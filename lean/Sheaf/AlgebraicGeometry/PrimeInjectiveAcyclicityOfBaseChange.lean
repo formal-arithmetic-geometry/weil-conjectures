@@ -8,16 +8,9 @@ module
 public import Sheaf.AlgebraicGeometry.TorsionAbelianBaseChange
 public import Sheaf.AlgebraicGeometry.PrimeInjectiveAcyclicity
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Sheaf.AlgebraicGeometry.DerivedCategories
-import WeilConjectures.AlgebraicGeometry.EtaleInverseImageExact
-import WeilConjectures.AlgebraicGeometry.EtaleSheaves
+import WeilConjectures.AlgebraicGeometry.ConstantRingModuleSheafEquivalence
+import WeilConjectures.AlgebraicGeometry.TorsionSheafCharacterizations
 import Sheaf.AlgebraicGeometry.InjectiveModuleDirectImageAcyclic
-import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
-import WeilConjectures.SixFunctors.BaseChange.Derived
-import WeilConjectures.SixFunctors.BaseChange.Square
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
-import Sheaf.AlgebraicGeometry.ChosenCartesianSquare
-import WeilConjectures.AlgebraicGeometry.DerivedCategories
 
 /-!
 # Proper base change implies injective acyclicity
@@ -56,6 +49,45 @@ exactly the higher direct image required by `def-weil-pbc-direct-image`.
 theorem hasAllPrimeInjectiveAcyclicity_of_hasTorsionAbelianBaseChange
     {X Y : Scheme.{u_forward}} (f : X ⟶ Y) [IsProper f]
     (hf : HasTorsionAbelianBaseChange f) : HasAllPrimeAbelianInjectiveAcyclicity f := by
-  sorry
+  intro r hr Y' X' g f' g' sq I hI q hq
+  let : Fact r.Prime := ⟨hr⟩
+  let : Injective I := hI
+  lift q to ℕ using hq.le
+  have hn : 0 < q := by exact_mod_cast hq
+  let F := (sheafCompose X.smallEtaleTopology
+    (forget₂ (ModuleCat.{u_forward + 1} (ULift.{u_forward + 1} (ZMod r)))
+      AddCommGrpCat.{u_forward + 1})).obj I
+  let K := (DerivedCategory.Plus.singleFunctor
+    (Sheaf X.smallEtaleTopology AddCommGrpCat.{u_forward + 1}) 0).obj F
+  have hF : Scheme.IsTorsionAbelianSheaf F :=
+    (Scheme.isTorsionAbelianSheaf_characterizations F).1.mpr
+      ((Scheme.isTorsionModuleSheaf_iff_isTorsion I).mp inferInstance)
+  have : IsIso ((derivedBaseChangeMapPlus AddCommGrpCat.{u_forward + 1}
+      sq.toCommSq).app K) := hf sq F hF
+  obtain ⟨E, ⟨e⟩⟩ := constantRing_moduleSheaf_equivalence X r
+  let J := E.functor.obj I
+  have : Injective J := (E.map_injective_iff I).2 hI
+  have hJ := isZero_higherDirectImage_of_injective_module f
+    (ULift.{u_forward} (ZMod r)) J q hn
+  have hsource : CategoryTheory.Limits.IsZero
+      ((DerivedCategory.Plus.homologyFunctor _ (q : ℤ)).obj
+        ((lowerStar AddCommGrpCat.{u_forward + 1} f).rightDerivedFunctorPlus.obj K)) :=
+    hJ.of_iso ((DerivedCategory.Plus.homologyFunctor _ (q : ℤ)).mapIso
+      ((lowerStar AddCommGrpCat.{u_forward + 1} f).rightDerivedFunctorPlus.mapIso
+        ((DerivedCategory.Plus.singleFunctor _ 0).mapIso (e.app I))))
+  have hpull : CategoryTheory.Limits.IsZero
+      ((DerivedCategory.Plus.homologyFunctor _ (q : ℤ)).obj
+        ((upperStar AddCommGrpCat.{u_forward + 1} g).mapDerivedCategoryPlus.obj
+          ((lowerStar AddCommGrpCat.{u_forward + 1} f).rightDerivedFunctorPlus.obj K))) :=
+    ((upperStar AddCommGrpCat.{u_forward + 1} g).map_isZero hsource).of_iso
+      ((Functor.mapDerivedCategoryPlusHomologyFunctorIso
+        (upperStar AddCommGrpCat.{u_forward + 1} g) (q : ℤ)).app _).symm
+  refine (hpull.of_iso ((DerivedCategory.Plus.homologyFunctor _ (q : ℤ)).mapIso
+    (asIso ((derivedBaseChangeMapPlus AddCommGrpCat.{u_forward + 1}
+      sq.toCommSq).app K))).symm).of_iso ?_
+  exact ((DerivedCategory.Plus.homologyFunctor _ (q : ℤ)).mapIso
+    ((lowerStar AddCommGrpCat.{u_forward + 1} f').rightDerivedFunctorPlus.mapIso
+      ((Functor.mapDerivedCategoryPlusSingleFunctor
+        (upperStar AddCommGrpCat.{u_forward + 1} g') 0).app F))).symm
 
 end AlgebraicGeometry.Etale
