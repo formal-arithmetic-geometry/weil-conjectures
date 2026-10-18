@@ -59,8 +59,9 @@ restriction of an `A_n`-complex is identified with the restriction of its compac
 with `A_n`-coefficients. This identification, the fact that it carries derived base changes
 of constructible complexes of finite Tor amplitude to derived base changes, and its
 compatibility with pullback, are the finite-level coefficient change of compact cohomology
-(`lem-fix-compact-support-coefficient-change`) and of geometric stalks
-(`thm-trf-finite-coefficient-map`), statements of the subsection `sk-p-trace-coeff` recorded here
+(`lem-fix-compact-support-coefficient-change`, subsection `sk-def-sfb-coefficient-comparisons`)
+and of geometric stalks
+(`thm-trf-finite-coefficient-map`, subsection `sk-p-trace-coeff`), statements recorded here
 as `AlgebraicGeometry.Etale.exists_isCoefficientChange_compactlySupportedGlobalSections` and
 `AlgebraicGeometry.Etale.exists_isCoefficientChange_geometricStalk`. The towers are built from
 any such identifications, so that they are data independent of a choice.
@@ -287,7 +288,8 @@ def IsStalkPullbackCompatible {x : s ⟶ X}
 variable {k : Type u} [Field k] [IsSepClosed k] (aX : X ⟶ Spec (.of k)) [LocallyOfFiniteType aX]
   [QuasiCompact aX] [IsSeparated aX] [HasCompactification aX]
 
-/-- Blueprint `lem-fix-compact-support-coefficient-change` (subsection `sk-p-trace-coeff`):
+/-- Blueprint `lem-fix-compact-support-coefficient-change` (subsection
+`sk-def-sfb-coefficient-comparisons`):
 compact cohomology commutes with finite-level coefficient reduction, compatibly with pullback.
 For a surjection `ρ : Λ →+* Λ'` of finite coefficient rings whose exponent is invertible on the
 separably closed field `k` and a separated finite-type `a_X : X ⟶ Spec k`, compact cohomology
