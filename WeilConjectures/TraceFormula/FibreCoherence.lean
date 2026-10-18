@@ -124,7 +124,7 @@ set_option maxHeartbeats 1000000 in
 /-- The relative Frobenius part of `θ_f` at a fibre (blueprint
 `lem-trf-weil-shriek-operator-fibres`, proof of (2)): under the base change to the fibre `Z`
 of `y`, `Rf'_!(η_r)` followed by the composition isomorphisms becomes the pullback `Φ_Z^♯`. -/
-lemma baseChange_comp_relativeFrobenius_stalk {ΦY : Y ⟶ Y} {p : X' ⟶ X} {f' : X' ⟶ Y}
+lemma baseChange_comp_relativeFrobenius_stalk {p : X' ⟶ X} {f' : X' ⟶ Y}
     {r : X ⟶ X'} {ΦZ : Z ⟶ Z} {j : Z ⟶ X'} {y : RationalPoint Y} [IsProper r.left]
     [IsProper ΦZ.left] (hZ : IsPullback (j ≫ p) (toPoint Z) (r ≫ f') y)
     (hL : IsPullback j (toPoint Z) f' y) (hT : IsPullback (j ≫ p) ΦZ r j)
