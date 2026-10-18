@@ -26,12 +26,11 @@
  ],
  "proof": [
   {
-   "text": "*$C$ is Noetherian and regular.* By [def-sc-curves] the structure morphism $C\\to\\operatorname{Spec}k$ is of finite type, and $\\operatorname{Spec}k$ is Noetherian ($k$ is a field, so a Noetherian ring, and $\\operatorname{Spec}k$ is one point). Hence $C$ is Noetherian, i.e. locally Noetherian and quasi-compact [lem-weil-pbc-finite-type-over-noetherian]. Since $C$ is smooth over the field $k$, every local ring $\\mathcal O_{C,x}$ is a regular local ring [lem-sc-smooth-regular]. So $C$ is a locally Noetherian scheme all of whose local rings are regular local rings, i.e. a regular scheme in the second form of [def-weil-regular-scheme], which is the form in which [lem-sc-regular-connected-integral] states its hypothesis.",
+   "text": "Finite type over Spec k gives local Noetherianity and compactness by the Mathlib instances recorded in [lem-weil-pbc-finite-type-over-noetherian]. Smoothness gives the source-library IsRegular instance [lem-sc-smooth-regular]. We use this stalkwise class directly together with local Noetherianity, without the separate IsRegularScheme wrapper.",
    "uses": [
     "def-sc-curves",
     "lem-weil-pbc-finite-type-over-noetherian",
-    "lem-sc-smooth-regular",
-    "def-weil-regular-scheme"
+    "lem-sc-smooth-regular"
    ],
    "elementary": false,
    "source": {
@@ -72,12 +71,11 @@
    }
   },
   {
-   "text": "*Chains of generalizations in $C$ have length at most one, and $C\\neq\\{\\eta\\}$.* Suppose $y,x,z\\in C$ with $y\\in\\overline{\\{x\\}}$, $x\\in\\overline{\\{z\\}}$, $y\\neq x\\neq z$ (so $y\\neq z$ by step 3). Then $\\overline{\\{y\\}}\\subsetneq\\overline{\\{x\\}}\\subsetneq\\overline{\\{z\\}}$ is a chain of length 2 of irreducible closed subsets of $C$ (closures of points are irreducible; the inclusions are strict by step 3), so the topological Krull dimension of $C$ [def-kun-topological-krull-dimension] is $\\ge2$; and $y=x_0,x,z$ is a chain of generalizations of $y$ of length 2, so $\\dim\\mathcal O_{C,y}\\ge2$ [lem-sc-scheme-stalk-dimension-generalization-chains] and the dimension of $C$ as the supremum of the dimensions of its local rings [def-pc-dimension] is $\\ge2$. Either reading of 'dimension one' in [def-sc-curves] excludes this; so no such $y,x,z$ exist. If $C=\\{\\eta\\}$, its only irreducible closed subset is $C$, so its topological dimension is $0$, and $\\dim\\mathcal O_{C,\\eta}=0$ since $\\eta$ has no chain of generalizations of positive length [lem-sc-scheme-stalk-dimension-generalization-chains]; both contradict dimension one. So $C$ has a point other than $\\eta$, and $\\eta$ is not closed (if $\\{\\eta\\}$ were closed, $C=\\overline{\\{\\eta\\}}=\\{\\eta\\}$).",
+   "text": "The generic point is not closed: otherwise its closure, which is all of C, would be its singleton. Thus C would be a subsingleton, hence discrete, and topologicalKrullDim_zero_of_discreteTopology would give dimension at most zero, contradicting the dimension-one equality in IsConnectedCurve. This uses only the topological dimension convention [def-kun-topological-krull-dimension], not the separate supremum-of-stalk-dimensions definition.",
    "uses": [
     "def-kun-topological-krull-dimension",
-    "def-pc-dimension",
-    "lem-sc-scheme-stalk-dimension-generalization-chains",
-    "def-sc-curves"
+    "def-sc-curves",
+    "def-sc-generic-point"
    ],
    "elementary": false,
    "source": {
@@ -86,20 +84,27 @@
    }
   },
   {
-   "text": "*Clause 2.* $\\eta$ is not closed and $C$ has a closed point (steps 3, 4). Let $x\\in C$, $x\\neq\\eta$, and suppose $\\{x\\}$ is not closed. The nonempty closed set $\\overline{\\{x\\}}$ contains a closed point $y$ (step 3), and $y\\neq x$ since $\\{x\\}$ is not closed. Also $x\\in C=\\overline{\\{\\eta\\}}$ and $x\\neq\\eta$. So $y\\in\\overline{\\{x\\}}$, $x\\in\\overline{\\{\\eta\\}}$ with $y\\neq x\\neq\\eta$, which step 4 excludes. Hence every point other than $\\eta$ is closed.",
+   "text": "For x different from eta, suppose {x} is not closed. If closure {x} were proper, its nonempty open complement would have x outside it, and [lem-sc-dim-one-point-outside-open-closed] would make {x} closed. Therefore closure {x} is all of C, making x a generic point. Uniqueness of the generic point contradicts x different from eta. This reuses the proved source-library length-two-chain argument rather than constructing another chain.",
    "uses": [
+    "lem-sc-dim-one-point-outside-open-closed",
+    "lem-sc-scheme-sober",
+    "def-sc-generic-point",
+    "def-sc-curves",
     "def-weil-closed-points"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/properties.tex",
     "place": "Properties Lemma 02IZ (properties-lemma-codimension-local-ring) and Topology Lemma 005E, as combined in steps 3-4"
    }
   },
   {
-   "text": "*$\\dim\\mathcal O_{C,P}=1$ at a closed point $P$.* By [lem-sc-scheme-stalk-dimension-generalization-chains], $\\dim\\mathcal O_{C,P}$ is the supremum of the lengths of chains of generalizations of $P$. Since $P$ is closed and $\\eta$ is not (step 4), $P\\neq\\eta$, and $P\\in C=\\overline{\\{\\eta\\}}$: so $P,\\eta$ is a chain of length 1. A chain $P=x_0,x_1,x_2$ of length 2 would give $x_0\\in\\overline{\\{x_1\\}}$, $x_1\\in\\overline{\\{x_2\\}}$, $x_0\\neq x_1\\neq x_2$, excluded by step 4. Hence $\\dim\\mathcal O_{C,P}=1$.",
+   "text": "At a closed point P, P is different from eta by the preceding generic-point argument, and eta specializes to P. Thus P < eta in the specialization partial order. Order.coheight_add_one_le gives coheight P at least one. The bound ringKrullDim_stalk_le_topologicalKrullDim and dimension at most one give the opposite inequality. Transport through [lem-sc-scheme-stalk-dimension-generalization-chains], namely ringKrullDim_stalk_eq_coheight, to obtain dimension one for the stalk.",
    "uses": [
-    "lem-sc-scheme-stalk-dimension-generalization-chains"
+    "lem-sc-scheme-stalk-dimension-generalization-chains",
+    "def-kun-topological-krull-dimension",
+    "def-sc-curves",
+    "def-sc-generic-point"
    ],
    "elementary": false,
    "source": {
@@ -122,7 +127,7 @@
    }
   },
   {
-   "text": "*Clause 3: the normalized valuation.* Write $R=\\mathcal O_{C,P}\\subseteq k(C)$ (via $\\rho_P$) and let $t$ be a uniformizer, $\\mathfrak m_R=tR$, $t\\neq0$ ($R$ is not a field). $R$ is a Noetherian (principal ideal) local domain with maximal ideal generated by $t$, so every nonzero $b\\in R$ is $b=u t^m$ with $u\\in R^\\times$, $m\\ge0$ [lem-weil-pbc-dvr-unit-times-uniformizer-power]. *Existence:* $f\\in k(C)^*$ is $a/b$ with $a,b\\in R\\setminus\\{0\\}$ (step 7); writing $a=u_1t^{m_1}$, $b=u_2t^{m_2}$ gives $f=(u_1u_2^{-1})t^{m_1-m_2}$. *Uniqueness:* if $ut^n=u't^{n'}$ with $n>n'$, then $u'=ut^{n-n'}\\in tR=\\mathfrak m_R$, contradicting $u'\\in R^\\times$; so $n=n'$ and then $u=u'$. *Independence of $t$:* another uniformizer is $t'=wt$ with $w\\in R^\\times$ ($t'R=tR$, $R$ a domain), and $ut'^n=(uw^n)t^n$. Hence $v_P(f)=n$ is well defined; $v_P(ff')=v_P(f)+v_P(f')$ by multiplying the two expressions, $v_P(t^n)=n$ gives surjectivity, and $f\\in R\\setminus\\{0\\}$ iff $v_P(f)\\ge0$ (if $n\\ge0$ then $ut^n\\in R$; if $f\\in R\\setminus\\{0\\}$ the expression $f=ut^m$, $m\\ge0$, above is the unique one).",
+   "text": "The fully proved private helper normalized_dvr_valuation handles an arbitrary DVR R and its fraction field K. Let w be Mathlib's maximal-ideal adic valuation and set v(g) = Multiplicative.ofAdd (-WithZero.log (w g)). Nonzero units of K have nonzero valuation, so log_mul proves the homomorphism law. An R-unit has w-value one and any generator t of the maximal ideal has w-value exp(-1), by valuation_eq_one_iff_notMem and intValuation_singleton. Hence applying v to any expression g = u*t^n gives exactly n, independently of t. Mathlib's exists_units_eq_smul_zpow_of_irreducible, the fraction-field consequence of [lem-weil-pbc-dvr-unit-times-uniformizer-power], supplies an expression; equality of exponents and cancellation, using injectivity R -> K, prove uniqueness of the unit as well. Choose an irreducible t and take all integer powers of its image to prove surjectivity. Finally valuation_le_one and IsDiscreteValuationRing.exists_lift_of_le_one show that g comes from a nonzero element of R exactly when w(g) <= 1, which is equivalent to v(g) >= 0 by log_le_log. Apply this helper to each closed stalk, with the DVR and fraction-field instances already obtained.",
    "uses": [
     "lem-weil-pbc-dvr-unit-times-uniformizer-power",
     "def-sc-discrete-valuation-ring"
@@ -138,7 +143,6 @@
   "def-sc-curves",
   "lem-weil-pbc-finite-type-over-noetherian",
   "lem-sc-smooth-regular",
-  "def-weil-regular-scheme",
   "lem-sc-regular-connected-integral",
   "lem-pc-integral-scheme-irreducible",
   "lem-sc-scheme-sober",
@@ -150,7 +154,7 @@
   "lem-sc-quasi-compact-kolmogorov-closed-point",
   "def-weil-closed-points",
   "def-kun-topological-krull-dimension",
-  "def-pc-dimension",
+  "lem-sc-dim-one-point-outside-open-closed",
   "lem-sc-scheme-stalk-dimension-generalization-chains",
   "lem-sc-regular-dim1-dvr",
   "def-sc-discrete-valuation-ring",
@@ -159,7 +163,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/properties.tex",
-  "place": "assembled by the worker from Properties Lemmas 033M and 02IZ, Topology Lemma 005E and Algebra Lemma 00PD (the standing hypotheses of Divisors Lemma 0BE9 for a smooth connected curve); no single document proves the statement"
+  "place": "D3 Lean proof, 2026-10-18: the original Properties 033M/02IZ, Topology 005E and Algebra 00PD route, shortened using the proved source-library dimension-one complement lemma and Mathlib's canonical maximal-ideal adic valuation, fraction-field unit-times-zpow lemma, and DVR valuation-subring characterization. The public statement is unchanged; no new holes."
  },
  "mathlib_searches": [
   {
@@ -252,5 +256,15 @@
   "group": "F1",
   "result": "pass",
   "note": "k alg closed; C with explicit f, IsConnectedCurve f (connected, nonempty, dim 1, separated, finite type) + Smooth f; concluded IsIntegral (AlgebraicGeometry.IsIntegral by #check), IsNoetherian, genericPoint, IsField functionField, germ and stalk->k(C) injectivity (algebraMap = stalkSpecializes by rfl), clause 2 via closedPoints, DVR + IsFractionRing at closed P, u t^n unique pair, v fixed before t, surjective hom, O_P\\{0} = {v>=0}"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D3",
+  "result": "pass",
+  "landing": "20261018T062724-L-639985",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
