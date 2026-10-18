@@ -1,0 +1,103 @@
+{
+ "id": "def-zl-ringed-site-duality-model",
+ "kind": "definition",
+ "title": "Normalized ringed-site duality model and coefficient unit",
+ "status": "split",
+ "statement": "Let $C$ be a category with object universe $c$ and morphism universe $v$, let $J$ be a Grothendieck topology on $C$, and let $R$ be a sheaf of commutative rings in universe $\\max(c,v,r)$. Use the sheaf-of-modules category of [def-weil-sheaf-of-modules-category], sheafification and local-bijection identification for additive sheaves in that universe, and a derived category in universe $w$ [def-weil-abstract-derived-category]. A normalized ringed-site duality model is the following data, with no existence assertion: a closed tensor-Hom structure and its K-flat pure-tensor representative normalization [def-coef-ringed-tensor-hom-model], a symmetric structure on that same tensor, and an isomorphism from its tensor unit to $R[0]$. Here $R[0]$ is the derived image of the coefficient module concentrated in cochain degree zero. The model includes K-flatness of this coefficient complex [def-pc-kflat-complex]. It requires that the symmetry on K-flat representatives descend the signed interchange $x_p\\otimes y_q\\mapsto(-1)^{pq}y_q\\otimes x_p$, that the right unitor descend scalar multiplication $x\\otimes a\\mapsto ax$, and that the associator descend $(x\\otimes y)\\otimes z\\mapsto x\\otimes(y\\otimes z)$, using the representative isomorphisms of the same tensor-Hom model. All cochain degrees are integers. The definition assumes neither perfectness nor invertibility of bidual or evaluation maps.",
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-coef-ringed-tensor-hom-model",
+  "def-pc-kflat-complex"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YN, 08JD, 0A97, 0A98: ordinary derived tensor, tensor-Hom adjunction and degree-zero coefficient unit; the existing RingedSiteDualityMaps representative normalization."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Normalized closed symmetric monoidal derived tensor model for sheaves of modules on a ringed site, with coefficient unit in degree zero",
+   "results": "[leanfinder] OK 8 hit(s): PresheafOfModules.Monoidal.tensorObj; LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat; LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf; LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat; CategoryTheory.Sheaf.monoidalCategory; CategoryTheory.Sheaf.symmetricCategory; LightCondensed.instMonoidalLightCondSetLightProfiniteModuleCatFree; PresheafOfModules.Monoidal.tensorObj_obj.",
+   "date": "2026-10-18",
+   "verdict": "These are underived or condensed structures; use the existing project declaration instead."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A ringed site derived tensor and internal Hom model normalized on K-flat complexes with Koszul symmetry and coefficient sheaf in degree zero",
+   "results": "[leansearch] OK 8 hit(s): ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat; Module.Flat.iff_lTensor_preserves_shortComplex_exact; SheafOfModules.Hom; RingHom.Flat; RingHom.Flat.propertyIsLocal; HomologicalComplex.rightUnitor'; RingHom.FaithfullyFlat; RingHom.Flat.comp.",
+   "date": "2026-10-18",
+   "verdict": "No normalized derived model; the existing project structure supplies exactly the notion."
+  },
+  {
+   "tool": "grep",
+   "query": "RingedSiteDualityModel|ringedSiteDualityUnitComplex (Mathlib/CategoryTheory, WeilConjectures, lean/Sheaf, dag/nodes); blueprint_refs.py search ringed site",
+   "results": "Mathlib: [grep] OK 0 hit(s). Source WeilConjectures: no hits. lean/Sheaf: RingedSiteDualityMaps defines both and ringedSiteDualityUnit; several consumer modules. DAG: no definition node carrying either; the theorem lem-sfb-ringed-site-duality-maps lists them among its auxiliary declarations. The new node records those existing definitions without asserting the theorem. Blueprint search returned 13 nodes; none records this full normalized model definition.",
+   "date": "2026-10-18",
+   "verdict": "Existing project definition recorded with existing:true; no duplicate module or declaration."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-zl-rational-realization-tensor-comparison",
+  "date": "2026-10-18",
+  "group": "Q20"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-zl-smooth-proper-relative-purity",
+   "place": "Proof Step 3, tensor compatibility of continuous realization: ordinary ambient derived tensor, coefficient unit, signed symmetry and associator normalization.",
+   "via": [
+    "lem-zl-rational-realization-tensor-comparison",
+    "lem-zl-adic-hom-tensor-lisse-criterion"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-zeta-weil",
+ "unit": "sk-prop-smooth-proper-purity",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.RingedSiteDualityMaps",
+  "declaration": "CategoryTheory.RingedSiteDualityModel",
+  "declarations": [
+   "CategoryTheory.ringedSiteDualityUnitComplex",
+   "CategoryTheory.ringedSiteDualityUnit",
+   "CategoryTheory.RingedSiteDualityModel"
+  ],
+  "statement": "structure RingedSiteDualityModel",
+  "branch": "newtargets-dag",
+  "by": "Q20",
+  "date": "2026-10-18",
+  "existing": true,
+  "note": "Records the already landed data definitions only. The item quantifies over this model and uses its unit complex; it does not invoke the Nonempty theorem ringedSiteDualityMaps_exists. Returned-delivery repair point 2."
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-546bcce97",
+  "group": "Q20",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-546bcce97",
+  "group": "Q20",
+  "result": "pass",
+  "note": "Re-delivery after the efd740dc RETURN; all 3 faults repaired: (1) Q36's lem-fix-constructible-tensor-completion record is byte-identical to live; the Normalized/Presentation/constructibleTensorCompletionPresentation helpers moved verbatim (only the blueprint tags changed) into the item module, are listed in its declarations and clash with no live name. (2) Theorem stmt_dep lem-sfb-ringed-site-duality-maps replaced by the new existing:true def node def-zl-ringed-site-duality-model owning RingedSiteDualityModel/ringedSiteDualityUnitComplex/ringedSiteDualityUnit; its statement matches the live structure field by field. (3) Unused stmt_dep lem-pur-kflat-total-tensor-model and its import dropped. Mechanical finding judged genuine: the pullbackTensorRational* structural maps are .exists.choose of ∃! theorems in lem-pur-derived-pullback-tensor-iso; completionData is .some of the item's verbatim repackaging of constructibleTensorCompletion (χ/T/e/τ are that theorem's constructed objects). Statement unchanged and faithful: J=J_pbc∘I, tensor/unit to E_T[0], associator/unitors/signed symmetry on the published maps, χ⁻¹ integral pin, fractions, all E≤F including reflexive. lean.statement is verbatim. Both files compile clean via nt_compile --json (3.7 s, 47.4 s). Advisory: 47 s is close to the 60 s limit; the unused proof-module imports could be trimmed."
+ }
+}

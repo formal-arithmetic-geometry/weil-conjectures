@@ -1,0 +1,108 @@
+{
+ "id": "def-zl-pbc-finite-raw-scalar-comparison",
+ "kind": "definition",
+ "title": "Canonical comparison of normalized and embedding finite-field scalar extension",
+ "status": "split",
+ "statement": "Fix a prime $\\ell$, an algebraic closure $\\Omega$ of $\\mathbf Q_\\ell$, a Noetherian finite-dimensional scheme $T$ on which $\\ell$ is invertible, and finite coefficient fields $E\\subset F$ in $\\Omega$. Use the canonical small coefficient models and completed coefficient maps of [def-weil-pbc-finite-completed-coefficient-map]. Let $Q_E$ denote the integral localization, and $S_{E,F}$ the normalized finite-stage transition of [def-weil-pbc-finite-stage-pair-category]. Let $S^{\\rm raw}_{E,F}$ be the embedding scalar extension of [prop-weil-pbc-scalar-extension], evaluated on these same small fields and their transported inclusion. Define $c_{E,F}:S_{E,F}\\xrightarrow\\sim S^{\\rm raw}_{E,F}$ as the unique natural isomorphism whose component on every integral object $Q_E(K)$ is the specified integral/rational scalar comparison of [def-weil-pbc-finite-stage-pair-category], under the canonical equality of the actual completed coefficient maps and hence the integral tensor objects. The equality is fixed by all finite quotient projections, which are the same transported field inclusion. At $E=F$ this comparison is precisely the specified tensor-multiplication unit. This defines a comparison of the two existing scalar constructions, without choosing a new coefficient map or discarding the reflexive case.",
+ "stmt_deps": [
+  "def-weil-pbc-finite-completed-coefficient-map",
+  "def-weil-pbc-finite-stage-pair-category",
+  "prop-weil-pbc-scalar-extension"
+ ],
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.14(2), Remark 6.8.15; Stacks 03EK and 0D6D. Canonical identity of the two quotient-normalized coefficient maps and integral scalar constructions used in the rational realization comparison."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Canonical comparison of normalized finite coefficient scalar extension with raw rationalized derived scalar tensor, fixed by its integral localization comparison",
+   "results": "8 hits: integral norm/localization and integral-closure tensor maps; no comparison of these categories.",
+   "date": "2026-10-18",
+   "verdict": "No match."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical natural isomorphism comparing normalized scalar extension with rational localization of ordinary derived scalar tensor, determined on integral objects",
+   "results": "8 hits: LinearMap.extendScalarsOfIsLocalizationEquiv and related scalar-extension/localization maps; no such derived finite-stage comparison.",
+   "date": "2026-10-18",
+   "verdict": "No match."
+  },
+  {
+   "tool": "grep",
+   "query": "pbcScalarExtension|pbcRationalScalarExtension in Mathlib CategoryTheory; rg pbc.*[Rr]aw.*[Cc]omparison|[Rr]aw.*[Ss]calar.*[Cc]omparison|pbcScalarExtension.*pbcRationalScalarExtension in dag/nodes, WeilConjectures and lean/Sheaf; blueprint_refs.py search scalar extension",
+   "results": "Mathlib grep: 0 hits. Project source contains the two separate scalar constructions and their integral/rational comparisons; no bridge. Blueprint search: 69 nodes, including the two constructions, no bridge identifying them.",
+   "date": "2026-10-18",
+   "verdict": "The missing comparison is defined from the unique integral normalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ScalarLocalization, AlgebraicGeometry.Scheme.pbcScalarExtension",
+   "results": "0 hits; loogle: unknown identifier 'CategoryTheory.ScalarLocalization'",
+   "date": "2026-10-18",
+   "verdict": "Invalid-name search; the valid natural-language and grep searches above establish no match."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-zl-rational-realization-tensor-comparison",
+  "date": "2026-10-18",
+  "group": "Q20"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-zl-smooth-proper-relative-purity",
+   "place": "Proof Step 3, field-stage projection formula: identify finite-stage identity-equivalence scalar transitions with the scalar functor used by continuous realization.",
+   "via": [
+    "lem-zl-rational-realization-tensor-comparison",
+    "lem-zl-adic-hom-tensor-lisse-criterion"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-zeta-weil",
+ "unit": "sk-prop-smooth-proper-purity",
+ "lean": {
+  "module": "Sheaf.Paper.PbcFiniteRawScalarComparison",
+  "declaration": "AlgebraicGeometry.Scheme.pbcFiniteRawScalarComparison",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.pbcFiniteRawScalarComparison_existsUnique",
+   "AlgebraicGeometry.Scheme.pbcFiniteRawScalarComparison"
+  ],
+  "file": "lean/Sheaf/Paper/PbcFiniteRawScalarComparison.lean",
+  "statement": "def pbcFiniteRawScalarComparison",
+  "branch": "newtargets-dag",
+  "by": "Q20",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-546bcce97",
+  "group": "Q20",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-546bcce97",
+  "group": "Q20",
+  "result": "pass",
+  "note": "Re-delivery after the efd740dc RETURN; all 3 faults repaired: (1) Q36's lem-fix-constructible-tensor-completion record is byte-identical to live; the Normalized/Presentation/constructibleTensorCompletionPresentation helpers moved verbatim (only the blueprint tags changed) into the item module, are listed in its declarations and clash with no live name. (2) Theorem stmt_dep lem-sfb-ringed-site-duality-maps replaced by the new existing:true def node def-zl-ringed-site-duality-model owning RingedSiteDualityModel/ringedSiteDualityUnitComplex/ringedSiteDualityUnit; its statement matches the live structure field by field. (3) Unused stmt_dep lem-pur-kflat-total-tensor-model and its import dropped. Mechanical finding judged genuine: the pullbackTensorRational* structural maps are .exists.choose of ∃! theorems in lem-pur-derived-pullback-tensor-iso; completionData is .some of the item's verbatim repackaging of constructibleTensorCompletion (χ/T/e/τ are that theorem's constructed objects). Statement unchanged and faithful: J=J_pbc∘I, tensor/unit to E_T[0], associator/unitors/signed symmetry on the published maps, χ⁻¹ integral pin, fractions, all E≤F including reflexive. lean.statement is verbatim. Both files compile clean via nt_compile --json (3.7 s, 47.4 s). Advisory: 47 s is close to the 60 s limit; the unused proof-module imports could be trimmed."
+ }
+}

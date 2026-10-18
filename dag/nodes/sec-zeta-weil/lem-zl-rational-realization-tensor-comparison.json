@@ -16,7 +16,11 @@
   "lem-fd-rational-coefficient-category-comparison",
   "lem-per-continuous-rational-derived-realization",
   "def-weil-sheaf-of-modules-category",
-  "def-weil-abstract-derived-category"
+  "def-weil-abstract-derived-category",
+  "lem-pur-derived-pullback-tensor-iso",
+  "lem-fix-constructible-tensor-completion",
+  "def-zl-pbc-finite-raw-scalar-comparison",
+  "def-zl-ringed-site-duality-model"
  ],
  "proof": [
   {
@@ -313,5 +317,49 @@
   "group": "N1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N1-97f829a01 (reviewer sub-agent of L); spot-checked: Read the complete item, report, unit/chapter route, parent and every cited node statement, current blueprint proof, Bhatt–Scholze, Hemo–Richarz–Scholbach, and Stacks sources. All seven steps are justified with correct coefficient categories, base-change maps, quotient-system coherence, finite scalar extensions, and edge cases. No duplicates, dropped machinery, SGA citations, hidden long-step lemmas, or target weakening found. Review written to review.md."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.RationalRealizationTensorComparison",
+  "declaration": "WeilConjectures.RationalTensorRealization.rational_realization_tensor_comparison",
+  "declarations": [
+   "WeilConjectures.ConstructibleTensorCompletionNormalized",
+   "WeilConjectures.ConstructibleTensorCompletionPresentation",
+   "WeilConjectures.constructibleTensorCompletionPresentation",
+   "WeilConjectures.RationalTensorRealization.realization",
+   "WeilConjectures.RationalTensorRealization.integralRealization",
+   "WeilConjectures.RationalTensorRealization.integralModule",
+   "WeilConjectures.RationalTensorRealization.integralComplex",
+   "WeilConjectures.RationalTensorRealization.integralCounit",
+   "WeilConjectures.RationalTensorRealization.completionData",
+   "WeilConjectures.RationalTensorRealization.ordinaryTensor",
+   "WeilConjectures.RationalTensorRealization.ordinaryModel",
+   "WeilConjectures.RationalTensorRealization.completionMap",
+   "WeilConjectures.RationalTensorRealization.completionIso",
+   "WeilConjectures.RationalTensorRealization.integralTensorIso",
+   "WeilConjectures.RationalTensorRealization.At",
+   "WeilConjectures.RationalTensorRealization.At.coefficientUnit",
+   "WeilConjectures.RationalTensorRealization.rawScalar",
+   "WeilConjectures.RationalTensorRealization.fieldMap",
+   "WeilConjectures.RationalTensorRealization.fieldExtend",
+   "WeilConjectures.RationalTensorRealization.fieldComplex",
+   "WeilConjectures.RationalTensorRealization.FieldChange",
+   "WeilConjectures.RationalTensorRealization.System",
+   "WeilConjectures.RationalTensorRealization.rational_realization_tensor_comparison"
+  ],
+  "file": "lean/Sheaf/Paper/RationalRealizationTensorComparison.lean",
+  "statement": "theorem rational_realization_tensor_comparison (D : FiniteFieldDatum.{u}) (_hl : l ≠ D.p) [X.scheme.Over (Spec (.of D.k))] [LocallyOfFiniteType (X.scheme ↘ Spec (.of D.k))] [QuasiCompact (X.scheme ↘ Spec (.of D.k))] [IsSeparated (X.scheme ↘ Spec (.of D.k))] : Nonempty (System l Ω S R X)",
+  "branch": "newtargets-dag",
+  "by": "Q20",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "The recorded raw identity equivalence and continuous realization are inputs; the conclusion supplies their tensor/unit comparisons with explicit associator, both unitor, signed-symmetry and finite-extension equations. Integral normalization inverts the same quotient/Roos map as the tensor-completion lemma, exposed through its equivalent presentation record. Ambient comparisons are pinned on actual sheafified tensor generators and cochain universal counits. The new finite scalar comparison bridges normalized PBC transitions and the embedding scalar functor, preserving the equal-field tensor unit. Dependency repairs are described in the report."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-546bcce97",
+  "group": "Q20",
+  "result": "pass",
+  "note": "Re-delivery after the efd740dc RETURN; all 3 faults repaired: (1) Q36's lem-fix-constructible-tensor-completion record is byte-identical to live; the Normalized/Presentation/constructibleTensorCompletionPresentation helpers moved verbatim (only the blueprint tags changed) into the item module, are listed in its declarations and clash with no live name. (2) Theorem stmt_dep lem-sfb-ringed-site-duality-maps replaced by the new existing:true def node def-zl-ringed-site-duality-model owning RingedSiteDualityModel/ringedSiteDualityUnitComplex/ringedSiteDualityUnit; its statement matches the live structure field by field. (3) Unused stmt_dep lem-pur-kflat-total-tensor-model and its import dropped. Mechanical finding judged genuine: the pullbackTensorRational* structural maps are .exists.choose of ∃! theorems in lem-pur-derived-pullback-tensor-iso; completionData is .some of the item's verbatim repackaging of constructibleTensorCompletion (χ/T/e/τ are that theorem's constructed objects). Statement unchanged and faithful: J=J_pbc∘I, tensor/unit to E_T[0], associator/unitors/signed symmetry on the published maps, χ⁻¹ integral pin, fractions, all E≤F including reflexive. lean.statement is verbatim. Both files compile clean via nt_compile --json (3.7 s, 47.4 s). Advisory: 47 s is close to the 60 s limit; the unused proof-module imports could be trimmed."
  }
 }
