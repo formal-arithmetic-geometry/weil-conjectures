@@ -3,24 +3,73 @@
  "blueprint": {
   "is": "def-pod-dual-tate-datum",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Dual and Tate Weil data",
- "statement": "In the Poincare duality conventions of this chapter (the fixed setting), strict Weil complex: a perfect $K\\in D^b_{ctf}(X,A)$ with $\\varphi _K:Lg_\\gamma ^*K\\xrightarrow {\\sim }K$, in the notation of Definition 7.2 and of the geometric-Frobenius datum of the purity chapter. Let $\\varphi _A:Lg_\\gamma ^*A_X\\xrightarrow {\\sim } A_X$ be the canonical Weil structure on the constant coefficient object, and let $\\tau _r:Lg_\\gamma ^*A_X(r)\\xrightarrow {\\sim }A_X(r)$ be the Tate datum of the purity chapter, on which geometric Frobenius acts by the scalar $q^{-r}$. The *contragredient datum* on the coefficient dual is the typed composite\n\n$$\n\\begin{gathered}\n\\varphi _{K^\\vee }:\\   Lg_\\gamma ^*R\\mathcal Hom_X(K,A_X) \\\\\n\\xrightarrow {\\  \\sim \\  } R\\mathcal Hom_X\\bigl(Lg_\\gamma ^*K,Lg_\\gamma ^*A_X\\bigr) \\\\\n\\xrightarrow {R\\mathcal Hom(\\operatorname {id},\\varphi _A)} R\\mathcal Hom_X\\bigl(Lg_\\gamma ^*K,A_X\\bigr) \\\\\n\\xrightarrow {R\\mathcal Hom(\\varphi _K^{-1},\\operatorname {id})} R\\mathcal Hom_X(K,A_X),\n\\end{gathered}\n$$\n\nand the datum on the twisted dual is $\\varphi _{K^\\vee (r)}=\\varphi _{K^\\vee }\\otimes \\tau _r$, with the scalar $q^{-r}$ on $A_X(r)$ (hence $q^r$ on $A_X(-r)$). For $K=\\Lambda_X$ the constant sheaf with its canonical datum, the contragredient datum corresponds to the canonical datum under the canonical identification $(\\Lambda_X)^\\vee\\cong\\Lambda_X$, and the resulting $F$-operators are the iterated global geometric Frobenius operators of chap:trace-formula.",
+ "statement": "In the Poincare duality conventions of this chapter (the fixed setting), fix a coefficient stage $A\\in\\{A_{E,n},\\mathcal O_E,E,\\Qlb\\}$ and let $(K,\\varphi_K)$ be a strict Weil complex on $X$: $K\\in D^b_{ctf}(X,A)$ is perfect over $A_X$ and $\\varphi_K:Lg_\\gamma ^*K\\xrightarrow {\\sim }K$, where $g_\\gamma$ is the geometric-Frobenius automorphism of [def-trf-scheme-frobenius]. At $A=\\mathcal O_E$ the datum includes a normalized compatible finite-stage system and an isomorphism in the derived category of actual coefficient systems realizing $\\varphi_K$, as specified in [def-pur-tate-datum]; at $A=E$ its scalar localization, and at $A=\\Qlb$ its common finite-coefficient-stage datum. Let $\\varphi_A:Lg_\\gamma ^*A_X\\xrightarrow {\\sim }A_X$ be the canonical Weil structure on the constant coefficient object, and let $\\tau_r:Lg_\\gamma ^*A_X(r)\\xrightarrow {\\sim }A_X(r)$ be the canonical Tate datum, on which geometric Frobenius acts by $q^{-r}$ (hence by $q^r$ on $A_X(-r)$). The *contragredient datum* on the coefficient dual is the typed composite\n\n$$\n\\begin{gathered}\n\\varphi_{K^\\vee}:Lg_\\gamma^*R\\mathcal Hom_X(K,A_X) \\\\\n\\xrightarrow{\\sim}R\\mathcal Hom_X\\bigl(Lg_\\gamma^*K,Lg_\\gamma^*A_X\\bigr) \\\\\n\\xrightarrow{R\\mathcal Hom(\\operatorname{id},\\varphi_A)}R\\mathcal Hom_X\\bigl(Lg_\\gamma^*K,A_X\\bigr) \\\\\n\\xrightarrow{R\\mathcal Hom(\\varphi_K^{-1},\\operatorname{id})}R\\mathcal Hom_X(K,A_X),\n\\end{gathered}\n$$\n\nwhere the first arrow is $\\alpha_{g_\\gamma;K,A_X}$ of [lem-pod-geometric-frobenius-internal-hom-comparison], at the chosen coefficient stage. The dual is perfect and lies in $D^b_{ctf}(X,A)$ by [lem-pod-coefficient-dual-perfect]. For $r\\in\\mathbf Z$ the datum on the twisted dual means the typed composite\n$$\n \\varphi_{K^\\vee(r)}:\n Lg_\\gamma^*(K^\\vee\\otimes_A^L A_X(r))\n \\xrightarrow{\\ \\mu_{g_\\gamma;K^\\vee,A_X(r)}\\ }\n Lg_\\gamma^*K^\\vee\\otimes_A^L Lg_\\gamma^*A_X(r)\n \\xrightarrow{\\ \\varphi_{K^\\vee}\\otimes^L\\tau_r\\ }\n K^\\vee\\otimes_A^L A_X(r),\n$$\nwith $\\mu$ the all-stage isomorphism of [lem-pur-derived-pullback-tensor-iso]; the abbreviated notation $\\varphi_{K^\\vee(r)}=\\varphi_{K^\\vee}\\otimes\\tau_r$ includes this first arrow.\n\nAt $A=\\mathcal O_E$ these definitions include the following coherent realization. Use the derived strict reduction functor $\\mathcal R_X:D(\\operatorname{Mod}(\\widehat{\\mathcal O}_{E,X}))\\to D(\\mathsf S_{A_E}(X_{\\mathrm{proet}}))$ constructed in [def-weil-exceptional-inverse-image], where $\\mathsf S_{A_E}$ is the category of actual systems of $(A_{E,n})_X$-modules. On an object it is represented by the strict system $P_n=P\\otimes_{\\widehat{\\mathcal O}_{E,X}}(A_{E,n})_X$ from one K-flat representative with flat terms; transitions are $1\\otimes(A_{E,n+1}\\to A_{E,n})$. Apply $\\mathcal R_X$ to each arrow in the two displayed composites, including the specified input isomorphisms $\\varphi_K$, $\\varphi_A$, $\\tau_r$ and their inverses. In particular retain the actual system isomorphisms\n$$\n \\mathcal R_X(\\varphi_{K^\\vee}):\\mathcal R_X(Lg_\\gamma^*K^\\vee)\\xrightarrow{\\sim}\\mathcal R_X(K^\\vee),\\qquad\n \\mathcal R_X(\\varphi_{K^\\vee(r)}):\\mathcal R_X(Lg_\\gamma^*(K^\\vee(r)))\\xrightarrow{\\sim}\\mathcal R_X(K^\\vee(r)).\n$$\nTheir inverses are $\\mathcal R_X(\\varphi_{K^\\vee}^{-1})$ and $\\mathcal R_X(\\varphi_{K^\\vee(r)}^{-1})$ by functoriality. Evaluation at $n$ gives the finite reduction of the displayed integral composite: the Hom comparison reduces as in [lem-pod-geometric-frobenius-internal-hom-comparison], and the tensor comparison reduces as in [lem-pur-derived-pullback-tensor-iso]. Reduction of completed pullback is identified with finite pullback by [lem-fix-operation-reduction]; together with the balancing isomorphisms and quotient cocycle of $\\mathcal R_X$ this identifies the source with the pulled-back normalized reduction system and gives compatibility with successive reductions. Thus the output datum retains an isomorphism in the derived category of actual systems, with its finite reductions, rather than just separate derived-category maps at each level. At $A=E$ take the scalar-localized composite and at $A=\\Qlb$ its class over a common finite coefficient field, using the scalar-compatible Hom and tensor comparisons just cited and the strict-data conventions of [def-pur-tate-datum]. For $K=A_X$ with its canonical datum, the coefficient-dual identification $(A_X)^\\vee\\cong A_X$ carries the contragredient datum to the canonical datum. Explicitly, under $R\\mathcal Hom_X(A_X,A_X)\\cong A_X$ a section $a$ denotes multiplication by $a$; the displayed composite carries its pullback to multiplication by $\\varphi_A(a)$, since the precomposition by $\\varphi_A^{-1}$ cancels the change of the unit in the source. This is the canonical unit transport at each stage. The resulting $F$-operators are the iterated global geometric Frobenius operators at the chosen coefficient stage. Here the ordinary and compact-support operators are $R\\Gamma(X,\\varphi)\\circ\\tau_K$ and $R\\Gamma_c(X,\\varphi)\\circ\\tau_{c,K}$, with transports of [def-weil-frobenius-cohomology-transport] and the conventions of [def-pod-conventions]; at finite coefficients their compact-support iterate formula is [lem-trf-frobenius-operator-compact-description].",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-poincare-duality/sk-def-weil/def-pod-dual-tate-datum.md",
   "place": "node def-pod-dual-tate-datum, order 2424"
  },
  "stmt_deps": [
-  "def-trf-scheme-frobenius"
+  "def-pod-conventions",
+  "def-trf-strict-weil-complex",
+  "def-pod-perfect-complex-on-x",
+  "def-weil-finite-tor-amplitude",
+  "def-pod-coefficient-dual-on-x",
+  "def-weil-derived-pullback-tensor-hom",
+  "lem-pod-geometric-frobenius-internal-hom-comparison",
+  "def-weil-frobenius-coefficient-twists",
+  "def-pur-tate-datum",
+  "def-trf-frobenius-operators",
+  "def-weil-global-geometric-frobenius",
+  "def-trf-scheme-frobenius",
+  "def-weil-constant-weil-structure",
+  "lem-weil-constant-weil-structure-stage-independence",
+  "lem-trf-frobenius-operator-compact-description",
+  "sk-def-ops",
+  "lem-pur-derived-pullback-tensor-iso",
+  "def-weil-exceptional-inverse-image",
+  "lem-pod-coefficient-dual-perfect",
+  "def-weil-frobenius-cohomology-transport",
+  "lem-fix-operation-reduction"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "strict Weil complex contragredient coefficient dual Tate twist Frobenius",
+   "results": "PreTilt.coeff_frobeniusEquiv_symm; PreTilt.coeff_frobenius; PreTilt.coeff_iterate_frobeniusEquiv_symm; WittVector.frobeniusRotationCoeff; Perfection.coeff_frobeniusEquiv_symm; groupCohomology.Hilbert90.aux; WittVector.StandardOneDimIsocrystal.frobenius_apply; Perfection.coeff_frobenius",
+   "date": "2026-10-18",
+   "verdict": "no match: these are ring/perfection Frobenius declarations, not Weil complexes or coefficient duals"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory, InternalHom, Pullback, Frobenius",
+   "results": "0 hits; unknown identifier CategoryTheory",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "WeilComplex|contragredient|Tate twist (Mathlib/)",
+   "results": "0 hits in Mathlib/",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "strict Weil complex with contragredient datum on derived internal Hom and Tate twist",
+   "results": "HomologicalComplex.instIsSupportedOfIsStrictlySupported; HomologicalComplex.IsStrictlySupported; HomologicalComplex.IsStrictlySupported.mk; CochainComplex.HomComplex; CochainComplex.HomComplex_d_hom_apply; HomologicalComplex.isStrictlySupported_op_iff; HomologicalComplex.instIsStrictlySupportedOppositeOpOp; FDRep.dualTensorIsoLinHom",
+   "date": "2026-10-18",
+   "verdict": "no match: returned homological-complex support and representation-theory declarations are unrelated"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -65,5 +114,20 @@
   "statement": "In the Poincare duality conventions of this chapter (the fixed setting), let $(K,\\varphi_K)$ be a strict Weil complex: a perfect $K\\in D^b_{ctf}(X,A)$ with $\\varphi _K:Lg_\\gamma ^*K\\xrightarrow {\\sim }K$, where $g_\\gamma$ is the geometric-Frobenius automorphism of [def-trf-scheme-frobenius]. Let $\\varphi _A:Lg_\\gamma ^*A_X\\xrightarrow {\\sim } A_X$ be the canonical Weil structure on the constant coefficient object, and let $\\tau _r:Lg_\\gamma ^*A_X(r)\\xrightarrow {\\sim }A_X(r)$ be the Tate datum of the purity chapter, on which geometric Frobenius acts by the scalar $q^{-r}$. The *contragredient datum* on the coefficient dual is the typed composite\n\n$$\n\\begin{gathered}\n\\varphi _{K^\\vee }:\\   Lg_\\gamma ^*R\\mathcal Hom_X(K,A_X) \\\\\n\\xrightarrow {\\  \\sim \\  } R\\mathcal Hom_X\\bigl(Lg_\\gamma ^*K,Lg_\\gamma ^*A_X\\bigr) \\\\\n\\xrightarrow {R\\mathcal Hom(\\operatorname {id},\\varphi _A)} R\\mathcal Hom_X\\bigl(Lg_\\gamma ^*K,A_X\\bigr) \\\\\n\\xrightarrow {R\\mathcal Hom(\\varphi _K^{-1},\\operatorname {id})} R\\mathcal Hom_X(K,A_X),\n\\end{gathered}\n$$\n\nand the datum on the twisted dual is $\\varphi _{K^\\vee (r)}=\\varphi _{K^\\vee }\\otimes \\tau _r$, with the scalar $q^{-r}$ on $A_X(r)$ (hence $q^r$ on $A_X(-r)$). For $K=\\Lambda_X$ the constant sheaf with its canonical datum, the contragredient datum corresponds to the canonical datum under the canonical identification $(\\Lambda_X)^\\vee\\cong\\Lambda_X$, and the resulting $F$-operators are the iterated global geometric Frobenius operators.",
   "proof": [],
   "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "def-pod-dual-tate-datum",
+  "worker": "stage1",
+  "summary": "Repaired all four numbered faults of the returned delivery: the first arrow now cites a new statement-only all-stage geometric-Frobenius/internal-Hom comparison, the integral output retains actual realized-tower isomorphisms obtained by the existing derived strict reduction functor, the twisted dual explicitly includes and cites the all-stage pullback-tensor isomorphism, and the unused rational-only zeta lemma is removed. Retained the all-stage definition and the current blueprint composite, variance, and Tate normalization. Corrected the report concerning elementary constant self-duality and maintainer-owned source/Lean metadata; no source or attachment metadata is changed.",
+  "blueprint": "The item realizes the complete text of main-20261015/sec-smooth-purity/sk-def-sf-weil-complexes/def-pod-dual-tate-datum.md (order 2768), with the all-stage coefficient conventions supplied by def-pur-tate-datum as required by the compatibility and unit interfaces."
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q51-6c49b2696",
+  "group": "Q51",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q51-6c49b2696 (reviewer sub-agent of L); spot-checked: PASS: I read the whole delivery, and the item and the new node are both mathematically correct; no fixes were written (fixes/ is empty) and there are no tool_uses. Source check: the item follows main-20261015 sk-def-sf-weil-complexes/def-pod-dual-tate-datum.md (order 2768) arrow by arrow: the pullback/Hom comparison, then RHom(id,phi_A), then RHom(phi_K^{-1},id); the twisted dual phi_{K^vee}(x)tau_r after mu, with q^{-r} on Lambda(r); the unit clause; the F-operator clause. It adds the four coefficient stages and the integral realization without adding any hypothesis or weakening anything. Typing: mu applies because K^vee is in D^b_ctf (lem-pod-coefficient-dual-perfect) and A_X(r) is in D^b_c. At O_E the item applies R_X from def-weil-exceptional-inverse-image; I read that construction (one K-flat representative, strict system, balancing maps and quotient cocycle), and its use matches the realized-tower clause of def-pur-tate-datum. Levelwise reductions are justified by the new lemma for the Hom arrow, lem-pur-derived-pullback-tensor-iso for the tensor arrow, lem-fix-operation-reduction for pullback, and the definition of tau for the twist. Tests: a rank-one datum alpha gives alpha^{-1}q^{-r}; r=0 gives the untwisted dual; K=A_X gives the canonical transport phi_A(g*a); K=0 is trivial. New node lem-pod-geometric-frobenius-internal-hom-comparison: true, because g_gamma is an automorphism, so Lg* is a monoidal equivalence (lem-weil-isomorphism-derived-pullback); the evaluation-mate arrow is correctly typed through the adjunction of sk-def-sf-operations (i); both sides use the same coefficient category, Ohat_E-modules with the derived-limit pullback (def-pur-integral-derived-operations); the reduction and scalar-extension clauses agree with lem-fix-operation-reduction and lem-pur-integral-operations-scalar-extension. One precision note, not a fault: for general N the lemma implicitly needs H(M,N) in D^b_c, which is true for site-perfect M, and in the item's use (N=A_X) it is supplied by lem-pod-coefficient-dual-perfect. The new node is statement-only, self-contained, has blueprint.from set to the item with via [] and four search records, does not restate a clause of the item, and makes no cycle. Duplicate candidates read and rejected: thm-trf-internal-hom-pullback and sk-thm-sf-internal-hom-pullback (finite coefficients only), lem-pc and lem-sc perfect internal-Hom pullback (structure sheaves), def-wf-internal-hom and lem-wf-internal-hom-weil, lem-weil-isomorphism-derived-pullback, lem-weil-pbc-ringed-presentation-transport. No SGA source is cited. Item source/lean metadata is maintainer-owned and its correction was requested in the report."
  }
 }
