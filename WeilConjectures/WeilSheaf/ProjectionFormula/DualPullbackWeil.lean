@@ -271,4 +271,30 @@ theorem nonempty_upperStar_obj_dual_iso [LocallyOfFiniteType (X ↘ 𝐒)] [Quas
     (EX[φ]) rfl G.obj _ (dual_obj_eq_isoAlgebraIhom G hG) _
     (dual_upperStar_obj_eq_isoAlgebraIhom φ G hG)
 
+omit [Fact (ringChar k₀ ≠ l)] in
+/-- The internal hom of pro-étale Weil sheaves into the constant sheaf. -/
+lemma ihom_adicConstant_eq_isoAlgebraIhom {T : Scheme.{u}} [T.Over 𝐒]
+    (A : ProEtaleWeilSheaf k₀ l T) :
+    ihom k₀ l T A (adicConstant k₀ l T) = isoAlgebraIhom l (Fr[T]) A (isoAlgebraUnit l (Fr[T])) :=
+  rfl
+
+omit [Fact (ringChar k₀ ≠ l)] in
+/-- **The pullback of the dual of a lisse sheaf is the dual of the pullback**, for pro-étale
+Weil sheaves: `φ^* [N, ℚ̄_ℓ] ≅ [φ^* N, ℚ̄_ℓ]`. -/
+theorem nonempty_upperStar_obj_ihom_adicConstant_iso [LocallyOfFiniteType (X ↘ 𝐒)]
+    [QuasiCompact (X ↘ 𝐒)] (φ : X ⟶ Y) [φ.IsOver 𝐒] (N : ProEtaleWeilSheaf k₀ l Y)
+    (hN : IsAdicLisseSheaf N.carrier) :
+    Nonempty ((upperStar k₀ l φ).obj (ihom k₀ l Y N (adicConstant k₀ l Y)) ≅
+      ihom k₀ l X ((upperStar k₀ l φ).obj N) (adicConstant k₀ l X)) := by
+  have : IsLocallyNoetherian (X ↘ 𝐒).geometricFiber :=
+    LocallyOfFiniteType.isLocallyNoetherian (X ↘ 𝐒).geometricFiberToAlgebraicClosure
+  have : IsIso (adicUpperStarDualComparison l (bc[φ]) N.carrier) :=
+    isIso_adicUpperStarDualComparison_of_specializes _ hN fun z ↦
+      Scheme.Hom.exists_specializes_of_isAlgClosed (X ↘ 𝐒).geometricFiberToAlgebraicClosure z
+  rw [upperStar_eq_mapOfNatIso]
+  exact nonempty_mapOfNatIso_obj_isoAlgebraIhom_iso_of_eq (l := l) (bc[φ]) (Fr[X]) (Fr[Y])
+    (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius φ (comp_over φ 𝐒)).symm
+    (EX[φ]) rfl N _ (ihom_adicConstant_eq_isoAlgebraIhom N) _
+    (ihom_adicConstant_eq_isoAlgebraIhom ((IsoAlgebra.mapOfNatIso (EX[φ])).obj N))
+
 end AlgebraicGeometry.ProEtaleWeilSheaf

@@ -148,12 +148,11 @@ theorem nonempty_iso_derivedLowerShriek_tensorLisse_of_nonempty {X Y : Scheme.{u
     [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
     [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))]
     [QuasiSeparated (Y ↘ Spec (CommRingCat.of k₀))] (G : WeilSheaf k₀ l Y) (hG : G.IsLisse)
-    (hU2 : ∀ {U Z : Scheme.{u}} [U.Over (Spec (CommRingCat.of k₀))]
-      [Z.Over (Spec (CommRingCat.of k₀))] (j : U ⟶ Z) [IsOpenImmersion j]
+    (hU2 : ∀ {Z : Scheme.{u}} [Z.Over (Spec (CommRingCat.of k₀))] (j : X ⟶ Z) [IsOpenImmersion j]
       [j.IsOver (Spec (CommRingCat.of k₀))] (M : ProEtaleWeilSheaf k₀ l Z),
       ProEtale.IsAdicLisseSheaf M.carrier →
         Nonempty (extensionByZero k₀ l j ⋙ ihomFunctor k₀ l Z M ≅
-          ihomFunctor k₀ l U ((ProEtaleWeilSheaf.upperStar k₀ l j).obj M) ⋙
+          ihomFunctor k₀ l X ((ProEtaleWeilSheaf.upperStar k₀ l j).obj M) ⋙
             extensionByZero k₀ l j))
     (hP4 : Nonempty ((ProEtaleWeilSheaf.upperStar k₀ l f).obj (G.dual hG).obj ≅
       (((WeilSheaf.upperStar f).obj G).dual (ProEtale.IsAdicLisseSheaf.upperStar _ hG)).obj)) :
@@ -185,12 +184,11 @@ theorem nonempty_iso_derivedLowerShriek_tensorLisse_of_extensionByZero {X Y : Sc
     [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
     [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))]
     [QuasiSeparated (Y ↘ Spec (CommRingCat.of k₀))] (G : WeilSheaf k₀ l Y) (hG : G.IsLisse)
-    (hU2 : ∀ {U Z : Scheme.{u}} [U.Over (Spec (CommRingCat.of k₀))]
-      [Z.Over (Spec (CommRingCat.of k₀))] (j : U ⟶ Z) [IsOpenImmersion j]
+    (hU2 : ∀ {Z : Scheme.{u}} [Z.Over (Spec (CommRingCat.of k₀))] (j : X ⟶ Z) [IsOpenImmersion j]
       [j.IsOver (Spec (CommRingCat.of k₀))] (M : ProEtaleWeilSheaf k₀ l Z),
       ProEtale.IsAdicLisseSheaf M.carrier →
         Nonempty (extensionByZero k₀ l j ⋙ ihomFunctor k₀ l Z M ≅
-          ihomFunctor k₀ l U ((ProEtaleWeilSheaf.upperStar k₀ l j).obj M) ⋙
+          ihomFunctor k₀ l X ((ProEtaleWeilSheaf.upperStar k₀ l j).obj M) ⋙
             extensionByZero k₀ l j)) :
     Nonempty (derivedLowerShriek k₀ l f ⋙ tensorLisse G hG ≅
       tensorLisse ((WeilSheaf.upperStar f).obj G) (ProEtale.IsAdicLisseSheaf.upperStar _ hG) ⋙
