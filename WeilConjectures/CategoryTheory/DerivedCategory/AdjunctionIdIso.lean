@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import Mathlib.CategoryTheory.Adjunction.Unique
 public import WeilConjectures.CategoryTheory.DerivedCategory.AdjunctionUnit
 public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 
@@ -23,6 +24,28 @@ identified with the identity adjunction by the derived isomorphisms `D(F) ≅ D(
 open CategoryTheory Limits MonoidalCategory Abelian
 
 namespace CategoryTheory.Adjunction
+
+section Uniq
+
+variable {C : Type*} [Category C]
+
+/-- For an adjunction `F ⊣ G` and `u : G ≅ 𝟭`, the identification `F ≅ 𝟭` of the left adjoints of
+`𝟭` (`Adjunction.leftAdjointUniq`) is compatible with the counit: `ι⁻¹ ≫ ε = u` on `G`. -/
+lemma leftAdjointUniq_ofNatIsoRight_inv_app_comp_counit {F G : C ⥤ C} (adj : F ⊣ G)
+    (u : G ≅ 𝟭 C) (Y : C) :
+    ((adj.ofNatIsoRight u).leftAdjointUniq Adjunction.id).inv.app (G.obj Y) ≫
+      adj.counit.app Y = u.hom.app Y := by
+  have h₁ : ((adj.ofNatIsoRight u).leftAdjointUniq Adjunction.id).hom.app Y =
+      F.map (u.inv.app Y) ≫ adj.counit.app Y := by
+    simpa [Adjunction.ofNatIsoRight_counit] using
+      leftAdjointUniq_hom_app_counit (adj.ofNatIsoRight u) Adjunction.id Y
+  have h₂ := ((adj.ofNatIsoRight u).leftAdjointUniq Adjunction.id).hom.naturality (u.hom.app Y)
+  simp only [Functor.id_map, Functor.id_obj] at h₂
+  rw [← cancel_epi (((adj.ofNatIsoRight u).leftAdjointUniq Adjunction.id).hom.app (G.obj Y)),
+    Iso.hom_inv_id_app_assoc, ← h₂, h₁, ← F.map_comp_assoc, Iso.hom_inv_id_app, F.map_id,
+    Category.id_comp]
+
+end Uniq
 
 section Id
 
