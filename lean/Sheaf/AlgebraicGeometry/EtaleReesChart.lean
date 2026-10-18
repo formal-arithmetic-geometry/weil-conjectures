@@ -11,14 +11,7 @@ public import Mathlib.AlgebraicGeometry.Scheme
 public import Mathlib.AlgebraicGeometry.AffineSpace
 public import WeilConjectures.Mathlib.RingTheory.ReesAlgebra
 
-import Mathlib.AlgebraicGeometry.Morphisms.Flat
-import Mathlib.AlgebraicGeometry.Pullbacks
-import Mathlib.RingTheory.RingHom.Flat
-import Mathlib.RingTheory.Flat.Basic
-import Mathlib.RingTheory.TensorProduct.Basic
-import Mathlib.RingTheory.TensorProduct.Maps
-import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
-import Sheaf.AlgebraicGeometry.EtaleSmoothZeroDimensionalFibres
+import WeilConjectures.Mathlib.RingTheory.Smooth.StandardSmooth
 
 set_option autoImplicit false
 
@@ -50,6 +43,12 @@ The helpers use the published extended-Rees algebra and origin-chart API.
 @[expose] public section
 
 namespace AlgebraicGeometry
+
+private theorem etale_comp {B C D : Type*} [CommRing B] [CommRing C] [CommRing D]
+    (f : B →+* C) (g : C →+* D) (hf : f.Etale) (hg : g.Etale) :
+    (g.comp f).Etale := by
+  algebraize [f, g, g.comp f]
+  exact Algebra.Etale.comp B C D
 
 /--
 The canonical chart map from the polynomial presentation of the origin chart to the
@@ -161,6 +160,82 @@ theorem etale_rees_chart
       AlgebraicGeometry.SmoothOfRelativeDimension d
         (AlgebraicGeometry.Spec.map (CommRingCat.ofHom (etaleReesChartSchemeMap A R d)) ≫
           AlgebraicGeometry.Spec.map (CommRingCat.ofHom (etaleReesBaseSchemeMap A R d))) := by
-  sorry
+  have hEtale : Algebra.Etale (MvPolynomial (Fin d) A) R :=
+    RingHom.etale_algebraMap.mp he
+  let J := Ideal.mvPolynomialOrigin A (Fin d)
+  let E := J.extendedReesAlgebra
+  let D := (J.map (algebraMap (MvPolynomial (Fin d) A) R)).extendedReesAlgebra
+  have hTensor : Function.Bijective (etaleReesTensorMap A R d) := by
+    have h := J.isBaseChange_extendedReesAlgebraAlgHom R
+    have hmap : (etaleReesTensorMap A R d).toLinearMap = h.equiv.toLinearMap := by
+      apply LinearMap.ext
+      intro x
+      induction x using TensorProduct.induction_on with
+      | zero => simp
+      | tmul r z =>
+        change etaleReesTensorMap A R d (r ⊗ₜ z) = h.equiv (r ⊗ₜ z)
+        rw [IsBaseChange.equiv_tmul]
+        simp [etaleReesTensorMap, Algebra.smul_def, J]
+      | add x y hx hy => simpa only [map_add] using congrArg₂ (· + ·) hx hy
+    change Function.Bijective (etaleReesTensorMap A R d).toLinearMap
+    rw [hmap]
+    exact h.equiv.bijective
+  have hRees : (algebraMap E D).Etale := by
+    have : Algebra.IsPushout (MvPolynomial (Fin d) A) E R D :=
+      Algebra.IsPushout.symm inferInstance
+    have : Algebra.Etale E D := Algebra.Etale.of_equiv
+      (Algebra.IsPushout.equiv (MvPolynomial (Fin d) A) E R D)
+    exact RingHom.etale_algebraMap.mpr this
+  have hChart : (etaleReesChartMap A R d).Etale :=
+    etale_comp _ _ (RingHom.Etale.of_bijective
+      (Ideal.mvPolynomialExtendedReesAlgebraEquiv A (Fin d)).bijective) hRees
+  have hLift : (etaleReesChartSchemeMap A R d).Etale := by
+    exact etale_comp _ _
+      (etale_comp _ _ (RingHom.Etale.of_bijective ULift.ringEquiv.bijective) hChart)
+      (RingHom.Etale.of_bijective ULift.ringEquiv.symm.bijective)
+  have hScheme : Etale (Spec.map (CommRingCat.ofHom (etaleReesChartSchemeMap A R d))) :=
+    HasRingHomProperty.Spec_iff.mpr hLift
+  refine ⟨Ideal.mvPolynomialExtendedReesAlgebraEquiv_comp_C A (Fin d), ?_,
+    hTensor, ?_, hScheme, ?_⟩
+  · intro i
+    apply (Ideal.mvPolynomialExtendedReesAlgebraEquiv A (Fin d)).injective
+    apply Subtype.ext
+    rw [RingEquiv.apply_symm_apply]
+    change LaurentPolynomial.C (MvPolynomial.X i) =
+      Ideal.mvPolynomialToLaurent A (Fin d) (MvPolynomial.C Polynomial.X * MvPolynomial.X i)
+    rw [map_mul, Ideal.mvPolynomialToLaurent_C, Ideal.mvPolynomialToLaurent_X,
+      Polynomial.map_X, Polynomial.toLaurent_X]
+    simp
+  · intro r z
+    simp [etaleReesTensorMap, Ideal.coe_extendedReesAlgebraAlgHom,
+      ← LaurentPolynomial.C_eq_algebraMap]
+  · have hp : RingHom.IsStandardSmoothOfRelativeDimension d
+        (etaleReesBaseMap A d) := by
+      simpa [etaleReesBaseMap] using
+        (RingHom.isStandardSmoothOfRelativeDimension_algebraMap
+          (R := Polynomial A) (S := MvPolynomial (Fin d) (Polynomial A))
+          (n := Nat.card (Fin d))).mpr
+          (MvPolynomial.isStandardSmoothOfRelativeDimension _ _)
+    have hpl : RingHom.IsStandardSmoothOfRelativeDimension d
+        (etaleReesBaseSchemeMap A R d) := by
+      have h₁ := hp.comp
+        (RingHom.IsStandardSmoothOfRelativeDimension.equiv
+          (ULift.ringEquiv : ULift.{v} (Polynomial A) ≃+* Polynomial A))
+      have h₂ := (RingHom.IsStandardSmoothOfRelativeDimension.equiv
+        (ULift.ringEquiv.symm : MvPolynomial (Fin d) (Polynomial A) ≃+*
+          ULift.{v} (MvPolynomial (Fin d) (Polynomial A)))).comp h₁
+      simp only [Nat.add_zero, Nat.zero_add] at h₂
+      convert h₂ using 1
+      ext x
+      rfl
+    have hps : SmoothOfRelativeDimension d
+        (Spec.map (CommRingCat.ofHom (etaleReesBaseSchemeMap A R d))) := by
+      apply HasRingHomProperty.Spec_iff.mpr
+      exact RingHom.locally_of RingHom.isStandardSmoothOfRelativeDimension_respectsIso _ hpl
+    have hc := smoothOfRelativeDimension_comp (n := 0) (m := d)
+      (Spec.map (CommRingCat.ofHom (etaleReesChartSchemeMap A R d)))
+      (Spec.map (CommRingCat.ofHom (etaleReesBaseSchemeMap A R d)))
+      (hf := inferInstance) (hg := hps)
+    simpa only [Nat.zero_add] using hc
 
 end AlgebraicGeometry
