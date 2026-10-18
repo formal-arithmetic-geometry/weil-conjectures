@@ -22,58 +22,65 @@
  ],
  "proof": [
   {
-   "text": "Let $\\eta=(0)\\in\\operatorname{Spec}A$. Since $A$ is a domain, $A_{(0)}=K$ is a field, so $\\kappa(\\eta)=K$ and the canonical map $\\operatorname{Spec}K\\to\\operatorname{Spec}A$ is the generic-point map. By [def-pc-scheme-fibre], $D_K=D\\times_{\\operatorname{Spec}A}\\operatorname{Spec}K$ is its scheme-theoretic fibre. By [lem-pc-projective-base-change] its projection to $\\operatorname{Spec}K$ is projective, hence proper by [lem-pc-projective-proper]. Properness includes finite type by [def-weil-proper-morphism] and [def-weil-finite-type-morphism]. Apply [lem-weil-pbc-finite-type-dim-zero-artinian] over the field $K$, using the hypothesis $\\dim D_K\\le0$, to obtain that $|D_K|$ is finite. The homeomorphism in [def-pc-scheme-fibre] identifies this finite space with the ordinary fibre $f^{-1}(\\{\\eta\\})$.",
+   "text": "Projectivity implies properness by [lem-pc-projective-proper]. Let eta:Spec K -> Spec A be the displayed fraction-field map. Properness is stable under base change by [lem-pc-proper-base-change], so the projection D_K -> Spec K is proper and hence of finite type by [def-weil-proper-morphism] and [def-weil-finite-type-morphism]. Apply [lem-weil-pbc-finite-type-dim-zero-artinian] with the dimension hypothesis: D_K is locally Noetherian, locally Artinian, compact and discrete, and its underlying set is finite.",
    "uses": [
-    "def-pc-scheme-fibre",
-    "lem-pc-projective-base-change",
     "lem-pc-projective-proper",
+    "lem-pc-proper-base-change",
     "def-weil-proper-morphism",
     "def-weil-finite-type-morphism",
     "lem-weil-pbc-finite-type-dim-zero-artinian"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/morphisms.tex; literature/stacks-project/schemes.tex; literature/stacks-project/algebra.tex",
-    "place": "Tag 01WF, lemma-H-projective-base-change; Tag 01K5, lemma-quasi-compact-preserved-base-change; Tag 01W1, definition-proper; Tag 00KH, lemma-Noetherian-dimension-0; Tags 01K0/01K1, definition-fibre and lemma-fibre-topological; elementary localization A_(0)=K; Tag 01WC, lemma-locally-projective-proper; Tag 01T1, definition-finite-type"
+    "document": "lean/WeilConjectures/AlgebraicGeometry/ProjectiveSpace/FiniteMorphism.lean",
+    "place": "exists_isFinite_morphismRestrict_of_generic_fibre, first four instance arguments; the same argument works with the given fraction field K"
    }
   },
   {
-   "text": "Projectivity implies properness by [lem-pc-projective-proper]. The single affine chart $\\operatorname{Spec}A$ has Noetherian coordinate ring, so it makes the base locally Noetherian by [pqf-def-locnoeth]. Apply [thm-sc-proper-finite-fibre-finite-neighbourhood] to $f:D\\to\\operatorname{Spec}A$ at $\\eta$, with the finite ordinary fibre from Step 1. It yields an open neighbourhood $U$ of $\\eta$ such that $f^{-1}(U)\\to U$ is finite. This restriction is the base-change projection $D\\times_{\\operatorname{Spec}A}U\\to U$.",
+   "text": "Choose the point p of the nonempty spectrum of the field K. For every y with f(y)=eta(p), the point-lifting corollary of [lem-weil-pbc-fibre-product-points] gives z in D_K mapping to y and p (Mathlib Scheme.Pullback.exists_preimage_pullback). Thus the ordinary fibre f^{-1}({eta(p)}) is contained in the range of D_K -> D. That range is finite by Step 1, hence the ordinary fibre is finite. This avoids identifying K with a particular residue-field implementation.",
    "uses": [
-    "lem-pc-projective-proper",
-    "pqf-def-locnoeth",
-    "thm-sc-proper-finite-fibre-finite-neighbourhood"
+    "lem-weil-pbc-fibre-product-points"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/coherent.tex; literature/stacks-project/properties.tex",
-    "place": "Tag 02OH, lemma-proper-finite-fibre-finite-in-neighbourhood; Tag 01OV, definition-noetherian"
+    "document": "lean/WeilConjectures/AlgebraicGeometry/ProjectiveSpace/FiniteMorphism.lean",
+    "place": "exists_isFinite_morphismRestrict_of_generic_fibre, finite_range and exists_preimage_pullback argument"
    }
   },
   {
-   "text": "Every open neighbourhood of the generic point of $\\operatorname{Spec}A$ is nonempty. Thus the open $U$ obtained in Step 2 is nonempty, and the restricted morphism is finite, as required.",
+   "text": "Apply [lem-trf-proper-finite-fibre-finite-near], the Mathlib theorem exists_isFinite_morphismRestrict_of_finite_preimage_singleton, to the proper morphism f at eta(p) with the finite ordinary fibre of Step 2. Obtain an open U containing eta(p) with IsFinite (f restricted to U). This theorem does not require a locally Noetherian base.",
+   "uses": [
+    "lem-trf-proper-finite-fibre-finite-near"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/WeilConjectures/AlgebraicGeometry/ProjectiveSpace/FiniteMorphism.lean",
+    "place": "exists_isFinite_morphismRestrict_of_generic_fibre, application of the Mathlib neighbourhood theorem"
+   }
+  },
+  {
+   "text": "Since eta(p) belongs to U, the set U is nonempty. Return U with this explicit witness and the finite restriction from Step 3.",
    "uses": [],
    "elementary": true,
    "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-fin-projective-generically-finite.md",
-    "place": "Proof, shrinking to a generic open; elementary fact eta belongs to U implies U is nonempty"
+    "document": "lean/WeilConjectures/AlgebraicGeometry/ProjectiveSpace/FiniteMorphism.lean",
+    "place": "exists_isFinite_morphismRestrict_of_generic_fibre, final line"
    }
   }
  ],
  "proof_deps": [
-  "def-pc-scheme-fibre",
-  "lem-pc-projective-base-change",
   "lem-pc-projective-proper",
+  "lem-pc-proper-base-change",
   "def-weil-proper-morphism",
   "def-weil-finite-type-morphism",
   "lem-weil-pbc-finite-type-dim-zero-artinian",
-  "pqf-def-locnoeth",
-  "thm-sc-proper-finite-fibre-finite-neighbourhood"
+  "lem-weil-pbc-fibre-product-points",
+  "lem-trf-proper-finite-fibre-finite-near"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-fin-projective-generically-finite.md",
-  "place": "## Proof, rewritten using the existing proper finite-fibre neighbourhood theorem"
+  "by": "document",
+  "document": "lean/WeilConjectures/AlgebraicGeometry/ProjectiveSpace/FiniteMorphism.lean",
+  "place": "exists_isFinite_morphismRestrict_of_generic_fibre: adapt the already-proved argument to arbitrary fraction field K and use properness under base change directly; implemented by T5"
  },
  "mathlib_searches": [
   {
@@ -146,10 +153,7 @@
    }
   ]
  },
- "tool_uses": [
-  "thm-sc-proper-finite-fibre-finite-neighbourhood",
-  "lem-pc-projective-base-change"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-14",
   "by": "L",
@@ -175,5 +179,15 @@
   "group": "NW",
   "result": "pass",
   "note": "Wrote review.md. Checked immutable files, source and dependency declarations, hypotheses, conclusions, edge cases, docstrings, and verbatim signature. Server-only compile reproduced cleanly in 1.7 seconds. No delivery errors or fixes; branch head unchanged."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T5",
+  "result": "pass",
+  "landing": "20261018T062920-L-680428",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
