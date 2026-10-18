@@ -1,6 +1,6 @@
 # Work queue
 
-1498 items; claim with `tools/claim.py next <group> [--stage N]`.
+1503 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (1498)
+## Stage 3: modules to prove (1503)
 
 On the sorry route of an open batch, or below a route sorry of one (the human, 2026-10-18: provable as soon as every dependency is stated, whatever the depth); route first, then nearest to a route sorry.
 
@@ -185,6 +185,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.AlgebraicGeometry.EtaleNormalComponents` | 11 | 1 | proof | 1 |
 | `Sheaf.Paper.FrobeniusCompactSupportExchange` | 13 | 2 | proof | 1 |
 | `Sheaf.AlgebraicGeometry.ArtinSchreierPrimeCharacterComparison` | - | 1 | proof | 1 |
+| `Sheaf.Paper.AdicLocalCharacteristicFactor` | - | 1 | proof | 1 |
 | `Sheaf.Paper.BoundedConstructibleHomFiniteness` | - | 1 | proof | 1 |
 | `Sheaf.Paper.CommonStageConstituentNonexceptional` | - | 4 | proof | 1 |
 | `Sheaf.Paper.DlConstantFieldCharts` | - | 1 | proof | 1 |
@@ -566,6 +567,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.RationalSmoothPurityCanonical` | - | 16 | proof | 2 |
 | `Sheaf.Paper.RealBoundaryDecompositionLanding` | - | 1 | proof | 2 |
 | `Sheaf.Paper.RealBoundaryPathIndependence` | - | 1 | proof | 2 |
+| `Sheaf.Paper.RealSheavesCohomologyEulerSeries` | - | 1 | proof | 2 |
 | `Sheaf.Paper.SfCbcCompactSupportCompositionLimit` | - | 1 | proof | 2 |
 | `Sheaf.Paper.SmoothPurityCoefficientTowersAbelian` | - | 2 | proof | 2 |
 | `Sheaf.Paper.SmoothPurityNormalizedEquivalence` | - | 1 | proof | 2 |
@@ -905,6 +907,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.SecSmoothPurity.PurityDncCoefficientTransport` | - | 2 | proof | 3 |
 | `Sheaf.SecSmoothPurity.ReductionCompatibilities` | - | 3 | proof | 3 |
 | `Sheaf.SecSmoothPurity.ReductionExceptional` | - | 5 | proof | 3 |
+| `Sheaf.SixFunctors.AmbientProperOpenPasting` | - | 1 | proof | 3 |
 | `Sheaf.SixFunctors.GeneratorReductionStatement` | - | 3 | proof | 3 |
 | `Sheaf.SixFunctors.ProEtale.SmallCoefficientDerivedCompletion` | - | 7 | proof | 3 |
 | `Sheaf.SixFunctors.SemilinearProperOpenMatePasting` | - | 33 | proof | 3 |
@@ -1126,6 +1129,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.SmoothPurityTowerBound` | - | 1 | proof | 4 |
 | `Sheaf.Paper.SmoothPurityTowerInjectiveComponents` | - | 9 | proof | 4 |
 | `Sheaf.Paper.SmoothPurityTowerLevels` | - | 3 | proof | 4 |
+| `Sheaf.Paper.SystemCompactificationProjectionSubstitution` | - | 4 | proof | 4 |
 | `Sheaf.Paper.TraceGraphCorrespondence` | - | 4 | proof | 4 |
 | `Sheaf.RingTheory.PowerSeries.ExpSubstHom` | - | 1 | proof | 4 |
 | `Sheaf.SecSmoothPurity.AdicScalarTraceCoherence` | - | 1 | proof | 4 |
@@ -1237,6 +1241,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.SystemTensorMateArrows` | - | 10 | proof | 5 |
 | `Sheaf.Paper.TrfWitnessedOpenPullback` | - | 1 | proof | 5 |
 | `Sheaf.Paper.VaryingRingGraphSummand` | - | 20 | proof | 5 |
+| `Sheaf.Paper.VectorBundleThomClass` | - | 17 | proof | 5 |
 | `Sheaf.RingTheory.FiniteTypeFibreComponentLowerBound` | - | 1 | proof | 5 |
 | `Sheaf.SecSmoothPurity.ProEtaleFiniteCDProperOpenInterchange` | - | 1 | proof | 5 |
 | `Sheaf.SecSmoothPurity.RestrictionTransitionTranspose` | - | 1 | proof | 5 |
@@ -1513,7 +1518,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Algebra.Homology.SplitCellComplexKFlat` | - | 1 | proof | 21 |
 | `Sheaf.CategoryTheory.BoundedFilteredPageFunctorNormalized` | - | 1 | proof | 21 |
 
-## Stage 3: waiting for statements of dependencies (50)
+## Stage 3: waiting for statements of dependencies (49)
 
 Not items: a node in the dependencies (stmt_deps or proof_deps) has no Lean statement yet (the human, 2026-10-17 and 2026-10-18).
 
@@ -1566,7 +1571,6 @@ Not items: a node in the dependencies (stmt_deps or proof_deps) has no Lean stat
 | `Sheaf.Paper.QuasiFiniteCompactSupportWeights` | - | 1 | `lem-a1-finite-weil-sections-decomposition` |
 | `Sheaf.Paper.RationalPurityPresentation` | - | 13 | `lem-pur-adic-purity-scalar-naturality` |
 | `Sheaf.Paper.RationalWeilPurityNaturalityMate` | - | 4 | `det-sp-tower-gamma` |
-| `Sheaf.Paper.SystemCompactificationProjectionSubstitution` | - | 4 | `lem-sf-ambient-proper-open-pasting` |
 | `Sheaf.Paper.VerdierExchange` | - | 1 | `fix-lem-exchanges` |
 | `Sheaf.SecSmoothPurity.SmoothPurityNaturality` | - | 1 | `fix-prop-projection-formula` |
 
