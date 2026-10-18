@@ -24,6 +24,8 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.AlgebraicGeometry.AdicDenseOpenImmersionFiniteness` | 7 | 1 | proof | route |
 | `Sheaf.AlgebraicGeometry.AdicProjectiveSpaceFiniteness` | 7 | 1 | proof | route |
 | `WeilConjectures.DeligneLaumon.AffineLine.MiddleExtension` | 8 | 4 | proof | route |
+| `Sheaf.AlgebraicGeometry.ProjectiveCurveFiniteGroupDevissage` | 9 | 1 | proof | route |
+| `Sheaf.AlgebraicGeometry.ProjectiveCurveFiniteGroupPrimeCases` | 9 | 1 | proof | route |
 | `Sheaf.AlgebraicGeometry.ProEtaleRingSheafChangeAdjunction` | 3 | 1 | proof | 1 |
 | `Sheaf.AlgebraicGeometry.BoundedBelowDerivedSmoothBaseChange` | 5 | 1 | proof | 1 |
 | `Sheaf.CategoryTheory.Galois.GaloisTransitive` | 5 | 1 | proof | 1 |
@@ -38,7 +40,6 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.CategoryTheory.DerivedCategory.NoetherianFlatComplexPerfect` | - | 1 | proof | 3 |
 | `Sheaf.CategoryTheory.RingedCechKoszulDualLimit` | - | 1 | proof | 3 |
 | `Sheaf.Paper.AdicCompletionReduction` | - | 1 | proof | 3 |
-| `Sheaf.Paper.ExtendedCechCompletionModel` | - | 1 | proof | 3 |
 | `Sheaf.Paper.FlatRingedIdealCompleteEquivalence` | - | 1 | proof | 3 |
 | `Sheaf.RingTheory.PolynomialDistinctLinearCRT` | - | 1 | proof | 3 |
 | `Sheaf.RingTheory.ValuationRingNormal` | - | 1 | proof | 3 |
@@ -50,7 +51,6 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.CategoryTheory.RingedCechKoszulColimitIso` | - | 1 | proof | 4 |
 | `Sheaf.CategoryTheory.RingedCechKoszulDualKFlat` | - | 1 | proof | 4 |
 | `Sheaf.Paper.AffineProjectiveComplexDerivedHom` | - | 1 | proof | 4 |
-| `Sheaf.AlgebraicGeometry.AffineFiniteModuleFreeLocus` | - | 2 | proof | 5 |
 | `Sheaf.AlgebraicGeometry.FiniteDenseNormalOpen` | - | 1 | proof | 5 |
 | `Sheaf.AlgebraicGeometry.Sites.EtaleSheavesGsetsPoint` | - | 1 | proof | 5 |
 | `Sheaf.AlgebraicGeometry.ClosedImmersionProducts` | - | 1 | proof | 6 |
