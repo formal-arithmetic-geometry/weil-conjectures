@@ -9,7 +9,9 @@ public import Mathlib.Algebra.Category.Ring.Colimits
 public import Mathlib.Algebra.MvPolynomial.Eval
 public import Mathlib.CategoryTheory.Category.Preorder
 public import Mathlib.Order.Directed
-import Sheaf.Order.DirectedFiniteUpperBound
+import Mathlib.Algebra.Category.Ring.FilteredColimits
+import Mathlib.CategoryTheory.Limits.ConcreteCategory.Basic
+import Mathlib.Data.Finset.Order
 
 /-!
 # Finite data and relations in a directed colimit of commutative rings
@@ -65,6 +67,49 @@ theorem exists_finite_data_stage {I : Type u} [Preorder I] [Nonempty I]
             (fun a ↦ F.map (homOfLE hij) (y a)) =
           (q r).eval₂ (Int.castRingHom (F.obj j))
             (fun a ↦ F.map (homOfLE hij) (y a))) := by
-  sorry
+  classical
+  have map_eval {R S : Type u} [CommRing R] [CommRing S] (φ : R →+* S)
+      (P : MvPolynomial (Fin n) ℤ) (z : Fin n → R) :
+      φ (P.eval₂ (Int.castRingHom R) z) =
+        P.eval₂ (Int.castRingHom S) (fun a ↦ φ (z a)) := by
+    rw [MvPolynomial.hom_eval₂, RingHom.eq_intCast' (φ.comp (Int.castRingHom R))]
+  choose stage lift hlift using fun a ↦ Concrete.colimit_exists_rep F (x a)
+  obtain ⟨i, hi⟩ := (Finset.univ.image stage).exists_le
+  let e (a : Fin n) : stage a ⟶ i :=
+    homOfLE (hi _ (Finset.mem_image_of_mem stage (Finset.mem_univ a)))
+  let y (a : Fin n) : F.obj i := F.map (e a) (lift a)
+  have hy (a : Fin n) : colimit.ι F i (y a) = x a :=
+    (ConcreteCategory.congr_hom (colimit.w F (e a)) (lift a)).trans (hlift a)
+  have heq (r : Fin m) :
+      colimit.ι F i ((p r).eval₂ (Int.castRingHom (F.obj i)) y) =
+        colimit.ι F i ((q r).eval₂ (Int.castRingHom (F.obj i)) y) := by
+    simpa only [map_eval, hy] using h r
+  have eventual (r : Fin m) : ∃ (j : I) (f : i ⟶ j),
+      F.map f ((p r).eval₂ (Int.castRingHom (F.obj i)) y) =
+        F.map f ((q r).eval₂ (Int.castRingHom (F.obj i)) y) := by
+    obtain ⟨j, f, g, hfg⟩ := Concrete.colimit_exists_of_rep_eq F _ _ (heq r)
+    exact ⟨j, f, (Subsingleton.elim g f) ▸ hfg⟩
+  choose j f hj using eventual
+  obtain ⟨k, hk⟩ := (insert i (Finset.univ.image j)).exists_le
+  let e₀ : i ⟶ k := homOfLE (hk i (Finset.mem_insert_self _ _))
+  let e₁ (r : Fin m) : j r ⟶ k :=
+    homOfLE (hk _ (Finset.mem_insert_of_mem
+      (Finset.mem_image_of_mem j (Finset.mem_univ r))))
+  let z (a : Fin n) : F.obj k := F.map e₀ (y a)
+  have hz (r : Fin m) :
+      (p r).eval₂ (Int.castRingHom (F.obj k)) z =
+        (q r).eval₂ (Int.castRingHom (F.obj k)) z := by
+    have hr := congrArg (F.map (e₁ r)) (hj r)
+    have hcomp : f r ≫ e₁ r = e₀ := Subsingleton.elim _ _
+    have hmap (v : F.obj i) : F.map (e₁ r) (F.map (f r) v) = F.map e₀ v := by
+      rw [← ConcreteCategory.comp_apply, ← F.map_comp, hcomp]
+    simpa only [hmap, map_eval] using hr
+  refine ⟨k, z, ?_, hz, ?_⟩
+  · intro a
+    exact (ConcreteCategory.congr_hom (colimit.w F e₀) (y a)).trans (hy a)
+  · intro l hkl r
+    exact (map_eval (F.map (homOfLE hkl)).hom (p r) z).symm.trans
+      ((congrArg (F.map (homOfLE hkl)) (hz r)).trans
+        (map_eval (F.map (homOfLE hkl)).hom (q r) z))
 
 end CommRingCat

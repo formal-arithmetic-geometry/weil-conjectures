@@ -15991,3 +15991,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 06:27 L: merged deliver/E5/Sheaf.AlgebraicGeometry.Morphisms.GenericFiniteOpenNeighborhood (stage 3; reviewer PASS; first push; landing 20261018T062736-L-644322 (proof); batch 20261018T062645; modules 1; new nodes 0)
 - 06:27 L: merged deliver/E5/Sheaf.Order.DirectedFiniteUpperBound (stage 3; reviewer PASS; first push; landing 20261018T062737-L-644553 (proof); batch 20261018T062645; modules 1; new nodes 0)
 - 06:27 L: merged deliver/E6/Sheaf.AlgebraicGeometry.Morphisms.QuasiFiniteFpFiniteFactorization (stage 3; reviewer PASS; first push; landing 20261018T062737-L-644769 (proof); batch 20261018T062645; modules 1; new nodes 0)
+- 06:27 L: merged deliver/E6/Sheaf.RingTheory.FilteredColimitFiniteData (stage 3; reviewer PASS; first push; landing 20261018T062738-L-644972 (proof); batch 20261018T062645; modules 1; new nodes 0)
