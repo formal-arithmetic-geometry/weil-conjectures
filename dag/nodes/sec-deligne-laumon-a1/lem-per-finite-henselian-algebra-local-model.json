@@ -19,7 +19,8 @@
   "def-weil-pbc-henselian-terminology",
   "def-weil-geometric-point",
   "def-weil-affine-spectrum",
-  "def-weil-pbc-strict-henselization-limit"
+  "def-weil-pbc-strict-henselization-limit",
+  "def-weil-pbc-strict-henselization-structural-map"
  ],
  "proof": [
   {
@@ -380,5 +381,23 @@
   "group": "N3",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N3-4ae512a35 (reviewer sub-agent of L); spot-checked: I read the item, all 9 steps and every cited node statement, plus ILO V 2.2.6–2.2.8 (finite over the henselization ⇒ finitely presented ⇒ descends along the colimit). The statement is correct; it has no new nodes and is not changed. Small cases checked: R0=k, C=H×H (excluded by locality), imperfect C=H[u]/(u^p−a) where κ(z)=L, and nonreduced C. Steps 1, 3, 4, 7, 8 and 9 are correct as written. Two C3/C4 citation gaps are repaired in fixes/dag/nodes/sec-deligne-laumon-a1/lem-per-finite-henselian-algebra-local-model.json. (1) Steps 2 and 5 identified H, which is only known to be the pointed-étale strict henselization, with the triples colimit. That identification is needed both for lem-sc-strict-henselization-noetherian and for the descent diagram, and no cited statement gave it; I added lem-weil-pbc-etale-local-ring-triples(3). (2) In Step 6, the invariance node gives the isomorphism only over R0, but the step claimed it was compatible with the colimit leg S→H; I added lem-weil-pbc-strict-henselization-functoriality(4) with V=W=Spec S and w=id, together with triples(3). proof_deps and split_report.tool_uses were updated; no cycle, and all steps are under 2000 characters. Batch-5 flags: lem-trf-henselization-prime-ind-etale (Stacks 04GN, pure algebra), lem-trf-ind-etale-strict-local-invariance (Stacks 05WR, generic, accepted before) and def-weil-pbc-henselization-at-prime (a definition, already in the base stmt_deps) are all outside the trace-formula and Poincaré-duality assumptions, so I accepted them. The new closure contains no other trace-formula or Poincaré node.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FiniteHenselianAlgebraLocalModel",
+  "declaration": "AlgebraicGeometry.Scheme.finite_henselian_algebra_local_model",
+  "file": "lean/Sheaf/RingTheory/FiniteHenselianAlgebraLocalModel.lean",
+  "statement": "theorem finite_henselian_algebra_local_model (D R₀ : Type u) [CommRing D] [CommRing R₀] [IsNoetherianRing D] [Algebra D R₀] [Algebra.FiniteType D R₀] (q : Ideal R₀) [q.IsMaximal] [IsSepClosed q.ResidueField] (H : Type u) [CommRing H] [Algebra (Localization.AtPrime q) H] [HenselianLocalRing H] (hH : Algebra.IsHenselizationAtPrime' R₀ q H) (C : Type u) [CommRing C] [Algebra H C] [Module.Finite H C] [IsLocalRing (AdicCompletion (IsLocalRing.maximalIdeal H) H ⊗[H] C)] : IsNoetherianRing C ∧ IsStrictlyHenselianLocalRing C ∧ ∃ (F : Type u) (_ : CommRing F) (_ : Algebra R₀ F), Algebra.FiniteType R₀ F ∧ ∃ (z : Ideal F) (_ : z.IsMaximal), z.comap (algebraMap R₀ F) = q ∧ ∃ (Ω : Type u) (_ : Field Ω) (_ : IsAlgClosed Ω) (barZ : Spec (.of Ω) ⟶ Spec (.of F)), (barZ (IsLocalRing.closedPoint Ω)).asIdeal = z ∧ ∃ e : C ≃+* strictHenselizationRing barZ, Spec.map (CommRingCat.ofHom e.symm.toRingHom) ≫ strictHenselizationStructuralMap barZ ≫ Spec.map (CommRingCat.ofHom (algebraMap R₀ F)) = Spec.map (CommRingCat.ofHom ((algebraMap H C).comp ((algebraMap (Localization.AtPrime q) H).comp (algebraMap R₀ (Localization.AtPrime q))))) ∧ ((algebraMap R₀ F).comp (algebraMap D R₀)).FiniteType",
+  "branch": "newtargets-dag",
+  "by": "NL",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5a6f4dd78",
+  "group": "NL",
+  "result": "pass",
+  "note": "Every node clause checked against the Lean: Noetherian D; finite-type R₀ via the Algebra.FiniteType instance form; maximal q with IsSepClosed q.ResidueField; H through the recorded IsHenselizationAtPrime' interface, whose own arguments include HenselianLocalRing, so nothing extra is assumed; Ĥ = AdicCompletion at the maximal ideal; finite commutative C; IsLocalRing of Ĥ⊗C, which includes Nontrivial. Conclusions: IsNoetherianRing ∧ IsStrictlyHenselianLocalRing; ∃ finite-type F, maximal z with comap = q, a geometric point barZ supported at z, and e : C ≃+* strictHenselizationRing barZ with a Spec equation through the canonical strictHenselizationStructuralMap (unique common composite), i.e. R₀-linearity; composite D→F finite type. The node differs from live only in lean and the added, used structural-map stmt_dep. lean.statement is verbatim the file signature. Docstrings carry the source, the blueprint id and all 9 steps; the proof is sorry; there are no definitions and no duplicate owner. nt_compile --json is clean in 2.3 s, matching the worker's 2.7 s. Advisory: single common universe u for D/R₀/H/C, harmless since D can be replaced by its image in R₀."
  }
 }
