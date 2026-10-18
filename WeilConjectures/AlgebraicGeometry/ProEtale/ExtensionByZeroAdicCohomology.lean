@@ -38,6 +38,215 @@ universe u
 
 open CategoryTheory Limits Opposite Abelian PadicInt
 
+namespace PrimeSpectrum
+
+section Compatible
+
+local instance : PreservesFilteredColimitsOfSize.{0, 0} (forget CommRingCat.{u}) :=
+  preservesFilteredColimitsOfSize_of_univLE.{u, u} (forget CommRingCat.{u})
+
+variable (G : ℕ ⥤ CommRingCat.{u}) (q : ∀ n, PrimeSpectrum (G.obj n))
+  (hq : ∀ n, comap (G.map (homOfLE n.le_succ)).hom (q (n + 1)) = q n)
+
+include hq in
+lemma comap_eq_of_compatible {m n : ℕ} (h : m ≤ n) :
+    comap (G.map (homOfLE h)).hom (q n) = q m := by
+  induction n, h using Nat.le_induction with
+  | base => simp
+  | succ n hmn ih =>
+    have : homOfLE (hmn.trans n.le_succ) = homOfLE hmn ≫ homOfLE n.le_succ := rfl
+    rw [this, Functor.map_comp, CommRingCat.hom_comp, comap_comp_apply, hq, ih]
+
+include hq in
+lemma map_mem_iff_of_compatible {m n : ℕ} (h : m ≤ n) (y : G.obj m) :
+    G.map (homOfLE h) y ∈ (q n).asIdeal ↔ y ∈ (q m).asIdeal := by
+  rw [← comap_eq_of_compatible G q hq h]
+  rfl
+
+include hq in
+lemma mem_iff_of_colimit_ι_eq {m n : ℕ} (y : G.obj m) (z : G.obj n)
+    (h : colimit.ι G m y = colimit.ι G n z) : y ∈ (q m).asIdeal ↔ z ∈ (q n).asIdeal := by
+  obtain ⟨k, f, g, hk⟩ := (Concrete.colimit_rep_eq_iff_exists G y z).1 h
+  rw [← map_mem_iff_of_compatible G q hq (leOfHom f) y,
+    ← map_mem_iff_of_compatible G q hq (leOfHom g) z]
+  exact Iff.of_eq (congrArg (· ∈ (q k).asIdeal) hk)
+
+/-- The ideal of `colim G` of the elements represented by an element of some `qₙ`, for a
+compatible sequence of primes `qₙ` of the `G n`. -/
+noncomputable def colimitIdealOfCompatible : Ideal (colimit G : CommRingCat) where
+  carrier := {x | ∃ n y, colimit.ι G n y = x ∧ y ∈ (q n).asIdeal}
+  add_mem' := by
+    rintro _ _ ⟨m, y, rfl, hy⟩ ⟨n, z, rfl, hz⟩
+    refine ⟨max m n, G.map (homOfLE (le_max_left m n)) y + G.map (homOfLE (le_max_right m n)) z,
+      ?_, add_mem ((map_mem_iff_of_compatible G q hq _ y).2 hy)
+        ((map_mem_iff_of_compatible G q hq _ z).2 hz)⟩
+    rw [map_add, ← CommRingCat.comp_apply, ← CommRingCat.comp_apply, colimit.w, colimit.w]
+  zero_mem' := ⟨0, 0, map_zero _, zero_mem _⟩
+  smul_mem' := by
+    rintro c _ ⟨n, z, rfl, hz⟩
+    obtain ⟨m, y, rfl⟩ := Concrete.colimit_exists_rep G c
+    refine ⟨max m n, G.map (homOfLE (le_max_left m n)) y * G.map (homOfLE (le_max_right m n)) z,
+      ?_, Ideal.mul_mem_left _ _ ((map_mem_iff_of_compatible G q hq _ z).2 hz)⟩
+    rw [map_mul, ← CommRingCat.comp_apply, ← CommRingCat.comp_apply, colimit.w, colimit.w,
+      smul_eq_mul]
+
+include hq in
+lemma ι_mem_colimitIdealOfCompatible_iff (n : ℕ) (y : G.obj n) :
+    colimit.ι G n y ∈ colimitIdealOfCompatible G q hq ↔ y ∈ (q n).asIdeal :=
+  ⟨fun ⟨_, z, hz, hz'⟩ ↦ (mem_iff_of_colimit_ι_eq G q hq z y hz).1 hz', fun h ↦ ⟨n, y, rfl, h⟩⟩
+
+include hq in
+lemma isPrime_colimitIdealOfCompatible : (colimitIdealOfCompatible G q hq).IsPrime where
+  ne_top' := by
+    rw [Ne, Ideal.eq_top_iff_one, ← map_one (colimit.ι G 0).hom,
+      ι_mem_colimitIdealOfCompatible_iff]
+    exact fun h ↦ (q 0).isPrime.ne_top ((Ideal.eq_top_iff_one _).2 h)
+  mem_or_mem' := by
+    intro a b hab
+    obtain ⟨m, y, rfl⟩ := Concrete.colimit_exists_rep G a
+    obtain ⟨n, z, rfl⟩ := Concrete.colimit_exists_rep G b
+    rw [← colimit.w G (homOfLE (le_max_left m n)), ← colimit.w G (homOfLE (le_max_right m n)),
+      CommRingCat.comp_apply, CommRingCat.comp_apply, ← map_mul,
+      ι_mem_colimitIdealOfCompatible_iff] at hab
+    rw [← colimit.w G (homOfLE (le_max_left m n)), ← colimit.w G (homOfLE (le_max_right m n)),
+      CommRingCat.comp_apply, CommRingCat.comp_apply, ι_mem_colimitIdealOfCompatible_iff,
+      ι_mem_colimitIdealOfCompatible_iff]
+    exact (q _).isPrime.mem_or_mem hab
+
+include hq in
+/-- **Points of the spectrum of a sequential colimit.** A compatible sequence of primes `qₙ` of
+the rings `G n` of a sequence comes from a prime of `colim G`. -/
+theorem exists_comap_colimit_ι_eq :
+    ∃ P : PrimeSpectrum (colimit G : CommRingCat), ∀ n, comap (colimit.ι G n).hom P = q n :=
+  ⟨⟨colimitIdealOfCompatible G q hq, isPrime_colimitIdealOfCompatible G q hq⟩, fun n ↦
+    PrimeSpectrum.ext (Ideal.ext fun y ↦ ι_mem_colimitIdealOfCompatible_iff G q hq n y)⟩
+
+end Compatible
+
+end PrimeSpectrum
+
+namespace AlgebraicGeometry.Scheme.AffineProEt
+
+variable {S : Scheme.{u}} {W : ℕ → S.AffineProEt} {π : ∀ n, W (n + 1) ⟶ W n}
+
+/-- **Points of a sequential limit** in the affine pro-étale site: a compatible sequence of
+points `xₙ` of the `Wₙ` comes from a point of `W_∞ = Spec (colim Γ(Wₙ))`. -/
+theorem exists_seqLimitπ_eq (x : ∀ n, (W n).left)
+    (hx : ∀ n, (π n).left.base (x (n + 1)) = x n) :
+    ∃ y : (seqLimit W π).left, ∀ n, (seqLimitπ W π n).left.base y = x n := by
+  let q (n : ℕ) : PrimeSpectrum Γ((W n).left, ⊤) := (W n).left.isoSpec.hom.base (x n)
+  have hq (n : ℕ) : PrimeSpectrum.comap ((ringSeq W π).map (homOfLE n.le_succ)).hom (q (n + 1)) =
+      q n := by
+    rw [ringSeq_map_succ]
+    change (Spec.map (π n).left.appTop).base ((W (n + 1)).left.isoSpec.hom.base (x (n + 1))) = _
+    rw [← Scheme.Hom.comp_apply, Scheme.isoSpec_hom_naturality, Scheme.Hom.comp_apply, hx]
+  obtain ⟨P, hP⟩ := PrimeSpectrum.exists_comap_colimit_ι_eq (ringSeq W π) q hq
+  refine ⟨P, fun n ↦ ?_⟩
+  change ((W n).left.isoSpec.inv).base ((Spec.map (colimit.ι (ringSeq W π) n)).base P) = x n
+  change ((W n).left.isoSpec.inv).base (PrimeSpectrum.comap (colimit.ι (ringSeq W π) n).hom P) = _
+  rw [hP n, ← Scheme.Hom.comp_apply, Iso.hom_inv_id]
+  rfl
+
+end AlgebraicGeometry.Scheme.AffineProEt
+
+namespace AlgebraicGeometry.ProEtale
+
+open Scheme
+
+section ExtensionByZeroLimit
+
+variable {U T : Scheme.{u}} (j : U ⟶ T) [IsOpenImmersion j]
+
+set_option synthInstance.maxHeartbeats 400000 in
+/-- **A section of an extension by zero vanishes on a cover of the complement.** For a section
+`r` of `j_! G` over an object `B` of the affine pro-étale site, there is a morphism `B' ⟶ B` of
+the affine pro-étale site along which `r` vanishes and whose image contains every point of `B`
+lying over the complement of `U`. Indeed `r` locally comes from the presheaf extension by zero,
+whose sections over objects not factoring through `U` vanish; the members of a finite
+jointly surjective family on which `r` vanishes are collected into a single disjoint union. -/
+lemma exists_map_eq_zero_openImmersionLowerShriek_of_affineProEt
+    (G : Sheaf (ProEt.topology U) AddCommGrpCat.{u + 1}) (B : T.AffineProEt)
+    (r : ToType (((j)_!open[AddCommGrpCat.{u + 1}].obj G).obj.obj
+      (op ((AffineProEt.toProEt T).obj B)))) :
+    ∃ (B' : T.AffineProEt) (π : B' ⟶ B),
+      ((j)_!open[AddCommGrpCat.{u + 1}].obj G).obj.map ((AffineProEt.toProEt T).map π).op r =
+        0 ∧ ∀ x : B.left, B.hom.base x ∉ Set.range j.base → x ∈ Set.range π.left.base := by
+  set H := (j)_!open[AddCommGrpCat.{u + 1}].obj G
+  set L := openImmersionLocalization j
+  let R : Sieve ((AffineProEt.toProEt T).obj B) :=
+    { arrows := fun W f ↦ Set.range W.hom.base ⊆ Set.range j.base ∨ H.obj.map f.op r = 0
+      downward_closed := by
+        rintro W W' f (hf | hf) g
+        · left
+          rintro _ ⟨y, rfl⟩
+          refine hf ⟨g.left.base y, ?_⟩
+          rw [← MorphismProperty.Over.w g]
+          rfl
+        · right
+          rw [op_comp, Functor.map_comp, ConcreteCategory.comp_apply, hf, map_zero] }
+  have hR : R ∈ ProEt.topology T ((AffineProEt.toProEt T).obj B) := by
+    have : Presheaf.IsLocallySurjective (ProEt.topology T)
+        (toSheafify (ProEt.topology T) (L.op.leftKanExtension G.obj)) :=
+      Presheaf.isLocallySurjective_toSheafify' (J := ProEt.topology T) _
+    refine GrothendieckTopology.superset_covering _ ?_ (Presheaf.imageSieve_mem
+      (ProEt.topology T) (toSheafify (ProEt.topology T) (L.op.leftKanExtension G.obj)) r)
+    rintro W f ⟨t, ht⟩
+    by_cases hc : IsEmpty (CostructuredArrow L.op (op W))
+    · right
+      have hI := (isColimitEquivIsInitialOfIsEmpty _ _).1
+        (L.op.isPointwiseLeftKanExtensionLeftKanExtensionUnit G.obj (op W))
+      have : Subsingleton (ToType ((L.op.leftKanExtension G.obj).obj (op W))) :=
+        AddCommGrpCat.subsingleton_of_isZero hI.isZero
+      change ConcreteCategory.hom ((sheafify (ProEt.topology T)
+        (L.op.leftKanExtension G.obj)).map f.op) r = 0
+      rw [← ht, Subsingleton.elim t 0, map_zero]
+    · left
+      obtain ⟨c⟩ := not_isEmpty_iff.1 hc
+      rintro _ ⟨y, rfl⟩
+      refine ⟨(c.left.unop.hom).base ((c.hom.unop.left).base y), ?_⟩
+      have h₁ := MorphismProperty.Over.w c.hom.unop
+      change (c.hom.unop.left ≫ c.left.unop.hom ≫ j) = W.hom at h₁
+      rw [← h₁]
+      rfl
+  have hRp : R.functorPullback (AffineProEt.toProEt T) ∈ AffineProEt.topology T B :=
+    Functor.mem_restrictedTopology_of_functorPushforward_mem _
+      (Functor.IsCoverDense.functorPullback_pushforward_covering ⟨R, hR⟩)
+  obtain ⟨ι, _, V, f, hRf, hsurj⟩ :=
+    AffineProEt.exists_finite_jointly_surjective_of_mem_topology hRp
+  let ι' := {i : ι // H.obj.map ((AffineProEt.toProEt T).map (f i)).op r = 0}
+  let V' (i : ι') : T.AffineProEt := V i.1
+  let f' (i : ι') : V' i ⟶ B := f i.1
+  refine ⟨AffineProEt.sigmaCover V' f', AffineProEt.sigmaCoverπ V' f', ?_, fun x hx ↦ ?_⟩
+  · let Fa : T.AffineProEtᵒᵖ ⥤ Type (u + 1) :=
+      (AffineProEt.toProEt T).op ⋙ H.obj ⋙ forget AddCommGrpCat.{u + 1}
+    have hFa : Presheaf.IsSheaf (AffineProEt.topology T) Fa :=
+      Presheaf.isSheaf_comp_of_isSheaf _ _ (forget AddCommGrpCat.{u + 1})
+        (((AffineProEt.toProEt T).sheafPushforwardContinuous AddCommGrpCat.{u + 1}
+          (AffineProEt.topology T) (ProEt.topology T)).obj H).property
+    refine AffineProEt.sigmaCover_ext V' f' hFa (z' := (0 : ToType (H.obj.obj
+      (op ((AffineProEt.toProEt T).obj (AffineProEt.sigmaCover V' f')))))) fun i ↦ ?_
+    change H.obj.map ((AffineProEt.toProEt T).map (AffineProEt.sigmaCoverι V' f' i)).op
+        (H.obj.map ((AffineProEt.toProEt T).map (AffineProEt.sigmaCoverπ V' f')).op r) =
+      H.obj.map ((AffineProEt.toProEt T).map (AffineProEt.sigmaCoverι V' f' i)).op 0
+    rw [map_zero, ← ConcreteCategory.comp_apply, ← Functor.map_comp, ← op_comp,
+      ← Functor.map_comp, AffineProEt.sigmaCoverι_π]
+    exact i.2
+  · obtain ⟨i, y, rfl⟩ := hsurj x
+    have hi : H.obj.map ((AffineProEt.toProEt T).map (f i)).op r = 0 := by
+      refine (hRf i).resolve_left fun h ↦ hx ?_
+      obtain ⟨z, hz⟩ := h ⟨y, rfl⟩
+      refine ⟨z, hz.trans ?_⟩
+      rw [← MorphismProperty.Over.w (f i)]
+      rfl
+    refine ⟨(AffineProEt.sigmaCoverι V' f' ⟨i, hi⟩).left.base y, ?_⟩
+    rw [← Scheme.Hom.comp_apply, ← MorphismProperty.Comma.comp_left,
+      AffineProEt.sigmaCoverι_π]
+    rfl
+
+end ExtensionByZeroLimit
+
+end AlgebraicGeometry.ProEtale
+
 namespace AlgebraicGeometry.ProEtale
 
 section RingHom
