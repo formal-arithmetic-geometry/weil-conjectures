@@ -1,0 +1,113 @@
+{
+ "id": "lem-weil-pbc-spectral-limit-descend-inclusion-relations",
+ "kind": "statement",
+ "title": "Inclusions and finite equalities of compact opens descend in a spectral inverse limit",
+ "statement": "Let I be a nonempty directed preordered set, (S_i) a system of spectral spaces with spectral transition maps f_{ij}, identities and composition laws. Let X be a space with compatible maps p_i and assume every compatible family of points has a unique point of X. Then (i) inclusion of two pulled-back quasi-compact opens descends to a common stage; (ii) finite union equalities of pulled-back quasi-compact opens descend to a stage; and (iii) finite intersection equalities descend to a stage.",
+ "source": {
+  "document": "literature/stacks-project/topology.tex",
+  "place": "Topology, Lemma Tag 0A30, parts (2)--(4), using Tag 0A2X for inclusion descent and formal finite union/intersection argument"
+ },
+ "stmt_deps": [
+  "def-weil-spectral-space",
+  "def-weil-pbc-constructible-topology"
+ ],
+ "proof": [
+  {
+   "text": "For two compact opens U_i and V_j whose pullbacks satisfy inclusion, pass to the directed upper tail above i and j. The differences of their pullbacks are closed in the constructible topologies and stable under transition maps. If all differences were nonempty, the compatible-point theorem for constructibly closed subsets would produce a compatible family, which extends to all indices and contradicts the assumed inclusion on X. Hence one difference is empty, giving inclusion at a common stage.",
+   "uses": [
+    "lem-weil-pbc-spectral-limit-constructible-closed-nonempty",
+    "def-weil-pbc-constructible-topology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a finite union or finite intersection family, combine the family into one compact open at the original stage. Apply inclusion descent in both directions and pass to a common upper bound; inverse images commute with unions and intersections. The empty family uses the empty or whole compact open as appropriate.",
+   "uses": [
+    "def-weil-spectral-space"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-spectral-limit-constructible-closed-nonempty",
+  "def-weil-pbc-constructible-topology",
+  "def-weil-spectral-space"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/topology.tex",
+  "place": "Topology, Lemma Tag 0A30, parts (2)--(4)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "directed inverse limit compact open inclusion descends to a finite stage",
+   "results": "No exact Mathlib declaration; only scheme affine-transition analogues.",
+   "verdict": "no match",
+   "date": "2026-10-18"
+  },
+  {
+   "tool": "grep",
+   "query": "grep compact open inverse limit spectral descent Mathlib Topology/Spectral",
+   "results": "No matching declaration in Mathlib Topology/Spectral; only generic compact-open operations.",
+   "verdict": "ingredient only",
+   "date": "2026-10-18"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsSpectralMap constructibleTopology compatible points",
+   "results": "No single declaration combines these notions; the project compatible-point theorem is required.",
+   "verdict": "no match",
+   "date": "2026-10-18"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Topology.SpectralLimitDescendOpens",
+  "date": "2026-10-18",
+  "group": "V1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-spectral-limit-descend-opens",
+   "place": "strict lower-level core extracted from parts (2)--(4)",
+   "via": []
+  },
+  "same_as": null
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Topology.SpectralLimitDescendInclusionRelations",
+  "file": "lean/Sheaf/Topology/SpectralLimitDescendInclusionRelations.lean",
+  "declaration": "Topology.spectralLimit_descend_inclusion_relations",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-18",
+  "statement": "theorem spectralLimit_descend_inclusion_relations {I : Type u} [Preorder I] [Nonempty I] [IsDirected I (· ≤ ·)] (S : I → Type u) [∀ i : I, TopologicalSpace (S i)] [∀ i : I, SpectralSpace (S i)] (f : ∀ (i j : I), i ≤ j → S j → S i) (hf : ∀ (i j : I) (h : i ≤ j), IsSpectralMap (f i j h)) (hfid : ∀ (i : I) (x : S i), f i i le_rfl x = x) (hfcomp : ∀ (i j k : I) (hij : i ≤ j) (hjk : j ≤ k) (x : S k), f i j hij (f j k hjk x) = f i k (hij.trans hjk) x) (X : Type v) [TopologicalSpace X] (p : ∀ i : I, X → S i) (hpcomp : ∀ (i j : I) (h : i ≤ j) (x : X), f i j h (p j x) = p i x) (hlimit : ∀ a : ∀ i : I, S i, (∀ (i j : I) (h : i ≤ j), f i j h (a j) = a i) → ∃! x : X, ∀ i : I, p i x = a i) : (∀ (i j : I) (U : Set (S i)) (V : Set (S j)), IsOpen U → IsCompact U → IsOpen V → IsCompact V → p i ⁻¹' U ⊆ p j ⁻¹' V → ∃ (k : I) (hik : i ≤ k) (hjk : j ≤ k), f i k hik ⁻¹' U ⊆ f j k hjk ⁻¹' V) ∧ (∀ (i : I) (n : ℕ) (U : Set (S i)) (V : Fin n → Set (S i)), IsOpen U → IsCompact U → (∀ l : Fin n, IsOpen (V l) ∧ IsCompact (V l)) → p i ⁻¹' U = ⋃ l : Fin n, p i ⁻¹' V l → ∃ (j : I) (hij : i ≤ j), f i j hij ⁻¹' U = ⋃ l : Fin n, f i j hij ⁻¹' V l) ∧ (∀ (i : I) (n : ℕ) (U : Set (S i)) (V : Fin n → Set (S i)), IsOpen U → IsCompact U → (∀ l : Fin n, IsOpen (V l) ∧ IsCompact (V l)) → p i ⁻¹' U = ⋂ l : Fin n, p i ⁻¹' V l → ∃ (j : I) (hij : i ≤ j), f i j hij ⁻¹' U = ⋂ l : Fin n, f i j hij ⁻¹' V l)"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261018T071233-L-1681131",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261018T071233-L-1681131",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
