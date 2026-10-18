@@ -7,12 +7,8 @@ module
 
 public import Sheaf.CategoryTheory.ExactCoupleConvergence
 
-import Sheaf.CategoryTheory.DerivedCoupleExact
-import WeilConjectures.Mathlib.CategoryTheory.Abelian.Subobject
-import WeilConjectures.Mathlib.CategoryTheory.Subobject.Limits
 import WeilConjectures.CategoryTheory.DerivedCoupleExact
-import WeilConjectures.CategoryTheory.ExactCouple
-import WeilConjectures.CategoryTheory.ExactCoupleConvergence
+import WeilConjectures.Mathlib.CategoryTheory.Subobject.Limits
 
 /-! # Finite-tail limiting subobjects
 
@@ -49,6 +45,65 @@ theorem finiteCocone_limitCycles
     (X : BigradedExactCouple C 0) (L : X.LimitSubobjects) (hreg : X.IsRegular)
     (hzero : ∀ n : ℤ, ∃ b : ℤ, ∀ P : ℤ, b ≤ P → IsZero (X.D P (n - P)))
     (p q : ℤ) : L.Z p q = imageSubobject (X.initialG p q) := by
-  sorry
+  obtain ⟨A, I, _, _, hI0, hIs, hImono, hIm, _⟩ := X.pageCouple_image_prefix
+  let T := X.cycleBoundaryTower
+  have hcomm : ∀ r : ℕ,
+      T.projection r p q ≫ (X.pageCouple r).f p q ≫ I r (p + 2) (q - 1) =
+        (T.Z r p q).arrow ≫ X.f p q := by
+    intro r
+    induction r with
+    | zero =>
+      simp only [hI0, T.projection_zero, pageCouple, Category.comp_id]
+    | succ r ih =>
+      let Y := X.pageCouple r
+      let M := Classical.choice Y.derivedMaps_exists
+      have hf : Y.derivedEProjection p q ≫ (X.pageCouple (r + 1)).f p q ≫
+          Y.derivedDInclusion (p + 2) (q - 1) =
+            kernel.ι (Y.d p q) ≫ Y.f p q := M.f_comm p q
+      rw [T.projection_succ, hIs]
+      calc
+        _ = T.cycleLift r p q ≫ (kernel.ι (Y.d p q) ≫ Y.f p q) ≫
+            I r (p + 2) (q - 1) := by
+          simpa only [Category.assoc] using congrArg
+            (fun z ↦ T.cycleLift r p q ≫ z ≫ I r (p + 2) (q - 1)) hf
+        _ = Subobject.ofLE _ _ (T.Z_decreasing r p q) ≫
+            (T.projection r p q ≫ (X.pageCouple r).f p q ≫
+              I r (p + 2) (q - 1)) := by
+          simpa only [Category.assoc] using congrArg
+            (fun z ↦ z ≫ (X.pageCouple r).f p q ≫ I r (p + 2) (q - 1))
+            (T.cycleLift_comm r p q)
+        _ = _ := by rw [ih, Subobject.ofLE_arrow_assoc]
+  obtain ⟨b, hb⟩ := hzero (p + q + 1)
+  obtain ⟨s, _⟩ := hreg p q
+  let r : ℕ := max s (b - (p + 2)).toNat
+  have hr : b ≤ p + 2 + (r : ℤ) := by
+    have h₁ := Nat.le_max_right s (b - (p + 2)).toNat
+    dsimp only [r]
+    omega
+  have hz : IsZero (X.D (p + 2 + (r : ℤ)) (q - 1 - (r : ℤ))) := by
+    convert hb (p + 2 + (r : ℤ)) hr using 1
+    congr 1
+    omega
+  have hAz : A r (p + 2) (q - 1) = 0 := hz.eq_of_src _ _
+  have := hImono r (p + 2) (q - 1)
+  have hIz : I r (p + 2) (q - 1) = 0 := by
+    apply Subobject.mk_eq_bot_iff_zero.mp
+    rw [← imageSubobject_mono, hIm, hAz, imageSubobject_zero]
+  have hfinite : (T.Z r p q).arrow ≫ X.f p q = 0 := by
+    rw [← hcomm r, hIz, comp_zero, comp_zero]
+  have hle : L.Z p q ≤ T.Z r p q := (L.Z_glb p q).1 ⟨r, rfl⟩
+  have hlimit : (L.Z p q).arrow ≫ X.f p q = 0 := by
+    rw [← Subobject.ofLE_arrow hle, Category.assoc, hfinite, comp_zero]
+  have hexact : imageSubobject (X.initialG p q) = kernelSubobject (X.f p q) := by
+    have aux (a b : ℤ) (ha : p + (0 : ℕ) = a) (hb : q - (0 : ℕ) = b) :
+        imageSubobject (X.g p q ≫ eqToHom (congrArg₂ X.E ha hb)) =
+          kernelSubobject (X.f a b) := by
+      subst a b
+      simpa only [eqToHom_refl, Category.comp_id] using X.exact_f p q
+    exact aux p q (by omega) (by omega)
+  apply le_antisymm
+  · rw [hexact]
+    exact le_kernelSubobject (X.f p q) _ hlimit
+  · exact (Subobject.imageSubobject_le_iff _ _).mpr (X.g_factors_limitCycles L p q)
 
 end CategoryTheory.BigradedExactCouple
