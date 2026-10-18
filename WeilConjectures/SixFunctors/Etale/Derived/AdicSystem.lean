@@ -285,42 +285,6 @@ def IsStalkPullbackCompatible {x : s ⟶ X}
         (geometricStalk Λ x).map ((leftDerivedUpperStarRestrictScalarsIso ρ g).hom.app K') ≫
         β.hom.app ((L((g)^*[ModuleCat.{u + 1} Λ'])).obj K')
 
-variable {k : Type u} [Field k] [IsSepClosed k] (aX : X ⟶ Spec (.of k)) [LocallyOfFiniteType aX]
-  [QuasiCompact aX] [IsSeparated aX] [HasCompactification aX]
-
-/-- Blueprint `lem-fix-compact-support-coefficient-change` (subsection
-`sk-def-sfb-coefficient-comparisons`):
-compact cohomology commutes with finite-level coefficient reduction, compatibly with pullback.
-For a surjection `ρ : Λ →+* Λ'` of finite coefficient rings whose exponent is invertible on the
-separably closed field `k` and a separated finite-type `a_X : X ⟶ Spec k`, compact cohomology
-commutes with restriction of scalars along `ρ` through a coefficient comparison `α` for which
-`RΓ_c(X, K) ⊗ᴸ_Λ Λ' ⟶ RΓ_c(X, K ⊗ᴸ_Λ Λ')` is an isomorphism for every `K ∈ Dᵇctf(X, Λ)`, and `α`
-is compatible with the compact-support base change along every pair of automorphisms
-(`AlgebraicGeometry.Etale.IsCompactPullbackCompatible`). -/
-theorem exists_isCoefficientChange_compactlySupportedGlobalSections
-    [HasInvertibleExponent Λ (Spec (.of k))] (hρ : Function.Surjective ρ) :
-    ∃ α, IsCoefficientChange ρ (compactlySupportedGlobalSections (ModuleCat.{u + 1} Λ) aX)
-        (compactlySupportedGlobalSections (ModuleCat.{u + 1} Λ') aX) α ∧
-      ∀ (g : X ⟶ X) (h : Spec (.of k) ⟶ Spec (.of k)) (sq : IsPullback g aX aX h) [IsIso h],
-        IsCompactPullbackCompatible ρ α sq :=
-  sorry
-
-/-- Blueprint `thm-trf-finite-coefficient-map` (subsection `sk-p-trace-coeff`), the pullback
-isomorphism at a geometric point: geometric stalks commute with finite-level coefficient
-reduction, compatibly with the stalk transports. For a surjection `ρ : Λ →+* Λ'` of finite
-coefficient rings whose exponent is invertible on `k` and a geometric point `x̄ : Spec k ⟶ X`,
-the geometric stalk commutes with restriction of scalars along `ρ` through a coefficient
-comparison `β` for which `K_x̄ ⊗ᴸ_Λ Λ' ⟶ (K ⊗ᴸ_Λ Λ')_x̄` is an isomorphism for every
-`K ∈ Dᵇctf(X, Λ)`, and `β` is compatible with the stalk transport at `x̄` along every pair of
-automorphisms fixing `x̄` (`AlgebraicGeometry.Etale.IsStalkPullbackCompatible`). -/
-theorem exists_isCoefficientChange_geometricStalk
-    [HasInvertibleExponent Λ (Spec (.of k))] (hρ : Function.Surjective ρ)
-    (x : Spec (.of k) ⟶ X) :
-    ∃ β, IsCoefficientChange ρ (geometricStalk Λ x) (geometricStalk Λ' x) β ∧
-      ∀ (g : X ⟶ X) (h : Spec (.of k) ⟶ Spec (.of k)) (hx : h ≫ x = x ≫ g) [IsIso h],
-        IsStalkPullbackCompatible ρ β hx :=
-  sorry
-
 end Compatibility
 
 namespace AdicSystem
@@ -333,44 +297,6 @@ variable {k : Type u} [Field k] [IsSepClosed k] (aX : X ⟶ Spec (.of k)) [Local
   [QuasiCompact aX] [IsSeparated aX] [HasCompactification aX] [∀ n, Finite (R ⧸ I ^ n)]
   [∀ n, HasInvertibleExponent (R ⧸ I ^ n) (Spec (.of k))]
 
-include aX in
-/-- Blueprint `prop-trf-adic-coefficient-morphism-systems` (1), levelwise perfectness and
-normalization: each `P_n = RΓ_c(X, L_n)` and each geometric stalk `P_{x̄, n} = (L_n)_x̄` is a
-perfect complex of `A_n`-modules, and the transition `ν_n` induces, through an identification of
-`RΓ_c(X, -)` (resp. `(-)_x̄`) of a restriction of scalars with the restriction of scalars of
-`RΓ_c(X, -)` (resp. `(-)_x̄`), a map `P_{n+1} ⟶ Res P_n` exhibiting `P_n` as
-`P_{n+1} ⊗ᴸ_{A_{n+1}} A_n`, i.e. an isomorphism `P_{n+1} ⊗ᴸ_{A_{n+1}} A_n ≅ P_n`. -/
-theorem isPerfect_and_exists_isDerivedBaseChange (n : ℕ) :
-    ((compactlySupportedGlobalSections (ModuleCat.{u + 1} (R ⧸ I ^ n)) aX).obj
-        (S.obj n)).IsPerfect ∧
-      (∃ e : (compactlySupportedGlobalSections (ModuleCat.{u + 1} (R ⧸ I ^ (n + 1))) aX).obj
-          ((_root_.DerivedCategory.levelTransitionRestrictScalars _ I n.le_succ).obj (S.obj n)) ≅
-          (ModuleCat.derivedRestrictScalars
-            (Ideal.Quotient.factor (Ideal.pow_le_pow_right n.le_succ))).obj
-            ((compactlySupportedGlobalSections (ModuleCat.{u + 1} (R ⧸ I ^ n)) aX).obj
-              (S.obj n)),
-        ModuleCat.IsDerivedBaseChange
-          ((compactlySupportedGlobalSections (ModuleCat.{u + 1} (R ⧸ I ^ (n + 1))) aX).map
-            (S.map n) ≫ e.hom)) ∧
-      ∀ x : Spec (.of k) ⟶ X,
-        ((geometricStalk (R ⧸ I ^ n) x).obj (S.obj n)).IsPerfect ∧
-        ∃ e : (geometricStalk (R ⧸ I ^ (n + 1)) x).obj
-            ((_root_.DerivedCategory.levelTransitionRestrictScalars _ I n.le_succ).obj
-              (S.obj n)) ≅
-            (ModuleCat.derivedRestrictScalars
-              (Ideal.Quotient.factor (Ideal.pow_le_pow_right n.le_succ))).obj
-              ((geometricStalk (R ⧸ I ^ n) x).obj (S.obj n)),
-          ModuleCat.IsDerivedBaseChange
-            ((geometricStalk (R ⧸ I ^ (n + 1)) x).map (S.map n) ≫ e.hom) := by
-  have hsurj : Function.Surjective
-      (Ideal.Quotient.factor (Ideal.pow_le_pow_right (I := I) n.le_succ)) :=
-    Ideal.Quotient.factor_surjective _
-  refine ⟨isPerfect_compactlySupportedGlobalSections _ aX _ (S.boundedConstructibleFiniteTor n),
-    ?_, fun x ↦ ⟨isPerfect_geometricStalk _ x _ (S.boundedConstructibleFiniteTor n), ?_⟩⟩
-  · obtain ⟨α, hα, -⟩ := exists_isCoefficientChange_compactlySupportedGlobalSections _ aX hsurj
-    exact ⟨α.app _, hα _ (S.boundedConstructibleFiniteTor (n + 1)) (S.isDerivedBaseChange n)⟩
-  · obtain ⟨β, hβ, -⟩ := exists_isCoefficientChange_geometricStalk _ hsurj x
-    exact ⟨β.app _, hβ _ (S.boundedConstructibleFiniteTor (n + 1)) (S.isDerivedBaseChange n)⟩
 
 /-- Blueprint `prop-trf-adic-coefficient-morphism-systems` (1): the normalized tower of perfect
 complexes `P_n = RΓ_c(X, L_n)` over the local rings `A_n = R ⧸ Iⁿ`, `n ≥ 1`, with transitions
@@ -408,37 +334,6 @@ noncomputable def stalkTower (x : Spec (.of k) ⟶ X)
     (β n).hom.app (S.obj (n + 1))
   isDerivedBaseChange n :=
     hβ n _ (S.boundedConstructibleFiniteTor (n + 1 + 1)) (S.isDerivedBaseChange (n + 1))
-
-include aX in
-/-- The coefficient identifications from which
-`AlgebraicGeometry.Etale.AdicSystem.compactSupportTower` is built exist, compatibly with the
-compact-support base change along every pair of automorphisms
-(`AlgebraicGeometry.Etale.exists_isCoefficientChange_compactlySupportedGlobalSections`). -/
-lemma exists_compactSupportTower :
-    ∃ (α : ∀ n : ℕ, Sheaf.derivedRestrictScalars X.smallEtaleTopology (I.powSuccFactor n) ⋙
-        compactlySupportedGlobalSections (ModuleCat.{u + 1} (R ⧸ I ^ (n + 1 + 1))) aX ≅
-      compactlySupportedGlobalSections (ModuleCat.{u + 1} (R ⧸ I ^ (n + 1))) aX ⋙
-        ModuleCat.derivedRestrictScalars (I.powSuccFactor n)),
-      (∀ n : ℕ, IsCoefficientChange (I.powSuccFactor n) _ _ (α n)) ∧
-      ∀ (n : ℕ) (g : X ⟶ X) (h : Spec (.of k) ⟶ Spec (.of k)) (sq : IsPullback g aX aX h)
-        [IsIso h], IsCompactPullbackCompatible (I.powSuccFactor n) (α n) sq := by
-  choose α hα hα' using fun n : ℕ ↦ exists_isCoefficientChange_compactlySupportedGlobalSections
-    (I.powSuccFactor n) aX (Ideal.Quotient.factor_surjective _)
-  exact ⟨α, hα, hα'⟩
-
-/-- The coefficient identifications from which `AlgebraicGeometry.Etale.AdicSystem.stalkTower`
-is built exist, compatibly with the stalk transports
-(`AlgebraicGeometry.Etale.exists_isCoefficientChange_geometricStalk`). -/
-lemma exists_stalkTower (x : Spec (.of k) ⟶ X) :
-    ∃ (β : ∀ n : ℕ, Sheaf.derivedRestrictScalars X.smallEtaleTopology (I.powSuccFactor n) ⋙
-        geometricStalk (R ⧸ I ^ (n + 1 + 1)) x ≅
-      geometricStalk (R ⧸ I ^ (n + 1)) x ⋙ ModuleCat.derivedRestrictScalars (I.powSuccFactor n)),
-      (∀ n : ℕ, IsCoefficientChange (I.powSuccFactor n) _ _ (β n)) ∧
-      ∀ (n : ℕ) (g : X ⟶ X) (h : Spec (.of k) ⟶ Spec (.of k)) (hx : h ≫ x = x ≫ g)
-        [IsIso h], IsStalkPullbackCompatible (I.powSuccFactor n) (β n) hx := by
-  choose β hβ hβ' using fun n : ℕ ↦ exists_isCoefficientChange_geometricStalk
-    (I.powSuccFactor n) (Ideal.Quotient.factor_surjective _) x
-  exact ⟨β, hβ, hβ'⟩
 
 variable [IsLocalRing R] [IsAdicComplete I R] {ϖ : R} (hϖ : ϖ ∈ IsLocalRing.maximalIdeal R)
   (hI : I = Ideal.span {ϖ})
