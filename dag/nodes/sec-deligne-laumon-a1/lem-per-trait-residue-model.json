@@ -13,7 +13,9 @@
   "def-weil-geometric-point",
   "def-weil-residue-field",
   "def-pur-etale-derived-supported-sections",
-  "def-weil-pbc-derived-categories"
+  "def-weil-pbc-derived-categories",
+  "def-per-tame-root-limit",
+  "def-per-completed-augmentation-algebra"
  ],
  "proof": [
   {
@@ -254,5 +256,59 @@
   "group": "N2",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N2-3c6f9902b (reviewer sub-agent of L); spot-checked: Repair of the 2134f318cf9b RETURN, read in full against ILO Travaux de Gabber XVII §1.2 (pp. 259-262) and Stacks 0BUB. The item statement is unchanged from base. All three return points are repaired. D1: the exercise 1.2.1.2 is Step 2 (ker(1-z)=Lambda N_d, explicit preimage, a level-ell*d solution projected down, since N_{ell d} maps to ell*N_d=0). The injective reduction of 1.2.2.1 is Steps 4-8: j_! and restriction, inflation and (-)^S, the Mathlib leaf on right adjoints preserving injectives, H^1=0 via (0,Lambda,0) into (Lambda,Lambda,id), H^2=0 via an extension from (1-z)B_{ell d}, and a bounded-width totalization. Lemma 1.2.3.2 is Steps 10-13: reduction along (0,id) and av_S, End(forget)=A, g=alpha_bar*u^{-1}, and v_b well defined modulo ell*d, giving eps(u)=alpha_bar. B2/E2: the projector-twist and generator-homotopy nodes are gone; Lambda=F_ell and the twist is Hom(mu_ell(kappa(eta_bar)),-). New node lem-per-trait-tame-algebra is true for any strictly henselian DVR (Stacks 0BUB with D=I=H; mu_d(K) and v^{1/d} by Hensel). It states the source's cited input (Gabber-Ramero), not one of the item's propositions, and it does not duplicate lem-exc-henselian-dvr-tame-sequence or lem-exc-dvr-galois, which need excellence and an algebraically closed residue field. New node lem-per-trait-sheaf-gluing is true ((j_*V)_s=V^H on a strictly henselian trait; Stacks 03QO); a DAG grep found no duplicate. Tested: the constant sheaf, a closed-supported sheaf, j_!V, d=1, ell=2 and p=1. Accepted tool use: lem-weil-pbc-module-sheaves-grothendieck-abelian, a generic category fact in Step 7. No SGA citation. Blueprint from/via fields and searches are in order. Maintainer note: lem-per-prime-power-trait-residue-model (Z/ell^n, unsplit) generalizes this item; it is not cited and creates no cycle. No fixes written."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.TraitResidueModel",
+  "declaration": "AlgebraicGeometry.Etale.exists_traitResidueModel",
+  "declarations": [
+   "AlgebraicGeometry.Etale.traitTameInertiaTopology",
+   "AlgebraicGeometry.Etale.TraitCoefficients",
+   "AlgebraicGeometry.Etale.traitCoefficientsField",
+   "AlgebraicGeometry.Etale.traitCharacteristicExponent",
+   "AlgebraicGeometry.Etale.TraitSeparableField",
+   "AlgebraicGeometry.Etale.traitSeparableFieldIsSepClosed",
+   "AlgebraicGeometry.Etale.TraitGaloisGroup",
+   "AlgebraicGeometry.Etale.traitGenericPoint",
+   "AlgebraicGeometry.Etale.traitClosedPoint",
+   "AlgebraicGeometry.Etale.TraitSheaves",
+   "AlgebraicGeometry.Etale.traitGenericStalk",
+   "AlgebraicGeometry.Etale.traitClosedStalk",
+   "AlgebraicGeometry.Etale.traitResidueGlobalGerm",
+   "AlgebraicGeometry.Etale.traitIsGenerator",
+   "AlgebraicGeometry.Etale.TraitResidueAlgebra",
+   "AlgebraicGeometry.Etale.TraitResidueRing",
+   "AlgebraicGeometry.Etale.traitResidueIdeal",
+   "AlgebraicGeometry.Etale.TraitResidueStalkData",
+   "AlgebraicGeometry.Etale.traitTotalFunctor",
+   "AlgebraicGeometry.Etale.traitTotalTransformation",
+   "AlgebraicGeometry.Etale.TraitTateLine",
+   "AlgebraicGeometry.Etale.TraitIdealHomFunctor",
+   "AlgebraicGeometry.Etale.TraitResidueIdealData",
+   "AlgebraicGeometry.Etale.TraitResidueComplexCore",
+   "AlgebraicGeometry.Etale.TraitResidueTwistData",
+   "AlgebraicGeometry.Etale.traitGenericOpen",
+   "AlgebraicGeometry.Etale.traitGenericComplex",
+   "AlgebraicGeometry.Etale.traitTensorComplex",
+   "AlgebraicGeometry.Etale.TraitResidueDerivedData",
+   "AlgebraicGeometry.Etale.TraitResidueModelData",
+   "AlgebraicGeometry.Etale.traitResidueTransition",
+   "AlgebraicGeometry.Etale.exists_traitResidueModel"
+  ],
+  "file": "lean/Sheaf/Paper/TraitResidueModel.lean",
+  "statement": "theorem exists_traitResidueModel (ell : ℕ) [Fact ell.Prime] (R : Type u) [CommRing R] [IsDomain R] [IsDiscreteValuationRing R] [IsStrictlyHenselianLocalRing R] (_hell : IsUnit (ell : R)) (Ω : Type u) [Field Ω] [IsAlgClosed Ω] [Algebra (FractionRing R) Ω] : Nonempty (TraitResidueModelData ell (TraitCoefficients.{u} ell) R Ω)",
+  "branch": "newtargets-dag",
+  "by": "Q32",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Canonical algebra, stalk, complex, twist and derived comparison data are packaged as an existence conclusion, never as additional hypotheses. The residue is exposed both in equivalent degree-minus-two form and as traitResidueTransition in the requested degree-plus-two form. The completed algebra and tame root-limit use the landed declarations; their nodes are added to stmt_deps.",
+  "fixed_by": "NT-stage2-cc-01c9c51de"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-01c9c51de",
+  "group": "Q32",
+  "result": "fix",
+  "note": "Statement correct in substance. All clauses of ILO XVII 1.2.1-1.2.3 are rendered and pinned: tame quotient via the uniformizer-root formula, wild pro-p kernel and p=1 case, A≅I by (1-groupElement σ)*a, germ-pinned left Galois action, closed germ and specialization, S-invariants, completed action by the finite-quotient formula, averaging formula, three-term exact F with pinned differentials, comparison normalized by rightDerivedFunctorPlusUnit, Tate line with unique module structure, s_σ formula, ∃! natural homotopy (verified true), residue_formula for every generator and representative. Hypotheses: DVR, strictly henselian, IsUnit ell; no extra. stmt_deps gain only landed def nodes (permitted); dependency nodes unchanged; record verbatim; 32 declarations listed. Only fault: H9, unused imports of the proof-dependency theorem modules CanonicalTraitTameCharacter and TraitSheafGluing. fixes/TraitResidueModel.lean replaces them with public import Sheaf.FieldTheory.TameRootsProduct and changes nothing else. nt_compile: delivered 17.3 s clean, fixed 17.2 s clean."
  }
 }
