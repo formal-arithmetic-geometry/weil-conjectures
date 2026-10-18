@@ -15,17 +15,24 @@ public import Sheaf.AlgebraicGeometry.ProperOpenComparison
 public import Sheaf.AlgebraicGeometry.Etale.DerivedExtensionZeroBaseChange
 public import Sheaf.AlgebraicGeometry.ExchangeForgetCoefficients
 public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
-import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarCoherence
-import Sheaf.AlgebraicGeometry.ProperOpenInterchangeRefinementNormalization
-import Sheaf.AlgebraicGeometry.ProperOpenInterchangeComposition
-import Sheaf.AlgebraicGeometry.ProperOpenInterchangeBaseChange
-import Sheaf.AlgebraicGeometry.ProperOpenComparisonComposition
-import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusBaseChange
 import Sheaf.AlgebraicGeometry.ProperSupportSheafComposition
+import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutions
+import Sheaf.AlgebraicGeometry.EtaleModuleEnoughInjectives
 import Sheaf.AlgebraicGeometry.OpenExtendedInjectiveProperAcyclic
+import WeilConjectures.CategoryTheory.Abelian.RightDerived.LongExactSequence
+import Sheaf.AlgebraicGeometry.DerivedOpenRestriction
+import Sheaf.AlgebraicGeometry.ClopenSectionDirectImage
+import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
 public import WeilConjectures.SixFunctors.BaseChange.DerivedPasting.Vertical
+import Sheaf.CategoryTheory.RingedToposDerivedPushforwardComposition
+import WeilConjectures.SixFunctors.BaseChange.Derived
+import WeilConjectures.SixFunctors.BaseChange.Square
+import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.Comparison
 public import Mathlib.CategoryTheory.Adjunction.CompositionIso
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
+import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.BaseChangeSquare
 
 /-!
 # Proper/open interchange and its coherence
@@ -42,183 +49,6 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.Etale
 
-set_option backward.isDefEq.respectTransparency false
-set_option backward.isDefEq.respectTransparency.types false
-set_option backward.defeqAttrib.useBackward true
-
-
-private theorem ordinaryInterchange (Λ : Type (u + 1)) [CommRing Λ] :
-    ∃ (δ : ∀ {A B C D : Scheme.{u}} (k : A ⟶ B) (i : C ⟶ D)
-        (r : A ⟶ C) (p : B ⟶ D) [IsOpenImmersion k] [IsOpenImmersion i]
-        [IsProper r] [IsProper p] (_h : k ≫ p = r ≫ i),
-        lowerStar (ModuleCat.{u + 1} Λ) r ⋙ openImmersionLowerShriek (ModuleCat.{u + 1} Λ) i ≅
-          openImmersionLowerShriek (ModuleCat.{u + 1} Λ) k ⋙ lowerStar (ModuleCat.{u + 1} Λ) p),
-      ∀ {A B C D : Scheme.{u}} (k : A ⟶ B) (i : C ⟶ D)
-        (r : A ⟶ C) (p : B ⟶ D) [IsOpenImmersion k] [IsOpenImmersion i]
-        [IsProper r] [IsProper p] (h : k ≫ p = r ≫ i)
-        (F : Sheaf A.smallEtaleTopology (ModuleCat.{u + 1} Λ)),
-      (δ k i r p h).hom.app F ≫ (lowerStar (ModuleCat.{u + 1} Λ) p).map
-          ((openImmersionLowerShriekToLowerStar (ModuleCat.{u + 1} Λ) k).app F) ≫
-          (lowerStarComp (ModuleCat.{u + 1} Λ) k p).hom.app F =
-        (openImmersionLowerShriekToLowerStar (ModuleCat.{u + 1} Λ) i).app
-            ((lowerStar (ModuleCat.{u + 1} Λ) r).obj F) ≫
-          (lowerStarComp (ModuleCat.{u + 1} Λ) r i (k ≫ p) h).hom.app F := by
-  classical
-  obtain ⟨L, ι, hι, hp, ho, c, e, hc, he, hce⟩ := properSupportSheafComposition Λ
-  have hproper {X Y : Scheme.{u}} (f : X ⟶ Y) [IsProper f] : IsIso (ι f) := by
-    have : ∀ F, IsIso ((ι f).app F) := hp X Y f
-    exact NatIso.isIso_of_isIso_app _
-  let c' {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
-      [IsSeparated f] [LocallyOfFiniteType f] [IsSeparated g] [LocallyOfFiniteType g]
-      (fg : X ⟶ Z) [IsSeparated fg] [LocallyOfFiniteType fg] (w : fg = f ≫ g) :
-      L f ⋙ L g ≅ L fg := by
-    subst fg
-    exact c X Y Z f g
-  have hc' {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
-      [IsSeparated f] [LocallyOfFiniteType f] [IsSeparated g] [LocallyOfFiniteType g]
-      (fg : X ⟶ Z) [IsSeparated fg] [LocallyOfFiniteType fg] (w : fg = f ≫ g)
-      (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
-      (c' f g fg w).hom.app F ≫ (ι fg).app F =
-        (ι g).app ((L f).obj F) ≫ (lowerStar (ModuleCat.{u + 1} Λ) g).map
-          ((ι f).app F) ≫ (lowerStarComp (ModuleCat.{u + 1} Λ) f g fg w).hom.app F := by
-    subst fg
-    exact hc X Y Z f g F
-  let δ {A B C D : Scheme.{u}} (k : A ⟶ B) (i : C ⟶ D)
-      (r : A ⟶ C) (p : B ⟶ D) [IsOpenImmersion k] [IsOpenImmersion i]
-      [IsProper r] [IsProper p] (h : k ≫ p = r ≫ i) :=
-    have := hproper r
-    have := hproper p
-    Functor.isoWhiskerRight (asIso (ι r)).symm _ ≪≫
-      Functor.isoWhiskerLeft _ (ho C D i).choose ≪≫ c' r i (k ≫ p) h ≪≫ (c A B D k p).symm ≪≫
-      Functor.isoWhiskerRight (ho A B k).choose.symm _ ≪≫
-      Functor.isoWhiskerLeft _ (asIso (ι p))
-  refine ⟨δ, ?_⟩
-  intro A B C D k i r p _ _ _ _ h F
-  have := hproper r
-  have := hproper p
-  have hok := congr_app (ho A B k).choose_spec F
-  have hoi := congr_app (ho C D i).choose_spec ((lowerStar (ModuleCat.{u + 1} Λ) r).obj F)
-  dsimp only [NatTrans.comp_app] at hok hoi
-  dsimp [δ]
-  simp only [Category.assoc]
-  rw [← (ι p).naturality_assoc, ← Functor.map_comp_assoc, ← hok,
-    Iso.inv_hom_id_app_assoc, (ι p).naturality_assoc, ← hc A B D k p F,
-    Iso.inv_hom_id_app_assoc,
-    hc' r i (k ≫ p) h F]
-  rw [(ho C D i).choose.hom.naturality_assoc, (ι i).naturality_assoc,
-    ← Functor.map_comp_assoc]
-  simp only [← NatTrans.comp_app, IsIso.inv_hom_id, NatTrans.id_app]
-  rw [← hoi, Category.assoc]
-  simp only [CategoryTheory.Functor.map_id, Category.id_comp]
-
-private theorem derivedBaseChange_fac_app
-    {B B' C C' : Type*} [Category* B] [Category* B'] [Category* C] [Category* C']
-    [Abelian B] [Abelian B'] [Abelian C] [Abelian C']
-    [HasDerivedCategory B] [HasDerivedCategory B']
-    [HasDerivedCategory C] [HasDerivedCategory C']
-    [EnoughInjectives B] [EnoughInjectives B']
-    {G : B ⥤ C} {G' : B' ⥤ C'} {P : B ⥤ B'} {Q : C ⥤ C'}
-    [G.Additive] [G'.Additive] [P.Additive] [Q.Additive]
-    [PreservesFiniteLimits P] [PreservesFiniteColimits P]
-    [PreservesFiniteLimits Q] [PreservesFiniteColimits Q]
-    (e : G ⋙ Q ⟶ P ⋙ G') (J : HomotopyCategory.Plus B) :
-    Q.mapDerivedCategoryPlus.map (G.rightDerivedFunctorPlusUnit.app J) ≫
-      (Functor.rightDerivedFunctorPlusBaseChange e).app (DerivedCategory.Plus.Qh.obj J) =
-    Q.mapDerivedCategoryPlusFactorsh.hom.app (G.mapHomotopyCategoryPlus.obj J) ≫
-      DerivedCategory.Plus.Qh.map ((NatTrans.mapHomotopyCategoryPlus e).app J) ≫
-      G'.rightDerivedFunctorPlusUnit.app (P.mapHomotopyCategoryPlus.obj J) ≫
-      G'.rightDerivedFunctorPlus.map (P.mapDerivedCategoryPlusFactorsh.inv.app J) := by
-  have hfac := NatTrans.congr_app (Functor.rightDerivedFunctorPlusBaseChange_fac e) J
-  simp only [Functor.rightDerivedFunctorPlusBaseChangeAux,
-    NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
-    Functor.associator_hom_app, Functor.associator_inv_app,
-    Functor.mapHomotopyCategoryPlusCompIso_refl_hom_app,
-    Functor.mapHomotopyCategoryPlusCompIso_refl_inv_app,
-    Category.id_comp, Category.comp_id, Category.assoc] at hfac
-  simp only [Functor.comp_obj, CategoryTheory.Functor.map_id, Category.id_comp] at hfac
-  exact hfac
-
-
-private theorem acyclic_of_homology_vanishing
-    {B C : Type*} [Category* B] [Category* C] [Abelian B] [Abelian C]
-    [HasDerivedCategory B] [HasDerivedCategory C] [EnoughInjectives B]
-    (G : B ⥤ C) [G.Additive] (F : B)
-    (h : ∀ n : ℕ, IsZero ((DerivedCategory.Plus.homologyFunctor C (n + 1)).obj
-      (G.rightDerivedFunctorPlus.obj ((DerivedCategory.Plus.singleFunctor B 0).obj F)))) :
-    G.rightAcyclic F := by
-  intro n
-  exact (h n).of_iso (G.homologyRightDerivedFunctorPlusObjSingleFunctorIso F (n + 1)).symm
-
-private theorem derivedInterchange (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
-    {A B C D : Scheme.{u}} (k : A ⟶ B) (i : C ⟶ D)
-    (r : A ⟶ C) (p : B ⟶ D) [IsOpenImmersion k] [IsOpenImmersion i]
-    [IsProper r] [IsProper p] (h : k ≫ p = r ≫ i)
-    (δ : lowerStar (ModuleCat.{u + 1} Λ) r ⋙ openImmersionLowerShriek (ModuleCat.{u + 1} Λ) i ≅
-      openImmersionLowerShriek (ModuleCat.{u + 1} Λ) k ⋙ lowerStar (ModuleCat.{u + 1} Λ) p) :
-    IsIso (Functor.rightDerivedFunctorPlusBaseChange
-        (G := lowerStar (ModuleCat.{u + 1} Λ) r)
-        (G' := lowerStar (ModuleCat.{u + 1} Λ) p)
-        (β := openImmersionLowerShriek (ModuleCat.{u + 1} Λ) k)
-        (γ := openImmersionLowerShriek (ModuleCat.{u + 1} Λ) i) δ.hom) := by
-  have hacyclic (J : Sheaf A.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [Injective J] :
-      (lowerStar (ModuleCat.{u + 1} Λ) p).rightAcyclic
-        ((openImmersionLowerShriek (ModuleCat.{u + 1} Λ) k).obj J) := by
-    apply acyclic_of_homology_vanishing
-    intro n
-    exact isZero_higherDirectImage_openImmersionLowerShriek_injective
-      Λ k i r p h J (n + 1) (by omega)
-  exact Functor.isIso_rightDerivedFunctorPlusBaseChange_of_rightAcyclic
-    (G := lowerStar (ModuleCat.{u + 1} Λ) r)
-    (G' := lowerStar (ModuleCat.{u + 1} Λ) p)
-    (β := openImmersionLowerShriek (ModuleCat.{u + 1} Λ) k)
-    (γ := openImmersionLowerShriek (ModuleCat.{u + 1} Λ) i) δ hacyclic
-
-private theorem normalized_iso_square
-    {C : Type*} [Category* C] {X Y Z : C} (a : X ≅ Y) (b : Z ≅ Y)
-    (f : X ⟶ Z) (g : Y ⟶ Z) (h : a.inv ≫ f = g) (hg : g ≫ b.hom = 𝟙 Y) :
-    f ≫ b.hom = a.hom := by
-  apply (cancel_epi a.inv).1
-  rw [← Category.assoc, h, hg, a.inv_hom_id]
-
-private theorem derived_identity_of_refinement
-    (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
-    {A B : Scheme.{u}} (k : A ⟶ B) [IsOpenImmersion k]
-    (δ : lowerStar (ModuleCat.{u + 1} Λ) (𝟙 A) ⋙
-        openImmersionLowerShriek (ModuleCat.{u + 1} Λ) k ≅
-      openImmersionLowerShriek (ModuleCat.{u + 1} Λ) k ⋙
-        lowerStar (ModuleCat.{u + 1} Λ) (𝟙 B))
-    (K : DerivedCategory.Plus (Sheaf A.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
-    (h : (openImmersionLowerShriek (ModuleCat.{u + 1} Λ) k).mapDerivedCategoryPlus.map
-        ((lowerStarIdDerivedPlus (ModuleCat.{u + 1} Λ) A).inv.app K) ≫
-        (Functor.rightDerivedFunctorPlusBaseChange
-        (G := lowerStar (ModuleCat.{u + 1} Λ) (𝟙 A))
-        (G' := lowerStar (ModuleCat.{u + 1} Λ) (𝟙 B))
-        (β := openImmersionLowerShriek (ModuleCat.{u + 1} Λ) k)
-        (γ := openImmersionLowerShriek (ModuleCat.{u + 1} Λ) k) δ.hom).app K =
-      properOpenComparison Λ (𝟙 B) k k (Category.comp_id k) K) :
-    (Functor.rightDerivedFunctorPlusBaseChange
-        (G := lowerStar (ModuleCat.{u + 1} Λ) (𝟙 A))
-        (G' := lowerStar (ModuleCat.{u + 1} Λ) (𝟙 B))
-        (β := openImmersionLowerShriek (ModuleCat.{u + 1} Λ) k)
-        (γ := openImmersionLowerShriek (ModuleCat.{u + 1} Λ) k) δ.hom).app K ≫
-        (lowerStarIdDerivedPlus (ModuleCat.{u + 1} Λ) B).hom.app
-          ((openImmersionLowerShriek (ModuleCat.{u + 1} Λ) k).mapDerivedCategoryPlus.obj K) =
-      (openImmersionLowerShriek (ModuleCat.{u + 1} Λ) k).mapDerivedCategoryPlus.map
-        ((lowerStarIdDerivedPlus (ModuleCat.{u + 1} Λ) A).hom.app K) := by
-  let E := (openImmersionLowerShriek (ModuleCat.{u + 1} Λ) k).mapDerivedCategoryPlus
-  exact normalized_iso_square
-    (E.mapIso ((lowerStarIdDerivedPlus (ModuleCat.{u + 1} Λ) A).app K))
-    ((lowerStarIdDerivedPlus (ModuleCat.{u + 1} Λ) B).app (E.obj K))
-    ((Functor.rightDerivedFunctorPlusBaseChange
-        (G := lowerStar (ModuleCat.{u + 1} Λ) (𝟙 A))
-        (G' := lowerStar (ModuleCat.{u + 1} Λ) (𝟙 B))
-        (β := openImmersionLowerShriek (ModuleCat.{u + 1} Λ) k)
-        (γ := openImmersionLowerShriek (ModuleCat.{u + 1} Λ) k) δ.hom).app K)
-    (properOpenComparison Λ (𝟙 B) k k (Category.comp_id k) K) h
-    (properOpenComparison_id Λ k K)
-
--- Preserve the binder names of the existing public interface.
-set_option linter.unusedVariables false in
 /-- The canonical proper/open interchange isomorphism, normalized by the derived units,
 with refinement normalization, vertical and horizontal composition, identities and base change.
 The ordinary isomorphism `δ` is fixed by equality in the common ordinary direct image.
@@ -229,28 +59,171 @@ Source: Stacks Project, Tags 0F7B, 0F7C, 0F7D, 0F7F
 (blueprint: lem-cbc-proper-open-interchange-coherence).
 
 Proof:
-1. Use properSupportSheafComposition to identify each proper direct image and each
-open extension with its proper-support functor. Compose through the common morphism
-k ≫ p = r ≫ i. Its inclusion/composition equations give exactly the ordinary
-normalization displayed below, without a Cartesian hypothesis.
-2. Open-extended injectives are acyclic for p*. The homology/classical-derived
-comparison converts this to the source rightAcyclic predicate. The proved source
-rightDerivedFunctorPlusBaseChange acyclicity criterion makes the canonical derived
-transformation invertible. The canonical asIso constructor supplies an isomorphism
-with this prescribed hom; an isomorphism is uniquely determined by its hom, so this
-choice introduces no arbitrary data. Evaluating its unit factorization gives the
-second displayed equation, on every bounded-below homotopy-category object.
-3. Apply the refinement-normalization subargument to this normalized ordinary map.
-4. Apply the formal composition subargument to obtain both pasting equations and the
-horizontal identity. These statements concern the already specified canonical
-transformation, and do not repeat the construction or its invertibility.
-5. For the vertical identity, specialize refinement normalization to the identity
-proper map, compose with lowerStarIdDerivedPlus, and apply properOpenComparison_id.
-Cancel the isomorphism given by extension of the inverse source identity compositor.
-6. The base-change subargument proves the ordinary cube by cancellation into the
-common direct image. The proved generic right-derived cube then lifts it. Its exact
-comparison isomorphisms are the specified extensionZeroBaseChangeDerivedPlusIso,
-and its two other derived faces are definitionally derivedBaseChangeMapPlus.
+1. Write $h=ir=pk$. Proper maps are separated and of finite type by [def-weil-proper-morphism],
+hence locally of finite type by [def-weil-finite-type-morphism]. An open immersion identifies its
+source with an open subscheme [def-weil-open-immersion]; its diagonal is an isomorphism, hence a
+closed immersion, and locally on that open subscheme its ring map is the identity, a finite-type
+map. Thus the separated and locally finite-type hypotheses of
+[lem-cbc-proper-support-sheaf-composition] hold. That node gives, for every module sheaf $F$ on
+$A$, the canonical identification
+$$\delta_Q(F):i_!r_*F=i_!^{\mathrm{supp}}r_!^{\mathrm{supp}}F
+=h_!^{\mathrm{supp}}F=p_!^{\mathrm{supp}}k_!^{\mathrm{supp}}F=p_*k_!F.$$
+All the equalities mean the same subsheaf of $h_*F$: a section is carried to the same section,
+rather than to an arbitrary abstract isomorphism. Thus $\delta_Q$ is natural and $\Lambda$-linear,
+and extends degreewise to complexes. For successive squares, all identifications of the underlying
+sheaves are identities on these common sections. In particular the sheaf versions of both stated
+composition equations hold. The proper-support composition result applies without Cartesian or
+quasi-compact-open assumptions. Uses: lem-cbc-proper-support-sheaf-composition,
+def-weil-proper-morphism, def-weil-finite-type-morphism, def-weil-open-immersion.
+2. Choose a universe in which the small etale sites are small. By
+[prop-pur-kinjective-resolutions-exist] their constant-ring module-sheaf categories are
+Grothendieck abelian. They have enough injectives by
+[lem-weil-pbc-module-sheaves-enough-injectives]. Represent $K$ by a bounded-below complex $J$ of
+injective module sheaves using [lem-weil-pbc-dplus-injective-representative], and choose a
+bounded-below injective resolution $t:k_!J\to I$. Exactness [lem-weil-pbc-extension-by-zero-exact]
+makes $k_!J$ a bounded-below representative of $k_!K$. Each $k_!J^n$ is $p_*$-acyclic by
+[lem-cbc-open-extended-injective-proper-acyclic]. Clause (3) of [lemma-weil-pbc-leray-acyclicity]
+therefore says that $p_*t:p_*k_!J\to p_*I$ is a quasi-isomorphism and computes the derived-functor
+comparison. Since $r_*J$ computes $Rr_*K$ by [def-weil-pbc-direct-image], the composite
+$i_!r_*J\xrightarrow{\delta_Q}p_*k_!J\xrightarrow{p_*t}p_*I$ gives the required isomorphism.
+Finite $\Lambda$ is torsion: multiplying positive integers annihilating its finitely many additive
+elements gives $N>0$ with $N\Lambda=0$, hence $NM=0$ for every $\Lambda$-module $M$. This is
+precisely case (b) of 0F7B, with no residue-characteristic restriction. Uses:
+prop-pur-kinjective-resolutions-exist, lem-weil-pbc-module-sheaves-enough-injectives,
+lem-weil-pbc-dplus-injective-representative, lem-weil-pbc-extension-by-zero-exact,
+lem-cbc-open-extended-injective-proper-acyclic, lemma-weil-pbc-leray-acyclicity,
+def-weil-pbc-direct-image.
+3. Morphisms into a K-injective complex are uniquely represented up to homotopy by
+[lem-weil-pbc-kinjective-hom-derived]. Given any other K-injective representative $J'$ of $K$, its
+identification with $J$ lifts to a homotopy equivalence. Applying the additive functors $i_!r_*$
+and $p_*k_!$ preserves that homotopy equivalence. Write $h:J\to J'$ for this homotopy equivalence
+and $t:k_!J\to I$, $t':k_!J'\to I'$ for the resolutions. The derived morphism $Q(t')\circ
+Q(k_!h)\circ Q(t)^{-1}:QI\to QI'$ lifts to a chain map $u:I\to I'$ by the Hom bijection. Since
+$I'$ is K-injective, equality of the derived classes of $ut$ and $t'k_!h$ gives the homotopy
+$ut\simeq t'k_!h$. Naturality of $\delta_Q$ makes the corresponding comparison diagram commute up
+to homotopy, and applying $p_*$ preserves the homotopy. The resulting derived arrow is independent
+of all these choices and is natural in $K$, again by the Hom bijection. This also proves the
+stated normalization for any K-injective representative, even if it is not itself bounded below
+termwise. Exactness of $k_!$ is used to descend it through localization; no claim that $k_!$
+preserves injectives is made. Uses: lem-weil-pbc-kinjective-hom-derived,
+lem-weil-pbc-extension-by-zero-exact.
+4. In the refinement case use [def-weil-pbc-proper-open-comparison]. Its construction identifies
+$V=u^{-1}(j_2(X))$ and its clopen component $s(X)$, with $bs=j_1$, $ps=\mathrm{id}_X$. Restrict
+the arrow just constructed to $j_2$. Under the restriction isomorphism
+[lem-weil-pbc-derived-open-restriction], the extension-by-zero comparison
+[cor-cbc-derived-extension-zero-base-change], and the component restriction
+[lem-weil-pbc-clopen-section-direct-image], its source and target become $K$. The underived
+$\delta$ sends a section on $X$ to itself on $s(X)$ and zero on the other component. Thus this
+restricted arrow is exactly $\theta_{u,K}^{-1}$ from the comparison definition; the resolution map
+is the canonical derived comparison and does not change that identity on the component. The
+adjunction [lem-weil-pbc-extension-by-zero-adjunction], descended degreewise since extension by
+zero and inverse image are exact [lem-weil-pbc-extension-by-zero-exact]
+[prop-weil-pbc-inverse-image-modules-exact], makes the arrow $j_{2!}K\to Ru_*j_{1!}K$ uniquely
+determined by this restriction. It is consequently $\alpha_{u,K}$, the adjoint of
+$\theta_{u,K}^{-1}$. Uses: def-weil-pbc-proper-open-comparison,
+lem-weil-pbc-derived-open-restriction, cor-cbc-derived-extension-zero-base-change,
+lem-weil-pbc-clopen-section-direct-image, lem-weil-pbc-extension-by-zero-adjunction,
+lem-weil-pbc-extension-by-zero-exact, prop-weil-pbc-inverse-image-modules-exact.
+5. For vertically stacked $Q_1,Q_2$, choose $J$ bounded-below injective on the upper-left scheme
+and $t:k_{1!}J\to I$ bounded-below injective on the upper-right scheme. Direct image preserves
+injectives by [lem-weil-pbc-direct-image-preserves-injectives], so $r_{1,*}J$ and $p_{1,*}I$ are
+bounded-below injective complexes. Put $E=i_{1!}r_{1,*}J$ and $a=p_{1,*}t\circ\delta_{Q_1}:E\to
+p_{1,*}I$. This is a quasi-isomorphism by step 2. For $Q_2$, every term of $E$ is
+$p_{2,*}$-acyclic by [lem-cbc-open-extended-injective-proper-acyclic], applied to the injective
+terms of $r_{1,*}J$. Clause (3) of [lemma-weil-pbc-leray-acyclicity] shows that $E$ computes
+$Rp_{2,*}E$; thus $Rp_{2,*}(\gamma_{Q_1})$ is represented by $p_{2,*}a$. The two-square composite
+is represented by
+$$i_{2!}r_{2,*}r_{1,*}J\xrightarrow{\delta_{Q_2}}p_{2,*}i_{1!}r_{1,*}J
+\xrightarrow{p_{2,*}a}p_{2,*}p_{1,*}I.$$
+Step 1 identifies this composite with $\delta_{Q_2Q_1}$ followed by $(p_2p_1)_*t$. The compositor
+[lem-weil-pbc-ringed-topoi-derived-pushforward-composition] is normalized on these injective
+direct images with the identity as the extra resolution. Consequently these are exactly the
+representatives of the displayed vertical equation, with the canonical compositors inserted. Uses:
+lem-weil-pbc-direct-image-preserves-injectives, lem-cbc-open-extended-injective-proper-acyclic,
+lemma-weil-pbc-leray-acyclicity, lem-weil-pbc-ringed-topoi-derived-pushforward-composition.
+6. For horizontal composition choose bounded-below injective $J$ on the left, $t:k_!J\to I$ in the
+middle, and $v:l_!I\to L$ on the right. By [lem-weil-pbc-extension-by-zero-exact], $w=v\circ
+l_!t:l_!k_!J\to L$ is a quasi-isomorphism. The two-square comparison is represented by
+$$j_!i_!r_*J\xrightarrow{j_!(p_*t\circ\delta_{Q_1})}j_!p_*I
+\xrightarrow{q_*v\circ\delta_{Q_2}}q_*L.$$
+Naturality of the sheaf identification $\delta_{Q_2}$ moves $t$ through it. The sheaf composition
+equality in step 1 then makes this map $q_*w\circ\delta_{Q_2Q_1}$, the representative for the
+outer rectangle. The identification $j_!i_!\cong(ji)_!$ is the sheaf support-composition equality
+in [lem-cbc-proper-support-sheaf-composition], applied degreewise; its exactness just cited lets
+it descend to $D^+$. This proves the stated horizontal equation. For horizontal identities take
+$t=\mathrm{id}_J$; $\delta$ is the identity and one obtains the identity on derived pushforward.
+For vertical identities $k=i$ and $p=r=\mathrm{id}$, so the constructed arrow is the
+quasi-isomorphism $k_!J\to I$, which represents the identity of $k_!K$. Uses:
+lem-weil-pbc-extension-by-zero-exact, lem-cbc-proper-support-sheaf-composition.
+7. For base change first work with sheaves. The support inclusions into ordinary direct images in
+[lem-cbc-proper-support-sheaf-composition] identify $i_!r_*$ and $p_*k_!$ inside $(ir)_*=(pk)_*$.
+Its pullback-composition clause says that the two paths consisting of the ordinary comparisons and
+the extension-by-zero comparisons give the pullback comparison for that same composite morphism.
+Thus the ordinary version of the required base-change diagram commutes. More explicitly, after
+inclusion into $(p_1k_1)_*d^{-1}F=(i_1r_1)_*d^{-1}F$, either path pulls a local section of $F$ to
+the same section on the base-changed test scheme. These are injective inclusions; inverse image
+preserves them by [prop-weil-pbc-inverse-image-modules-exact]. Hence equality in the common
+ordinary direct image is equality in the support subsheaf. The open comparisons here are the
+specific $\beta_i,\beta_k$ of [cor-cbc-derived-extension-zero-base-change], not isomorphisms
+chosen independently of the pullback maps. Their construction is the restriction of the ordinary
+pullback comparison to the support subsheaf. The ordinary-comparison pasting is also the
+unit/counit mate equation in clauses (1),(2) of [lem-weil-pbc-mate-pasting] for the module
+inverse-image adjunctions; all constant-ring pullbacks are the identifications of
+[prop-weil-pbc-inverse-image-modules-exact]. Uses: lem-cbc-proper-support-sheaf-composition,
+prop-weil-pbc-inverse-image-modules-exact, cor-cbc-derived-extension-zero-base-change,
+lem-weil-pbc-mate-pasting.
+8. Now take $J,t:k_!J\to I$ as in step 2, and choose a bounded-below injective resolution
+$s:d^{-1}J\to J_1$. Exact inverse image and exact extension by zero
+[prop-weil-pbc-inverse-image-modules-exact] [lem-weil-pbc-extension-by-zero-exact] make the
+diagram start with quasi-isomorphisms $$k_{1!}d^{-1}J\xrightarrow{k_{1!}s}k_{1!}J_1,\qquad
+k_{1!}d^{-1}J\xrightarrow{\beta_k^{-1}}a^{-1}k_!J\xrightarrow{a^{-1}t}a^{-1}I.$$ Choose a
+bounded-below injective resolution $v:k_{1!}J_1\to I_1$. By [lem-weil-pbc-kinjective-hom-derived],
+the morphism from $a^{-1}I$ to $I_1$ corresponding in the derived category to $v\circ
+k_{1!}s\circ\beta_k\circ(a^{-1}t)^{-1}$ is represented by a chain map $z:a^{-1}I\to I_1$. It
+satisfies $$z\circ a^{-1}t\circ\beta_k^{-1}\simeq v\circ k_{1!}s,$$ because the maps from
+$k_{1!}d^{-1}J$ into the K-injective $I_1$ have the same derived class. This is the needed
+homotopy-commutative resolution diagram, not a claim that $d^{-1}J$ or $a^{-1}I$ is injective. The
+module exchange maps are represented by the ordinary comparisons $b^{-1}p_*I\to p_{1,*}a^{-1}I$
+followed by $p_{1,*}z$, and $c^{-1}r_*J\to r_{1,*}d^{-1}J$ followed by $r_{1,*}s$. To verify this
+computation rather than take it from a definition, use the exact module adjunction of
+[prop-weil-pbc-inverse-image-modules-exact], its termwise adjunction on homotopy categories
+[lem-weil-pbc-termwise-adjunction-homotopy], and the K-injective Hom bijection. Exactness of
+inverse image shows its additive right adjoint preserves K-injectives: if $H$ is acyclic and $P$
+is K-injective, $\operatorname{Hom}_K(H,p_*P)=\operatorname{Hom}_K(p^{-1}H,P)=0$. Thus the two
+homotopy-category Hom sets in this adjunction identify with the corresponding derived Hom sets for
+injective target resolutions, with the same counit represented by $\varepsilon_{p,P}$. For a
+source representative $P$ and a target resolution $z:a^{-1}P\to I_1$, the transpose of
+$p_{1,*}z\circ\operatorname{Ex}^0_P$ is the chain map $z\circ a^{-1}\varepsilon_{p,P}\circ\theta$,
+by the defining adjoint formula of [def-weil-pbc-underived-exchange] and the underived adjunction
+triangle identities. That formula is stated for abelian sheaves;
+[prop-weil-pbc-inverse-image-modules-exact] gives exactly those same units and counits on
+constant-ring modules, and its section-restriction maps are linear, so the displayed formula is
+the module formula too. Maps into $I_1$ are computed modulo homotopy by
+[lem-weil-pbc-kinjective-hom-derived], so this is also its derived transpose. This is exactly the
+defining derived mate in [def-weil-pbc-derived-exchange], formed for module adjunctions as
+specified in [lem-weil-pbc-exchange-forget-coefficients]. For the left proper map, the chain map
+$r_{1,*}s\circ\operatorname{Ex}^0_{r,J}$ has transpose $s\circ
+d^{-1}\varepsilon_{r,J}\circ\theta_r:r_1^{-1}c^{-1}r_*J\to J_1$. The termwise adjunction and the
+Hom bijection into $J_1$ identify this transpose with the derived composite
+$d^{-1}\varepsilon_r\circ\theta_r$ followed by the resolution identification. Hence this chain map
+represents $\operatorname{Ex}_r$. No module computation is being inferred from the abelian-only
+termwise-exchange theorem. Apply the ordinary equality of step 7 degreewise to $J$. Naturality of
+$\delta_{Q_1}$ with respect to $s$ gives equality for the next segment. For the last segment apply
+$p_{1,*}$ to the displayed homotopy: it remains a homotopy since direct image is additive. The
+outside paths are therefore equal in the homotopy category after passing through $p_{1,*}I_1$, and
+hence in $D^+$. Written using the normalization of step 2 these paths are exactly
+$$(Rp_{1,*}\beta_k)\circ(\operatorname{Ex}_p k_!)\circ(b^{-1}\gamma_Q)
+=(\gamma_{Q_1}d^{-1})\circ(i_{1!}\operatorname{Ex}_r)\circ(\beta_iRr_*).$$ Properness and openness
+in $Q_1$ hold by [lem-weil-pbc-proper-base-change] and [lem-weil-pbc-open-immersion-base-change],
+respectively. Thus all comparisons used here are of the stated kind for arbitrary $b$. The
+exchanges stay in the constant-$\Lambda$ module categories; the comparison
+[lem-weil-pbc-exchange-forget-coefficients] identifies their underlying abelian exchanges but is
+not used to infer equality from derived forgetting. Uses:
+prop-weil-pbc-inverse-image-modules-exact, lem-weil-pbc-extension-by-zero-exact,
+lem-weil-pbc-kinjective-hom-derived, def-weil-pbc-derived-exchange,
+lem-weil-pbc-proper-base-change, lem-weil-pbc-open-immersion-base-change,
+lem-weil-pbc-exchange-forget-coefficients, def-weil-pbc-underived-exchange,
+lem-weil-pbc-termwise-adjunction-homotopy.
 -/
 theorem properOpenInterchangeCoherence (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] :
     ∃ (δ : ∀ {A B C D : Scheme.{u}} (k : A ⟶ B) (i : C ⟶ D) (r : A ⟶ C) (p : B ⟶ D) [IsOpenImmersion
@@ -365,35 +338,6 @@ theorem properOpenInterchangeCoherence (Λ : Type (u + 1)) [CommRing Λ] [Finite
         ((derivedBaseChangeMapPlus (ModuleCat.{u + 1} Λ) sr.toCommSq).app K) ≫
         (γ k₁ i₁ r₁ p₁ h₁).hom.app ((upperStar (ModuleCat.{u + 1} Λ) d).mapDerivedCategoryPlus.obj
         K)) := by
-  classical
-  let δ := @Exists.choose _ _ (ordinaryInterchange Λ)
-  have hδ := @Exists.choose_spec _ _ (ordinaryInterchange Λ)
-  let γ {A B C D : Scheme.{u}} (k : A ⟶ B) (i : C ⟶ D)
-      (r : A ⟶ C) (p : B ⟶ D) [IsOpenImmersion k] [IsOpenImmersion i]
-      [IsProper r] [IsProper p] (h : k ≫ p = r ≫ i) :
-      rightDerivedLowerStarPlus (ModuleCat.{u + 1} Λ) r ⋙
-          (openImmersionLowerShriek (ModuleCat.{u + 1} Λ) i).mapDerivedCategoryPlus ≅
-        (openImmersionLowerShriek (ModuleCat.{u + 1} Λ) k).mapDerivedCategoryPlus ⋙
-          rightDerivedLowerStarPlus (ModuleCat.{u + 1} Λ) p :=
-    @asIso _ _ _ _ (Functor.rightDerivedFunctorPlusBaseChange
-      (G := lowerStar (ModuleCat.{u + 1} Λ) r)
-      (G' := lowerStar (ModuleCat.{u + 1} Λ) p)
-      (β := openImmersionLowerShriek (ModuleCat.{u + 1} Λ) k)
-      (γ := openImmersionLowerShriek (ModuleCat.{u + 1} Λ) i) (δ k i r p h).hom)
-      (derivedInterchange Λ k i r p h (δ k i r p h))
-  have href := @properOpenInterchange_refinement_normalization Λ _ _ @δ @hδ
-  have hcomp := properOpenInterchange_composition Λ @δ @hδ
-  refine ⟨@δ, @γ, @hδ, ?_, @href, hcomp.1, hcomp.2.1, ?_, hcomp.2.2,
-    @properOpenInterchange_baseChange Λ _ _ @δ @hδ⟩
-  · intro A B C D k i r p _ _ _ _ h J
-    exact derivedBaseChange_fac_app
-      (G := lowerStar (ModuleCat.{u + 1} Λ) r)
-      (G' := lowerStar (ModuleCat.{u + 1} Λ) p)
-      (P := openImmersionLowerShriek (ModuleCat.{u + 1} Λ) k)
-      (Q := openImmersionLowerShriek (ModuleCat.{u + 1} Λ) i) (δ k i r p h).hom J
-  · intro A B k _ K
-    exact derived_identity_of_refinement Λ k
-      (δ k k (𝟙 A) (𝟙 B) ((Category.comp_id k).trans (Category.id_comp k).symm)) K
-      (href (𝟙 B) k k (Category.comp_id k) K)
+  sorry
 
 end AlgebraicGeometry.Etale

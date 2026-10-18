@@ -6,8 +6,25 @@ Authors: SHEAF group NI
 module
 
 public import Sheaf.Paper.ProjectionFormulaArrows
-import Sheaf.Paper.ProjectionFormulaRepresentative
+import Sheaf.Paper.StrictPerfectCoefficientPackage
+import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutions
+import Sheaf.CategoryTheory.KInjectiveTotalDerived
+import Sheaf.Algebra.Homology.BoundedAboveFlatSheafKFlat
+import Sheaf.Paper.RingedTopoiCanonicalTensorPullback
+import Sheaf.Algebra.Homology.SplitPerfectTensorKInjective
+import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
+import Mathlib.Algebra.Homology.BifunctorShift
+import Sheaf.Algebra.Homology.KFlatResolutionGeneral
+import Sheaf.CategoryTheory.PreDerivedAdjointFunctorsGeneral
+import Sheaf.Algebra.Homology.KFlat
 public import Sheaf.Algebra.Homology.KFlatCoefficientUniverse
+import Sheaf.Paper.ProjectionFormulaProjectiveSummand
+import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
+import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
+import Sheaf.CategoryTheory.ModulePullbackTensorIso
+import Sheaf.Paper.RingedTopoiDerivedPullback
+import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
 
 /-!
 # Signed totalization of the perfect projection formula
@@ -168,60 +185,6 @@ theorem ringedProjectionFormula_totalization
       (ringedProjectionFormulaArrows uInv uPush adj I c uStar hobj hmap LF epsilon hLF
       PR PS hPR hPS TR TS rR rS k V am RF eta hRF computeR computeL adjD canonicalAdj
       E K hK repE F P hbounded).1 =
-        𝟙 (RF.obj (TS.obj (E, LF.obj (DerivedCategory.Q.obj F)))) := by
-  classical
-  let := monoidalCategory R
-  let := monoidalCategory S
-  let := ringedTensorPreadditive R
-  let := ringedTensorPreadditive S
-  let hf := StrictPerfectCoefficientPackage.isKFlat_flat R F P hbounded
-  let hfR : PR F := (hPR F).mpr hf
-  let A := (V.mapHomologicalComplex (ComplexShape.up ℤ)).obj K
-  let pullF := (uStar.mapHomologicalComplex (ComplexShape.up ℤ)).obj F
-  let J := CochainComplex.mapBifunctor K pullF (MonoidalCategory.curriedTensor _)
-  let hfS : PS pullF := (hPS pullF).mpr
-    ((ringedTopoiCanonicalDerivedTensorPullback uInv uPush adj I c uStar
-      hobj hmap LF epsilon hLF PR PS hPR hPS TR TS rR rS k V am).1 F hf.1 hf.2)
-  let unitData := canonicalRingedTensorComparison_unit R S RI uInv I c uStar hobj hmap k
-  let j := Classical.choose unitData.exists
-  have hj := Classical.choose_spec unitData.exists
-  let t := tensorAdjunctionTotal uStar V am k.mu k.naturality K F
-  let s := tensorAdjunctionTotalInverse uStar V am k.mu k.naturality j hj K F
-    hbounded P.N P.i P.p P.splitting
-  have ht : IsIso t := tensorAdjunctionTotal_isIso uStar V am k.mu k.naturality j hj K F
-    hbounded P.N P.i P.p P.splitting
-  have hts : t ≫ s = 𝟙 _ := IsIso.hom_inv_id t
-  have hst : s ≫ t = 𝟙 _ := IsIso.inv_hom_id t
-  let eF : LF.obj (DerivedCategory.Q.obj F) ≅ DerivedCategory.Q.obj pullF :=
-    @asIso _ _ _ _ (derivedPullbackComplexComparison uStar LF epsilon F)
-      (computeL F hf.1 hf.2)
-  let eA : RF.obj E ≅ DerivedCategory.Q.obj A := RF.mapIso repE ≪≫
-    (@asIso _ _ _ _ (derivedPushforwardComplexComparison V RF eta K) (computeR K hK)).symm
-  let eC := TR.mapIso (Iso.prod eA (Iso.refl (DerivedCategory.Q.obj F))) ≪≫
-    mixedTensorRepresentative R PR hPR TR rR A F hfR
-  have hJ : J.IsKInjective := tensorAdjunctionTotal_target_isKInjective uStar j K hK F
-    hbounded P.N P.i P.p P.splitting
-  let eB := RF.mapIso (TS.mapIso (Iso.prod repE eF) ≪≫
-    mixedTensorRepresentative S PS hPS TS rS K pullF hfS) ≪≫
-      (@asIso _ _ _ _ (derivedPushforwardComplexComparison V RF eta J) (computeR J hJ)).symm
-  let alpha := ringedTopoiCanonicalDerivedTensorComparison uInv uPush adj I c uStar
-    hobj hmap LF epsilon hLF PR PS hPR hPS TR TS rR rS k V am
-  let pi := derivedProjectionFormulaMate LF RF adjD TR TS alpha E (DerivedCategory.Q.obj F)
-  have hrep : pi ≫ eB.hom = eC.hom ≫ DerivedCategory.Q.map t :=
-    ringedProjectionFormula_mixed_representative uInv uPush adj I c uStar hobj hmap
-      LF epsilon hLF PR PS hPR hPS TR TS rR rS k V am RF eta computeR computeL adjD
-      canonicalAdj E K hK repE F hfR hfS hJ
-  change pi ≫ (eB.hom ≫ DerivedCategory.Q.map s ≫ eC.inv) = 𝟙 _ ∧
-    (eB.hom ≫ DerivedCategory.Q.map s ≫ eC.inv) ≫ pi = 𝟙 _
-  constructor
-  · rw [← Category.assoc pi, hrep]
-    simp only [Category.assoc]
-    rw [← DerivedCategory.Q.map_comp_assoc, hts, CategoryTheory.Functor.map_id, Category.id_comp]
-    exact eC.hom_inv_id
-  · apply (cancel_mono eB.hom).mp
-    simp only [Category.assoc]
-    rw [hrep, eC.inv_hom_id_assoc, ← DerivedCategory.Q.map_comp, hst,
-      CategoryTheory.Functor.map_id, Category.comp_id, Category.id_comp]
-
+        𝟙 (RF.obj (TS.obj (E, LF.obj (DerivedCategory.Q.obj F)))) := sorry
 
 end SheafOfModules

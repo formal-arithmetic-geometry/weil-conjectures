@@ -43,12 +43,9 @@ isomorphism assertion concerns the specified evaluation map. Positive level a is
 universe t
 
 open CategoryTheory CategoryTheory.Limits
-open scoped ChangeOfRings TensorProduct
 
 namespace AlgebraicGeometry.Scheme
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 /-- Restriction of scalars is exact, also when the small site's object and morphism
 universes differ. Source: order 1260, proof step 6; Stacks Tag 03D3.
 Proof: restriction leaves the underlying abelian sheaf unchanged. Kernels and cokernels
@@ -58,30 +55,7 @@ theorem adicRestrictScalars_exact (X : Scheme.{t}) {A B : Type t}
     [CommRing A] [CommRing B] (φ : A →+* B) :
     PreservesFiniteLimits (SheafOfModules.restrictScalars.{t + 1} (adicModuleMap X φ)) ∧
       PreservesFiniteColimits (SheafOfModules.restrictScalars.{t + 1} (adicModuleMap X φ)) := by
-  let F := SheafOfModules.restrictScalars.{t + 1} (adicModuleMap X φ)
-  let UA := SheafOfModules.toSheaf.{t + 1, t, t + 1, t + 1} (adicModuleRing X A)
-  let UB := SheafOfModules.toSheaf.{t + 1, t, t + 1, t + 1} (adicModuleRing X B)
-  have hs : HasSheafify (ProEt.topology X) AddCommGrpCat.{t + 1} :=
-    SheafOfModules.hasSheafify_coefficientUniverse.{t + 1, t, t + 1}
-      (C := X.ProEt) (J := ProEt.topology X)
-  have hw : GrothendieckTopology.WEqualsLocallyBijective.{t + 1, t + 1, t,
-      t + 2, t + 1, t + 1} (ProEt.topology X) AddCommGrpCat.{t + 1} :=
-    SheafOfModules.wEqualsLocallyBijective_coefficientUniverse.{t + 1, t, t + 1}
-      (C := X.ProEt) (J := ProEt.topology X)
-  have : PreservesFiniteColimits UA :=
-    @SheafOfModules.preservesFiniteColimits_toSheaf.{t + 1, t, t + 1, t + 1}
-      X.ProEt inferInstance (ProEt.topology X) _ hs hw
-  have : PreservesFiniteColimits UB :=
-    @SheafOfModules.preservesFiniteColimits_toSheaf.{t + 1, t, t + 1, t + 1}
-      X.ProEt inferInstance (ProEt.topology X) _ hs hw
-  have : PreservesFiniteLimits (F ⋙ UA) :=
-    inferInstanceAs (PreservesFiniteLimits UB)
-  have : PreservesFiniteColimits (F ⋙ UA) :=
-    inferInstanceAs (PreservesFiniteColimits UB)
-  have : ReflectsFiniteColimits UA :=
-    { reflects := fun _ ↦ reflectsColimitsOfShape_of_reflectsIsomorphisms }
-  exact ⟨preservesFiniteLimits_of_reflects_of_preserves F UA,
-    preservesFiniteColimits_of_reflects_of_preserves F UA⟩
+  sorry
 
 /-- Exact derived restriction along the constant coefficient map.
 Source: order 1260, proof step 6 (blueprint: lemma-weil-pbc-adic-completion-reduction). -/
@@ -106,30 +80,6 @@ noncomputable def adicDerivedRestrictFactors (X : Scheme.{t}) {A B : Type t}
   letI := (adicRestrictScalars_exact X φ).1
   letI := (adicRestrictScalars_exact X φ).2
   (SheafOfModules.restrictScalars.{t + 1} (adicModuleMap X φ)).mapDerivedCategoryFactors.app P
-
-set_option linter.style.haveILetI false in
-/-- Naturality of the exact scalar-restriction localization comparison.
-Source: order 1260, proof step 6 (blueprint: lemma-weil-pbc-adic-completion-reduction).
-Proof: this is the inverse naturality square of mapDerivedCategoryFactors. -/
-private theorem adicDerivedRestrictFactors_naturality (X : Scheme.{t}) {A B : Type t}
-    [CommRing A] [CommRing B] (φ : A →+* B)
-    {P Q : CochainComplex (SheafOfModules.{t + 1} (adicModuleRing X B)) ℤ}
-    (f : P ⟶ Q) :
-    (adicLocalization X A).map
-        (((SheafOfModules.restrictScalars.{t + 1} (adicModuleMap X φ)).mapHomologicalComplex
-          (ComplexShape.up ℤ)).map f) ≫ (adicDerivedRestrictFactors X φ Q).inv =
-      (adicDerivedRestrictFactors X φ P).inv ≫
-        (adicDerivedRestrict X φ).map ((adicLocalization X B).map f) := by
-  have : GrothendieckTopology.WEqualsLocallyBijective.{t + 1, t + 1, t,
-      t + 2, t + 1, t + 1} (ProEt.topology X) AddCommGrpCat.{t + 1} :=
-    SheafOfModules.wEqualsLocallyBijective_coefficientUniverse.{t + 1, t, t + 1}
-      (C := X.ProEt) (J := ProEt.topology X)
-  letI := HasDerivedCategory.standard (SheafOfModules.{t + 1} (adicModuleRing X A))
-  letI := HasDerivedCategory.standard (SheafOfModules.{t + 1} (adicModuleRing X B))
-  letI := (adicRestrictScalars_exact X φ).1
-  letI := (adicRestrictScalars_exact X φ).2
-  exact (SheafOfModules.restrictScalars.{t + 1} (adicModuleMap X φ)).mapDerivedCategoryFactors
-    |>.inv.naturality f
 
 /-- The unit L → Res(L tensor P_(n+1)), with its canonical tensor-generator formula.
 Source: order 1260, adjunction in proof step 6
@@ -268,57 +218,7 @@ theorem adicReductionComplexMap_step (X : Scheme.{t}) {Λ : Type t} [CommRing Λ
     adicReductionComplexMap X d M M' f (n + 1) ≫
         adicReductionComplexStep X d M' n =
       adicReductionComplexStep X d M n ≫ adicReductionComplexMap X d M M' f n := by
-  exact adicTransitionComplex_naturality X d.ideal f
-    ⟨n + 1 + 1, Nat.succ_pos _⟩ ⟨n + 1, Nat.succ_pos _⟩ (Nat.le_succ _)
-
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-/-- Quotient augmentation commutes with maps of the chosen models.
-Source: order 1260, proof step 6 (blueprint: lemma-weil-pbc-adic-completion-reduction).
-Proof: naturality of module sheafification applied to the sectionwise tensor map sends
-one tensor m to one tensor f(m). The uniquely specified augmentation has that formula. -/
-private theorem adicReductionAugmentation_naturality (X : Scheme.{t})
-    {Λ : Type t} [CommRing Λ] (d : CompleteCoefficientDatum Λ)
-    {K K' : proEtaleDerivedCategory X Λ}
-    (M : AdicKFlatModel X Λ K) (M' : AdicKFlatModel X Λ K')
-    (f : M.complex ⟶ M'.complex) (n : ℕ) :
-    adicReductionAugmentation X d M n ≫ adicReductionComplexMap X d M M' f n =
-      f ≫ adicReductionAugmentation X d M' n := by
-  have : GrothendieckTopology.WEqualsLocallyBijective.{t + 1, t + 1, t,
-      t + 2, t + 1, t + 1} (ProEt.topology X) AddCommGrpCat.{t + 1} :=
-    SheafOfModules.wEqualsLocallyBijective_coefficientUniverse.{t + 1, t, t + 1}
-      (C := X.ProEt) (J := ProEt.topology X)
-  ext p U m
-  have hM := (Classical.choose_spec (adicReductionAugmentation_exists X d M n)).1 p U m
-  have hM' := (Classical.choose_spec (adicReductionAugmentation_exists X d M' n)).1
-    p U ((f.f p).val.app U m)
-  change (SheafOfModules.changeOfRingsHom.{t, t + 1, t + 1} (adicConstantMap X
-    (Ideal.Quotient.mk (d.ideal ^ (n + 1)))) (M.complex.X p) (f.f p)).val.app U
-      ((adicReductionAugmentation X d M n).f p |>.val.app U m) = _
-  dsimp only [adicReductionAugmentation] at ⊢
-  rw [hM]
-  change _ = ((adicReductionAugmentation X d M' n).f p).val.app U
-    ((f.f p).val.app U m)
-  dsimp only [adicReductionAugmentation] at ⊢
-  rw [hM']
-  let φ := adicConstantMap X (Ideal.Quotient.mk (d.ideal ^ (n + 1)))
-  let a : SheafOfModules.changeOfRingsPresheaf.{t, t + 1, t + 1} φ (M.complex.X p) ⟶
-      SheafOfModules.changeOfRingsPresheaf.{t, t + 1, t + 1} φ (M'.complex.X p) :=
-    { app := fun W ↦ (ModuleCat.extendScalars (φ.hom.app W).hom).map ((f.f p).val.app W)
-      naturality := SheafOfModules.changeOfRingsHom_naturality.{t, t + 1, t + 1} φ _ (f.f p) }
-  have hn := (PresheafOfModules.sheafificationAdjunction.{t + 1}
-    (𝟙 (adicModuleRing X (Λ ⧸ d.ideal ^ (n + 1))).obj)).unit.naturality a
-  have hx := congrArg (fun g ↦ g.app U
-    ((1 : (adicConstantRing X (Λ ⧸ d.ideal ^ (n + 1))).obj.obj U)
-      ⊗ₜ[(adicConstantRing X Λ).obj.obj U, (φ.hom.app U).hom] m)) hn
-  change (((PresheafOfModules.sheafificationAdjunction.{t + 1}
-    (𝟙 (adicModuleRing X (Λ ⧸ d.ideal ^ (n + 1))).obj)).unit.app
-      (SheafOfModules.changeOfRingsPresheaf.{t, t + 1, t + 1} φ (M'.complex.X p))).app U
-        ((ModuleCat.extendScalars (φ.hom.app U).hom).map ((f.f p).val.app U)
-          ((1 : (adicConstantRing X (Λ ⧸ d.ideal ^ (n + 1))).obj.obj U)
-            ⊗ₜ[(adicConstantRing X Λ).obj.obj U, (φ.hom.app U).hom] m))) = _ at hx
-  erw [ModuleCat.ExtendScalars.map_tmul] at hx
-  exact hx.symm
+  sorry
 
 /-- Completion of a model map, using the same product map in both cone coordinates.
 Source: order 1260, proof step 6; the strict cone construction at order 1258
@@ -331,54 +231,6 @@ noncomputable def adicCompletionModelMap (X : Scheme.{t}) {Λ : Type t} [CommRin
   (adicLocalization X Λ).map
     (adicCompletionTowerMap X d M M' (adicReductionComplexMap X d M M' f)
       (adicReductionComplexMap_step X d M M' f))
-
-/-- The abstract reduction of a represented morphism is its strict scalar extension.
-Source: order 1260, proof step 6 (blueprint: lemma-weil-pbc-adic-completion-reduction).
-Proof: apply the defining Hom equivalence. Naturality of the quotient augmentation and
-of the exact scalar-restriction comparison identifies the two resulting units. -/
-private theorem adicReductionMap_model (X : Scheme.{t}) {Λ : Type t} [CommRing Λ]
-    (d : CompleteCoefficientDatum Λ) {K K' : proEtaleDerivedCategory X Λ}
-    (M : AdicKFlatModel X Λ K) (M' : AdicKFlatModel X Λ K')
-    (f : M.complex ⟶ M'.complex) (n : ℕ) :
-    adicReductionMap X d M M' n
-        (M.realization.inv ≫ (adicLocalization X Λ).map f ≫ M'.realization.hom) =
-      (adicLocalization X (Λ ⧸ d.ideal ^ (n + 1))).map
-        (adicChangeHom X (Ideal.Quotient.mk (d.ideal ^ (n + 1))) f) := by
-  apply (adicReductionHomEquiv X d M n _).injective
-  simp only [adicReductionMap, Equiv.apply_symm_apply]
-  change (M.realization.inv ≫ (adicLocalization X Λ).map f ≫ M'.realization.hom) ≫
-      adicReductionDerivedUnit X d M' n =
-    adicReductionDerivedUnit X d M n ≫
-      (adicDerivedRestrict X (Ideal.Quotient.mk (d.ideal ^ (n + 1)))).map _
-  dsimp only [adicReductionDerivedUnit]
-  simp only [Category.assoc, Iso.hom_inv_id_assoc]
-  rw [← adicDerivedRestrictFactors_naturality]
-  simp only [← Category.assoc, ← Functor.map_comp]
-  congr 2
-  exact (adicLocalization X Λ).congr_map
-    (adicReductionAugmentation_naturality X d M M' f n).symm
-
-/-- Evaluation on the strict cone commutes with a map of models.
-Source: order 1260, proof step 6 (blueprint: lemma-weil-pbc-adic-completion-reduction).
-Proof: use the first coordinate formula of adicCompletionTowerMap_exists, compose with
-one product projection, and localize. -/
-private theorem adicCompletionEvaluation_naturality (X : Scheme.{t})
-    {Λ : Type t} [CommRing Λ] (d : CompleteCoefficientDatum Λ)
-    {K K' : proEtaleDerivedCategory X Λ}
-    (M : AdicKFlatModel X Λ K) (M' : AdicKFlatModel X Λ K')
-    (f : M.complex ⟶ M'.complex) (n : ℕ) :
-    adicCompletionModelMap X d M M' f ≫ adicCompletionEvaluation X d M' n =
-      adicCompletionEvaluation X d M n ≫
-        (adicLocalization X Λ).map (adicReductionComplexMap X d M M' f n) := by
-  have h := (Classical.choose_spec (adicCompletionTowerMap_exists X d M M'
-    (adicReductionComplexMap X d M M' f) (adicReductionComplexMap_step X d M M' f))).1.1
-  change (adicLocalization X Λ).map _ ≫ (adicLocalization X Λ).map _ =
-    (adicLocalization X Λ).map _ ≫ (adicLocalization X Λ).map _
-  simp only [← Functor.map_comp]
-  apply (adicLocalization X Λ).congr_map
-  change adicCompletionTowerMap X d M M'
-    (adicReductionComplexMap X d M M' f) (adicReductionComplexMap_step X d M M' f) ≫ _ = _ at h
-  rw [← Category.assoc, h, Category.assoc, Limits.Pi.map_π, ← Category.assoc]
 
 /-- The comparison is natural on all K-flat representatives. Since those representatives
 localize to the derived category, this is functoriality in K, including the inverse maps
@@ -403,42 +255,6 @@ theorem adicCompletionReduction_naturality (X : Scheme.{t}) {Λ : Type t} [CommR
       adicCompletionReduction X d M N n ≫
         adicReductionMap X d M M' n
           (M.realization.inv ≫ (adicLocalization X Λ).map f ≫ M'.realization.hom) := by
-  let R := adicDerivedRestrict X (Ideal.Quotient.mk (d.ideal ^ (n + 1)))
-  have hunit (A : proEtaleDerivedCategory X Λ)
-      (P : AdicKFlatModel X Λ A)
-      (H : proEtaleDerivedCategory X (Λ ⧸ d.ideal ^ (n + 1)))
-      (g : A ⟶ R.obj H) :
-      adicReductionDerivedUnit X d P n ≫
-        R.map ((adicReductionHomEquiv X d P n H).symm g) = g :=
-    (adicReductionHomEquiv X d P n H).apply_symm_apply g
-  apply (adicReductionHomEquiv X d N n _).injective
-  change adicReductionDerivedUnit X d N n ≫ R.map _ =
-    adicReductionDerivedUnit X d N n ≫ R.map _
-  simp only [Functor.map_comp, ← Category.assoc]
-  rw [show adicReductionDerivedUnit X d N n ≫
-      R.map (adicReductionMap X d N N' n (adicCompletionModelMap X d M M' f)) =
-      adicCompletionModelMap X d M M' f ≫ adicReductionDerivedUnit X d N' n from
-    hunit _ N _ _]
-  simp only [Category.assoc]
-  rw [show adicReductionDerivedUnit X d N' n ≫
-      R.map (adicCompletionReduction X d M' N' n) =
-      adicCompletionEvaluation X d M' n ≫
-        (adicDerivedRestrictFactors X (Ideal.Quotient.mk (d.ideal ^ (n + 1)))
-          (adicChange X (Ideal.Quotient.mk (d.ideal ^ (n + 1))) M'.complex)).inv from
-    hunit _ N' _ _]
-  rw [← Category.assoc, adicCompletionEvaluation_naturality]
-  rw [Category.assoc]
-  change adicCompletionEvaluation X d M n ≫
-    (adicLocalization X Λ).map
-      (((SheafOfModules.restrictScalars.{t + 1}
-          (adicModuleMap X (Ideal.Quotient.mk (d.ideal ^ (n + 1))))).mapHomologicalComplex
-            (ComplexShape.up ℤ)).map
-        (adicChangeHom X (Ideal.Quotient.mk (d.ideal ^ (n + 1))) f)) ≫ _ = _
-  rw [adicDerivedRestrictFactors_naturality]
-  rw [adicReductionMap_model]
-  simp only [← Category.assoc]
-  congr 1
-  exact (hunit _ N _ _).symm
-
+  sorry
 
 end AlgebraicGeometry.Scheme

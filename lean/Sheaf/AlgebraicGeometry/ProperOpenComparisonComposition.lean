@@ -22,7 +22,6 @@ import WeilConjectures.SixFunctors.BaseChange.DerivedPasting.Vertical
 import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
-import Sheaf.AlgebraicGeometry.ProperOpenComparisonIdentityAux
 
 /-!
 # Composition and identity of proper-open comparison maps
@@ -123,16 +122,6 @@ theorem properOpenComparison_id (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
         (lowerStarIdDerivedPlus (ModuleCat.{u + 1} Λ) T).hom.app
           ((openImmersionLowerShriek (ModuleCat.{u + 1} Λ) j).mapDerivedCategoryPlus.obj K) =
       𝟙 ((openImmersionLowerShriek (ModuleCat.{u + 1} Λ) j).mapDerivedCategoryPlus.obj K) := by
-  dsimp only [properOpenComparison]
-  rw [Category.assoc]
-  change (openImmersionLowerShriek (ModuleCat.{u + 1} Λ) j).mapDerivedCategoryPlus.map
-      (properOpenIdentification Λ (𝟙 T) j j (Category.comp_id j) K).inv ≫
-      (derivedOpenImmersionLowerShriekUpperStarAdjunctionPlus
-        (ModuleCat.{u + 1} Λ) j).counit.app
-        ((rightDerivedLowerStarPlus (ModuleCat.{u + 1} Λ) (𝟙 T)).obj
-          ((openImmersionLowerShriek (ModuleCat.{u + 1} Λ) j).mapDerivedCategoryPlus.obj K)) ≫
-      (lowerStarIdDerivedPlus (ModuleCat.{u + 1} Λ) T).hom.app
-        ((openImmersionLowerShriek (ModuleCat.{u + 1} Λ) j).mapDerivedCategoryPlus.obj K) = _
-  exact properOpenComparison_id_aux Λ j K
+  sorry
 
 end AlgebraicGeometry.Etale

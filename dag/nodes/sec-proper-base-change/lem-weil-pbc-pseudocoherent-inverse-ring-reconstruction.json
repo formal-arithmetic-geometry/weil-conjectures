@@ -1,246 +1,315 @@
 {
- "id": "lem-weil-pbc-pseudocoherent-inverse-ring-reconstruction",
- "blueprint": {
-  "is": null,
-  "from": {
-   "node": "thm-weil-pbc-finite-extension",
-   "place": "Proof, first sentence: choose an integral lattice; the algebraic finite-level models underlying the integral lattice; weaker pseudo-coherent reconstruction used before the residue-field argument",
-   "via": [
-    "lem-weil-pbc-rlim-perfect-complete",
-    "lem-weil-pbc-residue-lisse-perfect-lift",
-    "lem-weil-pbc-integral-stratified-perfect-characterization",
-    "lem-weil-pbc-condensed-e-realization",
-    "nt-target-proetale-e"
-   ]
+  "id": "lem-weil-pbc-pseudocoherent-inverse-ring-reconstruction",
+  "blueprint": {
+    "is": null,
+    "from": {
+      "node": "thm-weil-pbc-finite-extension",
+      "place": "Proof, first sentence: choose an integral lattice; the algebraic finite-level models underlying the integral lattice; weaker pseudo-coherent reconstruction used before the residue-field argument",
+      "via": [
+        "lem-weil-pbc-rlim-perfect-complete",
+        "lem-weil-pbc-residue-lisse-perfect-lift",
+        "lem-weil-pbc-integral-stratified-perfect-characterization",
+        "lem-weil-pbc-condensed-e-realization",
+        "nt-target-proetale-e"
+      ]
+    },
+    "same_as": []
   },
-  "same_as": []
- },
- "kind": "statement",
- "title": "Pseudo-coherent reconstruction over inverse limits of nilpotent ring quotients",
- "statement": "Let $(A_n)_{n\\geq1}$ be an inverse system of commutative rings with surjective transition maps and nilpotent kernels (a kernel $J$ is nilpotent when $J^r=0$ for some $r\\geq1$), and put $A=\\varprojlim_n A_n$, the ring of compatible tuples with componentwise operations. Let $E_n\\in D(A_n)$ [def-weil-abstract-derived-category] have maps $t_n:E_{n+1}\\to E_n$ in $D(A_{n+1})$ inducing isomorphisms $E_{n+1}\\otimes^L_{A_{n+1}}A_n\\simeq E_n$ [lem-pur-derived-change-of-rings]. If $E_1$ is pseudo-coherent [def-pc-ring-pseudo-coherent-complex], then $E=R\\varprojlim_n E_n$, formed after restriction to $A$ [def-weil-derived-limit], is pseudo-coherent and the projection-induced maps $E\\otimes_A^L A_n\\to E_n$ are isomorphisms. More precisely, there are bounded-above complexes $P_n^\\bullet$ of finite free $A_n$-modules, with a common upper cutoff, representing the $E_n$, and surjective chain transitions representing $t_n$ whose reduction maps $P_{n+1}^\\bullet\\otimes_{A_{n+1}}A_n\\to P_n^\\bullet$ are chain isomorphisms. Their termwise limit $P^\\bullet=\\varprojlim_nP_n^\\bullet$ is bounded above finite free over $A$, represents $E$ respecting its projections, and $P^\\bullet\\otimes_A A_n\\to P_n^\\bullet$ is a chain isomorphism for every $n$. These chain isomorphisms represent the projection-induced derived comparison maps.",
- "source": {
-  "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Tag 0CQF, lemma-Rlim-pseudo-coherent-gives-pseudo-coherent, statement and proof (compatible finite-free models and projection-induced reductions)"
- },
- "stmt_deps": [
-  "def-weil-abstract-derived-category",
-  "lem-pur-derived-change-of-rings",
-  "def-pc-ring-pseudo-coherent-complex",
-  "def-weil-derived-limit"
- ],
- "proof": [
-  {
-   "text": "Construct compatible marked bounded-above finite-free models by dependent recursion, beginning with the witness of pseudo-coherence of E_0. The normalized single-step nilpotent lift supplies the next marked model, a degreewise surjective transition and its ordinary scalar-extension chain isomorphism. The recursion keeps the same cutoff at every level.",
-   "uses": [
-    "lem-weil-pbc-nilpotent-finite-free-complex-tower"
-   ],
-   "elementary": false
+  "kind": "statement",
+  "title": "Pseudo-coherent reconstruction over inverse limits of nilpotent ring quotients",
+  "statement": "Let $(A_n)_{n\\geq1}$ be an inverse system of commutative rings with surjective transition maps and nilpotent kernels (a kernel $J$ is nilpotent when $J^r=0$ for some $r\\geq1$), and put $A=\\varprojlim_n A_n$, the ring of compatible tuples with componentwise operations. Let $E_n\\in D(A_n)$ [def-weil-abstract-derived-category] have maps $t_n:E_{n+1}\\to E_n$ in $D(A_{n+1})$ inducing isomorphisms $E_{n+1}\\otimes^L_{A_{n+1}}A_n\\simeq E_n$ [lem-pur-derived-change-of-rings]. If $E_1$ is pseudo-coherent [def-pc-ring-pseudo-coherent-complex], then $E=R\\varprojlim_n E_n$, formed after restriction to $A$ [def-weil-derived-limit], is pseudo-coherent and the projection-induced maps $E\\otimes_A^L A_n\\to E_n$ are isomorphisms. More precisely, there are bounded-above complexes $P_n^\\bullet$ of finite free $A_n$-modules, with a common upper cutoff, representing the $E_n$, and surjective chain transitions representing $t_n$ whose reduction maps $P_{n+1}^\\bullet\\otimes_{A_{n+1}}A_n\\to P_n^\\bullet$ are chain isomorphisms. Their termwise limit $P^\\bullet=\\varprojlim_nP_n^\\bullet$ is bounded above finite free over $A$, represents $E$ respecting its projections, and $P^\\bullet\\otimes_A A_n\\to P_n^\\bullet$ is a chain isomorphism for every $n$. These chain isomorphisms represent the projection-induced derived comparison maps.",
+  "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0CQF, lemma-Rlim-pseudo-coherent-gives-pseudo-coherent, statement and proof (compatible finite-free models and projection-induced reductions)"
   },
-  {
-   "text": "Apply the finite-free complex tower inverse-limit construction. Its compatible-basis argument yields an actual bounded-above A-complex P with finite-free terms, projections p_n, their degreewise compatible-tuple universal property, and chain isomorphisms theta_n from ordinary extension of P to P_n. The ordinary adjoints of theta_n are the literal projections.",
-   "uses": [
-    "lem-weil-pbc-finite-free-complex-tower-inverse-limit"
-   ],
-   "elementary": false
+  "stmt_deps": [
+    "def-weil-abstract-derived-category",
+    "lem-pur-derived-change-of-rings",
+    "def-pc-ring-pseudo-coherent-complex",
+    "def-weil-derived-limit"
+  ],
+  "proof": [
+    {
+      "text": "Induct on $n$ to show that every $E_n$ is pseudo-coherent. The base $n=1$ is assumed. At the induction step apply nilpotent invariance to $A_{n+1}\\twoheadrightarrow A_n$ and $E_{n+1}$: its derived reduction is isomorphic to $E_n$ by the specified transition. Thus the pseudo-coherence of $E_n$ implies that of $E_{n+1}$. Choose a bounded-above finite-free representative $P_1^\\bullet$ of $E_1$, an isomorphism $\\beta_1:Q(P_1^\\bullet)\\xrightarrow{\\sim}E_1$, and an integer $b$ above which it is zero.",
+      "uses": [
+        "lem-weil-pbc-pseudo-coherent-nilpotent-invariance",
+        "def-pc-ring-pseudo-coherent-complex"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/more-algebra.tex",
+        "place": "Tag 0CQF, first two sentences; Tag 0H76 (lemma-check-pseudo-coherent-modulo-nilpotent)"
+      }
+    },
+    {
+      "text": "Suppose $P_n$, $\\beta_n$, and the transitions through level $n$ have been chosen, with $P_n^i=0$ for $i>b$. Set $I=\\ker(A_{n+1}\\to A_n)$. If $I^N=0$, each $1+x$ with $x\\in I$ has inverse $\\sum_{j=0}^{N-1}(-x)^j$. Apply marked free-complex lifting to $R=A_{n+1}$, $R/I=A_n$, $K=E_{n+1}$, $F=P_n$, and the specified isomorphism $\\alpha=\\beta_n^{-1}\\circ\\overline t_n:E_{n+1}\\otimes^L_{A_{n+1}}A_n\\xrightarrow{\\sim}Q(P_n)$, where $\\overline t_n$ is induced by $t_n$. This gives $P_{n+1}$ zero above the same $b$, $\\beta_{n+1}$, and $\\theta_n:P_{n+1}\\otimes_{A_{n+1}}A_n\\xrightarrow{\\sim}P_n$, with $Q(\\theta_n)=\\beta_n^{-1}\\overline t_n(\\beta_{n+1}\\otimes^L A_n)$. Define $u_n:P_{n+1}\\to P_n$ as the quotient map followed by $\\theta_n$. It is a chain map, degreewise surjective, and the marking equation says that it represents the given transition $t_n$ under the $\\beta$'s. Repeating this induction constructs the entire strictly compatible complex tower.",
+      "uses": [
+        "lem-weil-pbc-nilpotent-marked-free-complex-lift"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/more-algebra.tex",
+        "place": "Tag 0CQF, induction using Tag 0BCB (lemma-lift-complex-stably-frees); prescribed marking as in the existing marked lifting statement"
+      }
+    },
+    {
+      "text": "Construct compatible finite bases separately in each degree $i$. Choose a basis of $P_1^i$ of size $r_i$. Given the basis at level $n$, lift its vectors through the surjection $u_n^i$ to $P_{n+1}^i$. They form a basis: put $R=A_{n+1}$ and let $f:R^{r_i}\\to P_{n+1}^i$ send the standard vectors to these lifts. Its reduction modulo $I$ is an isomorphism. Since $P_{n+1}^i$ is finite free, lift the matrix of the inverse reduced map to an $R$-linear $g:P_{n+1}^i\\to R^{r_i}$. Both $gf-1$ and $fg-1$ have matrices in $I$; their $N$th powers vanish, so geometric sums invert $gf$ and $fg$. Consequently $f$ has a left inverse $(gf)^{-1}g$ and a right inverse $g(fg)^{-1}$; these coincide, and $f$ is an isomorphism. This also covers $r_i=0$. The bases so constructed make $u_n^i$ the coordinatewise ring reduction $A_{n+1}^{r_i}\\to A_n^{r_i}$.",
+      "uses": [],
+      "elementary": true,
+      "source": {
+        "document": "literature/stacks-project/more-algebra.tex",
+        "place": "Tag 0CQF, sentence asserting the limit terms are finite free; explicit compatible-basis argument"
+      }
+    },
+    {
+      "text": "Let $P^i=\\varprojlim_n P_n^i$, with differential $(x_n)\\mapsto(d_nx_n)$; compatibility follows from $u_nd_{n+1}=d_nu_n$, and $d^2=0$ holds coordinatewise. In the compatible bases of step 3, a compatible vector tuple is exactly $r_i$ compatible scalar tuples, so $P^i\\cong(\\varprojlim_n A_n)^{r_i}=A^{r_i}$. All $P^i$ vanish for $i>b$. Projection is coordinatewise $A^{r_i}\\to A_n^{r_i}$. Therefore $P^i\\otimes_A A_n\\to P_n^i$, $(x_m)_m\\otimes a\\mapsto ax_n$, is an isomorphism. Its inverse in these bases sends the $j$th standard vector to the compatible $j$th basis tuple tensor $1$. The projections commute with differentials, so these degreewise maps assemble into chain isomorphisms $P^\\bullet\\otimes_A A_n\\xrightarrow{\\sim}P_n^\\bullet$.",
+      "uses": [],
+      "elementary": true,
+      "source": {
+        "document": "literature/stacks-project/more-algebra.tex",
+        "place": "Tag 0CQF, final three sentences; explicit coordinates and projection compatibility"
+      }
+    },
+    {
+      "text": "Restrict all $P_n$ to $A$. The maps $u_n$ are degreewise surjective, so the surjective module-complex tower lemma identifies $Q(P)$, with its literal projections, as a derived limit of $(Q(P_n),Q(u_n))$ in $D(A)$. The compatible isomorphisms $\\beta_n$ identify this system with $(E_n,t_n)$; the induced isomorphism of products is obtained componentwise, with inverse the product of the $\\beta_n^{-1}$. It conjugates $1-s$ to $1-s$ because $\\beta_nQ(u_n)=t_n\\beta_{n+1}$. Write $B_P=\\prod_nQ(P_n)$, $B_E=\\prod_nE_n$, $v=\\prod_n\\beta_n:B_P\\xrightarrow{\\sim}B_E$, and let $j:Q(P)\\to B_P$ and $\\delta_P:B_P\\to Q(P)[1]$ be the arrows of its Roos triangle. The triangle $Q(P)\\xrightarrow{vj}B_E\\xrightarrow{1-s}B_E\\xrightarrow{\\delta_Pv^{-1}}Q(P)[1]$ is isomorphic to that triangle by $(1,v,v)$: the first square is $vj=vj$, the second is $v(1-s)=(1-s)v$, and the last is $(\\delta_Pv^{-1})v=\\delta_P$. Thus TR1 makes it distinguished, with projections $\\beta_nQ(P\\to P_n)$. Compare with the chosen Roos triangle defining $E$: rotate both triangles so $1-s$ is their first arrow, use TR3 with identities on the two product objects, and rotate back. The triangle isomorphism lemma makes the resulting map $Q(P)\\to E$ an isomorphism. The first square says it respects every projection. No canonical choice of this isomorphism is asserted.",
+      "uses": [
+        "lem-weil-pbc-surjective-module-complex-tower-limit",
+        "def-weil-derived-limit",
+        "def-weil-triangulated-category",
+        "lem-sf-triangle-morphism-iso"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/more-algebra.tex",
+        "place": "Tag 0CQF, computation of the derived limit; Tag 091D (lemma-compute-Rlim-modules); remark-how-unique; TR3 and Tag 014A"
+      }
+    },
+    {
+      "text": "Every term of $P$ and $P_n$ is finite free by steps 2–4. Free modules are flat and projective by the two cited module lemmas. Therefore the bounded-above complexes $P$ and $P_n$ are K-flat by the bounded-flat criterion. These are the hypotheses needed for the scalar-extension comparisons below.",
+      "uses": [
+        "lem-weil-pbc-projective-module-flat",
+        "lem-weil-pbc-free-module-projective",
+        "lem-pc-module-bounded-flat-kflat"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/more-algebra.tex",
+        "place": "Tag 0CQF, final assertion; Tag 064K (lemma-derived-tor-quasi-isomorphism) and derived change of rings"
+      }
+    },
+    {
+      "text": "Apply the punctual-site module comparison with $R=A$ and $S=A_n$. Evaluation identifies the sheaf extension, restriction, complexes and tensor units with their ordinary-module counterparts. Derived change of rings, applied to the K-flat complex $P$ from step 6, consequently identifies $Q(P)\\otimes_A^L A_n$ with $Q(P\\otimes_A A_n)$. The same statements apply to $P_{n+1}$ over $A_{n+1}$ and its reduction to $A_n$.",
+      "uses": [
+        "lem-weil-pbc-singleton-site-module-comparison",
+        "lem-pur-derived-change-of-rings"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/more-algebra.tex",
+        "place": "Tag 0CQF, final assertion; Tag 064K (lemma-derived-tor-quasi-isomorphism) and derived change of rings"
+      }
+    },
+    {
+      "text": "Use the normalized sheaf-ring derived coefficient adjunction on the punctual site, transported by step 7, with $R=A$, $S=A_n$ and the flat-term K-flat model of step 6. It supplies $\\gamma_n: (Q(P)\\otimes_A^L A_n)\\xrightarrow{\\sim}Q(P\\otimes_A A_n)$ normalized by the chain unit $x\\mapsto x\\otimes1$. Let $p_n:P\\to P_n$ be the projection, an $A$-linear chain map to the restriction of $P_n$, and $\\widetilde p_n:P\\otimes_A A_n\\to P_n$, $x\\otimes a\\mapsto a\\,p_n(x)$. Clause (2) of the adjunction, with $g=p_n$ and $H=P_n$, identifies the actual adjunction transpose of $Q(p_n)$ with $Q(\\widetilde p_n)\\gamma_n$. Compose with $\\beta_n$ and transport the source through the projection-respecting isomorphism $Q(P)\\simeq E$ of step 5. Naturality of the adjunction then identifies this composite with the projection-induced comparison $E\\otimes_A^L A_n\\to E_n$. Applying the same cited adjunction to $A_{n+1}\\to A_n$ makes the marking equation in step 2 identify the specified transitions themselves.",
+      "uses": [
+        "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+        "lem-weil-pbc-singleton-site-module-comparison"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/more-algebra.tex",
+        "place": "Tag 0CQF, final assertion; Tag 064K (lemma-derived-tor-quasi-isomorphism) and derived change of rings"
+      }
+    },
+    {
+      "text": "The map $\\widetilde p_n$ is exactly the reduction chain isomorphism of step 4. Hence its image under localization is an isomorphism, and step 8 expresses the projection-induced comparison as a composite of isomorphisms. Finally steps 4–5 exhibit $E$ as represented by the bounded-above finite-free complex $P$, so it is pseudo-coherent by definition. The same models, cutoffs, transitions, projections and reduction chain isomorphisms give every more precise clause of the statement.",
+      "uses": [
+        "def-pc-ring-pseudo-coherent-complex"
+      ],
+      "elementary": true,
+      "source": {
+        "document": "literature/stacks-project/more-algebra.tex",
+        "place": "Tag 0CQF, final assertion; Tag 064K (lemma-derived-tor-quasi-isomorphism) and derived change of rings"
+      }
+    }
+  ],
+  "proof_deps": [
+    "lem-weil-pbc-pseudo-coherent-nilpotent-invariance",
+    "def-pc-ring-pseudo-coherent-complex",
+    "lem-weil-pbc-nilpotent-marked-free-complex-lift",
+    "lem-weil-pbc-surjective-module-complex-tower-limit",
+    "def-weil-derived-limit",
+    "def-weil-triangulated-category",
+    "lem-sf-triangle-morphism-iso",
+    "lem-weil-pbc-projective-module-flat",
+    "lem-weil-pbc-free-module-projective",
+    "lem-pc-module-bounded-flat-kflat",
+    "lem-weil-pbc-singleton-site-module-comparison",
+    "lem-pur-derived-change-of-rings",
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction"
+  ],
+  "proof_origin": {
+    "by": "document",
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0CQF, lemma-Rlim-pseudo-coherent-gives-pseudo-coherent, with the compatible-basis and projection calculations written out"
   },
-  {
-   "text": "Apply the projection comparison for surjective complex towers to the tuple universal property and the prescribed markings and comparison chi. It gives beta:Q(P)≅E satisfying every required projection equation.",
-   "uses": [
-    "lem-weil-pbc-complex-tower-limit-projection-comparison"
-   ],
-   "elementary": false
+  "mathlib_searches": [
+    {
+      "tool": "leanfinder",
+      "query": "Inverse limit of normalized pseudo coherent complexes over surjective rings with nilpotent kernels is pseudo coherent and has the prescribed derived base changes",
+      "results": "8 hits: CategoryTheory.coherentTopology.isLocallySurjective_π_app_zero_of_isLocallySurjective_map, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, LightCondensed.epi_π_app_zero_of_epi, localCohomology, localCohomology.diagram, localCohomology.ofDiagram, instHasLimitsCondensedMod",
+      "date": "2026-10-14",
+      "verdict": "no match: coherent sheaf limits, ordinary adic completion and t-structure bounds do not provide pseudo-coherent algebraic reconstruction"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "Recover a bounded above finite free complex from compatible derived reductions over an inverse limit of rings",
+      "results": "8 hits: AdicCompletion.exists_smodEq_pow_smul_top_and_smodEq_pow_add_one_smul_top, AdicCompletion.exists_smodEq_pow_smul_top_and_mkQ_eq, AdicCompletion.transitionMap_comp_reduceModIdeal, AdicCompletion.transitionMap_comp_eval_apply, IsAdicComplete.StrictMono.factorPow_comp_eq_of_factorPow_comp_succ_eq, AdicCompletion.map_exact, Hausdorffification, AdicCompletion.exists_smodEq_pow_add_one_smul",
+      "date": "2026-10-14",
+      "verdict": "no match: coherent sheaf limits, ordinary adic completion and t-structure bounds do not provide pseudo-coherent algebraic reconstruction"
+    },
+    {
+      "tool": "loogle",
+      "query": "\"DerivedCategory\", \"AdicCompletion\"",
+      "results": "0 hits: ",
+      "date": "2026-10-14",
+      "verdict": "no match: coherent sheaf limits, ordinary adic completion and t-structure bounds do not provide pseudo-coherent algebraic reconstruction"
+    },
+    {
+      "tool": "grep",
+      "query": "pseudo.?coherent|PerfectComplex|DerivedComplete",
+      "results": "0 hits: ",
+      "date": "2026-10-14",
+      "verdict": "no match: coherent sheaf limits, ordinary adic completion and t-structure bounds do not provide pseudo-coherent algebraic reconstruction"
+    },
+    {
+      "tool": "leansearch",
+      "query": "Reconstruct pseudo coherent complexes from compatible derived ring quotients",
+      "results": "0 hits: ; service unavailable: Internal Server Error",
+      "date": "2026-10-14",
+      "verdict": "unavailable"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "Compatible bounded above finite free resolutions lift along nilpotent ring epimorphisms and inverse limits",
+      "results": "8 hits: Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete, Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq, Algebra.FormallySmooth.exists_kerProj_comp_eq_id, Algebra.FormallySmooth.comp_lift, AdicCompletion.eval_lift, Hausdorffification.lift_comp_of, CategoryTheory.ProjectiveResolution.liftFSucc, Algebra.FormallySmooth.exists_lift",
+      "date": "2026-10-14",
+      "verdict": "no match: formally smooth ring lifts and comparison maps do not reconstruct compatible derived complexes"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "Inverse limit of compatible pseudo coherent complexes over nilpotent ring quotients is pseudo coherent and recovers every derived reduction",
+      "results": "8 hits: localCohomology, localCohomology.diagram, localCohomology.ofDiagram, localCohomology.isoSelfLERadical, localCohomology.ofSelfLERadical, AdicCompletion.exists_smodEq_pow_smul_top_and_mkQ_eq, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AdicCompletion.transitionMap_comp_eval_apply",
+      "date": "2026-10-14",
+      "verdict": "no match: ordinary projective resolutions, local cohomology and ordinary adic completion do not state compatible pseudo-coherent derived reconstruction"
+    },
+    {
+      "tool": "grep",
+      "query": "pseudo.?coherent|nilpotent.*complex|complex.*nilpotent",
+      "results": "0 hits: ",
+      "date": "2026-10-14",
+      "verdict": "no match: ordinary projective resolutions, local cohomology and ordinary adic completion do not state compatible pseudo-coherent derived reconstruction"
+    },
+    {
+      "tool": "leansearch",
+      "query": "Derived inverse limit of pseudo coherent complexes over nilpotent quotient rings",
+      "results": "0 hits: ; service unavailable: Internal Server Error",
+      "date": "2026-10-14",
+      "verdict": "unavailable"
+    },
+    {
+      "tool": "loogle",
+      "query": "\"DerivedCategory\", \"AdicCompletion\"",
+      "results": "0 hits: ",
+      "date": "2026-10-14",
+      "verdict": "no match: ordinary projective resolutions, local cohomology and ordinary adic completion do not state compatible pseudo-coherent derived reconstruction"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "A bounded above finite free complex is reconstructed by compatible finite free resolutions over an inverse system of surjective ring homomorphisms",
+      "results": "8 hits: CategoryTheory.ProjectiveResolution.ofComplex, CategoryTheory.ProjectiveResolution.complex, CategoryTheory.Abelian.LeftResolution.chainComplexXIso, ModuleCat.projectiveResolution, CategoryTheory.Abelian.LeftResolution.chainComplex, CategoryTheory.ProjectiveResolution.cochainComplex, Rep.standardComplex.x_projective, CategoryTheory.ProjectiveResolution.π_f_succ",
+      "date": "2026-10-14",
+      "verdict": "no match: ordinary projective resolutions, local cohomology and ordinary adic completion do not state compatible pseudo-coherent derived reconstruction"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "created": {
+    "item": "lem-weil-pbc-rlim-perfect-complete",
+    "by": "worker",
+    "date": "2026-10-14"
   },
-  {
-   "text": "Prove the normalized base-change comparison directly for bounded-above projective complexes, avoiding passage through sheaves. Such a complex is K-projective. Its localized Hom sets are bijective with Hom sets in the homotopy category. The ordinary scalar-extension/restriction adjunction descends to homotopy categories. Combining its Hom equivalence with the two localization bijections proves that the localized chain unit represents the adjunction on derived Hom sets. The ordinary extension of P is isomorphic to P_n, hence is also K-projective. Transpose that localized unit through the supplied derived adjunction to define gamma. Precomposition by gamma is bijective into every complex image, and localization is essentially surjective, so the coyoneda criterion makes gamma an isomorphism. Its defining adjoint equation is exactly the required unit normalization.",
-   "uses": [
-    "lem-pc-ring-derived-map-representative"
-   ],
-   "elementary": false
+  "chapter": "sec-proper-base-change",
+  "unit": "sk-thm-properbasechange",
+  "split_report": {
+    "date": "2026-10-17",
+    "item": "lem-weil-pbc-pseudocoherent-inverse-ring-reconstruction",
+    "worker": "stage1",
+    "summary": "Repair of the returned long step 6: preserve the statement, Lean record, route and first five proof steps verbatim. Replace step 6 by steps 6–9 citing existing free-module flatness/projectivity and a statement-only lemma for the punctual-site module comparison; reuse the existing normalized sheaf-ring derived coefficient adjunction for the derived comparison. All non-elementary steps are shorter than 2000 characters. Maintainer reader (2026-10-17): removed the unused homotopy-class step and its new node; the transpose formula is clause (2) of lem-pur-sheaf-ring-derived-coefficient-adjunction.",
+    "blueprint": "Realizes the first sentence of thm-weil-pbc-finite-extension ('Choose an integral lattice for K'), via the existing rlim-perfect-complete ancestry: finite-level pseudo-coherent algebraic reconstruction before the residue-field perfectness argument.",
+    "tool_uses": [
+      {
+        "node": "lem-pc-module-bounded-flat-kflat",
+        "why": "Generic K-flat criterion for bounded-above flat complexes; used to compute derived scalar extension, not replace a proper-base-change step."
+      },
+      {
+        "node": "lem-pur-derived-change-of-rings",
+        "why": "Generic derived scalar extension computed by K-flat complexes, specialized to ordinary rings; the unit supplies no other construction."
+      },
+      {
+        "node": "lem-sf-triangle-morphism-iso",
+        "why": "Generic two-out-of-three for morphisms of distinguished triangles to preserve the projections when identifying derived limits."
+      },
+      {
+        "node": "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+        "why": "Generic K-flat unit and transpose normalization for derived scalar extension; used on the punctual site to identify projection and transition comparisons."
+      }
+    ]
   },
-  {
-   "text": "Apply injectivity of the derived adjunction Hom equivalence to the claimed comparison equation. Naturality of its unit, the normalization of gamma, the ordinary adjunction equation defining theta_n, and naturality of the exact-restriction factor identify the two sides with the same localized projection. Using beta and the marked projection equation transports it to E. The comparison is a composite of the isomorphisms gamma, Q(theta_n), beta_n and M_n(beta), so it is an isomorphism. Finally P, its cutoff, its finite-free terms and beta exhibit pseudo-coherence by definition. Package these with all previously constructed witnesses; the chain units are the specified ordinary adjunction units.",
-   "uses": [
-    "def-pc-ring-pseudo-coherent-complex"
-   ],
-   "elementary": true
-  }
- ],
- "proof_deps": [
-  "lem-weil-pbc-nilpotent-finite-free-complex-tower",
-  "lem-weil-pbc-finite-free-complex-tower-inverse-limit",
-  "lem-weil-pbc-complex-tower-limit-projection-comparison",
-  "lem-pc-ring-derived-map-representative",
-  "def-pc-ring-pseudo-coherent-complex"
- ],
- "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Tag 0CQF, proof; final comparison normalized directly using Mathlib K-projective Hom bijections and the given derived adjunction"
- },
- "mathlib_searches": [
-  {
-   "tool": "leanfinder",
-   "query": "Inverse limit of normalized pseudo coherent complexes over surjective rings with nilpotent kernels is pseudo coherent and has the prescribed derived base changes",
-   "results": "8 hits: CategoryTheory.coherentTopology.isLocallySurjective_π_app_zero_of_isLocallySurjective_map, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, LightCondensed.epi_π_app_zero_of_epi, localCohomology, localCohomology.diagram, localCohomology.ofDiagram, instHasLimitsCondensedMod",
-   "date": "2026-10-14",
-   "verdict": "no match: coherent sheaf limits, ordinary adic completion and t-structure bounds do not provide pseudo-coherent algebraic reconstruction"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "Recover a bounded above finite free complex from compatible derived reductions over an inverse limit of rings",
-   "results": "8 hits: AdicCompletion.exists_smodEq_pow_smul_top_and_smodEq_pow_add_one_smul_top, AdicCompletion.exists_smodEq_pow_smul_top_and_mkQ_eq, AdicCompletion.transitionMap_comp_reduceModIdeal, AdicCompletion.transitionMap_comp_eval_apply, IsAdicComplete.StrictMono.factorPow_comp_eq_of_factorPow_comp_succ_eq, AdicCompletion.map_exact, Hausdorffification, AdicCompletion.exists_smodEq_pow_add_one_smul",
-   "date": "2026-10-14",
-   "verdict": "no match: coherent sheaf limits, ordinary adic completion and t-structure bounds do not provide pseudo-coherent algebraic reconstruction"
-  },
-  {
-   "tool": "loogle",
-   "query": "\"DerivedCategory\", \"AdicCompletion\"",
-   "results": "0 hits: ",
-   "date": "2026-10-14",
-   "verdict": "no match: coherent sheaf limits, ordinary adic completion and t-structure bounds do not provide pseudo-coherent algebraic reconstruction"
-  },
-  {
-   "tool": "grep",
-   "query": "pseudo.?coherent|PerfectComplex|DerivedComplete",
-   "results": "0 hits: ",
-   "date": "2026-10-14",
-   "verdict": "no match: coherent sheaf limits, ordinary adic completion and t-structure bounds do not provide pseudo-coherent algebraic reconstruction"
-  },
-  {
-   "tool": "leansearch",
-   "query": "Reconstruct pseudo coherent complexes from compatible derived ring quotients",
-   "results": "0 hits: ; service unavailable: Internal Server Error",
-   "date": "2026-10-14",
-   "verdict": "unavailable"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "Compatible bounded above finite free resolutions lift along nilpotent ring epimorphisms and inverse limits",
-   "results": "8 hits: Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete, Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq, Algebra.FormallySmooth.exists_kerProj_comp_eq_id, Algebra.FormallySmooth.comp_lift, AdicCompletion.eval_lift, Hausdorffification.lift_comp_of, CategoryTheory.ProjectiveResolution.liftFSucc, Algebra.FormallySmooth.exists_lift",
-   "date": "2026-10-14",
-   "verdict": "no match: formally smooth ring lifts and comparison maps do not reconstruct compatible derived complexes"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "Inverse limit of compatible pseudo coherent complexes over nilpotent ring quotients is pseudo coherent and recovers every derived reduction",
-   "results": "8 hits: localCohomology, localCohomology.diagram, localCohomology.ofDiagram, localCohomology.isoSelfLERadical, localCohomology.ofSelfLERadical, AdicCompletion.exists_smodEq_pow_smul_top_and_mkQ_eq, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AdicCompletion.transitionMap_comp_eval_apply",
-   "date": "2026-10-14",
-   "verdict": "no match: ordinary projective resolutions, local cohomology and ordinary adic completion do not state compatible pseudo-coherent derived reconstruction"
-  },
-  {
-   "tool": "grep",
-   "query": "pseudo.?coherent|nilpotent.*complex|complex.*nilpotent",
-   "results": "0 hits: ",
-   "date": "2026-10-14",
-   "verdict": "no match: ordinary projective resolutions, local cohomology and ordinary adic completion do not state compatible pseudo-coherent derived reconstruction"
-  },
-  {
-   "tool": "leansearch",
-   "query": "Derived inverse limit of pseudo coherent complexes over nilpotent quotient rings",
-   "results": "0 hits: ; service unavailable: Internal Server Error",
-   "date": "2026-10-14",
-   "verdict": "unavailable"
-  },
-  {
-   "tool": "loogle",
-   "query": "\"DerivedCategory\", \"AdicCompletion\"",
-   "results": "0 hits: ",
-   "date": "2026-10-14",
-   "verdict": "no match: ordinary projective resolutions, local cohomology and ordinary adic completion do not state compatible pseudo-coherent derived reconstruction"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "A bounded above finite free complex is reconstructed by compatible finite free resolutions over an inverse system of surjective ring homomorphisms",
-   "results": "8 hits: CategoryTheory.ProjectiveResolution.ofComplex, CategoryTheory.ProjectiveResolution.complex, CategoryTheory.Abelian.LeftResolution.chainComplexXIso, ModuleCat.projectiveResolution, CategoryTheory.Abelian.LeftResolution.chainComplex, CategoryTheory.ProjectiveResolution.cochainComplex, Rep.standardComplex.x_projective, CategoryTheory.ProjectiveResolution.π_f_succ",
-   "date": "2026-10-14",
-   "verdict": "no match: ordinary projective resolutions, local cohomology and ordinary adic completion do not state compatible pseudo-coherent derived reconstruction"
-  }
- ],
- "mathlib_match": null,
- "status": "split",
- "created": {
-  "item": "lem-weil-pbc-rlim-perfect-complete",
-  "by": "worker",
-  "date": "2026-10-14"
- },
- "chapter": "sec-proper-base-change",
- "unit": "sk-thm-properbasechange",
- "split_report": {
-  "date": "2026-10-17",
-  "item": "lem-weil-pbc-pseudocoherent-inverse-ring-reconstruction",
-  "worker": "stage1",
-  "summary": "Repair of the returned long step 6: preserve the statement, Lean record, route and first five proof steps verbatim. Replace step 6 by steps 6–9 citing existing free-module flatness/projectivity and a statement-only lemma for the punctual-site module comparison; reuse the existing normalized sheaf-ring derived coefficient adjunction for the derived comparison. All non-elementary steps are shorter than 2000 characters. Maintainer reader (2026-10-17): removed the unused homotopy-class step and its new node; the transpose formula is clause (2) of lem-pur-sheaf-ring-derived-coefficient-adjunction.",
-  "blueprint": "Realizes the first sentence of thm-weil-pbc-finite-extension ('Choose an integral lattice for K'), via the existing rlim-perfect-complete ancestry: finite-level pseudo-coherent algebraic reconstruction before the residue-field perfectness argument.",
   "tool_uses": [
-   {
-    "node": "lem-pc-module-bounded-flat-kflat",
-    "why": "Generic K-flat criterion for bounded-above flat complexes; used to compute derived scalar extension, not replace a proper-base-change step."
-   },
-   {
-    "node": "lem-pur-derived-change-of-rings",
-    "why": "Generic derived scalar extension computed by K-flat complexes, specialized to ordinary rings; the unit supplies no other construction."
-   },
-   {
-    "node": "lem-sf-triangle-morphism-iso",
-    "why": "Generic two-out-of-three for morphisms of distinguished triangles to preserve the projections when identifying derived limits."
-   },
-   {
-    "node": "lem-pur-sheaf-ring-derived-coefficient-adjunction",
-    "why": "Generic K-flat unit and transpose normalization for derived scalar extension; used on the punctual site to identify projection and transition comparisons."
-   }
-  ]
- },
- "tool_uses": [
-  "lem-sf-triangle-morphism-iso",
-  "lem-pc-ring-derived-map-representative"
- ],
- "reviewed": {
-  "date": "2026-10-17",
-  "by": "L",
-  "reviewer": "NT-cc-Q100-32a9a276a",
-  "group": "Q100",
-  "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q100-32a9a276a (reviewer sub-agent of L); spot-checked: Read the item, both new nodes, every cited statement, the unit sk-thm-properbasechange and its chapter, and the sources: Stacks 0CQF (more-algebra.tex lemma-Rlim-pseudo-coherent-gives-pseudo-coherent, statement and proof), 00X9 (punctual topos paragraph) and 05DQ. No SGA source is used. The item statement is the nilpotent, n0=1 case of 0CQF and is unchanged; it is not weakened. The coefficient category is ordinary modules, reached through the one-object site. The comparison map is the adjunction transpose of pr_n∘p_E, which matches the Lean record. Steps 1–5 are correct: hypotheses of the nilpotent invariance and marked lift are supplied; the basis lift was checked, including rank 0 and the zero ring; the Roos-triangle comparison uses (1,v,v), TR3 and 2-of-3. Steps 6, 7 and 9 are correct: free ⇒ projective ⇒ flat, then bounded-flat K-flat; punctual-site transport; derived coefficient adjunction clauses (1) and (2) applied to g=p_n, plus naturality. New node lem-weil-pbc-singleton-site-module-comparison is true (sheaves equal presheaves, sheafification is the identity), has a proper source, three kinds of search, and is not a duplicate; I scanned all one-object-site nodes. New node lem-weil-pbc-scalar-extension-homotopy-adjunction is true but unneeded: its only citer, old step 8, feeds no later step, because the transpose formula is clause (2) of the existing lem-pur-sheaf-ring-derived-coefficient-adjunction. Fix: dropped that node and old step 8; moved the definitions of p_n and p̃_n into the new step 8; renumbered the step reference; removed a step-6 sentence that is now unused; recomputed proof_deps; removed lem-pc-ring-derived-map-representative from split_report.tool_uses. Accepted tool uses: bounded-flat K-flat, derived change of rings, triangle-morphism iso, derived coefficient adjunction.; 1 file(s) fixed by the reviewer"
- },
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": []
+    "lem-pc-module-bounded-flat-kflat",
+    "lem-pur-derived-change-of-rings",
+    "lem-sf-triangle-morphism-iso",
+    "lem-pc-ring-derived-map-representative",
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction"
+  ],
+  "reviewed": {
+    "date": "2026-10-17",
+    "by": "L",
+    "reviewer": "NT-cc-Q100-32a9a276a",
+    "group": "Q100",
+    "result": "pass",
+    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q100-32a9a276a (reviewer sub-agent of L); spot-checked: Read the item, both new nodes, every cited statement, the unit sk-thm-properbasechange and its chapter, and the sources: Stacks 0CQF (more-algebra.tex lemma-Rlim-pseudo-coherent-gives-pseudo-coherent, statement and proof), 00X9 (punctual topos paragraph) and 05DQ. No SGA source is used. The item statement is the nilpotent, n0=1 case of 0CQF and is unchanged; it is not weakened. The coefficient category is ordinary modules, reached through the one-object site. The comparison map is the adjunction transpose of pr_n∘p_E, which matches the Lean record. Steps 1–5 are correct: hypotheses of the nilpotent invariance and marked lift are supplied; the basis lift was checked, including rank 0 and the zero ring; the Roos-triangle comparison uses (1,v,v), TR3 and 2-of-3. Steps 6, 7 and 9 are correct: free ⇒ projective ⇒ flat, then bounded-flat K-flat; punctual-site transport; derived coefficient adjunction clauses (1) and (2) applied to g=p_n, plus naturality. New node lem-weil-pbc-singleton-site-module-comparison is true (sheaves equal presheaves, sheafification is the identity), has a proper source, three kinds of search, and is not a duplicate; I scanned all one-object-site nodes. New node lem-weil-pbc-scalar-extension-homotopy-adjunction is true but unneeded: its only citer, old step 8, feeds no later step, because the transpose formula is clause (2) of the existing lem-pur-sheaf-ring-derived-coefficient-adjunction. Fix: dropped that node and old step 8; moved the definitions of p_n and p̃_n into the new step 8; renumbered the step reference; removed a step-6 sentence that is now unused; recomputed proof_deps; removed lem-pc-ring-derived-map-representative from split_report.tool_uses. Accepted tool uses: bounded-flat K-flat, derived change of rings, triangle-morphism iso, derived coefficient adjunction.; 1 file(s) fixed by the reviewer"
   },
-  "slopmaster2": {
-   "state": "none",
-   "decls": [],
-   "missing": []
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    },
+    "slopmaster2": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    }
+  },
+  "reviewed_lean": {
+    "date": "2026-10-15",
+    "by": "L",
+    "reviewer": "NT-stage2-Codex-682d7e431",
+    "group": "NV",
+    "result": "pass",
+    "note": "Wrote review.md. Checked the immutable statement, dependencies, source, comparison maps, universes, edge cases, report, and pilot gates. Signature matches verbatim. Server-only compile reproduced successfully in 2.6 seconds without errors or warnings. No delivery errors found; branch head unchanged."
+  },
+  "lean": {
+    "module": "Sheaf.RingTheory.PseudoCoherentInverseRingReconstruction",
+    "declaration": "DerivedCategory.isPseudoCoherent_inverse_ring_reconstruction",
+    "file": "lean/Sheaf/RingTheory/PseudoCoherentInverseRingReconstruction.lean",
+    "statement": "theorem isPseudoCoherent_inverse_ring_reconstruction (R : ℕ → Type u) [∀ n, CommRing (R n)] (φ : ∀ n, R (n + 1) →+* R n) (hsurj : ∀ n, Function.Surjective (φ n)) (hnil : ∀ n, IsNilpotent (RingHom.ker (φ n))) (A : Type u) [CommRing A] (q : ∀ n, A →+* R n) (hq : ∀ n, q n = (φ n).comp (q (n + 1))) (hlim : ∀ x : ∀ n, R n, (∀ n, φ n (x (n + 1)) = x n) → ∃! a : A, ∀ n, q n a = x n) [HasDerivedCategory.{w} (ModuleCat.{max u v} A)] [∀ n, HasDerivedCategory.{w} (ModuleCat.{max u v} (R n))] (L : ∀ n, DerivedCategory (ModuleCat.{max u v} (R (n + 1))) ⥤ DerivedCategory (ModuleCat.{max u v} (R n))) (adjφ : ∀ n, L n ⊣ (ModuleCat.restrictScalars (φ n)).mapDerivedCategory) (M : ∀ n, DerivedCategory (ModuleCat.{max u v} A) ⥤ DerivedCategory (ModuleCat.{max u v} (R n))) (adjq : ∀ n, M n ⊣ (ModuleCat.restrictScalars (q n)).mapDerivedCategory) (χ : ∀ n, (ModuleCat.restrictScalars (q n)).mapDerivedCategory ≅ (ModuleCat.restrictScalars (φ n)).mapDerivedCategory ⋙ (ModuleCat.restrictScalars (q (n + 1))).mapDerivedCategory) (hχ : ∀ n (C : CochainComplex (ModuleCat.{max u v} (R n)) ℤ), (χ n).hom.app (Q.obj C) ≫ (ModuleCat.restrictScalars (q (n + 1))).mapDerivedCategory.map ((ModuleCat.restrictScalars (φ n)).mapDerivedCategoryFactors.hom.app C) ≫ (ModuleCat.restrictScalars (q (n + 1))).mapDerivedCategoryFactors.hom.app (((ModuleCat.restrictScalars (φ n)).mapHomologicalComplex (.up ℤ)).obj C) = (ModuleCat.restrictScalars (q n)).mapDerivedCategoryFactors.hom.app C ≫ Q.map ((NatIso.mapHomologicalComplex (ModuleCat.restrictScalarsComp' (q (n + 1)) (φ n) (q n) (hq n)) (.up ℤ)).hom.app C)) (Eₙ : ∀ n, DerivedCategory (ModuleCat.{max u v} (R n))) (t : ∀ n, Eₙ (n + 1) ⟶ (ModuleCat.restrictScalars (φ n)).mapDerivedCategory.obj (Eₙ n)) (hred : ∀ n, IsIso (((adjφ n).homEquiv (Eₙ (n + 1)) (Eₙ n)).symm (t n))) (hpc : IsPseudoCoherent (Eₙ 0)) [HasProduct (fun n ↦ (ModuleCat.restrictScalars (q n)).mapDerivedCategory.obj (Eₙ n))] (E : DerivedCategory (ModuleCat.{max u v} A)) (pE : E ⟶ ∏ᶜ fun n ↦ (ModuleCat.restrictScalars (q n)).mapDerivedCategory.obj (Eₙ n)) (δ : (∏ᶜ fun n ↦ (ModuleCat.restrictScalars (q n)).mapDerivedCategory.obj (Eₙ n)) ⟶ E⟦(1 : ℤ)⟧) (hE : IsDerivedLimitTriangle (fun n ↦ (ModuleCat.restrictScalars (q (n + 1))).mapDerivedCategory.map (t n) ≫ (χ n).inv.app (Eₙ n)) E pE δ) : IsPseudoCoherent E ∧ (∀ n, IsIso (((adjq n).homEquiv E (Eₙ n)).symm (pE ≫ Pi.π _ n))) ∧ ∃ (Pₙ : ∀ n, CochainComplex (ModuleCat.{max u v} (R n)) ℤ) (b : ℤ) (βₙ : ∀ n, Q.obj (Pₙ n) ≅ Eₙ n) (uₙ : ∀ n, Pₙ (n + 1) ⟶ ((ModuleCat.restrictScalars (φ n)).mapHomologicalComplex (.up ℤ)).obj (Pₙ n)) (θₙ : ∀ n, ((ModuleCat.extendScalars (φ n)).mapHomologicalComplex (.up ℤ)).obj (Pₙ (n + 1)) ≅ Pₙ n) (P : CochainComplex (ModuleCat.{max u v} A) ℤ) (β : Q.obj P ≅ E) (p : ∀ n, P ⟶ ((ModuleCat.restrictScalars (q n)).mapHomologicalComplex (.up ℤ)).obj (Pₙ n)) (θ : ∀ n, ((ModuleCat.extendScalars (q n)).mapHomologicalComplex (.up ℤ)).obj P ≅ Pₙ n) (η : ∀ n, P ⟶ ((ModuleCat.restrictScalars (q n)).mapHomologicalComplex (.up ℤ)).obj (((ModuleCat.extendScalars (q n)).mapHomologicalComplex (.up ℤ)).obj P)) (γ : ∀ n, (M n).obj (Q.obj P) ≅ Q.obj (((ModuleCat.extendScalars (q n)).mapHomologicalComplex (.up ℤ)).obj P)), (∀ n, (Pₙ n).IsStrictlyLE b) ∧ (∀ n i, Module.Free (R n) ((Pₙ n).X i) ∧ Module.Finite (R n) ((Pₙ n).X i)) ∧ (∀ n i, Function.Surjective ((uₙ n).f i)) ∧ (∀ n i, ((ModuleCat.extendRestrictScalarsAdj (φ n)).homEquiv ((Pₙ (n + 1)).X i) ((Pₙ n).X i) ((θₙ n).hom.f i)) = (uₙ n).f i) ∧ (∀ n, Q.map (uₙ n) = (βₙ (n + 1)).hom ≫ t n ≫ (ModuleCat.restrictScalars (φ n)).mapDerivedCategory.map (βₙ n).inv ≫ (ModuleCat.restrictScalars (φ n)).mapDerivedCategoryFactors.hom.app (Pₙ n)) ∧ P.IsStrictlyLE b ∧ (∀ i, Module.Free A (P.X i) ∧ Module.Finite A (P.X i)) ∧ (∀ n i (y : P.X i), (uₙ n).f i ((p (n + 1)).f i y) = (p n).f i y) ∧ (∀ i (x : ∀ n, (Pₙ n).X i), (∀ n, (uₙ n).f i (x (n + 1)) = x n) → ∃! y : P.X i, ∀ n, (p n).f i y = x n) ∧ (∀ n, Q.map (p n) ≫ (ModuleCat.restrictScalars (q n)).mapDerivedCategoryFactors.inv.app (Pₙ n) ≫ (ModuleCat.restrictScalars (q n)).mapDerivedCategory.map (βₙ n).hom = β.hom ≫ pE ≫ Pi.π _ n) ∧ (∀ n i, ((ModuleCat.extendRestrictScalarsAdj (q n)).homEquiv (P.X i) ((Pₙ n).X i) ((θ n).hom.f i)) = (p n).f i) ∧ (∀ n i, (η n).f i = (ModuleCat.extendRestrictScalarsAdj (q n)).unit.app (P.X i)) ∧ (∀ n, (adjq n).unit.app (Q.obj P) ≫ (ModuleCat.restrictScalars (q n)).mapDerivedCategory.map (γ n).hom ≫ (ModuleCat.restrictScalars (q n)).mapDerivedCategoryFactors.hom.app (((ModuleCat.extendScalars (q n)).mapHomologicalComplex (.up ℤ)).obj P) = Q.map (η n)) ∧ (∀ n, (γ n).hom ≫ Q.map (θ n).hom ≫ (βₙ n).hom = (M n).map β.hom ≫ ((adjq n).homEquiv E (Eₙ n)).symm (pE ≫ Pi.π _ n))",
+    "branch": "newtargets-dag",
+    "by": "NV",
+    "date": "2026-10-15",
+    "existing": false,
+    "note": "Derived scalar extension is presented as a left adjoint to Mathlib exact derived restriction of scalars. hχ normalizes composition of restrictions on complexes. The conclusion includes compatible finite-free chain models, the degreewise compatible-tuple universal property of their limit, and normalized ordinary-to-derived scalar-extension isomorphisms γ identifying the actual projection-induced comparisons."
   }
- },
- "reviewed_lean": {
-  "date": "2026-10-15",
-  "by": "L",
-  "reviewer": "NT-stage2-Codex-682d7e431",
-  "group": "NV",
-  "result": "pass",
-  "note": "Wrote review.md. Checked the immutable statement, dependencies, source, comparison maps, universes, edge cases, report, and pilot gates. Signature matches verbatim. Server-only compile reproduced successfully in 2.6 seconds without errors or warnings. No delivery errors found; branch head unchanged."
- },
- "lean": {
-  "module": "Sheaf.RingTheory.PseudoCoherentInverseRingReconstruction",
-  "declaration": "DerivedCategory.isPseudoCoherent_inverse_ring_reconstruction",
-  "file": "lean/Sheaf/RingTheory/PseudoCoherentInverseRingReconstruction.lean",
-  "statement": "theorem isPseudoCoherent_inverse_ring_reconstruction (R : ℕ → Type u) [∀ n, CommRing (R n)] (φ : ∀ n, R (n + 1) →+* R n) (hsurj : ∀ n, Function.Surjective (φ n)) (hnil : ∀ n, IsNilpotent (RingHom.ker (φ n))) (A : Type u) [CommRing A] (q : ∀ n, A →+* R n) (hq : ∀ n, q n = (φ n).comp (q (n + 1))) (hlim : ∀ x : ∀ n, R n, (∀ n, φ n (x (n + 1)) = x n) → ∃! a : A, ∀ n, q n a = x n) [HasDerivedCategory.{w} (ModuleCat.{max u v} A)] [∀ n, HasDerivedCategory.{w} (ModuleCat.{max u v} (R n))] (L : ∀ n, DerivedCategory (ModuleCat.{max u v} (R (n + 1))) ⥤ DerivedCategory (ModuleCat.{max u v} (R n))) (adjφ : ∀ n, L n ⊣ (ModuleCat.restrictScalars (φ n)).mapDerivedCategory) (M : ∀ n, DerivedCategory (ModuleCat.{max u v} A) ⥤ DerivedCategory (ModuleCat.{max u v} (R n))) (adjq : ∀ n, M n ⊣ (ModuleCat.restrictScalars (q n)).mapDerivedCategory) (χ : ∀ n, (ModuleCat.restrictScalars (q n)).mapDerivedCategory ≅ (ModuleCat.restrictScalars (φ n)).mapDerivedCategory ⋙ (ModuleCat.restrictScalars (q (n + 1))).mapDerivedCategory) (hχ : ∀ n (C : CochainComplex (ModuleCat.{max u v} (R n)) ℤ), (χ n).hom.app (Q.obj C) ≫ (ModuleCat.restrictScalars (q (n + 1))).mapDerivedCategory.map ((ModuleCat.restrictScalars (φ n)).mapDerivedCategoryFactors.hom.app C) ≫ (ModuleCat.restrictScalars (q (n + 1))).mapDerivedCategoryFactors.hom.app (((ModuleCat.restrictScalars (φ n)).mapHomologicalComplex (.up ℤ)).obj C) = (ModuleCat.restrictScalars (q n)).mapDerivedCategoryFactors.hom.app C ≫ Q.map ((NatIso.mapHomologicalComplex (ModuleCat.restrictScalarsComp' (q (n + 1)) (φ n) (q n) (hq n)) (.up ℤ)).hom.app C)) (Eₙ : ∀ n, DerivedCategory (ModuleCat.{max u v} (R n))) (t : ∀ n, Eₙ (n + 1) ⟶ (ModuleCat.restrictScalars (φ n)).mapDerivedCategory.obj (Eₙ n)) (hred : ∀ n, IsIso (((adjφ n).homEquiv (Eₙ (n + 1)) (Eₙ n)).symm (t n))) (hpc : IsPseudoCoherent (Eₙ 0)) [HasProduct (fun n ↦ (ModuleCat.restrictScalars (q n)).mapDerivedCategory.obj (Eₙ n))] (E : DerivedCategory (ModuleCat.{max u v} A)) (pE : E ⟶ ∏ᶜ fun n ↦ (ModuleCat.restrictScalars (q n)).mapDerivedCategory.obj (Eₙ n)) (δ : (∏ᶜ fun n ↦ (ModuleCat.restrictScalars (q n)).mapDerivedCategory.obj (Eₙ n)) ⟶ E⟦(1 : ℤ)⟧) (hE : IsDerivedLimitTriangle (fun n ↦ (ModuleCat.restrictScalars (q (n + 1))).mapDerivedCategory.map (t n) ≫ (χ n).inv.app (Eₙ n)) E pE δ) : IsPseudoCoherent E ∧ (∀ n, IsIso (((adjq n).homEquiv E (Eₙ n)).symm (pE ≫ Pi.π _ n))) ∧ ∃ (Pₙ : ∀ n, CochainComplex (ModuleCat.{max u v} (R n)) ℤ) (b : ℤ) (βₙ : ∀ n, Q.obj (Pₙ n) ≅ Eₙ n) (uₙ : ∀ n, Pₙ (n + 1) ⟶ ((ModuleCat.restrictScalars (φ n)).mapHomologicalComplex (.up ℤ)).obj (Pₙ n)) (θₙ : ∀ n, ((ModuleCat.extendScalars (φ n)).mapHomologicalComplex (.up ℤ)).obj (Pₙ (n + 1)) ≅ Pₙ n) (P : CochainComplex (ModuleCat.{max u v} A) ℤ) (β : Q.obj P ≅ E) (p : ∀ n, P ⟶ ((ModuleCat.restrictScalars (q n)).mapHomologicalComplex (.up ℤ)).obj (Pₙ n)) (θ : ∀ n, ((ModuleCat.extendScalars (q n)).mapHomologicalComplex (.up ℤ)).obj P ≅ Pₙ n) (η : ∀ n, P ⟶ ((ModuleCat.restrictScalars (q n)).mapHomologicalComplex (.up ℤ)).obj (((ModuleCat.extendScalars (q n)).mapHomologicalComplex (.up ℤ)).obj P)) (γ : ∀ n, (M n).obj (Q.obj P) ≅ Q.obj (((ModuleCat.extendScalars (q n)).mapHomologicalComplex (.up ℤ)).obj P)), (∀ n, (Pₙ n).IsStrictlyLE b) ∧ (∀ n i, Module.Free (R n) ((Pₙ n).X i) ∧ Module.Finite (R n) ((Pₙ n).X i)) ∧ (∀ n i, Function.Surjective ((uₙ n).f i)) ∧ (∀ n i, ((ModuleCat.extendRestrictScalarsAdj (φ n)).homEquiv ((Pₙ (n + 1)).X i) ((Pₙ n).X i) ((θₙ n).hom.f i)) = (uₙ n).f i) ∧ (∀ n, Q.map (uₙ n) = (βₙ (n + 1)).hom ≫ t n ≫ (ModuleCat.restrictScalars (φ n)).mapDerivedCategory.map (βₙ n).inv ≫ (ModuleCat.restrictScalars (φ n)).mapDerivedCategoryFactors.hom.app (Pₙ n)) ∧ P.IsStrictlyLE b ∧ (∀ i, Module.Free A (P.X i) ∧ Module.Finite A (P.X i)) ∧ (∀ n i (y : P.X i), (uₙ n).f i ((p (n + 1)).f i y) = (p n).f i y) ∧ (∀ i (x : ∀ n, (Pₙ n).X i), (∀ n, (uₙ n).f i (x (n + 1)) = x n) → ∃! y : P.X i, ∀ n, (p n).f i y = x n) ∧ (∀ n, Q.map (p n) ≫ (ModuleCat.restrictScalars (q n)).mapDerivedCategoryFactors.inv.app (Pₙ n) ≫ (ModuleCat.restrictScalars (q n)).mapDerivedCategory.map (βₙ n).hom = β.hom ≫ pE ≫ Pi.π _ n) ∧ (∀ n i, ((ModuleCat.extendRestrictScalarsAdj (q n)).homEquiv (P.X i) ((Pₙ n).X i) ((θ n).hom.f i)) = (p n).f i) ∧ (∀ n i, (η n).f i = (ModuleCat.extendRestrictScalarsAdj (q n)).unit.app (P.X i)) ∧ (∀ n, (adjq n).unit.app (Q.obj P) ≫ (ModuleCat.restrictScalars (q n)).mapDerivedCategory.map (γ n).hom ≫ (ModuleCat.restrictScalars (q n)).mapDerivedCategoryFactors.hom.app (((ModuleCat.extendScalars (q n)).mapHomologicalComplex (.up ℤ)).obj P) = Q.map (η n)) ∧ (∀ n, (γ n).hom ≫ Q.map (θ n).hom ≫ (βₙ n).hom = (M n).map β.hom ≫ ((adjq n).homEquiv E (Eₙ n)).symm (pE ≫ Pi.π _ n))",
-  "branch": "newtargets-dag",
-  "by": "NV",
-  "date": "2026-10-15",
-  "existing": false,
-  "note": "Derived scalar extension is presented as a left adjoint to Mathlib exact derived restriction of scalars. hχ normalizes composition of restrictions on complexes. The conclusion includes compatible finite-free chain models, the degreewise compatible-tuple universal property of their limit, and normalized ordinary-to-derived scalar-extension isomorphisms γ identifying the actual projection-induced comparisons."
- },
- "reviewed_proof": {
-  "date": "2026-10-18",
-  "by": "L",
-  "reviewer": "COMPILER",
-  "group": "B4",
-  "result": "pass",
-  "landing": "20261018T071136-L-1664003",
-  "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
- }
 }

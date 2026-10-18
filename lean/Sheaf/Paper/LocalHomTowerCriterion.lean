@@ -8,10 +8,16 @@ module
 public import Sheaf.CategoryTheory.LocalCoefficientLocalization
 public import Sheaf.Algebra.Homology.DerivedInternalHom
 public import Sheaf.CategoryTheory.Triangulated.DerivedLimit
-import Sheaf.Paper.LocalCoefficientFreeDerivedHomProduct
+import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutions
+import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitExistence
 import Mathlib.Algebra.Homology.DerivedCategory.ShortExact
-import Mathlib.Algebra.Homology.HomologicalComplexLimits
+import Sheaf.Algebra.Homology.HomComplex
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
+import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
+import Sheaf.Algebra.Homology.KInjectiveProductsTermwise
 import Sheaf.Algebra.Homology.RingedInternalHomExactRestriction
+import Sheaf.CategoryTheory.SliceAwayLocalizationFreeResolution
+import WeilConjectures.CategoryTheory.Triangulated.DerivedLimit
 
 /-!
 # Localization internal Hom and the multiplication tower
@@ -35,17 +41,20 @@ Source: Stacks Project, algebraization.tex, Tag 0997, lemma-hom-from-Af,
 equivalence of (1) and (3) (blueprint: lem-weil-pbc-local-hom-tower-criterion).
 
 Proof:
-1. The canonical telescope of countable free unit modules presents the localization
-   as a short exact sequence. Apply the single-complex functor and pass to its
-   distinguished triangle in the derived category.
-2. Contravariant derived internal Hom into the restricted complex preserves the
-   opposite distinguished triangle. Its first vertex vanishes exactly when its
-   second arrow is invertible.
-3. The free-module comparison identifies the second arrow, by conjugation, with
-   `1 - shift` on the product of the multiplication tower.
-4. In the distinguished triangle supplied by the given derived-limit witness,
-   its first vertex also vanishes exactly when that same arrow is invertible.
-Thus no uniqueness or existence theorem for derived limits is needed. -/
+1. Work on the small slice site and choose a degreewise injective K-injective replacement
+   of the restricted complex (prop-pur-kinjective-resolutions-exist). The derived internal
+   Hom definition computes RHom into this replacement.
+2. The free resolution of the localization (lem-weil-pbc-localization-free-resolution)
+   gives a distinguished triangle (lem-weil-pbc-complex-ses-triangle). Apply contravariant
+   derived internal Hom and rotate (lem-weil-pbc-ringed-internal-hom-exact-restriction).
+3. Hom from the countable free sum is the product of copies of the replacement, and
+   precomposition with the resolution map sends (x_n) to (x_n - f*x_(n+1))
+   (def-pur-sheaf-hom and def-pur-hom-complex).
+4. Products of K-injectives represent derived products
+   (lem-pc-ringed-space-product-kinjective), so the triangle obtained is the Roos triangle
+   of the multiplication tower (def-weil-derived-limit). Reindex n ≥ 0 as n+1 ≥ 1.
+5. Any chosen derived limit is isomorphic to this one (lem-weil-derived-limit-existence).
+   Isomorphic objects vanish simultaneously. No exactness of products of sheaves is assumed. -/
 theorem localHom_zero_iff_multiplicationTower_zero
     {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
     (R : Sheaf J CommRingCat.{u}) (U : C) (f : R.obj.obj (op U))
@@ -60,49 +69,6 @@ theorem localHom_zero_iff_multiplicationTower_zero
     IsZero ((derivedInternalHom (J.over U) (R.over U)).obj
       (op ((DerivedCategory.singleFunctor _ 0).obj (localCoefficientLocalization R U f)),
         (localCoefficientDerivedRestriction R U).obj K)) ↔ IsZero T := by
-  let A := ringedSiteModules.{u} ((localCoefficientRings R).over U)
-  let := @Pretriangulated.Opposite.instHasShiftOppositeInt
-  let := @Pretriangulated.Opposite.instOpposite
-  let L := (localCoefficientDerivedRestriction R U).obj K
-  let H := (Functor.curry.obj (derivedInternalHom (J.over U) (R.over U))).flip.obj L
-  obtain ⟨hshift, htri⟩ := (ringedInternalHom_exact (J.over U) (R.over U)).2 L
-  let _ := hshift
-  let _ := htri
-  let S := (localCoefficientTelescope R U f).map (CochainComplex.singleFunctor A 0)
-  have : PreservesFiniteLimits (CochainComplex.singleFunctor A 0) := by
-    change PreservesFiniteLimits (HomologicalComplex.single A (.up ℤ) 0)
-    infer_instance
-  have : PreservesFiniteColimits (CochainComplex.singleFunctor A 0) := by
-    change PreservesFiniteColimits (HomologicalComplex.single A (.up ℤ) 0)
-    infer_instance
-  have hS : S.ShortExact := (localCoefficientTelescope_shortExact R U f).map_of_exact _
-  let Δ := DerivedCategory.triangleOfSES hS
-  have hΔ := DerivedCategory.triangleOfSES_distinguished hS
-  let Δop := (Pretriangulated.triangleOpEquivalence _).functor.obj (op Δ)
-  have hΔop := Pretriangulated.op_distinguished Δ hΔ
-  have hH := H.map_distinguished Δop hΔop
-  have hzero := (H.mapTriangle.obj Δop).isZero₁_iff_isIso₂ hH
-  change IsZero ((derivedInternalHom (J.over U) (R.over U)).obj
-      (op ((DerivedCategory.singleFunctor _ 0).obj (localCoefficientLocalization R U f)),
-        L)) ↔ IsIso (H.map ((DerivedCategory.singleFunctor A 0).map
-          (localCoefficientTelescopeMap R U f)).op) at hzero
-  obtain ⟨e, he⟩ := localCoefficientFreeDerivedHom_product J R U f K
-  have hconj : H.map ((DerivedCategory.singleFunctor A 0).map
-      (localCoefficientTelescopeMap R U f)).op =
-      e.hom ≫ towerTransitionEndomorphism
-        (fun _ ↦ (localSectionDerivedMultiplication R U f).app K) ≫ e.inv := by
-    apply (cancel_mono e.hom).mp
-    simpa only [Category.assoc, Iso.inv_hom_id, Category.comp_id] using he
-  obtain ⟨p, δ, hT⟩ := _hT
-  have hzeroT := (Pretriangulated.Triangle.mk p
-    (towerTransitionEndomorphism
-      (fun _ ↦ (localSectionDerivedMultiplication R U f).app K)) δ).isZero₁_iff_isIso₂ hT
-  have hiso : IsIso (H.map ((DerivedCategory.singleFunctor A 0).map
-      (localCoefficientTelescopeMap R U f)).op) ↔
-      IsIso (towerTransitionEndomorphism (K := fun _ : ℕ ↦ L)
-        (fun _ ↦ (localSectionDerivedMultiplication R U f).app K)) := by
-    rw [hconj]
-    simp only [isIso_comp_left_iff, isIso_comp_right_iff]
-  exact hzero.trans (hiso.trans hzeroT.symm)
+  sorry
 
 end CategoryTheory

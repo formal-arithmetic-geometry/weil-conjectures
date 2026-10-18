@@ -311,17 +311,4 @@ noncomputable def homComplex
       ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) ℤ :=
   (homComplexFunctor.obj (op L)).obj M
 
-/-- The projections selected together with the Hom complex form a limiting fan.
-Source: Stacks Project, sites-cohomology.tex, Section 0A8X
-(section-hom-complexes) (blueprint: def-pur-hom-complex).
-This exposes the product property at the generic site, so specializations need not
-recheck the dependent existential witness of `homComplex_exists`. -/
-theorem homComplex_isLimit
-    (L M : CochainComplex (SheafOfModules.{w}
-      ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) ℤ) (n : ℤ) :
-    Nonempty (IsLimit (Fan.mk ((homComplex (R := R) L M).X n)
-      (fun p : ℤ ↦ (homComplex_exists (R := R)).choose_spec.choose
-        L M n p (p + n) rfl))) :=
-  (homComplex_exists (R := R)).choose_spec.choose_spec.1 L M n
-
 end CategoryTheory

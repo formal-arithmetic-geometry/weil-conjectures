@@ -9,10 +9,6 @@ public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunc
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability.OpenImmersion
 public import WeilConjectures.SixFunctors.OpenClosed.Conservative
 
-import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekComposition
-import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMapProjection
-import Sheaf.AlgebraicGeometry.EtaleCompactSupportComparisonGeneral
-
 /-!
 # Étale localization of the derived categories of étale sheaves
 
@@ -25,7 +21,7 @@ Two facts about a surjective or arbitrary étale morphism `u : U ⟶ X` and the 
   jointly surjective family of étale maps reflect isomorphisms of sheaves;
 * the exceptional inverse image localizes along étale maps,
   `Lu^* Rf^! ≅ R(u ≫ f)^!` (blueprint `lem-amb-etale-adjoint-locality`, a node of the blueprint
-  subsection `sk-prop-sf-cbc`, in its general form below).
+  subsection `sk-prop-sf-cbc`, recorded here without proof).
 
 ## Main statements
 
@@ -86,42 +82,18 @@ For a separated étale morphism `u : U ⟶ X` of finite type, and `f : X ⟶ Y` 
 `Lu^* Rf^! K ≅ R(u ≫ f)^! K`,
 
 naturally in `K`. The blueprint also records that the extension by zero `u_!` along `u` is
-exact and left adjoint to `u^*`; the sum extension `etaleLowerShriek` realizes this
-adjunction. Identify compact support
-along `u` with its exact sum extension, compose compact supports, and use uniqueness of
-right adjoints. A compactification of `u` is obtained by its graph in the proper base
-change of a compactification of `h`; neither `f` nor `h` needs to be quasi-compact.
+exact and left adjoint to `u^*`; the extension by zero along an étale map that is not an open
+immersion is not available in the library. The canonical isomorphism is the mate of the
+composition `R(u ≫ f)_! ≅ Rf_! ⋙ Ru_!` with `Ru_! ⊣ Lu^*`; only its existence is recorded.
 
-The comparison on unbounded complexes uses acyclicity of open extension for the proper
-projection, followed by its pointwise finite cohomological dimension. The sheaf comparison
-is the canonical clopen-graph extension map.
-
-This is the general source-library form of a node of the blueprint subsection
-`sk-prop-sf-cbc`. (blueprint: lem-f7-etale-adjoint-locality-general). -/
+This is a node of the blueprint subsection `sk-prop-sf-cbc`. -/
 theorem nonempty_iso_rightDerivedUpperShriek_comp_leftDerivedUpperStar_of_etale
     {U X Y : Scheme.{u}} (u : U ⟶ X) [Etale u] [IsSeparated u] [QuasiCompact u]
     (f : X ⟶ Y) (h : U ⟶ Y) (w : u ≫ f = h) [HasCompactification f]
     [HasCompactification h] :
     Nonempty (R(f)^![ModuleCat.{u + 1} Λ] ⋙ L((u)^*[ModuleCat.{u + 1} Λ]) ≅
-      R(h)^![ModuleCat.{u + 1} Λ]) := by
-  subst h
-  let c := HasCompactification.compactification (u ≫ f)
-  let p := pullback.snd c.g f
-  let g : U ⟶ pullback c.g f := pullback.lift c.i u c.comm.symm
-  have hg : g ≫ pullback.fst c.g f = c.i := pullback.lift_fst _ _ _
-  have : IsImmersion g := by
-    have : IsImmersion (g ≫ pullback.fst c.g f) := by rw [hg]; infer_instance
-    exact .of_comp g (pullback.fst c.g f)
-  have : HasCompactification u :=
-    HasCompactification.of_isImmersion g p (pullback.lift_snd _ _ _)
-  obtain ⟨e⟩ := nonempty_iso_etale_compactSupport_general Λ u
-    (HasCompactification.compactification u)
-  let adj := (derivedEtaleLowerShriekUpperStarAdjunction
-      (ModuleCat.{u + 1} Λ) u inferInstance).ofNatIsoLeft e.symm
-  obtain ⟨comp⟩ := nonempty_iso_rightDerivedLowerShriek_comp Λ u f
-  exact ⟨Functor.isoWhiskerLeft _ (leftDerivedUpperStarIsoMapDerivedCategory _ u) ≪≫
-    ((adj.comp (rightDerivedUpperShriekAdjunction _ f)).ofNatIsoLeft comp.symm).rightAdjointUniq
-      (rightDerivedUpperShriekAdjunction _ (u ≫ f))⟩
+      R(h)^![ModuleCat.{u + 1} Λ]) :=
+  sorry
 
 end Etale
 

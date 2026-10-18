@@ -12,12 +12,6 @@ public import Sheaf.AlgebraicGeometry.BoundedConstructibleComplexes
 public import Mathlib.AlgebraicGeometry.Properties
 public import Mathlib.Data.ZMod.Basic
 public import Mathlib.Algebra.Ring.ULift
-import Sheaf.AlgebraicGeometry.SmoothLisseRelativeDualBounded
-import Sheaf.AlgebraicGeometry.SmoothLisseCompactDualExchange
-import Sheaf.AlgebraicGeometry.SmoothGenericDirectImageCohomology
-import WeilConjectures.ConstructibleSheaf.GenericConstancy
-import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
-import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Closed.Basic
 import Mathlib.AlgebraicGeometry.Noetherian
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
 import WeilConjectures.Compactification.NagataCompactification
@@ -47,71 +41,6 @@ open CategoryTheory Limits
 open scoped CategoryTheory.Functor
 
 namespace AlgebraicGeometry.Etale
-
-private theorem exists_dense_open_lisse_restriction
-    (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
-    (S : Scheme.{u}) (C : DerivedCategoryModule Λ S)
-    (hC : DerivedCategory.isBoundedConstructible Λ S C) :
-    ∃ U : S.Opens, Dense (U : Set S) ∧
-      (∃ a b : ℤ, a ≤ b ∧ ∀ i : ℤ, (i < a ∨ b < i) →
-        IsZero ((_root_.DerivedCategory.homologyFunctor _ i).obj
-          ((L((U.ι)^*[ModuleCat.{u + 1} Λ])).obj C))) ∧
-      ∀ i : ℤ, Scheme.IsFiniteLocallyConstantSheaf
-        ((_root_.DerivedCategory.homologyFunctor _ i).obj
-          ((L((U.ι)^*[ModuleCat.{u + 1} Λ])).obj C)) := by
-  classical
-  obtain ⟨hc, a, b, hab, hz⟩ := hC
-  have key : ∀ s : Finset ℤ, ∃ U : S.Opens, Dense (U : Set S) ∧ ∀ i ∈ s,
-      Scheme.IsFiniteLocallyConstantSheaf
-        (((U.ι)^*[ModuleCat.{u + 1} Λ]).obj
-          ((_root_.DerivedCategory.homologyFunctor _ i).obj C)) := by
-    intro s
-    induction s using Finset.induction_on with
-    | empty => exact ⟨⊤, by simp, by simp⟩
-    | insert i s _ ih =>
-      obtain ⟨V, hV, hs⟩ := ih
-      have := (Scheme.isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf _).mp (hc i)
-      obtain ⟨W, hW, hi⟩ := Scheme.IsConstructibleSheaf.exists_dense_open
-        ((_root_.DerivedCategory.homologyFunctor _ i).obj C)
-      refine ⟨V ⊓ W, hV.inter_of_isOpen_left hW V.isOpen, fun j hj ↦ ?_⟩
-      rcases Finset.mem_insert.mp hj with rfl | hj
-      · exact Scheme.IsFiniteLocallyConstantSheaf.upperStar_of_range_subset
-          (V ⊓ W).ι W.ι (by simp) _
-      · have := hs j hj
-        exact Scheme.IsFiniteLocallyConstantSheaf.upperStar_of_range_subset
-          (V ⊓ W).ι V.ι (by simp) _
-  obtain ⟨U, hU, hl⟩ := key (Finset.Icc a b)
-  have hzU (i : ℤ) (hi : i < a ∨ b < i) :
-      IsZero ((_root_.DerivedCategory.homologyFunctor _ i).obj
-        ((L((U.ι)^*[ModuleCat.{u + 1} Λ])).obj C)) :=
-    (((U.ι)^*[ModuleCat.{u + 1} Λ]).map_isZero (hz i hi)).of_iso
-      ((leftDerivedUpperStarHomologyFunctorIso _ U.ι i).app C).symm
-  refine ⟨U, hU, ⟨a, b, hab, hzU⟩, fun i ↦ ?_⟩
-  by_cases hi : a ≤ i ∧ i ≤ b
-  · have := hl i (Finset.mem_Icc.mpr hi)
-    exact Scheme.IsFiniteLocallyConstantSheaf.of_iso
-      (F := ((U.ι)^*[ModuleCat.{u + 1} Λ]).obj
-        ((_root_.DerivedCategory.homologyFunctor _ i).obj C))
-      ((leftDerivedUpperStarHomologyFunctorIso _ U.ι i).app C)
-  · exact Scheme.IsFiniteLocallyConstantSheaf.of_isZero (hzU i (by omega))
-
-private theorem bounded_finite_lisse_dual
-    (ℓ : ℕ) [Fact ℓ.Prime] (T : Scheme.{u})
-    (hℓ : IsUnit (ℓ : Γ(T, ⊤)))
-    (C : DerivedCategoryModule (ULift.{u + 1} (ZMod ℓ)) T)
-    (hb : ∃ a b : ℤ, a ≤ b ∧ ∀ i : ℤ, (i < a ∨ b < i) →
-      IsZero ((_root_.DerivedCategory.homologyFunctor _ i).obj C))
-    (hl : ∀ i : ℤ, Scheme.IsFiniteLocallyConstantSheaf
-      ((_root_.DerivedCategory.homologyFunctor _ i).obj C)) :
-    ∃ a b : ℤ, a ≤ b ∧ ∀ i : ℤ, (i < a ∨ b < i) →
-      IsZero ((_root_.DerivedCategory.homologyFunctor _ i).obj
-        (((derivedHom (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ))) T).obj
-          (Opposite.op C)).obj (constantComplex (ULift.{u + 1} (ZMod ℓ)) T))) := by
-  obtain ⟨_, hcoh, _⟩ := finiteLisseFieldDual ℓ T hℓ C hb hl
-  obtain ⟨a, b, hab, hz⟩ := hb
-  refine ⟨-b, -a, by omega, fun i hi ↦ ?_⟩
-  obtain ⟨e⟩ := hcoh i
-  exact (MonoidalCategory.isZero_ihom_obj_of_isZero (hz (-i) (by omega)) _).of_iso e
 
 /-- A finite locally constant prime-field sheaf on a separated smooth finite-type source
 has bounded finite locally constant ordinary derived direct image on a nonempty base open,
@@ -177,11 +106,7 @@ theorem exists_nonempty_open_smooth_directImage_lisse_baseChange
           IsIso ((derivedBaseChangeMap
             (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ))) sq.toCommSq).app
               ((L((p)^*[ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ))])).obj
-                ((_root_.DerivedCategory.singleFunctor _ 0).obj L)))  := by
-  obtain ⟨U, hU, hcoh⟩ := smooth_generic_directImage_cohomology k S aS ℓ hℓ X f L hL
-  refine ⟨U, hU, fun XU p fU sqU ↦ ?_⟩
-  obtain ⟨hb, hl⟩ := hcoh XU p fU sqU
-  refine ⟨hb, hl, ?_⟩
-  exact isIso_smooth_lisse_ordinary_exchange ℓ S aS hℓ X f L hL U XU p fU sqU
+                ((_root_.DerivedCategory.singleFunctor _ 0).obj L))) := by
+  sorry
 
 end AlgebraicGeometry.Etale

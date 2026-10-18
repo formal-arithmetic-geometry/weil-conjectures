@@ -1,27 +1,109 @@
 {
- "id": "lem-weil-pbc-proper-open-comparison-composition",
- "blueprint": {
-  "is": "lem-weil-pbc-proper-open-comparison-composition",
-  "from": null,
-  "same_as": []
- },
- "kind": "statement",
- "title": "Composition of proper-open comparison maps",
- "statement": "Let $u:T_1\\to T_2$ and $v:T_2\\to T_3$ be proper maps with\nopen immersions $j_i:X\\hookrightarrow T_i$ satisfying\n$u j_1=j_2$ and $v j_2=j_3$. For $K\\in D^+(X_{\\Et},\\Lambda)$\nwith finite $\\Lambda$, the maps of\nthe comparison-map\nconstruction satisfy\n\n$$\n\\alpha_{vu,K}\n= (Rv_*\\alpha_{u,K})\\circ\\alpha_{v,K},\n$$\n\nunder the canonical identification $R(vu)_*=Rv_*Ru_*$.\nFor the identity map the comparison is the identity.",
- "source": {
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/lem-weil-pbc-proper-open-comparison-composition.md",
-  "place": "node lem-weil-pbc-proper-open-comparison-composition, order 1483"
- },
- "stmt_deps": [
-  "def-weil-pbc-proper-open-comparison",
-  "def-weil-pbc-derived-categories",
-  "def-weil-pbc-direct-image",
-  "def-weil-pbc-extension-by-zero"
- ],
- "proof": [
-  {
-   "text": "We use the finite constant coefficient ring and the derived adjunction specified in [def-weil-pbc-proper-open-comparison]; in particular these are etale module categories, not structure-sheaf modules or pro-etale categories. The composite $vu$ is proper by [lem-weil-pbc-proper-composition], and $(vu)j_1=j_3$, so its comparison is defined. First compute a restriction map for arbitrary $L\\in D^+(T_a{}_{\\Et},\\Lambda)$ and a map $w:T_a\\to T_b$ satisfying $wj_a=j_b$. Choose a bounded below injective representative $I$ of $L$ using [lem-weil-pbc-dplus-injective-representative]. By [def-weil-pbc-direct-image], $Rw_*L$ is represented by $w_*I$, including its action on maps. Open immersions are etale by [lem-weil-pbc-open-immersion-etale]. Thus [lem-weil-pbc-etale-inverse-image-restriction] identifies open inverse image with restriction; the same identification is linear on constant-coefficient modules because [prop-weil-pbc-inverse-image-modules-exact] gives their underlying inverse image and action. Exactness in that proposition makes derived restriction termwise. For each etale $W\\to X$ define a chain map by restriction of $I$ along\n$$\\delta_w(W):W\\longrightarrow W\\times_{T_b}T_a,\\qquad z\\longmapsto(z,j_a(z)).$$\nHere $j_a(z)$ denotes the composite $W\\to X\\xrightarrow{j_a}T_a$. Both schemes are objects of $T_a{}_{\\Et}$, and $\\delta_w(W)$ is a morphism there. In degree $r$ this map is\n$$I^r(W\\times_{T_b}T_a)\\longrightarrow I^r(W).$$\nThe scalar action is compatible with this restriction: a section of the constant ring on $W$ pulls back along $W\\times_{T_b}T_a\\to W$, then along $\\delta_w(W)$, to itself, since their composite is $\\operatorname{id}_W$. Thus the displayed maps are $\\Lambda$-linear. It gives $t_{w,L}:j_b^{-1}Rw_*L\\to j_a^{-1}L$. Restrictions commute with the differentials, with maps of sheaves and with chain homotopies. By [lem-weil-pbc-kinjective-hom-derived], maps between injective representatives model all derived morphisms and changes of representative are homotopy equivalences. Consequently this construction is independent of the representative and natural in $L$.",
-   "uses": [
+  "id": "lem-weil-pbc-proper-open-comparison-composition",
+  "blueprint": {
+    "is": "lem-weil-pbc-proper-open-comparison-composition",
+    "from": null,
+    "same_as": []
+  },
+  "kind": "statement",
+  "title": "Composition of proper-open comparison maps",
+  "statement": "Let $u:T_1\\to T_2$ and $v:T_2\\to T_3$ be proper maps with\nopen immersions $j_i:X\\hookrightarrow T_i$ satisfying\n$u j_1=j_2$ and $v j_2=j_3$. For $K\\in D^+(X_{\\Et},\\Lambda)$\nwith finite $\\Lambda$, the maps of\nthe comparison-map\nconstruction satisfy\n\n$$\n\\alpha_{vu,K}\n= (Rv_*\\alpha_{u,K})\\circ\\alpha_{v,K},\n$$\n\nunder the canonical identification $R(vu)_*=Rv_*Ru_*$.\nFor the identity map the comparison is the identity.",
+  "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/lem-weil-pbc-proper-open-comparison-composition.md",
+    "place": "node lem-weil-pbc-proper-open-comparison-composition, order 1483"
+  },
+  "stmt_deps": [
+    "def-weil-pbc-proper-open-comparison",
+    "def-weil-pbc-derived-categories",
+    "def-weil-pbc-direct-image",
+    "def-weil-pbc-extension-by-zero"
+  ],
+  "proof": [
+    {
+      "text": "We use the finite constant coefficient ring and the derived adjunction specified in [def-weil-pbc-proper-open-comparison]; in particular these are etale module categories, not structure-sheaf modules or pro-etale categories. The composite $vu$ is proper by [lem-weil-pbc-proper-composition], and $(vu)j_1=j_3$, so its comparison is defined. First compute a restriction map for arbitrary $L\\in D^+(T_a{}_{\\Et},\\Lambda)$ and a map $w:T_a\\to T_b$ satisfying $wj_a=j_b$. Choose a bounded below injective representative $I$ of $L$ using [lem-weil-pbc-dplus-injective-representative]. By [def-weil-pbc-direct-image], $Rw_*L$ is represented by $w_*I$, including its action on maps. Open immersions are etale by [lem-weil-pbc-open-immersion-etale]. Thus [lem-weil-pbc-etale-inverse-image-restriction] identifies open inverse image with restriction; the same identification is linear on constant-coefficient modules because [prop-weil-pbc-inverse-image-modules-exact] gives their underlying inverse image and action. Exactness in that proposition makes derived restriction termwise. For each etale $W\\to X$ define a chain map by restriction of $I$ along\n$$\\delta_w(W):W\\longrightarrow W\\times_{T_b}T_a,\\qquad z\\longmapsto(z,j_a(z)).$$\nHere $j_a(z)$ denotes the composite $W\\to X\\xrightarrow{j_a}T_a$. Both schemes are objects of $T_a{}_{\\Et}$, and $\\delta_w(W)$ is a morphism there. In degree $r$ this map is\n$$I^r(W\\times_{T_b}T_a)\\longrightarrow I^r(W).$$\nThe scalar action is compatible with this restriction: a section of the constant ring on $W$ pulls back along $W\\times_{T_b}T_a\\to W$, then along $\\delta_w(W)$, to itself, since their composite is $\\operatorname{id}_W$. Thus the displayed maps are $\\Lambda$-linear. It gives $t_{w,L}:j_b^{-1}Rw_*L\\to j_a^{-1}L$. Restrictions commute with the differentials, with maps of sheaves and with chain homotopies. By [lem-weil-pbc-kinjective-hom-derived], maps between injective representatives model all derived morphisms and changes of representative are homotopy equivalences. Consequently this construction is independent of the representative and natural in $L$.",
+      "uses": [
+        "def-weil-pbc-proper-open-comparison",
+        "lem-weil-pbc-proper-composition",
+        "lem-weil-pbc-dplus-injective-representative",
+        "def-weil-pbc-direct-image",
+        "lem-weil-pbc-open-immersion-etale",
+        "lem-weil-pbc-etale-inverse-image-restriction",
+        "prop-weil-pbc-inverse-image-modules-exact",
+        "lem-weil-pbc-kinjective-hom-derived"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/sites-cohomology.tex",
+        "place": "Tags 0D6G (lemma-restrict-direct-image-open) and 0730 (lemma-pushforward-injective-flat); explicit section map along the given open"
+      }
+    },
+    {
+      "text": "For $w=u,v,vu$ and $L=j_{a!}K$, use the fibre product $V$, projections $b,p$ and section $s$ of [def-weil-pbc-proper-open-comparison]. The section $s$ is open and closed by [lem-weil-pbc-proper-open-section]. By [lem-weil-pbc-etale-restriction-injectives], $b^{-1}I$ is a bounded below injective representative of $b^{-1}j_{a!}K$. The restriction isomorphism $r$ of [lem-weil-pbc-derived-open-restriction] is represented by the sectionwise identity\n$$ (j_b^{-1}w_*I)(W)=I(W\\times_{T_b}T_a)=(p_*b^{-1}I)(W).$$\nUse the statement of [lem-weil-pbc-proper-open-identification]: restriction of extension by zero along the clopen section identifies $b^{-1}j_{a!}K$ with $s_!K$, and the composite of this identification, derived open restriction, and component restriction is the specified $\\theta$ of [def-weil-pbc-proper-open-comparison]. Thus this is a statement about the named comparison isomorphism, not merely the existence of an isomorphism between its source and $K$.\nThe component-restriction map of [lem-weil-pbc-clopen-section-direct-image] is induced by restriction along the section. On $b^{-1}I$, restriction from the object $W\\times_XV$ to its distinguished component $W$ is precisely $I(\\delta_w(W))$. Indeed the inclusion has projections $W\\to X$ and $W\\xrightarrow{j_a}T_a$, which characterize $\\delta_w(W)$ by the fibre-product universal property. The restriction identification of extension by zero in [lem-weil-pbc-proper-open-identification] identifies the resulting complex $s^{-1}b^{-1}I=j_a^{-1}I$ with $K$. Hence, after this canonical identification of $j_a^{-1}j_{a!}K$ with $K$, the map computed in step 1 is exactly $t_{w,j_{a!}K}=\\theta_{w,K}$. This calculation uses the statement that specifies the restriction composite; it does not extract an unrecorded formula for the separate base-change factor $e$ from the proof of another node. The injective terms need not vanish on the complementary component. Only the derived object is zero there, as follows from its identification with $s_!K$.",
+      "uses": [
+        "def-weil-pbc-proper-open-comparison",
+        "lem-weil-pbc-proper-open-section",
+        "lem-weil-pbc-etale-restriction-injectives",
+        "lem-weil-pbc-derived-open-restriction",
+        "lem-weil-pbc-clopen-section-direct-image",
+        "lem-weil-pbc-proper-open-identification"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/sites-cohomology.tex",
+        "place": "Tags 0D6G and 08FI; blueprint lem-weil-pbc-proper-open-identification, order 1481, statement specifying the restriction composite, and lem-weil-pbc-clopen-section-direct-image, order 1480"
+      }
+    },
+    {
+      "text": "Compute the composition of the $t$ maps using one representative $I$ of $L\\in D^+(T_1{}_{\\Et},\\Lambda)$. By [lem-weil-pbc-direct-image-preserves-injectives], $u_*I$ is itself a bounded below complex of injectives, so it represents $Ru_*L$ and can be used to compute $Rv_*Ru_*L$ by [def-weil-pbc-direct-image]. The fibre-product associator gives $(vu)_*I\\cong v_*u_*I$ and is linear on constant coefficients by [lem-weil-pbc-inverse-image-composition-module-linear]. This is the canonical derived composition identification: derive this underived identification on injectives, using the uniqueness clause of [lem-weil-pbc-right-derived-plus-injective]. For etale $W\\to X$, the two successive restrictions are along\n$$W\\longrightarrow W\\times_{T_2}T_1\\longrightarrow (W\\times_{T_3}T_2)\\times_{T_2}T_1\\cong W\\times_{T_3}T_1.$$\nThe first arrow is $(\\operatorname{id},j_1)$, and the second sends $(z,t_1)$ to $((z,j_2(z)),t_1)$. Under the associator their composite is $\\delta_{vu}(W)$, because $uj_1=j_2$ and $vj_2=j_3$. The contravariant functoriality of each sheaf $I^r$ therefore gives, degree by degree and hence in the derived category,\n$$t_{vu,L}=t_{u,L}\\circ t_{v,Ru_*L}.$$\nThis proves the coherence used below, rather than taking it from the proof of an open-restriction node.",
+      "uses": [
+        "lem-weil-pbc-direct-image-preserves-injectives",
+        "def-weil-pbc-direct-image",
+        "lem-weil-pbc-inverse-image-composition-module-linear",
+        "lem-weil-pbc-right-derived-plus-injective"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/sites-cohomology.tex",
+        "place": "Tag 0D6E (lemma-derived-pushforward-composition); explicit computation of composition on one bounded below injective representative"
+      }
+    },
+    {
+      "text": "Use the derived adjunction in [def-weil-pbc-proper-open-comparison]. Write $\\eta_j:\\operatorname{id}\\to j^{-1}j_!$ for its unit. The open-immersion square with $g=j$, $g_U=\\operatorname{id}_X$, $j'=\\operatorname{id}_X$ is cartesian since $j$ is a monomorphism; [cor-cbc-derived-extension-zero-base-change] gives the canonical identification $j^{-1}j_!K\\cong K$. Under it $\\eta_{j,K}$ is the identity: the transpose formula in [lem-weil-pbc-extension-by-zero-adjunction] sends each local section of $K$ to that same section on every etale object factoring through $X$, and the derived adjunction uses the same unit termwise. Thus the defining adjoint property of $\\alpha$ is exactly\n$$j_b^{-1}\\alpha_{w,K}=\\theta_{w,K}^{-1}.$$\nEquality of maps out of $j_{b!}K$ is detected by these restricted maps, because their transposes are $j_b^{-1}(-)\\circ\\eta_{j_b,K}$ and the adjunction is a bijection.",
+      "uses": [
+        "def-weil-pbc-proper-open-comparison",
+        "cor-cbc-derived-extension-zero-base-change",
+        "lem-weil-pbc-extension-by-zero-adjunction"
+      ],
+      "elementary": true,
+      "source": {
+        "document": "literature/stacks-project/sites-modules.tex",
+        "place": "Tag 03DI (lemma-extension-by-zero), its explicit transpose formula; blueprint comparison definition, adjoint-of-the-inverse clause"
+      }
+    },
+    {
+      "text": "Set $A=j_{1!}K$ and $\\beta=(Rv_*\\alpha_{u,K})\\circ\\alpha_{v,K}$. Naturality of $t_v$, applied to $\\alpha_{u,K}:j_{2!}K\\to Ru_*A$, gives\n$$t_{v,Ru_*A}\\circ j_3^{-1}(Rv_*\\alpha_{u,K})=(j_2^{-1}\\alpha_{u,K})\\circ t_{v,j_{2!}K}.$$\nUsing the composition calculation of step 3, the identification of step 2 and the defining transpose equation of step 4, one obtains\n$$\\begin{aligned}\n\\theta_{vu,K}\\circ j_3^{-1}\\beta\n&=\\theta_{u,K}\\circ t_{v,Ru_*A}\\circ j_3^{-1}(Rv_*\\alpha_{u,K})\\circ j_3^{-1}\\alpha_{v,K}\\\\\n&=\\theta_{u,K}\\circ(j_2^{-1}\\alpha_{u,K})\\circ\\theta_{v,K}\\circ j_3^{-1}\\alpha_{v,K}\\\\\n&=\\operatorname{id}_K.\n\\end{aligned}$$\nThe same equation holds for $\\alpha_{vu,K}$ by its definition [def-weil-pbc-proper-open-comparison]. Since $\\theta_{vu,K}$ is invertible, the two restricted maps agree. Injectivity of the adjunction bijection from step 4 proves $\\beta=\\alpha_{vu,K}$, with the canonical derived composition identification computed in step 3.",
+      "uses": [
+        "def-weil-pbc-proper-open-comparison"
+      ],
+      "elementary": true,
+      "source": {
+        "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/lem-weil-pbc-proper-open-comparison-composition.md",
+        "place": "Proof: compare the two adjoint morphisms on the distinguished component; explicit naturality and cancellation calculation"
+      }
+    },
+    {
+      "text": "For $w=\\operatorname{id}_{T}$ and $j_a=j_b=j$, the map $\\delta_w(W):W\\to W\\times_TT$ is the canonical identity fibre-product identification. Hence the section formula in step 1 makes $t_{w,L}$ the identity after $R(\\operatorname{id}_T)_*\\cong\\operatorname{id}$. By step 2 its value on $j_!K$ is the specified $\\theta_{w,K}=\\operatorname{id}_K$. The definition [def-weil-pbc-proper-open-comparison] now says that $\\alpha_{w,K}$ and $\\operatorname{id}_{j_!K}$ have the same transpose, namely the unit $K\\to j^{-1}j_!K$, identified with $\\operatorname{id}_K$ in step 4. The adjunction bijection gives the identity assertion.",
+      "uses": [
+        "def-weil-pbc-proper-open-comparison"
+      ],
+      "elementary": true,
+      "source": {
+        "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/lem-weil-pbc-proper-open-comparison-composition.md",
+        "place": "Proof, final sentence: identity comparison by uniqueness under the adjunction"
+      }
+    }
+  ],
+  "proof_deps": [
     "def-weil-pbc-proper-open-comparison",
     "lem-weil-pbc-proper-composition",
     "lem-weil-pbc-dplus-injective-representative",
@@ -29,287 +111,188 @@
     "lem-weil-pbc-open-immersion-etale",
     "lem-weil-pbc-etale-inverse-image-restriction",
     "prop-weil-pbc-inverse-image-modules-exact",
-    "lem-weil-pbc-kinjective-hom-derived"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 0D6G (lemma-restrict-direct-image-open) and 0730 (lemma-pushforward-injective-flat); explicit section map along the given open"
-   }
-  },
-  {
-   "text": "For $w=u,v,vu$ and $L=j_{a!}K$, use the fibre product $V$, projections $b,p$ and section $s$ of [def-weil-pbc-proper-open-comparison]. The section $s$ is open and closed by [lem-weil-pbc-proper-open-section]. By [lem-weil-pbc-etale-restriction-injectives], $b^{-1}I$ is a bounded below injective representative of $b^{-1}j_{a!}K$. The restriction isomorphism $r$ of [lem-weil-pbc-derived-open-restriction] is represented by the sectionwise identity\n$$ (j_b^{-1}w_*I)(W)=I(W\\times_{T_b}T_a)=(p_*b^{-1}I)(W).$$\nUse the statement of [lem-weil-pbc-proper-open-identification]: restriction of extension by zero along the clopen section identifies $b^{-1}j_{a!}K$ with $s_!K$, and the composite of this identification, derived open restriction, and component restriction is the specified $\\theta$ of [def-weil-pbc-proper-open-comparison]. Thus this is a statement about the named comparison isomorphism, not merely the existence of an isomorphism between its source and $K$.\nThe component-restriction map of [lem-weil-pbc-clopen-section-direct-image] is induced by restriction along the section. On $b^{-1}I$, restriction from the object $W\\times_XV$ to its distinguished component $W$ is precisely $I(\\delta_w(W))$. Indeed the inclusion has projections $W\\to X$ and $W\\xrightarrow{j_a}T_a$, which characterize $\\delta_w(W)$ by the fibre-product universal property. The restriction identification of extension by zero in [lem-weil-pbc-proper-open-identification] identifies the resulting complex $s^{-1}b^{-1}I=j_a^{-1}I$ with $K$. Hence, after this canonical identification of $j_a^{-1}j_{a!}K$ with $K$, the map computed in step 1 is exactly $t_{w,j_{a!}K}=\\theta_{w,K}$. This calculation uses the statement that specifies the restriction composite; it does not extract an unrecorded formula for the separate base-change factor $e$ from the proof of another node. The injective terms need not vanish on the complementary component. Only the derived object is zero there, as follows from its identification with $s_!K$.",
-   "uses": [
-    "def-weil-pbc-proper-open-comparison",
+    "lem-weil-pbc-kinjective-hom-derived",
     "lem-weil-pbc-proper-open-section",
     "lem-weil-pbc-etale-restriction-injectives",
     "lem-weil-pbc-derived-open-restriction",
     "lem-weil-pbc-clopen-section-direct-image",
-    "lem-weil-pbc-proper-open-identification"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 0D6G and 08FI; blueprint lem-weil-pbc-proper-open-identification, order 1481, statement specifying the restriction composite, and lem-weil-pbc-clopen-section-direct-image, order 1480"
-   }
-  },
-  {
-   "text": "Compute the composition of the $t$ maps using one representative $I$ of $L\\in D^+(T_1{}_{\\Et},\\Lambda)$. By [lem-weil-pbc-direct-image-preserves-injectives], $u_*I$ is itself a bounded below complex of injectives, so it represents $Ru_*L$ and can be used to compute $Rv_*Ru_*L$ by [def-weil-pbc-direct-image]. The fibre-product associator gives $(vu)_*I\\cong v_*u_*I$ and is linear on constant coefficients by [lem-weil-pbc-inverse-image-composition-module-linear]. This is the canonical derived composition identification: derive this underived identification on injectives, using the uniqueness clause of [lem-weil-pbc-right-derived-plus-injective]. For etale $W\\to X$, the two successive restrictions are along\n$$W\\longrightarrow W\\times_{T_2}T_1\\longrightarrow (W\\times_{T_3}T_2)\\times_{T_2}T_1\\cong W\\times_{T_3}T_1.$$\nThe first arrow is $(\\operatorname{id},j_1)$, and the second sends $(z,t_1)$ to $((z,j_2(z)),t_1)$. Under the associator their composite is $\\delta_{vu}(W)$, because $uj_1=j_2$ and $vj_2=j_3$. The contravariant functoriality of each sheaf $I^r$ therefore gives, degree by degree and hence in the derived category,\n$$t_{vu,L}=t_{u,L}\\circ t_{v,Ru_*L}.$$\nThis proves the coherence used below, rather than taking it from the proof of an open-restriction node.",
-   "uses": [
+    "lem-weil-pbc-proper-open-identification",
     "lem-weil-pbc-direct-image-preserves-injectives",
-    "def-weil-pbc-direct-image",
     "lem-weil-pbc-inverse-image-composition-module-linear",
-    "lem-weil-pbc-right-derived-plus-injective"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0D6E (lemma-derived-pushforward-composition); explicit computation of composition on one bounded below injective representative"
-   }
-  },
-  {
-   "text": "Use the derived adjunction in [def-weil-pbc-proper-open-comparison]. Write $\\eta_j:\\operatorname{id}\\to j^{-1}j_!$ for its unit. The open-immersion square with $g=j$, $g_U=\\operatorname{id}_X$, $j'=\\operatorname{id}_X$ is cartesian since $j$ is a monomorphism; [cor-cbc-derived-extension-zero-base-change] gives the canonical identification $j^{-1}j_!K\\cong K$. Under it $\\eta_{j,K}$ is the identity: the transpose formula in [lem-weil-pbc-extension-by-zero-adjunction] sends each local section of $K$ to that same section on every etale object factoring through $X$, and the derived adjunction uses the same unit termwise. Thus the defining adjoint property of $\\alpha$ is exactly\n$$j_b^{-1}\\alpha_{w,K}=\\theta_{w,K}^{-1}.$$\nEquality of maps out of $j_{b!}K$ is detected by these restricted maps, because their transposes are $j_b^{-1}(-)\\circ\\eta_{j_b,K}$ and the adjunction is a bijection.",
-   "uses": [
-    "def-weil-pbc-proper-open-comparison",
+    "lem-weil-pbc-right-derived-plus-injective",
     "cor-cbc-derived-extension-zero-base-change",
     "lem-weil-pbc-extension-by-zero-adjunction"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03DI (lemma-extension-by-zero), its explicit transpose formula; blueprint comparison definition, adjoint-of-the-inverse clause"
-   }
-  },
-  {
-   "text": "Set $A=j_{1!}K$ and $\\beta=(Rv_*\\alpha_{u,K})\\circ\\alpha_{v,K}$. Naturality of $t_v$, applied to $\\alpha_{u,K}:j_{2!}K\\to Ru_*A$, gives\n$$t_{v,Ru_*A}\\circ j_3^{-1}(Rv_*\\alpha_{u,K})=(j_2^{-1}\\alpha_{u,K})\\circ t_{v,j_{2!}K}.$$\nUsing the composition calculation of step 3, the identification of step 2 and the defining transpose equation of step 4, one obtains\n$$\\begin{aligned}\n\\theta_{vu,K}\\circ j_3^{-1}\\beta\n&=\\theta_{u,K}\\circ t_{v,Ru_*A}\\circ j_3^{-1}(Rv_*\\alpha_{u,K})\\circ j_3^{-1}\\alpha_{v,K}\\\\\n&=\\theta_{u,K}\\circ(j_2^{-1}\\alpha_{u,K})\\circ\\theta_{v,K}\\circ j_3^{-1}\\alpha_{v,K}\\\\\n&=\\operatorname{id}_K.\n\\end{aligned}$$\nThe same equation holds for $\\alpha_{vu,K}$ by its definition [def-weil-pbc-proper-open-comparison]. Since $\\theta_{vu,K}$ is invertible, the two restricted maps agree. Injectivity of the adjunction bijection from step 4 proves $\\beta=\\alpha_{vu,K}$, with the canonical derived composition identification computed in step 3.",
-   "uses": [
-    "def-weil-pbc-proper-open-comparison"
-   ],
-   "elementary": true,
-   "source": {
+  ],
+  "proof_origin": {
+    "by": "agent",
     "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/lem-weil-pbc-proper-open-comparison-composition.md",
-    "place": "Proof: compare the two adjoint morphisms on the distinguished component; explicit naturality and cancellation calculation"
-   }
+    "place": "Proof, expanded by injective-representative calculations; Stacks Tags 0D6G, 08FI, 0D6E and 03DI supply the background constructions"
   },
-  {
-   "text": "For $w=\\operatorname{id}_{T}$ and $j_a=j_b=j$, the map $\\delta_w(W):W\\to W\\times_TT$ is the canonical identity fibre-product identification. Hence the section formula in step 1 makes $t_{w,L}$ the identity after $R(\\operatorname{id}_T)_*\\cong\\operatorname{id}$. By step 2 its value on $j_!K$ is the specified $\\theta_{w,K}=\\operatorname{id}_K$. The definition [def-weil-pbc-proper-open-comparison] now says that $\\alpha_{w,K}$ and $\\operatorname{id}_{j_!K}$ have the same transpose, namely the unit $K\\to j^{-1}j_!K$, identified with $\\operatorname{id}_K$ in step 4. The adjunction bijection gives the identity assertion.",
-   "uses": [
-    "def-weil-pbc-proper-open-comparison"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/lem-weil-pbc-proper-open-comparison-composition.md",
-    "place": "Proof, final sentence: identity comparison by uniqueness under the adjunction"
-   }
-  }
- ],
- "proof_deps": [
-  "def-weil-pbc-proper-open-comparison",
-  "lem-weil-pbc-proper-composition",
-  "lem-weil-pbc-dplus-injective-representative",
-  "def-weil-pbc-direct-image",
-  "lem-weil-pbc-open-immersion-etale",
-  "lem-weil-pbc-etale-inverse-image-restriction",
-  "prop-weil-pbc-inverse-image-modules-exact",
-  "lem-weil-pbc-kinjective-hom-derived",
-  "lem-weil-pbc-proper-open-section",
-  "lem-weil-pbc-etale-restriction-injectives",
-  "lem-weil-pbc-derived-open-restriction",
-  "lem-weil-pbc-clopen-section-direct-image",
-  "lem-weil-pbc-proper-open-identification",
-  "lem-weil-pbc-direct-image-preserves-injectives",
-  "lem-weil-pbc-inverse-image-composition-module-linear",
-  "lem-weil-pbc-right-derived-plus-injective",
-  "cor-cbc-derived-extension-zero-base-change",
-  "lem-weil-pbc-extension-by-zero-adjunction"
- ],
- "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/lem-weil-pbc-proper-open-comparison-composition.md",
-  "place": "Proof, expanded by injective-representative calculations; Stacks Tags 0D6G, 08FI, 0D6E and 03DI supply the background constructions"
- },
- "mathlib_searches": [
-  {
-   "tool": "grep",
-   "query": "properOpenComparison|proper.open.comparison|lowerShriek",
-   "results": "none",
-   "date": "2026-10-14",
-   "verdict": "no match: these hits do not state the specified proper-open derived comparison and its two laws"
+  "mathlib_searches": [
+    {
+      "tool": "grep",
+      "query": "properOpenComparison|proper.open.comparison|lowerShriek",
+      "results": "none",
+      "date": "2026-10-14",
+      "verdict": "no match: these hits do not state the specified proper-open derived comparison and its two laws"
+    },
+    {
+      "tool": "leansearch",
+      "query": "proper open immersion comparison extension by zero derived pushforward composition",
+      "results": "service unavailable: Internal Server Error",
+      "date": "2026-10-14",
+      "verdict": "unavailable"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "Proper maps fixing a common open subscheme composition law for the comparison from extension by zero to derived direct image",
+      "results": "AlgebraicGeometry.Scheme.Modules.restrictFunctorComp; AlgebraicGeometry.Scheme.Hom.appLE_map; AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_hom_app_app; AlgebraicGeometry.Scheme.Hom.map_appLE_assoc; AlgebraicGeometry.Scheme.Hom.appLE_comp_appLE_assoc; AlgebraicGeometry.Scheme.Hom.appLE_map_assoc; AlgebraicGeometry.Scheme.Hom.map_appLE; AlgebraicGeometry.Scheme.Hom.map_appLE'_assoc",
+      "date": "2026-10-14",
+      "verdict": "no match: these hits do not state the specified proper-open derived comparison and its two laws"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "For etale sheaves extension by zero to proper pushforward comparison maps satisfy identity and composition",
+      "results": "TopCat.Sheaf.pushforwardForgetIso; SheafOfModules.pushforwardNatIso_hom; CategoryTheory.Functor.sheafPushforwardCocontinuousCompSheafToPresheafIso_hom; SheafOfModules.pushforwardNatIso; TopCat.Sheaf.pushforward_forget; CategoryTheory.Functor.sheafPushforwardContinuousCompSheafToPresheafIso_hom_app_app; CategoryTheory.Functor.sheafPushforwardContinuousCompSheafToPresheafIso; AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app",
+      "date": "2026-10-14",
+      "verdict": "no match: these hits do not state the specified proper-open derived comparison and its two laws"
+    },
+    {
+      "tool": "loogle",
+      "query": "CategoryTheory.Adjunction.homEquiv",
+      "results": "CategoryTheory.Adjunction.homEquiv; CategoryTheory.Adjunction.mk'_homEquiv; CategoryTheory.Adjunction.mkOfHomEquiv_homEquiv; CategoryTheory.Adjunction.corepresentableBy_homEquiv; CategoryTheory.Adjunction.representableBy_homEquiv; CategoryTheory.Adjunction.comp_homEquiv; CategoryTheory.Adjunction.homEquiv_apply; CategoryTheory.Adjunction.homEquiv_unit",
+      "date": "2026-10-14",
+      "verdict": "no match: these hits do not state the specified proper-open derived comparison and its two laws"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "merged_into": null,
+  "import_flags": [],
+  "blueprint_kind": "lemma",
+  "blueprint_order": 1483,
+  "blueprint_uses": [
+    "def-weil-pbc-extension-by-zero",
+    "def-weil-pbc-proper-open-comparison",
+    "lem-weil-pbc-derived-open-restriction",
+    "lem-weil-pbc-proper-open-identification",
+    "lem-weil-pbc-proper-open-section"
+  ],
+  "proof_split_by": "paragraphs",
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    },
+    "slopmaster2": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    }
   },
-  {
-   "tool": "leansearch",
-   "query": "proper open immersion comparison extension by zero derived pushforward composition",
-   "results": "service unavailable: Internal Server Error",
-   "date": "2026-10-14",
-   "verdict": "unavailable"
+  "chapter": "sec-smooth-purity",
+  "unit": "sk-def-sf-operations",
+  "split_report": {
+    "date": "2026-10-14",
+    "item": "lem-weil-pbc-proper-open-comparison-composition",
+    "worker": "stage1",
+    "summary": "Replaced the single imported paragraph by an explicit six-step proof. Constructed natural component restriction maps on bounded below injective representatives, computed their composition on sections, identified them with the specified theta, and checked the two adjoint maps by an explicit naturality equation. Kept the statement verbatim, with finite coefficients interpreted in the existing commutative-ring module convention; no new nodes or attachment.",
+    "blueprint": "Realizes all of the imported Proof: open-restriction and clopen-component identification in steps 1-2, the omitted agreement for composite maps in step 3, adjoint uniqueness in steps 4-5, and the identity sentence in step 6.",
+    "tool_uses": [
+      {
+        "node": "lem-weil-pbc-dplus-injective-representative",
+        "why": "Supplies bounded below injective representatives in arbitrary abelian categories, including constant-coefficient etale modules; this unit does not construct resolutions."
+      },
+      {
+        "node": "def-weil-pbc-direct-image",
+        "why": "Supplies the sectionwise module direct image and its derived computation and morphisms; the six-operations unit uses this framework definition."
+      },
+      {
+        "node": "lem-weil-pbc-open-immersion-etale",
+        "why": "Lets objects etale over the distinguished open be viewed on the ambient small etale site; no node of this unit states this generic scheme fact."
+      },
+      {
+        "node": "lem-weil-pbc-etale-inverse-image-restriction",
+        "why": "Supplies the explicit sectionwise open restriction formula, a generic site tool absent from this unit."
+      },
+      {
+        "node": "prop-weil-pbc-inverse-image-modules-exact",
+        "why": "Keeps the calculation in constant-coefficient module categories and makes inverse image termwise; no node of this unit supplies module exactness."
+      },
+      {
+        "node": "lem-weil-pbc-kinjective-hom-derived",
+        "why": "Supplies representation of derived maps by homotopy classes and independence of injective models; generic localization tool absent from this unit."
+      },
+      {
+        "node": "lem-weil-pbc-etale-restriction-injectives",
+        "why": "Ensures the open-restricted injective representative computes the specified restriction isomorphism; generic constant-coefficient site tool absent from this unit."
+      },
+      {
+        "node": "cor-cbc-derived-extension-zero-base-change",
+        "why": "Identifies the exact base-change map used by the already reviewed comparison definition, and the restriction of extension by zero; no other node of this unit states this transformation."
+      },
+      {
+        "node": "lem-weil-pbc-direct-image-preserves-injectives",
+        "why": "Permits both composites to be computed on the same injective complex, a generic module-sheaf tool absent from this unit."
+      },
+      {
+        "node": "lem-weil-pbc-inverse-image-composition-module-linear",
+        "why": "Supplies the module-linear fibre-product composition isomorphism on direct images; avoids substituting an abelian-only coherence result."
+      },
+      {
+        "node": "lem-weil-pbc-right-derived-plus-injective",
+        "why": "Supplies uniqueness of the derived functor normalized on injectives, to fix the canonical composition identification."
+      },
+      {
+        "node": "lem-weil-pbc-extension-by-zero-adjunction",
+        "why": "Supplies the actual identity-on-sections transpose and unit formula; the comparison definition specifies its derived descent."
+      }
+    ]
   },
-  {
-   "tool": "leanfinder",
-   "query": "Proper maps fixing a common open subscheme composition law for the comparison from extension by zero to derived direct image",
-   "results": "AlgebraicGeometry.Scheme.Modules.restrictFunctorComp; AlgebraicGeometry.Scheme.Hom.appLE_map; AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_hom_app_app; AlgebraicGeometry.Scheme.Hom.map_appLE_assoc; AlgebraicGeometry.Scheme.Hom.appLE_comp_appLE_assoc; AlgebraicGeometry.Scheme.Hom.appLE_map_assoc; AlgebraicGeometry.Scheme.Hom.map_appLE; AlgebraicGeometry.Scheme.Hom.map_appLE'_assoc",
-   "date": "2026-10-14",
-   "verdict": "no match: these hits do not state the specified proper-open derived comparison and its two laws"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "For etale sheaves extension by zero to proper pushforward comparison maps satisfy identity and composition",
-   "results": "TopCat.Sheaf.pushforwardForgetIso; SheafOfModules.pushforwardNatIso_hom; CategoryTheory.Functor.sheafPushforwardCocontinuousCompSheafToPresheafIso_hom; SheafOfModules.pushforwardNatIso; TopCat.Sheaf.pushforward_forget; CategoryTheory.Functor.sheafPushforwardContinuousCompSheafToPresheafIso_hom_app_app; CategoryTheory.Functor.sheafPushforwardContinuousCompSheafToPresheafIso; AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app",
-   "date": "2026-10-14",
-   "verdict": "no match: these hits do not state the specified proper-open derived comparison and its two laws"
-  },
-  {
-   "tool": "loogle",
-   "query": "CategoryTheory.Adjunction.homEquiv",
-   "results": "CategoryTheory.Adjunction.homEquiv; CategoryTheory.Adjunction.mk'_homEquiv; CategoryTheory.Adjunction.mkOfHomEquiv_homEquiv; CategoryTheory.Adjunction.corepresentableBy_homEquiv; CategoryTheory.Adjunction.representableBy_homEquiv; CategoryTheory.Adjunction.comp_homEquiv; CategoryTheory.Adjunction.homEquiv_apply; CategoryTheory.Adjunction.homEquiv_unit",
-   "date": "2026-10-14",
-   "verdict": "no match: these hits do not state the specified proper-open derived comparison and its two laws"
-  }
- ],
- "mathlib_match": null,
- "status": "split",
- "merged_into": null,
- "import_flags": [],
- "blueprint_kind": "lemma",
- "blueprint_order": 1483,
- "blueprint_uses": [
-  "def-weil-pbc-extension-by-zero",
-  "def-weil-pbc-proper-open-comparison",
-  "lem-weil-pbc-derived-open-restriction",
-  "lem-weil-pbc-proper-open-identification",
-  "lem-weil-pbc-proper-open-section"
- ],
- "proof_split_by": "paragraphs",
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  },
-  "slopmaster2": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  }
- },
- "chapter": "sec-smooth-purity",
- "unit": "sk-def-sf-operations",
- "split_report": {
-  "date": "2026-10-14",
-  "item": "lem-weil-pbc-proper-open-comparison-composition",
-  "worker": "stage1",
-  "summary": "Replaced the single imported paragraph by an explicit six-step proof. Constructed natural component restriction maps on bounded below injective representatives, computed their composition on sections, identified them with the specified theta, and checked the two adjoint maps by an explicit naturality equation. Kept the statement verbatim, with finite coefficients interpreted in the existing commutative-ring module convention; no new nodes or attachment.",
-  "blueprint": "Realizes all of the imported Proof: open-restriction and clopen-component identification in steps 1-2, the omitted agreement for composite maps in step 3, adjoint uniqueness in steps 4-5, and the identity sentence in step 6.",
   "tool_uses": [
-   {
-    "node": "lem-weil-pbc-dplus-injective-representative",
-    "why": "Supplies bounded below injective representatives in arbitrary abelian categories, including constant-coefficient etale modules; this unit does not construct resolutions."
-   },
-   {
-    "node": "def-weil-pbc-direct-image",
-    "why": "Supplies the sectionwise module direct image and its derived computation and morphisms; the six-operations unit uses this framework definition."
-   },
-   {
-    "node": "lem-weil-pbc-open-immersion-etale",
-    "why": "Lets objects etale over the distinguished open be viewed on the ambient small etale site; no node of this unit states this generic scheme fact."
-   },
-   {
-    "node": "lem-weil-pbc-etale-inverse-image-restriction",
-    "why": "Supplies the explicit sectionwise open restriction formula, a generic site tool absent from this unit."
-   },
-   {
-    "node": "prop-weil-pbc-inverse-image-modules-exact",
-    "why": "Keeps the calculation in constant-coefficient module categories and makes inverse image termwise; no node of this unit supplies module exactness."
-   },
-   {
-    "node": "lem-weil-pbc-kinjective-hom-derived",
-    "why": "Supplies representation of derived maps by homotopy classes and independence of injective models; generic localization tool absent from this unit."
-   },
-   {
-    "node": "lem-weil-pbc-etale-restriction-injectives",
-    "why": "Ensures the open-restricted injective representative computes the specified restriction isomorphism; generic constant-coefficient site tool absent from this unit."
-   },
-   {
-    "node": "cor-cbc-derived-extension-zero-base-change",
-    "why": "Identifies the exact base-change map used by the already reviewed comparison definition, and the restriction of extension by zero; no other node of this unit states this transformation."
-   },
-   {
-    "node": "lem-weil-pbc-direct-image-preserves-injectives",
-    "why": "Permits both composites to be computed on the same injective complex, a generic module-sheaf tool absent from this unit."
-   },
-   {
-    "node": "lem-weil-pbc-inverse-image-composition-module-linear",
-    "why": "Supplies the module-linear fibre-product composition isomorphism on direct images; avoids substituting an abelian-only coherence result."
-   },
-   {
-    "node": "lem-weil-pbc-right-derived-plus-injective",
-    "why": "Supplies uniqueness of the derived functor normalized on injectives, to fix the canonical composition identification."
-   },
-   {
-    "node": "lem-weil-pbc-extension-by-zero-adjunction",
-    "why": "Supplies the actual identity-on-sections transpose and unit formula; the comparison definition specifies its derived descent."
-   }
-  ]
- },
- "tool_uses": [
-  "lem-weil-pbc-dplus-injective-representative",
-  "def-weil-pbc-direct-image",
-  "lem-weil-pbc-open-immersion-etale",
-  "lem-weil-pbc-etale-inverse-image-restriction",
-  "prop-weil-pbc-inverse-image-modules-exact",
-  "lem-weil-pbc-kinjective-hom-derived",
-  "lem-weil-pbc-etale-restriction-injectives",
-  "cor-cbc-derived-extension-zero-base-change",
-  "lem-weil-pbc-direct-image-preserves-injectives",
-  "lem-weil-pbc-inverse-image-composition-module-linear",
-  "lem-weil-pbc-right-derived-plus-injective",
-  "lem-weil-pbc-extension-by-zero-adjunction"
- ],
- "reviewed": {
-  "date": "2026-10-17",
-  "by": "L",
-  "reviewer": "NT-cc-Q127-1e7b9ad5f",
-  "group": "Q127",
-  "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q127-1e7b9ad5f (reviewer sub-agent of L); spot-checked: I read the whole delivery against the cited statements and sources. The delivery changes only the item's status (unsplit -> split) and adds the report; the six-step proof, its uses and its tool_uses are unchanged, and I re-checked all of them. Statement: identical to master order 1483 and to main-20261015/20261017 order 1842; no hypothesis dropped, nothing weakened. Coefficients are étale sheaves of modules over the finite commutative constant ring Lambda; the pro-étale analogue is a separate node, not a duplicate. Step 1: delta_w(W)=(id, j_a) is well defined because w j_a = j_b and is a morphism of T_a,Et; the section formula holds by the restriction lemma plus the direct-image definition; independence of representative comes from kinjective-hom-derived. Step 2: theta = c ∘ Rp_*(e) ∘ r unwinds on b^{-1}I to restriction along delta_w. r is the sectionwise identity; c is restriction to the component, and that inclusion is delta by the universal property. e is the map of lem-cbc-extension-zero-base-change; its mate formula gives s^{-1}(e)=id once both sides are identified with K through the units, so the identification is eta^{-1}, the same one step 4 uses. Step 3: I checked by hand that the two restrictions compose to delta_vu, using u j_1 = j_2 and v j_2 = j_3; u_*I is injective, and the composition identification is fixed by the uniqueness clause of right-derived-plus-injective. Step 4: b_j = eta_j^{-1} by the cited base-change formula, and the transpose bijection is injective. Step 5: I recomputed theta_vu j_3^{-1} beta eta_3 = id. Step 6: theta_id = eta^{-1}. Edge cases tested: X empty, K=0, T_1=X (u a clopen immersion), u=id or v=id. Long steps: step 1 (2108 chars) is one construction plus its well-definedness, and step 2 (2014 chars) unwinds the three named factors of theta on one representative. Neither hides a separate lemma, so both stay. I accept all 12 declared tool_uses: they are generic site and derived-category tools, and the unit cites no units. No duplicates (searched with rg over dag/nodes), no SGA citation, no fixes, no new or dropped nodes. review.md is written."
- },
- "reviewed_lean": {
-  "date": "2026-10-15",
-  "by": "L",
-  "reviewer": "NT-stage2-Codex-b5b244ef8",
-  "group": "NN",
-  "result": "pass",
-  "note": "Reviewed immutable snapshot, source, all statement dependencies, canonical declarations, universes, edge cases, docstrings, and verbatim signature. Per-file scompile.py reproduction passed cleanly. No findings or fixes; review.md written and branch head unchanged."
- },
- "lean": {
-  "module": "Sheaf.AlgebraicGeometry.ProperOpenComparisonComposition",
-  "declaration": "AlgebraicGeometry.Etale.properOpenComparison_comp",
-  "declarations": [
-   "AlgebraicGeometry.Etale.properOpenDirectImageCompIso",
-   "AlgebraicGeometry.Etale.properOpenComparison_comp",
-   "AlgebraicGeometry.Etale.properOpenComparison_id"
+    "lem-weil-pbc-dplus-injective-representative",
+    "def-weil-pbc-direct-image",
+    "lem-weil-pbc-open-immersion-etale",
+    "lem-weil-pbc-etale-inverse-image-restriction",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-weil-pbc-etale-restriction-injectives",
+    "cor-cbc-derived-extension-zero-base-change",
+    "lem-weil-pbc-direct-image-preserves-injectives",
+    "lem-weil-pbc-inverse-image-composition-module-linear",
+    "lem-weil-pbc-right-derived-plus-injective",
+    "lem-weil-pbc-extension-by-zero-adjunction"
   ],
-  "file": "lean/Sheaf/AlgebraicGeometry/ProperOpenComparisonComposition.lean",
-  "statement": "theorem properOpenComparison_comp (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {T₁ T₂ T₃ X : Scheme.{u}} (f : T₁ ⟶ T₂) (g : T₂ ⟶ T₃) [IsProper f] [IsProper g] (j₁ : X ⟶ T₁) (j₂ : X ⟶ T₂) (j₃ : X ⟶ T₃) [IsOpenImmersion j₁] [IsOpenImmersion j₂] [IsOpenImmersion j₃] (hf : j₁ ≫ f = j₂) (hg : j₂ ≫ g = j₃) (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) : properOpenComparison Λ (f ≫ g) j₁ j₃ ((Category.assoc j₁ f g).symm.trans ((congrArg (· ≫ g) hf).trans hg)) K = properOpenComparison Λ g j₂ j₃ hg K ≫ (rightDerivedLowerStarPlus (ModuleCat.{u + 1} Λ) g).map (properOpenComparison Λ f j₁ j₂ hf K) ≫ (properOpenDirectImageCompIso Λ f g).hom.app ((openImmersionLowerShriek (ModuleCat.{u + 1} Λ) j₁).mapDerivedCategoryPlus.obj K)",
-  "branch": "newtargets-dag",
-  "by": "NN",
-  "date": "2026-10-15",
-  "existing": false
- },
- "reviewed_proof": {
-  "date": "2026-10-18",
-  "by": "L",
-  "reviewer": "COMPILER",
-  "group": "F2",
-  "result": "pass",
-  "landing": "20261018T071149-L-1667068",
-  "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "AlgebraicGeometry.Etale.properOpenComparison_comp",
-   "AlgebraicGeometry.Etale.properOpenComparison_id"
-  ],
-  "sorry_after": [
-   "AlgebraicGeometry.Etale.properOpenComparison_comp"
-  ]
- }
+  "reviewed": {
+    "date": "2026-10-17",
+    "by": "L",
+    "reviewer": "NT-cc-Q127-1e7b9ad5f",
+    "group": "Q127",
+    "result": "pass",
+    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q127-1e7b9ad5f (reviewer sub-agent of L); spot-checked: I read the whole delivery against the cited statements and sources. The delivery changes only the item's status (unsplit -> split) and adds the report; the six-step proof, its uses and its tool_uses are unchanged, and I re-checked all of them. Statement: identical to master order 1483 and to main-20261015/20261017 order 1842; no hypothesis dropped, nothing weakened. Coefficients are étale sheaves of modules over the finite commutative constant ring Lambda; the pro-étale analogue is a separate node, not a duplicate. Step 1: delta_w(W)=(id, j_a) is well defined because w j_a = j_b and is a morphism of T_a,Et; the section formula holds by the restriction lemma plus the direct-image definition; independence of representative comes from kinjective-hom-derived. Step 2: theta = c ∘ Rp_*(e) ∘ r unwinds on b^{-1}I to restriction along delta_w. r is the sectionwise identity; c is restriction to the component, and that inclusion is delta by the universal property. e is the map of lem-cbc-extension-zero-base-change; its mate formula gives s^{-1}(e)=id once both sides are identified with K through the units, so the identification is eta^{-1}, the same one step 4 uses. Step 3: I checked by hand that the two restrictions compose to delta_vu, using u j_1 = j_2 and v j_2 = j_3; u_*I is injective, and the composition identification is fixed by the uniqueness clause of right-derived-plus-injective. Step 4: b_j = eta_j^{-1} by the cited base-change formula, and the transpose bijection is injective. Step 5: I recomputed theta_vu j_3^{-1} beta eta_3 = id. Step 6: theta_id = eta^{-1}. Edge cases tested: X empty, K=0, T_1=X (u a clopen immersion), u=id or v=id. Long steps: step 1 (2108 chars) is one construction plus its well-definedness, and step 2 (2014 chars) unwinds the three named factors of theta on one representative. Neither hides a separate lemma, so both stay. I accept all 12 declared tool_uses: they are generic site and derived-category tools, and the unit cites no units. No duplicates (searched with rg over dag/nodes), no SGA citation, no fixes, no new or dropped nodes. review.md is written."
+  },
+  "reviewed_lean": {
+    "date": "2026-10-15",
+    "by": "L",
+    "reviewer": "NT-stage2-Codex-b5b244ef8",
+    "group": "NN",
+    "result": "pass",
+    "note": "Reviewed immutable snapshot, source, all statement dependencies, canonical declarations, universes, edge cases, docstrings, and verbatim signature. Per-file scompile.py reproduction passed cleanly. No findings or fixes; review.md written and branch head unchanged."
+  },
+  "lean": {
+    "module": "Sheaf.AlgebraicGeometry.ProperOpenComparisonComposition",
+    "declaration": "AlgebraicGeometry.Etale.properOpenComparison_comp",
+    "declarations": [
+      "AlgebraicGeometry.Etale.properOpenDirectImageCompIso",
+      "AlgebraicGeometry.Etale.properOpenComparison_comp",
+      "AlgebraicGeometry.Etale.properOpenComparison_id"
+    ],
+    "file": "lean/Sheaf/AlgebraicGeometry/ProperOpenComparisonComposition.lean",
+    "statement": "theorem properOpenComparison_comp (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {T₁ T₂ T₃ X : Scheme.{u}} (f : T₁ ⟶ T₂) (g : T₂ ⟶ T₃) [IsProper f] [IsProper g] (j₁ : X ⟶ T₁) (j₂ : X ⟶ T₂) (j₃ : X ⟶ T₃) [IsOpenImmersion j₁] [IsOpenImmersion j₂] [IsOpenImmersion j₃] (hf : j₁ ≫ f = j₂) (hg : j₂ ≫ g = j₃) (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) : properOpenComparison Λ (f ≫ g) j₁ j₃ ((Category.assoc j₁ f g).symm.trans ((congrArg (· ≫ g) hf).trans hg)) K = properOpenComparison Λ g j₂ j₃ hg K ≫ (rightDerivedLowerStarPlus (ModuleCat.{u + 1} Λ) g).map (properOpenComparison Λ f j₁ j₂ hf K) ≫ (properOpenDirectImageCompIso Λ f g).hom.app ((openImmersionLowerShriek (ModuleCat.{u + 1} Λ) j₁).mapDerivedCategoryPlus.obj K)",
+    "branch": "newtargets-dag",
+    "by": "NN",
+    "date": "2026-10-15",
+    "existing": false
+  }
 }
