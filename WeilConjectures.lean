@@ -4509,9 +4509,9 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheore
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.CompactlySupported
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.MorphismDefs
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.MorphismDefs
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.PullbackSquareComparison
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.Proper
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.ProperLowerShriek
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.PullbackSquareComparison
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoefficients
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility
@@ -4608,6 +4608,7 @@ public import WeilConjectures.Topology.Stratification
 public import WeilConjectures.Topology.StratificationDense
 public import WeilConjectures.Topology.TopologicalFilteredCohomology
 public import WeilConjectures.TraceFormula.Additivity
+public import WeilConjectures.TraceFormula.AffineLine
 public import WeilConjectures.TraceFormula.BaseChangeCoherence
 public import WeilConjectures.TraceFormula.Basic
 public import WeilConjectures.TraceFormula.BorelMoore
@@ -4617,9 +4618,10 @@ public import WeilConjectures.TraceFormula.Correspondence
 public import WeilConjectures.TraceFormula.CorrespondencePair
 public import WeilConjectures.TraceFormula.CurvePieces
 public import WeilConjectures.TraceFormula.DegreeOne
+public import WeilConjectures.TraceFormula.DimensionZero
 public import WeilConjectures.TraceFormula.Dualizing
-public import WeilConjectures.TraceFormula.FibreCoherence
 public import WeilConjectures.TraceFormula.Fibration
+public import WeilConjectures.TraceFormula.FibreCoherence
 public import WeilConjectures.TraceFormula.FixedPoint
 public import WeilConjectures.TraceFormula.Frobenius
 public import WeilConjectures.TraceFormula.Induction
