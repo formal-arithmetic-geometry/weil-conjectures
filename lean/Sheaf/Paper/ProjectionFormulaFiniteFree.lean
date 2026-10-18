@@ -7,17 +7,8 @@ module
 
 public import Sheaf.Paper.ProjectionFormulaArrows
 public import Mathlib.Algebra.Homology.Single
-import Mathlib.Algebra.Homology.BifunctorShift
-import Mathlib.CategoryTheory.Adjunction.Limits
-import Sheaf.CategoryTheory.ModulePullbackTensorIso
-import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
-import Sheaf.Algebra.Homology.KFlatResolutionGeneral
-import Sheaf.Algebra.Homology.KFlat
-import Sheaf.Paper.RingedTopoiCanonicalTensorPullback
-import Sheaf.CategoryTheory.PreDerivedAdjointFunctorsGeneral
 public import Sheaf.Algebra.Homology.KFlatCoefficientUniverse
-import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
-import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
+import Sheaf.Paper.ProjectionFormulaMateRepresentative
 
 /-!
 # Finite-free projection formula
@@ -45,26 +36,12 @@ K-injective representative and strict-perfect coefficient package.
 Source: proper base change, lemma 1265
 (blueprint: lemma-weil-pbc-projection-formula-finite-free).
 Proof:
-1. Use the K-injective representative K and the complexes A=h_*K, C=Tot(A tensor F),
-J=Tot(K tensor h^*F), B=h_*J of def-weil-pbc-projection-formula-arrows. Since the
-only coefficient degree is -a, C^n=(h_*K^{n+a})^N and B^n=h_*((K^{n+a})^N).
-The coefficient differential vanishes (def-pc-tensor-complex-sheaves).
-2. Pullback sends the coordinate splitting and the unit R to those of S. The ordinary
-counit mate t has each coordinate equal to the corresponding projection, by
-lem-weil-pbc-ringed-topoi-module-pullback-tensor and
-lem-weil-pbc-termwise-adjunction-homotopy. Finite products are preserved by the right
-adjoint (lem-weil-pbc-right-adjoint-preserves-limits), so q is its inverse, also for N=0.
-3. Naturality gives the chain equations for t and q, with no coefficient-differential
-term or extra sign. Thus they are inverse chain maps in every degree.
-4. Resolve A by a K-flat complex with flat terms (lem-pc-kflat-resolution). Tensoring
-with this single finite-free complex preserves quasi-isomorphisms and K-flatness
-(def-pc-kflat-complex). The canonical tensor comparison of
-lem-weil-pbc-ringed-topoi-derived-tensor-pullback and the representative adjunction
-formula of lem-pc-pre-derived-adjoint-functors-general identify Q(t) with the specified
-counit mate pi; cancel the resolution quasi-isomorphism.
-5. The summand formula of def-weil-pbc-projection-formula-arrows identifies Q(q) with
-rho. Localize both chain inverse identities. In diagrammatic order the first conjunct
-is rho after pi, and the second is pi after rho. -/
+The strict-perfect package is K-flat with flat terms. The arrow API supplies the
+ordinary total mate t, its isomorphism instance and inverse s, and K-injectivity of
+the target tensor complex J. The representative comparison lemma identifies the
+specified derived mate with eC.hom >> Q(t) >> eB.inv. The specified reverse arrow is
+eB.hom >> Q(s) >> eC.inv. Cancel eB and eC in each composite, then use functoriality
+of Q and the two inverse identities of t. This argument also covers rank zero. -/
 theorem ringedProjectionFormula_finiteFree
     {C D : Type u} [Category.{u} C] [Category.{u} D]
     {JC : GrothendieckTopology C} {JD : GrothendieckTopology D}
@@ -181,6 +158,70 @@ theorem ringedProjectionFormula_finiteFree
         E K hK repE F P hbounded).2 ≫
       (ringedProjectionFormulaArrows uInv uPush adj I c uStar hobj hmap LF epsilon hLF
         PR PS hPR hPS TR TS rR rS k V am RF eta hRF computeR computeL adjD canonicalAdj
-        E K hK repE F P hbounded).1 = 𝟙 _ := sorry
+        E K hK repE F P hbounded).1 = 𝟙 _ := by
+  let := monoidalCategory R
+  let := monoidalCategory S
+  let := ringedTensorPreadditive R
+  let := ringedTensorPreadditive S
+  have _ := hRF
+  have _ := hfree
+  have _ := canonicalAdj
+  let hf := StrictPerfectCoefficientPackage.isKFlat_flat R F P hbounded
+  let hfR : PR F := (hPR F).mpr hf
+  let A := (V.mapHomologicalComplex (ComplexShape.up ℤ)).obj K
+  let pullF := (uStar.mapHomologicalComplex (ComplexShape.up ℤ)).obj F
+  let J := CochainComplex.mapBifunctor K pullF (CategoryTheory.MonoidalCategory.curriedTensor
+    (SheafOfModules.{u} ((sheafCompose JD
+      (forget₂ CommRingCat.{u} RingCat.{u})).obj S)))
+  let hfS : PS pullF := (hPS pullF).mpr
+    ((ringedTopoiCanonicalDerivedTensorPullback uInv uPush adj I c uStar
+      hobj hmap LF epsilon hLF PR PS hPR hPS TR TS rR rS k V am).1 F hf.1 hf.2)
+  let unitData := canonicalRingedTensorComparison_unit R S RI uInv I c uStar hobj hmap k
+  let j := Classical.choose unitData.exists
+  have hj := (Classical.choose_spec unitData.exists)
+  let t := tensorAdjunctionTotal uStar V am k.mu k.naturality K F
+  have ht : IsIso t := by
+    with_unfolding_all
+      exact tensorAdjunctionTotal_isIso uStar V am k.mu k.naturality j hj K F
+        hbounded P.N P.i P.p P.splitting
+  let s := inv t
+  let eF : LF.obj (DerivedCategory.Q.obj F) ≅ DerivedCategory.Q.obj pullF :=
+    @asIso _ _ _ _ (derivedPullbackComplexComparison uStar LF epsilon F)
+      (computeL F hf.1 hf.2)
+  have : IsIso (derivedPushforwardComplexComparison V RF eta K) := computeR K hK
+  let eA : RF.obj E ≅ DerivedCategory.Q.obj A := RF.mapIso repE ≪≫
+    (@asIso _ _ _ _ (derivedPushforwardComplexComparison V RF eta K) (computeR K hK)).symm
+  let eC : TR.obj (RF.obj E, DerivedCategory.Q.obj F) ≅
+      DerivedCategory.Q.obj (CochainComplex.mapBifunctor A F
+        (CategoryTheory.MonoidalCategory.curriedTensor (SheafOfModules.{u}
+      ((sheafCompose JC (forget₂ CommRingCat.{u} RingCat.{u})).obj R)))) :=
+    TR.mapIso (Iso.prod eA (Iso.refl (DerivedCategory.Q.obj F))) ≪≫
+      mixedTensorRepresentative R PR hPR TR rR A F hfR
+  have hJ : J.IsKInjective := by
+    with_unfolding_all
+      exact tensorAdjunctionTotal_target_isKInjective uStar j K hK F
+        hbounded P.N P.i P.p P.splitting
+  have : IsIso (derivedPushforwardComplexComparison V RF eta J) := computeR J hJ
+  let eB : RF.obj (TS.obj (E, LF.obj (DerivedCategory.Q.obj F))) ≅
+      DerivedCategory.Q.obj ((V.mapHomologicalComplex (ComplexShape.up ℤ)).obj J) :=
+    RF.mapIso (TS.mapIso (Iso.prod repE eF) ≪≫
+      mixedTensorRepresentative S PS hPS TS rS K pullF hfS) ≪≫
+        (@asIso _ _ _ _ (derivedPushforwardComplexComparison V RF eta J) (computeR J hJ)).symm
+  let alpha := ringedTopoiCanonicalDerivedTensorComparison uInv uPush adj I c uStar
+    hobj hmap LF epsilon hLF PR PS hPR hPS TR TS rR rS k V am
+  have hs : s = inv t := rfl
+  have hpi : derivedProjectionFormulaMate LF RF adjD TR TS alpha E
+      (DerivedCategory.Q.obj F) = eC.hom ≫ DerivedCategory.Q.map t ≫ eB.inv := by
+    exact ringedProjectionFormulaMate_representative uInv uPush adj I c uStar hobj hmap
+      LF epsilon hLF PR PS hPR hPS TR TS rR rS k V am RF eta computeR computeL
+      adjD canonicalAdj E K hK repE F hfR hJ
+  change (derivedProjectionFormulaMate LF RF adjD TR TS alpha E
+      (DerivedCategory.Q.obj F)) ≫ (eB.hom ≫ DerivedCategory.Q.map s ≫ eC.inv) = 𝟙 _ ∧
+    (eB.hom ≫ DerivedCategory.Q.map s ≫ eC.inv) ≫
+      (derivedProjectionFormulaMate LF RF adjD TR TS alpha E
+        (DerivedCategory.Q.obj F)) = 𝟙 _
+  rw [hpi, hs]
+  constructor <;> simp [Category.assoc]
+
 
 end SheafOfModules
