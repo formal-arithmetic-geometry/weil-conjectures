@@ -10,12 +10,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.AlgebraicGeometry.OpenImmersion
 public import Mathlib.CategoryTheory.Comma.Over.Pullback
-import Sheaf.AlgebraicGeometry.EtaleInverseLimitDescent
 import WeilConjectures.AlgebraicGeometry.DescendMonomorphism
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-import Mathlib.AlgebraicGeometry.Morphisms.Etale
-import Mathlib.AlgebraicGeometry.Morphisms.UniversallyInjective
 import WeilConjectures.AlgebraicGeometry.Sites.EtaleTopologicalInvariance.Gluing
 import WeilConjectures.AlgebraicGeometry.EtaleInverseLimitDescent
 
@@ -34,6 +29,44 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry
 
+/-- A property stable under base change persists after another change of base. -/
+private theorem property_over_pullback_comp
+    (P : MorphismProperty Scheme.{u}) [P.IsStableUnderBaseChange]
+    {S T R : Scheme.{u}} (p : T ⟶ S) (q : R ⟶ T)
+    (X Y : Over S) (f : X ⟶ Y)
+    (hf : P ((Over.pullback p).map f).left) :
+    P ((Over.pullback (q ≫ p)).map f).left := by
+  let a := pullback.map X.hom (q ≫ p) X.hom p (𝟙 X.left) q (𝟙 S)
+    (by simp) (by simp)
+  let b := pullback.map Y.hom (q ≫ p) Y.hom p (𝟙 Y.left) q (𝟙 S)
+    (by simp) (by simp)
+  have ha : a ≫ pullback.fst X.hom p = pullback.fst X.hom (q ≫ p) := by
+    simp [a]
+  have hb : b ≫ pullback.fst Y.hom p = pullback.fst Y.hom (q ≫ p) := by
+    simp [b]
+  have hp : IsPullback ((Over.pullback p).map f).left (pullback.fst X.hom p)
+      (pullback.fst Y.hom p) f.left := by
+    apply IsPullback.of_right
+      (t := (IsPullback.of_hasPullback Y.hom p).flip)
+      (s := ?_) (by simp)
+    simpa only [pullback.lift_snd, Over.pullback_map_left, Over.w] using
+      (IsPullback.of_hasPullback X.hom p).flip
+  have hqp : IsPullback ((Over.pullback (q ≫ p)).map f).left
+      (pullback.fst X.hom (q ≫ p)) (pullback.fst Y.hom (q ≫ p)) f.left := by
+    apply IsPullback.of_right
+      (t := (IsPullback.of_hasPullback Y.hom (q ≫ p)).flip)
+      (s := ?_) (by simp)
+    simpa only [pullback.lift_snd, Over.pullback_map_left, Over.w] using
+      (IsPullback.of_hasPullback X.hom (q ≫ p)).flip
+  have h : IsPullback a ((Over.pullback (q ≫ p)).map f).left
+      ((Over.pullback p).map f).left b := by
+    apply IsPullback.flip
+    apply IsPullback.of_bot (t := hp)
+      (s := ?_) ?_
+    · simpa only [ha, hb] using hqp
+    · apply pullback.hom_ext <;> simp [a, b, Over.pullback_map_left]
+  exact P.of_isPullback h hf
+
 /-- A locally finitely presented morphism between qcqs schemes over a stage of a
 qcqs inverse system with affine transitions is an open immersion at every sufficiently
 late stage if its base change to the limit is an open immersion. Neither its source
@@ -45,24 +78,18 @@ Source: Stacks Project, Limits, Tag 0EUU in Situation 081D; base-change persiste
 Proof:
 1. The limit morphism is etale and monic, by lem-weil-pbc-open-immersion-etale and
    lem-weil-pbc-open-immersion-monomorphism.
-2. For each affine open of the target, cover its inverse image by affine opens
-   (lem-weil-pbc-affine-opens-basis). The coordinate algebras are finitely presented
-   by lem-weil-pbc-lfp-affine-opens-finite-presentation, hence finitely generated:
-   the finite polynomial generators descend to generators of the quotient. This is
-   locally finite type in def-weil-finite-type-morphism.
+2. Local finite presentation implies locally finite type, by Mathlib's instance
+   in Morphisms.FinitePresentation, so monomorphism descent applies.
 3. Apply lem-weil-pbc-descend-etale and lem-weil-pbc-descend-monomorphism to obtain
    stages a and b where the morphism is respectively etale and monic.
-4. Choose a common upper bound i. The fibre-product universal property
-   (def-pc-fibre-product) identifies X_i with X_c times_{Y_c} Y_i for c = a,b:
-   on T-points, (x0,t) maps to ((x0,s_c t),(f0 x0,t)), and the inverse forgets
-   the redundant coordinates. Thus f_i is etale by lem-weil-pbc-etale-scheme-base-change
-   and monic by cancellation on the two pullback projections.
-5. Monicity gives injectivity on points valued in every field, so f_i is radicial
-   by def-weil-radicial-morphism. Apply lem-weil-pbc-radicial-etale-open to obtain
-   that f_i is an open immersion.
-6. For j >= i the same fibre-product identification gives X_j = X_i times_{Y_i} Y_j
-   and identifies f_j with the projection to Y_j. Apply
-   lem-weil-pbc-open-immersion-base-change to conclude for every such j. -/
+4. Choose a common upper bound i. For every j >= i and c = a,b, the fibre-product
+   universal property identifies X_j with X_c times_{Y_c} Y_j: on T-points,
+   (x0,t) maps to ((x0,s_c t),(f0 x0,t)), and the inverse forgets the redundant
+   coordinates. Cartesian-square cancellation proves this identification in Lean.
+5. Etaleness and monicity persist across that square by base-change stability.
+   Thus f_j is both etale and monic for every j >= i.
+6. A monomorphism is universally injective (Mathlib's diagonal criterion), so
+   lem-weil-pbc-radicial-etale-open makes every such f_j an open immersion. -/
 theorem IsOpenImmersion.eventually_of_inverseLimit
     {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]
     (D : Iᵒᵖ ⥤ Scheme.{u})
@@ -78,6 +105,30 @@ theorem IsOpenImmersion.eventually_of_inverseLimit
     ∃ (i : I) (hi : i₀ ≤ i), ∀ (j : I) (hij : i ≤ j),
       IsOpenImmersion
         (((Over.pullback (D.map (homOfLE (hi.trans hij)).op)).map f₀).left) := by
-  sorry
+  have := hf
+  obtain ⟨a, ha, het⟩ := Etale.exists_stage_of_inverseLimit D c hc i₀ X₀ Y₀ f₀
+    (inferInstance : Etale ((Over.pullback (c.π.app (op i₀))).map f₀).left)
+  obtain ⟨b, hb, hmono⟩ := exists_mono_baseChange_stage D c hc i₀ X₀ Y₀ f₀
+    (inferInstance : Mono ((Over.pullback (c.π.app (op i₀))).map f₀).left)
+  obtain ⟨i, hai, hbi⟩ := exists_ge_ge a b
+  refine ⟨i, ha.trans hai, ?_⟩
+  intro j hij
+  have hcomp (k : I) (hk : i₀ ≤ k) (hkj : k ≤ j) :
+      D.map (homOfLE (hk.trans hkj)).op =
+        D.map (homOfLE hkj).op ≫ D.map (homOfLE hk).op := by
+    rw [← D.map_comp]
+    congr 1
+  have hj : Etale ((Over.pullback
+      (D.map (homOfLE ((ha.trans hai).trans hij)).op)).map f₀).left := by
+    rw [hcomp a ha (hai.trans hij)]
+    exact property_over_pullback_comp (@Etale)
+      (D.map (homOfLE ha).op) (D.map (homOfLE (hai.trans hij)).op) X₀ Y₀ f₀ het
+  have hjmono : Mono ((Over.pullback
+      (D.map (homOfLE ((ha.trans hai).trans hij)).op)).map f₀).left := by
+    rw [hcomp b hb (hbi.trans hij)]
+    exact property_over_pullback_comp (MorphismProperty.monomorphisms Scheme.{u})
+      (D.map (homOfLE hb).op) (D.map (homOfLE (hbi.trans hij)).op) X₀ Y₀ f₀ hmono
+  exact IsOpenImmersion.of_etale_of_universallyInjective _
 
 end AlgebraicGeometry
+
