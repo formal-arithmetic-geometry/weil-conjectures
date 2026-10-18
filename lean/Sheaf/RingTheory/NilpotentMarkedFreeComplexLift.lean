@@ -10,17 +10,9 @@ public import Sheaf.Algebra.Homology.DerivedChangeOfRings
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import Mathlib.CategoryTheory.Adjunction.Additive
 public import Mathlib.RingTheory.Ideal.Quotient.Defs
-import Sheaf.Algebra.Homology.BoundedFlatKFlat
-import Mathlib.Algebra.Homology.DerivedCategory.KProjective
 import Mathlib.Algebra.Module.Projective
-import Sheaf.AlgebraicGeometry.ComplexLiftConeProperties
-import Sheaf.Algebra.Homology.AcyclicLift
-import Sheaf.AlgebraicGeometry.ComplexLiftStrictMap
-import Sheaf.AlgebraicGeometry.ComplexLiftConeCokernel
-import Sheaf.AlgebraicGeometry.ProjectiveClassReducedSplitting
-import Sheaf.RingTheory.FiniteProjectiveFreeModIdeal
-import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
-import Sheaf.Algebra.Homology.DerivedChangeOfRingsIndependentCoefficients
+import Sheaf.RingTheory.UnmarkedFiniteFreeLift
+import Sheaf.RingTheory.MarkedFiniteFreeLiftCompatibility
 
 /-!
 # Lifting a marked finite free complex across a nilpotent quotient
@@ -110,6 +102,9 @@ theorem exists_marked_finiteFree_lift_of_nilpotent
           (.up ℤ)).hom.app P) ≫
         (quotientCompQhIso (ModuleCat.{max u v} (R ⧸ I))).hom.app _ ≫
         Q.map θ.hom := by
-  sorry
+  obtain ⟨P, β, θ, hbound, hfree⟩ :=
+    exists_unmarked_finiteFree_lift_of_nilpotent I hnil hunits L ε K hK F b hFbound hFterms α
+  exact exists_marking_compatible_finiteFree_lift I hnil hunits L ε K hK F b hFbound hFterms α
+    ⟨P, β, θ, hbound, hfree⟩
 
 end DerivedCategory

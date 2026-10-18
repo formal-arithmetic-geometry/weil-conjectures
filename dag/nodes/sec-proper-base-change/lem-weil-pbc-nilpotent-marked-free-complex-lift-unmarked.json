@@ -1,0 +1,109 @@
+{
+ "id": "lem-weil-pbc-nilpotent-marked-free-complex-lift-unmarked",
+ "kind": "statement",
+ "title": "Unmarked finite-free lift across a nilpotent quotient",
+ "statement": "theorem exists_unmarked_finiteFree_lift_of_nilpotent {R : Type u} [CommRing R] (I : Ideal R) (hnil : ∃ N : ℕ, 1 ≤ N ∧ I ^ N = 0) (hunits : ∀ x : I, IsUnit (1 + (x : R))) [HasDerivedCategory.{w} (ModuleCat.{max u v} R)] [HasDerivedCategory.{w'} (ModuleCat.{max u v} (R ⧸ I))] (L : DerivedCategory (ModuleCat.{max u v} R) ⥤ DerivedCategory (ModuleCat.{max u v} (R ⧸ I))) (ε : DerivedCategory.Qh ⋙ L ⟶ @Functor.mapHomotopyCategory _ _ _ _ _ _ _ (ModuleCat.extendScalars (Ideal.Quotient.mk I)) (ModuleCat.extendRestrictScalarsAdj (Ideal.Quotient.mk I)).left_adjoint_additive (.up ℤ) ⋙ DerivedCategory.Qh) [L.IsLeftDerivedFunctor ε (HomotopyCategory.quasiIso (ModuleCat.{max u v} R) (.up ℤ))] (K : DerivedCategory (ModuleCat.{max u v} R)) (hK : IsPseudoCoherent K) (F : CochainComplex (ModuleCat.{max u v} (R ⧸ I)) ℤ) (b : ℤ) (hFbound : F.IsStrictlyLE b) (hFterms : ∀ i : ℤ, Module.Free (R ⧸ I) (F.X i) ∧ Module.Finite (R ⧸ I) (F.X i)) (α : L.obj K ≅ Q.obj F) : ∃ (P : CochainComplex (ModuleCat.{max u v} R) ℤ) (β : Q.obj P ≅ K) (θ : ((ModuleCat.extendScalars (Ideal.Quotient.mk I)).mapHomologicalComplex (.up ℤ)).obj P ≅ F), P.IsStrictlyLE b ∧ (∀ i : ℤ, Module.Free R (P.X i) ∧ Module.Finite R (P.X i))",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tags 0H76, 0BCB and 0BCA, decomposition of the marked lift proof"
+ },
+ "stmt_deps": [
+  "def-pc-ring-pseudo-coherent-complex",
+  "def-weil-abstract-derived-category",
+  "lem-pur-derived-change-of-rings"
+ ],
+ "proof": [
+  {
+   "text": "Construct a bounded-above finite-free lift and its derived and chain isomorphisms, postponing only the prescribed-marking equality.",
+   "uses": [
+    "def-pc-ring-pseudo-coherent-complex",
+    "def-weil-abstract-derived-category",
+    "lem-pur-derived-change-of-rings"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-ring-pseudo-coherent-complex",
+  "def-weil-abstract-derived-category",
+  "lem-pur-derived-change-of-rings"
+ ],
+ "proof_origin": {
+  "by": "B3 stage 3",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tags 0H76, 0BCB and 0BCA",
+  "note": "Strict decomposition of the parent lifting argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "bounded finite free complex lift over nilpotent quotient",
+   "results": "No exact match",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsPseudoCoherent finite free nilpotent quotient",
+   "results": "No exact match",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "exists.*finiteFree.*nilpotent",
+   "results": "No exact match",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.NilpotentMarkedFreeComplexLift",
+  "date": "2026-10-18",
+  "group": "B3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-nilpotent-marked-free-complex-lift",
+   "place": "proof decomposition",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.UnmarkedFiniteFreeLift",
+  "file": "lean/Sheaf/RingTheory/UnmarkedFiniteFreeLift.lean",
+  "declaration": "DerivedCategory.exists_unmarked_finiteFree_lift_of_nilpotent",
+  "statement": "theorem exists_unmarked_finiteFree_lift_of_nilpotent {R : Type u} [CommRing R] (I : Ideal R) (hnil : ∃ N : ℕ, 1 ≤ N ∧ I ^ N = 0) (hunits : ∀ x : I, IsUnit (1 + (x : R))) [HasDerivedCategory.{w} (ModuleCat.{max u v} R)] [HasDerivedCategory.{w'} (ModuleCat.{max u v} (R ⧸ I))] (L : DerivedCategory (ModuleCat.{max u v} R) ⥤ DerivedCategory (ModuleCat.{max u v} (R ⧸ I))) (ε : DerivedCategory.Qh ⋙ L ⟶ @Functor.mapHomotopyCategory _ _ _ _ _ _ _ (ModuleCat.extendScalars (Ideal.Quotient.mk I)) (ModuleCat.extendRestrictScalarsAdj (Ideal.Quotient.mk I)).left_adjoint_additive (.up ℤ) ⋙ DerivedCategory.Qh) [L.IsLeftDerivedFunctor ε (HomotopyCategory.quasiIso (ModuleCat.{max u v} R) (.up ℤ))] (K : DerivedCategory (ModuleCat.{max u v} R)) (hK : IsPseudoCoherent K) (F : CochainComplex (ModuleCat.{max u v} (R ⧸ I)) ℤ) (b : ℤ) (hFbound : F.IsStrictlyLE b) (hFterms : ∀ i : ℤ, Module.Free (R ⧸ I) (F.X i) ∧ Module.Finite (R ⧸ I) (F.X i)) (α : L.obj K ≅ Q.obj F) : ∃ (P : CochainComplex (ModuleCat.{max u v} R) ℤ) (β : Q.obj P ≅ K) (θ : ((ModuleCat.extendScalars (Ideal.Quotient.mk I)).mapHomologicalComplex (.up ℤ)).obj P ≅ F), P.IsStrictlyLE b ∧ (∀ i : ℤ, Module.Free R (P.X i) ∧ Module.Finite R (P.X i))",
+  "branch": "sheaf-dag",
+  "by": "B3",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261018T071134-L-1663594",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261018T071134-L-1663594",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
