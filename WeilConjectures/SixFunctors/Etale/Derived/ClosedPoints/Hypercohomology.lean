@@ -73,6 +73,7 @@ lemma IsRightAcyclic.of_isZero {M : C} (hM : IsZero M) : F.IsRightAcyclic M := f
 
 variable (F)
 
+omit [EnoughInjectives C] in
 /-- A bounded complex `L ∈ D^{≥ a + 1 - k} ∩ D^{≤ a}` whose homology objects are `F`-acyclic
 has `H^j(RF(L)) = 0` for `j > a`. -/
 theorem isZero_homology_rightDerivedFunctor_obj_of_isLE (k : ℕ) :
