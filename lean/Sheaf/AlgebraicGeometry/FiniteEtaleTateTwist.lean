@@ -42,7 +42,18 @@ Its composite with multiplication by `N` is zero by the kernel condition. Natura
 scalar multiplication therefore makes `N` times every kernel section zero. -/
 theorem finiteEtaleMu_annihilated (T : Scheme.{u}) (N : ℕ) (U : T.Etaleᵒᵖ)
     (x : (T.rootsOfUnitySheaf N).obj.obj U) : N • x = 0 := by
-  sorry
+  have h : N • 𝟙 (T.rootsOfUnitySheaf N) = 0 := by
+    change N • 𝟙 (kernel (N • 𝟙 T.gmSheaf)) = 0
+    rw [← cancel_mono (kernel.ι (N • 𝟙 T.gmSheaf)), Preadditive.nsmul_comp,
+      Category.id_comp, zero_comp, ← Category.comp_id (kernel.ι _),
+      ← Preadditive.comp_nsmul, kernel.condition]
+  have hx := congrArg (fun f : T.rootsOfUnitySheaf N ⟶ T.rootsOfUnitySheaf N ↦
+    f.hom.app U x) h
+  have e : (N • 𝟙 (T.rootsOfUnitySheaf N)).hom =
+      N • 𝟙 (T.rootsOfUnitySheaf N).obj :=
+    (sheafToPresheaf _ _).map_nsmul (f := 𝟙 (T.rootsOfUnitySheaf N)) (n := N)
+  rw [e, NatTrans.app_nsmul, NatTrans.id_app] at hx
+  exact hx
 
 /-- The existing roots-of-unity sections with their unique `ZMod N`-module action.
 Source: Stacks, Section 03PK (blueprint: def-asd-finite-etale-tate-twist). -/
@@ -65,7 +76,11 @@ Proof: forgetting the linear structure gives exactly the identity restriction of
 existing roots-of-unity sheaf; linear maps are equal when their functions are equal. -/
 theorem finiteEtaleMuModuleMap_id (T : Scheme.{u}) (N : ℕ) (U : T.Etaleᵒᵖ) :
     finiteEtaleMuModuleMap T N (𝟙 U) = 𝟙 (finiteEtaleMuModuleObj T N U) := by
-  sorry
+  ext x
+  change (T.rootsOfUnitySheaf N).obj.obj U at x
+  change (T.rootsOfUnitySheaf N).obj.map (𝟙 U) x = x
+  rw [(T.rootsOfUnitySheaf N).obj.map_id]
+  rfl
 
 /-- Composition law for the module enhancement of roots of unity.
 Source: Stacks, Section 03PK (blueprint: def-asd-finite-etale-tate-twist).
@@ -76,7 +91,12 @@ theorem finiteEtaleMuModuleMap_comp (T : Scheme.{u}) (N : ℕ)
     {U V W : T.Etaleᵒᵖ} (f : U ⟶ V) (g : V ⟶ W) :
     finiteEtaleMuModuleMap T N (f ≫ g) =
       finiteEtaleMuModuleMap T N f ≫ finiteEtaleMuModuleMap T N g := by
-  sorry
+  ext x
+  change (T.rootsOfUnitySheaf N).obj.obj U at x
+  change (T.rootsOfUnitySheaf N).obj.map (f ≫ g) x =
+    (T.rootsOfUnitySheaf N).obj.map g ((T.rootsOfUnitySheaf N).obj.map f x)
+  rw [(T.rootsOfUnitySheaf N).obj.map_comp]
+  rfl
 
 /-- The existing roots-of-unity presheaf with its exponent action of `ZMod N`.
 Source: Stacks, Section 03PK (blueprint: def-asd-finite-etale-tate-twist). -/
