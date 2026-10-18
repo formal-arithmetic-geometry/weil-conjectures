@@ -7,9 +7,15 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.InvertibleExponent
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
+import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Curve
+import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.FiniteMorphism
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.SymmetricProduct
+import WeilConjectures.ConstructibleSheaf.FiniteTypePushforward
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.BoundedConstructible
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.FiniteCancellation
+import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.ProjectiveCurve
+import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.TargetLocal
+import WeilConjectures.SixFunctors.Etale.Derived.InvertibleRestriction
 
 /-!
 # Constructibility of projective direct images
@@ -53,20 +59,23 @@ instance ProjectiveSpace.isProper_projectiveLinePowProj (n : ℕ) (S : Scheme.{u
     exact inferInstanceAs
       (IsProper ((ProjectiveLine (projectiveLinePow n S) ↘ _) ≫ projectiveLinePowProj n S))
 
+/-- The fibres of a finite cover of the projective line have dimension at most one: for
+`h : Y ⟶ ℙ¹_S` finite and a point `s : Spec Ω ⟶ S` with values in a field, the fibre
+`Y ×_S Spec Ω` is finite over `ℙ¹_Ω`, which has dimension at most one. -/
+lemma topologicalKrullDim_pullback_comp_projectiveLine_le_one {S Y : Scheme.{u}}
+    (h : Y ⟶ ProjectiveLine S) [IsFinite h] (Ω : Type u) [Field Ω] (s : Spec (.of Ω) ⟶ S) :
+    topologicalKrullDim (pullback (h ≫ ProjectiveLine S ↘ S) s : Scheme.{u}) ≤ 1 := by
+  let e := pullbackRightPullbackFstIso (ProjectiveLine S ↘ S) s h
+  rw [← IsHomeomorph.topologicalKrullDim_eq _ e.hom.homeomorph.isHomeomorph]
+  refine (pullback.snd h (pullback.fst (ProjectiveLine S ↘ S) s)
+    ).topologicalKrullDim_le_of_locallyQuasiFinite.trans ?_
+  let e' := (isPullback_map (ULift.{u} (Fin 2)) s).isoPullback
+  rw [← IsHomeomorph.topologicalKrullDim_eq _ e'.hom.homeomorph.isHomeomorph]
+  exact topologicalKrullDim_projectiveLine_le_one Ω
+
 namespace Etale
 
 variable {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ] {k : Type u} [Field k]
-
-/-- Blueprint `thm-fin-projective-line-constructible`: Constructible coefficients on the
-projective line.
-
-Let `S` be of finite type over a field `k`, and let `Λ` be a finite ring killed by an integer
-invertible in `k`. For every constructible sheaf `F` of `Λ`-modules on `ℙ¹_S`, every higher
-direct image `Rᵠπ_* F` along `π : ℙ¹_S ⟶ S` is constructible. -/
-theorem hasConstructibleDirectImages_projectiveLine [HasInvertibleExponent Λ (Spec (.of k))]
-    {S : Scheme.{u}} (aS : S ⟶ Spec (.of k)) [LocallyOfFiniteType aS] [QuasiCompact aS] :
-    HasConstructibleDirectImages Λ (ProjectiveLine S ↘ S) :=
-  sorry
 
 /-- **`𝒞` for finite morphisms.** A finite morphism `f : X ⟶ S` with Noetherian target
 satisfies `𝒞(f)`: `f_*` is exact and preserves constructible sheaves. -/
@@ -74,6 +83,88 @@ theorem hasConstructibleDirectImages_of_isFinite {X S : Scheme.{u}} [IsNoetheria
     (f : X ⟶ S) [IsFinite f] : HasConstructibleDirectImages Λ f := fun F _ ↦
   (boundedConstructible_rightDerivedLowerStar_of_isFinite Λ f
     (DerivedCategory.boundedConstructible_singleFunctor_obj F 0)).2
+
+/-- The case of an affine base of `thm-fin-projective-line-constructible`. A constructible sheaf
+on `ℙ¹_S` embeds into a finite sum `G = ⨁ᵢ (hᵢ)_* Mᵢ` of finite pushforwards of constant sheaves
+(`lem-fin-finite-type-pushforward-embedding`); each `Y_i ⟶ S` is projective, `S` being affine
+(`lem-fin-finite-over-projective`), with fibres of dimension at most one, so
+`Rπ_* G = ⨁ᵢ R(π ∘ hᵢ)_* Mᵢ` has constructible homology (`cor-fin-projective-curve-finite-group`).
+The resolution principle `AlgebraicGeometry.Etale.hasConstructibleDirectImages_of_exists_mono`
+concludes. -/
+theorem hasConstructibleDirectImages_projectiveLine_of_isAffine
+    [HasInvertibleExponent Λ (Spec (.of k))] {S : Scheme.{u}} [IsAffine S]
+    (aS : S ⟶ Spec (.of k)) [LocallyOfFiniteType aS] [QuasiCompact aS] :
+    HasConstructibleDirectImages Λ (ProjectiveLine S ↘ S) := by
+  have : HasInvertibleExponent Λ S := .of_hom aS
+  have : IsLocallyNoetherian (ProjectiveLine S) :=
+    LocallyOfFiniteType.isLocallyNoetherian (ProjectiveLine S ↘ S ≫ aS)
+  have : CompactSpace (ProjectiveLine S) :=
+    QuasiCompact.compactSpace_of_compactSpace (ProjectiveLine S ↘ S ≫ aS)
+  have : IsNoetherian (ProjectiveLine S) := {}
+  refine hasConstructibleDirectImages_of_exists_mono _ fun Q hQ ↦ ?_
+  obtain ⟨r, Y, h, _, M, _, φ, _⟩ :=
+    exists_mono_biproduct_lowerStar_of_locallyOfFiniteType Λ (ProjectiveLine S ↘ S ≫ aS) Q
+  have (i : Fin r) : IsConstructibleSheaf
+      ((constantSheaf (Y i).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj (M i)) :=
+    have : Module.Finite Λ (M i) := Module.Finite.of_finite
+    (isFiniteLocallyConstantSheaf_constantSheaf (M i)).isConstructibleSheaf
+  have (i : Fin r) : IsConstructibleSheaf ((h i)_*[ModuleCat.{u + 1} Λ].obj
+      ((constantSheaf (Y i).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj (M i))) :=
+    IsConstructibleSheaf.lowerStar_of_isFinite (h i) _
+  refine ⟨_, φ, inferInstance, IsConstructibleSheaf.biproduct _, fun q ↦ ?_⟩
+  -- `Rᵠπ_*` of the finite sum, as a functor, to commute it with the biproduct
+  let Φ := _root_.DerivedCategory.singleFunctor (Sheaf (ProjectiveLine S).smallEtaleTopology
+    (ModuleCat.{u + 1} Λ)) 0 ⋙
+      ((ProjectiveLine S ↘ S)_*[ModuleCat.{u + 1} Λ]).rightDerivedFunctor ⋙
+      _root_.DerivedCategory.homologyFunctor _ q
+  have (i : Fin r) : IsConstructibleSheaf (Φ.obj ((h i)_*[ModuleCat.{u + 1} Λ].obj
+      ((constantSheaf (Y i).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj (M i)))) := by
+    obtain ⟨m, _, j, _, hj⟩ := exists_isClosedImmersion_of_isFinite (ProjectiveLine S ↘ S)
+      (𝟙 _) (by simp) (h i)
+    have := isConstructibleSheaf_homology_rightDerivedLowerStar_constantSheaf Λ aS
+      (h i ≫ ProjectiveLine S ↘ S) j hj
+      (fun Ω _ _ s ↦ topologicalKrullDim_pullback_comp_projectiveLine_le_one (h i) Ω s) (M i) q
+    exact IsConstructibleSheaf.of_iso ((_root_.DerivedCategory.homologyFunctor _ q).mapIso
+      (rightDerivedLowerStarSingleLowerStarIso (h i) _ _)).symm
+  have := IsConstructibleSheaf.biproduct fun i ↦ Φ.obj ((h i)_*[ModuleCat.{u + 1} Λ].obj
+      ((constantSheaf (Y i).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj (M i)))
+  have : IsConstructibleSheaf (⨁ Φ.obj ∘ fun i ↦ (h i)_*[ModuleCat.{u + 1} Λ].obj
+      ((constantSheaf (Y i).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj (M i))) := this
+  exact IsConstructibleSheaf.of_iso (Φ.mapBiproduct fun i ↦ (h i)_*[ModuleCat.{u + 1} Λ].obj
+      ((constantSheaf (Y i).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj (M i))).symm
+
+/-- Blueprint `thm-fin-projective-line-constructible`: Constructible coefficients on the
+projective line.
+
+Let `S` be of finite type over a field `k`, and let `Λ` be a finite ring killed by an integer
+invertible in `k`. For every constructible sheaf `F` of `Λ`-modules on `ℙ¹_S`, every higher
+direct image `Rᵠπ_* F` along `π : ℙ¹_S ⟶ S` is constructible.
+
+`𝒞` being local on the target, we reduce to an affine base, where this is
+`AlgebraicGeometry.Etale.hasConstructibleDirectImages_projectiveLine_of_isAffine`. -/
+theorem hasConstructibleDirectImages_projectiveLine [HasInvertibleExponent Λ (Spec (.of k))]
+    {S : Scheme.{u}} (aS : S ⟶ Spec (.of k)) [LocallyOfFiniteType aS] [QuasiCompact aS] :
+    HasConstructibleDirectImages Λ (ProjectiveLine S ↘ S) := by
+  have : IsLocallyNoetherian S := LocallyOfFiniteType.isLocallyNoetherian aS
+  have : CompactSpace S := QuasiCompact.compactSpace_of_compactSpace aS
+  have : IsNoetherian S := {}
+  refine HasConstructibleDirectImages.of_iSup_eq_top _ (fun U : S.affineOpens ↦ (U : S.Opens))
+    (iSup_affineOpens_eq_top S) fun U ↦ ?_
+  have : IsAffine U := U.2
+  have : QuasiCompact (U.1.ι ≫ aS) :=
+    HasAffineProperty.iff_of_isAffine.mpr (inferInstanceAs (CompactSpace U.1))
+  -- `π⁻¹ U ≅ ℙ¹_U` over `U`
+  let e := IsPullback.isoIsPullback _ _ (isPullback_morphismRestrict (ProjectiveLine S ↘ S) U.1)
+    (isPullback_map (ULift.{u} (Fin 2)) U.1.ι).flip
+  have : IsLocallyNoetherian (ProjectiveLine U) :=
+    LocallyOfFiniteType.isLocallyNoetherian (ProjectiveLine U ↘ U ≫ U.1.ι ≫ aS)
+  have : CompactSpace (ProjectiveLine U) :=
+    QuasiCompact.compactSpace_of_compactSpace (ProjectiveLine U ↘ U ≫ U.1.ι ≫ aS)
+  have : IsNoetherian (ProjectiveLine U) := {}
+  rw [← IsPullback.isoIsPullback_hom_fst _ _ (isPullback_morphismRestrict _ U.1)
+    (isPullback_map (ULift.{u} (Fin 2)) U.1.ι).flip]
+  exact (hasConstructibleDirectImages_of_isFinite e.hom).comp
+    (hasConstructibleDirectImages_projectiveLine_of_isAffine (U.1.ι ≫ aS))
 
 /-- **`𝒞` for the tower of projective lines.** If `𝒞(ℙ¹_T ⟶ T)` holds for every scheme `T` of
 finite type over `k`, then `𝒞((ℙ¹_S)ⁿ ⟶ S)` holds for every `S` of finite type over `k`, the
