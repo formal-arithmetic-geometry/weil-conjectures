@@ -2,23 +2,218 @@
  "id": "lem-pur-rational-weil-naturality-mate",
  "kind": "statement",
  "title": "Rational smooth purity naturality and Frobenius mate identification",
- "statement": "Fix $\\Lambda=E$ or $\\Qlb$ in the rational/common-stage coefficient categories of [def-weil-weil-sheaf-complex]. Let $f:X\\to Y$ be a smooth separated finite-type morphism of pure relative dimension $d$ between separated finite-type geometric fibers over $k_0$, and let $P_X=Lg_X^*$ and $P_Y=Lg_Y^*$. The canonical smooth purity maps $\\gamma_{f,K}:Lf^*K(d)[2d]\\xrightarrow{\\sim}Rf^!K$ are natural in every morphism $u:K\\to L$ of the rational constructible categories: under the canonical pullback, twist and shift identifications, $$Rf^!(u)\\circ\\gamma_{f,K}=\\gamma_{f,L}\\circ(Lf^*u)(d)[2d].$$ For every $K$, the exchange $$e_K:P_XRf^!K\\to Rf^!P_YK$$ defined by $$e_K=\\gamma_{f,P_YK}\\circ b_K\\circ(P_X\\gamma_{f,K})^{-1}$$, with $b_K:P_X(Lf^*K(d)[2d])\\xrightarrow{\\sim}Lf^*(P_YK)(d)[2d]$, is the adjunction mate of the inverse compact-support exchange $P_YRf_!\\xrightarrow{\\sim}Rf_!P_X$ under the constructible adjunction $Rf_!\\dashv Rf^!$. These assertions are identities in the rational category and, for $\\Qlb$, in its common-stage category; they quantify over arbitrary rational Weil isomorphisms and do not require a Frobenius-stable integral lattice.",
+ "statement": "Fix the finite-field and coefficient datum of [def-weil-weil-sheaf-complex], with $\\ell\\ne p$ and $\\Lambda=E$ or $\\Qlb$ in its rational/common-stage constructible categories. Let $X_0,Y_0$ be separated finite-type $k_0$-schemes and $f_0:X_0\\to Y_0$ a separated finite-type $k_0$-morphism. Put $X=X_0\\times_{k_0}k$, $Y=Y_0\\times_{k_0}k$, and $f=f_0\\times_{k_0}k$, and assume $f$ is smooth of pure relative dimension $d\\geq0$ [def-sbc-smooth-morphisms]. Let $g_X,g_Y$ be their geometric-Frobenius automorphisms and $P_X=Lg_X^*$, $P_Y=Lg_Y^*$ [def-pur-scheme-geometric-frobenius, def-weil-derived-pullback-tensor-hom]. Write $F=Rf_!$ and $G=Rf^!$ for the constructible adjoint pair of [def-weil-integral-rational-qbar-compact-support, def-weil-exceptional-inverse-image], with $F$ computed from a compactification $c=(j,\\bar f)$ of $f$ [def-weil-compactifications-refinements] that is the base change to $k$ of a compactification of $f_0$. Use the previously specified canonical purity maps $\\gamma_{f,K}:H(K)\\xrightarrow{\\sim}G(K)$ of [thm-pur-rational-and-qbar-purity], with $H(K)=Lf^*K(d)[2d]$, transporting the finite canonical maps [def-pur-smooth-purity-map].\n\nFor every morphism $u:K\\to L$ in $D^b_c(Y,\\Lambda)$, under the canonical pullback, twist and shift identifications,\n$$G(u)\\circ\\gamma_{f,K}=\\gamma_{f,L}\\circ H(u).$$\nLet $b_K:P_XH(K)\\xrightarrow{\\sim}H(P_YK)$ be pullback composition for $fg_X=g_Yf$, followed by the tensor, shift and canonical Tate-line comparison $P_X\\Lambda_X(d)\\simeq\\Lambda_X(d)$ of [def-weil-frobenius-coefficient-twists]. Let $\\beta:P_YF\\xrightarrow{\\sim}FP_X$ be the canonical compact-support exchange for that Cartesian square, formed with $c$ and its pullback along $g_Y$. Then\n$$e_K=\\gamma_{f,P_YK}\\circ b_K\\circ(P_X\\gamma_{f,K})^{-1}:P_XG(K)\\xrightarrow{\\sim}G(P_YK)$$\nis the right adjunction mate of $\\beta^{-1}:FP_X\\to P_YF$ under $F\\dashv G$ [def-weil-pbc-adjunction-mate]; equivalently, with counit $\\varepsilon:FG\\to\\mathrm{id}$,\n$$\\varepsilon_{P_YK}\\circ F(e_K)=P_Y(\\varepsilon_K)\\circ\\beta_{G(K)}^{-1}.$$\nBoth assertions are identities in the rational category and, for $\\Qlb$, in the common-stage category. In particular naturality applies to every rational Weil isomorphism $P_YK\\xrightarrow{\\sim}K$, without requiring a Frobenius-stable integral lattice.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/prop-weil-operations.proof.md",
   "place": "Proof sentence 3 (geometric orientation and trace) and sentence 4 (formal duality exchange from evaluation and adjunction maps)"
  },
  "stmt_deps": [
   "def-weil-weil-sheaf-complex",
+  "def-sbc-smooth-morphisms",
+  "def-pur-scheme-geometric-frobenius",
   "def-weil-derived-pullback-tensor-hom",
+  "def-weil-integral-rational-qbar-compact-support",
   "def-weil-exceptional-inverse-image",
+  "def-weil-compactifications-refinements",
+  "thm-pur-rational-and-qbar-purity",
   "def-pur-smooth-purity-map",
-  "def-pur-smooth-pullback-exchange",
-  "lem-fix-weil-operations",
+  "def-weil-frobenius-coefficient-twists",
   "def-weil-pbc-adjunction-mate"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "All schemes in the statement are separated finite type over $k$. They are Noetherian by [lem-weil-pbc-finite-type-over-noetherian] (a field is Noetherian), and finite-dimensional by [lem-kun-dimension-finite-type]; $\\ell$ is invertible since $\\ell\\ne p$. Thus they satisfy the scheme hypotheses of the integral and rational categories. By [def-weil-pbc-rational-category] an $E$-object is an integral object viewed in a scalar localization; this choice of an underlying integral object does not equip it with an integral Weil structure.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-kun-dimension-finite-type",
+    "def-weil-pbc-rational-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/prop-weil-operations.proof.md",
+    "place": "Proof sentences 3–4, expanded rational naturality and adjunction argument"
+   }
+  },
+  {
+   "text": "Identify the integral presentation of Step 1 with [def-weil-derived-complete-integral-detailed] by [lem-weil-pbc-integral-stratified-perfect-characterization]. For such an integral constructible object $K$, [lem-coef-integral-residue-tor] gives a single Tor-amplitude interval for all its derived reductions; hence its reduction tower lies in the domain of [det-sp-tower-gamma]. The powers $\\ell^n$ used there are a cofinal subsystem of uniformizer powers: in the DVR $\\ell$ is a unit times $\\varpi_E^{e(E/\\mathbf Q_\\ell)}$, so $\\mathcal O_E/(\\ell^n)=\\mathcal O_E/(\\varpi_E^{en})$. No additional finite-Tor condition on a rational object is being imposed.",
+   "uses": [
+    "lem-coef-integral-residue-tor",
+    "det-sp-tower-gamma",
+    "def-weil-derived-complete-integral-detailed",
+    "lem-weil-pbc-integral-stratified-perfect-characterization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/prop-weil-operations.proof.md",
+    "place": "Proof sentences 3–4, expanded rational naturality and adjunction argument"
+   }
+  },
+  {
+   "text": "Apply the naturality assertion in clause (2) of [det-sp-tower-gamma] to the actual derived reduction of an integral arrow $v:K\\to L$. Apply the functor $R\\varprojlim$ to that equality. The natural Hom bijections and purity formula of [det-sp-integral-adjunction-bijection] identify the result with $G(v)\\gamma_K=\\gamma_LH(v)$ for the integral purity maps. Identify its right adjoint $H_{f,\\mathcal O_E}$ with the specified $Rf^!$ using their constructible adjunctions [def-weil-exceptional-inverse-image] and the unique counit-preserving natural isomorphism [det-sp-unique-right-adjoint]. This fixes the adjunction normalization used below.",
+   "uses": [
+    "det-sp-tower-gamma",
+    "det-sp-integral-adjunction-bijection",
+    "def-weil-exceptional-inverse-image",
+    "det-sp-unique-right-adjoint"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/prop-weil-operations.proof.md",
+    "place": "Proof sentences 3–4, expanded rational naturality and adjunction argument"
+   }
+  },
+  {
+   "text": "The square with horizontal arrows $g_X,g_Y$ is Cartesian as a square of schemes by [def-pur-scheme-geometric-frobenius]. To apply a theorem stated for $k$-morphisms, give its source copy of each $T=X,Y$ the structure map $a_Tg_T=\\operatorname{Spec}(\\gamma)a_T$; call it $T^{\\langle\\gamma\\rangle}$. Then $g_T:T^{\\langle\\gamma\\rangle}\\to T$ is a $k$-isomorphism, and the left vertical arrow is the same underlying $f$, now $f^{\\langle\\gamma\\rangle}$. The source schemes remain separated finite type and this arrow remains smooth of dimension $d$, since these changes compose structural maps with a field isomorphism. The canonical twist comparison for this square is precisely the roots-of-unity pullback comparison specified in [def-weil-frobenius-coefficient-twists]. In particular the square does not replace geometric Frobenius by a $k$-linear absolute-Frobenius endomorphism.",
+   "uses": [
+    "def-pur-scheme-geometric-frobenius",
+    "def-weil-frobenius-coefficient-twists"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/prop-weil-operations.proof.md",
+    "place": "Proof sentences 3–4, expanded rational naturality and adjunction argument"
+   }
+  },
+  {
+   "text": "Choose the compactification $c$ of the statement as follows. Since $Y_0$ is of finite type over a field it is quasi-compact and quasi-separated, so [thm-nagata-compactification] gives a compactification $X_0\\xrightarrow{j_0}\\overline X_0\\xrightarrow{\\bar f_0}Y_0$ of the separated finite-type $f_0$; its base change $c=(j,\\bar f)$ to $k$ is a compactification of $f$ [def-weil-compactifications-refinements], by base change of open immersions and proper morphisms [lem-weil-pbc-open-immersion-base-change, lem-weil-pbc-proper-base-change]. By [lem-weil-frobenius-square-cartesian] for $\\bar f_0$, the square $\\bar fg_{\\overline X}=g_Y\\bar f$ is Cartesian, and $jg_X=g_{\\overline X}j$ since both are base changes of $j_0$. Hence the pullback of $c$ along $g_Y$, used by [det-sp-tower-exceptional-bc], is identified by $g_{\\overline X}$ with the same underlying compactification $(j,\\bar f)$ of the retagged $f^{\\langle\\gamma\\rangle}$, which is the compactification used in [lem-pur-tower-purity-ground-field-retagging]. Work first in the ordinary derived category of coefficient towers, retaining its transition maps. Apply [det-sp-purity-bc-factors] to the retagged $k$-Cartesian square of Step 4. Its $e_\\bullet$ is the transpose of inverse compact-support exchange by [det-sp-tower-exceptional-bc], not merely an isomorphism with the same endpoints. Its conclusion is\n$$e_{\\bullet,K}\\,P_X\\gamma_{\\bullet,K}=\\gamma_{f^{\\langle\\gamma\\rangle},\\bullet,P_YK}\\,b_{\\bullet,K}.$$\nBy [lem-pur-tower-purity-ground-field-retagging], identify the retagged purity on the right with $\\gamma_{f,\\bullet,P_YK}$, using the identity of the underlying sites, the same compactification, and the counit-preserving right-adjoint comparison. Multiplying on the right by $(P_X\\gamma_{\\bullet,K})^{-1}$ proves the displayed purity formula for the actual tower mate. This is an equality in the derived category of towers, not a conclusion from equality of its separate evaluations.",
+   "uses": [
+    "det-sp-purity-bc-factors",
+    "det-sp-tower-exceptional-bc",
+    "lem-pur-tower-purity-ground-field-retagging",
+    "thm-nagata-compactification",
+    "def-weil-compactifications-refinements",
+    "lem-weil-pbc-open-immersion-base-change",
+    "lem-weil-pbc-proper-base-change",
+    "lem-weil-frobenius-square-cartesian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/prop-weil-operations.proof.md",
+    "place": "Proof sentences 3–4, expanded rational naturality and adjunction argument"
+   }
+  },
+  {
+   "text": "Realize the normalized towers of Step 5 in the integral category by [det-sp-normalized-equivalence]. The pullback and compact-support identifications are the natural ones of [det-sp-integral-direct-image-tower]. The compatibility with the actual compactification exchange, including its open/proper maps and units/counits before evaluation, is [lem-sf-integral-compactification-system-realization], applied to the $k$-morphisms in the retagged square. The integral adjunction of [det-sp-integral-adjunction-bijection] has precisely the realized tower counit. Consequently applying this functor to the tower transpose equation gives\n$$\\varepsilon_{P_YK}F(e_K)=P_Y(\\varepsilon_K)\\beta_{GK}^{-1}$$\nin the integral category. Applying it to the equality in Step 5 gives $e_K=\\gamma_{P_YK}b_K(P_X\\gamma_K)^{-1}$. The counit-preserving comparison in Step 3 identifies these with the specified $G$ and $\\gamma$. These two conclusions use functorial realization of tower arrows; they do not use faithfulness of finite-level evaluation.",
+   "uses": [
+    "det-sp-normalized-equivalence",
+    "det-sp-integral-direct-image-tower",
+    "lem-sf-integral-compactification-system-realization",
+    "det-sp-integral-adjunction-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/prop-weil-operations.proof.md",
+    "place": "Proof sentences 3–4, expanded rational naturality and adjunction argument"
+   }
+  },
+  {
+   "text": "Keep the maps constructed in Steps 3–6 distinct from the already specified purity: denote the former by $\\gamma^T$. Apply [lem-pur-tower-trace-purity-comparison] to $f$ with the same compactification, normalized reductions and counit-preserving right-adjoint comparison. Its integral comparison is $\\gamma^{\\mathrm{tr}}_{E,K}=\\gamma^T_{E,K}$, where $\\gamma^{\\mathrm{tr}}$ uses any reconstructed unit orientation, its scalar-extended trace and the projection transpose. Its rational conclusion identifies the actual chosen maps of [thm-pur-rational-and-qbar-purity]: $\\gamma^{\\mathrm{rat}}_{f,Q_EK}=Q_E(\\gamma^T_{E,K})$, with the stated coefficient comparisons. Hence the naturality and counit equations proved above for $\\gamma^T$ apply to the intended family after localization. This uses a comparison of the unit orientation and of the actual transposes; equality of arbitrary coherent lifts is not assumed.",
+   "uses": [
+    "lem-pur-tower-trace-purity-comparison",
+    "thm-pur-rational-and-qbar-purity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/prop-weil-operations.proof.md",
+    "place": "Proof sentences 3–4, expanded rational naturality and adjunction argument"
+   }
+  },
+  {
+   "text": "Pass to $E$ by [prop-weil-pbc-rational-transport], using the rational operations on arrows of [def-weil-derived-pullback-tensor-hom, def-weil-exceptional-inverse-image] and the actual purity-family identification established in Step 7. For any rational arrow write $u=\\varpi_E^{-N}v$ with $v$ integral, possible by [def-weil-pbc-rational-category]. Both $H_E$ and $G_E$ act by this scalar-extension rule. Thus Steps 3 and 7 give, in the localized Hom group,\n$$G_E(u)\\gamma_K=\\varpi_E^{-N}G_E(v)\\gamma_K=\\varpi_E^{-N}\\gamma_LH_E(v)=\\gamma_LH_E(u).$$\nThis proves naturality for every rational arrow, whether or not it lifts to an integral isomorphism.",
+   "uses": [
+    "prop-weil-pbc-rational-transport",
+    "def-weil-derived-pullback-tensor-hom",
+    "def-weil-exceptional-inverse-image",
+    "def-weil-pbc-rational-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/prop-weil-operations.proof.md",
+    "place": "Proof sentences 3–4, expanded rational naturality and adjunction argument"
+   }
+  },
+  {
+   "text": "Apply the localization functor also to the two integral equations of Step 6. It preserves composites and inverses, so $e_E=\\gamma_{P_YK}b_K(P_X\\gamma_K)^{-1}$ and $\\varepsilon_{P_YK}F_E(e_E)=P_Y(\\varepsilon_K)\\beta_{G_EK}^{-1}$ remain equalities. The rational adjunction is the one whose units and counits agree with this passage, by [lem-coef-rational-operations]. Take $L_1=L_2=F_E$, $R_1=R_2=G_E$, and the connecting functors $P_X,P_Y$ in [def-weil-pbc-adjunction-mate]. Its transpose characterization says exactly that the latter equation identifies $e_E$ with the mate of $\\beta^{-1}:F_EP_X\\to P_YF_E$. This checks the direction of the inverse exchange as well as the adjunction normalization.",
+   "uses": [
+    "lem-coef-rational-operations",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/prop-weil-operations.proof.md",
+    "place": "Proof sentences 3–4, expanded rational naturality and adjunction argument"
+   }
+  },
+  {
+   "text": "For $\\Qlb$, use the common-stage categories of [def-weil-pbc-qbar-category]. Clauses (2)–(3) of [det-sp-field-extension-towers] intertwine the actual tower purity, preserve its units and counits, and give coefficient-composition compatibility. Step 7 identifies its rational image with the intended purity, with precisely these coefficient comparisons. The adjunction identifications preserve units and counits under finite scalar extension by [lem-coef-rational-operations], and the actual rational compact-support exchange satisfies its scalar comparison equation by [lem-cbc-rational-compact-support-coefficient-coherence]. The pullback/twist comparisons and their action on common-stage arrows are those of [def-weil-derived-pullback-tensor-hom, def-weil-frobenius-coefficient-twists]. Therefore the expressions in Steps 8–9 are compatible natural transformations and their equations descend by [prop-weil-pbc-descent-functors]. Concretely, represent an arbitrary arrow $u$ over one common finite extension $M$, apply Step 8 at $M$, and conjugate the two sides by the same scalar comparison isomorphisms. For the mate equation take the representative at the stage of $K$ and apply Step 9. The resulting equalities of representatives give exactly the asserted equalities of morphism classes.",
+   "uses": [
+    "def-weil-pbc-qbar-category",
+    "lem-coef-rational-operations",
+    "lem-cbc-rational-compact-support-coefficient-coherence",
+    "def-weil-derived-pullback-tensor-hom",
+    "def-weil-frobenius-coefficient-twists",
+    "prop-weil-pbc-descent-functors",
+    "det-sp-field-extension-towers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/prop-weil-operations.proof.md",
+    "place": "Proof sentences 3–4, expanded rational naturality and adjunction argument"
+   }
+  },
+  {
+   "text": "Finally let $\\theta:P_YK\\xrightarrow{\\sim}K$ be any Weil structure in the category of [def-weil-weil-sheaf-complex]. Apply Step 8 or 10 with $u=\\theta$ and $K$ there replaced by $P_YK$: $G(\\theta)\\gamma_{P_YK}=\\gamma_KH(\\theta)$. Substitute the formula for $e_K$ and cancel $P_X\\gamma_K$ to obtain\n$$G(\\theta)e_KP_X\\gamma_K=\\gamma_KH(\\theta)b_K.$$\nThus the purity comparison intertwines the Weil structure made from the adjunction mate with the pullback/twist Weil structure. No step selected a lattice stable under $\\theta$; the fraction calculation treated $\\theta$ itself as an arbitrary rational arrow.",
+   "uses": [
+    "def-weil-weil-sheaf-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/prop-weil-operations.proof.md",
+    "place": "Proof sentences 3–4, expanded rational naturality and adjunction argument"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-kun-dimension-finite-type",
+  "def-weil-pbc-rational-category",
+  "lem-coef-integral-residue-tor",
+  "det-sp-tower-gamma",
+  "def-weil-derived-complete-integral-detailed",
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "det-sp-integral-adjunction-bijection",
+  "def-weil-exceptional-inverse-image",
+  "det-sp-unique-right-adjoint",
+  "def-pur-scheme-geometric-frobenius",
+  "def-weil-frobenius-coefficient-twists",
+  "det-sp-purity-bc-factors",
+  "det-sp-tower-exceptional-bc",
+  "lem-pur-tower-purity-ground-field-retagging",
+  "thm-nagata-compactification",
+  "def-weil-compactifications-refinements",
+  "lem-weil-pbc-open-immersion-base-change",
+  "lem-weil-pbc-proper-base-change",
+  "lem-weil-frobenius-square-cartesian",
+  "det-sp-normalized-equivalence",
+  "det-sp-integral-direct-image-tower",
+  "lem-sf-integral-compactification-system-realization",
+  "lem-pur-tower-trace-purity-comparison",
+  "thm-pur-rational-and-qbar-purity",
+  "prop-weil-pbc-rational-transport",
+  "def-weil-derived-pullback-tensor-hom",
+  "lem-coef-rational-operations",
+  "def-weil-pbc-adjunction-mate",
+  "def-weil-pbc-qbar-category",
+  "lem-cbc-rational-compact-support-coefficient-coherence",
+  "prop-weil-pbc-descent-functors",
+  "det-sp-field-extension-towers",
+  "def-weil-weil-sheaf-complex"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/prop-weil-operations.proof.md",
+  "place": "Proof sentences 3–4; explicit tower, semilinear-retagging, scalar-localization and common-stage expansion"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -75,10 +270,68 @@
    "results": "SheafOfModules.PullbackConstruction.adjunction; TopCat.Sheaf.pullbackPushforwardAdjunction; AlgebraicGeometry.Scheme.Modules.restrictAdjunction; SheafOfModules.pushforwardPushforwardAdj; CondensedSet.compactlyGeneratedAdjunction; Topology.IsInducing.adjunction; CategoryTheory.ExponentiableMorphism.pullbackPushforwardAdj; CompHausLike.LocallyConstant.adjunction_unit",
    "date": "2026-10-18",
    "verdict": "generalization: unrelated adjunctions; no six-functor mate"
+  },
+  {
+   "tool": "grep",
+   "query": "purity|smoothPurity|Weil.*mate",
+   "subdirectory": "CategoryTheory",
+   "results": "none",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Smooth purity natural isomorphism for rational étale sheaves compatible with Frobenius adjunction mates",
+   "results": "CategoryTheory.frobeniusMorphism_mate, SheafOfModules.PullbackConstruction.adjunction, CategoryTheory.frobeniusMorphism, CategoryTheory.sheafHom'Iso, SheafOfModules.freeFunctorCompPullbackIso, SheafOfModules.pushforwardNatIso, CategoryTheory.sheafComposeNatIso, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal",
+   "date": "2026-10-18",
+   "verdict": "no match: no smooth-purity, rational-coefficient or geometric-Frobenius instance; generic category theory only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv",
+   "results": "CategoryTheory.mateEquiv, CategoryTheory.mateEquiv_counit, CategoryTheory.mateEquiv_counit_symm, CategoryTheory.unit_mateEquiv, CategoryTheory.unit_mateEquiv_symm, CategoryTheory.conjugateEquiv_mateEquiv_vcomp, CategoryTheory.mateEquiv_conjugateEquiv_vcomp, CategoryTheory.mateEquiv_vcomp",
+   "date": "2026-10-18",
+   "verdict": "no match: no smooth-purity, rational-coefficient or geometric-Frobenius instance; generic category theory only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of smooth purity on rational constructible complexes and the Frobenius exceptional exchange as adjunction mate",
+   "results": "CategoryTheory.ExponentiableMorphism.coev_naturality, CategoryTheory.ExponentiableMorphism.ev_naturality, AlgebraicTopology.DoldKan.Compatibility.τ₁_hom_app, CategoryTheory.ExponentiableMorphism.ev_naturality_assoc, CategoryTheory.bijection_natural, CategoryTheory.ExponentiableMorphism.coev_naturality_assoc, LightCondensed.ihomPoints_symm_comp, SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app",
+   "date": "2026-10-18",
+   "verdict": "no match: no smooth-purity, rational-coefficient or geometric-Frobenius instance; generic category theory only"
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv_counit|def mateEquiv|theorem naturality",
+   "subdirectory": "CategoryTheory/Adjunction",
+   "results": "Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean",
+   "date": "2026-10-18",
+   "verdict": "no match: no smooth-purity, rational-coefficient or geometric-Frobenius instance; generic category theory only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naturality of smooth purity under arbitrary morphisms in the localized rational constructible category",
+   "results": "CategoryTheory.Localization.Construction.natTransExtension, CategoryTheory.MorphismProperty.Localization', CategoryTheory.Localization.liftNatIso, RingHom.Smooth.holdsForLocalizationAway, RingHom.FormallySmooth.holdsForLocalizationAway, CategoryTheory.LocalizerMorphism.homMap, CategoryTheory.MorphismProperty.instIsLocalizationLocalization'Q', CategoryTheory.CatCenter.localization_app",
+   "date": "2026-10-18",
+   "verdict": "no match: no smooth-purity, rational-coefficient or geometric-Frobenius instance; generic category theory only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.naturality",
+   "results": "CategoryTheory.NatTrans.naturality, CategoryTheory.Limits.PullbackCone.isoMk, CategoryTheory.Limits.PushoutCocone.isoMk, CategoryTheory.Limits.PullbackCone.isoMk_hom_hom, CategoryTheory.Limits.PullbackCone.isoMk_inv_hom, CategoryTheory.Limits.PushoutCocone.isoMk_hom_hom, CategoryTheory.Limits.PushoutCocone.isoMk_inv_hom, CategoryTheory.Grothendieck.map_map",
+   "date": "2026-10-18",
+   "verdict": "no match: no smooth-purity, rational-coefficient or geometric-Frobenius instance; generic category theory only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical orientation of a smooth morphism identifies extraordinary pullback with ordinary pullback followed by a Tate twist and shift, naturally for rational sheaves",
+   "results": "AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_hom_τl, SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullbackComp, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_inv_τl, SheafOfModules.pullbackIso, AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity",
+   "date": "2026-10-18",
+   "verdict": "no match: no smooth-purity, rational-coefficient or geometric-Frobenius instance; generic category theory only"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "prop-weil-operations",
@@ -95,5 +348,129 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-pur-rational-weil-naturality-mate",
+  "worker": "stage1",
+  "summary": "Repair C4/E5: retained the intended rational purity family; added a statement-only comparison lemma identifying the actual tower orientation/trace-transpose construction with its chosen integral representatives and rational maps. Replaced the misapplied transitivity citation by det-sp-field-extension-towers, with explicit domain comparison. The remaining tower, mate and fraction arguments are retained.",
+  "blueprint": "prop-weil-operations proof sentence 3 (purity/orientation) and sentence 4 (adjunction normalization); arbitrary rational Weil structures are handled by the explicit fraction calculation, not stable lattices.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic A scheme of finite type over a Noetherian scheme is Noetherian (Stacks 01T6) used as stated for the purity/coefficient/adjunction argument supporting prop-weil-operations; the finiteness unit has no replacement for this tool."
+   },
+   {
+    "node": "lem-kun-dimension-finite-type",
+    "why": "Generic Finiteness of the dimension of a finite type scheme used as stated for the purity/coefficient/adjunction argument supporting prop-weil-operations; the finiteness unit has no replacement for this tool."
+   },
+   {
+    "node": "lem-coef-integral-residue-tor",
+    "why": "Generic The residue reduction controls integral Tor amplitude used as stated for the purity/coefficient/adjunction argument supporting prop-weil-operations; the finiteness unit has no replacement for this tool."
+   },
+   {
+    "node": "det-sp-tower-gamma",
+    "why": "Generic Tower orientation and tower purity isomorphism used as stated for the purity/coefficient/adjunction argument supporting prop-weil-operations; the finiteness unit has no replacement for this tool."
+   },
+   {
+    "node": "det-sp-integral-adjunction-bijection",
+    "why": "Generic The derived limit of the tower adjunction is an integral adjunction used as stated for the purity/coefficient/adjunction argument supporting prop-weil-operations; the finiteness unit has no replacement for this tool."
+   },
+   {
+    "node": "det-sp-unique-right-adjoint",
+    "why": "Generic Right adjoints are unique up to a unique counit-compatible isomorphism used as stated for the purity/coefficient/adjunction argument supporting prop-weil-operations; the finiteness unit has no replacement for this tool."
+   },
+   {
+    "node": "det-sp-purity-bc-factors",
+    "why": "Generic Base change of the orientation and of the tensor map used as stated for the purity/coefficient/adjunction argument supporting prop-weil-operations; the finiteness unit has no replacement for this tool."
+   },
+   {
+    "node": "det-sp-tower-exceptional-bc",
+    "why": "Generic Exceptional base change for towers and integral coefficients used as stated for the purity/coefficient/adjunction argument supporting prop-weil-operations; the finiteness unit has no replacement for this tool."
+   },
+   {
+    "node": "lem-pur-tower-purity-ground-field-retagging",
+    "why": "Generic Ground-field retagging preserves the full tower purity comparison used as stated for the purity/coefficient/adjunction argument supporting prop-weil-operations; the finiteness unit has no replacement for this tool."
+   },
+   {
+    "node": "det-sp-normalized-equivalence",
+    "why": "Generic Integral constructible complexes are normalized constructible towers used as stated for the purity/coefficient/adjunction argument supporting prop-weil-operations; the finiteness unit has no replacement for this tool."
+   },
+   {
+    "node": "det-sp-integral-direct-image-tower",
+    "why": "Generic Tower description of the integral compactly supported direct image used as stated for the purity/coefficient/adjunction argument supporting prop-weil-operations; the finiteness unit has no replacement for this tool."
+   },
+   {
+    "node": "lem-sf-integral-compactification-system-realization",
+    "why": "Generic Coherent integral realization of compactification expressions and their maps used as stated for the purity/coefficient/adjunction argument supporting prop-weil-operations; the finiteness unit has no replacement for this tool."
+   },
+   {
+    "node": "prop-weil-pbc-rational-transport",
+    "why": "Generic Functorial transport to a finite field used as stated for the purity/coefficient/adjunction argument supporting prop-weil-operations; the finiteness unit has no replacement for this tool."
+   },
+   {
+    "node": "thm-pur-rational-and-qbar-purity",
+    "why": "Generic Rational and $\\Qlb$ purity used as stated for the purity/coefficient/adjunction argument supporting prop-weil-operations; the finiteness unit has no replacement for this tool."
+   },
+   {
+    "node": "lem-coef-rational-operations",
+    "why": "Generic Identification with the rational internal Hom and exceptional inverse image used as stated for the purity/coefficient/adjunction argument supporting prop-weil-operations; the finiteness unit has no replacement for this tool."
+   },
+   {
+    "node": "lem-cbc-rational-compact-support-coefficient-coherence",
+    "why": "Generic Coherent coefficient comparisons for rational compact-support exchange used as stated for the purity/coefficient/adjunction argument supporting prop-weil-operations; the finiteness unit has no replacement for this tool."
+   },
+   {
+    "node": "prop-weil-pbc-descent-functors",
+    "why": "Generic Descent of coefficient-compatible functors used as stated for the purity/coefficient/adjunction argument supporting prop-weil-operations; the finiteness unit has no replacement for this tool."
+   },
+   {
+    "node": "det-sp-field-extension-towers",
+    "why": "Clauses (2)-(3) supply coefficient compatibility for the actual tower purity and its adjunction, before descent; this is a coefficient transport tool, not a replacement of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "why": "Identifies the integral category underlying rationalization with the completed constructible presentation required for tower purity; the finiteness unit does not provide this category comparison."
+   },
+   {
+    "node": "thm-nagata-compactification",
+    "why": "Step 5 needs a compactification of the descended morphism f_0 over the qcqs base Y_0, so that its base change is stable under Frobenius pullback; the unit has no compactification-existence node (added by the maintainer reader)."
+   },
+   {
+    "node": "lem-weil-frobenius-square-cartesian",
+    "why": "Step 5 uses that the Frobenius square of the proper map bar f_0 is Cartesian, to identify the pulled-back compactification with the retagged one; generic Frobenius-square tool (added by the maintainer reader)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-kun-dimension-finite-type",
+  "lem-coef-integral-residue-tor",
+  "det-sp-tower-gamma",
+  "det-sp-integral-adjunction-bijection",
+  "det-sp-unique-right-adjoint",
+  "det-sp-purity-bc-factors",
+  "det-sp-tower-exceptional-bc",
+  "lem-pur-tower-purity-ground-field-retagging",
+  "det-sp-normalized-equivalence",
+  "det-sp-integral-direct-image-tower",
+  "lem-sf-integral-compactification-system-realization",
+  "prop-weil-pbc-rational-transport",
+  "thm-pur-rational-and-qbar-purity",
+  "lem-coef-rational-operations",
+  "lem-cbc-rational-compact-support-coefficient-coherence",
+  "prop-weil-pbc-descent-functors",
+  "det-sp-field-extension-towers",
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "thm-nagata-compactification",
+  "lem-weil-frobenius-square-cartesian"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q23-fedfce9fc",
+  "group": "Q23",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q23-fedfce9fc (reviewer sub-agent of L); spot-checked: I read every step of the item and the new node, and every cited statement in full. I checked the source (prop-weil-operations proof sentences 3-4), the parent's Steps 7 and 10, the returned head 8893bc1ecc9d with its review, and the blueprint files sk-prop-sp-tower-geometric-gamma.proof (clauses 1-2) and sk-prop-sp-rational. Kept as correct: (a) the descent to k_0, since the A^1 translation counterexample checks out; (b) the typed mate β^{-1}:FP_X→P_YF, a correct instance of def-weil-pbc-adjunction-mate whose counit equation matches; (c) Steps 1-4 and 6-11, including the fraction calculation and Step 10 now citing det-sp-field-extension-towers(2)-(3). Small cases checked: empty X, d=0, f=id, and θ=ℓ^{±1} on a point. The new node is not a restatement of a clause and not a duplicate of tower-gamma, adjunction-bijection, scalar-naturality, tensor-trace-transpose or rational-trace-coherence. Its integral claims hold: End(Ẑ_ℓ(d)[2d]) = H^0(X,Ẑ_ℓ) = lim H^0(X,Z/ℓ^n), so g_0 = a^T_0; t_E follows from the coefficient squares; γ^tr = γ^T follows from the projection-formula transpose. No SGA, no cycle, no pivot-dropped id; proof_deps match the step uses. Fix 1 (E1/C4): Step 5 combined base-change nodes that use the compactification pulled back along g_Y with the retagging lemma, which uses the same underlying compactification. For an arbitrary c no cited node compares the two. The statement now computes F and β with a compactification descended from f_0. Step 5 proves it exists and is stable, citing thm-nagata-compactification, the open-immersion and proper base-change leaves and lem-weil-frobenius-square-cartesian; the last two non-leaf nodes are added to tool_uses. Fix 2 (C3/B2): the new node's equality γ^rat = Q_E(γ^T) rests on the trace-transpose family that only the proof of lem-pur-adic-purity-scalar-naturality constructs; that node's statement is existential. The new node now cites that lemma and states the trace-transpose premise explicitly, and clause (1) is added to its source. Maintainer remark: lem-pur-adic-purity-scalar-naturality should state its construction (or thm-pur-adic-reconstruction should follow its blueprint_update) so that this premise follows from a statement. Separately, the existing DAG references a missing node def-weil-pbc-etale-morphism; this delivery does not cite it directly. All declared tool uses are accepted.; 2 file(s) fixed by the reviewer"
  }
 }
