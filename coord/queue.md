@@ -1,6 +1,6 @@
 # Work queue
 
-1505 items; claim with `tools/claim.py next <group> [--stage N]`.
+1508 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (1505)
+## Stage 3: modules to prove (1508)
 
 On the sorry route of an open batch, or below a route sorry of one (the human, 2026-10-18: provable as soon as every dependency is stated, whatever the depth); route first, then nearest to a route sorry.
 
@@ -17,6 +17,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.AlgebraicGeometry.RelativeProjExists` | 6 | 1 | repair | route |
 | `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible` | 2 | 3 | repair | route |
 | `Sheaf.AlgebraicGeometry.EtaleCompactSupportGraphGeometricBaseChange` | 7 | 1 | repair | route |
+| `WeilConjectures.ZetaFunction.TraceFormula` | 2 | 1 | proof | route |
 | `Sheaf.AlgebraicGeometry.EllAdicLocalizingExceptionalBounded` | 3 | 1 | proof | route |
 | `Sheaf.AlgebraicGeometry.EllAdicLocalizingExceptionalConstructibleCohomology` | 3 | 1 | proof | route |
 | `Sheaf.PoincareDuality.ProperProjectionFormulaBounded` | 3 | 1 | proof | route |
@@ -564,6 +565,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.PointFibreDerivedTensor` | - | 1 | proof | 2 |
 | `Sheaf.Paper.ProperCoincidenceFrobenius` | - | 8 | proof | 2 |
 | `Sheaf.Paper.ProperOpenTowerComparison` | - | 1 | proof | 2 |
+| `Sheaf.Paper.ProperSectionsSemilinearGerms` | - | 3 | proof | 2 |
 | `Sheaf.Paper.PuritySourceTransports` | - | 10 | proof | 2 |
 | `Sheaf.Paper.RationalSmoothPurityCanonical` | - | 16 | proof | 2 |
 | `Sheaf.Paper.RealBoundaryDecompositionLanding` | - | 1 | proof | 2 |
@@ -910,6 +912,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.SecSmoothPurity.ReductionCompatibilities` | - | 3 | proof | 3 |
 | `Sheaf.SecSmoothPurity.ReductionExceptional` | - | 5 | proof | 3 |
 | `Sheaf.SixFunctors.AmbientProperOpenPasting` | - | 1 | proof | 3 |
+| `Sheaf.SixFunctors.FiniteMappingAdjunction` | - | 1 | proof | 3 |
 | `Sheaf.SixFunctors.GeneratorReductionStatement` | - | 3 | proof | 3 |
 | `Sheaf.SixFunctors.ProEtale.SmallCoefficientDerivedCompletion` | - | 7 | proof | 3 |
 | `Sheaf.SixFunctors.SemilinearProperOpenMatePasting` | - | 33 | proof | 3 |
@@ -1520,14 +1523,13 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Algebra.Homology.SplitCellComplexKFlat` | - | 1 | proof | 21 |
 | `Sheaf.CategoryTheory.BoundedFilteredPageFunctorNormalized` | - | 1 | proof | 21 |
 
-## Stage 3: waiting for statements of dependencies (48)
+## Stage 3: waiting for statements of dependencies (47)
 
 Not items: a node in the dependencies (stmt_deps or proof_deps) has no Lean statement yet (the human, 2026-10-17 and 2026-10-18).
 
 | module | distance to a target | sorry | waits for (first unstated node) |
 |---|---|---|---|
 | `Sheaf.SmoothPurity.NormalizedWitness` | 1 | 1 | `lem-pur-condensed-exceptional-reconstruction` |
-| `WeilConjectures.ZetaFunction.TraceFormula` | 2 | 1 | `lem-zl-general-condensed-weil-realization` |
 | `Sheaf.CategoryTheory.RightDerivedFunctorOfQuasiIsoResolutions` | 3 | 3 | `lem-sfb-modobj-abelian` |
 | `Sheaf.CategoryTheory.InternalSectionTensorComparison` | 5 | 7 | `lem-sfb-modobj-abelian` |
 | `Sheaf.Paper.CartesianCoefficients` | 5 | 2 | `lem-sfb-modobj-abelian` |
