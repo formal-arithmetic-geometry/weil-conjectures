@@ -18,9 +18,116 @@
   "def-kun-transcendence-degree",
   "def-weil-residue-field"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Excellence makes $S$ locally Noetherian and universally catenary, by the definition of excellence. Apply [lem-per-finite-type-dimension-function] to $f$ and $\\delta_S$. This gives precisely the asserted dimension function $\\delta_T$. Its values are integers since a residue extension for a finite-type map has finite transcendence degree.",
+   "uses": [
+    "def-exc-excellent-ring",
+    "lem-per-finite-type-dimension-function"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XIV, Corollary 2.5.2; Stacks Tag 02JW"
+   }
+  },
+  {
+   "text": "For $t\\in T$, put $s=f(t)$, $r=\\operatorname{trdeg}_{\\kappa(s)}\\kappa(t)$ and write $p_s:C_sK\\to\\Lambda(\\delta_S(s))[2\\delta_S(s)]$ for the given pinning. Use the actual costalk comparison of [lem-per-exceptional-costalk-gysin] to define\n$$p^f_t=\\bigl(a_t^*p_s\\bigr)(r)[2r]\\circ\\beta_{f,t,K}^{-1}:C_t(f^!K)\\longrightarrow\\Lambda(\\delta_T(t))[2\\delta_T(t)].$$\nHere inverse image of roots of unity identifies $a_t^*\\Lambda(m)$ with $\\Lambda(m)$, as part of the twist-compatible comparison. The formula is an isomorphism, is natural in pinning-preserving maps of $K$, and is independent of choices, because $\\beta$ has these properties. Thus the actual object $f^!K$ has specified pointwise pinnings; potentiality remains to be checked.",
+   "uses": [
+    "lem-per-exceptional-costalk-gysin",
+    "def-per-potential-dualizing-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, Lemma 4.4.1: construction on regular opens in point closures"
+   }
+  },
+  {
+   "text": "First consider a closed immersion $i:Z\\hookrightarrow V$ and a potential complex $L$ on $V$. The closed-immersion clause of [lem-per-exceptional-costalk-gysin] identifies $C_z(i^!L)$ with $C_{i(z)}L$, so the pinning of $i^!L$ is the pinning of $L$. For a geometric point of $Z$, [lem-sbc-strict-henselization-surjective-quotient-core] identifies its strict-local ring with the quotient of the strict-local ring of $V$ by the defining ideal. Thus $Z$ remains closed in that strict localization. For an immediate geometric specialization in $Z$, its reduced closure there is therefore also its reduced closure in $V$. Write that closure as $W$ and its inclusions as $W\\xrightarrow bZ\\xrightarrow iV$. In the defining residue construction, the complex on $W$ for $i^!L$ is $b^!i^!L=(ib)^!L$, exactly the complex on $W$ for $L$. The normalization of $W$, its purely inseparable degree, and its trait transition are identical. Hence the two specialization maps are identical under the costalk identifications. The potentiality equation for $L$ is therefore the potentiality equation for $i^!L$.",
+   "uses": [
+    "lem-per-exceptional-costalk-gysin",
+    "def-per-potential-dualizing-complex",
+    "lem-sbc-strict-henselization-surjective-quotient-core"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, Definition 1.4.1 and Definition 2.1.2; closed-immersion case of Section 4.4"
+   }
+  },
+  {
+   "text": "Next let $p:\\mathbf A^d_V\\to V$ be an affine-space projection with $V$ Noetherian excellent. Its source is Noetherian excellent by [lem-exc-finite-type-localization-excellent] applied to polynomial coordinate rings. The projection is smooth of relative dimension $d$ by [sbc-lem-affine-space-smooth]. It is also regular in the sense of [lem-per-regular-pullback-pinnings]: over an affine open $\\operatorname{Spec}R$ the ring $R[x_1,\\ldots,x_d]$ is a free, hence flat, $R$-module, and localizations preserve flatness [def-weil-flat-morphism]; for a point $v$ and any field $F\\supseteq\\kappa(v)$ the base-changed fibre is $\\operatorname{Spec}F[x_1,\\ldots,x_d]$, which is regular by [lem-weil-pbc-polynomial-ring-field-regular-ring]. For a potential $L$ on $V$, [lem-per-regular-pullback-pinnings] gives potential pinnings on $p^*L$ for $\\delta_V(p(y))-\\dim\\mathcal O_{(\\mathbf A^d_V)_{p(y)},y}$. Tensoring by the invertible Tate line $(d)$ and shifting by $2d$ carries the defining residue equation to the same equation with every value of the dimension function increased by $d$: on a strict henselian trait the Tate line is constant, and the supported trait model is linear, so its differentials and residue map commute with these operations. Thus $p^*L(d)[2d]$ is potential for that increased function. The smooth-purity isomorphism and its costalk compatibility in [lem-per-exceptional-costalk-gysin] identify this pinned object with $p^!L$ carrying exactly the pinnings of Step 2. The same compatibility identifies the increased function with $\\delta_V(p(y))+\\operatorname{trdeg}_{\\kappa(p(y))}\\kappa(y)$. The smooth isomorphism used here is the ordinary-etale, arbitrary-input, excellent-Noetherian one of [lem-trf-ambient-diagonal-purity-base-change].",
+   "uses": [
+    "lem-exc-finite-type-localization-excellent",
+    "sbc-lem-affine-space-smooth",
+    "def-weil-flat-morphism",
+    "lem-weil-pbc-polynomial-ring-field-regular-ring",
+    "lem-per-regular-pullback-pinnings",
+    "def-per-potential-dualizing-complex",
+    "lem-per-exceptional-costalk-gysin",
+    "lem-trf-ambient-diagonal-purity-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, Section 4.4, final paragraph and smooth-pinning comparison following Lemma 4.4.1"
+   }
+  },
+  {
+   "text": "Fix $t\\in T$. Choose an affine open $V=\\operatorname{Spec}A\\subset S$ about $f(t)$ and a member $U=\\operatorname{Spec}B$ about $t$ of the finite-type affine cover of $f^{-1}(V)$ in [def-weil-finite-type-morphism]. Thus $B$ is a finitely generated $A$-algebra. Choose generators $b_1,\\ldots,b_d$; the surjection $A[x_1,\\ldots,x_d]\\to B$, $x_j\\mapsto b_j$, factors $f|_U$ as a closed immersion $i:U\\hookrightarrow\\mathbf A^d_V$ followed by its projection $p$. Step 4 makes $p^!(K|_V)$ potential, and Step 3 makes $i^!p^!(K|_V)$ potential. Right-adjoint transitivity identifies this with $(f|_U)^!(K|_V)$. Source locality [lem-amb-etale-adjoint-locality] and target open restriction [lem-amb-shriek-open-exchange-adjoint] identify the latter with $(f^!K)|_U$. These ambient adjoint comparisons restrict to the bounded-below objects here: $p^!$ is the displayed twist-shift of $p^*$ and $i^!$ is right-derived supported restriction; their Hom adjunctions on $D^+$ identify them with the stated bounded-below adjoints. The restriction and composition clauses of [lem-per-exceptional-costalk-gysin] show that its pinnings are the restrictions of the globally defined $p^f_t$, rather than different pinnings on an isomorphic complex. Every immediate specialization can be checked on an open containing its special point, which also contains its general point; its strict-local closure and residue model are unchanged there. Consequently the global pinnings satisfy potentiality. This proves the main assertion.",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "def-weil-closed-immersion",
+    "def-sbc-affine-space",
+    "lem-amb-etale-adjoint-locality",
+    "lem-amb-shriek-open-exchange-adjoint",
+    "lem-per-exceptional-costalk-gysin",
+    "def-per-potential-dualizing-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, proof of Proposition 4.1.2, final paragraph: affine factorization"
+   }
+  },
+  {
+   "text": "For $T\\xrightarrow fS\\xrightarrow gB$ and $t\\mapsto s\\mapsto b$, the tower formula [lem-kun-transcendence-degree-tower] gives\n$$\\operatorname{trdeg}_{\\kappa(b)}\\kappa(t)=\\operatorname{trdeg}_{\\kappa(b)}\\kappa(s)+\\operatorname{trdeg}_{\\kappa(s)}\\kappa(t).$$\nThus the iterated and direct dimension functions agree. Expand the two iterated pinnings using the formula in Step 2. Their inverse comparison is the composite of $\\beta_{g,s,K}$ and $\\beta_{f,t,g^!K}$, followed by the pullback of the pinning at $b$, with the displayed twist-shifts added. The composition clause of [lem-per-exceptional-costalk-gysin] identifies that composite with $\\beta_{gf,t,K}$. Hence it gives exactly $p^{gf}_t$ under $f^!g^!\\cong(gf)^!$. This holds for every $t$, so transitivity preserves the pinnings. When the source is empty all pointwise conditions are vacuous; for an identity map, $r=0$ and the formula returns the original pinning.",
+   "uses": [
+    "lem-kun-transcendence-degree-tower",
+    "lem-per-exceptional-costalk-gysin"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, Remark 4.1.3 and composition verification following Lemma 4.4.1"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-exc-excellent-ring",
+  "def-per-potential-dualizing-complex",
+  "def-sbc-affine-space",
+  "def-weil-closed-immersion",
+  "def-weil-finite-type-morphism",
+  "def-weil-flat-morphism",
+  "lem-amb-etale-adjoint-locality",
+  "lem-amb-shriek-open-exchange-adjoint",
+  "lem-exc-finite-type-localization-excellent",
+  "lem-kun-transcendence-degree-tower",
+  "lem-per-exceptional-costalk-gysin",
+  "lem-per-finite-type-dimension-function",
+  "lem-per-regular-pullback-pinnings",
+  "lem-sbc-strict-henselization-surjective-quotient-core",
+  "lem-trf-ambient-diagonal-purity-base-change",
+  "lem-weil-pbc-polynomial-ring-field-regular-ring",
+  "sbc-lem-affine-space-smooth"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "XVII, proof of Proposition 4.1.2 in Section 4.4, Lemma 4.4.1 and Remark 4.1.3; XIV, Corollary 2.5.2 for the dimension function"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -52,7 +159,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-finite-regular-reduction-dualizing",
@@ -73,5 +180,59 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-per-potential-dualizing-finite-pullback",
+  "worker": "stage1",
+  "summary": "Kept the statement and all inherited metadata. Constructed the actual pointwise pinnings using Gysin costalk comparisons, proved the closed-immersion case directly from the defined residue transitions, and reduced locally to closed immersions and affine-space projections. Used regular pullback and the existing ordinary-etale ambient smooth comparison without any finite-field restriction. Checked pinnings under both restriction and composition; no target or coefficient category is changed. Three new statement-only helpers; no Mathlib match.",
+  "blueprint": "Proof, Step 3: dimension-normalized Verdier duality in the lower perverse bound; finite prime-power normalization underlying the regular generic duality model. Steps 1--6 supply the finite-prime-power exceptional normalization required by this ancestor through the existing created.item chain.",
+  "tool_uses": [
+   {
+    "node": "lem-exc-finite-type-localization-excellent",
+    "why": "Stability of excellence supplies the intermediate affine-space scheme in the source factorization; not a replacement of the perverse route."
+   },
+   {
+    "node": "sbc-lem-affine-space-smooth",
+    "why": "Polynomial projections are smooth of the displayed relative dimension, needed to apply the regular-pullback and purity tools."
+   },
+   {
+    "node": "lem-trf-ambient-diagonal-purity-base-change",
+    "why": "The ordinary-etale arbitrary-input smooth purity comparison over any excellent Noetherian base; the perverse unit has no such comparison."
+   },
+   {
+    "node": "lem-amb-etale-adjoint-locality",
+    "why": "Identifies restriction to a source open of the actual exceptional adjoint, used in the local affine factorization."
+   },
+   {
+    "node": "lem-amb-shriek-open-exchange-adjoint",
+    "why": "Identifies target-open restriction of the actual exceptional adjoint with the corresponding base-changed one."
+   },
+   {
+    "node": "lem-kun-transcendence-degree-tower",
+    "why": "Additivity of residue transcendence degrees identifies iterated and direct normalizations."
+   },
+   {
+    "node": "lem-sbc-strict-henselization-surjective-quotient-core",
+    "why": "Strict henselization commutes with the local quotient defining a closed immersion, so the closed-immersion residue comparison uses the same strict-local closure."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-exc-finite-type-localization-excellent",
+  "sbc-lem-affine-space-smooth",
+  "lem-trf-ambient-diagonal-purity-base-change",
+  "lem-amb-etale-adjoint-locality",
+  "lem-amb-shriek-open-exchange-adjoint",
+  "lem-kun-transcendence-degree-tower",
+  "lem-sbc-strict-henselization-surjective-quotient-core"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-N8-06523ec19",
+  "group": "N8",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N8-06523ec19 (reviewer sub-agent of L); spot-checked: I read the item, all three new nodes, every cited statement, and the sources: ILO XVII 2.4.1.1–2.4.3.4, 4.1.1–4.1.3, 4.3.1.1–4.3.3, Lemma 4.4.1 with the paragraphs after it and the proof of 4.1.2; Stacks 02JW. The item statement is unchanged and matches XVII 4.1.2 + 4.1.3 for Z/ℓ^n. The steps follow the source route: local f = p∘i, smooth via 4.1.1, closed immersion via the defining residue maps on the same reduced closure, composition via the β composition clause. I checked the twists and shifts and the dimension identity δ_V + d − dim O_fibre = δ_V + trdeg. New-node tests: A^1_k, a closed point immersion, a purely inseparable extension of degree p^a (multiplication by p^a, a unit). The 02JW node uses geometric immediate specializations, which agree with Stacks' topological notion under universal catenarity, so it is true. The costalk node (XVII Lemma 4.4.1 for general M ∈ D^+, with the correctly directed smooth clause) does not restate the item, since it does not give potentiality. No duplicates and no cycle; no SGA citations. Batch 5: I accept lem-trf-ambient-diagonal-purity-base-change, cited by the item and by lem-per-exceptional-costalk-gysin. It is finite-coefficient étale smooth purity over an excellent base, from the sec-smooth-purity route. The trace formula assumption does not touch purity, and the PD assumption takes Qlb purity over a field as an input and excludes base change. Its closure contains no trace or PD theorem. I accept lem-amb-shriek-open-exchange-adjoint: it is a generic f^× open exchange that batch 5 already reaches via thm-amb-vector-bundle-purity. Its reach to lem-pod-lisse-module-sheaves-as-module-objects goes through proper base change and is generic. Counting stmt_deps and proof uses and stopping at the assumed leaves, sk-thm-trace-transport and sk-thm-sf-verdier-exchange, the delivery adds only its three new nodes to the batch-5 closure. I accept all seven tool_uses. FIX, error C1: Step 4 said 'smooth, hence regular' with no citation. It now proves regularity (flat by def-weil-flat-morphism; fibres over any field F are Spec F[x], regular by the Mathlib leaf lem-weil-pbc-polynomial-ring-field-regular-ring), and uses/proof_deps were updated. The corrected file is fixes/dag/nodes/sec-deligne-laumon-a1/lem-per-potential-dualizing-finite-pullback.json.; 1 file(s) fixed by the reviewer"
  }
 }

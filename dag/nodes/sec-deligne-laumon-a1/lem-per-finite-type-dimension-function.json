@@ -1,0 +1,74 @@
+{
+ "id": "lem-per-finite-type-dimension-function",
+ "kind": "statement",
+ "title": "Residue-transcendence pullback of dimension functions",
+ "statement": "Let $S$ be a locally Noetherian universally catenary scheme: every affine coordinate ring is Noetherian and every finite-type algebra over it is catenary, in the sense spelled out in [def-exc-excellent-ring]. Let $f:T\\to S$ be locally of finite type [def-weil-finite-type-morphism]. A dimension function here means an integer-valued function whose value drops by one at each immediate specialization of geometric points, as in [def-per-potential-dualizing-complex]. If $\\delta_S$ is a dimension function on $S$, then\n$$\\delta_T(t)=\\delta_S(f(t))+\\operatorname{trdeg}_{\\kappa(f(t))}\\kappa(t)$$\nis a dimension function on $T$ [def-kun-transcendence-degree, def-weil-residue-field].",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 02JW, lemma-dimension-function-propagates; ILO XIV, Corollary 2.5.2 (with residue-field order as in its proof)"
+ },
+ "stmt_deps": [
+  "def-exc-excellent-ring",
+  "def-weil-finite-type-morphism",
+  "def-per-potential-dualizing-complex",
+  "def-kun-transcendence-degree",
+  "def-weil-residue-field"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A dimension function on a locally Noetherian scheme pulls back along a locally finite type map by adding the residue field transcendence degree",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.LocallyOfFiniteType.isLocallyNoetherian\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.LocallyOfFiniteType f]\\n  [AlgebraicGeometry.IsLocallyNoetherian Y], AlgebraicGeometry.IsLocallyNoetherian X\", \"doc\": \"If $ Y $ is a locally Noetherian scheme and $ f: X \\\\to Y $ is a morphism locally of finite type, then $ X $ is also a locally Noetherian scheme.\"}\n  {\"name\": \"AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.LocallyOfFiniteType\", \"doc\": \"The property of a morphism of schemes being locally of finite type is stable under base change. That is, if a morphism $ f: X \\to Y $ is locally of finite type, then any base change (pullback) of $ f $\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The morphism $ f: X \\\\to Y $ is locally of finite type, meaning that for every point in $ Y $, there exists an open neighborhood whose preimage under $ f $ is covered by affine open subsets such that t\"}\n  {\"name\": \"AlgebraicGeometry.instIsMultiplicativeSchemeLocallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType\", \"type\": \"CategoryTheory.MorphismProperty.IsMultiplicative @AlgebraicGeometry.LocallyOfFiniteType\", \"doc\": \"The property of being a morphism locally of finite type is multiplicative: if $ f : X \\\\to Y $ and $ g : Y \\\\to Z $ are morphisms of schemes that are locally of finite type, then their composition $ g \\\\\"}\n  {\"name\": \"AlgebraicGeometry.locallyOfFiniteType_of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType\", \"type\": \"∀ {X Y Z : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (g : Y ⟶ Z)\\n  [AlgebraicGeometry.LocallyOfFiniteType (CategoryTheory.CategoryStruct.comp f g)],\\n  AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"Let $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ be morphisms of schemes. If the composition $ f \\\\circ g $ is locally of finite type, then the morphism $ f $ is locally of finite type. A morphism is locally of f\"}\n  {\"name\": \"AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatFiberOfLocallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/Fiber\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (y : ↥Y) [AlgebraicGeometry.LocallyOfFiniteType f],\\n  JacobsonSpace ↥(AlgebraicGeometry.Scheme.Hom.fiber f y)\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes that is locally of finite type, and let $y$ be a point in $Y$. Then the fiber of $f$ over $y$, denoted $X_y$, is a Jacobson space.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsPreimmersionFromSpecResidueField\", \"module\": \"Mathlib/AlgebraicGeometry/ResidueField\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (x : ↥X), AlgebraicGeometry.IsPreimmersion (X.fromSpecResidueField x)\", \"doc\": \"For any scheme $X$ and a point $x \\\\in X$, the canonical morphism $\\\\operatorname{Spec}(\\\\kappa(x)) \\\\to X$ from the spectrum of the residue field $\\\\kappa(x)$ at $x$ to $X$ is a preimmersion in the sense \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.residueFieldMap_comp\", \"module\": \"Mathlib/AlgebraicGeometry/ResidueField\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : AlgebraicGeometry.Scheme} (g : Y ⟶ Z) (x : ↥X),\\n  AlgebraicGeometry.Scheme.Hom.residueFieldMap (CategoryTheory.CategoryStruct.comp f g) x =\\n    CategoryTheory.CategoryStruct.comp\\n      (AlgebraicGeometry.Scheme.Hom.residueFieldMap g ((CategoryTheor\", \"doc\": \"For schemes $X, Y, Z$ and morphisms $f : X \\\\to Y$, $g : Y \\\\to Z$, the residue field map of the composition $g \\\\circ f$ at a point $x \\\\in X$ satisfies $\\\\kappa_{g \\\\circ f}(x) = \\\\kappa_g(f(x)) \\\\circ \\\\kap\"}\n",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Dimension functions and codimension under a finite type morphism of universally catenary schemes",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsFinite.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsFinite f → Sort u} →\\n      (t : AlgebraicGeometry.IsFinite f) →\\n        ([toIsAffineHom : AlgebraicGeometry.IsAffineHom f] →\\n            (finite_app :\\n                ∀ (U : Y.Opens),\\n                  AlgebraicGeom\", \"doc\": \"A morphism $ f : X \\\\to Y $ of schemes is finite if it is affine and for every affine open subset $ U \\\\subseteq Y $, the induced ring homomorphism $ \\\\Gamma(Y, U) \\\\to \\\\Gamma(X, f^{-1}(U)) $ is finite, m\"}\n  {\"name\": \"ringKrullDim_le_of_surjective\", \"module\": \"Mathlib.RingTheory.KrullDimension.Basic\", \"type\": \"(f : R →+* S) (hf : Function.Surjective f) : ringKrullDim S ≤ ringKrullDim R\", \"doc\": \"For any surjective ring homomorphism $ f : R \\\\to S $ between commutative semirings, the Krull dimension of $ S $ satisfies $ \\\\dim(S) \\\\leq \\\\dim(R) $, where $ \\\\dim $ denotes the Krull dimension measured\"}\n  {\"name\": \"IsInducing.topologicalKrullDim_le\", \"module\": \"Mathlib.Topology.KrullDimension\", \"type\": \"{f : Y → X} (hf : IsInducing f) : topologicalKrullDim Y ≤ topologicalKrullDim X\", \"doc\": \"If $ f : Y \\\\to X $ is an inducing map (i.e., the topology on $ Y $ is the coarsest making $ f $ continuous), then the topological Krull dimension of $ Y $ is less than or equal to the topological Krul\"}\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_comp\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{Z : Scheme.{u}} (g : Y ⟶ Z) [hf : IsSmoothOfRelativeDimension n f] [hg : IsSmoothOfRelativeDimension m g] :\\n  IsSmoothOfRelativeDimension (n + m) (f ≫ g)\", \"doc\": \"For a morphism $ f: X \\to Y $ of schemes and a natural number $ n $, the proposition that $ f $ is smooth of relative dimension $ n $.\"}\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \": MorphismProperty.IsStableUnderBaseChange (@IsSmoothOfRelativeDimension n)\", \"doc\": \"For any morphism $ f: X \\\\to Y $ of schemes, if $ f $ is smooth of relative dimension $ n $, then any base change (pullback) of $ f $ is also smooth of relative dimension $ n $.\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.iff_isIntegralHom_and_locallyOfFiniteType\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \": IsFinite f ↔ IsIntegralHom f ∧ LocallyOfFiniteType f\", \"doc\": \"For a morphism $ f: X \\\\to Y $ of schemes, $ f $ is finite if and only if $ f $ is integral and locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For schemes $X$ and $Y$, a morphism from $X$ to $Y$ is finite.\"}\n  {\"name\": \"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"module\": \"Mathlib.AlgebraicGeometry.Fiber\", \"type\": \"(f : X ⟶ Y) (y : Y) [IsFinite f] : Finite (f.fiber y)\", \"doc\": \"Given a finite morphism of schemes $f: X \\\\to Y$, the fiber over any point $y \\\\in Y$ has a finite underlying set of points.\"}\n",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DimensionFunction\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "dimension.?[Ff]unction|dimension_function|delta.*trdeg",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-potential-dualizing-finite-pullback",
+  "date": "2026-10-18",
+  "group": "N8"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Proof, Step 3: dimension-normalized Verdier duality in the lower perverse bound; finite prime-power normalization underlying the regular generic duality model. Residue-transcendence pullback of dimension functions.",
+   "via": [
+    "lem-per-potential-dualizing-finite-pullback",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

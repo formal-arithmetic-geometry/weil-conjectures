@@ -1,0 +1,75 @@
+{
+ "id": "lem-per-regular-pullback-pinnings",
+ "kind": "statement",
+ "title": "Regular ordinary pullback with fibrewise pinnings",
+ "statement": "Let $\\ell$ be a prime, $n\\geq1$, $\\Lambda=\\mathbf Z/\\ell^n\\mathbf Z$, and let $h:Y\\to X$ be a regular morphism between Noetherian excellent schemes on which $\\ell$ is invertible [def-exc-excellent-ring]. Regular means flat [def-weil-flat-morphism] with geometrically regular fibres: every field extension of a residue field gives a regular fibre [def-weil-regular-scheme, def-pc-scheme-fibre]. Let $\\delta_X$ be a dimension function and $K\\in D^+(X_{\\mathrm{et}},\\Lambda)$ a pinned potential dualizing complex [def-per-potential-dualizing-complex]. Set\n$$c_h(y)=\\dim\\mathcal O_{Y_{h(y)},y},\\qquad \\delta_h(y)=\\delta_X(h(y))-c_h(y),$$\nwhere the dimension is the Krull dimension of the local ring [def-weil-pbc-krull-dimension-ring]. Then $\\delta_h$ is a dimension function, and $h^*K$ has potential pinnings for $\\delta_h$. The pinnings are the following fibrewise ones. After localization of $X$ at $x=h(y)$, write $i:Y_x\\hookrightarrow Y\\times_X\\operatorname{Spec}\\mathcal O_{X,x}$ and $q:Y_x\\to\\operatorname{Spec}\\kappa(x)$. The supported base-change comparison identifies $i^!h^*K$ with $q^*R\\Gamma_xK$; apply the pinning of $K$ at $x$, and then the inverse absolute-purity class at $y$ on the regular fibre $Y_x$. Thus the resulting costalk is $\\Lambda(\\delta_X(x)-c_h(y))[2\\delta_X(x)-2c_h(y)]$. These constructions are natural in pinning-preserving maps of $K$, restrict to open subsets, and respect composition of regular morphisms. No finite-type or perfect-field assumption on $h$ is imposed.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "XIV, Proposition 2.5.4; XVII, Proposition 4.1.1, Lemma 4.3.1.1, Remark 4.3.1.3, and Section 4.3.2"
+ },
+ "stmt_deps": [
+  "def-exc-excellent-ring",
+  "def-weil-flat-morphism",
+  "def-weil-regular-scheme",
+  "def-pc-scheme-fibre",
+  "def-per-potential-dualizing-complex",
+  "def-weil-pbc-krull-dimension-ring"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image under a regular morphism preserves pinned potential dualizing complexes normalized by codimension in the fibre",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] (U : ↑Y.affineOpens),\\n  let this := (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.app f ↑U)).toAlgebra;\\n  AlgebraicGeometry.Scheme.Hom.app (AlgebraicGeometry.\", \"doc\": \"For an affine open subset $U$ of a scheme $Y$, the application of the normalization morphism $f$ to the preimage of $U$ under the normalization map is equal to a composition of maps involving the inte\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationDiagram\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → CategoryTheory.Functor Y.Opensᵒᵖ CommRingCat\", \"doc\": \"The functor assigns to each open subset $ U $ of $ Y $ the integral closure of the ring of sections $ \\\\Gamma(Y, U) $ in $ \\\\Gamma(X, f^{-1}(U)) $, and to each inclusion $ V \\\\subseteq U $ the induced ri\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (f : X ⟶ Y) → Y.presheaf ⟶ AlgebraicGeometry.Scheme.Hom.normalizationDiagram f\", \"doc\": \"A morphism from the presheaf of a scheme $ Y $ to the normalization diagram associated with a morphism $ f $, which encodes the integral closure data of $ Y $ in the context of the morphism $ f $.\"}\n  {\"name\": \"SSet.Subcomplex.Pairing.IsRegular.toIsProper\", \"module\": \"Mathlib/AlgebraicTopology/SimplicialSet/AnodyneExtensions/Pairing\", \"type\": \"∀ {X : SSet} {A : X.Subcomplex} {P : A.Pairing} [self : P.IsRegular], P.IsProper\", \"doc\": \"For any simplicial set $X$ and its subcomplex $A$, if a pairing $P$ associated to $X$ and $A$ satisfies the regularity condition, then it also satisfies the properness condition required in anodyne ex\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.preservesLocalization_normalizationDiagramMap\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.QuasiCompact f] [AlgebraicGeometry.QuasiSeparated f],\\n  AlgebraicGeometry.Scheme.AffineZariskiSite.PreservesLocalization\\n    ((AlgebraicGeometry.Scheme.AffineZariskiSite.toOpensFunctor Y).op.comp\\n      (AlgebraicGeometry.Scheme.Hom.no\", \"doc\": \"For a scheme morphism $ f $, the normalization diagram functor $ F $ equipped with a natural transformation $ \\\\alpha: \\\\mathcal{O}_Y \\\\Rightarrow F $ satisfies the localization condition: for every affi\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.liftCoborder_preimage\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Immersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.IsImmersion f]\\n  (U : (↑(AlgebraicGeometry.Scheme.Hom.coborderRange f)).Opens),\\n  (TopologicalSpace.Opens.map (AlgebraicGeometry.Scheme.Hom.liftCoborder f).base).obj U =\\n    (TopologicalSpace.Opens.map f.base).obj\\n      ((Algeb\", \"doc\": \"For a scheme immersion $ f : X \\to Y $, the preimage of an open subset $ U $ of the cobord of $ f $ under the lift cobord morphism equals the preimage under $ f $ of the image of $ U $ under the canoni\"}\n  {\"name\": \"AlgebraicGeometry.liftCoborder_app\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Immersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.IsImmersion f]\\n  (U : (↑(AlgebraicGeometry.Scheme.Hom.coborderRange f)).Opens),\\n  AlgebraicGeometry.Scheme.Hom.app (AlgebraicGeometry.Scheme.Hom.liftCoborder f) U =\\n    CategoryTheory.CategoryStruct.comp\\n      (AlgebraicGeometr\", \"doc\": \"For a scheme immersion $ f : X \\to Y $, the preimage of an open subset $ U $ of the cobord of $ f $ under the lift cobord morphism equals the preimage under $ f $ of the image of $ U $ under the canoni\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.fromNormalization_preimage\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] (U : ↑Y.affineOpens),\\n  (TopologicalSpace.Opens.map (AlgebraicGeometry.Scheme.Hom.fromNormalization f).base).obj ↑U =\\n    AlgebraicGeometry.Scheme.Hom.opensRange (\", \"doc\": \"For any affine open subset $U$ of the target scheme $Y$, the preimage of $U$ under the normalization morphism $f.\\text{fromNormalization}$ is equal to the open subset of the normalization scheme obtain\"}\n",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pullback of etale dualizing complex along flat morphism with geometrically regular fibres and residue specialization compatibility",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Flat.generalizingMap\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen\", \"type\": \"[Flat f] : GeneralizingMap f\", \"doc\": \"If $ f : X \\\\to Y $ is a flat morphism of schemes, then the underlying continuous map $ f $ satisfies the generalizing property: for any $ x \\\\in X $ and $ y \\\\in Y $ such that $ y $ specializes to $ f(x\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instSndScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"(f : X ⟶ Z) (g : Y ⟶ Z) [Flat f] : Flat (pullback.snd f g)\", \"doc\": \"In the category of schemes, for any pair of morphisms $ f : X \\\\to Z $ and $ g : Y \\\\to Z $, the pullback of $ f $ and $ g $ exists. This asserts that the category of schemes admits pullbacks for all co\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.Triplet.isPullback_SpecMap_tensor\", \"module\": \"Mathlib.AlgebraicGeometry.PullbackCarrier\", \"type\": \"(T : Triplet f g) :\\n  CategoryTheory.IsPullback (Spec.map T.tensorInl) (Spec.map T.tensorInr)\\n    (Spec.map ((S.residueFieldCongr T.hx).inv ≫ f.residueFieldMap T.x))\\n    (Spec.map ((S.residueFieldCongr T.hy).inv ≫ g.residueFieldMap T.y))\", \"doc\": \"Given a pullback triplet $T$ in the category of schemes with morphisms $f: X \\to S$ and $g: Y \\to S$, the square formed by the morphisms $\\\\operatorname{Spec}(\\\\kappa(T.x)) \\to \\\\operatorname{Spec}(T.tensor\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y)\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \": IsStableUnderBaseChange @IsEtale\", \"doc\": \"The property of being an étale morphism is stable under base change. That is, if a morphism of schemes is étale, then any base change (pullback) of this morphism is also étale.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.residueFieldCongr_inv_residueFieldMap_ofPoint\", \"module\": \"Mathlib.AlgebraicGeometry.PullbackCarrier\", \"type\": \"(t : ↑(pullback f g)) :\\n  ((S.residueFieldCongr (Triplet.ofPoint t).hx).inv ≫ f.residueFieldMap (Triplet.ofPoint t).x) ≫\\n      (pullback.fst f g).residueFieldMap t =\\n    ((S.residueFieldCongr (Triplet.ofPoint t).hy).inv ≫ g.residueFieldMap (Triplet.ofPoint t).y) ≫\\n      (pullback.snd f g).residueFie\", \"doc\": \"For a point $ t $ in the pullback of morphisms $ f: X \\to S $ and $ g: Y \\to S $ of schemes, the composition of the inverse of the residue field isomorphism at $ t $'s image in $ X $ with the residue fi\"}\n  {\"name\": \"RingHom.Flat.generalizingMap_comap\", \"module\": \"Mathlib.RingTheory.RingHom.Flat\", \"type\": \"{f : R →+* S} (hf : f.Flat) : GeneralizingMap (comap f)\", \"doc\": \"For a flat ring homomorphism $ f : R \\\\to S $ between commutative rings, the induced map $ \\\\operatorname{Spec}(S) \\\\to \\\\operatorname{Spec}(R) $ defined by taking preimages of prime ideals under $ f $ is\"}\n  {\"name\": \"AlgebraicGeometry.Flat\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The property that a morphism $ f : X \\to Y $ of schemes is flat.\"}\n",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"dualizing\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "potential.?dual|putative|pinning|regular.*dualiz",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/Algebra/Order/Group/Lattice.lean\", \"line\": \"14\", \"text\": \"underpinnings of vector lattices, Banach lattices, AL-space, AM-space etc.\"}\n",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-potential-dualizing-finite-pullback",
+  "date": "2026-10-18",
+  "group": "N8"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Proof, Step 3: dimension-normalized Verdier duality in the lower perverse bound; finite prime-power normalization underlying the regular generic duality model. Regular ordinary pullback with fibrewise pinnings.",
+   "via": [
+    "lem-per-potential-dualizing-finite-pullback",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}
