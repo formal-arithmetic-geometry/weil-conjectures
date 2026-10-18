@@ -1,0 +1,105 @@
+{
+ "id": "def-pur-compact-product-twist-laws",
+ "kind": "definition",
+ "title": "CompactProductTwistLaws",
+ "status": "split",
+ "statement": "Fix the finite datum $P$, coefficient ring $A$ and algebraically closed field $k$ of [def-pur-conventions]. Use the signed-twist supported classes, pullbacks and cup of [lem-pur-supported-cup-functoriality], the support geometry and canonical intersection map of [def-pur-supported-class-geometry], the exterior class of [def-pur-supported-exterior-class-arrows], and its coefficient-source and site transports of [def-pur-supported-class-site-comparison]. Define three propositions, universally quantified over separated finite-type $k$-schemes $X,Y$ and closed immersions $i:Z\\hookrightarrow X$, $j:W\\hookrightarrow Y$: (1) the canonical map identifying the intersection of the two inverse-image supports with $Z\\times_kW$ is invertible; (2) for all $a,b,r,s\\in\\mathbb Z$ with $a,b$ even and all supported classes $\\alpha\\in H_Z^a(X,A(r))$, $\\beta\\in H_W^b(Y,A(s))$, the tensor exterior representative equals the supported cup of the two projection pullbacks, precomposed with the canonical coefficient-source multiplication; (3) the same equality holds after the specified etale-to-pro-etale transport of the representatives and their coefficient tensor source. Define CompactProductTwistLaws as the conjunction of these three propositions. The supports need not be proper. Record also the source-implied finiteness of the actual positive-level coefficient quotient, including its size lift.",
+ "stmt_deps": [
+  "def-pur-conventions",
+  "lem-pur-supported-cup-functoriality",
+  "def-pur-supported-class-geometry",
+  "def-pur-supported-exterior-class-arrows",
+  "def-pur-supported-class-site-comparison"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/thm-pur-projective-bundle-formula.proof.md",
+  "place": "Step 1: compact-support Kunneth and the product of localized Kummer classes"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "compact product proper support law proposition definitions",
+   "results": "IsProperMap.prodMap; HasCompactSupport; HasCompactMulSupport.mul; Pi.isCompact_iff; IsCompact.prod; Pi.compactSpace; hasCompactSupport_def; TopologicalSpace.Compacts.prod",
+   "date": "2026-10-18",
+   "verdict": "no match: unrelated topological compact-support facts"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "compactProductProperSupportLaws CompactProductTwistLaws CompactProductRealizationLaws",
+   "results": "Pi.exists_compact_superset_iff; HasCompactSupport.exists_simpleFunc_approx_of_prod; HasCompactMulSupport.comp₂_left; GromovHausdorff.candidatesBOfCandidates_mem; MeasureTheory.Measure.haar.mem_prehaar_empty; MeasureTheory.Measure.haar.chaar_mem_haarProduct; rieszContentAux_image_nonempty; MeasureTheory.closedCompactCylinders.finset",
+   "date": "2026-10-18",
+   "verdict": "no match: unrelated topological compact-support facts"
+  },
+  {
+   "tool": "grep",
+   "query": "CompactProductTwistLaws|CompactProductProperSupportLaws|CompactProductRealizationLaws",
+   "results": "No hits in Mathlib, upstream WeilConjectures, shared lean/Sheaf or DAG nodes; blueprint_refs.py search CompactProductProperSupportLaws returned 0 nodes.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-compact-product-proper-support-compatibility",
+  "date": "2026-10-18",
+  "group": "Q73"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-projective-bundle-formula",
+   "place": "Proof, Step 1: compact-support Kunneth and product of localized Kummer classes",
+   "via": [
+    "lem-pur-compact-product-proper-support-compatibility"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "lean": {
+  "module": "Sheaf.Paper.CompactProductTwistLaws",
+  "declaration": "WeilConjectures.PurityFiniteSetting.CompactProductTwistLaws",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.compactProductCoefficientFinite",
+   "WeilConjectures.PurityFiniteSetting.compactProductTwistSupportIdentificationLaw",
+   "WeilConjectures.PurityFiniteSetting.compactProductTwistEtaleLaw",
+   "WeilConjectures.PurityFiniteSetting.compactProductTwistProetaleLaw",
+   "WeilConjectures.PurityFiniteSetting.CompactProductTwistLaws"
+  ],
+  "file": "lean/Sheaf/Paper/CompactProductTwistLaws.lean",
+  "statement": "structure CompactProductTwistLaws (P : PurityFiniteSetting.{u}) : Prop",
+  "branch": "newtargets-dag",
+  "by": "Q73",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-281a9ea4a",
+  "group": "Q73",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-281a9ea4a",
+  "group": "Q73",
+  "result": "fix",
+  "note": "Substance correct: every node clause is rendered on the etale site and the specified pro-etale realizations. Covered: kappa_c invertible and natural for every compactification; u_Z = constant-section unit then counit image; supported classes for every a : Z; the u_{ZxW}.kappa^{Z,W} = kappa_c.(u_Z (x) u_W) square with the dependency's supportedExteriorProduct; excision for every D+ extension; signed-twist, even-degree, arbitrary-closed-support cup identity on both sites with the support identification; pro-etale square, unit/counit normalization and witness independence. Definitions are canonical: normalized Classical.choice/exists-unique data; the eqToHom equalities compactProductTensor_eq, compactProductExterior_eq, compactProductCoefficientUnit_eq and functorialCupComparisonTwist_eq all hold by rfl (checked). Advisory: proper_support_comparison only restates the dependency's IsIso; output_representative is an extra true conclusion. Mechanical faults, fixed: (1) the delivered SupportedCupFunctoriality is NE's stale text and reverts Q10's landed named-predicate refactor (22 record declarations dropped, no outside users). fixes/SupportedCupFunctoriality.lean is a clean diff3 merge of base->live and base->delivered: superset of both, statement unchanged. (2) The SupportedCup legacy-import change is unneeded, since the legacy TensorResolution path now re-exports the FiniteCoefficient one; fixes/SupportedCup.lean is the live text. nt_compile: all 15 new modules plus the merged dependency clean (dependency 26.6-49.7 s by load); live importers ClosedSupportedCupVanishing 13.9 s and PurityDivisorClass 16.3 s clean. Maintainer: --revert-nodes def-pur-supported-cup; re-add Q10's 22 names to the SupportedCupFunctoriality record if convenient; NE lem-pur-divisor-class must rebase or revert the same dependency."
+ }
+}

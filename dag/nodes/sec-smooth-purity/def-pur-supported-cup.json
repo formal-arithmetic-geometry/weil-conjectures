@@ -362,12 +362,12 @@
   "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
  },
  "reviewed_lean": {
-  "date": "2026-10-17",
+  "date": "2026-10-18",
   "by": "L",
-  "reviewer": "NT-stage2-cc-71cb30d3e",
-  "group": "Q103",
-  "result": "pass",
-  "note": "I read the node, the blueprint (main-20261015 and -17, identical), SupportedCup.lean, the report (real Worker report and Second reading by Q103) and the dependency declarations: PurityFiniteSetting, supported_cohomology_hom, ModuleDerivedCategory, ProEtale.derivedTensor (= curriedTensor), DerivedCategory/Monoidal/Shift.lean and Mathlib mapBifunctorShift2Iso. Every clause matches: finite A with n>=1, k-scheme X, closed immersions, h = pullback.fst ≫ i, underived lowerStar in degree 0, D^+ inputs with a,b in Z as supported-Hom representatives, unbounded Hom output with no Tor hypothesis. mu is chosen from a true ∃! (restriction and multiplication; quotient maps are epi), which AGENTS.md permits. theta is lax mu_Q, then the single-complex iso, then mu; its sorry IsIso is true (degree-0 flat implies K-flat). Right-shift-first composite gives exactly the node's (-1)^(b r); upstream left-first shiftTensorShiftIso would differ by (-1)^(ab). Four sorry theorems with proof docstrings, no hollow data, verbatim lean.statement, lines <=100. nt_compile at Sheaf/Paper/SupportedCup.lean: 14.8 s, exit 0, no errors or warnings. Maintainer note: the §1(B) repairs to def-weil-pbc-proetale-site / def-weil-derived-tensor are valid but flip shared records again (H1 → Q27/Q11 → Q01/Q16 → Q103; ~68 files use intrinsic, ~51 fixed-scalar). The maintainer should fix one canonical presentation; the stage-2 fix format cannot revert dependency nodes."
+  "reviewer": "NT-stage2-cc-281a9ea4a",
+  "group": "Q73",
+  "result": "fix",
+  "note": "Substance correct: every node clause is rendered on the etale site and the specified pro-etale realizations. Covered: kappa_c invertible and natural for every compactification; u_Z = constant-section unit then counit image; supported classes for every a : Z; the u_{ZxW}.kappa^{Z,W} = kappa_c.(u_Z (x) u_W) square with the dependency's supportedExteriorProduct; excision for every D+ extension; signed-twist, even-degree, arbitrary-closed-support cup identity on both sites with the support identification; pro-etale square, unit/counit normalization and witness independence. Definitions are canonical: normalized Classical.choice/exists-unique data; the eqToHom equalities compactProductTensor_eq, compactProductExterior_eq, compactProductCoefficientUnit_eq and functorialCupComparisonTwist_eq all hold by rfl (checked). Advisory: proper_support_comparison only restates the dependency's IsIso; output_representative is an extra true conclusion. Mechanical faults, fixed: (1) the delivered SupportedCupFunctoriality is NE's stale text and reverts Q10's landed named-predicate refactor (22 record declarations dropped, no outside users). fixes/SupportedCupFunctoriality.lean is a clean diff3 merge of base->live and base->delivered: superset of both, statement unchanged. (2) The SupportedCup legacy-import change is unneeded, since the legacy TensorResolution path now re-exports the FiniteCoefficient one; fixes/SupportedCup.lean is the live text. nt_compile: all 15 new modules plus the merged dependency clean (dependency 26.6-49.7 s by load); live importers ClosedSupportedCupVanishing 13.9 s and PurityDivisorClass 16.3 s clean. Maintainer: --revert-nodes def-pur-supported-cup; re-add Q10's 22 names to the SupportedCupFunctoriality record if convenient; NE lem-pur-divisor-class must rebase or revert the same dependency."
  },
  "lean": {
   "module": "Sheaf.Paper.SupportedCup",
@@ -398,9 +398,9 @@
   "file": "lean/Sheaf/Paper/SupportedCup.lean",
   "statement": "def supportedCup (P : WeilConjectures.PurityFiniteSetting.{u}) {Z W X : Scheme.{u}} [X.Over (Spec (CommRingCat.of P.field.k))] (i : Z ⟶ X) (j : W ⟶ X) [IsClosedImmersion i] [IsClosedImmersion j] (F G : CupPlus P X) (a b : ℤ) (α : cupSupportedHom P i F.obj a) (β : cupSupportedHom P j G.obj b) : cupSupportedHom P (cupIntersection i j) (cupTensorObject P X F.obj G.obj) (a + b)",
   "branch": "newtargets-dag",
-  "by": "Q103",
-  "date": "2026-10-17",
+  "by": "Q73",
+  "date": "2026-10-18",
   "existing": false,
-  "note": "Fixed finite coefficients and pro-etale supported Hom. The helper references share the existing localization and monoidal data explicitly; they do not construct another category or tensor. The normalized coefficient map and canonical K-flat localization comparison, right-shift-first sign, and unbounded output are retained."
+  "note": "Import-only dependency repair: the finite-coefficient TensorResolution import declares the same ProEtale tensor names as the legacy TensorResolution imported by the recorded supported-exterior/site-comparison interface. Use the upstream legacy tensor owner consistently; all supported-cup definitions, normalization, shifts and theorem statements are unchanged."
  }
 }
