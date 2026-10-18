@@ -158,5 +158,24 @@
   "group": "Q81",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q81-b2b39ae96 (reviewer sub-agent of L); spot-checked: Read the item, parent, cited nodes, unit/chapter route, and Stacks Tags 01MW/01MS in full. All five proof steps are valid; hypotheses, restriction maps, coefficient category, edge cases, searches, and accepted off-unit tool use check out. Review written to review.md."
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.ProjCommonDegreeTwistInvertible",
+  "declaration": "AlgebraicGeometry.Proj.commonDegreeTwistInvertible",
+  "file": "lean/Sheaf/TraceFormula/ProjCommonDegreeTwistInvertible.lean",
+  "statement": "theorem commonDegreeTwistInvertible (V : (Proj 𝒜).Opens) [CompactSpace V.toScheme] (I : Type v) [Finite I] (f : I → A) (d : I → ℕ) (hf : ∀ i, f i ∈ 𝒜 (d i)) (hd : ∀ i, 0 < d i) (hcover : V ≤ ⨆ i, basicOpen 𝒜 (f i)) (e : ℕ) (he : 0 < e) (hdiv : ∀ i, d i ∣ e) (W : (Proj 𝒜).Opens) (hW : W = ⨆ (α : ℕ) (β : ℕ) (a : 𝒜 α) (b : 𝒜 β) (_ : α = β + e), basicOpen 𝒜 ((a : A) * (b : A))) : V ≤ W ∧ (∀ n : ℤ, ((twist 𝒜 (n * (e : ℤ))).restrict V.ι).IsInvertible) ∧ (∀ n m : ℤ, ∃ μ : Scheme.Modules.tensorObj ((twist 𝒜 (n * (e : ℤ))).restrict V.ι) ((twist 𝒜 (m * (e : ℤ))).restrict V.ι) ⟶ (twist 𝒜 ((n + m) * (e : ℤ))).restrict V.ι, IsIso μ ∧ ∀ (Q : V.toScheme.Opens) (s : Γ((twist 𝒜 (n * (e : ℤ))).restrict V.ι, Q)) (t : Γ((twist 𝒜 (m * (e : ℤ))).restrict V.ι, Q)) (x : V.ι ''ᵁ Q), (((twist 𝒜 ((n + m) * (e : ℤ))).restrictAppIso V.ι Q).hom (μ.app Q (Scheme.Modules.tmulSection s t))).val x = ((((twist 𝒜 (n * (e : ℤ))).restrictAppIso V.ι Q).hom s).val x : Localization.AtPrime x.val.asHomogeneousIdeal.toIdeal) * (((twist 𝒜 (m * (e : ℤ))).restrictAppIso V.ι Q).hom t).val x) ∧ (∀ k : ℕ, 0 < k → ((twist 𝒜 (Int.ofNat (e * k))).restrict V.ι).IsInvertible) ∧ (∃ μ : ∀ k : ℕ, ((twist 𝒜 (e : ℤ)).restrict V.ι).tensorPow k ⟶ (twist 𝒜 (Int.ofNat (e * k))).restrict V.ι, (∀ k : ℕ, 0 < k → IsIso (μ k)) ∧ (∀ (Q : V.toScheme.Opens) (x : V.ι ''ᵁ Q), (((twist 𝒜 (Int.ofNat (e * 0))).restrictAppIso V.ι Q).hom ((μ 0).app Q (Scheme.Modules.unitSectionsEquiv Q 1))).val x = (1 : Localization.AtPrime x.val.asHomogeneousIdeal.toIdeal)) ∧ (∀ (k : ℕ) (Q : V.toScheme.Opens) (s : Γ((twist 𝒜 (e : ℤ)).restrict V.ι, Q)) (t : Γ(((twist 𝒜 (e : ℤ)).restrict V.ι).tensorPow k, Q)) (x : V.ι ''ᵁ Q), (((twist 𝒜 (Int.ofNat (e * (k + 1)))).restrictAppIso V.ι Q).hom ((μ (k + 1)).app Q (Scheme.Modules.tmulSection s t))).val x = ((((twist 𝒜 (e : ℤ)).restrictAppIso V.ι Q).hom s).val x : Localization.AtPrime x.val.asHomogeneousIdeal.toIdeal) * (((twist 𝒜 (Int.ofNat (e * k))).restrictAppIso V.ι Q).hom ((μ k).app Q t)).val x))",
+  "branch": "newtargets-dag",
+  "by": "Q82",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "W is specified by the equivalent standard-open union from the node. Canonical binary multiplication is characterized on every local pure tensor; tensor-power multiplication is characterized recursively by the unit and its action on the first factor and any section of the remaining tensor power. These formulas uniquely specify the maps, without choosing an arbitrary isomorphism or importing the downstream ampleness theorem."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7826a2a79",
+  "group": "Q82",
+  "result": "pass",
+  "note": "Every hypothesis and conclusion clause matches the node and Stacks 01MU/01MW, with no added assumptions. The open is the exact quasi-compact open of Proj with its inclusion; the cover is any finite family (may be empty, own universe); e>=1 is a common multiple of positive degrees. W_e is the node's equivalent union of D_+(ab) with deg a = deg b + e, b = 1 included. The conclusions state V <= W, invertibility of every O(ne) for n in Z, and isomorphisms for all binary multiplication maps, each pinned to the product of homogeneous fractions on local pure tensors. The k-fold map is pinned at 0 and recursively at k+1, with IsIso for k>0. These pins make the maps canonical, not arbitrary isomorphisms. The tensor is the same localization tensor recorded for def-pur-sheaf-tensor-product. No existing declaration duplicates this result. The six dependency records are identical to live; the item record only adds the lean field, and its statement field matches the file verbatim. No definitions, only sorry; docstrings carry the source place, blueprint tag and five proof steps. nt_compile --json: 3.2 s, exit 0, clean. Maintainer notes: the node's source field calls lemma-where-invertible Tag 01MS, but it is 01MU; the downstream qc-open-ample node pins the same map by a Fin-k product, which the proof stage must relate to this recursive pin."
  }
 }

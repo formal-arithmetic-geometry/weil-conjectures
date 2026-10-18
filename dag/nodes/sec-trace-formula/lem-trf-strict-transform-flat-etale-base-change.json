@@ -232,5 +232,23 @@
   "group": "N1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N1-d66876512 (reviewer sub-agent of L); spot-checked: I read the item, all five steps, every cited node's statement and blueprint_update, unit sk-i-curve-zero and the parent's step 3 (its only citer). Sources read: Stacks 081I (morphisms.tex:4965, including the affine-kernel proof), 01R8, 01U9, 0805, 080D, 02OS, and 080F (which assumes X flat over S, so it is correctly not cited). The statement is true: it is 081I applied to the quasi-compact open immersion Omega -> Z x_X X+ along the flat map T_W -> T. The base-change map is bc_v of def-nagata-blowup-flat-base-change-map composed with the factor swap; it is an isomorphism by thm-nagata-blowup-flat-base-change. The strict transform is read per the main-20261015 update of def-nagata-strict-transform. No coefficient category is involved. The generic-point hypothesis is retained and unused (it holds automatically for flat v), so the target is not weakened. Small cases checked: empty Z or W; I = O_X; I = 0; Z inside V(I); a nonreduced double line; and a non-flat closed point W, where the conclusion fails, so the flat hypothesis is needed. Steps 2, 3 and 5 are genuinely elementary: the quasi-compactness check by finite principal opens, the quotient-kernel injectivity, and the inverse-image ideals. All dependencies outside the unit are definitions, Mathlib leaves or Lean-closed statements, so no tool_uses entry is needed. Duplicate search: the closest existing node is lem-trf-module-strict-transform-flat-pullback (the module version, unsplit). It is not the same statement, and the delivery creates no new nodes. Three repairs in fixes/: (1) step 1's source cited Tag 01OF, which is the section; the lemma is 02OS, with the label case corrected. (2) stmt_deps gains def-nagata-blowup-flat-base-change-map and def-nagata-extended-ideal, with bracket citations added to the statement; the meaning is unchanged. (3) Step 4 now cites lemma-nagata-scheme-image-ideal-qc for 'image ideal = restriction kernel' in the quasi-compact case.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.StrictTransformFlatBaseChange",
+  "declaration": "AlgebraicGeometry.Scheme.IdealSheafData.strictTransform_flat_baseChange",
+  "file": "lean/Sheaf/AlgebraicGeometry/StrictTransformFlatBaseChange.lean",
+  "statement": "theorem strictTransform_flat_baseChange {X Z W : Scheme.{u}} (I : X.IdealSheafData) (_hI : I.ofFiniteType) (i : Z ⟶ X) [IsClosedImmersion i] (v : W ⟶ X) [Flat v] (_hgeneric : ∀ C ∈ irreducibleComponents ↥(pullback i v), ∀ ξ : ↥(pullback i v), IsGenericPoint ξ C → ∃ D ∈ irreducibleComponents Z, IsGenericPoint (pullback.fst i v ξ) D) : (AlgebraicGeometry.strictTransformMap i I.blowupMap I.support.compl).ker.comap (pullback.fst I.blowupMap v) = (AlgebraicGeometry.strictTransformMap (pullback.snd i v) (I.comap v).blowupMap (I.comap v).support.compl).ker.comap (I.blowupFlatBaseChangeIso v).inv ∧ (AlgebraicGeometry.strictTransformMap i I.blowupMap I.support.compl).ker.comap (pullback.fst I.blowupMap v) = ((AlgebraicGeometry.strictTransformOpen (pullback.snd i v) (pullback.snd I.blowupMap v) (v ⁻¹ᵁ I.support.compl)).ι ≫ pullback.snd (pullback.snd i v) (pullback.snd I.blowupMap v)).ker",
+  "branch": "newtargets-dag",
+  "by": "Q88",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cdd926f1e",
+  "group": "Q88",
+  "result": "pass",
+  "note": "Every node clause matches the Lean: finite-type IdealSheafData; arbitrary closed immersion i and flat v (étale via the Flat instance); generic-point hypothesis equivalent and kept (unused, as the node states). Conjunct 1 transports the strict-transform ideal of Z×_XW in Bl_{I.comap v}(W) by the inverse of the canonical blowupFlatBaseChangeIso (asIso of the closed-audit blowupFlatBaseChange; inverse is the right direction for comap). Conjunct 2 identifies the same ideal with Hom.ker of the preserved open over v⁻¹(U) into X⁺×_XW, a scheme-theoretic closure. Universes u throughout, nothing unbound; lean.statement verbatim; only the item lean record changed, the other node copies are identical to live; no duplicate in WeilConjectures/Sheaf; docstrings carry 081I/080D, the blueprint id and 5 proof steps; proof is only sorry. nt_compile --json clean in 2.0 s, matching the recorded compile. Advisory: def-nagata-blowup-flat-base-change-map is bound only through its closed slopmaster2 lean_audit."
  }
 }
