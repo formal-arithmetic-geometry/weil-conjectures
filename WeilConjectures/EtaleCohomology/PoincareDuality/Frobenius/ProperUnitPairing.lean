@@ -28,7 +28,7 @@ It is the untwisted degreewise Poincaré pairing of `Λ_X̄`, which is nondegene
 given the Weil equivariance of the smooth trace
 (`AlgebraicGeometry.Etale.exists_tateOrientation_isWeilMorphism_untwistedSmoothTrace`), read through
 `Hⁱ_c = Hⁱ` (`a` proper), `Λ_X̄ ≅ Λ_X̄^∨` (a morphism of Weil objects,
-`AlgebraicGeometry.Etale.isWeilMorphism_coefficientDualUnitIso_inv`) and `Λ(-d) ≅ Λ` over `k̄`.
+`AlgebraicGeometry.Etale.isWeilMorphism_unitCoefficientDualIso_inv`) and `Λ(-d) ≅ Λ` over `k̄`.
 The identification `Hⁱ(X̄, Λ) ≅ Hⁱ_c(X̄, Λ)` intertwines the Frobenius operators
 (`AlgebraicGeometry.Etale.frobeniusOperator_unitShiftAddEquivLowerStar_comp_lowerShriek`).
 -/
@@ -45,55 +45,97 @@ namespace AlgebraicGeometry.Etale
 
 open Scheme
 
-variable {Λ : Type (u + 1)} [CommRing Λ]
+section General
 
-/-- Read through `Λ_X ≅ Λ_X^∨` (`AlgebraicGeometry.Etale.coefficientDualUnitIso`), the evaluation
-`Λ_X ⊗ᴸ Λ_X^∨ ⟶ Λ_X` is the left unitor. -/
-lemma derivedTensor_map_coefficientDualUnitIso_inv_comp_coefficientEvaluation
+variable (A : Type*) [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
+  [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
+  [Abelian.HasFunctorialFlatResolution A]
+
+/-- The derived tensor product acts on a morphism in its second variable by whiskering (for the
+monoidal structure of `D(X_ét)` found by instance search). -/
+lemma derivedTensor_obj_map_eq_whiskerLeft (X : Scheme.{u})
+    (K : DerivedCategory (Sheaf X.smallEtaleTopology A))
+    {M M' : DerivedCategory (Sheaf X.smallEtaleTopology A)} (f : M ⟶ M') :
+    ((derivedTensor A X).obj K).map f = K ◁ f :=
+  rfl
+
+/-- The derived tensor product acts on a morphism in its first variable by whiskering (for the
+monoidal structure of `D(X_ét)` found by instance search). -/
+lemma derivedTensor_map_app_eq_whiskerRight (X : Scheme.{u})
+    {K K' : DerivedCategory (Sheaf X.smallEtaleTopology A)} (f : K ⟶ K')
+    (M : DerivedCategory (Sheaf X.smallEtaleTopology A)) :
+    ((derivedTensor A X).map f).app M = f ▷ M :=
+  rfl
+
+/-- The coefficient dual of the unit is the unit, `RHom(Λ_X, Λ_X) ≅ Λ_X` (for an arbitrary
+coefficient category; `AlgebraicGeometry.Etale.coefficientDualUnitIso` for `A = Mod_Λ`). -/
+noncomputable def unitCoefficientDualIso (X : Scheme.{u}) :
+    (DerivedCategory.coefficientDual A X).obj
+        (op (𝟙_ (DerivedCategory (Sheaf X.smallEtaleTopology A)))) ≅
+      𝟙_ (DerivedCategory (Sheaf X.smallEtaleTopology A)) :=
+  (((derivedTensorHomAdjunction A (𝟙_ (DerivedCategory (Sheaf X.smallEtaleTopology A)))).ofNatIsoLeft
+    (derivedTensorLeftUnitorNatIso A X)).rightAdjointUniq Adjunction.id).app _
+
+/-- Read through `Λ_X ≅ Λ_X^∨`, the evaluation `Λ_X ⊗ᴸ Λ_X^∨ ⟶ Λ_X` is the left unitor. -/
+lemma derivedTensor_map_unitCoefficientDualIso_inv_comp_coefficientEvaluation
     (X : Scheme.{u}) :
-    ((derivedTensor _ X).obj (𝟙_ (DerivedCategoryModule Λ X))).map
-        (coefficientDualUnitIso Λ X).inv ≫
-      DerivedCategory.coefficientEvaluation (𝟙_ (DerivedCategoryModule Λ X)) =
-        (λ_ (𝟙_ (DerivedCategoryModule Λ X))).hom := by
+    ((derivedTensor A X).obj (𝟙_ _)).map (unitCoefficientDualIso A X).inv ≫
+      DerivedCategory.coefficientEvaluation (𝟙_ (DerivedCategory (Sheaf X.smallEtaleTopology A))) =
+        (λ_ (𝟙_ (DerivedCategory (Sheaf X.smallEtaleTopology A)))).hom := by
   have h := Adjunction.rightAdjointUniq_hom_app_counit Adjunction.id
-    ((derivedTensorHomAdjunction _ (𝟙_ (DerivedCategoryModule Λ X))).ofNatIsoLeft
-      (derivedTensorLeftUnitorNatIso _ X)) (𝟙_ _)
+    ((derivedTensorHomAdjunction A (𝟙_ (DerivedCategory (Sheaf X.smallEtaleTopology A)))).ofNatIsoLeft
+      (derivedTensorLeftUnitorNatIso A X)) (𝟙_ _)
   rw [Adjunction.ofNatIsoLeft_counit, NatTrans.comp_app, Functor.whiskerLeft_app,
     Adjunction.id_counit, NatTrans.id_app, Functor.id_map, ← Adjunction.rightAdjointUniq_inv_app,
     ← Iso.app_inv] at h
-  have e1 : (λ_ (𝟙_ (DerivedCategoryModule Λ X))).inv ≫
-      ((derivedTensor _ X).obj (𝟙_ (DerivedCategoryModule Λ X))).map
-        (coefficientDualUnitIso Λ X).inv =
-      (coefficientDualUnitIso Λ X).inv ≫ (λ_ _).inv := by
-    rw [derivedTensor_obj_map]
-    exact (leftUnitor_inv_naturality _).symm
-  rw [← cancel_epi (λ_ (𝟙_ (DerivedCategoryModule Λ X))).inv, Iso.inv_hom_id, reassoc_of% e1]
+  rw [derivedTensor_obj_map_eq_whiskerLeft,
+    ← cancel_epi (λ_ (𝟙_ (DerivedCategory (Sheaf X.smallEtaleTopology A)))).inv, Iso.inv_hom_id,
+    ← leftUnitor_inv_naturality_assoc]
   exact h
+
+variable [UpperStarPreservesFlat A]
+
+/-- The identification `Λ_X ≅ Λ_X^∨` intertwines the canonical datum of `Λ_X` with the
+contragredient datum of `Λ_X^∨` (a morphism of Weil objects). -/
+lemma map_unitCoefficientDualIso_inv_comp_contragredientWeilDatum {X : Scheme.{u}}
+    (g : X ⟶ X) :
+    L((g)^*[A]).map (unitCoefficientDualIso A X).inv ≫
+        contragredientWeilDatum A g (leftDerivedUpperStarUnitIso A g) =
+      (leftDerivedUpperStarUnitIso A g).hom ≫ (unitCoefficientDualIso A X).inv := by
+  apply ((derivedTensorHomAdjunction A
+    (𝟙_ (DerivedCategory (Sheaf X.smallEtaleTopology A)))).homEquiv _ _).symm.injective
+  simp only [Adjunction.homEquiv_counit, Functor.map_comp, Category.assoc]
+  erw [derivedTensor_map_contragredientWeilDatum_comp_coefficientEvaluation,
+    derivedTensor_map_unitCoefficientDualIso_inv_comp_coefficientEvaluation]
+  have hU := leftDerivedUpperStarTensorComparison_leftUnitor_hom A g
+    (𝟙_ (DerivedCategory (Sheaf X.smallEtaleTopology A)))
+  rw [← leftDerivedUpperStarTensorIso_hom, ← derivedTensor_map_app_eq_whiskerRight] at hU
+  have hT : ((derivedTensor A X).obj (L((g)^*[A]).obj (𝟙_ _))).map
+        (L((g)^*[A]).map (unitCoefficientDualIso A X).inv) ≫
+      (leftDerivedUpperStarTensorIso A g (𝟙_ _) _).inv =
+      (leftDerivedUpperStarTensorIso A g (𝟙_ _) _).inv ≫
+        L((g)^*[A]).map (((derivedTensor A X).obj (𝟙_ _)).map (unitCoefficientDualIso A X).inv) := by
+    rw [Iso.comp_inv_eq, Category.assoc, leftDerivedUpperStarTensorIso_hom_naturality_right,
+      Iso.inv_hom_id_assoc]
+  rw [(derivedTensor A X |>.map (leftDerivedUpperStarUnitIso A g).inv).naturality_assoc,
+    reassoc_of% hT, ← Functor.map_comp_assoc,
+    derivedTensor_map_unitCoefficientDualIso_inv_comp_coefficientEvaluation, ← hU,
+    Iso.inv_hom_id_assoc, ← NatTrans.comp_app_assoc, ← Functor.map_comp, Iso.inv_hom_id,
+    CategoryTheory.Functor.map_id, NatTrans.id_app, Category.id_comp,
+    derivedTensor_obj_map_eq_whiskerLeft]
+  exact (leftUnitor_naturality _).symm
+
+end General
+
+variable {Λ : Type (u + 1)} [CommRing Λ]
 
 /-- The canonical identification `Λ_X ≅ Λ_X^∨` is a morphism of Weil objects, from the canonical
 datum of `Λ_X` to the contragredient datum of `Λ_X^∨`. -/
-lemma isWeilMorphism_coefficientDualUnitIso_inv {X : Scheme.{u}} (g : X ⟶ X) :
+lemma isWeilMorphism_unitCoefficientDualIso_inv {X : Scheme.{u}} (g : X ⟶ X) :
     IsWeilMorphism g (leftDerivedUpperStarUnitIso _ g).hom
       (contragredientWeilDatum _ g (leftDerivedUpperStarUnitIso _ g))
-      (coefficientDualUnitIso Λ X).inv := by
-  let := leftDerivedUpperStarMonoidal (ModuleCat.{u + 1} Λ) g
-  have hε : Functor.LaxMonoidal.ε L((g)^*[ModuleCat.{u + 1} Λ]) =
-      (leftDerivedUpperStarUnitIso _ g).inv := by
-    rw [← cancel_mono (leftDerivedUpperStarUnitIso _ g).hom, Iso.inv_hom_id]
-    have := leftDerivedUpperStarUnitIso_hom_eq_η (Λ := Λ) g
-    exact this ▸ Functor.Monoidal.ε_η _
-  unfold IsWeilMorphism
-  apply ((derivedTensorHomAdjunction _ (𝟙_ (DerivedCategoryModule Λ X))).homEquiv _
-    _).symm.injective
-  simp only [Adjunction.homEquiv_counit, Functor.map_comp, Category.assoc]
-  erw [derivedTensor_map_contragredientWeilDatum_comp_coefficientEvaluation,
-    derivedTensor_map_coefficientDualUnitIso_inv_comp_coefficientEvaluation]
-  rw [← leftDerivedUpperStarMonoidal_μ, ← hε, derivedTensor_obj_map, derivedTensor_obj_map,
-    derivedTensor_map_app, whisker_exchange_assoc, Functor.LaxMonoidal.μ_natural_right_assoc,
-    ← Functor.map_comp_assoc, ← derivedTensor_obj_map,
-    derivedTensor_map_coefficientDualUnitIso_inv_comp_coefficientEvaluation,
-    ← Functor.LaxMonoidal.left_unitality_assoc]
-  exact (leftUnitor_naturality _).symm
+      (unitCoefficientDualIso (ModuleCat.{u + 1} Λ) X).inv :=
+  map_unitCoefficientDualIso_inv_comp_contragredientWeilDatum _ g
 
 /-- Postcomposing an additive equivalence of Hom groups with an isomorphism of the target. -/
 lemma _root_.CategoryTheory.exists_addEquiv_comp_iso_hom {C : Type*} [Category C]
@@ -126,10 +168,11 @@ theorem frobeniusOperator_unitShiftAddEquivLowerStar_comp_lowerShriek {X Y : Sch
         ((rightDerivedLowerShriekIsoRightDerivedLowerStar _ a).inv.app _)⟦n⟧') =
       unitShiftAddEquivLowerStar Λ a n (frobeniusOperator g
           (shiftWeilDatum g (leftDerivedUpperStarUnitIso _ g).hom n) x) ≫
-        ((rightDerivedLowerShriekIsoRightDerivedLowerStar _ a).inv.app _)⟦n⟧' := by
-  rw [((isWeilMorphism_rightDerivedLowerShriekIsoRightDerivedLowerStar_inv_app sq
-    (leftDerivedUpperStarUnitIso _ g).hom).shift n).frobeniusOperator_comp,
-    frobeniusOperator_unitShiftAddEquivLowerStar sq.toCommSq]
+        ((rightDerivedLowerShriekIsoRightDerivedLowerStar _ a).inv.app _)⟦n⟧' :=
+  ((isWeilMorphism_rightDerivedLowerShriekIsoRightDerivedLowerStar_inv_app sq
+    (leftDerivedUpperStarUnitIso _ g).hom).shift n).frobeniusOperator_comp _ |>.trans
+    (congrArg (· ≫ ((rightDerivedLowerShriekIsoRightDerivedLowerStar _ a).inv.app _)⟦n⟧')
+      (frobeniusOperator_unitShiftAddEquivLowerStar sq.toCommSq n x))
 
 section FiniteLevel
 
@@ -169,7 +212,7 @@ theorem exists_unitPairing_frobeniusOperator_geometricGaloisFrobenius
   have hF := γ.untwistedDegreewisePoincarePairing_unit_frobeniusOperator
     f.isPullback_geometricGaloisFrobenius _ (isWeilPairing_coefficientEvaluation _
       (leftDerivedUpperStarUnitIso _ f.geometricGaloisFrobenius.hom)) _
-    (isWeilMorphism_coefficientDualUnitIso_inv _) τ hTr (Nat.card k₀) hτ i j hij
+    (isWeilMorphism_unitCoefficientDualIso_inv _) τ hTr (Nat.card k₀) hτ i j hij
   obtain ⟨eI, heI⟩ := exists_addEquiv_comp_iso_hom
     (unitShiftAddEquivLowerStar Λ f.geometricFiberToAlgebraicClosure i)
     ((shiftFunctor (DerivedCategoryModule Λ (Spec (.of (AlgebraicClosure k₀)))) i).mapIso
@@ -179,7 +222,7 @@ theorem exists_unitPairing_frobeniusOperator_geometricGaloisFrobenius
     (unitShiftAddEquivLowerStar Λ f.geometricFiberToAlgebraicClosure j)
     ((shiftFunctor (DerivedCategoryModule Λ (Spec (.of (AlgebraicClosure k₀)))) j).mapIso
       ((R((f.geometricFiberToAlgebraicClosure)_*[ModuleCat.{u + 1} Λ])).mapIso
-        (coefficientDualUnitIso Λ _).symm))
+        (unitCoefficientDualIso (ModuleCat.{u + 1} Λ) _).symm))
   simp only [Functor.mapIso_hom, Iso.symm_hom, Iso.app_inv] at heI heJ
   obtain ⟨eL⟩ : Nonempty ((𝟙_ (DerivedCategoryModule Λ (Spec (.of (AlgebraicClosure k₀)))) ⟶
       tateObject Λ (Spec (.of (AlgebraicClosure k₀))) (-d)) ≃+ Λ) :=
