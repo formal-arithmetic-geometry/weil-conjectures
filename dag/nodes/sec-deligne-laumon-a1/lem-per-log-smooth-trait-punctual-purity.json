@@ -19,9 +19,52 @@
   "def-sbc-smooth-morphisms",
   "def-weil-etale-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix $v\\in V$ and a uniformizer $\\pi$ of the trait. Apply the monomial chart theorem to the given regular Noetherian fs log-smooth $V\\to S$. It gives an etale neighbourhood $a:U\\to V$, a point $u$ above $v$, and an etale $S$-map $b:U\\to T$, with $U$ regular affine Noetherian and $T=\\operatorname{Spec}(R[T_1,\\ldots,T_n]/(\\prod_iT_i^{e_i}-\\pi))$, $n\\geq1$, $e_i\\geq0$ not all zero. The trait and its canonical log structure are exactly the ones required by the chart theorem. No change of the trait or of the coefficients is made.",
+   "uses": [
+    "lem-per-regular-log-smooth-monomial-chart"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Proposition 3.6.5, printed p.253."
+   }
+  },
+  {
+   "text": "The monomial purity theorem makes $T$ regular Noetherian and punctually pure with coefficients $A=\\mathbf F_\\ell$: the uniformizer and the nonzero exponent tuple come from Step 1, and $\\ell$ is invertible in $R$. The same invertibility holds on $U$ and $T$ as $S$-schemes. For each $z\\in U$, apply etale locality to $b:U\\to T$ at $z$; punctual purity at $b(z)$ implies punctual purity at $z$. Hence $U$ is punctually pure. This uses the theorem with arbitrary exponent multiplicities, including zeros and factors of $\\ell$; it does not assume that $T\\to S$ is smooth.",
+   "uses": [
+    "lem-per-monomial-trait-punctual-purity",
+    "lem-per-punctual-purity-etale-locality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Proposition 3.5.12, printed pp.250--251, and the concluding reduction of Theorem 3.6.2, printed p.253; Definitions 3.2.1--3.2.2, printed p.244."
+   }
+  },
+  {
+   "text": "Apply etale locality to $a:U\\to V$ at the chosen point $u$. Both schemes are regular Noetherian, $\\ell$ is invertible on them, and $a(u)=v$. The punctual purity of $U$ at $u$ obtained in Step 2 therefore implies punctual purity of $V$ at $v$, for the Kummer fundamental-class map in the statement. Since $v$ was arbitrary this proves punctual purity of $V$. If $V$ is empty, the condition at every point is vacuous.",
+   "uses": [
+    "lem-per-punctual-purity-etale-locality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Theorem 3.6.2, final reduction from Proposition 3.6.5 on printed p.253; Definitions 3.2.1--3.2.2, printed p.244."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-per-regular-log-smooth-monomial-chart",
+  "lem-per-monomial-trait-punctual-purity",
+  "lem-per-punctual-purity-etale-locality"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose XVI, proof of Theorem 3.6.2, final sentence following Proposition 3.6.5, printed p.253; monomial theorem on pp.250--251."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -60,7 +103,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-gabber-regular-pair-purity",
@@ -84,5 +127,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-log-smooth-trait-punctual-purity",
+  "worker": "stage1",
+  "summary": "Q29 checked ILO XVI 3.2 and 3.5--3.6 and supplies the etale monomial chart, monomial punctual-purity, and etale-locality inputs as three statement-only nodes. The complete item argument passes through both etale arrows. No hypothesis, coefficient category or statement was changed; no Lean was written or compiled.",
+  "blueprint": "Realizes the inherited regular finite-torsion local model input to lem-per-artin-gabber-affine-curve, proof Step 3. In ILO XVI Theorem 3.6.2 this is the final reduction via Proposition 3.6.5 and Proposition 3.5.12. This item is not the key statement of its unit."
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q29-59abb52c8",
+  "group": "Q29",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q29-59abb52c8 (reviewer sub-agent of L); spot-checked: I read the item, all three new nodes and the cited statements against ILO XVI §3.2 (pp.243-245), §3.4.1-3.4.5, §3.5 from its opening (arbitrary trait, p.248) through 3.5.11-3.5.13 with footnotes viii/ix (pp.248-251), and §3.6.1-3.6.5 (pp.252-253). The item is Thm 3.6.2 with the statement unchanged. Its three steps (3.6.5 chart, then 3.5.12 purity of the monomial model, then purity passed back through both étale arrows) are exactly the source's final sentence on p.253, and each step uses only what the cited statements say. Chart node: true for any uniformizer. The source argument is 3.6.3 with Q=N, inverting the face P', P≅N^r⊕P' (log regular and regular means M̄_x free), and an étale map into an open of V(S,π,e,f); the exponent tuple is nonzero because N→P is injective. Spec K⊂S is consistent with it. Monomial node: 3.5.12 over an arbitrary trait, with all-zero e correctly excluded (it gives the empty scheme). I tested e=(1), (1,0), (1,1), (2) in residue char 2, and (p), (p,p) in equal char p. Étale-locality node: true. It follows from essentially-étale local maps with m_xO_{Y,y}=m_y and d_y=d_x, ind-étale j^! base change, class compatibility with flat base change, and conservative pullback along the finite separable extension κ(y)/κ(x). It is strictly smaller than the item, so not a D1 relabelling. No duplicates: lem-trf-log-regular-completed-chart, lem-trf-face-localization-fs, lem-trf-fs-chart-free-factorization, lem-trf-log-smooth-log-regular, the nodal chart, and the punctual-purity siblings (two-of-three, trait-test, proper-degree-descent) all state other things. No cycle: the new nodes cite neither the item nor the parent gabber-regular-pair-purity. No SGA is cited. Batch 5: (1) regular-immersion-class-calculus is cited by the monomial and locality nodes only as a stmt_dep naming the Kummer class, exactly as the item's own statement already does. The flagged path ends at lem-trf-bounded-below-derived-adjunction, generic homological algebra that is not part of either assumption: accepted. (2) def-trf-fs-log-blowup is a general log-structure definition already in the item's stmt_deps: accepted. FIX: removed the unused stmt_dep def-weil-pbc-krull-dimension-ring from lem-per-regular-log-smooth-monomial-chart (fixes/dag/nodes/sec-deligne-laumon-a1/). Advisory for later splits: the 3.5.12 proof's footnote ix and 3.4.4 cite SGA 4, so the monomial node's split must use the blueprint smooth-purity route instead.; 1 file(s) fixed by the reviewer"
  }
 }
