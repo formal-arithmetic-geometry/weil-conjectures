@@ -6,7 +6,7 @@ Authors: Weil conjectures project
 module
 
 public import WeilConjectures.Compactification.BaseChange
-public import WeilConjectures.Compactification.Refinement
+public import WeilConjectures.Compactification.RefinementCategory
 
 /-!
 # Base change of refinements along a cartesian square
