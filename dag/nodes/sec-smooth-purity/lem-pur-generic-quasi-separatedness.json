@@ -38,10 +38,12 @@
    }
   },
   {
-   "text": "Apply [lem-pur-generic-finite-module-presentation] to each $(A,B_i,M_{ij})$. Its hypotheses hold because $A$ is a domain, $B_i$ is finite type, and $M_{ij}$ is cyclic. Obtain nonzero $a_{ij}\\in A$ such that $(M_{ij})_{a_{ij}}$ is finitely presented over $(B_i)_{a_{ij}}$. Put $a=\\prod_{i,j}a_{ij}$ (the empty product is $1$). This is nonzero in a domain, so $W=D(a)\\subseteq V\\subseteq T$ contains the prime ideal $(0)$ of $A$ and is nonempty. Each $a_{ij}$ is invertible after inverting $a$: its inverse is $(\\prod_{(k,l)\\ne(i,j)}a_{kl})/a$. Localize the finite presentation matrices at these further elements to obtain finite presentations of $(M_{ij})_a$ over $(B_i)_a$. Explicitly localization preserves exactness: if a fraction maps to zero, multiplying its numerator by a denominator makes it lie in the original kernel, so the original image representation supplies a localized preimage. Thus this common shrinking retains all the module finite presentations.",
+   "text": "Apply [lem-pur-generic-finite-module-presentation] to each cyclic quotient B_i/I_ij. Mathlib Submodule.toLocalizedQuotient' and IsLocalizedModule.linearEquiv identify its module of fractions with the quotient of the localized ring by the extended ideal; extend the linear equivalence to localized scalars. Module.support_of_algebra and Ideal.mk_ker identify its support with the zero locus of that ideal. By [lem-pur-finitely-presented-support-complement] the complement is compact in the localized spectrum. Its image in Spec B_i is the original intersection restricted to D(a_ij), by localization_away_comap_range. Compactness persists at every base element divisible by a_ij: the further restriction is the intersection with another compact basic open in the quasi-separated spectrum. Take the finite product a of the a_ij (the empty product is 1). The domain property implies a is nonzero and hence D(a) is nonempty. Each a_ij divides a, so every chart intersection is compact on this one shrinking.",
    "uses": [
     "lem-pur-generic-finite-module-presentation",
-    "def-weil-ring-localization-away"
+    "def-weil-ring-localization-away",
+    "lem-pur-finitely-presented-support-complement",
+    "def-weil-affine-spectrum"
    ],
    "elementary": false,
    "source": {
@@ -50,10 +52,8 @@
    }
   },
   {
-   "text": "A prime of $B_i$ lies over $D(a)$ exactly when it does not contain the image of $a$. Thus the inverse image of $W$ in $Z_i$ is $D(a)$ in that chart; [lem-weil-pbc-principal-localization-open-immersion] identifies this open subscheme with the affine $Z_{i,a}=\\operatorname{Spec}(B_i)_a$. Its intersection with $Z_{j,a}$ is the complement of $V(I_{ij}(B_i)_a)$. The quotient module $(M_{ij})_a$ is $(B_i)_a/I_{ij}(B_i)_a$: send $(b+I_{ij})/a^r$ to $b/a^r$ modulo the extended ideal; the fraction equality criterion makes this a well-defined bijection. Its support is exactly that zero locus. Indeed, if $\\mathfrak p$ does not contain the ideal, an ideal element outside $\\mathfrak p$ becomes a unit and kills the quotient; if the ideal is contained in $\\mathfrak p$, the localized quotient maps onto the residue field at $\\mathfrak p$ and is nonzero. Apply [lem-pur-finitely-presented-support-complement] to the presentations from step 2. It follows that every $Z_{i,a}\\cap Z_{j,a}$ is quasi-compact.",
+   "text": "Transfer the spectrum compactness computation to each affine chart by its canonical isoSpec homeomorphism and HasRingHomProperty.iff_of_isAffine for finite type. The preimage of D(a) in each chart is the basic open defined by the image of a; [lem-weil-pbc-principal-localization-open-immersion], as used by Mathlib IsAffineOpen.ι_basicOpen_preimage, makes the restricted charts affine. Pull back the finite chart cover to the restricted source. The image of each chart-complement computation is exactly the image of the corresponding intersection in this restricted source; write the witnesses explicitly and transfer compactness through the source inclusion, an open embedding.",
    "uses": [
-    "lem-pur-finitely-presented-support-complement",
-    "def-weil-ring-localization-away",
     "def-weil-affine-spectrum",
     "lem-weil-pbc-principal-localization-open-immersion"
    ],
@@ -64,7 +64,7 @@
    }
   },
   {
-   "text": "The $Z_{i,a}$ form a finite affine open cover of $h^{-1}(W)$ with quasi-compact pairwise intersections. Clause (2) of [lem-weil-pbc-quasi-separated-affine-cover-criterion] therefore makes this source scheme quasi-separated, including the empty source case. Clause (1) of [lem-weil-pbc-qcqs-morphism-permanence] says that a morphism whose source is quasi-separated is quasi-separated, with no condition on its target. Apply it to $h^{-1}(W)\\to W$. This proves the required conclusion, without having assumed quasi-separatedness of the original map or Noetherianity.",
+   "text": "Apply clause (2) of [lem-weil-pbc-quasi-separated-affine-cover-criterion], implemented by Scheme.quasiSeparatedSpace_of_isOpenCover, to the restricted affine cover and its compact intersections. Clause (1) of [lem-weil-pbc-qcqs-morphism-permanence], implemented by QuasiSeparated.of_quasiSeparatedSpace, makes the restricted morphism quasi-separated. For a general integral base choose a nonempty affine open, whose scheme remains integral, apply the affine-base construction to the restricted morphism, and take the image of the resulting nonempty open in the original base. Transfer quasi-separatedness along morphismRestrictRestrict using the isomorphism-invariance of the morphism property. All finite products and covers include the empty-source case.",
    "uses": [
     "lem-weil-pbc-quasi-separated-affine-cover-criterion",
     "lem-weil-pbc-qcqs-morphism-permanence"
@@ -90,7 +90,7 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/morphisms.tex",
-  "place": "Tag 052A, proposition-generic-flatness, proof"
+  "place": "Tag 052A, proposition-generic-flatness, proof; implemented by G7 on 2026-10-18 using compact intersection stability for further principal shrinking"
  },
  "mathlib_searches": [
   {
@@ -189,5 +189,15 @@
   "group": "NG",
   "result": "pass",
   "note": "Reviewed immutable node, dependencies, source proof, module, docstrings, report, edge cases, and verbatim signature. No delivery errors found. Server-only compilation reproduced successfully in 1.2 seconds without diagnostics. Review written to review.md; no project or branch changes."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G7",
+  "result": "pass",
+  "landing": "20261018T062801-L-652382",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
