@@ -7522,7 +7522,6 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.Rationalization
 public import WeilConjectures.CategoryTheory.DerivedCategory.RationalizationMap
 public import WeilConjectures.CategoryTheory.DerivedCategory.RationalizationRecollement
 public import WeilConjectures.CategoryTheory.DerivedCategory.ResolvingClassEssentialConstancy
-public import WeilConjectures.CategoryTheory.DerivedCategory.Retract
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Additive
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Adjunction
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.AdjunctionShift
@@ -7720,7 +7719,6 @@ public import WeilConjectures.CategoryTheory.HypercohomologyLeftEdgeNaturality
 public import WeilConjectures.CategoryTheory.HypercohomologyLeftEdgeSingle
 public import WeilConjectures.CategoryTheory.HypercohomologyLeftEdgeSingleAux
 public import WeilConjectures.CategoryTheory.HypercohomologyLeftEdgeTruncation
-public import WeilConjectures.CategoryTheory.Idempotents.FullSubcategory
 public import WeilConjectures.CategoryTheory.Idempotents.Pretriangulated
 public import WeilConjectures.CategoryTheory.Idempotents.Shift
 public import WeilConjectures.CategoryTheory.Idempotents.TStructure
@@ -8064,7 +8062,6 @@ public import WeilConjectures.CategoryTheory.Triangulated.RingedSpaceDerivedProd
 public import WeilConjectures.CategoryTheory.Triangulated.TStructure.Adjunction
 public import WeilConjectures.CategoryTheory.Triangulated.TStructure.Homology
 public import WeilConjectures.CategoryTheory.Triangulated.TStructure.Karoubian
-public import WeilConjectures.CategoryTheory.Triangulated.TStructure.KaroubianSubcategory
 public import WeilConjectures.CategoryTheory.Triangulated.TStructure.ShortExact
 public import WeilConjectures.CategoryTheory.Triangulated.TriangleMorphismExtension
 public import WeilConjectures.CategoryTheory.TriangulatedEquivalenceTransfer
@@ -11211,7 +11208,6 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.GeometricFrobeniusMate
 public import WeilConjectures.SixFunctors.ProEtale.Adic.GlobalSectionsHom
 public import WeilConjectures.SixFunctors.ProEtale.Adic.Hom
 public import WeilConjectures.SixFunctors.ProEtale.Adic.HomCoherence
-public import WeilConjectures.SixFunctors.ProEtale.Adic.IdempotentComplete
 public import WeilConjectures.SixFunctors.ProEtale.Adic.InternalHom
 public import WeilConjectures.SixFunctors.ProEtale.Adic.InternalHomEvaluation
 public import WeilConjectures.SixFunctors.ProEtale.Adic.IrreducibleLisse
