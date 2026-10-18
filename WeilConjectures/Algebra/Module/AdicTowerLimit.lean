@@ -24,14 +24,18 @@ Passing to the limit in `n`, which is exact on towers of finite modules by Kőni
 (`CategoryTheory.Functor.exists_mem_sections_of_finite`), gives the exact sequences
 `0 ⟶ L/ℓᵐL ⟶ Mₘ ⟶ L'[ℓᵐ] ⟶ 0`:
 
-- `ModuleCat.AdicTower.eval_eq_zero_iff`: the kernel of `L ⟶ Mₘ` is `ℓᵐL`;
-- `ModuleCat.AdicTower.exists_eval_eq_iff`: the image of `L ⟶ Mₘ` is the kernel of
+- `ModuleCat.AdicTowerSequence.eval_eq_zero_iff`: the kernel of `L ⟶ Mₘ` is `ℓᵐL`;
+- `ModuleCat.AdicTowerSequence.exists_eval_eq_iff`: the image of `L ⟶ Mₘ` is the kernel of
   `δ : Mₘ ⟶ L'`;
-- `ModuleCat.AdicTower.exists_limδ_eq_iff`: the image of `δ` is the `ℓᵐ`-torsion of `L'`.
+- `ModuleCat.AdicTowerSequence.exists_limδ_eq_iff`: the image of `δ` is the `ℓᵐ`-torsion of `L'`.
 
 If the `ℓ`-power torsion of `L'` is killed by `ℓᶜ`, the image of `Mₘ₊꜀ ⟶ Mₘ` is contained in
-the image of `L` (`ModuleCat.AdicTower.exists_eval_eq_towerMap`): the tower `(Mₘ)` is then
-Artin-Rees isomorphic to `(L/ℓᵐL)`.
+the image of `L` (`ModuleCat.AdicTowerSequence.exists_eval_eq_towerMap`): the tower `(Mₘ)` is
+then Artin-Rees isomorphic to `(L/ℓᵐL)`. When `R` is noetherian and `ℓ`-adically precomplete,
+`L` and `L'` are finitely generated (`ModuleCat.AdicTowerSequence.module_finite`, using
+`Module.Finite.of_isHausdorff_span_singleton`), so such a `c` exists
+(`ModuleCat.AdicTowerSequence.exists_pow_smul_eq_zero_of_pow_smul_eq_zero`); the result is
+`ModuleCat.AdicTowerSequence.exists_artinRees`.
 -/
 
 @[expose] public section
