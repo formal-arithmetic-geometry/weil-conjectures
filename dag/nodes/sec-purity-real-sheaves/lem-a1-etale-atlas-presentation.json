@@ -221,5 +221,28 @@
   "group": "NZ",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NZ-bebd23801 (reviewer sub-agent of L); spot-checked: I read the whole item, all 5 steps, every cited node's statement, and the sources at the cited places: spaces.tex Tag 0262 (lemma-space-presentation) with its full proof, and sites.tex 086K with its proof; the labels for 00W2, 00WH, 00WM and 00WN were checked in tags/tags. The statement matches 0262 (1)-(3). It adds two things, both correct: s and t are surjective (base change of the surjective atlas), and the quotient is written as the sheafification of U(T)/R(T), which step 5 proves equal to the coequalizer by the universal property only. Steps: (1) the sectionwise kernel pair, via the limits-sectionwise lemma on a finite pullback and def-pc-fibre-product. (2) s and t are surjective etale by testing p against p in def-trf-algebraic-space, then swapping the factors. (3) V=T x_X U -> T is surjective etale, so flat and lfp, so a singleton fppf covering; with the local lifts, the epi/locally-surjective lemma makes p an epimorphism. (4) The 086K Mathlib leaf applies, its hypotheses being the epi of step 3 and the sheaf kernel pair of step 1. (5) alpha/beta inverse argument, correct. That h_U and h_R are fppf sheaves is presupposed by def-trf-algebraic-space, as in Stacks. Edge cases checked: identity atlas, X disjoint-union X, no global lift, empty space. No new nodes. grep found no duplicate of 0262: the nearest nodes are lem-trf-etale-relation-quotient (02WW, the converse), lem-trf-etale-relation-restriction-quotient and lem-trf-etale-affine-quotient-representable. I accept the tool_use lem-trf-space-fibre-products-etale-covers: it is a generic fibre-product interface and the parent node already has the same tool use accepted. No SGA; the unit route is unchanged. FIX (B5): step 3's source.place cited Topologies 'Tag 021L (definition-fppf-covering)', but 021L is topologies-section-fppf and the definition is 021M. Corrected in fixes/dag/nodes/sec-purity-real-sheaves/lem-a1-etale-atlas-presentation.json; nothing else changed.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-05f0f6cdf",
+  "group": "NY",
+  "result": "pass",
+  "note": "Verified all statement clauses, dependencies, canonical quotient construction, universes, edge cases, docstrings, records, and route-pivot gates. Reproduced clean per-file compilation through scompile.py."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleAtlasPresentation",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.etale_atlas_presentation",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.etaleAtlasPresentationMap",
+   "AlgebraicGeometry.AlgebraicSpace.etale_atlas_presentation"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleAtlasPresentation.lean",
+  "statement": "theorem etale_atlas_presentation {S : Scheme.{u}} (X : AlgebraicSpace S) (U : Over S) (p : yoneda.obj U ⟶ X.obj.obj) (hp : IsEtale p) (hsur : IsSurjective p) (R : Over S) (s t : R ⟶ U) (hR : IsPullback (yoneda.map s) (yoneda.map t) p p) (Q : Sheaf (Scheme.fppfTopology.over S) (Type u)) (η : coequalizer (yoneda.map s) (yoneda.map t) ⟶ Q.obj) (hη : ∀ G : Sheaf (Scheme.fppfTopology.over S) (Type u), Function.Bijective (fun a : Q.obj ⟶ G.obj ↦ η ≫ a)) : Mono (prod.lift s t) ∧ (∀ T : Over S, Equivalence (fun a b : T ⟶ U ↦ ∃ r : T ⟶ R, r ≫ s = a ∧ r ≫ t = b) ∧ ∀ a b : T ⟶ U, (∃ r : T ⟶ R, r ≫ s = a ∧ r ≫ t = b) ↔ p.app (op T) a = p.app (op T) b) ∧ Etale s.left ∧ Surjective s.left ∧ Etale t.left ∧ Surjective t.left ∧ IsIso (etaleAtlasPresentationMap p s t hR Q η hη) ∧ (coequalizer.π (yoneda.map s) (yoneda.map t) ≫ η) ≫ (etaleAtlasPresentationMap p s t hR Q η hη).hom = p",
+  "branch": "newtargets-dag",
+  "by": "NY",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "The canonical comparison is constructed by the inverse sheafification hom-set bijection applied to the presheaf coequalizer descent of p. Q and its unit are specified by the universal property at this quotient presheaf, preserving the published small-valued algebraic-space interface on the big fppf site. The representing scheme R is an arbitrary supplied representative, expressed by its Yoneda pullback square."
  }
 }

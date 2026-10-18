@@ -27,7 +27,11 @@
   "def-weil-pbc-proetale-site",
   "def-weil-sheaf-of-modules-category",
   "def-weil-abstract-derived-category",
-  "def-pur-sheaf-inverse-limit"
+  "def-pur-sheaf-inverse-limit",
+  "def-weil-pbc-constant-sheaf",
+  "det-pe-milnor-epimorphic",
+  "def-weil-derived-limit",
+  "lem-kun-site-rgamma-derived-limit"
  ],
  "proof": [
   {
@@ -160,5 +164,31 @@
   "group": "Q12",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q12-eecedf29e (reviewer sub-agent of L); spot-checked: I read the item, the unit, the blueprint main-20261015 .md/.proof.md, Bhatt-Scholze Props 3.1.9-3.1.10 and 5.6.2, and every cited node. The statement is unchanged and correct, tested on a point with Z/l^n towers, constant towers and the zero tower; the non-epimorphic tower p^nZ in Z has R^1 lim = Z_p/Z, nonzero, so the epimorphism hypothesis is needed. No SGA, no new nodes, no cycle. Two repairable faults. (1) C1, step 1: it identified the statement's fibre of 1-shift on the product in D with the Cone(1-T)[-1] of the termwise product without citing det-pe-products-derived; Bhatt-Scholze rely on 3.1.9 for this. (2) C1/C4, step 2: it claimed RΓ(W,-) is a right adjoint, but no node states that adjunction for D(X_proet), and the Mathlib leaf lem-weil-pbc-right-adjoint-preserves-limits cannot supply it. Fixed file: fixes/dag/nodes/sec-proetale-coefficients/det-pe-continuous-cohomology-limit.json. Step 1 now cites det-pe-products-derived, the cone convention and the Z_X-module identification. Step 2 now builds a Roos triangle (def-weil-derived-limit) and applies the reviewed site-general lemma lem-kun-site-rgamma-derived-limit with O=Z_X, U=W, which gives RΓ(W,∏F_n)=∏RΓ(W,F_n) and that Roos triangles go to Roos triangles. proof_deps equal the union of uses. Tool use accepted: lem-kun-site-rgamma-derived-limit (off-route generic black box for the blueprint's 'right adjoint preserves products'). The unnecessary tool_uses entry for det-pe-milnor-epimorphic, which is on route via sk-prop-pe-milnor, was removed. Details are in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-05c0450e4",
+  "group": "Q55",
+  "result": "pass",
+  "note": "Statement, dependencies, source alignment, docstrings, edge cases, route-pivot compliance, and recorded compile evidence checked; no repair required."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleContinuousCohomologyLimit",
+  "declaration": "AlgebraicGeometry.ProEtale.continuousCohomology_limit",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.continuousCohomology_locallyBijective",
+   "AlgebraicGeometry.ProEtale.continuousCohomologyIntegerSheaf",
+   "AlgebraicGeometry.ProEtale.continuousCohomologyAbelianSheaves",
+   "AlgebraicGeometry.ProEtale.continuousCohomologySheafSections",
+   "AlgebraicGeometry.ProEtale.continuousCohomology_limit"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleContinuousCohomologyLimit.lean",
+  "statement": "theorem continuousCohomology_limit (X : Scheme.{t}) [HasDerivedCategory.{w} (continuousCohomologyAbelianSheaves X)] [HasDerivedCategory.{w'} AddCommGrpCat.{t + 1}] (F : ℕᵒᵖ ⥤ continuousCohomologyAbelianSheaves X) (ht : ∀ n : ℕ, Epi (F.map (homOfLE (Nat.le_succ n)).op)) : IsIso (DerivedCategory.Q.{w}.map (milnorLimitComparison F)) ∧ ∀ W : X.ProEt, IsDerivedLimit (K := fun n : ℕ ↦ (continuousCohomologySheafSections X W).obj (F.obj (op n))) (fun n : ℕ ↦ (continuousCohomologySheafSections X W).map (F.map (homOfLE (Nat.le_succ n)).op)) ((continuousCohomologySheafSections X W).obj (limit F))",
+  "branch": "newtargets-dag",
+  "by": "Q55",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Abelian sheaves are represented by modules over the sheafified constant integer ring. The comparison is the recorded canonical milnorLimitComparison; the derived-sections conclusion uses the existing fibre predicate IsDerivedLimit. Helpers only specialize existing constant-sheaf, module-sheaf, size-transport and derived-sections constructions. Added statement dependencies name the already-landed declarations used in the signature; the natural-language statement is unchanged."
  }
 }

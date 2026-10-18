@@ -247,5 +247,29 @@
   "lem-weil-pbc-proetale-ringed-open-closed",
   "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
   "lem-sfb-alpha-iso"
- ]
+ ],
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-3815ff509",
+  "group": "Q50",
+  "result": "pass",
+  "note": "Wrote review.md. Verified snapshot identity, all statement clauses and dependency interfaces, sources, universes, edge cases, docstrings, and route-pivot compliance. Reproduced clean per-file compilation through scompile.py. No delivery errors found; repositories unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FiniteModelStratumFiltration",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.exists_finiteModelStratumFiltration",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.openFiltrationPiece",
+   "AlgebraicGeometry.ProEtale.CondensedRing.openFiltrationCounit",
+   "AlgebraicGeometry.ProEtale.CondensedRing.openFiltrationStratum",
+   "AlgebraicGeometry.ProEtale.CondensedRing.exists_finiteModelStratumFiltration"
+  ],
+  "file": "lean/Sheaf/Paper/FiniteModelStratumFiltration.lean",
+  "statement": "theorem exists_finiteModelStratumFiltration (X : Scheme.{u}) [TopologicalSpace.NoetherianSpace X] (F : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) (hF : IsConstantModelConstructible Λ X F) : ∃ (r : ℕ) (V : Fin (r + 1) → X.Opens), Monotone V ∧ V 0 = ⊥ ∧ V (Fin.last r) = ⊤ ∧ ∃ (S : Fin r → Scheme.{u}) (t : ∀ k : Fin r, S k ⟶ (V k.succ).toScheme), (∀ k : Fin r, IsClosedImmersion (t k) ∧ IsReduced (S k) ∧ Set.range (t k) = {x | (V k.succ).ι x ∉ V k.castSucc}) ∧ (∀ k : Fin r, HasFiniteConstantLocalModel Λ (S k) ((upperStar Λ (t k)).obj ((upperStar Λ (V k.succ).ι).obj F))) ∧ (∀ k : Fin (r + 1), QuasiCompact (V k).ι ∧ QuasiSeparated (V k).ι) ∧ (∀ k : Fin r, QuasiCompact ((V k.succ).ι ⁻¹ᵁ V k.castSucc).ι ∧ QuasiSeparated ((V k.succ).ι ⁻¹ᵁ V k.castSucc).ι) ∧ (∀ k : Fin (r + 1), Mono ((openFiltrationCounit Λ (V k)).app F)) ∧ IsZero ((openFiltrationPiece Λ (V 0)).obj F) ∧ IsIso ((openFiltrationCounit Λ (V (Fin.last r))).app F) ∧ ∃ d : ∀ k : Fin r, openFiltrationPiece Λ (V k.castSucc) ⟶ openFiltrationPiece Λ (V k.succ), (∀ k : Fin r, d k ≫ openFiltrationCounit Λ (V k.succ) = openFiltrationCounit Λ (V k.castSucc)) ∧ (∀ k : Fin r, Mono ((d k).app F)) ∧ (∀ k : Fin r, Nonempty (cokernel (d k) ≅ openFiltrationStratum Λ (V k.succ) (t k)))",
+  "branch": "newtargets-dag",
+  "by": "Q50",
+  "date": "2026-10-18",
+  "existing": false
+ }
 }

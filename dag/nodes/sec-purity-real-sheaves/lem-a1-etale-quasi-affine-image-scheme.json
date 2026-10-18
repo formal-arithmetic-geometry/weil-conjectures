@@ -379,5 +379,28 @@
   "group": "NS",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NS-4224146c6 (reviewer sub-agent of L); spot-checked: I read the whole item, both new nodes, the parent, every cited statement, and Stacks 03XW (spaces-morphisms.tex l.10469-10586) with its cited lemmas (more-morphisms quasi-finite-separated-quasi-affine; spaces-properties 03BX/03BZ/03IR/03H4/03H5/03E4; spaces-morphisms 03KL/03XL/03KQ/03XK/03XJ, all resolved through tags/tags). The item's statement matches 03XW hypothesis by hypothesis. V' is assumed to be a scheme, and the factorization form of quasi-affine equals Stacks' notion over the affine base T'. The 11 steps are a correct and complete expansion of the source. Step 2: bounded-fibre induction, including n=0. Steps 3-4: the clopen diagonal complement T* is affine; the bound n-1 comes from the K×C dimension count via fibre-degree-bound-field-points in both directions. Step 5: n=1, etale mono gives an open immersion (pe-flat-lfp-monomorphism-open). Step 6: P(n-1) is applied to (T',T*,X',Z) with the pi_0/pi_1 roles kept apart. Step 7: P=V'∪H, a scheme by 01JJ. Step 8: P->T' is quasi-affine by the Nagata lemma. Steps 9-11: the fpqc/fppf cover T'->B of the non-affine open image B, the 02W5 descent datum, and effectivity by 0247. No cycle, no proof-internal citations. New lem-a1-space-etale-open-image (topology, open-subspace correspondence, open etale image, base-change identity, quasi-compactness) and lem-a1-space-separated-lqf-permanence are both true; I tested them on empty, identity, open-inclusion and nonreduced base-change cases. Neither is a duplicate (the only analogues, etale-morphism-open-map and separated-lqf-base-change, are scheme-only), and neither restates the item. Batch-5 check: the dependency closure (417 nodes) of all cited sec-trace-formula nodes contains only general Stacks foundations of algebraic spaces, descent and quasi-affine morphisms. It has no trace-formula, Poincare-duality or cohomological node and no assumption leaf. Each listed citation (space-fibre-products-etale-covers, space-chartwise-etale-permanence, def-trf-algebraic-space, quasi-affine-base-change, fppf-sheaf-representability-descent-data, quasi-affine-fpqc-effective-descent, and a1-etale-space-locally-quasi-finite, whose closure reaches only the definition) is outside the assumed statements. Existing batch-5 nodes, including the parent, already cite two of them. I accept the 11 declared generic tool_uses. No SGA source is cited. Minor implicit elementary points: converting between the two forms of quasi-affine, and representable etale implying chartwise etale. No fixes were written."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-069ee2c7f",
+  "group": "Q44",
+  "result": "pass",
+  "note": "Recorded review.md. Checked all hypotheses, conclusions, dependencies, field-point images, universes, docstrings, edge cases, and verbatim signature. Immutable module compiled successfully through scompile.py with no diagnostics; no fixes required."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleQuasiAffineImageScheme",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.etale_quasiAffine_image_scheme",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.IsFieldSpectrum",
+   "AlgebraicGeometry.AlgebraicSpace.FieldPointImage",
+   "AlgebraicGeometry.AlgebraicSpace.etale_quasiAffine_image_scheme"
+  ],
+  "statement": "theorem etale_quasiAffine_image_scheme {S : Scheme.{u}} (T T' : Over S) [IsAffine T.left] [IsAffine T'.left] (a : T' ⟶ T) [Etale a.left] (X : AlgebraicSpace S) (f : X.obj.obj ⟶ yoneda.obj T) (hlocal : ∀ (U : Over S) (g : yoneda.obj U ⟶ X.obj.obj) (q : U ⟶ T), AlgebraicSpace.IsEtale g → yoneda.map q = g ≫ f → Scheme.Hom.IsLocallyQuasiFinite q.left) (hdiag : AlgebraicSpace.IsRepresentableWith (fun _ _ p ↦ IsClosedImmersion p.left) (Limits.pullback.diagonal f)) (V' : Over S) (v : yoneda.obj V' ⟶ X.obj.obj) (b : V' ⟶ T') (hcomm : v ≫ f = yoneda.map b ≫ yoneda.map a) (hvopen : AlgebraicSpace.IsRepresentableWith (fun _ _ p ↦ IsOpenImmersion p.left) (Limits.pullback.lift v (yoneda.map b) hcomm)) (hvquasi : ∃ (Y : Over S) (j : V' ⟶ Y) (c : Y ⟶ T'), j ≫ c = b ∧ IsOpenImmersion j.left ∧ QuasiCompact j.left ∧ IsAffineHom c.left) : ∃ (W : Over S) (w : yoneda.obj W ⟶ X.obj.obj), CompactSpace W.left ∧ AlgebraicSpace.IsRepresentableWith (fun _ _ p ↦ IsOpenImmersion p.left) w ∧ ∀ (U : Over S) (g : yoneda.obj U ⟶ X.obj.obj), IsFieldSpectrum U → (FieldPointImage U g V' v ↔ FieldPointImage U g W w)",
+  "branch": "newtargets-dag",
+  "by": "Q44",
+  "date": "2026-10-18",
+  "existing": false,
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleQuasiAffineImageScheme.lean"
  }
 }

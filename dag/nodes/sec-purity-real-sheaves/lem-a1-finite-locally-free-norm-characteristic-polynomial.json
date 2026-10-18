@@ -294,5 +294,30 @@
   "group": "Q63",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q63-ca1f67307 (reviewer sub-agent of L); spot-checked: Read the item, all ten steps, all 22 distinct cited statements, unit/chapter route, and cited source passages. Checked polynomial base change, determinant characterization, Cayley–Hamilton descent, zero rings, rank zero, and nilpotents. No new nodes, duplicates, cycles, missing dependencies, or non-elementary steps over 2000 characters. Six generic tool uses accepted. Full findings and source-access limits recorded in review.md; no fixes needed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-67c97c214",
+  "group": "Q25",
+  "result": "fix",
+  "note": "Mathematics and Lean statement match; snapshot module compiles cleanly. Wrote review.md and a complete report replacement under fixes/ to repair the H11 placeholder second reading. No Lean or node changes needed."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FiniteLocallyFreeNormCharacteristicPolynomial",
+  "declaration": "Algebra.finiteLocallyFree_norm_characteristicPolynomial",
+  "declarations": [
+   "Algebra.IsLocallyFreeDeterminantNorm",
+   "Algebra.finiteLocallyFree_norm_characteristicPolynomial",
+   "Algebra.finiteLocallyFreeDeterminantNorm",
+   "Algebra.finiteLocallyFreeNormPolynomial"
+  ],
+  "file": "lean/Sheaf/RingTheory/FiniteLocallyFreeNormCharacteristicPolynomial.lean",
+  "statement": "theorem finiteLocallyFree_norm_characteristicPolynomial {A B : Type u} [CommRing A] [CommRing B] (φ : A →+* B) (r : ℕ) (h : (AlgebraicGeometry.Spec.map (CommRingCat.ofHom φ)).IsFiniteLocallyFreeOfDegree r) : (AlgebraicGeometry.Spec.map (CommRingCat.ofHom (Polynomial.mapRingHom φ))).IsFiniteLocallyFreeOfDegree r ∧ ∃ N : B → A, (IsLocallyFreeDeterminantNorm φ N ∧ ∀ N' : B → A, IsLocallyFreeDeterminantNorm φ N' → N' = N) ∧ ∃ Npoly : Polynomial B → Polynomial A, (IsLocallyFreeDeterminantNorm (Polynomial.mapRingHom φ) Npoly ∧ ∀ Npoly' : Polynomial B → Polynomial A, IsLocallyFreeDeterminantNorm (Polynomial.mapRingHom φ) Npoly' → Npoly' = Npoly) ∧ ∀ b : B, (∃ a : Fin r → A, Npoly (Polynomial.X - Polynomial.C b) = Polynomial.X ^ r + ∑ j : Fin r, Polynomial.C (a j) * Polynomial.X ^ (j : ℕ)) ∧ (Polynomial.map φ (Npoly (Polynomial.X - Polynomial.C b))).eval b = 0 ∧ (Nontrivial A → (Npoly (Polynomial.X - Polynomial.C b)).Monic ∧ (Npoly (Polynomial.X - Polynomial.C b)).natDegree = r)",
+  "branch": "newtargets-dag",
+  "by": "Q25",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "The theorem spells out unique existence of both norms from their local determinant characterization, together with polynomial base change, expansion, annihilation, and conditional monicity/degree. The two following definitions choose only these uniquely determined norm functions and form N_{φ[X]}(X-C b). The local determinant predicate is a helper for this owning node, not a replacement for the finite locally free hypothesis."
  }
 }
