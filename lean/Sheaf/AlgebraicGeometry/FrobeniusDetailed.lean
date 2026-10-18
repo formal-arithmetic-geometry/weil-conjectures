@@ -45,8 +45,11 @@ theorem specGaloisMap_over (D : WeilConjectures.FiniteFieldDatum.{u})
     (σ : D.k ≃ₐ[D.k₀] D.k) :
     Spec.map (CommRingCat.ofHom σ.toRingHom) ≫
         Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k)) =
-      Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k)) :=
-  sorry
+      Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k)) := by
+  rw [← Spec.map_comp, ← CommRingCat.ofHom_comp]
+  congr 1
+  ext x
+  exact σ.commutes x
 
 /-- The actual base-change map id × Spec σ on the geometric fibre, for a fixed closure.
 Source: Deligne, Weil II (1.1.7), pp. 150--151
@@ -70,8 +73,32 @@ of the fibre product then identifies both composites with its identity morphism.
 theorem galoisMap_inverse (D : WeilConjectures.FiniteFieldDatum.{u})
     {X : Scheme.{u}} (f : X ⟶ Spec (CommRingCat.of D.k₀)) (σ : D.k ≃ₐ[D.k₀] D.k) :
     D.galoisMap f σ ≫ D.galoisMap f σ.symm = 𝟙 _ ∧
-      D.galoisMap f σ.symm ≫ D.galoisMap f σ = 𝟙 _ :=
-  sorry
+      D.galoisMap f σ.symm ≫ D.galoisMap f σ = 𝟙 _ := by
+  let τ (ρ : D.k ≃ₐ[D.k₀] D.k) :
+      Over.mk (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k))) ⟶
+        Over.mk (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k))) :=
+    Over.homMk (Spec.map (CommRingCat.ofHom ρ.toRingHom)) (D.specGaloisMap_over ρ)
+  have hmul (ρ η : D.k ≃ₐ[D.k₀] D.k) : τ ρ ≫ τ η = τ (ρ * η) := by
+    apply Over.OverMorphism.ext
+    change Spec.map (CommRingCat.ofHom ρ.toRingHom) ≫
+        Spec.map (CommRingCat.ofHom η.toRingHom) = _
+    rw [← Spec.map_comp, ← CommRingCat.ofHom_comp]
+    congr 1
+  have hone : τ (1 : D.k ≃ₐ[D.k₀] D.k) = 𝟙 _ := by
+    apply Over.OverMorphism.ext
+    change Spec.map (CommRingCat.ofHom (RingHom.id D.k)) = 𝟙 _
+    exact Spec.map_id _
+  have hσmul : σ * σ.symm = 1 := mul_inv_cancel σ
+  have hσmul' : σ.symm * σ = 1 := inv_mul_cancel σ
+  have hσ : τ σ ≫ τ σ.symm = 𝟙 _ := by
+    rw [hmul, hσmul, hone]
+  have hσ' : τ σ.symm ≫ τ σ = 𝟙 _ := by
+    rw [hmul, hσmul', hone]
+  change baseChangeMap f (τ σ) ≫ baseChangeMap f (τ σ.symm) = 𝟙 _ ∧
+    baseChangeMap f (τ σ.symm) ≫ baseChangeMap f (τ σ) = 𝟙 _
+  constructor
+  · rw [← baseChangeMap_comp, hσ, baseChangeMap_id]
+  · rw [← baseChangeMap_comp, hσ', baseChangeMap_id]
 
 /-- The geometric Frobenius automorphism id × Spec(φ_q⁻¹). Its inverse has arithmetic
 Frobenius on coefficients; its underlying scheme is the dependency's geometric fibre.
@@ -102,8 +129,12 @@ theorem galoisMap_projections (D : WeilConjectures.FiniteFieldDatum.{u})
     D.galoisMap f σ ≫
         pullback.snd f (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k))) =
       pullback.snd f (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k))) ≫
-        Spec.map (CommRingCat.ofHom σ.toRingHom) :=
-  sorry
+        Spec.map (CommRingCat.ofHom σ.toRingHom) := by
+  change baseChangeMap f _ ≫ pullback.fst f _ = _ ∧
+    baseChangeMap f _ ≫ pullback.snd f _ = _
+  constructor
+  · exact baseChangeMap_fst f _
+  · exact baseChangeMap_snd f _
 
 /-- On every affine model the coefficient action is a tensor b ↦ a tensor σ(b).
 Source: Deligne, Weil II (1.1.7) and (1.1.14), pp. 150--153
@@ -118,7 +149,20 @@ theorem galoisMap_affine (D : WeilConjectures.FiniteFieldDatum.{u})
         D.galoisMap (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ A))) σ ≫
         (pullbackSpecIso D.k₀ A D.k).hom =
       Spec.map (CommRingCat.ofHom
-        (Algebra.TensorProduct.map (AlgHom.id D.k₀ A) σ.toAlgHom).toRingHom) :=
-  sorry
+        (Algebra.TensorProduct.map (AlgHom.id D.k₀ A) σ.toAlgHom).toRingHom) := by
+  rw [← cancel_mono (pullbackSpecIso D.k₀ A D.k).inv]
+  simp only [Category.assoc, Iso.hom_inv_id, Category.comp_id]
+  apply pullback.hom_ext
+  · simp only [Category.assoc, pullbackSpecIso_inv_fst]
+    rw [(D.galoisMap_projections _ σ).1,
+      pullbackSpecIso_inv_fst, ← Spec.map_comp, ← CommRingCat.ofHom_comp]
+    congr 1
+    ext a
+    simp [Algebra.TensorProduct.includeLeftRingHom]
+  · simp only [Category.assoc, pullbackSpecIso_inv_snd]
+    rw [(D.galoisMap_projections _ σ).2,
+      pullbackSpecIso_inv_snd_assoc, ← Spec.map_comp,
+      ← CommRingCat.ofHom_comp, ← Spec.map_comp, ← CommRingCat.ofHom_comp]
+    congr 1
 
 end WeilConjectures.FiniteFieldDatum
