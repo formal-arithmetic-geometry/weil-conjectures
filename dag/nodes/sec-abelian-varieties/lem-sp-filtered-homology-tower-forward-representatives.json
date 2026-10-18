@@ -112,7 +112,16 @@
  },
  "chapter": "sec-abelian-varieties",
  "unit": "sk-prop-av-pqf-finite",
- "lean": {},
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.FilteredHomologyTowerForwardRepresentatives",
+  "file": "lean/Sheaf/CategoryTheory/FilteredHomologyTowerForwardRepresentatives.lean",
+  "declaration": "CategoryTheory.filteredHomology_tower_forward_representatives",
+  "statement": "theorem filteredHomology_tower_forward_representatives (C : Type u) [Category.{v} C] [Abelian C] (U : ObjectProperty.FullSubcategory (fun W : FilteredObject (CochainComplex C ℤ) ↦ W.filtration.IsFinite)) (j : ∀ (s : ℕ) (p q : ℤ), (U.obj.filtration.complexCycles p (p + q) (s + 1) : C) ⟶ (U.obj.filtration.gradedPiece p).cycles (p + q)) (tQ : ∀ (s : ℕ) (p q : ℤ), (U.obj.filtration.complexCycles p (p + q) (s + 1) : C) ⟶ ((filteredHomologyExactCouple U.obj.obj U.obj.filtration).cycleBoundaryTower.Z s (2 * p + q) (-p) : C)) (hj : ∀ (s : ℕ) (p q : ℤ), j s p q ≫ (U.obj.filtration.gradedPiece p).iCycles (p + q) = (U.obj.filtration.complexCycles p (p + q) (s + 1)).arrow) (ht : ∀ (s : ℕ) (p q : ℤ), tQ s p q ≫ ((filteredHomologyExactCouple U.obj.obj U.obj.filtration).cycleBoundaryTower.Z s (2 * p + q) (-p)).arrow ≫ (filteredHomologyEIso U.obj.obj U.obj.filtration p q).hom = j s p q ≫ (U.obj.filtration.gradedPiece p).homologyπ (p + q)) (I : ∀ (n : ℕ) (P Q : ℤ), ((filteredHomologyExactCouple U.obj.obj U.obj.filtration).pageCouple n).D P Q ⟶ (filteredHomologyExactCouple U.obj.obj U.obj.filtration).D P Q) (hI0 : ∀ P Q : ℤ, I 0 P Q = 𝟙 _) (hIs : ∀ (n : ℕ) (P Q : ℤ), I (n + 1) P Q = ((filteredHomologyExactCouple U.obj.obj U.obj.filtration).pageCouple n).derivedDInclusion P Q ≫ I n P Q) (hImono : ∀ (n : ℕ) (P Q : ℤ), Mono (I n P Q)) (s : ℕ) (p q : ℤ) (e : (filteredHomologyExactCouple U.obj.obj U.obj.filtration).D (2 * (p + (s + 1)) + (q - (s + 1) + 1)) (-(p + (s + 1))) ⟶ ((filteredHomologyExactCouple U.obj.obj U.obj.filtration).pageCouple s).D (2 * (p + (s + 1)) + (q - (s + 1) + 1) - s) (-(p + (s + 1)) + s)) (he : e ≫ I s (2 * (p + (s + 1)) + (q - (s + 1) + 1) - s) (-(p + (s + 1)) + s) = (filteredHomologyExactCouple U.obj.obj U.obj.filtration).alphaIter s (2 * (p + (s + 1)) + (q - (s + 1) + 1)) (-(p + (s + 1)))) (A : C) (a : A ⟶ (U.obj.filtration.step p : CochainComplex C ℤ).X (p + q)) (b : A ⟶ (U.obj.filtration.step (p + (s + 1)) : CochainComplex C ℤ).cycles (p + (s + 1) + (q - (s + 1) + 1))) (x : A ⟶ (U.obj.filtration.complexCycles p (p + q) (s + 1) : C)) (ha : a ≫ (U.obj.filtration.step p).arrow.f (p + q) ≫ U.obj.obj.d (p + q) (p + (s + 1) + (q - (s + 1) + 1)) = b ≫ (U.obj.filtration.step (p + (s + 1)) : CochainComplex C ℤ).iCycles (p + (s + 1) + (q - (s + 1) + 1)) ≫ (U.obj.filtration.step (p + (s + 1))).arrow.f (p + (s + 1) + (q - (s + 1) + 1))) (hx : x ≫ (U.obj.filtration.complexCycles p (p + q) (s + 1)).arrow = a ≫ (U.obj.filtration.complexQuotientπ p (p + 1) (by omega)).f (p + q)) : x ≫ tQ s p q ≫ (filteredHomologyExactCouple U.obj.obj U.obj.filtration).cycleBoundaryTower.projection s (2 * p + q) (-p) ≫ ((filteredHomologyExactCouple U.obj.obj U.obj.filtration).pageCouple s).f (2 * p + q) (-p) ≫ eqToHom (by congr 1 <;> omega) = b ≫ (U.obj.filtration.step (p + (s + 1)) : CochainComplex C ℤ).homologyπ (p + (s + 1) + (q - (s + 1) + 1)) ≫ eqToHom (by dsimp only [filteredHomologyExactCouple, BigradedExactCouple.D, filteredHomologyD] exact congrArg₂ (fun i n : ℤ ↦ (U.obj.filtration.step i : CochainComplex C ℤ).homology n) (by omega) (by omega)) ≫ e",
+  "branch": "newtargets-dag",
+  "by": "ND",
+  "date": "2026-10-17"
+ },
  "reviewed": {
   "date": "2026-10-15",
   "by": "L",
@@ -155,5 +164,13 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-540a89f9b",
+  "group": "ND",
+  "result": "pass",
+  "note": "Lean byte-identical to the PASSed heads 3b95bce890e5/13b307dcfe69/56a1bdf6a389. Item node differs from base only in lean; its blueprint matches the maintainer-corrected base, so the base-node blueprint landing block is resolved. Own clause-by-clause reading: abelian C (independent u,v), finite U, canonical X and cycleBoundaryTower, j/tQ with hj/ht, I with hI0/hIs/hImono, e with he = alphaIter, a/b/x with ha/hx, D-valued identity before g. Indices check: P-s=2p+q+2, Q+s=-p-1, D(P,Q)=H^{p+q+1}(F^{p'}). Matches Stacks 012K/011R. s=0, negative indices, zero objects covered. Dependency §1(B) repair is a real structure literal (D/E/Alpha/F/G plus the six filteredHomologyCouple_exact clauses, eqToIso EIso), no sorry, signatures verbatim. nt_compile --json: both modules clean (1.9 s/5.6 s); item also clean against F8's live dependency text; item alone fails on the stale overlay; injected-error control fails. Maintainer: F8's 14:30 live completion of the dependency now makes ND's dependency repair redundant and its lean.note stale; if landing refuses the dependency record, land without it. The side FilteredHomologyExactCouple.lean (dead ofShifted version) should be aligned with live. Stage 3 must restore the TowerQuotients private helpers."
  }
 }

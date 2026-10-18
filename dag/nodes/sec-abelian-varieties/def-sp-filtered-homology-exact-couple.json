@@ -95,13 +95,14 @@
   "file": "lean/Sheaf/CategoryTheory/FilteredHomologyExactCouple.lean",
   "declaration": "CategoryTheory.filteredHomologyExactCouple",
   "statement": "abbrev filteredHomologyExactCouple {C : Type u} [Category.{v} C] [Abelian C] (K : CochainComplex C ℤ) (F : DecreasingFiltration K) : BigradedExactCouple C 0",
-  "branch": "sheaf-dag",
-  "by": "C3",
-  "date": "2026-10-13",
+  "branch": "newtargets-dag",
+  "by": "ND",
+  "date": "2026-10-17",
   "declarations": [
    "CategoryTheory.filteredHomologyExactCouple",
    "CategoryTheory.filteredHomologyEIso"
-  ]
+  ],
+  "note": "§1(B) interface repair. The published compiler binding of filteredHomologyExactCouple and filteredHomologyEIso has sorry data, so D cannot reduce to filtration-step homology; the archived source instead calls ofShifted, which is absent from the current upstream BigradedExactCouple API. Construct the existing BigradedExactCouple directly with the five explicit filteredHomologyD/E/Alpha/F/G terms and maps, the six proof fields from filteredHomologyCouple_exact, and the real equality isomorphism filteredHomologyEIso. No object or morphism is chosen from an existence assertion; the mathematical notion and all exported names and signatures are preserved."
  },
  "reviewed": {
   "date": "2026-10-13",
@@ -139,5 +140,13 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-540a89f9b",
+  "group": "ND",
+  "result": "pass",
+  "note": "Lean byte-identical to the PASSed heads 3b95bce890e5/13b307dcfe69/56a1bdf6a389. Item node differs from base only in lean; its blueprint matches the maintainer-corrected base, so the base-node blueprint landing block is resolved. Own clause-by-clause reading: abelian C (independent u,v), finite U, canonical X and cycleBoundaryTower, j/tQ with hj/ht, I with hI0/hIs/hImono, e with he = alphaIter, a/b/x with ha/hx, D-valued identity before g. Indices check: P-s=2p+q+2, Q+s=-p-1, D(P,Q)=H^{p+q+1}(F^{p'}). Matches Stacks 012K/011R. s=0, negative indices, zero objects covered. Dependency §1(B) repair is a real structure literal (D/E/Alpha/F/G plus the six filteredHomologyCouple_exact clauses, eqToIso EIso), no sorry, signatures verbatim. nt_compile --json: both modules clean (1.9 s/5.6 s); item also clean against F8's live dependency text; item alone fails on the stale overlay; injected-error control fails. Maintainer: F8's 14:30 live completion of the dependency now makes ND's dependency repair redundant and its lean.note stale; if landing refuses the dependency record, land without it. The side FilteredHomologyExactCouple.lean (dead ofShifted version) should be aligned with live. Stage 3 must restore the TowerQuotients private helpers."
  }
 }
