@@ -24,11 +24,148 @@
   "def-weil-closed-immersion",
   "def-pur-etale-supported-kernel",
   "def-weil-residue-field",
-  "def-weil-geometric-point"
+  "def-weil-geometric-point",
+  "def-pur-sheaf-tensor-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $U_X$ for restriction from $B_X$-modules to $A_X$-modules and $H_X(F)=\\mathcal Hom_A(B_X,F)$ with the indicated $B$-action. Restriction is exact: it leaves the underlying abelian sheaf, sectionwise kernels, and sheafified cokernels unchanged. The sheaf Hom definition gives mutually inverse maps\n$$\\operatorname{Hom}_A(U_XM,F)\\longleftrightarrow\\operatorname{Hom}_B(M,H_XF),\\quad t\\mapsto(m\\mapsto[b\\mapsto t(bm)]),\\quad s\\mapsto(m\\mapsto s(m)(1)).$$\nThese formulas commute with restriction on the localized sites, are linear, and are inverse since $s(bm)(1)=(bs(m))(1)=s(m)(b)$. Thus $U_X\\dashv H_X$, with evaluation at $1$ as counit. By the exact-left-adjoint lemma $H_X$ sends injectives to injectives.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-pur-sheaf-hom",
+    "lem-sp-right-adjoint-preserves-injectives"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVII, Proposition 6.2.1.1, printed p. 294; explicit agent expansion of supported-cohomology commutation"
+   }
+  },
+  {
+   "text": "There are enough injective module sheaves. Choose a bounded-below injective representative $I$ of $K$; when $K\\in D^{\\geq a}$ choose $I^q=0$ for $q<a$. The previous step makes $H_X(I)$ a bounded-below complex of injective $B$-sheaves, with the same lower bound. The termwise homotopy adjunction and the K-injective computation of derived morphisms give\n$$\\operatorname{Hom}_{D(A_X)}(U_XM,K)=\\operatorname{Hom}_{K(A_X)}(U_XM,I)=\\operatorname{Hom}_{K(B_X)}(M,H_XI)=\\operatorname{Hom}_{D(B_X)}(M,QH_XI).$$\nHere $M$ denotes any bounded-below complex representing the input. This proves the derived adjunction. A quasi-isomorphism between injective representatives is a homotopy equivalence; the additive functor $H_X$ preserves its homotopies. Consequently the construction is independent of representatives, with the canonical comparisons and evaluation counit. It is $C_X$, and the termwise lower bound proves the asserted $D^{\\geq a}$ bound.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-enough-injectives",
+    "lem-weil-pbc-dplus-injective-representative",
+    "lem-weil-pbc-termwise-adjunction-homotopy",
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVII, Proposition 6.2.1.1, printed p. 294; explicit agent expansion of supported-cohomology commutation"
+   }
+  },
+  {
+   "text": "Apply the exact constant-module-sheaf functor to $P\\to B[0]$, so $P_X\\to B_X[0]$ is a quasi-isomorphism. For a bounded-below representative $N$ of $K$, the finite-free Hom model computes the underlying $A$-object of $C_X(K)$ by\n$$T_X(N)=\\mathcal Hom_A^\\bullet(P_X,N),\\qquad T_X(N)^n=\\bigoplus_{a-n\\leq p\\leq0}\\mathcal Hom_A(P_X^p,N^{p+n})$$\nif $N^q=0$ for $q<a$. This identification is the canonical one induced by the augmentation and injective comparison, by invariance of derived internal Hom. The differential is $d_Nf-(-1)^nf d_P$. In particular every diagonal is finite, even though $P$ can extend indefinitely to the left. We use $T_X$ only after forgetting to $A$; we do not put a fictitious strict $B$-action on $P$.",
+   "uses": [
+    "lem-weil-pbc-finite-type-constant-exact",
+    "lem-weil-pbc-ringed-site-bounded-free-rhom-model",
+    "lem-pur-rhom-well-defined"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08JI, lemma-Rhom-complex-of-direct-summands-finite-free"
+   }
+  },
+  {
+   "text": "For $g:Y\\to X$, exact constant-coefficient inverse image commutes with restriction of scalars. Define $\\beta_g:g_B^*C_XK\\to C_Yg_A^*K$ as the $U_Y\\dashv C_Y$ adjunct of $g_A^*\\varepsilon_K:U_Yg_B^*C_XK=g_A^*U_XC_XK\\to g_A^*K$. This defines an actual $B$-linear derived morphism. Its scalar restriction is the usual sheaf-Hom pullback comparison: before deriving, both are adjoint to $(h,b)\\mapsto h(b)$, and deriving uses the same injective comparison and augmentation as Step 3. Since $P^p=A^{r_p}$ with $r_p$ finite, evaluation on its basis identifies each term $\\mathcal Hom_A(P_X^p,N^q)$ with $N^{q\\,\\oplus r_p}$. In these coordinates the pullback comparison is the canonical finite-sum isomorphism. It commutes with $d_N$ by functoriality and with $d_P$ because that differential is a matrix of constant $A$-scalars. The finite-diagonal formula therefore makes $U_Y\\beta_g$ an isomorphism of derived $A$-objects. Restriction reflects isomorphisms: a cone is acyclic exactly when its underlying abelian sheaf cohomology vanishes. Thus $\\beta_g$ is an isomorphism over $B$.",
+   "uses": [
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-weil-pbc-ringed-site-bounded-free-rhom-model",
+    "lem-weil-pbc-unbounded-derived-iso-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVII, Proposition 6.2.1.1, printed p. 294; explicit agent expansion of supported-cohomology commutation"
+   }
+  },
+  {
+   "text": "For a closed immersion $i$, the supported-kernel adjunction on abelian sheaves extends to sheaves of modules over either constant ring: all kernel and inverse-image maps carry scalar actions; its bijection restricts to linear maps since applying it to the equation $t\\circ r=r\\circ t$ gives exactly that equation on the other side. Exactness of $i_*$ on module sheaves follows from exactness on the underlying abelian sheaves. Hence $i_*\\dashv i_0^!$ and $i_0^!$ preserves injectives. Apply the bounded-below injective and homotopy-category calculation of Step 2 to this adjunction. It identifies $i_*\\dashv Ri_0^!=i^!$ on $D^+$, with the derived supported-kernel counit. This justifies the closed adjunction used below without assuming a constructible exceptional-functor package.",
+   "uses": [
+    "lem-pur-etale-supported-kernel-adjunction",
+    "def-weil-sheaf-of-modules-category",
+    "lem-sp-right-adjoint-preserves-injectives",
+    "lem-weil-pbc-dplus-injective-representative",
+    "lem-weil-pbc-termwise-adjunction-homotopy",
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVII, Proposition 6.2.1.1, printed p. 294; explicit agent expansion of supported-cohomology commutation"
+   }
+  },
+  {
+   "text": "Restriction of scalars commutes with closed direct image: on an etale $V\\to X$, both $U_Xi_{*,B}M$ and $i_{*,A}U_ZM$ have sections $M(V\\times_XZ)$ and the same $A$-action. The composite-adjunction theorem identifies the right adjoints of this common functor:\n$$i_B^!C_X\\ \\xrightarrow{\\sim}\\ C_Zi_A^!.$$\nConcretely, for $M\\in D^+(Z,B)$ their representing Hom functors are identified by\n$$\\operatorname{Hom}_B(M,i_B^!C_XK)=\\operatorname{Hom}_A(U_Xi_{*,B}M,K)=\\operatorname{Hom}_A(i_{*,A}U_ZM,K)=\\operatorname{Hom}_B(M,C_Zi_A^!K).$$\nThe comparison is therefore $B$-linear and preserves the pasted evaluation and closed counits, as the composite-adjunction theorem states. In particular its normalization is the one in the item, not an arbitrary isomorphism between the two objects.",
+   "uses": [
+    "lem-cat-right-adjoint-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVII, Proposition 6.2.1.1, printed p. 294; explicit agent expansion of supported-cohomology commutation"
+   }
+  },
+  {
+   "text": "For composable inverse images $h^*,g^*$ the mate of $h^*\\beta_g$ followed by $\\beta_h$ is the pullback of the single evaluation counit, by the mate-pasting identity; this is also the mate defining $\\beta_{gh}$. Identity pullback gives the identity comparison. Closed comparisons compose by the same pasting identity applied to the commutative squares $Ui_*=i_*U$; their pasted counits are exactly those of the composite closed adjunction. Thus the two comparisons have the stated composition compatibilities. This verifies equality of comparison morphisms in the coefficient category itself.",
+   "uses": [
+    "lem-weil-pbc-mate-pasting",
+    "lem-cat-right-adjoint-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVII, Proposition 6.2.1.1, printed p. 294; explicit agent expansion of supported-cohomology commutation"
+   }
+  },
+  {
+   "text": "Let $l_x:\\operatorname{Spec}\\mathcal O_{X,x}\\to X$ and $s_x:\\operatorname{Spec}\\kappa(x)\\hookrightarrow\\operatorname{Spec}\\mathcal O_{X,x}$ be localization and the closed point. By the meaning of $R\\Gamma_x$ in the statement, it is $s_x^!l_x^*$. Compose the established comparisons in that order:\n$$s_{x,B}^!l_x^*C_XK\\xrightarrow{s_x^!\\beta_{l_x}}s_{x,B}^!C_{X_x}l_x^*K\\xrightarrow{\\sim}C_{\\kappa(x)}s_{x,A}^!l_x^*K.$$\nThis is $c_x$. For a geometric point $e:\\operatorname{Spec}\\Omega\\to\\operatorname{Spec}\\kappa(x)$ apply $e^*$ and then $\\beta_e$. This proves the geometric-fibre clause as well. No base-change theorem for extraordinary inverse image is used here: these are the successive operations that define this costalk.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVII, Proposition 6.2.1.1, printed p. 294; explicit agent expansion of supported-cohomology commutation"
+   }
+  },
+  {
+   "text": "Put $L^\\vee=\\mathcal Hom_A(L,A_X)$. Locally $L=A_X$, so evaluation gives $L\\otimes_AL^\\vee=A_X$; tensoring with $L$ and with $L^\\vee$ are inverse exact functors, as can be checked in these local coordinates. Being an exact equivalence, tensoring with $L$ preserves injectives (apply the exact-left-adjoint lemma to its inverse). For injective $I^q$ the map\n$$\\mathcal Hom_A(B_X,I^q)\\otimes_BL_B\\longrightarrow\\mathcal Hom_A(B_X,I^q\\otimes_AL),\\quad h\\otimes(b\\otimes l)\\longmapsto[b'\\mapsto h(bb')\\otimes l]$$\nis balanced and $B$-linear. It is an isomorphism locally where $L=A_X$, hence globally, and commutes with $d_I$. Both sides consequently compute the claimed derived objects using $I$ and $I\\otimes L$. Inverting this map gives the direction displayed in the statement. All the maps used above arise from additive functors, degree-zero evaluation, the signed Hom differential, and pasted units and counits; shifting a representative gives those same maps with the usual cochain shift signs. They therefore respect cohomological shifts. Only the lower bound on $K$ and finiteness of each $P^p$ were used; no bound on the length of $P$, constructibility, or Tor amplitude entered.",
+   "uses": [
+    "def-pur-sheaf-hom",
+    "def-pur-sheaf-tensor-product",
+    "lem-sp-right-adjoint-preserves-injectives"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVII, Proposition 6.2.1.1, printed p. 294; explicit agent expansion of supported-cohomology commutation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-hom",
+  "lem-sp-right-adjoint-preserves-injectives",
+  "lem-weil-pbc-module-sheaves-enough-injectives",
+  "lem-weil-pbc-dplus-injective-representative",
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-finite-type-constant-exact",
+  "lem-weil-pbc-ringed-site-bounded-free-rhom-model",
+  "lem-pur-rhom-well-defined",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-weil-pbc-unbounded-derived-iso-cohomology",
+  "lem-pur-etale-supported-kernel-adjunction",
+  "lem-cat-right-adjoint-composition",
+  "lem-weil-pbc-mate-pasting",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose XVII, Proposition 6.2.1.1, printed p. 294; explicit agent expansion of supported-cohomology commutation"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -64,10 +201,45 @@
    "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"PresheafOfModules.instHasColimitModuleCatCarrierObjOppositeRingCatCompEvaluationRestrictScalarsHomMap\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Colimits\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {R : CategoryTheory.Functor Cᵒᵖ RingCat} {J : Type u₂} [CategoryTheory.Category.{v₂, u₂} J] (F : CategoryTheory.Functor J (PresheafOfModules R)) [∀ {X Y : Cᵒᵖ} (f : X ⟶ Y), CategoryTheory.Limits.PreservesColimit (F.comp (PresheafOfModules.evaluatio\", \"doc\": \"\"}\n  {\"name\": \"PresheafOfModules.instHasLimitModuleCatCarrierObjOppositeRingCatCompEvaluationRestrictScalarsHomMap\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Limits\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {R : CategoryTheory.Functor Cᵒᵖ RingCat} {J : Type u₂} [CategoryTheory.Category.{v₂, u₂} J] (F : CategoryTheory.Functor J (PresheafOfModules R)) [∀ (X : Cᵒᵖ), Small.{v, max u₂ v} ↑((F.comp (PresheafOfModules.evaluation R X)).comp (CategoryTheory.fo\", \"doc\": \"\"}\n  {\"name\": \"PresheafOfModules.instFullRestrictScalarsIdFunctorOppositeRingCat\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.ChangeOfRings\", \"type\": \" {C : Type u'} [CategoryTheory.Category.{v', u'} C] {R : CategoryTheory.Functor Cᵒᵖ RingCat} : (PresheafOfModules.restrictScalars (CategoryTheory.CategoryStruct.id R)).Full\", \"doc\": \"\"}\n  {\"name\": \"PresheafOfModules.restrictScalarsObj\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.ChangeOfRings\", \"type\": \" {C : Type u'} [CategoryTheory.Category.{v', u'} C] {R R' : CategoryTheory.Functor Cᵒᵖ RingCat} (M' : PresheafOfModules R') (α : R ⟶ R') : PresheafOfModules R\", \"doc\": \"The restriction of scalars of presheaves of modules, on objects.\"}\n  {\"name\": \"PresheafOfModules.restrictScalars\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.ChangeOfRings\", \"type\": \" {C : Type u'} [CategoryTheory.Category.{v', u'} C] {R R' : CategoryTheory.Functor Cᵒᵖ RingCat} (α : R ⟶ R') : CategoryTheory.Functor (PresheafOfModules R') (PresheafOfModules R)\", \"doc\": \"The restriction of scalars functor `PresheafOfModules R' ⥤ PresheafOfModules R`\\ninduced by a morphism of presheaves of rings `R ⟶ R'`.\"}\n  {\"name\": \"PresheafOfModules.instFaithfulRestrictScalars\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.ChangeOfRings\", \"type\": \" {C : Type u'} [CategoryTheory.Category.{v', u'} C] {R R' : CategoryTheory.Functor Cᵒᵖ RingCat} (α : R ⟶ R') : (PresheafOfModules.restrictScalars α).Faithful\", \"doc\": \"\"}\n  {\"name\": \"PresheafOfModules.instAdditiveRestrictScalars\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.ChangeOfRings\", \"type\": \" {C : Type u'} [CategoryTheory.Category.{v', u'} C] {R R' : CategoryTheory.Functor Cᵒᵖ RingCat} (α : R ⟶ R') : (PresheafOfModules.restrictScalars α).Additive\", \"doc\": \"\"}\n  {\"name\": \"PresheafOfModules.restrictScalars_obj\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.ChangeOfRings\", \"type\": \" {C : Type u'} [CategoryTheory.Category.{v', u'} C] {R R' : CategoryTheory.Functor Cᵒᵖ RingCat} (α : R ⟶ R') (M' : PresheafOfModules R') : (PresheafOfModules.restrictScalars α).obj M' = M'.restrictScalarsObj α\", \"doc\": \"\"}\n  {\"name\": \"PresheafOfModules.restrictScalarsCompToPresheaf\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.ChangeOfRings\", \"type\": \" {C : Type u'} [CategoryTheory.Category.{v', u'} C] {R R' : CategoryTheory.Functor Cᵒᵖ RingCat} (α : R ⟶ R') : (PresheafOfModules.restrictScalars α).comp (PresheafOfModules.toPresheaf R) ≅ PresheafOfModules.toPresheaf R'\", \"doc\": \"The isomorphism `restrictScalars α ⋙ toPresheaf R ≅ toPresheaf R'` for any\\nmorphism of presheaves of rings `α : R ⟶ R'`.\"}\n  {\"name\": \"PresheafOfModules.restrictScalarsObj_obj\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.ChangeOfRings\", \"type\": \" {C : Type u'} [CategoryTheory.Category.{v', u'} C] {R R' : CategoryTheory.Functor Cᵒᵖ RingCat} (M' : PresheafOfModules R') (α : R ⟶ R') (X : Cᵒᵖ) : (M'.restrictScalarsObj α).obj X = (ModuleCat.restrictScalars (RingCat.Hom.hom (α.app X))).obj (M'.obj X)\", \"doc\": \"\"}\n  {\"name\": \"PresheafOfModules.restrictScalars_map_app\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.ChangeOfRings\", \"type\": \" {C : Type u'} [CategoryTheory.Category.{v', u'} C] {R R' : CategoryTheory.Functor Cᵒᵖ RingCat} (α : R ⟶ R') {X✝ Y✝ : PresheafOfModules R'} (φ' : X✝ ⟶ Y✝) (X : Cᵒᵖ) : ((PresheafOfModules.restrictScalars α).map φ').app X = (ModuleCat.restrictScalars (RingCat.Hom.hom (α.app X))).map (φ'.app X)\", \"doc\": \"\"}\n  {\"name\": \"PresheafOfModules.restrictScalarsObj_map\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.ChangeOfRings\", \"type\": \" {C : Type u'} [CategoryTheory.Category.{v', u'} C] {R R' : CategoryTheory.Functor Cᵒᵖ RingCat} (M' : PresheafOfModules R') (α : R ⟶ R') {X Y : Cᵒᵖ} (f : X ⟶ Y) : (M'.restrictScalarsObj α).map f = ModuleCat.ofHom { toFun := ⇑(CategoryTheory.ConcreteCategory.hom (M'.map f)), map_add' := ⋯, map_smul' \", \"doc\": \"\"}\n",
    "date": "2026-10-18",
    "verdict": "no match: hits do not state derived coefficient coinduction locality on ordinary etale sheaves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived coinduction of constant coefficient sheaves commutes with inverse image when the coefficient algebra has a bounded above finite free resolution",
+   "results": "{\"top\": [\"SheafOfModules.map_ιFree_mapFree_hom\", \"SheafOfModules.freeFunctorCompPullbackIso\", \"SheafOfModules.ιFree_mapFree_inv_assoc\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\", \"SheafOfModules.map_ιFree_mapFree_hom_assoc\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc\", \"SheafOfModules.mapFree\", \"SheafOfModules.pullbackObjFreeIso_hom_naturality\"], \"n_hits\": 8, \"note\": \"\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: underived scalar restriction, free pullback, or condensed Hom hits do not state this bounded-below etale derived coinduction locality interface"
+  },
+  {
+   "tool": "grep",
+   "query": "coinduc|derived.*[Hh]om|restrictScalars",
+   "results": "{\"top\": [\"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean\"], \"n_hits\": 10, \"note\": \"\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: underived scalar restriction, free pullback, or condensed Hom hits do not state this bounded-below etale derived coinduction locality interface"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Right derived coinduction of sheaves of modules is right adjoint to restriction of scalars and commutes with pullback for finite free resolutions",
+   "results": "{\"top\": [\"ModuleCat.instIsRightAdjointRestrictScalars\", \"Rep.coindResAdjunction\", \"SheafOfModules.restrictScalars\", \"ModuleCat.restrictCoextendScalarsAdj\", \"SheafOfModules.PullbackConstruction.adjunction\", \"ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction\", \"Rep.resCoindAdjunction\", \"SheafOfModules.pullbackPushforwardAdjunction\"], \"n_hits\": 8, \"note\": \"\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: underived scalar restriction, free pullback, or condensed Hom hits do not state this bounded-below etale derived coinduction locality interface"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"restrictScalars\"",
+   "results": "{\"top\": [\"PresheafOfModules.instHasColimitModuleCatCarrierObjOppositeRingCatCompEvaluationRestrictScalarsHomMap\", \"PresheafOfModules.instHasLimitModuleCatCarrierObjOppositeRingCatCompEvaluationRestrictScalarsHomMap\", \"PresheafOfModules.instFullRestrictScalarsIdFunctorOppositeRingCat\", \"PresheafOfModules.restrictScalarsObj\", \"PresheafOfModules.restrictScalars\", \"PresheafOfModules.instFaithfulRestrictScalars\", \"PresheafOfModules.instAdditiveRestrictScalars\", \"PresheafOfModules.restrictScalars_obj\"], \"n_hits\": 12, \"note\": \"\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: underived scalar restriction, free pullback, or condensed Hom hits do not state this bounded-below etale derived coinduction locality interface"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Bounded below derived internal Hom from a pseudo coherent constant coefficient algebra commutes with inverse image on etale sheaves",
+   "results": "{\"top\": [\"LightCondensed.ihomPoints_symm_comp\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\", \"SheafOfModules.pullbackObjUnitToUnit\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_l\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj\", \"SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor\"], \"n_hits\": 8, \"note\": \"\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: underived scalar restriction, free pullback, or condensed Hom hits do not state this bounded-below etale derived coinduction locality interface"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-potential-hom-coefficient-restriction",
@@ -90,5 +262,89 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-per-finite-coefficient-coinduction-locality",
+  "worker": "stage1",
+  "summary": "Expanded Gabber XVII 6.2.1.1 locality into nine steps using only existing DAG interfaces: explicit sheaf coinduction adjunction, bounded-below injectives, finite-diagonal Hom calculation, canonical B-linear pullback comparison, closed supported adjunction and its counits, pasting, costalks and line twists. Statement unchanged; no new nodes.",
+  "blueprint": "lem-per-artin-gabber-affine-curve proof Step 3, dimension-normalized duality, via the existing coefficient-restriction and potential-dualizing-uniqueness ancestry; no chapter or unit route changed.",
+  "tool_uses": [
+   {
+    "node": "lem-sp-right-adjoint-preserves-injectives",
+    "why": "Generic sheaf or homological-algebra tool for the locality argument; this unit has no general interface with this statement."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-enough-injectives",
+    "why": "Generic sheaf or homological-algebra tool for the locality argument; this unit has no general interface with this statement."
+   },
+   {
+    "node": "lem-weil-pbc-dplus-injective-representative",
+    "why": "Generic sheaf or homological-algebra tool for the locality argument; this unit has no general interface with this statement."
+   },
+   {
+    "node": "lem-weil-pbc-termwise-adjunction-homotopy",
+    "why": "Generic sheaf or homological-algebra tool for the locality argument; this unit has no general interface with this statement."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-hom-derived",
+    "why": "Generic sheaf or homological-algebra tool for the locality argument; this unit has no general interface with this statement."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-constant-exact",
+    "why": "Generic sheaf or homological-algebra tool for the locality argument; this unit has no general interface with this statement."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-site-bounded-free-rhom-model",
+    "why": "Generic sheaf or homological-algebra tool for the locality argument; this unit has no general interface with this statement."
+   },
+   {
+    "node": "lem-pur-rhom-well-defined",
+    "why": "Generic sheaf or homological-algebra tool for the locality argument; this unit has no general interface with this statement."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Generic sheaf or homological-algebra tool for the locality argument; this unit has no general interface with this statement."
+   },
+   {
+    "node": "lem-weil-pbc-unbounded-derived-iso-cohomology",
+    "why": "Generic sheaf or homological-algebra tool for the locality argument; this unit has no general interface with this statement."
+   },
+   {
+    "node": "lem-pur-etale-supported-kernel-adjunction",
+    "why": "Generic sheaf or homological-algebra tool for the locality argument; this unit has no general interface with this statement."
+   },
+   {
+    "node": "lem-cat-right-adjoint-composition",
+    "why": "Generic sheaf or homological-algebra tool for the locality argument; this unit has no general interface with this statement."
+   },
+   {
+    "node": "lem-weil-pbc-mate-pasting",
+    "why": "Generic sheaf or homological-algebra tool for the locality argument; this unit has no general interface with this statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sp-right-adjoint-preserves-injectives",
+  "lem-weil-pbc-module-sheaves-enough-injectives",
+  "lem-weil-pbc-dplus-injective-representative",
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-finite-type-constant-exact",
+  "lem-weil-pbc-ringed-site-bounded-free-rhom-model",
+  "lem-pur-rhom-well-defined",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-weil-pbc-unbounded-derived-iso-cohomology",
+  "lem-pur-etale-supported-kernel-adjunction",
+  "lem-cat-right-adjoint-composition",
+  "lem-weil-pbc-mate-pasting"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-N6-a1e7ecaee",
+  "group": "N6",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N6-a1e7ecaee (reviewer sub-agent of L); spot-checked: Read in full: the item, all 9 steps, and the statement of every cited node. Shape: one commit containing the item and the report. No new nodes. The statement is unchanged; stmt_deps gains only def-pur-sheaf-tensor-product, which the tensor clauses need. Step uses equal proof_deps, there is no cycle, and every step is under 2000 characters. Sources checked: Gabber XVII Prop. 6.2.1.1 on printed p.294 says K'=RHom(Λ',K) follows from supported cohomology commuting with RHom_Λ(Λ',-); the item expands that remark as an agent formulation. Stacks 08JI states exactly the bounded-above finite-free Hom model behind lem-weil-pbc-ringed-site-bounded-free-rhom-model. Stacks 09XQ supplies the closed-support injective/adjunction. No SGA. Small cases tested: A=B; B=0; A=Z/ℓ², B=Z/ℓ with the infinite periodic P, where each diagonal is finite and the only cohomology is H^0=ℓA; Z empty or Z=X; L trivial. No clause is false. Step checks: (1) U⊣H, with the explicit inverse bijection checked by hand, plus the exact-left-adjoint lemma; (2) enough injectives, dplus (1),(2), termwise homotopy adjunction and K-injective Hom, with the A/B categories correct; (3) exactness of the constant functor, the Hom model with b=0, and rhom-well-defined for the augmentation; (4) β_g as a genuine adjunct in D(B), whose underlying map is the termwise finite-sum isomorphism (d_P has constant scalar entries), with conservativity from the cohomology criterion; (5) the abelian supported-kernel adjunction is extended to modules explicitly; (6) U i_* = i_* U, and the composite-adjunction lemma gives the normalized comparison; (7) mate-pasting clauses 1, 2 and 4; (8) costalk s^! l^*, an elementary composition; (9) I checked the twist map is balanced and B-linear, it is locally the identity, and ⊗L preserves injectives because ⊗L^∨ is exact. No duplicates: the trf coinduction and flat-base-change nodes are module-level only, and lem-sc-sheaf-coinduction-action is underived. The 13 tool_uses are generic homological interfaces from other units, and I accept them. No fixes."
  }
 }
