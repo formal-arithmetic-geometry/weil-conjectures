@@ -388,45 +388,4 @@ lemma Etale.surjective_stalkRestrict_of_isIntegralHom {Ω : Type u} [Field Ω] [
   exact ConcreteCategory.congr_hom
     (Etale.toPresheafFiber_stalkRestrict (ModuleCat.{u + 1} Λ) f y t G c) σ
 
-/-- The direct image along an integral morphism detects the zero sheaf: if `f_* G = 0` then
-`G = 0`. This is the conservativity step of the proof of blueprint `sbc-lem-bc-integral-base`.
-For a geometric point `t` of `X` over the geometric point `y` of `Y`, the stalk `G_t` is a
-quotient of the stalk `(f_* G)_y`
-(`AlgebraicGeometry.Etale.surjective_stalkRestrict_of_isIntegralHom`). -/
-theorem Etale.isZero_of_isZero_lowerStar_obj
-    {G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)}
-    (hG : IsZero ((f)_*[ModuleCat.{u + 1} Λ].obj G)) : IsZero G := by
-  rw [IsZero.iff_id_eq_zero]
-  refine Scheme.sheafHom_ext_of_sheafFiber_map_algClosurePoint (A := ModuleCat.{u + 1} Λ)
-    fun s ↦ ?_
-  refine IsZero.eq_of_src ?_ _ _
-  let x := X.algClosurePoint s
-  have : HasLimitsOfSize.{u, u} (ModuleCat.{u + 1} Λ) :=
-    ModuleCat.hasLimitsOfSize.{u, u, u + 1, u + 1}
-  have hy := Functor.map_isZero (pointSmallEtale (x ≫ f)).sheafFiber hG
-  have hsurj := Etale.surjective_stalkRestrict_of_isIntegralHom Λ f (x ≫ f) ⟨x, rfl⟩ G
-  refine @ModuleCat.isZero_of_subsingleton.{u + 1} _ _ _ ⟨fun a b ↦ ?_⟩
-  obtain ⟨a, rfl⟩ := hsurj a
-  obtain ⟨b, rfl⟩ := hsurj b
-  rw [hy.eq_of_src (Etale.stalkRestrict (ModuleCat.{u + 1} Λ) f (x ≫ f) ⟨x, rfl⟩ G) 0]
-  rfl
-
-/-- The direct image along an integral morphism is conservative: being exact by
-`AlgebraicGeometry.Etale.preservesFiniteColimits_lowerStar_of_isIntegralHom`, it sends the
-kernel and the cokernel of a morphism to those of its image, and it detects their vanishing by
-`AlgebraicGeometry.Etale.isZero_of_isZero_lowerStar_obj`. -/
-theorem Etale.reflectsIsomorphisms_lowerStar_of_isIntegralHom :
-    (f)_*[ModuleCat.{u + 1} Λ].ReflectsIsomorphisms where
-  reflects {G G'} φ _ := by
-    have := Etale.preservesFiniteColimits_lowerStar_of_isIntegralHom Λ f
-    have : Mono φ := Preadditive.mono_of_isZero_kernel φ <|
-      Etale.isZero_of_isZero_lowerStar_obj Λ f <|
-      (isZero_kernel_of_mono ((f)_*[ModuleCat.{u + 1} Λ].map φ)).of_iso
-        (PreservesKernel.iso _ φ)
-    have : Epi φ := Preadditive.epi_of_isZero_cokernel φ <|
-      Etale.isZero_of_isZero_lowerStar_obj Λ f <|
-      (isZero_cokernel_of_epi ((f)_*[ModuleCat.{u + 1} Λ].map φ)).of_iso
-        (PreservesCokernel.iso _ φ)
-    exact isIso_of_mono_of_epi φ
-
 end AlgebraicGeometry

@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import Mathlib.CategoryTheory.Functor.OfSequence
+public import WeilConjectures.CategoryTheory.Triangulated.HomotopyLimit.Basic
 public import WeilConjectures.CategoryTheory.Triangulated.HomotopyLimit.Tower
 
 /-!
@@ -71,15 +72,6 @@ lemma isHomotopyLimit_coneOfComp {F : ℕᵒᵖ ⥤ C} {P : Fan fun n : ℕ ↦ 
     Fan.IsLimit.hom_ext hP _ _ fun n ↦ by simp
   rw [this]
   exact hT
-
-/-- Every tower in a pretriangulated category with countable products has a homotopy limit
-cone. -/
-lemma exists_isHomotopyLimit (F : ℕᵒᵖ ⥤ C) [HasProduct fun n : ℕ ↦ F.obj (op n)] :
-    ∃ c : Cone F, IsHomotopyLimit c := by
-  let P : Fan fun n : ℕ ↦ F.obj (op n) := Fan.mk _ (Pi.π _)
-  let hP : IsLimit P := productIsProduct _
-  obtain ⟨X, c, δ, hT⟩ := distinguished_cocone_triangle₁ (𝟙 P.pt - towerShift hP)
-  exact ⟨_, isHomotopyLimit_coneOfComp hP hT⟩
 
 /-- A morphism of towers `a : F ⟶ G` which is an isomorphism at every level induces an
 isomorphism on homotopy limits: if `X ⟶ ∏ Fₙ ⟶ ∏ Fₙ ⟶ X⟦1⟧` and `Y ⟶ ∏ Gₙ ⟶ ∏ Gₙ ⟶ Y⟦1⟧` are
