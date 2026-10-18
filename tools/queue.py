@@ -7,25 +7,38 @@ Usage:
   tools/queue.py outside      modules outside the targets' import closure, one per line
 
 Stages 1 and 2 are read from the DAG by dag_queue.py: the nodes still to split, and the nodes that can be stated
-because every node their statement needs is stated. Stage 3 is read from the Lean code: the targets are the
-library modules imported by lean/TargetsCheck.lean, the active set is their import closure, and the items are
-the active modules that still contain `sorry` or `admit` and are on the sorry route of an open batch
-(local/sorry-route.json: a sorried declaration some target actually uses; 2026-10-17), in this order:
+because every node their statement needs is stated. Stage 3 is read from the Lean code and the DAG: the targets are
+the library modules imported by lean/TargetsCheck.lean, and a library module is an item when all of this holds
+(the human, 2026-10-18: a node may be proved as soon as every statement it depends on, stmt_deps and proof_deps,
+has a Lean statement, whatever its depth below the target):
+  1. it still contains `sorry` or `admit`;
+  2. it is on the sorry route of an open batch (local/sorry-route.json, tools/sorry_route.py: a sorried declaration
+     some target actually uses; 2026-10-17), or below a route sorry of an open batch (tools/below_route.py: in the
+     dependency closure of a node whose declaration is a sorry on that batch's own route, or of a target whose own
+     declaration is still a sorry, within the batch's own reach, not through an assumed node, another batch's target
+     or a finished node). A sorried module in the targets' import closure that is neither is bypassed by the Lean
+     route and is not an item (STATE["off_route"]); a module changed after the route was computed stays an item
+     until the next refresh;
+  3. every node in the dependencies (stmt_deps, proof_deps and the `uses` of the proof steps) of the node(s) it
+     realizes has its Lean statement: a declaration of the library, a Mathlib leaf, a finished node or a node assumed
+     by its batches (coord/assumed.tsv); dag_queue.Dag.waiting/stated (the human, 2026-10-17: the prover must see what
+     is available before proving). Otherwise it is listed as "waiting for statements of dependencies" until stage 2
+     has stated those nodes. Exempt: a repair of a module without `sorry` (already proved, broken by an upstream change)
+     and an item already claimed (coord/claims; nothing is released here).
+No cap. The order:
   1. modules listed in coord/repairs.txt, in file order (proof or definition repairs),
   2. modules containing `STATEMENT-DISPUTED`,
-  3. the rest, nearest to a target first (distance = fewest import steps from a target module).
-A module is an item only when every node in the proof dependencies (proof_deps and the `uses` of the proof steps) of
-the node(s) it realizes has its Lean statement: a declaration of the library, a Mathlib leaf, a finished node or a
-node assumed by its batches (coord/assumed.tsv); dag_queue.Dag.waiting/stated (the human, 2026-10-17: the prover must
-see what is available before proving). Otherwise it is listed as "waiting for statements of proof dependencies"
-until stage 2 has stated those nodes. Exempt: a repair of a module without `sorry` (already proved, broken by an
-upstream change) and an item already claimed (coord/claims; nothing is released here). A module in the closure may still contain declarations nothing uses: the
-closure is an upper bound of what the targets need.
+  3. the rest: the modules on the route first, then by the distance to the nearest route sorry (dependency steps in
+     the DAG, ascending), ties nearest to a target first (fewest import steps from a target module; a module the
+     targets do not import yet last), then by name.
+Without a complete route the import closure of the targets is used (STATE), as before 2026-10-17. `write` also puts
+the modules below a route sorry, per batch, into local/stage3-reach.json for tools/tag_batches.py.
 
-coord/queue.tsv lists stage 1 first, then 2, then 3. Within stages 1 and 3 the items nearest to a target come
-first; within stage 2 the definitions first, then the items the most stage-2 nodes wait for through stmt_deps (the
-last column, `blockers`; human, 2026-10-11 23:30 +08), ties nearest to Mathlib, counted in dependency steps down
-to a Mathlib leaf, so the statements climb from Mathlib upward. `claim.py next` without `--stage` takes from the head.
+coord/queue.tsv lists stage 1 first, then 2, then 3. Within stage 1 the items nearest to a target come first; within
+stage 2 the definitions first, then the items the most stage-2 nodes wait for through stmt_deps (the last column,
+`blockers`; human, 2026-10-11 23:30 +08), ties nearest to Mathlib, counted in dependency steps down to a Mathlib leaf,
+so the statements climb from Mathlib upward; stage 3 as above, its last column `route` for a module on the route and
+the distance to the nearest route sorry otherwise. `claim.py next` without `--stage` takes from the head.
 """
 from __future__ import annotations
 import collections, pathlib, sys
@@ -60,7 +73,12 @@ def claimed(m: str) -> bool:
     return (WORK / "claims" / (m.replace("/", "__") + ".lock")).is_file()
 
 
-def stage3(imports, dist, waiting: set[str]):
+FAR = 10**6   # the import distance of a module the targets do not import yet (below a route sorry, parent unproved)
+
+
+def stage3(imports, dist, waiting: set[str], below: dict[str, dict[str, int]] | None = None):
+    """items (kind rank, import distance, module, sorries, kind, route distance) and held (import distance, module, sorries).
+    `below`: batch -> {module: distance to the nearest route sorry} (tools/below_route.py; {} or None: route modules only)."""
     repairs = {}
     rp = WORK / "repairs.txt"
     if rp.exists():
@@ -70,16 +88,23 @@ def stage3(imports, dist, waiting: set[str]):
     # 2026-10-17: only modules on the sorry route of the open batches (local/sorry-route.json, tools/sorry_route.py) are
     # items: a module the targets import but whose sorries no target uses is not work. A module changed after the route
     # was computed stays an item until the next refresh; without a complete route the import closure is used (STATE).
+    # The human, 2026-10-18: also the modules below a route sorry (`below`), at their distance to the nearest one.
     import sorry_route
     route = sorry_route.load()
-    STATE["route"] = "import closure (no complete sorry route)" if route is None else "sorry route"
+    STATE["route"] = "import closure (no complete sorry route)" if route is None else "sorry route and below it"
+    bdist: dict[str, int] = {}
+    for mods in (below or {}).values():
+        for m, k in mods.items():
+            if m not in bdist or k < bdist[m]:
+                bdist[m] = k
+    keep = set(dist)
     if route is not None:
         keep = route["route"] | sorry_route.changed_since(route["t"], dist) | set(repairs)
-        STATE["off_route"] = sorted(m for m in dist if m not in keep and li.file_of(m).is_file()
+        STATE["off_route"] = sorted(m for m in dist if m not in keep and m not in bdist and li.file_of(m).is_file()
                                     and li.sorry_count(li.file_of(m).read_text(errors="ignore")))
     items, held = [], []
-    for m in dist:
-        if route is not None and m not in keep:
+    for m in list(dist) + sorted(m for m in bdist if m not in dist):
+        if m not in keep and m not in bdist:
             continue
         p = li.file_of(m)
         if not p.is_file():
@@ -89,15 +114,29 @@ def stage3(imports, dist, waiting: set[str]):
         if n == 0 and m not in repairs:
             continue
         kind = "repair" if m in repairs else "disputed" if "STATEMENT-DISPUTED" in text else "proof"
+        d = dist.get(m, FAR)
         if m in waiting and not (kind == "repair" and n == 0) and not claimed(m):
             # the human, 2026-10-17 (supersedes the launcher's 2026-10-14 rule that worked such modules anyway): a stage-3
-            # item opens only when every node of its proof dependencies has a Lean statement, so that the prover sees what
-            # is available. Exempt: a repair of a proved module (no sorry) and an item already claimed.
-            held.append((dist[m], m, n)); continue
-        items.append((("repair", "disputed", "proof").index(kind), dist[m], m, n, kind))
-    items.sort(key=lambda x: (x[0], repairs[x[2]] if x[4] == "repair" else x[1],
-                              x[1], x[2])); held.sort()
+            # item opens only when every node of its dependencies has a Lean statement, so that the prover sees what is
+            # available (stmt_deps and proof_deps, the human 2026-10-18). Exempt: a repair of a proved module (no sorry)
+            # and an item already claimed.
+            held.append((d, m, n)); continue
+        items.append((("repair", "disputed", "proof").index(kind), d, m, n, kind, 0 if m in keep else bdist[m]))
+    items.sort(key=lambda x: (x[0], repairs[x[2]] if x[4] == "repair" else x[5], x[1], x[2])); held.sort()
     return items, held
+
+
+def below_route_reach(g):
+    """batch -> {module: distance to the nearest route sorry}, from the DAG `g` and the route (tools/below_route.py)"""
+    import below_route
+    route = below_route.load_route()
+    if route is None:
+        return {}, None
+    return below_route.reach(g, dag_queue, route), route["t"]
+
+
+def _d(d) -> str:
+    return str(d) if d < FAR else "-"
 
 
 def main() -> int:
@@ -106,11 +145,14 @@ def main() -> int:
     lib = {m for m in imports if m not in ("Challenge", "TargetsCheck") and m not in li.library_dirs()} if imports else set()
     if cmd == "outside":
         print("\n".join(sorted(lib - set(dist)))); return 0
-    s1, s2, waiting, why = [], [], [], collections.Counter()
+    s1, s2, waiting, why, below, route_t = [], [], [], collections.Counter(), {}, None
     if dag_queue.nodes_dir().is_dir():
         g = dag_queue.Dag(dag_queue.load())
         s1 = g.stage1(); s2, why = g.stage2(); waiting = g.waiting()
-    items3, held = stage3(imports, dist, {m for m, _ in waiting})
+        if dist:
+            below, route_t = below_route_reach(g)
+    items3, held = stage3(imports, dist, {m for m, _ in waiting}, below)
+    STATE["below"] = {b: sum(1 for x in items3 if x[5] > 0 and x[2] in mods) for b, mods in below.items()}
     wfor = {}
     for m, c in waiting:
         wfor.setdefault(m, c)
@@ -120,10 +162,13 @@ def main() -> int:
         if dist:
             print(f"stage 3: library modules {len(lib)}; needed by the targets {len(dist)}; outside {len(lib - set(dist))}")
             print(f"stage 3: items from the {STATE.get('route', 'import closure')}"
-                  + (f"; {len(STATE['off_route'])} sorried modules in the closure are on no target's route (not items)" if STATE.get("off_route") else ""))
-            print(f"stage 3: {len(items3)} items (" + ", ".join(f"{k} {sum(1 for x in items3 if x[4] == k)}" for k in ("repair", "disputed", "proof")) + f"); {len(held)} modules waiting for statements of proof dependencies (not items)")
+                  + (f"; {len(STATE['off_route'])} sorried modules in the closure are on no target's route nor below a route sorry (not items)" if STATE.get("off_route") else ""))
+            print(f"stage 3: {len(items3)} items (" + ", ".join(f"{k} {sum(1 for x in items3 if x[4] == k)}" for k in ("repair", "disputed", "proof"))
+                  + f"; on the route {sum(1 for x in items3 if x[5] == 0)}, below a route sorry {sum(1 for x in items3 if x[5] > 0)}"
+                  + (": " + ", ".join(f"{b} {n}" for b, n in STATE["below"].items()) if STATE.get("below") else "")
+                  + f"); {len(held)} modules waiting for statements of dependencies (not items)")
             ns = sum(x[3] for x in items3) + sum(x[2] for x in held)   # held modules are not items again since 2026-10-17
-            print(f"stage 3: sorries left on the route {ns}, in {len(items3) + len(held)} modules (text count; "
+            print(f"stage 3: sorries left on the route and below it {ns}, in {len(items3) + len(held)} modules (text count; "
                   "tools/target_types.sh check prints each target's axioms: a target is closed when sorryAx is not among them)")
         else:
             print("stage 3: not open (lean/TargetsCheck.lean imports no target module yet)")
@@ -133,9 +178,12 @@ def main() -> int:
     WORK.mkdir(exist_ok=True)
     rows = [(i, 1, d if d < 10**6 else "-", "", dag_queue.audit_state(g.live[i]), "") for d, i in s1]
     rows += [(i, 2, h, "", "target-statement" if pri == 0 else "state", nb) for pri, h, i, nb in s2]
-    rows += [(m, 3, d, n, k, "") for _, d, m, n, k in items3]
+    rows += [(m, 3, _d(d), n, k, "route" if rd == 0 else rd) for _, d, m, n, k, rd in items3]
+    if route_t is not None:
+        import below_route
+        below_route.write_reach(below, route_t)   # the batch tags (tools/tag_batches.py) read what this run selected
     with open(WORK / "queue.tsv", "w") as f:
-        f.write("# item\tstage\tdistance (to a target; to Mathlib in stage 2)\tsorry\tkind\tblockers (stage 2: open stage-2 nodes that wait for it through stmt_deps)\n")
+        f.write("# item\tstage\tdistance (to a target; to Mathlib in stage 2)\tsorry\tkind\tblockers (stage 2: open stage-2 nodes that wait for it through stmt_deps; stage 3: `route`, or the distance to the nearest route sorry)\n")
         for r in rows:
             f.write("\t".join(str(x) for x in r) + "\n")
     with open(WORK / "queue.md", "w") as f:
@@ -153,17 +201,19 @@ def main() -> int:
         if why:
             f.write("\nNot open yet: " + ", ".join(f"{v} nodes that {k.replace('waits', 'wait')}" for k, v in why.items()) + ".\n")
         f.write("\n")
-        f.write(f"## Stage 3: modules to prove ({len(items3)})\n\n")
+        f.write(f"## Stage 3: modules to prove ({len(items3)})\n\n"
+                "On the sorry route of an open batch, or below a route sorry of one (the human, 2026-10-18: provable as soon as "
+                "every dependency is stated, whatever the depth); route first, then nearest to a route sorry.\n\n")
         if items3:
-            f.write("| module | distance to a target | sorry | kind |\n|---|---|---|---|\n")
-            for _, d, m, n, k in items3:
-                f.write(f"| `{m}` | {d} | {n} | {k} |\n")
+            f.write("| module | distance to a target | sorry | kind | route / steps to the nearest route sorry |\n|---|---|---|---|---|\n")
+            for _, d, m, n, k, rd in items3:
+                f.write(f"| `{m}` | {_d(d)} | {n} | {k} | {'route' if rd == 0 else rd} |\n")
         if held:
-            f.write(f"\n## Stage 3: waiting for statements of proof dependencies ({len(held)})\n\n"
-                    "Not items: a node in the proof dependencies has no Lean statement yet (the human, 2026-10-17).\n\n")
+            f.write(f"\n## Stage 3: waiting for statements of dependencies ({len(held)})\n\n"
+                    "Not items: a node in the dependencies (stmt_deps or proof_deps) has no Lean statement yet (the human, 2026-10-17 and 2026-10-18).\n\n")
             f.write("| module | distance to a target | sorry | waits for (first unstated node) |\n|---|---|---|---|\n")
             for d, m, n in held:
-                f.write(f"| `{m}` | {d} | {n} | `{wfor.get(m, '')}` |\n")
+                f.write(f"| `{m}` | {_d(d)} | {n} | `{wfor.get(m, '')}` |\n")
     print(f"wrote {len(rows)} items to coord/queue.tsv and coord/queue.md (stage 3: {len(items3)}, waiting {len(held)}; stage 2: {len(s2)}; stage 1: {len(s1)})")
     if dag_queue.nodes_dir().is_dir():  # the reverse index of the blueprint references is regenerated with the queue
         import blueprint_refs

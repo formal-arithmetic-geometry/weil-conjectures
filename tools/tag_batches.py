@@ -1,20 +1,27 @@
 #!/usr/bin/env python3
 """coord/queue-batches.tsv: the batch of each item of coord/queue.tsv (launcher, 2026-10-15; batch 3 and pruning 2026-10-16;
-sorry route 2026-10-17).
+sorry route 2026-10-17; below the route 2026-10-18).
 A stage-3 item belongs to an open batch N (coord/batchN-targets.txt without coord/batchN-complete.txt, every N present)
-when it is on that batch's sorry route (local/sorry-route.json, tools/sorry_route.py): it has a sorried declaration
-that the batch's targets actually use. A module whose source changed after the route was computed also counts for
+when it is on that batch's sorry route (local/sorry-route.json, tools/sorry_route.py: it has a sorried declaration
+that the batch's targets actually use), or below a route sorry of that batch (the human, 2026-10-18; tools/below_route.py:
+in the dependency closure of a node whose declaration is a sorry on the batch's own route, within the batch's own
+reach), read from local/stage3-reach.json as tools/queue.py write selected the items (computed here when that file is
+missing or belongs to another route). A module whose source changed after the route was computed also counts for
 every batch whose import closure reaches it, until the next route refresh (a landing may have split off a new sorry).
 When the route is missing or a walk failed, the batch falls back to its import closure and this script says so.
 The dispatch tag (queue-batches.tsv) is the first such batch; queue-batches-all.tsv lists every one. A stage-3 item
-reached by no open batch is tagged `unneeded`, which no dispatcher lane serves (tools/queue.py no longer lists modules
-off the route, so this is rare). Other stages: untagged."""
+reached by no open batch is tagged `unneeded`, which no dispatcher lane serves (tools/queue.py lists only modules on
+the route or below it, so this is rare). Other stages: untagged."""
 import collections, pathlib, re, sys
 R = pathlib.Path(__file__).resolve().parent.parent; sys.path.insert(0, str(R / "tools"))
 import leanindex as li
-import sorry_route
+import sorry_route, below_route
 _, imports = li.scan()
 route = sorry_route.load()
+below = below_route.read_reach(route["t"]) if route else None
+if route and below is None:   # queue.py write did not run for this route: compute what it would have selected
+    import dag_queue
+    below = below_route.reach(dag_queue.Dag(dag_queue.load()), dag_queue)
 
 
 def closure(n):
@@ -34,7 +41,7 @@ def reach(n):
     c = closure(n)
     if route is None or f"batch{n}" not in route["batches"]:
         notes.append(f"batch{n}: no complete sorry route, import closure used"); return c
-    return route["batches"][f"batch{n}"] | sorry_route.changed_since(route["t"], c)
+    return route["batches"][f"batch{n}"] | sorry_route.changed_since(route["t"], c) | set((below or {}).get(f"batch{n}", ()))
 
 
 ns = sorted(int(m.group(1)) for p in (R / "coord").glob("batch*-targets.txt") if (m := re.fullmatch(r"batch(\d+)-targets\.txt", p.name)))
@@ -48,5 +55,6 @@ for l in (R / "coord/queue.tsv").read_text().splitlines():
     allb = ",".join(name for name, s in rs if r[0] in s) if r[1] == "3" else ""
     allrows.append(f"{r[0]}\t{allb or b}")
 tmp = R / "coord/.queue-batches.tsv"; tmp.write_text("# item\tbatch\n" + "\n".join(rows) + "\n"); tmp.replace(R / "coord/queue-batches.tsv")
-tmp = R / "coord/.queue-batches-all.tsv"; tmp.write_text("# item\tbatches (every open batch whose sorry route has the item; queue-batches.tsv has the dispatch tag)\n" + "\n".join(allrows) + "\n"); tmp.replace(R / "coord/queue-batches-all.tsv")
-print(len(rows), "items tagged;", sum(1 for x in rows if x.endswith("unneeded")), "unneeded" + ("; " + "; ".join(notes) if notes else ""))
+tmp = R / "coord/.queue-batches-all.tsv"; tmp.write_text("# item\tbatches (every open batch whose sorry route has the item or whose route sorry it lies below; queue-batches.tsv has the dispatch tag)\n" + "\n".join(allrows) + "\n"); tmp.replace(R / "coord/queue-batches-all.tsv")
+print(len(rows), "items tagged;", sum(1 for x in rows if x.endswith("unneeded")), "unneeded;",
+      "reach below a route sorry (modules, items or not): " + ", ".join(f"{b} {len(v)}" for b, v in sorted((below or {}).items())) + ("; " + "; ".join(notes) if notes else ""))

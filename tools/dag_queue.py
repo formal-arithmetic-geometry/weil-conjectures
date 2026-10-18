@@ -5,7 +5,8 @@ Usage:
   tools/dag_queue.py summary      how many nodes each stage has open, and why the others are not open
   tools/dag_queue.py items        the open items, one per line: stage, item, distance (to a target in stage 1, to Mathlib in stage 2),
                                   kind (in stage 1 the node's lean_audit state on the done branch), in stage 2 also blockers
-  tools/dag_queue.py waiting      modules whose proof uses a node that has no Lean declaration yet, one per line
+  tools/dag_queue.py waiting      modules whose node depends (stmt_deps, proof_deps, the `uses` of the proof steps) on a node
+                                  that has no Lean declaration yet, one per line
 
 `queue.py write` calls this and puts the items into coord/queue.tsv; run this by hand only to look.
 
@@ -29,9 +30,10 @@ What is open follows the stage documents. A node that no target reaches is not o
            fewest dependency steps down to a Mathlib leaf), so that the statements climb from Mathlib upward. With SHEAF_EARLY_REVIEW=1 in coord/sheaf.env the nodes
            needed to state the targets come first instead.
 
-A module of stage 3 is held back ("waiting") while a node that its proof uses has no Lean declaration: its
-proof cannot be written yet. The order of the dependencies is never overridden: no node is stated before the
-nodes its statement needs, so stage 2 climbs from Mathlib upward whatever order stage 1 or stage 3 keep.
+A module of stage 3 is held back ("waiting") while a node that its node depends on, through stmt_deps or proof_deps
+(the human, 2026-10-18; proof_deps only from 2026-10-17), has no Lean declaration: its proof cannot be written yet.
+The order of the dependencies is never overridden: no node is stated before the nodes its statement needs, so stage 2
+climbs from Mathlib upward whatever order stage 1 or stage 3 keep.
 
 The DAG layout is the project's own (`stages/1-dag.md` §1 fixes the content, not the field names). The FIELDS
 table below lists the names this script accepts for each piece of content; the maintainer adapts it to the
@@ -353,12 +355,14 @@ class Dag:
         return sorted(items, key=lambda t: (t[0], not is_def(self.live[t[2]]), -t[3], t[1], t[2])), why
 
     def waiting(self) -> list[tuple[str, str]]:
-        """(module, node it waits for) for every stated node whose proof uses an unstated node."""
+        """(module, node it waits for) for every stated node that depends on an unstated node: stmt_deps and proof_deps
+        (the human, 2026-10-18: a node may be proved as soon as every statement it depends on, both stmt_deps and
+        proof_deps, has a Lean statement; until then its module is not a stage-3 item)."""
         out = []
         for i, d in self.live.items():
             if is_leaf(d) or not has_decl(d) or not module_of(d):
                 continue
-            for c in self.deps(i, "proof"):
+            for c in self.deps(i, "all"):
                 if not self.stated(c):
                     out.append((module_of(d), c)); break
         return sorted(out)
@@ -377,7 +381,7 @@ def main() -> int:
               + f"); finished: {sum(1 for d in g.live.values() if finished(d))} closed on {done_branch()}, "
               f"{sum(1 for i, d in g.live.items() if i in g.dist1 and unfolded(d) and not finished(d) and not is_leaf(d))} split and reviewed")
         print(f"stage 2 open: {len(s2)} nodes to state; not open: " + ", ".join(f"{v} {k}" for k, v in why.items()) if why else f"stage 2 open: {len(s2)} nodes to state")
-        print(f"stage 3 waiting: {len(w)} stated modules whose proof uses a node without a declaration")
+        print(f"stage 3 waiting: {len(w)} stated modules whose node depends on a node without a declaration")
     elif cmd == "items":
         for dist, i in s1:
             print(f"1\t{i}\t{dist}\t{audit_state(g.live[i])}")
