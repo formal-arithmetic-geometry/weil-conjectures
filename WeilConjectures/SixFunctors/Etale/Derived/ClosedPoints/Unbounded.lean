@@ -223,27 +223,27 @@ namespace DerivedCategory
 variable {C : Type*} [Category C] [Abelian C] [HasDerivedCategory C]
 
 /-- The tower `n ↦ τ^{≥ -n} K` of the truncations of an object `K` of `D(C)`. -/
-noncomputable def truncGETower (K : DerivedCategory C) : ℕᵒᵖ ⥤ DerivedCategory C :=
+noncomputable def truncGENatTower (K : DerivedCategory C) : ℕᵒᵖ ⥤ DerivedCategory C :=
   Functor.ofOpSequence (X := fun n : ℕ ↦ (TStructure.t.truncGE (-(n : ℤ))).obj K)
     fun n ↦ (TStructure.t.natTransTruncGEOfLE (-((n + 1 : ℕ) : ℤ)) (-(n : ℤ)) (by lia)).app K
 
-instance (K : DerivedCategory C) (n : ℕ) : ((truncGETower K).obj (op n)).IsGE (-(n : ℤ)) :=
+instance (K : DerivedCategory C) (n : ℕ) : ((truncGENatTower K).obj (op n)).IsGE (-(n : ℤ)) :=
   inferInstanceAs (((TStructure.t.truncGE (-(n : ℤ))).obj K).IsGE (-(n : ℤ)))
 
 /-- The cone over the tower `n ↦ τ^{≥ -n} K` with point `K` given by the truncation maps. -/
-noncomputable def truncGETowerCone (K : DerivedCategory C) : Cone (truncGETower K) :=
+noncomputable def truncGENatTowerCone (K : DerivedCategory C) : Cone (truncGENatTower K) :=
   Cone.mk K (NatTrans.ofOpSequence (fun n ↦ (TStructure.t.truncGEπ (-(n : ℤ))).app K)
     fun n ↦ by
-      dsimp [truncGETower]
+      dsimp [truncGENatTower]
       rw [id_comp, Functor.ofOpSequence_map_homOfLE_succ, TStructure.t.π_natTransTruncGEOfLE_app])
 
 @[simp]
-lemma truncGETowerCone_π_app (K : DerivedCategory C) (n : ℕ) :
-    (truncGETowerCone K).π.app (op n) = (TStructure.t.truncGEπ (-(n : ℤ))).app K :=
+lemma truncGENatTowerCone_π_app (K : DerivedCategory C) (n : ℕ) :
+    (truncGENatTowerCone K).π.app (op n) = (TStructure.t.truncGEπ (-(n : ℤ))).app K :=
   rfl
 
-lemma truncGETower_map_succ (K : DerivedCategory C) (n : ℕ) :
-    (truncGETower K).map (homOfLE n.le_succ).op =
+lemma truncGENatTower_map_succ (K : DerivedCategory C) (n : ℕ) :
+    (truncGENatTower K).map (homOfLE n.le_succ).op =
       (TStructure.t.natTransTruncGEOfLE (-((n + 1 : ℕ) : ℤ)) (-(n : ℤ)) (by lia)).app K :=
   Functor.ofOpSequence_map_homOfLE_succ _ n
 
@@ -319,19 +319,19 @@ omit [EnoughInjectives C] in
 transition `τ^{≥ -n-1} K ⟶ τ^{≥ -n} K` induces isomorphisms on `Hᵐ(RF(-))` for `m ≥ -n`: its
 fiber is `H^{-n-1}(K)` placed in degree `-n-1`, whose image under `RF` is concentrated in degree
 `-n-1`. -/
-lemma isIso_homology_rightDerivedFunctor_map_truncGETower_map_succ [PreservesFiniteLimits F]
+lemma isIso_homology_rightDerivedFunctor_map_truncGENatTower_map_succ [PreservesFiniteLimits F]
     (K : DerivedCategory C) (n : ℕ)
     (hK : F.IsRightAcyclic ((DerivedCategory.homologyFunctor C (-(n : ℤ) - 1)).obj K))
     (m : ℤ) (hm : -(n : ℤ) ≤ m) :
     IsIso ((DerivedCategory.homologyFunctor D m).map
       (F.rightDerivedFunctor.map
-        ((DerivedCategory.truncGETower K).map (homOfLE n.le_succ).op))) := by
+        ((DerivedCategory.truncGENatTower K).map (homOfLE n.le_succ).op))) := by
   let t := DerivedCategory.TStructure.t (C := C)
   let RF := F.rightDerivedFunctor
-  let L := (DerivedCategory.truncGETower K).obj (op (n + 1))
-  let g := (DerivedCategory.truncGETower K).map (homOfLE n.le_succ).op
+  let L := (DerivedCategory.truncGENatTower K).obj (op (n + 1))
+  let g := (DerivedCategory.truncGENatTower K).map (homOfLE n.le_succ).op
   have hg : g = (t.natTransTruncGEOfLE (-((n + 1 : ℕ) : ℤ)) (-(n : ℤ)) (by lia)).app K :=
-    DerivedCategory.truncGETower_map_succ K n
+    DerivedCategory.truncGENatTower_map_succ K n
   let T := (t.triangleLTGE (-(n : ℤ))).obj L
   have hT : T ∈ distTriang _ := t.triangleLTGE_distinguished (-(n : ℤ)) L
   have hRT := RF.map_distinguished T hT
@@ -347,11 +347,11 @@ lemma isIso_homology_rightDerivedFunctor_map_truncGETower_map_succ [PreservesFin
     · have : IsIso ((DerivedCategory.homologyFunctor C (-(n : ℤ) - 1)).map T.mor₁) :=
         DerivedCategory.isIso_homologyFunctor_map_truncLTι_app L (-(n : ℤ)) _ (by lia)
       have : IsIso ((DerivedCategory.homologyFunctor C (-(n : ℤ) - 1)).map
-          ((DerivedCategory.truncGETowerCone K).π.app (op (n + 1)))) :=
+          ((DerivedCategory.truncGENatTowerCone K).π.app (op (n + 1)))) :=
         DerivedCategory.isIso_homologyFunctor_map_truncGEπ_app K _ _ (by lia)
       exact hK.of_iso (asIso ((DerivedCategory.homologyFunctor C _).map T.mor₁) ≪≫
         (asIso ((DerivedCategory.homologyFunctor C (-(n : ℤ) - 1)).map
-          ((DerivedCategory.truncGETowerCone K).π.app (op (n + 1))))).symm)
+          ((DerivedCategory.truncGENatTowerCone K).π.app (op (n + 1))))).symm)
     · exact IsRightAcyclic.of_isZero (DerivedCategory.isZero_of_isLE _ _ q hq (hX := h₂))
   have hz := F.isZero_homology_rightDerivedFunctor_obj_of_isLE 1 T.obj₁ (-(n : ℤ) - 1) h₁ h₂ hac
   -- `RF(τ^{≥ -n} L ⟵ L)` is an isomorphism on `Hᵐ`
@@ -373,7 +373,7 @@ lemma isIso_homology_rightDerivedFunctor_map_truncGETower_map_succ [PreservesFin
     · have h0 : IsZero ((DerivedCategory.homologyFunctor C q).obj T.obj₃) :=
         DerivedCategory.isZero_of_isGE _ (-(n : ℤ)) q hq
       have h0' : IsZero ((DerivedCategory.homologyFunctor C q).obj
-          ((DerivedCategory.truncGETower K).obj (op n))) :=
+          ((DerivedCategory.truncGENatTower K).obj (op n))) :=
         DerivedCategory.isZero_of_isGE _ (-(n : ℤ)) q hq
       exact ⟨0, h0.eq_of_src _ _, h0'.eq_of_src _ _⟩
     · have : IsIso ((DerivedCategory.homologyFunctor C q).map T.mor₂) :=
@@ -441,7 +441,7 @@ theorem nonempty_homology_rightDerivedFunctor_obj_iso_of_acyclic_of_detects {ι 
         ((Γ i).rightDerivedFunctor.obj K) ≅
           (Γ i).obj ((DerivedCategory.homologyFunctor C q).obj K)) := by
   let t := DerivedCategory.TStructure.t (C := C)
-  let T := DerivedCategory.truncGETower K
+  let T := DerivedCategory.truncGENatTower K
   obtain ⟨c, hc⟩ := Pretriangulated.exists_isHomotopyLimit T
   -- the legs of `c` induce isomorphisms on `Hᵐ(RΓⱼ(-))` for `n ≥ 1 - m`
   have hleg (j : ι) (m : ℤ) (n : ℕ) (hn : 1 - m ≤ n) :
@@ -455,7 +455,7 @@ theorem nonempty_homology_rightDerivedFunctor_obj_iso_of_acyclic_of_detects {ι 
         IsIso ((DerivedCategory.homologyFunctor _ p).map
           ((addOpFunctor n₀ ⋙ T ⋙ RΓ).map (homOfLE hab).op)) :=
       (T ⋙ RΓ ⋙ DerivedCategory.homologyFunctor _ p).isIso_map_homOfLE_op_of_isIso_succ n₀
-        (fun k hk ↦ (Γ j).isIso_homology_rightDerivedFunctor_map_truncGETower_map_succ K k
+        (fun k hk ↦ (Γ j).isIso_homology_rightDerivedFunctor_map_truncGENatTower_map_succ K k
           (hK j _) p (by lia)) (Nat.add_le_add_right hab n₀) (by lia)
     obtain ⟨k, rfl⟩ : ∃ k, n = k + n₀ := ⟨n - n₀, by lia⟩
     exact DerivedCategory.isIso_homologyFunctor_map_π_of_isHomotopyLimit_of_isIso hc' m
@@ -486,7 +486,7 @@ theorem nonempty_homology_rightDerivedFunctor_obj_iso_of_acyclic_of_detects {ι 
         ((hz m (by lia)).eq_of_tgt _ _)
     exact isIso_of_mono_of_epi _
   -- the comparison map `α : K ⟶ c.pt`
-  let cK := DerivedCategory.truncGETowerCone K
+  let cK := DerivedCategory.truncGENatTowerCone K
   let P := Fan.mk (∏ᶜ fun n : ℕ ↦ T.obj (op n)) (Pi.π fun n : ℕ ↦ T.obj (op n))
   let hP : IsLimit P := productIsProduct _
   obtain ⟨δ, hT⟩ := hc.exists_distTriang hP

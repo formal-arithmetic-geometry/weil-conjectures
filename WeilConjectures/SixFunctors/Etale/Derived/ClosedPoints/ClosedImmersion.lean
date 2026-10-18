@@ -19,8 +19,8 @@ geometric stalks vanish at the points outside `Z` (blueprint `lem-kun-04ca`).
 
 ## Main statements
 
-- `AlgebraicGeometry.Etale.isZero_of_forall_isZero_sheafFiber`: a sheaf with vanishing stalks
-  is zero.
+- `AlgebraicGeometry.Etale.isZero_of_forall_isZero_sheafFiber_algClosurePoint`: a sheaf
+  with vanishing stalks is zero.
 - `AlgebraicGeometry.Etale.mem_essImage_lowerStar_iff_isZero_sheafFiber` (`lem-kun-04ca`).
 -/
 
@@ -40,7 +40,7 @@ variable {Λ : Type (u + 1)} [CommRing Λ]
 
 /-- An étale sheaf of `Λ`-modules whose stalks at the geometric points
 `X.algClosurePoint x` all vanish is zero. -/
-lemma isZero_of_forall_isZero_sheafFiber {X : Scheme.{u}}
+lemma isZero_of_forall_isZero_sheafFiber_algClosurePoint {X : Scheme.{u}}
     (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
     (h : ∀ x : X, IsZero ((pointSmallEtale (X.algClosurePoint x)).sheafFiber.obj F)) :
     IsZero F := by
@@ -80,7 +80,7 @@ theorem mem_essImage_lowerStar_iff_isZero_sheafFiber {X Z : Scheme.{u}} (i : Z �
       (hU ▸ disjoint_compl_left) G
   · intro h
     refine mem_essImage_lowerStar_of_isZero_upperStar (j := U.ι) i (by rw [hU, compl_compl]) ?_
-    refine isZero_of_forall_isZero_sheafFiber _ fun y ↦ ?_
+    refine isZero_of_forall_isZero_sheafFiber_algClosurePoint _ fun y ↦ ?_
     refine (isZero_sheafFiber_iff_of_apply_eq K ((U : Scheme.{u}).algClosurePoint y ≫ U.ι)
       (X.algClosurePoint (U.ι.base y)) (by simp)).2 (h _ ?_) |>.of_iso
         ((upperStarCompSheafFiberIso (ModuleCat.{u + 1} Λ) U.ι _).app K)
