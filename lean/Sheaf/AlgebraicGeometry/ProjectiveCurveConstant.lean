@@ -14,25 +14,9 @@ public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 public import Mathlib.Topology.KrullDimension
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.Data.ZMod.Basic
-import Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
-import Sheaf.AlgebraicGeometry.FiniteConstructibleDirectImage
-import Sheaf.AlgebraicGeometry.FiniteGenericCurveModel
-import Sheaf.AlgebraicGeometry.ConstantFiniteComparison
-import Sheaf.AlgebraicGeometry.ConstructibleSubsheafNoetherian
-import WeilConjectures.AlgebraicGeometry.InverseImageStalkGerm
-import Sheaf.AlgebraicGeometry.ModuleAbelianDerivedDirectImageComparison
-import WeilConjectures.ConstructibleSheaf.Biproduct
-import WeilConjectures.ConstructibleSheaf.Defs
-import WeilConjectures.SixFunctors.Finite.Stalk
-import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.ProjectiveLine
-import Mathlib.AlgebraicGeometry.Noetherian
-import WeilConjectures.ConstructibleSheaf.Pullback
-import WeilConjectures.AlgebraicGeometry.EtaleInverseImageExact
-import Sheaf.AlgebraicGeometry.UniversalHomeomorphismInvariance
-import Sheaf.AlgebraicGeometry.Morphisms.ProjectiveBaseChange
-import Sheaf.AlgebraicGeometry.Morphisms.ProjectiveImpliesProper
-import Sheaf.AlgebraicGeometry.ProjectiveSmoothCurveFiniteness
-import WeilConjectures.AlgebraicGeometry.BoundedConstructibleComplexes
+import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.ProjectiveCurve
+import WeilConjectures.AlgebraicGeometry.FieldBaseChangeDimension
+import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
 
 /-!
 # Constant coefficients on projective families of dimension at most one
@@ -122,6 +106,55 @@ theorem isConstructibleEtaleModuleSheaf_higherDirectImage_prime_of_projective_cu
             ((constantSheaf X.left.smallEtaleTopology
               (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ)))).obj
               (ModuleCat.of (ULift.{u + 1} (ZMod ℓ)) (ULift.{u + 1} (ZMod ℓ))))))) := by
-  sorry
+  classical
+  let Λ := ULift.{u + 1} (ZMod ℓ)
+  have : HasInvertibleExponent Λ S.left := by
+    refine ⟨ℓ, (Fact.out : ℓ.Prime).pos, ?_, hinv⟩
+    change (ℓ : ULift.{u + 1} (ZMod ℓ)) = 0
+    apply ULift.ext
+    exact ZMod.natCast_self ℓ
+  obtain ⟨n, hn, i, hi, hif⟩ := IsHProjective.exists_isClosedImmersion (f := f.left)
+  let := hn
+  let := hi
+  have hfib : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω]
+      (s : Spec (.of Ω) ⟶ S.left),
+      topologicalKrullDim (pullback f.left s : Scheme.{u}) ≤ 1 := by
+    intro Ω _ _ s
+    obtain ⟨⟨t, a⟩, rfl⟩ := (Scheme.SpecToEquivOfField Ω S.left).symm.surjective s
+    let c := Spec.map (CommRingCat.ofHom
+      (algebraMap (S.left.residueField t) (AlgebraicClosure (S.left.residueField t))))
+    have heq (K : Type u) [Field K]
+        (a : Spec (.of K) ⟶ Spec (.of (S.left.residueField t))) :
+        topologicalKrullDim
+          (pullback f.left (a ≫ S.left.fromSpecResidueField t) : Scheme.{u}) =
+          topologicalKrullDim (f.left.fiber t) := by
+      let e := pullbackLeftPullbackSndIso f.left (S.left.fromSpecResidueField t) a
+      rw [← IsHomeomorph.topologicalKrullDim_eq _ e.hom.homeomorph.isHomeomorph]
+      exact topologicalKrullDim_pullback_eq_of_field
+        (pullback.snd f.left (S.left.fromSpecResidueField t)) a
+    change topologicalKrullDim
+      (pullback f.left (Spec.map a ≫ S.left.fromSpecResidueField t) : Scheme.{u}) ≤ 1
+    rw [heq Ω (Spec.map a)]
+    rw [← heq (AlgebraicClosure (S.left.residueField t)) c]
+    exact hdim t
+  let F := (constantSheaf X.left.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj
+    (ModuleCat.of Λ Λ)
+  let A := (DerivedCategory.Plus.singleFunctor
+    (Sheaf X.left.smallEtaleTopology (ModuleCat.{u + 1} Λ)) 0).obj F
+  apply (Scheme.isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf _).2
+  have : Scheme.IsConstructibleSheaf
+      ((DerivedCategory.homologyFunctor _ q).obj
+        ((DerivedCategory.Plus.ι ⋙
+          (Etale.lowerStar (ModuleCat.{u + 1} Λ) f.left).rightDerivedFunctor).obj A)) := by
+    change Scheme.IsConstructibleSheaf
+      ((DerivedCategory.homologyFunctor _ q).obj
+        ((Etale.lowerStar (ModuleCat.{u + 1} Λ) f.left).rightDerivedFunctor.obj
+          ((DerivedCategory.singleFunctor _ 0).obj F)))
+    exact Etale.isConstructibleSheaf_homology_rightDerivedLowerStar_zmod
+      S.hom f.left i hif hfib ℓ q
+  exact Scheme.IsConstructibleSheaf.of_iso
+    ((DerivedCategory.homologyFunctor _ q).mapIso
+      ((Etale.lowerStar (ModuleCat.{u + 1} Λ) f.left).rightDerivedFunctorPlusCompatibility.app
+        A).symm)
 
 end AlgebraicGeometry
