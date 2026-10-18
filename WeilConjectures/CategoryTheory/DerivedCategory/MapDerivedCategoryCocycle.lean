@@ -49,7 +49,7 @@ noncomputable def mapDerivedCategoryCompNatIso (γ : F ⋙ G ≅ H) :
 
 /-- The morphism of complexes `G (F K) ⟶ H K` given in each degree by the component of
 `γ : F ⋙ G ≅ H`. -/
-noncomputable abbrev mapHomologicalComplexCompNatTrans (γ : F ⋙ G ≅ H)
+noncomputable abbrev mapHomologicalComplexCompIsoHomOfIso (γ : F ⋙ G ≅ H)
     (K : CochainComplex C ℤ) :
     (G.mapHomologicalComplex (ComplexShape.up ℤ)).obj
         ((F.mapHomologicalComplex (ComplexShape.up ℤ)).obj K) ⟶
@@ -65,7 +65,7 @@ lemma mapDerivedCategoryCompNatIso_hom_app_Q (γ : F ⋙ G ≅ H) (K : CochainCo
         H.mapDerivedCategoryFactors.hom.app K =
       G.mapDerivedCategory.map (F.mapDerivedCategoryFactors.hom.app K) ≫
         G.mapDerivedCategoryFactors.hom.app ((F.mapHomologicalComplex _).obj K) ≫
-        DerivedCategory.Q.map (mapHomologicalComplexCompNatTrans γ K) := by
+        DerivedCategory.Q.map (mapHomologicalComplexCompIsoHomOfIso γ K) := by
   have h := mapDerivedCategoryCompIso_fac F G K
   have h' := mapDerivedCategoryNatIso_fac γ K
   simp only [mapDerivedCategoryCompNatIso, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
@@ -110,7 +110,7 @@ lemma mapDerivedCategoryCompNatIso_cocycle (γ₁₂₃ : F₁₂ ⋙ F₂₃ �
     mapDerivedCategoryCompNatIso_hom_app_Q, Category.assoc, Functor.map_comp,
     Functor.map_comp, Category.assoc, Category.assoc]
   have n₁ := F₃₄.mapDerivedCategoryFactors.hom.naturality
-    (mapHomologicalComplexCompNatTrans γ₁₂₃ L)
+    (mapHomologicalComplexCompIsoHomOfIso γ₁₂₃ L)
   simp only [Functor.comp_map] at n₁
   rw [reassoc_of% n₁, mapDerivedCategoryCompNatIso_hom_app_Q]
   have n₂ := (mapDerivedCategoryCompNatIso γ₂₃₄).hom.naturality
@@ -122,7 +122,7 @@ lemma mapDerivedCategoryCompNatIso_cocycle (γ₁₂₃ : F₁₂ ⋙ F₂₃ �
   simp only [Category.assoc, ← DerivedCategory.Q.map_comp]
   congr 4
   ext n
-  simp only [mapHomologicalComplexCompNatTrans, Functor.mapHomologicalComplexCompIso_hom_app_f,
+  simp only [mapHomologicalComplexCompIsoHomOfIso, Functor.mapHomologicalComplexCompIso_hom_app_f,
     HomologicalComplex.comp_f, Functor.mapHomologicalComplex_map_f,
     NatTrans.mapHomologicalComplex_app_f, Iso.refl_hom, NatTrans.id_app, Functor.map_comp]
   erw [F₃₄.map_id, Category.id_comp, Category.id_comp, Category.id_comp, Category.id_comp]
