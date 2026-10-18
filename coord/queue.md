@@ -1,6 +1,6 @@
 # Work queue
 
-1409 items; claim with `tools/claim.py next <group> [--stage N]`.
+1410 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (1409)
+## Stage 3: modules to prove (1410)
 
 On the sorry route of an open batch, or below a route sorry of one (the human, 2026-10-18: provable as soon as every dependency is stated, whatever the depth); route first, then nearest to a route sorry.
 
@@ -1062,6 +1062,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.SixFunctors.ProperBaseChangeModules` | - | 1 | proof | 4 |
 | `Sheaf.SixFunctors.TensorProjectionAdjunct` | - | 1 | proof | 4 |
 | `Sheaf.SixFunctors.UnboundedClassicalTruncation` | - | 1 | proof | 4 |
+| `Sheaf.TraceFormula.CompactFrobeniusTransportComposition` | - | 1 | proof | 4 |
 | `Sheaf.TraceFormula.IntegralConeCounitRealization` | - | 1 | proof | 4 |
 | `Sheaf.Algebra.Homology.FilteredProjectiveComparison` | - | 6 | proof | 5 |
 | `Sheaf.Algebra.Homology.ModuleHomPrecompHomotopy` | - | 5 | proof | 5 |
@@ -1424,7 +1425,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Algebra.Homology.SplitCellComplexKFlat` | - | 1 | proof | 21 |
 | `Sheaf.CategoryTheory.BoundedFilteredPageFunctorNormalized` | - | 1 | proof | 21 |
 
-## Stage 3: waiting for statements of dependencies (77)
+## Stage 3: waiting for statements of dependencies (80)
 
 Not items: a node in the dependencies (stmt_deps or proof_deps) has no Lean statement yet (the human, 2026-10-17 and 2026-10-18).
 
@@ -1471,6 +1472,7 @@ Not items: a node in the dependencies (stmt_deps or proof_deps) has no Lean stat
 | `Sheaf.Paper.IntegralLocalizingProperBaseChange` | - | 1 | `sk-lem-integral-models` |
 | `Sheaf.Paper.IntegralProperBaseChange` | - | 1 | `sk-lem-integral-models` |
 | `Sheaf.Paper.IntegralProperDirectSums` | - | 1 | `sk-lem-int-integral-heart` |
+| `Sheaf.Paper.IntegralStratumExtBound` | - | 1 | `sk-lem-int-integral-heart` |
 | `Sheaf.Paper.IntegralStratumHomFormula` | - | 2 | `sk-lem-int-integral-heart` |
 | `Sheaf.Paper.IntegralTensorProduct` | - | 1 | `sk-lem-int-integral-heart` |
 | `Sheaf.Paper.IntegralTensorPullback` | - | 8 | `sk-lem-int-integral-heart` |
@@ -1492,10 +1494,12 @@ Not items: a node in the dependencies (stmt_deps or proof_deps) has no Lean stat
 | `Sheaf.Paper.RelativeSupportCoordinateModel` | - | 7 | `cor-pur-affine-space-zero-section-purity` |
 | `Sheaf.Paper.SmoothPurityTowerBound` | - | 1 | `det-sp-tower-bound-uniform` |
 | `Sheaf.Paper.SystemClopenTensorCompatibility` | - | 1 | `lem-sf-proper-open-projection-mate` |
+| `Sheaf.Paper.SystemCompactificationProjectionSubstitution` | - | 4 | `lem-sf-ambient-proper-open-pasting` |
 | `Sheaf.Paper.UniformConstructibleExtIntegral` | - | 1 | `sk-lem-integral-models` |
 | `Sheaf.Paper.UniformConstructibleExtRational` | - | 1 | `det-prop-scalar-six-pullback` |
 | `Sheaf.Paper.VerdierExchange` | - | 1 | `fix-lem-exchanges` |
 | `Sheaf.SecSmoothPurity.FiniteEtaleDualizingNormalization` | - | 1 | `fix-lem-exchanges` |
+| `Sheaf.SecSmoothPurity.FiniteGeneralRing` | - | 1 | `lem-pur-dnc-coefficient-transport` |
 | `Sheaf.SecSmoothPurity.SmoothPurityNaturality` | - | 1 | `fix-prop-projection-formula` |
 | `Sheaf.SixFunctors.CoefDualFormulaScalarTranspose` | - | 8 | `lem-coef-finite-free-extension` |
 | `Sheaf.SixFunctors.CoefIntegralFiniteExtension` | - | 5 | `lem-coef-finite-free-extension` |

@@ -5,7 +5,6 @@ Authors: SHEAF group NY
 -/
 module
 
-public import Sheaf.Paper.TraceExceptionalAdmissibility
 public import Sheaf.Paper.TraceFormulaCoefficientConventions
 public import Sheaf.Paper.DerivedPullbackTensorHom
 public import Sheaf.AlgebraicGeometry.FixedFiniteExceptionalAt
