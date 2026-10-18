@@ -5,20 +5,7 @@ Authors: SHEAF group Q75
 -/
 module
 
-public import Mathlib.AlgebraicGeometry.Scheme
-public import Mathlib.RingTheory.Noetherian.Defs
-public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-public import Mathlib.AlgebraicGeometry.Properties
-public import Mathlib.AlgebraicGeometry.ResidueField
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
-public import Sheaf.CategoryTheory.Sites.GrothendieckTopos
-public import Mathlib.AlgebraicGeometry.Morphisms.Proper
-public import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
-public import Mathlib.Topology.Irreducible
-public import Mathlib.AlgebraicGeometry.Noetherian
-public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
-public import Mathlib.CategoryTheory.Comma.Over.Basic
-public import Mathlib.RingTheory.Finiteness.Defs
 
 /-!
 # The prime-to-ell alteration category and topology
