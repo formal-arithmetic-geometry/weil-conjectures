@@ -18,9 +18,198 @@
   "def-weil-affine-spectrum",
   "def-sc-function-field"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By the complete-local finite-over-regular theorem, choose a complete regular local subring $R\\subseteq A$ with $A$ finite over $R$. Write $F=\\operatorname{Frac}R$ and $K=\\operatorname{Frac}A$. Finiteness makes the inclusion integral, hence $\\dim R=\\dim A=2$, and $n=[K:F]$ is finite and positive. Prove simultaneously, by strong induction on $n$, the following assertion: every finite inclusion $R\\subseteq D$ of a complete regular local domain into a complete normal Noetherian local domain, both of dimension $2$, with $[\\operatorname{Frac}D:\\operatorname{Frac}R]=n$, admits a proper birational regular integral model of $\\operatorname{Spec}D$. The chosen $R\\subseteq A$ is one instance. The induction permits all complete regular bases, not only this initial $R$.",
+   "uses": [
+    "lem-weil-pbc-complete-local-domain-finite-over-regular",
+    "lem-weil-pbc-finite-algebra-is-integral",
+    "lem-weil-pbc-integral-injective-dimension-equal",
+    "lem-trf-finite-domain-fraction-degree"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0BGN, initial choice of A_0 and induction on fraction-field degree."
+   }
+  },
+  {
+   "text": "Fix an instance $R\\subseteq A$ of degree $n$ and assume the induction assertion for all smaller positive degrees. The complete rings $R,A$ are excellent and Nagata. Every ring essentially of finite type over either is excellent by finite-type/localization stability, hence Nagata by quasi-excellent-implies-Nagata. We use these properties below on local rings of finite-type models. Regularity of $R$ at its maximal ideal implies regularity of all its localizations; regular-implies-normal applied to $\\operatorname{Spec}R$ makes $R$ integrally closed in $F$. If $n=1$, identify $K=F$. Every element of $A$ is integral over $R$ and lies in $F$, so $A=R$. Its spectrum is regular, integral, and the identity is the required proper birational map: it is separated, finite type and remains a closed map under every base change, as in the definition of properness.",
+   "uses": [
+    "lem-per-complete-local-excellence",
+    "lem-weil-pbc-complete-local-nagata",
+    "lem-exc-finite-type-localization-excellent",
+    "lem-exc-quasi-excellent-nagata",
+    "lem-weil-pbc-regular-local-localization",
+    "rem-pc-regular-normal",
+    "lem-weil-pbc-finite-algebra-is-integral",
+    "def-weil-proper-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0BGN, opening excellency paragraph and degree-one base case."
+   }
+  },
+  {
+   "text": "Suppose first that $F\\subsetneq L\\subsetneq K$. Put $B=A\\cap L$. This equals the integral closure of $R$ in $L$: elements of $A$ are integral over $R$, and an element of $L$ integral over $R$ is integral over $A$ and hence belongs to $A$ by normality. Also $B$ is normal: an element of $\\operatorname{Frac}B\\subseteq L$ integral over $B$ is integral over $A$, so lies in $A\\cap L$. Its fraction field is $L$: for $z\\in L$ use its monic algebraic equation over $F$, and choose nonzero $r\\in R$ clearing the coefficients; the equation for $rz$ has coefficients $r^ic_{m-i}\\in R$, so $rz\\in B$. As an $R$-submodule of finite $A$, the ring $B$ is finite. The finite-over-complete theorem makes this domain complete Noetherian local, and the integral-dimension theorem gives $\\dim B=2$. Its maximal ideal is $\\mathfrak m_A\\cap B$, since the finite inclusions are local by the uniqueness clause of that theorem. The tower formula gives $[L:F]<n$ and $[K:L]<n$. Apply induction to $R\\subseteq B$ to obtain an integral regular proper birational model $Y\\to\\operatorname{Spec}B$.",
+   "uses": [
+    "lem-weil-pbc-noetherian-submodule-finite",
+    "lem-weil-pbc-finite-over-complete-local-product",
+    "lem-weil-pbc-integral-injective-dimension-equal",
+    "lem-weil-pbc-field-degree-multiplicativity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0BGN, intermediate-field paragraph: construction of B and first induction application."
+   }
+  },
+  {
+   "text": "The finite-type model $Y$ is excellent, Noetherian, and has dimension $2$: it is a regular proper birational model over the excellent local surface $B$. The closed-dominant dimension theorem applies to its proper dominant finite-type structure map with trivial extension of function fields, and gives $\\dim Y=\\dim B=2$. Now normalize $Y$ in $K$ and call the result $X$. The normalization-cover lemma, with $C=B,D=A$, gives $X$ normal, integral, excellent and Noetherian of dimension $2$, and a proper birational $X\\to\\operatorname{Spec}A$. By the normal-surface local-data lemma its singular set is a finite set of closed points $x_i$ of local dimension $2$. At $y_i=\\pi(x_i)$ the cover lemma gives a finite inclusion of complete local domains $\\widehat{\\mathcal O}_{Y,y_i}\\subseteq\\widehat{\\mathcal O}_{X,x_i}$, with regular base of dimension $2$, normal target of dimension $2$, and field degree at most $[K:L]<n$. Apply induction to each of these inclusions to resolve $\\operatorname{Spec}\\widehat{\\mathcal O}_{X,x_i}$.",
+   "uses": [
+    "lem-exc-finite-type-localization-excellent",
+    "lem-per-normal-surface-cover-completed-degree",
+    "lem-per-excellent-normal-surface-local-data",
+    "lem-trf-closed-dominant-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0BGN, intermediate-field normalization and smaller completed local degrees."
+   }
+  },
+  {
+   "text": "For each singular $x_i$, refine its completed-local resolution to a finite proper normalized point blowup tower by the normalized-refinement theorem. Descend that tower along $\\mathcal O_{X,x_i}\\to\\widehat{\\mathcal O}_{X,x_i}$ using completion descent; the normal completion and local dimension $2$ are supplied by local data. The descended endpoint is regular. Globalize the finitely many towers on $X$ by local-normalized-blowup globalization. Outside the $x_i$ it is an isomorphism to a regular open. At a point over $x_i$, its local ring is the corresponding local ring of the regular local endpoint, by the globalization statement. Thus the global endpoint $T$ is regular. The normalized-tower geometry lemma makes $T$ integral and the tower projective and birational; projective-bundle properness makes it proper; composing with $X\\to\\operatorname{Spec}A$ preserves properness and the identity of function fields. This completes the intermediate-field induction case, including an empty singular set.",
+   "uses": [
+    "lem-per-surface-resolution-normalized-refinement",
+    "lem-per-normalized-blowup-completion-descent",
+    "lem-per-local-normalized-blowups-globalize",
+    "lem-per-excellent-normalized-blowup-tower",
+    "lem-trf-projective-bundle-proper",
+    "lem-weil-pbc-proper-composition",
+    "def-weil-regular-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0BGN, intermediate-field paragraph: refinement, completion descent, and globalization."
+   }
+  },
+  {
+   "text": "It remains to treat $n>1$ with no strict intermediate field. Let $K_s$ be the separable closure of $F$ in $K$. The separable-first theorem says that $K_s/F$ is separable and $K/K_s$ purely inseparable. Thus $K_s=K$, in which case $K/F$ is separable, or $K_s=F$, in which case $K/F$ is purely inseparable of positive characteristic $p$. In the latter case the degree-$p$ intermediate-step theorem gives $K/M$ of degree $p$ for some intermediate $M$; since $M\\ne K$, absence of strict intermediates forces $M=F$, so $n=p$. In the separable case, the regular-surface-rational theorem gives rationality of $R$, hence bounded modification genus with bound zero, and separable ascent gives bounded modification genus for $A$. In the inseparable degree-$p$ case, $A$ is the integral closure of $R$ in $K$ (by the same integrality and normality argument as in Step 3); apply the degree-$p$ rational-reduction theorem. In both cases reduction to rational singularities is possible for $A$.",
+   "uses": [
+    "lem-weil-pbc-separable-first-purely-inseparable",
+    "lem-weil-pbc-finite-purely-inseparable-degree-p-intermediate",
+    "lem-per-regular-surface-rational",
+    "def-per-rational-surface-singularity",
+    "lem-per-separable-rational-reduction",
+    "lem-per-degree-p-rational-reduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0BGN, no-intermediate-field paragraph and Tags 0AXL, 0B4U."
+   }
+  },
+  {
+   "text": "Apply the bounded-genus rational-model theorem to $A$. Obtain a finite tower of normalized point blowups $X\\to\\operatorname{Spec}A$ such that every closed local ring of dimension $2$ on $X$ is rational. The tower-geometry theorem gives $X$ integral, normal, Noetherian, excellent and of dimension $2$, with proper birational composite. By normal-surface local data, the singular set is finite, say $\\{x_1,\\ldots,x_t\\}$, and each $R_i=\\mathcal O_{X,x_i}$ is a normal excellent Nagata local domain of dimension $2$ with normal completion. It is rational by the rational-model conclusion, and it is essentially of finite type over the complete local ring $A$. Apply the rational-surface Gorenstein blowup theorem to each $R_i$. This gives finite ordinary point blowup towers with normal intermediate schemes and Gorenstein local rings at the endpoints.",
+   "uses": [
+    "lem-per-bounded-genus-rational-model",
+    "lem-per-excellent-normalized-blowup-tower",
+    "lem-per-excellent-normal-surface-local-data",
+    "lem-exc-quasi-excellent-nagata",
+    "lem-per-rational-surface-gorenstein-blowups"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0BGN, rational-model construction and Tag 0BBV."
+   }
+  },
+  {
+   "text": "Each ordinary tower just obtained is also a normalized tower: after each blowup its scheme is already normal, so the subsequent normalization is an isomorphism (the length-zero normal-open clause of tower geometry). Globalize these towers at $x_1,\\ldots,x_t$ using local-normalized-blowup globalization, obtaining $X'\\to X$. Its endpoint local rings above $x_i$ are those of the chosen Gorenstein endpoint. Off the $x_i$ the scheme is regular. The tower-geometry theorem gives $X'$ normal integral excellent Noetherian of dimension $2$. Its singular points $x'_j$ are finite and have dimension-two local rings by local data; each lies over an $x_i$, since the complement is unchanged and regular. Hence each $S_j=\\mathcal O_{X',x'_j}$ is Gorenstein by the endpoint local-ring identification.",
+   "uses": [
+    "lem-per-excellent-normalized-blowup-tower",
+    "lem-per-local-normalized-blowups-globalize",
+    "lem-per-excellent-normal-surface-local-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0BGN, globalization of the Gorenstein-producing towers, via Tag 0BFZ after the normal-intermediate observation."
+   }
+  },
+  {
+   "text": "For each singular $x'_j$ over $x_i$, the local map $R_i\\to S_j$ is injective, local, essentially of finite type and induces an isomorphism of fraction fields, because it is induced by the birational blowup tower. The rational-propagation theorem applies: $R_i$ is a rational normal Nagata local domain of dimension $2$; $S_j$ is normal and has dimension $2$. Thus $S_j$ is rational. Normal-surface local data gives its normal completion, and excellence gives the Nagata condition. Together with Step 8's Gorenstein property, these are exactly the hypotheses of the rational-double-point theorem. It gives a finite ordinary blowup tower at singular closed points over $\\operatorname{Spec}S_j$, with normal intermediate schemes and regular endpoint.",
+   "uses": [
+    "lem-per-rational-singularity-birational-propagation",
+    "lem-per-excellent-normal-surface-local-data",
+    "lem-exc-quasi-excellent-nagata",
+    "lem-per-rational-double-point-blowup-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0BGN, final rational-double-point paragraph, with rationality propagation Tag 0BG0 explicit."
+   }
+  },
+  {
+   "text": "The ordinary towers of Step 9 are normalized towers because their intermediate schemes are normal, just as in Step 8. Globalize them at the finitely many singular $x'_j$ of $X'$. Call the endpoint $T$. For a point of $T$ whose image is not one of the $x'_j$, the morphism is an isomorphism to the regular complement. For a point over $x'_j$, globalization identifies its local ring with that of the regular endpoint chosen over $S_j$. Thus every local ring of $T$ is regular; $T$ is locally Noetherian by tower geometry, so $T$ is regular. Concatenating the three finite normalized towers and applying tower geometry over $\\operatorname{Spec}A$ shows that $T$ is integral and $T\\to\\operatorname{Spec}A$ is projective and induces an isomorphism of function fields; projective-bundle properness gives properness. This completes the remaining induction case. Strong induction and Step 1 therefore prove the item.",
+   "uses": [
+    "lem-per-excellent-normalized-blowup-tower",
+    "lem-per-local-normalized-blowups-globalize",
+    "lem-trf-projective-bundle-proper",
+    "def-weil-regular-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0BGN, final globalization and local-ring regularity check."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-per-rational-surface-singularity",
+  "def-weil-proper-morphism",
+  "def-weil-regular-scheme",
+  "lem-exc-finite-type-localization-excellent",
+  "lem-exc-quasi-excellent-nagata",
+  "lem-per-bounded-genus-rational-model",
+  "lem-per-complete-local-excellence",
+  "lem-per-degree-p-rational-reduction",
+  "lem-per-excellent-normal-surface-local-data",
+  "lem-per-excellent-normalized-blowup-tower",
+  "lem-per-local-normalized-blowups-globalize",
+  "lem-per-normal-surface-cover-completed-degree",
+  "lem-per-normalized-blowup-completion-descent",
+  "lem-per-rational-double-point-blowup-resolution",
+  "lem-per-rational-singularity-birational-propagation",
+  "lem-per-rational-surface-gorenstein-blowups",
+  "lem-per-regular-surface-rational",
+  "lem-per-separable-rational-reduction",
+  "lem-per-surface-resolution-normalized-refinement",
+  "lem-trf-closed-dominant-dimension",
+  "lem-trf-finite-domain-fraction-degree",
+  "lem-trf-projective-bundle-proper",
+  "lem-weil-pbc-complete-local-domain-finite-over-regular",
+  "lem-weil-pbc-complete-local-nagata",
+  "lem-weil-pbc-field-degree-multiplicativity",
+  "lem-weil-pbc-finite-algebra-is-integral",
+  "lem-weil-pbc-finite-over-complete-local-product",
+  "lem-weil-pbc-finite-purely-inseparable-degree-p-intermediate",
+  "lem-weil-pbc-integral-injective-dimension-equal",
+  "lem-weil-pbc-noetherian-submodule-finite",
+  "lem-weil-pbc-proper-composition",
+  "lem-weil-pbc-regular-local-localization",
+  "lem-weil-pbc-separable-first-purely-inseparable",
+  "rem-pc-regular-normal"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/resolve.tex",
+  "place": "Tag 0BGN, resolve-lemma-resolve-complete, strong induction on the degree over a complete regular local subring; rational-reduction and rational-double-point route."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -49,10 +238,52 @@
    "results": "8 hits; AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization, AlgebraicGeometry.Scheme.Hom.ι_toNormalization_assoc, AlgebraicGeometry.Scheme.Hom.ker_toNormalization, AlgebraicGeometry.Scheme.Hom.toNormalization_fromNormalization, AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc, AlgebraicGeometry.Scheme.Hom.normalizationDesc, AlgebraicGeometry.Scheme.Hom.normalizationDesc.congr_simp, AlgebraicGeometry.Scheme.Hom.normalizationDesc_comp; logged digest a4d691231b415e66",
    "date": "2026-10-18",
    "verdict": "no match: the returned signatures give relative normalization, ordinary scheme or regular-sequence facts (or unrelated projective objects), not this geometric assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "resolution of singularities for complete normal local two dimensional domain",
+   "results": "8 hits; Algebra.smoothLocus_eq_univ_iff, Algebra.smoothLocus, AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization, AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization, Algebra.IsStandardSmoothOfRelativeDimension.localization_away, completeIntegralClosure_eq_integralClosure, RingHom.isStandardSmooth_holdsForLocalizationAway, RingHom.Smooth.holdsForLocalizationAway; ; logged digest bc422ecb9ccc9554",
+   "date": "2026-10-19",
+   "verdict": "no match: normalization or smoothness, cotangent and dimension-one facts do not give a surface resolution"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "complete normal local surface resolution proper birational regular model",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Hom.normalization, AlgebraicGeometry.IsSmoothOfRelativeDimension, AlgebraicGeometry.IsSmooth.exists_isStandardSmooth, AlgebraicGeometry.Scheme.Hom.fromNormalization, AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension, AlgebraicGeometry.Scheme.Hom.toNormalization, AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom, AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization; ; logged digest 2afcee3dae717593",
+   "date": "2026-10-19",
+   "verdict": "no match: normalization or smoothness, cotangent and dimension-one facts do not give a surface resolution"
+  },
+  {
+   "tool": "loogle",
+   "query": "resolution singularities, Normal, Regular",
+   "results": "0 hits; ; loogle: Unknown identifier `resolution`; logged digest 4f53cda18c2baa0c",
+   "date": "2026-10-19",
+   "verdict": "no match: normalization or smoothness, cotangent and dimension-one facts do not give a surface resolution"
+  },
+  {
+   "tool": "grep",
+   "query": "complete.*normal.*surface|resolution.*singular",
+   "results": "0 hits; ; ; logged digest 4f53cda18c2baa0c",
+   "date": "2026-10-19",
+   "verdict": "no match: normalization or smoothness, cotangent and dimension-one facts do not give a surface resolution"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Noetherian complete normal local domain dimension two has regular proper birational scheme",
+   "results": "8 hits; tfae_of_isNoetherianRing_of_isLocalRing_of_isDomain, AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization, AlgebraicGeometry.IsIntegral, AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom, AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization, AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization, AlgebraicGeometry.Scheme.Hom.normalization; ; logged digest e7c7266fe43d02be",
+   "date": "2026-10-19",
+   "verdict": "no match: normalization or smoothness, cotangent and dimension-one facts do not give a surface resolution"
+  },
+  {
+   "tool": "grep",
+   "query": "rational singularity|rational double point",
+   "results": "0 hits; ; ; logged digest 4f53cda18c2baa0c",
+   "date": "2026-10-19",
+   "verdict": "no match: normalization or smoothness, cotangent and dimension-one facts do not give a surface resolution"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-excellent-surface-desingularization",
@@ -78,5 +309,79 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-complete-normal-surface-resolution",
+  "worker": "stage1",
+  "summary": "Kept the statement and split Stacks 0BGN along its degree induction, exposing the completed-cover degree comparison and the rational-singularity inputs; reused normalized refinement, completion descent, local globalization and surface geometry. No Lean written or compiled.",
+  "blueprint": "Technical input to lem-per-artin-gabber-affine-curve proof Step 1, through the pinned potential-dualizing surface construction, ILO XVII 3.4.1; realizes the complete-local resolution input in the parent excellent-surface resolution.",
+  "tool_uses": [
+   {
+    "node": "lem-exc-finite-type-localization-excellent",
+    "why": "Generic commutative algebra or scheme-geometry input for the Stacks 0BGN surface-resolution argument; this perverse unit has no replacement for Excellence is preserved by finite type algebras and localization."
+   },
+   {
+    "node": "lem-exc-quasi-excellent-nagata",
+    "why": "Generic commutative algebra or scheme-geometry input for the Stacks 0BGN surface-resolution argument; this perverse unit has no replacement for Quasi-excellent rings are Nagata."
+   },
+   {
+    "node": "lem-trf-closed-dominant-dimension",
+    "why": "Generic commutative algebra or scheme-geometry input for the Stacks 0BGN surface-resolution argument; this perverse unit has no replacement for Dimension formula for a closed dominant morphism."
+   },
+   {
+    "node": "lem-trf-projective-bundle-proper",
+    "why": "Generic commutative algebra or scheme-geometry input for the Stacks 0BGN surface-resolution argument; this perverse unit has no replacement for Projective-bundle morphisms are proper."
+   },
+   {
+    "node": "lem-weil-pbc-complete-local-domain-finite-over-regular",
+    "why": "Generic commutative algebra or scheme-geometry input for the Stacks 0BGN surface-resolution argument; this perverse unit has no replacement for A Noetherian complete local domain is finite over a regular complete power series subring."
+   },
+   {
+    "node": "lem-weil-pbc-complete-local-nagata",
+    "why": "Generic commutative algebra or scheme-geometry input for the Stacks 0BGN surface-resolution argument; this perverse unit has no replacement for A Noetherian complete local ring is a Nagata ring."
+   },
+   {
+    "node": "lem-weil-pbc-finite-over-complete-local-product",
+    "why": "Generic commutative algebra or scheme-geometry input for the Stacks 0BGN surface-resolution argument; this perverse unit has no replacement for Finite algebras over a complete Noetherian local ring are products of complete local rings."
+   },
+   {
+    "node": "lem-weil-pbc-finite-purely-inseparable-degree-p-intermediate",
+    "why": "Generic commutative algebra or scheme-geometry input for the Stacks 0BGN surface-resolution argument; this perverse unit has no replacement for A nontrivial finite purely inseparable extension has a degree-p intermediate step."
+   },
+   {
+    "node": "lem-weil-pbc-integral-injective-dimension-equal",
+    "why": "Generic commutative algebra or scheme-geometry input for the Stacks 0BGN surface-resolution argument; this perverse unit has no replacement for An injective integral extension preserves Krull dimension."
+   },
+   {
+    "node": "lem-weil-pbc-regular-local-localization",
+    "why": "Generic commutative algebra or scheme-geometry input for the Stacks 0BGN surface-resolution argument; this perverse unit has no replacement for A localization of a regular local ring at a prime is a regular local ring."
+   },
+   {
+    "node": "rem-pc-regular-normal",
+    "why": "Generic commutative algebra or scheme-geometry input for the Stacks 0BGN surface-resolution argument; this perverse unit has no replacement for Regular schemes are normal; the normal decomposition."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-exc-finite-type-localization-excellent",
+  "lem-exc-quasi-excellent-nagata",
+  "lem-trf-closed-dominant-dimension",
+  "lem-trf-projective-bundle-proper",
+  "lem-weil-pbc-complete-local-domain-finite-over-regular",
+  "lem-weil-pbc-complete-local-nagata",
+  "lem-weil-pbc-finite-over-complete-local-product",
+  "lem-weil-pbc-finite-purely-inseparable-degree-p-intermediate",
+  "lem-weil-pbc-integral-injective-dimension-equal",
+  "lem-weil-pbc-regular-local-localization",
+  "rem-pc-regular-normal"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-NA-a63c39f5b",
+  "group": "NA",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NA-a63c39f5b (reviewer sub-agent of L); spot-checked: Read the item and all 9 new nodes in full against Stacks resolve.tex: 0BGN (whole proof), 0B4N, 0BG0, 0B4P, 0AXL, 0B4Q, 0B4U, 0BBV and 0BGE. The item statement is unchanged and matches 0BGN with resolve-definition-resolution. Steps 1-10 follow the 0BGN route. Step 1: strong induction over all complete regular bases of dimension 2. Steps 2-3: the degree-1 base case and the construction of B = A∩L (normal, finite, complete local, dimension 2, degree drops). Steps 4-5: normalization in K, completed-degree bound, then refinement, completion descent and globalization; hypotheses checked against the statements of the existing nodes. Step 6: separable/degree-p dichotomy; [K:M]=p forces M=F and n=p, R has characteristic p. Steps 7-10: rational model (0B4P), Gorenstein blowups (0BBV), propagation (0BG0), RDP resolution (0BGE), globalization. The new nodes are faithful to their tags. The Gorenstein node replaces 'has a dualizing complex' by 'essentially of finite type over a complete local ring' (implies it by 0BFR) and reads 'ω invertible' as 'Gorenstein local rings', which is correct because normal surfaces are CM. The completed-degree node is true: CM over regular gives flat (00R4), so π is locally free of rank d; completion splits into free factors of rank ≤ d; the completions are normal (0C23); the 'Moreover' clause holds by cancellation of properness. No new node restates a clause of the item; no duplicates found by grep over the snapshot DAG; no SGA citation; the item is still unsplit on live. Batch-5: lem-per-complete-local-excellence (closure reaches only trf universal-catenarity/CM algebra), lem-trf-closed-dominant-dimension (dimension formula), lem-trf-finite-domain-fraction-degree (Mathlib leaf) and lem-trf-projective-bundle-proper are generic algebra/geometry. Their closures contain no sk-thm-trace-transport, assumption leaf or sec-poincare-duality node, so I accept all four. The declared tool_uses are accepted as generic."
  }
 }

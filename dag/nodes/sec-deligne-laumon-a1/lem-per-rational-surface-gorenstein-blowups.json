@@ -1,0 +1,95 @@
+{
+ "id": "lem-per-rational-surface-gorenstein-blowups",
+ "kind": "statement",
+ "title": "Rational surface singularities acquire Gorenstein models by point blowups",
+ "statement": "Let $(C,\\mathfrak n)$ be a commutative Noetherian complete local ring [def-weil-pbc-noetherian-ring], [def-weil-pbc-adic-completion]. Let $R$ be a normal Nagata local domain of dimension $2$, essentially of finite type over $C$, meaning a localization of a finitely generated $C$-algebra [def-weil-pbc-normal-ring], [def-weil-pbc-nagata-ring], [def-weil-pbc-krull-dimension-ring], [def-weil-pbc-finite-type-algebra], [def-weil-pbc-module-localization]. Suppose $R$ defines a rational singularity [def-per-rational-surface-singularity]. Then there is a finite sequence $X_n\\to\\cdots\\to X_0=\\operatorname{Spec}R$ of ordinary blowups at singular closed points above the closed point of $\\operatorname{Spec}R$ [def-weil-affine-spectrum], [def-nagata-global-blowup], [def-weil-regular-scheme]. Every $X_i$ is integral and normal. Every local ring of $X_n$ is Gorenstein, meaning it has finite injective dimension as a module over itself. The composite is proper and induces an isomorphism of function fields [def-pc-integral-scheme], [def-weil-proper-morphism], [def-sc-function-field]. Length zero is allowed.",
+ "source": {
+  "document": "literature/stacks-project/resolve.tex",
+  "place": "Tag 0BBV, resolve-lemma-rational-to-gorenstein, specialized using dualizing.tex Tag 0BFR (dualizing-lemma-ubiquity-dualizing), clauses (2),(5). Normal surfaces are Cohen-Macaulay by properties.tex Tag 0B3D, and an invertible dualizing sheaf gives Gorenstein local rings by duality.tex Tag 0AWW (duality-definition-gorenstein)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-normal-ring",
+  "def-weil-pbc-nagata-ring",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-pbc-module-localization",
+  "def-per-rational-surface-singularity",
+  "def-weil-affine-spectrum",
+  "def-nagata-global-blowup",
+  "def-weil-regular-scheme",
+  "def-pc-integral-scheme",
+  "def-weil-proper-morphism",
+  "def-sc-function-field"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A rational normal local surface essentially of finite type over a complete local ring admits point blowups with Gorenstein endpoint",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.IsSmooth fun {R S} [CommRing R] [CommRing S] =>\\n  RingHom.Locally fun {R S} [CommRing R] [CommRing S] => RingHom.IsStandardSmooth\", \"doc\": \"A morphism of schemes is smooth if and only if it is locally standard smooth, meaning that for every point in the domain, there exists an open neighborhood where the morphism is isomorphic to a standa\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmooth f] (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"Let $f: X \\\\to Y$ be a smooth morphism of schemes. For any point $x \\\\in X$, there exist an open neighborhood $V$ of $x$ and an open neighborhood $U$ of $f(x)$ with $f(V) \\\\subseteq U$, such that the rin\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"ℕ → {X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For a natural number $n$ and a morphism $f: X \\\\to Y$ of schemes, the proposition that $f$ is smooth of relative dimension $n$.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {n : ℕ} {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmoothOfRelativeDimension n f]\\n  (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      RingHom.IsStandardSmoothOfRelativeDimension n\\n        (CommRingCat.Hom.hom (Algebraic\", \"doc\": \"For every point $x$ in $X$, there exist open neighborhoods $U$ of $f(x)$ in $Y$ and $V$ of $x$ in $X$ such that $V$ is contained in the preimage of $U$ under $f$, and the induced ring homomorphism on \"}\n  {\"name\": \"WeierstrassCurve.IsGoodReduction\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"(R : Type u_1) →\\n  [inst : CommRing R] →\\n    [inst_1 : IsDomain R] →\\n      [inst_2 : IsDiscreteValuationRing R] →\\n        {K : Type u_2} →\\n          [inst_3 : Field K] →\\n            [inst_4 : Algebra R K] →\\n              [inst_5 : IsFractionRing R K] → (W : WeierstrassCurve K) → [WeierstrassCurve.Is\", \"doc\": \"A property of a Weierstrass curve $ W $ over the fraction field $ K $ of a discrete valuation ring $ R $, asserting that $ W $ has good reduction. This means $ W $ satisfies minimality conditions with\"}\n  {\"name\": \"Algebra.IsSmoothAt.exists_notMem_smooth\", \"module\": \"Mathlib/RingTheory/Smooth/Locus\", \"type\": \"∀ (R : Type u_1) {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A] (p : Ideal A) [inst_4 : p.IsPrime] [Algebra.IsSmoothAt R p],\\n  ∃ f ∉ p, Algebra.Smooth R (Localization.Away f)\", \"doc\": \"For a finitely presented $ R $-algebra $ A $ and a prime ideal $ \\\\mathfrak{p} \\\\subseteq A $ where $ A $ is formally smooth at $ \\\\mathfrak{p} $, there exists an element $ f \\\\in A \\\\setminus \\\\mathfrak{p}\"}\n  {\"name\": \"Algebra.IsSmoothAt.exists_notMem_isStandardSmooth\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothOfFree\", \"type\": \"∀ (R : Type u_1) {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.FinitePresentation R S] (p : Ideal S) [inst_4 : p.IsPrime] [Algebra.IsSmoothAt R p],\\n  ∃ f ∉ p, Algebra.IsStandardSmooth R (Localization.Away f)\", \"doc\": \"Given a finitely presented $ R $-algebra $ S $ and a prime ideal $ \\\\mathfrak{p} $ of $ S $ where $ S $ is formally smooth at $ \\\\mathfrak{p} $, there exists an element $ f \\\\in S $ not belonging to $ \\\\m\"}\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ) {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmoothOfRelativeDimension n f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          RingHom.IsStandardSmoothOfRelativeDimension n\\n            (CommRingCat.Ho\", \"doc\": \"Let $n$ be a natural number and let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is smooth of relative dimension $n$ if and only if for every point $x \\\\in X$, there exist an open neighborho\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: read the returned signatures; normalization, smoothness, cotangent cohomology, number-field completions and birational-map definitions do not state this surface-singularity assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An invertible dualizing sheaf is obtained by blowups of singular closed points of a rational surface singularity",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CommRing.Pic.mk_dual\", \"module\": \"Mathlib.RingTheory.PicardGroup\", \"type\": \": Pic.mk R (Dual R M) = (Pic.mk R M)⁻¹\", \"doc\": \"For any invertible $ R $-module $ M $, the isomorphism class of its dual module $ \\\\mathrm{Dual}_R(M) $ in the Picard group $ \\\\mathrm{Pic}(R) $ is the inverse of the class of $ M $, i.e., $ [\\\\mathrm{Du\"}\n  {\"name\": \"Module.Invertible.instDual\", \"module\": \"Mathlib.RingTheory.PicardGroup\", \"type\": \": Module.Invertible R (Dual R M)\", \"doc\": \"For a commutative semiring $ R $ and an $ R $-module $ M $, if $ M $ is invertible, then its dual module $ \\text{Dual}_R(M) $ consisting of all $ R $-linear maps $ M \\to R $ is also an invertible $ R $-\"}\n  {\"name\": \"CommRing.Pic.inv_eq_dual\", \"module\": \"Mathlib.RingTheory.PicardGroup\", \"type\": \"(M : Pic R) : M⁻¹ = Pic.mk R (Dual R M)\", \"doc\": \"For any element $ M $ in the Picard group $ \\\\mathrm{Pic}(R) $, the inverse of $ M $ under the tensor product operation is equal to the isomorphism class of its dual module, i.e., $ M^{-1} = [\\\\mathrm{D\"}\n  {\"name\": \"Module.Invertible.instLocalizationLocalizedModule\", \"module\": \"Mathlib.RingTheory.PicardGroup\", \"type\": \"(S : Submonoid R) : Module.Invertible (Localization S) (LocalizedModule S M)\", \"doc\": \"For any submonoid $ S $ of a commutative ring $ R $ and an $ R $-module $ M $, the localization of $ M $ at $ S $ forms an invertible module over the localization of $ R $ at $ S $. This instance asse\"}\n  {\"name\": \"AlgebraicGeometry.stalkClosedPointIso_inv\", \"module\": \"Mathlib.AlgebraicGeometry.Stalk\", \"type\": \": (stalkClosedPointIso R).inv = StructureSheaf.toStalk R _\", \"doc\": \"The inverse of the isomorphism between the stalk of the structure sheaf at the closed point of the prime spectrum of a commutative ring $ R $ and $ R $ itself is given by the canonical ring homomorphi\"}\n  {\"name\": \"FractionalIdeal.dual_inv_le\", \"module\": \"Mathlib.RingTheory.DedekindDomain.Different\", \"type\": \": (dual A K I)⁻¹ ≤ I\", \"doc\": \"For a fractional ideal $ I $ over a Dedekind domain $ A $ in its field of fractions $ K $, the inverse of the dual ideal of $ I $ is contained within $ I $.\"}\n  {\"name\": \"instInvertibleReprₛ\", \"module\": \"Mathlib.RingTheory.PicardGroup\", \"type\": \": Module.Invertible R (Finite.reprₛ R M)\", \"doc\": \"For a finitely generated module $ M $ over a commutative semiring $ R $, the quotient representation of $ M $ (constructed as $ R^n $ modulo the kernel congruence of a surjective module map) is an inv\"}\n  {\"name\": \"FractionalIdeal.dual_injective\", \"module\": \"Mathlib.RingTheory.DedekindDomain.Different\", \"type\": \": Function.Injective (dual A K : FractionalIdeal B⁰ L → FractionalIdeal B⁰ L)\", \"doc\": \"The dual operation on fractional ideals of a Dedekind domain is injective, meaning that if two fractional ideals have the same dual, then they are equal.\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: read the returned signatures; normalization, smoothness, cotangent cohomology, number-field completions and birational-map definitions do not state this surface-singularity assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Gorenstein\", \"blowup\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-19",
+   "verdict": "no match: read the returned signatures; normalization, smoothness, cotangent cohomology, number-field completions and birational-map definitions do not state this surface-singularity assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "Gorenstein.{0,30}blow|rational.{0,30}dualizing",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-19",
+   "verdict": "no match: read the returned signatures; normalization, smoothness, cotangent cohomology, number-field completions and birational-map definitions do not state this surface-singularity assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An invertible dualizing sheaf is obtained by blowups of singular closed points of a rational surface singularity",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.XYIdeal'\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"{F : Type u} →\\n  [inst : Field F] →\\n    {W : WeierstrassCurve.Affine F} →\\n      {x y : F} → W.Nonsingular x y → (FractionalIdeal (nonZeroDivisors W.CoordinateRing) W.FunctionField)ˣ\", \"doc\": \"For a nonsingular point $(x, y)$ on an affine Weierstrass curve $W$ over a field $F$, this constructs the unit in the group of invertible fractional ideals of the coordinate ring $W.\\text{CoordinateRin\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  [inst : IrreducibleSpace ↥X] → X.RationalMap Y → (AlgebraicGeometry.Spec X.functionField ⟶ Y)\", \"doc\": \"For irreducible schemes $X$ and $Y$, this function constructs a morphism $\\\\operatorname{Spec}(K(X)) \\\\to Y$ from a rational map $X \\\\dashrightarrow Y$, where $K(X)$ is the function field of $X$. It is d\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.fromFunctionField_ofFunctionField\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} (sX : X ⟶ S) (sY : Y ⟶ S) [inst : AlgebraicGeometry.IsIntegral X]\\n  [inst_1 : AlgebraicGeometry.LocallyOfFiniteType sY] (f : AlgebraicGeometry.Spec X.functionField ⟶ Y)\\n  (h :\\n    CategoryTheory.CategoryStruct.comp f sY =\\n      CategoryTheory.CategoryStruct.comp \", \"doc\": \"Given an integral scheme $X$ and a scheme $Y$ with a morphism $s_Y: Y \\\\to S$ locally of finite type, if a morphism $f: \\\\operatorname{Spec}(K(X)) \\\\to Y$ satisfies the compatibility condition $f \\\\circ s\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.ofFunctionField\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"{X Y S : AlgebraicGeometry.Scheme} →\\n  (sX : X ⟶ S) →\\n    (sY : Y ⟶ S) →\\n      [inst : AlgebraicGeometry.IsIntegral X] →\\n        [AlgebraicGeometry.LocallyOfFiniteType sY] →\\n          (f : AlgebraicGeometry.Spec X.functionField ⟶ Y) →\\n            CategoryTheory.CategoryStruct.comp f sY =\\n           \", \"doc\": \"Given an integral scheme $X$, a scheme $Y$ with a morphism $s_Y:Y\\\\to S$ locally of finite type, and a morphism $f:\\\\operatorname{Spec}(K(X))\\\\to Y$ from the spectrum of $X$'s function field $K(X)$ satis\"}\n  {\"name\": \"WeierstrassCurve.Affine.FunctionField\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"{R : Type r} → [CommRing R] → WeierstrassCurve.Affine R → Type r\", \"doc\": \"The function field of an affine Weierstrass curve over a base ring $ R $ is the fraction ring of its coordinate ring. The coordinate ring is defined as the quotient ring $ R[X, Y] $ modulo the ideal g\"}\n  {\"name\": \"AlgebraicGeometry.instFieldCarrierFunctionField\", \"module\": \"Mathlib/AlgebraicGeometry/FunctionField\", \"type\": \"(X : AlgebraicGeometry.Scheme) → [inst : AlgebraicGeometry.IsIntegral X] → Field ↑X.functionField\", \"doc\": \"For any integral scheme $X$, its function field (defined as the stalk of the structure sheaf $\\\\mathcal{O}_X$ at the generic point of $X$) is a field. This follows from the fact that every nonzero elem\"}\n  {\"name\": \"WeierstrassCurve.exists_isMinimal\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] [inst_1 : IsDomain R] [inst_2 : IsDiscreteValuationRing R] {K : Type u_2}\\n  [inst_3 : Field K] [inst_4 : Algebra R K] [inst_5 : IsFractionRing R K] (W : WeierstrassCurve K),\\n  ∃ C, WeierstrassCurve.IsMinimal R (C • W)\", \"doc\": \"For any Weierstrass curve $ W $ defined over the fraction field $ K $ of a discrete valuation ring $ R $, there exists a variable change $ C $ such that the transformed curve $ C \\\\cdot W $ is a minima\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.fromFunctionField\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  [inst : IrreducibleSpace ↥X] → X.PartialMap Y → (AlgebraicGeometry.Spec X.functionField ⟶ Y)\", \"doc\": \"Given an irreducible scheme $X$ and a partial map $f : X \\to Y$ to a scheme $Y$, this constructs the morphism $\\\\operatorname{Spec}(K(X)) \\to Y$ where $K(X)$ is the function field of $X$. The constructio\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: read the returned signatures; normalization, smoothness, cotangent cohomology, number-field completions and birational-map definitions do not state this surface-singularity assertion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-complete-normal-surface-resolution",
+  "date": "2026-10-19",
+  "group": "NA"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Technical surface-resolution input to dimension-normalized Verdier duality in lem-per-artin-gabber-affine-curve, proof Step 1; via the potential-dualizing construction and ILO XVII 3.4.1. Realizes the Tag 0BBV, resolve-lemma-rational-to-gorenstein, specialized using dualizing.tex Tag 0BFR (dualizing-lemma-ubiquity-dualizing), clauses (2),(5). Normal surfaces are Cohen-Macaulay by properties.tex Tag 0B3D, and an invertible dualizing sheaf gives Gorenstein local rings by duality.tex Tag 0AWW (duality-definition-gorenstein). input in the proof of Stacks 0BGN.",
+   "via": [
+    "lem-per-complete-normal-surface-resolution",
+    "lem-per-excellent-surface-desingularization",
+    "lem-per-surface-resolution-supported-presentation",
+    "lem-per-normal-top-residue-class",
+    "lem-per-normal-pinned-extension",
+    "lem-per-potential-dualizing-uniqueness",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}
