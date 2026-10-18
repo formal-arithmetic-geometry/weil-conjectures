@@ -31,19 +31,20 @@
  ],
  "proof": [
   {
-   "text": "Choose a bounded finite-projective complex $B^\\bullet$ representing $K_1$ by [def-pc-perfect-ring-complex], supported in some $[a,b]$. It also admits a bounded-above finite-free representative: proceeding downwards from degree $b$, choose a finite-projective complement $Q$ making the current top unprocessed term free, and add the contractible two-term complex $Q\\xrightarrow{1}Q$ in that degree and the degree immediately below. Repeat downwards. Each degree is changed at only two consecutive stages, all terms remain finite projective until processed, and the sum of the added two-term complexes is termwise finite and has the direct-sum contracting homotopy. The resulting bounded-above finite-free complex is homotopy equivalent to $B^\\bullet$. Thus $K_1$ is pseudo-coherent by [def-pc-ring-pseudo-coherent-complex].",
+   "text": "Choose a bounded finite-projective representative B of K_1, supported above b. Apply [lem-pc-ring-finite-cone-free-model] to B. Its cone-finiteness hypothesis holds as follows. The cone of a map from a bounded finite-free F to B is bounded above with finite-projective terms. When it is exact above n, descending splitting of the surjections onto cycles, starting above its upper bound, makes its degree-n cycles finite projective. This is the proved library lemma CochainComplex.projective_finite_ker_d_of_exactAt. Its degree-n homology is a quotient of these finite cycles and is therefore finite. The finite-cone free-model theorem gives a bounded-above finite-free complex quasi-isomorphic to B, proving that K_1 is pseudo-coherent by [def-pc-ring-pseudo-coherent-complex].",
    "uses": [
     "def-pc-perfect-ring-complex",
-    "def-pc-ring-pseudo-coherent-complex"
+    "def-pc-ring-pseudo-coherent-complex",
+    "lem-pc-ring-finite-cone-free-model"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 09AW and Tag 0658, lemma-perfect, perfect implies pseudo-coherent; explicit complement construction"
+    "place": "Tags 09AW and 064U; finite-cone construction, with finite-projective cycles by descending splitting (WeilConjectures/CategoryTheory/DerivedCategory/Perfect/FiniteFree.lean)"
    }
   },
   {
-   "text": "Put $A_n=A/I^n$. Quotient maps $A_{n+1}\\to A_n$ are surjective and have square-zero kernel $I^n/I^{n+1}$, since $2n\\geq n+1$. Completeness [def-weil-pbc-adic-completion] identifies $A$ with their inverse limit. The transition-induced derived reduction isomorphisms are precisely the hypothesis of [lem-weil-pbc-pseudocoherent-inverse-ring-reconstruction], and step 1 supplies its pseudo-coherent first term. Apply it to obtain a bounded-above finite-free limit complex $P^\\bullet$ representing $K$, finite-free complexes $P_n^\\bullet$ representing $K_n$, and projection-induced chain isomorphisms $q_n:P^\\bullet\\otimes_A A_n\\simeq P_n^\\bullet$. In particular $K$ is pseudo-coherent and all its canonical derived reductions are isomorphisms.",
+   "text": "Put $A_n=A/I^n$. Quotient maps $A_{n+1}\\to A_n$ are surjective and have square-zero kernel $I^n/I^{n+1}$, since $2n\\geq n+1$. Completeness [def-weil-pbc-adic-completion] identifies $A$ with their inverse limit. The transition-induced derived reduction isomorphisms are precisely the hypothesis of [lem-weil-pbc-pseudocoherent-inverse-ring-reconstruction], and step 1 supplies its pseudo-coherent first term. Apply it to obtain a bounded-above finite-free limit complex $P^\\bullet$ representing $K$, finite-free complexes $P_n^\\bullet$ representing $K_n$, and projection-induced chain isomorphisms $q_n:P^\\bullet\\otimes_A A_n\\simeq P_n^\\bullet$. In particular $K$ is pseudo-coherent and all its canonical derived reductions are isomorphisms. In Lean, a proved private helper projects this generic reconstruction to the bounded-above finite-free model, its marking, and its first reduction isomorphism before the quotient tower is substituted; no witness is chosen in a public data definition.",
    "uses": [
     "lem-weil-pbc-pseudocoherent-inverse-ring-reconstruction",
     "def-weil-pbc-adic-completion"
@@ -55,16 +56,16 @@
    }
   },
   {
-   "text": "Every maximal ideal $\\mathfrak m$ of $A$ contains $I$ by [lem-weil-pbc-adic-complete-jacobson-radical]. Indeed the completeness hypothesis used there is exactly the bijectivity of $A\\to\\varprojlim A/I^n$ in this item. Set $\\kappa=A/\\mathfrak m$, so the coefficient map factors through $A_1$. View module complexes as sheaves on the one-object site with only the identity covering. Finite projectives are flat, because they are direct summands of finite free modules and tensoring a finite free module is a finite sum of the identity exact functor. Thus $P^\\bullet$, $P_1^\\bullet$, and the bounded complex $B^\\bullet$ of step 1 are K-flat by [lem-pc-kflat-closure]. By [lem-pur-derived-change-of-rings], ordinary tensor with $\\kappa$ computes their respective derived scalar extensions. The chain map $q_1$ gives the chain isomorphism\n$$P^\\bullet\\otimes_A\\kappa\\simeq (P^\\bullet\\otimes_A A_1)\\otimes_{A_1}\\kappa\\simeq P_1^\\bullet\\otimes_{A_1}\\kappa,$$\nwhere the first map sends $x\\otimes c$ to $(x\\otimes1)\\otimes c$ and its inverse sends $(x\\otimes u)\\otimes c$ to $x\\otimes uc$. Both $P_1^\\bullet$ and $B^\\bullet$ represent $K_1$, so their derived extensions are isomorphic. Since $B^\\bullet\\otimes_{A_1}\\kappa$ has zero terms outside the same interval $[a,b]$ for every $\\mathfrak m$, $H^i(K\\otimes_A^L\\kappa)=0$ outside that interval, uniformly over all maximal ideals.",
+   "text": "Every maximal ideal m contains I by [lem-weil-pbc-adic-complete-jacobson-radical], so the quotient map A -> A/m factors through A/I. Write P for the bounded-above finite-free model from step 2 and B for the bounded finite-projective model of K_1 from step 1. The complex E obtained by termwise extension of P to A/I represents K_1. Both E and B are bounded above and flat, so [lem-pc-module-bounded-flat-kflat] and [lem-sc-kflat-scalar-extension-derived-iso] identify the homology of their ordinary scalar extensions to A/m. The extension of B has zero terms outside its fixed interval [a,b], so its homology vanishes there. The natural isomorphism for iterated scalar extension identifies the extension of E with the extension of P along A -> A/m. Finally, termwise tensor with the restricted coefficient module A/m is naturally isomorphic to scalar extension followed by restriction; restriction commutes with homology. Since P is bounded above and flat, the proved source-library isomorphism DerivedCategory.QObjTensorSingleFunctorObjIso computes its derived tensor by this termwise tensor complex. Transport through Q(P) ≅ K. This yields a uniform bound [min(a,b),b] for every maximal residue fibre, including the case a>b.",
    "uses": [
     "lem-weil-pbc-adic-complete-jacobson-radical",
-    "lem-pc-kflat-closure",
-    "lem-pur-derived-change-of-rings"
+    "lem-pc-module-bounded-flat-kflat",
+    "lem-sc-kflat-scalar-extension-derived-iso"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 0CQG, lemma-Rlim-perfect-gives-perfect, residue-field argument; Tags 06YT and 06YY for the K-flat computation"
+    "place": "Tag 0CQG, residue-field argument; Tags 064K, 064L and 06Y0 for the module-complex K-flat comparisons"
    }
   },
   {
@@ -91,33 +92,32 @@
    }
   },
   {
-   "text": "Finally let $m\\geq n$. For the strict complexes supplied by [lem-weil-pbc-pseudocoherent-inverse-ring-reconstruction], the composite $P^\\bullet\\to P_m^\\bullet\\to P_n^\\bullet$ is the projection $P^\\bullet\\to P_n^\\bullet$ by the definition of termwise inverse limit. The reduction isomorphism $q_n$ sends $x\\otimes u$ to $u$ times that projection of $x$. Consequently applying the chain transition to $q_m(x\\otimes u)$ gives $q_n(x\\otimes\\bar u)$. Pure tensors generate every term, so this proves the equality of the chain maps, and repeated transitions give the same equality for any $m\\geq n$. The chosen markings represent the supplied maps $K_m\\to K_n$, and the reconstruction identifies $q_n$ with the projection-induced derived comparison, so these equalities are exactly the compatibility with transitions asserted in the item.",
-   "uses": [
-    "lem-weil-pbc-pseudocoherent-inverse-ring-reconstruction"
-   ],
+   "text": "The composite of the first two arrows in the distinguished Roos triangle is zero. Composing this equality with the nth product projection gives p_n = p_(n+1) followed by the restricted transition: expand the Roos endomorphism as identity minus product shift and use the product projection equations. By the unit formula for the adjunction Hom equivalence, the unit followed by restriction of the adjoint transpose of p_n is exactly p_n. Rewriting both sides of the required consecutive-level compatibility by this equality proves the assertion. No strict-model transition comparison or additional reconstruction property is needed for this step.",
+   "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 0CQF, compatible finite-free models and their projections; Tag 09AW, final assertion"
+    "place": "Tag 09AW, final assertion; elementary consequence of the distinguished Roos triangle and the adjunction unit identity"
    }
   }
  ],
  "proof_deps": [
   "def-pc-perfect-ring-complex",
   "def-pc-ring-pseudo-coherent-complex",
-  "def-weil-pbc-adic-completion",
-  "lem-pc-kflat-closure",
-  "lem-pur-derived-change-of-rings",
-  "lem-weil-pbc-adic-complete-jacobson-radical",
-  "lem-weil-pbc-nilpotent-torsion-derived-limit-complete",
+  "lem-pc-ring-finite-cone-free-model",
   "lem-weil-pbc-pseudocoherent-inverse-ring-reconstruction",
+  "def-weil-pbc-adic-completion",
+  "lem-weil-pbc-adic-complete-jacobson-radical",
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-sc-kflat-scalar-extension-derived-iso",
   "lem-weil-pbc-pseudocoherent-maximal-fibre-perfect",
+  "lem-weil-pbc-nilpotent-torsion-derived-limit-complete",
   "def-weil-point-derived-complete-module-complex"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Tag 09AW, expanded through the proof of Tag 0CQG and its pseudo-coherent reconstruction (0CQF), pointwise criterion (068V), and torsion completeness (091W)"
+  "place": "Tag 09AW through 0CQG, 0CQF, 068V and 091W; Lean uses the existing finite-cone free-model theorem for perfect implies pseudo-coherent, module-complex K-flat scalar-extension homology invariance for the fibres, and the Roos triangle directly for compatibility"
  },
  "mathlib_searches": [
   {
@@ -279,10 +279,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-pc-kflat-closure",
-  "lem-pur-derived-change-of-rings"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-14",
   "by": "L",
@@ -316,5 +313,15 @@
   "by": "NJ",
   "date": "2026-10-15",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261018T071216-L-1675709",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
