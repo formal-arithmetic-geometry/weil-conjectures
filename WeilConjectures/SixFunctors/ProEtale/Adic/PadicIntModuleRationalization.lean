@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.CategoryTheory.Monoidal.Mod.FreePresentation
 public import WeilConjectures.SixFunctors.ProEtale.Adic.PadicIntModuleExtendScalarsBaseChange
 public import WeilConjectures.SixFunctors.ProEtale.Adic.RightDerivedLowerStarFilteredColimit
 
@@ -330,6 +331,34 @@ theorem rightAcyclic_lowerStar_toAb_adicSheafExtendScalars_obj {Y : Scheme.{u}} 
   refine rightAcyclic_lowerStar_of_isColimit_discrete f (colimit.isColimit _) fun _ ↦ ?_
   refine rightAcyclic_lowerStar_of_isColimit f (colimit.isColimit _) fun _ ↦ ?_
   exact Functor.rightAcyclic_of_injective ((Mod.forget _).obj I)
+
+/-- `M ↦ ⨁_{b ∈ B} colim (M --ℓ--> M --ℓ--> ⋯)` is right exact. -/
+instance preservesFiniteColimits_rationalizationModel :
+    PreservesFiniteColimits (rationalizationModel l X) := by
+  have : PreservesFiniteColimits (ellMulTower l : Sheaf (ProEt.topology X) Ab.{u + 1} ⥤ _) :=
+    preservesFiniteColimits_of_evaluation _ fun n ↦
+      preservesFiniteColimits_of_natIso (NatIso.ofComponents (fun A ↦ Iso.refl A) (by simp) :
+        𝟭 _ ≅ ellMulTower l ⋙ (evaluation ℕ _).obj n)
+  dsimp only [rationalizationModel]
+  infer_instance
+
+/-- `M ↦ ℚ̄_ℓ ⊗_{ℤ_ℓ} M`, on underlying abelian sheaves, is right exact. -/
+instance preservesFiniteColimits_adicSheafExtendScalars_comp_toAb :
+    PreservesFiniteColimits (adicSheafExtendScalars X l ⋙ AdicSheaf.toAb l X) := by
+  have : PreservesFiniteColimits (weilCoefficientsForgetAb l X) :=
+    PreservesColimitsOfSize.preservesFiniteColimits _
+  dsimp only [AdicSheaf.toAb]
+  infer_instance
+
+/-- **Reduction of the rationalization formula to free modules**: the rationalization comparison
+is an isomorphism as soon as it is one on the free `ℤ_ℓ,X`-modules `ℤ_ℓ,X ⊗ Z`, both sides being
+right exact in `M`. -/
+theorem isIso_rationalizationComparison_of_free
+    (h : ∀ Z : Sheaf (ProEt.topology X) Ab.{u + 1},
+      IsIso ((rationalizationComparison l X).app ((Mod.free (padicIntAbSheaf X l)).obj Z))) :
+    IsIso (rationalizationComparison l X) := by
+  rw [NatTrans.isIso_iff_isIso_app]
+  exact Mod.isIso_app_of_isIso_app_free _ _ h
 
 end Model
 

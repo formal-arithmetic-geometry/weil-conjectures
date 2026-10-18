@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.Mathlib.CategoryTheory.Limits.Constructions.Filtered
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ForgetAbRightDerivedLowerStar
 
 /-!
@@ -15,7 +16,8 @@ For a quasi-compact quasi-separated morphism of schemes `f : X ⟶ Y`, the highe
 direct sums (`AlgebraicGeometry.ProEtale.preservesColimitsOfShape_rightDerived_lowerStar`,
 `AlgebraicGeometry.ProEtale.preservesColimitsOfShape_discrete_rightDerived_lowerStar`). This is
 the complement of the blueprint node `sk-cor-pe-bounded-continuity` (for the constant ring sheaf
-`ℤ`), which is stated here and not proved.
+`ℤ`); only the filtered colimit statement, the case of complexes concentrated in degree `0` of
+the blueprint node `det-pe-bounded-continuity-direct-image`, is stated here and not proved.
 
 We deduce that `f_*` itself commutes with filtered colimits and direct sums
 (`AlgebraicGeometry.ProEtale.preservesColimitsOfShape_lowerStar`,
@@ -38,26 +40,28 @@ open Scheme
 variable {X Y : Scheme.{u}} (f : X ⟶ Y) [QuasiCompact f] [QuasiSeparated f]
 
 /-- **Higher direct images commute with filtered colimits** (blueprint
-`sk-cor-pe-bounded-continuity`, complement, for the ring sheaf `ℤ`): for a quasi-compact
-quasi-separated morphism `f`, each `Rᵠf_*` on abelian sheaves on `X_proét` commutes with filtered
-colimits. Proof sketch: `Rᵠf_* M` is the sheafification of `V ↦ Hᵠ(X ×_Y V, M)`, and for affine
-`V` the scheme `X ×_Y V` is quasi-compact and quasi-separated, so that its cohomology is computed
-by a hypercovering by affine weakly contractible objects, whose sections commute with filtered
+`det-pe-bounded-continuity-direct-image`, sub-node of `sk-cor-pe-bounded-continuity`, in the case
+of complexes concentrated in degree `0` and of the ring sheaf `ℤ`): for a quasi-compact
+quasi-separated morphism `f` and a filtered diagram `(Kᵢ)` of abelian sheaves on `X_proét`, the
+canonical map `colim Rᵠf_* Kᵢ ⟶ Rᵠf_* (colim Kᵢ)` is an isomorphism. Proof sketch:
+`Rᵠf_* M` is the sheafification of `V ↦ Hᵠ(X ×_Y V, M)`, and for affine `V` the scheme
+`X ×_Y V` is quasi-compact and quasi-separated, so that its cohomology is computed by a
+hypercovering by affine weakly contractible objects, whose sections commute with filtered
 colimits. -/
 theorem preservesColimitsOfShape_rightDerived_lowerStar (J : Type) [SmallCategory J]
     [IsFiltered J] (q : ℕ) :
     PreservesColimitsOfShape J (((f)_*[Ab.{u + 1}]).rightDerived q) := by
   sorry
 
-/-- **Higher direct images commute with direct sums** (blueprint
-`sk-cor-pe-bounded-continuity`, complement, for the ring sheaf `ℤ`): for a quasi-compact
+/-- **Higher direct images commute with direct sums**: for a quasi-compact
 quasi-separated morphism `f`, each `Rᵠf_*` on abelian sheaves on `X_proét` commutes with direct
-sums. Proof sketch: a direct sum is the filtered colimit of its finite subsums, which `Rᵠf_*`
-preserves, being additive
+sums: a direct sum is the filtered colimit of its finite subsums, and `Rᵠf_*` preserves
+finite direct sums, being additive, and filtered colimits
 (`AlgebraicGeometry.ProEtale.preservesColimitsOfShape_rightDerived_lowerStar`). -/
 theorem preservesColimitsOfShape_discrete_rightDerived_lowerStar (B : Type) (q : ℕ) :
-    PreservesColimitsOfShape (Discrete B) (((f)_*[Ab.{u + 1}]).rightDerived q) := by
-  sorry
+    PreservesColimitsOfShape (Discrete B) (((f)_*[Ab.{u + 1}]).rightDerived q) :=
+  have := preservesColimitsOfShape_rightDerived_lowerStar f (Finset (Discrete B)) q
+  preservesColimitsOfShape_discrete_of_preservesFiniteCoproducts _
 
 /-- For a quasi-compact quasi-separated morphism `f`, the pushforward `f_*` of abelian sheaves on
 the small pro-étale sites commutes with direct sums. -/
