@@ -1,0 +1,124 @@
+{
+ "id": "def-a1-intersection-structure-sections",
+ "kind": "definition",
+ "title": "Intersection subspaces and inverse-image structure-sheaf sections",
+ "status": "split",
+ "statement": "For a scheme $X$ [def-pc-scheme] and an index type $I$, with opens $U_i\\subseteq X$, let $E=\\{x\\in |X|\\mid \\forall i,\\ x\\in U_i\\}$ with its subspace topology. Define the inclusion $j:E\\hookrightarrow X$, the inverse-image sheaf $\\mathcal O_X|_E=j^{-1}\\mathcal O_X$ [def-weil-pbc-topological-inverse-image], its section ring $\\Gamma(E,\\mathcal O_X|_E)$, and for every open $V\\subseteq X$ containing $E$ the canonical restriction homomorphism $\\Gamma(V,\\mathcal O_X)\\to\\Gamma(E,\\mathcal O_X|_E)$ induced by the inverse-image adjunction unit.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-topological-inverse-image"
+ ],
+ "source": {
+  "document": "literature/stacks-project/more-groupoids.tex",
+  "place": "Equation equation-sections-of-intersection preceding Tag 0APJ: the subspace intersection, inverse-image structure sheaf, global sections, and canonical restriction unit."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "intersection subspace inverse image structure sheaf sections restriction",
+   "results": "No exact existing declaration; generic sheaf pullback only.",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "intersection subspace inverse image structure sheaf sections restriction",
+   "results": "No exact existing declaration; only generic sheaf pullback and scheme sections APIs.",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "TopCat.Sheaf.pullback intersectionSections intersectionRestriction",
+   "results": "No exact project-specific intersection declaration.",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "intersectionSections|intersectionStructureSheaf|intersectionInclusion|intersectionRestriction",
+   "results": "No hits in Mathlib/AlgebraicGeometry.",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "intersectionSections|intersectionStructureSheaf|intersectionInclusion|intersectionRestriction",
+   "results": "No hits in WeilConjectures or shared lean/Sheaf before Q65 module; Q65 module is the recorded theorem-side occurrence.",
+   "date": "2026-10-18",
+   "verdict": "definition is missing as an independently owned node"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-a1-intersection-sections-flat-base-change",
+  "date": "2026-10-18",
+  "group": "Q53"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-a1-affine-hc0",
+   "place": "The equation-sections-of-intersection construction used by the flat base-change proof.",
+   "via": [
+    "lem-a1-intersection-sections-flat-base-change",
+    "lem-a1-ind-quasi-affine-fpqc-effective-descent",
+    "lem-a1-separated-lqf-fpqc-effective-descent",
+    "lem-a1-algebraic-space-fpqc-sheaf",
+    "lem-a1-space-fpqc-separated-valuative-descent",
+    "lem-a1-proetale-local-system-representability",
+    "lem-a1-normal-locally-constant-finite-section",
+    "lem-a1-normal-proetale-monodromy",
+    "lem-a1-smooth-lisse-integral-lattice",
+    "lem-a1-degree-zero-compact-support-sections"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-purity-real-sheaves",
+ "unit": "sk-p-real-rankin",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.IntersectionStructureSections",
+  "declaration": "AlgebraicGeometry.Scheme.intersectionInclusion",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.intersectionInclusion",
+   "AlgebraicGeometry.Scheme.intersectionStructureSheaf",
+   "AlgebraicGeometry.Scheme.intersectionSections",
+   "AlgebraicGeometry.Scheme.intersectionRestriction"
+  ],
+  "statement": "def intersectionInclusion (X : Scheme.{u}) {I : Type v} (U : I → X.Opens) : TopCat.of {x : X // ∀ i : I, x ∈ U i} ⟶ X.toTopCat",
+  "branch": "newtargets-dag",
+  "by": "Q53",
+  "date": "2026-10-18",
+  "existing": true,
+  "note": "Existing landed declarations (Q65, Sheaf.AlgebraicGeometry.IntersectionStructureSections on newtargets-dag): the subspace inclusion, the inverse-image structure sheaf TopCat.Sheaf.pullback along it, its global section ring, and the adjunction-unit restriction. They are exactly this node's four notions. This node now owns them; the colimit node's record lists only intersectionOpenDiagram, intersectionMap and sections_intersection_structure_colimit. Reviewer fix: the delivered separate module IntersectionStructureSectionsData was dropped and the landed module left unchanged, because moving the four definitions from one module to another cannot pass the landing duplicate-name check (import_prune_check, return of head 33d7fc4219)."
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7ff397179",
+  "group": "Q53",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7ff397179",
+  "group": "Q53",
+  "result": "fix",
+  "note": "Mathematics correct against Stacks 0APJ: hypotheses r, Flat(Spec.map r), f, QuasiSeparatedSpace Y, Nonempty I, compact U_i, no directedness. Canonical productMap T-algebra map; bijectivity, pure-tensor formula, naturality and iteration clauses checked on pure tensors and true. Edge cases and universes u/v/w fine; no hollow defs; two documented sorries; record signature verbatim; nt_compile clean on all three modules (5.1/3.9/18.2 s). The head is byte-identical to 33d7fc4219, which the landing duplicate-name check returned: moving the four definitions from IntersectionStructureSections into the new Data module is always refused, because the landing index never drops the old module's names (nt_parallel2.py:141-156). FIX: def-a1-intersection-structure-sections lean set to existing:true on the four landed declarations in Sheaf.AlgebraicGeometry.IntersectionStructureSections, so the Data module is left out; IntersectionStructureSections.lean restored to its landed text; the item module drops only the Data import, statement unchanged, recompiled clean (22.1 s); item lean.note reworded; report gains a Reviewer fix section. The colimit node's delivered lean.note still says the definitions moved to the Data module; a stage-2 fix cannot edit it and the report section supersedes it.; left out new module(s) lean/Sheaf/AlgebraicGeometry/IntersectionStructureSectionsData.lean (--drop-files, or a record fixed to existing: true)"
+ }
+}

@@ -386,5 +386,44 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SmoothPurityReductionTowerNormalized",
+  "declaration": "AlgebraicGeometry.ProEtale.sp_reduction_tower_normalized",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.spIntegralCondensed",
+   "AlgebraicGeometry.ProEtale.spIntegralCondensedComm",
+   "AlgebraicGeometry.ProEtale.spIntegralSectionRing",
+   "AlgebraicGeometry.ProEtale.spIntegralSectionModules",
+   "AlgebraicGeometry.ProEtale.spIntegralSectionHasDerived",
+   "AlgebraicGeometry.ProEtale.spIntegralModuleEquivalence",
+   "AlgebraicGeometry.ProEtale.spIntegralInternalization",
+   "AlgebraicGeometry.ProEtale.spIntegralAbComparison",
+   "AlgebraicGeometry.ProEtale.spIntegralEllProjection",
+   "AlgebraicGeometry.ProEtale.spIntegralReductionScalar",
+   "AlgebraicGeometry.ProEtale.spTowerLocalization",
+   "AlgebraicGeometry.ProEtale.spReductionOrdinaryLevels",
+   "AlgebraicGeometry.ProEtale.spReductionGenerator",
+   "AlgebraicGeometry.ProEtale.spStrictTransitionSection",
+   "AlgebraicGeometry.ProEtale.IsSpReductionTransition",
+   "AlgebraicGeometry.ProEtale.spReductionDerivedEvaluations",
+   "AlgebraicGeometry.ProEtale.IsSpReductionConstructible",
+   "AlgebraicGeometry.ProEtale.SpReductionTower",
+   "AlgebraicGeometry.ProEtale.sp_reduction_tower_normalized"
+  ],
+  "file": "lean/Sheaf/Paper/SmoothPurityReductionTowerNormalized.lean",
+  "statement": "theorem sp_reduction_tower_normalized (D : SpCoefficientTowersAbelian l E T) : Nonempty (SpReductionTower l E T D)",
+  "branch": "newtargets-dag",
+  "by": "Q19",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c5a062d79",
+  "group": "Q19",
+  "result": "pass",
+  "note": "Re-delivery after a 60 s landing timeout of 99f851370127, which had passed review on its mathematics. The only change is two helpers, spReductionGenerator and spStrictTransitionSection; they unfold exactly to the previous transition equation (same quantifiers over M, m<=n, U, c, x; same StrictRingSystem transition access) and add no hypothesis or postponed claim. The node differs only in lean.declarations (+2 names); lean.statement is verbatim in the file; the file's 19 declarations equal lean.declarations; the new names are not duplicated. Clauses re-checked: normalized (IsSpNormalizedTower, all m<=n including m=n, every T, no qcqs); qcqs (CompactSpace and QuasiSeparatedSpace, equivalent to the recorded QuasiSeparated) only in constructible; premise constantModelBoundedConstructible; conclusions finiteTorAmplitude, spNormalizedConstructibleTorTowers, and every Tor interval [a,b] of M as a HasProEtaleTorAmplitude and support interval at every level. The coefficient comparison is the unique witness of an exists-unique in sfb_integral_coefficient_limit, multiplicative in both directions. Dependency lean records match. Edge cases checked: n=0, m=n, empty T, M=0, unbounded M, ramified E. One sorry, no hollow definitions, docstrings with all 8 proof steps. nt_compile --json: exit 0, no diagnostics, 25.8 s of the 60 s limit (previous head 37-53 s). Non-blocking: the second reading was written by the author; a blank line is missing before the theorem docstring."
  }
 }

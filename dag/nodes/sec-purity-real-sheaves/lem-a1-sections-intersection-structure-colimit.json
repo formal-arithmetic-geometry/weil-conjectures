@@ -260,19 +260,15 @@
  "reviewed_lean": {
   "date": "2026-10-18",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-6bcd655dc",
-  "group": "Q65",
+  "reviewer": "NT-stage2-cc-7ff397179",
+  "group": "Q53",
   "result": "fix",
-  "note": "Mathematics and Lean statement passed; per-file compilation reproduced cleanly. Replaced the H11 second-reading placeholder with a complete report in fixes/. Detailed checks are in review.md. No repository mutations performed; concurrent context-clone HEAD movement recorded."
+  "note": "Mathematics correct against Stacks 0APJ: hypotheses r, Flat(Spec.map r), f, QuasiSeparatedSpace Y, Nonempty I, compact U_i, no directedness. Canonical productMap T-algebra map; bijectivity, pure-tensor formula, naturality and iteration clauses checked on pure tensors and true. Edge cases and universes u/v/w fine; no hollow defs; two documented sorries; record signature verbatim; nt_compile clean on all three modules (5.1/3.9/18.2 s). The head is byte-identical to 33d7fc4219, which the landing duplicate-name check returned: moving the four definitions from IntersectionStructureSections into the new Data module is always refused, because the landing index never drops the old module's names (nt_parallel2.py:141-156). FIX: def-a1-intersection-structure-sections lean set to existing:true on the four landed declarations in Sheaf.AlgebraicGeometry.IntersectionStructureSections, so the Data module is left out; IntersectionStructureSections.lean restored to its landed text; the item module drops only the Data import, statement unchanged, recompiled clean (22.1 s); item lean.note reworded; report gains a Reviewer fix section. The colimit node's delivered lean.note still says the definitions moved to the Data module; a stage-2 fix cannot edit it and the report section supersedes it.; left out new module(s) lean/Sheaf/AlgebraicGeometry/IntersectionStructureSectionsData.lean (--drop-files, or a record fixed to existing: true)"
  },
  "lean": {
   "module": "Sheaf.AlgebraicGeometry.IntersectionStructureSections",
   "declaration": "AlgebraicGeometry.Scheme.sections_intersection_structure_colimit",
   "declarations": [
-   "AlgebraicGeometry.Scheme.intersectionInclusion",
-   "AlgebraicGeometry.Scheme.intersectionStructureSheaf",
-   "AlgebraicGeometry.Scheme.intersectionSections",
-   "AlgebraicGeometry.Scheme.intersectionRestriction",
    "AlgebraicGeometry.Scheme.intersectionOpenDiagram",
    "AlgebraicGeometry.Scheme.intersectionMap",
    "AlgebraicGeometry.Scheme.sections_intersection_structure_colimit"
@@ -280,9 +276,9 @@
   "file": "lean/Sheaf/AlgebraicGeometry/IntersectionStructureSections.lean",
   "statement": "theorem sections_intersection_structure_colimit (X : Scheme.{u}) [QuasiSeparatedSpace X] {I : Type v} [Nonempty I] (U : I → X.Opens) (hqc : ∀ i : I, IsCompact (U i : Set X)) (hdir : ∀ i j : I, ∃ k : I, U k ≤ U i ⊓ U j) : (∀ s : intersectionSections X U, ∃ (i : I) (a : X.presheaf.obj (op (U i))), intersectionRestriction X U (U i) (fun x hx ↦ hx i) a = s) ∧ (∀ (i : I) (a a' : X.presheaf.obj (op (U i))), intersectionRestriction X U (U i) (fun x hx ↦ hx i) a = intersectionRestriction X U (U i) (fun x hx ↦ hx i) a' → ∃ (k : I) (hki : U k ≤ U i), X.presheaf.map (homOfLE hki).op a = X.presheaf.map (homOfLE hki).op a') ∧ (∃ ι : intersectionOpenDiagram X U ⟶ (Functor.const _).obj (intersectionSections X U), (∀ V, ι.app V = intersectionRestriction X U V.unop.val (fun x hx ↦ V.unop.property.elim (fun i hi ↦ hi ▸ hx i))) ∧ Nonempty (IsColimit (Cocone.mk (intersectionSections X U) ι)) ∧ Nonempty (IsColimit ((forget₂ CommRingCat RingCat ⋙ forget₂ RingCat AddCommGrpCat).mapCocone (Cocone.mk (intersectionSections X U) ι))) ∧ Nonempty (IsColimit ((CategoryTheory.forget CommRingCat).mapCocone (Cocone.mk (intersectionSections X U) ι)))) ∧ (∀ (Y : Scheme.{u}) (g : X ≅ Y) (V : I → Y.Opens) (hUV : ∀ i : I, U i = g.hom ⁻¹ᵁ V i), ∃! t : intersectionStructureSheaf Y V ⟶ (TopCat.Sheaf.pushforward CommRingCat (intersectionMap g.hom U V (fun i ↦ (hUV i).le))).obj (intersectionStructureSheaf X U), (∀ W : Y.Opens, HEq (((TopCat.Sheaf.pullbackPushforwardAdjunction CommRingCat (intersectionInclusion Y V)).unit.app Y.sheaf).hom.app (op W) ≫ t.hom.app (op ((Opens.map (intersectionInclusion Y V)).obj W))) (g.hom.app W ≫ ((TopCat.Sheaf.pullbackPushforwardAdjunction CommRingCat (intersectionInclusion X U)).unit.app X.sheaf).hom.app (op (g.hom ⁻¹ᵁ W)))) ∧ (∀ i : I, intersectionRestriction Y V (V i) (fun y hy ↦ hy i) ≫ t.hom.app (op ⊤) ≫ (intersectionStructureSheaf X U).obj.map (homOfLE (fun _ _ ↦ trivial)).op = g.hom.appLE (V i) (U i) (hUV i).le ≫ intersectionRestriction X U (U i) (fun x hx ↦ hx i)))",
   "branch": "newtargets-dag",
-  "by": "Q65",
+  "by": "Q53",
   "date": "2026-10-18",
   "existing": false,
-  "note": "Canonical subspace and inverse-image-unit helpers are concrete definitions owned by this node. The final clause characterizes the induced sheaf transport on every open by the adjunction-unit equation, and states its restriction square. The colimit is expressed by its universal property in rings, abelian groups and sets; distinct indicated opens give a small index category without restricting the original index universe."
+  "note": "Lean-only ownership repair for returned H1: the four concrete definitions intersectionInclusion, intersectionStructureSheaf, intersectionSections, and intersectionRestriction moved to Sheaf.AlgebraicGeometry.IntersectionStructureSectionsData, owned by def-a1-intersection-structure-sections and publicly imported by this module. This node owns intersectionOpenDiagram, intersectionMap, and sections_intersection_structure_colimit; the theorem is unchanged. The previous record was unusable because it still listed definitions moved to the independently owned data module."
  }
 }

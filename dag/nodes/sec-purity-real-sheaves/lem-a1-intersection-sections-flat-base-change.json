@@ -14,7 +14,8 @@
   "def-weil-quasi-separated-morphism",
   "def-pc-fibre-product",
   "lem-weil-pbc-algebra-tensor-pushout-universal-property",
-  "def-weil-pbc-topological-inverse-image"
+  "def-weil-pbc-topological-inverse-image",
+  "def-a1-intersection-structure-sections"
  ],
  "proof": [
   {
@@ -172,5 +173,48 @@
   "group": "NS",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NS-50474a8b9 (reviewer sub-agent of L); spot-checked: I read Stacks more-groupoids.tex: equation-sections-of-intersection (it holds for any sheaf of sets, proved through spectral spaces) and lemma-affine-base-change 0APJ with its two-sentence proof via coherent 02KH. The item's hypotheses match the source one by one (Y quasi-separated, R->T flat, nonempty family of quasi-compact opens, inverse-image sheaves, same projection g:Y_T->Y), so nothing is weakened. Step 1 is elementary and correct; g is affine, so each g^-1(U_i) is quasi-compact. Step 2 is correct: Y_T is quasi-separated because it is affine over the quasi-separated Y. Step 4 (naturality, iterated base change) is elementary from the explicit formula plus pushout uniqueness. The new node is the Stacks equation specialised to O_X: strictly smaller than the item, not elementary, not a restated clause. It has no duplicate; the nearest nodes are pbc 0A30/0A32/0A33 and sc filtered-colimit sections. Tested: E empty; singleton family; X=A^1_k with E the generic point gives k(x), and base change to k[t] gives k(x)[t]=k(x) tensor_k k[t]. Repairs: (1) C4: step 3 needs Gamma(E) to be the R-module colimit, but it cited lem-weil-pbc-filtered-colimit-algebras-elementwise, which gives only that every element comes from some stage, not the kernel condition. The new node now states (a) every section on E comes from some stage and (b) two sections that agree on E agree on some smaller U_k, as Stacks gives for sheaves of sets. Step 3 is rewritten to derive the R-module colimit from (a) and (b), write out the compatibility of the stage maps with restriction, and identify the colimit map with c tensor t -> g#(c)t. The unused algebra leaf is removed from uses, proof_deps and tool_uses. (2) B3: added def-weil-pbc-topological-inverse-image to both nodes. Every out-of-unit dependency is a Mathlib leaf; the remaining tool_uses are accepted and none is required. No SGA is cited. Parent note: lem-a1-ind-quasi-affine-fpqc-effective-descent relies on naturality for restriction to an open L, which the explicit formula gives. Corrected files are in fixes/dag/nodes/sec-purity-real-sheaves/ and the full review is in review.md.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.IntersectionSectionsFlatBaseChange",
+  "declaration": "AlgebraicGeometry.flat_affine_intersection_sections_base_change",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.intersectionSubsetMap",
+   "AlgebraicGeometry.Scheme.intersectionSheafMap",
+   "AlgebraicGeometry.Scheme.intersectionSectionsMap",
+   "AlgebraicGeometry.Scheme.intersectionScalars",
+   "AlgebraicGeometry.Scheme.intersectionAlgebraSections",
+   "AlgebraicGeometry.Scheme.intersectionScalars_map",
+   "AlgebraicGeometry.Scheme.intersectionScalarTensor",
+   "AlgebraicGeometry.Scheme.intersectionTensorSource",
+   "AlgebraicGeometry.Scheme.intersectionTensorMap",
+   "AlgebraicGeometry.Scheme.intersectionScalarTensorPure",
+   "AlgebraicGeometry.Scheme.intersectionScalarTensorMap",
+   "AlgebraicGeometry.Scheme.intersectionTensorAssociator",
+   "AlgebraicGeometry.Scheme.intersectionBaseChangeMap",
+   "AlgebraicGeometry.Scheme.intersectionOverIsoMap",
+   "AlgebraicGeometry.Scheme.intersectionBaseChangeIsoMap",
+   "AlgebraicGeometry.Scheme.intersectionBaseChangeIsoSections",
+   "AlgebraicGeometry.Scheme.intersectionIteratedProjection",
+   "AlgebraicGeometry.Scheme.intersectionIteratedSections",
+   "AlgebraicGeometry.Scheme.intersectionBaseChangeNaturality",
+   "AlgebraicGeometry.Scheme.intersectionBaseChangeIteration",
+   "AlgebraicGeometry.flat_affine_intersection_sections_base_change"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/IntersectionSectionsFlatBaseChange.lean",
+  "statement": "theorem flat_affine_intersection_sections_base_change {R T : CommRingCat.{u}} (r : R ⟶ T) {Y : Scheme.{u}} (f : Y ⟶ Spec R) [QuasiSeparatedSpace Y] [Flat (Spec.map r)] {I : Type v} (U : I → Y.Opens) (hI : Nonempty I) (hqc : ∀ i, IsCompact (U i : Set Y)) : Function.Bijective (Scheme.intersectionBaseChangeMap r f U) ∧ (∀ (c : Scheme.intersectionAlgebraSections f U) (t : T), Scheme.intersectionBaseChangeMap r f U (Scheme.intersectionScalarTensorPure r (Scheme.intersectionAlgebraSections f U) c t) = Scheme.intersectionSectionsMap (pullback.fst f (Spec.map r)) U (fun i ↦ pullback.fst f (Spec.map r) ⁻¹ᵁ U i) (fun _ hx ↦ hx) c * Scheme.intersectionScalars (pullback.snd f (Spec.map r)) (fun i ↦ pullback.fst f (Spec.map r) ⁻¹ᵁ U i) t) ∧ Scheme.intersectionBaseChangeNaturality.{u, v, w} r f U ∧ Scheme.intersectionBaseChangeIteration r f U",
+  "branch": "newtargets-dag",
+  "by": "Q53",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "The four intersection structure definitions are the existing landed declarations of Sheaf.AlgebraicGeometry.IntersectionStructureSections, owned by the new definition node def-a1-intersection-structure-sections (existing: true) and imported from that module. The colimit theorem in the same module is a proof dependency only. Canonical tensor comparison, bijectivity, pure-tensor formula, naturality and iterated compatibility are unchanged. Reviewer fix: dropped the import of the separate data module, which was not landed.",
+  "fixed_by": "NT-stage2-cc-7ff397179"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7ff397179",
+  "group": "Q53",
+  "result": "fix",
+  "note": "Mathematics correct against Stacks 0APJ: hypotheses r, Flat(Spec.map r), f, QuasiSeparatedSpace Y, Nonempty I, compact U_i, no directedness. Canonical productMap T-algebra map; bijectivity, pure-tensor formula, naturality and iteration clauses checked on pure tensors and true. Edge cases and universes u/v/w fine; no hollow defs; two documented sorries; record signature verbatim; nt_compile clean on all three modules (5.1/3.9/18.2 s). The head is byte-identical to 33d7fc4219, which the landing duplicate-name check returned: moving the four definitions from IntersectionStructureSections into the new Data module is always refused, because the landing index never drops the old module's names (nt_parallel2.py:141-156). FIX: def-a1-intersection-structure-sections lean set to existing:true on the four landed declarations in Sheaf.AlgebraicGeometry.IntersectionStructureSections, so the Data module is left out; IntersectionStructureSections.lean restored to its landed text; the item module drops only the Data import, statement unchanged, recompiled clean (22.1 s); item lean.note reworded; report gains a Reviewer fix section. The colimit node's delivered lean.note still says the definitions moved to the Data module; a stage-2 fix cannot edit it and the report section supersedes it.; left out new module(s) lean/Sheaf/AlgebraicGeometry/IntersectionStructureSectionsData.lean (--drop-files, or a record fixed to existing: true)"
  }
 }
