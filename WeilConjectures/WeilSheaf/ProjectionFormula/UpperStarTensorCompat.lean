@@ -181,6 +181,7 @@ lemma adicUpperStarExchange_μ_naturality (j : T₁ ⟶ T₂) (a : T₁ ≅ T₁
 
 /-- **The comparison `j^*(P ⊗ M) ≅ j^* P ⊗ j^* M` is compatible with the exchange
 isomorphisms** `j^* ⋙ (a⁻¹)_* ≅ (b⁻¹)_* ⋙ j^*` of `ℓ`-adic sheaves. -/
+@[reassoc]
 lemma adicUpperStarTensorLeftIso_exchange (j : T₁ ⟶ T₂) (a : T₁ ≅ T₁) (b : T₂ ≅ T₂)
     (c : a.hom ≫ j = j ≫ b.hom) (P M : AdicSheaf l T₂) :
     (a.inv)_*ᵃ[l].map ((adicUpperStarTensorLeftIso l j M).hom.app P) ≫
@@ -200,5 +201,45 @@ lemma adicUpperStarTensorLeftIso_exchange (j : T₁ ⟶ T₂) (a : T₁ ≅ T₁
   rw [adicUpperStar_lowerStar_map_tensorπ_comp, adicUpperStarExchange_hom_app_hom j a b c
     (P : AdicSheaf l T₂), adicUpperStarExchange_hom_app_hom j a b c (M : AdicSheaf l T₂)]
   rfl
+
+/-- The comparison `g^*(P ⊗_{ℚ̄_ℓ} M) ≅ g^*P ⊗_{ℚ̄_ℓ} g^*M` is natural in `M`. -/
+@[reassoc]
+lemma adicUpperStar_map_tensorLeftMap_app_tensorLeftIso_hom {Y Z : Scheme.{u}} (g : Z ⟶ Y)
+    {M M' : AdicSheaf l Y} (f : M ⟶ M') (P : AdicSheaf l Y) :
+    (g)^*ᵃ[l].map ((Mod.tensorLeftMap f).app P) ≫ (adicUpperStarTensorLeftIso l g M').hom.app P =
+      (adicUpperStarTensorLeftIso l g M).hom.app P ≫
+        (Mod.tensorLeftMap ((g)^*ᵃ[l].map f)).app ((g)^*ᵃ[l].obj P) := by
+  have : PreservesColimitsOfShape WalkingParallelPair
+      (Mod.mapModComap (G := (g)^*[WeilCoefficients.{u} l]) (adicUpperStarRingHom l g)) :=
+    inferInstanceAs (PreservesColimitsOfShape WalkingParallelPair (g)^*ᵃ[l])
+  exact Mod.map_tensorLeftMap_app_tensorLeftCompMapModComapIso_hom_app (adicUpperStarRingHom l g)
+    (fun _ _ ↦ Adjunction.μ_comp_map_braiding (upperStarLowerStarAdjunction _ g) _ _) f P
+
+/-- **The comparison `j^*(P ⊗ M) ≅ j^* P ⊗ j^* M` is compatible with the structure morphisms of
+tensor products**: given structure morphisms `sM : (b⁻¹)_* M ⟶ M` and `sP : (b⁻¹)_* P ⟶ P`, it
+intertwines the structure morphism of `P ⊗ M` transported along the exchange isomorphism with the
+structure morphism of the tensor product of the transported structure morphisms. -/
+lemma adicUpperStarTensorLeftIso_tensorStr_comm (j : T₁ ⟶ T₂) (a : T₁ ≅ T₁) (b : T₂ ≅ T₂)
+    (c : a.hom ≫ j = j ≫ b.hom) (P M : AdicSheaf l T₂) (sM : (b.inv)_*ᵃ[l].obj M ⟶ M)
+    (sP : (b.inv)_*ᵃ[l].obj P ⟶ P) :
+    (a.inv)_*ᵃ[l].map ((adicUpperStarTensorLeftIso l j M).hom.app P) ≫
+        (adicLowerStarTensorLeftIso l a.inv ((j)^*ᵃ[l].obj M)).hom.app ((j)^*ᵃ[l].obj P) ≫
+        (Mod.tensorLeftMap ((adicUpperStarExchange l j a b c).hom.app M ≫
+          (j)^*ᵃ[l].map sM)).app _ ≫
+        (Mod.tensorLeft _).map ((adicUpperStarExchange l j a b c).hom.app P ≫
+          (j)^*ᵃ[l].map sP) =
+      (adicUpperStarExchange l j a b c).hom.app ((Mod.tensorLeft M).obj P : AdicSheaf l T₂) ≫
+        (j)^*ᵃ[l].map ((adicLowerStarTensorLeftIso l b.inv M).hom.app P ≫
+          (Mod.tensorLeftMap sM).app _ ≫ (Mod.tensorLeft M).map sP) ≫
+        (adicUpperStarTensorLeftIso l j M).hom.app P := by
+  have n₁ := ((Mod.tensorLeftMap ((j)^*ᵃ[l].map sM)).naturality
+    ((adicUpperStarExchange l j a b c).hom.app P)).symm
+  have n₂ := (adicUpperStarTensorLeftIso l j M).hom.naturality sP
+  rw [Mod.tensorLeftMap_comp, NatTrans.comp_app, Functor.map_comp, Functor.map_comp,
+    Functor.map_comp]
+  simp only [Category.assoc]
+  rw [reassoc_of% n₁, adicUpperStarTensorLeftIso_exchange_assoc j a b c P M]
+  simp only [Functor.comp_map] at n₂
+  rw [← adicUpperStar_map_tensorLeftMap_app_tensorLeftIso_hom_assoc j sM, ← n₂]
 
 end AlgebraicGeometry.ProEtale
