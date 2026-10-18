@@ -19,33 +19,9 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.AlgebraicGeometry.Limits
-import Sheaf.AlgebraicGeometry.Morphisms.ProjectiveBaseChange
-import Sheaf.AlgebraicGeometry.ComponentIntersectionsFinite
-import WeilConjectures.Mathlib.AlgebraicGeometry.Normalization
-import WeilConjectures.AlgebraicGeometry.Regular
-import Sheaf.AlgebraicGeometry.ZeroDimIntegralPoint
-import Sheaf.AlgebraicGeometry.FinitePushforwardFiniteType
-import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
-import Sheaf.AlgebraicGeometry.CoherentKernelCokernelLocallyNoetherian
-import Sheaf.AlgebraicGeometry.FiniteTypeModuleSupportClosed
-import Sheaf.AlgebraicGeometry.Curve.DenseOpenFiniteComplement
-import WeilConjectures.AlgebraicGeometry.Curve
-import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
-import Sheaf.AlgebraicGeometry.FpqcClosedImmersionDescent
-import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FlatDescent
-import Sheaf.AlgebraicGeometry.Morphisms.AffineLimitSmoothStage
-import Sheaf.AlgebraicGeometry.DimensionAtPointFieldExtension
-import Sheaf.AlgebraicGeometry.FiniteTypeModuleSupportPullback
-import Sheaf.AlgebraicGeometry.DimensionPreservedFieldExtension
-import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
-import Sheaf.AlgebraicGeometry.FiniteOverProjective
-import Sheaf.AlgebraicGeometry.ProjectiveGenericallyFinite
-import Sheaf.AlgebraicGeometry.SpreadFiniteAlgebra
-import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
-import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
-import WeilConjectures.AlgebraicGeometry.CoherentKernelCokernelLocallyNoetherian
-import WeilConjectures.AlgebraicGeometry.FiniteTypeModuleSupportClosed
-import WeilConjectures.AlgebraicGeometry.FiniteTypeModuleSupportPullback
+import WeilConjectures.AlgebraicGeometry.Curve.GenericModel
+import WeilConjectures.AlgebraicGeometry.FieldBaseChangeDimension
+import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 
 /-!
 # A generic curve model with finite comparison boundary
@@ -280,6 +256,128 @@ theorem exists_finite_generic_curve_model
               pullback.snd f (p ≫ U.ι)) ∧
             ∃ V : (pullback f (p ≫ U.ι)).nilradical.subscheme.Opens,
               (∀ x, x ∈ V ↔ x ∉ Set.range d) ∧ IsIso (pullback.snd ν V.ι) := by
-  sorry
+  classical
+  have hf : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S),
+      topologicalKrullDim (pullback f s : Scheme.{u}) ≤ 1 := by
+    intro Ω _ _ s
+    obtain ⟨⟨y, t⟩, rfl⟩ := (Scheme.SpecToEquivOfField Ω S).symm.surjective s
+    change topologicalKrullDim (pullback f (Spec.map t ≫ S.fromSpecResidueField y) : Scheme) ≤ 1
+    have hfield (K : Type u) [Field K] (q : Spec (.of K) ⟶ Spec (.of (S.residueField y))) :
+        topologicalKrullDim (pullback f (q ≫ S.fromSpecResidueField y) : Scheme.{u}) =
+          topologicalKrullDim (pullback f (S.fromSpecResidueField y) : Scheme.{u}) := by
+      calc
+        _ = topologicalKrullDim (pullback (pullback.snd f (S.fromSpecResidueField y)) q :
+          Scheme.{u}) := by
+            let e := pullbackLeftPullbackSndIso f (S.fromSpecResidueField y) q
+            exact (IsHomeomorph.topologicalKrullDim_eq _ e.hom.homeomorph.isHomeomorph).symm
+        _ = _ := topologicalKrullDim_pullback_eq_of_field
+          (pullback.snd f (S.fromSpecResidueField y)) q
+    rw [hfield]
+    simpa only [hfield] using h_dim y
+  obtain ⟨m, _, i, _, hi⟩ := IsHProjective.exists_isClosedImmersion (f := f)
+  obtain ⟨U, hU, S', hS', p, hp, hps, T, t, ht, hts, hT, ι, hι, Y, ν, hν, hνs,
+    D, d, hd, hD, hV, hY⟩ :=
+    exists_isFinite_sigmaDesc_genericCurveModel (S ↘ Spec (.of k)) f i hi hf
+  let := hS'
+  let := hp
+  let := hps
+  let := ht
+  let := hts
+  let := hT
+  let := hι
+  let := hν
+  let := hνs
+  let := hd
+  let h := (IsPullback.of_hasPullback (f ∣_ U) p).flip.paste_vert
+    (isPullback_morphismRestrict f U)
+  let e₀ := h.flip.isoPullback
+  let a := t ≫ e₀.hom
+  let b := a.liftNilradical
+  have hb : b ≫ (pullback f (p ≫ U.ι)).nilradical.subschemeι = a := by
+    exact Scheme.Hom.liftNilradical_subschemeι a
+  have : IsClosedImmersion a := by dsimp [a]; infer_instance
+  have : Surjective a := by dsimp [a]; infer_instance
+  have : IsClosedImmersion b := by
+    have : IsClosedImmersion (b ≫ (pullback f (p ≫ U.ι)).nilradical.subschemeι) :=
+      hb.symm ▸ inferInstance
+    exact IsClosedImmersion.of_comp_isClosedImmersion b
+      (pullback f (p ≫ U.ι)).nilradical.subschemeι
+  have : Surjective b := by
+    constructor
+    intro y
+    obtain ⟨x, hx⟩ := a.surjective ((pullback f (p ≫ U.ι)).nilradical.subschemeι y)
+    refine ⟨x, ?_⟩
+    apply (pullback f (p ≫ U.ι)).nilradical.subschemeι.isClosedEmbedding.injective
+    change (b ≫ (pullback f (p ≫ U.ι)).nilradical.subschemeι) x = _
+    simpa only [hb] using hx
+  have : IsIso b := isIso_of_isClosedImmersion_of_surjective b
+  let e := asIso b
+  have he : e.hom ≫ (pullback f (p ≫ U.ι)).nilradical.subschemeι ≫
+      pullback.snd f (p ≫ U.ι) = t ≫ pullback.snd (f ∣_ U) p := by
+    change b ≫ _ ≫ _ = _
+    rw [← Category.assoc, hb]
+    dsimp [a, e₀, h]
+    simp
+  let := Fintype.ofFinite ι
+  let j := (Fintype.equivFin ι).symm
+  let Y' := Y ∘ j
+  let c := Sigma.reindex j Y
+  let ν' := c.hom ≫ ν ≫ e.hom
+  let d' := d ≫ e.hom
+  let g (i : Fin (Fintype.card ι)) := Sigma.ι Y (j i) ≫ ν ≫ t ≫
+    pullback.snd (f ∣_ U) p
+  refine ⟨U, ?_, S', p, hS', hp, hps, Fintype.card ι, Y', g, ν',
+    inferInstance, inferInstance, ?_, ?_, D, d', inferInstance, ?_, ?_⟩
+  · by_contra hne
+    apply hU
+    apply SetLike.coe_injective
+    exact Set.eq_empty_iff_forall_notMem.mpr fun x hx ↦ hne ⟨⟨x, hx⟩⟩
+  · intro i
+    rcases hY (j i) with ⟨⟨m, hm, z, hz, hzg⟩, hs⟩ | hfin
+    · left
+      refine ⟨hs, ?_⟩
+      let := hm
+      let := hz
+      have : IsHProjective (g i) := ⟨⟨m, hm, z, hz, hzg⟩⟩
+      exact IsHProjective.isProjective (g i)
+    · exact Or.inr hfin
+  · apply Sigma.hom_ext
+    intro i
+    dsimp [g, ν', Y', c]
+    simp only [Sigma.ι_desc]
+    rw [Category.assoc, Category.assoc, he]
+    simp only [Sigma.ι_reindex_hom_assoc]
+  · dsimp [d']
+    simpa only [Category.assoc, he] using hD
+  · let W : T.Opens := ⟨(Set.range d)ᶜ, d.isClosedEmbedding.isClosed_range.isOpen_compl⟩
+    let V := e.inv ⁻¹ᵁ W
+    have hpre : e.hom ⁻¹ᵁ V = W := by
+      simp [V, ← Scheme.Hom.comp_preimage]
+    refine ⟨V, ?_, ?_⟩
+    · intro x
+      change e.inv x ∉ Set.range d ↔ x ∉ Set.range d'
+      rw [Set.mem_range, Set.mem_range]
+      constructor
+      · rintro h ⟨y, hy⟩
+        apply h
+        refine ⟨y, ?_⟩
+        rw [← hy]
+        change d y = (d ≫ e.hom ≫ e.inv) y
+        simp
+      · rintro h ⟨y, hy⟩
+        apply h
+        refine ⟨y, ?_⟩
+        change (d ≫ e.hom) y = x
+        rw [Scheme.Hom.comp_apply, hy]
+        change (e.inv ≫ e.hom) x = x
+        simp
+    · have : IsIso (ν ∣_ W) := hV
+      have : IsIso (ν ∣_ (e.hom ⁻¹ᵁ V)) := hpre.symm ▸ inferInstance
+      have : IsIso (ν' ∣_ V) := by
+        dsimp [ν']
+        rw [morphismRestrict_comp, morphismRestrict_comp]
+        infer_instance
+      rw [← pullbackRestrictIsoRestrict_hom_morphismRestrict ν' V]
+      infer_instance
 
 end AlgebraicGeometry
