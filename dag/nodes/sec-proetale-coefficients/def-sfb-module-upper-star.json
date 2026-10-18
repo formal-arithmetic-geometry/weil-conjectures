@@ -431,5 +431,29 @@
     }
    ]
   }
+ },
+ "lean": {
+  "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.upperStar",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.upperStar",
+   "AlgebraicGeometry.ProEtale.CondensedRing.upperStar_obj",
+   "AlgebraicGeometry.ProEtale.CondensedRing.upperStar_comp_forget",
+   "AlgebraicGeometry.ProEtale.CondensedRing.upperStar_additive"
+  ],
+  "statement": "noncomputable def upperStar :\n    Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y) ⥤\n      Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)",
+  "branch": "slopmaster2",
+  "by": "N3",
+  "date": "2026-10-18",
+  "existing": true,
+  "note": "Exact existing construction in the published pro-etale framework: upperStar is (f)^*[Ab.{u + 1}].mapMod _ followed by Mod.extendScalars (condensedPullbackHom Λ f). Its explicit section parameters are an arbitrary condensed abelian sheaf Λ with MonObj Λ and IsCommMonObj Λ, schemes X,Y, and f : X ⟶ Y. upperStar_obj and the concrete coequalizer underlying Mod.extendScalarsObj give the stated relative tensor formula; upperStar_additive supplies the final clause. Uses the actual coefficient comparison, not an arbitrary map or an inverse-based replacement. The slopmaster2 branch label denotes the published WeilConjectures source root, including the side-overlay framework documented in coord/pefw-upstream-framework.md. No duplicate module is introduced."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-812a23009",
+  "group": "N3",
+  "result": "pass",
+  "note": "Existing binding to AlgebraicGeometry.ProEtale.CondensedRing.upperStar (ModuleObject/UpperLowerStar/Defs.lean:136-139, identical to the live published file). Body is (f)^*[Ab].mapMod _ then Mod.extendScalars (condensedPullbackHom Λ f), which matches the node: transport along strong monoidal f^*, then extension along the canonical alpha_f. Lambda is any condensed ring with MonObj and IsCommMonObj, f any scheme morphism, universes u/u+1, no extra hypotheses. upperStar_obj gives the relative tensor formula and the upperStar_additive instance gives additivity. lean.statement is verbatim; the node copy changes only lean. Dependency records for coefficient rings, alpha_f, f^* and its monoidal structure, mapMod, Mod and extendScalars were checked. Probe compile through nt_compile --json: all declarations resolve, axioms only propext/Classical.choice/Quot.sound. Edge cases (empty schemes, zero ring, identity f) are covered. Report sections are present. No findings."
  }
 }

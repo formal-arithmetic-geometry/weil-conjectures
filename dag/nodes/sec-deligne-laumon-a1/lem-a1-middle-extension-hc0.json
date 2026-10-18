@@ -297,5 +297,27 @@
   "group": "NI",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NI-dfc785a18 (reviewer sub-agent of L); spot-checked: PASS: I read the whole delivery: the item, the report, the full statement of every cited node and the sources. The delivery adds no new nodes and does not change the statement, which is true. I tested it on F=0, A^1 with F constant, G_m with a Kummer sheaf, and j_* of a Kummer sheaf on A^1. Steps 1-4 hold. Base change (lem-pod-separated-finite-type-base-change, lem-sbc-smooth-relative-dimension-permanence(1), lem-sbc-smooth-fixed-dimension-over-field) makes C a connected curve of dimension 1 in the sense of def-sc-curves. lem-sc-smooth-connected-curve-local-rings(1) gives integral and Noetherian. Openness of C->C_0 (lem-sc-scheme-over-field-universally-open) gives U dense and connected. The Noetherian and quasi-compact chain gives the hypotheses of cor-galois(2). lem-sc-proper-affine-finite shows C is not proper, and reducedness then rules out Z=C under def-weil-pbc-closed-subset-proper-over-base(1). Steps 5-7 hold. lem-a1-constructible-degree-zero-proper-support supplies injective alpha, a proper Z and compatibility with open restriction. Faithfulness of the fibre functor in cor-galois-lisse-representations(2) at a point of U minus Z gives t=0, and restriction from C to U is injective on sections of ordinary j_*F, so c=0. This follows the blueprint sentence of lem-fd-stalk-at-origin and Milne LEC Remark 29.7, p. 166, which I checked in the PDF. No cycles. Duplicates: lem-a1-affine-hc0 is a different statement. lem-a1-middle-extension-endpoints (imported) contains this as one clause, but the item predates this delivery; when that node is split it should cite this item. I accept all declared tool_uses as generic tools. Batch-5 flag: cor-galois-lisse-representations is the general lisse-sheaf to pi_1-representation equivalence (Stacks 0DV5, Weil II 1.1.9) in unit sk-lem-finite. Neither nt-assume-poincare-duality nor nt-assume-trace-formula gives it, and its transitive closure has no Poincare-duality-theorem, trace-formula or nt-* node. So it is genuinely outside the assumptions and allowed. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.MiddleExtensionHcZero",
+  "declaration": "WeilConjectures.subsingleton_adicMiddleExtension_hcZero",
+  "declarations": [
+   "WeilConjectures.middleExtensionCurve_geometricStructureIsSeparated",
+   "WeilConjectures.subsingleton_adicMiddleExtension_hcZero"
+  ],
+  "file": "lean/Sheaf/Paper/MiddleExtensionHcZero.lean",
+  "statement": "theorem subsingleton_adicMiddleExtension_hcZero (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p) (Ω : Type (u + 1)) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω] (c : MiddleExtensionCurve D) [IsAffine c.C.left] [SmoothOfRelativeDimension 1 c.C.hom] [GeometricallyConnected c.C.hom] (F : adicMiddleExtensionLisse l Ω c hl) (theta : (sfCommonStageWeilFrobeniusPullback D l hl c.U Ω).obj (adicMiddleExtensionInput l Ω c hl F) ≅ adicMiddleExtensionInput l Ω c hl F) (compactification : Compactification (D.geometricFiber c.C).hom) : Subsingleton (adicCompactCohomology D l hl (D.geometricFiber c.C).left Ω compactification ((sfCommonStageWeilForget D l hl c.C Ω).obj (adicMiddleExtensionWeil l Ω c hl F theta)) 0)",
+  "branch": "newtargets-dag",
+  "by": "N3",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b0a92b531",
+  "group": "N3",
+  "result": "pass",
+  "note": "Every node hypothesis has a matching binder: FiniteFieldDatum, l prime with l≠p, Ω algebraically closed over Q_l; MiddleExtensionCurve with IsAffine, SmoothOfRelativeDimension 1 and GeometricallyConnected (its extra Smooth/IsPureDimension 1/U finite-type separated fields follow from these); dense open immersion; lisse F on geometric U with an arbitrary common-stage Frobenius iso theta. Ordinary j_* is adicOrdinaryPush placed by singleFunctor 0, not Rj_*. sfCommonStageWeilForget then adicCompactCohomology in degree 0 for every compactification; Subsingleton means H_c^0=0. Ω : Type (u+1) is forced by the recorded adicMiddleExtensionLisse interface. Helper instance middleExtensionCurve_geometricStructureIsSeparated is the real pullback.snd instance with docstrings and is recorded in lean.declarations. Proof is only sorry; all 7 proof steps in the docstring; lean.statement verbatim; node diff only in the lean field. Edge cases F=0, j=id, empty C/U, rank 0 checked. nt_compile.py --json on the snapshot: rc 0, 3.9 s and 4.3 s, no errors or warnings. No findings."
  }
 }

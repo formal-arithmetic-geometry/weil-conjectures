@@ -253,5 +253,23 @@
    "missing": [],
    "open": []
   }
+ },
+ "lean": {
+  "module": "WeilConjectures.CategoryTheory.ModuleObjects.DerivedExtendScalars",
+  "declaration": "CategoryTheory.Mod.preservesKFlatQuasiIso",
+  "statement": "instance preservesKFlatQuasiIso : (extendScalars φ).PreservesKFlatQuasiIso",
+  "branch": "slopmaster2",
+  "by": "Q12",
+  "date": "2026-10-18",
+  "existing": true,
+  "note": "Exact existing upstream statement, read in the published source using scompile.py --source. The printed full type has exactly the node category, tensor, flat-resolution, commutative-ring-object and ring-map hypotheses. A clean scompile.py probe imports the recorded def-sfb-preserves-kflat-quasi-iso module and applies PreservesKFlatQuasiIso.quasiIso_map directly to P.IsKFlatForTotalTensor and P′.IsKFlatForTotalTensor, without any bridge or extra hypothesis. Thus the upstream monoidal K-flat predicate and the recorded binary-total-tensor predicate agree here. The branch label denotes the published WeilConjectures module root. No new module or proof is written."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-72b54c98d",
+  "group": "Q12",
+  "result": "pass",
+  "note": "The item is linked to the existing published CategoryTheory.Mod.preservesKFlatQuasiIso; only the node's lean field changed. Its full type has exactly the node's hypotheses (closed symmetric monoidal, Grothendieck abelian at size v, preadditive tensor, functorial flat resolutions, commutative ring objects R and S, ring-object map φ) and the node's conclusion (S ⊗_R s is a quasi-isomorphism), with no extra assumption or universe restriction. My nt_compile.py check (2.1 s, no errors) shows the upstream K-flat predicate is definitionally equal to the recorded IsKFlatForTotalTensor in both directions, and the recorded class PreservesTotalTensorKFlatQuasiIso follows in one line. The declaration is proved in the published source (standard axioms only). The merge tool's existing-declaration check passes with the statement verbatim. Edge cases covered: φ = id, non-flat φ such as Z→Z/2, zero ring, unbounded complexes. The report has a real worker report and the standard second-reading note. No findings."
  }
 }

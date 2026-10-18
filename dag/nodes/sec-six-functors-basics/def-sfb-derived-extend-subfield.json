@@ -269,5 +269,23 @@
     }
    ]
   }
+ },
+ "lean": {
+  "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.TwoColimit",
+  "declaration": "AlgebraicGeometry.ProEtale.derivedExtendScalarsSubfield",
+  "statement": "noncomputable abbrev derivedExtendScalarsSubfield {E F : FiniteIntermediateField ℓ} (h : E ≤ F) :\n    DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (padicSubfieldRingObj X ℓ E)) ⥤\n      DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (padicSubfieldRingObj X ℓ F))",
+  "branch": "slopmaster2",
+  "by": "Q03",
+  "date": "2026-10-18",
+  "existing": true,
+  "note": "Exact existing definition in the published pro-etale framework. Section parameters are (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime]; E and F are finite intermediate fields of ℚ_[ℓ] in PadicAlgCl ℓ and h is their inclusion. The read-only side source defines the functor as L(Mod.extendScalars (padicSubfieldRingObjMap X ℓ h)). Current server source, read with scompile.py --source, uses finiteCoefficientDerivedExtension X ℓ h, whose body is exactly the same leftDerivedFunctor in Sheaf.AlgebraicGeometry.CondensedDerivedTensorComparison. Its signature is unchanged. The coefficient map is precisely the recorded dependency padicSubfieldRingObjMap and the derived operation is the recorded generic derived-extension interface. No new definition or module is introduced; this statement attachment does not assert proof closure."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-942abd414",
+  "group": "Q03",
+  "result": "pass",
+  "note": "Only the node's lean field changed (checked against the live and side repo nodes). Existing AlgebraicGeometry.ProEtale.derivedExtendScalarsSubfield (TwoColimit.lean); lean.statement appears word for word in the live sheaf, side and newtargets sources. Clauses match the blueprint source (order 1758): Fact ℓ.Prime, arbitrary Scheme.{u}, E F : PadicAlgCl.FiniteIntermediateField ℓ, h : E ≤ F, unbounded D(Mod over padicSubfieldRingObj) with Ab.{u+1}; body is the reducible finiteCoefficientDerivedExtension = (Mod.extendScalars (padicSubfieldRingObjMap X ℓ h)).leftDerivedFunctor, checked by rfl. Same notion as the def-weil-pbc-finite-derived-tensor-comparison shared alias, not a duplicate. No extra hypotheses (the NoetherianSpace variable comes after this declaration). Edge cases E=F, E=ℚ_ℓ, empty X, any characteristic, unbounded complexes. Independent nt_compile probe clean (13.2 s, no errors or warnings): signature, rfl, derivedExtendMapDerivedCategoryAdjunction typed with this functor as left adjoint, E=F. Report has Worker report and the accepted second-reading placeholder. No findings."
  }
 }

@@ -1,0 +1,110 @@
+{
+ "id": "def-a1-scheme-groupoid-laws",
+ "kind": "definition",
+ "title": "Groupoid laws for schemes",
+ "status": "split",
+ "statement": "Let $U,R$ be schemes [def-pc-scheme], with morphisms $s,t:R\\to U$, $e:U\\to R$, $i:R\\to R$, and $c:R\\times_{s,U,t}R\\to R$ [def-pc-fibre-product]. The predicate that these maps define a groupoid means that on every test scheme $H$ they make $U(H)$ the objects and $R(H)$ the arrows, with source $s$, target $t$, identity $e$, inverse $i$, and composition $c(a,b)=a\\circ b$ when $s(a)=t(b)$. Explicitly, $s(e(x))=t(e(x))=x$, $s(i(a))=t(a)$, $t(i(a))=s(a)$, $s(c(a,b))=s(b)$, $t(c(a,b))=t(a)$, $c(e(t(a)),a)=c(a,e(s(a)))=a$, $c(i(a),a)=e(s(a))$, $c(a,i(a))=e(t(a))$, and $c(c(a,b),d)=c(a,c(b,d))$ whenever the arrows are composable. The induced operations are functorial in $H$ by precomposition.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-fibre-product"
+ ],
+ "source": {
+  "document": "literature/stacks-project/groupoids.tex",
+  "place": "Tag 0231 (definition-groupoid), preceding groupoid axioms, and following paragraph on the septuple (U,R,s,t,c,e,i); applied in Tag 03BJ."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A groupoid scheme has source target identity inverse and composition scheme morphisms satisfying groupoid laws on all test schemes",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Groupoid\", \"module\": \"Mathlib.CategoryTheory.Groupoid\", \"type\": \"Type u → Type (max u (v + 1))\", \"doc\": \"A groupoid is a category in which every morphism is invertible.\"}\n  {\"name\": \"CategoryTheory.SmallGroupoid\", \"module\": \"Mathlib.CategoryTheory.Groupoid\", \"type\": \"(C : Type u) : Type (u + 1)\", \"doc\": \"A groupoid is a category in which every morphism is invertible.\"}\n  {\"name\": \"CategoryTheory.Groupoid.mk.noConfusion\", \"module\": \"Mathlib.CategoryTheory.Groupoid\", \"type\": \"{obj : Type u} →\\n  {P : Sort u_1} →\\n    {toCategory : CategoryTheory.Category.{v, u} obj} →\\n      {inv : {X Y : obj} → (X ⟶ Y) → (Y ⟶ X)} →\\n        {inv_comp :\\n            autoParam\\n              (∀ {X Y : obj} (f : X ⟶ Y),\\n                CategoryTheory.CategoryStruct.comp (inv f) f = CategoryTheor\", \"doc\": \"A category in which every morphism is invertible.\"}\n  {\"name\": \"CategoryTheory.Groupoid.noConfusionType\", \"module\": \"Mathlib.CategoryTheory.Groupoid\", \"type\": \"Sort u_1 → {obj : Type u} → CategoryTheory.Groupoid obj → {obj' : Type u} → CategoryTheory.Groupoid obj' → Sort u_1\", \"doc\": \"A groupoid is a category in which every morphism is invertible.\"}\n  {\"name\": \"CategoryTheory.Grpd\", \"module\": \"Mathlib.CategoryTheory.Groupoid.Grpd.Basic\", \"type\": \"Type (max (u + 1) u (v + 1))\", \"doc\": \"The category whose objects are groupoids and morphisms are functors between them, constructed using the bundled structure for categories of mathematical objects.\"}\n  {\"name\": \"CategoryTheory.Groupoid.noConfusion\", \"module\": \"Mathlib.CategoryTheory.Groupoid\", \"type\": \"{P : Sort u_1} →\\n  {obj : Type u} →\\n    {t : CategoryTheory.Groupoid obj} →\\n      {obj' : Type u} →\\n        {t' : CategoryTheory.Groupoid obj'} → obj = obj' → t ≍ t' → CategoryTheory.Groupoid.noConfusionType P t t'\", \"doc\": \"A groupoid is a category in which every morphism is invertible.\"}\n  {\"name\": \"CategoryTheory.instIsGroupoid\", \"module\": \"Mathlib.CategoryTheory.Groupoid\", \"type\": \"{C : Type u} [Groupoid.{v} C] : IsGroupoid C\", \"doc\": \"Every groupoid is a category in which every morphism is an isomorphism.\"}\n  {\"name\": \"CategoryTheory.Grpd.category\", \"module\": \"Mathlib.CategoryTheory.Groupoid.Grpd.Basic\", \"type\": \": LargeCategory.{max v u} Grpd.{v, u}\", \"doc\": \"The category whose objects are groupoids and morphisms are functors between them, with composition defined by functor composition and identity morphisms given by identity functors. This structure sati\"}",
+   "date": "2026-10-18",
+   "verdict": "No scheme-groupoid interface: ordinary categorical groupoids are not internal groupoids in schemes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Internal groupoid object in the category of schemes given source target identity inversion composition morphisms satisfying groupoid laws",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.GlueData\", \"module\": \"Mathlib/AlgebraicGeometry/Gluing\", \"type\": \"Type (u_1 + 1)\", \"doc\": \"An inductive type representing the data required to glue schemes together, typically involving open subsets and isomorphisms between their intersections.\"}\n  {\"name\": \"AlgebraicGeometry.IsLocalIso\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/LocalIso\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For schemes $ X $ and $ Y $, a morphism $ f : X \\to Y $ is a local isomorphism if there exists an open cover $ \\\\{U_i\\\\} $ of $ X $ such that for each $ i $, the restriction $ f|_{U_i} $ is an isomorphis\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instCategory\", \"module\": \"Mathlib/AlgebraicGeometry/Scheme\", \"type\": \"CategoryTheory.Category.{u_1, u_1 + 1} AlgebraicGeometry.Scheme\", \"doc\": \"The collection of schemes forms a category, where morphisms are morphisms of locally ringed spaces between schemes, with identity morphisms and composition defined by the corresponding operations on t\"}\n  {\"name\": \"AlgebraicGeometry.Scheme\", \"module\": \"Mathlib/AlgebraicGeometry/Scheme\", \"type\": \"Type (u_1 + 1)\", \"doc\": \"The type of schemes in algebraic geometry.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"(X : AlgebraicGeometry.Scheme) → CategoryTheory.Category.{u, u + 1} X.Etale\", \"doc\": \"For any scheme $X$, the collection of étale morphisms to $X$ forms a category, where objects are schemes equipped with an étale morphism to $X$ and morphisms are commutative triangles between such obj\"}\n  {\"name\": \"CategoryTheory.Grpd\", \"module\": \"Mathlib/CategoryTheory/Groupoid/Grpd/Basic\", \"type\": \"Type (max (u + 1) u (v + 1))\", \"doc\": \"The category whose objects are groupoids and morphisms are functors between them, constructed using the bundled structure for categories of mathematical objects.\"}\n  {\"name\": \"CategoryTheory.Groupoid\", \"module\": \"Mathlib/CategoryTheory/Groupoid\", \"type\": \"Type u → Type (max u (v + 1))\", \"doc\": \"A groupoid is a category in which every morphism is invertible.\"}\n  {\"name\": \"Pregroupoid.groupoid\", \"module\": \"Mathlib/Geometry/Manifold/StructureGroupoid\", \"type\": \"{H : Type u_1} → [inst : TopologicalSpace H] → Pregroupoid H → StructureGroupoid H\", \"doc\": \"The structure groupoid associated to a pregroupoid $\\\\mathcal{PG}$ on a topological space $H$ consists of open partial homeomorphisms $H \\rightleftharpoons H$ that satisfy $\\\\mathcal{PG}$'s local compati\"}",
+   "date": "2026-10-18",
+   "verdict": "No scheme-groupoid interface: ordinary categorical groupoids are not internal groupoids in schemes."
+  },
+  {
+   "tool": "grep",
+   "query": "GroupoidScheme|IsGroupoidScheme|SchemeGroupoid|GroupoidObject|InternalGroupoid",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-18",
+   "verdict": "No scheme-groupoid interface: ordinary categorical groupoids are not internal groupoids in schemes."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n \"GroupoidScheme|IsGroupoidScheme|SchemeGroupoid|GroupoidObject|InternalGroupoid\" WeilConjectures lean/Sheaf; rg -l \"groupoid scheme|groupoid object\" dag/nodes; tools/blueprint_refs.py search groupoid",
+   "results": "No upstream WeilConjectures match. In lean/Sheaf, only CategoryTheory.IsGroupoidObject in SpaceGeometricDescent.lean:248, for simplicial spaces, not schemes. The DAG contains affine-groupoid theorem nodes but no definition of scheme-groupoid laws. Blueprint search: seven matches about other notions or uses; no groupoid-scheme definition.",
+   "date": "2026-10-18",
+   "verdict": "No matching DAG node or scheme-groupoid declaration."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-a1-affine-groupoid-integral-invariants",
+  "date": "2026-10-18",
+  "group": "Q70"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-a1-affine-hc0",
+   "place": "Tag 03BJ supporting the affine finite locally free groupoid quotient used in the fourth paragraph of the proof of 03XX.",
+   "via": [
+    "lem-a1-affine-groupoid-integral-invariants",
+    "lem-a1-finite-flat-affine-relation-quotient",
+    "lem-a1-separated-locally-qf-space-representable",
+    "lem-a1-separated-etale-space-scheme",
+    "lem-a1-proetale-local-system-representability",
+    "lem-a1-normal-locally-constant-finite-section",
+    "lem-a1-normal-proetale-monodromy",
+    "lem-a1-smooth-lisse-integral-lattice",
+    "lem-a1-degree-zero-compact-support-sections"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-purity-real-sheaves",
+ "unit": "sk-p-real-rankin",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SchemeGroupoidLaws",
+  "declaration": "AlgebraicGeometry.Scheme.IsGroupoid",
+  "file": "lean/Sheaf/AlgebraicGeometry/SchemeGroupoidLaws.lean",
+  "statement": "structure IsGroupoid {U R : Scheme.{u}} (s t : R ⟶ U) (e : U ⟶ R) (i : R ⟶ R) (c : pullback s t ⟶ R) : Prop",
+  "branch": "newtargets-dag",
+  "by": "Q70",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1427da8eb",
+  "group": "Q70",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1427da8eb",
+  "group": "Q70",
+  "result": "pass",
+  "note": "Read item, new def-a1-scheme-groupoid-laws, all stmt_deps, Stacks groupoids.tex 0231 axioms and 03BJ, upstream IsFiniteLocallyFree (side FiberDegree.lean:898) and Mathlib Spec.preimage. Lean matches the node clause by clause: canonical s♯,t♯ via Spec.preimage, C = RingHom.eqLocus (Iff.rfl to {a | σa = τa}), finite locally free instances, conclusion is exactly a monic annihilator over C; no extra assumptions, one universe; dropping the base S is equivalent. Scheme.IsGroupoid checked law by law (source/target/identity/inverse/composite endpoints, unit, inverse, associativity with correct fibre-product points); not hollow; identity groupoid satisfies it. lean.statement verbatim for both records; docstrings carry source, blueprint id and the six proof steps; proof is sorry; ancestry via chain is a valid DAG path. Edge cases: empty U, identity groupoid, mixed ranks. nt_compile --json: both modules compile clean (1.8 s / 1.9 s); probe module: axioms only sorryAx plus standard. No findings, no fixes."
+ }
+}

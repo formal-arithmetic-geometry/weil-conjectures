@@ -280,5 +280,34 @@
   "group": "Q57",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q57-4a37a1ddc (reviewer sub-agent of L); spot-checked: Read the complete mathematics, all 15 cited statements, relevant local sources, and Cartier route. The eight-step proof is sound; small cases and dependency checks pass. Corrected three stale step references in the full JSON under fixes/. No statements, hypotheses, dependencies, or targets changed. Detailed checks and accepted tool uses are in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.GeoCartierExponentIndependence",
+  "declaration": "SheafOfModules.GeoCartierExponent.geoCartier_exponent_independence",
+  "declarations": [
+   "SheafOfModules.GeoCartierExponent.residueProjection",
+   "SheafOfModules.GeoCartierExponent.projection_comp",
+   "SheafOfModules.GeoCartierExponent.residueRestriction",
+   "SheafOfModules.GeoCartierExponent.restrictionComp",
+   "SheafOfModules.GeoCartierExponent.derivedRestrictionComp",
+   "SheafOfModules.GeoCartierExponent.transitivity",
+   "SheafOfModules.GeoCartierExponent.ordinarySingle",
+   "SheafOfModules.GeoCartierExponent.geoCartier_exponent_independence"
+  ],
+  "file": "lean/Sheaf/Paper/GeoCartierExponentIndependence.lean",
+  "statement": "theorem geoCartier_exponent_independence [HasTerminal C] (hm : 1 ≤ m) (hn : 1 ≤ n) (h : n ∣ m) (Dm : DerivedChangeOfRingsCochainModel (projection J m)) (Dn : DerivedChangeOfRingsCochainModel (projection J n)) (Dmn : DerivedChangeOfRingsCochainModel (residueProjection (J := J) h)) (Pm : DivisibleReduction.Presentation (J := J) m) (Pn : DivisibleReduction.Presentation (J := J) n) (hB : Pm.S.X₁ = Pn.S.X₁) (hF : Pm.S.X₃ = Pn.S.X₃) (hH : IsFlatOnSite (R := residues J m) Pm.H) (hQ : IsFlatOnSite (R := residues J m) Pm.Q) : ∃ (eF : changeOfRings (residueProjection (J := J) h) Pm.Q ≅ Pn.Q) (eH : changeOfRings (residueProjection (J := J) h) Pm.H ≅ Pn.H) (beta : Pm.H ⟶ (residueRestriction (J := J) h).obj Pn.H), (∀ (U : Cᵒᵖ) (f : Pm.S.X₃.val.obj U) (b : (residues J n).obj.obj U), eF.hom.val.app U (SuccessiveDerivedQuotient.pure (residueProjection (J := J) h) Pm.Q U b (Pm.p.val.app U f)) = b • @id (Pn.Q.val.obj U) (Pn.p.val.app U ((eqToHom hF).val.app U f))) ∧ (∀ (U : Cᵒᵖ) (x : Pm.H.val.obj U), Pn.i.val.app U (beta.val.app U x) = (m / n) • (eqToHom hB).val.app U (Pm.i.val.app U x)) ∧ (∀ (U : Cᵒᵖ) (x : Pm.H.val.obj U) (b : (residues J n).obj.obj U), eH.hom.val.app U (SuccessiveDerivedQuotient.pure (residueProjection (J := J) h) Pm.H U b x) = b • @id (Pn.H.val.obj U) (beta.val.app U x)) ∧ Dmn.T.map (identifications m Dm hm Pm).alphaF.inv ≫ (transitivity h Dm Dn Dmn).hom.app ((DerivedCategory.singleFunctor (Integral J) 0).obj Pm.S.X₃) ≫ Dn.T.map ((DerivedCategory.singleFunctor (Integral J) 0).map (eqToHom hF)) ≫ (identifications n Dn hn Pn).alphaF.hom = ordinarySingle h Dmn Pm.Q ≫ (DerivedCategory.singleFunctor (Residue J n) 0).map eF.hom ∧ Dmn.T.map (identifications m Dm hm Pm).alphaB.inv ≫ (transitivity h Dm Dn Dmn).hom.app ((DerivedCategory.singleFunctor (Integral J) 0).obj Pm.S.X₁) ≫ Dn.T.map ((DerivedCategory.singleFunctor (Integral J) 0).map (eqToHom hB)) ≫ (identifications n Dn hn Pn).alphaB.hom = (Dmn.T.commShiftIso (1 : ℤ)).hom.app ((DerivedCategory.singleFunctor (Residue J m) 0).obj Pm.H) ≫ (ordinarySingle h Dmn Pm.H)⟦(1 : ℤ)⟧' ≫ ((DerivedCategory.singleFunctor (Residue J n) 0).map eH.hom)⟦(1 : ℤ)⟧'",
+  "branch": "newtargets-dag",
+  "by": "Q52",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Uses the recorded DivisibleReduction presentations and unique normalized identifications. The auxiliary extensions may be chosen split for every B,F; endpoint equalities identify the same B and F at both exponents. Transitivity is the canonical uniqueness-of-normalized-adjoints construction, specialized to independent localization universes; ordinarySingle is its recorded K-flat counit computation. The torsion formula is expressed using beta and its actual inclusion into B, fixing multiplication by m/n and its sign."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7fd9440b5",
+  "group": "Q52",
+  "result": "pass",
+  "note": "Read the node, all 9 statement dependencies (DivisibleReduction Presentation/identifications/sheafScalarDerivedAdjunction, DerivedChangeOfRingsCochainModel, SuccessiveDerivedQuotient Normalization.unit_comp, IsFlatOnSite) and the module. Hypotheses match exactly: Pm/Pn presentations with hB/hF give m,n epi on B and mono on F with their kernels/cokernels; the split extension makes S harmless; flatness only of H_m and F_m over R_m. Conclusion: eF/eH with sheaf section formulas, beta fixed by monic Pn.i, and the derived equations identifying the conjugated transitivity with ordinarySingle followed by eF[0], resp. the shift with the canonical commShift. transitivity = leftAdjointUniq of the normalized adjunctions (the unit_comp characterization), not arbitrary; residueProjection/restrictionComp/ordinarySingle carry real data. Edge cases m=n, n=1, zero sheaves and universes checked. lean.statement verbatim; only the lean field changed; docstrings and 8 proof steps present; only sorry. nt_compile --json on the snapshot: clean in 3.4 s (error reporting verified). The Second-reading placeholder is standard practice since 2026-10-17. No findings."
  }
 }

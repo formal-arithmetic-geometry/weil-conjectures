@@ -226,5 +226,23 @@
     }
    ]
   }
+ },
+ "lean": {
+  "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility",
+  "declaration": "AlgebraicGeometry.ProEtale.padicSubfieldRingObjMap_comp_toPadicAlgCl",
+  "statement": "lemma padicSubfieldRingObjMap_comp_toPadicAlgCl {E F : FiniteIntermediateField ℓ} (h : E ≤ F) :\n    padicSubfieldRingObjMap X ℓ h ≫ padicSubfieldRingObjToPadicAlgCl X ℓ F =\n      padicSubfieldRingObjToPadicAlgCl X ℓ E :=",
+  "branch": "slopmaster2",
+  "by": "Q16",
+  "date": "2026-10-18",
+  "existing": true,
+  "note": "Exact existing lemma in the published pro-etale framework, confirmed with scompile.py --source. The enclosing parameters are (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime]. FiniteIntermediateField ℓ consists of intermediate fields of ℚ_[ℓ] in PadicAlgCl ℓ with FiniteDimensional ℚ_[ℓ] E. The two maps are precisely the recorded declarations of the statement dependencies; their sources and targets are p_X^* E̲, p_X^* F̲ and p_X^* Q̲̄_ℓ. Composition is read left to right with ≫. No duplicate module or new proof is introduced. The branch label refers to the published WeilConjectures root; the declaration is in the side framework as documented in coord/pefw-upstream-framework.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-32eabec62",
+  "group": "Q16",
+  "result": "pass",
+  "note": "Existing-declaration delivery: only the item's lean field changes, pointing to AlgebraicGeometry.ProEtale.padicSubfieldRingObjMap_comp_toPadicAlgCl (side Colimit/Compatibility.lean:105-110). Every clause matches the node and the blueprint source (which names this declaration): (X : Scheme.{u}), ℓ prime, E F : FiniteIntermediateField ℓ, h : E ≤ F, padicSubfieldRingObjMap X ℓ h ≫ padicSubfieldRingObjToPadicAlgCl X ℓ F = padicSubfieldRingObjToPadicAlgCl X ℓ E, using the landed declarations of both stmt deps. No extra assumptions or universe restriction. Edge cases E=F, E=ℚ_ℓ, ℓ=2, empty scheme are covered. Maps are coefficientMap of concrete condensed inclusions, not hollow. The upstream proof is real; the delivery adds no proof. lean.statement is verbatim. No duplicate found by rg. Probe via nt_compile.py is clean in 2.8 s; axioms are propext/Classical.choice/Quot.sound with no sorryAx. Report has both required sections. Only cosmetic: report cites lines 1015-1045 instead of 105-110."
  }
 }

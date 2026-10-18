@@ -12,7 +12,8 @@
   "def-weil-affine-spectrum",
   "def-pc-fibre-product",
   "def-pc-finite-locally-free",
-  "def-weil-polynomial-ring"
+  "def-weil-polynomial-ring",
+  "def-a1-scheme-groupoid-laws"
  ],
  "proof": [
   {
@@ -185,5 +186,23 @@
   "group": "Q01",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q01-aa729ff4a (reviewer sub-agent of L); spot-checked: I read the item, the 3 new nodes and the cited statements in full, and checked them against Stacks groupoids.tex 03BH/03BI/03BJ (lines 4242-4368), exercises 02DU/02DV(1),(3) and algebra 00DX; all tag-to-label pairs were checked in tags/tags. The item statement still matches 03BJ, with no hypothesis added or dropped. Step 1: the rank-strata node covers the empty-U case and gives finite, positive-rank, affine, invariant pieces. Step 2: the Mathlib leaf for disjoint unions gives A, B and C as products, because s^{-1}(U_r)=t^{-1}(U_r). Step 3: the norm characteristic polynomial for sigma_r at tau_r(a_r) is annihilated by Cayley-Hamilton on local free charts. Step 4: the determinant trick for T-a_r makes P_r lie in C_r[T]. Step 5: e^sharp composed with tau is the identity because t∘e=id, so P_r(a_r)=0; this replaces the source's faithful-flatness argument and is valid. Step 6: padding by T^{d-r} glues the monic polynomials, which is correct. All new nodes are true and strictly smaller than the item; none restates one of its clauses. Rank strata: tested on the empty case, the identity case and a mixed-rank case; it is distinct from lem-weil-pbc-finite-locally-free-degree-locally-constant. Polynomial norm invariance: tested on the identity groupoid and a constant group action; it is distinct from lem-pd-finite-locally-free-norm-charts. Norm characteristic polynomial: tested on r=0, A=0 and a nilpotent element of k[eps]; Mathlib's charpoly needs Module.Free and the pinned Mathlib has no projective version, so this is not a one-line case of lem-weil-cayley-hamilton-free-module. B1-B9 pass: statement only, inline norm definition, tag+label sources, three kinds of search recorded, blueprint.from=lem-a1-affine-hc0 with the correct via. Route: the only off-unit citation is a Mathlib leaf, no tool_uses, no SGA. The item is not a target, so the base-change/coefficient check does not apply. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineGroupoidIntegralInvariants",
+  "declaration": "AlgebraicGeometry.isIntegral_affineGroupoid_invariants",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineGroupoidIntegralInvariants.lean",
+  "statement": "theorem isIntegral_affineGroupoid_invariants (A B : CommRingCat.{u}) (s t : Spec B ⟶ Spec A) (e : Spec A ⟶ Spec B) (i : Spec B ⟶ Spec B) (c : pullback s t ⟶ Spec B) (hG : Scheme.IsGroupoid s t e i c) [s.IsFiniteLocallyFree] [t.IsFiniteLocallyFree] : ∀ a : A, ∃ P : Polynomial ((Spec.preimage s).hom.eqLocus (Spec.preimage t).hom), P.Monic ∧ P.eval₂ ((Spec.preimage s).hom.eqLocus (Spec.preimage t).hom).subtype a = 0",
+  "branch": "newtargets-dag",
+  "by": "Q70",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1427da8eb",
+  "group": "Q70",
+  "result": "pass",
+  "note": "Read item, new def-a1-scheme-groupoid-laws, all stmt_deps, Stacks groupoids.tex 0231 axioms and 03BJ, upstream IsFiniteLocallyFree (side FiberDegree.lean:898) and Mathlib Spec.preimage. Lean matches the node clause by clause: canonical s♯,t♯ via Spec.preimage, C = RingHom.eqLocus (Iff.rfl to {a | σa = τa}), finite locally free instances, conclusion is exactly a monic annihilator over C; no extra assumptions, one universe; dropping the base S is equivalent. Scheme.IsGroupoid checked law by law (source/target/identity/inverse/composite endpoints, unit, inverse, associativity with correct fibre-product points); not hollow; identity groupoid satisfies it. lean.statement verbatim for both records; docstrings carry source, blueprint id and the six proof steps; proof is sorry; ancestry via chain is a valid DAG path. Edge cases: empty U, identity groupoid, mixed ranks. nt_compile --json: both modules compile clean (1.8 s / 1.9 s); probe module: axioms only sorryAx plus standard. No findings, no fixes."
  }
 }

@@ -235,5 +235,23 @@
     }
    ]
   }
+ },
+ "lean": {
+  "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility",
+  "declaration": "AlgebraicGeometry.ProEtale.padicAlgClRingObjCocone",
+  "statement": "noncomputable abbrev padicAlgClRingObjCocone :\n    Cocone (Profinite.padicSubfieldRingObjFunctor ℓ ⋙ upperStarFromPoint X)",
+  "branch": "slopmaster2",
+  "by": "Q04",
+  "date": "2026-10-18",
+  "existing": true,
+  "note": "Exact existing declaration in the published WeilConjectures pro-etale framework, read from the shared overlay and confirmed with scompile.py --source. The surrounding context is universe u, (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime]. Its body is (upperStarFromPoint X).mapCocone (Profinite.padicAlgClRingObjCocone ℓ). Profinite.padicSubfieldRingObjFunctor indexes finite intermediate fields by inclusion and maps an arrow to padicSubfieldRingObjMap. The point cocone has vertex Profinite.padicAlgClRingObj ℓ and legs padicSubfieldRingObjToPadicAlgCl ℓ E. Mapping it gives exactly the specified diagram, coefficient-ring vertex and inclusion legs on X. The recorded sfbPullbackFromPoint is definitionally upperStarFromPoint. The slopmaster2 branch label denotes the published WeilConjectures source root, including the read-only side overlay; no duplicate module is supplied."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-245f6d138",
+  "group": "Q04",
+  "result": "pass",
+  "note": "Lean-only record of existing WeilConjectures...Colimit.Compatibility.padicAlgClRingObjCocone = (upperStarFromPoint X).mapCocone (Profinite.padicAlgClRingObjCocone ℓ); node otherwise identical to shared DAG. Clause match: ℓ prime, any Scheme.{u}, I = PadicAlgCl.FiniteIntermediateField ℓ (thin by inclusion), D_X obj/map, vertex padicAlgClRingObj X ℓ, legs coefficientMap of padicSubfieldRingObjToPadicAlgCl, image-cocone clause literal; sfbPullbackFromPoint = upperStarFromPoint. Checked by rfl in a scratch nt_compile.py --json file: clean, 2.4 s. Statement verbatim; universes unchanged; edge cases (nonempty I, E=F, chains, empty X, ℓ=2) fine; no hollow/duplicate/substitute. No findings."
  }
 }

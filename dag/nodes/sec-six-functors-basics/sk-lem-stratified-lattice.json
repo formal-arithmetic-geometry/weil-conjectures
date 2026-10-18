@@ -288,5 +288,24 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.Paper.StratifiedLattice",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.exists_stratified_lisse_integral_lattice",
+  "file": "lean/Sheaf/Paper/StratifiedLattice.lean",
+  "statement": "theorem exists_stratified_lisse_integral_lattice (l : ℕ) [Fact l.Prime] (E : Type) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (p : ℕ) [Fact p.Prime] (k : Type u) [Field k] [CharP k p] (_hpl : p ≠ l) (X : Scheme.{u}) [X.Over (Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] : letI := spectralNorm.nontriviallyNormedField ℚ_[l] E let A := Profinite.continuousMapRingObj.{u} (Padic.coefficientExtensionIntegers l E) let B := Profinite.continuousMapRingObj.{u} E let a : A ⟶ B := (sheafCompose (coherentTopology Profinite.{u}) (forget₂ RingCat.{u + 1} Ab.{u + 1})).map (Profinite.continuousMapRingSheafMap (Padic.coefficientExtensionIntegers l E).subtype continuous_subtype_val) ∀ L : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj B X), LocallyFree (condensedRingObj B X) L → ∃ S : Scheme.FiniteLocallyClosedStratification X, ∀ i : Fin S.n, let T := S.domain i let aT := (upperStarFromPoint T).map a let LT := (CondensedRing.upperStar B (S.immersion i)).obj L ∃ M : Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) (condensedRingObj A T), LocallyFree (condensedRingObj A T) M ∧ ∃ ι : M ⟶ (Mod.comap aT).obj LT, Mono ι ∧ IsIso (((Mod.extendRestrictAdjunction aT).homEquiv M LT).symm ι)",
+  "branch": "newtargets-dag",
+  "by": "Q60",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Uses the recorded pulled condensed coefficients and internal module objects, with the spectral norm topology on E and the recorded valuation subring with its induced topology. The finite locally closed stratification is the recorded exact interface. A lattice is expressed by a monomorphism into the integral restriction of L whose adjoint under the actual extension/restriction-of-scalars adjunction is an isomorphism; this ties rationalization to the inclusion. The existing local-freeness predicate allows varying finite ranks and zero."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-dde26ab36",
+  "group": "Q60",
+  "result": "pass",
+  "note": "Read node, 4 stmt deps and exact declarations (coefficientExtensionIntegers, continuousMapRingObj/SheafMap, condensedRingObj/upperStarFromPoint, CondensedRing.upperStar, Mod.extendScalars/extendRestrictAdjunction, CondensedRing.LocallyFree, Scheme.FiniteLocallyClosedStratification). Every clause matches: standing scheme = separated + LOFT + QC over field k with CharP p, p≠l; pulled condensed coefficients and internal module objects on the small pro-etale site; lisse = pro-etale cover-wise Mod.IsFree (varying rank, 0 allowed); finite locally closed stratification with immersions; lattice = Mono ι into comap of the stratum pullback whose extendScalars adjoint is an iso, which is M[1/l] since C(S,E)=C(S,O_E)[1/l]. Canonical spectral-norm topology. Edge cases (empty X, rank 0, non-normal X) and universes fine; E : Type is the upstream convention. Only the lean field changed, statement verbatim, docstrings carry source, blueprint tag and all 7 steps, single sorry theorem, no hollow defs. nt_compile.py clean in 3.7 s; a planted error was reported; axioms are the standard three plus sorryAx. No findings."
  }
 }

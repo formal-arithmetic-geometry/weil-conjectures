@@ -13,7 +13,8 @@
   "place": "node lem-wf-deep-principal-unit-log, order 2615"
  },
  "stmt_deps": [
-  "def-weil-l-adic-coefficient-extension"
+  "def-weil-l-adic-coefficient-extension",
+  "sk-d-real-log"
  ],
  "proof": [
   {
@@ -186,5 +187,23 @@
   "group": "Q153",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q153-0cd17b136 (reviewer sub-agent of L); spot-checked: I read the item, its 5 steps, the 3 new unsplit nodes and the statement of every cited node against blueprint main-20261015 (lem-wf-deep-principal-unit-log .md and .proof.md, same as the master copy) and unit sk-d-real-log. The target statement is the blueprint's, verbatim and unchanged; the unit's ell^2 O_E = m_E^{2e} domain is covered. (1) valuation-convergence is true. v_ell(n) and v_ell(n!) are both at most (n-1)/(ell-1), the second by Legendre. This gives v_E >= r+(n-1)delta and weighted coefficients at most q*theta^(n-1) <= q. I checked it at (2,1,2) and (3,2,2), where equality occurs; the boundary case r=e/(ell-1) is correctly excluded (-1 is torsion in Q_2). (2) formal-identities is true over any commutative Q-algebra and uses the same composition convention as the substitution node. The live Mathlib Log.lean has no subst_exp_log, so unsplit is correct. (3) series-substitution is true: each expanded term is at most |a_n|s^n, and the finitely-many-terms-above-epsilon argument gives summability, both groupings and restrictedness. The returned p=2 counterexample fails its |a_n|s^n -> 0 hypothesis, so the false helper is really repaired. Step 2 applies clause (2) with rho=s=q, and every hypothesis is supplied by step 1. Step 3 evaluates exp(aT)exp(bT)=exp((a+b)T), from lem-weil-power-series-exp-hom, at T=1 with rho=1. Step 4 is elementary as written. Step 5: the DVR node (clauses 2-4) and the Mathlib-leaf finite-quotients node (clauses 1-2) give the finite quotient O_E/m_E^r and the exponent N. No duplicates: I compared against exp-hom, exp-coefficientwise-map, dl-a1 radius and factorial nodes, pbc adic evaluation and the ultrametric nodes. No new node restates a clause of the item. The route is kept; only the blueprint's insufficient convergence-only evaluation justification is made precise. Accepted tool_uses: lem-weil-power-series-exp-hom and lem-weil-l-adic-extension-integers-dvr. No fixes written."
+ },
+ "lean": {
+  "module": "Sheaf.NumberTheory.Padics.DeepPrincipalUnitLog",
+  "declaration": "Padic.deepPrincipalUnit_log_exp",
+  "file": "lean/Sheaf/NumberTheory/Padics/DeepPrincipalUnitLog.lean",
+  "statement": "theorem deepPrincipalUnit_log_exp (ℓ : ℕ) [Fact ℓ.Prime] (E : Type u) [Field E] [Algebra (Padic ℓ) E] [FiniteDimensional (Padic ℓ) E] (e : ℕ) (_he : ∃ u : (coefficientExtensionIntegers ℓ E)ˣ, (ℓ : E) = ((u : coefficientExtensionIntegers ℓ E) : E) * (coefficientExtensionUniformizer ℓ E : E) ^ e) (r : ℤ) (_hr : (e : ℚ) / ((ℓ : ℚ) - 1) < (r : ℚ)) : ∃ exp : E → E, (∀ x : ↥((coefficientExtensionMaximalIdeal ℓ E) ^ r.toNat), @HasSum E ℕ _ (spectralNorm.normedField (Padic ℓ) E).toUniformSpace.toTopologicalSpace (fun n : ℕ ↦ (-1 : E) ^ n * (x : E) ^ (n + 1) / (n + 1 : ℕ)) (coefficientExtensionSmallLog ℓ E (x : E)) (SummationFilter.unconditional ℕ) ∧ @HasSum E ℕ _ (spectralNorm.normedField (Padic ℓ) E).toUniformSpace.toTopologicalSpace (fun n : ℕ ↦ (x : E) ^ n / (Nat.factorial n : E)) (exp (x : E)) (SummationFilter.unconditional ℕ)) ∧ @ContinuousOn E E (spectralNorm.normedField (Padic ℓ) E).toUniformSpace.toTopologicalSpace (spectralNorm.normedField (Padic ℓ) E).toUniformSpace.toTopologicalSpace (coefficientExtensionSmallLog ℓ E) (Set.range (fun x : ↥((coefficientExtensionMaximalIdeal ℓ E) ^ r.toNat) ↦ (x : E))) ∧ @ContinuousOn E E (spectralNorm.normedField (Padic ℓ) E).toUniformSpace.toTopologicalSpace (spectralNorm.normedField (Padic ℓ) E).toUniformSpace.toTopologicalSpace exp (Set.range (fun x : ↥((coefficientExtensionMaximalIdeal ℓ E) ^ r.toNat) ↦ (x : E))) ∧ (∀ x : ↥((coefficientExtensionMaximalIdeal ℓ E) ^ r.toNat), (∃ y : ↥((coefficientExtensionMaximalIdeal ℓ E) ^ r.toNat), coefficientExtensionSmallLog ℓ E (x : E) = (y : E)) ∧ exp (coefficientExtensionSmallLog ℓ E (x : E)) = 1 + (x : E)) ∧ (∀ x : ↥((coefficientExtensionMaximalIdeal ℓ E) ^ r.toNat), (∃ y : ↥((coefficientExtensionMaximalIdeal ℓ E) ^ r.toNat), exp (x : E) = 1 + (y : E)) ∧ coefficientExtensionSmallLog ℓ E (exp (x : E) - 1) = (x : E)) ∧ (∀ x y : ↥((coefficientExtensionMaximalIdeal ℓ E) ^ r.toNat), coefficientExtensionSmallLog ℓ E ((1 + (x : E)) * (1 + (y : E)) - 1) = coefficientExtensionSmallLog ℓ E (x : E) + coefficientExtensionSmallLog ℓ E (y : E)) ∧ (∀ x y : ↥((coefficientExtensionMaximalIdeal ℓ E) ^ r.toNat), exp ((x : E) + (y : E)) = exp (x : E) * exp (y : E)) ∧ ∃ N : ℕ, 1 ≤ N ∧ ∀ u : (coefficientExtensionIntegers ℓ E)ˣ, (u : coefficientExtensionIntegers ℓ E) ^ N - 1 ∈ (coefficientExtensionMaximalIdeal ℓ E) ^ r.toNat",
+  "branch": "newtargets-dag",
+  "by": "NV",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e305c97e8",
+  "group": "NV",
+  "result": "pass",
+  "note": "Statement matches the node clause by clause on the recorded coefficientExtension integers, maximal ideal and uniformizer, and coefficientExtensionSmallLog (same series and spectral topology): HasSum for log and exp on m^r with exp determined by its series, ContinuousOn for both, maps into m^r and 1+m^r and mutually inverse, both group laws, and N>=1 with u^N-1 in m^r. e is fixed by l = unit*varpi^e, which is unique; r:Z with strict rational bound forces r>=1 so toNat is lossless; l=2,e=1 excludes r=1; single universe u. Node diff is only lean plus stmt_deps adding landed sk-d-real-log, with no cycle; statement verbatim; docstrings carry source, blueprint id and 5 proof steps; sorry only; no defs; lines <=94. nt_compile --json clean in 1.8 s, control error reported, normedField and nontriviallyNormedField topologies equal by rfl. Informational: the worker's search missed side-tree PadicAlgCl.deep_principal_unit_log and smallLog_smallExp_deep (Exponential.lean) under this id; they need an extra embedding into PadicAlgCl and different integer/norm data, so they are not an exact match and the module stands. Second-reading section is the direct-delivery placeholder; this review is the independent reading."
  }
 }

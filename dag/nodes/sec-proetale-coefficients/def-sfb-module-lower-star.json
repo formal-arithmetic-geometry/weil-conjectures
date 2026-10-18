@@ -366,5 +366,31 @@
     }
    ]
   }
+ },
+ "lean": {
+  "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.lowerStar",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.lowerStar",
+   "AlgebraicGeometry.ProEtale.CondensedRing.lowerStar_comp_forget",
+   "AlgebraicGeometry.ProEtale.CondensedRing.lowerStar_obj_X",
+   "AlgebraicGeometry.ProEtale.CondensedRing.lowerStar_obj_smul",
+   "AlgebraicGeometry.ProEtale.CondensedRing.lowerStar_additive",
+   "AlgebraicGeometry.ProEtale.CondensedRing.preservesFiniteLimits_lowerStar"
+  ],
+  "statement": "noncomputable def lowerStar :\n    Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X) ⥤\n      Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y) :=",
+  "branch": "slopmaster2",
+  "by": "N9",
+  "date": "2026-10-18",
+  "existing": true,
+  "note": "Exact existing construction in the published pro-etale ModuleObject framework, read from the shared side overlay and confirmed with scompile.py --source. lowerStar is mapMod of the abelian-sheaf pushforward followed by Mod.comap along condensedPushforwardHom. The companion declarations give the underlying functor/object, the displayed coefficient action, additivity and left exactness. The slopmaster2 label denotes the published WeilConjectures source root; no new module or duplicate construction is introduced. Existing upstream proof dependencies remain open as recorded in lean_audit."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-fe0513ec7",
+  "group": "N9",
+  "result": "pass",
+  "note": "Existing binding to AlgebraicGeometry.ProEtale.CondensedRing.lowerStar (side framework ModuleObject/UpperLowerStar/Defs.lean:88-91); only the lean field changed (checked against the side clone); the blueprint source lists the same declaration. The definition is mapMod(f_*) then Mod.comap along condensedPushforwardHom : Λ_Y ⟶ f_*Λ_X; #synth confirms mapMod uses the recorded ProEtale.laxMonoidal_lowerStar. lowerStar_comp_forget, lowerStar_obj_X and lowerStar_obj_smul state the underlying sheaf and the η_f⊗1, μ, f_*γ action; lowerStar_additive and preservesFiniteLimits_lowerStar state additivity and left exactness. lean.statement is verbatim; one universe u throughout (Scheme.{u}, Ab.{u+1}); IsCommMonObj is dropped because unused, a harmless generalization. No duplicate binding in the DAG. nt_compile --json scratch run (2.6 s): #check and #print confirm the signatures, axioms are propext, Classical.choice and Quot.sound only. No findings."
  }
 }
