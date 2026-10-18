@@ -18,65 +18,36 @@
  ],
  "proof": [
   {
-   "text": "Use the finite commutative coefficient ring $A$, schemes $U,X$, open immersion $j:U\\hookrightarrow X$ and module sheaf $M$ of [def-weil-extension-by-zero]. By [lem-weil-proetale-weakly-etale-localization], identify $U_{\\mathrm{proet}}$ with $X_{\\mathrm{proet}}/U$ and $A_U$ with $A_X|_U$. Put $P_M$ for the presheaf defining $j_!M$. Every object $V\\to U$ has its unique factorization through $U$, and every arrow between such objects is over $U$. The defining formula for $P_M$ therefore identifies $P_M|_U=M$ on values, restriction maps and coefficient actions.",
+   "text": "Apply the existing fixed-scalar full-faithfulness theorem [lem-sfb-finite-extension-by-zero-fully-faithful] with coefficient category ModuleCat (ULift A) and the given open immersion j. It supplies Full and Faithful for ProEtale.openImmersionLowerShriek.",
    "uses": [
-    "def-weil-extension-by-zero",
-    "lem-weil-proetale-weakly-etale-localization"
+    "lem-sfb-finite-extension-by-zero-fully-faithful"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03DI (sites-modules-lemma-extension-by-zero), direct-sum presheaf formula, specialized to the unique factorization of an open immersion; pro-etale application: Tag 09AE (proetale-definition-extension-zero)."
-   }
+   "elementary": false
   },
   {
-   "text": "Write $q_M:P_M\\to P_M^\\#=j_!M$ for the module-sheafification map. Its underlying map is abelian sheafification by [def-weil-presheaf-modules-sheafification]. Apply [lem-cbc-sieve-slice-sheafification] to the underlying abelian presheaf, using the chosen small pro-etale site (or its small skeleton). It identifies $q_M|_U$ with the sheafification unit of $P_M|_U=M$. This last unit is invertible: its universal property gives a retraction from the identity map of the sheaf $M$, and uniqueness of factorization gives the other inverse identity. Hence $u_M=q_M|_U:M\\to j^*j_!M$ is an isomorphism of abelian sheaves. It is $A_U$-linear because $q_M$ is linear; the inverse of a bijective linear map is linear, so $u_M$ is a module-sheaf isomorphism. Naturality of $q$ gives $(j^*j_!f)u_M=u_N f$ for every module-sheaf map $f:M\\to N$.",
+   "text": "By the definition [def-weil-extension-by-zero], sfIntrinsicExtensionByZero is the composite of the inverse coefficient equivalence on U, fixed-scalar extension by zero, and the coefficient equivalence on X. The outer equivalence functors are fully faithful, and composition preserves full faithfulness. Unfolding this definition and applying the standard functor instances gives Full and Faithful for the intrinsic extension.",
    "uses": [
-    "def-weil-extension-by-zero",
-    "def-weil-presheaf-modules-sheafification",
-    "lem-cbc-sieve-slice-sheafification"
+    "def-weil-extension-by-zero"
    ],
-   "elementary": false,
-   "source": {
-    "document": "Mathlib/CategoryTheory/Sites/CoverLifting.lean",
-    "place": "pushforwardContinuousSheafificationCompatibility:382 and toSheafify_pullbackSheafificationCompatibility:391, applied through lem-cbc-sieve-slice-sheafification; underlying abelian sheafification and linearity: Stacks Tag 03CY (sites-modules-lemma-sheafification-presheaf-modules)."
-   }
+   "elementary": true
   },
   {
-   "text": "The functor $L=j_!$ is fully faithful, as follows directly from the same formulas. For a module-sheaf map $b:LM\\to LN$, set $f=u_N^{-1}(j^*b)u_M:M\\to N$. Then $bq_M=q_NP_f$: on objects over $U$ this is the displayed formula defining $f$, and on every other object both maps have source $P_M(V)=0$. Since $Lf$ is the sheafification of $P_f$, uniqueness in [def-weil-presheaf-modules-sheafification] gives $b=Lf$. If $Lf=Lg$, restricting and using the naturality identity in step 2 gives $u_N f=u_N g$, hence $f=g$. Thus $f\\mapsto Lf$ is bijective on every Hom set.",
-   "uses": [
-    "def-weil-extension-by-zero",
-    "def-weil-presheaf-modules-sheafification"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03DI (sites-modules-lemma-extension-by-zero), proof: componentwise maps followed by unique module-sheafification factorization from Tag 03CY; explicit full-faithfulness calculation for the open subterminal case."
-   }
-  },
-  {
-   "text": "Put $R=j^*$ and let $\\eta,\\varepsilon$ be the unit and counit of the adjunction $L\\dashv R$ supplied by [lem-weil-extension-by-zero-adjunction]. Fullness in step 3 gives $a:RLM\\to M$ with $La=\\varepsilon_{LM}$. The left triangle identity gives $L(a\\eta_M)=\\varepsilon_{LM}L\\eta_M=\\mathrm{id}_{LM}$, and faithfulness gives $a\\eta_M=\\mathrm{id}_M$. Naturality of $\\eta$ and the right triangle identity give $\\eta_M a=RL(a)\\eta_{RLM}=R\\varepsilon_{LM}\\eta_{RLM}=\\mathrm{id}_{RLM}$. Thus the actual adjunction unit $\\eta_M$, irrespective of the presentation of the adjunction, has inverse $a$ and is an isomorphism.",
+   "text": "Apply CategoryTheory.Adjunction.unit_isIso_of_L_fully_faithful to the actual adjunction sfIntrinsicExtensionByZeroAdjunction of [lem-weil-extension-by-zero-adjunction]. Since its left adjoint is fully faithful, every component of its unit, in particular the component at M, is an isomorphism.",
    "uses": [
     "lem-weil-extension-by-zero-adjunction"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sf-open-closed-triangle/lem-exc-proetale-open-unit.proof.md",
-    "place": "last sentence: the named adjunction unit is invertible; elementary full-faithfulness/triangle calculation"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-weil-extension-by-zero",
-  "def-weil-presheaf-modules-sheafification",
-  "lem-cbc-sieve-slice-sheafification",
-  "lem-weil-extension-by-zero-adjunction",
-  "lem-weil-proetale-weakly-etale-localization"
+  "lem-sfb-finite-extension-by-zero-fully-faithful",
+  "lem-weil-extension-by-zero-adjunction"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sf-open-closed-triangle/lem-exc-proetale-open-unit.proof.md",
-  "place": "complete proof paragraph, with the slice-sheafification comparison and an explicit full-faithfulness/triangle-identity verification of the named unit"
+  "document": "WeilConjectures/SixFunctors/ProEtale/FiniteCoefficient/LowerShriek/Open/FullyFaithful.lean; Mathlib/CategoryTheory/Adjunction/FullyFaithful.lean",
+  "place": "Existing fullyFaithfulOpenImmersionLowerShriek (lines 85–94), transported through the defining coefficient equivalences, then unit_isIso_of_L_fully_faithful (line 75); F8, 2026-10-18."
  },
  "mathlib_searches": [
   {
@@ -208,5 +179,15 @@
   "group": "Q96",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q96-0a7efdbc9 (reviewer sub-agent of L); spot-checked: PASS: no faults found and no repairs written; review.md is written. I read the item, all five cited node statements, the blueprint item, proof and unit, Stacks 03DI/03CY/09AE and the Mathlib lines. The statement matches the blueprint word for word and is not weakened. It is not a target node, so no base-change morphism applies, and no SGA source is cited. Steps: (1) The extension presheaf restricted to U equals M. This follows from localization clauses (1), (2) and (4) and the extension formula; since j is a monomorphism, every arrow between objects over U is over U. (2) The slice-sheafification leaf explicitly states that it is compatible with the sheafification unit, and its hypotheses hold: the site is a small skeleton, the values are abelian groups, and the slice topology matches the localized site. So the restricted unit is the unit of the sheaf M, hence invertible; naturality also holds. (3) Full faithfulness of j_!: I checked the components, b q_M = q_N P_f holds, and uniqueness of factorization gives b = Lf. (4) The triangle-identity argument is correct and holds for any adjunction L ⊣ R. Route: everything used is in sk-def-sf-operations or the item's own unit, except the slice lemma, which is a Mathlib leaf. No tool_uses are needed. Duplicates: the étale, fixed-category (sfb), qcqs and derived variants each use a different coefficient category or a different setting. No new nodes. Edge cases checked: j = id, U empty, X empty, the zero ring and zero modules."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F8",
+  "result": "pass",
+  "landing": "20261018T145100-L-3639187",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
