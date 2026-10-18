@@ -13,9 +13,98 @@
   "def-weil-pbc-formally-smooth-adic",
   "def-weil-pbc-noetherian-ring"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First show that $k'/k_0$ is formally smooth with the discrete topology. Given a $k_0$-algebra $D$, a square-zero ideal $J$, and a $k_0$-algebra map $g:k'\\to D/J$, apply [lem-weil-pbc-field-char-p-nilpotent-lifting] with $K=k'$ and $N=2$ to obtain a ring lift $f:k'\\to D$; $p\\cdot1_D=0$ because $D$ is a $k_0$-algebra. Write $i:k_0\\to k'$ and $a:k_0\\to D$ for the structure maps. For $x\\in k_0$, choose $y\\in k_0$ with $y^p=x$, using perfectness. Then $f(i(y))-a(y)\\in J$, and the characteristic-$p$ binomial identity gives $f(i(x))-a(x)=(f(i(y))-a(y))^p=0$, since $p\\ge2$ and $J^2=0$. Thus $f$ is $k_0$-linear. This verifies the lifting condition of [def-weil-pbc-formally-smooth-adic] for the zero ideal of the field $k'$, with no finite-generation assumption.",
+   "uses": [
+    "lem-weil-pbc-field-char-p-nilpotent-lifting",
+    "def-weil-pbc-formally-smooth-adic"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0320, lemma-formally-smooth-extensions-easy (3); explicit perfect-base linearity verification for the field lifting theorem; ILO IV 4.1.4 and 4.2.5"
+   }
+  },
+  {
+   "text": "Every ideal of $W$ is principal, hence finitely generated, so $W$ is Noetherian [def-weil-pbc-noetherian-ring]. The field $E=k'$ is a Noetherian local ring with zero maximal ideal, and it is complete for that ideal: every quotient $E/0^n$ is $E$ with identity transition maps. Apply [lem-weil-pbc-fs-adic-lift-from-residue-field] to $A_0=W$, its specified residue field $k_0$, and $E=k'$ with the formal smoothness just proved. Obtain a complete Noetherian local ring $(V,\\mathfrak m_V)$, a local map $h:W\\to V$ formally smooth for the $\\mathfrak m_V$-adic topology, and a $W$-algebra isomorphism $e:V/\\pi V\\xrightarrow{\\sim}k'$. The $W$-linearity of $e$ says exactly that the induced map on $k_0$ is the specified inclusion. Here and below $\\pi$ in $V$ denotes $h(\\pi)$.",
+   "uses": [
+    "def-weil-pbc-noetherian-ring",
+    "lem-weil-pbc-fs-adic-lift-from-residue-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07NR, lemma-lift-fs, statement; ILO IV 4.1.6 and 4.2.5, first paragraph"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-fs-adic-local-flat], $h$ is flat; both rings are Noetherian and $h$ is local, as required. By [def-weil-pbc-flat-ring-map], tensoring the injective map $W\\xrightarrow{\\pi}W$ with $V$ remains injective. Under $W\\otimes_W V\\cong V$, $w\\otimes v\\mapsto h(w)v$ (inverse $v\\mapsto1\\otimes v$), it is multiplication by $\\pi$. Thus $\\pi$ is a nonzerodivisor in $V$. As $V/\\pi V\\cong k'$ is a nonzero field, $\\pi V=\\mathfrak m_V$ and $V\\ne0$, so all powers of $\\pi$ are nonzero. For any nonzero $w\\in W$, [lem-weil-pbc-dvr-unit-times-uniformizer-power] writes $w=u\\pi^n$ with $u$ a unit. Hence $h(w)=h(u)\\pi^n\\ne0$, proving injectivity of $h$.",
+   "uses": [
+    "lem-weil-pbc-fs-adic-local-flat",
+    "def-weil-pbc-flat-ring-map",
+    "lem-weil-pbc-dvr-unit-times-uniformizer-power"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07NP, lemma-formally-smooth-flat; Algebra Tag 00PD, lemma-characterize-dvr, final assertion; ILO IV 4.2.5, first paragraph"
+   }
+  },
+  {
+   "text": "We verify the DVR assertion directly. Completeness implies $\\bigcap_n\\mathfrak m_V^n=0$ [def-weil-pbc-adically-complete-ring]. For $0\\ne v\\in V$, choose the largest $n$ with $v\\in\\pi^nV$: such an $n$ exists because the powers are nested and their intersection is zero. Write $v=\\pi^nu$; maximality gives $u\\notin\\pi V=\\mathfrak m_V$, so $u$ is a unit. Products of nonzero elements are therefore nonzero, since $\\pi$ is a nonzerodivisor. For any nonzero ideal $H$, choose a nonzero element whose exponent $n$ is least among the exponents occurring in $H$. Its unit factor shows $\\pi^n\\in H$, and every other element is divisible by $\\pi^n$; thus $H=\\pi^nV$. The zero ideal is principal too. The ring $V$ is consequently a local principal ideal domain with nonzero maximal ideal $(\\pi)$, namely a DVR with uniformizer $\\pi$ by [def-sc-discrete-valuation-ring]. It is complete by construction.",
+   "uses": [
+    "def-weil-pbc-adically-complete-ring",
+    "def-sc-discrete-valuation-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00PD, lemma-characterize-dvr, elementary uniformizer-division argument; ILO IV 4.2.5 assertion that V is a DVR"
+   }
+  },
+  {
+   "text": "Now let $C$, $\\mathfrak n$ and $s$ be as in the statement, and put $J=\\pi C$. Locality of $W\\to C$ gives $J\\subseteq\\mathfrak n$, so $J$ is proper. By [lem-weil-pbc-complete-local-quotient], $C/J$ is complete for its maximal ideal $\\mathfrak n/J$. Its separatedness [def-weil-pbc-adically-complete-ring] gives $\\bigcap_{m\\ge1}(J+\\mathfrak n^m)/J=0$, equivalently $J=\\bigcap_{m\\ge1}(J+\\mathfrak n^m)$. Thus $J$ is closed for the $\\mathfrak n$-adic topology. Also $J^1\\subseteq\\mathfrak n$, verifying the remaining ideal hypothesis needed for complete-target lifting. This applies even when $\\pi$ is a zerodivisor or zero in $C$.",
+   "uses": [
+    "lem-weil-pbc-complete-local-quotient",
+    "def-weil-pbc-adically-complete-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0325, lemma-quotient-complete-local; closure condition for More on Algebra Tag 07NJ, lemma-lift-continuous"
+   }
+  },
+  {
+   "text": "Set $g=s\\circ e\\circ(V\\to V/\\pi V):V\\to C/J$. This is a $W$-algebra map: $e$ respects the specified residue map, and $s$ is $k_0$-linear. Since $\\mathfrak m_V=\\pi V$, $g(\\mathfrak m_V)=0$. Apply [lem-weil-pbc-fs-adic-lift-into-complete] with $R=W$, $S=V$, source ideal $\\mathfrak m_V$, target $A=C$, ideal of definition $I=\\mathfrak n$, quotient ideal $J=\\pi C$, and $r=t=1$. Formal smoothness is from step 2; completeness and the closed-ideal hypotheses are those of step 5. It yields a $W$-algebra map $f:V\\to C$ reducing to $g$, with $f(\\mathfrak m_V)\\subseteq\\mathfrak n$. This map is local: elements outside $\\mathfrak m_V$ are units and remain units, whereas elements of $\\mathfrak m_V$ map into $\\mathfrak n$. Its residue map is the given isomorphism induced by $s$. Thus it is the required lift.",
+   "uses": [
+    "lem-weil-pbc-fs-adic-lift-into-complete"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07NJ, lemma-lift-continuous; ILO IV 4.1.3 and 4.2.5, second paragraph"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-field-char-p-nilpotent-lifting",
+  "def-weil-pbc-formally-smooth-adic",
+  "def-weil-pbc-noetherian-ring",
+  "lem-weil-pbc-fs-adic-lift-from-residue-field",
+  "lem-weil-pbc-fs-adic-local-flat",
+  "def-weil-pbc-flat-ring-map",
+  "lem-weil-pbc-dvr-unit-times-uniformizer-power",
+  "def-weil-pbc-adically-complete-ring",
+  "def-sc-discrete-valuation-ring",
+  "lem-weil-pbc-complete-local-quotient",
+  "lem-weil-pbc-fs-adic-lift-into-complete"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose IV 4.2.5, first two paragraphs, following IV 4.1.3–4.1.6 via Stacks 07NR, 07NP and 07NJ; elementary perfect-base linearity and DVR/closed-ideal verifications expanded here"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -51,10 +140,80 @@
    "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq\", \"module\": \"Mathlib.RingTheory.Smooth.AdicCompletion\", \"type\": \"{I : Ideal S} (f : A →ₐ[R] S ⧸ I) :\\n  ∃ (g : A →ₐ[R] AdicCompletion I S), ((AdicCompletion.evalOneₐ I).restrictScalars R).comp g = f\", \"doc\": \"For any commutative rings $R$ and $S$, an ideal $I$ of $S$, and a formally smooth $R$-algebra $A$, given an $R$-algebra homomorphism $f : A \\\\to S/I$, there exists an $R$-algebra homomorphism $g : A \\\\t\"}\n  {\"name\": \"Algebra.FormallySmooth.lift\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"[FormallySmooth R A] (I : Ideal B) (hI : IsNilpotent I) (g : A →ₐ[R] B ⧸ I) : A →ₐ[R] B\", \"doc\": \"Given a commutative ring $ R $, a formally smooth $ R $-algebra $ A $, a ring $ B $ with a nilpotent ideal $ I $, and an $ R $-algebra homomorphism $ g: A \\to B/I $, there exists an $ R $-algebra homom\"}\n  {\"name\": \"Algebra.FormallySmooth.of_perfectField\", \"module\": \"Mathlib.RingTheory.Smooth.Field\", \"type\": \"[PerfectField K] [Algebra.EssFiniteType K L] : Algebra.FormallySmooth K L\", \"doc\": \"If $ K $ is a perfect field and $ L $ is a finitely generated $ K $-algebra, then $ L $ is formally smooth over $ K $. This instance asserts that for a perfect field $ K $ and an algebra $ L $ of esse\"}\n  {\"name\": \"Valued.integer.compactSpace_iff_completeSpace_and_isDiscreteValuationRing_and_finite_residueField\", \"module\": \"Mathlib.Topology.Algebra.Valued.LocallyCompact\", \"type\": \"[(Valued.v : Valuation K Γ₀).RankOne] :\\n  CompactSpace 𝒪[K] ↔ CompleteSpace 𝒪[K] ∧ IsDiscreteValuationRing 𝒪[K] ∧ Finite 𝓀[K]\", \"doc\": \"For a valued field $ K $ with a rank one valuation, the ring of integers $ \\\\mathcal{O}[K] $ is compact if and only if it is complete, a discrete valuation ring, and its residue field $ \\\\kappa[K] $ is \"}\n  {\"name\": \"IsNonarchimedeanLocalField.instCompleteSpace\", \"module\": \"Mathlib.NumberTheory.LocalField.Basic\", \"type\": \": CompleteSpace K\", \"doc\": \"A field $ K $ equipped with a valuative relation and a uniform space structure is a non-Archimedean local field if it is complete and its additive group operations are uniformly continuous.\"}\n  {\"name\": \"Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete\", \"module\": \"Mathlib.RingTheory.Smooth.AdicCompletion\", \"type\": \"{I : Ideal S} [IsAdicComplete I S] (f : A →ₐ[R] S ⧸ I) : ∃ (g : A →ₐ[R] S), (Ideal.Quotient.mkₐ _ _).comp g = f\", \"doc\": \"Let $ R $ be a commutative ring, $ A $ an $ R $-algebra, and $ S $ a commutative ring with an ideal $ I $. If $ S $ is adic complete with respect to $ I $, then for any $ R $-algebra homomorphism $ f \"}\n  {\"name\": \"IsLocalRing.ResidueField.lift_residue_apply\", \"module\": \"Mathlib.RingTheory.LocalRing.ResidueField.Basic\", \"type\": \"{R S : Type*} [CommRing R] [IsLocalRing R] [Field S] (f : R →+* S) [IsLocalHom f] (x) : lift f (residue R x) = f x\", \"doc\": \"For any commutative local ring $ R $, field $ S $, and local ring homomorphism $ f : R \\\\to S $, the induced ring homomorphism from the residue field of $ R $ to $ S $ satisfies $ \\\\text{lift}(f)(\\\\text{\"}\n  {\"name\": \"of_isDiscreteValuationRing\", \"module\": \"Mathlib.RingTheory.DiscreteValuationRing.Basic\", \"type\": \": ValuationRing A\", \"doc\": \"Every discrete valuation ring is a valuation ring. That is, if $ A $ is a commutative ring satisfying the discrete valuation ring axioms (a domain with a valuation taking values in the integers), then\"}",
    "date": "2026-10-19",
    "verdict": "no match: FormallySmooth lifting lemmas require an already formally smooth algebra; of_perfectField in the pinned Mathlib also assumes EssFiniteType and does not construct the required complete DVR"
+  },
+  {
+   "tool": "grep",
+   "query": "FormallySmooth.*perfect|FormallySmooth.*[Ss]epar|of_perfectField|characterize_separable",
+   "results": "msearch OK; 4 hits; returned: Mathlib/RingTheory/RamificationInertia/Ramification.lean, Mathlib/RingTheory/Smooth/Field.lean, Mathlib/RingTheory/Smooth/Field.lean, Mathlib/RingTheory/Smooth/Field.lean",
+   "date": "2026-10-18",
+   "verdict": "no match for the complete coefficient-DVR construction: lifting lemmas presuppose formal smoothness; the perfect-field instance read at Mathlib/RingTheory/Smooth/Field.lean:53 requires EssFiniteType, absent here. Existing DAG tools cover the supporting field step."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every extension of a perfect field is formally smooth without any finite generation hypothesis",
+   "results": "msearch OK; 8 hits; returned: Algebra.FormallySmooth.of_perfectField, Algebra.FormallySmooth.iff_injective_lTensor_residueField, Algebra.Smooth.formallySmooth, Algebra.FormallyEtale.instFormallySmooth, Algebra.Extension.formallySmooth_iff_split_injection, Algebra.FormallySmooth.adjoin_of_algebraicIndependent, Algebra.FormallySmooth.of_algebraicIndependent, Algebra.FormallySmooth.casesOn",
+   "date": "2026-10-18",
+   "verdict": "no match for the complete coefficient-DVR construction: lifting lemmas presuppose formal smoothness; the perfect-field instance read at Mathlib/RingTheory/Smooth/Field.lean:53 requires EssFiniteType, absent here. Existing DAG tools cover the supporting field step."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"FormallySmooth\", \"PerfectField\"",
+   "results": "msearch OK; 1 hits; returned: Algebra.FormallySmooth.of_perfectField",
+   "date": "2026-10-18",
+   "verdict": "no match for the complete coefficient-DVR construction: lifting lemmas presuppose formal smoothness; the perfect-field instance read at Mathlib/RingTheory/Smooth/Field.lean:53 requires EssFiniteType, absent here. Existing DAG tools cover the supporting field step."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every extension of a perfect field is formally smooth without any finite generation hypothesis",
+   "results": "msearch OK; 8 hits; returned: Algebra.FormallySmooth.of_perfectField, Algebra.IsAlgebraic.perfectField, perfectClosure.perfectField, Algebra.FormallySmooth.of_algebraicIndependent, Algebra.FormallyEtale.of_isSeparable, perfectField_of_isSeparable_of_perfectField_top, PerfectField.toPerfectRing, IsPurelyInseparable.instNonemptyAlgHomOfPerfectField",
+   "date": "2026-10-18",
+   "verdict": "no match for the complete coefficient-DVR construction: lifting lemmas presuppose formal smoothness; the perfect-field instance read at Mathlib/RingTheory/Smooth/Field.lean:53 requires EssFiniteType, absent here. Existing DAG tools cover the supporting field step."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"FormallySmooth\", \"IsDiscreteValuationRing\"",
+   "results": "msearch OK; 0 hits; returned: ",
+   "date": "2026-10-18",
+   "verdict": "no match for the complete coefficient-DVR construction: lifting lemmas presuppose formal smoothness; the perfect-field instance read at Mathlib/RingTheory/Smooth/Field.lean:53 requires EssFiniteType, absent here. Existing DAG tools cover the supporting field step."
+  },
+  {
+   "tool": "leansearch",
+   "query": "complete discrete valuation ring perfect residue field lift arbitrary residue field extension formally smooth complete discrete valuation ring",
+   "results": "msearch OK; 8 hits; returned: Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq, Algebra.FormallySmooth.lift, Algebra.FormallySmooth.of_perfectField, Valued.integer.compactSpace_iff_completeSpace_and_isDiscreteValuationRing_and_finite_residueField, IsNonarchimedeanLocalField.instCompleteSpace, Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete, IsLocalRing.ResidueField.lift_residue_apply, of_isDiscreteValuationRing",
+   "date": "2026-10-18",
+   "verdict": "no match for the complete coefficient-DVR construction: lifting lemmas presuppose formal smoothness; the perfect-field instance read at Mathlib/RingTheory/Smooth/Field.lean:53 requires EssFiniteType, absent here. Existing DAG tools cover the supporting field step."
+  },
+  {
+   "tool": "grep",
+   "query": "FormallySmooth.*IsDiscreteValuationRing|IsDiscreteValuationRing.*FormallySmooth|coefficient.*(dvr|valuation)",
+   "results": "msearch OK; 6 hits; returned: Mathlib/LinearAlgebra/Lagrange.lean, Mathlib/Algebra/Ring/Subring/IntPolynomial.lean, Mathlib/RingTheory/LaurentSeries.lean, Mathlib/RingTheory/LaurentSeries.lean, Mathlib/RingTheory/LaurentSeries.lean, Mathlib/RingTheory/Polynomial/Subring.lean",
+   "date": "2026-10-18",
+   "verdict": "no match for the complete coefficient-DVR construction: lifting lemmas presuppose formal smoothness; the perfect-field instance read at Mathlib/RingTheory/Smooth/Field.lean:53 requires EssFiniteType, absent here. Existing DAG tools cover the supporting field step."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An arbitrary field algebra over a perfect field has the infinitesimal square zero lifting property, including infinitely generated extensions",
+   "results": "msearch OK; 8 hits; returned: Algebra.FormallySmooth.of_perfectField, Algebra.Extension.homInfinitesimal, Algebra.FormallyEtale.of_isSeparable_aux, Algebra.FormallyUnramified, Algebra.Extension.infinitesimal, Algebra.FormallyEtale, Algebra.FormallySmooth.of_algebraicIndependent_of_isSeparable, Algebra.Etale.formallyEtale",
+   "date": "2026-10-18",
+   "verdict": "no match for the complete coefficient-DVR construction: lifting lemmas presuppose formal smoothness; the perfect-field instance read at Mathlib/RingTheory/Smooth/Field.lean:53 requires EssFiniteType, absent here. Existing DAG tools cover the supporting field step."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "complete discrete valuation ring perfect residue field lift arbitrary residue field extension formally smooth complete discrete valuation ring",
+   "results": "msearch OK; 8 hits; returned: Algebra.FormallySmooth.of_perfectField, Tilt, PreTilt, PreTilt.instPerfectRing, Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete, Ideal.ResidueField.lift, IsLocalRing.ResidueField.lift, Algebra.instFormallyUnramifiedResidueField",
+   "date": "2026-10-18",
+   "verdict": "no match for the complete coefficient-DVR construction: lifting lemmas presuppose formal smoothness; the perfect-field instance read at Mathlib/RingTheory/Smooth/Field.lean:53 requires EssFiniteType, absent here. Existing DAG tools cover the supporting field step."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohen formally smooth lift of field extension over complete trait with same uniformizer",
+   "results": "msearch OK; 8 hits; returned: Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete, PreTilt.untilt, Tilt, Algebra.FormallySmooth.lift, Algebra.FormallySmooth.of_perfectField, PreTilt.untiltFun, Algebra.Extension.homInfinitesimal, Algebra.FormallySmooth.exists_lift",
+   "date": "2026-10-18",
+   "verdict": "no match for the complete coefficient-DVR construction: lifting lemmas presuppose formal smoothness; the perfect-field instance read at Mathlib/RingTheory/Smooth/Field.lean:53 requires EssFiniteType, absent here. Existing DAG tools cover the supporting field step."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-cohen-gabber-finite-presentations",
@@ -78,5 +237,54 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-perfect-residue-coefficient-dvr",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Six steps follow ILO IV 4.2.5: field lifting plus a perfect-base pth-power calculation, the existing 07NR model, flatness and injectivity, explicit DVR division, closure of pi C, and 07NJ lifting with every ideal hypothesis checked. Reused existing support throughout; no new nodes.",
+  "blueprint": "Supports Step 1 of the current split of lem-per-artin-gabber-affine-curve through its dimension-normalized duality chain, via the mixed-characteristic coefficient lifting in Step 7 of lem-per-cohen-gabber-finite-presentations; realizes precisely ILO IV 4.2.5 first two paragraphs. The inherited ancestry is unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-field-char-p-nilpotent-lifting",
+    "why": "Generic characteristic-p ring-map lifting; the elementary perfect-base calculation makes its lift k_0-linear. No node of this perverse unit supplies this algebra tool."
+   },
+   {
+    "node": "lem-weil-pbc-fs-adic-lift-from-residue-field",
+    "why": "Generic complete-local deformation theorem 07NR, the same coefficient construction recalled in ILO IV 4.1.6; no perverse-unit result supplies it."
+   },
+   {
+    "node": "lem-weil-pbc-fs-adic-local-flat",
+    "why": "Generic 07NP consequence of local adic formal smoothness, used only to make pi a nonzerodivisor."
+   },
+   {
+    "node": "lem-weil-pbc-dvr-unit-times-uniformizer-power",
+    "why": "Generic DVR element factorization used to verify injectivity of W into V."
+   },
+   {
+    "node": "lem-weil-pbc-complete-local-quotient",
+    "why": "Generic quotient completeness used to verify the closed-ideal hypothesis for pi C, without assuming C is a domain."
+   },
+   {
+    "node": "lem-weil-pbc-fs-adic-lift-into-complete",
+    "why": "Generic complete-target lifting theorem 07NJ, precisely the ILO IV 4.1.3 tool invoked in IV 4.2.5."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-field-char-p-nilpotent-lifting",
+  "lem-weil-pbc-fs-adic-lift-from-residue-field",
+  "lem-weil-pbc-fs-adic-local-flat",
+  "lem-weil-pbc-dvr-unit-times-uniformizer-power",
+  "lem-weil-pbc-complete-local-quotient",
+  "lem-weil-pbc-fs-adic-lift-into-complete"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q103-63cca038f",
+  "group": "Q103",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q103-63cca038f (reviewer sub-agent of L); spot-checked: Read the item in full against ILO IV 4.2.5 paragraphs 1–2 and 4.1.3–4.1.6 (PDF pp. 63, 65). Statement, stmt_deps, source and blueprint are unchanged from the base; there are no new nodes. Step 1: lem-weil-pbc-field-char-p-nilpotent-lifting gives a ring lift (p·1_D=0, N=2). k0-linearity follows from y^p=x and (f(i(y))−a(y))^p ∈ J^2=0, with no finiteness assumption; no existing node states char-p perfect-base formal smoothness. Step 2: 07NR applies with A0=W (PID, complete) and E=k' (complete for the ideal 0). Its A0-linear e gives the specified map on k0. Step 3: 07NP applies (Noetherian local rings, local map), so flatness makes π a nonzerodivisor; 00PD is applied to W, which gives injectivity. Step 4: the DVR proof by largest and least π-exponents is correct and elementary. Step 5: 0325 makes C/πC complete, so πC=∩(πC+n^m) and t=1. Step 6: 07NJ applies with r=t=1; s is W-linear through W/π=k0; the lift is local and induces the given residue isomorphism. Edge cases checked: k'=k0, ramified W, infinitely generated or imperfect k', C=W/π^a, π=0 in C. Searched the DAG for duplicates (Cohen and coefficient-ring nodes, the char-0 field and residue-section nodes): none states the ramified extension with the W-linear lift. The only citer is lem-per-cohen-gabber-finite-presentations step 7, which uses exactly the stated clauses. Accepted tool_uses: the six generic algebra lemmas (char-p field lifting, 07NR, 07NP, 00PD, 0325, 07NJ). No SGA cited. No changes."
  }
 }
