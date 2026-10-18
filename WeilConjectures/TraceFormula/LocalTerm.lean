@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.CategoryTheory.Adjunction.ClopenIdempotent
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.ClopenLowerShriek
 public import WeilConjectures.TraceFormula.BorelMoore
 public import WeilConjectures.TraceFormula.OpenCover
 
@@ -369,7 +370,8 @@ theorem boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl_clopen (j : B ⟶
           (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ j).hom.app M) ≫
       (boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
         j).counit.app M = 𝟙 M :=
-  sorry
+  boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl_clopen_of j ℓ
+    (boundedConstructibleOpenImmersionLowerShriekOfIsProperIso_inv_app_comp_counit j ℓ) M
 
 /-- The pullback of an extension by zero `Rj_! M` along a morphism whose range misses the range
 of the open immersion `j` vanishes. -/
