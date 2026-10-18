@@ -9,7 +9,11 @@
  },
  "stmt_deps": [
   "def-trf-fs-log-blowup",
-  "def-per-fs-log-smooth-etale"
+  "def-per-fs-log-smooth-etale",
+  "def-trf-strict-normal-crossings-boundary",
+  "def-trf-normal-crossings-divisor",
+  "def-nagata-global-blowup",
+  "def-nagata-strict-transform"
  ],
  "proof": [
   {
@@ -263,5 +267,53 @@
   "group": "Q143",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q143-207ada543 (reviewer sub-agent of L); spot-checked: I read the item, all four new nodes and every cited statement in full, against ILO X 1.1–1.7, printed pp.135–146. That covers 1.2 with equations (1)–(5) and the P0 paragraph, 1.3 (i)–(vii) and (1.d), Lemmas 1.5–1.6, the 1.7 Claim, the U_i/V_i charts and the β/δ monoid maps. The statement matches the base apart from three clarifications: G-strict is defined, strict transform is the scheme-theoretic closure, and the new boundary is exceptional divisor ∪ strict transform. Allowing m = 0 is a harmless generalisation, handled by the V_i charts. Step 1: tame inertia has invertible order; the base action is trivial; G-strictness plus unibranch SNC components means inertia fixes every branch; VI 1.4 gives M̄ ≅ N^r; all hypotheses of the equivariant-chart node hold. Step 2 is the repaired fault: it asserted with no reason that the face units F^gp are torsion free. The fix shows P^gp is torsion free because P is saturated and P^× is torsion free, then applies the unit splitting. The residue-field argument for trivial unit characters is correct. Step 3: idempotent, coinvariants, free summands over local Λ, ζ^a − 1 a unit; I checked the fixed ideal. Step 4: the equaliser is open via the étale diagonal; the fixed locus commutes with S×_Σ. Step 5: monomial Tor applied to Y^H, T_J and Y^H∩T_J; strict-local vanishing spreads by faithfully flat descent and coherence; the hypotheses of the blowup node hold. Step 6 uses 0BIQ and the Rees cover. Steps 7–8: I checked the saturations and tested Z/2 acting on A² by −1, plus the cases m = 0 and a single generator. New nodes are all true and statement-only. The equivariant chart is X 1.2 (Z/2 on A¹ tested); it is not the non-equivariant Q50 Kato chart. The tame Sym V chart holds by averaging a lift through the Jacobian criterion; ILO's radicial base change is not needed. The monomial-Tor node I proved through the complete-local model (flat in equal characteristic; g a nonzerodivisor via the associated graded in mixed characteristic). It generalises lem-trf-kato-tor-independence-chart, which covers only Tor_1 and P = Q, so it is not a duplicate. The Tor-independent blowup node is X 1.6, with ILO's typo of V for W corrected; its NCD paragraph holds by Mayer–Vietoris. None of the new nodes restates a clause of the item, and there is no cycle and no SGA. Tool uses accepted: three trf monoid lemmas, 0593, 0BIQ, Nagata Rees cover and étale def. Batch-5: def-trf-fs-log-blowup and def-per-fs-log-smooth-etale are general definitions. lem-trf-free-characteristic-regular-boundary is VI 1.4 log-regular local algebra; its closure of 1040 nodes contains no thm-trf, trace transport, Poincaré-duality node or batch-4 target. fs-face-sharpening, fine-monoid-unit-splitting, projective-over-local-free and blowup-chart-regular-sequence-presentation are pure algebra. All flags accepted; none is a step of the trace formula or of Poincaré duality. Fix file: fixes/dag/nodes/sec-deligne-laumon-a1/lem-per-gabber-fixed-locus-log-chart.json, Step 2 text only.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GabberFixedLocusLogChart",
+  "declaration": "AlgebraicGeometry.GabberFixedLocus.exists_fixed_locus_log_chart",
+  "declarations": [
+   "AlgebraicGeometry.GabberFixedLocus.ToricMonoid",
+   "AlgebraicGeometry.GabberFixedLocus.ModelRing",
+   "AlgebraicGeometry.GabberFixedLocus.monomial",
+   "AlgebraicGeometry.GabberFixedLocus.unitCoordinate",
+   "AlgebraicGeometry.GabberFixedLocus.boundaryCoordinate",
+   "AlgebraicGeometry.GabberFixedLocus.polynomialCoordinate",
+   "AlgebraicGeometry.GabberFixedLocus.affineIdeal",
+   "AlgebraicGeometry.GabberFixedLocus.center",
+   "AlgebraicGeometry.GabberFixedLocus.boundary",
+   "AlgebraicGeometry.GabberFixedLocus.strictIdeal",
+   "AlgebraicGeometry.GabberFixedLocus.BlowupComparison",
+   "AlgebraicGeometry.GabberFixedLocus.IsFixedSubscheme",
+   "AlgebraicGeometry.GabberFixedLocus.IsGroupStrict",
+   "AlgebraicGeometry.GabberFixedLocus.beta",
+   "AlgebraicGeometry.GabberFixedLocus.delta",
+   "AlgebraicGeometry.GabberFixedLocus.zSubstitution",
+   "AlgebraicGeometry.GabberFixedLocus.ySubstitution",
+   "AlgebraicGeometry.GabberFixedLocus.affinePullback",
+   "AlgebraicGeometry.GabberFixedLocus.IsDivisorial",
+   "AlgebraicGeometry.GabberFixedLocus.chartRingMap",
+   "AlgebraicGeometry.GabberFixedLocus.chartSchemeMap",
+   "AlgebraicGeometry.GabberFixedLocus.modelBase",
+   "AlgebraicGeometry.GabberFixedLocus.groupMap",
+   "AlgebraicGeometry.GabberFixedLocus.LocalChart",
+   "AlgebraicGeometry.GabberFixedLocus.LocalChart.comparison",
+   "AlgebraicGeometry.GabberFixedLocus.BlowupCharts",
+   "AlgebraicGeometry.GabberFixedLocus.BlowupCharts.BaseMaps",
+   "AlgebraicGeometry.GabberFixedLocus.exists_fixed_locus_log_chart"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/GabberFixedLocusLogChart.lean",
+  "statement": "theorem exists_fixed_locus_log_chart (X S : FineSaturatedLogScheme.{u}) [IsNoetherian X.scheme] [IsNoetherian S.scheme] (_hregular : IsRegularScheme X.scheme) (Z : X.scheme.IdealSheafData) (D : S.scheme.IdealSheafData) (_hX : X.IsLogRegular) (_hS : S.IsLogRegular) (_hXZ : IsDivisorial X Z) (_hSD : IsDivisorial S D) (_hZ : IsStrictNormalCrossingsBoundary Z) (_hZn : Z.IsNormalCrossingsDivisor) (f : EtaleLogHom X S) (_hf : f.IsLogSmooth) (G : Type v) [Group G] [Finite G] (a : G →* Aut X.scheme) (_hover : ∀ g : G, (a g).hom ≫ f.base = f.base) (_hpreserve : ∀ g : G, Z.comap (a g).hom = Z) (_hstrict : IsGroupStrict a Z) (_htame : ∀ (K : Type u) [Field K] [IsAlgClosed K] (b : Spec (.of K) ⟶ X.scheme), IsUnit (Nat.card {g : G // b ≫ (a g).hom = b} : X.scheme.presheaf.stalk (b default))) (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (x : Spec (.of Ω) ⟶ X.scheme) (_hinertia : ∀ g : G, x ≫ (a g).hom = x) (H : Subgroup G) : ∃ (N : ℕ) (_hN : 0 < N) (Λ : Type u) (_ : CommRing Λ) (_ : Algebra (CyclotomicRing N ℤ ℚ) Λ) (M : Submonoid (CyclotomicRing N ℤ ℚ)), IsLocalization M Λ ∧ (N : CyclotomicRing N ℤ ℚ) ∈ M ∧ (∀ g : G, g ^ N = 1) ∧ ∃ (Q : Type u) (_ : CommMonoid Q), IsFineSaturatedMonoid Q ∧ (∀ q : Q, IsUnit q → q = 1) ∧ ∃ (t r s m n : ℕ) (γ : Q →* ToricMonoid t r), m ≤ r ∧ n ≤ s ∧ Function.Injective (groupMap γ) ∧ Finite (CommGroup.torsion (Algebra.GrothendieckGroup (ToricMonoid t r) ⧸ (groupMap γ).range)) ∧ IsUnit (Nat.card (CommGroup.torsion (Algebra.GrothendieckGroup (ToricMonoid t r) ⧸ (groupMap γ).range)) : Λ) ∧ ∃ c : LocalChart f a x Λ Q t r s γ, Etale c.comparison ∧ Z.comap c.V.hom = (boundary Λ t r (Fin s)).comap c.toModel ∧ IsFixedSubscheme c.modelAction H (center Λ t r s m n).subschemeι ∧ IsFixedSubscheme c.sourceAction H ((center Λ t r s m n).comap c.toModel).subschemeι ∧ (0 < m + n → BlowupComparison (pullback.snd (chartSchemeMap c.coefficient ((S.logStructure.alpha.app (op c.W)).hom.comp c.baseChart)) (modelBase t r (Fin s) γ)) (center Λ t r s m n) (boundary Λ t r (Fin s)) ∧ BlowupComparison c.toModel (center Λ t r s m n) (boundary Λ t r (Fin s)) ∧ ∃ b : BlowupCharts Λ t r s m n, b.BaseMaps γ)",
+  "branch": "newtargets-dag",
+  "by": "Q82",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-83f9db4cc",
+  "group": "Q82",
+  "result": "pass",
+  "note": "Read node, 6 stmt_dep records and their Lean declarations (FineSaturatedLogScheme/IsChart/IsLogRegular/EtaleLogHom, FSLogChart/IsLogSmooth, IsStrictNormalCrossingsBoundary, IsNormalCrossingsDivisor, IdealSheafData.blowup, strictTransformMap, divisorialSections) and the full module. All hypotheses render the node with none stronger: divisorial log structure via IsDivisorial bridge (not an H4 duplicate of the scheme-level pair predicate), SNC+NCD, G-strict equivalent, pointwise inertia tameness, post-replacement inertia. Conclusion: Lambda localization of Z[mu_N] with N in M, sharp fs Q (sharp at point), gamma gp-injective with finite invertible coker torsion, canonical pullback.lift comparison Etale, strict via monomial source chart, equivariant model action pinned on all generators (u fixed, z eigen, y linear), fixed subscheme by universal property = coordinate centre on model and source, boundary pullback, blowup comparisons (IsPullback + strict ideal) for model and source under 0<m+n, U_i/V_i charts with substitutions/exceptional/strict ideals and beta/delta checked by hand. Edge cases m,n,r,t,s=0, single generator, trivial H, empty X OK. Statement verbatim (script), sorry-only, docstrings, <=100 cols. nt_compile --json: 8.1 s, exit 0, clean. Advisories: stray '- right.' docstring line; FineMonoidUnitSplitting import missing but landed after base; divisorialSections owner only a transitive dep; model clause is global over W x_Sigma Y, which I believe holds (Kato log-regular base change) but stage 3 must prove the Tor vanishing at all points of W."
  }
 }
