@@ -16,7 +16,8 @@
   "def-constructible-stratification",
   "def-weil-pbc-inverse-image",
   "def-weil-pbc-category-colimit",
-  "def-pur-sheaf-tensor-product"
+  "def-pur-sheaf-tensor-product",
+  "def-per-galois-partition-modules"
  ],
  "proof": [
   {
@@ -280,5 +281,23 @@
   "group": "Q31",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q31-c050446e2 (reviewer sub-agent of L); spot-checked: The mathematics is correct and was read in full against ILO XVII 7.2.1-7.2.5 (local systems, the classifying-topos equivalence, descent and torsion extension closure; Ex. 7.2.7), 7.3.1-7.3.3 (the item's W_P(A) is the 'autrement dit' form of 7.3.2) and 11.2.1/11.3. Step 1: the constant-ring inverse image and 03EL give restriction of tensors to strata. Steps 2/4: the monodromy node's cover-descent, extension, exactness and pullback clauses carry finite filtrations to and from Pi-modules with H trivial on the quotients, and V->S is an etale covering. Step 3: I checked (h-1)(u⊗w)=(hu-u)⊗hw+u⊗(hw-w) in T_{a+b-1}; the filtration uses images, so no flatness and no normality of H is needed. Step 5: sheaf-tensor-closed (3) with Mod_A plus the 0GMW constant-presheaf clause, and I×J is filtered. Edge cases: empty X and empty strata, zero modules and length-zero filtrations. The new node lem-per-local-system-tensor-monodromy is true: every torsion local system is a filtered union of sub-local systems each trivialised by one finite Galois cover; there constant⊗constant is constant; then descent and colimits apply, and stalks commute with sheafification. It holds for R=0, infinite-rank and non-flat cases, is strictly smaller than the item, and duplicates nothing: torsion-local-system-monodromy has no tensor clause, galois-cover-module-descent has a trivial first factor only, and the sfb monodromy realization, coef-etale-open-tensor and cor-galois-lisse nodes are all different. FIX for B3: the new node's notions (scheme, connected, Noetherian, geometric point, pi_1, module sheaf, constant sheaf, etale site, colimit) are now cited inline and in stmt_deps. The four declared generic tool_uses are accepted. No SGA, and the route and targets are unchanged.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.GaloisPartitionTensorClosure",
+  "declaration": "AlgebraicGeometry.Scheme.GaloisPartition.modules_tensor",
+  "file": "lean/Sheaf/Paper/GaloisPartitionTensorClosure.lean",
+  "statement": "theorem GaloisPartition.modules_tensor (l : ℕ) [Fact l.Prime] (X : Scheme.{u}) [IsNoetherian X] (A : Type (u + 1)) [CommRing A] [IsNoetherianRing A] [Algebra (ZMod l) A] (P : GaloisPartition X) (E G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A)) (hE : P.modules A E) (hG : P.modules A G) : P.modules A (E ⊗ G)",
+  "branch": "newtargets-dag",
+  "by": "Q34",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-79942242c",
+  "group": "Q34",
+  "result": "pass",
+  "note": "Lean modules_tensor matches the node and ILO XVII 7.3.2-7.3.3 clause by clause: IsNoetherian X, Noetherian ZMod l-algebra A : Type (u+1) (recorded convention), P : GaloisPartition X and P.modules from the landed def-per-galois-partition-modules (stmt_dep correctly added; no copy). Conclusion P.modules A (E ⊗ G) with the same P; ⊗ probed as Etale.sheafMonoidalCategory = sheafified objectwise ⊗_A (ordinary, no flatness). No extra hypotheses. Edge cases: empty X, zero ring, zero-length filtrations, non-flat or infinite modules. Statement verbatim, lines <=100. Docstrings carry source, blueprint and proof steps 1-6; proof is sorry only. Proof-dep imports match the live records. nt_compile --json clean in 2.8 s. Advisory: def-pur-sheaf-tensor-product is recorded as cochainModulesMonoidal, but the landed W_P encoding forces Etale.sheafMonoidalCategory (same tensor); some public imports are only transitive."
  }
 }

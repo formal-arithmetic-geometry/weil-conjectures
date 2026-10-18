@@ -227,5 +227,23 @@
   "group": "Q40",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q40-ff07c745a (reviewer sub-agent of L); spot-checked: I read the item and the new node in full, all 15 cited statements, ILO XVII 4.2.1 (p.281) and 4.3.2.3 (pp.284-285), and Stacks 0FWF together with the definition of geometrically integral. The statement is unchanged and matches ILO 4.3.2.3. Step 1: the prime is chosen away from the residue characteristic, so it is a unit in A and B; Spec L -> X is affine, hence qcqs; W_L = Spec(B⊗_A L). Step 2: the regular base-change node (ILO 4.2.1, here with n=1) has every hypothesis met; degree-zero cohomology is taken through the exact inverse image, H0 Rg_* = g_*, and forgetting coefficients. Step 3: X and Y are both strictly henselian and f is local, so global sections equal stalks at the closed geometric points, and the stalk of the inverse image matches the stalk downstairs; this gives #Γ(W_L,F_ℓ) = ℓ. Step 4 is genuinely elementary: an empty W_L gives 1 section and a nontrivial clopen splitting gives at least ℓ^2. Step 5: W_L is regular (and locally Noetherian), nonempty and connected, so lem-sc-regular-connected-integral makes it integral. Step 6: 0FWF passes from all finite L to any geometric field Ω, writing out S⊗_k L ≅ B⊗_A L; this avoids assuming the Ω-fibre is Noetherian. The new node is exactly Stacks 0FWF (2)⇒(1), which needs no finiteness hypothesis. I tested it on k, k[ε]/(ε²), the zero ring and a separable field extension. It is self-contained, its blueprint fields are correct, and it duplicates nothing: 0FWF appears only in this delivery, and the geometric-reducedness and geometric-integrality nodes in trf/sbc do not state the criterion. There is no cycle (closure checked against the item and both citers), no SGA source, and every step is under 2000 characters (at most 1021). The three declared tool uses (constant-sheaf sections, constant-module inverse image, forgetting coefficients) are accepted; the other off-unit citations are slopmaster2-closed, Mathlib leaves or definitions. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.StrictLocalRegularIntegralFibres",
+  "declaration": "AlgebraicGeometry.isIntegral_geometricFiber_of_strictlyHenselian_local_regular",
+  "file": "lean/Sheaf/AlgebraicGeometry/StrictLocalRegularIntegralFibres.lean",
+  "statement": "theorem isIntegral_geometricFiber_of_strictlyHenselian_local_regular (A B : Type u) [CommRing A] [CommRing B] [IsNoetherianRing A] [IsNoetherianRing B] [IsStrictlyHenselianLocalRing A] [IsStrictlyHenselianLocalRing B] (φ : A →+* B) [IsLocalHom φ] [Flat (Spec.map (CommRingCat.ofHom φ))] (hreg : ∀ (x : Spec (.of A)) (L : Type u) [Field L] [Algebra ((Spec (.of A)).residueField x) L] [Module.Finite ((Spec (.of A)).residueField x) L], IsRegularScheme (pullback ((Spec.map (CommRingCat.ofHom φ)).fiberToSpecResidueField x) (Spec.map (CommRingCat.ofHom (algebraMap ((Spec (.of A)).residueField x) L))))) (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (z : Spec (.of Ω) ⟶ Spec (.of A)) : IsIntegral (pullback (Spec.map (CommRingCat.ofHom φ)) z)",
+  "branch": "newtargets-dag",
+  "by": "NQ",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ce37bed9d",
+  "group": "NQ",
+  "result": "pass",
+  "note": "Statement matches the node and ILO XVII 4.3.2.3 clause by clause: Spec of Noetherian IsStrictlyHenselianLocalRing A, B; IsLocalHom φ; Flat; hreg is regular fibres after every finite residue-field extension (same interface as lem-per-regular-etale-direct-image-base-change); arbitrary algebraically closed geometric point; conclusion IsIntegral (pullback f z), which includes Nonempty. No extra hypotheses, single standard universe. Node differs from live only in lean; lean.statement is verbatim in the file; imports = stmt_deps plus recorded proof_dep modules; source place, blueprint id and six-step proof docstring present; no definitions; proof is sorry. nt_compile --json exit 0 (item 2.1 s, no warnings). No findings."
  }
 }

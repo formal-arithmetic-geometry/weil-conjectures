@@ -247,5 +247,23 @@
   "group": "Q29",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q29-5b178624b (reviewer sub-agent of L); spot-checked: Read in full: the item, all 9 cited statements, the parent lem-per-set-generated-sheaf-aisle (it uses the item on Mod(R) with a [-1]-shifted filtration, matching the stated closure hypotheses), Stacks derived.tex lemma-compute-colimit (093W, l.10326), and the blueprint Step 2 (motivation only; proof_origin.by=agent is correct). The statement is true and strictly smaller than the parent; it is not a restated clause. Step 1: successor stage via the SES triangle plus extension closure. Step 2: I={β<λ} is nonempty, directed and V-small; Grothendieck exactness satisfies the bar-augmentation hypotheses, so the bar total B→E_λ is a quasi-isomorphism for unbounded complexes; Q(B_p) is in V_0 by derived coproducts. Step 3: column skeleta form subcomplexes; the quotient is B_{n+1}[n+1], whose sign (-1)^{n+1}d matches the (K[1])^r=K^{r+1}, -d convention. Step 4: B^r is the colimit of the finite partial sums, q=coker u, and u is monic by lem-kun-sequential-telescope-mono (AB5 gives its finite-limit hypothesis). Step 5: the TR2 rotation W→B→W[1]→W[1] puts B in the middle, with ends in V_0. Step 6: Q inverts the quasi-isomorphism and strict fullness transfers membership. Edge cases checked: θ=0, λ=ω, uncountable cofinality, unbounded complexes, only nonnegative shifts. grep for preaisle/transfinite/hocolim over dag/nodes found no duplicate. Declared tool_uses (bar total and augmentation, derived coproducts, telescope mono, SES triangle, base definitions) are generic black boxes and are accepted. No SGA source; no new nodes; no fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.PreaisleTransfiniteMonomorphismClosure",
+  "declaration": "DerivedCategory.preaisle_transfinite_monomorphism_closure",
+  "file": "lean/Sheaf/CategoryTheory/PreaisleTransfiniteMonomorphismClosure.lean",
+  "statement": "theorem preaisle_transfinite_monomorphism_closure {A : Type u} [Category.{v} A] [Abelian A] [IsGrothendieckAbelian.{v} A] [HasDerivedCategory.{t} A] (U : ObjectProperty (DerivedCategory A)) [U.IsClosedUnderIsomorphisms] [U.ContainsZero] [U.IsTriangulatedClosed₂] (hcoproducts : ∀ I : Type v, U.IsClosedUnderColimitsOfShape (Discrete I)) (hshift : ∀ K : DerivedCategory A, U K → U (K⟦(1 : ℤ)⟧)) {J : Type v} [LinearOrder J] [OrderBot J] [OrderTop J] [SuccOrder J] [WellFoundedLT J] (E : J ⥤ CochainComplex A ℤ) [hcontinuous : ∀ n : ℤ, (E ⋙ HomologicalComplex.eval A (ComplexShape.up ℤ) n).IsWellOrderContinuous] (hzero : IsZero (E.obj ⊥)) (hmono : ∀ (i j : J) (hij : i ≤ j) (n : ℤ), Mono ((E.map (homOfLE hij)).f n)) (hquotients : ∀ i : J, i < ⊤ → U (Q.obj (cokernel (E.map (homOfLE (Order.le_succ i)))))) : U (Q.obj (E.obj ⊤))",
+  "branch": "newtargets-dag",
+  "by": "Q96",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b606d35c4",
+  "group": "Q96",
+  "result": "pass",
+  "note": "Clause-by-clause match: Category.{v}+IsGrothendieckAbelian.{v} A; HasDerivedCategory.{t}; U strictly full (IsClosedUnderIsomorphisms), ContainsZero, IsTriangulatedClosed₂, Type-v coproduct closure via IsClosedUnderColimitsOfShape (Discrete I), [1]-closure only; J:Type v well-ordered with bot/top/SuccOrder (SuccOrder unique, so no restriction) = [0,θ]; IsZero E⊥; degreewise mono for all i≤j; degreewise IsWellOrderContinuous = colimit at every nonzero limit including top; cokernel quotients for i<⊤; conclusion U(Q E⊤). Edge cases θ=0, empty coproducts, uncountable limits covered; universes u,v,t free; fits the parent set-generated-sheaf-aisle use. Proof plan sound (Type-0 telescope lemma is reached via AB5 shrink at stage 3). Only change to the node is the lean record; statement verbatim; docstrings carry the source place, blueprint tag and 6 steps citing all proof_deps; all proof_dep modules imported; no defs, sorry only; no existing match. nt_compile --json: clean in 1.7 s (a control copy with an added error was reported, so the tool really compiles). Advisory: def-sp-grothendieck-abelian and def-weil-triangulated-category have no lean records."
  }
 }

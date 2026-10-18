@@ -253,5 +253,23 @@
   "group": "Q49",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q49-6912e418b (reviewer sub-agent of L); spot-checked: I read the item, the new node lem-per-free-finite-group-affine-quotient, every cited statement, parent Step 7 and Stacks 07S7/03BM/02LA/02VN/03SF/023Q. The new node matches the affine case of 07S7 hypothesis by hypothesis: K_S is finite locally free, freeness means j is a monomorphism, and X->S is affine. Its torsor, finite-locally-free-and-surjective, base-change and categorical clauses each follow in a few lines from the fppf torsor conclusion and the fact that schemes are fppf sheaves. I tested it on K=1, X empty, the swap on S⊔S, translation with char dividing |K|, and the trivial non-free action, which is correctly excluded. It is not a duplicate: lem-a1-finite-flat-affine-relation-quotient needs global affineness, lem-per-projective-finite-group-quotient has a Noetherian base and no torsor conclusion, lem-weil-pbc-connected-torsor-subgroup-quotient is only existential, and Mathlib has nothing (ColimitsOver is gluing). Step 1 derives alpha as an isomorphism from simple transitivity on fibres, using the reflection clause of the Galois category FEt(E). Step 2 checks that the restricted action is monomorphic and E->U affine. Step 3 gives explicit inverse U-isomorphisms compatible with pi and q, so the given pi is pinned. Step 4 identifies the base change as the coset-labelled coproduct; I checked the sheaf calculation. Step 5 checks the singleton fpqc covering and cites the exact finite and étale descent nodes. Step 6 counts [G:H] points per geometric fibre, also for non-normal H, and proves connectedness. The item statement is unchanged, stmt_deps and proof_deps are consistent and no SGA is cited. I accept the three declared generic tool_uses (fibre-functor conservativity, finite and étale fpqc descent). No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.TorsorSubgroupQuotientFiniteEtale",
+  "declaration": "AlgebraicGeometry.Scheme.GaloisCoverAction.torsor_subgroup_quotient_finite_etale",
+  "file": "lean/Sheaf/AlgebraicGeometry/TorsorSubgroupQuotientFiniteEtale.lean",
+  "statement": "theorem Scheme.GaloisCoverAction.torsor_subgroup_quotient_finite_etale {U : Scheme.{u}} [ConnectedSpace U] {G : Type v} [Group G] [Finite G] (c : Scheme.GaloisCoverAction G U) [ConnectedSpace c.Z] (H : Subgroup G) (Z : Scheme.{u}) (π : c.Z ⟶ Z) (v : Z ⟶ U) (_hπv : π ≫ v = c.π) [IsFinite π] (hπ : ∀ h : H, c.smul h.val ≫ π = π) (_hsheaf : ∀ W : Z.Opens, Function.Injective (π.app W) ∧ ∀ s : Γ(c.Z, π ⁻¹ᵁ W), (∀ h : H, (c.smul h.val).app (π ⁻¹ᵁ W) s = c.Z.presheaf.map (eqToHom (congrArg (fun f : c.Z ⟶ Z ↦ f ⁻¹ᵁ W) (hπ h))).op s) ↔ ∃ t : Γ(Z, W), π.app W t = s) (_hquotient : ∀ (T : Scheme.{u}) (f : c.Z ⟶ T), (∀ h : H, c.smul h.val ≫ f = f) → ∃! q : Z ⟶ T, π ≫ q = f) : Surjective π ∧ IsFinite v ∧ Etale v ∧ ConnectedSpace Z ∧ ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ U), Nat.card (v.GeometricFiber s) = H.index",
+  "branch": "newtargets-dag",
+  "by": "Q35",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-76c6bb4fe",
+  "group": "Q35",
+  "result": "pass",
+  "note": "Statement matches the node clause by clause: given pi and v over U, finite pi, canonical-map invariant-sections condition for O_Z=(pi_*O_E)^H, categorical quotient over all schemes, conclusions Surjective pi, IsFinite v, Etale v, ConnectedSpace Z, and Nat.card of the recorded GeometricFiber = H.index for alg-closed Omega : Type u. GaloisCoverAction is the recorded declaration of def-sbc-normal-dominant-galois. No extra hypotheses or universe ties; H=1, H=G and non-normal H are covered. Only the item lean field changed; dep node copies are identical to live; lean.statement is verbatim in the file. Not a duplicate: exists_connected_subgroup_quotient is existential and never identifies the given quotient; no live module yet. Docstrings carry the source place, blueprint id and the six proof steps; proof is sorry only. nt_compile --json clean (2.0 s, exit 0). Advisory only: unused proof-intended plain imports; the second-reading section is brief."
  }
 }
