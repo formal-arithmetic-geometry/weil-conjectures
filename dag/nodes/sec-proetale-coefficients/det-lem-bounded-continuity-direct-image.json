@@ -21,9 +21,10 @@
  ],
  "proof": [
   {
-   "text": "Apply [det-pe-bounded-continuity-direct-image] with its $X=Y$, its $Y=Z$, $f=g$, and $\\mathcal R=A$. The same diagram has the same common lower bound $a$, and the morphism is quasi-compact and quasi-separated by hypothesis. The source becomes $\\varinjlim_i R^qg_*K_i^\\bullet$ and the target becomes $R^qg_*(\\varinjlim_iK_i^\\bullet)$. The cited canonical map is induced by applying $R^qg_*$ to the colimit cocone maps $K_i^\\bullet\\to\\varinjlim_j K_j^\\bullet$, exactly the natural map in the item. Thus it is an isomorphism of sheaves on $Z_{\\mathrm{proét}}$ for every $q$.",
+   "text": "Apply the existing module-valued theorem det-pe-bounded-continuity-direct-image with X=Y, its target Y=Z, f=g and R=A. Its canonical comparison is invertible in sheaves of modules over g_*A, and the displayed colimit.desc is the corresponding colimit.post after localization and higher direct image. The underlying-sheaf functor SheafOfModules.toSheaf preserves colimits by the source-library theorem CategoryTheory.moduleSheaves_colimits_forgetful and the sheafification preservation instance. Therefore the underlying comparison, which is definitionally colimit.post for moduleComplexHigherDirectImage, is invertible.",
    "uses": [
-    "det-pe-bounded-continuity-direct-image"
+    "det-pe-bounded-continuity-direct-image",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful"
    ],
    "elementary": false,
    "source": {
@@ -33,12 +34,15 @@
   }
  ],
  "proof_deps": [
-  "det-pe-bounded-continuity-direct-image"
+  "det-pe-bounded-continuity-direct-image",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "worker",
+  "group": "D2",
+  "date": "2026-10-18",
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-cor-pe-bounded-continuity/sk-lem-bounded-continuity-direct-image.proof.md",
-  "place": "Proof, reduced to the existing same-unit duplicate det-pe-bounded-continuity-direct-image by renaming variables"
+  "place": "Proof: reduce to det-pe-bounded-continuity-direct-image and forget module scalars"
  },
  "mathlib_searches": [
   {
@@ -125,7 +129,7 @@
   "by": "NL",
   "date": "2026-10-16",
   "existing": false,
-  "note": "The helper constructs the underlying abelian-sheaf higher direct image by the recorded universal right-derived functor of the canonical lowerStar. The canonical map is colimit.post on the original module-complex diagram, whose colimit is termwise. No coefficient commutativity or pullback hypothesis, or extra resolution hypothesis, is imposed."
+  "note": "The helper localizes module complexes, applies the existing ringHigherDirectImage over g_*A and forgets scalars. This is the same underlying abelian higher direct image (Stacks 0D6J(3)); using the shared construction makes comparison with det-pe-bounded-continuity-direct-image definitional. The unchanged signature retains arbitrary ring-sheaf coefficients, the same universes, the common strict lower bound and all integer degrees."
  },
  "reviewed_lean": {
   "date": "2026-10-16",
@@ -146,5 +150,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261018T142043-L-3226495",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
