@@ -10,23 +10,38 @@
  "stmt_deps": [],
  "proof": [
   {
-   "text": "Expand finite subset summands and identify each transition-by-product filtered colimit with sectionwise localization; induction over ordered tensor factors gives the stated augmentation-compatible isomorphism.",
+   "text": "Use the proved one-section positive Koszul localization colimit to obtain augmentation-compatible colimit cocones for each factor.",
    "uses": [
-    "def-weil-pbc-ringed-koszul-system",
-    "lem-pc-complex-hocolim-colimit"
+    "lem-weil-pbc-ringed-koszul-factor-colimit"
    ],
    "elementary": false
+  },
+  {
+   "text": "The tensor-Hom adjunction for cochain complexes proves preservation of sequential colimits by tensoring on the left; braiding gives preservation on the right. Mathlib isColimitOfPreserves₂ therefore tensors two colimit cocones. The diagonal functor on the filtered category of natural numbers is final, so restricting this tensor cocone to the diagonal remains a colimit. Induct over the ordered factors, with the identity cocone on O[0] for the empty tensor. Naturality of the tensor bifunctor and the augmentation equations for the two factors prove the augmentation equation at the successor step.",
+   "uses": [
+    "def-weil-pbc-ringed-koszul-system",
+    "def-weil-pbc-ringed-extended-cech",
+    "lem-pc-sheaf-modules-tensor-closed"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compare the resulting cocone with the chosen colimit by uniqueness of colimits. Check the required augmentation equation after composing with every colimit inclusion; the cocone factorization equations and the stagewise augmentation equality give the result.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
+  "lem-weil-pbc-ringed-koszul-factor-colimit",
   "def-weil-pbc-ringed-koszul-system",
-  "lem-pc-complex-hocolim-colimit"
+  "def-weil-pbc-ringed-extended-cech",
+  "lem-pc-sheaf-modules-tensor-closed"
  ],
  "proof_origin": {
-  "by": "B2 stage 3",
+  "by": "D2 stage-3 worker",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Tag 0913, the filtered fraction calculation",
-  "note": "Split from the parent long proof as a strictly smaller calculation."
+  "place": "Tag 0913, one-section fraction calculation and tensor induction",
+  "note": "Implemented the ordered tensor induction and the one-section fraction calculation. Telescope/homotopy-colimit comparison is unnecessary for this strict complex isomorphism."
  },
  "mathlib_searches": [
   {
@@ -113,9 +128,9 @@
   "date": "2026-10-18",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "B2",
+  "group": "D2",
   "result": "pass",
-  "landing": "20261018T103527-L-17390",
+  "landing": "20261018T110825-L-401019",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

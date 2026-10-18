@@ -16421,3 +16421,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 11:03 L: merged deliver/E1/Sheaf.AlgebraicGeometry.ProjectiveCurveFiniteGroup (stage 3; reviewer PASS; first push; landing 20261018T110336-L-342043 (interface); batch 20261018T110332; modules 3; new nodes 2)
 - 11:03 L: merged deliver/F4/Sheaf.Paper.ExtendedCechCompletionModel (stage 3; reviewer PASS; first push; landing 20261018T110337-L-342298 (interface); batch 20261018T110332; modules 13; new nodes 14)
 - 11:08 L: merged deliver/A4/Sheaf.AlgebraicGeometry.IsFiniteLocallyFreeOfCoherentFreeStalks (stage 3; reviewer PASS; first push; landing 20261018T110825-L-400789 (proof); batch 20261018T110821; modules 1; new nodes 0)
+- 11:08 L: merged deliver/D2/Sheaf.CategoryTheory.RingedCechKoszulColimitIso (stage 3; reviewer PASS; first push; landing 20261018T110825-L-401019 (interface); batch 20261018T110821; modules 2; new nodes 1)

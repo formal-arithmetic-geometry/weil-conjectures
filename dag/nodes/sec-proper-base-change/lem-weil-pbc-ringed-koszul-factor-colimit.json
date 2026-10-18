@@ -1,0 +1,146 @@
+{
+ "id": "lem-weil-pbc-ringed-koszul-factor-colimit",
+ "kind": "statement",
+ "title": "One-section positive Koszul localization colimit",
+ "statement": "Let C be a small site with topology J, O a sheaf of commutative rings, and s a global section. For the positive one-section Koszul diagram of [def-weil-pbc-ringed-koszul-system], there is a cocone with vertex the localization two-term complex [O → O[1/s]] of [def-weil-pbc-ringed-extended-cech] which is a colimit, and whose stage-m map followed by the localization-complex augmentation equals the Koszul degree-zero projection. No regularity or nonvanishing hypothesis on s is imposed.",
+ "stmt_deps": [
+  "def-weil-pbc-ringed-koszul-system",
+  "def-weil-pbc-ringed-extended-cech"
+ ],
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0913, lemma-extended-alternating-Cech-is-colimit-koszul, one-section fraction calculation"
+ },
+ "proof": [
+  {
+   "text": "For one global section s, the maps in degree zero are the identity and the degree-one maps at stage m send a to a/s^(m+1). The existing module localization-colimit theorem supplies the sectionwise colimit. Transport its LocalizedModule coordinates to the ring localization, then multiply by the inverse of s to account for the positive exponent m+1. The normalization on the colimit inclusions determines this isomorphism uniquely, including for zero divisors and s=0.",
+   "uses": [
+    "lem-sc-module-localization-filtered-colimit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The localization lifts preserve the inverse of s by uniqueness of a multiplicative inverse. Thus the fraction maps commute with restrictions and give a presheaf cocone. Evaluation jointly reflects presheaf colimits. Apply the module sheafification adjunction to its universal mapping property: compatible maps into a module sheaf descend uniquely from the sheafified localization. This proves the degree-one sheaf colimit.",
+   "uses": [
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The scalar power followed by the corresponding fraction map is the localization unit, by induction from the successor fraction identity. This constructs the maps from the double complexes into the localization two-term complex. Degree zero is a constant identity cocone, degree one is the preceding sheaf colimit, and the remaining degrees are zero. Evaluation jointly reflects complex colimits, giving the one-section colimit. The degree-zero identity also proves compatibility with augmentation.",
+   "uses": [
+    "def-weil-pbc-ringed-koszul-system",
+    "def-weil-pbc-ringed-extended-cech"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-module-localization-filtered-colimit",
+  "def-weil-presheaf-modules-sheafification",
+  "def-weil-pbc-ringed-koszul-system",
+  "def-weil-pbc-ringed-extended-cech"
+ ],
+ "proof_origin": {
+  "by": "D2 stage-3 worker",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0913, one-section fraction calculation and tensor induction",
+  "note": "Proved in this delivery from the existing algebraic localization-colimit theorem; no new proof hole."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "localization as filtered colimit of multiplication and Koszul complexes",
+   "results": "Generic filtered-colimit and IsLocalizedModule constructors; no exact ringed Koszul theorem.",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "filtered colimit of Koszul complexes is the extended Cech complex localization",
+   "results": "Local-cohomology diagrams and existence of filtered colimits of complexes; no exact theorem.",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalization.Away",
+   "results": "Localization universal property and inverse APIs. Used IsLocalizedModule.iso and Away.mul_invSelf for the coordinate conversion.",
+   "date": "2026-10-18",
+   "verdict": "partial API"
+  },
+  {
+   "tool": "grep",
+   "query": "ringedKoszulDiagram|ringedLocalizationTwoTerm|localization.*colimit|colimit.*localization",
+   "results": "Mathlib search returned two unrelated hits (FunctorCategory colimit documentation and PreservesLocalization.colimitDesc_preimage). Separate repository rg found and reused ModuleCat.localization_away_colimit in Sheaf.RingTheory.ModuleLocalizationFilteredColimit; no existing ringed one-section Koszul colimit declaration.",
+   "date": "2026-10-18",
+   "verdict": "reused algebraic dependency"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.RingedCechKoszulColimitIso",
+  "date": "2026-10-18",
+  "group": "D2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-completed-pullback",
+   "place": "The displayed derived-limit formula and final completion-map sentence; the one-section fraction calculation supports the finite Koszul colimit used by the inherited completion comparison.",
+   "via": [
+    "lem-weil-pbc-ringed-cech-koszul-colimit-iso",
+    "lem-weil-pbc-ringed-cech-koszul-dual-limit",
+    "lem-weil-pbc-ringed-koszul-completion-reflector",
+    "lem-weil-pbc-constant-completion-equivalence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.RingedKoszulFactorColimit",
+  "file": "lean/Sheaf/CategoryTheory/RingedKoszulFactorColimit.lean",
+  "declaration": "CategoryTheory.exists_ringedKoszulFactor_colimit",
+  "statement": "theorem exists_ringedKoszulFactor_colimit\n    (s : (O.obj ⋙ forget CommRingCat).sections) :\n    ∃ ι : ringedKoszulFactors O s ⟶\n        (Functor.const ℕ).obj (ringedLocalizationTwoTerm O s),\n      Nonempty (IsColimit (Cocone.mk (ringedLocalizationTwoTerm O s) ι)) ∧\n        ∀ m, ι.app m ≫ ringedLocalizationTwoTermAugmentation O s =\n          ringedKoszulFactorProjection O s m",
+  "branch": "sheaf-dag",
+  "by": "D2",
+  "date": "2026-10-18"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261018T110825-L-401019",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261018T110825-L-401019",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
