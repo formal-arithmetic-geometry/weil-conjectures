@@ -12,6 +12,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.Data.ZMod.Basic
 public import Mathlib.Algebra.Field.ULift
 import Sheaf.AlgebraicGeometry.GenericOpenImmersionConstructibility
+import WeilConjectures.SixFunctors.Etale.Derived.UpperStarIdCoherence
 
 /-!
 # Higher open direct images over a field
@@ -55,6 +56,46 @@ theorem isBoundedConstructible_rightDerivedLowerStar_primeSheaf_of_isOpenImmersi
     DerivedCategory.isBoundedConstructible (ULift.{u + 1} (ZMod l)) Y
       ((rightDerivedLowerStar (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod l))) j).obj
         ((_root_.DerivedCategory.singleFunctor _ 0).obj F)) := by
-  sorry
+  obtain ⟨U, ⟨s⟩, hU⟩ :=
+    exists_nonempty_open_isBoundedConstructible_derived_open_pushforward k
+      (Spec (.of k)) (𝟙 _) l hl X Y (X ↘ Spec (.of k)) (Y ↘ Spec (.of k))
+      j (by simp) F hF
+  have htop : U = ⊤ := by
+    apply top_unique
+    intro x hx
+    exact Subsingleton.elim (x : Spec (.of k)) s.val ▸ s.property
+  subst U
+  let : IsIso (⊤ : (Spec (.of k)).Opens).ι :=
+    inferInstanceAs (IsIso (Spec (.of k)).topIso.hom)
+  have hcart : IsPullback (𝟙 Y)
+      ((Y ↘ Spec (.of k)) ≫ (Spec (.of k)).topIso.inv)
+      (Y ↘ Spec (.of k)) (⊤ : (Spec (.of k)).Opens).ι :=
+    IsPullback.of_horiz_isIso ⟨by simp⟩
+  have h := (hU X Y (𝟙 X) (𝟙 Y)
+    ((Y ↘ Spec (.of k)) ≫ (Spec (.of k)).topIso.inv) j
+    hcart (IsPullback.id_horiz j)).1
+  let e := (rightDerivedLowerStar (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod l))) j).mapIso
+    ((leftDerivedUpperStarId (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod l))) X).app
+      ((_root_.DerivedCategory.singleFunctor _ 0).obj F))
+  obtain ⟨hc, a, b, hab, hv⟩ := h
+  refine ⟨fun i ↦ ?_, a, b, hab, fun i hi ↦ ?_⟩
+  · obtain ⟨S, hS⟩ := hc i
+    refine ⟨S, fun t ↦ ?_⟩
+    obtain ⟨d, hd⟩ := hS t
+    let ei := (_root_.DerivedCategory.homologyFunctor _ i).mapIso e
+    let es := (upperStar (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod l)))
+      (S.immersion t)).mapIso ei
+    let d' : Scheme.LocallyConstantDatum _ :=
+      { cover := d.cover
+        isConstant := fun q ↦ by
+          obtain ⟨M, _, ⟨eM⟩⟩ := hd q
+          exact Sheaf.isConstant_of_iso _
+            ((((S.domain t).smallEtaleTopology.overPullback _ _).mapIso es).symm ≪≫ eM) }
+    refine ⟨d', fun q ↦ ?_⟩
+    obtain ⟨M, hM, ⟨eM⟩⟩ := hd q
+    exact ⟨M, hM, ⟨(((S.domain t).smallEtaleTopology.overPullback _ _).mapIso es).symm ≪≫
+      eM⟩⟩
+  · exact (hv i hi).of_iso
+      ((_root_.DerivedCategory.homologyFunctor _ i).mapIso e).symm
 
 end AlgebraicGeometry.Etale

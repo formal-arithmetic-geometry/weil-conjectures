@@ -15926,3 +15926,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 06:26 L: merged deliver/B3/Sheaf.AlgebraicGeometry.EtaleLocalNormalForm (stage 3; reviewer PASS; first push; landing 20261018T062659-L-630878 (proof); batch 20261018T062645; modules 1; new nodes 0)
 - 06:27 L: merged deliver/B3/Sheaf.AlgebraicGeometry.FundamentalGroup.FiberEquivalence (stage 3; reviewer PASS; first push; landing 20261018T062700-L-631028 (proof); batch 20261018T062645; modules 1; new nodes 0)
 - 06:27 L: merged deliver/B4/Sheaf.AlgebraicGeometry.GeometricStalkAsPullback (stage 3; reviewer PASS; first push; landing 20261018T062700-L-631153 (proof); batch 20261018T062645; modules 1; new nodes 0)
+- 06:27 L: merged deliver/B4/Sheaf.AlgebraicGeometry.OpenDirectImageOverField (stage 3; reviewer PASS; first push; landing 20261018T062701-L-631307 (proof); batch 20261018T062645; modules 1; new nodes 0)
