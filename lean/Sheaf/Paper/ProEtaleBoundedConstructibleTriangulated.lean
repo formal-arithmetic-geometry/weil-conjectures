@@ -32,7 +32,10 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.Scheme
 
-private theorem constantComparison_isIso {X Y : Scheme.{u}} (f : X ⟶ Y)
+/-- The canonical constant-coefficient inverse-image comparison is invertible.
+Source: Stacks Project, Tag 0H7J, uniqueness of the constant-sheaf adjunction
+(blueprint: lem-pur-proetale-constant-coefficient-comparison). -/
+theorem constantComparison_isIso {X Y : Scheme.{u}} (f : X ⟶ Y)
     (A : Type u) [CommRing A] : IsIso (proEtaleCoefficientInverseImageMap f A) := by
   let D := CommRingCat.{u + 1}
   let J := ProEt.topology Y

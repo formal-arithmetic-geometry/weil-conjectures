@@ -1,0 +1,129 @@
+{
+ "id": "lem-pur-proetale-constant-coefficient-comparison",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-derived-pullback-tensor-hom",
+   "place": "Integral-level paragraph: finite reductions of tensor products; The canonical constant coefficient comparison is invertible",
+   "via": [
+    "lem-pur-finite-tensor-constructible-cohomology",
+    "lem-pur-integral-operations-preserve-constructible"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "The canonical constant coefficient comparison is invertible",
+ "statement": "Let $f:X\\to Y$ be a morphism of schemes and $A$ any commutative ring. Use the constant coefficient ring sheaves $A_Y,A_X$ and the canonical map $c_A^f$ of [def-weil-proetale-inverse-image] on the small pro-etale sites [def-weil-pbc-proetale-site]. Then $c_A^f:f^{-1}A_Y\\to A_X$ is an isomorphism of commutative ring sheaves. No finiteness, nonemptiness, or invertibility assumption is required.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 0H7J, example-constant-sheaf; agent-formulated canonical-map specialization"
+ },
+ "stmt_deps": [
+  "def-weil-proetale-inverse-image",
+  "def-weil-pbc-proetale-site"
+ ],
+ "proof": [
+  {
+   "text": "The object (Y,id_Y) is terminal in the pro-etale site: its unique incoming map is the structure morphism. The base-change functor preserves this terminal object by finite-limit preservation in [def-weil-proetale-inverse-image]. The constant-sheaf functor is left adjoint to evaluation at either terminal object. Compose the constant-sheaf adjunction on Y with the inverse-image adjunction. Evaluation after direct image equals evaluation at the base-changed terminal object. Uniqueness of left adjoints therefore supplies an isomorphism f^{-1}A_Y≅A_X. This works in commutative rings with the stipulated lifted coefficient universe.",
+   "uses": [
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 0H7J, example-constant-sheaf; global-sections universal property"
+   }
+  },
+  {
+   "text": "The existing constantComparison_isIso proof checks that the adjoint-uniqueness isomorphism is the canonical coefficient map. Apply the inverse-image Hom equivalence, then the constant-sheaf Hom equivalence. The constant-section unit formula and sheafification Hom equivalence identify the map at the terminal object. Thus the hom of the adjoint-uniqueness isomorphism equals the specified coefficient map, which is therefore invertible. This existing proof is reused unchanged; only its visibility is public.",
+   "uses": [
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 0H7J; uniqueness of sheafification extensions and adjoints"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-proetale-inverse-image"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 0H7J; existing constantComparison_isIso proof reused unchanged, with public visibility"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Inverse image of a constant sheaf is constant, and an exact functor commutes with cohomology",
+   "results": "8 hits: CategoryTheory.Sheaf.isConstant_of_iso, CategoryTheory.Sheaf.IsConstant.mk, CategoryTheory.Sheaf.IsConstant.rec, CategoryTheory.Sheaf.isConstant_iff_mem_essImage, CategoryTheory.Sheaf.IsConstant.recOn, CategoryTheory.constantSheaf, CategoryTheory.Sheaf.IsConstant.casesOn, CategoryTheory.Sheaf.mem_essImage_of_isConstant",
+   "date": "2026-10-18",
+   "verdict": "No exact match for these pro-etale ringed-module constructions; generic adjunction and homology lemmas are used where applicable."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"constantSheaf\", \"Adj\"",
+   "results": "7 hits: CategoryTheory.constantSheafAdj, CategoryTheory.Sheaf.instIsIsoAppCounitConstantSheafAdjOfFaithfulOfFullConstantSheafOfIsConstant, CategoryTheory.constantSheafAdj_counit_app, CategoryTheory.constantSheafAdj_counit_w, CategoryTheory.constantSheafΓAdj, CategoryTheory.GrothendieckTopology.IsLocalSite.instIsRightAdjointSheafCoconstantSheaf, CategoryTheory.GrothendieckTopology.IsLocalSite.ΓCoconstantSheafAdj",
+   "date": "2026-10-18",
+   "verdict": "No exact match for these pro-etale ringed-module constructions; generic adjunction and homology lemmas are used where applicable."
+  },
+  {
+   "tool": "grep",
+   "query": "constantSheafAdj|pullback.*[Cc]onstant|[Cc]onstant.*pullback",
+   "results": "18 hits: Mathlib/Condensed/Discrete/Module.lean, Mathlib/Condensed/Discrete/Module.lean, Mathlib/Condensed/Discrete/Basic.lean, Mathlib/Condensed/Discrete/Basic.lean, Mathlib/CategoryTheory/Sites/ConstantSheaf.lean, Mathlib/CategoryTheory/Sites/ConstantSheaf.lean, Mathlib/CategoryTheory/Sites/ConstantSheaf.lean, Mathlib/CategoryTheory/Sites/ConstantSheaf.lean",
+   "date": "2026-10-18",
+   "verdict": "No exact match for these pro-etale ringed-module constructions; generic adjunction and homology lemmas are used where applicable."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteTensorConstructibleCohomology",
+  "date": "2026-10-18",
+  "group": "G2"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": true,
+  "module": "Sheaf.Paper.ProEtaleBoundedConstructibleTriangulated",
+  "declaration": "AlgebraicGeometry.Scheme.constantComparison_isIso",
+  "statement": "theorem constantComparison_isIso {X Y : Scheme.{u}} (f : X ⟶ Y)\n    (A : Type u) [CommRing A] : IsIso (proEtaleCoefficientInverseImageMap f A)",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261018T092905-L-3441258",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261018T092905-L-3441258",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

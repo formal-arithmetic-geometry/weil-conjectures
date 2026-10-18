@@ -1,0 +1,141 @@
+{
+ "id": "lem-pur-proetale-finite-local-constancy-pullback",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-derived-pullback-tensor-hom",
+   "place": "Integral-level paragraph: finite reductions of tensor products; Further inverse image preserves finite local constancy",
+   "via": [
+    "lem-pur-finite-tensor-constructible-cohomology",
+    "lem-pur-integral-operations-preserve-constructible"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Inverse image preserves finite local constancy",
+ "statement": "Let $b:X\\to Y$ be a scheme morphism and $A$ a finite commutative ring. Let $F$ be a module sheaf over the constant coefficient ring $A_Y$ on the small pro-etale site of $Y$ [def-weil-proetale-inverse-image]. Suppose $F$ is locally constant as an $A_Y$-module sheaf [def-weil-proetale-locally-constant-sheaf] and has finite module stalks at every geometric point $y:\\operatorname{Spec}\\Omega\\to Y$, with $\\Omega$ algebraically closed [def-weil-proetale-geometric-stalk]. Then the actual constant-coefficient module inverse image $b_A^*F$ is locally constant on $X$ and has finite module stalks at every geometric point of $X$.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 093R, lemma-pullback-locally-constant, plus the pointed-neighbourhood stalk computation"
+ },
+ "stmt_deps": [
+  "def-weil-proetale-inverse-image",
+  "def-weil-proetale-locally-constant-sheaf",
+  "def-weil-proetale-geometric-stalk"
+ ],
+ "proof": [
+  {
+   "text": "Choose a covering of the terminal object of Y on which F is a constant module sheaf, using [def-weil-proetale-locally-constant-sheaf]. Base change by b gives a covering of the terminal object of X, by [def-weil-proetale-inverse-image]. Restriction to each localized site commutes with this inverse image: both direct images are the corresponding precomposition functors on sections, and their left adjoints agree by uniqueness. The proved private helpers constantPresheafHomEquiv and constantModuleHomEquiv express the universal property of the actual constant module construction: module maps out of it correspond to linear maps to terminal sections with scalars restricted along the constant-ring unit. The private helper constantModulePullbackIso then proves that the actual module inverse image preserves these constant models: compose the constant-model and canonical module adjunctions of [def-weil-pbc-proetale-operations], identify terminal sections as modules using the normalized coefficient-unit formula, and apply uniqueness of left adjoints. It uses the actual restriction functor of [lem-pur-proetale-constant-module-pullback-homology]. The localized-site compatibility remains to be assembled. Equivalently, inverse image of a constant set sheaf is constant with the same value, since it preserves coproducts and terminal objects. Applying this to the addition and scalar-action diagrams gives the same assertion for constant module sheaves, with the canonical constant coefficient identification. Thus b_A^*F is locally constant. The canonical coefficient comparison is invertible by [lem-pur-proetale-constant-coefficient-comparison], identifying the resulting constant scalar action with the specified A_X-action.",
+   "uses": [
+    "def-weil-proetale-locally-constant-sheaf",
+    "def-weil-proetale-inverse-image",
+    "lem-pur-proetale-constant-coefficient-comparison",
+    "def-weil-pbc-proetale-operations",
+    "lem-pur-proetale-constant-module-pullback-homology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 093R, lemma-pullback-locally-constant; omitted proof expanded with covering and constant-sheaf constructions"
+   }
+  },
+  {
+   "text": "At x:Spec Ω→X, inverse image identifies the stalk of b_A^*F with that of F at x≫b. The identification is obtained by the pointed-neighbourhood pullback and the germ formula: local representatives map to the same representative over the cartesian neighbourhood, and sheafification does not change the germ. It respects the constant scalar action. Finiteness follows from the hypothesis at x≫b and invariance of finiteness under a bijection. Empty schemes and empty cover members impose no new stalk condition.",
+   "uses": [
+    "def-weil-proetale-geometric-stalk",
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 093R; pointed-neighbourhood computation of inverse image"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-proetale-locally-constant-sheaf",
+  "def-weil-proetale-inverse-image",
+  "lem-pur-proetale-constant-coefficient-comparison",
+  "def-weil-pbc-proetale-operations",
+  "lem-pur-proetale-constant-module-pullback-homology",
+  "def-weil-proetale-geometric-stalk"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 093R, lemma-pullback-locally-constant, plus the pointed-neighbourhood stalk computation"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Finite locally constant module sheaves stay finite locally constant after inverse image on the pro etale site",
+   "results": "8 hits: CategoryTheory.Functor.sheafPullbackConstruction.preservesFiniteLimits, CompHausLike.LocallyConstant.functor_map_val, CategoryTheory.Functor.sheafPullbackConstruction.instPreservesFiniteLimitsSheafSheafPullback, CategoryTheory.Sheaf.isConstant_iff_mem_essImage, CondensedSet.LocallyConstant.functorFullyFaithful, Condensed.lanSheafProfinite, SheafOfModules.pullbackObjFreeIso, CompHausLike.LocallyConstant.functorIso",
+   "date": "2026-10-18",
+   "verdict": "No exact match for these pro-etale ringed-module constructions; generic adjunction and homology lemmas are used where applicable."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsLocallyConstant\", \"pullback\"",
+   "results": "0 hits: ",
+   "date": "2026-10-18",
+   "verdict": "No exact match for these pro-etale ringed-module constructions; generic adjunction and homology lemmas are used where applicable."
+  },
+  {
+   "tool": "grep",
+   "query": "LocallyConstant.*[Pp]ullback|[Pp]ullback.*LocallyConstant",
+   "results": "0 hits: ",
+   "date": "2026-10-18",
+   "verdict": "No exact match for these pro-etale ringed-module constructions; generic adjunction and homology lemmas are used where applicable."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteTensorConstructibleCohomology",
+  "date": "2026-10-18",
+  "group": "G2"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ProEtaleFiniteLocalConstancyPullback",
+  "file": "lean/Sheaf/Paper/ProEtaleFiniteLocalConstancyPullback.lean",
+  "declaration": "AlgebraicGeometry.Scheme.proEtale_finiteLocalConstancy_pullback",
+  "statement": "theorem proEtale_finiteLocalConstancy_pullback\n    {Y X : Scheme.{u}} (b : X ⟶ Y)\n    (A : Type u) [CommRing A] [Finite A]\n    (F : proEtaleRingModules Y (proEtaleConstantRing Y A))\n    (hF : IsLocallyConstantProEtaleModuleSheaf Y A F ∧\n      ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (y : Spec (.of Ω) ⟶ Y),\n        Finite (proEtaleGeometricModuleStalk y (proEtaleConstantRing Y A) F)) :\n    IsLocallyConstantProEtaleModuleSheaf X A (proEtaleConstantModulePullback b A F) ∧\n      ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (x : Spec (.of Ω) ⟶ X),\n        Finite (proEtaleGeometricModuleStalk x (proEtaleConstantRing X A)\n          (proEtaleConstantModulePullback b A F))",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261018T092905-L-3441258",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261018T092905-L-3441258",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

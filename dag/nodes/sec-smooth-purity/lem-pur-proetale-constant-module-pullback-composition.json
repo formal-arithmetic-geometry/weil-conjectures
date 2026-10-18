@@ -1,0 +1,149 @@
+{
+ "id": "lem-pur-proetale-constant-module-pullback-composition",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-derived-pullback-tensor-hom",
+   "place": "Integral-level tensor reductions: normalization and composition of the constant-coefficient restrictions used on common strata",
+   "via": [
+    "lem-pur-finite-tensor-constructible-cohomology",
+    "lem-pur-integral-operations-preserve-constructible"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Composition of the actual canonical constant-coefficient module pullbacks",
+ "statement": "Let $a:Y\\to T$ and $b:X\\to Y$ be scheme morphisms, and let $A$ be any commutative ring. Use the actual canonical constant-coefficient module restriction functors of [def-weil-proetale-inverse-image], packaged by [lem-pur-proetale-constant-module-pullback-homology]. Restriction along $a\\circ b$ is naturally isomorphic to first applying $a_A^*$ and then $b_A^*$: $(a\\circ b)_A^*\\cong b_A^*\\circ a_A^*$. The scalar maps are the literal canonical coefficient maps. No finiteness or nonemptiness assumption is imposed.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03D8, lemma-push-pull-composition-modules; coefficient normalization by constant sheafification units"
+ },
+ "stmt_deps": [
+  "def-weil-proetale-inverse-image",
+  "lem-pur-proetale-constant-module-pullback-homology"
+ ],
+ "proof": [
+  {
+   "text": "For each morphism f, the constant sheafification unit followed by its coefficient direct-image map is the constant sheafification unit at the base-changed object. This is the inverse identity in the sheafification Hom equivalence of [def-weil-proetale-inverse-image]. Apply this identity twice and use naturality of the constant unit along the cartesian pasting isomorphism. Injectivity of the sheafification Hom equivalence shows the composite of the two canonical coefficient direct-image maps equals the canonical map for b≫a, after the scheme base-change composition comparison.",
+   "uses": [
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03D8, lemma-push-pull-composition-modules; coefficient normalization by constant sheafification units"
+   }
+  },
+  {
+   "text": "Forget commutativity in that equality. Module direct images are the corresponding sectionwise pushforwards. Mathlib SheafOfModules.pushforwardComp, pushforwardNatIso and pushforwardCongr therefore identify their composite with the direct image for b≫a. The normalized ringed-module adjunction of [def-weil-pbc-proetale-operations] has exactly the constant-module direct image: the adjunction unit followed by the image of the coefficient comparison is the defining direct-image map, by the inverse identity of its Hom equivalence. Use [lem-pur-proetale-constant-coefficient-comparison] for the coefficient isomorphisms.",
+   "uses": [
+    "def-weil-proetale-inverse-image",
+    "def-weil-pbc-proetale-operations",
+    "lem-pur-proetale-constant-coefficient-comparison",
+    "lem-pur-proetale-finite-local-constancy-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03D8, lemma-push-pull-composition-modules; coefficient normalization by constant sheafification units"
+   }
+  },
+  {
+   "text": "The functors of [lem-pur-proetale-constant-module-pullback-homology] are the actual pullbacks in those adjunctions. Compose the two adjunctions and transport the right adjoint by the proved direct-image composition isomorphism. Uniqueness of left adjoints gives the desired natural isomorphism. This is an explicitly constructed isomorphism in the proof; no data is chosen from an unproved existence assertion.",
+   "uses": [
+    "lem-pur-proetale-constant-module-pullback-homology",
+    "def-weil-pbc-proetale-operations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03D8, lemma-push-pull-composition-modules; coefficient normalization by constant sheafification units"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-proetale-inverse-image",
+  "def-weil-pbc-proetale-operations",
+  "lem-pur-proetale-constant-coefficient-comparison",
+  "lem-pur-proetale-constant-module-pullback-homology",
+  "lem-pur-proetale-finite-local-constancy-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03D8, lemma-push-pull-composition-modules; coefficient normalization by constant sheafification units"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Composition isomorphism for canonical pullback functors on module sheaves over constant coefficients from uniqueness of adjoints",
+   "results": "8 hits: SheafOfModules.pullbackIso, SheafOfModules.pullbackComp, SheafOfModules.conjugateEquiv_pullbackComp_inv, CategoryTheory.toOverIteratedSliceForwardIsoPullback, CategoryTheory.Over.pullbackComp, CategoryTheory.ChosenPullbacksAlong.pullbackComp, CategoryTheory.toOverPullbackIsoToOver, PresheafOfModules.pullbackComp",
+   "date": "2026-10-18",
+   "verdict": "Generic pushforward composition and uniqueness of adjoints are used; there is no ready theorem about the literal normalized pro-etale coefficient maps."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"leftAdjointUniq\", \"comp\"",
+   "results": "0 hits: ",
+   "date": "2026-10-18",
+   "verdict": "Generic pushforward composition and uniqueness of adjoints are used; there is no ready theorem about the literal normalized pro-etale coefficient maps."
+  },
+  {
+   "tool": "grep",
+   "query": "pullbackComp|upperStarComp|pushforwardNatIso",
+   "results": "25 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean",
+   "date": "2026-10-18",
+   "verdict": "Generic pushforward composition and uniqueness of adjoints are used; there is no ready theorem about the literal normalized pro-etale coefficient maps."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteTensorConstructibleCohomology",
+  "date": "2026-10-18",
+  "group": "G2"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ProEtaleConstantModulePullbackComposition",
+  "file": "lean/Sheaf/Paper/ProEtaleConstantModulePullbackComposition.lean",
+  "declaration": "AlgebraicGeometry.Scheme.proEtaleConstantModulePullback_comp",
+  "statement": "theorem proEtaleConstantModulePullback_comp {T Y X : Scheme.{u}}\n    (a : Y ⟶ T) (b : X ⟶ Y) (A : Type u) [CommRing A] :\n    Nonempty (proEtaleConstantModulePullbackFunctor (b ≫ a) A ≅\n      proEtaleConstantModulePullbackFunctor a A ⋙\n        proEtaleConstantModulePullbackFunctor b A)",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261018T092905-L-3441258",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261018T092905-L-3441258",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

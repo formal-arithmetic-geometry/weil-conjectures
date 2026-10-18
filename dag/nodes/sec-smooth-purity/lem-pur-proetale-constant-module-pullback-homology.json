@@ -1,0 +1,135 @@
+{
+ "id": "lem-pur-proetale-constant-module-pullback-homology",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-derived-pullback-tensor-hom",
+   "place": "Integral-level paragraph: finite reductions of tensor products; Exact constant coefficient restriction preserves upper cohomological bounds",
+   "via": [
+    "lem-pur-finite-tensor-constructible-cohomology",
+    "lem-pur-integral-operations-preserve-constructible"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Exact constant coefficient restriction preserves upper cohomological bounds",
+ "statement": "Let $f:X\\to Y$ be any scheme morphism and $A$ any commutative ring. Let $F=f_A^*$ be the actual canonical module restriction of [def-weil-proetale-inverse-image], equivalently the identified-coefficient pullback of [def-weil-pbc-proetale-operations] using [lem-pur-proetale-constant-coefficient-comparison]. Let $K^\\bullet$ be a cochain complex of $A_Y$-module sheaves. If $H^j(QK^\\bullet)=0$ for all $j>b$ for some integer $b$, then $H^j(FK^\\bullet)=0$ for all $j>b$. Here $FK^\\bullet$ is the actual termwise restriction complex, and $Q$ is localization to the derived category [def-weil-derived-cohomology-sheaves]. The construction also gives the cohomology isomorphism $H^j(FK^\\bullet)\\cong f_A^*H^j(QK^\\bullet)$.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Section 0735; exactness from Modules on Sites, Tag 04JC"
+ },
+ "stmt_deps": [
+  "def-weil-proetale-inverse-image",
+  "def-weil-pbc-proetale-operations",
+  "def-weil-derived-cohomology-sheaves",
+  "lem-pur-proetale-constant-coefficient-comparison"
+ ],
+ "proof": [
+  {
+   "text": "The coefficient map is invertible by [lem-pur-proetale-constant-coefficient-comparison]. Define the restriction functor using the existing identified-coefficient ring-module pullback of [def-weil-pbc-proetale-operations] and this concrete isomorphism; its object on M is definitionally proEtaleConstantModulePullback f A M. The existing operation properties give additivity, finite-limit preservation, and finite-colimit preservation.",
+   "uses": [
+    "lem-pur-proetale-constant-coefficient-comparison",
+    "def-weil-pbc-proetale-operations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03D2 and 04JC, exact identified-coefficient pullback"
+   }
+  },
+  {
+   "text": "Apply the standard homology comparison for a functor preserving kernels and cokernels to the short complex K.sc(j). Compose with the inverse of the image of DerivedCategory.homologyFunctorFactors. This constructs H^j(FK)≅f_A^*H^j(QK). If j>b, the right side is zero because additive functors preserve zero objects; transport that zero object across this isomorphism. The same b works, including the acyclic and empty-scheme cases.",
+   "uses": [
+    "def-weil-derived-cohomology-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Section 0735, termwise exact inverse image and cohomology"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-proetale-constant-coefficient-comparison",
+  "def-weil-pbc-proetale-operations",
+  "def-weil-derived-cohomology-sheaves"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Section 0735; exactness from Modules on Sites, Tag 04JC"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An exact functor commutes with homology and preserves complexes with bounded above cohomology",
+   "results": "8 hits: CategoryTheory.ExactFunctor.of, CategoryTheory.exactFunctor, CategoryTheory.ExactFunctor, CategoryTheory.Functor.exact_tfae, CategoryTheory.Functor.preservesHomology_of_preservesEpis_and_kernels, CategoryTheory.Functor.preservesHomology_of_map_exact, CategoryTheory.Functor.PreservesHomology, CategoryTheory.Functor.PreservesHomology.preservesRightHomologyOf",
+   "date": "2026-10-18",
+   "verdict": "No exact match for these pro-etale ringed-module constructions; generic adjunction and homology lemmas are used where applicable."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homology\", \"Iso\"",
+   "results": "12 hits: CategoryTheory.ShortComplex.hasLeftHomology_of_iso, CategoryTheory.ShortComplex.LeftHomologyData.cyclesIso, CategoryTheory.ShortComplex.LeftHomologyData.leftHomologyIso, CategoryTheory.ShortComplex.LeftHomologyData.ofIso, CategoryTheory.ShortComplex.leftHomologyMapIso, CategoryTheory.ShortComplex.leftHomologyMapIso', CategoryTheory.ShortComplex.isIso_leftHomologyMap'_of_isIso, CategoryTheory.ShortComplex.isIso_leftHomologyMap_of_iso",
+   "date": "2026-10-18",
+   "verdict": "No exact match for these pro-etale ringed-module constructions; generic adjunction and homology lemmas are used where applicable."
+  },
+  {
+   "tool": "grep",
+   "query": "map_isZero|mapHomologyIso|homEquiv_leftAdjointUniq",
+   "results": "25 hits: Mathlib/CategoryTheory/ObjectProperty/ContainsZero.lean, Mathlib/CategoryTheory/ObjectProperty/ContainsZero.lean, Mathlib/CategoryTheory/Limits/Preserves/Shapes/Zero.lean, Mathlib/CategoryTheory/Triangulated/Subcategory.lean, Mathlib/CategoryTheory/Triangulated/Pretriangulated.lean, Mathlib/CategoryTheory/Triangulated/HomologicalFunctor.lean, Mathlib/Algebra/Homology/HomotopyCategory/Plus.lean, Mathlib/CategoryTheory/Triangulated/TStructure/TruncLTGE.lean",
+   "date": "2026-10-18",
+   "verdict": "No exact match for these pro-etale ringed-module constructions; generic adjunction and homology lemmas are used where applicable."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteTensorConstructibleCohomology",
+  "date": "2026-10-18",
+  "group": "G2"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ProEtaleConstantModulePullbackHomology",
+  "file": "lean/Sheaf/Paper/ProEtaleConstantModulePullbackHomology.lean",
+  "declaration": "AlgebraicGeometry.Scheme.proEtaleConstantModulePullback_boundedAbove",
+  "statement": "theorem proEtaleConstantModulePullback_boundedAbove {X Y : Scheme.{u}} (f : X ⟶ Y)\n    (A : Type u) [CommRing A]\n    (K : CochainComplex (proEtaleRingModules Y (proEtaleConstantRing Y A)) ℤ)\n    (hK : ∃ b : ℤ, ∀ j : ℤ, b < j → IsZero\n      ((DerivedCategory.homologyFunctor (proEtaleRingModules Y\n        (proEtaleConstantRing Y A)) j).obj (DerivedCategory.Q.obj K))) :\n    ∃ b : ℤ, ∀ j : ℤ, b < j → IsZero\n      (((proEtaleConstantModulePullbackFunctor f A).mapHomologicalComplex\n        (ComplexShape.up ℤ) |>.obj K).homology j)",
+  "branch": "sheaf-dag",
+  "by": "G2",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261018T092905-L-3441258",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261018T092905-L-3441258",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
