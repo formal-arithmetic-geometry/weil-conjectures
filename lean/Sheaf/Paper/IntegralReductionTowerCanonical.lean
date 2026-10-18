@@ -88,7 +88,35 @@ theorem canonicalIntegralReductionTowerMap_naturality
         canonicalIntegralReductionTowerMap l E Y q hq j.unop =
       canonicalIntegralReductionTowerMap l E Y q hq i.unop ≫
         (canonicalIntegralReductionTower l E Y P).map f := by
-  sorry
+  have hcomp (n : ℕ) :
+      unrestrictedTowerUnit l E Y P (n + 1) ≫ unrestrictedTowerTransition l E Y P n =
+        unrestrictedTowerUnit l E Y P n := by
+    have hunit : unrestrictedTowerUnitCondition l E Y P (unrestrictedTowerUnit l E Y P) :=
+      (unrestrictedTowerMaps_existUnique l E Y P).exists.choose_spec
+    ext a U x
+    change (((unrestrictedTowerTransition l E Y P n).f a).val.app U)
+        ((((unrestrictedTowerUnit l E Y P (n + 1)).f a).val.app U) x) =
+      (((unrestrictedTowerUnit l E Y P n).f a).val.app U) x
+    rw [hunit (n + 1) a U x, hunit n a U x]
+    change (((unrestrictedIntegralTransition l E Y n).app P).f a).val.app U
+        (unrestrictedIntegralTensorSection l E Y (n + 1) (P.X a) U 1 x) =
+      unrestrictedIntegralTensorSection l E Y n (P.X a) U 1 x
+    simpa [unrestrictedIntegralTransition] using
+      (unrestrictedIntegralTransition_existsUnique l E Y n).exists.choose_spec P a U 1 x
+  let : HasSheafify (AlgebraicGeometry.Scheme.ProEt.topology Y)
+      AddCommGrpCat.{max u (t + 1)} := integralCoefficientAbSheafify.{t, u} Y
+  let : (AlgebraicGeometry.Scheme.ProEt.topology Y).WEqualsLocallyBijective
+      AddCommGrpCat.{max u (t + 1)} := integralCoefficientAbLocallyBijective.{t, u} Y
+  let α : (Functor.const ℕᵒᵖ).obj (DerivedCategory.Q.obj K) ⟶
+      canonicalIntegralReductionTower l E Y P :=
+    NatTrans.ofOpSequence (fun n ↦ canonicalIntegralReductionTowerMap l E Y q hq n)
+      (by
+        intro n
+        simp only [Functor.const_obj_map, canonicalIntegralReductionTower,
+          Functor.ofOpSequence_map_homOfLE_succ, canonicalIntegralReductionTowerMap,
+          Category.assoc, ← Functor.map_comp, hcomp]
+        exact Category.id_comp _)
+  exact α.naturality f
 
 /-- The reduction tower together with its compatible maps from K, as a cone.
 The comparison isomorphisms and both independence identities for another resolution
