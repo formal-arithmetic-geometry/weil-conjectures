@@ -8,7 +8,6 @@
   "place": "Expose XVI, Proposition 3.3.2, printed p.245: compatible Godement cocycles for the fundamental classes and triangles C(mu) -> C(mu+nu) -> C(nu); coefficient compatibility of Proposition 3.3.1."
  },
  "stmt_deps": [
-  "def-weil-regular-scheme",
   "def-weil-pbc-derived-categories",
   "def-asd-finite-etale-tate-twist",
   "lem-per-regular-immersion-class-calculus",
@@ -16,9 +15,95 @@
   "def-weil-pbc-regular-sequence",
   "def-weil-triangulated-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $L_r=A_{r,X}(c)$ and write $\\rho_{N,r}:L_N\\to L_r$ for coefficient reduction. By [lem-asd-etale-finite-twist-pullback] these are locally free rank-one lines and reduction identifies $L_N/\\ell^rL_N$ with $L_r$. For $N=a+b$, define $\\jmath_{a,N}(x)=\\ell^b\\widetilde x$, where $\\widetilde x$ is any local lift to $L_N$. Two lifts differ by $\\ell^a y$, so this is independent of the lift. On an etale cover trivializing $L_N$ it is the injection $A_a\\xrightarrow{\\ell^b}A_N$, with quotient $A_b$. Thus $0\\to L_a\\xrightarrow{\\jmath}L_N\\xrightarrow{\\rho}L_b\\to0$ is exact and $\\jmath_{a,N}\\rho_{N,a}=\\ell^b\\mathrm{id}_{L_N}$. The same formulas give the stated exact sequence of constant sheaves on $Z$. Notice that the injection of Tate lines is defined by this lift-and-multiply formula, not by taking the $c$-th tensor power of the injection of roots of unity.",
+   "uses": [
+    "lem-asd-etale-finite-twist-pullback"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Proposition 3.3.2, coefficient sequence underlying the Godement construction; Proposition 3.3.1, coefficient compatibility"
+   }
+  },
+  {
+   "text": "Apply [lem-per-etale-godement-supported-exact-model] to $L_r$ for every $r$, using one fixed family of geometric points. Write $S_r=S_i(L_r)$ and $E_r=\\Gamma(Z,S_r)$. The lemma gives complexes in degrees $\\geq0$ representing $i_r^!L_r$, exact coefficient rows for both $S_r$ and $E_r$, and comparisons compatible with restriction of scalars. Its rank-one tensor comparison identifies $i_r^!L_r$ with $(i_r^!A_{r,X})(c)$, so this is the actual target of the given Gysin map, not a different coefficient operation. The functor $i_r^!$ of [lem-per-regular-immersion-class-calculus] is the unbounded right adjoint of compact support, which for the closed immersion $i$ with the identity compactification is $Ri_!=i_*$ [def-amb-etale-compact-support]; the lemma's $i^!$ is the bounded-below right adjoint of the same exact $i_*$ [def-per-closed-support-plus-adjunction]. For $K\\in D^{\\geq n}(X_{\\mathrm{et}},A_r)$ and $G\\in D^{<n}(Z_{\\mathrm{et}},A_r)$ one has $\\operatorname{Hom}(G,i_r^!K)=\\operatorname{Hom}(i_*G,K)=0$, so $i_r^!K\\in D^{\\geq n}$ by the standard t-structure [def-sbc-standard-tstructure-derived-category]; Yoneda on the full subcategory $D^+$ then identifies the two adjoints on $K$ compatibly with the counits. Under its cocycle-to-derived-morphism identification the class $\\eta_r$ of [lem-per-regular-immersion-class-calculus] is an element $\\alpha_r\\in H^{2c}(E_r)$. The coefficient compatibility in that node says $\\rho_{r+1,r}(\\alpha_{r+1})=\\alpha_r$.",
+   "uses": [
+    "lem-per-etale-godement-supported-exact-model",
+    "lem-per-regular-immersion-class-calculus",
+    "def-amb-etale-compact-support",
+    "def-per-closed-support-plus-adjunction",
+    "def-sbc-standard-tstructure-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Proposition 3.3.2, first paragraph: representing Gysin morphisms by Godement cocycles; Proposition 3.3.1, reduction square"
+   }
+  },
+  {
+   "text": "Choose cocycles $z_r\\in E_r^{2c}$ representing $\\alpha_r$ recursively. First choose any representative $z_1$. If $z_r$ is chosen, choose any cocycle $w\\in E_{r+1}^{2c}$ representing $\\alpha_{r+1}$. Equality of the reduced cohomology classes means $\\rho(w)-z_r=dh$ for some $h\\in E_r^{2c-1}$. The degreewise surjectivity furnished by [lem-per-etale-godement-supported-exact-model] lifts $h$ to $\\widetilde h\\in E_{r+1}^{2c-1}$. Set $z_{r+1}=w-d\\widetilde h$. It is still a cocycle in the same class and now $\\rho(z_{r+1})=z_r$ as cochains. If $c=0$, degree $-1$ is zero and the same argument has $h=0$. Recursion gives one family for all $r$, and iteration gives $\\rho_{N,r}z_N=z_r$ for every $N\\geq r$. This explicitly supplies the simultaneous choice mentioned in the source.",
+   "uses": [
+    "lem-per-etale-godement-supported-exact-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Proposition 3.3.2, first paragraph, last sentence: a compatible family of cocycles for all exponents"
+   }
+  },
+  {
+   "text": "Let $K_r=S_r[2c]$ and let $e_r:A_{r,Z}[0]\\to K_r$ send $1$ to the global section $z_r$. A global section specifies a map from the constant rank-one module sheaf; the cocycle equation makes it a cochain map. By [lem-per-etale-godement-supported-exact-model], $Q(e_r)$ is precisely $\\eta_r$. Functoriality and additivity of that model carry $\\jmath\\rho=\\ell^b$ from Step 1 to $S$ and to $E$. Hence for $N=a+b$, $\\jmath_{a,N}z_a=\\jmath_{a,N}\\rho_{N,a}z_N=\\ell^bz_N$, while $\\rho_{N,b}z_N=z_b$. These two equalities state, respectively, that the squares for $e_a,e_N$ over the coefficient injection and for $e_N,e_b$ over the coefficient quotient commute strictly as cochain maps. Thus the two exact coefficient rows, for $A_{r,Z}[0]$ and for $K_r$, form a strict morphism of short exact sequences.",
+   "uses": [
+    "lem-per-etale-godement-supported-exact-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Proposition 3.3.2, compatible cocycles and the coefficient maps between them"
+   }
+  },
+  {
+   "text": "Use the mapping-cone convention of [def-weil-abstract-derived-category] and set $C_r=Q\\operatorname{Cone}(e_r)$. In degree $n$ the representative is $K_r^n\\oplus A_{r,Z}^{n+1}$ with differential $(k,x)\\mapsto(d_Kk+e_rx,-d_Ax)$. Define the injection and quotient on cones by the direct sums of the maps on $K$ and on $A[1]$. The strict square identities of Step 4 imply that these maps commute with that displayed differential. Each degree is the direct sum of the two exact coefficient rows, so its kernel, image and quotient are the direct sums of the corresponding kernels, images and quotients. Consequently\n$$0\\to\\operatorname{Cone}(e_a)\\to\\operatorname{Cone}(e_{a+b})\\to\\operatorname{Cone}(e_b)\\to0$$\nis a degreewise short exact sequence of $A_{a+b}$-module sheaf complexes. Each $C_r$ is a cone of the original $\\eta_r$ because $e_r$ represents it, including its target comparison from Step 2.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Proposition 3.3.2, second paragraph: preferred cones after compatible cocycles have been selected"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-complex-ses-triangle] in the abelian category of ordinary $A_{a+b}$-module sheaves on $Z_{\\mathrm{et}}$ to the exact sequence in Step 5. It gives the distinguished triangle $C_a\\to C_{a+b}\\to C_b\\to C_a[1]$, with its connecting map induced by that coefficient sequence. All outer complexes and all maps here are already defined over $A_{a+b}$ by restriction of scalars; no assertion that derived tensor commutes with $i^!$ is used. The same cones $C_r$ work for every pair $(a,b)$ because they were chosen from the one recursive family. Finally $S_r^n=0$ for $n<0$, so $K_r^n=0$ for $n<-2c$ and the displayed cone has zero terms for $n<-2c-1$. Its cohomology is therefore bounded below. All terms of the triangle belong to the full bounded-below derived subcategory of [def-weil-pbc-derived-categories], with its induced distinguished triangles. This is the asserted triangle in $D^+(Z_{\\mathrm{et}},A_{a+b})$.",
+   "uses": [
+    "lem-weil-pbc-complex-ses-triangle",
+    "def-weil-pbc-derived-categories"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Proposition 3.3.2, displayed triangles in the bounded-below derived category; Stacks Tag 0152, lemma-derived-canonical-delta-functor"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-per-etale-godement-supported-exact-model",
+  "lem-per-regular-immersion-class-calculus",
+  "def-amb-etale-compact-support",
+  "def-per-closed-support-plus-adjunction",
+  "def-sbc-standard-tstructure-derived-category",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-complex-ses-triangle",
+  "def-weil-pbc-derived-categories"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose XVI, Proposition 3.3.2, printed p.245; explicit cocycle-lifting and cone arguments expanding the omitted elementary properties"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -57,7 +142,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-gabber-regular-pair-purity",
@@ -81,5 +166,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-gysin-coefficient-cone-triangles",
+  "worker": "stage1",
+  "summary": "Read Expose XVI Proposition 3.3.2 and the reduction square in 3.3.1. Made the Godement resolution exactness a generic statement-only input, constructed a single compatible family by recursive coboundary correction, checked the injection squares by j rho = ell^b, and proved exactness of the actual mapping cones before applying the existing Mathlib triangle leaf. Removed the unused regular-scheme dependency; no statement change.",
+  "blueprint": "Realizes the coefficient-reduction input in the inherited proof-Step-3 ancestry of lem-per-artin-gabber-affine-curve; precisely the compatible Godement cocycles and cone triangles of Expose XVI Proposition 3.3.2. This is a technical child, not the unit key node.",
+  "tool_uses": [
+   {
+    "node": "lem-asd-etale-finite-twist-pullback",
+    "why": "The generic ordinary etale Tate-line and coefficient-reduction identifications are needed to identify the exact coefficient rows; the perverse-curve unit has no replacement for this coefficient tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-asd-etale-finite-twist-pullback"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-NQ-bfdcd8d20",
+  "group": "NQ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NQ-bfdcd8d20 (reviewer sub-agent of L); spot-checked: Read ILO XVI 3.3.1–3.3.2 (printed p.245) and Stacks 09XQ (etale-cohomology.tex line 14023, label lemma-sections-with-support-acyclic). No SGA is cited. The item statement is identical to the Q53 base; dropping def-weil-regular-scheme from stmt_deps is correct because the statement only mentions a regular immersion. It matches 3.3.2: compatible Godement cocycles and triangles C(µ)→C(µ+ν)→C(ν) in D^+(Y,Z/ℓ^{µ+ν}). The new unsplit node lem-per-etale-godement-supported-exact-model is true, as I checked clause by clause. H_Z(p_*M) is p_*M for p∈Z and 0 otherwise. The terms are i^{-1}H_Z-acyclic and Γ(Z,−)-acyclic. Supported terms are products of stalks, hence sectionwise exact in coefficients. Restriction of scalars commutes because the formulas do not depend on R, and the rank-one tensor map is a local isomorphism. Tested on Z=∅, Z=X, F=0, a single point and split sequences. It is statement-only and self-contained, with no regular immersion, class or cone, so it does not restate the item (D1/D2). Grep for Godement found only the Zariski cup-product family and the pbc ring-complex Godement nodes, so it is not a duplicate. Steps 1 and 3–6 are correct: j=ℓ^b·lift gives jρ=ℓ^b; the coboundary-corrected recursion is set up with base and step, and c=0 is handled; the cone convention matches def-weil-abstract-derived-category; the SES-triangle leaf applies; the cone vanishes below min(−2c,−1). Tool use lem-asd-etale-finite-twist-pullback is accepted. One repair: Step 2 identified the class node's unbounded compact-support i_r^! with the new lemma's bounded-below i^! without an argument. Added: Ri_!=i_* for the identity compactification [def-amb-etale-compact-support]; Hom(G,i_r^!K)=Hom(i_*G,K)=0 for G∈D^{<n}, so i_r^!K∈D^{≥n} [def-sbc-standard-tstructure-derived-category]; Yoneda on D^+ identifies it with [def-per-closed-support-plus-adjunction]. uses and proof_deps updated; no cycle. Corrected item at fixes/dag/nodes/sec-deligne-laumon-a1/lem-per-gysin-coefficient-cone-triangles.json.; 1 file(s) fixed by the reviewer"
  }
 }
