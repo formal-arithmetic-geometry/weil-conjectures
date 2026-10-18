@@ -2976,6 +2976,7 @@ public import WeilConjectures.AlgebraicGeometry.GeometricFrobenius
 public import WeilConjectures.AlgebraicGeometry.GeometricFrobenius.FiberMapPow
 public import WeilConjectures.AlgebraicGeometry.GeometricFrobenius.Irreducible
 public import WeilConjectures.AlgebraicGeometry.GeometricFrobenius.Points
+public import WeilConjectures.AlgebraicGeometry.GeometricFrobeniusNeAbsolute
 public import WeilConjectures.AlgebraicGeometry.GeometricPointFieldExtension
 public import WeilConjectures.AlgebraicGeometry.GeometricPointMorphismAddCommGrpStalk
 public import WeilConjectures.AlgebraicGeometry.GeometricPointMorphismCategoryEquivalence
@@ -5653,6 +5654,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusSingle
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusSingleZero
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.ShortExact
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.ShortExactPullback
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
 public import WeilConjectures.CategoryTheory.DerivedCategory.RingPseudoCoherentFiniteTorPerfect
 public import WeilConjectures.CategoryTheory.DerivedCategory.Shift.ExactFunctor
@@ -6065,6 +6067,7 @@ public import WeilConjectures.CategoryTheory.StageSectionTransitionExistence
 public import WeilConjectures.CategoryTheory.StageSystem.Basic
 public import WeilConjectures.CategoryTheory.StageSystem.Const
 public import WeilConjectures.CategoryTheory.StageSystem.Functor
+public import WeilConjectures.CategoryTheory.StageSystem.Idempotents
 public import WeilConjectures.CategoryTheory.SubobjectHomologyStep
 public import WeilConjectures.CategoryTheory.SupportedComplexSingleRealization
 public import WeilConjectures.CategoryTheory.TensorHomologyImageKernelEpi
@@ -9564,6 +9567,7 @@ public import WeilConjectures.WeilObject.BoundedConstructible.TensorHom
 public import WeilConjectures.WeilObject.BoundedConstructible.UpperLowerStar
 public import WeilConjectures.WeilObject.Defs
 public import WeilConjectures.WeilSheaf.AffineLineCohomology
+public import WeilConjectures.WeilSheaf.AlgClosedCoefficientCohomology
 public import WeilConjectures.WeilSheaf.ArtinSchreierDual
 public import WeilConjectures.WeilSheaf.ArtinSchreierFrobenius
 public import WeilConjectures.WeilSheaf.ArtinSchreierInertia
@@ -9600,6 +9604,8 @@ public import WeilConjectures.WeilSheaf.ExtensionByZero
 public import WeilConjectures.WeilSheaf.FieldCoefficient
 public import WeilConjectures.WeilSheaf.FieldCoefficientCohomology
 public import WeilConjectures.WeilSheaf.FieldCoefficientExtendScalars
+public import WeilConjectures.WeilSheaf.FieldCoefficientFrobeniusTwist
+public import WeilConjectures.WeilSheaf.FieldCoefficientKaroubian
 public import WeilConjectures.WeilSheaf.FieldCoefficientTransition
 public import WeilConjectures.WeilSheaf.FieldCoefficientTwoColimit
 public import WeilConjectures.WeilSheaf.FiniteEtale
