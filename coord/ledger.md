@@ -16255,3 +16255,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 07:11 L: returned deliver/N2/Sheaf.Paper.NilpotentReductionLissity (reviewer RETURN: (the landing tools, head b7a5b605c) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Pap)
 - 07:11 L: returned deliver/P3/Sheaf.CategoryTheory.CartanEilenbergDecalageSpectralObjectIso (reviewer RETURN: (the landing tools, head faef3cb36) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Cat)
 - 07:11 L: returned deliver/Q2/Sheaf.RingTheory.NoetherianKoszulAugmentationProZero (reviewer RETURN: (the landing tools, head 4ea080127) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Rin)
+- 07:11 L: returned deliver/Q3/Sheaf.AlgebraicGeometry.CanonicalCoherentEtaleComparison (reviewer RETURN: (the landing tools, head 41e61b06d) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
