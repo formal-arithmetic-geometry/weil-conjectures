@@ -8819,13 +8819,11 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.DescentLimit
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.FailureNormalBase
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.FieldBaseChange
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.FieldBaseChangeNormal
-public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.FieldBaseChangeNormalScratchNORMAL
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.FieldExtensionBaseChange
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.FiniteCoefficients.Constant
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.FiniteCoefficients.Defs
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.FiniteCoefficients.Projection
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.FiniteCoefficients.Residue
-public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.FiniteCoefficients.Scratch
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.FlatSingle
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.FlatSingle.BaseChange
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.FlatSingle.Coefficients
