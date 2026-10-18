@@ -17,7 +17,9 @@
   "def-weil-finitely-generated-module",
   "def-weil-pbc-constructible-complexes",
   "def-kun-derived-tensor",
-  "def-pur-derived-internal-hom"
+  "def-pur-derived-internal-hom",
+  "lem-kun-tensor-sym",
+  "lem-coef-etale-hom-thick-locus"
  ],
  "proof": [
   {
@@ -186,5 +188,29 @@
   "group": "NH",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NH-016d796ac (reviewer sub-agent of L); spot-checked: I read the item and all three new nodes in full against ILO XVII and Stacks: Thm 7.6.1 with its proof on p. 314, Defs 7.3.1-7.3.3, Prop 7.2.5, Def 7.6.8 / Prop 7.6.9, Def 7.7.1 and the paragraph after it, and Prop 10.1.1 with its proof on pp. 325-326, plus Stacks 03TT lemma-when-ctf, remark-projective-each-degree and 09BI. The item is still unsplit live, and its statement and stmt_deps are identical to live. Steps 1-3 follow ILO's proof. Step 1 takes the flat model with one Galois partition; on a connected V_i, kernels and cokernels of maps between constant sheaves are constant, so every M_X⊗^L L lies in W_P with bounds in [a,b] independent of M. Step 2 applies condition (B): the lower bound a-r comes from P in D^{<=r}, the upper bound b+c from shifting Def 7.6.8, and the constructibility clause is used only for L. Step 3 applies 10.1.1; Tor amplitude against all sheaves follows stalkwise from the bound for constant M. Step 4 works on the flat model: flatness survives tensor cancellation, B⊗E stays finite projective, and B is Noetherian, so no condition on B over A is needed. Step 5 checks β∘Uα=u_B on transposes (p⊗(b⊗h) goes to b⊗ev(p,h)), then uses uniqueness of transposes and that U reflects isomorphisms; α is the specified evaluation map. New nodes: condition-b is ILO 7.6.8/7.6.9 with the bounds written out, and W_P equals ILO's ind-unipotent class by 7.2.5 since the sheaves are ℓ-torsion. universal-coefficients is exactly 10.1.1 with its uniform-bound hypothesis. The flat model is true: stalks may be infinite, but after refining the strata the monodromy at each generic point is finite (I tested a nodal-curve twist example), and ILO asserts the same partition. None is a duplicate: sk-lem-sf-flat-model and lem-sf-etale-smooth-stratified-ctf need finite coefficient rings, 09BI and lem-sfb-connected-etale-perfect-constant give only étale-local models, and lem-per-constructible-finite-monodromy-filtration has no bounded flat model. None restates a clause of the item. The three tool_uses (scalar adjunction, exponential law, H^0 RHom) are generic ringed-site tools and I accept them. No SGA is cited. Edge cases checked: empty X, zero complexes, a non-flat quotient, dual numbers (excluded by the finite-Tor hypothesis), and a separably closed point. Nits not changed: the 'this category' wording is harmless because D^b_ctf = D^b_c over F_ℓ, and 'Galois cover' is defined inline."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CtfHomCoefficientComparison",
+  "declaration": "AlgebraicGeometry.Etale.ctf_hom_coefficient_comparison",
+  "declarations": [
+   "AlgebraicGeometry.Etale.ctfHomBidualMap",
+   "AlgebraicGeometry.Etale.ctfHomCoefficientMap",
+   "AlgebraicGeometry.Etale.ctf_hom_coefficient_comparison"
+  ],
+  "file": "lean/Sheaf/Paper/CtfHomCoefficientComparison.lean",
+  "statement": "theorem ctf_hom_coefficient_comparison (l : ℕ) [Fact l.Prime] (X : Scheme.{u}) [IsNoetherian X] (A : Type (u + 1)) [CommRing A] [IsNoetherianRing A] [Algebra (ZMod l) A] (hDual : ∃ Q : DerivedCategoryModule (ULift.{u + 1} (ZMod l)) X, DerivedCategory.isBoundedConstructible (ULift.{u + 1} (ZMod l)) X Q ∧ ∀ P : DerivedCategoryModule (ULift.{u + 1} (ZMod l)) X, DerivedCategory.isBoundedConstructible (ULift.{u + 1} (ZMod l)) X P → DerivedCategory.isBoundedConstructible (ULift.{u + 1} (ZMod l)) X (((derivedHom (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod l))) X).obj (op P)).obj Q) ∧ IsIso (ctfHomBidualMap (ULift.{u + 1} (ZMod l)) X P Q)) : (∀ P L : DerivedCategoryModule A X, DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} A) X P → DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} A) X L → DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} A) X (((derivedHom (ModuleCat.{u + 1} A) X).obj (op P)).obj L)) ∧ (∀ (B : Type (u + 1)) [CommRing B] [IsNoetherianRing B] (φ : A →+* B), (∀ K : DerivedCategoryModule A X, DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} A) X K → DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} B) X ((scalarExtension φ X).obj K)) ∧ (∀ P L : DerivedCategoryModule A X, DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} A) X P → DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} A) X L → IsIso (ctfHomCoefficientMap X φ P L) ∧ DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} B) X (((derivedHom (ModuleCat.{u + 1} B) X).obj (op ((scalarExtension φ X).obj P))).obj ((scalarExtension φ X).obj L))) ∧ (∀ (P P' L L' : DerivedCategoryModule A X), DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} A) X P → DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} A) X P' → DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} A) X L → DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} A) X L' → ∀ (f : P' ⟶ P) (g : L ⟶ L'), (scalarExtension φ X).map (((derivedHom (ModuleCat.{u + 1} A) X).map f.op).app L ≫ ((derivedHom (ModuleCat.{u + 1} A) X).obj (op P')).map g) ≫ ctfHomCoefficientMap X φ P' L' = ctfHomCoefficientMap X φ P L ≫ ((derivedHom (ModuleCat.{u + 1} B) X).map ((scalarExtension φ X).map f).op).app ((scalarExtension φ X).obj L) ≫ ((derivedHom (ModuleCat.{u + 1} B) X).obj (op ((scalarExtension φ X).obj P'))).map ((scalarExtension φ X).map g)))",
+  "branch": "newtargets-dag",
+  "by": "Q03",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Repair of returned head e3d9a7c3fe32 (H4): ctfHomCoefficientMap is the exact component ((etaleHomComparison_thickLocus X φ).choose L).app (op P), definitionally the parent CoefficientChangeDualizing.homComparison component. Uses the landed lem-coef-etale-hom-thick-locus comparison and its IsEtaleHomTranspose equation, not a second chosen tensor isomorphism. The other added landed statement dependency lem-kun-tensor-sym supplies canonical signed biduality. All hypotheses and conclusions are retained; no new notion or statement correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4098b44a4",
+  "group": "Q03",
+  "result": "pass",
+  "note": "Re-delivery of H4 return e3d9a7c3 applies the required repair exactly: ctfHomCoefficientMap := ((etaleHomComparison_thickLocus X φ).choose L).app (op P), definitionally the parent's CoefficientChangeDualizing.homComparison component; stmt_deps swap lem-pur-exceptional-coefficient-comparison → lem-coef-etale-hom-thick-locus; everything else byte-identical to the previously checked head (hDual with actual bidual arrow, ctf closure, arbitrary Noetherian B/φ with no flatness, extension preservation, IsIso + target ctf, two-variable naturality). Compiled probe confirms α = homEquiv(etaleHomTensorComparison.hom ≫ T(ev)) via IsEtaleHomTranspose (5.2 s clean). Mechanical theorem-stmt_dep finding judged PASS: derivedTensorSymmetry is lem-kun-tensor-sym's constructed canonical iso, α is .choose of the thick-locus theorem (same as PASSed parent). nt_compile --json of delivered module clean 4.5 s; statement verbatim, one sorry, no long lines, report sections present. Advisory: scalarExtension module has no owner node; parent uses boundedConstructibleFiniteTor/ULift algebra encoding; two scalar tensor comparisons remain unbridged."
  }
 }

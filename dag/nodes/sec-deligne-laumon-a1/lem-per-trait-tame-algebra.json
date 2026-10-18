@@ -11,7 +11,8 @@
   "def-weil-pbc-henselian-terminology",
   "def-sc-discrete-valuation-ring",
   "def-weil-residue-field",
-  "def-pd-separable-closure"
+  "def-pd-separable-closure",
+  "def-per-tame-root-limit"
  ],
  "proof": [
   {
@@ -375,5 +376,23 @@
   "group": "Q36",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q36-1e4d8b89c (reviewer sub-agent of L); spot-checked: I read the item in full: 16 steps, against the statement of every cited node. Its statement, stmt_deps and blueprint are identical to live, so the target is not weakened; only the split fields changed. The statement matches ILO XVII 1.2 (p.259): the canonical sequence 1→S→Gal→Ẑ'(1)→1 with S pro-p and p the characteristic exponent, and §1.2.1 uses the topological generator. The proof follows Stacks 0BUA/0BUB and 09EE. All hypotheses check: μ_d⊂R by henselian root lifting plus lem-sbc-strict-local-roots-of-unity; irreducibility of X^d−π by the root-algebra domain node; B_L is local by the henselian product node, with no excellence used; total inertia in both p>1 (pure inseparability) and p=1; e=d so α_d is a uniformizer; choice independence and surjectivity by gluing and extending from a normal subfield. For p>1, every hypothesis of the tower and inverse-limit nodes is checked, and the G≅C comparison is identified through K_d. For p=1, S=1 via the new node and the χ_L restriction formula. The CRT construction of primitive roots and the closure ⟨σ^d⟩=U_d with index d are both correct. The one new node, lem-per-dvr-char-zero-tangent-kernel (a finite-order, residue-trivial DVR automorphism with a(t)/t≡1 in residue characteristic 0 is the identity), is true by the 09EE(3) telescoping argument, and t↦t/(1+t) shows it fails in characteristic p. It is self-contained, not a clause of the item, and not a duplicate: every existing 09EE and tame node assumes p>0, and lem-exc-henselian-dvr-tame-sequence is excellent, algebraically-closed-residue and non-canonical. Its five Mathlib searches are logged. No SGA source is cited. I accept the nine declared tool_uses: generic algebra and profinite tools with no node in the perverse unit. Advisory, outside this delivery: lem-pc-crt-ideal-quotient-product's source tag should be 00DT, not 00U3. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.FieldTheory.CanonicalTraitTameCharacter",
+  "declaration": "IsDiscreteValuationRing.exists_canonical_tame_character",
+  "file": "lean/Sheaf/FieldTheory/CanonicalTraitTameCharacter.lean",
+  "statement": "theorem exists_canonical_tame_character (R : Type u) [CommRing R] [IsDomain R] [IsDiscreteValuationRing R] [IsStrictlyHenselianLocalRing R] (K : Type v) [Field K] [Algebra R K] [IsFractionRing R K] (Ksep : Type w) [Field Ksep] [Algebra K Ksep] [IsSepClosure K Ksep] (Ω : Type z) [Field Ω] [IsAlgClosed Ω] [Algebra Ksep Ω] (p : ℕ) (hp : p = if ringChar (IsLocalRing.ResidueField R) = 0 then 1 else ringChar (IsLocalRing.ResidueField R)) : ∃ t : Gal(Ksep/K) →* TameRoots.limitSubgroup Ω p, @Continuous _ _ inferInstance (TameRoots.limitTopology Ω p) t ∧ Function.Surjective t ∧ (∀ π : R, Irreducible π → ∃ α : TameRoots.Order p → Ksep, (∀ d : TameRoots.Order p, α d ^ d.1 = algebraMap K Ksep (algebraMap R K π)) ∧ ∀ d e : TameRoots.Order p, d.1 ∣ e.1 → α e ^ (e.1 / d.1) = α d) ∧ (∀ (π : R), Irreducible π → ∀ α : TameRoots.Order p → Ksep, (∀ d : TameRoots.Order p, α d ^ d.1 = algebraMap K Ksep (algebraMap R K π)) → (∀ d e : TameRoots.Order p, d.1 ∣ e.1 → α e ^ (e.1 / d.1) = α d) → ∀ (h : Gal(Ksep/K)) (d : TameRoots.Order p), (((t h).1 d : Ωˣ) : Ω) = algebraMap Ksep Ω (h (α d) / α d)) ∧ (∀ (Q : Type q) [Group Q] [TopologicalSpace Q] [DiscreteTopology Q] [Finite Q] (f : t.ker →* Q), Continuous f → Function.Surjective f → ∃ n : ℕ, Nat.card Q = p ^ n) ∧ (p = 1 → t.ker = ⊥) ∧ (∃ σ : TameRoots.limitSubgroup Ω p, TameRoots.IsCompatiblePrimitiveFamily p σ.1) ∧ ∀ σ : TameRoots.limitSubgroup Ω p, TameRoots.IsCompatiblePrimitiveFamily p σ.1 → @DenseRange (TameRoots.limitSubgroup Ω p) (TameRoots.limitTopology Ω p) ℤ (fun n : ℤ ↦ σ ^ n) ∧ ∀ d : TameRoots.Order p, ∃ U : Subgroup (TameRoots.limitSubgroup Ω p), (U : Set (TameRoots.limitSubgroup Ω p)) = @closure _ (TameRoots.limitTopology Ω p) (Set.range (fun n : ℤ ↦ (σ ^ d.1) ^ n)) ∧ U.index = d.1",
+  "branch": "newtargets-dag",
+  "by": "N8",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6100da206",
+  "group": "N8",
+  "result": "pass",
+  "note": "Re-delivery of RETURNed f4024d609a61. Lean diff = exactly the 16 private imports removed (signature/docstrings/sorry byte-identical; lean.statement verbatim). Item node vs prior: only stmt_deps lem-exc-tame-roots-product -> new def node def-per-tame-root-limit (H2 repair as instructed): kind definition, ILO XVII 1.2/Stacks 0BUB, stmt_deps def-weil-field, 3 searches, existing:true on the unchanged TameRootsProduct module with declarations Order/limitSubgroup/limitTopology/IsCompatiblePrimitiveFamily, statement and note signatures verbatim; its text matches the defs (positive coprime orders, root+transition subgroup, initial discrete-coordinate topology, exact-order normalized compatible family), with no characteristic hypothesis. Substance re-checked: canonical t pinned for all uniformizers/compatible roots, continuous surjective, actual kernel pro-p via finite discrete quotients, p=1 -> ker trivial, primitive sigma exists and every one is a dense generator with closure<sigma^d> of index d; independent universes. nt_compile --json clean 2.0 s. Import removal tests: TameRootsProduct/Henselian/KrullTopology needed; DVR.Basic/IsSepClosed/GroupTheory.Index are transitive but name notions the statement uses (advisory). Advisory: the TameRootsProduct docstrings cite the theorem node as their blueprint."
  }
 }

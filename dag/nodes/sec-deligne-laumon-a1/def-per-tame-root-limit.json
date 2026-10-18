@@ -1,0 +1,104 @@
+{
+ "id": "def-per-tame-root-limit",
+ "kind": "definition",
+ "title": "Prime-to-p root limit and compatible primitive families",
+ "status": "split",
+ "statement": "Let $k$ be a field [def-weil-field] and let $p\\in\\mathbf N$. Put $D_p=\\{m\\in\\mathbf N:0<m,\\ \\gcd(m,p)=1\\}$. For $m\\in D_p$, let $\\mu_m(k)=\\{z\\in k^\\times:z^m=1\\}$. Define $G(k,p)$ to be the subgroup of $\\prod_{m\\in D_p}k^\\times$ consisting of the families $x$ such that $x_m\\in\\mu_m(k)$ and $x_n^{n/m}=x_m$ whenever $m\\mid n$. Equip $G(k,p)$ with the coarsest topology for which every coordinate map into the discrete group $k^\\times$ is continuous, equivalently the inverse-limit topology of the discrete root groups. A family $\\zeta:D_p\\to k^\\times$ is a compatible primitive family if every $\\zeta_m$ has multiplicative order exactly $m$, $\\zeta_1=1$, and $\\zeta_n^{n/m}=\\zeta_m$ whenever $m\\mid n$.",
+ "stmt_deps": [
+  "def-weil-field"
+ ],
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose XVII, section 1.2 opening paragraph (printed p. 259), tame sequence; see also Stacks Tag 0BUB, pione.tex, lemma-structure-decomposition-separable-closure"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "inverse limit of roots of unity of positive orders prime to p with power transition maps and compatible primitive roots",
+   "results": "OK 8 hits: InverseSystem.limit; IsPrimitiveRoot.primitiveRootsPowEquivOfCoprime; rootsOfUnityEquivOfPrimitiveRoots; cyclotomicCharacter.toFun; IsPrimitiveRoot.inv_iff; InverseSystem.isNatEquiv_piEquivLim; ProfiniteGrp.isIso_toLimit; cyclotomicCharacter.toFun_apply.",
+   "date": "2026-10-18",
+   "verdict": "No exact tame root-limit notion; reuse the existing project definitions."
+  },
+  {
+   "tool": "loogle",
+   "query": "rootsOfUnity",
+   "results": "OK 12 hits: rootsOfUnity and its finite-level membership, kernel, power, and cardinality API; no all-orders limit or compatible primitive-family definition.",
+   "date": "2026-10-18",
+   "verdict": "Finite root groups reused by the existing project definitions."
+  },
+  {
+   "tool": "grep",
+   "query": "limitSubgroup|limitTopology|IsCompatiblePrimitiveFamily",
+   "results": "msearch Mathlib: OK 0 hits. rg of WeilConjectures: no hits. rg of lean/Sheaf/FieldTheory: TameRootsProduct.lean contains exactly the definitions being recorded. DAG exact-name search finds only lem-exc-tame-roots-product, a theorem node; no separate definition node. blueprint_refs.py search tame root: 0 blueprint nodes.",
+   "date": "2026-10-18",
+   "verdict": "Existing project declarations found; add only a definition-node record, no duplicate Lean module."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-per-trait-tame-algebra",
+  "date": "2026-10-18",
+  "group": "N8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Tame root inverse limit and primitive-generator terminology in Expose XVII section 1.2 opening paragraph, used by lem-per-trait-tame-algebra.",
+   "via": [
+    "lem-per-trait-tame-algebra",
+    "lem-per-trait-residue-model",
+    "def-per-potential-dualizing",
+    "lem-per-finite-residue-dualizing",
+    "lem-per-qbar-arbitrary-field-duality"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "lean": {
+  "module": "Sheaf.FieldTheory.TameRootsProduct",
+  "declaration": "TameRoots.Order",
+  "declarations": [
+   "TameRoots.Order",
+   "TameRoots.limitSubgroup",
+   "TameRoots.limitTopology",
+   "TameRoots.IsCompatiblePrimitiveFamily"
+  ],
+  "statement": "abbrev Order (p : ℕ)",
+  "branch": "newtargets-dag",
+  "by": "N8",
+  "date": "2026-10-18",
+  "existing": true,
+  "note": "Records the four unchanged general definitions already in TameRootsProduct; no invocation or choice of compatible_roots_product. Remaining verbatim signatures:\ndef limitSubgroup (k : Type u) [Field k] (p : ℕ) : Subgroup (Order p → kˣ)\ndef limitTopology (k : Type u) [Field k] (p : ℕ) : TopologicalSpace (limitSubgroup k p)\ndef IsCompatiblePrimitiveFamily {k : Type u} [Field k] (p : ℕ) (ζ : Order p → kˣ) : Prop"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6100da206",
+  "group": "N8",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6100da206",
+  "group": "N8",
+  "result": "pass",
+  "note": "Re-delivery of RETURNed f4024d609a61. Lean diff = exactly the 16 private imports removed (signature/docstrings/sorry byte-identical; lean.statement verbatim). Item node vs prior: only stmt_deps lem-exc-tame-roots-product -> new def node def-per-tame-root-limit (H2 repair as instructed): kind definition, ILO XVII 1.2/Stacks 0BUB, stmt_deps def-weil-field, 3 searches, existing:true on the unchanged TameRootsProduct module with declarations Order/limitSubgroup/limitTopology/IsCompatiblePrimitiveFamily, statement and note signatures verbatim; its text matches the defs (positive coprime orders, root+transition subgroup, initial discrete-coordinate topology, exact-order normalized compatible family), with no characteristic hypothesis. Substance re-checked: canonical t pinned for all uniformizers/compatible roots, continuous surjective, actual kernel pro-p via finite discrete quotients, p=1 -> ker trivial, primitive sigma exists and every one is a dense generator with closure<sigma^d> of index d; independent universes. nt_compile --json clean 2.0 s. Import removal tests: TameRootsProduct/Henselian/KrullTopology needed; DVR.Basic/IsSepClosed/GroupTheory.Index are transitive but name notions the statement uses (advisory). Advisory: the TameRootsProduct docstrings cite the theorem node as their blueprint."
+ }
+}
