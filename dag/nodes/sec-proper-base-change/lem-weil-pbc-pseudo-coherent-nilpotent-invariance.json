@@ -26,30 +26,30 @@
  ],
  "proof": [
   {
-   "text": "Set $A=R'$ and $I=\\ker(A\\to R)$, and choose $N\\geq1$ with $I^N=0$. Identify $A/I$ with $R$ by sending the class of $a$ to its image: this is well-defined, injective by the definition of $I$, and surjective by the hypothesis. Hence the scalar reductions below are exactly the derived reduction $K$ in the statement.",
+   "text": "Identify B with A/I for I=ker φ using the quotient-kernel ring equivalence. Uniqueness of left adjoints identifies extension along φ followed by restriction along this equivalence with extension along A→A/I. Postcomposition of right Kan extensions by an equivalence preserves universality: the induced functor on right-extension categories is an equivalence and preserves terminal objects. Thus transport of the given universal derived pair is legitimate, with no choice of a new derived tensor object.",
    "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 0H76, lemma-check-pseudo-coherent-modulo-nilpotent, proof"
+    "place": "Tag 0H76, lemma-check-pseudo-coherent-modulo-nilpotent"
    }
   },
   {
-   "text": "Assume $K'$ is pseudo-coherent. By [def-pc-ring-pseudo-coherent-complex] choose a bounded-above complex $F^\\bullet$ of finite free $A$-modules representing it. Every term is flat by [lem-weil-pbc-projective-module-flat], so $F^\\bullet$ is K-flat by [lem-pc-module-bounded-flat-kflat]. Apply [lem-pur-derived-change-of-rings] on the category with one object and only its identity morphism, with the identity covering. A presheaf on this category is just its value at that object, and the identity-cover sheaf condition imposes no extra restriction. Thus a ring sheaf is a ring and a module sheaf is a module; morphisms, complexes, cohomology, and tensor products are evaluated at that object. Consequently the K-flat computation in clause (2) gives: $K$ is represented by the termwise tensor complex $F^\\bullet\\otimes_A R$. A basis of each term tensors to the same finite basis over $R$, and zero terms above the bound stay zero. This is a bounded-above finite free model, so the pseudo-coherence definition gives the forward implication.",
+   "text": "For the forward implication choose the bounded-above finite-free model P given by [def-pc-ring-pseudo-coherent-complex]. Raise A and B by ULift to the module universe. Restriction along these ring equivalences preserves the upper bound and transports bases; uniqueness of left adjoints supplies the ordinary scalar-extension comparison. Transport the universal derived counit using the homotopy and derived equivalences and right Kan extension uniqueness. The raised complex is termwise free, hence flat by [lem-weil-pbc-projective-module-flat], and is K-flat by [lem-pc-module-bounded-flat-kflat]. Apply the module counit theorem [lem-pc-kflat-scalar-extension-counit]. All comparison maps are isomorphisms, and the target equivalence reflects isomorphisms, so the original counit is invertible on P. Termwise extension has the same upper bound and finite bases. Compose the counit comparison with the derived model isomorphism to obtain a finite-free model of L(K').",
    "uses": [
     "def-pc-ring-pseudo-coherent-complex",
     "lem-weil-pbc-projective-module-flat",
     "lem-pc-module-bounded-flat-kflat",
-    "lem-pur-derived-change-of-rings"
+    "lem-pc-kflat-scalar-extension-counit"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 0H76, lemma-check-pseudo-coherent-modulo-nilpotent, proof"
+    "place": "Tag 0H76, lemma-check-pseudo-coherent-modulo-nilpotent"
    }
   },
   {
-   "text": "Conversely assume $K$ is pseudo-coherent. Its definition gives a bounded-above complex $E^\\bullet$ of finite free $R$-modules representing it. Its terms are projective by [lem-weil-pbc-free-module-projective]. Apply [lem-weil-pbc-nilpotent-projective-complex-lift] to $A,I,C=K'$ and $E^\\bullet$, using the given derived reduction identification and $I^N=0$. Obtain a bounded-above complex $P^\\bullet$ of projective $A$-modules representing $K'$ and an isomorphism of complexes $P^\\bullet/IP^\\bullet\\cong E^\\bullet$. In particular every $P^i/IP^i$ has a finite basis. No pseudo-coherence of $K'$ has been assumed in this lifting step. The quotient and tensor descriptions agree degreewise by the mutually inverse maps $p\\otimes\\bar a\\mapsto\\overline{ap}$ and $\\bar p\\mapsto p\\otimes1$; these commute with the differentials since those are $A$-linear.",
+   "text": "For the reverse implication choose a bounded-above finite-free B-complex E representing L(K'). Restrict its scalars through A/I≅B; transport its finite bases by the ring equivalence and preserve its upper bound. Its terms are projective by [lem-weil-pbc-free-module-projective]. Apply [lem-weil-pbc-nilpotent-projective-complex-lift] to the transported universal pair, this prescribed reduced complex, and K'. This supplies a bounded-above projective A-complex P representing K', with termwise reduction isomorphic to the transported E. Hence each reduced P term is finite free.",
    "uses": [
     "def-pc-ring-pseudo-coherent-complex",
     "lem-weil-pbc-free-module-projective",
@@ -58,49 +58,51 @@
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 0H76, lemma-check-pseudo-coherent-modulo-nilpotent, proof"
+    "place": "Tag 0H76, lemma-check-pseudo-coherent-modulo-nilpotent"
    }
   },
   {
-   "text": "Fix a degree $i$ and choose the finite basis of $P^i/IP^i$ supplied by the isomorphism with $E^i$. Lift its $r_i$ basis vectors to $P^i$, and let $u:A^{\\oplus r_i}\\to P^i$ send the standard basis to those lifts. Its quotient map modulo $I$ is an isomorphism, hence surjective. Nilpotent Nakayama [lem-weil-pbc-nakayama-nilpotent] makes $u$ surjective even though $P^i$ is not yet known finite. Thus the chosen lifts generate $P^i$.",
-   "uses": [
-    "lem-weil-pbc-nakayama-nilpotent"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 0H76, lemma-check-pseudo-coherent-modulo-nilpotent, proof"
-   }
-  },
-  {
-   "text": "Projectivity, in its lifting-along-surjections form [def-weil-pbc-projective-module], supplies a section $s:P^i\\to A^{\\oplus r_i}$ of $u$. Put $T=\\ker(u)$. The explicit decomposition $v=(v-su(v))+su(v)$ identifies $A^{\\oplus r_i}$ with $T\\oplus P^i$. Multiplication by $I$ respects this decomposition, so its quotient is $(T/IT)\\oplus(P^i/IP^i)$, and the reduced map of $u$ is the projection onto the second factor. That map is an isomorphism by the chosen basis, so $T/IT=0$. Apply [lem-weil-pbc-nakayama-nilpotent] to $0\\to T$ to conclude $T=0$. Hence $u$ is an isomorphism and $P^i$ is finite free of rank $r_i$. This also works when $r_i=0$.",
+   "text": "Fix a term M of P. Choose a finite basis of (A/I)⊗M and let F be the free A-module on that basis index. The quotient map M→(A/I)⊗M is surjective by the tensor/quotient equivalence. Projectivity of the free source F [def-weil-pbc-projective-module] lifts the reduced basis isomorphism to a map F→M. Tensor extensionality proves that the base-changed map is the basis isomorphism. Convert tensor reduction to quotient reduction and apply [lem-weil-pbc-nakayama-nilpotent] to get surjectivity without finiteness of M. Therefore M is finite.",
    "uses": [
     "def-weil-pbc-projective-module",
+    "lem-weil-pbc-free-module-projective",
     "lem-weil-pbc-nakayama-nilpotent"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 0H76, lemma-check-pseudo-coherent-modulo-nilpotent, proof"
+    "place": "Tag 0H76, lemma-check-pseudo-coherent-modulo-nilpotent"
    }
   },
   {
-   "text": "Perform the preceding argument in every degree of the already constructed complex $P^\\bullet$. Its terms are now finite free; its differentials, bound, and derived identification with $K'$ were supplied in step 3 and have not been altered. Thus $P^\\bullet$ is a bounded-above finite free model for $K'$. By [def-pc-ring-pseudo-coherent-complex], $K'$ is pseudo-coherent, which proves the reverse implication.",
+   "text": "Since I is nilpotent, every 1+x with x∈I is a unit: its image in A/I is 1, and units lift modulo a nilpotent ideal. The term M is now finite and projective, and its reduction is free. Apply the already proved criterion [lem-sc-finite-projective-free-mod-ideal] to conclude M is free. This reuses the projective splitting/isomorphism-lifting argument rather than reproving the kernel calculation. Empty bases and the zero ring are included.",
+   "uses": [
+    "lem-sc-finite-projective-free-mod-ideal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0H76, lemma-check-pseudo-coherent-modulo-nilpotent"
+   }
+  },
+  {
+   "text": "Apply these module arguments in each degree of P. The lifted complex retains its upper bound and its derived identification with K'; its terms are now finite free. The definition [def-pc-ring-pseudo-coherent-complex] gives pseudo-coherence of K', completing the equivalence.",
    "uses": [
     "def-pc-ring-pseudo-coherent-complex"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 0H76, lemma-check-pseudo-coherent-modulo-nilpotent, proof"
+    "place": "Tag 0H76, lemma-check-pseudo-coherent-modulo-nilpotent"
    }
   }
  ],
  "proof_deps": [
   "def-pc-ring-pseudo-coherent-complex",
   "def-weil-pbc-projective-module",
+  "lem-pc-kflat-scalar-extension-counit",
   "lem-pc-module-bounded-flat-kflat",
-  "lem-pur-derived-change-of-rings",
+  "lem-sc-finite-projective-free-mod-ideal",
   "lem-weil-pbc-free-module-projective",
   "lem-weil-pbc-nakayama-nilpotent",
   "lem-weil-pbc-nilpotent-projective-complex-lift",
@@ -109,7 +111,8 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Tag 0H76, lemma-check-pseudo-coherent-modulo-nilpotent, proof"
+  "place": "Tag 0H76, proof; Tag 0BC6 for the finite-projective freeness step",
+  "note": "C2 formalization reuses the module K-flat counit theorem and transports ring/module universes through ULift equivalences; it replaces the proposed one-object-site bridge."
  },
  "mathlib_searches": [
   {
@@ -212,7 +215,6 @@
  },
  "tool_uses": [
   "lem-pc-module-bounded-flat-kflat",
-  "lem-pur-derived-change-of-rings",
   "lem-weil-pbc-free-module-projective",
   "lem-weil-pbc-nakayama-nilpotent"
  ],
@@ -254,5 +256,15 @@
   "date": "2026-10-15",
   "existing": false,
   "note": "L and its universal counit specify the total left derived functor of ModuleCat.extendScalars φ on the homotopy category; they name derived scalar extension, not an arbitrary functor. The general-site dependency is imported for the one-object-site construction, while the conclusion uses the recorded ModuleCat pseudo-coherence predicate."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261018T062710-L-634950",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
