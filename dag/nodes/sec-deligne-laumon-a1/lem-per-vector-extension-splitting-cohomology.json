@@ -14,9 +14,168 @@
   "def-weil-pbc-derived-categories",
   "lem-asd-etale-finite-twist-pullback"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-sc-local-splitting-finite-free] on the open rank strata, and refine its cover by affine opens trivializing $E\\prime$ and $E\\prime\\prime$ as in [def-amb-finite-locally-free-module]. Thus on each chosen $U_i$ we have a section $s_i$ of $q$ and coordinates $E|_{U_i}\\cong\\mathcal O_{U_i}^{a_i}\\oplus\\mathcal O_{U_i}^{b_i}$ in which $j(v)=(v,0)$ and $q(v,w)=w$. Take a finite subcover, using quasi-compactness of $X$. Pullback in [def-pc-module-pullback] preserves these split identities: it sends $q s_i=1$, $j r_i+s_i q=1$ and $r_i j=1$ to the same identities. Hence the pulled-back sequence is exact and split on the inverse image of every $U_i$, for every test scheme; no flatness of the test morphism is required.",
+   "uses": [
+    "lem-sc-local-splitting-finite-free",
+    "def-amb-finite-locally-free-module",
+    "def-pc-module-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVI, Proposition 1.5, proof, printed page 227"
+   }
+  },
+  {
+   "text": "On $U_i$ form $S_i=\\mathbf A^{a_i b_i}_{U_i}$. Let $T_i$ be its $a_i$ by $b_i$ matrix of coordinate functions. A test map $f:Y\\to U_i$ and a section of $f^*q$ determine a matrix $(T,1)$ in the coordinates of step 1; conversely every such matrix is a section. By [lem-per-affine-space-global-functions] the matrix $T$ is precisely a unique $U_i$-morphism $Y\\to S_i$. This proves representability on $U_i$, naturally for arbitrary test schemes, not only affine ones. The universal section is the column map $(T_i,1)$.",
+   "uses": [
+    "lem-per-affine-space-global-functions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVI, Proposition 1.5, proof, printed page 227"
+   }
+  },
+  {
+   "text": "On $U_i\\cap U_j$, change the two splittings and frames in step 1. In coordinates the matrix parameter changes by $T_j=A_{ij}T_iB_{ij}+C_{ij}$, with invertible frame matrices $A_{ij},B_{ij}$ and a translation matrix $C_{ij}$. Its entries are regular functions on the overlap, so [lem-per-affine-space-global-functions] makes it a morphism between the restrictions of $S_i,S_j$. Reversing the frame change is an inverse. On triple overlaps both composite changes send a section to its coordinates in the third frame, so uniqueness in that same bijection gives the cocycle identity. Apply [lem-weil-pbc-glue-schemes] to the open pieces lying over $U_i\\cap U_j$. The projections agree on overlaps and glue by [lem-weil-pbc-scheme-morphism-gluing] to $\\rho:S\\to X$. No affineness of $U_i\\cap U_j$ is assumed.",
+   "uses": [
+    "lem-per-affine-space-global-functions",
+    "lem-weil-pbc-glue-schemes",
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVI, Proposition 1.5, proof, printed page 227"
+   }
+  },
+  {
+   "text": "For an arbitrary $f:Y\\to X$, restrict to $f^{-1}U_i$. A section of $f^*q$ gives the local maps to $S_i$ in step 2; their changes are exactly those of step 3, so they glue uniquely to $Y\\to S$ by [lem-weil-pbc-scheme-morphism-gluing]. Conversely the local universal maps glue to a sheaf-module map: define its value on a local section by the maps on these opens, whose values agree on overlaps, and use the sheaf axiom. The two constructions are inverse since this is true on each $f^{-1}U_i$. Taking $Y=S$ gives the universal splitting. If $s,s\\prime$ are two sections, then $q(s-s\\prime)=0$. In the split coordinates of step 1 their difference is uniquely $(u,0)=j u$; these $u$ agree on overlaps by injectivity of $j$, and glue as sheaf maps. Thus translation is by a unique map $f^*E\\prime\\prime\\to f^*E\\prime$.",
+   "uses": [
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVI, Proposition 1.5, proof, printed page 227"
+   }
+  },
+  {
+   "text": "Every $U_i$ is Noetherian: it is affine, hence quasi-compact, and as an open subscheme of the locally Noetherian scheme $X$ it is locally Noetherian by the remark in [pqf-def-locnoeth]. By [def-amb-affine-trace-tower], its affine space $S_i$ is Noetherian, and the $d$-dimensional affine space is the tower of $d$ line projections with all intermediate stages Noetherian. The finitely many $S_i$ form an open cover of $S$. Their finite affine Noetherian covers together give a finite affine Noetherian cover of $S$, so $S$ is Noetherian by the definition in [pqf-def-locnoeth] and quasi-compactness of a finite union of quasi-compact subspaces. This includes $a_i b_i=0$ and the empty scheme.",
+   "uses": [
+    "def-amb-affine-trace-tower",
+    "pqf-def-locnoeth"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVI, Proposition 1.5, proof, printed page 227"
+   }
+  },
+  {
+   "text": "We record explicitly the locality calculation used below. Choose a bounded-below injective resolution $F\\to I$ of a constant-ring module sheaf on $S$, available by [lem-weil-pbc-module-sheaves-enough-injectives]. For an etale $v:V\\to X$, identify the slice sites with the small etale sites by [lem-weil-pbc-etale-site-localization-open]; this identification also transports module actions. By [lem-pur-site-restriction-module-adjunction-exact], restriction is exact and right adjoint to exact extension by zero. It preserves injectives: a lifting problem into a restricted injective transposes to one into the injective along an extension-by-zero monomorphism. Thus $I|_{S_V}$ resolves $F|_{S_V}$. On an etale test object $W\\to V$, the formulas of [def-weil-pbc-direct-image] give the identical complexes $I(W\\times_XS)$ for $(\\rho_*I)|_V$ and $(\\rho_V)_*(I|_{S_V})$. They therefore identify $(R\\rho_*F)|_V$ with $R(\\rho_V)_*(F|_{S_V})$. Under this comparison the restricted adjunction unit is the unit for $\\rho_V$: both maps send a local coefficient section to its pullback on $W\\times_XS$ and then to the resolution.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-enough-injectives",
+    "lem-weil-pbc-etale-site-localization-open",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "def-weil-pbc-direct-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Locality needed in Proposition 1.5; module resolution argument using Stacks Tags 03DJ and 03F3"
+   }
+  },
+  {
+   "text": "For each Noetherian $U_i$, apply [lem-per-noetherian-affine-line-unit] at every stage of the $d=a_i b_i$ coordinate tower of [def-amb-affine-trace-tower]. Induct on $d$: $d=0$ is the identity. For $p_d:X_d\\to U_i$ and $u_d:X_{d+1}\\to X_d$, the unit for their composite is the unit for $p_d$ followed by $Rp_{d*}$ of the unit for $u_d$, under the canonical composition comparison of [lem-weil-derived-direct-image-composition](5). To check the actual map, transpose this composite under $u_d^{-1}p_d^{-1}\\dashv Rp_{d*}Ru_{d*}$; the two triangle identities reduce its transpose to the identity of the pulled-back constant sheaf. By uniqueness of transposes it is the composite adjunction unit. Both factors are isomorphisms by induction and the affine-line input. Thus $\\Lambda_{U_i}\\to R(\\rho|_{U_i})_*\\Lambda_{S_i}$ is invertible for every $i$.",
+   "uses": [
+    "lem-per-noetherian-affine-line-unit",
+    "def-amb-affine-trace-tower",
+    "lem-weil-derived-direct-image-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVI, Proposition 1.5, proof, printed page 227"
+   }
+  },
+  {
+   "text": "By step 6 the global constant-coefficient unit restricts to those of step 7. Every geometric point of $X$ lies in a $U_i$, so [lemma-weil-pbc-geometric-stalk-conservative], applied to its cohomology-sheaf maps after forgetting module actions, makes these maps isomorphisms globally. A bijective module map has a module-linear inverse; hence [lem-weil-pbc-unbounded-derived-iso-cohomology] proves the desired module derived unit invertible. For a signed twist $L=\\Lambda(t)$, [lem-asd-etale-finite-twist-pullback] supplies an etale covering on which $L$ is free of rank one, and identifies $\\rho^{-1}L$ with $\\Lambda_S(t)$. Restrict simultaneously to this covering and the $U_i$. On a trivializing object the twisted unit is the constant unit by naturality. The constant unit there is already invertible: step 6 identifies it with restriction of the global constant unit just proved. The same stalk and cohomology criterion now proves $L\\to R\\rho_*\\rho^{-1}L$ invertible. This requires no global root of unity on $X$ and no assumption that an etale trivializing object is Noetherian.",
+   "uses": [
+    "lemma-weil-pbc-geometric-stalk-conservative",
+    "lem-weil-pbc-unbounded-derived-iso-cohomology",
+    "lem-asd-etale-finite-twist-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVI, Proposition 1.5, proof, printed page 227"
+   }
+  },
+  {
+   "text": "Apply derived global sections to the unit for $L=\\Lambda(t)$ of step 8. Take a resolution $\\rho^{-1}L\\to J$ by injective objects $J^m$ ($m\\geq0$) of $\\operatorname{Mod}(S_{\\mathrm{et}},\\Lambda)$ [lem-weil-pbc-module-sheaves-enough-injectives]. By [prop-weil-pbc-inverse-image-modules-exact], $\\rho^{-1}$ is exact and left adjoint to $\\rho_*$ on module sheaves, with the unit of abelian sheaves; transposing monomorphism-lifting problems shows that $\\rho_*$ preserves injective module sheaves. Thus $\\rho_*J$ computes $R\\rho_*\\rho^{-1}L$ [def-weil-pbc-direct-image], and by step 8 the composite $L\\to\\rho_*\\rho^{-1}L\\to\\rho_*J$ is a quasi-isomorphism, i.e. a resolution of $L$. Cohomology in [def-weil-pbc-etale-cohomology] is that of the underlying abelian sheaves. By clause (1) of [det-pbc-conventions-module-cohomology], the underlying abelian sheaves of the injective module sheaves $J^m$ on $S$ and $\\rho_*J^m$ on $X$ have no higher cohomology. The acyclicity criterion (2) of [lemma-weil-pbc-leray-acyclicity], for $\\Gamma(X,-)$ and $\\Gamma(S,-)$ on abelian sheaves, therefore gives natural isomorphisms $\\mathcal H^q\\Gamma(X,\\rho_*J)\\cong H^q(X,L)$ and $\\mathcal H^q\\Gamma(S,J)\\cong H^q(S,\\rho^{-1}L)$, induced by maps of resolutions $\\varphi:\\rho_*J\\to I$ and $\\psi:J\\to J'$ over the identities into injective abelian resolutions. The equality $\\Gamma(X,\\rho_*J)=\\Gamma(S,J)$ holds term by term by [def-weil-pbc-direct-image]. This gives $H^q(X,L)\\cong H^q(S,\\rho^{-1}L)$ for every $q\\geq0$; with [lem-asd-etale-finite-twist-pullback] its target is $H^q(S,\\Lambda(t))$.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-enough-injectives",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "def-weil-pbc-direct-image",
+    "def-weil-pbc-etale-cohomology",
+    "det-pbc-conventions-module-cohomology",
+    "lemma-weil-pbc-leray-acyclicity",
+    "lem-asd-etale-finite-twist-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVI, Proposition 1.5, proof, printed page 227"
+   }
+  },
+  {
+   "text": "The isomorphism of step 9 is the pullback $\\rho^*$ of [def-weil-pbc-cohomology-pullback]. There choose the injective abelian resolution $L\\to I$ of step 9 and an injective abelian resolution $\\rho^{-1}I\\to J'$; this $J'$ resolves $\\rho^{-1}L$ by exactness of $\\rho^{-1}$, so take $\\psi:J\\to J'$ in step 9. Since $\\rho^{-1}$ is exact, $\\rho^{-1}\\rho_*J$ resolves $\\rho^{-1}L$. Two maps $\\rho^{-1}\\rho_*J\\to J'$ over the identity of $\\rho^{-1}L$ are compared: $\\psi$ after the counit $\\rho^{-1}\\rho_*J\\to J$, and $\\rho^{-1}\\varphi$ followed by $\\rho^{-1}I\\to J'$. Both become the same map in the derived category, since they agree after the quasi-isomorphism from $\\rho^{-1}L$; as $J'$ is a bounded-below complex of injectives, hence K-injective, they are homotopic [lem-weil-pbc-kinjective-hom-derived]. Precompose with the unit and take $\\Gamma(X,-)$ of the adjoint maps. By the triangle identity the first gives $\\Gamma(S,\\psi)$ on $\\Gamma(X,\\rho_*J)=\\Gamma(S,J)$. By naturality of the unit the second gives the pullback recipe of [def-weil-pbc-cohomology-pullback] after $\\Gamma(X,\\varphi)$. Hence on cohomology the isomorphism of step 9 is $\\rho^*$ under the identifications of step 9, for every $q\\geq0$ and every integer $t$.",
+   "uses": [
+    "def-weil-pbc-cohomology-pullback",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "prop-weil-pbc-inverse-image-modules-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVI, Proposition 1.5, proof, printed page 227"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-local-splitting-finite-free",
+  "def-amb-finite-locally-free-module",
+  "def-pc-module-pullback",
+  "lem-per-affine-space-global-functions",
+  "lem-weil-pbc-glue-schemes",
+  "lem-weil-pbc-scheme-morphism-gluing",
+  "def-amb-affine-trace-tower",
+  "pqf-def-locnoeth",
+  "lem-weil-pbc-module-sheaves-enough-injectives",
+  "lem-weil-pbc-etale-site-localization-open",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "def-weil-pbc-direct-image",
+  "lem-per-noetherian-affine-line-unit",
+  "lem-weil-derived-direct-image-composition",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "lem-weil-pbc-unbounded-derived-iso-cohomology",
+  "lem-asd-etale-finite-twist-pullback",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "def-weil-pbc-etale-cohomology",
+  "det-pbc-conventions-module-cohomology",
+  "lemma-weil-pbc-leray-acyclicity",
+  "def-weil-pbc-cohomology-pullback",
+  "lem-weil-pbc-kinjective-hom-derived"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose XVI, Proposition 1.5, printed page 227; expanded local construction, localization, coordinate induction and twisted consequence. The homotopy input is isolated as a statement-only node."
+ },
  "mathlib_searches": [
   {
    "tool": "loogle",
@@ -73,10 +232,38 @@
    "results": "8 returned hits: Algebra.Extension.formallySmooth_iff_split_injection, Algebra.FormallyEtale.iff_exists_algEquiv_prod, Algebra.formallyEtale_iff, Algebra.Etale.formallyEtale, Algebra.FormallyEtale.subsingleton_h1Cotangent, Algebra.etaleLocus_eq_compl_support, Algebra.FormallyEtale.comp, Algebra.FormallyEtale.of_restrictScalars",
    "date": "2026-10-18",
    "verdict": "no match: inspected hits concern other objects; no ordinary etale Chern, hyperplane-cohomology or splitting-scheme theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "splittingTorsor|splitting_torsor|etale.*homotopy|homotopy.*etale|affineLine.*cohomology",
+   "results": "{\"t\": \"2026-10-18T20:06:50Z\", \"tool\": \"grep\", \"query\": \"splittingTorsor|splitting_torsor|etale.*homotopy|homotopy.*etale|affineLine.*cohomology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: no splitting-scheme cohomology theorem; geometric affine-space API does not state etale cohomology invariance"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The scheme of splittings of an extension of vector bundles preserves ordinary etale cohomology over any Noetherian base with invertible torsion coefficients",
+   "results": "{\"t\": \"2026-10-18T20:06:51Z\", \"tool\": \"leanfinder\", \"query\": \"The scheme of splittings of an extension of vector bundles preserves ordinary etale cohomology over any Noetherian base with invertible torsion coefficients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"Algebra.Etale.formallyEtale\", \"Algebra.FormallyEtale.comp\", \"Algebra.FormallyEtale.of_restrictScalars\", \"Algebra.FormallyEtale.Algebra.FormallyEtale.of_restrictScalars\", \"Algebra.etaleLocus_eq_compl_support\", \"Algebra.formallyEtale_iff\", \"Algebra.FormallyEtale.iff_exists_algEquiv_prod\"], \"digest\": \"6158215da5595295\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: no splitting-scheme cohomology theorem; geometric affine-space API does not state etale cohomology invariance"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An affine space bundle has the same etale cohomology as its base for invertible torsion coefficients",
+   "results": "{\"t\": \"2026-10-18T20:07:31Z\", \"tool\": \"leansearch\", \"query\": \"An affine space bundle has the same etale cohomology as its base for invertible torsion coefficients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"Algebra.Etale.baseChange\", \"AlgebraicGeometry.isAffineHom_isStableUnderBaseChange\", \"AlgebraicGeometry.AffineSpace.isoOfIsAffine_inv\", \"AlgebraicGeometry.AffineSpace.instIsAffine\", \"Algebra.FormallyEtale.instTensorProduct\", \"AffineEquiv.mk.inj\", \"AffineBasis.ext\"], \"digest\": \"73571e4ad0eb4e3c\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: no splitting-scheme cohomology theorem; geometric affine-space API does not state etale cohomology invariance"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.AffineSpace, CategoryTheory.Sheaf",
+   "results": "{\"t\": \"2026-10-18T20:07:31Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.AffineSpace, CategoryTheory.Sheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: no splitting-scheme cohomology theorem; geometric affine-space API does not state etale cohomology invariance"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-noetherian-etale-chern-identities",
@@ -101,5 +288,129 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-vector-extension-splitting-cohomology",
+  "worker": "stage1",
+  "summary": "Expanded ILO XVI Proposition 1.5 into local matrix charts, cocycle gluing, universal splitting and translations, Noetherianity, injective-resolution localization, induction on affine dimension, stalk descent and all signed twists. Reused local splitting and gluing nodes. Added a Mathlib affine-coordinate leaf and one statement-only affine-line unit valid over Noetherian bases without a field structure. Statement unchanged.",
+  "blueprint": "Proof Step 3: dimension-normalized Verdier duality, regular finite-torsion local model; pointwise purity and composition used to compare the normalized curve with the ambient regular scheme. Input: Kummer regular-immersion fundamental classes and their operations. Supporting input: Ordinary etale projective bundle and Chern identities over Noetherian bases. In the supporting Chern calculation: The extension-splitting step in the proof of Theorem 1.3, after Proposition 1.5; this is a geometric/cohomological tool, not a Chern identity.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-local-splitting-finite-free",
+    "why": "Generic geometric or ordinary etale derived-category tool used to expand the extension-splitting argument of ILO XVI Proposition 1.5; no node in the Fourier-exactness unit provides this statement."
+   },
+   {
+    "node": "def-amb-finite-locally-free-module",
+    "why": "Generic geometric or ordinary etale derived-category tool used to expand the extension-splitting argument of ILO XVI Proposition 1.5; no node in the Fourier-exactness unit provides this statement."
+   },
+   {
+    "node": "def-pc-module-pullback",
+    "why": "Generic geometric or ordinary etale derived-category tool used to expand the extension-splitting argument of ILO XVI Proposition 1.5; no node in the Fourier-exactness unit provides this statement."
+   },
+   {
+    "node": "lem-weil-pbc-glue-schemes",
+    "why": "Generic geometric or ordinary etale derived-category tool used to expand the extension-splitting argument of ILO XVI Proposition 1.5; no node in the Fourier-exactness unit provides this statement."
+   },
+   {
+    "node": "lem-weil-pbc-scheme-morphism-gluing",
+    "why": "Generic geometric or ordinary etale derived-category tool used to expand the extension-splitting argument of ILO XVI Proposition 1.5; no node in the Fourier-exactness unit provides this statement."
+   },
+   {
+    "node": "def-amb-affine-trace-tower",
+    "why": "Generic geometric or ordinary etale derived-category tool used to expand the extension-splitting argument of ILO XVI Proposition 1.5; no node in the Fourier-exactness unit provides this statement."
+   },
+   {
+    "node": "pqf-def-locnoeth",
+    "why": "Generic geometric or ordinary etale derived-category tool used to expand the extension-splitting argument of ILO XVI Proposition 1.5; no node in the Fourier-exactness unit provides this statement."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-enough-injectives",
+    "why": "Generic geometric or ordinary etale derived-category tool used to expand the extension-splitting argument of ILO XVI Proposition 1.5; no node in the Fourier-exactness unit provides this statement."
+   },
+   {
+    "node": "lem-weil-pbc-etale-site-localization-open",
+    "why": "Generic geometric or ordinary etale derived-category tool used to expand the extension-splitting argument of ILO XVI Proposition 1.5; no node in the Fourier-exactness unit provides this statement."
+   },
+   {
+    "node": "lem-pur-site-restriction-module-adjunction-exact",
+    "why": "Generic geometric or ordinary etale derived-category tool used to expand the extension-splitting argument of ILO XVI Proposition 1.5; no node in the Fourier-exactness unit provides this statement."
+   },
+   {
+    "node": "def-weil-pbc-direct-image",
+    "why": "Generic geometric or ordinary etale derived-category tool used to expand the extension-splitting argument of ILO XVI Proposition 1.5; no node in the Fourier-exactness unit provides this statement."
+   },
+   {
+    "node": "lem-weil-derived-direct-image-composition",
+    "why": "Generic geometric or ordinary etale derived-category tool used to expand the extension-splitting argument of ILO XVI Proposition 1.5; no node in the Fourier-exactness unit provides this statement."
+   },
+   {
+    "node": "lemma-weil-pbc-geometric-stalk-conservative",
+    "why": "Generic geometric or ordinary etale derived-category tool used to expand the extension-splitting argument of ILO XVI Proposition 1.5; no node in the Fourier-exactness unit provides this statement."
+   },
+   {
+    "node": "lem-weil-pbc-unbounded-derived-iso-cohomology",
+    "why": "Generic geometric or ordinary etale derived-category tool used to expand the extension-splitting argument of ILO XVI Proposition 1.5; no node in the Fourier-exactness unit provides this statement."
+   },
+   {
+    "node": "lem-asd-etale-finite-twist-pullback",
+    "why": "Generic geometric or ordinary etale derived-category tool used to expand the extension-splitting argument of ILO XVI Proposition 1.5; no node in the Fourier-exactness unit provides this statement."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Generic geometric or ordinary etale derived-category tool used to expand the extension-splitting argument of ILO XVI Proposition 1.5; no node in the Fourier-exactness unit provides this statement."
+   },
+   {
+    "node": "def-weil-pbc-etale-cohomology",
+    "why": "Generic geometric or ordinary etale derived-category tool used to expand the extension-splitting argument of ILO XVI Proposition 1.5; no node in the Fourier-exactness unit provides this statement."
+   },
+   {
+    "node": "det-pbc-conventions-module-cohomology",
+    "why": "Step 9 takes clause (1), acyclicity of underlying abelian sheaves of injective module sheaves, to compare module resolutions with the abelian cohomology of def-weil-pbc-etale-cohomology; no node of the Fourier-exactness unit gives it (added by the maintainer reader)."
+   },
+   {
+    "node": "lemma-weil-pbc-leray-acyclicity",
+    "why": "Step 9 takes the acyclicity criterion (2): acyclic resolutions compute derived functors; generic homological tool (added by the maintainer reader)."
+   },
+   {
+    "node": "def-weil-pbc-cohomology-pullback",
+    "why": "Step 10 identifies the isomorphism with the canonical pullback map of this definition (added by the maintainer reader)."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-hom-derived",
+    "why": "Step 10 uses homotopy-uniqueness of maps into K-injective complexes; generic Mathlib-level tool (added by the maintainer reader)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-local-splitting-finite-free",
+  "def-amb-finite-locally-free-module",
+  "def-pc-module-pullback",
+  "lem-weil-pbc-glue-schemes",
+  "lem-weil-pbc-scheme-morphism-gluing",
+  "def-amb-affine-trace-tower",
+  "pqf-def-locnoeth",
+  "lem-weil-pbc-module-sheaves-enough-injectives",
+  "lem-weil-pbc-etale-site-localization-open",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "def-weil-pbc-direct-image",
+  "lem-weil-derived-direct-image-composition",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "lem-weil-pbc-unbounded-derived-iso-cohomology",
+  "lem-asd-etale-finite-twist-pullback",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "def-weil-pbc-etale-cohomology",
+  "det-pbc-conventions-module-cohomology",
+  "lemma-weil-pbc-leray-acyclicity",
+  "def-weil-pbc-cohomology-pullback",
+  "lem-weil-pbc-kinjective-hom-derived"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q46-311139a90",
+  "group": "Q46",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q46-311139a90 (reviewer sub-agent of L); spot-checked: I read ILO XVI Prop. 1.5 on printed pp. 226-227: local affine-space charts plus homotopy invariance. The item statement is unchanged; it restricts the source to Noetherian X, as the base node already did, and cites no SGA. Steps 1-8 are correct. Step 1: local splitting applied per rank stratum, and pullback of split identities needs no flatness. Steps 2-3: the matrix charts come from the Mathlib homOverEquiv leaf; I checked the transition T_j=(A T_i+C')B'^{-1} and the hypotheses of the glue-schemes node. Step 4: the translation is a unique u because the pulled-back sequence is exact. Step 6: Zariski localization of R rho_* via restriction preserving injectives. Step 7: induction on the affine tower with composition clause (5), whose hypothesis that ell is invertible holds at every stage. Step 8: stalk conservativity, and étale-local trivialization of Lambda(t) for all t. FIX 1 (step 5): it said U_i has a Noetherian coordinate ring, which is Stacks 01OW and not the cited definition. It now argues from quasi-compact plus the open-subscheme remark of pqf-def-locnoeth. FIX 2 (C1/C4, step 9): it resolved by injective Lambda-module sheaves, but def-weil-pbc-etale-cohomology uses abelian resolutions, and it asserted the canonical pullback without comparing to the definition. Step 9 now uses det-pbc-conventions-module-cohomology(1) and lemma-weil-pbc-leray-acyclicity(2). A new step 10 matches the map with def-weil-pbc-cohomology-pullback, using homotopy uniqueness into K-injective complexes and the triangle identity. proof_deps updated and four tool_uses added. New nodes: lem-per-affine-space-global-functions is a correct Mathlib leaf (AffineSpace.lean homOverEquiv l.153-161, comp_homOfVector l.140-142). lem-per-noetherian-affine-line-unit is true; tested on empty B, F_p with p≠ell, Z_(p)[1/ell] and nonreduced B. It is strictly smaller than the item and not a duplicate: lem-pur-affine-line-ordinary-invariance, lem-pur-supported-affine-line-homotopy and prop-pur-a1-invariance all need a field base, and no live DAG node covers an arbitrary Noetherian Z[1/ell] base. Advisory: the item statement says Noetherian without citing pqf-def-locnoeth (pre-existing), and the report mentions a citations.json that is not in the delivery.; 1 file(s) fixed by the reviewer"
  }
 }
