@@ -283,6 +283,70 @@ lemma stdModelMap_comp [Finite k₀] {F₀ : X₀ ⟶ X₀} (hF₀ : F₀.IsFrob
   · simp [stdModelMap, stdModelFrobenius, reassoc_of% hp, hc]
   · simp [stdModelMap, stdModelFrobenius]
 
+variable [Finite k₀] (hΦ : IsModelFrobenius Φ f₀ p)
+
+omit [Finite k₀] in
+/-- The square `X ⟶ X₀`, `X ⟶ Y₀ ×_{k₀} k` over `π₀` is cartesian. -/
+lemma isPullback_stdModelMap :
+    IsPullback p (stdModelMap π₀ hπ hΦ.isPullback.w).left π₀
+      (pullback.fst g₀ (Spec.map (CommRingCat.ofHom (algebraMap k₀ k)))) := by
+  refine IsPullback.of_bot ?_ (stdModelMap_left_fst π₀ hπ _).symm (IsPullback.of_hasPullback _ _)
+  have h := hΦ.isPullback
+  rwa [← hπ, ← Over.w (stdModelMap π₀ hπ hΦ.isPullback.w)] at h
+
+variable (y : RationalPoint (stdModel k g₀)) (y₀ : Spec (.of k₀) ⟶ Y₀)
+  (hy₀ : Spec.map (CommRingCat.ofHom (algebraMap k₀ k)) ≫ y₀ =
+    y.left ≫ pullback.fst g₀ (Spec.map (CommRingCat.ofHom (algebraMap k₀ k))))
+
+/-- The map from the fibre `X_y` to the fibre `X₀ ×_{Y₀} y₀` of `π₀`. -/
+noncomputable def fibreModelMap :
+    (fibre (stdModelMap π₀ hπ hΦ.isPullback.w) y).left ⟶ pullback π₀ y₀ :=
+  pullback.lift ((fibreι (stdModelMap π₀ hπ hΦ.isPullback.w) y).left ≫ p)
+    ((fibre (stdModelMap π₀ hπ hΦ.isPullback.w) y).hom ≫
+      Spec.map (CommRingCat.ofHom (algebraMap k₀ k))) (by
+    have h := congrArg CommaMorphism.left
+      (isPullback_fibre (stdModelMap π₀ hπ hΦ.isPullback.w) y).w
+    simp only [Over.comp_left, toPoint_left] at h
+    rw [Category.assoc, Category.assoc, hy₀, ← stdModelMap_left_fst π₀ hπ hΦ.isPullback.w,
+      ← Category.assoc, h, Category.assoc])
+
+variable {F₀ : X₀ ⟶ X₀} (hF₀ : F₀.IsFrobenius (Nat.card k₀)) (hp : Φ.left ≫ p = p ≫ F₀)
+  {FY : Y₀ ⟶ Y₀} (hFY : FY.IsFrobenius (Nat.card k₀))
+  (hy : y ≫ stdModelFrobenius g₀ (hFY.comp_eq g₀) = y)
+
+/-- **The fibres are models** (blueprint `sk-thm-trace-formula`): the fibre `X_y` of the base
+change of `π₀` over a point `y` fixed by `Φ_Y`, with its Frobenius `Φ_y`, is the base change of
+the fibre `X₀ ×_{Y₀} y₀` of `π₀` over the `k₀`-point `y₀` underlying `y`. -/
+theorem isModelFrobenius_fibre :
+    IsModelFrobenius (fibreFrobenius (stdModelMap π₀ hπ hΦ.isPullback.w)
+        (stdModelMap_comp π₀ hπ hF₀ hp hFY hΦ.isPullback.w) y hy)
+      (pullback.snd π₀ y₀) (fibreModelMap π₀ hπ hΦ y y₀ hy₀) where
+  isPullback := by
+    refine IsPullback.of_right ?_ (pullback.lift_snd _ _ _) (IsPullback.of_hasPullback π₀ y₀)
+    have h₁ := (isPullback_fibre (stdModelMap π₀ hπ hΦ.isPullback.w) y).map (Over.forget _)
+    simp only [Over.forget_map, toPoint_left] at h₁
+    have h := h₁.paste_horiz (isPullback_stdModelMap π₀ hπ hΦ)
+    rw [← hy₀] at h
+    have heq : fibreModelMap π₀ hπ hΦ y y₀ hy₀ ≫ pullback.fst π₀ y₀ =
+        (fibreι (stdModelMap π₀ hπ hΦ.isPullback.w) y).left ≫ p :=
+      pullback.lift_fst _ _ _
+    rw [heq]
+    exact h
+  exists_isFrobenius := by
+    obtain ⟨FZ, hFZ⟩ := Scheme.Hom.exists_isFrobenius (pullback.snd π₀ y₀)
+    refine ⟨FZ, hFZ, pullback.hom_ext ?_ ?_⟩
+    · have hc : pullback.fst π₀ y₀ ≫ F₀ = FZ ≫ pullback.fst π₀ y₀ :=
+        hFZ.comp_eq_comp (pullback.snd π₀ y₀) hF₀ _
+      have hι := congrArg CommaMorphism.left (fibreFrobenius_ι
+        (stdModelMap π₀ hπ hΦ.isPullback.w) (stdModelMap_comp π₀ hπ hF₀ hp hFY
+          hΦ.isPullback.w) y hy)
+      simp only [Over.comp_left] at hι
+      simp only [fibreModelMap, Category.assoc, pullback.lift_fst, ← hc,
+        pullback.lift_fst_assoc]
+      rw [← Category.assoc, hι, Category.assoc, hp]
+    · simp only [fibreModelMap, Category.assoc, pullback.lift_snd, hFZ.comp_eq]
+      rw [← Category.assoc, Over.w]
+
 end FibreModel
 
 end AlgebraicGeometry.ProEtale.CondensedRing
