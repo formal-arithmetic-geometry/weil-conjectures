@@ -14,11 +14,136 @@
   "def-weil-etale-morphism",
   "def-weil-finite-type-morphism",
   "def-weil-residue-field",
-  "def-weil-surjective-morphism"
+  "def-weil-surjective-morphism",
+  "def-weil-pbc-scheme-conventions"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix $x\\in X$. By [lem-pc-flf-properties], the finite algebra sheaf $f_*\\mathcal O_Y$ is locally free of rank $d$. Choose an affine open $T=\\operatorname{Spec}A\\subseteq X$ containing $x$ on which this sheaf is free, and the finiteness in [def-pc-finite-locally-free] makes its inverse image affine; write $Y_T=\\operatorname{Spec}B$, with $B$ free of rank $d$ over $A$. Apply [lem-per-ordinary-henselian-pointed-neighbourhood-limit] to $(T,x)$, obtaining a henselian local ring $H=\\varinjlim_a A_a$ with residue field $\\kappa(x)$ and affine etale pointed neighbourhoods $T_a=\\operatorname{Spec}A_a$. Put $B_H=B\\otimes_AH$. Tensoring the displayed basis gives $B_H\\cong H^d$ as modules. Apply [lem-weil-pbc-finite-over-henselian-local-product] to decompose $B_H=\\prod_{t=1}^r C_t$ into nonzero finite henselian local $H$-algebras. Each $C_t$ is an $H$-module direct summand of $H^d$. By [lem-weil-pbc-finite-projective-standard-free-cover] it is locally finite free. In a local ring a family generating the unit ideal contains a unit, so one of that lemma's free principal localizations is $H$ itself: $C_t$ is free of some rank $e_t$.",
+   "uses": [
+    "lem-pc-flf-properties",
+    "lem-per-ordinary-henselian-pointed-neighbourhood-limit",
+    "lem-weil-pbc-finite-over-henselian-local-product",
+    "lem-weil-pbc-finite-projective-standard-free-cover",
+    "def-pc-finite-locally-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose II, proof of Theorem 3.2.3, exchange assertion, printed pp. 30--31 (the printed W_j in Z_j -> W_j denotes U_j); finite affine-open refinement by Corollary 2.2.4, printed p. 27."
+   }
+  },
+  {
+   "text": "Each $C_t\\ne0$ has $e_t>0$, and tensoring $B_H=\\prod_t C_t$ with the residue field gives $d=\\sum_t e_t$. If every $e_t$ were divisible by $\\ell$, so would $d$ be. Choose $t$ with $\\ell\\nmid e_t$, put $C=C_t$, $e=e_t$, and let $q$ be its closed point. Its image $y\\in Y_T\\subseteq Y$ has a lift $w\\in V_i$ for some $i$, with $\\kappa(y)\\cong\\kappa(w)$, by the completely decomposed hypothesis. Choose an affine open $W\\subseteq V_i\\times_Y Y_T$ containing $w$. The composite $\\operatorname{Spec}\\kappa(q)\\to\\operatorname{Spec}\\kappa(y)\\to W$ gives a rational point in the closed fibre of $W\\times_{Y_T}\\operatorname{Spec}C\\to\\operatorname{Spec}C$. This explicitly supplies the residue-field lift needed next; it uses no assumption that $C$ is reduced or that its residue field equals $\\kappa(x)$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose II, proof of Theorem 3.2.3, exchange assertion, printed pp. 30--31 (the printed W_j in Z_j -> W_j denotes U_j); finite affine-open refinement by Corollary 2.2.4, printed p. 27."
+   }
+  },
+  {
+   "text": "Write $W=\\operatorname{Spec}E$; its map to the affine $Y_T=\\operatorname{Spec}B$ is etale by open restriction and etale composition/cancellation [lem-weil-pbc-etale-composition-cancellation]. By [lem-weil-pbc-etale-ring-base-change] the algebra $C\\otimes_BE$ is etale over $C$. The preceding rational point defines a prime above the maximal ideal of $C$ with unchanged residue field. Apply [lem-weil-pbc-henselian-etale-retraction], using the henselianity of $C$ given by the finite-product lemma in Step 1. The resulting retraction $C\\otimes_BE\\to C$ gives a section $s:\\operatorname{Spec}C\\to W$ over $Y_T$. Thus its composite to $Y_T$ factors as the inclusion of the open-and-closed component $\\operatorname{Spec}C\\subseteq\\operatorname{Spec}B_H$ followed by the projection to $Y_T$.",
+   "uses": [
+    "lem-weil-pbc-etale-ring-base-change",
+    "lem-weil-pbc-henselian-etale-retraction",
+    "lem-weil-pbc-finite-over-henselian-local-product",
+    "lem-weil-pbc-etale-composition-cancellation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose II, proof of Theorem 3.2.3, exchange assertion, printed pp. 30--31 (the printed W_j in Z_j -> W_j denotes U_j); finite affine-open refinement by Corollary 2.2.4, printed p. 27."
+   }
+  },
+  {
+   "text": "Let $b\\in B_H$ be the idempotent selecting $C=bB_H$. The algebra $B_H=\\varinjlim_a(B\\otimes_A A_a)$ is a filtered colimit: tensoring a fixed algebra commutes with this colimit by the tensor-product universal property. Apply [lemma-nagata-filtered-colimit-finite-data] to lift $b$ and the equation $b^2=b$ to an idempotent $b_a\\in B_a=B\\otimes_AA_a$. Set $Z_a=\\operatorname{Spec}(b_aB_a)\\subseteq Y_{T_a}$. This is a clopen subscheme and is of finite presentation over $Y_{T_a}$, since $b_aB_a=B_a/(1-b_a)$. Its base change to $H$ is exactly $\\operatorname{Spec}C$. The affine schemes $Y_{T_a}$ form an inverse system with affine transition maps; by [lem-weil-pbc-limit-affine-transition] its limit is $\\operatorname{Spec}$ of the colimit $\\varinjlim_aB_a=B_H$ of their rings. Both $Z_a$ and $W\\times_TT_a$ are of finite presentation over $Y_{T_a}$: for the latter, etale gives local finite presentation, and [lem-weil-pbc-lfp-affine-opens-finite-presentation] makes the affine ring map $B\\to E$ finitely presented, hence so is its tensor base change by clause (1) of [lem-weil-pbc-finite-presentation-base-change-composition]. Apply clause 2 of [thm-pd-spreading-out] over this system to descend $s$ to a morphism $Z_{a'}\\to W\\times_TT_{a'}$ over $Y_{T_{a'}}$ at a later index $a'$. Being a morphism over $Y_{T_{a'}}$ already gives the required commuting triangle with $V_i\\to Y$.",
+   "uses": [
+    "lemma-nagata-filtered-colimit-finite-data",
+    "lem-weil-pbc-limit-affine-transition",
+    "thm-pd-spreading-out",
+    "def-weil-etale-morphism",
+    "def-weil-pbc-scheme-conventions",
+    "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+    "lem-weil-pbc-finite-presentation-base-change-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose II, proof of Theorem 3.2.3, exchange assertion, printed pp. 30--31 (the printed W_j in Z_j -> W_j denotes U_j); finite affine-open refinement by Corollary 2.2.4, printed p. 27."
+   }
+  },
+  {
+   "text": "The map $Z_{a'}\\to T_{a'}$ is locally of finite presentation: its clopen inclusion into $Y_{T_{a'}}$ has the one-relation presentation just displayed, and $Y_{T_{a'}}\\to T_{a'}$ is the base change of the finite locally free map $Y_T\\to T$; use [lem-weil-pbc-finite-presentation-base-change-composition] for base change and composition. Here $Y_T\\to T$ is of finite presentation, since [def-pc-finite-locally-free] gives local finite presentation and [lem-weil-pbc-lfp-affine-opens-finite-presentation] applied to its affine source and target makes $A\\to B$ finitely presented. All composition and base-change claims here are therefore applications of the cited ring-map theorem to these affine charts. Its base change to $H$ is $\\operatorname{Spec}C\\to\\operatorname{Spec}H$, finite locally free of constant rank $e$ by [lem-weil-pbc-finite-free-algebra-spectrum] and its chosen $e$-element basis. All schemes in this application are affine, hence quasi-compact and quasi-separated. The system $T_a$, $a\\ge a'$, has limit $\\operatorname{Spec}H$ by the last clause of [lem-per-ordinary-henselian-pointed-neighbourhood-limit]. Apply [lem-weil-pbc-descend-finite-locally-free] to the fixed model $Z_{a'}\\to T_{a'}$ and pass to a later stage $a''$ where it is finite locally free of constant rank $e$. The map to $V_i$ persists under base change.",
+   "uses": [
+    "lem-weil-pbc-finite-presentation-base-change-composition",
+    "def-pc-finite-locally-free",
+    "lem-weil-pbc-finite-free-algebra-spectrum",
+    "lem-weil-pbc-descend-finite-locally-free",
+    "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+    "lem-per-ordinary-henselian-pointed-neighbourhood-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose II, proof of Theorem 3.2.3, exchange assertion, printed pp. 30--31 (the printed W_j in Z_j -> W_j denotes U_j); finite affine-open refinement by Corollary 2.2.4, printed p. 27."
+   }
+  },
+  {
+   "text": "The neighbourhood construction gives a separated etale map $T_{a''}\\to T$ of finite presentation, hence of finite type. For the open inclusion $j:T\\hookrightarrow X$, [lem-weil-pbc-noetherian-open-subscheme-noetherian] applied to every affine open $P\\subseteq X$ shows that $P\\cap T$ is quasi-compact. Thus $j$ is quasi-compact, so [lem-weil-pbc-qc-open-immersion-finite-type] makes it finite type. By [lem-weil-pbc-etale-composition-cancellation] and [lem-sfb-finite-type-composition-base-change], $u_x:T_{a''}\\to T\\hookrightarrow X$ is etale and finite type. It is separated: since $j$ is a monomorphism, $T_{a''}\\times_XT_{a''}=T_{a''}\\times_TT_{a''}$, and the diagonal is the closed immersion of the separated map $T_{a''}\\to T$. The designated point over $x$ still has residue field $\\kappa(x)$.",
+   "uses": [
+    "lem-per-ordinary-henselian-pointed-neighbourhood-limit",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "lem-weil-pbc-qc-open-immersion-finite-type",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-sfb-finite-type-composition-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose II, proof of Theorem 3.2.3, exchange assertion, printed pp. 30--31 (the printed W_j in Z_j -> W_j denotes U_j); finite affine-open refinement by Corollary 2.2.4, printed p. 27."
+   }
+  },
+  {
+   "text": "Write $Z_x=Z_{a''}$ and $c_x:Z_x\\to T_{a''}$. It is surjective: over any point of $T_{a''}$ its fibre algebra has positive dimension $e$, hence is a nonzero finite-dimensional algebra over a field and has a maximal ideal, which gives a point of that fibre. Thus $c_x$ is a finite locally free surjection of positive rank prime to $\\ell$, with a map $g_x:Z_x\\to V_i$ satisfying $fv_i g_x=u_xc_x$. Carry this construction out for each $x$. The resulting family $(u_x)_x$ is completely decomposed because its designated lift at $x$ has exactly $\\kappa(x)$. Apply [lem-per-completely-decomposed-etale-finite-subcover] to retain a finite subfamily, with the corresponding $Z_x,c_x,g_x$ and indices $i$. This gives all the required data. If $X$ is empty, the empty family already satisfies every assertion.",
+   "uses": [
+    "lem-per-completely-decomposed-etale-finite-subcover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose II, proof of Theorem 3.2.3, exchange assertion, printed pp. 30--31 (the printed W_j in Z_j -> W_j denotes U_j); finite affine-open refinement by Corollary 2.2.4, printed p. 27."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-flf-properties",
+  "lem-per-ordinary-henselian-pointed-neighbourhood-limit",
+  "lem-weil-pbc-finite-over-henselian-local-product",
+  "lem-weil-pbc-finite-projective-standard-free-cover",
+  "def-pc-finite-locally-free",
+  "lem-weil-pbc-etale-ring-base-change",
+  "lem-weil-pbc-henselian-etale-retraction",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lemma-nagata-filtered-colimit-finite-data",
+  "lem-weil-pbc-limit-affine-transition",
+  "thm-pd-spreading-out",
+  "def-weil-etale-morphism",
+  "def-weil-pbc-scheme-conventions",
+  "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+  "lem-weil-pbc-finite-presentation-base-change-composition",
+  "lem-weil-pbc-finite-free-algebra-spectrum",
+  "lem-weil-pbc-descend-finite-locally-free",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-qc-open-immersion-finite-type",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-per-completely-decomposed-etale-finite-subcover"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose II, proof of Theorem 3.2.3, exchange assertion, printed pp. 30--31 (the printed W_j in Z_j -> W_j denotes U_j); finite affine-open refinement by Corollary 2.2.4, printed p. 27. Details of ordinary henselization and finite-presentation descent expanded using the cited Stacks nodes."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -54,10 +179,45 @@
    "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Cover.Over.over\", \"AlgebraicGeometry.Scheme.Cover.pullbackCoverOverProp'\", \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"AlgebraicGeometry.Scheme.OpenCover.finiteSubcover\", \"AlgebraicGeometry.Scheme.instOverXBind\", \"AlgebraicGeometry.Scheme.Cover.changeProp\", \"AlgebraicGeometry.Scheme.etalePretopology\", \"AlgebraicGeometry.Scheme.smallEtalePretopology\"], \"digest\": \"c7d069d20cad3f7b\"}",
    "date": "2026-10-18",
    "verdict": "no match: inspected hits concern ordinary scheme covers, etale morphisms, normalization or flatness; none states this refinement/flattening result."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite locally free cover of degree prime to ell can be exchanged with a Nisnevich cover using a residue-preserving etale cover of the base",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime\", \"AlgebraicGeometry.Scheme.smallEtalePretopology\", \"AlgebraicGeometry.Scheme.etaleTopology\", \"AlgebraicGeometry.Scheme.etalePretopology\", \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"AlgebraicGeometry.Scheme.Cover.ulift\", \"AlgebraicGeometry.Scheme.Cover.exists_of_trans_eq_trans\", \"AlgebraicGeometry.Scheme.Cover.exists_of_f_eq_f\"], \"digest\": \"54fb6a6b24d1d0a4\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: results concern ordinary etale covers, residue-field maps, root lifting or Zariski finite subcovers; none states this node."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Nisnevich completely decomposed cover finite flat prime degree henselian local component refinement",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.QuasiCompactCover\", \"AlgebraicGeometry.instUniqueI₀SchemeCover\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀\", \"AlgebraicGeometry.Scheme.Cover.ulift\", \"AlgebraicGeometry.Scheme.Cover\", \"AlgebraicGeometry.Scheme.Cover.exists_of_f_eq_f\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"AlgebraicGeometry.Scheme.Hom.cover_I₀\"], \"digest\": \"9bc1e70fb0735571\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: results concern ordinary etale covers, residue-field maps, root lifting or Zariski finite subcovers; none states this node."
+  },
+  {
+   "tool": "grep",
+   "query": "Nisnevich|completely.decomposed|hensel.*cover",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: results concern ordinary etale covers, residue-field maps, root lifting or Zariski finite subcovers; none states this node."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.IsFinite\"",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: results concern ordinary etale covers, residue-field maps, root lifting or Zariski finite subcovers; none states this node."
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite flat cover and completely decomposed etale cover exchange prime to ell degree",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsEtaleAt.comp\", \"Algebra.FormallyEtale.iff_exists_algEquiv_prod\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.IsEtale\", \"RingHom.FaithfullyFlat.iff_flat_and_comap_surjective\", \"Algebra.Etale.casesOn\", \"Algebra.FormallyEtale.iff_isSeparable\", \"Algebra.Etale.formallyEtale\"], \"digest\": \"9efc1e6b51b67324\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: results concern ordinary etale covers, residue-field maps, root lifting or Zariski finite subcovers; none states this node."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-alteration-cover-standard-refinement",
@@ -82,5 +242,104 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-finite-flat-cd-etale-exchange",
+  "worker": "stage1",
+  "summary": "Expanded the ordinary-henselian local component argument of ILO II 3.2.3, preserving residue fields, with explicit idempotent descent, finite-presentation map descent, constant-rank descent and finite completely decomposed subcover. Statement unchanged; two general unsplit tools added.",
+  "blueprint": "Ancestor Step 3 via finite exceptional preservation and ILO II 3.2.3: passage to an ordinary henselian base, choice of a prime-to-ell local factor, section, passage back to a pointed etale neighbourhood and finite-family extraction.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-flf-properties",
+    "why": "Generic algebraic geometry tool: The module $f_*\\mathcal{O}_X$ of a finite locally free morphism; used for the ILO exchange argument and not supplied by this Fourier unit."
+   },
+   {
+    "node": "lem-weil-pbc-finite-over-henselian-local-product",
+    "why": "Generic algebraic geometry tool: A finite algebra over a henselian local ring is a product of henselian local rings; used for the ILO exchange argument and not supplied by this Fourier unit."
+   },
+   {
+    "node": "lem-weil-pbc-finite-projective-standard-free-cover",
+    "why": "Generic algebraic geometry tool: A direct summand of a finite free module is finite locally free (standard cover); used for the ILO exchange argument and not supplied by this Fourier unit."
+   },
+   {
+    "node": "lem-weil-pbc-etale-ring-base-change",
+    "why": "Generic algebraic geometry tool: Base change of an etale ring map is etale; used for the ILO exchange argument and not supplied by this Fourier unit."
+   },
+   {
+    "node": "lem-weil-pbc-henselian-etale-retraction",
+    "why": "Generic algebraic geometry tool: Etale algebras over a henselian local ring have unique sections through rational points of the closed fibre; used for the ILO exchange argument and not supplied by this Fourier unit."
+   },
+   {
+    "node": "lem-weil-pbc-etale-composition-cancellation",
+    "why": "Generic algebraic geometry tool: Open immersions are etale; etale morphisms compose and cancel; used for the ILO exchange argument and not supplied by this Fourier unit."
+   },
+   {
+    "node": "lemma-nagata-filtered-colimit-finite-data",
+    "why": "Generic algebraic geometry tool: Finite data and finite relations descend in a filtered colimit; used for the ILO exchange argument and not supplied by this Fourier unit."
+   },
+   {
+    "node": "thm-pd-spreading-out",
+    "why": "Generic algebraic geometry tool: Descent of finitely presented data at a filtered limit; used for the ILO exchange argument and not supplied by this Fourier unit."
+   },
+   {
+    "node": "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+    "why": "Generic algebraic geometry tool: A morphism locally of finite presentation is of finite presentation on every pair of affine opens; used for the ILO exchange argument and not supplied by this Fourier unit."
+   },
+   {
+    "node": "lem-weil-pbc-finite-presentation-base-change-composition",
+    "why": "Generic algebraic geometry tool: Finite presentation: base change and composition; used for the ILO exchange argument and not supplied by this Fourier unit."
+   },
+   {
+    "node": "lem-weil-pbc-finite-free-algebra-spectrum",
+    "why": "Generic algebraic geometry tool: The spectrum of a finite free algebra is finite locally free; used for the ILO exchange argument and not supplied by this Fourier unit."
+   },
+   {
+    "node": "lem-weil-pbc-descend-finite-locally-free",
+    "why": "Generic algebraic geometry tool: Finite local freeness of a given degree descends to a finite stage of a limit (Stacks 06AC); used for the ILO exchange argument and not supplied by this Fourier unit."
+   },
+   {
+    "node": "lem-sfb-finite-type-composition-base-change",
+    "why": "Generic algebraic geometry tool: Finite-type morphisms are stable under composition and base change; used for the ILO exchange argument and not supplied by this Fourier unit."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "why": "The open intersection of an affine chart of X with T is quasi-compact because it is an open in a Noetherian scheme; this generic scheme tool verifies the finite-type hypothesis for the ILO exchange neighbourhood."
+   },
+   {
+    "node": "lem-weil-pbc-qc-open-immersion-finite-type",
+    "why": "A quasi-compact open immersion is finite type; this generic scheme tool verifies T to X is finite type and is not supplied by the Fourier unit."
+   },
+   {
+    "node": "lem-weil-pbc-limit-affine-transition",
+    "why": "Generic algebraic geometry tool: limits of inverse systems of schemes with affine transition maps, Spec of the colimit ring for affine systems (Stacks 01YW); used for the ILO exchange argument (Step 4) and not supplied by this Fourier unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-flf-properties",
+  "lem-weil-pbc-finite-over-henselian-local-product",
+  "lem-weil-pbc-finite-projective-standard-free-cover",
+  "lem-weil-pbc-etale-ring-base-change",
+  "lem-weil-pbc-henselian-etale-retraction",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lemma-nagata-filtered-colimit-finite-data",
+  "thm-pd-spreading-out",
+  "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+  "lem-weil-pbc-finite-presentation-base-change-composition",
+  "lem-weil-pbc-finite-free-algebra-spectrum",
+  "lem-weil-pbc-descend-finite-locally-free",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-qc-open-immersion-finite-type",
+  "lem-weil-pbc-limit-affine-transition"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q96-fdf37bb8b",
+  "group": "Q96",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q96-fdf37bb8b (reviewer sub-agent of L); spot-checked: I read the item, all 7 steps and both new nodes in full, together with every cited statement. Sources read: ILO II 2.1.1, 2.2.2–2.2.4 and the 3.2.3 exchange sketch (printed pp. 26–31), and Stacks 04GN lemma-henselization with its proof. The item statement is unchanged and matches the ILO exchange in finite form; no SGA is cited. Step 1 is correct: f_*O_Y is free on an affine T, B_H=∏C_t splits into henselian local factors (04GH node), and each C_t is free because a direct summand over a local ring becomes free after localizing at one f_i, which is a unit. Step 2 is correctly marked elementary: d=Σe_t over κ(x), so some e_t is prime to ℓ, and the κ(q)-point of W×_{Y_T}Spec C has residue field κ(q). Step 3 checks the hypotheses of the henselian étale retraction (C henselian, prime with trivial residue extension). Step 4 lifts b to a genuine idempotent, Z_a and W×_T T_a are of finite presentation, and 01ZM(2) gives a morphism over Y_{T_a'}, so f v g = u c holds. Step 5: 06AC applies (everything affine, f_0 locally of finite presentation) and gives constant degree e. Step 6: j is quasi-compact because X is Noetherian, finite type follows, and separatedness holds because j is a monomorphism. Step 7: positive rank gives surjectivity, and the subcover node gives a finite family; empty X is fine. New node lem-per-ordinary-henselian-pointed-neighbourhood-limit is true (04GN applied to A_p, descended along A_g; points κ(x)⊆κ(x_a)⊆κ(H); cofinal directed set; 01YW). It is not a duplicate: the existing etale-triples nodes all carry IsSepClosure, and pair-henselization and prime-ind-etale give no pointed A-system. New node lem-per-completely-decomposed-etale-finite-subcover is true by ILO 2.2.4 (ind-constructible cd loci, X_cons compact) and is not a duplicate. Neither new node restates an item clause. FIX (C1): Step 4 identified lim Y_{T_a}=Spec B_H only 'by the tensor universal property'; it now cites lem-weil-pbc-limit-affine-transition (01YW), which is added to proof_deps and tool_uses. Step 5 now cites the limit clause of the new neighbourhood node for lim T_a=Spec H, which 06AC requires. No other changes. I accept the recorded generic-AG tool_uses.; 1 file(s) fixed by the reviewer"
  }
 }
