@@ -4,7 +4,7 @@ Source scan; one hole per declaration, regardless of token count. Deleted declar
 Closure is the queue’s import upper bound. Classes use source references, not elaborated dependencies.
 Progress = closed − added in the closure, with pruning reported separately.
 
-Holes now: library **3791**, closure **144**, holes in definitions **9**, definitions with undetermined data **315** (closure **3**).
+Holes now: library **3790**, closure **144**, holes in definitions **9**, definitions with undetermined data **315** (closure **3**).
 
 Definitions with holes (def/instance/structure field):
 
@@ -338,20 +338,20 @@ Definitions with undetermined data (class-1 exceptions in `coord/hollow-definiti
 
 | root | library | closure |
 |---|---:|---:|
-| Sheaf | 3625 | 47 |
+| Sheaf | 3624 | 47 |
 | WeilConjectures | 166 | 97 |
 
 | baseline | scope | closed | added | net | deleted | changed holed statements |
 |---|---|---:|---:|---:|---:|---:|
-| 889327369 (Queue at the start of stage 3) | library | 1808 | 3403 | -1595 | 733 | 14 |
-| 660345513 (Application of proof-dependency imports) | library | 1805 | 3402 | -1597 | 679 | 14 |
+| 889327369 (Queue at the start of stage 3) | library | 1808 | 3402 | -1594 | 733 | 14 |
+| 660345513 (Application of proof-dependency imports) | library | 1805 | 3401 | -1596 | 679 | 14 |
 | 660345513 (Application of proof-dependency imports) | closure | 1500 | 75 | 1425 | 603 | 0 |
 
 No closure delta is quoted across 660345513: proof-dependency imports changed the reached set.
 
 | landing class | count |
 |---|---:|
-| proved | 4265 |
+| proved | 4266 |
 | decomposed | 56 |
 | moved | 4161 |
 | pruned | 147 |
@@ -567,7 +567,7 @@ Per group: whole-library closed/added/net since stage 3; landing count is not pr
 | Y9 | 2 | 2 | 0 | 2 | 0/2 (0.0%) |
 | Z2 | 3 | 4 | 0 | 4 | 1/3 (33.3%) |
 | Z5 | 1 | 1 | 0 | 1 | 0/1 (0.0%) |
-| Z6 | 1 | 1 | 0 | 1 | 0/1 (0.0%) |
+| Z6 | 2 | 2 | 0 | 2 | 0/2 (0.0%) |
 | Z7 | 1 | 1 | 2 | -1 | 1/1 (100.0%) |
 | Z8 | 2 | 2 | 0 | 2 | 0/2 (0.0%) |
 | Z9 | 2 | 2 | 1 | 1 | 1/2 (50.0%) |
