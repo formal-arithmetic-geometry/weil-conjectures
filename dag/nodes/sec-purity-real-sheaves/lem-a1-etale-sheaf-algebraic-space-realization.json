@@ -18,48 +18,318 @@
   "def-weil-weakly-etale-morphism",
   "def-pc-fibre-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose the small skeleton and the larger scheme universe of [def-weil-size-convention]. Index a family by all pairs $(A,a)$, with $A$ an object of $X_{\\mathrm{et}}$ and $a\\in\\mathcal F(A)$. Yoneda [lem-galois-yoneda-hom-bijection] gives a map $h_A^{\\mathrm{et}}\\to\\mathcal F$ for each pair. These representables are sheaves by [lem-weil-pbc-small-etale-representable-presheaf-sheaf]. Form $V=\\coprod_{(A,a)}A$ using [lem-weil-pbc-scheme-coproduct-family]. It is etale over $X$ by [lem-weil-pbc-etale-local-on-source], applied to its disjoint open summands. The sheaf axiom glues the sections $a$ over these summands into a section of $\\mathcal F(V)$ and hence a map $p:h_V^{\\mathrm{et}}\\to\\mathcal F$. This map is even surjective on sections: for any $a\\in\\mathcal F(A)$, the inclusion of the corresponding summand $A\\to V$ maps to $a$. Consequently $p$ is an epimorphism (two maps out of $\\mathcal F$ agreeing after $p$ agree on every section).",
+   "uses": [
+    "def-weil-size-convention",
+    "lem-galois-yoneda-hom-bijection",
+    "lem-weil-pbc-small-etale-representable-presheaf-sheaf",
+    "lem-weil-pbc-scheme-coproduct-family",
+    "lem-weil-pbc-etale-local-on-source"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 0GF6 (lemma-sheaf-gives-space), representable generators, size footnote and scheme coproduct; the epimorphism argument is written out."
+   }
+  },
+  {
+   "text": "Put $W=V\\times_XV$, with projections $\\pi_1,\\pi_2$, and let $a=p_V(\\mathrm{id}_V)$. The scheme-level cases of [lem-trf-space-chartwise-etale-permanence] show that $W\\to X$ is etale and that any $X$-morphism between etale $X$-schemes is etale. On $W_{\\mathrm{et}}$ define $H(T\\xrightarrow{g}W)$ to be a singleton if $\\mathcal F(\\pi_1g)(a)=\\mathcal F(\\pi_2g)(a)$, and empty otherwise. The composites $T\\to X$ are etale, so this is defined. It is a subsheaf of the final sheaf: equality of the two sections can be checked on a covering by the separatedness axiom of $\\mathcal F$. By [lem-weil-pbc-etale-subsheaf-final-open], $H$ is represented by a unique open $R\\subset W$. For an etale $X$-scheme $T$ and maps $b,c:T\\to V$, the map $(b,c):T\\to W$ is etale by the same permanence lemma. Applying the description of $H$ to this map gives\n$$ (b,c)\\text{ factors through }R\\quad\\Longleftrightarrow\\quad p_T(b)=p_T(c). $$\nThus $h_R^{\\mathrm{et}}=h_V^{\\mathrm{et}}\\times_{\\mathcal F}h_V^{\\mathrm{et}}$.",
+   "uses": [
+    "lem-trf-space-chartwise-etale-permanence",
+    "lem-weil-pbc-etale-subsheaf-final-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 0GF6, open support relation; the omitted detail is supplied using etale-cohomology.tex Tag 04HV (lemma-support-subsheaf-final)."
+   }
+  },
+  {
+   "text": "The open subscheme $R$ is etale over $X$: its points have the same etale affine charts as the corresponding points of $W$ [def-weil-etale-morphism]. The projections $s,t:R\\to V$ are then etale by [lem-trf-space-chartwise-etale-permanence]. Reflexivity of equality of sections makes the diagonal $V\\to W$ factor through $R$; symmetry gives the swap $R\\to R$; transitivity gives $R\\times_{t,V,s}R\\to R$. Here each domain is etale over $X$, so the preceding kernel-pair identity and Yoneda [lem-galois-yoneda-hom-bijection] produce these actual scheme morphisms, not merely identities on etale test points. Their defining projection identities imply that $R(T)$ is an equivalence relation on $V(T)$ for every $X$-scheme $T$. The open immersion $R\\to W$ is a monomorphism. Finally [lem-weil-pbc-site-sheaf-sets-epi-kernel-pair-coequalizer], applied to $p$, identifies $\\mathcal F$ as the coequalizer of $h_R^{\\mathrm{et}}\\rightrightarrows h_V^{\\mathrm{et}}$.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "lem-trf-space-chartwise-etale-permanence",
+    "lem-galois-yoneda-hom-bijection",
+    "lem-weil-pbc-site-sheaf-sets-epi-kernel-pair-coequalizer"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 0GF6, etale equivalence relation and coequalizer diagram; sites.tex Tag 086K (lemma-coequalizer-surjection)."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-etale-relation-quotient] with $S=X$ to this monomorphic etale equivalence relation. It constructs the fppf sheaf quotient $E=V/R$ as an algebraic space, with a representable etale surjective atlas $q:h_V\\to E$ and $h_R\\cong h_V\\times_Eh_V$. Its statement also supplies etale-local lifting of every section of $E$ over a scheme. At this point the conclusion is an algebraic space over $X$; etaleness of $E\\to X$ and the identification of its small-etale restriction will be proved next.",
+   "uses": [
+    "lem-trf-etale-relation-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces.tex",
+    "place": "Tag 02WW (theorem-presentation), including the atlas, kernel-pair and etale-local lifting clauses; used in Tag 0GF6."
+   }
+  },
+  {
+   "text": "Let $B\\to E$ be any representable etale map from a scheme. By [def-trf-algebraic-space], $P=B\\times_EV$ is a scheme, $P\\to B$ is etale and surjective, and $P\\to V$ is etale. Since $V\\to X$ is etale, $P\\to X$ is etale by the scheme composition case of [lem-trf-space-chartwise-etale-permanence]. Apply [lem-trf-etale-descent-through-source-cover] with its $(T,X,Y)=(X,B,P)$: its hypotheses are precisely the surjective etale map $P\\to B$ and the etale composite $P\\to X$. It follows that $B\\to X$ is etale. Since $B\\to E$ was arbitrary, this proves that the constructed $E\\to X$ is etale in the chartwise sense required in the statement.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-trf-space-chartwise-etale-permanence",
+    "lem-trf-etale-descent-through-source-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03FS (lemma-etale-local), source-atlas argument written using descent.tex Tag 036W (lemma-etale-etale-local-source)."
+   }
+  },
+  {
+   "text": "The presheaf $h_E^{\\mathrm{et}}$ is a sheaf: [lem-a1-algebraic-space-fpqc-sheaf] gives descent of morphisms into $E$, and [lem-weil-pbc-fpqc-finer-than-etale] applies to every covering of $X_{\\mathrm{et}}$. By the etale-local lifting clause of [lem-trf-etale-relation-quotient], every section of $h_E^{\\mathrm{et}}$ lifts to $h_V^{\\mathrm{et}}$ on an etale covering. These local lifts show that $q^{\\mathrm{et}}$ is an epimorphism: equality of two maps after $q^{\\mathrm{et}}$ implies equality locally on every section, hence equality by the sheaf axiom. The kernel-pair clause of that same quotient lemma restricts to $h_R^{\\mathrm{et}}=h_V^{\\mathrm{et}}\\times_{h_E^{\\mathrm{et}}}h_V^{\\mathrm{et}}$. Therefore [lem-weil-pbc-site-sheaf-sets-epi-kernel-pair-coequalizer] makes $h_E^{\\mathrm{et}}$ a coequalizer of the very same pair as $\\mathcal F$. The two universal properties give inverse isomorphisms $h_E^{\\mathrm{et}}\\cong\\mathcal F$ commuting with the maps from $h_V^{\\mathrm{et}}$. This proves essential surjectivity.",
+   "uses": [
+    "lem-a1-algebraic-space-fpqc-sheaf",
+    "lem-weil-pbc-fpqc-finer-than-etale",
+    "lem-trf-etale-relation-quotient",
+    "lem-weil-pbc-site-sheaf-sets-epi-kernel-pair-coequalizer"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 0GF6, part (3); spaces.tex Tag 02WW lifting and kernel-pair clauses, and sites.tex Tag 086K. The restriction argument is explicit."
+   }
+  },
+  {
+   "text": "For any etale algebraic space $E_1\\to X$, choose an atlas $q_1:A\\to E_1$ as in [def-trf-algebraic-space]. Its kernel pair $B=A\\times_{E_1}A$ is a scheme by representability of the diagonal. Both $A$ and $B$ are etale over $X$, using the chartwise hypothesis on $E_1$ and [lem-trf-space-chartwise-etale-permanence]. For any scheme $T\\to E_1$, the scheme $T\\times_{E_1}A\\to T$ is etale and surjective and has a tautological lift to $A$. On the small etale site of $X$ (with $T$ etale over $X$) it is an etale covering. On the big fppf site of $X$ it is an fppf covering, since an etale map is flat and locally finitely presented [def-weil-etale-morphism, def-pc-fppf-site]. On the small etale site $h_{E_1}^{\\mathrm{et}}$ is a sheaf, as in Step 6, by [lem-a1-algebraic-space-fpqc-sheaf] and [lem-weil-pbc-fpqc-finer-than-etale]; on the big fppf site it is a sheaf by [def-trf-algebraic-space]. The sheaf axiom consequently makes $h_A\\to h_{E_1}$ epimorphic on either site, with kernel pair $h_B$. By [lem-weil-pbc-site-sheaf-sets-epi-kernel-pair-coequalizer], $h_{E_1}$ is the coequalizer of this atlas kernel pair on both sites. The larger universe of [def-weil-size-convention] makes the sites and indexing diagrams small where needed.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-trf-space-chartwise-etale-permanence",
+    "def-weil-etale-morphism",
+    "def-pc-fppf-site",
+    "lem-weil-pbc-site-sheaf-sets-epi-kernel-pair-coequalizer",
+    "def-weil-size-convention",
+    "lem-a1-algebraic-space-fpqc-sheaf",
+    "lem-weil-pbc-fpqc-finer-than-etale"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 086K on the small etale and big fppf sites; the atlas lifting argument uses the definitions in spaces.tex Tag 025Y. This supplies the presentation argument needed for full faithfulness."
+   }
+  },
+  {
+   "text": "Given $\\alpha:h_{E_1}^{\\mathrm{et}}\\to h_{E_2}^{\\mathrm{et}}$, compose it with $h_A^{\\mathrm{et}}\\to h_{E_1}^{\\mathrm{et}}$ from Step 7. Yoneda [lem-galois-yoneda-hom-bijection] identifies the result with an $X$-morphism $a:A\\to E_2$. Naturality on the etale $X$-scheme $B$ gives $a\\circ s=a\\circ t$. The big-fppf coequalizer of Step 7, obtained from [lem-weil-pbc-site-sheaf-sets-epi-kernel-pair-coequalizer], therefore extends $a$ uniquely to a map of fppf sheaves $E_1\\to E_2$, hence to a morphism of algebraic spaces by [def-trf-algebraic-space]. Its restriction is $\\alpha$ because both agree after the epimorphism $h_A^{\\mathrm{et}}\\to h_{E_1}^{\\mathrm{et}}$. The same uniqueness proves faithfulness. Together with Step 6 this gives the asserted equivalence.",
+   "uses": [
+    "lem-galois-yoneda-hom-bijection",
+    "lem-weil-pbc-site-sheaf-sets-epi-kernel-pair-coequalizer",
+    "def-trf-algebraic-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 0GF6, equivalence via its presentation construction; full faithfulness is written using Yoneda and the atlas coequalizer rather than asserted as elementary."
+   }
+  },
+  {
+   "text": "For any algebraic space $E$ over $X$, [lem-a1-algebraic-space-fpqc-sheaf] and the covering definition in [def-weil-pbc-proetale-site] show that $h_E^{\\mathrm{proet}}$ is a sheaf. Now take an etale $E\\to X$ with the atlas $A$ and kernel pair $B$ of Step 7. For $T\\to X$ weakly etale and $T\\to E$, put $P=T\\times_EA$. The map $P\\to T$ is surjective etale by [def-trf-algebraic-space]. It is weakly etale (use the etale-to-weakly-etale inclusion in [def-weil-pbc-site-comparison-morphism] for the base $T$); then $P\\to X$ is weakly etale by [sk-lem-pe-weakly-etale-stability]. The etale cover $P\\to T$ is fpqc by [lem-weil-pbc-fpqc-finer-than-etale], hence a covering in $X_{\\mathrm{proet}}$. Its tautological lift proves that $h_A^{\\mathrm{proet}}\\to h_E^{\\mathrm{proet}}$ is an epimorphism, by the same sheaf cancellation argument as in Step 6. Its sectionwise kernel pair is $h_B^{\\mathrm{proet}}$. Thus [lem-weil-pbc-site-sheaf-sets-epi-kernel-pair-coequalizer] presents $h_E^{\\mathrm{proet}}$ as the coequalizer of $h_B^{\\mathrm{proet}}\\rightrightarrows h_A^{\\mathrm{proet}}$.",
+   "uses": [
+    "lem-a1-algebraic-space-fpqc-sheaf",
+    "def-weil-pbc-proetale-site",
+    "def-trf-algebraic-space",
+    "def-weil-pbc-site-comparison-morphism",
+    "sk-lem-pe-weakly-etale-stability",
+    "lem-weil-pbc-fpqc-finer-than-etale",
+    "lem-weil-pbc-site-sheaf-sets-epi-kernel-pair-coequalizer"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Section 5.1, comparison on etale presentations; the fpqc sheaf input is spaces-descent.tex Tag 04P2 and the effective epimorphism input is sites.tex Tag 086K. Lemma 5.1.1 alone is not being used as an algebraic-space comparison theorem."
+   }
+  },
+  {
+   "text": "For an etale $X$-scheme $C$ and a pro-etale sheaf $G$, the adjunction and evaluation formula in [def-weil-pbc-site-comparison-morphism], together with [lem-galois-yoneda-hom-bijection], give natural bijections\n$$\\operatorname{Hom}(\\nu_X^*h_C^{\\mathrm{et}},G)=\\operatorname{Hom}(h_C^{\\mathrm{et}},\\nu_{X,*}G)=G(C)=\\operatorname{Hom}(h_C^{\\mathrm{proet}},G).$$\nThey identify $\\nu_X^*h_C^{\\mathrm{et}}$ with $h_C^{\\mathrm{proet}}$, naturally in $C$. Also $\\nu_X^*$ preserves the atlas coequalizer: maps from its image to $G$ correspond by adjunction to maps from that coequalizer to $\\nu_{X,*}G$, which by the defining universal property [def-weil-pbc-category-colimit] are precisely equalizing maps from the image of $h_A$. This is a direct verification of the coequalizer universal property, with no formula for values of a general $\\nu_X^*$ asserted.",
+   "uses": [
+    "def-weil-pbc-site-comparison-morphism",
+    "lem-galois-yoneda-hom-bijection",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Section 5.1, comparison adjunction. The representable and colimit computations are written out formally; Lemmas 5.1.1-5.1.2 are compatible with them but are not cited for stronger conclusions."
+   }
+  },
+  {
+   "text": "Apply Step 10 to the small-etale atlas coequalizer of Step 7. It gives $\\nu_X^*h_E^{\\mathrm{et}}$ as the coequalizer of $h_B^{\\mathrm{proet}}\\rightrightarrows h_A^{\\mathrm{proet}}$, which by Step 9 also presents $h_E^{\\mathrm{proet}}$. The universal property [def-weil-pbc-category-colimit] therefore gives an isomorphism between them. More precisely, restriction gives $\\nu_{X,*}h_E^{\\mathrm{proet}}=h_E^{\\mathrm{et}}$, so the identity has an adjoint map $c_E:\\nu_X^*h_E^{\\mathrm{et}}\\to h_E^{\\mathrm{proet}}$ by [def-weil-pbc-site-comparison-morphism]. On $A$ and $B$ this is exactly the representable comparison of Step 10; hence the isomorphism just constructed is $c_E$. This description makes it independent of the atlas and natural in $E$.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "def-weil-pbc-site-comparison-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Section 5.1 comparison, proved by the common atlas coequalizer; canonicity is the comparison adjunction, not an invocation of Lemma 5.1.1 for non-affine presentations."
+   }
+  },
+  {
+   "text": "Let $u:U\\to X$ be weakly etale. The fibre product $E_U=E\\times_XU$ exists by [lem-trf-space-fibre-products-etale-covers] and is chartwise etale over $U$ by the arbitrary-base-change clause of [lem-trf-space-chartwise-etale-permanence]. Viewed over $U$, $E_U$ is the sheaf $(T\\to U)\\mapsto\\operatorname{Hom}_X(T,E)$ on $(\\mathit{Sch}/U)_{fppf}=(\\mathit{Sch}/X)_{fppf}/U$, and it is an algebraic space over $U$: for $U$-schemes $T,T'$ with maps to $E_U$, the fibre product $T\\times_{E_U}T'$ is the fibre product of $T,T'$ over the algebraic space $E\\times_XU$, a scheme by [def-trf-algebraic-space], with its map to $U$ through $T$, and for an atlas $A\\to E$ the base change of $A\\times_XU\\to E_U$ along any $T\\to E_U$ is $A\\times_ET\\to T$, so $A\\times_XU\\to E_U$ is a surjective etale atlas. Hence the charts of $E_U$ over $U$ are those over $X$, and the clause just cited says each composite to $U$ is etale. The slice site $X_{\\mathrm{proet}}/U$ is $U_{\\mathrm{proet}}$: composition with $u$ sends every weakly etale $T\\to U$ to a weakly etale $T\\to X$, and conversely a map $T\\to U$ between weakly etale $X$-schemes is weakly etale, both by [sk-lem-pe-weakly-etale-stability]. Coverings are the same fpqc families by [def-weil-pbc-proetale-site]. On every object $T\\to U$ of this site, the algebraic-space fibre-product universal property [lem-trf-space-fibre-products-etale-covers] gives\n$$h_E^{\\mathrm{proet}}|_U(T)=\\operatorname{Hom}_X(T,E)=\\operatorname{Hom}_U(T,E_U)=h_{E_U}^{\\mathrm{proet}}(T).$$\nApply Steps 9-11 with base $U$ to identify the last sheaf with $\\nu_U^*h_{E_U}^{\\mathrm{et}}$. These are the claimed restricted identifications. They are natural in $U$: the displayed bijection sends a map $T\\to E$ to its unique pair with $T\\to U$, and further restriction precomposes both components; the comparison maps are the canonical adjoint maps of Step 11.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-trf-space-chartwise-etale-permanence",
+    "sk-lem-pe-weakly-etale-stability",
+    "def-weil-pbc-proetale-site",
+    "def-trf-algebraic-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 5.4.1, p.39, functoriality by pullback on representables; the slice-site identification and fibre-product formula are written out using weakly-etale stability."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fppf-site",
+  "def-trf-algebraic-space",
+  "def-weil-etale-morphism",
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-site-comparison-morphism",
+  "def-weil-size-convention",
+  "lem-a1-algebraic-space-fpqc-sheaf",
+  "lem-galois-yoneda-hom-bijection",
+  "lem-trf-etale-descent-through-source-cover",
+  "lem-trf-etale-relation-quotient",
+  "lem-trf-space-chartwise-etale-permanence",
+  "lem-trf-space-fibre-products-etale-covers",
+  "lem-weil-pbc-etale-local-on-source",
+  "lem-weil-pbc-etale-subsheaf-final-open",
+  "lem-weil-pbc-fpqc-finer-than-etale",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-weil-pbc-site-sheaf-sets-epi-kernel-pair-coequalizer",
+  "lem-weil-pbc-small-etale-representable-presheaf-sheaf",
+  "sk-lem-pe-weakly-etale-stability"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-properties.tex",
+  "place": "Tag 0GF6 construction, parts (1)-(3), with Tag 04HV, Tag 02WW, Tag 036W and Tag 086K for its inputs; pro-etale comparison by the comparison adjunction and the atlas coequalizer, compatible with Bhatt-Scholze Section 5.1 and Lemma 5.4.1."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
-   "query": "Every sheaf of sets on the small etale site of a scheme is represented by an etale algebraic space, compatibly with inverse image to the proetale site and base change",
-   "results": "8 hits: AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful; AlgebraicGeometry.Scheme.instFullEtaleOverForget; AlgebraicGeometry.Scheme.Etale; AlgebraicGeometry.Scheme.instCategoryEtale; AlgebraicGeometry.Scheme.Etale.forget; AlgebraicGeometry.Scheme.instFaithfulEtaleOverForget; AlgebraicGeometry.Scheme.smallEtaleTopology; AlgebraicGeometry.Scheme.etaleTopology",
+   "query": "Every sheaf of sets on the small etale site of a scheme is represented by an etale algebraic space, with canonical comparison to the proetale site",
+   "results": "AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful; AlgebraicGeometry.Scheme.instFullEtaleOverForget; AlgebraicGeometry.Scheme.Etale; AlgebraicGeometry.Scheme.instCategoryEtale; AlgebraicGeometry.Scheme.Etale.forget; AlgebraicGeometry.Scheme.instFaithfulEtaleOverForget; AlgebraicGeometry.Scheme.smallEtaleTopology; AlgebraicGeometry.Scheme.etaleTopology",
    "date": "2026-10-18",
-   "verdict": "no match: scheme-level etale, separatedness, or valuative definitions do not give this algebraic-space theorem"
+   "verdict": "no match: Mathlib only has scheme-level etale/site declarations"
   },
   {
-   "tool": "leanfinder",
-   "query": "An arbitrary sheaf on the small etale site has an espace etale: an algebraic space with an etale atlas constructed as the quotient of its etale category of sections",
-   "results": "8 hits: AlgebraicGeometry.Scheme.Etale; AlgebraicGeometry.Scheme.Etale.forget; AlgebraicGeometry.SheafedSpace; AlgebraicGeometry.Scheme.smallEtaleTopology; AlgebraicGeometry.Scheme.etaleTopology; AlgebraicGeometry.Scheme.instCategoryEtale; AlgebraicGeometry.LocallyRingedSpace.toSheafedSpace; AlgebraicGeometry.Scheme.instFullEtaleOverForget",
+   "tool": "leansearch",
+   "query": "An arbitrary sheaf on the small etale site has an espace etale algebraic space representation and proetale comparison",
+   "results": "AlgebraicGeometry.Scheme.AffineZariskiSite.sheafEquiv; AlgebraicGeometry.Scheme.smallEtaleTopology; TopCat.Sheaf.forget; AlgebraicGeometry.SheafedSpace.sheaf; Algebra.Etale.formallyEtale; AlgebraicGeometry.Scheme.etaleTopology; AlgebraicGeometry.Scheme.Etale; AlgebraicGeometry.SheafedSpace.instEpiTopCatBaseHomPresheafedSpaceπ",
    "date": "2026-10-18",
-   "verdict": "no match: scheme-level etale, separatedness, or valuative definitions do not give this algebraic-space theorem"
+   "verdict": "no match: no algebraic-space or espace-etale theorem"
   },
   {
    "tool": "loogle",
-   "query": "\"AlgebraicSpace\"",
-   "results": "0 hits: ",
+   "query": "AlgebraicSpace",
+   "results": "",
    "date": "2026-10-18",
-   "verdict": "no match: scheme-level etale, separatedness, or valuative definitions do not give this algebraic-space theorem"
+   "verdict": "no match: no matching algebraic-space/proetale declaration"
   },
   {
    "tool": "grep",
    "query": "AlgebraicSpace|etale.*sheaf.*represent|sheaf.*etale.*space",
-   "results": "0 hits: ; directory AlgebraicGeometry",
+   "results": "",
    "date": "2026-10-18",
-   "verdict": "no match: scheme-level etale, separatedness, or valuative definitions do not give this algebraic-space theorem"
+   "verdict": "no match: source grep found no relevant theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an etale sheaf and an etale scheme cover, the relation of pairs with equal sections is an open etale subscheme of the fibre product",
+   "results": "AlgebraicGeometry.Scheme.smallEtaleTopology; AlgebraicGeometry.Scheme.etaleTopology; AlgebraicGeometry.Scheme.smallEtalePretopology; AlgebraicGeometry.Scheme.etalePretopology; AlgebraicGeometry.Scheme.instHasPullbacksEtale; Algebra.isOpen_etaleLocus; AlgebraicGeometry.Scheme.instCategoryEtale; AlgebraicGeometry.Scheme.Etale",
+   "date": "2026-10-18",
+   "verdict": "no match: Mathlib only has scheme-level etale/site declarations"
   },
   {
    "tool": "leansearch",
-   "query": "An etale sheaf of sets on a scheme has an etale algebraic space espace etale whose functor of points on the proetale site is the inverse image sheaf",
-   "results": "8 hits: AlgebraicGeometry.IsEtale; AlgebraicGeometry.Scheme.Etale; AlgebraicGeometry.Scheme.smallEtaleTopology; Algebra.Etale.formallyEtale; AlgebraicGeometry.Scheme.sheaf; AlgebraicGeometry.Scheme.etaleTopology; AlgebraicGeometry.Scheme.etalePretopology; AlgebraicGeometry.Scheme.AffineZariskiSite.sheafEquiv",
+   "query": "The equalizer relation of sections of an etale sheaf is represented by an open subscheme",
+   "results": "TopCat.Presheaf.SheafConditionEqualizerProducts.diagram.congr_simp; TopCat.Presheaf.SheafConditionEqualizerProducts.fork; AlgebraicGeometry.isClosedImmersion_equalizer_ι_left; TopCat.Presheaf.SheafConditionPairwiseIntersections.coneEquivFunctor; AlgebraicGeometry.Scheme.Hom.congr_app; AlgebraicGeometry.LocallyRingedSpace.HasCoequalizer.imageBasicOpen_image_open; TopCat.Sheaf.objSupIsoProdEqLocus; TopCat.Presheaf.SheafConditionEqualizerProducts.diagram",
    "date": "2026-10-18",
-   "verdict": "no match: scheme-level etale, separatedness, or valuative definitions do not give this algebraic-space theorem"
+   "verdict": "no match: no algebraic-space or espace-etale theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicSpace",
+   "results": "",
+   "date": "2026-10-18",
+   "verdict": "no match: no matching algebraic-space/proetale declaration"
+  },
+  {
+   "tool": "grep",
+   "query": "support.*subsheaf|equalizer.*etale|etale.*equivalence.*relation",
+   "results": "",
+   "date": "2026-10-18",
+   "verdict": "no match: source grep found no relevant theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The espace etale construction from a sheaf on a scheme etale site gives an algebraic space etale over the scheme and recovers the sheaf",
+   "results": "AlgebraicGeometry.Scheme.Etale.forget; AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful; AlgebraicGeometry.Scheme.Etale; AlgebraicGeometry.Scheme.instFullEtaleOverForget; AlgebraicGeometry.Scheme.instCategoryEtale; AlgebraicGeometry.Scheme.instFaithfulEtaleOverForget; AlgebraicGeometry.Scheme.etaleTopology; AlgebraicGeometry.Scheme.smallEtaleTopology",
+   "date": "2026-10-18",
+   "verdict": "no match: Mathlib only has scheme-level etale/site declarations"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A sheaf on the small etale site of a scheme is represented by an etale algebraic space",
+   "results": "AlgebraicGeometry.Scheme.sheaf; AlgebraicGeometry.Scheme.smallEtaleTopology; AlgebraicGeometry.Scheme.AffineZariskiSite.sheafEquiv; AlgebraicGeometry.Scheme.etaleTopology; Algebra.Etale.formallyEtale; AlgebraicGeometry.IsEtale; AlgebraicGeometry.Scheme.Etale; AlgebraicGeometry.Scheme.smallEtalePretopology",
+   "date": "2026-10-18",
+   "verdict": "no match: no algebraic-space or espace-etale theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicSpace",
+   "results": "",
+   "date": "2026-10-18",
+   "verdict": "no match: no matching algebraic-space/proetale declaration"
+  },
+  {
+   "tool": "grep",
+   "query": "sheaf.*algebraic.*space|etale.*space|AlgebraicSpace",
+   "results": "",
+   "date": "2026-10-18",
+   "verdict": "no match: source grep found no relevant theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an etale algebraic space over a scheme, inverse image of its etale sheaf to the proetale site equals its proetale functor of points, compatibly with weakly etale base change",
+   "results": "AlgebraicGeometry.Scheme.Etale.forget; AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme; AlgebraicGeometry.Scheme.instFullEtaleOverForget; AlgebraicGeometry.Scheme.instCategoryEtale; AlgebraicGeometry.Scheme.etaleTopology; AlgebraicGeometry.IsEtale.instFormallyUnramified; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified",
+   "date": "2026-10-18",
+   "verdict": "no match: Mathlib only has scheme-level etale/site declarations"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The proetale inverse image of an etale representable sheaf is represented by the same etale algebraic space",
+   "results": "AlgebraicGeometry.Scheme.smallEtaleTopology; Algebra.Etale.formallyEtale; AlgebraicGeometry.Scheme.etaleTopology; CategoryTheory.Sheaf.isSheaf_of_isRepresentable; AlgebraicGeometry.Scheme.etalePretopology; AlgebraicGeometry.Scheme.Etale; AlgebraicGeometry.Scheme.smallEtalePretopology; AlgebraicGeometry.SheafedSpace.IsOpenImmersion.inv_naturality_assoc",
+   "date": "2026-10-18",
+   "verdict": "no match: no algebraic-space or espace-etale theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "nu^* sheaf proetale",
+   "results": "",
+   "date": "2026-10-18",
+   "verdict": "no match: no matching algebraic-space/proetale declaration"
+  },
+  {
+   "tool": "grep",
+   "query": "pro.?etale.*comparison|inverse.*image.*etale|h_E",
+   "results": "Mathlib/AlgebraicGeometry/StructureSheaf.lean; Mathlib/AlgebraicGeometry/StructureSheaf.lean; Mathlib/AlgebraicGeometry/StructureSheaf.lean",
+   "date": "2026-10-18",
+   "verdict": "no match: source grep found no relevant theorem"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-a1-proetale-local-system-representability",
@@ -78,5 +348,59 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-a1-etale-sheaf-algebraic-space-realization",
+  "worker": "stage1",
+  "summary": "Repaired D1, C2 and C1/E1. Removed the clause-restating comparison node and folded the elementary generator and support-relation inputs into the item. The proof explicitly constructs the relation via existing Tag 04HV, descends etaleness through each chart, compares the small-etale quotient using lifting and effective epimorphisms, proves the atlas presentation and full faithfulness on both sites, and proves the pro-etale comparison from the common atlas coequalizer and the comparison adjunction. No statement or hypothesis changed; all prior searches retained.",
+  "blueprint": "Realizes the unchanged ancestor lem-a1-affine-hc0 auxiliary representability input through Stacks Tag 0GF6, including full faithfulness and chartwise etaleness, followed by the canonical pro-etale realization and weakly-etale restriction used by lem-a1-proetale-local-system-representability. No chapter or unit route is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-etale-relation-quotient",
+    "why": "General Stacks 02WW quotient theorem constructs the algebraic-space quotient with its atlas, kernel pair and etale-local lifting; the unit does not provide this foundational quotient tool."
+   },
+   {
+    "node": "lem-trf-space-chartwise-etale-permanence",
+    "why": "General algebraic-space/scheme composition, base-change and etale-permanence properties; used to form etale test objects and to base change E, not to replace any unit proof."
+   },
+   {
+    "node": "lem-trf-etale-descent-through-source-cover",
+    "why": "Generic scheme theorem Tag 036W descends etaleness from P to each chart B. The unit has no source-locality theorem."
+   },
+   {
+    "node": "lem-weil-pbc-etale-subsheaf-final-open",
+    "why": "Generic Tag 04HV identifies a subterminal etale sheaf on W with an open subscheme; the item then constructs and checks its own kernel relation."
+   },
+   {
+    "node": "lem-weil-pbc-fpqc-finer-than-etale",
+    "why": "Generic topology comparison shows the etale lifting covers are fpqc, for descent and the pro-etale covering condition."
+   },
+   {
+    "node": "sk-lem-pe-weakly-etale-stability",
+    "why": "Generic weakly-etale composition and cancellation identify the slice site and make the pulled-back atlas a pro-etale cover."
+   },
+   {
+    "node": "lem-trf-space-fibre-products-etale-covers",
+    "why": "Generic algebraic-space fibre-product existence supplies E_U; no arithmetic or cohomological theorem is used."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-etale-relation-quotient",
+  "lem-trf-space-chartwise-etale-permanence",
+  "lem-trf-etale-descent-through-source-cover",
+  "lem-weil-pbc-etale-subsheaf-final-open",
+  "lem-weil-pbc-fpqc-finer-than-etale",
+  "sk-lem-pe-weakly-etale-stability",
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-NB-7ea318903",
+  "group": "NB",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NB-7ea318903 (reviewer sub-agent of L); spot-checked: Read the item's statement and all 12 steps, all 29 cited statements, Stacks 0GF6 with its proof and set-theoretic footnote, and 03I4. There are no new nodes. The statement is unchanged and holds in the cases I tested: empty X, the initial sheaf (V=R=E=∅), the final sheaf, constant sheaves and non-separated spaces. No duplicate exists in the DAG. Steps 1-6 follow 0GF6: the 04HV open relation, the equivalence relation checked on all X-schemes T as 02WW requires, 036W with (T,X,Y)=(X,B,P), and the coequalizer on both sites. Full faithfulness (step 8) and the pro-etale comparison by atlas coequalizer and adjunction (steps 9-11) are correct. Batch-5 check: lem-a1-algebraic-space-fpqc-sheaf reaches sec-trace-formula only at the definition def-trf-algebraic-space. The closures of lem-trf-etale-relation-quotient (02WW), lem-trf-space-chartwise-etale-permanence (03FR-03FV), lem-trf-space-fibre-products-etale-covers (02X2) and lem-trf-etale-descent-through-source-cover (036W) contain only algebraic-space and descent foundations. None contains cohomology, trace, duality or a batch-4 target. Neither assumption gives these results, so they are genuinely outside the assumed statements and acceptable. The declared tool_uses are accepted; sk-lem-pe-weakly-etale-stability is the only off-route one. FIX, two small repairs in the corrected item: (1) step 7 used that h_{E_1}^et is a sheaf on X_et without citing anything; I added lem-a1-algebraic-space-fpqc-sheaf and lem-weil-pbc-fpqc-finer-than-etale. (2) Step 12 took E×_XU, an algebraic space over X, to be an algebraic space over U with the same charts (change of base scheme, Stacks 03I4(6)) without argument; I wrote out the diagonal and atlas check and cited def-trf-algebraic-space. No statement change, no drops.; 1 file(s) fixed by the reviewer"
  }
 }
