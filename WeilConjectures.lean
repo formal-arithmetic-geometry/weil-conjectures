@@ -1585,6 +1585,7 @@ public import WeilConjectures.AlgebraicGeometry.ProEtale.CohomologyFilteredColim
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Comparison.Affine
 public import WeilConjectures.AlgebraicGeometry.ProEtale.ContinuousSheaf
 public import WeilConjectures.AlgebraicGeometry.ProEtale.DenseOpen
+public import WeilConjectures.AlgebraicGeometry.ProEtale.EtaleCohomologyComparison
 public import WeilConjectures.AlgebraicGeometry.ProEtale.FiniteCoefficientCohomology
 public import WeilConjectures.AlgebraicGeometry.ProEtale.FiniteCoefficientEtaleComparison
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Flat.QuasiCompactCover
