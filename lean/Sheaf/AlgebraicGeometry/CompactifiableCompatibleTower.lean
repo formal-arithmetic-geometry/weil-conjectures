@@ -11,9 +11,6 @@ public import Mathlib.AlgebraicGeometry.OpenImmersion
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
-import WeilConjectures.Compactification.Constructions
-import Mathlib.AlgebraicGeometry.Morphisms.Immersion
-import Mathlib.AlgebraicGeometry.ZariskisMainTheorem
 import WeilConjectures.Compactification.CategoryBaseChange
 
 /-!
@@ -109,6 +106,118 @@ theorem exists_compactifiable_compatible_tower
         R.cf.i ≫ w = (T j).cf.i ∧ R.q ≫ v = w ≫ (T j).q ∧
         v ≫ (T j).p = R.p ≫ u ∧ w ≫ (T j).cf.g = R.cf.g ∧
         u ≫ (T j).cg.g = R.cg.g) := by
-  sorry
+  constructor
+  · let e := c.ofComp d
+    let v : e.Z ⟶ c.Z := (c.ofCompLift d).imageι ≫ pullback.fst c.g d.g
+    have hd : QuasiCompact d.i := d.quasiCompact_openImmersion inferInstance
+    have he : QuasiCompact e.i := e.quasiCompact_openImmersion inferInstance
+    have hr : QuasiCompact e.restrict.i := e.restrict.quasiCompact_openImmersion inferInstance
+    refine ⟨e, v, inferInstance, ?_, ?_, he, inferInstance, hr,
+      inferInstance, inferInstance, inferInstance, e.restrict_i_fst,
+      e.restrict.comm.symm, inferInstance, e.isPullback_restrict⟩
+    · change (c.ofCompLift d).toImage ≫ _ = _
+      rw [Scheme.Hom.toImage_imageι_assoc, Compactification.ofCompLift_fst]
+    · change ((c.ofCompLift d).imageι ≫ pullback.fst c.g d.g) ≫ c.g =
+        ((c.ofCompLift d).imageι ≫ pullback.snd c.g d.g) ≫ d.g
+      simp only [Category.assoc, pullback.condition]
+  constructor
+  · intro T v hv hvi hvg Z' k
+    let f' : pullback (f ≫ h) k ⟶ pullback h k :=
+      pullback.lift (pullback.fst (f ≫ h) k ≫ f) (pullback.snd (f ≫ h) k)
+        (by simp only [Category.assoc, pullback.condition])
+    have hf' : IsPullback (pullback.fst (f ≫ h) k) f' f (pullback.fst h k) := by
+      apply IsPullback.of_bot (v₂₁ := pullback.snd h k) (v₂₂ := h)
+      · simpa only [f', pullback.lift_snd] using IsPullback.of_hasPullback (f ≫ h) k
+      · simp [f']
+      · exact IsPullback.of_hasPullback h k
+    have hs : IsSeparated f' := MorphismProperty.of_isPullback hf' inferInstance
+    have hl : LocallyOfFiniteType f' := MorphismProperty.of_isPullback hf' inferInstance
+    have hq : QuasiCompact f' := MorphismProperty.of_isPullback hf' inferInstance
+    refine ⟨f', hf', hs, hl, hq, inferInstance, inferInstance, inferInstance, ?_⟩
+    let cf := T.cf.ofIsPullback hf'
+    let cg := T.cg.baseChange k
+    let cfg : Compactification (f' ≫ pullback.snd h k) :=
+      (T.cfg.baseChange k).copy (by simp [f'])
+    let rU : cf.Z ⟶ T.cf.Z := pullback.fst T.cf.g (pullback.fst h k)
+    let rB : cg.Z ⟶ T.cg.Z := pullback.fst T.cg.g k
+    let rA : cfg.Z ⟶ T.cfg.Z := pullback.fst T.cfg.g k
+    have hU : IsPullback rU cf.g T.cf.g (pullback.fst h k) :=
+      (T.cf.isPullback_g_ofIsPullback hf').flip
+    have hUZ := hU.paste_vert (IsPullback.of_hasPullback h k)
+    have hqg : T.q ≫ T.cfg.g = T.cf.g ≫ h := by
+      rw [← T.p_g, ← Category.assoc, ← T.isPullback.w, Category.assoc, ← T.cg.comm]
+    let p' : cfg.Z ⟶ cg.Z := pullback.lift (rA ≫ T.p) cfg.g
+      (by simp only [Category.assoc, T.p_g]; exact pullback.condition)
+    let q' : cf.Z ⟶ cfg.Z := pullback.lift (rU ≫ T.q) (cf.g ≫ pullback.snd h k)
+      (by rw [Category.assoc, hqg]; exact hUZ.w)
+    have hqA : q' ≫ rA = rU ≫ T.q := pullback.lift_fst _ _ _
+    have hqZ : q' ≫ cfg.g = cf.g ≫ pullback.snd h k := pullback.lift_snd _ _ _
+    have hpB : p' ≫ rB = rA ≫ T.p := pullback.lift_fst _ _ _
+    have hpZ : p' ≫ cg.g = cfg.g := pullback.lift_snd _ _ _
+    have hqPB : IsPullback rU q' T.q rA := by
+      apply IsPullback.of_bot (v₂₁ := cfg.g) (v₂₂ := T.cfg.g)
+      · rw [hqZ, hqg]; exact hUZ
+      · exact hqA.symm
+      · exact IsPullback.of_hasPullback T.cfg.g k
+    have hqo : IsOpenImmersion q' := MorphismProperty.of_isPullback hqPB inferInstance
+    have hsq : IsPullback cf.g q' cg.i p' := by
+      apply IsPullback.of_right (h₁₂ := pullback.fst h k) (h₂₂ := rB)
+      · rw [hpB, ← hU.w]
+        exact hqPB.paste_horiz T.isPullback
+      · apply pullback.hom_ext
+        · change cf.g ≫ cg.i ≫ rB = q' ≫ p' ≫ rB
+          calc
+            cf.g ≫ cg.i ≫ rB = (cf.g ≫ pullback.fst h k) ≫ T.cg.i := by
+              rw [T.cg.baseChange_i_fst, Category.assoc]
+            _ = (rU ≫ T.cf.g) ≫ T.cg.i := by rw [hU.w]
+            _ = (rU ≫ T.q) ≫ T.p := by rw [Category.assoc, T.isPullback.w,
+                Category.assoc]
+            _ = (q' ≫ rA) ≫ T.p := by rw [hqA]
+            _ = q' ≫ p' ≫ rB := by rw [Category.assoc, hpB]
+        · change cf.g ≫ cg.i ≫ cg.g = q' ≫ p' ≫ cg.g
+          rw [← cg.comm, hpZ, hqZ]
+      · exact T.cg.isPullback_i_ofIsPullback (IsPullback.of_hasPullback h k)
+    let T' : Compactification.Triangle f' (pullback.snd h k) :=
+      { cf := cf, cg := cg, cfg := cfg, q := q', p := p',
+        i_q := by
+          apply pullback.hom_ext
+          · change cf.i ≫ q' ≫ rA = cfg.i ≫ rA
+            rw [hqA, Compactification.ofIsPullback_i_fst_assoc, T.i_q]
+            exact (T.cfg.baseChange_i_fst k).symm
+          · change cf.i ≫ q' ≫ cfg.g = cfg.i ≫ cfg.g
+            rw [hqZ, ← Category.assoc, ← cf.comm, ← cfg.comm],
+        p_g := hpZ, isPullback := hsq }
+    let vr : T.cfg.Refinement c := ⟨v, hvi, hvg⟩
+    let v' := (vr.baseChange k).hom
+    refine ⟨T', rA, rB, rU, v', ?_, ?_, hUZ, ?_, ?_, ?_, hqA, hpB,
+      hU.w.symm, ?_, ?_, ?_, ?_, inferInstance, ?_, ?_, ?_⟩
+    · exact IsPullback.of_hasPullback T.cfg.g k
+    · exact IsPullback.of_hasPullback T.cg.g k
+    · exact T.cfg.baseChange_i_fst k
+    · exact T.cg.baseChange_i_fst k
+    · exact T.cf.ofIsPullback_i_fst hf'
+    · exact cfg.quasiCompact_openImmersion inferInstance
+    · exact cg.quasiCompact_openImmersion inferInstance
+    · exact cf.quasiCompact_openImmersion inferInstance
+    · have : QuasiCompact T.q :=
+        MorphismProperty.of_isPullback T.isPullback
+          (T.cg.quasiCompact_openImmersion inferInstance)
+      exact MorphismProperty.of_isPullback hqPB inferInstance
+    · exact (vr.baseChange k).i_hom
+    · exact (vr.baseChange k).hom_g
+    · change (vr.baseChange k).hom ≫ pullback.fst c.g k = rA ≫ v
+      simp [Compactification.Refinement.baseChange, rA, vr]
+  · intro T
+    let R := (T 0).inf (T 1)
+    refine ⟨R, ?_⟩
+    intro j
+    have φ : R.Hom (T j) := by
+      by_cases hj : j = 0
+      · subst j; exact (T 0).infFst (T 1)
+      · have hj : j = 1 := by omega
+        subst j; exact (T 0).infSnd (T 1)
+    exact ⟨φ.rfg.hom, φ.rg.hom, φ.rf.hom, inferInstance, inferInstance,
+      inferInstance, φ.rfg.i_hom, φ.rg.i_hom, φ.rf.i_hom, φ.q_comm.symm,
+      φ.p_comm.symm, φ.rf.hom_g, φ.rg.hom_g⟩
 
 end AlgebraicGeometry

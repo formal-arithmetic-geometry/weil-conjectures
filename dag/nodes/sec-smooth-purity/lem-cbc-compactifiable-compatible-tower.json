@@ -25,37 +25,41 @@
  ],
  "proof": [
   {
-   "text": "Form $P=W\\times_Z\\overline Y$ and $r=(a_0,if):X\\to P$. The equality $ta_0=hf=qif$ gives this map. Both projections of $P$ are proper by base change; in particular they are separated. Since $\\operatorname{pr}_W r=a_0$ is a quasi-compact open immersion (hence an immersion, using the identity closed immersion in its factorization), cancellation shows that $r$ is a quasi-compact immersion.",
+   "text": "Set e = c.ofComp d. This existing construction closes the graph c.ofCompLift d in the fibre product of c.Z and d.Z over Z, using quasi-compact immersion cancellation and the immersion compactification construction. Set v to its closed image inclusion followed by the projection to c.Z. The properness instances and the toImage/image inclusion equation give IsProper v and e.i followed by v = c.i; the fibre-product projection identity gives v followed by c.g = e.g followed by d.g.",
    "uses": [
     "def-pc-fibre-product",
     "lem-pc-proper-base-change",
-    "lem-cbc-qc-immersion-cancellation"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tag 0F7J, label lemma-shriek-composition; first paragraph: choose the compactification over the compactification of Y; supplied-compactification graph construction as in WeilConjectures/Compactification/Comp.lean and Triangle.lean"
-   }
-  },
-  {
-   "text": "Apply the immersion-compactification construction to $r$ over $\\overline Y$: put $\\overline X=\\operatorname{SIm}(r)$, write $k:\\overline X\\hookrightarrow P$ for its closed inclusion, and $a:X\\hookrightarrow\\overline X$ for the image factor, so $ka=r$. This gives a compactification of $if$, with $p=\\operatorname{pr}_{\\overline Y}k$ proper and $a$ a quasi-compact open immersion. Put $v=\\operatorname{pr}_W k$. A closed immersion followed by a proper map is proper, so $v$ is proper. Projection identities give $va=a_0$, $pa=if$, and $tv=qp$. Composition of proper maps makes $qp$ proper, so $(a,qp)$ compactifies $hf$.",
-   "uses": [
+    "lem-cbc-qc-immersion-cancellation",
     "def-nagata-immersion-compactification",
-    "lemma-nagata-immersion-into-proper",
     "lem-weil-pbc-closed-immersion-proper",
-    "lem-weil-pbc-proper-composition",
-    "def-pc-fibre-product"
+    "lem-weil-pbc-proper-composition"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tag 0F7J, label lemma-shriek-composition; first paragraph and its top ambient compactification; supplied-compactification graph construction as in WeilConjectures/Compactification/Comp.lean and Triangle.lean"
+    "place": "Tag 0F7J, label lemma-shriek-composition; geometric generalization with supplied compactifications over arbitrary bases, as in source Lean WeilConjectures.Compactification.Comp and Triangle"
    }
   },
   {
-   "text": "Put $U=\\overline X\\times_{\\overline Y}Y$. The projection $b$ is a quasi-compact open immersion by base change of $i$, and $p_Y$ is proper by base change of $p$. The pair $(a,f)$ gives $c_X:X\\to U$. To check that $c_X$ is the base change of $a$ along $b$, let $x:T\\to X$ and $u:T\\to U$ satisfy $ax=bu$. Write $y=p_Yu$. Then $iy=pbu=pax=ifx$. Since an open immersion identifies its domain with an open subscheme, $i$ is a monomorphism, so $y=fx$. The two projections of $u$ are therefore $ax,fx$, and fibre-product uniqueness gives $u=c_Xx$. Conversely $bc_Xx=ax$, so this constructs the inverse to the projection $U\\times_{\\overline X}X\\to X$. Thus $c_X$ is a base change of the quasi-compact open immersion $a$, and the cited openness and quasi-compactness base-change lemmas give both properties directly. The projection equations are $bc_X=a$, $p_Yc_X=f$, and $pb=ip_Y$. This proves the required restriction compactification and cartesian square.",
+   "text": "Use e.restrict, with its literal fibre-product ambient scheme. The existing restrict_i_fst, restrict.comm and isPullback_restrict give the restriction equations and cartesian square. The compactification quasiCompact_openImmersion theorem gives quasi-compactness of d.i, e.i and e.restrict.i. Base change gives openness and quasi-compactness of the projection, and properness of the restriction map; proper composition gives IsProper (e.g followed by d.g).",
    "uses": [
     "def-pc-fibre-product",
+    "lem-weil-pbc-open-immersion-base-change",
+    "lem-pc-quasi-compact-base-change",
+    "lem-pc-proper-base-change",
+    "lem-weil-pbc-proper-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7J, label lemma-shriek-composition; geometric generalization with supplied compactifications over arbitrary bases, as in source Lean WeilConjectures.Compactification.Comp and Triangle"
+   }
+  },
+  {
+   "text": "For k:Zprime to Z, define fprime between the literal base changes by the pullback lift of the projection followed by f and the projection to Zprime. Pullback cancellation proves its square cartesian. Separatedness, local finite type and quasi-compactness follow by base change. Let cf be T.cf.ofIsPullback of this square, cg = T.cg.baseChange k, and cfg = T.cfg.baseChange k transported along fprime followed by the base-changed h = the projection to Zprime. The ambient projections rU, rB and rA are the literal fibre-product projections. Pasting proves that rU also exhibits base change of T.cf.g followed by h. Define pprime and qprime by their two projections. Pullback cancellation makes qprime a base change of T.q, hence open; pasting and cancellation with the base-change square of T.cg.i give the cartesian square of the new triangle. Verify its open-map and proper-map equations by pullback hom_ext. Quasi-compactness of its open maps follows from quasiCompact_openImmersion, while quasi-compactness of qprime follows by two applications of base change to T.cg.i. Package v as a refinement of T.cfg over c, and use Refinement.baseChange for vprime; its i_hom and hom_g and pullback projection equation give all comparison equations. No scheme-theoretic-image base-change assertion is used.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-pod-separated-finite-type-base-change",
     "lem-weil-pbc-open-immersion-base-change",
     "lem-pc-quasi-compact-base-change",
     "lem-pc-proper-base-change"
@@ -63,63 +67,25 @@
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tag 0F7J, label lemma-shriek-composition; first paragraph: U is the inverse image of Y; supplied-compactification graph construction as in WeilConjectures/Compactification/Comp.lean and Triangle.lean"
+    "place": "Tag 0F7J, label lemma-shriek-composition; geometric generalization with supplied compactifications over arbitrary bases, as in source Lean WeilConjectures.Compactification.Comp and Triangle"
    }
   },
   {
-   "text": "For any $Z'\\to Z$, pull back every displayed scheme and arrow over $Z$. The base-changed maps $f'$ and $h'$ remain separated and of finite type by the cited stability node, applied along $Y\\times_Z Z'\\to Y$ and $Z'\\to Z$ respectively. Properness, openness and quasi-compactness of the designated maps survive by their respective base-change lemmas. The universal property of fibre products identifies $U\\times_Z Z'$ with $(\\overline X\\times_Z Z')\\times_{\\overline Y\\times_Z Z'}(Y\\times_Z Z')$. Projection identities and $ka=r$ pull back to the same identities, so the pulled-back data form a tower with the pulled-back supplied compactifications. This asserts stability of the data, not that forming the scheme-theoretic image commutes with arbitrary base change.",
+   "text": "Set R = Triangle.inf (T 0) (T 1). This existing construction takes a common refinement of the compactifications of h and closes X in the product of the two pulled-back ambient schemes, then restricts over Y. Triangle.infFst and Triangle.infSnd give triangle morphisms to T 0 and T 1. For each index of Fin 2 select the respective morphism by equality case analysis; use its three Refinement.isProper instances and the fields i_hom, q_comm, p_comm and hom_g to obtain exactly the seven required equations.",
    "uses": [
-    "def-pc-fibre-product",
-    "lem-pc-proper-base-change",
-    "lem-weil-pbc-open-immersion-base-change",
-    "lem-pc-quasi-compact-base-change",
-    "lem-pod-separated-finite-type-base-change"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tag 0F7J, label lemma-shriek-composition; base-change stability of the displayed geometric diagram; supplied-compactification graph construction as in WeilConjectures/Compactification/Comp.lean and Triangle.lean"
-   }
-  },
-  {
-   "text": "Now take two towers, writing their ambient schemes as $A_j=\\overline X_j$ and $B_j=\\overline Y_j$, with $p_j:A_j\\to B_j$ and $q_j:B_j\\to Z$. Apply cofilteredness for the compactifiable separated finite-type map $h:Y\\to Z$ to its two supplied objects $(i_j,q_j)$. It gives a compactification $j:Y\\hookrightarrow D$, $q:D\\to Z$ and proper maps $u_j:D\\to B_j$ with $u_jj=i_j$ and $q_ju_j=q$. This invocation uses no qcqs hypothesis on $Z$.",
-   "uses": [
-    "lem-cbc-compactifiable-cofiltered"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tag 0F7J, label lemma-shriek-composition; second paragraph: choose a compactification of Y dominating both choices; supplied-compactification graph construction as in WeilConjectures/Compactification/Comp.lean and Triangle.lean"
-   }
-  },
-  {
-   "text": "Form $P_j=A_j\\times_{B_j}D$ and $P=P_1\\times_D P_2$. Each $P_j\\to D$ is proper by base change of $p_j$, so $P\\to D$ is proper by base change and composition, and $P\\to Z$ is proper. The projections $P\\to A_j$ are $Z$-maps into schemes separated over $Z$ (since $q_jp_j$ is proper), hence are proper. Define $r:X\\to P$ using the pairs $(a_j,jf)$: the equations $p_ja_j=i_jf=u_jjf$ and equality of their $D$-components give the lift. Its composite with $P\\to A_1$ is $a_1$, a quasi-compact immersion; cancellation therefore makes $r$ a quasi-compact immersion. The immersion construction over $D$ gives $a:X\\hookrightarrow A=\\operatorname{SIm}(r)$ and a proper $p:A\\to D$. The restricted projections $v_j:A\\to A_j$ are proper because the image inclusion is closed and $P\\to A_j$ is proper. By the projection identities, $v_ja=a_j$, $p_jv_j=u_jp$ and $q_j u_j=q$.",
-   "uses": [
+    "lem-cbc-compactifiable-cofiltered",
     "def-pc-fibre-product",
     "lem-pc-proper-base-change",
     "lem-weil-pbc-proper-composition",
     "lemma-nagata-proper-to-separated-target",
     "lem-cbc-qc-immersion-cancellation",
     "def-nagata-immersion-compactification",
-    "lemma-nagata-immersion-into-proper",
     "lem-weil-pbc-closed-immersion-proper"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tag 0F7J, label lemma-shriek-composition; second paragraph: choose the common ambient compactification over D; supplied-compactification graph construction as in WeilConjectures/Compactification/Comp.lean and Triangle.lean"
-   }
-  },
-  {
-   "text": "Use step 3 for $(a,p,j)$ to obtain the intermediate scheme $U=A\\times_DY$, its quasi-compact open maps $c:X\\to U$, $b:U\\to A$, and the proper map $p_Y:U\\to Y$. For each $j$, define $w_j:U\\to U_j=A_j\\times_{B_j}Y$ by the pair $(v_jb,p_Y)$. The needed equation is $p_jv_jb=u_jpb=u_jjp_Y=i_jp_Y$. Thus $b_jw_j=v_jb$ and $p_{Y,j}w_j=p_Y$. Since $U\\to Y$ is proper and $U_j\\to Y$ is proper, hence separated, $w_j$ is proper. On $X$, the two components of $w_jc$ are $v_ja=a_j$ and $f$, which are exactly those of $c_j$; fibre-product uniqueness gives $w_jc=c_j$. Together with the equations in step 6 these are every required compatibility, restricting to the identity on $X,Y$. Relabel a refining tower and a target tower by 1 and 2 to obtain precisely the seven equations in the statement.",
-   "uses": [
-    "def-pc-fibre-product",
-    "lemma-nagata-proper-to-separated-target"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tag 0F7J, label lemma-shriek-composition; second paragraph: compatible maps of the two geometric diagrams; supplied-compactification graph construction as in WeilConjectures/Compactification/Comp.lean and Triangle.lean"
+    "place": "Tag 0F7J, label lemma-shriek-composition; geometric generalization with supplied compactifications over arbitrary bases, as in source Lean WeilConjectures.Compactification.Comp and Triangle"
    }
   }
  ],
@@ -128,19 +94,18 @@
   "lem-pc-proper-base-change",
   "lem-cbc-qc-immersion-cancellation",
   "def-nagata-immersion-compactification",
-  "lemma-nagata-immersion-into-proper",
   "lem-weil-pbc-closed-immersion-proper",
   "lem-weil-pbc-proper-composition",
   "lem-weil-pbc-open-immersion-base-change",
   "lem-pc-quasi-compact-base-change",
+  "lem-pod-separated-finite-type-base-change",
   "lem-cbc-compactifiable-cofiltered",
-  "lemma-nagata-proper-to-separated-target",
-  "lem-pod-separated-finite-type-base-change"
+  "lemma-nagata-proper-to-separated-target"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/more-etale.tex",
-  "place": "Tag 0F7J, label lemma-shriek-composition, geometric diagram and common domination; supplied-compactification generalization using Comp.ofComp and Triangle.inf"
+  "place": "Tag 0F7J, label lemma-shriek-composition; proof implemented by E2 using existing Compactification.ofComp, Compactification.restrict, Triangle.inf and explicit arbitrary-base-change pullback pasting"
  },
  "mathlib_searches": [
   {
@@ -293,7 +258,6 @@
   "def-pc-fibre-product",
   "lem-pc-proper-base-change",
   "def-nagata-immersion-compactification",
-  "lemma-nagata-immersion-into-proper",
   "lem-weil-pbc-closed-immersion-proper",
   "lem-weil-pbc-proper-composition",
   "lem-weil-pbc-open-immersion-base-change",
@@ -337,5 +301,15 @@
   "by": "NL",
   "date": "2026-10-15",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261018T062732-L-642444",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
