@@ -8,7 +8,7 @@ public import Sheaf.CategoryTheory.RingedSiteModules
 public import Mathlib.Algebra.Category.Ring.Limits
 public import Mathlib.CategoryTheory.Preadditive.Injective.Basic
 import Mathlib.Algebra.Category.ModuleCat.Presheaf.Generator
-import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
+import Mathlib.Algebra.Category.Grp.FilteredColimits
 
 /-!
 # Injective module sheaves restrict surjectively along site monomorphisms
@@ -70,6 +70,29 @@ theorem injective_ringed_site_mono_restriction
       ((sheafCompose J.toGrothendieck (forget₂ CommRingCat.{u} RingCat.{u})).obj O)) [Injective I]
     {W T : C} (m : W ⟶ T) [Mono m] :
     Function.Surjective (I.val.map m.op).hom := by
-  sorry
+  let R := (sheafCompose J.toGrothendieck
+    (forget₂ CommRingCat.{u} RingCat.{u})).obj O
+  let adj := PresheafOfModules.sheafificationAdjunction.{u} (𝟙 R.obj)
+  let M := (SheafOfModules.forget R ⋙
+    PresheafOfModules.restrictScalars (𝟙 R.obj)).obj I
+  have : Injective M := Injective.injective_of_adjoint adj I
+  let a := (PresheafOfModules.free R.obj).map (yoneda.map m)
+  have : Mono a := PresheafOfModules.mono_of_injective (fun {V} ↦ by
+    change Function.Injective (Finsupp.mapDomain (fun f : V.unop ⟶ W ↦ f ≫ m))
+    exact Finsupp.mapDomain_injective (fun f g h ↦ (cancel_mono m).mp h))
+  intro s
+  let b : (PresheafOfModules.free R.obj).obj (yoneda.obj W) ⟶ M :=
+    PresheafOfModules.freeYonedaEquiv.symm s
+  obtain ⟨g, hg⟩ := Injective.factors b a
+  refine ⟨PresheafOfModules.freeYonedaEquiv g, ?_⟩
+  have h := congrArg PresheafOfModules.freeYonedaEquiv hg
+  rw [Equiv.apply_symm_apply] at h
+  change M.map m.op (PresheafOfModules.freeYonedaEquiv g) = s
+  rw [← h]
+  change M.map m.op (g.app (op T) (ModuleCat.freeMk (𝟙 T))) =
+    g.app (op W) (a.app (op W) (ModuleCat.freeMk (𝟙 W)))
+  rw [← PresheafOfModules.naturality_apply g m.op]
+  simp [a, PresheafOfModules.free, PresheafOfModules.freeObj,
+    ModuleCat.free_map_apply, ModuleCat.freeDesc_apply]
 
 end CategoryTheory

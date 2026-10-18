@@ -15,58 +15,29 @@
  ],
  "proof": [
   {
-   "text": "For each object $U$, put $P_U=\\mathcal O[h_U]$, the presheaf $V\\mapsto\\bigoplus_{\\varphi:V\\to U}\\mathcal O(V)$ of [lem-weil-pbc-free-yoneda-presheaf-module], and put $L_U=P_U^\\#$ using [def-weil-presheaf-modules-sheafification]. The adjunction in the latter statement and the evaluation bijection in the former give $\\operatorname{Hom}_{\\operatorname{Mod}(\\mathcal O)}(L_U,F)\\cong\\operatorname{Hom}_{\\operatorname{PMod}(\\mathcal O)}(P_U,F)\\cong F(U)$ for every module sheaf $F$. Explicitly, a sheaf morphism $b:L_U\\to F$ corresponds to the value at $e_{\\mathrm{id}_U}$ of the presheaf map $\\widetilde b:P_U\\to F$ obtained by precomposing with the sheafification unit. Conversely, $s\\in F(U)$ determines the presheaf map $e_\\varphi\\mapsto F(\\varphi)(s)$ and its unique extension to $L_U$. The common-universe hypothesis ensures these direct sums and sheafifications belong to the category in which $I$ is injective.",
+   "text": "Let R be the ring sheaf underlying O. Module sheafification is left adjoint to the inclusion (expressed in Mathlib as forget followed by restriction of scalars along the identity). Since module sheafification preserves finite limits, it preserves monomorphisms. Transfer injectivity of I along this adjunction to the underlying presheaf M of R-modules, using Injective.injective_of_adjoint. This packages the sheafification and extension steps of the source argument without any assumption on the underlying abelian sheaf.",
    "uses": [
-    "lem-weil-pbc-free-yoneda-presheaf-module",
-    "def-weil-presheaf-modules-sheafification"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 093X, lemma-restriction-along-monomorphism-surjective, first paragraph; sites-modules.tex Tag 03DI, equation-map-lower-shriek-OU-into-module; Remark 03EJ and module sheafification Tag 03CY"
-   }
-  },
-  {
-   "text": "Define $a:P_W\\to P_T$ at $V$ by the $\\mathcal O(V)$-linear map $a_V(e_\\varphi)=e_{m\\circ\\varphi}$ for $\\varphi:V\\to W$. This is a morphism of module presheaves: for $g:V\\prime\\to V$ and $r\\in\\mathcal O(V)$, restricting $a_V(r e_\\varphi)$ gives $\\mathcal O(g)(r)e_{m\\circ\\varphi\\circ g}$, which is also $a_{V\\prime}$ applied to the restriction of $r e_\\varphi$. Finite sums of these generators exhaust $P_W(V)$, so the equality proves naturality on every section.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 093X, lemma-restriction-along-monomorphism-surjective, second paragraph: map between the displayed direct-sum presheaves"
-   }
-  },
-  {
-   "text": "Since $m$ is monic, $\\varphi\\mapsto m\\circ\\varphi$ is injective on $\\operatorname{Hom}(V,W)$ for every $V$. For a finitely supported tuple $x=(x_\\varphi)$, the coefficient of $a_V(x)$ at $m\\circ\\varphi$ is exactly $x_\\varphi$, because no other index has this image. Thus $a_V(x)=0$ forces every $x_\\varphi=0$, proving $a_V$ injective. Consequently $a$ is monic as a presheaf morphism: if $a\\circ b=a\\circ c$, evaluate at each $V$, cancel the injective $a_V$ on each section, and obtain $b=c$. This uses no claim that the componentwise coefficient-recovery maps are natural.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 093X, lemma-restriction-along-monomorphism-surjective, last two sentences: the monomorphism gives injectivity on direct sums"
-   }
-  },
-  {
-   "text": "Apply [lem-weil-pbc-ringed-site-module-sheafification-exact] to the given ringed site. Sheafification preserves finite limits, and hence monomorphisms, so the monomorphism $a$ from Step 3 gives a monomorphism $a^\\#:L_W\\hookrightarrow L_T$ of sheaves of $\\mathcal O$-modules. This is sheafification for the actual sheaf of rings $\\mathcal O$, rather than sheafification for modules over a fixed constant ring.",
-   "uses": [
-    "lem-weil-pbc-ringed-site-module-sheafification-exact"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 093X, lemma-restriction-along-monomorphism-surjective, final sentence; sites-modules.tex Tag 03EI, lemma-sheafification-exact"
-   }
-  },
-  {
-   "text": "The category $\\operatorname{Mod}(\\mathcal O)$ is abelian for the small site and common universe by [def-weil-sheaf-of-modules-category]. By the definition of injectivity in [def-sp-injective-resolutions], precomposition with $a^\\#$ is surjective from $\\operatorname{Hom}(L_T,I)$ to $\\operatorname{Hom}(L_W,I)$. To identify this map, take $t\\in I(T)$ and its morphism $b_t:L_T\\to I$ from Step 1. The corresponding presheaf map sends $e_\\psi$ to $I(\\psi)(t)$ by [lem-weil-pbc-free-yoneda-presheaf-module]. Naturality of the sheafification unit shows that the presheaf map associated to $b_t\\circ a^\\#$ is $\\widetilde b_t\\circ a$. Evaluating it at $e_{\\mathrm{id}_W}$ gives $\\widetilde b_{t,W}(e_m)=I(m)(t)$. Therefore the surjective Hom map is precisely $I(T)\\to I(W)$. For each $s\\in I(W)$, extend its map $L_W\\to I$ across $a^\\#$ and evaluate the extension at $e_{\\mathrm{id}_T}$ to obtain $t$ with $I(m)(t)=s$.",
-   "uses": [
+    "def-weil-presheaf-modules-sheafification",
+    "lem-weil-pbc-ringed-site-module-sheafification-exact",
     "def-weil-sheaf-of-modules-category",
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the free R-module presheaf functor to yoneda.map m to obtain a : P_W → P_T. At V this is Finsupp.mapDomain along f ↦ f ≫ m. Monicity of m makes this indexing function injective by cancellation; Finsupp.mapDomain_injective therefore gives componentwise injectivity. PresheafOfModules.mono_of_injective makes a a monomorphism. The functor construction already supplies semilinear naturality.",
+   "uses": [
+    "lem-weil-pbc-free-yoneda-presheaf-module"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For s in I(W), freeYonedaEquiv.symm gives b : P_W → M. Injectivity of M extends b across a, yielding g : P_T → M with a ≫ g = b. Take t = freeYonedaEquiv g. Applying freeYonedaEquiv to the factorization gives freeYonedaEquiv (a ≫ g) = s. Naturality of g along m identifies the left side with M(m)(t): the free map a sends the identity generator over W to e_m, and restriction of the identity generator over T is also e_m. Thus I(m)(t) = s, proving surjectivity.",
+   "uses": [
     "def-sp-injective-resolutions",
     "lem-weil-pbc-free-yoneda-presheaf-module"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 093X, lemma-restriction-along-monomorphism-surjective, first paragraph: injectivity and the restriction map; sites-modules.tex Tag 03DA, lemma-abelian; homology.tex characterization of injectives"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
@@ -79,7 +50,7 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 093X, lemma-restriction-along-monomorphism-surjective, entire proof (lines 1970-2009), with the free-presheaf evaluation formula of sites-modules.tex Remark 03EJ and the equation after Tag 03DI, and exact module sheafification Tag 03EI."
+  "place": "Tag 093X, lemma-restriction-along-monomorphism-surjective, lines 1970-2009; formalized by Q7 using the equivalent injectivity transfer through the exact module-sheafification adjunction. The free-presheaf evaluation is sites-modules.tex Tag 03DI and Remark 03EJ; exact sheafification is Tag 03EI."
  },
  "mathlib_searches": [
   {
@@ -218,5 +189,15 @@
   "by": "Q19",
   "date": "2026-10-17",
   "branch": "newtargets-dag"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q7",
+  "result": "pass",
+  "landing": "20261018T144417-L-3503827",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
