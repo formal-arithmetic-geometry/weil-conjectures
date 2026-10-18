@@ -5957,6 +5957,7 @@ public import WeilConjectures.CategoryTheory.Sites.CohomologyRightDerivedSection
 public import WeilConjectures.CategoryTheory.Sites.CoinduceZMod
 public import WeilConjectures.CategoryTheory.Sites.ConstantForget
 public import WeilConjectures.CategoryTheory.Sites.ConstantSheafMonoidal
+public import WeilConjectures.CategoryTheory.Sites.ConstantTowerStandardization
 public import WeilConjectures.CategoryTheory.Sites.ContractedProductPresentation
 public import WeilConjectures.CategoryTheory.Sites.DisjointGluing
 public import WeilConjectures.CategoryTheory.Sites.EquivariantEvaluation
@@ -6602,6 +6603,7 @@ public import WeilConjectures.GroupTheory.GroupAlgebraFunctorialInjectiveEmbeddi
 public import WeilConjectures.GroupTheory.TateModule
 public import WeilConjectures.GroupTheory.TorsionCharacter
 public import WeilConjectures.GroupTheory.WeilGroup
+public import WeilConjectures.LinearAlgebra.Basis.PowQuotientTower
 public import WeilConjectures.LinearAlgebra.Basis.TowerLift
 public import WeilConjectures.LinearAlgebra.ExteriorLocalizationKernelTorsion
 public import WeilConjectures.LinearAlgebra.ExteriorPower.ChartTransition
@@ -9186,6 +9188,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Comparison.Defs
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.Flat
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.FullyFaithful
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.LocallyConstantWContractible
+public import WeilConjectures.SixFunctors.ProEtale.Comparison.LocallyFreeTowerWContractible
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStar
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStarAcyclic
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStarCoherence
