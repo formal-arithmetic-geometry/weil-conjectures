@@ -24,23 +24,23 @@
  ],
  "proof": [
   {
-   "text": "Use the finite commutative coefficient ring $\\Lambda$ of [sbc-def-coefficient-conventions]: it is annihilated by a positive integer $N$ invertible in the base field $k$, and hence on every scheme over $k$. Put $K=F[0]$ in the ordinary etale derived category. Its only nonzero cohomology sheaf is $\\mathcal H^0(K)=F$, so $K\\in D^b_c(X,\\Lambda)$ by [def-weil-pbc-constructible-complexes]. Apply [thm-dg-finite-type-constructibility] to $u$ and $K$. Its hypotheses are precisely finite-type schemes over the field $k$ and the stated allowable finite coefficients; it imposes no separatedness hypothesis. It gives $Ru_*F\\in D^b_c(Y,\\Lambda)$, proving the first assertion.",
+   "text": "Put F in degree zero. The single-functor homology is F in degree zero and zero elsewhere; transfer constructibility along the degree-zero homology isomorphism using [lem-weil-pbc-constructible-etale-module-sheaf-comparison]. This gives [def-weil-pbc-constructible-complexes] with bounds [0,0]. Apply [thm-dg-finite-type-constructibility] with the given structure morphisms and the equality supplied by f.IsOver. No separatedness is used.",
    "uses": [
     "sbc-def-coefficient-conventions",
     "def-weil-pbc-constructible-complexes",
+    "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
     "thm-dg-finite-type-constructibility"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/sbc-thm-finiteness-finite-type.md",
-    "place": "Proof, opening sentence: the ordinary direct-image assertion, including the nonseparated case"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/sbc-thm-finiteness-finite-type.proof.md",
+    "place": "Complete proof, ordinary image, Nagata factorization, extension by zero, proper image, and original-fibre amplitude"
    }
   },
   {
-   "text": "For the remaining assertions suppose $u$ is separated. A field is Noetherian, since its only ideals are $0$ and the whole field. By [lem-weil-pbc-finite-type-over-noetherian], $X$ and $Y$ are Noetherian; in particular $Y$ is quasi-compact, and [lem-weil-pbc-locally-noetherian-quasi-separated] makes it quasi-separated. Thus [thm-nagata-compactification] applies to the separated finite-type $u$. By [def-nagata-compactification] its compactification is $X\\xrightarrow{j}\\overline X\\xrightarrow{r}Y$, where $j$ is a quasi-compact open immersion, $r$ is proper, and $rj=u$. The properness definition [def-weil-proper-morphism] includes finite type. To check that $\\overline X$ is of finite type over $k$, use [def-weil-finite-type-morphism]: take a finite affine cover $\\operatorname{Spec}R_i$ of $Y$ with each $R_i$ finitely generated over $k$, then a finite affine cover $\\operatorname{Spec}B_{ia}$ of $r^{-1}(\\operatorname{Spec}R_i)$ with $B_{ia}$ finitely generated over $R_i$. The images of the finite generators of $R_i$ together with the generators of $B_{ia}$ generate $B_{ia}$ over $k$. These finitely many affines cover $\\overline X$, giving the required finite-type structure. The same Noetherian lemma makes $\\overline X$ Noetherian. For each of $X$, $Y$ and $\\overline X$, local Noetherianity gives an affine neighbourhood with Noetherian coordinate ring at every point, and quasi-compactness selects finitely many of these neighbourhoods. Thus these schemes satisfy exactly the finite-Noetherian-affine-cover convention in the compact-support definition and comparison statement used in step 4. No dimension bound on $\\overline X$ or on the fibres of $r$ has been imposed.",
+   "text": "Under separatedness take c = compactSupportAmplitudeCompactification k Y f, the existing Nagata compactification supplied by [lem-dg-compact-support-amplitude] and [thm-nagata-compactification]. By [def-nagata-compactification], c.i is open and c.g is proper. The latter is finite type by [def-weil-proper-morphism], hence its composite with the finite-type structure morphism of Y is finite type by [def-weil-finite-type-morphism]. Quasi-compactness of c.i follows from quasi-compactness of f and the compactification factorization. No additional Noetherian or comparison assumptions are needed for this candidate.",
    "uses": [
-    "lem-weil-pbc-finite-type-over-noetherian",
-    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "lem-dg-compact-support-amplitude",
     "thm-nagata-compactification",
     "def-nagata-compactification",
     "def-weil-proper-morphism",
@@ -48,67 +48,71 @@
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/sbc-thm-finiteness-finite-type.md",
-    "place": "Proof, second sentence: choose the Nagata compactification; explicit checks of its hypotheses"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/sbc-thm-finiteness-finite-type.proof.md",
+    "place": "Complete proof, ordinary image, Nagata factorization, extension by zero, proper image, and original-fibre amplitude"
    }
   },
   {
-   "text": "By [lem-fin-extension-by-zero], applied to the open immersion $j$ between the finite-type $k$-schemes just obtained, the sheaf $j_!F$ is constructible on $\\overline X_{\\mathrm{et}}$. As a complex in degree zero it is bounded constructible by [def-weil-pbc-constructible-complexes]. Apply [lem-fin-proper-bounded-constructible] to the proper map $r:\\overline X\\to Y$ and this complex, with the same finite coefficients. It follows that $Rr_*(j_!F[0])\\in D^b_c(Y,\\Lambda)$. This uses bounded constructibility for proper direct image without any specified fibre-dimension bound.",
+   "text": "Use [lem-weil-pbc-constructible-etale-module-sheaf-comparison] to convert hF to the source constructibility predicate. Apply [lem-fin-extension-by-zero] to c.i and its closed complement, and convert back. Its extension by zero placed in degree zero is bounded constructible as in step 1. Map the coefficient unit from the field along each structure morphism; the same N is positive and annihilates the same finite ring. Apply [lem-fin-proper-bounded-constructible] to c.g and this degree-zero extension.",
    "uses": [
+    "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
     "lem-fin-extension-by-zero",
     "def-weil-pbc-constructible-complexes",
+    "sbc-def-coefficient-conventions",
     "lem-fin-proper-bounded-constructible"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/sbc-thm-finiteness-finite-type.md",
-    "place": "Proof, middle sentences: extension by zero is constructible and proper direct image is bounded constructible"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/sbc-thm-finiteness-finite-type.proof.md",
+    "place": "Complete proof, ordinary image, Nagata factorization, extension by zero, proper image, and original-fibre amplitude"
    }
   },
   {
-   "text": "The chosen-compactification definition [def-amb-etale-compact-support] sends $F[0]$ to $Rr_*Dj_!(F[0])$. The normalization $Dj_!Q_X\\cong Q_{\\overline X}j_!$ in that definition gives $Dj_!(F[0])\\cong (j_!F)[0]$: degreewise extension by zero sends the sole possibly nonzero term $F$ in degree zero to $j_!F$ in degree zero, and sends every zero term and differential to zero. All inputs here are bounded below. The comparison statement [lem-amb-etale-compact-comparisons] applies to this compactifiable separated finite-type map of Noetherian schemes with finite commutative coefficients, and identifies the chosen candidate with the compactification-independent $Ru_!F$. Consequently $Ru_!F\\cong Rr_*(j_!F[0])$ is bounded constructible by step 3: an isomorphism induces isomorphisms on cohomology sheaves and hence preserves their vanishing and finite lisse stratifications. This supplies the compact-support assertion in the same ordinary etale category as the first assertion.",
+   "text": "By [def-amb-etale-compact-support], the very candidate in the conclusion is the exact derived open extension followed by proper derived pushforward. Functor.mapDerivedCategorySingleFunctor identifies its extension of F[0] with (c.i_! F)[0]. Map this isomorphism by the proper pushforward. Homology functors carry it to isomorphisms, which preserve both constructibility and vanishing; transfer the conclusion of step 3. The statement specifies c itself, so no compactification-independence comparison is invoked.",
    "uses": [
     "def-amb-etale-compact-support",
-    "lem-amb-etale-compact-comparisons"
+    "def-weil-pbc-constructible-complexes",
+    "lem-weil-pbc-constructible-etale-module-sheaf-comparison"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/sbc-thm-finiteness-finite-type.md",
-    "place": "Proof, formula Ru_! = Rr_* j_!: distinguish the chosen candidate from the comparison-independent functor"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/sbc-thm-finiteness-finite-type.proof.md",
+    "place": "Complete proof, ordinary image, Nagata factorization, extension by zero, proper image, and original-fibre amplitude"
    }
   },
   {
-   "text": "Now assume the geometric fibres of the original map $u$ have dimension at most $d$. The finite ring $\\Lambda$ has positive additive exponent $m$ dividing the annihilating integer $N$ from step 1. Indeed, let $m$ be the additive order of $1_\\Lambda$. Then $N\\cdot 1_\\Lambda=0$ implies $m\\mid N$. For every $a\\in\\Lambda$, $ma=(m1_\\Lambda)a=0$, whereas any integer annihilating the additive group annihilates $1_\\Lambda$ and is divisible by $m$. Hence $m$ is exactly the additive exponent (also $m=1$ for the zero ring). Thus $m$ is invertible on $Y$: writing $N=mt$, if $N$ is a unit then $tN^{-1}$ is an inverse for $m$. Apply [lem-dg-compact-support-amplitude] to $u$, $A=\\Lambda$ and the sheaf $F$. This statement allows every etale $A$-module sheaf, so it applies in particular to this finite constructible one, and gives $R^qu_!F=0$ for every $q>2d$. The dimensional hypothesis in this application is on $u$ itself. The proof therefore never requires a dimension bound for the compactification map $r$.",
+   "text": "The source HasInvertibleExponent class asks for some positive annihilator, not the minimal additive exponent. The supplied N, its positivity, and (N : Λ) = 0, together with the unit on the field, give that class on Spec(k). Pull it back to Y. Apply [lem-dg-compact-support-amplitude] directly with the original geometric-fibre bound, F, q and the strict inequality. This gives exactly the third conjunct for the same compactification c.",
    "uses": [
+    "sbc-def-coefficient-conventions",
     "lem-dg-compact-support-amplitude"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/sbc-thm-finiteness-finite-type.md",
-    "place": "Proof, final sentences: apply the sharp compact-support amplitude bound to the original fibres"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/sbc-thm-finiteness-finite-type.proof.md",
+    "place": "Complete proof, ordinary image, Nagata factorization, extension by zero, proper image, and original-fibre amplitude"
    }
   }
  ],
  "proof_deps": [
   "sbc-def-coefficient-conventions",
   "def-weil-pbc-constructible-complexes",
+  "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
   "thm-dg-finite-type-constructibility",
-  "lem-weil-pbc-finite-type-over-noetherian",
-  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-dg-compact-support-amplitude",
   "thm-nagata-compactification",
   "def-nagata-compactification",
   "def-weil-proper-morphism",
   "def-weil-finite-type-morphism",
   "lem-fin-extension-by-zero",
   "lem-fin-proper-bounded-constructible",
-  "def-amb-etale-compact-support",
-  "lem-amb-etale-compact-comparisons",
-  "lem-dg-compact-support-amplitude"
+  "def-amb-etale-compact-support"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/sbc-thm-finiteness-finite-type.md",
-  "place": "## Proof, read from the originating server copy during the second reading; expanded into five steps with explicit prerequisite checks"
+  "group": "D5",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/sbc-thm-finiteness-finite-type.proof.md",
+  "place": "Complete proof, ordinary image, Nagata factorization, extension by zero, proper image, and original-fibre amplitude",
+  "note": "Implemented in Lean using the existing dependency declarations; no new unproved statements. The proper candidate in the signature makes compactification comparison unnecessary, and the exponent class accepts the original annihilator N."
  },
  "mathlib_searches": [
   {
@@ -252,10 +256,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-weil-pbc-finite-type-over-noetherian",
-  "lem-weil-pbc-locally-noetherian-quasi-separated"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-16",
   "by": "L",
@@ -282,5 +283,15 @@
   "group": "Q34",
   "result": "pass",
   "note": "All three clauses match the source and recorded notions; signature is verbatim, per-file compilation passes, and no H1–H13 defects were found."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D5",
+  "result": "pass",
+  "landing": "20261018T150145-L-3799094",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

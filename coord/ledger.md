@@ -16555,3 +16555,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 15:01 L: merged deliver/A8/Sheaf.AlgebraicGeometry.OrdinaryFiniteP1Kummer (stage 3; reviewer PASS; first push; landing 20261018T150144-L-3798487 (proof); batch 20261018T150141; modules 1; new nodes 0)
 - 15:01 L: merged deliver/A8/Sheaf.CategoryTheory.Sites.UnboundedSectionsLocalization (stage 3; reviewer PASS; first push; landing 20261018T150144-L-3798734 (interface); batch 20261018T150141; modules 1; new nodes 0; change records: coord/changes/UnboundedSectionsLocalization.md)
 - 15:01 L: merged deliver/C9/Sheaf.Paper.ProperUnboundedWindowBounded (stage 3; reviewer PASS; first push; landing 20261018T150145-L-3798929 (proof); batch 20261018T150141; modules 1; new nodes 0)
+- 15:01 L: merged deliver/D5/Sheaf.AlgebraicGeometry.FiniteTypeSheafFiniteness (stage 3; reviewer PASS; first push; landing 20261018T150145-L-3799094 (proof); batch 20261018T150141; modules 1; new nodes 0)

@@ -22,14 +22,10 @@ public import Mathlib.Topology.KrullDimension
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 import Sheaf.AlgebraicGeometry.FiniteTypeDirectImageConstructibility
-import Mathlib.AlgebraicGeometry.Noetherian
-import WeilConjectures.Compactification.NagataCompactification
-import WeilConjectures.Compactification.Defs
 import WeilConjectures.ConstructibleSheaf.OpenClosed
 import Sheaf.AlgebraicGeometry.ProperBoundedConstructible
-import Sheaf.AlgebraicGeometry.EtaleCompactSupportComparisons
+import Sheaf.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
 
-import Sheaf.AlgebraicGeometry.CompactifiableOverField
 /-!
 # Finiteness of finite-type direct images of constructible etale sheaves
 
@@ -49,6 +45,42 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.Etale
+
+private theorem isBoundedConstructible_single
+    (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] (X : Scheme.{u})
+    (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
+    (hF : Scheme.IsConstructibleEtaleModuleSheaf F) :
+    DerivedCategory.isBoundedConstructible Λ X
+      ((_root_.DerivedCategory.singleFunctor _ 0).obj F) := by
+  have : Scheme.IsConstructibleSheaf F :=
+    (Scheme.isConstructibleEtaleModuleSheaf_iff F).1 hF
+  refine ⟨fun q ↦ (Scheme.isConstructibleEtaleModuleSheaf_iff _).2 ?_,
+    0, 0, le_rfl, fun q hq ↦ ?_⟩
+  · by_cases hq : q = 0
+    · subst q
+      have : Scheme.IsConstructibleSheaf ((𝟭 _).obj F) := ‹Scheme.IsConstructibleSheaf F›
+      exact Scheme.IsConstructibleSheaf.of_iso
+        ((_root_.DerivedCategory.singleFunctorCompHomologyFunctorIso _ 0).app F).symm
+    · exact Scheme.IsConstructibleSheaf.of_isZero (by
+        rcases lt_or_gt_of_ne hq with hq | hq
+        · exact _root_.DerivedCategory.isZero_of_isGE _ 0 q hq
+        · exact _root_.DerivedCategory.isZero_of_isLE _ 0 q hq)
+  · rcases hq with hq | hq
+    · exact _root_.DerivedCategory.isZero_of_isGE _ 0 q hq
+    · exact _root_.DerivedCategory.isZero_of_isLE _ 0 q hq
+
+private theorem isBoundedConstructible_of_iso
+    (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] (X : Scheme.{u})
+    {K L : DerivedCategoryModule Λ X} (e : K ≅ L)
+    (hL : DerivedCategory.isBoundedConstructible Λ X L) :
+    DerivedCategory.isBoundedConstructible Λ X K := by
+  obtain ⟨hc, a, b, hab, hv⟩ := hL
+  refine ⟨fun q ↦ (Scheme.isConstructibleEtaleModuleSheaf_iff _).2 ?_,
+    a, b, hab, fun q hq ↦ (hv q hq).of_iso
+      ((_root_.DerivedCategory.homologyFunctor _ q).mapIso e)⟩
+  have := (Scheme.isConstructibleEtaleModuleSheaf_iff _).1 (hc q)
+  exact Scheme.IsConstructibleSheaf.of_iso
+    ((_root_.DerivedCategory.homologyFunctor _ q).mapIso e).symm
 
 /-- Direct image of a finite constructible etale module sheaf along a finite-type map of
 finite-type schemes over a field is bounded constructible. For a separated map the compact
@@ -112,6 +144,39 @@ theorem finiteType_directImages_finiteConstructible
                 (compactSupportAmplitudeCompactification k Y f)).obj
                 ((_root_.DerivedCategory.singleFunctor
                   (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) 0).obj F))) := by
-  sorry
+  have hsingle := isBoundedConstructible_single Λ X F hF
+  refine ⟨?_, ?_⟩
+  · exact isBoundedConstructible_rightDerivedLowerStar_of_finiteType_over_field
+      k Λ N hΛ (X ↘ Spec (.of k)) (Y ↘ Spec (.of k)) f
+      (inferInstance : f.IsOver (Spec (.of k))).1 _ hsingle
+  · intro hf
+    let c := compactSupportAmplitudeCompactification k Y f
+    have : HasInvertibleExponent Λ (Spec (.of k)) :=
+      ⟨N, hΛ.1, hΛ.2.2.1, hΛ.2.2.2⟩
+    have : HasInvertibleExponent Λ Y := HasInvertibleExponent.of_hom
+      (Y ↘ Spec (.of k))
+    refine ⟨?_, fun d hd q hq ↦
+      isZero_homology_rightDerivedLowerShriek_of_geometricFiberDimensionLE
+        k Λ X Y f d hd F q hq⟩
+    have : QuasiCompact c.i := c.quasiCompact_openImmersion inferInstance
+    have : Scheme.IsConstructibleSheaf F :=
+      (Scheme.isConstructibleEtaleModuleSheaf_iff F).1 hF
+    have hjF : Scheme.IsConstructibleEtaleModuleSheaf
+        ((openImmersionLowerShriek (ModuleCat.{u + 1} Λ) c.i).obj F) :=
+      (Scheme.isConstructibleEtaleModuleSheaf_iff _).2
+        (Scheme.IsConstructibleSheaf.openImmersionLowerShriek c.i c.i.closedComplement
+          c.i.range_closedComplement F)
+    have hcoeff (T : Scheme.{u}) (aT : T ⟶ Spec (.of k)) :
+        IsSmoothBaseChangeCoefficients N Λ T :=
+      ⟨hΛ.1, hΛ.2.1, hΛ.2.2.1, by
+        simpa only [map_natCast] using hΛ.2.2.2.map aT.appTop.hom⟩
+    have hproper := isBoundedConstructible_rightDerivedLowerStar_of_proper Λ N
+      (c.g ≫ (Y ↘ Spec (.of k))) (Y ↘ Spec (.of k)) c.g rfl
+      (hcoeff _ (c.g ≫ (Y ↘ Spec (.of k)))) (hcoeff _ (Y ↘ Spec (.of k)))
+      _ (isBoundedConstructible_single Λ c.Z _ hjF)
+    let J := openImmersionLowerShriek (ModuleCat.{u + 1} Λ) c.i
+    exact isBoundedConstructible_of_iso Λ Y
+      ((rightDerivedLowerStar (ModuleCat.{u + 1} Λ) c.g).mapIso
+        ((J.mapDerivedCategorySingleFunctor 0).app F)) hproper
 
 end AlgebraicGeometry.Etale
