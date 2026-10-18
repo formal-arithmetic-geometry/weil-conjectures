@@ -53,6 +53,19 @@ theorem isIso_derivedLimit_of_levelwise {C : Type u} [Category.{v} C]
     (hφ : ∀ n : ℕ, f n ≫ φ n = φ (n + 1) ≫ g n) [∀ n : ℕ, IsIso (φ n)]
     (ψ : L ⟶ L') (hp : ψ ≫ p' = p ≫ Limits.Pi.map φ)
     (hδ : δ ≫ ψ⟦(1 : ℤ)⟧' = Limits.Pi.map φ ≫ δ') : IsIso ψ := by
-  sorry
+  have hprod : IsIso (Limits.Pi.map φ) := by
+    refine ⟨⟨Limits.Pi.map (fun n ↦ inv (φ n)), ?_, ?_⟩⟩
+    · simp [Limits.Pi.map_comp_map]
+    · simp [Limits.Pi.map_comp_map]
+  let α : Pretriangulated.Triangle.mk p (towerTransitionEndomorphism f) δ ⟶
+      Pretriangulated.Triangle.mk p' (towerTransitionEndomorphism g) δ' :=
+    { hom₁ := ψ
+      hom₂ := Limits.Pi.map φ
+      hom₃ := Limits.Pi.map φ
+      comm₁ := hp.symm
+      comm₂ := (towerTransitionEndomorphism_natural_backward f g φ
+        (fun n ↦ (hφ n).symm)).symm
+      comm₃ := hδ }
+  exact Pretriangulated.isIso₁_of_isIso₂₃ α hL hL' hprod hprod
 
 end CategoryTheory
