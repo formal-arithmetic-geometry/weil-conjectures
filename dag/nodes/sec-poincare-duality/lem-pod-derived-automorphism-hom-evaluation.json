@@ -15,9 +15,243 @@
   "lem-coef-derived-system-evaluation-calculus",
   "lem-coef-semilinear-derived-sections"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $F=g^{-1}$, using the covering-preserving equivalence $(U\\to X)\\mapsto(U\\to X\\xrightarrow gY)$. Its quasi-inverse is inverse image along $g^{-1}$. Thus $F$ is exact, preserves products and coproducts, and identifies constant finite coefficient sheaves, compatibly with every quotient map. Also\n$F\\widehat{\\mathcal O}_{E,Y}=F\\lim_n(A_{E,n})_Y\\cong\\lim_n(A_{E,n})_X=\\widehat{\\mathcal O}_{E,X}$.\nThis is the actual comparison induced by all the projections. Reindexing sheaves and their module actions gives mutually inverse module equivalences for these completed ring sheaves as well: the inverse coefficient map is obtained by the same construction for $g^{-1}$ and their composites are identities on every projection. The tensor and sheaf-Hom comparisons are those on local sections, $s\\otimes t\\mapsto Fs\\otimes Ft$ and $f\\mapsto Ff$.",
+   "uses": [
+    "lem-weil-proetale-isomorphism-inverse-image",
+    "lem-pur-isomorphism-inverse-image-tensor-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 0GMX (remark-pullback-internal-hom), enhanced by the stated resolution constructions"
+   }
+  },
+  {
+   "text": "These equivalences preserve the resolution classes directly. If $I$ is K-injective and $A$ is acyclic, a chain map $A\\to FI$ corresponds under the inverse exact equivalence to a map $F^{-1}A\\to I$; its null homotopy transports back. If $Q$ is K-flat, then $A\\otimes FQ\\cong F(F^{-1}A\\otimes Q)$ is acyclic. Flat terms are preserved by the same argument on short exact sequences. Exactness carries quasi-isomorphisms to quasi-isomorphisms, and termwise application descends to the derived categories with the specified shift comparison. The termwise unit and counit still give inverse derived equivalences. At finite coefficients this derived functor is exactly $P=Lg^*$ in the question.",
+   "uses": [
+    "def-pur-kinjective-complex",
+    "def-pc-kflat-complex",
+    "lem-pur-isomorphism-inverse-image-tensor-hom",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 0GMX (remark-pullback-internal-hom), enhanced by the stated resolution constructions"
+   }
+  },
+  {
+   "text": "For finite coefficients, and separately in the ambient completed-ring module category, choose a representative $K$ of $M$ and a K-injective representative $I$ of $N$. In Hom degree $r$ the sheaf comparisons of Step 1 give\n$F\\prod_p\\mathcal Hom(K^p,I^{p+r})\\cong\\prod_p\\mathcal Hom(FK^p,FI^{p+r})$.\nThey commute with $d(f)=d_I f-(-1)^r f d_K$, so define an isomorphism of Hom complexes. Step 2 makes $FI$ an admissible K-injective representative. Consequently localization gives an isomorphism $c:FH(M,N)\\cong H(FM,FN)$. Naturality holds on maps of complexes, and independence of representatives and descent in both variables follow from the cited quasi-isomorphism invariance of Hom complexes. In particular this covers arbitrary unbounded finite-coefficient inputs.",
+   "uses": [
+    "def-pur-derived-internal-hom",
+    "def-pur-hom-complex",
+    "lem-pur-rhom-well-defined"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 0GMX (remark-pullback-internal-hom), enhanced by the stated resolution constructions"
+   }
+  },
+  {
+   "text": "The cited internal currying isomorphism, followed by global-Hom recovery, gives the tensor-Hom transposition bijection. Use flat-term K-flat representatives for the tensor inputs. The canonical tensor comparison $\\mu$ is induced by the ordinary comparison on their total tensor complexes. Evaluation is ordinary Hom-complex evaluation followed by the inverse localized augmentation of the target. Reindexing the pure-tensor evaluation $f\\otimes x\\mapsto f(x)$ gives the same chain map on either side. When evaluation is written in the order $x\\otimes f$, both sides use the same Koszul symmetry. Thus\n$\\operatorname{ev}_{FM,FN}(1\\otimes c)\\mu=F(\\operatorname{ev}_{M,N})$.\nThe closed adjunction and its representative normalization identify this $c$ with the evaluation-defined comparison; the transposition bijection makes it the unique map satisfying this equation.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "lem-pur-rhom-global-sections",
+    "lem-sfb-ringed-derived-monoidal-comparisons",
+    "def-coef-ringed-tensor-hom-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 0GMX (remark-pullback-internal-hom), enhanced by the stated resolution constructions"
+   }
+  },
+  {
+   "text": "For $b:M\\otimes^L L\\to N$ write $b=\\operatorname{ev}_{M,N}(1\\otimes b^\\sharp)$. Apply $F$ and the naturality of $\\mu$. Step 4 gives\n$F(b)\\mu_{M,L}^{-1}=\\operatorname{ev}_{FM,FN}(1\\otimes(cF(b^\\sharp)))$.\nApplying the inverse of the transposition bijection proves the displayed transposition formula. It also proves naturality in $M,N$: after uncurrying either side of the naturality square one obtains the same composite of evaluation with the two input maps.",
+   "uses": [
+    "def-coef-ringed-tensor-hom-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 0GMX (remark-pullback-internal-hom), enhanced by the stated resolution constructions"
+   }
+  },
+  {
+   "text": "The shift comparison for $F$ is identity in each degree. The Hom-complex identifications for $H(M[a],N[b])$ reindex the factors and multiply by the usual signs coming from $d_{K[a]}=(-1)^a d_K$. Step 3 applies $F$ to the same factors and the same integer signs, so its square with each of these identifications commutes as a square of complexes. It therefore commutes in the derived category. This checks shifts in both Hom inputs, rather than only a shift of the output.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "def-pur-hom-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 0GMX (remark-pullback-internal-hom), enhanced by the stated resolution constructions"
+   }
+  },
+  {
+   "text": "For a second scheme isomorphism $h:Z\\to X$, identify $P_{gh}$ with $P_hP_g$ by the canonical derived pullback-composition map. The two candidate internal-Hom comparisons become equal after uncurrying: both give $P_hP_g(\\operatorname{ev})$, since the tensor-composition square in the cited statement commutes. Injectivity of transposition proves the composition identity for $c$. For the identity scheme map it similarly gives the identity comparison. This is also visible before localization: two successive reindexings send a local homomorphism $f$ to $h^{-1}g^{-1}f$ in either construction.",
+   "uses": [
+    "lem-sfb-ringed-derived-monoidal-comparisons",
+    "def-coef-ringed-tensor-hom-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 0GMX (remark-pullback-internal-hom), enhanced by the stated resolution constructions"
+   }
+  },
+  {
+   "text": "Now work integrally. For a derived-complete input $K$, the canonical quotient-tower unit $u_K:K\\to\\mathcal L_Y\\mathcal R_YK$ is an isomorphism: apply the finite-free completed-scalar comparison with $L=E$. In particular this is the canonical unit, not an arbitrarily chosen isomorphism with a Roos triangle. Reindexing takes each reduction to the corresponding reduction of $FK$ and commutes with its quotient maps. It commutes with total derived inverse limit: apply it termwise to a K-injective resolution in the abelian tower category; Step 2's null-homotopy argument applies to tower maps, and the ordinary limit commutes with this equivalence. Hence\n$F\\mathcal L_Y\\mathcal R_YK\\cong\\mathcal L_X F_\\bullet\\mathcal R_YK=Lg^*K$.\nComposing with $F(u_K)$ gives the claimed natural identification $FK\\cong Lg^*K$, with all its reduction projections fixed.",
+   "uses": [
+    "lem-weil-finite-free-completed-scalar-comparison",
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "lem-coef-derived-system-evaluation-calculus",
+    "def-weil-derived-pullback-tensor-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 0GMX (remark-pullback-internal-hom), enhanced by the stated resolution constructions"
+   }
+  },
+  {
+   "text": "The same calculation applied to the actual strict tensor-reduction complexes identifies $F(M\\widehat\\otimes^L N)$ with $FM\\widehat\\otimes^L FN$. On a flat-term K-flat model it reindexes each total-tensor summand, and on the Roos realization it reindexes both product coordinates and $1-s$. This is the specified completed tensor comparison, since that comparison is fixed by precisely these representative and Roos-coordinate equations. Coefficient transitions commute before taking the limit. The comparison is invertible, with inverse given by inverse reindexing. Substitution of normalized tensor/pullback systems shows that composition, symmetry, and shift comparisons have the same normalization after realization.",
+   "uses": [
+    "def-pur-completed-pullback-tensor-comparison",
+    "lem-pur-completed-operation-tower-substitution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 0GMX (remark-pullback-internal-hom), enhanced by the stated resolution constructions"
+   }
+  },
+  {
+   "text": "To check integral evaluation against completed tensor, use the completion reflector. The constant-completion comparison identifies quotient-tower completion with Koszul completion, respecting its unit. The reflector then gives, for a complete target $N$,\n$\\operatorname{Hom}(\\widehat{M\\otimes^LL},N)\\cong\\operatorname{Hom}(M\\otimes^LL,N)\\cong\\operatorname{Hom}(L,H(M,N))$.\nHere the hat is the functorial completion of the ordinary tensor; its quotient tower is exactly the defining tower of completed tensor. Thus evaluation for completed tensor is the unique extension of ordinary evaluation along the completion unit. This establishes transposition on the complete full subcategory without assuming that ordinary tensor is already complete or that $M$ is perfect.",
+   "uses": [
+    "lem-weil-pbc-constant-completion-equivalence",
+    "lem-weil-pbc-ringed-koszul-completion-reflector",
+    "def-coef-ringed-tensor-hom-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 0GMX (remark-pullback-internal-hom), enhanced by the stated resolution constructions"
+   }
+  },
+  {
+   "text": "Use the ambient completed-ring Hom comparison of Step 3. Under Step 8 it is the required integral $c$. Its source is constructible by the hypothesis on $H(M,N)$ and preservation of the integral category by pullback; hence its target is constructible as well. Precompose its completed evaluation equation with the ordinary-to-completed tensor unit. By Steps 4 and 9 this becomes the already proved ordinary evaluation equation. The reflector's bijection in Step 10 proves equality of the completed maps. Step 5 now proves the integral transposition formula; Steps 6 and 7 prove the shift and composition identities, since completion units and both Roos coordinates commute with reindexing. The hypothesis on the internal Hom is used here to stay on the stated constructible domain, not to obtain its ambient comparison.",
+   "uses": [
+    "lem-pur-integral-operations-preserve-constructible",
+    "lem-weil-pbc-ringed-koszul-completion-reflector"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 0GMX (remark-pullback-internal-hom), enhanced by the stated resolution constructions"
+   }
+  },
+  {
+   "text": "For the system assertion, reindex the underlying site while keeping the inverse-sequence index and all coefficient quotient arrows. This defines an exact equivalence of the two abelian categories of strict module systems, with an explicit inverse. Step 2 therefore applies to their unbounded derived categories. On their ringed sequence topoi, the product-Hom-complex construction of Step 3 gives an actual internal-Hom comparison and Step 4 gives an actual equality of evaluation maps. For cartesian first inputs its evaluations are the finite-level comparisons, by the fiberwise-Hom identification in the cited semilinear-system statement. In the transition formula of that statement, reindexing commutes with scalar extension, $t^M$, its inverse, $t^N$, and evaluation; consequently it gives the same transpose. Thus the maps respect the specified system transitions, before evaluation at any level.",
+   "uses": [
+    "lem-coef-semilinear-derived-sections",
+    "lem-coef-derived-system-evaluation-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 0GMX (remark-pullback-internal-hom), enhanced by the stated resolution constructions"
+   }
+  },
+  {
+   "text": "The comparison with integral reduction is the square having top $\\mathcal R_X(FH(M,N))\\to\\mathcal R_XH(FM,FN)$ and bottom $F_\\bullet\\mathcal I_Y(\\mathcal R_YM,\\mathcal R_YN)\\to\\mathcal I_X(\\mathcal R_XFM,\\mathcal R_XFN)$, with vertical maps the specified $\\beta$ and the canonical reduction/reindexing identifications. This square commutes as a system square: $\\beta$ is defined by the same evaluation, and Step 12's reindexing carries that evaluation chain map and its transpose to themselves. Its unit/counit comparisons are the reduction/limit adjunction's actual unit and counit, so applying the functorial $\\mathcal L$ preserves this square and all the evaluation and transposition identities. This proves the demanded realization normalization. It uses neither equality detection by finite evaluations nor invertibility of $\\beta$ for arbitrary inputs; the integral Hom comparison is the ambient one already constructed.",
+   "uses": [
+    "lem-coef-derived-system-evaluation-calculus",
+    "lem-coef-semilinear-derived-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 0GMX (remark-pullback-internal-hom), enhanced by the stated resolution constructions"
+   }
+  },
+  {
+   "text": "Rationalize the integral maps and their inverses. For arbitrary arrows $a=\\sum_i a_i\\otimes\\lambda_i$ and $b=\\sum_j b_j\\otimes\\nu_j$ in localized Hom groups, each naturality or evaluation equation expands by bilinearity to the integral equation for $(a_i,b_j)$ multiplied by $\\lambda_i\\nu_j$; similarly the transpose identity is linear in its input. The inverse identities and shift/composition identities localize as well. This proves the assertion for arbitrary rational morphisms, rather than just arrows which are integral. These are exactly the localized operations specified in the question.",
+   "uses": [
+    "def-weil-rationalization-karoubi",
+    "def-weil-derived-pullback-tensor-hom"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 0GMX (remark-pullback-internal-hom), enhanced by the stated resolution constructions"
+   }
+  },
+  {
+   "text": "For a finite coefficient extension $E\\subset L$, its completed coefficient sheaf is finite free over the original completed coefficient sheaf, and ordinary scalar extension agrees canonically with the specified completed one. The evaluation-normalized derived scalar adjunction identifies the restriction of $H_S(S\\otimes_R^LM,S\\otimes_R^LN)$ with $H_R(M,N\\otimes_R^LS)$. On choosing a finite free basis for $S$, the latter is a finite direct sum of copies of $H_R(M,N)$: internal Hom preserves finite biproducts, either by its Hom-complex formula or by the transposition bijection. Therefore the scalar comparison is the direct sum of copies of Step 3's comparison, with evaluation $(f\\otimes s)(x\\otimes t)=f(x)\\otimes st$. Reindexing fixes the coefficient scalars and hence commutes with this map. This argument uses finite direct sums only, so imposes no perfectness condition on the inputs. The formula is basis independent because it is the transpose of evaluation. It commutes with a further extension by associativity of scalar multiplication and tensor reassociation. The existing operation/scalar comparisons therefore carry $c$ to the comparison at the larger field, with its evaluation and shifts.",
+   "uses": [
+    "lem-weil-finite-free-completed-scalar-comparison",
+    "lem-pur-integral-operations-scalar-extension",
+    "lem-sfb-dc-hom-scalar-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 0GMX (remark-pullback-internal-hom), enhanced by the stated resolution constructions"
+   }
+  },
+  {
+   "text": "Represent all objects, arrows and the comparisons over one common finite coefficient field in $\\overline{\\mathbf Q}_\\ell$. Step 15 makes the class of $c$ independent of enlarging that field. If two arrow representatives become equal at a further field, their naturality equations and images under $c$ agree there, hence define equal classes. Evaluation, transposition, inverses, composition and shifts can each be checked at that common field using Steps 11 and 14; their classes have the required identities. This is precisely the common-stage operation construction, and completes all coefficient stages.",
+   "uses": [
+    "def-weil-algebraically-closed-coefficients",
+    "def-weil-derived-pullback-tensor-hom"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 0GMX (remark-pullback-internal-hom), enhanced by the stated resolution constructions"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-proetale-isomorphism-inverse-image",
+  "lem-pur-isomorphism-inverse-image-tensor-hom",
+  "def-pur-kinjective-complex",
+  "def-pc-kflat-complex",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "def-pur-derived-internal-hom",
+  "def-pur-hom-complex",
+  "lem-pur-rhom-well-defined",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-pur-rhom-global-sections",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "def-coef-ringed-tensor-hom-model",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-coef-derived-system-evaluation-calculus",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-pur-completed-pullback-tensor-comparison",
+  "lem-pur-completed-operation-tower-substitution",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "lem-weil-pbc-ringed-koszul-completion-reflector",
+  "lem-pur-integral-operations-preserve-constructible",
+  "lem-coef-semilinear-derived-sections",
+  "def-weil-rationalization-karoubi",
+  "lem-pur-integral-operations-scalar-extension",
+  "lem-sfb-dc-hom-scalar-adjunction",
+  "def-weil-algebraically-closed-coefficients"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 0GMX, together with sites-cohomology.tex Tags 06YS, 0A95, 08J9; completed and system enhancement assembled from the cited DAG tools, following main-20261015 prop-pod-dual-tate-data-compatibility Steps 1, 2, 4 and 5"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -60,10 +294,45 @@
    "results": "8 displayed hits: LightCondensed.ihomPoints_symm_comp, LightCondensed.ihomPoints_symm_apply, LightCondensed.ihomPoints, Condensed.profiniteSolidCounit, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of, AdicCompletion.tensor_map_id_left_eq_map, AdicCompletion.ofTensorProduct_naturality, LightCondensed.free_internallyProjective_iff_tensor_condition",
    "date": "2026-10-18",
    "verdict": "no match: ordinary closed-structure transport, underived light-condensed Hom, or scheme pullback formulas do not supply the pro-etale derived/completed coefficient comparison and its actual system evaluation normalization"
+  },
+  {
+   "tool": "grep",
+   "query": "(closedComparison|ihomComparison|internalHom.*[Ee]quiv|ofEquiv)",
+   "results": "10 hits: Mathlib/CategoryTheory/Monoidal/Closed/Types.lean, Mathlib/CategoryTheory/Monoidal/Closed/Types.lean, Mathlib/CategoryTheory/Monoidal/Closed/Transport.lean, Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean, Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean, Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean, Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean, Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean",
+   "date": "2026-10-18",
+   "verdict": "no match: ordinary closed-structure transport and underived sheaf/module comparisons do not state the derived completed/system evaluation comparison of this item; read Monoidal/Closed/Basic.lean lines 309-368 and Closed/Functor.lean lines 14-27 (Cartesian restriction)"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An exact equivalence of ringed sites preserves derived internal Hom tensor evaluation and the completed integral reduction tower",
+   "results": "8 hits: CategoryTheory.Equivalence.sheafCongr, CategoryTheory.Equivalence.sheafCongrPrecoherent, AdicCompletion.congr, SheafOfModules.Finite.evaluationPreservesFiniteLimits, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, UniformSpace.Completion.mapRingEquiv.congr_simp, AdicCompletion.ofTensorProductEquivOfPiFintype, smoothSheafCommRing.forgetStalk_inv_comp_eval_assoc",
+   "date": "2026-10-18",
+   "verdict": "no match: ordinary closed-structure transport and underived sheaf/module comparisons do not state the derived completed/system evaluation comparison of this item; read Monoidal/Closed/Basic.lean lines 309-368 and Closed/Functor.lean lines 14-27 (Cartesian restriction)"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalClosed.ofEquiv",
+   "results": "3 hits: CategoryTheory.MonoidalClosed.ofEquiv, CategoryTheory.MonoidalClosed.ofEquiv_curry_def, CategoryTheory.MonoidalClosed.ofEquiv_uncurry_def",
+   "date": "2026-10-18",
+   "verdict": "no match: ordinary closed-structure transport and underived sheaf/module comparisons do not state the derived completed/system evaluation comparison of this item; read Monoidal/Closed/Basic.lean lines 309-368 and Closed/Functor.lean lines 14-27 (Cartesian restriction)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived internal Hom and evaluation commute with an exact monoidal inverse image equivalence of pro-etale sites and completed coefficient systems",
+   "results": "8 hits: LightCondensed.ihom_map_val_app, LightCondensed.ihomPoints_symm_comp, LightCondensed.ihomPoints_symm_apply, LightCondensed.ihomPoints, LightCondensed.ihomPoints_apply, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalClosedFunctorOppositeLightProfiniteModuleCat, LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition'",
+   "date": "2026-10-18",
+   "verdict": "no match: ordinary closed-structure transport and underived sheaf/module comparisons do not state the derived completed/system evaluation comparison of this item; read Monoidal/Closed/Basic.lean lines 309-368 and Closed/Functor.lean lines 14-27 (Cartesian restriction)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pullback by an isomorphism preserves unbounded derived sheaf Hom with evaluation and cohomological shifts after adic completion",
+   "results": "8 hits: SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.freeFunctorCompPullbackIso, SheafOfModules.pullbackObjFreeIso, SheafOfModules.pullbackIso, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.pullbackComp, SheafOfModules.PullbackConstruction.adjunction",
+   "date": "2026-10-18",
+   "verdict": "no match: ordinary closed-structure transport and underived sheaf/module comparisons do not state the derived completed/system evaluation comparison of this item; read Monoidal/Closed/Basic.lean lines 309-368 and Closed/Functor.lean lines 14-27 (Cartesian restriction)"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "prop-pod-dual-tate-data-compatibility",
@@ -80,5 +349,114 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-pod-derived-automorphism-hom-evaluation",
+  "worker": "stage1",
+  "summary": "Constructed the comparison by exact reindexing of Hom complexes, proved evaluation/transposition, shifts and composition; identified completed pullback via the canonical completion unit and total derived limits; checked actual system maps before realization and arbitrary localized/common-stage morphisms. No new nodes or changes to the statement.",
+  "blueprint": "Realizes the automorphism/internal-Hom comparison and evaluation normalization in main-20261015 prop-pod-dual-tate-data-compatibility proof Steps 1, 2, 4 and 5.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-proetale-isomorphism-inverse-image",
+    "why": "Generic Inverse image along an isomorphism of schemes on the pro-etale site used for exact reindexing, resolution calculus, coefficient completion or localization; sk-def-weil contains no separate proof of this tool."
+   },
+   {
+    "node": "lem-pur-isomorphism-inverse-image-tensor-hom",
+    "why": "Generic Inverse image along an isomorphism of schemes commutes with tensor products and sheaf Hom used for exact reindexing, resolution calculus, coefficient completion or localization; sk-def-weil contains no separate proof of this tool."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-factorization",
+    "why": "Generic The functor induced on derived categories by an exact functor, with its factorization through the localization functors used for exact reindexing, resolution calculus, coefficient completion or localization; sk-def-weil contains no separate proof of this tool."
+   },
+   {
+    "node": "lem-pur-rhom-well-defined",
+    "why": "Generic The Hom complex into K-injective complexes respects quasi-isomorphisms used for exact reindexing, resolution calculus, coefficient completion or localization; sk-def-weil contains no separate proof of this tool."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic Existence of K-flat resolutions on a ringed site used for exact reindexing, resolution calculus, coefficient completion or localization; sk-def-weil contains no separate proof of this tool."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "why": "Generic Derived internal Hom calculus on small ringed sites used for exact reindexing, resolution calculus, coefficient completion or localization; sk-def-weil contains no separate proof of this tool."
+   },
+   {
+    "node": "lem-pur-rhom-global-sections",
+    "why": "Generic Global sections of the derived internal Hom used for exact reindexing, resolution calculus, coefficient completion or localization; sk-def-weil contains no separate proof of this tool."
+   },
+   {
+    "node": "lem-sfb-ringed-derived-monoidal-comparisons",
+    "why": "Generic Monoidal and adjunction normalization of derived ringed-topos comparisons used for exact reindexing, resolution calculus, coefficient completion or localization; sk-def-weil contains no separate proof of this tool."
+   },
+   {
+    "node": "lem-weil-finite-free-completed-scalar-comparison",
+    "why": "Generic Finite free completed coefficient extension is ordinary derived scalar extension used for exact reindexing, resolution calculus, coefficient completion or localization; sk-def-weil contains no separate proof of this tool."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "why": "Generic Strict tower homotopy limit used for exact reindexing, resolution calculus, coefficient completion or localization; sk-def-weil contains no separate proof of this tool."
+   },
+   {
+    "node": "lem-coef-derived-system-evaluation-calculus",
+    "why": "Generic Coherent derived reduction, limit adjunction and fiberwise evaluation used for exact reindexing, resolution calculus, coefficient completion or localization; sk-def-weil contains no separate proof of this tool."
+   },
+   {
+    "node": "lem-pur-completed-operation-tower-substitution",
+    "why": "Generic Coherent substitution of normalized systems into completed operations used for exact reindexing, resolution calculus, coefficient completion or localization; sk-def-weil contains no separate proof of this tool."
+   },
+   {
+    "node": "lem-weil-pbc-constant-completion-equivalence",
+    "why": "Generic Constant-to-completed coefficients on derived-complete categories used for exact reindexing, resolution calculus, coefficient completion or localization; sk-def-weil contains no separate proof of this tool."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-koszul-completion-reflector",
+    "why": "Generic Ringed koszul reflector used for exact reindexing, resolution calculus, coefficient completion or localization; sk-def-weil contains no separate proof of this tool."
+   },
+   {
+    "node": "lem-pur-integral-operations-preserve-constructible",
+    "why": "Generic Integral pullback and completed tensor product preserve constructibility used for exact reindexing, resolution calculus, coefficient completion or localization; sk-def-weil contains no separate proof of this tool."
+   },
+   {
+    "node": "lem-coef-semilinear-derived-sections",
+    "why": "Generic Derived semilinear sections and coefficient-linear geometric operations used for exact reindexing, resolution calculus, coefficient completion or localization; sk-def-weil contains no separate proof of this tool."
+   },
+   {
+    "node": "lem-pur-integral-operations-scalar-extension",
+    "why": "Generic Integral derived operations commute with finite scalar extension used for exact reindexing, resolution calculus, coefficient completion or localization; sk-def-weil contains no separate proof of this tool."
+   },
+   {
+    "node": "lem-sfb-dc-hom-scalar-adjunction",
+    "why": "Generic Derived internal Hom under restriction of coefficient scalars used for exact reindexing, resolution calculus, coefficient completion or localization; sk-def-weil contains no separate proof of this tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-proetale-isomorphism-inverse-image",
+  "lem-pur-isomorphism-inverse-image-tensor-hom",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-pur-rhom-well-defined",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-pur-rhom-global-sections",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-pur-completed-operation-tower-substitution",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "lem-weil-pbc-ringed-koszul-completion-reflector",
+  "lem-pur-integral-operations-preserve-constructible",
+  "lem-coef-semilinear-derived-sections",
+  "lem-pur-integral-operations-scalar-extension",
+  "lem-sfb-dc-hom-scalar-adjunction"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-Codex-Q29-bd9e50c98",
+  "group": "Q29",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q29-bd9e50c98 (reviewer sub-agent of L); spot-checked: Full mathematical review completed. The item, cited statements and sources, unit/chapter route, coefficient categories, completion and system comparisons, all 16 proof steps, edge cases, searches, dependencies, and route-pivot restrictions check out. No new nodes or repairs are needed."
  }
 }

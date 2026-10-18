@@ -14,9 +14,100 @@
   "def-weil-ordinary-compact-cohomology",
   "lem-per-adic-heart-pullback-fibres"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First take $\\Lambda=E$, put $A=\\mathcal O_E$ and choose a uniformizer $\\varpi$. The scheme $T$ is Noetherian and finite dimensional, and $\\ell$ is invertible on it, since it is finite type over the field $k$. By [prop-weil-localized-tstructure], choose an integral heart object $F$ with an isomorphism $\\theta:QF\\xrightarrow{\\sim}M$. By [def-weil-pbc-rational-category], the morphism $\\theta^{-1}t$ has the form $\\varpi^{-d}Qu$ for some $d\\ge0$ and an integral morphism $u:B_T\\to F$, where $B_T$ is the completed coefficient unit. Indeed the Hom space is the localization of the integral Hom module, so finitely many fractions combine to one common denominator. Both objects are in degree zero, so this is an ordinary sheaf morphism. Multiplication by the nonzero scalar $\\varpi^{-d}$ and the isomorphism $\\theta$ do not change whether a fibre map is zero.",
+   "uses": [
+    "prop-weil-localized-tstructure",
+    "def-weil-pbc-rational-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Propositions 6.8.11(3) and 6.8.14(2): integral heart representative and a denominator for its section"
+   }
+  },
+  {
+   "text": "Apply [lem-a1-integral-constructible-reduction-fibres] to $F$ and $u$. It supplies the ordinary quotients $F_n$, their etale-origin sheaves $G_n$, their quotient transitions, and one finite stratification on which all levels are finite locally constant. For a geometric point $\\bar x$ write $P_{\\bar x}=\\varprojlim_n(G_n)_{\\bar x}$ and let $a_{\\bar x}$ be the compatible sequence of germs of $u(1)$. The same comparison identifies the fibre of $Qu$ with $1\\mapsto a_{\\bar x}\\otimes1$ in $P_{\\bar x}[1/\\varpi]$. Refine each stratum into its connected components. By [lem-sfb-noetherian-connected-components-open] there are finitely many, each open in that stratum, hence still locally closed in $T$. Call the resulting connected strata $S_1,\\ldots,S_r$. All finite levels remain locally constant there. No freeness of $F$ or degree-zero concentration of its derived reductions is used.",
+   "uses": [
+    "lem-a1-integral-constructible-reduction-fibres",
+    "lem-sfb-noetherian-connected-components-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definitions 6.8.10 and 6.8.11(3); finite connected refinement of the integral finite-reduction comparison"
+   }
+  },
+  {
+   "text": "For $m\\ge0$ and $n\\ge1$, let $v_{m,n}:(A/\\varpi^n)_T\\to G_n$ be the etale section map obtained from $\\varpi^m u$, and put $C_{m,n}=\\{x:(v_{m,n})_{\\bar x}(1)\\ne0\\}$. Apply [lem-sc-etale-section-zero-open] to its global section on the etale object $T\\to T$. The complementary zero-germ locus is Zariski open, so $C_{m,n}$ is closed in $T$. On a connected stratum $S_i$, the comparison inverse image of $v_{m,n}$ is a map between finite locally constant pro-etale $A/\\varpi^n$-module sheaves. By [lem-pur-lisse-morphism-rigidity](2), if it vanishes at one geometric point of $S_i$, it vanishes everywhere on $S_i$. Thus $C_{m,n}$ is a union of the entire strata $S_i$. The rigidity hypotheses hold because every $S_i$ is separated and finite type over $k$, and $A/\\varpi^n$ is exactly the finite coefficient ring required there.",
+   "uses": [
+    "lem-sc-etale-section-zero-open",
+    "lem-pur-lisse-morphism-rigidity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Finite-level support: Stacks Tags 04FR (lemma-zero-over-image) and 04FT (lemma-support-section-closed); Bhatt–Scholze §5.1 for finite local systems"
+   }
+  },
+  {
+   "text": "Fix $m$. Compatibility with the quotient transitions gives $C_{m,n}\\subseteq C_{m,n+1}$. These are unions of the same finite set of strata. For every stratum that occurs at some level, choose one such level; the maximum of these finitely many integers, or $1$ if none occurs, is $N_m$. Then $C_{m,N_m}=\\bigcup_{n\\ge1}C_{m,n}$. In particular this union is closed, being one of the closed sets from step 3. An element of an inverse limit of modules is zero exactly when all its coordinates are zero. Hence this union is precisely $A_m=\\{x:\\varpi^m a_{\\bar x}\\ne0\\text{ in }P_{\\bar x}\\}$. This stabilization uses finiteness of the connected stratification; it does not assert that arbitrary increasing sequences of closed subsets stabilize.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Elementary finite-stratification argument applied to the compatible quotient germs of the preceding steps"
+   }
+  },
+  {
+   "text": "Localization at the powers of $\\varpi$ gives $a_{\\bar x}\\otimes1=0$ if and only if $\\varpi^m a_{\\bar x}=0$ for some $m\\ge0$: this is the defining equality criterion for the fraction $a_{\\bar x}/1$ to equal $0/1$. Consequently steps 1 and 2 give $S(t)=\\bigcap_{m\\ge0}A_m$. Step 4 shows that every $A_m$ is closed; an arbitrary intersection of closed subsets is closed. This accounts for integral torsion as well: a nonzero torsion germ disappears in this intersection, whereas a nonzero rational germ survives all the powers.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Elementary scalar-localization equality criterion and intersections of closed subsets"
+   }
+  },
+  {
+   "text": "The natural independence of adic fibres from the geometric point over a fixed underlying point in [lem-per-adic-heart-pullback-fibres] identifies the unit maps and the fibre map of $t$, so the definition of $S(t)$ is independent of these choices. Let $V=T\\setminus S(t)$. Pullback preserves the constructible heart, and its fibre comparison makes every geometric fibre of $t|_V$ zero. Exactness identifies each fibre of its image sheaf with the image of the zero fibre map. Joint conservativity then makes that image sheaf zero. A morphism with zero image in an abelian category is zero, proving $t|_V=0$. The open $V$ is again separated finite type over $k$ because $T$ is Noetherian, so the cited pullback and fibre theorem applies to $V\\to T$.",
+   "uses": [
+    "lem-per-adic-heart-pullback-fibres"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.14 and the adic-heart fibre normalization: independence, restriction, exactness and conservativity"
+   }
+  },
+  {
+   "text": "For $E\\subset L$, [lem-per-adic-heart-pullback-fibres] identifies every extended fibre map with $t_{\\bar x}\\otimes_E L$. A map of vector spaces is zero if and only if its scalar extension to a field extension is zero: a nonzero vector remains nonzero after extending a basis. Thus scalar extension leaves $S(t)$ unchanged, and its compatibility with pullback carries the zero restriction on the same complement to zero. Conversely, zero of an extended restriction forces zero of every original fibre and hence zero of the original restriction by step 6. For $\\Lambda=\\Omega$, [def-weil-pbc-qbar-category] represents $M$ and $t$ at a common finite coefficient field; the heart and fibre descriptions in [lem-per-adic-heart-pullback-fibres] allow the representing object to be chosen in that finite-stage heart. Apply the finite-field-coefficient argument there. Extending its fibres to $\\Omega$ preserves zero and nonzero by the same vector-space argument, proving all assertions at the common stage independently of the finite representative.",
+   "uses": [
+    "lem-per-adic-heart-pullback-fibres",
+    "def-weil-pbc-qbar-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.14(1),(2): finite coefficient extension and common-finite-stage descent"
+   }
+  }
+ ],
+ "proof_deps": [
+  "prop-weil-localized-tstructure",
+  "def-weil-pbc-rational-category",
+  "lem-a1-integral-constructible-reduction-fibres",
+  "lem-sfb-noetherian-connected-components-open",
+  "lem-sc-etale-section-zero-open",
+  "lem-pur-lisse-morphism-rigidity",
+  "lem-per-adic-heart-pullback-fibres",
+  "def-weil-pbc-qbar-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "§6.8, especially Definition 6.8.10 and Propositions 6.8.11 and 6.8.14; support argument combines ordinary finite etale section supports with a finite connected stratification and the scalar-localization equality criterion"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -52,10 +143,38 @@
    "results": "{\"t\": \"2026-10-18T02:27:25Z\", \"tool\": \"grep\", \"query\": \"support.*section|section.*support|zeroLocus\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Topology.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Topology.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Topology.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Topology.lean\"], \"digest\": \"cd7026f03c38a92f\"}",
    "date": "2026-10-18",
    "verdict": "no match: read returned signatures; topological function support, structure sheaves, site equivalences and coefficient sheaf definitions do not supply this constructible adic assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A section of a constructible rational adic sheaf has Zariski closed locus of nonzero geometric fibres",
+   "results": "{\"t\": \"2026-10-18T02:40:46Z\", \"tool\": \"leanfinder\", \"query\": \"A section of a constructible rational adic sheaf has Zariski closed locus of nonzero geometric fibres\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.zeroLocus_isClosed\", \"AlgebraicGeometry.RingedSpace.zeroLocus_isClosed\", \"AlgebraicGeometry.Scheme.zeroLocus\", \"AlgebraicGeometry.RingedSpace.zeroLocus\", \"AlgebraicGeometry.Scheme.IdealSheafData.mkOfMemSupportIff_ideal\", \"AlgebraicGeometry.Scheme.IdealSheafData.coe_support_mkOfMemSupportIff\", \"AlgebraicGeometry.Scheme.mem_zeroLocus_iff\", \"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\"], \"digest\": \"251dc5e4b459b748\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned coefficient-sheaf definitions, ideal-sheaf results, profinite limit and locally constant function results do not state this comparison for integral constructible module sheaves and their adic geometric fibres"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, AlgebraicGeometry.Scheme",
+   "results": "{\"t\": \"2026-10-18T02:40:47Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Sheaf, AlgebraicGeometry.Scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.GlueData.sheafValGluedMk\", \"AlgebraicGeometry.Scheme.GlueData.sheafValGluedMk_val\", \"AlgebraicGeometry.Scheme.AffineZariskiSite.sheafEquiv\", \"AlgebraicGeometry.Scheme.Hom.toRingCatSheafHom\", \"AlgebraicGeometry.Scheme.AffineEtale.sheafEquiv\", \"AlgebraicGeometry.Scheme.instAbelianSheafAffineEtaleTopology\", \"AlgebraicGeometry.Scheme.instAbelianSheafEtaleSmallEtaleTopology\", \"AlgebraicGeometry.Scheme.instIsEquivalenceSheafEtaleSmallEtaleTopologyAffineEtaleTopologySheafPushforwardContinuousSpec\"], \"digest\": \"4b7354bbd781c2d2\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned coefficient-sheaf definitions, ideal-sheaf results, profinite limit and locally constant function results do not state this comparison for integral constructible module sheaves and their adic geometric fibres"
+  },
+  {
+   "tool": "grep",
+   "query": "support.*section|section.*support|zeroLocus",
+   "results": "{\"t\": \"2026-10-18T02:40:47Z\", \"tool\": \"grep\", \"query\": \"support.*section|section.*support|zeroLocus\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Topology.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Topology.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Topology.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Topology.lean\"], \"digest\": \"1543484bc008c4f6\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned coefficient-sheaf definitions, ideal-sheaf results, profinite limit and locally constant function results do not state this comparison for integral constructible module sheaves and their adic geometric fibres"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The nonzero geometric stalk locus of a global section of a constructible l-adic sheaf is closed",
+   "results": "{\"t\": \"2026-10-18T02:40:57Z\", \"tool\": \"leansearch\", \"query\": \"The nonzero geometric stalk locus of a global section of a constructible l-adic sheaf is closed\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.zeroLocus_isClosed\", \"AlgebraicGeometry.Scheme.IdealSheafData.isClosed_supportSet\", \"AlgebraicGeometry.RingedSpace.zeroLocus_isClosed\", \"AlgebraicGeometry.Scheme.IdealSheafData.support\", \"AlgebraicGeometry.Scheme.IdealSheafData.Simps.coe_support\", \"AlgebraicGeometry.RingedSpace.zeroLocus\", \"PrimeSpectrum.isClosed_zeroLocus\", \"PrimeSpectrum.isClosed_of_stableUnderSpecialization_of_isConstructible\"], \"digest\": \"5c42aa321b3b4715\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned coefficient-sheaf definitions, ideal-sheaf results, profinite limit and locally constant function results do not state this comparison for integral constructible module sheaves and their adic geometric fibres"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-a1-constructible-degree-zero-proper-support",
@@ -74,5 +193,59 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-a1-adic-section-closed-support",
+  "worker": "stage1",
+  "summary": "Kept the statement. Cleared a single section denominator in an integral heart model. Isolated the ordinary finite-quotient/adically normalized fibre comparison as one smaller statement-only node, including torsion models. Proved finite supports are closed and unions of finitely many connected strata, made the finite-level union explicit, and obtained rational support as an intersection over powers of the uniformizer. Used exact conservative fibres for the zero restriction and field-extension faithfulness for finite/common-stage compatibility. No SGA source or Lean compiler used.",
+  "blueprint": "Realizes the first two sentences of sk-l-dl-a1-endpoints through its child lem-a1-constructible-degree-zero-proper-support: the required closed-support assertion on the compactification is now argued, rather than inferred from constructibility of an arbitrary sheaf support.",
+  "tool_uses": [
+   {
+    "node": "prop-weil-localized-tstructure",
+    "why": "Provides an integral heart representative of a rational heart object; a coefficient-category tool, not a replacement of the endpoint argument."
+   },
+   {
+    "node": "def-weil-pbc-rational-category",
+    "why": "Defines the raw localized Hom module used to clear the denominator of this single section."
+   },
+   {
+    "node": "lem-sfb-noetherian-connected-components-open",
+    "why": "Refines the integral stratification into finitely many connected locally closed strata."
+   },
+   {
+    "node": "lem-sc-etale-section-zero-open",
+    "why": "Provides the closed nonzero-germ support of each ordinary finite-coefficient etale section; the unit has no separate finite-level support lemma."
+   },
+   {
+    "node": "lem-pur-lisse-morphism-rigidity",
+    "why": "Shows that each finite reduction section is either zero everywhere or nowhere on a connected stratum; used only at finite coefficients."
+   },
+   {
+    "node": "lem-per-adic-heart-pullback-fibres",
+    "why": "Supplies natural exact conservative adic fibres and their pullback/scalar/common-stage compatibility, needed to identify support and zero restriction."
+   },
+   {
+    "node": "def-weil-pbc-qbar-category",
+    "why": "Defines morphisms at a common finite coefficient stage, so the finite-E proof applies to the Omega case."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-weil-localized-tstructure",
+  "def-weil-pbc-rational-category",
+  "lem-sfb-noetherian-connected-components-open",
+  "lem-sc-etale-section-zero-open",
+  "lem-pur-lisse-morphism-rigidity",
+  "lem-per-adic-heart-pullback-fibres",
+  "def-weil-pbc-qbar-category"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-Codex-Q59-12eb06c39",
+  "group": "Q59",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q59-12eb06c39 (reviewer sub-agent of L); spot-checked: Read both nodes fully and checked all seven steps against cited statements, Bhatt–Scholze §5.1/§6.8, and Stacks 04FR/04FT. Torsion cases, finite-stratification stabilization, fibre normalization, coefficient extensions, duplicates, and cycles checked. No repairs needed. Detailed findings and snapshot limitations are recorded in review.md."
  }
 }
