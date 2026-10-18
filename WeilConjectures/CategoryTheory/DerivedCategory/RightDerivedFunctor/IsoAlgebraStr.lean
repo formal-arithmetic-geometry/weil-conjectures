@@ -7,6 +7,8 @@ module
 
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
 public import WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebraHomology
+public import Mathlib.CategoryTheory.Preadditive.Injective.Preserves
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.IsoAlgebra
 
 /-!
 # The structure isomorphism of a right derived functor of algebras
@@ -80,6 +82,16 @@ theorem str_homologyRightDerivedFunctorForgetIso {K : IsoAlgebra F}
   have hβ := hα =≫ (((mapResolution e I).sc r).mapHomologyIso (forget G)).inv
   simp only [Category.assoc] at hβ
   exact hβ.symm
+
+omit [HasDerivedCategory (IsoAlgebra F)] [HasDerivedCategory (IsoAlgebra G)]
+  [EnoughInjectives (IsoAlgebra F)] [HasKInjectiveResolutions (IsoAlgebra F)]
+  [PreservesFiniteLimits F] [PreservesFiniteColimits F] in
+/-- The forgetful functor from algebras of an autoequivalence preserves injective objects, being
+right adjoint to the exact free algebra functor. -/
+lemma preservesInjectiveObjects_forget [F.IsEquivalence] [HasColimitsOfShape (Discrete ℤ) C]
+    [HasExactColimitsOfShape (Discrete ℤ) C] : (forget F).PreservesInjectiveObjects :=
+  have := Functor.preservesFiniteLimits_of_preservesHomology (Free.functor F)
+  Functor.preservesInjectiveObjects_of_adjunction_of_preservesMonomorphisms (Free.adjunction F)
 
 section Frobenius
 
