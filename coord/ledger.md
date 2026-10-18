@@ -16166,3 +16166,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 06:29 L: merged deliver/T2/Sheaf.Algebra.Homology.SurjectiveModuleComplexTowerLimit (stage 3; reviewer PASS; first push; landing 20261018T062916-L-678450 (proof); batch 20261018T062645; modules 1; new nodes 0)
 - 06:29 L: merged deliver/T2/Sheaf.NumberTheory.Padics.IntegersLocalizationUniformizer (stage 3; reviewer PASS; first push; landing 20261018T062916-L-678751 (proof); batch 20261018T062645; modules 1; new nodes 0)
 - 06:29 L: merged deliver/T2/Sheaf.RingTheory.NormalRingFieldExtensionDescent (stage 3; reviewer PASS; first push; landing 20261018T062917-L-678956 (proof); batch 20261018T062645; modules 1; new nodes 0)
+- 06:29 L: merged deliver/T3/Sheaf.AlgebraicGeometry.AbelianEtaleProEtaleCohomologyComparison (stage 3; reviewer PASS; first push; landing 20261018T062917-L-679448 (proof); batch 20261018T062645; modules 1; new nodes 1)

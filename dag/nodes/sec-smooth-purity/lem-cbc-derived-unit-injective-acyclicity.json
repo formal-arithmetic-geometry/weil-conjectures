@@ -1,0 +1,145 @@
+{
+ "id": "lem-cbc-derived-unit-injective-acyclicity",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-cbc-proetale-stalk-conservative",
+   "place": "Proof Step 4, cohomology comparison for the functions quotient: acyclic injective images make the derived comparison unit invertible.",
+   "via": [
+    "lem-cbc-abelian-etale-proetale-cohomology-comparison",
+    "lem-cbc-proetale-functions-quotient-sections"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Invertibility of the derived unit from acyclic images of injectives",
+ "statement": "Let $C,D$ be abelian categories [def-sp-abelian] with enough injectives [def-sp-injective-resolutions] and chosen derived categories [def-weil-abstract-derived-category]. Let $L:C\\to D$ and $R:D\\to C$ be additive functors [def-sp-left-exact-additive] with an adjunction $L\\dashv R$, with $L$ exact and $R$ left exact. Suppose the adjunction unit $I\\to RLI$ is invertible for every injective object $I$ of $C$, and $LI$ is $R$-acyclic for every such $I$, meaning $R^qR(LI)=0$ for all $q>0$. Then the unit of the bounded-below derived adjunction $D^+(L)\\dashv R^+R$ is invertible at every $K\\in D^+(C)$.",
+ "source": {
+  "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/RightDerivedFunctor/PlusAdjunctionAcyclic.lean",
+  "place": "Adjunction.isIso_derivedPlus_unit_app_of_rightAcyclic; bounded-below injective-complex proof, lines 55-104"
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-sp-injective-resolutions",
+  "def-weil-abstract-derived-category",
+  "def-sp-left-exact-additive"
+ ],
+ "proof": [
+  {
+   "text": "Represent K by a bounded-below complex T of injective objects of C. Such a representative exists by enough injectives: replace a bounded-below complex representing K by an injective resolution. Naturality of the derived unit transports its invertibility across the resulting isomorphisms in D+(C).",
+   "uses": [
+    "def-sp-injective-resolutions",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/RightDerivedFunctor/PlusAdjunctionAcyclic.lean",
+    "place": "Adjunction.isIso_derivedPlus_unit_app_of_rightAcyclic; bounded-below injective-complex proof, lines 55-104"
+   }
+  },
+  {
+   "text": "On T the derived unit factors as the termwise unit T to R(L(T)), followed by the right-derived-functor comparison on L(T), up to the canonical exact-functor localization isomorphism. The first factor is an isomorphism termwise by the unit hypothesis, hence is an isomorphism in the homotopy and derived categories.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/RightDerivedFunctor/PlusAdjunctionAcyclic.lean",
+    "place": "Adjunction.isIso_derivedPlus_unit_app_of_rightAcyclic; bounded-below injective-complex proof, lines 55-104"
+   }
+  },
+  {
+   "text": "The bounded-below complex L(T) has R-acyclic terms by hypothesis. The acyclic-complex computation of the right derived functor makes its comparison to R+(L(T)) invertible; this is the existing theorem Functor.isIso_rightDerivedFunctorPlusUnit_app_of_rightAcyclic used in the source proof. Thus the second factor is invertible. The localization comparison is also an isomorphism, so cancellation gives invertibility of the derived unit on K.",
+   "uses": [
+    "lemma-weil-pbc-leray-acyclicity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/RightDerivedFunctor/PlusAdjunctionAcyclic.lean",
+    "place": "Adjunction.isIso_derivedPlus_unit_app_of_rightAcyclic; bounded-below injective-complex proof, lines 55-104"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-injective-resolutions",
+  "def-weil-abstract-derived-category",
+  "lemma-weil-pbc-leray-acyclicity"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/RightDerivedFunctor/PlusAdjunctionAcyclic.lean",
+  "place": "Adjunction.isIso_derivedPlus_unit_app_of_rightAcyclic; bounded-below injective-complex proof, lines 55-104"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The derived unit of an exact adjunction is invertible if injectives have acyclic images",
+   "results": "Adjunction.derived_unit, derivedη, derivedε, and isIsoAppToRightDerivedZeroOfInjective; no injective-acyclicity criterion.",
+   "date": "2026-10-18",
+   "verdict": "no exact Mathlib statement; reuse the existing source-library criterion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The derived unit of an exact adjunction is an isomorphism if its unit on injectives is invertible and the left adjoint sends injectives to acyclic objects",
+   "results": "Adjunction.derived_unit, derived'_unit, InjectiveResolution.isoRightDerivedObj and degree-zero right-derived isomorphisms.",
+   "date": "2026-10-18",
+   "verdict": "no exact Mathlib statement; existing source theorem is an exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "isIso.*derived.*unit|unit_app_of_rightAcyclic|isIso_derivedPlus_unit in Mathlib/CategoryTheory and Mathlib/Algebra/Homology/DerivedCategory",
+   "results": "No matches. The exact theorem is in WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusAdjunctionAcyclic.",
+   "date": "2026-10-18",
+   "verdict": "reuse the existing source-library declaration; no new Lean module or proof hole"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AbelianEtaleProEtaleCohomologyComparison",
+  "date": "2026-10-18",
+  "group": "T3"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-comparison",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusAdjunctionAcyclic",
+  "declaration": "CategoryTheory.Adjunction.isIso_derivedPlus_unit_app_of_rightAcyclic",
+  "statement": "theorem isIso_derivedPlus_unit_app_of_rightAcyclic\n    (h₁ : ∀ (I : C) [Injective I], IsIso (adj.unit.app I))\n    (h₂ : ∀ (I : C) [Injective I], R.rightAcyclic (L.obj I)) (X : DerivedCategory.Plus C) :\n    IsIso (adj.derivedPlus.unit.app X)",
+  "branch": "sheaf-dag",
+  "by": "T3",
+  "date": "2026-10-18",
+  "note": "Existing proved theorem; no duplicate declaration or new Lean file. Its ambient variables provide abelian categories, enough injectives, chosen derived categories, an exact additive left adjoint and a left exact additive right adjoint."
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261018T062917-L-679448",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261018T062917-L-679448",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

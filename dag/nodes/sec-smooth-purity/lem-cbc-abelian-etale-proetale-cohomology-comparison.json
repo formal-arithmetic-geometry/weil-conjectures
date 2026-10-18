@@ -27,68 +27,64 @@
  ],
  "proof": [
   {
-   "text": "Put $L=\\nu_T^{-1}$ and $G=\\nu_{T,*}$ on abelian sheaves. By [lem-cbc-comparison-pullback-sections], for every etale object $U\\to T$ the comparison unit on underlying sheaves of sets identifies $F(U)$ with $(LF)(U)$. The abelian inverse image and its unit have these underlying set functors and unit, by [def-weil-pbc-sites-and-cohomology] (3). Thus $\\eta_F:F\\to GLF$ is an isomorphism of abelian sheaves: each component is a bijective group homomorphism, whose inverse is a group homomorphism. For each morphism $a:F\\to F'$, naturality of the cited sections identification gives $(GLa)_U\\circ\\eta_F(U)=\\eta_{F'}(U)\\circ a_U$ for every etale $U$; hence the unit isomorphisms are natural in $F$.",
+   "text": "Work with A = AddCommGrpCat in universe u+1 and L = comparisonUpperStar A T, R = comparisonLowerStar A T. These are the canonical abelian comparison functors. The existing instances make L additive and exact and R additive and left exact; the sheaf categories are Grothendieck abelian, hence have enough injectives. Use the existing generic Grothendieck-abelian coefficient comparison-unit theorem, specialized to A, to obtain an invertible unit on every sheaf, in particular on injectives.",
    "uses": [
-    "lem-cbc-comparison-pullback-sections",
-    "def-weil-pbc-sites-and-cohomology"
+    "def-weil-pbc-site-comparison-morphism",
+    "lem-weil-pbc-comparison-grothendieck-unit"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 099T, label lemma-fully-faithful; Tag 0GLZ, label lemma-describe-pullback-from-etale"
+    "document": "lean/WeilConjectures/SixFunctors/ProEtale/Comparison/Defs.lean",
+    "place": "Comparison functors and exactness instances; Comparison/FullyFaithful.lean, isIso_comparisonAdjunction_unit"
    }
   },
   {
-   "text": "Choose an injective resolution $F\\to I^\\bullet$ in abelian etale sheaves, using the enough-injectives and cohomology conventions of [def-weil-pbc-sites-and-cohomology] (1)-(2). Exactness of $L$ from [lem-weil-pbc-site-pullback-abelian-exact] makes $LF\\to LI^\\bullet$ an exact augmented resolution. Each $LI^n$ is $G$-acyclic by [lem-cbc-abelian-comparison-injective-acyclicity]. Apply clause (2) of [lemma-weil-pbc-leray-acyclicity] to $v=G$ and this resolution: $R^qG(LF)$ is computed by $H^q(GLI^\\bullet)$. The natural unit of step 1 identifies the complex $I^\\bullet$ with $GLI^\\bullet$, commuting with every differential by unit naturality. Hence $R^qG(LF)=0$ for $q>0$, since $I^\\bullet$ resolves $F$. This uses only an ordinary resolution in degrees at least zero, with no boundedness or finiteness assumption on $F$.",
+   "text": "The existing arbitrary-coefficient injective acyclicity theorem says R.rightAcyclic (L.obj I) for every injective etale abelian sheaf I. Apply the generic derived-unit criterion to the unit from step 1 and this acyclicity. Its component is invertible at every bounded-below derived object. Mathlib Adjunction.fullyFaithfulLOfIsIsoUnit therefore makes L.mapDerivedCategoryPlus fully faithful.",
    "uses": [
-    "def-weil-pbc-sites-and-cohomology",
-    "lem-weil-pbc-site-pullback-abelian-exact",
     "lem-cbc-abelian-comparison-injective-acyclicity",
-    "lemma-weil-pbc-leray-acyclicity"
+    "lem-cbc-derived-unit-injective-acyclicity"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 099V, label lemma-relative-comparison, second paragraph; derived.tex Tag 015E, label lemma-leray-acyclicity"
+    "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/RightDerivedFunctor/PlusAdjunctionAcyclic.lean",
+    "place": "Adjunction.isIso_derivedPlus_unit_app_of_rightAcyclic; bounded-below injective-complex proof, lines 55-104"
    }
   },
   {
-   "text": "Apply [lem-weil-pbc-site-leray-degenerate] to the morphism $\\nu_T$ and the pro-etale abelian sheaf $A=LF$, with $V$ the terminal etale object $T\\to T$. The inclusion sends it to the terminal pro-etale object. The hypothesis $R^qG(A)=0$ for $q>0$ is exactly step 2. Thus for each $i\\geq0$ the edge map $e_A^i:H^i(T_{\\mathrm{et}},GLF)\\to H^i(T_{\\mathrm{proet}},LF)$ is an isomorphism. By the cited statement, it is specifically $H^i(\\varepsilon_{LF})\\circ\\nu_T^*$, not an unspecified isomorphism. Compose this edge isomorphism with $H^i(\\eta_F)$, an isomorphism by step 1.",
+   "text": "For any sheaves X,Y and n at least zero, take their degree-zero single objects, with the target shifted by n. Both objects belong to D+: the shifted target has lower bound -n. The inclusion D+ to D is fully faithful, so the Hom map of L.mapDerivedCategory between these objects is bijective. Conjugate this Hom bijection by the canonical single-functor isomorphisms and the shift comparison. Ext.homEquiv identifies the resulting map with L.mapExtAddHom X Y n, exactly by Ext.mapExactFunctor_hom. This is the completely proved private helper mapExt_bijective_of_derivedPlus_fullyFaithful, and uses no injective-preservation assertion for L.",
    "uses": [
-    "lem-weil-pbc-site-leray-degenerate"
+    "def-weil-abstract-derived-category"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 099W, label lemma-compare-cohomology, proof; sites-cohomology.tex Tag 0733, label lemma-apply-Leray"
+    "document": "lean/Sheaf/AlgebraicGeometry/AbelianEtaleProEtaleCohomologyComparison.lean",
+    "place": "Private Ext/Hom bridge; Mathlib Ext.mapExactFunctor_hom and Iso.homCongr"
    }
   },
   {
-   "text": "The preceding composite is the canonical pullback on $F$. Indeed the coefficient naturality of [lem-weil-pbc-site-cohomology-pullback] (2), applied to $\\eta_F:F\\to GLF$, gives $\\nu_T^*\\circ H^i(\\eta_F)=H^i(L\\eta_F)\\circ\\nu_T^*$. Consequently $e_{LF}^i\\circ H^i(\\eta_F)=H^i(\\varepsilon_{LF}\\circ L\\eta_F)\\circ\\nu_T^*=\\nu_T^*$, by the triangle identity for $L\\dashv G$ of [def-weil-pbc-sites-and-cohomology]. Since both factors on the left are isomorphisms, the pullback is an isomorphism. This also checks $i=0$, where the map is the unit on sections; no change of coefficient category has occurred.",
+   "text": "By its unchanged definition comparisonCohomologyMap is L.mapExtAddHom from the constant integral sheaf followed by Ext.precompAddEquiv for the canonical constant-sheaf comparison. The former is bijective by step 3 and the latter is an additive equivalence. Their composite is therefore bijective in every nonnegative degree, including degree zero. This proves the specified canonical map without choosing an unrelated Leray isomorphism.",
    "uses": [
-    "lem-weil-pbc-site-cohomology-pullback",
     "def-weil-pbc-sites-and-cohomology"
    ],
    "elementary": true,
    "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 099W, label lemma-compare-cohomology: identification with canonical pullback; sites-cohomology.tex Remark 08J6"
+    "document": "lean/Sheaf/AlgebraicGeometry/AbelianEtaleProEtaleCohomologyComparison.lean",
+    "place": "comparisonCohomologyMap and Sheaf.H.mapFunctor; Stacks 099W"
    }
   }
  ],
  "proof_deps": [
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-site-comparison-morphism",
   "def-weil-pbc-sites-and-cohomology",
   "lem-cbc-abelian-comparison-injective-acyclicity",
-  "lem-cbc-comparison-pullback-sections",
-  "lem-weil-pbc-site-cohomology-pullback",
-  "lem-weil-pbc-site-leray-degenerate",
-  "lem-weil-pbc-site-pullback-abelian-exact",
-  "lemma-weil-pbc-leray-acyclicity"
+  "lem-cbc-derived-unit-injective-acyclicity",
+  "lem-weil-pbc-comparison-grothendieck-unit"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/proetale.tex",
-  "place": "Tags 099V and 099W, labels lemma-relative-comparison and lemma-compare-cohomology"
+  "by": "agent",
+  "document": "lean/Sheaf/AlgebraicGeometry/AbelianEtaleProEtaleCohomologyComparison.lean",
+  "place": "T3, 2026-10-18: existing derived-unit acyclicity criterion, fully faithful bounded-below Hom maps, and the canonical Ext map"
  },
  "mathlib_searches": [
   {
@@ -182,12 +178,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lemma-weil-pbc-leray-acyclicity",
-  "lem-weil-pbc-site-pullback-abelian-exact",
-  "lem-weil-pbc-site-leray-degenerate",
-  "lem-weil-pbc-site-cohomology-pullback"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-14",
   "by": "L",
@@ -230,5 +221,15 @@
   "by": "NA",
   "date": "2026-10-15",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261018T062917-L-679448",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
