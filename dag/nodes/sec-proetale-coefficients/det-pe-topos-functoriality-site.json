@@ -22,13 +22,13 @@
  ],
  "proof": [
   {
-   "text": "For the covering axioms use the full category of weakly etale $X$-schemes of the fixed size [def-weil-pbc-small-proetale-site]. A pro-etale covering has weakly etale members and is fpqc [def-weil-pbc-proetale-covering]. The fpqc components of all three axioms are [lem-weil-pbc-fpqc-covering-axioms]. For a singleton isomorphism between objects, the map is weakly etale because every $X$-morphism between weakly etale $X$-schemes is weakly etale [sk-lem-pe-weakly-etale-stability]. For a composite family, its members are weakly etale by composition stability in the same statement [sk-lem-pe-weakly-etale-stability]. For a covering $\\{U_i\\to U\\}$ and $V\\to U$, form the scheme fibre products $W_i=U_i\\times_U V$ [def-pc-fibre-product], within the fixed scheme universe. The maps $W_i\\to V$ are weakly etale by base-change stability, and $W_i\\to X$ is weakly etale by composition stability, both from [sk-lem-pe-weakly-etale-stability], since $V\\to X$ is an object of the site. Thus $W_i\\to X$ is again an object. Fullness over $X$ makes the scheme universal property the universal property in this category: the induced map to $W_i$ is over $X$ because either projection gives its prescribed structure map to $X$. The fpqc pullback family from the covering-axioms node therefore is a pro-etale covering. This proves all three axioms.",
+   "text": "Take base-change and composition stability of weakly etale morphisms from the unit-route theorem weaklyEtale_stability (sk-lem-pe-weakly-etale-stability), installing both clauses as local instances. Then use the Mathlib realization of the same covering-axiom argument. The category X.ProEt and its finite limits are those of def-weil-pbc-small-proetale-site. Its precoverage is the comap of proetalePrecoverage along the underlying-scheme functor. Mathlib proves that proetalePrecoverage has isomorphisms and is stable under composition and base change, using weakly etale stability and the quasi-compact jointly-surjective covering axioms (the fpqc operations of lem-weil-pbc-fpqc-covering-axioms). The forgetful functor preserves pullbacks, so Precoverage.comap transfers all three properties. Unfold ProEt.precoverage to expose these instances. Precoverage.toPretopology.transitive gives the required Presieve.bind composition clause; it explicitly reindexes both levels by their arrows. For an arbitrary indexed covering and morphism b, choose the categorical pullbacks pullback b (a i), use IsPullback.of_hasPullback, and apply Precoverage.IsStableUnderBaseChange.mem_coverings_of_isPullback. Thus the site axiom is proved for every Type (u+1) index set, including the empty one. This retains the unit's original covering-stability step and its named stability theorem; Mathlib implements the remaining precoverage operations.",
    "uses": [
     "def-weil-pbc-small-proetale-site",
     "def-weil-pbc-proetale-covering",
     "lem-weil-pbc-fpqc-covering-axioms",
-    "sk-lem-pe-weakly-etale-stability",
-    "def-pc-fibre-product"
+    "def-pc-fibre-product",
+    "sk-lem-pe-weakly-etale-stability"
    ],
    "elementary": false,
    "source": {
@@ -37,8 +37,9 @@
    }
   },
   {
-   "text": "Let $\\{U_i\\to U\\}$ cover and let $a_i:U_i\\to T$ be $X$-morphisms agreeing on $U_i\\times_U U_j$. The cover is fpqc by [def-weil-pbc-proetale-covering]. The compatible-family statement [lem-weil-pbc-fpqc-representable-descent] supplies a unique scheme morphism $a:U\\to T$ restricting to the $a_i$. Its composite with $T\\to X$ and the structure map $U\\to X$ restrict to the same map on every $U_i$, since the $a_i$ are over $X$. The uniqueness clause of the same descent statement, now with target $X$, equates these two maps, proving that $a$ is over $X$. Its uniqueness follows from uniqueness as a scheme morphism. This is exactly the equalizer sheaf condition of [def-weil-pbc-sites-and-cohomology] for $\\operatorname{Hom}_X(-,T)$, including the empty covering case.",
+   "text": "Use Mathlib's existing instance (ProEt.topology X).Subcanonical. Its proof is GrothendieckTopology.subcanonical_of_full_of_faithful applied to ProEt.forget X and the topology proetaleTopology.over X. The big proetale topology is subcanonical because it is bounded above by fpqcTopology, whose subcanonicity is exactly lem-weil-pbc-fpqc-representable-descent. This formalizes the same fpqc descent argument, including the condition that maps are over X and the empty-cover case, through the full-and-faithful functor API.",
    "uses": [
+    "def-weil-pbc-small-proetale-site",
     "def-weil-pbc-proetale-covering",
     "lem-weil-pbc-fpqc-representable-descent",
     "def-weil-pbc-sites-and-cohomology"
@@ -50,7 +51,7 @@
    }
   },
   {
-   "text": "The size convention [def-weil-size-convention], explicitly used by [def-weil-pbc-small-proetale-site], fixes $\\mathcal U\\in\\mathcal V$ and a $\\mathcal V$-small skeleton within the chosen bound. Thus essential smallness here is relative to $\\mathcal V$, not a claim of $\\mathcal U$-essential smallness. Write $e:\\mathcal D\\to X_{\\mathrm{proet}}$ for the equivalence from that skeleton and $J$ for the topology established in step 1. The induced-topology statement [lem-weil-pbc-site-equivalence-sheaf-transport] gives a Grothendieck topology $K$ on $\\mathcal D$ and an equivalence $e^*:\\operatorname{Sh}(X_{\\mathrm{proet}},J;\\operatorname{Sets}_{\\mathcal V})\\simeq\\operatorname{Sh}(\\mathcal D,K;\\operatorname{Sets}_{\\mathcal V})$. Its hypotheses hold: $e$ is an equivalence, and $K$ is defined to be its induced topology. This is the small-site presentation, rather than an identification of the two sheaf categories by equality.",
+   "text": "The objects of X.ProEt lie in Type (u+1), and its morphisms lie in Type u, so Mathlib's essentiallySmall_of_small_of_locallySmall instance proves EssentiallySmall.{u+1} X.ProEt. Let e = equivSmallModel.{u+1} X.ProEt and K = e.inverse.inducedTopology (ProEt.topology X). SmallModel lies in Type (u+1) and has a SmallCategory instance in that universe. Apply Equivalence.sheafCongr with e and Type (u+1), the Mathlib realization of lem-weil-pbc-site-equivalence-sheaf-transport. Its inverse functor is a dense subsite automatically for this induced topology. This gives the required equivalence of the original sheaf category with sheaves on the small model.",
    "uses": [
     "def-weil-size-convention",
     "def-weil-pbc-small-proetale-site",
@@ -63,7 +64,7 @@
    }
   },
   {
-   "text": "By step 3, $\\mathcal D$ is a skeleton chosen within the bound of [def-weil-size-convention], so its objects and morphisms form sets in $\\mathcal V$; $K$ is a Grothendieck topology on $\\mathcal D$; and $e^*:\\Sh(X_{\\mathrm{proet}},J;\\operatorname{Sets}_{\\mathcal V})\\simeq\\Sh(\\mathcal D,K;\\operatorname{Sets}_{\\mathcal V})$ is an equivalence of categories. These are exactly the data of a $\\mathcal V$-small-site presentation in [def-weil-pbc-topos], so $\\Sh(X_{\\mathrm{proet}};\\operatorname{Sets}_{\\mathcal V})$ is a $\\mathcal V$-Grothendieck topos. With this definition (Stacks 00XA: a topos is the category of sheaves on a site, up to equivalence) the blueprint's alternative description by Giraud's theorem or as a left exact reflective subcategory of presheaves is not needed.",
+   "text": "Supply SmallModel.{u+1} X.ProEt, its SmallCategory instance, K and the nonempty equivalence from step 3 to the existential definition IsGrothendieckTopos.{u+1} (def-weil-pbc-topos). Pair this with the covering-site property, subcanonicity and essential smallness from the previous steps. No extra hypothesis on X is introduced.",
    "uses": [
     "def-weil-size-convention",
     "def-weil-pbc-topos"
@@ -90,7 +91,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-finite-pushforward-pullback/det-pe-topos-functoriality-site.proof.md",
-  "place": "Proof paragraphs *1*-*3*, with small-site transport explicitly supplied"
+  "place": "Proof paragraphs 1--3, formalized using the closed Mathlib covering, subcanonical and site-equivalence APIs; SHEAF group Y5, 2026-10-18."
  },
  "mathlib_searches": [
   {
@@ -185,5 +186,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y5",
+  "result": "pass",
+  "landing": "20261018T144427-L-3508340",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

@@ -62,6 +62,33 @@ theorem proetale_site_properties (X : Scheme.{u}) :
       (ProEt.topology X).Subcanonical ∧
       EssentiallySmall.{u + 1} X.ProEt ∧
       IsGrothendieckTopos.{u + 1} (Sheaf (ProEt.topology X) (Type (u + 1))) := by
-  sorry
+  have : MorphismProperty.IsStableUnderBaseChange @WeaklyEtale.{u} :=
+    weaklyEtale_stability.1
+  have : MorphismProperty.IsStableUnderComposition @WeaklyEtale.{u} :=
+    weaklyEtale_stability.2.1
+  have : (ProEt.precoverage X).HasIsos := by
+    dsimp [ProEt.precoverage]
+    infer_instance
+  have : (ProEt.precoverage X).IsStableUnderComposition := by
+    dsimp [ProEt.precoverage]
+    infer_instance
+  have : (ProEt.precoverage X).IsStableUnderBaseChange := by
+    dsimp [ProEt.precoverage]
+    infer_instance
+  have hsite : (ProEt.precoverage X).IsSiteForCoverings := by
+    refine ⟨inferInstance, ?_, ?_⟩
+    · exact (ProEt.precoverage X).toPretopology.transitive
+    · intro I U V a hR Y b
+      refine ⟨fun i ↦ Limits.pullback b (a i), fun i ↦ Limits.pullback.fst b (a i),
+        fun i ↦ Limits.pullback.snd b (a i), ?_, ?_⟩
+      · intro i
+        exact IsPullback.of_hasPullback _ _
+      · exact Precoverage.IsStableUnderBaseChange.mem_coverings_of_isPullback
+          a hR b _ _ (fun i ↦ IsPullback.of_hasPullback _ _)
+  refine ⟨hsite, inferInstance, inferInstance, ?_⟩
+  let e := equivSmallModel.{u + 1} X.ProEt
+  let K := e.inverse.inducedTopology (ProEt.topology X)
+  exact ⟨SmallModel.{u + 1} X.ProEt, inferInstance, K,
+    ⟨e.sheafCongr (ProEt.topology X) K (Type (u + 1))⟩⟩
 
 end AlgebraicGeometry.Scheme
