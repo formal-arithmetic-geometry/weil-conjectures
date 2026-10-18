@@ -10719,6 +10719,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.BoundedConstr
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.CohomologicalDimension
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.CompactSupport
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.CompactSupportBaseChange
+public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.ConstantCoefficients
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.ConstructibleDirectImage
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.Deligne
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.Deligne.ChangeOfBase

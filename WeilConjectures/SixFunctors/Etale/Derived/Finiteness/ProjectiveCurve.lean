@@ -11,6 +11,8 @@ public import WeilConjectures.AlgebraicGeometry.InvertibleExponent
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
 public import WeilConjectures.AlgebraicGeometry.Sites.Kummer
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.BoundedConstructible
+import WeilConjectures.AlgebraicGeometry.InvertibleExponentBase
+import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.ConstantCoefficients
 
 /-!
 # Constant coefficients on projective families of curves
@@ -142,7 +144,15 @@ theorem isConstructibleSheaf_homology_rightDerivedLowerStar_constantSheaf
       ((R((f)_*[ModuleCat.{u + 1} Λ])).obj
         ((_root_.DerivedCategory.singleFunctor _ 0).obj
           ((constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M)))) := by
-  sorry
+  refine constructibleHomology_rightDerivedLowerStar_constantSheaf_of_zmod f
+    (fun ℓ _ hℓ q' ↦ ?_) M q
+  -- `ℓ` divides the characteristic of `Λ`, which is invertible on `S`
+  have : HasInvertibleExponent (ULift.{u + 1} (ZMod ℓ)) S := by
+    obtain ⟨c, hc⟩ := hℓ
+    have hu := isUnit_ringChar_of_hasInvertibleExponent (Λ := Λ) S
+    rw [hc, Nat.cast_mul] at hu
+    exact ⟨ℓ, (Fact.out : ℓ.Prime).pos, by ext; simp, isUnit_of_mul_isUnit_left hu⟩
+  exact isConstructibleSheaf_homology_rightDerivedLowerStar_zmod aS f i hi hf ℓ q'
 
 end Etale
 
