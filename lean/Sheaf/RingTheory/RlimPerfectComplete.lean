@@ -5,15 +5,9 @@ Authors: SHEAF group NJ
 -/
 module
 
-public import Mathlib.RingTheory.AdicCompletion.Basic
-public import Mathlib.RingTheory.Ideal.Quotient.PowTransition
-public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRingsExact
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import WeilConjectures.CategoryTheory.DerivedCategory.Perfect
-public import WeilConjectures.CategoryTheory.Triangulated.DerivedLimit
 public import Sheaf.RingTheory.DerivedCompleteModuleComplex
-import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
-import Sheaf.RingTheory.RingPseudoCoherent
 import Sheaf.Algebra.Homology.RingPseudoCoherentSummand
 import Sheaf.Algebra.Homology.TensorRestrictExtendScalarsModule
 import Sheaf.RingTheory.NilpotentTorsionDerivedLimitComplete
