@@ -10,18 +10,13 @@ public import Sheaf.AlgebraicGeometry.QuasiFiniteMorphism
 public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
-import WeilConjectures.SixFunctors.OpenClosed.Complex
-import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.FiniteComparison
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
 import WeilConjectures.SixFunctors.Finite.Exact
-import Mathlib.AlgebraicGeometry.Sites.EtalePoint
-import Mathlib.AlgebraicGeometry.Morphisms.Finite
 import Sheaf.AlgebraicGeometry.FiniteFinitePresentationPushforwardConstructible
 import Sheaf.AlgebraicGeometry.Morphisms.QuasiFiniteFpFiniteFactorization
 import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekCoherence
-import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
-import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
+import WeilConjectures.ConstructibleSheaf.OpenClosed
+import Sheaf.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusExact
 
 /-!
 # Constructible cohomology under quasi-finite lower shriek
@@ -74,7 +69,49 @@ theorem constructibleCohomology_lowerShriek_of_quasiFinite
     ∀ q : ℤ, Scheme.IsConstructibleEtaleModuleSheaf
       ((_root_.DerivedCategory.Plus.homologyFunctor _ q).obj
         ((rightDerivedLowerShriekOfCompactificationPlus (ModuleCat.{u + 1} Λ) c).obj K)) := by
-  sorry
+  obtain ⟨T₁, a, g, ha, hac, hg, hgfp, hgqc, hgqs, hag, hT₁, hT₁qs⟩ :=
+    h.exists_qcqs_finitePresentation_factorization hqf
+  have := ha
+  have := hac
+  have := hg
+  have := hgfp
+  have := hgqc
+  have := hgqs
+  have := hT₁
+  have := hT₁qs
+  let d : Compactification h :=
+    { Z := T₁, i := a, g := g, comm := hag.symm,
+      isProper := inferInstance, isOpenImmersion := ha }
+  have : QuasiCompact d.i := hac
+  intro q
+  let F := (_root_.DerivedCategory.Plus.homologyFunctor _ q).obj K
+  have : Scheme.IsConstructibleSheaf F :=
+    (Scheme.isConstructibleEtaleModuleSheaf_iff F).mp (hK q)
+  have hzero : Scheme.IsConstructibleEtaleModuleSheaf
+      ((openImmersionLowerShriek (ModuleCat.{u + 1} Λ) a).obj F) :=
+    (Scheme.isConstructibleEtaleModuleSheaf_iff _).mpr
+      (Scheme.IsConstructibleSheaf.openImmersionLowerShriek
+        a a.closedComplement a.range_closedComplement F)
+  have hfinite :=
+    Scheme.isConstructibleEtaleModuleSheaf_lowerStar_of_finite_finitePresentation g _ hzero
+  have : Scheme.IsConstructibleSheaf
+      ((lowerStar (ModuleCat.{u + 1} Λ) g).obj
+        ((openImmersionLowerShriek (ModuleCat.{u + 1} Λ) a).obj F)) :=
+    (Scheme.isConstructibleEtaleModuleSheaf_iff _).mp hfinite
+  let J := (openImmersionLowerShriek (ModuleCat.{u + 1} Λ) a).mapDerivedCategoryPlus.obj K
+  let e₁ := (_root_.DerivedCategory.Plus.homologyFunctor _ q).mapIso
+      ((lowerStar (ModuleCat.{u + 1} Λ) g).rightDerivedFunctorPlusIsoMapDerivedCategoryPlus.app J)
+    ≪≫ ((lowerStar (ModuleCat.{u + 1} Λ) g).mapDerivedCategoryPlusHomologyFunctorIso q).symm.app J
+  let e₂ := (lowerStar (ModuleCat.{u + 1} Λ) g).mapIso
+    ((Functor.mapDerivedCategoryPlusHomologyFunctorIso
+      (openImmersionLowerShriek (ModuleCat.{u + 1} Λ) a) q).symm.app K)
+  let e₃ := (_root_.DerivedCategory.Plus.homologyFunctor _ q).mapIso
+    ((rightDerivedLowerShriekOfCompactificationPlusIso Λ c d).app K)
+  exact (Scheme.isConstructibleEtaleModuleSheaf_iff _).mpr
+    (Scheme.IsConstructibleSheaf.of_iso
+      (F := (lowerStar (ModuleCat.{u + 1} Λ) g).obj
+        ((openImmersionLowerShriek (ModuleCat.{u + 1} Λ) a).obj F))
+      (e₃ ≪≫ e₁ ≪≫ e₂).symm)
 
 /-- The closed-immersion consequence of quasi-finite constructibility.
 Source: Stacks Project, Tags 035C, 01TD, 0GK3 and 0GKM
@@ -96,6 +133,8 @@ theorem constructibleCohomology_lowerShriek_of_isClosedImmersion
     ∀ q : ℤ, Scheme.IsConstructibleEtaleModuleSheaf
       ((_root_.DerivedCategory.Plus.homologyFunctor _ q).obj
         ((rightDerivedLowerShriekOfCompactificationPlus (ModuleCat.{u + 1} Λ) c).obj K)) := by
-  sorry
+  apply constructibleCohomology_lowerShriek_of_quasiFinite Λ h _ K hK c
+  refine ⟨inferInstance, inferInstance, fun x ↦ ?_⟩
+  exact Scheme.Hom.quasiFiniteAt_iff_isOpen_singleton_asFiber.mp (h.quasiFiniteAt x)
 
 end AlgebraicGeometry.Etale
