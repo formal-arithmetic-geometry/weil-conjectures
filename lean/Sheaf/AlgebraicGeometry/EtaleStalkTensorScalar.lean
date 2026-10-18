@@ -7,11 +7,15 @@ module
 
 public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Closed
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
+public import Mathlib.CategoryTheory.Monoidal.Closed.Braided
 public import Mathlib.CategoryTheory.Sites.Point.Monoidal
 public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Point.Basic
-public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.StalkMonoidal
+public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.Defs
+import Sheaf.Algebra.Category.ModuleCat.RingScalarExtension
+import Mathlib.CategoryTheory.Sites.Adjunction
+import WeilConjectures.Mathlib.CategoryTheory.Sites.Monoidal
 
 /-!
 # Tensor products and scalar extension at geometric étale stalks
@@ -46,6 +50,55 @@ section Tensor
 
 variable {R : Type (u + 1)} [CommRing R]
 
+private theorem stalk_tensorator
+    (F G : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} R)) :
+    (let p := (pointSmallEtale y).ulift.{u + 1}
+    letI := (sheafificationAdjunction Y.smallEtaleTopology
+      (ModuleCat.{u + 1} R)).rightAdjointLaxMonoidal
+    Functor.LaxMonoidal.μ p.sheafFiber F G =
+      Functor.LaxMonoidal.μ p.presheafFiber F.obj G.obj ≫
+        p.presheafFiber.map (Functor.LaxMonoidal.μ
+          (sheafToPresheaf Y.smallEtaleTopology (ModuleCat.{u + 1} R)) F G)) := by
+  dsimp only
+  let p := (pointSmallEtale y).ulift.{u + 1}
+  let J := Y.smallEtaleTopology
+  let A := ModuleCat.{u + 1} R
+  let L := presheafToSheaf J A
+  let T := p.sheafFiber (A := A)
+  let e := p.presheafToSheafCompSheafFiberIso A
+  let adj := sheafificationAdjunction J A
+  let := adj.rightAdjointLaxMonoidal
+  -- Compare through sheafification, then cancel its monoidal structure maps.
+  have ht := NatTrans.IsMonoidal.tensor (τ := e.inv) F.obj G.obj
+  dsimp only [Functor.comp_obj] at ht
+  have he (H : Sheaf J A) :
+      e.inv.app H.obj ≫ T.map (adj.counit.app H) = 𝟙 (T.obj H) := by
+    change p.presheafFiber.map (adj.unit.app H.obj) ≫
+      p.presheafFiber.map ((sheafToPresheaf J A).map (adj.counit.app H)) = 𝟙 _
+    rw [← Functor.map_comp]
+    have h := congrArg (fun k ↦ p.presheafFiber.map k) (adj.right_triangle_components H)
+    simpa only [sheafToPresheaf, ObjectProperty.ι_obj, CategoryTheory.Functor.map_id,
+      Functor.id_obj] using h
+  have hm : p.presheafFiber.map (Functor.LaxMonoidal.μ
+      (sheafToPresheaf J A) F G) =
+      e.inv.app (F.obj ⊗ G.obj) ≫
+        T.map (Functor.OplaxMonoidal.δ L F.obj G.obj) ≫
+          T.map (adj.counit.app F ⊗ₘ adj.counit.app G) := by
+    rw [Adjunction.rightAdjointLaxMonoidal_μ, Adjunction.homEquiv_apply]
+    simp only [Functor.map_comp]
+    rfl
+  rw [hm, ← Category.assoc, ht]
+  simp only [Functor.LaxMonoidal.comp_μ, Category.assoc]
+  rw [← Functor.map_comp_assoc, Functor.Monoidal.μ_δ,
+    CategoryTheory.Functor.map_id, Category.id_comp,
+    ← Functor.LaxMonoidal.μ_natural]
+  rw [tensorHom_comp_tensorHom_assoc]
+  change Functor.LaxMonoidal.μ T F G =
+    ((e.inv.app F.obj ≫ T.map (adj.counit.app F)) ⊗ₘ
+      (e.inv.app G.obj ≫ T.map (adj.counit.app G))) ≫ Functor.LaxMonoidal.μ T F G
+  rw [he, he]
+  exact ((congrArg (fun k ↦ k ≫ Functor.LaxMonoidal.μ T F G)
+    (id_tensorHom_id (T.obj F) (T.obj G))).trans (Category.id_comp _)).symm
 
 /-- Source: Stacks 007K, 008B, 03EL, 04FM
 (blueprint: lem-pod-etale-stalk-tensor-scalar), clause 1.
@@ -71,7 +124,26 @@ theorem etale_stalk_tensor_unique
             p.toPresheafFiber U x (F ⊗ G).obj
     (∃! f, P f) ∧ P (Functor.LaxMonoidal.μ T F G) ∧
       IsIso (Functor.LaxMonoidal.μ T F G)) := by
-  sorry
+  dsimp only
+  let p := (pointSmallEtale y).ulift.{u + 1}
+  let := (sheafificationAdjunction Y.smallEtaleTopology
+    (ModuleCat.{u + 1} R)).rightAdjointLaxMonoidal
+  have hμ (U : Y.Etale) (x : p.fiber.obj U) :
+      (p.toPresheafFiber U x F.obj ⊗ₘ p.toPresheafFiber U x G.obj) ≫
+        Functor.LaxMonoidal.μ p.sheafFiber F G =
+      (Functor.LaxMonoidal.μ
+        (sheafToPresheaf Y.smallEtaleTopology (ModuleCat.{u + 1} R)) F G).app (op U) ≫
+          p.toPresheafFiber U x (F ⊗ G).obj := by
+    rw [stalk_tensorator y]
+    rw [← Category.assoc, p.tensorHom_comp_toPresheafFiber_μ]
+    exact p.toPresheafFiber_naturality _ U x
+  refine ⟨⟨Functor.LaxMonoidal.μ p.sheafFiber F G, hμ, ?_⟩, hμ, inferInstance⟩
+  intro a ha
+  apply ((p.isColimitPresheafFiberCocone F.obj).tensor
+    (p.isColimitPresheafFiberCocone G.obj)).hom_ext
+  rintro ⟨⟨U, x⟩⟩
+  exact (ha U x).trans (hμ U x).symm
+
 
 /-- Source: Stacks 008B and 03EL (blueprint: lem-pod-etale-stalk-tensor-scalar),
 clause 1 naturality. Step 3: both composites send pure germs to the germ of the tensor
@@ -85,7 +157,7 @@ theorem etale_stalk_tensor_natural
       ((pointSmallEtale y).ulift.{u + 1}.sheafFiber (A := ModuleCat.{u + 1} R)).Monoidal
     (T.map f ⊗ₘ T.map g) ≫ Functor.LaxMonoidal.μ T F' G' =
       Functor.LaxMonoidal.μ T F G ≫ T.map (f ⊗ₘ g)) := by
-  sorry
+  exact Functor.LaxMonoidal.μ_natural _ f g
 
 /-- Source: Stacks 008B and 03EL (blueprint: lem-pod-etale-stalk-tensor-scalar),
 clause 1 coherence. Step 3 evaluates associativity, symmetry and the two unit diagrams
@@ -113,13 +185,69 @@ theorem etale_stalk_tensor_coherence
     ((T.obj F ◁ Functor.LaxMonoidal.ε T) ≫
         Functor.LaxMonoidal.μ T F (𝟙_ _) ≫ T.map (ρ_ F).hom =
       (ρ_ (T.obj F)).hom)) := by
-  sorry
+  dsimp only
+  let p := (pointSmallEtale y).ulift.{u + 1}
+  let T := p.sheafFiber (A := ModuleCat.{u + 1} R)
+  refine ⟨rfl, Functor.LaxMonoidal.associativity T F G H, ?_,
+    (Functor.LaxMonoidal.left_unitality T F).symm,
+    (Functor.LaxMonoidal.right_unitality T F).symm⟩
+  let := (sheafificationAdjunction Y.smallEtaleTopology
+    (ModuleCat.{u + 1} R)).rightAdjointLaxMonoidal
+  have hμ (F G : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} R)) :=
+    (etale_stalk_tensor_unique y F G).2.1
+  apply ((p.isColimitPresheafFiberCocone F.obj).tensor
+    (p.isColimitPresheafFiberCocone G.obj)).hom_ext
+  rintro ⟨⟨U, x⟩⟩
+  change (p.toPresheafFiber U x F.obj ⊗ₘ p.toPresheafFiber U x G.obj) ≫
+      (β_ (T.obj F) (T.obj G)).hom ≫ Functor.LaxMonoidal.μ T G F =
+    (p.toPresheafFiber U x F.obj ⊗ₘ p.toPresheafFiber U x G.obj) ≫
+      Functor.LaxMonoidal.μ T F G ≫ T.map (β_ F G).hom
+  erw [BraidedCategory.braiding_naturality_assoc]
+  erw [hμ G F U x]
+  erw [reassoc_of% (hμ F G U x)]
+  change _ = _ ≫ p.toPresheafFiber U x (F ⊗ G).obj ≫
+    p.presheafFiber.map (β_ F G).hom.hom
+  erw [p.toPresheafFiber_naturality]
+  have h := NatTrans.congr_app
+    (Functor.LaxBraided.braided
+      (F := sheafToPresheaf Y.smallEtaleTopology (ModuleCat.{u + 1} R)) F G) (op U)
+  change (Functor.LaxMonoidal.μ
+      (sheafToPresheaf Y.smallEtaleTopology (ModuleCat.{u + 1} R)) F G).app (op U) ≫
+      (β_ F G).hom.hom.app (op U) =
+    (β_ (F.obj.obj (op U)) (G.obj.obj (op U))).hom ≫
+      (Functor.LaxMonoidal.μ
+        (sheafToPresheaf Y.smallEtaleTopology (ModuleCat.{u + 1} R)) G F).app (op U) at h
+  simpa only [← Category.assoc] using
+    congrArg (fun k ↦ k ≫ p.toPresheafFiber U x (G ⊗ F).obj) h.symm
+
 
 end Tensor
 
 section Scalar
 
 variable {R S : Type (u + 1)} [Ring R] [Ring S] (f : R →+* S)
+
+private theorem scalar_coprojection
+    (E : ModuleCat.{u + 1} R ⥤ ModuleCat.{u + 1} S) [E.IsLeftAdjoint]
+    (F : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} R))
+    (U : Y.Etale) (x : (pointSmallEtale y).ulift.{u + 1}.fiber.obj U) :
+    (let p := (pointSmallEtale y).ulift.{u + 1}
+    let J := Y.smallEtaleTopology
+    let B := ModuleCat.{u + 1} S
+    E.map (p.toPresheafFiber U x F.obj) ≫
+        (p.presheafFiberCompIso E).inv.app F.obj ≫
+          (p.presheafToSheafCompSheafFiberIso B).inv.app (F.obj ⋙ E) =
+      (toSheafify J (F.obj ⋙ E)).app (op U) ≫
+        p.toPresheafFiber U x ((presheafToSheaf J B).obj (F.obj ⋙ E)).obj) := by
+  dsimp only
+  let p := (pointSmallEtale y).ulift.{u + 1}
+  change E.map (p.toPresheafFiber U x F.obj) ≫
+    (p.presheafFiberCompIso E).inv.app F.obj ≫
+      (p.presheafToSheafCompSheafFiberIso (ModuleCat.{u + 1} S)).inv.app (F.obj ⋙ E) = _
+  rw [← p.toPresheafFiber_presheafFiberCompIso_hom_app E U x F.obj]
+  rw [Category.assoc]
+  erw [Iso.hom_inv_id_app_assoc]
+  exact p.toPresheafFiber_naturality (toSheafify Y.smallEtaleTopology (F.obj ⋙ E)) U x
 
 /-- Source: Stacks 008B, change-of-rings construction
 (blueprint: lem-pod-etale-stalk-tensor-scalar), clause 2's tensor object.
@@ -130,36 +258,8 @@ scalar extension without imposing commutativity. -/
 theorem etale_scalar_extension_exists :
     ∃ E : ModuleCat.{u + 1} R ⥤ ModuleCat.{u + 1} S,
       Nonempty (E ⊣ ModuleCat.restrictScalars f) := by
-  sorry
-
-/-- Source: Stacks 007K, 008B and 04FM
-(blueprint: lem-pod-etale-stalk-tensor-scalar), clause 2.
-Step 4 uses `lem-weil-pbc-sheafification-geometric-stalk` and
-`lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered`. The balanced maps on sections
-to `S ⊗[R] F_y` induce the comparison inverse. A tensor of a germ is sent to the germ
-of its tensor section; equality of representatives follows on a refinement. Both
-composites are identities on pure tensors. Naturality and uniqueness follow by the
-same calculation. The displayed equation is the pure-germ formula at `1 ⊗ s`;
-`S`-linearity gives it at every `a ⊗ s`. -/
-theorem etale_stalk_scalar_unique
-    (E : ModuleCat.{u + 1} R ⥤ ModuleCat.{u + 1} S)
-    (adj : E ⊣ ModuleCat.restrictScalars f) :
-    (let p := (pointSmallEtale y).ulift.{u + 1}
-    let J := Y.smallEtaleTopology
-    let A := ModuleCat.{u + 1} R
-    let B := ModuleCat.{u + 1} S
-    let P := fun c : p.sheafFiber ⋙ E ⟶
-        sheafToPresheaf J A ⋙ (Functor.whiskeringRight _ _ _).obj E ⋙
-          presheafToSheaf J B ⋙ p.sheafFiber ↦
-      ∀ (F : Sheaf J A) (U : Y.Etale) (x : p.fiber.obj U),
-        p.toPresheafFiber U x F.obj ≫ adj.unit.app (p.sheafFiber.obj F) ≫
-          (ModuleCat.restrictScalars f).map (c.app F) =
-        adj.unit.app (F.obj.obj (op U)) ≫
-          (ModuleCat.restrictScalars f).map
-            ((toSheafify J (F.obj ⋙ E)).app (op U) ≫
-              p.toPresheafFiber U x ((presheafToSheaf J B).obj (F.obj ⋙ E)).obj)
-    (∃! c, P c) ∧ ∀ c, P c → ∀ F : Sheaf J A, IsIso (c.app F)) := by
-  sorry
+  exact ⟨ModuleCat.ringExtendScalars.{u + 1, u + 1} f,
+    ⟨ModuleCat.ringExtendScalarsAdj.{u + 1, u + 1} f⟩⟩
 
 /-- Source: Stacks 007K, 008B and 04FM
 (blueprint: lem-pod-etale-stalk-tensor-scalar), clause 2, individual-map uniqueness.
@@ -190,7 +290,95 @@ theorem etale_stalk_scalar_component_unique
             ((toSheafify J (F.obj ⋙ E)).app (op U) ≫
               p.toPresheafFiber U x Q.obj)
     (∃! c, P c) ∧ P c₀ ∧ IsIso c₀) := by
-  sorry
+  let := adj.isLeftAdjoint
+  dsimp only
+  let p := (pointSmallEtale y).ulift.{u + 1}
+  let J := Y.smallEtaleTopology
+  let B := ModuleCat.{u + 1} S
+  let Q := (presheafToSheaf J B).obj (F.obj ⋙ E)
+  let c₀ := (p.presheafFiberCompIso E).inv.app F.obj ≫
+    (p.presheafToSheafCompSheafFiberIso B).inv.app (F.obj ⋙ E)
+  have hc (U : Y.Etale) (x : p.fiber.obj U) :
+      E.map (p.toPresheafFiber U x F.obj) ≫ c₀ =
+        (toSheafify J (F.obj ⋙ E)).app (op U) ≫ p.toPresheafFiber U x Q.obj := by
+    dsimp [c₀]
+    rw [← p.toPresheafFiber_presheafFiberCompIso_hom_app E U x F.obj]
+    simp only [Category.assoc, Iso.hom_inv_id_app_assoc]
+    exact p.toPresheafFiber_naturality (toSheafify J (F.obj ⋙ E)) U x
+  have hp (U : Y.Etale) (x : p.fiber.obj U) :
+      p.toPresheafFiber U x F.obj ≫ adj.unit.app (p.sheafFiber.obj F) ≫
+        (ModuleCat.restrictScalars f).map c₀ =
+      adj.unit.app (F.obj.obj (op U)) ≫ (ModuleCat.restrictScalars f).map
+        ((toSheafify J (F.obj ⋙ E)).app (op U) ≫ p.toPresheafFiber U x Q.obj) := by
+    erw [← Category.assoc, ← adj.unit_naturality]
+    rw [Category.assoc]
+    simpa only [Functor.comp_map, Category.assoc, ← Functor.map_comp] using
+      congrArg (fun k ↦ adj.unit.app (F.obj.obj (op U)) ≫
+        (ModuleCat.restrictScalars f).map k) (hc U x)
+  refine ⟨⟨c₀, hp, ?_⟩, hp, ?_⟩
+  · intro c h
+    apply (adj.homEquiv _ _).injective
+    apply p.presheafFiber_hom_ext
+    intro U x
+    simpa only [Adjunction.homEquiv_apply, Category.assoc, sheafToPresheaf,
+      ObjectProperty.ι_obj] using (h U x).trans (hp U x).symm
+  · dsimp [c₀]
+    infer_instance
+
+
+/-- Source: Stacks 007K, 008B and 04FM
+(blueprint: lem-pod-etale-stalk-tensor-scalar), clause 2.
+Step 4 uses `lem-weil-pbc-sheafification-geometric-stalk` and
+`lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered`. The balanced maps on sections
+to `S ⊗[R] F_y` induce the comparison inverse. A tensor of a germ is sent to the germ
+of its tensor section; equality of representatives follows on a refinement. Both
+composites are identities on pure tensors. Naturality and uniqueness follow by the
+same calculation. The displayed equation is the pure-germ formula at `1 ⊗ s`;
+`S`-linearity gives it at every `a ⊗ s`. -/
+theorem etale_stalk_scalar_unique
+    (E : ModuleCat.{u + 1} R ⥤ ModuleCat.{u + 1} S)
+    (adj : E ⊣ ModuleCat.restrictScalars f) :
+    (let p := (pointSmallEtale y).ulift.{u + 1}
+    let J := Y.smallEtaleTopology
+    let A := ModuleCat.{u + 1} R
+    let B := ModuleCat.{u + 1} S
+    let P := fun c : p.sheafFiber ⋙ E ⟶
+        sheafToPresheaf J A ⋙ (Functor.whiskeringRight _ _ _).obj E ⋙
+          presheafToSheaf J B ⋙ p.sheafFiber ↦
+      ∀ (F : Sheaf J A) (U : Y.Etale) (x : p.fiber.obj U),
+        p.toPresheafFiber U x F.obj ≫ adj.unit.app (p.sheafFiber.obj F) ≫
+          (ModuleCat.restrictScalars f).map (c.app F) =
+        adj.unit.app (F.obj.obj (op U)) ≫
+          (ModuleCat.restrictScalars f).map
+            ((toSheafify J (F.obj ⋙ E)).app (op U) ≫
+              p.toPresheafFiber U x ((presheafToSheaf J B).obj (F.obj ⋙ E)).obj)
+    (∃! c, P c) ∧ ∀ c, P c → ∀ F : Sheaf J A, IsIso (c.app F)) := by
+  let := adj.isLeftAdjoint
+  dsimp only
+  let p := (pointSmallEtale y).ulift.{u + 1}
+  let J := Y.smallEtaleTopology
+  let A := ModuleCat.{u + 1} R
+  let B := ModuleCat.{u + 1} S
+  let c : p.sheafFiber ⋙ E ⟶
+      sheafToPresheaf J A ⋙ (Functor.whiskeringRight _ _ _).obj E ⋙
+        presheafToSheaf J B ⋙ p.sheafFiber :=
+    Functor.whiskerLeft (sheafToPresheaf J A) (p.presheafFiberCompIso E).inv ≫
+      Functor.whiskerLeft (sheafToPresheaf J A ⋙
+        (Functor.whiskeringRight _ _ _).obj E) (p.presheafToSheafCompSheafFiberIso B).inv
+  have hc := fun F ↦ etale_stalk_scalar_component_unique y f E adj F
+  refine ⟨⟨c, ?_, ?_⟩, ?_⟩
+  · intro F U x
+    exact (hc F).2.1 U x
+  · intro d hd
+    apply NatTrans.ext
+    funext F
+    exact (hc F).1.unique (hd F) ((hc F).2.1)
+  · intro d hd F
+    have h := (hc F).1.unique (hd F) ((hc F).2.1)
+    rw [h]
+    exact (hc F).2.2
+
+
 
 end Scalar
 
@@ -236,6 +424,87 @@ theorem etale_stalk_scalar_iteration {R S V : Type (u + 1)} [Ring R] [Ring S] [R
         a.hom.app (F.obj.obj (op U)) ≫ (toSheafify J (F.obj ⋙ E₁₃)).app (op U)) ∧
       E₂₃.map c₁₂ ≫ c₂₃ ≫ p.sheafFiber.map b.hom =
         a.hom.app (p.sheafFiber.obj F) ≫ c₁₃) := by
-  sorry
+  let := adj₁₂.isLeftAdjoint
+  let := adj₂₃.isLeftAdjoint
+  let := adj₁₃.isLeftAdjoint
+  dsimp only
+  let J := Y.smallEtaleTopology
+  let p := (pointSmallEtale y).ulift.{u + 1}
+  let B := ModuleCat.{u + 1} S
+  let D := ModuleCat.{u + 1} V
+  let F₁₂ := (presheafToSheaf J B).obj (F.obj ⋙ E₁₂)
+  let F₁₂₃ := (presheafToSheaf J D).obj (F₁₂.obj ⋙ E₂₃)
+  let F₁₃ := (presheafToSheaf J D).obj (F.obj ⋙ E₁₃)
+  let a := ((adj₁₂.comp adj₂₃).ofNatIsoRight
+    (ModuleCat.restrictScalarsComp f g).symm).leftAdjointUniq adj₁₃
+  -- Extending a sheafification unit becomes invertible after sheafification.
+  let k := (presheafToSheaf J D).map
+    (Functor.whiskerRight (toSheafify J (F.obj ⋙ E₁₂)) E₂₃)
+  have hk : IsIso k := by
+    apply (J.W_iff _).mp
+    exact J.W_of_preservesSheafification E₂₃ _ (J.W_toSheafify _)
+  let b : F₁₂₃ ≅ F₁₃ :=
+    (asIso k).symm ≪≫ (presheafToSheaf J D).mapIso (Functor.isoWhiskerLeft F.obj a)
+  have hb :
+      Functor.whiskerRight (toSheafify J (F.obj ⋙ E₁₂)) E₂₃ ≫
+        toSheafify J (F₁₂.obj ⋙ E₂₃) ≫ b.hom.hom =
+      Functor.whiskerLeft F.obj a.hom ≫ toSheafify J (F.obj ⋙ E₁₃) := by
+    rw [toSheafify_naturality_assoc]
+    change toSheafify J _ ≫ (sheafToPresheaf J D).map k ≫
+      (sheafToPresheaf J D).map (inv k) ≫
+        sheafifyMap J (Functor.whiskerLeft F.obj a.hom) = _
+    rw [← Functor.map_comp_assoc, IsIso.hom_inv_id,
+      CategoryTheory.Functor.map_id, Category.id_comp]
+    exact (toSheafify_naturality J (Functor.whiskerLeft F.obj a.hom)).symm
+  refine ⟨b, ?_, ?_⟩
+  · intro U
+    exact NatTrans.congr_app hb (op U)
+  · let c₁₂ := (p.presheafFiberCompIso E₁₂).inv.app F.obj ≫
+      (p.presheafToSheafCompSheafFiberIso B).inv.app (F.obj ⋙ E₁₂)
+    let c₂₃ := (p.presheafFiberCompIso E₂₃).inv.app F₁₂.obj ≫
+      (p.presheafToSheafCompSheafFiberIso D).inv.app (F₁₂.obj ⋙ E₂₃)
+    let c₁₃ := (p.presheafFiberCompIso E₁₃).inv.app F.obj ≫
+      (p.presheafToSheafCompSheafFiberIso D).inv.app (F.obj ⋙ E₁₃)
+    -- It remains to check the square on the images of section coprojections.
+    apply (isColimitOfPreserves (E₁₂ ⋙ E₂₃)
+      (p.isColimitPresheafFiberCocone F.obj)).hom_ext
+    rintro ⟨⟨U, x⟩⟩
+    have h₁₂ := scalar_coprojection y E₁₂ F U x
+    have h₂₃ := scalar_coprojection y E₂₃ F₁₂ U x
+    have h₁₃ := scalar_coprojection y E₁₃ F U x
+    let i := p.toPresheafFiber U x F.obj
+    let j₁₂ := p.toPresheafFiber U x F₁₂.obj
+    let j₂₃ := p.toPresheafFiber U x F₁₂₃.obj
+    let j₁₃ := p.toPresheafFiber U x F₁₃.obj
+    let t₁₂ := (toSheafify J (F.obj ⋙ E₁₂)).app (op U)
+    let t₂₃ := (toSheafify J (F₁₂.obj ⋙ E₂₃)).app (op U)
+    let t₁₃ := (toSheafify J (F.obj ⋙ E₁₃)).app (op U)
+    change E₁₂.map i ≫ c₁₂ = t₁₂ ≫ j₁₂ at h₁₂
+    change E₂₃.map j₁₂ ≫ c₂₃ = t₂₃ ≫ j₂₃ at h₂₃
+    change E₁₃.map i ≫ c₁₃ = t₁₃ ≫ j₁₃ at h₁₃
+    have hbU : E₂₃.map t₁₂ ≫ t₂₃ ≫ b.hom.hom.app (op U) =
+        a.hom.app (F.obj.obj (op U)) ≫ t₁₃ := NatTrans.congr_app hb (op U)
+    change E₂₃.map (E₁₂.map i) ≫ E₂₃.map c₁₂ ≫ c₂₃ ≫ p.sheafFiber.map b.hom =
+      E₂₃.map (E₁₂.map i) ≫ a.hom.app (p.sheafFiber.obj F) ≫ c₁₃
+    calc
+      _ = E₂₃.map t₁₂ ≫ (E₂₃.map j₁₂ ≫ c₂₃) ≫ p.sheafFiber.map b.hom := by
+        rw [← Functor.map_comp_assoc, h₁₂, Functor.map_comp]
+        simp only [Category.assoc]
+      _ = E₂₃.map t₁₂ ≫ t₂₃ ≫ j₂₃ ≫ p.sheafFiber.map b.hom := by
+        erw [h₂₃]
+        simp only [Category.assoc]
+      _ = E₂₃.map t₁₂ ≫ t₂₃ ≫ b.hom.hom.app (op U) ≫ j₁₃ := by
+        have hnB := p.toPresheafFiber_naturality b.hom.hom U x
+        change j₂₃ ≫ p.sheafFiber.map b.hom = b.hom.hom.app (op U) ≫ j₁₃ at hnB
+        exact congrArg (fun k ↦ E₂₃.map t₁₂ ≫ t₂₃ ≫ k) hnB
+      _ = a.hom.app (F.obj.obj (op U)) ≫ t₁₃ ≫ j₁₃ := by
+        simpa only [Category.assoc] using congrArg (fun k ↦ k ≫ j₁₃) hbU
+      _ = _ := by
+        have hn := a.hom.naturality i
+        dsimp only [Functor.comp_map] at hn
+        symm
+        rw [← Category.assoc]
+        erw [hn]
+        rw [Category.assoc, h₁₃]
 
 end AlgebraicGeometry.Scheme
