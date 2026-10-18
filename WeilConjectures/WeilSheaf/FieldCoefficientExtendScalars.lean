@@ -26,9 +26,11 @@ constructibility, hence induces an exact functor on pro-étale Weil sheaves
 `D^b_{c,W}(X, E) ⥤ D^b_{c,W}(X, ℚ̄_ℓ)` (`AlgebraicGeometry.FieldWeilComplex.extendScalarsToAdic`,
 and `AlgebraicGeometry.FieldWeilComplex.toWeilComplex` for a subfield `E ⊆ ℚ̄_ℓ`).
 
-The transition functors between two finite stages `E ⊆ E'` and the universal property of the
-`2`-colimit (every `ℚ̄_ℓ`-Weil complex and every morphism between them is defined over a finite
-stage) are not formalised here.
+The transition functors between two finite stages `E ⊆ E'`, the cocone of these functors
+(`AlgebraicGeometry.FieldWeilComplex.cocone`) and the `2`-colimit
+`AlgebraicGeometry.WeilComplexTwoColimit`, with its comparison functor to
+`AlgebraicGeometry.WeilComplex`, are in `WeilConjectures.WeilSheaf.FieldCoefficientTransition`
+and `WeilConjectures.WeilSheaf.FieldCoefficientTwoColimit`.
 -/
 
 @[expose] public section
