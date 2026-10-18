@@ -474,6 +474,7 @@ theorem boundedConstructibleIntegral_and_torAmplitudeIn_of_isHomotopyLimit {X Y 
   exact h₂
 
 include hϖ hI in
+set_option maxHeartbeats 1600000 in
 /-- Blueprint `prop-coef-integral-exceptional-adjoint`: The integral exceptional adjoint on
 constructible complexes.
 
