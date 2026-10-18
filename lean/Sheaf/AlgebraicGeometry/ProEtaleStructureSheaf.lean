@@ -1,0 +1,46 @@
+/-
+Copyright (c) 2026 The SHEAF contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: SHEAF group Q16
+-/
+module
+
+public import Mathlib.AlgebraicGeometry.Sites.Proetale
+
+/-! # The structure sheaf on the small pro-etale site
+
+Source: Stacks Project, Tags 03O3 and 098K
+(blueprint: def-pur-proetale-structure-sheaf).
+-/
+
+@[expose] public section
+
+universe u
+
+open CategoryTheory
+
+namespace AlgebraicGeometry.Scheme
+
+/-- Global sections, restricted to weakly etale schemes over `S`, with pullback of functions.
+Source: Stacks Project, Tags 03O3 and 098K
+(blueprint: def-pur-proetale-structure-sheaf). -/
+def proEtaleStructurePresheaf (S : Scheme.{u}) : S.ProEtᵒᵖ ⥤ CommRingCat.{u} :=
+  (ProEt.forget S ⋙ Over.forget S).op ⋙ Scheme.Γ
+
+/-- Global sections form a sheaf for pro-etale coverings.
+Source: Stacks Project, Tag 03O3 (blueprint: def-pur-proetale-structure-sheaf).
+Proof: the underlying set presheaf is represented on schemes by the affine line over `Z`.
+Representable functors satisfy fpqc descent. Restrict this descent to the small pro-etale
+site, whose coverings are fpqc coverings. The forgetful functor from commutative rings
+creates limits and reflects isomorphisms, so set-valued descent gives ring-valued descent. -/
+theorem proEtaleStructurePresheaf_isSheaf (S : Scheme.{u}) :
+    Presheaf.IsSheaf (ProEt.topology S) (proEtaleStructurePresheaf S) := by
+  sorry
+
+/-- The pro-etale structure sheaf, with sections `Γ(U, O_U)` and the usual restriction maps.
+Source: Stacks Project, Tags 03O3 and 098K
+(blueprint: def-pur-proetale-structure-sheaf). -/
+def proEtaleStructureSheaf (S : Scheme.{u}) : Sheaf (ProEt.topology S) CommRingCat.{u} :=
+  ⟨proEtaleStructurePresheaf S, proEtaleStructurePresheaf_isSheaf S⟩
+
+end AlgebraicGeometry.Scheme

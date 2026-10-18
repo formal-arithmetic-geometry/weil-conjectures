@@ -1,0 +1,80 @@
+/-
+Copyright (c) 2026 The SHEAF contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: SHEAF group Q64
+-/
+module
+
+public import Sheaf.AlgebraicGeometry.ProEtaleSurjectiveTowerDerivedLimit
+public import Mathlib.Algebra.Homology.DerivedCategory.Basic
+public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits
+public import Sheaf.CategoryTheory.RingedSiteModules
+public import Mathlib.Algebra.Homology.HomologicalComplexLimits
+public import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Basic
+
+import Sheaf.AlgebraicGeometry.ProEtaleProductsExact
+import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
+import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
+import Sheaf.Algebra.Homology.KInjectiveProductsTermwise
+
+import Sheaf.Algebra.Homology.KInjectiveProducts
+/-!
+# Products in the derived category of pro-etale module sheaves
+
+Source: Weil conjectures blueprint, snapshot main-20261015,
+sec-proetale-coefficients/sk-prop-pe-products/det-pe-products-derived.md
+(blueprint: det-pe-products-derived).
+-/
+
+@[expose] public section
+
+set_option autoImplicit false
+
+universe t u v
+
+open CategoryTheory CategoryTheory.Limits
+
+namespace AlgebraicGeometry.Scheme.ProEt
+
+/-- Products of complexes of pro-etale module sheaves are computed termwise in the derived
+category, commute with cohomology, and preserve quasi-isomorphisms.
+
+Source: Weil conjectures blueprint, snapshot main-20261015,
+sec-proetale-coefficients/sk-prop-pe-products/det-pe-products-derived.md
+(blueprint: det-pe-products-derived).
+
+Proof plan:
+1. Form the termwise product using Mathlib's `coneOfHasLimitEval`. Its differential and
+   projections are determined degreewise by the product universal property
+   (def-weil-category-product and def-weil-abstract-derived-category).
+2. By det-pe-products-exact, products preserve the short exact sequences with cycles,
+   boundaries and cohomology. Thus the canonical map induced by projections identifies
+   the cohomology of this product with the product of the cohomologies, naturally in K.
+3. For a family of quasi-isomorphisms the cohomology comparison identifies the map on
+   product cohomology with the product of the isomorphisms on cohomology. Its inverse
+   is the product of their inverses, so this product map is a quasi-isomorphism.
+4. Use def-weil-size-convention and lem-weil-pbc-ring-sheaves-grothendieck to regard the
+   arbitrary ring-sheaf module category as Grothendieck abelian. Apply
+   lem-sfb-grothendieck-k-injective to choose resolutions K i to J i. By
+   lem-pc-ringed-space-product-kinjective, their termwise product is K-injective and
+   its localization, with the localized projections, is a product in the derived category.
+5. Step 3 makes the product of the resolution maps a quasi-isomorphism. Its projection
+   squares commute. Invert it and the individual localized resolution maps to transfer
+   existence and uniqueness of the product lift to the localized termwise product of K.
+   Hence the actual localized product cone is limiting for arbitrary derived morphisms. -/
+theorem products_derived
+    (X : Scheme.{t})
+    (R : Sheaf (topology X) RingCat.{max u (t + 1)})
+    (I : Type u)
+    [HasDerivedCategory.{v} (ringedSiteModules.{max u (t + 1)} R)]
+    (K : I → CochainComplex (ringedSiteModules.{max u (t + 1)} R) ℤ) :
+    Nonempty (IsLimit (DerivedCategory.Q.mapCone (limit.cone (Discrete.functor K)))) ∧
+      (∀ p : ℤ, IsIso (piComparison
+        (HomologicalComplex.homologyFunctor
+          (ringedSiteModules.{max u (t + 1)} R) (ComplexShape.up ℤ) p) K)) ∧
+      (∀ (K' : I → CochainComplex (ringedSiteModules.{max u (t + 1)} R) ℤ)
+        (f : ∀ i : I, K i ⟶ K' i), (∀ i : I, QuasiIso (f i)) →
+          QuasiIso (Limits.Pi.map f)) := by
+  sorry
+
+end AlgebraicGeometry.Scheme.ProEt
