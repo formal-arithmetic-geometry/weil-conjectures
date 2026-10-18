@@ -303,5 +303,23 @@
   "group": "Q99",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q99-707657bbe (reviewer sub-agent of L); spot-checked: I read the item, the new node and every cited statement in full. Sources: Stacks 03S8 lemma-jshriek-constructible (3) (l.12185-12212) and 095B lemma-pushforward-locally-constant (l.9973-9990). No SGA source is used. The item statement is unchanged from Q23's version, matches 03S8(3) hypothesis by hypothesis, and matches the constructibility notion the parent uses with M=R. Step 1: 03S0 stratification, qcqs X and U checked. Step 2: 03S6 module base change (any commutative Lambda) with f=i_a, plus constant pullback (its category of values includes Lambda-modules), giving i_a^{-1}j_!M = pi_{a!}M. Step 3: 03S7 shriek=star for finite etale pi, any ring. Step 4: a constant sheaf is locally constant of finite type (maximal sieve); apply the new node and move the trivializations across the isomorphism. Step 5: elementary assembly, including empty X and empty strata. New node lem-per-finite-etale-pushforward-finite-type is true: etale-locally the finite etale map splits into n sheets, and a common refinement gives a finite product of finitely generated modules (zero when n=0). No finiteness of R or M is needed (checked with R=Z, M=Z). B1-B9 hold. It strictly generalizes lem-weil-pbc-etale-finite-pushforward-locally-constant, which needs a finite Lambda and so does not apply here; it is not a duplicate or a restatement. lem-weil-pbc-etale-free-sheaf-constructible is the finite-Lambda case of the item, so the item is not a duplicate either. The six generic sk-thm-p1 tool_uses are accepted. No cycle. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NoetherianEtaleSumConstructible",
+  "declaration": "AlgebraicGeometry.Scheme.exists_noetherian_etale_sum_constructible",
+  "file": "lean/Sheaf/AlgebraicGeometry/NoetherianEtaleSumConstructible.lean",
+  "statement": "theorem exists_noetherian_etale_sum_constructible {X U : Scheme.{u}} [CompactSpace X] [QuasiSeparatedSpace X] [CompactSpace U] [QuasiSeparatedSpace U] (j : U ⟶ X) [Etale j] (R : Type (u + 1)) [CommRing R] [IsNoetherianRing R] (M : ModuleCat.{u + 1} R) [Module.Finite R M] : ∃ S : FiniteLocallyClosedStratification X, ∀ i : Fin S.n, IsFiniteLocallyConstantSheaf ((Etale.upperStar (ModuleCat.{u + 1} R) (S.immersion i)).obj ((Etale.etaleLowerShriek (ModuleCat.{u + 1} R) j inferInstance).obj ((constantSheaf U.smallEtaleTopology (ModuleCat.{u + 1} R)).obj M)))",
+  "branch": "newtargets-dag",
+  "by": "Q05",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3da10dce7",
+  "group": "Q05",
+  "result": "pass",
+  "note": "Statement matches node and Stacks 03S8(3) clause by clause: qcqs X,U; Etale j; R : Type (u+1) CommRing + IsNoetherianRing (recorded u+1 coefficient convention, as in upstream 03SA siblings and the Q59-accepted dep record); M : ModuleCat R with Module.Finite only (infinite R, M allowed); recorded etaleLowerShriek of constantSheaf; ∃ FiniteLocallyClosedStratification (no constructible-strata strengthening, per the node's own definition) ∀ i, IsFiniteLocallyConstantSheaf of upperStar along S.immersion i (cover-constant + f.g. stalks = node's locally-≅-f.g.-constant, the exposed interface of def-weil-pbc-locally-constant-finite-type-modules). Edge cases (empty X: n=0; empty U; M=0) covered. No duplicate: upstream _of_isNoetherian/_of_isAffine/_SpecMap/_of_stratification and K1 finite-Λ core differ. Only sorry; docstrings with source/blueprint and 5 proof steps; plain imports = the three Lean-recorded proof_dep modules; statement verbatim; node otherwise identical to live. nt_compile --json clean (2.2 s). Advisory: redundant public imports RingedSiteModules/Noetherian.Defs; upperStar owner not in stmt_deps."
  }
 }

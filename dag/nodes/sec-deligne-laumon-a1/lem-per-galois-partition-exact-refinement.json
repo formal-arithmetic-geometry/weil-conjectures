@@ -18,7 +18,8 @@
   "def-weil-pbc-category-colimit",
   "def-weil-pbc-constant-sheaf",
   "def-weil-sheaf-of-modules-category",
-  "def-galois-object"
+  "def-galois-object",
+  "def-per-galois-partition-modules"
  ],
  "proof": [
   {
@@ -339,5 +340,28 @@
   "group": "Q28",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q28-91fb14653 (reviewer sub-agent of L); spot-checked: Read in full: the item (8 steps), both new statement-only nodes, the statements of all cited nodes, unit sk-p-dl-a1-perverse, and ILO XVII 7.2.2-7.2.7, 7.3.1-7.3.8, 7.4.3-7.4.5 and 11.1-11.3.4 in the local PDF. The item statement matches ILO 7.3.1-7.3.4, 7.3.6/7.3.8 and 7.4.5. Against live it only adds definition citations, and live is still unsplit. One fault found (C4/E5): Step 2 credited lem-per-torsion-local-system-monodromy with showing that any sheaf L with c^{-1}L constant is a local system. That node only characterizes local systems among local systems, and ILO 7.2.7 shows an étale-locally constant sheaf need not be one. The missing fact is ILO 7.2.4: descent of local systems along a surjective finite étale cover. Repair: I added this as a clause to the new child, whose source already cites 7.2.2-7.2.5, and rewrote Step 2 to cite it. Step 2 also had a small gap, now filled: under the finite-type reading, the subquotients of the finite-orbit span are finitely generated because A is Noetherian (lem-weil-pbc-noetherian-submodule-finite). Steps 1 and 3-8 checked: module-level colimits come via the forgetful node; the reduced strata come from fibre-product pieces, so the old strata really receive maps (no E3); I verified the elementary ordering argument of Step 6; the Galois domination and simple transitivity of Step 7 come from lem-galois-object-exists and lem-galois-axioms(6); Step 8 proves the refinement for every B via inverse image of constant modules. Both new nodes are true (tested on R=0, F_l[t], H=1, Z/l acting on F_l[Z/l], and the nodal cubic). Neither duplicates an existing node or restates a clause of the item. The 14 generic tool_uses are accepted. No SGA citations. Advisory: the plain 'locally constant' in the item's W_P definition cites no definition node (inherited); repaired Step 2 covers both readings.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GaloisPartitionExactRefinement",
+  "declaration": "AlgebraicGeometry.Scheme.GaloisPartition.exact_refinement",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.GaloisPartition.constructible",
+   "AlgebraicGeometry.Scheme.GaloisPartition.IsDirected",
+   "AlgebraicGeometry.Scheme.GaloisPartition.exact_refinement"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/GaloisPartitionExactRefinement.lean",
+  "statement": "theorem exact_refinement (ℓ : ℕ) [Fact ℓ.Prime] (X : Scheme.{u}) [IsNoetherian X] (A : Type (u + 1)) [CommRing A] [IsNoetherianRing A] [Algebra (ZMod ℓ) A] : (∀ P : GaloisPartition X, Nonempty (Abelian (P.modules A).FullSubcategory) ∧ PreservesFiniteLimits (P.modules A).ι ∧ PreservesFiniteColimits (P.modules A).ι ∧ (P.modules A).IsClosedUnderExtensions ∧ (∀ (J : Type (u + 1)) [SmallCategory J] [IsFiltered J], (P.modules A).IsClosedUnderColimitsOfShape J) ∧ (P.constructible A).IsClosedUnderKernels ∧ (P.constructible A).IsClosedUnderCokernels ∧ (P.constructible A).IsClosedUnderExtensions) ∧ (∀ (n : ℕ) (P : Fin n → GaloisPartition X), ∃ R : GaloisPartition X, R.IsDirected ∧ ∀ (i : Fin n) (B : Type (u + 1)) [CommRing B], R.Refines (P i) B)",
+  "branch": "newtargets-dag",
+  "by": "Q91",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7a0cc23f3",
+  "group": "Q91",
+  "result": "pass",
+  "note": "Repair of the H12/H4 return at 465367b6 is complete: the duplicate GaloisPartition node and module are removed; Q59's landed def-per-galois-partition-modules is used (modules, Refines) and added to stmt_deps as a landed node (allowed by stage2_delivery). The node differs from the side clone only in lean and stmt_deps; the statement is verbatim. Clauses match ILO XVII 7.3.1-7.3.8 and 7.4.5 and the node: ℓ prime, Noetherian X, Noetherian ZMod ℓ-algebra A : Type (u+1); Nonempty Abelian on the full subcategory, plus PreservesFiniteLimits/Colimits of ι, extension closure, and closure under filtered colimits for every J : Type (u+1); the constructible class = modules ∧ IsConstructibleSheaf, closed under kernels, cokernels and extensions; ∀ n (P : Fin n → GaloisPartition X), ∃ R, R.IsDirected ∧ ∀ i B [CommRing B], R.Refines (P i) B, with R chosen before B and n=0 covered. IsDirected (permutation, closed complements of initial unions) = ILO 7.3.5, checked by an rfl probe. Edge cases: empty X, empty family, zero ring. No duplicate of IsDirected/constructible in live, side or runs/2 snapshots. Docstrings carry source, blueprint and the 8-step proof plan; the private imports are exactly the proof_deps modules; only the theorem's proof is sorry. nt_compile --json clean (2.3 s, no warnings). Advisory: IsConstructibleSheaf owners are reached through indirect stmt_deps (same as Q59)."
  }
 }
