@@ -345,8 +345,21 @@ private lemma exact_alpha_gShifted
 
 private noncomputable def couple
     (F : DerivedCategory.Plus A ⥤ DerivedCategory.Plus B) [F.CommShift ℤ]
-    [F.IsTriangulated] (K : DerivedCategory.Plus A) : BigradedExactCouple B 0 := by
-  sorry
+    [F.IsTriangulated] (K : DerivedCategory.Plus A) : BigradedExactCouple B 0 where
+  D := D F K
+  E := E F K
+  alpha := alpha F K
+  f := f F K
+  g := gShifted F K
+  alpha_f_zero := fun p q ↦ (exact_f_alpha F K p q).choose
+  f_g_zero := fun p q ↦ (exact_gShifted_f F K p q).choose
+  g_alpha_zero := fun p q ↦ (exact_alpha_gShifted F K p q).choose
+  exact_alpha := fun p q ↦
+    (ShortComplex.exact_iff_image_eq_kernel _).mp (exact_f_alpha F K p q).choose_spec
+  exact_f := fun p q ↦
+    (ShortComplex.exact_iff_image_eq_kernel _).mp (exact_gShifted_f F K p q).choose_spec
+  exact_g := fun p q ↦
+    (ShortComplex.exact_iff_image_eq_kernel _).mp (exact_alpha_gShifted F K p q).choose_spec
 
 private lemma couple_data
     (F : DerivedCategory.Plus A ⥤ DerivedCategory.Plus B) [F.CommShift ℤ]
@@ -354,7 +367,15 @@ private lemma couple_data
     (couple F K).D = D F K ∧ (couple F K).E = E F K ∧
       HEq (couple F K).alpha (alpha F K) ∧
       HEq (couple F K).f (f F K) ∧ HEq (couple F K).g (g F K) := by
-  sorry
+  refine ⟨rfl, rfl, HEq.rfl, HEq.rfl, ?_⟩
+  change HEq (gShifted F K) (g F K)
+  apply Function.hfunext rfl
+  intro p p' hp
+  cases hp
+  apply Function.hfunext rfl
+  intro q q' hq
+  cases hq
+  exact comp_eqToHom_heq _ _
 
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in

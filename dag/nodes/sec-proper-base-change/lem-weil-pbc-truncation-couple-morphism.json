@@ -51,7 +51,7 @@
    "elementary": false
   },
   {
-   "text": "Apply the long exact homology sequence [lem-sf-derived-homology-long-exact] to the image triangles. Private exact_alpha_g transports the first two arrows of the triangle at q+1, in total degree p+q; exact_g_f uses homologySequence_exact3 for the triangle at q in degrees p+q and (p+2)+(q-1); exact_f_alpha uses homologySequence_exact1 for the same triangle and degrees. exact_transport is the explicit short-complex isomorphism argument, so all zero-composite identities and exactness statements include their degree transports. gShifted inserts only the eqToHom required by the type-zero shifted-map interface. Two further short-complex transports give its exactness statements. BigradedExactCouple.ofShifted [def-sp-exact-couple] packages these data into each exact couple. Its accessor equations, with heterogeneous function extensionality for g, give all displayed D/E equalities and HEq identities.",
+   "text": "Apply the long exact homology sequence [lem-sf-derived-homology-long-exact] to the image triangles. Private exact_alpha_g transports the first two arrows of the triangle at q+1, in total degree p+q; exact_g_f uses homologySequence_exact3 for the triangle at q in degrees p+q and (p+2)+(q-1); exact_f_alpha uses homologySequence_exact1 for the same triangle and degrees. exact_transport is the explicit short-complex isomorphism argument, so all zero-composite identities and exactness statements include their degree transports. gShifted inserts only the eqToHom required by the type-zero shifted map. Two further short-complex transports give its exactness statements. Construct the upstream BigradedExactCouple structure [def-sp-exact-couple] directly with D, E, alpha, f, and gShifted. The three zero-composite fields are the already proved equalities; ShortComplex.exact_iff_image_eq_kernel converts each exactness proof to the corresponding image/kernel field. D, E, alpha, and f have reflexive accessor equalities. Apply Function.hfunext twice and comp_eqToHom_heq to identify gShifted heterogeneously with g. This repairs the removed ofShifted API without introducing another exact-couple representation.",
    "uses": [
     "lem-sf-derived-homology-long-exact",
     "def-sp-exact-couple"
@@ -89,11 +89,11 @@
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "F1",
-  "date": "2026-10-15",
+  "group": "R2",
+  "date": "2026-10-18",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Lemma 0DDE proof, using the truncation construction of derived.tex Remark 08J5, the long exact cohomology sequence 0148, and the exact-couple convention 011Q",
-  "note": "Complete Lean proof of both original holes. Standard-t-structure construction replaces the complex-level descent. The remaining proof is the explicit exact-couple construction and naturality calculation. Both #print axioms checks give only propext, Classical.choice, Quot.sound. No new nodes, statements or holes."
+  "place": "Lemma 0DDE proof; derived.tex Tags 08J5 and 0148; homology.tex Tag 011Q",
+  "note": "Retain the previously proved triangle, exactness, and naturality arguments. Repair both upstream-sync holes by constructing the current upstream exact-couple structure directly and proving its accessor identities with heterogeneous function extensionality. No new statements or holes."
  },
  "mathlib_searches": [
   {
@@ -243,12 +243,12 @@
   "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
  },
  "reviewed_proof": {
-  "date": "2026-10-15",
+  "date": "2026-10-18",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "F1",
+  "group": "R2",
   "result": "pass",
-  "landing": "20261015T154207-L-163503",
+  "landing": "20261018T062859-L-672122",
   "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
