@@ -20,9 +20,162 @@
   "def-weil-pbc-regular-system-of-parameters",
   "def-weil-affine-spectrum"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Begin on an affine pointed neighbourhood of $\\bar y$, refining the prescribed one if supplied. The boundary chart gives parameter equations for the components through $\\bar y$; remove the other components, so its complement is $D(f)$, $f=\\prod_i t_i$. Equations already prescribed differ from these component equations by units locally, so can be used instead. Write this affine ring as $A_0$. Etale algebras over regular rings are regular by smooth ascent. Put $R=\\mathcal O^{\\mathrm{sh}}_{Y,\\bar y}$, equivalently the strict localization of this neighbourhood. It is regular local by strict-henselization regularity. Its pointed etale-neighbourhood colimit has maximal ideal extended from the point and separably closed residue field. The cotangent-space comparison preserves the independence of the prescribed parameter equations, so their images still extend to a regular system of parameters of $R$.",
+   "uses": [
+    "lem-per-regular-boundary-divisorial-chart",
+    "lem-weil-pbc-regular-ring-smooth-ascent",
+    "lem-sc-strict-henselization-regular",
+    "lem-weil-pbc-strict-henselization-triples",
+    "lem-sc-strict-henselization-cotangent-dimension",
+    "lem-weil-pbc-etale-smooth-zero-dimensional-fibres"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "IX 2.1 proof, p.133, initial strict-local and parameter reduction."
+   }
+  },
+  {
+   "text": "Write $Z\\times_Y\\operatorname{Spec}A_0=\\operatorname{Spec}C_0$. Normalization commutes with this etale (hence smooth) base change, so its restriction to $D(f)$ is the given torsor and it is normal. Finite morphisms over a locally Noetherian base have finite presentation. Let $C=C_0\\otimes_{A_0}R$; it is finite over $R$ and hence Noetherian. The henselian finite-algebra product theorem writes $C=\\prod_j C_j$ as finite local $R$-algebras. Each $C_j$ is a normal domain: localize at its maximal ideal, view it as the local filtered colimit of pointed etale neighbourhoods over the corresponding local normal domain of $Z$, and apply the etale-colimit normal-domain theorem. Select the factor containing the lift of $\\bar z$ and call it $D$. Its generic restriction is one component of the generic torsor: every component dominates the base, since the same holds before etale base change and the normal etale components remain open and closed. Thus $R\\hookrightarrow D$, and $L=\\operatorname{Frac}(D)$ is a finite extension of $K=\\operatorname{Frac}(R)$.",
+   "uses": [
+    "lem-sbc-relative-normalization-smooth-base-change",
+    "pqf-lem-finite-fp-locnoeth",
+    "lem-weil-pbc-finite-algebra-noetherian",
+    "lem-weil-pbc-finite-over-henselian-local-product",
+    "lem-weil-pbc-etale-colimit-normal-local-domain",
+    "lem-fin-etale-normal-components",
+    "lem-weil-pbc-etale-smooth-zero-dimensional-fibres"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "IX 2.1 proof, pp.133--134, normalization and strict-local reduction."
+   }
+  },
+  {
+   "text": "The roots-of-unity theorem over the strictly henselian ring $R$ gives a generator $\\zeta$ of $\\mu_n(R)$, with $\\zeta^n=1$ and all $1-\\zeta^a$ ($0<a<n$) units. Form $\\widetilde B=R[x_1,\\ldots,x_r]/(x_i^n-t_i)$. The simultaneous-root structure theorem makes $\\widetilde B$ a regular strictly henselian local domain with the indicated monomial basis and residue field equal to that of $R$. For $E=\\operatorname{Frac}(\\widetilde B)$ it identifies $\\operatorname{Gal}(E/K)$ with $\\Gamma=(\\mathbf Z/n\\mathbf Z)^r$, acting by the displayed rotations.",
+   "uses": [
+    "lem-sbc-strict-local-roots-of-unity",
+    "lem-per-snc-root-algebra-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "IX 2.1 proof, p.133, simultaneous-root algebra and its root-of-unity action."
+   }
+  },
+  {
+   "text": "Apply simultaneous-root torsor splitting to $V'\\times_Y\\operatorname{Spec}R$ over $D(f)$; its hypotheses are exactly strict henselian regular locality, the parameter equations, and invertibility of $n=|G|$. After base change to $\\widetilde B[1/f]$ the entire torsor is a disjoint union of $n$ copies of that base. On the generic point this says that each field factor, in particular $L$, embeds as a $K$-subfield of $E$: an $E$-algebra projection $L\\otimes_KE\\to E$ restricts to the required embedding $l\\mapsto\\pi(l\\otimes1)$, which is injective because it is unital and $L$ is a field. Fix this embedding.",
+   "uses": [
+    "lem-per-snc-root-punctured-torsor-splitting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "IX 2.1 proof, p.134, essential-surjectivity (Abhyankar) input."
+   }
+  },
+  {
+   "text": "Let $H\\subseteq\\Gamma$ consist of the rotations fixing the embedded $L$ pointwise. Since $E/K$ is Galois, the fixed-field theorem gives $E^H=L$. It applies to every intermediate field, so does not require the selected local component to have degree $n$ or the original torsor to stay connected over $R$.",
+   "uses": [
+    "lem-exc-etale-galois-fixed-field-subgroup"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "IX 2.1 proof, p.133, the subgroup giving the intermediate cover."
+   }
+  },
+  {
+   "text": "Inside $E$, identify $D$ with the integral closure of $R$ in $L$: its elements are integral over $R$ because $D$ is finite, and any element of $L$ integral over $R$ is also integral over $D$, hence in $D$ because $D$ is integrally closed. Likewise $\\widetilde B$ is the integral closure of $R$ in $E$, since it is finite and normal. Therefore the integral closure in $L=E^H$ is $\\widetilde B\\cap E^H=\\widetilde B^H$. This gives an isomorphism $D\\simeq\\widetilde B^H$ of $R$-algebras, and hence of the corresponding finite schemes over $\\operatorname{Spec}R$.",
+   "uses": [
+    "def-fin-normalization-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "IX 2.1 proof, p.133, invariant ring is the normalization."
+   }
+  },
+  {
+   "text": "Descend $\\zeta$ to a pointed affine etale neighbourhood $\\operatorname{Spec}A_1$ over $\\operatorname{Spec}A_0$. Descend also the finitely many equations $\\zeta^n=1$ and $(1-\\zeta^a)u_a=1$, including the inverse of $\\zeta$. Descend the idempotent $e\\in C$ cutting out $D$ and the equation $e^2=e$. These are finitely many elements and equalities in the pointed-neighbourhood colimit; after a common refinement all hold. Define $D_1=e(C_0\\otimes A_1)$, with identity $e$. It is a direct factor, finite over $A_1$, whose base change to $R$ is $D$. The geometric point $\\bar z$ lies in this open-and-closed factor by its selection before descent.",
+   "uses": [
+    "lem-weil-pbc-strict-henselization-triples",
+    "lem-weil-pbc-colimit-category-fp-algebras"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "IX 2.1 proof, initial etale locality; finite-data descent from its strict-local calculation."
+   }
+  },
+  {
+   "text": "Put $B_1=A_1[x_1,\\ldots,x_r]/(x_i^n-t_i)$. Successive division by these monic polynomials gives the basis $x^a$ ($0\\leq a_i<n$) over any coefficient ring: reduce exponents, and uniqueness follows by division in one variable at a time. For $h\\in H$, the coefficient of $x^a$ in $h(b)-b$ is $(\\zeta^{\\sum h_i a_i}-1)b_a$. A nontrivial character value has unit difference from $1$; hence this coefficient vanishes for every $h$ exactly when $b_a=0$ for all noninvariant exponents. Thus $B_1^H$ is free on the invariant basis monomials. This basis description gives $(B_1^H)\\otimes_{A_1}R\\simeq\\widetilde B^H$ by coefficientwise base change. No assertion about arbitrary base change of invariants is needed.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "IX 2.1 proof, p.133, diagonal-action invariant algebra; explicit basis calculation."
+   }
+  },
+  {
+   "text": "Both $\\operatorname{Spec}D_1$ and $\\operatorname{Spec}(B_1^H)$ are finite over the Noetherian ring $A_1$ and consequently finitely presented; regularity and Noetherianity of $A_1$ follow from smooth ascent. Their base changes to $R$ are isomorphic by Steps 6 and 8. Apply affine finite-presentation isomorphism descent to the ind-etale map $A_1\\to R$. It provides an etale $A_1$-algebra $A$ mapping to $R$ on which the two schemes are isomorphic. Pullback of the maximal ideal of $R$ selects a point over $\\bar y$; its residue field embeds in the fixed separable closure and hence in the field of $\\bar y$, giving the pointed refinement. The basis calculation in Step 8 also identifies the base-changed invariant algebra with $B^H$, for $B=A[x_i]/(x_i^n-t_i)$.",
+   "uses": [
+    "pqf-lem-finite-fp-locnoeth",
+    "lem-weil-pbc-regular-ring-smooth-ascent",
+    "lem-sbc-affine-fp-iso-ind-etale-descent",
+    "lem-weil-pbc-etale-smooth-zero-dimensional-fibres"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "IX 2.1 proof, etale-local reduction; explicit descent of the obtained normal form."
+   }
+  },
+  {
+   "text": "Let $U=\\operatorname{Spec}A$ and $W=\\operatorname{Spec}(D_1\\otimes_{A_1}A)$. The projection $Z\\times_YU\\to Z$ is etale by scheme base change. Its restriction to the open-and-closed affine factor $W$ is etale as well: at each point it has exactly the same local chart and local-ring map as this projection, so the local finite-presentation, flatness and unramifiedness conditions are unchanged. The selected lift of $\\bar z$ remains in $W$. The descended isomorphism is $W\\simeq\\operatorname{Spec}(B^H)$ over $U$. Finiteness over $A$ gives Noetherianity of $W$. The equations $t_i$ have only been pulled back from $A_0$, and $U$ still avoids every removed component; hence $V_U=D(\\prod_i t_i)$ and the parameter requirements hold. When $r=0$, $\\Gamma=0$ and the same argument has $\\widetilde B=R$, $D=R$, $B=A$ and $H=0$, giving the required etale branch with empty boundary.",
+   "uses": [
+    "lem-weil-pbc-finite-algebra-noetherian",
+    "def-weil-etale-morphism",
+    "lem-weil-pbc-etale-scheme-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "IX 2.1 proof, pp.133--134, underlying scheme quotient and etale-local conclusion."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-fin-normalization-extension",
+  "def-weil-etale-morphism",
+  "lem-exc-etale-galois-fixed-field-subgroup",
+  "lem-fin-etale-normal-components",
+  "lem-per-regular-boundary-divisorial-chart",
+  "lem-per-snc-root-algebra-structure",
+  "lem-per-snc-root-punctured-torsor-splitting",
+  "lem-sbc-affine-fp-iso-ind-etale-descent",
+  "lem-sbc-relative-normalization-smooth-base-change",
+  "lem-sbc-strict-local-roots-of-unity",
+  "lem-sc-strict-henselization-cotangent-dimension",
+  "lem-sc-strict-henselization-regular",
+  "lem-weil-pbc-colimit-category-fp-algebras",
+  "lem-weil-pbc-etale-colimit-normal-local-domain",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+  "lem-weil-pbc-finite-algebra-noetherian",
+  "lem-weil-pbc-finite-over-henselian-local-product",
+  "lem-weil-pbc-regular-ring-smooth-ascent",
+  "lem-weil-pbc-strict-henselization-triples",
+  "pqf-lem-finite-fp-locnoeth"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose IX Proposition 2.1 proof, printed pp.133--134; explicit finite-data descent uses Stacks Tag 05N9 (algebra-lemma-colimit-category-fp-algebras)."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -58,10 +211,38 @@
    "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Proj.valuativeCriterion_existence_aux\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] {O : Type u_3} [inst_4 : CommRing O] [inst_5 : IsDomain O] [ValuationRing O] {K : Type u_4}\\n  [inst_7 : Field K] [inst_8 : Algebra O K] [IsFractionRing O K\", \"doc\": \"Let $ O $ be a commutative valuation ring with fraction field $ K $, and let $ \\\\mathcal{A} $ be a graded $ O $-algebra. Given a finite set $ \\\\{x_i\\\\}_{i \\\\in I} $ of homogeneous elements in $ \\\\mathcal{A\"}\n  {\"name\": \"AlgebraicGeometry.exists_lift_of_germInjective_aux\", \"module\": \"Mathlib/AlgebraicGeometry/SpreadingOut\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {R A : CommRingCat} {U : X.Opens} {x : ↥X} (hxU : x ∈ U) (φ : A ⟶ X.presheaf.stalk x)\\n  (φRA : R ⟶ A) (φRX : R ⟶ X.presheaf.obj (Opposite.op U)),\\n  (CommRingCat.Hom.hom φRA).FiniteType →\\n    CategoryTheory.CategoryStruct.comp φRA φ = CategoryTheory.CategoryStruct.com\", \"doc\": \"Given a point $x$ in an open subset $U$ of a scheme $X$, a morphism $\\\\phi: A \\\\to \\\\mathcal{F}_x$ to the stalk of a presheaf $\\\\mathcal{F}$ at $x$, and compatible ring homomorphisms $\\\\phi_{RA}: R \\\\to A$ \"}\n  {\"name\": \"AlgebraicGeometry.spread_out_of_isGermInjective'\", \"module\": \"Mathlib/AlgebraicGeometry/SpreadingOut\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} (sX : X ⟶ S) (sY : Y ⟶ S) [AlgebraicGeometry.LocallyOfFiniteType sY] {x : ↥X}\\n  [X.IsGermInjectiveAt x] (φ : AlgebraicGeometry.Spec (X.presheaf.stalk x) ⟶ Y),\\n  CategoryTheory.CategoryStruct.comp φ sY = CategoryTheory.CategoryStruct.comp (X.fromSpecStalk x) sX →\\n\", \"doc\": \"Let $X$ and $Y$ be schemes with $s_X: X \\\\to S$ and $s_Y: Y \\\\to S$ morphisms locally of finite type. For a point $x \\\\in X$ where the germ map at $x$ is injective, and a morphism $\\\\phi: \\\\operatorname{Sp\"}\n  {\"name\": \"AlgebraicGeometry.exists_lift_of_germInjective\", \"module\": \"Mathlib/AlgebraicGeometry/SpreadingOut\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {R A : CommRingCat} {x : ↥X} [X.IsGermInjectiveAt x] {U : X.Opens} (hxU : x ∈ U)\\n  (φ : A ⟶ X.presheaf.stalk x) (φRA : R ⟶ A) (φRX : R ⟶ X.presheaf.obj (Opposite.op U)),\\n  (CommRingCat.Hom.hom φRA).FiniteType →\\n    CategoryTheory.CategoryStruct.comp φRA φ = CategoryT\", \"doc\": \"Given a scheme $X$ with injective germ at a point $x$, an open subset $U$ containing $x$, and morphisms $\\\\phi: A \\\\to \\\\mathcal{F}_x$, $\\\\phi_{RA}: R \\\\to A$, and $\\\\phi_{RX}: R \\\\to \\\\Gamma(U, \\\\mathcal{F})$\"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation\", \"module\": \"Mathlib/AlgebraicGeometry/StructureSheaf\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (U : TopologicalSpace.Opens ↑(AlgebraicGeometry.PrimeSpectrum.Top R))\\n  (s : ↑((AlgebraicGeometry.Spec.structureSheaf R).val.obj (Opposite.op U))) {ι : Type u_1} (t : Finset ι) (a h : ι → R)\\n  (iDh : (i : ι) → PrimeSpectrum.basicOpen (h i) ⟶ U),\\n  U ≤ ⨆ i ∈ t, Prim\", \"doc\": \"Given an open set $ U $ in the prime spectrum $ \\\\operatorname{Spec}(R) $ of a commutative ring $ R $, a section $ s $ of the structure sheaf over $ U $, and a finite cover of $ U $ by basic open sets \"}\n  {\"name\": \"AlgebraicGeometry.exists_basicOpen_le_appLE_of_appLE_of_isAffine\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/RingHomProperties\", \"type\": \"∀ {P : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop} {X Y : AlgebraicGeometry.Scheme}\\n  {f : X ⟶ Y},\\n  (RingHom.StableUnderCompositionWithLocalizationAwayTarget fun {R S} [CommRing R] [CommRing S] => P) →\\n    (RingHom.LocalizationAwayPreserves fun {R S} [CommRing R\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes, and let $P$ be a property of ring homomorphisms that is stable under composition with localization and preserved by localization. Let $x \\\\in X$ be a point.\\\\n\"}\n  {\"name\": \"AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) (U : X.Opens),\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ (f : ↑(X.presheaf.obj (Opposite.op U))) (x : ↑(X.presheaf.obj (Opposite.op (X.basicOpen f)))),\\n      ∃ n y, TopCat.Presheaf.restrictOpen y (X.basicOpen f) ⋯ = TopCat.Presheaf.restrictOpen f (X.basicOpen f) ⋯ ^\", \"doc\": \"For any affine open subset $ U $ of a scheme $ X $, a section $ f $ over $ U $, and a section $ x $ over the basic open set $ D(f) $ defined by $ f $, there exists a natural number $ n $ and a section\"}\n  {\"name\": \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) {U : X.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ (x f : ↑(X.presheaf.obj (Opposite.op U))),\\n      TopCat.Presheaf.restrictOpen x (X.basicOpen f) ⋯ = 0 → ∃ n, f ^ n * x = 0\", \"doc\": \"For an affine open subset $ U $ of a scheme $ X $, if a section $ x $ of the structure sheaf $ \\\\mathcal{O}_X $ over $ U $ vanishes on the basic open set $ D(f) $ defined by a section $ f \\\\in \\\\Gamma(U,\"}",
    "date": "2026-10-18",
    "verdict": "no match: the returned declarations do not give this parameter-root quotient or its invariant exponent-monoid algebra and fs lattice assertions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite etale covers of a regular local normal crossings complement split after adjoining roots of all boundary parameters of exponent the invertible torsor order",
+   "results": "Logged results: StandardEtalePair.hasMap_X, StandardEtalePair, Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial, StandardEtalePresentation, StandardEtalePresentation.P, StandardEtalePresentation.toPresentation_σ', Polynomial.instEtaleUniversalCoprimeFactorizationRing, Algebra.IsStandardEtale; 8 hits; digest ed51ac1f1ed81b5a.",
+   "date": "2026-10-19",
+   "verdict": "no match: the returned declarations do not give the parameter-root quotient of a finite normalization with its pointed etale descent."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Etale\", \"torsor\"",
+   "results": "Logged results: ; 0 hits; digest 4f53cda18c2baa0c.",
+   "date": "2026-10-19",
+   "verdict": "no match: the returned declarations do not give the parameter-root quotient of a finite normalization with its pointed etale descent."
+  },
+  {
+   "tool": "grep",
+   "query": "Abhyankar|Kummer.*[Cc]over|[Ss]trict.*[Nn]ormal.*[Cc]rossing",
+   "results": "Logged results: ; 0 hits; digest 4f53cda18c2baa0c.",
+   "date": "2026-10-19",
+   "verdict": "no match: the returned declarations do not give the parameter-root quotient of a finite normalization with its pointed etale descent."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tame finite etale torsors on a regular strict local scheme with normal crossings boundary are dominated by simultaneous roots of parameters",
+   "results": "Logged results: AlgebraicGeometry.Scheme.Etale, Algebra.FormallyEtale.of_unramified_and_smooth, Algebra.Etale.exists_subalgebra_fg, AlgebraicGeometry.Scheme.etalePretopology, AlgebraicGeometry.FormallyUnramified.recOn, Algebra.instEtaleOfIsStandardEtale, Algebra.Etale.casesOn, AlgebraicGeometry.IsEtale; 8 hits; digest 36941b7403807204.",
+   "date": "2026-10-19",
+   "verdict": "no match: the returned declarations do not give the parameter-root quotient of a finite normalization with its pointed etale descent."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-prime-to-order-snc-kummer-charts",
@@ -88,5 +269,84 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-snc-parameter-root-quotient",
+  "worker": "stage1",
+  "summary": "Read ILO IX 2.1 and its normalization/root-quotient argument, separated simultaneous-root algebra structure and punctured torsor trivialization as two genuine statement-only inputs, and retained the intermediate-field, integral-closure and pointed finite-data descent arguments in this item. The imported statement is unchanged. Searched the full DAG/blueprint and both project sources, then the logged Mathlib services with second phrasings. Checked the r=0, n=1, disconnected strict-local torsor and prescribed-parameter cases.",
+  "blueprint": "Refines the uniformization input descended from ancestor lem-per-artin-gabber-affine-curve Step 3, through the listed created.item chain, at ILO IX 2.1: strict-local simultaneous root algebra, intermediate subgroup quotient, and descent to pointed etale neighbourhoods.",
+  "tool_uses": [
+   {
+    "node": "lem-fin-etale-normal-components",
+    "why": "Generic algebraic tool for 2; used only for its stated strict-local, normality, regularity, or finite-presentation assertion. The perverse-curve unit has no replacement for this algebraic tool."
+   },
+   {
+    "node": "lem-sbc-affine-fp-iso-ind-etale-descent",
+    "why": "Generic algebraic tool for 9; used only for its stated strict-local, normality, regularity, or finite-presentation assertion. The perverse-curve unit has no replacement for this algebraic tool."
+   },
+   {
+    "node": "lem-sbc-strict-local-roots-of-unity",
+    "why": "Generic algebraic tool for 3; used only for its stated strict-local, normality, regularity, or finite-presentation assertion. The perverse-curve unit has no replacement for this algebraic tool."
+   },
+   {
+    "node": "lem-sc-strict-henselization-cotangent-dimension",
+    "why": "Generic algebraic tool for 1; used only for its stated strict-local, normality, regularity, or finite-presentation assertion. The perverse-curve unit has no replacement for this algebraic tool."
+   },
+   {
+    "node": "lem-sc-strict-henselization-regular",
+    "why": "Generic algebraic tool for 1; used only for its stated strict-local, normality, regularity, or finite-presentation assertion. The perverse-curve unit has no replacement for this algebraic tool."
+   },
+   {
+    "node": "lem-weil-pbc-etale-colimit-normal-local-domain",
+    "why": "Generic algebraic tool for 2; used only for its stated strict-local, normality, regularity, or finite-presentation assertion. The perverse-curve unit has no replacement for this algebraic tool."
+   },
+   {
+    "node": "lem-weil-pbc-finite-over-henselian-local-product",
+    "why": "Generic algebraic tool for 2; used only for its stated strict-local, normality, regularity, or finite-presentation assertion. The perverse-curve unit has no replacement for this algebraic tool."
+   },
+   {
+    "node": "lem-weil-pbc-regular-ring-smooth-ascent",
+    "why": "Generic algebraic tool for 1; used only for its stated strict-local, normality, regularity, or finite-presentation assertion. The perverse-curve unit has no replacement for this algebraic tool."
+   },
+   {
+    "node": "lem-weil-pbc-strict-henselization-triples",
+    "why": "Generic algebraic tool for 1; used only for its stated strict-local, normality, regularity, or finite-presentation assertion. The perverse-curve unit has no replacement for this algebraic tool."
+   },
+   {
+    "node": "pqf-lem-finite-fp-locnoeth",
+    "why": "Generic algebraic tool for 2; used only for its stated strict-local, normality, regularity, or finite-presentation assertion. The perverse-curve unit has no replacement for this algebraic tool."
+   },
+   {
+    "node": "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+    "why": "Generic algebraic tool: etale maps are smooth, respectively finite-presentation map/equality descent. Used without replacing any step of the perverse-curve unit."
+   },
+   {
+    "node": "lem-weil-pbc-colimit-category-fp-algebras",
+    "why": "Generic algebraic tool: etale maps are smooth, respectively finite-presentation map/equality descent. Used without replacing any step of the perverse-curve unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-fin-etale-normal-components",
+  "lem-sbc-affine-fp-iso-ind-etale-descent",
+  "lem-sbc-strict-local-roots-of-unity",
+  "lem-sc-strict-henselization-cotangent-dimension",
+  "lem-sc-strict-henselization-regular",
+  "lem-weil-pbc-etale-colimit-normal-local-domain",
+  "lem-weil-pbc-finite-over-henselian-local-product",
+  "lem-weil-pbc-regular-ring-smooth-ascent",
+  "lem-weil-pbc-strict-henselization-triples",
+  "pqf-lem-finite-fp-locnoeth",
+  "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+  "lem-weil-pbc-colimit-category-fp-algebras"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q38-973288c49",
+  "group": "Q38",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q38-973288c49 (reviewer sub-agent of L); spot-checked: I read the item and both new nodes in full, against ILO IX 2.1 (printed pp.133-134, pdf pp.139-140) and Stacks 0BRM (DVR Abhyankar) / 0BMB (purity). The item statement is unchanged, and none of the item, the new nodes or the report cites SGA. Steps 1-10 check out against each cited statement. For R into D (Step 2), D[1/f] is a clopen piece of the flat P_R and is nonzero because O_{Z,z} injects into D. In Step 4 a projection of L tensor_K E onto E gives the embedding. In Step 6, D is the integral closure of R in L, which is B~ intersected with E^H, i.e. B~^H. In Step 8 the invariant-monomial basis comes from the unit differences 1-zeta^a. In Step 9 the descent uses the ind-etale map A_1 to R, and the point comes from A to R, not from the descent node. In Step 10, W is clopen in Z x_Y U. The case r=0 holds. New lem-per-snc-root-algebra-structure is true: the closed fibre is k[x]/(x^n), so B is local and strictly henselian; m_B has d generators, so B is regular; the n^r rotations are distinct, so E/K is Galois; the discriminant shows B[1/f] is finite etale over R[1/f]. New lem-per-snc-root-punctured-torsor-splitting is true. Inertia of order dividing an invertible n is tame. 0BRM at each (x_i) and then 0BMB purity over the regular B make the normalization etale, and the cover splits over the strictly henselian B. I checked r=0, a disconnected P, and y^2=ut. Neither new node restates a clause of the item. Both are multi-parameter generalizations of the single-divisor sbc nodes, not duplicates. There is no cycle. Batch-5 flag (chart node reaching def-trf-strict-normal-crossings-boundary): accepted. Its trace-formula-chapter closure is only definitions plus generic algebra (UFD 0AG0, Pic, K0/determinant), with no thm-trf, sk-thm or batch-4 node, and the parent already cites the chart node. I accept the generic algebra tool_uses. No fixes."
  }
 }
