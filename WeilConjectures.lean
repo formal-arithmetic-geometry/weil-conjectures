@@ -6,6 +6,7 @@ public import WeilConjectures.Algebra.Category.ModuleCat.AdicTowerFiniteLimit
 public import WeilConjectures.Algebra.Category.ModuleCat.AdicTowerFreeKernelCorrection
 public import WeilConjectures.Algebra.Category.ModuleCat.CoextendScalarsAdjunction
 public import WeilConjectures.Algebra.Category.ModuleCat.DerivedBaseChange
+public import WeilConjectures.Algebra.Category.ModuleCat.ExtendScalarsInjective
 public import WeilConjectures.Algebra.Category.ModuleCat.FilteredColimitFlat
 public import WeilConjectures.Algebra.Category.ModuleCat.Presheaf.Bidual
 public import WeilConjectures.Algebra.Category.ModuleCat.Presheaf.ExteriorPower
@@ -2504,6 +2505,7 @@ public import WeilConjectures.CategoryTheory.Sites.SheafCohomologyModules
 public import WeilConjectures.CategoryTheory.Sites.SheafCohomologyRightDerived
 public import WeilConjectures.CategoryTheory.Sites.SheafCohomologyTorsion
 public import WeilConjectures.CategoryTheory.Sites.SheafComposeMonoidal
+public import WeilConjectures.CategoryTheory.Sites.SheafComposeMonoidalPresheaf
 public import WeilConjectures.CategoryTheory.Sites.SheafComposePushforwardMonoidal
 public import WeilConjectures.CategoryTheory.Sites.SheafifyGrp
 public import WeilConjectures.CategoryTheory.Sites.SigmaPresheaf
@@ -4517,6 +4519,8 @@ public import WeilConjectures.SixFunctors.ProEtale.FieldCoefficient.InternalHom
 public import WeilConjectures.SixFunctors.ProEtale.FieldCoefficient.Module
 public import WeilConjectures.SixFunctors.ProEtale.FieldCoefficient.OpenImmersion
 public import WeilConjectures.SixFunctors.ProEtale.FieldCoefficient.Ring
+public import WeilConjectures.SixFunctors.ProEtale.FieldCoefficient.ScalarExtension
+public import WeilConjectures.SixFunctors.ProEtale.FieldCoefficient.ScalarExtensionConstructible
 public import WeilConjectures.SixFunctors.ProEtale.FieldCoefficient.UnitMatrix
 public import WeilConjectures.SixFunctors.ProEtale.FieldCoefficient.UpperStar
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.AlgClosedField
@@ -4760,6 +4764,7 @@ public import WeilConjectures.WeilSheaf.EulerProduct
 public import WeilConjectures.WeilSheaf.ExtensionByZero
 public import WeilConjectures.WeilSheaf.FieldCoefficient
 public import WeilConjectures.WeilSheaf.FieldCoefficientCohomology
+public import WeilConjectures.WeilSheaf.FieldCoefficientExtendScalars
 public import WeilConjectures.WeilSheaf.FiniteEtale
 public import WeilConjectures.WeilSheaf.FiniteEtaleLisse
 public import WeilConjectures.WeilSheaf.FiniteLength
