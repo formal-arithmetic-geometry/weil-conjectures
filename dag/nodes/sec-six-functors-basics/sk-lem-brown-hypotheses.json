@@ -186,5 +186,27 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctorsBasics.BrownHypotheses",
+  "declaration": "CategoryTheory.brownHypotheses",
+  "declarations": [
+   "CategoryTheory.BrownHypothesesFor",
+   "CategoryTheory.brownHypotheses"
+  ],
+  "file": "lean/Sheaf/SixFunctorsBasics/BrownHypotheses.lean",
+  "statement": "theorem brownHypotheses (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] (p : ℕ) [CharP k p] (hp : 0 < p) (hpl : p ≠ ℓ) {X : Scheme.{u}} (aX : X ⟶ Spec (.of k)) [IsSeparated aX] [LocallyOfFiniteType aX] [QuasiCompact aX] (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ] (hΛ : IsLocalizingAdmissibleCoefficient ℓ Λ) : BrownHypothesesFor Λ X",
+  "branch": "newtargets-dag",
+  "by": "Q15",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4a4b72b28",
+  "group": "Q15",
+  "result": "pass",
+  "note": "Read the item node, all five stmt deps (setting binders; IsLocalizingAdmissibleCoefficient + localizingClosureProEtale; Mathlib thick rendering; IsCompactObject; IsTriangulatedGeneratingFamily), BrownHypothesesAmbient and the small/generation detail nodes. Every clause matches: prime l, char p>0 with p!=l, separated finite-type X over Spec k, the six admissible Lambda up to Mon-iso; conclusion has LocallySmall.{u+1}, L.IsTriangulated with canonical shift, HasCoproducts.{u+1} including the empty sum, IsIdempotentComplete, S thick (IsTriangulated+iso-closed+retracts), EssentiallySmall.{u+1}, and compactness+generation for every small presentation G equivalent to S (covers any skeleton; equivalent in substance). Universes are uniformly u+1 (probe: Homs in Type (u+1)); no autobound vars. Def is sorry-free, theorem only sorry; docstrings have source place, blueprint id, 3 proof steps; snapshot dep nodes identical to main; item node changed only in lean; statement verbatim. nt_compile --json rc 0, no diagnostics (3.7 s). Non-blocking: generation detail node is stated only for k = F_q-bar with the finite-subextension Q_l-bar (stage-1 route reconciliation needed); localizing-closure record does not list localizingClosureProEtale."
  }
 }

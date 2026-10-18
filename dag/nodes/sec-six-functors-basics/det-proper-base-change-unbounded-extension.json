@@ -21,7 +21,8 @@
   "sk-prop-sfb-cartesian-coefficients",
   "sk-def-sfb-module-derived-pushpull",
   "def-sfb-module-upper-star-comp",
-  "sk-def-sfb-derived-categories"
+  "sk-def-sfb-derived-categories",
+  "def-weil-pbc-ambient-ringed-exchange"
  ],
  "proof": [
   {
@@ -245,5 +246,29 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.Paper.UnboundedBaseChangeExtension",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.unboundedBaseChangeExtension",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.termwiseCondensedAmbientExchange",
+   "AlgebraicGeometry.ProEtale.CondensedRing.UnboundedBaseChangeExtension",
+   "AlgebraicGeometry.ProEtale.CondensedRing.unboundedBaseChangeExtension"
+  ],
+  "file": "lean/Sheaf/Paper/UnboundedBaseChangeExtension.lean",
+  "statement": "theorem unboundedBaseChangeExtension (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))] [X'.Over (Spec (.of k))] [Y'.Over (Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))] [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))] [IsSeparated (Y ↘ Spec (.of k))] [LocallyOfFiniteType (X' ↘ Spec (.of k))] [QuasiCompact (X' ↘ Spec (.of k))] [IsSeparated (X' ↘ Spec (.of k))] [LocallyOfFiniteType (Y' ↘ Spec (.of k))] [QuasiCompact (Y' ↘ Spec (.of k))] [IsSeparated (Y' ↘ Spec (.of k))] [p.IsOver (Spec (.of k))] [g.IsOver (Spec (.of k))] [p'.IsOver (Spec (.of k))] [g'.IsOver (Spec (.of k))] [IsProper p] (sq : ChosenCartesianSquare g' p' p g) : (∀ (A : Type) [CommRing A] [Finite A] [TopologicalSpace A] [DiscreteTopology A], (∃ n : ℕ, (ℓ ^ n : A) = 0) → UnboundedBaseChangeExtension (Profinite.continuousMapRingObj A) sq) ∧ UnboundedBaseChangeExtension (Profinite.continuousMapRingObj ℤ_[ℓ]) sq ∧ UnboundedBaseChangeExtension (Profinite.continuousMapRingObj ℚ_[ℓ]) sq ∧ (∀ E : PadicAlgCl.FiniteIntermediateField ℓ, UnboundedBaseChangeExtension (Profinite.padicIntegersRingObj ℓ E) sq ∧ UnboundedBaseChangeExtension (Profinite.continuousMapRingObj E) sq) ∧ UnboundedBaseChangeExtension (Profinite.padicAlgClRingObj ℓ) sq",
+  "branch": "newtargets-dag",
+  "by": "Q11",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "The six coefficient assertions spell out the admissible list with the required finite-subextension-valued Qbar. The exchange is the existing condensedAmbientExchange transported through the canonical Lu*=D(u*) isomorphisms; UnboundedBaseChangeExtension is exactly the generator-to-localizing-closure implication for this termwise presentation."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9162b2854",
+  "group": "Q11",
+  "result": "pass",
+  "note": "All node clauses match the Lean. Setting: k of positive characteristic ≠ ℓ (ringChar prime); four separated finite-type k-schemes and four k-morphisms; ChosenCartesianSquare g' p' p g; only p proper. Coefficients: all six cases, with Q̄ℓ = padicAlgClRingObj (finite-subextension convention) as in sibling UnboundedLocalizingPullback. Categories: ordinary unbounded D(Mod Λ_X); Dctf = constantModelBoundedConstructible ∧ finiteTorAmplitude; Loc = localizingClosureProEtale. Map: termwiseCondensedAmbientExchange is the canonical condensedAmbientExchange (mate unit(p')→θ→counit(p), θ derived from upperStarComp and sq.w) conjugated by leftDerivedFunctorIsoMapDerivedCategory, so it is the displayed β; no arbitrary map. UnboundedBaseChangeExtension is the generator ⇒ closure implication for the same .app K. stmt_deps adds only the landed def-weil-pbc-ambient-ringed-exchange; lean.statement verbatim. No hollow definitions, docstrings with source and blueprint, five proof steps in the docstring, only the theorem sorry, universe u free. nt_compile --json: clean in 4.5 s; probe #print axioms shows sorryAx only for the theorem. No fixes."
  }
 }

@@ -225,5 +225,24 @@
   "group": "Q32",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q32-85c813f79 (reviewer sub-agent of L); spot-checked: Read the item and both new nodes in full. Stacks 0DEN and 0992 support all four steps without flat-term or boundedness assumptions. Checked master coefficient categories, edge cases, duplicates, cycles and route restrictions; no dropped node occurs in the 356-node closure. Detailed checks are in review.md; no fixes needed."
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.ModuleMapmodPullbackKFlat",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.preservesKFlatComplexes_mapMod_upperStar_statement",
+  "file": "lean/Sheaf/SixFunctors/ModuleMapmodPullbackKFlat.lean",
+  "statement": "theorem preservesKFlatComplexes_mapMod_upperStar_statement : ∀ {P : CochainComplex (CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y)) ℤ}, (HomologicalComplex.quasiIso _ (.up ℤ)).kFlat P → (HomologicalComplex.quasiIso _ (.up ℤ)).kFlat ((((f)^*[Ab.{u + 1}].mapMod (condensedRingObj Λ Y)).mapHomologicalComplex (.up ℤ)).obj P)",
+  "branch": "newtargets-dag",
+  "by": "Q14",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Direct universal K-flat-preservation statement. Uses the scoped canonical Functor.monObjObj instance. The upstream kFlat test is definitionally equivalent to CochainComplex.IsKFlatForTotalTensor, checked by Iff.rfl through scompile.py; the Mod source category is definitionally equal to N2’s pulledBackModuleObjects, checked by rfl. No dependency node record is changed. The similarly named instance in the local archived framework is absent from the current server source and compiled environment, confirmed by scompile.py --source and a consumer check."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-dc373939f",
+  "group": "Q14",
+  "result": "pass",
+  "note": "Delivery dc373939 changes only the item's lean record, the module Sheaf/SixFunctors/ModuleMapmodPullbackKFlat.lean and the report (with real Worker report and Second reading by Q14 sections); all other node fields and every dependency record are unchanged. Clause by clause: arbitrary commutative condensed ring Λ (MonObj and IsCommMonObj), arbitrary f : X ⟶ Y of Scheme.{u}, Mod over condensedRingObj Λ Y (rfl-equal to pulledBackModuleObjects), the strong monoidal (f)^*[Ab] with Functor.mapMod, termwise on unbounded ℤ-indexed cochain complexes, and upstream kFlat (Iff.rfl to the recorded CochainComplex.IsKFlatForTotalTensor) on both sides; the target MonObj is rfl-equal to Functor.monObjObj. No flat-term, boundedness, nonempty, characteristic or universe assumption; edge cases are all admitted. Docstrings carry the source place, the blueprint id and all 4 proof steps; the proof is sorry only (axioms include sorryAx); the statement field appears verbatim. nt_compile.py compiles the module cleanly in 3.3 s, and scratch consumer checks pass. The archived unsuffixed instance is absent from the live build (Unknown identifier), so existing:false is correct. No findings."
  }
 }

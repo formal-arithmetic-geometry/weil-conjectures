@@ -214,5 +214,23 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CoefficientFiniteDescentObjects",
+  "declaration": "AlgebraicGeometry.ProEtale.coefficient_finite_descent_objects",
+  "file": "lean/Sheaf/Paper/CoefficientFiniteDescentObjects.lean",
+  "statement": "theorem coefficient_finite_descent_objects (k : Type u) [Field k] (p ℓ : ℕ) [CharP k p] [Fact ℓ.Prime] (_hp : 0 < p) (_hpℓ : p ≠ ℓ) (X : Scheme.{u}) [X.Over (Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))] : (∀ K : ConstantModelBoundedConstructible (Profinite.padicAlgClRingObj ℓ) X, ∃ (E : Padic.FiniteCoefficientFields ℓ (PadicAlgCl ℓ)) (K_E : ConstantModelBoundedConstructible (Profinite.continuousMapRingObj E) X), Nonempty ((derivedExtendScalarsToPadicAlgCl X ℓ E).obj K_E.obj ≅ K.obj)) ∧ (∀ (K : ConstantModelBoundedConstructible (Profinite.padicAlgClRingObj ℓ) X) (E : Padic.FiniteCoefficientFields ℓ (PadicAlgCl ℓ)) (K_E : ConstantModelBoundedConstructible (Profinite.continuousMapRingObj E) X), Nonempty ((derivedExtendScalarsToPadicAlgCl X ℓ E).obj K_E.obj ≅ K.obj) → ∀ (F : Padic.FiniteCoefficientFields ℓ (PadicAlgCl ℓ)) (h : E ≤ F), constantModelBoundedConstructible (Profinite.continuousMapRingObj F) X ((derivedExtendScalarsSubfield X ℓ h).obj K_E.obj) ∧ Nonempty ((derivedExtendScalarsToPadicAlgCl X ℓ F).obj ((derivedExtendScalarsSubfield X ℓ h).obj K_E.obj) ≅ K.obj))",
+  "branch": "newtargets-dag",
+  "by": "Q10",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ab8ffe98b",
+  "group": "Q10",
+  "result": "pass",
+  "note": "The statement matches the node and source clause by clause: standing field k (char p>0, p≠ℓ, ℓ prime) and X separated and finite type over k by explicit binders; Dbc as the recorded ConstantModelBoundedConstructible over padicAlgClRingObj / continuousMapRingObj E (rfl to padicSubfieldRingObj checked); recorded derivedExtendScalarsToPadicAlgCl and derivedExtendScalarsSubfield; conjunct 1 is existence of a model, conjunct 2 is persistence for every finite F with E≤F and states both constructibility and the model iso. No extra hypotheses, single universe u, edge cases (X empty, K=0, F=E, E=ℚ_ℓ) covered. No definitions, sorry-only proof, docstrings carry the source, blueprint tag and five proof steps; imports follow the rule; lean.statement verbatim; node changed only in lean; the five statement-dependency nodes match the current DAG. nt_compile --json clean (rc 0, no warnings, 4.0 s); a probe compile checked the signature, universes, the rfl identities and the axioms (sorryAx only). The report has Worker report and the disclosed self-check Second reading by Q10. No findings."
  }
 }

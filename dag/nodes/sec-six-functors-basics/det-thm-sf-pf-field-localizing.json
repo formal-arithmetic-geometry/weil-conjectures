@@ -309,5 +309,33 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.Paper.RationalLocalizingProjectionFormula",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.isIso_projectionMate_localizing_finiteExtension",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.ModuleObjectTensorGeneratorFormula",
+   "AlgebraicGeometry.ProEtale.CondensedRing.ModuleObjectDerivedTensorFormula",
+   "AlgebraicGeometry.ProEtale.CondensedRing.existsUnique_moduleObjectDerivedTensorComparison",
+   "AlgebraicGeometry.ProEtale.CondensedRing.moduleObjectDerivedTensorComparison",
+   "AlgebraicGeometry.ProEtale.CondensedRing.moduleObjectProjectionMate",
+   "AlgebraicGeometry.ProEtale.CondensedRing.isIso_projectionMate_localizing_finiteExtension",
+   "AlgebraicGeometry.ProEtale.CondensedRing.isIso_projectionMate_localizing_padicAlgCl"
+  ],
+  "file": "lean/Sheaf/Paper/RationalLocalizingProjectionFormula.lean",
+  "statement": "theorem isIso_projectionMate_localizing_finiteExtension (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] {X Y : Scheme.{u}} [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))] [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))] [IsSeparated (Y ↘ Spec (.of k))] (p : X ⟶ Y) [p.IsOver (Spec (.of k))] [IsProper p] (E : Type u) [NormedField E] [NormedAlgebra ℚ_[ℓ] E] [FiniteDimensional ℚ_[ℓ] E] (A : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj (Profinite.continuousCoefficientRingObj E) X))) (B : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj (Profinite.continuousCoefficientRingObj E) Y))) (hA : CategoryTheory.localizingClosure (constantModelBoundedConstructible (Profinite.continuousCoefficientRingObj E) X) A) (hB : CategoryTheory.localizingClosure (constantModelBoundedConstructible (Profinite.continuousCoefficientRingObj E) Y) B) : CategoryTheory.localizingClosure (constantModelBoundedConstructible (Profinite.continuousCoefficientRingObj E) Y) ((lowerStar (Profinite.continuousCoefficientRingObj E) p).rightDerivedFunctor.obj A ⊗ B) ∧ CategoryTheory.localizingClosure (constantModelBoundedConstructible (Profinite.continuousCoefficientRingObj E) Y) ((lowerStar (Profinite.continuousCoefficientRingObj E) p).rightDerivedFunctor.obj (A ⊗ (upperStar (Profinite.continuousCoefficientRingObj E) p).leftDerivedFunctor.obj B)) ∧ IsIso (moduleObjectProjectionMate (Profinite.continuousCoefficientRingObj E) p A B)",
+  "branch": "newtargets-dag",
+  "by": "Q99",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "The five module-object projection-map helpers are recorded in this owning item module under brief-stage2 §1 (missing helpers). The general dependency lem-weil-pbc-ringed-projection-mate-exact and all nine of its declarations are unchanged. The comparison is chosen from a named uniquely characterizing theorem, not a bare Nonempty isomorphism."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0768d4333",
+  "group": "Q99",
+  "result": "pass",
+  "note": "Re-delivery repairs the earlier RETURN (H13/H2): lem-weil-pbc-ringed-projection-mate-exact is byte-identical to base, and the five module-object helpers are now in the item module with identical bodies (only the blueprint tag changed). The item theorems are byte-identical to the earlier head; only the item's lean key changed; lean.statement is verbatim and all 7 declarations exist. Clause by clause: ℓ, k char p≠ℓ, separated finite-type X,Y/k, proper k-morphism p, E (finite normed ext, continuousCoefficientRingObj) and Qlbar (padicAlgClRingObj, finite-subextension-valued, checked in source), A,B in localizingClosure of constantModelBoundedConstructible (Dbc, not Dctf), both endpoint memberships and IsIso of the actual counit mate (rightAdjointProjectionMap of the derived adjunction at μ; transpose of μ then ε⊗1, Stacks 0B56). μ is unique because derivedTensorLeftDerived is a two-variable left derived functor with that counit, so the ∃! is genuine, not Nonempty. No stronger hypotheses, single universe u, no hollow defs, sorry-only proofs, docstrings carry source places, blueprint ids and the ten steps. Edge cases (zero objects, empty X, p = id, E = Qℓ, ℓ = 2, unbounded, shifts) are fine. nt_compile --json: rc 0, 27-31 s, no diagnostics. Non-blocking: the second reading is labelled an author self-check; the qlbar node lacks a lean record (bound only via its closed slopmaster2 audit); localizingClosure is not listed in sk-def-localizing-closure's declarations."
  }
 }

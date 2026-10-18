@@ -16,7 +16,8 @@
   "def-weil-abstract-derived-category",
   "sk-def-pe-wlocal",
   "def-sfb-site-derived-constant-module-functor",
-  "def-pur-sheaf-tensor-product"
+  "def-pur-sheaf-tensor-product",
+  "def-zl-condensed-scalar-realization"
  ],
  "proof": [
   {
@@ -302,5 +303,35 @@
   "group": "Q23",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q23-4aa25e585 (reviewer sub-agent of L); spot-checked: Read the full item, cited statements, route, and mathematical sources. All eight steps support arbitrary unbounded complexes without flatness or t-admissibility; no repairs or new nodes needed. review.md records checks and the unavailable external pivot-history audit."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.WContractibleCondensedScalarEvaluation",
+  "declaration": "AlgebraicGeometry.ProEtale.wContractible_condensed_scalar_evaluation",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.condensedCoefficientRing",
+   "AlgebraicGeometry.ProEtale.condensedSectionModuleTransport",
+   "AlgebraicGeometry.ProEtale.condensedDerivedSections",
+   "AlgebraicGeometry.ProEtale.scalarAffineComponents",
+   "AlgebraicGeometry.ProEtale.condensedComponentScalar",
+   "AlgebraicGeometry.ProEtale.scalarCoefficientEvaluation",
+   "AlgebraicGeometry.ProEtale.scalarComponentEvaluation",
+   "AlgebraicGeometry.ProEtale.condensedComponentExtension_additive",
+   "AlgebraicGeometry.ProEtale.wContractible_condensed_scalar_evaluation"
+  ],
+  "file": "lean/Sheaf/Paper/WContractibleCondensedScalarEvaluation.lean",
+  "statement": "theorem wContractible_condensed_scalar_evaluation (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ] (T : Scheme.{u}) (A : Type u) [CommRing A] [IsWContractibleRing A] (f : Spec (CommRingCat.of A) ⟶ T) [WeaklyEtale f] [HasDerivedCategory.{wS} (SheafOfModules.{u + 1} (condensedCoefficientRing Λ T))] [HasDerivedCategory.{wV} (SheafOfModules.{u + 1} (condensedCoefficientRing Λ (Spec (CommRingCat.of A))))] [HasDerivedCategory.{wBT} (ModuleCat.{u + 1} ((condensedCoefficientRing Λ T).obj.obj (op (Scheme.ProEt.mk f))))] [HasDerivedCategory.{wBV} (ModuleCat.{u + 1} ((condensedCoefficientRing Λ (Spec (CommRingCat.of A))).obj.obj (op (Scheme.ProEt.mk (𝟙 (Spec (CommRingCat.of A)))))))] [HasDerivedCategory.{wB} (ModuleCat.{u + 1} (scalarComponentEvaluation Λ A))] : ∃ (eT : scalarCoefficientEvaluation Λ T (Scheme.ProEt.mk f) ≅ scalarComponentEvaluation Λ A) (eV : scalarCoefficientEvaluation Λ (Spec (CommRingCat.of A)) (Scheme.ProEt.mk (𝟙 (Spec (CommRingCat.of A)))) ≅ scalarComponentEvaluation Λ A), (∃ (E : DerivedCategory (ModuleCat.{u + 1} (condensedScalarRing Λ)) ⥤ DerivedCategory (ModuleCat.{u + 1} (scalarComponentEvaluation Λ A))) (ε : DerivedCategory.Q ⋙ E ⟶ (ModuleCat.extendScalars.{u + 1, u + 1, u + 1} (condensedComponentScalar Λ A).hom).mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q), E.IsLeftDerivedFunctor ε (HomologicalComplex.quasiIso _ (.up ℤ)) ∧ Nonempty (condensedScalarRealization Λ T ⋙ condensedSectionModuleTransport Λ T ⋙ condensedDerivedSections Λ T (Scheme.ProEt.mk f) ⋙ Functor.mapDerivedCategory.{wBT, wB} (C₁ := ModuleCat.{u + 1} ((condensedCoefficientRing Λ T).obj.obj (op (Scheme.ProEt.mk f)))) (C₂ := ModuleCat.{u + 1} (scalarComponentEvaluation Λ A)) (ModuleCat.restrictScalars.{u + 1} eT.inv.hom) ≅ E)) ∧ (∀ (M : DerivedCategory (SheafOfModules.{u + 1} (condensedCoefficientRing Λ (Spec (CommRingCat.of A))))) (n : ℤ), M.IsLE n → ((condensedDerivedSections Λ (Spec (CommRingCat.of A)) (Scheme.ProEt.mk (𝟙 (Spec (CommRingCat.of A)))) ⋙ Functor.mapDerivedCategory.{wBV, wB} (C₁ := ModuleCat.{u + 1} ((condensedCoefficientRing Λ (Spec (CommRingCat.of A))).obj.obj (op (Scheme.ProEt.mk (𝟙 (Spec (CommRingCat.of A))))))) (C₂ := ModuleCat.{u + 1} (scalarComponentEvaluation Λ A)) (ModuleCat.restrictScalars.{u + 1} eV.inv.hom)).obj M).IsLE n) ∧ (∀ (M : DerivedCategory (SheafOfModules.{u + 1} (condensedCoefficientRing Λ (Spec (CommRingCat.of A))))) (n : ℤ), M.IsGE n → ((condensedDerivedSections Λ (Spec (CommRingCat.of A)) (Scheme.ProEt.mk (𝟙 (Spec (CommRingCat.of A)))) ⋙ Functor.mapDerivedCategory.{wBV, wB} (C₁ := ModuleCat.{u + 1} ((condensedCoefficientRing Λ (Spec (CommRingCat.of A))).obj.obj (op (Scheme.ProEt.mk (𝟙 (Spec (CommRingCat.of A))))))) (C₂ := ModuleCat.{u + 1} (scalarComponentEvaluation Λ A)) (ModuleCat.restrictScalars.{u + 1} eV.inv.hom)).obj M).IsGE n)",
+  "branch": "newtargets-dag",
+  "by": "NF",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Repair of immutable head 7d401fa641d3: the scalar ring, canonical point scalar map and scalar realization are imported and reused from Sheaf.AlgebraicGeometry.CondensedScalarRealization (def-zl-condensed-scalar-realization). No renamed copy remains. Lambda is the existing internal commutative ring object, and its pulled-back coefficients are exactly condensedRingObj. The sectionwise derived transport is only the existing internal/sectionwise module equivalence applied termwise. Coefficient comparison uses its reconstructed section rings. The RHS universal left-derived pair specifies ordinary extension along the restriction Lambda(*) → Lambda(pi_0 V). The comparison is a natural isomorphism on all D(R)."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c9b3661cf",
+  "group": "NF",
+  "result": "pass",
+  "note": "Repair of 7d401fa641d3: the colliding condensedScalarRing/Map/Realization are now imported from the landed def-zl-condensed-scalar-realization, which is added to stmt_deps (acyclic). No copies remain, and none of the 9 names collides elsewhere. The node differs only in lean and stmt_deps. lean.statement is verbatim the file signature, and all 9 declarations exist. Clauses checked against the node: Λ is the internal comm ring object; R=Γ(*,Λ); T any scheme; Λ_T=condensedRingObj with section rings via the existing equivalence; L_T is the landed realization; V=Spec A with IsWContractibleRing and WeaklyEtale f; S is the actual π0 quotient; the ring iso is in CommRingCat; Q⊗^L_RΓ(S,Λ) is a universal left-derived extension along restriction S→*, with a natural iso on all of D(R); t-exactness holds in both halves for all M,n. No t-admissibility, flatness or boundedness hypothesis. Universes: modules in u+1, localization universes independent. Edge cases covered: empty V, zero Λ, unbounded Q. Only the main theorem uses sorry. Docstrings carry source place and blueprint id. nt_compile --json exit 0, about 3.5 s, no errors or warnings. Non-blocking: eT/eV are bare existential ring isos; eT's R-compatibility is forced by the natural derived iso, while eV's R-compatibility is not stated and does not affect t-exactness. Sections are taken at V on T's site, which equals RΓ(V,-|_V) by slice localization (proof step 8)."
  }
 }

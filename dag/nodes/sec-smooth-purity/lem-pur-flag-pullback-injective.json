@@ -13,7 +13,8 @@
   "def-coefficient-twists-detailed",
   "def-amb-finite-locally-free-module",
   "def-pur-complete-flag-bundle",
-  "thm-pur-projective-bundle-formula"
+  "thm-pur-projective-bundle-formula",
+  "def-pur-supported-projection-splitting"
  ],
  "proof": [
   {
@@ -261,5 +262,33 @@
   "group": "Q38",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q38-0ec2116f7 (reviewer sub-agent of L); spot-checked: I read the item, every cited statement, blueprint Step 1 of thm-pur-localized-top-chern (main-20261015) and Stacks 0F0G. No new nodes. (1) Statement: the delivery adds constant rank r>=0 because def-pur-complete-flag-bundle needs it; the parent assumes a rank-r bundle, so this is a typing correction, not a weakening, and the report names it. The extension to all b, a and any closed Z is harmless. (2) The steps check against the cited statements. Step 1: the tower has ranks r..2, each stage is proper by the tautological-geometry lemma, so every stage is in the domain of the projective-bundle formula. Step 2: the twist identification is in the statement of kummer-additivity, which gives the etale-origin and constructibility hypotheses used later. Step 3: the e=0 component is the unit. Step 4: lem-sp-finite-ring-compact-support-projection applies with j=id; its hypotheses hold (finite ring killed by a power of l, q proper, bounded constructible inputs), and the triangle identity gives pi(eta tensor 1)=eta_L. Step 5: the supported-Hom pullback formula plus adjunction naturality give a left inverse. Step 6: the units compose and the all-zero tuple is the only shift-0 summand. Small cases checked: r=0,1,2; Z empty; Z=T. No duplicate: rg over dag/nodes found only lem-pur-chern-flag-formula, a different statement. The worker's tool_uses are accepted. (3) Batch-5 check on lem-sp-finite-ring-compact-support-projection: it is outside the assumptions. Neither assumption gives a finite-ring proper projection formula. The node reached in sec-poincare-duality (lem-pod-lisse-module-sheaves-as-module-objects) is a general lemma that lisse sheaves are module objects in FLC(Y), used by proper base change. Smooth purity itself is in the stmt_deps of nt-assume-poincare-duality (nt-target-smooth-purity-qbar), so its proof legitimately belongs to batch 5. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FlagPullbackInjective",
+  "declaration": "WeilConjectures.PurityFiniteSetting.flag_pullback_split_injective",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.flagChernWord",
+   "WeilConjectures.PurityFiniteSetting.flagOrderedCup",
+   "WeilConjectures.PurityFiniteSetting.flagWordCupRaw",
+   "WeilConjectures.PurityFiniteSetting.flagRootChern",
+   "WeilConjectures.PurityFiniteSetting.flagChernComponent",
+   "WeilConjectures.PurityFiniteSetting.flagZeroComponent",
+   "WeilConjectures.PurityFiniteSetting.flagTwistPlus",
+   "WeilConjectures.PurityFiniteSetting.flag_pullback_split_injective"
+  ],
+  "file": "lean/Sheaf/Paper/FlagPullbackInjective.lean",
+  "statement": "theorem flag_pullback_split_injective (P : PurityFiniteSetting.{u}) (r : ℕ) (T : Scheme.{u}) (F : T.Modules) [F.IsFiniteLocallyFreeOfRank r] (bT : T ⟶ Spec (.of P.field.k)) [IsSeparated bT] [LocallyOfFiniteType bT] [QuasiCompact bT] {Z Z' : Scheme.{u}} (i : Z ⟶ T) [IsClosedImmersion i] (i' : Z' ⟶ (completeFlagBundle r T F).scheme) [IsClosedImmersion i'] (g : Z' ⟶ Z) (_sq : ChosenCartesianSquare g i' i (completeFlagBundle r T F).projection) (a b : ℤ) : ∃ t : Etale.OrdinaryFiniteTwistTransport P.Coefficient P.diagonalExponent P.diagonalExponent_annihilates, P.supportedProjectionSplitting i i' (completeFlagBundle r T F).projection (P.flagTwistPlus T a) b (fun rho ↦ ∀ w : ℕ → ℕ, (∀ j : ℕ, j < r → w j ≤ j) → P.flagChernComponent t r T F bT w ≫ rho = P.flagZeroComponent T r w)",
+  "branch": "newtargets-dag",
+  "by": "Q67",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5de4531e8",
+  "group": "Q67",
+  "result": "pass",
+  "note": "Checked node clause by clause against flag_pullback_split_injective: rank r via IsFiniteLocallyFreeOfRank, separated finite-type bT, recorded completeFlagBundle, arbitrary closed i with ChosenCartesianSquare, all a b : ℤ, actual derived support groups and Transport.derivedMap pullback, additive left inverse. rho is uniquely the all-zero projection: bounds w j ≤ j match the tower (completeFlagQuotient i is the D.L of a rank-(i+1) stage, the same Kummer class as the PBF). rK is fixed by the counit projection-map equation, s by the normalized Hom identification. The existentials t, chi, chi', e are normalized interfaces, so there is no arbitrary data. New def node def-pur-supported-projection-splitting is a genuine missing notion with no existence claim. Statement field verbatim, lean.statement verbatim, single sorry, source/blueprint docstrings, no extra assumptions. Edge cases r=0,1,2, empty or full Z, negative a b, universes OK. Report has Worker report and Second reading by Q67 (same worker, disclosed). nt_compile --json of both files clean twice (36.6 s / 7.6 s), exit 0. No fixes."
  }
 }
