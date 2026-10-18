@@ -8,9 +8,6 @@ module
 public import Sheaf.AlgebraicGeometry.KInjectiveResolutions
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolutionInjective
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.GlobalSections
-public import Mathlib.CategoryTheory.Linear.FunctorCategory
-public import Mathlib.Algebra.Homology.HomotopyCategory.Triangulated
-public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 
 import Sheaf.AlgebraicGeometry.ClosedSupportHomSequence
 import WeilConjectures.Algebra.Homology.KernelShiftedMappingCone
