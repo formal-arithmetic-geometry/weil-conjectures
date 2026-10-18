@@ -73,17 +73,17 @@ instance isIso_mapDerivedCategoryRightDerivedAdjunction_unit (adj : L ⊣ R) [Is
   rw [h]
   infer_instance
 
-/-- For an adjunction `L ⊣ R` with invertible unit, `R` inverts the counit: by the triangle
-identity, `R ε_Y` is a retraction of the invertible `η_{R Y}`. -/
 omit [Abelian C] [Abelian D] [HasDerivedCategory C] [HasDerivedCategory D]
   [Abelian.HasKInjectiveResolutions D] [L.Additive] [R.Additive] [PreservesFiniteLimits L]
   [PreservesFiniteColimits L] [PreservesFiniteLimits R] [PreservesFiniteColimits R] in
+/-- For an adjunction `L ⊣ R` with invertible unit, `R` inverts the counit: by the triangle
+identity, `R ε_Y` is a retraction of the invertible `η_{R Y}`. -/
 lemma isIso_map_counit_app_of_isIso_unit (adj : L ⊣ R) [IsIso adj.unit] (Y : D) :
     IsIso (R.map (adj.counit.app Y)) := by
   have h := adj.right_triangle_components Y
   have : IsIso (adj.unit.app (R.obj Y) ≫ R.map (adj.counit.app Y)) := by
     rw [h]
-    infer_instance
+    exact IsIso.id _
   exact IsIso.of_isIso_comp_left (adj.unit.app (R.obj Y)) _
 
 end CategoryTheory.Adjunction
