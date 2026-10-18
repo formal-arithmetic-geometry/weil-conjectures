@@ -2,7 +2,7 @@
  "id": "lem-trf-etale-point-morphism-classification",
  "kind": "statement",
  "title": "Morphisms between geometric points are exactly stalk-point 2-morphisms",
- "statement": "Let $S$ be a scheme [def-pc-scheme] and let $\\bar{x}:\\operatorname{Spec}\\Omega\\to S$ and $\\bar{y}:\\operatorname{Spec}\\Omega'\\to S$ be geometric points [def-weil-geometric-point]. Let $p_x$ and $p_y$ be the associated points of the small étale topos $S_{\\mathrm{Et}}$, with inverse images given by geometric stalk functors [lem-trf-etale-topos-points-geometric]. The assignment sending a morphism of geometric points $a:\\operatorname{Spec}\\Omega\\to\\operatorname{Spec}\\Omega'$ with $a\\circ\\bar{y}=\\bar{x}$ to the induced natural transformation of stalk functors (equivalently, its adjoint 2-morphism $p_x\\Rightarrow p_y$) is a bijection from such scheme morphisms to 2-morphisms between $p_x$ and $p_y$. Every such 2-morphism is invertible, because the induced map on every étale stalk is bijective.",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and let $\\bar x:\\operatorname{Spec}\\Omega_x\\to S$ and $\\bar y:\\operatorname{Spec}\\Omega_y\\to S$ be geometric points [def-weil-geometric-point]. Work with small representatives in a common enlarged universe [def-weil-size-convention]. Let $p_x,p_y$ be their geometric-stalk points of the small etale topos [def-weil-pbc-etale-site, lem-fix-geometric-stalk-topos-point]; a $2$-morphism $p_x\\Rightarrow p_y$ means a natural transformation $(p_x)_*\\to(p_y)_*$, with inverse-image mate $F_{\\bar y}\\to F_{\\bar x}$ [def-trf-geometric-morphism, def-weil-pbc-geometric-stalks]. Define covariant lift functors $L_z(U)=\\operatorname{Hom}_S(\\operatorname{Spec}\\Omega_z,U)$ on the small etale site, with $L_z(f)(u)=f\\circ u$. Let $E(\\bar x,\\bar y)$ be the set of families $v=(v_{U,u})$ indexed by pointed etale neighbourhoods $(U,u)$ of $\\bar y$ [def-weil-pbc-pointed-etale-neighbourhoods], where $v_{U,u}\\in L_x(U)$ and $f\\circ v_{V,w}=v_{U,u}$ for every pointed arrow $f:(V,w)\\to(U,u)$. There are canonical bijections\n$$\\operatorname{Hom}_{\\operatorname{Pt}(S_{\\mathrm{Et}})}(p_x,p_y)\\;\\cong\\;\\operatorname{Nat}(L_y,L_x)\\;\\cong\\;E(\\bar x,\\bar y)\\;\\cong\\;\\operatorname{Hom}_S(\\operatorname{Spec}\\Omega_x,S_{(\\bar y)}),$$\nwhere $S_{(\\bar y)}$ is the inverse-limit strict localization [def-weil-pbc-strict-henselization-limit], with structural map $\\rho_y$ [def-weil-pbc-strict-henselization-structural-map], and the final Hom means maps $b$ with $\\rho_y b=\\bar x$. A transformation $\\theta:L_y\\to L_x$ corresponds to $v_{U,u}=\\theta_U(u)$; the mate of its corresponding $2$-morphism sends every germ by\n$$[U,u,s]\\longmapsto[U,\\theta_U(u),s].$$\nFor a scheme morphism $a:\\operatorname{Spec}\\Omega_x\\to\\operatorname{Spec}\\Omega_y$ with $\\bar y\\circ a=\\bar x$, the associated transformation is $\\theta_U(u)=u\\circ a$, and the corresponding $2$-morphism is invertible. The classification is by the displayed compatible lifts; it asserts neither uniqueness of an inducing map between the original geometric fields nor invertibility of arbitrary $2$-morphisms.",
  "source": {
   "document": "literature/stacks-project/etale-cohomology.tex",
   "place": "Tag 04FN (remark-map-stalks), together with Tag 04HU (lemma-points-small-etale-site) and the definition of morphisms of points in sites.tex; the converse uniqueness is the representative calculation on representable sheaves."
@@ -10,14 +10,96 @@
  "stmt_deps": [
   "def-pc-scheme",
   "def-weil-geometric-point",
+  "def-weil-size-convention",
   "def-weil-pbc-etale-site",
+  "lem-fix-geometric-stalk-topos-point",
   "def-trf-geometric-morphism",
-  "lem-trf-etale-topos-points-geometric",
+  "def-weil-pbc-geometric-stalks",
+  "def-weil-pbc-pointed-etale-neighbourhoods",
+  "def-weil-pbc-strict-henselization-limit",
+  "def-weil-pbc-strict-henselization-structural-map"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-trf-point-arrows-strict-local-lifts] with $\\bar t=\\bar x$ and $\\bar s=\\bar y$. Its hypotheses are precisely that $S$ is a scheme and both geometric fields are algebraically closed. It gives a canonical bijection $b\\mapsto\\Theta(b)$ from maps $b:\\operatorname{Spec}\\Omega_x\\to S_{(\\bar y)}$ over $S$ to $2$-morphisms $p_x\\Rightarrow p_y$. Its stated germ formula uses the canonical neighbourhood projections $c_{U,u}$ and sends $[U,u,s]$ to $[U,c_{U,u}b,s]$. These are the actual stalk points by [lem-fix-geometric-stalk-topos-point] in its etale case; no choice of a representation of an arbitrary topos point is needed.",
+   "uses": [
+    "lem-trf-point-arrows-strict-local-lifts",
+    "lem-fix-geometric-stalk-topos-point"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0GJ2, section-specialization, germ construction of sp; Tag 04FN, remark-map-stalks, construction and its final warning about general point morphisms. The compatible-family reformulation uses the defining inverse limit."
+   }
+  },
+  {
+   "text": "By [def-weil-pbc-strict-henselization-limit] the maps into $S_{(\\bar y)}$ are exactly cones of maps into a small representative category of affine pointed neighbourhoods. The structural-map definition [def-weil-pbc-strict-henselization-structural-map] identifies the condition of being over $S$ with every cone map being a lift of $\\bar x$. Such an affine family extends uniquely to all pointed neighbourhoods: for $(U,u)$ choose an affine pointed refinement $f:(V,w)\\to(U,u)$ using [lemma-weil-pbc-affine-neighbourhood-cofinal] and put $v_{U,u}=f v_{V,w}$. For two refinements, [lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered] supplies a common pointed source; equalize its two arrows to $(U,u)$ and refine it again to an affine object. Compatibility of the affine family makes the two images equal. Applying the same argument to a refinement followed by any pointed arrow proves compatibility with that arrow. Restriction to affine objects and this extension are inverse: their agreement on any chosen affine refinement determines the value at $(U,u)$. Hence maps $b$ over $S$ are canonically bijective to $E(\\bar x,\\bar y)$, with $v_{U,u}=c_{U,u}b$.",
+   "uses": [
+    "def-weil-pbc-strict-henselization-limit",
+    "def-weil-pbc-strict-henselization-structural-map",
+    "lemma-weil-pbc-affine-neighbourhood-cofinal",
+    "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0GJ2, section-specialization, germ construction of sp; Tag 04FN, remark-map-stalks, construction and its final warning about general point morphisms. The compatible-family reformulation uses the defining inverse limit."
+   }
+  },
+  {
+   "text": "A natural transformation $\\theta:L_y\\to L_x$ gives $v_{U,u}=\\theta_U(u)$. For a pointed arrow $f:(V,w)\\to(U,u)$, its defining equation $fw=u$ from [def-weil-pbc-pointed-etale-neighbourhoods] and naturality give $f\\theta_V(w)=\\theta_U(fw)=\\theta_U(u)$. Conversely a compatible family defines functions $\\theta_U:L_y(U)\\to L_x(U)$ by $u\\mapsto v_{U,u}$. For any site arrow $f:V\\to U$ and any $w\\in L_y(V)$, it is a pointed arrow $(V,w)\\to(U,fw)$, so compatibility says $f\\theta_V(w)=\\theta_U(fw)$. This is precisely naturality, including empty lift sets. These two constructions are inverse by evaluation at each $u$.",
+   "uses": [
+    "def-weil-pbc-pointed-etale-neighbourhoods"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0GJ2, section-specialization, germ construction of sp; Tag 04FN, remark-map-stalks, construction and its final warning about general point morphisms. The compatible-family reformulation uses the defining inverse limit."
+   }
+  },
+  {
+   "text": "Combine the bijections of steps 1--3. The germ formula in [lem-trf-point-arrows-strict-local-lifts] now reads $[U,u,s]\\mapsto[U,\\theta_U(u),s]$, since $c_{U,u}b=v_{U,u}=\\theta_U(u)$. This describes the mate on every sheaf and every germ, not just representables. The stalk definition [def-weil-pbc-geometric-stalks] says that all elements are represented in this colimit. Thus the formula determines the natural transformation on every sheaf. The mate convention in [def-trf-geometric-morphism] then determines the unique direct-image $2$-morphism in the direction $p_x\\Rightarrow p_y$.",
+   "uses": [
+    "lem-trf-point-arrows-strict-local-lifts",
+    "def-weil-pbc-geometric-stalks",
+    "def-trf-geometric-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0GJ2, section-specialization, germ construction of sp; Tag 04FN, remark-map-stalks, construction and its final warning about general point morphisms. The compatible-family reformulation uses the defining inverse limit."
+   }
+  },
+  {
+   "text": "If $a$ is the stated scheme morphism, the family $v_{U,u}=u\\circ a$ consists of lifts of $\\bar x$ and satisfies $f(w a)=(fw)a$ for every pointed arrow. Step 3 therefore gives $\\theta_U(u)=u a$. The resulting germ formula is exactly the one in [lem-weil-pbc-geometric-point-morphism-stalk-bijection], with $\\bar s=\\bar x$ and $\\bar s'=\\bar y$; that statement gives bijectivity on the stalk of every set sheaf. These maps are natural by step 4. Their inverse functions are natural as well: for a sheaf morphism $h:F\\to G$, from $h_{\\bar x}\\lambda_F=\\lambda_G h_{\\bar y}$ multiply on the two sides by the component inverses. Thus the mate is a natural isomorphism and [def-trf-geometric-morphism] gives an invertible $2$-morphism. This proves the assertion for scheme morphisms without asserting that they exhaust all compatible families.",
+   "uses": [
+    "lem-weil-pbc-geometric-point-morphism-stalk-bijection",
+    "def-trf-geometric-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0GJ2, section-specialization, germ construction of sp; Tag 04FN, remark-map-stalks, construction and its final warning about general point morphisms. The compatible-family reformulation uses the defining inverse limit."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-point-arrows-strict-local-lifts",
+  "lem-fix-geometric-stalk-topos-point",
+  "def-weil-pbc-strict-henselization-limit",
+  "def-weil-pbc-strict-henselization-structural-map",
+  "lemma-weil-pbc-affine-neighbourhood-cofinal",
+  "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered",
+  "def-weil-pbc-pointed-etale-neighbourhoods",
+  "def-weil-pbc-geometric-stalks",
+  "def-trf-geometric-morphism",
   "lem-weil-pbc-geometric-point-morphism-stalk-bijection"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0GJ2, section-specialization, germ construction of sp; Tag 04FN, remark-map-stalks, construction and its final warning about general point morphisms. The compatible-family reformulation uses the defining inverse limit."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -67,10 +149,52 @@
    "results": "EtalePoint.lean:64 pointSmallEtale and lines 98–114 fibre lemmas; no IsIso classification.",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "pointSmallEtale|presheafFiber_hom_ext|structure Hom",
+   "results": "{\"t\": \"2026-10-17T23:50:45Z\", \"tool\": \"grep\", \"query\": \"pointSmallEtale|presheafFiber_hom_ext|structure Hom\", \"sub\": \"AlgebraicGeometry/Sites\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean\", \"Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean\", \"Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean\", \"Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean\", \"Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean\"], \"digest\": \"b64010dac7a67c35\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: generic Point.Hom.sheafFiber constructs maps from site-point arrows; EtalePoint constructs geometric points; neither supplies the inverse-limit classification or its converse. Read Mathlib/CategoryTheory/Sites/Point/Category.lean:39-95 and AlgebraicGeometry/Sites/EtalePoint.lean:64-114."
+  },
+  {
+   "tool": "grep",
+   "query": "sheafFiber|presheafFiber|fullyFaithful",
+   "results": "{\"t\": \"2026-10-17T23:50:45Z\", \"tool\": \"grep\", \"query\": \"sheafFiber|presheafFiber|fullyFaithful\", \"sub\": \"CategoryTheory/Sites/Point\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean\", \"Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean\", \"Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean\", \"Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean\", \"Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean\", \"Mathlib/CategoryTheory/Sites/Point/OfIsCofiltered.lean\", \"Mathlib/CategoryTheory/Sites/Point/OfIsCofiltered.lean\", \"Mathlib/CategoryTheory/Sites/Point/OfIsCofiltered.lean\"], \"digest\": \"324e9aa69ef658d3\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: generic Point.Hom.sheafFiber constructs maps from site-point arrows; EtalePoint constructs geometric points; neither supplies the inverse-limit classification or its converse. Read Mathlib/CategoryTheory/Sites/Point/Category.lean:39-95 and AlgebraicGeometry/Sites/EtalePoint.lean:64-114."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Natural transformations between etale stalk functors are classified by compatible geometric lifts to etale neighborhoods",
+   "results": "{\"t\": \"2026-10-17T23:50:46Z\", \"tool\": \"leansearch\", \"query\": \"Natural transformations between etale stalk functors are classified by compatible geometric lifts to etale neighborhoods\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Point.Hom\", \"sheafFiber\"",
+   "results": "{\"t\": \"2026-10-17T23:50:46Z\", \"tool\": \"loogle\", \"query\": \"\\\"Point.Hom\\\", \\\"sheafFiber\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"CategoryTheory.GrothendieckTopology.Point.Hom.presheafFiber\", \"CategoryTheory.GrothendieckTopology.Point.Hom.sheafFiber\", \"CategoryTheory.GrothendieckTopology.Point.Hom.presheafFiber_id\", \"CategoryTheory.GrothendieckTopology.Point.Hom.presheafFiber_comp\", \"CategoryTheory.GrothendieckTopology.Point.Hom.sheafFiber_id\", \"CategoryTheory.GrothendieckTopology.Point.Hom.presheafFiber_app\", \"CategoryTheory.GrothendieckTopology.Point.Hom.sheafFiber_comp\", \"CategoryTheory.GrothendieckTopology.Point.Hom.presheafFiber_comp_assoc\"], \"digest\": \"c5b872d79cf550da\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: generic Point.Hom.sheafFiber constructs maps from site-point arrows; EtalePoint constructs geometric points; neither supplies the inverse-limit classification or its converse. Read Mathlib/CategoryTheory/Sites/Point/Category.lean:39-95 and AlgebraicGeometry/Sites/EtalePoint.lean:64-114."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Morphisms between points of the small etale topos correspond to lifts of a geometric point to a strict localization",
+   "results": "{\"t\": \"2026-10-17T23:50:55Z\", \"tool\": \"leanfinder\", \"query\": \"Morphisms between points of the small etale topos correspond to lifts of a geometric point to a strict localization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"StandardEtalePair.homEquiv_symm_apply\", \"AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful\", \"AlgebraicGeometry.Scheme.instFaithfulEtaleOverForget\", \"AlgebraicGeometry.Scheme.instFullEtaleOverForget\", \"AlgebraicGeometry.Scheme.Etale.forget\", \"StandardEtalePair.homEquiv\", \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"AlgebraicGeometry.Scheme.instCategoryEtale\"], \"digest\": \"ae1379be8b65600a\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: generic Point.Hom.sheafFiber constructs maps from site-point arrows; EtalePoint constructs geometric points; neither supplies the inverse-limit classification or its converse. Read Mathlib/CategoryTheory/Sites/Point/Category.lean:39-95 and AlgebraicGeometry/Sites/EtalePoint.lean:64-114."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural transformations of fiber functors on an etale site correspond to compatible families of geometric lifts in pointed neighborhoods",
+   "results": "{\"t\": \"2026-10-17T23:50:56Z\", \"tool\": \"leanfinder\", \"query\": \"Natural transformations of fiber functors on an etale site correspond to compatible families of geometric lifts in pointed neighborhoods\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.GrothendieckTopology.Point.toPresheafFiber_eq_iff'\", \"CategoryTheory.GrothendieckTopology.Point.toPresheafFiber_w_apply\", \"CategoryTheory.GrothendieckTopology.Point.Hom.sheafFiber\", \"CategoryTheory.GrothendieckTopology.Point.toPresheafFiber_map_bijective\", \"CategoryTheory.GrothendieckTopology.Point.presheafFiber_hom_ext_iff\", \"CategoryTheory.GrothendieckTopology.Point.Hom.presheafFiber_app\", \"CategoryTheory.GrothendieckTopology.Point.presheafFiber_hom_ext\", \"CategoryTheory.GrothendieckTopology.Point.toPresheafFiber_w\"], \"digest\": \"22b65a10175fc23c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: generic Point.Hom.sheafFiber constructs maps from site-point arrows; EtalePoint constructs geometric points; neither supplies the inverse-limit classification or its converse. Read Mathlib/CategoryTheory/Sites/Point/Category.lean:39-95 and AlgebraicGeometry/Sites/EtalePoint.lean:64-114."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-etale-point-support-fibre",
@@ -82,12 +206,54 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "Fixed-second-support reduction in Orgogozo, proof of Lemma 8.3.2, printed p. 18: the point morphisms and their automorphisms are identified through geometric representatives and stalk maps.",
+   "place": "Current main-20261015 lem-trf-local-term-locality.proof.md, (1) and (2), paragraph on specialization to the normal cone; subsidiary point-arrow calculation in the existing nearby-cycle finiteness branch, specifically the fixed-support reduction of Orgogozo Lemma 8.3.2, printed p. 18. Corrects the attempted identification of all point arrows with geometric-field maps.",
    "via": [
-    "lem-trf-etale-point-morphism-classification"
+    "lem-trf-etale-point-support-fibre",
+    "lem-trf-oriented-point-normalized-stratum",
+    "lem-trf-oriented-maximal-point-finiteness",
+    "lem-trf-oriented-constructible-subquotients",
+    "lem-trf-psi-proper-surjective-constructibility",
+    "lem-trf-psi-good-oriented-cohomology-strata",
+    "lem-trf-nearby-cycle-sheaf-finiteness",
+    "lem-trf-nearby-cycle-finiteness-exchange",
+    "lem-trf-specialization-zero-section"
    ]
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-etale-point-morphism-classification",
+  "worker": "stage1",
+  "summary": "STATEMENT-DISPUTED: the original composite a composed with bar y was ill-typed; field maps neither classify all topos point arrows nor uniquely determine them, and general specialization arrows need not be invertible. Corrected to classification by natural lift transformations, coherent neighbourhood lifts and maps into the strict localization, reusing the existing reviewed strict-local point-arrow theorem. Retained invertibility for arrows actually induced by scheme morphisms. Five steps; no new nodes. Counterexamples, parent impact and maintainer-owned title/source corrections are in report.md.",
+  "blueprint": "Supports the normal-cone specialization argument in main-20261015 lem-trf-local-term-locality.proof.md (1)--(2), through the inherited nearby-cycle finiteness branch and fixed-support comparison; does not replace either unit step. Blueprint searches for geometric point, strict localization and morphisms of points found no blueprint node with the corrected full statement.",
+  "tool_uses": [
+   {
+    "node": "lem-fix-geometric-stalk-topos-point",
+    "why": "Constructs the canonical geometric-stalk point; a generic point-construction tool, not a replacement of the unit route."
+   },
+   {
+    "node": "lemma-weil-pbc-affine-neighbourhood-cofinal",
+    "why": "Extends cones on affine pointed neighbourhoods to all neighbourhoods; this general indexing tool is not supplied by a statement of the unit."
+   },
+   {
+    "node": "lem-weil-pbc-geometric-point-morphism-stalk-bijection",
+    "why": "Gives invertibility for genuine maps of geometric fields, separately from the general point-arrow classification; a generic etale-stalk tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-fix-geometric-stalk-topos-point",
+  "lemma-weil-pbc-affine-neighbourhood-cofinal",
+  "lem-weil-pbc-geometric-point-morphism-stalk-bijection"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q03-b691ead1b",
+  "group": "Q03",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q03-b691ead1b (reviewer sub-agent of L); spot-checked: PASS: I read all the mathematics. No fix files written. The old statement was false and the five-step split proves the corrected classification. (1) Old statement: it was ill-typed (a∘ȳ instead of ȳ∘a). It was also not injective: for S=Spec C and Ω the algebraic closure of C(u), every lift factors through a component, so u∘Spec σ=u and distinct field automorphisms give the same 2-morphism. It was not surjective or always invertible either: on the trait C[[t]] the specialization arrow p_η⇒p_s has mate ∅→{*} on h_{D(t)}. Stacks 04FN (remark-map-stalks, last paragraph) itself warns that specialization arrows exist and are not isomorphisms. (2) Directions: checked against Sites 00YI (an arrow p→p' is a transformation u'→u, which gives Nat(L_y,L_x)), against 04FN (ȳa=x̄ gives p_x→p_y), and against 0GJ2 (the mate runs from the closed stalk to the generic stalk). They agree with the direct-image convention of def-trf-geometric-morphism. (3) Steps: step 1 applies lem-trf-point-arrows-strict-local-lifts with t̄=x̄, s̄=ȳ, whose only hypotheses are a scheme and algebraically closed fields. Step 2 (cones over the representative category J, the structural map ρ, affine refinement, common source and equalizer, refinement back into J) is correct and elementary. Step 3 is bookkeeping and also covers empty lift sets. Step 4 turns the germ formula into [U,u,s]↦[U,θ_U(u),s]. Step 5 gets bijectivity from the stalk-bijection lemma with s̄=x̄, s̄'=ȳ. It also uses that an inverse-image isomorphism implies a direct-image one, which def-trf-geometric-morphism does not state; this is standard mate calculus and I accept it as elementary. (4) Tested the corrected statement on Spec C (all four sets are singletons), the trait (exactly one arrow from the generic point to the closed one, none back) and empty étale objects. (5) No cycle in the 166-node closure, no new nodes, no duplicate found, no SGA cited. Accepted tool_uses: lem-fix-geometric-stalk-topos-point, lemma-weil-pbc-affine-neighbourhood-cofinal and lem-weil-pbc-geometric-point-morphism-stalk-bijection. For the maintainer: the reviewed parent lem-trf-etale-point-support-fibre cites the old false classification in steps 1, 3 and 4, so its proof must be reopened. Its statement may still hold. The maintainer-owned title and source of the item are stale and should be updated as the report suggests."
  }
 }

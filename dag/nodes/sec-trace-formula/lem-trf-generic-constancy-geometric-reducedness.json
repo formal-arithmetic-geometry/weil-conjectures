@@ -17,9 +17,43 @@
   "def-weil-residue-field",
   "def-pc-geometrically-irreducible"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Because $f$ is locally of finite presentation [def-sbc-locally-finite-presentation], it is locally of finite type: a finitely presented algebra is finitely generated, and the condition passes to every affine open of $Y$ by restricting to principal opens common to two affine opens. Since $f$ is moreover quasi-compact, it is of finite type by the definition of finite type morphism [def-weil-finite-type-morphism]. This verifies the finiteness hypothesis of Tags 0577 and 0578 without adding flatness, reducedness, Noetherianity, or a nonemptiness assumption.",
+   "uses": [
+    "def-sbc-locally-finite-presentation",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tags 0577 and 0578 hypotheses; finite type definition as quasi-compact and locally of finite type"
+   }
+  },
+  {
+   "text": "Use excluded middle on the proposition that the generic fibre $X_\\eta$ is geometrically reduced. If it is geometrically reduced, apply [lem-trf-generic-fibre-geometrically-reduced-open] to obtain a nonempty open $V$ on which every fibre is geometrically reduced, hence each fibre has the same truth value as the generic fibre. If it is not geometrically reduced, apply [lem-trf-generic-fibre-not-geometrically-reduced-open] to obtain a nonempty open $V$ on which every fibre is not geometrically reduced, again giving the stated equivalence. The fibre notation and the geometric-reducedness predicates are exactly those in the item, so the argument also covers empty fibres.",
+   "uses": [
+    "lem-trf-generic-fibre-geometrically-reduced-open",
+    "lem-trf-generic-fibre-not-geometrically-reduced-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0579 proof, final paragraph: apply Tags 0578 and 0577 to the generic point of an irreducible closed subset"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-locally-finite-presentation",
+  "def-weil-finite-type-morphism",
+  "lem-trf-generic-fibre-geometrically-reduced-open",
+  "lem-trf-generic-fibre-not-geometrically-reduced-open"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tags 0577 and 0578, with the finite-type specialization from the definition of finite type"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -58,7 +92,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-geometrically-reduced-fibre-locus",
@@ -70,7 +104,7 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "Proof (1)--(2), semistable-alteration input: the Raynaud--Gruson flattening argument uses Stacks 05I3 for universal injectivity and equivalence of flatness with the cokernel, globalized by Algebra 05CL; within 05I3 (1)⇒(2), the projectivity of S over R (Tag 05FT) used with Tag 05FQ. In the resulting 05FT Noetherian-approximation input: 05FG, good reduced-fibre locus and its base-change equality. In the constructibility input, apply the two generic-fibre alternatives of Stacks 0579 on each irreducible closed subset.",
+   "place": "In the constructibility input, apply the two generic-fibre alternatives of Stacks 0579 on each irreducible closed subset: Tags 0578 and 0577.",
    "via": [
     "lem-trf-geometrically-reduced-fibre-locus",
     "lem-trf-local-noetherian-approximation",
@@ -90,5 +124,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-generic-constancy-geometric-reducedness",
+  "worker": "stage1",
+  "summary": "Split the generic constancy assertion into the two strict Stacks alternatives: geometric reducedness on a nonempty open when the generic fibre is geometrically reduced (0578), and failure of geometric reducedness on a nonempty open otherwise (0577). The item proof first observes that quasi-compact locally finite presentation implies finite type, then applies the appropriate alternative by excluded middle. No statement change was made and no Mathlib leaf matched.",
+  "blueprint": "In the constructibility input, apply the two generic-fibre alternatives of Stacks 0579 on each irreducible closed subset: Tags 0578 and 0577."
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q50-381c6bd47",
+  "group": "Q50",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q50-381c6bd47 (reviewer sub-agent of L); spot-checked: Read in full: the item, both new nodes, every cited definition and the parent lem-trf-geometrically-reduced-fibre-locus, plus more-morphisms.tex Tags 0577 (l.7180), 0578 (l.7214) and 0579 (l.7261). The item statement is unchanged from the base and keeps the 0579 hypotheses (quasi-compact plus locally of finite presentation) with nothing added. The two new nodes match Stacks 0578 and 0577 hypothesis by hypothesis and conclusion by conclusion. Each is a separately sourced Stacks lemma, strictly smaller than the item's iff, so neither restates the item (no D1 problem) and there is no cycle. Step 1 (qc + lfp implies finite type) is a few-line affine-locality fact and I accept it as elementary. Step 2 splits on whether the generic fibre is geometrically reduced and applies 0578 or 0577; each case gives the iff on a nonempty open. Small cases checked: the identity morphism; x^p=t in characteristic p, where the generic fibre is not geometrically reduced and all closed fibres are nonreduced; empty X; non-reduced Y=Spec k[eps]. No DAG node or blueprint node already states either lemma (Tag 0550 and the sbc models differ). No SGA is cited. Fixes: (1) step 1 now cites def-sbc-locally-finite-presentation in uses and proof_deps, and its text gives the lfp-to-lft argument; (2) and (3) the new nodes' source.place now names Tag 0578 and Tag 0577 (B5). No tool_uses were needed and no nodes were dropped.; 3 file(s) fixed by the reviewer"
  }
 }

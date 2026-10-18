@@ -17,9 +17,72 @@
   "lem-trf-scheme-frobenius-finite-radicial",
   "nt-assume-trace-formula"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work with the actual module-object categories, not an adic or discrete-coefficient replacement. The coefficient ring and bounded constructible category are those of [sk-def-sfb-qlbar-condensed] and [sk-def-sfb-bounded-constructible]. By [sk-def-sfb-dc-restricted-functors], the restricted adjunction is $Lh^*\\dashv Rh_*$, with unit $\\eta_h:\\mathrm{id}\\to Rh_*Lh^*$. By [sk-def-sfb-dc-lower-shriek], $P$ means the lower shriek for the chosen compactification of $f$. Denote by $c_h:Rh_*\\to Rh_!$ the inverse of the specified proper comparison, by $\\alpha_{f,h}:PRh_!\\to R(fh)_!$ the specified composition comparison, and by $e_h:R(fh)_!\\to P$ the equality-induced comparison for $fh=f$. Thus the arrow defined in the statement is $d_{h,M}^{\\mathrm{cond}}=(e_h)_{Lh^*M}(\\alpha_{f,h})_{Lh^*M}P((c_h)_{Lh^*M})P(\\eta_{h,M})$. This is a naming of the maps already fixed in the statement; no new choice of comparisons is made.",
+   "uses": [
+    "sk-def-sfb-qlbar-condensed",
+    "sk-def-sfb-bounded-constructible",
+    "sk-def-sfb-dc-restricted-functors",
+    "sk-def-sfb-dc-lower-shriek"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-dc-lower-shriek/_section.md",
+    "place": "Definition of the restricted compact-support composite; notation for the specified maps in the item statement"
+   }
+  },
+  {
+   "text": "By [lem-trf-scheme-frobenius-finite-radicial], $\\Phi$ is finite. To check the iterate rather than assume its properness, induct on $r\\geq1$: the base case is $\\Phi$ itself, and if $\\Phi^r$ is finite, [lem-weil-pbc-finite-composition] applied to $\\Phi^r$ and $\\Phi$ makes $\\Phi^{r+1}$ finite. Thus $h$ is finite and is proper by [lem-weil-pbc-finite-proper]. Also $fh=f$, since $\\Phi$ and all its iterates are morphisms over $s$. These are exactly the geometric conditions needed by the proper comparison and the final equality comparison in the recipe. The model is allowed to be non-reduced and $X$ need not be proper over $s$.",
+   "uses": [
+    "lem-trf-scheme-frobenius-finite-radicial",
+    "lem-weil-pbc-finite-composition",
+    "lem-weil-pbc-finite-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01WK (lemma-composition-finite) and 01WN (lemma-finite-proper); the model-Frobenius finiteness is the cited existing node"
+   }
+  },
+  {
+   "text": "Use the concrete model-Weil compact-support interface named in [nt-assume-trace-formula], without invoking its trace equality. Expand its $\\operatorname{compactCohomologyFrobeniusComparison}$ according to the definition recipe recorded in this item's source field. With $I_s=L\\operatorname{id}_s^*$, its underlying map at $M$ is\n$$I_s(PM)\\xrightarrow{u_{PM}}PM\\xrightarrow{P(\\eta_{h,M})}PRh_*Lh^*M\\xrightarrow{P((c_h)_{Lh^*M})}PRh_!Lh^*M\\xrightarrow{(\\alpha_{f,h})_{Lh^*M}}R(fh)_!Lh^*M\\xrightarrow{(e_h)_{Lh^*M}}PLh^*M.$$\nHere $u$ is precisely the canonical identity-pullback isomorphism (including its unitors). Removing the initial identity pullback means precomposing this displayed map by $u_{PM}^{-1}$. The two adjacent maps $u_{PM}$ and $u_{PM}^{-1}$ cancel. What remains is the four-factor expression of Step 1, in the same order, so $\\Theta_{h,M}=d_{h,M}^{\\mathrm{cond}}$. The only expansion here is of the named implementation definition; in particular the proper and composition comparisons are not replaced by arbitrary isomorphisms having the same endpoints.",
+   "uses": [
+    "nt-assume-trace-formula"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/upstream-pr1473-495bc3883/Statement.lean",
+    "place": "compactCohomologyFrobeniusComparison definition recipe transcribed in the item source record (archive WANTED locally); identity-pullback removal is the explicit cancellation above"
+   }
+  },
+  {
+   "text": "For $v:M\\to N$, naturality of the four transformations in Step 1 gives, in order, $Rh_*Lh^*(v)\\eta_{h,M}=\\eta_{h,N}v$ and the three corresponding naturality squares for $c_h,\\alpha_{f,h},e_h$. Whisker the first square by $P$, then compose the four squares. The result is $PLh^*(v)d_{h,M}^{\\mathrm{cond}}=d_{h,N}^{\\mathrm{cond}}P(v)$. This proves the asserted naturality. Finally the Weil compact-support object in [nt-assume-trace-formula] has underlying object $PM$. In the recorded recipe for $\\operatorname{weilCompactCohomology}$, applying $\\operatorname{IsoAlgebra.mapOfNatIso}$ to a Weil structure $w:Lh^*M\\xrightarrow{\\sim}M$ gives the structure arrow $P(w)\\Theta_{h,M}$ after the same identity pullback is removed; $\\operatorname{globalOperator}$ takes this arrow. Substitute Step 3 to obtain $P(w)d_{h,M}^{\\mathrm{cond}}$. This is an expansion of the construction, not an application of a trace formula or an identification with a Galois action.",
+   "uses": [
+    "nt-assume-trace-formula"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/upstream-pr1473-495bc3883/Statement.lean",
+    "place": "weilCompactCohomology, IsoAlgebra.mapOfNatIso and WeilBoundedConstructibleOfEnd.globalOperator, as recorded in the item source field; archive WANTED locally"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-scheme-frobenius-finite-radicial",
+  "lem-weil-pbc-finite-composition",
+  "lem-weil-pbc-finite-proper",
+  "nt-assume-trace-formula",
+  "sk-def-sfb-bounded-constructible",
+  "sk-def-sfb-dc-lower-shriek",
+  "sk-def-sfb-dc-restricted-functors",
+  "sk-def-sfb-qlbar-condensed"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-operator/prop-trf-graph-operator.proof.md",
+  "place": "Agent-written definitional expansion from the implementation recipe in the item source record. The blueprint supplies the graph/proper-unit recipe in finite coefficients only; the concrete PR1473 source archive is WANTED locally, not claimed to have been read."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -55,10 +118,45 @@
    "results": "8 hits; ; returned names/files: coe_frobeniusEquiv, frobeniusEquiv_apply, iterateFrobeniusEquiv_one, SheafOfModules.unitToPushforwardObjUnit_val_app_apply, coe_frobeniusEquiv_symm_comp_coe_frobenius, coe_frobenius_comp_coe_frobeniusEquiv_symm, LightCondensed.ihomPoints_symm_comp, CompHausLike.LocallyConstantModule.functor_map_val. Only ordinary adjunctions, discrete condensed functors or ring Frobenius; no compact-support module-object implementation or adic realization comparison.",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "compactCohomologyFrobeniusComparison|weilCompactCohomology|boundedConstructibleLowerShriek",
+   "results": "0 hits: ",
+   "date": "2026-10-18",
+   "verdict": "no match: generic adjunctions or ordinary/discrete condensed functors only, no project-specific model compact-support comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a proper endomorphism the model Frobenius comparison on compactly supported cohomology is induced by the pullback direct image adjunction unit",
+   "results": "Service unavailable: service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-18",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.unit, CategoryTheory.NatTrans",
+   "results": "1 hits: TopCat.adj₂_unit",
+   "date": "2026-10-18",
+   "verdict": "no match: generic adjunctions or ordinary/discrete condensed functors only, no project-specific model compact-support comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The compact support Frobenius comparison on bounded constructible condensed module objects is the pushforward of the pullback pushforward adjunction unit followed by proper coincidence and compact support composition",
+   "results": "8 hits: LightCondMod.LocallyConstant.adjunction, CondensedMod.LocallyConstant.adjunction, SheafOfModules.pushforwardPushforwardAdj, LightCondensed.ihomPoints_symm_comp, CondensedMod.LocallyConstant.instIsIsoCondensedSetMapForgetAppCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, LightCondMod.LocallyConstant.instIsIsoLightCondSetMapForgetAppLightCondensedModuleCatCounitDiscreteUnderlyingAdjObjFunctor, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat",
+   "date": "2026-10-18",
+   "verdict": "no match: generic adjunctions or ordinary/discrete condensed functors only, no project-specific model compact-support comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A Weil object pushed forward with compact supports has Frobenius equal to compact support pushforward of its coefficient isomorphism after the adjunction unit and the proper direct image identification",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, SheafOfModules.pushforwardPushforwardAdj, SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, SheafOfModules.unitToPushforwardObjUnit_val_app_apply, SheafOfModules.pushforwardSections_unitHomEquiv",
+   "date": "2026-10-18",
+   "verdict": "no match: generic adjunctions or ordinary/discrete condensed functors only, no project-specific model compact-support comparison"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-zl-condensed-global-frobenius-comparison",
@@ -77,5 +175,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-zl-model-compact-comparison-unit",
+  "worker": "stage1",
+  "summary": "Expanded the item into notation for the exact specified maps, an explicit positive-iterate finiteness induction and properness check, cancellation of the identity pullback in the recorded implementation composite, and a written naturality/globalOperator calculation. No new nodes and no statement changes. The local PR1473 source archive is missing; the proof is therefore marked agent-written, uses the recipe preserved in the item source record, and the exact source is WANTED in the report. No finite-coefficient comparison is asserted for the actual condensed coefficient category.",
+  "blueprint": "Realizes the sk-thm-rationality prerequisite sentence requiring the specific model-Frobenius operator: steps 1–2 establish its domain and properness, step 3 identifies the specified comparison with the proper-unit map, and step 4 unfolds the resulting global operator and naturality.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-scheme-frobenius-finite-radicial",
+    "why": "Generic finite-field scheme geometry needed to make the positive model-Frobenius iterate proper; no rationality-unit node states this geometric fact."
+   },
+   {
+    "node": "nt-assume-trace-formula",
+    "why": "Only identifies the actual Weil compact-support object and globalOperator interface whose definitions are unfolded; its trace equality is never used, and no rationality-unit node names this implementation."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-scheme-frobenius-finite-radicial",
+  "nt-assume-trace-formula"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-NQ-0c1d5d01b",
+  "group": "NQ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NQ-0c1d5d01b (reviewer sub-agent of L); spot-checked: I read the whole item, its four steps, every cited statement, the parent, the sibling and unit sk-thm-rationality. The source archive literature/upstream-pr1473-495bc3883 is missing locally, so I read the definitions read-only in lean/WeilConjectures/TraceFormula/Statement.lean. That file is identical to the b5sync/pr1473 copy at the three definitions (l.122, l.146, l.188); only the imports and one local braiding-instance attribute (l.269) differ. compactCohomologyFrobeniusComparison is, in order: UpperStarId with its unitors, the unit of LΦ^*⊣RΦ_*, the inverse of LowerShriekIsoLowerStar_padicAlgCl (RΦ_!≅RΦ_*), the inverse of LowerShriekComp_padicAlgCl (R(f≫g)_!≅Rf_!⋙Rg_!), then eqToIso comp_toPoint. This is exactly the item's c_h, α and e, in the item's order. Mathlib mapOfNatIso_obj_str gives str = e.app K ≪≫ P.mapIso w, and frobenius = u^{-1} ≫ str, so the identity-pullback terms cancel and globalOperator = P(φ_m)∘d. The eqToHom casts in globalOperator are along definitionally equal carriers, so they are identities. The coefficient category is the actual padicAlgClRingObj module-object D^b_c with the chosen-compactification lower shriek. No finite or adic coefficients are identified with it, there is no base-change morphism, and no target is weakened. Step 2: lem-trf-scheme-frobenius-finite-radicial makes Φ finite; the Mathlib leaves 01WK (IsFinite.instCompScheme) and 01WN (IsProper.instOfIsFinite) give the induction and properness; fh=f is comp_toPoint. Steps 1, 3 and 4 are correctly marked elementary. Small cases checked: X empty or M=0, X=Spec k, non-reduced X_0, X=A^1, r=1 and 2. Duplicate search with rg: the existing proper-unit nodes are at finite coefficients and the sibling realization lemma is different, so there are no duplicates and no new nodes; the item is not a restated clause of its parent. Both declared tool uses are accepted: the Frobenius-finiteness lemma is generic geometry, and nt-assume-trace-formula is used only to name the interface, never its trace equality. No SGA is cited. No fixes were made."
  }
 }
