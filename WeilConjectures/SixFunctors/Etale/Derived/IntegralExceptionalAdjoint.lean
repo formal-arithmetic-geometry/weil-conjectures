@@ -499,6 +499,7 @@ theorem boundedConstructibleIntegral_and_torAmplitudeIn_of_isHomotopyLimit {X Y 
   exact h₂
 
 include hϖ hI in
+omit [IsDomain Λ] [IsNoetherianRing Λ] [IsAlgClosed k] in
 /-- Clause 1 (reductions) of `prop-coef-integral-exceptional-adjoint`:
 `(G_f L) ⊗ᴸ A_n ≅ Rf^!(L ⊗ᴸ A_n)`. -/
 theorem nonempty_iso_reductionModIdeal_of_isHomotopyLimit_rightDerivedUpperShriek {X Y : Scheme.{u}}
@@ -506,7 +507,7 @@ theorem nonempty_iso_reductionModIdeal_of_isHomotopyLimit_rightDerivedUpperShrie
     [LocallyOfFiniteType aY] [QuasiCompact aY] [IsSeparated aX] [IsSeparated aY]
     [HasCompactification aX] [HasCompactification aY]
     [(R(aX)_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint] [(R(aY)_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint]
-    (f : X ⟶ Y) (hf : f ≫ aY = aX) [QuasiCompact f] [HasCompactification f]
+    (f : X ⟶ Y) (_hf : f ≫ aY = aX) [QuasiCompact f] [HasCompactification f]
     [(R(f)_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint] {L : 𝐃(Y, Λ)}
     (hL : DerivedCategory.boundedConstructibleIntegral I Y L)
     {c : Cone (DerivedCategory.derivedCompletionDiagram Y.smallEtaleTopology I L ⋙

@@ -25,8 +25,8 @@ matrix `rem-sf-preservation-matrix` cites:
   the internal hom commutes with reduction and preserves derived completeness;
 - `AlgebraicGeometry.Etale.boundedConstructibleIntegral_derivedHom`
   (`cor-coef-integral-internal-hom`): the internal hom preserves `Dᵇc(X, Λ)`;
-- `AlgebraicGeometry.Etale.exists_iso_rightDerivedUpperShriek`: `Rf^!` commutes with derived
-  limits of reductions (the integral exceptional adjoint
+- the integral exceptional adjoint (`Rf^!` commuting with derived limits of reductions,
+  `AlgebraicGeometry.Etale.exists_iso_rightDerivedUpperShriek`, and
   `AlgebraicGeometry.Etale.boundedConstructibleIntegral_exceptionalAdjoint`,
   `prop-coef-integral-exceptional-adjoint`, and the preservation matrix entries
   `AlgebraicGeometry.Etale.preservationMatrix_integral` are in
