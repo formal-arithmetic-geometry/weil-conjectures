@@ -8,10 +8,232 @@
   "place": "Proposition 3.2.1, Lemma 3.2.2, Corollaries 3.2.4–3.2.5, Proposition 3.2.6 and Corollary 3.2.7, printed pp. 15–17. The relative open-cover assertion is their restriction to S_0, as used in Theorem 3.5.5, Steps 1 and 5. Primary PDF read online; local archival copy WANTED.",
   "url": "https://math.huji.ac.il/~temkin/papers/Stable_Modification.pdf"
  },
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "status": "unsplit",
+ "proof": [
+  {
+   "text": "For any model or quasi-model $X$, take a nonempty affine chart $\\operatorname{Spec}B$ over an affine chart $\\operatorname{Spec}A$ of $S$ with $B$ finitely generated over $A$, as in [def-weil-finite-type-morphism]. Integrality identifies $\\operatorname{Frac}A=F$ and $\\operatorname{Frac}B=k(X)\\subseteq L$. If $b_1,\\ldots,b_n$ generate $B/A$, then $k(X)=F(b_1,\\ldots,b_n)$. Each $b_j$ is algebraic separable over $F$, so adjoining them successively gives a finite separable extension. Thus all the asserted generic fields are finite separable. The same argument shows that $L$ is a separable closure of each $k(X)$.",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "def-pc-integral-scheme",
+    "def-kun-separably-closed"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01T1 (definition-finite-type), applied on generic affine charts; elementary field calculation."
+   }
+  },
+  {
+   "text": "Every model and quasi-model is qcqs. Its structure morphism is quasi-compact by finite type [def-weil-finite-type-morphism], and is separated (proper implies separated by [def-weil-proper-morphism]), hence quasi-separated by [lem-pc-separated-quasi-separated]. Since $S$ is qcqs, clause (2) of [lem-weil-pbc-qcqs-morphism-permanence] gives both assertions about its source. No Noetherian hypothesis is used.",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "def-weil-proper-morphism",
+    "lem-pc-separated-quasi-separated",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01KK and 01KU, lemma-separated-permanence; lemma-composition-quasi-compact. These give qcqs permanence over the given qcqs base."
+   }
+  },
+  {
+   "text": "We use the following explicit construction repeatedly. If $P\\to S$ is proper and has a specified $L$-point over the generic map, take the closure of its image point with the reduced induced structure of [lem-weil-pbc-reduced-induced-closed-subscheme]. It is nonempty, irreducible and reduced, hence integral [def-pc-integral-scheme]. On a chart meeting the image point its defining ideal is the kernel of the ring map to $L$, so the generic $L$-point factors through the closure and embeds its function field in $L$. The closed subscheme is proper over $S$ by [lem-weil-pbc-closed-immersion-proper], and is therefore an $L$-model. If an integral open subscheme of $P$ contains that image point densely, the induced closure restricts to that whole open, since the kernel on its affine domains is zero.",
+   "uses": [
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "def-pc-integral-scheme",
+    "lem-weil-pbc-closed-immersion-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01J3, lemma-reduced-closed-subscheme, affine kernel construction; properness of the result: morphisms.tex Tag 01W5, lemma-closed-immersion-proper."
+   }
+  },
+  {
+   "text": "The models form a nonempty directed partially ordered set after taking representatives: $S$ is a model; for two models take the reduced generic closure of their product, which is proper by [lem-weil-pbc-proper-base-change] and [lem-weil-pbc-proper-composition], and apply Step 3. There is at most one refinement map: the equalizer of two maps to the separated target is closed by its diagonal and [lem-weil-pbc-closed-immersion-base-change]; its ideal vanishes generically, hence is zero on the affine domains of the integral source. Thus mutual refinements are inverse. The representatives form a set: a finite affine cover of $S$ is fixed; each finite-type source has a finite cover by finitely generated algebras over those rings (quotients by ideals in finite polynomial rings), and its gluing uses finitely many affine charts on each intersection, since it is quasi-separated by Step 2. These ring presentations, gluing maps and embeddings into the fixed set $L$ range over a set.",
+   "uses": [
+    "lem-weil-pbc-proper-base-change",
+    "lem-weil-pbc-proper-composition",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-closed-immersion-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01W4 and 01W3, lemma-base-change-proper and lemma-composition-proper; the smallness and generic equalizer arguments are written here."
+   }
+  },
+  {
+   "text": "By Step 2 and [lem-weil-pbc-qcqs-scheme-spectral], each model has a spectral underlying space. A refinement is proper by [lemma-nagata-proper-to-separated-target], since its source is proper over $S$ and its target separated over $S$. It is consequently quasi-compact by [def-weil-proper-morphism] and [def-weil-finite-type-morphism], so it is a spectral map. Apply [lem-weil-pbc-spectral-directed-limit-spectral] to the small directed system of Step 4. Its limit is exactly the compatible-point space with the topology in the statement. It is spectral, hence quasi-compact by [def-weil-spectral-space].",
+   "uses": [
+    "lem-weil-pbc-qcqs-scheme-spectral",
+    "lemma-nagata-proper-to-separated-target",
+    "def-weil-proper-morphism",
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-spectral-directed-limit-spectral",
+    "def-weil-spectral-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 0A2Z, lemma-directed-inverse-limit-spectral-spaces; spectrality of models: properties.tex Tag 094L, lemma-quasi-compact-quasi-separated-spectral."
+   }
+  },
+  {
+   "text": "For a compatible point $x=(x_X)$ form $R_x=\\bigcup_X\\mathcal O_{X,x_X}\\subseteq L$. A refinement is dominant because it respects the specified generic points, so these are injective subring maps and the union is directed. They are local maps, hence the maximal ideals have a directed union $\\mathfrak m$: it is an ideal and any element outside it has its inverse in a local ring already containing that element. Thus $R_x$ is local and dominates each $\\mathcal O_{X,x_X}$. In particular the inclusion from the coordinate on the model $S$ gives $\\operatorname{Spec}R_x\\to S$ with the prescribed generic map as soon as $\\operatorname{Frac}R_x=L$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Local subring unions as in Tag 00IA, lemma-dominate, first paragraph of proof; the directed-union verification is written in full."
+   }
+  },
+  {
+   "text": "For $f\\in L^\\times$, use the map $\\operatorname{Spec}L\\to S\\times_{\\mathbf Z}\\mathbf P^1_{\\mathbf Z}$ with projective coordinate $[1:f]$. The product is proper over $S$ by [lemma-nagata-projective-space-base-change-proper]; take its reduced generic closure $X_f$ by Step 3. The two standard opens of $\\mathbf P^1$ cover it by [def-nagata-affine-proj], and [lemma-nagata-relative-affine-space-open-immersion] identifies their coordinates with $f$ and $f^{-1}$ on the generic point. At $x_{X_f}$ one of these coordinates is regular; hence $f$ or $f^{-1}$ belongs to $R_x$. This proves that $R_x$ is a valuation subring and that its fraction field is all of $L$.",
+   "uses": [
+    "lemma-nagata-projective-space-base-change-proper",
+    "def-nagata-affine-proj",
+    "lemma-nagata-relative-affine-space-open-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Projective line and its two standard affine charts; graph construction corresponding to Temkin Lemma 3.2.3. The graph and local-ring calculation are written here."
+   }
+  },
+  {
+   "text": "Conversely a pair $(V,c)$ lifts uniquely to every proper model by [lemma-nagata-proper-separated-valuation-extension]. The closed-point images of these lifts are compatible by uniqueness. Their local homomorphisms embed the corresponding local rings in $V$ and make $V$ dominate $R_x$. Now Step 7 says $R_x$ has fraction field $L$, so [lemma-nagata-valuation-intersection], with both fields equal to $L$, gives $V=R_x$. In the other direction the local inclusions into $R_x$ give lifts with closed-point images $x_X$; uniqueness recovers the original compatible family. Both constructions preserve the entire morphism to $S$, not just its closed-point image. This proves the asserted valuation-pair bijection even when $S$ is not separated over $\\mathbf Z$.",
+   "uses": [
+    "lemma-nagata-proper-separated-valuation-extension",
+    "lemma-nagata-valuation-intersection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Valuative criterion for properness; valuation domination and intersection: algebra.tex Tag 052K, lemma-x-or-x-inverse-valuation-ring. Explicit inverse constructions supplied here."
+   }
+  },
+  {
+   "text": "For a quasi-model $U\\to S$, [thm-nagata-compactification] and [def-nagata-compactification] give a quasi-compact open immersion into a proper $S$-scheme. Replace the latter by its reduced generic closure as in Step 3, calling it $\\overline U$. This retains all of $U$ as an open subscheme. Steps 1--8 apply over the integral qcqs scheme $U$ as well. By [lemma-nagata-separated-valuation-lift-unique], composition gives an injection of valuation pairs into those on $S$. Its image equals $p_{\\overline U}^{-1}(U)$: a lift to $U$ agrees with the proper lift to $\\overline U$ by [lemma-nagata-proper-separated-valuation-extension]; conversely a proper lift whose closed point lands in $U$ factors through $U$, since every point of a local spectrum generalizes its closed point. Thus the image is open as a subset.",
+   "uses": [
+    "thm-nagata-compactification",
+    "def-nagata-compactification",
+    "lemma-nagata-separated-valuation-lift-unique",
+    "lemma-nagata-proper-separated-valuation-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Nagata compactification of a separated finite-type morphism over a qcqs base, with generic closure; the open-image argument is written here."
+   }
+  },
+  {
+   "text": "We spell out the permanence needed to compare the topologies. For any proper $U$-model $A$, its composite to $S$ is finite type by [lem-sfb-finite-type-composition-base-change] and [def-weil-proper-morphism]. It is separated: its diagonal factors as $A\\to A\\times_U A\\to A\\times_S A$; the first arrow is closed and the second is a base change of the closed diagonal of $U/S$. By [lem-weil-pbc-closed-immersion-base-change] and [lem-weil-pbc-closed-immersion-comp] their composite is closed. Hence [thm-nagata-compactification] applies to $A\\to S$. Taking the reduced generic closure in this compactification produces an $S$-model $\\overline A$ containing $A$ openly, exactly as in Step 9.",
+   "uses": [
+    "lem-sfb-finite-type-composition-base-change",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-weil-pbc-closed-immersion-comp",
+    "thm-nagata-compactification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01KU, lemma-separated-permanence (1), with its diagonal proof; finite-type composition: morphisms.tex Tag 01T3, lemma-composition-finite-type."
+   }
+  },
+  {
+   "text": "For an open $O\\subseteq A$ in any proper $U$-model, its inverse image in $RZ_L(U)$ corresponds, under the injection of Step 9, to $p_{\\overline A}^{-1}(O)$ in $RZ_L(S)$. Indeed the proper lift over $U$, composed with $A\\hookrightarrow\\overline A$, is the unique proper lift over $S$ by [lemma-nagata-proper-separated-valuation-extension]. These are all the generating opens of the source topology, so the injection is open. It is also continuous: for any proper $S$-model $B$, the reduced generic closure inside $B\\times_SU$ is a proper $U$-model by [lem-weil-pbc-proper-base-change] and [lem-weil-pbc-closed-immersion-proper], and its map to $B$ computes the restricted centre projection. Thus inverse images of all generating opens of the target are open. This proves the homeomorphism onto the open in Step 9.",
+   "uses": [
+    "lemma-nagata-proper-separated-valuation-extension",
+    "lem-weil-pbc-proper-base-change",
+    "lem-weil-pbc-closed-immersion-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Compactification and base change as in Steps 9--10; explicit comparison of the generating opens (the open-injection clause)."
+   }
+  },
+  {
+   "text": "For a finite family $U_i$, form their integral compactifications $\\overline U_i$ from Step 9 and take $T$ to be the reduced generic closure in $\\prod_S\\overline U_i$. The product is proper by [lem-weil-pbc-proper-base-change] and [lem-weil-pbc-proper-composition], so Step 3 applies. Its projections $q_i:T\\to\\overline U_i$ are proper by [lemma-nagata-proper-to-separated-target] and dominant because they send the specified generic point to that of $U_i$. Set $W_i=q_i^{-1}(U_i)$. Then $W_i\\to U_i$ is proper by [lem-weil-pbc-proper-base-change], and dominant since $W_i$ contains the generic point of $T$. It is quasi-compact over the quasi-compact scheme $U_i$ by [def-weil-proper-morphism], [def-weil-finite-type-morphism] and [lem-weil-pbc-qcqs-morphism-permanence](2). In particular $W_i$ is a quasi-compact open in $T$. All morphisms commute with $\\operatorname{Spec}L$ by construction. For the empty family use $T=S$.",
+   "uses": [
+    "lem-weil-pbc-proper-base-change",
+    "lem-weil-pbc-proper-composition",
+    "lemma-nagata-proper-to-separated-target",
+    "def-weil-proper-morphism",
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01W4 and 01W3, proper base change and composition; product of compactifications is the common refinement construction. Quasi-compactness: schemes.tex lemma-composition-quasi-compact."
+   }
+  },
+  {
+   "text": "For any model $T\\to S$, proper lifting gives a bijection $RZ_L(T)\\to RZ_L(S)$ by [lemma-nagata-proper-separated-valuation-extension]. It is a homeomorphism: a proper $T$-model is already a proper $S$-model by [lem-weil-pbc-proper-composition]; conversely the reduced generic closure in $B\\times_ST$ of any $S$-model $B$ is a $T$-model by [lem-weil-pbc-proper-base-change] and [lem-weil-pbc-closed-immersion-proper]. The respective centre projections compute both topologies. The same argument applies to the proper map $W_i\\to U_i$, with their compatible generic maps from $L$, and gives $RZ_L(W_i)=RZ_L(U_i)$ as subspaces of $RZ_L(S)$: the existence and uniqueness of the proper lift to $W_i$ identifies the valuation sets, and Step 11 identifies their open embeddings. This proves exactly the open-image equality asserted for the constructed $W_i$.",
+   "uses": [
+    "lemma-nagata-proper-separated-valuation-extension",
+    "lem-weil-pbc-proper-composition",
+    "lem-weil-pbc-proper-base-change",
+    "lem-weil-pbc-closed-immersion-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Proper valuative lifting and proper composition/base change; comparison of the centre projections proves the claimed natural identifications."
+   }
+  },
+  {
+   "text": "For any $y\\in T$, [lemma-nagata-local-domain-valuation-dominates] supplies a valuation ring of $k(T)$ dominating $\\mathcal O_{T,y}$. Extend it to a valuation ring $V$ of $L$ with [lemma-nagata-valuation-ring-extension]. The resulting local inclusion $\\mathcal O_{T,y}\\subseteq V$ gives a morphism $\\operatorname{Spec}V\\to T$ with closed point $y$. If the $RZ_L(U_i)$ cover, this pair over $S$ lifts to some $U_i$. Its composite into $\\overline U_i$ and the composite through $q_i$ agree by [lemma-nagata-proper-separated-valuation-extension]. Therefore $q_i(y)\\in U_i$, or $y\\in W_i$, proving the covering assertion. For an arbitrary open $S_0\\subseteq S$, the relative valuation subspace consists of the pairs whose morphism factors through $S_0$; equivalently their centre on $S$ is in $S_0$, so this is the open $p_S^{-1}(S_0)$ denoted $RZ_L(S_0)$. If $y\\in T\\times_SS_0$, the constructed valuation morphism factors through this open (its closed point does), and the selected subfamily supplies a lift to one of its $U_i$. The same uniqueness argument puts $y$ in the corresponding $W_i$. Each such $W_i$ already factors through $S_0$ via $U_i$. Hence these opens cover exactly $T\\times_SS_0$, without imposing quasi-compactness on $S_0$.",
+   "uses": [
+    "lemma-nagata-local-domain-valuation-dominates",
+    "lemma-nagata-valuation-ring-extension",
+    "lemma-nagata-proper-separated-valuation-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00IA, lemma-dominate; extension and valuative uniqueness give the explicit pointwise covering argument, including restriction to an arbitrary open base."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-separably-closed",
+  "def-nagata-affine-proj",
+  "def-nagata-compactification",
+  "def-pc-integral-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism",
+  "def-weil-spectral-space",
+  "lem-pc-separated-quasi-separated",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-closed-immersion-comp",
+  "lem-weil-pbc-closed-immersion-proper",
+  "lem-weil-pbc-proper-base-change",
+  "lem-weil-pbc-proper-composition",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-qcqs-scheme-spectral",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-weil-pbc-spectral-directed-limit-spectral",
+  "lemma-nagata-local-domain-valuation-dominates",
+  "lemma-nagata-projective-space-base-change-proper",
+  "lemma-nagata-proper-separated-valuation-extension",
+  "lemma-nagata-proper-to-separated-target",
+  "lemma-nagata-relative-affine-space-open-immersion",
+  "lemma-nagata-separated-valuation-lift-unique",
+  "lemma-nagata-valuation-intersection",
+  "lemma-nagata-valuation-ring-extension",
+  "thm-nagata-compactification"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Agent-written proof using the existing Nagata, spectral-limit and valuation nodes. Temkin §3.2 is the organizational reference, read online; the local PDF is unavailable. The finite-type sibling proof was checked and generalized without its Noetherian or finite-height steps."
+ },
+ "status": "split",
  "mathlib_match": null,
  "created": {
   "by": "worker",
@@ -49,6 +271,48 @@
    "results": "OK; 0 hits; top=[]; note=; digest=4f53cda18c2baa0c. The hits give valuative squares, properness from the valuative criterion, normalization, and ordinary quasi-compactness. No hit constructs the valuation space or the simultaneous open common refinement. The Mathlib grep has no Riemann–Zariski or quasi-alteration result.",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Riemann.?Zariski|quasiModel|quasi.model|quasi.alteration AlgebraicGeometry",
+   "results": "{\"t\": \"2026-10-17T23:50:27Z\", \"tool\": \"grep\", \"query\": \"Riemann.?Zariski|quasiModel|quasi.model|quasi.alteration\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} Hits concern individual valuation rings, affine-transition limits, finite morphisms or number-theoretic zeta functions; none gives the complete Riemann--Zariski/model-refinement assertion.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "ValuationSubring, AlgebraicGeometry.IsProper",
+   "results": "{\"t\": \"2026-10-17T23:50:27Z\", \"tool\": \"loogle\", \"query\": \"ValuationSubring, AlgebraicGeometry.IsProper\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} Hits concern individual valuation rings, affine-transition limits, finite morphisms or number-theoretic zeta functions; none gives the complete Riemann--Zariski/model-refinement assertion.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Valuation rings of an algebraic field extension with centers on an integral scheme form a quasi compact Riemann Zariski space",
+   "results": "{\"t\": \"2026-10-17T23:50:27Z\", \"tool\": \"leansearch\", \"query\": \"Valuation rings of an algebraic field extension with centers on an integral scheme form a quasi compact Riemann Zariski space\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ValuationRing.mk\", \"ValuationRing.instValuationRingInteger\", \"Valued.integer.isDiscreteValuationRing_of_compactSpace\", \"ValuationRing.iff_isInteger_or_isInteger\", \"Valued.integer.compactSpace_iff_completeSpace_and_isDiscreteValuationRing_and_finite_residueField\", \"Valuation.HasExtension.ofComapInteger\", \"Valuation.HasExtension.instIsLocalHomValuationInteger\", \"ValuationSubring\"], \"digest\": \"0f41c47e16a5b975\"} Hits concern individual valuation rings, affine-transition limits, finite morphisms or number-theoretic zeta functions; none gives the complete Riemann--Zariski/model-refinement assertion.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The inverse limit of proper integral models in a separable closure is the quasi compact space of centred valuation rings and quasi models admit simultaneous proper open refinements",
+   "results": "{\"t\": \"2026-10-17T23:50:38Z\", \"tool\": \"leanfinder\", \"query\": \"The inverse limit of proper integral models in a separable closure is the quasi compact space of centred valuation rings and quasi models admit simultaneous proper open refinements\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_mem_of_isClosed_of_nonempty\", \"AlgebraicGeometry.exists_mem_of_isClosed_of_nonempty'\", \"AlgebraicGeometry.Scheme.Hom.instQuasiCompactToNormalization\", \"AlgebraicGeometry.Scheme.exists_isQuasiAffine_of_isLimit\", \"AlgebraicGeometry.exists_preimage_eq\", \"AlgebraicGeometry.Scheme.compactSpace_of_isLimit\", \"AlgebraicGeometry.IsProper.of_valuativeCriterion\", \"AlgebraicGeometry.compactSpace_of_universallyClosed\"], \"digest\": \"d76a814b2d094a13\"} Hits concern individual valuation rings, affine-transition limits, finite morphisms or number-theoretic zeta functions; none gives the complete Riemann--Zariski/model-refinement assertion.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Riemann|ZariskiSpace|Zariski.*[Vv]aluation|[Vv]aluation.*[Mm]odel",
+   "results": "{\"t\": \"2026-10-17T23:51:38Z\", \"tool\": \"grep\", \"query\": \"Riemann|ZariskiSpace|Zariski.*[Vv]aluation|[Vv]aluation.*[Mm]odel\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/Bernoulli.lean\", \"Mathlib/NumberTheory/Bernoulli.lean\", \"Mathlib/NumberTheory/ModularForms/DedekindEta.lean\", \"Mathlib/NumberTheory/LSeries/Nonvanishing.lean\", \"Mathlib/NumberTheory/LSeries/Nonvanishing.lean\", \"Mathlib/NumberTheory/LSeries/Nonvanishing.lean\", \"Mathlib/NumberTheory/LSeries/Nonvanishing.lean\", \"Mathlib/NumberTheory/LSeries/Nonvanishing.lean\"], \"digest\": \"29218bce1501bf47\"} Hits concern individual valuation rings, affine-transition limits, finite morphisms or number-theoretic zeta functions; none gives the complete Riemann--Zariski/model-refinement assertion.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Simultaneously compactify finitely many generically finite separated schemes as open subschemes of one proper dominant scheme over any quasi compact quasi separated base",
+   "results": "{\"t\": \"2026-10-17T23:51:48Z\", \"tool\": \"leanfinder\", \"query\": \"Simultaneously compactify finitely many generically finite separated schemes as open subschemes of one proper dominant scheme over any quasi compact quasi separated base\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsFinite\", \"AlgebraicGeometry.LocallyQuasiFinite\", \"AlgebraicGeometry.LocallyOfFiniteType\", \"AlgebraicGeometry.IsFinite.of_comp\", \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.Scheme.exists_hom_isAffine_of_isZariskiLocalAtSource\", \"AlgebraicGeometry.isProper_eq\", \"AlgebraicGeometry.instIsProperOfIsFinite\"], \"digest\": \"fc0740868dcc86bb\"} Hits concern individual valuation rings, affine-transition limits, finite morphisms or number-theoretic zeta functions; none gives the complete Riemann--Zariski/model-refinement assertion.",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "stmt_deps": [
@@ -81,5 +345,159 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-qcqs-separable-riemann-zariski-refinement",
+  "worker": "stage1",
+  "summary": "Unchanged statement proved in 14 steps with no new nodes: finite generic fields, qcqs models, reduced generic closures, directed spectral limit, valuation bijection, open quasi-model embeddings, simultaneous compactifications and the global/relative covering argument. Replaces the finite-type sibling's Noetherian argument with qcqs permanence and uses no valuation-height assertion. All cited statements were read and quoted.",
+  "blueprint": "Historical ancestry beneath lem-trf-local-term-locality is preserved; this is the generic Riemann--Zariski tool used in lem-trf-reduced-fibre-modification, corresponding to Temkin §3.2 and the relative covering argument in Theorem 3.5.5. It is not a new realization of the current contracting-correspondence unit. Whole-blueprint searches found no equivalent imported node.",
+  "tool_uses": [
+   {
+    "node": "def-kun-separably-closed",
+    "why": "General scheme-theoretic, topological or valuation tool used in the explicit model construction; the historical trace-formula unit has no replacement for this generic input."
+   },
+   {
+    "node": "def-nagata-affine-proj",
+    "why": "General scheme-theoretic, topological or valuation tool used in the explicit model construction; the historical trace-formula unit has no replacement for this generic input."
+   },
+   {
+    "node": "def-nagata-compactification",
+    "why": "General scheme-theoretic, topological or valuation tool used in the explicit model construction; the historical trace-formula unit has no replacement for this generic input."
+   },
+   {
+    "node": "def-pc-integral-scheme",
+    "why": "General scheme-theoretic, topological or valuation tool used in the explicit model construction; the historical trace-formula unit has no replacement for this generic input."
+   },
+   {
+    "node": "def-weil-finite-type-morphism",
+    "why": "General scheme-theoretic, topological or valuation tool used in the explicit model construction; the historical trace-formula unit has no replacement for this generic input."
+   },
+   {
+    "node": "def-weil-proper-morphism",
+    "why": "General scheme-theoretic, topological or valuation tool used in the explicit model construction; the historical trace-formula unit has no replacement for this generic input."
+   },
+   {
+    "node": "def-weil-spectral-space",
+    "why": "General scheme-theoretic, topological or valuation tool used in the explicit model construction; the historical trace-formula unit has no replacement for this generic input."
+   },
+   {
+    "node": "lem-pc-separated-quasi-separated",
+    "why": "General scheme-theoretic, topological or valuation tool used in the explicit model construction; the historical trace-formula unit has no replacement for this generic input."
+   },
+   {
+    "node": "lem-sfb-finite-type-composition-base-change",
+    "why": "General scheme-theoretic, topological or valuation tool used in the explicit model construction; the historical trace-formula unit has no replacement for this generic input."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-base-change",
+    "why": "General scheme-theoretic, topological or valuation tool used in the explicit model construction; the historical trace-formula unit has no replacement for this generic input."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-comp",
+    "why": "General scheme-theoretic, topological or valuation tool used in the explicit model construction; the historical trace-formula unit has no replacement for this generic input."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-proper",
+    "why": "General scheme-theoretic, topological or valuation tool used in the explicit model construction; the historical trace-formula unit has no replacement for this generic input."
+   },
+   {
+    "node": "lem-weil-pbc-proper-base-change",
+    "why": "General scheme-theoretic, topological or valuation tool used in the explicit model construction; the historical trace-formula unit has no replacement for this generic input."
+   },
+   {
+    "node": "lem-weil-pbc-proper-composition",
+    "why": "General scheme-theoretic, topological or valuation tool used in the explicit model construction; the historical trace-formula unit has no replacement for this generic input."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-morphism-permanence",
+    "why": "General scheme-theoretic, topological or valuation tool used in the explicit model construction; the historical trace-formula unit has no replacement for this generic input."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-scheme-spectral",
+    "why": "General scheme-theoretic, topological or valuation tool used in the explicit model construction; the historical trace-formula unit has no replacement for this generic input."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "why": "General scheme-theoretic, topological or valuation tool used in the explicit model construction; the historical trace-formula unit has no replacement for this generic input."
+   },
+   {
+    "node": "lem-weil-pbc-spectral-directed-limit-spectral",
+    "why": "General scheme-theoretic, topological or valuation tool used in the explicit model construction; the historical trace-formula unit has no replacement for this generic input."
+   },
+   {
+    "node": "lemma-nagata-local-domain-valuation-dominates",
+    "why": "General scheme-theoretic, topological or valuation tool used in the explicit model construction; the historical trace-formula unit has no replacement for this generic input."
+   },
+   {
+    "node": "lemma-nagata-projective-space-base-change-proper",
+    "why": "General scheme-theoretic, topological or valuation tool used in the explicit model construction; the historical trace-formula unit has no replacement for this generic input."
+   },
+   {
+    "node": "lemma-nagata-proper-separated-valuation-extension",
+    "why": "General scheme-theoretic, topological or valuation tool used in the explicit model construction; the historical trace-formula unit has no replacement for this generic input."
+   },
+   {
+    "node": "lemma-nagata-proper-to-separated-target",
+    "why": "General scheme-theoretic, topological or valuation tool used in the explicit model construction; the historical trace-formula unit has no replacement for this generic input."
+   },
+   {
+    "node": "lemma-nagata-relative-affine-space-open-immersion",
+    "why": "General scheme-theoretic, topological or valuation tool used in the explicit model construction; the historical trace-formula unit has no replacement for this generic input."
+   },
+   {
+    "node": "lemma-nagata-separated-valuation-lift-unique",
+    "why": "General scheme-theoretic, topological or valuation tool used in the explicit model construction; the historical trace-formula unit has no replacement for this generic input."
+   },
+   {
+    "node": "lemma-nagata-valuation-intersection",
+    "why": "General scheme-theoretic, topological or valuation tool used in the explicit model construction; the historical trace-formula unit has no replacement for this generic input."
+   },
+   {
+    "node": "lemma-nagata-valuation-ring-extension",
+    "why": "General scheme-theoretic, topological or valuation tool used in the explicit model construction; the historical trace-formula unit has no replacement for this generic input."
+   },
+   {
+    "node": "thm-nagata-compactification",
+    "why": "General scheme-theoretic, topological or valuation tool used in the explicit model construction; the historical trace-formula unit has no replacement for this generic input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-kun-separably-closed",
+  "def-nagata-affine-proj",
+  "def-nagata-compactification",
+  "def-pc-integral-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism",
+  "def-weil-spectral-space",
+  "lem-pc-separated-quasi-separated",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-closed-immersion-comp",
+  "lem-weil-pbc-closed-immersion-proper",
+  "lem-weil-pbc-proper-base-change",
+  "lem-weil-pbc-proper-composition",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-qcqs-scheme-spectral",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-weil-pbc-spectral-directed-limit-spectral",
+  "lemma-nagata-local-domain-valuation-dominates",
+  "lemma-nagata-projective-space-base-change-proper",
+  "lemma-nagata-proper-separated-valuation-extension",
+  "lemma-nagata-proper-to-separated-target",
+  "lemma-nagata-relative-affine-space-open-immersion",
+  "lemma-nagata-separated-valuation-lift-unique",
+  "lemma-nagata-valuation-intersection",
+  "lemma-nagata-valuation-ring-extension",
+  "thm-nagata-compactification"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q56-b1e8bf912",
+  "group": "Q56",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q56-b1e8bf912 (reviewer sub-agent of L); spot-checked: I read the item, all 14 steps and the full statements of all 27 cited nodes plus its stmt_deps; none is merged. I checked the Stacks sources 01T1, 01KU, 01J3, 01W5, 01W3, 01W4, 0A2Z, 094L, 00IA, 052K and 01T3. Temkin is not in literature/ (WANTED was reported), so I checked the mathematics directly and the agent-written proof origin is correct. The statement is unchanged and there are no new nodes. The steps are correct. Step 1: subfields of a separable L/F are separable, and they are finite because finitely generated. Step 3: on an affine chart the generic closure has ideal p, the kernel to L, and is proper by closed-immersion-proper (c). Step 4: refinements are unique through the equalizer, a pullback of the closed diagonal whose ideal is 0 in an integral source. Step 5: refinements are proper by proper-to-separated-target, hence spectral, and the spectral-limit node applies. Steps 6-8: R_x is a directed union of local rings; the P^1 charts give f or f^{-1} in R_x; valuation-intersection with K=L gives V=R_x. Steps 9-11: Nagata applies (separated, finite type, qcqs base); Step 10 checks separatedness of the composite through A->AxUA->AxSA; open images are p^{-1}(U) by the generalization argument; continuity uses the closure in BxSU. Step 12: the projections q_i are proper, and W_i is quasi-compact over the quasi-compact U_i. Step 13: proper lifting identifies RZ_L(W_i) with RZ_L(U_i). Step 14: domination plus extension to L, then uniqueness of the lift into the compactification of U_i, gives y in W_i. Reading RZ_L(S_0) as p_S^{-1}(S_0) is consistent and matches what the parent step 5 uses. Edge cases checked: empty family, S=Spec F, empty or non-quasi-compact S_0, infinite height. Duplicates: lem-trf-riemann-zariski-finite-refinement needs finite type over Z and finite height, and the birational, local-colimit and common-cover nodes state different results; there is no circularity. All 27 tool_uses are accepted as generic black-box inputs; the unit sk-i-curve-zero supplies none of them. Fix: Steps 4 and 12 cited Stacks Tag 01W2 (proper-local-on-the-base) for proper base change, which is 01W4. I corrected both source places in fixes/dag/nodes/sec-trace-formula/lem-trf-qcqs-separable-riemann-zariski-refinement.json; nothing else changed.; 1 file(s) fixed by the reviewer"
  }
 }

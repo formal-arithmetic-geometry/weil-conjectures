@@ -21,9 +21,148 @@
   "def-weil-affine-spectrum",
   "def-weil-pbc-module-tensor-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $k=\\kappa(r)$, $k'=\\kappa(r')$, $Y=X_r$ and $Y'=X'_{r'}$. By [lem-weil-pbc-fibre-of-base-change] there is a cartesian square identifying $h:Y'\\to Y$ with the base change of $\\operatorname{Spec}k'\\to\\operatorname{Spec}k$. If $i:Y\\to X$ and $i':Y'\\to X'$ are the fibre projections, then $i\\circ h=g'\\circ i'$. Pullback composition in [def-pc-module-pullback] therefore gives $\\mathcal F'_{r'}=(i')^*(g')^*\\mathcal F\\cong h^*i^*\\mathcal F=h^*\\mathcal F_r$. This comparison identifies the same pullback module, rather than changing the coefficient sheaf.",
+   "uses": [
+    "lem-weil-pbc-fibre-of-base-change",
+    "def-pc-module-pullback"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 05DC, first paragraph: cartesian fibre square and coefficient pullback identification"
+   }
+  },
+  {
+   "text": "The map $\\operatorname{Spec}k'\\to\\operatorname{Spec}k$ is flat by [lem-pc-field-extension-flat]. Its base change $h$ is flat by [lem-weil-pbc-flat-morphism-base-change]. No flatness of the original morphism $f$ or of $g$ is required.",
+   "uses": [
+    "lem-pc-field-extension-flat",
+    "lem-weil-pbc-flat-morphism-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 05DC, first paragraph: flatness of the field-extension morphism of fibres"
+   }
+  },
+  {
+   "text": "The structure map $Y\\to\\operatorname{Spec}k$ is locally of finite type by [lem-weil-pbc-lft-base-change]. A field has only the ideals $(0)$ and $(1)$, so its spectrum is locally Noetherian. Apply [pqf-lem-locnoeth-lft] to conclude that $Y$ is locally Noetherian. The sheaf $\\mathcal F_r=i^*\\mathcal F$ is quasi-coherent by [lem-weil-pbc-module-pullback-quasi-coherent]. Thus the flat pullback formula can be applied with base $Y$ and arbitrary quasi-coherent coefficients $\\mathcal F_r$; no finite generation of $\\mathcal F$ has been assumed.",
+   "uses": [
+    "lem-weil-pbc-lft-base-change",
+    "pqf-lem-locnoeth-lft",
+    "lem-weil-pbc-module-pullback-quasi-coherent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 05DC, first paragraph: locally Noetherian fibre and quasi-coherent coefficients"
+   }
+  },
+  {
+   "text": "Apply [lem-trf-flat-pullback-associated-points] to $h:Y'\\to Y$ and $\\mathcal G=\\mathcal F_r$, using steps 1–3. It gives\n$$\\operatorname{Ass}_{Y'}(\\mathcal F'_{r'})=\\bigcup_{y\\in\\operatorname{Ass}_Y(\\mathcal F_r)}j_y\\operatorname{Ass}_{Y'_y}(\\mathcal O_{Y'_y}).$$\nThe point of $Y$ underlying $z'\\in Y'$ is the canonical point $z\\in X_r$. Since the images of the fibre maps $j_y$ lie over their respective $y$, this equality says precisely that $z'$ is associated to $\\mathcal F'_{r'}$ if and only if $z$ is associated to $\\mathcal F_r$ and the corresponding point of $Y'_z$ is associated to $\\mathcal O_{Y'_z}$.",
+   "uses": [
+    "lem-trf-flat-pullback-associated-points"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 05DC, displayed associated-point formula and its interpretation at the given point"
+   }
+  },
+  {
+   "text": "The residue field at the canonical point $z\\in Y=X_r$ is $\\kappa(z)$: on affine charts, clause (2) of [lem-weil-pbc-fibre-ring-primes-residue-fields] identifies the residue field in the fibre ring with that of the original point. Base-changing the square of step 1 along $\\operatorname{Spec}\\kappa(z)\\to Y$, the fibre $Y'_z$ is consequently $\\operatorname{Spec}k'\\times_{\\operatorname{Spec}k}\\operatorname{Spec}\\kappa(z)$. By [lem-weil-pbc-fibre-product-affine-spectra] it is $\\operatorname{Spec}T$ for $T=k'\\otimes_k\\kappa(z)$. To check the finiteness needed below, choose an affine neighbourhood $V=\\operatorname{Spec}R$ of $r$ and a finite-type affine chart $U=\\operatorname{Spec}B$ of $f^{-1}(V)$ containing $z$, as in [def-weil-finite-type-morphism]. Apply [lem-weil-pbc-finite-type-residue-field-extension-finitely-generated] to $R\\to B$ and the primes of $r,z$. It gives that $\\kappa(z)/k$ is finitely generated as a field, even when $z$ is not closed.",
+   "uses": [
+    "lem-weil-pbc-fibre-ring-primes-residue-fields",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-finite-type-residue-field-extension-finitely-generated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 05DC, second paragraph: identify the residual fibre and verify the finite-type field hypothesis of 045M"
+   }
+  },
+  {
+   "text": "Apply [lem-trf-tensor-fields-cohen-macaulay] to $k'/k$ and $\\kappa(z)/k$, the latter finitely generated by step 5. Thus $T$ is Noetherian and every $T_{\\mathfrak q}$ is Noetherian local Cohen–Macaulay. The other extension $k'/k$ may be completely arbitrary. We now determine the associated points of $\\operatorname{Spec}T$ directly in these local rings.",
+   "uses": [
+    "lem-trf-tensor-fields-cohen-macaulay"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 05DC, second paragraph: apply the tensor-fields Cohen–Macaulay theorem"
+   }
+  },
+  {
+   "text": "Let $\\mathfrak q\\in\\operatorname{Spec}T$ be an associated point of its structure sheaf. By [lem-weil-pbc-affine-open-stalk-localization](c) its local ring is $T_{\\mathfrak q}$; association means its maximal ideal $\\mathfrak qT_{\\mathfrak q}$ is an element-annihilator associated prime of that ring. Step 6 and [lem-weil-pbc-cm-local-associated-prime-minimal] imply that $\\mathfrak qT_{\\mathfrak q}$ is a minimal prime of $T_{\\mathfrak q}$. The inclusion-preserving prime correspondence [lem-weil-pbc-primes-of-localization](1) now implies that $\\mathfrak q$ is minimal in $T$: a strictly smaller prime would extend to a strictly smaller prime below $\\mathfrak qT_{\\mathfrak q}$, a contradiction.",
+   "uses": [
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-weil-pbc-cm-local-associated-prime-minimal",
+    "lem-weil-pbc-primes-of-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 05DC, second paragraph: Cohen–Macaulay local rings have no embedded associated primes"
+   }
+  },
+  {
+   "text": "Conversely, if $\\mathfrak q$ is a minimal prime of $T$, the Noetherian hypothesis from step 6 lets us apply [lem-weil-pbc-noetherian-minimal-prime-associated]: $\\mathfrak q$ is an element-annihilator associated prime of $T$. By [lem-weil-pbc-associated-prime-localization-depth-zero], its extension $\\mathfrak qT_{\\mathfrak q}$ is associated to $T_{\\mathfrak q}$. The stalk identification [lem-weil-pbc-affine-open-stalk-localization](c) therefore says that $\\mathfrak q$ is an associated point of the structure sheaf of $\\operatorname{Spec}T$. Together with step 7 this characterizes those associated points as exactly the minimal primes.",
+   "uses": [
+    "lem-weil-pbc-noetherian-minimal-prime-associated",
+    "lem-weil-pbc-associated-prime-localization-depth-zero",
+    "lem-weil-pbc-affine-open-stalk-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 05DC, second paragraph: minimal primes of a Noetherian ring are associated"
+   }
+  },
+  {
+   "text": "The prime-ideal/irreducible-closed-set correspondence in [def-weil-pbc-krull-dimension-ring] reverses inclusions: the closure of $\\{\\mathfrak q\\}$ is $V(\\mathfrak q)$, and it is a maximal irreducible closed subset exactly when $\\mathfrak q$ is minimal. By [def-sc-generic-point] these are exactly the generic points of irreducible components of $\\operatorname{Spec}T$. Hence steps 7–8 replace the last condition in step 4 by the generic-component condition of the statement. Finally the fibrewise definition [def-trf-relative-assassin] identifies association of $z$ to $\\mathcal F_r$, respectively of $z'$ to $\\mathcal F'_{r'}$, with membership in the two relative assassins. This proves both implications of the desired equivalence.",
+   "uses": [
+    "def-weil-pbc-krull-dimension-ring",
+    "def-sc-generic-point",
+    "def-trf-relative-assassin"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 05DC, conclusion: minimal primes are component generic points and relative assassin is fibrewise association"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-fibre-of-base-change",
+  "def-pc-module-pullback",
+  "lem-pc-field-extension-flat",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-weil-pbc-lft-base-change",
+  "pqf-lem-locnoeth-lft",
+  "lem-weil-pbc-module-pullback-quasi-coherent",
+  "lem-trf-flat-pullback-associated-points",
+  "lem-weil-pbc-fibre-ring-primes-residue-fields",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-finite-type-residue-field-extension-finitely-generated",
+  "lem-trf-tensor-fields-cohen-macaulay",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-cm-local-associated-prime-minimal",
+  "lem-weil-pbc-primes-of-localization",
+  "lem-weil-pbc-noetherian-minimal-prime-associated",
+  "lem-weil-pbc-associated-prime-localization-depth-zero",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-sc-generic-point",
+  "def-trf-relative-assassin"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 05DC (lemma-base-change-relative-assassin), complete proof; no-embedded-points argument made local via the existing Cohen–Macaulay associated-prime lemma."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -66,10 +205,38 @@
    "results": "0 hits: ; digest=4f53cda18c2baa0c.  The hits describe residue-field tensor points of a scheme pullback and prime-spectrum fibre bijections, without any associated-point assertion for modules. No relative-assassin base-change theorem.",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative assassin of a quasi coherent sheaf under arbitrary base change characterized by generic points of residue field tensor products",
+   "results": "8 hits: AlgebraicGeometry.Scheme.IsGermInjective.Spec, AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.IsAffineOpen.primeIdealOf_genericPoint, AlgebraicGeometry.exists_of_res_zero_of_qcqs, AlgebraicGeometry.exists_of_res_eq_of_qcqs, AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated, Module.mem_support_iff_nontrivial_residueField_tensorProduct; digest=4413b974ea6e01f3.  No match for the relative-assassin statement. Hits concern general base change, support, residue-field pullback points or unrelated uses of the words associated and base change.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "associatedPrimes, TensorProduct",
+   "results": "0 hits: none; digest=4f53cda18c2baa0c.  No match for the relative-assassin statement. Hits concern general base change, support, residue-field pullback points or unrelated uses of the words associated and base change.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "relativeAss|assassin|associated.*base.change|base.change.*associated",
+   "results": "2 hits: Mathlib/CategoryTheory/GuitartExact/KanExtension.lean, Mathlib/CategoryTheory/Sites/MorphismProperty.lean; digest=23c86965da5b8f34.  No match for the relative-assassin statement. Hits concern general base change, support, residue-field pullback points or unrelated uses of the words associated and base change.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Under arbitrary base change the relative associated points are generic points of residue field tensor products over fibrewise associated points",
+   "results": "8 hits: RingHom.IsStableUnderBaseChange, IsLocalizedModule.isBaseChange, Algebra.QuasiFinite.baseChange, Algebra.QuasiFiniteAt.baseChange, Module.rankAtStalk_baseChange, AlgebraicGeometry.Flat.isStableUnderBaseChange, IsBaseChange, AlgebraicGeometry.Scheme.Pullback.SpecOfPoint; digest=9d014efae0784223.  No match for the relative-assassin statement. Hits concern general base change, support, residue-field pullback points or unrelated uses of the words associated and base change.",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-flat-relative-associated-specialization",
@@ -98,5 +265,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-relative-assassin-base-change",
+  "worker": "stage1",
+  "summary": "Preserved the full 05DC statement, including arbitrary base change and arbitrary quasi-coherent coefficients. Wrote nine proof steps; added only the flat-pullback associated-point formula and the Noetherian Cohen–Macaulay field-tensor theorem as statement-only nodes. Reused existing fibre, residue-field, local ring and associated-prime results. Checked finite generation of kappa(z)/kappa(r) without assuming z closed or S Noetherian.",
+  "blueprint": "Realizes the inherited lem-trf-local-term-locality proof (1)–(2), through its flat-family component-closure and relative-associated-specialization input: both ascent and descent in 0GSI need 05DC, whose two paragraphs are expanded in steps 1–9.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-module-pullback-quasi-coherent",
+    "why": "Quasi-coherence is preserved by fibre pullback, with no finite-type hypothesis on the sheaf; this is a generic module tool, not a replacement for the unit argument."
+   },
+   {
+    "node": "lem-weil-pbc-fibre-ring-primes-residue-fields",
+    "why": "Identifies the residue field of the point in its scheme-theoretic fibre with its original residue field; no statement of this unit supplies that comparison."
+   },
+   {
+    "node": "lem-weil-pbc-cm-local-associated-prime-minimal",
+    "why": "Removes embedded associated primes in the Cohen–Macaulay local rings of the residual field tensor; this is the local algebra tool used in the source route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-module-pullback-quasi-coherent",
+  "lem-weil-pbc-fibre-ring-primes-residue-fields",
+  "lem-weil-pbc-cm-local-associated-prime-minimal"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q19-a7cc8455c",
+  "group": "Q19",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q19-a7cc8455c (reviewer sub-agent of L); spot-checked: Read Divisors 05DC (lemma-base-change-relative-assassin), 05DB (lemma-bourbaki) and its input 05C2, and Algebra 045M (lemma-tensor-fields-CM, whose proof via 045I uses finitely generated field extensions), all in full; the tags are verified in tags/tags. The item states 05DC exactly: f locally of finite type, F arbitrary quasi-coherent, g arbitrary, fibrewise association by element annihilators, and the generic-component condition on Spec(κ(r')⊗κ(z)). The parent's steps 3 and 7 use it in exactly this form. Steps 1–9 each say what their cited statements say. (1) fibre square and pullback composition give F'_{r'}≅h^*F_r. (2) field-extension flatness plus flat base change make h flat. (3) the fibre is locally Noetherian because it is locally of finite type over a field, and F_r is quasi-coherent; S need not be Noetherian. (4) the flat-pullback formula at z' uses that fibre images lie over their indexing point. (5) the residue field is unchanged on fibre-ring charts, and κ(z)/κ(r) is finitely generated by a finite-type chart, with z not necessarily closed. (6) 045M needs only one extension finitely generated. (7) the CM local lemma (depth≥dim) plus the localization prime bijection give associated ⇒ minimal. (8) for a Noetherian ring, minimal primes are associated, and association passes to the localization. (9) V(q) gives minimal primes = component generic points. `uses` equals the cited ids and `proof_deps` is their union. Both new nodes are true, self-contained, statement-only and searched. Small cases tested: k(t)⊗k(u) (the diagonal prime is not associated, so the generic-component condition is needed); K⊗K=K[ε]/(ε^p) (not reduced, but CM); non-finitely-generated extensions (Noetherianity fails, so the hypothesis is needed); Z[x]/Z with G=O and G=Z/p. Neither new node duplicates an existing one: 0312 lem-weil-pbc-associated-primes-flat-base-change is ring-level, 05C2 lem-trf-associated-primes-fibre-bound needs finite modules and gives one inclusion, and lem-pur-cohen-macaulay-field-extension is only for schemes locally of finite type. Neither restates the item. Accepted tool_uses: lem-weil-pbc-module-pullback-quasi-coherent, lem-weil-pbc-fibre-ring-primes-residue-fields and lem-weil-pbc-cm-local-associated-prime-minimal, all generic sk-thm-p1 facts; every other off-unit citation is a Mathlib leaf. No SGA. Not a target node. Maintainer note: the ancestry runs through the pre-update split of lem-trf-local-term-locality (via lem-trf-trace-specialization), whose blueprint_update now proves (1)–(2) by quoting Varshavsky's normal-cone argument, so this chain may become unreachable on realignment; that is not a fault of this split. No fixes written."
  }
 }

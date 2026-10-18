@@ -9,11 +9,11 @@
     "def-weil-constant-weil-structure"
    ]
   },
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "The canonical Weil structure on the constant object is independent of the coefficient stage",
- "statement": "Fix the finite-field datum [def-weil-finite-field-fiber] $p,a,q,k_0,k$, a prime $\\ell\\neq p$, an algebraic closure $\\Qlb$ of $\\Ql$, a finite-type [def-weil-scheme-morphism-properties] $k_0$-scheme $Y_0$, $Y=Y_0\\times_{k_0}k$ and the geometric Frobenius $g_Y$ [def-weil-frobenius-detailed]. For every finite extension $E/\\Ql$ inside $\\Qlb$ let $(E_Y,\\theta_E)\\in D^b_{c,\\mathrm W}(Y,E)$ be the canonical Weil structure of [def-weil-constant-weil-structure]. Then for finite extensions $E\\subset L$ inside $\\Qlb$:\n\n1. the canonical isomorphism $\\alpha_{E,L}:E_Y\\otimes_EL\\xrightarrow{\\sim}L_Y$ in $D^b_c(Y,L)$ of [lem-weil-constant-coefficient-objects-constructible] (scalar extension of [def-weil-rationalization-karoubi]) satisfies $\\theta_L\\circ Lg_Y^*(\\alpha_{E,L})=\\alpha_{E,L}\\circ(\\theta_E\\otimes_EL)$, where $Lg_Y^*(E_Y\\otimes_EL)$ is identified with $(Lg_Y^*E_Y)\\otimes_EL$ by the compatibility of the derived pullback [def-weil-derived-pullback-tensor-hom] with scalar extension; so $\\alpha_{E,L}$ is an isomorphism $(E_Y,\\theta_E)\\otimes_EL\\cong(L_Y,\\theta_L)$ of $L$-Weil sheaves [def-weil-weil-sheaf-complex];\n2. consequently, in the common-stage category $D^b_{c,\\mathrm W}(Y,\\Qlb)$ [def-weil-weil-sheaf-complex, def-weil-algebraically-closed-coefficients], the object $(E,(E_Y,\\theta_E))$ is canonically isomorphic to the canonical Weil structure $(\\Ql,((\\Ql)_Y,\\theta_{\\Ql}))$ on $(\\Qlb)_Y$, compatibly with the forgetful functor $\\operatorname{For}$.",
+ "statement": "Fix the finite-field datum [def-weil-finite-field-fiber] $p,a,q,k_0,k$, a prime $\\ell\\neq p$, an algebraic closure $\\Qlb$ of $\\Ql$, a finite-type [def-weil-scheme-morphism-properties] $k_0$-scheme $Y_0$, $Y=Y_0\\times_{k_0}k$ and the geometric Frobenius $g_Y$ [def-weil-frobenius-detailed]. For every finite extension $E/\\Ql$ inside $\\Qlb$ let $(E_Y,\\theta_E)\\in D^b_{c,\\mathrm W}(Y,E)$ be the canonical Weil structure of [def-weil-constant-weil-structure]. Then for finite extensions $E\\subset L$ inside $\\Qlb$:\n\n1. the canonical isomorphism $\\alpha_{E,L}:E_Y\\otimes_EL\\xrightarrow{\\sim}L_Y$ in $D^b_c(Y,L)$ of [lem-weil-constant-coefficient-objects-constructible] (scalar extension of [def-weil-rationalization-karoubi]), namely the image of the isomorphism $\\beta_{E,L}:\\widehat{\\mathcal O}_{E,Y}\\otimes_{\\mathcal O_E}\\mathcal O_L\\xrightarrow{\\sim}\\widehat{\\mathcal O}_{L,Y}$ whose inverse sends a local section $s$ to the point of the strict-cone model of the integral scalar extension [def-weil-integral-scalar-extension] (computed with the representative $\\widehat{\\mathcal O}_{E,Y}$ itself, so that its $m$-th term is $\\widehat{\\mathcal O}_{E,Y}\\otimes_{\\widehat{\\mathcal O}_{E,Y}}(A_{L,m})_Y=(A_{L,m})_Y$) with components the projections $\\pi^L_m(s)$ [def-weil-completed-integral-coefficients] and zero shifted-product component, satisfies $\\theta_L\\circ Lg_Y^*(\\alpha_{E,L})=\\alpha_{E,L}\\circ(\\theta_E\\otimes_EL)$, where $Lg_Y^*(E_Y\\otimes_EL)$ is identified with $(Lg_Y^*E_Y)\\otimes_EL$ by the compatibility of the derived pullback [def-weil-derived-pullback-tensor-hom] with scalar extension; so $\\alpha_{E,L}$ is an isomorphism $(E_Y,\\theta_E)\\otimes_EL\\cong(L_Y,\\theta_L)$ of $L$-Weil sheaves [def-weil-weil-sheaf-complex];\n2. consequently, in the common-stage category $D^b_{c,\\mathrm W}(Y,\\Qlb)$ [def-weil-weil-sheaf-complex, def-weil-algebraically-closed-coefficients], the object $(E,(E_Y,\\theta_E))$ is canonically isomorphic to the canonical Weil structure $(\\Ql,((\\Ql)_Y,\\theta_{\\Ql}))$ on $(\\Qlb)_Y$, compatibly with the forgetful functor $\\operatorname{For}$.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-admissible/def-weil-ordinary-compact-cohomology.md",
   "place": "node def-weil-ordinary-compact-cohomology, order 1510 ('equip it with the canonical Weil structure'); the claim was part of the statement of def-weil-constant-weil-structure as written by the worker of def-weil-ordinary-compact-cohomology, and is split off here. Written by an agent"
@@ -27,11 +27,148 @@
   "def-weil-rationalization-karoubi",
   "def-weil-derived-pullback-tensor-hom",
   "def-weil-weil-sheaf-complex",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-integral-scalar-extension",
+  "def-weil-completed-integral-coefficients"
+ ],
+ "proof": [
+  {
+   "text": "Put $g=g_Y$, $F=g^{-1}$, $R=\\widehat{\\mathcal O}_{E,Y}$, $S=\\widehat{\\mathcal O}_{L,Y}$, and $B_m=(A_{L,m})_Y$. The map $g$ is a scheme isomorphism, not assumed to be a $k$-morphism, and $\\ell$ is invertible on $Y$ by [def-weil-frobenius-detailed, def-weil-constant-weil-structure]. By [lem-weil-proetale-isomorphism-inverse-image], $F$ is an exact equivalence preserving limits; its constant-ring maps $c_A:F(A_Y)\\to A_Y$ are ring isomorphisms natural in every ring homomorphism. Write $c_R:FR\\to R$ and $c_S:FS\\to S$ for their inverse-limit maps as in [def-weil-constant-weil-structure]. If $\\pi^E_m:R\\to(A_{E,m})_Y$ and $\\pi^L_m:S\\to B_m$ are the projections [def-weil-completed-integral-coefficients], the definitions give $\\pi^E_m c_R=c_{A_{E,m}}F\\pi^E_m$ and $\\pi^L_m c_S=c_{A_{L,m}}F\\pi^L_m$.",
+   "uses": [
+    "def-weil-frobenius-detailed",
+    "def-weil-constant-weil-structure",
+    "lem-weil-proetale-isomorphism-inverse-image",
+    "def-weil-completed-integral-coefficients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09A5 (proetale-section-morphism); specialization to the geometric-Frobenius isomorphism, with the constant coefficient maps defined in the blueprint coefficient-object paragraph"
+   }
+  },
+  {
+   "text": "Let $\\iota_m:A_{E,m}\\to A_{L,m}$, $\\rho_m=(\\iota_m)_Y\\pi^E_m:R\\to B_m$, and $j:R\\to S$ be the maps of [def-weil-integral-scalar-extension]; thus $\\pi^L_m j=\\rho_m$. Naturality of the constant-ring maps from Step 1 gives\n$$\\rho_m c_R=c_{A_{L,m}}F\\rho_m.$$\nIndeed, substitute $\\rho_m=(\\iota_m)_Y\\pi^E_m$ and use naturality for $\\iota_m$ and the projection square of Step 1. Composing $c_S F j$ and $j c_R$ with $\\pi^L_m$ gives these same maps for every $m$. The coordinate description of the inverse limit [def-pur-sheaf-inverse-limit] therefore proves\n$$c_S F j=j c_R.$$\nThis checks the coefficient-action square even for ramified extensions: it uses the quotient homomorphisms $\\iota_m$, never an identification of the two uniformizers or their powers.",
+   "uses": [
+    "def-weil-integral-scalar-extension",
+    "lem-weil-proetale-isomorphism-inverse-image",
+    "def-pur-sheaf-inverse-limit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 0H7J (sites-example-constant-sheaf), functoriality in the constant ring; agent calculation of the completed coefficient square using the displayed projections"
+   }
+  },
+  {
+   "text": "Use $R[0]$ as its own K-flat representative: tensoring any acyclic complex with this regular rank-one module gives the same complex, by the tensor definition [def-pc-kflat-complex, def-pur-sheaf-tensor-product]. Thus $R\\otimes_R^{\\mathbf L}S=R\\otimes_RS\\xrightarrow{\\mu}S$, with $\\mu(r\\otimes s)=j(r)s$ and inverse $s\\mapsto1\\otimes s$. The same calculation gives $R\\otimes_R^{\\mathbf L}B_m=B_m$ with its reduction transitions. By [lem-weil-constant-coefficient-objects-constructible], $R,S$ are constructible derived-complete coefficient units. Apply [lem-weil-finite-free-completed-scalar-comparison] to $K=R$: its natural isomorphism $\\chi:R\\otimes_R^{\\mathbf L}S\\to R\\otimes_{\\mathcal O_E}\\mathcal O_L$ identifies the strict completed scalar extension with ordinary change of rings. Hence\n$$\\beta=\\mu\\chi^{-1}:R\\otimes_{\\mathcal O_E}\\mathcal O_L\\xrightarrow{\\sim}S.$$\nThis is the canonical coefficient-unit comparison: at every finite quotient it is $r\\otimes b\\mapsto\\rho_m(r)b$. Its inverse is $\\chi\\mu^{-1}$: $\\mu^{-1}(s)=1\\otimes s$, and $\\chi$ sends this to the strict-cone point with components $1\\otimes\\pi^L_m(s)=\\pi^L_m(s)$ and zero shifted component. So $\\beta$ is the map $\\beta_{E,L}$ of the statement, and its image is $\\alpha_{E,L}$; since $\\widehat{\\mathcal O}_{L,Y}$ is the limit of a surjective tower, this map is unique with these projections by clause 3 of [lem-weil-proetale-surjective-tower-derived-limit]. It therefore has exactly the normalization of the scalar-extension isomorphism in clause 3 of the constant-coefficient lemma, rather than an arbitrary unit multiple of that isomorphism.",
+   "uses": [
+    "def-pc-kflat-complex",
+    "def-pur-sheaf-tensor-product",
+    "lem-weil-constant-coefficient-objects-constructible",
+    "lem-weil-finite-free-completed-scalar-comparison",
+    "lem-weil-proetale-surjective-tower-derived-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sf-admissible/def-weil-ordinary-compact-cohomology.md",
+    "place": "Coefficient-object paragraph: scalar extensions of the completed coefficient unit; explicit multiplication on its rank-one models"
+   }
+  },
+  {
+   "text": "Record the normalization of the derived Weil maps on these unit models. At finite coefficient ring $A$, the pullback of its unit is $F(A_Y)\\otimes_{F(A_Y)}A_Y$, with multiplication comparison $x\\otimes a\\mapsto c_A(x)a$ [def-weil-derived-pullback-tensor-hom]. For $R$, its integral pullback is the strict cone limit of these finite pullbacks [def-pur-integral-derived-operations]. The augmentations from $FR$ are $F\\pi^E_n$, followed by these finite multiplication maps. By Step 1 their composites with the unit identifications are $\\pi^E_n c_R$. The tower is therefore the quotient tower of $R$ with this augmentation. Its transitions are epimorphisms: locally a section of a finite constant sheaf is represented by a coefficient, and that coefficient lifts through the surjective ring quotient; these local lifts suffice for epimorphy. The surjective-tower result [lem-weil-proetale-surjective-tower-derived-limit], clauses 2--3, identifies its cone limit with $R[0]$ and fixes uniquely the map with these projections. Consequently the canonical comparison $\\lambda_R:Lg_E^*R\\to FR$ of [lem-weil-isomorphism-derived-pullback], followed by $c_R$, is precisely this multiplication-normalized unit map. The same argument applies to $S$ and $L$. These are $\\theta_{\\mathcal O_E}$ and $\\theta_{\\mathcal O_L}$ by [def-weil-constant-weil-structure]. Thus no choice of an isomorphism between unrelated Roos triangles is being used.",
+   "uses": [
+    "def-weil-derived-pullback-tensor-hom",
+    "def-pur-integral-derived-operations",
+    "lem-weil-proetale-surjective-tower-derived-limit",
+    "lem-weil-isomorphism-derived-pullback",
+    "def-weil-constant-weil-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 3.1.10, p. 17 (surjective towers); multiplication-normalized constant-unit specialization of the blueprint canonical Weil datum"
+   }
+  },
+  {
+   "text": "Compute the scalar comparison before completion. The tensor isomorphism of [lem-pur-isomorphism-inverse-image-tensor-hom] identifies $F(R\\otimes_RS)$ with $FR\\otimes_{FR}FS$ and sends $F(r\\otimes s)$ to $F(r)\\otimes F(s)$. Transporting the coefficients along $c_R,c_S$ is balanced, since Step 2 says $c_S F j=j c_R$. If $\\mu_F:FR\\otimes_{FR}FS\\to FS$ denotes multiplication, the required unit square is\n$$c_S\\mu_F=\\mu(c_R\\otimes c_S).$$\nOn a local pure tensor $x\\otimes y$ the left side is $c_S(Fj(x)y)=j(c_R(x))c_S(y)$, which is the right side. Both maps are maps of sheaf tensors: the equality on the sectionwise tensor products descends to their sheafifications [def-pur-sheaf-tensor-product]. The identical calculation with $B_m$ and $\\rho_m$ gives the square at every finite quotient. The ring reductions commute with each expression because they preserve multiplication and the coefficient homomorphisms.",
+   "uses": [
+    "lem-pur-isomorphism-inverse-image-tensor-hom",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EL (sites-modules-lemma-tensor-product-pullback); explicit multiplication calculation of its unit/scalar-extension square"
+   }
+  },
+  {
+   "text": "The integral pullback/scalar-extension comparison of [lem-pur-integral-operations-scalar-extension] applies to $f=g$, $K=R$: $g$ is a scheme morphism on schemes where $\\ell$ is invertible, and $R$ is in $D^b_c(Y,\\mathcal O_E)$. It identifies $(Lg_E^*R)\\otimes_{\\mathcal O_E}\\mathcal O_L$ with $Lg_L^*(R\\otimes_{\\mathcal O_E}\\mathcal O_L)$. On the present unit representatives its tensor comparison is the map of Step 5. To check completion explicitly, use the natural maps $\\chi$ of [lem-weil-finite-free-completed-scalar-comparison]: their components are the quotient maps to $B_m$, with zero component in the shifted product of the strict cone. The two routes of Step 5 have equal quotient components for every $m$ and commute with their transitions, so they induce the same map on each product and on both coordinates of its cone. The pullback unit maps are the normalized ones of Step 4, and $\\beta$ is the multiplication-normalized map of Step 3. Consequently the integral square is\n$$\\theta_{\\mathcal O_L}\\circ Lg_L^*(\\beta)=\\beta\\circ(\\theta_{\\mathcal O_E}\\otimes_{\\mathcal O_E}\\mathcal O_L),$$\nwith the source identified by that pullback/scalar comparison. This computation only uses rank-one representatives and the stated natural completion maps; it makes no inference from equality of finite reductions of arbitrary derived morphisms.",
+   "uses": [
+    "lem-pur-integral-operations-scalar-extension",
+    "lem-weil-finite-free-completed-scalar-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sf-admissible/def-weil-ordinary-compact-cohomology.md",
+    "place": "Coefficient-object paragraph, canonical Weil structures after coefficient extension; agent calculation on strict quotient/cone models of the two operations"
+   }
+  },
+  {
+   "text": "Apply the rationalization functor to the integral square of Step 6. By [def-weil-rationalization-karoubi], its scalar extension is induced on integral representatives by $-\\otimes_{\\mathcal O_E}\\mathcal O_L$; by [def-weil-derived-pullback-tensor-hom], rational pullback and its comparison are induced from the integral ones. By [def-weil-constant-weil-structure], the images of the integral Weil maps are $\\theta_E,\\theta_L$. The image of $\\beta$ is the canonical $\\alpha_{E,L}$ of the statement, so the image square is exactly\n$$\\theta_L\\circ Lg_Y^*(\\alpha_{E,L})=\\alpha_{E,L}\\circ(\\theta_E\\otimes_EL).$$\nThis is the morphism condition of [def-weil-weil-sheaf-complex]. Since $\\alpha_{E,L}$ is invertible, its inverse satisfies the reverse condition: multiply this equality by $\\alpha_{E,L}^{-1}$ on the left and by $Lg_Y^*(\\alpha_{E,L}^{-1})$ on the right. Hence it is an isomorphism of $L$-Weil sheaves. The two underlying objects lie in the constructible heart by [def-weil-constant-weil-structure]. This proves clause 1.",
+   "uses": [
+    "def-weil-rationalization-karoubi",
+    "def-weil-derived-pullback-tensor-hom",
+    "def-weil-constant-weil-structure",
+    "def-weil-weil-sheaf-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sf-admissible/def-weil-ordinary-compact-cohomology.md",
+    "place": "Coefficient-object paragraph, rational coefficient object and its canonical Weil datum; rationalization of the preceding computed square"
+   }
+  },
+  {
+   "text": "Take the inclusion $\\Ql\\subset E$ in clause 1. In the common-stage category of [def-weil-algebraically-closed-coefficients], represent the map from $(\\Ql,(\\Ql)_Y)$ to $(E,E_Y)$ at the stage $E$ by $\\alpha_{\\Ql,E}$, inserting the canonical unit identification $E_Y\\otimes_EE\\cong E_Y$ in the target. Its inverse is represented by $\\alpha_{\\Ql,E}^{-1}$ with the inverse unit identification. Composing at the same stage gives the two identity classes. The Frobenius-equivariance equation for these representatives is Step 7, since the common-stage pullback acts on representatives with exactly that scalar comparison [def-weil-derived-pullback-tensor-hom]. Thus they are inverse morphisms of $\\Qlb$-Weil complexes [def-weil-weil-sheaf-complex], and their underlying objects are precisely the finite-stage representatives specified in [def-weil-constant-weil-structure]. Inverting this isomorphism gives the direction in clause 2. The forgetful functor sends each representative to its underlying map, so this isomorphism forgets to the canonical coefficient-unit identification. Its normalization is compatible with passing to a larger stage: on the regular module both iterated and direct scalar-unit maps send $(r\\otimes s)\\otimes t$ to $j(r)st$, and the identity/tower comparisons of [lem-pur-integral-operations-scalar-extension] preserve these maps. Therefore it is canonical in the common-stage category. This proves clause 2, without identifying that category of fixed pairs with a derived category of Weil sheaves.",
+   "uses": [
+    "def-weil-algebraically-closed-coefficients",
+    "def-weil-derived-pullback-tensor-hom",
+    "def-weil-weil-sheaf-complex",
+    "def-weil-constant-weil-structure",
+    "lem-pur-integral-operations-scalar-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sf-admissible/def-weil-ordinary-compact-cohomology.md",
+    "place": "Coefficient-object paragraph, algebraically closed coefficient object and compatibility with the forgetful functor; explicit common-stage inverse representatives"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-frobenius-detailed",
+  "def-weil-constant-weil-structure",
+  "lem-weil-proetale-isomorphism-inverse-image",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-integral-scalar-extension",
+  "def-pur-sheaf-inverse-limit",
+  "def-pc-kflat-complex",
+  "def-pur-sheaf-tensor-product",
+  "lem-weil-constant-coefficient-objects-constructible",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-pur-integral-derived-operations",
+  "lem-weil-proetale-surjective-tower-derived-limit",
+  "lem-weil-isomorphism-derived-pullback",
+  "lem-pur-isomorphism-inverse-image-tensor-hom",
+  "lem-pur-integral-operations-scalar-extension",
+  "def-weil-rationalization-karoubi",
+  "def-weil-weil-sheaf-complex",
   "def-weil-algebraically-closed-coefficients"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sf-admissible/def-weil-ordinary-compact-cohomology.md",
+  "place": "Coefficient-object paragraph (order 1869 in main-20261015; order 1510 in master), canonical Weil structure for E and Qlb; explicit ring, tensor, completion and common-stage calculations, using the cited existing DAG results. The blueprint names the structure but has no proof of this auxiliary lemma."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -39,10 +176,52 @@
    "results": "no file mentions Weil sheaves, Weil complexes or a geometric Frobenius; ProEt only in AlgebraicGeometry/Sites/Proetale.lean and Sites/ElladicCohomology.lean (no coefficient fields, no scalar extension of l-adic sheaves)",
    "date": "2026-10-09",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "WeilSheaf|WeilComplex|constant.*Frobenius|Frobenius.*constant",
+   "results": "0 hits.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.constantSheaf, CategoryTheory.Sheaf",
+   "results": "12 hits, including CategoryTheory.constantSheaf, constantSheafAdj, constantCommuteCompose, equivCommuteConstant and equivCommuteConstant'. These concern general constant sheaves/equivalences, not completed l-adic coefficient extension or Weil data.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The canonical Weil structure on a constant sheaf is compatible with extension of scalars",
+   "results": "8 hits: CategoryTheory.constantCommuteCompose, constantSheaf, constantSheafΓAdj and constant-sheaf characterizations; no Weil/coefficient-stage compatibility statement.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "equivCommuteConstant|constantCommuteCompose|ellAdicSheaf",
+   "results": "10 hits. Read Mathlib/CategoryTheory/Sites/ConstantSheaf.lean:132-158 (equivCommuteConstant at 142, inverse at 152; TODO for general pullback) and Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean:57-71 (ellAdicSheaf at 63). These do not give finite-stage E-to-L Weil compatibility.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical Frobenius structure on a constant l-adic sheaf commutes with finite extension of the coefficient field",
+   "results": "8 hits, all WittVector isocrystal declarations (standard one-dimensional isocrystal, frobenius_apply, frobenius, frob and equivariance); they are not l-adic sheaves or Weil structures on a scheme.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Equivalence of sheaf categories preserves constant coefficient sheaves naturally in the coefficient ring and extension of scalars",
+   "results": "8 hits: SheafOfModules.toSheafCompSheafToPresheafIso, SheafOfModules.unit, constant-sheaf reflection and condensed locally constant/free module functors; no completed coefficient-stage Weil statement.",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -65,5 +244,39 @@
   "unreachable"
  ],
  "chapter": "sec-smooth-purity",
- "unit": "sk-def-sf-admissible"
+ "unit": "sk-def-sf-admissible",
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-weil-constant-weil-structure-stage-independence",
+  "worker": "stage1",
+  "summary": "Proved both clauses without changing the statement or introducing nodes. Expanded the finite coefficient naturality square, the completed coefficient square, multiplication-normalized unit pullback and scalar extension, equality on strict tower/cone models, rational equivariance and inverse common-stage representatives. The existing Qbar_l-only Lean constant Weil sheaf does not state finite-stage compatibility. Mathlib searches found general constant-sheaf tools, not this statement.",
+  "blueprint": "Realizes the coefficient-object paragraph of def-weil-ordinary-compact-cohomology (main-20261015 order 1869, master order 1510), specifically canonical Weil structures on E and Qlb coefficient units. The inherited unit sk-def-sf-admissible has no proof steps; no unit route or unit record is changed. Whole-blueprint searches for canonical Weil structure, constant coefficient, scalar extension and the full item concept found no equivalent blueprint node.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-isomorphism-inverse-image-tensor-hom",
+    "why": "Generic inverse-image tensor comparison with its explicit pure-tensor formula; the unit has no such tensor comparison statement."
+   },
+   {
+    "node": "lem-weil-finite-free-completed-scalar-comparison",
+    "why": "Generic natural comparison between ordinary and completed finite-coefficient scalar extension, with its specified quotient/zero-cone normalization; no node of the item unit states it."
+   },
+   {
+    "node": "lem-pur-integral-operations-scalar-extension",
+    "why": "Generic pullback/scalar-extension comparison and identity/tower coherence, used on the constant unit; its specialized equivariance is proved by the multiplication calculation rather than assumed."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-isomorphism-inverse-image-tensor-hom",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-pur-integral-operations-scalar-extension"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-NC-80e6ddc06",
+  "group": "NC",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NC-80e6ddc06 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item, its 8 steps, the statement of all 23 cited nodes, and the proofs of lem-weil-isomorphism-derived-pullback, lem-weil-constant-coefficient-objects-constructible, lem-pur-integral-operations-scalar-extension and lem-weil-finite-free-completed-scalar-comparison. Source checked: blueprint main-20261015 def-weil-ordinary-compact-cohomology, coefficient-object paragraph (lines 51-64), against the master copy. No SGA source, no new nodes, no duplicate (lem-zl-constant-weil-datum and lem-fix-weil-operations state different things). Step checks: step 2's square c_S F j = j c_R recomputed through the projections using naturality for iota_m, with no identification of uniformizers. Step 3: chi mu^{-1}(s) = (pi^L_m(s)) with zero shifted component, which is the map phi of the constant-coefficient lemma's step 9. Step 4: the surjective-tower lemma is used only for maps out of degree-0 sheaves. Step 5: the multiplication identity holds on pure tensors and descends through sheafification. Step 6: hypotheses of the scalar-extension lemma (f an isomorphism, ell invertible, R in D^b_c) hold. Step 7: rationalization formulas and the inverse condition are correct. Step 8: the representative psi^{-1} alpha_{Ql,E} matches the constant-coefficient lemma's u, so the For claim holds. Edge cases checked: E=L, empty Y, Y_0=Spec F_{q^2} (Frobenius swaps the components), ramified extension, tower Q_l in E in L. One fault, fixed: clause 1 cited 'the canonical isomorphism of [lem-weil-constant-coefficient-objects-constructible]', whose statement only says an isomorphism exists. Clause 1 is false for other isomorphisms: for Y_0=Spec F_{q^2}, (a,b)*alpha with a != b is not equivariant. I pinned alpha in the statement as the image of beta_{E,L}, the map whose inverse has strict-cone components pi^L_m and zero shifted component. stmt_deps gains def-weil-integral-scalar-extension and def-weil-completed-integral-coefficients. Step 3 gains the identifying computation and cites clause 3 of lem-weil-proetale-surjective-tower-derived-limit. The 3 declared tool uses are accepted (the unit has no steps or uses). Upstream note for the maintainer: lem-weil-isomorphism-derived-pullback (lambda) and lem-pur-integral-operations-scalar-extension (the pullback/scalar-extension comparison) state only natural isomorphisms but are used as data. Steps 4 and 6 depend on their constructions, which I verified match. Their statements should record these normalizations.; 1 file(s) fixed by the reviewer"
+ }
 }
