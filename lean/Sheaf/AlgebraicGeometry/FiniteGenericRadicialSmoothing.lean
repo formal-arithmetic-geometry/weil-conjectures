@@ -5,10 +5,6 @@ Authors: SHEAF group ND
 -/
 module
 
-public import Mathlib.AlgebraicGeometry.Properties
-public import Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
-public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
-public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.UniversallyInjective
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
