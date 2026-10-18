@@ -8,6 +8,7 @@ module
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.WeilFundamentalRepresentationDual
 public import WeilConjectures.Mathlib.RepresentationTheory.LinHom
 public import WeilConjectures.WeilSheaf.StalkTensor
+public import WeilConjectures.WeilSheaf.StalkTensorTrace
 
 /-!
 # The Weil fundamental representation of a tensor product
@@ -30,16 +31,6 @@ namespace AlgebraicGeometry
 
 variable {K : Type u} [Field K] [Finite K] {C : Scheme.{u}} [C.Over (Spec (.of K))]
   {l : ℕ} [Fact l.Prime] [Fact (ringChar K ≠ l)]
-
-namespace WeilSheaf
-
-/-- The tensor product of two lisse Weil sheaves is lisse: it is the internal hom `[ℱ^∨, 𝒢]` of
-two lisse sheaves. -/
-theorem IsLisse.tensorObj {F G : WeilSheaf K l C} (hF : F.IsLisse) (hG : G.IsLisse) :
-    (F.tensorObj G hF).IsLisse :=
-  ProEtale.IsAdicLisseSheaf.ihom hF.dual hG
-
-end WeilSheaf
 
 namespace WeilGroup
 
