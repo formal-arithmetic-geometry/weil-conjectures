@@ -27,49 +27,32 @@
  ],
  "proof": [
   {
-   "text": "For two module-sheaf morphisms $a,b:F\\to G$, addition is addition on sections. By the formula for direct image on morphisms, for each $V\\to Y$ one has $(f_*(a+b))_V=(a+b)_{V\\times_YX}=a_{V\\times_YX}+b_{V\\times_YX}=(f_*a)_V+(f_*b)_V$. The same formula gives $f_*0=0$ on morphisms. Equality of sheaf morphisms is equality of all components, so $f_*$ is additive.",
+   "text": "Addition of module-sheaf morphisms is sectionwise. The direct image of [def-weil-proetale-module-direct-image] applies each component at the base-changed object and restricts scalars through the coefficient ring map. Consequently f_*(a+b)=f_*a+f_*b componentwise. In Lean the Additive.map_add field follows by extensionality on objects and sections, then reflexivity.",
    "uses": [
-    "def-weil-proetale-module-direct-image",
-    "def-weil-sheaf-of-modules-category"
+    "def-weil-proetale-module-direct-image"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03DA (lemma-abelian), preceding section-kernels: addition and kernels on sections; compare Tag 03DC (lemma-exactness-pushforward-pullback)"
-   }
+   "elementary": true
   },
   {
-   "text": "Use the small-site/module-universe convention of the direct-image definition, so both module categories are abelian. Let $b:F\\to G$ and put $K=\\ker b$ in the category of $A_X$-module sheaves. Kernels of module sheaves are computed sectionwise. Thus for every $V\\to Y$, $(f_*K)(V)=K(V\\times_YX)=\\{s\\in F(V\\times_YX):b_{V\\times_YX}(s)=0\\}=\\ker((f_*b)_V)$. These identifications commute with restriction because each kernel has the restrictions induced from $F$. They respect the $A_Y(V)$-action because on both sides it is restriction of the $A_X(V\\times_YX)$-action along the component $\\rho^f_{A,V}:A_Y(V)\\to A_X(V\\times_YX)$ of the constant-ring structure map specified in the direct-image definition. The inclusion is on each object the kernel inclusion. Consequently $f_*K\\to f_*F$ is the kernel of $f_*b$. Also $f_*$ sends the zero sheaf to the zero sheaf, since its value at every object is the zero module.",
+   "text": "Let R_X and R_Y be the underlying RingCat-valued constant ring sheaves used in [def-weil-proetale-module-direct-image]. After composing the direct image with SheafOfModules.toSheaf R_Y, its functor is definitionally equal to SheafOfModules.toSheaf R_X followed by the continuous sheaf pushforward of abelian groups along proEtaleBaseChange f. Mathlib proves finite-limit preservation for both factors: module-sheaf limits and sheaf limits are computed on underlying sections. Hence their composite preserves finite limits.",
    "uses": [
-    "def-weil-proetale-module-direct-image",
-    "def-weil-sheaf-of-modules-category"
+    "def-weil-proetale-module-direct-image"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03DA (lemma-abelian), preceding section-kernels: addition and kernels on sections; compare Tag 03DC (lemma-exactness-pushforward-pullback)"
-   }
+   "elementary": true
   },
   {
-   "text": "Write the given sequence as $0\\to F\\xrightarrow{a}G\\xrightarrow{b}H$, relabelling its three terms. In an abelian category its exactness says precisely that $a$ identifies $F$ with $\\ker b$: $a$ is monic, and its image is $\\ker b$. Let $c:F\\xrightarrow{\\sim}\\ker b$ be this identification, so $a$ is $c$ followed by the kernel inclusion. A functor sends an isomorphism to an isomorphism, since it sends the two inverse identities to inverse identities. Applying $f_*$, step 2 therefore identifies $f_*a$ with the kernel inclusion of $f_*b$, up to the isomorphism $f_*c$. It is monic with image that kernel. Together with preservation of the zero sheaf, this is exactly the asserted exactness $0\\to f_*F\\to f_*G\\to f_*H$.",
-   "uses": [
-    "def-weil-sheaf-of-modules-category"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03DA (lemma-abelian), preceding section-kernels: addition and kernels on sections; compare Tag 03DC (lemma-exactness-pushforward-pullback)"
-   }
+   "text": "The functor SheafOfModules.toSheaf R_Y reflects isomorphisms and preserves finite limits, and the module-sheaf category has finite limits. Thus it reflects finite limits (Mathlib reflectsFiniteLimits_of_reflectsIsomorphisms). Apply preservesFiniteLimits_of_reflects_of_preserves to the composite in the preceding step. This gives finite-limit preservation of f_* itself, which together with the first step proves the conjunction in the Lean statement.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-proetale-module-direct-image",
-  "def-weil-sheaf-of-modules-category"
+  "def-weil-proetale-module-direct-image"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-modules.tex",
-  "place": "Explicit sectionwise-kernel proof using section-kernels and Tag 03DA; proves the direct-image assertion of Tag 03DC without using the adjunction proof there"
+  "place": "Section section-kernels, Lemma lemma-abelian (Tag 03DA), and the direct-image assertion of lemma-exactness-pushforward-pullback (Tag 03DC). The Lean proof uses Mathlib finite-limit preservation and reflection for the forgetful functor to abelian sheaves, realizing the sectionwise-limit argument without a module adjunction."
  },
  "mathlib_searches": [
   {
@@ -218,5 +201,15 @@
   "group": "NG",
   "result": "pass",
   "note": "Wrote review.md. Verified immutable files, exact signature, dependencies, sources, universes, edge cases, docstrings, and report sections. Reproduced clean per-file compilation through scompile.py’s local side overlay. No substantive or mechanical faults found; branch head unchanged."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261018T062744-L-647651",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

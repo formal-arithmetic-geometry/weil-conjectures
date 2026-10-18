@@ -7,8 +7,6 @@ module
 
 public import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
 public import Mathlib.CategoryTheory.Limits.Preserves.Finite
-import Sheaf.CategoryTheory.RingedSiteModules
-import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Defs
 
 /-!
 # Left exactness of pro-etale module direct image
@@ -46,6 +44,24 @@ theorem proEtaleConstantModuleDirectImage_additive_leftExact
     {X Y : Scheme.{u}} (f : X ⟶ Y) (A : Type u) [CommRing A] :
     (proEtaleConstantModuleDirectImage f A).Additive ∧
       PreservesFiniteLimits (proEtaleConstantModuleDirectImage f A) := by
-  sorry
+  constructor
+  · constructor
+    intro M N a b
+    ext U x
+    rfl
+  · let RX := (sheafCompose (ProEt.topology X)
+      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj (proEtaleConstantRing X A)
+    let RY := (sheafCompose (ProEt.topology Y)
+      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj (proEtaleConstantRing Y A)
+    have : PreservesFiniteLimits
+        (proEtaleConstantModuleDirectImage f A ⋙ SheafOfModules.toSheaf RY) := by
+      -- Forgetting the scalar actions identifies pushforward with precomposition.
+      change PreservesFiniteLimits (SheafOfModules.toSheaf RX ⋙
+        (proEtaleBaseChange f).sheafPushforwardContinuous AddCommGrpCat.{u + 1}
+          (ProEt.topology Y) (ProEt.topology X))
+      infer_instance
+    -- The forgetful functor preserves finite limits and reflects isomorphisms.
+    exact preservesFiniteLimits_of_reflects_of_preserves
+      (proEtaleConstantModuleDirectImage f A) (SheafOfModules.toSheaf RY)
 
 end AlgebraicGeometry.Scheme
