@@ -8,11 +8,85 @@
   "place": "Tags 05RG, 05RI and 05RK; labels lemma-construct-multiplicative-system, definition-quotient-category, lemma-kernel-quotient"
  },
  "stmt_deps": [
-  "def-weil-triangulated-category"
+  "def-weil-triangulated-category",
+  "def-pur-saturated-triangulated-localization"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $W=\\{f:X\\to Y\\mid X\\xrightarrow fY\\to C\\to X[1]\\text{ is distinguished for some }C\\in\\mathcal S\\}$. Membership in the strictly full triangulated subcategory $\\mathcal S$ contains zero, is invariant under all integer shifts and isomorphisms, and has the two-out-of-three property on distinguished triangles. Apply [lem-trf-triangulated-subcategory-cone-system] to this subcategory: $W$ contains identities, is closed under composition, has left and right calculi of fractions and is compatible with the triangulated structure. Define $\\mathcal D/\\mathcal S=W^{-1}\\mathcal D$ and its functor $Q$ by localization as in [def-pur-saturated-triangulated-localization]; no saturation assumption is needed for this part of that definition. Thus $Q$ inverts exactly the specified class in the sense of being localization at that class (this does not assert that no other morphisms become invertible).",
+   "uses": [
+    "def-weil-triangulated-category",
+    "def-pur-saturated-triangulated-localization",
+    "lem-trf-triangulated-subcategory-cone-system"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05RG, lemma-construct-multiplicative-system, first assertion; Tag 05RI, definition-quotient-category"
+   }
+  },
+  {
+   "text": "Apply [lem-pur-localization-triangles-05r6] to $W$ and the triangulated category $\\mathcal D$. Its hypotheses are supplied by Step 1, without needing saturation: the localization inherits a triangulated structure and $Q$ is exact. In particular, by the definition of an exact functor [def-weil-triangulated-category], $Q$ is additive and therefore sends every zero morphism to a zero morphism.",
+   "uses": [
+    "lem-pur-localization-triangles-05r6",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05R6, proposition-construct-localization; note following Tag 05RI"
+   }
+  },
+  {
+   "text": "Let $A\\in\\mathcal S$. By inverse rotation of the contractible distinguished triangle $A\\xrightarrow{\\mathrm{id}}A\\to0\\to A[1]$, the triangle $0\\to A\\xrightarrow{\\mathrm{id}}A\\to0$ is distinguished, up to the canonical shift-of-zero isomorphism. Hence $0:0\\to A$ belongs to $W$. The morphism $Q(0):Q(0)\\to Q(A)$ is both invertible (localization) and zero (Step 2). Composing this zero morphism with its inverse gives $\\mathrm{id}_{Q(A)}=0$. Every map to or from $Q(A)$ is then zero, by composing with this identity; the zero maps exist, so $Q(A)$ is both initial and terminal.",
+   "uses": [
+    "def-weil-triangulated-category",
+    "def-pur-saturated-triangulated-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05RI and Tag 05RK, lemma-kernel-quotient, forward containment, expanded using TR1 and TR2"
+   }
+  },
+  {
+   "text": "Conversely suppose $Q(A)$ is a zero object. Then $Q(\\mathrm{id}_A)=\\mathrm{id}_{Q(A)}=0=Q(0_{A,A})$. Apply [lem-pc-right-fraction-common-refinement] with $M=N=P_1=P_2=A$, $s_1=s_2=\\mathrm{id}_A\\in W$, $f_1=\\mathrm{id}_A$ and $f_2=0_{A,A}$. The right calculus required there is Step 1. The resulting maps $a_1,a_2:R\\to A$ satisfy $a_1=a_2=s\\in W$ and $a_1=0\\circ a_2=0$. Consequently $s=0:R\\to A$ is a member of $W$. This is a direct application of equality of fractions, not an assumption that $W$ is saturated.",
+   "uses": [
+    "lem-pc-right-fraction-common-refinement",
+    "lem-trf-triangulated-subcategory-cone-system"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 04VJ, lemma-equality-morphisms-right-localization, and the preceding right-fraction equivalence relation; cf. derived.tex, lemma-kernel-localization"
+   }
+  },
+  {
+   "text": "By the definition of $W$, choose a distinguished triangle $R\\xrightarrow{0}A\\xrightarrow gC\\xrightarrow hR[1]$ with $C\\in\\mathcal S$. Apply clause (iii) of [lem-weil-pbc-hom-into-triangle-exact] with its $X=R$, $Y=A$, $Z=C$, $u=0$, $W=R[1]$ and $c=\\mathrm{id}_{R[1]}$; its hypothesis $u[1]\\circ c=0$ holds since the shift is additive. It gives $k:R[1]\\to C$ with $h\\circ k=\\mathrm{id}_{R[1]}$. We show that $(g,k):A\\oplus R[1]\\to C$ is an isomorphism. By TR2 [def-weil-triangulated-category] the rotation $A\\xrightarrow gC\\xrightarrow hR[1]\\xrightarrow{-0[1]=0}A[1]$ is distinguished. Put $p=\\mathrm{id}_C-k\\circ h$. Then $h\\circ p=h-h\\circ k\\circ h=0$, so clause (ii) of [lem-weil-pbc-hom-into-triangle-exact] for the rotated triangle, with its $W=C$, gives $q:C\\to A$ with $p=g\\circ q$. Clause (ii) for the original triangle shows that $g\\circ a=0$ forces $a=0\\circ b=0$, for every $a:V\\to A$. By clause (i), $h\\circ g=0$, so $p\\circ g=g$ and $g\\circ(q\\circ g-\\mathrm{id}_A)=0$; also $g\\circ q\\circ k=p\\circ k=k-k\\circ h\\circ k=0$. Hence $q\\circ g=\\mathrm{id}_A$ and $q\\circ k=0$. With $h\\circ g=0$ and $h\\circ k=\\mathrm{id}_{R[1]}$ this says that $(q,h):C\\to A\\oplus R[1]$ is a left inverse of $(g,k)$, and $g\\circ q+k\\circ h=p+k\\circ h=\\mathrm{id}_C$ says that it is a right inverse. Thus $A$ is a direct summand of $C\\in\\mathcal S$, and the closure of $\\mathcal S$ under direct summands gives $A\\in\\mathcal S$. Together with Step 3 this is the claimed equivalence.",
+   "uses": [
+    "lem-weil-pbc-hom-into-triangle-exact",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05QT, lemma-split, parts (1) and (2), written out from Tag 0149 (lemma-representable-homological) as clauses (i)-(iii) of the cited node; expands Tag 05RK via lemma-kernel-localization"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-triangulated-category",
+  "def-pur-saturated-triangulated-localization",
+  "lem-trf-triangulated-subcategory-cone-system",
+  "lem-pur-localization-triangles-05r6",
+  "lem-pc-right-fraction-common-refinement",
+  "lem-weil-pbc-hom-into-triangle-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 05RG, 05RI, 05RK; expanded proof of the zero-arrow criterion from right-fraction equality (categories.tex, Tag 04VJ) and representable exactness (Tag 0149)"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -48,10 +122,80 @@
    "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Triangulated.Subcategory.W\", \"CategoryTheory.Triangulated.Subcategory.W_iff'\", \"CategoryTheory.ObjectProperty.trW\", \"CategoryTheory.ObjectProperty.IsTriangulated.toIsTriangulatedClosed₂\", \"CategoryTheory.Triangulated.Subcategory.W_iff\", \"CategoryTheory.Triangulated.Subcategory.ext₁\", \"CategoryTheory.Triangulated.Subcategory.ext₂\", \"CategoryTheory.Triangulated.Subcategory.W.mk'\"], \"digest\": \"587e7c48ae29e9bf\"}",
    "date": "2026-10-18",
    "verdict": "no match: the hits supply triangulated localization and the cone class W, but not the stated zero-object criterion for a thick subcategory; the pinned source searches found no quotient-kernel theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "triangulated localization at a compatible multiplicative system is a triangulated category and the localization functor is exact",
+   "results": "{\"t\": \"2026-10-18T16:52:03Z\", \"tool\": \"leanfinder\", \"query\": \"triangulated localization at a compatible multiplicative system is a triangulated category and the localization functor is exact\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Triangulated.Localization.isTriangulated\", \"CategoryTheory.Triangulated.Localization.instIsTriangulatedLocalization'\", \"CategoryTheory.Triangulated.Localization.instIsTriangulatedLocalization\", \"CategoryTheory.Triangulated.Localization.isTriangulated_functor\", \"CategoryTheory.Triangulated.Localization.instPretriangulatedLocalization'\", \"CategoryTheory.Triangulated.Localization.instPretriangulatedLocalization\", \"CategoryTheory.Triangulated.Localization.pretriangulated\", \"CategoryTheory.Functor.isHomological_of_localization\"], \"digest\": \"4e654a53fc9ef28d\"}",
+   "date": "2026-10-18",
+   "verdict": "no match for the complete item: localization and fraction APIs cover auxiliary steps, but not the full thick-quotient kernel statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Triangulated.Localization.isTriangulated, CategoryTheory.Triangulated.Localization.isTriangulated_functor",
+   "results": "{\"t\": \"2026-10-18T16:52:12Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Triangulated.Localization.isTriangulated, CategoryTheory.Triangulated.Localization.isTriangulated_functor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match for the complete item: localization and fraction APIs cover auxiliary steps, but not the full thick-quotient kernel statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "kernel of the Verdier quotient functor consists of objects that are direct summands of objects in the triangulated subcategory",
+   "results": "{\"t\": \"2026-10-18T16:52:13Z\", \"tool\": \"leanfinder\", \"query\": \"kernel of the Verdier quotient functor consists of objects that are direct summands of objects in the triangulated subcategory\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.mem_homologicalKernel_trW_iff\", \"CategoryTheory.Triangulated.Subcategory.W\", \"CategoryTheory.Functor.mem_homologicalKernel_W_iff\", \"CategoryTheory.Triangulated.Subcategory.W_iff'\", \"CategoryTheory.Functor.homologicalKernel\", \"CategoryTheory.Triangulated.Subcategory.W_iff\", \"CategoryTheory.ObjectProperty.isLocal_trW\", \"CategoryTheory.Functor.instIsTriangulatedHomologicalKernel\"], \"digest\": \"7fd785a8624dadac\"}",
+   "date": "2026-10-18",
+   "verdict": "no match for the complete item: localization and fraction APIs cover auxiliary steps, but not the full thick-quotient kernel statement"
+  },
+  {
+   "tool": "grep",
+   "query": "isTriangulated_functor|instIsTriangulatedLocalization",
+   "results": "{\"t\": \"2026-10-18T16:52:14Z\", \"tool\": \"grep\", \"query\": \"isTriangulated_functor|instIsTriangulatedLocalization\", \"sub\": \"CategoryTheory/Localization\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Localization/Triangulated.lean\"], \"digest\": \"611894b7e60a4325\"}",
+   "date": "2026-10-18",
+   "verdict": "no match for the complete item: localization and fraction APIs cover auxiliary steps, but not the full thick-quotient kernel statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Verdier localization by a compatible multiplicative system has an exact triangulated localization functor",
+   "results": "{\"t\": \"2026-10-18T16:52:15Z\", \"tool\": \"leansearch\", \"query\": \"Verdier localization by a compatible multiplicative system has an exact triangulated localization functor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Triangulated.Localization.isTriangulated\", \"CategoryTheory.Triangulated.Localization.isTriangulated_functor\", \"CategoryTheory.Triangulated.Localization.instIsTriangulatedLocalization'\", \"CategoryTheory.Triangulated.Localization.instPretriangulatedLocalization\", \"CategoryTheory.MorphismProperty.Q'\", \"CategoryTheory.Functor.IsLocalization.mk\", \"CategoryTheory.MorphismProperty.instIsLocalizationLocalization'Q'\", \"CategoryTheory.Triangulated.Localization.pretriangulated\"], \"digest\": \"3b0d04aaf15f7240\"}",
+   "date": "2026-10-18",
+   "verdict": "no match for the complete item: localization and fraction APIs cover auxiliary steps, but not the full thick-quotient kernel statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Triangulated.Localization, CategoryTheory.Triangulated.Subcategory, IsZero",
+   "results": "{\"t\": \"2026-10-18T16:52:15Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Triangulated.Localization, CategoryTheory.Triangulated.Subcategory, IsZero\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'CategoryTheory.Triangulated.Localization'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "kernel.*quotient|isZero.*Localization",
+   "results": "{\"t\": \"2026-10-18T16:52:19Z\", \"tool\": \"grep\", \"query\": \"kernel.*quotient|isZero.*Localization\", \"sub\": \"CategoryTheory/Triangulated\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match for the complete item: localization and fraction APIs cover auxiliary steps, but not the full thick-quotient kernel statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "objects sent to zero by Verdier quotient are retracts of subcategory objects",
+   "results": "{\"t\": \"2026-10-18T16:52:35Z\", \"tool\": \"leansearch\", \"query\": \"objects sent to zero by Verdier quotient are retracts of subcategory objects\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Limits.imageZero\", \"CategoryTheory.Limits.imageZero'\", \"CategoryTheory.ObjectProperty.instHasZeroObjectFullSubcategoryOfContainsZero\", \"HomologicalComplex.instIsStableUnderRetractsQuasiIso\", \"DerivedCategory.instHasZeroObject\", \"HomotopyCategory.quotient_obj_surjective\", \"CategoryTheory.Limits.kernelZeroIsoSource\", \"CategoryTheory.Subobject.factorThru_zero\"], \"digest\": \"073dc993258fe3b1\"}",
+   "date": "2026-10-18",
+   "verdict": "no match for the complete item: localization and fraction APIs cover auxiliary steps, but not the full thick-quotient kernel statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Verdier quotient object is zero exactly when identity vanishes after precomposition by a morphism whose cone lies in the thick subcategory",
+   "results": "{\"t\": \"2026-10-18T17:37:54Z\", \"tool\": \"leanfinder\", \"query\": \"Verdier quotient object is zero exactly when identity vanishes after precomposition by a morphism whose cone lies in the thick subcategory\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Triangulated.TStructure.isZero\", \"DerivedCategory.instHasZeroObject\", \"CategoryTheory.Functor.mem_homologicalKernel_trW_iff\", \"CategoryTheory.Functor.mem_homologicalKernel_W_iff\", \"CategoryTheory.Functor.homologicalKernel\", \"CategoryTheory.Triangulated.TStructure.zero\", \"CategoryTheory.Triangulated.TStructure.zero'\", \"CategoryTheory.Abelian.Ext.mk₀_eq_zero_iff\"], \"digest\": \"28681189d8068983\"}",
+   "date": "2026-10-18",
+   "verdict": "no match for the complete item: localization and fraction APIs cover auxiliary steps, but not the full thick-quotient kernel statement"
+  },
+  {
+   "tool": "grep",
+   "query": "map_eq_iff_precomp|isZero.*obj|isZero_iff",
+   "results": "{\"t\": \"2026-10-18T17:37:55Z\", \"tool\": \"grep\", \"query\": \"map_eq_iff_precomp|isZero.*obj|isZero_iff\", \"sub\": \"CategoryTheory/Localization\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Localization/CalculusOfFractions.lean\"], \"digest\": \"35be15a9cf0353a2\"}",
+   "date": "2026-10-18",
+   "verdict": "no match for the complete item: localization and fraction APIs cover auxiliary steps, but not the full thick-quotient kernel statement"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-gabber-open-immersion-sheaf-finiteness",
@@ -74,5 +218,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-thick-verdier-quotient-kernel",
+  "worker": "stage1",
+  "summary": "Retained the statement; reused existing Mathlib leaves for cone-class calculus, exact triangulated localization, equality of right fractions and representable exactness. Expanded the kernel proof: a killed identity has a zero right denominator 0:R->A in W; its cone triangle splits, C = A (+) R[1] (written out from the representable-exactness clauses, Stacks 05QT), so closure under direct summands forces A into the subcategory. No new nodes and no Lean changes. Added the existing localization definition to statement dependencies.",
+  "blueprint": "Realizes the quotient-kernel tool used by the ancestor lem-per-artin-gabber-affine-curve, proof Step 3 via lem-per-gabber-open-immersion-sheaf-finiteness: supplies the thick quotient argument cited as ILO XIII 3.4.1 and 3.6.1, using the Stacks route 05RG, 05RI, 05RK already specified in blueprint.from.place.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q63-f571d7894",
+  "group": "Q63",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q63-f571d7894 (reviewer sub-agent of L); spot-checked: Read the whole item, all six cited statements and the Stacks sources in derived.tex: 05RG (l.1909), 05RI (l.2066), 05RK (l.2121), lemma-kernel-localization (l.1549), 05QT lemma-split (l.700) and 0149 (l.386). The statement is the correct summand-closed case of 05RK and is unchanged; no new nodes. Steps 1-4 are correct. Step 1: the trW cone class has MS1-3 and MS5-6 without saturation. Step 2: lem-pur-localization-triangles-05r6 makes Q exact, hence additive. Step 3 is genuinely elementary: by TR1/TR2, 0->A lies in W, so id_{Q(A)}=0. Step 4: fraction equality with s1=s2=id, f1=id, f2=0 puts 0:R->A in W. Fault (C1/E5) in Step 5: clause (iii) gives h∘k=id, so R[1] is only a retract of C, and the step concluded R[1]∈S by 'retract closure'. The item's hypothesis is closure under direct summands, and retract => summand needs Stacks 05QT(2), which no step proved and no node states. FIX: Step 5 is rewritten using the already-cited lem-weil-pbc-hom-into-triangle-exact clauses (i)/(ii) and TR2. Set p=id-kh and take q with p=gq; this shows (g,k):A⊕R[1]->C is an isomorphism with inverse (q,h). So A is a direct summand of C∈S, and A∈S directly. The rewritten step is 1469 characters. Its source.place now names 05QT, and the split_report summary is updated. Edge cases S=0, S=D and S not summand-closed all behave as expected. Duplicate search over the DAG found no node for the kernel criterion or for 05QT(2). Batch-5 flag on lem-trf-triangulated-subcategory-cone-system: it is a Mathlib leaf (trW instances) with an empty closure and general Verdier-localization content (05RG), not part of the trace-formula or Poincaré-duality statements or proofs; no non-trf 05RG node exists. Accepted; the maintainer may relocate it. No SGA cited, no tool_uses.; 1 file(s) fixed by the reviewer"
  }
 }
