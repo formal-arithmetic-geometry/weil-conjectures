@@ -276,7 +276,11 @@ class Dag:
 
     def stated(self, i: str) -> bool:
         d = self.live.get(i)
-        return d is None or is_leaf(d) or has_decl(d) or i in self.assumed   # an assumed node is stated (2026-10-17); a dependency on a missing node is reported by the DAG check, not here
+        # an assumed node is stated (2026-10-17); a finished node is stated (the human, 2026-10-18: its declaration exists
+        # in slopmaster2, which this project imports verbatim; the audit record's `decls` name it -- before, a finished
+        # node without a `lean` record held back every module whose proof uses it); a dependency on a missing node is
+        # reported by the DAG check, not here
+        return d is None or is_leaf(d) or has_decl(d) or i in self.assumed or finished(d)
 
     def stage1(self) -> list[tuple[int, str]]:
         """nearest to a target first; since 2026-10-09 (SETUP.md) ordered first by the unit route: the rank of the node's unit in
@@ -304,9 +308,9 @@ class Dag:
         return out
 
     def needs_statement(self, i: str) -> bool:
-        """A stage-2 node that still needs a statement: reached from a target, not a Mathlib leaf, no Lean declaration."""
-        d = self.live.get(i)
-        return d is not None and i in self.dist and not is_leaf(d) and not has_decl(d) and i not in self.assumed
+        """A stage-2 node that still needs a statement: reached from a target and not stated (no Lean declaration of its
+        own, not a Mathlib leaf, not assumed, not finished with its declaration upstream; 2026-10-18)."""
+        return i in self.live and i in self.dist and not self.stated(i)
 
     def blockers(self, items) -> dict[str, int]:
         """item -> how many stage-2 nodes still needing a statement cannot be stated before it: every node whose stmt_deps
@@ -333,7 +337,7 @@ class Dag:
         why = collections.Counter(); items = []; tsc = self.target_statement_closure()
         early = li.config().get("SHEAF_EARLY_REVIEW", "") not in ("", "0", "no")
         for i, d in self.live.items():
-            if i not in self.dist or is_leaf(d) or has_decl(d) or i in self.assumed:   # assumed: never an item (2026-10-17)
+            if not self.needs_statement(i):   # a leaf, stated, assumed (never an item, 2026-10-17) or finished (2026-10-18)
                 continue
             if not unfolded(d):
                 why["waits for stage 1"] += 1; continue

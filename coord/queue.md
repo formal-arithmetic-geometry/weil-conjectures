@@ -41,8 +41,8 @@ Not items: a node in the proof dependencies has no Lean statement yet (the human
 | module | distance to a target | sorry | waits for (first unstated node) |
 |---|---|---|---|
 | `Sheaf.SmoothPurity.NormalizedWitness` | 1 | 1 | `lem-pur-finite-smooth-adjunction-general-base` |
-| `Sheaf.AlgebraicGeometry.EllAdicLocalizingExceptionalBounded` | 3 | 1 | `sk-def-sfb-qlbar-condensed` |
-| `Sheaf.AlgebraicGeometry.EllAdicLocalizingExceptionalConstructibleCohomology` | 3 | 1 | `sk-def-sfb-dc-setting` |
+| `Sheaf.AlgebraicGeometry.EllAdicLocalizingExceptionalBounded` | 3 | 1 | `det-def-sfb-constructible-local-model` |
+| `Sheaf.AlgebraicGeometry.EllAdicLocalizingExceptionalConstructibleCohomology` | 3 | 1 | `det-def-sfb-constructible-local-model` |
 | `Sheaf.PoincareDuality.ProperProjectionFormulaBounded` | 3 | 1 | `lem-pd-module-ringed-topos-derived-comparison` |
 | `Sheaf.WeilSheaf.CohomologyGeometricConjugacy` | 4 | 1 | `def-weil-frobenius-cohomology-transport` |
 | `WeilConjectures.DeligneLaumon.Reduction.RealSheaves` | 4 | 2 | `def-wf-fundamental-representation` |
