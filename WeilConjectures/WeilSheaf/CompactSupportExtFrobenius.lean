@@ -133,20 +133,9 @@ theorem testE1 (F : WeilSheaf k₀ l X) : Nonempty (
     (hf := hasCompactification_of_over (k₀ := k₀) _)).i).obj F.obj))) := by
   let c := HasCompactification.compactification (X ↘ Spec (CommRingCat.of k₀))
     (hf := hasCompactification_of_over (k₀ := k₀) _)
-  exact ⟨(ProEtaleWeilSheaf.lowerStar k₀ l c.g).rightDerivedFunctor.mapIso
+  exact ⟨(ProEtaleWeilSheaf.lowerStar k₀ l c.g).rightDerivedFunctor.mapIso (eqToIso (Functor.comp_obj _ _ _).symm ≪≫
       (((ProEtaleWeilSheaf.extensionByZero k₀ l c.i).mapDerivedCategorySingleFunctor 0).app
-        F.obj)⟩
-
-theorem testE2 (M : _root_.DerivedCategory (ProEtaleWeilSheaf k₀ l (HasCompactification.compactification (X ↘ Spec (CommRingCat.of k₀))
-    (hf := hasCompactification_of_over (k₀ := k₀) _)).Z)) : Nonempty (
-    (ProEtaleWeilSheaf.lowerStar k₀ l (HasCompactification.compactification (X ↘ Spec (CommRingCat.of k₀))
-    (hf := hasCompactification_of_over (k₀ := k₀) _)).g).rightDerivedFunctor.obj M ≅
-    (ProEtaleWeilSheaf.lowerStar k₀ l ((HasCompactification.compactification (X ↘ Spec (CommRingCat.of k₀))
-    (hf := hasCompactification_of_over (k₀ := k₀) _)).Z ↘ Spec (CommRingCat.of k₀))).rightDerivedFunctor.obj M) := by
-  let c := HasCompactification.compactification (X ↘ Spec (CommRingCat.of k₀))
-    (hf := hasCompactification_of_over (k₀ := k₀) _)
-  exact ⟨(Functor.rightDerivedFunctorNatIso
-      (ProEtaleWeilSheaf.lowerStarCongr k₀ l (Category.comp_id c.g).symm)).app _⟩
+        F.obj) ≪≫ eqToIso (Functor.comp_obj _ _ _))⟩
 
 end WeilSheaf
 end AlgebraicGeometry

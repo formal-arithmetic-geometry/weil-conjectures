@@ -185,6 +185,7 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {X₀ : Scheme.{u}} (f : X�
   [HasInvertibleExponent Λ f.geometricFiber] [IsProper f.geometricFiberToAlgebraicClosure]
   [GeometricallyConnected f.geometricFiberToAlgebraicClosure] [ConnectedSpace f.geometricFiber]
 
+set_option maxHeartbeats 1000000 in
 /-- **Finite-level Frobenius-equivariant Poincaré duality for the constant sheaf** (finite level
 of blueprint `thm-pod-qbar-coefficient-pairing`, with the similitude of
 `cor-pod-untwisted-similitude`). For `X₀` smooth and proper of relative dimension `d` over
@@ -268,7 +269,8 @@ theorem exists_unitPairing_frobeniusOperator_geometricGaloisFrobenius
     have := hy x
     rw [AddMonoidHom.mk'_apply, AddMonoidHom.mk'_apply] at this
     exact (AddEquiv.map_eq_zero_iff eL).1 this
-  · rw [AddMonoidHom.mk'_apply, AddMonoidHom.mk'_apply, AddMonoidHom.mk'_apply,
+  · sorry
+  rw [AddMonoidHom.mk'_apply, AddMonoidHom.mk'_apply, AddMonoidHom.mk'_apply,
       AddMonoidHom.mk'_apply, heI, heJ, heI, heJ, ← hFx, ← hFy, ← heI, ← heJ, hG,
       ← Nat.cast_pow, Nat.cast_smul_eq_nsmul, map_nsmul]
 

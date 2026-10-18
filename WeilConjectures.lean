@@ -4368,6 +4368,7 @@ public import WeilConjectures.AlgebraicGeometry.ProEtale.ContinuousSheaf
 public import WeilConjectures.AlgebraicGeometry.ProEtale.ContinuousSheafPullback
 public import WeilConjectures.AlgebraicGeometry.ProEtale.DenseOpen
 public import WeilConjectures.AlgebraicGeometry.ProEtale.EtaleCohomologyComparison
+public import WeilConjectures.AlgebraicGeometry.ProEtale.ExtensionByZeroAdicCohomology
 public import WeilConjectures.AlgebraicGeometry.ProEtale.FiniteCoefficientCohomology
 public import WeilConjectures.AlgebraicGeometry.ProEtale.FiniteCoefficientEtaleComparison
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Flat.QuasiCompactCover
@@ -6343,6 +6344,7 @@ public import WeilConjectures.EtaleCohomology.PoincareDuality.Frobenius.Equivari
 public import WeilConjectures.EtaleCohomology.PoincareDuality.Frobenius.Pairings
 public import WeilConjectures.EtaleCohomology.PoincareDuality.Frobenius.Perfectness
 public import WeilConjectures.EtaleCohomology.PoincareDuality.Frobenius.PointPairing
+public import WeilConjectures.EtaleCohomology.PoincareDuality.Frobenius.ProperUnitPairing
 public import WeilConjectures.EtaleCohomology.PoincareDuality.Frobenius.Reciprocity
 public import WeilConjectures.EtaleCohomology.PoincareDuality.Frobenius.SelfInjective
 public import WeilConjectures.EtaleCohomology.PoincareDuality.Frobenius.TraceCupNondegenerate
@@ -9153,6 +9155,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.ExchangeMate
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ExtFrobenius
 public import WeilConjectures.SixFunctors.ProEtale.Adic.Extension
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ExtensionByZero
+public import WeilConjectures.SixFunctors.ProEtale.Adic.ExtensionByZeroAdicBaseChange
 public import WeilConjectures.SixFunctors.ProEtale.Adic.FiniteAdicCup
 public import WeilConjectures.SixFunctors.ProEtale.Adic.FiniteAdicCupNondegenerate
 public import WeilConjectures.SixFunctors.ProEtale.Adic.FiniteAdicDuality
@@ -9584,6 +9587,8 @@ public import WeilConjectures.WeilSheaf.CohomologyResolution
 public import WeilConjectures.WeilSheaf.CohomologySequence
 public import WeilConjectures.WeilSheaf.CohomologyShift
 public import WeilConjectures.WeilSheaf.CompactSupportAdicConstant
+public import WeilConjectures.WeilSheaf.CompactSupportExt
+public import WeilConjectures.WeilSheaf.CompactSupportExtFrobenius
 public import WeilConjectures.WeilSheaf.ComplexWeights
 public import WeilConjectures.WeilSheaf.Constant
 public import WeilConjectures.WeilSheaf.ConstantTwistCohomology
