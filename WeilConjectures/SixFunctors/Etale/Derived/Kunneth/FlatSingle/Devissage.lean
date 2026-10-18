@@ -9,6 +9,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.FlatSingle.Finit
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.FlatSingle.BaseChange
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
 public import WeilConjectures.ConstructibleSheaf.FilteredColimit
+public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.FlatSingle.Coefficients
 public import WeilConjectures.ConstructibleSheaf.FiniteTypePushforward
 
 /-!
@@ -98,11 +99,39 @@ theorem isIso_tensorBaseChangeMap_lowerStar_unit {K : Type u} [Field K]
     (isIso_derivedBaseChangeMap_app_upperStar_singleFunctor Λ a b p f' h e g sq₁ sq₂ π _ _ sqπ
       _ _ sq 𝓕)
 
+/-- **Dévissage of the flat sheaf**, for coefficient sheaves killed by the Jacobson radical `J` of
+`Λ`: for `X` of finite type over a field and `h` quasi-compact and quasi-separated, if the base
+change map `Lp^* 𝓔 ⊗ᴸ Lf'^* Rg_* 𝓕 ⟶ Rh_* (Lh^* Lp^* 𝓔 ⊗ᴸ Le^* 𝓕)` is an isomorphism for the
+pushforwards `𝓔 = π_* Λ` along finite morphisms `π`, it is an isomorphism for every flat `𝓔` and
+every sheaf `𝓕` killed by `J`. The homology sheaves of both sides then only depend on `𝓔 / J𝓔`,
+which is a filtered colimit of constructible sheaves killed by `J` (blueprint `lem-kun-03sa`), and
+these embed into finite sums of pushforwards along finite morphisms of constant sheaves killed by
+`J`, direct summands of sums of `π_* (Λ ⧸ J)`. -/
+theorem isIso_tensorBaseChangeMap_singleFunctor_of_flat_of_lowerStar_of_smul_eq_zero
+    {K : Type u} [Field K]
+    {X X' S' T Y : Scheme.{u}} (a : X ⟶ Spec (.of K)) [LocallyOfFiniteType a] [QuasiCompact a]
+    (p : X' ⟶ X) (f' : X' ⟶ S') (h : Y ⟶ X') (e : Y ⟶ T) (g : T ⟶ S') [QuasiCompact h]
+    [QuasiSeparated h] (w : h ≫ f' = e ≫ g)
+    (hgood : ∀ {Xᵢ : Scheme.{u}} (π : Xᵢ ⟶ X) [IsFinite π]
+      (𝓕 : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)),
+      IsIso (tensorBaseChangeMap (ModuleCat.{u + 1} Λ) h e f' g w
+        (L((p)^*[ModuleCat.{u + 1} Λ]).obj ((DerivedCategory.singleFunctor _ 0).obj
+          ((π)_*[ModuleCat.{u + 1} Λ].obj (𝟙_ _))))
+        ((DerivedCategory.singleFunctor _ 0).obj 𝓕)))
+    (𝓔 : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (h𝓔 : ObjectProperty.flat 𝓔)
+    (𝓕 : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ))
+    (h𝓕 : ∀ x ∈ Ring.jacobson Λ, x • 𝟙 𝓕 = 0) :
+    IsIso (tensorBaseChangeMap (ModuleCat.{u + 1} Λ) h e f' g w
+      (L((p)^*[ModuleCat.{u + 1} Λ]).obj ((DerivedCategory.singleFunctor _ 0).obj 𝓔))
+      ((DerivedCategory.singleFunctor _ 0).obj 𝓕)) :=
+  sorry
+
 /-- **Dévissage of the flat sheaf** in the proof of blueprint `lem-kun-0f1j`: for `X` of finite
 type over a field, `h` quasi-compact and quasi-separated, if the base change map
 `Lp^* 𝓔 ⊗ᴸ Lf'^* Rg_* 𝓕 ⟶ Rh_* (Lh^* Lp^* 𝓔 ⊗ᴸ Le^* 𝓕)` is an isomorphism for the
 pushforwards `𝓔 = π_* Λ` along finite morphisms `π` and every sheaf `𝓕`, it is an isomorphism for
-every flat sheaf `𝓔` and every sheaf `𝓕`. -/
+every flat sheaf `𝓔` and every sheaf `𝓕`
+(`AlgebraicGeometry.Etale.isIso_tensorBaseChangeMap_singleFunctor_of_smul_eq_zero`). -/
 theorem isIso_tensorBaseChangeMap_singleFunctor_of_flat_of_lowerStar {K : Type u} [Field K]
     {X X' S' T Y : Scheme.{u}} (a : X ⟶ Spec (.of K)) [LocallyOfFiniteType a] [QuasiCompact a]
     (p : X' ⟶ X) (f' : X' ⟶ S') (h : Y ⟶ X') (e : Y ⟶ T) (g : T ⟶ S') [QuasiCompact h]
@@ -118,7 +147,9 @@ theorem isIso_tensorBaseChangeMap_singleFunctor_of_flat_of_lowerStar {K : Type u
     IsIso (tensorBaseChangeMap (ModuleCat.{u + 1} Λ) h e f' g w
       (L((p)^*[ModuleCat.{u + 1} Λ]).obj ((DerivedCategory.singleFunctor _ 0).obj 𝓔))
       ((DerivedCategory.singleFunctor _ 0).obj 𝓕)) :=
-  sorry
+  isIso_tensorBaseChangeMap_singleFunctor_of_smul_eq_zero h e f' g w _
+    (fun 𝓕 h𝓕 ↦ isIso_tensorBaseChangeMap_singleFunctor_of_flat_of_lowerStar_of_smul_eq_zero Λ
+      a p f' h e g w hgood 𝓔 h𝓔 𝓕 h𝓕) 𝓕
 
 end Etale
 

@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.TensorBaseChange
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
 public import WeilConjectures.Mathlib.CategoryTheory.Triangulated.Functor
 public import Mathlib.Algebra.Homology.DerivedCategory.SingleTriangle
 public import Mathlib.RingTheory.Jacobson.Semiprimary
@@ -51,10 +52,11 @@ noncomputable def smulLift {C : Type*} [Category C] [Preadditive C] [Linear Λ C
 lemma smul_id_kernel_smulLift {C : Type*} [Category C] [Abelian C] [Linear Λ C]
     (I : Ideal Λ) [Finite I] (F : C) {x : Λ} (hx : x ∈ I) :
     x • 𝟙 (kernel (smulLift I F)) = 0 := by
-  rw [← cancel_mono (kernel.ι (smulLift I F)), zero_comp, Linear.smul_comp, Category.id_comp,
-    ← Category.comp_id (kernel.ι _), ← Linear.comp_smul]
-  have := kernel.condition (smulLift I F) =≫ biproduct.π _ ⟨x, hx⟩
-  simpa [smulLift] using this
+  have h2 := kernel.condition (smulLift I F) =≫ biproduct.π _ ⟨x, hx⟩
+  rw [Category.assoc, smulLift, biproduct.lift_π, zero_comp, Linear.comp_smul,
+    Category.comp_id] at h2
+  rw [← cancel_mono (kernel.ι (smulLift I F)), zero_comp, Linear.smul_comp, Category.id_comp]
+  exact h2
 
 /-- If `F` is killed by `I^{m+1}`, the cokernel of the inclusion of the subobject killed by `I` is
 killed by `I^m`. -/
@@ -64,9 +66,9 @@ lemma smul_id_cokernel_kernel_smulLift {C : Type*} [Category C] [Abelian C] [Lin
     x • 𝟙 (cokernel (kernel.ι (smulLift I F))) = 0 := by
   have hl : (x • 𝟙 F) ≫ smulLift I F = 0 := by
     ext y
-    simp only [smulLift, Category.assoc, biproduct.lift_π, zero_comp, Linear.smul_comp,
+    simp only [smulLift, biproduct.lift_π, zero_comp, Linear.smul_comp,
       Category.id_comp, Linear.comp_smul, Category.comp_id, smul_smul]
-    exact hF _ (by rw [pow_succ']; exact Ideal.mul_mem_mul y.2 hx)
+    exact hF _ (by rw [pow_succ]; exact Ideal.mul_mem_mul hx y.2)
   rw [← cancel_epi (cokernel.π (kernel.ι (smulLift I F))), comp_zero, Linear.comp_smul,
     Category.comp_id, ← Category.id_comp (cokernel.π _), ← Linear.smul_comp,
     ← kernel.lift_ι _ _ hl, Category.assoc, cokernel.condition, comp_zero]
