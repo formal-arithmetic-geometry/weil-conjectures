@@ -10,7 +10,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriekCanonicalMaps
 /-!
 # Coherence of the composition law and the projection formula
 
-Three coherence properties of the compactly supported direct image `Rf_!` on the unbounded
+Two coherence properties of the compactly supported direct image `Rf_!` on the unbounded
 derived categories of the small étale sites, with finite coefficients, recorded here without
 proof as the corresponding blueprint nodes of the six-functor chapters:
 
@@ -20,12 +20,12 @@ proof as the corresponding blueprint nodes of the six-functor chapters:
 * there is a composition law `Rh_! ≅ Rf_! ⋙ Rg_!` for `h = f ≫ g` (`sk-thm-sf-comp-composition`)
   compatible with the projection maps (`sk-prop-sf-pf-coherence`) and with the compactly
   supported base change maps `Ex_!` of pasted cartesian squares (`sk-thm-sf-package` (2))
-  (`AlgebraicGeometry.Etale.exists_rightDerivedLowerShriekCompIso`);
-* for an étale `u`, the derived pullback commutes with the derived internal hom
-  (`AlgebraicGeometry.Etale.isIso_ihomComparison_leftDerivedUpperStar_of_etale`,
-  `def-weil-derived-pullback-tensor-hom`).
+  (`AlgebraicGeometry.Etale.exists_rightDerivedLowerShriekCompIso`).
 
-They are the inputs of the composition and étale-locality statements for cohomologically smooth
+Together with the commutation of the derived pullback along an étale morphism with the derived
+internal hom (`AlgebraicGeometry.Etale.isIso_ihomComparison_leftDerivedUpperStar_of_etale`, in
+`WeilConjectures.SixFunctors.Etale.Derived.UpperStarInternalHom`), they are the inputs of the
+composition and étale-locality statements for cohomologically smooth
 morphisms (`lem-pur-co-smooth-composition`, `lem-pur-co-smooth-etale-locality`).
 -/
 
@@ -101,20 +101,6 @@ theorem exists_rightDerivedLowerShriekCompIso :
         Adjunction.ExchangeCompCompatible (rightDerivedLowerShriekBaseChangeMap Λ sqf)
           (rightDerivedLowerShriekBaseChangeMap Λ sqg) (rightDerivedLowerShriekBaseChangeMap Λ sqh)
           (E f g h w) (E f' g' h' w')) :=
-  sorry
-
-/-- Blueprint `def-weil-derived-pullback-tensor-hom`: Derived pullback, tensor product, and
-internal Hom.
-
-For an étale morphism `u : U ⟶ X`, the derived pullback commutes with the derived internal hom:
-the comparison `Lu^* RHom(M, N) ⟶ RHom(Lu^* M, Lu^* N)` of the monoidal functor `Lu^*`
-(`CategoryTheory.Functor.LaxMonoidal.ihomComparison`) is an isomorphism. The pullback along `u`
-is the restriction to the slice site `X_ét/U`, which has an exact left adjoint, so it preserves
-K-injective complexes, and the sheaf internal hom commutes with restriction to `U`. -/
-theorem isIso_ihomComparison_leftDerivedUpperStar_of_etale {U X : Scheme.{u}} (u : U ⟶ X)
-    [Etale u] (M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
-    letI := leftDerivedUpperStarMonoidal (ModuleCat.{u + 1} Λ) u
-    IsIso (Functor.LaxMonoidal.ihomComparison L((u)^*[ModuleCat.{u + 1} Λ]) M).natTrans :=
   sorry
 
 end Etale

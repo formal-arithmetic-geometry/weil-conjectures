@@ -5,6 +5,9 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.AlgebraicGeometry.Curve.DivisorIdealSheaf
+
+
 public import Mathlib.RingTheory.FractionalIdeal.Operations
 public import Mathlib.RingTheory.KrullDimension.Basic
 public import Mathlib.RingTheory.Ideal.GoingUp
