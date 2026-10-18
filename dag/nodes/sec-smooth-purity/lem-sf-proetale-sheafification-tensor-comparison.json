@@ -1,0 +1,153 @@
+{
+ "id": "lem-sf-proetale-sheafification-tensor-comparison",
+ "kind": "statement",
+ "title": "Tensor/sheafification comparison in the pro-etale site universes",
+ "statement": "Let C be a category with objects in Type (u+1) and morphisms in Type u, J a Grothendieck topology, O a presheaf of commutative rings in Type (u+1), and R a sheaf of such rings. Assume abelian-group sheafification in this coefficient universe and its locally bijective criterion. Let alpha:O -> R be locally injective and locally surjective. Let a_alpha be module sheafification [lem-pc-sites-module-sheafification-interface] and use the intrinsic sheaf tensor [def-pur-sheaf-tensor-product]. There is a natural isomorphism a_alpha(F) tensor_R a_alpha(G) -> a_alpha(F tensor_O G), characterized by its inverse sending the sheafification of f tensor g to the tensor of the two sheafification units, with the canonical tensorObjIsoSheafification identification. This is the canonical tensor comparison, simultaneously natural in F and G.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 0GMW, lemma-sheafification-tensor; Tag 03CY, lemma-sheafification-presheaf-modules"
+ },
+ "stmt_deps": [
+  "lem-pc-sites-module-sheafification-interface",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "Construct the sheaf tensor universal property directly from the sectionwise tensor universal property and the module sheafification adjunction. A restriction-compatible bilinear family gives a presheaf tensor morphism, which factors uniquely through sheafification. Pure tensors and the adjunction prove uniqueness.",
+   "uses": [
+    "lem-pc-sites-module-sheafification-interface",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 0GMW, lemma-sheafification-tensor; Tag 03CY, lemma-sheafification-presheaf-modules"
+   }
+  },
+  {
+   "text": "Tensor the two sheafification units sectionwise; their semilinearity makes this balanced over O. Sheafify the resulting morphism and use tensorObjIsoSheafification to obtain c:a_alpha(F tensor G) -> a_alpha(F) tensor a_alpha(G), with the displayed pure-tensor formula.",
+   "uses": [
+    "lem-pc-sites-module-sheafification-interface",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 0GMW, lemma-sheafification-tensor; Tag 03CY, lemma-sheafification-presheaf-modules"
+   }
+  },
+  {
+   "text": "Extend the original pure-tensor pairing uniquely across both module sheafification units by the declared bilinear extension theorem. The universal property from step 1 gives a morphism in the opposite direction.",
+   "uses": [
+    "lem-pc-sites-module-sheafification-bilinear-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 0GMW, lemma-sheafification-tensor; Tag 03CY, lemma-sheafification-presheaf-modules"
+   }
+  },
+  {
+   "text": "Check both inverse identities after precomposition with the units and on pure tensors. Sheafification uniqueness and uniqueness of bilinear extension prove equality. The same argument proves naturality in both variables. For the final tensorObjIsoSheafification naturality calculation use the inverse counit naturality and the monoidal tensorator naturality, without unfolding the localized monoidal structure.",
+   "uses": [
+    "lem-pc-sites-module-sheafification-interface",
+    "def-pur-sheaf-tensor-product",
+    "lem-pc-sites-module-sheafification-bilinear-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 0GMW, lemma-sheafification-tensor; Tag 03CY, lemma-sheafification-presheaf-modules"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-sites-module-sheafification-interface",
+  "def-pur-sheaf-tensor-product",
+  "lem-pc-sites-module-sheafification-bilinear-extension"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 0GMW, the bilinear universal-property argument, with separate site object and Hom universes"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Sheafification of modules over a locally bijective presheaf ring map commutes with tensor products on a site with different object and morphism universes",
+   "results": "Eight hits, including PresheafOfModules.sheafification, sheafifyMap, toSheafify, sheafification_map and Sheafify.map_smul_eq. None states the tensor comparison.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Module sheafification along a locally bijective map from a presheaf of rings commutes with tensor products when the site object and Hom universes are different",
+   "results": "Eight generic module-sheafification, scalar-action and hom-equivalence hits; no tensor comparison.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "PresheafOfModules.sheafification",
+   "results": "Twelve hits for the sheafification adjunction, underlying presheaf and finite-limit preservation; no tensor comparison.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "sheafification.*tensor|tensor.*sheafification",
+   "results": "No matching Mathlib declaration. The source/project tensor comparison is proved only when the site object and Hom universes coincide; this declaration covers the pro-etale universe choice.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ProEtaleResidueTorTest",
+  "date": "2026-10-18",
+  "group": "G3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-proetale-residue-tor-test",
+   "place": "Proof, field-module tensor calculation: tensor comparison for the constant presheaf ring before sheafification",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-localization",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ProEtaleSheafificationTensorComparison",
+  "file": "lean/Sheaf/Paper/ProEtaleSheafificationTensorComparison.lean",
+  "declaration": "PresheafOfModules.exists_sheafificationTensorIso_proEtaleUniverses",
+  "statement": "theorem exists_sheafificationTensorIso_proEtaleUniverses\n    (α : (O ⋙ forget₂ CommRingCat.{u + 1} RingCat.{u + 1}) ⟶\n      ((sheafCompose J (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R).obj)\n    [Presheaf.IsLocallyInjective J α] [Presheaf.IsLocallySurjective J α] :\n    letI := SheafOfModules.monoidalCategory R\n    ∃ e : (sheafification α).prod (sheafification α) ⋙ tensor _ ≅\n        tensor (PresheafOfModules.{u + 1}\n          (O ⋙ forget₂ CommRingCat.{u + 1} RingCat.{u + 1})) ⋙\n          sheafification α,\n      ∀ (F G : PresheafOfModules.{u + 1} (O ⋙ forget₂ CommRingCat.{u + 1} RingCat.{u + 1}))\n        (U : Cᵒᵖ) (f : F.obj U) (g : G.obj U),\n        (e.inv.app (F, G)).val.app U\n          (((sheafificationAdjunction α).unit.app (F ⊗ G)).app U\n            (f ⊗ₜ[O.obj U] g)) =\n        (SheafOfModules.tensorObjIsoSheafification\n          ((sheafification α).obj F) ((sheafification α).obj G)).inv.val.app U\n            (((sheafificationAdjunction\n              (𝟙 ((sheafCompose J\n                (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R).obj)).unit.app\n              (((sheafification α).obj F).val ⊗ ((sheafification α).obj G).val)).app U\n                ((((sheafificationAdjunction α).unit.app F).app U f) ⊗ₜ[R.obj.obj U]\n                  (((sheafificationAdjunction α).unit.app G).app U g)))",
+  "branch": "sheaf-dag",
+  "by": "G3",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261018T071153-L-1667997",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261018T071153-L-1667997",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

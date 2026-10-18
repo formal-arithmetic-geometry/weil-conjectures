@@ -19,44 +19,45 @@
  ],
  "proof": [
   {
-   "text": "If $K$ has Tor amplitude in $[a,b]$, substitute the degree-zero $A_T$-module $\\kappa_T$ for $M$ in [def-weil-proetale-tor-amplitude]. This gives the required vanishing of $\\mathcal H^r(K\\otimes_A^L\\kappa_T)$ outside the interval.",
+   "text": "Substitute the constant residue module in degree zero in the definition of Tor amplitude. This proves the forward implication for the chosen K-flat resolution.",
    "uses": [
-    "def-weil-proetale-tor-amplitude"
+    "def-weil-proetale-tor-amplitude",
+    "def-weil-derived-tensor"
    ],
    "elementary": true,
    "source": {
     "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-localization/lem-sf-proetale-residue-tor-test.md",
-    "place": "Proof, first sentence"
+    "place": "node lem-sf-proetale-residue-tor-test, order 1867"
    }
   },
   {
-   "text": "For the converse choose a representing complex for $K$ and a K-flat resolution $P\\to K$ with every $P^q$ flat, using [lem-pc-kflat-resolution] on the ringed site $(T_{\\mathrm{proet}},A_T)$. By [def-weil-derived-tensor], for every module sheaf $M$ the complex $P\\otimes_{A_T}M$ represents $K\\otimes_A^LM$. Set $C=P\\otimes_{A_T}\\kappa_T$. The hypothesis is $\\mathcal H^r(C)=0$ for $r\\notin[a,b]$. Neither $P$ nor $C$ is assumed bounded.",
+   "text": "Choose the recorded K-flat resolution Q -> K with flat terms. Prove invariance of tensor homology under a derived isomorphism between K-flat complexes: resolve the other tensor factor, use mapping cones and K-flatness to preserve quasi-isomorphisms in either variable, and descend homology of tensor with that resolution through localization at quasi-isomorphisms. The total-tensor/single-complex isomorphism identifies tensor with a module in degree zero with ordinary termwise tensor. Apply this comparison to P and Q to transfer the residue vanishing hypothesis to Q.",
    "uses": [
     "lem-pc-kflat-resolution",
-    "def-weil-derived-tensor"
+    "def-pc-kflat-complex",
+    "def-weil-derived-tensor",
+    "def-pur-sheaf-tensor-product"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 06YS, lemma-K-flat-resolution; blueprint Proof, converse"
+    "place": "Tags 06YN and 06YS; explicit mapping-cone and localization argument"
    }
   },
   {
-   "text": "Let $N$ be any sheaf of $\\kappa_T$-modules. Compute tensors over the constant presheaf $U\\mapsto\\kappa$, before sheafification: [lem-pc-sites-module-sheafification-tensor] identifies the sheafification of $U\\mapsto C^q(U)\\otimes_\\kappa N(U)$ with $C^q\\otimes_{\\kappa_T}N$. For each $U$, tensoring vector spaces with $N(U)$ preserves exactness: split a vector-space sequence by lifting a basis of its quotient, so after tensoring it is still a direct-sum sequence. For the section complex, put $Z^r=\\ker d^r$ and $B^r=\\operatorname{im}d^{r-1}$. Exactness of tensor applied to $0\\to Z^r\\to C^r(U)\\to B^{r+1}\\to0$ and $0\\to B^r\\to Z^r\\to H^r(C(U))\\to0$ identifies the cycles after tensor with $Z^r\\otimes_\\kappa N(U)$ and the boundaries with $B^r\\otimes_\\kappa N(U)$. Hence the canonical map $[z]\\otimes y\\mapsto[z\\otimes y]$, which commutes with restrictions independently of the chosen splittings, gives\n$$H^r(C(U)\\otimes_\\kappa N(U))=H^r(C(U))\\otimes_\\kappa N(U).$$\nBy [lem-weil-pbc-site-module-presheaf-sheafification-exact], sheafification commutes with cohomology. Sheafify the preceding identity and apply the tensor-sheafification comparison once more to obtain\n$$\\mathcal H^r(C\\otimes_{\\kappa_T}N)\\cong\\mathcal H^r(C)\\otimes_{\\kappa_T}N.$$\nThus this is zero outside $[a,b]$. Finally the maps $(x\\otimes t)\\otimes y\\mapsto x\\otimes ty$ and $x\\otimes y\\mapsto(x\\otimes1)\\otimes y$ are inverse balanced maps\n$$(P\\otimes_{A_T}\\kappa_T)\\otimes_{\\kappa_T}N\\cong P\\otimes_{A_T}N.$$\nThey commute with restriction and differentials, hence define inverse maps of the sheafified complexes by [def-pur-sheaf-tensor-product]. Consequently $\\mathcal H^r(K\\otimes_A^LN)=0$ outside $[a,b]$. This uses ordinary tensor on $C$, and does not assert that an arbitrary section ring $\\kappa_T(U)$ is a field.",
+   "text": "The image r of the uniformizer has r^n=0 in A. Its principal ideal is maximal because the uniformizer generates the maximal ideal of the coefficient DVR and n>=1. For every module sheaf annihilated by r, apply the one-degree ordinary tensor calculation [lem-sf-proetale-residue-module-tensor-homology] to Q and the transferred residue vanishing.",
    "uses": [
-    "lem-pc-sites-module-sheafification-tensor",
-    "lem-weil-pbc-site-module-presheaf-sheafification-exact",
-    "def-pur-sheaf-tensor-product",
-    "def-weil-derived-tensor"
+    "lem-weil-l-adic-extension-integers-dvr",
+    "lem-sf-proetale-residue-module-tensor-homology"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 0GMW, lemma-sheafification-tensor; Tag 03EI, lemma-sheafification-exact; blueprint Proof, field-module calculation"
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-localization/lem-sf-proetale-residue-tor-test.md",
+    "place": "node lem-sf-proetale-residue-tor-test, order 1867"
    }
   },
   {
-   "text": "Let $M$ be an arbitrary $A_T$-module sheaf. Define $F_sM=\\operatorname{im}(\\varpi_E^s:M\\to M)$ for $0\\leq s\\leq n$. Then $F_0M=M$ and $F_nM=0$ since $\\varpi_E^n=0$ in $A$. Each quotient $G_s=F_sM/F_{s+1}M$ is killed by $\\varpi_E$: locally a section of $F_sM$ is $\\varpi_E^s m$, whose product with $\\varpi_E$ lies in $F_{s+1}M$. Its $A_T$-action therefore factors through $\\kappa_T$, so step 3 applies to $G_s$. For each $0\\leq s<n$, tensor $0\\to F_{s+1}M\\to F_sM\\to G_s\\to0$ termwise with $P$. Flatness of each $P^q$ means precisely exactness of this tensor functor by [def-pc-flat-sheaf-modules], giving a degreewise short exact sequence of complexes. By [lem-weil-pbc-complex-ses-homology-long-exact], the sequence\n$$\\mathcal H^r(P\\otimes F_{s+1}M)\\longrightarrow\\mathcal H^r(P\\otimes F_sM)\\longrightarrow\\mathcal H^r(P\\otimes G_s)$$\nis exact. Descending induction on $s$, starting with $P\\otimes F_nM=0$, shows that the middle term vanishes for every $r\\notin[a,b]$: its adjacent terms are zero by the induction hypothesis and step 3. At $s=0$, [def-weil-derived-tensor] identifies the result with $\\mathcal H^r(K\\otimes_A^LM)=0$. Since $M$ was arbitrary, [def-weil-proetale-tor-amplitude] gives Tor amplitude in $[a,b]$.",
+   "text": "For a natural scalar endomorphism eta and an extension-closed property W containing zero and all eta-killed objects, prove by induction that eta^n X=0 implies W(X). In the induction take I=image(eta_X): eta^(n-1) kills I, while eta kills coker(I -> X), by naturality and the image/cokernel identities. Apply this to W(M)=vanishing of degree-i homology of termwise Q tensor M. Each term of Q is flat, so a short exact sequence of modules gives a degreewise short exact sequence of tensor complexes; the exact homology segment makes W extension-closed. Hence Q tensor M vanishes for every M outside the interval. Compare Q with each K-flat resolution of each representative of K using the comparison in step 2. This supplies every quantifier in the unchanged definition of Tor amplitude.",
    "uses": [
     "def-pc-flat-sheaf-modules",
     "lem-weil-pbc-complex-ses-homology-long-exact",
@@ -66,24 +67,25 @@
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/homology.tex",
-    "place": "Tag 0117, lemma-long-exact-sequence-cochain; blueprint Proof, uniformizer filtration"
+    "place": "Tag 0117; blueprint uniformizer filtration proof"
    }
   }
  ],
  "proof_deps": [
   "def-weil-proetale-tor-amplitude",
-  "lem-pc-kflat-resolution",
   "def-weil-derived-tensor",
-  "lem-pc-sites-module-sheafification-tensor",
-  "lem-weil-pbc-site-module-presheaf-sheafification-exact",
+  "lem-pc-kflat-resolution",
+  "def-pc-kflat-complex",
   "def-pur-sheaf-tensor-product",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-sf-proetale-residue-module-tensor-homology",
   "def-pc-flat-sheaf-modules",
   "lem-weil-pbc-complex-ses-homology-long-exact"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-localization/lem-sf-proetale-residue-tor-test.md",
-  "place": "Proof, with explicit K-flat and presheaf-sheafification computations using Stacks Tags 06YS, 0GMW, 03EI and 0117"
+  "place": "G3 stage-3 proof: K-flat comparison, one-degree field-module calculation, and categorical nilpotent image/cokernel induction"
  },
  "mathlib_searches": [
   {
@@ -224,8 +226,6 @@
  },
  "tool_uses": [
   "lem-pc-kflat-resolution",
-  "lem-pc-sites-module-sheafification-tensor",
-  "lem-weil-pbc-site-module-presheaf-sheafification-exact",
   "lem-weil-pbc-complex-ses-homology-long-exact"
  ],
  "reviewed": {
@@ -253,5 +253,15 @@
   "group": "NM",
   "result": "pass",
   "note": "Wrote review.md. Checked immutable statements, dependencies, sources, exact declarations, universes, edge cases, docstrings, report sections, and verbatim signature. Snapshot compilation passed through scompile.py's local side overlay without diagnostics. No defects found; no clone or branch-head changes made."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261018T071153-L-1667997",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
