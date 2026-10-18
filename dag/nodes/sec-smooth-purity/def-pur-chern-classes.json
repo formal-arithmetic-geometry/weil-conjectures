@@ -2,7 +2,7 @@
  "id": "def-pur-chern-classes",
  "kind": "definition",
  "title": "Ordinary finite-coefficient Chern classes",
- "statement": "Use [def-pur-conventions] at finite coefficients $A=A_{E,n}$ and ordinary cohomology $H^{2i}(T,A(i))$ of [def-pur-support-cohomology] with full support. Let $F$ be a locally free module of rank $r$ on a separated finite-type $k$-scheme $T$. For $r>0$ put $q:P=\\mathbf P_T(F)\\to T$ in the quotient convention [lem-pur-projective-bundle-tautological-geometry], and put $h=c_{1,A}(\\mathcal O_P(1))$ [lem-pur-kummer-additivity]. Expand $h^r$ uniquely in the basis $1,h,\\ldots,h^{r-1}$ using the inverse of the isomorphism [thm-pur-projective-bundle-formula] on ordinary cohomology. Define $c_i(F)\\in H^{2i}(T,A(i))$ for $1\\leq i\\leq r$ by the signed coefficients in\n$$h^r-q^*c_1(F)h^{r-1}+q^*c_2(F)h^{r-2}-\\cdots+(-1)^rq^*c_r(F)=0.$$\nProducts are the full-support instance of [def-pur-supported-cup]. Set $c_0(F)=1$ and $c_i(F)=0$ for $i>r$; for $r=0$ these conventions define all the classes without forming $\\mathbf P(0)$. These are ordinary Chern classes, defined without reference to a section, a supported Euler class, or a purity isomorphism.",
+ "statement": "Use [def-pur-conventions] at finite coefficients $A=A_{E,n}$, with $n\\geq1$. Write $H^m(T,A(j))$ for the ordinary pro-etale cohomology of [def-pur-support-cohomology] with full support $T$, and use the full-support cup product of [def-pur-supported-cup], with the canonical Tate-twist identifications of [def-pur-conventions]. Let $T$ be a separated finite-type $k$-scheme and let $F$ be a locally free $\\mathcal O_T$-module of constant rank $r\\geq0$ [def-amb-finite-locally-free-module].\n\nFor $r>0$, put $q:P=\\mathbf P_T(F)\\to T$ in the quotient convention [lem-pur-projective-bundle-tautological-geometry] and put $h=c_{1,A}(\\mathcal O_P(1))$ [lem-pur-kummer-additivity]. Use the degree-$2r$, twist-$r$ cohomology instance of [thm-pur-projective-bundle-formula]:\n$$\\Phi_{F,r}:\\bigoplus_{j=0}^{r-1}H^{2(r-j)}(T,A(r-j))\\xrightarrow{\\sim}H^{2r}(P,A(r)),\\qquad (a_j)_j\\longmapsto\\sum_{j=0}^{r-1}q^*a_j\\cup h^j.$$\nHere $h^0=1$, and the powers and products are the full-support cup products just specified. Set $(a_0,\\ldots,a_{r-1})=\\Phi_{F,r}^{-1}(h^r)$, and for $1\\leq i\\leq r$ define\n$$c_i(F):=(-1)^{i+1}a_{r-i}\\in H^{2i}(T,A(i)).$$\nEquivalently, these are the signed coefficients in\n$$h^r-q^*c_1(F)\\cup h^{r-1}+q^*c_2(F)\\cup h^{r-2}-\\cdots+(-1)^rq^*c_r(F)=0.$$\nSet $c_0(F)=1\\in H^0(T,A)$ and $c_i(F)=0\\in H^{2i}(T,A(i))$ for $i>r$. For $r=0$ these conventions define all the classes without forming $\\mathbf P(0)$. These are ordinary finite-coefficient Chern classes, defined without reference to a section, a supported Euler class, or a purity isomorphism.",
  "source": {
   "document": "literature/stacks-project/weil.tex",
   "place": "Tag 0FI5, proposition-chern-class, defining projective-bundle relation; blueprint Step 4 (L4)"
@@ -54,10 +54,38 @@
    "results": "{\"t\": \"2026-10-18T02:15:52Z\", \"tool\": \"loogle\", \"query\": \"\\\"Chern\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Lean.Meta.MatcherApp.matcherName\", \"Lean.Meta.Match.MkMatcherInput.matcherName\"], \"digest\": \"2e182d11eee43268\"}",
    "date": "2026-10-18",
    "verdict": "no match: hits concern different notions; none states this supported-cohomology or scheme-theoretic construction."
+  },
+  {
+   "tool": "grep",
+   "query": "Chern|chernClass|chern_class",
+   "results": "{\"t\": \"2026-10-18T02:35:08Z\", \"tool\": \"grep\", \"query\": \"Chern|chernClass|chern_class\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Mathlib/Tactic/DeriveTraversable.lean\", \"Mathlib/Tactic/DeriveTraversable.lean\", \"Mathlib/Probability/Moments/SubGaussian.lean\", \"Mathlib/Probability/Moments/SubGaussian.lean\", \"Mathlib/Probability/Moments/SubGaussian.lean\", \"Mathlib/Probability/Moments/SubGaussian.lean\", \"Mathlib/Probability/Moments/SubGaussian.lean\", \"Mathlib/Probability/Moments/Basic.lean\"], \"digest\": \"fb8c568b029dfc35\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: all 12 hits are matcherName or Chernoff probability bounds, not Chern classes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Characteristic classes of a locally free sheaf defined by the coefficients of the projective bundle cohomology relation",
+   "results": "{\"t\": \"2026-10-18T02:35:08Z\", \"tool\": \"leansearch\", \"query\": \"Characteristic classes of a locally free sheaf defined by the coefficients of the projective bundle cohomology relation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.free\", \"SheafOfModules.ιFree\", \"IsLocalFrameOn.coeff\", \"CategoryTheory.ProjectiveResolution.extEquivCohomologyClass\", \"IsLocalFrameOn.coeff.congr_simp\", \"AlgebraicGeometry.Proj.mul_apply\", \"SheafOfModules.freeCofan\", \"AlgebraicGeometry.ProjectiveSpectrum.StructureSheaf.structureSheafInType\"], \"digest\": \"b5ad1ddd85b47c4f\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: free sheaves, local-frame coefficients, generic Ext/cohomology and Proj structure sheaves do not define finite-coefficient Chern classes."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Chern\"",
+   "results": "{\"t\": \"2026-10-18T02:35:08Z\", \"tool\": \"loogle\", \"query\": \"\\\"Chern\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Lean.Meta.MatcherApp.matcherName\", \"Lean.Meta.Match.MkMatcherInput.matcherName\"], \"digest\": \"2e182d11eee43268\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: both hits are Lean matcherName declarations, not characteristic classes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Chern classes of a vector bundle in etale cohomology defined by the projective bundle relation",
+   "results": "{\"t\": \"2026-10-18T02:35:10Z\", \"tool\": \"leanfinder\", \"query\": \"Chern classes of a vector bundle in etale cohomology defined by the projective bundle relation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"VectorBundle\", \"Algebra.FormallySmooth.projective_kaehlerDifferential\", \"CommRing.relPic\", \"CategoryTheory.PresheafOfGroups.OneCocycle.class\", \"CategoryTheory.PresheafOfGroups.H1\", \"ContinuousCohomology.MultiInd.complex\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale\", \"Algebra.H1Cotangent.δ\"], \"digest\": \"7c9e93d36e25810d\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: topological vector bundles, differentials, Picard groups and generic cocycle/cohomology constructions do not state the projective-bundle Chern-class construction."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "thm-pur-localized-top-chern",
@@ -69,10 +97,25 @@
  "blueprint": {
   "from": {
    "node": "thm-pur-localized-top-chern",
-   "place": "Tag 0FI5, proposition-chern-class, defining projective-bundle relation; blueprint Step 4 (L4)",
+   "place": "Step 4 (L4): \"the usual splitting-principle definition of c_r(F)\"; ordinary Chern classes are constructed by the projective-bundle relation of Stacks Tag 0FI5, equation-chern-classes.",
    "via": []
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "def-pur-chern-classes",
+  "worker": "stage1",
+  "summary": "Audited the definition against Stacks Tag 0FI5 (proposition-chern-class, equation-chern-classes), the current blueprint ancestor Step 4 (L4), and all seven existing statement dependencies. Made constant rank, the pro-etale/full-support interpretation, the graded coefficient map and its signed inverse coordinates explicit. The definition uses the existing projective-bundle isomorphism, which determines every coefficient uniquely; it introduces no arbitrary existence choice. Preserved the defining relation and rank-zero conventions, all inherited search records and metadata. No new nodes and no attachment: no project Chern-class declaration was found. No theorem proof is added to a definition.",
+  "blueprint": "Supplies the ordinary Chern classes named in main-20261015 thm-pur-localized-top-chern proof Step 4 (L4), by the defining projective-bundle relation of Stacks Tag 0FI5. It does not assert or reprove the localized-class construction, the flag formula, or any purity theorem."
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-NH-7aff6e2ec",
+  "group": "NH",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NH-7aff6e2ec (reviewer sub-agent of L); spot-checked: Read the item in full, all 7 statement dependencies, both citers (thm-pur-localized-top-chern Steps 0/10 and lem-pur-chern-flag-formula), unit sk-prop-an, Stacks weil.tex proposition-chern-class (0FI5) with equation-chern-classes, constructions.tex definition-projective-bundle (01OB, P(E)=Proj Sym E), and main-20261015 thm-pur-localized-top-chern.proof.md Step 4. Hypotheses hold: P is proper over a separated finite-type T, so it is separated and of finite type over k, which is the domain of Kummer additivity; projective-bundle formula with B=T, n=r-1. Phi is Hom(A_T(-r)[-2r],-) applied to the derived isomorphism, using p^* -| Rp_* and twist invertibility; its components are q^*a cup h^j (full-support cup, even degrees, no signs). The coefficients are therefore unique. Sign: c_i=(-1)^{i+1}a_{r-i} gives h^r-c_1h^{r-1}+...=0, which is Stacks' relation times (-1)^r. Tested r=0; r=1 (c_1 = Kummer c_1); r=2 trivial bundle over k (h^2=0, so c=0); r=2 split bundle (h-x_1)(h-x_2)=0, consistent with the flag formula. Empty T and non-field A are fine. Constant rank is all the citers use. No cycle (does not depend on the flag formula or the localized class). No duplicate in the DAG and no blueprint same_as (searched 'chern', 0FI5, main-20261015/20261017). No new nodes, no SGA, no tool_uses. No fixes."
  }
 }
