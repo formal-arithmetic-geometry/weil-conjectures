@@ -63,11 +63,13 @@ variable {C : Type u} [Category.{v} C] [Abelian C] [HasExt.{w} C] {X Y : C}
   (R : InjectiveResolution Y) {A : Type u'} [Ring A] {n : ℕ} (S : ShortComplex (ModuleCat.{v'} A))
   (e₂ : (X ⟶ R.cocomplex.X n) ≃+ S.X₂) (e₃ : (X ⟶ R.cocomplex.X (n + 1)) ≃+ S.X₃)
 
+omit [HasExt C] in
 lemma cocycle_of_g_eq_zero (hg : ∀ f, S.g (e₂ f) = e₃ (f ≫ R.cocomplex.d n (n + 1)))
     (f : X ⟶ R.cocomplex.X n) (hf : S.g (e₂ f) = 0) :
     f ≫ R.cocomplex.d n (n + 1) = 0 :=
   e₃.injective (by rw [← hg, hf, map_zero])
 
+omit [HasExt C] in
 lemma g_eq_zero_of_cocycle (hg : ∀ f, S.g (e₂ f) = e₃ (f ≫ R.cocomplex.d n (n + 1)))
     (f : X ⟶ R.cocomplex.X n) (hf : f ≫ R.cocomplex.d n (n + 1) = 0) :
     S.g (e₂ f) = 0 := by

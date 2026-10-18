@@ -65,6 +65,7 @@ lemma extMk_eq_zero_iff_exists {n : ℕ} (f : X ⟶ R.cocomplex.X n)
 variable {X' Y' : C} {R} (R' : InjectiveResolution Y')
   (Φ : ∀ n, (X ⟶ R.cocomplex.X n) →+ (X' ⟶ R'.cocomplex.X n))
 
+omit [HasExt C] in
 lemma map_comp_d_eq_zero
     (hΦ : ∀ n m (f : X ⟶ R.cocomplex.X n),
       Φ m (f ≫ R.cocomplex.d n m) = Φ n f ≫ R'.cocomplex.d n m)
