@@ -46,30 +46,42 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-adic-completion-reduction.md",
-  "place": "Proof step 6"
+  "place": "Proof step 6; D4 reuses the proved generic scalar-adjunction helpers and proves the localization-unit comparison in Lean."
  },
  "id": "lem-weil-pbc-adic-reduction-adjunction-hom-equiv",
  "title": "Canonical derived scalar Hom equivalence",
  "statement": "The derived scalar extension and exact restriction admit an equivalence of Hom sets whose value on a morphism f is adicReductionDerivedUnit ≫ Res.map f.",
  "proof": [
   {
-   "text": "Construct the ordinary sheaf scalar extension and restriction adjunction from the tensor unit. Restriction is exact, so the derived adjunction exists and its left derived functor is computed on the K-flat model by adicChange and localization. The derived unit is the displayed adicReductionDerivedUnit, by its representative tensor formula. Transporting the derived Hom equivalence along the chosen realization gives the stated e and formula.",
+   "text": "Apply derivedChangeOfRingsGeneral to the constant quotient coefficient map. Use the proved generic tensorAdjunction_of_identifications helper of DerivedScalarExtensionRestrictionAdjunction: the change-of-rings functor is left adjoint to exact restriction, with unit m ↦ 1 tensor m. Resolve every homotopy object by exists_isKFlatResolutionGeneral. Its K-flat counit is invertible, so the proved generic derivedAdjunction_of_resolutions helper supplies the derived adjunction and its unit compatibility.",
    "uses": [
     "lem-pur-derived-change-of-rings",
-    "lem-pc-derived-adjoint-functors",
-    "lem-weil-pbc-ringed-topoi-module-adjunction"
+    "lem-pc-kflat-resolution",
+    "lem-weil-derived-scalar-extension-restriction-adjunction"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-adic-completion-reduction.md",
-    "place": "Proof, order 1260"
+    "place": "Proof step 6, derivation of the scalar adjunction"
+   }
+  },
+  {
+   "text": "Identify the termwise extension functor on the chosen K-flat complex with adicChange by its recorded object and morphism equalities. Transport the derived Hom equivalence along the K-flat counit, quotientCompQhIso, this termwise identification, and the chosen realization. The ordinary complex unit followed by the identification agrees with adicReductionAugmentation: both send every local section m to 1 tensor m, and the augmentation uniqueness theorem applies. Naturality of mapDerivedCategoryFactors and its homotopy factorization then identifies the transported unit with adicReductionDerivedUnit. Postcomposition by restriction of f gives the required formula.",
+   "uses": [
+    "def-weil-pbc-completion-map"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-adic-completion-reduction.md",
+    "place": "Proof step 6, identification of the specified tensor unit and adjoint"
    }
   }
  ],
  "proof_deps": [
   "lem-pur-derived-change-of-rings",
-  "lem-pc-derived-adjoint-functors",
-  "lem-weil-pbc-ringed-topoi-module-adjunction"
+  "lem-pc-kflat-resolution",
+  "lem-weil-derived-scalar-extension-restriction-adjunction",
+  "def-weil-pbc-completion-map"
  ],
  "lean": {
   "existing": false,
@@ -106,19 +118,10 @@
   "date": "2026-10-18",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "F3",
+  "group": "D4",
   "result": "pass",
-  "landing": "20261018T094935-L-3722747",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "AlgebraicGeometry.Scheme.adicCompletionReduction_restricted_isIso",
-   "AlgebraicGeometry.Scheme.adicDerivedRestrict_reflectsIsomorphisms",
-   "AlgebraicGeometry.Scheme.adicReductionAdjunction_homEquiv_exists"
-  ],
-  "sorry_after": [
-   "AlgebraicGeometry.Scheme.adicCompletionReduction_restricted_isIso",
-   "AlgebraicGeometry.Scheme.adicReductionAdjunction_homEquiv_exists"
-  ]
+  "landing": "20261018T102313-L-4076185",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

@@ -1,30 +1,22 @@
 /-
 Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-Authors: SHEAF group NH
+Authors: SHEAF groups NH and D4
 -/
 module
 
 public import Sheaf.Paper.CompletionMap
 public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+import all Sheaf.Paper.DerivedScalarExtensionRestrictionAdjunction
 import Sheaf.Algebra.Homology.DerivedChangeOfRingsGeneral
-import Sheaf.CategoryTheory.ModulePullbackPushforwardAdjunction
-import Sheaf.CategoryTheory.DerivedCategory.AdjointFunctors
 import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimit
 import Sheaf.Paper.StrictPerfectCoefficientPackage
 import Sheaf.Paper.IntrinsicKoszulCompletion
-import Mathlib.Algebra.Homology.DerivedCategory.KProjective
-import Mathlib.CategoryTheory.Sites.Sheafification
-import Sheaf.Algebra.Homology.DerivedChangeOfRingsIndependentCoefficients
-import Sheaf.Algebra.Homology.DerivedTensor
-import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
+import Sheaf.Algebra.Homology.KFlatResolutionGeneral
 import Sheaf.AlgebraicGeometry.ProEtaleCountableProductsExact
-import Sheaf.CategoryTheory.DerivedCategory.PerfectRingComplexGeneral
-import Sheaf.CategoryTheory.Triangulated.DerivedLimitProducts
 import Sheaf.Paper.KoszulQuotientLimit
 import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitProducts
-import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Tensor
 
 /-!
 # Reduction of adic completion
@@ -48,6 +40,9 @@ open scoped ChangeOfRings TensorProduct
 
 namespace AlgebraicGeometry.Scheme
 
+-- The imported adjunction specializes its site-size instance to another coefficient universe.
+-- Keep that instance out of this proof; the site here already has size t + 1.
+attribute [-instance] WeilConjectures.scalarReductionSiteSmall in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Restriction of scalars is exact, also when the small site's object and morphism
@@ -108,6 +103,7 @@ noncomputable def adicDerivedRestrictFactors (X : Scheme.{t}) {A B : Type t}
   letI := (adicRestrictScalars_exact X φ).2
   (SheafOfModules.restrictScalars.{t + 1} (adicModuleMap X φ)).mapDerivedCategoryFactors.app P
 
+attribute [-instance] WeilConjectures.scalarReductionSiteSmall in
 set_option linter.style.haveILetI false in
 /-- Naturality of the exact scalar-restriction localization comparison.
 Source: order 1260, proof step 6 (blueprint: lemma-weil-pbc-adic-completion-reduction).
@@ -144,9 +140,17 @@ noncomputable def adicReductionDerivedUnit (X : Scheme.{t}) {Λ : Type t} [CommR
     (adicDerivedRestrictFactors X (Ideal.Quotient.mk (d.ideal ^ (n + 1)))
       (adicChange X (Ideal.Quotient.mk (d.ideal ^ (n + 1))) N.complex)).inv
 
+attribute [-instance] WeilConjectures.scalarReductionSiteSmall in
+set_option linter.style.haveILetI false in
+set_option backward.defeqAttrib.useBackward true in
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 /-- The derived change-of-rings construction supplies the canonical Hom equivalence and
-the displayed unit formula. Apply the exact scalar restriction adjunction to the
-derived change-of-rings left adjoint; its unit is `adicReductionDerivedUnit`.
+the displayed unit formula. Use the generic tensor--restriction adjunction and its derived
+unit compatibility, resolve homotopy objects by K-flat complexes, and transport the resulting
+Hom equivalence along the chosen realization. The tensor-unit formula identifies the ordinary
+complex unit with the unique quotient augmentation, so the derived unit is
+`adicReductionDerivedUnit`.
 Source: order 1260, proof step 6 (blueprint: lem-weil-pbc-adic-reduction-adjunction-hom-equiv). -/
 theorem adicReductionAdjunction_homEquiv_exists (X : Scheme.{t}) {Λ : Type t} [CommRing Λ]
     (d : CompleteCoefficientDatum Λ) {L : proEtaleDerivedCategory X Λ}
@@ -156,7 +160,168 @@ theorem adicReductionAdjunction_homEquiv_exists (X : Scheme.{t}) {Λ : Type t} [
       (L ⟶ (adicDerivedRestrict X (Ideal.Quotient.mk (d.ideal ^ (n + 1)))).obj H),
       ∀ f, e f = adicReductionDerivedUnit X d N n ≫
         (adicDerivedRestrict X (Ideal.Quotient.mk (d.ideal ^ (n + 1)))).map f := by
-  sorry
+  classical
+  have hs : HasSheafify (ProEt.topology X) AddCommGrpCat.{t + 1} :=
+    SheafOfModules.hasSheafify_coefficientUniverse.{t + 1, t, t + 1}
+      (C := X.ProEt) (J := ProEt.topology X)
+  have hw : GrothendieckTopology.WEqualsLocallyBijective.{t + 1, t + 1, t,
+      t + 2, t + 1, t + 1} (ProEt.topology X) AddCommGrpCat.{t + 1} :=
+    SheafOfModules.wEqualsLocallyBijective_coefficientUniverse.{t + 1, t, t + 1}
+      (C := X.ProEt) (J := ProEt.topology X)
+  letI := HasDerivedCategory.standard (SheafOfModules.{t + 1} (adicModuleRing X Λ))
+  letI := HasDerivedCategory.standard
+    (SheafOfModules.{t + 1} (adicModuleRing X (Λ ⧸ d.ideal ^ (n + 1))))
+  let φ := Ideal.Quotient.mk (d.ideal ^ (n + 1))
+  let A := SheafOfModules.{t + 1} (adicModuleRing X Λ)
+  let B := SheafOfModules.{t + 1} (adicModuleRing X (Λ ⧸ d.ideal ^ (n + 1)))
+  let R : B ⥤ A := SheafOfModules.restrictScalars.{t + 1} (adicModuleMap X φ)
+  letI := (adicRestrictScalars_exact X φ).1
+  letI := (adicRestrictScalars_exact X φ).2
+  obtain ⟨E, hE, hmE, hAdd, _, _, LF, ε, hLF, _, hε⟩ :=
+    SheafOfModules.derivedChangeOfRingsGeneral (adicConstantMap X φ)
+  letI := hAdd
+  obtain ⟨adj, hadj⟩ :=
+    SheafOfModules.ScalarReductionProof.tensorAdjunction_of_identifications
+      (adicConstantMap X φ) E hE hmE
+  have hres : ∀ G : HomotopyCategory A (.up ℤ),
+      ∃ (P : HomotopyCategory A (.up ℤ)) (s : P ⟶ G),
+        IsIso (ε.app P) ∧ HomotopyCategory.quasiIso A (.up ℤ) s := by
+    intro G
+    obtain ⟨G, rfl⟩ := HomotopyCategory.quotient_obj_surjective G
+    obtain ⟨P, s, hP, _, hs, _⟩ :=
+      CochainComplex.exists_isKFlatResolutionGeneral (R := adicConstantRing X Λ) G
+    exact ⟨_, (HomotopyCategory.quotient _ _).map s, hε P hP,
+      (HomotopyCategory.quotient_map_mem_quasiIso_iff s).2 hs⟩
+  obtain ⟨adjD, hunit⟩ := ScalarReductionDerivedProof.derivedAdjunction_of_resolutions
+    E R adj LF ε hLF hres
+  let eC : (E.mapHomologicalComplex (.up ℤ)).obj N.complex ≅
+      adicChange X φ N.complex :=
+    HomologicalComplex.Hom.isoOfComponents (fun i ↦ eqToIso (hE (N.complex.X i))) (by
+      intro i j hij
+      change eqToHom (hE (N.complex.X i)) ≫
+          SheafOfModules.changeOfRingsHom (adicConstantMap X φ) _ (N.complex.d i j) =
+        E.map (N.complex.d i j) ≫ eqToHom (hE (N.complex.X j))
+      rw [hmE]
+      simp)
+  let qN := (HomotopyCategory.quotient A (.up ℤ)).obj N.complex
+  letI := hε N.complex N.isKFlat
+  let EC := (E.mapHomologicalComplex (.up ℤ)).obj N.complex
+  let eps : LF.obj (DerivedCategory.Qh.obj qN) ⟶
+      DerivedCategory.Qh.obj ((HomotopyCategory.quotient B (.up ℤ)).obj EC) := ε.app qN
+  let u : LF.obj (DerivedCategory.Qh.obj qN) ≅ adicReduction X d N ⟨n + 1,
+      Nat.succ_pos n⟩ :=
+    asIso eps ≪≫
+      (DerivedCategory.quotientCompQhIso B).app
+        ((E.mapHomologicalComplex (.up ℤ)).obj N.complex) ≪≫
+      (adicLocalization X _).mapIso eC
+  let v : DerivedCategory.Qh.obj qN ≅ L :=
+    (DerivedCategory.quotientCompQhIso A).app N.complex ≪≫ N.realization
+  let e := (Iso.homCongr u (Iso.refl H)).symm.trans
+    ((adjD.homEquiv _ H).trans (Iso.homCongr v (Iso.refl _)))
+  refine ⟨e, ?_⟩
+  intro f
+  change (Iso.homCongr v (Iso.refl _))
+    (adjD.homEquiv _ H ((Iso.homCongr u (Iso.refl H)).symm f)) = _
+  simp only [Iso.homCongr_apply, Iso.homCongr_symm, Iso.symm_inv, Iso.symm_hom,
+    Iso.refl_hom, Iso.refl_inv, Category.comp_id]
+  rw [Adjunction.homEquiv_unit, Functor.map_comp]
+  suffices h : v.inv ≫ adjD.unit.app (DerivedCategory.Qh.obj qN) ≫
+      R.mapDerivedCategory.map u.hom = adicReductionDerivedUnit X d N n by
+    change v.inv ≫ adjD.unit.app (DerivedCategory.Qh.obj qN) ≫
+        R.mapDerivedCategory.map u.hom ≫ R.mapDerivedCategory.map f =
+      adicReductionDerivedUnit X d N n ≫ R.mapDerivedCategory.map f
+    simpa only [Category.assoc] using congrArg (fun k ↦ k ≫ R.mapDerivedCategory.map f) h
+  let ηC : N.complex ⟶ (R.mapHomologicalComplex (.up ℤ)).obj EC :=
+    (adj.mapHomologicalComplex (.up ℤ)).unit.app N.complex
+  have hAug : ηC ≫ (R.mapHomologicalComplex (.up ℤ)).map eC.hom =
+      adicReductionAugmentation X d N n := by
+    apply (Classical.choose_spec (adicReductionAugmentation_exists X d N n)).2
+    intro p U m
+    change (eC.hom.f p).val.app U ((ηC.f p).val.app U m) = _
+    dsimp only [ηC]
+    erw [Adjunction.mapHomologicalComplex_unit_app_f]
+    change (eqToHom (hE (N.complex.X p))).val.app U
+      ((adj.unit.app (N.complex.X p)).val.app U m) = _
+    rw [hadj]
+    change (eqToHom (hE (N.complex.X p))).val.app U
+      ((eqToHom (hE (N.complex.X p)).symm).val.app U _) = _
+    change ((eqToHom (hE (N.complex.X p)).symm ≫
+      eqToHom (hE (N.complex.X p))).val.app U) _ = _
+    simp only [eqToHom_trans, eqToHom_refl, SheafOfModules.id_val,
+      PresheafOfModules.id_app, ModuleCat.id_apply]
+    rfl
+  let fh : R.mapDerivedCategory.obj (DerivedCategory.Qh.obj
+      ((HomotopyCategory.quotient B (.up ℤ)).obj EC)) ⟶
+      DerivedCategory.Qh.obj ((HomotopyCategory.quotient A (.up ℤ)).obj
+        ((R.mapHomologicalComplex (.up ℤ)).obj EC)) :=
+    R.mapDerivedCategoryFactorsh.hom.app ((HomotopyCategory.quotient B (.up ℤ)).obj EC)
+  let fD : R.mapDerivedCategory.obj (DerivedCategory.Q.obj EC) ⟶
+      DerivedCategory.Q.obj ((R.mapHomologicalComplex (.up ℤ)).obj EC) :=
+    R.mapDerivedCategoryFactors.hom.app EC
+  have hfac : R.mapDerivedCategory.map
+        ((DerivedCategory.quotientCompQhIso B).hom.app EC) ≫
+        R.mapDerivedCategoryFactors.hom.app EC =
+      fh ≫
+        (DerivedCategory.quotientCompQhIso A).hom.app
+          ((R.mapHomologicalComplex (.up ℤ)).obj EC) := by
+    dsimp only [fh]
+    rw [Functor.mapDerivedCategoryFactorsh_hom_app]
+    change R.mapDerivedCategory.map (𝟙 (DerivedCategory.Q.obj EC)) ≫ fD =
+      (R.mapDerivedCategory.map (𝟙 (DerivedCategory.Q.obj EC)) ≫ fD ≫
+        𝟙 (DerivedCategory.Q.obj ((R.mapHomologicalComplex (.up ℤ)).obj EC)) ≫
+        (DerivedCategory.Qh (C := A)).map
+          (𝟙 ((HomotopyCategory.quotient A (.up ℤ)).obj
+            ((R.mapHomologicalComplex (.up ℤ)).obj EC)))) ≫
+      𝟙 (DerivedCategory.Q.obj ((R.mapHomologicalComplex (.up ℤ)).obj EC))
+    have hq : (DerivedCategory.Qh (C := A)).map
+        (𝟙 ((HomotopyCategory.quotient A (.up ℤ)).obj
+          ((R.mapHomologicalComplex (.up ℤ)).obj EC))) =
+        𝟙 (DerivedCategory.Q.obj ((R.mapHomologicalComplex (.up ℤ)).obj EC)) :=
+      CategoryTheory.Functor.map_id _ _
+    rw [hq, CategoryTheory.Functor.map_id]
+    simp only [Category.comp_id]
+    exact (Category.comp_id _).symm
+  have hu := hunit qN
+  rw [Adjunction.mapHomotopyCategory_unit_app_quotient] at hu
+  change adjD.unit.app (DerivedCategory.Qh.obj qN) ≫
+      R.mapDerivedCategory.map eps ≫ fh =
+    DerivedCategory.Qh.map ((HomotopyCategory.quotient A (.up ℤ)).map ηC) at hu
+  have hu' : adjD.unit.app (DerivedCategory.Qh.obj qN) ≫
+      R.mapDerivedCategory.map u.hom ≫
+        R.mapDerivedCategoryFactors.hom.app (adicChange X φ N.complex) =
+      (DerivedCategory.quotientCompQhIso A).hom.app N.complex ≫
+        (adicLocalization X Λ).map (adicReductionAugmentation X d N n) := by
+    change adjD.unit.app (DerivedCategory.Qh.obj qN) ≫
+        R.mapDerivedCategory.map (eps ≫
+          (DerivedCategory.quotientCompQhIso B).hom.app EC ≫
+            DerivedCategory.Q.map eC.hom) ≫
+        R.mapDerivedCategoryFactors.hom.app (adicChange X φ N.complex) =
+      (DerivedCategory.quotientCompQhIso A).hom.app N.complex ≫
+        DerivedCategory.Q.map (adicReductionAugmentation X d N n)
+    simp only [Functor.map_comp, Category.assoc]
+    rw [Functor.mapDerivedCategoryFactors_hom_naturality]
+    rw [reassoc_of% hfac]
+    rw [← Category.assoc (R.mapDerivedCategory.map eps),
+      ← Category.assoc (adjD.unit.app (DerivedCategory.Qh.obj qN)), hu]
+    rw [DerivedCategory.quotientCompQhIso_hom_naturality_assoc]
+    simp only [← Functor.map_comp]
+    rw [hAug]
+  apply (cancel_mono (R.mapDerivedCategoryFactors.hom.app
+    (adicChange X φ N.complex))).1
+  simp only [Category.assoc]
+  rw [hu']
+  dsimp only [v, Iso.trans_inv, adicReductionDerivedUnit, adicDerivedRestrictFactors]
+  change (N.realization.inv ≫
+      (DerivedCategory.quotientCompQhIso A).inv.app N.complex) ≫
+        (DerivedCategory.quotientCompQhIso A).hom.app N.complex ≫
+          (adicLocalization X Λ).map (adicReductionAugmentation X d N n) =
+      (N.realization.inv ≫
+        (adicLocalization X Λ).map (adicReductionAugmentation X d N n) ≫
+          R.mapDerivedCategoryFactors.inv.app (adicChange X φ N.complex)) ≫
+            R.mapDerivedCategoryFactors.hom.app (adicChange X φ N.complex)
+  simp only [Category.assoc, Iso.inv_hom_id_app]
+  simp only [← Category.assoc, Iso.inv_hom_id_app]
+  erw [Category.comp_id, Category.comp_id]
 
 /-- The unit formula is bijective because it is the canonical Hom equivalence supplied by
 the preceding derived change-of-rings construction. Source: order 1260, proof step 6.
@@ -229,6 +394,7 @@ theorem adicCompletionReduction_restricted_isIso (X : Scheme.{t}) {Λ : Type t} 
       (adicCompletionReduction X d M N n)) := by
   sorry
 
+attribute [-instance] WeilConjectures.scalarReductionSiteSmall in
 set_option linter.style.haveILetI false in
 /-- Exact restriction is conservative on the derived categories. Reflect the vanishing of
 the cone degree by degree through the exact underlying sheaf functor, using derived
@@ -332,6 +498,7 @@ theorem adicReductionComplexMap_step (X : Scheme.{t}) {Λ : Type t} [CommRing Λ
   exact adicTransitionComplex_naturality X d.ideal f
     ⟨n + 1 + 1, Nat.succ_pos _⟩ ⟨n + 1, Nat.succ_pos _⟩ (Nat.le_succ _)
 
+attribute [-instance] WeilConjectures.scalarReductionSiteSmall in
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- Quotient augmentation commutes with maps of the chosen models.
