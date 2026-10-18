@@ -413,5 +413,23 @@
   "group": "NN",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NN-f02e55b98 (reviewer sub-agent of L); spot-checked: Read the full mathematics, cited statements, sources and unit route. Repaired two hypothesis checks: trace admissibility for Frobenius graphs/fixed-point base changes, and the original surface’s finite-Tor lattice for the orbit formula. Statement unchanged; exact arithmetic and dependency checks passed. Wrote review.md and the corrected whole DAG JSON under fixes/.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-334b1d37c",
+  "group": "N6",
+  "result": "fix",
+  "note": "Existing slopmaster2 binding AlgebraicGeometry.WeilSheaf.isReal_higherLowerShriek_snd_one (RealPushforward.lean 128-131) is correct: the record statement matches the source exactly up to ':='; the node changes only in lean; every clause matches (finite k0, l prime != char, affinePlane = literal pullback of affine lines, p2 = pullback.snd, constructible WeilSheaf, arbitrary iota ring map, IsReal = real local factors at finite/closed points, vanishing for all natural nu != 1 including 0 via the real compact-support direct image higherLowerShriek, degree-1 conclusion); upstream WeilSheaf/higherLowerShriek API already used by prop-functor-package and landed bindings, so no second definition; no hollow defs, nothing proved, no pro-etale substitute; nt_compile of the module exit 0, 2.6 s, no diagnostics. Only fault: the delivered '## Second reading by N6' is explicitly an author self-check (H11). FIX: fixes/lem-fd-realness-pushforward.report.md, the complete report with the Worker report unchanged and an independent second reading."
+ },
+ "lean": {
+  "module": "WeilConjectures.DeligneLaumon.AffineLine.RealPushforward",
+  "declaration": "AlgebraicGeometry.WeilSheaf.isReal_higherLowerShriek_snd_one",
+  "statement": "theorem isReal_higherLowerShriek_snd_one {ι : PadicAlgCl l →+* ℂ}\n    {K : WeilSheaf k₀ l (affinePlane k₀)} (hK : K.IsReal ι)\n    (hvan : ∀ ν : ℕ, ν ≠ 1 → IsZero ((higherLowerShriek k₀ l (affinePlane.snd k₀) ν).obj K)) :\n    ((higherLowerShriek k₀ l (affinePlane.snd k₀) 1).obj K).IsReal ι",
+  "branch": "slopmaster2",
+  "by": "N6",
+  "date": "2026-10-18",
+  "existing": true,
+  "note": "Exact existing sheaf-level Fourier-projection statement, read with scompile.py --source. The local source checkout lacks this module, but the current published source supplies it. Its implicit finite-field and coefficient-prime binders are documented in the worker report. No new definition or theorem is introduced."
  }
 }
