@@ -2,13 +2,12 @@
  "id": "lem-a1-reduced-boundary-smooth",
  "kind": "statement",
  "title": "Reduced boundary of a smooth curve is smooth of dimension zero",
- "statement": "Let $k$ be a perfect field, let $C$ be a smooth [def-sbc-smooth-morphisms] separated [def-weil-proper-morphism] finite-type [def-weil-finite-type-morphism] $k$-scheme [def-pc-scheme] of pure dimension one [def-weil-pure-dimension], and let $j:U\\to C$ be a dense open immersion [def-weil-open-immersion]. Let $i:Z\\to C$ be the reduced [def-pc-reduced-scheme] closed complement [def-weil-closed-immersion]. Then $Z$ is a finite-type [def-weil-finite-type-morphism] reduced [def-pc-reduced-scheme] zero-dimensional [def-kun-topological-krull-dimension] $k$-scheme, and its structure morphism $Z\\to\\operatorname{Spec}k$ is smooth [def-sbc-smooth-morphisms] of pure relative dimension zero [def-weil-pure-dimension].",
+ "statement": "Let $k$ be a perfect field (every algebraic extension of $k$ is separable), let $C$ be a smooth [def-sbc-smooth-morphisms] separated [def-weil-proper-morphism] finite-type [def-weil-finite-type-morphism] $k$-scheme [def-pc-scheme] of pure dimension one [def-weil-pure-dimension], and let $j:U\\to C$ be a dense open immersion [def-weil-open-immersion]. Let $i:Z\\to C$ be the reduced [def-pc-reduced-scheme] closed complement [def-weil-closed-immersion]. Then $Z$ is a finite-type [def-weil-finite-type-morphism] reduced [def-pc-reduced-scheme] $k$-scheme with $\\dim Z\\le0$ [def-kun-topological-krull-dimension] (and $\\dim Z=-\\infty$ when $Z=\\varnothing$), and its structure morphism $Z\\to\\operatorname{Spec}k$ is smooth [def-sbc-smooth-morphisms] of pure relative dimension zero [def-weil-pure-dimension].",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-perverse/thm-a1-curve-perverse-heart.proof.md",
   "place": "Step 2: the reduced scheme Z is a finite disjoint union of spectra of perfect fields, hence smooth of dimension zero"
  },
  "stmt_deps": [
-  "def-weil-pbc-scheme-conventions",
   "def-weil-finite-type-morphism",
   "def-weil-open-immersion",
   "def-weil-closed-immersion",
@@ -19,9 +18,107 @@
   "def-kun-topological-krull-dimension",
   "def-pc-scheme"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose a finite affine cover $C=\\bigcup_{a=1}^m\\operatorname{Spec}A_a$ with each $A_a$ a finitely generated $k$-algebra, using [def-weil-finite-type-morphism]. By the affine description in [def-weil-closed-immersion], the preimage in $Z$ of the $a$th member is $\\operatorname{Spec}(A_a/I_a)$ for an ideal $I_a\\subseteq A_a$. The images of any finite set of $k$-algebra generators of $A_a$ generate $A_a/I_a$. These finitely many quotient spectra cover $Z$, proving that $Z\\to\\operatorname{Spec}k$ is of finite type by the same definition. Reducedness of $Z$ is part of the hypothesis.",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01T5 (lemma-immersion-locally-finite-type), closed-immersion assertion, written out on the given finite affine cover"
+   }
+  },
+  {
+   "text": "Every chain of irreducible closed subsets of $C$ is contained in an irreducible component: apply [lem-sc-irreducible-components-cover] to its largest member. The chain remains a chain of closed irreducible subsets of that component. Each component has dimension one by [def-weil-pure-dimension], so the topological Krull dimension of $C$ is at most one (also when $C$ is empty). By [lem-pc-scheme-dimension-local-rings], this is the dimension hypothesis of [lem-pc-nowhere-dense-dim-zero]. The subset $|Z|=|C|\\setminus U$ is closed with empty interior because $U$ is dense. Thus that lemma applies to the closed immersion $i$ and yields $\\dim Z\\le0$. Apply [lem-pc-scheme-dimension-local-rings] to $Z$ to express this as topological Krull dimension at most zero. If $Z$ is empty both dimensions in this comparison are $-\\infty$, as explicitly included in the comparison lemma.",
+   "uses": [
+    "lem-sc-irreducible-components-cover",
+    "def-weil-pure-dimension",
+    "lem-pc-scheme-dimension-local-rings",
+    "lem-pc-nowhere-dense-dim-zero"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0AYY (lemma-degree-effective-Cartier-divisor), proof sentence deducing dimension at most zero from nowhere density; dimension comparison: Properties Tag 04MU (lemma-dimension)"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-finite-type-dim-zero-artinian] to the finite-type $k$-scheme $Z$ of step 1 and the topological dimension bound of step 2. Its statement gives that $|Z|$ is finite and discrete; in particular every singleton $\\{z\\}$ is both open and closed. For every $z\\in Z$, write $Z_z$ for the open subscheme on $\\{z\\}$. This construction has no members when $Z$ is empty.",
+   "uses": [
+    "lem-weil-pbc-finite-type-dim-zero-artinian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 0AAX (lemma-locally-Noetherian-dimension-0), discrete underlying space; Varieties Tag 06LH (lemma-algebraic-scheme-dim-0), finite type gives finitely many summands"
+   }
+  },
+  {
+   "text": "Each singleton scheme $Z_z$ is affine by [lem-weil-pbc-finite-discrete-scheme-affine]; put $B_z=\\Gamma(Z_z,\\mathcal O_Z)$. The only open neighbourhood of $z$ in $Z_z$ is $Z_z$, so the stalk is $B_z$ itself. Thus $B_z$ is a nonzero local ring and is reduced by [def-pc-reduced-scheme]. Since $\\operatorname{Spec}B_z$ has just one point, $B_z$ has exactly one prime ideal $\\mathfrak m_z$ by [def-weil-affine-spectrum]. This prime is minimal. By [lem-weil-pbc-minimal-prime-reduced-localization-field], $(B_z)_{\\mathfrak m_z}$ is a field. The map $B_z\\to(B_z)_{\\mathfrak m_z}$ is an isomorphism: every denominator lies outside the maximal ideal of the local ring $B_z$, hence is a unit, and the inverse sends $b/s$ to $bs^{-1}$. Consequently $B_z$ is a field, its maximal ideal is zero, and its quotient defining the residue field in [def-weil-residue-field] identifies $B_z$ with $\\kappa_Z(z)$. These maps respect the $k$-algebra structures induced by $Z\\to\\operatorname{Spec}k$, giving $Z_z\\simeq\\operatorname{Spec}\\kappa_Z(z)$ over $k$.",
+   "uses": [
+    "lem-weil-pbc-finite-discrete-scheme-affine",
+    "def-pc-reduced-scheme",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-minimal-prime-reduced-localization-field",
+    "def-weil-residue-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00EU (lemma-minimal-prime-reduced-ring), applied to each singleton affine ring; singleton decomposition: Varieties Tag 06LH (lemma-algebraic-scheme-dim-0)"
+   }
+  },
+  {
+   "text": "Every $z\\in Z$ is a closed point of the finite-type $k$-scheme $Z$, so part (a) of [lem-kun-closed-point-field] makes $\\kappa_Z(z)/k$ finite. It is separable because $k$ is perfect, using the meaning of perfect specified in the statement. Form the coproduct of the finitely many $\\operatorname{Spec}\\kappa_Z(z)$ using [lem-weil-pbc-scheme-coproduct-family]. The isomorphisms of step 4 identify its summands with the disjoint open subschemes $Z_z$. Their inclusions define a map from the coproduct to $Z$; the inverse maps $Z_z$ to the corresponding summand. The inverses glue since the opens are disjoint and cover $Z$, and the two composites are the identity on every member of these open covers. Hence $Z\\simeq\\coprod_{z\\in |Z|}\\operatorname{Spec}\\kappa_Z(z)$ over $k$. The same gluing argument includes the empty coproduct.",
+   "uses": [
+    "lem-kun-closed-point-field",
+    "lem-weil-pbc-scheme-coproduct-family"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 06LH (lemma-algebraic-scheme-dim-0), singleton decomposition and finite residue algebras; Schemes Tags 01JB (lemma-glue), 01JC (lemma-glue-schemes), disjoint gluing"
+   }
+  },
+  {
+   "text": "Apply [lem-exc-etale-coproduct-etale] to the finite separable extensions $\\kappa_Z(z)/k$ obtained in step 5. Under the displayed $k$-isomorphism its coproduct structure morphism is exactly $Z\\to\\operatorname{Spec}k$, so this morphism is etale. By [lem-weil-pbc-etale-smooth-zero-dimensional-fibres] it is smooth and its fibres have dimension zero at every source point, that is, it is smooth of pure relative dimension zero. If $Z=\\varnothing$, the coproduct theorem applies with empty index set and the relative dimension condition has no points to check. Together with steps 1 and 2 this gives every asserted conclusion, including the empty boundary.",
+   "uses": [
+    "lem-exc-etale-coproduct-etale",
+    "lem-weil-pbc-etale-smooth-zero-dimensional-fibres"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02GL (lemma-etale-over-field), converse direction; Tag 02GK (lemma-etale-smooth-unramified) and the remark after Definition 02GI (definition-etale): etale is smooth of relative dimension zero"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-type-morphism",
+  "def-weil-closed-immersion",
+  "lem-sc-irreducible-components-cover",
+  "def-weil-pure-dimension",
+  "lem-pc-scheme-dimension-local-rings",
+  "lem-pc-nowhere-dense-dim-zero",
+  "lem-weil-pbc-finite-type-dim-zero-artinian",
+  "lem-weil-pbc-finite-discrete-scheme-affine",
+  "def-pc-reduced-scheme",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-minimal-prime-reduced-localization-field",
+  "def-weil-residue-field",
+  "lem-kun-closed-point-field",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-exc-etale-coproduct-etale",
+  "lem-weil-pbc-etale-smooth-zero-dimensional-fibres"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 06LH (lemma-algebraic-scheme-dim-0), singleton decomposition, with Algebra Tag 00EU (lemma-minimal-prime-reduced-ring) and Morphisms Tag 02GL (lemma-etale-over-field); realizes the geometry sentence in the current blueprint Step 2"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -71,10 +168,52 @@
    "results": "{\"t\": \"2026-10-18T02:34:56Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.IsEtale, AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'AlgebraicGeometry.IsEtale'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-18",
    "verdict": "invalid query: unknown identifier; no absence inference"
+  },
+  {
+   "tool": "grep",
+   "query": "IsReduced|PerfectField|IsSmoothOfRelativeDimension",
+   "results": "{\"t\": \"2026-10-18T02:47:58Z\", \"tool\": \"grep\", \"query\": \"IsReduced|PerfectField|IsSmoothOfRelativeDimension\", \"sub\": \"AlgebraicGeometry/Morphisms/Smooth.lean\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"140\", \"150\", \"173\", \"347\", \"348\"], \"digest\": \"13156841bf9cf590\"}",
+   "date": "2026-10-18",
+   "verdict": "search output malformed because a file was supplied as the subdirectory; repeated using AlgebraicGeometry/Morphisms, no absence inference from this output"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsReduced\", \"IsSmooth\"",
+   "results": "{\"t\": \"2026-10-18T02:47:59Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsReduced\\\", \\\"IsSmooth\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: zero hits for the two name fragments"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The reduced closed complement of a dense open in a smooth curve over a perfect field is a smooth zero dimensional scheme",
+   "results": "{\"t\": \"2026-10-18T02:48:00Z\", \"tool\": \"leanfinder\", \"query\": \"The reduced closed complement of a dense open in a smooth curve over a perfect field is a smooth zero dimensional scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"AlgebraicGeometry.IsReduced\", \"WeierstrassCurve.IsGoodReduction\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"WeierstrassCurve.reduction\", \"WeierstrassCurve.Affine.FunctionField\", \"WeierstrassCurve.IsMinimal\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\"], \"digest\": \"ed8f7c5cfba46632\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: definitions, smooth charts, etale/smooth conversions and generic-point smoothness do not prove the boundary dimension and reduced singleton decomposition"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A reduced closed subscheme supported on the complement of a dense open of a smooth curve over a perfect field is etale over the field",
+   "results": "{\"t\": \"2026-10-18T02:48:23Z\", \"tool\": \"leansearch\", \"query\": \"A reduced closed subscheme supported on the complement of a dense open of a smooth curve over a perfect field is etale over the field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.IsEtale\", \"Algebra.etaleLocus\", \"Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat\", \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"Algebra.etaleLocus_eq_compl_support\", \"AlgebraicGeometry.Scheme.IdealSheafData.Simps.coe_support\", \"AlgebraicGeometry.IsReduced.mk\"], \"digest\": \"b0a5f279f0303ab0\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: definitions, smooth charts, etale/smooth conversions and generic-point smoothness do not prove the boundary dimension and reduced singleton decomposition"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A reduced zero dimensional scheme of finite type over a perfect field is etale",
+   "results": "{\"t\": \"2026-10-18T02:48:24Z\", \"tool\": \"leanfinder\", \"query\": \"A reduced zero dimensional scheme of finite type over a perfect field is etale\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat\", \"Algebra.Etale.iff_isStandardSmoothOfRelativeDimension_zero\", \"AlgebraicGeometry.Scheme.Etale\", \"Algebra.etaleLocus_eq_univ_iff_etale\", \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"Algebra.instEtaleOfIsStandardEtale\", \"Algebra.etaleLocus_eq_univ_iff\", \"StandardEtalePair.instEtaleRing\"], \"digest\": \"5c84bfc1873950a8\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: definitions, smooth charts, etale/smooth conversions and generic-point smoothness do not prove the boundary dimension and reduced singleton decomposition"
+  },
+  {
+   "tool": "grep",
+   "query": "PerfectField|genericPoint_mem_smoothLocus_of_perfectField",
+   "results": "{\"t\": \"2026-10-18T02:49:17Z\", \"tool\": \"grep\", \"query\": \"PerfectField|genericPoint_mem_smoothLocus_of_perfectField\", \"sub\": \"AlgebraicGeometry/Morphisms\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\"], \"digest\": \"5f2f5c600573476f\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: definitions, smooth charts, etale/smooth conversions and generic-point smoothness do not prove the boundary dimension and reduced singleton decomposition"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-a1-qbar-curve-duality",
@@ -87,11 +226,58 @@
   "from": {
    "node": "thm-a1-curve-perverse-heart",
    "place": "Proof Step 2: the reduced scheme Z is a finite disjoint union of spectra of perfect fields and is smooth of dimension zero",
-   "via": [
-    "lem-a1-qbar-curve-duality"
-   ]
+   "via": []
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-a1-reduced-boundary-smooth",
+  "worker": "stage1",
+  "summary": "Expanded the reduced-boundary geometry sentence into the finite affine quotient cover, dimension drop, finite discrete topology, explicit reduced singleton identification with its residue field, finite separability over the perfect base, and the etale/smooth-zero comparison. Reused existing DAG statements throughout; created no nodes. Made the empty-boundary dimension convention explicit (dimension at most zero, not equality zero).",
+  "blueprint": "Current main-20261015 thm-a1-curve-perverse-heart.proof.md, Step 2, sentence beginning \"The reduced scheme Z is a finite disjoint union of spectra of perfect fields, hence smooth of dimension zero\". Steps 1-5 justify the disjoint field spectra and step 6 the smooth dimension-zero conclusion; this supplies the supporting geometry for the unit first step, via lem-a1-qbar-curve-duality.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-scheme-dimension-local-rings",
+    "why": "Generic comparison of local-ring and topological Krull dimension, required to apply the existing nowhere-dense lemma with its actual dimension convention; this unit has no such scheme-theoretic comparison."
+   },
+   {
+    "node": "lem-pc-nowhere-dense-dim-zero",
+    "why": "Generic dimension bound for nowhere-dense closed subschemes of finite-type one-dimensional schemes; applies to the boundary without any Cartier or properness assumption, and realizes rather than replaces the blueprint geometry sentence."
+   },
+   {
+    "node": "lem-kun-closed-point-field",
+    "why": "Generic closed-point residue-field finiteness over an arbitrary ground field; the present unit has no replacement for this algebraic-geometric tool."
+   },
+   {
+    "node": "lem-weil-pbc-scheme-coproduct-family",
+    "why": "Generic existence and open-cover description of scheme coproducts, used to glue the singleton identifications over k; no such construction is supplied by the unit."
+   },
+   {
+    "node": "lem-exc-etale-coproduct-etale",
+    "why": "Generic criterion that a coproduct of finite separable field spectra is etale; applies after the boundary decomposition, not as a replacement for a unit proof step."
+   },
+   {
+    "node": "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+    "why": "Generic equivalence between the etale conclusion and smoothness of relative dimension zero; needed to compare the two definitions in the existing DAG."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-scheme-dimension-local-rings",
+  "lem-pc-nowhere-dense-dim-zero",
+  "lem-kun-closed-point-field",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-exc-etale-coproduct-etale",
+  "lem-weil-pbc-etale-smooth-zero-dimensional-fibres"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-Codex-Q03-18e35e1d8",
+  "group": "Q03",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q03-18e35e1d8 (reviewer sub-agent of L); spot-checked: Read the full mathematics and checked all six steps against cited DAG statements, current blueprint, and Stacks sources. Empty boundary, disconnected curves, nonrational points, perfectness and reducedness checks pass. No new nodes, circular dependencies, forbidden proof routes, or long steps. No repairs required; report metadata discrepancy documented in review.md."
  }
 }
