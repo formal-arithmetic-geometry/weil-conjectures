@@ -6,10 +6,15 @@ Authors: SHEAF group NM
 module
 
 public import Sheaf.AlgebraicGeometry.BaseChangeMapAbelianAndSets
+public import Sheaf.AlgebraicGeometry.DerivedCategories
+public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
+import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtaleOver
 import WeilConjectures.AlgebraicGeometry.EtaleSetInverseImageRestriction
+import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 import Sheaf.AlgebraicGeometry.EtaleSetBaseChangeLocalTransport
 import Sheaf.AlgebraicGeometry.EtaleDerivedBaseChangeLocalTransport
 import Mathlib.CategoryTheory.Sites.LocalProperties
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-!
 # Etale locality of base change
