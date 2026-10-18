@@ -11,6 +11,7 @@ public import Sheaf.Algebra.Homology.DerivedChangeOfRingsIndependentCoefficients
 public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import Mathlib.Algebra.Homology.Single
 public import Mathlib.Algebra.Module.Projective
+import Mathlib.CategoryTheory.Sites.Abelian
 import Sheaf.Paper.ConstantModuleSectionProperties
 import Sheaf.RingTheory.LimitFlatModules
 import Sheaf.Algebra.Category.ModuleCat.Presheaf.SheafificationFlat
@@ -46,7 +47,22 @@ theorem base_exists (T : Scheme.{u}) {A : Type (u + 1)} [CommRing A] (I : Ideal 
       ∀ n : ℕ, φ ≫ limit.π (adicLisseRingSystem T I) (op n) =
         (constantSheaf (ProEt.topology T) CommRingCat.{u + 1}).map
           (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1)))) := by
-  sorry
+  let c : Cone (adicLisseRingSystem T I) :=
+    { pt := adicLisseConstantRing T A
+      π := NatTrans.ofOpSequence
+        (fun n ↦ (constantSheaf (ProEt.topology T) CommRingCat.{u + 1}).map
+          (CommRingCat.ofHom (Ideal.Quotient.mk (I ^ (n + 1))))) (by
+            intro n
+            simp only [Functor.const_obj_map, adicLisseRingSystem,
+              Functor.ofOpSequence_map_homOfLE_succ, ← Functor.map_comp]
+            congr 1) }
+  refine ⟨limit.lift _ c, ?_, ?_⟩
+  · intro n
+    exact limit.lift_π c (op n)
+  · intro φ hφ
+    apply limit.hom_ext
+    intro n
+    exact (hφ n.unop).trans (limit.lift_π c n).symm
 
 /-- The canonical constant-to-completed coefficient homomorphism. Source: Stacks Tag 093M
 (blueprint: lem-weil-pbc-completed-constant-sheaf-reduction). -/
@@ -130,7 +146,14 @@ Proof: the constant presheaf functor and associated-module-sheafification functo
 and so is their composite defining `adicLisseConstantModules`. -/
 theorem constant_additive (T : Scheme.{u}) (A : Type (u + 1)) [CommRing A] :
     (adicLisseConstantModules T A).Additive := by
-  sorry
+  constructor
+  intro M N f g
+  apply (SheafOfModules.toSheaf _).map_injective
+  change (presheafToSheaf (ProEt.topology T) AddCommGrpCat.{u + 1}).map
+    ((Functor.const T.ProEtᵒᵖ).map
+      ((forget₂ (ModuleCat A) AddCommGrpCat).map (f + g))) = _
+  rw [Functor.map_add, Functor.map_add, Functor.map_add]
+  rfl
 
 /-- The termwise constant module sheaf of a complex. Source: Stacks Tag 093J
 (blueprint: lem-weil-pbc-completed-constant-sheaf-reduction). -/
@@ -201,7 +224,15 @@ theorem systemComparison_naturality (T : Scheme.{u}) {A : Type (u + 1)} [CommRin
     (adicLisseRingSystem T I).map f ≫
       @constantComparison _ _ _ (hf n.unop) =
     @constantComparison _ _ _ (hf m.unop) ≫ (ringSystem T I hf).map f := by
-  sorry
+  let := hf
+  let c : adicLisseRingSystem T I ⟶ ringSystem T I hf :=
+    NatTrans.ofOpSequence (fun n ↦ constantComparison T (A ⧸ I ^ (n + 1))) (by
+      intro k
+      simp only [adicLisseRingSystem, ringSystem, Functor.ofOpSequence_map_homOfLE_succ,
+        constantComparison, constantSheaf, Functor.comp_map, coefficientMap,
+        ← Functor.map_comp]
+      congr 1)
+  exact c.naturality f
 
 /-- The canonical comparison of quotient ring diagrams, retaining the quotient maps.
 Source: blueprint finite-coefficient interpretation, Stacks Tag 093M

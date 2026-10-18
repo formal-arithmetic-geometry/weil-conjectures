@@ -16561,3 +16561,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 15:01 L: merged deliver/G4/Sheaf.AlgebraicGeometry.ProEtaleModuleStalkFunctor (stage 3; reviewer PASS; first push; landing 20261018T150147-L-3799499 (proof); batch 20261018T150141; modules 1; new nodes 0)
 - 15:01 L: merged deliver/G6/Sheaf.Paper.ExceptionalAdjointAdmissibility (stage 3; reviewer PASS; first push; landing 20261018T150147-L-3799668 (proof); batch 20261018T150141; modules 1; new nodes 0)
 - 15:01 L: merged deliver/J3/Sheaf.Paper.FieldComplexScalarExtension (stage 3; reviewer PASS; first push; landing 20261018T150148-L-3799832 (proof); batch 20261018T150141; modules 1; new nodes 0)
+- 15:01 L: merged deliver/K4/Sheaf.Paper.CompletedConstantSheafReduction (stage 3; reviewer PASS; first push; landing 20261018T150148-L-3800039 (proof); batch 20261018T150141; modules 1; new nodes 0)
