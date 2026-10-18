@@ -13,9 +13,193 @@
   "def-weil-frobenius-cohomology-transport",
   "def-weil-derived-pullback-tensor-hom"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $a=a_X$, $F=La^*$, $R=Ra_*$, $P=Ra_!$, $H=Lg_s^*$ and $T=Lg^*$. Write $e_M:HPM\\to PTM$ and $u_M:HRM\\to RTM$ for the specified Frobenius exchanges. The Frobenius square is Cartesian with horizontal scheme isomorphisms by [lem-weil-frobenius-square-cartesian]. It is generally not a square of $k$-morphisms. Work with its underlying ringed topoi throughout. At finite coefficients these pullbacks are exact module inverse images; [lem-weil-proetale-isomorphism-inverse-image] identifies the horizontal ones with site reindexing equivalences. Thus they preserve bounded constructibility and finite Tor amplitude: transport a constructible stratification by the isomorphism, and apply the exact tensor equivalence to the defining tensor-vanishing test for amplitude. By [thm-sf-ctf-stability](i)--(iv), $K\\otimes^LL$, $PK$, $RL$, $FRL$ and $K\\otimes^LFRL$ have the required bounded constructible finite-Tor domains. Set $N=RL$ and let $\\theta:FH\\xrightarrow{\\sim}TF$ be the square comparison. Composition below is right to left and tensors are derived.",
+   "uses": [
+    "lem-weil-frobenius-square-cartesian",
+    "lem-weil-proetale-isomorphism-inverse-image",
+    "def-weil-derived-pullback-tensor-hom",
+    "thm-sf-ctf-stability",
+    "def-weil-frobenius-square-exchange"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/thm-pod-equivariance-of-the-twisted-pairing.proof.md",
+    "place": "Step 1: mixed-support cup equivariance, expanded at finite coefficients"
+   }
+  },
+  {
+   "text": "Choose the base-changed $k_0$-compactification $a=pj$ used in [def-weil-frobenius-square-exchange](2). Its upper Frobenius is denoted $\\bar g$. In the notation of [def-exchange-projection], put $B=L\\bar g^*$, $J=Lj^*$, $J'=Lj'^*$, $W=Lp^*$, $W'=Lp'^*$ and $S'=Rp'_*$. Then $P=Rp_*j_!$, $e=S'(\\beta)\\,e_p$, and $\\operatorname{PF}_{K,N}=Rp_*(\\gamma_{j;K,WN})\\,\\pi_{p;j_!K,N}$. Primes denote the pulled-back compactification, identified with the same underlying $a$-compactification by the Frobenius isomorphisms. All these are the specified maps, rather than comparisons chosen from invertibility. The finite formulas of [def-exchange-projection] apply over the base scheme $S=s$, viewing $Y'=s$ with structural map $g_s$ and $X'=X$ with structural map $g_s a$. They are finite type over $S$: twisting the scalar action by a field automorphism preserves any finite list of algebra generators. The required arrows are $S$-morphisms by $ag=g_sa$. The underlying sites, coefficient rings and compactification formulas do not depend on these structural labels.",
+   "uses": [
+    "def-weil-frobenius-square-exchange",
+    "def-exchange-projection"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/thm-pod-equivariance-of-the-twisted-pairing.proof.md",
+    "place": "Step 1: mixed-support cup equivariance, expanded at finite coefficients"
+   }
+  },
+  {
+   "text": "Let $\\sigma:TJ\\xrightarrow{\\sim}J'B$ be the open square comparison and let $b_B,b_T$ denote the pullback-tensor maps. Put $M=j_!K$, $Q=M\\otimes WN$, and\n$$z=j'_!((1\\otimes\\sigma_{WN})b_{T;K,JWN})\\,\\beta_{K\\otimes JWN}.$$\nThe open-factor equality is\n$$z\\,B(\\gamma_{j;K,WN})=\\gamma_{j';TK,BWN}(\\beta_K\\otimes1)b_{B;M,WN}.$$\nAt each corner the structural ring map is $c^u_A:u^{-1}A\\to A$ of [prop-weil-pbc-proetale-constant-ring-map], which preserves constant sections. This is the finite convention of [def-weil-derived-pullback-tensor-hom]. Thus the finite identification clause of [lem-sf-open-tensor-normalization] identifies these $\\beta,\\gamma$ with the very open maps used in step 2. Indeed [lem-sf-open-tensor-normalization] identifies $BM$ with $j'_!TK$, and then the source $B(M\\otimes WN)$ lies in the fully faithful image of $j'_!$ by the open tensor isomorphism. Restriction by $J'$ determines a map from this image. Both displayed routes restrict to the identity open units followed by the same tensor comparison: this is the restriction normalization of $\\beta,\\gamma$ in that lemma and the composition and naturality clauses of [lem-pur-derived-pullback-tensor-iso]. Full faithfulness proves the equality. This applies to the semilinear $\\bar g$ because the open-normalization statement allows arbitrary scheme maps and ring maps.",
+   "uses": [
+    "lem-sf-open-tensor-normalization",
+    "lem-pur-derived-pullback-tensor-iso",
+    "prop-weil-pbc-proetale-constant-ring-map",
+    "def-weil-derived-pullback-tensor-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/thm-pod-equivariance-of-the-twisted-pairing.proof.md",
+    "place": "Step 1: mixed-support cup equivariance, expanded at finite coefficients"
+   }
+  },
+  {
+   "text": "Let $\\theta_p:W'H\\xrightarrow{\\sim}BW$ be the proper square comparison, and put $c_Q=(1\\otimes\\theta_{p,N}^{-1})b_{B;M,WN}$. Apply [lem-weil-pbc-ringed-exchange-tensor-coherence] to the underlying constant-$A$ ringed-topos square of $p$. Its maps are precisely the proper mate $e_p$ and counit projection $\\pi_p$ of step 2, so it gives\n$$S'(c_Q)e_{p,Q}H(\\pi_{p;M,N})=\\pi_{p';BM,HN}(e_{p,M}\\otimes1)b_{H;Rp_*M,N}.$$\nNo $k$-linearity or cartesianness is a hypothesis of that ringed-topos theorem. Thus it applies to this Frobenius square without a change of coefficient categories.",
+   "uses": [
+    "lem-weil-pbc-ringed-exchange-tensor-coherence",
+    "def-exchange-projection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/thm-pod-equivariance-of-the-twisted-pairing.proof.md",
+    "place": "Step 1: mixed-support cup equivariance, expanded at finite coefficients"
+   }
+  },
+  {
+   "text": "Expand $\\operatorname{PF}=Rp_*(\\gamma_j)\\pi_p$ and $e=S'(\\beta)e_p$ in the left route of the projection square. Naturality of $e_p$ moves $H(Rp_*\\gamma_j)$ past $e_p$. The open identity of step 3 then replaces $zB\\gamma_j$ by $\\gamma_{j'}(\\beta_K\\otimes1)b_B$. Move $\\theta_{p,N}^{-1}$ through $\\gamma_{j'}$ by its naturality and apply the proper identity of step 4. Finally naturality of $\\pi_{p'}$ moves $S'(\\beta_K)$ to its first input. The resulting equality, with $\\theta:FH\\cong TF$, is\n$$P(c_{K,N})e_{K\\otimes FN}H(\\operatorname{PF}_{K,N})\n=\\operatorname{PF}_{TK,HN}(e_K\\otimes1)b_{H;PK,N},\n\\qquad c_{K,N}=(1\\otimes\\theta_N^{-1})b_{T;K,FN}.$$\nThe target comparison is $T(K\\otimes FN)\\to TK\\otimes FHN$; the pullback-composition clause in [lem-pur-derived-pullback-tensor-iso] identifies it with the composite through $z$ and $J'(\\theta_{p,N}^{-1})$. This proves the needed projection square by its actual proper and open factors; it does not assume that the $k$-linear base-change statement applies to $g_s$.",
+   "uses": [
+    "def-exchange-projection",
+    "lem-pur-derived-pullback-tensor-iso"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/thm-pod-equivariance-of-the-twisted-pairing.proof.md",
+    "place": "Step 1: mixed-support cup equivariance, expanded at finite coefficients"
+   }
+  },
+  {
+   "text": "The defining mate formula for $u_L$ in [def-weil-frobenius-square-exchange](1) says exactly\n$$\\varepsilon_{TL}\\,F(u_L)=T(\\varepsilon_L)\\,\\theta_{RL}:FHRL\\longrightarrow TL.$$\nConsequently, by tensor functoriality and naturality of $b_T$,\n$$b_{T;K,L}\\,T(1_K\\otimes\\varepsilon_L)\n=(1_{TK}\\otimes\\varepsilon_{TL})(1_{TK}\\otimes F(u_L))c_{K,RL}.$$\nThis is the counit comparison needed for the second arrow of cup product; it follows from the transpose defining this particular ordinary exchange.",
+   "uses": [
+    "def-weil-frobenius-square-exchange",
+    "lem-pur-derived-pullback-tensor-iso"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/thm-pod-equivariance-of-the-twisted-pairing.proof.md",
+    "place": "Step 1: mixed-support cup equivariance, expanded at finite coefficients"
+   }
+  },
+  {
+   "text": "Before applying the point functor write $m_{K,L}=P(1_K\\otimes\\varepsilon_L)\\operatorname{PF}_{K,RL}$, the map defining mixed-support cup product. Naturality of $e$ at $1_K\\otimes\\varepsilon_L$, followed by step 6 and then step 5 at $N=RL$, gives\n$$\\begin{aligned}\nP(b_{T;K,L})e_{K\\otimes L}H(m_{K,L})\n&=P(1\\otimes\\varepsilon_{TL})P(1\\otimes F(u_L))\n\\operatorname{PF}_{TK,HRL}(e_K\\otimes1)b_{H;PK,RL}\\\\\n&=m_{TK,TL}(e_K\\otimes u_L)b_{H;PK,RL}.\n\\end{aligned}$$\nFor the second equality, use naturality of $\\operatorname{PF}$ in its second variable at $u_L:HRL\\to RTL$; tensor bifunctoriality gives $(1\\otimes u_L)(e_K\\otimes1)=e_K\\otimes u_L$. The cited definitions explicitly make these maps composites of natural transformations. This establishes cup equivariance in $D(s_{\\mathrm{proet}},A)$ for arbitrary $K,L$, without Weil data on either input.",
+   "uses": [
+    "def-pod-mixed-support-cup-product",
+    "def-exchange-projection",
+    "def-weil-frobenius-square-exchange"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/thm-pod-equivariance-of-the-twisted-pairing.proof.md",
+    "place": "Step 1: mixed-support cup equivariance, expanded at finite coefficients"
+   }
+  },
+  {
+   "text": "Put $V=\\operatorname{Fib}_s$. Under the canonical tensor identification of [lem-sf-point-fibre-derived-tensor], the finite point transport satisfies\n$$V(b_{H;U,W})\\,\\iota_{U\\otimes W}=\\iota_U\\otimes\\iota_W.$$\nTo check this, use the exact section functor and the restriction--insertion--$x\\mapsto x\\otimes1$ formula of [def-weil-frobenius-point-transport]. On a pure tensor of sections in degrees $i,j$, the route on the left restricts $x\\otimes y$ along $g_s$, inserts it and applies tensor comparison; the right route restricts and inserts $x,y$ separately and tensors their images. Both are $(\\operatorname{res}_{g_s}x\\otimes1)\\otimes(\\operatorname{res}_{g_s}y\\otimes1)$. The insertion and sheafification maps respect these tensor relations by construction of sheaf tensor. Apply this calculation to K-flat flat-term models: [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] gives those tensor models and preservation of K-flatness under pullback; the point tensor is the canonical comparison on them. Additivity gives equality on the total complexes and localization gives the displayed derived identity.",
+   "uses": [
+    "lem-sf-point-fibre-derived-tensor",
+    "def-weil-frobenius-point-transport",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/thm-pod-equivariance-of-the-twisted-pairing.proof.md",
+    "place": "Step 1: mixed-support cup equivariance, expanded at finite coefficients"
+   }
+  },
+  {
+   "text": "Apply $V$ to step 7 and precompose with $\\iota_{PK\\otimes RL}$. Naturality of point transport [lem-weil-frobenius-point-transport-natural](2), at $m_{K,L}$, replaces $V(Hm)\\iota_{PK\\otimes RL}$ by $\\iota_{P(K\\otimes L)}V(m)$. Step 8 replaces the tensor comparison followed by point transport by $\\iota_{PK}\\otimes\\iota_{RL}$. Since [def-weil-frobenius-cohomology-transport] defines $\\tau_{c,M}=V(e_M)\\iota_{PM}$ and $\\tau_M=V(u_M)\\iota_{RM}$, the resulting equality is precisely\n$$R\\Gamma_c(X,b_{K,L})\\,\\tau_{c,K\\otimes L}\\,\\mu_{K,L}\n=\\mu_{TK,TL}(\\tau_{c,K}\\otimes\\tau_L).$$\nAll tensor identifications used in applying $V$ are natural by [lem-sf-point-fibre-derived-tensor].",
+   "uses": [
+    "lem-weil-frobenius-point-transport-natural",
+    "def-weil-frobenius-cohomology-transport",
+    "lem-sf-point-fibre-derived-tensor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/thm-pod-equivariance-of-the-twisted-pairing.proof.md",
+    "place": "Step 1: mixed-support cup equivariance, expanded at finite coefficients"
+   }
+  },
+  {
+   "text": "For an integer $r$, the unit and counit of every derived pullback/direct-image adjunction in the mate formulas commute with $[r]$ by [lem-weil-pbc-derived-adjunction-shift]. The finite pullbacks are termwise exact inverse images; their composition and square comparisons commute with shift because they act in each degree by the same module map. Thus their unit--square--counit composite $u_{L[r]}$ is $u_L[r]$ through the composite shift comparisons. For compact support, the proper exchange has the same property, while the open $\\beta$ has it too: restrict to the open, where it is the identity by [lem-sf-open-tensor-normalization], and use full faithfulness. Whiskering by the exact termwise $j_!$ and derived $Rp_*$ preserves these equalities. Hence $e_{K[r]}=e_K[r]$. This uses the fixed compactification of the definition, so no extra independence or comparison theorem is needed. Here $\\beta$ is the fixed-constant-section map identified in step 3.",
+   "uses": [
+    "lem-weil-pbc-derived-adjunction-shift",
+    "def-weil-derived-pullback-tensor-hom",
+    "def-weil-frobenius-square-exchange",
+    "lem-sf-open-tensor-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/thm-pod-equivariance-of-the-twisted-pairing.proof.md",
+    "place": "Step 1: mixed-support cup equivariance, expanded at finite coefficients"
+   }
+  },
+  {
+   "text": "The cup map itself respects the same separate shifts. Expand it as $P(1\\otimes\\varepsilon_L)Rp_*(\\gamma_j)\\pi_p$ as in steps 2 and 7. For a shift in $L$, the ordinary counit commutes with shift by [lem-weil-pbc-derived-adjunction-shift], and the second-variable projection comparison does so by [lem-weil-pbc-ringed-projection-mate-exact]. For a shift in $K$, the proper projection is the mate of $(\\varepsilon_{j_!K}\\otimes1)b_W$; its unit and counit commute with shift by the same derived-adjunction statement, and $b_W$ does so by the pullback-tensor shift clause of the projection-mate statement. The open $\\gamma_j$ commutes with either shift: after restricting to the open, it is the identity tensor identification, so full faithfulness in [lem-sf-open-tensor-normalization] proves this assertion. Whiskering and composition give the assertion for the displayed cup composite. These calculations use exactly the signed total-tensor comparisons, and apply to every integer shift. The $\\gamma_j$ used here is the same fixed-scalar finite map identified in step 3.",
+   "uses": [
+    "def-pod-mixed-support-cup-product",
+    "def-exchange-projection",
+    "lem-weil-pbc-derived-adjunction-shift",
+    "lem-weil-pbc-ringed-projection-mate-exact",
+    "lem-sf-open-tensor-normalization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/thm-pod-equivariance-of-the-twisted-pairing.proof.md",
+    "place": "Steps 1--2, canonical shifts of the finite cup composite"
+   }
+  },
+  {
+   "text": "The restriction, insertion and $x\\mapsto x\\otimes1$ maps defining $\\iota$ are degree-zero maps of complexes, so their map on a shifted complex is their shifted map. Together with steps 10--11 and the definition of $\\tau$ this proves $\\tau_{L[r]}=\\tau_L[r]$ and $\\tau_{c,K[r]}=\\tau_{c,K}[r]$ for every integer $r$. Apply steps 1--9 to $K[r],L$ and to $K,L[r]$; these are still arbitrary bounded constructible finite-Tor inputs. Read the equalities through the canonical cochain shifts. In the second tensor variable the comparison on a summand of first-factor degree $i$ has sign $(-1)^{ri}$; the same sign occurs on both routes since all transports have degree zero. In the first variable its standard comparison has no extra sign. These comparisons commute with $b_T$ by the shift clause of [lem-weil-pbc-ringed-projection-mate-exact]. Thus the stated shifted equalities and both asserted transport identifications hold, including negative shifts.",
+   "uses": [
+    "def-weil-frobenius-point-transport",
+    "def-weil-frobenius-cohomology-transport",
+    "def-pc-tensor-complex-sheaves",
+    "lem-weil-pbc-ringed-projection-mate-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/thm-pod-equivariance-of-the-twisted-pairing.proof.md",
+    "place": "Steps 1--2: shifted derived cup product and transport comparisons"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-exchange-projection",
+  "def-pc-tensor-complex-sheaves",
+  "def-pod-mixed-support-cup-product",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-frobenius-cohomology-transport",
+  "def-weil-frobenius-point-transport",
+  "def-weil-frobenius-square-exchange",
+  "lem-pur-derived-pullback-tensor-iso",
+  "lem-sf-open-tensor-normalization",
+  "lem-sf-point-fibre-derived-tensor",
+  "lem-weil-frobenius-point-transport-natural",
+  "lem-weil-frobenius-square-cartesian",
+  "lem-weil-pbc-derived-adjunction-shift",
+  "lem-weil-pbc-ringed-exchange-tensor-coherence",
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-proetale-isomorphism-inverse-image",
+  "prop-weil-pbc-proetale-constant-ring-map",
+  "thm-sf-ctf-stability"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/thm-pod-equivariance-of-the-twisted-pairing.proof.md",
+  "place": "Step 1, with explicit finite-coefficient mate/open-factor and shift calculations; Stacks Tags 0B56, 0E48 and 07A4 supply the ringed-topos formulas"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -51,10 +235,45 @@
    "results": "IsBaseChange.dual; LinearMap.baseChange_comp; LinearEquiv.baseChange_trans; IsBaseChange.toDual_apply; IsBaseChange.transvection; IsBaseChange.toDual; IsBaseChange; Module.Dual.baseChange",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "mixedSupportCupProduct|frobenius.*cupProduct|cupProduct.*exchange",
+   "results": "No hits.",
+   "date": "2026-10-18",
+   "verdict": "no match: results do not state finite-coefficient pro-etale mixed-support cup transport and its shifts"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pullback by a scheme automorphism preserves the mixed support cup product on derived cohomology",
+   "results": "AlgebraicGeometry.Scheme.Modules.pullbackCongr; AlgebraicGeometry.Scheme.Modules.pullback; AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback; AlgebraicGeometry.Scheme.Modules.instAdditivePullback; AlgebraicGeometry.Scheme.Modules.pullbackComp; AlgebraicGeometry.Scheme.Pullback.affine_hasPullback; AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction; AlgebraicGeometry.Scheme.Cover.pullbackHom_map_assoc",
+   "date": "2026-10-18",
+   "verdict": "no match: results do not state finite-coefficient pro-etale mixed-support cup transport and its shifts"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, \"tensor\"",
+   "results": "CategoryTheory.Sheaf.tensorProd_isSheaf",
+   "date": "2026-10-18",
+   "verdict": "no match: results do not state finite-coefficient pro-etale mixed-support cup transport and its shifts"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Transport along geometric Frobenius commutes with the mixed compact support and ordinary derived cohomology cup product",
+   "results": "groupCohomology.cochainsMap_f_1_comp_cochainsIso₁; LightCondensed.ihomPoints_symm_comp; groupCohomology.cochainsMap_f_2_comp_cochainsIso₂; groupCohomology.cochainsMap_f_1_comp_cochainsIso₁_assoc; groupCohomology.cochainsMap_f_1_comp_cochainsIso₁_apply; groupCohomology.cochainsMap_f_3_comp_cochainsIso₃; groupCohomology.cochainsMap_f_2_comp_cochainsIso₂_apply; groupCohomology.cochainsMap_f_3_comp_cochainsIso₃_apply",
+   "date": "2026-10-18",
+   "verdict": "no match: results do not state finite-coefficient pro-etale mixed-support cup transport and its shifts"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Base change exchange and the projection formula imply naturality of compactly supported cup products for constant coefficient sheaves",
+   "results": "SheafOfModules.pullbackObjFreeIso_hom_naturality; SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc; CondensedMod.hom_naturality_apply; CategoryTheory.Sheaf.ΓHomEquiv_naturality_left; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom; CategoryTheory.Sheaf.ΓHomEquiv_naturality_left_symm; CategoryTheory.ExponentiableMorphism.coev_naturality",
+   "date": "2026-10-18",
+   "verdict": "no match: results do not state finite-coefficient pro-etale mixed-support cup transport and its shifts"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "thm-pod-equivariance-of-the-twisted-pairing",
@@ -71,5 +290,84 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-pod-frobenius-cup-transport",
+  "worker": "stage1",
+  "summary": "Expanded finite pro-etale Frobenius cup transport into twelve steps using existing nodes only. Verified the actual proper/open exchanges and projection map, the ordinary counit mate, point-transport tensor compatibility, and all integer-shift clauses. No statement change and no new nodes. The etale Lean cup exchange has sorry and is not an attachment. Repair of returned head 2272b15f01: re-read current cited statements; explicitly verify the canonical constant-section structural ring maps required by the corrected open-normalization finite clause, and retain that identification in the two shift steps. Reconstructed citations.json from current statements. No target or item statement change.",
+  "blueprint": "thm-pod-equivariance-of-the-twisted-pairing proof Step 1 (cup-product equivariance), and its shifted use in Step 2.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-frobenius-square-cartesian",
+    "why": "Frobenius-square Cartesian and scheme-isomorphism properties needed to type the existing exchanges."
+   },
+   {
+    "node": "lem-weil-proetale-isomorphism-inverse-image",
+    "why": "Site equivalence gives exact finite inverse image and preservation of the domains for semilinear isomorphisms."
+   },
+   {
+    "node": "thm-sf-ctf-stability",
+    "why": "Finite tensor and both direct images preserve the input domain needed by the cup definition."
+   },
+   {
+    "node": "lem-sf-open-tensor-normalization",
+    "why": "Generic open ringed-site normalization and full faithfulness establish the open-factor square, including semilinear maps."
+   },
+   {
+    "node": "lem-pur-derived-pullback-tensor-iso",
+    "why": "Canonical tensor/composition comparison and its naturality identify all target arrows."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-exchange-tensor-coherence",
+    "why": "Arbitrary ringed-topos proper projection/exchange identity applies without k-linearity; no lemma of this unit supplies it."
+   },
+   {
+    "node": "lem-sf-point-fibre-derived-tensor",
+    "why": "Translates the equality of sheaf-derived point maps to derived A-modules using the specified tensor comparison."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "K-flat models and pullback preservation justify the point-transport tensor calculation on complexes."
+   },
+   {
+    "node": "lem-weil-frobenius-point-transport-natural",
+    "why": "Naturality of the actual point transport, rather than an unspecified fibre comparison."
+   },
+   {
+    "node": "lem-weil-pbc-derived-adjunction-shift",
+    "why": "Integer-shift compatibility of the ordinary derived units and counits in the actual exchange maps."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-projection-mate-exact",
+    "why": "Integer-shift compatibility of the canonical pullback-tensor comparisons."
+   },
+   {
+    "node": "prop-weil-pbc-proetale-constant-ring-map",
+    "why": "Pins each Frobenius structural ring map to the constant-section map, as now required to identify the normalized open comparisons with the fixed-A maps; generic coefficient-site tool, not a replacement of the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-frobenius-square-cartesian",
+  "lem-weil-proetale-isomorphism-inverse-image",
+  "thm-sf-ctf-stability",
+  "lem-sf-open-tensor-normalization",
+  "lem-pur-derived-pullback-tensor-iso",
+  "lem-weil-pbc-ringed-exchange-tensor-coherence",
+  "lem-sf-point-fibre-derived-tensor",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-frobenius-point-transport-natural",
+  "lem-weil-pbc-derived-adjunction-shift",
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "prop-weil-pbc-proetale-constant-ring-map"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q154-41edf9bee",
+  "group": "Q154",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q154-41edf9bee (reviewer sub-agent of L); spot-checked: I read all twelve steps in full, together with the full statements of every cited node and the blueprint proof of thm-pod-equivariance-of-the-twisted-pairing (Steps 1-2). Return point (the changed statement of lem-sf-open-tensor-normalization): its finite clause now requires the canonical constant-section structural ring map. Step 3 checks this through c^u_A, using def-weil-derived-pullback-tensor-hom and prop-weil-pbc-proetale-constant-ring-map, which allows any scheme morphism, including the semilinear g-bar. Steps 10-11 reuse the same beta and gamma. Repaired. Steps 4-7: I recomputed the pasting myself. The proper factor comes from lem-weil-pbc-ringed-exchange-tensor-coherence, which needs no k-linearity or Cartesian square; its pi and Ex are exactly the maps of def-exchange-projection. The open factor follows from full faithfulness and identity restriction. Step 6 is the counit transpose of the u_L definition. Step 7 uses naturality of PF in its second variable at u_L, with second input RL. Step 8: the point tensor is canonical in the sense of def-sf-point-fibre-tensor-finite-models, and the generator computation holds. Step 9: point-transport naturality at m_{K,L} gives exactly the displayed equality. Steps 10-12: shifts follow from lem-weil-pbc-derived-adjunction-shift and lem-weil-pbc-ringed-projection-mate-exact, with matching signs on both routes. Hypotheses of def-exchange-projection with S=s, Y'=s and structure map g_s: satisfied. thm-sf-ctf-stability is applied only to the k-morphism a. Compactification: def-weil-frobenius-square-exchange fixes the base-changed k_0 model for the cohomology case, so no PF refinement comparison is needed; lem-fix-projection-compactification-comparison would cover another model. Edge cases K=0 or L=0, d=0 and r=0,±1 all check out. There are no new nodes, no SGA citations, and the tool_uses are acceptable generic tools. No fixes."
  }
 }
