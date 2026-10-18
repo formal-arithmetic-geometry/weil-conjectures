@@ -17,9 +17,216 @@
   "def-trf-strict-normal-crossings-boundary",
   "def-weil-pbc-regular-system-of-parameters"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $U=M\\setminus B$. It is a nonempty dense open since $M$ is integral and $B$ is nowhere dense. Give $M$ its divisorial fs log structure $\\mathcal L$ from [def-trf-log-regular-pair]; its triviality locus is exactly $U$, and its log-regularity condition is the one in [def-trf-fs-log-blowup]. At a geometric point the characteristic monoid $P=\\overline{\\mathcal L}$ is sharp and saturated. Its group completion is torsion free: if $ng=0$, saturation puts both $g$ and $-g$ in $P$, so $g$ is a unit, hence zero by sharpness. The Noetherian scheme $M$ is quasi-compact and locally Noetherian. Thus [lem-trf-monoidal-resolution-tower] gives a finite saturated log blowup tower $(X_n,\\mathcal L_n)\\to\\cdots\\to(X_0,\\mathcal L_0)=(M,\\mathcal L)$ along nonempty coherent log ideals, with free final characteristic monoids. Write $b_i:X_{i+1}\\to X_i$ for the underlying maps.",
+   "uses": [
+    "def-trf-log-regular-pair",
+    "def-trf-fs-log-blowup",
+    "lem-trf-monoidal-resolution-tower"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 1.1--1.4; VIII 3.3.14--3.3.15 and 3.4.8, printed pp. 69, 109--111."
+   }
+  },
+  {
+   "text": "We will use the following chart observation at both stages. The blowup of a nonzero finite-type ideal $J$ on an integral scheme $X$ is integral. On an affine domain $A$, [prop-nagata-affine-blowup-chart-cover] gives the nonempty charts $\\operatorname{Spec}A[J/a]$ for nonzero generators $a$. By [def-nagata-blowup-chart-ring], these are domains inside the same function field, each containing its generic point. The charts cover and share that point; the same is true across affine opens of $X$. Their union is reduced and irreducible, hence integral. Its normalization is integral as well: by [def-sc-normalization] its affine rings are integral closures of domains inside that same field, hence domains, again with a common generic point. A nonempty open on which the blowup or normalized blowup is an isomorphism is therefore dense in its source.",
+   "uses": [
+    "prop-nagata-affine-blowup-chart-cover",
+    "def-nagata-blowup-chart-ring",
+    "def-sc-normalization",
+    "def-pc-integral-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 3.4.6(i), printed p. 111; explicit affine-chart argument, also Stacks 02ND (divisors.tex, lemma-blow-up-integral-scheme)."
+   }
+  },
+  {
+   "text": "Induct on $i$ with invariant: $X_i$ is integral excellent Noetherian, $(X_i,\\mathcal L_i)$ is log regular, and its triviality locus $U_i$ is the inverse image of $U$ and maps isomorphically to $U$. The case $i=0$ is the hypothesis and Step 1. Given the invariant at $i$, [lem-trf-log-blowup-normalization] identifies $X_{i+1}$ with the normalization of $Y_i=\\operatorname{Bl}_{J_i}X_i$, where $J_i$ is nonzero finite-type quasi-coherent; it gives log regularity and $U_{i+1}=b_i^{-1}U_i\\cong U_i$. Step 2 makes both $Y_i$ and $X_{i+1}$ integral. By [lemma-nagata-blowup-proper], $Y_i\\to X_i$ is proper, hence finite type by [def-weil-proper-morphism]; [lem-weil-pbc-finite-type-over-noetherian] makes $Y_i$ Noetherian.",
+   "uses": [
+    "lem-trf-log-blowup-normalization",
+    "lemma-nagata-blowup-proper",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-finite-type-over-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 3.4.5--3.4.9, printed pp. 111--112; ordinary blowup finiteness and Stacks 01T6 (morphisms.tex, lemma-finite-type-noetherian)."
+   }
+  },
+  {
+   "text": "Over an excellent affine open $\\operatorname{Spec}A\\subset X_i$, the finite-type definition [def-weil-finite-type-morphism] covers $Y_i$ by affine spectra of finite-type $A$-algebras. These rings are excellent by [lem-exc-finite-type-localization-excellent]. The affine-cover criterion [lem-trf-excellent-scheme-affine-cover] therefore makes $Y_i$ excellent. Apply [lem-per-excellent-normalization-preparation] to the integral, hence reduced, excellent Noetherian scheme $Y_i$. On an integral scheme its componentwise normalization is precisely normalization in its one function field, as in Step 2. Thus $X_{i+1}\\to Y_i$ is finite and $X_{i+1}$ is excellent Noetherian. It is proper by [lem-weil-pbc-finite-proper], so [lem-weil-pbc-proper-composition] makes $b_i$ proper. This closes the induction of Step 3, including all the excellence hypotheses needed at the next stage.",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "lem-exc-finite-type-localization-excellent",
+    "lem-trf-excellent-scheme-affine-cover",
+    "lem-per-excellent-normalization-preparation",
+    "lem-weil-pbc-finite-proper",
+    "lem-weil-pbc-proper-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 3.4.6--3.4.9, printed pp. 111--112; Stacks 07QU (more-algebra.tex, lemma-finite-type-over-excellent), 0HAB (morphisms.tex, lemma-locally-excellent), 035S (lemma-nagata-normalization)."
+   }
+  },
+  {
+   "text": "Put $V=X_n$ and let $p:V\\to M$ be the composite tower. Repeated application of [lem-weil-pbc-proper-composition] makes $p$ proper; for a zero-length tower the identity is proper directly from [def-weil-proper-morphism]. The invariant gives $p^{-1}U\\cong U$. By Step 1 the final characteristic monoids are free, so [lem-trf-free-characteristic-regular-boundary] makes $V$ regular and its reduced nontriviality locus $Z$ an effective Cartier normal crossings divisor. It also makes $p^{-1}U$ dense. Since the triviality locus is exactly $p^{-1}U$, the support of $Z$ is $p^{-1}B$. The scheme $V$ is integral excellent Noetherian by Steps 3--4. This proves the regular, possibly non-strict normal crossings stage without applying the existing finite-type-over-a-field resolution lemma.",
+   "uses": [
+    "lem-weil-pbc-proper-composition",
+    "def-weil-proper-morphism",
+    "lem-trf-free-characteristic-regular-boundary"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VII Theorem 4.3, printed pp. 82--83; VIII 3.4.4, 3.4.8 and 4.1.1, printed pp. 110--111, 117."
+   }
+  },
+  {
+   "text": "Set $V_0=V$, $B_0=D_0=Z$, $H_0=\\varnothing$, and $q_0=1_V$. We now maintain: $V_j$ is integral regular Noetherian; $q_j:V_j\\to V$ is proper and isomorphic over $V\\setminus |Z|$; $B_j=(q_j^{-1}Z)_{\\rm red}$ is normal crossings; $D_j$ is the remaining strict transform of $Z$ and a reduced union of components of $B_j$; $H_j$ is a strict normal crossings union of components of $B_j$; and $B_j=D_j\\cup H_j$. These hold at $j=0$, with the empty boundary understood as the unit ideal. If $D_j$ is empty we stop. Otherwise [lem-trf-nc-maximal-branch-blowup] supplies a finite maximum branch number $m_j\\ge1$ and its reduced regular closed locus $C_j$, with $C_j\\subset D_j\\subset B_j$ and, etale locally, $C_j=V(t_1,\\ldots,t_{m_j})$, $D_j=V(t_1\\cdots t_{m_j})$ in boundary parameters for $B_j$.",
+   "uses": [
+    "def-weil-proper-morphism",
+    "lem-trf-nc-maximal-branch-blowup"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 4.1.2--4.1.8, printed pp. 117--118: strict transform, accumulated exceptional boundary, and maximum-depth stratum."
+   }
+  },
+  {
+   "text": "Blow up $C_j$: let $c_j:V_{j+1}\\to V_j$ and $q_{j+1}=q_jc_j$. Its center ideal is finite type since $V_j$ is Noetherian, and is nonzero because it is the unit ideal on the nonempty open identified with $U$. By [lemma-nagata-blowup-proper], $c_j$ is proper. It is an isomorphism off $C_j$ by [thm-nagata-global-blowup-complement], hence over that open. Step 2 makes $V_{j+1}$ integral. Properness implies finite type [def-weil-proper-morphism], and [lem-weil-pbc-finite-type-over-noetherian] makes $V_{j+1}$ Noetherian. [lem-weil-pbc-proper-composition] makes $q_{j+1}$ proper. Thus the scheme, properness, and preserved-open parts of the invariant hold at the next stage.",
+   "uses": [
+    "lemma-nagata-blowup-proper",
+    "thm-nagata-global-blowup-complement",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-proper-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 4.1.2--4.1.4 and 4.1.8, printed pp. 117--118; Stacks 01T6 and the ordinary blowup-complement property."
+   }
+  },
+  {
+   "text": "The center supplied in Step 6 is regular and is generated by a nonempty subset of the boundary parameters, exactly the center hypothesis of [lem-trf-permissible-boundary-preservation]. Apply it to $(V_j,B_j,H_j,C_j)$. It gives regular $V_{j+1}$, normal crossings $B_{j+1}=(c_j^{-1}B_j)_{\\rm red}$, and strict normal crossings $H_{j+1}=(c_j^{-1}(H_j\\cup C_j))_{\\rm red}$, a union of components of $B_{j+1}$. With $E_{j+1}=(c_j^{-1}C_j)_{\\rm red}$ it also gives $B_{j+1}=B_j^{\\rm st}\\cup E_{j+1}$ and $H_{j+1}=H_j^{\\rm st}\\cup E_{j+1}$. Meanwhile [lem-trf-nc-maximal-branch-blowup] gives that $D_{j+1}=D_j^{\\rm st}$ is normal crossings or empty, and every one of its branch numbers is at most $m_j-1$.",
+   "uses": [
+    "lem-trf-permissible-boundary-preservation",
+    "lem-trf-nc-maximal-branch-blowup"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 4.1.4(i), 4.1.8 and Lemma 4.2.9, printed pp. 117--118, 121."
+   }
+  },
+  {
+   "text": "The boundary identities also give $B_{j+1}=D_{j+1}\\cup H_{j+1}$. Indeed strict transform is the scheme-theoretic closure away from the center [def-nagata-strict-transform]. Closure commutes with a finite scheme-theoretic union: on an affine chart its defining ideal is the kernel of restriction, and the kernel for a union is the intersection of the two kernels. Hence $B_j^{\\rm st}=D_j^{\\rm st}\\cup H_j^{\\rm st}$. Substitute the identities in Step 8. Reduction does not alter supports [def-weil-pbc-scheme-reduction], so $B_{j+1}$ is also $(q_{j+1}^{-1}Z)_{\\rm red}$. Since $D_{j+1}$ is normal crossings or empty and contained in $B_{j+1}$, its branches are a subset of the branches of $B_{j+1}$; thus it is again a reduced union of components. This completes the boundary part of the induction.",
+   "uses": [
+    "def-nagata-strict-transform",
+    "def-weil-pbc-scheme-reduction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 4.1.3--4.1.4(i) and 4.1.8, printed pp. 117--118; closure and reduced-union bookkeeping."
+   }
+  },
+  {
+   "text": "If $Z$ is empty, take no blowups. Otherwise the positive integers $m_j$ strictly decrease whenever $D_j$ remains nonempty, by Step 8. Thus after at most $m_0$ steps $D_N=\\varnothing$ and $B_N=H_N$. This includes $m_j=1$: the center is then all of $D_j$, possibly a Cartier center with identity blowup, but its strict transform is empty since $D_j\\setminus C_j=\\varnothing$. Put $R=V_N$, $q=q_N$ and $A=B_N=H_N$. By the invariant, $R$ is integral regular Noetherian, $q$ is proper and isomorphic over $V\\setminus|Z|$, and $A$ is a strict normal crossings boundary with $|A|=q^{-1}|Z|$. The latter assertion has exactly the regular-component and intersection meaning of [def-trf-strict-normal-crossings-boundary], supplied at every nonempty stage by [lem-trf-permissible-boundary-preservation].",
+   "uses": [
+    "def-nagata-strict-transform",
+    "def-trf-strict-normal-crossings-boundary",
+    "lem-trf-permissible-boundary-preservation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 4.1.6--4.1.8 and Remark 4.2.2(i), printed p. 118; termination including the final Cartier center."
+   }
+  },
+  {
+   "text": "We spell out the parameter clause, without interpreting etale normal crossings as strict normal crossings. At $x\\in R$, discard the finitely many components of $A$ not containing $x$. In the regular local ring $(S,\\mathfrak m)=\\mathcal O_{R,x}$ of dimension $d$, let $I_1,\\ldots,I_s$ be the ideals of the remaining distinct components. [def-trf-strict-normal-crossings-boundary] gives that every $S/I_J$ for $I_J=\\sum_{a\\in J}I_a$ is regular local of dimension $d-|J|$. By [lem-weil-pbc-regular-local-quotient-independent-generators], $I_a$ has generators with independent images in $\\mathfrak m/\\mathfrak m^2$. Its image there has dimension one: the quotient is the cotangent space of $S/I_a$, whose dimension is $d-1$, whereas that of $S$ is $d$, by [lem-weil-pbc-regular-local-cotangent-dimension]. Thus this independent generating set has exactly one member, say $I_a=(t_a)$.",
+   "uses": [
+    "def-trf-strict-normal-crossings-boundary",
+    "lem-weil-pbc-regular-local-quotient-independent-generators",
+    "lem-weil-pbc-regular-local-cotangent-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII Remark 4.2.2(i), printed p. 118; Stacks 00NR (algebra.tex, lemma-regular-quotient-regular), with 00KU cotangent dimension."
+   }
+  },
+  {
+   "text": "For $I=I_1+\\cdots+I_s$, the same quotient-cotangent calculation gives $\\dim_\\kappa((I+\\mathfrak m^2)/\\mathfrak m^2)=d-(d-s)=s$. This space is spanned by the $s$ classes of $t_1,\\ldots,t_s$, so they are independent. Extend them to a basis of $\\mathfrak m/\\mathfrak m^2$ and lift the additional basis vectors to $\\mathfrak m$. Nakayama in the generator form [lem-weil-pbc-nakayama-local-generators], applied to the finitely generated $S$-module $\\mathfrak m$, says that the resulting $d$ elements generate $\\mathfrak m$. Thus they are a regular system of parameters [def-weil-pbc-regular-system-of-parameters]. By [lem-trf-regular-local-ufd-boundary-factorization] the $t_a$ are pairwise nonassociate prime elements. Their principal ideals therefore have intersection $(t_1\\cdots t_s)$: divisibility by each distinct prime implies divisibility by their product. The reduced union of the components has this ideal. Represent these finitely many germs on a common neighbourhood of $x$; equality of their finitely generated ideal stalks persists after shrinking. The component equations and product equation follow there. For $s=0$ the product is $1$ and the boundary is empty near $x$.",
+   "uses": [
+    "lem-weil-pbc-regular-local-cotangent-dimension",
+    "lem-weil-pbc-nakayama-local-generators",
+    "def-weil-pbc-regular-system-of-parameters",
+    "lem-trf-regular-local-ufd-boundary-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII Remark 4.2.2(i), printed p. 118; Stacks 00NR, 00KU (algebra.tex), and 0AG0 (more-algebra.tex, lemma-regular-local-UFD)."
+   }
+  },
+  {
+   "text": "Finally take $e=pq:R\\to M$. It is proper by [lem-weil-pbc-proper-composition]. The nonempty open $e^{-1}U$ is isomorphic to $U$ by the two preserved-open constructions, and is dense in the integral $R$; $U$ is dense in $M$. Thus $e$ is birational with precisely the dense-open meaning in the statement. From Step 5 and the boundary recurrence, $e^{-1}B=q^{-1}p^{-1}B=q^{-1}|Z|=|A|$ as closed supports, which in particular proves the requested containment. Regularity, integrality and Noetherianity were proved in the induction, and Steps 11--12 give every local parameter clause. If $B$ is empty all conclusions still apply, with $A$ empty.",
+   "uses": [
+    "lem-weil-pbc-proper-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VII Theorem 4.3, VIII 4.1.8 and IX 2.4, printed pp. 82--83, 118, 134."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-log-regular-pair",
+  "def-trf-fs-log-blowup",
+  "lem-trf-monoidal-resolution-tower",
+  "prop-nagata-affine-blowup-chart-cover",
+  "def-nagata-blowup-chart-ring",
+  "def-sc-normalization",
+  "def-pc-integral-scheme",
+  "lem-trf-log-blowup-normalization",
+  "lemma-nagata-blowup-proper",
+  "def-weil-proper-morphism",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "def-weil-finite-type-morphism",
+  "lem-exc-finite-type-localization-excellent",
+  "lem-trf-excellent-scheme-affine-cover",
+  "lem-per-excellent-normalization-preparation",
+  "lem-weil-pbc-finite-proper",
+  "lem-weil-pbc-proper-composition",
+  "lem-trf-free-characteristic-regular-boundary",
+  "lem-trf-nc-maximal-branch-blowup",
+  "thm-nagata-global-blowup-complement",
+  "lem-trf-permissible-boundary-preservation",
+  "def-nagata-strict-transform",
+  "def-weil-pbc-scheme-reduction",
+  "def-trf-strict-normal-crossings-boundary",
+  "lem-weil-pbc-regular-local-quotient-independent-generators",
+  "lem-weil-pbc-regular-local-cotangent-dimension",
+  "lem-weil-pbc-nakayama-local-generators",
+  "def-weil-pbc-regular-system-of-parameters",
+  "lem-trf-regular-local-ufd-boundary-factorization"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VII Theorem 4.3; VIII 3.3.15, 3.4.6--3.4.9, 4.1.1--4.1.8, Remark 4.2.2(i); IX 2.4. General scheme inputs in the existing DAG are reused, rather than the field-specific packaged lemmas."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -55,10 +262,45 @@
    "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.mk.noConfusion\", \"module\": \"Mathlib.AlgebraicGeometry.Scheme\", \"type\": \"{P : Sort u} →\\n  {toLocallyRingedSpace : AlgebraicGeometry.LocallyRingedSpace} →\\n    {local_affine :\\n        ∀ (x : ↑toLocallyRingedSpace.toTopCat),\\n          ∃ U R,\\n            Nonempty\\n              (toLocallyRingedSpace.restrict ⋯ ≅ AlgebraicGeometry.Spec.toLocallyRingedSpace.obj (Opposite.op R))\", \"doc\": \"A scheme is a locally ringed space such that every point has an open neighborhood isomorphic to the affine scheme associated to some commutative ring, constructed via the Spec functor applied to the o\"}\n  {\"name\": \"AlgebraicGeometry.IsNoetherian.toIsLocallyNoetherian\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [self : AlgebraicGeometry.IsNoetherian X], AlgebraicGeometry.IsLocallyNoetherian X\", \"doc\": \"If a scheme $X$ is Noetherian, then it is locally Noetherian, meaning it admits an open cover by Noetherian schemes.\"}\n  {\"name\": \"AlgebraicGeometry.IsLocallyNoetherian.component_noetherian\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [self : AlgebraicGeometry.IsLocallyNoetherian X] (U : ↑X.affineOpens),\\n  IsNoetherianRing ↑(X.presheaf.obj (Opposite.op ↑U))\", \"doc\": \"For a locally Noetherian scheme $ X $, the ring of sections over every affine open subset $ U $ of $ X $ is a Noetherian ring, i.e., $ \\\\mathcal{O}_X(U) $ is Noetherian.\"}\n  {\"name\": \"AlgebraicGeometry.finite_irreducibleComponents_of_isNoetherian\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \"[IsNoetherian X] : (irreducibleComponents X).Finite\", \"doc\": \"If $ X $ is a Noetherian scheme, then the set of its irreducible components is finite.\"}\n  {\"name\": \"AlgebraicGeometry.IsLocallyNoetherian.quasiSeparatedSpace\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \"[IsLocallyNoetherian X] : QuasiSeparatedSpace X\", \"doc\": \"Every locally Noetherian scheme is quasi-separated, meaning the intersection of any two quasi-compact open subsets of the scheme is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsSmooth f → Sort u_1} →\\n      (t : AlgebraicGeometry.IsSmooth f) →\\n        ((exists_isStandardSmooth :\\n              ∀ (x : ↥X),\\n                ∃ U V,\\n                  ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Ope\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.IsLocallyNoetherian\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A scheme is locally Noetherian if it admits an open cover by Noetherian schemes.\"}\n  {\"name\": \"AlgebraicGeometry.instIsLocallyNoetherianXScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \"{U : X.OpenCover} (i) [IsLocallyNoetherian X] : IsLocallyNoetherian (U.X i)\", \"doc\": \"If a scheme $ X $ is locally Noetherian, then each open subscheme in an open cover of $ X $ is also locally Noetherian.\"}",
    "date": "2026-10-19",
    "verdict": "no match: inspected hits concern ordinary normalization, smooth or etale morphisms, Noetherianity, abstract Sylow groups, or unrelated uses of regular/log/nodal; none states this geometric assertion or a one-line generalization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An excellent Noetherian log regular scheme has a proper birational regular modification with strict normal crossings boundary",
+   "results": "{\"t\": \"2026-10-18T20:11:13Z\", \"tool\": \"leanfinder\", \"query\": \"An excellent Noetherian log regular scheme has a proper birational regular modification with strict normal crossings boundary\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\"], \"digest\": \"9bd88a7fcf7e4b9e\"}; Read returned signatures: only ordinary normalization maps/covers, properness definitions, and smoothness results; no logarithmic resolution or strict-normal-crossings resolution theorem.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "LogRegular|log.regular|strict.*normal.*crossing|desingular",
+   "results": "{\"t\": \"2026-10-18T20:12:28Z\", \"tool\": \"grep\", \"query\": \"LogRegular|log.regular|strict.*normal.*crossing|desingular\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read returned signatures: only ordinary normalization maps/covers, properness definitions, and smoothness results; no logarithmic resolution or strict-normal-crossings resolution theorem.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LogRegular\"",
+   "results": "{\"t\": \"2026-10-18T20:12:28Z\", \"tool\": \"loogle\", \"query\": \"\\\"LogRegular\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read returned signatures: only ordinary normalization maps/covers, properness definitions, and smoothness results; no logarithmic resolution or strict-normal-crossings resolution theorem.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Desingularization of logarithmically regular schemes followed by blowing up normal crossings strata to separate boundary components",
+   "results": "{\"t\": \"2026-10-18T20:13:05Z\", \"tool\": \"leanfinder\", \"query\": \"Desingularization of logarithmically regular schemes followed by blowing up normal crossings strata to separate boundary components\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.Scheme.Hom.normalizationOpenCover\", \"AlgebraicGeometry.Scheme.Hom.fromNormalization\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.Scheme.Hom.ι_fromNormalization\"], \"digest\": \"76ffa74baa090cd0\"}; Read returned signatures: only ordinary normalization maps/covers, properness definitions, and smoothness results; no logarithmic resolution or strict-normal-crossings resolution theorem.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Proper birational resolution of a log regular scheme by a regular scheme with strict normal crossings divisor",
+   "results": "{\"t\": \"2026-10-18T20:13:06Z\", \"tool\": \"leansearch\", \"query\": \"Proper birational resolution of a log regular scheme by a regular scheme with strict normal crossings divisor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmooth.casesOn\", \"AlgebraicGeometry.isProper_iff\", \"AlgebraicGeometry.IsProper.toLocallyOfFiniteType\", \"AlgebraicGeometry.IsProper.toIsSeparated\", \"AlgebraicGeometry.IsProper\", \"AlgebraicGeometry.isProper_eq\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"AlgebraicGeometry.IsProper.of_valuativeCriterion\"], \"digest\": \"076cce3f00b1bcb5\"}; Read returned signatures: only ordinary normalization maps/covers, properness definitions, and smoothness results; no logarithmic resolution or strict-normal-crossings resolution theorem.",
+   "date": "2026-10-19",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-gabber-prime-to-ell-regular-cover",
@@ -83,5 +325,109 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-noetherian-log-pair-strict-resolution",
+  "worker": "stage1",
+  "summary": "Expanded the excellent Noetherian log-pair resolution through the existing general saturated monoidal tower and permissible blowup lemmas. Checked all cited statements and both inductions, separated regularity from strictness, and proved the ordinary-local parameter clause from regular quotients and Nakayama. The statement is unchanged. No new nodes.",
+  "blueprint": "Ancestor lem-per-artin-gabber-affine-curve Step 3, the ILO IX 1.1 uniformization input used by XIII 3.2.1, via prime-to-ell standard form. This item realizes precisely the Kato--Niziol resolution/strict-boundary input in ILO IX 2.4: VII 4.3 and VIII 4.1.1--4.1.8.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-monoidal-resolution-tower",
+    "why": "General geometric/algebraic input to the ILO IX 2.4 log-pair resolution: Monoidal resolution of characteristic monoids. This preserves the unit route and no node of this unit supplies the same general input."
+   },
+   {
+    "node": "prop-nagata-affine-blowup-chart-cover",
+    "why": "General geometric/algebraic input to the ILO IX 2.4 log-pair resolution: Finite affine chart cover. This preserves the unit route and no node of this unit supplies the same general input."
+   },
+   {
+    "node": "lem-trf-log-blowup-normalization",
+    "why": "General geometric/algebraic input to the ILO IX 2.4 log-pair resolution: Comparison of one saturated log blowup with normalization. This preserves the unit route and no node of this unit supplies the same general input."
+   },
+   {
+    "node": "lemma-nagata-blowup-proper",
+    "why": "General geometric/algebraic input to the ILO IX 2.4 log-pair resolution: Properness of a blow-up. This preserves the unit route and no node of this unit supplies the same general input."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "General geometric/algebraic input to the ILO IX 2.4 log-pair resolution: A scheme of finite type over a Noetherian scheme is Noetherian (Stacks 01T6). This preserves the unit route and no node of this unit supplies the same general input."
+   },
+   {
+    "node": "lem-exc-finite-type-localization-excellent",
+    "why": "General geometric/algebraic input to the ILO IX 2.4 log-pair resolution: Excellence is preserved by finite type algebras and localization. This preserves the unit route and no node of this unit supplies the same general input."
+   },
+   {
+    "node": "lem-trf-excellent-scheme-affine-cover",
+    "why": "General geometric/algebraic input to the ILO IX 2.4 log-pair resolution: Excellence of a scheme is detected on an affine open cover. This preserves the unit route and no node of this unit supplies the same general input."
+   },
+   {
+    "node": "lem-weil-pbc-finite-proper",
+    "why": "General geometric/algebraic input to the ILO IX 2.4 log-pair resolution: Finite morphisms are proper. This preserves the unit route and no node of this unit supplies the same general input."
+   },
+   {
+    "node": "lem-weil-pbc-proper-composition",
+    "why": "General geometric/algebraic input to the ILO IX 2.4 log-pair resolution: Properness is stable under composition. This preserves the unit route and no node of this unit supplies the same general input."
+   },
+   {
+    "node": "lem-trf-free-characteristic-regular-boundary",
+    "why": "General geometric/algebraic input to the ILO IX 2.4 log-pair resolution: Free characteristic criterion and normal crossings boundary. This preserves the unit route and no node of this unit supplies the same general input."
+   },
+   {
+    "node": "lem-trf-nc-maximal-branch-blowup",
+    "why": "General geometric/algebraic input to the ILO IX 2.4 log-pair resolution: Maximal geometric branch locus and its one-step blowup. This preserves the unit route and no node of this unit supplies the same general input."
+   },
+   {
+    "node": "thm-nagata-global-blowup-complement",
+    "why": "General geometric/algebraic input to the ILO IX 2.4 log-pair resolution: Complement of the center. This preserves the unit route and no node of this unit supplies the same general input."
+   },
+   {
+    "node": "lem-trf-permissible-boundary-preservation",
+    "why": "General geometric/algebraic input to the ILO IX 2.4 log-pair resolution: A permissible blowup preserves the boundary and its strict exceptional part. This preserves the unit route and no node of this unit supplies the same general input."
+   },
+   {
+    "node": "lem-weil-pbc-regular-local-quotient-independent-generators",
+    "why": "General geometric/algebraic input to the ILO IX 2.4 log-pair resolution: A regular local quotient has independent cotangent-space kernel generators. This preserves the unit route and no node of this unit supplies the same general input."
+   },
+   {
+    "node": "lem-weil-pbc-regular-local-cotangent-dimension",
+    "why": "General geometric/algebraic input to the ILO IX 2.4 log-pair resolution: Fundamental inequality dim R <= dim m/m^2, with equality iff regular. This preserves the unit route and no node of this unit supplies the same general input."
+   },
+   {
+    "node": "lem-weil-pbc-nakayama-local-generators",
+    "why": "General geometric/algebraic input to the ILO IX 2.4 log-pair resolution: Nakayama: generators of a finite module over a local ring are detected modulo the maximal ideal. This preserves the unit route and no node of this unit supplies the same general input."
+   },
+   {
+    "node": "lem-trf-regular-local-ufd-boundary-factorization",
+    "why": "General geometric/algebraic input to the ILO IX 2.4 log-pair resolution: Boundary-unit factorization in a regular local ring. This preserves the unit route and no node of this unit supplies the same general input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-monoidal-resolution-tower",
+  "prop-nagata-affine-blowup-chart-cover",
+  "lem-trf-log-blowup-normalization",
+  "lemma-nagata-blowup-proper",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-exc-finite-type-localization-excellent",
+  "lem-trf-excellent-scheme-affine-cover",
+  "lem-weil-pbc-finite-proper",
+  "lem-weil-pbc-proper-composition",
+  "lem-trf-free-characteristic-regular-boundary",
+  "lem-trf-nc-maximal-branch-blowup",
+  "thm-nagata-global-blowup-complement",
+  "lem-trf-permissible-boundary-preservation",
+  "lem-weil-pbc-regular-local-quotient-independent-generators",
+  "lem-weil-pbc-regular-local-cotangent-dimension",
+  "lem-weil-pbc-nakayama-local-generators",
+  "lem-trf-regular-local-ufd-boundary-factorization"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q67-6d6f5f3f4",
+  "group": "Q67",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q67-6d6f5f3f4 (reviewer sub-agent of L); spot-checked: I read the item in full: 13 steps, no new nodes, and the statement and stmt_deps are byte-identical to the base. I read every cited statement and ILO VII 4.3, VIII 3.3.15, 3.4.8-3.4.9, 4.1.1-4.1.8, Remark 4.2.2(i) and IX 2.4. The route is the source's: (1) a saturated monoidal tower, whose characteristic groups are torsion-free by the saturated-and-sharp argument, which I checked; (2) the first induction is stated explicitly, using log-blowup-normalization and blowup properness; excellence passes to Y_i through 07QU and the 0HAB affine cover, and normalization-preparation applies because for an integral scheme the componentwise and function-field normalizations agree; (3) free-characteristic-regular-boundary gives a regular V with an NC boundary whose support is exactly p^-1 B; (4) the second induction alternates maximal-branch-blowup and permissible-boundary-preservation, with every hypothesis checked: the center is regular and generated by a subset of the parameters, and H stays SNC as a union of components; Step 9 holds because scheme-theoretic closure commutes with finite unions (kernel intersection); the induction terminates because the maximum branch number strictly drops, including the case m=1 with an empty strict transform; (5) the parameter clause comes from regular quotients, cotangent dimension 1 and then s, Nakayama, and UFD primes, giving the ideal (t1...ts). The SNC codim-s to local-dimension translation is covered by def-trf-strict-normal-crossings-boundary's own equivalence sentence on regular schemes; I accepted it. Small cases checked: a field, a trait, an irreducible nodal curve in a surface, and the A1 toric singularity. Duplicate search: only the field-specific F-algebraically-closed finite-type packages turn up, and they do not apply. Batch-5: the target closure computed with and without the item's proof deps differs by 0 nodes. All 9 flagged citations are generic log-geometry or commutative algebra (VIII 3.3.15/3.4.6/4.1.6/4.2.9, VI 1.7, Stacks 0HAB/035S/0AG0), and their closures contain no trace-formula or Poincaré-duality theorem node, so I accepted them. The declared tool_uses are accepted, and there is no SGA citation."
  }
 }
