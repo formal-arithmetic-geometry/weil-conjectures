@@ -349,5 +349,30 @@
   "group": "Q06",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q06-2896d2eec (reviewer sub-agent of L); spot-checked: Read the full item, all cited statements, sources, and route. All ten steps check: finite-coefficient restriction, closed-unit vanishing, and forgetting-support compatibility are explicit. No new nodes, circular dependency, dropped-route dependency, or over-2000-character step. Accepted generic tool uses and source checks are recorded in review.md; no repairs needed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-be3aaa4df",
+  "group": "Q59",
+  "result": "pass",
+  "note": "Wrote review.md. Checked statements, canonical constructions, dependencies, sources, universes, edge cases, docstrings, and route-pivot compliance. Snapshot module compiled successfully through scompile.py with no diagnostics. No corrections required; branches unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ClosedSupportedCupVanishing",
+  "declaration": "WeilConjectures.PurityFiniteSetting.closed_supported_cup_vanishing",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.closedCupFullSupport",
+   "WeilConjectures.PurityFiniteSetting.closedSupportedCup",
+   "WeilConjectures.PurityFiniteSetting.closedOrdinaryCup",
+   "WeilConjectures.PurityFiniteSetting.closed_supported_cup_vanishing"
+  ],
+  "file": "lean/Sheaf/Paper/ClosedSupportedCupVanishing.lean",
+  "statement": "theorem closed_supported_cup_vanishing (P : PurityFiniteSetting.{u}) {Z X : Scheme.{u}} [X.Over (Spec (.of P.field.k))] [IsSeparated (X ↘ Spec (.of P.field.k))] [LocallyOfFiniteType (X ↘ Spec (.of P.field.k))] [QuasiCompact (X ↘ Spec (.of P.field.k))] (i : Z ⟶ X) [IsClosedImmersion i] (a b : ℕ) (t s : ℤ) (α : P.FunctorialCupOrdinaryH true X (a : ℤ) t) (β : P.FunctorialCupH true i (b : ℤ) s) (hα : P.functorialCupOrdinaryPullback true i (X ↘ Spec (.of P.field.k)) a t α = 0) : P.closedSupportedCup i a b t s α β = 0 ∧ P.closedOrdinaryCup X a b t s α (P.functorialCupForget true i b s β) = 0",
+  "branch": "newtargets-dag",
+  "by": "Q59",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Both zero conclusions on the actual pro-etale supported-Hom groups. Helpers specialize the published cup using the full-support identity and canonical identity-pullback support identification; ordinary pullback and forgetting support are the recorded functoriality maps."
  }
 }

@@ -16,7 +16,12 @@
   "lem-pur-integral-operations-preserve-constructible",
   "lem-pod-point-sections-derived-reduction",
   "def-trf-frobenius-operators",
-  "prop-trf-scheme-galois-comparison"
+  "prop-trf-scheme-galois-comparison",
+  "lem-trf-local-frobenius-transport-normalization",
+  "lem-trf-point-reduction-unit-normalization",
+  "lem-pod-integral-pullback-composition",
+  "def-trf-point-reduction-units",
+  "lem-weil-pbc-proetale-derived-pullback-composition"
  ],
  "proof": [
   {
@@ -317,5 +322,45 @@
   "group": "Q25",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q25-5aa934fbc (reviewer sub-agent of L); spot-checked: Read the full mathematics and cited sources. Repaired C3/C4: steps 4 and 6 required point-reduction unit normalization absent from the cited statements. Added one searched, statement-only lemma and corrected item JSON under fixes/. Statement unchanged; step checks, edge cases, source locations and accepted tool uses are documented in review.md.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-e9327cd09",
+  "group": "Q76",
+  "result": "pass",
+  "note": "Wrote review.md. Checked immutable statements, dependencies, sources, canonical maps, universes, edge cases, docstrings and verbatim signature. Both scompile.py checks passed without diagnostics. No fixes needed; branch unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CompletedStalkFrobeniusReduction",
+  "declaration": "WeilConjectures.CompletedStalkFrobenius.completedStalkFrobeniusReduction",
+  "declarations": [
+   "WeilConjectures.CompletedStalkFrobenius.moduleSizeLift",
+   "WeilConjectures.CompletedStalkFrobenius.integralSectionsLarge",
+   "WeilConjectures.CompletedStalkFrobenius.finiteSectionsLarge",
+   "WeilConjectures.CompletedStalkFrobenius.integralSectionsSize",
+   "WeilConjectures.CompletedStalkFrobenius.finiteSectionsSize",
+   "WeilConjectures.CompletedStalkFrobenius.integralSectionsLargeFactors",
+   "WeilConjectures.CompletedStalkFrobenius.integralFibreLarge",
+   "WeilConjectures.CompletedStalkFrobenius.moduleQLarge",
+   "WeilConjectures.CompletedStalkFrobenius.sectionsReduction",
+   "WeilConjectures.CompletedStalkFrobenius.finiteFibre",
+   "WeilConjectures.CompletedStalkFrobenius.reduction",
+   "WeilConjectures.CompletedStalkFrobenius.finiteModel",
+   "WeilConjectures.CompletedStalkFrobenius.finiteTransport",
+   "WeilConjectures.CompletedStalkFrobenius.integralTransport",
+   "WeilConjectures.CompletedStalkFrobenius.restrictedModel",
+   "WeilConjectures.CompletedStalkFrobenius.transition",
+   "WeilConjectures.CompletedStalkFrobenius.reductionAdjoint",
+   "WeilConjectures.CompletedStalkFrobenius.ReductionStatement",
+   "WeilConjectures.CompletedStalkFrobenius.completedStalkFrobeniusReduction"
+  ],
+  "file": "lean/Sheaf/Paper/CompletedStalkFrobeniusReduction.lean",
+  "statement": "theorem completedStalkFrobeniusReduction (X₀ : Over (Spec (.of D.k₀))) [LocallyOfFiniteType X₀.hom] [QuasiCompact X₀.hom] [IsSeparated X₀.hom] (m : ℕ) (hm : 1 ≤ m) (y : D.extensionPoints X₀ m hm) : ReductionStatement D l hl E X₀ m hm y",
+  "branch": "newtargets-dag",
+  "by": "Q76",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Uses the published LocalFrobeniusTransport finiteNormalized and integralNormalized, not a new choice of transport. The target uses canonical composite-pullback coordinates. Identity-induced localization-size comparisons reconcile the small point-fibre and standard coefficient-adjunction derived categories, preserving the site and coefficient universes. ReductionStatement unfolds the reduction square, all quotient transitions (in normalized adjoint form), and naturality in every integral morphism; all positive exponents are successors. Good representatives are universally quantified, not extra restrictions on K."
  }
 }
