@@ -8,10 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.AffineSpace
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
-import Mathlib.AlgebraicGeometry.ResidueField
-import Mathlib.RingTheory.Smooth.StandardSmoothOfFree
-import WeilConjectures.Mathlib.RingTheory.Extension.Presentation.Submersive
-import WeilConjectures.Mathlib.RingTheory.Smooth.StandardSmoothOfFree
+import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
 
 /-!
 # Étale-local normal form at a smooth point
@@ -63,6 +60,27 @@ theorem Scheme.Hom.exists_etale_to_affineSpace_of_exists_smooth_appLE
       Etale e ∧
         e ≫ (AffineSpace (ULift.{u} (Fin d)) U.toScheme ↘ U.toScheme) =
           g.resLE U V hVU := by
-  sorry
+  obtain ⟨U, hU, V, hV, hxV, hVU, H⟩ := hx
+  have : IsAffine U.toScheme := hU
+  have : IsAffine V.toScheme := hV
+  have : Smooth (g.resLE U V hVU) := by
+    rw [HasRingHomProperty.iff_of_isAffine (P := @Smooth)]
+    exact (RingHom.Smooth.propertyIsLocal.respectsIso.arrow_mk_iso_iff
+      (arrowResLEAppIso g U V hVU)).mpr H
+  obtain ⟨U', hU', V', hV', hxV', hVU', H'⟩ :=
+    Smooth.exists_isStandardSmooth (g.resLE U V hVU) ⟨x, hxV⟩
+  let := ((g.resLE U V hVU).appLE U' V' hVU').hom.toAlgebra
+  obtain ⟨_, _, _, _, ⟨P⟩⟩ := H'
+  obtain ⟨d, H''⟩ : ∃ d,
+      ((g.resLE U V hVU).appLE U' V' hVU').hom.IsStandardSmoothOfRelativeDimension d :=
+    ⟨_, _, _, _, ‹_›, P, rfl⟩
+  rw [Scheme.Hom.resLE_appLE] at H''
+  have hU'' := hU'.image_of_isOpenImmersion U.ι
+  have hV'' := hV'.image_of_isOpenImmersion V.ι
+  obtain ⟨e, he, hge⟩ :=
+    g.exists_etale_to_affineSpace_of_isStandardSmoothOfRelativeDimension hU'' hV'' _ H''
+  have hxV'' : x ∈ V.ι ''ᵁ V' := ⟨⟨x, hxV⟩, hxV', rfl⟩
+  exact ⟨d, _, _, hU'', hV'', (le_resLE_preimage_iff g hVU U' V').mp hVU' hxV'', hxV'', _, e,
+    he, hge⟩
 
 end AlgebraicGeometry
