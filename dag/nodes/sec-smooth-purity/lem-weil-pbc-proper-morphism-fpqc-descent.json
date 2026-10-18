@@ -28,93 +28,40 @@
  ],
  "proof": [
   {
-   "text": "For each $i$, properness of $f_i$ means that $f_i$ is separated, universally closed and of finite type. Finite type means locally of finite type and quasi-compact. Thus the hypotheses needed below hold for all $i$.",
+   "text": "The source-library instance isProper_descendsAlong_surjective_inf_flat_inf_quasiCompact supplies descent of properness along a surjective flat quasi-compact morphism. Mathlib supplies Zariski locality on the target and stability under base change for IsProper.",
    "uses": [
-    "def-weil-proper-morphism",
-    "def-weil-finite-type-morphism"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tag 01W1 (definition-proper), Tag 01T0"
-   }
-  },
-  {
-   "text": "Apply [lem-weil-pbc-fpqc-descend-universally-closed] to the given fpqc family and the universally closed $f_i$. It gives that $f$ is universally closed.",
-   "uses": [
-    "lem-weil-pbc-fpqc-descend-universally-closed"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/descent.tex",
-    "place": "Tag 02KS (lemma-descending-property-universally-closed)"
-   }
-  },
-  {
-   "text": "Apply [lem-weil-pbc-fpqc-descend-locally-finite-type] to the same fpqc family and the locally finite type $f_i$. It gives that $f$ is locally of finite type.",
-   "uses": [
-    "lem-weil-pbc-fpqc-descend-locally-finite-type"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/descent.tex",
-    "place": "Tag 02KX (lemma-descending-property-locally-finite-type)"
-   }
-  },
-  {
-   "text": "By [lem-weil-pbc-universally-closed-quasi-compact], the universally closed $f$ of step 2 is quasi-compact. Together with step 3, this says that $f$ is of finite type by definition.",
-   "uses": [
-    "lem-weil-pbc-universally-closed-quasi-compact",
-    "def-weil-finite-type-morphism"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tag 04XU (lemma-universally-closed-quasi-compact)"
-   }
-  },
-  {
-   "text": "Put $D=X\\times_S X$ and $\\delta:X\\to D$ equal to the diagonal. Pull the given fpqc family back along $D\\to S$. By [lem-galois-fpqc-covering-base-change], the projections $D_i=D\\times_S S_i\\to D$ form an fpqc covering. Apply [lem-weil-pbc-over-pullback-diagonal-closed-immersion] to the $S$-morphism $f:X\\to S$ and $S_i\\to S$: it says exactly that the base change of $\\delta$ along $S_i\\to S$ is closed because $f_i$ is separated. As $X\\times_D(D\\times_S S_i)\\cong X\\times_S S_i$, this is also the base change of $\\delta$ along $D_i\\to D$. The identification follows from the fibre-product universal property: for a test scheme $Z$, both represent pairs $a:Z\\to X$, $b:Z\\to S_i$ with $f a=g_i b$. Under this identification the map to $D_i$ is $(\\delta a,b)$ on both sides, so the isomorphism identifies the morphisms over $D_i$, not only their source schemes. Now [lem-pc-fpqc-descend-closed-immersion] applied to $\\delta$ and the cover of $D$ shows that $\\delta$ is a closed immersion. Thus $f$ is separated by definition.",
-   "uses": [
-    "lem-galois-fpqc-covering-base-change",
-    "lem-weil-pbc-over-pullback-diagonal-closed-immersion",
-    "lem-pc-fpqc-descend-closed-immersion",
-    "def-pc-fibre-product",
+    "lem-weil-pbc-proper-single-fpqc-descent",
     "def-weil-proper-morphism"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/descent.tex",
-    "place": "Tag 02KU (lemma-descending-property-separated); Tag 02L6 (lemma-descending-property-closed-immersion)"
-   }
+   "elementary": false
   },
   {
-   "text": "Steps 2, 4 and 5 give universal closedness, finite type and separatedness of $f$, respectively. These are the three defining conditions for properness. Hence $f$ is proper.",
+   "text": "The covering presieve generates an fpqc covering sieve by Precoverage.generate_mem_toGrothendieck. For every i, take the canonical pullback square with first projection pullback.fst f (g i) and second projection pullback.snd f (g i); its pullback witness is IsPullback.of_hasPullback.",
    "uses": [
-    "def-weil-proper-morphism"
+    "def-weil-pbc-fpqc-covering",
+    "def-pc-fibre-product"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tag 01W1 (definition-proper)"
-   }
+   "elementary": true
+  },
+  {
+   "text": "Apply the already proved generic covering-family descent theorem Scheme.of_isPullback_of_ofArrows_mem_fpqcTopology with P = IsProper to these squares and the assumed proper second projections. This gives IsProper f, including arbitrary index universes and the empty covering of the empty base.",
+   "uses": [
+    "lem-weil-pbc-fpqc-family-descent-of-single-morphism-descent"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
+  "lem-weil-pbc-proper-single-fpqc-descent",
   "def-weil-proper-morphism",
-  "def-weil-finite-type-morphism",
-  "lem-weil-pbc-fpqc-descend-universally-closed",
-  "lem-weil-pbc-fpqc-descend-locally-finite-type",
-  "lem-weil-pbc-universally-closed-quasi-compact",
-  "lem-galois-fpqc-covering-base-change",
-  "lem-weil-pbc-over-pullback-diagonal-closed-immersion",
-  "lem-pc-fpqc-descend-closed-immersion",
-  "def-pc-fibre-product"
+  "def-weil-pbc-fpqc-covering",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-fpqc-family-descent-of-single-morphism-descent"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/descent.tex",
-  "place": "Tag 02L1"
+  "by": "agent",
+  "document": "lean/WeilConjectures/Mathlib/AlgebraicGeometry/Sites/Fpqc.lean",
+  "place": "S2 stage 3, 2026-10-18: specialize the existing proved family-descent theorem with the existing properness single-morphism descent instance in FieldExtensionDescent.lean; Stacks Descent Tag 02L1."
  },
  "mathlib_searches": [
   {
@@ -243,12 +190,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-weil-pbc-fpqc-descend-universally-closed",
-  "lem-weil-pbc-fpqc-descend-locally-finite-type",
-  "lem-weil-pbc-over-pullback-diagonal-closed-immersion",
-  "lem-pc-fpqc-descend-closed-immersion"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-14",
   "by": "L",
@@ -286,5 +228,15 @@
   "by": "NH",
   "date": "2026-10-15",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261018T062906-L-674281",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

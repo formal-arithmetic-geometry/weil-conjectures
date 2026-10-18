@@ -1,0 +1,132 @@
+{
+ "id": "lem-weil-pbc-proper-single-fpqc-descent",
+ "kind": "statement",
+ "title": "Properness descends along a single surjective flat quasi-compact morphism (proved source instance)",
+ "statement": "For schemes [def-pc-scheme], the morphism property of properness [def-weil-proper-morphism] descends along surjective flat quasi-compact morphisms [def-weil-flat-morphism, def-weil-finite-type-morphism]: for any cartesian square [def-pc-fibre-product] with right vertical arrow g and lower horizontal arrow p, if p is surjective, flat and quasi-compact and the upper horizontal arrow is proper, then g is proper. No finite-type, quasi-separatedness or affineness hypothesis on the schemes is added.",
+ "source": {
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tag 02L1, lemma-descending-property-proper; existing source-library proof in FieldExtensionDescent.lean, lines 164-170."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-proper-morphism",
+  "def-weil-flat-morphism",
+  "def-weil-finite-type-morphism",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Use the existing source-library proof: rewrite IsProper by isProper_eq as the conjunction of separatedness, universal closedness and local finite type. Mathlib supplies descent of universal closedness and local finite type. For separatedness, the source-library instance immediately above rewrites it as the diagonal of the closed-immersion property; the diagonal descent instance follows from closed-immersion descent, whose complete source proof is in WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FlatDescent.lean. The DescendsAlong instance for intersections combines these three descents. This is exactly the proof by rw [isProper_eq]; infer_instance in the attached existing instance; no new Lean theorem is stated.",
+   "uses": [
+    "def-weil-proper-morphism",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tag 02L1, lemma-descending-property-proper; existing source-library proof in FieldExtensionDescent.lean, lines 164-170."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Proper morphisms descend along faithfully flat quasi compact morphisms",
+   "results": "Eight hits, including IsZariskiLocalAtTarget.descendsAlong_inf_quasiCompact, DescendsAlong and IsProper. The precise instance is in the existing source library.",
+   "date": "2026-10-18",
+   "verdict": "Reuse the already proved source instance."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsProper",
+   "results": "Twelve hits, including IsProper.isStableUnderBaseChange and IsProper.instIsZariskiLocalAtTarget.",
+   "date": "2026-10-18",
+   "verdict": "Mathlib supplies the locality and base-change instances; source supplies single-morphism descent."
+  },
+  {
+   "tool": "grep",
+   "query": "rg isProper_descendsAlong_surjective_inf_flat_inf_quasiCompact lean/WeilConjectures; rg FieldExtensionDescent dag/nodes",
+   "results": "Existing complete instance at FieldExtensionDescent.lean:165-170. No existing node attaches this declaration. Existing FieldExtensionDescent nodes concern field extensions or other properties.",
+   "date": "2026-10-18",
+   "verdict": "Attach this existing closed result without duplicating its Lean statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProperMorphismFpqcDescent",
+  "date": "2026-10-18",
+  "group": "S2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-cbc-finite-torsion",
+   "place": "Single-morphism descent input to the properness covering-family descent tool needed for closed proper supports in the compact-support base-change comparison.",
+   "via": [
+    "lem-weil-pbc-proper-morphism-fpqc-descent",
+    "lem-cbc-closed-proper-support-locality",
+    "lem-cbc-proper-support-sheaf-composition",
+    "lem-cbc-proper-open-interchange-coherence"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "closed",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.isProper_descendsAlong_surjective_inf_flat_inf_quasiCompact",
+     "module": "WeilConjectures.AlgebraicGeometry.FieldExtensionDescent",
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.FieldExtensionDescent",
+  "declaration": "AlgebraicGeometry.isProper_descendsAlong_surjective_inf_flat_inf_quasiCompact",
+  "statement": "instance isProper_descendsAlong_surjective_inf_flat_inf_quasiCompact :\n    DescendsAlong @IsProper\n      (@Surjective ⊓ @Flat ⊓ @QuasiCompact : MorphismProperty Scheme.{u})",
+  "branch": "slopmaster2",
+  "by": "S2",
+  "date": "2026-10-18",
+  "note": "Existing proved instance, used by typeclass synthesis in the family-descent specialization. #print axioms of the resulting family theorem has only propext, Classical.choice, Quot.sound."
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261018T062906-L-674281",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261018T062906-L-674281",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
