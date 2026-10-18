@@ -6,14 +6,11 @@ Authors: SHEAF group Q69
 module
 
 public import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
+import Sheaf.NumberTheory.Padics.ExtensionIntegersDvr
 public import Mathlib.RingTheory.IntegralClosure.Algebra.Basic
-import Mathlib.Analysis.Normed.Unbundled.SpectralNorm
-import Mathlib.NumberTheory.Padics.PadicIntegers
-import Mathlib.RingTheory.DiscreteValuationRing.Basic
-import Mathlib.RingTheory.Noetherian.Basic
+import Mathlib.Algebra.Polynomial.Lifts
 import Mathlib.RingTheory.PrincipalIdealDomain
 import Mathlib.RingTheory.Polynomial.RationalRoot
-import Mathlib.Topology.Algebra.Module.FiniteDimension
 
 /-!
 # Integers in a finite extension of p-adic fields
@@ -73,6 +70,54 @@ theorem padic_integers_integralClosure
     x ∈ coefficientExtensionIntegers l F ↔
       x ∈ @integralClosure (coefficientExtensionIntegers l E) F _ _
         ((i.toRingHom.comp (coefficientExtensionIntegers l E).subtype).toAlgebra) := by
-  sorry
+  classical
+  -- The spectral value controls the coefficients of the minimal polynomial directly.
+  let O := coefficientExtensionIntegers l E
+  let T := coefficientExtensionIntegers l F
+  let : Algebra O F := (i.toRingHom.comp O.subtype).toAlgebra
+  have hE := (extension_integers_dvr l E (coefficientExtensionAbsoluteValue l E)
+    (spectralNorm_extends (K := ℚ_[l]) (L := E))).choose_spec.choose_spec
+  have hF := (extension_integers_dvr l F (coefficientExtensionAbsoluteValue l F)
+    (spectralNorm_extends (K := ℚ_[l]) (L := F))).choose_spec.choose_spec
+  have hmemE (a : E) : a ∈ O ↔ spectralNorm ℚ_[l] E a ≤ 1 := hE.1 a
+  have hmemF (a : F) : a ∈ T ↔ spectralNorm ℚ_[l] F a ≤ 1 := hF.1 a
+  have hmap (a : E) : spectralNorm ℚ_[l] F (i a) = spectralNorm ℚ_[l] E a := by
+    unfold spectralNorm
+    rw [minpoly.algHom_eq i i.injective]
+  constructor
+  · intro hx
+    have hmon := minpoly.monic (Algebra.IsIntegral.isIntegral (R := ℚ_[l]) x)
+    have hcoeff := (spectralValue_le_one_iff hmon).mp ((hmemF x).mp hx)
+    let p := (minpoly ℚ_[l] x).map (algebraMap ℚ_[l] E)
+    have hp : p.Monic := hmon.map _
+    have hlift : p ∈ Polynomial.lifts O.subtype := by
+      rw [Polynomial.lifts_iff_coeff_lifts]
+      intro n
+      refine ⟨⟨p.coeff n, (hmemE _).mpr ?_⟩, rfl⟩
+      simpa only [p, Polynomial.coeff_map, spectralNorm_extends] using hcoeff n
+    obtain ⟨q, hq, _, hqmon⟩ := Polynomial.lifts_and_degree_eq_and_monic hlift hp
+    change IsIntegral O x
+    refine ⟨q, hqmon, ?_⟩
+    change q.eval₂ (i.toRingHom.comp O.subtype) x = 0
+    rw [← Polynomial.eval₂_map, hq]
+    simp only [p, Polynomial.eval₂_map]
+    have hi : i.toRingHom.comp (algebraMap ℚ_[l] E) = algebraMap ℚ_[l] F := by
+      ext a
+      exact i.commutes a
+    rw [hi]
+    exact minpoly.aeval ℚ_[l] x
+  · intro hx
+    -- The larger integer ring is integrally closed in its fraction field.
+    have : IsFractionRing T F := hF.2.2.2.2.2.2.1
+    have : IsPrincipalIdealRing T := hF.2.2.2.2.2.2.2.2.1
+    have : IsIntegrallyClosed T := inferInstance
+    have : IsIntegrallyClosedIn T F :=
+      (isIntegrallyClosed_iff_isIntegrallyClosedIn F).mp inferInstance
+    apply (Subring.integralClosure_le_iff (R := O) (T := T)).mpr ?_ hx
+    intro a
+    apply (hmemF _).mpr
+    change spectralNorm ℚ_[l] F (i (a : E)) ≤ 1
+    rw [hmap]
+    exact (hmemE _).mp a.property
 
 end Padic

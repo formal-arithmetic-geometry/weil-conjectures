@@ -1,0 +1,102 @@
+{
+ "id": "lem-sfb-monic-spectral-value-coefficients",
+ "kind": "statement",
+ "title": "Coefficient criterion for the spectral value of a monic polynomial",
+ "statement": "Let R be a normed division ring and P a monic polynomial over R [def-weil-polynomial-ring]. Write d for its natural degree and let s(P) be the supremum, over n < d, of the real numbers ‖P.coeff n‖^(1/(d-n)), with the other terms zero; this is Mathlib spectralValue P. Then s(P) ≤ 1 if and only if ‖P.coeff n‖ ≤ 1 for every natural number n.",
+ "source": {
+  "document": "Mathlib/Analysis/Normed/Unbundled/SpectralNorm.lean",
+  "place": "spectralValue_le_one_iff, lines 200–219"
+ },
+ "stmt_deps": [
+  "def-weil-polynomial-ring"
+ ],
+ "proof": [
+  {
+   "text": "Apply Mathlib spectralValue_le_one_iff to the monicity hypothesis. The theorem has exactly the stated hypotheses and conclusion, including the coefficients in and above degree d.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "mathlib",
+  "document": "Mathlib/Analysis/Normed/Unbundled/SpectralNorm.lean",
+  "place": "spectralValue_le_one_iff, lines 200–219"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The spectral value of a monic polynomial is at most one if and only if all its coefficients have norm at most one",
+   "results": "{\"t\": \"2026-10-18T14:25:04Z\", \"tool\": \"leansearch\", \"query\": \"The spectral value of a monic polynomial is at most one if and only if all its coefficients have norm at most one\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"spectralValue_le_one_iff\", \"spectralValue\", \"Polynomial.cauchyBound_zero\", \"Polynomial.cauchyBound\", \"spectralValue_eq_zero_iff\", \"Polynomial.one_le_cauchyBound\", \"norm_root_le_spectralValue\", \"spectralNorm\"], \"digest\": \"fc9e88ee988c3e84\"}",
+   "date": "2026-10-18",
+   "verdict": "exact match: spectralValue_le_one_iff, read at lines 200–219 of SpectralNorm.lean"
+  },
+  {
+   "tool": "loogle",
+   "query": "spectralValue_le_one_iff",
+   "results": "{\"t\": \"2026-10-18T14:00:18Z\", \"tool\": \"loogle\", \"query\": \"spectralValue_le_one_iff\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"spectralValue_le_one_iff\"], \"digest\": \"79b228bf6b113d7e\"}",
+   "date": "2026-10-18",
+   "verdict": "exact match: spectralValue_le_one_iff, read at lines 200–219 of SpectralNorm.lean"
+  },
+  {
+   "tool": "grep",
+   "query": "theorem spectralValue_le_one_iff",
+   "results": "{\"t\": \"2026-10-18T14:25:41Z\", \"tool\": \"grep\", \"query\": \"theorem spectralValue_le_one_iff\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/Analysis/Normed/Unbundled/SpectralNorm.lean\"], \"digest\": \"a98f5afed062b1d7\"}",
+   "date": "2026-10-18",
+   "verdict": "exact match: spectralValue_le_one_iff, read at lines 200–219 of SpectralNorm.lean"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "spectralValue_le_one_iff",
+  "file": "Mathlib/Analysis/Normed/Unbundled/SpectralNorm.lean",
+  "line": 202,
+  "how": "exact: for {R : Type u} [NormedDivisionRing R] {P : Polynomial R}, (hP : P.Monic), the theorem states spectralValue P ≤ 1 ↔ ∀ n : ℕ, ‖P.coeff n‖ ≤ 1. Read lines 200–219."
+ },
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.NumberTheory.Padics.PadicIntegersIntegralClosure",
+  "date": "2026-10-18",
+  "group": "S9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-sfb-cartesian-coefficients-finite-free",
+   "place": "First sentence: integral-closure identification in the arithmetic input, via the minimal polynomial coefficient bound.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-prop-sfb-cartesian-coefficients",
+ "lean": {
+  "existing": true,
+  "module": "Mathlib.Analysis.Normed.Unbundled.SpectralNorm",
+  "declaration": "spectralValue_le_one_iff",
+  "statement": "theorem spectralValue_le_one_iff {R : Type u} [NormedDivisionRing R] {P : Polynomial R} (hP : P.Monic) : spectralValue P ≤ 1 ↔ ∀ n : ℕ, ‖P.coeff n‖ ≤ 1",
+  "branch": "mathlib",
+  "by": "S9",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S9",
+  "result": "pass",
+  "landing": "20261018T145116-L-3645150",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S9",
+  "result": "pass",
+  "landing": "20261018T145116-L-3645150",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

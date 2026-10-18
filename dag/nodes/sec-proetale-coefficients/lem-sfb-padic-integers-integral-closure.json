@@ -22,88 +22,46 @@
  ],
  "proof": [
   {
-   "text": "Put $K=\\mathbf Q_\\ell$ and $A=\\mathbf Z_\\ell$. By [def-weil-l-adic-numbers], $K$ is complete and $|\\ell|_\\ell=\\ell^{-1}<1$, so its norm is nontrivial. The compatible absolute values and valuation subrings are those of [def-weil-l-adic-coefficient-extension]; [lem-weil-l-adic-extension-absolute-value], applied to $F/K$, gives the ultrametric inequality on $F$. Choose a finite $K$-basis $b_1,\\ldots,b_d$ of $F$, possible since $F/K$ is finite, with $d\\geq1$ since a field is nonzero. Write $c_i(y)$ for the coordinates, so $y=\\sum_i c_i(y)b_i$. Apply [lem-weil-pbc-finite-dimensional-linear-homeomorphism] to the $K$-linear equivalence $F\\to K^d$, $y\\mapsto(c_i(y))_i$. Its hypotheses hold: $F$ and $K^d$ have Hausdorff norm/product topologies and continuous vector-space operations, because the absolute value on $F$ extends that on $K$ (scalar multiplication is field multiplication restricted to $K\\times F$). Thus the coordinate map is continuous.",
+   "text": "Use [def-weil-l-adic-coefficient-extension] and [lem-weil-l-adic-extension-integers-dvr] to obtain the unit-ball membership descriptions for O_E and O_F, and the fraction-field and principal-ideal-ring structures on O_F. The coefficient absolute values are spectral norms by [lem-weil-l-adic-extension-absolute-value]. For the given injective Q_l-algebra homomorphism i, minpoly.algHom_eq identifies the minimal polynomials of a and i(a), so their spectral norms agree.",
    "uses": [
-    "def-weil-l-adic-numbers",
     "def-weil-l-adic-coefficient-extension",
-    "lem-weil-l-adic-extension-absolute-value",
-    "lem-weil-pbc-finite-dimensional-linear-homeomorphism"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/sk-prop-sfb-cartesian-coefficients-finite-free.proof.md",
-    "place": "First sentence: supply the finite-dimensional coordinate topology for the arithmetic input; expanded agent argument"
-   }
-  },
-  {
-   "text": "The inverse image under this coordinate map of $\\{(a_i):|a_i|_\\ell<1\\ \\text{for every }i\\}$ is an open neighborhood of zero. Hence there is $\\varepsilon>0$ such that $|y|_F<\\varepsilon$ implies $|c_i(y)|_\\ell<1$ for all $i$. Choose $N\\geq0$ with $\\ell^{-N}<\\varepsilon$; this is possible since the geometric sequence $\\ell^{-N}$ tends to zero. Fix $x\\in\\mathcal O_F$. For every $n\\geq0$, including $n=0$, compatibility and multiplicativity give $|\\ell^N x^n|_F=\\ell^{-N}|x|_F^n\\leq\\ell^{-N}<\\varepsilon$. Therefore $\\ell^N c_i(x^n)=c_i(\\ell^N x^n)$ belongs to $A$, using the unit-ball description in [def-weil-l-adic-numbers]. It follows explicitly that\n$$x^n=\\sum_i(\\ell^N c_i(x^n))(\\ell^{-N}b_i)\\in L:=\\sum_i A(\\ell^{-N}b_i).$$\nHere the coordinate continuity is precisely that supplied by [lem-weil-pbc-finite-dimensional-linear-homeomorphism] in step 1. Thus all powers of $x$ lie in the single finitely generated $A$-module $L$; no uniform choice in $x$ is needed for the argument.",
-   "uses": [
-    "def-weil-l-adic-numbers",
-    "lem-weil-pbc-finite-dimensional-linear-homeomorphism"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/sk-prop-sfb-cartesian-coefficients-finite-free.proof.md",
-    "place": "First sentence: explicit bounded-powers lattice argument, using the topology established in step 1"
-   }
-  },
-  {
-   "text": "The ring $A$ is a discrete valuation ring by [def-weil-l-adic-numbers]. In the definition [def-sc-discrete-valuation-ring], this is in particular an integral domain with every ideal principal. Thus [lem-weil-pbc-pid-noetherian-normal] gives that $A$ is Noetherian. Let $B=A[x]\\subseteq F$, concretely the set of all finite sums $\\sum_{n=0}^m a_nx^n$ with $a_n\\in A$. These sums contain $1$ and $x$ and are closed under addition, negation and multiplication by distributing finite sums, so $B$ is a commutative $A$-algebra and an $A$-submodule of $F$. Step 2 places every summand in $L$, hence $B\\subseteq L$. Apply [lem-weil-pbc-noetherian-submodule-finite] to the finitely generated $A$-module $L$ and its $A$-submodule $B$. This proves that $B$ is a finitely generated $A$-module.",
-   "uses": [
-    "def-weil-l-adic-numbers",
-    "def-sc-discrete-valuation-ring",
-    "lem-weil-pbc-pid-noetherian-normal",
-    "lem-weil-pbc-noetherian-submodule-finite"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tags 00PD (lemma-characterize-dvr) and 00IK (lemma-Noetherian-basic), submodule finiteness; PID Noetherianity is the cited Mathlib leaf"
-   }
-  },
-  {
-   "text": "Apply [lem-weil-pbc-finite-algebra-is-integral] to $A\\to B$. Since $x\\in B$, it satisfies a monic polynomial $P\\in A[T]$, and the same equation holds in $F$ under the inclusion $B\\hookrightarrow F$. For every $a\\in A$, compatibility of the absolute value on $E$ with that on $K$ gives $|a|_E=|a|_\\ell\\leq1$, so $A\\subseteq\\mathcal O_E$, by [def-weil-l-adic-numbers] and [def-weil-l-adic-coefficient-extension]. Regard the coefficients of $P$ as elements of $\\mathcal O_E$. Its leading coefficient remains $1$, and evaluation in $F$ is unchanged, because $A\\to E\\to F$ is the given inclusion. Consequently $x$ is integral over $\\mathcal O_E$ in the sense of [def-weil-pbc-integral-closure]. This proves $x\\in\\mathcal O_F\\Rightarrow x\\text{ integral over }\\mathcal O_E$.",
-   "uses": [
-    "lem-weil-pbc-finite-algebra-is-integral",
-    "def-weil-l-adic-numbers",
-    "def-weil-l-adic-coefficient-extension",
-    "def-weil-pbc-integral-closure"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tags 00GK (lemma-finite-is-integral) and 00GI (definition-integral-ring-map); coefficient inclusion is the explicit elementary calculation"
-   }
-  },
-  {
-   "text": "Conversely, suppose $x\\in F$ is integral over $\\mathcal O_E$. By [def-weil-pbc-integral-closure] there are $r\\geq1$ and $a_0,\\ldots,a_{r-1}\\in\\mathcal O_E$ with $x^r=-\\sum_{j=0}^{r-1}a_jx^j$. Compatibility of absolute values and [def-weil-l-adic-coefficient-extension] give $|a_j|_F=|a_j|_E\\leq1$. If $t=|x|_F>1$, repeated application of the ultrametric inequality of [lem-weil-l-adic-extension-absolute-value] gives\n$$t^r=\\left|\\sum_{j=0}^{r-1}a_jx^j\\right|_F\\leq\\max_{0\\leq j<r}(|a_j|_F t^j)\\leq t^{r-1}<t^r,$$\na contradiction. Thus $|x|_F\\leq1$, i.e. $x\\in\\mathcal O_F$. The two implications give the required equivalence for every $x$, and the definition of integral closure in [def-weil-pbc-integral-closure] turns this pointwise equivalence into equality of the subrings.",
-   "uses": [
-    "def-weil-pbc-integral-closure",
-    "def-weil-l-adic-coefficient-extension",
+    "lem-weil-l-adic-extension-integers-dvr",
     "lem-weil-l-adic-extension-absolute-value"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tags 00GI (definition-integral-ring-map) and 00GP (definition-integral-closure); explicit leading-term ultrametric estimate"
-   }
+   "elementary": false
+  },
+  {
+   "text": "For x in O_F, its monic minimal polynomial over Q_l has spectral value at most one, by the definition of spectralNorm. Apply [lem-sfb-monic-spectral-value-coefficients] to bound every coefficient by one. Map this polynomial to E[T]. spectralNorm_extends shows that all mapped coefficients belong to O_E. Lift the mapped polynomial through O_E.subtype to a monic polynomial q over O_E, using Polynomial.lifts_iff_coeff_lifts and Polynomial.lifts_and_degree_eq_and_monic. The equation q.map O_E.subtype = (minpoly Q_l x).map (algebraMap Q_l E), the algebra-homomorphism identity i.commutes, and minpoly.aeval show that q evaluates to zero at x in F. Thus x is integral over O_E as in [def-weil-pbc-integral-closure].",
+   "uses": [
+    "lem-sfb-monic-spectral-value-coefficients",
+    "def-weil-l-adic-coefficient-extension",
+    "lem-weil-l-adic-extension-absolute-value",
+    "def-weil-pbc-integral-closure"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The principal ideal domain O_F is integrally closed by the normality clause of [lem-weil-pbc-pid-noetherian-normal], and F is its fraction field. Compatibility of spectral norms proved in step 1 maps O_E into O_F. Subring.integralClosure_le_iff therefore puts the integral closure of O_E in F inside O_F: an element integral over O_E is also integral over O_F, hence belongs to O_F. Together with step 2 this proves the equivalence unchanged.",
+   "uses": [
+    "lem-weil-pbc-pid-noetherian-normal",
+    "def-weil-pbc-integral-closure",
+    "lem-weil-l-adic-extension-integers-dvr"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-sc-discrete-valuation-ring",
   "def-weil-l-adic-coefficient-extension",
-  "def-weil-l-adic-numbers",
   "def-weil-pbc-integral-closure",
+  "lem-sfb-monic-spectral-value-coefficients",
   "lem-weil-l-adic-extension-absolute-value",
-  "lem-weil-pbc-finite-algebra-is-integral",
-  "lem-weil-pbc-finite-dimensional-linear-homeomorphism",
-  "lem-weil-pbc-noetherian-submodule-finite",
+  "lem-weil-l-adic-extension-integers-dvr",
   "lem-weil-pbc-pid-noetherian-normal"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/sk-prop-sfb-cartesian-coefficients-finite-free.proof.md",
-  "place": "First sentence, arithmetic input. Agent-written bounded-powers proof; the Serre textbook cited in the original node is not obtained. Submodule finiteness and finite-implies-integral follow Stacks 00IK and 00GK."
+  "document": "Mathlib/Analysis/Normed/Unbundled/SpectralNorm.lean",
+  "place": "S9 shorter proof from spectralValue_le_one_iff (lines 200–219), minpoly.algHom_eq, monic polynomial lifting, and integral closedness of a PID; applied to the arithmetic input in the first sentence of the original blueprint source. No bounded-coordinate lattice or finite-algebra construction is needed."
  },
  "mathlib_searches": [
   {
@@ -293,5 +251,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S9",
+  "result": "pass",
+  "landing": "20261018T145116-L-3645150",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
