@@ -119,6 +119,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.ProEtaleResidueTorTest` | - | 1 | proof | 2 |
 | `Sheaf.Paper.ProjectionFormulaTotalization` | - | 1 | proof | 2 |
 | `Sheaf.RingTheory.UniformPerfectQuotientBound` | - | 2 | proof | 2 |
+| `WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FreeSheafFlat` | - | 1 | proof | 2 |
 | `Sheaf.AlgebraicGeometry.GenericOpenImmersionConstructibility` | 6 | 1 | proof | 3 |
 | `Sheaf.AlgebraicGeometry.GeometricRegularitySmoothFieldCriterion` | 6 | 1 | proof | 3 |
 | `Sheaf.AlgebraicGeometry.RationalUnramifiedCotangentCriterion` | 6 | 1 | proof | 3 |
@@ -250,7 +251,6 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.RingTheory.PseudoCoherentMaximalFibrePerfect` | - | 1 | proof | 4 |
 | `Sheaf.RingTheory.PseudoCoherentNilpotentInvariance` | - | 1 | proof | 4 |
 | `Sheaf.RingTheory.PseudoCoherentOfCohomology` | - | 1 | proof | 4 |
-| `WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FreeSheafFlat` | - | 1 | proof | 4 |
 | `Sheaf.AlgebraicGeometry.CompactBoundedConstructibleBaseChange` | 8 | 1 | proof | 5 |
 | `Sheaf.AlgebraicGeometry.FiniteLisseFieldDual` | 8 | 1 | proof | 5 |
 | `Sheaf.AlgebraicGeometry.FiniteReflectsBoundedConstructible` | 8 | 1 | proof | 5 |
@@ -450,28 +450,25 @@ Not items: a node in the dependencies (stmt_deps or proof_deps) has no Lean stat
 | `Sheaf.AlgebraicGeometry.EllAdicProperTruncationBound` | 5 | 1 | `det-proper-unbounded-window-arbitrary` |
 | `WeilConjectures.DeligneLaumon.AffineLine.TraceEnergy` | 5 | 7 | `lem-fd-rational-coefficient-category-comparison` |
 | `WeilConjectures.DeligneLaumon.AffineLine.LocalDuality` | 6 | 2 | `cor-coef-verdier-weil-equivariance` |
-| `WeilConjectures.DeligneLaumon.AffineLine.Exactness` | 7 | 1 | `lem-dl-a1-constructible-fibres-exact` |
+| `WeilConjectures.DeligneLaumon.AffineLine.Exactness` | 7 | 1 | `lem-dl-a1-weil-open-image-delta` |
 | `WeilConjectures.DeligneLaumon.AffineLine.MiddleExtension` | 8 | 4 | `lem-a1-qbar-open-closed-cohomology` |
 | `WeilConjectures.DeligneLaumon.AffineLine.ZeroExtension` | 9 | 3 | `lem-trf-rational-local-frobenius-powers` |
 
-## Stage 3: held for an open upstream PR (24)
+## Stage 3: held for an open upstream PR (22)
 
 Not items: an open Orchestra branch or PR of the source library proves the module (~/upstream-pr/upstream-pending.tsv, the human, 2026-10-18: do not duplicate Orchestra's open PRs); the routine sync brings the proof, and the hold ends when no sorry is left.
 
 | module | source |
 |---|---|
 | `WeilConjectures.AlgebraicGeometry.Bertini` | bundle/sec-deligne-laumon-general-d1 |
-| `WeilConjectures.DeligneLaumon.AffineLine.DegreeOne` | bundle/sec-deligne-laumon-a1-d1 |
 | `WeilConjectures.DeligneLaumon.AffineLine.Perverse` | bundle/sec-deligne-laumon-a1-d1 |
 | `WeilConjectures.DeligneLaumon.Reduction.RealSheaves` | bundle/sec-deligne-laumon-general-d1 |
 | `WeilConjectures.EtaleCohomology.Purity.RealSheaves.Boundary` | bundle/sec-purity-real-sheaves-d1 |
 | `WeilConjectures.EtaleCohomology.Purity.Smooth.Basic` | bundle/sec-smooth-purity-d3 |
-| `WeilConjectures.SixFunctors.Etale.Derived.Exchange` | bundle/sec-smooth-purity-c2 |
 | `WeilConjectures.SixFunctors.Etale.Derived.Finiteness.CohomologicalDimension` | bundle/sec-smooth-purity-d5 |
 | `WeilConjectures.SixFunctors.Etale.Derived.IntegralCoefficients` | bundle/sec-six-functors-c1 |
 | `WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Ordinary` | bundle/sec-smooth-purity-d2 |
 | `WeilConjectures.SixFunctors.Etale.Perverse.Operations` | bundle/sec-deligne-laumon-a1-d1 |
-| `WeilConjectures.SixFunctors.ProEtale.Adic.LisseMonodromy` | bundle/sec-purity-real-sheaves-d1 |
 | `WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Perfect` | bundle/sec-poincare-duality-c1 |
 | `WeilConjectures.WeilSheaf.AffineLineCohomology` | bundle/sec-fourier-transform-d1 |
 | `WeilConjectures.WeilSheaf.CurveEndpoints` | bundle/sec-deligne-laumon-a1-d1 |
@@ -480,6 +477,7 @@ Not items: an open Orchestra branch or PR of the source library proves the modul
 | `WeilConjectures.WeilSheaf.FourierInversion.Delta` | bundle/sec-fourier-transform-d1 |
 | `WeilConjectures.WeilSheaf.FourierInversion.OtherSections` | bundle/sec-smooth-purity-d1,bundle/sec-smooth-purity-d3 |
 | `WeilConjectures.WeilSheaf.FourierInversion.UpperStar` | bundle/sec-fourier-transform-d1 |
+| `WeilConjectures.WeilSheaf.FourierStalk` | bundle/sec-deligne-laumon-a1-d1,bundle/sec-fourier-transform-d1 |
 | `WeilConjectures.WeilSheaf.LowerShriekFunctoriality` | bundle/sec-six-functors-c1,bundle/sec-smooth-purity-d3 |
 | `WeilConjectures.WeilSheaf.LowerShriekOperations` | bundle/sec-poincare-duality-c1 |
 | `WeilConjectures.WeilSheaf.PoincareDuality` | bundle/sec-poincare-duality-c1 |
