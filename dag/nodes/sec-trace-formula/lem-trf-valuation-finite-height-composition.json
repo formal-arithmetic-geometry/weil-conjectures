@@ -1,7 +1,7 @@
 {
  "id": "lem-trf-valuation-finite-height-composition",
  "kind": "statement",
- "status": "unsplit",
+ "status": "split",
  "title": "Residue comparison for relative integral closure",
  "statement": "Let $V$ be a valuation ring [def-trf-valuation-ring] with fraction field $K$, let $\\mathfrak p\\subset V$ be a nonzero prime, and put $T=V\\setminus\\mathfrak p$. Let $A$ be a commutative $V$-algebra which is torsion-free as a $V$-module, viewed inside $A_K=A\\otimes_VK$. Assume that $A_T=T^{-1}A$ is integrally closed in $A_K$: every element of $A_K$ integral over $A_T$ belongs to $A_T$ [def-weil-pbc-integral-closure]. Let $B$ be the integral closure of $A$ in $A_K$. Then $B\\subseteq A_T$ and, as ideals in $A_T$, $\\mathfrak pA=\\mathfrak pB=\\mathfrak pA_T$. The induced maps $A/\\mathfrak pA\\to B/\\mathfrak pB\\to A_T/\\mathfrak pA_T$ are injective, and $B/\\mathfrak pB$ is exactly the integral closure of $A/\\mathfrak pA$ in $A_T/\\mathfrak pA_T$. This statement imposes no finite-height, finite-type or separably closed hypothesis, and includes the zero algebra.",
  "source": {
@@ -13,42 +13,125 @@
   "def-trf-valuation-ring",
   "def-weil-pbc-integral-closure"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "If $A=0$, then $A_K=A_T=B=0$ and all conclusions hold. Assume henceforth $A\\ne0$. For $q\\in\\mathfrak p$ and $t\\in T$, we have $q/t\\in\\mathfrak p\\subset V$. For $q=0$ this is immediate. Otherwise $q,t\\ne0$, and the fraction-field characterization of [def-trf-valuation-ring] gives $q/t\\in V$ or $t/q\\in V$. The latter would imply $t=q(t/q)\\in\\mathfrak p$, a contradiction, so $q/t\\in V$. Since $t(q/t)=q\\in\\mathfrak p$ and $t\\notin\\mathfrak p$, primality puts $q/t$ in $\\mathfrak p$. Thus division by any $t\\in T$ preserves $\\mathfrak p$.",
+   "uses": [
+    "def-trf-valuation-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "url": "https://math.huji.ac.il/~temkin/papers/Stable_Modification.pdf",
+    "place": "Theorem 3.5.5, Step 4, printed pp. 23–24, after replacing the algebra to make its T-localization relatively integrally closed; primary PDF read online, archival copy WANTED."
+   }
+  },
+  {
+   "text": "View $A_T$ as the subring $\\{a/t:a\\in A,\\ t\\in T\\}$ of $A_K$: each $t\\in T$ is nonzero and invertible in $K$, and $A\\hookrightarrow A_K$ is part of the hypothesis. Every element of $\\mathfrak pA_T$ is a finite sum $\\sum_i q_i(a_i/t_i)$ with $q_i\\in\\mathfrak p$, $a_i\\in A$, $t_i\\in T$. Step 1 rewrites it as $\\sum_i(q_i/t_i)a_i\\in\\mathfrak pA$. The reverse inclusion is immediate. Hence $\\mathfrak pA_T=\\mathfrak pA$ as subsets of $A_T$; in particular $\\mathfrak pA$ is an ideal of $A_T$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "url": "https://math.huji.ac.il/~temkin/papers/Stable_Modification.pdf",
+    "place": "Theorem 3.5.5, Step 4, printed pp. 23–24, after replacing the algebra to make its T-localization relatively integrally closed; primary PDF read online, archival copy WANTED."
+   }
+  },
+  {
+   "text": "By [def-weil-pbc-integral-closure], $A\\subseteq B$ and every $b\\in B$ satisfies a monic polynomial over $A$. Regard its coefficients in $A_T$; the same equation makes $b$ integral over $A_T$. The assumed relative integral closedness gives $b\\in A_T$. Therefore $A\\subseteq B\\subseteq A_T$, and $\\mathfrak pA\\subseteq\\mathfrak pB\\subseteq\\mathfrak pA_T=\\mathfrak pA$. All three sets are equal, and by step 2 they are ideals in $A_T$.",
+   "uses": [
+    "def-weil-pbc-integral-closure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "url": "https://math.huji.ac.il/~temkin/papers/Stable_Modification.pdf",
+    "place": "Theorem 3.5.5, Step 4, printed pp. 23–24, after replacing the algebra to make its T-localization relatively integrally closed; primary PDF read online, archival copy WANTED."
+   }
+  },
+  {
+   "text": "Put $I=\\mathfrak pA=\\mathfrak pB=\\mathfrak pA_T$. Restricting the quotient map $A_T\\to A_T/I$ to $A$ and $B$ has kernels $A\\cap I=I$ and $B\\cap I=I$, since $I\\subseteq A\\subseteq B$. Thus the induced maps $A/I\\to B/I\\to A_T/I$ are injective. These are exactly the two induced maps in the statement.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "url": "https://math.huji.ac.il/~temkin/papers/Stable_Modification.pdf",
+    "place": "Theorem 3.5.5, Step 4, printed pp. 23–24, after replacing the algebra to make its T-localization relatively integrally closed; primary PDF read online, archival copy WANTED."
+   }
+  },
+  {
+   "text": "For $b\\in B$, reduce its monic equation over $A$ modulo $I$. Its residue $\\bar b\\in A_T/I$ is a root of the resulting monic polynomial over $A/I$. The definition [def-weil-pbc-integral-closure] therefore puts the embedded ring $B/I$ inside the integral closure of $A/I$ in $A_T/I$.",
+   "uses": [
+    "def-weil-pbc-integral-closure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "url": "https://math.huji.ac.il/~temkin/papers/Stable_Modification.pdf",
+    "place": "Theorem 3.5.5, Step 4, printed pp. 23–24, after replacing the algebra to make its T-localization relatively integrally closed; primary PDF read online, archival copy WANTED."
+   }
+  },
+  {
+   "text": "Conversely let $\\bar z\\in A_T/I$ be integral over $A/I$, and lift it to $z\\in A_T$. Lift the finitely many coefficients of a monic equation for $\\bar z$ to $A$, obtaining a monic $P(X)\\in A[X]$ of degree $n\\geq1$ with $P(z)\\in I$. By step 2, $e=P(z)\\in\\mathfrak pA\\subseteq A$. The polynomial $P(X)-e$ is still monic of degree $n$ and vanishes at $z$ in $A_T\\subseteq A_K$. Hence $z\\in B$ by [def-weil-pbc-integral-closure], so $\\bar z\\in B/I$. This proves the reverse inclusion. The argument also holds in the zero algebra; it uses no height, finite-type, reducedness or separable-closedness assumption.",
+   "uses": [
+    "def-weil-pbc-integral-closure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "url": "https://math.huji.ac.il/~temkin/papers/Stable_Modification.pdf",
+    "place": "Theorem 3.5.5, Step 4, printed pp. 23–24, after replacing the algebra to make its T-localization relatively integrally closed; primary PDF read online, archival copy WANTED."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-valuation-ring",
+  "def-weil-pbc-integral-closure"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+  "place": "Theorem 3.5.5, Step 4, printed pp. 23–24: elementary expansion of the T-divisibility and residue monic-equation argument; primary PDF read online, local archival copy unavailable."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
    "query": "Integral closure modulo a prime of a valuation ring when localization away from the prime is integrally closed in the generic fibre",
-   "results": "hits=8; declarations/files=['Valuation.Integers.isIntegrallyClosed', 'NumberField.RingOfIntegers.instIsIntegralClosureIntWithVal', 'Valuation.Integers.integrallyClosed', 'Valuation.Integers.integralClosure', 'Valuation.Integers.isIntegrallyClosed_integers', 'ValuationSubring.ofPrimeAlgebra', 'instIsIntegralAtPrimeLocalizationAlgebraMapSubmonoidPrimeCompl', 'IsIntegrallyClosed.of_localization']; note=; directory=. None of these hits states this assertion or a one-line generalization.",
+   "results": "[leanfinder] OK 8 hit(s); declarations/files: IsIntegrallyClosed.of_isLocalization_maximal, IsIntegrallyClosed.of_localization_maximal, isIntegrallyClosed_ofLocalizationMaximal, IsDedekindDomainDvr.isIntegrallyClosed, Valuation.Integers.integrallyClosed, IsIntegrallyClosed.of_localization, Valuation.Integers.isIntegrallyClosed, LocalSubring.exists_le_valuationSubring_of_isIntegrallyClosedIn. No hit states the whole residue comparison or specializes to it in one line; the quotient-integrality hits cover only a forward implication.",
    "date": "2026-10-18",
    "verdict": "no match"
   },
   {
    "tool": "leanfinder",
    "query": "For valuation rings relative normalization commutes with quotient by a prime if the algebra is already normal after localization",
-   "results": "hits=8; declarations/files=['Algebra.intNorm_eq_of_isLocalization', 'Ideal.spanIntNorm_localization', 'Algebra.norm_localization', 'Ideal.relNorm_relNorm', \"Ideal.relNorm_algebraMap'\", 'Ideal.Quotient.normal', 'IsLocalization.OverPrime.mem_normalizedFactors_of_isPrime', 'KummerDedekind.quotMapEquivQuotQuotMap']; note=; directory=. None of these hits states this assertion or a one-line generalization.",
+   "results": "[leanfinder] OK 8 hit(s); declarations/files: Algebra.intNorm_eq_of_isLocalization, Ideal.spanIntNorm_localization, Algebra.norm_localization, Ideal.relNorm_relNorm, Ideal.relNorm_algebraMap', Ideal.Quotient.normal, IsLocalization.OverPrime.mem_normalizedFactors_of_isPrime, KummerDedekind.quotMapEquivQuotQuotMap. No hit states the whole residue comparison or specializes to it in one line; the quotient-integrality hits cover only a forward implication.",
    "date": "2026-10-18",
    "verdict": "no match"
   },
   {
    "tool": "loogle",
    "query": "\"integralClosure\", \"quotient\"",
-   "results": "hits=0; declarations/files=[]; note=; directory=. None of these hits states this assertion or a one-line generalization.",
+   "results": "[loogle] OK 0 hit(s); declarations/files: none. No hit states the whole residue comparison or specializes to it in one line; the quotient-integrality hits cover only a forward implication.",
    "date": "2026-10-18",
    "verdict": "no match"
   },
   {
    "tool": "grep",
    "query": "integralClosure.*[Qq]uotient|[Qq]uotient.*integralClosure",
-   "results": "hits=1; declarations/files=['Mathlib/RingTheory/IntegralClosure/IsIntegralClosure/Basic.lean']; note=; directory=. None of these hits states this assertion or a one-line generalization.",
+   "results": "[grep] OK 1 hit(s); declarations/files: Mathlib/RingTheory/IntegralClosure/IsIntegralClosure/Basic.lean. No hit states the whole residue comparison or specializes to it in one line; the quotient-integrality hits cover only a forward implication.",
    "date": "2026-10-18",
    "verdict": "no match"
   },
   {
    "tool": "leansearch",
    "query": "integral closure valuation prime quotient comparison",
-   "results": "hits=8; declarations/files=['Valuation.Integers.isIntegrallyClosed', 'instIsIntegrallyClosedSubtypeMemValuationSubring', 'Valuation.Integers.integrallyClosed', 'Valuation.onQuotVal', 'Valuation.onQuot', 'ValuationSubring.isIntegral_of_mem_ringOfIntegers', 'Valuation.Integers.isIntegrallyClosed_integers', \"ValuationSubring.isIntegral_of_mem_ringOfIntegers'\"]; note=; directory=. None of these hits states this assertion or a one-line generalization.",
+   "results": "[leansearch] OK 8 hit(s); declarations/files: Valuation.Integers.isIntegrallyClosed, instIsIntegrallyClosedSubtypeMemValuationSubring, Valuation.Integers.integrallyClosed, Valuation.onQuotVal, Valuation.onQuot, ValuationSubring.isIntegral_of_mem_ringOfIntegers, Valuation.Integers.isIntegrallyClosed_integers, ValuationSubring.isIntegral_of_mem_ringOfIntegers'. No hit states the whole residue comparison or specializes to it in one line; the quotient-integrality hits cover only a forward implication.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "quotient_isIntegralElem|theorem.*quotient|lemma.*quotient",
+   "results": "[grep] OK 5 hit(s); declarations/files: Mathlib/RingTheory/IntegralClosure/IsIntegralClosure/Basic.lean, Mathlib/RingTheory/IntegralClosure/IsIntegralClosure/Basic.lean, Mathlib/RingTheory/IntegralClosure/IsIntegralClosure/Basic.lean, Mathlib/RingTheory/IntegralClosure/IsIntegralClosure/Basic.lean, Mathlib/RingTheory/IntegralClosure/IsIntegralClosure/Basic.lean. No hit states the whole residue comparison or specializes to it in one line; the quotient-integrality hits cover only a forward implication.",
    "date": "2026-10-18",
    "verdict": "no match"
   }
@@ -86,5 +169,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-valuation-finite-height-composition",
+  "worker": "stage1",
+  "summary": "Q66: retained the statement and ancestry; proved prime-ideal T-divisibility, equality of the three extended ideals, both quotient injections, and both inclusions in the relative integral closure by explicit monic equations. The converse subtracts the lifted equation error, which belongs to pA, from the constant coefficient. All six steps are elementary from the two existing Mathlib-backed definitions and the stated hypotheses. No new nodes or statement corrections. Item searches were run and read using msearch.py.",
+  "blueprint": "Historical normalization-chain ingredient, parent lem-trf-valuation-reduced-fibre-normalization step 8; expands Temkin Theorem 3.5.5 Step 4 at the sentence on T-divisibility of the valuation prime and the subsequent claim identifying the residue integral closure. This historical branch is not a replacement for the current main-20261015 contracting-correspondence proof of lem-trf-local-term-locality. Retained the exact blueprint.from ancestry and searched the whole imported blueprint; no same statement found.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q66-73314343a",
+  "group": "Q66",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q66-73314343a (reviewer sub-agent of L); spot-checked: I read the item and all 6 of its steps in full. It has no new nodes. Cited nodes: def-trf-valuation-ring (Mathlib leaf, element-or-inverse dichotomy) and def-weil-pbc-integral-closure (Mathlib leaf: a monic equation of degree n>=1, and the integral closure is a subring containing R); each says what its steps take from it. The statement is true and unchanged. Step 1: for any nonzero prime p of V, q/t stays in p for every t in T, by the dichotomy and primality, with q=0 handled. Step 2: pA_T=pA inside A_K, using torsion-freeness for the embeddings. Step 3: B is inside A_T by the relative-closedness hypothesis; then pA=pB=pA_T follows by squeezing. Step 4: the two maps are injective because I is contained in A, which is contained in B. Step 5: reducing B's monic equations mod I puts B/I inside the integral closure. Step 6 (the converse): lift z and a monic P with n>=1; then e=P(z) lies in pA, which is inside A, so P-e is monic over A and kills z, giving z in B. All six steps are genuinely elementary. Small cases checked: A=0, p maximal (A_T=A), A=K, A=V (giving pV_p=p and V/p integrally closed in its fraction field), and a non-reduced torsion-free A. The degree-0 problem when A_T/I=0 is avoided because the definition requires n>=1. Parent check: lem-trf-valuation-reduced-fibre-normalization steps 7-8 use exactly these hypotheses (A' flat, so torsion-free; A'_T=B_T relatively closed) and exactly these conclusions. The item cites only definitions and Mathlib leaves, so there is no off-route use and no tool_uses entry is needed. Duplicate search (rg over dag/nodes for relative integral closure, residue/quotient and valuation): no other node states this, and only the parent cites it. Mathlib searches cover all three kinds and find no match. Source: the Temkin PDF is not in literature/ and not in LIST.md, so the WANTED line remains for the maintainer. I read Temkin arXiv:0707.3953v3 Thm 3.5.5 Step 4, pp. 23-24, from a text extraction already on this server (/tmp/q38temkin/t.txt, lines 1226-1281). It has the T-divisibility of m, mA_1=mA=mA°, the embedding, and the residue normalization claim proved by lifting a monic relation. The item is the same argument, generalized slightly to any nonzero prime. proof_origin.by=agent is correct. No faults found; no fixes or changes."
  }
 }
