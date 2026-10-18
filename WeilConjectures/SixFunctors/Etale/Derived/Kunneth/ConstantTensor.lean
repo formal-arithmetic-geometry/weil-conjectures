@@ -59,15 +59,35 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
   [Abelian.HasFunctorialFlatResolution A] (W : Scheme.{u})
   [(constantSheaf W.smallEtaleTopology A).PreservesFlat]
 
+/-- The monoidal comparison of constant complexes is the tensor comparison
+`CategoryTheory.Functor.mapDerivedCategoryTensorComparison` of the functor induced by the
+constant sheaf functor. -/
+lemma derivedConstantSheafTensorComparison_eq (M N : DerivedCategory A) :
+    derivedConstantSheafTensorComparison A W M N =
+      ((Functor.mapDerivedCategoryTensorComparison
+        (constantSheaf W.smallEtaleTopology A)).app M).app N := by
+  rw [Functor.mapDerivedCategoryTensorComparison_app_app]
+  rfl
+
+/-- The constant-tensor comparison is the transpose of the monoidal comparison followed by the
+counit. -/
+lemma derivedConstantSheafProjectionMap_eq_homEquiv
+    (K : DerivedCategory (Sheaf W.smallEtaleTopology A)) (M : DerivedCategory A) :
+    derivedConstantSheafProjectionMap A W K M = (derivedConstantSheafAdjunction A W).homEquiv _ _
+      (derivedConstantSheafTensorComparison A W _ M ≫
+        (derivedConstantSheafAdjunction A W).counit.app K ▷ _) :=
+  rfl
+
 /-- The constant-tensor comparison `RΓ_W K ⊗ᴸ M ⟶ RΓ_W (K ⊗ᴸ c_W M)` is the projection map of
 the adjunction `c_W ⊣ RΓ_W` (`CategoryTheory.Functor.mapDerivedCategoryProjectionMap`). -/
 lemma derivedConstantSheafProjectionMap_eq (K : DerivedCategory (Sheaf W.smallEtaleTopology A))
     (M : DerivedCategory A) :
     derivedConstantSheafProjectionMap A W K M =
-      (Functor.mapDerivedCategoryProjectionMap (derivedConstantSheafAdjunction A W) K).app M := by
-  rw [Functor.mapDerivedCategoryProjectionMap_app,
-    Functor.mapDerivedCategoryTensorComparison_app_app]
-  rfl
+      (Functor.mapDerivedCategoryProjectionMap (derivedConstantSheafAdjunction A W) K).app M :=
+  (derivedConstantSheafProjectionMap_eq_homEquiv A W K M).trans
+    (Functor.homEquiv_comp_counit_eq_mapDerivedCategoryProjectionMap_app
+      (derivedConstantSheafAdjunction A W) (derivedConstantSheafTensorComparison A W)
+      (derivedConstantSheafTensorComparison_eq A W) K M)
 
 end Coefficients
 
@@ -77,21 +97,21 @@ variable (Λ : Type (u + 1)) [CommRing Λ]
 scheme, `E ∈ D(X_ét, Λ)` concentrated in degrees `≥ a` and `K ∈ D(Λ)` of Tor amplitude in
 `[b, ∞)`. Then the canonical map `RΓ(X, E) ⊗ᴸ K ⟶ RΓ(X, E ⊗ᴸ K_X)` is an isomorphism. -/
 theorem isIso_constantProjectionMap_of_torAmplitudeGE (X : Scheme.{u}) [CompactSpace X]
-    [QuasiSeparatedSpace X] (E : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    [QuasiSeparatedSpace X]
+    (E : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (a : ℤ) [E.IsGE a] (K : DerivedCategory (ModuleCat.{u + 1} Λ)) (b : ℤ)
     (hK : DerivedCategory.torAmplitudeGE (ModuleCat.{u + 1} Λ) b K) :
     IsIso (constantProjectionMap Λ X E K) := by
   let Γ := Sheaf.Γ X.smallEtaleTopology (ModuleCat.{u + 1} Λ)
-  let adj : (constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).mapDerivedCategory ⊣
-      Γ.rightDerivedFunctor := derivedConstantSheafAdjunction (ModuleCat.{u + 1} Λ) X
   have hΓ (J : Type (u + 1)) [SmallCategory J] [IsFiltered J] (q : ℕ) :
       PreservesColimitsOfShape J (Γ.rightDerived q) :=
     preservesColimitsOfShape_rightDerived_globalSections_of_isFiltered Λ X q J
   rw [constantProjectionMap, derivedConstantSheafProjectionMap_eq]
-  exact Functor.isIso_mapDerivedCategoryProjectionMap_app_of_torAmplitudeGE adj
+  exact Functor.isIso_mapDerivedCategoryProjectionMap_app_of_torAmplitudeGE
+    (derivedConstantSheafAdjunction (ModuleCat.{u + 1} Λ) X)
     (fun Y n _ ↦ Γ.isGE_rightDerivedFunctor_obj Y n) E a
-    (fun M hM ↦ Functor.isIso_mapDerivedCategoryProjectionMap_app_singleFunctor_of_flat adj hΓ
-      E a M hM) K b hK
+    (fun M hM ↦ Functor.isIso_mapDerivedCategoryProjectionMap_app_singleFunctor_of_flat (Γ := Γ)
+      (derivedConstantSheafAdjunction (ModuleCat.{u + 1} Λ) X) hΓ E a M hM) K b hK
 
 /-- Blueprint `lem-kun-0f0e`: **tensor product with a constant complex over `ℤ`.**
 
