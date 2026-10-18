@@ -50,7 +50,7 @@
    }
   },
   {
-   "text": "For $x\\in\\ker Q$ choose $N\\ge0$ such that $x_i=0$ for $i>N$, including $N=0$ for the zero sequence. Set $a=\\sum_{i=0}^N f^{N-i}x_i$. Common-denominator addition gives $Q(x)=a/f^N$. By the fraction relation explicitly given in step 1, $a/f^N=0/1$ means that there is $k\\ge0$ with $f^k a=0$. No cancellation of $f$ in $R$ is used.",
+   "text": "Fix a section ring R and its element f. For n ≤ m, the vector a e_n - f^(m-n)a e_m belongs to im D, by induction on m starting with zero and adding D(f^(m-n)a e_m) at each successor step. Induction on a finite-support sequence, taking the maximum of the two indices in the additive step, gives x - a e_m ∈ im D for some m and a. If Qx=0, apply Q and use QD=0 to get a/f^m=0. Multiplying by the invertible image of f^m gives algebraMap(a)=0.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -59,7 +59,7 @@
    }
   },
   {
-   "text": "Set $M=N+k$ and $s_j=\\sum_{i=0}^j f^{j-i}x_i$ for $0\\le j\\le M$. Then $s_0=x_0$, $s_j-fs_{j-1}=x_j$ for $1\\le j\\le M$, and $s_M=f^k a=0$. Define $y_j=s_j$ for $j<M$ and $y_j=0$ for $j\\ge M$. These identities give $D(y)_j=x_j$ for $j\\le M$, including $j=M$, and both sides vanish for $j>M$. When $M=0$, $x_0=a=0$ and $y=0$ gives the same conclusion. Hence $\\ker Q=\\operatorname{im}D$. The sequence of presheaves is exact: its sectionwise kernels and quotients, with induced restrictions, have the kernel and cokernel universal properties, checked separately at every object.",
+   "text": "The localization equality algebraMap(a)=algebraMap(0) supplies k with f^k a=0, without cancelling f in R. The coordinate relation from the preceding step gives a e_m - f^k a e_(m+k) ∈ im D, hence a e_m ∈ im D. Adding this to x-a e_m ∈ im D proves x ∈ im D. The reverse inclusion is QD=0. This works with k=0, zero sequences, f=0, nilpotent f, and zero divisors. Sectionwise injectivity, exactness and surjectivity give short exact short complexes of modules. The evaluation functors jointly reflect the kernel limit; sectionwise surjectivity proves the presheaf Q is epi. Thus the presheaf sequence is short exact.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -98,7 +98,7 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/algebraization.tex",
-  "place": "Tag 0997 (lemma-hom-from-Af), displayed free resolution in the proof, with the sectionwise verification expanded"
+  "place": "Tag 0997 (lemma-hom-from-Af), displayed free resolution; its finite-support verification formalized using coordinate relations modulo im D, localization power torsion, and the sheafification adjunction."
  },
  "mathlib_searches": [
   {
@@ -289,5 +289,15 @@
   "by": "NO",
   "date": "2026-10-15",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261018T062947-L-690858",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
