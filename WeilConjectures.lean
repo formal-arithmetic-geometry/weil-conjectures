@@ -7771,6 +7771,7 @@ public import WeilConjectures.CategoryTheory.Pro.Generating
 public import WeilConjectures.CategoryTheory.Pro.HypercoverColimit
 public import WeilConjectures.CategoryTheory.Pro.PresheafColimit
 public import WeilConjectures.CategoryTheory.PushoutShortExactSequence
+public import WeilConjectures.CategoryTheory.RepleteSheafTopos
 public import WeilConjectures.CategoryTheory.ResolutionDerivedSingleUnitAugmentation
 public import WeilConjectures.CategoryTheory.ResolutionPullbackAugmentation
 public import WeilConjectures.CategoryTheory.ResolutionSectionCohomology
@@ -7845,6 +7846,7 @@ public import WeilConjectures.CategoryTheory.SiteCechZeroCohomology
 public import WeilConjectures.CategoryTheory.SiteCohomologyPullbackData
 public import WeilConjectures.CategoryTheory.SiteCohomologyZeroSections
 public import WeilConjectures.CategoryTheory.SiteContinuousPushforwardSheaf
+public import WeilConjectures.CategoryTheory.SiteCoveringAxioms
 public import WeilConjectures.CategoryTheory.SiteCoveringsCommonRefinement
 public import WeilConjectures.CategoryTheory.SiteEquivalenceMorphismOfSites
 public import WeilConjectures.CategoryTheory.SiteEquivalenceMorphismTransport
