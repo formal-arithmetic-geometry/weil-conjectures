@@ -308,5 +308,23 @@
   "group": "NC",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NC-5df72c78f (reviewer sub-agent of L); spot-checked: I read the whole delivery and its sources: Bhatt-Scholze Lemma 7.4.10 (p. 71, first paragraph of the proof), and Stacks 0357, 0BQ3, 06DI, 01T2 and 01TW. The item statement is true and unchanged; I tested the empty case, an infinite disjoint union of separable points, the case over Spec Z, and the nodal cubic (which the normality hypothesis excludes). There are no new nodes and no duplicate in the DAG: lem-trf-normal-topologically-noetherian-components, lem-fin-etale-normal-components and rem-pc-regular-normal all need global Noetherian, quasi-compact or integral hypotheses. Steps 2 to 7 check against the full statements of the nodes they cite. Step 4 meets every hypothesis of the colimit lemma (domain and normal ring via 00GY, a filtered and essentially small pairs category, C local) and proves the claim for any strict henselization. Step 5 meets every hypothesis of clause (2) of rem-pc-regular-normal on an affine Noetherian W, and the component-restriction lemma applies because C∩W contains z. One C1 fault, which I repaired: step 1 went from the pointwise locally-finite-presentation definition to def-weil-finite-type-morphism, which quantifies over every affine open of the target, with no node for that step (Stacks 01T2). It now cites the Mathlib leaf lem-weil-pbc-lft-pointwise-criterion, which is added to uses and proof_deps, and the step's source names 01TW/01T2. I accept the five declared tool_uses as generic algebra and scheme inputs that replace no step of the Rankin-Selberg unit. No SGA is cited and this is not a target node.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-27f631fc3",
+  "group": "Q21",
+  "result": "pass",
+  "note": "Item normal_etale_components_clopen matches the node clause by clause: IsLocallyNoetherian X, inline normal-domain stalks, Etale q; pointwise Noetherian open neighbourhoods; strict-henselization spectra irreducible for every presentation; irreducible components clopen; Maximal IsConnected components irreducible and clopen. No extra hypotheses; empty Z and the non-quasi-compact case are covered; the nodal cubic is excluded. The statement field matches the file exactly; docstrings carry source, blueprint tag and all 7 proof steps; the only proof is sorry. §1(B) module StrictHenselizationPresentationIn states the same pointed-etale colimit as Q97's structure with K,H in Type (max u v). A compiled test shows it converts to and from the Q97 structure at v=0 and v=u; it has real data and Stacks 04GW docstrings; only the dependency's lean record changes, with a note; the old module stays available. Both files compile cleanly with nt_compile.py (side overlay; a broken control copy reports its error). No duplicate found in Mathlib or the project. Notes, not faults: the 'unusable' justification is overstated but the generalization is authorized; stage 3 needs a size transport for step 4's Type-u lemmas."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NormalEtaleComponentsClopen",
+  "declaration": "AlgebraicGeometry.normal_etale_components_clopen",
+  "file": "lean/Sheaf/AlgebraicGeometry/NormalEtaleComponentsClopen.lean",
+  "statement": "theorem normal_etale_components_clopen {X Z : Scheme.{u}} [IsLocallyNoetherian X] (hnormal : ∀ x : X, IsDomain (X.presheaf.stalk x) ∧ IsIntegrallyClosed (X.presheaf.stalk x)) (q : Z ⟶ X) [Etale q] : (∀ z : Z, ∃ U : Z.Opens, z ∈ U ∧ TopologicalSpace.NoetherianSpace U) ∧ (∀ (z : Z) (K H : Type (max u v)) [Field K] [Algebra (IsLocalRing.ResidueField (Z.presheaf.stalk z)) K] [IsSepClosure (IsLocalRing.ResidueField (Z.presheaf.stalk z)) K] [Algebra (Z.presheaf.stalk z) K] [IsScalarTower (Z.presheaf.stalk z) (IsLocalRing.ResidueField (Z.presheaf.stalk z)) K] [CommRing H] [Algebra (Z.presheaf.stalk z) H], Algebra.StrictHenselizationPresentationIn.{u, v} (Z.presheaf.stalk z) K H → IrreducibleSpace (PrimeSpectrum H)) ∧ (∀ C : Set Z, C ∈ irreducibleComponents Z → IsClopen C) ∧ (∀ C : Set Z, Maximal IsConnected C → IsIrreducible C ∧ IsClopen C)",
+  "branch": "newtargets-dag",
+  "by": "Q21",
+  "date": "2026-10-18",
+  "existing": false
  }
 }

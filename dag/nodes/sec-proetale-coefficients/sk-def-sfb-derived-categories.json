@@ -569,5 +569,30 @@
    "missing": [],
    "open": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b21a03641",
+  "group": "NH",
+  "result": "pass",
+  "note": "Node clauses match the Lean: common-universe small ringed site (no commutativity), Mathlib overFunctor localization, unbounded rightDerivedFunctor, a NatIso pinned down on every K-injective I by Q of Iso.refl, H^q iso for all q : ℤ, no boundedness. Mechanical theorem-stmt_dep finding judged justified: the statement needs the conclusion of isGrothendieckAbelianOfUniverses (IsGrothendieckAbelian, hence HasKInjectiveResolutions) to type the derived functors, and that module has no definitions to move. No hollow definitions; only the main theorem is sorry (axioms checked); source and blueprint docstrings present; lean.statement verbatim; sk-def-sfb-derived-categories change is lean-only (§1(B), existing). nt_compile --json clean in 2.8 s. Remarks: second reading is the author's own disclosed pass; dependency signature omits noncomputable."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.RightDerivedFunctorOfQuasiIsoResolutions",
+  "declaration": "CategoryTheory.Functor.rightDerivedFunctorOfQuasiIsoResolutions",
+  "declarations": [
+   "DerivedCategory",
+   "CochainComplex.IsKInjective",
+   "CategoryTheory.Functor.rightDerivedFunctorOfQuasiIsoResolutions",
+   "CategoryTheory.Functor.rightDerivedFunctorOfQuasiIsoResolutionsUnit",
+   "CategoryTheory.Functor.rightDerivedFunctorOfQuasiIsoResolutionsObjIso"
+  ],
+  "statement": "def rightDerivedFunctorOfQuasiIsoResolutions :\n    DerivedCategory C ⥤ DerivedCategory D",
+  "branch": "newtargets-dag",
+  "by": "NH",
+  "date": "2026-10-18",
+  "existing": true,
+  "note": "§1(B), existing convention interfaces: no lean record existed. This unit fixes several conventions rather than a new category: DerivedCategory/Q and DerivedCategory.Plus are Mathlib localization/full-subcategory definitions; IsKInjective is Mathlib's homotopy-vanishing condition. The primary declaration in Sheaf.CategoryTheory.RightDerivedFunctorOfQuasiIsoResolutions gives precisely total right derivation under arbitrary quasi-isomorphic K-injective resolutions (not just monomorphic ones), with its universal unit and ObjIso. On the Grothendieck module categories used here it is canonically the upstream rightDerivedFunctor, whose ObjQIso supplies the normalization. The left-derived clause uses the already recorded def-sfb-left-derived-functor and def-sfb-left-derived-exact interfaces in Sheaf.CategoryTheory.DerivedCategory.LeftDerivedTotalTensor and LeftDerivedTotalTensorExact. Derived adjunction is the existing CategoryTheory.Adjunction.derivedAdjunction interface. The table uses DerivedCategory on the recorded sheaf and module-object categories; the bounded-constructible row is AlgebraicGeometry.ProEtale.BoundedConstructible in WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory, with IsConstructibleModuleObject from its existing Def module. No new definition or modified statement is introduced. lean.declarations lists only the interfaces exported by the primary module; the other convention components remain the existing definitions in the explicitly named component modules, not declarations asserted to be exported by this primary module."
  }
 }

@@ -171,10 +171,10 @@
  "reviewed_lean": {
   "date": "2026-10-18",
   "by": "L",
-  "reviewer": "NT-stage2-cc-61d21167b",
-  "group": "ND",
+  "reviewer": "NT-stage2-cc-12438f8cd",
+  "group": "NP",
   "result": "fix",
-  "note": "Read node (only lean set; statement and stmt_deps unchanged), all 9 stmt_deps incl. the TrfCohomologicalCorrespondence record, the module, the report, and upstream Correspondence.fix (a different ambient structure, not a duplicate; no named finite-clopen-component definition exists). Clause check: fixedScheme = pullback c.toProduct (pullback.diagonal X.hom) with fst/snd as i_F and d; fixedScheme_relations gives c∘i_F=Δ∘d and c1 i_F=d=c2 i_F; graph (𝟙, h.left) over s; HasFiniteClopenConnectedComponents = Finite (ConnectedComponents F) ∧ each fibre clopen, counting all components; open subschemes with full sheaf; canonical Sigma.desc map with asIso. No extra hypotheses or universe restrictions, no hollow data, only sorry proofs, empty case covered. Finding H3: trfEndomorphismFixedScheme_equalizer stated only (∃! lift ↔ t≫h=t), which does not show that composites g≫incl are fixed, so it falls short of the node's bijection Hom(T,Fix h) ≅ {t | h t = t}. fixes/TraceFixedScheme.lean adds the conjunct ∀ g, (g≫incl)≫h.left = g≫incl with an updated proof docstring; same name and binders, no record change. fixes/def-trf-fixed-scheme.report.md keeps both sections verbatim and appends a maintainer-fix note. Second reading by the same worker (dispatcher-mandated) is clause-level, accepted under H11. nt_compile --json: delivered and fixed files both rc 0, no diagnostics (3.8 s / 3.9 s)."
+  "note": "Duplicate of the already-landed ND delivery (a23cc44f6a). Delivered declarations, signatures and bodies are byte-identical to the landed module; the record changes only lean.by ND->NP. Read all clauses against the node: fixedScheme = pullback c.toProduct (pullback.diagonal X.hom) with fst/snd; fixedScheme_relations; graph (𝟙,h.left) over s; equalizer theorem with both conjuncts (bijection) for all T : Scheme.{u}; HasFiniteClopenConnectedComponents counts all components; full restricted structure sheaf; canonical Sigma.desc iso via asIso. Single universe u, no extra hypotheses, no hollow data, only sorry with proof docstrings, empty/identity/fixed-point-free/nonreduced cases covered. Only defect (H9): the module docstring gained the process sentence 'This copy is validated for the NP stage-2 delivery.' fixes/TraceFixedScheme.lean is the complete module without it (= landed newtargets-dag text). nt_compile --json: delivered and fixed files both rc 0, no error or warning output (5.3 s / 6.0 s)."
  },
  "lean": {
   "module": "Sheaf.Paper.TraceFixedScheme",
@@ -198,7 +198,7 @@
   "file": "lean/Sheaf/Paper/TraceFixedScheme.lean",
   "statement": "def fixedScheme (c : TrfCohomologicalCorrespondence F l E n hl X K) : Scheme.{u}",
   "branch": "newtargets-dag",
-  "by": "ND",
+  "by": "NP",
   "date": "2026-10-18",
   "existing": false,
   "note": "Uses the recorded TrfCohomologicalCorrespondence and its geometric toProduct, with the actual pullback along the Mathlib diagonal. The remaining declarations render the projections, graph/equalizer convention, finiteness of all connected components, full open component subschemes and their canonical coproduct isomorphism. Each of the three postponed theorem statements is a clause of this definition node, with its proof in its docstring; all are listed in declarations. The graph and component helpers are geometric constructions also meaningful without coefficients. No statement or dependency field changed."

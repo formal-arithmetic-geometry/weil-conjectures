@@ -12,7 +12,8 @@
   "def-weil-size-convention",
   "def-weil-sheaf-of-modules-category",
   "def-pur-localized-ringed-site",
-  "sk-def-sfb-derived-categories"
+  "sk-def-sfb-derived-categories",
+  "lem-weil-pbc-ring-sheaves-grothendieck"
  ],
  "proof": [
   {
@@ -160,5 +161,35 @@
   "group": "Q55",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q55-2eb703aaa (reviewer sub-agent of L); spot-checked: I read the item, all three steps, every cited statement and Stacks sites-cohomology.tex Tag 0D6F (lemma-unbounded-cohomology-of-open, lines 4329-4346) and Tag 08FI (lines 4314-4325). The item matches 0D6F with the same hypotheses and is not weakened: arbitrary ringed site, unbounded K, the degreewise identity and H^q in every degree. It also matches how the parent lem-sfb-unbounded-direct-image-comparison applies it to H[0] and to arbitrary M. The blueprint ancestor det-ctf-finite-comparison-localizing Step 4 and the unit sk-prop-ctf-finite-comparison are consistent. The delivery adds no new nodes. The duplicate search turned up only special cases: lem-weil-pbc-cohomology-over-object-localization, lem-pe-injective-complex-slice-section-model, the smooth-base-change 0D6F citers and def-pc-open-module-derived-sections. The edge cases (K=0, W final, complexes unbounded in both directions, negative q) and the cycle check pass. I repaired two small faults in fixes/.../lem-sfb-unbounded-sections-localization.json. (1) C1/E1, step 1: the right-derived clause of sk-def-sfb-derived-categories needs K-injective resolutions in Mod(O) and Mod(O_W), and nothing cited supplied them. I added prop-pur-kinjective-resolutions-exist (Stacks 07A5/079P, Lean-closed in slopmaster2) with the smallness of C/W. (2) E5, step 3: 'descends' left out why the identification does not depend on the representative and why it is natural. I added lem-weil-pbc-kinjective-hom-derived (a Mathlib leaf): morphisms into a K-injective complex are homotopy classes of chain maps, and (f|_W)(id_W)=f(W). proof_deps is now the union of the step uses. Accepted tool_uses: sk-def-sfb-derived-categories, lem-pur-kinjective-restrict-localized (08FI), prop-pur-kinjective-resolutions-exist. The statement is unchanged.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b21a03641",
+  "group": "NH",
+  "result": "pass",
+  "note": "Node clauses match the Lean: common-universe small ringed site (no commutativity), Mathlib overFunctor localization, unbounded rightDerivedFunctor, a NatIso pinned down on every K-injective I by Q of Iso.refl, H^q iso for all q : ℤ, no boundedness. Mechanical theorem-stmt_dep finding judged justified: the statement needs the conclusion of isGrothendieckAbelianOfUniverses (IsGrothendieckAbelian, hence HasKInjectiveResolutions) to type the derived functors, and that module has no definitions to move. No hollow definitions; only the main theorem is sorry (axioms checked); source and blueprint docstrings present; lean.statement verbatim; sk-def-sfb-derived-categories change is lean-only (§1(B), existing). nt_compile --json clean in 2.8 s. Remarks: second reading is the author's own disclosed pass; dependency signature omits noncomputable."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.Sites.UnboundedSectionsLocalization",
+  "declaration": "CategoryTheory.UnboundedSectionsLocalization.unboundedSectionsLocalization",
+  "declarations": [
+   "CategoryTheory.UnboundedSectionsLocalization.modulesGrothendieck",
+   "CategoryTheory.UnboundedSectionsLocalization.evaluation",
+   "CategoryTheory.UnboundedSectionsLocalization.restrictionAdditive",
+   "CategoryTheory.UnboundedSectionsLocalization.restrictComplex",
+   "CategoryTheory.UnboundedSectionsLocalization.restrictedKInjective",
+   "CategoryTheory.UnboundedSectionsLocalization.sectionComplexIdentity",
+   "CategoryTheory.UnboundedSectionsLocalization.derivedEvaluation",
+   "CategoryTheory.UnboundedSectionsLocalization.derivedRestriction",
+   "CategoryTheory.UnboundedSectionsLocalization.unboundedSectionsLocalization"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/Sites/UnboundedSectionsLocalization.lean",
+  "statement": "theorem unboundedSectionsLocalization (W : C) [HasDerivedCategory.{w} (ringedSiteModules.{u} (R.over W))] : ∃ e : derivedEvaluation R W ≅ derivedRestriction R W ⋙ derivedEvaluation (R.over W) (Over.mk (𝟙 W)), (∀ (I : CochainComplex (ringedSiteModules.{u} R) ℤ) [I.IsKInjective], e.hom.app (DerivedCategory.Q.obj I) ≫ (derivedEvaluation (R.over W) (Over.mk (𝟙 W))).map ((SheafOfModules.overFunctor.{u} R W).rightDerivedFunctorObjQIso I).hom ≫ ((evaluation (R.over W) (Over.mk (𝟙 W))).rightDerivedFunctorObjQIso ((restrictComplex R W).obj I)).hom = ((evaluation R W).rightDerivedFunctorObjQIso I).hom ≫ DerivedCategory.Q.map (sectionComplexIdentity R W I).hom) ∧ (∀ (K : DerivedCategory (ringedSiteModules.{u} R)) (q : ℤ), Nonempty ((DerivedCategory.homologyFunctor AddCommGrpCat.{u} q).obj ((derivedEvaluation R W).obj K) ≅ (DerivedCategory.homologyFunctor AddCommGrpCat.{u} q).obj ((derivedEvaluation (R.over W) (Over.mk (𝟙 W))).obj ((derivedRestriction R W).obj K))))",
+  "branch": "newtargets-dag",
+  "by": "NH",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Natural isomorphism of total right derived functors, normalized on every K-injective representative by Q of the literal section-complex identity. All integer cohomology degrees are included. The common-universe hypothesis is encoded by C, its arrows, ring values and module values in u; localization Hom universes w and z are independent. The additional already landed statement dependency supplies Grothendieck abelianness for arbitrary ring sheaves, without imposing commutativity."
  }
 }
