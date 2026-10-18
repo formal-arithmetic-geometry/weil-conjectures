@@ -18,41 +18,213 @@
   "def-weil-finite-integral-morphism",
   "def-kun-projective"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "$S$ is Noetherian because it is the spectrum of the Noetherian ring $A$. Apply [lem-weil-pbc-finite-type-over-noetherian] to $X\\to S$. Thus $X$ is Noetherian, in particular quasi-compact.",
+   "uses": [
+    "pqf-def-locnoeth",
+    "lem-weil-pbc-finite-type-over-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01T6 (lemma-finite-type-noetherian); Properties Tag 01OV (definition-noetherian)."
+   }
+  },
+  {
+   "text": "Let $i:X\\hookrightarrow\\mathbf P^m_S$ be the given immersion. By [lem-nagata-affine-proj-scalar-extension], applied to $\\mathbf Z\\to A$ and the graded isomorphism $A\\otimes_{\\mathbf Z}\\mathbf Z[T_0,\\ldots,T_m]\\cong A[T_0,\\ldots,T_m]$, the scheme $\\mathbf P^m_S=S\\times_{\\operatorname{Spec}\\mathbf Z}\\mathbf P^m_{\\mathbf Z}$ is identified over $S$ with $\\operatorname{Proj}A[T_0,\\ldots,T_m]$; we regard $i$ as an immersion into this Proj. By [lemma-nagata-immersion-shrink-to-closed-exists], its image is contained in a quasi-compact open $W$ of this Proj and $X\\to W$ is closed. Apply [lem-trf-proj-qc-open-twist-ample] to obtain an ample invertible twist $\\mathcal O_W(e)$ for some $e\\geq1$. Its pullback to $X$ is ample by [lem-trf-ample-restrict-closed-immersion]. Hence $X$ admits an ample invertible sheaf.",
+   "uses": [
+    "lem-nagata-affine-proj-scalar-extension",
+    "lemma-nagata-immersion-shrink-to-closed-exists",
+    "lem-trf-proj-qc-open-twist-ample",
+    "lem-trf-ample-restrict-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01MW (lemma-ample-on-proj), (2),(3),(7); properties.tex Tag 01PU (lemma-ample-on-closed). Quasi-compact closed neighbourhood as in the cited blueprint lemma."
+   }
+  },
+  {
+   "text": "Form the sheaf Rees algebra $\\mathcal R=\\bigoplus_{n\\geq0}J^n$ [def-nagata-sheaf-rees-algebra]. The degree-one inclusion $J\\to\\mathcal R$ extends by [lem-weil-pbc-quasi-coherent-symmetric-algebra] to $\\operatorname{Sym}(J)\\to\\mathcal R$. It is graded and surjective: in degree $n$ every element of $J^n$ is locally a finite sum of products of $n$ sections of $J$, and each such product is the image of the corresponding symmetric monomial. Apply [prop-nagata-relative-proj-functoriality] to get a closed immersion $\\operatorname{Proj}_X\\mathcal R\\hookrightarrow\\mathbf P_X(J)$. This source is the blowup in the statement: over $\\operatorname{Spec}R$, the standard chart for $at$ has coordinate ring $(R[Jt]_{at})_0=R[J/a]$, since $b t^n/(at)^n$ maps to $b/a^n$ for $b\\in J^n$. The displayed maps commute with localization and with each other on overlaps, so identify the chart gluing over $X$. Consequently $p$ is projective in the projective-bundle sense [def-trf-projective-bundle-morphism], using the finite-type quasi-coherent module $J$.",
+   "uses": [
+    "def-nagata-sheaf-rees-algebra",
+    "lem-weil-pbc-quasi-coherent-symmetric-algebra",
+    "prop-nagata-relative-proj-functoriality",
+    "def-trf-projective-bundle-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 02NS (lemma-blowing-up-projective), proof via the symmetric-to-Rees surjection; constructions.tex Tag 07ZK (lemma-surjective-generated-degree-1-map-relative-proj)."
+   }
+  },
+  {
+   "text": "Put $U=X\\setminus V(J)$. It is nonempty and dense: a nonzero ideal subsheaf of $\\mathcal O_X$ on an integral scheme is nonzero at the generic point, since on any nonempty affine open its sections embed in the function field. On $U$ the ideal is the unit ideal, and the blowup charts are those of $U$ itself; hence $p^{-1}U\\to U$ is an isomorphism. Each chart $\\operatorname{Spec}R[J/a]$ with $a\\ne0$ has domain coordinate ring inside $\\operatorname{Frac}R$, and its open $D(a)$ is nonempty and maps into $U$. Thus $p^{-1}U$ is dense in every chart, so dense in $Z$. All charts are reduced, and this dense open is irreducible because it is isomorphic to the nonempty open $U$ of the integral scheme $X$. Therefore $Z$ is reduced, irreducible and nonempty, hence integral [def-pc-integral-scheme]; $p$ is birational.",
+   "uses": [
+    "def-pc-integral-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tags 02ND (lemma-blow-up-integral-scheme) and 02OS (lemma-blowing-up-gives-effective-Cartier-divisor); direct chart argument using the statement's rings."
+   }
+  },
+  {
+   "text": "By [lem-trf-projective-bundle-proper], $p$ is proper, hence of finite type by [def-weil-proper-morphism]. Compose with $X\\to S$ using [lem-sfb-finite-type-composition-base-change]; this makes $Z\\to S$ finite type. Thus $Z$ is Noetherian by [lem-weil-pbc-finite-type-over-noetherian]. Choose the finite affine cover of $Z$ by finite-type $A$-algebras given by the definition of finite type. Each of these rings is excellent by [lem-exc-finite-type-localization-excellent]. By [lem-trf-excellent-scheme-affine-cover], every affine coordinate ring of $Z$ is excellent.",
+   "uses": [
+    "lem-trf-projective-bundle-proper",
+    "def-weil-proper-morphism",
+    "lem-sfb-finite-type-composition-base-change",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "def-weil-finite-type-morphism",
+    "lem-exc-finite-type-localization-excellent",
+    "lem-trf-excellent-scheme-affine-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01WC (lemma-locally-projective-proper), 01T3 (lemma-composition-finite-type), 01T6 (lemma-finite-type-noetherian), 0HAB (lemma-locally-excellent); more-algebra.tex Tag 07QU (lemma-finite-type-over-excellent)."
+   }
+  },
+  {
+   "text": "Since $X$ has an ample invertible sheaf, [lem-trf-projective-bundle-to-h-projective] upgrades $p$ to a closed immersion $Z\\hookrightarrow\\mathbf P^r_X$ followed by projection for some $r\\geq0$. Base change the given locally closed immersion $i:X\\hookrightarrow\\mathbf P^m_S$ along $\\mathbf P^r_S\\to S$. Factoring $i$ as a closed immersion followed by an open immersion, [lem-weil-pbc-closed-immersion-base-change] and [lem-weil-pbc-open-immersion-base-change] give an immersion $\\mathbf P^r_X\\hookrightarrow\\mathbf P^r_S\\times_S\\mathbf P^m_S$. Composition of immersions [lem-weil-pbc-proper-fp-permanence](e), followed by the closed Segre embedding [lem-chow-segre], gives a locally closed immersion $Z\\hookrightarrow\\mathbf P^{(r+1)(m+1)-1}_S$.",
+   "uses": [
+    "lem-trf-projective-bundle-to-h-projective",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-weil-pbc-open-immersion-base-change",
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-chow-segre"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 087S (lemma-projective-over-quasi-projective-is-H-projective), (1); Schemes Tag 01JY (lemma-base-change-immersion), Tag 02V0 (lemma-composition-immersion); Tag 01WD (lemma-segre-embedding)."
+   }
+  },
+  {
+   "text": "Apply the same explicit ample-sheaf construction to the immersion of $Z$ from Step 6. The Noetherian scheme $Z$ is quasi-compact, so [lemma-nagata-immersion-shrink-to-closed-exists] provides a quasi-compact open $W_Z$ of that projective space containing $Z$ as a closed subscheme. By [lem-nagata-affine-proj-scalar-extension], as in Step 2, that projective space is $\\operatorname{Proj}$ of the polynomial ring over $A$, so [lem-trf-proj-qc-open-twist-ample] supplies an ample invertible twist on $W_Z$. Pull it back by the closed immersion using [lem-trf-ample-restrict-closed-immersion]. Thus $Z$ admits an ample invertible sheaf.",
+   "uses": [
+    "lem-nagata-affine-proj-scalar-extension",
+    "lemma-nagata-immersion-shrink-to-closed-exists",
+    "lem-trf-proj-qc-open-twist-ample",
+    "lem-trf-ample-restrict-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01MW (lemma-ample-on-proj), (2),(3),(7); properties.tex Tag 01PU (lemma-ample-on-closed)."
+   }
+  },
+  {
+   "text": "Apply [lem-per-excellent-normalization-preparation] to the reduced Noetherian excellent scheme $Z$. For an integral scheme its componentwise normalization is its function-field normalization, because it has only one irreducible component [def-weil-pbc-reduced-normalization]. Thus $\\nu:N\\to Z$ is finite and surjective, $N$ is Noetherian excellent, and there is a dense open $O\\subseteq Z$ over which $\\nu$ is an isomorphism. The scheme $N$ is integral: by [def-sc-normalization] the inverse image of an affine domain chart $\\operatorname{Spec}B\\subset Z$ is $\\operatorname{Spec}\\overline B$, with $\\overline B$ the integral closure of $B$ in $k(Z)$; these are domains, and their zero primes all glue to the same generic point with residue field $k(Z)$. Thus their union is reduced and irreducible. Finally a finite module algebra is generated as an algebra by its finite module generators, so [def-weil-finite-integral-morphism] makes $\\nu$ finite type. Composition [lem-sfb-finite-type-composition-base-change] makes $N\\to S$ finite type.",
+   "uses": [
+    "lem-per-excellent-normalization-preparation",
+    "def-weil-pbc-reduced-normalization",
+    "def-sc-normalization",
+    "def-weil-finite-integral-morphism",
+    "lem-sfb-finite-type-composition-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 035S (lemma-nagata-normalization), 035P (lemma-description-normalization), 035Q (lemma-normalization-normal), 0BAJ (lemma-birational-isomorphism-over-dense-open), 01T3 (lemma-composition-finite-type)."
+   }
+  },
+  {
+   "text": "The finite map $\\nu$ is projective in the projective-bundle sense by [lem-trf-finite-projective-bundle]. Since $Z$ admits an ample invertible sheaf (Step 7), [lem-trf-projective-bundle-to-h-projective] makes $\\nu$ H-projective. Compose it with the H-projective map $p$ (Step 6), using [lem-trf-h-projective-composition], to obtain a closed immersion $N\\hookrightarrow\\mathbf P^t_X$ over $X$. Base change $i:X\\hookrightarrow\\mathbf P^m_S$ along $\\mathbf P^t_S\\to S$ exactly as in Step 6, using stability of closed and open immersions under base change. Compose immersions and then the Segre closed immersion to obtain $N\\hookrightarrow\\mathbf P^{(t+1)(m+1)-1}_S$. This proves both the required projectivity of $p\\nu$ and the quasi-projectivity of $N$ over $S$.",
+   "uses": [
+    "lem-trf-finite-projective-bundle",
+    "lem-trf-projective-bundle-to-h-projective",
+    "lem-trf-h-projective-composition",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-weil-pbc-open-immersion-base-change",
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-chow-segre"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 0B3I (lemma-finite-projective), 087S (lemma-projective-over-quasi-projective-is-H-projective), 01WE (lemma-H-projective-composition), 01WD (lemma-segre-embedding)."
+   }
+  },
+  {
+   "text": "The two dense opens $O$ and $p^{-1}U$ of the integral scheme $Z$ have nonempty intersection $V$. The isomorphism $p^{-1}U\\cong U$ identifies $V$ with a nonempty open $U_0\\subset X$. The inverse image $\\nu^{-1}V$ is isomorphic to $V$ because $V\\subset O$, and is a nonempty open of the integral scheme $N$. Both $U_0$ and $\\nu^{-1}V$ are therefore dense. The composite $p\\nu$ restricts to their isomorphism, which is the asserted birationality.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0BAJ (lemma-birational-isomorphism-over-dense-open), elementary intersection of the isomorphism opens from Steps 4 and 8."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-nagata-sheaf-rees-algebra",
+  "def-pc-integral-scheme",
+  "def-sc-normalization",
+  "def-trf-projective-bundle-morphism",
+  "def-weil-finite-integral-morphism",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-reduced-normalization",
+  "def-weil-proper-morphism",
+  "lem-chow-segre",
+  "lem-exc-finite-type-localization-excellent",
+  "lem-nagata-affine-proj-scalar-extension",
+  "lem-per-excellent-normalization-preparation",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-trf-ample-restrict-closed-immersion",
+  "lem-trf-excellent-scheme-affine-cover",
+  "lem-trf-finite-projective-bundle",
+  "lem-trf-h-projective-composition",
+  "lem-trf-proj-qc-open-twist-ample",
+  "lem-trf-projective-bundle-proper",
+  "lem-trf-projective-bundle-to-h-projective",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-open-immersion-base-change",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-weil-pbc-quasi-coherent-symmetric-algebra",
+  "lemma-nagata-immersion-shrink-to-closed-exists",
+  "pqf-def-locnoeth",
+  "prop-nagata-relative-proj-functoriality"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tags 02NS and 02ND, with the explicitly cited projectivity, ampleness and excellence lemmas in morphisms.tex, properties.tex, constructions.tex and more-algebra.tex."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
    "query": "The normalization of a blowup of an integral quasi projective scheme of finite type over an excellent affine base is projective and quasi projective",
    "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] [AlgebraicGeometry.IsIntegral X],\\n  AlgebraicGeometry.IsIntegral (AlgebraicGeometry.Scheme.Hom.normalization f)\", \"doc\": \"If $ X $ is an integral scheme, then the normalization of a morphism $ f: X \\\\to Y $ is also an integral scheme. This instance asserts that the categorical construction of normalization preserves the i\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) → [AlgebraicGeometry.QuasiCompact f] → [AlgebraicGeometry.QuasiSeparated f] → AlgebraicGeometry.Scheme\", \"doc\": \"The normalization of a scheme morphism $ f: X \\to Y $ is defined as the colimit in the category of schemes of a diagram constructed by composing the opposite of the affine Zariski site inclusion functo\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instQuasiCompactToNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f],\\n  AlgebraicGeometry.QuasiCompact (AlgebraicGeometry.Scheme.Hom.toNormalization f)\", \"doc\": \"The morphism from a scheme $ X $ to the normalization of a scheme morphism $ f: X \\\\to Y $ is quasi-compact. This morphism is constructed by gluing local normalization maps defined via integral closure\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f],\\n  AlgebraicGeometry.IsIntegralHom (AlgebraicGeometry.Scheme.Hom.fromNormalization f)\", \"doc\": \"The canonical morphism from the normalization of a scheme morphism $ f: X \\to Y $ to the target scheme $ Y $ is an integral morphism of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.QuasiCompact f] →\\n      [inst_1 : AlgebraicGeometry.QuasiSeparated f] →\\n        {T : AlgebraicGeometry.Scheme} →\\n          (f₁ : X ⟶ T) →\\n            (f₂ : T ⟶ Y) →\\n              [AlgebraicGeometry.IsIntegralHom f₂] →\\n \", \"doc\": \"A morphism from the normalization of a scheme morphism $ f: X \\to Y $ to another scheme $ T $, constructed as the colimit in the category of schemes of a diagram involving the affine Zariski site of $ \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] [AlgebraicGeometry.IsIntegralHom f],\\n  CategoryTheory.IsIso (AlgebraicGeometry.Scheme.Hom.toNormalization f)\", \"doc\": \"For any integral morphism $ f: X \\to Y $ of schemes, the normalization morphism from $ X $ to the normalization of $ f $ is an isomorphism.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] [AlgebraicGeometry.IsAffineHom f],\\n  AlgebraicGeometry.IsAffineHom (AlgebraicGeometry.Scheme.Hom.toNormalization f)\", \"doc\": \"For any scheme morphism $ f: X \\to Y $, the induced morphism from $ X $ to the normalization of $ f $ is affine.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instQuasiSeparatedToNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f],\\n  AlgebraicGeometry.QuasiSeparated (AlgebraicGeometry.Scheme.Hom.toNormalization f)\", \"doc\": \"The morphism from a scheme $ X $ to the normalization of a scheme morphism $ f: X \\\\to Y $ is quasi-separated, meaning that the diagonal morphism $ X \\\\to X \\\\times_{\\\\text{Normalization}(f)} X $ is quasi\"}\n",
    "date": "2026-10-19",
-   "verdict": "no match: the returned signatures concern ordinary normalization, ordinary smooth or etale maps, categorical projective objects or projective measure limits; none states this logarithmic theorem or global normalized-blowup projectivity."
+   "verdict": "no match: the returned signatures do not give global projectivity and quasi-projectivity of an ordinary normalized blowup over an excellent affine base."
   },
   {
    "tool": "leansearch",
    "query": "Normalized blowups of excellent schemes are finite over blowups and projective",
    "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \"(H : f = f₁ ≫ f₂) : f.normalization ⟶ T\", \"doc\": \"A morphism from the normalization of a scheme morphism $ f: X \\to Y $ to another scheme $ T $, constructed as the colimit in the category of schemes of a diagram involving the affine Zariski site of $ \"}\n  {\"name\": \"AlgebraicGeometry.IsFinite\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For schemes $X$ and $Y$, a morphism from $X$ to $Y$ is finite.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalization\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \": Scheme\", \"doc\": \"The normalization of a scheme morphism $ f: X \\to Y $ is defined as the colimit in the category of schemes of a diagram constructed by composing the opposite of the affine Zariski site inclusion functo\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \": X ⟶ f.normalization\", \"doc\": \"The morphism from a scheme $ X $ to the normalization of a scheme morphism $ f: X \\to Y $, constructed by gluing local normalization maps defined via the integral closure of structure sheaves over an a\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \"[IsIntegralHom f] : IsIso f.toNormalization\", \"doc\": \"For any integral morphism $ f: X \\to Y $ of schemes, the normalization morphism from $ X $ to the normalization of $ f $ is an isomorphism.\"}\n  {\"name\": \"AlgebraicGeometry.instIsProperOfIsFinite\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"[IsFinite f] : IsProper f\", \"doc\": \"Every finite morphism of schemes is proper.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \"(H : f = f₁ ≫ f₂) : f.toNormalization ≫ f.normalizationDesc f₁ f₂ H = f₁\", \"doc\": \"Given a morphism $ f $ that factors as $ f = f_1 \\\\circ f_2 $, the composition of the normalization morphism $ f.toNormalization $ and the normalization description morphism $ f.normalizationDesc(f_1, \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \": IsIntegralHom f.fromNormalization\", \"doc\": \"The canonical morphism from the normalization of a scheme morphism $ f: X \\to Y $ to the target scheme $ Y $ is an integral morphism of schemes.\"}\n",
    "date": "2026-10-19",
-   "verdict": "no match: the returned signatures concern ordinary normalization, ordinary smooth or etale maps, categorical projective objects or projective measure limits; none states this logarithmic theorem or global normalized-blowup projectivity."
+   "verdict": "no match: the returned signatures do not give global projectivity and quasi-projectivity of an ordinary normalized blowup over an excellent affine base."
   },
   {
    "tool": "loogle",
    "query": "\"IsProjective\"",
    "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"CategoryTheory.isProjective\", \"module\": \"Mathlib.CategoryTheory.Preadditive.Projective.Basic\", \"type\": \" (C : Type u) [CategoryTheory.Category.{v, u} C] : CategoryTheory.ObjectProperty C\", \"doc\": \"The `ObjectProperty C` corresponding to the notion of projective objects in `C`.\"}\n  {\"name\": \"IsProjective.iff_projective\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Projective\", \"type\": \" {R : Type u} [Ring R] [Small.{v, u} R] (P : Type v) [AddCommGroup P] [Module R P] : Module.Projective R P ↔ CategoryTheory.Projective ↧P\", \"doc\": \"The categorical notion of projective object agrees with the explicit module-theoretic notion.\"}\n  {\"name\": \"MeasureTheory.IsProjectiveMeasureFamily\", \"module\": \"Mathlib.MeasureTheory.Constructions.Projective\", \"type\": \" {ι : Type u_1} {α : ι → Type u_2} [(i : ι) → MeasurableSpace (α i)] (P : (J : Finset ι) → MeasureTheory.Measure ((j : ↥J) → α ↑j)) : Prop\", \"doc\": \"A family of measures indexed by finite sets of `ι` is projective if, for finite sets `J ⊆ I`,\\nthe projection from `∀ i : I, α i` to `∀ i : J, α i` maps `P I` to `P J`.\"}\n  {\"name\": \"MeasureTheory.IsProjectiveLimit\", \"module\": \"Mathlib.MeasureTheory.Constructions.Projective\", \"type\": \" {ι : Type u_1} {α : ι → Type u_2} [(i : ι) → MeasurableSpace (α i)] (μ : MeasureTheory.Measure ((i : ι) → α i)) (P : (J : Finset ι) → MeasureTheory.Measure ((j : ↥J) → α ↑j)) : Prop\", \"doc\": \"A measure `μ` is the projective limit of a family of measures indexed by finite sets of `ι` if\\nfor all `I : Finset ι`, the projection from `∀ i, α i` to `∀ i : I, α i` maps `μ` to `P I`.\"}\n  {\"name\": \"MeasureTheory.IsProjectiveLimit.measure_univ_unique\", \"module\": \"Mathlib.MeasureTheory.Constructions.Projective\", \"type\": \" {ι : Type u_1} {α : ι → Type u_2} [(i : ι) → MeasurableSpace (α i)] {P : (J : Finset ι) → MeasureTheory.Measure ((j : ↥J) → α ↑j)} {μ ν : MeasureTheory.Measure ((i : ι) → α i)} (hμ : MeasureTheory.IsProjectiveLimit μ P) (hν : MeasureTheory.IsProjectiveLimit ν P) : μ Set.univ = ν Set.univ\", \"doc\": \"\"}\n  {\"name\": \"MeasureTheory.IsProjectiveLimit.isFiniteMeasure\", \"module\": \"Mathlib.MeasureTheory.Constructions.Projective\", \"type\": \" {ι : Type u_1} {α : ι → Type u_2} [(i : ι) → MeasurableSpace (α i)] {P : (J : Finset ι) → MeasureTheory.Measure ((j : ↥J) → α ↑j)} {μ : MeasureTheory.Measure ((i : ι) → α i)} [∀ (i : Finset ι), MeasureTheory.IsFiniteMeasure (P i)] (hμ : MeasureTheory.IsProjectiveLimit μ P) : MeasureTheory.IsFiniteM\", \"doc\": \"\"}\n  {\"name\": \"MeasureTheory.IsProjectiveLimit.isProbabilityMeasure\", \"module\": \"Mathlib.MeasureTheory.Constructions.Projective\", \"type\": \" {ι : Type u_1} {α : ι → Type u_2} [(i : ι) → MeasurableSpace (α i)] {P : (J : Finset ι) → MeasureTheory.Measure ((j : ↥J) → α ↑j)} {μ : MeasureTheory.Measure ((i : ι) → α i)} [∀ (i : Finset ι), MeasureTheory.IsProbabilityMeasure (P i)] (hμ : MeasureTheory.IsProjectiveLimit μ P) : MeasureTheory.IsPr\", \"doc\": \"\"}\n  {\"name\": \"MeasureTheory.IsProjectiveLimit.unique\", \"module\": \"Mathlib.MeasureTheory.Constructions.Projective\", \"type\": \" {ι : Type u_1} {α : ι → Type u_2} [(i : ι) → MeasurableSpace (α i)] {P : (J : Finset ι) → MeasureTheory.Measure ((j : ↥J) → α ↑j)} {μ ν : MeasureTheory.Measure ((i : ι) → α i)} [∀ (i : Finset ι), MeasureTheory.IsFiniteMeasure (P i)] (hμ : MeasureTheory.IsProjectiveLimit μ P) (hν : MeasureTheory.IsP\", \"doc\": \"The projective limit of a family of finite measures is unique.\"}\n  {\"name\": \"MeasureTheory.IsProjectiveLimit.measure_univ_eq\", \"module\": \"Mathlib.MeasureTheory.Constructions.Projective\", \"type\": \" {ι : Type u_1} {α : ι → Type u_2} [(i : ι) → MeasurableSpace (α i)] {P : (J : Finset ι) → MeasureTheory.Measure ((j : ↥J) → α ↑j)} {μ : MeasureTheory.Measure ((i : ι) → α i)} (hμ : MeasureTheory.IsProjectiveLimit μ P) (I : Finset ι) : μ Set.univ = (P I) Set.univ\", \"doc\": \"\"}\n  {\"name\": \"MeasureTheory.IsProjectiveMeasureFamily.eq_zero_of_isEmpty\", \"module\": \"Mathlib.MeasureTheory.Constructions.Projective\", \"type\": \" {ι : Type u_1} {α : ι → Type u_2} [(i : ι) → MeasurableSpace (α i)] {P : (J : Finset ι) → MeasureTheory.Measure ((j : ↥J) → α ↑j)} [h : IsEmpty ((i : ι) → α i)] (hP : MeasureTheory.IsProjectiveMeasureFamily P) (I : Finset ι) : P I = 0\", \"doc\": \"\"}\n  {\"name\": \"MeasureTheory.IsProjectiveLimit.measure_cylinder\", \"module\": \"Mathlib.MeasureTheory.Constructions.Projective\", \"type\": \" {ι : Type u_1} {α : ι → Type u_2} [(i : ι) → MeasurableSpace (α i)] {P : (J : Finset ι) → MeasureTheory.Measure ((j : ↥J) → α ↑j)} {μ : MeasureTheory.Measure ((i : ι) → α i)} (h : MeasureTheory.IsProjectiveLimit μ P) (I : Finset ι) {s : Set ((i : ↥I) → α ↑i)} (hs : MeasurableSet s) : μ (MeasureTheo\", \"doc\": \"\"}\n  {\"name\": \"MeasureTheory.IsProjectiveMeasureFamily.measure_univ_eq\", \"module\": \"Mathlib.MeasureTheory.Constructions.Projective\", \"type\": \" {ι : Type u_1} {α : ι → Type u_2} [(i : ι) → MeasurableSpace (α i)] {P : (J : Finset ι) → MeasureTheory.Measure ((j : ↥J) → α ↑j)} (hP : MeasureTheory.IsProjectiveMeasureFamily P) (I J : Finset ι) : (P I) Set.univ = (P J) Set.univ\", \"doc\": \"\"}\n",
    "date": "2026-10-19",
-   "verdict": "no match: the returned signatures concern ordinary normalization, ordinary smooth or etale maps, categorical projective objects or projective measure limits; none states this logarithmic theorem or global normalized-blowup projectivity."
+   "verdict": "no match: the returned signatures do not give global projectivity and quasi-projectivity of an ordinary normalized blowup over an excellent affine base."
   },
   {
    "tool": "grep",
    "query": "normaliz.*blow|blow.*normaliz|IsProjective",
    "results": "[grep] OK 0 hit(s)\n",
    "date": "2026-10-19",
-   "verdict": "no match: the returned signatures concern ordinary normalization, ordinary smooth or etale maps, categorical projective objects or projective measure limits; none states this logarithmic theorem or global normalized-blowup projectivity."
+   "verdict": "no match: the returned signatures do not give global projectivity and quasi-projectivity of an ordinary normalized blowup over an excellent affine base."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-log-regular-projective-log-resolution",
@@ -78,5 +250,89 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-excellent-quasiprojective-normalized-blowup",
+  "worker": "stage1",
+  "summary": "Split the ordinary normalized-blowup input with no new nodes. Constructed the symmetric-to-Rees closed embedding, proved integrality from the supplied domain charts, checked excellence and finite normalization, and converted projective-bundle maps to global projective-space embeddings using ample twists and Segre. All cited node statements were read; hypotheses and unit ancestry retained.",
+  "blueprint": "Realizes the ordinary scheme-theoretic input to the inherited ancestor Step 3: projectivity and quasi-projectivity of the normalized blowups in the log-resolution tower, before the duality argument. The unit Fourier/perverse statement is unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-chow-segre",
+    "why": "Embeds a product of two finite projective spaces in one; only this elementary projective geometry tool is used."
+   },
+   {
+    "node": "lem-exc-finite-type-localization-excellent",
+    "why": "Excellence of finite-type affine A-algebras; the local unit has no permanence theorem."
+   },
+   {
+    "node": "lem-nagata-affine-proj-scalar-extension",
+    "why": "Identifies P^m_S = Spec A x_Z P^m_Z with Proj A[T_0..T_m] (Stacks 01N2), so the Proj-open ample-twist lemma applies to the given embedding; added by the maintainer reader."
+   },
+   {
+    "node": "lem-trf-ample-restrict-closed-immersion",
+    "why": "Restricts that ample twist to X and Z; no local unit lemma supplies it."
+   },
+   {
+    "node": "lem-trf-excellent-scheme-affine-cover",
+    "why": "Promotes excellence of the selected affine cover to all affine coordinate rings, to match the normalization lemma."
+   },
+   {
+    "node": "lem-trf-finite-projective-bundle",
+    "why": "A finite morphism embeds in a projective bundle; needed before converting normalization to H-projectivity."
+   },
+   {
+    "node": "lem-trf-h-projective-composition",
+    "why": "Composes the two H-projective maps without asserting that local projectivity suffices."
+   },
+   {
+    "node": "lem-trf-proj-qc-open-twist-ample",
+    "why": "An ample invertible twist on a quasi-compact open of polynomial Proj; supplies the ample base needed by 087S."
+   },
+   {
+    "node": "lem-trf-projective-bundle-proper",
+    "why": "Projective-bundle morphisms are proper, hence finite type."
+   },
+   {
+    "node": "lem-trf-projective-bundle-to-h-projective",
+    "why": "Converts projective bundles to finite-dimensional projective spaces using the explicitly constructed ample base."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-coherent-symmetric-algebra",
+    "why": "Sheaf symmetric algebra and universal extension of J into the Rees algebra; not replaced by the log-resolution route."
+   },
+   {
+    "node": "lemma-nagata-immersion-shrink-to-closed-exists",
+    "why": "Quasi-compact closed neighbourhood for an immersion; used to obtain an ample sheaf from the given quasi-projective embedding."
+   },
+   {
+    "node": "prop-nagata-relative-proj-functoriality",
+    "why": "Surjective graded maps induce closed immersions; applies to the symmetric-to-Rees map and carries the ordinary blowup construction."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-chow-segre",
+  "lem-exc-finite-type-localization-excellent",
+  "lem-nagata-affine-proj-scalar-extension",
+  "lem-trf-ample-restrict-closed-immersion",
+  "lem-trf-excellent-scheme-affine-cover",
+  "lem-trf-finite-projective-bundle",
+  "lem-trf-h-projective-composition",
+  "lem-trf-proj-qc-open-twist-ample",
+  "lem-trf-projective-bundle-proper",
+  "lem-trf-projective-bundle-to-h-projective",
+  "lem-weil-pbc-quasi-coherent-symmetric-algebra",
+  "lemma-nagata-immersion-shrink-to-closed-exists",
+  "prop-nagata-relative-proj-functoriality"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-NM-a1a093fc1",
+  "group": "NM",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NM-a1a093fc1 (reviewer sub-agent of L); spot-checked: Read the item in full: 10 steps, no new nodes, statement unchanged. I also read every cited node statement and the Stacks sources 087S (morphisms l.10848: ample base implies projective is H-projective), 0B3I, 01WE, 01N2, 01MW/01Q2, 01PU, 0HAB and 07QU. One fault, C1: Steps 2 and 7 identify P^m_S, defined in the DAG as S x_Z P^m_Z (def-nagata-projective-space-base-change), with Proj A[T_0..T_m] without a citation, and A need not be flat over Z. I fixed this by citing the existing node lem-nagata-affine-proj-scalar-extension (Stacks 01N2, cartesian square for B = S tensor_R A) in both steps, and added it to proof_deps and split_report.tool_uses. Its closure does not contain the item, so there is no cycle, and it has no trf or pod node. The rest is correct. Step 3: Sym(J) to Rees(J) is surjective in each degree and gives a closed immersion by relative-Proj functoriality (3); the chart (R[Jt]_{at})_0 is R[J/a], injective because R is a domain and a is nonzero. Step 4 (integrality, elementary) is accepted: D(a) is nonempty inside a domain chart and maps into U = X minus V(J), so p^{-1}U is dense and irreducible. Step 5: 01WC gives proper, hence finite type; 07QU makes the cover excellent and 0HAB extends this to every affine, which is exactly the preparation lemma's hypothesis. Steps 6 and 9: 087S is used only over bases with an ample sheaf constructed in Steps 2 and 7; the immersion is base-changed as closed followed by open, then composed and followed by Segre 01WD; 0B3I and 01WE give pν H-projective. Step 8: on integral Z the componentwise normalization is the function-field normalization. Step 10: O meets p^{-1}U because Z is irreducible. Edge cases J = O_X, X = Spec k and nonreduced A are fine; J = 0 is excluded. Duplicates: lem-trf-normalized-blowup-calculus is only over Q, so not a duplicate. Batch-5 flags are all accepted as generic scheme theory, each checked by its own closure: def-trf-projective-bundle-morphism (01W8), lem-trf-ample-restrict-closed-immersion (01PU), lem-trf-excellent-scheme-affine-cover and its G-ring/J-2/catenary children (0HAB), which is also the only trf route of lem-per-excellent-normalization-preparation, lem-trf-finite-projective-bundle (0B3I), lem-trf-h-projective-composition (01WE), lem-trf-proj-qc-open-twist-ample (01MW), lem-trf-projective-bundle-proper (01WC) and lem-trf-projective-bundle-to-h-projective (087S). None of them reaches the trace-formula transport, a batch-4 target or Poincare duality. No SGA is cited.; 1 file(s) fixed by the reviewer"
  }
 }
