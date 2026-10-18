@@ -266,9 +266,83 @@ noncomputable def derivedRestrictScalarsCompRightDerivedGlobalSectionsIso :
       (G₂ := ModuleCat.restrictScalars.{u + 1} ρ) (Iso.refl _) ≪≫
     Functor.isoWhiskerRight (rightDerivedGlobalSectionsIsoOfIsSepClosed Λ').symm _
 
+section DerivedExact
 
-/-- The compatibility of the coefficient comparison of `RΓ(Spec k, -)` with the transport along
-an automorphism `h` of `Spec k`. -/
+attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimits
+
+variable {C D E : Type*} [Category C] [Category D] [Category E] [Abelian C] [Abelian D]
+  [Abelian E] [HasDerivedCategory C] [HasDerivedCategory D] [HasDerivedCategory E]
+  [HasKInjectiveResolutions C] [HasKInjectiveResolutions D]
+
+omit [HasKInjectiveResolutions D] in
+/-- For exact functors, the isomorphism `RF ≅ RG` induced by `e : F ≅ G` corresponds to the
+isomorphism `D(F) ≅ D(G)` under the identifications `RF ≅ D(F)` and `RG ≅ D(G)`. -/
+@[reassoc]
+lemma rightDerivedFunctorNatIso_hom_app_comp_isoMapDerivedCategory_hom_app {F G : C ⥤ D}
+    [F.Additive] [G.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+    [PreservesFiniteLimits G] [PreservesFiniteColimits G] (e : F ≅ G) (K : DerivedCategory C) :
+    (Functor.rightDerivedFunctorNatIso e).hom.app K ≫
+        G.rightDerivedFunctorIsoMapDerivedCategory.hom.app K =
+      F.rightDerivedFunctorIsoMapDerivedCategory.hom.app K ≫
+        (Functor.mapDerivedCategoryNatIso e).hom.app K := by
+  suffices H : (Functor.rightDerivedFunctorNatIso e).hom ≫
+      G.rightDerivedFunctorIsoMapDerivedCategory.hom =
+      F.rightDerivedFunctorIsoMapDerivedCategory.hom ≫
+        (Functor.mapDerivedCategoryNatIso e).hom from NatTrans.congr_app H K
+  refine Functor.rightDerived_ext F.rightDerivedFunctor F.rightDerivedFunctorUnit
+    (HomotopyCategory.quasiIso C (ComplexShape.up ℤ)) _ _ _ ?_
+  ext X
+  have hF := NatTrans.congr_app F.rightDerivedFunctorIsoMapDerivedCategory_hom_fac X
+  have hG := NatTrans.congr_app G.rightDerivedFunctorIsoMapDerivedCategory_hom_fac X
+  simp only [NatTrans.comp_app, Functor.whiskerLeft_app] at hF hG ⊢
+  rw [reassoc_of% hF,
+    Functor.mapDerivedCategoryFactorsh_inv_app_mapDerivedCategoryNatIso_hom_app]
+  simp only [Functor.rightDerivedFunctorNatIso, Functor.rightDerivedFunctorNatTrans]
+  rw [Functor.rightDerivedNatTrans_app_assoc, hG]
+  simp
+
+/-- For exact functors `F` and `G`, the composition isomorphism `R(F ⋙ G) ≅ RF ⋙ RG`
+corresponds to `D(F ⋙ G) ≅ D(F) ⋙ D(G)` under the identifications `R ≅ D`. -/
+lemma rightDerivedFunctorCompIso_hom_app_comp_isoMapDerivedCategory_hom_app (F : C ⥤ D)
+    (G : D ⥤ E) [F.Additive] [G.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+    [PreservesFiniteLimits G] [PreservesFiniteColimits G] [F.PreservesKInjectiveComplexes]
+    (K : DerivedCategory C) :
+    (Functor.rightDerivedFunctorCompIso F G).hom.app K ≫
+        G.rightDerivedFunctor.map (F.rightDerivedFunctorIsoMapDerivedCategory.hom.app K) ≫
+        G.rightDerivedFunctorIsoMapDerivedCategory.hom.app (F.mapDerivedCategory.obj K) =
+      (F ⋙ G).rightDerivedFunctorIsoMapDerivedCategory.hom.app K ≫
+        (Functor.mapDerivedCategoryCompIso F G).hom.app K := by
+  suffices H : (Functor.rightDerivedFunctorCompIso F G).hom ≫
+      Functor.whiskerRight F.rightDerivedFunctorIsoMapDerivedCategory.hom G.rightDerivedFunctor ≫
+      Functor.whiskerLeft F.mapDerivedCategory G.rightDerivedFunctorIsoMapDerivedCategory.hom =
+      (F ⋙ G).rightDerivedFunctorIsoMapDerivedCategory.hom ≫
+        (Functor.mapDerivedCategoryCompIso F G).hom by
+    simpa using NatTrans.congr_app H K
+  refine Functor.rightDerived_ext (F ⋙ G).rightDerivedFunctor (F ⋙ G).rightDerivedFunctorUnit
+    (HomotopyCategory.quasiIso C (ComplexShape.up ℤ)) _ _ _ ?_
+  ext X
+  have h₁ : (F ⋙ G).rightDerivedFunctorUnit.app X ≫
+      (Functor.rightDerivedFunctorCompIso F G).hom.app (DerivedCategory.Qh.obj X) =
+      (Functor.rightDerivedFunctorCompUnit F G).app X := by
+    simp [Functor.rightDerivedFunctorCompIso]
+  have hF := NatTrans.congr_app F.rightDerivedFunctorIsoMapDerivedCategory_hom_fac X
+  have hG := NatTrans.congr_app G.rightDerivedFunctorIsoMapDerivedCategory_hom_fac
+    ((F.mapHomotopyCategory (ComplexShape.up ℤ)).obj X)
+  have hFG := NatTrans.congr_app (F ⋙ G).rightDerivedFunctorIsoMapDerivedCategory_hom_fac X
+  simp only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app] at hF hG hFG ⊢
+  rw [reassoc_of% h₁, reassoc_of% hFG,
+    Functor.mapDerivedCategoryFactorsh_inv_app_mapDerivedCategoryCompIso_hom_app]
+  simp only [Functor.rightDerivedFunctorCompUnit, NatTrans.comp_app, Functor.whiskerRight_app,
+    Functor.whiskerLeft_app, Functor.associator_hom_app, Functor.associator_inv_app,
+    Category.id_comp, Category.assoc, Functor.comp_obj]
+  rw [← Functor.map_comp_assoc, hF, NatTrans.naturality, reassoc_of% hG]
+
+end DerivedExact
+
+/-- **Unfinished.** The compatibility of the coefficient comparison of `RΓ(Spec k, -)` with the
+transport along
+an automorphism `h` of `Spec k` (part of the compatibility with pullback asserted by blueprint
+`lem-fix-compact-support-coefficient-change` and `thm-trf-finite-coefficient-map`). -/
 lemma derivedRestrictScalarsCompRightDerivedGlobalSectionsIso_hom_app_globalSectionsTransport
     (h : Spec (.of k) ⟶ Spec (.of k)) [IsIso h]
     (M' : DerivedCategory (Sheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ'))) :
@@ -415,8 +489,10 @@ noncomputable def compactlySupportedGlobalSectionsRestrictScalarsIso :
   pasteTwoSquaresIso (derivedRestrictScalarsCompRightDerivedLowerShriekIso ρ aX)
     (derivedRestrictScalarsCompRightDerivedGlobalSectionsIso ρ)
 
-/-- The compatibility of the coefficient comparison of `Ra_!` with the compact-support exchange
-map along an automorphism pair `(g, h)`. -/
+/-- **Unfinished.** The compatibility of the coefficient comparison of `Ra_!` with the
+compact-support exchange
+map along an automorphism pair `(g, h)`: the "compatible with pullback" clause of blueprint
+`lem-fix-compact-support-coefficient-change`. -/
 lemma derivedRestrictScalarsCompRightDerivedLowerShriekIso_baseChangeMap [QuasiCompact aX]
     {g : X ⟶ X} {h : Spec (.of k) ⟶ Spec (.of k)} (sq : IsPullback g aX aX h)
     (K' : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ'))) :
