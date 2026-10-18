@@ -18,9 +18,127 @@
   "def-weil-finite-type-morphism",
   "def-sbc-smooth-morphisms"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The trait $S$ is Noetherian by its definition, so $X$ is Noetherian by [lem-weil-pbc-finite-type-over-noetherian], since $X$ is finite type over $S$. By [lem-per-regular-lci-geometric-calculus], smoothness over the regular scheme $X$ makes $Y$ regular. Fix $y\\in Y$, and put $x=q(y)$. Choose affine open neighbourhoods $U=\\operatorname{Spec}C$ of $x$ and $V=\\operatorname{Spec}B$ of $y$ with $q(V)\\subset U$. Restriction is smooth by [lem-weil-pbc-smooth-restrict-open-subschemes]. By [sbc-lem-smooth-relative-dimension-locally-constant], shrink $V$ further to an affine neighbourhood on which this restriction has constant relative dimension $r$. By [lem-weil-pbc-lft-affine-pairs], $B$ is a finitely generated $C$-algebra, so $V\\to U$ is finite type. Replacing $X,Y$ by these opens changes neither local ring at $x,y$ nor its punctual-purity map: these maps are defined on the local schemes themselves. It suffices to prove the assertion at the chosen $y$.",
+   "uses": [
+    "lem-per-regular-lci-geometric-calculus",
+    "lem-weil-pbc-smooth-restrict-open-subschemes",
+    "sbc-lem-smooth-relative-dimension-locally-constant",
+    "lem-weil-pbc-lft-affine-pairs",
+    "lem-weil-pbc-finite-type-over-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVI Corollary 3.5.6, p.249; affine-local reduction"
+   }
+  },
+  {
+   "text": "Let $\\mathfrak p\\subset C$ be the prime of $x$, put $R=C_{\\mathfrak p}=\\mathcal O_{X,x}$, $T=\\operatorname{Spec}R$, $k=\\kappa(x)$, and $c=\\dim R$. Form $P=V\\times_U T$ and $F=P\\times_T\\operatorname{Spec}k$. Write $h:P\\to T$, $i:\\operatorname{Spec}k\\hookrightarrow T$, $a:F\\hookrightarrow P$, and $b:F\\to\\operatorname{Spec}k$. By [def-weil-regular-scheme], the local ring $R$ of the regular scheme $X$ is a regular local ring, hence Noetherian, so $T$ is Noetherian; $T$ is regular because its local rings are the localizations $R_{\\mathfrak p'}=\\mathcal O_{X,x'}$ at the generizations $x'$ of $x$, which are regular local rings by the same definition. By [lem-sbc-smooth-relative-dimension-permanence], $h$ and $b$ are smooth of relative dimension $r$. Finite type is preserved by these base changes [lem-sfb-finite-type-composition-base-change], so $P$ and $F$ are Noetherian by [lem-weil-pbc-finite-type-over-noetherian]. The field $k$ is regular: its only local ring is itself with zero maximal ideal and dimension zero. Thus [lem-per-regular-lci-geometric-calculus] makes both $P$ and $F$ regular. All these schemes have $\\ell$ invertible because their structure maps factor through $X$.",
+   "uses": [
+    "def-weil-regular-scheme",
+    "lem-sbc-smooth-relative-dimension-permanence",
+    "lem-sfb-finite-type-composition-base-change",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-per-regular-lci-geometric-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVI Corollary 3.5.6, fibrewise expansion; XVI Proposition 3.2.3"
+   }
+  },
+  {
+   "text": "The immersion $i$ is regular of codimension $c$: choose $c$ generators of the maximal ideal of the regular local ring $R$ using [def-weil-regular-scheme]; they are a regular sequence by [lem-weil-pbc-regular-local-generators-regular-sequence]. Since $h$ is smooth, it is flat by [lem-pc-smooth-flat]. Flat base change in [lem-per-regular-lci-geometric-calculus] makes $a$ regular of the same constant codimension $c$. Moreover $h$ is a regular morphism in the sense needed for supported base change. Indeed its fibres are smooth by [lem-sbc-smooth-relative-dimension-permanence], remain smooth after every finite field extension by that same statement, and are regular by [lem-per-regular-lci-geometric-calculus], since a field is regular. These base-changed fibres are Noetherian: finite-type base change [lem-sfb-finite-type-composition-base-change] makes them finite type over the extended field, and [lem-weil-pbc-finite-type-over-noetherian] applies. Thus $h$ is flat with geometrically regular fibres. This verifies the hypotheses rather than assuming an excellence property of the trait.",
+   "uses": [
+    "def-weil-regular-scheme",
+    "lem-weil-pbc-regular-local-generators-regular-sequence",
+    "lem-pc-smooth-flat",
+    "lem-per-regular-lci-geometric-calculus",
+    "lem-sbc-smooth-relative-dimension-permanence",
+    "lem-sfb-finite-type-composition-base-change",
+    "lem-weil-pbc-finite-type-over-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVI Corollary 3.5.6; XVII Corollary 4.2.3, hypotheses"
+   }
+  },
+  {
+   "text": "Punctual purity of $X$ at $x$ says that the specified class $\\eta_i:A_k\\to i^!A_T(c)[2c]$ is an isomorphism. Apply [lem-per-regular-supported-base-change] to the Cartesian square $(i,a,h,b)$ with exponent $n=1$ and $M=A_T(c)[2c]$. Its Noetherian and regularity hypotheses were verified in Steps 2 and 3. Identifying $\\mathbf Z/\\ell\\mathbf Z=A$, it gives the canonical isomorphism\n$$b^*i^!A_T(c)[2c]\\xrightarrow{\\sim}a^!A_P(c)[2c].$$\nThe twist identification is that of [lem-asd-etale-finite-twist-pullback]. The closed exceptional functor in the fundamental-class statement agrees on $D^+$ with the supported functor here: for the closed immersions $i$ and $a$ the compactifications $(1,i)$, resp. $(1,a)$, of [def-amb-etale-compact-support] give $Ri_!=i_*$ and $Ra_!=a_*$ (the exact closed direct image applied termwise), so the compact-support right adjoint used by the class is a right adjoint of $i_*$, resp. $a_*$, and it preserves $D^+$ (compute on bounded-below injective representatives); [def-per-closed-support-plus-adjunction] specifies exactly the right adjoint of the same exact closed direct image, obtained by deriving its supported inverse image. Uniqueness of a right adjoint identifies them with their counits. Thus this comparison is the canonical closed-counit comparison, not an arbitrary isomorphism of targets. Flat-base-change compatibility of the specified classes [lem-per-regular-immersion-class-calculus] gives\n$$\\eta_a=B_{h,i}\\circ b^*(\\eta_i).$$\nBoth arrows on the right are isomorphisms (a functor preserves inverses), so the pair $(P,F)$ satisfies condition (a) of the two-of-three criterion.",
+   "uses": [
+    "lem-per-regular-supported-base-change",
+    "lem-asd-etale-finite-twist-pullback",
+    "def-per-closed-support-plus-adjunction",
+    "lem-per-regular-immersion-class-calculus",
+    "def-amb-etale-compact-support"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII Corollary 4.2.3, p.281; XVI Theorem 2.3.2, flat-base-change compatibility"
+   }
+  },
+  {
+   "text": "The regular Noetherian scheme $F$ is a scheme over the field $k$, hence over its prime subfield, which is $\\mathbf Q$ in characteristic zero and $\\mathbf F_p$ in characteristic $p$. Since $\\ell$ is invertible on $F$, [lem-per-prime-field-punctual-purity] applies and proves that $F$ is punctually pure. In particular, this does not assume that $k$ is perfect, or that $F$ is finite type over its prime subfield.",
+   "uses": [
+    "lem-per-prime-field-punctual-purity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVI Proposition 3.2.5, p.245; fibre-purity input to Corollary 3.5.6"
+   }
+  },
+  {
+   "text": "Apply [lem-per-punctual-purity-two-of-three] to $a:F\\hookrightarrow P$. Both schemes are regular Noetherian with $\\ell$ invertible, and $a$ has constant codimension $c$ by Step 3. Step 4 gives its condition (a), and Step 5 gives (b). Therefore (c) holds: $P$ is punctually pure at every point of $F$, in particular at the point $y'$ lying above the chosen $y$ and $x$. This use needs only purity of the fibre and of its closed pair, not purity of $P$ away from the fibre.",
+   "uses": [
+    "lem-per-punctual-purity-two-of-three"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVI Proposition 3.2.3, p.244, implication (a)+(b) implies (c)"
+   }
+  },
+  {
+   "text": "Finally the local scheme of $P$ at $y'$ is the local scheme of $Y$ at $y$. Explicitly, let $\\mathfrak q\\subset B$ represent $y$, so its contraction is $\\mathfrak p$, and set $S=C\\setminus\\mathfrak p$. The maps $B\\otimes_C C_{\\mathfrak p}\\leftrightarrow S^{-1}B$ send $b\\otimes(c/s)$ to $bc/s$ and $b/s$ to $b\\otimes(1/s)$; these inverse maps respect the tensor relations. Since $S$ misses $\\mathfrak q$, localizing this ring at $S^{-1}\\mathfrak q$ gives $B_{\\mathfrak q}$: $ (b/s)/(b'/s')\\mapsto bs'/(sb')$ and $b/b'\\mapsto(b/1)/(b'/1)$ are inverse. Thus $\\mathcal O_{P,y'}=\\mathcal O_{V,y}=\\mathcal O_{Y,y}$ with the same residue field, dimension and closed-point pair. Canonical class compatibility under the resulting isomorphism, a flat base change of pairs, is [lem-per-regular-immersion-class-calculus]. The punctual-purity map at $y'$ in Step 6 is therefore exactly that at $y$ under these identifications. Since $y$ was arbitrary, $Y$ is punctually pure; its regularity was established in Step 1. If $Y$ is empty this conclusion is vacuous. If $c=0$, $i$ and $a$ are identities and their classes are the identity by the codimension-zero clause of the same class-calculus statement.",
+   "uses": [
+    "lem-per-regular-immersion-class-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVI Definition 3.2.2 and Corollary 3.5.6; elementary affine fraction identification"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-amb-etale-compact-support",
+  "def-per-closed-support-plus-adjunction",
+  "def-weil-regular-scheme",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-pc-smooth-flat",
+  "lem-per-prime-field-punctual-purity",
+  "lem-per-punctual-purity-two-of-three",
+  "lem-per-regular-immersion-class-calculus",
+  "lem-per-regular-lci-geometric-calculus",
+  "lem-per-regular-supported-base-change",
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-lft-affine-pairs",
+  "lem-weil-pbc-regular-local-generators-regular-sequence",
+  "lem-weil-pbc-smooth-restrict-open-subschemes",
+  "sbc-lem-smooth-relative-dimension-locally-constant"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "XVI Corollary 3.5.6, expanded by the fibrewise argument using XVI Proposition 3.2.3 and XVII Corollary 4.2.3; the source states the corollary without a separate proof."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -49,10 +167,45 @@
    "results": "{\"t\": \"2026-10-18T20:44:40Z\", \"tool\": \"leansearch\", \"query\": \"Punctual purity ascends from a regular trait scheme along a smooth morphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmooth.recOn\", \"AlgebraicGeometry.IsSmooth.casesOn\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_comp\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"AlgebraicGeometry.IsSmooth.mk\", \"AlgebraicGeometry.IsSmooth.rec\"], \"digest\": \"fc9d73bc970e6e53\"}",
    "date": "2026-10-19",
    "verdict": "no match: inspected returned signatures; algebraic smoothness, nonzerodivisors, and adjoining-root infrastructure do not state this node"
+  },
+  {
+   "tool": "grep",
+   "query": "punctual.*pur|cohomological.*pur|absolute.*purity|Gysin",
+   "results": "{\"t\": \"2026-10-18T21:44:05Z\", \"tool\": \"grep\", \"query\": \"punctual.*pur|cohomological.*pur|absolute.*purity|Gysin\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/Canonical.lean\", \"Mathlib/CategoryTheory/Sites/Canonical.lean\", \"Mathlib/CategoryTheory/Sites/Canonical.lean\"], \"digest\": \"17a4ebe8e1b1193c\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: inspected returned signatures; smooth algebra presentations and algebraic base-change results do not state punctual cohomological purity; grep hits are only the substring finestTopologySingle"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Etale\", \"purity\"",
+   "results": "{\"t\": \"2026-10-18T21:44:05Z\", \"tool\": \"loogle\", \"query\": \"\\\"Etale\\\", \\\"purity\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: inspected returned signatures; smooth algebra presentations and algebraic base-change results do not state punctual cohomological purity; grep hits are only the substring finestTopologySingle"
+  },
+  {
+   "tool": "leansearch",
+   "query": "If a regular scheme is punctually cohomologically pure then a smooth scheme over it is punctually pure",
+   "results": "{\"t\": \"2026-10-18T21:44:05Z\", \"tool\": \"leansearch\", \"query\": \"If a regular scheme is punctually cohomologically pure then a smooth scheme over it is punctually pure\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmooth.casesOn\", \"AlgebraicGeometry.Scheme.mk.noConfusion\", \"AlgebraicGeometry.IsSmooth.recOn\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth\", \"AlgebraicGeometry.IsSmooth.mk\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_comp\", \"AlgebraicGeometry.IsSmooth\"], \"digest\": \"e2f2ae1457494eef\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: inspected returned signatures; smooth algebra presentations and algebraic base-change results do not state punctual cohomological purity; grep hits are only the substring finestTopologySingle"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Smooth base change of etale cohomology with support preserves purity of regular closed immersions",
+   "results": "{\"t\": \"2026-10-18T21:44:06Z\", \"tool\": \"leanfinder\", \"query\": \"Smooth base change of etale cohomology with support preserves purity of regular closed immersions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange\", \"RingHom.Etale.isStableUnderBaseChange\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"Algebra.Etale.baseChange\", \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"AlgebraicGeometry.IsEtale.of_comp\"], \"digest\": \"f538004342e91a7e\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: inspected returned signatures; smooth algebra presentations and algebraic base-change results do not state punctual cohomological purity; grep hits are only the substring finestTopologySingle"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Gysin fundamental class isomorphism at all local rings ascends along a smooth scheme morphism",
+   "results": "{\"t\": \"2026-10-18T21:44:47Z\", \"tool\": \"leanfinder\", \"query\": \"Gysin fundamental class isomorphism at all local rings ascends along a smooth scheme morphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.liftCoborder_app\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"AlgebraicGeometry.IsClosedImmersion.isIso_lift\", \"AlgebraicGeometry.isSmooth_iff\", \"AlgebraicGeometry.Scheme.IdealSheafData.comapIso_hom_snd\"], \"digest\": \"fb14b43e84943f18\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: inspected returned signatures; smooth algebra presentations and algebraic base-change results do not state punctual cohomological purity; grep hits are only the substring finestTopologySingle"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-monomial-trait-punctual-purity",
@@ -78,5 +231,54 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-smooth-punctual-purity-ascent",
+  "worker": "stage1",
+  "summary": "Q67 gives a fibrewise proof with no new nodes: smooth regularity; purity of the pulled-back closed point class by regular supported base change; prime-field purity of the smooth fibre; the two-of-three criterion; explicit equality of the local rings. No excellence, completeness, mixed characteristic, separatedness or compactifiability assumption is added. Existing item statement and source are retained.",
+  "blueprint": "Realizes the supporting smooth-ascent input to the historical regular finite-coefficient duality step of lem-per-artin-gabber-affine-curve, through the inherited ancestry, specifically the zero-exponent reduction in lem-per-monomial-trait-punctual-purity (ILO XVI Corollary 3.5.6).",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-smooth-restrict-open-subschemes",
+    "why": "Generic preservation of smoothness on open affine charts; the perverse unit supplies no such geometric restriction lemma."
+   },
+   {
+    "node": "sbc-lem-smooth-relative-dimension-locally-constant",
+    "why": "Generic local constancy lets one use the fixed-relative-dimension base-change statement on a chart, without changing the perverse-unit route."
+   },
+   {
+    "node": "lem-sbc-smooth-relative-dimension-permanence",
+    "why": "Generic smooth base-change theorem for local schemes and geometric fibres; the perverse unit has no such permanence statement."
+   },
+   {
+    "node": "lem-weil-pbc-regular-local-generators-regular-sequence",
+    "why": "Generic commutative algebra identifies the closed point of a regular local ring as a regular immersion with its actual codimension."
+   },
+   {
+    "node": "lem-pc-smooth-flat",
+    "why": "Generic geometric fact supplying flatness for class compatibility and for the regular supported base-change theorem."
+   },
+   {
+    "node": "lem-asd-etale-finite-twist-pullback",
+    "why": "Generic ordinary-etale Tate-line comparison fixes the target of the pulled-back supported class; no coefficient-category change is made."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-smooth-restrict-open-subschemes",
+  "sbc-lem-smooth-relative-dimension-locally-constant",
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "lem-weil-pbc-regular-local-generators-regular-sequence",
+  "lem-pc-smooth-flat",
+  "lem-asd-etale-finite-twist-pullback"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q67-5d760c002",
+  "group": "Q67",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q67-5d760c002 (reviewer sub-agent of L); spot-checked: I read the item's statement, all 7 steps, the statement of every cited node, and ILO XVI 3.2.1–3.2.5, 3.5.1–3.5.6 (printed p.244–249) and XVII 4.2.3 (p.281). The statement is unchanged and is a special case of ILO 3.5.6 (q of finite type, Y Noetherian). Coefficients are ordinary étale F_ℓ throughout, and no SGA is cited. The route is fibrewise, like the proof of ILO 3.5.2: purity of X at x is base-changed along h to the pair (P,F) with lem-per-regular-supported-base-change at n=1 (h is flat with geometrically regular fibres, all checked). The fibre F is pure by prime-field purity (3.2.5), and two-of-three (a)+(b)⇒(c) then gives purity at y, with O_{P,y'}=O_{Y,y} checked by explicit fraction maps. The route avoids 3.5.5 (lem-per-trait-relative-class-criterion), which would close a cycle through the monomial node. None of the 17 cited nodes has the item in its closure, so the DAG stays acyclic. Edge cases checked: Y empty, r=0, c=0, generic and closed points, non-closed y, imperfect residue fields, and Y=A^1 over Z_(p). Repaired 2 faults. (1) C1/E1: Step 1 claimed every affine open of a regular scheme is Noetherian, which no node supplies. The claim is removed, and Step 2 now gets T Noetherian and regular directly from def-weil-regular-scheme; lem-weil-pbc-localization-noetherian is dropped. (2) C1/C4: Step 4 identified the class calculus's compact-support i^! with the closed-support i^! without citing def-amb-etale-compact-support (the compactification (1,i) gives Ri_!=i_*). That citation and argument are added, and proof_deps is recomputed. The 6 declared tool uses are generic and accepted. Batch-5 flags: lem-trf-regular-sequence-dimension-formula is a Mathlib leaf about Krull dimension, and lem-trf-bounded-below-derived-adjunction is generic derived-adjunction algebra. The other trf nodes reached through regular-supported-base-change are generic too. None is a step of the trace-formula or Poincaré-duality proofs. The citer monomial node already cites prime-field purity, two-of-three and class calculus, so the item adds no new trf or pod node. Accepted.; 1 file(s) fixed by the reviewer"
  }
 }
