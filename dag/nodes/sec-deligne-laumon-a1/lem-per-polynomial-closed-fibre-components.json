@@ -17,9 +17,125 @@
   "def-weil-pbc-mv-polynomial-ring",
   "def-weil-pbc-localization-at-prime"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $P=C[x_1,\\ldots,x_r]$, $S=P\\setminus\\mathfrak n'$ and $D=S^{-1}P$. The polynomial algebra $P$ is finite type over the Noetherian ring $C$, so [lem-weil-pbc-finite-type-algebra-noetherian] makes $P$ Noetherian. Every ideal $J\\subset D$ is extended from its contraction $I\\subset P$: if $a/s\\in J$, then $a/1=(s/1)(a/s)\\in J$, so $a\\in I$, and the opposite inclusion follows by multiplying by $1/s$. Images of finitely many generators of $I$ generate $J$. Thus $D$ is Noetherian, and [def-weil-pbc-localization-at-prime] makes it local with maximal ideal $\\mathfrak n'D$.",
+   "uses": [
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00FN, lemma-Noetherian-permanence; localization argument written out, and Tag 00CO, definition-localization"
+   }
+  },
+  {
+   "text": "The completeness hypothesis is completeness for the maximal-ideal topology. Apply [lem-per-complete-local-excellence] to the given Noetherian local ring $C$. By [def-exc-excellent-ring], excellence implies universal catenarity, so the finite type $C$-algebra $P$ is catenary. To pass to $D$, primes correspond by extension and contraction to primes of $P$ contained in $\\mathfrak n'$: the inverse to contraction sends $Q$ to the fractions with numerator in $Q$. Between two such primes every intermediate prime is still contained in $\\mathfrak n'$. Thus their entire intervals, strict inclusions and saturated chains agree with those in $D$. The finite chain bound and equality of saturated lengths for $P$ therefore hold for $D$. Hence $D$ is catenary.",
+   "uses": [
+    "lem-per-complete-local-excellence",
+    "def-exc-excellent-ring",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0AW5, lemma-formally-catenary, catenarity paragraph; complete-local excellence is Tag 07QW, proposition-ubiquity-excellent (2), and localization uses the prime-interval argument of algebra.tex Tag 00NJ, lemma-localization-catenary"
+   }
+  },
+  {
+   "text": "Let $\\mathfrak q$ be any minimal prime of $D$, and let $Q$ be its contraction to $P$. By [lem-weil-pbc-prime-contains-minimal-prime], choose a minimal prime $\\mathfrak p$ of $C$ contained in $Q\\cap C$. Coefficient reduction $P\\to(C/\\mathfrak p)[x_1,\\ldots,x_r]$ is onto with kernel $\\mathfrak pP$: a polynomial is in the kernel exactly when all its finitely many coefficients lie in $\\mathfrak p$. The quotient is a domain: order monomials lexicographically; the largest monomial of a product of two nonzero polynomials is the product of their largest monomials and has nonzero coefficient. Thus $\\mathfrak pP$ is prime. Since $\\mathfrak pP\\subset Q\\subset\\mathfrak n'$, it is disjoint from $S$ and its extension $\\mathfrak pD$ is a proper prime contained in $\\mathfrak q$. Minimality gives $\\mathfrak q=\\mathfrak pD$. This supplies the source's omitted minimal-prime argument using only prime existence and the coefficient and fraction definitions [def-weil-pbc-mv-polynomial-ring, def-weil-pbc-localization-at-prime].",
+   "uses": [
+    "lem-weil-pbc-prime-contains-minimal-prime",
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0AW5, lemma-formally-catenary, sentence identifying each minimal prime as an extended minimal prime (small detail omitted in the source)"
+   }
+  },
+  {
+   "text": "Fix the $\\mathfrak p$ from Step 3 and put $R=C/\\mathfrak p$, $T=R[x_1,\\ldots,x_r]$, $\\mathfrak m=\\mathfrak n/\\mathfrak p$, and $M=\\mathfrak n'/\\mathfrak pP\\subset T$. Then $R$ is local with maximal ideal $\\mathfrak m$, and $M$ is maximal with contraction $\\mathfrak m$, since $T/M=P/\\mathfrak n'$ is a field. Both $R$ and $T$ are Noetherian by [lem-weil-pbc-finite-type-algebra-noetherian], applied first to the quotient $C\\to R$ and then to its polynomial algebra. Coefficient reduction and fractions give\n$$D/\\mathfrak q\\ \\cong\\ T_M,\\qquad (f/s)\\bmod\\mathfrak q\\longmapsto\\bar f/\\bar s.$$\nEvery denominator of $T\\setminus M$ lifts to one of $P\\setminus\\mathfrak n'$, so the map is onto; it kills precisely those fractions with some $S$-multiple of their numerator in $\\mathfrak pP$, which is exactly the extended ideal $\\mathfrak pD=\\mathfrak q$. This verifies the identification directly [def-weil-pbc-mv-polynomial-ring, def-weil-pbc-localization-at-prime].",
+   "uses": [
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0AW5, lemma-formally-catenary, minimal-component quotient in the last displayed dimension calculation; coefficient/fraction calculation written out"
+   }
+  },
+  {
+   "text": "The map $R\\to T$ is flat directly from [def-weil-pbc-flat-ring-map] and the monomial description [def-weil-pbc-mv-polynomial-ring]. For any $R$-module $N$, the map\n$$N\\otimes_R T\\longrightarrow\\bigoplus_{\\alpha\\in\\mathbf N^r}N,\\qquad n\\otimes\\sum_\\alpha a_\\alpha x^\\alpha\\longmapsto(a_\\alpha n)_\\alpha$$\nhas inverse $(n_\\alpha)_\\alpha\\mapsto\\sum_\\alpha n_\\alpha\\otimes x^\\alpha$. The sums are finite and these maps are inverse by tensor bilinearity. Tensoring an injective map $N_1\\to N_2$ with $T$ consequently applies that injective map separately to each coefficient, so stays injective. This is precisely the cited definition of flatness, rather than an uncited appeal to free modules being flat.",
+   "uses": [
+    "def-weil-pbc-flat-ring-map",
+    "def-weil-pbc-mv-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00HB, definition-flat; elementary monomial tensor calculation for the polynomial map used in Tag 0AW5"
+   }
+  },
+  {
+   "text": "Put $k=R/\\mathfrak m=C/\\mathfrak n$ and $M_0=M/\\mathfrak mT\\subset k[x_1,\\ldots,x_r]$. This is maximal because $\\mathfrak mT\\subset M$ and its quotient is the field $T/M$. Reducing coefficients in fractions gives\n$$T_M/\\mathfrak mT_M\\ \\cong\\ k[x_1,\\ldots,x_r]_{M_0}.$$\nIndeed every polynomial outside $M_0$ lifts to one outside $M$; the kernel consists of fractions having a denominator-complement multiple of the numerator in $\\mathfrak mT$, exactly $\\mathfrak mT_M$, by the fraction equality in [def-weil-pbc-localization-at-prime]. Apply [lem-weil-pbc-polynomial-ring-maximal-localization-dimension] to the field $k$, the nonnegative integer $r$, and its maximal ideal $M_0$. The dimension of this closed-fibre local ring is therefore $r$; no rationality assumption on the closed point is needed.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "lem-weil-pbc-polynomial-ring-maximal-localization-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00OP, lemma-dim-affine-space, dimension of polynomial localization at any maximal ideal; coefficient/fraction identification in Tag 0AW5"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-flat-height-formula] to the flat map $R\\to T$ of Noetherian rings and the prime $M$ contracting to $\\mathfrak m$. All these hypotheses were checked in Steps 4 and 5. Its local dimension equality yields\n$$\\dim T_M=\\dim R_{\\mathfrak m}+\\dim(T_M/\\mathfrak mT_M)=\\dim R+r.$$\nHere $R_{\\mathfrak m}=R$ since $R$ is local (every denominator outside its maximal ideal is already a unit), and Step 6 supplies the second summand. Step 4 now gives $\\dim(D/\\mathfrak q)=\\dim(C/\\mathfrak p)+r$.",
+   "uses": [
+    "lem-weil-pbc-flat-height-formula"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00ON, lemma-dimension-base-fibre-equals-total, applied to a polynomial algebra; this is the first equality of the final display in more-algebra.tex Tag 0AW5"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-spec-irreducible-components-minimal-primes], $V(\\mathfrak p)$ is an irreducible component of $\\operatorname{Spec}C$. Primes of $C/\\mathfrak p$ are exactly primes of $C$ containing $\\mathfrak p$, with the same closed subsets $V(I)$; hence $\\operatorname{Spec}(C/\\mathfrak p)$ identifies with $V(\\mathfrak p)$. By [lem-weil-pbc-spec-topological-krull-dimension-ring] its dimension is $\\dim(C/\\mathfrak p)$. Equidimensionality of $\\operatorname{Spec}C$ makes this value independent of $\\mathfrak p$ and equal to $\\dim C$: every chain of primes lies above a minimal prime contained in its smallest member, by [lem-weil-pbc-prime-contains-minimal-prime], so the supremum of component dimensions is the dimension of the whole spectrum. The same component correspondence for $D$ identifies every irreducible component with $\\operatorname{Spec}(D/\\mathfrak q)$ for some minimal $\\mathfrak q$. Step 7 and the arbitrary choice of $\\mathfrak q$ give dimension $\\dim C+r$ for every one. Thus $\\operatorname{Spec}D$ is equidimensional, completing the conclusion together with Step 2.",
+   "uses": [
+    "lem-weil-pbc-spec-irreducible-components-minimal-primes",
+    "lem-weil-pbc-spec-topological-krull-dimension-ring",
+    "lem-weil-pbc-prime-contains-minimal-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0AW5, lemma-formally-catenary, second equality of final display and conclusion; component correspondence is algebra.tex Tag 00ES, lemma-irreducible, and dimension is Tag 00KE, definition-Krull"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-exc-excellent-ring",
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-mv-polynomial-ring",
+  "lem-per-complete-local-excellence",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-flat-height-formula",
+  "lem-weil-pbc-polynomial-ring-maximal-localization-dimension",
+  "lem-weil-pbc-prime-contains-minimal-prime",
+  "lem-weil-pbc-spec-irreducible-components-minimal-primes",
+  "lem-weil-pbc-spec-topological-krull-dimension-ring"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0AW5, lemma-formally-catenary, final two paragraphs, with the omitted minimal-prime detail and coefficient/fraction identifications written out; algebra.tex Tags 00ON and 00OP supply the displayed dimension equality"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -55,10 +171,45 @@
    "results": "{\"t\": \"2026-10-18T20:21:24Z\", \"tool\": \"leansearch\", \"query\": \"Equidimensionality of polynomial localization at a maximal ideal above the maximal ideal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalization.AtPrime.mem_primesOver_of_isPrime\", \"IsLocalization.AtPrime.ringKrullDim_eq_height\", \"IsLocalization.AtPrime.liesOver_maximalIdeal\", \"IsLocalization.AtPrime.map_eq_maximalIdeal\", \"Ring.DimensionLEOne.localization\", \"Polynomial.height_eq_height_add_one\", \"IsLocalRing.ResidueField.instLiesOverMaximalIdeal\", \"IsLocalization.height_comap\"], \"digest\": \"8679af72bc3347e8\"}",
    "date": "2026-10-19",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a complete equidimensional Noetherian local ring C, the polynomial ring in r variables localized at a maximal ideal over the closed point is catenary and equidimensional of dimension dim C plus r",
+   "results": "{\"t\": \"2026-10-18T21:12:19Z\", \"tool\": \"leanfinder\", \"query\": \"For a complete equidimensional Noetherian local ring C, the polynomial ring in r variables localized at a maximal ideal over the closed point is catenary and equidimensional of dimension dim C plus r\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Presentation.localizationAway_dimension_zero\", \"RingHom.isStandardSmoothOfRelativeDimension_holdsForLocalizationAway\", \"RingHom.isStandardSmoothOfRelativeDimension_localizationPreserves\", \"Algebra.IsStandardSmoothOfRelativeDimension.localization_away\", \"instFiniteRingKrullDimOfIsNoetherianRingOfIsLocalRing\", \"OfLocalizationMaximal\", \"Ring.krullDimLE_of_isLocalization_maximal\", \"Ring.KrullDimLE.of_isLocalization\"], \"digest\": \"097a8a2f7a48d866\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: no result states catenarity and equidimensionality of these closed-fibre polynomial localizations; global polynomial dimension and localization bounds are only partial inputs"
+  },
+  {
+   "tool": "grep",
+   "query": "catenary|equidimensional|[pP]olynomial.*minimalPrimes|minimalPrimes.*[pP]olynomial",
+   "results": "{\"t\": \"2026-10-18T21:12:44Z\", \"tool\": \"grep\", \"query\": \"catenary|equidimensional|[pP]olynomial.*minimalPrimes|minimalPrimes.*[pP]olynomial\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: no result states catenarity and equidimensionality of these closed-fibre polynomial localizations; global polynomial dimension and localization bounds are only partial inputs"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Equidimensional polynomial local rings over a complete Noetherian local ring",
+   "results": "{\"t\": \"2026-10-18T21:12:44Z\", \"tool\": \"leansearch\", \"query\": \"Equidimensional polynomial local rings over a complete Noetherian local ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Polynomial.ringKrullDim_of_isNoetherianRing\", \"MvPolynomial.ringKrullDim_of_isNoetherianRing\", \"PowerSeries.instIsLocalRing\", \"Ring.krullDimLE_zero_and_isLocalRing_tfae\", \"instFiniteRingKrullDimOfIsNoetherianRingOfIsLocalRing\", \"ringKrullDim_quotSMulTop_succ_eq_ringKrullDim\", \"ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim\", \"IsLocalRing.maximalIdeal_primeHeight_eq_ringKrullDim\"], \"digest\": \"12503aeb33882749\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: no result states catenarity and equidimensionality of these closed-fibre polynomial localizations; global polynomial dimension and localization bounds are only partial inputs"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ringKrullDim\", \"MvPolynomial\"",
+   "results": "{\"t\": \"2026-10-18T21:12:44Z\", \"tool\": \"loogle\", \"query\": \"\\\"ringKrullDim\\\", \\\"MvPolynomial\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"ringKrullDim_mvPolynomial_of_isEmpty\", \"ringKrullDim_mvPolynomial_of_infinite\", \"ringKrullDim_add_enatCard_le_ringKrullDim_mvPolynomial\", \"ringKrullDim_add_natCard_le_ringKrullDim_mvPolynomial\", \"MvPolynomial.ringKrullDim_of_isNoetherianRing\", \"MvPolynomial.ringKrullDim_of_isNoetherianRing_of_finite\"], \"digest\": \"006a2642b71e2abf\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: no result states catenarity and equidimensionality of these closed-fibre polynomial localizations; global polynomial dimension and localization bounds are only partial inputs"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Equidimensional complete local rings remain equidimensional at closed points of affine space; irreducible components have dimension dim C plus the number of variables",
+   "results": "{\"t\": \"2026-10-18T21:12:45Z\", \"tool\": \"leanfinder\", \"query\": \"Equidimensional complete local rings remain equidimensional at closed points of affine space; irreducible components have dimension dim C plus the number of variables\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MvPolynomial.ringKrullDim_of_isNoetherianRing\", \"ringKrullDim_add_natCard_le_ringKrullDim_mvPolynomial\", \"ringKrullDim_le_ringKrullDim_add_card\", \"ringKrullDim_add_enatCard_le_ringKrullDim_mvPolynomial\", \"Algebra.IsStandardSmoothOfRelativeDimension.out\", \"ringKrullDim_succ_le_ringKrullDim_polynomial\", \"ringKrullDim_le_ringKrullDim_add_spanFinrank\", \"Algebra.IsStandardSmooth.relativeDimension\"], \"digest\": \"514952eeb3d11692\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: no result states catenarity and equidimensionality of these closed-fibre polynomial localizations; global polynomial dimension and localization bounds are only partial inputs"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-ratliff-formal-catenarity",
@@ -82,5 +233,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-polynomial-closed-fibre-components",
+  "worker": "stage1",
+  "summary": "Split Stacks 0AW5 into eight steps, reusing all non-elementary algebra inputs already in the DAG. Wrote out minimal-prime extension, polynomial quotient/localization, flatness by the monomial tensor calculation, and catenarity via prime intervals. Checked every citation against its statement, retained the item statement unchanged, and introduced no new nodes.",
+  "blueprint": "Supports the Ratliff reverse-completion argument (ILO XIV 2.1.6) below the duality input to lem-per-artin-gabber-affine-curve, historically Step 3 of the master blueprint and now Step 1 of its repaired DAG proof. The precise algebra place realized is more-algebra.tex Tag 0AW5, final two paragraphs; this polynomial lemma itself is not stated by the affine-curve blueprint. Whole-blueprint searches for equidimensional, catenary, polynomial localization, dimension base fibre total, and minimal prime polynomial found no matching blueprint statement.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-polynomial-ring-maximal-localization-dimension",
+    "why": "Generic dimension theorem for affine space over a field, used exactly for the special-fibre local ring in Stacks 0AW5; the perverse unit gives no replacement for this commutative-algebra tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-polynomial-ring-maximal-localization-dimension"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q120-5ba0ee5da",
+  "group": "Q120",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q120-5ba0ee5da (reviewer sub-agent of L); spot-checked: I read the full item, all 11 proof_deps and the 8 stmt_deps, plus Stacks more-algebra.tex lemma-formally-catenary (0AW5, last two proof paragraphs). The statement is true and unchanged. There are no new nodes, no duplicates (checked lem-per-closed-fibre-polynomial-presentation and lem-per-flat-equidimensional-catenary-descent; no other node cites 0AW5 for this lemma) and no SGA. Step 1: Noetherianity, with the localization argument written out. Step 2: complete-local-excellence plus def-exc gives universal catenarity, and catenarity passes to D through the prime intervals inside n'. Step 3: correctly supplies the source's 'small detail omitted': a minimal prime p of C sits below Q∩C, (C/p)[x] is a domain, and q=pD. Step 4: D/q ≅ T_M, with the contraction of M equal to n/p because n' lies over n. Step 5: polynomial flatness via N⊗T≅⊕N, elementary. Step 6: the closed fibre is k[x]_{M0} with dimension r, valid for any maximal ideal. Step 7: the flat-height-formula leaf in its local form, with all hypotheses checked, gives dim(C/p)+r. Step 8: components are V(minimal primes) and equidimensionality gives dim(C/p)=dim C. Edge cases checked: r=0, k[[t]] with (t,x) vs (x), ℝ[[t]] with (t,x²+1), k[[u,v]]/(uv), nilpotents. Accepted tool_use: lem-weil-pbc-polynomial-ring-maximal-localization-dimension (generic Stacks 00OP); the other off-unit citations are Mathlib leaves. Batch-5 flag: lem-trf-regular-ring-universally-catenary is generic algebra (Stacks 00NM, regular ⇒ CM ⇒ universally catenary), not part of the trace formula or Poincaré duality, and the parent Ratliff node already cites lem-per-complete-local-excellence, so the b5 closure is unchanged. Accepted. Advisory: the inherited statement uses ring dim C without def-weil-pbc-krull-dimension-ring in stmt_deps and does not define 'equidimensional' inline. This is cosmetic."
  }
 }
