@@ -8974,6 +8974,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.SupportsAssoc
 public import WeilConjectures.SixFunctors.Etale.Derived.SupportsBaseChange
 public import WeilConjectures.SixFunctors.Etale.Derived.SupportsEtale
 public import WeilConjectures.SixFunctors.Etale.Derived.SupportsOpenImmersion
+public import WeilConjectures.SixFunctors.Etale.Derived.SupportsPairFunctoriality
 public import WeilConjectures.SixFunctors.Etale.Derived.Tensor
 public import WeilConjectures.SixFunctors.Etale.Derived.TensorHom
 public import WeilConjectures.SixFunctors.Etale.Derived.TensorRightUnitor
@@ -9069,6 +9070,7 @@ public import WeilConjectures.SixFunctors.Etale.SupportCohomology
 public import WeilConjectures.SixFunctors.Etale.SupportCohomologyExact
 public import WeilConjectures.SixFunctors.Etale.SupportCohomologyHom
 public import WeilConjectures.SixFunctors.Etale.SupportCohomologyRestriction
+public import WeilConjectures.SixFunctors.Etale.SupportCohomologyRestrictionNaturality
 public import WeilConjectures.SixFunctors.Etale.SupportCohomologyTriangle
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.ClosedImmersion
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
