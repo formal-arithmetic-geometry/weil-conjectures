@@ -12,7 +12,10 @@
   "def-weil-integral-rational-qbar-compact-support",
   "def-weil-derived-complete-integral-detailed",
   "def-weil-finite-tor-amplitude",
-  "def-weil-triangulated-category"
+  "def-weil-triangulated-category",
+  "def-pur-integral-expression-occurrences",
+  "def-pur-integral-operation-shift-data",
+  "def-pur-synchronized-canonical-maps"
  ],
  "proof": [
   {
@@ -285,5 +288,29 @@
   "group": "Q26",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q26-9d06da8a7 (reviewer sub-agent of L); spot-checked: Read the whole delivery: the item, all 5 new nodes, every cited statement, the full proof of lem-sf-integral-compactification-system-realization, the sk-thm-sf-compatibility route, master sk-thm-purity-transport Step 2 and main-20261015 fix-prop-coherence.proof. Item statement against base: it now uses slotwise shifts on leaf occurrences with the signed tensor comparison, and fixes a strict tower plus Roos model for the integral shift on Rf_!. The base left that shift undefined, because the def-weil Rf_! is an R lim of objects (a non-unique cone, Stacks 08TC). Every hypothesis is kept, nothing is weakened, and the parent's step-4 use is covered. Steps: the recursion formulas are well typed and are verbatim the definitions in step 4 of the realization proof. The inverse-square identity, whiskering (Mathlib leaf), unary and binary tree induction, and the second-slot sign (-1)^{rp} on both sides are correct. The adjunct and mate formulas are correct. beta^{-1} and gamma^{-1} match lem-sf-open-tensor-normalization; lambda_Q, Gamma_Q and alpha_Q are verbatim from lem-sf-semilinear-proper-open-mate-pasting with matching hypotheses. Ex_*, pi, Ex_!^c and PF^c match def-exchange-projection. The compact-support transitions match lem-sf-compact-support-restriction-of-scalars and def-weil-integral. proof_deps equals the union of uses; no cycle. All dependencies lie in the unit route, and the declared tool_uses are generic tools. proof_origin is agent, which is honest (the blueprint asserts no shift coherence); no SGA cited. New nodes: true, smaller than the item, not restatements. I hand-checked the Koszul signs of the primitive node for the associator and symmetry. The recursion node is an accepted construction interface for the item's c_V. The primitive node's mu clause overlaps lem-weil-pbc-ringed-projection-mate-exact; this is noted for the later split, not a duplicate. Fixes (3 faults, corrected files under fixes/): B9: blueprint.from.via of basic-operation-shift, open-adjunction-shift and reduction-limit-shift-adjunction corrected to [item, lem-pur-adic-projection-shift-coherence]. B2: those three nodes are now self-contained (setting written out, stmt_deps completed); content unchanged. Brief §3: lean_audit none and merged_into null added to all five new nodes.; 5 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.IntegralRealizationShiftCoherence",
+  "declaration": "WeilConjectures.IntegralSystemRealization.integralRealizationShiftCoherence",
+  "declarations": [
+   "WeilConjectures.IntegralSystemRealization.RealizationShiftSquare",
+   "WeilConjectures.IntegralSystemRealization.CanonicalMapShiftSquares",
+   "WeilConjectures.IntegralSystemRealization.CanonicalMapShiftCoherence",
+   "WeilConjectures.IntegralSystemRealization.integralRealizationShiftCoherence"
+  ],
+  "file": "lean/Sheaf/SixFunctors/IntegralRealizationShiftCoherence.lean",
+  "statement": "theorem integralRealizationShiftCoherence (D : FiniteFieldDatum.{u}) (_hl : l ≠ D.p) (o : Operations l E) (R : Realizations l E D o) : (∀ {I : Type u} [Finite I] {X : I → Over (Spec (.of D.k))} {W : Over (Spec (.of D.k))} (e : IndependentExpression _ I X W) (ge : e.val.geometric) (K : (e.val.domain l E o).FullSubcategory) (i : I) (r : ℤ), RealizationShiftSquare l E D o R e ge K i r) ∧ (∀ {I : Type u} [Finite I] {X : I → Over (Spec (.of D.k))} {W : Over (Spec (.of D.k))} (e t : IndependentExpression _ I X W) (_ge : e.val.geometric) (_gt : t.val.geometric) (K : (e.val.domain l E o).FullSubcategory) (_ht : t.val.domain l E o K.obj) (i : I) (r : ℤ), CanonicalMapShiftCoherence l E D o R e t K i r)",
+  "branch": "newtargets-dag",
+  "by": "Q15",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e46f90653",
+  "group": "Q15",
+  "result": "pass",
+  "note": "Re-delivery after H13 RETURN of 629de211ff8c: def-weil-finite-tor-amplitude record now byte-identical to live (R1 fixed), report paragraph removed. Lean modules and item/new-node records byte-identical to the returned head, whose substance was accepted. Against live: item changes only lean and adds 3 new def nodes (H2 ok); dependency records' lean equals live; no dependency module touched. Live IntegralCompactificationSystemRealization changed after the last review, but only imports; constructor sets of CanonicalIsoPair/BasicPair/CanonicalPair = SynchronizedIso/Basic/Pair (9/11/8, same names). Statements verbatim, declarations present, no line over 100 chars, sorry only in theorem bodies, report sections present. nt_compile --json on the 4 files: rc 0, clean, 7.1/32.8/14.9/4.6 s at load ~89 (base RingedSiteDualityMaps fault no longer blocks). Advisory/maintainer: def-pur-integral-operation-shift-data cites theorem lem-sf-completed-tensor-shift-right for plain defs, and def-pur-synchronized-canonical-maps cites lem-sf-integral-compactification-system-realization (already a base item dep) for CanonicalPair/Realizations; no def node owns either module, so existing:true def nodes are suggested. The item does not import Sheaf.Paper.PurReductionLimitShiftAdjunction (proof dep); its docstring paraphrases the node's proof steps."
  }
 }

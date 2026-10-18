@@ -336,5 +336,24 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteClassicalUnboundedComparison",
+  "declaration": "AlgebraicGeometry.ProEtale.finiteClassicalUnboundedComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteClassicalUnboundedComparison.lean",
+  "statement": "theorem finiteClassicalUnboundedComparison (k : Type u) [Field k] (hbase : Finite k ∨ IsAlgClosed k) (ℓ : ℕ) [Fact ℓ.Prime] (hℓ : IsUnit (algebraMap ℤ k (ℓ : ℤ))) (A : Type (u + 1)) [CommRing A] [Finite A] (hA : ∃ r : ℕ, 1 ≤ r ∧ (ℓ : A) ^ r = 0) (X : Scheme.{u}) [X.Over (Spec (CommRingCat.of k))] [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k))] [QuasiCompact (X ↘ Spec (CommRingCat.of k))] : (∀ M : FiniteCoefficientEtaleDerivedCategory X A, IsClassicalComplexFor X A ((comparisonUpperStar (ModuleCat.{u + 1} A) X).mapDerivedCategory.obj M)) ∧ (∀ K : DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} A)), IsClassicalComplexFor X A K → IsIso ((comparisonAdjunction (ModuleCat.{u + 1} A) X).mapDerivedCategoryRightDerivedAdjunction |>.counit.app K)) ∧ (∀ K : DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} A)), IsClassicalComplexFor X A K → ∃ M : FiniteCoefficientEtaleDerivedCategory X A, Nonempty ((comparisonUpperStar (ModuleCat.{u + 1} A) X).mapDerivedCategory.obj M ≅ K))",
+  "branch": "newtargets-dag",
+  "by": "Q70",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "The ordinary constant-coefficient module-sheaf presentation is Sheaf (site) (ModuleCat A), identified with the continuous-function ringed-module presentation by the already recorded finiteCoefficientRealization equivalence. Uses the existing IsClassicalComplexFor continuity-map predicate of sk-def-pe-classical-definition and the canonical unbounded adjunction derived from comparisonAdjunction; no boundedness restriction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b2090f21b",
+  "group": "Q70",
+  "result": "pass",
+  "note": "The statement matches the node clause by clause: field, prime ℓ invertible in k, finite commutative A with ∃ r≥1, ℓ^r=0, and finite-type X (LocallyOfFiniteType+QuasiCompact). It uses fixed-ring module sheaves on the small étale and pro-étale sites, the canonical comparisonUpperStar.mapDerivedCategory, and the counit of comparisonAdjunction.mapDerivedCategoryRightDerivedAdjunction (K-injective rightDerivedFunctor). Classical means the existing IsClassicalComplexFor (∀ q, continuity maps on affine presentations), as in the landed siblings. The three conclusions (classical image, unbounded counit iso, essential image) have no boundedness or extra instances. A : Type (u+1) follows the sibling convention. The node copy differs from live only in lean, the statement is verbatim, all universes are bound, the proof is sorry, and the docstrings carry the source place, blueprint tag and six proof steps. Edge cases (empty X, A=0, r=1, unbounded-below K) are covered. nt_compile --json is clean (3.2 s, exit 0). Advisory: ClassicalDerivedDefinitions decls are not listed in the sk-def-pe-classical-definition declarations (shared with siblings)."
  }
 }
