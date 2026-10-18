@@ -285,7 +285,8 @@ lemma leftDerivedUpperStar_map_eqToHom_tateObjectShift {Y : Scheme.{u}}
     (f : X ⟶ Y) {m m' : ℤ} (hm : m = m')
     (p : (tateObject Λ Y m)⟦2 * m⟧ = (tateObject Λ Y m')⟦2 * m'⟧)
     (p' : (tateObject Λ X m)⟦2 * m⟧ = (tateObject Λ X m')⟦2 * m'⟧) :
-    (L((f)^*[ModuleCat.{u + 1} Λ])).map (eqToHom p) ≫ (leftDerivedUpperStarTateShiftIso Λ f m').hom =
+    (L((f)^*[ModuleCat.{u + 1} Λ])).map (eqToHom p) ≫
+        (leftDerivedUpperStarTateShiftIso Λ f m').hom =
       (leftDerivedUpperStarTateShiftIso Λ f m).hom ≫ eqToHom p' := by
   subst hm
   simp
@@ -309,8 +310,33 @@ lemma classRestriction_chernPow_succ {Y : Scheme.{u}} [HasInvertibleExponent Λ 
         derivedTensorHom _ x y ≫ z := fun _ _ _ ↦ by
     simp only [derivedTensorHom, Category.assoc]
   rw [hfold, hfold]
-  done
+  simp only [Functor.map_comp, Category.assoc]
+  rw [← derivedTensorHom_comp, ← derivedTensorHom_comp]
+  simp only [Category.assoc]
+  rw [reassoc_of% (constantComplexDiagonal_comp_derivedTensorHom Λ f)]
+  rw [← leftDerivedUpperStarTensorIso_hom_naturality_assoc]
+  erw [← reassoc_of% (leftDerivedUpperStar_map_shiftTateObjectAddIso Λ f (a : ℤ) 1)]
+  rw [leftDerivedUpperStar_map_eqToHom_tateObjectShift f (by push_cast; rfl)]
 
+
+omit [Finite Λ] in
+/-- **The cup powers are compatible with pullback**, base case: `f^* (h⁰) = 1`. -/
+lemma classRestriction_chernPow_zero {Y : Scheme.{u}} [HasInvertibleExponent Λ Y] (f : X ⟶ Y)
+    (h : constantComplex Λ Y ⟶ (tateObject Λ Y 1)⟦2 * (1 : ℤ)⟧) :
+    VectorBundle.classRestriction Λ (r := 0) f (chernPow h 0) =
+      chernPow (VectorBundle.classRestriction Λ (r := 1) f h) 0 := by
+  simp only [VectorBundle.classRestriction, chernPow, tateObjectShiftZeroIso', Iso.trans_hom,
+    Iso.symm_hom, Iso.app_hom, leftDerivedUpperStarTateShiftIso, Functor.mapIso_hom]
+  exact leftDerivedUpperStarConstantComplexIso_inv_comp_map_twistObjectZeroIso_inv Λ f (by simp)
+
+omit [Finite Λ] in
+/-- **The cup powers are compatible with pullback**: `f^* (hᵃ) = (f^* h)ᵃ`. -/
+lemma classRestriction_chernPow {Y : Scheme.{u}} [HasInvertibleExponent Λ Y] (f : X ⟶ Y)
+    (h : constantComplex Λ Y ⟶ (tateObject Λ Y 1)⟦2 * (1 : ℤ)⟧) :
+    ∀ a : ℕ, VectorBundle.classRestriction Λ (r := a) f (chernPow h a) =
+      chernPow (VectorBundle.classRestriction Λ (r := 1) f h) a
+  | 0 => classRestriction_chernPow_zero f h
+  | a + 1 => classRestriction_chernPow_succ f h a (classRestriction_chernPow f h a)
 
 end Powers
 
@@ -1226,6 +1252,18 @@ theorem restrictSupportedClass_reindex_hyperplaneClass {α β : Type u} [Finite 
   rw [frameRestriction] at hH
   rw [hH, frameClass, frameClass]
   exact restrictSupportedClass_kummerBoundaryProduct Λ b _ _ (fun _ ↦ hv) _ hz
+
+include aS in
+/-- The first Chern class `h` of `ℙ(Option β; S)` pulls back to that of `ℙ(Option α; S)` along the
+renaming of the coordinates. -/
+theorem classRestriction_reindex_hyperplaneChernClass {α β : Type u} [Finite α] [Finite β]
+    (e : α ≃ β) :
+    VectorBundle.classRestriction Λ (r := 1) (reindexHom S (Equiv.optionCongr e))
+        (hyperplaneChernClass (hyperplaneClass Λ β aS)) =
+      hyperplaneChernClass (hyperplaneClass Λ α aS) := by
+  rw [← restrictSupportedClass_reindex_hyperplaneClass aS e]
+  simp only [VectorBundle.classRestriction, hyperplaneChernClass, restrictSupportedClass,
+    Functor.map_comp, Category.assoc, supportedRestriction_comp_counit]
 
 end TwistBundle
 
