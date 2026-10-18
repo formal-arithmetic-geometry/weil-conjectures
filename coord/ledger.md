@@ -15907,3 +15907,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 06:26 L: merged deliver/A2/Sheaf.CategoryTheory.InternalModule (stage 3; reviewer PASS; first push; landing 20261018T062648-L-628056 (proof); batch 20261018T062645; modules 1; new nodes 0)
 - 06:26 L: merged deliver/A2/Sheaf.CategoryTheory.MateIsoAlongEquivalences (stage 3; reviewer PASS; first push; landing 20261018T062649-L-628165 (proof); batch 20261018T062645; modules 1; new nodes 0)
 - 06:26 L: merged deliver/A3/Sheaf.AlgebraicGeometry.AffineCurveCohomologicalDimension (stage 3; reviewer PASS; first push; landing 20261018T062649-L-628285 (proof); batch 20261018T062645; modules 1; new nodes 0)
+- 06:26 L: merged deliver/A3/Sheaf.AlgebraicGeometry.NoetherianStratumDetection (stage 3; reviewer PASS; first push; landing 20261018T062650-L-628400 (proof); batch 20261018T062645; modules 1; new nodes 0)
