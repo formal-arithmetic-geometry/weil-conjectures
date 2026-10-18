@@ -18,11 +18,213 @@
   "def-weil-pbc-category-colimit",
   "def-weil-pbc-locally-constant-finite-type-modules",
   "def-weil-finitely-generated-module",
-  "def-galois-object"
+  "def-galois-object",
+  "def-weil-geometric-point",
+  "def-weil-pbc-geometric-stalks"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "We first establish the section-colimit comparison needed below, from existing affine-site tools. Restriction to the full affine etale site is an equivalence on set sheaves, so preserves colimits; affine evaluation there preserves filtered colimits by the affine-section theorem. For a qcqs etale object $U$, choose a finite affine etale covering $V_a\\to U$ with quasi-compact pairwise fibre products. Cover each $V_a\\times_UV_b$ by finitely many affine opens $W_{abk}$. For any sheaf $F$, $F(U)$ is the equalizer of $\\prod_a F(V_a)\\rightrightarrows\\prod_{a,b,k}F(W_{abk})$: equality on those open covers is precisely equality on the overlaps. These are finite products of affine evaluations. Commuting their finite equalizer with a filtered colimit gives $\\varinjlim_i F_i(U)\\simeq(\\varinjlim_i F_i)(U)$, naturally in every diagram of set sheaves. For represented $h_U$, the same says $\\varinjlim_i\\operatorname{Hom}(h_U,F_i)\\simeq\\operatorname{Hom}(h_U,\\varinjlim_iF_i)$, by the representable universal property. Empty covers give the same formula when $U$ is empty.",
+   "uses": [
+    "lem-weil-pbc-affine-etale-site-topos",
+    "aux-weil-pbc-affine-sections-colimit",
+    "lem-weil-pbc-etale-qcqs-cofinal-finite-coverings",
+    "lem-weil-pbc-filtered-colimits-commute-finite-limits"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 0738, lemma-directed-colimits-sections (4), realized as the finite sheaf-matching argument using existing affine-section and affine-site-equivalence nodes; qcqs cover refinement: Etale Cohomology Tag 03Q4, section-colimit."
+   }
+  },
+  {
+   "text": "First work with sets. Write $F=\\varinjlim_i h_{P_i}$ and $E=\\varinjlim_j h_{Q_j}$, where $P_i,Q_j$ are finite etale over $S$. Such schemes are qcqs, so the section-colimit lemma and the represented-sheaf universal property give $\\operatorname{Hom}(F,E)=\\varprojlim_i\\varinjlim_j\\operatorname{Hom}_S(P_i,Q_j)$. By the finite Galois equivalence the inner Hom is the Hom of finite continuous $G$-sets. A continuous action on a discrete set has finite orbits: an open stabilizer has finite index in a profinite group, since the open cosets cover a compact space. Thus every discrete continuous $G$-set is the directed union of its finite invariant subsets. Maps out of a finite $G$-set into a filtered colimit factor at a stage, and equivariance is checked at a common later stage using the finite source and the finite target at that stage: both actions factor through a common finite quotient of $G$, so only finitely many equations must hold at a common later stage. The same limit-colimit Hom formula therefore holds for discrete continuous $G$-sets. Stalks commute with colimits, so these formulas prove full faithfulness and essential surjectivity of the stalk functor on set local systems.",
+   "uses": [
+    "thm-galois-fundamental",
+    "lem-kun-stalks-commute-colimits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Propositions 7.2.2–7.2.3, p. 301; the compactness input is Stacks Tag 0738(4) instead of the source’s SGA citation."
+   }
+  },
+  {
+   "text": "Finite products of local systems are ambient sheaf products: present each factor as a filtered colimit of finite etale sheaves, use products of the finite covers, and commute the finite products with the filtered colimit. This last comparison can be checked on every qcqs etale object using the section-colimit lemma; such objects form a basis, since affine open subsets of an etale scheme are again etale. Products of represented sheaves are represented by the scheme fibre products. The stalk correspondence consequently preserves finite products. A constant set is the filtered union of its finite constant subsets, represented by finite disjoint unions of $S$, and has trivial action. Conversely a trivial continuous action is just such a union, hence corresponds to the constant sheaf.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimits-commute-finite-limits",
+    "lem-weil-pbc-site-sheaf-sets-limits-sectionwise",
+    "lem-fet-finite-limits",
+    "def-weil-pbc-constant-sheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Propositions 7.2.3–7.2.4, pp. 301–302 (finite products and constants)."
+   }
+  },
+  {
+   "text": "Transport the zero, negation and addition maps through the set equivalence and its finite-product comparison. Full faithfulness transports every abelian-group identity. For each $r\\in R$, transport the unary map $m\\mapsto rm$; full faithfulness transports the scalar identities as well. These maps give an $R_S$-module structure: a section of the constant ring sheaf is locally represented by a scalar $r\\in R$, so its action is defined locally by the corresponding unary map and the actions glue. Conversely any $R_S$-module structure gives these maps. The same reasoning identifies module morphisms and their sums, proving the additive equivalence asserted in the item. In particular constants correspond to trivial $R$-linear actions. No finite subset used above is claimed to be an $R$-submodule.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-pbc-constant-sheaf"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Paragraph following Proposition 7.2.3, p. 302: local systems of abelian groups and modules."
+   }
+  },
+  {
+   "text": "There is a useful finite additive presentation. Put $\\Lambda=\\mathbf Z/n\\mathbf Z$. In any discrete continuous $G$-module $M$ killed by $n$, the additive subgroup generated by the $G$-orbits of a finite list of elements is finite: the orbits contain finitely many elements, and an abelian group of exponent dividing $n$ generated by $d$ elements has at most $n^d$ elements. It is $G$-stable. These subgroups form a directed family with union $M$. The finite-coefficient equivalence for the finite ring $\\Lambda$ realizes them as finite locally constant $\\Lambda$-module sheaves $A_i$. Their ambient filtered colimit has underlying set the set-local-system realization of $M$: on a qcqs etale object both colimits are the sectionwise filtered colimit, and the induced addition and scalar maps are the same. Thus every $R$-local system, after forgetting $R$ to $\\Lambda$, is an ambient filtered union of these $A_i$. This uses finite additive subgroups, not finite $R$-submodules.",
+   "uses": [
+    "cor-galois-lisse-representations",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Proposition 7.2.4, p. 302; the torsion finite-subgroup argument is also used in Lemma 7.2.6, p. 303."
+   }
+  },
+  {
+   "text": "For a morphism $f:A\\to B$, use the finite additive presentations from the previous step. Index pairs of finite invariant additive subgroups $(A_i,B_j)$ satisfying $f(A_i)\\subseteq B_j$. This is directed, and both projections exhaust the respective modules: enlarge $B_j$ by the finite subgroup $f(A_i)$ when necessary. The finite-coefficient theorem computes the ambient kernels and cokernels of $f_{ij}:A_i\\to B_j$ as finite locally constant sheaves. Their filtered colimits are the ambient kernel and cokernel of $f$: kernels are sectionwise, and on the qcqs etale basis filtered colimits commute with the equalizer defining a kernel; cokernels commute with colimits by their universal property. Each of these finite locally constant sheaves has underlying sheaf of sets in $\\mathrm{FLC}(S)$, hence represented by a finite etale $S$-scheme by the finite locally constant/finite etale equivalence, so both filtered colimits are local systems. The $R$-actions on these ambient objects are the induced ones, so their underlying set-local-system property suffices. These constructions identify their stalks with the ordinary module kernel and cokernel. The equivalence therefore preserves and reflects short exact sequences in the stated ambient sense.",
+   "uses": [
+    "cor-galois-lisse-representations",
+    "lem-weil-pbc-filtered-colimits-commute-finite-limits",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "prop-weil-pbc-geometric-stalks-exact",
+    "thm-galois-lc-etale"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Proposition 7.2.4, p. 302 (ambient kernels, cokernels and exactness)."
+   }
+  },
+  {
+   "text": "For a family of local systems, its ambient direct sum after forgetting to $\\Lambda$ is the filtered colimit of the finite direct sums of finite additive subsystems from step 5. Indeed a compatible map from all those finite sums is precisely a family of maps from the original sheaves, which is the coproduct universal property. Each finite sum is finite locally constant, hence its underlying set is represented by a finite etale cover by the finite locally constant/finite etale equivalence, so this ambient direct sum is a local system. In an additive module-sheaf category the colimit of any small diagram $(L_i)$ is the cokernel of the difference map $\\bigoplus_{a:i\\to j}L_i\\to\\bigoplus_iL_i$, whose summand indexed by $a$ sends $x$ to $x$ in the $i$-summand minus $L(a)x$ in the $j$-summand: a map kills these differences exactly when it is a cocone. Steps 5–6 therefore show closure under every small ambient colimit. The stalk functor commutes with these colimits, and the forgetful functor from $R_S$-modules to abelian sheaves commutes with them, giving the asserted colimit comparison with $R$-modules.",
+   "uses": [
+    "cor-galois-lisse-representations",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-kun-stalks-commute-colimits",
+    "thm-galois-lc-etale"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Proposition 7.2.4, p. 302 (all small colimits)."
+   }
+  },
+  {
+   "text": "Given an ambient exact sequence $0\\to F'\\to F\\to F''\\to0$, let the additive sheaf $F'$ act on the underlying set sheaf of $F$ by translation. This action is free because $F'\\to F$ is a monomorphism, and its quotient sheaf is the underlying set of $F''$: two local lifts differ by a section of the kernel, and lifts exist etale locally because $F\\to F''$ is an epimorphism of sheaves. The kernel is a torsion local system since $nF'=0$, and the quotient is a local system by hypothesis. The torsion-torsor lemma now makes the underlying set of $F$ a local system; its already given $R_S$-module structure makes it a local system in the item’s sense.",
+   "uses": [
+    "lem-per-torsion-torsor-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Proposition 7.2.5 deduced from Lemma 7.2.6, pp. 302–303."
+   }
+  },
+  {
+   "text": "Under pullback along a connected finite etale cover $c:T\\to S$, each finite represented sheaf pulls back to the represented base-change cover. On these finite covers the fundamental-group theorem identifies the action with restriction along the injection $c_*$, whose image $H$ is open. Inverse image preserves colimits as a left adjoint, so this comparison passes to all filtered presentations and hence to their module operations. By step 3 applied on $T$, the pullback is constant exactly when its $\\pi_1(T,\\bar t)$-action is trivial, equivalently when $H$ acts trivially on $L_{\\bar s}$.",
+   "uses": [
+    "thm-galois-fundamental",
+    "thm-galois-lc-etale",
+    "def-weil-pbc-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Propositions 7.2.3–7.2.4, pp. 301–302; finite-cover subgroup and base-change statements in the finite Galois theorem."
+   }
+  },
+  {
+   "text": "For the converse we need finite-cover direct image on additive local systems. Let $p:T\\to S$ be a finite etale morphism between connected Noetherian schemes, and let $E$ be an additive local system killed by $n$ on $T$. Use step 5 to write $E=\\varinjlim_i A_i$ with each $A_i$ a finite locally constant $\\Lambda$-module sheaf. Etale locally split $T$ into finitely many copies of the base, and trivialize the restriction of $A_i$ to each copy. On a common refinement the formula $(p_*A_i)(U)=A_i(U\\times_ST)$ is the finite product of the corresponding finite constant additive groups. Thus $p_*A_i$ has finite locally constant underlying set, represented by a finite etale cover by the finite locally constant equivalence. The section-colimit lemma gives $p_*E=\\varinjlim_i p_*A_i$: check on qcqs etale $U$, for which $U\\times_ST$ is also qcqs, and use the module forgetful colimit comparison. Therefore $p_*E$ is an additive local system. Pullback of module local systems between connected schemes was established in step 9.",
+   "uses": [
+    "lem-fet-locally-trivial",
+    "thm-galois-lc-etale",
+    "def-weil-pbc-direct-image",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Proposition 7.2.4, p. 302 (finite-cover direct image and inverse image)."
+   }
+  },
+  {
+   "text": "Now let $L$ be an arbitrary module sheaf with $c^{-1}L$ a local system. A connected finite etale cover of nonempty connected $S$ is surjective; equivalently, the corresponding nonempty transitive finite $G$-set has positive fibre cardinality. Apply sheaf descent to this cover. Explicitly $L$ is the equalizer of the two unit-induced maps $c_*c^{-1}L\\rightrightarrows c_*c^{-1}c_*c^{-1}L$: on an etale object $U$, this says that a section over $U\\times_ST$ descends exactly when its two restrictions over $U\\times_ST\\times_ST$ agree, which is the sheaf condition. By step 10 the two terms have underlying set local systems. Their equalizer as module sheaves is the kernel of their difference, which is a local system by step 6. Hence $L$ is a local system, without assuming this before descent.",
+   "uses": [
+    "lem-pe-set-sheaf-cover-descent",
+    "def-weil-pbc-direct-image",
+    "def-weil-pbc-inverse-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Proof of Proposition 7.2.4, p. 302 (the converse descent assertion)."
+   }
+  },
+  {
+   "text": "Suppose the stalk module $M$ is generated by $m_1,\\ldots,m_d$. By continuity and compactness, the orbit of each $m_i$ is finite; let $E$ be the finite union of these orbits, a finite invariant subset of $M$. Its pointwise stabilizer $N$ is the kernel of $G\\to\\operatorname{Sym}(E)$, hence open and normal; fixing the generators makes $N$ act trivially on all of $M$. The finite transitive continuous set $G/N$ corresponds to a connected finite etale cover $T\\to S$ by the fundamental-group equivalence. Right translations by $G/N$ commute with the left action, act transitively on its fibre and are all the cover automorphisms, so this cover is Galois in the sense of the cited definition. Step 9 trivializes $L$ on $T$, with value the finitely generated $R$-module $M$; thus $L$ is locally constant of finite type. In the converse direction a locally constant finite-type sheaf is in particular of finite type in the sense of the finite-type definition: on a covering where it is $\\underline M$ with $M$ generated by $x_1,\\ldots,x_k$, the constant sections $x_j$ give an epimorphism $(R_S)^{\\oplus k}\\to\\underline M$; and the finite-type stalk theorem makes its stalk finitely generated. This also treats the zero module (use $N=G$); it does not assert that the finite set $E$ is an $R$-submodule.",
+   "uses": [
+    "thm-galois-fundamental",
+    "def-galois-object",
+    "def-weil-pbc-locally-constant-finite-type-modules",
+    "lem-weil-pbc-finite-type-module-sheaf-stalk-finitely-generated",
+    "def-weil-pbc-etale-module-finite-type"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Finite-generation assertion: elementary common-stabilizer argument from Proposition 7.2.3; finite Galois correspondence as in Stacks Tag 0BND."
+   }
+  },
+  {
+   "text": "For a disconnected Noetherian scheme the connected components form a finite disjoint open decomposition. A sheaf is specified by its restrictions to these opens, with no overlap conditions between different components; the same is true of module operations and morphisms. Limits, colimits and exact sequences restrict to the corresponding componentwise constructions. A filtered presentation on each of finitely many components combines to one global presentation by taking the product of the filtered index categories and the disjoint union of their finite etale covers. Thus the preceding local-system assertions hold component by component. On the empty scheme the corresponding category has only the zero module sheaf and the assertions are vacuous.",
+   "uses": [
+    "lem-sfb-noetherian-connected-components-open"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "§7.2, p. 301: reduction to the finitely many open connected components."
+   }
+  }
+ ],
+ "proof_deps": [
+  "aux-weil-pbc-affine-sections-colimit",
+  "cor-galois-lisse-representations",
+  "def-galois-object",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-etale-module-finite-type",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-locally-constant-finite-type-modules",
+  "def-weil-sheaf-of-modules-category",
+  "lem-fet-finite-limits",
+  "lem-fet-locally-trivial",
+  "lem-kun-stalks-commute-colimits",
+  "lem-pe-set-sheaf-cover-descent",
+  "lem-per-torsion-torsor-descent",
+  "lem-sfb-noetherian-connected-components-open",
+  "lem-weil-pbc-affine-etale-site-topos",
+  "lem-weil-pbc-etale-qcqs-cofinal-finite-coverings",
+  "lem-weil-pbc-filtered-colimits-commute-finite-limits",
+  "lem-weil-pbc-finite-type-module-sheaf-stalk-finitely-generated",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-site-sheaf-sets-limits-sectionwise",
+  "prop-weil-pbc-geometric-stalks-exact",
+  "thm-galois-fundamental",
+  "thm-galois-lc-etale"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose XVII §7.2, pp. 301–303 (PDF pp. 307–309): expand the Ind/Hom and finite-additive-subsystem arguments, replacing all SGA citations by existing finite Galois interfaces and Stacks Tag 0738."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -58,10 +260,38 @@
    "results": "8 hits; top: LightCondMod.ofSheafLightProfinite, LightCondMod.LocallyConstant.functorToPresheaves, LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat, Condensed.lanSheafProfinite, CondensedMod.ofSheafProfinite, LightCondAb.ofSheafLightProfinite, Condensed.profiniteFree, Condensed.profiniteSolid; note: ; digest: 793d5b2ce45a45b3",
    "date": "2026-10-18",
    "verdict": "no match: condensed discrete objects and generic sheaf evaluation do not give the etale ind-finite monodromy equivalence or ambient torsion-extension closure"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "torsion local systems on a noetherian scheme equivalent to discrete continuous fundamental group modules and closed under extensions",
+   "results": "8 hits; top: CondensedMod.isDiscrete_tfae, LightCondMod.isDiscrete_tfae, LightCondensed.instIsGrothendieckAbelianLightCondMod, LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat, LightCondMod.LocallyConstant.functorIsoDiscreteAux₂, LightCondMod.LocallyConstant.instFaithfulModuleCatSheafLightProfiniteCoherentTopologyConstantSheaf, CondensedMod.LocallyConstant.instFaithfulModuleCatSheafCompHausCoherentTopologyConstantSheaf, CondensedMod.isDiscrete_iff_isDiscrete_forget; note: ; digest: 18e24709626ebe79",
+   "date": "2026-10-18",
+   "verdict": "no match: condensed/light condensed categories and abstract colimit constructions do not state the etale ind-finite monodromy and torsion ambient-extension result"
+  },
+  {
+   "tool": "grep",
+   "query": "continuous.*(module|representation)|IsFiniteContinuous|LocallyConstant",
+   "results": "5 hits; top: Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean; note: ; digest: d43dd0bdf22f5d69; subdirectory AlgebraicGeometry",
+   "date": "2026-10-18",
+   "verdict": "no match: condensed/light condensed categories and abstract colimit constructions do not state the etale ind-finite monodromy and torsion ambient-extension result"
+  },
+  {
+   "tool": "leansearch",
+   "query": "filtered colimit of finite etale local systems is equivalent to a discrete continuous module over the fundamental group",
+   "results": "8 hits; top: CategoryTheory.Limits.colimitLimitIso, CondensedMod.isDiscrete_tfae, ModuleCat.FilteredColimits.colimitModule, LightCondensed.isColimitLocallyConstantPresheaf, ModuleCat.FilteredColimits.M, ModuleCat.FilteredColimits.colimitCoconeIsColimit, CommGrpCat.FilteredColimits.colimitCoconeIsColimit, AddGrpCat.FilteredColimits.colimitCoconeIsColimit; note: ; digest: dbf3cc82f4b4f0e4",
+   "date": "2026-10-18",
+   "verdict": "no match: condensed/light condensed categories and abstract colimit constructions do not state the etale ind-finite monodromy and torsion ambient-extension result"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite etale local systems on a connected noetherian scheme and discrete continuous fundamental group modules with arbitrary torsion ring coefficients",
+   "results": "8 hits; top: LightCondMod.LocallyConstant.functorIsoDiscreteAux₂, LightCondMod.LocallyConstant.functorIsoDiscrete, CondensedMod.LocallyConstant.functorIsoDiscrete, CondensedMod.isDiscrete_tfae, LightCondMod.isDiscrete_tfae, LightCondMod.LocallyConstant.functorIsoDiscreteComponents, CategoryTheory.PreGaloisCategory.IsFundamentalGroup, Condensed.finFree; note: ; digest: f92e4d3d2a7e78d3",
+   "date": "2026-10-18",
+   "verdict": "no match: condensed/light condensed categories and abstract colimit constructions do not state the etale ind-finite monodromy and torsion ambient-extension result"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-galois-partition-exact-refinement",
@@ -86,5 +316,104 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-torsion-local-system-monodromy",
+  "worker": "stage1",
+  "summary": "Continued the incomplete Q94 sandbox, retaining its item statement, search log and torsion-torsor support node. Corrected the invalid use of finite R-submodules for infinite R: first prove set-level monodromy using qcqs section compactness, then transport module operations, and use only finite invariant additive Z/n-subgroups for ambient exactness and colimits. Expanded the finite-cover descent and finite-generator stabilizer arguments and replaced paraphrased citation quotes by literal excerpts. The qcqs section-colimit argument is a finite matching step from existing affine-site tools, so the proposed extra compactness node was removed as elementary. The only new node is the generalized torsion-torsor lemma, left unsplit. No statement change to the item and no Lean writes or compiles.",
+  "blueprint": "Proof, Step 1 of lem-per-artin-gabber-affine-curve, coefficient comparison through the recorded ancestry: this support lemma supplies ILO XVII §7.2 to the §7.3 Galois-partition construction, preserving the unit route.",
+  "tool_uses": [
+   {
+    "node": "aux-weil-pbc-affine-sections-colimit",
+    "why": "Generic sheaf, finite matching, finite Galois, or topological input used in the named step of the ILO XVII §7.2 support argument; the perverse unit supplies no replacement for this foundational fact."
+   },
+   {
+    "node": "cor-galois-lisse-representations",
+    "why": "Generic sheaf, finite matching, finite Galois, or topological input used in the named step of the ILO XVII §7.2 support argument; the perverse unit supplies no replacement for this foundational fact."
+   },
+   {
+    "node": "lem-fet-finite-limits",
+    "why": "Generic sheaf, finite matching, finite Galois, or topological input used in the named step of the ILO XVII §7.2 support argument; the perverse unit supplies no replacement for this foundational fact."
+   },
+   {
+    "node": "lem-fet-locally-trivial",
+    "why": "Generic sheaf, finite matching, finite Galois, or topological input used in the named step of the ILO XVII §7.2 support argument; the perverse unit supplies no replacement for this foundational fact."
+   },
+   {
+    "node": "lem-kun-stalks-commute-colimits",
+    "why": "Generic sheaf, finite matching, finite Galois, or topological input used in the named step of the ILO XVII §7.2 support argument; the perverse unit supplies no replacement for this foundational fact."
+   },
+   {
+    "node": "lem-pe-set-sheaf-cover-descent",
+    "why": "Generic sheaf, finite matching, finite Galois, or topological input used in the named step of the ILO XVII §7.2 support argument; the perverse unit supplies no replacement for this foundational fact."
+   },
+   {
+    "node": "lem-sfb-noetherian-connected-components-open",
+    "why": "Generic sheaf, finite matching, finite Galois, or topological input used in the named step of the ILO XVII §7.2 support argument; the perverse unit supplies no replacement for this foundational fact."
+   },
+   {
+    "node": "lem-weil-pbc-affine-etale-site-topos",
+    "why": "Generic sheaf, finite matching, finite Galois, or topological input used in the named step of the ILO XVII §7.2 support argument; the perverse unit supplies no replacement for this foundational fact."
+   },
+   {
+    "node": "lem-weil-pbc-etale-qcqs-cofinal-finite-coverings",
+    "why": "Generic sheaf, finite matching, finite Galois, or topological input used in the named step of the ILO XVII §7.2 support argument; the perverse unit supplies no replacement for this foundational fact."
+   },
+   {
+    "node": "lem-weil-pbc-filtered-colimits-commute-finite-limits",
+    "why": "Generic sheaf, finite matching, finite Galois, or topological input used in the named step of the ILO XVII §7.2 support argument; the perverse unit supplies no replacement for this foundational fact."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-module-sheaf-stalk-finitely-generated",
+    "why": "Generic sheaf, finite matching, finite Galois, or topological input used in the named step of the ILO XVII §7.2 support argument; the perverse unit supplies no replacement for this foundational fact."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "why": "Generic sheaf, finite matching, finite Galois, or topological input used in the named step of the ILO XVII §7.2 support argument; the perverse unit supplies no replacement for this foundational fact."
+   },
+   {
+    "node": "lem-weil-pbc-site-sheaf-sets-limits-sectionwise",
+    "why": "Generic sheaf, finite matching, finite Galois, or topological input used in the named step of the ILO XVII §7.2 support argument; the perverse unit supplies no replacement for this foundational fact."
+   },
+   {
+    "node": "prop-weil-pbc-geometric-stalks-exact",
+    "why": "Generic sheaf, finite matching, finite Galois, or topological input used in the named step of the ILO XVII §7.2 support argument; the perverse unit supplies no replacement for this foundational fact."
+   },
+   {
+    "node": "thm-galois-fundamental",
+    "why": "Generic sheaf, finite matching, finite Galois, or topological input used in the named step of the ILO XVII §7.2 support argument; the perverse unit supplies no replacement for this foundational fact."
+   },
+   {
+    "node": "thm-galois-lc-etale",
+    "why": "Generic sheaf, finite matching, finite Galois, or topological input used in the named step of the ILO XVII §7.2 support argument; the perverse unit supplies no replacement for this foundational fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "aux-weil-pbc-affine-sections-colimit",
+  "cor-galois-lisse-representations",
+  "lem-fet-finite-limits",
+  "lem-fet-locally-trivial",
+  "lem-kun-stalks-commute-colimits",
+  "lem-pe-set-sheaf-cover-descent",
+  "lem-sfb-noetherian-connected-components-open",
+  "lem-weil-pbc-affine-etale-site-topos",
+  "lem-weil-pbc-etale-qcqs-cofinal-finite-coverings",
+  "lem-weil-pbc-filtered-colimits-commute-finite-limits",
+  "lem-weil-pbc-finite-type-module-sheaf-stalk-finitely-generated",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-site-sheaf-sets-limits-sectionwise",
+  "prop-weil-pbc-geometric-stalks-exact",
+  "thm-galois-fundamental",
+  "thm-galois-lc-etale"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q94-9e1c5c9b0",
+  "group": "Q94",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q94-9e1c5c9b0 (reviewer sub-agent of L); spot-checked: FIX: the delivery is correct apart from two missing citations, now repaired. I read the item and the new node in full, every cited statement, and ILO XVII §7.2 (Def 7.2.1, Props 7.2.2–7.2.5 with proofs, Lemma 7.2.6 with proof, Ex. 7.2.7; printed pp. 301–303) plus Stacks Tag 0738. The item statement is unchanged. 'Connected' excludes the empty scheme, so the converse descent clause holds. I checked R=0, the empty G-set, constant F_p[t], infinite sums of F_p, and the torsion hypothesis against Ex. 7.2.7. Steps 1–13 are correct: qcqs section colimits; the Ind-Galois set equivalence; finite Z/n-additive presentations, with cor-galois-lisse-representations used only at Λ=Z/n; ambient kernels and cokernels; colimits; extensions via the torsor lemma; pullback; finite p_*; the descent equalizer c_*c^{-1}c_*c^{-1}L(U)=L(U×T×T), which I checked; finite generation. Faults repaired: steps 6 and 7 concluded that finite locally constant sheaves are local systems without citing thm-galois-lc-etale (C4/C1). Step 12's converse used the finite-type stalk lemma without its finite-type definition or the one-line check (C4); I cited def-weil-pbc-etale-module-finite-type and added the check. proof_deps recomputed. The new node lem-per-torsion-torsor-descent is exactly ILO Lemma 7.2.6, statement-only, not a restated clause, and has no duplicate in the DAG. Batch-5 flag on cor-galois-lisse-representations: accepted. It is the general lisse Galois correspondence; its own closure contains only pod lisse definitions and lattice lemmas, with no duality or trace-formula theorem, and it is already cited across batch-5 chapters. No SGA source is cited. Accepted tool_uses: the generic Galois, finite-étale, site-colimit, stalk, descent, Noetherian-component and lisse-correspondence nodes declared in split_report.tool_uses.; 1 file(s) fixed by the reviewer"
  }
 }
