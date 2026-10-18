@@ -1,0 +1,120 @@
+{
+ "id": "lem-weil-pbc-derived-module-scalar-adjunction",
+ "kind": "statement",
+ "title": "Derived scalar restriction for ordinary modules has a left adjoint",
+ "statement": "Let R and S be commutative rings in a universe u and let φ:R → S be a unital ring homomorphism. In a module universe max(u,v), choose unbounded derived categories D(Mod R) and D(Mod S) [def-weil-abstract-derived-category]. The exact functor Res_φ:Mod S → Mod R, which keeps the underlying additive group and restricts the scalar action through φ, induces D(Res_φ):D(Mod S) → D(Mod R). This functor is a right adjoint: there exists a functor L:D(Mod R) → D(Mod S) and an adjunction L ⊣ D(Res_φ). No flatness, boundedness or finiteness hypothesis is imposed.",
+ "stmt_deps": [
+  "def-weil-abstract-derived-category"
+ ],
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "lemma-tensor-hom-adjoint, following lemma-derived-base-change; derived.tex Tag 09T5, lemma-derived-adjoint-functors"
+ },
+ "proof": [
+  {
+   "text": "In the equal ring/module universe construct functorial flat epimorphisms using the free module on the underlying set, with the free-forgetful counit sending the generator at x to x. These supply the source flat-resolution construction. Let F be ordinary extension of scalars R → S, and let B be S restricted to R. Tensor induction shows that Res_φ composed with F is naturally isomorphic to B tensor_R -. An acyclic K-flat complex [def-pc-module-kflat-complex] stays acyclic under this tensor functor, and exact faithful restriction reflects acyclicity. Thus F preserves K-flat quasi-isomorphisms. This entire argument is written in the two private Lean helpers of the module.",
+   "uses": [
+    "def-pc-module-kflat-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Module categories have exact filtered colimits and K-injective resolutions. Apply the already proved source declaration CategoryTheory.Adjunction.derivedAdjunction to the ordinary extension/restriction adjunction, with the preceding flat-resolution and K-flat preservation instances. Exactness identifies the right derived restriction with its levelwise derived functor [def-weil-abstract-derived-category], using rightDerivedFunctorIsoMapDerivedCategory. Transporting the adjunction proves the result in the equal universe case. No new existence assumption or postponed proof is used.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a larger module universe, replace both rings by their universe lifts and use their standard derived localizations. Apply the equal universe result to the lifted ring map. The two lifting ring equivalences induce equivalences on module categories and on the chosen derived categories [def-weil-abstract-derived-category], hence right adjoints. The original scalar restriction is naturally isomorphic to the composite of these two equivalences with the lifted restriction: use RingHom.comp_ulift_eq, restrictScalarsComp, mapDerivedCategoryNatIso and mapDerivedCategoryCompIso. Composites of right adjoints are right adjoints; transport along this natural isomorphism.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-module-kflat-complex",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "lemma-tensor-hom-adjoint, with derived.tex Tag 09T5; Q4 complete Lean proof using the proved source K-flat derived adjunction and explicit universe transport"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "restrictScalars.*[Ii]sRightAdjoint|[Dd]erived.*[Ss]calar.*[Aa]dj",
+   "results": "0 hits: ",
+   "date": "2026-10-18",
+   "verdict": "No matching Mathlib result."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a ring homomorphism the restriction of scalars on unbounded derived categories of modules has a left adjoint derived extension of scalars",
+   "results": "8 hits: ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply, ModuleCat.instIsLeftAdjointRestrictScalars, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars_hom_apply, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars, ModuleCat.instIsLeftAdjointExtendScalars, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars, ModuleCat.extendRestrictScalarsAdj, ModuleCat.instIsRightAdjointRestrictScalars",
+   "date": "2026-10-18",
+   "verdict": "Only ordinary module adjunctions; no unbounded derived statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapDerivedCategory\", \"IsRightAdjoint\"",
+   "results": "0 hits: ",
+   "date": "2026-10-18",
+   "verdict": "No matching Mathlib result."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.PseudoCoherentNormalizedAlgebraTower",
+  "date": "2026-10-18",
+  "group": "Q4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-amplification-proper",
+   "place": "proof (c): scalar extension of the normalized finite coefficient tower, in the common finite local complex argument",
+   "via": [
+    "lem-weil-pbc-pseudocoherent-normalized-algebra-tower",
+    "lem-weil-pbc-normalized-constructible-local-effectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.DerivedModuleScalarAdjunction",
+  "file": "lean/Sheaf/RingTheory/DerivedModuleScalarAdjunction.lean",
+  "declaration": "ModuleCat.derivedRestrictScalars_isRightAdjoint",
+  "statement": "theorem derivedRestrictScalars_isRightAdjoint\n    {R S : Type u} [CommRing R] [CommRing S]\n    [HasDerivedCategory.{w} (ModuleCat.{max u v} R)]\n    [HasDerivedCategory.{w} (ModuleCat.{max u v} S)] (φ : R →+* S) :\n    (restrictScalars.{max u v} φ).mapDerivedCategory.IsRightAdjoint",
+  "branch": "sheaf-dag",
+  "by": "Q4",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261018T062855-L-671140",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261018T062855-L-671140",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
