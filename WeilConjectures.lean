@@ -8752,6 +8752,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Exchange
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.AbelianConstant
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.BocksteinLimit
+public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.BocksteinReduction
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.BoundedConstructible
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.CohomologicalDimension
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.CompactSupport
@@ -8795,6 +8796,8 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.Proper
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.QuotientCoefficients
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.SetLocallyConstant
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.SetLocallyConstantScalars
+public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.StalkBockstein
+public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.StalkBocksteinQuotient
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.TargetLocal
 public import WeilConjectures.SixFunctors.Etale.Derived.GenericFibre.ClosedSupport
 public import WeilConjectures.SixFunctors.Etale.Derived.GenericFibre.Comparison
@@ -9132,6 +9135,8 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.InternalHom
 public import WeilConjectures.SixFunctors.ProEtale.Adic.InternalHomEvaluation
 public import WeilConjectures.SixFunctors.ProEtale.Adic.IrreducibleLisse
 public import WeilConjectures.SixFunctors.ProEtale.Adic.IrreducibleLisseQuotients
+public import WeilConjectures.SixFunctors.ProEtale.Adic.LatticeEvaluation
+public import WeilConjectures.SixFunctors.ProEtale.Adic.LatticeGeneration
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LatticeSections
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseAbelian
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseCover.CocycleLimit
@@ -9153,6 +9158,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseExtensionByZeroSpec
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseGerm
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseInternalHom
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseLattice
+public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseLatticeTensor
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseMonodromy
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseMonodromyCover
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseMonodromyCoverContinuity
@@ -9167,6 +9173,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseStalkPointwise
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseStrictlyHenselian
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseUniversalCover
 public import WeilConjectures.SixFunctors.ProEtale.Adic.Localization
+public import WeilConjectures.SixFunctors.ProEtale.Adic.LocallyFiniteDecomposition
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LocallyFreeTowerLimit
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LowerShriekFiniteness
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LowerStar
