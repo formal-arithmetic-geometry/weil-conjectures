@@ -117,5 +117,37 @@
   "group": "NH",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NH-7aff6e2ec (reviewer sub-agent of L); spot-checked: Read the item in full, all 7 statement dependencies, both citers (thm-pur-localized-top-chern Steps 0/10 and lem-pur-chern-flag-formula), unit sk-prop-an, Stacks weil.tex proposition-chern-class (0FI5) with equation-chern-classes, constructions.tex definition-projective-bundle (01OB, P(E)=Proj Sym E), and main-20261015 thm-pur-localized-top-chern.proof.md Step 4. Hypotheses hold: P is proper over a separated finite-type T, so it is separated and of finite type over k, which is the domain of Kummer additivity; projective-bundle formula with B=T, n=r-1. Phi is Hom(A_T(-r)[-2r],-) applied to the derived isomorphism, using p^* -| Rp_* and twist invertibility; its components are q^*a cup h^j (full-support cup, even degrees, no signs). The coefficients are therefore unique. Sign: c_i=(-1)^{i+1}a_{r-i} gives h^r-c_1h^{r-1}+...=0, which is Stacks' relation times (-1)^r. Tested r=0; r=1 (c_1 = Kummer c_1); r=2 trivial bundle over k (h^2=0, so c=0); r=2 split bundle (h-x_1)(h-x_2)=0, consistent with the flag formula. Empty T and non-field A are fine. Constant rank is all the citers use. No cycle (does not depend on the flag formula or the localized class). No duplicate in the DAG and no blueprint same_as (searched 'chern', 0FI5, main-20261015/20261017). No new nodes, no SGA, no tool_uses. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PurityChernClasses",
+  "declaration": "WeilConjectures.PurityFiniteSetting.ordinaryFiniteChernClasses",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.ordinaryFiniteCohomology",
+   "WeilConjectures.PurityFiniteSetting.ordinaryFiniteCohomologyOne",
+   "WeilConjectures.PurityFiniteSetting.ordinaryFiniteCohomologyPullback",
+   "WeilConjectures.PurityFiniteSetting.ordinaryFiniteHyperplaneStepRaw",
+   "WeilConjectures.PurityFiniteSetting.ordinaryFiniteHyperplaneStep",
+   "WeilConjectures.PurityFiniteSetting.ordinaryFiniteHyperplaneProduct",
+   "WeilConjectures.PurityFiniteSetting.ordinaryFiniteProjectiveRelation",
+   "WeilConjectures.PurityFiniteSetting.IsOrdinaryFiniteChernClasses",
+   "WeilConjectures.PurityFiniteSetting.existsUniqueOrdinaryFiniteChernClasses",
+   "WeilConjectures.PurityFiniteSetting.ordinaryFiniteChernClasses",
+   "WeilConjectures.PurityFiniteSetting.ordinaryFiniteChernClass"
+  ],
+  "file": "lean/Sheaf/Paper/PurityChernClasses.lean",
+  "statement": "def ordinaryFiniteChernClasses (P : PurityFiniteSetting.{u}) {T : Scheme.{u}} (a : T ⟶ Spec (.of P.field.k)) [IsSeparated a] [LocallyOfFiniteType a] [QuasiCompact a] (F : T.Modules) (r : ℕ) [F.IsFiniteLocallyFreeOfRank r] : ∀ i : ℕ, ordinaryFiniteCohomology P T i",
+  "branch": "newtargets-dag",
+  "by": "NJ",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Repair of H3/H5: actual pro-etale derived-Hom groups with no doubled shift; canonical pullback and full-support hyperplane products; signed projective-bundle relation, c_0=1 and above-rank vanishing. The family is selected from an existence-and-uniqueness theorem whose predicate determines every component, rather than bare Nonempty."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-5a5d86a95",
+  "group": "NJ",
+  "result": "fix",
+  "note": "Mathematics and Lean pass; compilation reproduced cleanly (8.6s/7.0s). Repaired H11 by replacing the author self-check with an independent reading in fixes/def-pur-chern-classes.report.md. Full findings in review.md; no Lean or node changes."
  }
 }

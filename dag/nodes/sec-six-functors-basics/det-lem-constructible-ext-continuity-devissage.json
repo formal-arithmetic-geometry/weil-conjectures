@@ -27,7 +27,8 @@
   "def-sfb-module-lower-star",
   "def-sfb-module-open-lower-shriek",
   "def-weil-open-immersion",
-  "def-weil-closed-immersion"
+  "def-weil-closed-immersion",
+  "det-lem-coefficient-heart-common-stratification"
  ],
  "proof": [
   {
@@ -244,5 +245,31 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ConstructibleHomContinuityDevissage",
+  "declaration": "AlgebraicGeometry.ProEtale.constructibleHomContinuity_devissage",
+  "declarations": [
+   "CategoryTheory.homContinuityComparison",
+   "CategoryTheory.homContinuityLocus",
+   "CategoryTheory.complexHomContinuityLocus",
+   "AlgebraicGeometry.ProEtale.constructibleHomContinuity_devissage",
+   "AlgebraicGeometry.ProEtale.constructibleHomContinuity_of_lisseGenerators"
+  ],
+  "file": "lean/Sheaf/Paper/ConstructibleHomContinuityDevissage.lean",
+  "statement": "theorem constructibleHomContinuity_devissage (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] (X : Scheme.{u}) [HasDerivedCategory.{u + 1} (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))] {I : Type (u + 1)} [SmallCategory I] [IsFiltered I] (D : I ⥤ CochainComplex (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) ℤ) [HasColimit D] : (∀ (C : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))) (n : ℤ), complexHomContinuityLocus _ D C → complexHomContinuityLocus _ D (C⟦n⟧)) ∧ (∀ (C B : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))) (_ : C ≅ B), complexHomContinuityLocus _ D C → complexHomContinuityLocus _ D B) ∧ (∀ T : Pretriangulated.Triangle (DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))), T ∈ distTriang _ → complexHomContinuityLocus _ D T.obj₁ → complexHomContinuityLocus _ D T.obj₃ → complexHomContinuityLocus _ D T.obj₂) ∧ (∀ G : ObjectProperty (DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))), G ≤ complexHomContinuityLocus _ D → ∀ n : ℕ, (G.shiftClosure ℤ).extensionProductIter n ≤ complexHomContinuityLocus _ D)",
+  "branch": "newtargets-dag",
+  "by": "Q49",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Formal closure and constructible specialization are the two theorem declarations; the other three declarations give the canonical abelian-group comparison and its all-degree locus. The complex colimit is mapped by Q, never asserted to be a derived colimit."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-843f08c66",
+  "group": "Q49",
+  "result": "pass",
+  "note": "Wrote review.md. Checked immutable statements, dependencies, exact declarations, sources, universes, edge cases, docstrings, canonical constructions, and route-pivot compliance. Signature matches verbatim; scompile.py reproduced clean per-file compilation. No corrections required."
  }
 }

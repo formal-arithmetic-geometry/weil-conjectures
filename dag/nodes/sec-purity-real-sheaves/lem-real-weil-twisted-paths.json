@@ -283,5 +283,34 @@
   "group": "Q09",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q09-473a99991 (reviewer sub-agent of L); spot-checked: I read the whole item and every cited statement: def-galois-fibre-functor, lem-galois-pi1-functoriality, def-wf-weil-group with def-wf-fundamental-representation and lem-wf-arithmetic-lift-fibre-path, lem-wf-weil-group-exact-sequence, lem-wf-finite-etale-weil-transport, lem-sfb-finite-field-galois-frobenius, lem-sc-finite-etale-algebra-criterion and def-weil-frobenius-detailed. Sources checked at the place: Stacks 0BTX (qcqs and connected geometric fibre both hold) and Deligne Weil II (1.1.7), (1.1.8), (1.1.10)(ii) and (1.1.13), pp. 150-153, for F = phi^{-1}, F mapping to 1, and deg F_y = deg y. I recomputed each step. Step 2: group axioms. Step 4: the sign gives A(n,p) acting by sigma -> gamma^n sigma on Hom(E,Omega), so the degree is n. Step 5: the homomorphism identity r_{n+m} g^m(p) = A(n,p) r_m. Step 7: the torsor bijectivity argument. Step 8: g^e a = a Spec(gamma^e). Step 9: the result is tau_0 Frob tau_0^{-1} with degree e, not its inverse. Edge cases checked: X_0 = Spec k_0 gives Z, n = 0, negative n, e = 1, and a change of tau conjugates the result. There are no new nodes. lem-wf-arithmetic-lift-fibre-path gives the path bijection only for each sigma, so the item adds the group law and the closed-point formula and is not a duplicate. Fix: step 4 used the convention for r: pi_1(X_0) -> Gal(k/k_0) without citing the node where r is specified (C4). I added lem-wf-arithmetic-lift-fibre-path to step 4's uses and to proof_deps, wrote out the reading of r(A(n,p)) = gamma^n, and declared the node in split_report.tool_uses. review_split passes before and after the fix; no cycle. Batch-5 check: lem-wf-weil-group-exact-sequence reaches def-pod-lisse-l-adic-sheaves and the other sec-poincare-duality/sec-trace-formula nodes only through def-wf-fundamental-representation. That closure is identical to the closure of the item's existing statement dependency def-wf-weil-group. The exact sequence is a pi_1 fact that neither assumption gives, and no trace-formula or Poincare node cites it, so it is outside the assumptions. lem-wf-finite-etale-weil-transport reaches sec-trace-formula only through the generic lemma lem-trf-finite-morphism-finite-presentation (finite and locally finitely presented implies finitely presented) and the generic base-change lemma lem-pod-separated-finite-type-base-change. Neither is a step of the trace-formula or Poincare proofs, so it is also outside. The added citation adds no new reach. Accepted tool_uses: lem-wf-finite-etale-weil-transport (only existence of a path b to g^n b), lem-sc-finite-etale-algebra-criterion, and lem-wf-arithmetic-lift-fibre-path. No SGA source is used; the statement is unchanged.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FundamentalGroup.WeilTwistedPaths",
+  "declaration": "AlgebraicGeometry.Scheme.FiniteEtale.weilTwistedPaths",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.FiniteEtale.TwistedEtaleLoop",
+   "AlgebraicGeometry.Scheme.FiniteEtale.IsTwistedEtalePathTranslate",
+   "AlgebraicGeometry.Scheme.FiniteEtale.IsTwistedEtaleLoopMultiplication",
+   "AlgebraicGeometry.Scheme.FiniteEtale.restrictTwistedEtalePath",
+   "AlgebraicGeometry.Scheme.FiniteEtale.twistedPathSpecFrobenius",
+   "AlgebraicGeometry.Scheme.FiniteEtale.IsWeilTwistedPathIdentification",
+   "AlgebraicGeometry.Scheme.FiniteEtale.HasWeilTwistedClosedPointFormula",
+   "AlgebraicGeometry.Scheme.FiniteEtale.weilTwistedPaths"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FundamentalGroup/WeilTwistedPaths.lean",
+  "statement": "theorem weilTwistedPaths (D : WeilConjectures.FiniteFieldDatum.{u}) (X₀ : Over (Spec (.of D.k₀))) [GeometricallyConnected X₀.hom] [IsSeparated X₀.hom] [LocallyOfFiniteType X₀.hom] [QuasiCompact X₀.hom] {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (b : Spec (.of Ω) ⟶ (D.geometricFiber X₀).left) : ∃ (G : Group (TwistedEtaleLoop (D.geometricFrobenius X₀) b)) (E : TwistedEtaleLoop (D.geometricFrobenius X₀) b ≃ weilGroup X₀.hom (b ≫ Limits.pullback.fst X₀.hom (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k)))) (Aut (fiber (b ≫ Limits.pullback.fst X₀.hom (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k))))))), IsTwistedEtaleLoopMultiplication (D.geometricFrobenius X₀) b G.mul ∧ (∀ p q, E (G.mul p q) = E p * E q) ∧ IsWeilTwistedPathIdentification D X₀ b E ∧ (∀ E' : TwistedEtaleLoop (D.geometricFrobenius X₀) b ≃ weilGroup X₀.hom (b ≫ Limits.pullback.fst X₀.hom (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k)))) (Aut (fiber (b ≫ Limits.pullback.fst X₀.hom (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k)))))), IsWeilTwistedPathIdentification D X₀ b E' → E' = E) ∧ (∀ (p : TwistedEtaleLoop (D.geometricFrobenius X₀) b) (h : Aut (fiber b)), p.1 = 0 → (∀ (P : (D.geometricFiber X₀).left.FiniteEtale) (z : (fiber b).obj P), (p.2.hom.app P z).left = (h.hom.app P z).left) → (E p).val.1 = fiberAutBaseChange (Limits.pullback.fst X₀.hom (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k)))) b h) ∧ HasWeilTwistedClosedPointFormula D X₀ b E",
+  "branch": "newtargets-dag",
+  "by": "Q21",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "The theorem asserts a Group on the actual pairs and an equivalence to the recorded Weil group, with the displayed multiplication and multiplicativity. Full arithmetic-cover components characterize the equivalence uniquely. Componentwise predicates include the geometric subgroup and residue-field return-path/decomposition formula. All helper data are explicit constructions; only the main theorem is postponed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-0ecfc62f4",
+  "group": "Q21",
+  "result": "pass",
+  "note": "Reviewed the immutable node, dependencies, Lean module, report sections, source citations, edge cases, route-pivot constraints, docstrings, and exact statement. Reproduced scompile.py successfully for sandbox and library module; no substantive or mechanical defects found."
  }
 }
