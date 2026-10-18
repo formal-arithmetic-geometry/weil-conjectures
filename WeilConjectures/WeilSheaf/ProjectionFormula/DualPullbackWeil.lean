@@ -157,4 +157,118 @@ lemma adicUpperStarDualComparison_comm (j : T₁ ⟶ T₂) (a : T₁ ≅ T₁) (
     (uncurryHom_ihomStr a.inv ((j)^*ᵃ[l].obj G) (AdicSheaf.unit l T₁) _ _)
     (ihomStr_tensorHom_comp_evaluation b.inv G (AdicSheaf.unit l T₂) s _) hEu.symm
 
+variable (l) in
+/-- The internal hom `𝓗om(A, B)` of sheaves with structure isomorphisms `(a⁻¹)_* A ≅ A` and
+`(a⁻¹)_* B ≅ B`, with the structure isomorphism
+`(a⁻¹)_* 𝓗om(A, B) ≅ 𝓗om((a⁻¹)_* A, (a⁻¹)_* B) ≅ 𝓗om(A, B)`. For `a` the geometric Frobenius,
+this is the internal hom of pro-étale Weil sheaves (`AlgebraicGeometry.ProEtaleWeilSheaf.ihom`). -/
+noncomputable def isoAlgebraIhom (a : T ≅ T) (A B : IsoAlgebra (a.inv)_*ᵃ[l]) :
+    IsoAlgebra (a.inv)_*ᵃ[l] :=
+  IsoAlgebra.mk ((AdicSheaf.ihom A.carrier).obj B.carrier)
+    ((adicLowerStarCompIhomIso l a.inv A.carrier).symm.app B.carrier ≪≫
+      (Mod.ihomMapIso A.str.symm).app _ ≪≫ (AdicSheaf.ihom A.carrier).mapIso B.str)
+
+lemma isoAlgebraIhom_obj_str (a : T ≅ T) (A B : IsoAlgebra (a.inv)_*ᵃ[l]) :
+    (isoAlgebraIhom l a A B).obj.str =
+      (adicLowerStarCompIhomIso l a.inv A.carrier).inv.app B.carrier ≫
+        (Mod.ihomMap A.str.inv).app _ ≫ (AdicSheaf.ihom A.carrier).map B.str.hom :=
+  rfl
+
+/-- The comparison `j^* 𝓗om(G, ℚ̄_ℓ) ⟶ 𝓗om(j^* G, ℚ̄_ℓ)` is compatible with the structure
+isomorphisms, for `G` with a structure isomorphism. -/
+lemma adicUpperStarDualComparison_isoAlgebra_comm (j : T₁ ⟶ T₂) (a : T₁ ≅ T₁) (b : T₂ ≅ T₂)
+    (c : a.hom ≫ j = j ≫ b.hom) (e : (j)^*ᵃ[l] ⋙ (a.inv)_*ᵃ[l] ≅ (b.inv)_*ᵃ[l] ⋙ (j)^*ᵃ[l])
+    (he : e = adicUpperStarExchange l j a b c) (G : IsoAlgebra (b.inv)_*ᵃ[l]) :
+    (a.inv)_*ᵃ[l].map (adicUpperStarDualComparison l j G.carrier) ≫
+        (isoAlgebraIhom l a ((IsoAlgebra.mapOfNatIso e).obj G) (isoAlgebraUnit l a)).obj.str =
+      ((IsoAlgebra.mapOfNatIso e).obj
+          (isoAlgebraIhom l b G (isoAlgebraUnit l b))).obj.str ≫
+        adicUpperStarDualComparison l j G.carrier := by
+  rw [isoAlgebraIhom_obj_str, mapOfNatIso_obj_obj_str, isoAlgebraIhom_obj_str,
+    IsoAlgebra.mapOfNatIso_obj_str]
+  exact adicUpperStarDualComparison_comm j a b c e he G.carrier G.str
+
+variable (l) in
+/-- **The pullback of the dual is the dual of the pullback**, for sheaves with structure
+isomorphisms, when the comparison of the underlying sheaves is an isomorphism. -/
+noncomputable def mapOfNatIsoIsoAlgebraIhomIso (j : T₁ ⟶ T₂) (a : T₁ ≅ T₁) (b : T₂ ≅ T₂)
+    (c : a.hom ≫ j = j ≫ b.hom) (e : (j)^*ᵃ[l] ⋙ (a.inv)_*ᵃ[l] ≅ (b.inv)_*ᵃ[l] ⋙ (j)^*ᵃ[l])
+    (he : e = adicUpperStarExchange l j a b c) (G : IsoAlgebra (b.inv)_*ᵃ[l])
+    [IsIso (adicUpperStarDualComparison l j G.carrier)] :
+    (IsoAlgebra.mapOfNatIso e).obj (isoAlgebraIhom l b G (isoAlgebraUnit l b)) ≅
+      isoAlgebraIhom l a ((IsoAlgebra.mapOfNatIso e).obj G) (isoAlgebraUnit l a) :=
+  IsoAlgebra.isoMk (asIso (adicUpperStarDualComparison l j G.carrier))
+    (adicUpperStarDualComparison_isoAlgebra_comm j a b c e he G)
+
+/-- `AlgebraicGeometry.ProEtale.mapOfNatIsoIsoAlgebraIhomIso` for objects equal to the duals. -/
+theorem nonempty_mapOfNatIso_obj_isoAlgebraIhom_iso_of_eq (j : T₁ ⟶ T₂) (a : T₁ ≅ T₁)
+    (b : T₂ ≅ T₂) (c : a.hom ≫ j = j ≫ b.hom)
+    (e : (j)^*ᵃ[l] ⋙ (a.inv)_*ᵃ[l] ≅ (b.inv)_*ᵃ[l] ⋙ (j)^*ᵃ[l])
+    (he : e = adicUpperStarExchange l j a b c) (G : IsoAlgebra (b.inv)_*ᵃ[l])
+    [IsIso (adicUpperStarDualComparison l j G.carrier)] (K : IsoAlgebra (b.inv)_*ᵃ[l])
+    (hK : K = isoAlgebraIhom l b G (isoAlgebraUnit l b)) (K' : IsoAlgebra (a.inv)_*ᵃ[l])
+    (hK' : K' = isoAlgebraIhom l a ((IsoAlgebra.mapOfNatIso e).obj G) (isoAlgebraUnit l a)) :
+    Nonempty ((IsoAlgebra.mapOfNatIso e).obj K ≅ K') := by
+  subst hK hK'
+  exact ⟨mapOfNatIsoIsoAlgebraIhomIso l j a b c e he G⟩
+
 end AlgebraicGeometry.ProEtale
+
+namespace AlgebraicGeometry.ProEtaleWeilSheaf
+
+open ProEtale
+
+variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
+variable {X Y : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
+  [Y.Over (Spec (CommRingCat.of k₀))]
+
+set_option hygiene false in
+local notation "𝐒" => Spec (CommRingCat.of k₀)
+
+set_option hygiene false in
+local notation "Fr[" T "]" => Scheme.Hom.geometricGaloisFrobenius (T ↘ Spec (CommRingCat.of k₀))
+
+set_option hygiene false in
+local notation "bc[" f "]" =>
+  Scheme.Hom.geometricFiberMap f (comp_over f (Spec (CommRingCat.of k₀)))
+
+set_option hygiene false in
+local notation "EX[" φ "]" => adicUpperStarExchange l (bc[φ]) (Fr[X]) (Fr[Y])
+        (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius φ (comp_over φ 𝐒)).symm
+
+/-- The dual of a lisse Weil sheaf is the internal hom into the constant sheaf, with the
+structure isomorphism along the geometric Frobenius. -/
+lemma dual_obj_eq_isoAlgebraIhom {T : Scheme.{u}} [T.Over 𝐒] (G : WeilSheaf k₀ l T)
+    (hG : G.IsLisse) :
+    (G.dual hG).obj = isoAlgebraIhom l (Fr[T]) G.obj (isoAlgebraUnit l (Fr[T])) :=
+  rfl
+
+/-- The dual of the pullback of a lisse Weil sheaf. -/
+lemma dual_upperStar_obj_eq_isoAlgebraIhom (φ : X ⟶ Y) [φ.IsOver 𝐒] (G : WeilSheaf k₀ l Y)
+    (hG : G.IsLisse) :
+    (((WeilSheaf.upperStar φ).obj G).dual (ProEtale.IsAdicLisseSheaf.upperStar _ hG)).obj =
+      isoAlgebraIhom l (Fr[X]) ((IsoAlgebra.mapOfNatIso (EX[φ])).obj G.obj)
+        (isoAlgebraUnit l (Fr[X])) := by
+  rw [← upperStar_eq_mapOfNatIso]
+  rfl
+
+/-- **The pullback of the dual of a lisse Weil sheaf is the dual of the pullback**:
+`φ^*(G^∨) ≅ (φ^* G)^∨`, through the comparison
+`AlgebraicGeometry.ProEtale.adicUpperStarDualComparison` of the underlying sheaves, an
+isomorphism by `AlgebraicGeometry.ProEtale.isIso_adicUpperStarDualComparison_of_specializes`. -/
+theorem nonempty_upperStar_obj_dual_iso [LocallyOfFiniteType (X ↘ 𝐒)] [QuasiCompact (X ↘ 𝐒)]
+    (φ : X ⟶ Y) [φ.IsOver 𝐒] (G : WeilSheaf k₀ l Y) (hG : G.IsLisse) :
+    Nonempty ((upperStar k₀ l φ).obj (G.dual hG).obj ≅
+      (((WeilSheaf.upperStar φ).obj G).dual (ProEtale.IsAdicLisseSheaf.upperStar _ hG)).obj) := by
+  have : IsLocallyNoetherian (X ↘ 𝐒).geometricFiber :=
+    LocallyOfFiniteType.isLocallyNoetherian (X ↘ 𝐒).geometricFiberToAlgebraicClosure
+  have : IsIso (adicUpperStarDualComparison l (bc[φ]) G.obj.carrier) :=
+    isIso_adicUpperStarDualComparison_of_specializes _ hG fun z ↦
+      Scheme.Hom.exists_specializes_of_isAlgClosed (X ↘ 𝐒).geometricFiberToAlgebraicClosure z
+  rw [upperStar_eq_mapOfNatIso]
+  exact nonempty_mapOfNatIso_obj_isoAlgebraIhom_iso_of_eq (l := l) (bc[φ]) (Fr[X]) (Fr[Y])
+    (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius φ (comp_over φ 𝐒)).symm
+    (EX[φ]) rfl G.obj _ (dual_obj_eq_isoAlgebraIhom G hG) _
+    (dual_upperStar_obj_eq_isoAlgebraIhom φ G hG)
+
+end AlgebraicGeometry.ProEtaleWeilSheaf
