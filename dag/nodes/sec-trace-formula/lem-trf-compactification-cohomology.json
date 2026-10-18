@@ -345,5 +345,36 @@
   "group": "NO",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NO-226b2cfd8 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item statement, which matches the main-20261015 and master blueprint texts word for word with the same pro-etale A_{E,n} D^b_c coefficients, all 8 steps, the new node, and the statement of every cited node. Steps 1-4 and 6-8 are correct. Step 1 instantiates the conventions and the candidate formula. Steps 2, 7 and 8 use the natural isomorphism, naturality and cocycle that prop-compactification-coherence-detailed states, on the witnessed domain. Steps 3 and 5 use only the restriction clause of prop-finite-compact-support-constructibility plus closure under isomorphism. Step 4 gets quasi-compactness from the Nagata lemma (a_X finite type, abar separated), then finite type, and separatedness from the identity diagonal. Fib_s is defined because k is algebraically closed. Every cited unit is on the route of sk-thm-trace-formula, so the two declared tool_uses are redundant but accurate and I accept them. Fault (C1 exception, D1): the new statement-only node lem-trf-open-compact-support-normalization (Rj_! = j_! on witnessed complexes) is true but follows in a few lines from existing nodes: coherence applied to f=j against the compactification (j, id_Xbar), the candidate formula Rj_!^{(j,id)} = R(id)_* j_!, and R(id)_* = id from the K-injective definition in def-weil-derived-direct-image. I folded that argument into Step 5 (1547 characters, below the 2000 limit), recomputed proof_deps (adding def-weil-derived-direct-image), updated split_report.summary and split_report.blueprint, and dropped the node. Nothing else cites it. The duplicate search found no existing node with the normalization; lem-trf-open-ctf needs finite Tor amplitude and cannot replace Step 5. Edge cases checked: K=0, empty X, proper X with the identity compactification, an extra component of Xbar, n=1. The corrected item is at fixes/dag/nodes/sec-trace-formula/lem-trf-compactification-cohomology.json and the details are in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.TraceCompactificationCohomology",
+  "declaration": "WeilConjectures.trace_compactification_cohomology",
+  "declarations": [
+   "WeilConjectures.traceCompactificationCoefficientFinite",
+   "WeilConjectures.traceCompactificationUnderlying",
+   "WeilConjectures.traceCompactificationBounded",
+   "WeilConjectures.traceCompactificationForgetful",
+   "WeilConjectures.traceCompactificationImages",
+   "WeilConjectures.traceCompactificationSections",
+   "WeilConjectures.traceCompactificationRefinementAmbient",
+   "WeilConjectures.traceCompactificationRefinementImage",
+   "WeilConjectures.traceCompactificationRefinement",
+   "WeilConjectures.traceCompactificationComparisonLaws",
+   "WeilConjectures.trace_compactification_cohomology"
+  ],
+  "file": "lean/Sheaf/Paper/TraceCompactificationCohomology.lean",
+  "statement": "theorem trace_compactification_cohomology (T : TraceFormulaCoefficientConventions.{u}) : ∃ C : ∀ c d : Compactification T.structureMap, traceCompactificationSections T c ≅ traceCompactificationSections T d, traceCompactificationComparisonLaws T C",
+  "branch": "newtargets-dag",
+  "by": "Q15",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-01084778f",
+  "group": "Q15",
+  "result": "pass",
+  "note": "Snapshot module compiles clean via nt_compile.py (12.1 s, no errors or warnings). A review-only check file (in /tmp, not delivered) proves by rfl that traceCompactificationSections T c is T.compactSupportComplex c, i.e. the recorded RΓ_c. The target unfolds to Fib_s(R c.g_* (sfIntrinsicExtensionByZero c.i) K) = RΓ(X̄, j_!K). The laws fix C c d at every common refinement to the refinementComparisonAtWitness maps of compactification_coherence, moved by the canonical sfIntrinsicCompactSupportComparison, so C is unique; they also give the cocycle and C c c = id. The domain keeps the witness, allows all ambient morphisms and adds no hypotheses. Edge cases checked: empty X, K = 0, n = 1, identity and non-dense compactifications, universes (ULift u+1 as recorded). No hollow definitions; only the theorem is sorry; docstrings and blueprint tags present; lean.statement verbatim; declarations list equals the 11 file declarations; only the item node's lean field changed. Remark only: the Second reading section is the author's own but substantive."
  }
 }

@@ -18,7 +18,11 @@
   "def-weil-algebraically-closed-coefficients",
   "def-fd-kernel",
   "lem-fd-kernel-composition",
-  "def-coefficient-twists-detailed"
+  "def-coefficient-twists-detailed",
+  "def-fd-adic-fourier-realization",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-integral-rational-qbar-compact-support",
+  "def-weil-derived-direct-image"
  ],
  "proof": [
   {
@@ -294,5 +298,47 @@
   "group": "N1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N1-6b60affde (reviewer sub-agent of L); spot-checked: Read the item, new helper, unit/chapter route, cited statements, and cited source locations in full. Verified hypotheses, coefficient category, base-change morphism, relative chart/open-closed proof, edge cases, duplicate searches, and all eight proof steps. The nontrivial-character correction is necessary and justified by the trivial-character counterexample; no remaining mathematical or DAG faults found. Review written to review.md."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FourierKernelConvolution",
+  "declaration": "WeilConjectures.fourierKernelConvolutionIso",
+  "declarations": [
+   "WeilConjectures.fourierGeometricBase",
+   "WeilConjectures.fourierGeometricSpace",
+   "WeilConjectures.fourierGeometricProjection",
+   "WeilConjectures.fourierGeometricSquare",
+   "WeilConjectures.fourierGeometricTriple",
+   "WeilConjectures.fourierGeometricR13",
+   "WeilConjectures.fourierSquareOver",
+   "WeilConjectures.fourierTripleOver",
+   "WeilConjectures.fourierSquareNoetherian",
+   "WeilConjectures.fourierConvolutionGeometry",
+   "WeilConjectures.fourierPairingCharacteristic",
+   "WeilConjectures.fourierGeometricCoefficient_isUnit",
+   "WeilConjectures.fourierResidueCoefficient_isUnit",
+   "WeilConjectures.fourierGeometricKernel",
+   "WeilConjectures.fourierConvolutionIntegrand",
+   "WeilConjectures.fourierConvolutionIntegrand_mem",
+   "WeilConjectures.fourierGeometricConvolution",
+   "WeilConjectures.fourierSecondReflection",
+   "WeilConjectures.fourierIntegralDelta",
+   "WeilConjectures.fourierIntegralDelta_mem",
+   "WeilConjectures.fourierDeltaKernel",
+   "WeilConjectures.fourierKernelConvolutionIso"
+  ],
+  "file": "lean/Sheaf/Paper/FourierKernelConvolution.lean",
+  "statement": "theorem fourierKernelConvolutionIso (F : FourierSetting.{u}) (n : Type u) [Fintype n] (Ψ : AddChar (ZMod F.field.p) F.coefficients.Qbar) (hΨ : Ψ ≠ 1) (c : Compactification (fourierGeometricR13 F n)) : Nonempty (fourierGeometricConvolution F n Ψ Ψ⁻¹ c ≅ (shiftFunctor _ (-2 * (Fintype.card n : ℤ))).obj (fourierDeltaKernel F n false)) ∧ Nonempty (fourierGeometricConvolution F n Ψ Ψ c ≅ (shiftFunctor _ (-2 * (Fintype.card n : ℤ))).obj (fourierDeltaKernel F n true))",
+  "branch": "newtargets-dag",
+  "by": "Q04",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-69a3a96f8",
+  "group": "Q04",
+  "result": "fix",
+  "note": "Mathematics and Lean correct: FourierSetting + nontrivial prime-field AddChar; adic common-stage objects from completed pro-etale integral AS sheaves (Etale.fourierKernel of stdPairing, defeq rep); convolution K'*K=Rr13!(r12^*K⊗r23^*K') via tripleProj13 with (Ψ,Ψ⁻¹) and (Ψ,Ψ), unshifted, recorded sfQbarCompactSupportValue; RHS integralCoefficientTwist(-r) pushed along diagonal and (id×neg), shift -2r; edge cases r=0, char 2, p|a, ramified E, universes OK; no hollow defs, 11 true sorry theorems, docstrings/blueprint tags/8-step proof present; new node def-fd-adic-fourier-realization justified (no adic AS/kernel/convolution in Mathlib, slopmaster2 or side); statements verbatim; nt_compile --json both modules rc 0, no warnings. Finding H11: Second reading by Q04 was an admitted self-reading; fixed by fixes/lem-fd-convolution-kernel.report.md (Worker report and New nodes unchanged, independent clause-by-clause second reading; passes check_report). No Lean or node change."
  }
 }
