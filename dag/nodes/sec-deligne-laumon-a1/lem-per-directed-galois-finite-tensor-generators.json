@@ -21,9 +21,163 @@
   "def-weil-pbc-category-colimit",
   "def-pur-sheaf-tensor-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $Z_i=X\\setminus(S_1\\cup\\cdots\\cup S_{i-1})$ with its reduced structure, and factor $k_i:S_i\\to X$ as its open inclusion into $Z_i$, followed by the closed inclusion into $X$. All these schemes are Noetherian: a closed affine chart has ring $R/J$, whose increasing ideal chains lift to those of $R$, and open subschemes are covered by [lem-weil-pbc-noetherian-open-subscheme-noetherian]. Open extension is exact by [lem-weil-pbc-extension-by-zero-exact]; closed direct image is exact and fully faithful by [lem-trf-oriented-closed-base-localization]. Their stalks are the original stalks on the stratum and zero off it, by [lem-weil-pbc-extension-by-zero-stalks, lemma-openclosed-stalk-lowerstar] and the closed-support description in the closed-base lemma. Consequently $k_{i!}$ preserves constructibility and membership in the fixed partition class: on $S_i$ it is the given sheaf, and on every other stratum it is zero. It also preserves small filtered colimits. For open extension this follows from its sheafified presheaf formula [def-weil-pbc-extension-by-zero]: extend the sectionwise colimit by zero and sheafify. For a closed inclusion $c$, a colimit of sheaves supported on $Z_i$ is still zero on the complement, since inverse image preserves colimits [prop-weil-pbc-inverse-image-modules-exact]. The closed-base lemma identifies it with $c_*c^{-1}$ of that colimit; applying $c^{-1}$ and its counit identifies it with the colimit on $Z_i$.",
+   "uses": [
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "lem-weil-pbc-extension-by-zero-exact",
+    "lem-trf-oriented-closed-base-localization",
+    "lem-weil-pbc-extension-by-zero-stalks",
+    "lemma-openclosed-stalk-lowerstar",
+    "def-weil-pbc-extension-by-zero",
+    "prop-weil-pbc-inverse-image-modules-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII 7.4.2 and 7.4.3: the stratum extension functors"
+   }
+  },
+  {
+   "text": "On a nonempty stratum $S$ with cover $V\\to S$, choose a geometric point above one on $S$. The cover has a continuous surjection $G\\to\\operatorname{Aut}_S(V)$ with kernel $H=\\pi_1(V)$ by clause (1) of [lem-per-galois-descent-monodromy-tensor]; thus $H$ is normal and open. By [lem-per-torsion-local-system-monodromy], the sheaves defining $\\mathcal W$ are local systems and correspond exactly to discrete continuous $A$-linear modules for $G=\\pi_1(S)$ which are ind-unipotent for the normal open subgroup $H=\\pi_1(V)$. This uses the cover-descent, extension and colimit clauses of that node. The coefficient ring is killed by $\\ell$, as its hypotheses require. By [lem-per-normal-subgroup-ind-unipotence], the class is closed under submodules, and a finitely generated member is $H$-unipotent. Each finite set of elements of a discrete continuous module has a finite union of $G$-orbits: the stabilizers are open, hence have finite index. The $A$-span of those orbits is therefore a finitely generated $G$-stable submodule. These submodules form a directed union of the whole module and remain $H$-ind-unipotent. The monodromy equivalence identifies their sheaves with locally constant finite-type subobjects, hence constructible ones. Submodules and quotients of a finitely generated member remain finite over $A$ by [lem-weil-pbc-noetherian-submodule-finite]. Its finite $H$-unipotent filtration therefore has finitely generated successive quotients trivial on $H$. The same argument shows that an object of $\\mathcal W$ on any of the finitely many strata is locally constant of finite type precisely when its stalk module is finitely generated. In particular any subobject in $\\mathcal W$ of an object with finite stalk modules has finite stalk modules and is constructible on the fixed strata.",
+   "uses": [
+    "lem-per-torsion-local-system-monodromy",
+    "lem-per-normal-subgroup-ind-unipotence",
+    "lem-weil-pbc-noetherian-submodule-finite",
+    "lem-per-galois-descent-monodromy-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII 7.4.3, one-stratum argument, and 7.4.5"
+   }
+  },
+  {
+   "text": "For each stratum write $K_i=\\operatorname{Aut}_{S_i}(V_i)$ and $B_i=\\Lambda[K_i]$. Choose one representative of each simple left $B_i$-module. There are only finitely many: $B_i$ is a finite set, so it has finitely many left ideals, and every simple module is a quotient of its regular module by a maximal left ideal (send $b$ to $bv$ for a nonzero vector $v$). Each representative is finite-dimensional over $\\Lambda$, since it is such a quotient. The exact descent equivalence [lem-per-galois-cover-module-descent] gives a locally constant finite-type sheaf $T_i(L)$ on $S_i$ trivialized by $V_i$. Take as the fixed list all $C_{i,L}=k_{i!}T_i(L)$. Step 1 proves that they are constructible and belong to $\\mathcal W_{\\mathcal P}(\\Lambda)$. The list is finite and was chosen before choosing $A$ or $E$.",
+   "uses": [
+    "lem-per-galois-cover-module-descent"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII 7.4.3, artinian case; 7.4.6 and 7.4.7"
+   }
+  },
+  {
+   "text": "Let $L$ be a locally constant finite-type $A$-module sheaf on $S_i$ trivialized by $V_i$. Under [lem-per-galois-cover-module-descent] it corresponds to a finitely generated $A$-module $M$ with $K_i$-action, or equivalently to a module for $A\\otimes_\\Lambda B_i$. A finite $A$-generating set also generates it over that algebra. Apply [lem-per-finite-algebra-external-tensor-filtration] with the finite-dimensional algebra $B_i$. Its quotients are retracts of $N\\otimes_\\Lambda L_0$ for finite $A$-modules $N$ and simple $B_i$-modules $L_0$. Replace $L_0$ by its representative from Step 3. Exact additive descent carries the filtration, inclusion and retraction to sheaves. Its mixed tensor clause identifies the tensor with $N_{S_i}\\otimes_{\\Lambda_{S_i}}T_i(L_0)$. Combining this filtration with the finite unipotent filtration of Step 2 gives the corresponding tensor filtration for every constructible member of the one-stratum class. All intermediate sheaves have finite stalk modules and lie in that class by Step 2.",
+   "uses": [
+    "lem-per-galois-cover-module-descent",
+    "lem-per-finite-algebra-external-tensor-filtration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII proof of 7.4.6 via 7.4.7; use $B=\\Lambda[K_i]$"
+   }
+  },
+  {
+   "text": "For the factors just obtained, the canonical projection map gives\n$$N_X\\otimes_{\\Lambda_X}k_{i!}T_i(L_0)\\ \\simeq\\ k_{i!}(N_{S_i}\\otimes_{\\Lambda_{S_i}}T_i(L_0)).$$\nConstant modules restrict to the same constant modules by [lem-sfb-geometric-inverse-image-constant-module], and inverse image commutes with tensor by [lem-weil-pbc-ringed-topoi-module-pullback-tensor], applied to the constant rings identified in [prop-weil-pbc-inverse-image-modules-exact]. For the open part, construct the map by the extension/restriction adjunction, restricting on $S_i$ to the identity on pure tensors. For the closed part, use the map to $c_*c^{-1}$ followed by evaluation on pure tensors on the closed subscheme; the closed-base counit is the identity there [lem-trf-oriented-closed-base-localization]. The stalk tensor formula [lem-pod-etale-stalk-tensor-scalar] and the extension stalk formulas from Step 1 identify both maps with the ordinary module tensor identity on the stratum and $0\\to0$ off it. Hence [lem-weil-pbc-sets-etale-iso-on-geometric-stalks] makes them isomorphisms. The maps are $A$-linear, with $A$ acting only on $N$. Thus the exact additive functor $k_{i!}$ carries the filtration and its retract data to the required ambient tensor filtration on $X$.",
+   "uses": [
+    "lem-trf-oriented-closed-base-localization",
+    "lem-pod-etale-stalk-tensor-scalar",
+    "lem-weil-pbc-sets-etale-iso-on-geometric-stalks",
+    "lem-weil-pbc-open-closed-short-exact",
+    "lem-weil-pbc-extension-by-zero-stalks",
+    "lemma-openclosed-stalk-lowerstar",
+    "lem-sfb-geometric-inverse-image-constant-module",
+    "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+    "prop-weil-pbc-inverse-image-modules-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII 7.4.2 and 7.4.6: extend the one-stratum filtration and tensors"
+   }
+  },
+  {
+   "text": "For constructible $E$, repeatedly apply the actual open/closed sequence [lem-weil-pbc-open-closed-short-exact]\n$$0\\to j_!j^{-1}E\\to E\\to c_*c^{-1}E\\to0$$\nwith $j:S_1\\hookrightarrow X$ and $c:Z_2\\hookrightarrow X$, then with the first stratum of $Z_2$, and so on. This finite recursion gives a filtration with factors $k_{i!}(E|_{S_i})$. Each $E|_{S_i}$ lies in the one-stratum class and has finitely generated stalks, so Step 2 makes it locally constant of finite type on that whole stratum. Steps 4 and 5 provide a finite tensor filtration of each factor with the fixed $C_{i,L}$. Lift each factor's subobjects by inverse image along the relevant quotient map and concatenate these finite filtrations. This is the elementary refinement of a finite filtration in an abelian category. The exactness and extension closure of [lem-per-galois-partition-exact-refinement], together with the finite stalk assertion of Step 2, keep every intermediate term and quotient constructible and in the fixed class. This proves the finite-filtration assertion for every $A$, without varying the list in Step 3.",
+   "uses": [
+    "lem-weil-pbc-open-closed-short-exact",
+    "lem-per-galois-partition-exact-refinement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII 7.4.2 followed by the proof of 7.4.6"
+   }
+  },
+  {
+   "text": "We need the following extension argument for the filtered-union assertion. Suppose $0\\to H\\to F\\to G\\to0$ lies in the fixed class, $G$ is constructible, and $H$ is a directed union of constructible subobjects $H_a$ in that class. Apply [lem-per-constructible-extension-finite-stage]. It gives $0\\to H_a\\to F_a\\to G\\to0$ mapping into the given sequence. The map $F_a\\to F$ is mono, so we view $F_a$ as a subobject. For any $b\\geq a$, its sum with $H_b$ is the pushout along $H_a\\to H_b$, with exact sequence $0\\to H_b\\to F_a+H_b\\to G\\to0$. These subobjects are in the fixed class by [lem-per-galois-partition-exact-refinement], and constructible by [lem-sfb-discrete-noetherian-constructible-serre], [lem-sfb-noetherian-global-constructibility] and [lem-sc-noetherian-finite-module-finite-presentation]. Their union contains $H$ and surjects onto $G$, hence is all of $F$. More explicitly $F/(F_a+H)=0$ by the displayed exact sequences. Exactness of filtered colimits [lem-weil-pbc-module-sheaves-grothendieck-abelian] identifies this union with the filtered colimit of the inclusions. This is the finite-stage extension argument in the proof of 7.4.4.",
+   "uses": [
+    "lem-per-constructible-extension-finite-stage",
+    "lem-per-galois-partition-exact-refinement",
+    "lem-sfb-discrete-noetherian-constructible-serre",
+    "lem-sfb-noetherian-global-constructibility",
+    "lem-sc-noetherian-finite-module-finite-presentation",
+    "lem-weil-pbc-module-sheaves-grothendieck-abelian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII proof of Lemma 7.4.4, p.306"
+   }
+  },
+  {
+   "text": "Induct on the number of strata to show every $E$ in the class is a union of constructible subobjects in it. The empty case is zero; one stratum is Step 2. For more strata, the sequence of Step 6 has kernel $H=j_!j^{-1}E$, which is such a union by Steps 1 and 2. By induction $c^{-1}E$ is a union of constructible subobjects in the remaining partition. Step 1 carries this union to the quotient $c_*c^{-1}E$. For each constructible subobject $G$ of that quotient in the class, take its inverse image $F\\subseteq E$. It fits into $0\\to H\\to F\\to G\\to0$ in the class, by its exactness and kernel closure [lem-per-galois-partition-exact-refinement]. Step 7 expresses $F$ as the required union. The union of these $F$ is $E$, by exact filtered colimits [lem-weil-pbc-module-sheaves-grothendieck-abelian]. To obtain a single directed indexing set, use all constructible subobjects of $E$ in the class, ordered by inclusion. Finite sums remain in the class and have finitely generated stalk modules; by the last assertion of Step 2 they are constructible. Thus this poset is directed and nonempty (it contains zero). It is a set in the site-and-coefficient universe: subobjects are represented by subsheaves of the fixed sheaf $E$ on a small site. Its colimit is $E$ by the union just proved. This supplies the small filtered colimit required in the statement.",
+   "uses": [
+    "lem-per-galois-partition-exact-refinement",
+    "lem-weil-pbc-module-sheaves-grothendieck-abelian",
+    "def-weil-size-convention"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII proof of Proposition 7.4.3, with Lemma 7.4.4 and Definition 7.4.5"
+   }
+  },
+  {
+   "text": "If $E=0$, all filtrations may be empty. If $X$ is empty, its module-sheaf category contains only the zero object, the stratum list is empty, and take $r=0$; the singleton diagram on zero supplies the filtered presentation. If $A$ is the zero ring the same construction gives zero throughout. No step requires $\\ell$ invertible on $X$, nor finite underlying sets for $A$ or $N$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII 7.4.2--7.4.7: empty and zero cases"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-extension-by-zero",
+  "def-weil-size-convention",
+  "lem-per-constructible-extension-finite-stage",
+  "lem-per-finite-algebra-external-tensor-filtration",
+  "lem-per-galois-cover-module-descent",
+  "lem-per-galois-descent-monodromy-tensor",
+  "lem-per-galois-partition-exact-refinement",
+  "lem-per-normal-subgroup-ind-unipotence",
+  "lem-per-torsion-local-system-monodromy",
+  "lem-pod-etale-stalk-tensor-scalar",
+  "lem-sc-noetherian-finite-module-finite-presentation",
+  "lem-sfb-discrete-noetherian-constructible-serre",
+  "lem-sfb-geometric-inverse-image-constant-module",
+  "lem-sfb-noetherian-global-constructibility",
+  "lem-trf-oriented-closed-base-localization",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-weil-pbc-extension-by-zero-stalks",
+  "lem-weil-pbc-module-sheaves-grothendieck-abelian",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-noetherian-submodule-finite",
+  "lem-weil-pbc-open-closed-short-exact",
+  "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+  "lem-weil-pbc-sets-etale-iso-on-geometric-stalks",
+  "lemma-openclosed-stalk-lowerstar",
+  "prop-weil-pbc-inverse-image-modules-exact"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose XVII, proofs of Propositions 7.4.2, 7.4.3 and 7.4.6 and Lemma 7.4.4, printed pp.305--308; finite-algebra filtration delegated to the existing 7.4.7 node"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -59,10 +213,45 @@
    "results": "1 hits; top: Mathlib/Data/Setoid/Partition.lean; note: ; digest: 169f775172edefc5",
    "date": "2026-10-18",
    "verdict": "no match: general sheaf colimits, finite-type local generators and scheme Noetherianity do not give the fixed-Galois-partition finite tensor generation statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finitely many prime field constructible sheaves generate weakly constructible sheaves for a fixed directed Galois partition by tensor products direct summands and finite extensions uniformly over all noetherian coefficient algebras",
+   "results": "{\"t\": \"2026-10-18T21:38:12Z\", \"tool\": \"leanfinder\", \"query\": \"Finitely many prime field constructible sheaves generate weakly constructible sheaves for a fixed directed Galois partition by tensor products direct summands and finite extensions uniformly over all noetherian coefficient algebras\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PrimeSpectrum.BasicConstructibleSetData.g\", \"PrimeSpectrum.ConstructibleSetData\", \"PrimeSpectrum.BasicConstructibleSetData\", \"PrimeSpectrum.BasicConstructibleSetData.n\", \"Condensed.finFree\", \"PrimeSpectrum.ConstructibleSetData.isConstructible_toSet\", \"PrimeSpectrum.exists_constructibleSetData_iff\", \"PrimeSpectrum.ConstructibleSetData.toSet\"], \"digest\": \"9d7c91f9c9c73698\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned constructible-set data, module finite-type predicates, scheme/field Galois constructions and general sheaf colimits do not state fixed-partition uniform finite tensor generation"
+  },
+  {
+   "tool": "grep",
+   "query": "Galois.*partition|weakly.constructible|tensor.*generators",
+   "results": "{\"t\": \"2026-10-18T21:38:31Z\", \"tool\": \"grep\", \"query\": \"Galois.*partition|weakly.constructible|tensor.*generators\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/PiTensorProduct/Finite.lean\", \"Mathlib/Algebra/Module/Presentation/Tensor.lean\", \"Mathlib/Data/Setoid/Partition.lean\"], \"digest\": \"72d9cdbc6cb101dc\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned constructible-set data, module finite-type predicates, scheme/field Galois constructions and general sheaf colimits do not state fixed-partition uniform finite tensor generation"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, IsNoetherian",
+   "results": "{\"t\": \"2026-10-18T21:38:32Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Sheaf, IsNoetherian\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned constructible-set data, module finite-type predicates, scheme/field Galois constructions and general sheaf colimits do not state fixed-partition uniform finite tensor generation"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Constructible sheaves adapted to a finite Galois partition have finite prime field tensor generators uniformly over noetherian coefficient algebras and every weakly constructible sheaf is a filtered union of constructible subobjects",
+   "results": "{\"t\": \"2026-10-18T21:38:32Z\", \"tool\": \"leansearch\", \"query\": \"Constructible sheaves adapted to a finite Galois partition have finite prime field tensor generators uniformly over noetherian coefficient algebras and every weakly constructible sheaf is a filtered union of constructible subobjects\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.GeneratingSections.IsFiniteType.mk\", \"CategoryTheory.Sheaf.hasFilteredColimitsOfSize\", \"SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType\", \"SheafOfModules.IsFiniteType.exists_localGeneratorsData\", \"SheafOfModules.LocalGeneratorsData.IsFiniteType.mk\", \"SheafOfModules.GeneratingSections.IsFiniteType.recOn\", \"SheafOfModules.GeneratingSections.IsFiniteType\", \"SheafOfModules.IsFiniteType.mk\"], \"digest\": \"deaec5ce7f6909a7\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned constructible-set data, module finite-type predicates, scheme/field Galois constructions and general sheaf colimits do not state fixed-partition uniform finite tensor generation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A fixed finite Galois stratification has finitely many simple finite field local systems whose external module tensors and direct summands give filtrations of all adapted constructible sheaves over a noetherian algebra",
+   "results": "{\"t\": \"2026-10-18T21:38:32Z\", \"tool\": \"leanfinder\", \"query\": \"A fixed finite Galois stratification has finitely many simple finite field local systems whose external module tensors and direct summands give filtrations of all adapted constructible sheaves over a noetherian algebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"galBasis\", \"Field.Emb.Cardinal.directed_filtration\", \"Field.Emb.Cardinal.filtration_apply\", \"Field.Emb.Cardinal.filtration_succ\", \"InfiniteGalois.asProfiniteGaloisGroupFunctor\", \"Module.Finite.left\", \"Field.Emb.Cardinal.instInverseSystemWithTopToTypeOrdRankAlgHomSubtypeMemIntermediateFieldCoeOrderEmbeddingFiltrationAlgebraicClosureEmbFunctor\", \"Ideal.Filtration.submodule_fg_iff_stable\"], \"digest\": \"29a8d6e06d06263c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned constructible-set data, module finite-type predicates, scheme/field Galois constructions and general sheaf colimits do not state fixed-partition uniform finite tensor generation"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-galois-localization-uniform-bounds",
@@ -88,5 +277,104 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-directed-galois-finite-tensor-generators",
+  "worker": "stage1",
+  "summary": "Split the fixed-partition statement following ILO XVII 7.4.2--7.4.7. Reused the finite-algebra filtration, exact Galois descent, monodromy and ind-unipotence nodes. Wrote the finite uniform list, directed-stratum filtration, tensor comparison and filtered-union induction explicitly. One new statement-only helper supplies finite-stage descent of a constructible-quotient extension. Statement unchanged.",
+  "blueprint": "Proof, Step 1 of lem-per-artin-gabber-affine-curve: 'Relative Verdier duality, biduality ... over the same arbitrary field $k$', through lem-per-qbar-arbitrary-field-duality, lem-per-finite-residue-dualizing and lem-per-potential-local-duality; the last node's Step 2 extends finite-field coefficients.; coefficient comparison via ILO XVII 7.6.1, proof p. 314. Subargument: ILO XVII 7.6.10 closed/open devissage. Dependency of the localization-devissage argument: Expose XVII, Proposition 7.6.3, Proposition 7.6.5, Corollary 7.6.6 and Proposition 7.6.7, pp. 311-313; arbitrary Lambda-algebra coefficients in the application in Lemma 7.6.10. Corollary 7.6.6 concerns the closed immersion i (the word ouverte in its printed statement is a typo, as the complementary-open proof shows). Supporting the finite-simple-object devissage in ILO XVII 7.6.5: directed-partition and coefficient tensor devissage of XVII 7.4.2-7.4.6. Steps 1--6 realize the finite-simple-object devissage; Steps 7--8 the locally Noetherian filtered-union argument used in localization. No change to the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-pod-etale-stalk-tensor-scalar",
+    "why": "Generic module-sheaf, stalk, constructibility or open/closed operation used in the ILO directed-partition argument; the perverse unit provides no replacement for this foundational tool."
+   },
+   {
+    "node": "lem-sc-noetherian-finite-module-finite-presentation",
+    "why": "Generic module-sheaf, stalk, constructibility or open/closed operation used in the ILO directed-partition argument; the perverse unit provides no replacement for this foundational tool."
+   },
+   {
+    "node": "lem-sfb-discrete-noetherian-constructible-serre",
+    "why": "Generic module-sheaf, stalk, constructibility or open/closed operation used in the ILO directed-partition argument; the perverse unit provides no replacement for this foundational tool."
+   },
+   {
+    "node": "lem-sfb-geometric-inverse-image-constant-module",
+    "why": "Generic module-sheaf, stalk, constructibility or open/closed operation used in the ILO directed-partition argument; the perverse unit provides no replacement for this foundational tool."
+   },
+   {
+    "node": "lem-sfb-noetherian-global-constructibility",
+    "why": "Generic module-sheaf, stalk, constructibility or open/closed operation used in the ILO directed-partition argument; the perverse unit provides no replacement for this foundational tool."
+   },
+   {
+    "node": "lem-trf-oriented-closed-base-localization",
+    "why": "Generic module-sheaf, stalk, constructibility or open/closed operation used in the ILO directed-partition argument; the perverse unit provides no replacement for this foundational tool."
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-exact",
+    "why": "Generic module-sheaf, stalk, constructibility or open/closed operation used in the ILO directed-partition argument; the perverse unit provides no replacement for this foundational tool."
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-stalks",
+    "why": "Generic module-sheaf, stalk, constructibility or open/closed operation used in the ILO directed-partition argument; the perverse unit provides no replacement for this foundational tool."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-grothendieck-abelian",
+    "why": "Generic module-sheaf, stalk, constructibility or open/closed operation used in the ILO directed-partition argument; the perverse unit provides no replacement for this foundational tool."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "why": "Generic module-sheaf, stalk, constructibility or open/closed operation used in the ILO directed-partition argument; the perverse unit provides no replacement for this foundational tool."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-submodule-finite",
+    "why": "Generic module-sheaf, stalk, constructibility or open/closed operation used in the ILO directed-partition argument; the perverse unit provides no replacement for this foundational tool."
+   },
+   {
+    "node": "lem-weil-pbc-open-closed-short-exact",
+    "why": "Generic module-sheaf, stalk, constructibility or open/closed operation used in the ILO directed-partition argument; the perverse unit provides no replacement for this foundational tool."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+    "why": "Generic module-sheaf, stalk, constructibility or open/closed operation used in the ILO directed-partition argument; the perverse unit provides no replacement for this foundational tool."
+   },
+   {
+    "node": "lem-weil-pbc-sets-etale-iso-on-geometric-stalks",
+    "why": "Generic module-sheaf, stalk, constructibility or open/closed operation used in the ILO directed-partition argument; the perverse unit provides no replacement for this foundational tool."
+   },
+   {
+    "node": "lemma-openclosed-stalk-lowerstar",
+    "why": "Generic module-sheaf, stalk, constructibility or open/closed operation used in the ILO directed-partition argument; the perverse unit provides no replacement for this foundational tool."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Generic module-sheaf, stalk, constructibility or open/closed operation used in the ILO directed-partition argument; the perverse unit provides no replacement for this foundational tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pod-etale-stalk-tensor-scalar",
+  "lem-sc-noetherian-finite-module-finite-presentation",
+  "lem-sfb-discrete-noetherian-constructible-serre",
+  "lem-sfb-geometric-inverse-image-constant-module",
+  "lem-sfb-noetherian-global-constructibility",
+  "lem-trf-oriented-closed-base-localization",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-weil-pbc-extension-by-zero-stalks",
+  "lem-weil-pbc-module-sheaves-grothendieck-abelian",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-noetherian-submodule-finite",
+  "lem-weil-pbc-open-closed-short-exact",
+  "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+  "lem-weil-pbc-sets-etale-iso-on-geometric-stalks",
+  "lemma-openclosed-stalk-lowerstar",
+  "prop-weil-pbc-inverse-image-modules-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q40-83e2c325f",
+  "group": "Q40",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q40-83e2c325f (reviewer sub-agent of L); spot-checked: I read ILO XVII 7.4.2–7.4.7 (printed pp.305–308) next to all nine steps and the statements of every cited node. The item statement and stmt_deps are byte-identical to the Q52-created version. Every step is correct. (1) k_{i!} exact, preserving constructibility, class membership and filtered colimits: j_! exactness and stalks, plus the trf closed-subtopos node (exact, fully faithful, essential image j*M=0) and the closed-pushforward stalk node. (2) Torsion-local-system monodromy and descent-monodromy θ identify the one-stratum class with π1(V)-ind-unipotent discrete modules; finite orbit spans give the directed union; the final clause gives lcc ⇔ f.g. stalk. (3) There are finitely many simple F_ℓ[K_i]-modules, chosen before A. (4) The 7.4.7 node applies with B=Λ[K_i]. The report is right that ILO's printed B=A[K] is a typo. The mixed tensor clause of cover descent gives N_S⊗T(L0). (5) The projection map is an isomorphism on stalks (pod stalk-tensor, 03PU). (6) Open/closed recursion with exact-refinement closure. (7)–(8) The 7.4.4 pushout argument and the induction on strata are correct. The indexing poset is closed under finite sums, which are constructible by Step 2, and is small. New node lem-per-constructible-extension-finite-stage: it is true, equivalent to colim Ext¹(G,H_a)=Ext¹(G,H) plus the snake lemma and the pushout. I checked it via the j_!-generator resolution and qcqs H¹–colimit commutation, and on a point, X empty, G=0 and H=0. It is statement-only and self-contained. It is not a duplicate: the existing nodes give sheaf-Ext continuity, internal RHom with coproducts, condensed pro-étale O_E, or D_ctf with finite A only. No SGA citation appears in either file. Batch-5 flags are all generic. The trf closed-base localization closure is topos constructions only, and the parent already cites it. The pod stalk tensor is Stacks 008B. The three per monodromy/partition nodes reach pod only through cor-galois-lisse-representations (π1 ↔ lisse correspondence), which neither assumption gives and which is not part of the proof of Poincaré duality. I accepted the generic tool_uses. Maintainer note: when the helper is split later, it must avoid SGA 4 IX 2.7.3 (route lock) and go through Stacks."
  }
 }
