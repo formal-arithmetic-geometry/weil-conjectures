@@ -18,9 +18,99 @@
   "def-weil-abstract-derived-category",
   "def-sfb-site-derived-constant-module-functor"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For a scheme morphism $f:T\\to X$, [sk-def-sfb-coefficient-morphisms] gives the ring isomorphism $\\alpha_f:f^*\\Lambda_X\\xrightarrow{\\sim}\\Lambda_T$ (both rings commutative since $\\Lambda$ is). With $c=\\alpha_f$, [def-weil-pbc-proetale-operations] supplies the exact module inverse image $f^*$ and its unbounded derived functor $Lf^*$, computed termwise, which is triangulated, hence exact. The derived tensor comparison $Lf^*(F\\otimes^L G)\\cong Lf^*F\\otimes^LLf^*G$ is [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]; by [lem-sfb-ringed-derived-monoidal-comparisons] this comparison and the unit comparison $Lf^*\\Lambda_X\\cong\\Lambda_T$ commute with associators, unitors and symmetries, so $Lf^*$ is strong symmetric monoidal for the closed symmetric monoidal structures of [lem-sf-ringed-derived-closed-symmetric-monoidal]. Scalar extension: by [def-zl-condensed-scalar-realization], $\\Lambda_X\\otimes^L_{\\underline R}\\underline P$ (constant-section structure map, constant realization of [def-sfb-site-derived-constant-module-functor]) is $D(p_X^*)(N_P)$, where $N_P=D(e^{-1})Lc^*\\underline P\\in D(\\operatorname{Mod}_\\Lambda)$ is formed on the point and does not depend on $X$; likewise for $T$ with the same $N_P$. For a $\\Lambda$-module sheaf $M$ on $*_{\\mathrm{proet}}$, the natural isomorphism $\\varphi_M:f^*p_X^*M\\cong p_T^*M$ of [sk-def-sfb-pullback-from-point-comp] is monoidal and its component at $\\Lambda$ is $\\alpha_f$ by definition of $\\alpha_f$. Applying naturality and monoidality to the action $\\Lambda\\otimes M\\to M$ shows that $\\varphi_M$ carries the $f^{-1}\\Lambda_X$-action on $f^{-1}p_X^*M$, transported along $\\alpha_f$, to the $\\Lambda_T$-action on $p_T^*M$. By the final paragraph of the module construction in [def-weil-pbc-proetale-operations], $f^*(p_X^*M)=f^{-1}p_X^*M\\otimes_{f^{-1}\\Lambda_X,\\alpha_f}\\Lambda_T$ is $f^{-1}p_X^*M$ with exactly this transported action, so $\\varphi$ is a natural isomorphism $f^*\\circ p_X^*\\cong p_T^*$ of functors $\\operatorname{Mod}_\\Lambda\\to\\operatorname{Mod}(\\Lambda_T)$. All functors involved are exact and act termwise on complexes, so $\\varphi$ induces a natural isomorphism $Lf^*\\circ D(p_X^*)\\cong D(p_T^*)$, and evaluating it at $N_P$ gives $Lf^*(\\Lambda_X\\otimes^L_{\\underline R}\\underline P)\\cong\\Lambda_T\\otimes^L_{\\underline R}\\underline P$, natural in $P$.",
+   "uses": [
+    "sk-def-sfb-coefficient-morphisms",
+    "def-weil-pbc-proetale-operations",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-sfb-ringed-derived-monoidal-comparisons",
+    "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "def-zl-condensed-scalar-realization",
+    "def-sfb-site-derived-constant-module-functor",
+    "sk-def-sfb-pullback-from-point-comp"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Section 3 pullback paragraph before (3.1)"
+   }
+  },
+  {
+   "text": "A strong symmetric monoidal functor sends the evaluation and coevaluation maps of a dualizable object to evaluation and coevaluation maps for its image; functoriality of the tensor comparison transports both triangle identities. Hence every scheme inverse image $f^*$ preserves dualizable objects.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Definition 3.3 and the monoidal pullback assertion in Section 3"
+   }
+  },
+  {
+   "text": "Let $\\{u_i:U_i\\to X\\}$ be a pro-etale covering family. By [lem-zl-condensed-cover-restriction-conservative] the derived inverse images $Lu_i^*$, formed with $\\alpha_{u_i}$ of [sk-def-sfb-coefficient-morphisms] as in [def-weil-pbc-proetale-operations], are jointly conservative. They are the restrictions $K\\mapsto K|_{U_i}$ of the statement: clause (1) of [lem-weil-proetale-weakly-etale-localization] identifies $(U_i)_{\\mathrm{proet}}$ with the localized site $X_{\\mathrm{proet}}/U_i$, and clause 1 of [lem-sfb-proetale-object-inverse-image-restriction], which holds for every sheaf of sets, abelian groups or rings with no constancy hypothesis, gives $u_i^{-1}G\\cong G|_{U_i}$ naturally in $G$. In particular $u_i^{-1}\\Lambda_X\\cong\\Lambda_X|_{U_i}$ as rings, and composing with $\\alpha_{u_i}$ gives $\\Lambda_X|_{U_i}\\cong\\Lambda_{U_i}$. By the scalar-transport clause of [def-weil-pbc-proetale-operations], $u_i^*G$ is $u_i^{-1}G\\cong G|_{U_i}$ with its action transported along this ring isomorphism. Since $u_i^*$ is exact and $Lu_i^*$ is termwise, $Lu_i^*K=K|_{U_i}$. The constant-ring clauses ((2) of the localization lemma, 2--3 of the restriction lemma) are not used, since $\\Lambda_X$ need not be a constant sheaf.",
+   "uses": [
+    "lem-zl-condensed-cover-restriction-conservative",
+    "lem-weil-proetale-weakly-etale-localization",
+    "lem-sfb-proetale-object-inverse-image-restriction",
+    "sk-def-sfb-coefficient-morphisms",
+    "def-weil-pbc-proetale-operations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Lemma 4.5 proof, conservativity of restriction to a covering"
+   }
+  },
+  {
+   "text": "Under the identification of Step 3, each $u_i^*$ is the exact derived slice restriction $r$ for $\\mathcal C=X_{\\mathrm{proet}}$, $\\mathcal O=\\Lambda_X$, $U=U_i$. It is strong symmetric monoidal by Step 1, with tensorator the comparison $\\rho$ of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] for the localization morphism. The source and target categories carry the closed symmetric monoidal structures, internal Homs $R\\mathcal Hom$ and natural tensor--Hom bijections $\\operatorname{tr}$ of [lem-sf-ringed-derived-closed-symmetric-monoidal]. The natural isomorphism $h_i=\\eta_{L,M}:r\\,R\\mathcal Hom(L,M)\\cong R\\mathcal Hom_{U_i}(rL,rM)$ is the slice comparison of [lem-weil-pbc-ringed-internal-hom-exact-restriction]. The second displayed identity of [lem-weil-pbc-ringed-slice-evaluation-transpose], $\\operatorname{tr}_U(r(f)\\circ\\rho^{-1})=\\eta\\circ r(\\operatorname{tr}(f))$, is exactly the transpose-preservation hypothesis of [lem-zl-dualizable-jointly-conservative-locality], and its third identity is the symmetry compatibility of the tensorator. With the joint conservativity of Step 3, all hypotheses of [lem-zl-dualizable-jointly-conservative-locality] hold for the family $(u_i^*)_{i\\in I}$.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "lem-weil-pbc-ringed-slice-evaluation-transpose",
+    "lem-zl-condensed-cover-restriction-conservative",
+    "lem-zl-dualizable-jointly-conservative-locality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Lemma 4.5 proof, monoidality, conservativity, and internal Hom"
+   }
+  },
+  {
+   "text": "Applying [lem-zl-dualizable-jointly-conservative-locality] to $K$ and the restrictions $u_i^*$ gives $K$ dualizable if and only if every $K|_{U_i}$ is dualizable. No quasi-compactness or irreducible-component bound is used.",
+   "uses": [
+    "lem-zl-dualizable-jointly-conservative-locality",
+    "lem-zl-condensed-cover-restriction-conservative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Lemma 4.5 and its stated locality conclusion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "sk-def-sfb-coefficient-morphisms",
+  "def-weil-pbc-proetale-operations",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "def-zl-condensed-scalar-realization",
+  "def-sfb-site-derived-constant-module-functor",
+  "sk-def-sfb-pullback-from-point-comp",
+  "lem-zl-condensed-cover-restriction-conservative",
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-sfb-proetale-object-inverse-image-restriction",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-weil-pbc-ringed-slice-evaluation-transpose",
+  "lem-zl-dualizable-jointly-conservative-locality"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Section 3 pullback paragraph before (3.1), Definition 3.3, and Lemma 4.5 proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -59,7 +149,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-zl-condensed-dualizable-local-perfect-models",
@@ -78,5 +168,54 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-zl-condensed-lisse-proetale-locality",
+  "worker": "stage1",
+  "summary": "Repaired the returned split by replacing the underived monoidality citations with the derived tensor-pullback and monoidal-coherence nodes, adding the constant-module inverse-image statement needed for scalar extension, citing pro-etale localization/module restriction in the conservativity step, and citing the derived internal-Hom restriction/evaluation nodes in the locality step. The abstract dualizability helper now states its symmetry, internal-Hom adjunction, and transpose-compatibility hypotheses explicitly. Removed the unsupported profinite-set proof sentence.",
+  "blueprint": "Realizes prop-zl-smooth-proper-relative-purity, Proof Step 3, paragraph beginning “The field-stage projection formula”, and the continuous-coefficient realization in lem-zl-adic-hom-tensor-lisse-criterion; the repaired steps implement the Hemo–Richarz–Scholbach Section 3 pullback paragraph, Definition 3.3, and Lemma 4.5 proof.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Foundational derived tensor/pullback comparison used to establish strong monoidality of pro-etale restriction; the locality unit has no replacement for this generic ringed-topos interface."
+   },
+   {
+    "node": "lem-sfb-ringed-derived-monoidal-comparisons",
+    "why": "Generic associator, unit, symmetry, and pullback-composition coherence used for derived restriction and scalar extension; no node in the locality unit supplies this infrastructure."
+   },
+   {
+    "node": "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "why": "Generic closed symmetric monoidal structure on ordinary derived module categories used by the dualizability criterion."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "why": "Generic derived internal-Hom restriction comparison used for the local Hom hypothesis."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-slice-evaluation-transpose",
+    "why": "Generic slice evaluation and tensor-Hom transpose compatibility used to verify the local closed-monoidal comparison."
+   },
+   {
+    "node": "lem-sfb-proetale-object-inverse-image-restriction",
+    "why": "Generic clause 1 (inverse image along an object of X_proet is restriction, for any sheaf of sets, groups or rings) identifies Lu_i^* with restriction; no node of the unit states it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-weil-pbc-ringed-slice-evaluation-transpose",
+  "lem-sfb-proetale-object-inverse-image-restriction"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q36-ba7553628",
+  "group": "Q36",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q36-ba7553628 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, every cited statement, the citers' steps that use the item, the unit route, and HRS arXiv 2305.18131. In HRS I checked §3 (Λ_X=p_X^{-1}Λ, the paragraph 'f^*=f^{-1} … exact, t-exact and symmetric monoidal'), (3.1), Remark 3.2, Def. 3.3 and Lemma 4.5 with its proof ('monoidal, conservative and commutes with inner homomorphisms'). The coefficient category and pullback are HRS's: ordinary D(T_proet,Λ_T), with f^* taken along α_f. Lisse means dualizable, which is a homotopy-category notion. The arbitrary-cover form is true by the same argument. Nothing is weakened and no SGA is used. Tested cases: K=0, X=∅ with the empty cover, identity and infinite covers, Λ=Z with ⊕_N Λ (not dualizable), and I=∅ in the abstract lemma (C is a groupoid and ν is invertible). Both new nodes are true and statement-only, and neither restates an item clause. The finite-discrete lem-cbc-proetale-stalk-conservative is only a special case of the new conservativity node. Three faults, all repaired in fixes/: (C4) Steps 1 and 3 cited constant-ring nodes for the condensed ring Λ_X: lem-pe-constant-left-module-inverse-image, localization clause (2), restriction clauses 2–3. Step 3 now uses localization clause (1), restriction clause 1 (any sheaf of rings), α_{u_i} and the scalar transport of def-weil-pbc-proetale-operations, and the conservativity node now defines u_i^*=Lu_i^*. (B3) The abstract helper used symmetric monoidal, strong symmetric monoidal and jointly conservative without defining them. They are now defined inline, with def-sfb-strong-monoidal-functor cited and an explicit transpose formula. (E5) The ring-map compatibility in the scalar-extension clause was only gestured at. Step 1 now argues it through def-zl-condensed-scalar-realization and the monoidal isomorphism f^*p_X^*≅p_T^* of sk-def-sfb-pullback-from-point-comp, whose component at Λ is α_f; there is no cycle. Step 4 now matches each hypothesis of the helper (η from lem-weil-pbc-ringed-internal-hom-exact-restriction; second and third identities of lem-weil-pbc-ringed-slice-evaluation-transpose). Accepted tool_uses: lem-sfb-ringed-derived-monoidal-comparisons and lem-sfb-proetale-object-inverse-image-restriction (added). The item statement is unchanged.; 3 file(s) fixed by the reviewer"
  }
 }
