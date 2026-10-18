@@ -20,9 +20,154 @@
   "def-weil-pbc-constant-sheaf",
   "def-weil-abstract-derived-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $H=R\\mathcal Hom_A(K,Y)$, $F(C)=C_X\\otimes^L_AH$ and $G(C)=R\\mathcal Hom_A(K,C_X\\otimes^L_AY)$. The hypothesis with $M=A$ gives $H\\in D^{[d,e]}$. Choose $r$ with $K\\in D^{\\le r}$ and $[a,b]$ a Tor interval for $Y$. Constant module sheafification is exact by [lem-weil-pbc-finite-type-constant-exact]; hence it sends cone triangles of ordinary complexes to cone triangles. Derived tensor is triangulated by [lem-kun-derived-tensor-triangulated], and derived internal Hom is exact and shift-compatible by [lem-weil-pbc-ringed-internal-hom-exact-restriction]. Thus $F,G$ are exact functors. Use throughout the actual $u_C$ in the statement: transpose $K\\otimes^L(C_X\\otimes^LH)\\to C_X\\otimes^LY$ obtained from evaluation and signed symmetry. Naturality of evaluation and of transposition gives the comparison squares for every coefficient map; the same construction on cone complexes, with the tensor differential and its signed symmetry, gives a morphism of cone triangles. No arbitrary choice of an isomorphism replaces $u_C$.",
+   "uses": [
+    "lem-weil-pbc-finite-type-constant-exact",
+    "lem-kun-derived-tensor-triangulated",
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "def-kun-derived-tensor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVII, Proposition 10.1.1, proof p. 325, definition of the canonical morphism; exact functor conventions."
+   }
+  },
+  {
+   "text": "Let $V=\\bigoplus_{i\\in I}A$ be any free ordinary module, including $I=\\varnothing$. Its constant sheaf is $\\bigoplus_I A_X$: both are sheafifications of the constant-presheaf direct sum [def-weil-pbc-constant-sheaf]. Tensor commutes with these sums by [lem-weil-pbc-independent-sheaf-tensor-colimits]. A free sheaf is flat since its tensor functor is a sum of identity functors; placed in degree zero it is a bounded-above flat complex, hence K-flat by [lem-pc-bounded-above-flat-kflat-site], so by [def-kun-derived-tensor] the degree-zero free tensor computes the derived tensor. Consequently $F(V)=\\bigoplus_I H$ and $V_X\\otimes^LY=\\bigoplus_IY$. The family of copies of $Y$ has common lower bound $a$. Apply [lem-per-constructible-rhom-coproduct-continuity] to identify $G(V)$ with $\\bigoplus_IH$. Under these identifications $u_V$ is the identity: on each basis inclusion $A\\to V$, its transpose is evaluation, hence its restriction is the corresponding coproduct inclusion of $H$. The coproduct universal property determines the map. This proves invertibility for arbitrary-rank free modules, not just finite free ones.",
+   "uses": [
+    "def-weil-pbc-constant-sheaf",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits",
+    "lem-per-constructible-rhom-coproduct-continuity",
+    "lem-pc-bounded-above-flat-kflat-site",
+    "def-kun-derived-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVII, Proposition 10.1.1, proof p. 325, first paragraph, the free-module case."
+   }
+  },
+  {
+   "text": "A projective ordinary module $Q$ is a retract of a free module: take $i:Q\\to V$, $s:V\\to Q$, $si=1$ from [def-weil-pbc-projective-module]. Naturality gives an inverse to $u_Q$, namely $F(s)u_V^{-1}G(i)$; the two composites reduce respectively to $G(si)$ and $F(si)$. Hence $u_Q$ is invertible. For a bounded complex $P$ of projective ordinary modules, induct on the number of possibly nonzero terms using its finite stupid filtration. Each successive triangle adds one shifted projective module, on which the result holds by the retract calculation and shifts. The exact cohomology sequences of [lem-sf-derived-homology-long-exact] give invertibility at the third vertex from invertibility at the other two (or apply [lem-weil-pbc-five-lemma] to each five-term window), and [lem-weil-pbc-unbounded-derived-iso-cohomology] detects the resulting isomorphism. The zero complex starts the induction. Thus $u_P$ is invertible for every bounded projective complex.",
+   "uses": [
+    "def-weil-pbc-projective-module",
+    "lem-sf-derived-homology-long-exact",
+    "lem-weil-pbc-five-lemma",
+    "lem-weil-pbc-unbounded-derived-iso-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVII, Proposition 10.1.1, proof p. 325, end of first paragraph; projective retract variant of the free-complex argument."
+   }
+  },
+  {
+   "text": "For any $E\\in D(A)^{\\le q}$, [lem-weil-pbc-bounded-above-projective-model] gives a projective representative $L$ with $L^j=0$ for $j>q$. Its constant terms are flat: a projective module is a retract of a free module [def-weil-pbc-projective-module], and the corresponding constant sheaf is a retract of a sum of $A_X$; tensor with the sum is exact and a retract preserves exactness. Thus $L_X$ is K-flat by [lem-pc-bounded-above-flat-kflat-site]. Represent $H\\in D^{\\le e}$ by a complex zero above $e$, using [def-sbc-standard-tstructure-derived-category]. The total tensor $L_X\\otimes H$ computes $F(E)$ by [def-kun-derived-tensor], and its degree $j$ is zero for $j>q+e$, since there are no indices $s\\le q$, $t\\le e$ with $s+t=j$. Therefore $F(E)\\in D^{\\le q+e}$. This argument makes no lower boundedness assumption on $E$ or finite-Tor assumption on $H$.",
+   "uses": [
+    "lem-weil-pbc-bounded-above-projective-model",
+    "def-weil-pbc-projective-module",
+    "lem-pc-bounded-above-flat-kflat-site",
+    "def-sbc-standard-tstructure-derived-category",
+    "def-kun-derived-tensor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVII, Proposition 10.1.1, proof p. 325, bound on the left vertical cone, with the total-degree argument expanded."
+   }
+  },
+  {
+   "text": "Now let $C\\in D^b(A)$ and fix an arbitrary integer $q$. Choose a bounded-above projective model $L\\simeq C$ by [lem-weil-pbc-bounded-above-projective-model]. Its brutal subcomplex $P=L^{\\ge q+1}$ is bounded and projective. The map $P\\to C$ has a cone $E\\in D^b(A)^{\\le q}$: its cone is quasi-isomorphic to $L/P$, which is zero in degrees above $q$, and it is bounded in cohomology because both $P,C$ are bounded. Step 4 gives $F(E)\\le q+e$. Apply [lem-pur-bounded-heart-amplitude] to the exact functor $G$ and all ordinary modules, whose images lie in $[d,e]$ by hypothesis. Since $E$ is bounded, it gives $G(E)\\le q+e$ as well. In the natural square from $P\\to C$, the two vertical arrows therefore induce cohomology isomorphisms in every degree $i>q+e+1$, by the long exact sequences [lem-sf-derived-homology-long-exact]. The top comparison $u_P$ is invertible by Step 3, so $H^i(u_C)$ is invertible in that range. For a fixed $i$ choose $q<i-e-1$; this proves invertibility in every degree and hence invertibility of $u_C$ by [lem-weil-pbc-unbounded-derived-iso-cohomology]. Crucially the finite Postnikov bound is applied only to the bounded cone $E$, never to an unbounded-below complex.",
+   "uses": [
+    "lem-weil-pbc-bounded-above-projective-model",
+    "lem-pur-bounded-heart-amplitude",
+    "lem-sf-derived-homology-long-exact",
+    "lem-weil-pbc-unbounded-derived-iso-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVII, Proposition 10.1.1, proof p. 325, bounded-coefficient approximation square and vertical cone bounds."
+   }
+  },
+  {
+   "text": "In particular, for every ordinary module $M$ placed in degree zero, Step 5 and the hypothesis give $M_X\\otimes^LH\\in D^{[d,e]}$. Fix a geometric point $\\bar x$ and any ordinary $A$-module $N$. Take $M=N$. Exactness of geometric stalks [prop-weil-pbc-geometric-stalks-exact], the constant-sheaf stalk $N$ from [lem-weil-pbc-constant-sheaf-geometric-stalk] (the abelian-group isomorphism respects the $A$-action because multiplication by every scalar commutes with coefficient germs), and [lem-sfb-etale-derived-tensor-stalk] give $N\\otimes_A^LH_{\\bar x}\\in D^{[d,e]}$. Now let $B$ be any $A_X$-module sheaf in degree zero and take $N=B_{\\bar x}$ separately at each point. The same derived tensor-stalk isomorphism yields $(B\\otimes^LH)_{\\bar x}=B_{\\bar x}\\otimes_A^LH_{\\bar x}\\in D^{[d,e]}$. Exact stalks and [lemma-weil-pbc-geometric-stalk-conservative] detect zero cohomology sheaves, so $B\\otimes^LH\\in D^{[d,e]}$ globally. This proves the requested Tor amplitude against all module sheaves, not only constant ones.",
+   "uses": [
+    "prop-weil-pbc-geometric-stalks-exact",
+    "lem-sfb-etale-derived-tensor-stalk",
+    "lemma-weil-pbc-geometric-stalk-conservative",
+    "lem-weil-pbc-constant-sheaf-geometric-stalk"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVII, Proposition 10.1.1, proof p. 326, first sentence; its implicit stalkwise finite-Tor test expanded."
+   }
+  },
+  {
+   "text": "We record the bounds needed to pass to $D^+(A)$. By [lem-sp-ringed-site-tor-flat-model], take bounded flat sheaf representatives of $H$ in $[d,e]$ and of $Y$ in $[a,b]$; they are K-flat by [lem-pc-bounded-above-flat-kflat-site]. If $T\\in D(A)^{\\ge t}$, exact constant sheafification [lem-weil-pbc-finite-type-constant-exact] and the standard truncations [def-sbc-standard-tstructure-derived-category] give a representative $T_X$ zero below $t$. Total degrees then give $F(T)\\ge t+d$ and $T_X\\otimes^LY\\ge t+a$. By [lem-weil-pbc-module-sheaves-enough-injectives] and [lem-weil-pbc-dplus-injective-representative], choose for the latter object an injective representative $J$ zero below $t+a$, which is K-injective. Choose a representative of $K$ zero above $r$ by the standard truncation statement. The formula [def-pur-derived-internal-hom] computes $G(T)$ by $\\mathcal Hom^\\bullet(K,J)$; its degree $n$ is a product of $\\mathcal Hom(K^p,J^{p+n})$, all zero when $n<t+a-r$. Thus $G(T)\\ge t+a-r$, uniformly in $T$.",
+   "uses": [
+    "lem-sp-ringed-site-tor-flat-model",
+    "lem-pc-bounded-above-flat-kflat-site",
+    "lem-weil-pbc-finite-type-constant-exact",
+    "def-sbc-standard-tstructure-derived-category",
+    "lem-weil-pbc-module-sheaves-enough-injectives",
+    "lem-weil-pbc-dplus-injective-representative",
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVII, Proposition 10.1.1, proof p. 326, lower bounds on source and target before the final truncation."
+   }
+  },
+  {
+   "text": "Let $C\\in D^+(A)$ and let $n$ tend to $+\\infty$. Its standard triangle [def-sbc-standard-tstructure-derived-category] is $C_n=\\tau_{\\le n}C\\to C\\to T_n\\to C_n[1]$, where $C_n$ is bounded and $T_n\\ge n+1$. Step 7 gives $F(T_n)\\ge n+1+d$ and $G(T_n)\\ge n+1+a-r$. For a fixed degree $i$, choose $n$ so large that $i<n+1+\\min(d,a-r)$. The long exact sequences [lem-sf-derived-homology-long-exact] show that $H^iF(C_n)\\to H^iF(C)$ and $H^iG(C_n)\\to H^iG(C)$ are both isomorphisms. Naturality of the specified comparison gives a commuting square with these two maps and $u_{C_n},u_C$. Step 5 makes $u_{C_n}$ invertible, so $H^i(u_C)$ is invertible. Varying $i$ and using [lem-weil-pbc-unbounded-derived-iso-cohomology] proves that $u_C$ is invertible. The map has remained the evaluation transpose from Step 1 throughout. Evaluation, signed symmetry and transposition are natural in $K,Y,C$; consequently the isomorphisms just proved are natural in all three variables. No perfection or finite Tor amplitude of $C$ was used.",
+   "uses": [
+    "def-sbc-standard-tstructure-derived-category",
+    "lem-sf-derived-homology-long-exact",
+    "lem-weil-pbc-unbounded-derived-iso-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVII, Proposition 10.1.1, proof p. 326, final truncation argument."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-constant-exact",
+  "lem-kun-derived-tensor-triangulated",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "def-kun-derived-tensor",
+  "def-weil-pbc-constant-sheaf",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits",
+  "lem-per-constructible-rhom-coproduct-continuity",
+  "def-weil-pbc-projective-module",
+  "lem-sf-derived-homology-long-exact",
+  "lem-weil-pbc-five-lemma",
+  "lem-weil-pbc-unbounded-derived-iso-cohomology",
+  "lem-weil-pbc-bounded-above-projective-model",
+  "lem-pc-bounded-above-flat-kflat-site",
+  "def-sbc-standard-tstructure-derived-category",
+  "lem-pur-bounded-heart-amplitude",
+  "prop-weil-pbc-geometric-stalks-exact",
+  "lem-sfb-etale-derived-tensor-stalk",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "lem-weil-pbc-constant-sheaf-geometric-stalk",
+  "lem-sp-ringed-site-tor-flat-model",
+  "lem-weil-pbc-module-sheaves-enough-injectives",
+  "lem-weil-pbc-dplus-injective-representative",
+  "def-pur-derived-internal-hom"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose XVII, proof of Proposition 10.1.1, pp. 325-326, uniformly bounded alternative; projective retracts, stalkwise Tor detection and the final degree bounds expanded."
+ },
  "mathlib_searches": [
   {
    "tool": "loogle",
@@ -79,10 +224,38 @@
    "results": "10 hits; top: Mathlib/Data/Set/Defs.lean, Mathlib/AlgebraicTopology/ModelCategory/FibrantObjectHomotopy.lean, Mathlib/Algebra/Homology/HomotopyFiber.lean, Mathlib/CategoryTheory/Adjunction/PartialAdjoint.lean, Mathlib/CategoryTheory/Category/Cat/Op.lean, Mathlib/Analysis/InnerProductSpace/Dual.lean, Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean; note: ; digest: c6515e968d6b823f",
    "date": "2026-10-18",
    "verdict": "no match: results concern underived module/sheaf Hom, general derived bounds, or scheme/ring finiteness, not the stated etale constructible theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Uniform bounds for derived sheaf Hom with all constant module coefficients imply tensor Hom coefficient comparison and finite Tor amplitude",
+   "results": "8 hits; top: SheafOfModules.isFinitePresentation, SheafOfModules.IsFinitePresentation, SheafOfModules.IsFiniteType, SheafOfModules.QuasicoherentData.IsFinitePresentation, LightCondensed.free_internallyProjective_iff_tensor_condition, LightCondensed.internallyProjective_iff_tensor_condition, LightCondensed.internallyProjective_iff_tensor_condition', LightCondensed.free_internallyProjective_iff_tensor_condition'; note: ; digest: dc106e19a5b6721c",
+   "date": "2026-10-18",
+   "verdict": "no match: sheaf colimits, ordinary sheaf Hom and generic derived-category infrastructure do not assert constructible internal-Hom coproduct continuity on the etale site for an arbitrary Noetherian coefficient ring"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived internal Hom commutes with constant coefficients tensor under uniform boundedness hypotheses",
+   "results": "8 hits; top: UniformFun.continuousSMul_induced_of_range_bounded, ContinuousMultilinearMap.instUniformContinuousConstSMul, BoundedContinuousFunction.instSMulCommClass, BoundedContinuousFunction.instSMulCommClass_1, LightCondensed.ihomPoints, ContinuousAlternatingMap.instUniformContinuousConstSMul, BoundedContinuousFunction.instSMulCommClass_2, ContinuousMultilinearMap.toUniformOnFun; note: ; digest: bfceea8019e970a7",
+   "date": "2026-10-18",
+   "verdict": "no match: sheaf colimits, ordinary sheaf Hom and generic derived-category infrastructure do not assert constructible internal-Hom coproduct continuity on the etale site for an arbitrary Noetherian coefficient ring"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"tensor\", \"hom\", \"Derived\"",
+   "results": "0 hits; top: ; note: ; digest: 4f53cda18c2baa0c",
+   "date": "2026-10-18",
+   "verdict": "no match: sheaf colimits, ordinary sheaf Hom and generic derived-category infrastructure do not assert constructible internal-Hom coproduct continuity on the etale site for an arbitrary Noetherian coefficient ring"
+  },
+  {
+   "tool": "grep",
+   "query": "universal.coefficient|RHom|internalHom.*colimit",
+   "results": "25 hits; top: Mathlib/RepresentationTheory/Character.lean, Mathlib/RepresentationTheory/Coinduced.lean, Mathlib/NumberTheory/Padics/Measure/Basic.lean, Mathlib/Algebra/Algebra/Unitization.lean, Mathlib/Algebra/Algebra/Unitization.lean, Mathlib/RepresentationTheory/Intertwining.lean, Mathlib/RepresentationTheory/Intertwining.lean, Mathlib/RepresentationTheory/Intertwining.lean; note: ; digest: e3ca0b3dcd2afac3",
+   "date": "2026-10-18",
+   "verdict": "no match: sheaf colimits, ordinary sheaf Hom and generic derived-category infrastructure do not assert constructible internal-Hom coproduct continuity on the etale site for an arbitrary Noetherian coefficient ring"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-ctf-hom-coefficient-comparison",
@@ -105,5 +278,109 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-per-ctf-hom-universal-coefficients",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged. Expanded the ILO approximation proof in eight steps, with one statement-only continuity input; all amplitude, stalk, resolution and truncation tools reuse existing nodes. Distinguished bounded approximation cones from unbounded coefficient tails.",
+  "blueprint": "Proof, Step 1 of lem-per-artin-gabber-affine-curve: 'Relative Verdier duality, biduality ... over the same arbitrary field $k$', through lem-per-qbar-arbitrary-field-duality, lem-per-finite-residue-dualizing and lem-per-potential-local-duality; the last node's Step 2 extends finite-field coefficients.; coefficient comparison via ILO XVII 7.6.1, proof p. 314. Realizes the universal-coefficients input in the coefficient extension underlying arbitrary-field duality; ILO XVII 10.1.1 first paragraph is Step 2, bounded comparison is Steps 3-5, finite Tor is Step 6, and final D+ truncation is Steps 7-8.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-type-constant-exact",
+    "why": "General ordinary ringed-site/module derived-category tool used in the indicated proof steps; the perverse-curve unit has no replacement for this resolution, tensor, cohomology or stalk calculation. Its statement is applied with arbitrary Noetherian A, not an adic or condensed substitute."
+   },
+   {
+    "node": "lem-kun-derived-tensor-triangulated",
+    "why": "General ordinary ringed-site/module derived-category tool used in the indicated proof steps; the perverse-curve unit has no replacement for this resolution, tensor, cohomology or stalk calculation. Its statement is applied with arbitrary Noetherian A, not an adic or condensed substitute."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "why": "General ordinary ringed-site/module derived-category tool used in the indicated proof steps; the perverse-curve unit has no replacement for this resolution, tensor, cohomology or stalk calculation. Its statement is applied with arbitrary Noetherian A, not an adic or condensed substitute."
+   },
+   {
+    "node": "lem-weil-pbc-independent-sheaf-tensor-colimits",
+    "why": "General ordinary ringed-site/module derived-category tool used in the indicated proof steps; the perverse-curve unit has no replacement for this resolution, tensor, cohomology or stalk calculation. Its statement is applied with arbitrary Noetherian A, not an adic or condensed substitute."
+   },
+   {
+    "node": "lem-sf-derived-homology-long-exact",
+    "why": "General ordinary ringed-site/module derived-category tool used in the indicated proof steps; the perverse-curve unit has no replacement for this resolution, tensor, cohomology or stalk calculation. Its statement is applied with arbitrary Noetherian A, not an adic or condensed substitute."
+   },
+   {
+    "node": "lem-weil-pbc-five-lemma",
+    "why": "General ordinary ringed-site/module derived-category tool used in the indicated proof steps; the perverse-curve unit has no replacement for this resolution, tensor, cohomology or stalk calculation. Its statement is applied with arbitrary Noetherian A, not an adic or condensed substitute."
+   },
+   {
+    "node": "lem-weil-pbc-unbounded-derived-iso-cohomology",
+    "why": "General ordinary ringed-site/module derived-category tool used in the indicated proof steps; the perverse-curve unit has no replacement for this resolution, tensor, cohomology or stalk calculation. Its statement is applied with arbitrary Noetherian A, not an adic or condensed substitute."
+   },
+   {
+    "node": "lem-weil-pbc-bounded-above-projective-model",
+    "why": "General ordinary ringed-site/module derived-category tool used in the indicated proof steps; the perverse-curve unit has no replacement for this resolution, tensor, cohomology or stalk calculation. Its statement is applied with arbitrary Noetherian A, not an adic or condensed substitute."
+   },
+   {
+    "node": "lem-pc-bounded-above-flat-kflat-site",
+    "why": "General ordinary ringed-site/module derived-category tool used in the indicated proof steps; the perverse-curve unit has no replacement for this resolution, tensor, cohomology or stalk calculation. Its statement is applied with arbitrary Noetherian A, not an adic or condensed substitute."
+   },
+   {
+    "node": "lem-pur-bounded-heart-amplitude",
+    "why": "General ordinary ringed-site/module derived-category tool used in the indicated proof steps; the perverse-curve unit has no replacement for this resolution, tensor, cohomology or stalk calculation. Its statement is applied with arbitrary Noetherian A, not an adic or condensed substitute."
+   },
+   {
+    "node": "prop-weil-pbc-geometric-stalks-exact",
+    "why": "General ordinary ringed-site/module derived-category tool used in the indicated proof steps; the perverse-curve unit has no replacement for this resolution, tensor, cohomology or stalk calculation. Its statement is applied with arbitrary Noetherian A, not an adic or condensed substitute."
+   },
+   {
+    "node": "lem-sfb-etale-derived-tensor-stalk",
+    "why": "General ordinary ringed-site/module derived-category tool used in the indicated proof steps; the perverse-curve unit has no replacement for this resolution, tensor, cohomology or stalk calculation. Its statement is applied with arbitrary Noetherian A, not an adic or condensed substitute."
+   },
+   {
+    "node": "lemma-weil-pbc-geometric-stalk-conservative",
+    "why": "General ordinary ringed-site/module derived-category tool used in the indicated proof steps; the perverse-curve unit has no replacement for this resolution, tensor, cohomology or stalk calculation. Its statement is applied with arbitrary Noetherian A, not an adic or condensed substitute."
+   },
+   {
+    "node": "lem-sp-ringed-site-tor-flat-model",
+    "why": "General ordinary ringed-site/module derived-category tool used in the indicated proof steps; the perverse-curve unit has no replacement for this resolution, tensor, cohomology or stalk calculation. Its statement is applied with arbitrary Noetherian A, not an adic or condensed substitute."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-enough-injectives",
+    "why": "General ordinary ringed-site/module derived-category tool used in the indicated proof steps; the perverse-curve unit has no replacement for this resolution, tensor, cohomology or stalk calculation. Its statement is applied with arbitrary Noetherian A, not an adic or condensed substitute."
+   },
+   {
+    "node": "lem-weil-pbc-dplus-injective-representative",
+    "why": "General ordinary ringed-site/module derived-category tool used in the indicated proof steps; the perverse-curve unit has no replacement for this resolution, tensor, cohomology or stalk calculation. Its statement is applied with arbitrary Noetherian A, not an adic or condensed substitute."
+   },
+   {
+    "node": "lem-weil-pbc-constant-sheaf-geometric-stalk",
+    "why": "The ordinary etale constant-sheaf stalk formula supplies every ordinary module as the stalk of its constant sheaf in the Tor test; no perverse-curve-specific replacement is available."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-type-constant-exact",
+  "lem-kun-derived-tensor-triangulated",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits",
+  "lem-sf-derived-homology-long-exact",
+  "lem-weil-pbc-five-lemma",
+  "lem-weil-pbc-unbounded-derived-iso-cohomology",
+  "lem-weil-pbc-bounded-above-projective-model",
+  "lem-pc-bounded-above-flat-kflat-site",
+  "lem-pur-bounded-heart-amplitude",
+  "prop-weil-pbc-geometric-stalks-exact",
+  "lem-sfb-etale-derived-tensor-stalk",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "lem-sp-ringed-site-tor-flat-model",
+  "lem-weil-pbc-module-sheaves-enough-injectives",
+  "lem-weil-pbc-dplus-injective-representative",
+  "lem-weil-pbc-constant-sheaf-geometric-stalk"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q58-551a55593",
+  "group": "Q58",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q58-551a55593 (reviewer sub-agent of L); spot-checked: I read ILO XVII Prop. 10.1.1 and its whole proof (pp. 325-326). The item statement is unchanged from its creating delivery and matches the uniformly bounded alternative hypothesis by hypothesis; no target was weakened. All 8 steps check against the cited statements. Step 3: I checked both retract composites (F(s)u_V^{-1}G(i)). Step 4: a bounded-above projective model plus K-flat gives F(E)<=q+e, so heart amplitude is never applied to F (that would be circular before Step 6). Step 5: the long exact sequence gives isomorphisms for i>q+e+1, matching ILO's i>=q+N+2; heart amplitude is applied only to G on the bounded cone. Step 6: stalkwise derived tensor with N=B_x gives the Tor test against all sheaves. Steps 7-8: the lower bounds t+d and t+a-r follow from the Hom-complex indices p<=r and p+n>=t+a. New node lem-per-constructible-rhom-coproduct-continuity: statement only and self-contained; it is ILO's first-paragraph Ext continuity and is true (resolution by finite sums of j_!A_U plus the uniform lower bound; empty family and K=0 checked). It does not restate the item. It is not a duplicate of sk-lem-constructible-ext-continuity (condensed coefficients), det-ctf-finite-compact-etale or lem-pur-etale-finite-ring-compact-generators (finite rings, global Hom), lem-per-ind-etale-derived-hom-continuity, or det-lem-constructible-ext-continuity-devissage. Batch-5 flag: lem-sfb-etale-derived-tensor-stalk reaches PD only through lem-pod-etale-stalk-tensor-scalar (Stacks 008B stalk of a tensor product); that is generic sheaf algebra, not a PD proof step, so it is accepted. All tool_uses (generic derived/ringed-site facts) are accepted. No SGA source is used. FIX (C1/C4): Step 2 used K-flatness of a free sheaf in degree 0 to compute the derived tensor without citing it; it now cites lem-pc-bounded-above-flat-kflat-site and def-kun-derived-tensor, and proof_deps is unchanged. Maintainer note: the worker reports that lem-weil-pbc-finite-type-constant-exact cites Tag 093U where its statement is 093J.; 1 file(s) fixed by the reviewer"
  }
 }
