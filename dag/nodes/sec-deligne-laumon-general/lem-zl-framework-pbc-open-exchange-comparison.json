@@ -28,9 +28,228 @@
   "def-kun-topological-krull-dimension",
   "pqf-def-locnoeth"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work first over $R=\\mathcal O_E$. Its discrete valuation ring property and the finite perfect quotients $A_n$ are [lem-weil-l-adic-extension-integers-dvr, lem-weil-pbc-standard-quotients-perfect]; thus the adic datum is applicable. By [def-pur-completed-coefficient-presentation-transport], $J_W$ is restriction along the specified completed ring isomorphism, retaining all finite projections. By [lem-weil-pbc-integral-stratified-perfect-characterization], it restricts to precisely the two full constructible categories in the statement. Its hypotheses hold at every corner and at $T,T_V$: Noetherian and finite-dimensional are explicit assumptions, and $\\ell$ is a unit since these are $k$-schemes. In particular $J_XK$ has compatible bounded-below etale-origin witnesses, by the definition [def-weil-pbc-bounded-constructible-complete]. This does not impose a uniform finite-Tor bound on the $A_n$-complexes.",
+   "uses": [
+    "lem-weil-l-adic-extension-integers-dvr",
+    "lem-weil-pbc-standard-quotients-perfect",
+    "def-pur-completed-coefficient-presentation-transport",
+    "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "def-weil-pbc-bounded-constructible-complete"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-field/thm-cbc-qbar.proof.md",
+    "place": "Agent supplement: fix the integral presentation before common-stage descent"
+   }
+  },
+  {
+   "text": "Make all identifications on whole strict diagrams. In either presentation choose one flat-term K-flat representative $Q$ and the simultaneous quotients $Q\\otimes_R A_n$, with transition $1\\otimes(A_{n+1}\\twoheadrightarrow A_n)$. The specified coefficient isomorphism sends each quotient projection to the same projection. On a scheme edge the two coefficient structure maps agree: their composites with every finite projection send a constant coefficient to that same coefficient, so the universal property of the inverse limit identifies the maps. The scheme-edge coefficient maps are isomorphisms by [lem-weil-pbc-profinite-coefficient-inverse-image]. Restriction along a ring isomorphism is exact, preserves products and K-injectives, and is identity on underlying sections with their transported action. Apply [lem-weil-pbc-flat-ringed-diagram-restriction] with these ring isomorphisms and indexing category $\\mathbf N_{\\ge1}^{op}$. It compares direct images and inverse images as diagram functors and preserves their adjuncts. On open extension the same assertion follows directly from the sheafified extension presheaf: changing the scalar action changes neither its sections nor its unit and counit. Thus these are comparisons of diagram operations and adjunctions, including transitions, rather than comparisons chosen after evaluation.",
+   "uses": [
+    "def-pur-completed-coefficient-presentation-transport",
+    "lem-weil-pbc-flat-ringed-diagram-restriction",
+    "lem-weil-pbc-profinite-coefficient-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-field/thm-cbc-qbar.proof.md",
+    "place": "Agent supplement: coefficient-presentation transport on strict diagrams"
+   }
+  },
+  {
+   "text": "For a quasi-compact open $j:X\\hookrightarrow T$, let $M=j_!J_XK$. The completed-open theorem [lem-cbc-completed-extension-zero-comparison] says that $M$ is complete. Its strict reduction diagram is canonically $j_!(J_XK)_\\bullet$. To see the normalization, the module tensor comparison [lem-weil-pbc-ringed-slice-extension-tensor] gives the map on flat representatives; $j_!$ preserves K-flatness because its tensor with an acyclic complex is $j_!$ of the tensor with its exact restriction. At every transition the tensor map sends a section tensored with $a$ to the same section tensored with the quotient of $a$; therefore it is a map of quotient diagrams. By [prop-weil-pbc-koszul-reconstruction], the canonical quotient completion map consequently gives $\\rho_{j,K}:j_!J_XK\\xrightarrow{\\sim}R\\lim j_!(J_XK)_\\bullet$. Use the specified strict-limit comparison, not a choice of a triangle: [lem-sf-strict-roos-derived-limit-comparison] identifies the framework cone with total derived limit, naturally and with the same projections. Its product-exactness hypothesis is [lem-weil-proetale-countable-products-exact]. The construction also applies to $j_V$. For later composition coherence, $j_!$ also preserves products: choose a closed complement $i$ by [lem-weil-pbc-closed-subset-closed-subscheme]. The exact open/closed sequence of [lem-weil-pbc-proetale-ringed-open-closed], applied to $j_*F$, identifies $j_!F$ with $\\ker(j_*F\\to i_*i^{-1}j_*F)$. Right adjoints $j_*,i_*$ preserve products; $i^{-1}$ does so by [lem-weil-pbc-proetale-immersion-limit-preservation], with coefficients $i^{-1}R_T$. Products preserve kernels, giving the required product comparison. This proves the module version of Stacks 09BP and supplies the hypothesis used in Step 9.",
+   "uses": [
+    "lem-cbc-completed-extension-zero-comparison",
+    "lem-weil-pbc-ringed-slice-extension-tensor",
+    "lem-sf-strict-roos-derived-limit-comparison",
+    "lem-weil-proetale-countable-products-exact",
+    "prop-weil-pbc-koszul-reconstruction",
+    "lem-weil-pbc-closed-subset-closed-subscheme",
+    "lem-weil-pbc-proetale-ringed-open-closed",
+    "lem-weil-pbc-proetale-immersion-limit-preservation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09BP, lemma-j-shriek-limits; completed-open reconstruction with the canonical quotient maps"
+   }
+  },
+  {
+   "text": "Let $c_p:Rp_*R\\lim N_\\bullet\\xrightarrow{\\sim}R\\lim Rp_*^{\\operatorname{Tow}}N_\\bullet$ be exactly [prop-weil-pbc-direct-image-limits]. Set $b_f=Rp_*(\\rho_{j,K}^{-1})\\circ c_p^{-1}$ after the diagram identifications of Step 2 and the framework definition [def-weil-integral-rational-qbar-compact-support]. Step 2 only handles ring isomorphisms; the framework levels $\\operatorname{Res}_nRp_{*,A_n}j_!K_n$ are identified with the evaluations of $Rp_*^{\\operatorname{Tow}}$ on the restricted tower $j_!(J_XK)_\\bullet$ by [lem-pur-completed-coefficient-pushforward-comparison]: its comparison $F_RV_{X,n}\\cong V_{Y,n}F_n$ is a comparison of derived strict-diagram functors, compatible with restriction along $A_m\\to A_n$, so it carries the quotient transitions. This has source $J_YF_f^{\\mathrm{sf}}K$ and target $Rp_*j_!J_XK$. The transition in the framework definition is the image of the actual quotient transition under this same composite: its scalar-restriction comparison is the canonical one of [lem-sf-compact-support-restriction-of-scalars], coherent for successive quotients. Thus the entire diagram, not merely the list of values, is the one used in $c_p$. Define $b_{f_V}$ in the same way. Naturality follows from that of $\\rho$ and $c_p$. Both sides restrict to the claimed constructible categories, since [lem-cbc-integral-compact-support-uniform-restriction] applies to $f$ and $f_V$, and Step 1 identifies these categories.",
+   "uses": [
+    "prop-weil-pbc-direct-image-limits",
+    "lem-pur-completed-coefficient-pushforward-comparison",
+    "def-weil-integral-rational-qbar-compact-support",
+    "lem-sf-compact-support-restriction-of-scalars",
+    "lem-cbc-integral-compact-support-uniform-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A07, lemma-Rf-commutes-with-Rlim; specified direct-image/total-limit comparison"
+   }
+  },
+  {
+   "text": "For $s=u,v$, the framework construction [def-weil-derived-pullback-tensor-hom] and the PBC construction [def-weil-pbc-completed-pullback] apply the same finite module pullbacks to the simultaneous quotient diagram. Under Step 2 the coefficient maps have the same components. Apply [lem-cbc-adic-pullback-presentation-transport]: its identity on balanced tensors gives a derived strict-diagram isomorphism, and its total-limit image defines $a_s$. That lemma also identifies the quotient augmentation and its completion unit, so this is precisely the stipulated normalization. Use the natural Roos/total-limit identification of Step 3 on the framework side. These are isomorphisms of completed pullback functors. For their identity/composition and scalar comparisons use [lem-trf-integral-pullback-comparison-realization], whose comparisons are defined using the counit of the whole quotient diagram and are associative and unital. This result is stated for arbitrary scheme morphisms and has no absolute separatedness or finite-Tor restriction.",
+   "uses": [
+    "def-weil-derived-pullback-tensor-hom",
+    "def-weil-pbc-completed-pullback",
+    "lem-cbc-adic-pullback-presentation-transport",
+    "lem-trf-integral-pullback-comparison-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099N, lemma-pushforward-Noetherian-case (5); completed pullback on the strict reduction diagram"
+   }
+  },
+  {
+   "text": "Write $w:T_V\\hookrightarrow T$. In the constant-$R$ strict-tower model put $N_\\bullet=\\operatorname{Res}(J_XK)_\\bullet$, and denote termwise open extension by $J_j$, inverse image by $G$, and derived diagram direct image by $R_p^{\\mathcal T}$. The ordered diagram map is\n$$e_\\bullet=(R_{p_V}^{\\mathcal T}\\beta_{j,w})\\circ E_p^{\\mathcal T}:G_vR_p^{\\mathcal T}J_jN_\\bullet\\longrightarrow R_{p_V}^{\\mathcal T}J_{j_V}G_uN_\\bullet.$$\nHere $E_p^{\\mathcal T}$ is the mate of the pullback square and $\\beta$ is the open unit-mate, with the normalizations of [lem-cbc-strict-tower-proper-open-calculus]. The framework exchange in the question is exactly the realization of this map: its defining order is proper mate, then open comparison. Step 2 preserves the units and counits forming those mates. Passing from the finite $A_n$-level systems to constant-$R$ towers is restriction along the non-flat $R\\to A_n$. Derived direct image commutes with it on whole diagrams by [lem-pur-completed-coefficient-pushforward-comparison]. Applied on the diagram sites with $R_X=((A_n)_X)_n$, [lem-pur-ringed-coefficient-restriction-counit] carries the finite counits to the constant ones. The units follow by the triangle identities, both comparisons being isomorphisms. Inverse image and $j_!$ act on underlying sheaves. The finite open comparisons commute with quotient transitions as actual complex maps by [lem-cbc-finite-open-exchange-scalars]; hence this identifies the diagram arrow itself. The proper factor is likewise the normalized whole-diagram mate, not a lift characterized by its evaluated arrows.",
+   "uses": [
+    "lem-cbc-strict-tower-proper-open-calculus",
+    "lem-cbc-finite-open-exchange-scalars",
+    "lem-weil-pbc-flat-ringed-diagram-restriction",
+    "lem-pur-completed-coefficient-pushforward-comparison",
+    "lem-pur-ringed-coefficient-restriction-counit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-adic/thm-cbc-complete-proetale.proof.md",
+    "place": "Ordered proper and open factors; identify their strict-diagram lifts"
+   }
+  },
+  {
+   "text": "Apply [lem-cbc-complete-proetale-strict-tower-realization] to $J_XK$, $c$ and its base change by $v$. The hypotheses are now verified: $p$ is proper, $j$ is quasi-compact, $J_XK$ is complete with compatible etale-origin witnesses (Step 1), $j_!J_XK$ is complete and has strict quotient tower $j_!(J_XK)_\\bullet$ (Step 3). That lemma identifies precisely the ordered completed exchange [def-cbc-completed-exchange-map] with $R\\lim(e_\\bullet)$ under its stated coefficient, reduction, direct-image/limit and extension/limit identifications. Its proper normalization uses $H'\\mathcal R(e)H^{-1}$ in the derived diagram category; thus it applies to the particular PBC arrow in the question. The framework arrow of Step 6 and this PBC arrow are images of the same actual diagram map under the endpoint identifications already fixed in Steps 3–5. No base-change invertibility theorem is used.",
+   "uses": [
+    "lem-cbc-complete-proetale-strict-tower-realization",
+    "def-cbc-completed-exchange-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-adic/thm-cbc-complete-proetale.proof.md",
+    "place": "First sentence: the two ordered factors, using the strict-tower realization rather than finite evaluations"
+   }
+  },
+  {
+   "text": "Here is the endpoint calculation. Let $A_\\bullet,B_\\bullet$ be the source and target diagrams of $e_\\bullet$. Write $d_s:J_VP_v^{\\mathrm{sf}}F_f^{\\mathrm{sf}}\\xrightarrow{\\sim}R\\lim A_\\bullet$ and $d_t:J_VF_{f_V}^{\\mathrm{sf}}P_u^{\\mathrm{sf}}\\xrightarrow{\\sim}R\\lim B_\\bullet$ for the framework identifications, and $q_s:P_v^{\\mathrm{pbc}}F_f^{\\mathrm{pbc}}J_X\\xrightarrow{\\sim}R\\lim A_\\bullet$, $q_t:F_{f_V}^{\\mathrm{pbc}}P_u^{\\mathrm{pbc}}J_X\\xrightarrow{\\sim}R\\lim B_\\bullet$ for the PBC identifications. By the definitions in Steps 4–5, with $c_C\\kappa_C=\\operatorname{comp}_C$ ensuring the same quotient units, $q_sS=d_s$ and $q_tT=d_t$. Steps 6–7 say $J_V(\\operatorname{Ex}^{\\mathrm{sf}})=d_t^{-1}R\\lim(e_\\bullet)d_s$ and $\\operatorname{Ex}^{\\mathrm{pbc}}J_X=q_t^{-1}R\\lim(e_\\bullet)q_s$. Consequently\n$$\\operatorname{Ex}^{\\mathrm{pbc}}J_X\\,S=q_t^{-1}R\\lim(e_\\bullet)d_s=T\\,J_V(\\operatorname{Ex}^{\\mathrm{sf}}).$$\nAll identifications are natural, so this componentwise calculation is the required equality of natural transformations.",
+   "uses": [
+    "prop-weil-pbc-koszul-reconstruction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-field/thm-cbc-qbar.proof.md",
+    "place": "Agent supplement: conjugation calculation for the specified endpoints"
+   }
+  },
+  {
+   "text": "For identities and two successive open restrictions, use the pullback composition comparison of Step 5. The proper diagram mate respects composition by [lem-weil-pbc-mate-pasting](1),(2),(4), and the open diagram comparison respects identity and composition by [lem-cbc-strict-tower-proper-open-calculus]. Thus the ordered diagram maps for two restrictions paste to the ordered map for their composite. The endpoint comparisons have the same property: on K-injective towers the proper/limit comparison is the underived equality $p_*\\lim=\\lim p_*$, and on the Roos model the open comparison applies the canonical product comparison to both summands. For composable functors $F,G$, their product comparisons satisfy $\\phi_{FG}=\\phi_F\\circ F(\\phi_G)$ because their composites with each product projection agree. Therefore these endpoint maps also compose. This is the specified comparison of [lem-cbc-exact-product-functor-strict-limit], not an arbitrary cone map. Applying the functorial total limit [prop-weil-pbc-rlim-functoriality] proves identity and iterated-restriction coherence. An isomorphism of the entire diagram acts on the same sections, quotient maps and adjunctions, so the construction commutes with it; none of this uses $k$-linearity of the isomorphism.",
+   "uses": [
+    "lem-weil-pbc-mate-pasting",
+    "lem-cbc-strict-tower-proper-open-calculus",
+    "lem-cbc-exact-product-functor-strict-limit",
+    "prop-weil-pbc-rlim-functoriality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A07, diagram-site proof; identity and composition of the canonical limit comparisons"
+   }
+  },
+  {
+   "text": "Check coefficient extension before passing to common stages. For $E\\subset L$, [lem-weil-finite-free-completed-scalar-comparison] identifies the ordinary completed-coefficient scalar tensor with the framework strict-tower scalar construction by the specified completion map $\\chi$. For proper direct image and completed pullback, use the comparisons and the exchange compatibility of [prop-weil-pbc-scalar-extension]. For open extension use [lem-weil-pbc-ringed-slice-extension-tensor]: tensoring by the finite-free completed $\\mathcal O_L$ coefficient commutes with $j_!$, already on module sheaves; its derived comparison is the same termwise map, since this scalar tensor is exact. It preserves the open unit and counit: after restriction to the open its map is multiplication of coefficients, while on the complementary extension summands both maps are zero. Thus it carries the open unit-mate to the open unit-mate. The presentation comparison uses the balanced-tensor normalization of [def-pur-completed-coefficient-presentation-transport]. Accordingly the two scalar images of each factor of $b,a,e_\\bullet$ agree, including the completion unit; the proper-mate compatibility is the one explicitly asserted in the scalar-extension theorem. For three fields both routes act on pure tensors by $c\\otimes(b\\otimes x)\\mapsto cb\\otimes x$. The coefficient associators and their cocycle are those of [lem-fd-rational-coefficient-category-comparison], and the pullback completion comparisons obey precisely these associators by Step 5. This proves the asserted scalar compatibility without using a theorem limited to absolutely separated schemes or finite-Tor inputs.",
+   "uses": [
+    "lem-weil-finite-free-completed-scalar-comparison",
+    "prop-weil-pbc-scalar-extension",
+    "lem-weil-pbc-ringed-slice-extension-tensor",
+    "def-pur-completed-coefficient-presentation-transport",
+    "lem-fd-rational-coefficient-category-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-field/thm-cbc-qbar.proof.md",
+    "place": "Scalar extension through proper direct image and open extension, before common-stage descent"
+   }
+  },
+  {
+   "text": "At $E$ take the raw scalar localizations of all the integral functors, comparisons and equations. This is exactly the equivalence prescribed by [lem-fd-rational-coefficient-category-comparison] and the field construction of [def-weil-integral-rational-qbar-compact-support]. Each isomorphism retains its localized inverse. The integral naturality equation is $R$-linear, so after tensoring Hom groups with $E$ it is natural for every localized arrow; sums follow by additivity. Applying the localization functor to the equation of Step 8 proves it at $E$, and applying it to Steps 9–10 preserves their composition and coefficient equations.",
+   "uses": [
+    "lem-fd-rational-coefficient-category-comparison",
+    "def-weil-integral-rational-qbar-compact-support"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-field/thm-cbc-qbar.proof.md",
+    "place": "Raw rationalization of the specified integral arrows"
+   }
+  },
+  {
+   "text": "At $\\Omega$, represent an object by $(E,K)$ and an arrow over a common finite extension $L$. Define $a,b$ by their $L$-components, conjugated by the coefficient maps $j_{W,L/E}$ of [lem-fd-rational-coefficient-category-comparison]. Step 10 says that further extension to $L'$ gives the same representatives, with the stipulated associators, so these are well-defined maps in the Hom colimits. Their inverse representatives descend likewise. Naturality and the equation of Step 8 hold over $L$ by Step 11 and hence in the colimit. Every identity, pasting or scalar-associator equation involves finitely many representatives; put them over one common finite field and apply Steps 9–11. The intermediate comparison and its inverse cancel. This proves precisely the common-stage assertions, without changing either category by a Karoubi completion.",
+   "uses": [
+    "lem-fd-rational-coefficient-category-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-field/thm-cbc-qbar.proof.md",
+    "place": "Common-stage descent of functors and exchange transformations"
+   }
+  },
+  {
+   "text": "Finally suppose the diagram descends to $k_0$. Its geometric-Frobenius automorphisms form an isomorphism of the entire compactification/open diagram. The naturality established in Step 9 therefore intertwines the Frobenius exchange comparisons on the two presentations; Steps 11–12 give the same assertion at field coefficients. The equivalence's pullback comparison for scheme isomorphisms is exactly that of [lem-fd-rational-coefficient-category-comparison], normalized by the same quotient diagram as $a$. For a Weil pair $(K,\\theta)$, its induced compact-support Weil arrow is the Frobenius exchange followed by $F_f(\\theta)$. Naturality of $b_f$ for $\\theta$, composed with the preceding intertwining square, gives\n$$b_{f,K}\\,J_Y(\\theta_{F_f^{\\mathrm{sf}}K})=\\theta_{F_f^{\\mathrm{pbc}}J_XK}\\,P_{g_Y}^{\\mathrm{pbc}}(b_{f,K})$$\nwith the specified comparison $J_YP_{g_Y}^{\\mathrm{sf}}\\cong P_{g_Y}^{\\mathrm{pbc}}J_Y$ inserted on the source. This is exactly the intertwining condition of [def-weil-weil-sheaf-complex]. The identical argument for $a$ and the exchange equation identifies the induced Weil structures throughout. Scheme isomorphisms, not absolute separatedness over $k$, are what this argument uses.",
+   "uses": [
+    "lem-fd-rational-coefficient-category-comparison",
+    "def-weil-weil-sheaf-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-field/thm-cbc-qbar.proof.md",
+    "place": "Agent supplement: apply semilinear diagram naturality to geometric Frobenius"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-pbc-standard-quotients-perfect",
+  "def-pur-completed-coefficient-presentation-transport",
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "def-weil-pbc-bounded-constructible-complete",
+  "lem-weil-pbc-flat-ringed-diagram-restriction",
+  "lem-weil-pbc-profinite-coefficient-inverse-image",
+  "lem-cbc-completed-extension-zero-comparison",
+  "lem-weil-pbc-ringed-slice-extension-tensor",
+  "lem-sf-strict-roos-derived-limit-comparison",
+  "lem-weil-proetale-countable-products-exact",
+  "prop-weil-pbc-koszul-reconstruction",
+  "lem-weil-pbc-closed-subset-closed-subscheme",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "lem-weil-pbc-proetale-immersion-limit-preservation",
+  "prop-weil-pbc-direct-image-limits",
+  "lem-pur-completed-coefficient-pushforward-comparison",
+  "def-weil-integral-rational-qbar-compact-support",
+  "lem-sf-compact-support-restriction-of-scalars",
+  "lem-cbc-integral-compact-support-uniform-restriction",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-pbc-completed-pullback",
+  "lem-cbc-adic-pullback-presentation-transport",
+  "lem-trf-integral-pullback-comparison-realization",
+  "lem-cbc-strict-tower-proper-open-calculus",
+  "lem-cbc-finite-open-exchange-scalars",
+  "lem-pur-ringed-coefficient-restriction-counit",
+  "lem-cbc-complete-proetale-strict-tower-realization",
+  "def-cbc-completed-exchange-map",
+  "lem-weil-pbc-mate-pasting",
+  "lem-cbc-exact-product-functor-strict-limit",
+  "prop-weil-pbc-rlim-functoriality",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "prop-weil-pbc-scalar-extension",
+  "lem-fd-rational-coefficient-category-comparison",
+  "def-weil-weil-sheaf-complex"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-field/thm-cbc-qbar.proof.md",
+  "place": "Explicit integral presentation comparison and strict-diagram argument supplementing common-stage scalar descent; Stacks 0A07 and 09BP"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -94,10 +313,59 @@
    "results": "18 hits: Mathlib/Analysis/Fourier/RiemannLebesgueLemma.lean; Mathlib/Analysis/Fourier/RiemannLebesgueLemma.lean; Mathlib/Analysis/Normed/Group/Bounded.lean; Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.lean; Mathlib/Analysis/Distribution/ContDiffMapSupportedIn.lean; Mathlib/Analysis/Distribution/TestFunction.lean; Mathlib/Analysis/Calculus/BumpFunction/FiniteDimension.lean; Mathlib/Analysis/Calculus/BumpFunction/FiniteDimension.lean",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "completedExchange|compactSupportComparison|derivedLowerShriek|integralDetailedTransport",
+   "results": "0 hits: ",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An equivalence of completed adic sheaf coefficient presentations identifies compact support direct image and its open restriction exchange transformation",
+   "results": "8 hits: AdicCompletion.congr_symm_apply; PadicInt.coe_adicCompletionIntegersEquiv_apply; AdicCompletion.congr; Padic.adicCompletionEquiv; AdicCompletion.ofLinearEquiv; AdicCompletion.sumInv_apply; AdicCompletion.ofLinearEquiv_apply; AdicCompletion.of_ofLinearEquiv_symm",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.NatIso",
+   "results": "0 hits: ; loogle: unknown identifier 'CategoryTheory.NatIso'",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The compact support functor defined by a strict adic reduction tower agrees with completed proper pushforward after extension by zero, preserving the ordered open base change exchange map",
+   "results": "8 hits: IsAdicComplete.StrictMono.factorPow_comp_extend; Condensed.profiniteSolid; IsAdicComplete.StrictMono.of_comp_lift; IsAdicComplete.StrictMono.of_lift; IsAdicComplete.StrictMono.extend_eq; Condensed.profiniteSolidification; Condensed.profiniteSolidCounit; SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "adic.*[Ss]heaf|[Cc]ompact[Ss]upport|[Ll]owerShriek|[Bb]ase[Cc]hange",
+   "results": "25 hits: Mathlib/AlgebraicGeometry/PullbackCarrier.lean; Mathlib/AlgebraicGeometry/ValuativeCriterion.lean; Mathlib/AlgebraicGeometry/ValuativeCriterion.lean; Mathlib/AlgebraicGeometry/Geometrically/Integral.lean; Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean; Mathlib/AlgebraicGeometry/EllipticCurve/DivisionPolynomial/Basic.lean; Mathlib/AlgebraicGeometry/EllipticCurve/DivisionPolynomial/Basic.lean; Mathlib/AlgebraicGeometry/EllipticCurve/DivisionPolynomial/Basic.lean; scope AlgebraicGeometry",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, \"mate\"",
+   "results": "12 hits: CategoryTheory.mateEquiv; CategoryTheory.mateEquiv_counit; CategoryTheory.mateEquiv_counit_symm; CategoryTheory.unit_mateEquiv; CategoryTheory.unit_mateEquiv_symm; CategoryTheory.conjugateEquiv_mateEquiv_vcomp; CategoryTheory.mateEquiv_conjugateEquiv_vcomp; CategoryTheory.mateEquiv_vcomp",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A comparison between derived complete constructible sheaf categories preserves proper direct image, extension by zero, and base change mates on the entire quotient diagram",
+   "results": "8 hits: Condensed.ofSheafForgetProfinite; Condensed.lanSheafProfinite; Condensed.ofSheafForgetCompHaus; Condensed.ofSheafProfinite; LightCondensed.lanLightCondSet; LightProfinite.hasSheafify; CategoryTheory.RanIsSheafOfIsCocontinuous.fac'; topCatToSheafCompHausLike",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "sk-l-dl-general-quasifinite",
@@ -114,5 +382,169 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-zl-framework-pbc-open-exchange-comparison",
+  "worker": "stage1",
+  "summary": "Constructed the normalized compact-support and pullback comparisons on the full strict quotient diagrams, identified the two ordered exchanges by the existing strict-tower realization theorem, calculated the endpoint conjugation, and checked open pasting, scalar associators, raw rationalization, common-stage descent and semilinear Frobenius naturality. Statement unchanged; no new nodes or stronger separatedness/Tor hypotheses.",
+  "blueprint": "Realizes sk-l-dl-general-quasifinite, proof first sentence (compact-support base change identifies stalks), specifically the missing framework/PBC comparison for open target restriction. Uses the current main-20261015 common-stage descent of thm-cbc-qbar.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-l-adic-extension-integers-dvr",
+    "why": "Generic coefficient/strict-diagram tool: The valuation ring of a finite extension of $\\mathbf Q_\\ell$ is a discrete valuation ring with finite residue field. Used only for its stated comparison or coherence, not to replace the quasi-finite unit route; that unit has no such construction."
+   },
+   {
+    "node": "lem-weil-pbc-standard-quotients-perfect",
+    "why": "Generic coefficient/strict-diagram tool: Perfectness of the standard quotients. Used only for its stated comparison or coherence, not to replace the quasi-finite unit route; that unit has no such construction."
+   },
+   {
+    "node": "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "why": "Generic coefficient/strict-diagram tool: Stratified perfect description of the integral completed category. Used only for its stated comparison or coherence, not to replace the quasi-finite unit route; that unit has no such construction."
+   },
+   {
+    "node": "lem-weil-pbc-flat-ringed-diagram-restriction",
+    "why": "Generic coefficient/strict-diagram tool: Flat coefficient restriction and normalized derived operations on module diagrams. Used only for its stated comparison or coherence, not to replace the quasi-finite unit route; that unit has no such construction."
+   },
+   {
+    "node": "lem-weil-pbc-profinite-coefficient-inverse-image",
+    "why": "Generic coefficient/strict-diagram tool: Compatible inverse image of profinite coefficient sheaves. Used only for its stated comparison or coherence, not to replace the quasi-finite unit route; that unit has no such construction."
+   },
+   {
+    "node": "lem-cbc-completed-extension-zero-comparison",
+    "why": "Generic coefficient/strict-diagram tool: Completed extension-by-zero base change. Used only for its stated comparison or coherence, not to replace the quasi-finite unit route; that unit has no such construction."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-slice-extension-tensor",
+    "why": "Generic coefficient/strict-diagram tool: Tensor projection formula for extension by zero on a ringed-site slice. Used only for its stated comparison or coherence, not to replace the quasi-finite unit route; that unit has no such construction."
+   },
+   {
+    "node": "lem-sf-strict-roos-derived-limit-comparison",
+    "why": "Generic coefficient/strict-diagram tool: Strict Roos cone comparison with total derived inverse limit and evaluations. Used only for its stated comparison or coherence, not to replace the quasi-finite unit route; that unit has no such construction."
+   },
+   {
+    "node": "lem-weil-proetale-countable-products-exact",
+    "why": "Generic coefficient/strict-diagram tool: Countable products of pro-etale modules are exact. Used only for its stated comparison or coherence, not to replace the quasi-finite unit route; that unit has no such construction."
+   },
+   {
+    "node": "prop-weil-pbc-koszul-reconstruction",
+    "why": "Generic coefficient/strict-diagram tool: Koszul and quotient reconstruction. Used only for its stated comparison or coherence, not to replace the quasi-finite unit route; that unit has no such construction."
+   },
+   {
+    "node": "lem-weil-pbc-closed-subset-closed-subscheme",
+    "why": "Generic coefficient/strict-diagram tool: Every closed subset of a scheme underlies a closed subscheme. Used only for its stated comparison or coherence, not to replace the quasi-finite unit route; that unit has no such construction."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-ringed-open-closed",
+    "why": "Generic coefficient/strict-diagram tool: Ringed pro-etale open-closed localization. Used only for its stated comparison or coherence, not to replace the quasi-finite unit route; that unit has no such construction."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-immersion-limit-preservation",
+    "why": "Generic coefficient/strict-diagram tool: Inverse images along immersions preserve pro-etale limits. Used only for its stated comparison or coherence, not to replace the quasi-finite unit route; that unit has no such construction."
+   },
+   {
+    "node": "prop-weil-pbc-direct-image-limits",
+    "why": "Generic coefficient/strict-diagram tool: Direct image, derived limits, and completeness. Used only for its stated comparison or coherence, not to replace the quasi-finite unit route; that unit has no such construction."
+   },
+   {
+    "node": "lem-sf-compact-support-restriction-of-scalars",
+    "why": "Generic coefficient/strict-diagram tool: Finite-level compact-support direct image commutes with restriction of scalars. Used only for its stated comparison or coherence, not to replace the quasi-finite unit route; that unit has no such construction."
+   },
+   {
+    "node": "lem-cbc-integral-compact-support-uniform-restriction",
+    "why": "Generic coefficient/strict-diagram tool: Integral compact-support image preserves uniform constructibility. Used only for its stated comparison or coherence, not to replace the quasi-finite unit route; that unit has no such construction."
+   },
+   {
+    "node": "lem-cbc-adic-pullback-presentation-transport",
+    "why": "Generic coefficient/strict-diagram tool: Counit-normalized transport of adic pullback presentations and completion units. Used only for its stated comparison or coherence, not to replace the quasi-finite unit route; that unit has no such construction."
+   },
+   {
+    "node": "lem-trf-integral-pullback-comparison-realization",
+    "why": "Generic coefficient/strict-diagram tool: Strict-system realization and composition coherence of integral pullback comparisons. Used only for its stated comparison or coherence, not to replace the quasi-finite unit route; that unit has no such construction."
+   },
+   {
+    "node": "lem-cbc-strict-tower-proper-open-calculus",
+    "why": "Generic coefficient/strict-diagram tool: Normalized proper/open calculus on strict pro-etale towers. Used only for its stated comparison or coherence, not to replace the quasi-finite unit route; that unit has no such construction."
+   },
+   {
+    "node": "lem-cbc-finite-open-exchange-scalars",
+    "why": "Generic coefficient/strict-diagram tool: Finite open exchange commutes with coefficient restriction and tower transitions. Used only for its stated comparison or coherence, not to replace the quasi-finite unit route; that unit has no such construction."
+   },
+   {
+    "node": "lem-cbc-complete-proetale-strict-tower-realization",
+    "why": "Generic coefficient/strict-diagram tool: Strict Tower Realization. Used only for its stated comparison or coherence, not to replace the quasi-finite unit route; that unit has no such construction."
+   },
+   {
+    "node": "lem-weil-pbc-mate-pasting",
+    "why": "Generic coefficient/strict-diagram tool: Mates of pasted squares and of conjugate-whiskered squares. Used only for its stated comparison or coherence, not to replace the quasi-finite unit route; that unit has no such construction."
+   },
+   {
+    "node": "lem-cbc-exact-product-functor-strict-limit",
+    "why": "Generic coefficient/strict-diagram tool: Canonical strict derived-limit comparison for exact product-preserving module functors. Used only for its stated comparison or coherence, not to replace the quasi-finite unit route; that unit has no such construction."
+   },
+   {
+    "node": "prop-weil-pbc-rlim-functoriality",
+    "why": "Generic coefficient/strict-diagram tool: Functoriality of the sequential derived inverse limit. Used only for its stated comparison or coherence, not to replace the quasi-finite unit route; that unit has no such construction."
+   },
+   {
+    "node": "lem-weil-finite-free-completed-scalar-comparison",
+    "why": "Generic coefficient/strict-diagram tool: Finite free completed coefficient extension is ordinary derived scalar extension. Used only for its stated comparison or coherence, not to replace the quasi-finite unit route; that unit has no such construction."
+   },
+   {
+    "node": "prop-weil-pbc-scalar-extension",
+    "why": "Generic coefficient/strict-diagram tool: Compatibility with finite scalar extension. Used only for its stated comparison or coherence, not to replace the quasi-finite unit route; that unit has no such construction."
+   },
+   {
+    "node": "lem-fd-rational-coefficient-category-comparison",
+    "why": "Generic coefficient/strict-diagram tool: Comparison of the framework and PBC rational coefficient systems. Used only for its stated comparison or coherence, not to replace the quasi-finite unit route; that unit has no such construction."
+   },
+   {
+    "node": "lem-pur-completed-coefficient-pushforward-comparison",
+    "why": "Generic coefficient tool: derived direct image commutes with restriction of scalars from the finite quotients and from completed to constant coefficients, as strict-diagram functors. Used to identify the framework compact-support levels with the PBC tower evaluations; the quasi-finite unit route has no such construction."
+   },
+   {
+    "node": "lem-pur-ringed-coefficient-restriction-counit",
+    "why": "Generic coefficient tool: the derived direct-image counit commutes with restriction of scalars along a non-flat coefficient algebra map. Used to identify the finite-level proper mate with the constant-tower mate; the quasi-finite unit route has no such construction."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-pbc-standard-quotients-perfect",
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "lem-weil-pbc-flat-ringed-diagram-restriction",
+  "lem-weil-pbc-profinite-coefficient-inverse-image",
+  "lem-cbc-completed-extension-zero-comparison",
+  "lem-weil-pbc-ringed-slice-extension-tensor",
+  "lem-sf-strict-roos-derived-limit-comparison",
+  "lem-weil-proetale-countable-products-exact",
+  "prop-weil-pbc-koszul-reconstruction",
+  "lem-weil-pbc-closed-subset-closed-subscheme",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "lem-weil-pbc-proetale-immersion-limit-preservation",
+  "prop-weil-pbc-direct-image-limits",
+  "lem-sf-compact-support-restriction-of-scalars",
+  "lem-cbc-integral-compact-support-uniform-restriction",
+  "lem-cbc-adic-pullback-presentation-transport",
+  "lem-trf-integral-pullback-comparison-realization",
+  "lem-cbc-strict-tower-proper-open-calculus",
+  "lem-cbc-finite-open-exchange-scalars",
+  "lem-cbc-complete-proetale-strict-tower-realization",
+  "lem-weil-pbc-mate-pasting",
+  "lem-cbc-exact-product-functor-strict-limit",
+  "prop-weil-pbc-rlim-functoriality",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "prop-weil-pbc-scalar-extension",
+  "lem-fd-rational-coefficient-category-comparison",
+  "lem-pur-completed-coefficient-pushforward-comparison",
+  "lem-pur-ringed-coefficient-restriction-counit"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-N5-55e2fb980",
+  "group": "N5",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N5-55e2fb980 (reviewer sub-agent of L); spot-checked: Read the whole delivery: the item statement (unchanged; created by Q03), all 13 steps, the current statements and blueprint_updates of all 34 cited nodes, the parent sk-l-dl-general-quasifinite steps 3-4 and its unit, main-20261015 thm-cbc-qbar and its proof, thm-cbc-complete-proetale.proof, and Stacks 09BP (lemma-j-shriek-limits). The base-change map is exactly the ordered completed exchange of def-cbc-completed-exchange-map at the completed coefficient A_T. Steps 1-13 hold. The hypotheses are checked: T and T_V are Noetherian and finite-dimensional, j is quasi-compact, f is separated with no absolute separatedness, there is no finite-Tor restriction, and the witnesses come from Step 1. The 09BP kernel argument is correct. The Step 8 cancellation is right: T d_t^{-1} = q_t^{-1}, so Ex^pbc S = T J(Ex^sf). There are no new nodes and no SGA citations. One fault, C1/C4: Steps 4 and 6 relied on Step 2, which covers only restriction along ring isomorphisms (lem-weil-pbc-flat-ringed-diagram-restriction requires flatness). They need restriction along the non-flat maps R -> A_n, to identify the framework levels Res_n Rp_{*,A_n} j_!K_n and the finite proper mates with the PBC tower evaluations and with the constant-R tower e_•. Repaired by citing lem-pur-completed-coefficient-pushforward-comparison (strict-diagram comparison F_R V_n = V_n F_n) and lem-pur-ringed-coefficient-restriction-counit (counit compatibility with no flatness assumed; units follow by the triangle identities). Both are added to proof_deps and to split_report.tool_uses (unit sk-lem-sf-mate). Both closures are batch-5 clean and create no cycle, and both steps stay under 2000 characters. Batch-5 check: lem-cbc-integral-compact-support-uniform-restriction is accepted. It proves that Rp_*j_! preserves constructibility, which neither assumption gives and which is not a step of their proofs. Its flagged path ends in lem-trf-additive-homotopy-category-triangulated, a Mathlib leaf saying the homotopy category of an additive category is triangulated. lem-trf-integral-pullback-comparison-realization is also accepted as generic coherence (the Q60 ruling). All other sec-trace-formula and sec-poincare-duality nodes in the closure are generic tools.; 1 file(s) fixed by the reviewer"
  }
 }
