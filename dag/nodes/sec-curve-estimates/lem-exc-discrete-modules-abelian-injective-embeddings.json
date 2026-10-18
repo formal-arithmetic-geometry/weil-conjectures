@@ -22,7 +22,7 @@
  ],
  "proof": [
   {
-   "text": "A profinite group is a topological group and a finite ring is a ring, so [lem-exc-rg-discrete-modules-functorial-injective-embeddings] applies with $(G,R)=(G,A)$; its category of left $R$-modules with $R$-linear $G$-action whose elements have open stabilizers, with $R$-linear $G$-equivariant maps, is then exactly $\\mathcal C$. It gives a functor $J:\\mathcal C\\to\\mathcal C$ and a natural transformation $j:\\operatorname{id}_{\\mathcal C}\\to J$ with every $j_M$ a monomorphism and every $J(M)$ injective in $\\mathcal C$.",
+   "text": "Apply [lem-exc-rg-discrete-modules-functorial-injective-embeddings] with R = A and G unchanged, at carrier universe max(u,v,w). Destructure its endofunctor J, natural transformation j, monic-component proof hmono and injective-value proof hinj. Pair hmono M with hinj M for each M, obtaining precisely the functorial embedding conjunct.",
    "uses": [
     "lem-exc-rg-discrete-modules-functorial-injective-embeddings"
    ],
@@ -33,11 +33,11 @@
    }
   },
   {
-   "text": "For each object $M$ of $\\mathcal C$, the component $j_M$ of step 1 is a monomorphism into $J(M)$, which is an injective object of $\\mathcal C$ in the sense of [def-sp-injective-resolutions]. Thus every object of $\\mathcal C$ admits a monomorphism into an injective object, which is what it means for $\\mathcal C$ to have enough injectives (the notion presupposed in [def-sp-injective-resolutions]).",
+   "text": "For every M form the Mathlib InjectivePresentation with J = J.obj M, injective = hinj M, f = j.app M and mono = hmono M. Its nonempty wrapper is the presentation field of EnoughInjectives. This is the immediate enough-injectives consequence of [def-sp-injective-resolutions], using the actual EnoughInjectives and InjectivePresentation definitions in the same Mathlib module.",
    "uses": [
     "def-sp-injective-resolutions"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/injectives.tex",
     "place": "Tag 04JF, conclusion of lemma-G-modules, together with the definition of enough injectives"
@@ -117,11 +117,12 @@
    "Rep.discreteContinuousRep_functorialInjectiveEmbeddings"
   ],
   "file": "lean/Sheaf/RepresentationTheory/DiscreteContinuousInjectives.lean",
-  "statement": "theorem discreteContinuousRep_functorialInjectiveEmbeddings (A : Type u) [Ring A] [Finite A] (G : Type v) [Group G] [TopologicalSpace G] [IsTopologicalGroup G] [CompactSpace G] [T2Space G] [TotallyDisconnectedSpace G] : (∃ (J : DiscreteContinuousRep.{u, v, w} A G ⥤ DiscreteContinuousRep.{u, v, w} A G) (j : 𝟭 (DiscreteContinuousRep.{u, v, w} A G) ⟶ J), ∀ M, Mono (j.app M) ∧ Injective (J.obj M)) ∧ EnoughInjectives (DiscreteContinuousRep.{u, v, w} A G)",
+  "statement": "theorem discreteContinuousRep_functorialInjectiveEmbeddings (A : Type u) [Ring A] [Finite A] (G : Type v) [Group G] [TopologicalSpace G] [IsTopologicalGroup G] [CompactSpace G] [T2Space G] [TotallyDisconnectedSpace G] : (∃ (J : DiscreteContinuousRep.{u, v, max u v w} A G ⥤ DiscreteContinuousRep.{u, v, max u v w} A G) (j : 𝟭 (DiscreteContinuousRep.{u, v, max u v w} A G) ⟶ J), ∀ M, Mono (j.app M) ∧ Injective (J.obj M)) ∧ EnoughInjectives (DiscreteContinuousRep.{u, v, max u v w} A G)",
   "branch": "sheaf-dag",
   "by": "M1",
   "date": "2026-10-11",
-  "existing": false
+  "existing": false,
+  "note": "G3 stage 3, 2026-10-18: carrier universe repaired from independent w to max u v w, matching the general functorial embedding theorem and Tag 04JF group-ring construction. See coord/changes/G3-discrete-continuous-injectives-universes.md. Mathematical node statement unchanged."
  },
  "reviewed_lean": {
   "date": "2026-10-11",
@@ -142,5 +143,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "C-1920a",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261018T062757-L-651262",
+  "kind": "interface",
+  "note": "independent cc review: Rep.discreteContinuousRep_functorialInjectiveEmbeddings (carrier max u v w) against node lem-exc-discrete-modules-abelian-injective-embeddings, Stacks Tag 04JF, and the proved general theorem Rep.discreteContinuousRep_functorialInjectiveEmbeddings_of_topologicalGroup; change record checked; old independent-w statement confirmed false via the F_p^K counterexample; axioms clean; importer DiscreteModulesAbelian compiles"
  }
 }

@@ -32,6 +32,8 @@ open CategoryTheory
 
 namespace Rep
 
+-- The carrier universe contains the coefficient ring and the group, as in Tag 04JF's
+-- group-ring construction and the general functorial embedding theorem.
 /-- (blueprint: lem-exc-discrete-modules-abelian-injective-embeddings)
 Stacks Project, Injectives, Tag 04JF, specialized to a profinite group and a finite ring.
 First apply `lem-exc-rg-discrete-modules-functorial-injective-embeddings` to
@@ -44,11 +46,14 @@ theorem discreteContinuousRep_functorialInjectiveEmbeddings
     (A : Type u) [Ring A] [Finite A] (G : Type v) [Group G]
     [TopologicalSpace G] [IsTopologicalGroup G] [CompactSpace G] [T2Space G]
     [TotallyDisconnectedSpace G] :
-    (∃ (J : DiscreteContinuousRep.{u, v, w} A G ⥤
-          DiscreteContinuousRep.{u, v, w} A G)
-       (j : 𝟭 (DiscreteContinuousRep.{u, v, w} A G) ⟶ J),
+    (∃ (J : DiscreteContinuousRep.{u, v, max u v w} A G ⥤
+          DiscreteContinuousRep.{u, v, max u v w} A G)
+       (j : 𝟭 (DiscreteContinuousRep.{u, v, max u v w} A G) ⟶ J),
        ∀ M, Mono (j.app M) ∧ Injective (J.obj M)) ∧
-      EnoughInjectives (DiscreteContinuousRep.{u, v, w} A G) := by
-  sorry
+      EnoughInjectives (DiscreteContinuousRep.{u, v, max u v w} A G) := by
+  obtain ⟨J, j, hmono, hinj⟩ :=
+    discreteContinuousRep_functorialInjectiveEmbeddings_of_topologicalGroup.{u, v, w} A G
+  exact ⟨⟨J, j, fun M ↦ ⟨hmono M, hinj M⟩⟩,
+    ⟨fun M ↦ ⟨⟨J.obj M, hinj M, j.app M, hmono M⟩⟩⟩⟩
 
 end Rep
