@@ -16247,3 +16247,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 07:11 L: returned deliver/H9/Sheaf.AlgebraicGeometry.LisseFiniteEtaleFiltration (reviewer RETURN: (the landing tools, head 58c8e3b0a) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
 - 07:11 L: returned deliver/J4/Sheaf.AlgebraicGeometry.EtaleCompactSupportNormalization (reviewer RETURN: (the landing tools, head 745eaa049) the delivery did not land: (d) user Sheaf.AlgebraicGeometry.EtaleAmbientAdjointLocal)
 - 07:11 L: returned deliver/J5/Sheaf.AlgebraicGeometry.ProjectiveCurveConstant (reviewer RETURN: (the landing tools, head 92954511c) the delivery did not land: import cycle: Sheaf.AlgebraicGeometry.ProjectiveCurveCons)
+- 07:11 L: returned deliver/J8/Sheaf.AlgebraicGeometry.SymmetricProductProperties (reviewer RETURN: (the landing tools, head 695c86a4d) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
