@@ -113,7 +113,7 @@ attribute [local instance high] SymmetricCategory.toBraidedCategory
 attribute [-instance] CategoryTheory.sheafToPresheaf_isRightAdjoint ModuleCat.hasColimitsOfShape
   ModuleCat.hasColimitsOfSize
 
-attribute [local instance] _root_.DerivedCategory.symmetricCategory
+attribute [local instance] _root_.DerivedCategory.symmetricCategory'
   leftDerivedUpperStarBraidedFunctor
 
 -- As in `WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjectionExchange`: braid étale

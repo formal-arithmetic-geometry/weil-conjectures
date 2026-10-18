@@ -20,7 +20,7 @@ composed braidings cancel. Hence so are the braiding of the homotopy category
 ## Main definitions
 
 - `CochainComplex.Monoidal.symmetricCategory`, `HomotopyCategory.symmetricCategory`,
-  `CategoryTheory.DerivedMonoidal.symmetricCategory`, `DerivedCategory.symmetricCategory`.
+  `CategoryTheory.DerivedMonoidal.symmetricCategory`, `DerivedCategory.symmetricCategory'`.
 -/
 
 @[expose] public section
@@ -147,7 +147,7 @@ lemma braiding_hom_braiding_hom (X Y : DerivedCategory C) :
 functorial flat resolutions is symmetric for the Koszul braiding
 `DerivedCategory.braidedCategory' C`. -/
 @[instance_reducible]
-noncomputable def symmetricCategory : SymmetricCategory (DerivedCategory C) where
+noncomputable def symmetricCategory' : SymmetricCategory (DerivedCategory C) where
   toBraidedCategory := braidedCategory' C
   symmetry X Y := braiding_hom_braiding_hom C X Y
 

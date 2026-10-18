@@ -87,6 +87,15 @@ lemma isPullback_mapOverBaseRight_fst {Z : Scheme.{u}} (b : Y ⟶ B) (c : Z ⟶ 
     (by simpa using (IsPullback.of_hasPullback (f ≫ b) c).flip)
     (pullback.mapOverBaseRight_fst f b c) (IsPullback.of_hasPullback b c).flip
 
+/-- The braiding `K ⊗ᴸ M ≅ M ⊗ᴸ K` of `AlgebraicGeometry.Etale.derivedBraidedCategory`, as a
+natural isomorphism `-⊗ᴸ- ≅ (-⊗ᴸ-).flip`. -/
+noncomputable def derivedTensorBraiding (X : Scheme.{u}) :
+    derivedTensor A X ≅ (derivedTensor A X).flip :=
+  -- `curriedBraidingNatIso` is generic in the category, so the kernel does not check the
+  -- naturality of the braiding in `D(X_ét)`, as in `nonempty_iso_derivedTensor_flip`.
+  letI := derivedBraidedCategory A X
+  BraidedCategory.curriedBraidingNatIso _
+
 /-- The comparison map `Rf_* M ⊠ Q ⟶ R(f × 𝟙_Z)_* (M ⊠ Q)` of the ordinary Künneth formula
 with an identity factor (`sk-lem-sf-kunneth-star`, `lem-trf-ordinary-kunneth`), for
 `f : X ⟶ Y`, `b : Y ⟶ B`, `c : Z ⟶ B`, `M ∈ D(X_ét)` and `Q ∈ D(Z_ét)`.
@@ -97,17 +106,17 @@ it is the composite
 `p_Y^* Rf_* M ⊗ᴸ p'_Z^* Q ≅ p'_Z^* Q ⊗ᴸ p_Y^* Rf_* M
   ⟶ R(f × 𝟙)_* ((f × 𝟙)^* p'_Z^* Q ⊗ᴸ p_X^* M) ≅ R(f × 𝟙)_* (p_X^* M ⊗ᴸ p_Z^* Q)`
 
-of a symmetry of `⊗ᴸ` (chosen from `AlgebraicGeometry.Etale.nonempty_iso_derivedTensor_flip`),
+of the braiding of `⊗ᴸ` (`AlgebraicGeometry.Etale.derivedTensorBraiding`),
 the base change map `AlgebraicGeometry.Etale.tensorBaseChangeMap` of `lem-kun-0f1n` for the
 cartesian square `AlgebraicGeometry.Etale.isPullback_mapOverBaseRight_fst`, and the
-composition isomorphism `(f × 𝟙)^* p'_Z^* ≅ p_Z^*` followed by the symmetry again. -/
+composition isomorphism `(f × 𝟙)^* p'_Z^* ≅ p_Z^*` followed by the braiding again. -/
 noncomputable def externalProductRightDerivedLowerStarMap [UpperStarPreservesFlat A]
     {Z : Scheme.{u}} (b : Y ⟶ B) (c : Z ⟶ B) (f : X ⟶ Y)
     (M : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A))
     (Q : _root_.DerivedCategory (Sheaf Z.smallEtaleTopology A)) :
     externalProduct A b c ((R((f)_*[A])).obj M) Q ⟶
       (R((pullback.mapOverBaseRight f b c)_*[A])).obj (externalProduct A (f ≫ b) c M Q) :=
-  ((nonempty_iso_derivedTensor_flip A (pullback b c)).some.hom.app _).app _ ≫
+  ((derivedTensorBraiding A (pullback b c)).hom.app _).app _ ≫
     tensorBaseChangeMap A (pullback.mapOverBaseRight f b c) (pullback.fst (f ≫ b) c)
       (pullback.fst b c) f (isPullback_mapOverBaseRight_fst b c f).w
       ((L((pullback.snd b c)^*[A])).obj Q) M ≫
@@ -115,7 +124,7 @@ noncomputable def externalProductRightDerivedLowerStarMap [UpperStarPreservesFla
       (((derivedTensor A (pullback (f ≫ b) c)).map
           ((leftDerivedUpperStarComp A (pullback.mapOverBaseRight f b c) (pullback.snd b c)
             (pullback.snd (f ≫ b) c) (by simp)).inv.app Q)).app _ ≫
-        ((nonempty_iso_derivedTensor_flip A (pullback (f ≫ b) c)).some.hom.app _).app _)
+        ((derivedTensorBraiding A (pullback (f ≫ b) c)).hom.app _).app _)
 
 /-- The comparison map `Rf_* M ⊠ Q ⟶ R(f × 𝟙_Z)_* (M ⊠ Q)` is an isomorphism as soon as the
 base change map of `lem-kun-0f1n` it is built from is one. -/

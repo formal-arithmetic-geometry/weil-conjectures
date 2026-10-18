@@ -19,7 +19,10 @@ stated here for the module objects over `Λ_X` of
 `WeilConjectures.SixFunctors.ProEtale.ModuleObject`. Each theorem carries the blueprint id of the
 node it formalises and states that node for one coefficient ring; the docstring lists the
 clauses of the node which are not stated, for lack of the relevant notions for module objects.
-They are not proved here.
+They are not proved here, except that `lem-sfb-dc-tensor-preserves` and
+`sk-prop-open-coefficients` are deduced from the general statements
+`AlgebraicGeometry.ProEtale.CondensedRing.isMonoidal_boundedConstructible` and
+`AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructible_rightDerivedLowerStar_obj`.
 
 * `lem-sfb-dc-tensor-preserves`: `⊗ᴸ` preserves bounded constructible complexes;
 * `det-thm-sfb-proper-base-change-integral`, `det-thm-sfb-proper-base-change-rational`: proper
@@ -78,6 +81,8 @@ section Integers
 variable (E : Type) [Field E] [Algebra E (PadicAlgCl ℓ)] [Algebra ℚ_[ℓ] E]
   [IsScalarTower ℚ_[ℓ] E (PadicAlgCl ℓ)] [FiniteDimensional ℚ_[ℓ] E]
 
+omit [Fact (ringChar k).Prime] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
+  [IsSeparated X.hom] in
 /-- Blueprint `lem-sfb-dc-tensor-preserves`: `⊗ᴸ` preserves bounded constructible complexes
 (`ℓ`-adic `Λ`), stated for `Λ = 𝒪̲_E, E̲, ℚ̲̄_ℓ` by one declaration each; the case `Λ = 𝒪̲_E`.
 If `K, L ∈ D(Mod_{𝒪_{E,X}})` are bounded constructible, then
@@ -88,7 +93,7 @@ theorem boundedConstructible_tensor_padicIntegersRingObj
     (hL : boundedConstructible (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) X.left) L) :
     boundedConstructible (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) X.left)
       (K ⊗ L) :=
-  sorry
+  ObjectProperty.prop_tensor hK hL
 
 /-- Blueprint `det-thm-sfb-proper-base-change-integral`: Proper direct image, base change and
 projection formula for `𝒪_E`. Let `p : X ⟶ Y` be proper.
@@ -168,7 +173,7 @@ theorem boundedConstructible_rightDerivedLowerStar_openImmersion_padicIntegersRi
     (hK : boundedConstructible (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) X.left) K) :
     boundedConstructible (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) Y.left)
       ((R((j.left)_*⟦Profinite.padicIntegersRingObj ℓ E⟧)).obj K) :=
-  sorry
+  boundedConstructible_rightDerivedLowerStar_obj _ ℓ j K hK
 
 end Integers
 
@@ -183,6 +188,8 @@ set_option hygiene false in
 /-- The condensed field `E̲`. -/
 local notation "𝐄" => Profinite.continuousMapRingObj.{u} E
 
+omit [Fact (ringChar k).Prime] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
+  [IsSeparated X.hom] in
 /-- Blueprint `lem-sfb-dc-tensor-preserves`: `⊗ᴸ` preserves bounded constructible complexes
 (`ℓ`-adic `Λ`), stated for `Λ = 𝒪̲_E, E̲, ℚ̲̄_ℓ` by one declaration each; the case `Λ = E̲`.
 If `K, L ∈ D(Mod_{Λ_X})` are bounded constructible, then
@@ -192,7 +199,7 @@ theorem boundedConstructible_tensor_continuousMapRingObj
     (hK : boundedConstructible (condensedRingObj 𝐄 X.left) K)
     (hL : boundedConstructible (condensedRingObj 𝐄 X.left) L) :
     boundedConstructible (condensedRingObj 𝐄 X.left) (K ⊗ L) :=
-  sorry
+  ObjectProperty.prop_tensor hK hL
 
 /-- Blueprint `det-thm-sfb-proper-base-change-rational`: Proper direct image, base change and
 projection formula for `E` and `ℚ̄_ℓ`; the case `Λ = E̲`. Let `p : X ⟶ Y` be proper.
@@ -265,7 +272,7 @@ theorem boundedConstructible_rightDerivedLowerStar_openImmersion_continuousMapRi
     (j : X ⟶ Y) [IsOpenImmersion j.left] [QuasiCompact j.left]
     {K : 𝔻[𝐄](X.left)} (hK : boundedConstructible (condensedRingObj 𝐄 X.left) K) :
     boundedConstructible (condensedRingObj 𝐄 Y.left) ((R((j.left)_*⟦𝐄⟧)).obj K) :=
-  sorry
+  boundedConstructible_rightDerivedLowerStar_obj _ ℓ j K hK
 
 end Field
 
@@ -277,6 +284,8 @@ set_option hygiene false in
 /-- The condensed field `ℚ̲̄_ℓ`. -/
 local notation "𝐐" => Profinite.padicAlgClRingObj.{u} ℓ
 
+omit [Fact (ringChar k).Prime] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
+  [IsSeparated X.hom] in
 /-- Blueprint `lem-sfb-dc-tensor-preserves`: `⊗ᴸ` preserves bounded constructible complexes
 (`ℓ`-adic `Λ`), stated for `Λ = 𝒪̲_E, E̲, ℚ̲̄_ℓ` by one declaration each; the case `Λ = ℚ̲̄_ℓ`.
 If `K, L ∈ D(Mod_{Λ_X})` are bounded constructible, then
@@ -286,7 +295,7 @@ theorem boundedConstructible_tensor_padicAlgClRingObj
     (hK : boundedConstructible (condensedRingObj 𝐐 X.left) K)
     (hL : boundedConstructible (condensedRingObj 𝐐 X.left) L) :
     boundedConstructible (condensedRingObj 𝐐 X.left) (K ⊗ L) :=
-  sorry
+  ObjectProperty.prop_tensor hK hL
 
 /-- Blueprint `det-thm-sfb-proper-base-change-rational`: Proper direct image, base change and
 projection formula for `E` and `ℚ̄_ℓ`; the case `Λ = ℚ̲̄_ℓ`. Let `p : X ⟶ Y` be proper.
@@ -359,7 +368,7 @@ theorem boundedConstructible_rightDerivedLowerStar_openImmersion_padicAlgClRingO
     (j : X ⟶ Y) [IsOpenImmersion j.left] [QuasiCompact j.left]
     {K : 𝔻[𝐐](X.left)} (hK : boundedConstructible (condensedRingObj 𝐐 X.left) K) :
     boundedConstructible (condensedRingObj 𝐐 Y.left) ((R((j.left)_*⟦𝐐⟧)).obj K) :=
-  sorry
+  boundedConstructible_rightDerivedLowerStar_obj _ ℓ j K hK
 
 end AlgCl
 
