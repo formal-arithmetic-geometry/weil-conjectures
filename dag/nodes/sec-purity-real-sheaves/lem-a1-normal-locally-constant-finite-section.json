@@ -18,9 +18,65 @@
   "def-weil-connected-scheme",
   "def-weil-pbc-quasi-compact-scheme"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-a1-proetale-local-system-representability] to $X$ and $F$. Its locally Noetherian hypothesis is part of the assumed Noetherianity; its local-constancy hypothesis is exactly the specified covering by constant sheaves of sets. Obtain an etale $q:Z\\to X$, with the unique valuation lifting property, and natural bijections $\\theta_U:F(U)\\simeq\\operatorname{Hom}_X(U,Z)$. Neither normality nor local nonemptiness is used at this stage.",
+   "uses": [
+    "lem-a1-proetale-local-system-representability"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 7.3.9, Loc_X contained in Cov_X"
+   }
+  },
+  {
+   "text": "The scheme $Z$ is nonempty. Indeed, choose a point $x\\in X$. The covering $\\{V_j\\to X\\}_j$ in the local-nonemptiness assumption is jointly surjective by the covering definition in [def-weil-pbc-proetale-site], so some $V_j$ has a point $v$ above $x$. Choose the given $s_j\\in F(V_j)$. Under the bijection of [lem-a1-proetale-local-system-representability], $s_j$ gives an $X$-morphism $f_j:V_j\\to Z$. Its image contains the point $z=f_j(v)$; hence $|Z|$ is nonempty.",
+   "uses": [
+    "lem-a1-proetale-local-system-representability",
+    "def-weil-pbc-proetale-site"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definition 7.3.1 and Lemma 7.3.9: translate a local section into a point of the representing geometric covering"
+   }
+  },
+  {
+   "text": "Apply [lem-a1-normal-geometric-cover-components] to $q:Z\\to X$. The base is nonempty, connected, locally Noetherian and quasi-compact by the hypotheses; its local rings are integrally closed domains by the stated normality assumption. The morphism is etale and has the required unique valuation lifting property by step 1. The cited lemma makes the connected component of $z$ into an open and closed subscheme $Y\\subseteq Z$ and says that its structural morphism $p=q|_Y:Y\\to X$ is finite etale and surjective. Its nonemptiness follows from $z\\in Y$. Only this component is taken, even if $Z$ has infinitely many components.",
+   "uses": [
+    "lem-a1-normal-geometric-cover-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proof of Lemma 7.4.10, p. 71, applied to one connected component of the geometric covering"
+   }
+  },
+  {
+   "text": "The inclusion of etale $X$-schemes into the pro-etale site in [def-weil-pbc-site-comparison-morphism] makes $Y\\to X$ a site object. The inclusion $i:Y\\hookrightarrow Z$ is an element of $\\operatorname{Hom}_X(Y,Z)$. The bijection $\\theta_Y$ of [lem-a1-proetale-local-system-representability] therefore sends the element $\\theta_Y^{-1}(i)$ of $F(Y)$ to $i$. This explicitly supplies a section, so $F(Y)\\ne\\varnothing$, and $p$ has all the required properties.",
+   "uses": [
+    "lem-a1-proetale-local-system-representability",
+    "def-weil-pbc-site-comparison-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 7.3.9, evaluation of the representing presheaf on the selected finite etale component"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-a1-proetale-local-system-representability",
+  "def-weil-pbc-proetale-site",
+  "lem-a1-normal-geometric-cover-components",
+  "def-weil-pbc-site-comparison-morphism"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 7.3.9 and proof of Lemma 7.4.10; take one nonempty connected component of the representing geometric covering"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -63,10 +119,45 @@
    "results": "Profinite.exists_locallyConstant_finite_nonempty, Profinite.exists_locallyConstant_finite_aux, Profinite.exists_locallyConstant, LightCondensed.isLocallySurjective_iff_locallySurjective_on_lightProfinite, CategoryTheory.PreGaloisCategory.exists_hom_from_galois_of_connected, Profinite.exists_locallyConstant_fin_two, CategoryTheory.PreGaloisCategory.nonempty_fiber_of_isConnected, LocallyConstant.exists_eq_const",
    "date": "2026-10-18",
    "verdict": "no match: the returned declarations concern abstract finite Galois categories, profinite spaces, constant sheaves or condensed modules, not locally constant pro-etale sheaves on normal schemes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On a normal connected Noetherian scheme every locally nonempty locally constant sheaf of sets on the proetale site admits a section after a finite etale surjective cover",
+   "results": "8 hits: Profinite.exists_locallyConstant_finite_nonempty, Profinite.exists_locallyConstant_finite_aux, Profinite.exists_locallyConstant, Profinite.exists_locallyConstant_fin_two, CompHausLike.LocallyConstant.counit_app_val, CondensedSet.mem_locallyConstant_essImage_of_isColimit_mapCocone, CompHausLike.LocallyConstant.presheaf_ext, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit",
+   "date": "2026-10-18",
+   "verdict": "no match: profinite function factorization and finite abstract Galois categories do not compare arbitrary pro-etale local systems with geometric finite covers"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsLocallyConstant\", \"IsEtale\"",
+   "results": "0 hits: ",
+   "date": "2026-10-18",
+   "verdict": "no match: profinite function factorization and finite abstract Galois categories do not compare arbitrary pro-etale local systems with geometric finite covers"
+  },
+  {
+   "tool": "grep",
+   "query": "geometric.?cover|unibranch|locally.?constant.*finite.?etale",
+   "results": "0 hits: ",
+   "date": "2026-10-18",
+   "verdict": "no match: profinite function factorization and finite abstract Galois categories do not compare arbitrary pro-etale local systems with geometric finite covers"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A nonempty locally constant proetale sheaf on a normal Noetherian scheme has a section on a finite etale cover",
+   "results": "8 hits: AlgebraicGeometry.StructureSheaf.exists_const, CategoryTheory.Sheaf.IsConstant.mk, CategoryTheory.Sheaf.IsConstant.casesOn, CategoryTheory.Sheaf.isConstant_iff_mem_essImage, CondensedSet.LocallyConstant.functorFullyFaithful, ModuleCat.Tilde.exists_const, Condensed.lanSheafProfinite, LightCondensed.lanLightCondSet",
+   "date": "2026-10-18",
+   "verdict": "no match: profinite function factorization and finite abstract Galois categories do not compare arbitrary pro-etale local systems with geometric finite covers"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A discrete continuous action of the etale fundamental group of a normal Noetherian scheme has finite orbits, giving a finite cover with a point of any nonempty local system",
+   "results": "8 hits: CategoryTheory.PreGaloisCategory.exists_hom_from_galois_of_fiber_nonempty, CategoryTheory.PreGaloisCategory.exists_lift_of_continuous, CategoryTheory.PreGaloisCategory.instIsPretransitiveCarrierObjFintypeCatOfIsConnected, CategoryTheory.PreGaloisCategory.exists_hom_from_galois_of_fiber, CategoryTheory.PreGaloisCategory.instEssSurjContActionFintypeCatAutFunctorFunctorToContActionOfFiberFunctor, CategoryTheory.PreGaloisCategory.has_decomp_quotients, CategoryTheory.FintypeCat.instGaloisCategoryActionFintypeCat, CategoryTheory.PreGaloisCategory.exists_lift_of_quotient_openSubgroup",
+   "date": "2026-10-18",
+   "verdict": "no match: profinite function factorization and finite abstract Galois categories do not compare arbitrary pro-etale local systems with geometric finite covers"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-a1-normal-proetale-monodromy",
@@ -87,5 +178,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-a1-normal-locally-constant-finite-section",
+  "worker": "stage1",
+  "summary": "Kept the statement and separated pro-etale representability (without normality or finite stalks) from the purely geometric normal-base component finiteness lemma. Four proof steps exhibit a point, select its finite etale surjective component, and evaluate the representing bijection at its inclusion. Two statement-only child nodes; actual semantic, Loogle and source searches recorded.",
+  "blueprint": "Master proof of lem-a1-affine-hc0, first sentence: 'A class in H_c^0 is a global section of F whose support is proper over the base field'; the coefficient realization uses global integral lattices. Here the finite-cover section supplies the geometric normality input in the monodromy comparison used to construct those lattices."
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-ND-d151372e5",
+  "group": "ND",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-ND-d151372e5 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, every cited statement and the unit and chapter records. Sources checked: Bhatt–Scholze Def. 7.3.1(1),(3), Lemma 7.3.9 and its proof (pp. 66–68), and Lemma 7.4.10 and its proof (p. 71); Stacks properties.tex Tag 0BQ3 (lemma-normal-geometrically-unibranch). lem-a1-proetale-local-system-representability is the Loc_X ⊂ Cov_X half of 7.3.9: locally Noetherian is a special case of the standing hypothesis, the S_i may be arbitrary sets, and the lifting is unique for all valuation rings. lem-a1-normal-geometric-cover-components is 7.4.10 plus 0BQ3. I checked its extra conclusions myself: components are open because Z is locally Noetherian, the lifting property restricts to a component because Spec R is connected, and a finite etale component maps onto connected X because its image is open and closed. Both statements hold on small cases: Spec k, a singleton or infinite constant sheaf, Z empty, and a proper open that fails lifting. Neither new node restates the item. Steps 1 and 3 check every hypothesis against what the cited statements say. Step 2 uses joint surjectivity of pro-etale covers, which follows from the covering definition in def-weil-pbc-proetale-site, and step 4 uses the etale-in-pro-etale inclusion in def-weil-pbc-site-comparison-morphism; both are genuinely elementary. Searching the DAG with rg and the blueprint with blueprint_refs.py found no duplicate. The steps cite only own-unit nodes and definitions, with no SGA and no cycle; the item statement is unchanged and no target is weakened. Batch-5 check: both flagged citations are of def-trf-valuation-ring, a status-mathlib definition depending only on def-weil-pbc-normal-ring and def-weil-field. It is not a step of the trace formula or Poincaré duality proofs, so I accepted it. No fixes, no dropped nodes, no tool_uses."
  }
 }
