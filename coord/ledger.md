@@ -15911,3 +15911,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 06:26 L: merged deliver/A3/Sheaf.Paper.AdicTowerReconstruction (stage 3; reviewer PASS; first push; landing 20261018T062651-L-628589 (proof); batch 20261018T062645; modules 1; new nodes 0)
 - 06:26 L: merged deliver/A4/Sheaf.AlgebraicGeometry.AffineFiniteTypeAlgebra (stage 3; reviewer PASS; first push; landing 20261018T062651-L-628819 (proof); batch 20261018T062645; modules 1; new nodes 0)
 - 06:26 L: merged deliver/A4/Sheaf.AlgebraicGeometry.GeometricallyConnectedAlgebraicClosure (stage 3; reviewer PASS; first push; landing 20261018T062652-L-628961 (proof); batch 20261018T062645; modules 1; new nodes 0)
+- 06:26 L: merged deliver/A4/Sheaf.CategoryTheory.RingedSectionLocalization (stage 3; reviewer PASS; first push; landing 20261018T062652-L-629081 (proof); batch 20261018T062645; modules 1; new nodes 0)

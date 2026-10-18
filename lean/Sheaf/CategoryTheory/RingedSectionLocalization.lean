@@ -44,7 +44,10 @@ theorem ringedSectionLocalization_isUnit
     (s : (O.obj ⋙ forget CommRingCat).sections) {X Y : Cᵒᵖ} (a : X ⟶ Y) :
     IsUnit ((algebraMap (O.obj.obj Y) (ringedSectionLocalizationCarrier O s Y))
       (O.obj.map a ((s.val X : O.obj.obj X)))) := by
-  sorry
+  have hs : O.obj.map a (s.val X) = s.val Y := s.property a
+  rw [hs]
+  exact IsLocalization.Away.algebraMap_isUnit (R := O.obj.obj Y)
+    (S := ringedSectionLocalizationCarrier O s Y) (s.val Y)
 
 /-- Restriction on sectionwise localizations, given by the localization universal property.
 Source: Stacks Project, algebraization.tex, Tag 0996
@@ -67,7 +70,8 @@ theorem ringedSectionLocalizationMap_smul
     (r : O.obj.obj X) (x : ringedSectionLocalizationCarrier O s X) :
     ringedSectionLocalizationMap O s a (r • x) =
       O.obj.map a r • ringedSectionLocalizationMap O s a x := by
-  sorry
+  simp only [Algebra.smul_def, map_mul, ringedSectionLocalizationMap,
+    IsLocalization.Away.lift_eq, RingHom.comp_apply]
 
 /-- The linear form of localization restriction.
 Source: Stacks Project, algebraization.tex, Tag 0996
@@ -94,7 +98,15 @@ theorem ringedSectionLocalizationLinearMap_id
     ringedSectionLocalizationLinearMap O s (𝟙 X) =
       (ModuleCat.restrictScalarsId' (O.obj.map (𝟙 X)).hom
         (congrArg CommRingCat.Hom.hom (O.obj.map_id X))).inv.app _ := by
-  sorry
+  have h : ringedSectionLocalizationMap O s (𝟙 X) =
+      RingHom.id (ringedSectionLocalizationCarrier O s X) := by
+    apply IsLocalization.ringHom_ext (R := O.obj.obj X)
+      (Submonoid.powers (s.val X))
+    ext r
+    simp [ringedSectionLocalizationMap]
+  ext x
+  change ringedSectionLocalizationMap O s (𝟙 X) x = x
+  exact DFunLike.congr_fun h x
 
 /-- Composition compatibility of sectionwise localization restriction.
 Source: Stacks Project, algebraization.tex, Tag 0996
@@ -111,7 +123,16 @@ theorem ringedSectionLocalizationLinearMap_comp
         (ModuleCat.restrictScalarsComp' (O.obj.map a).hom (O.obj.map b).hom
           (O.obj.map (a ≫ b)).hom
           (congrArg CommRingCat.Hom.hom (O.obj.map_comp a b))).inv.app _ := by
-  sorry
+  have h : ringedSectionLocalizationMap O s (a ≫ b) =
+      (ringedSectionLocalizationMap O s b).comp (ringedSectionLocalizationMap O s a) := by
+    apply IsLocalization.ringHom_ext (R := O.obj.obj X)
+      (Submonoid.powers (s.val X))
+    ext r
+    simp [ringedSectionLocalizationMap, Functor.map_comp]
+  ext x
+  change ringedSectionLocalizationMap O s (a ≫ b) x =
+    ringedSectionLocalizationMap O s b (ringedSectionLocalizationMap O s a x)
+  exact DFunLike.congr_fun h x
 
 /-- The presheaf of modules `V ↦ O(V)[1/s(V)]`, with the actual localization lifts
 as its restriction maps.
@@ -145,7 +166,7 @@ theorem ringedSectionLocalizationPresheaf_one_natural
     (ringedSectionLocalizationPresheaf O s).map a
       (1 : ringedSectionLocalizationCarrier O s X) =
         (1 : ringedSectionLocalizationCarrier O s Y) := by
-  sorry
+  exact (ringedSectionLocalizationMap O s a).map_one
 
 /-- The canonical map from the ring sheaf to its localization as a module sheaf.
 Source: Stacks Project, algebraization.tex, Tag 0996
@@ -172,7 +193,8 @@ theorem ringedSliceSection_natural (U : C) (f : O.obj.obj (op U))
     {X Y : (Over U)ᵒᵖ} (a : X ⟶ Y) :
     (O.over U).obj.map a (O.obj.map (unop X).hom.op f) =
       O.obj.map (unop Y).hom.op f := by
-  sorry
+  change (O.obj.map (unop X).hom.op ≫ O.obj.map a.unop.left.op) f = _
+  rw [← O.obj.map_comp, ← op_comp, Over.w a.unop]
 
 /-- A section over U, viewed as a global section on the slice site.
 Source: Stacks Project, algebraization.tex, Tag 099E
