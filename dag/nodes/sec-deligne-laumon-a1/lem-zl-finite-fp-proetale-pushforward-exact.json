@@ -13,21 +13,113 @@
   "def-weil-pbc-proetale-site",
   "lem-weil-pbc-ringed-topoi-module-adjunction"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $W$ be an object of $Y_{\\mathrm{proet}}$. Cover $Y$ by affine opens $\\operatorname{Spec}A\\subseteq Y$ and consider the affine opens $W'=\\operatorname{Spec}A'\\subseteq W$ whose image lies in one such $\\operatorname{Spec}A$. Each composite $W'\\to W\\to Y$ is weakly etale by [lem-weil-pbc-weakly-etale-source-locality] (applied to the open cover of $W$ by these $W'$), so $W'$ is an object and $W'\\to W$ a morphism of $Y_{\\mathrm{proet}}$ [def-weil-pbc-small-proetale-site]. These $W'$ form a basis of the topology of $W$, so every affine open $V\\subseteq W$, being quasi-compact, is a finite union of such $W'$ contained in $V$: the family is a pro-etale covering of $W$ [def-weil-pbc-proetale-covering]. For such $W'$ over $\\operatorname{Spec}A$, the finite morphism $f$ has $f^{-1}(\\operatorname{Spec}A)=\\operatorname{Spec}B$ with $B$ a finite $A$-module [def-weil-finite-integral-morphism], and $A\\to B$ is of finite presentation by [lem-weil-pbc-lfp-affine-opens-finite-presentation], since $f$ is locally of finite presentation [def-sbc-locally-finite-presentation]. As $W'\\to Y$ factors through $\\operatorname{Spec}A$, the universal property of fibre products gives $u_f(W')=X\\times_YW'\\cong\\operatorname{Spec}(A'\\otimes_AB)$.",
+   "uses": [
+    "lem-weil-pbc-weakly-etale-source-locality",
+    "def-weil-pbc-small-proetale-site",
+    "def-weil-pbc-proetale-covering",
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+    "def-sbc-locally-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09A8, proof, first sentence: work Zariski locally and write X=Spec(A), Z=Spec(B) with B finite of finite presentation; carried out here for the affine objects of Y_proet lying over affine opens of Y"
+   }
+  },
+  {
+   "text": "For an affine object $W'=\\operatorname{Spec}A'$ of step 1, choose a faithfully flat ind-etale $A'$-algebra $D$ whose spectrum is w-contractible, using [lem-weil-pbc-source-wcontractible-extension]. Ind-etale maps are weakly etale and weakly etale maps compose [lem-weil-pbc-ind-etale-stability], so $\\operatorname{Spec}D\\to W'\\to Y$ is weakly etale and $\\operatorname{Spec}D$ is an object of $Y_{\\mathrm{proet}}$. Since $A'\\to D$ is faithfully flat, $\\operatorname{Spec}D\\to W'$ is surjective and affine; for an affine open $V\\subseteq W'$ its inverse image is affine and maps onto $V$, so the single map is a pro-etale covering [def-weil-pbc-proetale-covering]. Put $C=D\\otimes_{A'}(A'\\otimes_AB)=D\\otimes_AB$. The images of finitely many $A$-module generators of $B$ generate $C$ as a $D$-module, and tensoring a presentation $B=A[x_1,\\dots,x_n]/(g_1,\\dots,g_m)$ with $D$ gives $C=D[x_1,\\dots,x_n]/(g_1,\\dots,g_m)$; so $C$ is finite and finitely presented over $D$. Hence $C$ is w-contractible by [lem-ce-finite-finitely-presented-wcontractible]; this includes $C=0$ (empty fibre). Finally $u_f(\\operatorname{Spec}D)=X\\times_Y\\operatorname{Spec}D\\cong\\operatorname{Spec}C$ by step 1 and associativity of fibre products.",
+   "uses": [
+    "lem-weil-pbc-source-wcontractible-extension",
+    "lem-weil-pbc-ind-etale-stability",
+    "def-weil-pbc-proetale-covering",
+    "lem-ce-finite-finitely-presented-wcontractible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09A8, proof, second and third sentences: the construction of Proposition proposition-find-w-contractible gives A -> D faithfully flat ind-etale with D w-contractible; D tensor_A B is w-contractible by Lemma lemma-finite-finitely-presented-over-w-contractible (Tag 0986)"
+   }
+  },
+  {
+   "text": "Let $0\\to F'\\to F\\xrightarrow{\\pi}F''\\to0$ be a short exact sequence in $\\operatorname{Ab}(X_{\\mathrm{proet}})$. By the direct-image definition [def-weil-proetale-inverse-image], $(f_*F)(\\operatorname{Spec}D)=F(u_f(\\operatorname{Spec}D))$, and $u_f(\\operatorname{Spec}D)$ is an object of $X_{\\mathrm{proet}}$ whose scheme is isomorphic to $\\operatorname{Spec}C$ with $C$ w-contractible (step 2). The epimorphism $\\pi$ is locally surjective by [lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective]; hence its underlying map of set-valued sheaves is locally surjective, and [lem-weil-pbc-source-affine-wcontractible-evaluation] says it is surjective on $u_f(\\operatorname{Spec}D)$-sections. Thus every section of $(f_*F'')(\\operatorname{Spec}D)$ lifts to $(f_*F)(\\operatorname{Spec}D)$.",
+   "uses": [
+    "def-weil-proetale-inverse-image",
+    "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective",
+    "lem-weil-pbc-source-affine-wcontractible-evaluation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09A8, proof, fourth and fifth sentences: f_* F evaluated at U=Spec(D) equals F evaluated at V=Spec(D tensor_A B), and evaluation at V is exact"
+   }
+  },
+  {
+   "text": "Let $W$ be any object of $Y_{\\mathrm{proet}}$ and $s\\in(f_*F'')(W)$. With the affine $W'\\subseteq W$ of step 1 and the $\\operatorname{Spec}D_{W'}\\to W'$ of step 2, the composites $\\operatorname{Spec}D_{W'}\\to W$ form a pro-etale covering of $W$ [def-weil-pbc-proetale-covering]: an affine open $V\\subseteq W$ is a finite union of such $W'\\subseteq V$, and each $\\operatorname{Spec}D_{W'}$ is affine and maps onto $W'$. By step 3, $s|_{\\operatorname{Spec}D_{W'}}$ lifts for every $W'$, so $f_*\\pi$ is locally surjective, hence an epimorphism of $\\operatorname{Ab}(Y_{\\mathrm{proet}})$ by [lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective]. Kernels of abelian sheaves are computed sectionwise [lem-weil-pbc-module-sheaves-colimits-forgetful], and $(f_*G)(V)=G(u_f(V))$ [def-weil-proetale-inverse-image], so $0\\to f_*F'\\to f_*F\\to f_*F''$ is exact sectionwise, hence exact. Therefore $f_*:\\operatorname{Ab}(X_{\\mathrm{proet}})\\to\\operatorname{Ab}(Y_{\\mathrm{proet}})$ is exact.",
+   "uses": [
+    "def-weil-pbc-proetale-covering",
+    "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09A8, proof, third sentence: 'We may check exactness of a sequence of sheaves by evaluating on U = Spec(D)', written out for covers of every object of Y_proet"
+   }
+  },
+  {
+   "text": "For sheaves of modules over arbitrary commutative ring sheaves $R_Y,R_X$, the underlying abelian direct image is the same sectionwise functor by [def-weil-proetale-module-direct-image] and [def-weil-proetale-inverse-image], while the $R_Y$-action is the one induced from $f^{-1}R_Y\\to R_X$ through the module adjunction [lem-weil-pbc-ringed-topoi-module-adjunction]. The forgetful functor from module sheaves to abelian sheaves is faithful and exact by [lem-weil-pbc-module-sheaves-colimits-forgetful]. Hence the underlying sequence after $f_*$ is short exact by the preceding steps, and faithfulness reflects its exactness in the module category. No constructibility, torsion, or flatness of the modules is used.",
+   "uses": [
+    "def-weil-proetale-module-direct-image",
+    "def-weil-proetale-inverse-image",
+    "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex; literature/stacks-project/sites-modules.tex",
+    "place": "Tag 09A8 module consequence; module direct image is obtained by forgetting module structures"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-weakly-etale-source-locality",
+  "def-weil-pbc-small-proetale-site",
+  "def-weil-pbc-proetale-covering",
+  "def-weil-finite-integral-morphism",
+  "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+  "def-sbc-locally-finite-presentation",
+  "lem-weil-pbc-source-wcontractible-extension",
+  "lem-weil-pbc-ind-etale-stability",
+  "lem-ce-finite-finitely-presented-wcontractible",
+  "def-weil-proetale-inverse-image",
+  "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective",
+  "lem-weil-pbc-source-affine-wcontractible-evaluation",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "def-weil-proetale-module-direct-image",
+  "lem-weil-pbc-ringed-topoi-module-adjunction"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09A8, Lemma proetale-lemma-finite: the affine w-contractible evaluation proof; module clause is the immediate consequence by forgetting module structures"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
    "query": "pro[Ee]tale.*(exact|finite)|(exact|finite).*pro[Ee]tale",
-   "results": "Hits: Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean.  The read sources concern exact limits of condensed objects, general site pullback/pushforward constructions, structure-sheaf modules, or etale ring maps; none states exactness of finite finitely presented pro-etale direct image. Proetale.lean lines 120-175 only constructs the small site. ",
+   "results": "No hits in Mathlib/.",
    "date": "2026-10-18",
    "verdict": "no match"
   },
   {
    "tool": "grep",
-   "query": "preservesFiniteColimits.*lowerStar|finite.*[Pp]ushforward|finite.*[Dd]irect[Ii]mage",
-   "results": "No hits. ",
+   "query": "pro[Ee]tale.*(exact|finite)|(exact|finite).*pro[Ee]tale",
+   "results": "No hits in Mathlib/.",
    "date": "2026-10-18",
    "verdict": "no match"
   },
@@ -58,10 +150,38 @@
    "results": "Hits: Condensed.hasExactColimitsOfShape, Condensed.hasExactLimitsOfShape, CategoryTheory.Sheaf.instHasExactLimitsOfShapeOfHasFiniteColimitsOfPreservesFiniteColimitsFunctorOppositeSheafToPresheaf, CategoryTheory.Functor.SmallCategories.instPreservesFiniteLimitsSheafSheafPullbackOfRepresentablyFlat, CategoryTheory.Functor.sheafPushforwardCocontinuous, CategoryTheory.Sheaf.instHasExactColimitsOfShapeOfHasFiniteLimitsOfPreservesColimitsOfShapeFunctorOppositeSheafToPresheaf, CategoryTheory.Functor.sheafPullbackConstruction.preservesFiniteLimits, CategoryTheory.Functor.sheafPullbackConstruction.instPreservesFiniteLimitsSheafSheafPullback.  The read sources concern exact limits of condensed objects, general site pullback/pushforward constructions, structure-sheaf modules, or etale ring maps; none states exactness of finite finitely presented pro-etale direct image. Proetale.lean lines 120-175 only constructs the small site. ",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact direct image of abelian sheaves on the small pro-etale site for a finite morphism locally of finite presentation",
+   "results": "8 hits: Condensed.instAB4StarCondensedMod; LightCondensed.instIsGrothendieckAbelianLightCondMod; Condensed.hasExactColimitsOfShape; Condensed.hasExactLimitsOfShape; CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact; CategoryTheory.Sheaf.instHasExactLimitsOfShapeOfHasFiniteColimitsOfPreservesFiniteColimitsFunctorOppositeSheafToPresheaf; CategoryTheory.Sheaf.instHasExactColimitsOfShapeOfHasFiniteLimitsOfPreservesColimitsOfShapeFunctorOppositeSheafToPresheaf; CategoryTheory.Functor.SmallCategories.instPreservesFiniteLimitsSheafSheafPullbackOfRepresentablyFlat. None states finite pro-etale pushforward exactness.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, ProEtale, IsFinite, PreservesFiniteLimits",
+   "results": "loogle: unknown identifier 'ProEtale'",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "pro[Ee]tale.*(exact|finite)|(exact|finite).*pro[Ee]tale",
+   "results": "No hits in Mathlib/.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite locally finitely presented morphisms have exact pushforward on all small pro-etale abelian sheaves",
+   "results": "8 hits: SheafOfModules.pushforward_map_val; SheafOfModules.pushforward_obj_val; AlgebraicGeometry.Scheme.Modules.instAdditivePushforward; AlgebraicGeometry.IsFinite.recOn; AlgebraicGeometry.Scheme.Hom.finitePresentation_appLE; SheafOfModules.isFinitePresentation; AlgebraicGeometry.Scheme.Modules.instFaithfulPushforward; AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth. None states the pro-etale exactness theorem.",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-zl-finite-adic-direct-image",
@@ -80,5 +200,49 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-zl-finite-fp-proetale-pushforward-exact",
+  "worker": "stage1",
+  "summary": "Retained the imported Stacks Tag 09A8 statement and split its proof into the affine w-contractible evaluation argument. Every object of the target pro-etale site is covered by affine objects over affine opens, over which the finite morphism is given by a finite finitely presented algebra (Morphisms 01TQ); a w-contractible ind-etale cover of each is chosen, finite base change preserves the hypotheses of the existing finite-w-contractibility lemma, and exact evaluation gives local surjectivity. The arbitrary ringed-module clause is obtained by the explicit sectionwise direct-image formula and the faithful exact forgetful functor. No new nodes or Mathlib leaves were needed; the item searches were rerun and appended. Maintainer reader (2026-10-18) repaired the localization to cover every object of Y_proet, replaced the sec-trace-formula citation by the 01TQ Mathlib leaf, and cited the abelian epi criterion and ind-etale permanence.",
+  "blueprint": "Realizes the parent lem-zl-finite-pushforward proof sentence invoking finite-adic direct-image exactness: exactness of the ambient pro-etale direct image needed before the coefficient reduction tower.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-source-wcontractible-extension",
+    "why": "Generic pro-etale basis construction supplies the w-contractible faithfully flat ind-etale cover used to test epimorphisms."
+   },
+   {
+    "node": "lem-weil-pbc-ind-etale-stability",
+    "why": "Generic ind-etale permanence: ind-etale maps are weakly etale and weakly etale maps compose, so the w-contractible cover is an object of the pro-etale site."
+   },
+   {
+    "node": "lem-ce-finite-finitely-presented-wcontractible",
+    "why": "Generic Stacks 0986 input proves the finite finitely presented pullback ring remains w-contractible."
+   },
+   {
+    "node": "lem-weil-pbc-source-affine-wcontractible-evaluation",
+    "why": "Generic weakly contractible evaluation criterion supplies exact section lifting on the pullback object."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "why": "Generic ringed-site infrastructure makes forgetting module structure faithful and exact, reflecting the abelian exactness."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-source-wcontractible-extension",
+  "lem-weil-pbc-ind-etale-stability",
+  "lem-ce-finite-finitely-presented-wcontractible",
+  "lem-weil-pbc-source-affine-wcontractible-evaluation",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q33-defb52375",
+  "group": "Q33",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q33-defb52375 (reviewer sub-agent of L); spot-checked: I read Stacks 09A8 (proetale.tex lemma-finite, l.4762-4784) and 0986 (l.2027 ff.) in full, together with the item, every cited node, the unit sk-thm-dl-a1-upper and the parent lem-zl-finite-pushforward. The statement matches 09A8 hypothesis by hypothesis, the module clause is correct, nothing is weakened, and there is no duplicate in the DAG. Batch-5 citation lem-trf-finite-morphism-finite-presentation: it is a general scheme fact (finite + lfp => fp) whose closure stays in elementary scheme definitions and never reaches the trace-formula or Poincare-duality proofs. It was still the wrong citation, because step 1 needs the ring map on affine charts to be finitely presented (Morphisms 01TQ), which it does not state. I replaced it with the Mathlib leaf lem-weil-pbc-lfp-affine-opens-finite-presentation, and the corrected proof_deps closure no longer reaches sec-trace-formula, sec-poincare-duality or sk-thm-trace-transport. Repaired 3 faults in fixes/dag/nodes/sec-deligne-laumon-a1/lem-zl-finite-fp-proetale-pushforward-exact.json: (1) C4/batch-5: the step-1 citation above; (2) E5/D5: steps 1 and 4 built the w-contractible covers only over affine opens of Y, but the epi criterion needs a lifting covering for every object W of Y_proet; the localization now covers each W by affine W' over affine opens of Y (cited lem-weil-pbc-weakly-etale-source-locality), C = D tensor_A B is written out as finite and finitely presented over D, and the composite covering is checked directly; (3) C4: 'ind-etale => weakly etale' is now cited to lem-weil-pbc-ind-etale-stability instead of the definition, the Ab epi <=> locally surjective step to lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective, and the sectionwise kernels to lem-weil-pbc-module-sheaves-colimits-forgetful. Removed unused deps: def-weil-pbc-ind-etale-algebra, lem-weil-pbc-finite-morphism-permanence, lem-weil-pbc-site-sheaf-sets-epi-locally-surjective. Edge cases checked: identity, empty X (C = 0), split finite cover, nonreduced B. Accepted tool_uses: source-wcontractible-extension, ind-etale-stability, ce-finite-finitely-presented-wcontractible, source-affine-wcontractible-evaluation, module-sheaves-colimits-forgetful. No new nodes, no SGA, no cycle.; 1 file(s) fixed by the reviewer"
  }
 }
