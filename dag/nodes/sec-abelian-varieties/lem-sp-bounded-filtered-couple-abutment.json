@@ -23,7 +23,7 @@
    "elementary": false
   },
   {
-   "text": "Images of A(n).iota(P) agree with the homology inclusion images, because precomposition by the isomorphism eD and the equality transport does not change an image. Define G(n).step(p) to be imageFiltration(n,A(n)).step(p+n). Antitonicity follows by shifting its integer argument. The whole and zero steps of U give whole and zero homology images, so both the diagonal image filtration and G are finite. A bottom step implies separation and a top step implies exhaustiveness.",
+   "text": "Images of A(n).iota(P) agree with the homology inclusion images, because precomposition by eD and the equality transport is epimorphic and does not change an image. Define G(n) using the upstream DecreasingFiltration structure, with F(p)=imageFiltration(n,A(n)).step(p+n). Its successor inequality follows from antitonicity of the PBC image filtration. The whole and zero steps of U give whole and zero homology images, so both filtrations are finite. A bottom step implies separation and a top step implies exhaustiveness.",
    "uses": [
     "def-sp-filtration",
     "def-sp-convergence",
@@ -40,7 +40,7 @@
    "elementary": false
   },
   {
-   "text": "A finite filtration has the required quotient inverse-limit property: choose a bottom step b, at which the cokernel projection is an isomorphism. For a compatible inverse cone f define h=f(b) followed by the inverse of this projection. Integer induction about b proves every projection equation; the downward step uses compatibility, and the upward step cancels the quotient transition, an isomorphism in the bottom tail. Uniqueness follows by cancelling the projection at b. The private finite_inverseLimit helper is fully proved. Combine this with separatedness, exhaustiveness, regularity and weak convergence to obtain ConvergesTo.",
+   "text": "A finite PBCDecreasingFiltration has the quotient inverse-limit property. The private finite_inverse_limit helper is adapted from the proved private helper in WeilConjectures.CategoryTheory.HalfPlaneConvergence. Choose a bottom step m. The cokernel projection is an isomorphism at every index at least m. For a compatible inverse cone f define h=f(m) followed by the inverse projection. Integer induction about m proves the projection equations: downward use compatibility, upward cancel the quotient transition, which is an isomorphism between bottom-tail quotients. Uniqueness follows by cancelling the projection at m. Combine with separatedness, exhaustiveness, regularity and weak convergence to obtain ConvergesTo.",
    "uses": [
     "def-sp-filtration",
     "def-sp-convergence"
@@ -48,7 +48,7 @@
    "elementary": true
   },
   {
-   "text": "Use weakConvergence_comparison, which is already proved in ExactCoupleConvergence, and reindex the graded piece. Total degree (2p+q)+(-p)=p+q, and filtration index (2p+q)-(p+q)=p. Equality transports give the required pageInfinity-to-G graded isomorphism.",
+   "text": "Apply weakConvergence_comparison at (2p+q,-p). Its target is the graded PBC image filtration at total degree (2p+q)+(-p)=p+q and filtration index 2p+q. Unfold the two gradedPiece definitions and G. Congruence of the cokernel and inclusion identifies the steps using p+(p+q)=2p+q and p+1+(p+q)=2p+q+1; proof irrelevance identifies the inequality witnesses. Compose this equality isomorphism with the weak-convergence comparison.",
    "uses": [
     "def-sp-convergence"
    ],
@@ -66,7 +66,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/homology.tex",
-  "place": "Tag 012W finite tails, implemented via the explicit cohomology diagonal colimit and generic finite-cocone weak convergence; K1 stage 3"
+  "place": "Tag 012W finite tails; explicit cohomology diagonal colimit and generic finite-cocone weak convergence; H2 stage 3 proof against the current upstream filtration APIs. The inverse-limit helper adapts the proved private helper in WeilConjectures.CategoryTheory.HalfPlaneConvergence."
  },
  "mathlib_searches": [
   {
@@ -145,13 +145,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-18",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "K1",
+  "group": "H2",
   "result": "pass",
-  "landing": "20261012T213436-L-1178094",
-  "kind": "interface",
+  "landing": "20261018T062803-L-653629",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

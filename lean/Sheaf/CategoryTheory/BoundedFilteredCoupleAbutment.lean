@@ -11,10 +11,6 @@ public import Mathlib.Algebra.Homology.SpectralSequence.Basic
 public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
 import Sheaf.CategoryTheory.FilteredCohomologyDiagonalColimit
 import Sheaf.CategoryTheory.FiniteCoconeExactCouple
-import WeilConjectures.CategoryTheory.ExactCouple
-import WeilConjectures.CategoryTheory.ExactCoupleConvergence
-import WeilConjectures.CategoryTheory.PBCFiltration
-import WeilConjectures.CategoryTheory.Abelian.Filtration
 
 /-!
 # Finite abutment of a filtered-complex exact couple
@@ -39,54 +35,56 @@ private theorem finite_separated_exhaustive {C : Type u} [Category.{v} C] [Abeli
   · intro V hV
     exact top_le_iff.mp (ha ▸ hV a)
 
-/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
-returned as a stage-3 repair item.
-private theorem finite_inverseLimit {C : Type u} [Category.{v} C] [Abelian C]
-    {T : C} (F : DecreasingFiltration T) (hF : F.IsFinite) :
-    BigradedExactCouple.IsInverseLimit F := by
-  obtain ⟨a, b, ha, hb⟩ := hF
-  have hz (p : ℤ) (hp : b ≤ p) : (F.step p).arrow = 0 := by
-    have he : F.step p = ⊥ := le_bot_iff.mp (hb ▸ F.antitone_step hp)
-    rw [he, Subobject.bot_arrow]
-  have hπ (p : ℤ) (hp : b ≤ p) : IsIso (cokernel.π (F.step p).arrow) := by
-    rw [hz p hp]
-    infer_instance
+-- Adapted from the private finite_inverse_limit proof in HalfPlaneConvergence.
+private theorem finite_inverse_limit {C : Type u} [Category.{v} C] [Abelian C]
+    {T : C} (F : PBCDecreasingFiltration T)
+    (m : ℤ) (hm : F.step m = ⊥) : BigradedExactCouple.IsInverseLimit F := by
+  have hz (p : ℤ) (hp : m ≤ p) : F.step p = ⊥ :=
+    le_antisymm (hm ▸ F.antitone_step hp) bot_le
+  have hπ (p : ℤ) (hp : m ≤ p) : IsIso (cokernel.π (F.step p).arrow) := by
+    apply CokernelCofork.IsColimit.isIso_π
+      (CokernelCofork.ofπ _ (cokernel.condition _)) (cokernelIsCokernel _)
+    apply Subobject.mk_eq_bot_iff_zero.mp
+    simpa only [Subobject.mk_arrow] using hz p hp
+  have hcomm (p : ℤ) :
+      cokernel.π (F.step (p + 1)).arrow ≫ BigradedExactCouple.quotientTransition F p =
+        cokernel.π (F.step p).arrow := by
+    exact cokernel.π_desc _ _ _
   intro S f hf
-  let := hπ b le_rfl
-  let h : S ⟶ T := f b ≫ inv (cokernel.π (F.step b).arrow)
-  have hcomm (p : ℤ) : h ≫ cokernel.π (F.step p).arrow = f p := by
-    refine Int.inductionOn' (motive := fun p ↦
-      h ≫ cokernel.π (F.step p).arrow = f p) p b ?_ ?_ ?_
-    · simp [h]
-    · intro p hp ih
-      have hw : cokernel.π (F.step (p + 1)).arrow ≫
-          BigradedExactCouple.quotientTransition F p = cokernel.π (F.step p).arrow := by
-        simp [BigradedExactCouple.quotientTransition]
-      let := hπ p hp
-      let := hπ (p + 1) (by omega)
-      have hc : IsIso (cokernel.π (F.step (p + 1)).arrow ≫
-          BigradedExactCouple.quotientTransition F p) := hw ▸ inferInstance
-      let := (isIso_comp_left_iff (cokernel.π (F.step (p + 1)).arrow)
-        (BigradedExactCouple.quotientTransition F p)).mp hc
-      apply (cancel_mono (BigradedExactCouple.quotientTransition F p)).mp
-      rw [Category.assoc, hw, hf p, ih]
-    · intro p _ ih
+  have := hπ m le_rfl
+  let h : S ⟶ T := f m ≫ inv (cokernel.π (F.step m).arrow)
+  have hbase : h ≫ cokernel.π (F.step m).arrow = f m := by simp [h]
+  refine ⟨h, ?_, ?_⟩
+  · intro p
+    induction p using Int.inductionOn' with
+    | b => exact m
+    | zero => exact hbase
+    | succ p hp ih =>
+      have := hπ p hp
+      have := hπ (p + 1) (by omega)
+      have : IsIso (BigradedExactCouple.quotientTransition F p) := by
+        have heq : BigradedExactCouple.quotientTransition F p =
+            inv (cokernel.π (F.step (p + 1)).arrow) ≫ cokernel.π (F.step p).arrow := by
+          apply (cancel_epi (cokernel.π (F.step (p + 1)).arrow)).1
+          simp [hcomm]
+        rw [heq]
+        infer_instance
+      apply (cancel_mono (BigradedExactCouple.quotientTransition F p)).1
+      rw [Category.assoc, hcomm, hf, ih]
+    | pred p hp ih =>
       have ih' : h ≫ cokernel.π (F.step (p - 1 + 1)).arrow = f (p - 1 + 1) := by
-        rw [show p - 1 + 1 = p by omega]
-        exact ih
+        exact Eq.mp (congrArg (fun j : ℤ ↦ h ≫ cokernel.π (F.step j).arrow = f j)
+          (show p = p - 1 + 1 by omega)) ih
       calc
         h ≫ cokernel.π (F.step (p - 1)).arrow =
-            h ≫ cokernel.π (F.step (p - 1 + 1)).arrow ≫
-              BigradedExactCouple.quotientTransition F (p - 1) := by
-          simp [BigradedExactCouple.quotientTransition]
+            h ≫ (cokernel.π (F.step (p - 1 + 1)).arrow ≫
+              BigradedExactCouple.quotientTransition F (p - 1)) := by rw [hcomm]
         _ = f (p - 1 + 1) ≫ BigradedExactCouple.quotientTransition F (p - 1) := by
           rw [← Category.assoc, ih']
         _ = f (p - 1) := hf (p - 1)
-  refine ⟨h, hcomm, ?_⟩
-  intro k hk
-  apply (cancel_mono (cokernel.π (F.step b).arrow)).mp
-  exact (hk b).trans (hcomm b).symm
--/
+  · intro h' hh'
+    apply (cancel_mono (cokernel.π (F.step m).arrow)).1
+    exact (hh' m).trans hbase.symm
 
 private theorem homology_image_top {C : Type u} [Category.{v} C] [Abelian C]
     {K : CochainComplex C ℤ} (V : Subobject K) (hV : V = ⊤) (n : ℤ) :
@@ -176,6 +174,88 @@ theorem boundedFilteredComplex_coupleAbutment
           X.ConvergesTo L A ∧
           (∀ p q : ℤ, Nonempty
             (X.pageInfinity L (2 * p + q) (-p) ≅ (G (p + q)).gradedPiece p)) := by
-  sorry
+  -- The finite-cocone criterion only needs the alpha comparison.
+  have _hγ := hγ
+  obtain ⟨hc, hu⟩ := filteredCohomologyDiagonal_isColimit U.obj U.property X eD hα
+  let A : ∀ n : ℤ, X.AlphaColimit n := fun n ↦
+    { obj := U.obj.obj.homology n
+      ι := filteredCohomologyDiagonalMap U.obj X eD n
+      comm := hc n
+      isColimit := hu n }
+  have himage (n P : ℤ) : (X.imageFiltration n (A n)).step P =
+      imageSubobject (HomologicalComplex.homologyMap
+        (U.obj.filtration.step (P - n)).arrow n) := by
+    dsimp [BigradedExactCouple.imageFiltration, A, filteredCohomologyDiagonalMap]
+    rw [imageSubobject_comp_eq_of_epi, imageSubobject_comp_eq_of_epi]
+  let G : ∀ n : ℤ, DecreasingFiltration (U.obj.obj.homology n) := fun n ↦
+    { F := fun p ↦ (X.imageFiltration n (A n)).step (p + n)
+      F_succ_le := fun p ↦ (X.imageFiltration n (A n)).antitone_step (by omega) }
+  have hG (n p : ℤ) : (G n).step p =
+      imageSubobject (HomologicalComplex.homologyMap
+        (U.obj.filtration.step p).arrow n) := by
+    dsimp [G]
+    rw [himage, add_sub_cancel_right]
+  obtain ⟨a, b, ha, hb⟩ := U.property
+  have hGfinite (n : ℤ) : (G n).IsFinite := by
+    refine ⟨a, b, ?_, ?_⟩
+    · change (G n).step a = ⊤
+      rw [hG]
+      exact homology_image_top _ ha n
+    · change (G n).step b = ⊥
+      rw [hG]
+      exact homology_image_bot _ hb n
+  have hfinite (n : ℤ) : (X.imageFiltration n (A n)).IsFinite := by
+    refine ⟨a + n, b + n, ?_, ?_⟩
+    · rw [himage, add_sub_cancel_right]
+      exact homology_image_top _ ha n
+    · rw [himage, add_sub_cancel_right]
+      exact homology_image_bot _ hb n
+  have hA : ∀ n : ℤ, ∃ a b : ℤ,
+      (∀ P : ℤ, P ≤ a → IsIso ((A n).ι P)) ∧
+      (∀ P : ℤ, b ≤ P → IsZero (X.D P (n - P))) := by
+    intro n
+    refine ⟨a + n, b + n, ?_, ?_⟩
+    · intro P hP
+      have ht : U.obj.filtration.step (P - n) = ⊤ :=
+        top_le_iff.mp (ha ▸ U.obj.filtration.antitone_step (by omega))
+      let : IsIso (U.obj.filtration.step (P - n)).arrow :=
+        (Subobject.isIso_arrow_iff_eq_top _).mpr ht
+      let : IsIso (HomologicalComplex.homologyMap
+          (U.obj.filtration.step (P - n)).arrow n) :=
+        (HomologicalComplex.homologyFunctor C (ComplexShape.up ℤ) n).map_isIso _
+      dsimp [A, filteredCohomologyDiagonalMap]
+      infer_instance
+    · intro P hP
+      have ht : U.obj.filtration.step (-(n - P)) = ⊥ :=
+        le_bot_iff.mp (hb ▸ U.obj.filtration.antitone_step (by omega))
+      have hz : (U.obj.filtration.step (-(n - P))).arrow = 0 := by
+        rw [ht, Subobject.bot_arrow]
+      exact IsZero.of_iso
+        ((HomologicalComplex.homologyFunctor C (ComplexShape.up ℤ)
+          (P + (n - P))).map_isZero (IsZero.of_mono_eq_zero _ hz)) (eD P (n - P))
+  obtain ⟨L, hreg, hweak⟩ := X.finiteCocone_weakConvergence A hA
+  refine ⟨G, L, A, fun n ↦ Iso.refl _, hG, ?_, ?_, ?_, ?_⟩
+  · exact fun n ↦ ⟨hGfinite n, (finite_separated_exhaustive (G n) (hGfinite n)).1⟩
+  · intro n P
+    exact Category.comp_id _
+  · refine ⟨hreg, ⟨hweak, ?_⟩, ?_⟩
+    · intro n
+      obtain ⟨c, d, hc, hd⟩ := hfinite n
+      constructor
+      · intro V hV
+        exact le_bot_iff.mp (hd ▸ hV d)
+      · intro V hV
+        exact top_le_iff.mp (hc ▸ hV c)
+    · intro n
+      obtain ⟨c, d, hc, hd⟩ := hfinite n
+      exact finite_inverse_limit _ d hd
+  · intro p q
+    obtain ⟨e, _, _⟩ := X.weakConvergence_comparison L A hweak (2 * p + q) (-p)
+    refine ⟨e ≪≫ eqToIso ?_⟩
+    dsimp only [PBCDecreasingFiltration.gradedPiece, DecreasingFiltration.gradedPiece,
+      DecreasingFiltration.gr, G]
+    have hn : 2 * p + q + -p = p + q := by omega
+    rw [hn]
+    congr 3 <;> first | omega | exact proof_irrel_heq _ _
 
 end CategoryTheory
