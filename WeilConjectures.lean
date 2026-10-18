@@ -63,6 +63,7 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TopologicalPullba
 public import WeilConjectures.Algebra.Category.ModuleCat.StableImageTower
 public import WeilConjectures.Algebra.Category.ModuleCat.TorSymmetry
 public import WeilConjectures.Algebra.Category.ModuleCat.TowerLimitExactCoordinateMaps
+public import WeilConjectures.Algebra.Category.ModuleCat.TowerLimitFiniteOfExact
 public import WeilConjectures.Algebra.Category.ModuleCat.TowerLimitInducedMaps
 public import WeilConjectures.Algebra.Category.Ring.FilteredColimitsFiniteData
 public import WeilConjectures.Algebra.Central.ReducedNorm
@@ -6055,6 +6056,7 @@ public import WeilConjectures.CategoryTheory.TowerSplitEnvelope
 public import WeilConjectures.CategoryTheory.TransportScalarActionDiagrams
 public import WeilConjectures.CategoryTheory.TriangleCommonRefinement
 public import WeilConjectures.CategoryTheory.TriangleMorphismCategory
+public import WeilConjectures.CategoryTheory.Triangulated.BocksteinTowerFinite
 public import WeilConjectures.CategoryTheory.Triangulated.BrownRepresentability.Basic
 public import WeilConjectures.CategoryTheory.Triangulated.BrownRepresentability.Localization
 public import WeilConjectures.CategoryTheory.Triangulated.BrownRepresentability.Telescope
@@ -6614,6 +6616,7 @@ public import WeilConjectures.LinearAlgebra.ExteriorPower.ChartTransition
 public import WeilConjectures.LinearAlgebra.ExteriorPower.Top
 public import WeilConjectures.LinearAlgebra.ExteriorPowerLocalization
 public import WeilConjectures.LinearAlgebra.ExteriorTopDirectSum
+public import WeilConjectures.LinearAlgebra.FreeModule.TorsionCoordinates
 public import WeilConjectures.LinearAlgebra.GenericExteriorPowerLocalization
 public import WeilConjectures.LinearAlgebra.IdempotentCharpoly
 public import WeilConjectures.LinearAlgebra.IdempotentCharpolyLeadingCoeff
@@ -8615,6 +8618,7 @@ public import WeilConjectures.RingTheory.TateResidue.ResidueTheorem
 public import WeilConjectures.RingTheory.TateResidue.TateIdeals
 public import WeilConjectures.RingTheory.TateRootClosureQuotientFinite
 public import WeilConjectures.RingTheory.TateRootIdealPrime
+public import WeilConjectures.RingTheory.TateSubmoduleFinite
 public import WeilConjectures.RingTheory.TensorAlgebraStructureFiniteStage
 public import WeilConjectures.RingTheory.TensorCyclesFlatCokernel
 public import WeilConjectures.RingTheory.TensorFiniteTypeLimit
@@ -8747,6 +8751,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.EtaleLocalization
 public import WeilConjectures.SixFunctors.Etale.Derived.Exchange
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.AbelianConstant
+public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.BocksteinLimit
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.BoundedConstructible
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.CohomologicalDimension
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.CompactSupport
@@ -8773,6 +8778,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.Deligne.State
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.Deligne.ThirdStep
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.Deligne.Transport
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.DirectImage
+public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.DirectImageReduction
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.FiniteBoundary
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.FiniteCancellation
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.FiniteComparison
@@ -9114,6 +9120,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.FiniteEtaleCounit
 public import WeilConjectures.SixFunctors.ProEtale.Adic.FiniteEtaleLisse
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ForgetCoherence
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ForgetLowerStar
+public import WeilConjectures.SixFunctors.ProEtale.Adic.FreeSections
 public import WeilConjectures.SixFunctors.ProEtale.Adic.GeometricFrobenius
 public import WeilConjectures.SixFunctors.ProEtale.Adic.GeometricFrobeniusMate
 public import WeilConjectures.SixFunctors.ProEtale.Adic.GlobalSectionsHom
@@ -9125,6 +9132,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.InternalHom
 public import WeilConjectures.SixFunctors.ProEtale.Adic.InternalHomEvaluation
 public import WeilConjectures.SixFunctors.ProEtale.Adic.IrreducibleLisse
 public import WeilConjectures.SixFunctors.ProEtale.Adic.IrreducibleLisseQuotients
+public import WeilConjectures.SixFunctors.ProEtale.Adic.LatticeSections
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseAbelian
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseCover.CocycleLimit
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseCover.Congruence
@@ -9144,6 +9152,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseExtensionByZero
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseExtensionByZeroSpecializes
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseGerm
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseInternalHom
+public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseLattice
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseMonodromy
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseMonodromyCover
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseMonodromyCoverContinuity
@@ -9171,6 +9180,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.Module
 public import WeilConjectures.SixFunctors.ProEtale.Adic.OpenImmersion
 public import WeilConjectures.SixFunctors.ProEtale.Adic.RightDerivedLowerStarColimit
 public import WeilConjectures.SixFunctors.ProEtale.Adic.Ring
+public import WeilConjectures.SixFunctors.ProEtale.Adic.SectionAction
 public import WeilConjectures.SixFunctors.ProEtale.Adic.SplitCovering
 public import WeilConjectures.SixFunctors.ProEtale.Adic.StalkEvaluation
 public import WeilConjectures.SixFunctors.ProEtale.Adic.StalkIhomDual
