@@ -3,35 +3,130 @@
  "blueprint": {
   "is": "lem-sfb-module-mapmod-pullback-kflat",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Transport along the pullback preserves K-flat complexes",
- "statement": "Let $\\Lambda$ be a commutative condensed ring and $f\\colon X\\to Y$ a morphism of\nschemes. The transport\n$\\operatorname{mapMod}(f^*_{\\Ab})\\colon\\Mod_{\\Lambda_Y}\\to\\Mod_{f^*\\Lambda_Y}$ along\nthe strong monoidal pullback of abelian sheaves ([sk-def-sfb-transport],\n[sk-def-sfb-finite-pushforward-pullback]) sends K-flat complexes ([sk-def-sfb-derived-categories]) of\n$\\Lambda_Y$-modules to K-flat complexes of $f^*\\Lambda_Y$-modules, for the relative\ntensor products of [sk-prop-sfb-module-category].",
+ "statement": "Let $\\Lambda$ be a commutative condensed ring and $f\\colon X\\to Y$ a morphism of\nschemes. The transport\n$\\operatorname{mapMod}(f^*_{\\Ab})\\colon\\Mod_{\\Lambda_Y}\\to\\Mod_{f^*\\Lambda_Y}$ along\nthe strong monoidal pullback of abelian sheaves ([sk-def-sfb-transport],\n[def-sfb-finite-upper-star-monoidal]) sends K-flat complexes ([sk-def-sfb-derived-categories]) of\n$\\Lambda_Y$-modules to K-flat complexes of $f^*\\Lambda_Y$-modules, for the relative\ntensor products of [def-sfb-modobj-relative-tensor].",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sfb-module-derived-factorization/lem-sfb-module-mapmod-pullback-kflat.md",
   "place": "node lem-sfb-module-mapmod-pullback-kflat, order 1704"
  },
  "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-objects",
   "sk-def-sfb-transport",
-  "sk-def-sfb-derived-categories"
+  "def-sfb-finite-upper-star-monoidal",
+  "sk-def-sfb-derived-categories",
+  "def-sfb-modobj-relative-tensor"
  ],
  "proof": [
   {
-   "text": "The functor $\\operatorname{mapMod}(f^*_{\\Ab})$ is the pullback of modules along the\nmorphism of ringed topoi $(X_{\\mathrm{proét}},f^*\\Lambda_Y)\\to\n(Y_{\\mathrm{proét}},\\Lambda_Y)$ whose inverse image is $f^*_{\\Ab}$. Since $f^*_{\\Ab}$\nis exact, strong monoidal and commutes with colimits\n([sk-def-sfb-finite-pushforward-pullback]), it commutes with the relative tensor\nproduct of complexes of module objects (a coequalizer of tensor products, followed by\ntotalization, [sk-prop-sfb-module-category]) and preserves acyclicity. That the\npullback of a K-flat complex along a morphism of ringed topoi is K-flat is then the\ngeneral statement of the Stacks Project (Cohomology on Sites, section on K-flat\ncomplexes): one tests $f^*P\\otimes_{f^*\\Lambda_Y}N$ against an arbitrary acyclic\ncomplex $N$ of $f^*\\Lambda_Y$-modules on $X$, not only against pulled-back ones, by\nreducing to the K-flat complexes built from the functorial flat resolutions\n$\\Lambda_Y\\otimes Q$ of [sk-prop-sfb-module-category], whose pullbacks\n$f^*\\Lambda_Y\\otimes f^*_{\\Ab}Q$ are again of this form with $f^*_{\\Ab}Q$ flat.",
-   "uses": [],
-   "elementary": null
+   "text": "Put $R=\\Lambda_Y$ and $S=f^*_{\\mathrm{Ab}}R$. For each of the two pro-etale sites, the tensor on abelian sheaves is the sheafified objectwise tensor of [sk-def-sfb-sheaf-tensor]. Apply [lem-pe-internal-section-tensor-comparison] to $R$ and $S$: its equivalences $E_R,E_S$ identify internal modules with sectionwise module sheaves, identify their direct-sum total relative tensors, and preserve and reflect K-flatness. Thus for a K-flat internal complex $P$, $E_RP$ is K-flat over the section-ring sheaf $R_{\\mathrm{sec}}$. It remains to prove K-flatness of $E_S\\operatorname{mapMod}(f^*_{\\mathrm{Ab}})P$.",
+   "uses": [
+    "sk-def-sfb-sheaf-tensor",
+    "lem-pe-internal-section-tensor-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK, section-tensor-product; internal/sectionwise comparison as stated in lem-pe-internal-section-tensor-comparison"
+   }
+  },
+  {
+   "text": "Write $u=f_{\\mathrm{proet}}$ for the geometric morphism of [def-weil-proetale-inverse-image]. Its abelian inverse image is the sheafified left Kan extension defining $f^*_{\\mathrm{Ab}}$, and its strong monoidal structure is [def-sfb-finite-upper-star-monoidal]. Under the equivalences in step 1, $S_{\\mathrm{sec}}=u^{-1}R_{\\mathrm{sec}}$ canonically, and the transported module is $u^{-1}(E_RP)$ with its induced module action. Indeed [sk-def-sfb-transport] gives the action $f^*R\\otimes f^*M\\to f^*(R\\otimes M)\\to f^*M$. Evaluating on local pure tensors makes this the action obtained by applying $u^{-1}$ to the bilinear scalar action; the unit and multiplication are the images of the original unit and multiplication in exactly the same way. The identifications leave the underlying inverse-image abelian sheaf and maps unchanged, hence also identify each differential of the two termwise complexes. This proves the identification on complexes, not only on objects.",
+   "uses": [
+    "def-weil-proetale-inverse-image",
+    "def-sfb-finite-upper-star-monoidal",
+    "sk-def-sfb-transport"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sfb-module-derived-factorization/lem-sfb-module-mapmod-pullback-kflat.md",
+    "place": "Proof, opening identification with module inverse image; action formula expanded from sk-def-sfb-transport(1)"
+   }
+  },
+  {
+   "text": "Let $p:\\mathbf{Set}\\to\\operatorname{Sh}(X_{\\mathrm{proet}})$ be any topos point and let $q=u\\circ p$. By [def-trf-geometric-morphism], this is a point of $\\operatorname{Sh}(Y_{\\mathrm{proet}})$ and $q^{-1}=p^{-1}u^{-1}$. The forward implication of [lem-sfb-ringed-site-kflat-stalk-criterion] applied to $E_RP$ says that $(E_RP)_q$ is K-flat over $(R_{\\mathrm{sec}})_q$. Step 2 and the composite inverse-image formula give $(E_S\\operatorname{mapMod}(f^*_{\\mathrm{Ab}})P)_p\\cong(E_RP)_q$ over $(S_{\\mathrm{sec}})_p\\cong(R_{\\mathrm{sec}})_q$. The action agrees because both are $p^{-1}u^{-1}$ of the original action; the differentials agree because both are $p^{-1}u^{-1}d_P$. Consequently the target stalk complex is K-flat. This uses no extension to a different stalk ring.",
+   "uses": [
+    "def-trf-geometric-morphism",
+    "lem-sfb-ringed-site-kflat-stalk-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0DEN, lemma-check-K-flat-stalks (1); compare the pointwise proof of Tag 0DEP, lemma-pullback-K-flat-points"
+   }
+  },
+  {
+   "text": "By [lem-sfb-proetale-enough-points], the small pro-etale topos of $X$ admits a set-indexed conservative family of topos points. Step 3 gives K-flatness at every member of this family. Apply the reverse implication of [lem-sfb-ringed-site-kflat-stalk-criterion] on $X$ to conclude that $E_S\\operatorname{mapMod}(f^*_{\\mathrm{Ab}})P$ is K-flat. Finally [lem-pe-internal-section-tensor-comparison] reflects K-flatness through $E_S$, giving the required K-flatness for the internal relative tensor product. In particular the argument tests every acyclic $S$-module complex on $X$, through the converse stalk criterion, rather than just complexes pulled back from $Y$.",
+   "uses": [
+    "lem-sfb-proetale-enough-points",
+    "lem-sfb-ringed-site-kflat-stalk-criterion",
+    "lem-pe-internal-section-tensor-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 0992, lemma-points-proetale, together with sites-cohomology.tex Tag 0DEN(2)"
+   }
   }
  ],
- "proof_deps": [],
+ "proof_deps": [
+  "def-sfb-finite-upper-star-monoidal",
+  "def-trf-geometric-morphism",
+  "def-weil-proetale-inverse-image",
+  "lem-pe-internal-section-tensor-comparison",
+  "lem-sfb-proetale-enough-points",
+  "lem-sfb-ringed-site-kflat-stalk-criterion",
+  "sk-def-sfb-sheaf-tensor",
+  "sk-def-sfb-transport"
+ ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sfb-module-derived-factorization/lem-sfb-module-mapmod-pullback-kflat.md",
-  "place": "## Proof"
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0DEN and the pointwise proof of Tag 0DEP, with proetale.tex Tag 0992 and the existing internal/sectionwise tensor comparison; replaces the incomplete blueprint argument"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image of module sheaves along a morphism of topoi preserves K-flat complexes",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.SmallCategories.instPreservesFiniteLimitsSheafSheafPullbackOfRepresentablyFlat\", \"Module.Flat.of_shrink\", \"CategoryTheory.compatiblePreservingOfFlat\", \"AlgebraicGeometry.Scheme.Hom.flat_appLE\", \"AlgebraicGeometry.Flat.flat_appLE\", \"CategoryTheory.lan_flat_of_flat\", \"ModuleCat.preservesFiniteLimits_extendScalars_of_flat\", \"Module.Flat.instPreservesFiniteLimitsModuleCatTensorLeftOfCarrier\"], \"sub\": \"\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: hits give ordinary module flatness, sheaf pullback constructions, or points of topological/etale sites, not this assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullback",
+   "results": "{\"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"SheafOfModules.pullbackId\", \"SheafOfModules.pullback\", \"SheafOfModules.instIsLeftAdjointPullback\", \"SheafOfModules.pullbackPushforwardAdjunction\", \"SheafOfModules.pullbackComp\", \"SheafOfModules.pullback_comp_id\", \"SheafOfModules.pullback_id_comp\", \"SheafOfModules.pullbackIso\"], \"sub\": \"\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: hits give ordinary module flatness, sheaf pullback constructions, or points of topological/etale sites, not this assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "KFlat|IsKFlat|kFlat",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"sub\": \"\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: hits give ordinary module flatness, sheaf pullback constructions, or points of topological/etale sites, not this assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pullback of module objects in abelian sheaves preserves K-flat complexes",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pullback\", \"SheafOfModules.pullbackObjFreeIso_hom_naturality\", \"AlgebraicGeometry.Scheme.Modules.pullback\", \"SheafOfModules.pullbackPushforwardAdjunction\", \"SheafOfModules.pullbackObjFreeIso.congr_simp\", \"CategoryTheory.Functor.sheafPullbackConstruction.preservesFiniteLimits\", \"SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc\", \"CategoryTheory.Functor.sheafPullbackConstruction.sheafPullback\"], \"sub\": \"\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: hits give ordinary module flatness, sheaf pullback constructions, or points of topological/etale sites, not this assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensor-acyclic complexes remain K-flat under inverse image to the pulled-back ring sheaf",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"Module.Flat.rTensor_shortComplex_exact\", \"Module.Flat.lTensor_shortComplex_exact\", \"Module.Flat.of_flat_tensorProduct\", \"Module.Flat.iff_lTensor_preserves_shortComplex_exact\", \"Module.Flat.iff_rTensor_preserves_shortComplex_exact\", \"ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat\", \"CommRingCat.Under.instPreservesFiniteLimitsUnderTensorProdOfFlatCarrier\"], \"sub\": \"\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: hits give ordinary module flatness, sheaf pullback constructions, or points of topological/etale sites, not this assertion"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "proof_cites_literature",
@@ -81,5 +176,54 @@
    "missing": [],
    "open": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-sfb-module-mapmod-pullback-kflat",
+  "worker": "stage1",
+  "summary": "Repaired the incomplete unrestricted appeal to ringed-topos K-flat pullback: 0G7E assumes flat terms. Use existing internal/sectionwise tensor comparison, identify the transport action explicitly, take composite topos points, and apply both directions of the general ringed-site stalk criterion plus enough points of the pro-etale site. Added two statement-only lemmas, searched all required services with second phrasings, checked citations and small cases. Replaced two nonexistent umbrella references by their existing precise definition nodes; mathematical statement unchanged.",
+  "blueprint": "Realizes the opening ringed-topos identification and the final arbitrary-acyclic-complex test in the proof of lem-sfb-module-mapmod-pullback-kflat, hence the K-flat preservation input to unit sk-prop-sfb-module-derived-factorization clause (2). The unsupported resolution reduction is replaced below the unit level by the Stacks 0DEN/0DEP point argument, with 0992.",
+  "tool_uses": [
+   {
+    "node": "sk-def-sfb-sheaf-tensor",
+    "why": "The existing sheaf tensor structure supplies the hypotheses of the internal/sectionwise comparison."
+   },
+   {
+    "node": "lem-pe-internal-section-tensor-comparison",
+    "why": "Generic exact tensor equivalence, preserving and reflecting K-flatness; the unit has no replacement for this module-encoding comparison."
+   },
+   {
+    "node": "def-weil-proetale-inverse-image",
+    "why": "Defines the same scheme-induced inverse image on sets, abelian groups and ring objects, needed for composite topos points."
+   },
+   {
+    "node": "def-sfb-finite-upper-star-monoidal",
+    "why": "Defines the strong monoidal structure on the pullback used in mapMod."
+   },
+   {
+    "node": "sk-def-sfb-transport",
+    "why": "Defines the transported module action used in the elementary action identification."
+   },
+   {
+    "node": "def-trf-geometric-morphism",
+    "why": "Generic composite inverse-image formula for geometric morphisms and topos points."
+   }
+  ]
+ },
+ "tool_uses": [
+  "sk-def-sfb-sheaf-tensor",
+  "lem-pe-internal-section-tensor-comparison",
+  "def-weil-proetale-inverse-image",
+  "def-sfb-finite-upper-star-monoidal",
+  "sk-def-sfb-transport",
+  "def-trf-geometric-morphism"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-Codex-Q32-85c813f79",
+  "group": "Q32",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q32-85c813f79 (reviewer sub-agent of L); spot-checked: Read the item and both new nodes in full. Stacks 0DEN and 0992 support all four steps without flat-term or boundedness assumptions. Checked master coefficient categories, edge cases, duplicates, cycles and route restrictions; no dropped node occurs in the 356-node closure. Detailed checks are in review.md; no fixes needed."
  }
 }
