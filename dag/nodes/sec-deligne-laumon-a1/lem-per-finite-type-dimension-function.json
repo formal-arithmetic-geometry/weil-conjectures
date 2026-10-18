@@ -14,9 +14,110 @@
   "def-kun-transcendence-degree",
   "def-weil-residue-field"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The claim is local around the specialized point. Fix a specialization $a\\rightsquigarrow b$ in $T$. Choose an affine neighbourhood $V=\\operatorname{Spec}A$ of $f(b)$ and, from the affine cover in [def-weil-finite-type-morphism], an affine neighbourhood $U=\\operatorname{Spec}B$ of $b$ mapping to $V$, with $B$ finite type over $A$. Every open containing a point contains its generalizations, so $a\\in U$ and $f(a)\\in V$. The ring $A$ is Noetherian by the hypothesis; [pqf-lem-locnoeth-lft] and [pqf-lem-affine-open-locnoeth] give that $T$ is locally Noetherian and $B$ is Noetherian. The ring $B$ is universally catenary: a finite type $B$-algebra is finite type over $A$ (combine the two finite lists of generators), hence catenary by [def-exc-excellent-ring]. Thus $U=\\operatorname{Spec}B$ and $V=\\operatorname{Spec}A$ are Noetherian schemes covered by a single affine open whose ring is universally catenary, which is exactly the universal-catenarity hypothesis of [lem-per-immediate-specialization-criterion](b). Strict localizations at geometric points of $U$ (resp. $V$) are the same whether taken in $U$ or in $T$ (resp. in $V$ or in $S$): a pointed etale neighbourhood in $U$ is one in $T$, and for a pointed etale neighbourhood $W$ in $T$ the open $W\\times_TU$ is one in $U$ mapping to $W$, so the neighbourhoods over $U$ are initial in the limit of [def-weil-pbc-strict-henselization-limit]. Hence geometric specializations between points of a chart, and their immediacy, are the same on the chart and on the scheme. Consequently [lem-per-immediate-specialization-criterion] applies on these charts to both the input and output geometric immediate-specialization conditions.",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "pqf-lem-locnoeth-lft",
+    "pqf-lem-affine-open-locnoeth",
+    "def-exc-excellent-ring",
+    "def-weil-pbc-strict-henselization-limit",
+    "lem-per-immediate-specialization-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02JW, lemma-dimension-function-propagates, first affine reduction; ILO XIV Proposition 2.1.4"
+   }
+  },
+  {
+   "text": "The displayed formula is integer-valued. For any $t\\in U$, put $s=f(t)$. The affine fibre ring $C=B\\otimes_A\\kappa(s)$ is finite type over $\\kappa(s)$: images of a finite list of algebra generators of $B$ still generate after tensoring [def-weil-finite-type-morphism, def-weil-pbc-localization-at-prime]. The point of this fibre over $t$ has local ring $\\mathcal O_{U,t}/\\mathfrak m_s\\mathcal O_{U,t}$ by [lem-sbc-scheme-fibre-stalk-quotient]; its residue field is $\\kappa(t)$, since the quotient ideal lies in the maximal ideal and quotienting once more by that maximal ideal gives $\\mathcal O_{U,t}/\\mathfrak m_t$. Apply [lem-kun-finite-type-residue-trdeg] to $\\operatorname{Spec}C$ over $\\kappa(s)$. It gives $e_t=\\operatorname{trdeg}_{\\kappa(s)}\\kappa(t)<\\infty$. Thus $\\delta_T(t)=\\delta_S(s)+e_t$ is an integer. Here and below the residue fields on an affine chart are those of the original scheme, by [lem-weil-pbc-affine-open-stalk-localization, def-weil-residue-field].",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "def-weil-pbc-localization-at-prime",
+    "lem-sbc-scheme-fibre-stalk-quotient",
+    "lem-kun-finite-type-residue-trdeg",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "def-weil-residue-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02JW, definition of delta_{X/S}; finiteness of the residue transcendence degrees"
+   }
+  },
+  {
+   "text": "Let $\\mathfrak q_0\\subseteq\\mathfrak q_1$ be the primes of $B$ corresponding to $a,b$, and put $\\mathfrak p_i=\\mathfrak q_i\\cap A$. Set $R=A/\\mathfrak p_0$ and $D=B/\\mathfrak q_0$. These are domains and the induced map $R\\to D$ is injective: its kernel is $\\mathfrak q_0\\cap A$ modulo $\\mathfrak p_0$. The images of the generators of $B/A$ generate $D/R$. A quotient of a Noetherian ring is Noetherian (lift an ideal to the original ring and descend its finitely many generators). Moreover $R$ and $D$ are universally catenary: every finite type algebra over either quotient is finite type over $A$, hence catenary by [def-exc-excellent-ring]. The reduced point closures on the charts are $\\operatorname{Spec}R$ and $\\operatorname{Spec}D$; their generic points are $f(a)$ and $a$. The scheme-to-ring residue identifications are given by [lem-weil-pbc-spec-residue-field-identification]. Quotienting by the generic-point primes leaves all residue fields of points in these closures unchanged: at a prime $\\mathfrak r$ containing the quotient ideal the field is $\\operatorname{Frac}(A/\\mathfrak r)$, or $\\operatorname{Frac}(B/\\mathfrak r)$, as in [lem-exc-dimension-formula-universally-catenary-finite-type-domain]. Write $\\mathfrak p=\\mathfrak p_1/\\mathfrak p_0$ in $R$ and $\\mathfrak q=\\mathfrak q_1/\\mathfrak q_0$ in $D$, and put $h_S=\\operatorname{ht}(\\mathfrak p)$ and $h_T=\\operatorname{ht}(\\mathfrak q)$.",
+   "uses": [
+    "def-exc-excellent-ring",
+    "def-weil-pbc-noetherian-ring",
+    "def-weil-affine-spectrum",
+    "def-weil-pbc-finite-type-algebra",
+    "lem-exc-dimension-formula-universally-catenary-finite-type-domain",
+    "lem-weil-pbc-spec-residue-field-identification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02JW, reduction to the reduced closures of the general points"
+   }
+  },
+  {
+   "text": "Choose a saturated chain from $0$ to $\\mathfrak p$ in $R$. By the catenary condition expanded in [def-exc-excellent-ring], the lengths of chains between these endpoints are bounded and all saturated chains have the same length. A chain of largest length exists, is saturated, and has length $h_S$: any chain ending at $\\mathfrak p$ extends downwards to $0$ and can be saturated. Lift this chain to primes of $A$ between $\\mathfrak p_0$ and $\\mathfrak p_1$. Every adjacent pair is an immediate specialization on $V$: a point between the endpoints would give a prime strictly between consecutive primes. More explicitly, [lem-sc-scheme-stalk-dimension-generalization-chains] applied to the reduced closure of the general endpoint says that the local dimension at the special endpoint is $1$, since its generalization chains have maximum length $1$. Since $V$ is Noetherian and universally catenary (Step 1), the final clause of [lem-per-immediate-specialization-criterion] makes each such pair an immediate specialization in the sense of the definition, that is, the pair of underlying points of an immediate geometric specialization of $V$, hence of $S$ by Step 1; by its part (a) every geometric specialization over the pair is immediate. The dimension-function paragraph of [def-per-potential-dualizing-complex] defines immediacy by dimension one of the reduced closure in the strict localization and requires $\\delta(y)=\\delta(x)+1$ at each such specialization. These equations for $\\delta_S$ add along this chain to give $\\delta_S(f(a))-\\delta_S(f(b))=h_S$. If $\\mathfrak p=0$, the chain is empty and the equality is $0=0$. This is the finite telescoping-chain argument underlying Topology Tag 02IA, not an additional lemma taken without proof.",
+   "uses": [
+    "def-exc-excellent-ring",
+    "def-weil-affine-spectrum",
+    "lem-sc-scheme-stalk-dimension-generalization-chains",
+    "lem-per-immediate-specialization-criterion",
+    "def-per-potential-dualizing-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02JW, cancellation of the base dimension difference; Topology Tag 02IA, lemma-dimension-function-catenary, finite-chain argument"
+   }
+  },
+  {
+   "text": "Apply [lem-exc-dimension-formula-universally-catenary-finite-type-domain] to $R\\subset D$ and $\\mathfrak p,\\mathfrak q$. Step 3 verifies every hypothesis, including universal catenarity of the Noetherian domain $R$ and finite type of the inclusion. Its equality is\n$$h_T+\\operatorname{trdeg}_{\\kappa(f(b))}\\kappa(b)=h_S+\\operatorname{trdeg}_{\\kappa(f(a))}\\kappa(a).$$\nIndeed the fraction fields of $R,D$ are the residue fields at their generic points, identified with $\\kappa(f(a)),\\kappa(a)$ in Step 3. Subtracting the finite integers of Step 2 and using Step 4 yields\n$$\\delta_T(a)-\\delta_T(b)=h_S+\\operatorname{trdeg}_{\\kappa(f(a))}\\kappa(a)-\\operatorname{trdeg}_{\\kappa(f(b))}\\kappa(b)=h_T.$$\nIf $a\\ne b$, then $\\mathfrak q\\ne0$ and $0\\subsetneq\\mathfrak q$ gives $h_T\\ge1$. If $a\\rightsquigarrow b$ is geometric immediate, [lem-per-immediate-specialization-criterion](b) on $U$ gives $\\dim\\mathcal O_{\\overline{\\{a\\}}_{\\mathrm{red}},b}=1$. By [lem-sc-scheme-stalk-dimension-generalization-chains] this is $h_T$, since both are the supremum of prime-chain lengths from $0$ to $\\mathfrak q$ in $D$. Hence the difference is exactly $1$. Thus $\\delta_T(a)=\\delta_T(b)+1$ for each immediate geometric specialization, exactly the dimension-function paragraph of [def-per-potential-dualizing-complex]. This holds on every chart and therefore on $T$; it also proves the strict decrease required by the usual Zariski convention.",
+   "uses": [
+    "lem-exc-dimension-formula-universally-catenary-finite-type-domain",
+    "lem-per-immediate-specialization-criterion",
+    "lem-sc-scheme-stalk-dimension-generalization-chains",
+    "def-per-potential-dualizing-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02JW, final dimension-formula computation and positivity; ILO XIV Proposition 2.1.4 and Corollary 2.5.2"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-type-morphism",
+  "pqf-lem-locnoeth-lft",
+  "pqf-lem-affine-open-locnoeth",
+  "def-exc-excellent-ring",
+  "def-weil-pbc-strict-henselization-limit",
+  "lem-per-immediate-specialization-criterion",
+  "def-weil-pbc-localization-at-prime",
+  "lem-sbc-scheme-fibre-stalk-quotient",
+  "lem-kun-finite-type-residue-trdeg",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "def-weil-residue-field",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-finite-type-algebra",
+  "lem-exc-dimension-formula-universally-catenary-finite-type-domain",
+  "lem-weil-pbc-spec-residue-field-identification",
+  "lem-sc-scheme-stalk-dimension-generalization-chains",
+  "def-per-potential-dualizing-complex"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 02JW, lemma-dimension-function-propagates, with the geometric-specialization comparison of ILO XIV Proposition 2.1.4"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -45,10 +146,45 @@
    "results": "[grep] OK 0 hit(s)\n",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A locally finite type morphism of locally Noetherian universally catenary schemes pulls back a dimension function by adding the residue field transcendence degree",
+   "results": "8 hits: AlgebraicGeometry.LocallyOfFiniteType.isLocallyNoetherian, AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange, AlgebraicGeometry.finite_appTop_of_universallyClosed, AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_ofPointTensor_SpecTensorTo, AlgebraicGeometry.instLocallyOfFiniteTypeSndScheme, AlgebraicGeometry.instLocallyOfFiniteTypeFstScheme, AlgebraicGeometry.Scheme.Pullback.Triplet.isPullback_SpecMap_tensor, AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_map_tensor_isPullback. ",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "dimension.?[Ff]unction|dimension_function|delta.*trdeg",
+   "results": "0 hits: none. ",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Dimension functions and codimension under a finite type morphism of universally catenary schemes",
+   "results": "8 hits: AlgebraicGeometry.IsFinite.recOn, ringKrullDim_le_of_surjective, IsInducing.topologicalKrullDim_le, AlgebraicGeometry.isSmoothOfRelativeDimension_comp, AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange, AlgebraicGeometry.IsFinite.iff_isIntegralHom_and_locallyOfFiniteType, AlgebraicGeometry.IsFinite, AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite. ",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DimensionFunction\"",
+   "results": "0 hits: none. ",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A dimension function has difference equal to the height between specializations and adding residue transcendence degree along finite type morphisms preserves dimension functions",
+   "results": "8 hits: Ideal.height_eq_height_add_of_liesOver_of_hasGoingDown, AlgebraicGeometry.Scheme.height_of_isClosed, height_le_ringKrullDim_quotient_add_spanFinrank, ringKrullDim_le_ringKrullDim_add_spanFinrank, Ideal.height_le_height_add_spanFinrank_of_le, IsLocalization.AtPrime.ringKrullDim_eq_height, ringKrullDim_add_length_eq_ringKrullDim_of_isRegular, Module.ringKrullDim_quotient_add_one_of_mem_nonZeroDivisors. ",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-potential-dualizing-finite-pullback",
@@ -60,7 +196,7 @@
  "blueprint": {
   "from": {
    "node": "lem-per-artin-gabber-affine-curve",
-   "place": "Proof, Step 3: dimension-normalized Verdier duality in the lower perverse bound; finite prime-power normalization underlying the regular generic duality model. Residue-transcendence pullback of dimension functions.",
+   "place": "Proof, current Step 1: dimension-normalized Verdier duality underlying the perverse bounds (historically Step 3 when this child was created); finite prime-power normalization underlying the regular generic duality model. Residue-transcendence pullback of dimension functions.",
    "via": [
     "lem-per-potential-dualizing-finite-pullback",
     "lem-per-finite-regular-reduction-dualizing",
@@ -70,5 +206,64 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-per-finite-type-dimension-function",
+  "worker": "stage1",
+  "summary": "Followed Stacks 02JW using existing DAG nodes only. Made the affine domain reduction, saturated base-chain telescoping and height/transcendence-degree computation explicit. Used ILO XIV 2.1.4 through the existing immediate-specialization criterion to handle the geometric definition without adding excellence or global Noetherianity. Retained the statement and inherited searches; searched again through msearch, with no full Mathlib match. Repair of the refused landing: re-read the current def-per-potential-dualizing-complex and every other cited statement; Steps 4 and 5 explicitly use only its unchanged geometric dimension-function paragraph, with fresh verbatim quotations in citations.json. Retained the five-step proof and all recorded searches.",
+  "blueprint": "Nearest ancestor lem-per-artin-gabber-affine-curve, current proof Step 1: dimension-normalized Verdier duality underlying the perverse bounds (historically Step 3 when this child was created), through the existing finite-pullback ancestry. The five steps supply the induced dimension function used by that route; no chapter or unit route is replaced.",
+  "tool_uses": [
+   {
+    "node": "pqf-lem-locnoeth-lft",
+    "why": "Locally finite type preserves local Noetherianity; generic input for the affine charts, without replacing a perverse-sheaf argument."
+   },
+   {
+    "node": "pqf-lem-affine-open-locnoeth",
+    "why": "Affine charts on a locally Noetherian scheme have Noetherian coordinate rings."
+   },
+   {
+    "node": "lem-weil-pbc-affine-open-stalk-localization",
+    "why": "Identifies chart local rings and their residues with those in the original scheme."
+   },
+   {
+    "node": "lem-sbc-scheme-fibre-stalk-quotient",
+    "why": "Identifies the fibre local ring, hence its residue field, to apply the existing finite-transcendence-degree result."
+   },
+   {
+    "node": "lem-kun-finite-type-residue-trdeg",
+    "why": "Finiteness of residue transcendence degree on the affine finite-type fibre over its residue field."
+   },
+   {
+    "node": "lem-exc-dimension-formula-universally-catenary-finite-type-domain",
+    "why": "Generic commutative-algebra height equality on the reduced affine point closures; the perverse unit has no such dimension formula."
+   },
+   {
+    "node": "lem-sc-scheme-stalk-dimension-generalization-chains",
+    "why": "Identifies local dimensions on reduced point closures with lengths of specialization chains."
+   },
+   {
+    "node": "lem-weil-pbc-spec-residue-field-identification",
+    "why": "Identifies scheme residue fields with the ring-theoretic residue fields in the affine dimension formula."
+   }
+  ]
+ },
+ "tool_uses": [
+  "pqf-lem-locnoeth-lft",
+  "pqf-lem-affine-open-locnoeth",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-sbc-scheme-fibre-stalk-quotient",
+  "lem-kun-finite-type-residue-trdeg",
+  "lem-exc-dimension-formula-universally-catenary-finite-type-domain",
+  "lem-sc-scheme-stalk-dimension-generalization-chains",
+  "lem-weil-pbc-spec-residue-field-identification"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q22-10d12a277",
+  "group": "Q22",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q22-10d12a277 (reviewer sub-agent of L); spot-checked: Read the item and its five steps in full, all 18 cited statements, Stacks 02JW (morphisms.tex, lemma-dimension-function-propagates, statement and whole proof) and ILO XIV 2.1.3–2.1.8 and 2.5.1–2.5.2 (pp. 209–211, 216). The statement is 02JW with the geometric dimension-function notion. It is true, uses the residue-field order of the proof of 2.5.2, and adds or weakens nothing. I tested it on the identity, A^1/k, a finite map, a DVR and a specialization inside one fibre. The arithmetic in Steps 2, 3 and 5 is correct: fibre trdeg is finite, the domain reduction is valid, and the 02IJ equality gives delta_T(a)-delta_T(b)=h_T with the right sign. No new nodes, no cycle, no SGA citation. The corrected item is in fixes/dag/nodes/sec-deligne-laumon-a1/; it repairs three faults. (1) Batch-5 flag: lem-trf-universally-catenary-affine-cover (Stacks 02J9) is generic commutative algebra, not a trace-formula or Poincaré step, and it is not needed. The item's hypothesis already makes A universally catenary, B is shown directly, and criterion (b) only needs a cover by universally catenary affine opens, which U=Spec B is. I removed it from Step 1, proof_deps and tool_uses. (2) Step 1 justified that the strict localization does not change on an open chart by 'the local ring is unchanged'. In this DAG the strict localization is defined as a limit over étale neighbourhoods, so I replaced this with the cofinality argument and cited def-weil-pbc-strict-henselization-limit. (3) Step 4 cited only part (a) of lem-per-immediate-specialization-criterion, which is vacuous unless a geometric specialization over the pair exists. It now uses the criterion's final clause on the universally catenary Noetherian chart V. The closure still reaches three generic trf nodes (ind-étale strict-local invariance, bounded-below derived adjunction, henselian integral algebra), but only through the existing criterion's stmt_deps; none is part of the assumed statements. Accepted tool_uses: the eight remaining generic nodes. Maintainer notes: the criterion's split must supply the faithful-flatness existence argument, and it overlaps the Q07 node lem-per-geometric-immediate-catenary, so the two should be reconciled.; 1 file(s) fixed by the reviewer"
  }
 }
