@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.CategoryTheory.Monoidal.Mod.TensorExchange
+public import WeilConjectures.CategoryTheory.Monoidal.Mod.IsoAlgebraTensor
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ForgetCoherence
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseInternalHom
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.MonoidalIso
@@ -27,7 +27,6 @@ namespace AlgebraicGeometry.ProEtale
 
 variable {l : ℕ} [Fact l.Prime] {T₁ T₂ : Scheme.{u}}
 
-attribute [local instance] Sheaf.symmetricCategory
 
 variable (l) in
 /-- The exchange isomorphism `j^* ⋙ (a⁻¹)_* ≅ (b⁻¹)_* ⋙ j^*` of sheaves of `ℚ̄_ℓ`-modules
@@ -93,4 +92,94 @@ lemma adicUpperStarExchange_hom_app_hom (j : T₁ ⟶ T₂) (a : T₁ ≅ T₁) 
   rw [adicUpperStarExchange_hom_app_hom', upperStarExchange_hom_app]
   congr 1
 
+instance preservesColimitsOfShape_mapModComap_adicConstantSheafToLowerStar (g : T₁ ⟶ T₁)
+    [IsIso g] : PreservesColimitsOfShape WalkingParallelPair
+      (Mod.mapModComap (G := (g)_*[WeilCoefficients.{u} l]) (adicConstantSheafToLowerStar l g)) :=
+  have : (Mod.mapModComap (G := (g)_*[WeilCoefficients.{u} l])
+      (adicConstantSheafToLowerStar l g)).IsEquivalence :=
+    isEquivalence_adicLowerStar l g
+  inferInstance
+
+instance preservesColimitsOfShape_mapModComap_adicUpperStarRingHom (j : T₁ ⟶ T₂) :
+    PreservesColimitsOfShape WalkingParallelPair
+      (Mod.mapModComap (G := (j)^*[WeilCoefficients.{u} l]) (adicUpperStarRingHom l j)) :=
+  inferInstanceAs (PreservesColimitsOfShape WalkingParallelPair (j)^*ᵃ[l])
+
+variable (l) in
+/-- The exchange isomorphism of `ℓ`-adic sheaves, as an isomorphism of the functors induced on
+modules by the pullbacks and the pushforwards. -/
+noncomputable def mapModComapExchangeIso (j : T₁ ⟶ T₂) (a : T₁ ≅ T₁) (b : T₂ ≅ T₂)
+    (c : a.hom ≫ j = j ≫ b.hom) :
+    Mod.mapModComap (adicUpperStarRingHom l j) ⋙
+        Mod.mapModComap (adicConstantSheafToLowerStar l a.inv) ≅
+      Mod.mapModComap (adicConstantSheafToLowerStar l b.inv) ⋙
+        Mod.mapModComap (adicUpperStarRingHom l j) :=
+  NatIso.ofComponents (fun M ↦ (adicUpperStarExchange l j a b c).app M)
+    fun f ↦ (adicUpperStarExchange l j a b c).hom.naturality f
+
+lemma mapModComapExchangeIso_hom_app_hom (j : T₁ ⟶ T₂) (a : T₁ ≅ T₁) (b : T₂ ≅ T₂)
+    (c : a.hom ≫ j = j ≫ b.hom) (M : AdicSheaf l T₂) :
+    ((mapModComapExchangeIso l j a b c).hom.app M).hom =
+      (upperStarExchange l j a b c).hom.app M.X :=
+  adicUpperStarExchange_hom_app_hom j a b c M
+
+variable (l) in
+/-- The transport along the exchange isomorphism `j^* ⋙ (a⁻¹)_* ≅ (b⁻¹)_* ⋙ j^*` of
+`ℓ`-adic sheaves commutes with tensor products of modules with structure isomorphisms. -/
+noncomputable def isoAlgebraTensorCompExchangeIso (j : T₁ ⟶ T₂) (a : T₁ ≅ T₁) (b : T₂ ≅ T₂)
+    (c : a.hom ≫ j = j ≫ b.hom)
+    (K : Endofunctor.IsoAlgebra (Mod.mapModComap (adicConstantSheafToLowerStar l b.inv))) :=
+  Mod.isoAlgebraTensorCompMapOfNatIsoIso (adicUpperStarRingHom l j)
+    (by exact fun _ _ ↦ Adjunction.μ_comp_map_braiding (upperStarLowerStarAdjunction _ _) _ _)
+    (adicConstantSheafToLowerStar l b.inv) (by exact fun _ _ ↦ Functor.LaxBraided.braided _ _)
+    (adicConstantSheafToLowerStar l a.inv) (by exact fun _ _ ↦ Functor.LaxBraided.braided _ _)
+    (upperStarExchange l j a b c).hom (mapModComapExchangeIso l j a b c)
+    (mapModComapExchangeIso_hom_app_hom j a b c) K
+
 end AlgebraicGeometry.ProEtale
+
+namespace AlgebraicGeometry
+
+open ProEtale Endofunctor
+
+attribute [local instance] Sheaf.symmetricCategory
+
+variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]
+variable {X Y : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
+  [Y.Over (Spec (CommRingCat.of k₀))]
+
+set_option hygiene false in
+local notation "𝐒" => Spec (CommRingCat.of k₀)
+
+set_option hygiene false in
+local notation "Fr[" T "]" => Scheme.Hom.geometricGaloisFrobenius (T ↘ Spec (CommRingCat.of k₀))
+
+set_option hygiene false in
+local notation "bc[" f "]" =>
+  Scheme.Hom.geometricFiberMap f (comp_over f (Spec (CommRingCat.of k₀)))
+
+/-- The exchange isomorphism of `ℓ`-adic pullbacks along a base change with the Frobenius
+pullbacks is that of the underlying sheaves. -/
+lemma adicUpperStarGeometricFiberMapCompFrobeniusIso_hom_app_hom' {k : Type u} [Field k]
+    [Finite k] {X₀ Y₀ : Scheme.{u}} {f : X₀ ⟶ Spec (.of k)} {g : Y₀ ⟶ Spec (.of k)}
+    (φ : X₀ ⟶ Y₀) (h : φ ≫ g = f) (M : AdicSheaf l g.geometricFiber) :
+    ((adicUpperStarGeometricFiberMapCompFrobeniusIso l φ h).hom.app M).hom =
+      (upperStarExchange l (Scheme.Hom.geometricFiberMap φ h) f.geometricGaloisFrobenius
+        g.geometricGaloisFrobenius
+        (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius φ h).symm).hom.app M.X := by
+  rw [adicUpperStarGeometricFiberMapCompFrobeniusIso_hom_app_hom, upperStarExchange_hom_app]
+  congr 1
+
+variable (k₀ l X) in
+/-- The tensor product of pro-étale Weil sheaves is the tensor product of modules with structure
+isomorphisms of `CategoryTheory.Mod.isoAlgebraTensor`. -/
+noncomputable def ProEtaleWeilSheaf.tensorFunctorIsoIsoAlgebraTensor
+    (A : ProEtaleWeilSheaf k₀ l X) :
+    ProEtaleWeilSheaf.tensorFunctor k₀ l X A ≅
+      Mod.isoAlgebraTensor (adicConstantSheafToLowerStar l (Fr[X]).inv)
+        (by exact fun _ _ ↦ Functor.LaxBraided.braided _ _) A :=
+  NatIso.ofComponents (fun B ↦ IsoAlgebra.isoMk (Iso.refl _) (by
+    simp only [Iso.refl_hom, Category.comp_id]
+    rfl)) fun _ ↦ IsoAlgebra.hom_ext ((Category.comp_id _).trans (Category.id_comp _).symm)
+
+end AlgebraicGeometry
