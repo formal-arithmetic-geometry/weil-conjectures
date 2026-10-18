@@ -52,6 +52,28 @@ theorem smallModuleDiagrams_isGrothendieckAbelian
     {C : Type u} [SmallCategory C] (τ : GrothendieckTopology C)
     (R : Sheaf τ RingCat.{u}) (J : Type u) [SmallCategory J] :
     IsGrothendieckAbelian.{u} (J ⥤ ringedSiteModules.{u} R) := by
-  sorry
+  let : IsGrothendieckAbelian.{u} (ringedSiteModules.{u} R) :=
+    SheafOfModules.isGrothendieckAbelian R
+  let G := separator (ringedSiteModules.{u} R)
+  have hG := isSeparator_separator (ringedSiteModules.{u} R)
+  have hS : ObjectProperty.IsSeparating
+      (.ofObj fun j : J ↦ (evaluationLeftAdjoint (ringedSiteModules.{u} R) j).obj G) := by
+    intro F F' f g hfg
+    apply NatTrans.ext
+    funext j
+    apply hG.def
+    intro a
+    let adj := evaluationAdjunctionRight (ringedSiteModules.{u} R) j
+    apply (adj.homEquiv G F').symm.injective
+    have h := hfg _ (ObjectProperty.ofObj_apply _ j) ((adj.homEquiv G F).symm a)
+    exact (adj.homEquiv_naturality_right_symm a f).trans
+      (h.trans (adj.homEquiv_naturality_right_symm a g).symm)
+  let : HasSeparator (J ⥤ ringedSiteModules.{u} R) :=
+    ⟨_, hS.isSeparator_coproduct⟩
+  let : Limits.HasFilteredColimitsOfSize.{u, u} (J ⥤ ringedSiteModules.{u} R) :=
+    ⟨fun _ _ _ ↦ inferInstance⟩
+  let : AB5OfSize.{u, u} (J ⥤ ringedSiteModules.{u} R) :=
+    ⟨fun _ _ _ ↦ inferInstance⟩
+  exact {}
 
 end CategoryTheory
