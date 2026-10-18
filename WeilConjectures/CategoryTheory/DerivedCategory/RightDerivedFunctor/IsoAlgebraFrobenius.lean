@@ -34,20 +34,9 @@ namespace CategoryTheory.Endofunctor.IsoAlgebra
 
 attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimits
 
-section StrNatIso
+section ForgetCompIsoOfIso
 
-variable {C : Type*} [Category C] (F : C ⥤ C)
-
-/-- The structure isomorphisms of algebras with invertible structure morphism, as a natural
-isomorphism `F ∘ forget ≅ forget`. -/
-noncomputable def strNatIso : forget F ⋙ F ≅ forget F :=
-  NatIso.ofComponents (fun K ↦ K.str) fun φ ↦ φ.hom.h
-
-@[simp]
-lemma strNatIso_hom_app (K : IsoAlgebra F) : (strNatIso F).hom.app K = K.str.hom :=
-  rfl
-
-variable {F} {V : Type*} [Category V] {Γ : C ⥤ V}
+variable {C : Type*} [Category C] {F : C ⥤ C} {V : Type*} [Category V] {Γ : C ⥤ V}
 
 /-- The automorphism `Γ M ≅ Γ (F M) ≅ Γ M` of `Γ` on an algebra `(M, φ)`, induced by an
 isomorphism `γ : F ⋙ Γ ≅ Γ` and the structure isomorphism `φ`. -/
@@ -58,7 +47,7 @@ lemma forgetCompIsoOfIso_hom_app (γ : F ⋙ Γ ≅ Γ) (K : IsoAlgebra F) :
     (forgetCompIsoOfIso γ).hom.app K = γ.inv.app K.carrier ≫ Γ.map K.str.hom :=
   rfl
 
-end StrNatIso
+end ForgetCompIsoOfIso
 
 end CategoryTheory.Endofunctor.IsoAlgebra
 

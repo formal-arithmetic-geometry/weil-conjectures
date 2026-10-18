@@ -220,7 +220,7 @@ noncomputable def strForgetAb :
     forgetAb k₀ l Y ⋙
         ((Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv)_*[AddCommGrpCat.{u + 1}] ⟶
       forgetAb k₀ l Y :=
-  Functor.whiskerRight (IsoAlgebra.strNatTrans (WeilSheaf.frobeniusPullback k₀ l Y))
+  Functor.whiskerRight (IsoAlgebra.strNatIso (WeilSheaf.frobeniusPullback k₀ l Y)).hom
     (AdicSheaf.forget _ ⋙ sheafForget₂ (ULift.{u + 1} (PadicAlgCl l)) _)
 
 /-- The Frobenius on the cocycles `ℤ ⟶ Iⁿ` of the complex computing `Ext(ℤ, K)`: the Frobenius of
