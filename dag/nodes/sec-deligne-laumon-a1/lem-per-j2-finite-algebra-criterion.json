@@ -228,5 +228,23 @@
   "group": "N0",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N0-760f784a3 (reviewer sub-agent of L); spot-checked: I read the full delivery. It adds six proof steps and no new nodes; the item's statement and stmt_deps are unchanged. I checked it against Stacks more-algebra.tex lemma-J-2 (Tag 07PC, lines 11689-11734): the item is (3)⇒(1), and def-exc-excellent-ring gives J-2 exactly. Steps 1-5 write out (3)⇒(4). Step 1 identifies κ(p) with Frac(R/p) by primality cancellation. Steps 2-3 scale a k-basis by β_i=d_iα_i, using β_i^{n_i}=c_i d_i^{n_i-1}, so B=A[β] is module-finite over R with Frac B=L. Step 4 makes B Noetherian (lem-weil-pbc-finite-algebra-noetherian) and the item's hypothesis makes Reg(B) open. Step 5 puts the zero prime in Reg(B), since B_(0)=L is a field. Step 6 cites lem-exc-j2-residue-field-criterion, which is (4)⇒(1); I matched its statement hypothesis by hypothesis to steps 1-5, including the same map R→L. Characteristic 0, the zero ring, L=k, nonreduced R and F_p(t^{1/p}) all go through. There are no SGA citations, no tags in step text and no cycle: the item is not in the criterion's 575-node dependency closure. A grep for 07PC finds no duplicate of the item. I accepted the tool_uses entry for the off-unit criterion (unit sk-prop-a1-kummer): it is a generic tool implementing exactly the cited Stacks route."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.JTwoFiniteAlgebraCriterion",
+  "declaration": "isOpen_regularLocus_of_finite_algebras",
+  "file": "lean/Sheaf/RingTheory/JTwoFiniteAlgebraCriterion.lean",
+  "statement": "theorem isOpen_regularLocus_of_finite_algebras (R : Type u) [CommRing R] [IsNoetherianRing R] (hfinite : ∀ (B : Type (max u v)) [CommRing B] [Algebra R B] [Module.Finite R B], IsOpen {q : PrimeSpectrum B | IsRegularLocalRing (Localization.AtPrime q.asIdeal)}) (C : Type (max u v)) [CommRing C] [Algebra R C] [Algebra.FiniteType R C] : IsOpen {q : PrimeSpectrum C | IsRegularLocalRing (Localization.AtPrime q.asIdeal)}",
+  "branch": "newtargets-dag",
+  "by": "Q10",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e80823e30",
+  "group": "Q10",
+  "result": "pass",
+  "note": "Statement matches Stacks 07PC (3)=>(1) and the node clause by clause: IsNoetherianRing, Module.Finite, PrimeSpectrum/Localization.AtPrime/IsRegularLocalRing, Algebra.FiniteType (instance form of the recorded RingHom.FiniteType). Conclusion at v=0 is exactly the J-2 clause of IsQuasiExcellent. No extra hypotheses. B and C both in Type (max u v), the same universe pattern as isOpen_regularLocus_of_residueField_finite_models, so the proof route works with no vacuity. Edge cases (R=0, B or C zero, C=R, any characteristic) covered. No duplicate found (side lean/Sheaf grep; the delivery's Mathlib searches). Statement field verbatim; single sorry; source and blueprint docstrings with all six proof steps; report has both sections. nt_compile --json clean (4.0 s, 8.3 s), and a broken-copy control fails as expected."
  }
 }

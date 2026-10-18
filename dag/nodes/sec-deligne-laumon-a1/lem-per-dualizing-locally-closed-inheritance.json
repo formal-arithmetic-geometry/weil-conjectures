@@ -17,7 +17,9 @@
   "def-weil-finitely-generated-module",
   "def-pur-derived-internal-hom",
   "def-weil-open-immersion",
-  "def-weil-closed-immersion"
+  "def-weil-closed-immersion",
+  "def-weil-pbc-constructible-complexes",
+  "lem-kun-tensor-sym"
  ],
  "proof": [
   {
@@ -311,5 +313,28 @@
   "group": "Q27",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q27-ad8c06adf (reviewer sub-agent of L); spot-checked: I read the whole item. It has 8 steps and no new nodes, and the statement is unchanged; I also read the statements of all 26 cited nodes. ILO XVII p.311 (proof of 7.6.3: j^*K is dualizing 'pour des raisons évidentes') and p.313 (proof of 7.6.9: existence is preserved under passage to a subscheme) match the item. ILO Déf. 0.8 matches the item's definition of a dualizing complex. The proof needs no invertibility of ℓ. Steps 1-3, open case: exact j^*/j_!, constructibility of j_! by strata plus zero stalks off U, D_U via the internal-Hom restriction, and restriction of the evaluation-transpose map. Steps 4-7, closed case: Z is Noetherian on its quotient charts. i_* is exact, reflects isomorphisms and preserves D^b_c (by 04CA and the module counit). i^!Q = i^*D_X(i_*Λ_Z) is in D^b_c. β_M: i_*D_ZM≅D_X(i_*M) from the finite internal adjunction. The identity β_{D_ZM}∘i_*η_M = D_X(β_M)∘η_{i_*M} is checked by transposition, so η_M is an isomorphism. Step 8 factors T→U→X and composes the two cases. Edge cases checked: empty T, identity immersions, nonreduced Z, characteristic ℓ. No duplicate: lem-fin-closed-immersion and lem-fin-extension-by-zero need finite type over k, and potential-extraordinary-pullback concerns pinned excellent schemes. No cycle and no SGA citation. The declared tool uses are accepted as generic site and étale infrastructure; the finite-exceptional and bidual-triangles nodes are in the item's own unit. Batch 5: lem-per-finite-exceptional-internal-hom is accepted. It is the generic finite-morphism internal adjunction, not part of the trace-formula or Poincaré-duality proofs; the flagged chain ends in the generic lisse-module node. Recomputing the batch-5 closure with and without the item's proof gives 16549 nodes both ways (difference 0), and that node is already in the base closure. No changes made."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.DualizingLocallyClosedInheritance",
+  "declaration": "AlgebraicGeometry.Etale.exists_dualizing_of_isImmersion",
+  "declarations": [
+   "AlgebraicGeometry.Etale.etaleEvaluationBiduality",
+   "AlgebraicGeometry.Etale.exists_dualizing_of_isImmersion"
+  ],
+  "file": "lean/Sheaf/Paper/DualizingLocallyClosedInheritance.lean",
+  "statement": "theorem exists_dualizing_of_isImmersion (ℓ : ℕ) [Fact ℓ.Prime] (X : Scheme.{u}) [IsNoetherian X] (A : Type a) [CommRing A] [IsNoetherianRing A] [Algebra (ZMod ℓ) A] (hX : ∃ Q : DerivedCategoryModule (ULift.{u + 1} (ZMod ℓ)) X, DerivedCategory.isBoundedConstructible (ULift.{u + 1} (ZMod ℓ)) X Q ∧ ∀ M : DerivedCategoryModule (ULift.{u + 1} (ZMod ℓ)) X, DerivedCategory.isBoundedConstructible (ULift.{u + 1} (ZMod ℓ)) X M → DerivedCategory.isBoundedConstructible (ULift.{u + 1} (ZMod ℓ)) X (((derivedHom (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ))) X).obj (op M)).obj Q) ∧ IsIso (etaleEvaluationBiduality (ULift.{u + 1} (ZMod ℓ)) X Q M)) (T : Scheme.{u}) (f : T ⟶ X) [IsImmersion f] : ∃ Q : DerivedCategoryModule (ULift.{u + 1} (ZMod ℓ)) T, DerivedCategory.isBoundedConstructible (ULift.{u + 1} (ZMod ℓ)) T Q ∧ ∀ M : DerivedCategoryModule (ULift.{u + 1} (ZMod ℓ)) T, DerivedCategory.isBoundedConstructible (ULift.{u + 1} (ZMod ℓ)) T M → DerivedCategory.isBoundedConstructible (ULift.{u + 1} (ZMod ℓ)) T (((derivedHom (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ))) T).obj (op M)).obj Q) ∧ IsIso (etaleEvaluationBiduality (ULift.{u + 1} (ZMod ℓ)) T Q M)",
+  "branch": "newtargets-dag",
+  "by": "Q62",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "The canonical evaluation-transpose component is an owning-node helper with explicit type, needed to avoid repeated elaboration of the signed tensor-Hom pairing. It is constructed from existing ordinary-etale derivedHom, derivedTensorHomAdjunction and derivedTensorSymmetry; no arbitrary map or data chosen from existence. The identical downstream helper cannot be imported because its coefficient-change theorem depends on this item. Bounded constructibility is the existing finite-coefficient predicate; over the prime field finite module values are exactly finitely generated values, and strata constructibility is automatic on the Noetherian schemes here."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1ce4e4c2c",
+  "group": "Q62",
+  "result": "pass",
+  "note": "Statement matches node clause by clause (prime ℓ, ULift F_ℓ coefficients, IsNoetherian X, inert Noetherian A, isBoundedConstructible = finite-valued strata over F_ℓ, RHom preservation, IsIso of canonical homEquiv(symmetry≫counit) biduality, ∀ immersion T→X, same three clauses on T, no extra hypotheses). Mechanical theorem-stmt_dep finding: lem-kun-tensor-sym's Lean record is the def derivedTensorSymmetry, the canonical iso the node asserts → genuine, PASS on point. H4: landed downstream CoefficientChangeDualizing.biduality is definitionally the same map but cannot be imported (closure cycle via lem-per-ctf-hom-condition-b) → advisory maintainer note. Docstrings, source place, 8 proof steps present; lean.statement verbatim; single sorry. nt_compile --json clean in 4.5 s."
  }
 }
