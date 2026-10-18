@@ -9,6 +9,9 @@ public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 public import Mathlib.CategoryTheory.ObjectProperty.ContainsZero
 public import WeilConjectures.FromJoel.Algebra.Homology.CochainComplexMinus
 
+import Sheaf.Algebra.Homology.LeftResolutionReducedClass
+import Sheaf.Algebra.Homology.LeftResolutionBoundedMinus
+
 /-!
 # Functorial bounded-above resolutions by an object class
 
@@ -68,6 +71,33 @@ theorem exists_functorial_boundedAbove_class_resolution
       (∀ (L : CochainComplex.Minus A) (i : ℤ), F ((S.obj L).X i)) ∧
       (∀ (L : CochainComplex.Minus A) (b : ℤ),
         L.obj.IsStrictlyLE b → (S.obj L).IsStrictlyLE b) := by
-  sorry
+  have h_retract : ∀ {X Y : A} (i : X ⟶ Y) (e : Y ⟶ X),
+      i ≫ e = 𝟙 X → F Y → F X := by
+    intro X Y i e hie hY
+    let : IsSplitMono i := IsSplitMono.mk' ⟨e, hie⟩
+    let d := isBilimitBinaryBiconeOfIsSplitMonoOfCokernel (cokernelIsCokernel i)
+    exact (h_summand X (cokernel i)
+      (F.prop_of_iso (biprod.uniqueUpToIso X (cokernel i) d) hY)).1
+  obtain ⟨C, cC, pC, zC, fcC, zmC, ι, hfull, hfaithful, hadd, hι,
+    Q, zQ, π, hπ⟩ := CategoryTheory.Abelian.leftResolution_reduced_class A F P ε
+      F.exists_prop_of_containsZero (fun h e ↦ F.prop_of_iso e h)
+      h_biproduct h_retract hP hε
+  let := cC
+  let := pC
+  let := zC
+  let := fcC
+  let := hfull
+  let := hfaithful
+  let := hadd
+  have hzm : zmC = @Preadditive.preadditiveHasZeroMorphisms C cC pC :=
+    Subsingleton.elim _ _
+  rw [hzm] at zQ
+  let := zQ
+  obtain ⟨S, a, ha, hterms, hbound⟩ :=
+    exists_functorial_boundedAbove_left_resolution ι Q π hπ
+  refine ⟨S, a, ha, ?_, hbound⟩
+  intro L i
+  obtain ⟨X, ⟨e⟩⟩ := hterms L i
+  exact F.prop_of_iso e.symm (hι X)
 
 end CochainComplex
