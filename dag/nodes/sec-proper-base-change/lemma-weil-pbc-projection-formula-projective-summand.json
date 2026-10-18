@@ -1,175 +1,189 @@
 {
-  "id": "lemma-weil-pbc-projection-formula-projective-summand",
-  "blueprint": {
-    "is": "lemma-weil-pbc-projection-formula-projective-summand",
-    "from": null,
-    "same_as": []
+ "id": "lemma-weil-pbc-projection-formula-projective-summand",
+ "blueprint": {
+  "is": "lemma-weil-pbc-projection-formula-projective-summand",
+  "from": null,
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Finite-projective summand equations",
+ "statement": "For a finite projective $F^r$ and a displayed splitting $(i_r,p_r)$, the\narrows $\\pi_{h,E,F^r}$ and $\\rho_{F^r}$ are inverse and are independent of\nthe chosen finite-free summand presentation.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-projection-formula-projective-summand.md",
+  "place": "node lemma-weil-pbc-projection-formula-projective-summand, order 1266"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-projection-formula-arrows"
+ ],
+ "proof": [
+  {
+   "text": "For the coefficient functors A(X)=Rh_*E tensor^L X and B(X)=Rh_*(E tensor^L Lh^*X), the forward arrow is natural by naturality of the right-adjoint projection map. The specified reverse arrow is natural by [lem-weil-pbc-projection-inverse-coefficient-naturality]. Apply both equations to the inclusion and projection of the degree-zero splitting. Construct the finite-free strict-perfect package on the degree-zero single complex using its canonical degree-zero isomorphism and zero maps in every other degree.",
+   "uses": [
+    "def-weil-pbc-projection-formula-arrows",
+    "lem-weil-pbc-projection-inverse-coefficient-naturality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/slopmaster2/src/version/detailed/proper_base_change.tex",
+    "place": "lemma:weil-pbc-projection-formula-projective-summand, proof; definition:weil-pbc-projection-formula-arrows"
+   }
   },
-  "kind": "statement",
-  "title": "Finite-projective summand equations",
-  "statement": "For a finite projective $F^r$ and a displayed splitting $(i_r,p_r)$, the\narrows $\\pi_{h,E,F^r}$ and $\\rho_{F^r}$ are inverse and are independent of\nthe chosen finite-free summand presentation.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-projection-formula-projective-summand.md",
-    "place": "node lemma-weil-pbc-projection-formula-projective-summand, order 1266"
-  },
-  "stmt_deps": [
-    "def-weil-pbc-projection-formula-arrows"
-  ],
-  "proof": [
-    {
-      "text": "Use the ringed-topos data $h:(\\mathcal T,S)\\to(\\mathcal S,R)$ and $E\\in D(S)$ of the arrow definition; regard each coefficient sheaf as a complex in degree zero. Write $A(X)=Rh_*E\\otimes_R^{\\mathbf L}X$ and $B(X)=Rh_*(E\\otimes_S^{\\mathbf L}Lh^*X)$. Let $\\alpha_X:Lh^*A(X)\\xrightarrow{\\sim}Lh^*Rh_*E\\otimes_S^{\\mathbf L}Lh^*X$ be the canonical comparison and $c_X=(\\varepsilon_E\\otimes1)\\alpha_X$, whose adjunct is $\\pi_X$. For any coefficient map $u:X\\to Y$, naturality in the second variable of the cited derived tensor comparison gives $\\alpha_Y Lh^*A(u)=(1\\otimes Lh^*u)\\alpha_X$. Tensor functoriality then gives $c_Y Lh^*A(u)=(1_E\\otimes Lh^*u)c_X$. Under the natural Hom bijection of the derived adjunction specified in the arrow definition, the adjuncts of the two sides are $\\pi_Y A(u)$ and $B(u)\\pi_X$, respectively; hence these maps are equal. Taking $u=i_r:F^r\\to R^{\\oplus N_r}$ and $u=p_r:R^{\\oplus N_r}\\to F^r$ gives $B(i_r)\\pi_{F^r}=\\pi_{N_r}A(i_r)$ and $B(p_r)\\pi_{N_r}=\\pi_{F^r}A(p_r)$.",
-      "uses": [
-        "def-weil-pbc-projection-formula-arrows",
-        "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/slopmaster2/src/version/detailed/proper_base_change.tex",
-        "place": "lemma:weil-pbc-projection-formula-projective-summand, proof"
-      }
-    },
-    {
-      "text": "The splitting has $p_ri_r=1$. Specializing the finite-free lemma to $\\Lambda=R$, $N=N_r$ and shift $a=0$, use its two inverse identities, compute $\\rho_{F^r}\\pi_{F^r}=A(p_r)\\rho_rB(i_r)\\pi_{F^r}=A(p_r)\\rho_r\\pi_rA(i_r)=A(p_ri_r)=1$. For the other composite, compute $\\pi_{F^r}\\rho_{F^r}=\\pi_{F^r}A(p_r)\\rho_rB(i_r)=B(p_r)\\pi_r\\rho_rB(i_r)=B(p_ri_r)=1$. Thus the displayed maps are inverse.",
-      "uses": [
-        "def-weil-pbc-projection-formula-arrows",
-        "lemma-weil-pbc-projection-formula-finite-free"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/slopmaster2/src/version/detailed/proper_base_change.tex",
-        "place": "lemma:weil-pbc-projection-formula-projective-summand, proof"
-      }
-    },
-    {
-      "text": "The map $\\pi_{F^r}$ is intrinsic because its defining adjunct $(\\varepsilon_E\\otimes1)\\alpha_{F^r}$ does not use a splitting. For any second displayed finite-free summand presentation, repeat Steps 1 and 2 with its inclusion, projection and rank to obtain a map $\\rho'_{F^r}$ satisfying both inverse equations for this same $\\pi_{F^r}$. Then $\\rho'_{F^r}=\\rho'_{F^r}(\\pi_{F^r}\\rho_{F^r})=(\\rho'_{F^r}\\pi_{F^r})\\rho_{F^r}=\\rho_{F^r}$. This proves independence of the inverse and of the intrinsic forward arrow.",
-      "uses": [
-        "def-weil-pbc-projection-formula-arrows"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/blueprint/slopmaster2/src/version/detailed/proper_base_change.tex",
-        "place": "lemma:weil-pbc-projection-formula-projective-summand, proof"
-      }
-    }
-  ],
-  "proof_deps": [
+  {
+   "text": "Let i:M to R^N and p:R^N to M be the degree-zero maps supplied by the package, transported through the single-complex degree-zero isomorphism; i followed by p is the identity. The finite-free lemma at shift zero supplies both inverse equations on R^N. Naturality along i and p expresses the composites on M as B(i) followed by the free reverse-forward composite followed by B(p), and A(i) followed by the free forward-reverse composite followed by A(p), respectively. Replace the middle composites by identities and use functoriality and i followed by p equal to the identity. This proves both equations, including rank zero.",
+   "uses": [
     "def-weil-pbc-projection-formula-arrows",
     "lemma-weil-pbc-projection-formula-finite-free",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-projection-formula-projective-summand.md",
-    "place": "## Proof"
+    "lem-weil-pbc-projection-inverse-coefficient-naturality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/slopmaster2/src/version/detailed/proper_base_change.tex",
+    "place": "lemma:weil-pbc-projection-formula-projective-summand, proof; definition:weil-pbc-projection-formula-arrows"
+   }
   },
-  "mathlib_searches": [
-    {
-      "tool": "leanfinder",
-      "query": "finite projective summand projection formula inverse naturality",
-      "results": "Module.Finite.exists_comp_eq_id_of_projective; Module.Projective.of_split; Module.Projective.iff_split; no derived ringed-topos projection formula",
-      "date": "2026-10-14",
-      "verdict": "no match"
-    },
-    {
-      "tool": "loogle",
-      "query": "CategoryTheory.Adjunction, finite projective, tensor",
-      "results": "0 hits; loogle reported Unknown identifier `finite`",
-      "date": "2026-10-14",
-      "verdict": "no match"
-    },
-    {
-      "tool": "grep",
-      "query": "projection.*formula|finite.*projective [Mathlib/CategoryTheory]",
-      "results": "0 hits under Mathlib/CategoryTheory",
-      "date": "2026-10-14",
-      "verdict": "no match"
-    },
-    {
-      "tool": "loogle",
-      "query": "CategoryTheory.Limits.PreservesFiniteProducts",
-      "results": "CategoryTheory.Limits.PreservesFiniteProducts and additive-functor finite-product preservation declarations; no projection formula statement",
-      "date": "2026-10-14",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "inverse maps induced by a split finite projective module summand",
-      "results": "Module.Projective.of_split; Module.Projective.iff_split; Module.Finite.exists_comp_eq_id_of_projective; no projection formula",
-      "date": "2026-10-14",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leansearch",
-      "query": "finite projective projection formula inverse",
-      "results": "service unavailable (Internal Server Error)",
-      "date": "2026-10-14",
-      "verdict": "unavailable"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "merged_into": null,
-  "import_flags": [],
-  "blueprint_kind": "lemma",
-  "blueprint_order": 1266,
-  "blueprint_uses": [
-    "def-weil-pbc-projection-formula-arrows",
-    "lemma-weil-pbc-projection-formula-finite-free"
-  ],
-  "uses_not_cited": [
-    "def-weil-pbc-projection-formula-arrows",
-    "lemma-weil-pbc-projection-formula-finite-free"
-  ],
-  "proof_split_by": "paragraphs",
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
-  },
-  "chapter": "sec-proper-base-change",
-  "unit": "sk-thm-properbasechange",
-  "split_report": {
-    "date": "2026-10-14",
-    "item": "lemma-weil-pbc-projection-formula-projective-summand",
-    "worker": "stage1",
-    "summary": "Audited the imported proof against the detailed proper-base-change source. No finished Lean declaration exists. Replaced uncited proof paragraphs with three explicit steps: counit naturality, the two inverse computations using the finite-free lemma, and uniqueness of an inverse for independence of the splitting. Added the required Mathlib search log; no Mathlib declaration states this derived ringed-topos result. Second reading cites the existing simultaneous derived tensor naturality theorem directly and expands the adjunct calculation and inverse uniqueness; no statement changes or new nodes.",
-    "blueprint": "Finite-projective summand equations: the three steps realize the naturality equations, the two displayed inverse computations, and the final uniqueness sentence of the blueprint proof."
-  },
-  "reviewed": {
-    "date": "2026-10-14",
-    "by": "L",
-    "reviewer": "NT-Codex-NG-1b9bc96e2",
-    "group": "NG",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NG-1b9bc96e2 (reviewer sub-agent of L); spot-checked: Read the complete item, report, unit/chapter route, master and detailed sources, and all cited node statements. The statement matches the master source; Steps 1–3 correctly establish naturality, both inverse composites, and presentation independence with the proper derived tensor comparison and coefficient categories. Edge cases N=0, N=1, and differing splittings check out. No duplicate, circularity, missing hypothesis, or accepted tool use found. Review written to review.md."
-  },
-  "reviewed_lean": {
-    "date": "2026-10-15",
-    "by": "L",
-    "reviewer": "NT-stage2-Codex-5947cf56d",
-    "group": "NU",
-    "result": "pass",
-    "note": "Wrote review.md. Source, hypotheses, inverse equations, presentation independence, dependencies, universes, edge cases, and metadata pass. Immutable snapshot compiled cleanly through scompile.py in 25.4s/32.6s. No fixes required; no branch mutations performed."
-  },
-  "lean": {
-    "module": "Sheaf.Paper.ProjectionFormulaProjectiveSummand",
-    "declaration": "SheafOfModules.ringedProjectionFormula_projective_summand",
-    "declarations": [
-      "SheafOfModules.ringedProjectionFormulaSummandArrows",
-      "SheafOfModules.ringedProjectionFormula_projective_summand"
-    ],
-    "file": "lean/Sheaf/Paper/ProjectionFormulaProjectiveSummand.lean",
-    "statement": "theorem ringedProjectionFormula_projective_summand (M : SheafOfModules.{u} ((sheafCompose JC (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) (P P' : StrictPerfectCoefficientPackage ((sheafCompose JC (forget₂ CommRingCat.{u} RingCat.{u})).obj R) ((HomologicalComplex.single (SheafOfModules.{u} ((sheafCompose JC (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) (ComplexShape.up ℤ) 0).obj M)) : (ringedProjectionFormulaSummandArrows uInv uPush adj I c uStar hobj hmap LF epsilon hLF PR PS hPR hPS TR TS rR rS k V am RF eta hRF computeR computeL adjD canonicalAdj E K hK repE M P).2 ≫ (ringedProjectionFormulaSummandArrows uInv uPush adj I c uStar hobj hmap LF epsilon hLF PR PS hPR hPS TR TS rR rS k V am RF eta hRF computeR computeL adjD canonicalAdj E K hK repE M P).1 = 𝟙 _ ∧ (ringedProjectionFormulaSummandArrows uInv uPush adj I c uStar hobj hmap LF epsilon hLF PR PS hPR hPS TR TS rR rS k V am RF eta hRF computeR computeL adjD canonicalAdj E K hK repE M P).1 ≫ (ringedProjectionFormulaSummandArrows uInv uPush adj I c uStar hobj hmap LF epsilon hLF PR PS hPR hPS TR TS rR rS k V am RF eta hRF computeR computeL adjD canonicalAdj E K hK repE M P).2 = 𝟙 _ ∧ ringedProjectionFormulaSummandArrows uInv uPush adj I c uStar hobj hmap LF epsilon hLF PR PS hPR hPS TR TS rR rS k V am RF eta hRF computeR computeL adjD canonicalAdj E K hK repE M P = ringedProjectionFormulaSummandArrows uInv uPush adj I c uStar hobj hmap LF epsilon hLF PR PS hPR hPS TR TS rR rS k V am RF eta hRF computeR computeL adjD canonicalAdj E K hK repE M P'",
-    "branch": "newtargets-dag",
-    "by": "NU",
-    "date": "2026-10-15",
-    "existing": false
+  {
+   "text": "In the current specified-arrow construction the displayed strict-perfect package supplies only proofs of flatness and invertibility, never the underlying comparison morphisms. Its two arrow expressions are therefore definitionally unchanged when the package changes, by proof irrelevance. Reflexivity proves presentation independence; this is the same intrinsic inverse as the uniqueness calculation in the source.",
+   "uses": [
+    "def-weil-pbc-projection-formula-arrows"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/slopmaster2/src/version/detailed/proper_base_change.tex",
+    "place": "lemma:weil-pbc-projection-formula-projective-summand, proof; definition:weil-pbc-projection-formula-arrows"
+   }
   }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-projection-formula-arrows",
+  "lemma-weil-pbc-projection-formula-finite-free",
+  "lem-weil-pbc-projection-inverse-coefficient-naturality"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "E3",
+  "date": "2026-10-18",
+  "document": "literature/blueprint/slopmaster2/src/version/detailed/proper_base_change.tex",
+  "place": "lemma:weil-pbc-projection-formula-projective-summand, proof; definition:weil-pbc-projection-formula-arrows",
+  "note": "Lean realization of the finite-free retract argument. Reverse-arrow naturality is proved in a separate reusable module; package independence is definitional in the existing construction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "finite projective summand projection formula inverse naturality",
+   "results": "Module.Finite.exists_comp_eq_id_of_projective; Module.Projective.of_split; Module.Projective.iff_split; no derived ringed-topos projection formula",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, finite projective, tensor",
+   "results": "0 hits; loogle reported Unknown identifier `finite`",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "projection.*formula|finite.*projective [Mathlib/CategoryTheory]",
+   "results": "0 hits under Mathlib/CategoryTheory",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.PreservesFiniteProducts",
+   "results": "CategoryTheory.Limits.PreservesFiniteProducts and additive-functor finite-product preservation declarations; no projection formula statement",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "inverse maps induced by a split finite projective module summand",
+   "results": "Module.Projective.of_split; Module.Projective.iff_split; Module.Finite.exists_comp_eq_id_of_projective; no projection formula",
+   "date": "2026-10-14",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite projective projection formula inverse",
+   "results": "service unavailable (Internal Server Error)",
+   "date": "2026-10-14",
+   "verdict": "unavailable"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 1266,
+ "blueprint_uses": [
+  "def-weil-pbc-projection-formula-arrows",
+  "lemma-weil-pbc-projection-formula-finite-free"
+ ],
+ "uses_not_cited": [
+  "def-weil-pbc-projection-formula-arrows",
+  "lemma-weil-pbc-projection-formula-finite-free"
+ ],
+ "proof_split_by": "paragraphs",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "split_report": {
+  "date": "2026-10-14",
+  "item": "lemma-weil-pbc-projection-formula-projective-summand",
+  "worker": "stage1",
+  "summary": "Audited the imported proof against the detailed proper-base-change source. No finished Lean declaration exists. Replaced uncited proof paragraphs with three explicit steps: counit naturality, the two inverse computations using the finite-free lemma, and uniqueness of an inverse for independence of the splitting. Added the required Mathlib search log; no Mathlib declaration states this derived ringed-topos result. Second reading cites the existing simultaneous derived tensor naturality theorem directly and expands the adjunct calculation and inverse uniqueness; no statement changes or new nodes.",
+  "blueprint": "Finite-projective summand equations: the three steps realize the naturality equations, the two displayed inverse computations, and the final uniqueness sentence of the blueprint proof."
+ },
+ "reviewed": {
+  "date": "2026-10-14",
+  "by": "L",
+  "reviewer": "NT-Codex-NG-1b9bc96e2",
+  "group": "NG",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NG-1b9bc96e2 (reviewer sub-agent of L); spot-checked: Read the complete item, report, unit/chapter route, master and detailed sources, and all cited node statements. The statement matches the master source; Steps 1–3 correctly establish naturality, both inverse composites, and presentation independence with the proper derived tensor comparison and coefficient categories. Edge cases N=0, N=1, and differing splittings check out. No duplicate, circularity, missing hypothesis, or accepted tool use found. Review written to review.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-5947cf56d",
+  "group": "NU",
+  "result": "pass",
+  "note": "Wrote review.md. Source, hypotheses, inverse equations, presentation independence, dependencies, universes, edge cases, and metadata pass. Immutable snapshot compiled cleanly through scompile.py in 25.4s/32.6s. No fixes required; no branch mutations performed."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ProjectionFormulaProjectiveSummand",
+  "declaration": "SheafOfModules.ringedProjectionFormula_projective_summand",
+  "declarations": [
+   "SheafOfModules.ringedProjectionFormulaSummandArrows",
+   "SheafOfModules.ringedProjectionFormula_projective_summand"
+  ],
+  "file": "lean/Sheaf/Paper/ProjectionFormulaProjectiveSummand.lean",
+  "statement": "theorem ringedProjectionFormula_projective_summand (M : SheafOfModules.{u} ((sheafCompose JC (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) (P P' : StrictPerfectCoefficientPackage ((sheafCompose JC (forget₂ CommRingCat.{u} RingCat.{u})).obj R) ((HomologicalComplex.single (SheafOfModules.{u} ((sheafCompose JC (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) (ComplexShape.up ℤ) 0).obj M)) : (ringedProjectionFormulaSummandArrows uInv uPush adj I c uStar hobj hmap LF epsilon hLF PR PS hPR hPS TR TS rR rS k V am RF eta hRF computeR computeL adjD canonicalAdj E K hK repE M P).2 ≫ (ringedProjectionFormulaSummandArrows uInv uPush adj I c uStar hobj hmap LF epsilon hLF PR PS hPR hPS TR TS rR rS k V am RF eta hRF computeR computeL adjD canonicalAdj E K hK repE M P).1 = 𝟙 _ ∧ (ringedProjectionFormulaSummandArrows uInv uPush adj I c uStar hobj hmap LF epsilon hLF PR PS hPR hPS TR TS rR rS k V am RF eta hRF computeR computeL adjD canonicalAdj E K hK repE M P).1 ≫ (ringedProjectionFormulaSummandArrows uInv uPush adj I c uStar hobj hmap LF epsilon hLF PR PS hPR hPS TR TS rR rS k V am RF eta hRF computeR computeL adjD canonicalAdj E K hK repE M P).2 = 𝟙 _ ∧ ringedProjectionFormulaSummandArrows uInv uPush adj I c uStar hobj hmap LF epsilon hLF PR PS hPR hPS TR TS rR rS k V am RF eta hRF computeR computeL adjD canonicalAdj E K hK repE M P = ringedProjectionFormulaSummandArrows uInv uPush adj I c uStar hobj hmap LF epsilon hLF PR PS hPR hPS TR TS rR rS k V am RF eta hRF computeR computeL adjD canonicalAdj E K hK repE M P'",
+  "branch": "newtargets-dag",
+  "by": "NU",
+  "date": "2026-10-15",
+  "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261018T101337-L-3972577",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

@@ -6,8 +6,8 @@ Authors: SHEAF group NU
 module
 
 public import Sheaf.Paper.ProjectionFormulaArrows
-import Sheaf.Paper.RingedTopoiCanonicalTensorPullback
 import Sheaf.Paper.ProjectionFormulaFiniteFree
+import Sheaf.Paper.ProjectionFormulaInverseNaturality
 
 /-!
 # Finite-projective summand equations
@@ -126,6 +126,64 @@ variable
       CommRingCat.{u} RingCat.{u})).obj S)) ℤ) (hK : K.IsKInjective)
     (repE : E ≅ DerivedCategory.Q.obj K)
 
+private theorem projectionMate_naturality
+    {A B : Type*} [Category A] [Category B]
+    (L : A ⥤ B) (V : B ⥤ A) (a : L ⊣ V)
+    (T : A × A ⥤ A) (U : B × B ⥤ B)
+    (alpha : T ⋙ L ≅ (L.prod L) ⋙ U) (E : B)
+    {X Y : A} (f : X ⟶ Y) :
+    T.map (CategoryTheory.Prod.mkHom (𝟙 (V.obj E)) f) ≫
+        derivedProjectionFormulaMate L V a T U alpha E Y =
+      derivedProjectionFormulaMate L V a T U alpha E X ≫
+        V.map (U.map (CategoryTheory.Prod.mkHom (𝟙 E) (L.map f))) := by
+  exact ((a.rightAdjointProjectionMap (T_C := Functor.curry.obj U)
+    (T_D := Functor.curry.obj T) (Functor.curry.map alpha.hom ≫ (Functor.curryObjProdComp L L
+      U).hom)).app E).naturality f
+
+private theorem inverseEquations_of_retract
+    {A B : Type*} [Category A] [Category B] (T U : A ⥤ B)
+    {X Y : A} (i : X ⟶ Y) (p : Y ⟶ X) (hi : i ≫ p = 𝟙 X)
+    (f : T.obj X ⟶ U.obj X) (g : U.obj X ⟶ T.obj X)
+    (f' : T.obj Y ⟶ U.obj Y) (g' : U.obj Y ⟶ T.obj Y)
+    (hfi : T.map i ≫ f' = f ≫ U.map i)
+    (hfp : T.map p ≫ f = f' ≫ U.map p)
+    (hgi : U.map i ≫ g' = g ≫ T.map i)
+    (hgp : U.map p ≫ g = g' ≫ T.map p)
+    (hfg : f' ≫ g' = 𝟙 _) (hgf : g' ≫ f' = 𝟙 _) :
+    g ≫ f = 𝟙 _ ∧ f ≫ g = 𝟙 _ := by
+  have hT : T.map i ≫ T.map p = 𝟙 _ := by rw [← T.map_comp, hi, T.map_id]
+  have hU : U.map i ≫ U.map p = 𝟙 _ := by rw [← U.map_comp, hi, U.map_id]
+  constructor
+  · calc
+      g ≫ f = g ≫ T.map i ≫ T.map p ≫ f := by simp [← Category.assoc, hT]
+      _ = U.map i ≫ g' ≫ f' ≫ U.map p := by
+        rw [hfp, ← Category.assoc g (T.map i), ← hgi]
+        simp [Category.assoc]
+      _ = 𝟙 _ := by rw [← Category.assoc g' f', hgf]; simpa using hU
+  · calc
+      f ≫ g = f ≫ U.map i ≫ U.map p ≫ g := by simp [← Category.assoc, hU]
+      _ = T.map i ≫ f' ≫ g' ≫ T.map p := by
+        rw [hgp, ← Category.assoc f (U.map i), ← hfi]
+        simp [Category.assoc]
+      _ = 𝟙 _ := by rw [← Category.assoc f' g', hfg]; simpa using hT
+
+private noncomputable def singleFreePackage
+    (N : ℕ) : StrictPerfectCoefficientPackage
+      ((sheafCompose JC (forget₂ CommRingCat.{u} RingCat.{u})).obj R)
+      ((HomologicalComplex.single _ (ComplexShape.up ℤ) 0).obj
+        (∏ᶜ fun _ : Fin N ↦ SheafOfModules.unit
+          ((sheafCompose JC (forget₂ CommRingCat.{u} RingCat.{u})).obj R))) where
+  N _ := N
+  i r := if h : r = 0 then
+    (HomologicalComplex.singleObjXIsoOfEq (ComplexShape.up ℤ) 0 _ r h).hom else 0
+  p r := if h : r = 0 then
+    (HomologicalComplex.singleObjXIsoOfEq (ComplexShape.up ℤ) 0 _ r h).inv else 0
+  splitting r := by
+    split_ifs with h
+    · simp
+    · exact (HomologicalComplex.isZero_single_obj_X (ComplexShape.up ℤ) 0 _ r h).eq_of_src
+        _ _
+
 /-- The arrows of definition 1264 for one coefficient sheaf, placed in degree zero.
 The package records the displayed finite-free splitting in degree zero; its other
 terms are zero. This is a specialization of the existing arrows, with the canonical
@@ -181,6 +239,55 @@ theorem ringedProjectionFormula_projective_summand
       hPR hPS TR TS rR rS k V am RF eta hRF computeR computeL adjD canonicalAdj E K hK repE M P =
       ringedProjectionFormulaSummandArrows uInv uPush adj I c uStar hobj hmap LF epsilon hLF PR PS
       hPR hPS TR TS rR rS k V am RF eta hRF computeR computeL adjD canonicalAdj E K hK repE M P'
-      := sorry
+      := by
+  classical
+  let single := HomologicalComplex.single
+    (SheafOfModules.{u} ((sheafCompose JC (forget₂ CommRingCat.{u} RingCat.{u})).obj R))
+    (ComplexShape.up ℤ) 0
+  let q := single ⋙ DerivedCategory.Q
+  let A := q ⋙ (Functor.curry.obj TR).obj (RF.obj E)
+  let B := q ⋙ LF ⋙ (Functor.curry.obj TS).obj E ⋙ RF
+  let Free := ∏ᶜ fun _ : Fin (P.N 0) ↦ SheafOfModules.unit
+    ((sheafCompose JC (forget₂ CommRingCat.{u} RingCat.{u})).obj R)
+  let Pfree := singleFreePackage (R := R) (P.N 0)
+  let e := HomologicalComplex.singleObjXSelf (ComplexShape.up ℤ) 0 M
+  let i : M ⟶ Free := e.inv ≫ P.i 0
+  let p : Free ⟶ M := P.p 0 ≫ e.hom
+  have hip : i ≫ p = 𝟙 M := by
+    change (e.inv ≫ P.i 0) ≫ (P.p 0 ≫ e.hom) = _
+    rw [Category.assoc, ← Category.assoc (P.i 0), P.splitting]
+    simp
+  let hb : ∀ X, ∃ a b : ℤ, ∀ r : ℤ, r < a ∨ b < r →
+      IsZero ((single.obj X).X r) := fun X ↦
+    ⟨0, 0, fun r h ↦ HomologicalComplex.isZero_single_obj_X (ComplexShape.up ℤ) 0 X r
+      (h.elim ne_of_lt ne_of_gt)⟩
+  let arrows := ringedProjectionFormulaArrows uInv uPush adj I c uStar hobj hmap LF epsilon hLF PR
+    PS hPR hPS TR TS rR rS k V am RF eta hRF
+      computeR computeL adjD canonicalAdj E K hK repE
+  let f := (arrows (single.obj M) P (hb M)).1
+  let g := (arrows (single.obj M) P (hb M)).2
+  let f' := (arrows (single.obj Free) Pfree (hb Free)).1
+  let g' := (arrows (single.obj Free) Pfree (hb Free)).2
+  have hn (X Y) (a : X ⟶ Y)
+      (PX : StrictPerfectCoefficientPackage _ (single.obj X))
+      (PY : StrictPerfectCoefficientPackage _ (single.obj Y)) :
+      B.map a ≫ (arrows (single.obj Y) PY (hb Y)).2 =
+        (arrows (single.obj X) PX (hb X)).2 ≫ A.map a := by
+    exact ringedProjectionFormulaInverse_naturality uInv uPush adj I c uStar hobj hmap LF epsilon
+      hLF PR PS hPR hPS TR TS rR rS k V am RF eta hRF
+      computeR computeL adjD canonicalAdj E K hK repE
+      (single.obj X) (single.obj Y) PX PY (hb X) (hb Y) (single.map a)
+  have hfree : f' ≫ g' = 𝟙 _ ∧ g' ≫ f' = 𝟙 _ :=
+    ringedProjectionFormula_finiteFree uInv uPush adj I c uStar hobj hmap LF epsilon hLF PR PS hPR
+      hPS TR TS rR rS k V am RF eta hRF
+      computeR computeL adjD canonicalAdj E K hK repE
+      (single.obj Free) Pfree (hb Free) (P.N 0) 0 rfl
+  have heqs : g ≫ f = 𝟙 _ ∧ f ≫ g = 𝟙 _ :=
+    inverseEquations_of_retract A B i p hip f g f' g'
+      (projectionMate_naturality LF RF adjD TR TS _ E (q.map i))
+      (projectionMate_naturality LF RF adjD TR TS _ E (q.map p))
+      (hn M Free i P Pfree) (hn Free M p Pfree P) hfree.1 hfree.2
+  exact ⟨heqs.1, heqs.2, rfl⟩
+
 
 end SheafOfModules
