@@ -20,9 +20,91 @@
   "def-weil-pbc-qbar-category",
   "def-weil-abstract-derived-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work in $\\mathcal T=D^b_c(C,\\overline{\\mathbf Q}_\\ell)$ with its ordinary t-structure. Put $B=i_*E$. By [lem-a1-qbar-open-closed-cohomology], $A=j_*F$ is constructible since $F$ is lisse, $B$ is a constructible sheaf since closed direct image is exact on sheaves, and $j^*B=0$ by the stated essential-image characterization of $i_*$. Thus $A,B$ belong to the standard heart. The same node supplies the exact restriction $j^*$ on hearts and the ordinary sheaf adjunction $j^*\\dashv j_*$ with counit $\\epsilon_F:j^*j_*F\\xrightarrow{\\sim}F$.",
+   "uses": [
+    "lem-a1-qbar-open-closed-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-d-dl-a1-setup/rem-dl-a1-conventions.md",
+    "place": "Ordinary j_* convention, supplemented by the cited open-closed cohomology statement"
+   }
+  },
+  {
+   "text": "Let $\\delta:B\\to A[1]$ be arbitrary. The completion and rotation axioms of [def-weil-triangulated-category] give a distinguished triangle $A\\xrightarrow{a}M\\xrightarrow{b}B\\xrightarrow{\\delta}A[1]$. Since its outer objects $A,B$ lie in the heart, extension-closure in clause (2) of [lem-weil-heart-short-exact-triangles] puts $M$ in the heart. Clause (4) then makes its first three arrows the short exact sequence $0\\to A\\xrightarrow{a}M\\xrightarrow{b}B\\to0$ in constructible sheaves. All these constructions take place in the geometric triangulated category.",
+   "uses": [
+    "def-weil-triangulated-category",
+    "lem-weil-heart-short-exact-triangles"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
+    "place": "1.2.3–1.2.6 and 1.3.4–1.3.6, printed pp. 27–31: extension-closed heart and admissible short exact sequences"
+   }
+  },
+  {
+   "text": "Apply the exact restriction of [lem-a1-qbar-open-closed-cohomology] to this short exact sequence. Because $j^*B=0$, $j^*a:j^*A\\to j^*M$ is an isomorphism. Set $t=\\epsilon_F\\circ(j^*a)^{-1}:j^*M\\to F$ and let $r:M\\to j_*F=A$ be its adjoint under the same node's ordinary sheaf adjunction. Naturality of the Hom bijection sends $r\\circ a$ to $t\\circ j^*a=\\epsilon_F$. The identity of $j_*F$ also corresponds to $\\epsilon_F$, by the defining counit formula for adjunction. Injectivity of that bijection therefore gives $r\\circ a=\\operatorname{id}_A$. This writes the retraction explicitly; it uses neither exactness of $j_*$ nor injectivity of $F$.",
+   "uses": [
+    "lem-a1-qbar-open-closed-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-d-dl-a1-setup/rem-dl-a1-conventions.md",
+    "place": "Ordinary direct-image convention; explicit adjunction retraction argument supplied here"
+   }
+  },
+  {
+   "text": "Apply clause (i) of [lem-weil-pbc-hom-into-triangle-exact] to the twice-rotated distinguished triangle, whose first arrows are $B\\xrightarrow{\\delta}A[1]\\xrightarrow{-a[1]}M[1]$. Consecutive arrows compose to zero, hence $a[1]\\circ\\delta=0$. Since shifts are functors [def-weil-triangulated-category], the retraction identity gives $r[1]\\circ a[1]=\\operatorname{id}_{A[1]}$, so $\\delta=r[1]\\circ a[1]\\circ\\delta=0$. As $\\delta$ was arbitrary, $\\operatorname{Hom}(i_*E,A[1])=0$.",
+   "uses": [
+    "lem-weil-pbc-hom-into-triangle-exact",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0146, lemma-composition-zero; Tag 0145, definition-triangulated-category (TR2)"
+   }
+  },
+  {
+   "text": "Because shift is an automorphism [def-weil-triangulated-category], $\\operatorname{Hom}(A[1],B)\\cong\\operatorname{Hom}(A,B[-1])$. Both $A,B$ lie in the ordinary heart from Step 1. In particular $A\\in\\mathcal T^{\\le0}$ and $B\\in\\mathcal T^{\\ge0}$, so axiom (2) of [def-weil-t-structure] says that the latter group is zero. This proves the reverse Hom vanishing.",
+   "uses": [
+    "def-weil-triangulated-category",
+    "def-weil-t-structure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
+    "place": "Definition 1.3.1(i), printed p. 29: t-structure orthogonality"
+   }
+  },
+  {
+   "text": "Finally suppose $E$ underlies the specified Weil sheaf $E_0$. The Frobenius compatibility in [lem-a1-qbar-open-closed-cohomology] gives the induced Frobenius structures on the ordinary direct images, and the shifted structure is understood as in [def-weil-weil-sheaf-complex]. By clause (2) of that definition, forgetting a morphism of Frobenius pairs is faithful and keeps its underlying geometric morphism. Each of the two Hom sets of pairs therefore injects into the corresponding zero geometric Hom group proved above. The zero geometric map satisfies the Frobenius commutation equation, so each Hom set consists exactly of zero. No triangle or short exact sequence in a category of Weil pairs is used, and this argument imposes no Frobenius structure on an arbitrary geometric $E$.",
+   "uses": [
+    "lem-a1-qbar-open-closed-cohomology",
+    "def-weil-weil-sheaf-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-d-dl-a1-setup/rem-dl-a1-conventions.md",
+    "place": "Weil sheaf convention; forgetting Frobenius pairs after geometric vanishing"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-a1-qbar-open-closed-cohomology",
+  "def-weil-triangulated-category",
+  "lem-weil-heart-short-exact-triangles",
+  "lem-weil-pbc-hom-into-triangle-exact",
+  "def-weil-t-structure",
+  "def-weil-weil-sheaf-complex"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-d-dl-a1-setup/rem-dl-a1-conventions.md",
+  "place": "Ordinary j_* convention and intermediate-extension assertion; explicit heart-extension and adjunction proof, using BBD 1.2.3–1.3.6 and Stacks Tags 0145 and 0146"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -72,10 +154,45 @@
    "results": "Zero hits in all Mathlib source.",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "perverse|intermediateExtension|middleExtension",
+   "results": "Successful source search returned zero hits in all Mathlib.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The first extension group from a sheaf supported outside an open subset to the ordinary direct image from that subset is zero",
+   "results": "Eight hits, including Abelian.Ext.mk₀, ShortComplex.ShortExact.extClass_comp, InjectiveResolution.extMk_eq_zero_iff and Scheme.Modules.restrict_obj. None states the geometric boundary vanishing. Ext classes and their compositions are general ingredients only.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"perverse\"",
+   "results": "Successful literal search returned zero hits.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived Hom from a sheaf supported on the closed complement of an open immersion to the ordinary direct image of a sheaf shifted by one vanishes",
+   "results": "Eight hits concerning ringed-space open-immersion component identities and Scheme.Modules.restrictAdjunction. The latter is an adjunction for structure sheaves of modules, not the constructible l-adic boundary derived Hom theorem.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an exact localization of abelian categories with fully faithful right adjoint, Ext one from an object in the kernel to an object in the image of the right adjoint is zero",
+   "results": "Eight hits: Ext.mapExactFunctor_zero (preservation of the zero element), ShortExact.extClass (defines an extension class), HasExt instances, contravariant/covariant exact sequences and injective_iff_subsingleton_ext_one. No localization-to-right-adjoint-image vanishing theorem. Read Ext/Map.lean:164, Ext/ExtClass.lean:78 and Modules/Sheaf.lean:425 to check the closest candidates; they do not specialize to the item in one line.",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-dl-a1-curve-intermediate-extension",
@@ -87,12 +204,41 @@
  "blueprint": {
   "from": {
    "node": "rem-dl-a1-conventions",
-   "place": "Second paragraph, sentence characterizing the curve intermediate extension by absence of boundary perverse subobjects and quotients",
+   "place": "Final paragraph, sentence “its curve perverse intermediate extension is j_{!*}(F[1])=(j_*F)[1]”; boundary-subobject/quotient characterization made explicit in lem-dl-a1-curve-intermediate-extension, proof Step 2",
    "via": [
     "lem-dl-a1-curve-intermediate-extension"
    ]
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-dl-a1-boundary-hom-vanishing",
+  "worker": "stage1",
+  "summary": "Proved both geometric Hom vanishings without adding nodes: an arbitrary degree-one map yields an extension in the ordinary heart, and restriction followed by ordinary j^*–j_* adjunction constructs a retraction. A consecutive-arrow identity kills the connecting map. The reverse direction is negative-degree orthogonality; faithfulness gives the Frobenius-pair claims. Statement and existing ancestry retained.",
+  "blueprint": "Realizes the derived boundary-map input to the ordinary shifted middle-extension assertion in rem-dl-a1-conventions, via the boundary-subobject/quotient argument of lem-dl-a1-curve-intermediate-extension; the setup unit has no proof steps to replace.",
+  "tool_uses": [
+   {
+    "node": "lem-a1-qbar-open-closed-cohomology",
+    "why": "Uses its standard heart, exact open restriction, closed supported sheaves, ordinary open adjunction, and Frobenius compatibility as geometric tools. The setup unit has no proof steps or cited units providing these interfaces."
+   },
+   {
+    "node": "lem-weil-heart-short-exact-triangles",
+    "why": "Uses clauses (2) and (4) for an arbitrary t-structure to realize a degree-one map as a short exact sequence in the standard heart. The setup unit supplies no generic heart theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-a1-qbar-open-closed-cohomology",
+  "lem-weil-heart-short-exact-triangles"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q03-e5d4dcc22",
+  "group": "Q03",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q03-e5d4dcc22 (reviewer sub-agent of L); spot-checked: I read the whole item: the statement and all six steps, every cited node's statement, the parent's Step 2, the rem-dl-a1-conventions blueprint source, BBD 1.2.4–1.2.6, 1.3.1 and 1.3.6, and Stacks Tags 0145 and 0146. The statement is unchanged and true; I checked it independently: i^!(j_*F)[1] lies in D^{>=1}, and the second Hom vanishes by negative-degree orthogonality. Edge cases checked: Z empty, E=0, F=0, j=id, the constant sheaf on G_m in A^1, and nontrivial inertia. Each step uses only what its cited statement says. Step 1: lem-a1-qbar-open-closed-cohomology gives the heart, t-exactness of j^*, the essential image of i_* and the sheaf adjunction j^* -| j_*. Step 2: clauses (2) and (4) of the heart lemma. Step 3: I checked the adjunction retraction r∘a=id. Step 4: clause (i) of the composition-zero leaf on the rotated triangle. Steps 5 and 6: axiom (2) of the t-structure and faithfulness of the forgetful functor on Frobenius pairs, both correctly marked elementary. There are no new nodes, no cycle, no duplicate in the DAG and no SGA citation. I accept both tool_uses (the open/closed node and the heart short-exact-triangles lemma), since the setup unit has no steps. Batch 5: the closure of lem-a1-qbar-open-closed-cohomology reaches sec-poincare-duality only through the general definition def-pod-lisse-l-adic-sheaves (already a statement dependency of the item), lisse-sheaf foundations and generic homological algebra. None of these is the trace formula, Poincaré duality or a step of their proofs, so the citation is allowed. Fix: source.place still said 'Second paragraph ... no boundary perverse subobjects', although the report claims it was corrected. I changed it to the final paragraph's sentence j_{!*}(F[1])=(j_*F)[1]; the whole corrected item is in fixes/dag/nodes/sec-deligne-laumon-a1/.; 1 file(s) fixed by the reviewer"
  }
 }
