@@ -7253,6 +7253,7 @@ public import WeilConjectures.CategoryTheory.AbutmentImageFiltration
 public import WeilConjectures.CategoryTheory.Adjunction.ExchangeMate
 public import WeilConjectures.CategoryTheory.Adjunction.FiniteProductRingFunctor
 public import WeilConjectures.CategoryTheory.Adjunction.LiftedCommRingBranch
+public import WeilConjectures.CategoryTheory.Adjunction.MatesCounit
 public import WeilConjectures.CategoryTheory.Adjunction.ProjectionMap
 public import WeilConjectures.CategoryTheory.Adjunction.ProjectionMap.Comp
 public import WeilConjectures.CategoryTheory.Adjunction.ProjectionMapAssoc
@@ -10980,6 +10981,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.Charts
 public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.Etale
 public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.Local
 public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.OpenImmersion
+public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.ProjectiveLineBaseChange
 public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.SmoothBaseChange
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability.Basic
