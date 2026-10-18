@@ -10577,8 +10577,6 @@ public import WeilConjectures.SixFunctors.ProEtale.Comparison.FullyFaithful
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStar
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStarAcyclic
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.Monoidal
-public import WeilConjectures.SixFunctors.ProEtale.Complete.CompletedPullback
-public import WeilConjectures.SixFunctors.ProEtale.Complete.LowerShriekBaseChange
 public import WeilConjectures.SixFunctors.ProEtale.CompletedIntegral
 public import WeilConjectures.SixFunctors.ProEtale.ConstructibleSheaf
 public import WeilConjectures.SixFunctors.ProEtale.ExceptionalAdjoint
