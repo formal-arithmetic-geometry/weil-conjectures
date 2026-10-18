@@ -19,9 +19,129 @@
   "def-sbc-normal-dominant-galois",
   "def-weil-finite-integral-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-per-normal-projective-compactification] to $X/S$. Obtain $S_0\\to S$ and the normal integral projective $S_0$-scheme $C$, flat with geometrically integral generic fibre, with $X$ a dense open of $C$ and $k(C)=k(X)$. This is a change of the base through algebraic constants inside $k(X)$, not an alteration of $X$. It is essential that the ultimate generic cover be Galois over $k(X)$; composing an arbitrary constant-field extension with an alteration would not justify that assertion.",
+   "uses": [
+    "lem-per-normal-projective-compactification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVI 3.7, first paragraph and start of second paragraph, p.254"
+   }
+  },
+  {
+   "text": "Suppose first that $\\dim C_{\\eta_0}=0$. The projective generic fibre is proper by [lem-kun-projective-implies-proper] and [lem-pc-projective-base-change], so [lem-pc-dim-zero-finite-over-field] makes this zero-dimensional integral fibre a finite field spectrum. Its geometric integrality forces this field to be $k(S_0)$ (a nontrivial finite characteristic-zero extension splits after algebraic closure). Thus $C\\to S_0$ has finite generic fibre and is projective birational. It is in fact an isomorphism: the identity on the generic point extends to $s:S_0\\to C$ by the valuative criterion [lemma-nagata-proper-valuative-criterion-existence-api], and $s\\circ f=1_C$ since the two maps agree generically and the equalizer is closed in integral reduced $C$; similarly $f\\circ s=1$. Here separatedness follows from properness [lem-kun-projective-implies-proper]. Then $X$ is a nonempty open in the trait $S_0$; take $X'=X$, $S'=S_0$, $G=1$, and $a=1_X$. The semistable chart is $\\operatorname{Spec}R_0[t]/(t-\\pi_0)\\cong S_0$ restricted to this open. The log-structure verification is Step 7 below.",
+   "uses": [
+    "lem-pc-dim-zero-finite-over-field",
+    "lem-kun-projective-implies-proper",
+    "lem-pc-projective-base-change",
+    "lemma-nagata-proper-valuative-criterion-existence-api",
+    "def-weil-proper-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "X 2.5 proof, omitted dimension-zero case; XVI 3.7 p.254"
+   }
+  },
+  {
+   "text": "For $d=\\dim C_{\\eta_0}>0$ apply [lem-per-trait-marked-nodal-alteration] to $C/S_0$. All its hypotheses are Step 1's conclusions. Write its output $q:Y_d\\to C$ over $S'\\to S_0$, with the finite group $G$ and marked split nodal tower. Keep the nonempty open $V\\subset C$ where $q^{-1}V\\to V$ is a connected finite etale $G$-torsor. The group acts trivially on $C,S_0$ and hence on $X,S$, but may act nontrivially on $S'$. No log smoothness or regularity of this nodal tower is being assumed.",
+   "uses": [
+    "lem-per-trait-marked-nodal-alteration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "X 2.5 proof, first application of Vidal 4.4.3, p.153; XVI 3.7 p.254"
+   }
+  },
+  {
+   "text": "Apply [lem-per-marked-nodal-tower-semistable-modification] to this same marked split tower with its $G$-action. It supplies an integral regular projective $S'$-scheme $Z$ and a $G$-equivariant projective birational $h:Z\\to Y_d$, with the stated strictly semistable charts. Its splitting hypotheses are precisely those provided in Step 3. This step modifies the nodal tower; it does not use the later Sylow quotient or the prime-to-$\\ell$ alteration that cites the present item.",
+   "uses": [
+    "lem-per-marked-nodal-tower-semistable-modification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "X 2.5 proof, successive Vidal 4.4.4 modifications and remark, p.153"
+   }
+  },
+  {
+   "text": "The composite $q h:Z\\to C$ is projective by [lem-trf-h-projective-composition]. Restrict it by the open immersion $X\\hookrightarrow C$, putting $X'=Z\\times_C X$. By [lem-pc-projective-base-change] the map $a:X'\\to X$ is projective. It is dominant since $q h$ is dominant and $X$ is dense open. The source is a nonempty open of the integral regular $Z$, hence integral regular; regularity and the semistable charts restrict to opens directly. For the generic torsor choose a dense isomorphism open $O\\subset Y_d$ for $h$, intersect all its finitely many $G$-translates, and set $F=Y_d\\setminus O$. Properness of $q$ follows from [lem-kun-projective-implies-proper]; its closed-image property [def-weil-proper-morphism] makes $q(F)$ closed. It misses the generic point of $C$: its fibre there is the single generic point of integral $Y_d$, since $q$ is generically finite and the generic torsor is integral. Thus $U=X\\cap V\\setminus q(F)$ is nonempty open. Above $U$ the modification is an equivariant isomorphism, so $a^{-1}U\\to U$ is the original connected finite etale $G$-torsor. Restriction to a nonempty open of an integral scheme preserves integrality, hence connectedness.",
+   "uses": [
+    "lem-trf-h-projective-composition",
+    "lem-pc-projective-base-change",
+    "lem-kun-projective-implies-proper",
+    "def-weil-proper-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVI 3.7, four bullets p.254; elementary restriction and removal of a proper closed image"
+   }
+  },
+  {
+   "text": "The composite $S'\\to S_0\\to S$ is finite directly from [def-weil-finite-integral-morphism]: write the traits as spectra of $R\\to R_0\\to R'$. If $b_i$ generate $R_0$ as an $R$-module and $c_j$ generate $R'$ as an $R_0$-module, then the finitely many $b_ic_j$ generate $R'$ over $R$. It is dominant; $S'$ is already complete strictly henselian by Step 3. To check quasi-projectivity over $S$, apply [lem-fin-finite-over-projective] to the finite scheme $S'\\to S$ and the identity projective $S\\to S$: since $S$ is affine Noetherian it gives a finite-dimensional projective embedding of $S'$ over $S$. The projective composition theorem [lem-trf-h-projective-composition] makes $Z$ projective over $S$ as well as over $S'$. The open $X'\\subset Z$ is therefore quasi-projective over both bases. Projective maps are finite type by [lem-kun-projective-implies-proper] and the definition of properness [def-weil-proper-morphism]. The open $X'$ is quasi-compact because $Z$ is Noetherian by [lem-weil-pbc-finite-type-over-noetherian]; thus it remains finite type over either base by the affine-generator definition [def-weil-finite-type-morphism].",
+   "uses": [
+    "lem-fin-finite-over-projective",
+    "lem-trf-h-projective-composition",
+    "lem-kun-projective-implies-proper",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "def-weil-finite-type-morphism",
+    "def-weil-finite-integral-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVI 3.7 p.254, projectivity and finite trait extension"
+   }
+  },
+  {
+   "text": "Give $X'$ the divisorial structure $M=\\mathcal O_{X'}\\cap j_*\\mathcal O_{X'_{\\eta'}}^\\times$. On a semistable chart with $t_1\\cdots t_r=\\pi'$, use the log chart $\\mathbf N^r\\to\\mathcal O$, $e_i\\mapsto t_i$, and the base chart $\\mathbf N\\to R'$, $1\\mapsto\\pi'$. The compatible monoid map sends $1$ to $(1,\\ldots,1)$. It is injective and its group cokernel is $\\mathbf Z^{r-1}$: subtract the first coordinate from the others to exhibit the quotient. The comparison scheme is $B_r=\\operatorname{Spec}R'[t_1,\\ldots,t_r]/(t_1\\cdots t_r-\\pi')$, and the semistable model is $\\mathbf A^{n-r}_{B_r}$. The comparison map is the etale chart map, smooth by [lem-weil-pbc-etale-smooth-zero-dimensional-fibres], followed by the projection, smooth by [sbc-lem-affine-space-smooth]; it is smooth by [lem-trf-smooth-composition]. $\\mathbf N\\to R'$ charts the canonical structure as $R'\\cap K'^\\times=\\pi'^{\\mathbf N}R'^\\times$. Hence the fs chart definition [def-per-fs-log-smooth-etale] gives log smoothness. The canonical log trait is log regular directly from [def-trf-fs-log-blowup]: at the closed point the nonunit ideal is $(\\pi')$, the quotient is a field and $1=0+\\operatorname{rank}\\mathbf Z$; at the generic point the log structure is trivial and the field is regular. Apply [lem-trf-log-smooth-log-regular] with these injective torsion-free charts. It gives log regularity and identifies the local chart structures with the divisorial structure, so they glue to $M$. Its triviality locus is exactly the generic fibre, since inverting the product makes every $t_i$ a unit. The $G$-action preserves that fibre (automorphisms of the trait fix its closed point), so it preserves the subsheaf $M$. This verifies all log clauses also in the dimension-zero case, using $r=n=1$.",
+   "uses": [
+    "def-per-fs-log-smooth-etale",
+    "def-trf-fs-log-blowup",
+    "lem-trf-log-smooth-log-regular",
+    "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+    "sbc-lem-affine-space-smooth",
+    "lem-trf-smooth-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 1.4 and 1.8, pp.69–70; XVI 3.7 p.254, semistable log structure"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-per-fs-log-smooth-etale",
+  "def-trf-fs-log-blowup",
+  "def-weil-finite-integral-morphism",
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism",
+  "lem-fin-finite-over-projective",
+  "lem-kun-projective-implies-proper",
+  "lem-pc-dim-zero-finite-over-field",
+  "lem-pc-projective-base-change",
+  "lem-per-trait-marked-nodal-alteration",
+  "lem-per-marked-nodal-tower-semistable-modification",
+  "lem-per-normal-projective-compactification",
+  "lem-trf-h-projective-composition",
+  "lem-trf-log-smooth-log-regular",
+  "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lemma-nagata-proper-valuative-criterion-existence-api",
+  "sbc-lem-affine-space-smooth",
+  "lem-trf-smooth-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "XVI 3.7 p.254, expanded using X Lemma 2.5 p.153 and VI 1.4/1.8 pp.69–70; dimension-zero and open-restriction arguments supplied explicitly."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -53,7 +173,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-trait-prime-to-ell-log-alteration",
@@ -78,5 +198,99 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-trait-semistable-galois-alteration",
+  "worker": "stage1",
+  "summary": "Preserved the statement, isolated normal compactification and constants, split nodal alteration from semistable tower modification, and wrote out open restriction, generic-torsor preservation, projectivity, dimension zero and divisorial log charts. No Sylow quotient or later purity theorem is used.",
+  "blueprint": "Historical regular-pair-purity input below Artin-Gabber proof Step 3: ILO XVI 3.7, preliminary constants, normalized projective closure and the four-bullet G-equivariant semistable square (p.254). X 2.5 explains its nodal construction.",
+  "tool_uses": [
+   {
+    "node": "def-trf-fs-log-blowup",
+    "why": "Generic properness, projective embedding, finiteness or logarithmic chart tool used in the explicit restriction of the ILO XVI 3.7 construction; no step of the unit route is replaced."
+   },
+   {
+    "node": "def-weil-finite-integral-morphism",
+    "why": "Generic properness, projective embedding, finiteness or logarithmic chart tool used in the explicit restriction of the ILO XVI 3.7 construction; no step of the unit route is replaced."
+   },
+   {
+    "node": "def-weil-finite-type-morphism",
+    "why": "Generic properness, projective embedding, finiteness or logarithmic chart tool used in the explicit restriction of the ILO XVI 3.7 construction; no step of the unit route is replaced."
+   },
+   {
+    "node": "def-weil-proper-morphism",
+    "why": "Generic properness, projective embedding, finiteness or logarithmic chart tool used in the explicit restriction of the ILO XVI 3.7 construction; no step of the unit route is replaced."
+   },
+   {
+    "node": "lem-fin-finite-over-projective",
+    "why": "Generic properness, projective embedding, finiteness or logarithmic chart tool used in the explicit restriction of the ILO XVI 3.7 construction; no step of the unit route is replaced."
+   },
+   {
+    "node": "lem-kun-projective-implies-proper",
+    "why": "Generic properness, projective embedding, finiteness or logarithmic chart tool used in the explicit restriction of the ILO XVI 3.7 construction; no step of the unit route is replaced."
+   },
+   {
+    "node": "lem-pc-dim-zero-finite-over-field",
+    "why": "Generic properness, projective embedding, finiteness or logarithmic chart tool used in the explicit restriction of the ILO XVI 3.7 construction; no step of the unit route is replaced."
+   },
+   {
+    "node": "lem-pc-projective-base-change",
+    "why": "Generic properness, projective embedding, finiteness or logarithmic chart tool used in the explicit restriction of the ILO XVI 3.7 construction; no step of the unit route is replaced."
+   },
+   {
+    "node": "lem-trf-h-projective-composition",
+    "why": "Generic properness, projective embedding, finiteness or logarithmic chart tool used in the explicit restriction of the ILO XVI 3.7 construction; no step of the unit route is replaced."
+   },
+   {
+    "node": "lem-trf-log-smooth-log-regular",
+    "why": "Generic properness, projective embedding, finiteness or logarithmic chart tool used in the explicit restriction of the ILO XVI 3.7 construction; no step of the unit route is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+    "why": "Generic properness, projective embedding, finiteness or logarithmic chart tool used in the explicit restriction of the ILO XVI 3.7 construction; no step of the unit route is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic properness, projective embedding, finiteness or logarithmic chart tool used in the explicit restriction of the ILO XVI 3.7 construction; no step of the unit route is replaced."
+   },
+   {
+    "node": "lemma-nagata-proper-valuative-criterion-existence-api",
+    "why": "Generic properness, projective embedding, finiteness or logarithmic chart tool used in the explicit restriction of the ILO XVI 3.7 construction; no step of the unit route is replaced."
+   },
+   {
+    "node": "sbc-lem-affine-space-smooth",
+    "why": "Generic smoothness tool for the semistable-chart comparison map of Step 7 (etale chart followed by an affine-space projection, reviewer repair); no step of the unit route is replaced."
+   },
+   {
+    "node": "lem-trf-smooth-composition",
+    "why": "Generic smoothness tool for the semistable-chart comparison map of Step 7 (etale chart followed by an affine-space projection, reviewer repair); no step of the unit route is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-trf-fs-log-blowup",
+  "def-weil-finite-integral-morphism",
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism",
+  "lem-fin-finite-over-projective",
+  "lem-kun-projective-implies-proper",
+  "lem-pc-dim-zero-finite-over-field",
+  "lem-pc-projective-base-change",
+  "lem-trf-h-projective-composition",
+  "lem-trf-log-smooth-log-regular",
+  "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lemma-nagata-proper-valuative-criterion-existence-api",
+  "sbc-lem-affine-space-smooth",
+  "lem-trf-smooth-composition"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q53-10898dda1",
+  "group": "Q53",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q53-10898dda1 (reviewer sub-agent of L); spot-checked: I read the item, the three new nodes, every cited statement, ILO XVI 3.7 (p.254) and ILO X Lemma 2.5 with its proof (p.153), whose Vidal 4.4.3 and 4.4.4 applications I checked with H trivial: in characteristic 0 the radicial factor is trivial and K together with G/K gives a G-torsor. The item statement is unchanged and matches the four bullets of XVI 3.7. Steps 1-6 are sound. Step 2 (d=0): the existence-api section plus a closed equalizer give C=S0. Step 5: the generic fibre of the torsor is the single generic point of Y_d, so q(F) misses η_C. Step 6: projectivity over S via lem-fin-finite-over-projective. All three new nodes are true and are not duplicates. Compactification: integral closure of R in the algebraic constants, then normalize the closure. The Q74 equivariant-marked-nodal and trf plurinodal/nodal-pair nodes have a different scope. No node restates an item clause. Three repairs: (1) E3/C4 in Step 7: the comparison map is not étale when n>r; it is the étale chart followed by the A^{n-r} projection, so smooth. I now cite sbc-lem-affine-space-smooth and lem-trf-smooth-composition, added a sentence on the canonical chart, and added both tools to tool_uses. (2) B3: the compactification node cited def-sc-function-field, which covers curves only; it now defines k(W) inline via the stalk at the generic point. (3) B3: 'generically finite' in the nodal-alteration node is now defined inline. Batch 5: the closure of lem-trf-h-projective-composition (01WE) contains no other trf node and the parent already cites it. The closure of lem-trf-log-smooth-log-regular (VI 1.8) has only generic log and monoid algebra and no thm-trf. The added lem-trf-smooth-composition has a trivial closure. All three are general facts, not steps of the trace formula or Poincaré duality proofs, so I accepted them. No SGA is used.; 3 file(s) fixed by the reviewer"
  }
 }
