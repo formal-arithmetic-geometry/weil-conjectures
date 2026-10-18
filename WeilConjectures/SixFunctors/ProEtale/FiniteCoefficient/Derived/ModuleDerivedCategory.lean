@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import Mathlib.Algebra.Category.ModuleCat.AB
+public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 
@@ -13,7 +14,8 @@ public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 # The derived category of sheaves of `A`-modules on the small pro-étale site
 
 For a scheme `Y` and a commutative ring `A`, this file names the derived category
-`D(Y_proét, A)` of sheaves of `A`-modules on the small pro-étale site of `Y`.
+`D(Y_proét, A)` of sheaves of `A`-modules on the small pro-étale site of `Y`, and its cohomology
+sheaf functors `𝓗^r` (`AlgebraicGeometry.ProEtale.cohomologySheaf`).
 
 The small pro-étale site itself is Mathlib's `AlgebraicGeometry.Scheme.ProEt Y`, the category of
 schemes weakly étale over `Y` (flat with flat diagonal), with the topology
@@ -52,5 +54,39 @@ the values in `ModuleCat.{u + 1} A` in `Type (u + 1)`, the site being essentiall
 (blueprint: `def-weil-pbc-proetale-site`, `def-weil-size-convention`) -/
 abbrev ModuleDerivedCategory (Y : Scheme.{u}) (A : Type (u + 1)) [CommRing A] : Type _ :=
   DerivedCategory (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} A))
+
+/-- Blueprint `def-weil-derived-cohomology-sheaves`: Cohomology sheaves of a derived complex
+
+For a scheme `Y`, a commutative ring `A` and `r : ℤ`, the `r`-th cohomology sheaf functor
+`𝓗^r : D(Y_proét, A) ⥤ Sh(Y_proét, A)`, the homology functor of the standard t-structure
+(`DerivedCategory.homologyFunctor`). Being a functor on the derived category it is invariant
+under quasi-isomorphism (`AlgebraicGeometry.ProEtale.cohomologySheafQIso`); the nonpositive and
+nonnegative parts of the standard t-structure are described by
+`AlgebraicGeometry.ProEtale.isLE_iff_isZero_cohomologySheaf` and
+`AlgebraicGeometry.ProEtale.isGE_iff_isZero_cohomologySheaf`. -/
+noncomputable abbrev cohomologySheaf (Y : Scheme.{u}) (A : Type (u + 1)) [CommRing A] (r : ℤ) :
+    ModuleDerivedCategory Y A ⥤ Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} A) :=
+  DerivedCategory.homologyFunctor _ r
+
+/-- The cohomology sheaf `𝓗^r` of the image of a cochain complex `K` in `D(Y_proét, A)` is the
+`r`-th homology sheaf of `K`. -/
+noncomputable def cohomologySheafQIso {Y : Scheme.{u}} {A : Type (u + 1)} [CommRing A] (r : ℤ)
+    (K : CochainComplex (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} A)) ℤ) :
+    (cohomologySheaf Y A r).obj (DerivedCategory.Q.obj K) ≅ K.homology r :=
+  (DerivedCategory.homologyFunctorFactors _ r).app K
+
+/-- The nonpositive part of the standard t-structure (shifted by `n`) consists of the complexes
+whose cohomology sheaves vanish in degrees `> n`. -/
+lemma isLE_iff_isZero_cohomologySheaf {Y : Scheme.{u}} {A : Type (u + 1)} [CommRing A]
+    (K : ModuleDerivedCategory Y A) (n : ℤ) :
+    K.IsLE n ↔ ∀ r, n < r → Limits.IsZero ((cohomologySheaf Y A r).obj K) :=
+  DerivedCategory.isLE_iff K n
+
+/-- The nonnegative part of the standard t-structure (shifted by `n`) consists of the complexes
+whose cohomology sheaves vanish in degrees `< n`. -/
+lemma isGE_iff_isZero_cohomologySheaf {Y : Scheme.{u}} {A : Type (u + 1)} [CommRing A]
+    (K : ModuleDerivedCategory Y A) (n : ℤ) :
+    K.IsGE n ↔ ∀ r, r < n → Limits.IsZero ((cohomologySheaf Y A r).obj K) :=
+  DerivedCategory.isGE_iff K n
 
 end AlgebraicGeometry.ProEtale

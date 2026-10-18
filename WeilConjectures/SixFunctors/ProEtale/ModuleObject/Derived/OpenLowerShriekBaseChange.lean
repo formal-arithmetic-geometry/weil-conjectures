@@ -218,7 +218,8 @@ include ℓ k
 /-- The *unit insertion* step of the exchange morphism: the natural transformation
 `Rp_* ⋙ j_! ⟶ (Rp_* ⋙ j_!) ⋙ (Lp'^* ⋙ Rp'_*)` obtained by inserting the unit of the adjunction
 `Lp'^* ⊣ Rp'_*`. -/
-noncomputable def boundedConstructibleLowerStarOpenImmersionLowerShriekExchangeUnitStep' :
+noncomputable def boundedConstructibleLowerStarOpenImmersionLowerShriekExchangeUnitStep'
+    [IsFinitenessCoefficient ℓ Λ] :
     boundedConstructibleLowerStar Λ ℓ p ⋙ boundedConstructibleOpenImmersionLowerShriek Λ ℓ j ⟶
       (boundedConstructibleLowerStar Λ ℓ p ⋙ boundedConstructibleOpenImmersionLowerShriek Λ ℓ j) ⋙
         (boundedConstructibleUpperStar Λ ℓ p' ⋙ boundedConstructibleLowerStar Λ ℓ p') :=
@@ -229,6 +230,7 @@ noncomputable def boundedConstructibleLowerStarOpenImmersionLowerShriekExchangeU
 the extension-by-zero base-change isomorphism `j_! ⋙ Lp'^* ≅ Lp^* ⋙ i'_!` of the cartesian
 square, under `Rp_*` on the left and `Rp'_*` on the right. -/
 noncomputable def boundedConstructibleLowerStarOpenImmersionLowerShriekExchangeSquareStep'
+    [IsFinitenessCoefficient ℓ Λ]
     (sq : IsPullback p i' j p') :
     (boundedConstructibleLowerStar Λ ℓ p ⋙ boundedConstructibleOpenImmersionLowerShriek Λ ℓ j) ⋙
         (boundedConstructibleUpperStar Λ ℓ p' ⋙ boundedConstructibleLowerStar Λ ℓ p') ≅
@@ -242,7 +244,8 @@ noncomputable def boundedConstructibleLowerStarOpenImmersionLowerShriekExchangeS
 /-- The *counit contraction* step of the exchange morphism: the natural transformation
 `(Rp_* ⋙ Lp^*) ⋙ (i'_! ⋙ Rp'_*) ⟶ i'_! ⋙ Rp'_*` obtained by contracting the counit of the
 adjunction `Lp^* ⊣ Rp_*`. -/
-noncomputable def boundedConstructibleLowerStarOpenImmersionLowerShriekExchangeCounitStep' :
+noncomputable def boundedConstructibleLowerStarOpenImmersionLowerShriekExchangeCounitStep'
+    [IsFinitenessCoefficient ℓ Λ] :
     (boundedConstructibleLowerStar Λ ℓ p ⋙ boundedConstructibleUpperStar Λ ℓ p) ⋙
         (boundedConstructibleOpenImmersionLowerShriek Λ ℓ i' ⋙
           boundedConstructibleLowerStar Λ ℓ p') ⟶
@@ -265,6 +268,7 @@ with `j` and `i'` open immersions: the mate, under the adjunctions `Lp^* ⊣ Rp_
 unit insertion, the square transport, and the counit contraction:
 `Rp_* ⋙ j_! ⟶ Rp_* ⋙ j_! ⋙ Lp'^* ⋙ Rp'_* ≅ Rp_* ⋙ Lp^* ⋙ i'_! ⋙ Rp'_* ⟶ i'_! ⋙ Rp'_*`. -/
 noncomputable def boundedConstructibleLowerStarOpenImmersionLowerShriekExchange'
+    [IsFinitenessCoefficient ℓ Λ]
     (sq : IsPullback p i' j p') :
     boundedConstructibleLowerStar Λ ℓ p ⋙ boundedConstructibleOpenImmersionLowerShriek Λ ℓ j ⟶
       boundedConstructibleOpenImmersionLowerShriek Λ ℓ i' ⋙
@@ -278,6 +282,7 @@ noncomputable def boundedConstructibleLowerStarOpenImmersionLowerShriekExchange'
 `CategoryTheory.Adjunction.exchangeRight` of the extension-by-zero base-change isomorphism under
 the adjunctions `Lp^* ⊣ Rp_*` and `Lp'^* ⊣ Rp'_*`. -/
 lemma boundedConstructibleLowerStarOpenImmersionLowerShriekExchange'_eq_exchangeRight
+    [IsFinitenessCoefficient ℓ Λ]
     (sq : IsPullback p i' j p') :
     boundedConstructibleLowerStarOpenImmersionLowerShriekExchange' Λ ℓ sq =
       Adjunction.exchangeRight (boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ p)

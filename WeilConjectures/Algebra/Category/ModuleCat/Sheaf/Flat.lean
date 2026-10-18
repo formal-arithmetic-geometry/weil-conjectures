@@ -20,7 +20,8 @@ The tensor product is the one of `def-pur-sheaf-tensor-product`, the source's
 `SheafOfModules.tensorObjIsoSheafification`), on a site `C : Type u`, `Category.{u} C` in the
 universe of the rings and modules, as for the K-flat complexes (`CochainComplex.IsKFlatTensor`).
 The source's `CategoryTheory.ObjectProperty.flat` asks both `tensorLeft` and `tensorRight` to
-be exact; the node asks it of `G ↦ G ⊗ F` only.
+be exact; the node asks it of `G ↦ G ⊗ F` only. By the symmetry of the tensor product the two
+notions agree (`SheafOfModules.isFlat_iff_flat`).
 -/
 
 @[expose] public section

@@ -3,10 +3,15 @@ Copyright (c) 2026 Bin Wu. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Bin Wu
 -/
-
 module
 
 public import WeilConjectures.AlgebraicGeometry.StrictHenselizationStructuralMap
+
+
+public import WeilConjectures.AlgebraicGeometry.Sites.StrictHenselization
+
+
+public import WeilConjectures.AlgebraicGeometry.StrictHenselizationStructuralMapExtension
 public import Mathlib.CategoryTheory.Comma.Over.Pullback
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 
@@ -63,19 +68,19 @@ Source: Stacks, Tag 03Q9, first proof paragraph
 structure StrictLocalNeighbourhoodGeometry {X S : Scheme.{v}} (f : X ⟶ S)
     {Ω : Type v} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S) where
   legs : (Functor.const (SmallModel.{v} (Scheme.strictHenselizationNeighbourhoods s))).obj
-      (pullback f (Scheme.strictHenselizationStructuralMap s)) ⟶
+      (pullback f (Scheme.strictLocalizationToBase s)) ⟶
     strictLocalNeighbourhoodDiagram f s
   isLimit : IsLimit (Cone.mk _ legs)
   [compact : ∀ i, CompactSpace ((strictLocalNeighbourhoodDiagram f s).obj i)]
   [quasiSeparated : ∀ i, QuasiSeparatedSpace ((strictLocalNeighbourhoodDiagram f s).obj i)]
   [affine : ∀ {i j} (a : i ⟶ j), IsAffineHom ((strictLocalNeighbourhoodDiagram f s).map a)]
   first : ∀ i, legs.app i ≫ pullback.fst ((strictLocalNeighbourhoods s).obj i).hom f =
-    pullback.snd f (Scheme.strictHenselizationStructuralMap s) ≫
-      (Scheme.strictHenselizationCone s).π.app (op (op i)) ≫
+    pullback.snd f (Scheme.strictLocalizationToBase s) ≫
+      (Scheme.strictHenselizationAffineCone s).π.app (op (op i)) ≫
         Spec.map (Scheme.ΓSpecIso
           ((equivSmallModel.{v} (Scheme.strictHenselizationNeighbourhoods s)).inverse.obj
             i).1.left.unop).inv
   over : ∀ i, legs.app i ≫ (strictLocalNeighbourhoodProjection f s).app i =
-    pullback.fst f (Scheme.strictHenselizationStructuralMap s)
+    pullback.fst f (Scheme.strictLocalizationToBase s)
 
 end AlgebraicGeometry.Etale

@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LowerStarComp
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerStarComp
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.CoherenceLegacy
 
 /-!
@@ -144,12 +145,6 @@ lemma lowerStarFactor_exchange_cube {Z Z' P P' : Scheme.{u}} (θ : Z ⟶ Z') (ψ
   repeat' apply pullback.hom_ext
   all_goals simp [MorphismProperty.Over.pullback, MorphismProperty.Over.mk,
     MorphismProperty.Over.pullbackComp, e, e']
-
-/-- The factorisation isomorphism of the tautological factorisation is the composition
-isomorphism. -/
-lemma lowerStarFactor_rfl {X Y Z : Scheme.{u}} (b : Z ⟶ Y) (c : Y ⟶ X) :
-    lowerStarFactor A (rfl : b ≫ c = b ≫ c) = lowerStarComp A b c := by
-  rw [← lowerStarComp_trans_lowerStarCongr, lowerStarCongr_rfl, Iso.trans_refl]
 
 /-- A congruence followed by the inverse of a composition isomorphism is the inverse of a
 factorisation isomorphism. -/
