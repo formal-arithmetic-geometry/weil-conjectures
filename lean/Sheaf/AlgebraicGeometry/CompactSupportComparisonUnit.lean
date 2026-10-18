@@ -5,7 +5,6 @@ Authors: SHEAF group Q81
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.ProEtaleSiteComparisonDerived
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Comparison
 
 /-! # The comparison unit in fixed-coefficient module sheaves
@@ -15,7 +14,8 @@ Stacks Project, Tag 099V (blueprint: thm-weil-pbc-site-comparison).
 
 This exposes the canonical unit in the fixed-ring presentation used by compact support.
 The recorded coefficient realization identifies this presentation with constant-ring
-module sheaves. The existing realized-coefficient statement is reexported as well.
+module sheaves. The proof uses the existing generic injective-acyclicity criterion
+for the canonical bounded-below derived adjunction unit.
 -/
 
 @[expose] public section
@@ -44,7 +44,15 @@ no condition on the individual module sheaves is imposed. -/
 theorem isIso_compactSupportComparisonUnit (T : Scheme.{u})
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] :
     IsIso (derivedComparisonAdjunctionPlus (ModuleCat.{u + 1} Λ) T).unit := by
-  sorry
+  have := isIso_comparisonAdjunction_unit (ModuleCat.{u + 1} Λ) T
+  rw [NatTrans.isIso_iff_isIso_app]
+  intro M
+  change IsIso
+    ((comparisonAdjunction (ModuleCat.{u + 1} Λ) T).derivedAdjunctionPlus.unit.app M)
+  rw [(comparisonAdjunction (ModuleCat.{u + 1} Λ) T).derivedAdjunctionPlus_eq_derivedPlus]
+  exact (comparisonAdjunction (ModuleCat.{u + 1} Λ) T).isIso_derivedPlus_unit_app_of_rightAcyclic
+    (fun _ _ ↦ inferInstance)
+    (fun I _ ↦ rightAcyclic_comparisonUpperStar_obj_of_injective (ModuleCat.{u + 1} Λ) T I) M
 
 /-- The comparison isomorphism is the inverse of the uniquely specified adjunction unit,
 not an arbitrary fully-faithful witness. Source: blueprint site-comparison theorem

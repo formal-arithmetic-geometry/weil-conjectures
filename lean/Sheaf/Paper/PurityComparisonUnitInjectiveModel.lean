@@ -6,6 +6,7 @@ Authors: SHEAF group Q23
 module
 
 public import Sheaf.AlgebraicGeometry.CompactSupportComparisonUnit
+public import Sheaf.AlgebraicGeometry.ProEtaleSiteComparisonDerived
 public import Sheaf.AlgebraicGeometry.ProEtaleFiniteModules
 public import Sheaf.Paper.ComparisonPullbackExact
 public import Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
