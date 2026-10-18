@@ -193,5 +193,34 @@
   "group": "Q157",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q157-41e1c63b2 (reviewer sub-agent of L); spot-checked: I read the item, all five cited node statements, the parent's steps 6-8 that use the item, fix-prop-coherence (main-20261015), the unit route, and Stacks 0FPL/0FPM/0FPT/0FNG. The statement is unchanged and true. I checked the following by hand. (1) t_{a,b} with sign (-1)^{bp} is a chain map. (2) The symmetry square with one shifted slot has no extra sign, and with both slots shifted the exponents differ by 2bp, which gives (-1)^{ab}. (3) The associator with a shift in the middle slot gives (-1)^{bp} on both routes, and the unitors carry sign 1. (4) The pullback/tensor square preserves bidegree, and the tensor node applies because u^* is exact. (5) P_bJ_k≅J_s is beta of the open-tensor node with g_U=id. (6) For the clopen V_W=s(U)⊔C, pi_s is the projection and J_s→S_s is J_sM→s_*M→s_*I, which commutes when I[r] is the resolution of M[r]. Edge cases checked: r=0, U empty, s an isomorphism. The route is fine: sk-prop-a1-kummer is reachable from sk-thm-sf-compatibility. There are no new nodes, no duplicates (I read the monoidal-comparison, finite-commshift, pinned-pullback, open-adjunction and adic-projection shift nodes), no D1 restatement and no SGA. One C-type fault, fixed in fixes/: step 3 cited Stacks 0FPL/0FPM, which are about the cup product rather than shift signs. It now cites more-algebra Section sign-rules 0FNG and sites-cohomology 0FPT. No tool_uses.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.SystemPrimitiveComparisonShift",
+  "declaration": "WeilConjectures.IntegralSystemRealization.systemPrimitiveComparisonShift",
+  "declarations": [
+   "WeilConjectures.IntegralSystemRealization.primitiveResolvingInclusion",
+   "WeilConjectures.IntegralSystemRealization.primitiveTensorModel",
+   "WeilConjectures.IntegralSystemRealization.primitiveSystemSymmetry",
+   "WeilConjectures.IntegralSystemRealization.PrimitiveSystemScheme",
+   "WeilConjectures.IntegralSystemRealization.PrimitiveSystemArrow",
+   "WeilConjectures.IntegralSystemRealization.primitiveSystemRestriction",
+   "WeilConjectures.IntegralSystemRealization.primitiveSystemProjection",
+   "WeilConjectures.IntegralSystemRealization.PrimitiveSystemComparison",
+   "WeilConjectures.IntegralSystemRealization.systemPrimitiveComparisonShift"
+  ],
+  "file": "lean/Sheaf/SixFunctors/SystemPrimitiveComparisonShift.lean",
+  "statement": "theorem systemPrimitiveComparisonShift (D : FiniteFieldDatum.{u}) (_hl : l ≠ D.p) (o : Operations l E) (c : Compositors l E o) (a : OpenComparisons l E o c) {A W : PrimitiveSystemScheme D} (e t : Expression.SlotContext (systemInterpretation l E o) A.obj W.obj) (τ : ∀ M : System l E A.obj.left, e.evaluate.obj M ⟶ t.evaluate.obj M) (_hτ : PrimitiveSystemComparison l E D o c a e t τ) (M : System l E A.obj.left) (r : ℤ) : τ (M⟦r⟧) ≫ (t.shift (systemShifts l E o) r M).hom = (e.shift (systemShifts l E o) r M).hom ≫ (τ M)⟦r⟧'",
+  "branch": "newtargets-dag",
+  "by": "Q03",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4021a28fa",
+  "group": "Q03",
+  "result": "pass",
+  "note": "I read the item node, all 4 stmt_deps and their Lean declarations, the source place, the module and the report. Each primitive family has a constructor tied to the actual published map: pullComp, square, tensorPullLeft/Right, all 3 associator slots, both unitors, the symmetry slots (derivedTensorSymmetry, the ∃! choice), openComp, the restriction P_bJ_k≅J_s (inverse openComp ≫ openCongr ≫ inverse open unit, for general b and s), clopen (a.clopen, pinned by transpose) and π_s (unit ≫ P_s(clopen⁻¹), the same formula as the mate-pasting dependency's pi). The shifts are systemShifts, identical to BasicShiftOperation.systemShift (left slot 1, right slot (-1)^{ri}). The square has the right orientation and holds for all r : ℤ. I checked the signs by hand for symmetry, assocMiddle/Last and the unitors. Finite-type objects and separated finite-type, quasi-compact-open arrows match the node. The operations o, c, a are pinned interfaces, not free maps. Edge cases, universes and H4 are fine. The docstrings carry all 7 proof steps; the only sorry is the theorem; the statement is verbatim; the node changes only in lean. nt_compile --json: exit 0, clean, 17.1 s. Maintainer note: the associator and unitors of calculus.systemClosed.monoidal are not pinned on representatives upstream (they are shared with the realization dependency's tensorAssoc); pin them at the calculus level, for example to derivedTensorAssociator."
  }
 }
