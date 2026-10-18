@@ -13,9 +13,95 @@
   "def-weil-etale-morphism",
   "def-weil-residue-field"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The finite affine Noetherian cover in the hypothesis is a locally Noetherian cover in [pqf-def-locnoeth]. Apply [lem-weil-pbc-noetherian-scheme-closed-subsets-minimal]. This gives the descending-chain condition on closed subsets: an infinite strictly descending chain would be a nonempty family with no minimal member. Thus [lem-sfb-noetherian-space-compact-subsets] makes every subset of $X$, in particular every open, quasi-compact. Apply [lem-weil-pbc-locally-noetherian-quasi-separated] and then [lem-weil-pbc-qcqs-scheme-spectral] to see that $X$ is spectral. Its constructible topology is therefore quasi-compact by [lem-weil-pbc-spectral-constructible-topology-quasi-compact].",
+   "uses": [
+    "pqf-def-locnoeth",
+    "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+    "lem-sfb-noetherian-space-compact-subsets",
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "lem-weil-pbc-qcqs-scheme-spectral",
+    "lem-weil-pbc-spectral-constructible-topology-quasi-compact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose II, Corollary 2.2.4, printed p. 27, completely decomposed case ell=infinity, using Proposition 2.2.3 and compactness of the constructible topology."
+   }
+  },
+  {
+   "text": "For each $i\\in I$, define $C_i=\\{x\\in X:\\exists z\\in U_i,\\ u_i(z)=x,\\ \\kappa(x)\\to\\kappa(z)\\text{ is an isomorphism}\\}$. An etale morphism is locally of finite presentation by [def-weil-etale-morphism]. The finite-polynomial presentation in [def-sbc-locally-finite-presentation] is in particular finitely generated, so it is locally of finite type in [def-weil-finite-type-morphism]. For $x\\in C_i$, apply [lem-per-rational-lift-locally-closed-section] to $u_i$ to obtain a locally closed subscheme $j:Z\\hookrightarrow X$ through $x$ and $s:Z\\to U_i$ with $u_i\\circ s=j$.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "def-sbc-locally-finite-presentation",
+    "def-weil-finite-type-morphism",
+    "lem-per-rational-lift-locally-closed-section"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose II, Corollary 2.2.4, printed p. 27, completely decomposed case ell=infinity, using Proposition 2.2.3 and compactness of the constructible topology."
+   }
+  },
+  {
+   "text": "The image $j(Z)$ is contained in $C_i$. Indeed, an immersion induces residue-field isomorphisms: for a closed immersion this is the equality of the residue fields of $A$ at a prime containing an ideal $J$ and of $A/J$ at the corresponding prime, and for an open immersion the local rings agree. These affine descriptions are in [def-weil-closed-immersion, def-weil-open-immersion]. For $t\\in Z$, put $w=j(t)$ and $z=s(t)$. On residue fields [def-weil-residue-field], the composite $\\kappa(w)\\xrightarrow{a}\\kappa(z)\\xrightarrow{b}\\kappa(t)$ is the isomorphism induced by $j$. Identifying the last field with the first gives $ba=1$. Every unital field homomorphism is injective; hence $b(a(b(v)))=b(v)$ implies $a(b(v))=v$ for each $v\\in\\kappa(z)$. Thus $a$ is an isomorphism, proving $w\\in C_i$.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "def-weil-open-immersion",
+    "def-weil-residue-field"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose II, Corollary 2.2.4, printed p. 27, completely decomposed case ell=infinity, using Proposition 2.2.3 and compactness of the constructible topology."
+   }
+  },
+  {
+   "text": "Write the locally closed image as $j(Z)=O\\cap F$ with $O$ open and $F$ closed, using the closed-then-open factorization of [def-weil-closed-immersion]. By Step 1 both $O$ and $X\\setminus F$ are quasi-compact opens. The subbase definition [def-weil-pbc-constructible-topology] makes $O$ and $F$ open in the constructible topology, so $j(Z)$ is open there. Steps 2--3 give such a subset through every $x\\in C_i$, contained in $C_i$. Therefore each $C_i$ is a union of open subsets in that topology and is open there.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "def-weil-pbc-constructible-topology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose II, Corollary 2.2.4, printed p. 27, completely decomposed case ell=infinity, using Proposition 2.2.3 and compactness of the constructible topology."
+   }
+  },
+  {
+   "text": "The covering hypothesis is exactly $X=\\bigcup_{i\\in I}C_i$. By [lem-weil-pbc-spectral-constructible-topology-quasi-compact] applied to the open cover from Step 4, choose a finite subset $I_0\\subseteq I$ with $X=\\bigcup_{i\\in I_0}C_i$. Unfolding $C_i$ gives every required residue-field-isomorphism lift with its index in $I_0$. When $X$ is empty the empty subset suffices; when $X$ is nonempty the hypothesis excludes an empty $I$. The proof never requires the individual $U_i$ to be quasi-compact or separated.",
+   "uses": [
+    "lem-weil-pbc-spectral-constructible-topology-quasi-compact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose II, Corollary 2.2.4, printed p. 27, completely decomposed case ell=infinity, using Proposition 2.2.3 and compactness of the constructible topology."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-locally-finite-presentation",
+  "def-weil-closed-immersion",
+  "def-weil-etale-morphism",
+  "def-weil-finite-type-morphism",
+  "def-weil-open-immersion",
+  "def-weil-pbc-constructible-topology",
+  "def-weil-residue-field",
+  "lem-per-rational-lift-locally-closed-section",
+  "lem-sfb-noetherian-space-compact-subsets",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+  "lem-weil-pbc-qcqs-scheme-spectral",
+  "lem-weil-pbc-spectral-constructible-topology-quasi-compact",
+  "pqf-def-locnoeth"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose II, Proposition 2.2.3 and Corollary 2.2.4, printed p. 27, with compactness supplied by Stacks Tag 0901."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -51,10 +137,45 @@
    "results": "{\"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/MayerVietorisSquare.lean\", \"Mathlib/CategoryTheory/Sites/MayerVietorisSquare.lean\"], \"digest\": \"5559778a21417766\"}",
    "date": "2026-10-19",
    "verdict": "no match: results concern ordinary etale covers, residue-field maps, root lifting or Zariski finite subcovers; none states this node."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Noetherian scheme completely decomposed etale covering finite subcover",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.instFintypeI₀FiniteSubcover\", \"AlgebraicGeometry.IsNoetherian.noetherianSpace\", \"AlgebraicGeometry.Scheme.OpenCover.finiteSubcover\", \"AlgebraicGeometry.Scheme.quasiCompactCover\", \"AlgebraicGeometry.finite_irreducibleComponents_of_isNoetherian\", \"AlgebraicGeometry.Scheme.OpenCover.finiteSubcover_X\", \"AlgebraicGeometry.QuasiCompactCover.inst\", \"AlgebraicGeometry.instIsLocallyNoetherianXScheme\"], \"digest\": \"0d165c2a57b89fc6\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: finiteSubcover concerns open-immersion covers and does not preserve rational residue-field lifts; no declaration states the completely decomposed finite-subfamily assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "NoetherianSpace, IsEtale, residue field isomorphism finite subcover",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'NoetherianSpace'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: finiteSubcover concerns open-immersion covers and does not preserve rational residue-field lifts; no declaration states the completely decomposed finite-subfamily assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "NoetherianSpace|constructible|etale",
+   "results": "{\"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean\", \"Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean\", \"Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean\", \"Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean\", \"Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean\", \"Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean\", \"Mathlib/AlgebraicGeometry/Sites/Etale.lean\", \"Mathlib/AlgebraicGeometry/Sites/Etale.lean\"], \"digest\": \"290e3680bd2d5622\"} ; subdirectory AlgebraicGeometry",
+   "date": "2026-10-18",
+   "verdict": "no match: finiteSubcover concerns open-immersion covers and does not preserve rational residue-field lifts; no declaration states the completely decomposed finite-subfamily assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A completely decomposed etale covering family of a Noetherian scheme has a finite completely decomposed subcover",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.OpenCover.finiteSubcover\", \"AlgebraicGeometry.Scheme.OpenCover.finiteSubcover_X\", \"AlgebraicGeometry.isLocallyNoetherian_of_affine_cover\", \"AlgebraicGeometry.IsNoetherian.toCompactSpace\", \"AlgebraicGeometry.isNoetherian_iff_of_finite_iSup_eq_top\", \"AlgebraicGeometry.Scheme.OpenCover.finiteSubcover_f\", \"AlgebraicGeometry.Scheme.affineCover\", \"AlgebraicGeometry.instIsLocallyNoetherianXScheme\"], \"digest\": \"7dcc8b63265a52bd\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: finiteSubcover concerns open-immersion covers and does not preserve rational residue-field lifts; no declaration states the completely decomposed finite-subfamily assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A Nisnevich covering family of a Noetherian scheme admits a finite Nisnevich subcover",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.instFintypeI₀FiniteSubcover\", \"AlgebraicGeometry.IsNoetherian.noetherianSpace\", \"AlgebraicGeometry.Scheme.OpenCover.finiteSubcover\", \"AlgebraicGeometry.Scheme.OpenCover.finiteSubcover_X\", \"AlgebraicGeometry.QuasiCompactCover.inst\", \"AlgebraicGeometry.QuasiCompactCover.of_finite\", \"AlgebraicGeometry.Scheme.OpenCover.finiteSubcover_f\", \"AlgebraicGeometry.instIsLocallyNoetherianXScheme\"], \"digest\": \"7194e8a5eb8836e6\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: finiteSubcover concerns open-immersion covers and does not preserve rational residue-field lifts; no declaration states the completely decomposed finite-subfamily assertion."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-finite-flat-cd-etale-exchange",
@@ -80,5 +201,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-completely-decomposed-etale-finite-subcover",
+  "worker": "stage1",
+  "summary": "Split the ILO compactness argument into five steps. One new statement-only pointwise section lemma; reuse existing Noetherian, spectral and constructible-compactness nodes. The arbitrary non-quasi-compact etale sources and residue-field-isomorphism condition are preserved. No statement change.",
+  "blueprint": "The inherited ancestor Step 3 chain invokes the finite completely decomposed refinement ILO II 2.2.4. These steps realize that precise finite-selection ingredient via II 2.2.3; the current ancestor split has since changed to the BBD argument, so this auxiliary item is proved on its own stated ILO route, without changing any unit."
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q11-8349315f4",
+  "group": "Q11",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q11-8349315f4 (reviewer sub-agent of L); spot-checked: I read ILO II 2.1.1 and 2.2.1–2.2.4 (printed pp. 26–27). The item is exactly the ℓ=∞ case of Corollary 2.2.4, with no extra hypotheses on the U_i. The new node lem-per-rational-lift-locally-closed-section is Proposition 2.2.3, with 'subscheme' made precise as an immersion. It is statement-only, introduces every object it uses, and has the correct blueprint from/via/same_as. It is not a restatement of the item: it is pointwise and has no family or compactness. It is not a duplicate: I grepped for Nisnevich, completely decomposed, 2.2.3, section on a locally closed subscheme and the spreading-out tags. The nearest node, lem-sbc-pointed-section-stage-descent, is a general limit tool, not this statement. I tested it on: a closed point of Spec Z, the generic point with the open D(2), Spec Z[i] (no rational lift, no section), nonreduced Spec k[ε] (needs a subscheme, not an open), and the reverse direction via the field argument. Steps: (1) The cited statements check out: locnoeth, minimal closed subsets, DCC compactness, 01OY, 094L, and 0901 for spectral spaces. Quasi-compactness from the finite cover is implicit (advisory). (2) Étale gives lfp, which gives lft. The locality in def-weil-finite-type-morphism is one routine 01T2-style sentence (advisory). (3) Immersions induce residue-field isomorphisms; with ba an isomorphism and b injective, a is an isomorphism. Correct. (4) j(Z)=O∩F is open in the constructible topology because every open is quasi-compact (Step 1). Correct. (5) Compactness gives a finite I_0; the empty X case is handled. The citers (finite-flat-cd-etale-exchange step 7, uniformization-nodal-quotient-reduction) use the unchanged statement. No SGA source, no cycle, no tool_uses needed. No fixes."
  }
 }
