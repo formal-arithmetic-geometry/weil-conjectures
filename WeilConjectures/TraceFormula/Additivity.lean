@@ -109,6 +109,86 @@ lemma lowerShriekBaseChange_isPullback_toPoint_app
   rw [boundedConstructibleLowerShriekBaseChange_padicAlgCl_eq_mateEquiv]
   exact h
 
+variable (ℓ) in
+/-- The Frobenius operator `Φ^♯ : Ra_{X!} ⟶ Ra_{X!} LΦ^*` of a proper endomorphism `Φ` of `X`
+(blueprint `prop-trf-graph-operator`): the unit of `LΦ^* ⊣ RΦ_*`, the identification
+`RΦ_* ≅ RΦ_!` and the composition isomorphism `RΦ_! ⋙ Ra_{X!} ≅ R(Φ ≫ a_X)_! = Ra_{X!}`. -/
+noncomputable def frobeniusSharp (Φ : X ⟶ X) [IsProper Φ.left] :
+    boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X) ⟶
+      boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ Φ ⋙
+        boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X) :=
+  Functor.whiskerRight
+      ((boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+        Φ).unit ≫ Functor.whiskerLeft _ (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ
+          Φ).inv)
+      (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)) ≫
+    Functor.whiskerLeft (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ Φ)
+      ((boundedConstructibleLowerShriekComp_padicAlgCl ℓ Φ (toPoint X)).inv ≫
+        eqToHom (congrArg (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ)
+          (comp_toPoint Φ)))
+
+lemma frobeniusSharp_app (Φ : X ⟶ X) [IsProper Φ.left]
+    (V : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+    (frobeniusSharp ℓ Φ).app V =
+      (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).map
+          ((boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+            Φ).unit.app V ≫ (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ Φ).inv.app
+              ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ Φ).obj V)) ≫
+        (boundedConstructibleLowerShriekComp_padicAlgCl ℓ Φ (toPoint X)).inv.app
+          ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ Φ).obj V) ≫
+        eqToHom (congrArg (fun m ↦
+          (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ m).obj
+            ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ Φ).obj V))
+            (comp_toPoint Φ)) := by
+  simp only [frobeniusSharp, NatTrans.comp_app, Functor.whiskerRight_app,
+    Functor.whiskerLeft_app, eqToHom_app]
+
 end FrobeniusSharp
+
+namespace WeilBoundedConstructible
+
+variable {X : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
+  [IsSeparated X.hom] {Φ : X ⟶ X} [IsFinite Φ.left] [IsUniversalHomeomorphism Φ.left]
+
+/-- **The compactly supported Frobenius is `RΓ_c(φ) ∘ Φ^♯`** (blueprint
+`prop-trf-graph-operator`): for a Weil object `(K, φ)`,
+`F_c = Ra_{X!} φ ∘ Φ^♯ : RΓ_c(X, K) ⟶ RΓ_c(X, LΦ^* K) ⟶ RΓ_c(X, K)`. -/
+theorem compactFrobenius_eq (K : WeilBoundedConstructible ℓ Φ) :
+    K.compactFrobenius = (frobeniusSharp ℓ Φ).app K.carrier ≫
+      (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).map
+        K.str.hom := by
+  have := isIso_boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ (isPullback_toPoint X)
+  have := isIso_unit_boundedConstructibleUpperStarLowerStarAdjunction
+    (Profinite.padicAlgClRingObj ℓ) ℓ Φ
+  have hcU : (boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ Φ
+      (𝟙 X)).hom.app K.carrier ≫ (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ)
+        ℓ Φ).map ((boundedConstructibleUpperStarId (Profinite.padicAlgClRingObj ℓ) ℓ X).hom.app
+          K.carrier) =
+      (eqToIso (congrArg (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ)
+        (Category.comp_id Φ))).hom.app K.carrier := by
+    rw [boundedConstructibleUpperStarComp_id_right_app, eqToIso.hom, eqToHom_app]
+  rw [compactFrobenius, frobenius_hom]
+  unfold weilCompactCohomology weilLowerShriekOfFrobenius
+  rw [Endofunctor.IsoAlgebra.mapOfNatIso_obj_str, Iso.trans_hom, Functor.mapIso_hom, Iso.app_hom,
+    frobeniusSharp_app, Category.assoc, Category.assoc]
+  exact frobeniusSharp_aux
+    (boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ Φ)
+    (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ Φ)
+    (boundedConstructibleUpperStarId (Profinite.padicAlgClRingObj ℓ) ℓ (point k))
+    (boundedConstructibleUpperStarId (Profinite.padicAlgClRingObj ℓ) ℓ X)
+    (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ (isPullback_toPoint X))
+    (boundedConstructibleLowerShriekComp_padicAlgCl ℓ Φ (toPoint X))
+    (boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ Φ (𝟙 X))
+    (eqToIso (congrArg (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ)
+      (Category.comp_id Φ)))
+    (eqToIso (by rw [Category.comp_id, comp_toPoint])) K.carrier
+    (eqToHom (congrArg (fun m ↦
+      (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ m).obj
+        ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ Φ).obj K.carrier))
+        (comp_toPoint Φ)))
+    (lowerShriekBaseChange_isPullback_toPoint_app ℓ X K.carrier) hcU
+    (by simp only [eqToIso.hom, eqToHom_app, eqToHom_map, eqToHom_trans]) K.str.hom
+
+end WeilBoundedConstructible
 
 end AlgebraicGeometry.ProEtale.CondensedRing
