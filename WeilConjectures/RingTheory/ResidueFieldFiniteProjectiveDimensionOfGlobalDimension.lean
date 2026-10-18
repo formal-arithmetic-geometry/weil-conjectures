@@ -33,15 +33,8 @@ theorem residueField_hasFiniteProjectiveDimension (R : Type u) [CommRing R]
   obtain ⟨n, hn⟩ := h
   let K := ModuleCat.of R (IsLocalRing.ResidueField R)
   let L := ModuleCat.of R (ULift.{v} (IsLocalRing.ResidueField R))
-  have hL := (ModuleCat.hasProjectiveResolutionLE_iff_ext_vanishing L n).2.mp (hn L)
-  let : CategoryTheory.HasProjectiveDimensionLE L n := ⟨fun i hi Y ↦ hL Y i hi⟩
-  let : CategoryTheory.HasProjectiveDimensionLE K n :=
-    ModuleCat.hasProjectiveDimensionLE_of_linearEquiv.{max u v, u}
-      (M := L) (N := K)
-      (ULift.moduleEquiv : L ≃ₗ[R] K) n
-  refine ⟨n, (ModuleCat.hasProjectiveResolutionLE_iff_ext_vanishing K n).2.mpr ?_⟩
-  intro Y i hi
-  let := CategoryTheory.HasExt.standard (ModuleCat.{u} R)
-  exact CategoryTheory.HasProjectiveDimensionLT.subsingleton.{u + 1} K (n + 1) i hi Y
+  have : CategoryTheory.HasProjectiveDimensionLE L n := hn L
+  exact ⟨n, ModuleCat.hasProjectiveDimensionLE_of_linearEquiv.{max u v, u}
+    (M := L) (N := K) (ULift.moduleEquiv : L ≃ₗ[R] K) n⟩
 
 end Ring

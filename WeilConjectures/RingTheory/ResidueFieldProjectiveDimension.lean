@@ -11,6 +11,7 @@ public import Mathlib.RingTheory.KrullDimension.Basic
 public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
 import WeilConjectures.RingTheory.DepthLeSupportDimension
 import WeilConjectures.RingTheory.ResidueFieldProjectiveDimensionDepth
+import WeilConjectures.RingTheory.BoundedProjectiveResolutionDimension
 
 /-!
 # Projective dimension of the residue field
@@ -62,26 +63,21 @@ lemma residueField_projectiveDimension_le_ringKrullDim
     (R : Type u) [CommRing R] [IsLocalRing R] [IsNoetherianRing R]
     (h : ModuleCat.HasFiniteProjectiveDimension
       (ModuleCat.of R (IsLocalRing.ResidueField R))) :
-    (ModuleCat.projectiveDimension
-      (ModuleCat.of R (IsLocalRing.ResidueField R)) h : WithBot ℕ∞) ≤ ringKrullDim R ∧
+    CategoryTheory.projectiveDimension (ModuleCat.of R (IsLocalRing.ResidueField R)) ≤
+        ringKrullDim R ∧
       ∀ D : ℕ, ringKrullDim R = (D : WithBot ℕ∞) →
         ModuleCat.HasProjectiveResolutionLE
           (ModuleCat.of R (IsLocalRing.ResidueField R)) D := by
-  classical
-  have hdim : (ModuleCat.projectiveDimension
-      (ModuleCat.of R (IsLocalRing.ResidueField R)) h : WithBot ℕ∞) ≤ ringKrullDim R := by
+  have hdim : CategoryTheory.projectiveDimension
+      (ModuleCat.of R (IsLocalRing.ResidueField R)) ≤ ringKrullDim R := by
     calc
       _ ≤ (IsLocalRing.depth (R := R) R : WithBot ℕ∞) :=
-        WithBot.coe_le_coe.mpr (residueField_projectiveDimension_le_depth R h)
+        residueField_projectiveDimension_le_depth R h
       _ ≤ Module.supportDim R R := IsLocalRing.depth_le_supportDim R
       _ = ringKrullDim R := Module.supportDim_self_eq_ringKrullDim R
   refine ⟨hdim, ?_⟩
   intro D hD
-  have hle : ModuleCat.projectiveDimension
-      (ModuleCat.of R (IsLocalRing.ResidueField R)) h ≤ D := by
-    have hb := WithBot.coe_le_coe.mp (hdim.trans_eq hD)
-    exact_mod_cast hb
-  obtain ⟨P, hP⟩ := Nat.find_spec h
-  exact ⟨P, fun i hi => hP i (lt_of_le_of_lt hle hi)⟩
+  have hle := (CategoryTheory.projectiveDimension_le_iff _ D).1 (hdim.trans_eq hD)
+  exact (ModuleCat.hasProjectiveResolutionLE_iff_hasProjectiveDimensionLE.{u, u} _ D).2 hle
 
 end Ring
