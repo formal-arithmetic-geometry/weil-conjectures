@@ -250,5 +250,52 @@
   "group": "Q97",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q97-65edb15bb (reviewer sub-agent of L); spot-checked: I read the whole item. Statement: every map is well-typed against blueprint main-20261015 sk-thm-int-restriction-line.proof (1) and sk-prop-p1-adjunction-rational-triangle.proof 'First identity'. The base-change maps b2:f^*Rf_*->Rp2*p1^* and b1 are the mates for fp1=fp2, matching unit-counit.md. The coefficient category is D(Mod O_{E,Z}) restricted to Loc(Dbc), the same as the parent det-thm-int-restriction-line steps 3-4, which uses the item with f=q, N=M, t=t_q. The statement is unchanged and the hypotheses are not weakened. Steps: I recomputed both transposes. D2 transposes under F then U2 to (c_{p2}⊗1)(U2 b2⊗1)(1⊗U2 c_{f,T}). D1 transposes to (1⊗c_{p1})(1⊗U1 b1)(U1 c_{f,N}⊗1). The 'equivalently' clause of def-weil-pbc-adjunction-mate gives c_{p2}U2 b2=U1 c_f and c_{p1}U1 b1=U2 c_f, so both transposes equal U1c_{f,N}⊗U2c_{f,T}. The composite-adjunction clause of lem-sfb-ringed-derived-monoidal-comparisons then gives D1=D2. P(B_N)D2=π is literal cancellation, so D2 is invertible from the assumed isomorphisms alone. Step 6 uses λ-naturality from lem-sfb-ringed-projection-tensor-composition and α_{R_Y}=1 from lem-weil-pbc-ringed-projection-mate-exact, both at statement level. Edge cases checked: f=id, X empty or N=0, t=0, X=Y⊔Y for index order, Koszul signs. Route: every cited unit is reachable from sk-thm-int-restriction, and the four declared tool_uses are accepted. No new nodes, no SGA. rg duplicate search found only lem-sfb-trace-base-change-second (the symmetric identity) and the finite étale analogue, so there is no duplicate. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.TraceBaseChangeFirst",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.trace_base_change_first",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.CondensedTensorNormalization",
+   "AlgebraicGeometry.ProEtale.CondensedRing.condensedTensorCore_existsUnique",
+   "AlgebraicGeometry.ProEtale.CondensedRing.condensedTensorCore",
+   "AlgebraicGeometry.ProEtale.CondensedRing.condensedUpperStarMonoidal",
+   "AlgebraicGeometry.ProEtale.CondensedRing.condensedUpperStarPreservesFlat",
+   "AlgebraicGeometry.ProEtale.CondensedRing.condensedDerivedTensorComparison",
+   "AlgebraicGeometry.ProEtale.CondensedRing.condensedDerivedTensorIso",
+   "AlgebraicGeometry.ProEtale.CondensedRing.condensedDerivedUnitIso",
+   "AlgebraicGeometry.ProEtale.CondensedRing.condensedDerivedSymmetry",
+   "AlgebraicGeometry.ProEtale.CondensedRing.traceProjectionFromComparison",
+   "AlgebraicGeometry.ProEtale.CondensedRing.traceBFromComparisons",
+   "AlgebraicGeometry.ProEtale.CondensedRing.TraceFirstHypotheses",
+   "AlgebraicGeometry.ProEtale.CondensedRing.traceAbstractCounit",
+   "AlgebraicGeometry.ProEtale.CondensedRing.traceAbstractMate",
+   "AlgebraicGeometry.ProEtale.CondensedRing.traceTensorComponent",
+   "AlgebraicGeometry.ProEtale.CondensedRing.TraceFirstFormula",
+   "AlgebraicGeometry.ProEtale.CondensedRing.TraceD",
+   "AlgebraicGeometry.ProEtale.CondensedRing.TraceLoc",
+   "AlgebraicGeometry.ProEtale.CondensedRing.tracePull",
+   "AlgebraicGeometry.ProEtale.CondensedRing.tracePush",
+   "AlgebraicGeometry.ProEtale.CondensedRing.traceAdjunction",
+   "AlgebraicGeometry.ProEtale.CondensedRing.tracePullComp",
+   "AlgebraicGeometry.ProEtale.CondensedRing.tracePullSquare",
+   "AlgebraicGeometry.ProEtale.CondensedRing.traceTate",
+   "AlgebraicGeometry.ProEtale.CondensedRing.TraceFirstAssertion",
+   "AlgebraicGeometry.ProEtale.CondensedRing.trace_base_change_first"
+  ],
+  "file": "lean/Sheaf/Paper/TraceBaseChangeFirst.lean",
+  "statement": "theorem trace_base_change_first (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ) (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] {X Y W : Scheme.{u}} [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))] [W.Over (Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))] [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))] [IsSeparated (Y ↘ Spec (.of k))] [LocallyOfFiniteType (W ↘ Spec (.of k))] [QuasiCompact (W ↘ Spec (.of k))] [IsSeparated (W ↘ Spec (.of k))] (f : X ⟶ Y) [f.IsOver (Spec (.of k))] [IsProper f] (p q : W ⟶ X) [p.IsOver (Spec (.of k))] [q.IsOver (Spec (.of k))] (sq : ChosenCartesianSquare p q f f) : TraceFirstAssertion (Profinite.padicIntegersRingObj ℓ E.1) f p q sq (traceTate ℓ E Y)",
+  "branch": "newtargets-dag",
+  "by": "Q16",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Repair of returned head 21f8aa1d2971: the normalized internal-condensed-module tensor helpers are declared in the item module and listed here, without changing the landed general tensor-pullback dependency record. Unused trace wrappers and proof-plan imports identified by the review were removed. The item statement is unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b120affca",
+  "group": "Q16",
+  "result": "pass",
+  "note": "Re-delivery of returned 21f8aa1d2971; both earlier findings repaired. (1) H13: the dep record lem-weil-pbc-ringed-topoi-derived-tensor-pullback is identical to live; the only DAG difference is the item's lean field. CondensedModuleTensorPullback.lean is deleted; its nine helpers moved verbatim (only the blueprint tag changed) into Sheaf/Paper/TraceBaseChangeFirst.lean and are listed in lean.declarations. (2) H9: the three unused imports and the traceAbstractSquare/traceBaseChange/tracePushSquare wrappers are removed. Statement unchanged; I re-checked trace1/trace2 (t_i b_i = f*t, with the square comparison and the unit iso), the B_N order (symmetry, pi^-1_{p2,T_X,p1*N}, symmetry, b2^-1 tensor 1), e_K, the conjugateIsoEquiv common-source identification and both targets Rf*N. Hypotheses only on Loc(Dbc); no extra universe constraints; statement field verbatim; 26 declarations present; no name collisions or competing upperStar Monoidal instance. Sorries: two postponed helper theorems with proof docstrings plus the item theorem. nt_compile --json: first try a side dep (DerivedPullbackTensorHom) timed out at load ~118; retry exit 0, item 42.9 s/60 s, no errors or warnings. Notes: condensedDerivedTensorIso unused (moved at the earlier reviewer's request); stage 3 must prove the two helper theorems; the second reading is a worker self-check."
  }
 }

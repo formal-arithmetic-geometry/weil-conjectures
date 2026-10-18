@@ -3,13 +3,16 @@
  "unit": "sk-thm-sf-verdier-exchange",
  "proof": [
   {
-   "text": "For $T=X,Y$, [def-weil-pbc-internal-abelian-sheaf-module-equivalence] gives $E_T$ on the same underlying abelian sheaf and the same linear maps. Addition of maps is therefore unchanged. Kernels and cokernels acquire their induced section-ring actions, so their universal properties on either side are identical; hence $E_T$ and its inverse are exact. By [sk-def-sfb-sheaf-tensor] the ambient tensor is sheafified sectionwise tensor over $\\mathbf Z$. The balancing coequalizer of [def-sfb-modobj-relative-tensor] imposes precisely $(rm)\\otimes n=m\\otimes(rn)$ on that tensor. A map out of it is consequently the same as a restriction-compatible $R_T$-balanced bilinear pairing of sections. This also characterizes the sheafified sectionwise tensor of [def-pur-sheaf-tensor-product]. The resulting tensor identification sends $m\\otimes n$ to $m\\otimes n$. Its associativity and unit diagrams agree on local pure tensors, which generate these sheafifications. The symmetry of [def-sfb-modobj-symmetric-tensor] sends $m\\otimes n$ to $n\\otimes m$, just as on the section-ring side. Thus these are the specified symmetric monoidal comparisons, with unit $E_TR_T=R_T$.",
+   "text": "For $T=X,Y$, [def-weil-pbc-internal-abelian-sheaf-module-equivalence] gives $E_T$ on the same underlying abelian sheaf and the same linear maps. Addition of maps is therefore unchanged. Kernels and cokernels acquire their induced section-ring actions, so their universal properties on either side are identical; hence $E_T$ and its inverse are exact. By [sk-def-sfb-sheaf-tensor] the ambient tensor is sheafified sectionwise tensor over $\\mathbf Z$. The balancing coequalizer of [def-sfb-modobj-relative-tensor] imposes precisely $(rm)\\otimes n=m\\otimes(rn)$ on that tensor. A map out of it is consequently the same as a restriction-compatible $R_T$-balanced bilinear pairing of sections. This also characterizes the sheafified sectionwise tensor of [def-pur-sheaf-tensor-product]. The resulting tensor identification sends $m\\otimes n$ to $m\\otimes n$. Its associativity and unit diagrams agree on local pure tensors, which generate these sheafifications. The symmetry of [def-sfb-modobj-symmetric-tensor] sends $m\\otimes n$ to $n\\otimes m$, just as on the section-ring side. Thus these are the specified symmetric monoidal comparisons, with unit $E_TR_T=R_T$. Concretely, the existing ordinary section-operation comparisons of [lem-sfb-internal-module-operations-transport] and the normalized tensor, flatness and total-complex comparisons of [lem-pe-internal-section-tensor-comparison] supply the ordinary compatibility results used here; their underlying definitions are recorded separately in [def-pd-section-module-operations-data].",
    "uses": [
     "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
     "sk-def-sfb-sheaf-tensor",
     "def-sfb-modobj-relative-tensor",
     "def-pur-sheaf-tensor-product",
-    "def-sfb-modobj-symmetric-tensor"
+    "def-sfb-modobj-symmetric-tensor",
+    "lem-sfb-internal-module-operations-transport",
+    "lem-pe-internal-section-tensor-comparison",
+    "def-pd-section-module-operations-data"
    ],
    "elementary": false,
    "source": {
@@ -166,7 +169,10 @@
   "sk-def-sfb-derived-categories",
   "sk-def-sfb-module-derived-pushpull",
   "sk-def-sfb-module-lower-shriek",
-  "sk-def-sfb-sheaf-tensor"
+  "sk-def-sfb-sheaf-tensor",
+  "lem-sfb-internal-module-operations-transport",
+  "lem-pe-internal-section-tensor-comparison",
+  "def-pd-section-module-operations-data"
  ],
  "proof_origin": {
   "by": "agent",
@@ -188,7 +194,11 @@
   "def-pc-kflat-complex",
   "def-sfb-module-upper-star",
   "def-sfb-module-lower-star",
-  "sk-def-sfb-module-lower-shriek"
+  "sk-def-sfb-module-lower-shriek",
+  "def-pd-proetale-section-module-functors",
+  "def-pd-section-derived-realization",
+  "def-pd-section-derived-tensor-data",
+  "def-pd-section-module-operations-data"
  ],
  "mathlib_match": null,
  "status": "split",
@@ -201,7 +211,7 @@
  "id": "lem-pd-module-ringed-topos-derived-comparison",
  "kind": "statement",
  "title": "Module-object and ringed-topos derived tensor comparison",
- "statement": "Fix a prime $\\ell$ and a field $k$ of positive characteristic different from $\\ell$, and separated finite-type $k$-schemes as in [sk-def-sfb-dc-setting]. Let $f:X\\to Y$ be a $k$-morphism and $\\Lambda$ a commutative condensed ring [sk-def-sfb-condensed-ring]. Work on representatives of the small pro-étale sites small relative to the universe of module sheaves [def-weil-pbc-proetale-site]. Put $R_T=\\Lambda_T=p_T^*\\Lambda$, for $T=X,Y$ [sk-def-sfb-pulled-back-coefficients], and also denote by $R_T$ its section-ring sheaf. Let\n$$E_T:\\operatorname{Mod}_{R_T}(\\operatorname{Sh}(T_{\\mathrm{proet}},\\operatorname{Ab}))\\simeq\\operatorname{Mod}(R_T)$$\nbe the equivalence [def-weil-pbc-internal-abelian-sheaf-module-equivalence], preserving the underlying abelian sheaf. On the left use relative tensor [def-sfb-modobj-relative-tensor], total derived tensor and the module-object functors [sk-def-sfb-derived-tensor-hom, sk-def-sfb-module-derived-pushpull]; on the right use the sheaf-module derived constructions of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback, lem-weil-pbc-ringed-projection-mate-exact]. Flat means that tensor with the object is exact, and K-flat means that its direct-sum total tensor with every acyclic complex is acyclic, with the internal-module and sheaf-module definitions [pur713-def-kflat-module, def-pc-kflat-complex].\nThe equivalence $E_T$ is additive, exact and symmetric monoidal for the specified relative tensors, preserves and reflects flat objects and K-flat complexes, and identifies total tensor complexes, K-flat derived tensors and their units. Its induced equivalence $D(E_T)$ identifies the total derived module-object pullback and pushforward with ringed-topos $Lf^*$ and $Rf_*$ for $f^{-1}R_Y\\xrightarrow{\\alpha_f}R_X$, including the specified derived adjunction, its unit, counit and pullback composition comparisons. The underived identification of pullback is $f^*M=R_X\\otimes_{f^{-1}R_Y}f^{-1}M$ [def-sfb-module-upper-star]; pushforward is [def-sfb-module-lower-star].\nMore precisely, under these tensor and functor identifications, the actual oplax tensor map $\\delta_f:Lf^*(M\\otimes^{\\mathbf L}N)\\to Lf^*M\\otimes^{\\mathbf L}Lf^*N$ induced by the module-object pullback and localization is carried to the canonical ringed-topos tensor isomorphism of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]; its actual lax map $\\mu_f$ is carried to $\\delta_f^{-1}$. This is equality of these specified natural transformations under the comparison isomorphisms. In particular the module-object proper projection map, the adjoint under $Lf^*\\dashv Rf_*$ of $(\\varepsilon_K\\otimes1)\\circ\\delta_{f,Rf_*K,L}$, is carried to the precise ringed-topos projection map $\\alpha_{K,L}$ in [lem-weil-pbc-ringed-projection-mate-exact], rather than just some map between its endpoints. For an open immersion $j$, the equivalences also identify levelwise module extension by zero and its adjunction $D(j_!)\\dashv Lj^*$ with ringed-topos extension by zero and restriction, including their unit and counit and the $\\mu_j$ used in the adjoint-of-unit open projection map.",
+ "statement": "Fix a prime $\\ell$ and a field $k$ of positive characteristic different from $\\ell$, and separated finite-type $k$-schemes as in [sk-def-sfb-dc-setting]. Let $f:X\\to Y$ be a $k$-morphism and $\\Lambda$ a commutative condensed ring [sk-def-sfb-condensed-ring]. Work on representatives of the small pro-étale sites small relative to the universe of module sheaves [def-weil-pbc-proetale-site]. Put $R_T=\\Lambda_T=p_T^*\\Lambda$, for $T=X,Y$ [sk-def-sfb-pulled-back-coefficients], and also denote by $R_T$ its section-ring sheaf. Let\n$$E_T:\\operatorname{Mod}_{R_T}(\\operatorname{Sh}(T_{\\mathrm{proet}},\\operatorname{Ab}))\\simeq\\operatorname{Mod}(R_T)$$\nbe the equivalence [def-weil-pbc-internal-abelian-sheaf-module-equivalence], preserving the underlying abelian sheaf. On the left use relative tensor [def-sfb-modobj-relative-tensor], total derived tensor and the module-object functors [sk-def-sfb-derived-tensor-hom, sk-def-sfb-module-derived-pushpull]; on the right use the sheaf-module derived constructions of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback, lem-weil-pbc-ringed-projection-mate-exact]. Flat means that tensor with the object is exact, and K-flat means that its direct-sum total tensor with every acyclic complex is acyclic, with the internal-module and sheaf-module definitions [pur713-def-kflat-module, def-pc-kflat-complex].\nThe equivalence $E_T$ is additive, exact and symmetric monoidal for the specified relative tensors, preserves and reflects flat objects and K-flat complexes, and identifies total tensor complexes, K-flat derived tensors and their units. Its induced equivalence $D(E_T)$ identifies the total derived module-object pullback and pushforward with ringed-topos $Lf^*$ and $Rf_*$ for $f^{-1}R_Y\\xrightarrow{\\alpha_f}R_X$, including the canonical ringed derived adjunction obtained by deriving the ordinary ringed module adjunction, its unit, counit and pullback composition comparisons. The ordinary ringed operations, their normalized comparisons and the local pure-tensor terms are those of [def-pd-section-module-operations-data]; compatibility with this independently specified ringed derived adjunction is asserted, rather than defining it by transport of the internal adjunction. The underived identification of pullback is $f^*M=R_X\\otimes_{f^{-1}R_Y}f^{-1}M$ [def-sfb-module-upper-star]; pushforward is [def-sfb-module-lower-star].\nMore precisely, under these tensor and functor identifications, the actual oplax tensor map $\\delta_f:Lf^*(M\\otimes^{\\mathbf L}N)\\to Lf^*M\\otimes^{\\mathbf L}Lf^*N$ induced by the module-object pullback and localization is carried to the canonical ringed-topos tensor isomorphism of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]; its actual lax map $\\mu_f$ is carried to $\\delta_f^{-1}$. This is equality of these specified natural transformations under the comparison isomorphisms. In particular the module-object proper projection map, the adjoint under $Lf^*\\dashv Rf_*$ of $(\\varepsilon_K\\otimes1)\\circ\\delta_{f,Rf_*K,L}$, is carried to the precise ringed-topos projection map $\\alpha_{K,L}$ in [lem-weil-pbc-ringed-projection-mate-exact], rather than just some map between its endpoints. For an open immersion $j$, the equivalences also identify levelwise module extension by zero and its adjunction $D(j_!)\\dashv Lj^*$ with ringed-topos extension by zero and restriction, including their unit and counit and the $\\mu_j$ used in the adjoint-of-unit open projection map.",
  "source": {
   "document": "literature/stacks-project/sites-cohomology.tex",
   "place": "Tags 07A4, lemma-pullback-tensor-product; 0G7E, lemma-pullback-K-flat; 07A6, lemma-adjoint; 0B56, equation-projection-formula-map. The additional identification with internal module objects is the comparison to be proved, using the module-object definitions and sites.tex Tag 00YV, proposition-functoriality-algebraic-structures-topoi."
@@ -402,5 +412,269 @@
   "group": "Q67",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q67-d33ad4b87 (reviewer sub-agent of L); spot-checked: Read the full item, all nine steps, every cited statement, and relevant sources. Corrected one B5 source-label error: Stacks 05RU is definition-unbounded-derived-category. Tensor-map normalization, derived adjunctions, projection mates, coefficients, edge cases, and acyclicity checks pass. No new nodes; all twelve tool uses accepted. Details in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a2d2e275d",
+  "group": "NF",
+  "result": "pass",
+  "note": "Re-delivery after RETURN (e3bb1be5). F1 fixed: derivedAdjunction is now ((adjunction Λ f).derivedAdjunction).ofNatIsoLeft (pullback.leftDerivedFunctorIsoMapDerivedCategory), the canonical derived ringed adjunction (Adjunction.lean:173), so derived_homEquiv has content and projection is the α of lem-weil-pbc-ringed-projection-mate-exact. F2 fixed: new def node def-pd-section-module-operations-data (module SectionModuleOperationsData, 17 transparent abbrevs, 0 sorry, only def stmt_deps) replaces the two theorem nodes in the stmt_deps of the item and def-pd-proetale-section-module-functors; the theorems are now proof_deps. Aliasing rather than moving is accepted (no landed module rewritten, no duplicate construction). F3 fixed: clause-by-clause second reading. §1(C) statement_change only makes the canonical ringed adjunction explicit (Stacks 07A6/0B56); citers lem-pd-condensed-proper-projection-formula and det-thm-sf-pf-adic-projection checked, holds:true correct. All five modules compile clean with nt_compile --json (9.6/22.4/25.0/32.4/22.3 s). lean.statement verbatim for all five nodes; all declarations present; no sorry in definition bodies; docstrings with source and blueprint tags; no extra assumptions or universe restrictions. Minor: conjugatePullIso and conjugatePushIso are now unused.",
+  "statement_corrected": true
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ModuleRingedToposDerivedComparison",
+  "declaration": "AlgebraicGeometry.ProEtale.ModuleRingedComparison.module_ringed_topos_derived_comparison",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.ordinary_exact_flat_kflat",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.ordinary_monoidal",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.internalDelta_isIso",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.internalProjection",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.projection",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.derived_homEquiv",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.delta_comparison",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.internalMu",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.mu_comparison",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.projection_comparison",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.open_homEquiv",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.internalOpenProjection",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.openProjection",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.openProjection_comparison",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.composition_comparison",
+   "AlgebraicGeometry.ProEtale.ModuleRingedComparison.module_ringed_topos_derived_comparison"
+  ],
+  "file": "lean/Sheaf/Paper/ModuleRingedToposDerivedComparison.lean",
+  "statement": "theorem module_ringed_topos_derived_comparison (ℓ p : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k] [CharP k p] (_hp : 0 < p) (_hne : p ≠ ℓ) {X Y : Over (Scheme.Spec.obj (Opposite.op (CommRingCat.of k)))} [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom] (f : X ⟶ Y) (M N : DerivedCategory (internalModules Λ Y.left)) : (derivedEquivalence Λ X.left).functor.map (((internalDelta Λ f.left).app M).app N) ≫ (tensorComparison Λ X.left).hom.app ((internalDerivedPullback Λ f.left).obj M, (internalDerivedPullback Λ f.left).obj N) ≫ (tensor Λ X.left).map (Prod.mkHom ((derivedPullComparison Λ f.left).hom.app M) ((derivedPullComparison Λ f.left).hom.app N)) = (derivedPullComparison Λ f.left).hom.app (((CondensedRing.derivedTensor Λ Y.left).obj M).obj N) ≫ (derivedPullback Λ f.left).map ((tensorComparison Λ Y.left).hom.app (M, N)) ≫ (tensorPullComparison Λ f.left).hom.app ((derivedEquivalence Λ Y.left).functor.obj M, (derivedEquivalence Λ Y.left).functor.obj N)",
+  "branch": "newtargets-dag",
+  "by": "NF",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "The recorded declaration is the field-setting delta clause. The declarations list contains all ordinary, derived-adjunction, composition, proper-projection and open-projection clauses; report.md maps the complete statement clause by clause."
+ },
+ "statement_change": {
+  "date": "2026-10-18",
+  "by": "NF stage 2",
+  "old_statement": "Fix a prime $\\ell$ and a field $k$ of positive characteristic different from $\\ell$, and separated finite-type $k$-schemes as in [sk-def-sfb-dc-setting]. Let $f:X\\to Y$ be a $k$-morphism and $\\Lambda$ a commutative condensed ring [sk-def-sfb-condensed-ring]. Work on representatives of the small pro-étale sites small relative to the universe of module sheaves [def-weil-pbc-proetale-site]. Put $R_T=\\Lambda_T=p_T^*\\Lambda$, for $T=X,Y$ [sk-def-sfb-pulled-back-coefficients], and also denote by $R_T$ its section-ring sheaf. Let\n$$E_T:\\operatorname{Mod}_{R_T}(\\operatorname{Sh}(T_{\\mathrm{proet}},\\operatorname{Ab}))\\simeq\\operatorname{Mod}(R_T)$$\nbe the equivalence [def-weil-pbc-internal-abelian-sheaf-module-equivalence], preserving the underlying abelian sheaf. On the left use relative tensor [def-sfb-modobj-relative-tensor], total derived tensor and the module-object functors [sk-def-sfb-derived-tensor-hom, sk-def-sfb-module-derived-pushpull]; on the right use the sheaf-module derived constructions of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback, lem-weil-pbc-ringed-projection-mate-exact]. Flat means that tensor with the object is exact, and K-flat means that its direct-sum total tensor with every acyclic complex is acyclic, with the internal-module and sheaf-module definitions [pur713-def-kflat-module, def-pc-kflat-complex].\nThe equivalence $E_T$ is additive, exact and symmetric monoidal for the specified relative tensors, preserves and reflects flat objects and K-flat complexes, and identifies total tensor complexes, K-flat derived tensors and their units. Its induced equivalence $D(E_T)$ identifies the total derived module-object pullback and pushforward with ringed-topos $Lf^*$ and $Rf_*$ for $f^{-1}R_Y\\xrightarrow{\\alpha_f}R_X$, including the specified derived adjunction, its unit, counit and pullback composition comparisons. The underived identification of pullback is $f^*M=R_X\\otimes_{f^{-1}R_Y}f^{-1}M$ [def-sfb-module-upper-star]; pushforward is [def-sfb-module-lower-star].\nMore precisely, under these tensor and functor identifications, the actual oplax tensor map $\\delta_f:Lf^*(M\\otimes^{\\mathbf L}N)\\to Lf^*M\\otimes^{\\mathbf L}Lf^*N$ induced by the module-object pullback and localization is carried to the canonical ringed-topos tensor isomorphism of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]; its actual lax map $\\mu_f$ is carried to $\\delta_f^{-1}$. This is equality of these specified natural transformations under the comparison isomorphisms. In particular the module-object proper projection map, the adjoint under $Lf^*\\dashv Rf_*$ of $(\\varepsilon_K\\otimes1)\\circ\\delta_{f,Rf_*K,L}$, is carried to the precise ringed-topos projection map $\\alpha_{K,L}$ in [lem-weil-pbc-ringed-projection-mate-exact], rather than just some map between its endpoints. For an open immersion $j$, the equivalences also identify levelwise module extension by zero and its adjunction $D(j_!)\\dashv Lj^*$ with ringed-topos extension by zero and restriction, including their unit and counit and the $\\mu_j$ used in the adjoint-of-unit open projection map.",
+  "what": "The ringed derived adjunction was not distinguished explicitly from transport of the internal one. This ambiguity led the returned realization definition to use transport along D(E), making the Hom-compatibility clause tautological and specifying the wrong endpoint for the ringed projection. Following Stacks 07A6 and 0B56, specify the independent derived ordinary ringed adjunction and cite definition data separately from ordinary comparison theorems. No hypothesis or conclusion is changed; the canonical structure is made explicit. F2 also requires the two ordinary comparison theorem nodes in proof_deps, where they supply proofs rather than data.",
+  "source": {
+   "document": "literature/stacks-project/sites-cohomology.tex",
+   "place": "Tags 07A4, lemma-pullback-tensor-product; 0G7E, lemma-pullback-K-flat; 07A6, lemma-adjoint; 0B56, equation-projection-formula-map. The additional identification with internal module objects is the comparison to be proved, using the module-object definitions and sites.tex Tag 00YV, proposition-functoriality-algebraic-structures-topoi."
+  },
+  "citers": [
+   {
+    "id": "det-prop-p1-adjunction-rational-triangle",
+    "holds": true,
+    "note": "Holds: the canonical adjunction, projection and composition comparisons used for the projective-line triangle are preserved."
+   },
+   {
+    "id": "det-thm-sf-pf-adic-projection",
+    "holds": true,
+    "note": "Holds: its proper projection and shift transport use the independently canonical ringed adjunction and the same identified counit and tensor map."
+   },
+   {
+    "id": "lem-pd-condensed-open-exceptional-projection-formula",
+    "holds": true,
+    "note": "Holds: the exact open adjunction, its unit and actual inverse delta remain identified."
+   },
+   {
+    "id": "lem-pd-condensed-proper-projection-formula",
+    "holds": true,
+    "note": "Holds: its actual counit-adjoint proper projection now explicitly uses the independent canonical ringed derived adjunction."
+   },
+   {
+    "id": "lem-sfb-projection-section-normalization",
+    "holds": true,
+    "note": "Holds: its projection/composition normalization uses precisely the canonical ringed adjunction now made explicit."
+   },
+   {
+    "id": "nt-target-poincare-isiso",
+    "holds": true,
+    "note": "Holds: the proper and open adjoint transposes in Step 2 are unchanged and use the canonical ringed operations."
+   }
+  ],
+  "old_stmt_deps": [
+   "sk-def-sfb-dc-setting",
+   "sk-def-sfb-condensed-ring",
+   "def-weil-pbc-proetale-site",
+   "sk-def-sfb-pulled-back-coefficients",
+   "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+   "def-sfb-modobj-relative-tensor",
+   "sk-def-sfb-derived-tensor-hom",
+   "sk-def-sfb-module-derived-pushpull",
+   "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+   "lem-weil-pbc-ringed-projection-mate-exact",
+   "pur713-def-kflat-module",
+   "def-pc-kflat-complex",
+   "def-sfb-module-upper-star",
+   "def-sfb-module-lower-star",
+   "sk-def-sfb-module-lower-shriek"
+  ],
+  "old_proof": [
+   {
+    "text": "For $T=X,Y$, [def-weil-pbc-internal-abelian-sheaf-module-equivalence] gives $E_T$ on the same underlying abelian sheaf and the same linear maps. Addition of maps is therefore unchanged. Kernels and cokernels acquire their induced section-ring actions, so their universal properties on either side are identical; hence $E_T$ and its inverse are exact. By [sk-def-sfb-sheaf-tensor] the ambient tensor is sheafified sectionwise tensor over $\\mathbf Z$. The balancing coequalizer of [def-sfb-modobj-relative-tensor] imposes precisely $(rm)\\otimes n=m\\otimes(rn)$ on that tensor. A map out of it is consequently the same as a restriction-compatible $R_T$-balanced bilinear pairing of sections. This also characterizes the sheafified sectionwise tensor of [def-pur-sheaf-tensor-product]. The resulting tensor identification sends $m\\otimes n$ to $m\\otimes n$. Its associativity and unit diagrams agree on local pure tensors, which generate these sheafifications. The symmetry of [def-sfb-modobj-symmetric-tensor] sends $m\\otimes n$ to $n\\otimes m$, just as on the section-ring side. Thus these are the specified symmetric monoidal comparisons, with unit $E_TR_T=R_T$.",
+    "uses": [
+     "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+     "sk-def-sfb-sheaf-tensor",
+     "def-sfb-modobj-relative-tensor",
+     "def-pur-sheaf-tensor-product",
+     "def-sfb-modobj-symmetric-tensor"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/stacks-project/sites-modules.tex",
+     "place": "Tag 03EK, section-tensor-product; sites.tex Tag 00YV, proposition-functoriality-algebraic-structures-topoi; module-object balancing construction"
+    }
+   },
+   {
+    "text": "Apply Step 1 degreewise. An equivalence preserves coproducts by their universal property, so $E_T$ identifies the direct-sum total tensor complexes, including their differential $d(m\\otimes n)=dm\\otimes n+(-1)^{\\deg m}m\\otimes dn$. Its exactness identifies cohomology and hence preserves and reflects acyclicity and quasi-isomorphisms. For a module $P$, the tensor functors on either side are conjugate by this exact equivalence; one is exact if and only if the other is. This proves preservation and reflection of flatness. The revised [pur713-def-kflat-module] specifies the same unbounded direct-sum total and signed differential. Its relative tensor uses the same balancing coequalizer as Step 1. Its test is $P\\otimes N$, whereas [def-pc-kflat-complex] tests $N\\otimes P$; the total symmetry $p\\otimes n\\mapsto(-1)^{ab}n\\otimes p$ for degrees $a,b$ identifies them, since substituting into the displayed differential gives equal signs. Every acyclic test complex on either side comes from the other by exactness and essential surjectivity. Thus the K-flat tests agree in both directions. This also identifies K-flat resolutions with flat terms. The module tensor with its localization comparison is the two-variable derived functor by [lem-sfb-derived-tensor-modules-derived]. On the section-ring side [lem-weil-pbc-site-derived-tensor-descent] computes it on these same resolutions. The identifications on such representatives therefore give the canonical derived tensor comparison, including the unit and constraints induced by Step 1.",
+    "uses": [
+     "pur713-def-kflat-module",
+     "def-pc-kflat-complex",
+     "lem-sfb-derived-tensor-modules-derived",
+     "lem-weil-pbc-site-derived-tensor-descent",
+     "def-pc-tensor-complex-sheaves"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/stacks-project/sites-cohomology.tex",
+     "place": "Tags 06YN, definition-K-flat; 06YU, definition-derived-tor; blueprint module-object two-variable derived tensor"
+    }
+   },
+   {
+    "text": "The termwise extensions of $E_T$ and its inverse preserve quasi-isomorphisms by Step 2. Apply [lem-weil-pbc-localization-universal-property] to both extensions and to their unit and counit. Their composites are inverse equivalences on derived categories because the original unit and counit become inverse isomorphisms after localization. This constructs $D(E_T)$ with its specified localization comparisons. K-injectivity is also preserved and reflected: by [def-pur-kinjective-complex] its condition is that every map from an acyclic complex is null-homotopic. A map or a homotopy is a family of linear maps satisfying equations, and $E_T$ identifies those maps and equations degreewise. Every acyclic source on the other side comes from one here. Thus $I$ is K-injective if and only if $E_TI$ is; resolutions to K-injectives are identified as well.",
+    "uses": [
+     "lem-weil-pbc-localization-universal-property",
+     "def-pur-kinjective-complex"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/stacks-project/derived.tex",
+     "place": "Tags 05RU, definition-unbounded-derived-category; 070H, definition-K-injective; localization of exact equivalences"
+    }
+   },
+   {
+    "text": "Under Step 1, [def-sfb-module-upper-star] is the same functor on objects and arrows as $M\\mapsto R_X\\otimes_{f^{-1}R_Y}f^{-1}M$. Likewise [def-sfb-module-lower-star] has the usual pushforward action through $R_Y\\to f_*R_X$. This ring map is the adjunct of $\\alpha_f$ by [sk-def-sfb-coefficient-morphisms], exactly the ring map required by [lem-weil-pbc-ringed-topoi-module-adjunction]. The module-object adjunction of [def-sfb-module-upper-lower-adjunction] sends a linear map $a:R_X\\otimes f^{-1}M\\to N$ first to $m\\mapsto a(1\\otimes m)$, and then to its inverse-image/direct-image adjunct $M\\to f_*N$. These are also the two bijections defining the ringed-topos module adjunction. Since $E_T$ keeps all underlying maps, these Hom bijections coincide, including their inverses. Units and counits, obtained by applying the bijections to identity maps, therefore coincide.",
+    "uses": [
+     "def-sfb-module-upper-star",
+     "def-sfb-module-lower-star",
+     "sk-def-sfb-coefficient-morphisms",
+     "lem-weil-pbc-ringed-topoi-module-adjunction",
+     "def-sfb-module-upper-lower-adjunction"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/stacks-project/sites-modules.tex",
+     "place": "Tag 03D7, lemma-adjoint-pullback-pushforward-modules; blueprint def-sfb-module-upper-lower-adjunction, concrete Hom bijection"
+    }
+   },
+   {
+    "text": "The total derived module functors of [sk-def-sfb-module-derived-pushpull] are computed by applying these composites to K-flat and K-injective resolutions. Steps 2 and 3 identify both sorts of resolutions, and Step 4 identifies the functors applied to them. Together with the canonical K-flat computation of [lem-weil-pbc-ringed-topoi-derived-pullback], this gives $D(E_X)Lf^*\\cong Lf^*D(E_Y)$ and $D(E_Y)Rf_*\\cong Rf_*D(E_X)$, compatible with their resolution comparison maps. The derived adjunction is the canonical one induced from the underived Hom bijection: [new-derived-adjunction-compatibility] states its compatibility with the derived comparison transformations. That underived bijection and both comparison transformations have just been identified, so its derived Hom bijection, and hence its unit and counit, agree too. For composition, [def-sfb-module-lower-star-comp] is the underlying sheaf pushforward composition map, unchanged by $E_T$. The pullback comparison in [def-sfb-module-upper-star-comp] is its specified conjugate under the adjunctions, so is unchanged by the identified Hom bijections. Derive it on common K-flat resolutions. Their iterated pullbacks are still K-flat with flat terms by [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]; thus both derived composition comparisons have the same representative map and agree.",
+    "uses": [
+     "sk-def-sfb-module-derived-pushpull",
+     "lem-weil-pbc-ringed-topoi-derived-pullback",
+     "new-derived-adjunction-compatibility",
+     "def-sfb-module-lower-star-comp",
+     "def-sfb-module-upper-star-comp",
+     "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/stacks-project/sites-cohomology.tex",
+     "place": "Tags 07A6, lemma-adjoint; 0FPI, lemma-adjoints-push-pull-compatibility; 0G7E, lemma-pullback-K-flat; derived.tex Tag 09T5, lemma-derived-adjoint-functors"
+    }
+   },
+   {
+    "text": "We check the specified tensor arrow before deriving. The abelian-sheaf oplax structure is the mate structure by [def-sfb-finite-upper-star-monoidal]; its tensor component is the adjunct of the tensor of the units followed by the pushforward lax pairing, by [lem-sfb-adjunction-oplax-mate]. Applying the Hom formula of Step 4 to that composite sends the inserted pure tensor $1\\otimes(m\\otimes n)$ to $(1\\otimes m)\\otimes(1\\otimes n)$. For the module pullback of [def-sfb-module-upper-star], scalar extension and balancing then give, writing $S=R_X$ and $R'=f^{-1}R_Y$, the formula\n$$S\\otimes_{R'}f^{-1}(M\\otimes_{R_Y}N)\\longrightarrow (S\\otimes_{R'}f^{-1}M)\\otimes_S(S\\otimes_{R'}f^{-1}N),\\qquad s\\otimes(m\\otimes n)\\longmapsto(s\\otimes m)\\otimes(1\\otimes n).$$\nThe inverse sends $(s\\otimes m)\\otimes(t\\otimes n)$ to $st\\otimes(m\\otimes n)$. The relations balancing $R'$ and $S$ make these formulas well-defined and mutually inverse; their formulas commute with restriction and therefore sheafify. This is precisely the generalized pure-tensor normalization of [def-weil-pbc-canonical-ringed-tensor-comparison], whose construction is [lem-weil-pbc-canonical-ringed-tensor-comparison-construction]. Both maps agree after the insertions and scalar multiplication, which generate the sheafified tensors. This proves equality of the actual underived comparisons. Associators and unitors commute with these maps because both orders send each local pure tensor to the same displayed tensor.",
+    "uses": [
+     "def-sfb-finite-upper-star-monoidal",
+     "lem-sfb-adjunction-oplax-mate",
+     "def-sfb-module-upper-star",
+     "def-weil-pbc-canonical-ringed-tensor-comparison",
+     "lem-weil-pbc-canonical-ringed-tensor-comparison-construction"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/stacks-project/sites-modules.tex",
+     "place": "Tag 03EL, lemma-tensor-product-pullback, canonical pure-tensor comparison; blueprint def-sfb-finite-upper-star-monoidal, mate convention"
+    }
+   },
+   {
+    "text": "For $M,N$ choose K-flat representatives with flat terms. By [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] their pullbacks are K-flat with flat terms and compute the canonical derived comparison. By [lem-sfb-derived-tensor-modules-derived] the module-object tensor has its specified localization structure and is computed by the same relative tensor on these representatives. The module-object $\\delta_f$ induced by pullback and localization is consequently represented by the map of Step 6, degree by degree. Step 2 identifies the total tensors and Step 5 the derived pullbacks, so its image is the canonical ringed-topos map on these representatives. The uniqueness assertion of [lem-weil-pbc-site-derived-tensor-descent] promotes equality on the resolving subcategory to equality of natural transformations on both derived variables. The actual lax map $\\mu_f$ is inverse to the oplax comparison; an equivalence preserves the two inverse equations, so it is carried to the inverse ringed-topos map. The unit and naturality identities hold on representatives by Step 6 and hence hold after descent as well.",
+    "uses": [
+     "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+     "lem-sfb-derived-tensor-modules-derived",
+     "lem-weil-pbc-site-derived-tensor-descent"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/stacks-project/sites-cohomology.tex",
+     "place": "Tag 07A4, lemma-pullback-tensor-product, K-flat total-complex proof; Tags 06YS, 0G7D, 06YU, resolving-class descent"
+    }
+   },
+   {
+    "text": "For the proper projection arrow, its defining adjoint is $(\\varepsilon_K\\otimes1)\\circ\\delta_{f,Rf_*K,L}$. Step 5 identifies the specified counit and the Hom bijection, and Step 7 identifies $\\delta_f$. Its image is therefore exactly $(\\varepsilon_K\\otimes1)\\circ\\mu_{Rf_*K,L}$, where $\\mu$ denotes the oplax ringed-topos isomorphism in [lem-weil-pbc-ringed-projection-mate-exact] (the notation is opposite to the inverse lax $\\mu_f$). That node defines $\\alpha_{K,L}$ as the adjoint of this composite. Applying the identified Hom bijection gives the equality of projection arrows, including the normalization at the tensor unit and naturality stated there. This uses only the definition of the map; it makes no assertion that the projection arrow is invertible for arbitrary inputs.",
+    "uses": [
+     "lem-weil-pbc-ringed-projection-mate-exact"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/stacks-project/sites-cohomology.tex",
+     "place": "Tag 0B56, equation-projection-formula-map"
+    }
+   },
+   {
+    "text": "For an open immersion $j:U\\to X$, [def-sfb-module-open-lower-shriek] gives the underlying extension-by-zero sheaf, and [def-sfb-module-linear-open-lower-shriek] gives its action. On a local section of the summand indexed by $V\\to U$, that action is $r\\cdot m=(r|_U)m$, with the scalar change along $\\alpha_j$. This is exactly the action on the extension-by-zero presheaf in [lem-pur-site-restriction-module-adjunction-exact]. Hence $E_Xj_!\\cong j_!E_U$ on objects and maps, with the indicated action. The same node gives exact restriction and exact extension by zero on the localized ringed site; the site identification is Part (1) of [lem-weil-proetale-weakly-etale-localization], applied to the open $U\\to X$. Only its site equivalence is used, independently of its constant-coefficient clauses. Since $\\alpha_j$ is invertible by [sk-def-sfb-coefficient-morphisms], this restriction is the module pullback of Step 4. The module adjunction is stated by [sk-def-sfb-module-lower-shriek]. Its Hom bijection restricts an extension-by-zero map to each summand over $U$, exactly the ringed-site Hom bijection; its inverse extends by zero. Thus unit and counit agree. Exactness permits levelwise derivation by [sk-def-sfb-derived-categories], giving $D(j_!)\\dashv Lj^*$ with those same comparisons. Finally the adjoint-of-unit open projection is the composite $\\varepsilon_{eK\\otimes L}\\,e(\\mu_{eK,L})\\,e(\\eta_K\\otimes1)$, with $e=D(j_!)$. Each factor has been identified here or in Step 7, so its image is the same canonical ringed-topos composite, with the actual $\\mu_j$ and the specified unit and counit.",
+    "uses": [
+     "def-sfb-module-open-lower-shriek",
+     "def-sfb-module-linear-open-lower-shriek",
+     "lem-pur-site-restriction-module-adjunction-exact",
+     "sk-def-sfb-coefficient-morphisms",
+     "sk-def-sfb-module-lower-shriek",
+     "sk-def-sfb-derived-categories",
+     "lem-weil-proetale-weakly-etale-localization"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/stacks-project/sites-modules.tex",
+     "place": "Tags 03DI, lemma-extension-by-zero; 03DJ, lemma-extension-by-zero-exact; blueprint linear extension-by-zero action and its adjunction"
+    }
+   }
+  ],
+  "old_proof_deps": [
+   "def-pc-kflat-complex",
+   "def-pc-tensor-complex-sheaves",
+   "def-pur-kinjective-complex",
+   "def-pur-sheaf-tensor-product",
+   "def-sfb-finite-upper-star-monoidal",
+   "def-sfb-modobj-relative-tensor",
+   "def-sfb-modobj-symmetric-tensor",
+   "def-sfb-module-linear-open-lower-shriek",
+   "def-sfb-module-lower-star",
+   "def-sfb-module-lower-star-comp",
+   "def-sfb-module-open-lower-shriek",
+   "def-sfb-module-upper-lower-adjunction",
+   "def-sfb-module-upper-star",
+   "def-sfb-module-upper-star-comp",
+   "def-weil-pbc-canonical-ringed-tensor-comparison",
+   "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+   "lem-pur-site-restriction-module-adjunction-exact",
+   "lem-sfb-adjunction-oplax-mate",
+   "lem-sfb-derived-tensor-modules-derived",
+   "lem-weil-pbc-canonical-ringed-tensor-comparison-construction",
+   "lem-weil-pbc-localization-universal-property",
+   "lem-weil-pbc-ringed-projection-mate-exact",
+   "lem-weil-pbc-ringed-topoi-derived-pullback",
+   "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+   "lem-weil-pbc-ringed-topoi-module-adjunction",
+   "lem-weil-pbc-site-derived-tensor-descent",
+   "lem-weil-proetale-weakly-etale-localization",
+   "new-derived-adjunction-compatibility",
+   "pur713-def-kflat-module",
+   "sk-def-sfb-coefficient-morphisms",
+   "sk-def-sfb-derived-categories",
+   "sk-def-sfb-module-derived-pushpull",
+   "sk-def-sfb-module-lower-shriek",
+   "sk-def-sfb-sheaf-tensor"
+  ]
  }
 }

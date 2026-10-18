@@ -16,7 +16,11 @@
   "def-weil-size-convention",
   "def-weil-sheaf-of-modules-category",
   "def-weil-abstract-derived-category",
-  "def-pc-tensor-complex-sheaves"
+  "def-pc-tensor-complex-sheaves",
+  "def-coef-ringed-tensor-hom-model",
+  "def-pur-derived-internal-hom",
+  "def-zl-ringed-derived-closed-symmetric-monoidal-data",
+  "lem-sfb-derived-monoidal"
  ],
  "proof": [
   {
@@ -315,5 +319,41 @@
   "group": "NP",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NP-720a9bcaa (reviewer sub-agent of L); spot-checked: I read the item, the new node, every cited statement, HRS 2305.18131 Lemma 4.1(1) with its proof, and Stacks 0F63 with its full proof. Item statement: unchanged, not weakened. It generalizes HRS from condensed coefficients to arbitrary ring sheaves, and the proof never uses where the coefficients come from, so proof_origin agent is correct. New node lem-zl-partition-refinement-sheafification: the abstract form of the 0F63 plus-plus argument. I checked that the stated hypotheses suffice: disjoint, pullback-stable coproducts give monic components; a strict initial object makes P+(empty) a point; P+ keeps the finite-product condition; partitions are cofinal at W. It is true and self-contained, with no proof sketch. The P(empty)=point hypothesis is needed: a constant two-element presheaf fails at W=empty. It is strictly smaller than the item and not a duplicate. The existing scheme-only nodes det-pe-wc-sections-exact and lem-weil-pbc-proetale-wcontractible-affine-evaluation-colimits do not cover the profinite case or the tensor presheaf. Steps: step 1 uses det-pe-wcb-clopen-partition (its unbounded site contains the bounded site's covers, and the clopen pieces are objects of both) and det-pe-stonean-projective(3). Step 5 proves flatness of F(T) from the trivial-relation criterion 00HK and is correct. Steps 6-7 build a telescope that is K-flat both on the site and after evaluation; I checked the chain map and compatibility into the truncations. Steps 8-9 use resolving-class localization and the 0FPT coherence signs. Fault, repaired: steps 2 and 4 apply the set-valued new node to module sheafifications without citing that a module sheafification has the set sheafification as its underlying sheaf of sets. I added def-weil-presheaf-modules-sheafification and lem-pc-sites-sheafification-underlying-sets (both Mathlib leaves) to those steps and to proof_deps, in fixes/dag/nodes/sec-zeta-weil/lem-zl-contractible-derived-sections-tensor.json. The declared tool_uses are accepted as generic tools that replace no unit step. No SGA source is cited.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.Sites.ContractibleDerivedSectionsTensor",
+  "declaration": "AlgebraicGeometry.contractible_derived_sections_tensor",
+  "declarations": [
+   "CategoryTheory.contractibleModuleEvaluation",
+   "CategoryTheory.contractibleModuleEvaluation_additive",
+   "CategoryTheory.contractibleSectionsBraiding",
+   "CategoryTheory.ContractibleSectionsPairing",
+   "CategoryTheory.ContractibleSectionsPairingFormula",
+   "CategoryTheory.ContractibleSectionsMonoidal",
+   "CategoryTheory.ContractibleSectionsTensorFormula",
+   "CategoryTheory.ContractibleSectionsSymmetryFormula",
+   "CategoryTheory.ContractibleSectionsUnitComplex",
+   "CategoryTheory.ContractibleSectionsUnitScalarFormula",
+   "CategoryTheory.ContractibleSectionsUnitFormula",
+   "CategoryTheory.ContractibleSectionsRightDerived",
+   "CategoryTheory.ContractibleDerivedSectionsTensorData",
+   "CategoryTheory.ContractibleDerivedSectionsTensor",
+   "AlgebraicGeometry.contractible_derived_sections_tensor"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/Sites/ContractibleDerivedSectionsTensor.lean",
+  "statement": "theorem contractible_derived_sections_tensor : (∀ (X : Scheme.{t}) [IsAffine X] [IsWContractibleRing Γ(X, ⊤)] (R : Sheaf (Scheme.ProEt.topology X) CommRingCat.{max (t + 1) r}) [HasSheafify (Scheme.ProEt.topology X) AddCommGrpCat.{max (t + 1) r}] [(Scheme.ProEt.topology X).WEqualsLocallyBijective AddCommGrpCat.{max (t + 1) r}] [HasDerivedCategory.{max (t + 1) r} (RingedTensorModules.{t + 1, t, r} (Scheme.ProEt.topology X) R)] [HasDerivedCategory.{max (t + 1) r} (ModuleCat.{max (t + 1) r} (R.obj.obj (op (Scheme.ProEt.mk (𝟙 X)))))], ContractibleDerivedSectionsTensor.{t + 1, t, r} (Scheme.ProEt.topology X) R (op (Scheme.ProEt.mk (𝟙 X)))) ∧ (∀ (T : Profinite.{t}) [ExtremallyDisconnected T] (R : Sheaf ((coherentTopology Profinite.{t}).over T) CommRingCat.{max (t + 1) r}) [HasSheafify ((coherentTopology Profinite.{t}).over T) AddCommGrpCat.{max (t + 1) r}] [((coherentTopology Profinite.{t}).over T).WEqualsLocallyBijective AddCommGrpCat.{max (t + 1) r}] [HasDerivedCategory.{max (t + 1) r} (RingedTensorModules.{t + 1, t, r} ((coherentTopology Profinite.{t}).over T) R)] [HasDerivedCategory.{max (t + 1) r} (ModuleCat.{max (t + 1) r} (R.obj.obj (op (Over.mk (𝟙 T)))))], ContractibleDerivedSectionsTensor.{t + 1, t, r} ((coherentTopology Profinite.{t}).over T) R (op (Over.mk (𝟙 T))))",
+  "branch": "newtargets-dag",
+  "by": "NP",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Collision repair: publicly imports the existing Sheaf.Algebra.Homology.RingedDerivedClosedSymmetricMonoidal module and reuses its eleven representative-coherence declarations through the existing:true definition-node record. No replacement dependency module or data module is delivered. All mathematical signatures and canonical-map normalization formulas are unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-fd8d28ec8",
+  "group": "NP",
+  "result": "pass",
+  "note": "Re-delivery of PASSed 830cdbe; the only change is removal of 13 proof-dependency imports (old lines 24-36); node record, report, stmt_deps, lean.statement and 15 declarations are unchanged. Clause check vs node: ProEt site of affine X with IsWContractibleRing Γ(X,⊤), and coherentTopology.over T for extremally disconnected profinite T; arbitrary CommRing sheaf; universes t+1/t with modules in max(t+1) r; exactness and all colimits as conclusions; IsRightDerivedFunctor with canonical unit; strong Functor.Monoidal pinned by pairing_tmul, tensor_model on K-flat representatives, unit_scalar/unit_model and the symmetry square. Edge cases covered, no hollow data, single sorry, docstrings present. Mechanical finding: lem-sfb-derived-monoidal is genuinely needed, since its instance hasDerivedMonoidalCategory constructs the monoidal structure on D(ModuleCat A) used by Functor.Monoidal, Q's lax mu/eps and DerivedMonoidal.braidedCategory; PASS on that point. nt_compile --json: full file timed out twice at load ~117; #check of all 18 external names resolves under the reduced imports; prefixes to lines 73/118/165 clean (38.7/39.5/49.0 s); full file then exit 0, no diagnostics, 48.5 s. Maintainer note: the report's 'proof deps imported for stage 3' sentence is now stale (cosmetic)."
  }
 }
