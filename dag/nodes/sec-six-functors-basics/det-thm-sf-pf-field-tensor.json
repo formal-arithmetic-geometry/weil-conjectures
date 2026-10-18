@@ -301,5 +301,25 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.FieldTensor",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.tensorClosureRational",
+  "file": "lean/Sheaf/SixFunctors/FieldTensor.lean",
+  "statement": "theorem tensorClosureRational (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] (p : ℕ) [CharP k p] (hp : 0 < p) (hpl : p ≠ ℓ) {X : Scheme.{u}} (aX : X ⟶ Spec (.of k)) [IsSeparated aX] [LocallyOfFiniteType aX] [QuasiCompact aX] (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ] (hΛ : (∃ E : PadicAlgCl.FiniteIntermediateField ℓ, Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj E))) ∨ Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.padicAlgClRingObj ℓ))) : (∀ (K M : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))), constantModelBoundedConstructible Λ X K → constantModelBoundedConstructible Λ X M → constantModelBoundedConstructible Λ X (((derivedTensor Λ X).obj K).obj M)) ∧ (∀ (A B : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))), CategoryTheory.localizingClosure (constantModelBoundedConstructible Λ X) A → CategoryTheory.localizingClosure (constantModelBoundedConstructible Λ X) B → CategoryTheory.localizingClosure (constantModelBoundedConstructible Λ X) (((derivedTensor Λ X).obj A).obj B))",
+  "branch": "newtargets-dag",
+  "by": "Q44",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Maintainer FIX (cc second reader, 2026-10-18): the coefficient hypothesis hΛ is stated as an isomorphism of monoid objects, Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj E)) or Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.padicAlgClRingObj ℓ)), as in the landed rational items (e.g. RationalRestrictionGlue, BrownHypothesesSmall). The delivered equality Λ = ... of underlying Ab-sheaves left the independent [MonObj Λ] instance unconstrained, so the theorem ranged over arbitrary ring structures on the abelian sheaf of E or Q̄_ℓ. The statement's docstring now carries the node's eight proof steps.",
+  "fixed_by": "NT-stage2-cc-b86d5a6d7"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b86d5a6d7",
+  "group": "Q44",
+  "result": "fix",
+  "note": "Read node, blueprint source (two clauses, Λ=E or Q̄ℓ), all 6 stmt_deps and their declarations (continuousMapRingObj, padicAlgClRingObj, constantModelBoundedConstructible, CategoryTheory.localizingClosure, CondensedRing.derivedTensor), module, report. Setting binders, Dbc, ambient derived tensor, both clauses, quantifier order, edge cases (empty X, zero, E=Q_ℓ, Q̄ℓ finite-stage ring, empty coproducts) and universes (single u, pp.universes probe) correct; lean.statement verbatim; no defs, sorry only. F1 (H3): hΛ was an equality of underlying Ab-sheaves with an independent [MonObj Λ], so the ring structure was unconstrained; fixed to Nonempty (Mon.mk Λ ≅ Mon.mk …) for E and Q̄ℓ (landed convention). F2 (H8): docstring now carries the node's 8 proof steps. F3 (H11): thin second reading; maintainer section appended to report. Delivered (12.0 s) and fixed (20.6 s) files compile clean via nt_compile --json. Fixes: FieldTensor.lean, det-thm-sf-pf-field-tensor.lean-record.json, det-thm-sf-pf-field-tensor.report.md."
  }
 }

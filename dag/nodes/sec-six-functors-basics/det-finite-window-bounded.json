@@ -188,5 +188,27 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FiniteWindowBounded",
+  "declaration": "AlgebraicGeometry.ProEtale.finiteWindow_bounded",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.finiteWindow_bounded",
+   "AlgebraicGeometry.ProEtale.finiteWindow_bounded_padicAlgCl"
+  ],
+  "file": "lean/Sheaf/Paper/FiniteWindowBounded.lean",
+  "statement": "theorem finiteWindow_bounded (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ) (X : Scheme.{u}) (C : CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj (Profinite.continuousMapRingObj E) X)) (hC : IsConstantModelConstructible (Profinite.continuousMapRingObj E) X C) (d_C : ℕ) (hExt : ∀ N : CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj (Profinite.continuousMapRingObj E) X), IsConstantModelConstructible (Profinite.continuousMapRingObj E) X N → ∀ r : ℕ, d_C < r → Subsingleton (@Abelian.Ext _ _ _ (HasExt.standard _) C N r)) (L : DerivedCategory (CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj (Profinite.continuousMapRingObj E) X))) (hL : ∀ q : ℤ, ObjectProperty.ind.{u + 1} (IsConstantModelConstructible (Profinite.continuousMapRingObj E) X) ((DerivedCategory.homologyFunctor _ q).obj L)) (hbounded : {q : ℤ | ¬ IsZero ((DerivedCategory.homologyFunctor _ q).obj L)}.Finite) (hvanish : ∀ q : ℤ, -(d_C : ℤ) - 1 < q → IsZero ((DerivedCategory.homologyFunctor _ q).obj L)) : Subsingleton ((DerivedCategory.singleFunctor _ 0).obj C ⟶ L)",
+  "branch": "newtargets-dag",
+  "by": "NJ",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-37aa1a4ff",
+  "group": "NJ",
+  "result": "pass",
+  "note": "Clause-by-clause check of NJ/det-finite-window-bounded: E and Q̄_ℓ coefficients (continuousMapRingObj E / padicAlgClRingObj ℓ), Mod(condensedRingObj Λ X), IsConstantModelConstructible, d_C:ℕ given as a property hypothesis with Ext from HasExt.standard for r>d_C, ObjectProperty.ind.{u+1} on every H^q, finite support, strict vanishing above -d_C-1, conclusion Subsingleton(single 0 C ⟶ L). All match node and source; lean.statement verbatim; only the lean field changed. No extra hypotheses or universe restrictions, no definitions, sorry only, source and proof docstrings present. nt_compile --json: clean, 12.8 s. A /tmp test applying both theorems with the citer FiniteWindowUnbounded's pulledBackModuleObjects types compiled clean (33.5 s), so the encodings and instances agree. Edge cases (L=0, acyclic L, C=0, empty X, d_C=0, boundary degree) covered. The 'Second reading by NJ' section holds the post-2026-10-17 convention text (822 landed reports carry it). STATEMENT-DISPUTED: the proof dep det-ind-heart-ii-vanishing assumes X Noetherian, but neither the source lemma nor the unit or chapter sections do, and the landed sibling also allows any X. Statement kept; the gap is in the stage-3 proof route and is recorded in review.md for the maintainer."
  }
 }

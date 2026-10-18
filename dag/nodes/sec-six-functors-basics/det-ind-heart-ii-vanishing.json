@@ -23,7 +23,8 @@
   "def-constructible-stratification",
   "det-def-sfb-constructible-local-model",
   "def-pc-ext",
-  "sk-lem-uniform-constructible-ext"
+  "sk-lem-uniform-constructible-ext",
+  "sk-def-sfb-constructible"
  ],
  "proof": [
   {
@@ -172,5 +173,23 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.Paper.IndHeartIIVanishing",
+  "declaration": "AlgebraicGeometry.ProEtale.indHeartII_vanishing",
+  "file": "lean/Sheaf/Paper/IndHeartIIVanishing.lean",
+  "statement": "theorem indHeartII_vanishing (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ) (R : Sheaf (coherentTopology Profinite.{u}) RingCat.{u + 1}) [IsCommMonObj (coefficientHeartRingObj R)] (_hR : R = Profinite.padicSubfieldCondensedRing ℓ E ∨ R = Profinite.padicAlgClCondensedRing ℓ) (X : Scheme.{u}) [IsLocallyNoetherian X] [CompactSpace X] (C : ConstantModelConstructible (coefficientHeartRingObj R) X) (d : ℤ) (_hd : 0 ≤ d) (_hbound : ∀ N : ConstantModelConstructible (coefficientHeartRingObj R) X, ∀ r : ℤ, d < r → Subsingleton ((DerivedCategory.singleFunctor _ 0).obj C.obj ⟶ ((DerivedCategory.singleFunctor _ 0).obj N.obj)⟦r⟧)) : (∀ (I : Type (u + 1)) [SmallCategory I] [IsFiltered I] (D : I ⥤ Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj (coefficientHeartRingObj R) X)), (∀ i : I, IsConstantModelConstructible (coefficientHeartRingObj R) X (D.obj i)) → ∀ (c : Cocone D), IsColimit c → ∀ q : ℤ, IsIso (colimit.desc _ ((DerivedCategory.singleFunctor _ 0 ⋙ shiftFunctor _ q ⋙ preadditiveCoyoneda.obj (op ((DerivedCategory.singleFunctor _ 0).obj C.obj))).mapCocone c))) ∧ (∀ B : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj (coefficientHeartRingObj R) X), ObjectProperty.ind.{u + 1} (IsConstantModelConstructible (coefficientHeartRingObj R) X) B → ∀ q : ℤ, d < q → Subsingleton ((DerivedCategory.singleFunctor _ 0).obj C.obj ⟶ ((DerivedCategory.singleFunctor _ 0).obj B)⟦q⟧))",
+  "branch": "newtargets-dag",
+  "by": "NM",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a41aa0951",
+  "group": "NM",
+  "result": "pass",
+  "note": "Every node clause matches the Lean: Noetherian X as IsLocallyNoetherian+CompactSpace; Λ=E or Q̄ℓ via _hR; Λ_X-modules; Cons=IsConstantModelConstructible; IndCons=ObjectProperty.ind.{u+1}, as in all siblings; Ext^q as derived Hom C[0]→N[0][q] for all q∈ℤ; fixed d:ℤ, 0≤d, with the bound ∀N ∀r>d. Both conclusions present: colimit.desc comparison iso for every small filtered constructible presentation, and Subsingleton for q>d for every ind-constructible B. A probe shows the first conjunct is exactly constructible_sheaf_ext_continuity applied to C.obj. Edge cases (empty X, zero objects, d=0, q=d, negative q, E=Qℓ) and universes (single u, I : Type (u+1), no universe equality) checked. No definitions, sorry only, standard axioms, source/blueprint docstrings with proof steps. Node diff is lean plus one landed stmt_dep (sk-def-sfb-constructible), which is allowed; the statement matches the file verbatim. The Second reading section is the standard placeholder found in 822 landed reports. nt_compile --json: exit 0, 18.1 s, no warnings. No findings."
  }
 }
