@@ -346,5 +346,48 @@
   "group": "N6",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N6-a1e7ecaee (reviewer sub-agent of L); spot-checked: Read in full: the item, all 9 steps, and the statement of every cited node. Shape: one commit containing the item and the report. No new nodes. The statement is unchanged; stmt_deps gains only def-pur-sheaf-tensor-product, which the tensor clauses need. Step uses equal proof_deps, there is no cycle, and every step is under 2000 characters. Sources checked: Gabber XVII Prop. 6.2.1.1 on printed p.294 says K'=RHom(Λ',K) follows from supported cohomology commuting with RHom_Λ(Λ',-); the item expands that remark as an agent formulation. Stacks 08JI states exactly the bounded-above finite-free Hom model behind lem-weil-pbc-ringed-site-bounded-free-rhom-model. Stacks 09XQ supplies the closed-support injective/adjunction. No SGA. Small cases tested: A=B; B=0; A=Z/ℓ², B=Z/ℓ with the infinite periodic P, where each diagonal is finite and the only cohomology is H^0=ℓA; Z empty or Z=X; L trivial. No clause is false. Step checks: (1) U⊣H, with the explicit inverse bijection checked by hand, plus the exact-left-adjoint lemma; (2) enough injectives, dplus (1),(2), termwise homotopy adjunction and K-injective Hom, with the A/B categories correct; (3) exactness of the constant functor, the Hom model with b=0, and rhom-well-defined for the augmentation; (4) β_g as a genuine adjunct in D(B), whose underlying map is the termwise finite-sum isomorphism (d_P has constant scalar entries), with conservativity from the cohomology criterion; (5) the abelian supported-kernel adjunction is extended to modules explicitly; (6) U i_* = i_* U, and the composite-adjunction lemma gives the normalized comparison; (7) mate-pasting clauses 1, 2 and 4; (8) costalk s^! l^*, an elementary composition; (9) I checked the twist map is balanced and B-linear, it is locally the identity, and ⊗L preserves injectives because ⊗L^∨ is exact. No duplicates: the trf coinduction and flat-base-change nodes are module-level only, and lem-sc-sheaf-coinduction-action is underived. The 13 tool_uses are generic homological interfaces from other units, and I accept them. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteCoefficientCoinductionLocality",
+  "declaration": "AlgebraicGeometry.Etale.finite_coefficient_coinduction_locality",
+  "declarations": [
+   "AlgebraicGeometry.Etale.supportedKernelCoefficients",
+   "AlgebraicGeometry.Etale.supportedKernelCoefficients_additive",
+   "AlgebraicGeometry.Etale.supportedClosedInverseImageCoefficients",
+   "AlgebraicGeometry.Etale.supportedClosedInverseImageCoefficients_additive",
+   "AlgebraicGeometry.Etale.coinductionScalarPullbackIso",
+   "AlgebraicGeometry.Etale.coinductionScalarPullbackIsoPlus",
+   "AlgebraicGeometry.Etale.finiteCoinductionPullbackMap",
+   "AlgebraicGeometry.Etale.coinductionScalarClosedImageIsoPlus",
+   "AlgebraicGeometry.Etale.finiteCoinductionClosedIso",
+   "AlgebraicGeometry.Etale.coinduction_preserves_lower_bound",
+   "AlgebraicGeometry.Etale.coinduction_injective_representative",
+   "AlgebraicGeometry.Etale.finite_coefficient_coinduction_locality",
+   "AlgebraicGeometry.Etale.finiteCoinductionPullbackMap_comp",
+   "AlgebraicGeometry.Etale.finiteCoinductionPullbackMap_id",
+   "AlgebraicGeometry.Etale.coinduction_supported_closed_adjunction",
+   "AlgebraicGeometry.Etale.finiteCoinductionClosedIso_counit",
+   "AlgebraicGeometry.Etale.coinductionCoefficientLine",
+   "AlgebraicGeometry.Etale.finiteCoinduction_rank_one_twist",
+   "AlgebraicGeometry.Etale.finiteCoinductionCostalkMap",
+   "AlgebraicGeometry.Etale.finiteCoinduction_costalk_locality",
+   "AlgebraicGeometry.Etale.finiteCoinductionAdjunction",
+   "AlgebraicGeometry.Etale.finiteCoinductionClosedIso_comp",
+   "AlgebraicGeometry.Etale.finiteCoinduction_underlying_rhom"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteCoefficientCoinductionLocality.lean",
+  "statement": "theorem finite_coefficient_coinduction_locality (P : CochainComplex (ModuleCat.{u + 1} A) ℤ) (ε : P ⟶ (HomologicalComplex.single (ModuleCat.{u + 1} A) (ComplexShape.up ℤ) 0).obj ((ModuleCat.restrictScalars φ).obj (ModuleCat.of B B))) (hε : QuasiIso ε) (hP : ∀ n : ℤ, 0 < n → IsZero (P.X n)) (hfree : ∀ n : ℤ, ∃ r : ℕ, Nonempty (P.X n ≅ ModuleCat.of A (Fin r → A))) {Y X : Scheme.{u}} (g : Y ⟶ X) : IsIso (finiteCoinductionPullbackMap φ g) ∧ (finiteCoinductionPullbackMap φ g).CommShift ℤ",
+  "branch": "newtargets-dag",
+  "by": "NP",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-526e1d46d",
+  "group": "NP",
+  "result": "pass",
+  "note": "Re-delivery repairs the ce48b7ab406c H13/H4 RETURN exactly: def-pur-etale-supported-kernel record byte-identical to live Q72 existing:true supportedKernel (no overwrite); EtaleSupportedKernelCoefficients.lean dropped, no remaining importers; supportedKernelCoefficients/_additive and supportedClosedInverseImageCoefficients/_additive moved into FiniteCoefficientCoinductionLocality.lean with Stacks 09XQ + item blueprint docstrings and listed in lean.declarations; rest of module unchanged (diff), item node differs from live only in lean. Re-read all clauses: arbitrary CommRing A,B Type(u+1); finite-free Z-indexed resolution with QuasiIso ε, hP, hfree, no lower bound; C_X = derived coextendScalars pinned on injectives; derivedPlus adjunction; IsGE bound; pullback mate IsIso+CommShift with id/comp laws; conjugate closed iso with counit, comp pasting; costalk via fromSpecStalk/Spec.map residue plus IsAlgClosed geometric fibre; local rank-one twist. Statement verbatim, all 23 declarations present, no hollow defs, all theorems sorry with proof docstrings, no long lines. Live closedSupportPlus requires [Finite A], so it is not a duplicate. nt_compile --json: 10.1 s, exit 0, no diagnostics. Advisory: closed adjunction Nonempty only (parameters aA/aB); twist and RHom bridge existential as the node says."
  }
 }
