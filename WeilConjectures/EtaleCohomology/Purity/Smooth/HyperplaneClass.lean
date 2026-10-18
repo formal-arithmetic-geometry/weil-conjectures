@@ -987,7 +987,7 @@ include aS in
 /-- **`c₁(𝒪(1))` is the hyperplane class.** On `ℙ(Option m; S)`, the top Chern class of the line
 bundle `𝒪(1)` is the first Chern class `h` of the hyperplane class of `V(T_∗)`.
 
-Not proved here. Let `σ = twistBundleSection (Option m) S none : ℙ(Option m; S) ⟶ W` be the
+Proof: let `σ = twistBundleSection (Option m) S none : ℙ(Option m; S) ⟶ W` be the
 section `[x] ↦ [x : x_∗]` of `𝒪(1)` (`twistBundleSection_comp_π`). By (L4) and
 `localizedTopChernForget_eq`, `c₁(𝒪(1)) = σ^* (forget th)`, and by
 `twistBundleHyperplaneClass_eq_thomClass` and `classRestriction_comp` this is the restriction of
@@ -1069,13 +1069,28 @@ theorem topChernClass_twistBundle_eq_hyperplaneChernClass {m : Type u} [Finite m
     refine (restrictSupportedClass_comp_tateShift Λ b (hyperplaneFrame (Option m) S (some k)).e
       ((hyperplaneFrame m S k).e ≫ twistBundleSectionAux (Option m) S none)
       hbι.symm (hyperplane (Option m) S) _ _ (hyperplaneFrame (Option m) S (some k)).toZ
-      (hyperplaneFrame (Option m) S (some k)).isPullback _ hz _ hp).trans ?_
+      (hyperplaneFrame (Option m) S (some k)).isPullback _ hz _ hp
+      (hyperplaneClass Λ (Option m) aS)).trans ?_
     have hH := isHyperplaneClass_hyperplaneClass (Λ := Λ) aS (some k)
     rw [frameRestriction] at hH
     rw [hH, frameClass, frameClass]
     exact restrictSupportedClass_kummerBoundaryProduct Λ b _ _ (fun _ ↦ hv) _ hz
   have hδ : δ = hyperplaneClass Λ m aS := eq_hyperplaneClass aS hframe
-  sorry
+  rw [← (twistBundle (Option m) S).forgetSupports_localizedTopChern Λ (ℙ(Option m; S) ↘ S ≫ aS)
+      (twistBundleSection (Option m) S none) (twistBundleSection_comp_π (Option m) S none),
+    VectorBundle.localizedTopChernForget_eq, ← twistBundleHyperplaneClass_eq_thomClass, ← hδ]
+  have hW : twistBundleHyperplaneClass Λ (Option m) aS ≫
+      (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ)
+        (twistBundle (Option m) S).zero).counit.app _ =
+      VectorBundle.classRestriction Λ (r := 1) (twistBundleOpen (Option m) S).ι
+        (hyperplaneChernClass (hyperplaneClass Λ (Option m) aS)) := by
+    simp only [VectorBundle.classRestriction, hyperplaneChernClass, twistBundleHyperplaneClass,
+      restrictSupportedClass, Functor.map_comp, Category.assoc, supportedRestriction_comp_counit]
+  rw [hW, ← VectorBundle.classRestriction_comp Λ (twistBundleSection (Option m) S none)
+    (twistBundleOpen (Option m) S).ι (twistBundleSectionAux (Option m) S none)
+    (twistBundleSection_ι (Option m) S none).symm]
+  simp only [VectorBundle.classRestriction, hyperplaneChernClass, δ, restrictSupportedClass,
+    Functor.map_comp, Category.assoc, supportedRestriction_comp_counit]
 
 include aS in
 /-- **The hyperplane class restricts to the hyperplane class**: along the hyperplane embedding

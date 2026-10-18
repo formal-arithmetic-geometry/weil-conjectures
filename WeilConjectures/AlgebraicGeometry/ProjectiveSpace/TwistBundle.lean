@@ -876,6 +876,84 @@ lemma hyperplane_comp_twistBundleSectionAux_none {m : Type u} :
     simp [hyperplaneSections, Scheme.CoordinateCover.zeroSection]
 
 
+/-! ### Renaming the homogeneous coordinates -/
+
+section Reindex
+
+variable {α β : Type u}
+
+lemma span_reindexSections (e : α ≃ β) (i : α) :
+    Ideal.span (Set.range fun b ↦ ((standardCoordinateCover α S).coord (e.symm b)).s i) = ⊤ := by
+  refine Ideal.eq_top_of_isUnit_mem _ (Ideal.subset_span ⟨e i, rfl⟩) ?_
+  simp [(standardCoordinateCover α S).ratio_self i]
+
+/-- The morphism `ℙ(α; S) ⟶ ℙ(β; S)` renaming the homogeneous coordinates along `e : α ≃ β`. -/
+noncomputable def reindexHom (e : α ≃ β) : ℙ(α; S) ⟶ ℙ(β; S) :=
+  Scheme.CoordinateCover.hom (fun b ↦ (standardCoordinateCover α S).coord (e.symm b))
+    (span_reindexSections S e) (ℙ(α; S) ↘ S)
+
+@[reassoc (attr := simp)]
+lemma reindexHom_over (e : α ≃ β) : reindexHom S e ≫ ℙ(β; S) ↘ S = ℙ(α; S) ↘ S :=
+  Scheme.CoordinateCover.hom_over _ _ _
+
+lemma reindexHom_preimage_standardOpen (e : α ≃ β) (b : β) :
+    reindexHom S e ⁻¹ᵁ standardOpen β S b = standardOpen α S (e.symm b) := by
+  rw [reindexHom, Scheme.CoordinateCover.preimage_hom_standardOpen]
+  exact nonvanishing_coord _ _
+
+lemma reindexHom_comp_reindexHom_symm (e : α ≃ β) :
+    reindexHom S e ≫ reindexHom S e.symm = 𝟙 ℙ(α; S) := by
+  refine Scheme.Opens.hom_ext_of_iSup_eq_top (fun i ↦ standardOpen α S i) (iSup_standardOpen α S)
+    _ _ fun i ↦ ?_
+  have hr : Set.range ((standardOpen α S i).ι ≫ reindexHom S e).base ⊆
+      Set.range (standardOpen β S (e i)).ι.base := by
+    rintro _ ⟨x, rfl⟩
+    rw [Scheme.Opens.range_ι]
+    have hx : x.1 ∈ reindexHom S e ⁻¹ᵁ standardOpen β S (e i) := by
+      rw [reindexHom_preimage_standardOpen, e.symm_apply_apply]
+      exact x.2
+    exact hx
+  let c := IsOpenImmersion.lift _ _ hr
+  have hc : c ≫ (standardOpen β S (e i)).ι = (standardOpen α S i).ι ≫ reindexHom S e :=
+    IsOpenImmersion.lift_fac _ _ _
+  have hh₀ : (standardOpen α S i).ι ≫ reindexHom S e = homOfSections
+      ((standardOpen α S i).ι ≫ ℙ(α; S) ↘ S)
+      (fun b ↦ (standardOpen α S i).topIso.inv
+        (((standardCoordinateCover α S).coord (e.symm b)).s i))
+      (Scheme.CoordinateCover.span_topIso_inv _ (span_reindexSections S e) i) :=
+    Scheme.CoordinateCover.ι_hom (𝒟 := standardCoordinateCover α S) _ _ _ _
+  have hh₁ : (standardOpen β S (e i)).ι ≫ reindexHom S e.symm = homOfSections
+      ((standardOpen β S (e i)).ι ≫ ℙ(β; S) ↘ S)
+      (fun a ↦ (standardOpen β S (e i)).topIso.inv
+        (((standardCoordinateCover β S).coord (e.symm.symm a)).s (e i)))
+      (Scheme.CoordinateCover.span_topIso_inv _ (span_reindexSections S e.symm) (e i)) :=
+    Scheme.CoordinateCover.ι_hom (𝒟 := standardCoordinateCover β S) _ _ _ _
+  rw [← Category.assoc, ← hc, Category.assoc, hh₁, comp_homOfSections, Category.comp_id]
+  conv_rhs => rw [ι_eq_homOfSections α S i]
+  congr 1
+  · rw [← Category.assoc c, hc, Category.assoc, reindexHom_over]
+  · funext a
+    have e₀ : (standardOpen β S (e i)).topIso.inv =
+        (standardOpen β S (e i)).ι.appLE (standardOpen β S (e i)) ⊤
+          (Scheme.Opens.ι_preimage_self _).ge := by
+      rw [Scheme.Opens.ι_appLE]
+      rfl
+    have e₂ : c.appTop = c.appLE ⊤ ⊤ le_top := by
+      rw [Scheme.Hom.appTop, Scheme.Hom.app_eq_appLE]
+      rfl
+    dsimp only
+    rw [Scheme.CoordinateCover.coord_s, standardCoordinateCover_ratio, e₀, e₂,
+      ← CommRingCat.comp_apply, Scheme.Hom.appLE_comp_appLE, appLE_eq_of_eq hc,
+      appLE_eq_of_eq hh₀]
+    refine (homOfSections_appLE_coordRatio (S := S) _
+      (fun b ↦ (standardOpen α S i).topIso.inv
+        (((standardCoordinateCover α S).coord (e.symm b)).s i))
+      (Scheme.CoordinateCover.span_topIso_inv _ (span_reindexSections S e) i)
+      (by simp [(standardCoordinateCover α S).ratio_self i]) _ _).trans ?_
+    simp [Scheme.CoordinateCover.coord_s, standardCoordinateCover_ratio]
+
+end Reindex
+
 end ProjectiveSpace
 
 end AlgebraicGeometry
