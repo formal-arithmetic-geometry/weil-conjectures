@@ -93,7 +93,13 @@ theorem ordinaryOpenProjectionExchange_forward
           (ModuleCat.{u + 1} C) (pullback.snd j a)).inv.app
           (L((pullback.fst j a)^*[ModuleCat.{u + 1} C]).obj E)).app
           (L((a)^*[ModuleCat.{u + 1} C]).obj N) := by
-  sorry
+  have h := derivedOpenImmersionLowerShriekProjectionIso_inv_baseChange
+    (ModuleCat.{u + 1} C) (IsPullback.of_hasPullback j a) E N
+  rw [← cancel_epi (leftDerivedUpperStarTensorIso (ModuleCat.{u + 1} C) a
+    (D((j)_!open[ModuleCat.{u + 1} C]).obj E) N).inv, Iso.inv_hom_id_assoc]
+  rw [reassoc_of% h]
+  simp only [← Functor.map_comp, Iso.inv_hom_id_assoc, Iso.hom_inv_id_app]
+  erw [CategoryTheory.Functor.map_id, CategoryTheory.Functor.map_id, Category.comp_id]
 
 end Etale
 end AlgebraicGeometry
