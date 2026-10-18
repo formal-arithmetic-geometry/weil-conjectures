@@ -4373,6 +4373,7 @@ public import WeilConjectures.AlgebraicGeometry.ProEtale.FiniteCoefficientEtaleC
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Flat.QuasiCompactCover
 public import WeilConjectures.AlgebraicGeometry.ProEtale.FromPi1
 public import WeilConjectures.AlgebraicGeometry.ProEtale.IntegralAdicCohomology
+public import WeilConjectures.AlgebraicGeometry.ProEtale.IntegralAdicLimit
 public import WeilConjectures.AlgebraicGeometry.ProEtale.LocalProperties
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Proetale.Basic
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Proetale.Sheafification
