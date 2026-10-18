@@ -1,0 +1,140 @@
+{
+ "id": "lem-weil-pbc-finite-ring-derived-hom-finite",
+ "kind": "statement",
+ "title": "Finiteness of algebraic derived Hom over a finite ring",
+ "statement": "Let $B$ be a commutative ring whose underlying set is finite. Let $E,G$ be cochain complexes of $B$-modules [def-weil-abstract-derived-category], with finite underlying sets in every degree and with terms zero outside bounded intervals of integers. Then the set $\\operatorname{Hom}_{D(B)}(E,G)$ is finite.",
+ "stmt_deps": [
+  "def-weil-abstract-derived-category"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 094G lemma-locally-constant, 09BE lemma-locally-constant-map, and 08FR lemma-local-actual; Finiteness of algebraic derived Hom over a finite ring"
+ },
+ "proof": [
+  {
+   "text": "The cycles of a complex with finite terms inject into a finite term, and its homology is a quotient of its cycles, hence finite. A mapping cone from a finite free complex to E has finite terms, so it satisfies the finite-cone hypothesis of the finite-free-model theorem. Obtain a bounded-above complex P of finite free modules and a quasi-isomorphism P to E.",
+   "uses": [
+    "lem-pc-ring-finite-cone-free-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "A bounded-above complex of projective modules is K-projective. Every derived map P to G therefore has a representative chain map, using Qh_map_bijective followed by surjectivity of the homotopy quotient on morphisms.",
+   "uses": [
+    "lem-pc-ring-derived-map-representative"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Only the finitely many degrees in a bounded support interval of G can contribute to a chain map. Evaluation in these degrees injects the set of chain maps into a finite product of finite sets of module maps. Outside the interval every map to the zero target is unique. Hence chain maps, and their surjective image of derived maps, form finite sets. The quasi-isomorphism P to E transports this finiteness to Hom(E,G).",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-abstract-derived-category",
+  "lem-pc-ring-derived-map-representative",
+  "lem-pc-ring-finite-cone-free-model"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "The finite-source Hom argument in lem-weil-pbc-finite-ring-derived-local-constancy; Finiteness of algebraic derived Hom over a finite ring"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The morphism set in the derived category between two bounded complexes of finite modules over a finite ring is finite",
+   "results": "8 hits: CategoryTheory.hasExt_of_hasDerivedCategory, CategoryTheory.FinCategory.instFintypeHomObjAsType, CategoryTheory.IsGrothendieckAbelian.hasExt, CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat, instHasExtModuleCatOfSmall, FGModuleCat.instFiniteHom, HasDerivedCategory, FintypeCat.instFiniteHom",
+   "date": "2026-10-18",
+   "verdict": "no exact match; use the finite-cone resolution and the K-projective API"
+  },
+  {
+   "tool": "grep",
+   "query": "Finite.*(Q.obj|derived.*[Hh]om)|derived.*[Hh]om.*[Ff]inite",
+   "results": "0 hits: ",
+   "date": "2026-10-18",
+   "verdict": "no exact match; use the finite-cone resolution and the K-projective API"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"Finite\"",
+   "results": "0 hits: ",
+   "date": "2026-10-18",
+   "verdict": "no exact match; use the finite-cone resolution and the K-projective API"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteRingDerivedLocalConstancy",
+  "date": "2026-10-18",
+  "group": "Q2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-amplification-proper",
+   "place": "proof (c), TOW: finite lisse cohomology gives local finite-module complex models; derived Hom descent between those models",
+   "via": [
+    "lem-weil-pbc-finite-ring-derived-local-constancy",
+    "lem-weil-pbc-normalized-constructible-local-effectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.FiniteRingDerivedHomFinite",
+  "file": "lean/Sheaf/RingTheory/FiniteRingDerivedHomFinite.lean",
+  "declaration": "DerivedCategory.finite_derived_hom_of_bounded_finite",
+  "statement": "theorem finite_derived_hom_of_bounded_finite\n    (B : Type u) [CommRing B] [Finite B]\n    (E G : CochainComplex (ModuleCat.{u} B) ℤ)\n    (hE : ∃ a b : ℤ, ∀ n : ℤ, n < a ∨ b < n → IsZero (E.X n))\n    (hG : ∃ a b : ℤ, ∀ n : ℤ, n < a ∨ b < n → IsZero (G.X n))\n    (hEfin : ∀ n : ℤ, Finite (E.X n)) (hGfin : ∀ n : ℤ, Finite (G.X n)) :\n    Finite (DerivedCategory.Q.obj E ⟶ DerivedCategory.Q.obj G)",
+  "branch": "sheaf-dag",
+  "by": "Q2",
+  "date": "2026-10-18"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-weil-pbc-finite-ring-derived-local-constancy",
+  "worker": "Q2",
+  "tool_uses": [
+   {
+    "node": "lem-pc-ring-finite-cone-free-model",
+    "why": "Generic bounded-above finite-free resolution after checking its finite-cone hypothesis; this tool is already approved on the parent finite-ring lemma, and the unit has no substitute algebraic resolution statement."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261018T071212-L-1674751",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261018T071212-L-1674751",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

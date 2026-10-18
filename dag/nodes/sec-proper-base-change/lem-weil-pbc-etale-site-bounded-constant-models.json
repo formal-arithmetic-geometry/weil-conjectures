@@ -1,0 +1,144 @@
+{
+ "id": "lem-weil-pbc-etale-site-bounded-constant-models",
+ "kind": "statement",
+ "title": "Bounded constant complex models on the mixed-universe etale site",
+ "statement": "Let $X$ be a scheme with its small etale site [def-weil-pbc-etale-site] and $B$ a finite commutative ring. Let $K$ be a derived etale $B$-module sheaf [def-weil-abstract-derived-category] whose cohomology vanishes outside $[a,b]$, with $a\\leq b$. Suppose that on every etale object every cohomology sheaf admits a covering trivialization as a constant finitely generated $B$-module [def-kun-constant-sheaf]. Then there is a jointly surjective etale covering of $X$, indexed in the universe of $X$, on each member of which $K$ is isomorphic to the constant complex of finite $B$-modules with terms zero outside $[a,b]$.",
+ "stmt_deps": [
+  "def-weil-pbc-etale-site",
+  "def-weil-abstract-derived-category",
+  "def-kun-constant-sheaf"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 094G lemma-locally-constant; transport of the general-site bounded constant-model theorem through AsSmall.equiv"
+ },
+ "proof": [
+  {
+   "text": "Replace X.Etale by AsSmall X.Etale and transport the topology along AsSmall.down. Its associated precoverage has isomorphisms, pullbacks, and stability under composition and base change. Both category universes now equal the coefficient universe. The equivalence transports the terminal object, induces exact equivalences on sheaf categories and slice sheaf categories, commutes with constant sheaves and slice restriction, and preserves homology under the derived equivalence. Transport the assumed cohomology vanishing and local finite constant trivializations to this small site.",
+   "uses": [
+    "def-weil-pbc-etale-site",
+    "lem-weil-pbc-etale-site-localization-open",
+    "def-kun-constant-sheaf"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "A finite commutative ring is Noetherian. Apply exists_site_bounded_constant_model on the transported small site, obtaining bounded finite-module complex models with exactly the bounds a and b. Transport them back through the exact slice equivalences. Constant sheaves and their termwise complex functors commute with these equivalences, so the resulting objects are the asserted constant complexes.",
+   "uses": [
+    "lem-weil-pbc-site-bounded-constant-model",
+    "def-weil-abstract-derived-category",
+    "def-kun-constant-sheaf"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The transported covering family is jointly surjective. Choose one of its arrows above each point of X and keep that arrow and its constant model. This gives an etale cover indexed by the points of X, in the universe of X. Each finitely generated module over the finite ring has finite underlying set. On the empty scheme use the empty cover.",
+   "uses": [
+    "def-weil-pbc-etale-site"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-kun-constant-sheaf",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-etale-site",
+  "lem-weil-pbc-etale-site-localization-open",
+  "lem-weil-pbc-site-bounded-constant-model"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 094G and equivalence-of-sites transport of lem-weil-pbc-site-bounded-constant-model; Q2 proves the site and slice equivalences, homology transport, finite covering extraction and constant-complex comparison explicitly in Lean"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Local bounded constant complex models transport along equivalences of sites to the small etale site with larger object universe",
+   "results": "8 hits: CategoryTheory.GrothendieckTopology.WEqualsLocallyBijective.transport, AlgebraicGeometry.Scheme.smallEtaleTopology, CategoryTheory.Sheaf.isConstant_iff_of_equivalence, CategoryTheory.GrothendieckTopology.WEqualsLocallyBijective.ofEssentiallySmall, CategoryTheory.Equivalence.precoherent_isSheaf_iff_of_essentiallySmall, AlgebraicGeometry.Scheme.smallEtalePretopology, CategoryTheory.Equivalence.preregular_isSheaf_iff_of_essentiallySmall, AlgebraicGeometry.Scheme.etaleTopology",
+   "date": "2026-10-18",
+   "verdict": "No bounded-model transport theorem; equivalences of sites and constants provide the intended infrastructure."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AsSmall\", \"sheafCongr\"",
+   "results": "0 hits: ",
+   "date": "2026-10-18",
+   "verdict": "No bounded-model transport theorem; equivalences of sites and constants provide the intended infrastructure."
+  },
+  {
+   "tool": "grep",
+   "query": "bounded.*constant.*model|constant.*model.*bounded",
+   "results": "0 hits: ",
+   "date": "2026-10-18",
+   "verdict": "No bounded-model transport theorem; equivalences of sites and constants provide the intended infrastructure."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Local bounded constant models on an etale site transport from its equivalent small category with lifted morphisms",
+   "results": "8 hits: AlgebraicGeometry.Scheme.smallEtaleTopology, CategoryTheory.instSmallCategoryAsSmall, CondensedSet.LocallyConstant.functorFullyFaithful, CategoryTheory.Grothendieck.compAsSmallFunctorEquivalence, CategoryTheory.Grothendieck.compAsSmallFunctorEquivalenceInverse, CategoryTheory.Equivalence.transportAndSheafify, CategoryTheory.Grothendieck.toTransport, CategoryTheory.Sheaf.isConstant_iff_of_equivalence",
+   "date": "2026-10-18",
+   "verdict": "No bounded-model transport theorem; the AsSmall category and sheaf equivalence infrastructure is available."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteRingDerivedLocalConstancy",
+  "date": "2026-10-18",
+  "group": "Q2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-amplification-proper",
+   "place": "proof (c), TOW: finite lisse cohomology gives local finite-module complex models; derived Hom descent between those models",
+   "via": [
+    "lem-weil-pbc-finite-ring-derived-local-constancy",
+    "lem-weil-pbc-normalized-constructible-local-effectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleSiteBoundedConstantModels",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleSiteBoundedConstantModels.lean",
+  "declaration": "AlgebraicGeometry.Etale.etale_site_bounded_constant_models",
+  "statement": "theorem etale_site_bounded_constant_models\n    (X : Scheme.{u}) (B : Type (u + 1)) [CommRing B] [Finite B]\n    (K : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} B)))\n    (a b : ℤ) (hab : a ≤ b)\n    (hvan : ∀ q : ℤ, q < a ∨ b < q → IsZero\n      ((DerivedCategory.homologyFunctor\n        (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} B)) q).obj K))\n    (hloc : ∀ (q : ℤ) (V : X.Etale),\n      ∃ (I : Type (u + 1)) (U : I → X.Etale) (f : ∀ i, U i ⟶ V),\n        Sieve.ofArrows U f ∈ X.smallEtaleTopology V ∧\n        ∀ i, ∃ M : ModuleCat.{u + 1} B, Module.Finite B M ∧ Nonempty\n          (((DerivedCategory.homologyFunctor\n            (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} B)) q).obj K).over (U i) ≅\n            (constantSheaf (X.smallEtaleTopology.over (U i))\n              (ModuleCat.{u + 1} B)).obj M)) :\n    ∃ 𝒰 : Cover.{u} etalePrecoverage X, ∀ i : 𝒰.I₀,\n      ∃ E : CochainComplex (ModuleCat.{u + 1} B) ℤ,\n        (∀ n : ℤ, Finite (E.X n)) ∧\n        (∀ n : ℤ, n < a ∨ b < n → IsZero (E.X n)) ∧ Nonempty\n          ((upperStar (ModuleCat.{u + 1} B) (𝒰.f i)).mapDerivedCategory.obj K ≅\n            DerivedCategory.Q.obj\n              (((constantSheaf (𝒰.X i).smallEtaleTopology\n                (ModuleCat.{u + 1} B)).mapHomologicalComplex (ComplexShape.up ℤ)).obj E))",
+  "branch": "sheaf-dag",
+  "by": "Q2",
+  "date": "2026-10-18"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261018T071212-L-1674751",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261018T071212-L-1674751",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

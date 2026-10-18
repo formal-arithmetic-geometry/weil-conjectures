@@ -1,0 +1,134 @@
+{
+ "id": "lem-weil-pbc-derived-mapping-presheaves-restriction",
+ "kind": "statement",
+ "title": "Restriction of derived mapping presheaves to an etale scheme",
+ "statement": "Let $X$ be a scheme with small etale site [def-weil-pbc-etale-site], let $B$ be a commutative ring, and let $K,L$ be objects of the derived category of etale $B$-module sheaves on $X$ [def-weil-abstract-derived-category]. Let $U$ be an etale $X$-scheme. Precompose each of the derived Hom and Isom presheaves [def-weil-pbc-etale-derived-map-presheaves] on $X$ with the functor from the small etale site of $U$ to the small etale site of $X$ which composes structure maps with $U\\to X$. The resulting presheaves are naturally isomorphic to the derived Hom and Isom presheaves of $K|_U,L|_U$, respectively. Restriction of objects is exact inverse image [lem-weil-pbc-inverse-image-composition].",
+ "stmt_deps": [
+  "def-weil-pbc-etale-site",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-etale-derived-map-presheaves",
+  "lem-weil-pbc-inverse-image-composition"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 094G lemma-locally-constant, 09BE lemma-locally-constant-map, and 08FR lemma-local-actual; Restriction of derived mapping presheaves to an etale scheme"
+ },
+ "proof": [
+  {
+   "text": "At an etale U-scheme V, the composition comparison for derived pullback identifies K restricted directly to V as an X-scheme with the pullback to V of K restricted to U. Conjugation by this comparison and the analogous comparison for L gives the bijections on Hom and Isom sets. Their inverses are conjugations by inverse comparisons.",
+   "uses": [
+    "def-weil-pbc-etale-derived-map-presheaves",
+    "lem-weil-pbc-inverse-image-composition"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Lift inverse-image associativity using a generic exact-functor calculation: mapDerivedCategoryNatIso preserves compositions, its whiskering comparisons are natural in both exact functors, and mapDerivedCategoryCompIso is associative. Apply this calculation to three etale pullbacks. The resulting comparison equation, followed by cancellation of inverse isomorphisms, proves naturality of conjugation on Hom sets. For Isom sets apply the same identity to their forward maps and use Iso.ext. Assemble both natural isomorphisms with NatIso.ofComponents.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-inverse-image-composition"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-etale-derived-map-presheaves",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-inverse-image-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "The finite-source Hom argument in lem-weil-pbc-finite-ring-derived-local-constancy; Restriction of derived mapping presheaves to an etale scheme"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Sheafification commutes with restriction to the slice site and equivalence of sites",
+   "results": "8 hits: CategoryTheory.Functor.IsDenseSubsite.sheafEquivSheafificationCompatibility, CategoryTheory.GrothendieckTopology.sheafifyCompIso_inv_eq_sheafifyLift, CategoryTheory.GrothendieckTopology.sheafificationWhiskerLeftIso, CategoryTheory.GrothendieckTopology.sheafificationWhiskerLeftIso_hom_app, CategoryTheory.GrothendieckTopology.toSheafify_comp_sheafifyCompIso_inv, CategoryTheory.GrothendieckTopology.sheafificationWhiskerRightIso_hom_app, CategoryTheory.GrothendieckTopology.sheafificationWhiskerLeftIso_inv_app, CategoryTheory.sheafifyComposeIso",
+   "date": "2026-10-18",
+   "verdict": "Sheafification compatibility is available and used in the parent; no derived mapping presheaf restriction theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "derivedHomPresheaf|derivedIsoPresheaf",
+   "results": "0 hits: ",
+   "date": "2026-10-18",
+   "verdict": "Sheafification compatibility is available and used in the parent; no derived mapping presheaf restriction theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pushforwardContinuousSheafificationCompatibility\"",
+   "results": "2 hits: CategoryTheory.Functor.pushforwardContinuousSheafificationCompatibility, CategoryTheory.Functor.pushforwardContinuousSheafificationCompatibility_hom_app_hom",
+   "date": "2026-10-18",
+   "verdict": "Sheafification compatibility is available and used in the parent; no derived mapping presheaf restriction theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sheafification of the presheaf of derived morphisms commutes with restriction to a localized site",
+   "results": "8 hits: TopCat.Presheaf.sheafify, PresheafOfModules.sheafification_map, CategoryTheory.plusPlusSheaf, TopCat.Presheaf.toSheafify, CategoryTheory.Sheaf.isColimitSheafifyCocone, CategoryTheory.preservesFiniteLimits_presheafToSheaf, CategoryTheory.GrothendieckTopology.sheafificationWhiskerLeftIso, CategoryTheory.sheafifyComposeIso",
+   "date": "2026-10-18",
+   "verdict": "Sheafification compatibility is available and used in the parent; no derived mapping presheaf restriction theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteRingDerivedLocalConstancy",
+  "date": "2026-10-18",
+  "group": "Q2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-amplification-proper",
+   "place": "proof (c), TOW: finite lisse cohomology gives local finite-module complex models; derived Hom descent between those models",
+   "via": [
+    "lem-weil-pbc-finite-ring-derived-local-constancy",
+    "lem-weil-pbc-normalized-constructible-local-effectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DerivedMappingPresheavesRestriction",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedMappingPresheavesRestriction.lean",
+  "declaration": "AlgebraicGeometry.Etale.derived_mapping_presheaves_restriction",
+  "statement": "theorem derived_mapping_presheaves_restriction\n    (X : Scheme.{u}) (B : Type (u + 1)) [CommRing B]\n    (K L : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} B)))\n    (U : X.Etale) :\n    Nonempty\n      ((Scheme.Etale.etaleToOver U).op ⋙ (Over.forget U).op ⋙ derivedHomPresheaf B K L ≅\n        derivedHomPresheaf B\n          ((upperStar (ModuleCat.{u + 1} B) U.hom).mapDerivedCategory.obj K)\n          ((upperStar (ModuleCat.{u + 1} B) U.hom).mapDerivedCategory.obj L)) ∧\n    Nonempty\n      ((Scheme.Etale.etaleToOver U).op ⋙ (Over.forget U).op ⋙ derivedIsoPresheaf B K L ≅\n        derivedIsoPresheaf B\n          ((upperStar (ModuleCat.{u + 1} B) U.hom).mapDerivedCategory.obj K)\n          ((upperStar (ModuleCat.{u + 1} B) U.hom).mapDerivedCategory.obj L))",
+  "branch": "sheaf-dag",
+  "by": "Q2",
+  "date": "2026-10-18"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261018T071212-L-1674751",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261018T071212-L-1674751",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
