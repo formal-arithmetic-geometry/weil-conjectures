@@ -230,14 +230,16 @@ variable {k : Type u} [Field k] {X Y : Over (Spec (.of k))} (f : X ⟶ Y) {Φ : 
 
 /-- A sum over the points of `X` fixed by `Φ` is the sum over the points `y` of `Y` fixed by
 `Φ_Y` of the sums over the points of the fibres `X_y` fixed by `Φ_y`. -/
-lemma sum_fixedPoint_eq_sum_sum_fibre {M : Type*} [AddCommMonoid M] (F : RationalPoint X → M)
+lemma sum_fixedPoint_eq_sum_sum_fibre {M : Type*} [AddCommMonoid M]
+    (F : {x : RationalPoint X // x ≫ Φ = x} → M)
     [Fintype {x : RationalPoint X // x ≫ Φ = x}] [Fintype {y : RationalPoint Y // y ≫ ΦY = y}]
     [∀ y : {y : RationalPoint Y // y ≫ ΦY = y},
       Fintype {z : RationalPoint (fibre f y.1) // z ≫ fibreFrobenius f hf y.1 y.2 = z}] :
-    ∑ x : {x : RationalPoint X // x ≫ Φ = x}, F x.1 =
+    ∑ x : {x : RationalPoint X // x ≫ Φ = x}, F x =
       ∑ y : {y : RationalPoint Y // y ≫ ΦY = y},
         ∑ z : {z : RationalPoint (fibre f y.1) // z ≫ fibreFrobenius f hf y.1 y.2 = z},
-          F (z.1 ≫ fibreι f y.1) := by
+          F ⟨z.1 ≫ fibreι f y.1, by
+            rw [Category.assoc, ← fibreFrobenius_ι f hf y.1 y.2, ← Category.assoc, z.2]⟩ := by
   classical
   let g : {x : RationalPoint X // x ≫ Φ = x} → {y : RationalPoint Y // y ≫ ΦY = y} :=
     fun x ↦ ⟨x.1 ≫ f, by rw [Category.assoc, ← hf, ← Category.assoc, x.2]⟩
@@ -440,6 +442,55 @@ lemma trace_weilStalkFrobenius_weilPushforward [IsSepClosed k] (K : WeilBoundedC
   rw [← WeilBoundedConstructible.trace_stalkFrobenius_one _ z.1 hz1 z.2,
     WeilBoundedConstructible.trace_stalkFrobenius_weilUpperStar,
     WeilBoundedConstructible.trace_stalkFrobenius_one]
+
+/-- The fibration step for Weil objects: if the degree one trace formula holds for the Weil
+`!`-pushforward of `K` along `f` and for the restrictions of `K` to the fibres of `f` over the
+points fixed by `Φ_Y`, it holds for `K`. -/
+theorem traceFormulaOne_of_weilPushforward [IsSepClosed k] (K : WeilBoundedConstructible ℓ Φ)
+    [Finite {y : RationalPoint Y // y ≫ ΦY = y}]
+    (hY : ((weilLowerShriekOfFrobenius ℓ Φ ΦY f (IsPullback.of_hasPullback f ΦY)
+      (relativeFrobenius f hf) (relativeFrobenius_fst f hf)
+      (relativeFrobenius_snd f hf)).obj K).TraceFormulaOne)
+    (hfin : ∀ (y : RationalPoint Y) (hy : y ≫ ΦY = y),
+      IsFinite (fibreFrobenius f hf y hy).left ∧
+        IsUniversalHomeomorphism (fibreFrobenius f hf y hy).left)
+    (hfib : ∀ (y : RationalPoint Y) (hy : y ≫ ΦY = y),
+      haveI := (hfin y hy).1
+      haveI := (hfin y hy).2
+      ((weilUpperStar ℓ (fibreFrobenius f hf y hy) Φ (fibreι f y)
+        (fibreFrobenius_ι f hf y hy)).obj K).TraceFormulaOne) :
+    K.TraceFormulaOne := by
+  classical
+  intro _ iX _
+  let _ := Fintype.ofFinite {y : RationalPoint Y // y ≫ ΦY = y}
+  let _ (y : {y : RationalPoint Y // y ≫ ΦY = y}) :
+      Fintype {z : RationalPoint (fibre f y.1) // z ≫ fibreFrobenius f hf y.1 y.2 = z} :=
+    Fintype.ofEquiv _ (fibreFixedPointEquiv f hf y.1 y.2)
+  let hLc : HasRightDual
+      ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint Y)).obj
+        ((weilLowerShriekOfFrobenius ℓ Φ ΦY f (IsPullback.of_hasPullback f ΦY)
+          (relativeFrobenius f hf) (relativeFrobenius_fst f hf)
+          (relativeFrobenius_snd f hf)).obj K).carrier) :=
+    (WeilBoundedConstructible.nonempty_hasRightDual_compactCohomology _).some
+  let hLs (y : RationalPoint Y) : HasRightDual
+      ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ y).obj
+        ((weilLowerShriekOfFrobenius ℓ Φ ΦY f (IsPullback.of_hasPullback f ΦY)
+          (relativeFrobenius f hf) (relativeFrobenius_fst f hf)
+          (relativeFrobenius_snd f hf)).obj K).carrier) :=
+    (WeilBoundedConstructible.nonempty_hasRightDual_stalk _ y).some
+  have hYeq : trace ((weilLowerShriekOfFrobenius ℓ Φ ΦY f (IsPullback.of_hasPullback f ΦY)
+      (relativeFrobenius f hf) (relativeFrobenius_fst f hf)
+      (relativeFrobenius_snd f hf)).obj K).compactFrobenius =
+      ∑ y : {y : RationalPoint Y // y ≫ ΦY = y},
+        trace (((weilLowerShriekOfFrobenius ℓ Φ ΦY f (IsPullback.of_hasPullback f ΦY)
+          (relativeFrobenius f hf) (relativeFrobenius_fst f hf)
+          (relativeFrobenius_snd f hf)).obj K).weilStalkFrobenius y.1 y.2) := hY
+  rw [← trace_compactFrobenius_weilPushforward f hf K (hL := hLc) (hK := iX), hYeq,
+    sum_fixedPoint_eq_sum_sum_fibre f hf (fun x ↦ trace (K.weilStalkFrobenius x.1 x.2))]
+  refine Finset.sum_congr rfl fun y _ ↦ ?_
+  have := (hfin y.1 y.2).1
+  have := (hfin y.1 y.2).2
+  exact trace_weilStalkFrobenius_weilPushforward f hf y.1 y.2 K (hfib y.1 y.2) (hL := hLs y.1)
 
 end Pushforward
 
