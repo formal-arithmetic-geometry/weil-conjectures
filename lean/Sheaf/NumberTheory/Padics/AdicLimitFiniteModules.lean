@@ -15,9 +15,7 @@ import Mathlib.NumberTheory.Padics.ProperSpace
 import Mathlib.Analysis.Normed.Module.FiniteDimension
 import Mathlib.RingTheory.AdicCompletion.Noetherian
 import Sheaf.Paper.AdicTowerReconstruction
-import Sheaf.RingTheory.FiniteModuleComplete
 import Sheaf.RingTheory.FiniteOverCompleteRing
-import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
 import WeilConjectures.RingTheory.FiniteModuleComplete
 
 /-!
@@ -296,7 +294,60 @@ theorem adicLimit_finite_modules (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
         (letI : ∀ j : ℕᵒᵖ, TopologicalSpace (F.obj j) := fun _ ↦ ⊥
          TopologicalSpace.induced (fun x : S ↦ x.val) inferInstance =
            (coefficientExtensionMaximalIdeal l E).adicModuleTopology S) := by
-  sorry
+  classical
+  intro R I F hfin hkill ht S
+  let p (n : ℕ) : S →ₗ[R] F.obj (op n) := (LinearMap.proj (op n)).comp S.subtype
+  have hp (n : ℕ) :
+      (F.map (homOfLE (Nat.le_succ n)).op).hom.comp (p (n + 1)) = p n := by
+    ext x
+    exact x.property (homOfLE (Nat.le_succ n)).op
+  have hlim (x : ∀ n : ℕ, F.obj (op n))
+      (hx : ∀ n, (F.map (homOfLE (Nat.le_succ n)).op).hom (x (n + 1)) = x n) :
+      ∃! y : S, ∀ n, p n y = x n := by
+    refine ⟨⟨fun j ↦ x j.unop, compatible_sections F x hx⟩, fun _ ↦ rfl, ?_⟩
+    intro y hy
+    apply Subtype.ext
+    funext j
+    exact hy j.unop
+  obtain ⟨he, _, hh, htop⟩ := Ideal.adic_tower_reconstruction I
+    (Submodule.fg_span_singleton _) (fun n ↦ F.obj (op n))
+    (fun n ↦ (F.map (homOfLE (Nat.le_succ n)).op).hom) hkill ht S p hp hlim
+  have hproj (n : ℕ) : Function.Surjective (p n) ∧
+      LinearMap.ker (p n) = I ^ (n + 1) • (⊤ : Submodule R S) := by
+    obtain ⟨e, he⟩ := he n
+    constructor
+    · intro x
+      obtain ⟨y, rfl⟩ := e.surjective x
+      obtain ⟨y, rfl⟩ := Submodule.mkQ_surjective _ y
+      exact ⟨y, (he y).symm⟩
+    · ext x
+      rw [LinearMap.mem_ker, ← he x, ← e.map_zero, e.injective.eq_iff]
+      exact Submodule.Quotient.mk_eq_zero _
+  have h := (extension_integers_dvr l E (coefficientExtensionAbsoluteValue l E)
+    (spectralNorm_extends (K := ℚ_[l]) (L := E))).choose_spec.choose_spec
+  have hIJ : I = coefficientExtensionMaximalIdeal l E :=
+    h.2.2.2.2.2.2.2.2.2.2.2.2.2.1.choose_spec
+  let : IsAdicComplete I R := hIJ.symm ▸ coefficientIntegers_complete l E
+  let : IsHausdorff I S := hh
+  let : Module.Finite R (F.obj (op 0)) := hfin 0
+  obtain ⟨e, _⟩ := he 0
+  change (S ⧸ (I ^ 1 • ⊤ : Submodule R S)) ≃ₗ[R] F.obj (op 0) at e
+  rw [pow_one] at e
+  have hfinite : Module.Finite R (S ⧸ (I • ⊤ : Submodule R S)) :=
+    Module.Finite.equiv e.symm
+  let : Module.Finite R (S ⧸ (I • ⊤ : Submodule R S)) := hfinite
+  let : Module.Finite (R ⧸ I) (S ⧸ (I • ⊤ : Submodule R S)) :=
+    Module.Finite.of_restrictScalars_finite R _ _
+  refine ⟨(Module.finite_and_span_eq_top_of_adicComplete I S).1, hproj, ?_⟩
+  let : ∀ j : ℕᵒᵖ, TopologicalSpace (F.obj j) := fun _ ↦ ⊥
+  rw [induced_to_pi, ← hIJ, ← htop]
+  apply le_antisymm
+  · apply le_iInf
+    intro n
+    exact iInf_le_of_le (op n) le_rfl
+  · apply le_iInf
+    intro j
+    exact iInf_le_of_le j.unop le_rfl
 
 /-- Completeness, quotient towers, and Hom comparison for finite integral modules.
 
