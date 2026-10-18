@@ -35,6 +35,8 @@ theorem affine_finiteType_algebra_of_field {k : Type u} [Field k] {Y : Scheme.{u
     [IsAffine Y] (f : Y ⟶ Spec (.of k)) [LocallyOfFiniteType f] [QuasiCompact f] :
     (letI := ((f.appTop).hom.comp (Scheme.ΓSpecIso (.of k)).inv.hom).toAlgebra
      Algebra.FiniteType k Γ(Y, ⊤)) := by
-  sorry
+  exact (HasRingHomProperty.appTop (P := @LocallyOfFiniteType) f inferInstance).comp
+    (RingHom.FiniteType.of_surjective _
+      (Scheme.ΓSpecIso (.of k)).symm.commRingCatIsoToRingEquiv.surjective)
 
 end AlgebraicGeometry
