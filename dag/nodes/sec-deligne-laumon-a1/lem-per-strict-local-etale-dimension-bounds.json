@@ -2,7 +2,7 @@
  "id": "lem-per-strict-local-etale-dimension-bounds",
  "kind": "statement",
  "title": "Support-sensitive etale dimension bounds on strict local schemes",
- "statement": "Let $\\ell$ be prime, $n\\geq1$, $\\Lambda=\\mathbf Z/\\ell^n\\mathbf Z$, and $S$ a Noetherian excellent strictly henselian local scheme of finite dimension $d$, with closed point $s$ and $\\ell$ invertible [def-exc-excellent-ring], [def-weil-pbc-henselian-terminology], [def-weil-pbc-krull-dimension-ring]. Put $U=S\\setminus\\{s\\}$. Cohomology is ordinary small etale cohomology and supported cohomology is the right derived closed-support functor [def-weil-pbc-derived-categories], [def-pur-etale-derived-supported-sections]. If $F$ is a sheaf of $\\Lambda$-modules on $U$ and every point $u$ with nonzero geometric stalk $F_{\\bar u}$ has closure in $S$ of dimension at most $e$, then $H^q(U,F)=0$ for $q\\geq2e$. In particular, for every sheaf $G$ of $\\Lambda$-modules on $S$, $H^q_s(S,G)=0$ for $q>2d$. If $S$ is integral, with generic point $\\eta$, then $H^q(\\eta,L)=0$ for every etale sheaf $L$ of $\\Lambda$-modules and every $q>d$ [def-pc-integral-scheme].",
+ "statement": "Let $\\ell$ be prime, $n\\geq1$, $\\Lambda=\\mathbf Z/\\ell^n\\mathbf Z$, and $S$ a Noetherian excellent strictly henselian local scheme of finite dimension $d$, with closed point $s$ and $\\ell$ invertible [def-exc-excellent-ring], [def-weil-pbc-henselian-terminology], [def-weil-pbc-krull-dimension-ring]. Put $U=S\\setminus\\{s\\}$. Cohomology is ordinary small etale cohomology and supported cohomology is the right derived closed-support functor [def-weil-pbc-derived-categories], [def-pur-etale-derived-supported-sections]. If $F$ is a sheaf of $\\Lambda$-modules on $U$ and every point $u$ with nonzero geometric stalk $F_{\\bar u}$ has closure in $S$ of dimension at most an integer $e\\geq0$, then $H^q(U,F)=0$ for $q\\geq2e$. In particular, for every sheaf $G$ of $\\Lambda$-modules on $S$, $H^q_s(S,G)=0$ for $q>2d$. If $S$ is integral, with generic point $\\eta$, then $H^q(\\eta,L)=0$ for every etale sheaf $L$ of $\\Lambda$-modules and every $q>d$ [def-pc-integral-scheme].",
  "source": {
   "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
   "place": "Expose XVII, Propositions 3.2.1 and 3.2.2, printed pp. 268–269; extend from F_ell to Z/ell^n by the finite filtration by powers of ell"
@@ -13,11 +13,186 @@
   "def-weil-pbc-krull-dimension-ring",
   "def-weil-pbc-derived-categories",
   "def-pur-etale-derived-supported-sections",
-  "def-pc-integral-scheme"
+  "def-pc-integral-scheme",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-geometric-stalks",
+  "def-weil-pbc-etale-cohomology"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The Noetherian scheme $U$ is quasi-compact and quasi-separated. Since $\\Lambda$ is finite, [lem-weil-pbc-module-sheaf-colimit-constructible] expresses $F$ as a small filtered colimit $F=\\varinjlim_a C_a$ of constructible $\\Lambda$-module sheaves with structure maps $a_a:C_a\\to F$. These maps need not be injective; replace their sources by their images as follows.",
+   "uses": [
+    "lem-weil-pbc-module-sheaf-colimit-constructible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, proof of Proposition 3.2.1: constructible reduction"
+   }
+  },
+  {
+   "text": "Put $K_a=\\ker(a_a)$ and $D_a=\\operatorname{im}(a_a)=C_a/K_a\\subseteq F$. By [lem-weil-pbc-constructible-subobjects-noetherian], $K_a$ is constructible; [thm-constructible-serre] makes its cokernel $D_a$ constructible. Each transition $C_a\\to C_b$ induces $D_a\\to D_b$ over $F$. Also $F=\\varinjlim_a D_a$: a compatible cocone from the $D_a$ induces one from the $C_a$, hence a unique map from $F$; its restrictions to $D_a$ are the given maps since $C_a\\to D_a$ is epimorphic. Exact forgetting [lem-weil-pbc-module-sheaves-colimits-forgetful] and exact geometric stalks [prop-weil-pbc-geometric-stalks-exact] show that $(D_a)_{\\bar u}\\hookrightarrow F_{\\bar u}$. Thus every $D_a$ satisfies the original support hypothesis. By [lem-weil-pbc-cohomology-filtered-colimit] and [lem-weil-pbc-etale-module-cohomology-forget],\n$$H^q(U,F)\\cong\\varinjlim_a H^q(U,D_a).$$\nIt suffices to prove the bound for a constructible subsheaf $C=D_a$.",
+   "uses": [
+    "lem-weil-pbc-constructible-subobjects-noetherian",
+    "thm-constructible-serre",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "prop-weil-pbc-geometric-stalks-exact",
+    "lem-weil-pbc-cohomology-filtered-colimit",
+    "lem-weil-pbc-etale-module-cohomology-forget"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, proof of Proposition 3.2.1: filtered union of constructible subsheaves"
+   }
+  },
+  {
+   "text": "Use the finite locally constant stratification of $C$ from [def-weil-pbc-etale-constructible-sheaf], refined to irreducible strata by [lem-weil-pbc-irreducible-refinement-topological]. On each stratum, the zero and nonzero stalk loci are both open: an etale trivializing cover is open and its constant values are either zero or nonzero. Irreducibility makes one locus empty. Hence the support is the union of finitely many nonzero strata $T_j$. By [lem-sc-scheme-sober] applied to each irreducible stratum, let $u_j$ be the generic point of $T_j$; it has nonzero stalk. Since $T_j$ is locally closed, $\\overline{T_j}^{S}=\\overline{\\{u_j\\}}^{S}$, of dimension at most $e$. Thus the reduced closed subscheme\n$$Z=\\overline{\\operatorname{Supp}(C)}^{S}=\\bigcup_j\\overline{\\{u_j\\}}^{S}$$\nhas dimension $r\\le e$: an irreducible member of a chain of closed irreducible subsets of this finite union lies in one member, so its chain length is bounded by that member's dimension. If $C=0$ there is nothing to prove. Otherwise $Z$ is nonempty and contains $s$.",
+   "uses": [
+    "def-weil-pbc-etale-constructible-sheaf",
+    "lem-weil-pbc-irreducible-refinement-topological",
+    "lem-sc-scheme-sober"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, proof of Proposition 3.2.1: closure of constructible support"
+   }
+  },
+  {
+   "text": "Set $V=Z\\cap U=Z\\setminus\\{s\\}$ and let $i:V\\hookrightarrow U$ be the closed immersion. Since all geometric stalks of $C$ outside $V$ vanish, [lem-kun-04ca] identifies its underlying abelian sheaf with $i_*C_V$, where $C_V=i^{-1}C$. This closed immersion is finite; $C_V$ is killed by $\\ell^n$. Therefore [lem-fd-finite-pushforward-cohomology], with [lem-weil-pbc-etale-module-cohomology-forget], gives\n$$H^q(U,C)\\cong H^q(V,C_V).$$",
+   "uses": [
+    "lem-kun-04ca",
+    "lem-fd-finite-pushforward-cohomology",
+    "lem-weil-pbc-etale-module-cohomology-forget"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, proof of Proposition 3.2.1: finite pushforward from the support"
+   }
+  },
+  {
+   "text": "Write $S=\\operatorname{Spec}A$ and $Z=\\operatorname{Spec}R$ for the local quotient $R=A/I$; since $Z$ is nonempty, $I\\subseteq\\mathfrak m_A$. The quotient is excellent by [lem-exc-finite-type-localization-excellent] (it is generated by the image of $A$ as an $A$-algebra), and strictly henselian by [lem-weil-pbc-strictly-henselian-quotient]. It has dimension $r$. By [lem-weil-pbc-noetherian-local-system-of-parameters] choose $f_1,\\ldots,f_r\\in\\mathfrak m_R$ with $\\sqrt{(f_1,\\ldots,f_r)}=\\mathfrak m_R$. Then\n$$V=\\bigcup_{i=1}^r D_Z(f_i).$$\nIndeed a prime containing all the $f_i$ contains their radical and hence is the maximal ideal; all other primes omit a parameter. If $r=0$, the radical of the zero ideal is the maximal ideal, so $Z$ has only its closed point and $V$ is empty. This case already has zero cohomology in every nonnegative degree.",
+   "uses": [
+    "lem-exc-finite-type-localization-excellent",
+    "lem-weil-pbc-strictly-henselian-quotient",
+    "lem-weil-pbc-noetherian-local-system-of-parameters"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, proof of Proposition 3.2.1: system-of-parameters affine cover"
+   }
+  },
+  {
+   "text": "Suppose $r\\ge1$. Every intersection indexed by distinct indices $i_0<\\cdots<i_p$ is\n$$D_Z(f_{i_0})\\cap\\cdots\\cap D_Z(f_{i_p})=D_Z(f_{i_0}\\cdots f_{i_p}),$$\nas a prime omits a product exactly when it omits every factor. This is an affine open of the excellent strictly henselian local scheme $Z$, with $\\ell$ still invertible. Applying [lem-per-affine-open-strict-local-cd] to $C_V$ on each such open makes all its cohomology in degrees $b>r$ zero. Apply [lem-sc-cech-spectral] on the small etale site of $V$ to the $r$-member covering and the underlying abelian sheaf of $C_V$. By [lem-weil-pbc-etale-cohomology-over-open], cohomology over each site object is the displayed cohomology on its open subscheme. In the alternating Cech complex, use the increasing-index terms\n$$\\prod_{i_0<\\cdots<i_p}H^b(D_Z(f_{i_0}\\cdots f_{i_p}),C_V).$$\nThese are zero for $p\\ge r$, since no such tuple exists, and for $b>r$, by the affine bound. Thus $E_2^{p,b}=0$ when $p+b\\ge2r$: either $p\\ge r$ or $b>r$. The first-quadrant spectral sequence gives a finite filtration of $H^q(V,C_V)$ whose graded pieces all vanish for $q\\ge2r$. Hence $H^q(V,C_V)=0$ in that range.",
+   "uses": [
+    "lem-per-affine-open-strict-local-cd",
+    "lem-sc-cech-spectral",
+    "lem-weil-pbc-etale-cohomology-over-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, proof of Proposition 3.2.1: affine intersections and Cech/Mayer–Vietoris bound"
+   }
+  },
+  {
+   "text": "For $q\\ge2e$, one has $q\\ge2r$. Steps 4–6 give $H^q(U,C)=H^q(V,C_V)=0$ for every constructible subsheaf $C=D_a$. Step 2 then gives $H^q(U,F)=\\varinjlim_a0=0$. This proves the punctured bound directly for the original coefficients $\\Lambda=\\mathbf Z/\\ell^n\\mathbf Z$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, Proposition 3.2.1: conclusion of the punctured bound"
+   }
+  },
+  {
+   "text": "For a sheaf $G$ on $S$, its restriction to $U$ satisfies the first assertion with $e=d$, since every closure in $S$ has dimension at most $d$. The strict-local acyclicity statement [lem-weil-pbc-strictly-henselian-etale-acyclic] gives $H^a(S,G)=0$ for $a>0$ on underlying abelian sheaves. The support exact sequence [thm-pur-with-support-exactness] contains $H^{q-1}(U,G|_U)\\to H_s^q(S,G)\\to H^q(S,G)$. The module support functor in the statement agrees, after forgetting scalars, with this abelian support functor by [lem-pur-module-restriction-kernel-comparison], applied to the open monomorphism $U\\to S$ in the small etale site. If $d\\ge1$ and $q>2d$, then $q-1\\ge2d$ and both outer terms vanish. If $d=0$, the local scheme has just its closed point, so $U$ is empty; for every $q>0$ the two outer terms again vanish. Thus $H_s^q(S,G)=0$ for $q>2d$, including the zero-dimensional case.",
+   "uses": [
+    "lem-weil-pbc-strictly-henselian-etale-acyclic",
+    "thm-pur-with-support-exactness",
+    "lem-pur-module-restriction-kernel-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, Proposition 3.2.1: supported-cohomology consequence"
+   }
+  },
+  {
+   "text": "Now suppose $S$ integral and write $S=\\operatorname{Spec}A$. Its generic residue field is $K=\\operatorname{Frac}A$ by [lem-sc-integral-function-field-affine-fraction]. Index the nonzero elements $f\\in A$ by divisibility, so $f\\preceq g$ when $g=fh$; this is a small directed preorder because $f,g\\preceq fg$. The corresponding inverse system consists of $V_f=D(f)=\\operatorname{Spec}A_f$, with affine transition inclusions $V_g\\to V_f$. By [lem-weil-pbc-localization-colimit-principal-localizations], $K=\\varinjlim_{f\\ne0}A_f$. The affine-limit clause of [lem-weil-pbc-limit-affine-transition] therefore identifies $\\operatorname{Spec}K=\\eta$ with $\\varprojlim_{f\\ne0}V_f$. All stages are affine, hence quasi-compact and quasi-separated. Passing to any tail $f\\preceq g$ leaves the same colimit: every denominator $h$ occurs after the stage $fh$.",
+   "uses": [
+    "lem-sc-integral-function-field-affine-fraction",
+    "lem-weil-pbc-localization-colimit-principal-localizations",
+    "lem-weil-pbc-limit-affine-transition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, proof of Proposition 3.2.2: presentation of the generic point as a limit of affine opens"
+   }
+  },
+  {
+   "text": "Let $C$ be a constructible sheaf of $\\Lambda$-modules on $\\eta$. By [lem-weil-pbc-constructible-module-limit-descent], there is a stage $V_f$ and a constructible sheaf $C_f$ whose pullback to $\\eta$ is $C$. On the tail $f\\preceq g$ let $C_g=C_f|_{V_g}$. Each $V_g$ is an affine open of the original excellent strictly henselian local scheme $S$, so [lem-per-affine-open-strict-local-cd] gives $H^q(V_g,C_g)=0$ for $q>d$. Apply [lem-weil-pbc-etale-cohomology-limit-of-schemes] to this system of underlying abelian sheaves, using the affine transitions and limit verified in Step 9. It gives $H^q(\\eta,C)\\cong\\varinjlim_{g\\succeq f}H^q(V_g,C_g)=0$ for $q>d$.",
+   "uses": [
+    "lem-weil-pbc-constructible-module-limit-descent",
+    "lem-per-affine-open-strict-local-cd",
+    "lem-weil-pbc-etale-cohomology-limit-of-schemes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, proof of Proposition 3.2.2: affine bound and continuity"
+   }
+  },
+  {
+   "text": "Finally let $L$ be an arbitrary sheaf of $\\Lambda$-modules on $\\eta$. Since $\\eta$ is affine and $\\Lambda$ is finite, [lem-weil-pbc-module-sheaf-colimit-constructible] writes $L=\\varinjlim_\\alpha C_\\alpha$ as a small filtered colimit of constructible module sheaves. By the fixed-constant-ring clause of [lem-weil-pbc-cohomology-filtered-colimit], and the module-to-abelian comparison [lem-weil-pbc-etale-module-cohomology-forget], one has $H^q(\\eta,L)\\cong\\varinjlim_\\alpha H^q(\\eta,C_\\alpha)$. For $q>d$ every term is zero by Step 10, so the colimit is zero. This proves the generic-point assertion for every $L$, with the original prime-power coefficients.",
+   "uses": [
+    "lem-weil-pbc-module-sheaf-colimit-constructible",
+    "lem-weil-pbc-cohomology-filtered-colimit",
+    "lem-weil-pbc-etale-module-cohomology-forget"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, Proposition 3.2.2: extension to arbitrary finite-ring module sheaves"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-module-sheaf-colimit-constructible",
+  "lem-weil-pbc-constructible-subobjects-noetherian",
+  "thm-constructible-serre",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "prop-weil-pbc-geometric-stalks-exact",
+  "lem-weil-pbc-cohomology-filtered-colimit",
+  "lem-weil-pbc-etale-module-cohomology-forget",
+  "def-weil-pbc-etale-constructible-sheaf",
+  "lem-weil-pbc-irreducible-refinement-topological",
+  "lem-sc-scheme-sober",
+  "lem-kun-04ca",
+  "lem-fd-finite-pushforward-cohomology",
+  "lem-exc-finite-type-localization-excellent",
+  "lem-weil-pbc-strictly-henselian-quotient",
+  "lem-weil-pbc-noetherian-local-system-of-parameters",
+  "lem-per-affine-open-strict-local-cd",
+  "lem-sc-cech-spectral",
+  "lem-weil-pbc-etale-cohomology-over-open",
+  "lem-weil-pbc-strictly-henselian-etale-acyclic",
+  "thm-pur-with-support-exactness",
+  "lem-pur-module-restriction-kernel-comparison",
+  "lem-sc-integral-function-field-affine-fraction",
+  "lem-weil-pbc-localization-colimit-principal-localizations",
+  "lem-weil-pbc-limit-affine-transition",
+  "lem-weil-pbc-constructible-module-limit-descent",
+  "lem-weil-pbc-etale-cohomology-limit-of-schemes"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose XVII, Propositions 3.2.1 and 3.2.2, printed pp. 268–269; the punctured bound is proved internally by constructible reduction, support closure, parameter cover, affine bound and Cech/Mayer–Vietoris"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -53,7 +228,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-normal-top-residue-class",
@@ -65,7 +240,7 @@
  "blueprint": {
   "from": {
    "node": "lem-per-artin-gabber-affine-curve",
-   "place": "Proof Step 1: dimension-normalized Verdier duality and the middle t-structure (historically Step 3 when this child was created); the finite-coefficient potential-dualizing construction underlying the qbar generic duality model. Supporting the normal top-class argument: Expose XVII, Propositions 3.2.1 and 3.2.2, printed pp. 268–269; extend from F_ell to Z/ell^n by the finite filtration by powers of ell",
+   "place": "Proof Step 1: dimension-normalized Verdier duality and the middle t-structure (historically Step 3 when this child was created); the finite-coefficient potential-dualizing construction underlying the qbar generic duality model. Supporting the normal top-class argument: Expose XVII, Propositions 3.2.1 and 3.2.2, printed pp. 268–269; the punctured support estimate is proved for Z/ell^n directly by the constructible-support and affine-cover argument",
    "via": [
     "lem-per-normal-top-residue-class",
     "lem-per-normal-pinned-extension",
@@ -77,5 +252,129 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-strict-local-etale-dimension-bounds",
+  "worker": "stage1",
+  "summary": "Repair C6/D4: remove the cyclic punctured-support citation and the unnecessary ell-adic filtration. Prove the punctured estimate directly for prime-power coefficients: constructible colimit, constructible images with support contained in that of F, closure of support of dimension r <= e, finite pushforward, parameter cover by r principal opens, affine bound on their intersections, and alternating Cech spectral sequence. Retain the checked supported-cohomology and generic-limit arguments. Keep the sole new affine-open bound as a statement-only node.",
+  "blueprint": "Proof Step 1: dimension-normalized Verdier duality and the middle t-structure (historically Step 3 when this child was created); the finite-coefficient potential-dualizing construction underlying the qbar generic duality model. Supporting the normal top-class argument: Expose XVII, Propositions 3.2.1 and 3.2.2, printed pp. 268–269; the punctured support estimate is proved for Z/ell^n directly by the constructible-support and affine-cover argument",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-module-sheaf-colimit-constructible",
+    "why": "Express arbitrary finite-ring module sheaves as constructible filtered colimits on qcqs schemes in Steps 1 and 11; the unit gives no such sheaf presentation."
+   },
+   {
+    "node": "lem-weil-pbc-constructible-subobjects-noetherian",
+    "why": "The kernel inside a constructible approximation is constructible on the Noetherian U, in Step 2; a generic constructibility input, absent from the unit."
+   },
+   {
+    "node": "thm-constructible-serre",
+    "why": "The quotient by that constructible kernel is constructible in Step 2; a generic sheaf-category input absent from the unit."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "why": "Forget module coefficients exactly to compute images on abelian stalks in Step 2; the unit supplies no coefficient comparison."
+   },
+   {
+    "node": "lem-weil-pbc-cohomology-filtered-colimit",
+    "why": "Commute qcqs cohomology with the filtered colimits in Steps 2 and 11; this generic continuity result is not a unit-specific step."
+   },
+   {
+    "node": "lem-weil-pbc-etale-module-cohomology-forget",
+    "why": "Compare ordinary module cohomology and underlying abelian cohomology in Steps 2, 4 and 11; the unit supplies no scalar-forgetting theorem."
+   },
+   {
+    "node": "lem-weil-pbc-irreducible-refinement-topological",
+    "why": "Refine a constructible finite stratification into irreducible strata in Step 3; this Noetherian topological tool is absent from the unit."
+   },
+   {
+    "node": "lem-kun-04ca",
+    "why": "Identify a small-etale sheaf supported on the closed subscheme with its closed direct image in Step 4, without a field-base assumption; no unit node supplies this."
+   },
+   {
+    "node": "lem-fd-finite-pushforward-cohomology",
+    "why": "Finite pushforward preserves cohomology of torsion sheaves in Step 4; the unit does not contain this general finite-morphism tool."
+   },
+   {
+    "node": "lem-exc-finite-type-localization-excellent",
+    "why": "A quotient of the excellent local ring is excellent in Step 5; no unit theorem replaces this commutative-algebra input."
+   },
+   {
+    "node": "lem-weil-pbc-strictly-henselian-quotient",
+    "why": "The local quotient defining the support remains strictly henselian in Step 5; this local-algebra tool is not supplied by the unit."
+   },
+   {
+    "node": "lem-sc-cech-spectral",
+    "why": "Pass from the affine-intersection vanishing to the finite-cover cohomology bound in Step 6; no unit node supplies this general site spectral sequence."
+   },
+   {
+    "node": "lem-weil-pbc-strictly-henselian-etale-acyclic",
+    "why": "Vanishing of all higher strict-local cohomology in Step 8; this is a general etale-site tool, absent from the unit."
+   },
+   {
+    "node": "thm-pur-with-support-exactness",
+    "why": "Use the long exact support sequence in Step 8; the unit does not provide the general torsion support sequence."
+   },
+   {
+    "node": "lem-pur-module-restriction-kernel-comparison",
+    "why": "Identify module supported cohomology with abelian support cohomology in Step 8; ordinary cohomology comparison alone is insufficient."
+   },
+   {
+    "node": "lem-weil-pbc-localization-colimit-principal-localizations",
+    "why": "Present the fraction field by principal localizations in Step 9; generic local algebra, with no replacement in the unit."
+   },
+   {
+    "node": "lem-weil-pbc-limit-affine-transition",
+    "why": "Present the generic spectrum as the inverse limit of the affine opens in Step 9; the unit has no general affine-limit theorem."
+   },
+   {
+    "node": "lem-weil-pbc-constructible-module-limit-descent",
+    "why": "Descend a constructible finite-coefficient sheaf from eta to a principal open in Step 10; a general scheme-limit tool absent from the unit."
+   },
+   {
+    "node": "lem-weil-pbc-etale-cohomology-limit-of-schemes",
+    "why": "Compute cohomology on eta by the affine-tail limit in Step 10; the unit has no corresponding continuity theorem."
+   },
+   {
+    "node": "lem-sc-scheme-sober",
+    "why": "Give the generic point of each irreducible support stratum in Step 3; the unit does not supply this general scheme-topology fact."
+   },
+   {
+    "node": "lem-weil-pbc-etale-cohomology-over-open",
+    "why": "Identify site-object cohomology in the Cech spectral sequence with the open-scheme cohomology bounded in Step 6; no unit theorem supplies this site comparison."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-module-sheaf-colimit-constructible",
+  "lem-weil-pbc-constructible-subobjects-noetherian",
+  "thm-constructible-serre",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-cohomology-filtered-colimit",
+  "lem-weil-pbc-etale-module-cohomology-forget",
+  "lem-weil-pbc-irreducible-refinement-topological",
+  "lem-kun-04ca",
+  "lem-fd-finite-pushforward-cohomology",
+  "lem-exc-finite-type-localization-excellent",
+  "lem-weil-pbc-strictly-henselian-quotient",
+  "lem-sc-cech-spectral",
+  "lem-weil-pbc-strictly-henselian-etale-acyclic",
+  "thm-pur-with-support-exactness",
+  "lem-pur-module-restriction-kernel-comparison",
+  "lem-weil-pbc-localization-colimit-principal-localizations",
+  "lem-weil-pbc-limit-affine-transition",
+  "lem-weil-pbc-constructible-module-limit-descent",
+  "lem-weil-pbc-etale-cohomology-limit-of-schemes",
+  "lem-sc-scheme-sober",
+  "lem-weil-pbc-etale-cohomology-over-open"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q71-844945c09",
+  "group": "Q71",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q71-844945c09 (reviewer sub-agent of L); spot-checked: The C6/D4 return of 93495d86 is repaired. lem-per-punctured-support-cohomological-bound has been removed. The transitive closure of the item's dependencies (3447 nodes) reaches neither that node nor the item, so there is no cycle. The punctured bound is now proved directly for Z/ℓ^n in 11 steps, following ILO XVII 3.2.1 (p. 268), which I read. Steps 1–2: constructible filtered presentation, replaced by images D_a ⊆ F. Constructibility comes from subobjects-noetherian and from Serre (1) on K_a→C_a. colim D_a = F is checked, and the support passes on through exact forgetting and exact stalks. Step 3: irreducible refinement and sober generic points give Z = closure of the support, with dim r ≤ e; C=0 is handled first. Step 4: lem-kun-04ca and finite pushforward for an ℓ^n-torsion sheaf. Step 5: S=Spec A, Z=Spec A/I with I⊆m. A/I is excellent (finite-type lemma, S={1}) and strictly henselian (quotient lemma). The r parameters cover the puncture; r=0 gives an empty puncture. Step 6: the new node on Z (dim r) bounds each D(f_{i0}⋯f_{ip}) ⊆ V. With the alternating Čech complex on r opens, E_2^{p,b}=0 for p+b≥2r. Steps 8–11 are the supported and generic arguments already checked in the earlier review: the acyclic/torsion support sequence and the module-kernel comparison, then η = lim D(f), constructible descent, the affine bound with q>d, and colimits. The source's bounds are kept: q≥2e, Γ_s q>2d (at least ILO's cd_ℓ Γ_x ≤ 2d), cd η ≤ d. The only change is that e is now stated as an integer ≥0. New node lem-per-affine-open-strict-local-cd is true by ILO XV Cor 1.2.2 (p. 219) for an affine open immersion, giving f⋆δ ≤ d, extended to all sheaves by colimits. It has a statement only, five recorded searches and correct blueprint fields. A fresh dag grep found no duplicate (trf relative bounds, condition (*), curve bounds). There is no parallel delivery of the new node. All 20 off-unit tool_uses are generic and accepted. No SGA is used. Advisory: the item's source.place still mentions the ℓ-adic filtration, which the proof no longer uses. This is cosmetic and left unchanged. No fixes were written."
  }
 }
