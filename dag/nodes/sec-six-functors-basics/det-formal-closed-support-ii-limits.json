@@ -395,5 +395,31 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FormalClosedSupportIILimits",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.formalClosedSupportIILimitsAssertions",
+  "file": "lean/Sheaf/Paper/FormalClosedSupportIILimits.lean",
+  "statement": "theorem formalClosedSupportIILimitsAssertions (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ] (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (hpℓ : p ≠ ℓ) {Z V X S : Scheme.{u}} [X.Over (Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))] (i : Z ⟶ X) (j : V ⟶ X) (u : S ⟶ Z) [IsClosedImmersion i] [IsOpenImmersion j] [QuasiCompact j] [IsOpenImmersion u] (hij : Set.range i.base = (Set.range j.base)ᶜ) (L : FormalSupportModules Λ S) (hL : ∃ 𝒰 : Scheme.Cover.{u} Scheme.proetalePrecoverage S, ∀ c : 𝒰.I₀, ∃ n : ℕ, Nonempty ((formalSupportPullback Λ (𝒰.f c)).obj L ≅ Mod.finiteFree (condensedRingObj Λ (𝒰.X c)) n)) : Nonempty (ClosedSupportIILimitsAssertions Λ i j u hij L)",
+  "branch": "newtargets-dag",
+  "by": "Q36",
+  "date": "2026-10-18",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.formalClosedSupportIILimitsAssertions",
+   "AlgebraicGeometry.ProEtale.CondensedRing.ClosedSupportIILimitsAssertions",
+   "AlgebraicGeometry.ProEtale.CondensedRing.ClosedSupportLimitFunctorProperties",
+   "AlgebraicGeometry.ProEtale.CondensedRing.derivedTensorObjCommShift"
+  ],
+  "note": "Reviewer fix: the functor-property structure now takes the canonical [F.CommShift ℤ] as a parameter (the delivered fields quantified over every CommShift structure, which is false for a sign-twisted one); the missing u^* : D(Z,Λ) → D(S,Λ) clause is added; derivedTensorObjCommShift exposes the canonical DerivedCategory.commShiftTensorLeft structure of L[0] ⊗ᴸ -, which instance search does not find through the def derivedTensor.",
+  "fixed_by": "NT-stage2-cc-5dba12d83"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5dba12d83",
+  "group": "Q36",
+  "result": "fix",
+  "note": "F1: ClosedSupportLimitFunctorProperties quantified triangulated/fibers/sequential_limits/comparison_isIso over every [F.CommShift ℤ], which is false: a (-1)^n-twisted shift structure negates connecting maps, so the theorem was unprovable even for j = id. Fixed by making [F.CommShift ℤ] a structure parameter that uses the canonical instances, plus the canonical helper instance derivedTensorObjCommShift := DerivedCategory.commShiftTensorLeft for L[0]⊗ᴸ-, which instance search does not find through the def derivedTensor. F2: the node lists seven functors but the delivery omitted u^*: D(Z)->D(S); added field u_star. F3: stray docstring punctuation. The theorem signature is unchanged and lean.statement is verbatim up to whitespace. Other clauses, edge cases (Z/V/S empty, u=id, L=0, varying rank, empty product, zero tower), dependencies and gates checked; the Λ generalization is accepted as in the parent record. nt_compile --json: delivered file clean in 8.2 s; fixed file clean with rc 0 and no warnings in 38-41 s (about 13 s CPU) at load about 145. Fixes: fixes/FormalClosedSupportIILimits.lean and fixes/det-formal-closed-support-ii-limits.lean-record.json (declarations and note). merge_delivery.py was not run, not even with --dry-run, so tool acceptance of the fix is unverified."
  }
 }

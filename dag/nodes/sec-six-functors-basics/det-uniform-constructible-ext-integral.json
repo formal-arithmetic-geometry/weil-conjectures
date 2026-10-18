@@ -236,5 +236,23 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.Paper.UniformConstructibleExtIntegral",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.uniformConstructibleExtIntegral",
+  "file": "lean/Sheaf/Paper/UniformConstructibleExtIntegral.lean",
+  "statement": "theorem uniformConstructibleExtIntegral (ℓ : ℕ) [Fact ℓ.Prime] (E : Type u) [Field E] [Algebra (Padic ℓ) E] [FiniteDimensional (Padic ℓ) E] (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (hpℓ : p ≠ ℓ) (S Z V X T B : Over (Spec (.of k))) [LocallyOfFiniteType S.hom] [QuasiCompact S.hom] [IsSeparated S.hom] [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom] [IsSeparated Z.hom] [LocallyOfFiniteType V.hom] [QuasiCompact V.hom] [IsSeparated V.hom] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType T.hom] [QuasiCompact T.hom] [IsSeparated T.hom] [LocallyOfFiniteType B.hom] [QuasiCompact B.hom] [IsSeparated B.hom] (u : S ⟶ Z) (i : Z ⟶ X) (j : V ⟶ X) (kb : B ⟶ X) (vb : T ⟶ B) [IsOpenImmersion u.left] [IsClosedImmersion i.left] [IsOpenImmersion j.left] [IsClosedImmersion kb.left] [IsOpenImmersion vb.left] (hij : Set.range i.left.base = (Set.range j.left.base)ᶜ) (L₀ : FormalSupportModules (DerivedNakayama.integerRing ℓ E) S.left) (M₀ : FormalSupportModules (DerivedNakayama.integerRing ℓ E) T.left) (hL₀ : IsLisseCoefficientModule (DerivedNakayama.integerRing ℓ E) L₀) (hM₀ : IsLisseCoefficientModule (DerivedNakayama.integerRing ℓ E) M₀) (q : ℤ) (hq : torsionStratumRelativeDimension ℓ k j + torsionStratumDimension ℓ k S + 2 < (q.toNat : WithTop ℕ)) : Subsingleton (((DerivedCategory.singleFunctor (FormalSupportModules (DerivedNakayama.integerRing ℓ E) X.left) 0).obj ((lowerStar (DerivedNakayama.integerRing ℓ E) i.left).obj ((openImmersionLowerShriek (DerivedNakayama.integerRing ℓ E) u.left).obj L₀))) ⟶ ((DerivedCategory.singleFunctor (FormalSupportModules (DerivedNakayama.integerRing ℓ E) X.left) 0).obj ((lowerStar (DerivedNakayama.integerRing ℓ E) kb.left).obj ((openImmersionLowerShriek (DerivedNakayama.integerRing ℓ E) vb.left).obj M₀))) ⟦q⟧)",
+  "branch": "newtargets-dag",
+  "by": "NX",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-79289e02f",
+  "group": "NX",
+  "result": "pass",
+  "note": "Snapshot vs live: only the new module and the item's added lean record; lean.statement verbatim. All hypotheses copy the landed torsion node's standing setting (same ℓ/E/k/schemes/immersions/hij/IsLisseCoefficientModule lattices, recorded lowerStar∘openImmersionLowerShriek for a_!, b_!), with no n and no extra assumptions; E,k universe u is inherited from torsion. Ext^q rendered as Subsingleton(single₀ Q ⟶ (single₀ N)⟦q⟧) in DerivedCategory(FormalSupportModules (integerRing ℓ E) X.left) = D(X_proet,O_E); hq with cutoff cd(j)+cd(S)+2 < q.toNat is exact (cutoff ≥2, ⊤ vacuous). Edge cases Z=X, Z=∅, empty schemes, rank 0, q at cutoff, infinite cd checked. No definitions, sorry only, docstrings with source/blueprint and all six proof steps, proof-dep imports match recorded modules, lines ≤100. nt_compile --json: exit 0, clean, 10.9 s. Minor non-blocking: derived Hom rather than Abelian.Ext (equivalent by Mathlib's definition); Second reading is the standard direct-delivery stub."
  }
 }

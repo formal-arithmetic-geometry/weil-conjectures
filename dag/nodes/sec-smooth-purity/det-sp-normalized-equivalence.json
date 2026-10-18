@@ -375,5 +375,32 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SmoothPurityNormalizedEquivalence",
+  "declaration": "AlgebraicGeometry.ProEtale.sp_normalized_equivalence",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.spCompletedStrictTower",
+   "AlgebraicGeometry.ProEtale.spCompletedReduction",
+   "AlgebraicGeometry.ProEtale.spCompletedTotalLimit",
+   "AlgebraicGeometry.ProEtale.spCompletedForgettingEvaluationIso",
+   "AlgebraicGeometry.ProEtale.spCompletedTotalProjection",
+   "AlgebraicGeometry.ProEtale.SpNormalizedEquivalence",
+   "AlgebraicGeometry.ProEtale.sp_normalized_equivalence"
+  ],
+  "file": "lean/Sheaf/Paper/SmoothPurityNormalizedEquivalence.lean",
+  "statement": "theorem sp_normalized_equivalence [∀ x : T, Invertible (l : T.residueField x)] (D : SpCoefficientTowersAbelian l E T) (R : SpReductionTower l E T D) : Nonempty (SpNormalizedEquivalence l E T D R)",
+  "branch": "newtargets-dag",
+  "by": "NK",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f9273b5b6",
+  "group": "NK",
+  "result": "pass",
+  "note": "Every node clause matches the Lean: r_T (R.red transported along the canonical, sectionwise-fixed coefficient map) is left adjoint to L_T (exact scalar forgetting then the canonical right-derived lim); unit iso on IsComplete none M; counit iso on IsSpNormalizedTower; Noetherian (Mathlib IsNoetherian = finite affine Noetherian cover) only for the restriction, an equivalence sfIntegralConstructibleCategory ≌ spNormalizedConstructibleTorTowerCategory with strict equalities to the restricted functors. No hypothesis beyond the node; structure extras (exactness, CommShift, triangulated, countable products, Roos triangle with canonical projections matching spTower_reconstruction) are true assertions, not assumptions. D and R are canonically fixed recorded constructions. Edge cases ok (empty scheme, zero objects, n+1 indexing, m=n, unbounded unit/counit, ramified). E and T share universe u, forced by the recorded sfIntegralConstructible; harmless. No hollow defs, one sorry, docstrings with source/blueprint and the 10 steps, lines <=100, imports per convention. Commit touches report, node (lean field only) and module; lean.statement verbatim; 7 declarations present. nt_compile --json exit 0, no warnings, 32.4 s at load ~142. Notes only: reuse of coefficientConstantTowerLimit outside stmt_deps is acceptable; stale top-level tool_uses and unused Noetherian hypothesis come from stage 1."
  }
 }

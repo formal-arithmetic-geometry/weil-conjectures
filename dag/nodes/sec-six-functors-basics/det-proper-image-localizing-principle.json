@@ -222,5 +222,28 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.Triangulated.LocalizingFunctor",
+  "declaration": "CategoryTheory.Functor.maps_localizingClosure",
+  "declarations": [
+   "CategoryTheory.Functor.maps_localizingClosure",
+   "AlgebraicGeometry.ProEtale.maps_localizingClosureProEtale"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/Triangulated/LocalizingFunctor.lean",
+  "statement": "theorem maps_localizingClosure {C : Type u₁} {D : Type u₂} [Category.{v₁} C] [Category.{v₂} D] [HasZeroObject C] [HasShift C ℤ] [Preadditive C] [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C] [CategoryTheory.IsTriangulated C] [HasZeroObject D] [HasShift D ℤ] [Preadditive D] [∀ n : ℤ, (shiftFunctor D n).Additive] [Pretriangulated D] [CategoryTheory.IsTriangulated D] [HasCoproducts.{w} C] [HasCoproducts.{w} D] (G : ObjectProperty C) (G' : ObjectProperty D) (F : C ⥤ D) [F.CommShift ℤ] [F.IsTriangulated] [∀ I : Type w, PreservesColimitsOfShape (Discrete I) F] (hG : ∀ K : C, G K → localizingClosureOfSize.{w} G' (F.obj K)) : ∃ (_ : (localizingClosureOfSize.{w} G).IsTriangulated) (_ : (localizingClosureOfSize.{w} G').IsTriangulated) (hF : ∀ K : C, localizingClosureOfSize.{w} G K → localizingClosureOfSize.{w} G' (F.obj K)), ((localizingClosureOfSize.{w} G').lift ((localizingClosureOfSize.{w} G).ι ⋙ F) (fun K : (localizingClosureOfSize.{w} G).FullSubcategory ↦ hF K.obj K.property)).IsTriangulated ∧ ∀ I : Type w, PreservesColimitsOfShape (Discrete I) ((localizingClosureOfSize.{w} G').lift ((localizingClosureOfSize.{w} G).ι ⋙ F) (fun K : (localizingClosureOfSize.{w} G).FullSubcategory ↦ hF K.obj K.property))",
+  "branch": "newtargets-dag",
+  "by": "Q90",
+  "date": "2026-10-18",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-e11afae0a"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e11afae0a",
+  "group": "Q90",
+  "result": "fix",
+  "note": "Mathematics correct: every clause of maps_localizingClosure matches the node (independent universes, one free sum-index universe w, ObjectProperty generators, CommShift+IsTriangulated, PreservesColimitsOfShape (Discrete I), canonical lift exact and sum-preserving as conclusions); the pro-etale specialization uses the recorded DerivedCategory (homs u+1) and Dctf; sorry-only, docstrings and record verbatim. Blocking mechanical fault: delivered LocalizingAdmissibleCoefficients drops the import of Sheaf.Paper.LocalizingClosure and redeclares IsLocalizingSubcategory/localizingClosure/localizingClosureProEtale, which that unchanged file still declares; RestrictionLocal fails with 'environment already contains CategoryTheory.IsLocalizingSubcategory' (5 importers affected) and two pro-etale closure definitions (u+1/u+2) result. Fix: LAC restored to main plus only IsLocalizingSubcategoryOfSize/localizingClosureOfSize with docstrings (OfSize.{u} = localizingClosure by rfl); item statements textually unchanged, specialization now uses the recorded localizingClosureProEtale with the size identification in its docstring proof; report gets a fix section. nt_compile --json: fixed pair rc 0; with unchanged RestrictionLocal, BrownHypotheses, UnboundedBaseChangeExtension rc 0. Dependency-record note is stale (the fix tool cannot edit it)."
  }
 }
