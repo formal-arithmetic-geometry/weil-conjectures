@@ -38,10 +38,10 @@
    }
   },
   {
-   "text": "Fix an arbitrary integer $m$. For every integer $q$, the hypothesis says that $H^q(K)[0]$ is pseudo-coherent. Apply [lem-pc-ring-pseudo-coherent-iff-all-m] to this degree-zero complex: it is $(m-q)$-pseudo-coherent. Repeatedly apply [lem-pc-ring-m-pseudo-coherent-shift] in the forward or reverse direction (a finite number of times, according to the sign of $q$). Its formula $X[1]\\text{ is }a\\text{-pseudo-coherent}\\iff X\\text{ is }(a+1)\\text{-pseudo-coherent}$ gives $X[-q]\\text{ is }m\\text{-pseudo-coherent}\\iff X\\text{ is }(m-q)\\text{-pseudo-coherent}$. Therefore $H^q(K)[-q]$ is $m$-pseudo-coherent. In particular this supplies the third vertex for every truncation triangle below.",
+   "text": "For each integer q, transport the pseudo-coherent degree-zero cohomology hypothesis to the module H^q(C) using the representative isomorphism Q(C) ≅ K and the cohomology factorization isomorphism. Shift its bounded-above finite-free representative by -q. The shifted complex is still bounded above, and its terms are finite free via the termwise shift isomorphisms. The commutation of Q with shifts and the single-functor shift isomorphism identify this model with the single complex H^q(C) placed in degree q. Thus that single complex is pseudo-coherent. Apply [lem-pc-ring-pseudo-coherent-iff-all-m] to obtain m-pseudo-coherence for every m. This direct witness construction replaces iteration of the one-step m-pseudo-coherent shift lemma.",
    "uses": [
-    "lem-pc-ring-pseudo-coherent-iff-all-m",
-    "lem-pc-ring-m-pseudo-coherent-shift"
+    "def-pc-ring-pseudo-coherent-complex",
+    "lem-pc-ring-pseudo-coherent-iff-all-m"
    ],
    "elementary": false,
    "source": {
@@ -98,8 +98,8 @@
  "proof_deps": [
   "def-weil-abstract-derived-category",
   "lem-weil-pbc-truncation-triangle",
+  "def-pc-ring-pseudo-coherent-complex",
   "lem-pc-ring-pseudo-coherent-iff-all-m",
-  "lem-pc-ring-m-pseudo-coherent-shift",
   "lem-pc-ring-m-pseudo-coherent-vanishing-base",
   "lem-pc-ring-pseudo-coherent-distinguished-triangle",
   "def-pc-ring-m-pseudo-coherent"
@@ -107,7 +107,7 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Tag 066B, lemma-cohomology-pseudo-coherent, pseudo-coherent clause; finite truncation induction using Tags 064U, 064R, 064W and Derived Categories Tag 08J5"
+  "place": "Tag 066B, lemma-cohomology-pseudo-coherent, finite truncation induction using Tags 064U, 064R, 064W and Derived Categories Tag 08J5; Lean implementation by C3, 2026-10-18: shift bounded-above finite-free representatives directly for the cohomology terms, then use the all-m criterion."
  },
  "mathlib_searches": [
   {
@@ -224,7 +224,6 @@
  },
  "tool_uses": [
   "lem-pc-ring-pseudo-coherent-iff-all-m",
-  "lem-pc-ring-m-pseudo-coherent-shift",
   "lem-pc-ring-m-pseudo-coherent-vanishing-base",
   "lem-pc-ring-pseudo-coherent-distinguished-triangle"
  ],
@@ -265,5 +264,15 @@
   "by": "NR",
   "date": "2026-10-15",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261018T062713-L-636129",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
