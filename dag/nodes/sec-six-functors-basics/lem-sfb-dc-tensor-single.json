@@ -1,0 +1,244 @@
+{
+ "id": "lem-sfb-dc-tensor-single",
+ "kind": "statement",
+ "title": "Tensor of constructible single-sheaf complexes",
+ "statement": "In [sk-def-sfb-dc-setting], let Λ satisfy IsEllAdicFinitenessCoefficient ell Λ. If F and G are constructible Λ_X-module objects, then F[0] tensor-derived G[0] is bounded constructible. Constructibility here is stratified local finite presentation for the given pulled-back condensed coefficient ring.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Definitions 6.8.6, 6.8.10 and Proposition 6.8.11(3); lem-sfb-dc-tensor-preserves, steps 1--9"
+ },
+ "stmt_deps": [
+  "sk-def-sfb-dc-setting",
+  "sk-def-sfb-bounded-constructible"
+ ],
+ "proof": [
+  {
+   "text": "First record the geometric hypothesis needed for detecting cohomology on strata. The field $k$ is Noetherian (its only ideals are $0$ and $k$), so $\\operatorname{Spec}k$ is Noetherian. Since $X\\to\\operatorname{Spec}k$ is of finite type, [lem-weil-pbc-finite-type-over-noetherian] makes $X$ Noetherian. In particular it is quasi-compact, and the constructibility condition in [sk-def-sfb-constructible] is given by a finite stratification.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "sk-def-sfb-constructible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01T6, lemma-finite-type-noetherian; finite-type hypothesis from the setting"
+   }
+  },
+  {
+   "text": "Compare the two constructibility conditions on the Noetherian scheme $X$ of step 1 and on its locally closed strata, which are Noetherian too. The item's hypothesis and conclusion use [sk-def-sfb-bounded-constructible], whose cohomology modules are constructible in the stratified local-finite-presentation sense: on each stratum the module is pro-étale locally a cokernel of an arbitrary map between finite free coefficient modules, not necessarily with scalar matrix entries. For $\\Lambda=\\underline{\\cO}_E$, [lem-sfb-integral-lfp-constant-model-comparison], applied with $A=\\cO_E$ to $X$, shows that this condition is equivalent to constructibility with finite constant local models $\\Lambda_V\\otimes_{\\cO_E}P$, $P$ a finitely presented, possibly torsion, $\\cO_E$-module, as in [sk-def-sfb-constructible]. For $\\Lambda=\\underline E$, resp. $\\underline{\\Qlb}$, [lem-weil-pbc-condensed-lfp-local-triviality], resp. [lem-weil-pbc-condensed-qbar-lfp-local-triviality], applied on each Noetherian stratum, turns every such local presentation into a pro-étale locally finite free module $\\Lambda_W^{r}$, which is a finite constant local model with $P=A^r$. Conversely a finite constant local model $\\Lambda_V\\otimes_AP$ over the field $A=E$ or $\\Qlb$ is finite free, hence finitely presented. So in all three coefficient cases a module is constructible in one sense if and only if it is in the other (the stratifications may differ), and the bounded constructible category of [sk-def-sfb-bounded-constructible] is the full subcategory of bounded complexes whose cohomology sheaves are constructible with finite constant local models. The remaining steps work with these local models.",
+   "uses": [
+    "lem-sfb-integral-lfp-constant-model-comparison",
+    "lem-weil-pbc-condensed-lfp-local-triviality",
+    "lem-weil-pbc-condensed-qbar-lfp-local-triviality",
+    "sk-def-sfb-bounded-constructible",
+    "sk-def-sfb-constructible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definitions 6.8.6 and 6.8.10 (constructible sheaves as locally Λ⊗ finitely presented modules on strata); comparison with the master local-finite-presentation predicate through the three cited comparison nodes (agent comparison inputs, Hemo–Richarz–Scholbach Example 3.1 for coefficient realization)"
+   }
+  },
+  {
+   "text": "We first treat constructible module sheaves $F,G$ in degree zero. Intersect their finite stratifications, using [lemma-constructible-pullback-stratification] to form the intersections as fibre products of the actual strata. On each resulting stratum $T$, if $\\{U_i\\to T\\}$ trivializes $F$ and $\\{W_j\\to T\\}$ trivializes $G$, use the cover $\\{U_i\\times_T W_j\\to T\\}_{i,j}$: base change of the second covering covers each $U_i$, and composition with the first covering covers $T$. The local models pull back along both projections, since inverse image preserves constant sheaves, tensor products and the pulled-back coefficient ring as below. Thus on every chosen covering object $V$ the sheaves become $R\\otimes_A P$ and $R\\otimes_A Q$, where $R=\\Lambda_V$, $A=\\Lambda(*)$ and $P,Q$ are finitely presented $A$-modules [sk-def-sfb-constructible]. By [sk-prop-sfb-cartesian-coefficients] the restrictions to strata and covering objects are exact inverse images with the inverse-image coefficient ring equal to $\\Lambda_V$. Consequently they commute with cohomology. Their derived tensor comparison is the isomorphism of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]; since the module inverse images are exact, their derived functors are their termwise functors [sk-def-sfb-derived-categories]. It therefore suffices to compute the tensor of these local models, and later to detect vanishing and constructibility on these strata. By step 2 such finite constant local models exist for the constructible sheaves in each of the three coefficient cases.",
+   "uses": [
+    "lemma-constructible-pullback-stratification",
+    "sk-def-sfb-constructible",
+    "sk-prop-sfb-cartesian-coefficients",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "sk-def-sfb-derived-categories"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A4, lemma-pullback-tensor-product; Bhatt–Scholze Definitions 6.8.6 and 6.8.10 for the local models"
+   }
+  },
+  {
+   "text": "For integral coefficients set $A=\\mathcal O_E$ and choose a uniformizer $\\varpi$. The ring $A$ is a DVR, hence a PID, and each nonzero scalar is a unit times a power of $\\varpi$ [lem-weil-l-adic-extension-integers-dvr]. For a finitely presented $A$-module $P$, choose a finite free surjection $A^n\\twoheadrightarrow P$ and put $N=\\ker(A^n\\to P)$. Apply [lem-sc-dvr-saturation-line-smith-normal-form] to the submodule $N\\subseteq A^n$. Every diagonal scalar is nonzero, since its basis vector has nonzero image under the inclusion; its exponent in the uniformizer factorization is nonnegative because the scalar belongs to $A$. Taking the cokernel of its diagonal inclusion expresses $P$ as a finite direct sum of $A$ and $A/\\varpi^a$, $a\\geq1$; a unit diagonal gives a zero summand, which is discarded. The same applies to $Q$. Right exactness of the ordinary tensor product then gives corresponding decompositions of the local sheaves into $R$ and $R/\\varpi^aR$.",
+   "uses": [
+    "lem-weil-l-adic-extension-integers-dvr",
+    "lem-sc-dvr-saturation-line-smith-normal-form",
+    "sk-def-sfb-constructible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definition 6.8.10 and proof of Proposition 6.8.11(3), finite projective resolutions; diagonal decomposition from the cited Smith normal form statement"
+   }
+  },
+  {
+   "text": "Multiplication by $\\varpi^a$ on the condensed sheaf $\\underline{\\mathcal O}_E$ is injective: on every profinite set it sends a continuous function $f$ to $\\varpi^af$, and $\\varpi^af=0$ implies $f=0$ pointwise [sk-def-sfb-condensed-ring]. The functor $p_V^*$ defining $R=\\mathcal O_{E,V}$ is an inverse image [sk-def-sfb-pullback-from-point, sk-def-sfb-pulled-back-coefficients]; inverse image of abelian sheaves is exact [lem-weil-pbc-site-pullback-abelian-exact]. Applying it to this monomorphism shows that multiplication by $\\varpi^a$ on $R$ is injective as well. This argument uses the given pulled-back condensed coefficient sheaf, rather than substituting the discrete constant sheaf $A$.",
+   "uses": [
+    "sk-def-sfb-condensed-ring",
+    "sk-def-sfb-pullback-from-point",
+    "sk-def-sfb-pulled-back-coefficients",
+    "lem-weil-pbc-site-pullback-abelian-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 04JC, lemma-flat-pullback-exact, exactness of abelian inverse image; pointwise calculation with the stated condensed coefficient definition"
+   }
+  },
+  {
+   "text": "For the local integral ring sheaf $R$, the complex $[R\\xrightarrow{\\varpi^a}R]$ in degrees $-1,0$ is a resolution of $R/\\varpi^aR$ by step 5. It is K-flat directly from [def-pc-kflat-complex]: tensoring it with an acyclic complex gives, up to the shift convention, the cone of multiplication by $\\varpi^a$ on that acyclic complex, which is acyclic. The unit complex $R[0]$ is also K-flat since tensoring with it is the identity. The K-flat computation of [sk-def-sfb-derived-tensor-hom] therefore computes every local cyclic or free tensor in step 4 using these explicit resolutions.",
+   "uses": [
+    "def-pc-kflat-complex",
+    "def-weil-abstract-derived-category",
+    "sk-def-sfb-derived-tensor-hom"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YN (definition-K-flat) and 06YU (definition-derived-tor); the two-term cone calculation is written out"
+   }
+  },
+  {
+   "text": "Tensoring a free summand $R$ with any of the listed summands leaves that summand in degree zero. For two torsion summands, the model of step 6 is\n$$\n(R/\\varpi^aR)\\otimes_R^{\\mathrm L}(R/\\varpi^bR)\n\\simeq [R/\\varpi^bR\\xrightarrow{\\varpi^a}R/\\varpi^bR].\n$$\nIf $a\\geq b$ its differential is zero, so both cohomology sheaves are $R/\\varpi^bR$. If $a<b$, its cokernel is $R/\\varpi^aR$ and its kernel is $\\varpi^{b-a}R/\\varpi^bR\\cong R/\\varpi^aR$: multiplication by $\\varpi^{b-a}$ gives this isomorphism, since the injectivity proved in step 5 permits cancellation of powers of $\\varpi$. For $a<b$, the quotient-sheaf calculation is justified locally as follows: a section of $R/\\varpi^bR$ lifts locally to $x\\in R$. If $\\varpi^a x=0$ modulo $\\varpi^b$, refine the cover to write $\\varpi^a x=\\varpi^b y$; injectivity gives $x=\\varpi^{b-a}y$. Conversely every such multiple is in the kernel, and $\\varpi^{b-a}y=0$ modulo $\\varpi^b$ holds locally exactly when $y=0$ modulo $\\varpi^a$. Thus in either case $H^{-1}$ and $H^0$ are $R/\\varpi^{\\min(a,b)}R$, with no other cohomology. Finite direct sums of these calculations compute the tensor of the local models in step 4. All resulting sheaves have finite constant local models, because $R/\\varpi^cR=R\\otimes_A(A/\\varpi^c)$ and finite sums of finitely presented scalar modules are finitely presented.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YU, definition-derived-tor, explicit two-term computation using steps 4–6"
+   }
+  },
+  {
+   "text": "For $\\Lambda=\\underline E$ or $\\underline{\\Qlb}$, its scalar ring $A=\\Lambda(*)$ is respectively the field $E$ or $\\Qlb$, by the section formulas of [sk-def-sfb-condensed-ring, sk-def-sfb-qlbar-condensed]. Finitely presented modules over a field have finite bases; hence the local models of step 3 are $R^r$ and $R^s$ for finite $r,s$. The unit $R[0]$ is K-flat by step 6's identity argument, so their derived tensor is $R^{rs}[0]$. It has a finite constant local model and no cohomology outside degree zero. The calculation applies to the finite-subextension definition of $\\underline{\\Qlb}$ itself; it does not replace that sheaf by all continuous maps into $\\Qlb$.",
+   "uses": [
+    "sk-def-sfb-condensed-ring",
+    "sk-def-sfb-qlbar-condensed",
+    "sk-def-sfb-derived-tensor-hom"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definitions 6.8.6 and 6.8.8; finite-rank free local calculation with the project coefficient definitions"
+   }
+  },
+  {
+   "text": "Return to $F\\otimes_{\\Lambda_X}^{\\mathrm L}G$. Exactness and the tensor comparison in step 3 identify the restrictions of its cohomology with those calculated in steps 7–8. By [lem-weil-pbc-noetherian-stratum-detection], cohomology vanishes globally outside $[-1,0]$ in the integral case and outside $\\{0\\}$ in the rational cases. The hypotheses of this detection statement hold by step 1 and the finite stratification and covering construction of step 3. On each stratum the remaining cohomology sheaves have finite constant local models by the displayed computations, so they are constructible by [sk-def-sfb-constructible]. By the comparison of step 2, the derived tensor of two constructible sheaves therefore lies in the bounded constructible category [sk-def-sfb-bounded-constructible].",
+   "uses": [
+    "lem-weil-pbc-noetherian-stratum-detection",
+    "sk-def-sfb-constructible",
+    "sk-def-sfb-bounded-constructible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AH, lemma-ses-associated-to-open, finite-stratum detection as stated in the cited node; Bhatt–Scholze Definition 6.8.8 and Proposition 6.8.11(3)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "sk-def-sfb-constructible",
+  "lem-sfb-integral-lfp-constant-model-comparison",
+  "lem-weil-pbc-condensed-lfp-local-triviality",
+  "lem-weil-pbc-condensed-qbar-lfp-local-triviality",
+  "sk-def-sfb-bounded-constructible",
+  "lemma-constructible-pullback-stratification",
+  "sk-prop-sfb-cartesian-coefficients",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "sk-def-sfb-derived-categories",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-sc-dvr-saturation-line-smith-normal-form",
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-pullback-from-point",
+  "sk-def-sfb-pulled-back-coefficients",
+  "lem-weil-pbc-site-pullback-abelian-exact",
+  "def-pc-kflat-complex",
+  "def-weil-abstract-derived-category",
+  "sk-def-sfb-derived-tensor-hom",
+  "sk-def-sfb-qlbar-condensed",
+  "lem-weil-pbc-noetherian-stratum-detection"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "B2",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Definitions 6.8.6, 6.8.10 and Proposition 6.8.11(3); lem-sfb-dc-tensor-preserves, steps 1--9"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived tensor of constructible sheaves over ell-adic coefficient rings is bounded constructible",
+   "date": "2026-10-18",
+   "results": "Hits: Condensed.instAB4CondensedMod, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, PiTensorProduct.dualSeminorms_bounded, CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat, SheafOfModules.hasLimitsOfSize, Condensed.instAB4StarCondensedMod, LightCondensed.instCountableAB4StarLightCondMod, SheafOfModules.hasLimit",
+   "verdict": "No exact theorem for this constructible module-object assertion; use the general derived-category APIs and the stated project lemmas."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived tensor of two bounded constructible complexes of sheaves with field or discrete valuation ring coefficients",
+   "date": "2026-10-18",
+   "results": "Hits: LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, HomologicalComplex.HasGoodTensor₁₂, HomologicalComplex.HasTensor, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalCategoryLightCondMod, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, HomologicalComplex.HasGoodTensor₂₃, LightCondensed.instMonoidalLightCondSetLightCondModFree",
+   "verdict": "No exact theorem for this constructible module-object assertion; use the general derived-category APIs and the stated project lemmas."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"IsTriangulated\"",
+   "date": "2026-10-18",
+   "results": "Hits: DerivedCategory.instIsTriangulated, DerivedCategory.instIsTriangulatedHomotopyCategoryIntUpQh, DerivedCategory.Plus.instIsTriangulatedPlusQh, CategoryTheory.Functor.instIsTriangulatedDerivedCategoryMapDerivedCategory",
+   "verdict": "No exact theorem for this constructible module-object assertion; use the general derived-category APIs and the stated project lemmas."
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*(tensor|pushforward|homology)|isGE.*adjunction|isTriangulated.*bounded",
+   "date": "2026-10-18",
+   "results": "No hits.",
+   "verdict": "No exact theorem for this constructible module-object assertion; use the general derived-category APIs and the stated project lemmas."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible",
+  "date": "2026-10-18",
+  "group": "B2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-def-sfb-dc-restricted-functors",
+   "place": "Tensor of constructible single-sheaf complexes",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-def-sfb-dc-restricted-functors",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.BoundedConstructibleTensorSingle",
+  "file": "lean/Sheaf/AlgebraicGeometry/BoundedConstructibleTensorSingle.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructible_tensor_single",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructible_tensor_single"
+  ],
+  "statement": "theorem boundedConstructible_tensor_single\n    {ℓ : ℕ} [IsEllAdicFinitenessCoefficient ℓ Λ] [Fact (ringChar k ≠ ℓ)]\n    (F G : Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1})\n      (condensedRingObj Λ X.left))\n    (hF : IsConstructibleModuleObject (condensedRingObj Λ X.left) F)\n    (hG : IsConstructibleModuleObject (condensedRingObj Λ X.left) G) :\n    boundedConstructible (condensedRingObj Λ X.left)\n      ((DerivedCategory.singleFunctor _ 0).obj F ⊗\n        (DerivedCategory.singleFunctor _ 0).obj G)",
+  "branch": "sheaf-dag",
+  "by": "B2",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261018T103528-L-17731",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261018T103528-L-17731",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

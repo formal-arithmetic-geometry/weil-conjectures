@@ -9,6 +9,7 @@ public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.Def
 public import WeilConjectures.CategoryTheory.RingObjects.Ab
 public import Mathlib.CategoryTheory.ObjectProperty.Kernels
 public import Mathlib.CategoryTheory.ObjectProperty.Extensions
+import Sheaf.AlgebraicGeometry.ProEtaleModuleConstructiblePullback
 import all Sheaf.AlgebraicGeometry.CondensedConstructibleSerre
 
 /-! # Cokernels and extensions of constructible internal module sheaves

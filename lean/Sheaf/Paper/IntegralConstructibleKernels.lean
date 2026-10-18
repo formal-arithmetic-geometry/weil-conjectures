@@ -5,6 +5,7 @@ Authors: SHEAF groups B4 and H2
 -/
 module
 public import Sheaf.Paper.ContinuousIntegralCoefficients
+import Sheaf.AlgebraicGeometry.ProEtaleModuleConstructiblePullback
 import Sheaf.Paper.IntegralMatrixPivotCover
 import all Sheaf.Paper.ConstructibleCokernelsExtensions
 import all Sheaf.AlgebraicGeometry.CondensedConstructibleSerre

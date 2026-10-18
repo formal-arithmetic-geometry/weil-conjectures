@@ -6,6 +6,9 @@ Authors: SHEAF contributors
 module
 
 public import Sheaf.PoincareDuality.IntegralResidueQuotient
+public import WeilConjectures.AlgebraicGeometry.Sites.Kummer
+import WeilConjectures.Mathlib.AlgebraicGeometry.Limits
+import WeilConjectures.Mathlib.AlgebraicGeometry.Restrict
 import WeilConjectures.AlgebraicGeometry.PrimitiveRootsCover
 import WeilConjectures.AlgebraicGeometry.ProEtale.WeaklyContractible
 import WeilConjectures.Mathlib.LinearAlgebra.Lagrange

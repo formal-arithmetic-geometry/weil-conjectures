@@ -1,0 +1,116 @@
+{
+ "id": "lem-sfb-dc-lower-star-bounded",
+ "kind": "statement",
+ "title": "Boundedness of module-object pushforward by truncation",
+ "statement": "In [sk-def-sfb-dc-setting], for every finiteness coefficient Λ, the ambient total right derived module-object pushforward sends a bounded complex with constructible homology to a bounded complex.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "lem-sfb-dc-lower-star-preserves; finite cohomological devissage and bounded-below right-derived compatibility"
+ },
+ "stmt_deps": [
+  "sk-def-sfb-dc-setting",
+  "sk-def-sfb-bounded-constructible"
+ ],
+ "proof": [
+  {
+   "text": "The inverse image of the bounded subcategory under Rf_* is triangulated and invariant under isomorphisms. For a constructible F in degree zero, left t-exactness gives lower bound zero, and the single-sheaf finiteness input supplies an upper bound. Apply finite truncation devissage to the bounded constructible input.",
+   "uses": [
+    "lem-sfb-dc-lower-star-single-upper-bounded",
+    "lem-sfb-dc-module-devissage"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-dc-lower-star-single-upper-bounded",
+  "lem-sfb-dc-module-devissage"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "B2",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "lem-sfb-dc-lower-star-preserves; finite cohomological devissage and bounded-below right-derived compatibility"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A right derived functor sends bounded constructible sheaves to bounded constructible complexes",
+   "date": "2026-10-18",
+   "results": "Hits: CategoryTheory.Functor.rightDerived, CategoryTheory.Functor.IsRightDerivedFunctor.recOn, CategoryTheory.Functor.rightDerivedToHomotopyCategory, CategoryTheory.Functor.IsRightDerivedFunctor, CategoryTheory.NatTrans.rightDerivedToHomotopyCategory_id, CategoryTheory.Functor.rightDerived_fac, CategoryTheory.Functor.HasRightDerivedFunctor.mk, CategoryTheory.Functor.IsRightDerivedFunctor.mk",
+   "verdict": "No exact theorem for this constructible module-object assertion; use the general derived-category APIs and the stated project lemmas."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "bounded constructible module objects preserved by derived pushforward finite coefficient",
+   "date": "2026-10-18",
+   "results": "Hits: LightCondensed.instIsGrothendieckAbelianLightCondMod, Condensed.finFree, CondensedMod.IsSolid, CondensedMod, CondensedMod.LocallyConstant.functor, instAbelianCondensedMod, Condensed.instAB4CondensedMod, Condensed.instAB4StarCondensedMod",
+   "verdict": "No exact theorem for this constructible module-object assertion; use the general derived-category APIs and the stated project lemmas."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"IsTriangulated\"",
+   "date": "2026-10-18",
+   "results": "Hits: DerivedCategory.instIsTriangulated, DerivedCategory.instIsTriangulatedHomotopyCategoryIntUpQh, DerivedCategory.Plus.instIsTriangulatedPlusQh, CategoryTheory.Functor.instIsTriangulatedDerivedCategoryMapDerivedCategory",
+   "verdict": "No exact theorem for this constructible module-object assertion; use the general derived-category APIs and the stated project lemmas."
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*(tensor|pushforward|homology)|isGE.*adjunction|isTriangulated.*bounded",
+   "date": "2026-10-18",
+   "results": "No hits.",
+   "verdict": "No exact theorem for this constructible module-object assertion; use the general derived-category APIs and the stated project lemmas."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible",
+  "date": "2026-10-18",
+  "group": "B2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-def-sfb-dc-restricted-functors",
+   "place": "Boundedness of module-object pushforward by truncation",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-def-sfb-dc-restricted-functors",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.BoundedConstructibleLowerStarPreservation",
+  "file": "lean/Sheaf/AlgebraicGeometry/BoundedConstructibleLowerStarPreservation.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructible_rightDerivedLowerStar_bounded",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructible_rightDerivedLowerStar_bounded"
+  ],
+  "statement": "theorem boundedConstructible_rightDerivedLowerStar_bounded\n    [IsFinitenessCoefficient ℓ Λ]\n    (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1})\n      (condensedRingObj Λ X.left)))\n    (hK : boundedConstructible (condensedRingObj Λ X.left) K) :\n    (DerivedCategory.TStructure.t.bounded\n      : ObjectProperty (DerivedCategory (Mod\n        (Sheaf (Scheme.ProEt.topology Y.left) Ab.{u + 1})\n        (condensedRingObj Λ Y.left)))) ((R((f.left)_*⟦Λ⟧)).obj K)",
+  "branch": "sheaf-dag",
+  "by": "B2",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261018T103528-L-17731",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261018T103528-L-17731",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
