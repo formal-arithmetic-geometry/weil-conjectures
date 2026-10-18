@@ -8,6 +8,8 @@ module
 public import WeilConjectures.CategoryTheory.Monoidal.Closed.VerdierBiduality
 public import WeilConjectures.PoincareDuality.ProjectionFormula
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenClosed
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenImmersionIhom
+public import WeilConjectures.SixFunctors.Etale.Derived.DoubleDual
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleBraided
 public import WeilConjectures.TraceFormula.Dualizing
 
@@ -60,6 +62,12 @@ The isomorphism `γ` is the conjugate of the composition isomorphism of lower sh
 - `ProEtale.CondensedRing.isIso_verdierExchange`: **Verdier duality**, the exchange morphism
   is an isomorphism, deduced from the derived projection formula
   (`isIso_boundedConstructibleExceptionalProjection_app_app`) by the Yoneda argument.
+- `ProEtale.CondensedRing.isIso_verdierBiduality_of_isDualizable` and
+  `ProEtale.CondensedRing.isIso_verdierBiduality_of_isCompl`: the lisse and open–closed steps of
+  biduality.
+- `ProEtale.CondensedRing.relativeDualizingComplexIsoUpperStar`: `Lj^* ω_X ≅ ω_U` for an open
+  immersion `j`, and `ProEtale.CondensedRing.isIso_map_verdierBiduality_iff_of_isOpenImmersion`:
+  `Lj^* δ_K` is an isomorphism iff `δ_{Lj^* K}` is (given the braided axiom for `Lj^*`).
 
 ## Sorried input
 
@@ -229,5 +237,86 @@ noncomputable def dualVerdierExchange (K : Dᵇc(X.left)⟦Profinite.padicAlgClR
     (upperShriekDualizingComplexIso ℓ f aY) K
 
 end Absolute
+
+/-! ### Restriction of the dualizing complex to an open subscheme -/
+
+section OpenImmersion
+
+variable {U X S : Over (Spec (.of k))}
+  [LocallyOfFiniteType U.hom] [QuasiCompact U.hom] [IsSeparated U.hom] [LocallyOfFiniteType X.hom]
+  [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType S.hom] [QuasiCompact S.hom]
+  [IsSeparated S.hom]
+  (j : U ⟶ X) [IsOpenImmersion j.left] (a : X ⟶ S)
+
+/-- For an open immersion `j`, the lower shriek `Rj_!` on bounded constructible `ℚ̄_ℓ`-complexes
+is the extension by zero `j_!`: the independence of the compactification, comparing the chosen
+compactification of `j` with the compactification `X ⟶ X` by the identity, along which the
+derived pushforward is the identity. -/
+noncomputable def boundedConstructibleLowerShriekIsoOpenImmersionLowerShriek :
+    boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ j ≅
+      boundedConstructibleOpenImmersionLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ j :=
+  boundedConstructibleLowerShriekOfCompactificationIso_padicAlgCl ℓ (compactificationOverField j)
+      (Compactification.ofIsOpenImmersion j.left) ≪≫
+    (Iso.refl _ : _ ≅ boundedConstructibleOpenImmersionLowerShriek _ ℓ j ⋙
+      boundedConstructibleLowerStar _ ℓ (𝟙 X)) ≪≫
+    Functor.isoWhiskerLeft _ (boundedConstructibleLowerStarId _ ℓ X) ≪≫ Functor.rightUnitor _
+
+/-- For an open immersion `j`, the exceptional inverse image `Rj^!` on bounded constructible
+`ℚ̄_ℓ`-complexes is the pullback `Lj^*`: the conjugate of
+`boundedConstructibleLowerShriekIsoOpenImmersionLowerShriek`. -/
+noncomputable def boundedConstructibleUpperShriekIsoUpperStar :
+    boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ j ≅
+      boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j :=
+  conjugateIsoEquiv (boundedConstructibleUpperShriekAdjunction _ ℓ j)
+    (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction _ ℓ j)
+    (boundedConstructibleLowerShriekIsoOpenImmersionLowerShriek ℓ j).symm
+
+/-- **The dualizing complex restricts to open subschemes**: for an open immersion `j : U ⟶ X` and
+`a : X ⟶ S`, the dualizing complex of `U` relative to `j ≫ a` is the restriction
+`Lj^* ω_X` of the dualizing complex of `X` relative to `a`. -/
+noncomputable def relativeDualizingComplexIsoUpperStar :
+    relativeDualizingComplex ℓ (j ≫ a) ≅
+      (boundedConstructibleUpperStar _ ℓ j).obj (relativeDualizingComplex ℓ a) :=
+  (upperShriekDualizingComplexIso ℓ j a).symm ≪≫
+    (boundedConstructibleUpperShriekIsoUpperStar ℓ j).app _
+
+/-- **Restriction of biduality to an open subscheme**: for an open immersion `j : U ⟶ X` and
+`a : X ⟶ S`, the restriction `Lj^* δ_K` of the double-dual morphism of `K` relative to `a` is an
+isomorphism if and only if the double-dual morphism `δ_{Lj^* K}` relative to `j ≫ a` is, under
+the identification `Lj^* ω_X ≅ ω_U` (`relativeDualizingComplexIsoUpperStar`) and the
+commutation of `Lj^*` with internal homs
+(`isIso_ihomComparison_boundedConstructibleUpperStar_of_isOpenImmersion`).
+
+The braided axiom `hbr` for the monoidal structure of `Lj^*` and the Koszul braidings is taken
+as a hypothesis: it is not yet available for the derived pullback. -/
+theorem isIso_map_verdierBiduality_iff_of_isOpenImmersion
+    (hbr : ∀ K M : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧,
+      Functor.LaxMonoidal.μ (boundedConstructibleUpperStar _ ℓ j) K M ≫
+          (boundedConstructibleUpperStar _ ℓ j).map (β_ K M).hom =
+        (β_ ((boundedConstructibleUpperStar _ ℓ j).obj K)
+            ((boundedConstructibleUpperStar _ ℓ j).obj M)).hom ≫
+          Functor.LaxMonoidal.μ (boundedConstructibleUpperStar _ ℓ j) M K)
+    (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+    IsIso ((boundedConstructibleUpperStar _ ℓ j).map (verdierBiduality ℓ a K)) ↔
+      IsIso (verdierBiduality ℓ (j ≫ a) ((boundedConstructibleUpperStar _ ℓ j).obj K)) := by
+  let : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j).LaxBraided :=
+    { (inferInstance : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
+        j).LaxMonoidal) with braided := hbr }
+  have := isIso_ihomComparison_boundedConstructibleUpperStar_of_isOpenImmersion _ ℓ j K
+  have := isIso_ihomComparison_boundedConstructibleUpperStar_of_isOpenImmersion _ ℓ j
+    ((ihom K).obj (relativeDualizingComplex ℓ a))
+  have : IsIso (MonoidalClosed.dualComparison (boundedConstructibleUpperStar _ ℓ j)
+      (relativeDualizingComplexIsoUpperStar ℓ j a).inv K) := by
+    rw [MonoidalClosed.dualComparison]
+    infer_instance
+  have : IsIso (MonoidalClosed.dualComparison (boundedConstructibleUpperStar _ ℓ j)
+      (relativeDualizingComplexIsoUpperStar ℓ j a).inv
+      ((ihom K).obj (relativeDualizingComplex ℓ a))) := by
+    rw [MonoidalClosed.dualComparison]
+    infer_instance
+  exact MonoidalClosed.isIso_map_toIhomIhom_iff (boundedConstructibleUpperStar _ ℓ j)
+    (relativeDualizingComplexIsoUpperStar ℓ j a).inv K
+
+end OpenImmersion
 
 end AlgebraicGeometry.ProEtale.CondensedRing
