@@ -13,7 +13,8 @@
   "def-pc-integral-scheme",
   "def-weil-regular-scheme",
   "def-weil-finite-type-morphism",
-  "def-kun-projective"
+  "def-kun-projective",
+  "def-per-fs-log-group-action"
  ],
  "proof": [
   {
@@ -240,5 +241,23 @@
   "group": "Q18",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q18-66c96b64c (reviewer sub-agent of L); spot-checked: Read the item, all five new nodes and every cited statement in full, against ILO VIII 1.1–1.2, 4.1.5–4.2.13; X 1.1–1.10 (preparation 1.2, 1.3(vii), Lemmas 1.5–1.6, the Ui/Vi charts of 1.7, the 1.8 invariant monoids R̄ = Ker χ ∩ P̄ and R ⊂ R′ ⊂ R̄′); VI 3.1–3.5; and the XVI 3.7 application. The statement is unchanged apart from expanding the combined brackets, and it matches X 1.1 over a complete strictly henselian trait. Step 1: complete local gives excellent; finite type gives qe and Noetherian; separatedness checked; the trait's log-regularity dimension check holds; the map is one of log regular pairs. Step 2 takes only the absolute conclusions (VIII 1.2 shows h is not log smooth). Step 3: the first two stages are saturated log blowups, hence log étale. Step 4: I checked β_i^{-1}, the Vi cokernel map b−Σa_j and the split sequence. snc is kept because the blowups are permissible, and G-strictness by VIII 4.1.5. A (Z/2)² test on A² shows the strict-transform centres are locally fixed loci of subgroups of the inertia. Step 5: the subgroup-torsion argument for R̄^gp and R′^gp and the affine-space clause hold, and the quotient commutes with base change because |G| is invertible in Λ. Step 6: the quotient is admissible and generically free, the very-tame quotient is Kummer étale, and composition gives W→T log smooth. New nodes: all true, statement-only, not restatements, with small cases tested; none cites SGA. Two are strict generalizations of Q70's lem-per-gabber-equivariant-log-modification and lem-per-very-tame-quotient-log-regular (maintainer may repoint later). There is no existing general log-smooth chart-calculus node. Tool uses accepted: lem-trf-projective-bundle-separated and lem-trf-log-regular-divisorial-structure. Batch-5: the closures of every flagged citation contain only generic trf definitions or algebra (fs log/log-regular-pair definitions, universally catenary/CM, G-ring/J-2 locality, Proj separated, Kato–Nizioł toric local algebra). There is no thm-trf, trace transport, Poincaré duality or batch-4 node, so all flags are accepted. Advisory: the inherited stmt_dep def-weil-regular-scheme is unused but harmless. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GabberLogSmoothEquivariantModification",
+  "declaration": "AlgebraicGeometry.exists_gabber_logSmooth_equivariant_modification",
+  "file": "lean/Sheaf/AlgebraicGeometry/GabberLogSmoothEquivariantModification.lean",
+  "statement": "theorem exists_gabber_logSmooth_equivariant_modification (R : CommRingCat.{u}) [IsDomain R] [IsDiscreteValuationRing R] [IsAdicComplete (IsLocalRing.maximalIdeal R) R] [IsStrictlyHenselianLocalRing R] (T : FineSaturatedLogScheme.{u}) (e : T.scheme ≅ Spec R) (hcanonical : ∃ c : T.logStructure.monoidSheaf.obj ≅ divisorialLogPresheaf (Spec.map (CommRingCat.ofHom (algebraMap R (FractionRing R))) ≫ e.inv), c.hom ≫ divisorialStructuralMap (Spec.map (CommRingCat.ofHom (algebraMap R (FractionRing R))) ≫ e.inv) = T.logStructure.alpha) (V : FineSaturatedLogScheme.{u}) [IsIntegral V.scheme] (f : EtaleLogHom V T) (hregular : V.IsLogRegular) (hsmooth : f.IsLogSmooth) [LocallyOfFiniteType f.base] [QuasiCompact f.base] (hqp : ∃ (N : ℕ) (i : V.scheme ⟶ ℙ(ULift.{u} (Fin (N + 1)); T.scheme)), IsImmersion i ∧ i ≫ ℙ(ULift.{u} (Fin (N + 1)); T.scheme) ↘ T.scheme = f.base) (H : Type v) [Group H] [Finite H] (a : FSLogGroupAction H V) (hover : ∀ g : H, (a.logMap g).CompEq f f) (htame : a.IsTame) (hfree : a.IsGenericallyFree) : ∃ (W : FineSaturatedLogScheme.{u}) (b : FSLogGroupAction H W) (h : EtaleLogHom W V) (s : EtaleLogHom W T) (Q : FineSaturatedLogScheme.{u}) (q : EtaleLogHom W Q) (t : EtaleLogHom Q T), IsIntegral W.scheme ∧ LocallyOfFiniteType s.base ∧ QuasiCompact s.base ∧ (∃ (N : ℕ) (i : W.scheme ⟶ ℙ(ULift.{u} (Fin (N + 1)); T.scheme)), IsImmersion i ∧ i ≫ ℙ(ULift.{u} (Fin (N + 1)); T.scheme) ↘ T.scheme = s.base) ∧ h.CompEq f s ∧ b.IsEquivariant a h ∧ IsHProjective h.base ∧ (∃ d : W.scheme.PartialIso V.scheme, d.source.ι ≫ h.base = d.iso.hom ≫ d.target.ι) ∧ W.IsLogRegular ∧ s.IsLogSmooth ∧ b.IsQuotient q ∧ q.CompEq t s ∧ Q.IsLogRegular ∧ t.IsLogSmooth",
+  "branch": "newtargets-dag",
+  "by": "N5",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d93d3b686",
+  "group": "N5",
+  "result": "pass",
+  "note": "Statement matches node and ILO X 1.1 clause by clause: complete strictly henselian DVR trait, hcanonical pins the canonical log structure, V integral/log regular/log smooth/finite type/quasi-projective, action over T, tame and generically free; conclusions (equivariant, projective, birational restriction of h, W and Q log regular and log smooth, Q the invariant quotient with (q_*M_W)^H) all present. New def-per-fs-log-group-action has the required fields and real data, Aut convention consistent, no existing equivalent (Q111/Q128 are scheme/divisorial-pair actions). Node changes only lean + stmt_deps gain (allowed). Both files compile clean via nt_compile --json in dependency order, 3.0 s each; statements verbatim. Advisory: IsQuotient scheme clauses overlap IsAdmissibleFiniteSchemeQuotient; inherited def-weil-regular-scheme unused."
  }
 }

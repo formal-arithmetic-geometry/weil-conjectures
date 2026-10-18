@@ -1,0 +1,110 @@
+{
+ "id": "def-per-fs-log-group-action",
+ "kind": "definition",
+ "title": "Finite group actions and invariant quotients of fs log schemes",
+ "status": "split",
+ "statement": "Let $H$ be a finite group and $X$ an fs log scheme, with log morphisms as in [def-trf-fs-log-blowup]. An $H$-action on $X$ consists of log automorphisms $a_g:X\\to X$ with $a_1=\\operatorname{id}$ and $a_{gh}=a_g\\circ a_h$. It is tame if for every geometric point $x:\\operatorname{Spec}\\Omega\\to X$, with $\\Omega$ algebraically closed, the order of $\\{g\\in H:a_gx=x\\}$ is invertible in $\\Omega$. It is generically free if there is a dense invariant open $U\\subset X$ such that every geometric point in $U$ has trivial stabilizer. A log morphism $f:X\\to Y$ between schemes with $H$-actions is equivariant when $f a_g=a_g f$ for every $g$.\n\nFor an fs log scheme $Y$, a log morphism $q:X\\to Y$ is the invariant log quotient if its underlying scheme morphism is invariant, its topology is the orbit quotient topology, it is categorical among invariant scheme morphisms, and for every affine open $U\\subset Y$ its preimage is affine and the canonical ring map identifies $\\mathcal O_Y(U)$ with $\\mathcal O_X(q^{-1}U)^H$; moreover, for every etale $E\\to Y$, the canonical log pullback map identifies $M_Y(E)$ with the invariant submonoid of $M_X(E\\times_YX)$. Here the $H$-action on $E\\times_YX$ is the identity on $E$ and the given action on $X$, and the invariance is tested using the given action on log sections. Thus $M_Y=(q_*M_X)^H$, with its prescribed structural map.",
+ "stmt_deps": [
+  "def-trf-fs-log-blowup"
+ ],
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose VI 3.1--3.5, pp.73--75, especially the paragraph after Proposition 3.5; Expose X 1.1, pp.135--136."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A finite group action on a fine saturated logarithmic scheme with tame geometric stabilizers and invariant quotient log structure",
+   "results": "{\"t\": \"2026-10-18T22:20:54Z\", \"tool\": \"leansearch\", \"query\": \"A finite group action on a fine saturated logarithmic scheme with tame geometric stabilizers and invariant quotient log structure\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Finite.to_properlyDiscontinuousSMul\", \"ProperlyDiscontinuousSMul.finite_stabilizer'\", \"ProperlyDiscontinuousVAdd.finite_stabilizer'\", \"ProperlyDiscontinuousVAdd.finite_stabilizer\", \"MulAction.IsQuasiPreprimitive\", \"ProperlyDiscontinuousSMul.finite_stabilizer\", \"MulAction.selfEquivOrbitsQuotientProd'\", \"MulAction.ofQuotientStabilizer\"], \"digest\": \"6882a9fe96b51571\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: returned declarations do not define log actions with invariant direct-image logarithmic quotient"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tame finite group action on fs log schemes and invariant direct image log quotient",
+   "results": "{\"t\": \"2026-10-18T22:20:54Z\", \"tool\": \"leanfinder\", \"query\": \"Tame finite group action on fs log schemes and invariant direct image log quotient\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.PreGaloisCategory.FiberFunctor.preservesQuotientsByFiniteGroups\", \"CategoryTheory.PreGaloisCategory.has_decomp_quotients\", \"CategoryTheory.PreGaloisCategory.exists_lift_of_quotient_openSubgroup\", \"AlgebraicGeometry.Scheme.Hom.instIsLocallyDirectedAffineZariskiSiteCompOppositeCommRingCatRightOpOpensOpToOpensFunctorNormalizationDiagramSpecForget\", \"Ideal.Quotient.stabilizerHomSurjectiveAuxFunctor\", \"AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.Scheme.Hom.liftQuotient\", \"AlgebraicGeometry.Scheme.Hom.normalizationDiagram\"], \"digest\": \"59ff09bf87834aff\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: returned declarations do not define log actions with invariant direct-image logarithmic quotient"
+  },
+  {
+   "tool": "grep",
+   "query": "LogGroupAction|IsLogQuotient|IsTame",
+   "results": "{\"t\": \"2026-10-18T22:20:54Z\", \"tool\": \"grep\", \"query\": \"LogGroupAction|IsLogQuotient|IsTame\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: returned declarations do not define log actions with invariant direct-image logarithmic quotient"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-per-gabber-log-smooth-equivariant-modification",
+  "date": "2026-10-18",
+  "group": "N5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Proof Step 3: dimension-normalized Verdier duality, regular finite-torsion local model; pointwise purity and composition used to compare the normalized curve with the ambient regular scheme. Input: Gabber purity for a regular Noetherian closed pair. More precisely: Expose XVI, section 3.7 second paragraph through its last paragraph, printed pp.254--255: semistable G-alteration, ell-Sylow H, tame equivariant modification, quotient over T=S prime/H, and log resolution. Geometric construction only, before applying Theorem 3.6.2 and Proposition 3.5.7; preliminary finite extension to normalize constants in the first paragraph. Specifically: XVI 3.7: equivariant modification X double-prime and log-smooth quotient X double-prime/H. The tame equivariant modification and its invariant logarithmic quotient require the action and quotient notions.",
+   "via": [
+    "lem-per-gabber-log-smooth-equivariant-modification",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-gabber-regular-pair-purity",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FSLogGroupAction",
+  "declaration": "AlgebraicGeometry.FSLogGroupAction",
+  "file": "lean/Sheaf/AlgebraicGeometry/FSLogGroupAction.lean",
+  "statement": "structure FSLogGroupAction (H : Type v) [Group H] (X : FineSaturatedLogScheme.{u})",
+  "branch": "newtargets-dag",
+  "by": "N5",
+  "date": "2026-10-18",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.FSLogGroupAction",
+   "AlgebraicGeometry.FSLogGroupAction.IsTame",
+   "AlgebraicGeometry.FSLogGroupAction.IsGenericallyFree",
+   "AlgebraicGeometry.FSLogGroupAction.IsEquivariant",
+   "AlgebraicGeometry.logQuotientTest",
+   "AlgebraicGeometry.FSLogGroupAction.IsInvariantLogSection",
+   "AlgebraicGeometry.FSLogGroupAction.IsQuotient"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d93d3b686",
+  "group": "N5",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d93d3b686",
+  "group": "N5",
+  "result": "pass",
+  "note": "Statement matches node and ILO X 1.1 clause by clause: complete strictly henselian DVR trait, hcanonical pins the canonical log structure, V integral/log regular/log smooth/finite type/quasi-projective, action over T, tame and generically free; conclusions (equivariant, projective, birational restriction of h, W and Q log regular and log smooth, Q the invariant quotient with (q_*M_W)^H) all present. New def-per-fs-log-group-action has the required fields and real data, Aut convention consistent, no existing equivalent (Q111/Q128 are scheme/divisorial-pair actions). Node changes only lean + stmt_deps gain (allowed). Both files compile clean via nt_compile --json in dependency order, 3.0 s each; statements verbatim. Advisory: IsQuotient scheme clauses overlap IsAdmissibleFiniteSchemeQuotient; inherited def-weil-regular-scheme unused."
+ }
+}
