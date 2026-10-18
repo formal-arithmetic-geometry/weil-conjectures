@@ -25,7 +25,8 @@
   "lem-pur-twist-cancellation",
   "lem-pur-coprojection",
   "lem-pur-finite-etale-dualizing-normalization",
-  "lem-pur-finite-clopen-derived-decomposition"
+  "lem-pur-finite-clopen-derived-decomposition",
+  "def-pur-composition-comparisons"
  ],
  "proof": [],
  "proof_deps": [],
@@ -109,5 +110,58 @@
   "group": "Q95",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q95-012da2a12 (reviewer sub-agent of L); spot-checked: I read pur9-rg-def-phi in full against main-20261015 sk-thm-regular/pur9-rg-def-phi.md and sk-thm-regular.proof.md Steps 1-2. I also read the statement of every cited node. The delivery has no new nodes. The composite matches the blueprint and Step 2a of the citer sk-thm-regular: Pi_{a_Z}^{-1}, then c_{a_X,i}, then Ri^!Pi_{a_X}, then the twist arrows, with N-m=c, giving Lambda_Z -> Ri^!(Lambda_X(c)[2c]) in D(Z_proet,A_{E,n}). Checks: pur9-def-upper-shriek-composition with g=a_X, f=i gives omega_{a_Z} -> Ri^!omega_{a_X}, so the direction is right. That map is an isomorphism because it is the adjunction conjugate (def-weil-pbc-adjunction-conjugate) of alpha from thm-sf-comp-composition. The Pi_f of def-pur-smooth-purity-map apply to a_X (d=N) and a_Z (d=m) on each component. lem-pur-regular-immersion-smooth-structure gives the smoothness and m=N-c; its blueprint_update, a stalk-dimension equality, still implies this. Small cases tested: Z empty; Z a point in A^N, consistent with Step 4c (Thom class); components of different dimensions, where only the componentwise construction is well typed; c=0 is excluded since def-pur-regular-immersion requires c>=1. Not a duplicate of lem-pur-twist-cancellation (the general composite, of which this is the canonical instance), def-pur-smooth-purity-map or pur9-def-upper-shriek-composition; same_as set to []. Faults repaired in fixes/dag/nodes/sec-smooth-purity/pur9-rg-def-phi.json: (1) B4: '$Lambda=' was missing its backslash. (2) C1/B3: the assembly over components and the twist identifications cited no node. The connected case is now the specified composite Phi(i;b,Pi_X,Pi_Z) of lem-pur-twist-cancellation (through lem-pur-coprojection). The general case uses the clopen equivalence of lem-pur-finite-clopen-derived-decomposition and beta_s built from rho_e of lem-pur-finite-etale-dualizing-normalization and c_{j_s,i_s}, c_{i,j'_s}. The empty-Z case is stated. (3) The unused citation of thm-pur-finite-coefficient-smooth-purity is removed: Pi_f is already an isomorphism by its specification. The definition is not weakened and has no cycle. Batch 5: def-pur-smooth-purity-map is kept. It is a general definition that neither assumption gives; the PD assumption takes smoothPurityIso as given data. The lem-pod/lem-trf nodes it reaches are generic foundational lemmas (stalk tensor, integral pullback composition, adjoint mates), reached through sk-def-purity-conv and def-weil-exceptional-inverse-image, which were already cited. thm-pur-finite-coefficient-smooth-purity is dropped, as unneeded and outside both assumptions anyway. lem-pur-immersion-twist is replaced by lem-pur-twist-cancellation and lem-pur-coprojection, the general closed-immersion co-projection, also outside both assumptions. Maintainer notes: lem-pur-etale-orientation-locality and Step 4d of sk-thm-regular treat c=0, which falls outside c>=1; this predates the delivery. Possible tool_uses: lem-pur-finite-etale-dualizing-normalization (sk-thm-smooth-purity) and lem-pur-finite-clopen-derived-decomposition (sk-def-purity-conv).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.RegularImmersionPurityComparison",
+  "declaration": "AlgebraicGeometry.ProEtale.RegularImmersionPurity.comparison",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.RegularImmersionPurity.D",
+   "AlgebraicGeometry.ProEtale.RegularImmersionPurity.unit",
+   "AlgebraicGeometry.ProEtale.RegularImmersionPurity.unitPresentation",
+   "AlgebraicGeometry.ProEtale.RegularImmersionPurity.unit_bounded",
+   "AlgebraicGeometry.ProEtale.RegularImmersionPurity.exceptional",
+   "AlgebraicGeometry.ProEtale.RegularImmersionPurity.comp",
+   "AlgebraicGeometry.ProEtale.RegularImmersionPurity.comp_isIso",
+   "AlgebraicGeometry.ProEtale.RegularImmersionPurity.compIso",
+   "AlgebraicGeometry.ProEtale.RegularImmersionPurity.structure_isOver",
+   "AlgebraicGeometry.ProEtale.RegularImmersionPurity.positiveEquation",
+   "AlgebraicGeometry.ProEtale.RegularImmersionPurity.omega",
+   "AlgebraicGeometry.ProEtale.RegularImmersionPurity.orientation",
+   "AlgebraicGeometry.ProEtale.RegularImmersionPurity.twist_bounded",
+   "AlgebraicGeometry.ProEtale.RegularImmersionPurity.exceptional_bounded",
+   "AlgebraicGeometry.ProEtale.RegularImmersionPurity.rho",
+   "AlgebraicGeometry.ProEtale.RegularImmersionPurity.rho_isIso",
+   "AlgebraicGeometry.ProEtale.RegularImmersionPurity.rhoIso",
+   "AlgebraicGeometry.ProEtale.RegularImmersionPurity.positiveCoprojection",
+   "AlgebraicGeometry.ProEtale.RegularImmersionPurity.positiveCoprojectionWitnessIso",
+   "AlgebraicGeometry.ProEtale.RegularImmersionPurity.PositiveCoprojectionType",
+   "AlgebraicGeometry.ProEtale.RegularImmersionPurity.existsUnique_positiveCoprojectionIso",
+   "AlgebraicGeometry.ProEtale.RegularImmersionPurity.positiveCoprojectionIso",
+   "AlgebraicGeometry.ProEtale.RegularImmersionPurity.unitProduct",
+   "AlgebraicGeometry.ProEtale.RegularImmersionPurity.omegaComp",
+   "AlgebraicGeometry.ProEtale.RegularImmersionPurity.ConnectedEquation",
+   "AlgebraicGeometry.ProEtale.RegularImmersionPurity.existsUnique_connected",
+   "AlgebraicGeometry.ProEtale.RegularImmersionPurity.connected",
+   "AlgebraicGeometry.ProEtale.RegularImmersionPurity.Component",
+   "AlgebraicGeometry.ProEtale.RegularImmersionPurity.componentBeta",
+   "AlgebraicGeometry.ProEtale.RegularImmersionPurity.ComponentEquations",
+   "AlgebraicGeometry.ProEtale.RegularImmersionPurity.existsUnique_comparison",
+   "AlgebraicGeometry.ProEtale.RegularImmersionPurity.comparison"
+  ],
+  "file": "lean/Sheaf/Paper/RegularImmersionPurityComparison.lean",
+  "statement": "def comparison (c : ℕ) (hreg : IsRegularImmersionOfPureCodimension (X ↘ Spec (.of P.field.k)) i c) [Smooth (X ↘ Spec (.of P.field.k))] [IsRegular Z] : unit P Z ⟶ (exceptional P i).obj (P.diagonalTwist X c)",
+  "branch": "newtargets-dag",
+  "by": "Q21",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Canonical positive-power determining equation for the connected four-arrow composite, followed by unique finite-clopen assembly using the displayed rho/composition paste. The definition chooses only a uniquely determined morphism. The existing:true definition node def-pur-composition-comparisons owns compositionPowerAdd, compositionTwistPullback, and the unfolding lemma compositionEtalePowerZero, the canonical factors of compositionSourceIdentification in Sheaf.Paper.PurityCompositionCoherence. These factors do not choose data from smoothPurityCompositionCoherence; no theorem statement dependency is added."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7dfc5c37c",
+  "group": "Q21",
+  "result": "pass",
+  "note": "Re-delivery after a landing failure at PASSed head fd647cbc3184. That landing failed on a dependency overlay break: RingedSiteDualityMaps 'Unknown constant SheafOfModules.overFunctor', not a delivery fault. Snapshot diff vs fd647: item Lean module byte-identical (sha bed0ae00...) and node record identical; only blueprint-index.tsv and an appended report section differ. All 14 stmt_dep lean and statement records equal live. Live item has no lean record and its module is absent live, so no supersession or collision. nt_compile --json clean: 7.3 s, exit 0, all side overrides cached, the RingedSiteDualityMaps error did not recur. Spot check: proofs are sorry, comparison is .choose of an ExistsUnique, statement verbatim, docstrings with source place and blueprint id. The full mathematical review of b022a6c3/fd647cbc stands. Advisories unchanged: diagonalTwist vs purityCancellationTate typing; plain defs from base-era lemma stmt_deps."
  }
 }
