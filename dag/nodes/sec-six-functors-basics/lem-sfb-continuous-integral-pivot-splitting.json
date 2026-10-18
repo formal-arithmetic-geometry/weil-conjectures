@@ -13,9 +13,11 @@
  ],
  "proof": [
   {
-   "text": "Set $q_{ij}(t)$ to be the quotient of $G_{ij}(t)$ by $\\pi^e$. The divisibility hypothesis and [lem-sfb-continuous-uniformizer-division] give entrywise continuous maps $q:T\\to\\operatorname{Mat}_{n\\times m}(A)$ with $G=\\pi^e q$. At $t_0$, $q_{11}(t_0)$ is a unit; after shrinking to an open neighbourhood $U$ of $t_0$, the same lemma gives that $a(t)=q_{11}(t)$ is unit-valued and $a^{-1}$ is continuous on $U$.",
+   "text": "The DVR description of the recorded coefficient ring gives a nonzero maximal ideal. Since span {pi} is that ideal, pi is nonzero. Define q_ij(t) explicitly as G_ij(t) / pi^e in E; divisibility proves that this lies in the integer ring, and cancellation gives G_ij(t) = pi^e q_ij(t). Division by a fixed nonzero field element is continuous. Identify the recorded integer-ring topology with the induced topology from coefficientExtensionAbsoluteValue using equality of the two spectral norm metrics. Cancellation identifies the pivot quotient at t0 with the given unit. Apply continuous_uniformizer_division at exponent zero to the pivot function: its unique quotient is the same function, and its local clause gives an open unit neighbourhood U and continuous ambient-field inversion. On units, Ring.inverse in the integer ring has that ambient inverse, so it too is continuous on U.",
    "uses": [
     "def-weil-l-adic-coefficient-extension",
+    "lem-weil-l-adic-extension-integers-dvr",
+    "lem-sfb-integers-profinite-tower",
     "lem-sfb-continuous-uniformizer-division"
    ],
    "elementary": false,
@@ -25,7 +27,7 @@
    }
   },
   {
-   "text": "Apply [lem-sfb-unit-pivot-schur-formula] to $q|_U$ and the pivot $a$. Write the combined left factor supplied there as $L_{\\mathrm{pivot}}(t)=L_0(t)L_1(t)$. Its explicit diagonal and transvection matrices are continuous and invertible with continuous inverses, and they give $L_{\\mathrm{pivot}}(t)q(t)R_0(t)=\\operatorname{diag}(1,H_0(t))$ for a continuous residual block $H_0(t)$.",
+   "text": "Reindex the restricted matrix q along the equivalence from Fin (n+1) to Fin 1 ⊕ Fin n sending zero to Sum.inl 0 and successors to Sum.inr. Apply continuous_unitPivot_schur_formula to its continuous entries, unit-valued pivot and continuous pivot inverse. Package the prescribed invertible left and right matrices as units of matrix rings and map them along Matrix.reindexRingEquiv. The same reindexing transports all four continuity assertions for the factors and their inverses. Transport the Schur identity using submatrix_mul_equiv; its Fin.cases matrix is exactly fromBlocks(1,0,0,H0).",
    "uses": [
     "lem-sfb-unit-pivot-schur-formula"
    ],
@@ -56,13 +58,15 @@
  ],
  "proof_deps": [
   "def-weil-l-adic-coefficient-extension",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-sfb-integers-profinite-tower",
   "lem-sfb-continuous-uniformizer-division",
   "lem-sfb-unit-pivot-schur-formula"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "agent S8",
   "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
-  "place": "Proof of Theorem 6.12(2), finite E case, pp. 18–19; explicit continuous integral division, unit-pivot elimination, and scalar normalization."
+  "place": "Proof of Theorem 6.12(2), finite extension case, pp. 18–19; the recorded auxiliary pivot plan, implemented by explicit ambient-field division, the exponent-zero local unit clause, reindexed unit-pivot Schur elimination and scalar rescaling."
  },
  "mathlib_searches": [
   {
@@ -168,5 +172,15 @@
   "group": "Q21",
   "result": "pass",
   "note": "Every node clause matches the Lean: l prime and E/Q_l finite; A = coefficientExtensionIntegers with the recorded spectral-norm topology coefficientExtensionIntegersTopology in every continuity clause; any generator pi of the maximal ideal (hpi); arbitrary T in an independent universe; sizes as Fin 1 ⊕ Fin n and Fin 1 ⊕ Fin m (a bijection with the positive sizes); divisibility by pi^e everywhere; pivot = pi^e times a unit at t0; Opens U containing t0; L, R in GeneralLinearGroup with entrywise continuity of L, L^-1, R, R^-1 and H; L*G*R = fromBlocks(pi^e,0,0,H) in the node's order. No extra assumptions. Edge cases e=0, empty blocks, 1x1 and the zero matrix are correct, and the statement is true. The node differs from the shared node only in lean and in the added landed stmt_dep lem-sfb-integers-profinite-tower (owner of the topology, no cycle). lean.statement is verbatim. No definitions, sorry only, and the docstrings carry source, blueprint tag and the four proof steps. Both report sections are present. No duplicate in Mathlib, the side tree or slopmaster2. nt_compile.py --json: rc 0, 2.9 s; an error probe was surfaced and #check confirms the signature. Minor, not a fault: the parent local-smith uses the maximal-ideal adic topology, which is mathematically equal."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S8",
+  "result": "pass",
+  "landing": "20261018T145115-L-3644743",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

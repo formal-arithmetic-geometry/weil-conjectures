@@ -16540,3 +16540,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 14:51 L: merged deliver/R1/Sheaf.LinearAlgebra.Matrix.ContinuousUnitPivot (stage 3; reviewer PASS; first push; landing 20261018T145112-L-3644050 (proof); batch 20261018T145048; modules 1; new nodes 0)
 - 14:51 L: merged deliver/R8/Sheaf.CategoryTheory.TensorParameterComposition (stage 3; reviewer PASS; first push; landing 20261018T145113-L-3644275 (proof); batch 20261018T145048; modules 1; new nodes 0)
 - 14:51 L: merged deliver/S7/Sheaf.FieldTheory.FiniteFieldAbsoluteGalois (stage 3; reviewer PASS; first push; landing 20261018T145114-L-3644473 (interface); batch 20261018T145048; modules 1; new nodes 0; change records: coord/changes/finite-field-absolute-galois-proof-imports.md)
+- 14:51 L: merged deliver/S8/Sheaf.LinearAlgebra.ContinuousIntegralPivotSplitting (stage 3; reviewer PASS; first push; landing 20261018T145115-L-3644743 (proof); batch 20261018T145048; modules 1; new nodes 0)
