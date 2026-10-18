@@ -11,35 +11,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.Topology.KrullDimension
 public import Mathlib.LinearAlgebra.FiniteDimensional.Defs
-import Mathlib.AlgebraicGeometry.Noetherian
-import Sheaf.AlgebraicGeometry.ZeroDimensionalClosedSubschemeFinite
-import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
-import Sheaf.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
-import Sheaf.AlgebraicGeometry.CohomologyFiniteExtension
-import Sheaf.AlgebraicGeometry.CoherentFiltrationIntegralSubschemes
-import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.AffineMorphism
-import WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar
-import Sheaf.Algebra.Homology.ModuleStalkExact
-import WeilConjectures.AlgebraicGeometry.ClosedPushforwardStalks
-import Sheaf.AlgebraicGeometry.FiniteTypeModuleSupportClosed
-import Sheaf.AlgebraicGeometry.CoherentKernelCokernelLocallyNoetherian
-import Sheaf.AlgebraicGeometry.NowhereDenseDimensionDrop
-import WeilConjectures.AlgebraicGeometry.ChowLemma
-import Sheaf.AlgebraicGeometry.IntegralChowRelativelyAmple
-import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-import Sheaf.AlgebraicGeometry.RelativeSerreVanishing
-import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.FiniteFreeComplex
-import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Twist
-import Sheaf.AlgebraicGeometry.LerayAcyclicPushforwardLinearComparison
-import WeilConjectures.AlgebraicGeometry.ChowLemma.ClosedModel
-import WeilConjectures.AlgebraicGeometry.Cohomology.Projective
-import Sheaf.AlgebraicGeometry.TopDegreeOpenRestrictionSurjective
-import WeilConjectures.Algebra.Homology.ModuleStalkExact
-import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
-import WeilConjectures.AlgebraicGeometry.CoherentKernelCokernelLocallyNoetherian
-import WeilConjectures.AlgebraicGeometry.FiniteTypeModuleSupportClosed
-import WeilConjectures.AlgebraicGeometry.PQFCohomology
-import WeilConjectures.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
+import Sheaf.AlgebraicGeometry.TopCoherentCohomologyFiniteQuotient
 
 /-! # Finite-dimensional top coherent cohomology
 
@@ -51,7 +23,7 @@ Source: Stacks Project, Étale Cohomology, Tag 0A3M, lemma-top-cohomology-cohere
 
 universe u
 
-open CategoryTheory
+open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry
 
@@ -117,6 +89,9 @@ theorem finiteDimensional_top_coherent_cohomology (k : Type u) [Field k]
           ((Scheme.ΓSpecIso (CommRingCat.of k)).inv ≫
             (X ↘ Spec (.of k)).appTop).hom).obj
         ((RingedSpace.moduleCohomology X.toRingedSpace d).obj F)) := by
-  sorry
+  obtain ⟨n, f, hf, Y, π, hπ, hsurj⟩ :=
+    exists_finiteDimensional_top_coherent_cohomology_quotient
+    k X d hd F hF
+  exact FiniteDimensional.of_surjective f hf
 
 end AlgebraicGeometry
