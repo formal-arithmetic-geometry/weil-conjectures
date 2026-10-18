@@ -15987,3 +15987,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 06:27 L: merged deliver/E3/Sheaf.AlgebraicGeometry.FiniteOverProjective (stage 3; reviewer PASS; first push; landing 20261018T062734-L-643323 (proof); batch 20261018T062645; modules 1; new nodes 0)
 - 06:27 L: merged deliver/E4/Sheaf.AlgebraicGeometry.DescendSmoothQcqs (stage 3; reviewer PASS; first push; landing 20261018T062734-L-643547 (interface); batch 20261018T062645; modules 1; new nodes 0; change records: coord/changes/descend-smooth-qcqs-import-pruning.md)
 - 06:27 L: merged deliver/E4/Sheaf.AlgebraicGeometry.InvertibleStalkLinearEquiv (stage 3; reviewer PASS; first push; landing 20261018T062735-L-643806 (proof); batch 20261018T062645; modules 1; new nodes 0)
+- 06:27 L: merged deliver/E4/Sheaf.AlgebraicGeometry.ProEtaleClassicalStalk (stage 3; reviewer PASS; first push; landing 20261018T062735-L-644046 (proof); batch 20261018T062645; modules 1; new nodes 0)
