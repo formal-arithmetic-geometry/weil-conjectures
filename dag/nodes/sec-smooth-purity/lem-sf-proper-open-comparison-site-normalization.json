@@ -43,80 +43,37 @@
  ],
  "proof": [
   {
-   "text": "The coefficient definition [def-weil-l-adic-coefficient-extension] gives that $\\Lambda=A_{E,n}$ is a finite commutative ring. Both $T_1$ and $T_2$ are quasi-separated by [lem-weil-pbc-locally-noetherian-quasi-separated], since they are locally Noetherian. The hypothesis also makes $T_1$ quasi-compact. Applying clause (1) of [lem-weil-pbc-qcqs-morphism-permanence] to $u:T_1\\to T_2$ gives quasi-compactness of $u$ from quasi-compactness of $T_1$ and quasi-separatedness of $T_2$, and quasi-separatedness of $u$ from that of $T_1$. Thus the direct-image comparison below has all its hypotheses. No invertibility assumption on $\\ell$ on these schemes is needed by that comparison.",
+   "text": "Use the positive-level finiteness theorem of [def-weil-l-adic-coefficient-extension], as already packaged by properOpenNormalizationCoefficientFinite. Expand the named properOpenProEtaleIsoPlus of [lem-weil-pbc-proper-open-comparison-proetale]. Its four factors are the inverse j2 open-extension comparison, the comparison image of the specified etale proper/open arrow, the canonical derived direct-image comparison, and the direct image of the j1 open-extension comparison. The construction already supplies all required invertibility and exact derived functors.",
    "uses": [
     "def-weil-l-adic-coefficient-extension",
-    "lem-weil-pbc-locally-noetherian-quasi-separated",
-    "lem-weil-pbc-qcqs-morphism-permanence"
+    "lem-weil-pbc-proper-open-comparison-proetale"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-comparison-direct-image.md",
-    "place": "Proof, qcqs hypotheses; schemes.tex Tags 01KV (lemma-compose-after-separated), 03GI (lemma-quasi-compact-permanence); locally Noetherian quasi-separatedness"
-   }
+   "elementary": true
   },
   {
-   "text": "By [lem-cbc-proetale-extension-zero-comparison], the specified canonical sheaf comparisons $e_{j_i,F}:A_{T_i}j^e_{i!}F\\to j^p_{i!}A_XF$ are natural isomorphisms. The etale and pro-etale open-extension functors are exact by [lem-weil-pbc-extension-by-zero-exact] and [lem-weil-extension-by-zero-exact]; $A$ is termwise exact comparison by [def-sf-comparison-derived-pullback]. Naturality of $e$ with respect to each differential gives an isomorphism of the termwise complexes, with the termwise inverse as inverse chain map. These exact functors preserve quasi-isomorphisms, so those chain maps descend to the displayed $e_{j_i,L}$ in the derived categories. Exactness also identifies the cohomology of an extended complex with the extension of its cohomology (kernels and images are preserved), so all open-extension inputs used below remain bounded below.",
+   "text": "Unfold the abbreviating comparison functor of [def-sf-comparison-derived-pullback] and the named direct-image transformation of [lem-weil-pbc-comparison-direct-image-canonical-mate]. They are definitionally the same functor and transformation appearing in the expanded construction. Apply Iso.trans_hom, Iso.app_hom, Functor.mapIso_hom and asIso_hom to identify its underlying morphism with that four-factor composite. This uses no new geometric comparison or choice of an endpoint isomorphism.",
    "uses": [
-    "lem-cbc-proetale-extension-zero-comparison",
-    "lem-weil-pbc-extension-by-zero-exact",
-    "lem-weil-extension-by-zero-exact",
-    "def-sf-comparison-derived-pullback"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09AF, lemma-jshriek-comparison; module extension adjunction 09AE, definition-extension-zero; exact termwise passage to complexes"
-   }
-  },
-  {
-   "text": "Put $M=j^e_{1!}L$. The etale input arrow is the specified one in [def-weil-pbc-proper-open-comparison], namely $\\alpha^e_{u,L}=\\varepsilon^e_{j_2,Ru_{e,*}M}\\circ j^e_{2!}(\\theta_{u,L}^{-1})$; [lem-weil-pbc-proper-open-comparison-iso] asserts invertibility for precisely that arrow. Applying $A_{T_2}$ gives an isomorphism $A_{T_2}(\\alpha^e_{u,L})$ with source $A_{T_2}j^e_{2!}L$ and target $A_{T_2}Ru_{e,*}M$. Use [lem-weil-pbc-comparison-direct-image-canonical-mate] at $M$: with its notation $a_u:A_{T_1}u_e^{-1}\\cong Lu_p^*A_{T_2}$, the next arrow is $b_{u,M}$, the transpose of $A_{T_1}(\\varepsilon^e_{u,M})\\circ a_{u,Ru_{e,*}M}^{-1}$. Its statement asserts this particular $b$ is invertible and satisfies $\\varepsilon^p\\circ Lu_p^*(b_{u,M})\\circ a_{u,Ru_{e,*}M}=A_{T_1}(\\varepsilon^e_{u,M})$. This fixes the comparison used here, rather than choosing an isomorphism with the same ends. Finally applying $Ru_{p,*}$ to $e_{j_1,L}$ gives an isomorphism with target $Ru_{p,*}j^p_{1!}A_XL$: its inverse is the image of $e_{j_1,L}^{-1}$.",
-   "uses": [
-    "def-weil-pbc-proper-open-comparison",
-    "lem-weil-pbc-proper-open-comparison-iso",
+    "def-sf-comparison-derived-pullback",
     "lem-weil-pbc-comparison-direct-image-canonical-mate"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-comparison-direct-image.md",
-    "place": "Proof, first paragraph (the counit mate defining the direct-image comparison); compare the proper/open source first paragraph for the specified etale arrow"
-   }
+   "elementary": true
   },
   {
-   "text": "Now spell out the construction of the named pro-etale map specified in the statement. Its source is $j^p_{2!}A_XL$, so identifying that source with the source of the pulled-back etale arrow uses $e_{j_2,L}^{-1}$, not $e_{j_2,L}$. The construction first uses that inverse, then $A_{T_2}(\\alpha^e_{u,L})$, then the named $b_{u,j^e_{1!}L}$, and then $Ru_{p,*}(e_{j_1,L})$. Hence its complete expression is\n$$\\alpha^p_{u,L}=Ru_{p,*}(e_{j_1,L})\\circ b_{u,j^e_{1!}L}\\circ A_{T_2}(\\alpha^e_{u,L})\\circ e_{j_2,L}^{-1}.$$\nThis is an expansion of the named-map construction in the statement, with every constituent supplied in steps 2 and 3. No assertion about an arbitrary isomorphism between these endpoints is used.",
+   "text": "Precompose with the forward j2 open comparison. Iso.hom_inv_id_app_assoc cancels that comparison with its inverse at L. The three remaining factors are exactly the right-hand side of the stated normalization equality.",
    "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/lem-weil-pbc-proper-open-comparison-proetale.md",
-    "place": "Proof, first paragraph and last paragraph: applying exact comparison to the etale map and identifying both endpoints; the construction is explicitly bound in this item statement"
-   }
-  },
-  {
-   "text": "Compose the equation of step 4 on the right with $e_{j_2,L}$. Associativity and $e_{j_2,L}^{-1}\\circ e_{j_2,L}=\\operatorname{id}_{A_{T_2}j^e_{2!}L}$ cancel the final inverse pair and give exactly\n$$\\alpha^p_{u,L}\\circ e_{j_2,L}=Ru_{p,*}(e_{j_1,L})\\circ b_{u,j^e_{1!}L}\\circ A_{T_2}(\\alpha^e_{u,L}).$$\nThe source and target computed in steps 2 and 3 are respectively $A_{T_2}j^e_{2!}L$ and $Ru_{p,*}j^p_{1!}A_XL$, both in $D^+(T_{2,\\mathrm{proet}},\\Lambda)$. Thus the equality has the required type.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/lem-weil-pbc-proper-open-comparison-proetale.md",
-    "place": "Proof, last paragraph, explicit source/target identification and inverse cancellation"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-weil-l-adic-coefficient-extension",
-  "lem-weil-pbc-locally-noetherian-quasi-separated",
-  "lem-weil-pbc-qcqs-morphism-permanence",
-  "lem-cbc-proetale-extension-zero-comparison",
-  "lem-weil-pbc-extension-by-zero-exact",
-  "lem-weil-extension-by-zero-exact",
+  "lem-weil-pbc-proper-open-comparison-proetale",
   "def-sf-comparison-derived-pullback",
-  "def-weil-pbc-proper-open-comparison",
-  "lem-weil-pbc-proper-open-comparison-iso",
   "lem-weil-pbc-comparison-direct-image-canonical-mate"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/lem-weil-pbc-proper-open-comparison-proetale.md",
-  "place": "First and last proof paragraphs define the pro-etale arrow by transport; expanded into endpoint typing, fixed counit-mate normalization, and inverse cancellation. Stacks 09AF identifies the canonical open comparison; 099R is the comparison setting."
+  "place": "First and last proof paragraphs; X5 uses the existing four-factor named-map construction and definitional agreement of its comparison names, then cancels the inverse open comparison. Exact derived descent and invertibility are already part of the imported construction."
  },
  "mathlib_searches": [
   {
@@ -342,5 +299,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X5",
+  "result": "pass",
+  "landing": "20261018T150152-L-3801087",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

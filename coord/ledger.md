@@ -16568,3 +16568,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 15:01 L: merged deliver/R2/Sheaf.NumberTheory.FrobeniusRootsOfUnityPower (stage 3; reviewer PASS; first push; landing 20261018T150150-L-3800643 (proof); batch 20261018T150141; modules 1; new nodes 0)
 - 15:01 L: merged deliver/W5/Sheaf.AlgebraicGeometry.ProEtaleRootsOfUnitySheaf (stage 3; reviewer PASS; first push; landing 20261018T150151-L-3800778 (proof); batch 20261018T150141; modules 1; new nodes 0)
 - 15:01 L: merged deliver/W6/Sheaf.Paper.FormalClosedSupportSheaves (stage 3; reviewer PASS; first push; landing 20261018T150151-L-3800951 (interface); batch 20261018T150141; modules 1; new nodes 0; change records: coord/changes/W6-formal-closed-support-proof-scopes.md)
+- 15:01 L: merged deliver/X5/Sheaf.AlgebraicGeometry.ProperOpenComparisonSiteNormalization (stage 3; reviewer PASS; first push; landing 20261018T150152-L-3801087 (proof); batch 20261018T150141; modules 1; new nodes 0)

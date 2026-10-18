@@ -9,17 +9,6 @@ public import Sheaf.Paper.ProEtaleProperOpenComparison
 public import Sheaf.AlgebraicGeometry.FixedComparisonDirectImageMate
 public import Sheaf.AlgebraicGeometry.ComparisonDerivedPullbackFixed
 public import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
-import WeilConjectures.SixFunctors.ProEtale.LowerShriek.OpenImmersion.Defs
-import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Defs
-import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
-import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasLeftKanExtension
-import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify
-import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Proetale
-import WeilConjectures.Mathlib.CategoryTheory.Sites.Continuous
-import Mathlib.CategoryTheory.Adjunction.Additive
-import Mathlib.CategoryTheory.Adjunction.Triple
-import WeilConjectures.Mathlib.CategoryTheory.MorphismProperty.OverAdjunction
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 
 /-!
 # Site normalization of the proper/open comparison
@@ -54,30 +43,15 @@ direct-image comparison in their specified directions.
 Source: blueprint order 1484, first and last proof paragraphs; Stacks Tags 09AF, 099R
 (blueprint: lem-sf-proper-open-comparison-site-normalization).
 
-Proof:
-1. The positive-level coefficient ring is finite by def-weil-l-adic-coefficient-extension.
-Locally Noetherian schemes are quasi-separated by
-lem-weil-pbc-locally-noetherian-quasi-separated. With quasi-compactness, the permanence
-lemma lem-weil-pbc-qcqs-morphism-permanence gives the direct-image comparison hypotheses;
-alternatively properness directly supplies them. No invertibility of l is required.
-2. The canonical adjoint open comparisons of lem-cbc-proetale-extension-zero-comparison
-are natural in sheaves. Exactness of both extensions (lem-weil-pbc-extension-by-zero-exact
-and lem-weil-extension-by-zero-exact), and exact comparison
-(def-sf-comparison-derived-pullback), let these isomorphisms act termwise on complexes.
-Naturality respects differentials. Exactness preserves quasi-isomorphisms and lower
-cohomology bounds, so they descend to the displayed bounded below comparisons.
-3. Apply exact comparison to the specified etale map of
-def-weil-pbc-proper-open-comparison. It is invertible by
-lem-weil-pbc-proper-open-comparison-iso. At its target use precisely the named comparison
-of lem-weil-pbc-comparison-direct-image-canonical-mate, then the direct image of the first
-open comparison. Each arrow has the displayed source and target.
-4. Expand properOpenProEtaleIsoPlus: it first uses the inverse open comparison for
-j₂, then the pulled-back etale arrow, then the canonical direct-image mate, and finally
-the direct image of the open comparison for j₁. This is the named construction of
-lem-weil-pbc-proper-open-comparison-proetale, not an arbitrary endpoint isomorphism.
-5. Precompose with the forward open comparison for j₂. Associativity and cancellation
-of that comparison with its inverse yield the equality, in the bounded below derived
-category of pro-etale constant-coefficient modules on T₂. -/
+Proof: the coefficient instance supplies finiteness at the positive level. Expand
+`properOpenProEtaleIsoPlus` into its four specified factors. The comparison functor
+and the direct-image mate agree definitionally with `siteComparisonDerivedPullbackPlus`
+and `fixedComparisonDirectImageMatePlus`. The hom of each composed isomorphism is
+the composite of its homs, and mapping an isomorphism maps its hom. The first factor
+is the inverse of the open-extension comparison for j₂. Precomposing with its forward
+map cancels this inverse by `Iso.hom_inv_id_app_assoc`, leaving the required three
+factors. The existing construction already supplies the exact derived open comparisons
+and the invertibility proofs; neither is constructed again here. -/
 theorem properOpenComparison_site_normalization (l : ℕ) [Fact l.Prime]
     (E : Type (u + 1)) [Field E] [Algebra (Padic l) E]
     [FiniteDimensional (Padic l) E] (n : ℕ)
@@ -100,6 +74,9 @@ theorem properOpenComparison_site_normalization (l : ℕ) [Fact l.Prime]
         f).rightDerivedFunctorPlus.map
           ((properOpenSiteExtensionIso
             (Padic.coefficientExtensionRing l E (n + 1)) j₁).hom.app L) := by
-  sorry
+  simp only [properOpenProEtaleIsoPlus, Iso.trans_hom, Iso.symm_hom,
+    Iso.app_hom, Functor.mapIso_hom, asIso_hom,
+    fixedComparisonDirectImageMatePlus, siteComparisonDerivedPullbackPlus,
+    Iso.hom_inv_id_app_assoc]
 
 end AlgebraicGeometry.ProEtale
