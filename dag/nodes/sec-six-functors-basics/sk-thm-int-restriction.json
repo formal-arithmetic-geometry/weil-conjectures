@@ -235,5 +235,27 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-13a855811",
+  "group": "NH",
+  "result": "pass",
+  "note": "Statement matches node/source sk-thm-int-restriction: setting binders identical to landed det-prop-int-brown-adjoint (prime ℓ, ringChar k prime ≠ ℓ, X,Y,f separated finite type over k, any BoundaryCompactification c); h/G/_adj are exactly what exists_integralBrownAdjoint supplies (not vacuous); conclusion ctfRestrictionAssertions gives hR (G maps Dctf(Y)=constantModelBoundedConstructible⊓finiteTorAmplitude into Dctf(X)) and Nonempty adjunction between the actual lifts of ι⋙image Λ c and ιOfLE hY⋙G⋙ι; hY/hL are true typing conclusions, not premises. No extra hypotheses or universe restriction; edge cases (empty scheme, zero, id/immersions, E=Q_ℓ) covered; finiteTorAmplitude form rfl-equal to ConstantModelConstructibleFiniteTor. No existing declaration (glue/line/closed nodes have no lean). Single sorry, standard axioms, source/blueprint docstrings with the 5 proof steps (glue clause (1) only), node changes only lean, statement verbatim, report has Worker report and Second reading by NH. nt_compile --json: IntegralBrownAdjoint 6.2 s, item 5.5 s, EXIT 0 clean."
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.IntegralExceptionalRestriction",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.IntegralCompactSupport.integralExceptionalRestriction",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.IntegralCompactSupport.ctfRestrictionAssertions",
+   "AlgebraicGeometry.ProEtale.CondensedRing.IntegralCompactSupport.integralExceptionalRestriction"
+  ],
+  "file": "lean/Sheaf/SixFunctors/IntegralExceptionalRestriction.lean",
+  "statement": "theorem integralExceptionalRestriction (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ) (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))] [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))] [IsSeparated (Y ↘ Spec (.of k))] (f : X ⟶ Y) [f.IsOver (Spec (.of k))] [LocallyOfFiniteType f] [QuasiCompact f] [IsSeparated f] (c : Compactification.BoundaryCompactification f) (h : ∀ K, localizing (Profinite.padicIntegersRingObj ℓ E.val) X K → localizing (Profinite.padicIntegersRingObj ℓ E.val) Y ((image (Profinite.padicIntegersRingObj ℓ E.val) c.obj.obj).obj K)) (G : (localizing (Profinite.padicIntegersRingObj ℓ E.val) Y).FullSubcategory ⥤ (localizing (Profinite.padicIntegersRingObj ℓ E.val) X).FullSubcategory) (_adj : lowerShriek (Profinite.padicIntegersRingObj ℓ E.val) c.obj.obj h ⊣ G) : ctfRestrictionAssertions (Profinite.padicIntegersRingObj ℓ E.val) c.obj.obj G",
+  "branch": "newtargets-dag",
+  "by": "NH",
+  "date": "2026-10-18",
+  "existing": false
  }
 }

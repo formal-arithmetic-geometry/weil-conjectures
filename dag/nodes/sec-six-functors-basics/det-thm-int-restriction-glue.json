@@ -288,5 +288,31 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3025ab499",
+  "group": "NB",
+  "result": "pass",
+  "note": "Node changed only in lean, and lean.statement is word for word the signature. Clause 1: M in the ambient derived category of module objects over O_E; finite open cover of free universe w with iSup U = top (empty cover allowed); hypothesis uses derived restriction (pull) and the recorded constantModelBoundedConstructible (generators); conclusion is generators X M. Clause 2: quantifies over every compactification c, preservation proof h, right adjoint G and adj : lowerShriek c h ⊣ G, as in brownAdjointAssertions; generators is invariant under isomorphism, so this says exactly the node's claim. Preservation of Dbc by f^! (hG) and by Rf_! (hF) are conclusions; the restricted adjunction adj' must have the same Hom bijections as adj, so it inherits the original one. Setting binders are identical to exists_integralBrownAdjoint; no extra assumptions. Edge cases (empty cover, X empty, M=0, every finite E, l=2) and universes checked. The three helpers are real ιOfLE/lift constructions with source and blueprint docstrings; the theorem docstring has the 8 proof steps; proof is sorry only; pro-etale site is real. No duplicate: rationalRestrictionGlue belongs to the separate node det-thm-restriction-glue. Report has Worker report and Second reading by NB. nt_compile --json on the snapshot exited 0 (item 3.6 s, clean). Maintainer note: three proof-dep nodes have no module yet, so no import; not needed for the statement."
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.IntegralRestrictionGlue",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.IntegralCompactSupport.IntegralRestriction.integralRestrictionGlue",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.IntegralCompactSupport.IntegralRestriction.constructibleInclusion",
+   "AlgebraicGeometry.ProEtale.CondensedRing.IntegralCompactSupport.IntegralRestriction.restrictedLowerShriek",
+   "AlgebraicGeometry.ProEtale.CondensedRing.IntegralCompactSupport.IntegralRestriction.restrictedUpperShriek",
+   "AlgebraicGeometry.ProEtale.CondensedRing.IntegralCompactSupport.IntegralRestriction.integralRestrictionGlueAssertions",
+   "AlgebraicGeometry.ProEtale.CondensedRing.IntegralCompactSupport.IntegralRestriction.integralRestrictionGlue"
+  ],
+  "file": "lean/Sheaf/SixFunctors/IntegralRestrictionGlue.lean",
+  "statement": "theorem integralRestrictionGlue (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ) (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] : integralRestrictionGlueAssertions.{u, w} (Profinite.padicIntegersRingObj ℓ E.val) k",
+  "branch": "newtargets-dag",
+  "by": "NB",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "States both clauses using the recorded finite-constant-model Dbc and ordinary Loc(Dbc). The right adjoint and adjunction are universally quantified representatives of the Brown adjunction; the restricted Hom equivalence is required to equal its original ambient Hom equivalence. Helpers only construct literal full inclusions and functor restrictions with actual data."
  }
 }
