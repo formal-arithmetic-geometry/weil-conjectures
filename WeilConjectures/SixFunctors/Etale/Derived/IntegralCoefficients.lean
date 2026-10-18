@@ -240,25 +240,6 @@ lemma isTriangulated_rightDerivedUpperShriek {X Y : Scheme.{u}} (f : X ⟶ Y)
   have := (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) f).commShift_of_leftAdjoint ℤ
   (rightDerivedUpperShriekAdjunction _ f).isTriangulated_rightAdjoint
 
-/-- The exceptional inverse image `Rf^!` commutes with derived limits of reductions: for a
-derived complete `L ∈ D(Y_ét, Λ)` and a homotopy limit cone `c` of the tower
-`n ↦ Rf^!(L ⊗ᴸ Λ ⧸ Iⁿ)`, there is an isomorphism `Rf^! L ≅ c.pt` compatible with the legs.
-Indeed `Rf^!` is a triangulated right adjoint, so it carries the Milnor triangle exhibiting
-`L = R lim_n L ⊗ᴸ Λ ⧸ Iⁿ` to a Milnor triangle. -/
-theorem exists_iso_rightDerivedUpperShriek {X Y : Scheme.{u}} (f : X ⟶ Y)
-    [HasCompactification f] [(R(f)_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint] {L : 𝐃(Y, Λ)}
-    (hL : DerivedCategory.derivedComplete Y.smallEtaleTopology I L)
-    {c : Cone (DerivedCategory.derivedCompletionDiagram Y.smallEtaleTopology I L ⋙
-      R(f)^![ModuleCat.{u + 1} Λ])} (hc : Pretriangulated.IsHomotopyLimit c) :
-    ∃ e : (R(f)^![ModuleCat.{u + 1} Λ]).obj L ≅ c.pt, ∀ n : ℕ,
-      e.hom ≫ c.π.app (op n) = (R(f)^![ModuleCat.{u + 1} Λ]).map
-        ((DerivedCategory.derivedCompletionCone Y.smallEtaleTopology I L).π.app (op n)) := by
-  let adj := rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) f
-  have := adj.commShift_of_leftAdjoint ℤ
-  have : (R(f)^![ModuleCat.{u + 1} Λ]).IsTriangulated := adj.isTriangulated_rightAdjoint
-  have : (R(f)^![ModuleCat.{u + 1} Λ]).Additive := adj.right_adjoint_additive
-  exact (hL.map (R(f)^![ModuleCat.{u + 1} Λ])).exists_iso hc
-
 section Constructible
 
 variable [IsDomain Λ] [IsNoetherianRing Λ] [IsAdicComplete I Λ] [Finite (Λ ⧸ I)]

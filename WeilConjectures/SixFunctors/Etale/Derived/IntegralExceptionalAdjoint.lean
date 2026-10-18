@@ -345,6 +345,31 @@ end Dualizing
 
 
 
+section DerivedLimit
+
+variable {Λ : Type (u + 1)} [CommRing Λ] (I : Ideal Λ)
+
+/-- The exceptional inverse image `Rf^!` commutes with derived limits of reductions: for a
+derived complete `L ∈ D(Y_ét, Λ)` and a homotopy limit cone `c` of the tower
+`n ↦ Rf^!(L ⊗ᴸ Λ ⧸ Iⁿ)`, there is an isomorphism `Rf^! L ≅ c.pt` compatible with the legs.
+Indeed `Rf^!` is a triangulated right adjoint, so it carries the Milnor triangle exhibiting
+`L = R lim_n L ⊗ᴸ Λ ⧸ Iⁿ` to a Milnor triangle. -/
+theorem exists_iso_rightDerivedUpperShriek {X Y : Scheme.{u}} (f : X ⟶ Y)
+    [HasCompactification f] [(R(f)_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint] {L : 𝐃(Y, Λ)}
+    (hL : DerivedCategory.derivedComplete Y.smallEtaleTopology I L)
+    {c : Cone (DerivedCategory.derivedCompletionDiagram Y.smallEtaleTopology I L ⋙
+      R(f)^![ModuleCat.{u + 1} Λ])} (hc : Pretriangulated.IsHomotopyLimit c) :
+    ∃ e : (R(f)^![ModuleCat.{u + 1} Λ]).obj L ≅ c.pt, ∀ n : ℕ,
+      e.hom ≫ c.π.app (op n) = (R(f)^![ModuleCat.{u + 1} Λ]).map
+        ((DerivedCategory.derivedCompletionCone Y.smallEtaleTopology I L).π.app (op n)) := by
+  let adj := rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) f
+  have := adj.commShift_of_leftAdjoint ℤ
+  have : (R(f)^![ModuleCat.{u + 1} Λ]).IsTriangulated := adj.isTriangulated_rightAdjoint
+  have : (R(f)^![ModuleCat.{u + 1} Λ]).Additive := adj.right_adjoint_additive
+  exact (hL.map (R(f)^![ModuleCat.{u + 1} Λ])).exists_iso hc
+
+end DerivedLimit
+
 /-! ### The integral exceptional adjoint -/
 
 section Constructible
@@ -474,7 +499,60 @@ theorem boundedConstructibleIntegral_and_torAmplitudeIn_of_isHomotopyLimit {X Y 
   exact h₂
 
 include hϖ hI in
-set_option maxHeartbeats 1600000 in
+/-- Clause 1 (reductions) of `prop-coef-integral-exceptional-adjoint`:
+`(G_f L) ⊗ᴸ A_n ≅ Rf^!(L ⊗ᴸ A_n)`. -/
+theorem nonempty_iso_reductionModIdeal_of_isHomotopyLimit_rightDerivedUpperShriek {X Y : Scheme.{u}}
+    (aX : X ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX]
+    [LocallyOfFiniteType aY] [QuasiCompact aY] [IsSeparated aX] [IsSeparated aY]
+    [HasCompactification aX] [HasCompactification aY]
+    [(R(aX)_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint] [(R(aY)_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint]
+    (f : X ⟶ Y) (hf : f ≫ aY = aX) [QuasiCompact f] [HasCompactification f]
+    [(R(f)_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint] {L : 𝐃(Y, Λ)}
+    (hL : DerivedCategory.boundedConstructibleIntegral I Y L)
+    {c : Cone (DerivedCategory.derivedCompletionDiagram Y.smallEtaleTopology I L ⋙
+      R(f)^![ModuleCat.{u + 1} Λ])} (hc : Pretriangulated.IsHomotopyLimit c) :
+    ∀ n : ℕ, Nonempty ((reductionModIdeal Λ X (I ^ n)).obj c.pt ≅
+        (R(f)^![ModuleCat.{u + 1} Λ]).obj ((reductionModIdeal Λ Y (I ^ n)).obj L)) := by
+  let adj := rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) f
+  have := adj.commShift_of_leftAdjoint ℤ
+  have : (R(f)^![ModuleCat.{u + 1} Λ]).IsTriangulated := adj.isTriangulated_rightAdjoint
+  have : (R(f)^![ModuleCat.{u + 1} Λ]).Additive := adj.right_adjoint_additive
+  obtain ⟨e, -⟩ := (hL.1.map (R(f)^![ModuleCat.{u + 1} Λ])).exists_iso hc
+  intro n
+  subst hI
+  obtain ⟨e'⟩ := nonempty_iso_map_reductionModIdeal (R(f)^![ModuleCat.{u + 1} Λ]) hϖ n L
+  exact ⟨(reductionModIdeal Λ X _).mapIso e.symm ≪≫ e'.symm⟩
+
+
+include hϖ hI in
+/-- Clause 3 of `prop-coef-integral-exceptional-adjoint`: the dual formula
+`G_f L ≅ 𝔻_X f^*_comp 𝔻_Y L`. -/
+theorem nonempty_iso_derivedHom_of_isHomotopyLimit_of_derivedComplete {X Y : Scheme.{u}}
+    (aX : X ⟶ Spec (.of k)) (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aX] [QuasiCompact aX]
+    [LocallyOfFiniteType aY] [QuasiCompact aY] [IsSeparated aX] [IsSeparated aY]
+    [HasCompactification aX] [HasCompactification aY]
+    [(R(aX)_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint] [(R(aY)_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint]
+    (f : X ⟶ Y) (hf : f ≫ aY = aX) [QuasiCompact f] [HasCompactification f]
+    [(R(f)_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint] {L : 𝐃(Y, Λ)}
+    (hL : DerivedCategory.boundedConstructibleIntegral I Y L)
+    {c : Cone (DerivedCategory.derivedCompletionDiagram Y.smallEtaleTopology I L ⋙
+      R(f)^![ModuleCat.{u + 1} Λ])} (hc : Pretriangulated.IsHomotopyLimit c) :
+    ∀ (ωX : Cone (DerivedCategory.quotPowFunctor (Spec (.of k)).smallEtaleTopology I ⋙
+        R(aX)^![ModuleCat.{u + 1} Λ])) (_ : Pretriangulated.IsHomotopyLimit ωX)
+      (ωY : Cone (DerivedCategory.quotPowFunctor (Spec (.of k)).smallEtaleTopology I ⋙
+        R(aY)^![ModuleCat.{u + 1} Λ])) (_ : Pretriangulated.IsHomotopyLimit ωY)
+      (N : 𝐃(X, Λ)) (φ : (L((f)^*[ModuleCat.{u + 1} Λ])).obj
+        (((derivedHom (ModuleCat.{u + 1} Λ) Y).obj (op L)).obj ωY.pt) ⟶ N),
+      DerivedCategory.derivedComplete X.smallEtaleTopology I N →
+        (∀ n : ℕ, IsIso ((reductionModIdeal Λ X (I ^ n)).map φ)) →
+          Nonempty (c.pt ≅ ((derivedHom (ModuleCat.{u + 1} Λ) X).obj (op N)).obj ωX.pt) := by
+  intro ωX hωX ωY hωY N φ _ hφ
+  have hφ₁ := hφ 1
+  rw [pow_one] at hφ₁
+  exact nonempty_iso_derivedHom_of_isHomotopyLimit I hϖ hI aX aY f hf hL hc ωX hωX ωY hωY N φ
+    hφ₁
+
+include hϖ hI in
 /-- Blueprint `prop-coef-integral-exceptional-adjoint`: The integral exceptional adjoint on
 constructible complexes.
 
@@ -532,20 +610,10 @@ theorem boundedConstructibleIntegral_exceptionalAdjoint {X Y : Scheme.{u}}
           ((reductionModIdeal Λ X (I ^ (n + 1))).obj c.pt) := by
   have hBT := boundedConstructibleIntegral_and_torAmplitudeIn_of_isHomotopyLimit I hϖ hI aX aY
     f hf hL hc
-  let adj := rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) f
-  have := adj.commShift_of_leftAdjoint ℤ
-  have : (R(f)^![ModuleCat.{u + 1} Λ]).IsTriangulated := adj.isTriangulated_rightAdjoint
-  have : (R(f)^![ModuleCat.{u + 1} Λ]).Additive := adj.right_adjoint_additive
-  -- `Rf^!` carries the derived completion cone of `L` to a homotopy limit cone
-  obtain ⟨e, he⟩ := (hL.1.map (R(f)^![ModuleCat.{u + 1} Λ])).exists_iso hc
-  refine ⟨⟨hBT.1, fun n ↦ ?_⟩, ⟨e, he⟩, fun ωX hωX ωY hωY N φ _ hφ ↦ ?_, hBT.2⟩
-  · subst hI
-    obtain ⟨e'⟩ := nonempty_iso_map_reductionModIdeal (R(f)^![ModuleCat.{u + 1} Λ]) hϖ n L
-    exact ⟨(reductionModIdeal Λ X _).mapIso e.symm ≪≫ e'.symm⟩
-  · have hφ₁ := hφ 1
-    rw [pow_one] at hφ₁
-    exact nonempty_iso_derivedHom_of_isHomotopyLimit I hϖ hI aX aY f hf hL hc ωX hωX ωY hωY N φ
-      hφ₁
+  exact ⟨⟨hBT.1, nonempty_iso_reductionModIdeal_of_isHomotopyLimit_rightDerivedUpperShriek I hϖ
+      hI aX aY f hf hL hc⟩, exists_iso_rightDerivedUpperShriek I f hL.1 hc,
+    nonempty_iso_derivedHom_of_isHomotopyLimit_of_derivedComplete I hϖ hI aX aY f hf hL hc,
+    hBT.2⟩
 
 end Constructible
 
