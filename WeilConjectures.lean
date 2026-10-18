@@ -2779,6 +2779,7 @@ public import WeilConjectures.EtaleCohomology.PoincareDuality.Frobenius.Reciproc
 public import WeilConjectures.EtaleCohomology.PoincareDuality.Frobenius.SelfInjective
 public import WeilConjectures.EtaleCohomology.PoincareDuality.Frobenius.TracePairing
 public import WeilConjectures.EtaleCohomology.PoincareDuality.Frobenius.UnitPairing
+public import WeilConjectures.EtaleCohomology.PoincareDuality.Frobenius.UntwistedPerfectness
 public import WeilConjectures.EtaleCohomology.PoincareDuality.IntegralDegreewise
 public import WeilConjectures.EtaleCohomology.PoincareDuality.InvertibleTwist
 public import WeilConjectures.EtaleCohomology.PoincareDuality.Pairing
