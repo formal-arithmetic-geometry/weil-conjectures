@@ -179,6 +179,77 @@ lemma irreducibleSpace_of_isClosedImmersion_of_surjective {R W : Scheme.{u}} (r 
   have := (IrreducibleSpace.isIrreducible_univ W).image _ e.symm.continuous.continuousOn
   rwa [Set.image_univ_of_surjective e.symm.surjective] at this
 
+/-- **The inductive step of the dévissage, given a good open.** Let `g : Z ⟶ Y` be a morphism
+between locally noetherian schemes, `F` a constructible sheaf on `Z` and `W` a nonempty open of
+`Z` such that `j^* F` has bounded constructible derived pushforward along `j : W ⟶ Z` (`hjZ`)
+and along `j ≫ g` (`hj`). If the finiteness theorem holds for constructible sheaves on the proper
+closed subschemes of `Z` (`ih`), then it holds for `F`: the cone `C` of the unit
+`F ⟶ Rj_* j^* F` is bounded with constructible cohomology sheaves and vanishes on `W`, so
+`C ≅ Ri_* i^* C` for the closed complement `i : Z₁ ⟶ Z` of `W`. -/
+lemma finiteLowerStar_singleFunctor_of_opens {Y Z : Scheme.{u}} [IsLocallyNoetherian Y]
+    [IsLocallyNoetherian Z] (g : Z ⟶ Y)
+    (ih : ∀ (Z' : Scheme.{u}) (i : Z' ⟶ Z) [IsClosedImmersion i], ¬ Function.Surjective i.base →
+      ∀ F' : AdicSheaf l Z', IsAdicConstructibleSheaf F' →
+        finiteLowerStar l (i ≫ g) ((DerivedCategory.singleFunctor _ 0).obj F'))
+    {F : AdicSheaf l Z} (hF : IsAdicConstructibleSheaf F) (W : Z.Opens) {x : Z} (hxW : x ∈ W)
+    (hj : finiteLowerStar l (W.ι ≫ g)
+      ((DerivedCategory.singleFunctor _ 0).obj ((W.ι)^*ᵃ[l].obj F)))
+    (hjZ : finiteLowerStar l W.ι
+      ((DerivedCategory.singleFunctor _ 0).obj ((W.ι)^*ᵃ[l].obj F))) :
+    finiteLowerStar l g ((DerivedCategory.singleFunctor _ 0).obj F) := by
+  -- the closed complement `i₁ : Z₁ ⟶ Z` of `W`
+  let i₁ := (Scheme.IdealSheafData.vanishingIdeal
+    (⟨(W : Set Z)ᶜ, W.isOpen.isClosed_compl⟩ : Closeds Z)).subschemeι
+  have hi₁ : Set.range i₁.base = (W : Set Z)ᶜ := by
+    rw [Scheme.IdealSheafData.range_subschemeι, Scheme.IdealSheafData.coe_support_vanishingIdeal]
+    rfl
+  have hij : IsCompl (Set.range i₁.base) (Set.range W.ι.base) := by
+    rw [hi₁, Scheme.Opens.range_ι]
+    exact isCompl_compl.symm
+  have hns : ¬ Function.Surjective i₁.base := fun h ↦ by
+    obtain ⟨y, hy⟩ := h x
+    have hx' : x ∈ Set.range i₁.base := ⟨y, hy⟩
+    rw [hi₁] at hx'
+    exact hx' hxW
+  -- the triangle `F ⟶ Rj_* j^* F ⟶ C ⟶ F[1]`
+  let M := (DerivedCategory.singleFunctor (AdicSheaf l Z) 0).obj F
+  let adj := adicDerivedUpperStarLowerStarAdjunction l W.ι
+  obtain ⟨C, v, w, hT⟩ := Pretriangulated.distinguished_cocone_triangle (adj.unit.app M)
+  let eM : (W.ι)^*ᵃ[l].mapDerivedCategory.obj M ≅
+      (DerivedCategory.singleFunctor _ 0).obj ((W.ι)^*ᵃ[l].obj F) :=
+    ((W.ι)^*ᵃ[l].mapDerivedCategorySingleFunctor 0).app F
+  have h₂ : finiteLowerStar l g
+      ((W.ι)_*ᵃ[l].rightDerivedFunctor.obj ((W.ι)^*ᵃ[l].mapDerivedCategory.obj M)) :=
+    (finiteLowerStar_rightDerivedFunctor_obj_iff W.ι g _).2
+      ((finiteLowerStar l (W.ι ≫ g)).prop_of_iso eM.symm hj)
+  have hiso : IsIso ((W.ι)^*ᵃ[l].mapDerivedCategory.map (adj.unit.app M)) := by
+    have h := adj.left_triangle_components M
+    have : IsIso ((W.ι)^*ᵃ[l].mapDerivedCategory.map (adj.unit.app M) ≫
+        adj.counit.app ((W.ι)^*ᵃ[l].mapDerivedCategory.obj M)) := by
+      rw [h]
+      exact IsIso.id _
+    exact IsIso.of_isIso_comp_right _ (adj.counit.app ((W.ι)^*ᵃ[l].mapDerivedCategory.obj M))
+  have hCU : IsZero ((W.ι)^*ᵃ[l].mapDerivedCategory.obj C) :=
+    Pretriangulated.Triangle.isZero₃_of_isIso₁ _
+      ((W.ι)^*ᵃ[l].mapDerivedCategory.map_distinguished _ hT) hiso
+  -- the cone is bounded with constructible cohomology, and supported on `Z₁`
+  have hM : DerivedCategory.boundedConstructibleAdic l Z M :=
+    ⟨(bounded_homologyProperty_singleFunctor hF).1, (bounded_homologyProperty_singleFunctor hF).2⟩
+  have hR : DerivedCategory.boundedConstructibleAdic l Z
+      ((W.ι)_*ᵃ[l].rightDerivedFunctor.obj ((W.ι)^*ᵃ[l].mapDerivedCategory.obj M)) :=
+    (DerivedCategory.boundedConstructibleAdic l Z).prop_of_iso
+      ((W.ι)_*ᵃ[l].rightDerivedFunctor.mapIso eM.symm) hjZ
+  have hC : DerivedCategory.boundedConstructibleAdic l Z C :=
+    (DerivedCategory.boundedConstructibleAdic l Z).ext_of_isTriangulatedClosed₃ _ hT hM hR
+  have := isIso_adicDerivedUpperStarLowerStarAdjunction_unit_app_of_isZero i₁ W.ι hij hCU
+  have hC' := bounded_homologyProperty_mapDerivedCategory_adicUpperStar (l := l) i₁ hC.1 hC.2
+  have h₃ : finiteLowerStar l g C :=
+    (finiteLowerStar l g).prop_of_iso
+      (asIso ((adicDerivedUpperStarLowerStarAdjunction l i₁).unit.app C)).symm
+      ((finiteLowerStar_rightDerivedFunctor_obj_iff i₁ g _).2
+        (finiteLowerStar_of_bounded (i₁ ≫ g) (fun F' hF' ↦ ih _ i₁ hns F' hF') _ hC'.1 hC'.2))
+  exact (finiteLowerStar l g).ext_of_isTriangulatedClosed₁ _ hT h₂ h₃
+
 /-- **The inductive step of the dévissage**. Let `g : Z ⟶ Y` be a morphism locally of finite type
 from an affine scheme to an affine scheme of finite type over a field `K`, and assume the
 finiteness theorem for lisse sheaves over `K` (`H`), and for constructible sheaves on the proper
@@ -254,58 +325,7 @@ lemma finiteLowerStar_singleFunctor_of_isAffine_step {K : Type u} [Field K]
     finiteLowerStar_singleFunctor_adicUpperStar_of_range_subset (a k) W.ι hWa F _
       (finiteLowerStar_singleFunctor_of_surjective r hr _ _
         (H (g ≫ s) _ (((hL k).upperStar _).upperStar r)))
-  -- the closed complement `i₁ : Z₁ ⟶ Z` of `W`
-  let i₁ := (Scheme.IdealSheafData.vanishingIdeal
-    (⟨(W : Set Z)ᶜ, W.isOpen.isClosed_compl⟩ : Closeds Z)).subschemeι
-  have hi₁ : Set.range i₁.base = (W : Set Z)ᶜ := by
-    rw [Scheme.IdealSheafData.range_subschemeι, Scheme.IdealSheafData.coe_support_vanishingIdeal]
-    rfl
-  have hij : IsCompl (Set.range i₁.base) (Set.range W.ι.base) := by
-    rw [hi₁, Scheme.Opens.range_ι]
-    exact isCompl_compl.symm
-  have hns : ¬ Function.Surjective i₁.base := fun h ↦ by
-    obtain ⟨y, hy⟩ := h x
-    have hx' : x ∈ Set.range i₁.base := ⟨y, hy⟩
-    rw [hi₁] at hx'
-    exact hx' hxW
-  -- the triangle `F ⟶ Rj_* j^* F ⟶ C ⟶ F[1]`
-  let M := (DerivedCategory.singleFunctor (AdicSheaf l Z) 0).obj F
-  let adj := adicDerivedUpperStarLowerStarAdjunction l W.ι
-  obtain ⟨C, v, w, hT⟩ := Pretriangulated.distinguished_cocone_triangle (adj.unit.app M)
-  let eM : (W.ι)^*ᵃ[l].mapDerivedCategory.obj M ≅
-      (DerivedCategory.singleFunctor _ 0).obj ((W.ι)^*ᵃ[l].obj F) :=
-    ((W.ι)^*ᵃ[l].mapDerivedCategorySingleFunctor 0).app F
-  have h₂ : finiteLowerStar l g
-      ((W.ι)_*ᵃ[l].rightDerivedFunctor.obj ((W.ι)^*ᵃ[l].mapDerivedCategory.obj M)) :=
-    (finiteLowerStar_rightDerivedFunctor_obj_iff W.ι g _).2
-      ((finiteLowerStar l (W.ι ≫ g)).prop_of_iso eM.symm hj)
-  have hiso : IsIso ((W.ι)^*ᵃ[l].mapDerivedCategory.map (adj.unit.app M)) := by
-    have h := adj.left_triangle_components M
-    have : IsIso ((W.ι)^*ᵃ[l].mapDerivedCategory.map (adj.unit.app M) ≫
-        adj.counit.app ((W.ι)^*ᵃ[l].mapDerivedCategory.obj M)) := by
-      rw [h]
-      exact IsIso.id _
-    exact IsIso.of_isIso_comp_right _ (adj.counit.app ((W.ι)^*ᵃ[l].mapDerivedCategory.obj M))
-  have hCU : IsZero ((W.ι)^*ᵃ[l].mapDerivedCategory.obj C) :=
-    Pretriangulated.Triangle.isZero₃_of_isIso₁ _
-      ((W.ι)^*ᵃ[l].mapDerivedCategory.map_distinguished _ hT) hiso
-  -- the cone is bounded with constructible cohomology, and supported on `Z₁`
-  have hM : DerivedCategory.boundedConstructibleAdic l Z M :=
-    ⟨(bounded_homologyProperty_singleFunctor hF).1, (bounded_homologyProperty_singleFunctor hF).2⟩
-  have hR : DerivedCategory.boundedConstructibleAdic l Z
-      ((W.ι)_*ᵃ[l].rightDerivedFunctor.obj ((W.ι)^*ᵃ[l].mapDerivedCategory.obj M)) :=
-    (DerivedCategory.boundedConstructibleAdic l Z).prop_of_iso
-      ((W.ι)_*ᵃ[l].rightDerivedFunctor.mapIso eM.symm) hjZ
-  have hC : DerivedCategory.boundedConstructibleAdic l Z C :=
-    (DerivedCategory.boundedConstructibleAdic l Z).ext_of_isTriangulatedClosed₃ _ hT hM hR
-  have := isIso_adicDerivedUpperStarLowerStarAdjunction_unit_app_of_isZero i₁ W.ι hij hCU
-  have hC' := bounded_homologyProperty_mapDerivedCategory_adicUpperStar (l := l) i₁ hC.1 hC.2
-  have h₃ : finiteLowerStar l g C :=
-    (finiteLowerStar l g).prop_of_iso
-      (asIso ((adicDerivedUpperStarLowerStarAdjunction l i₁).unit.app C)).symm
-      ((finiteLowerStar_rightDerivedFunctor_obj_iff i₁ g _).2
-        (finiteLowerStar_of_bounded (i₁ ≫ g) (fun F' hF' ↦ ih _ i₁ hns F' hF') _ hC'.1 hC'.2))
-  exact (finiteLowerStar l g).ext_of_isTriangulatedClosed₁ _ hT h₂ h₃
+  exact finiteLowerStar_singleFunctor_of_opens g ih hF W hxW hj hjZ
 
 
 /-- **Dévissage for the finiteness theorem: reduction to lisse sheaves** (SGA 4½,
