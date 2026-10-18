@@ -14,7 +14,7 @@
  ],
  "proof": [
   {
-   "text": "At each point unpack absolute ampleness and keep its affine open, positive exponent n and section s of M^n. Form tensorPowSection of homOfGlobalSection(s), raised to the positive exponent k. The source ClearDenominators theorem exists_tensorPowSectionOne_eq_pow_smul supplies a local free frame E for this tensor power and coefficient a^k when s has coefficient a in a free frame. Its restriction identity identifies this with the global powered section.",
+   "text": "Unpack IsAmple, retain compactness, and at a point choose n > 0, a global section s of M.tensorPow n and its affine nonvanishing open U. Form a = tensorPowSection (homOfGlobalSection (M.tensorPow n) s) k. The existing tensorPowMulIso, its inverse, and Nat.mul_comm give e : (M.tensorPow n).tensorPow k ≅ (M.tensorPow k).tensorPow n. Evaluate a followed by e.hom at one to obtain t.",
    "uses": [
     "def-sc-invertible-module",
     "def-weil-pbc-ample-invertible-module"
@@ -22,27 +22,28 @@
    "elementary": false
   },
   {
-   "text": "Prove that a local free generator gives a bijective scalar map on stalks by representing scalars and vectors as germs. Its span is top, so Submodule.mem_smul_span_singleton identifies maximal-ideal membership of a times the frame with membership of a. A positive power of a is a unit exactly when a is a unit. Hence the powered section has the original nonvanishing locus.",
-   "uses": [],
-   "elementary": true
+   "text": "Apply [lem-weil-pbc-section-nonvanishing-zero-locus] to identify both nonvanishing loci with complements of zero-locus supports. The proved private helper nonvanishingLocus_app_one identifies homOfGlobalSection of evaluation at one with the original morphism, using unitHomEquiv injectivity and naturality. Apply the existing proved source theorem Hom.zeroLocus_eq_of_arrowIso to remove e, then compl_support_zeroLocus_tensorPowSection (WeilConjectures.AlgebraicGeometry.Modules.AffineComplement) with hk to identify the two supports. Thus nonvanishingLocus t = nonvanishingLocus s.",
+   "uses": [
+    "lem-weil-pbc-section-nonvanishing-zero-locus"
+   ],
+   "elementary": false
   },
   {
-   "text": "Transport the powered section through tensorPowMulIso, the equality n*k=k*n, and tensorPowMulIso again. Prove preservation of nonvanishing under a module isomorphism using inverse linear maps on stalks and Submodule.smul_top_le_comap_smul_top. The resulting section of (M^k)^n has the same affine locus. Compactness is unchanged.",
-   "uses": [
-    "def-sc-invertible-module"
-   ],
+   "text": "Keep the original n, its positivity, and the affine open U. Transport each pointwise equality of membership through the equality of nonvanishing loci just proved. These witnesses and the original compactness prove IsAmple X (M.tensorPow k), including when X is empty.",
+   "uses": [],
    "elementary": true
   }
  ],
  "proof_deps": [
   "def-sc-invertible-module",
-  "def-weil-pbc-ample-invertible-module"
+  "def-weil-pbc-ample-invertible-module",
+  "lem-weil-pbc-section-nonvanishing-zero-locus"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "worker",
   "document": "literature/stacks-project/properties.tex",
-  "place": "Lemma 01PT (lemma-ample-power), forward implication; Definition 01PS",
-  "note": "H2 formal proof following the cited source, checked by lcompile.py."
+  "place": "Lemma 01PT (lemma-ample-power-ample), forward implication; Definition 01PS",
+  "note": "S6: complete Lean proof using the existing proved positive-power zero-locus theorem and nonvanishing/zero-locus comparison; no new sorry."
  },
  "mathlib_searches": [
   {
@@ -111,14 +112,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-18",
   "by": "L",
-  "reviewer": "X-92135",
-  "group": "H2",
+  "reviewer": "COMPILER",
+  "group": "S6",
   "result": "pass",
-  "landing": "20261012T135240-L-1667920",
-  "kind": "interface",
-  "note": "independent Codex review: Matched the unchanged item signature and both helper statements with their DAG records and sources; all delivered modules and direct importer ExistsAmpleOfReducedDimLEOne compile cleanly; axiom checks show only standard axioms and sorryAx from existing dependencies; earlier return repaired."
+  "landing": "20261018T062912-L-676573",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
  "lean_audit": {
   "master": {

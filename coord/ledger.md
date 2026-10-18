@@ -16156,3 +16156,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 06:29 L: merged deliver/S4/Sheaf.CategoryTheory.RingedSiteCechRefinementSquare (stage 3; reviewer PASS; first push; landing 20261018T062910-L-675769 (proof); batch 20261018T062645; modules 1; new nodes 1)
 - 06:29 L: merged deliver/S4/Sheaf.CategoryTheory.SequentialTowerEvaluationFull (stage 3; reviewer PASS; first push; landing 20261018T062911-L-675969 (proof); batch 20261018T062645; modules 1; new nodes 0)
 - 06:29 L: merged deliver/S5/Sheaf.AlgebraicGeometry.AffineLocusOfCompatibleComponentSections (stage 3; reviewer PASS; first push; landing 20261018T062911-L-676339 (proof); batch 20261018T062645; modules 1; new nodes 0)
+- 06:29 L: merged deliver/S6/Sheaf.AlgebraicGeometry.AmplePositiveTensorPower (stage 3; reviewer PASS; first push; landing 20261018T062912-L-676573 (proof); batch 20261018T062645; modules 1; new nodes 0)

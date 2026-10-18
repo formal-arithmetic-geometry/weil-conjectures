@@ -5,13 +5,10 @@ Authors: SHEAF group H2
 -/
 module
 
-import all Sheaf.AlgebraicGeometry.AmpleIso
-import all WeilConjectures.AlgebraicGeometry.SectionNonvanishingZeroLocus
-
 public import WeilConjectures.AlgebraicGeometry.Ample
 public import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
-import WeilConjectures.AlgebraicGeometry.Modules.ClearDenominators
-import WeilConjectures.AlgebraicGeometry.Modules.Invertible
+import WeilConjectures.AlgebraicGeometry.SectionNonvanishingZeroLocus
+import WeilConjectures.AlgebraicGeometry.Modules.AffineComplement
 
 /-! # Positive tensor powers preserve absolute ampleness
 
@@ -28,37 +25,18 @@ open CategoryTheory MonoidalCategory
 
 namespace AlgebraicGeometry.Scheme.Modules
 
-private theorem nonvanishing_of_frame {X : Scheme.{u}} (M : X.Modules)
-    (s : Γ(M, ⊤)) {V : X.Opens} {e : Γ(M, V)} (he : IsFreeGenerator e)
-    (a : Γ(X, V)) (ha : M.presheaf.map (homOfLE le_top).op s = a • e)
-    (x : X) (hx : x ∈ V) :
-    x ∈ nonvanishingLocus M s ↔ IsUnit (X.presheaf.germ V x hx a) := by
-  let g := TopCat.Presheaf.germ M.val.presheaf V x hx e
-  have hg := bijective_smul_germ M he x hx
-  have hspan : Submodule.span (X.presheaf.stalk x) ({g} : Set _) = ⊤ := by
-    apply eq_top_iff.mpr
-    intro z _
-    obtain ⟨b, hb⟩ := hg.2 z
-    exact Submodule.mem_span_singleton.mpr ⟨b, hb⟩
-  have hsg : TopCat.Presheaf.germ M.val.presheaf ⊤ x trivial s =
-      X.presheaf.germ V x hx a • g := by
-    rw [← TopCat.Presheaf.germ_res_apply M.val.presheaf (homOfLE le_top) x hx s]
-    change TopCat.Presheaf.germ M.val.presheaf V x hx
-      (M.presheaf.map (homOfLE le_top).op s) = _
-    rw [ha, PresheafOfModules.germ_smul]
-    rfl
-  have hmem : TopCat.Presheaf.germ M.val.presheaf ⊤ x trivial s ∈
-      (IsLocalRing.maximalIdeal (X.presheaf.stalk x)) • (⊤ : Submodule (X.presheaf.stalk x)
-        ↑(TopCat.Presheaf.stalk M.val.presheaf x)) ↔
-      X.presheaf.germ V x hx a ∈ IsLocalRing.maximalIdeal (X.presheaf.stalk x) := by
-    rw [hsg, ← hspan, Submodule.mem_smul_span_singleton]
-    constructor
-    · rintro ⟨b, hb, heq⟩
-      exact hg.1 heq ▸ hb
-    · intro hb
-      exact ⟨_, hb, rfl⟩
-  change ¬ _ ↔ _
-  rw [hmem, IsLocalRing.mem_maximalIdeal, mem_nonunits_iff, not_not]
+private theorem nonvanishingLocus_app_one {X : Scheme.{u}} (M : X.Modules)
+    [M.IsInvertible] (a : 𝟙_ X.Modules ⟶ M) :
+    nonvanishingLocus M (a.app ⊤ (unitSectionsEquiv ⊤ 1)) =
+      ((Hom.zeroLocus a).support.compl : Set X) := by
+  have h : homOfGlobalSection M (a.app ⊤ (unitSectionsEquiv ⊤ 1)) = a := by
+    refine (SheafOfModules.unitHomEquiv M).injective (Subtype.ext (funext fun U ↦ ?_))
+    change Hom.app (homOfGlobalSection M (a.app ⊤ (unitSectionsEquiv ⊤ 1)))
+      U.unop (1 : Γ(X, U.unop)) = Hom.app a U.unop (1 : Γ(X, U.unop))
+    rw [homOfGlobalSection_app_one, ← Hom.app_presheaf_map]
+    exact congrArg (Hom.app a U.unop)
+      (map_one (X.presheaf.map (homOfLE (le_top : U.unop ≤ ⊤)).op).hom :)
+  rw [nonvanishingLocus_eq_compl_support_zeroLocus, h]
 
 /-- A positive tensor power of an ample invertible module is ample.
 
@@ -79,6 +57,22 @@ which need not be ample on a nonaffine scheme.
 -/
 theorem isAmple_positive_tensorPow {X : Scheme.{u}} (M : X.Modules) [M.IsInvertible]
     (hM : IsAmple X M) (k : ℕ) (hk : 0 < k) : IsAmple X (M.tensorPow k)  := by
-  sorry
+  refine ⟨hM.1, fun x ↦ ?_⟩
+  obtain ⟨n, hn, s, U, hx, hU, hs⟩ := hM.2 x
+  let e : (M.tensorPow n).tensorPow k ≅ (M.tensorPow k).tensorPow n :=
+    (M.tensorPowMulIso n k).symm ≪≫
+      eqToIso (congrArg M.tensorPow (Nat.mul_comm n k)) ≪≫ M.tensorPowMulIso k n
+  let a := tensorPowSection (homOfGlobalSection (M.tensorPow n) s) k
+  let t := (a ≫ e.hom).app ⊤ (unitSectionsEquiv ⊤ 1)
+  have ht : nonvanishingLocus ((M.tensorPow k).tensorPow n) t =
+      nonvanishingLocus (M.tensorPow n) s := by
+    have := IsInvertible.sheafOfModules_isInvertible ((M.tensorPow k).tensorPow n)
+    have := IsInvertible.sheafOfModules_isInvertible ((M.tensorPow n).tensorPow k)
+    rw [nonvanishingLocus_app_one, nonvanishingLocus_eq_compl_support_zeroLocus]
+    have he := Hom.zeroLocus_eq_of_arrowIso a (a ≫ e.hom)
+      (Arrow.isoMk (Iso.refl _) e (by simp))
+    rw [← he, compl_support_zeroLocus_tensorPowSection (M.tensorPow n) _ hk]
+  refine ⟨n, hn, t, U, hx, hU, fun y ↦ ?_⟩
+  exact (hs y).trans (Set.ext_iff.mp ht y).symm
 
 end AlgebraicGeometry.Scheme.Modules
