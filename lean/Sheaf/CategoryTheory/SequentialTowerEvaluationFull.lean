@@ -9,8 +9,6 @@ public import Sheaf.CategoryTheory.SmallModuleDiagramsGrothendieck
 public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import Mathlib.CategoryTheory.Functor.OfSequence
 import Mathlib.CategoryTheory.Adjunction.Evaluation
-import Mathlib.CategoryTheory.Limits.FunctorCategory.EpiMono
-import Mathlib.Algebra.Homology.DerivedCategory.KInjective
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolutionInjective
 import WeilConjectures.Algebra.Homology.TowerEvaluationKInjective
 
