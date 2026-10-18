@@ -1,0 +1,117 @@
+{
+ "id": "lem-weil-pbc-affine-limit-fibre-dimension-bound-core",
+ "kind": "statement",
+ "title": "Bad-locus contradiction for affine limit fibre dimensions",
+ "statement": "With the same directed finite-type affine system and surjective comparison maps as in lem-weil-pbc-affine-limit-fibre-dimension-bound, if every stage has a prime whose fibre dimension is strictly greater than d, then the limiting fibre has dimension strictly greater than d; equivalently, the stagewise bad-prime hypothesis contradicts the bound on every limiting fibre.",
+ "source": {
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 05M5, affine specialization, bad-locus construction and Noetherian fibre stabilization"
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-affine-limit-fibre-dimension-bound"
+ ],
+ "proof": [
+  {
+   "text": "Form the open loci where local fibre dimension is at most d using the bounded-open-upstairs theorem, and take their reduced closed complements. Surjective comparison maps carry bad loci backwards. The affine spectrum limit and nonempty-limit theorem give a compatible limiting bad point. After passage to its residue field, the surjective finite-type fibre system stabilizes by Noetherianity; field-extension invariance of local dimension then contradicts the assumed bound on the limiting fibre.",
+   "uses": [
+    "lem-weil-pbc-fibre-dimension-bounded-open-upstairs",
+    "lem-weil-pbc-dimension-at-point-field-extension",
+    "lem-weil-pbc-dimension-supremum-local-dimensions",
+    "lem-weil-pbc-spec-colimit-limit",
+    "lem-weil-pbc-limit-nonempty",
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "lem-pc-filtered-colimit-commrings-elementwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 05M5, affine specialization"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-dimension-at-point-field-extension",
+  "lem-weil-pbc-dimension-supremum-local-dimensions",
+  "lem-weil-pbc-fibre-dimension-bounded-open-upstairs",
+  "lem-weil-pbc-limit-nonempty",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-weil-pbc-spec-colimit-limit",
+  "lem-pc-filtered-colimit-commrings-elementwise"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 05M5, bad-locus contradiction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "bad locus contradiction for bounded dimensions of affine fibres in inverse limits",
+   "results": "No exact theorem; existing affine limit and dimension declarations are used",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "topologicalKrullDim pullback colimit",
+   "results": "No exact match",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg dimension fibre limit colimit lean",
+   "results": "No exact theorem found",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.AffineLimitFibreDimensionBound",
+  "date": "2026-10-18",
+  "group": "R9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-affine-limit-fibre-dimension-bound",
+   "place": "proof, bad-locus and Noetherian stabilization steps",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineLimitFibreDimensionBoundCore",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineLimitFibreDimensionBoundCore.lean",
+  "declaration": "AlgebraicGeometry.fibre_dimension_contradiction_of_all_stages_bad",
+  "statement": "theorem fibre_dimension_contradiction_of_all_stages_bad {I : Type u} [PartialOrder I] [Nonempty I] [IsDirected I (· ≤ ·)] (A C : I ⥤ CommRingCat.{u}) (φ : A ⟶ C) (hfinite : ∀ i : I, (φ.app i).hom.FiniteType) (hsurj : ∀ (i j : I) (hij : i ≤ j), Function.Surjective (pushout.desc (φ.app j) (C.map (homOfLE hij)) (φ.naturality (homOfLE hij))).hom) (d : ℕ) (hbound : ∀ (p : Ideal ↥(colimit A)) [p.IsPrime], topologicalKrullDim ↥(pullback (Spec.map (colimMap φ)) (Spec.map (CommRingCat.ofHom (algebraMap ↥(colimit A) p.ResidueField))) : Scheme.{u}) ≤ (d : WithBot ℕ∞)) (hbad : ∀ i : I, ∃ p : PrimeSpectrum (A.obj i), (d : WithBot ℕ∞) < topologicalKrullDim ↥(pullback (Spec.map (φ.app i)) (Spec.map (CommRingCat.ofHom (algebraMap (A.obj i) p.asIdeal.ResidueField))) : Scheme.{u})) : False",
+  "branch": "sheaf-dag",
+  "by": "R9",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R9",
+  "result": "pass",
+  "landing": "20261018T071220-L-1676611",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R9",
+  "result": "pass",
+  "landing": "20261018T071220-L-1676611",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

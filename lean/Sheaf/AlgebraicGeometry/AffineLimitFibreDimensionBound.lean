@@ -12,14 +12,7 @@ public import Mathlib.RingTheory.FiniteType
 public import Mathlib.RingTheory.LocalRing.ResidueField.Fiber
 public import Mathlib.Topology.KrullDimension
 import WeilConjectures.Mathlib.Topology.KrullDimension
-import Sheaf.AlgebraicGeometry.DimensionAtPointFieldExtension
-import Sheaf.Topology.DimensionSupremumLocalDimensions
-import Sheaf.AlgebraicGeometry.FibreDimensionBoundedOpenUpstairs
-import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
-import Mathlib.AlgebraicGeometry.AffineTransitionLimit
-import Mathlib.AlgebraicGeometry.GammaSpecAdjunction
-import WeilConjectures.Topology.DimensionSupremumLocalDimensions
-import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
+import Sheaf.AlgebraicGeometry.AffineLimitFibreDimensionBoundCore
 
 /-!
 # Fibre dimension bounds descend in affine inverse systems
@@ -147,7 +140,13 @@ theorem exists_stage_fibre_dimension_le
       topologicalKrullDim
         ↥(pullback (Spec.map (φ.app i))
           (Spec.map (CommRingCat.ofHom (algebraMap (A.obj i) p.ResidueField))) : Scheme.{u}) ≤
-        (d : WithBot ℕ∞) :=
-  sorry
+        (d : WithBot ℕ∞) := by
+  classical
+  by_contra h
+  apply fibre_dimension_contradiction_of_all_stages_bad A C φ hfinite hsurj d hbound
+  intro i
+  push Not at h
+  obtain ⟨p, hp, hdim⟩ := h i
+  exact ⟨⟨p, hp⟩, hdim⟩
 
 end AlgebraicGeometry
