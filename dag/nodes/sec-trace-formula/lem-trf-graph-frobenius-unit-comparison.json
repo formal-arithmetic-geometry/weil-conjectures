@@ -17,7 +17,8 @@
   "prop-trf-frobenius-factorization",
   "lem-weil-pbc-proetale-derived-pullback-composition",
   "lem-trf-absolute-frobenius-site",
-  "def-weil-derived-direct-image"
+  "def-weil-derived-direct-image",
+  "def-trf-finite-ordinary-pullback"
  ],
  "proof": [
   {
@@ -267,5 +268,32 @@
   "group": "Q27",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q27-236bf22b9 (reviewer sub-agent of L); spot-checked: Reviewed the complete item, new node, DAG route, cited node statements, exact Stacks sources, hypotheses, edge cases, searches, duplicate candidates, coefficient normalization, and derived chain comparison. No repairs are needed; review.md records the checks."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-32c8e1f05",
+  "group": "Q17",
+  "result": "pass",
+  "note": "Re-delivery after return L: rho and RGamma(kappa) are now typed on the recorded finiteOrdinarySections (Fib_s∘Ra_{Y*}) at T.coefficients.l/T.coefficientField/T.level, with a_Y = T.structureMap; r/tau/w/kappa/d clauses unchanged and correct. New def node def-trf-finite-ordinary-pullback has valid H12 fields. It supplies a canonical comparison c_Y (exact-postcomposition iso, then the uniquely normalized point-sections iso via a named ∃! theorem, then the recorded a_Y terminal/Leray iso), lambda_h = c∘t_h∘c⁻¹ for every endomorphism h, rho = unit then lambda, and the stated compatibility theorem. No hollow defs; only named theorems are sorry; no duplicate found. Item node changed only in lean and stmt_deps. Both files compile clean via nt_compile.py (3.9 s, 12.3 s; no messages). Edge cases and universes (site u+1/u, coefficients u+1, D u+2) checked; docstrings and report sections present. No findings requiring change."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GraphFrobeniusUnitComparison",
+  "declaration": "WeilConjectures.TraceFormulaCoefficientConventions.graphFrobenius_unit_comparison",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.graphFrobeniusConstantDirectImage",
+   "AlgebraicGeometry.Scheme.graphFrobeniusConstantPullback",
+   "AlgebraicGeometry.Scheme.graphFrobeniusDerivedConstantPullback",
+   "WeilConjectures.TraceFormulaCoefficientConventions.graphFrobeniusGeometricOver",
+   "WeilConjectures.TraceFormulaCoefficientConventions.graphFrobeniusOrdinaryPullback",
+   "WeilConjectures.TraceFormulaCoefficientConventions.graphFrobenius_unit_comparison"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/GraphFrobeniusUnitComparison.lean",
+  "statement": "theorem graphFrobenius_unit_comparison (T : TraceFormulaCoefficientConventions.{u}) [IsProper T.X₀.hom] (m : ℕ) (hm : 1 ≤ m) : ∃ r : 𝟭 T.geometricBaseChange.ProEt ≅ proEtaleBaseChange (T.geometricBaseChange.iterateFrobenius T.datum.prime (T.datum.model_characteristic (pullback.fst T.X₀.hom (Spec.map (CommRingCat.ofHom (algebraMap T.datum.k₀ T.datum.k))) ≫ T.X₀.hom)) (T.datum.a * m)), ∃ τ : proEtaleConstantRingPullback T.coefficientRing (T.geometricBaseChange.iterateFrobenius T.datum.prime (T.datum.model_characteristic (pullback.fst T.X₀.hom (Spec.map (CommRingCat.ofHom (algebraMap T.datum.k₀ T.datum.k))) ≫ T.X₀.hom)) (T.datum.a * m)) ≅ 𝟭 _, (∀ V : T.geometricBaseChange.ProEt, ∃ hV : (T.datum.p : Γ(V.left, ⊤)) = 0, (r.hom.app V).left ≫ pullback.fst V.hom (T.geometricBaseChange.iterateFrobenius T.datum.prime (T.datum.model_characteristic (pullback.fst T.X₀.hom (Spec.map (CommRingCat.ofHom (algebraMap T.datum.k₀ T.datum.k))) ≫ T.X₀.hom)) (T.datum.a * m)) = V.left.iterateFrobenius T.datum.prime hV (T.datum.a * m)) ∧ (∀ (N : proEtaleRingModules T.geometricBaseChange (proEtaleConstantRing T.geometricBaseChange T.coefficientRing)) (V : T.geometricBaseChange.ProEt) (s : N.val.obj (Opposite.op V)), ((proEtaleConstantRingAdjunction T.coefficientRing (T.geometricBaseChange.iterateFrobenius T.datum.prime (T.datum.model_characteristic (pullback.fst T.X₀.hom (Spec.map (CommRingCat.ofHom (algebraMap T.datum.k₀ T.datum.k))) ≫ T.X₀.hom)) (T.datum.a * m))).unit.app N ≫ (proEtaleConstantRingPushforward T.coefficientRing (T.geometricBaseChange.iterateFrobenius T.datum.prime (T.datum.model_characteristic (pullback.fst T.X₀.hom (Spec.map (CommRingCat.ofHom (algebraMap T.datum.k₀ T.datum.k))) ≫ T.X₀.hom)) (T.datum.a * m))).map (τ.hom.app N)).val.app (Opposite.op V) s = N.val.map (r.inv.app V).op s) ∧ ∃ w : T.datum.schemeFrobeniusIterate T.X₀ m = T.geometricBaseChange.iterateFrobenius T.datum.prime (T.datum.model_characteristic (pullback.fst T.X₀.hom (Spec.map (CommRingCat.ofHom (algebraMap T.datum.k₀ T.datum.k))) ≫ T.X₀.hom)) (T.datum.a * m) ≫ HPow.hPow (α := End T.geometricBaseChange) (T.datum.geometricGaloisFrobenius T.X₀) m, ∃ κ : proEtaleConstantRingDerivedPullback T.coefficientRing (T.datum.schemeFrobeniusIterate T.X₀ m) ≅ proEtaleConstantRingDerivedPullback T.coefficientRing (HPow.hPow (α := End T.geometricBaseChange) (T.datum.geometricGaloisFrobenius T.X₀) m), κ.hom = eqToHom (congrArg (proEtaleConstantRingDerivedPullback T.coefficientRing) w) ≫ (proEtaleConstantRingPullbackComposition (T.geometricBaseChange.iterateFrobenius T.datum.prime (T.datum.model_characteristic (pullback.fst T.X₀.hom (Spec.map (CommRingCat.ofHom (algebraMap T.datum.k₀ T.datum.k))) ≫ T.X₀.hom)) (T.datum.a * m)) (HPow.hPow (α := End T.geometricBaseChange) (T.datum.geometricGaloisFrobenius T.X₀) m) T.coefficientRing).inv ≫ Functor.whiskerLeft (proEtaleConstantRingDerivedPullback T.coefficientRing (HPow.hPow (α := End T.geometricBaseChange) (T.datum.geometricGaloisFrobenius T.X₀) m)) (proEtaleFrobeniusDerivedIso T.coefficientRing τ).hom ≫ (Functor.rightUnitor _).hom ∧ IsIso (graphFrobeniusDerivedConstantPullback T.coefficientRing (T.datum.schemeFrobeniusIterate T.X₀ m)) ∧ IsIso (graphFrobeniusDerivedConstantPullback T.coefficientRing (HPow.hPow (α := End T.geometricBaseChange) (T.datum.geometricGaloisFrobenius T.X₀) m)) ∧ (κ.hom.app ((DerivedCategory.singleFunctor _ 0).obj (proEtaleConstantModule T.geometricBaseChange T.coefficientRing)) ≫ graphFrobeniusDerivedConstantPullback T.coefficientRing (HPow.hPow (α := End T.geometricBaseChange) (T.datum.geometricGaloisFrobenius T.X₀) m) = graphFrobeniusDerivedConstantPullback T.coefficientRing (T.datum.schemeFrobeniusIterate T.X₀ m)) ∧ (∀ M : T.boundedConstructibleFiniteTor.FullSubcategory, (graphFrobeniusOrdinaryPullback T (T.datum.schemeFrobeniusIterate T.X₀ m) M.obj) ≫ (finiteOrdinarySectionsFunctor T.datum T.coefficientRing T.geometricBaseChange).map (κ.hom.app M.obj) = (graphFrobeniusOrdinaryPullback T (HPow.hPow (α := End T.geometricBaseChange) (T.datum.geometricGaloisFrobenius T.X₀) m) M.obj))",
+  "branch": "newtargets-dag",
+  "by": "Q17",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Repair of return L at 6fe7a17da7c2: ordinary rho now has exactly the finiteOrdinarySections objects at T.coefficients.l, T.coefficientField and T.level. The canonical a_Y Leray/point-sections comparison, its uniquely scalar-normalized point identification and its compatibility with rho for every endomorphism are supplied by def-trf-finite-ordinary-pullback. No statement correction; constant and kappa clauses retained."
  }
 }

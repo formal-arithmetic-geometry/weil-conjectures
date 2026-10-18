@@ -1,0 +1,112 @@
+{
+ "id": "def-trf-finite-ordinary-pullback",
+ "kind": "definition",
+ "title": "Canonical finite ordinary sections comparison and adjunction pullback",
+ "statement": "Let $D=(p,a,q,k_0,k)$ be the datum of [def-weil-finite-field-fiber], let $A$ be a finite commutative ring, let $s=\\operatorname{Spec}k$ and let $Y\\to s$ be any scheme over $k$. Use the intrinsic constant-ring module realization of [def-weil-proetale-inverse-image], the exact point sections $\\Gamma_s$ of [def-weil-finite-coefficient-point], and the ordinary derived direct image of [def-weil-derived-direct-image]. Define $F_Y=\\Gamma_s\\circ Ra_{Y*}$, the ambient functor whose values at $A=\\mathcal O_E/\\varpi_E^n$ are exactly finiteOrdinarySections of [def-weil-ordinary-compact-cohomology], and $G_Y=R\\Gamma_{\\mathrm{abs}}(Y,-)$ using [lem-trf-proetale-unit-leray-chain-formula], in the same coefficient-derived-category universe as $F_Y$. The point-section comparison with realization-inverse terminal evaluation is the unique natural isomorphism sending the scalar-unit realization of each section of each fixed-scalar sheaf back to that section after the realization unit inverse. Compose it with inverse terminal evaluation to identify point sections with absolute sections on $s$. Define $c_Y:F_Y\\xrightarrow{\\sim}G_Y$ by the canonical exact-postcomposition derived comparison, that point identification and the $a_Y$ terminal/Leray identification. Thus $c_Y$ is the canonical $a_Y$ Leray plus point-sections comparison, not an arbitrary natural isomorphism.\n\nFor any scheme endomorphism $h:Y\\to Y$, with no assumption that it is over $s$, let $t_h:G_Y Rh_*\\xrightarrow{\\sim}G_Y$ be the canonical terminal/Leray comparison of [lem-trf-proetale-unit-leray-chain-formula]. Transport $t_h$ through $c_Y$ to define $\\lambda_h:F_Y Rh_*\\xrightarrow{\\sim}F_Y$. With the derived adjunction of [def-weil-derived-pullback-tensor-hom] and [def-weil-derived-direct-image], define $\\rho^F_{h,M}=\\lambda_{h,Lh^*M}\\circ F_Y(\\eta_{h,M})$. This is ordinary pullback on the recorded point-fibre/direct-image model. Its compatibility with the absolute unit pullback is\n$$c_{Y,Lh^*M}\\circ\\rho^F_{h,M}=t_{h,Lh^*M}\\circ G_Y(\\eta_{h,M})\\circ c_{Y,M}$$\nfor every derived object $M$, naturally in $M$ and for every $h$; in particular it holds for $h=\\Phi_Y^m$ and $h=g_Y^m$ of [def-trf-scheme-frobenius].",
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-proetale-inverse-image",
+  "def-weil-finite-coefficient-point",
+  "def-weil-derived-direct-image",
+  "def-weil-ordinary-compact-cohomology",
+  "lem-trf-proetale-unit-leray-chain-formula",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-trf-scheme-frobenius"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-graph-frobenius-operator.proof.md",
+  "place": "Step 1: normalization on constant coefficients and identification of the induced ordinary cohomology maps"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Canonical comparison between geometric point sections of derived direct image and absolute derived global sections, compatible with adjunction unit pullback",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.ΓSpec.toOpen_comp_locallyRingedSpaceAdjunction_homEquiv_app\", \"module\": \"Mathlib/AlgebraicGeometry/GammaSpecAdjunction\", \"type\": \"∀ {X : AlgebraicGeometry.LocallyRingedSpace} {R : Type u} [inst : CommRing R]\\n  (f : AlgebraicGeometry.LocallyRingedSpace.Γ.rightOp.obj X ⟶ Opposite.op { carrier := R, commRing := inst })\\n  (U :\\n    (TopologicalSpace.Opens\\n        ↑↑(AlgebraicGeometry.Spec.toLocallyRingedSpace.obj\\n                (O\", \"doc\": \"For a locally ringed space $X$ and commutative ring $R$, the composition of the structure sheaf morphism $\\\\mathcal{O}_{\\\\operatorname{Spec}(R)}(U) \\\\to R$ with the component of the Γ-Spec adjunction hom\"}\n  {\"name\": \"TopCat.Presheaf.pushforwardPullbackAdjunction_unit_pullback_map_germToPullbackStalk\", \"module\": \"Mathlib/Topology/Sheaves/Stalks\", \"type\": \"∀ (C : Type u) [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Limits.HasColimits C] {X Y : TopCat}\\n  (f : X ⟶ Y) (F : TopCat.Presheaf C Y) (U : TopologicalSpace.Opens ↑X) (x : ↑X) (hx : x ∈ U)\\n  (V : TopologicalSpace.Opens ↑Y) (hV : U ≤ (TopologicalSpace.Opens.map f).obj V),\\n  Ca\", \"doc\": \"Let $f: X \\\\to Y$ be a continuous map between topological spaces, and let $\\\\mathcal{F}$ be a presheaf on $Y$ with values in a category $C$ that has colimits. Let $f^{-1}$ denote the pullback functor an\"}\n  {\"name\": \"AlgebraicGeometry.ΓSpecIso_inv_ΓSpec_adjunction_homEquiv\", \"module\": \"Mathlib/AlgebraicGeometry/GammaSpecAdjunction\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {B : CommRingCat} (φ : B ⟶ X.presheaf.obj (Opposite.op ⊤)),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Scheme.ΓSpecIso B).inv\\n      (AlgebraicGeometry.Scheme.Hom.appTop ((AlgebraicGeometry.ΓSpec.adjunction.homEquiv X (Opposite.op B)) φ.op)) =\\n    φ\", \"doc\": \"The global sections functor $\\\\Gamma$ (contravariant from the category of schemes to commutative rings) is left adjoint to the spectrum functor $\\\\operatorname{Spec}$ (from commutative rings to schemes)\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y), (AlgebraicGeometry.Scheme.Modules.pullback f).IsLeftAdjoint\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pullback functor from the category of sheaves of modules over $ Y $'s structure sheaf to the category of sheaves of modules over $ X $'s structure sheaf\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) → AlgebraicGeometry.Scheme.Modules.pullback f ⊣ AlgebraicGeometry.Scheme.Modules.pushforward f\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pullback functor from the category of sheaves of modules over $ Y $'s structure sheaf to the category of sheaves of modules over $ X $'s structure sheaf\"}\n  {\"name\": \"AlgebraicGeometry.identityToΓSpec\", \"module\": \"Mathlib/AlgebraicGeometry/GammaSpecAdjunction\", \"type\": \"CategoryTheory.Functor.id AlgebraicGeometry.LocallyRingedSpace ⟶\\n  AlgebraicGeometry.LocallyRingedSpace.Γ.rightOp.comp AlgebraicGeometry.Spec.toLocallyRingedSpace\", \"doc\": \"The natural transformation from the identity functor on locally ringed spaces to the composition of the global sections functor $\\\\Gamma$ (in the opposite category) with the spectrum functor $\\\\operator\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y), (AlgebraicGeometry.Scheme.Modules.pushforward f).IsRightAdjoint\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pushforward functor from the category of sheaves of modules over the structure sheaf of $ X $ to that over $ Y $ is a right adjoint. This means there ex\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : CategoryTheory.LocallyDiscrete AlgebraicGeometry.Schemeᵒᵖ} (f : X ⟶ Y),\\n  (AlgebraicGeometry.Scheme.Modules.pseudofunctor.map f).adj =\\n    (AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction f.as.unop).toCat\", \"doc\": \"For any morphism $ f $ in the opposite category of schemes, the adjunction associated with the pseudofunctor's mapping of $ f $ is equal to the pullback-pushforward adjunction between the module categ\"}\n",
+   "date": "2026-10-18",
+   "verdict": "no match: generic evaluation and adjunction facts do not construct this comparison of the recorded intrinsic point-fibre/direct-image model with absolute derived sections"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Geometric point evaluation of derived direct image agrees canonically with derived global sections and transports cohomology pullback",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.evaluation\", \"module\": \"Mathlib.AlgebraicGeometry.ResidueField\", \"type\": \"(U : X.Opens) (x : X) (hx : x ∈ U) : Γ(X, U) ⟶ X.residueField x\", \"doc\": \"For a scheme $X$, an open subset $U \\\\subseteq X$, and a point $x \\\\in U$, this defines the evaluation map, which is a ring homomorphism from the ring of sections $\\\\Gamma(X, U)$ to the residue field at \"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.Γevaluation_naturality_apply\", \"module\": \"Mathlib.Geometry.RingedSpace.LocallyRingedSpace.ResidueField\", \"type\": \"(x : X) (a : Y.presheaf.obj (op ⊤)) :\\n  residueFieldMap f x (Y.Γevaluation (f.base x) a) = X.Γevaluation x (f.c.app (op ⊤) a)\", \"doc\": \"Let $f: (X, \\\\mathcal{O}_X) \\\\to (Y, \\\\mathcal{O}_Y)$ be a morphism of locally ringed spaces, and let $x$ be a point in $X$. Let $a \\\\in \\\\Gamma(Y, \\\\mathcal{O}_Y)$ be a global section of the structure shea\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.evaluation_naturality\", \"module\": \"Mathlib.AlgebraicGeometry.ResidueField\", \"type\": \"{V : Opens Y} (x : X) (hx : f x ∈ V) :\\n  Y.evaluation V (f x) hx ≫ f.residueFieldMap x = f.app V ≫ X.evaluation (f ⁻¹ᵁ V) x hx\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes, let $x \\\\in X$ be a point, and let $V$ be an open neighborhood of $f(x)$ in $Y$. Then the following diagram of ring homomorphisms commutes:\\n$$\\n\\\\begin{CD}\\n\\\\Gam\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Γevaluation\", \"module\": \"Mathlib.AlgebraicGeometry.ResidueField\", \"type\": \"(x : X) : Γ(X, ⊤) ⟶ X.residueField x\", \"doc\": \"For a scheme $X$ and a point $x \\\\in X$, this defines the ring homomorphism from the ring of global sections $\\\\mathcal{O}_X(X)$ (denoted `Γ(X, ⊤)` in the formal statement) to the residue field $k(x)$ a\"}\n  {\"name\": \"CategoryTheory.evalEquiv_apply\", \"module\": \"Mathlib.CategoryTheory.Sites.Types\", \"type\": \"∀ (S : CategoryTheory.Functor Type uᵒᵖ (Type u))\\n  (hs : CategoryTheory.Presheaf.IsSheaf CategoryTheory.typesGrothendieckTopology S) (α : Type u)\\n  (s : S.obj (Opposite.op α)) (x : α), (CategoryTheory.evalEquiv S hs α) s x = CategoryTheory.eval S α s x\", \"doc\": \"For a sheaf $ S $ on the category of types with the canonical Grothendieck topology, and for any type $ \\\\alpha $, the evaluation of the equivalence $ S(\\\\alpha^{\\\\text{op}}) \\\\simeq (\\\\alpha \\\\to S(\\\\ast^{\\\\\"}\n  {\"name\": \"smoothSheaf.evalAt\", \"module\": \"Mathlib.Geometry.Manifold.Sheaf.Smooth\", \"type\": \"(x : TopCat.of M) (U : OpenNhds x) (i : (smoothSheaf IM I M N).presheaf.obj (Opposite.op U.val)) : N\", \"doc\": \"For a point $x$ in a topological space $M$, an open neighborhood $U$ of $x$, and a section $i$ of the smooth sheaf over $U$, this function evaluates the section $i$ at the point $x$ and returns its va\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Γevaluation_naturality_assoc\", \"module\": \"Mathlib.AlgebraicGeometry.ResidueField\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (x : ↥X) {Z : CommRingCat} (h : X.residueField x ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp (Y.Γevaluation ((CategoryTheory.ConcreteCategory.hom f.base) x))\\n      (CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Scheme.Hom.residueFieldMap f x) h) \", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes and let $x \\\\in X$ be a point. The theorem states that the following diagram of ring homomorphisms commutes:\\n$$\\n\\\\begin{CD}\\n\\\\Gamma(Y, \\\\mathcal{O}_Y) @>{f^*}>> \\\\\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Γevaluation_naturality_apply\", \"module\": \"Mathlib.AlgebraicGeometry.ResidueField\", \"type\": \"(x : X) (a : Y.presheaf.obj (op ⊤)) : f.residueFieldMap x (Y.Γevaluation (f x) a) = X.Γevaluation x (f.appTop a)\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. For any point $x \\\\in X$ and any global section $a$ of the structure sheaf $\\\\mathcal{O}_Y$, the following equality holds:\\n$$ f^\\\\#_x(\\\\text{ev}_{f(x)}(a)) = \\\\te\"}\n",
+   "date": "2026-10-18",
+   "verdict": "no match: generic evaluation and adjunction facts do not construct this comparison of the recorded intrinsic point-fibre/direct-image model with absolute derived sections"
+  },
+  {
+   "tool": "grep",
+   "query": "finiteOrdinary.*(Comparison|Pullback)|point.*[Ss]ections.*[Ll]eray",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-18",
+   "verdict": "no match: generic evaluation and adjunction facts do not construct this comparison of the recorded intrinsic point-fibre/direct-image model with absolute derived sections"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-graph-frobenius-unit-comparison",
+  "date": "2026-10-18",
+  "group": "Q17"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-d-weil",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-trf-graph-frobenius-operator",
+   "place": "Steps 1--2: common ordinary cohomology model and compatibility of its canonical unit pullbacks",
+   "via": [
+    "lem-trf-graph-frobenius-unit-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteOrdinaryPullback",
+  "declaration": "WeilConjectures.finiteOrdinarySectionsComparison",
+  "declarations": [
+   "WeilConjectures.finiteOrdinaryPointComparison_existsUnique",
+   "WeilConjectures.finiteOrdinaryPointComparison",
+   "WeilConjectures.finiteOrdinarySectionsFunctor",
+   "WeilConjectures.finiteOrdinaryAbsoluteSections",
+   "WeilConjectures.finiteOrdinarySectionsComparison",
+   "WeilConjectures.finiteOrdinaryAbsoluteLeray",
+   "WeilConjectures.finiteOrdinaryLeray",
+   "WeilConjectures.finiteOrdinaryPullback",
+   "WeilConjectures.finiteOrdinaryPullback_absolute_compatibility"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteOrdinaryPullback.lean",
+  "statement": "def finiteOrdinarySectionsComparison (D : FiniteFieldDatum.{u}) (A : Type u) [CommRing A] [Finite A] (Y : Scheme.{u}) [Y.Over (Spec (.of D.k))] : finiteOrdinarySectionsFunctor D A Y ≅ finiteOrdinaryAbsoluteSections A Y",
+  "branch": "newtargets-dag",
+  "by": "Q17",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-32c8e1f05",
+  "group": "Q17",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-32c8e1f05",
+  "group": "Q17",
+  "result": "pass",
+  "note": "Re-delivery after return L: rho and RGamma(kappa) are now typed on the recorded finiteOrdinarySections (Fib_s∘Ra_{Y*}) at T.coefficients.l/T.coefficientField/T.level, with a_Y = T.structureMap; r/tau/w/kappa/d clauses unchanged and correct. New def node def-trf-finite-ordinary-pullback has valid H12 fields. It supplies a canonical comparison c_Y (exact-postcomposition iso, then the uniquely normalized point-sections iso via a named ∃! theorem, then the recorded a_Y terminal/Leray iso), lambda_h = c∘t_h∘c⁻¹ for every endomorphism h, rho = unit then lambda, and the stated compatibility theorem. No hollow defs; only named theorems are sorry; no duplicate found. Item node changed only in lean and stmt_deps. Both files compile clean via nt_compile.py (3.9 s, 12.3 s; no messages). Edge cases and universes (site u+1/u, coefficients u+1, D u+2) checked; docstrings and report sections present. No findings requiring change."
+ }
+}

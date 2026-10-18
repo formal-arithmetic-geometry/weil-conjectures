@@ -332,5 +332,51 @@
   "group": "Q08",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q08-6099da10b (reviewer sub-agent of L); spot-checked: Read the master and main-20261015 source (identical), the unit sk-prop-sf-biduality-general, the chapter record and all 18 cited statements. The delivery only flips status to split on the inherited 7-step proof; I reviewed that proof in full. Statement: matches the source exactly, with implicit data bound faithfully (A_{E,n}->A_{E,m}, 1<=m<=n; X separated, finite type over k; etale omega=a^x A; pro-etale omega transported by the site comparison). Step 2 types correctly as RHom(K_B,u)∘v with omega in D^b_ctf. I recomputed both transposes in step 4 and the term-by-term cocycle in step 5 (identity case included). The step 6 balanced-tensor chain isomorphism is correct. Step 7 (long-step check): one transport argument assembled from cited clauses (site origin, Tor detection, duality site comparison, the pro-etale realization clauses of lem-coef-finite-dualizing and thm-coef-finite-hom); a separate node would only restate the item's own pro-etale clause (D1), so it stays one step. Edge cases checked: m=n; a point with d=0; A^1, where omega=A(1)[2] lies in [-2,0]; A/varpi excluded as not finite-Tor; empty X. Tool uses accepted: lem-sf-flat-model and lem-fix-operation-reduction are off-route generic tools; the other declared tools are on the route. No new nodes and no duplicates. FIX made (C1/E1, two points): (1) step 1 now cites lem-pur-derived-change-of-rings (2) for computing T_B on the K-flat model, added to uses and proof_deps; (2) step 7 now checks that omega_proet ≅ nu^*omega lies in D^b_ctf(X_proet,A) by lem-sf-comparison-tor-amplitude (i), which the pro-etale v of thm-coef-finite-hom needs.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-abfc42029",
+  "group": "NH",
+  "result": "pass",
+  "note": "Repairs all points of the 61ae2ddb625a return. H3(a): natural transformation with IsIso only on the recorded finite-Tor constructible objects, fixed there by the evaluation equation. H3(b): evaluation, double-dual, cocycle and identity clauses on both sites, using the published pairing, scalar unit/associator and the counit-defined u; FiniteDualizing.lean:515 fixes u at the identity to the scalar unit, so the identity and evaluation clauses agree. H3(c): Tor [-b-2d,-a] for S(D_A K) and D_B(K_B) on both sites via hasTorAmplitudeIn and HasProEtaleTorAmplitude. H3(d): site-comparison conjuncts removed; pro-etale omega is the nu^* pullback of the etale one. H11/H8 repaired. Hypotheses match the node with no extras; universes u/u+1, no identification. Item node changed only in lean; statement verbatim; 26/26 declarations; one sorry; docstrings and line widths ok. nt_compile clean in 7.6 s. Scratch rfl checks show the HEq tensor-normalization types agree on both sites (a false control failed as expected). Minor, no action: finiteVerdierOrdinaryExtension/Adjunction have the same body as FiniteReduction.extend/extendAdjunction; second reading is the author's but substantive."
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.FiniteCoefficientVerdier",
+  "declaration": "WeilConjectures.finite_coefficient_verdier",
+  "file": "lean/Sheaf/SixFunctors/FiniteCoefficientVerdier.lean",
+  "statement": "theorem finite_coefficient_verdier (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p) (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (d : ℕ) (X : Scheme.{u}) (hd : topologicalKrullDim X ≤ (d : WithBot ℕ∞)) [X.Over (Spec (.of D.k))] [IsSeparated (X ↘ Spec (.of D.k))] [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))] : FiniteCoefficientVerdierComparison D l hl E d X hd",
+  "branch": "newtargets-dag",
+  "by": "NH",
+  "date": "2026-10-18",
+  "existing": false,
+  "declarations": [
+   "WeilConjectures.finiteVerdierOrdinaryExtension",
+   "WeilConjectures.finiteVerdierOrdinaryAdjunction",
+   "WeilConjectures.finiteVerdierOrdinaryExtension_additive",
+   "WeilConjectures.finiteVerdierOrdinaryExtension_oplax",
+   "WeilConjectures.finiteVerdierScalarRepresentativeAux",
+   "WeilConjectures.finiteVerdierScalarRepresentative",
+   "WeilConjectures.FiniteVerdierCoherentComparison",
+   "WeilConjectures.FiniteVerdierSiteComparison",
+   "WeilConjectures.finiteVerdierEtaleEvaluation",
+   "WeilConjectures.finiteVerdierProEtaleEvaluation",
+   "WeilConjectures.finiteVerdierProEtaleBiduality",
+   "WeilConjectures.finiteVerdierEtaleTensorAt",
+   "WeilConjectures.finiteVerdierEtaleHomAt",
+   "WeilConjectures.finiteVerdierEtalePairingAt",
+   "WeilConjectures.finiteVerdierEtaleEvaluationAt",
+   "WeilConjectures.finiteVerdierEtaleBidualityAt",
+   "WeilConjectures.finiteVerdierProEtaleTensorAt",
+   "WeilConjectures.finiteVerdierProEtaleHomAt",
+   "WeilConjectures.finiteVerdierProEtalePairingAt",
+   "WeilConjectures.finiteVerdierProEtaleEvaluationAt",
+   "WeilConjectures.finiteVerdierProEtaleBidualityAt",
+   "WeilConjectures.FiniteVerdierEtaleComparison",
+   "WeilConjectures.FiniteVerdierProEtaleComparison",
+   "WeilConjectures.FiniteVerdierTwoSitesComparison",
+   "WeilConjectures.FiniteCoefficientVerdierComparison",
+   "WeilConjectures.finite_coefficient_verdier"
+  ]
  }
 }
