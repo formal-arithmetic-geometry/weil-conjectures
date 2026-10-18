@@ -16212,3 +16212,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 06:29 L: merged deliver/W3/Sheaf.CategoryTheory.RingedExtendedCech (stage 3; reviewer PASS; first push; landing 20261018T062941-L-689057 (proof); batch 20261018T062645; modules 1; new nodes 0)
 - 06:29 L: merged deliver/W4/Sheaf.AlgebraicGeometry.ClosedProperSupportLocality (stage 3; reviewer PASS; first push; landing 20261018T062942-L-689195 (proof); batch 20261018T062645; modules 1; new nodes 0)
 - 06:29 L: merged deliver/W4/Sheaf.AlgebraicGeometry.StrictlyHenselianConstantCohomology (stage 3; reviewer PASS; first push; landing 20261018T062942-L-689349 (proof); batch 20261018T062645; modules 1; new nodes 0)
+- 06:29 L: merged deliver/W4/Sheaf.CategoryTheory.Sites.LocalizedSheavesOverRepresentable (stage 3; reviewer PASS; first push; landing 20261018T062943-L-689513 (proof); batch 20261018T062645; modules 1; new nodes 0)

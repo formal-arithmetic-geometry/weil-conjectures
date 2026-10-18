@@ -27,7 +27,7 @@
  ],
  "proof": [
   {
-   "text": "Construct the fibre functor $R$. For $(F,p)$ put $R(F,p)(X,a)=\\{s\\in F(X):p_X(s)=\\eta_X(a)\\}$, and restrict along $b:(Y,ab)\\to(X,a)$ using $F(b)$. Naturality of $p$ and $\\eta$ preserves the fibre condition. For a covering of $(X,a)$ the underlying family covers $X$ by [def-pur-localized-ringed-site]. A matching family in these fibres glues uniquely in $F(X)$ by [def-weil-pbc-sites-and-cohomology]; its image under $p$ and $\\eta_X(a)$ agree on the cover, hence agree in the sheaf $h_U^\\#$. Thus the amalgamation lies in the fibre, proving the sheaf condition. A map over $h_U^\\#$ preserves each fibre, and its component restrictions respect identities and composition. This defines $R$ on objects and arrows.",
+   "text": "Construct the explicit fibre subfunctor of the restriction of F to C/U. Naturality of p and the sheafification unit preserves fibres. Use Subfunctor.isSheaf_iff: a section locally in the fibre has the required image by separatedness of the restricted sheafified representable. This constructs the fibre sheaf and its functor R on maps.",
    "uses": [
     "def-pur-localized-ringed-site",
     "def-weil-pbc-sites-and-cohomology"
@@ -39,7 +39,7 @@
    }
   },
   {
-   "text": "For a sheaf $H$ on $\\mathcal C/U$ define $P_H(X)=\\coprod_{a:X\\to U}H(X,a)$ and $q_H:P_H\\to h_U$ by $q_H(a,s)=a$. Along $b:Y\\to X$ set $(a,s)|_Y=(ab,H(b)(s))$; the functor laws for $H$ prove the presheaf laws and naturality of $q_H$. Let $\\theta_H:P_H\\to P_H^\\#$ be the sheafification unit. The universal property [def-weil-pbc-sheafification] extends $\\eta q_H$ uniquely to $\\bar q_H:P_H^\\#\\to h_U^\\#$. Set $E(H)=(P_H^\\#,\\bar q_H)$. For $f:H\\to H'$ the presheaf map $(a,s)\\mapsto(a,f_{X,a}(s))$ induces a unique sheaf map $E(f)$; uniqueness of extensions proves compatibility with the structure maps and the identity and composition laws. This is exactly the concrete functor required in the statement.",
+   "text": "Construct the presheaf Q_H(X) = Σ (a : X → U), H(X,a), its projection to h_U, and the functor P on sheaves and maps. Dependent-pair transport along equal arrows proves the functor laws. Set Efun = P followed by Over.post of presheafToSheaf. The required projection, restriction and arrow formulas are definitional.",
    "uses": [
     "def-weil-pbc-sheafification"
    ],
@@ -50,9 +50,9 @@
    }
   },
   {
-   "text": "Define $u_H:H\\to R E(H)$ by $s\\mapsto\\theta_{H,X}(a,s)$ at $(X,a)$; it lies in the fibre because $\\bar q_H\\theta_H(a,s)=\\eta_X(a)$. This map is natural under restrictions. It is componentwise injective: equal images of $(a,s)$ and $(a,t)$ in $P_H^\\#(X)$ imply equality of these pairs on a covering of $X$ by the local-equality clause of [lem-weil-pbc-site-sheafification-sections-local]. The covering lifts to $(X,a)$, where separatedness of $H$ gives $s=t$. For surjectivity let $z\\in P_H^\\#(X)$ satisfy $\\bar q_H(z)=\\eta_X(a)$. The local-representative clause of the same node supplies a covering $b_i:X_i\\to X$ and pairs $(a_i,s_i)\\in P_H(X_i)$ representing $z|_{X_i}$. Their images satisfy $\\eta(a_i)=\\eta(ab_i)$. Apply the local-equality clause to the presheaf $h_U$ to refine each covering member until $a_i=ab_i$ on that refinement. Composition of covers gives a cover of $X$ and all these $s_i$ now lie in $H(X_i,ab_i)$. On overlaps they have the same image under $u_H$, namely the restriction of $z$; the injectivity already proved, applied to the overlap object over $U$, proves equality. Glue in $H$ to obtain $s\\in H(X,a)$. The images of $u_H(s)$ and $z$ agree on the cover, so separatedness of $P_H^\\#$ gives $u_H(s)=z$. Therefore $u_H$ is an isomorphism, with inverse given componentwise by these unique preimages. For a restriction $b:(Y,ab)\\to(X,a)$, naturality gives $u_{H,Y}(H(b)(s))=R E(H)(b)(u_{H,X}(s))$; uniqueness of preimages under $u_{H,Y}$ therefore proves that the componentwise inverses commute with $b$. Only pullbacks of covering arrows were used.",
+   "text": "Construct u_H : H → R Efun(H) by sending s over (X,a) to the sheafification of (a,s). Local injectivity of toSheafify, expressed by Presheaf.equalizerSieve_mem in Mathlib, gives an equality cover of pairs. Lift it to C/U and use separatedness of H to prove u_H injective. For local surjectivity, use Presheaf.imageSieve_mem for toSheafify to represent a fibre section locally by (a_i,s_i). Naturality of the projection shows that η(a_i)=η(a) on that slice object. Local injectivity of η gives a further equality cover on which a_i becomes the required structure arrow. Restrict s_i along that arrow to obtain a preimage. Transitivity of the localized topology combines the covers. Sheaf.isLocallyBijective_iff_isIso now proves u_H is an isomorphism; its proof supplies the gluing argument of the original plan.",
    "uses": [
-    "lem-weil-pbc-site-sheafification-sections-local",
+    "def-weil-pbc-sheafification",
     "def-pur-localized-ringed-site",
     "def-weil-pbc-sites-and-cohomology"
    ],
@@ -63,10 +63,9 @@
    }
   },
   {
-   "text": "For $(F,p)$ define $t:P_{R(F,p)}\\to F$ by $t_X(a,s)=s$. Naturality of restrictions is immediate and $p\\,t=\\eta q$. Extend uniquely through sheafification to $c_{F,p}:E R(F,p)\\to(F,p)$ using [def-weil-pbc-sheafification]; the extension is over $h_U^\\#$ because the two structure maps agree after the sheafification unit. Prove componentwise injectivity of $c$: if $z,z'\\in P_{R(F,p)}^\\#(X)$ have equal images, [lem-weil-pbc-site-sheafification-sections-local] supplies local pair representatives for each. Refine to a common covering (pull back the second cover along members of the first and compose), obtaining representatives $(a,s)$ and $(a',s')$ over each member with $s=s'$ in $F$. Their fibre conditions give $\\eta(a)=p(s)=p(s')=\\eta(a')$. The local-equality clause applied to $h_U$ refines once more until $a=a'$. The representatives are then equal as pairs, so $z$ and $z'$ agree on this covering. Separatedness of $P_{R(F,p)}^\\#$ gives $z=z'$. This argument does not identify $h_U$ with $h_U^\\#$.",
+   "text": "Construct t : Q_(R(F,p)) → F by forgetting the arrow and use sheafifyLift to construct c : Efun R(F,p) → (F,p). The sheafification universal property proves that c is over h_U#. If two pairs have equal underlying sections, their fibre conditions make the images of their arrows under η equal. Local injectivity of η gives an equality sieve for their arrows; on it the restricted dependent pairs coincide. Thus t is locally injective.",
    "uses": [
     "def-weil-pbc-sheafification",
-    "lem-weil-pbc-site-sheafification-sections-local",
     "def-weil-pbc-sites-and-cohomology"
    ],
    "elementary": false,
@@ -76,9 +75,9 @@
    }
   },
   {
-   "text": "Prove componentwise surjectivity of $c_{F,p}$. For $s\\in F(X)$ apply the local-representative clause of [lem-weil-pbc-site-sheafification-sections-local] to $p_X(s)\\in h_U^\\#(X)$. It gives a covering $b_i:X_i\\to X$ and arrows $a_i:X_i\\to U$ with $\\eta(a_i)=p(s)|_{X_i}=p(s|_{X_i})$. Consequently $(a_i,s|_{X_i})\\in P_{R(F,p)}(X_i)$. Their sheafification images $z_i$ map under $c$ to $s|_{X_i}$. On every overlap the two restrictions of $z_i$ have equal images under $c$, so the injectivity proved in step 4 forces equality. Glue the $z_i$ in $P_{R(F,p)}^\\#$; the resulting $z$ has $c(z)=s$ by separatedness of $F$. Thus $c$ is an isomorphism of sheaves. Its inverse is also over $h_U^\\#$ by composing the structure-map identity with the inverse.",
+   "text": "For s ∈ F(X), local surjectivity of η : h_U → h_U# gives a covering image sieve with representatives a_i for p(s). Naturality of p makes (a_i,s restricted) a fibre pair, proving t is locally surjective. Since toSheafify followed by c equals t, Mathlib local-injectivity and local-surjectivity factorization lemmas transfer both properties to c. Sheaf.isLocallyBijective_iff_isIso makes c.left an isomorphism, and Over.forget reflects it. This includes the separatedness and gluing steps of the local-section argument.",
    "uses": [
-    "lem-weil-pbc-site-sheafification-sections-local",
+    "def-weil-pbc-sheafification",
     "def-weil-pbc-sites-and-cohomology"
    ],
    "elementary": false,
@@ -88,7 +87,7 @@
    }
   },
   {
-   "text": "The maps $u_H$ are natural in $H$: both sides of the naturality square send $s\\in H(X,a)$ to $\\theta_{H',X}(a,f(s))$. The maps $c_{F,p}$ are natural in maps over $h_U^\\#$: precomposition with the sheafification unit makes both sides send $(a,s)$ to the image of $s$, so uniqueness in [def-weil-pbc-sheafification] proves the square. Hence steps 3 and 5 give natural isomorphisms $\\mathrm{id}\\cong R E$ and $E R\\cong\\mathrm{id}$. The triangle on $R(F,p)$ sends a fibre section $s$ first to the image of $(a,s)$ and then back to $s$. The triangle on $E(H)$, precomposed with $\\theta_H$, sends $(a,s)$ first to $(a,\\theta_H(a,s))$ and then to $\\theta_H(a,s)$; uniqueness of extensions proves that it is the identity. Thus $E$ and $R$ form the stated equivalence with natural unit and counit. All constructions use only disjoint unions of sets, sheafification, and gluing along coverings; no subcanonicity or unrestricted fibre products have been introduced.",
+   "text": "Prove naturality of u by the pair-section formula and toSheafify_naturality. Prove naturality of c using sheafifyMap_sheafifyLift and sheafifyLift_comp; on presheaf pairs both sides just apply the given map to the underlying fibre section. Assemble their natural isomorphisms with Equivalence.mk, which adjusts the unit to satisfy the triangle identities while preserving the explicit forward and inverse functors. The equivalences of sections e and r are identities for these explicit functors, so every remaining formula follows by reflexivity. All constructions and comparison proofs work for an arbitrary Grothendieck topology K on a small category; specialize K to J.toGrothendieck to preserve the module theorem signature.",
    "uses": [
     "def-weil-pbc-sheafification"
    ],
@@ -102,13 +101,12 @@
  "proof_deps": [
   "def-pur-localized-ringed-site",
   "def-weil-pbc-sheafification",
-  "def-weil-pbc-sites-and-cohomology",
-  "lem-weil-pbc-site-sheafification-sections-local"
+  "def-weil-pbc-sites-and-cohomology"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites.tex",
-  "place": "Explicit local-section realization of Tag 00Y1 (lemma-essential-image-j-shriek), using its fibre/disjoint-union construction and Tag 00WK instead of its plus-commutation diagram."
+  "place": "Tag 00Y1 fibre/disjoint-union construction and Tag 00WK local-section argument, realized directly with Mathlib.CategoryTheory.Sites.LocallyBijective (equalizer/image covering sieves, local bijections of sheaves, and factorization lemmas). The public theorem signature is unchanged."
  },
  "mathlib_searches": [
   {
@@ -267,5 +265,15 @@
   "date": "2026-10-17",
   "existing": false,
   "note": "Section 1(B): the recorded theorem required a Precoverage with HasPullbacks, stability and isomorphism axioms. This does not provide the node for an arbitrary Grothendieck topology on a small category without categorical pullbacks, as this consumer requires. The module now takes J : GrothendieckTopology C directly, retaining every disjoint-union, sheafification, fibre, restriction and morphism formula. Sheafification is supplied canonically for the small site; covering refinements use pullback sieves. The natural-language node is unchanged and no existing external declaration uses this theorem."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W4",
+  "result": "pass",
+  "landing": "20261018T062943-L-689513",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
