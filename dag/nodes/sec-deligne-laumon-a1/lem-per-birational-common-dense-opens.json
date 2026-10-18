@@ -15,9 +15,87 @@
   "def-weil-locally-ringed-space-morphism",
   "def-weil-open-immersion"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $\\eta_1,\\ldots,\\eta_r$ be the generic points of the irreducible components $Y_1,\\ldots,Y_r$ of $Y$ and $\\xi_i=f(\\eta_i)$; by hypothesis and uniqueness of generic points these are the generic points of the irreducible components $X_1,\\ldots,X_r$ of $X$, with $X_i=\\overline{\\{\\xi_i\\}}$, $Y_i=\\overline{\\{\\eta_i\\}}$. Put $X_i^\\circ=X\\setminus\\bigcup_{j\\ne i}X_j$ and $Y_i^\\circ=Y\\setminus\\bigcup_{j\\ne i}Y_j$: open (finite unions of closed sets), pairwise disjoint, $X_i^\\circ\\subseteq X_i$, $Y_i^\\circ\\subseteq Y_i$, and $\\xi_i\\in X_i^\\circ$, $\\eta_i\\in Y_i^\\circ$ (if $\\xi_i\\in X_j$ then $X_i\\subseteq X_j$, so $i=j$ by maximality). By the affine-open basis choose an affine open $V_i^0=\\operatorname{Spec}B\\subseteq X_i^\\circ$ containing $\\xi_i$, and then an affine open $U_i^0=\\operatorname{Spec}A\\subseteq Y_i^\\circ\\cap f^{-1}(V_i^0)$ containing $\\eta_i$ (this open contains $\\eta_i$ since $f(\\eta_i)=\\xi_i$). By the affine-chart square, under the identifications $U_i^0=\\operatorname{Spec}A$, $V_i^0=\\operatorname{Spec}B$ the restriction $f|_{U_i^0}:U_i^0\\to V_i^0$ is $\\operatorname{Spec}\\varphi$ for the ring map $\\varphi:B\\to A$ induced by $f$. A nonempty open subset of an irreducible space is irreducible and dense, so $\\operatorname{Spec}B$ and $\\operatorname{Spec}A$ are irreducible with generic points $\\xi_i$, $\\eta_i$; by the description of the irreducible components of a spectrum, these correspond to the unique minimal primes $\\mathfrak q\\subset B$ and $\\mathfrak p\\subset A$. Steps 2--4 are carried out for each $i$ separately with this notation.",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis",
+    "lem-sc-scheme-sober",
+    "lem-weil-pbc-spec-irreducible-components-minimal-primes",
+    "lem-weil-pbc-affine-opens-induced-ring-map-spec-square"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0BAC, lemma-birational-birational, proof: “There is an immediate reduction to the case where X and Y are irreducible which we omit. Moreover, after shrinking further we may assume X and Y are affine”."
+   }
+  },
+  {
+   "text": "The hypothesis on the generic points gives $\\varphi^{-1}(\\mathfrak p)=\\mathfrak q$. By the stalk-localization description for affine schemes, the map on stalks at the generic points is exactly $B_{\\mathfrak q}\\to A_{\\mathfrak p}$, and it is an isomorphism by assumption. Apply the generic-localization lemma above to obtain an isomorphism $B_{\\mathfrak q}\\xrightarrow{\\sim}A_{\\mathfrak q}$.",
+   "uses": [
+    "lem-weil-pbc-spec-map-stalk-localization",
+    "lem-per-birational-generic-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0BAC, lemma-birational-birational, proof: “By Lemma \\ref{lemma-birational-generic-fibres} we have B_q = A_q = A_p”, with the proof of Tag 0BAB (lemma-birational-generic-fibres)."
+   }
+  },
+  {
+   "text": "The affine morphism is locally of finite presentation, hence its ring map is of finite presentation and in particular has finitely many algebra generators. Choose generators $x_1,\\ldots,x_n$ of $A$ over $B$. Since $B_{\\mathfrak q}\\to A_{\\mathfrak q}$ is surjective, each $x_i$ is $b_i/g_i$ with $g_i\\notin\\mathfrak q$. Equality after localization gives another $g_i'\\notin\\mathfrak q$ with $g_i'(b_i-g_ix_i)=0$. For $g=\\prod_i g_ig_i'$, the map $B_g\\to A_g$ is surjective. Its kernel is finitely generated: $A_g=A\\otimes_BB_g$ is finitely presented over $B_g$ (base change of a presentation $B[x_1,\\ldots,x_n]/(h_1,\\ldots,h_m)$ of $A$), and the kernel lemma applies to the surjection $B_g\\to A_g$ (polynomial ring in $0$ variables); each kernel generator vanishes after localization at $\\mathfrak q$, so multiplying $g$ by finitely many further elements outside $\\mathfrak q$ makes the kernel zero. Thus, after replacing $g$, $B_g\\xrightarrow{\\sim}A_g$.",
+   "uses": [
+    "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+    "lem-weil-pbc-finite-presentation-surjection-kernel-fg"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0BAC, lemma-birational-birational, proof, finite-presentation case (2), together with Tag 01TQ."
+   }
+  },
+  {
+   "text": "For each $i$, put $V_i=D(g)\\subseteq\\operatorname{Spec}B=V_i^0$ and $U_i=(\\operatorname{Spec}\\varphi)^{-1}(V_i)=D(\\varphi(g))\\subseteq\\operatorname{Spec}A=U_i^0$. By the principal-localization lemma these are open subschemes identified with $\\operatorname{Spec}B_g$ and $\\operatorname{Spec}A_g$, and $f|_{U_i}:U_i\\to V_i$ is $\\operatorname{Spec}$ of $B_g\\to A_g$, an isomorphism by Step 3. They are nonempty since $\\xi_i\\in V_i$ ($g\\notin\\mathfrak q$) and $\\eta_i\\in U_i$ ($\\varphi(g)\\notin\\mathfrak p$, as $\\varphi^{-1}(\\mathfrak p)=\\mathfrak q$).",
+   "uses": [
+    "lem-weil-pbc-principal-localization-open-immersion",
+    "def-weil-open-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0BAC, conclusion of the affine proof."
+   }
+  },
+  {
+   "text": "Set $U=\\bigcup_iU_i\\subseteq Y$ and $V=\\bigcup_iV_i\\subseteq X$. Since $U_i\\subseteq Y_i^\\circ$ and $V_i\\subseteq X_i^\\circ$, these are disjoint unions of open subschemes, $f(U_i)\\subseteq V_i$ gives $f(U)\\subseteq V$, and $f|_U:U\\to V$ is the disjoint union of the isomorphisms $f|_{U_i}:U_i\\to V_i$, hence an isomorphism. $U$ contains every $\\eta_i$, so $\\overline U\\supseteq\\bigcup_iY_i=Y$; likewise $V$ contains every $\\xi_i$, so $\\overline V\\supseteq\\bigcup_iX_i=X$, since every point of $X$ lies in an irreducible component and the $X_i$ are all of them.",
+   "uses": [
+    "def-weil-irreducible-components"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0BAC, first sentence and final “This proves case (2)” reduction."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-irreducible-components",
+  "def-weil-open-immersion",
+  "lem-per-birational-generic-localization",
+  "lem-sc-scheme-sober",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-affine-opens-induced-ring-map-spec-square",
+  "lem-weil-pbc-finite-presentation-surjection-kernel-fg",
+  "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+  "lem-weil-pbc-principal-localization-open-immersion",
+  "lem-weil-pbc-spec-irreducible-components-minimal-primes",
+  "lem-weil-pbc-spec-map-stalk-localization"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 0BAC, lemma-birational-birational, locally-of-finite-presentation alternative (2)"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -56,7 +134,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-birational-isomorphism-dense-open",
@@ -68,7 +146,7 @@
  "blueprint": {
   "from": {
    "node": "lem-per-artin-gabber-affine-curve",
-   "place": "Proof Step 1: dimension-normalized Verdier duality and the middle t-structure (historically Step 3 when this child was created); the finite-coefficient potential-dualizing construction underlying the qbar generic duality model. Technical input to ILO XVII sections 3.4–3.5: Expose XVII sections 3.4.1–3.4.3: existence of an SNC resolution, Propositions 3.4.1.1(d), 3.4.1.2–3.4.1.3, the connectedness observation in 3.4.1.4, common domination in 3.4.2, and the normalized support square of Lemma 3.4.3.1; printed pp.270–274; input: Stacks Project Tag 0BFP (varieties-lemma-modification-normal-iso-over-codimension-1), all four clauses; input Tag 0BAJ, morphisms-lemma-birational-isomorphism-over-dense-open, separated and locally finitely presented case; input Tag 0BAC, lemma-birational-birational: spreading a birational map to two dense open subschemes before using separatedness",
+   "place": "Proof Step 1: spreading a birational morphism to a common dense open via the generic-fibre and finite-presentation arguments (Tag 0BAC).",
    "via": [
     "lem-per-birational-isomorphism-dense-open",
     "lem-per-normal-modification-codimension-one",
@@ -83,5 +161,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-birational-common-dense-opens",
+  "worker": "stage1",
+  "summary": "Split the Stacks Tag 0BAC proof into the affine generic-localization argument, the finite-presentation denominator/kernel argument, and the principal-open conclusion. Added one strictly smaller algebra node for the intermediate equality B_q ≅ A_q; all other inputs are existing DAG nodes or Mathlib leaves.",
+  "blueprint": "The steps realize Proof Step 1 of the blueprint ancestor lem-per-artin-gabber-affine-curve: the Tag 0BAC spreading-to-common-open argument used before the later perverse-duality construction.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-spec-map-stalk-localization",
+    "why": "Generic stalk maps are identified with the corresponding localizations."
+   },
+   {
+    "node": "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+    "why": "Affine charts of a locally finitely presented morphism have finitely presented coordinate maps."
+   },
+   {
+    "node": "lem-weil-pbc-finite-presentation-surjection-kernel-fg",
+    "why": "The kernel of the affine surjection onto a finitely presented algebra is finitely generated."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-spec-map-stalk-localization",
+  "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+  "lem-weil-pbc-finite-presentation-surjection-kernel-fg"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q115-dd4a93c24",
+  "group": "Q115",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q115-dd4a93c24 (reviewer sub-agent of L); spot-checked: Verdict FIX. I read Stacks Tags 0BAC alternative (2) and 0BAB in morphisms.tex (lines ~12970-13110; tags confirmed in tags lines 14204-14205) and Definition 0BAA. The item statement matches 0BAC(2) hypothesis by hypothesis; it spells out 'birational', swaps X and Y consistently, and weakens nothing. The new node lem-per-birational-generic-localization is the 0BAB ring claim (B_q ≅ A_p implies B_q ≅ A_q). I checked its proof: every prime of A_q contains p, A_q→κ(p) is surjective, so A_q is local and equals A_p. I tested it on id, k[x]→k[x,y]/(y²,xy), Z→Z[1/2] and a case where the hypothesis fails. It is true, self-contained, statement-only, strictly smaller than the item, and I found no duplicate after grepping the DAG for birational/0BAB/0BAC/'unique minimal prime' (the 0BAJ, 0552 and 0559 nodes are different statements). Steps 2-4 cite statements that say what is used. Three small repairs in the item (statement unchanged): (1) D5/E5: Steps 1 and 5 left out the source's omitted 'immediate reduction'. I wrote it out with disjoint opens X_i°=X∖∪_{j≠i}X_j and Y_i°, chosen affine charts with U_i^0 ⊆ f^{-1}(V_i^0), and explicit gluing of the disjoint U_i→V_i plus density through the generic points. (2) C1: added the Mathlib leaf lem-weil-pbc-affine-opens-induced-ring-map-spec-square (01I1) to Step 1 for 'f on the affine charts is Spec φ', and wrote in Step 3 that A_g is finitely presented over B_g by base change, which 00R2 needs with n=0. (3) B5: the source places of Steps 1 and 2 said 'Tag 0BAB, lemma-birational-birational'; corrected to 0BAC. I accept the tool_uses of the three sec-proper-base-change nodes. No SGA is cited.; 1 file(s) fixed by the reviewer"
  }
 }
