@@ -16,8 +16,9 @@ import Mathlib.CategoryTheory.Triangulated.Opposite.Pretriangulated
 /-!
 # Brown representability for cohomological functors
 
-We compare the notions of compactness and compact generation of
-`WeilConjectures.CategoryTheory.CompactlyGenerated` with those of
+Using the comparison `isCompactObject_iff_isCompactObj` of the two notions of compact object,
+we show that a compactly generated triangulated category in the sense of
+`WeilConjectures.CategoryTheory.CompactlyGenerated` has compact generators in the sense of
 `CategoryTheory.BrownRepresentability`, and deduce Brown representability in the form
 `H ≅ preadditiveYoneda.obj G` from `BrownRepresentability.exists_bijective`.
 
@@ -33,66 +34,6 @@ open CategoryTheory CategoryTheory.Limits Opposite DirectSum
 open CategoryTheory.Pretriangulated CategoryTheory.Pretriangulated.Opposite
 
 namespace CategoryTheory
-
-section Compact
-
-variable {C : Type u} [Category.{v} C] [Preadditive C] [HasCoproducts.{v} C]
-
-open scoped Classical in
-/-- The projection `∐ E ⟶ E j`, the identity on the summand `E j` and zero on the others. -/
-private noncomputable def sigmaProj {I : Type v} (E : I → C) (j : I) : ∐ E ⟶ E j :=
-  Sigma.desc (Pi.single (M := fun k : I ↦ E k ⟶ E j) j (𝟙 (E j)))
-
-/-- The canonical map `⨁ Hom(K, E i) ⟶ Hom(K, ∐ E)` is injective in any preadditive category:
-composing with the projection to `E j` recovers the `j`-th component. -/
-private lemma toAddMonoid_comp_sigmaProj {I : Type v} [DecidableEq I] (E : I → C) (K : C)
-    (d : ⨁ i : I, (K ⟶ E i)) (j : I) :
-    DirectSum.toAddMonoid (fun i : I ↦ Preadditive.rightComp K (Sigma.ι E i)) d ≫
-      sigmaProj E j = d j := by
-  classical
-  induction d using DirectSum.induction_on with
-  | zero => simp
-  | of k x =>
-    rw [DirectSum.toAddMonoid_of]
-    by_cases h : k = j
-    · subst h
-      simp [sigmaProj, Preadditive.rightComp]
-    · rw [DirectSum.of_eq_of_ne _ _ _ (Ne.symm h)]
-      simp only [sigmaProj, Preadditive.rightComp, AddMonoidHom.mk'_apply, Category.assoc,
-        Sigma.ι_desc]
-      convert comp_zero
-      convert Pi.single_eq_of_ne h _
-  | add d₁ d₂ h₁ h₂ => simp [Preadditive.add_comp, h₁, h₂]
-
-/-- Compactness in the sense of `IsCompactObject` (bijectivity of
-`⨁ Hom(K, E i) ⟶ Hom(K, ∐ E)`) agrees with `BrownRepresentability.IsCompactObj` (every
-morphism to a coproduct is a finite sum of morphisms through the summands):
-injectivity is automatic. -/
-theorem isCompactObject_iff_isCompactObj (K : C) :
-    IsCompactObject.{v} K ↔ BrownRepresentability.IsCompactObj K := by
-  classical
-  constructor
-  · intro hK J X c hc f
-    let e : c.pt ≅ ∐ X := hc.coconePointUniqueUpToIso (colimit.isColimit _)
-    have he (j : J) : Sigma.ι X j ≫ e.inv = c.inj j :=
-      hc.comp_coconePointUniqueUpToIso_inv (colimit.isColimit _) ⟨j⟩
-    obtain ⟨d, hd⟩ := (hK J X).2 (f ≫ e.hom)
-    refine ⟨d.support, fun j ↦ d j, ?_⟩
-    rw [← cancel_mono e.hom, ← hd, DirectSum.toAddMonoid, DFinsupp.liftAddHom_apply]
-    erw [DFinsupp.sumAddHom_apply]
-    rw [DFinsupp.sum, Preadditive.sum_comp]
-    refine Finset.sum_congr rfl fun j _ ↦ ?_
-    simp [Preadditive.rightComp, ← he]
-  · intro hK I E
-    refine ⟨(injective_iff_map_eq_zero _).2 fun d hd ↦ ?_, fun f ↦ ?_⟩
-    · ext j
-      rw [← toAddMonoid_comp_sigmaProj E K d j, hd, zero_comp]
-      rfl
-    · obtain ⟨S, g, hg⟩ := hK _ (coproductIsCoproduct E) f
-      refine ⟨∑ j ∈ S, DirectSum.of (fun i ↦ K ⟶ E i) j (g j), ?_⟩
-      simp [hg, Preadditive.rightComp]
-
-end Compact
 
 variable {C : Type u} [Category.{v} C] [HasZeroObject C] [HasShift C ℤ]
   [Preadditive C] [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C]
