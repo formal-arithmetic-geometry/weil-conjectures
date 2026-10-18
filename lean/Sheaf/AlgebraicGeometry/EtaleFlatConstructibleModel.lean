@@ -14,10 +14,7 @@ public import Sheaf.AlgebraicGeometry.EtaleTorAmplitude
 public import WeilConjectures.SixFunctors.Etale.Derived.Tensor
 public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.Basic
 import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.FlatModel
-import WeilConjectures.CategoryTheory.DerivedCategory.FlatModelOfClass
 import Sheaf.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
-import WeilConjectures.CategoryTheory.Abelian.Flat.Basic
-import WeilConjectures.ConstructibleSheaf.KernelCokernel
 
 /-!
 # Bounded flat constructible models on the small etale site
@@ -80,6 +77,20 @@ theorem hasTorAmplitudeIn_iff_exists_finiteValueConstructibleModel
         (∀ q : ℤ, Scheme.IsConstructibleEtaleModuleSheaf (P.X q)) ∧
         (∀ q : ℤ, q < a ∨ b < q → IsZero (P.X q)) ∧
         Nonempty ((_root_.DerivedCategory.Q).obj P ≅ K) := by
-  sorry
+  have hK' : DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) X K := by
+    obtain ⟨c, d, -, hcd⟩ := hK.2
+    refine ⟨⟨⟨c, ?_⟩, ⟨d, ?_⟩⟩, fun q ↦ ?_⟩
+    · exact (_root_.DerivedCategory.isGE_iff _ c).2 fun q hq ↦ hcd q (.inl hq)
+    · exact (_root_.DerivedCategory.isLE_iff _ d).2 fun q hq ↦ hcd q (.inr hq)
+    · exact (Scheme.isConstructibleEtaleModuleSheaf_iff _).1 (hK.1 q)
+  constructor
+  · intro h
+    obtain ⟨P, hP, hc, ⟨e⟩⟩ :=
+      (hasTorAmplitudeIn_iff_exists_flatConstructibleModel Λ a b hab K hK').1 h
+    exact ⟨P, hP.2, fun q ↦ (Scheme.isConstructibleEtaleModuleSheaf_iff _).2 (hc q),
+      hP.1, ⟨e.symm⟩⟩
+  · rintro ⟨P, hf, -, hz, ⟨e⟩⟩
+    exact (hasTorAmplitudeIn_iff_exists_flatModel Λ a b hab K hK').2
+      ⟨P, ⟨hz, hf⟩, ⟨e.symm⟩⟩
 
 end AlgebraicGeometry.Etale

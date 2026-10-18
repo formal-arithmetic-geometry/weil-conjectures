@@ -29,74 +29,50 @@
  ],
  "proof": [
   {
-   "text": "Use [lem-weil-pbc-constructible-etale-module-sheaf-comparison] on each $H^n(K)$ to convert the finite-value constructibility hypothesis to the source $\\operatorname{IsConstructibleSheaf}$ predicate. The category and sheaves are unchanged. Let $T$ be this source constructibility property and $S(F)$ mean $T(F)$ and flatness of $F$.",
+   "text": "Convert the given bounded finite-value-constructible hypothesis to the source boundedConstructible predicate. Its integer cohomology bounds give the canonical t-structure IsGE and IsLE conditions by DerivedCategory.isGE_iff and isLE_iff. Apply [lem-weil-pbc-constructible-etale-module-sheaf-comparison] to every cohomology sheaf. This gives exactly the hypothesis of the already-proved source theorem hasTorAmplitudeIn_iff_exists_flatConstructibleModel.",
    "uses": [
     "lem-weil-pbc-constructible-etale-module-sheaf-comparison"
    ],
    "elementary": false,
    "source": {
     "document": "WeilConjectures/SixFunctors/Etale/Derived/Finiteness/FlatModel.lean",
-    "place": "hasTorAmplitudeIn_iff_exists_flatConstructibleModel, lines 160-214; constructible variant of blueprint lem-sf-flat-model"
+    "place": "hasTorAmplitudeIn_iff_exists_flatConstructibleModel, lines 160-214; hasTorAmplitudeIn_iff_exists_flatModel, lines 91-107"
    }
   },
   {
-   "text": "The kernel and cokernel clauses of [thm-constructible-serre], together with the comparison [lem-weil-pbc-constructible-etale-module-sheaf-comparison] on source, target and resulting object, show that $T$ is closed under kernels and cokernels. Thus this applies to maps whose terms satisfy the source predicate, not merely to terms given in the finite-value encoding.",
+   "text": "For the forward implication, apply the forward direction of the existing source theorem hasTorAmplitudeIn_iff_exists_flatConstructibleModel. Its proof implements the planned construction: the source constructibility class is closed under kernels and cokernels by [thm-constructible-serre]; its flat subclass contains zero and is stable under isomorphisms and binary biproducts, the latter using [lem-weil-pbc-flat-coproduct]. The lifting theorem [lem-sf-etale-flat-constructible-lifting] supplies the class-resolution hypothesis, and [lem-sf-flat-model-class-resolution] gives the bounded flat constructible model by lower good truncation. Thus the existing source theorem packages these four stated dependencies, without bypassing the unit construction.",
    "uses": [
-    "thm-constructible-serre",
-    "lem-weil-pbc-constructible-etale-module-sheaf-comparison"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "WeilConjectures/SixFunctors/Etale/Derived/Finiteness/FlatModel.lean",
-    "place": "hasTorAmplitudeIn_iff_exists_flatConstructibleModel, lines 160-214; constructible variant of blueprint lem-sf-flat-model"
-   }
-  },
-  {
-   "text": "The zero sheaf is constant with zero module value on the one-stratum partition of $X$, so it is constructible. An isomorphism preserves a trivialization on every stratum, so $T$ is invariant under isomorphism. Flatness is invariant under isomorphism by conjugating the exact tensor functors, and tensor with zero is the zero exact functor. For $F,G$ in $S$, the split exact sequence $0\\to F\\to F\\oplus G\\to G\\to0$ and [thm-constructible-serre] give constructibility of $F\\oplus G$, after applying the comparison to both ends and back to the middle. The binary case of [lem-weil-pbc-flat-coproduct] gives its flatness, since the biproduct is the binary coproduct. Hence $S$ contains zero, is invariant under isomorphisms and is closed under binary biproducts; $S\\subseteq T$ and $S\\subseteq\\mathrm{Flat}$ hold by definition.",
-   "uses": [
-    "thm-constructible-serre",
-    "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
-    "lem-weil-pbc-flat-coproduct"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "WeilConjectures/SixFunctors/Etale/Derived/Finiteness/FlatModel.lean",
-    "place": "hasTorAmplitudeIn_iff_exists_flatConstructibleModel, lines 160-214; constructible variant of blueprint lem-sf-flat-model"
-   }
-  },
-  {
-   "text": "For every epimorphism $p:A\\to B$ and map $g:G\\to B$ with $T(G)$, [lem-sf-etale-flat-constructible-lifting] produces $E$ in $S$, an epimorphism $e:E\\to G$ and $h:E\\to A$ satisfying $p\\circ h=g\\circ e$. This is exactly the lifting hypothesis for the class-resolution theorem; it does not assert that the constructible sheaf $G$ itself is flat or projective.",
-   "uses": [
-    "lem-sf-etale-flat-constructible-lifting"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "WeilConjectures/SixFunctors/Etale/Derived/Finiteness/FlatModel.lean",
-    "place": "hasTorAmplitudeIn_iff_exists_flatConstructibleModel, lines 160-214; constructible variant of blueprint lem-sf-flat-model"
-   }
-  },
-  {
-   "text": "Suppose $K$ has Tor amplitude in $[a,b]$. Apply [lem-sf-flat-model-class-resolution] to the category of small-etale $\\Lambda$-module sheaves and the classes $S,T$ just checked. Every $H^n(K)$ belongs to $T$ by step 1. The amplitude test is literally the vanishing required in that theorem; the source's t-structure version is the same two inequalities $i<a$ and $i>b$. It gives $P$ supported in $[a,b]$, flat with every term in $T$, and $Q(P)\\cong K$. Invert that isomorphism and apply [lem-weil-pbc-constructible-etale-module-sheaf-comparison] separately to each $P^n$. The terms then have exactly the finite-value constructibility requested in the item. In the source resolution, the good truncation term is a cokernel in $T$; no hard truncation at $b$ or change to an arbitrary representative is used.",
-   "uses": [
+    "lem-sf-etale-flat-constructible-lifting",
     "lem-sf-flat-model-class-resolution",
-    "lem-weil-pbc-constructible-etale-module-sheaf-comparison"
+    "lem-weil-pbc-flat-coproduct",
+    "thm-constructible-serre"
    ],
    "elementary": false,
    "source": {
     "document": "WeilConjectures/SixFunctors/Etale/Derived/Finiteness/FlatModel.lean",
-    "place": "hasTorAmplitudeIn_iff_exists_flatConstructibleModel, lines 160-214; constructible variant of blueprint lem-sf-flat-model"
+    "place": "hasTorAmplitudeIn_iff_exists_flatConstructibleModel, lines 160-214; hasTorAmplitudeIn_iff_exists_flatModel, lines 91-107"
    }
   },
   {
-   "text": "Conversely, suppose such a $P$ and $K\\cong Q(P)$ exist. Discard only the additional termwise constructibility assertion and use the reverse direction of [lem-sf-etale-flat-model] with the same $\\Lambda,X,a,b$, the stated $a\\le b$, and the given bounded-constructible $K$ (converted by the comparison as in step 1). It yields Tor amplitude in $[a,b]$ for $K$. This converse does not assume or claim that every bounded-constructible object has finite Tor amplitude.",
+   "text": "Unpack IsBoundedFlatComplex into support outside [a,b] and termwise flatness. Apply [lem-weil-pbc-constructible-etale-module-sheaf-comparison] in reverse to each model term. Reverse the source isomorphism K ≅ Q(P) to obtain Q(P) ≅ K. These are exactly the four clauses requested for the model.",
    "uses": [
-    "lem-sf-etale-flat-model",
     "lem-weil-pbc-constructible-etale-module-sheaf-comparison"
    ],
    "elementary": false,
    "source": {
     "document": "WeilConjectures/SixFunctors/Etale/Derived/Finiteness/FlatModel.lean",
-    "place": "hasTorAmplitudeIn_iff_exists_flatConstructibleModel, lines 160-214; constructible variant of blueprint lem-sf-flat-model"
+    "place": "hasTorAmplitudeIn_iff_exists_flatConstructibleModel, lines 160-214; hasTorAmplitudeIn_iff_exists_flatModel, lines 91-107"
+   }
+  },
+  {
+   "text": "Conversely, discard only termwise constructibility. Pair the given support and flatness into IsBoundedFlatComplex, reverse Q(P) ≅ K, and apply the reverse implication of [lem-sf-etale-flat-model] with the converted bounded-constructible hypothesis. This proves the original Tor amplitude predicate in the same interval.",
+   "uses": [
+    "lem-sf-etale-flat-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "WeilConjectures/SixFunctors/Etale/Derived/Finiteness/FlatModel.lean",
+    "place": "hasTorAmplitudeIn_iff_exists_flatConstructibleModel, lines 160-214; hasTorAmplitudeIn_iff_exists_flatModel, lines 91-107"
    }
   }
  ],
@@ -110,8 +86,8 @@
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-lem-sf-flat-model/lem-sf-flat-model.md",
-  "place": "Constructible variant proof, implemented by FlatModel.lean with explicit finite-value/source-predicate comparison"
+  "document": "WeilConjectures/SixFunctors/Etale/Derived/Finiteness/FlatModel.lean",
+  "place": "Reuse the existing proved constructible-model theorem (lines 160-214), whose proof is the original class-resolution route, and the flat-model converse (lines 91-107); M4 supplies the finite-value comparison and t-structure bound conversion."
  },
  "mathlib_searches": [
   {
@@ -223,5 +199,15 @@
   "date": "2026-10-16",
   "existing": false,
   "note": "Import-only repair of the published prerequisite. Its module imported both upstream and Sheaf IsConstructibleEtaleModuleSheaf, which declare the same name with different definitions and fail together. Remove only the redundant upstream import; retain the recorded locally closed constructibility interface supplied through the Sheaf bounded-constructible dependency. Every declaration, signature, definition body and proof is unchanged; no other DAG statement is introduced."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261018T062833-L-664107",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
