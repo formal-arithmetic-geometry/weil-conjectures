@@ -60,7 +60,8 @@ coefficient ring `Λ`, lies in `Dctf(X, Λ)`.
   (`prop-pod-perfect-local-model`): a perfect complex lies in `Dctf(X, Λ)`. It is locally a
   bounded complex of finite projective modules
   (`AlgebraicGeometry.ProEtale.DerivedCategory.isDualizable_iff_isLocallyPerfect`, the node
-  `sk-def-perfect`), so its cohomology sheaves are locally constant with finite stalks, hence of étale origin (`lem-sf-proetale-constructible-origin`).
+  `sk-def-perfect`), so its cohomology sheaves are locally constant with finite stalks, hence of
+  étale origin (`lem-sf-proetale-constructible-origin`).
 - `AlgebraicGeometry.ProEtale.DerivedCategory.isDualizable_iff_isLocallyPerfect`
   (`sk-def-perfect`, Stacks 0FPV): an object of `D(X_proét, Λ)` is dualizable if and only if it
   is locally quasi-isomorphic to a bounded complex of finite projective `Λ_X`-modules. Being
