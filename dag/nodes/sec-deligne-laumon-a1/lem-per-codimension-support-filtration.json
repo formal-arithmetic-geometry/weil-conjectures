@@ -16,9 +16,222 @@
   "def-sp-filtration",
   "lem-per-prime-power-supported-calculus"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First $c$ strictly increases along every strict specialization. Indeed both endpoints lie in any affine neighbourhood of the specialized endpoint. Universal catenarity in [def-exc-excellent-ring] bounds chain lengths in this prime interval; choose a chain of maximum length, which is saturated. Adding the given increments along it gives $c(z)-c(y)>0$ for a strict specialization $y\\rightsquigarrow z$. For a closed set $E$, use its finitely many irreducible components and their generic points. In particular, if every point of $E$ has level at least $p$, every point of $E\\cap X^p$ is the generic point of a component of $E$, and there are finitely many such points. Every proper closed subset of $\\overline{\\{x\\}}$ for $c(x)=p$ has all its points at levels greater than $p$. No local-closedness of $X^p$ is asserted.",
+   "uses": [
+    "def-exc-excellent-ring",
+    "lem-sc-noetherian-closed-subset-finite-components",
+    "lem-sc-scheme-sober"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01IS (lemma-scheme-sober); finite-component decomposition and the bounded saturated-chain definition of universal catenarity"
+   }
+  },
+  {
+   "text": "The constant-$\\Lambda$ module-sheaf category has enough injectives. Choose a bounded-below complex $I$ of injective module sheaves representing $K$, and set $A=\\Gamma(X,I)$; the right-derived-functor comparison identifies $A$ with $R\\Gamma(X,K)$ and identifies $\\Gamma_Z(X,I)$ with derived sections supported on any closed $Z$. For every open $V\\subseteq X$, open immersions are etale, so $I|_V$ again has injective terms; hence these same section complexes compute the derived sections on $V$.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-enough-injectives",
+    "lem-weil-pbc-dplus-injective-representative",
+    "lem-weil-pbc-right-derived-plus-injective",
+    "def-pur-etale-derived-supported-sections",
+    "lem-weil-pbc-open-immersion-etale",
+    "lem-weil-pbc-etale-restriction-injectives"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 013K and 070J; etale-cohomology.tex, section-cohomology-support; etale restriction of module-injectives"
+   }
+  },
+  {
+   "text": "Define $F^pA$ to be the degreewise union of $\\Gamma_Z(X,I)$ over closed $Z$ all of whose points have level at least $p$. The family is nonempty (it contains $\\varnothing$) and directed because it is closed under finite unions. The differential preserves these modules: restriction commutes with the differential, and $\\Gamma_Z$ is its kernel. Addition of two supported sections is supported on the union. Thus $F^pA$ is a subcomplex, $F^{p+1}A\\subseteq F^pA$, $F^pA=A$ for $p\\leq0$ (use $Z=X$), and $F^pA=0$ for $p>N$ (only $Z=\\varnothing$ is possible). This is precisely a finite decreasing filtration [def-sp-filtration].",
+   "uses": [
+    "def-pur-etale-derived-supported-sections",
+    "def-sp-filtration"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVII, proof of Lemma 3.6.2, printed pp. 278–279; explicit support-filtration construction"
+   }
+  },
+  {
+   "text": "For any module sheaf $J$ and point $x$, put $D_x=\\overline{\\{x\\}}$ with its reduced closed scheme structure, and define the germ module\n$$G_x(J)=\\varinjlim_{V\\ni x}\\Gamma_{D_x\\cap V}(V,J|_V),$$\nwhere $V$ ranges over open neighbourhoods and arrows are restriction to smaller neighbourhoods. For $s\\in\\Gamma_Z(X,J)$ with $Z$ of level at least $p$, the points $Z\\cap X^p$ are finitely many generic points by Step 1. At such a point $x$ remove all components of $Z$ other than $D_x$; the restriction of $s$ now has support in $D_x$, giving a germ in $G_x(J)$. At other points of $X^p$ set the germ to zero. This gives a linear map\n$$\\theta_J:F^p\\Gamma(X,J)\\longrightarrow\\bigoplus_{x\\in X^p}G_x(J).$$\nIt is independent of $Z$: two choices can be compared inside their union, and restriction to a common smaller neighbourhood gives the same germ. It is natural in $J$, since sheaf maps commute with restriction and preserve vanishing.",
+   "uses": [
+    "lem-sc-noetherian-closed-subset-finite-components",
+    "lem-sc-scheme-sober",
+    "def-pur-etale-derived-supported-sections"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVII, proof of Lemma 3.6.2, printed pp. 278–279; explicit support-filtration construction"
+   }
+  },
+  {
+   "text": "The kernel of $\\theta_J$ is exactly $F^{p+1}\\Gamma(X,J)$. The inclusion from right to left follows because a level-$(p+1)$ support contains no level-$p$ point. Conversely, choose a closed level-$p$ support $Z$ for $s$ and list its level-$p$ generic points $x_1,\\ldots,x_r$. If all their germs are zero, for each $i$ there is an open neighbourhood $V_i$ of $x_i$ on which $s$ vanishes (first restrict to where its support is in $D_{x_i}$, then use the definition of zero in the directed germ colimit). It follows that $s$ is supported on the closed set $Z\\setminus\\bigcup_iV_i$. This set has no level-$p$ point by Step 1, so all its points have level at least $p+1$. If $r=0$, use $Z$ itself. This proves the kernel assertion without assuming that the support of a sheaf is constructible.",
+   "uses": [
+    "def-pur-etale-derived-supported-sections"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVII, proof of Lemma 3.6.2, printed pp. 278–279; explicit support-filtration construction"
+   }
+  },
+  {
+   "text": "For injective $J$, the map $\\theta_J$ is surjective. It suffices to lift a germ at one $x\\in X^p$, represented by $s\\in\\Gamma_{D_x\\cap V}(V,J)$. Glue $s$ on $V$ with zero on $X\\setminus D_x$; they agree on $V\\setminus D_x$. This gives a section on $O=V\\cup(X\\setminus D_x)$. Injective module restriction along the open monomorphism $O\\hookrightarrow X$ is surjective [lem-pur-ringed-site-injective-mono-restriction], so lift it to $\\widetilde s\\in J(X)$. The lift vanishes on $X\\setminus D_x$, hence has support in $D_x$ and belongs to $F^p$. Its germ at $x$ is the prescribed one, and its germ at every other level-$p$ point is zero, since no such point lies in $D_x$. A finite sum of these lifts lifts any element of the direct sum. Applying Steps 4–6 to every term of $I$ yields a natural isomorphism of complexes\n$$\\operatorname{gr}^p_FA\\xrightarrow{\\sim}\\bigoplus_{x\\in X^p}G_x(I).$$\nThe maps commute with differentials by naturality in $J$.",
+   "uses": [
+    "lem-pur-ringed-site-injective-mono-restriction",
+    "def-pur-etale-derived-supported-sections"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 093X (lemma-restriction-along-monomorphism-surjective); explicit sheaf gluing and the kernel calculation of Steps 4–5"
+   }
+  },
+  {
+   "text": "To identify $G_x(I)$, fix an affine neighbourhood $V_0=\\operatorname{Spec}B$ of $x$, corresponding to $\\mathfrak p$. Principal opens $V_f$, $f\\notin\\mathfrak p$, form a cofinal system of neighbourhoods of $x$ in $V_0$. The localization-colimit and affine-limit results give $\\varprojlim_fV_f=X_x=\\operatorname{Spec}\\mathcal O_{X,x}$. They also identify $\\varprojlim_f(V_f\\setminus D_x)$ with $X_x\\setminus\\{x\\}$, since the inverse image of $D_x$ is $V(\\mathfrak pB_{\\mathfrak p})=\\{x\\}$. All schemes here are qcqs: the stages are opens in a Noetherian affine scheme and the limit is an open in a Noetherian local affine scheme. Transition maps, including those on the complements, are restrictions of principal open immersions and hence affine. Thus both systems satisfy the hypotheses of derived etale cohomology continuity for the fixed finite ring $\\Lambda$ and the inverse images of $K|_{V_0}$.",
+   "uses": [
+    "lem-weil-pbc-localization-colimit-principal-localizations",
+    "lem-weil-pbc-limit-affine-transition",
+    "lem-weil-pbc-localization-noetherian",
+    "lem-weil-pbc-derived-cohomology-continuity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0GIT (lemma-colimit-complexes); Tag 09YQ (theorem-colimit), applied to principal neighbourhoods and their open complements; Limits Tag 01YW"
+   }
+  },
+  {
+   "text": "For each $V_f$, the complex $\\Gamma_{D_x\\cap V_f}(V_f,I)$ is the kernel of the degreewise surjection $\\Gamma(V_f,I)\\to\\Gamma(V_f\\setminus D_x,I)$; surjectivity follows from injective module restriction. Its support triangle is therefore the shifted cone of this restriction. Take directed colimits of these triangles. Filtered colimits of abelian groups preserve exactness, and the same holds for modules by forgetting scalars: kernels and quotients carry their inherited scalar action. Equivalently, a cocycle or a relation in a directed colimit is represented at a stage, and a zero relation becomes zero at a later stage, so cohomology commutes with this colimit. The two outer section comparisons are quasi-isomorphisms by Step 7 and derived continuity. The induced map on their shifted cones is then a quasi-isomorphism (use the long exact cohomology sequences). Consequently\n$$G_x(I)\\simeq R\\Gamma_{\\{x\\}}(X_x,K|_{X_x}).$$\nThis specifies the comparison via restriction maps, rather than an arbitrary isomorphism.",
+   "uses": [
+    "lem-pur-ringed-site-injective-mono-restriction",
+    "lem-pur-support-restriction-triangle",
+    "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
+    "lem-weil-pbc-derived-cohomology-continuity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Section cohomology-support and Tag 0A45; Tag 0GIT (lemma-colimit-complexes); Tag 09YQ (theorem-colimit); algebra.tex Tag 00DB (lemma-directed-colimit-exact)"
+   }
+  },
+  {
+   "text": "For a closed immersion $a:W\\hookrightarrow V$, the supported-kernel adjunction and identification of the supported subsheaf with $a_*a^!_0$ also hold for constant-$\\Lambda$ modules. Indeed its abelian Hom bijection is natural, so a map commutes with each scalar exactly when its transpose does; exact faithful scalar forgetting transfers exactness of $a_*$ to modules. Thus $a^!_0$ sends injective module sheaves to injectives: lift a transposed map along a monomorphism using the exact functor $a_*$. On a bounded-below injective representative $J$ of a complex $M$ one consequently has the equality of computing complexes\n$$\\Gamma_W(V,J)=\\Gamma(W,a^!_0J),\\qquad R\\Gamma_W(V,M)\\simeq R\\Gamma(W,a^!M).$$\nUse this with $W=\\operatorname{Spec}\\kappa(x)\\subseteq X_x$; by the definition of $C_x$, Step 8 becomes $G_x(I)\\simeq R\\Gamma(\\operatorname{Spec}\\kappa(x),C_xK)$. Substitute into Step 6. Direct sums preserve these quasi-isomorphisms: a cocycle in a direct sum has finitely many components, and primitives can be chosen in those finitely many components. This proves the required graded identifications.",
+   "uses": [
+    "lem-pur-etale-supported-kernel-adjunction",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-weil-pbc-dplus-injective-representative",
+    "def-per-potential-dualizing-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 09XQ (lemma-sections-with-support-acyclic), support adjunction; explicit scalar-equivariant extension and derived-composite calculation"
+   }
+  },
+  {
+   "text": "Write $R=\\mathcal O_{X,x}$ and $H=R^h$. The pair-henselization theorem presents $H$ as the filtered colimit of etale $R$-algebras inducing an isomorphism on the closed fibre, and identifies $H/\\mathfrak m_RH$ with $\\kappa(x)$. The Noetherian-henselization theorem ensures that $H$ is Noetherian. Hence $g:\\operatorname{Spec}H\\to\\operatorname{Spec}R$ satisfies precisely the affine ind-etale hypotheses of [lem-per-ind-etale-closed-support-base-change]. Apply that result to the closed immersion $a:\\operatorname{Spec}\\kappa(x)\\hookrightarrow\\operatorname{Spec}R$. The map on closed fibres is the identity, so it gives $a^!(K|_{X_x})\\simeq a_H^!g^*(K|_{X_x})$, with the counit normalization. Applying $R\\Gamma(\\kappa(x),-)$ and the computation in Step 9 proves the henselian invariance of the point complex. Neither constructibility nor replacement of the residue field by a separable closure is used.",
+   "uses": [
+    "lem-weil-pbc-pair-henselization",
+    "lem-weil-pbc-henselization-noetherian-completion",
+    "lem-per-ind-etale-closed-support-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0A02 (lemma-henselization); Noetherian henselization; etale-cohomology.tex Tag 0A45, supported ind-etale comparison"
+   }
+  },
+  {
+   "text": "The preceding graded identifications are natural on the derived category. A map of module sheaves preserves every support, hence maps and homotopies between bounded-below injective complexes preserve $F^p$ and induce the corresponding maps and homotopies on $G_x$. By the K-injective Hom comparison, every derived morphism between these representatives is represented by a chain map, uniquely up to homotopy, and a change of representative is a homotopy equivalence. This makes both the filtered construction (up to filtered homotopy equivalence) and its graded comparisons independent of representative choices. For an open $U\\subseteq X$, restrict supported sections to $U$: a support $Z$ goes to $Z\\cap U$, still of level at least $p$. On germs this is the identity comparison for $x\\in U$ and zero for $x\\notin U$. Injective restriction to opens and the natural restriction comparisons of derived continuity therefore give the asserted compatibility with open restriction.",
+   "uses": [
+    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-weil-pbc-dplus-injective-representative",
+    "lem-weil-pbc-etale-restriction-injectives",
+    "lem-weil-pbc-derived-cohomology-continuity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 070I and 070J; etale restriction and the canonical continuity comparison of Tags 0GIT (lemma-colimit-complexes) and 09YQ"
+   }
+  },
+  {
+   "text": "For a closed $x$ with $c(x)=N$, one has $D_x=\\{x\\}$. A supported section on a neighbourhood of $x$ extends uniquely by zero to $X$: glue with zero on $X\\setminus\\{x\\}$, and use the sheaf separation axiom for uniqueness. Thus $G_x(I)=\\Gamma_{\\{x\\}}(X,I)$ canonically. As $F^{N+1}=0$, the inverse of the isomorphism in Step 6 on this summand is its inclusion into $F^NA$, followed by the literal inclusion $F^NA\\subseteq A$. This is exactly $\\Gamma_{\\{x\\}}(X,I)\\hookrightarrow\\Gamma(X,I)$, which derives to the canonical enlargement-of-support map claimed in the statement.",
+   "uses": [
+    "def-pur-etale-derived-supported-sections"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVII, proof of Lemma 3.6.2, printed pp. 278–279; explicit support-filtration construction"
+   }
+  },
+  {
+   "text": "Finally choose a bounded-below injective representative $I_T$ of $K_T$ and put $J=i^!_0I_T$ on $Z$; by Step 9 it is a bounded-below injective representative of $L$. There is a morphism of degreewise short exact sequences\n$$\\begin{array}{ccccccccc}0&\\to&\\Gamma_{\\{t\\}}(Z,J)&\\to&\\Gamma(Z,J)&\\to&\\Gamma(x,J|_x)&\\to&0\\\\&&\\downarrow&&\\downarrow&&\\downarrow\\\\0&\\to&\\Gamma_{\\{t\\}}(T,I_T)&\\to&\\Gamma(T,I_T)&\\to&\\Gamma(X,I_T|_X)&\\to&0.\\end{array}$$\nThe middle arrow is the supported-kernel inclusion $i_*J\\hookrightarrow I_T$. The left arrow is an isomorphism, in fact the identity of support kernels: a section of $I_T$ supported on $t\\subseteq Z$ already lies in $i_*J$. The right arrow identifies $\\Gamma(x,J|_x)$ with $\\Gamma_{\\{x\\}}(X,I_T|_X)$ and then includes it into all sections. These assertions follow sectionwise from the supported-kernel identification of Step 9 and sheaf gluing. Short exactness uses injective restriction on $Z$ and $T$.",
+   "uses": [
+    "lem-weil-pbc-dplus-injective-representative",
+    "lem-pur-etale-supported-kernel-adjunction",
+    "lem-pur-ringed-site-injective-mono-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 09XQ and section-cohomology-support; explicit counit map between the two localization kernel sequences"
+   }
+  },
+  {
+   "text": "Form the connecting maps of the two short exact sequences of Step 13 using the same cohomological cone convention. The commuting square of the last two vertical arrows induces a commuting square on cones; equivalently, lift a cocycle in the upper right to the upper middle, apply its differential, and include into the lower middle. This is exactly the same cocycle as first including in the lower right and then computing the lower boundary. Thus the upper localization boundary equals the lower boundary after the point-support inclusion and the displayed left-hand identification. On derived objects, Step 9 identifies that left-hand map with $R\\Gamma_{\\{t\\}}(Z,L)\\simeq R\\Gamma_{\\{t\\}}(T,K_T)$. The supported calculus identifies $L|_x$ with $C_xK_T$ and fixes these comparisons by the same closed counits and open restrictions. By Step 12 the right-hand inclusion is the point-summand map (for any closed $x$ it is the same supported map). The resulting identity is exactly the boundary compatibility in the statement, with no additional sign.",
+   "uses": [
+    "lem-per-prime-power-supported-calculus",
+    "lem-pur-support-restriction-triangle"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0A45; naturality of the localization boundary, via the explicit short exact sequences of Step 13; ILO XVII, proof of Lemma 3.6.2"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-exc-excellent-ring",
+  "def-per-potential-dualizing-complex",
+  "def-pur-etale-derived-supported-sections",
+  "def-sp-filtration",
+  "lem-per-ind-etale-closed-support-base-change",
+  "lem-per-prime-power-supported-calculus",
+  "lem-pur-etale-supported-kernel-adjunction",
+  "lem-pur-ringed-site-injective-mono-restriction",
+  "lem-pur-support-restriction-triangle",
+  "lem-sc-noetherian-closed-subset-finite-components",
+  "lem-sc-scheme-sober",
+  "lem-weil-pbc-derived-cohomology-continuity",
+  "lem-weil-pbc-dplus-injective-representative",
+  "lem-weil-pbc-etale-restriction-injectives",
+  "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
+  "lem-weil-pbc-henselization-noetherian-completion",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-limit-affine-transition",
+  "lem-weil-pbc-localization-colimit-principal-localizations",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-module-sheaves-enough-injectives",
+  "lem-weil-pbc-open-immersion-etale",
+  "lem-weil-pbc-pair-henselization",
+  "lem-weil-pbc-right-derived-plus-injective"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose XVII, proof of Lemma 3.6.2, pp. 278–279 gives the coniveau page and henselian replacement; agent-explicit construction from germ modules, support kernels, and etale continuity, using the displayed Stacks sources."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -47,10 +260,45 @@
    "results": "localCohomology.isoSelfLERadical; Algebra.etaleLocus_eq_compl_support; Ideal.Filtration.Stable.exists_pow_smul_eq_of_ge; Ideal.Filtration.Stable.exists_pow_smul_eq; IsModuleFiltration.mk_int; Ideal.Filtration.Stable.bounded_difference; Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq; Ideal.Filtration.stable_iff_exists_pow_smul_eq_of_ge",
    "date": "2026-10-18",
    "verdict": "no match: returned declarations concern ideal-adic module filtrations, algebraic local cohomology, or injective resolutions, not the etale codimension support filtration"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The coniveau filtration of etale cohomology is constructed by closed supports on injective resolutions with graded local cohomology at points",
+   "results": "localCohomology.diagram; localCohomology.ofDiagram; localCohomology; CochainComplex.cm5b.I; localCohomology.ofSelfLERadical; CategoryTheory.InjectiveResolution.ofCocomplex; CategoryTheory.InjectiveResolution.instIsLECochainComplexOfNatInt; CochainComplex.cm5b.I_X",
+   "date": "2026-10-19",
+   "verdict": "no match: the returned ideal-adic module filtrations, algebraic local-cohomology definitions, generic injective resolutions, and etale-topology definitions do not give this etale coniveau filtration"
+  },
+  {
+   "tool": "grep",
+   "query": "coniveau|Cousin|codimension.*filtration",
+   "results": "Mathlib/Tactic/Rify.lean; Mathlib/Tactic/Rify.lean; Mathlib/Geometry/Manifold/MFDeriv/NormedSpace.lean",
+   "date": "2026-10-19",
+   "verdict": "no match: the returned ideal-adic module filtrations, algebraic local-cohomology definitions, generic injective resolutions, and etale-topology definitions do not give this etale coniveau filtration"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite codimension filtration on etale cohomology with graded complexes local cohomology at points",
+   "results": "Ideal.Filtration.Stable; Ideal.Filtration; Ideal.Filtration.noConfusion; Ideal.stableFiltration; Ideal.Filtration.rec; Ideal.Filtration.casesOn; IsModuleFiltration.mk_int; Ideal.Filtration.noConfusionType",
+   "date": "2026-10-19",
+   "verdict": "no match: the returned ideal-adic module filtrations, algebraic local-cohomology definitions, generic injective resolutions, and etale-topology definitions do not give this etale coniveau filtration"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"support\", \"filtration\"",
+   "results": "No hits.",
+   "date": "2026-10-19",
+   "verdict": "no match: the returned ideal-adic module filtrations, algebraic local-cohomology definitions, generic injective resolutions, and etale-topology definitions do not give this etale coniveau filtration"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale Cousin complex from a filtration by closed subsets and localization triangles, henselian excision for local supported cohomology",
+   "results": "localCohomology.diagram; localCohomology.ofDiagram; localCohomology; localCohomology.ofSelfLERadical; AlgebraicGeometry.Scheme.etaleTopology; Algebra.etaleLocus_eq_compl_support; AlgebraicGeometry.Scheme.smallEtaleTopology; Algebra.exists_etale_of_isEtaleAt",
+   "date": "2026-10-19",
+   "verdict": "no match: the returned ideal-adic module filtrations, algebraic local-cohomology definitions, generic injective resolutions, and etale-topology definitions do not give this etale coniveau filtration"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-coniveau-top-edge-presentation",
@@ -75,5 +323,129 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-codimension-support-filtration",
+  "worker": "stage1",
+  "summary": "Kept the full statement. Constructed the directed support filtration on an injective representative and proved its graded decomposition by explicit finite-germ kernel and lifting arguments, without treating X^p as locally closed. Identified the germ complex using derived etale continuity and the closed supported adjunction; proved henselian invariance by the existing ind-etale supported base-change theorem. Wrote the top-stratum inclusion and localization-boundary compatibility on injective support-kernel sequences. No new nodes.",
+  "blueprint": "Supports the inherited ancestor lem-per-artin-gabber-affine-curve through the potential-dualizing top-class argument: the coniveau construction and henselian replacement of ILO XVII Lemma 3.6.2 and the boundary interpretation required by lem-per-coniveau-top-edge-presentation.",
+  "tool_uses": [
+   {
+    "node": "lem-per-ind-etale-closed-support-base-change",
+    "why": "The existing ordinary-etale supported comparison under affine ind-etale maps proves henselian invariance of each local term."
+   },
+   {
+    "node": "lem-per-prime-power-supported-calculus",
+    "why": "The existing residue-field costalk and supported-composition normalization identifies the two sides of the final boundary square."
+   },
+   {
+    "node": "lem-pur-etale-supported-kernel-adjunction",
+    "why": "The closed-support adjunction gives supported injectives and the equality between global supported sections and residue-field sections."
+   },
+   {
+    "node": "lem-pur-ringed-site-injective-mono-restriction",
+    "why": "Surjective restriction of injective module sheaves supplies germ lifts and the short exact support-kernel sequences."
+   },
+   {
+    "node": "lem-pur-support-restriction-triangle",
+    "why": "The generic ordinary-etale support-restriction triangle supplies the cone interpretation and its natural connecting map."
+   },
+   {
+    "node": "lem-sc-noetherian-closed-subset-finite-components",
+    "why": "Finite-component decomposition of each closed support is used to make the germ map land in a direct sum; the perverse unit does not supply this topology theorem."
+   },
+   {
+    "node": "lem-sc-scheme-sober",
+    "why": "Generic points of irreducible closed supports identify the finitely many level-p germs; this is a general scheme-topology tool."
+   },
+   {
+    "node": "lem-weil-pbc-derived-cohomology-continuity",
+    "why": "The existing finite-coefficient D+ continuity theorem is used twice, on neighbourhoods and complements, to identify local supported complexes."
+   },
+   {
+    "node": "lem-weil-pbc-dplus-injective-representative",
+    "why": "The general bounded-below injective-representative and K-injectivity theorem supplies the model and representative comparisons."
+   },
+   {
+    "node": "lem-weil-pbc-etale-restriction-injectives",
+    "why": "Preservation of constant-ring module injectives under open restriction lets the same complex compute neighbourhood cohomology."
+   },
+   {
+    "node": "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
+    "why": "Exact directed colimits permit the passage from neighbourhood support kernels to their cohomology; scalar actions are retained throughout."
+   },
+   {
+    "node": "lem-weil-pbc-henselization-noetherian-completion",
+    "why": "Only its Noetherian henselization clause is used to apply the Noetherian ind-etale support comparison."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-hom-derived",
+    "why": "Hom into K-injectives is computed up to chain homotopy, giving naturality and independence of the representative."
+   },
+   {
+    "node": "lem-weil-pbc-limit-affine-transition",
+    "why": "Existence and open-base-change of scheme limits identify both the local scheme and its punctured complement for the continuity calculation."
+   },
+   {
+    "node": "lem-weil-pbc-localization-colimit-principal-localizations",
+    "why": "The affine localization diagram identifies the inverse limit of principal neighbourhoods of a point."
+   },
+   {
+    "node": "lem-weil-pbc-localization-noetherian",
+    "why": "The local ring and its punctured spectrum are Noetherian, ensuring the qcqs hypotheses needed in the continuity calculation."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "why": "Exact faithful scalar forgetting transfers the closed-pushforward exactness and scalar-equivariant adjunction to module sheaves."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-enough-injectives",
+    "why": "Existence of injectives for arbitrary constant-ring etale modules supplies the required representatives, with no constructibility condition."
+   },
+   {
+    "node": "lem-weil-pbc-open-immersion-etale",
+    "why": "Open restriction is an instance of etale restriction of injectives; this scheme-morphism tool verifies the hypothesis."
+   },
+   {
+    "node": "lem-weil-pbc-pair-henselization",
+    "why": "The actual ind-etale henselization with unchanged closed residue field verifies the supported base-change hypotheses."
+   },
+   {
+    "node": "lem-weil-pbc-right-derived-plus-injective",
+    "why": "Generic right-derived-functor computation on injective complexes identifies ordinary section kernels with their derived objects."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-per-ind-etale-closed-support-base-change",
+  "lem-per-prime-power-supported-calculus",
+  "lem-pur-etale-supported-kernel-adjunction",
+  "lem-pur-ringed-site-injective-mono-restriction",
+  "lem-pur-support-restriction-triangle",
+  "lem-sc-noetherian-closed-subset-finite-components",
+  "lem-sc-scheme-sober",
+  "lem-weil-pbc-derived-cohomology-continuity",
+  "lem-weil-pbc-dplus-injective-representative",
+  "lem-weil-pbc-etale-restriction-injectives",
+  "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
+  "lem-weil-pbc-henselization-noetherian-completion",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-limit-affine-transition",
+  "lem-weil-pbc-localization-colimit-principal-localizations",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-module-sheaves-enough-injectives",
+  "lem-weil-pbc-open-immersion-etale",
+  "lem-weil-pbc-pair-henselization",
+  "lem-weil-pbc-right-derived-plus-injective"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q21-b0335d743",
+  "group": "Q21",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q21-b0335d743 (reviewer sub-agent of L); spot-checked: I read the whole delivery (item only, no new nodes), every cited statement, and ILO XVII Lemma 3.6.2 with its proof (printed pp. 278-279: the coniveau E1 page and the henselian replacement). The statement, stmt_deps and blueprint are unchanged from base. Checks: proof_deps equals the union of the step uses, there is no cycle, and no SGA is cited. Steps 1-6: c increases strictly because immediacy in an affine neighbourhood equals immediacy in X and catenarity bounds chain lengths. Level-p points of a level>=p support are finitely many component generic points. The germ map is well defined, its kernel is F^{p+1}, and it is onto for injectives by gluing and lifting along an open monomorphism (lem-pur-ringed-site-injective-mono-restriction). Steps 7-9: V_f and V_f minus D_x are qcqs with affine transitions, and their limits are Spec O_{X,x} and the punctured local scheme. Continuity, the five lemma and the module-level supported-kernel adjunction give G_x(I) = RGamma_x(X_x,K) = RGamma(kappa(x), C_x K), matching def-per-potential-dualizing-complex. Step 10: all hypotheses of lem-per-ind-etale-closed-support-base-change hold for R to R^h (affine, ind-etale, Noetherian, closed fibre equal to kappa(x)). Steps 12-14: for top closed points the summand map is the support inclusion, and the boundary follows from naturality of connecting maps for a morphism of short exact sequences; the left map is the identity Gamma_t(Z,J) = Gamma_t(T,I_T). Small cases checked: DVR, A^1, the empty scheme, and closed x with c<N. No duplicate node found. Tool uses are generic and declared. Batch-5 flag (lem-per-ind-etale-closed-support-base-change to lem-trf-bounded-below-derived-adjunction): the item and both nodes are already in the batch-5 closure, the delivery adds 0 nodes to it, and the trf node is a generic D+ adjunction outside both assumed statements, so I accept it."
  }
 }
