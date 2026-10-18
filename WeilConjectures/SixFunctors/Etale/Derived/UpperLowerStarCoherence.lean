@@ -73,7 +73,14 @@ noncomputable def rightDerivedLowerStar :
   (g)_*[A].rightDerivedFunctor
 
 /-- The right derived functor `Rg_* : D⁺(Z_ét) ⥤ D⁺(Y_ét)` of the pushforward `g_*` on the
-*bounded below* derived categories of étale sheaves. -/
+*bounded below* derived categories of étale sheaves.
+
+Blueprint `def-weil-pbc-direct-image`: Direct image and its derived functor
+
+The direct image `g_*` is `AlgebraicGeometry.Etale.lowerStar`, with
+`(g_* F)(W) = F(W ×_Y Z)` (`AlgebraicGeometry.Etale.lowerStar_obj_val_obj`); this is its right
+derived functor `Rg_* : D⁺(Z_ét) ⥤ D⁺(Y_ét)`, computed by injective resolutions, and
+`R^q g_* F` is the `q`-th cohomology sheaf of `Rg_* F`. -/
 noncomputable def rightDerivedLowerStarPlus :
     DerivedCategory.Plus (Sheaf Z.smallEtaleTopology A) ⥤
       DerivedCategory.Plus (Sheaf Y.smallEtaleTopology A) :=

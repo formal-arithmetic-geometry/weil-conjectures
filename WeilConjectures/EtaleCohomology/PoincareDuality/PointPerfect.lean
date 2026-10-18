@@ -10,6 +10,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import WeilConjectures.SixFunctors.Etale.Derived.DerivedComplete
 public import WeilConjectures.SixFunctors.Etale.Derived.Exchange
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness
+public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.CompactSupport
 public import WeilConjectures.SixFunctors.Etale.Derived.GlobalSections
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekToLowerStar
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability
@@ -104,6 +105,9 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {k : Type u} [Field k] [I
 /-- Blueprint `sk-lem-finite`: Finiteness: the global sections are perfect at the point.
 This is also blueprint `thm-pod-point-perfectness` (Point perfectness of global sections), at
 the finite stage.
+
+Also blueprint `prop-trf-compact-support-perfectness`: Compact-support perfectness (compactly
+supported cohomology).
 
 **`RΓ_c(X, K)` is perfect.** Let `Λ` be a finite ring whose exponent is invertible in the
 separably closed field `k`, `X` separated of finite type over `k` and `K ∈ Dctf(X, Λ)`. Then

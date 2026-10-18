@@ -83,7 +83,7 @@ instance (J : Type w) :
   have : PreservesColimitsOfSize.{w, w}
       D(ProEtale.openImmersionLowerShriek (ModuleCat.{u + 1} Λ) j) :=
     (ProEtale.derivedOpenImmersionLowerShriekUpperStarAdjunction _ j).leftAdjoint_preservesColimits
-  inferInstance
+  this.preservesColimitsOfShape
 
 /-- Blueprint `det-proper-image-localizing-open`: Extension by zero on the localizing
 categories.
@@ -101,8 +101,8 @@ theorem localizingClosure_constructibleFiniteTor_openImmersionLowerShriek :
           D(ProEtale.openImmersionLowerShriek (ModuleCat.{u + 1} Λ) j) ∧
       (∀ J : Type w, PreservesColimitsOfShape (Discrete J)
         D(ProEtale.openImmersionLowerShriek (ModuleCat.{u + 1} Λ) j)) ∧
-      (DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) U).localizingClosure.{w} ≤
-        ((DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X).localizingClosure.{w}
+      (DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) U).localizingClosure ≤
+        ((DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X).localizingClosure
           ).inverseImage D(ProEtale.openImmersionLowerShriek (ModuleCat.{u + 1} Λ) j) :=
   ⟨fun _ hK ↦ constructibleFiniteTor_mapDerivedCategory_openImmersionLowerShriek Λ j hK,
     fun _ ↦ inferInstance,

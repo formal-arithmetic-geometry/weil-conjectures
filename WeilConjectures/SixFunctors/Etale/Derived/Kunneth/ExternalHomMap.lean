@@ -57,14 +57,14 @@ for `Eᵢ, Lᵢ ∈ D(Zᵢ_ét)` and `cᵢ : Zᵢ ⟶ B`, the external products 
 tensor–Hom transpose of the two evaluations
 (`CategoryTheory.MonoidalClosed.externalIhomMap` for the monoidal functors `Lp₁^*`, `Lp₂^*`),
 with the tensor symmetry the Koszul braiding of `D((Z₁ ×_B Z₂)_ét)`
-(`DerivedCategory.braidedCategory`). -/
+(`DerivedCategory.braidedCategory'`). -/
 noncomputable def externalHomMap {B Z₁ Z₂ : Scheme.{u}} (c₁ : Z₁ ⟶ B) (c₂ : Z₂ ⟶ B)
     (E₁ L₁ : _root_.DerivedCategory (Sheaf Z₁.smallEtaleTopology A))
     (E₂ L₂ : _root_.DerivedCategory (Sheaf Z₂.smallEtaleTopology A)) :
     externalProduct A c₁ c₂ ((RHom(Z₁)[A].obj (op E₁)).obj L₁) ((RHom(Z₂)[A].obj (op E₂)).obj L₂) ⟶
       (RHom(pullback c₁ c₂)[A].obj (op (externalProduct A c₁ c₂ E₁ E₂))).obj
         (externalProduct A c₁ c₂ L₁ L₂) :=
-  letI := _root_.DerivedCategory.braidedCategory (Sheaf (pullback c₁ c₂).smallEtaleTopology A)
+  letI := _root_.DerivedCategory.braidedCategory' (Sheaf (pullback c₁ c₂).smallEtaleTopology A)
   letI := leftDerivedUpperStarMonoidal A (pullback.fst c₁ c₂)
   letI := leftDerivedUpperStarMonoidal A (pullback.snd c₁ c₂)
   MonoidalClosed.externalIhomMap (L((pullback.fst c₁ c₂)^*[A])) (L((pullback.snd c₁ c₂)^*[A]))

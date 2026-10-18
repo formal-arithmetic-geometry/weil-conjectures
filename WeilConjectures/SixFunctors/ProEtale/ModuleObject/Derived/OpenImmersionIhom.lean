@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategoryBraided
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Closed.IhomUnitTensor
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleBraided
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Hom
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenImmersionProjection
 
@@ -57,8 +57,8 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [I
 
 /-- The unit of the adjunction `Dj_! ⊣ Lj^*` along an open immersion `j` is an isomorphism. -/
 instance isIso_derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction_unit :
-    IsIso (derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction Λ j).unit := by
-  set adj := derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction Λ j
+    IsIso (derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction' Λ j).unit := by
+  set adj := derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction' Λ j
   have (T : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology U) Ab.{u + 1})
       (condensedRingObj Λ U))) : IsIso (adj.unit.app T) := by
     have h := Adjunction.homEquiv_ofNatIsoRight_apply
@@ -85,9 +85,9 @@ lemma isIso_derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction_counit
       (condensedRingObj Λ X)))
     (T : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology U) Ab.{u + 1})
       (condensedRingObj Λ U))) :
-    IsIso ((derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction Λ j).counit.app
+    IsIso ((derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction' Λ j).counit.app
       (M ⊗ D((j)_!open⟦Λ⟧).obj T)) := by
-  set adj := derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction Λ j
+  set adj := derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction' Λ j
   have hε (Z : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology U) Ab.{u + 1})
       (condensedRingObj Λ U))) : IsIso (adj.counit.app (D((j)_!open⟦Λ⟧).obj Z)) := by
     have : IsIso (D((j)_!open⟦Λ⟧).map (adj.unit.app Z) ≫
@@ -96,7 +96,7 @@ lemma isIso_derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction_counit
       exact IsIso.id _
     exact IsIso.of_isIso_comp_left (D((j)_!open⟦Λ⟧).map (adj.unit.app Z)) _
   obtain ⟨Z, ⟨e⟩⟩ := tensorObj_mem_essImage_mapDerivedCategory_openImmersionLowerShriek Λ j T M
-  let := DerivedCategory.braidedCategory
+  let := DerivedCategory.braidedCategory'
     (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))
   let e' : M ⊗ D((j)_!open⟦Λ⟧).obj T ≅ D((j)_!open⟦Λ⟧).obj Z := (β_ _ _) ≪≫ e.symm
   have h := adj.counit.naturality e'.hom
@@ -115,7 +115,7 @@ instance isIso_projectionMap_derivedOpenImmersionLowerShriekLeftDerivedUpperStar
     (M : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj Λ X))) :
     IsIso (Functor.Monoidal.projectionMap
-      (derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction Λ j) M) := by
+      (derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction' Λ j) M) := by
   refine @NatIso.isIso_of_isIso_app _ _ _ _ _ _ _ fun T ↦ ?_
   have := isIso_derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction_counit_app_tensorObj
     Λ j M T
@@ -130,14 +130,14 @@ theorem isIso_ihomComparison_leftDerivedUpperStar_of_isOpenImmersion
       (condensedRingObj Λ X))) :
     IsIso (Functor.LaxMonoidal.ihomComparison L((j)^*⟦Λ⟧) M).natTrans :=
   Functor.Monoidal.isIso_ihomComparison_of_isIso_projectionMap
-    (derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction Λ j) M
+    (derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction' Λ j) M
 
 /-! ### Bounded constructible complexes -/
 
 section BoundedConstructible
 
 variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).Prime]
-  [Fact (ringChar k ≠ ℓ)] {V Y : Over (Spec (.of k))}
+  [Fact (ringChar k ≠ ℓ)] [IsEllAdicFinitenessCoefficient ℓ Λ] {V Y : Over (Spec (.of k))}
   [LocallyOfFiniteType V.hom] [QuasiCompact V.hom] [IsSeparated V.hom] [LocallyOfFiniteType Y.hom]
   [QuasiCompact Y.hom] [IsSeparated Y.hom]
   (i : V ⟶ Y) [IsOpenImmersion i.left]
@@ -156,7 +156,7 @@ instance isIso_projectionMap_boundedConstructibleOpenImmersionLowerShriekUpperSt
       simp only [adj, boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction,
         Adjunction.map_restrictFullyFaithful_unit_app]
       have := NatIso.isIso_app_of_isIso
-        (derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction Λ i.left).unit
+        (derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction' Λ i.left).unit
         ((boundedConstructible _).ι.obj T)
       exact IsIso.comp_isIso' this inferInstance
     exact isIso_of_reflects_iso _ (boundedConstructible _).ι

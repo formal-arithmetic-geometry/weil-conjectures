@@ -84,9 +84,9 @@ lemma PreservesCoproductsOn.comp {E : Type*} [Category* E] {F : C ⥤ D} {G : D 
 
 end Functor
 
-variable {C D : Type*} [Category* C] [HasZeroObject C] [HasShift C ℤ] [Preadditive C]
+variable {C D : Type*} [Category.{w} C] [HasZeroObject C] [HasShift C ℤ] [Preadditive C]
   [∀ (n : ℤ), (shiftFunctor C n).Additive] [Pretriangulated C]
-  [Category* D] [HasZeroObject D] [HasShift D ℤ] [Preadditive D]
+  [Category.{w} D] [HasZeroObject D] [HasShift D ℤ] [Preadditive D]
   [∀ (n : ℤ), (shiftFunctor D n).Additive] [Pretriangulated D]
 
 namespace ObjectProperty
@@ -95,24 +95,24 @@ namespace ObjectProperty
 maps the objects of `P` into `Loc(Q)` maps `Loc(P)` into `Loc(Q)`: the objects `X` of `Loc(P)`
 with `F X ∈ Loc(Q)` form a localizing property containing `P`. -/
 lemma localizingClosure_map (P : ObjectProperty C) (Q : ObjectProperty D) (F : C ⥤ D)
-    [F.CommShift ℤ] [F.IsTriangulated] (hF : F.PreservesCoproductsOn.{w} P.localizingClosure.{w})
-    (h : ∀ X, P X → Q.localizingClosure.{w} (F.obj X)) {X : C}
-    (hX : P.localizingClosure.{w} X) : Q.localizingClosure.{w} (F.obj X) := by
-  let R := P.localizingClosure.{w} ⊓ (Q.localizingClosure.{w}).inverseImage F
-  have : R.IsLocalizing.{w} :=
-    { isClosedUnderCoproducts J :=
+    [F.CommShift ℤ] [F.IsTriangulated] (hF : F.PreservesCoproductsOn.{w} P.localizingClosure)
+    (h : ∀ X, P X → Q.localizingClosure (F.obj X)) {X : C}
+    (hX : P.localizingClosure X) : Q.localizingClosure (F.obj X) := by
+  let R := P.localizingClosure ⊓ (Q.localizingClosure).inverseImage F
+  have : R.IsLocalizing :=
+    { isClosedUnderColimitsOfShape_discrete J :=
         { colimitsOfShape_le := by
             rintro Y ⟨h⟩
-            have hY : P.localizingClosure.{w} Y :=
-              (P.localizingClosure.{w}).prop_of_isColimit h.isColimit
+            have hY : P.localizingClosure Y :=
+              (P.localizingClosure).prop_of_isColimit h.isColimit
                 (fun j ↦ (h.prop_diag_obj j).1)
             obtain ⟨hc⟩ := hF _ h.isColimit (fun j ↦ (h.prop_diag_obj j).1)
-            exact ⟨hY, (Q.localizingClosure.{w}).prop_of_isColimit hc
+            exact ⟨hY, (Q.localizingClosure).prop_of_isColimit hc
               (fun j ↦ (h.prop_diag_obj j).2)⟩ } }
-  exact (localizingClosure_le_of_le P (Q := R)
+  exact (localizingClosure_le (P := P) (Q := R)
     (fun Y hY ↦ ⟨le_localizingClosure P Y hY, h Y hY⟩) X hX).2
 
-variable {C' : Type*} [Category* C'] [HasZeroObject C'] [HasShift C' ℤ] [Preadditive C']
+variable {C' : Type*} [Category.{w} C'] [HasZeroObject C'] [HasShift C' ℤ] [Preadditive C']
   [∀ (n : ℤ), (shiftFunctor C' n).Additive] [Pretriangulated C']
 
 /-- A bifunctor `T : C ⥤ C' ⥤ D` which is triangulated and preserves the coproducts of objects
@@ -123,12 +123,12 @@ lemma localizingClosure_map₂ (P : ObjectProperty C) (P' : ObjectProperty C')
     (Q : ObjectProperty D) (T : C ⥤ C' ⥤ D) [∀ X, (T.obj X).CommShift ℤ]
     [∀ X, (T.obj X).IsTriangulated] [∀ Y, (T.flip.obj Y).CommShift ℤ]
     [∀ Y, (T.flip.obj Y).IsTriangulated]
-    (h₁ : ∀ Y, P' Y → (T.flip.obj Y).PreservesCoproductsOn.{w} P.localizingClosure.{w})
-    (h₂ : ∀ X, P.localizingClosure.{w} X →
-      (T.obj X).PreservesCoproductsOn.{w} P'.localizingClosure.{w})
-    (h : ∀ X Y, P X → P' Y → Q.localizingClosure.{w} ((T.obj X).obj Y)) {X : C} {Y : C'}
-    (hX : P.localizingClosure.{w} X) (hY : P'.localizingClosure.{w} Y) :
-    Q.localizingClosure.{w} ((T.obj X).obj Y) :=
+    (h₁ : ∀ Y, P' Y → (T.flip.obj Y).PreservesCoproductsOn.{w} P.localizingClosure)
+    (h₂ : ∀ X, P.localizingClosure X →
+      (T.obj X).PreservesCoproductsOn.{w} P'.localizingClosure)
+    (h : ∀ X Y, P X → P' Y → Q.localizingClosure ((T.obj X).obj Y)) {X : C} {Y : C'}
+    (hX : P.localizingClosure X) (hY : P'.localizingClosure Y) :
+    Q.localizingClosure ((T.obj X).obj Y) :=
   localizingClosure_map P' Q (T.obj X) (h₂ X hX)
     (fun Y' hY' ↦ localizingClosure_map P Q (T.flip.obj Y') (h₁ Y' hY')
       (fun X' hX' ↦ h X' Y' hX' hY') hX) hY
@@ -146,17 +146,17 @@ natural transformation of triangulated functors, compatible with the shifts, whe
 `P`, it is an isomorphism on the objects of `Loc(P)`: the objects of `Loc(P)` on which `τ` is an
 isomorphism form a localizing property containing `P`. -/
 theorem isIso_app_of_localizingClosure {P : ObjectProperty C}
-    (hF₁ : F₁.PreservesCoproductsOn.{w} P.localizingClosure.{w})
-    (hF₂ : F₂.PreservesCoproductsOn.{w} P.localizingClosure.{w})
-    (h : ∀ X, P X → IsIso (τ.app X)) {X : C} (hX : P.localizingClosure.{w} X) :
+    (hF₁ : F₁.PreservesCoproductsOn.{w} P.localizingClosure)
+    (hF₂ : F₂.PreservesCoproductsOn.{w} P.localizingClosure)
+    (h : ∀ X, P X → IsIso (τ.app X)) {X : C} (hX : P.localizingClosure X) :
     IsIso (τ.app X) := by
-  let R := P.localizingClosure.{w} ⊓ τ.isoLocus
-  have : R.IsLocalizing.{w} :=
-    { isClosedUnderCoproducts J :=
+  let R := P.localizingClosure ⊓ τ.isoLocus
+  have : R.IsLocalizing :=
+    { isClosedUnderColimitsOfShape_discrete J :=
         { colimitsOfShape_le := by
             rintro Y ⟨h⟩
-            have hY : P.localizingClosure.{w} Y :=
-              (P.localizingClosure.{w}).prop_of_isColimit h.isColimit
+            have hY : P.localizingClosure Y :=
+              (P.localizingClosure).prop_of_isColimit h.isColimit
                 (fun j ↦ (h.prop_diag_obj j).1)
             obtain ⟨h₁⟩ := hF₁ _ h.isColimit (fun j ↦ (h.prop_diag_obj j).1)
             obtain ⟨h₂⟩ := hF₂ _ h.isColimit (fun j ↦ (h.prop_diag_obj j).1)
@@ -171,10 +171,10 @@ theorem isIso_app_of_localizingClosure {P : ObjectProperty C}
                 simp [e]
             rw [isoLocus_iff, he]
             infer_instance } }
-  exact (ObjectProperty.localizingClosure_le_of_le P (Q := R)
+  exact (ObjectProperty.localizingClosure_le (P := P) (Q := R)
     (fun Y hY ↦ ⟨ObjectProperty.le_localizingClosure P Y hY, h Y hY⟩) X hX).2
 
-variable {C' : Type*} [Category* C'] [HasZeroObject C'] [HasShift C' ℤ] [Preadditive C']
+variable {C' : Type*} [Category.{w} C'] [HasZeroObject C'] [HasShift C' ℤ] [Preadditive C']
   [∀ (n : ℤ), (shiftFunctor C' n).Additive] [Pretriangulated C']
 
 /-- The two-variable version of `CategoryTheory.NatTrans.isIso_app_of_localizingClosure`: let
@@ -191,14 +191,14 @@ theorem isIso_app_app_of_localizingClosure {T₁ T₂ : C ⥤ C' ⥤ D} (τ : T�
     [∀ X, NatTrans.CommShift (τ.app X) ℤ]
     [∀ Y, NatTrans.CommShift (NatTrans.flipApp τ Y) ℤ]
     {P : ObjectProperty C} {P' : ObjectProperty C'}
-    (h₁ : ∀ Y, P' Y → (T₁.flip.obj Y).PreservesCoproductsOn.{w} P.localizingClosure.{w})
-    (h₂ : ∀ Y, P' Y → (T₂.flip.obj Y).PreservesCoproductsOn.{w} P.localizingClosure.{w})
-    (h₃ : ∀ X, P.localizingClosure.{w} X →
-      (T₁.obj X).PreservesCoproductsOn.{w} P'.localizingClosure.{w})
-    (h₄ : ∀ X, P.localizingClosure.{w} X →
-      (T₂.obj X).PreservesCoproductsOn.{w} P'.localizingClosure.{w})
+    (h₁ : ∀ Y, P' Y → (T₁.flip.obj Y).PreservesCoproductsOn.{w} P.localizingClosure)
+    (h₂ : ∀ Y, P' Y → (T₂.flip.obj Y).PreservesCoproductsOn.{w} P.localizingClosure)
+    (h₃ : ∀ X, P.localizingClosure X →
+      (T₁.obj X).PreservesCoproductsOn.{w} P'.localizingClosure)
+    (h₄ : ∀ X, P.localizingClosure X →
+      (T₂.obj X).PreservesCoproductsOn.{w} P'.localizingClosure)
     (h : ∀ X Y, P X → P' Y → IsIso ((τ.app X).app Y)) {X : C} {Y : C'}
-    (hX : P.localizingClosure.{w} X) (hY : P'.localizingClosure.{w} Y) :
+    (hX : P.localizingClosure X) (hY : P'.localizingClosure Y) :
     IsIso ((τ.app X).app Y) :=
   isIso_app_of_localizingClosure (τ.app X) (h₃ X hX) (h₄ X hX)
     (fun Y' hY' ↦ isIso_app_of_localizingClosure (NatTrans.flipApp τ Y')

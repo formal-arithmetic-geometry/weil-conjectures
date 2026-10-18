@@ -14,8 +14,8 @@ If `C` is a symmetric monoidal category, the Koszul braiding of cochain complexe
 (`CochainComplex.Monoidal.braidedCategory`) is symmetric, since the signs `(-1)^(pq)` of the two
 composed braidings cancel. Hence so are the braiding of the homotopy category
 (`HomotopyCategory.braidedCategory`) and the braiding descended to the derived monoidal category
-(`CategoryTheory.DerivedMonoidal.braidedCategory`), in particular the braiding
-`DerivedCategory.braidedCategory C` of the derived tensor product on `DerivedCategory C`.
+(`CategoryTheory.DerivedMonoidal.braidedCategory'`), in particular the braiding
+`DerivedCategory.braidedCategory' C` of the derived tensor product on `DerivedCategory C`.
 
 ## Main definitions
 
@@ -100,7 +100,7 @@ variable {C D : Type*} [Category C] [Category D] [MonoidalCategory C] [Symmetric
 /-- Over a symmetric category, the braiding of the derived monoidal category is symmetric: its
 inverse is lifted from `β_ Y X⁻¹ = β_ X Y`. -/
 lemma braiding_hom_braiding_hom (X Y : DerivedMonoidal L W) :
-    (braiding L W X Y).hom ≫ (braiding L W Y X).hom = 𝟙 _ := by
+    (braiding' L W X Y).hom ≫ (braiding' L W Y X).hom = 𝟙 _ := by
   have h : braidingInvNatTrans L W = braidingNatTrans L W := by
     unfold braidingInvNatTrans braidingNatTrans
     congr 1
@@ -108,8 +108,8 @@ lemma braiding_hom_braiding_hom (X Y : DerivedMonoidal L W) :
     congr 2
     ext X Y
     exact (SymmetricCategory.braiding_swap_eq_inv_braiding X Y).symm
-  have := (braiding L W X Y).hom_inv_id
-  simp only [braiding] at this ⊢
+  have := (braiding' L W X Y).hom_inv_id
+  simp only [braiding'] at this ⊢
   rwa [h] at this
 
 variable [W.RespectsIso] [W.HasTwoOutOfThreeProperty]
@@ -118,7 +118,7 @@ variable [W.RespectsIso] [W.HasTwoOutOfThreeProperty]
 /-- Over a symmetric category, the derived monoidal category is symmetric. -/
 @[instance_reducible]
 noncomputable def symmetricCategory : SymmetricCategory (DerivedMonoidal L W) where
-  toBraidedCategory := braidedCategory L W
+  toBraidedCategory := braidedCategory' L W
   symmetry X Y := braiding_hom_braiding_hom L W X Y
 
 end CategoryTheory.DerivedMonoidal
@@ -135,20 +135,20 @@ local instance hasColimitsOfSize_symmetricCategory : HasColimitsOfSize.{0, 0} C 
 variable [HasDerivedCategory.{w} C] [MonoidalCategory C] [MonoidalClosed C]
   [MonoidalPreadditive C] [SymmetricCategory C] [Abelian.HasFunctorialFlatResolution C]
 
-/-- The braiding `DerivedCategory.braidedCategory C` of the derived tensor product over a
+/-- The braiding `DerivedCategory.braidedCategory' C` of the derived tensor product over a
 symmetric category is symmetric. -/
 lemma braiding_hom_braiding_hom (X Y : DerivedCategory C) :
-    letI := braidedCategory C
+    letI := braidedCategory' C
     (β_ X Y).hom ≫ (β_ Y X).hom = 𝟙 _ :=
   letI := HomotopyCategory.symmetricCategory (C := C)
   DerivedMonoidal.braiding_hom_braiding_hom Qh _ X Y
 
 /-- The derived category of a symmetric monoidal closed Grothendieck abelian category with
 functorial flat resolutions is symmetric for the Koszul braiding
-`DerivedCategory.braidedCategory C`. -/
+`DerivedCategory.braidedCategory' C`. -/
 @[instance_reducible]
 noncomputable def symmetricCategory : SymmetricCategory (DerivedCategory C) where
-  toBraidedCategory := braidedCategory C
+  toBraidedCategory := braidedCategory' C
   symmetry X Y := braiding_hom_braiding_hom C X Y
 
 end DerivedCategory

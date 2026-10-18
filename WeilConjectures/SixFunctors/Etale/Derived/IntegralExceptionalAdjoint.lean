@@ -151,7 +151,7 @@ lemma bijective_comp_of_isIso_reductionModIdeal {S T W : 𝐃(X, Λ)} (u : S ⟶
   have hC : IsZero ((reductionModIdeal Λ X (Ideal.span {ϖ})).obj C) :=
     (Triangle.isZero₃_iff_isIso₁ _
       ((reductionModIdeal Λ X (Ideal.span {ϖ})).map_distinguished _ hT)).2 hu
-  exact _root_.DerivedCategory.bijective_comp_of_smulInvertible hT
+  exact ObjectProperty.bijective_comp_of_distinguished hT
     (isIso_smul_id_of_isZero_reductionModIdeal hϖ C hC) hW
 
 /-- Tensoring a morphism whose reduction modulo `ϖ` is an isomorphism with any object gives a
@@ -173,7 +173,7 @@ lemma bijective_derivedTensor_map_comp_of_isIso_reductionModIdeal {S T W : 𝐃(
     change IsIso (ϖ • 𝟙 _)
     rw [← F.map_id, ← Functor.map_smul]
     infer_instance
-  exact _root_.DerivedCategory.bijective_comp_of_smulInvertible (F.map_distinguished _ hT) hFC hW
+  exact ObjectProperty.bijective_comp_of_distinguished (F.map_distinguished _ hT) hFC hW
 
 omit hϖ in
 /-- The point of a homotopy limit of a tower of objects killed by powers of `ϖ` receives no
@@ -458,8 +458,8 @@ theorem boundedConstructibleIntegral_and_torAmplitudeIn_of_isHomotopyLimit {X Y 
   obtain ⟨ωY, hωY, -⟩ := exists_isHomotopyLimit_dualizing (Ideal.span {ϖ}) hϖ rfl aY
   have hVY := boundedConstructibleIntegral_derivedHom_dualizing (Ideal.span {ϖ}) hϖ rfl aY ωY
     hωY hL
-  obtain ⟨N, C, φ, g, h, hT, hN, hC⟩ :=
-    _root_.DerivedCategory.exists_distTriang_derivedComplete_smulInvertible
+  obtain ⟨N, C, φ, g, h, hT, hC, hN⟩ :=
+    _root_.DerivedCategory.exists_distinguished_derivedComplete
       (J := X.smallEtaleTopology) hϖ rfl ((L((f)^*[ModuleCat.{u + 1} Λ])).obj
         (((derivedHom (ModuleCat.{u + 1} Λ) Y).obj (op L)).obj ωY.pt))
   have hφ (n : ℕ) : IsIso ((reductionModIdeal Λ X (Ideal.span {ϖ} ^ n)).map φ) :=

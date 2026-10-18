@@ -129,12 +129,12 @@ invertibly on `C`, and the derived completion inverts such morphisms. -/
 theorem isIso_derivedCompletion_map_of_isIso_reductionModIdeal {ϖ : R}
     (hϖ : ϖ ∈ nonZeroDivisors R) {M N : DerivedCategory (Sheaf J (ModuleCat.{u + 1} R))}
     (u : M ⟶ N) (hu : IsIso ((reductionModIdeal J (Ideal.span {ϖ})).map u)) :
-    IsIso ((derivedCompletion J ⟨ϖ, hϖ, rfl⟩).map u) := by
+    IsIso ((derivedCompletion J (Ideal.span {ϖ}) ⟨ϖ, hϖ, rfl⟩).map u) := by
   obtain ⟨C', g, h, hT⟩ := distinguished_cocone_triangle u
   have hC : IsZero ((reductionModIdeal J (Ideal.span {ϖ})).obj C') :=
     (Triangle.isZero₃_iff_isIso₁ _
       ((reductionModIdeal J (Ideal.span {ϖ})).map_distinguished _ hT)).2 hu
-  exact isIso_derivedCompletion_map_of_smulInvertible _ rfl hT
+  exact isIso_derivedCompletion_map _ rfl hT
     (isIso_smul_id_of_isZero_reductionModIdeal hϖ C' hC)
 
 end DerivedCategory

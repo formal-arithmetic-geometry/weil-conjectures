@@ -6,7 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.DerivedBaseChange
-public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.Completion
+public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.IntegralCompletion
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.Reduction
 public import WeilConjectures.SixFunctors.Etale.Derived.IntegralCoefficients
 public import WeilConjectures.SixFunctors.Etale.Derived.Perfect.SitePerfect

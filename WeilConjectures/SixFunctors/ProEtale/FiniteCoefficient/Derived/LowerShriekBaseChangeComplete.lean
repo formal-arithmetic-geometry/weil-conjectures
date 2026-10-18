@@ -55,7 +55,7 @@ blueprint `thm-cbc-finite-level-proetale`). Hence the cone of `Ex_!(c)` at `K` h
 reduction, so `ϖ` acts invertibly on it
 (`DerivedCategory.isIso_smul_id_of_isZero_reductionModIdeal`), and the derived
 completion inverts such morphisms
-(`DerivedCategory.isIso_derivedCompletion_map_of_smulInvertible`). This is the argument of the
+(`DerivedCategory.isIso_derivedCompletion_map`). This is the argument of the
 blueprint proof (completed proper base change for the proper part, which is proved in the same
 way, and the completed extension-by-zero comparison), carried out for the composite at once.
 
@@ -114,9 +114,9 @@ of the blueprint definition. -/
 noncomputable def completedRightDerivedLowerShriekOfCompactificationBaseChangeMap
     (sq : IsPullback g' f' f g) (c : Compactification f) :
     Rf_!(c)[ModuleCat.{u + 1} Λ] ⋙ L((g)^*[ModuleCat.{u + 1} Λ]) ⋙
-        _root_.DerivedCategory.derivedCompletion (Scheme.ProEt.topology Y') hI ⟶
+        _root_.DerivedCategory.derivedCompletion (Scheme.ProEt.topology Y') _ hI ⟶
       L((g')^*[ModuleCat.{u + 1} Λ]) ⋙ Rf_!(c.ofIsPullback sq)[ModuleCat.{u + 1} Λ] ⋙
-        _root_.DerivedCategory.derivedCompletion (Scheme.ProEt.topology Y') hI :=
+        _root_.DerivedCategory.derivedCompletion (Scheme.ProEt.topology Y') _ hI :=
   (Functor.associator _ _ _).inv ≫
     Functor.whiskerRight (rightDerivedLowerShriekOfCompactificationBaseChangeMap
       (ModuleCat.{u + 1} Λ) sq c) _ ≫ (Functor.associator _ _ _).hom
@@ -124,7 +124,7 @@ noncomputable def completedRightDerivedLowerShriekOfCompactificationBaseChangeMa
 lemma completedRightDerivedLowerShriekOfCompactificationBaseChangeMap_app
     (sq : IsPullback g' f' f g) (c : Compactification f) (K : 𝐃(X, Λ)) :
     (completedRightDerivedLowerShriekOfCompactificationBaseChangeMap hI sq c).app K =
-      (_root_.DerivedCategory.derivedCompletion (Scheme.ProEt.topology Y') hI).map
+      (_root_.DerivedCategory.derivedCompletion (Scheme.ProEt.topology Y') _ hI).map
         ((rightDerivedLowerShriekOfCompactificationBaseChangeMap (ModuleCat.{u + 1} Λ) sq
           c).app K) := by
   simp [completedRightDerivedLowerShriekOfCompactificationBaseChangeMap]

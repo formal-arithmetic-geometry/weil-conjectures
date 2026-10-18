@@ -242,7 +242,7 @@ noncomputable def HasSmulInvertibleCones.homFunctorIso {J : Type*} [Category J]
       @NatIso.isIso_of_isIso_app _ _ _ _ _ _ _ fun K ↦ ?_
     rw [isIso_iff_bijective]
     obtain ⟨C, b, c, hT, hC⟩ := hα K.unop
-    exact _root_.DerivedCategory.bijective_comp_of_smulInvertible hT hC (hP j)
+    exact ObjectProperty.bijective_comp_of_distinguished hT hC (hP j)
   asIso (Functor.whiskerLeft (P ⋙ yoneda)
     ((Functor.whiskeringLeft _ _ (Type (u + 1))).map (NatTrans.op α)))
 

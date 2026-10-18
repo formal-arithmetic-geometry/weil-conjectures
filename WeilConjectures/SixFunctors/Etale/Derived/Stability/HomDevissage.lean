@@ -133,8 +133,7 @@ lemma constructibleFiniteTor_derivedHom_shift {X : Scheme.{u}}
     (constructibleFiniteTor _ X).le_shift (-n) _ hK
   let e : ((RHom(X)[ModuleCat.{u + 1} Λ]).obj (op (K⟦n⟧))).obj L ≅
       (((RHom(X)[ModuleCat.{u + 1} Λ]).obj (op K)).obj L)⟦-n⟧ :=
-    (derivedHomShiftIso (ModuleCat.{u + 1} Λ) K n).app L ≪≫
-      (((RHom(X)[ModuleCat.{u + 1} Λ]).obj (op K)).commShiftIso (-n)).app L
+    (derivedHomShiftIso (ModuleCat.{u + 1} Λ) K n).app L
   exact (constructibleFiniteTor _ X).prop_of_iso e.symm h
 
 /-- For `L ∈ Dctf(X, Λ)`, the objects `K` with `RHom(K, L) ∈ Dctf(X, Λ)` form a thick

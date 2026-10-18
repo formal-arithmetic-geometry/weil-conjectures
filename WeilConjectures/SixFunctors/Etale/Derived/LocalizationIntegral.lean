@@ -423,8 +423,10 @@ section Recollement
 variable {U Z X : Scheme.{u}}
 
 variable (Λ) in
-/-- For an open immersion `j`, the counit `Lj^* Rj_* ⟶ 𝟭` is an isomorphism: `Rj_*` is fully
-faithful. -/
+/-- Blueprint `lem-exc-open-fully-faithful`, first half: for an open immersion `j`, the counit
+`Lj^* Rj_* ⟶ 𝟭` is an isomorphism: `Rj_*` is fully faithful. In the adjoint triple
+`D(j_!) ⊣ D(j^*) ⊣ Rj_*` the unit of the first adjunction is invertible, hence so is the counit
+of the second. -/
 instance isIso_derivedUpperStarLowerStarAdjunction_counit (j : U ⟶ X) [IsOpenImmersion j] :
     IsIso (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) j).counit := by
   let adj := mapDerivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) j
@@ -447,8 +449,9 @@ noncomputable def rightDerivedLowerStarUpperShriekAdjunction (i : Z ⟶ X) [IsCl
   (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) i).ofNatIsoLeft
     (rightDerivedLowerShriekIsoRightDerivedLowerStar (ModuleCat.{u + 1} Λ) i)
 
-/-- `j^* i_* = 0` for an open immersion `j` whose range is disjoint from that of the closed
-immersion `i` (`AlgebraicGeometry.Etale.isZero_upperStar_rightDerivedLowerShriek`). -/
+/-- Blueprint `lem-exc-open-fully-faithful`, second half: `j^* i_* = 0` for an open immersion `j`
+whose range is disjoint from that of the closed immersion `i`
+(`AlgebraicGeometry.Etale.isZero_upperStar_rightDerivedLowerShriek`). -/
 lemma isZero_leftDerivedUpperStar_obj_rightDerivedLowerStar_obj (i : Z ⟶ X)
     [IsClosedImmersion i] [HasCompactification i] (j : U ⟶ X) [IsOpenImmersion j]
     (hij : Disjoint (Set.range i.base) (Set.range j.base)) (M : 𝐃(Z, Λ)) :

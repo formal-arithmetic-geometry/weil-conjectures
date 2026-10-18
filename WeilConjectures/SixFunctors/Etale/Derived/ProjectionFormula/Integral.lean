@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.Completion
+public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.IntegralCompletion
 public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula
 public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula.RestrictScalars
 public import WeilConjectures.SixFunctors.Etale.Derived.ReductionConservative
@@ -56,7 +56,7 @@ classification of these objects.
   proof: it is the finite-level projection map `PF_{f, K_n, L_n}`);
 * hence the cone of `PF_{f, K, L}` is an object on which `ϖ` acts invertibly, and the derived
   completion inverts such morphisms
-  (`DerivedCategory.isIso_derivedCompletion_map_of_smulInvertible`) — this replaces Step 3 of the
+  (`DerivedCategory.isIso_derivedCompletion_map`) — this replaces Step 3 of the
   blueprint proof.
 
 ## Main statements
@@ -216,7 +216,7 @@ theorem isIso_completion_map_of_isIso_reductionModIdeal
   have hC : IsZero ((reductionModIdeal _ X (Ideal.span {ϖ})).obj C) :=
     (Pretriangulated.Triangle.isZero₃_iff_isIso₁ _
       ((reductionModIdeal _ X (Ideal.span {ϖ})).map_distinguished _ hT)).2 hu
-  exact _root_.DerivedCategory.isIso_derivedCompletion_map_of_smulInvertible _ hI hT
+  exact _root_.DerivedCategory.isIso_derivedCompletion_map _ hI hT
     (isIso_smul_id_of_isZero_reductionModIdeal hϖ C hC)
 
 /-- **The projection formula at the integral stage of the étale model** (the étale-site form of

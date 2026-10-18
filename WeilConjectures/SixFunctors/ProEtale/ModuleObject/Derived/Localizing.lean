@@ -71,15 +71,15 @@ constructible complexes `Dbc(X, Λ)` and closed under isomorphisms and direct su
 `Type (u + 1)`). For `Λ = 𝒪̲_E, E̲, ℚ̲̄_ℓ` one has `Dctf(X, Λ) = Dbc(X, Λ)`, so this is
 `Loc(Dctf(X, Λ))`. -/
 noncomputable def localizingBoundedConstructible (X : Scheme.{u}) : ObjectProperty 𝔻(X) :=
-  (boundedConstructible (condensedRingObj Λ X)).localizingClosure.{u + 1}
+  (boundedConstructible (condensedRingObj Λ X)).localizingClosure
 
 omit [IsCommMonObj Λ] in
 lemma le_localizingBoundedConstructible (X : Scheme.{u}) :
     boundedConstructible (condensedRingObj Λ X) ≤ localizingBoundedConstructible Λ X :=
   ObjectProperty.le_localizingClosure _
 
-instance (X : Scheme.{u}) : (localizingBoundedConstructible Λ X).IsLocalizing.{u + 1} :=
-  inferInstanceAs ((boundedConstructible _).localizingClosure.{u + 1}).IsLocalizing
+instance (X : Scheme.{u}) : (localizingBoundedConstructible Λ X).IsLocalizing :=
+  inferInstanceAs ((boundedConstructible _).localizingClosure).IsLocalizing
 
 /-! ### Shifts and direct sums -/
 
