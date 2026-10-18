@@ -8,8 +8,10 @@ module
 public import Mathlib.AlgebraicGeometry.Geometrically.Connected
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import WeilConjectures.WeilSheaf.Cohomology
+public import WeilConjectures.WeilSheaf.CohomologyZero
 public import WeilConjectures.WeilSheaf.Dual
 public import WeilConjectures.WeilSheaf.GeometricCoinvariants
+public import WeilConjectures.WeilSheaf.LissePoincarePairing
 
 /-!
 # Top compactly supported cohomology of a lisse Weil sheaf on an affine curve
@@ -26,8 +28,9 @@ The geometric coinvariants are `AlgebraicGeometry.WeilSheaf.geometricCoinvariant
 ## Main statements
 
 - `AlgebraicGeometry.WeilSheaf.nonempty_equiv_compactlySupportedCohomology_two`
-  (`lem-a1-affine-hc2`), stated with `sorry`: Verdier duality for Weil complexes is not
-  available yet.
+  (`lem-a1-affine-hc2`), from the lisse Poincaré pairing
+  `AlgebraicGeometry.WeilSheaf.exists_isPerfPair_compactlySupportedCohomology_dual_mul` (from the
+  lisse case of `thm-pod-degreewise-perfectness-over-a-field`).
 -/
 
 @[expose] public section
@@ -58,7 +61,13 @@ theorem nonempty_equiv_compactlySupportedCohomology_two [IsAffine U]
     (hF : F.IsLisse) :
     Nonempty ((F.compactlySupportedCohomology 2).Equiv
       ((F.geometricCoinvariants hF).tateTwist (Nat.card k₀) (-1))) := by
-  sorry
+  obtain ⟨P, hP, hPF⟩ :=
+    exists_isPerfPair_compactlySupportedCohomology_dual_mul 1 F hF 2 0 (by norm_num)
+  have hq : (Nat.card k₀ : PadicAlgCl l) ^ (-(-1 : ℤ)) ≠ 0 :=
+    zpow_ne_zero _ (Nat.cast_ne_zero.2 Nat.card_pos.ne')
+  exact ⟨(FrobeniusModule.Equiv.ofIsPerfPair P hq fun x y ↦ by
+    rw [hPF, neg_neg, zpow_one, pow_one]).trans
+      ((cohomologyZeroEquiv (F.dual hF)).dual.rescale _)⟩
 
 /-- Blueprint `lem-a1-affine-hc2-pure`: Purity of `H_c²` on an affine curve.
 

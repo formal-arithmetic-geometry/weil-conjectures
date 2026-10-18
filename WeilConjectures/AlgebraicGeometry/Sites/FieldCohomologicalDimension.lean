@@ -7,8 +7,14 @@ module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
+public import WeilConjectures.AlgebraicGeometry.Sites.ArtinVanishing.StalkFormula
+public import WeilConjectures.AlgebraicGeometry.Sites.CohomologyFilteredColimit
 public import WeilConjectures.AlgebraicGeometry.Sites.FiniteSupport
+public import WeilConjectures.AlgebraicGeometry.Sites.LerayVanishing
+public import WeilConjectures.AlgebraicGeometry.Sites.StrictHenselizationField
 public import WeilConjectures.AlgebraicGeometry.Sites.TorsionCohomologicalDimension
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.CohomologyMapDevissage
+public import WeilConjectures.SixFunctors.OpenClosed.Conservative
 
 /-!
 # Torsion cohomological dimension and the ground field
@@ -28,6 +34,9 @@ finite type over a field `K` with `cd_tor(K) ≤ c` and
 universe u
 
 open CategoryTheory Limits
+
+open scoped AlgebraicGeometry.Etale
+
 
 namespace AlgebraicGeometry.Scheme
 
@@ -69,6 +78,21 @@ theorem torsionCohomologicalDimension_spec_of_isSepClosed (K : Type u) [Field K]
   le_antisymm (torsionCohomologicalDimension_le_iff.2
     (hasTorsionCohomologicalDimensionLE_zero_of_isSepClosed K)) bot_le
 
+open ZeroObject in
+/-- An abelian étale sheaf on `X` whose pullback along a surjective morphism `s : S ⟶ X`
+vanishes is zero. -/
+lemma isZero_of_isZero_upperStar_of_surjective {X S : Scheme.{u}} (s : S ⟶ X)
+    (hs : Function.Surjective s)
+    (M : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})
+    (h : IsZero ((s)^*[AddCommGrpCat.{u + 1}].obj M)) : IsZero M := by
+  have hz : IsZero (0 : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) := isZero_zero _
+  have : IsIso (hz.from_ M) := by
+    refine Etale.isIso_of_isIso_upperStar_map_of_jointlySurjective AddCommGrpCat.{u + 1}
+      (fun _ : PUnit.{u + 1} ↦ s) (fun x ↦ ⟨⟨⟩, hs x⟩) _ fun _ ↦ ?_
+    have hz' : IsZero ((s)^*[AddCommGrpCat.{u + 1}].obj 0) := Functor.map_isZero _ hz
+    exact ⟨⟨hz'.to_ _, h.eq_of_src _ _, hz'.eq_of_src _ _⟩⟩
+  exact IsZero.of_iso hz (asIso (hz.from_ M))
+
 /-- Blueprint `lem-sc-cd-ground-field`: Descent of a geometric cohomological dimension bound.
 
 Let `X` be a scheme of finite type over a field `K` (structure morphism `a`), and let `K̄` be an
@@ -82,7 +106,44 @@ theorem hasTorsionCohomologicalDimensionLE_add_of_isAlgClosure {K : Type u} [Fie
     (hK : (Spec (.of K)).HasTorsionCohomologicalDimensionLE c)
     (hX : HasTorsionCohomologicalDimensionLE
       (pullback a (Spec.map (CommRingCat.ofHom (algebraMap K L)))) e) :
-    X.HasTorsionCohomologicalDimensionLE (c + e) :=
-  sorry
+    X.HasTorsionCohomologicalDimensionLE (c + e) := by
+  have := LocallyOfFiniteType.isLocallyNoetherian a
+  have := QuasiCompact.compactSpace_of_compactSpace a
+  have : IsNoetherian X := {}
+  have : QuasiSeparated a := inferInstance
+  have : IsAlgClosed L := IsAlgClosure.isAlgClosed K
+  have : Algebra.IsAlgebraic K L := IsAlgClosure.isAlgebraic
+  let s₀ := Spec.map (CommRingCat.ofHom (algebraMap K L))
+  -- the higher direct images vanish above `e`
+  have hvan (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (hF : F.IsTorsion) (q : ℕ)
+      (hq : e < q) : IsZero ((((a)_*[AddCommGrpCat.{u + 1}]).rightDerived q).obj F) := by
+    let T := strictLocalizationToBase s₀ ≫ 𝟙 (Spec (.of K))
+    let u := Spec.map (strictHenselizationEval s₀)
+    have hu : IsUniversalHomeomorphism u := isUniversalHomeomorphism_spec_strictHenselizationEval
+    have hs : s₀ = u ≫ T := by
+      simp only [T, Category.comp_id]
+      exact (spec_map_strictHenselizationEval_comp_strictLocalizationToBase s₀).symm
+    let φ : pullback a s₀ ⟶ pullback a T :=
+      (pullback.congrHom rfl hs).hom ≫ (pullbackLeftPullbackSndIso a T u).inv ≫ pullback.fst _ _
+    have hP := hX.of_isUniversalHomeomorphism φ
+    refine isZero_of_isZero_upperStar_of_surjective (s₀ ≫ 𝟙 _) ?_ _
+      (Etale.isZero_upperStar_rightDerived_lowerStar_of_subsingleton_H a (𝟙 _) F s₀ q (by lia)
+        (hP _ (Etale.isTorsion_upperStar _ hF) q hq))
+    exact fun x ↦ ⟨IsLocalRing.closedPoint L, Subsingleton.elim _ _⟩
+  intro F hF n hn
+  obtain ⟨D, c', hc, rfl, hD⟩ := hF.exists_isColimit_nsmul_eq_zero
+  suffices h0 : ∀ x : Sheaf.H c'.pt n, x = 0 by
+    exact ⟨fun x y ↦ (h0 x).trans (h0 y).symm⟩
+  intro x
+  obtain ⟨j, y, rfl⟩ := (H_map_isColimit_of_isFiltered X hc n).1 x
+  obtain ⟨m, hm, hmD⟩ := hD j
+  have hDj : (D.obj j).IsTorsion := isTorsion_of_nsmul_id_eq_zero hm hmD
+  have : Subsingleton (Sheaf.H (D.obj j) n) :=
+    Etale.subsingleton_H_of_rightDerived_lowerStar a (D.obj j) (c := c) (e := e)
+      (fun q hq ↦ hvan _ hDj q hq)
+      (fun p q hp ↦ hK _ (isTorsion_of_nsmul_id_eq_zero hm (by
+        rw [← CategoryTheory.Functor.map_id, ← Functor.map_nsmul, hmD, Functor.map_zero])) p hp)
+      n hn
+  rw [Subsingleton.elim y 0, map_zero]
 
 end AlgebraicGeometry.Scheme

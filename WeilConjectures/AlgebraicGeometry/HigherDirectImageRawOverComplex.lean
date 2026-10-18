@@ -6,7 +6,9 @@ Authors: Bin Wu
 
 module
 
-public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.Transition
+public import WeilConjectures.AlgebraicGeometry.HigherDirectImageTransitions
+
+
 
 /-! # The single complex of coefficients restricted from W
 
