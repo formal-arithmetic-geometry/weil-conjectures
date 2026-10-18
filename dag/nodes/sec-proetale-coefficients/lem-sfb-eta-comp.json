@@ -353,5 +353,23 @@
     }
    ]
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-5010c811e",
+  "group": "Q28",
+  "result": "pass",
+  "note": "Wrote review.md. Verified the source, all ten statement dependencies, exact signature, canonical comparison orientation, universes, edge cases, and report sections. scompile overlay and library checks passed without warnings or errors; only standard axioms. No fixes needed; branch unchanged."
+ },
+ "lean": {
+  "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic",
+  "declaration": "AlgebraicGeometry.ProEtale.condensedPushforwardHom_comp",
+  "statement": "lemma condensedPushforwardHom_comp {Z : Scheme.{u}} (g : Y ⟶ Z) :\n    condensedPushforwardHom Λ (f ≫ g) =\n      condensedPushforwardHom Λ g ≫ (g)_*[Ab.{u + 1}].map (condensedPushforwardHom Λ f) ≫\n        (ProEtale.lowerStarComp Ab.{u + 1} f g).hom.app (condensedRingObj Λ X)",
+  "branch": "slopmaster2",
+  "by": "Q28",
+  "date": "2026-10-18",
+  "existing": true,
+  "note": "Exact existing theorem in the published pro-etale module-object framework, read through scompile.py --source. The section binds Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}, arbitrary X Y : Scheme.{u}, and f : X ⟶ Y; the theorem binds arbitrary Z and g. The section's MonObj instance is explicitly omitted since the equality is on underlying abelian sheaves, so it applies in particular to every condensed ring without a commutativity condition. condensedPushforwardHom is the recorded eta, and lowerStarComp.hom at condensedRingObj Λ X is the recorded c_{f,g} at Λ_X. The construction also agrees with the node's explicit normalization: upperStarComp is the inverse of (conjugateIsoEquiv adjCompositeScheme adjComposite).symm (lowerStarComp.symm); hence its inverse is exactly m_{a,b} with conjugate c_{a,b}^{-1}. upperStarFromPointComp uses that inverse followed by comp_toSpecZ, and condensedPullbackHom is its component at Λ. The branch label denotes the published WeilConjectures source root, resolved by the side overlay rather than the older local slopmaster2 checkout. No new module or construction is introduced."
  }
 }

@@ -235,5 +235,28 @@
   "group": "Q156",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q156-7d9c6b4f0 (reviewer sub-agent of L); spot-checked: I read the item in full, all 8 cited statements, the parent prop-weil-twist-preserves (all 13 steps), unit sk-prop-sf-existence, and the blueprint final sentence in both main-20261015 prop-weil-twist-preserves.proof.md and master prop-weil-twist-preserves.md. The delivery adds no new nodes and does not change the statement. Shape: one commit; proof_deps equals the union of the step uses; no cycle (the parent cites the item, the item does not cite the parent); no SGA source. Coefficient category: the raw common-stage Hom colimit of def-weil-algebraically-closed-coefficients and the raw rationalization, with no Karoubi completion. The coherence lemma says its a_C rationalizes to the lem-weil-scalar-extension-composition associator, so Step 2's a is the Hom-system transition. I checked every step by explicit composition. Step 2: both rearrangements of the tower equation are correct, sources and targets included. Step 3: with β_{G/F} naturality the enlargement of t_F(f) equals t_G(f^G), which gives representative independence. Step 4: identity and composition hold. Step 5: γ is well typed, and e_F∘γ = B(e_E) is the assumed evaluation-compatibility hypothesis written out termwise. Step 6: expanding twice gives γ'^{-1}T_{-m}T_m(f)γ, and the naturality square and inverse components follow. Step 7: E(m)=T_{E,m}(E_S), and invertibility at Q̄ is read as in the parent's statement. Edge cases m=0, m<0, E=E', F=E and unrelated E, E' all go through. No duplicate found (lem-weil-twist-rationalization covers only the rational stage; det-prop-sfb-cartesian-coefficients-twists and lem-sf-twist-interchange are about other things). Accepted tool_use: lem-weil-scalar-extension-composition (a generic associator, already part of the Hom system's definition). No fixes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-6546e68fa",
+  "group": "Q25",
+  "result": "fix",
+  "note": "Review written to review.md. Complete replacement report in fixes repairs H11: author self-check replaced by independent second reading. Mathematics and Lean accepted; reproduced clean sandbox and library compiles (18.5 s, 28.3 s)."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.QbarTwistCommonStage",
+  "declaration": "WeilConjectures.qbar_twist_common_stage",
+  "declarations": [
+   "WeilConjectures.qbarTwistIntegralMap",
+   "WeilConjectures.qbarTwistIntegralBeta",
+   "WeilConjectures.qbar_twist_common_stage"
+  ],
+  "file": "lean/Sheaf/Paper/QbarTwistCommonStage.lean",
+  "statement": "theorem qbar_twist_common_stage (m : ℤ) (T : Bool → ∀ E : Index l Ω, Stage l Ω S E ⥤ Stage l Ω S E) (_hobj : ∀ (s : Bool) (E : Index l Ω) (C : Stage l Ω S E), (T s E).obj C = ⟨integralTwistCoherenceObject l (Coefficient.{u} l Ω E) S (if s then m else -m) C.obj⟩) (_hmap : ∀ (s : Bool) (E : Index l Ω) (C D : sfIntegralConstructibleCategory l (Coefficient.{u} l Ω E) S) (f : C ⟶ D) (a : Localization.Away (Padic.coefficientExtensionUniformizer l (Coefficient.{u} l Ω E))), HEq ((T s E).map (a ⊗ₜ[Padic.coefficientExtensionIntegers l (Coefficient.{u} l Ω E)] f : (sfRationalConstructibleLocalization l (Coefficient.{u} l Ω E) S).obj C ⟶ (sfRationalConstructibleLocalization l (Coefficient.{u} l Ω E) S).obj D)) (a ⊗ₜ[Padic.coefficientExtensionIntegers l (Coefficient.{u} l Ω E)] qbarTwistIntegralMap l Ω S E (if s then m else -m) f)) (b : ∀ (s : Bool) {E F : Index l Ω} (h : E ≤ F), T s E ⋙ (stageSystem l Ω S).T h ≅ (stageSystem l Ω S).T h ⋙ T s F) (_hbeta : ∀ (s : Bool) (E F : Index l Ω) (h : E ≤ F) (C : sfIntegralConstructibleCategory l (Coefficient.{u} l Ω E) S), HEq ((b s h).hom.app ((sfRationalConstructibleLocalization l (Coefficient.{u} l Ω E) S).obj C)) ((1 : Localization.Away (Padic.coefficientExtensionUniformizer l (Coefficient.{u} l Ω F))) ⊗ₜ[ Padic.coefficientExtensionIntegers l (Coefficient.{u} l Ω F)] qbarTwistIntegralBeta l Ω S h (if s then m else -m) C)) (_hunit : ∀ (s : Bool) (E : Index l Ω) (C : Stage l Ω S E), HEq ((b s (le_refl E)).hom.app C) ((unitor l Ω S E).hom.app ((T s E).obj C) ≫ (T s E).map ((unitor l Ω S E).inv.app C))) (_htower : ∀ s : Bool, StageSystem.pairFunctorCoherent (stageSystem l Ω S) (stageSystem l Ω S) (T s) (b s)) (e : ∀ (s : Bool) (E : Index l Ω), T s E ⋙ T (!s) E ≅ 𝟭 (Stage l Ω S E)) (_heval : ∀ (s : Bool) (E F : Index l Ω) (h : E ≤ F) (C : Stage l Ω S E), (b (!s) h).hom.app ((T s E).obj C) ≫ (T (!s) F).map ((b s h).hom.app C) ≫ (e s F).hom.app (((stageSystem l Ω S).T h).obj C) = ((stageSystem l Ω S).T h).map ((e s E).hom.app C)) : ∃ U : Bool → (Pair l Ω S ⥤ Pair l Ω S), (∀ (s : Bool) (P : Pair l Ω S), (U s).obj P = ⟨P.stage, (T s P.stage).obj P.obj⟩) ∧ (∀ (s : Bool) (P Q : Pair l Ω S) (F : Index l Ω) (hP : P.stage ≤ F) (hQ : Q.stage ≤ F) (f : P.toStage hP ⟶ Q.toStage hQ), HEq ((U s).map (StageSystem.PairCategory.mkHom F hP hQ f)) (StageSystem.PairCategory.mkHom (X := (⟨P.stage, (T s P.stage).obj P.obj⟩ : Pair l Ω S)) (Y := (⟨Q.stage, (T s Q.stage).obj Q.obj⟩ : Pair l Ω S)) F hP hQ ((b s hP).hom.app P.obj ≫ (T s F).map f ≫ (b s hQ).inv.app Q.obj))) ∧ ∃ ε : ∀ s : Bool, U s ⋙ U (!s) ≅ 𝟭 (Pair l Ω S), ∀ (s : Bool) (P : Pair l Ω S), HEq ((ε s).hom.app P) (((stageSystem l Ω S).ι P.stage).map ((e s P.stage).hom.app P.obj))",
+  "branch": "newtargets-dag",
+  "by": "Q25",
+  "date": "2026-10-18",
+  "existing": false
  }
 }

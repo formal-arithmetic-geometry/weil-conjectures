@@ -272,5 +272,27 @@
   "group": "Q34",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q34-2490a4307 (reviewer sub-agent of L); spot-checked: I read the whole item and all 20 cited node statements. Sources checked: the main-20261015 blueprint statement and proof, Bhatt–Scholze Def. 5.6.1 and Prop. 5.6.2 (p. 41), and the unit sk-prop-pe-continuous-cohomology. The statement is unchanged and matches the source: X is arbitrary, the transitions are epimorphic, and the coefficients are Z. The delivery correctly replaces the finite-coefficient lem-weil-pbc-comparison-global-cohomology with sk-prop-sf-comparison for an arbitrary ring. I checked the tower site (its fibre products are (VxU_i,n)), the prefix left adjoint L_n including the boundary at n+1, the exact constant-sheaf left adjoint, and the strict Roos functoriality in step 7. There are no new nodes, no duplicates (other continuous-cohomology hits are Galois/group cohomology) and no cycle. The accepted tool_uses are lem-sc-bounded-below-injective-resolution, lem-weil-pbc-ringed-strict-tower-homotopy-limit, lem-weil-strict-roos-comparison and the added lem-weil-derived-limit-existence. Three repairs were missing citations (C1/E5), now in fixes/: (1) Step 4 used the total Rlim on T(I) without citing that a bounded-below injective complex is K-injective; added lem-weil-pbc-bounded-below-injectives-kinjective, the Roos transport and def-weil-derived-limit. (2) Step 6 said 'the natural resolution comparison identifies a_n' in place of an argument; it now spells out that nu_* preserves injectives, that u_n: I_n -> nu_*J_n represents the derived unit (an isomorphism by sk-prop-sf-comparison), and that a_n = Gamma(u_n) is a quasi-isomorphism. (3) Step 8 composed two different derived limits of the pro-étale tower; it now cites lem-weil-derived-limit-existence clause 1 for uniqueness up to isomorphism, with the tower identification through alpha and lem-pc-abelian-groups-exact-products for products. Also added lem-weil-tower-category-levelwise-abelian to stmt_deps, and proof_deps is now the union of all step uses.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-7db77a195",
+  "group": "NR",
+  "result": "pass",
+  "note": "Wrote review.md. Checked immutable files, all nine statement dependencies, source alignment, exact declarations, universes, edge cases, report sections, and route-pivot compliance. Per-file scompile reproduction passed without diagnostics. No delivery errors found; no project files or branch refs changed."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ContinuousEtaleCohomology",
+  "declaration": "AlgebraicGeometry.ProEtale.continuousEtaleCohomology",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.continuousEtaleSectionComplexes",
+   "AlgebraicGeometry.ProEtale.continuousEtaleCohomology"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ContinuousEtaleCohomology.lean",
+  "statement": "theorem continuousEtaleCohomology (X : Scheme.{u}) [HasDerivedCategory.{w} (ℕᵒᵖ ⥤ Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})] : ∃ (_hproducts : HasCountableProducts (DerivedCategory.{u + 1} AddCommGrpCat.{u + 1})) (Rc : DerivedCategory.{w} (ℕᵒᵖ ⥤ Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) ⥤ DerivedCategory.{u + 1} AddCommGrpCat.{u + 1}) (η : continuousEtaleSectionComplexes X ⋙ DerivedCategory.Q ⟶ DerivedCategory.Q ⋙ Rc), Rc.IsRightDerivedFunctor η (HomologicalComplex.quasiIso (ℕᵒᵖ ⥤ Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (ComplexShape.up ℤ)) ∧ ∀ (F : ℕᵒᵖ ⥤ Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}), (∀ n : ℕ, Epi (F.map (homOfLE (Nat.le_succ n)).op)) → ∃ (L₁ L₂ : DerivedCategory.{u + 1} AddCommGrpCat.{u + 1}), IsDerivedLimit (K := fun n : ℕ ↦ (Sheaf.Γ X.smallEtaleTopology AddCommGrpCat.{u + 1}).rightDerivedFunctor.obj ((DerivedCategory.singleFunctor _ 0).obj (F.obj (op n)))) (fun n : ℕ ↦ (Sheaf.Γ X.smallEtaleTopology AddCommGrpCat.{u + 1}).rightDerivedFunctor.map ((DerivedCategory.singleFunctor _ 0).map (F.map (homOfLE (Nat.le_succ n)).op))) L₁ ∧ IsDerivedLimit (K := fun n : ℕ ↦ (Sheaf.Γ (Scheme.ProEt.topology X) AddCommGrpCat.{u + 1}).rightDerivedFunctor.obj ((DerivedCategory.singleFunctor _ 0).obj ((comparisonUpperStar AddCommGrpCat.{u + 1} X).obj (F.obj (op n))))) (fun n : ℕ ↦ (Sheaf.Γ (Scheme.ProEt.topology X) AddCommGrpCat.{u + 1}).rightDerivedFunctor.map ((DerivedCategory.singleFunctor _ 0).map ((comparisonUpperStar AddCommGrpCat.{u + 1} X).map (F.map (homOfLE (Nat.le_succ n)).op)))) L₂ ∧ Nonempty (Rc.obj ((DerivedCategory.singleFunctor _ 0).obj F) ≅ L₁) ∧ Nonempty (L₁ ≅ L₂) ∧ Nonempty (L₂ ≅ (Sheaf.Γ (Scheme.ProEt.topology X) AddCommGrpCat.{u + 1}).rightDerivedFunctor.obj ((DerivedCategory.singleFunctor _ 0).obj (limit (F ⋙ comparisonUpperStar AddCommGrpCat.{u + 1} X))))",
+  "branch": "newtargets-dag",
+  "by": "NR",
+  "date": "2026-10-18",
+  "existing": false
  }
 }

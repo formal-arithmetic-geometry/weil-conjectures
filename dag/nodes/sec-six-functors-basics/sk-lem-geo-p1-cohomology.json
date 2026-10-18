@@ -28,7 +28,11 @@
   "def-sf-comparison-derived-pullback",
   "sk-lem-geo-cartier",
   "def-nagata-projective-space-base-change",
-  "def-pc-projective-space-twist"
+  "def-pc-projective-space-twist",
+  "thm-amb-p1-decomposition",
+  "def-amb-p1-trace",
+  "def-asd-ordinary-finite-p1-arrows",
+  "def-asd-ordinary-finite-p1-data"
  ],
  "proof": [
   {
@@ -503,5 +507,45 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-ac47f660f",
+  "group": "Q43",
+  "result": "pass",
+  "note": "Reviewed immutable source, all 12 statement dependencies, canonical maps, trace normalization, hypotheses, universes, edge cases, records and pilot gates. Signature matches verbatim; scompile.py checks passed in 23.3s and 22.9s. No repository or branch changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GeoP1Cohomology",
+  "declaration": "AlgebraicGeometry.ProEtale.geoP1Cohomology",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.geoP1Comparison",
+   "AlgebraicGeometry.ProEtale.geoP1Pullback",
+   "AlgebraicGeometry.ProEtale.geoP1Pushforward",
+   "AlgebraicGeometry.ProEtale.geoP1PullComparison",
+   "AlgebraicGeometry.ProEtale.geoP1PushComparison",
+   "AlgebraicGeometry.ProEtale.geoP1SumComparison",
+   "AlgebraicGeometry.ProEtale.geoP1Unit",
+   "AlgebraicGeometry.ProEtale.geoP1Twist",
+   "AlgebraicGeometry.ProEtale.geoP1EtaleChern",
+   "AlgebraicGeometry.ProEtale.geoP1DecompositionMap",
+   "AlgebraicGeometry.ProEtale.geoP1TwistedMap",
+   "AlgebraicGeometry.ProEtale.geoP1UnitPullback",
+   "AlgebraicGeometry.ProEtale.geoP1TwistPullback",
+   "AlgebraicGeometry.ProEtale.geoP1SourceMap",
+   "AlgebraicGeometry.ProEtale.geoP1Exchange",
+   "AlgebraicGeometry.ProEtale.geoP1UnitExchange",
+   "AlgebraicGeometry.ProEtale.geoP1TwistExchange",
+   "AlgebraicGeometry.ProEtale.geoP1Trace",
+   "AlgebraicGeometry.ProEtale.geoP1Cohomology"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/GeoP1Cohomology.lean",
+  "statement": "theorem geoP1Cohomology (ℓ : ℕ) (hℓ : ℓ.Prime) (r : ℕ) (_hr : 0 < r) (A : Type (u + 1)) [CommRing A] [Finite A] (hA : ((ℓ ^ r : ℕ) : A) = 0) : ∃ b : ∀ (S : Scheme.{u}) [IsNoetherian S] (_hS : IsUnit ((ℓ ^ r : ℕ) : Γ(S, ⊤))), (geoP1Twist A (ℓ ^ r) hA S 1 2 ⊞ geoP1Unit A S) ≅ (geoP1Pushforward A (ProjectiveLine S ↘ S)).obj (geoP1Twist A (ℓ ^ r) hA (ProjectiveLine S) 1 2), (∀ (S : Scheme.{u}) [IsNoetherian S] (hS : IsUnit ((ℓ ^ r : ℕ) : Γ(S, ⊤))), IsIso (geoP1DecompositionMap A (ℓ ^ r) (pow_pos hℓ.pos r) hA S hS) ∧ (b S hS).hom = geoP1TwistedMap A (ℓ ^ r) (pow_pos hℓ.pos r) hA S hS) ∧ ∀ (S' S : Scheme.{u}) [IsNoetherian S'] [IsNoetherian S] (g : S' ⟶ S) (hS : IsUnit ((ℓ ^ r : ℕ) : Γ(S, ⊤))) (hS' : IsUnit ((ℓ ^ r : ℕ) : Γ(S', ⊤))), ((geoP1Pullback A g).map (geoP1DecompositionMap A (ℓ ^ r) (pow_pos hℓ.pos r) hA S hS) ≫ geoP1UnitExchange A g = geoP1SourceMap A (ℓ ^ r) (pow_pos hℓ.pos r) hA g hS ≫ geoP1DecompositionMap A (ℓ ^ r) (pow_pos hℓ.pos r) hA S' hS') ∧ ((geoP1Pullback A g).map (geoP1Trace A (ℓ ^ r) hA S (b S hS)) ≫ (geoP1UnitPullback A g).hom = geoP1TwistExchange A (ℓ ^ r) (pow_pos hℓ.pos r) hA g hS ≫ geoP1Trace A (ℓ ^ r) hA S' (b S' hS'))",
+  "branch": "newtargets-dag",
+  "by": "Q43",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "The constants and finite signed twists are exact comparison pullbacks of the ordinary etale module objects. Both decomposition maps use the same existing Kummer-normalized Chern arrow; the direct-image comparison and geometric exchange are their canonical counit mates. The trace is the inverse twisted decomposition followed by the constant-summand projection. No new coefficient category or arbitrary comparison is chosen."
  }
 }
