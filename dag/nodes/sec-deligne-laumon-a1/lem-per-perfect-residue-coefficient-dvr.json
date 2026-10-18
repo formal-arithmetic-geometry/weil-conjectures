@@ -286,5 +286,23 @@
   "group": "Q103",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q103-63cca038f (reviewer sub-agent of L); spot-checked: Read the item in full against ILO IV 4.2.5 paragraphs 1–2 and 4.1.3–4.1.6 (PDF pp. 63, 65). Statement, stmt_deps, source and blueprint are unchanged from the base; there are no new nodes. Step 1: lem-weil-pbc-field-char-p-nilpotent-lifting gives a ring lift (p·1_D=0, N=2). k0-linearity follows from y^p=x and (f(i(y))−a(y))^p ∈ J^2=0, with no finiteness assumption; no existing node states char-p perfect-base formal smoothness. Step 2: 07NR applies with A0=W (PID, complete) and E=k' (complete for the ideal 0). Its A0-linear e gives the specified map on k0. Step 3: 07NP applies (Noetherian local rings, local map), so flatness makes π a nonzerodivisor; 00PD is applied to W, which gives injectivity. Step 4: the DVR proof by largest and least π-exponents is correct and elementary. Step 5: 0325 makes C/πC complete, so πC=∩(πC+n^m) and t=1. Step 6: 07NJ applies with r=t=1; s is W-linear through W/π=k0; the lift is local and induces the given residue isomorphism. Edge cases checked: k'=k0, ramified W, infinitely generated or imperfect k', C=W/π^a, π=0 in C. Searched the DAG for duplicates (Cohen and coefficient-ring nodes, the char-0 field and residue-section nodes): none states the ramified extension with the W-linear lift. The only citer is lem-per-cohen-gabber-finite-presentations step 7, which uses exactly the stated clauses. Accepted tool_uses: the six generic algebra lemmas (char-p field lifting, 07NR, 07NP, 00PD, 0325, 07NJ). No SGA cited. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.PerfectResidueCoefficientDvr",
+  "declaration": "Algebra.exists_perfect_residue_coefficient_dvr",
+  "file": "lean/Sheaf/RingTheory/PerfectResidueCoefficientDvr.lean",
+  "statement": "theorem exists_perfect_residue_coefficient_dvr (W : Type u) [CommRing W] [IsDomain W] [IsDiscreteValuationRing W] [IsNoetherianRing W] [IsLocalRing W] [IsAdicComplete (IsLocalRing.maximalIdeal W) W] [CharZero W] (p : ℕ) (hp : p.Prime) (hres : ringChar (IsLocalRing.ResidueField W) = p) (π : W) (hπ : π ≠ 0) (hπgen : IsLocalRing.maximalIdeal W = Ideal.span {π}) [PerfectField (IsLocalRing.ResidueField W)] (k' : Type v) [Field k'] [Algebra (IsLocalRing.ResidueField W) k'] : ∃ (V : Type (max u v)) (_ : CommRing V) (_ : IsDomain V) (_ : IsDiscreteValuationRing V) (_ : IsNoetherianRing V) (_ : IsLocalRing V) (_ : IsAdicComplete (IsLocalRing.maximalIdeal V) V) (ι : W →+* V), IsLocalHom ι ∧ Function.Injective ι ∧ (ι π ≠ 0) ∧ IsLocalRing.maximalIdeal V = Ideal.span {ι π} ∧ (ringChar (IsLocalRing.ResidueField V) = p) ∧ (∃ rι : IsLocalRing.ResidueField W →+* IsLocalRing.ResidueField V, rι.comp (IsLocalRing.residue W) = (IsLocalRing.residue V).comp ι ∧ ∃ e : IsLocalRing.ResidueField V ≃+* k', e.toRingHom.comp rι = algebraMap _ k' ∧ (@Algebra.FormallySmoothAdic W V _ _ (RingHom.toAlgebra ι) (IsLocalRing.maximalIdeal V)) ∧ ∀ (C : Type w) (_ : CommRing C) (_ : IsNoetherianRing C) (_ : IsLocalRing C) (_ : IsAdicComplete (IsLocalRing.maximalIdeal C) C) (γ : W →+* C), IsLocalHom γ → ∀ (s : k' →+* C ⧸ Ideal.span {γ π}) (q : C ⧸ Ideal.span {γ π} →+* IsLocalRing.ResidueField C), q.comp (Ideal.Quotient.mk (Ideal.span {γ π})) = IsLocalRing.residue C → (∀ x : W, s (algebraMap (IsLocalRing.ResidueField W) k' (IsLocalRing.residue W x)) = Ideal.Quotient.mk (Ideal.span {γ π}) (γ x)) → Function.Bijective (q.comp s) → ∃ f : V →+* C, f.comp ι = γ ∧ IsLocalHom f ∧ (Ideal.Quotient.mk (Ideal.span {γ π})).comp f = s.comp (e.toRingHom.comp (IsLocalRing.residue V)))",
+  "branch": "newtargets-dag",
+  "by": "NK",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-48e9139b6",
+  "group": "NK",
+  "result": "pass",
+  "note": "Re-delivery of RETURNed 88e0bfa4. Both H3 faults are fixed: Function.Bijective (q.comp s) and ∀ x:W, s(algebraMap(residue W x)) = mk(γ x) are now hypotheses, so the false/vacuous ∃eC→ clause and the missing k₀-linearity are gone, and the returned counterexamples no longer contradict the statement. Checked clause by clause against ILO IV 4.2.5 ¶1–2; universes u/v/max u v/w independent; edge cases k'=k₀, γπ=0, non-reduced C covered; 4 stmt_deps correct; only the lean field changed; lean.statement verbatim. The docstring now gives all 6 proof steps (H8 resolved), and the report has a real clause-by-clause second reading (H11 resolved). Citer lem-per-cohen-gabber-finite-presentations step 7 matches. nt_compile --json clean in 1.7 s; a broken-copy control errors as expected. Advisory H9: 4 proof-stage imports are unused but justified in the report."
  }
 }
