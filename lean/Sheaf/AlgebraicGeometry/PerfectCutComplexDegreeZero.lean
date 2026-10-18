@@ -12,9 +12,7 @@ import Sheaf.Algebra.Homology.AffinePerfectCutDegreeZero
 import Sheaf.AlgebraicGeometry.StrictlyPerfectFiniteFreeRefinement
 import Sheaf.AlgebraicGeometry.AffinePerfectFibreSurjectivity
 import Sheaf.AlgebraicGeometry.AffinePerfectCutSheafRealization
-import Mathlib.Algebra.Homology.Monoidal
-import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure
-import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 
 /-! # Splitting a perfect complex at degree zero near a point
 
