@@ -1,6 +1,6 @@
 # Work queue
 
-1486 items; claim with `tools/claim.py next <group> [--stage N]`.
+1488 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (1486)
+## Stage 3: modules to prove (1488)
 
 On the sorry route of an open batch, or below a route sorry of one (the human, 2026-10-18: provable as soon as every dependency is stated, whatever the depth); route first, then nearest to a route sorry.
 
@@ -1312,8 +1312,10 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.RationalThickEvaluation` | - | 4 | proof | 6 |
 | `Sheaf.Paper.RingedComparisonTensorAdjunction` | - | 1 | proof | 6 |
 | `Sheaf.SecSmoothPurity.DerivedExchangeCube` | - | 1 | proof | 6 |
+| `Sheaf.SixFunctors.IntegralBasicOperationShift` | - | 1 | proof | 6 |
 | `Sheaf.SixFunctors.IntegralExpressionOccurrences` | - | 6 | proof | 6 |
 | `Sheaf.SixFunctors.IntegralOperationShiftData` | - | 4 | proof | 6 |
+| `Sheaf.SixFunctors.IntegralRealizationRecursion` | - | 1 | proof | 6 |
 | `Sheaf.SixFunctors.OpenAdjunctionShift` | - | 1 | proof | 6 |
 | `Sheaf.SixFunctors.SynchronizedCanonicalMaps` | - | 2 | proof | 6 |
 | `Sheaf.AlgebraicGeometry.ProEtaleVanishingDetection` | 9 | 3 | proof | 7 |
@@ -1564,7 +1566,7 @@ Not items: a node in the dependencies (stmt_deps or proof_deps) has no Lean stat
 | `Sheaf.Paper.SystemCompactificationProjectionSubstitution` | - | 4 | `lem-sf-ambient-proper-open-pasting` |
 | `Sheaf.Paper.VerdierExchange` | - | 1 | `fix-lem-exchanges` |
 | `Sheaf.SecSmoothPurity.SmoothPurityNaturality` | - | 1 | `fix-prop-projection-formula` |
-| `Sheaf.SixFunctors.IntegralRealizationShiftCoherence` | - | 1 | `lem-pur-integral-basic-operation-shift` |
+| `Sheaf.SixFunctors.IntegralRealizationShiftCoherence` | - | 1 | `lem-pur-system-primitive-comparison-shift` |
 
 ## Stage 3: held for an open upstream PR (14)
 
