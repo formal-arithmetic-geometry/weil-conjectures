@@ -4453,8 +4453,8 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Sta
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Tensor
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.TensorResolution
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.TorAmplitude
-public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.TraceScalarExtension
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.TorAmplitudeResidue
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.TraceScalarExtension
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperLowerStar
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperShriek
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperShriekComposition
