@@ -235,5 +235,23 @@
   "group": "Q41",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q41-12af154e2 (reviewer sub-agent of L); spot-checked: I read ILO XIV Lemme 2.1.5 (p. 210). The item's statement matches it hypothesis by hypothesis and is unchanged; the Noetherian hypothesis turns out not to be needed. The six steps are correct. Step 1: the neighbourhood colimit is identified with the triples colimit (etale-local-ring-triples (3), strict-henselization-triples (1)-(3) with K = the separable closure in Omega), so B is henselian local and ind-etale with f^-1(m_B)=m_A, and faithfully flat by 07QM. Step 2: lem-trf-ind-etale-local-henselian-integral gives B integral over H=A^h_{m_A}; the universal property gives H iso A (r eta=1, eta r=1 by uniqueness) and the monic equations are pulled back; f is injective by 05CK with N=A. Steps 3-4: flat going-down shows contractions of minimal primes are minimal; lying-over plus 00E0(4) with I=0 lifts minimal primes. Step 5: A/p -> B/q is injective and integral, so the dimensions are equal by 00OK. Step 6: components are V(minimal prime), V(p) is homeomorphic to Spec(A/p), and ring dimension equals topological dimension. Small cases checked: a field, a henselian DVR, k[[x,y,z]]/(xy,xz), nilpotents. No duplicate in the DAG; the completion analogue and etale-component-criterion nodes are different statements. review_split on the snapshot: PASS with the tool use declared. Route: sk-thm-p1, sk-thm-br and sk-thm-properbasechange are on the unit route; sk-i-curve-zero is declared as a tool use and accepted. Batch-5 flag: lem-trf-ind-etale-local-henselian-integral is generic commutative algebra (Schmidt p. 13, Stacks 04GN/04GQ). Its 105-node closure contains no assume leaf, Poincare node, trace-transport node or batch-4 target; its only sec-trace-formula members are itself and the definition. Neither assumed statement gives it, and it is not a step of either, so it is accepted, as with the earlier henselian-permanence acceptance. def-weil-pbc-henselization-at-prime is a general definition and is accepted. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.HenselianComponentDimension",
+  "declaration": "AlgebraicGeometry.Scheme.henselian_has_one_dimensional_component_iff_strictHenselization",
+  "file": "lean/Sheaf/AlgebraicGeometry/HenselianComponentDimension.lean",
+  "statement": "theorem henselian_has_one_dimensional_component_iff_strictHenselization (A : Type u) [CommRing A] [IsNoetherianRing A] [HenselianLocalRing A] {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (barX : Spec (.of Ω) ⟶ Spec (.of A)) (hbarX : barX (IsLocalRing.closedPoint Ω) = IsLocalRing.closedPoint A) : (∃ C ∈ irreducibleComponents (Spec (.of A)), topologicalKrullDim C = 1) ↔ ∃ C ∈ irreducibleComponents (strictHenselizationScheme barX), topologicalKrullDim C = 1",
+  "branch": "newtargets-dag",
+  "by": "NK",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7bcb3475b",
+  "group": "NK",
+  "result": "pass",
+  "note": "ILO XIV Lemme 2.1.5 read; the node statement matches it. Lean matches each clause: [IsNoetherianRing A] [HenselianLocalRing A], geometric point as an IsAlgClosed Ω with barX : Spec Ω ⟶ Spec A, lying over the closed point via closedPoint, existence of an irreducible component with topologicalKrullDim = 1 on both sides through ↔, strictHenselizationScheme = upstream Spec(colimit of affine pointed-étale coordinate rings), a real construction. No extra hypotheses; the shared universe is forced by the Scheme.{u} morphism. The node copy differs from live only in lean; the statement field is verbatim; docstrings carry the source place, blueprint id and all six proof steps; only sorry; imports match the proof-dep records; no existing duplicate. nt_compile --json clean in 2.0 s, and a broken control copy fails. No findings."
  }
 }
