@@ -438,5 +438,23 @@
   "group": "Q94",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q94-add72e938 (reviewer sub-agent of L); spot-checked: Read the item, all cited node statements and sources, chapter/unit route, and delivery instructions. Verified all 11 proof steps, coefficient/base-change types, bounded-below hypotheses, mate orientations, clopen component calculation, edge cases, duplicate search, and route-lock compliance. No repairs needed; review.md records the checks."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.RefinementCoefficientMate",
+  "declaration": "AlgebraicGeometry.refinementCoefficientMate",
+  "file": "lean/Sheaf/Paper/RefinementCoefficientMate.lean",
+  "statement": "theorem refinementCoefficientMate {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B] (φ : A →+* B) {X T₁ T₂ : Scheme.{u}} [IsNoetherian X] [IsNoetherian T₁] [IsNoetherian T₂] (u : T₁ ⟶ T₂) [IsProper u] (j₁ : X ⟶ T₁) (j₂ : X ⟶ T₂) [IsOpenImmersion j₁] [IsOpenImmersion j₂] (h : j₁ ≫ u = j₂) (L : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A))) (hL : DerivedCategory.TStructure.t.plus ((Etale.scalarExtension φ X).obj L.obj)) : (Etale.scalarExtension φ T₂).map (Etale.properOpenComparisonAmbient A u j₁ j₂ h L) ≫ (Etale.scalarMate φ u).app ((Etale.openImmersionLowerShriek (ModuleCat.{u + 1} A) j₁).mapDerivedCategory.obj L.obj) ≫ (Etale.rightDerivedLowerStar (ModuleCat.{u + 1} B) u).map (Etale.properOpenCoefficientOpenIso φ j₁ L.obj).hom = (Etale.properOpenCoefficientOpenIso φ j₂ L.obj).hom ≫ Etale.properOpenComparisonAmbient B u j₁ j₂ h { obj := (Etale.scalarExtension φ X).obj L.obj, property := hL } ∧ (∀ {R : Type (u + 1)} [CommRing R] [Finite R] (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} R))), (ProEtale.properOpenSiteExtensionIso R j₂).hom.app K ≫ (ProEtale.properOpenProEtaleIsoPlus R u j₁ j₂ h K).hom = (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} R) T₂).mapDerivedCategoryPlus.map (Etale.properOpenComparison R u j₁ j₂ h K) ≫ (Functor.rightDerivedFunctorPlusBaseChange (ProEtale.lowerStarComparisonUpperStarBaseChange u (ModuleCat.{u + 1} R))).app ((Etale.openImmersionLowerShriek (ModuleCat.{u + 1} R) j₁).mapDerivedCategoryPlus.obj K) ≫ (ProEtale.lowerStar (ModuleCat.{u + 1} R) u).rightDerivedFunctorPlus.map ((ProEtale.properOpenSiteExtensionIso R j₁).hom.app K))",
+  "branch": "newtargets-dag",
+  "by": "NZ",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-290c62f1d",
+  "group": "NZ",
+  "result": "pass",
+  "note": "Statement, dependencies, canonical derived-route constructions, docstrings, edge cases, route-pivot compliance, and recorded compilation were checked; no defects found."
  }
 }

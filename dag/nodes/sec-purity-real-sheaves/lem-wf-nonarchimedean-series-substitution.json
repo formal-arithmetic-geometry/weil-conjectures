@@ -268,5 +268,29 @@
   "group": "Q53",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q53-2a3395d6d (reviewer sub-agent of L); spot-checked: I read the item's statement (the Q153 statement, unchanged), all 8 steps and the 3 new Mathlib leaves in full, plus def-weil-formal-power-series, def-weil-field, the unit sk-d-real-log and blueprint main-20261015 lem-wf-deep-principal-unit-log.proof.md paragraph 3. Step 1: the cofinite criterion gives evaluation, and the bound with C=s>0 gives |G(x)|<=s. Step 2: the M>=1, N, k>=2N estimate on the Cauchy-product coefficient is correct and elementary. Step 3: the product leaf plus regrouping by i+j over finite fibers gives (HJ)(x)=H(x)J(x). Step 4: the induction for the coefficients of G^n is properly set up, and fibers are finite since m_j>=1. Step 5: the finite-exception estimate really uses B_m->0, not only W<=A_n; with B_m constant there would be infinitely many length-1 exceptions. Step 6: composition decay uses no point of norm rho. Steps 7-8: the two regroupings, the induction for G(x)^n via the product leaf and a bijection, and singleton scaling by a_n, all correct. Mathlib sources checked at the lines cited: Nonarchimedean.lean:104 (summable_iff_tendsto_cofinite_zero), :126, :135, :139 (mul_of_nonarchimedean, NonarchimedeanRing section, no completeness needed); Ultra.lean:197 (nonarchimedeanGroup instance) and :347 (norm_tsum_le_of_forall_le_of_nonneg, needs C>=0); Constructions.lean:240 (tsum_fiberwise, needs CompleteSpace and T2); Group.lean:301 (subtype). One caveat: Mathlib has no ready-made NonarchimedeanRing instance for an ultrametric normed field. It is a two-field instance built from Ultra.lean:197, which B8 accepts. I tested the leaves on empty and singleton index sets, empty fibers, a non-surjective p and the trivial absolute value. An rg search of dag/nodes found no duplicates: the nearest, lem-wf-summable-finite-subset-products, lem-rp-nonnegative-summable-comparison and lem-sfb-ultrametric-criterion-natural-norms, are different statements. No new node restates a clause of the item. No off-unit statement or tool_uses, no SGA citation, and blueprint from/via are correct. The target base-change and coefficient-category check does not apply, since this is not a target node. I made no changes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.NonarchimedeanSeriesSubstitution",
+  "declaration": "PowerSeries.nonarchimedean_restricted_subst",
+  "declarations": [
+   "PowerSeries.nonarchimedean_restricted_eval",
+   "PowerSeries.nonarchimedean_restricted_mul",
+   "PowerSeries.nonarchimedean_restricted_subst"
+  ],
+  "file": "lean/Sheaf/RingTheory/NonarchimedeanSeriesSubstitution.lean",
+  "statement": "theorem nonarchimedean_restricted_subst {K : Type u} [NormedField K] [IsUltrametricDist K] [CompleteSpace K] (ρ s : ℝ) (hρ : 0 < ρ) (hs : 0 < s) (F G : PowerSeries K) (hG₀ : constantCoeff G = 0) (hG : IsRestricted ρ G) (hbound : ∀ m : ℕ+, ‖coeff (m : ℕ) G‖ * ρ ^ (m : ℕ) ≤ s) (hF : IsRestricted s F) : IsRestricted ρ (F.subst G) ∧ ∀ (x : K), ‖x‖ ≤ ρ → ‖∑' m : ℕ, coeff m G * x ^ m‖ ≤ s ∧ (∑' k : ℕ, coeff k (F.subst G) * x ^ k) = (∑' n : ℕ, coeff n F * (∑' m : ℕ, coeff m G * x ^ m) ^ n) ∧ HasSum (fun α : (Σ n : ℕ, Fin n → ℕ+) ↦ coeff α.1 F * ∏ j : Fin α.1, (coeff (α.2 j : ℕ) G * x ^ (α.2 j : ℕ))) (∑' k : ℕ, coeff k (F.subst G) * x ^ k) ∧ HasSum (fun n : ℕ ↦ ∑' m : Fin n → ℕ+, coeff n F * ∏ j : Fin n, (coeff (m j : ℕ) G * x ^ (m j : ℕ))) (∑' k : ℕ, coeff k (F.subst G) * x ^ k) ∧ HasSum (fun k : ℕ ↦ ∑' α : {α : (Σ n : ℕ, Fin n → ℕ+) // (∑ j : Fin α.1, (α.2 j : ℕ)) = k}, coeff α.1.1 F * ∏ j : Fin α.1.1, (coeff (α.1.2 j : ℕ) G * x ^ (α.1.2 j : ℕ))) (∑' k : ℕ, coeff k (F.subst G) * x ^ k) ∧ ∀ α : (Σ n : ℕ, Fin n → ℕ+), ‖coeff α.1 F * ∏ j : Fin α.1, (coeff (α.2 j : ℕ) G * x ^ (α.2 j : ℕ))‖ ≤ ‖coeff α.1 F‖ * s ^ α.1",
+  "branch": "newtargets-dag",
+  "by": "NQ",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "The three declarations together state the introductory evaluation convergence and both numbered clauses. Uses Mathlib IsRestricted and subst, with evaluation written directly as tsum. NormedField permits trivial absolute values."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-172d6a12f",
+  "group": "NQ",
+  "result": "pass",
+  "note": "Statement, dependencies, docstrings, edge cases, exact declarations, report sections, and compiler evidence checked; no findings."
  }
 }

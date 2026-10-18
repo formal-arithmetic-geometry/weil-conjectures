@@ -503,5 +503,30 @@
   "group": "Q27",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q27-b2d09518f (reviewer sub-agent of L); spot-checked: I read the whole item: the unchanged statement, all 11 steps, the 5 stmt_deps and the statements of all 24 cited nodes. I also read the parent lem-sfb-dc-hom-preserves (step 3) and the unit sk-def-sfb-dc-restricted-functors. Source: Bhatt–Scholze 1309.1198, Lemma 6.7.11 (support triangle, then i^!=i^*i_*i^!) and Lemma 6.7.13 (filtering down to i_!R, then adjunction). The statement is the R=A, m=0 case of 6.7.13; finite-type schemes over a field are quasi-excellent and ell is invertible. It is not weakened, and the coefficient category is Mod(A_X) with the closed-structure RHom, which step 1 identifies with the ringed-site RHom. All Stacks tags exist: 095E, 09AJ, 09B5, 09AL, 06UQ, 0GMW, 08JB, 08JC, 04JC. No SGA source is cited. Step checks: step 2's local-to-global conversion holds because the gluing node gives actual factorizations and the inverse image of a constant sheaf is constant. Step 3 gets all its weak-Serre hypotheses from step 2. Step 4 refines covers so the matrix entries are scalars. Step 5 is the étale origin node, then thm-dg (any field, ell invertible), then the qcqs D^+ comparison. Step 6 is the BS 6.7.11 support triangle with g^*g_*=id. Step 7's flatness is a sectionwise vector-space argument plus exact sheafification. Step 8's truncation indices (n=-r) are right and the open-then-closed convention is kept. In step 9 I checked the stratum restriction explicitly through U×_S S_b. Step 10 applies stratum-ambient-hom twice, each time with the identity as one factor, which its statement allows. Step 11 is a closed induction. Small cases tested: Spec k with no cd bound; j_!A on G_m⊂A^1; i_*A for a point; empty X; zero complexes. No duplicate: the nearby nodes cor-weil-finite-constructible-hom, thm-sf-hom-ctf, thm-coef-finite-hom and lem-sf-ext-sheaf-constructible are all over F_q-bar, ctf or site-perfect. I accept every declared tool_use as a generic tool. FIX: step 1 used the identification p_T^*\\underline A ≅ A_T (asserted in the statement) with no argument. I added the few-line argument (discrete \\underline A is the sheafified constant presheaf; p_T^* is sheafify∘Lan by sk-def-sfb-pullback-from-point (3)–(4); the comma category has a terminal object, so it is connected and Lan of a constant presheaf is constant), cited sk-def-sfb-pullback-from-point and added it to proof_deps. Maintainer note: the maintainer-owned tool_uses still lists lem-sf-derived-homology-long-exact, which the item no longer cites, so drop it at merge.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FiniteFieldInternalHomFiniteness",
+  "declaration": "AlgebraicGeometry.ProEtale.finiteField_constantModel_internalHom",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.finiteFieldCondensedRing",
+   "AlgebraicGeometry.ProEtale.finiteFieldCondensedRingMonObj",
+   "AlgebraicGeometry.ProEtale.finiteFieldCondensedRingComm",
+   "AlgebraicGeometry.ProEtale.finiteField_constantModel_internalHom"
+  ],
+  "file": "lean/Sheaf/Paper/FiniteFieldInternalHomFiniteness.lean",
+  "statement": "theorem finiteField_constantModel_internalHom (l : ℕ) [Fact l.Prime] (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ l)] (A : Type u) [Field A] [Finite A] [CharP A l] (X : Scheme.{u}) [X.Over (Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] (P Q : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj (finiteFieldCondensedRing A) X))) (hP : constantModelBoundedConstructible (finiteFieldCondensedRing A) X P) (hQ : constantModelBoundedConstructible (finiteFieldCondensedRing A) X Q) : constantModelBoundedConstructible (finiteFieldCondensedRing A) X (((CondensedRing.derivedHom (finiteFieldCondensedRing A) X).obj (op P)).obj Q)",
+  "branch": "newtargets-dag",
+  "by": "Q29",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Uses the recorded finite constant scalar model predicate and ambient Layer-B derived Hom. The three coefficient helpers specialize the recorded continuous-map condensed ring to the discrete topology and its canonical ring structures; their data are real. No finiteness, perfection or separable-closedness assumption on the ground field is imposed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-c1441a8c1",
+  "group": "Q29",
+  "result": "fix",
+  "note": "Wrote review.md and a complete replacement report under fixes/, repairing the missing substantive second reading (H11/H1). Mathematics, dependencies, universes, docstrings and verbatim signature pass; immutable module compiles cleanly through scompile.py. No branch or project clone changed."
  }
 }
