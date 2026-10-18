@@ -17,9 +17,107 @@
   "def-weil-finitely-generated-module",
   "def-weil-pbc-direct-image"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For each $x\\in X$, apply [lem-weil-pbc-finite-etale-etale-local-split] to $f$ and $x$. Obtain an etale neighbourhood $g:U\\to X$ with a point over $x$, a finite set $J$, and $Y_U=Y\\times_XU=\\coprod_{j\\in J}V_j$ with each $V_j\\to U$ an isomorphism. The neighbourhoods for all $x$ form an etale covering, since their images contain their chosen $x$ [def-weil-pbc-etale-site]. Work on each such $U$ separately: neither $|J|$ nor the later constant module values need be independent of $U$.",
+   "uses": [
+    "lem-weil-pbc-finite-etale-etale-local-split",
+    "def-weil-pbc-etale-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 095B, lemma-pushforward-locally-constant, proof, lines 9982-9991 (module clause)."
+   }
+  },
+  {
+   "text": "Put $q:Y_U\\to U$ and $h:Y_U\\to Y$. The morphism $h$ is etale by [lem-weil-pbc-etale-base-change-finite-limits]. Use literal restrictions of module sheaves as in [def-pur-localized-ringed-site], and write $H=F|_{Y_U}$. For every $W\\to U$ in $U_{\\mathrm{et}}$, the direct-image formula [def-weil-pbc-direct-image] gives\n$$((f_*F)|_U)(W)=F(W\\times_XY),\\qquad(q_*H)(W)=F((W\\times_UY_U)\\to Y).$$\nThe universal property [def-pc-fibre-product] identifies the arguments by $(w,(y,u))\\mapsto(w,y)$, with inverse $(w,y)\\mapsto(w,(y,w|_U))$. These maps commute with both projections and every $W'\\to W$, so applying $F$ gives an isomorphism $(f_*F)|_U\\cong q_*H$. Every component is a restriction map of $F$ and is $R$-linear; thus this is an isomorphism of the fixed-coefficient module sheaves. This proves the localization assertion directly, without invoking an abelian-only exchange statement.",
+   "uses": [
+    "lem-weil-pbc-etale-base-change-finite-limits",
+    "def-pur-localized-ringed-site",
+    "def-weil-pbc-direct-image",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 095B, lemma-pushforward-locally-constant, proof, lines 9982-9991 (module clause)."
+   }
+  },
+  {
+   "text": "Let $s_j:U\\to Y_U$ be the inverse of $V_j\\to U$ followed by the inclusion of that component, and put $H_j=H|_{s_j}$. Apply [lem-weil-pbc-direct-image-split-cover-product] with base $U$, source $Y_U$, ring $R$, and sheaf $H$. Its hypotheses are exactly the finite clopen decomposition of Step 1, and its conclusion is the isomorphism\n$$q_*H\\cong\\prod_{j\\in J}H_j.$$\nThe cited statement gives the sectionwise product, including the zero sheaf when $J$ is empty, and does not assume that $R$ is finite.",
+   "uses": [
+    "lem-weil-pbc-direct-image-split-cover-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 095B, lemma-pushforward-locally-constant, proof, lines 9982-9991 (module clause)."
+   }
+  },
+  {
+   "text": "Each $H_j$ is locally constant of finite type directly from [def-weil-pbc-locally-constant-finite-type-modules]: an object etale over $U$ maps etale to $Y$ through the component (etaleness of compositions follows from [lem-weil-pbc-etale-composition-cancellation]), and restricting its covering and trivializations for $F$ gives those for $H_j$. Relocalization is sectionwise restriction [def-pur-localized-ringed-site]. On any object $T\\to U$, choose a trivializing cover for each of the finitely many $H_j$. Iterated fibre products of these covers give a common covering of $T$ [def-weil-pbc-etale-site, lem-weil-pbc-etale-base-change-finite-limits]; this follows by successively pulling back a covering and composing covering families. On each member $W$ all restrictions are constant, say $H_j|_W\\cong\\underline{M_j}_W$ with $M_j$ finitely generated. The same values remain constant on the refinement by [lemma-constructible-pullback-constant], used for the category of $R$-modules. For $J=\\varnothing$ use the identity cover and no module choices.",
+   "uses": [
+    "def-weil-pbc-locally-constant-finite-type-modules",
+    "def-pur-localized-ringed-site",
+    "def-weil-pbc-etale-site",
+    "lem-weil-pbc-etale-base-change-finite-limits",
+    "lemma-constructible-pullback-constant",
+    "lem-weil-pbc-etale-composition-cancellation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 095B, lemma-pushforward-locally-constant, proof, lines 9982-9991 (module clause)."
+   }
+  },
+  {
+   "text": "On any $W$ of Step 4, finite products commute with restriction since both operations evaluate sectionwise (Step 3 and [def-pur-localized-ringed-site]). By [def-weil-pbc-constant-sheaf] a constant module sheaf is the sheafification of its constant module presheaf. The product of the finitely many presheaves with values $M_j$ is the constant presheaf with value $M=\\prod_{j\\in J}M_j$: its sections are $M$ and all restriction maps are identities. Apply the finite-limit preservation in [lem-weil-pbc-site-r-module-presheaf-sheafification-exact] on $W_{\\mathrm{et}}$, with the constant presheaf of rings $R$. It gives\n$$\\prod_{j\\in J}\\underline{M_j}_W\\cong\\underline{\\prod_{j\\in J}M_j}_W.$$\nThis is a module-sheaf isomorphism. For the empty family the terminal presheaf of $R$-modules is zero, so the same formula gives the zero constant sheaf.",
+   "uses": [
+    "def-pur-localized-ringed-site",
+    "def-weil-pbc-constant-sheaf",
+    "lem-weil-pbc-site-r-module-presheaf-sheafification-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 095B, lemma-pushforward-locally-constant, proof, lines 9982-9991 (module clause)."
+   }
+  },
+  {
+   "text": "For each $j$ choose a finite set of generators $m_{j,1},\\ldots,m_{j,r_j}$ of $M_j$. The finite collection of vectors in $M=\\prod_jM_j$ which have $m_{j,a}$ in coordinate $j$ and zero in the others generates $M$: expand each coordinate of a vector in its chosen generators and sum the resulting coordinate vectors. This is finite generation in [def-weil-finitely-generated-module]; for $J=\\varnothing$ the empty set generates $M=0$. Steps 2, 3 and 5 therefore trivialize $(f_*F)|_U$ on the covers of Step 4 with finitely generated module values. Composing those coverings with the covering of $X$ from Step 1 (and restricting to any object of $X_{\\mathrm{et}}$) gives exactly [def-weil-pbc-locally-constant-finite-type-modules] for $f_*F$. If $X$ is empty the empty cover suffices. This argument uses no finiteness of the underlying sets of $R$ or $M_j$ and no Noetherian property.",
+   "uses": [
+    "def-weil-finitely-generated-module",
+    "def-weil-pbc-locally-constant-finite-type-modules",
+    "def-weil-pbc-etale-site"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 095B, lemma-pushforward-locally-constant, proof, lines 9982-9991 (module clause)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-etale-etale-local-split",
+  "def-weil-pbc-etale-site",
+  "lem-weil-pbc-etale-base-change-finite-limits",
+  "def-pur-localized-ringed-site",
+  "def-weil-pbc-direct-image",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-direct-image-split-cover-product",
+  "def-weil-pbc-locally-constant-finite-type-modules",
+  "lemma-constructible-pullback-constant",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "def-weil-pbc-constant-sheaf",
+  "lem-weil-pbc-site-r-module-presheaf-sheafification-exact",
+  "def-weil-finitely-generated-module"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 095B, lemma-pushforward-locally-constant, proof, lines 9982-9991 (module clause)."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -55,10 +153,45 @@
    "results": "{\"t\": \"2026-10-18T20:45:50Z\", \"tool\": \"leansearch\", \"query\": \"A finite etale morphism preserves local constancy of module sheaves under pushforward\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pushforward\", \"AlgebraicGeometry.Scheme.Modules.pushforward\", \"SheafOfModules.pushforward_map_val\", \"SheafOfModules.pushforwardSections\", \"PresheafOfModules.pushforward₀_obj_obj_isModule\", \"PresheafOfModules.pushforward₀_obj\", \"AlgebraicGeometry.Scheme.Modules.pushforward_map_app\", \"SheafOfModules.pushforward_obj_val\"], \"digest\": \"0e7b48a789ba399b\"}",
    "date": "2026-10-18",
    "verdict": "no match: the returned declarations concern condensed modules, topological locally constant functions, algebraic etaleness, rank functions, general pushforward functors or free Yoneda objects; none states finite-etale preservation of local constancy of module sheaves or constructibility of etale sum extension."
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*etale.*(pushforward|lowerStar)|locallyConstant.*(pushforward|lowerStar)",
+   "results": "{\"t\": \"2026-10-18T21:18:43Z\", \"tool\": \"grep\", \"query\": \"finite.*etale.*(pushforward|lowerStar)|locallyConstant.*(pushforward|lowerStar)\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: no scheme finite-etale local-constancy pushforward declaration matched this pattern"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Direct image along a finite covering preserves locally constant sheaves of modules of finite type",
+   "results": "{\"t\": \"2026-10-18T21:18:44Z\", \"tool\": \"leansearch\", \"query\": \"Direct image along a finite covering preserves locally constant sheaves of modules of finite type\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CompHausLike.LocallyConstantModule.functor\", \"CondensedSet.LocallyConstant.functorFullyFaithful\", \"CompHausLike.LocallyConstant.functor\", \"SheafOfModules.IsFiniteType\", \"LightCondensed.lanLightCondSet\", \"CompHausLike.LocallyConstantModule.functor_map_val\", \"CategoryTheory.preservesFiniteLimits_presheafToSheaf\", \"SheafOfModules.IsFiniteType.mk\"], \"digest\": \"220a4207c13fb5c5\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: condensed locally constant functors, the IsFiniteType predicate and sheafification left exactness do not state the required preservation theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, ModuleCat",
+   "results": "{\"t\": \"2026-10-18T21:18:44Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Sheaf, ModuleCat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"SheafOfModules.evaluation\", \"SheafOfModules.forgetToSheafModuleCat\", \"SheafOfModules.forgetToSheafModuleCat_obj_obj\", \"SheafOfModules.forgetToSheafModuleCat_map_hom\", \"SheafOfModules.unitHomEquiv_apply_coe\", \"SheafOfModules.forgetToSheafModuleCatOfIso\", \"SheafOfModules.evaluationPreservesLimitsOfSize\", \"SheafOfModules.Finite.evaluationPreservesFiniteLimits\"], \"digest\": \"c9ddd5be79904bc0\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: general SheafOfModules evaluation/forgetful declarations, not preservation of local constancy under a finite etale map"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pushforward under a finite locally trivial covering is a finite product of locally constant module sheaves",
+   "results": "{\"t\": \"2026-10-18T21:18:44Z\", \"tool\": \"leanfinder\", \"query\": \"Pushforward under a finite locally trivial covering is a finite product of locally constant module sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CompHausLike.LocallyConstantModule.functor\", \"CompHausLike.LocallyConstantModule.functor_obj_val\", \"CompHausLike.LocallyConstantModule.functor_map_val\", \"LightCondMod.LocallyConstant.functor\", \"CondensedMod.LocallyConstant.functorToPresheaves\", \"CompHausLike.LocallyConstantModule.functorToPresheaves\", \"LightCondMod.LocallyConstant.functorToPresheaves\", \"CompHausLike.LocallyConstantModule.functorToPresheaves_obj_obj_isModule\"], \"digest\": \"f8b344b4ebe5c12a\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: condensed/light condensed locally constant module functors, not arbitrary-scheme small-etale finite-cover direct image"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite etale direct image of a locally constant sheaf of finitely generated modules over an arbitrary commutative ring is locally constant of finite type",
+   "results": "{\"t\": \"2026-10-18T21:18:45Z\", \"tool\": \"leanfinder\", \"query\": \"Finite etale direct image of a locally constant sheaf of finitely generated modules over an arbitrary commutative ring is locally constant of finite type\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CompHausLike.LocallyConstantModule.functor\", \"LightCondMod.LocallyConstant.functor\", \"CondensedMod.LocallyConstant.functor\", \"CompHausLike.LocallyConstantModule.functor_obj_val\", \"CompHausLike.LocallyConstantModule.functorToPresheaves_obj_obj_isModule\", \"LightCondMod.LocallyConstant.instFaithfulModuleCatSheafLightProfiniteCoherentTopologyConstantSheaf\", \"CompHausLike.LocallyConstantModule.functor_map_val\", \"LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat\"], \"digest\": \"e8a7af8d52e5fec8\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: condensed/light condensed locally constant module functors, not arbitrary-scheme small-etale finite-cover direct image"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-noetherian-etale-sum-constructible",
@@ -84,5 +217,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-finite-etale-pushforward-finite-type",
+  "worker": "stage1",
+  "summary": "Expanded Stacks 095B along its etale-local splitting and finite-product argument, reusing the existing pointwise finite-etale splitting, module-valued split direct-image product, constant-pullback and arbitrary-site fixed-R-module sheafification nodes. Localization is proved on sections with its explicit inverse, and finite generation by coordinate generators. No new nodes and no statement change. Checked arbitrary rings, varying degree and the empty product.",
+  "blueprint": "Auxiliary Stacks 095B input in 03S8 for the finite affine generators in the proof of Stacks 03TT, reached from lem-per-artin-gabber-affine-curve through the coefficient-comparison flat-model chain recorded in blueprint.from. The six steps realize the three sentences of the 095B proof: etale localization, local disjoint union, and finite products. No change to the unit route.",
+  "tool_uses": [
+   {
+    "node": "lemma-constructible-pullback-constant",
+    "why": "Generic constant-sheaf pullback for R-modules keeps the module value on each refinement; used only as a tool below the unit, not to replace a perverse/Fourier step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lemma-constructible-pullback-constant"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q45-83eb4e957",
+  "group": "Q45",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q45-83eb4e957 (reviewer sub-agent of L); spot-checked: Read Stacks 095B (etale-cohomology.tex lines 9972-9991, statement and proof). The item matches the source's module clause exactly: f finite étale, R any commutative ring, F locally constant of finite type in the sense of def-weil-pbc-locally-constant-finite-type-modules. The statement is unchanged from live, and the live node is still unsplit. The delivery has no new nodes and no cycle (the 343-node DFS never reaches the item), cites no SGA, and every step is under 2000 characters. Step 1: lem-weil-pbc-finite-etale-etale-local-split, with one neighbourhood per point; these form a jointly surjective cover and the degree may vary. Step 2: elementary localization of f_* through the fibre-product isomorphism W×_U(U×_XY)≅W×_XY with an explicit inverse; R-linearity gives R_U-linearity. Step 3: lem-weil-pbc-direct-image-split-cover-product, whose hypotheses are exactly Step 1's output; it works for any Λ and gives zero for J=∅. Step 4: restriction of trivializations through étale composites, a common refinement from finite fibre products, and lemma-constructible-pullback-constant. That node is in route unit sk-thm-p1 and closed in slopmaster2, so the declared tool_use is harmless and accepted. Step 5: ∏ of constant presheaves is the constant presheaf with value ∏M_j, then clause (2) of lem-weil-pbc-site-r-module-presheaf-sheafification-exact (sheafification commutes with finite limits). Advisory only: \\underline M is cited via def-weil-pbc-constant-sheaf, while the definition uses the module sheafification of def-weil-pbc-constant-coefficient-scalar-extension; the two agree by the standard identification of \\underline R-module sheaves with R-module-valued sheaves. Step 6: coordinate generators give finite generation, and composing with Step 1's cover gives local constancy. Edge cases checked: J=∅, X=∅, R=0, ℤ², varying degree, infinite R. The only 095B duplicate candidate, lem-weil-pbc-etale-finite-pushforward-locally-constant, needs Λ finite and is a special case."
  }
 }
