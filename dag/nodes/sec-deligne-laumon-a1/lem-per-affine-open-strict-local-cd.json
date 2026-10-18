@@ -158,5 +158,23 @@
   "group": "NA",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NA-7e05f1e81 (reviewer sub-agent of L); spot-checked: Read in full: the item, the new node lem-per-affine-open-strict-local-cd-constructible, every cited statement, the unit route, and the source ILO (arXiv 1207.3648) Exposé XV 1.1.2–1.2.6 (printed pp. 219–220). The item statement is unchanged from live. Mathematics accepted. The new node follows from ILO XV Cor. 1.2.2 applied to the affine, finite-type open immersion V→X: there f_*δ_X = δ_X|_V ≤ d. Excellent implies quasi-excellent, Λ=Z/ℓ^n has ℓ^n invertible, and the constructibility notion is the same one the colimit node uses. Steps 2–4 are correct: filtered colimit of constructible sheaves on the qcqs affine V, cohomology commuting with filtered colimits (module form), and the forget comparison; Step 4 is elementary. Edge cases checked: d=0, V empty, the generic point of a strictly henselian DVR (cd_ℓ=1), and non-constructible M. No duplicate found (grep for XV 1.2.x, affine Lefschetz, Gabber and cd with strictly local; the closest nodes are punctured-support-cohomological-bound, strict-local-etale-dimension-bounds and the trf nearby-cycle bound). The units sk-thm-p1 and sk-prop-h2 are in the route, so no tool_uses are needed. The citer strict-local-etale-dimension-bounds Steps 6 and 10 are covered. FIX: (1) the new node's source.place and blueprint.from.place, and the item's Step 1 source, named XV 1.2.4 ('equivalent to 1.2.2 for constructible'). 1.2.4 is the constant Z/n case only; the constructible statement comes directly from 1.2.2 for the open immersion, so the places now cite 1.2.2 with the δ computation. (2) Item Step 1 used C without introducing it; it is now introduced. No SGA is cited and no statement changed.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineOpenStrictLocalCohomology",
+  "declaration": "AlgebraicGeometry.Etale.isZero_cohomology_affineOpen_of_strictlyHenselian",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineOpenStrictLocalCohomology.lean",
+  "statement": "theorem isZero_cohomology_affineOpen_of_strictlyHenselian (X : Scheme.{u}) [IsAffine X] [IsNoetherianRing Γ(X, ⊤)] [IsStrictlyHenselianLocalRing Γ(X, ⊤)] (hX : IsExcellent Γ(X, ⊤)) (ℓ n d : ℕ) (hℓ : ℓ.Prime) (hn : 1 ≤ n) (hunit : IsUnit (ℓ : Γ(X, ⊤))) (hd : ringKrullDim Γ(X, ⊤) = (d : WithBot ℕ∞)) {V : Scheme.{u}} [IsAffine V] (j : V ⟶ X) [IsOpenImmersion j] (M : Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod (ℓ ^ n))))) (q : ℕ) (hq : d < q) : IsZero ((cohomology AddCommGrpCat.{u + 1} V (q : ℤ)).obj ((DerivedCategory.singleFunctor _ 0).obj ((sheafCompose V.smallEtaleTopology (forget₂ (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod (ℓ ^ n)))) AddCommGrpCat.{u + 1})).obj M)))",
+  "branch": "newtargets-dag",
+  "by": "Q20",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c28b2dda7",
+  "group": "Q20",
+  "result": "pass",
+  "note": "Every node clause matches the Lean: affine X with Noetherian, strictly henselian local, excellent global ring; ℓ prime; n≥1; ℓ a unit; ringKrullDim = d; arbitrary affine open V via an open immersion; arbitrary M in the recorded ModuleCat.{u+1} (ULift (ZMod (ℓ^n))) encoding; q>d; IsZero of Etale.cohomology AddCommGrpCat.{u+1} of the forgotten sheaf in degree 0 (the recorded rendering). Edge cases d=0, empty V, V=X, DVR generic open, q=0 and n=0 checked. Only the item's lean field changed; statement verbatim; docstrings carry the source place, blueprint id and Steps 1-4; no line over 100; no duplicate found in side or slopmaster2. nt_compile --json clean in 4.8 s. Advisory: proof-only plain imports; the citer phrases strict locality through Spec R (stage-3 transport); the constructible sibling has no Lean record yet."
  }
 }

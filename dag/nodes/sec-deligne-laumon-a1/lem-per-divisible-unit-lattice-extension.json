@@ -208,5 +208,23 @@
   "group": "NX",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NX-0c01647c7 (reviewer sub-agent of L); spot-checked: I read ILO XVI Lemme 3.6.4 and its proof (printed pp.252-253). The item's statement is unchanged and matches the lemma hypothesis by hypothesis: n>=1, L free of finite type, phi arbitrary, D n-divisible, B/D torsion-free, cokernel finite and killed by n. The 8 steps are correct. Step 1 sets up strong induction on |Q|. Step 2 chooses the order d of q (d divides n) and a with f(a)=dc. Step 3 corrects b by e*v with nv=u, so db=phi(a). Step 4 derives the relations dx+ka=0 <=> (x,k)=(-ta,dt) from torsion-freeness of C and of L. Step 5 gets L1=dL+Za free from the cited statement of lem-weil-subgroup-finite-free-abelian-group-free (Mathlib leaf basisOfPid). Step 6 shows phi1 is well defined, phi1 j=phi and L1/dL is killed by d. Step 7 gives the cokernel Q/<q> of order |Q|/d. Step 8 shows exponent s+1 kills G/i(L). Step 8's computation of the composite exponent is right. The concrete subgroup dL+Za is a valid realization of the source's pushout. Small cases checked: n=1; the non-injective map Z^2 to Z, (x,y) to 2x; a nontrivial 2-divisible D=Z/3 inside Z+Z/3; composite n. No new nodes. The only related node, lem-per-kato-lattice-chart-realization, takes this conclusion as a hypothesis and is not a duplicate. No SGA is used and there is no cycle. The live copy is still unsplit. Minor: the report cites a citations.json that does not exist; this is not a DAG fault."
+ },
+ "lean": {
+  "module": "Sheaf.GroupTheory.DivisibleUnitLatticeExtension",
+  "declaration": "AddCommGroup.divisible_unit_lattice_extension",
+  "file": "lean/Sheaf/GroupTheory/DivisibleUnitLatticeExtension.lean",
+  "statement": "theorem divisible_unit_lattice_extension (n : ℕ) (hn : 1 ≤ n) (L : Type u) [AddCommGroup L] [Module.Free ℤ L] [Module.Finite ℤ L] (B : Type v) [AddCommGroup B] (D : AddSubgroup B) (φ : L →+ B) (hD : ∀ d : D, ∃ e : D, n • e = d) [IsAddTorsionFree (B ⧸ D)] [Finite ((B ⧸ D) ⧸ ((QuotientAddGroup.mk' D).comp φ).range)] (hQ : ∀ q : (B ⧸ D) ⧸ ((QuotientAddGroup.mk' D).comp φ).range, n • q = 0) : ∃ (G : Type u) (_ : AddCommGroup G), Module.Free ℤ G ∧ Module.Finite ℤ G ∧ ∃ (i : L →+ G) (h : G →+ B), Function.Injective i ∧ (∃ s : ℕ, ∀ q : G ⧸ i.range, n ^ s • q = 0) ∧ h.comp i = φ ∧ Function.Surjective ((QuotientAddGroup.mk' D).comp h)",
+  "branch": "newtargets-dag",
+  "by": "Q74",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4fc15c601",
+  "group": "Q74",
+  "result": "pass",
+  "note": "Lean statement of AddCommGroup.divisible_unit_lattice_extension matches node and ILO XVI Lemme 3.6.4 (pdftotext, pp.252-253) clause by clause: n≥1, L Module.Free+Finite ℤ (def-weil-pbc-free-module = Mathlib Module.Free), arbitrary φ, D n-divisible with witness in D, IsAddTorsionFree (B⧸D), finite cokernel killed by n; conclusion ∃ G:Type u free finite, i injective, ∃ s killing G⧸i.range by n^s, h∘i=φ, B→B/D surjective. Universe choice harmless; no extra hypotheses; statement verbatim, only lean field changed vs live node. Edge cases n=1, rank 0, D=0/B, non-injective φ covered. No duplicate in Mathlib/slopmaster2/side Sheaf. Docstrings carry source place, blueprint tag and 8 proof steps; proof is sorry. nt_compile --json clean 1.7 s exit 0; broken-copy control fails as expected. Advisory: plain FreeModule.PID import kept for stage-3 proof dep."
  }
 }
