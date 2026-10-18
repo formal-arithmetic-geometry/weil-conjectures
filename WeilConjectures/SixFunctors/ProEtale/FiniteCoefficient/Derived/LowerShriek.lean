@@ -147,7 +147,8 @@ namespace ProEtale
 /-- The derived lower shriek `Rf_! : D(X_proét) ⥤ D(Y_proét)` along a morphism `f : X ⟶ Y`
 admitting a compactification, on the unbounded derived categories of pro-étale sheaves: the
 functor `rightDerivedLowerShriekOfCompactification` attached to the chosen compactification
-`HasCompactification.compactification f`. -/
+`HasCompactification.compactification f`. This is blueprint
+`def-compact-support-direct-image-detailed`. -/
 noncomputable def rightDerivedLowerShriek :
     DerivedCategory (Sheaf (Scheme.ProEt.topology X) A) ⥤
       DerivedCategory (Sheaf (Scheme.ProEt.topology Y) A) :=
