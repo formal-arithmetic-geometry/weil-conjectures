@@ -23,9 +23,154 @@
   "def-per-potential-dualizing",
   "def-pc-fibre-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "We work componentwise with smooth dimension d and immersion codimension c. Smooth base change preserves d, and smooth maps are flat. Consequently the flat-base-change assertion of the immersion class calculus applies: j is regular of codimension c on its nonempty components and, writing c_i:Ri_*Λ_X→Λ_Y(c)[2c] and c_j:Rj_*Λ_X'→Λ_Y'(c)[2c] for the supported maps, closed-immersion exchange gives q^*c_i=c_j. These are maps with support, not their images in unsupported cohomology. The shifts of the two desired composites are both 2(d-c).",
+   "uses": [
+    "lem-sbc-smooth-relative-dimension-permanence",
+    "lem-pc-smooth-flat",
+    "lem-per-immersion-class-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVI, Lemma 2.5.7, supported-class pullback assertion"
+   }
+  },
+  {
+   "text": "For a smooth h of dimension r put T_hM=h^*M(r)[2r], and let t_{h,M}:Rh_!T_hM→M be the transpose of γ_{h,M}. It is natural in M. In a cartesian square with base b, compact-support exchange gives b^*Rh_!T_hM≅Rh'_!T_h'b^*M. Under this identification one has b^*t_{h,M}=t_{h',b^*M}: the exceptional exchange β is defined by transposing the pulled-back exceptional counit, and the base-change compatibility of γ identifies β∘b'^*γ_{h,M} with γ_{h',b^*M}. Apply the two adjunction hom bijections to this last equality; the defining mate formula gives exactly the asserted trace equality. The identity and composition comparisons here are the coherent compact-support comparisons; their mates paste by the stated mate-pasting formula. This uses the specified ordinary diagonal/deformation orientation, including its Noetherian-base-change clause.",
+   "uses": [
+    "lem-per-ordinary-smooth-orientation",
+    "prop-asd-smooth-base-change",
+    "thm-cbc-finite-torsion",
+    "def-weil-pbc-adjunction-mate",
+    "lem-weil-pbc-mate-pasting",
+    "lem-amb-etale-compact-comparisons"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVI, Lemma 2.5.7, trace input replaced by the diagonal/affine ordinary adjunction and its counit"
+   }
+  },
+  {
+   "text": "Take M=Ri_*Λ_X in Step 2 and b=i. The q-square has q^*Ri_*Λ_X≅Rj_*Λ_X' by compact-support base change for the closed immersion i, so Rq_!T_qM≅Ri_*Rq'_!Λ_X'(d)[2d]. Moreover i^*Ri_*Λ_X≅Λ_X. Thus Step 2 says that applying i^* to t_{q,Ri_*Λ_X} gives t_{q',Λ_X}. Pullback by i detects equality of maps between objects Ri_*A and Ri_*B: on sheaves, closed direct image is fully faithful with i^{-1}i_*≅id; its exactness and exact inverse image give the same adjunction and counit on complexes and on their derived localizations. The assertions extend to constant-Λ modules by carrying the action along the same maps. Hence, under the displayed coherent comparisons, t_{q,Ri_*Λ_X}=Ri_*t_{q',Λ_X}. All uses of compact-support exchange have bounded-below inputs: the constants, their finite twists and shifts, and the exact closed direct images.",
+   "uses": [
+    "thm-cbc-finite-torsion",
+    "lem-kun-04ca",
+    "lem-pur-etale-supported-kernel-adjunction",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-amb-etale-compact-comparisons"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVI, Lemma 2.5.7: base change of the trace; direct ordinary-etale mate calculation"
+   }
+  },
+  {
+   "text": "Apply naturality of t_{q,-} to c_i:Ri_*Λ_X→Λ_Y(c)[2c]. By Step 1 its pulled-back map is c_j. By Step 3 its source counit is Ri_*t_{q',Λ}. Hence\n$$t_{q,Λ_Y(c)[2c]}\\circ Rq_!(c_j(d)[2d])=c_i\\circ Ri_*t_{q',Λ}.$$\nBoth sides have source R(qj)_!Λ_X'(d)[2d] and target Λ_Y(c)[2c]. Transpose this equality through R(qj)_!⊣(qj)^!= (iq')^! and undo the common twist (c)[2c]. The left transpose is j^!Cl_q∘Cl_j(d)[2d]; the right transpose is q'^!Cl_i∘Cl_{q'}(-c)[-2c], because a composite adjunction's hom bijection is the composite of its two hom bijections. These are the required star products. All shifts used for the fundamental classes are even, so there is no Koszul sign.",
+   "uses": [
+    "lem-per-immersion-class-calculus",
+    "def-weil-pbc-composite-adjunction",
+    "lem-amb-etale-compact-comparisons"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVI, Lemma 2.5.7: the two trace transposes give the two Gysin products"
+   }
+  },
+  {
+   "text": "A section s of separated p is closed. Apply the local-coordinate theorem for a closed immersion between smooth S-schemes to S→P, with S→S the identity. Since V=S×_PU is etale over A^a_S and open in S, a=0 on nonempty V, and since U is smooth of dimension d and etale over A^b_S, b=d. So, after shrinking S to an affine open and U to an affine neighbourhood of s(S) over it (affine over an affine base), there is a separated etale chart e:U→A^d_S with e∘s=0 and e^{-1}(0)=s(S) scheme-theoretically. Equivalently start with a smooth chart, subtract the section's coordinate functions, and remove the complementary clopen component of e^{-1}(0); the etale-section lemma ensures that this removal is possible. The coordinate theorem says that the pulled-back d coordinates form a regular sequence. Thus s is regular of codimension d, and, e being flat with e^{-1}(0)=s(S), the flat-base-change clause of the immersion class calculus identifies e^*c_0 with c_s for the zero section 0:S→A^d_S. U and A^d_S are again regular affine Noetherian excellent, so the first identity (Steps 1-4) applies to the etale map e (dimension 0) and the zero section.",
+   "uses": [
+    "lem-weil-pbc-section-separated-closed-immersion",
+    "lem-pur-smooth-pair-local-coordinates",
+    "lem-weil-pbc-etale-section-clopen-immersion",
+    "lem-per-immersion-class-calculus",
+    "lem-sbc-smooth-relative-dimension-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVI, Lemma 2.5.8: reduction to an etale chart of affine space"
+   }
+  },
+  {
+   "text": "Compute first for q:A^1_S→S and its zero section z. Let j:A^1_S↪P^1_S and r:P^1_S→S; write zbar=jz. Under the supported Kummer construction the map c_zbar:Rzbar_*Λ→Λ_{P^1}(1)[2] has c_zbar∘u=c_1(O(zbar))=c_1(O(1)) (the section is cut out by one homogeneous coordinate, whose two-chart transition is that of O(1)), where u:Λ_{P^1}→Rzbar_*Λ is the inverse-image/direct-image unit. After Rr_*, composing u with the unit Λ_S→Rr_*Λ_{P^1} gives the identity on Λ_S, since rzbar=1_S and the units compose. Therefore Rr_*c_zbar is exactly h:Λ_S→Rr_*Λ(1)[2] in the projective-line adjunction. Its trace is t_rh=1 by that node's normalization. Restriction of this adjunction through j_!⊣j^* defines the affine-line adjunction; the supported Kummer class restricts to c_z. The composite counit formula consequently gives t_q∘Rq_!c_z=1. By the affine-line normalization of the ordinary smooth orientation (integration sends c_1(O(1)) to 1, the affine-line trace being the restriction of the projective-line one), Cl_q=γ_{q,Λ} is the transpose of this counit t_q. Hence, transposing as in Step 4 under R(qz)_!⊣(qz)^!=id, Cl_q⋆Cl_z=1.",
+   "uses": [
+    "lem-asd-ordinary-supported-kummer",
+    "lem-asd-ordinary-finite-p1-adjunction",
+    "lem-amb-affine-space-top-trace",
+    "lem-per-immersion-class-calculus",
+    "def-weil-pbc-composite-adjunction",
+    "lem-per-ordinary-smooth-orientation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVI, Lemma 2.5.10 and the one-dimensional case of Lemma 2.5.9, using the ordinary P1 normalization"
+   }
+  },
+  {
+   "text": "Claim: for every d≥0 and every base T as in the statement, Cl_{p_d}⋆Cl_{z_d}=1 for p_d:A^d_T→T and its zero section z_d. Base d=0: both maps are identities, the orientation is the identity inverse-image comparison and the class of the identity is the identity (c=0 case). Step d≥1: write A^d_T=A^1_{A^{d-1}_T}, with π:A^d_T→A^{d-1}_T forgetting the last coordinate and z':A^{d-1}_T→A^d_T its zero section, so p_d=p_{d-1}π and z_d=z'z_{d-1}. The composition clause of the smooth orientation (for affine space the ordered composite of affine-line orientations) gives Cl_{p_d}=Cl_{p_{d-1}}⋆Cl_π. The flag-product assertion of the immersion class calculus, for the flag cutting x_d first, gives c_{z_d}=c_{z'}∘Rz'_*(c_{z_{d-1}}) up to the Tate shift; transposing through the composite adjunction gives Cl_{z_d}=Cl_{z'}⋆Cl_{z_{d-1}}. The law ⋆ is associative by functoriality of the exceptional pullbacks and associativity of the compact-support composition isomorphisms. Thus Cl_{p_d}⋆Cl_{z_d}=Cl_{p_{d-1}}⋆(Cl_π⋆Cl_{z'})⋆Cl_{z_{d-1}}. Step 6 over the base A^{d-1}_T gives Cl_π⋆Cl_{z'}=1, and the induction hypothesis gives the claim. This uses only the flag-product assertion of the immersion class calculus, not the factorization independence or composition theorem for arbitrary regular-scheme maps.",
+   "uses": [
+    "lem-per-immersion-class-calculus",
+    "lem-per-ordinary-smooth-orientation",
+    "lem-amb-affine-space-top-trace",
+    "def-weil-pbc-composite-adjunction",
+    "lem-amb-etale-compact-comparisons"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVI, Lemma 2.5.9: induction through the ordered coordinate flag"
+   }
+  },
+  {
+   "text": "On each neighbourhood of Step 5, etale locality replaces P by U: (p|_U)^!=u^*p^! and s^! is computed on U, and the smooth orientation and the immersion class commute with this open restriction. There p|_U=qe with q=p_d:A^d_S→S. The composition clause of the smooth orientation, with its d=0 normalization for e (the etale inverse-image comparison), gives Cl_{p|_U}=Cl_q⋆Cl_e. Apply the first identity (Steps 1-4) to the cartesian square of the etale map e over the zero section 0:S→A^d_S: since e^{-1}(0)=s(S), the base-changed immersion is s and the base-changed smooth map is the identity of S. So Cl_e⋆Cl_s=Cl_0⋆Cl_{1_S}=Cl_0. By associativity of ⋆ and Step 7, Cl_p⋆Cl_s=Cl_q⋆Cl_e⋆Cl_s=Cl_q⋆Cl_0=1 on each base neighbourhood. These composites are endomorphisms of the degree-zero constant sheaf Λ_S: the connective-single Hom comparison identifies their maps with ordinary sheaf maps, and such a map is determined by the image of its unit section, which is a section of Λ_S. Equality of such sections can be checked on an open cover. Thus the local equalities give Cl_p⋆Cl_s=1 globally. The supported Kummer and diagonal/deformation normalizations were retained throughout.",
+   "uses": [
+    "lem-amb-etale-adjoint-locality",
+    "lem-per-ordinary-smooth-orientation",
+    "lem-per-immersion-class-calculus",
+    "lem-amb-etale-compact-comparisons",
+    "lem-sc-connective-single-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVI, Lemma 2.5.8: descent of the local section calculation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-adjunction-mate",
+  "def-weil-pbc-composite-adjunction",
+  "lem-amb-affine-space-top-trace",
+  "lem-amb-etale-adjoint-locality",
+  "lem-amb-etale-compact-comparisons",
+  "lem-asd-ordinary-finite-p1-adjunction",
+  "lem-asd-ordinary-supported-kummer",
+  "lem-kun-04ca",
+  "lem-pc-smooth-flat",
+  "lem-per-immersion-class-calculus",
+  "lem-per-ordinary-smooth-orientation",
+  "lem-pur-etale-supported-kernel-adjunction",
+  "lem-pur-smooth-pair-local-coordinates",
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "lem-sc-connective-single-hom",
+  "lem-weil-pbc-etale-section-clopen-immersion",
+  "lem-weil-pbc-mate-pasting",
+  "lem-weil-pbc-section-separated-closed-immersion",
+  "prop-asd-smooth-base-change",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "thm-cbc-finite-torsion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose XVI, Lemmas 2.5.7-2.5.10; ordinary diagonal-normalized adjunction replaces the trace input"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -82,10 +227,52 @@
    "results": "[grep] OK 3 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Canonical.lean\", \"line\": \"17\", \"text\": \"A sieve `S` on `X` is covering for `finestTopologySingle P` iff\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Canonical.lean\", \"line\": \"59\", \"text\": \"def finestTopologySingle (P : Cᵒᵖ ⥤ Type w) : GrothendieckTopology C where\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Canonical.lean\", \"line\": \"83\", \"text\": \"  sInf (finestTopologySingle '' Ps)\"}\n",
    "date": "2026-10-18",
    "verdict": "no match: hits concern scheme maps, regular-sequence preservation, field Kummer theory, or unrelated sections; none is the stated supported etale Gysin identity"
+  },
+  {
+   "tool": "grep",
+   "query": "Gysin|gysin|fundamentalClass|smooth.*section|section.*smooth",
+   "results": "{\"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Normalization.lean\"]}",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Gysin class of a regular immersion commutes with a smooth Cartesian base change and the Gysin class of a section composed with the smooth projection is identity",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.pullbackAwayιIso\", \"AlgebraicGeometry.Proj.pullbackAwayιIso_hom_awayι\", \"AlgebraicGeometry.IsImmersion.isPullback_toImage_liftCoborder\", \"AlgebraicGeometry.Scheme.Hom.liftCoborder_ι_assoc\", \"AlgebraicGeometry.liftCoborder_app\", \"AlgebraicGeometry.Proj.pullbackAwayιIso_hom_SpecMap_awayMap_left\", \"AlgebraicGeometry.Proj.pullbackAwayιIso_hom_SpecMap_awayMap_right\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_ofPointTensor_SpecTensorTo\"]}",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Gysin, fundamental class, smooth section, regular immersion",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"loogle: <input>:1:19: expected end of input\", \"top\": []}",
+   "date": "2026-10-18",
+   "verdict": "query syntax rejected; replaced by the valid quoted Gysin search"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Gysin class of a regular immersion commutes with a smooth Cartesian base change and the Gysin class of a section composed with the smooth projection is identity",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsImmersion.isStableUnderBaseChange\", \"AlgebraicGeometry.IsPreimmersion.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.IsClosedImmersion.isStableUnderBaseChange\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange\", \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"AlgebraicGeometry.isOpenImmersion_stableUnderBaseChange\", \"AlgebraicGeometry.Scheme.Hom.app_appIso_inv_assoc\", \"AlgebraicGeometry.instHasOfPostcompPropertySchemeIsOpenImmersionOfIsStableUnderBaseChange\"]}",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Composition of an etale smooth purity orientation with a supported regular embedding fundamental class is compatible with pullback",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.pullbackAwayιIso_hom_awayι\", \"AlgebraicGeometry.IsImmersion.isPullback_toImage_liftCoborder\", \"AlgebraicGeometry.Scheme.Hom.liftCoborder_ι_assoc\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"Algebra.etaleLocus_eq_compl_support\", \"AlgebraicGeometry.liftCoborder_app\", \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_symm_D_algebraMap\"]}",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Gysin\"",
+   "results": "{\"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.finestTopologySingle\"]}",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-regular-gysin-calculus",
@@ -97,7 +284,7 @@
  "blueprint": {
   "from": {
    "node": "lem-per-artin-gabber-affine-curve",
-   "place": "Proof Step 3, dimension-normalized Verdier duality over the arbitrary base field: the regular-affine Gysin normalization used in the finite-type residue-field construction",
+   "place": "Proof Step 3 (the greater-than-or-equal direction), Verdier duality: regular-affine Gysin normalization used by the arbitrary-field dualizing construction; specifically the smooth-square and section identities in the regular Gysin calculus",
    "via": [
     "lem-per-regular-gysin-calculus",
     "lem-per-potential-extraordinary-pullback",
@@ -107,5 +294,84 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-per-smooth-immersion-interchange",
+  "worker": "stage1",
+  "summary": "Eight explicit steps give the supported-class trace naturality square, its two exceptional transposes, a regular section chart, the P1 Kummer normalization, coordinate induction and open-cover descent. Replaced the source trace input by the existing ordinary diagonal/affine adjunction route; avoided the parent regular-Gysin composition theorem to prevent circularity.",
+  "blueprint": "Supports Step 3 (Verdier duality) of lem-per-artin-gabber-affine-curve through the regular-affine Gysin normalization. Steps 1-4 prove the smooth-square identity; Steps 5-8 prove the section identity using the prescribed diagonal/deformation orientation. This refines the ancestor proof below its unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-amb-affine-space-top-trace",
+    "why": "the affine adjunction obtained by restricting that P1 adjunction and iterating the coordinate tower; a generic tool absent from the perverse-heart unit itself."
+   },
+   {
+    "node": "lem-amb-etale-adjoint-locality",
+    "why": "ordinary exceptional locality through etale charts; a generic tool absent from the perverse-heart unit itself."
+   },
+   {
+    "node": "lem-amb-etale-compact-comparisons",
+    "why": "coherent bounded-below compact-support composition comparisons; a generic tool absent from the perverse-heart unit itself."
+   },
+   {
+    "node": "lem-asd-ordinary-finite-p1-adjunction",
+    "why": "the explicit ordinary projective-line adjunction normalized by t_qh=1; a generic tool absent from the perverse-heart unit itself."
+   },
+   {
+    "node": "lem-asd-ordinary-supported-kummer",
+    "why": "the supported Cartier class and its unsupported Kummer first Chern image; a generic tool absent from the perverse-heart unit itself."
+   },
+   {
+    "node": "lem-kun-04ca",
+    "why": "closed etale sheaf equivalence with supported sheaves and inverse i^{-1}; a generic tool absent from the perverse-heart unit itself."
+   },
+   {
+    "node": "lem-pur-etale-supported-kernel-adjunction",
+    "why": "exactness of closed direct image, extending the closed sheaf equivalence to complexes; a generic tool absent from the perverse-heart unit itself."
+   },
+   {
+    "node": "lem-pur-smooth-pair-local-coordinates",
+    "why": "regular-sequence coordinates on a smooth pair, specialized to a smooth section; a generic tool absent from the perverse-heart unit itself."
+   },
+   {
+    "node": "lem-sbc-smooth-relative-dimension-permanence",
+    "why": "the unchanged relative dimension of a smooth base change; a generic tool absent from the perverse-heart unit itself."
+   },
+   {
+    "node": "lem-sc-connective-single-hom",
+    "why": "identifying degree-zero derived maps of constant sheaves with ordinary sheaf maps; a generic tool absent from the perverse-heart unit itself."
+   },
+   {
+    "node": "prop-asd-smooth-base-change",
+    "why": "the precise counit-transposed exceptional exchange, so trace base change is an equality of maps; a generic tool absent from the perverse-heart unit itself."
+   },
+   {
+    "node": "thm-cbc-finite-torsion",
+    "why": "bounded-below compact-support exchange and its pasting, including closed direct-image exchange; a generic tool absent from the perverse-heart unit itself."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-amb-affine-space-top-trace",
+  "lem-amb-etale-adjoint-locality",
+  "lem-amb-etale-compact-comparisons",
+  "lem-asd-ordinary-finite-p1-adjunction",
+  "lem-asd-ordinary-supported-kummer",
+  "lem-kun-04ca",
+  "lem-pur-etale-supported-kernel-adjunction",
+  "lem-pur-smooth-pair-local-coordinates",
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "lem-sc-connective-single-hom",
+  "prop-asd-smooth-base-change",
+  "thm-cbc-finite-torsion"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q50-c5ac91264",
+  "group": "Q50",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q50-c5ac91264 (reviewer sub-agent of L); spot-checked: The mathematics is sound. Source checked: ILO Exposé XVI, Def. 2.5.6 (the ⋆ law), Lemmas 2.5.7–2.5.10 with their proofs; the item's statement matches 2.5.7 and 2.5.8 and is unchanged. Steps 1–4: I redid the base change of the trace (mate of β from prop-asd-smooth-base-change together with the orientation's Noetherian base-change clause), the reduction to M=Ri_*Λ (the adjunction i^*⊣Ri_* means i^* detects maps between Ri_* objects), and both transposes of the naturality square. They give Cl_q⋆Cl_j and Cl_i⋆Cl_q' with e_q=d and e_i=−c. Step 6: Rr_*c_z̄=h, t_r h=1, and the affine counit is the restriction of the P^1 one, so t_q∘Rq_!c_z=1. The sign is +c_1(O(1)), as in ILO 2.5.10. Step 5: the smooth-pair coordinates give a=0 and b=d. Two repairable faults, fixed in fixes/dag/nodes/sec-deligne-laumon-a1/lem-per-smooth-immersion-interchange.json. (a) C1/C4: the last transpose in Step 6 needs Cl_q to be the transpose of the affine-line counit. Only lem-per-ordinary-smooth-orientation states this, and Step 6 did not cite it; the citation is now added. (b) C3/E5: Steps 5 and 8 identified Cl_p on the étale chart through the 'étale sum counit', a description that is only in the orientation node's proof. They also cited lem-per-etale-section-deformation-comparison for something vacuous ('this is also the prescribed orientation'). Step 8 now argues from statements only: Cl_{p|U}=Cl_q⋆Cl_e by the orientation's composition and d=0 clauses; the item's own first identity, applied to the étale e over the zero section (e^{-1}(0)=s(S)), gives Cl_e⋆Cl_s=Cl_0; then Step 7 gives Cl_q⋆Cl_0=1, and the result glues because End(Λ_S)=Γ(S,Λ) (lem-sc-connective-single-hom). The deformation-comparison citation is removed. I also wrote Step 7 out as an explicit induction: A^d=A^1 over A^{d−1}, Cl_{p_d}=Cl_{p_{d−1}}⋆Cl_π, Cl_{z_d}=Cl_{z'}⋆Cl_{z_{d−1}}, ⋆ associative, and Step 6 over the base A^{d−1}. proof_deps is the union of the step uses. All steps are at most 1298 characters. There is no cycle back to the item or to lem-per-regular-gysin-calculus, no new nodes and no SGA source. Batch-5 flags: the chain from lem-asd-ordinary-supported-kummer ends at lem-pod-etale-stalk-tensor-scalar, which only states stalks of étale sheaf tensor products and scalar extensions. That is generic sheaf algebra, neither stated by nor part of the proof of the trace formula or Poincaré duality, so the flag is accepted. The flag through lem-per-etale-section-deformation-comparison is removed with that citation. The worker's tool_uses are accepted. Maintainer note: chains to lem-pod-etale-stalk-tensor-scalar are generic.; 1 file(s) fixed by the reviewer"
  }
 }
