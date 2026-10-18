@@ -4621,6 +4621,7 @@ public import WeilConjectures.TraceFormula.KunnethVerdier
 public import WeilConjectures.TraceFormula.LocalTerm
 public import WeilConjectures.TraceFormula.Main
 public import WeilConjectures.TraceFormula.ModelDecomposition
+public import WeilConjectures.TraceFormula.ModelDegreeOne
 public import WeilConjectures.TraceFormula.ModelExtension
 public import WeilConjectures.TraceFormula.OpenCover
 public import WeilConjectures.TraceFormula.OpenSquare
