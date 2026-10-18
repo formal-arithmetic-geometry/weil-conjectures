@@ -1,0 +1,126 @@
+{
+ "id": "lem-weil-pbc-abelian-pullback-local-sections",
+ "kind": "statement",
+ "title": "Local unit representatives for abelian inverse images in independent universes",
+ "statement": "Let X,Y be topological spaces in Type u, f:X→Y continuous, and F an Ab.{max u v}-valued sheaf on Y. Use the constructed inverse image f⁻¹F [def-weil-pbc-topological-inverse-image] and its adjunction unit η. For every open U⊆X, s∈(f⁻¹F)(U), and x∈U, there exist an open V⊆Y containing f(x), t∈F(V), and an open W⊆U∩f⁻¹(V) containing x such that s|W=η(t)|W.",
+ "source": {
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Tag 008H (inverse-image stalks), and Tag 0A32, lemma-compute-pullback-to-limit, local representability in the surjectivity paragraph."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-topological-inverse-image"
+ ],
+ "proof": [
+  {
+   "text": "Pushforward of the skyscraper sheaf at x is definitionally the skyscraper sheaf at f(x). Uniqueness of left adjoints identifies the fiber of F at f(x) with the fiber of the constructed pullback at x. The unit identity for this uniqueness isomorphism gives its formula on germs.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply the inverse fiber isomorphism to the germ of s and represent this element by a section t on a neighborhood V of f(x). The unit formula says the pullback unit image of t and s have equal germs at x.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Restrict to U∩f⁻¹(V). Equality in the filtered neighborhood colimit gives a smaller neighborhood W on which the sections agree. All colimits of fibers are small in u, while their abelian values may lie in max u v.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Tag 008H (inverse-image stalks), and Tag 0A32, lemma-compute-pullback-to-limit, local representability in the surjectivity paragraph.; source argument expanded in the displayed Lean proof and docstring by W3."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Every section of a topological inverse image sheaf of abelian groups is locally a restriction of a unit section",
+   "results": "Ringed-space unit germs and generic global sections results, no inverse-image local representation theorem.",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The stalk of the inverse image of an abelian sheaf at x is canonically the stalk at f x, with no equality of coefficient and space universes required",
+   "results": "Presheaf.stalkPullbackIso and its germ formulas concern presheaf pullback. They do not identify local representatives of the constructed sheaf pullback in these universes.",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "sheafFiberComapIso|pullback.*local.*[Ss]ection|[Ss]ection.*locally.*unit",
+   "results": "Point.sheafFiberComapIso is the generic abstract stalk comparison; local section extraction and the constructed-unit formula still require proof.",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Topology.SpectralLimitSheafSections",
+  "date": "2026-10-18",
+  "group": "W3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-smooth-curve-artin-schreier",
+   "place": "General cohomological continuity used after constructing the punctured inverse system: sections on quasi-compact opens are represented and identified at a finite stage.",
+   "via": [
+    "lem-weil-pbc-spectral-limit-sheaf-sections",
+    "lem-weil-pbc-spectral-limit-cohomology",
+    "lem-weil-pbc-punctured-neighborhood-cohomology-colimit",
+    "lem-weil-pbc-top-degree-open-restriction-surjective",
+    "lem-weil-pbc-top-coherent-cohomology-finite"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Topology.AbelianPullbackLocalSections",
+  "file": "lean/Sheaf/Topology/AbelianPullbackLocalSections.lean",
+  "declaration": "TopCat.Sheaf.abelianPullback_localSections",
+  "statement": "theorem abelianPullback_localSections\n    {X Y : TopCat.{u}} (f : X ⟶ Y) (F : Y.Sheaf AddCommGrpCat.{max u v})\n    (U : Opens X)\n    (s : ((Functor.sheafPullbackConstruction.sheafPullback (Opens.map f)\n      AddCommGrpCat.{max u v} (Opens.grothendieckTopology Y)\n        (Opens.grothendieckTopology X)).obj F).obj.obj (op U))\n    (x : X) (hx : x ∈ U) :\n    ∃ (V : Opens Y) (_ : f x ∈ V) (t : F.obj.obj (op V))\n      (W : Opens X) (_ : x ∈ W) (hWU : W ≤ U) (hWV : W ≤ (Opens.map f).obj V),\n      ((Functor.sheafPullbackConstruction.sheafPullback (Opens.map f)\n        AddCommGrpCat.{max u v} (Opens.grothendieckTopology Y)\n          (Opens.grothendieckTopology X)).obj F).obj.map (homOfLE hWU).op s =\n        ((Functor.sheafPullbackConstruction.sheafPullback (Opens.map f)\n          AddCommGrpCat.{max u v} (Opens.grothendieckTopology Y)\n            (Opens.grothendieckTopology X)).obj F).obj.map (homOfLE hWV).op\n              (((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous\n                (Opens.map f) AddCommGrpCat.{max u v} (Opens.grothendieckTopology Y)\n                  (Opens.grothendieckTopology X)).unit.app F).hom.app (op V) t)",
+  "branch": "sheaf-dag",
+  "by": "W3",
+  "date": "2026-10-18"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261018T071238-L-1682539",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261018T071238-L-1682539",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,134 @@
+{
+ "id": "lem-weil-pbc-spectral-limit-unit-eventually-zero",
+ "kind": "statement",
+ "title": "A vanishing inverse-image unit is detected at a coefficient stage",
+ "statement": "Let I be a nonempty directed preorder in Type u, S_i spectral spaces, f_ij spectral transition maps satisfying identity and composition, and (X,p_i) their topological inverse limit. Let F_i be Ab.{max u v}-valued sheaves and let α_ij:F_i→(f_ij)_*F_j be arbitrary sheaf morphisms, with no coherence assumption. For j∈I, a compact open V⊆S_j and s∈F_j(V), if the inverse-image unit of s is zero in (p_j⁻¹F_j)(p_j⁻¹V), then there are l≥j such that α_jl,V(s)=0 [def-weil-pbc-topological-inverse-image].",
+ "source": {
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Tags 008H and 0A32, zero/equality detection in inverse-image sections; Topology, Tag 0A30(2)."
+ },
+ "stmt_deps": [
+  "def-weil-spectral-space",
+  "def-weil-pbc-topological-inverse-image"
+ ],
+ "proof": [
+  {
+   "text": "At each image point p_j(x), the map to the skyscraper sheaf of the coefficient fiber factors through the pullback unit by adjunction. Hence its value on s is zero, its germ is zero, and filtered-colimit equality gives a neighborhood on which s restricts to zero.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The spectral inverse-limit theorem makes the pulled-back open compact. Refine the neighborhoods of coefficient image points by compact opens at stage j and take finitely many of their inverse images covering the limit open. Their union A is compact open.",
+   "uses": [
+    "lem-weil-pbc-spectral-directed-limit-spectral"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Descend the inclusion of the pulled-back domain in the pulled-back A. At the resulting stage, naturality of α makes its image of t zero on a covering family, and sheaf separation makes α_jl(s) zero globally. If the limit open is empty, the same argument uses the empty finite subcover.",
+   "uses": [
+    "lem-weil-pbc-spectral-limit-descend-opens"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-spectral-directed-limit-spectral",
+  "lem-weil-pbc-spectral-limit-descend-opens"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Tags 008H and 0A32, zero/equality detection in inverse-image sections; Topology, Tag 0A30(2).; source argument expanded in the displayed Lean proof and docstring by W3."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For an inverse system of spectral spaces, a coefficient section whose inverse image is zero becomes zero at a finite stage, and every section on the limit is represented at a finite stage",
+   "results": "AffineTransitionLimit has analogous results for scheme structure sheaves, not arbitrary abelian sheaf systems.",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A section of an inverse image sheaf on a spectral inverse limit is represented by a section at a finite stage",
+   "results": "Affine scheme and ring-valued structure-sheaf results; none applies to arbitrary abelian sheaves.",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "(unit|pullback).*(locally_zero|eventually_zero|unit_generation)|abelianSections_preservesDirectedColimits",
+   "results": "No matching Mathlib declaration.",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Topology.SpectralLimitSheafSections",
+  "date": "2026-10-18",
+  "group": "W3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-smooth-curve-artin-schreier",
+   "place": "General cohomological continuity used after constructing the punctured inverse system: sections on quasi-compact opens are represented and identified at a finite stage.",
+   "via": [
+    "lem-weil-pbc-spectral-limit-sheaf-sections",
+    "lem-weil-pbc-spectral-limit-cohomology",
+    "lem-weil-pbc-punctured-neighborhood-cohomology-colimit",
+    "lem-weil-pbc-top-degree-open-restriction-surjective",
+    "lem-weil-pbc-top-coherent-cohomology-finite"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Topology.SpectralLimitUnitZero",
+  "file": "lean/Sheaf/Topology/SpectralLimitUnitZero.lean",
+  "declaration": "TopCat.Sheaf.spectralLimit_unit_eventually_zero",
+  "statement": "theorem spectralLimit_unit_eventually_zero\n    {I : Type u} [Preorder I] [Nonempty I] [IsDirected I (· ≤ ·)]\n    (S : I → TopCat.{u}) [∀ j : I, SpectralSpace (S j)]\n    (f : ∀ (j k : I), j ≤ k → (S k ⟶ S j))\n    (hf : ∀ (j k : I) (h : j ≤ k), IsSpectralMap (f j k h))\n    (hfid : ∀ j : I, f j j le_rfl = 𝟙 (S j))\n    (hfcomp : ∀ (j k l : I) (hjk : j ≤ k) (hkl : k ≤ l),\n      f k l hkl ≫ f j k hjk = f j l (hjk.trans hkl))\n    (X : TopCat.{u}) (p : ∀ j : I, X ⟶ S j)\n    (hpcomp : ∀ (j k : I) (h : j ≤ k), p k ≫ f j k h = p j)\n    (hlimit : ∀ a : ∀ j : I, S j,\n      (∀ (j k : I) (h : j ≤ k), f j k h (a k) = a j) →\n      ∃! x : X, ∀ j : I, p j x = a j)\n    (htop : X.str = ⨅ j : I, TopologicalSpace.induced (p j) (S j).str)\n    (F : ∀ j : I, (S j).Sheaf AddCommGrpCat.{max u v})\n    (alpha : ∀ (j k : I) (h : j ≤ k),\n      F j ⟶ (pushforward AddCommGrpCat.{max u v} (f j k h)).obj (F k))\n    (j : I) (V : Opens (S j)) (hVc : IsCompact (V : Set (S j)))\n    (s : (F j).obj.obj (op V))\n    (hs : (((Functor.sheafPullbackConstruction.sheafAdjunctionContinuous\n      (Opens.map (p j)) AddCommGrpCat.{max u v} (Opens.grothendieckTopology (S j))\n        (Opens.grothendieckTopology X)).unit.app (F j)).hom.app (op V)) s = 0) :\n    ∃ (l : I) (hjl : j ≤ l), (alpha j l hjl).hom.app (op V) s = 0",
+  "branch": "sheaf-dag",
+  "by": "W3",
+  "date": "2026-10-18"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261018T071238-L-1682539",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261018T071238-L-1682539",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

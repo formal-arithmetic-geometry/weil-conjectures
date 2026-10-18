@@ -1,0 +1,130 @@
+{
+ "id": "lem-weil-pbc-abelian-large-compact-open-colimit",
+ "kind": "statement",
+ "title": "Compact-open abelian sections preserve directed colimits in larger coefficient universes",
+ "statement": "Let u,v be universes, X a topological space in Type u, with a basis of compact opens and with compact opens closed under binary intersections. Let I be a nonempty directed preorder in Type u. For every diagram D:I→AbSheaves(X;Ab.{max u v}) with a colimit and every compact open U⊆X, evaluation at U preserves this colimit [def-weil-pbc-category-colimit]. Unlike the same-universe declaration of lem-sc-topological-abelian-sections-filtered-colimit, the coefficient universe may be strictly larger than the space and indexing universe. No compactness assumption on X is needed.",
+ "source": {
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Tag 009F(4), lemma-directed-colimits-sections; Cohomology, Tag 01FF, degree-zero argument. The proved same-universe source module WeilConjectures.Topology.AbelianSectionsFilteredColimit is adapted using generic site point fibers."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [
+  {
+   "text": "The generic site point fiber is left adjoint to its skyscraper sheaf functor, so it preserves the sheaf colimit. The forgetful functor from large abelian groups preserves the small filtered colimits by universe restriction. Concrete filtered-colimit representative and equality lemmas therefore apply to these fibers.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Equality of two colimit sections gives equality of germs, hence at each point equality at a later stage on a neighborhood. Compactness gives a finite subcover, directedness gives a common stage, and sheaf separation proves eventual equality on U.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Represent a colimit section locally using the colimit of fibers and then represent each fiber element by a germ. Refine to a finite cover by compact opens. Move the finitely many representatives to one stage. Eventual equality on compact pairwise overlaps gives a further common stage where they glue. Their glued image is the original section by separation. The section comparison is bijective, hence an isomorphism of abelian groups and evaluation preserves the colimit.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Tag 009F(4), lemma-directed-colimits-sections; Cohomology, Tag 01FF, degree-zero argument. The proved same-universe source module WeilConjectures.Topology.AbelianSectionsFilteredColimit is adapted using generic site point fibers.; source argument expanded in the displayed Lean proof and docstring by W3."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Sections of abelian sheaves with larger coefficient universe on a compact open commute with directed colimits",
+   "results": "Generic colimit and point-fiber preservation results; no compact-open section theorem with independent coefficient universe.",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"colimit\"",
+   "results": "Presheaf Kan-extension and module-presheaf colimit results; no compact-open evaluation theorem.",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "(quasi.compact|compact).*(section|sheaf).*(colimit|limit)|(colimit|limit).*(section|sheaf).*(quasi.compact|compact)",
+   "results": "No matching Mathlib source lines.",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Topology.SpectralLimitSheafSections",
+  "date": "2026-10-18",
+  "group": "W3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-smooth-curve-artin-schreier",
+   "place": "General cohomological continuity used after constructing the punctured inverse system: sections on quasi-compact opens are represented and identified at a finite stage.",
+   "via": [
+    "lem-weil-pbc-spectral-limit-sheaf-sections",
+    "lem-weil-pbc-spectral-limit-cohomology",
+    "lem-weil-pbc-punctured-neighborhood-cohomology-colimit",
+    "lem-weil-pbc-top-degree-open-restriction-surjective",
+    "lem-weil-pbc-top-coherent-cohomology-finite"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Topology.AbelianLargeCompactOpenColimit",
+  "file": "lean/Sheaf/Topology/AbelianLargeCompactOpenColimit.lean",
+  "declaration": "TopCat.abelianCompactOpen_preservesDirectedColimits",
+  "statement": "theorem abelianCompactOpen_preservesDirectedColimits\n    (X : Type u) [TopologicalSpace X]\n    (hbas : ∀ (V : Set X), IsOpen V → ∀ x ∈ V, ∃ W : Set X, IsOpen W ∧\n      IsCompact W ∧ x ∈ W ∧ W ⊆ V)\n    (hint : ∀ (V W : Set X), IsOpen V → IsOpen W → IsCompact V → IsCompact W →\n      IsCompact (V ∩ W))\n    (I : Type u) [Preorder I] [Nonempty I] [IsDirected I (· ≤ ·)]\n    (D : I ⥤ TopCat.Sheaf AddCommGrpCat.{max u v} (TopCat.of X)) [HasColimit D]\n    (U : Opens X) (hU : IsCompact (U : Set X)) :\n    PreservesColimit D\n      ((sheafSections (Opens.grothendieckTopology X) AddCommGrpCat.{max u v}).obj (op U))",
+  "branch": "sheaf-dag",
+  "by": "W3",
+  "date": "2026-10-18",
+  "declarations": [
+   "TopCat.AddCommGrpCat.forget_preservesSmallFilteredColimits",
+   "TopCat.abelianCompactOpen_preservesDirectedColimits"
+  ]
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261018T071238-L-1682539",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261018T071238-L-1682539",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

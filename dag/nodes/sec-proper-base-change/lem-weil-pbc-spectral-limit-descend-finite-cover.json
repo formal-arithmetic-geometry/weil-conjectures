@@ -1,0 +1,134 @@
+{
+ "id": "lem-weil-pbc-spectral-limit-descend-finite-cover",
+ "kind": "statement",
+ "title": "Simultaneous finite compact-open cover descent with prescribed inclusions",
+ "statement": "Let I be a nonempty directed preorder, S_i spectral spaces, and f_ij:S_j→S_i spectral transition maps with identity and composition laws. Let X be their topological inverse limit with projections p_i [def-weil-spectral-space]. Fix i and compact open U⊆S_i. Let n≥0, V_a⊆S_i and W_a⊆X be compact opens indexed by Fin n, with p_i⁻¹U=⋃_a W_a and W_a⊆p_i⁻¹V_a. Then there are j≥i and compact opens D_a⊆S_j such that f_ij⁻¹U=⋃_a D_a, p_j⁻¹D_a=W_a, and D_a⊆f_ij⁻¹V_a for every a.",
+ "source": {
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Tag 0A32, lemma-compute-pullback-to-limit, simultaneous cover descent in the surjectivity paragraph; Topology, Tag 0A30(1)-(3)."
+ },
+ "stmt_deps": [
+  "def-weil-spectral-space"
+ ],
+ "proof": [
+  {
+   "text": "Descend each W_a to a compact open in a stage using part (1) of compact-open descent. A common upper bound of these finitely many stages and i gives representatives E_a at one stage k. Their pullbacks are still W_a and they remain compact open.",
+   "uses": [
+    "lem-weil-pbc-spectral-limit-descend-opens"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Descend the finite covering equality by part (3), giving a later stage q where these opens cover f_iq⁻¹U.",
+   "uses": [
+    "lem-weil-pbc-spectral-limit-descend-opens"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply part (2) separately to each inclusion W_a⊆p_i⁻¹V_a. Pull the opens at q to a common upper bound of the finitely many resulting stages. The covering equality, pullback identities and inclusions persist under inverse image. Empty families are included by inserting q into the finite set used for the upper bound.",
+   "uses": [
+    "lem-weil-pbc-spectral-limit-descend-opens"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-spectral-limit-descend-opens"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sheaves.tex",
+  "place": "Tag 0A32, lemma-compute-pullback-to-limit, simultaneous cover descent in the surjectivity paragraph; Topology, Tag 0A30(1)-(3).; source argument expanded in the displayed Lean proof and docstring by W3."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A finite compact open cover of an inverse limit of spectral spaces descends to one finite stage together with finitely many inclusions",
+   "results": "IsCompactOpenCovered and finite scheme-cover lemmas; none states simultaneous descent along arbitrary spectral inverse systems.",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite compact open covering of a spectral inverse limit descends with inclusions to the same finite stage",
+   "results": "CompactOpenCovered, Profinite and LightProfinite special constructions; no arbitrary spectral-system result.",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "spectral.*(descend|cover)|inverse.*limit.*cover|descend.*finite.*cover",
+   "results": "Three hits: PrespectralSpace.of_isOpenCover, an affine-scheme descent comment, and scheme spectrality. No exact theorem.",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Topology.SpectralLimitSheafSections",
+  "date": "2026-10-18",
+  "group": "W3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-smooth-curve-artin-schreier",
+   "place": "General cohomological continuity used after constructing the punctured inverse system: sections on quasi-compact opens are represented and identified at a finite stage.",
+   "via": [
+    "lem-weil-pbc-spectral-limit-sheaf-sections",
+    "lem-weil-pbc-spectral-limit-cohomology",
+    "lem-weil-pbc-punctured-neighborhood-cohomology-colimit",
+    "lem-weil-pbc-top-degree-open-restriction-surjective",
+    "lem-weil-pbc-top-coherent-cohomology-finite"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Topology.SpectralLimitDescendFiniteCover",
+  "file": "lean/Sheaf/Topology/SpectralLimitDescendFiniteCover.lean",
+  "declaration": "Topology.spectralLimit_descend_finite_cover",
+  "statement": "theorem spectralLimit_descend_finite_cover\n    {I : Type u} [Preorder I] [Nonempty I] [IsDirected I (· ≤ ·)]\n    (S : I → Type u) [∀ i : I, TopologicalSpace (S i)] [∀ i : I, SpectralSpace (S i)]\n    (f : ∀ (i j : I), i ≤ j → S j → S i)\n    (hf : ∀ (i j : I) (h : i ≤ j), IsSpectralMap (f i j h))\n    (hfid : ∀ (i : I) (x : S i), f i i le_rfl x = x)\n    (hfcomp : ∀ (i j k : I) (hij : i ≤ j) (hjk : j ≤ k) (x : S k),\n      f i j hij (f j k hjk x) = f i k (hij.trans hjk) x)\n    (X : Type v) [TopologicalSpace X] (p : ∀ i : I, X → S i)\n    (hp : ∀ i : I, Continuous (p i))\n    (hpcomp : ∀ (i j : I) (h : i ≤ j) (x : X), f i j h (p j x) = p i x)\n    (hlimit : ∀ a : ∀ i : I, S i,\n      (∀ (i j : I) (h : i ≤ j), f i j h (a j) = a i) →\n      ∃! x : X, ∀ i : I, p i x = a i)\n    (htop : ‹TopologicalSpace X› =\n      ⨅ i : I, TopologicalSpace.induced (p i) inferInstance)\n    (i : I) (U : Set (S i)) (hUo : IsOpen U) (hUc : IsCompact U)\n    (n : ℕ) (V : Fin n → Set (S i)) (W : Fin n → Set X)\n    (hV : ∀ a, IsOpen (V a) ∧ IsCompact (V a))\n    (hW : ∀ a, IsOpen (W a) ∧ IsCompact (W a))\n    (hcover : p i ⁻¹' U = ⋃ a, W a)\n    (hincl : ∀ a, W a ⊆ p i ⁻¹' V a) :\n    ∃ (j : I) (hij : i ≤ j) (D : Fin n → Set (S j)),\n      (∀ a, IsOpen (D a) ∧ IsCompact (D a)) ∧\n      f i j hij ⁻¹' U = ⋃ a, D a ∧\n      (∀ a, p j ⁻¹' D a = W a) ∧\n      (∀ a, D a ⊆ f i j hij ⁻¹' V a)",
+  "branch": "sheaf-dag",
+  "by": "W3",
+  "date": "2026-10-18"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261018T071238-L-1682539",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261018T071238-L-1682539",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
