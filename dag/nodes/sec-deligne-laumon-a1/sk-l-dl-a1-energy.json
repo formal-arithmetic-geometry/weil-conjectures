@@ -426,5 +426,27 @@
   "group": "Q79",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q79-8aa7954ca (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item, all 10 steps, the new node, every cited statement including blueprint_update, the main-20261015 statement and proof files, and the unit and chapter records. The statement is verbatim main-20261015 and not weakened. Its C>0 agrees with the unit's free C, because step 5 forces S_n>0. The mathematics is correct. The conjugate-tensor double sum is right, and the blueprint's single sum is wrong (identity Frobenius on rank 2 gives 2 against 4), as the worker reported. The positivity, gcd cancellation, surviving root of modulus q^{-(v+1)}, geometric majorant and pole-radius bound all check, and the bound is sharp for a constant rank-one line on A^1. The new lem-dl-a1-formal-exponential-radius is true by majorizing with exp of the absolute-value series. U=log(1-T) shows it must be an inequality. It is not a duplicate (rg over radius/exp hits), is statement-only and has all three search kinds. Batch-5 audit: every flagged citation is acceptable except prop-trace-determinant, because its closure reaches thm-trf-grothendieck-lefschetz-qbar via prop-every-iterate-trace and thm-weil-grothendieck-lefschetz-trace (its clause 3). The definitions, the representation equivalence, cor-galois-lisse-representations (the pi1 equivalence, not a Poincare duality step), p-linear-spectra, p-linear-triangular, p-real-operations, lem-tw-dual-stalk-frobenius and lem-zl-weil-constant-extension-frobenius reach no trace-formula or Poincare-duality theorem. The unflagged sk-thm-trace-transport in step 4 is the assumed trace formula itself. Repairs: (1) step 4 now cites nt-assume-trace-formula, with its hypotheses checked: separated finite type, finite fixed points V_0(F_{q^n}), and dualizability from prop-cohomological-finiteness, cited in step 3. The categorical-to-alternating trace identification that the leaf excludes is cited as prop-trf-trace-formal-laws(4). (2) In steps 4 and 5, prop-trace-determinant is replaced by the on-route log-det node lem-zl-euler-product-identity plus lem-weil-power-series-exp-hom and lem-weil-exp-coefficientwise-map. tool_uses are updated, there are no cycles, and proof_deps equals the union of uses. (3) The new node gains its lean_audit field. Remaining caveat, shared by all batch-5 consumers and as accepted for sk-thm-rationality: reading the leaf's condensed model-Frobenius formulation in the setup's Weil category. Corrected files are in fixes/dag/nodes/sec-deligne-laumon-a1/; details are in review.md.; 2 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-43815458d",
+  "group": "Q57",
+  "result": "pass",
+  "note": "The delivery only adds lean{existing:true} for upstream WeilSheaf.traceEnergy and le_sub_one_of_traceEnergy_le (TraceEnergy.lean 87-94, 603-623, both tagged sk-l-dl-a1-energy). lean.statement is verbatim the signature, and the node statement is verbatim main-20261015 order 3100. Clause match: ι a ring hom (more general than an iso); affine, SmoothOfRelativeDimension 1 and GeometricallyConnected curve (LocallyOfFiniteType redundant); ¬IsZero N; IsLisse; purity at every closed point and every eigenvalue, q_x^{v/2}; traceEnergy is the finite sum of ‖ι Tr(Frobenius relative to F_{q^n})‖² over galoisExtension k₀ n points; ∀n≥1 bound with C>0 bound before n; conclusion v ≤ B-1. Edge cases: zero sheaf and empty curve excluded, n=0 junk unused, real v and B, shared universe forced by Over. Not hollow (axioms propext/choice/Quot.sound), no local proof, real report sections. nt_compile --json probe: EXIT 0, 22.6 s, clean. Informational only: pre-existing parallel local-trace encodings (Sheaf.Paper localFrobeniusTrace vs upstream traceFunction)."
+ },
+ "lean": {
+  "module": "WeilConjectures.DeligneLaumon.AffineLine.TraceEnergy",
+  "declaration": "AlgebraicGeometry.WeilSheaf.le_sub_one_of_traceEnergy_le",
+  "declarations": [
+   "AlgebraicGeometry.WeilSheaf.traceEnergy",
+   "AlgebraicGeometry.WeilSheaf.le_sub_one_of_traceEnergy_le"
+  ],
+  "statement": "theorem le_sub_one_of_traceEnergy_le (ι : PadicAlgCl l →+* ℂ) {V : Scheme.{u}}\n    [V.Over (Spec (CommRingCat.of k₀))] [IsAffine V]\n    [LocallyOfFiniteType (V ↘ Spec (CommRingCat.of k₀))]\n    [SmoothOfRelativeDimension 1 (V ↘ Spec (CommRingCat.of k₀))]\n    [GeometricallyConnected (V ↘ Spec (CommRingCat.of k₀))]\n    (N : WeilSheaf k₀ l V) (hN : ¬ Limits.IsZero N) (hlisse : N.IsLisse) {v : ℝ}\n    (hpure : N.IsPunctuallyPureOfWeight ι v) {C B : ℝ} (hC : 0 < C)\n    (hS : ∀ n : ℕ, 1 ≤ n → N.traceEnergy ι n ≤ C * (Nat.card k₀ : ℝ) ^ ((n : ℝ) * B)) :\n    v ≤ B - 1",
+  "branch": "slopmaster2",
+  "by": "Q57",
+  "date": "2026-10-18",
+  "existing": true,
+  "note": "Exact existing trace-energy definition and weight-detection statement, both explicitly tagged sk-l-dl-a1-energy upstream. The finite field has cardinality Nat.card k₀; the trace uses geometric Frobenius relative to the extension degree. SmoothOfRelativeDimension 1, geometric connectedness and affineness encode the smooth geometrically connected affine curve. No duplicate module; this stage-2 attachment does not claim a sorry-free upstream proof."
  }
 }

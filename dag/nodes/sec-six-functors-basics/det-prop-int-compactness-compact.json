@@ -433,5 +433,27 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-fec40737d",
+  "group": "Q29",
+  "result": "pass",
+  "note": "Read the node (3 clauses, 15 steps), all 14 stmt_deps and their recorded Lean (IsConstantModelConstructible/constantModelBoundedConstructible, integralConstructibleExt, localizingClosure/IsLocalizingSubcategory, IsCompactObject, ObjectProperty.ind, Mathlib Ind), the module, the report and the commit (adds only the lean field and one module; statement unchanged). Hypotheses: general char-p field, separated finite-type X, O_E via padicIntegersRingObj, d/hd exactly the shape of sk-lem-int-ext(2); nothing extra. Conclusions: Phi characterized by Ind.yoneda iso plus filtered-colimit preservation (determines the realization), exact, full, faithful, essImage = H.ind; extension and kernel/cokernel closure; Ext vanishing above d_C into IndCons; Dic closed under sums and both truncations, containing localizingClosure B; window IsIso of the shifted truncLE-iota and truncGE-pi Hom maps at degrees [m-d_C, m]; IsCompactObject in the localizing closure for all B-objects. Universes all u+1 (checked with pp.universes; HasDerivedCategory.{u+1} found by inferInstance). lean.statement verbatim. nt_compile --json: 28.1 s, exit 0, no errors or warnings. Edge cases ok. No duplicate (IndConstructible* are rational; BoundedBelowCompactness assumes bounds). Non-blocking notes: stage 3 needs the Ext-continuity input over a general field (flagged in the report); FiniteIntermediateField is the same subtype as FiniteCoefficientFields; the localizing-closure dependency's object-universe sums agree with small sums."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.IntegralConstructibleCompactness",
+  "declaration": "AlgebraicGeometry.ProEtale.integralConstructibleCompactness",
+  "file": "lean/Sheaf/Paper/IntegralConstructibleCompactness.lean",
+  "statement": "theorem integralConstructibleCompactness (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ) (k : Type u) [Field k] (p : ℕ) [CharP k p] (hp : 0 < p) (hpℓ : p ≠ ℓ) (X : Scheme.{u}) [X.Over (Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] (d : ConstantModelConstructible (Profinite.padicIntegersRingObj ℓ E) X → ℕ) (hd : ∀ (C N : ConstantModelConstructible (Profinite.padicIntegersRingObj ℓ E) X) (q : ℤ), (d C : ℤ) < q → Subsingleton (((DerivedCategory.singleFunctor _ 0).obj C.obj) ⟶ ((DerivedCategory.singleFunctor _ 0).obj N.obj)⟦q⟧)) : IntegralConstructibleCompactnessAssertions (IsConstantModelConstructible (Profinite.padicIntegersRingObj ℓ E) X) (constantModelBoundedConstructible (Profinite.padicIntegersRingObj ℓ E) X) d",
+  "branch": "newtargets-dag",
+  "by": "Q29",
+  "date": "2026-10-18",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.IntegralConstructibleCompactnessAssertions",
+   "AlgebraicGeometry.ProEtale.integralConstructibleCompactness"
+  ]
  }
 }
