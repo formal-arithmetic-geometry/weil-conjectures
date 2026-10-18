@@ -8,7 +8,6 @@ module
 public import Sheaf.AlgebraicGeometry.EtaleOriginAdjointClass
 public import Sheaf.AlgebraicGeometry.FixedFiniteExceptionalAt
 public import Sheaf.AlgebraicGeometry.FixedEtaleOriginWitness
-import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekIndependenceUnbounded
 
 /-!
 # The relative Hom bijection at a specified compactification
