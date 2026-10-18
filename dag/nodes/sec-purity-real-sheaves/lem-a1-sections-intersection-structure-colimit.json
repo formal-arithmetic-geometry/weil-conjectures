@@ -256,5 +256,33 @@
   "group": "Q18",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q18-c49932a2a (reviewer sub-agent of L); spot-checked: Read the complete item, all cited statements, sources and unit/chapter route. All eight steps preserve the canonical restriction maps and the three coefficient categories; edge cases, duplicates, cycles and long-step checks passed. Both generic tool uses accepted. No repairs needed; detailed checks are in review.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-6bcd655dc",
+  "group": "Q65",
+  "result": "fix",
+  "note": "Mathematics and Lean statement passed; per-file compilation reproduced cleanly. Replaced the H11 second-reading placeholder with a complete report in fixes/. Detailed checks are in review.md. No repository mutations performed; concurrent context-clone HEAD movement recorded."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.IntersectionStructureSections",
+  "declaration": "AlgebraicGeometry.Scheme.sections_intersection_structure_colimit",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.intersectionInclusion",
+   "AlgebraicGeometry.Scheme.intersectionStructureSheaf",
+   "AlgebraicGeometry.Scheme.intersectionSections",
+   "AlgebraicGeometry.Scheme.intersectionRestriction",
+   "AlgebraicGeometry.Scheme.intersectionOpenDiagram",
+   "AlgebraicGeometry.Scheme.intersectionMap",
+   "AlgebraicGeometry.Scheme.sections_intersection_structure_colimit"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/IntersectionStructureSections.lean",
+  "statement": "theorem sections_intersection_structure_colimit (X : Scheme.{u}) [QuasiSeparatedSpace X] {I : Type v} [Nonempty I] (U : I → X.Opens) (hqc : ∀ i : I, IsCompact (U i : Set X)) (hdir : ∀ i j : I, ∃ k : I, U k ≤ U i ⊓ U j) : (∀ s : intersectionSections X U, ∃ (i : I) (a : X.presheaf.obj (op (U i))), intersectionRestriction X U (U i) (fun x hx ↦ hx i) a = s) ∧ (∀ (i : I) (a a' : X.presheaf.obj (op (U i))), intersectionRestriction X U (U i) (fun x hx ↦ hx i) a = intersectionRestriction X U (U i) (fun x hx ↦ hx i) a' → ∃ (k : I) (hki : U k ≤ U i), X.presheaf.map (homOfLE hki).op a = X.presheaf.map (homOfLE hki).op a') ∧ (∃ ι : intersectionOpenDiagram X U ⟶ (Functor.const _).obj (intersectionSections X U), (∀ V, ι.app V = intersectionRestriction X U V.unop.val (fun x hx ↦ V.unop.property.elim (fun i hi ↦ hi ▸ hx i))) ∧ Nonempty (IsColimit (Cocone.mk (intersectionSections X U) ι)) ∧ Nonempty (IsColimit ((forget₂ CommRingCat RingCat ⋙ forget₂ RingCat AddCommGrpCat).mapCocone (Cocone.mk (intersectionSections X U) ι))) ∧ Nonempty (IsColimit ((CategoryTheory.forget CommRingCat).mapCocone (Cocone.mk (intersectionSections X U) ι)))) ∧ (∀ (Y : Scheme.{u}) (g : X ≅ Y) (V : I → Y.Opens) (hUV : ∀ i : I, U i = g.hom ⁻¹ᵁ V i), ∃! t : intersectionStructureSheaf Y V ⟶ (TopCat.Sheaf.pushforward CommRingCat (intersectionMap g.hom U V (fun i ↦ (hUV i).le))).obj (intersectionStructureSheaf X U), (∀ W : Y.Opens, HEq (((TopCat.Sheaf.pullbackPushforwardAdjunction CommRingCat (intersectionInclusion Y V)).unit.app Y.sheaf).hom.app (op W) ≫ t.hom.app (op ((Opens.map (intersectionInclusion Y V)).obj W))) (g.hom.app W ≫ ((TopCat.Sheaf.pullbackPushforwardAdjunction CommRingCat (intersectionInclusion X U)).unit.app X.sheaf).hom.app (op (g.hom ⁻¹ᵁ W)))) ∧ (∀ i : I, intersectionRestriction Y V (V i) (fun y hy ↦ hy i) ≫ t.hom.app (op ⊤) ≫ (intersectionStructureSheaf X U).obj.map (homOfLE (fun _ _ ↦ trivial)).op = g.hom.appLE (V i) (U i) (hUV i).le ≫ intersectionRestriction X U (U i) (fun x hx ↦ hx i)))",
+  "branch": "newtargets-dag",
+  "by": "Q65",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Canonical subspace and inverse-image-unit helpers are concrete definitions owned by this node. The final clause characterizes the induced sheaf transport on every open by the adjunction-unit equation, and states its restriction square. The colimit is expressed by its universal property in rings, abelian groups and sets; distinct indicated opens give a small index category without restricting the original index universe."
  }
 }

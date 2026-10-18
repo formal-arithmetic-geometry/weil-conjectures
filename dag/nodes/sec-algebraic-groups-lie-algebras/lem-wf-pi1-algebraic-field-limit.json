@@ -15,7 +15,8 @@
   "def-weil-connected-scheme",
   "def-weil-geometric-point",
   "def-galois-fibre-functor",
-  "lem-galois-pi1-functoriality"
+  "lem-galois-pi1-functoriality",
+  "lem-wf-finite-etale-field-limit-descent"
  ],
  "proof": [
   {
@@ -297,5 +298,24 @@
   "group": "Q43",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q43-127b66c77 (reviewer sub-agent of L); spot-checked: Read the item, all ten proof steps, cited statements and source locations in full. The descent, model-independence, naturality and continuity arguments check out. Added the omitted functoriality tool-use declaration in a corrected whole JSON file. No mathematical changes or new nodes. Detailed checks and the unavailable historical pivot-list limitation are recorded in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-ad40048fb",
+  "group": "Q41",
+  "result": "pass",
+  "note": "Wrote review.md. Verified all statement clauses, dependencies, source hypotheses, canonical maps, universes, edge cases, and verbatim signature. Per-file scompile.py reproduction passed with exit 0 and no diagnostics. No defects found; branch head unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FundamentalGroup.AlgebraicFieldLimit",
+  "declaration": "AlgebraicGeometry.Scheme.FiniteEtale.fundamentalGroup_algebraicFieldLimit",
+  "file": "lean/Sheaf/AlgebraicGeometry/FundamentalGroup/AlgebraicFieldLimit.lean",
+  "statement": "theorem fundamentalGroup_algebraicFieldLimit {K L : Type u} [Field K] [Field L] [Algebra K L] [Algebra.IsSeparable K L] (X₀ : Over (Spec (.of K))) [IsSeparated X₀.hom] [LocallyOfFiniteType X₀.hom] [QuasiCompact X₀.hom] [ConnectedSpace (fieldExtensionBase X₀ L)] [∀ E : {E : IntermediateField K L // FiniteDimensional K E}, ConnectedSpace (fieldExtensionBase X₀ E.val)] {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ fieldExtensionBase X₀ L) (G_L : Type u) [Group G_L] [TopologicalSpace G_L] [IsTopologicalGroup G_L] [CompactSpace G_L] [∀ P, MulAction G_L ((fiber s).obj P)] [IsFundamentalGroup (fiber s) G_L] (G : {E : IntermediateField K L // FiniteDimensional K E} → Type u) [∀ E, Group (G E)] [∀ E, TopologicalSpace (G E)] [∀ E, IsTopologicalGroup (G E)] [∀ E, CompactSpace (G E)] [∀ E P, MulAction (G E) ((fiber (s ≫ fieldExtensionBaseMap X₀ E.val.val)).obj P)] [∀ E, IsFundamentalGroup (fiber (s ≫ fieldExtensionBaseMap X₀ E.val.val)) (G E)] : ∃ τ : ∀ (E E' : {E : IntermediateField K L // FiniteDimensional K E}) (h : E.val ≤ E'.val), pullback (fieldExtensionBaseMap X₀ (IntermediateField.inclusion h)) ⋙ fiber (s ≫ fieldExtensionBaseMap X₀ E'.val.val) ≅ fiber (s ≫ fieldExtensionBaseMap X₀ E.val.val), (∀ (E E' : {E : IntermediateField K L // FiniteDimensional K E}) (h : E.val ≤ E'.val) (P : (fieldExtensionBase X₀ E.val).FiniteEtale) (z : (fiber (s ≫ fieldExtensionBaseMap X₀ E'.val.val)).obj ((pullback (fieldExtensionBaseMap X₀ (IntermediateField.inclusion h))).obj P)), ((τ E E' h).hom.app P z).left = z.left ≫ Limits.pullback.fst P.obj.hom (fieldExtensionBaseMap X₀ (IntermediateField.inclusion h))) ∧ ∃ e : G_L ≃ₜ* ↥(⨅ E, ⨅ E', ⨅ h : E.val ≤ E'.val, MonoidHom.eqLocus ((fundamentalGroupMap (τ E E' h) (G E') (G E)).comp (Pi.evalMonoidHom G E')) (Pi.evalMonoidHom G E)), ∀ (g : G_L) (E : {E : IntermediateField K L // FiniteDimensional K E}), (e g).val E = fundamentalGroupMap (pullbackFiberIso (fieldExtensionBaseMap X₀ E.val.val) s) G_L (G E) g",
+  "branch": "newtargets-dag",
+  "by": "Q41",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "The limit is the infimum of equalizer subgroups of the product, with inherited subtype topology. The existential transition fibre isomorphisms are uniquely specified on every point by their projection equation, so their fundamentalGroupMaps are the canonical transition maps. The last equation specifies the canonical limit map on every coordinate. Small fundamental-group models use the established IsFundamentalGroup interface."
  }
 }
