@@ -11,9 +11,47 @@
   "def-weil-pbc-noetherian-ring",
   "def-sbc-ideal-power-torsion-functor"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The displayed maps are $R$-linear. In a component indexed by $i_1<\\cdots<i_{p+2}$, each term of $d^{p+1}d^p$ comes from deleting a pair of indices. If their positions are $a<b$, deleting $b$ then $a$ has coefficient $(-1)^{b-1+a-1}$, whereas deleting $a$ then the new position $b-1$ has coefficient $(-1)^{a-1+b-2}$. These sum to zero, and the two localization maps agree on every fraction. This includes the composite starting at degree zero: its two terms are $m/1-m/1$. At the end of the complex the target is zero. Thus $d^{p+1}d^p=0$. A module map acts on each fraction by $m/u\\mapsto f(m)/u$; the fraction relation makes this well-defined and the same formula shows it commutes with every differential.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0956 (lemma-compute-local-cohomology-noetherian), module assertion and the displayed extended alternating localization complex."
+   }
+  },
+  {
+   "text": "Apply [lem-per-local-cohomology-cech-bound] with $A=R$, $f_i=t_i$, $I=K$ and $j=q$. Its hypotheses require precisely a commutative Noetherian ring, a finite list of generators and an arbitrary module; all are present, and neither nonzeroness of $R$, properness of $K$, nor finite generation of $M$ is required. Its $C^0=M$, its degree-$p$ products indexed by increasing $p$-tuples, its degree-zero localization map, its signs $(-1)^{a-1}$, and its zero terms outside degrees $0,\\ldots,r$ are exactly those of the complex in this statement. The localization $M_g$ in that node is at the powers of $g$, exactly as specified here by the fraction relation. The torsion convention agrees with [def-sbc-ideal-power-torsion-functor]: allowing exponent zero adds only the element zero, which is already killed by $K^1$. Consequently the cited natural $R$-linear comparison is an isomorphism $a_M:H^q(C_R(t_1,\\ldots,t_r;M))\\longrightarrow H_K^q(M)$.",
+   "uses": [
+    "lem-per-local-cohomology-cech-bound",
+    "def-sbc-ideal-power-torsion-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0956 (lemma-compute-local-cohomology-noetherian), module assertion and the displayed extended alternating localization complex."
+   }
+  },
+  {
+   "text": "Take $a_M^{-1}$ to obtain the stated direction. For an $R$-linear map $f:M\\to N$, naturality of Step 2 says $H_K^q(f)a_M=a_N H^q(C_R(t;f))$. Multiplying on the left by $a_N^{-1}$ and on the right by $a_M^{-1}$ gives $a_N^{-1}H_K^q(f)=H^q(C_R(t;f))a_M^{-1}$, proving naturality in the required direction. The inverse is $R$-linear: applying the injective map $a_M$ to the addition and scalar-multiplication identities reduces them to linearity of $a_M$. For $r=0$ the cited comparison explicitly uses $K=(0)$ and the complex $M$ in degree zero, so the same conclusion covers $q=0$ and all higher degrees without a nonempty-list assumption.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0956 (lemma-compute-local-cohomology-noetherian), module assertion and the displayed extended alternating localization complex."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-ideal-power-torsion-functor",
+  "lem-per-local-cohomology-cech-bound"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/dualizing.tex",
+  "place": "Tag 0956 (lemma-compute-local-cohomology-noetherian), module assertion and the displayed extended alternating localization complex."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -56,10 +94,45 @@
    "results": "{\"t\": \"2026-10-18T22:29:04Z\", \"tool\": \"leanfinder\", \"query\": \"Cohomology of the augmented complex M to product M localized at f_i to product M localized at f_i f_j computes derived sections killed by powers of the ideal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"localCohomology.diagram\", \"ModuleCat.Tilde.const\", \"ModuleCat.Tilde.Localizations\", \"SheafOfModules.generatorsOfIsCokernelFree_I\", \"ModuleCat.Tilde.exists_const\", \"Algebra.H1Cotangent.isLocalizedModule\", \"ModuleCat.Tilde.openToLocalization\", \"SheafOfModules.generatorsOfIsCokernelFree_s\"], \"digest\": \"c945133e1d283604\"}",
    "date": "2026-10-19",
    "verdict": "No match. Read the returned declarations and Mathlib/Algebra/Homology/LocalCohomology.lean:40-47,161-174: localCohomology is an Ext-colimit definition; its Cech and derived-torsion characterizations are listed as future work. Other hits concern Krull dimension, module localization, tilde sections, or Stone-Cech compactification, not this computation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The right derived ideal power torsion functor over a Noetherian ring is computed by the augmented alternating Cech localization complex",
+   "results": "{\"t\": \"2026-10-18T23:04:49Z\", \"tool\": \"leanfinder\", \"query\": \"The right derived ideal power torsion functor over a Noetherian ring is computed by the augmented alternating Cech localization complex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"localCohomology\", \"localCohomology.ofSelfLERadical\", \"localCohomology.isoSelfLERadical\", \"localCohomology.ideal_powers_initial\", \"localCohomology.diagram\", \"localCohomology.idealPowersDiagram\", \"localCohomology.idealPowersToSelfLERadical\", \"localCohomology.ofDiagram\"], \"digest\": \"e1eb8cad4c598b66\"}",
+   "date": "2026-10-19",
+   "verdict": "No match: inspected the hits and LocalCohomology.lean lines 40-47; Mathlib defines local cohomology by Ext colimits and lists derived-torsion and Cech comparisons as future work. Other hits are cotangent localization, general derived categories, or injective complexes, not this comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "localCohomology",
+   "results": "{\"t\": \"2026-10-18T23:04:49Z\", \"tool\": \"loogle\", \"query\": \"localCohomology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"localCohomology\", \"localCohomology.isoSelfLERadical\", \"localCohomology.isoOfSameRadical\"], \"digest\": \"2281aba51a833720\"}",
+   "date": "2026-10-19",
+   "verdict": "No match: inspected the hits and LocalCohomology.lean lines 40-47; Mathlib defines local cohomology by Ext colimits and lists derived-torsion and Cech comparisons as future work. Other hits are cotangent localization, general derived categories, or injective complexes, not this comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "localCohomology|Cech|torsion",
+   "results": "{\"t\": \"2026-10-18T23:04:49Z\", \"tool\": \"grep\", \"query\": \"localCohomology|Cech|torsion\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/LocalCohomology.lean\", \"Mathlib/Algebra/Homology/LocalCohomology.lean\", \"Mathlib/Algebra/Homology/LocalCohomology.lean\", \"Mathlib/Algebra/Homology/LocalCohomology.lean\", \"Mathlib/Algebra/Homology/LocalCohomology.lean\"], \"digest\": \"f13c4b1705753d94\"}",
+   "date": "2026-10-19",
+   "verdict": "No match: inspected the hits and LocalCohomology.lean lines 40-47; Mathlib defines local cohomology by Ext colimits and lists derived-torsion and Cech comparisons as future work. Other hits are cotangent localization, general derived categories, or injective complexes, not this comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived ideal torsion is the cohomology of a complex of module localizations",
+   "results": "{\"t\": \"2026-10-18T23:04:50Z\", \"tool\": \"leansearch\", \"query\": \"Derived ideal torsion is the cohomology of a complex of module localizations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HasDerivedCategory\", \"Algebra.tensorH1CotangentOfIsLocalization\", \"HasDerivedCategory.standard\", \"Ideal.torsionOf\", \"DerivedCategory.homologyFunctorFactors\", \"Ideal.isTorsionBySet_cotangent\", \"DerivedCategory.instIsLocalizationHomotopyCategoryIntUpQhTrWSubcategoryAcyclic\", \"instIsTorsionFreeLocalizationAlgebraMapSubmonoidPrimeCompl_2\"], \"digest\": \"15102f190577d487\"}",
+   "date": "2026-10-19",
+   "verdict": "No match: inspected the hits and LocalCohomology.lean lines 40-47; Mathlib defines local cohomology by Ext colimits and lists derived-torsion and Cech comparisons as future work. Other hits are cotangent localization, general derived categories, or injective complexes, not this comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology of the augmented complex M to product M localized at generators to product M localized at pairwise products is right derived ideal torsion",
+   "results": "{\"t\": \"2026-10-18T23:08:26Z\", \"tool\": \"leanfinder\", \"query\": \"Cohomology of the augmented complex M to product M localized at generators to product M localized at pairwise products is right derived ideal torsion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"localCohomology.diagram\", \"Algebra.H1Cotangent.isLocalizedModule\", \"Algebra.Generators.cotangentCompLocalizationAwayEquiv\", \"CochainComplex.cm5b.I\", \"CochainComplex.cm5b.I_d\", \"Ext\", \"Rep.isZero_Tor_succ_of_projective\", \"CategoryTheory.isZero_Tor'_succ_of_projective\"], \"digest\": \"40c49525a3587d90\"}",
+   "date": "2026-10-19",
+   "verdict": "No match: inspected the hits and LocalCohomology.lean lines 40-47; Mathlib defines local cohomology by Ext colimits and lists derived-torsion and Cech comparisons as future work. Other hits are cotangent localization, general derived categories, or injective complexes, not this comparison."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-local-cohomology-change-rings",
@@ -87,5 +160,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-ideal-torsion-cech-computation",
+  "worker": "stage1",
+  "summary": "Reused the already existing exact Noetherian module Cech comparison lem-per-local-cohomology-cech-bound instead of creating a duplicate. Checked the alternating differential and functorial maps explicitly, matched every complex component, sign and torsion convention, and inverted the cited natural linear isomorphism with its naturality equation written out. No statement change and no new nodes. The duplicate interface is reported for maintainer consolidation.",
+  "blueprint": "Proof Step 1: dimension-normalized Verdier duality and the middle t-structure; the finite-coefficient potential-dualizing construction, via the normal-local top-residue-class input (ILO XVII Lemma 3.5.8): normality of completion and connectedness of punctured principal slices. Specific input: The bound on the closed complement of an algebraized neighborhood, and the empty-puncture dimension comparison, in the complete-local connectedness input. In the isolated-intersection bound: Tag 0DXA (lemma-cd-change-rings), the inequality, restricted to Noetherian source and target rings so that local cohomology is also the right-derived ideal-torsion functor. To prove change of rings: the extended alternating localization complex computing right-derived ideal-power torsion, used in the fraction comparison of Stacks 0BJB."
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-NH-30328cc68",
+  "group": "NH",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NH-30328cc68 (reviewer sub-agent of L); spot-checked: Read the item, both cited nodes and the source in full. The item statement is unchanged and correct: it matches Stacks dualizing.tex Tag 0956 (lemma-compute-local-cohomology-noetherian, l.1649-1672, module assertion) for any module over a Noetherian ring. The complex, signs and localization agree with the source. Small cases check out: r=0, generator t=0, unit generator, two generators (m/1-m/1) and the zero ring. The torsion convention n>=1 gives the same submodule as def-sbc-ideal-power-torsion-functor's n in N. Steps: Step 1 proves d∘d=0 and functoriality correctly. Step 2 cites lem-per-local-cohomology-cech-bound, an existing unsplit node (Q71) in the same chapter and unit. I compared the two statements clause by clause: same hypotheses, same complex, same natural A-linear isomorphism. Step 3 inverts it with naturality and linearity written out. No new nodes, no tool_uses, no SGA, no cycle: the cited node has empty proof_deps and no delivery of it exists yet. Maintainer note: the item and lem-per-local-cohomology-cech-bound are same-day duplicates. Q71's run ended 06:53 and Q54's run, which created this item, ended 06:57 on 2026-10-19, so this item should be merged into cech-bound and lem-per-local-cohomology-change-rings repointed. Until then, a split of cech-bound must not cite this item, because that would create a 2-cycle."
  }
 }
