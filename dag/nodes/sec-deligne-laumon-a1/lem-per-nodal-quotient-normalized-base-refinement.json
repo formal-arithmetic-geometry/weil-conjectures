@@ -31,9 +31,262 @@
   "def-pc-fibre-product",
   "def-pc-geometrically-irreducible"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $b:Y'\\to Y$ and $U=Y\\setminus T$. The admissible quotient chart lemma gives $Y'=\\operatorname{Spec}B$, $Y=\\operatorname{Spec}A$ and an integral inclusion $A=B^G\\subset B$ (the source is affine because the target is affine). The dense torsor over $U$ makes $L=K(Y')$ finite over $K(Y)$. Excellence makes $A$ Nagata, hence Japanese. Thus its integral closure $\\overline A\\subset L$ is a finite $A$-module. The integral inclusion puts $B$ inside $\\overline A$ as an $A$-submodule; since $A$ is Noetherian, the submodule finiteness lemma makes $B$ finite over $A$. Consequently $b$ is finite, without assuming that arbitrary excellent Noetherian schemes have Noetherian invariant rings.",
+   "uses": [
+    "lem-per-admissible-quotient-affine-integral-charts",
+    "lem-exc-quasi-excellent-nagata",
+    "lem-weil-pbc-nagata-domain-n2",
+    "def-weil-pbc-japanese-domain",
+    "lem-weil-pbc-noetherian-submodule-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "IX 1.4 admissible quotients; Stacks Tags 07QV, 0334 and definition 032F (Japanese domains)."
+   }
+  },
+  {
+   "text": "We will use the following explicit scalar-extension calculation. If $R$ is an $A$-algebra acted on $A$-linearly by a finite group $H$, with $n=|H|$ invertible in $A$, the endomorphism $e(r)=n^{-1}\\sum_{h\\in H}h(r)$ satisfies $e^2=e$, $\\operatorname{im}e=R^H$, and $R=\\operatorname{im}e\\oplus\\ker e$. After tensoring with any $A$-algebra $A_1$, the same formula is the averaging idempotent on $R\\otimes_AA_1$, so its image is both $R^H\\otimes_AA_1$ and $(R\\otimes_AA_1)^H$. The canonical map between these rings is therefore an isomorphism. Apply this whenever needed below: $|G|$ and $|G_1|$ are powers of the unit $\\ell$. This calculation requires no flatness of $A_1$ over $A$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 0BRH (lemma-base-change-invariants), with the averaging argument supplying the stronger arbitrary-base-change assertion when the group order is invertible."
+   }
+  },
+  {
+   "text": "Put $U_1=Y_1\\setminus T_1$ and $P=(Y'\\setminus T')\\times_UU_1$. Dominance and the nowhere-density of $T$ make $U_1$ a nonempty dense open of the integral $Y_1$. Pullback of the torsor makes $P\\to U_1$ a finite etale $G$-torsor. Regularity makes $Y_1$ normal, and etale algebras over normal rings are normal. The clopen-components lemma therefore applies to $P$: its finitely many irreducible components are disjoint, open and closed, normal and integral. Each is finite etale over $U_1$ by clopen restriction; its image is closed because finite morphisms are proper, and open because etale morphisms are open. Since $U_1$ is connected and the component is nonempty, this image is all of $U_1$.",
+   "uses": [
+    "lem-sbc-galois-cover-base-change",
+    "lem-weil-pbc-regular-ring-normal",
+    "lem-weil-pbc-etale-over-normal-ring-normal",
+    "lem-a1-normal-etale-components-clopen",
+    "lem-weil-pbc-finite-etale-clopen-restriction-rank",
+    "lem-weil-pbc-finite-morphism-permanence",
+    "lem-weil-pbc-etale-morphism-open-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose IX 1.4, printed p.133: normalized component replacement and (*)."
+   }
+  },
+  {
+   "text": "Let $F$ be any chosen irreducible component of $W=Y'\\times_YY_1$ dominating $Y_1$, with reduced induced structure. Its intersection $V'$ with $P$ is one of the components just described: at the generic point of $Y_1$, $W$ is finite etale, so its distinct dominant components have distinct generic points, and closure identifies them with the components of $P$. The group $G$ acts transitively on these components. Indeed choose geometric generic points on any two of them; the torsor gives a group element carrying the first point to the second, and that element must carry the entire component to the second component. The stabilizer of $F$ is therefore also the stabilizer $H=G_1$ of $V'$. If two geometric generic points lie on $V'$, the unique element carrying one to the other lies in $H$. Thus $H$ acts simply transitively on that component's geometric generic fibre.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose IX 1.4, printed p.133: normalized component replacement and (*)."
+   }
+  },
+  {
+   "text": "The scheme $W$ is finite over $Y_1$, by permanence of finite morphisms, and is excellent Noetherian by finite-type stability of excellence. Its reduced closed component $F$ is excellent Noetherian as well (on rings it is a quotient by a prime ideal). The normalization preparation lemma makes the normalization $N=Y'_1\\to F$ finite, normal, integral and excellent. Its composite with $F\\hookrightarrow W\\to Y_1$ is finite; here a finite set of module generators for two finite algebras yields, by pairwise products, module generators for their composite. Hence $N$ is affine over the affine $Y_1$. Over $U_1$ its normalization is the identity on $V'$, because the latter's affine rings are already integrally closed in their fraction fields. The $H$-action lifts uniquely to $N$: apply dominant lifting through normalization to the composites of the normalization map with each action automorphism of $F$; uniqueness gives the identity and multiplication laws.",
+   "uses": [
+    "lem-weil-pbc-finite-morphism-permanence",
+    "lem-exc-finite-type-localization-excellent",
+    "lem-per-excellent-normalization-preparation",
+    "lem-sbc-normalization-dominant-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose IX 1.4, printed p.133: normalized component replacement and (*)."
+   }
+  },
+  {
+   "text": "The map $\\coprod_{h\\in H}V'\\to V'\\times_{U_1}V'$, $(h,v)\\mapsto(hv,v)$, is an isomorphism at the generic point: it is the restriction of the original $G$-torsor identity to pairs of points on the selected component, and precisely the $H$-summands remain. Both sides are finite etale over the normal integral $U_1$; clopen restriction gives this for $V'$, and the torsor base-change and finite-coproduct formulas give it for the displayed sides. Generic full faithfulness for finite etale schemes extends the generic inverse uniquely, and faithfulness makes both compositions identities. Since $V'\\to U_1$ is surjective by Step 3, it is a connected finite etale $H$-torsor. In particular $H$ is an $\\ell$-group, including the trivial subgroup.",
+   "uses": [
+    "lem-sbc-normal-integral-generic-hom-full",
+    "lem-weil-pbc-finite-etale-clopen-restriction-rank",
+    "lem-sbc-galois-cover-base-change",
+    "lem-weil-pbc-scheme-coproduct-family",
+    "lem-sc-etale-coproduct-etale"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 03SF (section-finite-etale-under-galois); generic full faithfulness Tags 0BQL and 0BQM."
+   }
+  },
+  {
+   "text": "Let $L_1=K(N)=K(V')$ and $K_1=K(Y_1)$. On an affine $\\operatorname{Spec}A_1\\subset Y_1$ the ring $B_1$ of its inverse image in $N$ is a finite normal domain over $A_1$, with fraction field $L_1$. It equals the integral closure of $A_1$ in $L_1$: each element of $B_1$ is integral over $A_1$, whereas any element of $L_1$ integral over $A_1$ is integral over $B_1$ by the same monic polynomial and hence belongs to $B_1$. This also identifies the normalization in the connected torsor, not merely an unspecified normal model.",
+   "uses": [
+    "def-sc-normalization",
+    "def-fin-normalization-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose IX 1.4, printed p.133: normalized component replacement and (*)."
+   }
+  },
+  {
+   "text": "Compute the invariant field without assuming that $Y'$ was normal. At the generic point of $Y_1$ the finite algebra of $W$ is a product of the fields $K(V'_a)$ of the components of $P$. By Step 2 its $G$-invariants are $K_1$, since before scalar extension $B^G=A$. A $G$-invariant tuple is determined by its coordinate on the selected factor, and that coordinate is $H$-invariant. Conversely an $H$-invariant coordinate extends uniquely to a tuple by translating it to each factor; two translating elements differ by $H$, so the extension is well-defined. Hence $L_1^H=K_1$. Now $B_1^H\\subset L_1^H=K_1$ and every such element is integral over $A_1$; normality of $Y_1$ gives $B_1^H=A_1$. The quotient chart lemma identifies $N/H$ with $Y_1$, including the structure map. The equality of closed supports $T'_1=b_1^{-1}T_1$ gives exactly the torsor complement and boundary claimed.",
+   "uses": [
+    "lem-per-admissible-quotient-affine-integral-charts",
+    "lem-weil-pbc-regular-ring-normal"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose IX 1.4, printed p.133: normalized component replacement and (*)."
+   }
+  },
+  {
+   "text": "Apply the nodal-family base-change lemma to $C\\to Y'$ along $N\\to Y'$. It gives the projectivity, flatness, finite presentation, nonempty connected geometric curve fibres and the completed singular-fibre ring $\\Omega[[u,v]]/(uv)$ of $C_1=C\\times_{Y'}N\\to N$. The smooth locus is pulled back, so this family is smooth over $V'$. At the generic point of $N$ its fibre is a field extension of the original smooth geometrically integral generic fibre; thus it is still smooth and geometrically integral, by the definition of geometric integrality and smooth base change.",
+   "uses": [
+    "lem-trf-projective-nodal-family-geometry",
+    "lem-pc-proper-base-change",
+    "def-pc-geometrically-irreducible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose IX 1.4, printed p.133: normalized component replacement and (*)."
+   }
+  },
+  {
+   "text": "Here is the integrality check for the whole curve. On every nonempty affine open of $C_1$, lying over an affine open $\\operatorname{Spec}R$ of the integral $N$, write its ring as $S$. The affine flatness criterion and the definition of flatness make $S\\to S\\otimes_R\\operatorname{Frac}R$ injective, by tensoring $R\\hookrightarrow\\operatorname{Frac}R$. The localization on the right is the ring of an affine open of the integral generic fibre, so it is a domain; it cannot be zero unless $S=0$. Therefore $S$ is a domain and every nonempty open of $C_1$ meets the generic fibre. The generic fibre is irreducible, hence any two nonempty opens of $C_1$ intersect there. This proves both reducedness and irreducibility, and nonempty fibres give nonemptiness: $C_1$ is integral. This argument also shows its generic point maps to the generic point of $N$.",
+   "uses": [
+    "lem-weil-pbc-flat-morphism-affine-criterion",
+    "def-weil-pbc-flat-ring-map",
+    "def-pc-integral-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose IX 1.4, printed p.133: normalized component replacement and (*)."
+   }
+  },
+  {
+   "text": "The curve $C_1$ is excellent Noetherian, since it is of finite type over the excellent Noetherian $N$. Both $b:Y'\\to Y$ and $b_1:N\\to Y_1$ are finite with affine Noetherian target. Apply the finite-over-projective lemma with the identity projective morphism of the target to see they have finite-projective-space embeddings. Composition of H-projective morphisms now makes $C\\to Y$ and $C_1\\to Y_1$ projective. All these schemes are separated: the affine bases are separated, and projectivity is proper and hence separated; their diagonals compose to give the absolute separatedness. The projective quotient lemma gives $X_1=C_1/H$, finite quotient map $\\pi_1$, integral $X_1$, and projective finite-type $X_1\\to Y_1$. For any orbit, choose an affine neighbourhood of its image in $X_1$; its inverse image under the finite map $\\pi_1$ is an affine open containing the orbit, proving admissibility. Finite-type stability then gives excellence and Noetherianity of $X_1$. The same projective quotient lemma gives projective $X=C/G\\to Y$, so $X\\times_YY_1$ is separated over $Y_1$.",
+   "uses": [
+    "lem-exc-finite-type-localization-excellent",
+    "lem-fin-finite-over-projective",
+    "lem-trf-h-projective-composition",
+    "lem-kun-projective-implies-proper",
+    "lem-per-projective-finite-group-quotient",
+    "lem-weil-pbc-separated-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose IX 1.4, printed p.133: normalized component replacement and (*)."
+   }
+  },
+  {
+   "text": "The marking $D\\to Y'$ is finite etale and therefore flat. Since it is already an effective Cartier divisor, it is a relative effective Cartier divisor by definition. Apply relative Cartier pullback to get an effective Cartier divisor $D_1\\subset C_1$. Finiteness is stable under base change; on affine charts the etale ring-base-change lemma preserves etaleness. The nodal-family lemma identifies the relative smooth loci after base change, so $D_1$ remains inside the smooth locus. The pulled-back $H$-action preserves the divisor because the original $G$-action preserved $D$. The same elementary inverse-image calculation preserves the inverse-image boundary conditions once $E_1$ is known to be Cartier below.",
+   "uses": [
+    "def-pc-relative-effective-cartier",
+    "lem-pc-recd-pullback",
+    "lem-weil-pbc-finite-morphism-permanence",
+    "lem-weil-pbc-etale-ring-base-change",
+    "lem-trf-projective-nodal-family-geometry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose IX 1.4, printed p.133: normalized component replacement and (*)."
+   }
+  },
+  {
+   "text": "The projection $C_1\\to C$ followed by $\\pi:C\\to X$, together with its map to $Y_1$, is $H$-invariant. The categorical quotient property gives a unique $Y_1$-map $r:X_1\\to Z=X\\times_YY_1$. To identify it over $U_1$, use the finite clopen decomposition $P=\\coprod_{G/H}gV'$. Pulling $C$ back gives a $G$-equivariant identification\n$C\\times_YU_1=\\coprod_{G/H}g(C_1|_{U_1})$.\nAn invariant map out of the right side is exactly an $H$-invariant map out of the selected summand: restrict in one direction, and on the $g$-summand extend by composing with $g^{-1}$ in the other. Independence of the coset representative follows from $H$-invariance. These inverse constructions commute with restriction of test targets. Thus its categorical quotient is $X_1|_{U_1}$. On the other hand, on every inverse image of an affine quotient chart of $X$, Step 2 identifies the invariant coordinate ring after base change with the coordinate ring of $Z|_{U_1}$. The integral orbit-quotient charts therefore identify that categorical quotient with $Z|_{U_1}$. Uniqueness of categorical quotients shows the actual $r$ restricts to this isomorphism.",
+   "uses": [
+    "lem-per-projective-finite-group-quotient",
+    "lem-per-admissible-quotient-affine-integral-charts",
+    "lem-weil-pbc-scheme-coproduct-family"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose IX 1.4, printed p.133: normalized component replacement and (*)."
+   }
+  },
+  {
+   "text": "The open $X_1|_{U_1}$ is nonempty and dense, by integrality and the nonempty generic curve. Its isomorphic image $Z|_{U_1}$ is integral. Thus $Z$ has exactly one component dominating $Y_1$, and its reduced closure is $Z_{\\mathrm{md}}$: every such component meets $U_1$, and the generic fibre lies in the integral open just identified. The map $r$ factors scheme-theoretically through this reduced closure. Locally, a section of its defining radical ideal pulls back to zero on the dense open of the reduced integral $X_1$, hence is zero on its whole inverse image; this is exactly the vanishing condition for factorization through the closed subscheme. Since $X_1$ is projective, it is proper over $Y_1$. The reduced closed subscheme $Z_{\\mathrm{md}}\\subset Z$ is separated over $Y_1$, so proper-over-separated makes $X_1\\to Z_{\\mathrm{md}}$ proper. It is birational because it is an isomorphism on the dense opens over $U_1$, as proved in Step 13.",
+   "uses": [
+    "lem-kun-projective-implies-proper",
+    "lem-weil-pbc-proper-over-separated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose IX 1.4, printed p.133: normalized component replacement and (*)."
+   }
+  },
+  {
+   "text": "The projection $X_1\\to X$ is dominant. Indeed $N\\to Y'$ is dominant (the chosen component dominates $Y_1$, and $K(Y')\\to K_1\\otimes_{K(Y)}K(Y')\\to K(N)$ is an injection of fields); the generic fibre of $C\\to Y'$ is geometrically integral, so its field extension to $K(N)$ maps dominantly onto that generic curve. Step 10 makes this generic fibre dense in $C_1$, so $C_1\\to C$, and hence $X_1\\to X$, are dominant. A local equation $a$ of the effective Cartier divisor $E$ is nonzero in $K(X)$. Its pullback is nonzero in $K(X_1)$ by dominance and is therefore a nonzerodivisor in every domain chart of $X_1$ where the equation is defined. The pulled-back locally principal ideal consequently defines an effective Cartier divisor $E_1$. Finally the commutative square with $\\pi,\\pi_1$ gives\n$\\pi_1^{-1}|E_1|=(C_1\\to C)^{-1}\\pi^{-1}|E|\\subseteq |D_1|\\cup f_1^{-1}T'_1$.\nThis uses dominance and integrality, not flatness of $X_1\\to X$.",
+   "uses": [
+    "def-nagata-effective-cartier-ideal",
+    "def-pc-integral-scheme",
+    "def-pc-geometrically-irreducible"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose IX 1.4, printed p.133: normalized component replacement and (*)."
+   }
+  },
+  {
+   "text": "For a finite alteration-topology covering $(Y_i\\to Y)_i$ as in the assertion, pull it back along the dominant finite-type morphism $X\\to Y$, retaining the reduced components dominating the new base, as in the alteration-cover calculus. At the generic point of $Y$, the quotient of the geometrically integral generic curve after the finite etale torsor extension is a geometrically integral curve: after an algebraic closure the torsor is the disjoint union of copies of the field, $G$ permutes them simply transitively, and the quotient is any one copy of the geometrically integral curve. Thus its further field extensions have only one dominating component. Consequently the dominant pullbacks in the cover calculus are precisely $Z_{i,\\mathrm{md}}=(X\\times_YY_i)_{\\mathrm{md}}$ used here; both descriptions retain the closure of that same generic fibre. Step 14 gives a proper birational morphism $X_i\\to Z_{i,\\mathrm{md}}$ for every $i$. Each is a singleton covering, and composition of coverings gives $(X_i\\to X)_i$ covering. This proves the assertion for every covering family in the statement, without claiming that an arbitrary single dominant map $Y_1\\to Y$ is itself a covering.",
+   "uses": [
+    "lem-per-alteration-cover-calculus",
+    "def-pc-geometrically-irreducible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose II 1.2.5--1.2.8 and 2.3.1; IX 1.4, printed p.133."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-per-admissible-quotient-affine-integral-charts",
+  "lem-exc-quasi-excellent-nagata",
+  "lem-weil-pbc-nagata-domain-n2",
+  "def-weil-pbc-japanese-domain",
+  "lem-weil-pbc-noetherian-submodule-finite",
+  "lem-sbc-galois-cover-base-change",
+  "lem-weil-pbc-regular-ring-normal",
+  "lem-weil-pbc-etale-over-normal-ring-normal",
+  "lem-a1-normal-etale-components-clopen",
+  "lem-weil-pbc-finite-etale-clopen-restriction-rank",
+  "lem-weil-pbc-finite-morphism-permanence",
+  "lem-weil-pbc-etale-morphism-open-map",
+  "lem-exc-finite-type-localization-excellent",
+  "lem-per-excellent-normalization-preparation",
+  "lem-sbc-normalization-dominant-lift",
+  "lem-sbc-normal-integral-generic-hom-full",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-sc-etale-coproduct-etale",
+  "def-sc-normalization",
+  "def-fin-normalization-extension",
+  "lem-trf-projective-nodal-family-geometry",
+  "lem-pc-proper-base-change",
+  "def-pc-geometrically-irreducible",
+  "lem-weil-pbc-flat-morphism-affine-criterion",
+  "def-weil-pbc-flat-ring-map",
+  "def-pc-integral-scheme",
+  "lem-fin-finite-over-projective",
+  "lem-trf-h-projective-composition",
+  "lem-kun-projective-implies-proper",
+  "lem-per-projective-finite-group-quotient",
+  "lem-weil-pbc-separated-base-change",
+  "def-pc-relative-effective-cartier",
+  "lem-pc-recd-pullback",
+  "lem-weil-pbc-etale-ring-base-change",
+  "lem-weil-pbc-proper-over-separated",
+  "def-nagata-effective-cartier-ideal",
+  "lem-per-alteration-cover-calculus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "IX 1.4, pp.132--133, with the component, invariant-chart and Cartier arguments supplied explicitly; II 1.2.5--1.2.8 for dominant products."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -62,10 +315,38 @@
    "results": "[grep] OK 5 hit(s)\n  {\"file\": \"Mathlib/LinearAlgebra/Lagrange.lean\", \"line\": \"295\", \"text\": \"/-- Lagrange interpolation: given a finset `s : Finset ι`, a nodal map `v : ι → F` injective on\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Lagrange.lean\", \"line\": \"529\", \"text\": \"section Nodal\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Lagrange.lean\", \"line\": \"536\", \"text\": \"/-- `nodal s v` is the unique monic polynomial whose roots are the nodes defined by `v` and `s`.\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Lagrange.lean\", \"line\": \"538\", \"text\": \"That is, the roots of `nodal s v` are exactly the image of `v` on `s`,\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Lagrange.lean\", \"line\": \"541\", \"text\": \"We can use `nodal` to define the barycentric forms of the evaluated interpolant.\"}",
    "date": "2026-10-19",
    "verdict": "no match: read the returned types; none states this scheme-theoretic assertion or specializes to it in one line."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalized dominant base change of a finite group quotient of a marked nodal curve is a proper birational refinement using the decomposition subgroup",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization, AlgebraicGeometry.Scheme.Hom.normalizationDesc, AlgebraicGeometry.Scheme.Hom.toNormalization, AlgebraicGeometry.Scheme.Hom.normalization, WeierstrassCurve.Affine.Point.map_some, AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage, AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc_assoc, WeierstrassCurve.baseChange_integralModel_eq",
+   "date": "2026-10-19",
+   "verdict": "no match: normalization morphisms, valuation decomposition subgroups, and abstract finite-group quotients do not state the marked nodal scheme-quotient refinement."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"normalization\", \"quotient\"",
+   "results": "0 hits: ",
+   "date": "2026-10-19",
+   "verdict": "no match: normalization morphisms, valuation decomposition subgroups, and abstract finite-group quotients do not state the marked nodal scheme-quotient refinement."
+  },
+  {
+   "tool": "grep",
+   "query": "nodal|decompositionSubgroup|quotient.*baseChange",
+   "results": "0 hits: ",
+   "date": "2026-10-19",
+   "verdict": "no match: normalization morphisms, valuation decomposition subgroups, and abstract finite-group quotients do not state the marked nodal scheme-quotient refinement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite group quotient of semistable curve after normalization of the base and dominant pullback",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization, QuotientGroup.finite, QuotientGroup.Quotient.group, QuotientGroup.fg, QuotientGroup.map_normal, QuotientGroup.Quotient.group.congr_simp, IsZGroup.instQuotientSubgroupOfFinite, Group.fintypeOfDomOfCoker",
+   "date": "2026-10-19",
+   "verdict": "no match: normalization morphisms, valuation decomposition subgroups, and abstract finite-group quotients do not state the marked nodal scheme-quotient refinement."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-uniformization-nodal-quotient-reduction",
@@ -91,5 +372,149 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-nodal-quotient-normalized-base-refinement",
+  "worker": "stage1",
+  "summary": "Q138 resumed the recorded searches; proved finiteness of the original base quotient before using finite-type quotient results, constructed the component torsor and normalization, verified integrality via flat injection into the generic fibre, and wrote the arbitrary-base-change invariant calculation and proper birational quotient comparison. One general statement-only admissible affine quotient lemma is added; all nodal, Cartier, normalization and alteration tools are reused. No Lean work or compilation.",
+  "blueprint": "Supports ancestor lem-per-artin-gabber-affine-curve Step 3 finiteness/duality branch through its recorded chain; precisely realizes ILO IX 1.4 p.133 replacement of the base by Y_i, of Y prime by its normalized selected component, and of G by its decomposition subgroup, before (*).",
+  "tool_uses": [
+   {
+    "node": "lem-exc-quasi-excellent-nagata",
+    "why": "Generic algebraic or scheme-theoretic tool used in the IX 1.4 normalized-component construction; the perverse Fourier unit has no statement supplying this fact. Its precise use is given in the numbered proof step and Q138 review."
+   },
+   {
+    "node": "lem-weil-pbc-nagata-domain-n2",
+    "why": "Generic algebraic or scheme-theoretic tool used in the IX 1.4 normalized-component construction; the perverse Fourier unit has no statement supplying this fact. Its precise use is given in the numbered proof step and Q138 review."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-submodule-finite",
+    "why": "Generic algebraic or scheme-theoretic tool used in the IX 1.4 normalized-component construction; the perverse Fourier unit has no statement supplying this fact. Its precise use is given in the numbered proof step and Q138 review."
+   },
+   {
+    "node": "lem-sbc-galois-cover-base-change",
+    "why": "Generic algebraic or scheme-theoretic tool used in the IX 1.4 normalized-component construction; the perverse Fourier unit has no statement supplying this fact. Its precise use is given in the numbered proof step and Q138 review."
+   },
+   {
+    "node": "lem-weil-pbc-regular-ring-normal",
+    "why": "Generic algebraic or scheme-theoretic tool used in the IX 1.4 normalized-component construction; the perverse Fourier unit has no statement supplying this fact. Its precise use is given in the numbered proof step and Q138 review."
+   },
+   {
+    "node": "lem-weil-pbc-etale-over-normal-ring-normal",
+    "why": "Generic algebraic or scheme-theoretic tool used in the IX 1.4 normalized-component construction; the perverse Fourier unit has no statement supplying this fact. Its precise use is given in the numbered proof step and Q138 review."
+   },
+   {
+    "node": "lem-a1-normal-etale-components-clopen",
+    "why": "Generic algebraic or scheme-theoretic tool used in the IX 1.4 normalized-component construction; the perverse Fourier unit has no statement supplying this fact. Its precise use is given in the numbered proof step and Q138 review."
+   },
+   {
+    "node": "lem-weil-pbc-finite-etale-clopen-restriction-rank",
+    "why": "Generic algebraic or scheme-theoretic tool used in the IX 1.4 normalized-component construction; the perverse Fourier unit has no statement supplying this fact. Its precise use is given in the numbered proof step and Q138 review."
+   },
+   {
+    "node": "lem-weil-pbc-finite-morphism-permanence",
+    "why": "Generic algebraic or scheme-theoretic tool used in the IX 1.4 normalized-component construction; the perverse Fourier unit has no statement supplying this fact. Its precise use is given in the numbered proof step and Q138 review."
+   },
+   {
+    "node": "lem-weil-pbc-etale-morphism-open-map",
+    "why": "Generic algebraic or scheme-theoretic tool used in the IX 1.4 normalized-component construction; the perverse Fourier unit has no statement supplying this fact. Its precise use is given in the numbered proof step and Q138 review."
+   },
+   {
+    "node": "lem-exc-finite-type-localization-excellent",
+    "why": "Generic algebraic or scheme-theoretic tool used in the IX 1.4 normalized-component construction; the perverse Fourier unit has no statement supplying this fact. Its precise use is given in the numbered proof step and Q138 review."
+   },
+   {
+    "node": "lem-sbc-normalization-dominant-lift",
+    "why": "Generic algebraic or scheme-theoretic tool used in the IX 1.4 normalized-component construction; the perverse Fourier unit has no statement supplying this fact. Its precise use is given in the numbered proof step and Q138 review."
+   },
+   {
+    "node": "lem-sbc-normal-integral-generic-hom-full",
+    "why": "Generic algebraic or scheme-theoretic tool used in the IX 1.4 normalized-component construction; the perverse Fourier unit has no statement supplying this fact. Its precise use is given in the numbered proof step and Q138 review."
+   },
+   {
+    "node": "lem-weil-pbc-scheme-coproduct-family",
+    "why": "Generic algebraic or scheme-theoretic tool used in the IX 1.4 normalized-component construction; the perverse Fourier unit has no statement supplying this fact. Its precise use is given in the numbered proof step and Q138 review."
+   },
+   {
+    "node": "lem-sc-etale-coproduct-etale",
+    "why": "Generic algebraic or scheme-theoretic tool used in the IX 1.4 normalized-component construction; the perverse Fourier unit has no statement supplying this fact. Its precise use is given in the numbered proof step and Q138 review."
+   },
+   {
+    "node": "lem-trf-projective-nodal-family-geometry",
+    "why": "Generic algebraic or scheme-theoretic tool used in the IX 1.4 normalized-component construction; the perverse Fourier unit has no statement supplying this fact. Its precise use is given in the numbered proof step and Q138 review."
+   },
+   {
+    "node": "lem-pc-proper-base-change",
+    "why": "Generic algebraic or scheme-theoretic tool used in the IX 1.4 normalized-component construction; the perverse Fourier unit has no statement supplying this fact. Its precise use is given in the numbered proof step and Q138 review."
+   },
+   {
+    "node": "lem-weil-pbc-flat-morphism-affine-criterion",
+    "why": "Generic algebraic or scheme-theoretic tool used in the IX 1.4 normalized-component construction; the perverse Fourier unit has no statement supplying this fact. Its precise use is given in the numbered proof step and Q138 review."
+   },
+   {
+    "node": "lem-fin-finite-over-projective",
+    "why": "Generic algebraic or scheme-theoretic tool used in the IX 1.4 normalized-component construction; the perverse Fourier unit has no statement supplying this fact. Its precise use is given in the numbered proof step and Q138 review."
+   },
+   {
+    "node": "lem-trf-h-projective-composition",
+    "why": "Generic algebraic or scheme-theoretic tool used in the IX 1.4 normalized-component construction; the perverse Fourier unit has no statement supplying this fact. Its precise use is given in the numbered proof step and Q138 review."
+   },
+   {
+    "node": "lem-kun-projective-implies-proper",
+    "why": "Generic algebraic or scheme-theoretic tool used in the IX 1.4 normalized-component construction; the perverse Fourier unit has no statement supplying this fact. Its precise use is given in the numbered proof step and Q138 review."
+   },
+   {
+    "node": "lem-weil-pbc-separated-base-change",
+    "why": "Generic algebraic or scheme-theoretic tool used in the IX 1.4 normalized-component construction; the perverse Fourier unit has no statement supplying this fact. Its precise use is given in the numbered proof step and Q138 review."
+   },
+   {
+    "node": "lem-pc-recd-pullback",
+    "why": "Generic algebraic or scheme-theoretic tool used in the IX 1.4 normalized-component construction; the perverse Fourier unit has no statement supplying this fact. Its precise use is given in the numbered proof step and Q138 review."
+   },
+   {
+    "node": "lem-weil-pbc-etale-ring-base-change",
+    "why": "Generic algebraic or scheme-theoretic tool used in the IX 1.4 normalized-component construction; the perverse Fourier unit has no statement supplying this fact. Its precise use is given in the numbered proof step and Q138 review."
+   },
+   {
+    "node": "lem-weil-pbc-proper-over-separated",
+    "why": "Generic algebraic or scheme-theoretic tool used in the IX 1.4 normalized-component construction; the perverse Fourier unit has no statement supplying this fact. Its precise use is given in the numbered proof step and Q138 review."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-exc-quasi-excellent-nagata",
+  "lem-weil-pbc-nagata-domain-n2",
+  "lem-weil-pbc-noetherian-submodule-finite",
+  "lem-sbc-galois-cover-base-change",
+  "lem-weil-pbc-regular-ring-normal",
+  "lem-weil-pbc-etale-over-normal-ring-normal",
+  "lem-a1-normal-etale-components-clopen",
+  "lem-weil-pbc-finite-etale-clopen-restriction-rank",
+  "lem-weil-pbc-finite-morphism-permanence",
+  "lem-weil-pbc-etale-morphism-open-map",
+  "lem-exc-finite-type-localization-excellent",
+  "lem-sbc-normalization-dominant-lift",
+  "lem-sbc-normal-integral-generic-hom-full",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-sc-etale-coproduct-etale",
+  "lem-trf-projective-nodal-family-geometry",
+  "lem-pc-proper-base-change",
+  "lem-weil-pbc-flat-morphism-affine-criterion",
+  "lem-fin-finite-over-projective",
+  "lem-trf-h-projective-composition",
+  "lem-kun-projective-implies-proper",
+  "lem-weil-pbc-separated-base-change",
+  "lem-pc-recd-pullback",
+  "lem-weil-pbc-etale-ring-base-change",
+  "lem-weil-pbc-proper-over-separated"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q138-d3320f6db",
+  "group": "Q138",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q138-d3320f6db (reviewer sub-agent of L); spot-checked: I read the source, ILO IX 1.4 printed p.133 (pdf pp.138-139). The item realizes the induction on (Y'/G, T'/G), normalizes a dominant component of Y'×_Y Y_i, passes to its decomposition group, and reaches (*). Its statement is the same as Q74's text; no target is weakened and no SGA source is cited. I checked all 16 steps against the cited statements. Step 1: B is finite over A because A is Nagata, hence N-2, B lies in the integral closure of A in the finite extension L, and A is Noetherian. Step 2: the averaging idempotent shows that invariants commute with any base change when |G| is invertible. Steps 3-4: P is normal and étale over the regular U_1, its components are clopen and surject onto U_1, and G permutes them transitively. Step 5: the normalization is finite and excellent, and the H-action lifts uniquely. Step 6: V' is a connected H-torsor. Step 7: N is the normalization of Y_1 in the torsor's function field. Step 8: L_1^H=K_1, and B_1^H=A_1 by normality, so N/H=Y_1. Steps 9-12: the nodal-family base change applies, C_1 is integral via the flat injection into its generic fibre, projectivity comes from finite-over-projective plus 01WE, the Rydh quotient gives X_1, and the marking pulls back as a relative Cartier divisor. Steps 13-14: over U_1 the coset decomposition and Step 2 make r an isomorphism; r factors through Z_md because X_1 is reduced, and it is proper over the separated Z_md. Step 15: the pulled-back equation of E is a nonzerodivisor because the maps are dominant and the charts are domains. Step 16: cover members are generically finite and X_{K(Y)} is geometrically integral, so the md-components agree with those of the cover calculus. There is no cycle. The new node lem-per-admissible-quotient-affine-integral-charts is the general admissible quotient theorem (categorical, affine, integral, orbit fibres, B→B^H charts) and asserts no finiteness. It is true, and I tested it on the empty scheme, H=1, a Galois field, and the free affine case. It is not a duplicate of the generic-degree, projective-quotient or free-affine-quotient nodes, nor of the 03BJ/03BL nodes or the admissible-quotient definition. B1-B9 are satisfied. Batch-5 flags: excellent-normalization-preparation reaches only the trf affine-cover locality lemmas for excellence, G-ring, J-2 and catenarity; projective-nodal-family-geometry is pure geometry (Fitting ideals, differentials, valuation flatness); h-projective-composition is Stacks 01WE. None is part of the proof of the trace formula or of Poincaré duality, so all are accepted. I accepted all 25 declared generic tool_uses. No changes were made."
  }
 }
