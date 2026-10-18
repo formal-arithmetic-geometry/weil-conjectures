@@ -8,12 +8,14 @@ module
 public import WeilConjectures.WeilSheaf.FourierInversion.Defs
 public import WeilConjectures.WeilSheaf.LowerShriekOperations
 public import WeilConjectures.WeilSheaf.TateTwist
+public import WeilConjectures.WeilSheaf.ProjectionFormula.LisseDualityProof
 
 /-!
 # Fourier inversion: inputs from other sections
 
 Statements of blueprint nodes of other sections (the projection formula, the open–closed
-recollement and the Thom isomorphism for Weil complexes) used in the proof of Fourier inversion,
+recorded here; the projection formula is proved in
+`WeilConjectures.WeilSheaf.ProjectionFormula`, the other two are recorded with `sorry`.
 recorded here with `sorry`.
 -/
 
@@ -44,7 +46,8 @@ theorem WeilComplex.nonempty_iso_derivedLowerShriek_tensorLisse {X Y : Scheme.{u
       WeilComplex.tensorLisse ((WeilSheaf.upperStar f).obj G)
           (ProEtale.IsAdicLisseSheaf.upperStar _ hG) ⋙
         WeilComplex.derivedLowerShriek k₀ l f) :=
-  sorry
+  WeilComplex.nonempty_iso_derivedLowerShriek_tensorLisse_of_duality
+    ProEtaleWeilSheaf.lisseDuality f G hG
 
 /-- Blueprint `def-weil-open-closed-recollement` and
 `prop-weil-open-closed-recollement-adjunctions` (open–closed recollement), for Weil complexes.
