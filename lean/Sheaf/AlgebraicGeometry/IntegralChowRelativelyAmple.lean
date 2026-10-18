@@ -8,9 +8,16 @@ module
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Twist
 public import Sheaf.AlgebraicGeometry.TensorPullback
 public import Sheaf.AlgebraicGeometry.Ample
+public import Mathlib.AlgebraicGeometry.Properties
+public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+public import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
+public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
 import WeilConjectures.AlgebraicGeometry.ChowLemma
 import WeilConjectures.AlgebraicGeometry.ProjectiveSpaceReindexImmersion
+import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.SchemeTheoreticallyDominant
 import all Sheaf.AlgebraicGeometry.ChowRelativeAmpleTwistProperties
+import WeilConjectures.AlgebraicGeometry.AmpleIso
 
 /-! # Integral Chow modification with relatively ample twist
 
