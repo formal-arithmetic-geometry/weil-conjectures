@@ -7,14 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.StrictHenselizationCanonicalMap
 import Sheaf.Paper.StrictHenselizationPointEvaluationPointed
-import Sheaf.AlgebraicGeometry.StrictHenselization
 import Sheaf.AlgebraicGeometry.StrictHenselizationStructuralMap
-import WeilConjectures.AlgebraicGeometry.EtalePointedMapRigidity
-import Sheaf.Paper.StrictHenselizationMapExists
-import Sheaf.Paper.StrictHenselizationPointedMap
-import WeilConjectures.AlgebraicGeometry.Sites.StrictHenselizationLocal
-import Sheaf.AlgebraicGeometry.StrictHenselizationCompatibility
-import WeilConjectures.AlgebraicGeometry.StrictHenselizationStructuralMap
 
 /-!
 # The distinguished geometric closed point lies over the original point
@@ -42,6 +35,17 @@ theorem strictHenselizationClosedLift_over
     (s : Spec (.of Ω) ⟶ S) :
     Spec.map (CommRingCat.ofHom (strictHenselizationPointEvaluation s)) ≫
       strictHenselizationStructuralMap s = s := by
-  sorry
+  have := (strictHenselization_properties s).2.1
+  obtain ⟨j⟩ := IsCofiltered.nonempty
+    (C := SmallModel.{u} (strictHenselizationNeighbourhoods s))
+  rw [← strictHenselizationStructuralMap_eq s j]
+  rw [← Scheme.isoSpec_Spec_inv]
+  simpa only [Category.assoc] using!
+    (congrArg (fun f ↦ f ≫ ((AffineEtale.Spec S).obj
+      ((equivSmallModel.{u}
+        (strictHenselizationNeighbourhoods s)).inverse.obj j).1).hom)
+      (strictHenselizationPointEvaluation_pointed s j)).trans
+        (Over.w ((equivSmallModel.{u}
+          (strictHenselizationNeighbourhoods s)).inverse.obj j).2)
 
 end AlgebraicGeometry.Scheme

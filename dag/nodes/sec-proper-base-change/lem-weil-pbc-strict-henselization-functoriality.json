@@ -42,13 +42,14 @@
    }
   },
   {
-   "text": "The canonical structural map is the composite through any representative neighbourhood. Use a representative supplied by cofilteredness and its factorization equation to get Spec(inc sigma residue) followed by jY = barY. The residue map sends every point of its spectrum to the closed point, proving the closed-point assertion. IsSepClosure.sep_closed gives separable closedness of K.",
+   "text": "The canonical structural map is the composite through any representative neighbourhood. Use a representative supplied by cofilteredness and its factorization equation to get Spec(inc sigma residue) followed by jY = barY. The residue map sends every point of its spectrum to the closed point, proving the closed-point assertion. IsSepClosure.sep_closed gives separable closedness of K. For the canonical coordinate-ring evaluation, the auxiliary theorem strictHenselizationClosedLift_over uses cofiltered nonemptiness to choose a representative j, rewrites the structural map using strictHenselizationStructuralMap_eq, and identifies Spec.map (GammaSpecIso _).inv with isoSpec.inv. Postcompose strictHenselizationPointEvaluation_pointed at j with the neighbourhood structure morphism; associativity and the pointed Over.w equation give evaluation followed by jY = barY. This argument does not need the residue-field or functoriality assertions.",
    "uses": [
     "def-weil-pbc-strict-henselization-limit",
     "def-weil-pbc-strict-henselization-structural-map",
     "def-weil-geometric-point",
     "def-weil-pbc-relative-separable-closure",
-    "def-pc-separably-closed"
+    "def-pc-separably-closed",
+    "lem-weil-pbc-strict-henselization-point-evaluation-pointed"
    ],
    "elementary": true,
    "source": {
@@ -127,13 +128,14 @@
   "lem-weil-pbc-strict-henselization-map-exists",
   "lem-weil-pbc-etale-pointed-map-rigidity",
   "def-weil-locally-ringed-space-morphism",
-  "def-weil-etale-morphism"
+  "def-weil-etale-morphism",
+  "lem-weil-pbc-strict-henselization-point-evaluation-pointed"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
   "place": "Tags 04HX and 03PS; algebra.tex Tags 04GU and 08HR; morphisms.tex Tag 02GE",
-  "note": "Y2 stage-3 proof: local structure transported in Lean from existing triple lemmas; residue equivalence and uniqueness, closure inclusion, local-map uniqueness, and neighbourhood compatibility proved in Lean. Only the pointed-map and local-map existence transports remain in separate named modules."
+  "note": "Y2 stage-3 proof: local structure transported in Lean from existing triple lemmas; residue equivalence and uniqueness, closure inclusion, local-map uniqueness, and neighbourhood compatibility proved in Lean. Only the pointed-map and local-map existence transports remain in separate named modules. F8 on 2026-10-18 proves the canonical evaluation closed-lift equation by the pointed evaluation leg equation and the structural-map leg equation. The other proof steps and their dependencies are retained for the parent functoriality theorem."
  },
  "mathlib_searches": [
   {
@@ -232,13 +234,13 @@
   "note": "Statement, dependencies, source proof, docstrings, edge cases, universes, and canonical-map compatibility checked; scompile.py local/server compilation passed."
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-18",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Y2",
+  "group": "F8",
   "result": "pass",
-  "landing": "20261012T044800-L-2043896",
-  "kind": "interface",
+  "landing": "20261018T062752-L-649846",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
