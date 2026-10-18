@@ -66,6 +66,11 @@ lemma mk₀_comp_comp_mk₀ {X' X Y Y' : C} {n : ℕ} (a : X' ⟶ X) (y : Ext.{w
     ((mk₀ a).comp y (zero_add n)).comp (mk₀ b) (add_zero n) = mk₀CompMk₀ a y b :=
   comp_assoc_of_third_deg_zero _ _ _ _
 
+lemma mk₀CompMk₀_comp_mk₀_right {X' X Y Y' Y'' : C} {n : ℕ} (a : X' ⟶ X) (y : Ext.{w} X Y n)
+    (b : Y ⟶ Y') (b' : Y' ⟶ Y'') :
+    mk₀CompMk₀ a (y.comp (mk₀ b) (add_zero n)) b' = mk₀CompMk₀ a y (b ≫ b') := by
+  simp [mk₀CompMk₀, mk₀_comp_mk₀]
+
 end Comp
 
 variable {C : Type u} [Category.{v} C] [Abelian C] {D : Type u'} [Category.{v'} D] [Abelian D]
