@@ -2,7 +2,7 @@
  "id": "lem-per-local-system-finite-cover-germ-action",
  "kind": "statement",
  "title": "Monodromy of a local system on germs over a finite etale neighbourhood",
- "statement": "Let $S$ be a nonempty connected Noetherian scheme [def-pc-scheme, def-weil-connected-scheme, def-weil-pbc-noetherian-ring], let $\\bar s:\\operatorname{Spec}\\Omega\\to S$ be a geometric point [def-weil-geometric-point], and put $\\Pi=\\pi_1(S,\\bar s)$ [def-galois-fibre-functor]. Let $R$ be a commutative ring killed by an integer $n>0$, and let $L$ be an $R_S$-module sheaf [def-weil-sheaf-of-modules-category, def-weil-pbc-constant-sheaf] on the small etale site $S_{\\mathrm{et}}$ [def-weil-pbc-etale-site] which is a local system in the sense of [lem-per-torsion-local-system-monodromy]: its underlying sheaf of sets is a filtered colimit [def-weil-pbc-category-colimit] of sheaves represented by finite etale $S$-schemes [def-weil-pbc-finite-etale-category]. Give $L_{\\bar s}$ the monodromy action of that node. Let $u:U\\to S$ be a finite etale morphism, let $\\bar x:\\operatorname{Spec}\\Omega\\to U$ satisfy $u\\bar x=\\bar s$, and let $z\\in L(U)$. Regard $\\bar x$ as an element of the finite geometric fibre $|U_{\\bar s}|$, with its natural $\\Pi$-action from the fibre functor [def-galois-fibre-functor]. Writing $\\operatorname{germ}_{\\bar x}(z)$ for the class of $z$ at the pointed etale neighbourhood $(U,\\bar x)$ in $L_{\\bar s}$ [def-weil-pbc-geometric-stalks], one has\n$$g\\cdot\\operatorname{germ}_{\\bar x}(z)=\\operatorname{germ}_{g\\cdot\\bar x}(z)\\qquad(g\\in\\Pi).$$\nNeither $R$ nor the stalks of $L$ are required to be finite, and $U$ need not be connected or Galois.",
+ "statement": "Let $S$ be a nonempty connected Noetherian scheme [def-pc-scheme, def-weil-connected-scheme, pqf-def-locnoeth, def-weil-pbc-quasi-compact-scheme], let $\\bar s:\\operatorname{Spec}\\Omega\\to S$ be a geometric point [def-weil-geometric-point], and put $\\Pi=\\pi_1(S,\\bar s)$ [def-galois-fibre-functor]. Let $R$ be a commutative ring killed by an integer $n>0$, and let $L$ be an $R_S$-module sheaf [def-weil-sheaf-of-modules-category, def-weil-pbc-constant-sheaf] on the small etale site $S_{\\mathrm{et}}$ [def-weil-pbc-etale-site] which is a local system in the sense of [lem-per-torsion-local-system-monodromy]: its underlying sheaf of sets is a filtered colimit [def-weil-pbc-category-colimit] of sheaves represented by finite etale $S$-schemes [def-weil-pbc-finite-etale-category]. Give $L_{\\bar s}$ the monodromy action of that node. Let $u:U\\to S$ be a finite etale morphism, let $\\bar x:\\operatorname{Spec}\\Omega\\to U$ satisfy $u\\bar x=\\bar s$, and let $z\\in L(U)$. Regard $\\bar x$ as an element of the finite geometric fibre $|U_{\\bar s}|$, with its natural $\\Pi$-action from the fibre functor [def-galois-fibre-functor]. Writing $\\operatorname{germ}_{\\bar x}(z)$ for the class of $z$ at the pointed etale neighbourhood $(U,\\bar x)$ in $L_{\\bar s}$ [def-weil-pbc-geometric-stalks], one has\n$$g\\cdot\\operatorname{germ}_{\\bar x}(z)=\\operatorname{germ}_{g\\cdot\\bar x}(z)\\qquad(g\\in\\Pi).$$\nNeither $R$ nor the stalks of $L$ are required to be finite, and $U$ need not be connected or Galois.",
  "source": {
   "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
   "place": "Expose XVII, Proposition 7.2.3 and its proof, p. 301 (PDF p. 307): the monodromy action is the extension of the finite-etale fibre functor to ind-objects; its naturality applied to the sheaf map represented by a section on a finite etale neighbourhood."
@@ -10,7 +10,6 @@
  "stmt_deps": [
   "def-pc-scheme",
   "def-weil-connected-scheme",
-  "def-weil-pbc-noetherian-ring",
   "def-weil-geometric-point",
   "def-galois-fibre-functor",
   "def-weil-sheaf-of-modules-category",
@@ -19,11 +18,104 @@
   "lem-per-torsion-local-system-monodromy",
   "def-weil-pbc-geometric-stalks",
   "def-weil-pbc-category-colimit",
-  "def-weil-pbc-finite-etale-category"
+  "def-weil-pbc-finite-etale-category",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-quasi-compact-scheme"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The scheme $U$ is quasi-compact and quasi-separated. Indeed a finite morphism is affine and, on each affine open of $S$, its algebra is a finite module. A finite module generating list also generates that algebra as an algebra, so the morphism is of finite type. The finite-type-over-Noetherian theorem makes $U$ Noetherian, hence quasi-compact; the locally-Noetherian quasi-separatedness lemma gives the other assertion. These arguments do not assume that $U$ is connected or that $S$ is separated.",
+   "uses": [
+    "def-weil-finite-integral-morphism",
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-locally-noetherian-quasi-separated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01T6, lemma-finite-type-noetherian; Properties Tags 01OV (definition-noetherian) and 01OY (lemma-locally-Noetherian-quasi-separated); finite morphisms: Tag 01WH."
+   }
+  },
+  {
+   "text": "For a small filtered diagram of set sheaves $(E_i)$ on $S_{\\mathrm{et}}$ with sheaf colimit $E$, evaluation on every affine etale object commutes with this colimit: restriction to the full affine etale site is an equivalence, hence carries a colimit to a colimit, and affine evaluation there preserves filtered colimits. Choose a finite affine etale cover $(V_a\\to U)_a$ with quasi-compact overlaps, using the cofinal finite-covering lemma. Cover each overlap $V_a\\times_U V_b$ by finitely many affine opens $W_{abk}$. For every sheaf $H$, the sheaf axiom identifies $H(U)$ with the equalizer of $\\prod_aH(V_a)\\rightrightarrows\\prod_{a,b,k}H(W_{abk})$: the displayed equations say exactly that sections agree on each overlap, since its affine opens cover it. Apply the affine comparison to all these finitely many objects and commute the resulting finite products and equalizer with the filtered colimit. This proves that the canonical map $\\varinjlim_i E_i(U)\\to E(U)$ is bijective. All index categories and finite matching diagrams are small; the same argument permits empty covers.",
+   "uses": [
+    "lem-weil-pbc-affine-etale-site-topos",
+    "aux-weil-pbc-affine-sections-colimit",
+    "lem-weil-pbc-etale-qcqs-cofinal-finite-coverings",
+    "lem-weil-pbc-filtered-colimits-commute-finite-limits",
+    "lem-weil-pbc-site-sheaf-sets-limits-sectionwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 0738, lemma-directed-colimits-sections (4); Etale Cohomology Tag 03Q4, section-colimit; finite matching written out using Topologies Tag 04HR and Categories Tag 002W."
+   }
+  },
+  {
+   "text": "Forget the module structure and choose a small filtered presentation $F=\\varinjlim_{i\\in I}h_{P_i}$ of the underlying set sheaf of $L$, with each $P_i$ finite etale over $S$, and cocone maps $a_i:h_{P_i}\\to F$. Here $h_P(V)=\\operatorname{Mor}_S(V,P)$ is a sheaf by the representable-sheaf lemma. Yoneda identifies the transition sheaf maps with $S$-morphisms between the $P_i$. The canonical fibre/stalk comparisons for finite etale sheaves and the fact that geometric stalks commute with colimits give $F_{\\bar s}=\\varinjlim_i |(P_i)_{\\bar s}|$. Denote its cocone maps by $j_i$. For $g\\in\\Pi$, the finite-fibre maps $p\\mapsto g\\cdot p$ commute with every transition, because $\\Pi$ consists of natural automorphisms of the finite fibre functor. They therefore induce the map $[i,p]\\mapsto[i,g\\cdot p]$ on this colimit. The filtered-colimit equality criterion checks well-definedness: equality at a common stage remains equality after applying $g$. The identity and multiplication laws hold at each stage and hence on every colimit class. This is precisely the ind-finite extension defining the stipulated monodromy action, so $g\\cdot j_i(p)=j_i(g\\cdot p)$. No $h_{P_i}$ is required to be a module subsheaf.",
+   "uses": [
+    "lem-weil-pbc-small-etale-representable-presheaf-sheaf",
+    "lem-galois-yoneda-hom-bijection",
+    "thm-galois-lc-etale",
+    "lem-kun-stalks-commute-colimits",
+    "def-galois-fibre-functor",
+    "lem-weil-pbc-filtered-colimit-sets-elementwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVII, Definition 7.2.1 and proof of Proposition 7.2.3, p. 301 (PDF p. 307): extend the finite-etale fibre action to ind-objects. Finite fibre/stalk comparison: Stacks Tag 0DV5, theorem-locally-constant; colimit classes: Categories Tag 04AX."
+   }
+  },
+  {
+   "text": "By Step 2 and the elementwise description of a filtered colimit of sets, $z\\in F(U)$ is $(a_i)_U(f)$ for some $i$ and some $f\\in h_{P_i}(U)=\\operatorname{Mor}_S(U,P_i)$. For every geometric lift $y$ of $\\bar s$ to $U$, the canonical fibre/stalk comparison sends the germ of $f$ at $(U,y)$ to $f\\circ y\\in |(P_i)_{\\bar s}|$. Taking the stalk of $a_i$ therefore gives $\\operatorname{germ}_y(z)=j_i(f\\circ y)$. This normalization is also read directly from the stalk colimit: a sheaf map sends the class of a section at $(U,y)$ to the class of its image at that same pointed neighbourhood.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-sets-elementwise",
+    "thm-galois-lc-etale",
+    "def-weil-pbc-geometric-stalks"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVII, proof of Proposition 7.2.3, p. 301 (PDF p. 307), fibre functor on ind-objects; section factorization uses Stacks Tag 0738(4) as established in Step 2; geometric stalk normalization is the pointed-neighbourhood colimit."
+   }
+  },
+  {
+   "text": "Apply naturality of $g$, as an automorphism of the finite fibre functor, to the morphism $f:U\\to P_i$. It says $g\\cdot(f\\circ\\bar x)=f\\circ(g\\cdot\\bar x)$. Together with Steps 3 and 4 this gives\n$$g\\cdot\\operatorname{germ}_{\\bar x}(z)=g\\cdot j_i(f\\circ\\bar x)=j_i(g\\cdot(f\\circ\\bar x))=j_i(f\\circ(g\\cdot\\bar x))=\\operatorname{germ}_{g\\cdot\\bar x}(z).$$\nThe argument is on underlying sets, so it applies to the given module stalk regardless of the cardinality of $R$ or $L_{\\bar s}$. It uses only that $U$ is finite etale; disconnected and non-Galois covers are included.",
+   "uses": [
+    "def-galois-fibre-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVII, proof of Proposition 7.2.3, p. 301 (PDF p. 307), naturality of the finite fibre functor followed by passage to ind-objects."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-integral-morphism",
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-affine-etale-site-topos",
+  "aux-weil-pbc-affine-sections-colimit",
+  "lem-weil-pbc-etale-qcqs-cofinal-finite-coverings",
+  "lem-weil-pbc-filtered-colimits-commute-finite-limits",
+  "lem-weil-pbc-site-sheaf-sets-limits-sectionwise",
+  "lem-weil-pbc-small-etale-representable-presheaf-sheaf",
+  "lem-galois-yoneda-hom-bijection",
+  "thm-galois-lc-etale",
+  "lem-kun-stalks-commute-colimits",
+  "def-galois-fibre-functor",
+  "lem-weil-pbc-filtered-colimit-sets-elementwise",
+  "def-weil-pbc-geometric-stalks"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose XVII, Definition 7.2.1 and Propositions 7.2.2–7.2.3, p. 301 (PDF p. 307), with the section factorization supplied by Stacks Tag 0738(4) through the finite matching argument in Step 2."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -66,10 +158,38 @@
    "results": "8 hits: IsCoveringMap.monodromyFunctor_map, IsCoveringMap.monodromy_map, ModuleCat.Tilde.stalkToFiberLinearMap_germ, IsCoveringMap.monodromyFunctor_obj, AlgebraicGeometry.exists_lift_of_germInjective_aux, IsCoveringMap.monodromyFunctor, ModuleCat.Tilde.toOpen_germ_apply, AlgebraicGeometry.spread_out_of_isGermInjective; note: ; digest: 2fcbc45d617ba490",
    "date": "2026-10-19",
    "verdict": "no match: abstract finite Galois-category naturality has finite fibres only; topological covering monodromy and Zariski tilde-module germs do not state the etale ind-finite local-system germ formula"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "monodromy of an etale ind finite local system sends a germ of a section over a finite etale cover to the germ at the translated geometric lift",
+   "results": "8 hits: IsCoveringMap.monodromyFunctor_map, IsCoveringMap.monodromyFunctor, IsCoveringMap.monodromyFunctor_obj, AlgebraicGeometry.exists_lift_of_germInjective_aux, ModuleCat.Tilde.stalkToFiberLinearMap_germ, TopCat.Presheaf.Γgerm_res_apply, TopCat.Presheaf.map_germ_eq_Γgerm, ModuleCat.Tilde.toOpen_germ_apply; note: ; digest: dcdb7b241700eff2",
+   "date": "2026-10-19",
+   "verdict": "no match: finite Galois-category naturality gives only finite fibres; the other hits concern topological coverings or Zariski germs, not the etale ind-finite local-system germ formula"
+  },
+  {
+   "tool": "leansearch",
+   "query": "stalks of etale sheaves ind finite local systems monodromy natural action on germs over finite etale covers",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.germ_stalkMap_apply, TopCat.Presheaf.Sheafify.isGerm, AlgebraicGeometry.LocallyRingedSpace.stalkMap_germ_apply, TopCat.Presheaf.Γgerm, IsCoveringMap.monodromy, TopCat.Presheaf.stalk_mono_of_mono, AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso, TopCat.stalkToFiber; note: ; digest: f568a1a3174d6c98",
+   "date": "2026-10-19",
+   "verdict": "no match: finite Galois-category naturality gives only finite fibres; the other hits concern topological coverings or Zariski germs, not the etale ind-finite local-system germ formula"
+  },
+  {
+   "tool": "grep",
+   "query": "mulAction_naturality|IsNaturalSMul|[Ii]nd.*[Gg]alois|[Ll]ocal[Ss]ystem CategoryTheory",
+   "results": "10 hits: Mathlib/CategoryTheory/Galois/GaloisObjects.lean, Mathlib/CategoryTheory/Galois/Basic.lean, Mathlib/CategoryTheory/Galois/Prorepresentability.lean, Mathlib/CategoryTheory/Galois/Prorepresentability.lean, Mathlib/CategoryTheory/Category/GaloisConnection.lean, Mathlib/CategoryTheory/Galois/IsFundamentalgroup.lean, Mathlib/CategoryTheory/Galois/IsFundamentalgroup.lean, Mathlib/CategoryTheory/Galois/IsFundamentalgroup.lean; note: ; digest: a66ed75f29f299fc",
+   "date": "2026-10-19",
+   "verdict": "no match: finite Galois-category naturality gives only finite fibres; the other hits concern topological coverings or Zariski germs, not the etale ind-finite local-system germ formula"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "fundamental group natural automorphism of finite etale fibre functor extends to filtered colimit stalk of local system",
+   "results": "8 hits: CategoryTheory.PreGaloisCategory.instIsFundamentalGroupAutFunctorFintypeCat, CategoryTheory.PreGaloisCategory.autIsoFibers, CategoryTheory.PreGaloisCategory.toAutMulEquiv_apply, CategoryTheory.PreGaloisCategory.toAutHomeo_apply, CategoryTheory.PreGaloisCategory.IsFundamentalGroup.toIsNaturalSMul, CategoryTheory.PreGaloisCategory.autMulEquivAutGalois_π, CategoryTheory.PreGaloisCategory.endEquivAutGalois_π, CategoryTheory.PreGaloisCategory.autIsoFibers_inv_app; note: ; digest: 6fde93a401c06d71",
+   "date": "2026-10-19",
+   "verdict": "no match: finite Galois-category naturality gives only finite fibres; the other hits concern topological coverings or Zariski germs, not the etale ind-finite local-system germ formula"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-galois-descent-monodromy-tensor",
@@ -97,5 +217,49 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-local-system-finite-cover-germ-action",
+  "worker": "stage1",
+  "summary": "Kept the mathematical statement, replacing the Noetherian-ring citation by the actual locally-Noetherian and quasi-compact scheme definitions. Factored a section over finite etale U through a finite set-valued stage using a finite sheaf-matching calculation from existing affine-site tools. Constructed the monodromy action on the stalk colimit and applied finite-fibre naturality with the explicit germ normalization. No new node and no Lean attachment.",
+  "blueprint": "Proof, Step 3 of lem-per-artin-gabber-affine-curve: 'By the duality symmetry of the middle perverse t-structure' and 'the Verdier exchange'; the inherited coefficient-duality branch via lem-per-qbar-arbitrary-field-duality, lem-per-finite-residue-dualizing, lem-per-potential-local-duality, lem-per-coefficient-change-dualizing, lem-per-ctf-hom-coefficient-comparison and lem-per-ctf-hom-condition-b. Subargument: ILO XVII Lemma 7.6.11, the locally constant flat case of condition (B). Auxiliary tensor stability of the fixed-partition weakly constructible class. The monodromy tensor comparison for arbitrary torsion local systems, before the finite convolution-filtration argument. Step 7 of lem-per-local-system-tensor-monodromy: equivariance of the stalk tensor comparison on a finite Galois cover trivializing a pair of finite-type pieces. Supporting germ calculation: the action of the fundamental group on the stalk of an ind-finite local system sends a germ over a finite etale neighbourhood to the germ at the translated geometric lift. The five proof steps supply the germ calculation on the inherited coefficient-duality/tensor-monodromy branch without changing its unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-affine-etale-site-topos",
+    "why": "Generic restriction equivalence for sheaves of sets, used only to preserve the filtered presentation on the affine site; this unit has no such site comparison."
+   },
+   {
+    "node": "aux-weil-pbc-affine-sections-colimit",
+    "why": "Generic affine evaluation of a filtered set-sheaf colimit, used for the finite matching calculation; this unit has no affine evaluation theorem."
+   },
+   {
+    "node": "lem-weil-pbc-etale-qcqs-cofinal-finite-coverings",
+    "why": "Generic finite affine etale cover with quasi-compact overlaps for qcqs U; this unit has no site compactness lemma."
+   },
+   {
+    "node": "lem-weil-pbc-small-etale-representable-presheaf-sheaf",
+    "why": "Generic subcanonicality fact ensuring the finite-etale representables in the presentation are sheaves."
+   },
+   {
+    "node": "thm-galois-lc-etale",
+    "why": "Generic finite-etale/finite locally constant equivalence, used only for its canonical fibre/stalk comparison, not a replacement of the perverse unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-affine-etale-site-topos",
+  "aux-weil-pbc-affine-sections-colimit",
+  "lem-weil-pbc-etale-qcqs-cofinal-finite-coverings",
+  "lem-weil-pbc-small-etale-representable-presheaf-sheaf",
+  "thm-galois-lc-etale"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q05-9b5e46558",
+  "group": "Q05",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q05-9b5e46558 (reviewer sub-agent of L); spot-checked: I read the item, all five steps and every cited statement, plus the source, ILO XVII §7.2 on PDF p.307 (Def 7.2.1, Props 7.2.2–7.2.3). The proof of 7.2.3 defines the monodromy action as the fibre-functor action passed to ind-objects. Step 3 builds exactly that action, [i,p]↦[i,gp], and checks it is well defined and satisfies the group laws. Step 1 is correct: finite gives finite type over Noetherian S, so U is Noetherian and qcqs. Step 2 is correct: the finite affine cover from the cofinal lemma has quasi-compact overlaps, the equalizer is right because sheaves are separated on the overlap covers, finite limits commute with filtered colimits, and the empty U case holds. Steps 4–5 are correct: germ_y(a_i(f))=j_i(f∘y), and naturality of g along the FEt morphism f:U→P_i gives the formula. Steps 4–5 with U=P_i also show the action does not depend on the chosen presentation. Edge cases checked: U empty, U disconnected or not surjective, L=0 or R=0, U=S, and infinite R or stalks. The stmt_deps change (Noetherian ring replaced by locally Noetherian plus quasi-compact) is a correct citation repair, not a change to the statement. No new nodes; no duplicate germ node found in the DAG; no cycle; no SGA cited. Accepted the declared tool_uses: affine-etale-site-topos, affine-sections-colimit, qcqs-cofinal-finite-coverings, representable-presheaf-sheaf and galois-lc-etale. These are generic tools, the same set already accepted for lem-per-torsion-local-system-monodromy. Advisory, not a fault: that node's statement does not spell out how the action is defined, so the item takes the ILO 7.2.3 definition, which step 3 writes out."
  }
 }
