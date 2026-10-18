@@ -15,9 +15,91 @@
   "def-weil-finite-type-morphism",
   "def-pc-base-change"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $S=\\operatorname{Spec}A$ and $S_0=\\operatorname{Spec}(A/I)$. The affine scheme $S$ is quasi-compact and quasi-separated: apply [lem-weil-pbc-qcqs-over-affine] to its identity morphism, which is quasi-compact and separated. The given $f:X\\to S$ is separated and of finite type, so [thm-nagata-compactification] supplies a compactification $X\\xrightarrow{j}\\overline X\\xrightarrow{p}S$. By [def-nagata-compactification] and [def-nagata-compactifiable], $j$ is an open immersion, $p$ is proper, and $p\\circ j=f$. Here we use Nagata as the existing general compactification tool in place of the Chow reduction of 0CT9; the boundary argument is the second paragraph of that proof.",
+   "uses": [
+    "lem-weil-pbc-qcqs-over-affine",
+    "thm-nagata-compactification",
+    "def-nagata-compactification",
+    "def-nagata-compactifiable"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0CT9, lemma-split-off-proper-part-henselian, second reduction paragraph (proper compactification and removal of its boundary)."
+   }
+  },
+  {
+   "text": "Base change gives an open immersion $j_0:X_0\\hookrightarrow\\overline X_0$ by [lem-weil-pbc-open-immersion-base-change]. Thus $Y$ identifies with an open subscheme $Y^c=j_0(Y)$ of $\\overline X_0$. The latter is proper, hence separated, over $S_0$ by [lem-weil-pbc-proper-fp-permanence] and [def-weil-proper-morphism]. Since $Y\\to S_0$ is proper by hypothesis, [lem-weil-pbc-proper-over-separated] makes $Y\\to\\overline X_0$ proper. Its image is closed: universal closedness applied to the identity base change is closedness, and the entire domain is closed in itself. Consequently $Y^c$ is open and closed in $\\overline X_0$, with the restricted structure sheaf.",
+   "uses": [
+    "lem-weil-pbc-open-immersion-base-change",
+    "lem-weil-pbc-proper-fp-permanence",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-proper-over-separated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0CT9, lemma-split-off-proper-part-henselian, second reduction paragraph (proper compactification and removal of its boundary)."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-henselian-clopen-restriction] to the proper scheme $\\overline X\\to S$ and the same henselian pair $(A,I)$. Its surjectivity assertion gives a clopen subset $\\overline W\\subseteq\\overline X$ whose restriction to $\\overline X_0$ is $Y^c$. Give it the restricted structure sheaf. Its inclusion is a closed immersion: locally on the ambient scheme the sheaf map is the identity on $\\overline W$ and the map to zero on its open complement, hence is surjective. By [lem-weil-pbc-closed-immersion-proper], $\\overline W\\to S$ is proper. By open-immersion base change [lem-weil-pbc-open-immersion-base-change], its closed fibre is the open subscheme on $Y^c$, so $\\overline W_0=Y^c$ as subschemes, not merely as underlying subsets.",
+   "uses": [
+    "lem-weil-pbc-henselian-clopen-restriction",
+    "lem-weil-pbc-closed-immersion-proper",
+    "lem-weil-pbc-open-immersion-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0CT9, lemma-split-off-proper-part-henselian, second reduction paragraph (proper compactification and removal of its boundary)."
+   }
+  },
+  {
+   "text": "The boundary $T=\\overline W\\setminus j(X)$ is closed in $\\overline W$, since $j(X)$ is open, and is disjoint from $\\overline W_0=Y^c\\subseteq j_0(X_0)$. If $t\\in T$, its closure $C=\\overline{\\{t\\}}$ in $\\overline W$ is nonempty, closed, irreducible and contained in $T$. Indeed, if two relatively closed subsets cover $C$, one contains $t$ and therefore its closure $C$. Apply the irreducible-closed-subset assertion of [lemma-weil-pbc-stein-connectedness] to the proper scheme $\\overline W\\to S$: it says $C$ meets its closed fibre in a nonempty connected subset. This contradicts $T\\cap\\overline W_0=\\varnothing$. Hence $T=\\varnothing$ and $\\overline W\\subseteq j(X)$. No local, Noetherian or completeness assumption on $A$ was used.",
+   "uses": [
+    "lemma-weil-pbc-stein-connectedness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0CT9, lemma-split-off-proper-part-henselian, second reduction paragraph (proper compactification and removal of its boundary)."
+   }
+  },
+  {
+   "text": "Let $W=j^{-1}(\\overline W)$ with the restricted structure sheaf. It is open and closed in $X$ by continuity, and the open immersion $j$ restricts to an isomorphism $W\\simeq\\overline W$ by [def-weil-open-immersion], since Step 4 gives its entire image. Thus $W\\to S$ is proper, being identified with $\\overline W\\to S$. Base change of this restriction, or equivalently taking the inverse image under $j_0$, gives $W_0=j_0^{-1}(\\overline W_0)=j_0^{-1}(j_0(Y))=Y$ as open subschemes of $X_0$. Equality of their restricted structure sheaves follows from the open-immersion description in [def-weil-open-immersion] and its base-change assertion [lem-weil-pbc-open-immersion-base-change]. This proves the required equality of subschemes.",
+   "uses": [
+    "def-weil-open-immersion",
+    "lem-weil-pbc-open-immersion-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0CT9, lemma-split-off-proper-part-henselian, second reduction paragraph (proper compactification and removal of its boundary)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-qcqs-over-affine",
+  "thm-nagata-compactification",
+  "def-nagata-compactification",
+  "def-nagata-compactifiable",
+  "lem-weil-pbc-open-immersion-base-change",
+  "lem-weil-pbc-proper-fp-permanence",
+  "def-weil-proper-morphism",
+  "lem-weil-pbc-proper-over-separated",
+  "lem-weil-pbc-henselian-clopen-restriction",
+  "lem-weil-pbc-closed-immersion-proper",
+  "lemma-weil-pbc-stein-connectedness",
+  "def-weil-open-immersion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0CT9, lemma-split-off-proper-part-henselian, second reduction paragraph (proper compactification and removal of its boundary). The agent substitutes the existing Nagata compactification theorem for Chow and uses the existing proper henselian clopen theorem for the final Stein argument."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -46,10 +128,38 @@
    "results": "[grep] OK 0 hit(s)\nSearched Mathlib/AlgebraicGeometry",
    "date": "2026-10-19",
    "verdict": "no match: the hits concern ordinary etale algebras, formal smoothness, cotangent definitions or completeness; none states this completion/algebraization or henselian lifting theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A separated finite type scheme over a henselian pair has a proper clopen part lifting every proper clopen part of its closed fibre",
+   "results": "8 hits: AlgebraicGeometry.IsSeparated.instIsClosedImmersionLiftSchemeId, AlgebraicGeometry.isProper_eq, AlgebraicGeometry.Scheme.instIsClosedImmersionLiftIdOfIsSeparated, AlgebraicGeometry.finite_appTop_of_universallyClosed, Algebra.QuasiFiniteAt.isClopen_singleton, AlgebraicGeometry.pointsPi_surjective, AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.Scheme.isSeparated_iff_isClosedImmersion_prod_lift",
+   "date": "2026-10-19",
+   "verdict": "no match: the hits give properness criteria, separated diagonals, or quasi-finite clopen singletons; none gives lifting of a proper clopen part over a henselian pair."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsProper, HenselianRing",
+   "results": "0 hits: ",
+   "date": "2026-10-19",
+   "verdict": "no match: the hits give properness criteria, separated diagonals, or quasi-finite clopen singletons; none gives lifting of a proper clopen part over a henselian pair."
+  },
+  {
+   "tool": "grep",
+   "query": "henselian|Henselian|clopen.*proper|proper.*clopen",
+   "results": "0 hits: ; searched Mathlib/AlgebraicGeometry",
+   "date": "2026-10-19",
+   "verdict": "no match: the hits give properness criteria, separated diagonals, or quasi-finite clopen singletons; none gives lifting of a proper clopen part over a henselian pair."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A proper connected component of the closed fibre over a henselian pair extends to a proper open and closed part of a separated scheme of finite type",
+   "results": "8 hits: AlgebraicGeometry.isProper_eq, AlgebraicGeometry.isProper_iff, AlgebraicGeometry.IsProper.toIsSeparated, AlgebraicGeometry.IsProper.of_comp_of_isSeparated, AlgebraicGeometry.IsProper.mk, AlgebraicGeometry.IsProper.casesOn, AlgebraicGeometry.IsProper.recOn, AlgebraicGeometry.IsProper.instMorphismRestrict",
+   "date": "2026-10-19",
+   "verdict": "no match: the hits give properness criteria, separated diagonals, or quasi-finite clopen singletons; none gives lifting of a proper clopen part over a henselian pair."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-elkik-finite-etale-away-completion",
@@ -73,5 +183,64 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-henselian-pair-proper-clopen-lift",
+  "worker": "stage1",
+  "summary": "Statement unchanged; five-step compactification and boundary-removal argument for Stacks 0CT9 using existing nodes only. General Nagata compactification is already Lean-closed and replaces the preliminary Chow reduction; proper henselian clopen lifting is reused only after passing to the proper ambient scheme. The boundary contradiction uses the precise irreducible-closed-subset clause of Stein connectedness. No new nodes or leaves.",
+  "blueprint": "Supports the inherited ancestor lem-per-artin-gabber-affine-curve Step 1 through its recorded local-duality / partial-algebraization / Elkik chain, specifically splitting off the proper closed-fibre piece of the finite-type model. The unit and chapter route are unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-qcqs-over-affine",
+    "why": "Generic affine qcqs criterion for the base S; no node of this unit supplies this general tool, and it does not replace a step of the perverse unit."
+   },
+   {
+    "node": "thm-nagata-compactification",
+    "why": "Generic compactification theorem for a separated finite-type scheme over the affine base; no node of this unit supplies this general tool, and it does not replace a step of the perverse unit."
+   },
+   {
+    "node": "lem-weil-pbc-open-immersion-base-change",
+    "why": "Generic base-change stability of open immersions; no node of this unit supplies this general tool, and it does not replace a step of the perverse unit."
+   },
+   {
+    "node": "lem-weil-pbc-proper-fp-permanence",
+    "why": "Generic proper base-change permanence; no node of this unit supplies this general tool, and it does not replace a step of the perverse unit."
+   },
+   {
+    "node": "lem-weil-pbc-proper-over-separated",
+    "why": "Generic proper-source to separated-target theorem; no node of this unit supplies this general tool, and it does not replace a step of the perverse unit."
+   },
+   {
+    "node": "lem-weil-pbc-henselian-clopen-restriction",
+    "why": "Generic clopen lifting on the proper compactification; no node of this unit supplies this general tool, and it does not replace a step of the perverse unit."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-proper",
+    "why": "Generic properness of a closed subscheme of a proper scheme; no node of this unit supplies this general tool, and it does not replace a step of the perverse unit."
+   },
+   {
+    "node": "lemma-weil-pbc-stein-connectedness",
+    "why": "Generic nonempty closed-fibre intersection of an irreducible closed subset of a proper henselian scheme; no node of this unit supplies this general tool, and it does not replace a step of the perverse unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-qcqs-over-affine",
+  "thm-nagata-compactification",
+  "lem-weil-pbc-open-immersion-base-change",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-weil-pbc-proper-over-separated",
+  "lem-weil-pbc-henselian-clopen-restriction",
+  "lem-weil-pbc-closed-immersion-proper",
+  "lemma-weil-pbc-stein-connectedness"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q68-f2a3f2b0c",
+  "group": "Q68",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q68-f2a3f2b0c (reviewer sub-agent of L); spot-checked: I read Stacks 0CT9 (more-morphisms.tex l.15462, all three paragraphs). The item statement matches the source hypothesis by hypothesis and is unchanged. The five steps replace the Chow reduction with Nagata, which is Lean-closed and applies over Spec A once Step 1 shows Spec A is qcqs; then they follow the source's second paragraph. Step 2: open-immersion base change, proper-fp-permanence (b) and 01W6(2) show that Y^c is clopen in Xbar_0. Step 3: the surjectivity clause of 0A0B on the proper Xbar gives Wbar; a clopen open subscheme is a closed immersion, so Wbar is proper over S, and Wbar_0=Y^c as open subschemes. Step 4: by the irreducible-closed-subset clause of lemma-weil-pbc-stein-connectedness (in both its statement and its blueprint_update), a nonempty boundary T would meet Wbar_0, so T is empty. Step 5 restricts along j and is genuinely elementary. Every cited statement says what its step takes from it. I tested Y empty, I=0, A=0, proper X, and k[[t]] disjoint union k((t)) over k[[t]] with I=(t); each case is handled. There are no new nodes. The DAG has no duplicate (0CT9 appears only in the item and its citer), and walking the dependency closure (2073 nodes) finds no cycle. proof_deps is exactly the union of the steps' uses. I accept all eight declared off-unit generic tool_uses. There is no SGA. Cosmetic only: the verdict text on the first four mathlib_searches is generic, and citations.json, mentioned in the report, is not in the commit."
  }
 }
