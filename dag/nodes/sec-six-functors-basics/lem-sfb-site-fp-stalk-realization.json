@@ -15,9 +15,89 @@
   "def-weil-sheaf-of-modules-category",
   "def-weil-pbc-sheafification"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply the site-point reconstruction theorem to $p$. Put $u(V)=p^{-1}(h_V^\\#)$ and let $\\mathcal N$ have objects $(V,y)$ with $y\\in u(V)$ and arrows preserving these elements. It is small and cofiltered, and for every sheaf of sets $G$ its canonical section-to-germ map identifies $p^{-1}G$ with $\\varinjlim_{\\mathcal N^{\\mathrm{op}}}G(V)$. In particular every element of the underlying set of $R_p$ is represented by a section of $R$ on a pointed object. Only this set-valued assertion is used: no constant-coefficient hypothesis on $R$ is imposed.",
+   "uses": [
+    "lem-trf-site-point-reconstruction-sets"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0DEN, lemma-check-K-flat-stalks, proof of (1), local finite-presentation realization paragraph."
+   }
+  },
+  {
+   "text": "By finite presentation choose $a,b\\in\\mathbf N$ and an exact presentation $R_p^a\\xrightarrow A R_p^b\\to M\\to0$. Write the linear map in the standard bases as the finite matrix $(A_{ij})_{i<b,j<a}$. For each entry, step 1 supplies a pointed object $(U_{ij},x_{ij})$ and a section representing it. Cofilteredness supplies a common pointed object $(U,x)$ with arrows to these finitely many objects. Restrict the chosen sections along these arrows to obtain $r_{ij}\\in R(U)$ whose germs are $A_{ij}$. If $ab=0$, choose any object of the nonempty category $\\mathcal N$ and take the empty matrix. The germ map $R(U)\\to R_p$ is a ring homomorphism: a section is a sheaf map $h_U^\\#\\to R$, and applying the finite-product-preserving $p^{-1}$ to the addition and multiplication identities sends its value at $x$ to the corresponding sum or product of germs. Thus the lifted matrix maps to $A$ as a matrix over rings.",
+   "uses": [
+    "def-sc-finitely-presented-module",
+    "lem-trf-site-point-reconstruction-sets",
+    "def-trf-geometric-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0DEN, lemma-check-K-flat-stalks, proof of (1), local finite-presentation realization paragraph."
+   }
+  },
+  {
+   "text": "Set $H=h_U^\\#$ and $S=p^{-1}H$, so $x\\in S$. The slice-equivalence theorem gives $E_U:\\operatorname{Sh}(C/U)\\simeq\\operatorname{Sh}(C)/H$. The sheaf-limit theorem supplies finite limits in $\\operatorname{Sh}(C)$, and the slice-adjoint lemma applied to $p^{-1}\\dashv p_*$ gives a finite-limit-preserving left adjoint $P:\\operatorname{Sh}(C)/H\\to\\mathbf{Set}/S$, acting by $p^{-1}$ on arrows. Define $e_x:\\mathbf{Set}/S\\to\\mathbf{Set}$ by taking the fibre over $x$. This preserves finite limits, computed fibre by fibre. It has the explicit right adjoint assigning to a set $B$ the family with fibre $B$ at $x$ and a singleton at every $s\\ne x$: a map into that family is exactly a map from the $x$-fibre into $B$. Equivalences have their inverse as right adjoint and preserve limits. Hence $q^{-1}=e_x\\circ P\\circ E_U$ has a right adjoint (compose the three right adjoints in reverse order) and preserves finite limits. It defines a geometric morphism $q:\\mathbf{Set}\\to\\operatorname{Sh}(C/U)$.",
+   "uses": [
+    "lem-weil-pbc-localized-sheaves-over-representable",
+    "lem-weil-pbc-site-sheaf-sets-limits-sectionwise",
+    "lem-sfb-left-exact-left-adjoint-slices",
+    "def-trf-geometric-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 04H2, lemma-point-localize; explicit slice-adjunction construction using Tag 04H1, lemma-localize-morphism-topoi, and Tag 00Y1, lemma-essential-image-j-shriek."
+   }
+  },
+  {
+   "text": "For a set sheaf $G$, the quasi-inverse formula for $E_U$ sends $(G\\times H\\to H)$ at an object $v:V\\to U$ to the fibre of $G(V)\\times H(V)\\to H(V)$ over $\\eta(v)$, canonically $G(V)$. Thus $E_U(G|_U)\\cong(G\\times H\\to H)$, naturally in $G$. Applying $P$ gives $(p^{-1}G\\times S\\to S)$, because $p^{-1}$ preserves products, and applying $e_x$ gives the projection isomorphism $q^{-1}(G|_U)\\cong p^{-1}G$. These natural identifications give $j_Uq\\cong p$. Applied to the zero, unit, addition, multiplication and module-action maps, the same product identifications respect all operations. Consequently they identify $q^{-1}R_U$ with $R_p$ as rings and $q^{-1}(G|_U)$ with $p^{-1}G$ as $R_p$-modules, naturally in module sheaves $G$. For a section $r\\in R(U)$ its image under this ring identification is its germ $p^{-1}(r)(x)$: under $E_U$ the corresponding section of $R_U$ is the graph of $r:H\\to R$, and taking its $x$-fibre after $p^{-1}$ evaluates exactly at $x$. This checks the coefficient map used for the lifted matrix.",
+   "uses": [
+    "lem-weil-pbc-localized-sheaves-over-representable",
+    "def-pur-localized-ringed-site",
+    "def-trf-geometric-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 04H2, lemma-point-localize, equality of stalk functors; Tag 00Y1, lemma-essential-image-j-shriek, explicit fibre formula."
+   }
+  },
+  {
+   "text": "On $C/U$ define $\\alpha:R_U^a\\to R_U^b$ at $v:V\\to U$ by $(t_j)_j\\mapsto(\\sum_j r_{ij}|_V\\,t_j)_i$. Restriction maps preserve these sums and products, so this is a morphism of module sheaves. Form its sheaf cokernel $F=\\operatorname{coker}(\\alpha)$ in the abelian module-sheaf category. For the geometric morphism $q$, transported module inverse image preserves cokernels. It also identifies $q^{-1}(R_U^n)$ with $R_p^n$ for each finite $n$, since these powers are finite products and $q^{-1}$ preserves finite limits (including the zero module when $n=0$). The coefficient calculation in step 4 identifies $q^{-1}\\alpha$ with $A$: on a tuple its $i$th coordinate is $\\sum_j A_{ij}t_j$. Therefore $q^{-1}F\\cong\\operatorname{coker}(A)\\cong M$ as $R_p$-modules, by the chosen exact presentation. This proves the assertion with the actual finite matrix $(r_{ij})$ over $R(U)$.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-pur-localized-ringed-site",
+    "lem-trf-geometric-inverse-image-exact",
+    "def-trf-geometric-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0DEN, lemma-check-K-flat-stalks, proof of (1), local finite-presentation realization paragraph."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-site-point-reconstruction-sets",
+  "def-sc-finitely-presented-module",
+  "def-trf-geometric-morphism",
+  "lem-weil-pbc-localized-sheaves-over-representable",
+  "lem-weil-pbc-site-sheaf-sets-limits-sectionwise",
+  "lem-sfb-left-exact-left-adjoint-slices",
+  "def-pur-localized-ringed-site",
+  "def-weil-sheaf-of-modules-category",
+  "lem-trf-geometric-inverse-image-exact"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0DEN, lemma-check-K-flat-stalks, proof of (1), finite-presentation descent and passage to C/U; slice point made explicit using sites.tex Tags 04H1 and 04H2."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -53,10 +133,45 @@
    "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"SheafOfModules.Presentation.generators\", \"SheafOfModules.localGeneratorsDataOfIsFiniteType\", \"SheafOfModules.LocalGeneratorsData.generators\", \"SheafOfModules.IsFinitePresentation.exists_quasicoherentData\", \"SheafOfModules.LocalGeneratorsData.I\", \"SheafOfModules.Presentation.mapGenerators\", \"SheafOfModules.LocalGeneratorsData.X\"], \"sub\": \"\"}",
    "date": "2026-10-18",
    "verdict": "no match: inspected hits concern ordinary flatness, module presentations, or homological notions without this site-local or unbounded K-flat assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.FinitePresentation, CategoryTheory.GrothendieckTopology.Point",
+   "results": "{\"t\": \"2026-10-18T03:29:53Z\", \"tool\": \"loogle\", \"query\": \"Module.FinitePresentation, CategoryTheory.GrothendieckTopology.Point\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: sheaf finite-presentation predicates assume a sheaf already exists and do not realize arbitrary modules over stalk rings; no declaration covers the slice-point and matrix-realization assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every finitely presented module over the stalk ring of a point of a ringed site is realized by a finite matrix cokernel on a slice site",
+   "results": "{\"t\": \"2026-10-18T03:29:55Z\", \"tool\": \"leanfinder\", \"query\": \"Every finitely presented module over the stalk ring of a point of a ringed site is realized by a finite matrix cokernel on a slice site\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"SheafOfModules.IsFinitePresentation.exists_quasicoherentData\", \"SheafOfModules.isFinitePresentation\", \"SheafOfModules.quasicoherentDataOfIsFinitePresentation\", \"SheafOfModules.IsFinitePresentation\", \"SheafOfModules.instIsFiniteTypeOfIsFinitePresentation\", \"SheafOfModules.QuasicoherentData.instIsFiniteTypeLocalGeneratorsDataOfIsFinitePresentation\", \"SheafOfModules.Presentation.IsFinite\"], \"digest\": \"e1ccb25dcef286f2\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: sheaf finite-presentation predicates assume a sheaf already exists and do not realize arbitrary modules over stalk rings; no declaration covers the slice-point and matrix-realization assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A module of finite presentation over a stalk extends to a finitely presented sheaf on a pointed site neighborhood",
+   "results": "{\"t\": \"2026-10-18T03:30:02Z\", \"tool\": \"leanfinder\", \"query\": \"A module of finite presentation over a stalk extends to a finitely presented sheaf on a pointed site neighborhood\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"SheafOfModules.isFinitePresentation\", \"SheafOfModules.IsFinitePresentation\", \"SheafOfModules.quasicoherentDataOfIsFinitePresentation\", \"SheafOfModules.instIsFiniteTypeOfIsFinitePresentation\", \"SheafOfModules.IsFinitePresentation.exists_quasicoherentData\", \"SheafOfModules.QuasicoherentData.instIsFiniteTypeLocalGeneratorsDataOfIsFinitePresentation\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation\"], \"digest\": \"5dc4967197767db7\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: sheaf finite-presentation predicates assume a sheaf already exists and do not realize arbitrary modules over stalk rings; no declaration covers the slice-point and matrix-realization assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "FinitePresentation.*(stalk|sheafFiber)|(?:stalk|sheafFiber).*FinitePresentation",
+   "results": "{\"t\": \"2026-10-18T03:29:52Z\", \"tool\": \"grep\", \"query\": \"FinitePresentation.*(stalk|sheafFiber)|(?:stalk|sheafFiber).*FinitePresentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean\", \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean\"], \"digest\": \"1dd6df45a6def0e0\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: no hit realizes a given finite-presentation stalk module on a pointed slice; inspected sheaf finite-presentation predicates assume the sheaf already exists, and the grep hits concern scheme prime spectra."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite presentation over a stalk ring lifts to a finite matrix of local sections on a site neighborhood",
+   "results": "{\"t\": \"2026-10-18T03:29:53Z\", \"tool\": \"leansearch\", \"query\": \"A finite presentation over a stalk ring lifts to a finite matrix of local sections on a site neighborhood\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.isFinitePresentation\", \"SheafOfModules.IsFinitePresentation.mk\", \"SheafOfModules.Presentation.IsFinite.mk\", \"SheafOfModules.IsFinitePresentation\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation\", \"SheafOfModules.QuasicoherentData.IsFinitePresentation\", \"AlgebraicGeometry.Scheme.Hom.finitePresentation_appLE\", \"SheafOfModules.instIsFiniteTypeOfIsFinitePresentation\"], \"digest\": \"56770867e117de49\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: no hit realizes a given finite-presentation stalk module on a pointed slice; inspected sheaf finite-presentation predicates assume the sheaf already exists, and the grep hits concern scheme prime spectra."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-ringed-site-kflat-stalk-criterion",
@@ -84,5 +199,39 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-sfb-site-fp-stalk-realization",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged. Gave the common-neighborhood finite-matrix construction, an explicit slice-point adjunction, natural ring/module comparisons including section germs, and exact pullback of the cokernel. Reused the general set-valued site-point theorem, avoiding the constant-coefficient restriction of the similarly named module-fibre node. Created only one general categorical Mathlib leaf for left exact adjoints on slices.",
+  "blueprint": "Realizes the local algebra required by the finite-limit-site stalk criterion underlying lem-sfb-module-mapmod-pullback-kflat in clause (2) of sk-prop-sfb-module-derived-factorization. The present lemma does not itself assert K-flatness.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-site-point-reconstruction-sets",
+    "why": "General set-valued neighborhood colimit and cofilteredness, needed to lift finitely many coefficients for a variable ring sheaf; no node of this unit states this site-point fact."
+   },
+   {
+    "node": "lem-weil-pbc-localized-sheaves-over-representable",
+    "why": "General site/slice equivalence with explicit fibre formula, used to construct q and its restriction comparison; no node of this unit supplies it."
+   },
+   {
+    "node": "lem-trf-geometric-inverse-image-exact",
+    "why": "Exact transported inverse image for arbitrary commutative ring sheaves, used only to preserve the finite presentation cokernel; this is a generic topos tool, not an alternative K-flat route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-site-point-reconstruction-sets",
+  "lem-weil-pbc-localized-sheaves-over-representable",
+  "lem-trf-geometric-inverse-image-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-Codex-Q21-bafa6c3a0",
+  "group": "Q21",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q21-bafa6c3a0 (reviewer sub-agent of L); spot-checked: Read the item, new leaf, cited statements and source passages in full. All five proof steps, the localized-point coefficient map and the Mathlib slice-adjoint match check out. Completed the new leaf’s missing metadata in fixes; mathematics unchanged. Detailed checks and unavailable Git-only pivot-record limitations are documented in review.md.; 1 file(s) fixed by the reviewer"
  }
 }
