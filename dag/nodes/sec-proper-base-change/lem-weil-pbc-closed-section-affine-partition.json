@@ -1,0 +1,186 @@
+{
+ "id": "lem-weil-pbc-closed-section-affine-partition",
+ "kind": "statement",
+ "title": "Disjoint closed sections over a finite reduced affine partition",
+ "statement": "Let $X$ be an affine Noetherian scheme [def-pc-scheme, pqf-def-locnoeth], let $W$ be affine, and let $p:W\\to X$ and $j:Y\\hookrightarrow W$ be morphisms with $j$ a closed immersion [def-weil-closed-immersion]. Put $h=p\\circ j$. Suppose finitely many closed immersions $s_k:Z_k\\hookrightarrow W$ cover $W$ on points and every composite $Z_k\\to X$ is an isomorphism. Then there are finitely many reduced affine schemes $R_a$ [def-pc-reduced-scheme] with maps $R_a\\to X$ covering $X$ on points, such that each $Y\\times_X R_a$ [def-pc-fibre-product] is covered on points by finitely many pairwise disjoint closed immersions $R_a\\to Y\\times_X R_a$, each having isomorphic composite to $R_a$. The finite families may be empty.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 095K, label lemma-decompose-quasi-finite-morphism, proof of part (1)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-locnoeth",
+  "def-weil-closed-immersion",
+  "def-pc-reduced-scheme",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "Replace each closed section Z_k -> W, whose composite to X is an isomorphism, by a map s_k:X -> W with s_k p = id. This preserves closed immersion and coverage. For each k take the closed incidence scheme Y x_W X -> X. For each pair k,l take X x_W X -> X along s_k,s_l; its first projection is closed because s_l is closed. Its image records equality of the two sections at underlying points.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-closed-immersion-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 095K, label lemma-decompose-quasi-finite-morphism, proof of part (1)"
+   }
+  },
+  {
+   "text": "Form the Boolean membership atoms of these finitely many closed images. Each atom is locally closed. Over X=Spec A realize it by restricting Spec(A/I) to an open, where I is the vanishing ideal of its closed part. This realization is exactly the proved source-library lemma Scheme.exists_isImmersion_range_eq_of_isLocallyClosed. Its underlying space is Noetherian as a subspace of X, hence compact. Apply the reduced affine partition theorem to each atom and reindex the finite dependent sum by Fin m. Each resulting reduced affine piece maps either entirely into, or disjointly from, each closed image. The pieces cover X.",
+   "uses": [
+    "lem-zl-affine-partition",
+    "def-pc-reduced-scheme",
+    "def-weil-locally-closed-subset",
+    "pqf-def-locnoeth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 095K, label lemma-decompose-quasi-finite-morphism, proof of part (1)"
+   }
+  },
+  {
+   "text": "Fix one reduced piece R -> X. If an incidence image contains the image of R, then R -> W factors uniquely through Y. Indeed, pullbacks of functions in the defining ideal vanish at every point of R, and reducedness makes those functions zero; this is IsClosedImmersion.existsUnique_fac_of_range_subset_range in the proved source library. Lift the factorization to t_k:R -> Y x_X R. Its composite to R is the identity. The square with top R -> X, left t_k, right s_k:X -> W and bottom Y x_X R -> Y -> W is a pullback: a compatible cone lifts through its projection to R, and uniqueness follows from the identity composite. Therefore t_k is a closed immersion.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "def-pc-reduced-scheme",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-reduced-source-factors-through-closed-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 095K, label lemma-decompose-quasi-finite-morphism, proof of part (1)"
+   }
+  },
+  {
+   "text": "If the pair-intersection image contains R, the same reduced-source factorization lifts R into X x_W X. Both projections of this lift equal R -> X, because both original sections are over X. Thus the two section morphisms into Y x_X R are equal. If the pair-intersection image is disjoint from R, equality of points on the two sections would give a point in that intersection by the fibre-product point-lifting lemma, a contradiction. Hence retained sections are either equal or have disjoint images.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-pc-reduced-scheme",
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-reduced-source-factors-through-closed-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 095K, label lemma-decompose-quasi-finite-morphism, proof of part (1)"
+   }
+  },
+  {
+   "text": "The retained sections cover Y x_X R. Given y, the original cover places its image in W on some s_k. Applying p identifies its X-coordinate with the image of the R-coordinate of y. Thus the incidence image meets R, so compatibility makes it contain R. The pullback square just constructed lifts y to the retained t_k. Take the finite set of distinct section morphisms, reindex it by Fin q, and retain each morphism once. These are pairwise disjoint closed immersions covering all points, each with identity composite to R. The construction also works for empty R, zero sections and repeated sections.",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 095K, label lemma-decompose-quasi-finite-morphism, proof of part (1)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-pc-reduced-scheme",
+  "def-weil-closed-immersion",
+  "def-weil-locally-closed-subset",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+  "lem-zl-affine-partition",
+  "pqf-def-locnoeth"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 095K, label lemma-decompose-quasi-finite-morphism, proof of part (1)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "disjoint.*section|section.*disjoint",
+   "results": "25 hits; Mathlib/Logic/Embedding/Set.lean, Mathlib/Topology/Compactification/OnePoint/Basic.lean, Mathlib/Topology/Compactness/Lindelof.lean, Mathlib/Data/Finset/Disjoint.lean, Mathlib/Data/Sum/Order.lean, Mathlib/Topology/Order/T5.lean, Mathlib/Topology/Order/T5.lean, Mathlib/Topology/Order/T5.lean",
+   "date": "2026-10-18",
+   "verdict": "no exact Mathlib match; proved library results reused"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsClosedImmersion, CategoryTheory.Limits.Sigma.desc",
+   "results": "0 hits; ",
+   "date": "2026-10-18",
+   "verdict": "no exact Mathlib match; proved library results reused"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given a closed subscheme of a finite union of closed sections over a Noetherian affine scheme, stratify the base into reduced affine pieces where the subscheme is covered by disjoint closed sections",
+   "results": "8 hits; AlgebraicGeometry.Scheme.IdealSheafData.subschemeCover, AlgebraicGeometry.isNoetherian_iff_of_finite_iSup_eq_top, AlgebraicGeometry.IsNoetherian, AlgebraicGeometry.IsNoetherian.noetherianSpace, AlgebraicGeometry.IsLocallyNoetherian, AlgebraicGeometry.noetherianSpace_of_isAffine, AlgebraicGeometry.isLocallyNoetherian_of_affine_cover, AlgebraicGeometry.Scheme.affineOpenCoverOfSpanRangeEqTop_idx",
+   "date": "2026-10-18",
+   "verdict": "no exact Mathlib match; proved library results reused"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A closed subscheme of finitely many closed sections admits a finite reduced affine partition of the base on which disjoint sections cover it",
+   "results": "8 hits; AlgebraicGeometry.Scheme.IdealSheafData.subschemeCover, AlgebraicGeometry.isLocallyNoetherian_of_affine_cover, AlgebraicGeometry.isCompactOpen_iff_eq_finset_affine_union, AlgebraicGeometry.isNoetherian_iff_of_finite_iSup_eq_top, AlgebraicGeometry.isNoetherian_iff_of_finite_affine_openCover, AlgebraicGeometry.IsAffineOpen.iSup_of_disjoint, AlgebraicGeometry.isCompact_and_isOpen_iff_finite_and_eq_biUnion_basicOpen, AlgebraicGeometry.isCompact_iff_finite_and_eq_biUnion_affineOpens",
+   "date": "2026-10-18",
+   "verdict": "no exact Mathlib match; proved library results reused"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.QuasiFiniteAffineEtaleThickeningDecomposition",
+  "date": "2026-10-18",
+  "group": "J7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-direct-image-finiteness-proper",
+   "place": "095K(1), Noetherian finite-stratification and closed-section refinement paragraphs",
+   "via": [
+    "lem-weil-pbc-quasifinite-affine-etale-thickening-decomposition",
+    "lem-weil-pbc-finite-fp-pushforward-constructible",
+    "lem-weil-pbc-etale-quasifinite-shriek-constructible",
+    "lem-weil-pbc-etale-compactification-constructibility",
+    "lem-weil-pbc-etale-proper-direct-image-finiteness"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ClosedSectionAffinePartition",
+  "file": "lean/Sheaf/AlgebraicGeometry/ClosedSectionAffinePartition.lean",
+  "declaration": "AlgebraicGeometry.exists_closed_section_affine_partition",
+  "statement": "theorem exists_closed_section_affine_partition\n    {X Y W : Scheme.{u}} [IsAffine X] [IsNoetherian X] [IsAffine W]\n    (h : Y ⟶ X) (p : W ⟶ X) (j : Y ⟶ W) [IsClosedImmersion j]\n    (hjp : j ≫ p = h) (n : ℕ) (Z : Fin n → Scheme.{u})\n    (s : ∀ k, Z k ⟶ W)\n    (hs : ∀ k, IsClosedImmersion (s k) ∧ IsIso (s k ≫ p))\n    (hcover : ∀ w : W, ∃ (k : Fin n) (z : Z k), s k z = w) :\n    ∃ (m : ℕ) (R : Fin m → Scheme.{u}) (r : ∀ a, R a ⟶ X),\n      (∀ a, IsAffine (R a) ∧ IsReduced (R a)) ∧\n      (∀ x : X, ∃ (a : Fin m) (z : R a), r a z = x) ∧\n      ∀ a : Fin m, ∃ (q : ℕ) (t : Fin q → (R a ⟶ pullback h (r a))),\n        (∀ k, IsClosedImmersion (t k) ∧ IsIso (t k ≫ pullback.snd h (r a))) ∧\n        Pairwise (fun k l ↦ Disjoint (Set.range (t k)) (Set.range (t l))) ∧\n        ∀ y : ↥(pullback h (r a)), ∃ (k : Fin q) (z : R a), t k z = y",
+  "branch": "sheaf-dag",
+  "by": "J7",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J7",
+  "result": "pass",
+  "landing": "20261018T062817-L-658627",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J7",
+  "result": "pass",
+  "landing": "20261018T062817-L-658627",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

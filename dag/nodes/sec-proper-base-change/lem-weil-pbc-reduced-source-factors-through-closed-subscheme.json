@@ -209,14 +209,14 @@
   "note": "6 steps following Stacks 0356: 'only if'; sections of the ideal sheaf vanish at the points of Y (zero-locus node, section-vanishing node, local stalk maps); the pullback is zero on affine opens of Y since Y is reduced (intersection of primes = nilradical); zero on f^{-1}(U) by the sheaf property; factorization via a new composed leaf for 01HP (IsClosedImmersion.lift / lift_fac with le_ofIdeals_iff; ClosedImmersion.lean:210/215, IdealSheaf/Basic.lean:125 verified by L); the X_red clause. Statement gained the citation of def-weil-pbc-scheme-reduction."
  },
  "lean": {
-  "module": "Sheaf.Paper.ReducedSourceFactors",
-  "declaration": "AlgebraicGeometry.reduced_source_factors_through_closed_subscheme",
-  "file": "lean/Sheaf/Paper/ReducedSourceFactors.lean",
-  "statement": "theorem reduced_source_factors_through_closed_subscheme {X Y Z : Scheme.{u}} [IsReduced Y] (i : Z ⟶ X) [IsClosedImmersion i] (f : Y ⟶ X) : ((∃ g : Y ⟶ Z, g ≫ i = f) ↔ Set.range f.base ⊆ Set.range i.base) ∧ (∃ g : Y ⟶ X.nilradical.subscheme, g ≫ X.nilradical.subschemeι = f)",
+  "existing": true,
+  "module": "WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion",
+  "declaration": "AlgebraicGeometry.IsClosedImmersion.existsUnique_fac_of_range_subset_range",
+  "statement": "theorem IsClosedImmersion.existsUnique_fac_of_range_subset_range {X Y Z : Scheme.{u}} [IsReduced X] (i : Z ⟶ Y) [IsClosedImmersion i] (s : X ⟶ Y) (hs : Set.range s.base ⊆ Set.range i.base) : ∃! t : X ⟶ Z, t ≫ i = s",
   "branch": "sheaf-dag",
-  "by": "C1",
-  "date": "2026-10-11",
-  "existing": false
+  "by": "J7",
+  "date": "2026-10-18",
+  "note": "Proved source-library theorem states the general reduced-source factorization with uniqueness. The only-if direction is immediate from range of a composite; the reduction clause is its specialization to the nilradical subscheme immersion, whose image is all points. The actual J7 proof uses the general factorization clause; no holed wrapper is imported."
  },
  "reviewed_lean": {
   "date": "2026-10-11",
@@ -225,5 +225,15 @@
   "group": "C1",
   "result": "pass",
   "note": "X Y Z : Scheme.{u}; [IsReduced Y] = def-pc-reduced-scheme; i closed immersion via IsClosedImmersion; iff factorization g ≫ i = f vs Set.range f.base ⊆ Set.range i.base; X_red = Mathlib X.nilradical.subscheme/subschemeι (radical ⊥ ideal sheaf, IdealSheafData per STATE line); no let/local instance"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J7",
+  "result": "pass",
+  "landing": "20261018T062817-L-658627",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

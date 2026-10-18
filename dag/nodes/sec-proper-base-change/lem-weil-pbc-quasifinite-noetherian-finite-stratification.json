@@ -1,0 +1,167 @@
+{
+ "id": "lem-weil-pbc-quasifinite-noetherian-finite-stratification",
+ "kind": "statement",
+ "title": "A Noetherian finite stratification for separated quasi-finite morphisms",
+ "statement": "Let $v:V\\to X$ be a quasi-compact separated morphism of schemes [def-pc-scheme, def-weil-finite-type-morphism, def-weil-proper-morphism], locally of finite type and locally quasi-finite [pqf-def-quasifinite]. Suppose $X$ is Noetherian [pqf-def-locnoeth]. Then there is a finite scheme stratification $S$ of $X$ [def-constructible-stratification] such that the pullback $V\\times_X S_a\\to S_a$ [def-pc-fibre-product] is finite [def-weil-finite-integral-morphism] for every stratum. Here locally quasi-finite may be read as Mathlib's ring-theoretic predicate: the separate local finite-type hypothesis makes it the usual Stacks notion.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 095K, label lemma-decompose-quasi-finite-morphism, proof of part (1)"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism",
+  "pqf-def-quasifinite",
+  "pqf-def-locnoeth",
+  "def-constructible-stratification",
+  "def-pc-fibre-product",
+  "def-weil-finite-integral-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Use Noetherian induction on closed subsets Z of X. If Z is empty take the empty family. Otherwise choose an irreducible component of Z and a nonempty open of Z meeting only that component. Give its closure the reduced closed subscheme structure and base change v to it. The base-changed map remains locally quasi-finite, separated and quasi-compact, so it is quasi-finite. The generic finite-neighborhood theorem gives a neighborhood of the generic point over which it is finite.",
+   "uses": [
+    "lem-weil-pbc-generic-finite-morphism-open-neighborhood",
+    "lem-weil-pbc-separated-lqf-base-change",
+    "lem-pc-quasi-compact-base-change",
+    "def-weil-pbc-scheme-reduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 095K, label lemma-decompose-quasi-finite-morphism, proof of part (1)"
+   }
+  },
+  {
+   "text": "Intersect this neighborhood with the chosen component-open. Its image is a nonempty locally closed piece of Z with closed complement. The induced immersion has finite pullback of v by restriction stability and pullback pasting. Apply the induction hypothesis to the strictly smaller closed complement and take the disjoint union of the two finite families. The resulting locally closed pieces cover X uniquely. Reindex by Fin n; in a Noetherian scheme their locally closed images are constructible, giving a Scheme.Stratification X. This is the already proved source-library theorem Scheme.Hom.exists_stratification_isFinite, reused without a new proof.",
+   "uses": [
+    "lem-weil-pbc-finite-local-on-target",
+    "def-constructible-stratification",
+    "def-pc-fibre-product",
+    "pqf-def-locnoeth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 095K, label lemma-decompose-quasi-finite-morphism, proof of part (1)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-constructible-stratification",
+  "def-pc-fibre-product",
+  "def-weil-pbc-scheme-reduction",
+  "lem-pc-quasi-compact-base-change",
+  "lem-weil-pbc-finite-local-on-target",
+  "lem-weil-pbc-generic-finite-morphism-open-neighborhood",
+  "lem-weil-pbc-separated-lqf-base-change",
+  "pqf-def-locnoeth"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 095K, label lemma-decompose-quasi-finite-morphism, proof of part (1)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "stratif.*[Ff]inite|[Ff]inite.*stratif",
+   "results": "0 hits; ",
+   "date": "2026-10-18",
+   "verdict": "no exact Mathlib match; proved library results reused"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A quasi compact separated locally quasi finite morphism over a Noetherian scheme is finite over each stratum of a finite stratification",
+   "results": "8 hits; AlgebraicGeometry.LocallyQuasiFinite.recOn, AlgebraicGeometry.LocallyQuasiFinite.mk, AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite, AlgebraicGeometry.IsFinite, AlgebraicGeometry.LocallyQuasiFinite, AlgebraicGeometry.IsProper.instOfIsFinite, AlgebraicGeometry.IsFinite.instLocallyOfFiniteType, AlgebraicGeometry.instIsProperOfIsFinite",
+   "date": "2026-10-18",
+   "verdict": "no exact Mathlib match; proved library results reused"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.LocallyQuasiFinite, AlgebraicGeometry.IsFinite",
+   "results": "7 hits; AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite, AlgebraicGeometry.IsFinite.of_locallyQuasiFinite, AlgebraicGeometry.instIsFiniteFiberToSpecResidueFieldOfLocallyQuasiFiniteOfQuasiCompact, AlgebraicGeometry.locallyQuasiFinite_iff_isFinite_fiber, AlgebraicGeometry.IsFinite.of_isProper_of_locallyQuasiFinite, AlgebraicGeometry.IsFinite.iff_isProper_and_locallyQuasiFinite, AlgebraicGeometry.IsFinite.eq_proper_inf_locallyQuasiFinite",
+   "date": "2026-10-18",
+   "verdict": "no exact Mathlib match; proved library results reused"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quasi compact separated locally quasi finite morphism over a Noetherian scheme is finite over each stratum of a finite stratification",
+   "results": "8 hits; AlgebraicGeometry.IsFinite, AlgebraicGeometry.LocallyQuasiFinite, AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite, AlgebraicGeometry.LocallyOfFiniteType, AlgebraicGeometry.IsProper.toLocallyOfFiniteType, AlgebraicGeometry.IsFinite.instLocallyOfFiniteType, AlgebraicGeometry.quasiCompact_of_noetherianSpace_source, AlgebraicGeometry.LocallyQuasiFinite.quasiFinite_appLE",
+   "date": "2026-10-18",
+   "verdict": "no exact Mathlib match; proved library results reused"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.QuasiFiniteAffineEtaleThickeningDecomposition",
+  "date": "2026-10-18",
+  "group": "J7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-direct-image-finiteness-proper",
+   "place": "095K(1), Noetherian finite-stratification and closed-section refinement paragraphs",
+   "via": [
+    "lem-weil-pbc-quasifinite-affine-etale-thickening-decomposition",
+    "lem-weil-pbc-finite-fp-pushforward-constructible",
+    "lem-weil-pbc-etale-quasifinite-shriek-constructible",
+    "lem-weil-pbc-etale-compactification-constructibility",
+    "lem-weil-pbc-etale-proper-direct-image-finiteness"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.EtaleFiniteRefinement.FiniteStrata",
+  "declaration": "AlgebraicGeometry.Scheme.Hom.exists_stratification_isFinite",
+  "statement": "theorem Hom.exists_stratification_isFinite {V X : Scheme.{u}} (v : V ⟶ X) [LocallyQuasiFinite v] [LocallyOfFiniteType v] [IsSeparated v] [QuasiCompact v] [IsNoetherian X] : ∃ S : Stratification X, ∀ i, IsFinite (pullback.snd v (S.immersion i))",
+  "branch": "sheaf-dag",
+  "by": "J7",
+  "date": "2026-10-18",
+  "note": "Existing proved source-library theorem; no source module changed and no new Lean obligation."
+ },
+ "lean_audit": {
+  "slopmaster2": {
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Scheme.Hom.exists_stratification_isFinite",
+     "module": "WeilConjectures.AlgebraicGeometry.EtaleFiniteRefinement.FiniteStrata",
+     "lines": [
+      173,
+      190
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J7",
+  "result": "pass",
+  "landing": "20261018T062817-L-658627",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J7",
+  "result": "pass",
+  "landing": "20261018T062817-L-658627",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
