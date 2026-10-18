@@ -1,0 +1,100 @@
+{
+ "id": "def-trf-two-step-filtered-total",
+ "kind": "definition",
+ "title": "The total-object functor of two-step filtered module complexes",
+ "status": "split",
+ "statement": "Let $R$ be a commutative ring and let $DF_2(R)$ be the localization of two-step filtered module complexes [def-trf-two-step-filtered-module-derived]. Let $D(R)$ be the ordinary derived category [def-weil-abstract-derived-category]. Forgetting a pair $K^\\prime\\hookrightarrow K$ means taking $K$, and forgetting a commutative square means taking its total chain map, followed by ordinary derived localization. Filtered chain homotopies give equal total derived maps. The resulting functor on the filtered homotopy category inverts filtered quasi-isomorphisms: a map which is a quasi-isomorphism on the subcomplex and quotient is one on the total complex. Define $\\omega:DF_2(R)\\to D(R)$ as the canonical localization lift of this functor, with this chain normalization.",
+ "stmt_deps": [
+  "def-trf-two-step-filtered-module-derived",
+  "def-weil-abstract-derived-category"
+ ],
+ "source": {
+  "document": "literature/stacks-project/trace.tex",
+  "place": "Tag 03TB, two-step filtered derived category; blueprint main-20261015 prop-trf-trace-formal-laws clause (2), underlying total object"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "forget filtration derived category total complex",
+   "results": "8 hits: HomologicalComplex₂.total_d, HomologicalComplex₂.total, HomologicalComplex₂.totalFunctor, HomologicalComplex₂.total.mapIso, HomologicalComplex.forget_obj, HomologicalComplex₂.total.map_comp, HomologicalComplex.forget, HomologicalComplex.forget_map.",
+   "date": "2026-10-18",
+   "verdict": "No match: bicomplex totalization and forgetting differentials are different notions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "forget filtration functor two step filtered derived category total complex",
+   "results": "8 hits: HomologicalComplex₂.total.forget_map, HomologicalComplex.HasGoodTrifunctor₂₃Obj, HomologicalComplex₂.totalFunctor, HomologicalComplex.HasGoodTrifunctor₁₂Obj, HomologicalComplex₂.totalFunctor_obj, CategoryTheory.Functor.map₂HomologicalComplex, CochainComplex.instHasMapBifunctorObjIntShiftFunctor_1, CategoryTheory.Functor.mapBifunctorHomologicalComplex_obj_obj_toGradedObject.",
+   "date": "2026-10-18",
+   "verdict": "No match: none forgets a two-step filtration after filtered localization."
+  },
+  {
+   "tool": "grep",
+   "query": "msearch grep twoStepTotal|filteredTotal|forgetFiltration; rg same pattern in Mathlib, WeilConjectures and lean/Sheaf; blueprint_refs.py search filtered total; rg -l forget filtration|forgetting the filtration dag/nodes/sec-trace-formula",
+   "results": "msearch: 0 hits. Direct source searches: 0 hits. Blueprint search: 0 blueprint nodes. Broader DAG search finds filtered calculus and sheaf-operation nodes, which concern bounded/bounded-below filtered categories or sheaf operations, not this unbounded two-step forgetful functor. TwoStepFilteredModuleDerived defines only the graded functors; FilteredProjectiveComparison embeds pairs into finite filtered objects but provides no total functor.",
+   "date": "2026-10-18",
+   "verdict": "New canonical helper needed, using the existing pair category without replacing it."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "prop-trf-trace-formal-laws",
+  "date": "2026-10-18",
+  "group": "Q12"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-trf-trace-formal-laws",
+   "place": "clause (2), the ordinary total object and its induced endomorphism",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-p-trace",
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.TwoStepFilteredTotal",
+  "declaration": "CochainComplex.twoStepTotal",
+  "declarations": [
+   "CochainComplex.twoStepTotalComplex",
+   "CochainComplex.twoStepTotal_homotopy",
+   "CochainComplex.twoStepTotalHomotopy",
+   "CochainComplex.twoStepTotal_inverts",
+   "CochainComplex.twoStepTotal"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/TwoStepFilteredTotal.lean",
+  "statement": "def twoStepTotal : TwoStepModuleDerived R ⥤ DerivedCategory (ModuleCat.{u} R)",
+  "branch": "newtargets-dag",
+  "by": "Q12",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c69791b83",
+  "group": "Q12",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c69791b83",
+  "group": "Q12",
+  "result": "pass",
+  "note": "Read node, new node def-trf-two-step-filtered-total, both modules, report and all stmt_dep declarations (PerfectCategoricalTrace, IsPerfectRingComplex, TwoStepFilteredModuleDerived, PointFdComplexes, PointFdQbar). Clauses 1-4 match the node: conjugacy direction correct; filtered additivity is stated on the DF2 object with total and graded functors and all three pieces perfect (triangle form follows by clause 1); Z/4 counterexample verified by hand (2*2=0, left square null-homotopic via h^1=1, pv=0, middle trace -2≠0); scalar extension over an arbitrary ring map with a universal left derived functor, no flatness, perfectness concluded, and B in the coefficient universe per def-weil-size-convention; supertrace for E and Qbar with perfectness concluded and finsum negOnePow; common-stage ∃! characterization valid. New total functor genuinely absent elsewhere, real data, two true sorry compatibility theorems, fields per §5. Helper instance reuses an existing theorem and is required (the inferInstance test fails). nt_compile --json: both files clean (1.2 s, 5.2 s). Gates: no hollow defs, docstrings with source and blueprint, sorry-only proofs, no pro-etale substitute, lean.statement verbatim. Minor: def-trf-two-step-filtered-module-derived is reached only transitively in stmt_deps; no action needed."
+ }
+}
