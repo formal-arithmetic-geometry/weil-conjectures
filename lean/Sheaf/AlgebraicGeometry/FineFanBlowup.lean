@@ -3,7 +3,11 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 -/
 
+import Sheaf.GroupTheory.FineMonoidFiniteSaturation
 import Sheaf.TraceFormula.FsFaceSharpening
+import Sheaf.CategoryTheory.SiteCoveringAxioms
+import Mathlib.CategoryTheory.Sites.LeftExact
+import Mathlib.Topology.Sheaves.Stalks
 import Mathlib.Geometry.RingedSpace.SheafedSpace
 import Mathlib.Algebra.Category.MonCat.FilteredColimits
 import Mathlib.Algebra.Category.MonCat.Limits
