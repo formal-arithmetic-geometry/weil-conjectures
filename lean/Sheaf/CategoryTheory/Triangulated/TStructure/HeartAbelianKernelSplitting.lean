@@ -9,8 +9,6 @@ public import Mathlib.CategoryTheory.Triangulated.Triangulated
 public import Mathlib.CategoryTheory.Triangulated.TStructure.Heart
 public import Mathlib.CategoryTheory.Abelian.Basic
 public import Mathlib.CategoryTheory.Preadditive.Biproducts
-import Mathlib.CategoryTheory.Triangulated.TStructure.AbelianSubcategory
-import Mathlib.CategoryTheory.Triangulated.TStructure.TruncLTGE
 import WeilConjectures.Mathlib.CategoryTheory.Triangulated.TStructure.Heart
 
 /-!
@@ -60,6 +58,58 @@ theorem heart_abelian_and_idempotent_kernel_decomposition
           ∃ φ : A ≅ (kernel e ⊞ kernel (𝟙 A - e)),
             φ.inv = biprod.desc (kernel.ι e) (kernel.ι (𝟙 A - e)) ∧
               φ.inv ≫ e ≫ φ.hom = biprod.snd ≫ biprod.inr := by
-  sorry
+  constructor
+  · let := t.hasHeartFullSubcategory
+    exact ⟨t.abelianHeart t.heart.FullSubcategory⟩
+  · intro D _ _ A e he
+    let g := 𝟙 A - e
+    have hge : g ≫ e = 0 := by
+      simp [g, Preadditive.sub_comp, he]
+    have heg : e ≫ g = 0 := by
+      simp [g, Preadditive.comp_sub, he]
+    let p := kernel.lift e g hge
+    let q := kernel.lift g e heg
+    have hj : kernel.ι g ≫ e = kernel.ι g := by
+      have h := kernel.condition g
+      dsimp [g] at h ⊢
+      simp only [Preadditive.comp_sub, Category.comp_id, sub_eq_zero] at h
+      exact h.symm
+    have hip : kernel.ι e ≫ p = 𝟙 _ := by
+      apply (cancel_mono (kernel.ι e)).1
+      simp [p, Category.assoc, g, Preadditive.comp_sub]
+    have hiq : kernel.ι e ≫ q = 0 := by
+      apply (cancel_mono (kernel.ι g)).1
+      simp [q, Category.assoc]
+    have hjp : kernel.ι g ≫ p = 0 := by
+      apply (cancel_mono (kernel.ι e)).1
+      simp [p, Category.assoc]
+    have hjq : kernel.ι g ≫ q = 𝟙 _ := by
+      apply (cancel_mono (kernel.ι g)).1
+      simp [q, Category.assoc, hj]
+    let φ : A ≅ kernel e ⊞ kernel g :=
+      { hom := biprod.lift p q
+        inv := biprod.desc (kernel.ι e) (kernel.ι g)
+        hom_inv_id := by
+          simp [biprod.lift_desc, p, q, g]
+        inv_hom_id := by
+          apply biprod.hom_ext' <;> apply biprod.hom_ext
+          · simp [Category.assoc, hip]
+          · simp [Category.assoc, hiq]
+          · simp [Category.assoc, hjp]
+          · simp [Category.assoc, hjq] }
+    refine ⟨φ, rfl, ?_⟩
+    have hφ : biprod.desc (kernel.ι e) (kernel.ι g) ≫ e =
+        biprod.snd ≫ kernel.ι g := by
+      apply biprod.hom_ext'
+      · simp
+      · simpa using hj
+    have hjlift : kernel.ι g ≫ biprod.lift p q =
+        (biprod.inr : kernel g ⟶ kernel e ⊞ kernel g) := by
+      apply biprod.hom_ext
+      · simp [Category.assoc, hjp]
+      · simp [Category.assoc, hjq]
+    change biprod.desc (kernel.ι e) (kernel.ι g) ≫ e ≫ biprod.lift p q =
+      (biprod.snd : kernel e ⊞ kernel g ⟶ kernel g) ≫ biprod.inr
+    rw [← Category.assoc, hφ, Category.assoc, hjlift]
 
 end CategoryTheory.Triangulated.TStructure
