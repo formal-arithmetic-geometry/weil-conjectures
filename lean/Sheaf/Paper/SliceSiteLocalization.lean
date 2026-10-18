@@ -13,6 +13,8 @@ import Mathlib.CategoryTheory.Yoneda
 import Mathlib.CategoryTheory.Sites.Limits
 import Sheaf.CategoryTheory.SiteCoveringAxioms
 import Sheaf.CategoryTheory.Sites.LocalizedSheavesOverRepresentable
+import Sheaf.CategoryTheory.Sites.SliceSheafInverseImageEquivalence
+import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Over
 
 /-!
 # Localization of a continuous site morphism
@@ -28,6 +30,11 @@ universe u v
 open CategoryTheory CategoryTheory.Limits
 
 namespace CategoryTheory
+
+set_option backward.defeqAttrib.useBackward true
+set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
+set_option linter.unusedVariables false
 
 /-- Localization of a continuous morphism of sites induces a morphism on slices.
 
@@ -102,6 +109,53 @@ theorem slice_site_localization
           K.toGrothendieck.overPullback (Type (max u v)) V ≅
           J.toGrothendieck.overPullback (Type (max u v)) (u.obj V) ⋙
             (Over.post (X := V) u).sheafPushforwardContinuous (Type (max u v))
-              (K.toGrothendieck.over V) (J.toGrothendieck.over (u.obj V))) := by sorry
+              (K.toGrothendieck.over V) (J.toGrothendieck.over (u.obj V)))  := by
+  have hcov : ∀ (X : Over V) (R : Presieve X),
+      Presieve.overEquiv X R ∈ K X.left →
+      Presieve.overEquiv ((Over.post (X := V) u).obj X)
+        (R.map (Over.post (X := V) u)) ∈ J (u.obj X.left) := by
+    intro X R hR
+    have heq : Presieve.overEquiv ((Over.post (X := V) u).obj X)
+        (R.map (Over.post u)) = (Presieve.overEquiv X R).map u := by
+      change (R.map (Over.post u)).map (Over.forget _) = _
+      obtain ⟨I, A, f, rfl⟩ := R.exists_eq_ofArrows
+      simp only [Presieve.overEquiv, RelIso.coe_fn_mk, Equiv.coe_fn_mk,
+        Presieve.map_ofArrows]
+      rfl
+    rw [heq]
+    exact hcover X.left _ hR
+  have hpb : ∀ (X Y Z : Over V) (R : Presieve X),
+      Presieve.overEquiv X R ∈ K X.left →
+      ∀ (f : Y ⟶ X) (g : Z ⟶ X), R f →
+        PreservesLimit (cospan f g) (Over.post (X := V) u) := by
+    intro X Y Z R hR f g hf
+    have : PreservesLimit (cospan f.left g.left) u :=
+      hpullback X.left Y.left Z.left _ hR f.left g.left
+        (Presieve.map.of hf)
+    have : PreservesLimit (cospan f g ⋙ Over.forget V) u := by
+      have : PreservesLimit (cospan
+          ((cospan f g ⋙ Over.forget V).map WalkingCospan.Hom.inl)
+          ((cospan f g ⋙ Over.forget V).map WalkingCospan.Hom.inr)) u := by
+        simpa only [Functor.comp_map, cospan_map_inl, cospan_map_inr, Over.forget_map] using
+          (inferInstance : PreservesLimit (cospan f.left g.left) u)
+      exact preservesLimit_of_iso_diagram u (diagramIsoCospan _).symm
+    have : PreservesLimit (cospan f g) (Over.post u ⋙ Over.forget (u.obj V)) :=
+      inferInstanceAs (PreservesLimit (cospan f g) (Over.forget V ⋙ u))
+    exact preservesLimit_of_reflects_of_preserves _ (Over.forget _)
+  refine ⟨hcov, hpb, ?_⟩
+  have : (K.comap (Over.forget V)).PullbacksPreservedBy (Over.post u) :=
+    ⟨fun {X R} hR ↦ ⟨fun {Y Z f g} hf _ ↦ hpb X Y Z R hR f g hf⟩⟩
+  have hcont : (Over.post (X := V) u).IsContinuous
+      (K.toGrothendieck.over V) (J.toGrothendieck.over (u.obj V)) := by
+    rw [over_toGrothendieck_eq_toGrothendieck_comap_forget,
+      over_toGrothendieck_eq_toGrothendieck_comap_forget]
+    exact (Over.post u).isContinuous_toGrothendieck_of_pullbacksPreservedBy
+      (K.comap (Over.forget V)) (J.comap (Over.forget (u.obj V)))
+      (fun _ _ hR ↦ hcov _ _ hR)
+  have := hcont
+  refine ⟨hcont, inferInstance, ?_⟩
+  obtain ⟨hlim, e, eR⟩ :=
+    sliceSheafInverseImage_remainder K.toGrothendieck J.toGrothendieck u V
+  exact ⟨hlim, e, eR⟩
 
 end CategoryTheory

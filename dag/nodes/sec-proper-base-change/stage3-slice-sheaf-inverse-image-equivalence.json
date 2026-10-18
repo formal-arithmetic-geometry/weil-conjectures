@@ -1,0 +1,123 @@
+{
+ "id": "stage3-slice-sheaf-inverse-image-equivalence",
+ "kind": "statement",
+ "title": "Finite limits and restriction comparisons for the localized inverse image",
+ "statement": "Under the hypotheses of lem-weil-pbc-slice-site-localization, after the slice functor is continuous and its sheaf pushforward has a right adjoint, the induced sheaf inverse image on the slice preserves finite limits and its composites with the localized restriction functors admit the canonical inverse-image and direct-image comparison isomorphisms.",
+ "stmt_deps": [],
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 03CF, middle diagram and final paragraph"
+ },
+ "proof": [
+  {
+   "text": "Identify sheaves on each localized slice with sheaves over the sheafified representable using Tag 00Y1, then transport the global inverse image across these equivalences. The fibre formula gives the inverse-image comparison and the sectionwise direct-image comparison.",
+   "uses": [
+    "lem-weil-pbc-localized-sheaves-over-representable",
+    "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
+    "lem-weil-pbc-site-sheaf-sets-limits-sectionwise"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-localized-sheaves-over-representable",
+  "lem-weil-pbc-continuous-functor-sheaf-pullback-adjunction",
+  "lem-weil-pbc-site-sheaf-sets-limits-sectionwise"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 03CF"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite limits and restriction comparison for inverse image on localized slice sheaves",
+   "results": "Mathlib finds generic sheafPullback finite-limit declarations but no exact slice comparison.",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "sheaves on slice site equivalence over sheafified representable",
+   "results": "No exact existing theorem; existing search results concern dense subsites or presheaves.",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Over.post sheafPullback",
+   "results": "No exact match for the full comparison.",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "slice sheaf inverse image equivalence",
+   "results": "No existing declaration in lean/Sheaf or Mathlib.",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SliceSiteLocalization",
+  "date": "2026-10-18",
+  "group": "P4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-slice-site-localization",
+   "place": "Step 3, slice adjunction and equivalence"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "merged_into": null,
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.Sites.SliceSheafInverseImageEquivalence",
+  "declaration": "CategoryTheory.sliceSheafInverseImage_remainder",
+  "file": "lean/Sheaf/CategoryTheory/Sites/SliceSheafInverseImageEquivalence.lean",
+  "statement": "theorem sliceSheafInverseImage_remainder\n    {D : Type u} {C : Type v} [SmallCategory D] [SmallCategory C]\n    (K : GrothendieckTopology D) (J : GrothendieckTopology C) (u : D ⥤ C)\n    [u.IsContinuous K J]\n    [(u.sheafPushforwardContinuous (Type (max u v)) K J).IsRightAdjoint]\n    [PreservesFiniteLimits (u.sheafPullback (Type (max u v)) K J)]\n    (V : D) [(Over.post (X := V) u).IsContinuous (K.over V) (J.over (u.obj V))]\n    [((Over.post (X := V) u).sheafPushforwardContinuous (Type (max u v))\n      (K.over V) (J.over (u.obj V))).IsRightAdjoint] :\n    PreservesFiniteLimits ((Over.post (X := V) u).sheafPullback (Type (max u v))\n      (K.over V) (J.over (u.obj V))) ∧\n    Nonempty (K.overPullback (Type (max u v)) V ⋙\n      (Over.post (X := V) u).sheafPullback (Type (max u v)) (K.over V) (J.over (u.obj V)) ≅\n      u.sheafPullback (Type (max u v)) K J ⋙ J.overPullback (Type (max u v)) (u.obj V)) ∧\n    Nonempty (u.sheafPushforwardContinuous (Type (max u v)) K J ⋙ K.overPullback\n      (Type (max u v)) V ≅ J.overPullback (Type (max u v)) (u.obj V) ⋙\n      (Over.post (X := V) u).sheafPushforwardContinuous (Type (max u v))\n        (K.over V) (J.over (u.obj V)))",
+  "branch": "sheaf-dag",
+  "by": "P4",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261018T071210-L-1674057",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261018T071210-L-1674057",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

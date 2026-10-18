@@ -16321,3 +16321,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 07:12 L: merged deliver/P3/Sheaf.Paper.SiteBoundedConstantModel (stage 3; reviewer PASS; first push; landing 20261018T071208-L-1673571 (interface); batch 20261018T071125; modules 5; new nodes 4)
 - 07:12 L: merged deliver/P4/Sheaf.CategoryTheory.FilteredComplexDecalagePageCoherence (stage 3; reviewer PASS; first push; landing 20261018T071209-L-1673722 (interface); batch 20261018T071125; modules 3; new nodes 2)
 - 07:12 L: merged deliver/P4/Sheaf.Paper.ExtendedLocalizationCech (stage 3; reviewer PASS; first push; landing 20261018T071210-L-1673872 (proof); batch 20261018T071125; modules 1; new nodes 0)
+- 07:12 L: merged deliver/P4/Sheaf.Paper.SliceSiteLocalization (stage 3; reviewer PASS; first push; landing 20261018T071210-L-1674057 (interface); batch 20261018T071125; modules 2; new nodes 1; change records: coord/changes/sliceSheafInverseImage_remainder.md)
