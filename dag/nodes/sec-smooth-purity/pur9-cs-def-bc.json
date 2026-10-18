@@ -33,7 +33,8 @@
   "lem-cbc-proetale-extension-zero-comparison",
   "lem-cbc-proetale-extension-zero",
   "prop-compactification-coherence-detailed",
-  "pur713-def-shriek-exchange-chosen"
+  "pur713-def-shriek-exchange-chosen",
+  "def-pur-conventions"
  ],
  "proof": [],
  "proof_deps": [],
@@ -233,27 +234,20 @@
  "reviewed_lean": {
   "date": "2026-10-18",
   "by": "L",
-  "reviewer": "NT-stage2-cc-3236235f5",
-  "group": "Q02",
+  "reviewer": "NT-stage2-cc-aa839a531",
+  "group": "Q16",
   "result": "pass",
-  "note": "Item exceptionalBaseChangeOnOrigin matches pur9-cs-def-bc clause by clause: recorded sfFiniteExceptionalAt at the literal c and cf', K in D+ with the recorded finite-Tor constructibility predicate (= D^b_ctf), retained witness (G = étale f^x Rnu_* K, alpha = refl) and its pulled-back witness via sfDerivedComparisonPullbackIso, Ex° = theta_{c'} (fixedCompactSupportOriginIso conjugated by W'.iso) after the exchange into c' = c.ofIsPullback, counit = preimage of 1_M, b = f'-transpose of (Ex°)^-1 then Lv^*eps; directions and endpoints correct; no extra assumptions, no hollow defs, no sorry in the item module. Three §1(B) repairs justified: CanonicalShriekExchange is the identical body under a new name, forced by the clash of the legacy rightDerivedLowerShriekOfCompactification constant; SpecifiedExceptionalClassHom builds the Hom bijection at the given compactification from canonical maps (recorded theorem only existential, E : Type (u+1)); isIso_csAuxiliaryExchange within the scope of thm-cbc-finite-level-proetale. Postponed specifiedExceptionalEtale_boundedBelow is more general than node clause (2) but true (uniform proper cohomological-dimension bound over a quasi-compact base via proper base change). Records verbatim and only lean fields changed; docstrings and source places present. All four files compile through nt_compile --json (exit 0, no errors; the tool printed no warnings at all). Second reading is an openly declared self-audit with real fixes. Edge cases n=1, K=0, empty schemes, v=id with independent compactifications, and universes checked."
+  "note": "Delivery is correct. Both modules compile clean as siblings through nt_compile.py (exit 0, no warnings); a probe #check confirms the type Lu^*Rf^!K -> Rf'^!Lv^*K. Every node clause matches the Lean: P (n>=1, l!=p), all schemes and arrows finite type over k, f separated finite type, v arbitrary, c and cf' arbitrary with c' = c.ofIsPullback, M = nu^* R Rnu_* K with the chosen adjoint, retained G and alpha, correctly oriented pulled-back witness, Ex followed by theta_{c'} with invertibility from the published upstream theorem tagged thm-cbc-finite-level-proetale, counit = homEquiv^{-1}(id), final arrow = H' transpose. H and H' are fully determined by their normalization and naturality fields. The section 1(B) rebinding of pur713-def-shriek-exchange to the exact upstream declaration and the new pur713-def-shriek-exchange-chosen module are justified: a probe compile reproduces the duplicate-declaration collision of Q02's old modules, and both state their nodes' notions. Records verbatim; node changes are lean only, plus the added landed def-pur-conventions (no cycle). Docstrings and blueprint tags present; no hollow def; no line over 100 characters. Non-blocking remarks: main parameters are lambda-bound so lean.statement does not show the type; the invertibility theorem used is upstream rather than the recorded declaration; Q02's old modules are left without a node.; reverted the delivery's change of existing node(s) pur713-def-shriek-exchange (--revert-nodes; kept as on newtargets-dag)"
  },
  "lean": {
-  "module": "Sheaf.SecSmoothPurity.ExceptionalBaseChange",
-  "declaration": "AlgebraicGeometry.ProEtale.exceptionalBaseChangeOnOrigin",
-  "declarations": [
-   "AlgebraicGeometry.ProEtale.csExceptionalOrigin",
-   "AlgebraicGeometry.ProEtale.csPullbackOrigin",
-   "AlgebraicGeometry.ProEtale.csOriginCompactificationIso",
-   "AlgebraicGeometry.ProEtale.csChosenSupportExchangeIso",
-   "AlgebraicGeometry.ProEtale.exceptionalBaseChangeOnOrigin"
-  ],
-  "file": "lean/Sheaf/SecSmoothPurity/ExceptionalBaseChange.lean",
-  "statement": "def exceptionalBaseChangeOnOrigin (D : WeilConjectures.FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p) (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ) (hn : 1 ≤ n) {X' X Y' Y : Scheme.{u}} [X'.Over (Spec (.of D.k))] [X.Over (Spec (.of D.k))] [Y'.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))] [LocallyOfFiniteType (X' ↘ Spec (.of D.k))] [QuasiCompact (X' ↘ Spec (.of D.k))] [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))] [LocallyOfFiniteType (Y' ↘ Spec (.of D.k))] [QuasiCompact (Y' ↘ Spec (.of D.k))] [LocallyOfFiniteType (Y ↘ Spec (.of D.k))] [QuasiCompact (Y ↘ Spec (.of D.k))] (g' : X' ⟶ X) (f' : X' ⟶ Y') (f : X ⟶ Y) (g : Y' ⟶ Y) [g'.IsOver (Spec (.of D.k))] [f'.IsOver (Spec (.of D.k))] [f.IsOver (Spec (.of D.k))] [g.IsOver (Spec (.of D.k))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (sq : ChosenCartesianSquare g' f' f g) (c : Compactification f) (cf' : Compactification f') (K : DerivedCategory.Plus (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E n))))) (_hK : WeilConjectures.finiteTorConstructibleProEtaleModule l E n hn Y K.obj) : (sfFixedDerivedPullback (Padic.coefficientExtensionRing l E n) g').obj ((@sfFiniteExceptionalAt (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E n)) _ (@Finite.of_equiv _ _ (Padic.finite_coefficientExtensionRing l E n hn) Equiv.ulift.symm) X Y f c (@Etale.isLeftAdjoint_rightDerivedLowerShriekOfCompactification _ _ (@Finite.of_equiv _ _ (Padic.finite_coefficientExtensionRing l E n hn) Equiv.ulift.symm) X Y f c)).obj K.obj) ⟶ (@sfFiniteExceptionalAt (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E n)) _ (@Finite.of_equiv _ _ (Padic.finite_coefficientExtensionRing l E n hn) Equiv.ulift.symm) X' Y' f' cf' (@Etale.isLeftAdjoint_rightDerivedLowerShriekOfCompactification _ _ (@Finite.of_equiv _ _ (Padic.finite_coefficientExtensionRing l E n hn) Equiv.ulift.symm) X' Y' f' cf')).obj ((sfFixedDerivedPullback (Padic.coefficientExtensionRing l E n) g).obj K.obj)",
+  "module": "Sheaf.Paper.StandingExceptionalBaseChange",
+  "declaration": "AlgebraicGeometry.ProEtale.standingExceptionalBaseChange",
+  "file": "lean/Sheaf/Paper/StandingExceptionalBaseChange.lean",
+  "statement": "def standingExceptionalBaseChange (P : WeilConjectures.PurityFiniteSetting.{u}) {X' X Y' Y : Scheme.{u}} [X'.Over (Spec (.of P.field.k))] [X.Over (Spec (.of P.field.k))] [Y'.Over (Spec (.of P.field.k))] [Y.Over (Spec (.of P.field.k))] [LocallyOfFiniteType (X' ↘ Spec (.of P.field.k))] [QuasiCompact (X' ↘ Spec (.of P.field.k))] [LocallyOfFiniteType (X ↘ Spec (.of P.field.k))] [QuasiCompact (X ↘ Spec (.of P.field.k))] [LocallyOfFiniteType (Y' ↘ Spec (.of P.field.k))] [QuasiCompact (Y' ↘ Spec (.of P.field.k))] [LocallyOfFiniteType (Y ↘ Spec (.of P.field.k))] [QuasiCompact (Y ↘ Spec (.of P.field.k))] (g' : X' ⟶ X) (f' : X' ⟶ Y') (f : X ⟶ Y) (g : Y' ⟶ Y) [g'.IsOver (Spec (.of P.field.k))] [f'.IsOver (Spec (.of P.field.k))] [f.IsOver (Spec (.of P.field.k))] [g.IsOver (Spec (.of P.field.k))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (sq : ChosenCartesianSquare g' f' f g) (c : Compactification f) (cf' : Compactification f')",
   "branch": "newtargets-dag",
-  "by": "Q02",
+  "by": "Q16",
   "date": "2026-10-18",
   "existing": false,
-  "note": "The explicit-compactification exceptional functor is the recorded sfFiniteExceptionalAt, with the existing ordinary etale left-adjoint theorem supplying its proof-valued instance. The relative Hom chain is constructed at those literal compactifications. The auxiliary exchange invertibility clause is stated in the repaired finite-level CBC dependency. The item module has no postponed theorem. All data, witnesses, comparison maps, the counit and the final transpose are actual constructions. K in D+ with the existing finite-Tor constructibility predicate presents exactly D^b_ctf. No unrestricted ambient exceptional right adjoint or ambient compactification comparison is assumed."
+  "note": "The definition retains the chosen ordinary etale right adjoints and the normalized ComparisonClassAdjunction data supplied by thm-sf-ambient-adjoint-class at c and cf'. These are choices named in the node, not an ambient pro-etale adjunction assumption. Its remaining explicit inputs are K in the existing finite-Tor category, G in the existing bounded constructible etale category, and alpha identifying its comparison image with the specified composite Rnu_* followed by the chosen etale right adjoint and nu^*. The component comparison is restricted to the pulled-back etale-origin class. All pullback-coordinate changes use the canonical exactness isomorphism."
  }
 }

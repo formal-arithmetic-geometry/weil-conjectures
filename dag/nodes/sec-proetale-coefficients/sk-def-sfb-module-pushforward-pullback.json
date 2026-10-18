@@ -517,5 +517,40 @@
     }
    ]
   }
+ },
+ "lean": {
+  "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.lowerStar",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.lowerStar",
+   "AlgebraicGeometry.ProEtale.CondensedRing.lowerStar_comp_forget",
+   "AlgebraicGeometry.ProEtale.CondensedRing.lowerStar_obj_X",
+   "AlgebraicGeometry.ProEtale.CondensedRing.lowerStar_obj_smul",
+   "AlgebraicGeometry.ProEtale.CondensedRing.lowerStar_additive",
+   "AlgebraicGeometry.ProEtale.CondensedRing.preservesFiniteLimits_lowerStar",
+   "AlgebraicGeometry.ProEtale.CondensedRing.upperStar",
+   "AlgebraicGeometry.ProEtale.CondensedRing.upperStar_comp_forget",
+   "AlgebraicGeometry.ProEtale.CondensedRing.upperStar_obj",
+   "AlgebraicGeometry.ProEtale.CondensedRing.comapPullbackHomCompIso",
+   "AlgebraicGeometry.ProEtale.CondensedRing.upperStarLowerStarAdjunction",
+   "AlgebraicGeometry.ProEtale.CondensedRing.comapCondensedPushforwardHomComp",
+   "AlgebraicGeometry.ProEtale.CondensedRing.lowerStarComp",
+   "AlgebraicGeometry.ProEtale.CondensedRing.upperStarComp",
+   "AlgebraicGeometry.ProEtale.isMonoidal_lowerStarComp"
+  ],
+  "statement": "noncomputable def lowerStar :\n    Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X) ⥤\n      Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y)",
+  "branch": "slopmaster2",
+  "by": "NC",
+  "date": "2026-10-18",
+  "existing": true,
+  "note": "Exact aggregate match in the published pro-etale module-object framework, read in the shared overlay and confirmed through scompile.py --source. The primary lowerStar is mapMod of abelian-sheaf pushforward followed by Mod.comap along condensedPushforwardHom; the companion declarations record its underlying sheaf, action, additivity and left exactness, the upperStar defined using Mod.extendScalars along the forward condensedPullbackHom, the lifted/scalar-change adjunction and both canonical composition isomorphisms. isMonoidal_lowerStarComp is in the transitively imported ModuleObject.UpperLowerStar.Monoidal module. The slopmaster2 branch label denotes the published WeilConjectures source root; no duplicate definition is added. Existing proof dependencies remain open as recorded by lean_audit."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7fdc964df",
+  "group": "NC",
+  "result": "pass",
+  "note": "Existing binding to WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs (CondensedRing.lowerStar + 14 companions). Read Defs.lean 1-307 in full: lowerStar = mapMod(f_*) then comap eta_f; upperStar = mapMod(f^*) then extendScalars along the forward alpha_f; the adjunction is mapModAdjunction composed with extendRestrictAdjunction through the mate iso; lowerStarComp lifts ProEtale.lowerStarComp via mapModCompIso and condensedPushforwardHom_comp; upperStarComp is the conjugate, in the node's direction. General Lambda, small pro-etale site, single universe u, no extra hypotheses, alpha invertibility unused in the definitions. Node diff vs the side clone: only the lean field; statement verbatim at Defs.lean:88-90. Dependency records match the declarations used. Report has a Worker report and the standard post-2026-10-17 second-reading text. nt_compile probe of all 15 declarations: exit 0, 2.6 s, no warnings; the axioms of the 4 main data definitions are standard only. No faults."
  }
 }

@@ -151,5 +151,28 @@
   "group": "Q120",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q120-ab3eaa7e7 (reviewer sub-agent of L); spot-checked: Read the complete item, cited statements, sources and route. All four steps support the actual transition adjoints and cocycles for unbounded complexes without flat coefficient maps. Checked non-flat quotient cases, duplicate candidates and dependency acyclicity. No new nodes or repairs; no additional tool_uses needed. Detailed review written to review.md."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SystemNormalizedTensorClosure",
+  "declaration": "WeilConjectures.SemilinearSections.normalized_tensor_closure",
+  "declarations": [
+   "WeilConjectures.SemilinearSections.normalized_tensor_closure",
+   "WeilConjectures.SemilinearSections.SemilinearDerivedSectionsData.inverseImageGeometry",
+   "WeilConjectures.SemilinearSections.normalized_inverseImage_closure"
+  ],
+  "file": "lean/Sheaf/Paper/SystemNormalizedTensorClosure.lean",
+  "statement": "theorem normalized_tensor_closure (A : Data.{c, v, r} J B τ) (P Q : DS.{c, v, max c v r} J B τ) (hP : Normalized.{c, v, max c v r} J B τ A.scalar P) (hQ : Normalized.{c, v, max c v r} J B τ A.scalar Q) : Normalized.{c, v, max c v r} J B τ A.scalar (A.closed.tensor.obj (P, Q)) ∧ (∀ {m n : ℕ} (h : n ≤ m), reduction.{c, v, max c v r} J B τ h (A.scalar h) (A.closed.tensor.obj (P, Q)) ≫ (A.tensorEvaluation n).hom.app (P, Q) = (A.scalar h).T.map ((A.tensorEvaluation m).hom.app (P, Q)) ≫ (A.scalarTensor h).hom.app ((e.{c, v, max c v r} J B τ m).obj P, (e.{c, v, max c v r} J B τ m).obj Q) ≫ (A.levelClosed n).tensor.map (Prod.mkHom (reduction.{c, v, max c v r} J B τ h (A.scalar h) P) (reduction.{c, v, max c v r} J B τ h (A.scalar h) Q))) ∧ (∀ {l m n : ℕ} (h : n ≤ m) (k : m ≤ l), (A.scalar h).T.map (reduction.{c, v, max c v r} J B τ k (A.scalar k) (A.closed.tensor.obj (P, Q))) ≫ reduction.{c, v, max c v r} J B τ h (A.scalar h) (A.closed.tensor.obj (P, Q)) = (A.scalarComposition h k).hom.app ((e.{c, v, max c v r} J B τ l).obj (A.closed.tensor.obj (P, Q))) ≫ reduction.{c, v, max c v r} J B τ (h.trans k) (A.scalar (h.trans k)) (A.closed.tensor.obj (P, Q)))",
+  "branch": "newtargets-dag",
+  "by": "Q55",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-30f0fd047",
+  "group": "Q55",
+  "result": "pass",
+  "note": "Clause-by-clause match with node: small site/strict tower (ℕ 0-indexed) via dependency conventions; Normalized = IsIso of actual reduction (adjoint of derivedTransition, unique transition), m=n included; tensor conjunct 2 type-checked by hand as T_h(tensorEval m) ≫ scalarTensor h ≫ tensor.map(red P, red Q) with scalarTensor pinned by ScalarTensorComparisonModel; cocycle conjuncts match Data.reduction_cocycle; inverse image: C_n pinned by AlgebraicInverseImage + coefficient_compatibility, transition formula = PullTransitionFormula orientation as in node. No extra hypotheses (no flatness/boundedness); C' universes inherited from landed dependency's geometric binder (no loss up to topos equivalence). Helper inverseImageGeometry is a projection abbrev with docstrings, listed. Only sorry proofs; docstrings carry Stacks 07A4/06YS, blueprint tag and step-by-step proof. Node copy changes only lean; statement verbatim; declarations present; lines ≤100. Report has Worker report and Second reading by Q55 (standard placeholder). No duplicate declaration found by rg. nt_compile.py --json on snapshot: exit 0, no messages, 3.9 s; control with injected error was reported."
  }
 }

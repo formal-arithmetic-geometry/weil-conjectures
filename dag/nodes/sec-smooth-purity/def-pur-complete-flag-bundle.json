@@ -122,5 +122,43 @@
   "group": "NQ",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NQ-c59002130 (reviewer sub-agent of L); spot-checked: I read the item in full against Stacks chow.tex Tag 02UL lemma-splitting-principle (proof lines 8445-8464: the sequence 0->F->pi^*E->O(1)->0 of ranks r-1, r, 1, then induction, with base case id) and constructions.tex Tag 01OB definition-projective-bundle plus the canonical map pi^*Sym^n E->O(n) that follows it. The recursion matches the source with the same quotient-line convention. Chart checks: eps(v_i)=(X_i/X_j)tau_j agrees on overlaps because tau_j=(X_j/X_k)tau_k, which is the transition in lem-pur-projective-bundle-tautological-geometry (used with n=r-1>=1, so its hypothesis holds). The kernel basis v_i-(X_i/X_j)v_j together with v_j is unitriangular, so K is free of rank r-1 over any ring and the recursion is well defined. The local splitting survives h^*, so h^*K->p^*F is injective with quotient h^*L and no flatness is needed. The indices F_i=G_i, F_r=p^*F and Q_r=h^*L are right, and adapted local frames make every F_i and p^*F/F_i locally free. Tested r=0, 1, 2, 3, empty T and rings with zero divisors; no global splitting is claimed, and in rank 2 none exists in general (Euler sequence). All five stmt_deps say what the item uses. The delivery adds no new nodes. Searching the DAG with rg, the main-20261015 blueprint and slopmaster2 found no duplicate. The searches recorded on the node give no Mathlib match. A definition has no proof steps, so there is no route issue, and no SGA source is used. Not cited: lem-trf-projective-bundle-quotient-geometry states the canonical surjection, but it is built on a different symmetric-algebra node, and the inline chart construction is complete, so I left it uncited. Notes outside this delivery: lem-pur-flag-pullback-injective omits the constant-rank hypothesis that Fl_T(F) needs; the item's lean_audit field is absent; four search verdicts on the node carry boilerplate text. No fixes written."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CompleteFlagBundle",
+  "declaration": "AlgebraicGeometry.completeFlagBundle",
+  "declarations": [
+   "AlgebraicGeometry.IsCompleteFlagProjectivization",
+   "AlgebraicGeometry.exists_completeFlagProjectivization",
+   "AlgebraicGeometry.completeFlagProjectivization",
+   "AlgebraicGeometry.completeFlagKernel",
+   "AlgebraicGeometry.completeFlagKernel_chart",
+   "AlgebraicGeometry.completeFlagKernel_pullback_locally_split",
+   "AlgebraicGeometry.completeFlagKernel_rank",
+   "AlgebraicGeometry.CompleteFlagBundleData",
+   "AlgebraicGeometry.completeFlagIdentity",
+   "AlgebraicGeometry.completeFlagExtend",
+   "AlgebraicGeometry.completeFlagBundle",
+   "AlgebraicGeometry.completeFlagPredecessor",
+   "AlgebraicGeometry.completeFlagBundle_mono",
+   "AlgebraicGeometry.completeFlagBundle_step_unique",
+   "AlgebraicGeometry.completeFlagStep",
+   "AlgebraicGeometry.completeFlagQuotient",
+   "AlgebraicGeometry.completeFlagBundle_last_quotient",
+   "AlgebraicGeometry.completeFlagBundle_properties"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/CompleteFlagBundle.lean",
+  "statement": "def completeFlagBundle : (r : ℕ) → (T : Scheme.{u}) → (F : T.Modules) → [F.IsFiniteLocallyFreeOfRank r] → CompleteFlagBundleData T F",
+  "branch": "newtargets-dag",
+  "by": "NH",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5f52aa81f",
+  "group": "NH",
+  "result": "fix",
+  "note": "Read node, Stacks chow.tex Tag 02UL, all 5 stmt_deps and the ProjectiveBundleTautologicalGeometry interface; clause-by-clause match is correct: identity cases at r=0,1; ProjectiveBundleRealization with normalized quotient ε; K = kernel ε; chart section/basis; rank r-1; p=q∘h; F_i=G_i (i≤r-1), F_r=p^*F via h^*ι and the tensorPullbackSectionComp inverse (direction checked by #check); Q_i = cokernels of the unique steps; invertible Q_i and locally free p^*F/F_i; no global splitting. Universal-property choice of the projectivization is correct and canonical; universe u single; edge cases r=0,1,2, empty T, indices past r all fine; docstrings/source/blueprint present, only sorry proofs, no duplicate (rg completeFlag empty). Finding (H3, fixed): completeFlagBundle_last_quotient asserted only Nonempty (Q_r ≅ h^*L); fixes/CompleteFlagBundle.lean strengthens it to ∃ θ with cokernel.π ≫ θ.hom = inclusion (n+2) ≫ (tensorPullbackSectionComp h q).hom.app F ≫ h^*ε, i.e. Q_r = h^*L with its quotient map h^*ε as the node says; no other change; no citers. nt_compile --json: delivered 10.5 s clean, fixed 10.8 s/10.2 s clean, broken copy gives the expected type error."
  }
 }
