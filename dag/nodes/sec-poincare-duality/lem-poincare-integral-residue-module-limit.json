@@ -1,0 +1,209 @@
+{
+ "id": "lem-poincare-integral-residue-module-limit",
+ "kind": "statement",
+ "title": "The regular integral coefficient module is the limit of its concrete residue modules",
+ "statement": "For any scheme X and prime l, let R_X=p_X^*continuousMapRingObj(Z_l) [def-sfb-padic-int-condensed-ring]. Define q_n:R_X->C(-,Z/l^n) as the canonical condensed-to-continuous chartComparison of [lem-weil-pbc-continuous-coefficient-realizations] followed by the actual continuous reduction toZModPow n. Regard C(-,Z/l^n) [lem-weil-pbc-continuous-regular-functions] as an R_X-module by restriction along q_n, with transitions the usual residue reductions. The cone of q_n with vertex regular R_X is a limit cone in internal R_X-modules. This includes n=0, where Z/l^0 is the zero ring. No invertibility or finiteness hypothesis on X is required.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sp-tate-twist/_section.md",
+  "place": "Integral inverse-limit formula for the completed coefficient sheaf, in the actual internal-module encoding."
+ },
+ "stmt_deps": [
+  "def-sfb-padic-int-condensed-ring",
+  "lem-weil-pbc-continuous-coefficient-realizations",
+  "lem-weil-pbc-continuous-regular-functions"
+ ],
+ "proof": [
+  {
+   "text": "The concrete residue ring is the sheaf of continuous Z/l^n-valued functions. Define its R_X action through chartComparison followed by PadicInt.toZModPow, and define transitions by ZMod.castHom. Tensor naturality proves their linearity, and castHom_toZModPow_succ proves compatibility. Thus the actual regular R_X-module is the vertex of a specified cone, including n=0.",
+   "uses": [
+    "lem-weil-pbc-continuous-coefficient-realizations",
+    "lem-weil-pbc-continuous-regular-functions"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "On every topological space S, a compatible system of continuous maps S->Z/l^n lifts pointwise by PadicInt.ofCompatible. For continuity at x and epsilon>0, choose n with l^(-n)<epsilon. The open fiber of the nth residue through x makes differences have zero nth residue; ker_toZModPow and norm_le_pow_iff_mem_span_pow bound their norms by l^(-n). The residue maps determine a p-adic integer uniquely. Therefore continuous Z_l-valued functions are the sectionwise inverse limit.",
+   "uses": [
+    "def-weil-l-adic-numbers"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The canonical chartComparison is an isomorphism for Z_l, using its ultrametric totally disconnected topology. Transfer the sectionwise limiting cone across this specified isomorphism. The sheaf-to-presheaf and module forgetful functors reflect limits; naturality of the explicit module transition maps identifies the underlying diagram with the continuous residue diagram. This proves Nonempty(IsLimit(tateResidueModuleCone X l)).",
+   "uses": [
+    "lem-weil-pbc-continuous-coefficient-realizations"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-continuous-coefficient-realizations",
+  "lem-weil-pbc-continuous-regular-functions",
+  "def-weil-l-adic-numbers"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sp-tate-twist/_section.md",
+  "place": "Integral inverse-limit formula for the completed coefficient sheaf, in the actual internal-module encoding."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "ofCompatible|residueModule|padicInt.*[Ll]imit",
+   "results": {
+    "t": "2026-10-17T21:05:35Z",
+    "tool": "grep",
+    "query": "ofCompatible|residueModule|padicInt.*[Ll]imit",
+    "sub": "",
+    "ok": true,
+    "n_hits": 25,
+    "note": "",
+    "top": [
+     "Mathlib/LinearAlgebra/TensorProduct/Associator.lean",
+     "Mathlib/LinearAlgebra/TensorProduct/Associator.lean",
+     "Mathlib/LinearAlgebra/TensorProduct/Associator.lean",
+     "Mathlib/NumberTheory/Padics/RingHoms.lean",
+     "Mathlib/LinearAlgebra/TensorProduct/Quotient.lean",
+     "Mathlib/LinearAlgebra/TensorProduct/Quotient.lean",
+     "Mathlib/LinearAlgebra/TensorProduct/Quotient.lean",
+     "Mathlib/LinearAlgebra/TensorProduct/Quotient.lean"
+    ],
+    "digest": "e926e40a606e3459"
+   },
+   "date": "2026-10-18",
+   "verdict": "Used the project PadicInt.ofCompatible API and Mathlib p-adic residue/norm uniqueness; no exact sheaf-module limit theorem was found."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PadicInt.ofCompatible\"",
+   "results": {
+    "t": "2026-10-17T21:05:36Z",
+    "tool": "loogle",
+    "query": "\"PadicInt.ofCompatible\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-18",
+   "verdict": "Used the project PadicInt.ofCompatible API and Mathlib p-adic residue/norm uniqueness; no exact sheaf-module limit theorem was found."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Continuous p-adic integer valued functions are the inverse limit of their finite residue modules on the pro-etale site",
+   "results": {
+    "t": "2026-10-17T21:05:38Z",
+    "tool": "leanfinder",
+    "query": "Continuous p-adic integer valued functions are the inverse limit of their finite residue modules on the pro-etale site",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "BDeRhamPlus",
+     "BDeRham",
+     "PadicInt.limNthHom",
+     "PadicInt.lift",
+     "PadicInt.limNthHom_spec",
+     "PadicInt.adicCompletionIntegersEquiv",
+     "PadicInt.coe_adicCompletionIntegersEquiv_symm_apply",
+     "PadicInt.toZMod_eq_residueField_comp_residue"
+    ],
+    "digest": "6a90892eda6beda1"
+   },
+   "date": "2026-10-18",
+   "verdict": "Used the project PadicInt.ofCompatible API and Mathlib p-adic residue/norm uniqueness; no exact sheaf-module limit theorem was found."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Continuous p-adic integer valued functions are the inverse limit of their finite residue modules on the pro-etale site",
+   "results": {
+    "t": "2026-10-17T21:56:50Z",
+    "tool": "leansearch",
+    "query": "Continuous p-adic integer valued functions are the inverse limit of their finite residue modules on the pro-etale site",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "PadicInt",
+     "ProfiniteGrp.toLimit_fun_continuous",
+     "PadicInt.limNthHom",
+     "PadicInt.instIsAdicCompleteMaximalIdeal",
+     "mahler",
+     "PadicInt.lift",
+     "Padic.adicCompletionEquiv",
+     "PadicInt.toZMod_eq_residueField_comp_residue"
+    ],
+    "digest": "57211e6b38b63437"
+   },
+   "date": "2026-10-18",
+   "verdict": "Generic p-adic, finite free module, or scheme hits do not supply the actual internal-module or pro-etale root comparison. The existing elementary field unit proof already uses the relevant characteristic API."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.PoincareDuality.Poincare",
+  "date": "2026-10-18",
+  "group": "A4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-def-sp-tate-twist",
+   "place": "Integral inverse-limit formula for the completed coefficient sheaf, in the actual internal-module encoding."
+  },
+  "same_as": []
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-def-sp-tate-twist",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.PoincareDuality.IntegralResidueLimit",
+  "file": "lean/Sheaf/PoincareDuality/IntegralResidueLimit.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.tateResidueModuleCone_isLimit",
+  "statement": "theorem tateResidueModuleCone_isLimit (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime] :\n    Nonempty (IsLimit (tateResidueModuleCone X ℓ))",
+  "branch": "sheaf-dag",
+  "by": "A4",
+  "date": "2026-10-18",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.tateResidueMap",
+   "AlgebraicGeometry.ProEtale.tateResidueMap_isMonHom",
+   "AlgebraicGeometry.ProEtale.tateResidueTransition",
+   "AlgebraicGeometry.ProEtale.tateResidueTransition_isMonHom",
+   "AlgebraicGeometry.ProEtale.tateResidueCoefficientMap",
+   "AlgebraicGeometry.ProEtale.tateResidueCoefficientMap_isMonHom",
+   "AlgebraicGeometry.ProEtale.tateResidueCoefficientMap_compat",
+   "AlgebraicGeometry.ProEtale.tateResidueModuleLevel",
+   "AlgebraicGeometry.ProEtale.tateResidueModuleTransition",
+   "AlgebraicGeometry.ProEtale.tateResidueModuleSystem",
+   "AlgebraicGeometry.ProEtale.tateResidueModuleProjection",
+   "AlgebraicGeometry.ProEtale.tateResidueModuleCone",
+   "AlgebraicGeometry.ProEtale.tateResidueModuleCone_isLimit"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261018T035847-L-1403567",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261018T035847-L-1403567",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

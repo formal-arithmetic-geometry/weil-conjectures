@@ -1,0 +1,197 @@
+{
+ "id": "lem-poincare-integral-residue-free-comparison",
+ "kind": "statement",
+ "title": "Free integral modules on constant residue groups are the actual residue diagram",
+ "statement": "Let X be a scheme and l a prime. Set R_X=p_X^*continuousMapRingObj(Z_l). Let C_n be the constant abelian sheaf on ULift(ZMod(l^n)), with transitions induced by the usual reduction homomorphisms [def-weil-pbc-constant-sheaf]. Let Q_n be the actual R_X-module of continuous ZMod(l^n)-valued functions, with action through chartComparison followed by PadicInt.toZModPow and the actual reduction transitions of [lem-poincare-integral-residue-module-limit]. Then the diagrams n|->Mod.freeFunctor(R_X)(C_n) [def-pur-condensed-tate-twists] and n|->Q_n are naturally isomorphic. Both include n=0. No invertibility or finiteness assumption on X is required.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sp-tate-twist/_section.md",
+  "place": "The actual integral coefficient quotient and free-module comparison, compatible with all residue reductions."
+ },
+ "stmt_deps": [
+  "lem-poincare-integral-residue-module-limit",
+  "def-weil-pbc-constant-sheaf",
+  "def-pur-condensed-tate-twists"
+ ],
+ "proof": [
+  {
+   "text": "For every site object U, reduction C(U,Z_l)->C(U,Z/l^n) is surjective: compose a residue-valued function with its integer representatives. A continuous integral function with zero residue divides continuously by l^n: divide in Q_l, use the residue norm bound to land in Z_l, and use continuity of division by a fixed nonzero scalar. Thus the reduction is the cokernel of multiplication by l^n, sectionwise and hence in abelian sheaves.",
+   "uses": [
+    "def-weil-l-adic-numbers",
+    "lem-weil-pbc-continuous-regular-functions"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Transfer this cokernel across the canonical chartComparison from the actual integral coefficient object, and reflect the underlying colimit through the module forgetful functor. Independently, Z/l^n is the cokernel of multiplication by l^n on the integral tensor unit in Ab: its integer projection is surjective with kernel nZ. Constant sheafification and the free internal-module functor preserve that cokernel. Their monoidal unit comparison identifies its source with the regular integral coefficient module.",
+   "uses": [
+    "lem-weil-pbc-continuous-coefficient-realizations",
+    "def-weil-pbc-constant-sheaf",
+    "def-pur-condensed-tate-twists"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Uniqueness of cokernels gives an explicit linear level isomorphism from the free module on the constant residue group to the actual residue module of [lem-poincare-integral-residue-module-limit]. The defining projection identity of this comparison makes the transition squares commute: precompose with the epic integer projection and use castHom compatibility. NatTrans.ofOpSequence assembles the level maps, all of which are isomorphisms. The argument includes n=0 and empty schemes.",
+   "uses": [
+    "lem-poincare-integral-residue-module-limit"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-l-adic-numbers",
+  "lem-weil-pbc-continuous-regular-functions",
+  "lem-weil-pbc-continuous-coefficient-realizations",
+  "def-weil-pbc-constant-sheaf",
+  "def-pur-condensed-tate-twists",
+  "lem-poincare-integral-residue-module-limit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sp-tate-twist/_section.md",
+  "place": "The actual integral coefficient quotient and free-module comparison, compatible with all residue reductions."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "ZMod.*cokernel|cokernel.*ZMod|freeFunctor.*constant",
+   "results": {
+    "t": "2026-10-17T21:29:24Z",
+    "tool": "grep",
+    "query": "ZMod.*cokernel|cokernel.*ZMod|freeFunctor.*constant",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-18",
+   "verdict": "Used ZMod.intCast_zmod_eq_zero_iff_dvd, the p-adic residue norm API, and categorical cokernel comparisons; no exact sheaf-module comparison was found."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ZMod.intCast_zmod_eq_zero_iff_dvd\"",
+   "results": {
+    "t": "2026-10-17T21:29:25Z",
+    "tool": "loogle",
+    "query": "\"ZMod.intCast_zmod_eq_zero_iff_dvd\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "ZMod.intCast_zmod_eq_zero_iff_dvd"
+    ],
+    "digest": "5c8d8de45bec539f"
+   },
+   "date": "2026-10-18",
+   "verdict": "Used ZMod.intCast_zmod_eq_zero_iff_dvd, the p-adic residue norm API, and categorical cokernel comparisons; no exact sheaf-module comparison was found."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The integral p-adic coefficient sheaf modulo a prime power is the free integral module on the constant finite residue sheaf compatible with reductions",
+   "results": {
+    "t": "2026-10-17T21:29:30Z",
+    "tool": "leanfinder",
+    "query": "The integral p-adic coefficient sheaf modulo a prime power is the free integral module on the constant finite residue sheaf compatible with reductions",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "BDeRhamPlus",
+     "BDeRham",
+     "WittVector.StandardOneDimIsocrystal",
+     "ModP",
+     "LocallyConstant.freeOfProfinite",
+     "WittVector.instModuleFractionRingStandardOneDimIsocrystal",
+     "PreTilt",
+     "WittVector.mk_pow_fontaineTheta"
+    ],
+    "digest": "23b30fa887ab0b8b"
+   },
+   "date": "2026-10-18",
+   "verdict": "Used ZMod.intCast_zmod_eq_zero_iff_dvd, the p-adic residue norm API, and categorical cokernel comparisons; no exact sheaf-module comparison was found."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The integral p-adic coefficient sheaf modulo a prime power is the free integral module on the constant finite residue sheaf compatible with reductions",
+   "results": {
+    "t": "2026-10-17T21:56:50Z",
+    "tool": "leansearch",
+    "query": "The integral p-adic coefficient sheaf modulo a prime power is the free integral module on the constant finite residue sheaf compatible with reductions",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "SheafOfModules.ιFree",
+     "SheafOfModules.free",
+     "LocallyConstant.freeOfProfinite",
+     "PadicInt",
+     "PadicInt.toZMod_eq_residueField_comp_residue",
+     "PadicInt.residueField",
+     "PadicInt.zmodRepr",
+     "WittVector.toPadicInt"
+    ],
+    "digest": "eff504d6d6f85ef5"
+   },
+   "date": "2026-10-18",
+   "verdict": "Generic p-adic, finite free module, or scheme hits do not supply the actual internal-module or pro-etale root comparison. The existing elementary field unit proof already uses the relevant characteristic API."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.PoincareDuality.Poincare",
+  "date": "2026-10-18",
+  "group": "A4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-def-sp-tate-twist",
+   "place": "The actual integral coefficient quotient and free-module comparison, compatible with all residue reductions."
+  },
+  "same_as": []
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-def-sp-tate-twist",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.PoincareDuality.IntegralResidueQuotient",
+  "file": "lean/Sheaf/PoincareDuality/IntegralResidueQuotient.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.constantTateResidueSystem_free_iso",
+  "statement": "theorem constantTateResidueSystem_free_iso (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime] :\n    Nonempty (constantTateResidueSystem X ℓ ⋙\n      Mod.freeFunctor (condensedRingObj (Profinite.continuousMapRingObj ℤ_[ℓ]) X) ≅\n        tateResidueModuleSystem X ℓ)",
+  "branch": "sheaf-dag",
+  "by": "A4",
+  "date": "2026-10-18",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.integralResidueAbTransition",
+   "AlgebraicGeometry.ProEtale.constantTateResidueSystem",
+   "AlgebraicGeometry.ProEtale.constantTateResidueSystem_free_iso"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261018T035847-L-1403567",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261018T035847-L-1403567",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

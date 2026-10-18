@@ -29,97 +29,56 @@
  ],
  "proof": [
   {
-   "text": "Put $R_X=p_X^*\\underline{\\mathbf Z}_\\ell$ and $A_{r,X}=(\\mathbf Z/\\ell^r)_X$ for $r\\ge1$. At $E=\\mathbf Q_\\ell$, [sk-prop-sfb-qlbar-colimit-x] gives $R_X\\simeq\\varprojlim_r A_{r,X}$, compatibly with scheme inverse image and the coefficient maps. Apply [lem-pur-condensed-zl-reduction-mod-ell-power] on this same scheme $X$: its quotient isomorphism $R_X/\\ell^rR_X\\simeq A_{r,X}$ is an isomorphism of rings and $R_X$-modules, and its compatibility clause identifies successive quotient maps with the reduction maps $A_{r+1,X}\\to A_{r,X}$. The helper requires only a prime and a scheme, so imposes no extra hypothesis on $X$. These are precisely the coefficient identifications used in the next two steps.",
+   "text": "Apply [lem-poincare-first-twist-pullback-local-line] to the identity of X. It provides a pro-etale cover trivializing the first twist after the identity-stratum pullback, over exactly the twice-pulled-back coefficient ring.",
    "uses": [
-    "sk-prop-sfb-qlbar-colimit-x",
-    "lem-pur-condensed-zl-reduction-mod-ell-power"
+    "lem-poincare-first-twist-pullback-local-line"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sp-tate-twist/_section.md",
-    "place": "Integral limit and coefficient extension; spell out the quotient comparison needed to identify the exact upstream Tate construction"
-   }
+   "elementary": true
   },
   {
-   "text": "Write $F_r=R_X\\otimes_{\\mathbf Z}\\mu_{\\ell^r,X}$ for the actual free internal-module level in [def-pur-condensed-tate-twists]. Since $\\ell^r$ annihilates the abelian sheaf $\\mu_{\\ell^r,X}$, balancing factors its tensor through $R_X/\\ell^r R_X=A_{r,X}$ from Step 1. Thus the maps $a\\otimes z\\mapsto az$ and $z\\mapsto1\\otimes z$ are inverse $R_X$-linear maps $F_r\\simeq\\mu_{\\ell^r,X}$. The first composite sends $z$ to $z$; the other sends $a\\otimes z$ to $1\\otimes az=a\\otimes z$, because the reduction of $a$ in the constant sheaf $A_{r,X}$ is locally represented by an integer $k$, and locally $1\\otimes az=1\\otimes kz=k\\otimes z=a\\otimes z$. These local equalities give equality of the sheaf maps. For the transition from $r+1$ to $r$, the two composites on $a\\otimes z$ give $\\bar a\\cdot(z^\\ell)$ and $(a\\cdot z)^\\ell$, which agree: after reducing $a$ modulo $\\ell^{r+1}$, choose locally an integer representative $k$ of that residue section; both are then $z^{k\\ell}$. Here $\\bar a$ is reduction modulo $\\ell^r$. This agrees with the transition because it is $1\\otimes(z\\mapsto z^\\ell)$ and the scalar quotient maps are the reduction maps. The level $r=0$ is zero since $\\mu_1$ is the trivial abelian sheaf. A cone over the positive levels extends uniquely by the zero map to this level. Therefore the limit universal property, applied to these compatible inverse maps, identifies the actual $T_X=\\varprojlim_{r\\ge0}F_r$ with $Z_X=\\varprojlim_{r\\ge1}\\mu_{\\ell^r,X}$ as an $R_X$-module.",
-   "uses": [
-    "def-pur-condensed-tate-twists"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sp-tate-twist/_section.md",
-    "place": "Displayed roots-of-unity inverse limit; identify all levels, their transitions and the harmless level zero"
-   }
-  },
-  {
-   "text": "Apply clause 2 of [lem-pur-twist-sheaf-locally-free] with $S=X$ and $E=\\mathbf Q_\\ell$. Its hypotheses require precisely that $\\ell$ be invertible on $X$. It supplies a pro-etale covering $V_j\\to X$ with $Z_X|_{V_j}\\simeq\\widehat{\\mathbf Z}_{\\ell,V_j}$. Step 1 identifies these rings with $R_{V_j}$. The actual positive Tate line is $L_X=B_X\\otimes_{R_X}T_X$ by [def-pur-condensed-tate-twists]. Restricting this sheaf tensor to the covering slice keeps the same sectionwise tensor and sheafification, hence on $V_j$ it becomes $B_{V_j}\\otimes_{R_{V_j}}R_{V_j}$. Multiplication $b\\otimes r\\mapsto br$ and $b\\mapsto b\\otimes1$ identify this with $B_{V_j}$. The coefficient comparisons in [sk-prop-sfb-qlbar-colimit-x] identify the restricted rings with these displayed coefficient rings. Thus the actual upstream line, rather than a line in a rationalized category, is locally free of rank one.",
-   "uses": [
-    "lem-pur-twist-sheaf-locally-free",
-    "def-pur-condensed-tate-twists",
-    "sk-prop-sfb-qlbar-colimit-x"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sp-tate-twist/_section.md",
-    "place": "Each coefficient Tate line is locally free of rank one; use the integral line and the exact scalar extension"
-   }
-  },
-  {
-   "text": "Use the very same covering of Step 3. The signed powers in [def-pur-condensed-tate-twists] give $B_X(0)|_{V_j}=B_{V_j}$. Inductively the positive powers restrict to $B_{V_j}\\otimes_{B_{V_j}}B_{V_j}\\simeq B_{V_j}$, with inverse $b\\mapsto b\\otimes1$. For a negative power the definition is the sheaf Hom into $B_X$ of the corresponding positive power. On the covering slice, [def-pur-sheaf-hom] describes it as the sheaf of module maps out of $B_{V_j}$; evaluation at $1$ identifies it with $B_{V_j}$, with inverse sending a section $b$ to multiplication by $b$. Restriction to a smaller object commutes with these formulas. This proves that $B_X(d)$ is pro-etale locally free of rank one for every integer $d$, including zero and negative integers.",
+   "text": "For this composite monoidal mapMod functor, prove the positive tensor-power case by induction. At zero use the monoidal unit comparison; at the successor use the inverse tensor comparison, the two basis isomorphisms and the left unitor. These are the exact recursive signed-twist definitions of [def-pur-condensed-tate-twists].",
    "uses": [
     "def-pur-condensed-tate-twists",
-    "def-pur-sheaf-hom"
+    "def-sfb-finite-upper-star-monoidal"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sp-tate-twist/_section.md",
-    "place": "Tensor powers and dual powers; write the zero and negative cases explicitly"
-   }
+   "elementary": true
   },
   {
-   "text": "Each local trivialization in Step 4 is a finite constant local model: choose the scalar module $P=B(*)=\\overline{\\mathbf Q}_\\ell$, with presentation $B(*)^0\\to B(*)^1\\to P\\to0$. Extending this presentation to $B_{V_j}$ gives $0\\to B_{V_j}$ with cokernel $B_{V_j}$; the matrix has zero columns and scalar entries. This satisfies both the scalar-model criterion and its local finite-presentation consequence in [det-def-sfb-constructible-local-model]. Use the one-stratum stratification $X=X$; its immersion is the identity and its image is constructible (the entire space). The definition [sk-def-sfb-constructible] now gives constructibility of $B_X(d)$. This argument also gives the global finite-stratification predicate in the exact upstream source, without relying on the weaker affine-local convention: the single stratum works on the whole scheme. For the zero sheaf use $P=0$ and the rank-zero presentation. The covering itself need not be a finite family. Explicitly for the predicate of [def-sfb-constructible-module]: take the stratification with the single stratum $g=\\mathrm{id}_X$, so $g^*$ is the identity up to the canonical isomorphism and $g^*B_X=B_X$. For each member $u_j\\colon V_j\\to X$ of the pro-etale covering of Step 4, the pullback $u_j^*$ of [def-sfb-finite-upper-star] is restriction to the slice $X_{\\mathrm{proet}}/V_j=(V_j)_{\\mathrm{proet}}$: the base change functor $W\\mapsto W\\times_XV_j$ has as left adjoint the functor regarding a $V_j$-object as an $X$-object, so the left Kan extension along it is precomposition with that left adjoint, which is already a sheaf. Hence $\\operatorname{mapMod}(u_j^*)B_X(d)\\simeq B_{V_j}=\\operatorname{coker}(B_{V_j}^0\\to B_{V_j}^1)$ is finitely presented [def-sfb-finitely-presented-module], so $B_X(d)$ is locally finitely presented [def-sfb-locally-finitely-presented] and constructible; the zero module is $\\operatorname{coker}(B_X^0\\to B_X^0)$.",
+   "text": "For negative powers, pullback along the identity and each pro-etale cover member is weakly etale and commutes with internal Hom. Use the existing isIso_ihomComparison_upperStar, the concrete Mod.ihom' equalizer comparison, and uniqueness of right adjoints to identify it with the actual categorical ihom used by tateTwist. The transported positive basis reduces Hom(regular,regular) to regular through unitIsoSelf. This argument is fully proved in nonempty_pullback_ihom and powers_image_regular; there is no new Hom obligation.",
    "uses": [
-    "det-def-sfb-constructible-local-model",
-    "sk-def-sfb-constructible",
+    "def-pur-condensed-tate-twists",
+    "def-sfb-finite-upper-star"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Choose the finite stratification with one stratum, the whole of X, and identity immersion. On every covering member the obtained regular module is the cokernel of the zero map from the rank-zero free module to the rank-one free module, by biproductUniqueIso and cokernelZeroIsoTarget. This is exactly local finite presentation and constructibility, with the actual raw pullbacks of the source predicate.",
+   "uses": [
     "def-sfb-constructible-module",
     "def-sfb-locally-finitely-presented",
     "def-sfb-finitely-presented-module",
     "def-sfb-finite-upper-star"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sp-tate-twist/_section.md",
-    "place": "Rank-one local model implies constructibility; one stratum suffices on arbitrary schemes"
-   }
+   "elementary": true
   },
   {
-   "text": "By [def-pur-condensed-tate-twists], $\\mathrm{tateTwistDerived}(X,\\ell,d)$ is represented by the complex with $B_X(d)$ in degree zero, zero in all other degrees and all differentials zero. Its shift by $n$ has that same sheaf in degree $-n$, zero elsewhere and zero differentials. The kernel/image formula for cohomology gives $H^{-n}=B_X(d)$ and $H^i=0$ for $i\\ne-n$. Both kinds of cohomology sheaf are constructible by Step 5, and the interval $[-n,-n]$ is a single bound independent of $X$. This is exactly the predicate [def-sfb-bounded-constructible-complexes] (the predicate named by [sk-def-sfb-bounded-constructible]). No assertion that the entire bounded constructible subcategory is triangulated is needed. The calculation also covers empty $X$, when all the displayed module sheaves are zero.",
+   "text": "Apply the proved shifted-single theorem [lem-poincare-constructible-shift-single] to the constructible signed twist. tateTwistDerived is its degree-zero single object by definition. The result applies to all integer shifts, including the empty-scheme case.",
    "uses": [
-    "def-pur-condensed-tate-twists",
-    "sk-def-sfb-bounded-constructible",
-    "def-sfb-bounded-constructible-complexes"
+    "lem-poincare-constructible-shift-single",
+    "def-pur-condensed-tate-twists"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sp-tate-twist/_section.md",
-    "place": "Degree-zero Tate object and arbitrary cohomological shift; direct one-term calculation"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "sk-prop-sfb-qlbar-colimit-x",
-  "lem-pur-condensed-zl-reduction-mod-ell-power",
+  "lem-poincare-first-twist-pullback-local-line",
   "def-pur-condensed-tate-twists",
-  "lem-pur-twist-sheaf-locally-free",
-  "def-pur-sheaf-hom",
-  "det-def-sfb-constructible-local-model",
-  "sk-def-sfb-constructible",
+  "def-sfb-finite-upper-star-monoidal",
+  "def-sfb-finite-upper-star",
   "def-sfb-constructible-module",
   "def-sfb-locally-finitely-presented",
   "def-sfb-finitely-presented-module",
-  "def-sfb-finite-upper-star",
-  "sk-def-sfb-bounded-constructible",
-  "def-sfb-bounded-constructible-complexes"
+  "lem-poincare-constructible-shift-single"
  ],
  "mathlib_searches": [
   {
@@ -487,7 +446,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sp-tate-twist/_section.md",
-  "place": "Tate construction, integral limit, scalar extension, tensor powers and duals; expanded for the actual upstream internal modules and shifted one-term complex. The upstream target proof is sorry."
+  "place": "The integral-root, coefficient-quotient, inverse-limit, scalar-extension, signed-power and constructibility route. Every comparison, including the compatible primitive-root diagram, is now proved in Lean. The corrected constructibility theorem uses only propext, Classical.choice and Quot.sound."
  },
  "split_report": {
   "date": "2026-10-17",
@@ -533,14 +492,15 @@
   }
  },
  "lean": {
-  "module": "Sheaf.Targets.PoincareTateBoundedConstructible",
-  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructible_tateTwistDerived_of_invertible",
-  "file": "lean/Sheaf/Targets/PoincareTateBoundedConstructible.lean",
-  "statement": "theorem boundedConstructible_tateTwistDerived_of_invertible (ℓ : ℕ) [Fact ℓ.Prime] (X : Scheme.{u}) [∀ x : X, Invertible (ℓ : X.residueField x)] (d n : ℤ) : boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X) ((shiftFunctor _ n).obj (tateTwistDerived X ℓ d))",
-  "branch": "newtargets-dag",
-  "by": "Q08",
+  "existing": true,
+  "module": "WeilConjectures.PoincareDuality.Poincare",
+  "file": "lean/WeilConjectures/PoincareDuality/Poincare.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructible_tateTwistDerived",
+  "statement": "lemma boundedConstructible_tateTwistDerived (X : Scheme.{u})\n    (hℓ : IsUnit (ℓ : Γ(X, ⊤))) (d n : ℤ) :\n    boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X)\n      ((shiftFunctor _ n).obj (tateTwistDerived X ℓ d))",
+  "branch": "sheaf-dag",
+  "by": "A4",
   "date": "2026-10-18",
-  "existing": false
+  "note": "The existing Lean signature is repaired to include the invertibility hypothesis already present in this reviewed DAG statement. The wrapper and all local uses are adapted in the same delivery."
  },
  "reviewed_lean": {
   "date": "2026-10-18",
@@ -549,5 +509,15 @@
   "group": "Q08",
   "result": "pass",
   "note": "Wrote review.md. All hypotheses, coefficients, Tate constructions, constructibility predicates, universes, edge cases, dependency records and docstrings match. Signature is verbatim. No route-pivot or pilot-gate faults found. Immutable module independently compiled cleanly through scompile.py; no branch or clone changes."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261018T035847-L-1403567",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

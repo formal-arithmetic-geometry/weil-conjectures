@@ -1,0 +1,186 @@
+{
+ "id": "lem-poincare-compatible-integral-root-bases",
+ "kind": "statement",
+ "title": "Compatible finite-level bases identify the actual root and residue diagrams",
+ "statement": "Let l be a prime and X a scheme with l invertible in Gamma(X,O_X). Let T_r=Mod.freeFunctor(R_X)(rootsOfUnitySheaf X (l^r)), with the actual power transitions of [def-pur-condensed-tate-twists], and let Q_r=tateResidueModuleLevel X l r be the actual continuous residue modules, with the specified action and reduction transitions of [lem-poincare-integral-residue-module-limit]. There is a pro-etale cover (u_i:U_i->X) such that the diagrams r|->mapMod(u_i^*) T_r and r|->mapMod(u_i^*) Q_r are naturally isomorphic as diagrams of modules over u_i^*R_X [def-sfb-finite-upper-star]. Both diagrams include r=0. No inverse limits, rational extensions, signed powers or constructibility assertion occur in this statement.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sp-tate-twist/_section.md",
+  "place": "Compatible primitive-root bases and finite coefficient comparison, before passage to the integral inverse limit."
+ },
+ "stmt_deps": [
+  "def-pur-condensed-tate-twists",
+  "lem-poincare-integral-residue-module-limit",
+  "def-sfb-finite-upper-star"
+ ],
+ "proof": [
+  {
+   "text": "Take the cover and natural isomorphism of abelian root and constant residue diagrams from [lem-poincare-compatible-primitive-roots]. The actual integral Tate system is the root diagram followed by Mod.freeFunctor: the identity level maps form a natural isomorphism, since the successive transitions are exactly the free images of the power maps.",
+   "uses": [
+    "lem-poincare-compatible-primitive-roots",
+    "def-pur-condensed-tate-twists"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The free-module functor commutes with raw inverse image. The two composites free_R then upperStar.mapMod and upperStar then free_(upperStar R) are left adjoints to definitionally the same right adjoint, using the free-forgetful adjunction and the monoidal lifted sheaf adjunction. Whisker this natural comparison with the root and residue diagrams, apply the free functor to the given abelian basis, and use the inverse comparison on residues.",
+   "uses": [
+    "def-sfb-finite-upper-lower-star-adjunction"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Whisker the proved natural isomorphism of [lem-poincare-integral-residue-free-comparison] with the module inverse image. Composing with the previous comparisons gives exactly the displayed actual root-module/residue-module diagram isomorphism. This entire aggregation is proved in Lean; the sole remaining geometric hole is the abelian compatible-root theorem.",
+   "uses": [
+    "lem-poincare-integral-residue-free-comparison"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-poincare-compatible-primitive-roots",
+  "def-pur-condensed-tate-twists",
+  "def-sfb-finite-upper-lower-star-adjunction",
+  "lem-poincare-integral-residue-free-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sp-tate-twist/_section.md",
+  "place": "Fully proved aggregation of compatible abelian root bases, the proved coefficient quotient diagram, and free-module/inverse-image adjunctions."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "tateModuleSystem|rootsOfUnitySheafPow",
+   "results": {
+    "t": "2026-10-17T21:05:35Z",
+    "tool": "grep",
+    "query": "tateModuleSystem|rootsOfUnitySheafPow",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-18",
+   "verdict": "No exact result for this internal-module Tate construction; generic hits do not identify the roots tower."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"tateModuleSystem\"",
+   "results": {
+    "t": "2026-10-17T21:05:36Z",
+    "tool": "loogle",
+    "query": "\"tateModuleSystem\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-18",
+   "verdict": "No exact result for this internal-module Tate construction; generic hits do not identify the roots tower."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A pro-etale cover admits compatible primitive roots identifying the free integral root tower with the finite residue module tower",
+   "results": {
+    "t": "2026-10-17T21:05:37Z",
+    "tool": "leanfinder",
+    "query": "A pro-etale cover admits compatible primitive roots identifying the free integral root tower with the finite residue module tower",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "StandardEtalePresentation",
+     "StandardEtalePresentation.hasMap",
+     "Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime",
+     "Algebra.instIsStandardEtaleRing",
+     "StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot",
+     "StandardEtalePair.instFormallyEtaleRing",
+     "Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq",
+     "Algebra.Etale.comp"
+    ],
+    "digest": "ebe32ace556fb1d6"
+   },
+   "date": "2026-10-18",
+   "verdict": "No exact result for this internal-module Tate construction; generic hits do not identify the roots tower."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A pro-etale cover admits compatible primitive roots identifying the free integral root tower with the finite residue module tower",
+   "results": {
+    "t": "2026-10-17T21:56:50Z",
+    "tool": "leansearch",
+    "query": "A pro-etale cover admits compatible primitive roots identifying the free integral root tower with the finite residue module tower",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq",
+     "Algebra.Etale.formallyEtale",
+     "AlgebraicGeometry.Scheme.smallEtaleTopology",
+     "AlgebraicGeometry.Scheme.Cover.pullbackCoverOverProp'",
+     "IsPrimitiveRoot.isIntegral",
+     "IsPrimitiveRoot.adjoinEquivRingOfIntegers",
+     "Algebra.IsEtaleAt.comp",
+     "AlgebraicGeometry.Scheme.etaleTopology"
+    ],
+    "digest": "0a92fb85459207ef"
+   },
+   "date": "2026-10-18",
+   "verdict": "Generic p-adic, finite free module, or scheme hits do not supply the actual internal-module or pro-etale root comparison. The existing elementary field unit proof already uses the relevant characteristic API."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.PoincareDuality.Poincare",
+  "date": "2026-10-18",
+  "group": "A4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-def-sp-tate-twist",
+   "place": "Compatible primitive-root bases and finite coefficient comparison, before passage to the integral inverse limit."
+  },
+  "same_as": []
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-def-sp-tate-twist",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.PoincareDuality.CompatibleIntegralRootBases",
+  "file": "lean/Sheaf/PoincareDuality/CompatibleIntegralRootBases.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.exists_tateModule_residue_diagram_iso",
+  "statement": "theorem exists_tateModule_residue_diagram_iso\n    (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime] (hℓ : IsUnit (ℓ : Γ(X, ⊤))) :\n    ∃ 𝒰 : Scheme.Cover.{u} Scheme.proetalePrecoverage X, ∀ i : 𝒰.I₀,\n      Nonempty\n        (tateModuleSystem X ℓ ⋙ (upperStar Ab.{u + 1} (𝒰.f i)).mapMod\n          (condensedRingObj (Profinite.continuousMapRingObj ℤ_[ℓ]) X) ≅\n        tateResidueModuleSystem X ℓ ⋙ (upperStar Ab.{u + 1} (𝒰.f i)).mapMod\n          (condensedRingObj (Profinite.continuousMapRingObj ℤ_[ℓ]) X))",
+  "branch": "sheaf-dag",
+  "by": "A4",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261018T035847-L-1403567",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A4",
+  "result": "pass",
+  "landing": "20261018T035847-L-1403567",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
