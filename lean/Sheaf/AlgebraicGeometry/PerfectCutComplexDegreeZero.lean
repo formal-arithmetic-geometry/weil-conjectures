@@ -7,7 +7,6 @@ module
 
 public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Sheaf.AlgebraicGeometry.DegreeZeroFibreSurjective
-public import Sheaf.AlgebraicGeometry.DerivedTensorCohomologyVanishes
 import Sheaf.Algebra.Homology.AffinePerfectCutDegreeZero
 import Sheaf.AlgebraicGeometry.StrictlyPerfectFiniteFreeRefinement
 import Sheaf.AlgebraicGeometry.AffinePerfectModuleModel
