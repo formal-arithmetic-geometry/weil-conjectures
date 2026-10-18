@@ -26,7 +26,11 @@ which is a functor of `K`, and taking cohomology gives the long exact sequence
 natural in `K`. The triangle is also functorial in the pair: for an étale (resp. weakly étale)
 `X`-scheme `V`, the restriction to the pair `(V, V ×_X U)` gives a morphism of triangles
 (`AlgebraicGeometry.Etale.sectionsWithSupportTriangleToPair`), and morphisms of pairs inside the
-site induce morphisms of triangles (`CategoryTheory.Sheaf.pairRightDerivedTriangleMap`).
+site induce morphisms of triangles (`CategoryTheory.Sheaf.pairRightDerivedTriangleMap`). For an
+arbitrary morphism of pairs `e : (X', X' ∖ Z') ⟶ (X, X ∖ Z)` of schemes, the pullback maps form a
+morphism of triangles compatible with composition
+(`AlgebraicGeometry.Etale.sectionsWithSupportTrianglePullback` in
+`WeilConjectures.SixFunctors.Etale.SupportCohomologyTrianglePullback`).
 
 ## Main definitions
 
