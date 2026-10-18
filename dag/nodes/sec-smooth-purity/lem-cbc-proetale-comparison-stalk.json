@@ -26,125 +26,50 @@
  ],
  "proof": [
   {
-   "text": "Put $C=A^{\\mathrm{sh}}_{T,\\bar t}$ and $S=\\operatorname{Spec}C=T_{(\\bar t)}$ with structural map $p:S\\to T$. The local-structure lemma gives a local-ring structure on $C$ for which $C$ is strictly henselian. Apply the pointed-map lemma with this structure: it gives $\\psi:C\\twoheadrightarrow K\\subset\\Omega$ with kernel the maximal ideal and with the specified neighbourhood projection equations. The composite $C\\to K\\hookrightarrow\\Omega$ defines $\\bar s:\\operatorname{Spec}\\Omega\\to S$. Its image is the closed point because the kernel is the maximal ideal. The projection equations and the definition of the structural map give $p\\bar s=\\bar t$. Thus the strictly henselian sections lemma can be applied at $\\bar s$, rather than at an arbitrary point of $S$.",
+   "text": "Define the pro-etale point by the lift functor U ↦ Hom_T(Spec Ω,U), enlarged by ULift to universe u+1. Its elements category is equivalent to the pointed weakly etale neighbourhood category of [def-weil-proetale-geometric-stalk], hence cofiltered and initially small. For a covering sieve choose a generating pro-etale covering family, base change it along the lift Spec Ω → U, and use joint surjectivity to choose a point of one member. That member is weakly etale over Spec Ω. Apply [lem-fix-weakly-etale-algclosed-section] and compose its section with the other pullback projection. The pullback equation proves that this is a lift into the original sieve. This is the fully proved private helper comparison_cover_lift and the explicit point comparisonPoint.",
    "uses": [
-    "def-weil-pbc-strict-henselization-limit",
-    "def-weil-pbc-strict-henselization-structural-map",
-    "lem-weil-pbc-strict-henselization-local-structure",
-    "lem-weil-pbc-strict-henselization-pointed-map"
+    "def-weil-proetale-geometric-stalk",
+    "def-weil-pbc-proetale-site",
+    "lem-fix-weakly-etale-algclosed-section"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tags 04GP and 04GW, labels lemma-strict-henselization and lemma-strict-henselization-different; Etale Cohomology Tag 04HX, lemma-describe-etale-local-ring"
-   }
+   "elementary": false
   },
   {
-   "text": "By the classical pro-etale stalk lemma, $S\\to T$ is an object of the pro-etale site and the germ map $(\\nu_T^*H)(S)\\to(\\nu_T^*H)_{\\bar t}$ is a canonical isomorphism, natural in the sheaf $H$. Use its inverse to start the desired comparison. This is an evaluation formula on the strict localization; it does not assert that etale neighbourhoods are cofinal among weakly etale neighbourhoods.",
-   "uses": [
-    "lem-cbc-proetale-classical-stalk"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 0993, label lemma-classical-point"
-   }
-  },
-  {
-   "text": "Apply the sections formula to the object $p:S\\to T$. It identifies $(\\nu_T^*H)(S)$ with $\\Gamma(S_{\\mathrm{et}},p_{\\mathrm{et}}^{-1}H)$, naturally in $H$. Since Step 2 places $p$ in the pro-etale site, the weakly etale hypothesis of that formula is satisfied. The identification is with the ordinary inverse image of sheaves of sets, with no tensor product or change of coefficient ring.",
-   "uses": [
-    "lem-cbc-comparison-pullback-sections"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 0GLZ, label lemma-describe-pullback-from-etale"
-   }
-  },
-  {
-   "text": "Apply the sets version of the strictly henselian sections lemma with its ambient scheme and open subscheme both equal to $S$. Step 1 gives precisely its hypotheses: a strictly henselian local coordinate ring and a geometric point at the closed point. Its germ map identifies $\\Gamma(S_{\\mathrm{et}},p_{\\mathrm{et}}^{-1}H)$ with $(p_{\\mathrm{et}}^{-1}H)_{\\bar s}$. Apply the etale inverse-image stalk-germ lemma to $p$ and $\\bar s$; since $p\\bar s=\\bar t$, this last stalk is bijective to $H_{\\bar t}$. Composing these bijections with Steps 2 and 3 defines $c_H:(\\nu_T^*H)_{\\bar t}\\xrightarrow{\\sim}H_{\\bar t}$.",
-   "uses": [
-    "lem-weil-pbc-sets-strictly-henselian-open-sections-stalk",
-    "lem-weil-pbc-sets-etale-inverse-image-stalk-germ"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 03QO, label lemma-vanishing-etale-cohomology-strictly-henselian; Tag 03Q1, label lemma-stalk-pullback (3)"
-   }
-  },
-  {
-   "text": "The evaluations and germ maps in the first three arrows of this composite commute with a sheaf morphism $a:H\\to H'$ (evaluation and germ are componentwise, and the sections formula is natural). For the last arrow, apply the characterization in the stalk-germ lemma to a pulled-back section $s\\in H(U)$: either composite with $a$ sends its germ to the germ of $a_U(s)$. Naturality of the inverse-image unit is the clause (0) of the composition-units lemma. These pulled-back germs exhaust the source stalk: an element maps under the bijection of Step 4 to a germ represented by a section of H on a pointed etale neighbourhood; the pulled-back germ of that section has the same image, so injectivity makes it the original element. The two composites are therefore equal on every element. This uses the bijection and its formula on unit germs, not a uniqueness assertion for a different codomain. This proves $c_{H'}(\\nu_T^*a)_{\\bar t}=a_{\\bar t}c_H$. All choices in Step 1 give the same $\\bar s$: its composites with every limit projection are the specified lifts, so the inverse-limit universal property determines it. Hence the isomorphism is canonical, not dependent on a chosen local-ring structure or presentation.",
-   "uses": [
-    "lem-weil-pbc-sets-etale-inverse-image-stalk-germ",
-    "lem-weil-pbc-sets-etale-inverse-image-composition-units",
-    "def-weil-pbc-strict-henselization-limit",
-    "def-weil-pbc-geometric-stalks"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 03Q1, label lemma-stalk-pullback (3), with its germ characterization; Tag 0GLZ, naturality of the displayed sections formula"
-   }
-  },
-  {
-   "text": "Write $P(H)=(\\nu_T^*H)_{\\bar t}$ and $Q(H)=H_{\\bar t}$ for the two functors on etale sheaves of sets. $P$ preserves finite products: comparison inverse image preserves finite limits by the geometric-morphism definition, and the classical stalk identification makes the second functor evaluation at $S$, which preserves sectionwise products and the terminal sheaf. The etale stalk finite-limits lemma gives the same assertion for $Q$. Under these product identifications, naturality from Step 5 with the two projections gives $c_{H\\times H}(x,y)=(c_H(x),c_H(y))$; on the terminal sheaf the component is the unique map. An abelian sheaf is an abelian group object, so naturality with $+:H\\times H\\to H$, $0:*\\to H$, and negation gives $c_H(x+y)=c_H(x)+c_H(y)$, $c_H(0)=0$, and $c_H(-x)=-c_H(x)$. The inverse bijection is additive as well. On abelian sheaves this is the asserted abelian stalk isomorphism: the two pointed-neighbourhood colimits are filtered, and forgetting abelian groups preserves filtered colimits. Thus their underlying sets are exactly the stalks used in Steps 2--5. The identification of abelian comparison inverse image with the set inverse image equipped with its group operations is clause (3) of [def-weil-pbc-sites-and-cohomology], so the abelian functor here is the one in the statement.",
+   "text": "The inclusion toProEt is continuous, representably flat and cover preserving by [def-weil-pbc-site-comparison-morphism]; cover preservation follows from etaleTopology_le_proetaleTopology and coverPreserving_changeProp. Its composite with the pro-etale lift functor is definitionally the ULift of the etale lift functor. Construct the explicit equivalence comparisonPointElements and apply Functor.Final.colimIso to identify the pro-etale neighbourhood colimit with this point fibre. Its coprojection formula is Final.ι_colimitIso_hom. The analogous ULift equivalence removes the universe enlargement on the etale side, again with the same coprojection formula.",
    "uses": [
     "def-weil-pbc-site-comparison-morphism",
-    "lem-cbc-proetale-classical-stalk",
-    "lem-weil-pbc-sets-etale-stalk-finite-limits",
-    "lem-weil-pbc-sheaf-algebraic-structures-objects",
-    "lem-weil-pbc-abelian-groups-forget-filtered-colimits",
-    "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered",
     "def-weil-proetale-geometric-stalk",
-    "def-weil-pbc-sites-and-cohomology"
+    "def-weil-pbc-geometric-stalks"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Sites, Tag 00YR, label section-sheaves-algebraic-structures; Etale Cohomology Tag 03PT, lemma-stalk-exact; Pro-etale Cohomology Tag 0993"
-   }
+   "elementary": true
   },
   {
-   "text": "For a sheaf of left $\\Lambda$-modules, the inverse image in the statement applies the set functor to each scalar endomorphism $\\lambda_r:H\\to H$ separately. Step 5 applied to $\\lambda_r$ therefore gives $c_H(rx)=r c_H(x)$ for every $r\\in\\Lambda$; Step 6 supplies additivity. The filtered-module-colimit elementwise lemma identifies these stalk structures with module colimits: every element has a section representative, equality holds after a common refinement, and the operations are $[x]+[y]=[x|_W+y|_W]$, $r[x]=[rx]$ on a common pointed refinement $W$. These formulas are well defined because restrictions are linear, and have the module-colimit universal property since a compatible family of linear maps preserves the displayed operations. Consequently the comparison and its inverse are $\\Lambda$-linear. This argument uses only a fixed ring and each individual scalar operation, so neither commutativity nor finiteness of $\\Lambda$ is needed.",
+   "text": "Apply [lem-cbc-site-point-comap-germ] to this point and toProEt. Compose the neighbourhood-colimit isomorphism, uniqueness of left adjoints for the specified comparison adjunction and the abstract sheaf pullback adjunction, the inverse of sheafFiberComapIso, and the etale ULift isomorphism. Germ naturality moves the left-adjoint comparison before the germ. Adjunction.unit_leftAdjointUniq_hom_app identifies its composite with the specified unit. The unit-germ formula of the cited lemma followed by its inverse identity and the ULift coprojection formula proves exactly the normalization in HasCanonicalProEtaleStalkComparison. All factors are natural isomorphisms, so naturality needs no separate elementwise argument.",
    "uses": [
-    "def-weil-sheaf-of-modules-category",
-    "def-weil-proetale-geometric-stalk",
-    "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered",
-    "lem-weil-pbc-filtered-colimit-modules-elementwise"
+    "lem-cbc-site-point-comap-germ"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Sites, Tag 00YR, label section-sheaves-algebraic-structures; Algebra Tags 00D6 and 00D7, labels lemma-directed-colimit and lemma-zero-directed-limit"
-   }
+   "elementary": true
+  },
+  {
+   "text": "The private comparison_generic proof works for every coefficient category with products in universe u+1 and colimits in universes u and u+1. Specialize it to Type (u+1), AddCommGrpCat and ModuleCat Λ. The supplied adjunctions are proEtaleSiteComparison and ProEtale.comparisonAdjunction. The latter components are isomorphisms in their coefficient categories, hence already additive or Λ-linear, for an arbitrary ring Λ. This is a categorical specialization, with no passage through underlying sets and no filtered-forgetful comparison required.",
+   "uses": [
+    "def-weil-pbc-site-comparison-morphism"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-strict-henselization-limit",
-  "def-weil-pbc-strict-henselization-structural-map",
-  "lem-weil-pbc-strict-henselization-local-structure",
-  "lem-weil-pbc-strict-henselization-pointed-map",
-  "lem-cbc-proetale-classical-stalk",
-  "lem-cbc-comparison-pullback-sections",
-  "lem-weil-pbc-sets-strictly-henselian-open-sections-stalk",
-  "lem-weil-pbc-sets-etale-inverse-image-stalk-germ",
-  "lem-weil-pbc-sets-etale-inverse-image-composition-units",
-  "def-weil-pbc-geometric-stalks",
-  "def-weil-pbc-site-comparison-morphism",
-  "lem-weil-pbc-sets-etale-stalk-finite-limits",
-  "lem-weil-pbc-sheaf-algebraic-structures-objects",
-  "lem-weil-pbc-abelian-groups-forget-filtered-colimits",
-  "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered",
   "def-weil-proetale-geometric-stalk",
-  "def-weil-sheaf-of-modules-category",
-  "lem-weil-pbc-filtered-colimit-modules-elementwise",
-  "def-weil-pbc-sites-and-cohomology"
+  "def-weil-pbc-proetale-site",
+  "lem-fix-weakly-etale-algclosed-section",
+  "def-weil-pbc-site-comparison-morphism",
+  "def-weil-pbc-geometric-stalks",
+  "lem-cbc-site-point-comap-germ"
  ],
  "proof_origin": {
   "by": "document",
-  "document": "literature/stacks-project/proetale.tex",
-  "place": "Tags 0993 and 0GLZ; combine with Etale Cohomology Tags 03QO and 03Q1 and the algebraic-structure construction of Sites Tag 00YR"
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 05V1, lemma-point-morphism-sites, second proof; geometric point construction from proetale.tex Tags 0F6C and 0991; fully formalized coefficient-valued argument by F1 on 2026-10-18"
  },
  "mathlib_searches": [
   {
@@ -340,15 +265,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-weil-pbc-strict-henselization-local-structure",
-  "lem-weil-pbc-strict-henselization-pointed-map",
-  "lem-weil-pbc-sets-strictly-henselian-open-sections-stalk",
-  "lem-weil-pbc-sets-etale-inverse-image-stalk-germ",
-  "lem-weil-pbc-sets-etale-inverse-image-composition-units",
-  "lem-weil-pbc-sheaf-algebraic-structures-objects",
-  "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-14",
   "by": "L",
@@ -379,5 +296,15 @@
   "date": "2026-10-15",
   "existing": false,
   "note": "The three coefficient clauses assert natural isomorphisms characterized by their action on unit germs. The helper predicate only expands this conclusion. Arbitrary-ring modules use the existing comparisonUpperStar without Finite or CommRing assumptions; the canonical Kan extension/sheafification realizes inverse image on the underlying algebraic operations."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "C-88df6",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261018T062742-L-646887",
+  "kind": "proof",
+  "note": "independent cc review: Delivered ProEtaleComparisonStalk.lean (proof only, signature and HasCanonicalProEtaleStalkComparison unchanged; axioms propext/Classical.choice/Quot.sound) checked against node lem-cbc-proetale-comparison-stalk, new node lem-cbc-site-point-comap-germ against the proved upstream lemma toPresheafFiber_sheafFiberComapIso_hom_app, and the removed ProEtaleComparisonPullbackSections import against dag/units realized: it is a step of sk-prop-pe-comparison-morphism, proved and still imported by two other modules, so not bypassed"
  }
 }

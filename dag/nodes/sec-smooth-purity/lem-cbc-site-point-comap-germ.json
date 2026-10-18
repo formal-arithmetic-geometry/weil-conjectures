@@ -1,0 +1,102 @@
+{
+ "id": "lem-cbc-site-point-comap-germ",
+ "kind": "statement",
+ "title": "Site-point inverse-image comparison with its unit-germ formula",
+ "statement": "Let $C,D$ be categories with Grothendieck topologies $J,K$, and let $F:C\\to D$ be a representably flat continuous functor which preserves covering sieves. Let $\\Phi$ be a point of $(D,K)$: a functor $\\Phi:D\\to\\mathbf{Set}_{w}$ whose category of elements is cofiltered and $w$-initially small and for which covering sieves act jointly surjectively. Assume that the category of elements of $\\Phi\\circ F$ is $w$-initially small. Let $A$ be a category with products and colimits of size $w$, and assume that restriction $F_*:\\operatorname{Sh}(K,A)\\to\\operatorname{Sh}(J,A)$ has a left adjoint $F^*$. The composite lift functor defines the point $\\Phi_F$ on $(C,J)$. There is a natural isomorphism $b:(\\Phi_F)^*\\xrightarrow{\\sim}\\Phi^*\\circ F^*$ of fibre functors on $A$-valued sheaves. For every $H\\in\\operatorname{Sh}(J,A)$, object $U\\in C$ and $x\\in\\Phi(FU)$, its component satisfies $b_H\\circ\\operatorname{germ}_{U,x}=\\operatorname{germ}_{FU,x}\\circ\\eta_{H,U}$, where $\\eta:\\mathrm{id}\\to F_*F^*$ is the adjunction unit and germs are the coprojections into the corresponding neighbourhood colimits.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 05V1, lemma-point-morphism-sites, second proof by skyscraper adjunctions; Tag 0F4F, lemma-point-functor; arbitrary coefficient form from the same product/skyscraper adjunction"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Use Mathlib CategoryTheory.GrothendieckTopology.Point.comap and sheafFiberComapIso (Mathlib/CategoryTheory/Sites/Point/Comap.lean:41-75). The skyscraper functors for the composite lift functor agree definitionally, so uniqueness of their left adjoints gives b. The existing theorem CategoryTheory.GrothendieckTopology.Point.toPresheafFiber_sheafFiberComapIso_hom_app (WeilConjectures/Mathlib/CategoryTheory/Sites/Point/Comap.lean:58-80) is exactly the displayed unit-germ identity; its proof computes the mate of the identity of skyscraper functors and projects the skyscraper unit to x. These are existing proved declarations, with no new Lean statement or unproved obligation.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 05V1, lemma-point-morphism-sites, second proof; existing coefficient-valued skyscraper adjunction and its germ formula"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A point comapped along a continuous cover preserving representably flat functor of sites has sheaf fiber naturally isomorphic to sheaf pullback followed by the original point fiber",
+   "results": "8 hits: Functor.sheafPullbackConstruction.sheafPullback, TopCat.Sheaf.pullback, Functor.sheafPullback, TopCat.Presheaf.stalkPullbackHom, Point.presheafFiber, Point.sheafFiber, SheafOfModules.freeFunctorCompPullbackIso, Point.presheafToSheafCompSheafFiber. Read Point/Comap.lean and the existing upstream germ companion.",
+   "date": "2026-10-18",
+   "verdict": "The abstract comparison is Mathlib; the normalized formula is an existing proved upstream lemma."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"sheafFiberComapIso\"",
+   "results": "3 hits: CategoryTheory.GrothendieckTopology.Point.sheafFiberComapIso, sheafFiberComapIso_hom_app, sheafFiberComapIso_inv_app. Read Mathlib/CategoryTheory/Sites/Point/Comap.lean:35-75.",
+   "date": "2026-10-18",
+   "verdict": "Exact existing abstract comparison; the germ formula is in the upstream companion module."
+  },
+  {
+   "tool": "grep",
+   "query": "sheafFiberComapIso|pointProEtale|proEtaleGeometricCoverLift",
+   "results": "1 Mathlib hit: Mathlib/CategoryTheory/Sites/Point/Comap.lean:69, noncomputable def sheafFiberComapIso. Read its full signature and construction, and the upstream germ theorem.",
+   "date": "2026-10-18",
+   "verdict": "Existing library route; not a new proof obligation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProEtaleComparisonStalk",
+  "date": "2026-10-18",
+  "group": "F1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-cbc-proetale-stalk-conservative",
+   "place": "Proof Step 3: canonical identification of the pro-etale stalk of comparison inverse image with the etale stalk, using the general site-point comparison",
+   "via": [
+    "lem-cbc-proetale-comparison-stalk"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-comparison",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.Mathlib.CategoryTheory.Sites.Point.Comap",
+  "declaration": "CategoryTheory.GrothendieckTopology.Point.toPresheafFiber_sheafFiberComapIso_hom_app",
+  "declarations": [
+   "CategoryTheory.GrothendieckTopology.Point.sheafFiberComapIso",
+   "CategoryTheory.GrothendieckTopology.Point.toPresheafFiber_sheafFiberComapIso_hom_app"
+  ],
+  "statement": "lemma toPresheafFiber_sheafFiberComapIso_hom_app (G : Sheaf J A) (X : C) (x : Φ.fiber.obj (F.obj X)) : (Φ.comap F hF).toPresheafFiber X x G.obj ≫ (Φ.sheafFiberComapIso F hF A).hom.app G = ((F.sheafAdjunctionContinuous A J K).unit.app G).hom.app (op X) ≫ Φ.toPresheafFiber (F.obj X) x ((F.sheafPullback A J K).obj G).obj",
+  "branch": "slopmaster2",
+  "by": "F1",
+  "date": "2026-10-18",
+  "note": "Primary signature copied verbatim, whitespace-normalized, from the upstream germ lemma at lines 58-63, with section parameters as stated in the node. The natural isomorphism is Mathlib Point.sheafFiberComapIso, publicly imported by this module. Both declarations are reused; no module or theorem is duplicated."
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "C-88df6",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261018T062742-L-646887",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "C-88df6",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261018T062742-L-646887",
+  "kind": "proof",
+  "note": "independent cc review: Delivered ProEtaleComparisonStalk.lean (proof only, signature and HasCanonicalProEtaleStalkComparison unchanged; axioms propext/Classical.choice/Quot.sound) checked against node lem-cbc-proetale-comparison-stalk, new node lem-cbc-site-point-comap-germ against the proved upstream lemma toPresheafFiber_sheafFiberComapIso_hom_app, and the removed ProEtaleComparisonPullbackSections import against dag/units realized: it is a step of sk-prop-pe-comparison-morphism, proved and still imported by two other modules, so not bypassed"
+ }
+}
