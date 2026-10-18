@@ -17,70 +17,46 @@
  ],
  "proof": [
   {
-   "text": "First justify restriction compatibility. For an open $U\\subset X$, [lem-weil-pbc-etale-site-localization-open] and [lem-weil-proetale-weakly-etale-localization] identify its two sites with the respective slice sites and identify the restricted pro-étale coefficient ring with $\\Lambda_U$. For an étale sheaf $E$ on $X$ and $W\\to U$ pro-étale, the presheaf-colimit formula of [def-weil-pbc-site-comparison-morphism] identifies the two presheaf pullbacks: replace each pair $(T,W\\to T)$ with $(T\\times_XU,W\\to T\\times_XU)$ and each section $s\\in E(T)$ with its restriction. Inclusion of pairs étale over $U$ is the inverse on colimits, since $T\\times_XU\\to T$ supplies the relation identifying these representatives. The coverings and their refinements over every such $W$ are the same in the slice and the original site; hence the two plus constructions of [lem-weil-pbc-sheafification-plus-theorem] show that sheafification commutes with this restriction. The resulting natural identification $(\\nu_X^*E)|_U\\cong\\nu_U^*(E|_U)$ respects addition and scalar action, since it is defined by restriction of sections. If $F$ is classical, [det-pe-classical-sheaves-modules] gives $F\\cong\\nu_X^*E$ for an étale module sheaf $E$; the displayed identification and the same node for $U$ prove that $F|_U$ is classical.",
+   "text": "For the underlying set sheaf G, the essential-image equivalence of [det-pe-classical-sheaves-image] turns classicality of each open restriction into an etale presentation. Sectionwise module restriction followed by the forgetful functor is definitionally the sectionwise set restriction. Replace the arbitrary index type by the subtype range(U) of X.Opens, lifted to the site universe; classicality on each distinct open follows by choosing an original index.",
    "uses": [
-    "lem-weil-pbc-etale-site-localization-open",
-    "lem-weil-proetale-weakly-etale-localization",
-    "def-weil-pbc-site-comparison-morphism",
-    "lem-weil-pbc-sheafification-plus-theorem",
-    "det-pe-classical-sheaves-modules"
+    "det-pe-classical-sheaves-image"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-constructible-comparison/sk-thm-pe-constructible-comparison-local.proof.md",
-    "place": "First sentence: inverse image commutes with restriction to open subschemes."
-   }
+   "elementary": true
   },
   {
-   "text": "Assume the restrictions to an open cover $X=\\bigcup_aX_a$ are classical. By [det-pe-classical-sheaves-modules], choose a $\\Lambda$-module sheaf $F_a$ on $(X_a)_{\\Et}$ and an isomorphism $\\alpha_a:\\nu_{X_a}^*F_a\\xrightarrow{\\sim}F|_{X_a}$ for each $a$. On $X_{ab}=X_a\\cap X_b$, functoriality of restriction identifies the restriction of $\\alpha_b^{-1}\\alpha_a$ with a map $\\nu_{X_{ab}}^*(F_a|_{X_{ab}})\\to\\nu_{X_{ab}}^*(F_b|_{X_{ab}})$. The full-faithfulness clause of [det-pe-classical-sheaves-modules] gives a unique $\\Lambda$-linear isomorphism $\\varphi_{ab}:F_a|_{X_{ab}}\\xrightarrow{\\sim}F_b|_{X_{ab}}$ lifting it. On triple overlaps the two composites have the same image under $\\nu^*$, so faithfulness gives $\\varphi_{bc}\\circ\\varphi_{ab}=\\varphi_{ac}$; the diagonal maps are identities by uniqueness applied to $\\alpha_a^{-1}\\alpha_a=\\mathrm{id}$.",
+   "text": "The distinct opens form a pro-etale cover of the final object. More explicitly, over every pro-etale object T use the opens T.hom inverse-image U. Their inclusions are jointly surjective because the original opens have supremum top. The Zariski-cover criterion of [sk-def-pe-site], implemented by Scheme.ProEt.mem_topology_of_openImmersion, makes the sieve of objects mapping into a cover member covering. Restricting T.hom to its inverse-image open gives the required map into that member.",
    "uses": [
-    "det-pe-classical-sheaves-modules"
+    "sk-def-pe-site"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-constructible-comparison/sk-thm-pe-constructible-comparison-local.proof.md",
-    "place": "Choice of local models and overlap cocycle."
-   }
+   "elementary": true
   },
   {
-   "text": "Apply [lem-weil-pbc-site-module-sheaf-gluing] to the étale site of $X$ with final object $X$, the covering family of open immersions $X_a\\to X$, the constant ring sheaf $\\Lambda$, the local module sheaves $F_a$, and the transition isomorphisms $\\varphi_{ab}$. The slice identification from step 1 identifies the local module categories. Since coverings on an object over $X_a$ are unchanged, the same plus-construction argument from step 1 applied to the constant ring presheaf identifies the restricted constant étale ring sheaf with the one on $X_a$, including all ring operations. Its fibre products are the overlap schemes $X_{ab}$, and its cocycle hypothesis, including repeated indices, is the identity from step 2. We obtain an étale module sheaf $F_0$ and linear isomorphisms $e_a:F_0|_{X_a}\\xrightarrow{\\sim}F_a$ satisfying $\\varphi_{ab}e_a=e_b$ on overlaps.",
+   "text": "Apply the first clause of [lem-weil-pbc-proetale-locally-classical-etale-cover] to the underlying set sheaf and this cover. It gives a global etale presentation. The essential-image equivalence [det-pe-classical-sheaves-image] then proves the required continuity-map classicality. This uses the already stated stronger set-sheaf descent theorem rather than constructing linear transition maps and gluing module models.",
    "uses": [
-    "lem-weil-pbc-site-module-sheaf-gluing"
+    "lem-weil-pbc-proetale-locally-classical-etale-cover",
+    "det-pe-classical-sheaves-image"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-constructible-comparison/sk-thm-pe-constructible-comparison-local.proof.md",
-    "place": "Étale sheaves glue along Zariski coverings."
-   }
+   "elementary": false
   },
   {
-   "text": "Set $\\beta_a=\\alpha_a\\circ\\nu^*(e_a)$ using step 1's natural restriction identification. On $X_{ab}$ the two overlap equations give $\\beta_a=\\alpha_a\\nu^*e_a=\\alpha_b\\nu^*\\varphi_{ab}\\nu^*e_a=\\alpha_b\\nu^*e_b=\\beta_b$. The Zariski cover is a pro-étale cover by [sk-def-pe-site]. Apply [lem-pur-sheaf-hom-cover-gluing] to the pro-étale site of $X$, its final object $X$, ring $\\Lambda_X$, and module sheaves $\\nu_X^*F_0,F$. All overlap fibre products exist as scheme fibre products; step 1 identifies the slice restrictions and coefficients. It gives a unique linear map $\\beta:\\nu_X^*F_0\\to F$ with these local restrictions. Since equal isomorphisms have equal inverses, the $\\beta_a^{-1}$ agree on overlaps and the same lemma glues them to $\\gamma:F\\to\\nu_X^*F_0$. The composites $\\gamma\\beta$ and $\\beta\\gamma$ restrict to the identity maps, so uniqueness in that lemma makes them identities globally. Thus $F\\cong\\nu_X^*F_0$ is classical by [det-pe-classical-sheaves-modules].",
+   "text": "For the converse, take an affine etale presentation P over an open U as in [det-pe-classical-definition-continuity-map]. Compose its diagram and cone with the localization functor to X. The affine schemes are unchanged and the composite of each etale structure map with the open immersion is etale. Cofiltered categories are connected; the over-category forgetful functor preserves connected limits and reflects limits, so P remains a limit in schemes over X. The section diagram and restriction cocone of the set restriction along U are definitionally those of the composed presentation. Thus its continuity map is bijective by classicality on X.",
    "uses": [
-    "sk-def-pe-site",
-    "lem-pur-sheaf-hom-cover-gluing",
-    "det-pe-classical-sheaves-modules"
+    "det-pe-classical-definition-continuity-map"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-constructible-comparison/sk-thm-pe-constructible-comparison-local.proof.md",
-    "place": "The local isomorphisms glue to an isomorphism $\\nu_X^*F_0\\cong F$."
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-etale-site-localization-open",
-  "lem-weil-proetale-weakly-etale-localization",
-  "def-weil-pbc-site-comparison-morphism",
-  "lem-weil-pbc-sheafification-plus-theorem",
-  "det-pe-classical-sheaves-modules",
-  "lem-weil-pbc-site-module-sheaf-gluing",
+  "det-pe-classical-sheaves-image",
   "sk-def-pe-site",
-  "lem-pur-sheaf-hom-cover-gluing"
+  "lem-weil-pbc-proetale-locally-classical-etale-cover",
+  "det-pe-classical-definition-continuity-map"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-constructible-comparison/sk-thm-pe-constructible-comparison-local.proof.md",
-  "place": "## Proof"
+  "group": "E5",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemmas 5.1.2 and 5.1.4; the blueprint converse is proved directly using composed affine presentations and connected limits in over-categories."
  },
  "mathlib_searches": [
   {
@@ -179,13 +155,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-weil-pbc-site-module-sheaf-gluing",
-  "lem-pur-sheaf-hom-cover-gluing",
-  "lem-weil-pbc-etale-site-localization-open",
-  "lem-weil-proetale-weakly-etale-localization",
-  "lem-weil-pbc-sheafification-plus-theorem"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-16",
   "by": "L",
@@ -225,5 +195,15 @@
   "group": "NX",
   "result": "pass",
   "note": "Read the node, the blueprint statement and proof (sk-thm-pe-constructible-comparison-local.md/.proof.md), the module, the node record, the report and the statement dependency det-pe-classical-sheaves-modules. Both clauses match the node: X : Scheme.{u}, Λ : Type (u+1) [CommRing Λ], F a ModuleCat-valued sheaf on the real Scheme.ProEt.topology X (the dependency's encoding), an arbitrary open cover with free index universe w via ⨆ U i = ⊤, the existing IsClassical on underlying set sheaves, and the genuine sectionwise openImmersionRestriction (FiniteCoefficient/LowerShriek/Open/Defs.lean:260; no finiteness of Λ; its instances hold for ModuleCat). The converse covers all opens independently of any cover. Edge cases checked: empty cover/empty scheme, empty or repeated opens, zero ring, universes bound. IsClassicalModule exists but the item correctly follows the landed dependency's encoding. No definitions, one sorry, docstrings carry source/blueprint and all four proof steps, all proof imports present, node differs from base only in lean, statement verbatim. nt_compile --json rc=0, no errors or warnings. No findings."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "C-55d1d",
+  "group": "E5",
+  "result": "pass",
+  "landing": "20261018T145058-L-3638295",
+  "kind": "interface",
+  "note": "independent cc review: delivered proEtaleClassical_zariskiLocal (statement byte-identical to clone) and node det-pe-constructible-comparison-local proof/proof_deps against the Lean proof via proEtale_locallyClassical_etaleCover + proEtaleClassicalSheavesImage; ProEtaleSiteComparison still reached through both new imports"
  }
 }
