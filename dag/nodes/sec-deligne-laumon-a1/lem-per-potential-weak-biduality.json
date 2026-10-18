@@ -2,7 +2,7 @@
  "id": "lem-per-potential-weak-biduality",
  "kind": "statement",
  "title": "Weak biduality for ordinary constructible sheaves",
- "statement": "Let $\\ell$ be a prime, $r\\geq1$, and $\\Lambda=\\mathbf Z/\\ell^r\\mathbf Z$. Schemes below are Noetherian excellent schemes on which $\\ell$ is invertible [def-exc-excellent-ring]. Use pinned potential dualizing complexes for dimension functions [def-per-potential-dualizing-complex], the bounded constructible small etale category $D^b_c$ [def-weil-pbc-constructible-complexes], and $D_K=R\\mathcal Hom_\\Lambda(-,K)$ [def-pur-derived-internal-hom]. Write $\\eta_M:M\\to D_K^2M$ for the transpose of evaluation after symmetry of the tensor factors. For every such $X$, every dimension function, every pinned potential $K$, and every constructible sheaf $M$ in degree zero, $eta_M$ induces isomorphisms on cohomology in all degrees $a\\leq0$. Equivalently, the factorization through ordinary truncation is an isomorphism $$M\\xrightarrow{\\sim}\\tau_{\\leq0}D_K^2M.$$ This makes no assertion about $\\mathcal H^a(D_K^2M)$ for $a>0$.",
+ "statement": "Let $\\ell$ be a prime, $r\\geq1$, and $\\Lambda=\\mathbf Z/\\ell^r\\mathbf Z$. Schemes below are Noetherian excellent schemes on which $\\ell$ is invertible [def-exc-excellent-ring]. Use pinned potential dualizing complexes for dimension functions [def-per-potential-dualizing-complex], the bounded constructible small etale category $D^b_c$ [def-weil-pbc-constructible-complexes], and $D_K=R\\mathcal Hom_\\Lambda(-,K)$ [def-pur-derived-internal-hom]. Write $\\eta_M:M\\to D_K^2M$ for the transpose of evaluation after symmetry of the tensor factors. For every such $X$, every dimension function, every pinned potential $K$, and every constructible sheaf $M$ in degree zero, $\\eta_M$ induces isomorphisms on cohomology in all degrees $a\\leq0$. Equivalently, the factorization through ordinary truncation is an isomorphism $$M\\xrightarrow{\\sim}\\tau_{\\leq0}D_K^2M.$$ This makes no assertion about $\\mathcal H^a(D_K^2M)$ for $a>0$.",
  "source": {
   "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
   "place": "Expose XVII, Proposition 6.3.1"
@@ -14,9 +14,130 @@
   "def-pur-derived-internal-hom",
   "def-sbc-standard-tstructure-derived-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $B(M)=D_K^2M$, and call a degree-zero constructible sheaf weakly reflexive when $H^a(\\eta_M)$ is an isomorphism for every $a\\leq0$. By [lem-per-potential-dual-constructibility], both dualizations stay bounded constructible. For the coefficient sheaf, $D_K\\Lambda_X=K$: the underived functor $\\mathcal Hom_\\Lambda(\\Lambda_X,-)$ is the identity on every complex. Under this identification, the transpose of evaluation $\\eta_{\\Lambda_X}:\\Lambda_X\\to R\\mathcal Hom(K,K)$ sends a scalar to scalar multiplication. Hence [lem-per-potential-scalar-rigidity] proves weak reflexivity of $\\Lambda_X$ for every scheme and potential complex under consideration.",
+   "uses": [
+    "lem-per-potential-dual-constructibility",
+    "lem-per-potential-scalar-rigidity",
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVII, Proposition 6.3.1, proof"
+   }
+  },
+  {
+   "text": "For $0\\to A\\to E\\to C\\to0$, [lem-weil-heart-short-exact-triangles] supplies a triangle. By [lem-per-relative-bidual-triangles] its bidual is a triangle and $\\eta$ is a morphism of triangles. Apply the long exact sequence [lem-sf-derived-homology-long-exact]. If $C$ is weakly reflexive, then $H^aB(C)=0$ for $a<0$ and $C\\cong H^0B(C)$. Consequently $H^aB(A)\\to H^aB(E)$ is an isomorphism for $a<0$, and $$0\\to H^0B(A)\\to H^0B(E)\\to H^0B(C)\\to H^1B(A)$$ is exact. If $E$ is weakly reflexive, its map to $H^0B(C)$ is the surjection $E\\to C$, and the kernel is $A$; thus $A$ is weakly reflexive. Conversely, if $A$ is weakly reflexive, the image of $H^0B(E)\\to H^0B(C)$ contains the image of $E\\to C$, by naturality and the isomorphism for $C$; it is therefore surjective. The two short exact rows now identify $E$ with $H^0B(E)$, and the negative groups vanish. Thus $E$ is weakly reflexive if and only if $A$ is. Finite direct sums and direct summands preserve weak reflexivity: the additive natural map $\\eta$ is block diagonal, so its degreewise kernels and cokernels decompose into those of the summands.",
+   "uses": [
+    "lem-weil-heart-short-exact-triangles",
+    "lem-per-relative-bidual-triangles",
+    "lem-sf-derived-homology-long-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVII, Proposition 6.3.1, proof"
+   }
+  },
+  {
+   "text": "Let $p:Y\\to X$ be finite. Its source is Noetherian and excellent: on affine charts its rings are finite modules, hence finite-type algebras over the excellent Noetherian rings of $X$; excellence follows from [lem-exc-finite-type-localization-excellent]. The integer $\\ell$ remains invertible. A finite morphism is proper [lem-weil-pbc-finite-proper], hence separated and of finite type, so the identity open immersion followed by $p$ is a compactification, and compact support along it is $Rp_!=p_*$; thus the exceptional pullback of the finite-pullback lemma is the right adjoint of finite direct image used in the comparison. Thus [lem-per-potential-dualizing-finite-pullback] gives the induced dimension function and the pinned potential $K_Y=p^!K_X$. The transcendence degrees in this dimension function are zero because residue extensions of finite morphisms are finite. By [lem-per-potential-dual-constructibility] both duality functors preserve $D^b_c$. All hypotheses of [lem-per-potential-finite-bidual-comparison] hold. That statement identifies $p_*H^a(\\eta_N)$ with $H^a(\\eta_{p_*N})$ and makes $p_*$ exact and conservative. Hence $N$ is weakly reflexive if and only if $p_*N$ is, for every constructible sheaf $N$ on $Y$. This includes closed immersions; no surjectivity of $p$ is needed.",
+   "uses": [
+    "lem-exc-finite-type-localization-excellent",
+    "lem-weil-pbc-finite-proper",
+    "lem-per-potential-dualizing-finite-pullback",
+    "lem-per-potential-dual-constructibility",
+    "lem-per-potential-finite-bidual-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVII, Proposition 6.3.1, proof"
+   }
+  },
+  {
+   "text": "For an open immersion $j:U\\hookrightarrow Y$ with complementary reduced closed immersion $i:Z\\hookrightarrow Y$, the coefficient sequence is $$0\\to j_!\\Lambda_U\\to\\Lambda_Y\\to i_*\\Lambda_Z\\to0$$ by [lem-weil-pbc-open-closed-short-exact]. The closed scheme $Z$ is again Noetherian excellent with invertible $\\ell$, as in Step 3, and its pinned potential comes from $i^!K_Y$. Step 1 proves weak reflexivity of $\\Lambda_Y$ and $\\Lambda_Z$; Step 3 proves it for $i_*\\Lambda_Z$. The implication from middle and quotient to kernel in Step 2 proves it for $j_!\\Lambda_U$. A second application of Step 3 proves it for $p_*j_!\\Lambda_U$ for every finite $p:Y\\to X$.",
+   "uses": [
+    "lem-weil-pbc-open-closed-short-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVII, Proposition 6.3.1, proof"
+   }
+  },
+  {
+   "text": "First assume $r=1$, so the coefficient ring is the finite field $\\mathbf F_\\ell$. Apply [lem-per-constructible-finite-open-constant-generation] to $X$. It states that every constructible sheaf is obtained by finitely many extensions, finite direct sums and direct summands from $p_*j_!\\mathbf F_\\ell$ with $p$ finite and $j$ open in its integral source. Step 4 supplies all those generators, and Step 2 supplies each closure operation. Induction on this finite construction proves weak reflexivity for every constructible $\\mathbf F_\\ell$-sheaf. The zero sheaf and the empty scheme are covered by the empty sum.",
+   "uses": [
+    "lem-per-constructible-finite-open-constant-generation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVII, Proposition 6.3.1, proof"
+   }
+  },
+  {
+   "text": "For general $r$, set $k=\\mathbf F_\\ell$ and $K_1=R\\mathcal Hom_\\Lambda(k_X,K)$. It is a pinned potential complex over $k$ by [lem-per-potential-hom-coefficient-restriction]. By [lem-per-potential-coinduction], after restriction of scalars $D_KN\\cong D_{K_1}N$ for every bounded constructible $k$-complex $N$; applying it to $N$ and then to $D_{K_1}N$ gives $D_K^2N\\cong D_{K_1}^2N$. The second application is allowed by [lem-per-potential-dual-constructibility]. These comparisons identify the biduality maps: on injective representatives coinduction sends $\\phi$ to $\\operatorname{ev}_1\\circ\\phi$; the pairing $N\\otimes D_{K_1}N\\to K$ is therefore $\\operatorname{ev}_1$ composed with evaluation into $K_1$. Transposing this same pairing, after symmetry, is both $\\eta_N$ over $\\Lambda$ and the image of $\\eta_N$ over $k$. This proves the identification without assuming biduality. Step 5 applies to $(X,\\delta,K_1)$, so every constructible sheaf killed by $\\ell$, regarded as a $\\Lambda$-sheaf, is weakly reflexive.",
+   "uses": [
+    "lem-per-potential-hom-coefficient-restriction",
+    "lem-per-potential-coinduction",
+    "lem-per-potential-dual-constructibility"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVII, Proposition 6.3.1, proof"
+   }
+  },
+  {
+   "text": "The finite filtration $$0=\\ell^rM\\subseteq\\ell^{r-1}M\\subseteq\\cdots\\subseteq\\ell M\\subseteq M$$ has constructible terms and quotients by [thm-constructible-serre]: each image is the kernel of the cokernel of scalar multiplication. Every quotient $\\ell^aM/\\ell^{a+1}M$ is killed by $\\ell$, so Step 6 proves it weakly reflexive. Starting from zero and applying the extension implication in Step 2 at each short exact sequence proves that $M$ is weakly reflexive. Only $r$ finite steps are used.",
+   "uses": [
+    "thm-constructible-serre"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVII, Proposition 6.3.1, proof"
+   }
+  },
+  {
+   "text": "Finally, the ordinary truncation adjunction in [lem-weil-heart-short-exact-triangles] factors $\\eta_M$, since $M$ lies in $D^{\\leq0}$, uniquely as $M\\to\\tau_{\\leq0}B(M)\\to B(M)$. By [def-sbc-standard-tstructure-derived-category], the factor has the same maps on cohomology for $a\\leq0$ and both its source and target have zero cohomology above zero. Steps 5–7 make all its cohomology maps isomorphisms, hence it is an isomorphism in the derived category, whose inverted maps are quasi-isomorphisms. This is exactly the asserted truncation statement; positive cohomology of $B(M)$ has not been used.",
+   "uses": [
+    "lem-weil-heart-short-exact-triangles",
+    "def-sbc-standard-tstructure-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVII, Proposition 6.3.1, proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-derived-internal-hom",
+  "def-sbc-standard-tstructure-derived-category",
+  "lem-exc-finite-type-localization-excellent",
+  "lem-per-constructible-finite-open-constant-generation",
+  "lem-per-potential-coinduction",
+  "lem-per-potential-dual-constructibility",
+  "lem-per-potential-dualizing-finite-pullback",
+  "lem-per-potential-finite-bidual-comparison",
+  "lem-per-potential-hom-coefficient-restriction",
+  "lem-per-potential-scalar-rigidity",
+  "lem-per-relative-bidual-triangles",
+  "lem-sf-derived-homology-long-exact",
+  "lem-weil-heart-short-exact-triangles",
+  "lem-weil-pbc-finite-proper",
+  "lem-weil-pbc-open-closed-short-exact",
+  "thm-constructible-serre"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose XVII, Proposition 6.3.1; its devissage is supplied by Expose XIII 3.7.2"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -48,7 +169,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-gabber-local-duality-general",
@@ -70,5 +191,49 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-potential-weak-biduality",
+  "worker": "stage1",
+  "summary": "Expanded ILO XVII 6.3.1 using exact-sequence cancellation, finite duality, open-closed constants, existing finite-open-constant generation, and coinduction-compatible prime-power filtration. Added only scalar rigidity and constructibility preservation as prior independent inputs. Corrected the literal eta_M TeX typo, without changing its meaning.",
+  "blueprint": "Realizes the local-duality input of lem-per-artin-gabber-affine-curve, Proof Step 3, along its existing potential-duality branch. No unit or chapter route changes.",
+  "tool_uses": [
+   {
+    "node": "lem-exc-finite-type-localization-excellent",
+    "why": "Generic excellence stability for the finite sources; no result of this unit supplies it."
+   },
+   {
+    "node": "lem-sf-derived-homology-long-exact",
+    "why": "Generic cohomology exact sequence; no result of this unit supplies it."
+   },
+   {
+    "node": "lem-weil-heart-short-exact-triangles",
+    "why": "Generic heart triangles and truncation adjunction; no result of this unit supplies it."
+   },
+   {
+    "node": "lem-weil-pbc-open-closed-short-exact",
+    "why": "Generic coefficient open-closed sequence; no result of this unit supplies it."
+   },
+   {
+    "node": "thm-constructible-serre",
+    "why": "Generic constructibility of filtration images and quotients; no result of this unit supplies it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-exc-finite-type-localization-excellent",
+  "lem-sf-derived-homology-long-exact",
+  "lem-weil-heart-short-exact-triangles",
+  "lem-weil-pbc-open-closed-short-exact",
+  "thm-constructible-serre"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q50-ad80de9c7",
+  "group": "Q50",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q50-ad80de9c7 (reviewer sub-agent of L); spot-checked: Read ILO XVII 5.1.1 (p.287), 6.2.1.1, 6.2.3.1 (p.295) and 6.3.1 (p.297) against the item and both new nodes. The item statement matches 6.3.1 for Lambda=Z/ell^r; the only change is the TeX typo eta_M -> \\eta_M (compared with the base copy in the Q51 snapshot). scalar-rigidity is exactly the last clause of 5.1.1 (Lambda -> tau<=0 RHom(K,K)); no existing node states it, since uniqueness has it only inside its proof and normal-pinned-extension only for normal integral X. dual-constructibility is 6.2.3.1. It is clause 2 of the parent lem-per-gabber-local-duality-general, but citing the parent would be a cycle (C6: the parent's proof cites this item), so the node is justified. Maintainer note: the parent's steps 2-4 already prove this preservation without weak biduality and can serve as its split. All 8 steps checked against the cited statements: the step-2 long-exact cancellation in both directions, finite transport via finite-bidual-comparison with its preservation hypotheses, the open-closed generators, XIII 3.7.2 generation for r=1, the coinduction identification of eta through ev_1 with the second application in D^+, the ell-adic filtration through constructible-Serre, and the truncation factorization. Edge cases checked: X empty, M=0, U empty or U=Y, nonsurjective p, r=1. FIX (C1, step 3): 'finite => proper' was used for the compactification needed by finite-pullback without a node. I added the Mathlib leaf lem-weil-pbc-finite-proper to step 3 and proof_deps, plus one sentence that Rp_!=p_* via the identity compactification. Batch 5: recomputed closure; the delivery adds only its two new nodes. Every flagged path (def-per-potential-dualizing-complex, already a stmt_dep of the item; finite-pullback -> lem-trf-ambient-diagonal-purity-base-change; finite-bidual-comparison and hom-coefficient-restriction -> costalk reduction -> lem-trf-ind-etale-strict-local-invariance) was already reached on the base. The trf nodes are generic: strict-henselization algebra, and finite-coefficient smooth purity for ILO 4.1.2. Neither is a statement of either assumption or a step of their proofs, so all are accepted. No SGA citation is used. The worker-written tool_uses are five generic tools and are accepted.; 1 file(s) fixed by the reviewer"
  }
 }
