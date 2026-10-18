@@ -44,6 +44,13 @@ theorem finiteExtension_tensor_algebraicClosure_reduced_isSeparable
     [FiniteDimensional k K] [IsAlgClosure k kbar]
     [IsReduced (K ⊗[k] kbar)] :
     Algebra.IsSeparableExtension k K := by
-  sorry
+  classical
+  by_contra hnot
+  have hfinite : FieldExtension.degree k K ≠ ⊤ := by
+    simp [FieldExtension.degree, show Module.Finite k K from inferInstance]
+  obtain ⟨α, hα⟩ :=
+    FieldExtension.exists_not_isSeparable_of_not_isSeparableExtension k K hfinite hnot
+  exact (FieldTheory.inseparable_tensorProduct_algebraicClosure_not_isReduced
+    k K kbar α hα).2 inferInstance
 
 end Algebra
