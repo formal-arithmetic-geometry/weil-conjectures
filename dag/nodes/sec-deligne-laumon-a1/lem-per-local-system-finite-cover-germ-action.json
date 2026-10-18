@@ -261,5 +261,23 @@
   "group": "Q05",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q05-9b5e46558 (reviewer sub-agent of L); spot-checked: I read the item, all five steps and every cited statement, plus the source, ILO XVII §7.2 on PDF p.307 (Def 7.2.1, Props 7.2.2–7.2.3). The proof of 7.2.3 defines the monodromy action as the fibre-functor action passed to ind-objects. Step 3 builds exactly that action, [i,p]↦[i,gp], and checks it is well defined and satisfies the group laws. Step 1 is correct: finite gives finite type over Noetherian S, so U is Noetherian and qcqs. Step 2 is correct: the finite affine cover from the cofinal lemma has quasi-compact overlaps, the equalizer is right because sheaves are separated on the overlap covers, finite limits commute with filtered colimits, and the empty U case holds. Steps 4–5 are correct: germ_y(a_i(f))=j_i(f∘y), and naturality of g along the FEt morphism f:U→P_i gives the formula. Steps 4–5 with U=P_i also show the action does not depend on the chosen presentation. Edge cases checked: U empty, U disconnected or not surjective, L=0 or R=0, U=S, and infinite R or stalks. The stmt_deps change (Noetherian ring replaced by locally Noetherian plus quasi-compact) is a correct citation repair, not a change to the statement. No new nodes; no duplicate germ node found in the DAG; no cycle; no SGA cited. Accepted the declared tool_uses: affine-etale-site-topos, affine-sections-colimit, qcqs-cofinal-finite-coverings, representable-presheaf-sheaf and galois-lc-etale. These are generic tools, the same set already accepted for lem-per-torsion-local-system-monodromy. Advisory, not a fault: that node's statement does not spell out how the action is defined, so the item takes the ILO 7.2.3 definition, which step 3 writes out."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.TorsionLocalSystemMonodromy",
+  "declaration": "AlgebraicGeometry.Scheme.TorsionLocalSystemStalkEquivalence.finiteGerm",
+  "statement": "finiteGerm (L : IndFiniteEtaleModules.{u} S R) (P : S.FiniteEtale)\n    (a : (FiniteEtale.fiber s).obj P) (x : L.obj.obj.obj (op P.obj))\n    (g : Aut (FiniteEtale.fiber s)) :\n    (stalkIso.hom.app L).hom\n        ((equivalence.functor.obj L).obj.ρ g\n          ((stalkIso.inv.app L).hom\n            (((pointSmallEtale s).toPresheafFiber P.obj a L.obj.obj).hom x))) =\n      ((pointSmallEtale s).toPresheafFiber P.obj (g.hom.app P a) L.obj.obj).hom x",
+  "branch": "newtargets-dag",
+  "by": "Q66",
+  "date": "2026-10-18",
+  "existing": true,
+  "note": "Existing theorem projection of the recorded monodromy interface. Specialize self to the stipulated TorsionLocalSystemStalkEquivalence supplied by torsion_local_system_monodromy for connected Noetherian S and R killed by n > 0. Its finiteGerm field is exactly the action on the actual module stalk, transported through stalkIso, and the natural finite-fibre action moves a to g.hom.app P a. The theorem is stated generally for any such normalized monodromy interface; no alternative action or extra finiteness assumption is introduced."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2e9a9abc9",
+  "group": "Q66",
+  "result": "pass",
+  "note": "existing:true binding to field TorsionLocalSystemStalkEquivalence.finiteGerm of the landed dependency lem-per-torsion-local-system-monodromy (Q77, Q94 PASS); node otherwise identical to live. Clause by clause: L : IndFiniteEtaleModules, P : S.FiniteEtale (U arbitrary, not necessarily connected/Galois), a : fiber lift, x ∈ L(U), germ = pointSmallEtale.toPresheafFiber (pointed-neighbourhood colimit), action ρ g carried to the actual stalk by stalkIso, g·a = g.hom.app P a; S connected Noetherian and nR=0 are hypotheses of the dependency theorem constructing the interface. Not hollow: the field is the dependency's normalization pinning the canonical monodromy (ILO XVII 7.2.3); content lives in the dependency's existence clause. Statement verbatim; check_existing accepts fields. Probe #check/#print axioms via nt_compile --json: exit 0, 4.3 s. Edge cases U empty/disconnected, R=0, infinite stalks, empty S excluded. Advisory: group Aut(FiniteEtale.fiber s) vs flcFiber, the dependency's convention."
  }
 }
