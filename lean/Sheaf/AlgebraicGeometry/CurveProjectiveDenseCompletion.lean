@@ -12,13 +12,10 @@ public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 public import Mathlib.Topology.KrullDimension
 public import WeilConjectures.AlgebraicGeometry.Morphisms.Projective
-import Mathlib.AlgebraicGeometry.Noetherian
-import Mathlib.AlgebraicGeometry.Morphisms.Immersion
-import Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
 import Sheaf.AlgebraicGeometry.DimOneQuasiProjective
-import Sheaf.AlgebraicGeometry.ClosedIrreducibleDimensionTrdeg
-import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
+import WeilConjectures.AlgebraicGeometry.DenseCompactification
+import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
+import WeilConjectures.Mathlib.Topology.KrullDimension
 
 /-!
 # Dense projective completion of a scheme of dimension at most one
@@ -43,36 +40,20 @@ Source: Stacks Project, Varieties, Tag 0BXV, `lemma-dim-1-projective-completion`
 (blueprint: lem-weil-pbc-curve-projective-dense-completion)
 
 Proof:
-1. By `lem-weil-pbc-finite-type-over-noetherian`, X is Noetherian. The minimal-closed-subset
-   assertion `lem-weil-pbc-noetherian-scheme-closed-subsets-minimal` shows every open is
-   quasi-compact (take a maximal finite union in any cover). Every morphism out of X
-   is therefore quasi-compact.
-2. Use `lem-sc-dim-one-quasi-projective` to immerse X into a finite projective space.
-   Its scheme-theoretic image C and factor map a are supplied by
-   `lemma-nagata-scheme-image-ideal-qc`. By
-   `lemma-nagata-immersion-open-in-scheme-image`, a is an open immersion with both density
-   properties. The closed image inclusion makes C H-projective over k.
-3. By `lem-pc-projective-proper` and `def-weil-proper-morphism`, C is finite type;
-   `lem-weil-pbc-finite-type-over-noetherian` then makes it Noetherian.
-4. Decompose C into finitely many irreducible components using
-   `lem-sc-noetherian-closed-subset-finite-components`. Each has a generic point by
-   `lem-weil-pbc-scheme-sober`. The open dense image meets the open part of each
-   component outside all the others, hence contains each component's generic point.
-5. For each component Z, Z intersect X is a nonempty irreducible closed subset of X.
-   The generic residue fields in X and C agree because a is an open immersion.
-   Apply `lem-sc-closed-irreducible-dimension-trdeg` twice: Z and Z intersect X have
-   the same dimension, at most one. Every irreducible closed chain in C lies in a
-   component, proving the dimension bound, also for mixed dimensions.
-6. A boundary point is not a component's generic point. A further strict specialization
-   would give a chain of length two, contradicting the dimension bound and sobriety
-   (`lem-weil-pbc-scheme-sober`). Thus boundary points are closed. The closed boundary
-   has finitely many irreducible components by
-   `lem-sc-noetherian-closed-subset-finite-components`; their closed generic points
-   show these components are singletons, so the boundary is finite.
-7. If X is reduced (`def-pc-reduced-scheme`), any nilpotent section on C restricts to
-   zero on X. Scheme-theoretic density makes restriction injective, so C is reduced.
-8. If X is empty, its dense image forces C empty. All bounds and boundary claims
-   allow this case. -/
+1. Use the dimension-one quasi-projectivity theorem to immerse X into a finite projective
+   space. Since X is Noetherian, this immersion is quasi-compact.
+2. Take its scheme-theoretic image C. The induced map a is an open immersion, dominant
+   and scheme-theoretically dominant. The closed inclusion of C in projective space
+   makes its structure map H-projective, hence proper and of finite type.
+3. Apply `topologicalKrullDim_le_of_dense` to the dense open image of a, and identify
+   that open with X using the open embedding. This gives dim C ≤ dim X ≤ 1.
+4. Every point of C specializes from a maximal point, and every maximal point lies
+   in the dense open image of a. Thus each chain in the closed boundary extends by
+   a point outside it. The specialization-chain dimension bound makes the boundary
+   zero-dimensional. The Noetherian T0 finiteness theorem makes it finite with all
+   its points closed in C. This also covers reducible and mixed-dimensional C.
+5. Scheme-theoretic dominance gives injectivity on all rings of sections, and makes
+   C reduced if X is reduced. If X is empty, the empty image is dense, so C is empty. -/
 theorem exists_projective_dense_completion_of_dim_le_one
     {k : Type u} [Field k] {X : Scheme.{u}} [X.Over (Spec (.of k))]
     [IsSeparated (X ↘ Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))]
@@ -82,6 +63,67 @@ theorem exists_projective_dense_completion_of_dim_le_one
       a ≫ g = X ↘ Spec (.of k) ∧ DenseRange a ∧
       (∀ U : C.Opens, Function.Injective (a.app U)) ∧
       (Set.range a)ᶜ.Finite ∧ (∀ c : C, c ∉ Set.range a → IsClosed ({c} : Set C)) ∧
-      (IsReduced X → IsReduced C) ∧ (IsEmpty X → IsEmpty C) := sorry
+      (IsReduced X → IsReduced C) ∧ (IsEmpty X → IsEmpty C) := by
+  obtain ⟨N, U, gU, i, j, hi, hj, hig, hjg⟩ :=
+    exists_closed_open_immersion_projectiveSpace_of_dim_le_one
+      (X ↘ Spec (.of k)) (by simpa only [X.dim_eq_topologicalKrullDim] using hdim)
+  let := hi
+  let := hj
+  let h := i ≫ j
+  have : IsImmersion h := inferInstance
+  have : IsLocallyNoetherian X :=
+    LocallyOfFiniteType.isLocallyNoetherian (X ↘ Spec (.of k))
+  have : CompactSpace X :=
+    QuasiCompact.compactSpace_of_compactSpace (X ↘ Spec (.of k))
+  have : IsNoetherian X := ⟨⟩
+  have : QuasiCompact h := inferInstance
+  let C := h.image
+  let g : C ⟶ Spec (.of k) :=
+    h.imageι ≫ ℙ(ULift.{u} (Fin (N + 1)); Spec (.of k)) ↘ Spec (.of k)
+  let a : X ⟶ C := h.toImage
+  have : IsHProjective g := ⟨⟨ULift.{u} (Fin (N + 1)), inferInstance,
+    h.imageι, inferInstance, rfl⟩⟩
+  have : IsLocallyNoetherian C := LocallyOfFiniteType.isLocallyNoetherian g
+  have : CompactSpace C := QuasiCompact.compactSpace_of_compactSpace g
+  have : IsNoetherian C := ⟨⟩
+  have hdense : DenseRange a := a.denseRange
+  have hCdim : topologicalKrullDim C ≤ 1 := by
+    refine (topologicalKrullDim_le_of_dense g a.opensRange hdense).trans ?_
+    change topologicalKrullDim (Set.range a) ≤ 1
+    rw [← a.isOpenEmbedding.isEmbedding.topologicalKrullDim_eq_range]
+    exact hdim
+  have hboundary : (Set.range a)ᶜ.Finite ∧
+      ∀ c : C, c ∉ Set.range a → IsClosed ({c} : Set C) := by
+    have hc : IsClosed (Set.range a)ᶜ := a.isOpenEmbedding.isOpen_range.isClosed_compl
+    have hgen : ∀ c ∈ (Set.range a)ᶜ,
+        ∃ η ∈ (Set.univ : Set C), η ⤳ c ∧ η ∉ (Set.range a)ᶜ := by
+      intro c _
+      obtain ⟨η, _, hη, hηc⟩ :=
+        isClosed_univ.exists_maximal_specializes (Set.mem_univ c)
+      have hηa : η ∈ Set.range a :=
+        mem_of_dense_of_forall_specializes_eq a.isOpenEmbedding.isOpen_range hdense
+          (fun y hy ↦ hη y (Set.mem_univ y) hy)
+      exact ⟨η, Set.mem_univ _, hηc, not_not.mpr hηa⟩
+    have hdrop : topologicalKrullDim ↥((Set.range a)ᶜ) < (1 : ℕ) :=
+      topologicalKrullDim_lt_of_forall_exists_specializes isClosed_univ hc
+        (Set.subset_univ _) hgen (d := 1)
+        (lt_of_le_of_lt ((topologicalKrullDim_subspace_le C Set.univ).trans hCdim)
+          (by decide))
+    exact hc.finite_and_isClosed_singleton_of_topologicalKrullDim_le_zero
+      (ENat.WithBot.lt_add_one_iff.mp (by simpa using hdrop))
+  refine ⟨C, g, a, inferInstance, hCdim, inferInstance, ?_, hdense,
+    a.app_injective, hboundary.1, hboundary.2, ?_, ?_⟩
+  · dsimp only [a, g]
+    rw [h.toImage_imageι_assoc]
+    dsimp only [h]
+    rw [Category.assoc, hjg, hig]
+  · intro hX
+    let := hX
+    exact IsSchemeTheoreticallyDominant.isReduced a
+  · intro hX
+    let := hX
+    refine ⟨fun c ↦ ?_⟩
+    have hc : c ∈ closure (Set.range a) := hdense c
+    simp only [Set.range_eq_empty, closure_empty, Set.mem_empty_iff_false] at hc
 
 end AlgebraicGeometry

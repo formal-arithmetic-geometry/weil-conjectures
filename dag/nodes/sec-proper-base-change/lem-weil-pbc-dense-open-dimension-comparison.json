@@ -1,0 +1,122 @@
+{
+ "id": "lem-weil-pbc-dense-open-dimension-comparison",
+ "kind": "statement",
+ "title": "A dense open in a finite type scheme over a field has full dimension",
+ "statement": "Let $k$ be a field [def-weil-field], let $Y$ be a scheme [def-pc-scheme], and let $f:Y\\to\\operatorname{Spec} k$ be locally of finite type and quasi-compact [def-weil-finite-type-morphism]. If $U\\subseteq Y$ is a dense open subset, then $\\dim Y\\le\\dim U$, where both dimensions are topological Krull dimensions [def-kun-topological-krull-dimension] and $U$ has its subspace topology. Together with subspace monotonicity this is equality. No irreducibility, reducedness, equidimensionality, or nonemptiness hypothesis is required.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0BXV, lemma-dim-1-projective-completion, dimension sentence; its cited Tag 0A21, lemma-dimension-locally-algebraic. Already proved in lean/WeilConjectures/AlgebraicGeometry/DenseCompactification.lean, theorem topologicalKrullDim_le_of_dense."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "def-kun-topological-krull-dimension"
+ ],
+ "proof": [
+  {
+   "text": "Finite type over the field makes Y Noetherian by [lem-weil-pbc-finite-type-over-noetherian]. The finite irreducible components [lem-sc-noetherian-closed-subset-finite-components] have generic points by [lem-weil-pbc-scheme-sober]. Every point x specializes from a component generic point eta. Such eta lies in U: remove the closures of the other finitely many component generic points to get an open neighbourhood of eta, use density of U there, and use stability of opens under generalization. This is the proved source helper mem_of_dense_of_forall_specializes_eq.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-sc-noetherian-closed-subset-finite-components",
+    "lem-weil-pbc-scheme-sober"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Give the closure of eta its reduced induced closed subscheme structure T by [lem-weil-pbc-reduced-induced-closed-subscheme]. It is integral, locally of finite type over k, and its inverse image of U is nonempty because eta belongs to U. By [lem-sc-integral-locally-algebraic-opens-dimension], T has the dimension of that nonempty open. The closed immersion identifies this open with a subspace of U, so its dimension is at most dim U. Every specialization chain ending below eta is contained in the closure of eta. Taking the supremum over x, using [def-kun-topological-krull-dimension], gives dim Y at most dim U. The empty case has no x and the supremum is bottom. This is precisely the complete existing Lean proof of topologicalKrullDim_le_of_dense, reused rather than restated.",
+   "uses": [
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "lem-sc-integral-locally-algebraic-opens-dimension",
+    "def-kun-topological-krull-dimension"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-sc-noetherian-closed-subset-finite-components",
+  "lem-weil-pbc-scheme-sober",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-sc-integral-locally-algebraic-opens-dimension",
+  "def-kun-topological-krull-dimension"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "0BXV dimension sentence and 0A21; existing complete Lean proof in WeilConjectures.AlgebraicGeometry.DenseCompactification, read and reused by U9."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A dense open subscheme of a scheme of finite type over a field has the same dimension",
+   "results": "Eight hits: dominant open inclusions, integral open subschemes, dense-open subspace extension, and rational-map domain facts. No dimension comparison.",
+   "date": "2026-10-18",
+   "verdict": "no Mathlib match; existing project theorem found by local rg"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a finite type scheme over a field, a dense open subset has dimension at least the ambient scheme",
+   "results": "Eight hits about dominant morphisms, open inclusions and rational-map domains; no dimension comparison.",
+   "date": "2026-10-18",
+   "verdict": "no Mathlib match; existing project theorem attached"
+  },
+  {
+   "tool": "grep",
+   "query": "topologicalKrullDim.*dense|dense.*topologicalKrullDim",
+   "results": "msearch returned zero Mathlib hits. Local rg found AlgebraicGeometry.topologicalKrullDim_le_of_dense in lean/WeilConjectures/AlgebraicGeometry/DenseCompactification.lean:70. Read its full proof. Blueprint search for dense open dimension returned zero matches.",
+   "date": "2026-10-18",
+   "verdict": "existing proved source-library declaration"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CurveProjectiveDenseCompletion",
+  "date": "2026-10-18",
+  "group": "U9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-direct-image-finiteness-proper",
+   "place": "Classical constructibility input, via lem-weil-pbc-curve-projective-dense-completion: the dimension sentence in Stacks 0BXV, steps 4-5 of the former completion proof.",
+   "via": [
+    "lem-weil-pbc-curve-projective-dense-completion"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.DenseCompactification",
+  "declaration": "AlgebraicGeometry.topologicalKrullDim_le_of_dense",
+  "statement": "theorem topologicalKrullDim_le_of_dense {k : Type u} [Field k] {Y : Scheme.{u}} (a : Y ⟶ Spec (.of k)) [LocallyOfFiniteType a] [QuasiCompact a] (U : Y.Opens) (hU : Dense (U : Set Y)) : topologicalKrullDim Y ≤ topologicalKrullDim U",
+  "branch": "slopmaster2",
+  "by": "U9",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U9",
+  "result": "pass",
+  "landing": "20261018T062930-L-685487",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U9",
+  "result": "pass",
+  "landing": "20261018T062930-L-685487",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

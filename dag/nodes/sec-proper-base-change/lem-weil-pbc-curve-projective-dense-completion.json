@@ -35,22 +35,22 @@
  ],
  "proof": [
   {
-   "text": "First $X$ is Noetherian by [lem-weil-pbc-finite-type-over-noetherian]: $\\operatorname{Spec}k$ is Noetherian since its only affine ring $k$ has just the ideals $0$ and $k$, and its space is a singleton. By [lem-weil-pbc-noetherian-scheme-closed-subsets-minimal], every open of $X$ is quasi-compact: for an open cover of an open $V$, choose a maximal finite union of covering opens using the minimal-complement assertion; if that union misses a point of $V$, adjoining a covering open through that point contradicts maximality. Consequently the inverse image of any affine open under any morphism from $X$ is quasi-compact.",
+   "text": "Finite type over Spec k makes X Noetherian by [lem-weil-pbc-finite-type-over-noetherian]. Every morphism from a Noetherian scheme is quasi-compact (Mathlib quasiCompact_of_noetherianSpace_source, implementing [lem-weil-pbc-noetherian-scheme-closed-subsets-minimal]). Apply [lem-sc-dim-one-quasi-projective] to obtain a closed immersion i into U and an open immersion j from U into a finite projective space, over k. Their composite h is a quasi-compact immersion.",
    "uses": [
     "lem-weil-pbc-finite-type-over-noetherian",
-    "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal"
+    "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+    "lem-sc-dim-one-quasi-projective",
+    "def-weil-closed-immersion"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/properties.tex",
-    "place": "Tags 01OZ (lemma-Noetherian-topology) and 01P0 (lemma-morphism-Noetherian-schemes-quasi-compact); finite type input: Morphisms Tag 01T6 (lemma-finite-type-noetherian)"
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0BXV, label lemma-dim-1-projective-completion; proof: scheme-theoretic closure, whose reduction agrees over reduced X"
    }
   },
   {
-   "text": "Apply [lem-sc-dim-one-quasi-projective] to the separated finite type $k$-scheme $X$ with $\\dim X\\le1$. Obtain a closed immersion $X\\to U$ followed by an open immersion $U\\to\\mathbf P^N_k$ over $k$, hence an immersion $h:X\\to\\mathbf P^N_k$ by [def-weil-closed-immersion]. Step 1 makes $h$ quasi-compact. Take its constructed scheme-theoretic image $C$ with closed immersion $i:C\\to\\mathbf P^N_k$ and factor map $a:X\\to C$, supplied by [lemma-nagata-scheme-image-ideal-qc]. By [lemma-nagata-immersion-open-in-scheme-image], $a$ is an open immersion with topologically and scheme-theoretically dense image. The latter means exactly that $\\mathcal O_C\\to a_*\\mathcal O_X$ is injective. Give $C$ the structure map induced by $i$; the factorization is over $k$, and the closed immersion into $\\mathbf P^N_k$ makes $C$ projective by [def-kun-projective].",
+   "text": "Let C=h.image, a=h.toImage, and let g be h.imageι followed by the projective-space structure map. These are the constructed image, closed inclusion, and factor map of [lemma-nagata-scheme-image-ideal-qc]. By [lemma-nagata-immersion-open-in-scheme-image], a is an open immersion. Mathlib gives IsDominant a and the proved source ker_toImage instance gives IsSchemeTheoreticallyDominant a; app_injective supplies injectivity on all rings of sections. The closed inclusion exhibits [def-kun-projective], and associativity and toImage_imageι give a composed with g equal to the original structure map.",
    "uses": [
-    "lem-sc-dim-one-quasi-projective",
-    "def-weil-closed-immersion",
     "lemma-nagata-scheme-image-ideal-qc",
     "lemma-nagata-immersion-open-in-scheme-image",
     "def-kun-projective"
@@ -58,78 +58,55 @@
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 0BXV (lemma-dim-1-projective-completion), first three sentences; inputs: Tag 0A25 (lemma-dim-1-quasi-projective), Morphisms Tags 01R8 (lemma-quasi-compact-scheme-theoretic-image) and 01RG (lemma-quasi-compact-immersion)"
+    "place": "Tag 0BXV, label lemma-dim-1-projective-completion; proof: scheme-theoretic closure, whose reduction agrees over reduced X"
    }
   },
   {
-   "text": "By [lem-pc-projective-proper], the projective structure map $C\\to\\operatorname{Spec}k$ is proper, and thus of finite type by [def-weil-proper-morphism]. Apply [lem-weil-pbc-finite-type-over-noetherian] over the same Noetherian $\\operatorname{Spec}k$ to conclude that $C$ is Noetherian. This verifies the finite type and Noetherian hypotheses needed in the following dimension and boundary steps.",
+   "text": "By [lem-pc-projective-proper] and [def-weil-proper-morphism], g is proper and finite type. Thus C is Noetherian by [lem-weil-pbc-finite-type-over-noetherian]. Apply [lem-weil-pbc-dense-open-dimension-comparison] to a.opensRange. The open embedding identifies its dimension with dim X, giving dim C at most dim X at most one. This reuses the complete existing topologicalKrullDim_le_of_dense rather than rebuilding the generic residue-field comparison.",
    "uses": [
     "lem-pc-projective-proper",
     "def-weil-proper-morphism",
-    "lem-weil-pbc-finite-type-over-noetherian"
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-dense-open-dimension-comparison"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tag 01WC (lemma-locally-projective-proper), applied to a projective morphism; Tag 01T6 (lemma-finite-type-noetherian)"
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0BXV, label lemma-dim-1-projective-completion; proof: scheme-theoretic closure, whose reduction agrees over reduced X"
    }
   },
   {
-   "text": "Use [lem-sc-noetherian-closed-subset-finite-components] with the closed subset $C$ itself to write $C=\\bigcup_{j=1}^r Z_j$ as its finitely many irreducible components; by [lem-weil-pbc-scheme-sober] each has a generic point $\\eta_j$. Each $\\eta_j$ belongs to $a(X)$. Indeed, if $\\eta_j$ lay in another component $Z_l$, its closure $Z_j$ would be contained in $Z_l$, contradicting maximality of the distinct components. Thus $C\\setminus\\bigcup_{l\\ne j}Z_l$ is an open containing $\\eta_j$, so density of $a(X)$ gives a point of $a(X)\\cap Z_j$. As $a(X)\\cap Z_j$ is nonempty open in $Z_j$, it contains its generic point: otherwise its closed complement in $Z_j$ would contain $\\eta_j$ and hence all of $Z_j$.",
+   "text": "Put E=C minus range(a), a closed subset. Noetherianity and [lem-sc-noetherian-closed-subset-finite-components], together with [lem-weil-pbc-scheme-sober], give a maximal generalization eta of every c in E; the source helper isClosed_univ.exists_maximal_specializes supplies it. Every such eta belongs to the dense open image, by the source helper mem_of_dense_of_forall_specializes_eq (finite component argument as in the dense-open comparison proof). Thus each specialization chain in E extends in C by a point outside E. The proved topologicalKrullDim_lt_of_forall_exists_specializes applies with the whole space as Z and d=1: dim C at most 1 is strictly less than 2, so dim E is strictly less than 1, hence at most zero by ENat.WithBot.lt_add_one_iff. Now [lem-sc-zero-dim-noetherian-closed-finite] gives E finite and all its points closed in C. All arguments allow empty, reducible and mixed-dimensional C.",
    "uses": [
     "lem-sc-noetherian-closed-subset-finite-components",
-    "lem-weil-pbc-scheme-sober"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 0BXV (lemma-dim-1-projective-completion), generic-point argument; Properties Tag 0BA8 (lemma-Noetherian-irreducible-components) and Schemes Tag 01IS (lemma-scheme-sober)"
-   }
-  },
-  {
-   "text": "Identify $X$ with $a(X)$ and let $D_j=Z_j\\cap X$. This is a nonempty irreducible closed subset of $X$, with generic point $\\eta_j$, since the closure of $\\eta_j$ in the subspace $X$ is $Z_j\\cap X$. Apply [lem-sc-closed-irreducible-dimension-trdeg] first to $Z_j\\subseteq C$ and then to $D_j\\subseteq X$, both in finite type $k$-schemes. By [def-weil-open-immersion], the structure sheaf on $X$ is the restriction of that on $C$. Taking germs at $\\eta_j$ gives an isomorphism of local $k$-algebras; quotienting by their corresponding maximal ideals identifies the residue fields, giving $\\dim Z_j=\\operatorname{trdeg}_k\\kappa_C(\\eta_j)=\\operatorname{trdeg}_k\\kappa_X(\\eta_j)=\\dim D_j\\le\\dim X\\le1$. The inequality is immediate from [def-kun-topological-krull-dimension]: a chain of irreducible closed subsets of $D_j$ is also such a chain in $X$, since $D_j$ is closed in $X$. Finally any irreducible closed subset of $C$ is contained in some $Z_j$: it is covered by its intersections with the finite family of closed $Z_j$, so irreducibility forces one intersection to be the whole subset. Thus every chain counted in $\\dim C$ lies in a $Z_j$ and has length at most one. Hence $\\dim C\\le1$, including mixed zero- and one-dimensional components.",
-   "uses": [
-    "lem-sc-closed-irreducible-dimension-trdeg",
-    "def-kun-topological-krull-dimension",
-    "def-weil-open-immersion"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 0BXV (lemma-dim-1-projective-completion), dimension sentence; Tag 0A21 (lemma-dimension-locally-algebraic), part (6), item Tag 0B1C (item-dimension-irreducible-trdeg)"
-   }
-  },
-  {
-   "text": "Put $E=C\\setminus a(X)$, a closed subset. Every $b\\in E$ is closed in $C$: choose a component $Z_j$ containing $b$; its generic point $\\eta_j$ is in $a(X)$ by step 4 and differs from $b$. If $b$ had a distinct specialization $c$, there would be a strict chain $\\overline{\\{c\\}}\\subsetneq\\overline{\\{b\\}}\\subsetneq Z_j$ of irreducible closed subsets of $C$, contradicting $\\dim C\\le1$. Strictness follows from uniqueness of generic points in [lem-weil-pbc-scheme-sober]. By [lem-sc-noetherian-closed-subset-finite-components], $E$ is a finite union of irreducible closed subsets $T_l$. Each $T_l$ is closed in $C$, so [lem-weil-pbc-scheme-sober] supplies its generic point $t_l$. Since $t_l\\in E$ is closed in $C$, $T_l=\\overline{\\{t_l\\}}=\\{t_l\\}$. Thus $E$ is a finite set of closed points, with the empty boundary allowed.",
-   "uses": [
     "lem-weil-pbc-scheme-sober",
-    "lem-sc-noetherian-closed-subset-finite-components"
+    "def-kun-topological-krull-dimension",
+    "lem-sc-zero-dim-noetherian-closed-finite"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 0BXV (lemma-dim-1-projective-completion), last sentence, expanded using Properties Tag 0BA8 and Schemes Tag 01IS"
+    "place": "Tag 0BXV, label lemma-dim-1-projective-completion; proof: scheme-theoretic closure, whose reduction agrees over reduced X"
    }
   },
   {
-   "text": "If $X$ is reduced, the same $C$ is reduced; no normalization is necessary. For any open $V\\subseteq C$, a nilpotent section $s\\in\\mathcal O_C(V)$ restricts to a nilpotent section of $\\mathcal O_X(a^{-1}V)$, which is zero by [def-pc-reduced-scheme]. The scheme-theoretic density supplied by [lemma-nagata-immersion-open-in-scheme-image] makes this restriction injective, so $s=0$. Thus all rings of sections of $C$ are reduced, which is precisely the equivalent criterion in [def-pc-reduced-scheme].",
+   "text": "If X is reduced, apply IsSchemeTheoreticallyDominant.isReduced a: injectivity on rings of sections embeds every section ring of C into a reduced section ring of X, hence it is reduced [def-pc-reduced-scheme].",
    "uses": [
-    "def-pc-reduced-scheme",
-    "lemma-nagata-immersion-open-in-scheme-image"
+    "def-pc-reduced-scheme"
    ],
    "elementary": true,
    "source": {
-    "document": "literature/stacks-project/schemes.tex",
-    "place": "Tags 01J0 (definition-reduced) and 01J1 (lemma-reduced); elementary consequence of the scheme-theoretic density from Morphisms Tag 01RG"
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0BXV, label lemma-dim-1-projective-completion; proof: scheme-theoretic closure, whose reduction agrees over reduced X"
    }
   },
   {
-   "text": "If $X$ is empty, the constructed $C$ is empty as well: step 2 makes the empty image dense, and the closure of the empty set is empty. The dimension bound, empty finite boundary, and reducedness assertions are then vacuous; the same closed immersion $C\\to\\mathbf P^N_k$ still supplies projectivity. This establishes the allowed empty case without a nonemptiness hypothesis.",
+   "text": "If X is empty, range a is empty, and density implies every point of C lies in the closure of the empty set, an impossibility. Thus C is empty.",
    "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 0BXV (lemma-dim-1-projective-completion), construction applied to the empty scheme"
+    "place": "Tag 0BXV, label lemma-dim-1-projective-completion; proof: scheme-theoretic closure, whose reduction agrees over reduced X"
    }
   }
  ],
@@ -143,17 +120,17 @@
   "def-kun-projective",
   "lem-pc-projective-proper",
   "def-weil-proper-morphism",
+  "lem-weil-pbc-dense-open-dimension-comparison",
   "lem-sc-noetherian-closed-subset-finite-components",
   "lem-weil-pbc-scheme-sober",
-  "lem-sc-closed-irreducible-dimension-trdeg",
   "def-kun-topological-krull-dimension",
-  "def-pc-reduced-scheme",
-  "def-weil-open-immersion"
+  "lem-sc-zero-dim-noetherian-closed-finite",
+  "def-pc-reduced-scheme"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/varieties.tex",
-  "place": "Tag 0BXV (lemma-dim-1-projective-completion), proof; generic-point and boundary arguments expanded, with the elementary reduced and empty cases"
+  "place": "Tag 0BXV, lemma-dim-1-projective-completion; scheme-theoretic closure retained, dimension comparison reused from the proved DenseCompactification theorem, and finite boundary proved by specialization-chain extension and the proved zero-dimensional closed-subset finiteness theorem. Lean implementation U9."
  },
  "mathlib_searches": [
   {
@@ -242,7 +219,6 @@
   "lemma-nagata-scheme-image-ideal-qc",
   "lemma-nagata-immersion-open-in-scheme-image",
   "lem-pc-projective-proper",
-  "lem-sc-closed-irreducible-dimension-trdeg",
   "lem-sc-noetherian-closed-subset-finite-components"
  ],
  "reviewed": {
@@ -282,5 +258,15 @@
   "by": "NX",
   "date": "2026-10-15",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U9",
+  "result": "pass",
+  "landing": "20261018T062930-L-685487",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
