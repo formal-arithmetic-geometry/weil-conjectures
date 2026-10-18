@@ -1,0 +1,91 @@
+{
+ "id": "lem-per-ideal-torsion-cech-computation",
+ "kind": "statement",
+ "title": "Extended localization Cech complex computes derived ideal-power torsion",
+ "statement": "Let $R$ be a commutative Noetherian ring [def-weil-pbc-noetherian-ring], let $r\\geq0$ and $t_1,\\ldots,t_r\\in R$, put $K=(t_1,\\ldots,t_r)$, and let $M$ be any $R$-module, not necessarily finitely generated. Let $\\Gamma_K$ be the ideal-power torsion functor [def-sbc-ideal-power-torsion-functor], so $\\Gamma_K(M)=\\{m:K^nm=0\\text{ for some }n\\geq1\\}$, and set $H_K^q(M)=R^q\\Gamma_K(M)$ for $q\\geq0$.\n\nFor $t\\in R$, write $M_t$ for localization at the powers of $t$: its fractions $m/t^a$ satisfy $m/t^a=m'/t^b$ exactly when $t^c(t^b m-t^a m')=0$ for some $c\\geq0$. Define the extended alternating cochain complex $C_R(t_1,\\ldots,t_r;M)$ by\n$$C^0=M,\\qquad C^p=\\prod_{1\\leq i_1<\\cdots<i_p\\leq r}M_{t_{i_1}\\cdots t_{i_p}}\\quad(1\\leq p\\leq r),$$\nand $C^p=0$ outside $0\\leq p\\leq r$. The degree-zero differential sends $m$ to $(m/1)_i$. For $p\\geq1$, the component of $d^p(x)$ indexed by $i_1<\\cdots<i_{p+1}$ is $\\sum_{a=1}^{p+1}(-1)^{a-1}x_{i_1\\ldots\\widehat{i_a}\\ldots i_{p+1}}$, with each summand mapped to the indicated localization. These are cochain differentials. If $r=0$ the complex is $M$ in degree zero only. For every $q\\geq0$ there is a natural $R$-linear isomorphism\n$$H_K^q(M)\\cong H^q(C_R(t_1,\\ldots,t_r;M)),$$\nwhere $H^q(C)=\\ker(d^q)/\\operatorname{im}(d^{q-1})$, with the incoming image zero in degree zero.",
+ "source": {
+  "document": "literature/stacks-project/dualizing.tex",
+  "place": "Tag 0956 (lemma-compute-local-cohomology-noetherian), the module assertion and the displayed extended alternating localization complex."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-sbc-ideal-power-torsion-functor"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "localCohomology|Cech|[Cc]ech|Čech",
+   "results": "{\"t\": \"2026-10-18T22:28:10Z\", \"tool\": \"grep\", \"query\": \"localCohomology|Cech|[Cc]ech|Čech\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Lie/Weights/Chain.lean\", \"Mathlib/Algebra/Lie/Weights/Chain.lean\", \"Mathlib/Algebra/Lie/Weights/Chain.lean\", \"Mathlib/Algebra/Lie/Weights/Chain.lean\", \"Mathlib/Algebra/Lie/Weights/Chain.lean\", \"Mathlib/Algebra/Homology/LocalCohomology.lean\", \"Mathlib/Algebra/Homology/LocalCohomology.lean\", \"Mathlib/Algebra/Homology/LocalCohomology.lean\"], \"digest\": \"c2e9cd33e7799171\"}",
+   "date": "2026-10-19",
+   "verdict": "No match. Read the returned declarations and Mathlib/Algebra/Homology/LocalCohomology.lean:40-47,161-174: localCohomology is an Ext-colimit definition; its Cech and derived-torsion characterizations are listed as future work. Other hits concern Krull dimension, module localization, tilde sections, or Stone-Cech compactification, not this computation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Local cohomology of a module over a Noetherian ring is the cohomology of the Cech complex of localizations at generators of the ideal",
+   "results": "{\"t\": \"2026-10-18T22:28:11Z\", \"tool\": \"leansearch\", \"query\": \"Local cohomology of a module over a Noetherian ring is the cohomology of the Cech complex of localizations at generators of the ideal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"localCohomology\", \"localCohomology.diagram\", \"localCohomology.ofSelfLERadical\", \"localCohomology.ofDiagram\", \"IsHausdorff.of_isLocalRing\", \"Submodule.fg_of_localized_maximal\", \"Module.Finite.of_localizationSpan_finite\", \"localCohomology.hasColimitDiagram\"], \"digest\": \"bd79a45521a902a2\"}",
+   "date": "2026-10-19",
+   "verdict": "No match. Read the returned declarations and Mathlib/Algebra/Homology/LocalCohomology.lean:40-47,161-174: localCohomology is an Ext-colimit definition; its Cech and derived-torsion characterizations are listed as future work. Other hits concern Krull dimension, module localization, tilde sections, or Stone-Cech compactification, not this computation."
+  },
+  {
+   "tool": "loogle",
+   "query": "localCohomology",
+   "results": "{\"t\": \"2026-10-18T22:28:11Z\", \"tool\": \"loogle\", \"query\": \"localCohomology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"localCohomology\", \"localCohomology.isoSelfLERadical\", \"localCohomology.isoOfSameRadical\"], \"digest\": \"2281aba51a833720\"}",
+   "date": "2026-10-19",
+   "verdict": "No match. Read the returned declarations and Mathlib/Algebra/Homology/LocalCohomology.lean:40-47,161-174: localCohomology is an Ext-colimit definition; its Cech and derived-torsion characterizations are listed as future work. Other hits concern Krull dimension, module localization, tilde sections, or Stone-Cech compactification, not this computation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The right derived ideal power torsion of a module over a Noetherian ring is computed by the extended alternating localization Cech complex",
+   "results": "{\"t\": \"2026-10-18T22:28:12Z\", \"tool\": \"leanfinder\", \"query\": \"The right derived ideal power torsion of a module over a Noetherian ring is computed by the extended alternating localization Cech complex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"localCohomology\", \"localCohomology.ideal_powers_initial\", \"localCohomology.ofSelfLERadical\", \"Ideal.exists_pow_inf_eq_pow_smul\", \"localCohomology.isoSelfLERadical\", \"Ideal.iInf_pow_smul_eq_bot_of_isTorsionFree\", \"Ideal.mem_iInf_smul_pow_eq_bot_iff\", \"Ideal.iInf_pow_smul_eq_bot_of_noZeroSMulDivisors\"], \"digest\": \"559d3c15c9cb7e0a\"}",
+   "date": "2026-10-19",
+   "verdict": "No match. Read the returned declarations and Mathlib/Algebra/Homology/LocalCohomology.lean:40-47,161-174: localCohomology is an Ext-colimit definition; its Cech and derived-torsion characterizations are listed as future work. Other hits concern Krull dimension, module localization, tilde sections, or Stone-Cech compactification, not this computation."
+  },
+  {
+   "tool": "grep",
+   "query": "localCohomology|[Cc]ech|[Tt]orsion",
+   "results": "{\"t\": \"2026-10-18T22:29:01Z\", \"tool\": \"grep\", \"query\": \"localCohomology|[Cc]ech|[Tt]orsion\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/LocalCohomology.lean\", \"Mathlib/Algebra/Homology/LocalCohomology.lean\", \"Mathlib/Algebra/Homology/LocalCohomology.lean\", \"Mathlib/Algebra/Homology/LocalCohomology.lean\", \"Mathlib/Algebra/Homology/LocalCohomology.lean\"], \"digest\": \"f13c4b1705753d94\"}",
+   "date": "2026-10-19",
+   "verdict": "No match. Read the returned declarations and Mathlib/Algebra/Homology/LocalCohomology.lean:40-47,161-174: localCohomology is an Ext-colimit definition; its Cech and derived-torsion characterizations are listed as future work. Other hits concern Krull dimension, module localization, tilde sections, or Stone-Cech compactification, not this computation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology of the augmented complex M to product M localized at f_i to product M localized at f_i f_j computes derived sections killed by powers of the ideal",
+   "results": "{\"t\": \"2026-10-18T22:29:04Z\", \"tool\": \"leanfinder\", \"query\": \"Cohomology of the augmented complex M to product M localized at f_i to product M localized at f_i f_j computes derived sections killed by powers of the ideal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"localCohomology.diagram\", \"ModuleCat.Tilde.const\", \"ModuleCat.Tilde.Localizations\", \"SheafOfModules.generatorsOfIsCokernelFree_I\", \"ModuleCat.Tilde.exists_const\", \"Algebra.H1Cotangent.isLocalizedModule\", \"ModuleCat.Tilde.openToLocalization\", \"SheafOfModules.generatorsOfIsCokernelFree_s\"], \"digest\": \"c945133e1d283604\"}",
+   "date": "2026-10-19",
+   "verdict": "No match. Read the returned declarations and Mathlib/Algebra/Homology/LocalCohomology.lean:40-47,161-174: localCohomology is an Ext-colimit definition; its Cech and derived-torsion characterizations are listed as future work. Other hits concern Krull dimension, module localization, tilde sections, or Stone-Cech compactification, not this computation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-local-cohomology-change-rings",
+  "date": "2026-10-19",
+  "group": "Q54"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Proof Step 1: dimension-normalized Verdier duality and the middle t-structure; the finite-coefficient potential-dualizing construction, via the normal-local top-residue-class input (ILO XVII Lemma 3.5.8): normality of completion and connectedness of punctured principal slices. Specific input: The bound on the closed complement of an algebraized neighborhood, and the empty-puncture dimension comparison, in the complete-local connectedness input. In the isolated-intersection bound: Tag 0DXA (lemma-cd-change-rings), the inequality, restricted to Noetherian source and target rings so that local cohomology is also the right-derived ideal-torsion functor. To prove change of rings: the extended alternating localization complex computing right-derived ideal-power torsion, used in the fraction comparison of Stacks 0BJB.",
+   "via": [
+    "lem-per-local-cohomology-change-rings",
+    "lem-per-isolated-intersection-dimension-bound",
+    "lem-per-complete-local-connectedness-bound",
+    "lem-per-normal-punctured-hypersurface-connected",
+    "lem-per-normal-top-residue-class",
+    "lem-per-normal-pinned-extension",
+    "lem-per-potential-dualizing-uniqueness",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

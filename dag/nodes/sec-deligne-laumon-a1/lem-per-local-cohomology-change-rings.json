@@ -10,9 +10,59 @@
  "stmt_deps": [
   "def-weil-pbc-noetherian-ring"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [def-weil-pbc-noetherian-ring], choose a finite list $t_1,\\ldots,t_r$ generating $I$. Put $u_i=f(t_i)$. The elements $u_i$ generate $J=IB$: each $a\\in I$ is a sum $\\sum a_it_i$, hence $f(a)=\\sum f(a_i)u_i$, and each $u_i$ itself is in $f(I)$. This also handles $r=0$, when $I=0$ and $J=0$.",
+   "uses": [
+    "def-weil-pbc-noetherian-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0BJB (lemma-local-cohomology-and-restriction), choice of generators."
+   }
+  },
+  {
+   "text": "Let $N$ be an arbitrary $B$-module and write $N_A$ for the same additive group with $a\\cdot n=f(a)n$. Both coefficient rings are Noetherian. Apply [lem-per-ideal-torsion-cech-computation] to $(A,(t_i),N_A)$ and to $(B,(u_i),N)$. Thus $H_I^j(N_A)$ and $H_J^j(N)$ are respectively the cohomology of $C_A(t_1,\\ldots,t_r;N_A)$ and $C_B(u_1,\\ldots,u_r;N)$. The same computation for any ideal of either ring, using a finite generating list of length $s$, makes every cohomology in degrees $>s$ zero, since the displayed complex has zero terms there. Consequently the least integers defining both cohomological dimensions exist (the nonempty set of admissible integers is bounded below by $-1$).",
+   "uses": [
+    "lem-per-ideal-torsion-cech-computation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0956 (lemma-compute-local-cohomology-noetherian); local-cohomology.tex Tags 0DX8 (definition-cd) and 0DX9 (lemma-bound-cd), existence of the finite bound."
+   }
+  },
+  {
+   "text": "For every nonempty ordered subset $S\\subseteq\\{1,\\ldots,r\\}$ put $t_S=\\prod_{i\\in S}t_i$ and $u_S=f(t_S)=\\prod_{i\\in S}u_i$. Identify $(N_A)_{t_S}$ with $(N_{u_S})_A$ by $n/t_S^a\\mapsto n/u_S^a$, with inverse given by the reverse formula. In the fraction definition in [lem-per-ideal-torsion-cech-computation], the equality test on the first side is $t_S^c(t_S^b n-t_S^a n')=0$ in $N_A$, which is exactly $u_S^c(u_S^b n-u_S^a n')=0$ in $N$. Thus both maps are well-defined and inverse, including $u_S=0$. They preserve addition and the restricted $A$-action. They commute with every face localization: both ways send $n/t_S^a$ to the same fraction after additionally inverting the missing generator. Applying them componentwise, and the identity in degree zero, gives an $A$-linear cochain isomorphism of the two complexes in Step 2 after restriction of scalars. The alternating signs agree because the index order is unchanged. Kernels and images of a $B$-linear map are the same subsets after restricting scalars, and their quotient additive groups agree. Taking cohomology therefore identifies $H_I^j(N_A)$ with $(H_J^j(N))_A$ for every $j\\geq0$.",
+   "uses": [
+    "lem-per-ideal-torsion-cech-computation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0BJB (lemma-local-cohomology-and-restriction), second proof, with the fraction identification and compatibility with differentials written out."
+   }
+  },
+  {
+   "text": "Put $q=\\operatorname{cd}(A,I)$. If $j>q$ is a nonnegative degree, the defining vanishing property gives $H_I^j(N_A)=0$. Step 3 then says that the underlying additive group of $H_J^j(N)$ is zero, so this $B$-module is zero. Since $N$ was arbitrary, $q$ is admissible in the definition of $\\operatorname{cd}(B,J)$, and its least admissible integer is at most $q$. This applies also to $q=-1$, when all nonnegative cohomology vanishes. For $r=0$ Step 3 is the identity of the degree-zero complexes. If either ring is zero, its modules are zero and the same argument applies. No tensoring of an exact sequence with $B$ and no flatness of $f$ was used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/local-cohomology.tex",
+    "place": "Tag 0DXA (lemma-cd-change-rings), inequality, using the restriction comparison of Tag 0BJB."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "lem-per-ideal-torsion-cech-computation"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/local-cohomology.tex",
+  "place": "Tag 0DXA (lemma-cd-change-rings), using the explicit restriction comparison in dualizing.tex Tag 0BJB and the derived-torsion Cech computation Tag 0956."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -48,10 +98,38 @@
    "results": "[loogle] OK 3 hit(s)\n  {\"name\": \"localCohomology\", \"module\": \"Mathlib.Algebra.Homology.LocalCohomology\", \"type\": \" {R : Type u} [CommRing R] (J : Ideal R) (i : ℕ) : CategoryTheory.Functor (ModuleCat R) (ModuleCat R)\", \"doc\": \"`localCohomology J i` is `i`-th the local cohomology module of a module `M` over\\na commutative ring `R` with support in the ideal `J` of `R`, defined as the direct limit\\nof `Ext^i(R/J^t, M)` over all \"}\n  {\"name\": \"localCohomology.isoSelfLERadical\", \"module\": \"Mathlib.Algebra.Homology.LocalCohomology\", \"type\": \" {R : Type u} [CommRing R] (J : Ideal R) [IsNoetherian R R] (i : ℕ) : localCohomology.ofSelfLERadical J i ≅ localCohomology J i\", \"doc\": \"Local cohomology (defined in terms of powers of `J`) agrees with local\\ncohomology computed over all ideals with radical containing `J`.\"}\n  {\"name\": \"localCohomology.isoOfSameRadical\", \"module\": \"Mathlib.Algebra.Homology.LocalCohomology\", \"type\": \" {R : Type u} [CommRing R] {J K : Ideal R} [IsNoetherian R R] (hJK : J.radical = K.radical) (i : ℕ) : localCohomology J i ≅ localCohomology K i\", \"doc\": \"Local cohomology agrees on ideals with the same radical.\"}\n",
    "date": "2026-10-19",
    "verdict": "No match: localCohomology and its same-radical comparison are for one fixed ring; none compares cohomological dimension under a ring map."
+  },
+  {
+   "tool": "grep",
+   "query": "localCohomology|cohomologicalDimension|torsion.*change.*ring",
+   "results": "{\"t\": \"2026-10-18T22:30:31Z\", \"tool\": \"grep\", \"query\": \"localCohomology|cohomologicalDimension|torsion.*change.*ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/LocalCohomology.lean\", \"Mathlib/Algebra/Homology/LocalCohomology.lean\", \"Mathlib/Algebra/Homology/LocalCohomology.lean\", \"Mathlib/Algebra/Homology/LocalCohomology.lean\", \"Mathlib/Algebra/Homology/LocalCohomology.lean\"], \"digest\": \"1b64f7a08010717e\"}",
+   "date": "2026-10-19",
+   "verdict": "No match: the hits state Krull-dimension inequalities, definitions of Ext-colimit local cohomology, or facts about localized modules; none states the arbitrary-ring-map inequality or a one-line specialization. Read LocalCohomology.lean:40-47 and161-174."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Local cohomological dimension cannot increase along an arbitrary ring homomorphism",
+   "results": "{\"t\": \"2026-10-18T22:30:31Z\", \"tool\": \"leansearch\", \"query\": \"Local cohomological dimension cannot increase along an arbitrary ring homomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ringKrullDim_le_of_surjective\", \"ringKrullDim_succ_le_of_surjective\", \"localCohomology\", \"localCohomology.ofSelfLERadical\", \"localCohomology.diagram\", \"instFiniteRingKrullDimOfIsNoetherianRingOfIsLocalRing\", \"IsLocalHom.of_surjective\", \"IsLocalHom.of_comap_surjective\"], \"digest\": \"951551fa05b827b8\"}",
+   "date": "2026-10-19",
+   "verdict": "No match: the hits state Krull-dimension inequalities, definitions of Ext-colimit local cohomology, or facts about localized modules; none states the arbitrary-ring-map inequality or a one-line specialization. Read LocalCohomology.lean:40-47 and161-174."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For any homomorphism of Noetherian commutative rings A to B and ideal I local cohomological dimension of IB is at most that of I",
+   "results": "{\"t\": \"2026-10-18T22:30:32Z\", \"tool\": \"leanfinder\", \"query\": \"For any homomorphism of Noetherian commutative rings A to B and ideal I local cohomological dimension of IB is at most that of I\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ringKrullDim_le_ringKrullDim_add_spanFinrank\", \"ringKrullDim_quotient_le\", \"Ideal.height_le_height_add_of_liesOver\", \"ringKrullDim_le_ringKrullDim_quotient_add_spanFinrank\", \"Module.supportDim_le_supportDim_quotSMulTop_succ\", \"ringKrullDim_le_ringKrullDim_add_card\", \"ringKrullDim_le_ringKrullDim_quotient_add_encard\", \"ringKrullDim_le_ringKrullDim_quotSMulTop_succ\"], \"digest\": \"9c16834f530256a2\"}",
+   "date": "2026-10-19",
+   "verdict": "No match: the hits state Krull-dimension inequalities, definitions of Ext-colimit local cohomology, or facts about localized modules; none states the arbitrary-ring-map inequality or a one-line specialization. Read LocalCohomology.lean:40-47 and161-174."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of scalars identifies local cohomology of a B module with local cohomology over A at the contracted generators without flatness",
+   "results": "{\"t\": \"2026-10-18T22:30:33Z\", \"tool\": \"leanfinder\", \"query\": \"Restriction of scalars identifies local cohomology of a B module with local cohomology over A at the contracted generators without flatness\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.flat_of_isLocalized_span\", \"Submodule.restrictScalars_localized'\", \"Module.flat_of_isLocalized_maximal\", \"Submodule.restrictScalars_localized'_smul\", \"LocalizedModule.restrictScalars_map_eq\", \"Ideal.localized₀_eq_restrictScalars_map\", \"IsLocalizedModule.of_restrictScalars\", \"instFlatAtPrime\"], \"digest\": \"f9aadf080338ce9d\"}",
+   "date": "2026-10-19",
+   "verdict": "No match: the hits state Krull-dimension inequalities, definitions of Ext-colimit local cohomology, or facts about localized modules; none states the arbitrary-ring-map inequality or a one-line specialization. Read LocalCohomology.lean:40-47 and161-174."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-isolated-intersection-dimension-bound",
@@ -78,5 +156,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-local-cohomology-change-rings",
+  "worker": "stage1",
+  "summary": "Q54 kept the statement unchanged, checked Stacks 0DXA and its module interpretation, and proved the inequality by the explicit fraction comparison of 0BJB. One new statement-only node records the Noetherian derived-torsion Cech computation of 0956. The actual module comparison, signs, cohomological-dimension existence and the cases q=-1, empty generators and zero rings are written in the item. No new comparison lemma merely restates the conclusion. All searches were read and recorded from msearch.py.",
+  "blueprint": "Proof Step 1: dimension-normalized Verdier duality and the middle t-structure; the finite-coefficient potential-dualizing construction, via the normal-local top-residue-class input (ILO XVII Lemma 3.5.8): normality of completion and connectedness of punctured principal slices. Specific input: The bound on the closed complement of an algebraized neighborhood, and the empty-puncture dimension comparison, in the complete-local connectedness input. In the isolated-intersection bound: Tag 0DXA (lemma-cd-change-rings), the inequality, restricted to Noetherian source and target rings so that local cohomology is also the right-derived ideal-torsion functor. The split realizes the local-cohomological-dimension change-of-rings input of the isolated-intersection bound; it does not replace any unit-level argument."
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q54-283913996",
+  "group": "Q54",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q54-283913996 (reviewer sub-agent of L); spot-checked: Read the item, the new node lem-per-ideal-torsion-cech-computation, every cited statement, Stacks 0DXA (local-cohomology.tex lemma-cd-change-rings), 0BJB, 0ALZ and 0956 (dualizing.tex), and Mathlib LocalCohomology.lean lines 40-47. The item's statement and stmt_deps are byte-identical to the pre-delivery copy, so no target was changed or weakened. Step 1 picks generators by Noetherianity, and their images generate IB. Step 2 applies 0956 over A to the restricted module N_A (the node allows modules that are not finitely generated) and over B to N. It also shows the least q in the cd definition exists. Step 3 is the alternative proof of 0BJB written out: (N_A)_{t_S} = (N_{u_S})_A, because the fraction equality test is the same condition in both. The faces and signs agree, so the two cochain complexes are isomorphic after restriction of scalars. No flatness and no derived base change is used. Step 4 follows from the cd definition and covers q=-1, r=0 and zero rings. proof_deps equals the union of the uses. There is no route departure, no tool_use and no SGA. The new node is a self-contained, statement-only form of 0956 with the correct tag and label. It cites the Noetherian and torsion-functor definitions (n>=1 versus n in N makes no difference) and has all three kinds of search recorded. Mathlib lists the Cech description of local cohomology as future work, so the node is not a Mathlib leaf. I tested it on r=0, t=1, t=0 and k[x] with ideal (x) (H^1 = k[x,1/x]/k[x]), and checked that d1 composed with d0 is zero. It does not duplicate lem-sbc-local-cohomology-derived-torsion (an Ext colimit), lem-sbc-punctured-h-one-derived-torsion, lem-per-local-cohomology-generator-bound or the pbc/pc Cech nodes, and the blueprint has no local-cohomology node. Advisory: the item defines Gamma and cd inline instead of citing def-sbc-ideal-power-torsion-functor or def-per-local-cohomological-dimension. The inline definitions agree with those nodes, and the statement was unchanged from base, so I made no edit. No fixes."
  }
 }
