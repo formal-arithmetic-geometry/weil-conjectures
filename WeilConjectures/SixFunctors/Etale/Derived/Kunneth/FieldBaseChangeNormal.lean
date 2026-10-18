@@ -394,11 +394,11 @@ theorem Etale.isZero_higherDirectImage_constantModSheaf_of_isAlgClosed {K : Type
     (n : ℕ) (hn : IsUnit (n : K)) (hΛ : (n : Λ) = 0)
     {S' X' : Scheme.{u}} (s : S' ⟶ Spec (.of K)) (b : X' ⟶ X) (p' : X' ⟶ S')
     (hpb : IsPullback b p' a s) [IsAffine S'] [IsIntegral S']
-    (hnorm : ∀ x : S', IsIntegrallyClosed (S'.presheaf.stalk x))
+    (_hnorm : ∀ x : S', IsIntegrallyClosed (S'.presheaf.stalk x))
     [IsAlgClosed S'.functionField] {L : Type u} [Field L] [IsAlgClosed L]
     (i : S'.functionField ⟶ CommRingCat.of L) {Y : Scheme.{u}} (e : Y ⟶ Spec (.of L))
     (h : Y ⟶ X') (sq : IsPullback e h (Spec.map i ≫ S'.fromSpecStalk (genericPoint S')) p')
-    (d : ℕ) (hd : d ∣ n) (q : ℤ) (hq : 1 ≤ q) :
+    (d : ℕ) (_hd : d ∣ n) (q : ℤ) (hq : 1 ≤ q) :
     IsZero (Etale.higherDirectImage Λ h q (Etale.constantModSheaf Λ Y d)) := by
   let t := Spec.map i ≫ S'.fromSpecStalk (genericPoint S')
   let M := ModuleCat.of Λ (Λ ⧸ (Ideal.span {(d : Λ)} : Ideal Λ))

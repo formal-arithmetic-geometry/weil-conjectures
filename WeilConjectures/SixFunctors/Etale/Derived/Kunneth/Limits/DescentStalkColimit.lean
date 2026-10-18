@@ -35,6 +35,7 @@ section LowerStarComp
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
 variable {R S T : Scheme.{u}} (h₁ : T ⟶ S) (h₂ : S ⟶ R)
 
+omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
 /-- The components of the inverse of the composition isomorphism `(h₁)_* ⋙ (h₂)_* ≅ (h₁₂)_*`
 of étale pushforwards are the restriction maps along the inverse pullback pasting
 isomorphisms. -/

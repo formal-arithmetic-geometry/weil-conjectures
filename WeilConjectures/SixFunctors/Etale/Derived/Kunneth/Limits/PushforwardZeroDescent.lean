@@ -67,6 +67,7 @@ lemma descentTransition_eq_upperStarComp :
       ((q)_*[A].obj F)), descentTransitionAux]
   rfl
 
+omit [HasSmallSiteSheafify A] in
 /-- Morphisms to `q_* F` are determined by their transposes `q^* M ⟶ F`. -/
 lemma eq_of_upperStar_map_comp_counit {M : Sheaf Y.smallEtaleTopology A}
     {x y : M ⟶ (q)_*[A].obj F}
@@ -124,12 +125,12 @@ lemma sheafTransition_pushforwardStage_proj (q : X ⟶ Y) :
       (Etale.upperStarId (ModuleCat.{u + 1} Λ) X).inv.app (((q)^*[ModuleCat.{u + 1} Λ]).obj
         (((f₀ ≫ q)_*[ModuleCat.{u + 1} Λ]).obj (((𝟙 Z)^*[ModuleCat.{u + 1} Λ]).obj J))) := by
     rw [Etale.upperStarComp_id_left]
-    simp <;> rfl
+    simp
   have h2 : (Etale.upperStarComp (ModuleCat.{u + 1} Λ) (𝟙 Z) (𝟙 Z) (𝟙 Z) (by simp)).inv.app J =
       (Etale.upperStarId (ModuleCat.{u + 1} Λ) Z).hom.app
         (((𝟙 Z)^*[ModuleCat.{u + 1} Λ]).obj J) := by
     rw [Etale.upperStarComp_id_left]
-    simp <;> rfl
+    simp
   have n := (Etale.upperStarId (ModuleCat.{u + 1} Λ) X).hom.naturality
     ((Etale.baseChangeMap (ModuleCat.{u + 1} Λ)
         (⟨by simp⟩ : CommSq (𝟙 Z) f₀ (f₀ ≫ q) q)).app (((𝟙 Z)^*[ModuleCat.{u + 1} Λ]).obj J) ≫
@@ -171,7 +172,7 @@ lemma sheafTransition_pushforwardStage_proj (q : X ⟶ Y) :
   have key' := congrArg ((f₀ ≫ q)_*[ModuleCat.{u + 1} Λ]).map key
   simp only [Functor.map_comp, CategoryTheory.Functor.map_id] at key'
   simp only [Iso.trans_hom, Functor.isoWhiskerRight_hom, NatTrans.comp_app,
-    Functor.whiskerRight_app, Functor.leftUnitor_hom_app, Category.comp_id, Category.assoc]
+    Functor.whiskerRight_app, Functor.leftUnitor_hom_app, Category.assoc]
   rw [← n4]
   erw [Category.id_comp]
   rw [Category.assoc, reassoc_of% key']

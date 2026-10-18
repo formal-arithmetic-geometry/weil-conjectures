@@ -59,11 +59,13 @@ noncomputable def descentTransition :
     (r)^*[A].obj ((r)_*[A].obj F) ⟶ (q)^*[A].obj ((q)_*[A].obj F) :=
   ((upperStarLowerStarAdjunction A r).homEquiv _ _).symm (descentTransitionAux A q g r hr F)
 
+omit [HasSmallSiteSheafify A] in
 lemma homEquiv_descentTransition :
     (upperStarLowerStarAdjunction A r).homEquiv _ _ (descentTransition A q g r hr F) =
       descentTransitionAux A q g r hr F := by
   simp [descentTransition]
 
+omit [HasSmallSiteSheafify A] in
 /-- The transition maps are compatible with the counits. -/
 @[reassoc (attr := simp)]
 lemma descentTransition_counit :
@@ -79,6 +81,7 @@ lemma descentTransition_counit :
     Adjunction.homEquiv_counit]
   simp
 
+omit [HasSmallSiteSheafify A] in
 /-- The transition map along an identity is the identity. -/
 lemma descentTransition_id (e : Y ⟶ Y) (he : e = 𝟙 Y) :
     descentTransition A q e q (by simp [he]) F = 𝟙 _ := by
@@ -88,6 +91,7 @@ lemma descentTransition_id (e : Y ⟶ Y) (he : e = 𝟙 Y) :
     lowerStarComp_id_right]
   simp
 
+omit [HasSmallSiteSheafify A] in
 /-- The transition maps compose. -/
 lemma descentTransition_comp {W : Scheme.{u}} (g₂ : Z ⟶ W) (g₁₂ : Y ⟶ W)
     (hg₁₂ : g₁₂ = g ≫ g₂) (r₂ : X ⟶ W) (hr₂ : r₂ = r ≫ g₂) :
