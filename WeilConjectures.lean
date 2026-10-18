@@ -1827,8 +1827,12 @@ public import WeilConjectures.AlgebraicGeometry.DeformationSpace.AffineSpace
 public import WeilConjectures.AlgebraicGeometry.DeformationSpace.BaseChange
 public import WeilConjectures.AlgebraicGeometry.DeformationSpace.BaseChangeCover
 public import WeilConjectures.AlgebraicGeometry.DeformationSpace.BaseChangeSection
+public import WeilConjectures.AlgebraicGeometry.DeformationSpace.BlowupCenter
 public import WeilConjectures.AlgebraicGeometry.DeformationSpace.BlowupChart
 public import WeilConjectures.AlgebraicGeometry.DeformationSpace.BlowupChartStrictTransform
+public import WeilConjectures.AlgebraicGeometry.DeformationSpace.BlowupGlobal
+public import WeilConjectures.AlgebraicGeometry.DeformationSpace.BlowupGlobalRange
+public import WeilConjectures.AlgebraicGeometry.DeformationSpace.BlowupGlobalSection
 public import WeilConjectures.AlgebraicGeometry.DeformationSpace.BlowupModel
 public import WeilConjectures.AlgebraicGeometry.DeformationSpace.Coordinates
 public import WeilConjectures.AlgebraicGeometry.DeformationSpace.ReesBaseChange
@@ -6069,8 +6073,12 @@ public import WeilConjectures.CategoryTheory.StageSectionFunctorFromTransitions
 public import WeilConjectures.CategoryTheory.StageSectionTransitionExistence
 public import WeilConjectures.CategoryTheory.StageSystem.Basic
 public import WeilConjectures.CategoryTheory.StageSystem.Const
+public import WeilConjectures.CategoryTheory.StageSystem.Exact
 public import WeilConjectures.CategoryTheory.StageSystem.Functor
 public import WeilConjectures.CategoryTheory.StageSystem.Idempotents
+public import WeilConjectures.CategoryTheory.StageSystem.Preadditive
+public import WeilConjectures.CategoryTheory.StageSystem.Pretriangulated
+public import WeilConjectures.CategoryTheory.StageSystem.Shift
 public import WeilConjectures.CategoryTheory.SubobjectHomologyStep
 public import WeilConjectures.CategoryTheory.SupportedComplexSingleRealization
 public import WeilConjectures.CategoryTheory.TensorHomologyImageKernelEpi
@@ -9078,6 +9086,7 @@ public import WeilConjectures.SixFunctors.Etale.SupportCohomologyHom
 public import WeilConjectures.SixFunctors.Etale.SupportCohomologyRestriction
 public import WeilConjectures.SixFunctors.Etale.SupportCohomologyRestrictionNaturality
 public import WeilConjectures.SixFunctors.Etale.SupportCohomologyTriangle
+public import WeilConjectures.SixFunctors.Etale.SupportCohomologyTrianglePullback
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.ClosedImmersion
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.CohomologyMap
@@ -9399,6 +9408,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.U
 public import WeilConjectures.SixFunctors.ProEtale.ScalarExtension
 public import WeilConjectures.SixFunctors.ProEtale.ScalarExtensionFlat
 public import WeilConjectures.SixFunctors.ProEtale.ScalarExtensionMonoidal
+public import WeilConjectures.SixFunctors.ProEtale.SupportCohomologyTrianglePullback
 public import WeilConjectures.SixFunctors.ProEtale.WeaklyContractibleCohomology
 public import WeilConjectures.SixFunctors.UpperLowerStar.Defs
 public import WeilConjectures.SixFunctors.UpperLowerStar.Monoidal
@@ -9607,9 +9617,11 @@ public import WeilConjectures.WeilSheaf.ExtensionByZero
 public import WeilConjectures.WeilSheaf.FieldCoefficient
 public import WeilConjectures.WeilSheaf.FieldCoefficientCohomology
 public import WeilConjectures.WeilSheaf.FieldCoefficientExtendScalars
+public import WeilConjectures.WeilSheaf.FieldCoefficientForget
 public import WeilConjectures.WeilSheaf.FieldCoefficientFrobeniusTwist
 public import WeilConjectures.WeilSheaf.FieldCoefficientKaroubian
 public import WeilConjectures.WeilSheaf.FieldCoefficientTransition
+public import WeilConjectures.WeilSheaf.FieldCoefficientTriangulated
 public import WeilConjectures.WeilSheaf.FieldCoefficientTwoColimit
 public import WeilConjectures.WeilSheaf.FiniteEtale
 public import WeilConjectures.WeilSheaf.FiniteEtaleLisse
