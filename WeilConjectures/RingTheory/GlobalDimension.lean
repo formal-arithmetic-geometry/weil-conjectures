@@ -8,9 +8,20 @@ module
 
 public import Mathlib.Algebra.Category.ModuleCat.Projective
 public import Mathlib.CategoryTheory.Preadditive.Projective.Resolution
+public import Mathlib.Algebra.Category.ModuleCat.Abelian
+public import Mathlib.CategoryTheory.Abelian.Projective.Dimension
 
 /-!
 # Finite projective and global dimension
+
+Projective dimension is Mathlib's `CategoryTheory.HasProjectiveDimensionLE` and
+`CategoryTheory.projectiveDimension`, defined by the vanishing of `Ext`. In terms of it we
+define modules of finite projective dimension and the global dimension of a ring.
+
+The predicate `ModuleCat.HasProjectiveResolutionLE M n` asks for an explicit projective
+resolution of length at most `n`; it is used to construct resolutions, and it is equivalent to
+`HasProjectiveDimensionLE M n`
+(`ModuleCat.hasProjectiveResolutionLE_iff_hasProjectiveDimensionLE`, Stacks Lemma 065R).
 
 Source: Stacks Project, Algebra, Definitions 00O4 and 00O6
 (blueprint: def-weil-pbc-finite-global-dimension).
@@ -24,47 +35,42 @@ namespace ModuleCat
 
 open CategoryTheory
 
-/-- A projective resolution of `M` of length at most `n` is exact, has projective
-terms, and has zero terms in degrees greater than `n`. The exactness and
-projectivity are fields of `ProjectiveResolution`. Source: Stacks Project,
-Algebra, Definition 00O4 (blueprint: def-weil-pbc-finite-global-dimension). -/
+/-- A projective resolution of `M` of length at most `n`: a projective resolution whose terms
+vanish in degrees greater than `n`. This is equivalent to Mathlib's
+`CategoryTheory.HasProjectiveDimensionLE M n`
+(`ModuleCat.hasProjectiveResolutionLE_iff_hasProjectiveDimensionLE`). Source: Stacks Project,
+Algebra, Definition 00O4 and Lemma 065R. -/
 def HasProjectiveResolutionLE {R : Type u} [CommRing R] (M : ModuleCat.{v} R)
     (n : ℕ) : Prop :=
   ∃ P : ProjectiveResolution M, ∀ i : ℕ, n < i → CategoryTheory.Limits.IsZero (P.complex.X i)
 
-/-- A module has finite projective dimension when it has a projective resolution
-of some finite length. Source: Stacks Project, Algebra, Definition 00O4
-(blueprint: def-weil-pbc-finite-global-dimension). -/
+/-- A module has finite projective dimension when it has projective dimension at most `n`, in
+the sense of Mathlib's `CategoryTheory.HasProjectiveDimensionLE`, for some `n`. Its projective
+dimension is Mathlib's `CategoryTheory.projectiveDimension M`. Source: Stacks Project, Algebra,
+Definition 00O4 (blueprint: def-weil-pbc-finite-global-dimension). -/
 def HasFiniteProjectiveDimension {R : Type u} [CommRing R] (M : ModuleCat.{v} R) :
     Prop :=
-  ∃ n : ℕ, HasProjectiveResolutionLE M n
-
-/-- The projective dimension of a module with finite projective dimension is
-the least length of a projective resolution. Source: Stacks Project, Algebra,
-Definition 00O4 (blueprint: def-weil-pbc-finite-global-dimension). -/
-noncomputable def projectiveDimension {R : Type u} [CommRing R] (M : ModuleCat.{v} R)
-    (h : HasFiniteProjectiveDimension M) : ℕ :=
-  by classical exact Nat.find h
+  ∃ n : ℕ, HasProjectiveDimensionLE M n
 
 end ModuleCat
 
 namespace Ring
 
-/-- A ring has global dimension at most `n` when every module has a projective
-resolution of length at most `n`, with no finite generation assumption.
+/-- A ring has global dimension at most `n` when every module has projective dimension at most
+`n` (Mathlib's `CategoryTheory.HasProjectiveDimensionLE`), with no finite generation assumption.
 Source: Stacks Project, Algebra, Definition 00O6
 (blueprint: def-weil-pbc-finite-global-dimension). -/
 def HasGlobalDimensionLE (R : Type u) [CommRing R] (n : ℕ) : Prop :=
-  ∀ M : ModuleCat.{v} R, ModuleCat.HasProjectiveResolutionLE M n
+  ∀ M : ModuleCat.{v} R, CategoryTheory.HasProjectiveDimensionLE M n
 
-/-- A ring has finite global dimension if one finite length bounds projective
-resolutions of all its modules. Source: Stacks Project, Algebra, Definition 00O6
+/-- A ring has finite global dimension if one finite bound holds for the projective dimensions
+of all its modules. Source: Stacks Project, Algebra, Definition 00O6
 (blueprint: def-weil-pbc-finite-global-dimension). -/
 def HasFiniteGlobalDimension (R : Type u) [CommRing R] : Prop :=
   ∃ n : ℕ, HasGlobalDimensionLE.{u, v} R n
 
 /-- The global dimension of a ring of finite global dimension is the least
-uniform bound for projective resolutions of all its modules. Source: Stacks
+uniform bound for the projective dimensions of all its modules. Source: Stacks
 Project, Algebra, Definition 00O6
 (blueprint: def-weil-pbc-finite-global-dimension). -/
 noncomputable def globalDimension (R : Type u) [CommRing R]

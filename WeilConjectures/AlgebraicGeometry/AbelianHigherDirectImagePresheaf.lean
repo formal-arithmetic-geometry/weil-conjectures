@@ -9,8 +9,8 @@ module
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.ConcreteCoefficients
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarCoherence
 public import WeilConjectures.AlgebraicGeometry.DerivedCategories
-import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.DerivabilityStructureInjectives
-import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
+public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.DerivabilityStructureInjectives
+public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
 import Mathlib.CategoryTheory.Sites.EpiMono
 
 /-!
@@ -51,7 +51,7 @@ open Opposite
 /-- The free sheaf `ℤ[W]` of abelian groups on an étale `X`-scheme `W`: the sheafification of the
 presheaf `V ↦ ℤ^{(Hom_X(V, W))}`. It corepresents sections over `W`, and
 `Ext^q(ℤ[W], F)` is the étale cohomology `H^q(W, F|_W)`. -/
-private noncomputable def freeSheaf (J : GrothendieckTopology C)
+noncomputable def freeSheaf (J : GrothendieckTopology C)
     [HasSheafify J AddCommGrpCat.{u + 1}] :
     C ⥤ Sheaf J (AddCommGrpCat.{u + 1}) :=
   uliftYoneda.{u + 1} ⋙ (Functor.whiskeringRight _ _ _).obj (AddCommGrpCat.free) ⋙
@@ -60,7 +60,7 @@ private noncomputable def freeSheaf (J : GrothendieckTopology C)
 /-- Evaluation at the generator: for a sheaf `G` of abelian groups on `X_ét`, the natural map
 `Hom(ℤ[W], G) ⟶ G(W)` sending `f` to the image under `f` of the section of `ℤ[W]` given by
 the identity of `W`. -/
-private noncomputable def freeSheafSections
+noncomputable def freeSheafSections
     (G : Sheaf J (AddCommGrpCat.{u + 1})) :
     (freeSheaf J).op ⋙ preadditiveYoneda.obj G ⟶
       G.obj where
@@ -130,7 +130,7 @@ variable [HasDerivedCategory.{u + 1} (Sheaf J AddCommGrpCat.{u + 1})]
 
 /-- For `L ∈ D⁺(X_ét)`, the map `Hom(ℤ[W][0], L) ⟶ Hom(ℤ[W], H⁰(L))` induced by the degree-`0`
 homology, natural in `W`. -/
-private noncomputable def derivedHomToHomology
+noncomputable def derivedHomToHomology
     (L : DerivedCategory.Plus (Sheaf J (AddCommGrpCat.{u + 1}))) :
     (freeSheaf J ⋙ DerivedCategory.Plus.singleFunctor _ 0).op ⋙
         preadditiveYoneda.obj L ⟶
@@ -452,7 +452,7 @@ private theorem isLocallyBijective_derivedHomToHomology
   constructor <;> infer_instance
 
 
-private noncomputable def sheafifyIsoOfLocallyBijective
+noncomputable def sheafifyIsoOfLocallyBijective
     {P : Cᵒᵖ ⥤ AddCommGrpCat.{u + 1}} {G : Sheaf J AddCommGrpCat.{u + 1}}
     (φ : P ⟶ G.obj) [Presheaf.IsLocallyInjective J φ] [Presheaf.IsLocallySurjective J φ] :
     (presheafToSheaf J AddCommGrpCat.{u + 1}).obj P ≅ G := by
@@ -475,6 +475,18 @@ private noncomputable def sheafifyIsoOfLocallyBijective
       exact Presheaf.isLocallySurjective_of_isLocallySurjective J (toSheafify J P) ψ.hom
   exact asIso ψ
 
+omit [HasSheafify J AddCommGrpCat.{u + 1}]
+  [HasDerivedCategory.{u + 1} (Sheaf J AddCommGrpCat.{u + 1})]
+  [EnoughInjectives (Sheaf J AddCommGrpCat.{u + 1})] in
+lemma toSheafify_comp_sheafifyIsoOfLocallyBijective_hom
+    {P : Cᵒᵖ ⥤ AddCommGrpCat.{u + 1}} {G : Sheaf J AddCommGrpCat.{u + 1}}
+    (φ : P ⟶ G.obj) [Presheaf.IsLocallyInjective J φ] [Presheaf.IsLocallySurjective J φ] :
+    toSheafify J P ≫ (sheafifyIsoOfLocallyBijective φ).hom.hom = φ := by
+  have he := ((sheafificationAdjunction J AddCommGrpCat.{u + 1}).homEquiv
+    _ _).apply_symm_apply φ
+  rw [Adjunction.homEquiv_unit] at he
+  exact he
+
 private theorem nonempty_sheafifyDerivedHomIso
     (L : DerivedCategory.Plus (Sheaf J AddCommGrpCat.{u + 1})) :
     Nonempty ((presheafToSheaf J AddCommGrpCat.{u + 1}).obj
@@ -485,7 +497,7 @@ private theorem nonempty_sheafifyDerivedHomIso
 
 end LocalComparison
 
-private noncomputable def adjunctionPresheafIso
+noncomputable def adjunctionPresheafIso
     {B D E : Type*} [Category B] [Category.{u + 1} D] [Category.{u + 1} E]
     [Preadditive D] [Preadditive E] (A : B ⥤ D)
     {F : D ⥤ E} {G : E ⥤ D} [F.Additive] (adj : F ⊣ G) (K : E) :
@@ -495,7 +507,7 @@ private noncomputable def adjunctionPresheafIso
       ext f
       exact adj.homEquiv_naturality_left _ _)
 
-private noncomputable def higherDirectImagePresheaf {X Y : Scheme.{u}} (h : Y ⟶ X) (q : ℤ)
+noncomputable def higherDirectImagePresheaf {X Y : Scheme.{u}} (h : Y ⟶ X) (q : ℤ)
     (K : DerivedCategory.Plus (Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1})) :
     X.Etaleᵒᵖ ⥤ AddCommGrpCat.{u + 1} :=
   (freeSheaf X.smallEtaleTopology ⋙ upperStar AddCommGrpCat.{u + 1} h ⋙
@@ -503,7 +515,7 @@ private noncomputable def higherDirectImagePresheaf {X Y : Scheme.{u}} (h : Y �
 
 /-- The isomorphism `Hom(h^* ℤ[W][0], K[q]) ≅ Hom(ℤ[W][0], Rh_*(K[q]))`, natural in `W`: the
 isomorphism `Lh^*(ℤ[W][0]) ≅ (h^* ℤ[W])[0]` and the adjunction `Lh^* ⊣ Rh_*`. -/
-private noncomputable def higherDirectImagePresheafIso {X Y : Scheme.{u}} (h : Y ⟶ X) (q : ℤ)
+noncomputable def higherDirectImagePresheafIso {X Y : Scheme.{u}} (h : Y ⟶ X) (q : ℤ)
     (K : DerivedCategory.Plus (Sheaf Y.smallEtaleTopology (AddCommGrpCat.{u + 1}))) :
     higherDirectImagePresheaf h q K ≅
       (freeSheaf X.smallEtaleTopology ⋙ DerivedCategory.Plus.singleFunctor _ 0).op ⋙
@@ -515,14 +527,7 @@ private noncomputable def higherDirectImagePresheafIso {X Y : Scheme.{u}} (h : Y
     (freeSheaf X.smallEtaleTopology ⋙ DerivedCategory.Plus.singleFunctor _ 0)
     (upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} h).derivedPlus (K⟦q⟧)
 
-private theorem nonempty_mapIso_trans
-    {B D : Type*} [Category* B] [Category* D] (F : B ⥤ D)
-    {P Q : B} {G H : D} (e : P ≅ Q) (h : Nonempty (F.obj Q ≅ G)) (e' : G ≅ H) :
-    Nonempty (F.obj P ≅ H) := by
-  obtain ⟨f⟩ := h
-  exact ⟨F.mapIso e ≪≫ f ≪≫ e'⟩
-
-private noncomputable def homologyShiftIso
+noncomputable def homologyShiftIso
     {D E : Type*} [Category.{u + 1} D] [Category.{u + 1} E] [Abelian D] [Abelian E]
     [HasDerivedCategory.{u + 1} D] [HasDerivedCategory.{u + 1} E]
     (R : DerivedCategory.Plus D ⥤ DerivedCategory.Plus E) [R.CommShift ℤ]
@@ -535,7 +540,67 @@ private noncomputable def homologyShiftIso
 end AbelianComparison
 
 
-/-- Higher direct image is the sheaf associated to the restricted cohomology presheaf.
+/-- The restricted cohomology presheaf `U ↦ Hom(h^* ℤ[U][0], K[q]) = H^q(U ×_X Y, K)` on `X_ét`,
+for `h : Y ⟶ X` and `K ∈ D⁺(Y_ét)`, where `ℤ[U]` is the sheafification of the free presheaf of
+abelian groups on the representable presheaf of `U`.
+Source: Stacks Project, Tag 03Q8 (blueprint: sbc-lem-higher-direct-image-presheaf). -/
+noncomputable abbrev higherDirectImageRawPresheafAbelian {X Y : Scheme.{u}} (h : Y ⟶ X) (q : ℤ)
+    (K : DerivedCategory.Plus (Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1})) :
+    X.Etaleᵒᵖ ⥤ AddCommGrpCat.{u + 1} :=
+  AbelianComparison.higherDirectImagePresheaf h q K
+
+/-- The canonical map from the restricted cohomology presheaf to the sections of
+`Rᵠh_* K`: a class `Hom(h^* ℤ[U][0], K[q])` is sent, by the adjunction `h^* ⊣ Rh_*`, to a map
+`ℤ[U][0] ⟶ Rh_*(K[q])`, whose degree `0` homology `ℤ[U] ⟶ H⁰(Rh_*(K[q])) = Rᵠh_* K` is
+evaluated at the generator of `ℤ[U]`.
+Source: Stacks Project, Tag 03Q8 (blueprint: sbc-lem-higher-direct-image-presheaf). -/
+noncomputable def higherDirectImagePresheafToHomologyAbelian {X Y : Scheme.{u}} (h : Y ⟶ X)
+    (q : ℤ) (K : DerivedCategory.Plus (Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1})) :
+    higherDirectImageRawPresheafAbelian h q K ⟶
+      ((DerivedCategory.Plus.homologyFunctor
+        (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) q).obj
+          ((rightDerivedLowerStarPlus AddCommGrpCat.{u + 1} h).obj K)).obj :=
+  by
+  let R := rightDerivedLowerStarPlus AddCommGrpCat.{u + 1} h
+  letI : R.CommShift ℤ := by
+    dsimp only [R, rightDerivedLowerStarPlus]
+    infer_instance
+  exact (AbelianComparison.higherDirectImagePresheafIso h q K).hom ≫
+    (AbelianComparison.derivedHomToHomology (R.obj (K⟦q⟧)) ≫
+      AbelianComparison.freeSheafSections _) ≫
+    (AbelianComparison.homologyShiftIso R q K).hom.hom
+
+/-- The canonical map `higherDirectImagePresheafToHomologyAbelian` is locally injective and
+locally surjective, so that it induces an isomorphism on sheafifications. -/
+theorem isLocallyBijective_higherDirectImagePresheafToHomologyAbelian {X Y : Scheme.{u}}
+    (h : Y ⟶ X) (q : ℤ)
+    (K : DerivedCategory.Plus (Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1})) :
+    Presheaf.IsLocallyInjective X.smallEtaleTopology
+        (higherDirectImagePresheafToHomologyAbelian h q K) ∧
+      Presheaf.IsLocallySurjective X.smallEtaleTopology
+        (higherDirectImagePresheafToHomologyAbelian h q K) := by
+  have : PreservesLimitsOfSize.{u, u + 1} (CategoryTheory.forget AddCommGrpCat.{u + 1}) :=
+    preservesLimitsOfSize_shrink.{u + 1, u + 1, u, u + 1} _
+  have : X.smallEtaleTopology.HasSheafCompose (CategoryTheory.forget AddCommGrpCat.{u + 1}) :=
+    inferInstance
+  let R := rightDerivedLowerStarPlus AddCommGrpCat.{u + 1} h
+  have : R.CommShift ℤ := by
+    dsimp only [R, rightDerivedLowerStarPlus]
+    infer_instance
+  have := (AbelianComparison.isLocallyBijective_derivedHomToHomology (R.obj (K⟦q⟧))).1
+  have := (AbelianComparison.isLocallyBijective_derivedHomToHomology (R.obj (K⟦q⟧))).2
+  have : IsIso (AbelianComparison.homologyShiftIso R q K).hom.hom :=
+    Functor.map_isIso (sheafToPresheaf _ _) (AbelianComparison.homologyShiftIso R q K).hom
+  constructor
+  · dsimp only [higherDirectImagePresheafToHomologyAbelian]
+    infer_instance
+  · dsimp only [higherDirectImagePresheafToHomologyAbelian]
+    infer_instance
+
+/-- **Higher direct image is the sheafified restricted cohomology presheaf.** For `h : Y ⟶ X`
+and `K ∈ D⁺(Y_ét)`, the canonical map `higherDirectImagePresheafToHomologyAbelian` from the
+presheaf `U ↦ H^q(U ×_X Y, K)` to `Rᵠh_* K` induces an isomorphism from its sheafification to
+`Rᵠh_* K` (`toSheafify_comp_higherDirectImageIsoSheafificationAbelian_hom`).
 Source: Stacks Project, Tag 03Q8 (blueprint: sbc-lem-higher-direct-image-presheaf).
 
 Proof:
@@ -549,9 +614,37 @@ Proof:
    transports these assertions from M to L. The local-bijection criterion for
    sheafification therefore identifies the associated sheaf with H⁰(L).
 3. Apply this to L = Rh_*(K[q]). Shift compatibility of derived direct image identifies
-   H⁰(Rh_*(K[q])) with H^q(Rh_*K). For a sheaf specialize to its degree-zero complex. -/
-theorem nonempty_higherDirectImage_iso_sheafification_abelian {X Y : Scheme.{u}} (h : Y ⟶ X) (q : ℤ)
+   H⁰(Rh_*(K[q])) with H^q(Rh_*K). -/
+noncomputable def higherDirectImageIsoSheafificationAbelian {X Y : Scheme.{u}} (h : Y ⟶ X)
+    (q : ℤ) (K : DerivedCategory.Plus (Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1})) :
+    (presheafToSheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}).obj
+        (higherDirectImageRawPresheafAbelian h q K) ≅
+      (DerivedCategory.Plus.homologyFunctor
+        (Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) q).obj
+          ((rightDerivedLowerStarPlus AddCommGrpCat.{u + 1} h).obj K) :=
+  have := (isLocallyBijective_higherDirectImagePresheafToHomologyAbelian h q K).1
+  have := (isLocallyBijective_higherDirectImagePresheafToHomologyAbelian h q K).2
+  AbelianComparison.sheafifyIsoOfLocallyBijective
+    (higherDirectImagePresheafToHomologyAbelian h q K)
+
+/-- The isomorphism `higherDirectImageIsoSheafificationAbelian` is compatible with the
+sheafification unit: composed with `toSheafify`, it is the canonical map
+`higherDirectImagePresheafToHomologyAbelian`. -/
+theorem toSheafify_comp_higherDirectImageIsoSheafificationAbelian_hom {X Y : Scheme.{u}}
+    (h : Y ⟶ X) (q : ℤ)
     (K : DerivedCategory.Plus (Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1})) :
+    toSheafify X.smallEtaleTopology (higherDirectImageRawPresheafAbelian h q K) ≫
+        (higherDirectImageIsoSheafificationAbelian h q K).hom.hom =
+      higherDirectImagePresheafToHomologyAbelian h q K := by
+  have := (isLocallyBijective_higherDirectImagePresheafToHomologyAbelian h q K).1
+  have := (isLocallyBijective_higherDirectImagePresheafToHomologyAbelian h q K).2
+  exact AbelianComparison.toSheafify_comp_sheafifyIsoOfLocallyBijective_hom _
+
+/-- The sheafified restricted cohomology presheaf is isomorphic to `Rᵠh_* K`; the canonical
+isomorphism is `higherDirectImageIsoSheafificationAbelian`.
+Source: Stacks Project, Tag 03Q8 (blueprint: sbc-lem-higher-direct-image-presheaf). -/
+theorem nonempty_higherDirectImage_iso_sheafification_abelian {X Y : Scheme.{u}} (h : Y ⟶ X)
+    (q : ℤ) (K : DerivedCategory.Plus (Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1})) :
     Nonempty
       ((presheafToSheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}).obj
         (((uliftYoneda.{u + 1} ⋙
@@ -571,35 +664,11 @@ theorem nonempty_higherDirectImage_iso_sheafification_abelian {X Y : Scheme.{u}}
     (((Functor.whiskeringRight _ _ _).obj AddCommGrpCat.free) ⋙
       presheafToSheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})
     (upperStar AddCommGrpCat.{u + 1} h ⋙ DerivedCategory.Plus.singleFunctor _ 0)]
-  have : PreservesLimitsOfSize.{u, u + 1} (CategoryTheory.forget AddCommGrpCat.{u + 1}) :=
-    preservesLimitsOfSize_shrink.{u + 1, u + 1, u, u + 1} _
-  have : X.smallEtaleTopology.HasSheafCompose (CategoryTheory.forget AddCommGrpCat.{u + 1}) :=
-    inferInstance
-  let R := rightDerivedLowerStarPlus AddCommGrpCat.{u + 1} h
-  have : R.CommShift ℤ := by
-    dsimp only [R, rightDerivedLowerStarPlus]
-    infer_instance
-  exact AbelianComparison.nonempty_mapIso_trans
-    (presheafToSheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})
-    (AbelianComparison.higherDirectImagePresheafIso h q K)
-    (AbelianComparison.nonempty_sheafifyDerivedHomIso (R.obj (K⟦q⟧)))
-    (AbelianComparison.homologyShiftIso R q K)
+  exact ⟨higherDirectImageIsoSheafificationAbelian h q K⟩
 
-/-- Higher direct image is the sheaf associated to the restricted cohomology presheaf.
-Source: Stacks Project, Tag 03Q8 (blueprint: sbc-lem-higher-direct-image-presheaf).
-
-Proof:
-1. Derived adjunction identifies the displayed presheaf with
-   U ↦ Hom(ℤ[U][0], Rh_*(K[q])). Exact pullback commutes with the single functor.
-2. For a bounded below derived object L, choose a K-injective complex M representing L.
-   The map Hom(ℤ[U][0], L) → Γ(U, H⁰(L)) is locally bijective. Every section locally
-   lifts through the epimorphism from cycles to homology, giving a chain map from
-   ℤ[U][0]. If its homology section vanishes, the corresponding cycle locally lifts
-   through the differential from degree -1, giving an explicit null homotopy. Naturality
-   transports these assertions from M to L. The local-bijection criterion for
-   sheafification therefore identifies the associated sheaf with H⁰(L).
-3. Apply this to L = Rh_*(K[q]). Shift compatibility of derived direct image identifies
-   H⁰(Rh_*(K[q])) with H^q(Rh_*K). For a sheaf specialize to its degree-zero complex. -/
+/-- The case of a sheaf of `nonempty_higherDirectImage_iso_sheafification_abelian`, with the
+canonical isomorphism `higherDirectImageIsoSheafificationAbelian h q (F[0])`.
+Source: Stacks Project, Tag 03Q8 (blueprint: sbc-lem-higher-direct-image-presheaf). -/
 theorem nonempty_higherDirectImage_iso_sheafification_abelian_single
     {X Y : Scheme.{u}} (h : Y ⟶ X) (q : ℤ)
     (F : Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}) :
