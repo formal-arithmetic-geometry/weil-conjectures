@@ -27,85 +27,75 @@
  ],
  "proof": [
   {
-   "text": "Fix $q\\geq0$ and a geometric point $\\bar y$ of $Y$ whose underlying point $y$ has $b=\\operatorname{trdeg}_K\\kappa(y)>a-q$. By [lem-weil-pbc-affine-morphism-permanence], $f$ is quasi-compact and quasi-separated. Apply [prop-weil-pbc-strict-henselization-stalk-formula] to identify $(R^qf_*F)_{\\bar y}$ with $H^q(T,F_T)$, where $S=\\operatorname{Spec}\\mathcal O^{\\mathrm{sh}}_{Y,\\bar y}$, $T=X\\times_Y S$, and $F_T$ is the inverse image of $F$. It suffices to prove this group zero for each such geometric point, by the definition [def-kun-support].",
+   "text": "Fix a geometric point outside E_(a-q)(Y). Use lem-kun-finite-type-residue-trdeg to write its residue transcendence degree as a natural number b; the complement condition and a >= 0 give a.toNat < b+q, including q=0 and q>a. Choose the compatible affine models over a separably closed field L supplied by lem-kun-strict-local-algebraic-residue-models, with trdeg_K L=b.",
    "uses": [
-    "lem-weil-pbc-affine-morphism-permanence",
-    "prop-weil-pbc-strict-henselization-stalk-formula",
-    "def-kun-support"
+    "lem-kun-finite-type-residue-trdeg",
+    "lem-kun-strict-local-algebraic-residue-models"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0F0X, lemma-interlude-I, stalk calculation using Tag 03Q9"
-   }
+   "elementary": false
   },
   {
-   "text": "Apply [lem-kun-strict-local-algebraic-residue-models] at $\\bar y$. Write $U=\\operatorname{Spec}A$, $X_U=\\operatorname{Spec}B$ (affineness by [lem-weil-pbc-affine-morphism-permanence]), and $V_i=\\operatorname{Spec}C_i$ for its models over the separably closed field $L$, where $\\operatorname{trdeg}_K L=b$. Set $T_i=\\operatorname{Spec}(B\\otimes_A C_i)$ with projection $p_i:T_i\\to X$ and $F_i=p_i^{-1}F$. The algebra $B$ is generated over $A$ by any finite set of its $K$-algebra generators, so each $T_i$ is affine finite type over $L$. All transition maps are affine. The equality $\\varinjlim_i(B\\otimes_A C_i)=B\\otimes_A(\\varinjlim_i C_i)$ follows from the universal property of tensor product and colimit: a map from either side is a compatible family of pairs of maps from $B,C_i$ agreeing on $A$. Thus $T=\\varprojlim_iT_i$, over $X$. This uses no closed embedding into affine space.",
+   "text": "Regard the model diagram over Y by composing its morphisms to U with the open immersion U -> Y. This preserves its cofiltered limit: the forgetful functors from over categories preserve and reflect connected limits. Apply Over.pullback f, a right adjoint, and then forget to schemes. The resulting cone is a limit of T_i=V_i x_Y X. The T_i and their transitions are affine by lem-weil-pbc-affine-morphism-permanence. The morphism f is locally of finite type since its composite to Spec K is; base change and composition make T_i finite type over L. The given cone vertex identification and the pullback universal property identify the limit with X x_Y Y_(s), respecting its projection to X.",
    "uses": [
     "lem-kun-strict-local-algebraic-residue-models",
     "lem-weil-pbc-affine-morphism-permanence"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tags 0F0U and 0F0X, compatible-etale-model approximation; applied directly to an affine morphism"
-   }
+   "elementary": false
   },
   {
-   "text": "For a point $z\\in T_i$ put $x=p_i(z)$, and let $v\\in V_i$ and $u\\in U$ be its other images. The model lemma gives $\\kappa(v)/\\kappa(u)$ algebraic. The fibre of $T_i\\to X_U$ at $x$ is obtained from $V_i$ by extending scalars from $\\kappa(u)$ to $\\kappa(x)$; its residue fields over $v$ are residue fields of $\\kappa(x)\\otimes_{\\kappa(u)}\\kappa(v)$. This tensor product is integral over $\\kappa(x)$, since each element of the algebraic extension $\\kappa(v)$ satisfies a monic polynomial and any finite collection lies in a finite field extension. Its prime quotients are algebraic fields. Hence $\\kappa(z)/\\kappa(x)$ is algebraic. By [lemma-openclosed-stalk-upperstar], a nonzero stalk of $F_i$ maps to a nonzero stalk of $F$; thus such an $x$ has $\\operatorname{trdeg}_K\\kappa(x)\\leq a$. Also $F_i$ is torsion, by the same stalk formula and [lem-weil-pbc-torsion-sheaf-characterizations].",
+   "text": "For z in T_i, the map on residue fields of V_i -> U is algebraic by the model theorem; composing with U -> Y preserves this because open immersions induce residue-field isomorphisms. Apply lem-weil-pbc-fibre-product-point-residue-field. The tensor product of kappa(z_X) and the algebraic extension kappa(z_V) over kappa(y) is integral over kappa(z_X), by stability of integrality under base change. Its prime quotient is an integral domain integral over a field, hence a field. The compatible residue-field isomorphism identifies kappa(z) with this quotient, proving algebraicity over kappa(z_X). The inverse-image stalk comparison gives support(p_i^* F) subset p_i^-1(support F). Torsion pulls back by its stalk characterization.",
    "uses": [
     "lem-kun-strict-local-algebraic-residue-models",
+    "lem-weil-pbc-fibre-product-point-residue-field",
     "lemma-openclosed-stalk-upperstar",
     "lem-weil-pbc-torsion-sheaf-characterizations"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0F0X, lemma-interlude-I, residue-extension and support calculation (using compatible models)"
-   }
+   "elementary": false
   },
   {
-   "text": "For a point $z$ in the support of $F_i$, apply [lem-kun-transcendence-degree-tower] first to $K\\subseteq\\kappa(x)\\subseteq\\kappa(z)$ and then to $K\\subseteq L\\subseteq\\kappa(z)$. The algebraic extension in the previous step has transcendence degree zero, so $b+\\operatorname{trdeg}_L\\kappa(z)=\\operatorname{trdeg}_K\\kappa(z)=\\operatorname{trdeg}_K\\kappa(x)\\leq a$. If $b>a$ no such $z$ exists. In that case all geometric stalks of $F_i$ vanish, and [lemma-weil-pbc-geometric-stalk-conservative] applied to $0\\to F_i$ gives $F_i=0$, so its cohomology is zero in every degree. If $b\\leq a$, the displayed inequality gives $\\operatorname{trdeg}_L\\kappa(z)\\leq a-b$. Apply [lem-kun-affine-support-vanishing] to the affine finite-type $L$-scheme $T_i$ and torsion sheaf $F_i$, with nonnegative bound $c=a-b$. It gives $H^q(T_i,F_i)=0$ whenever $q>a-b$, which is exactly the inequality $b>a-q$ fixed in step 1.",
+   "text": "On the pulled-back support the two compatible field towers give b+trdeg_L kappa(z)=trdeg_K kappa(z_X)<=a.toNat, using lem-kun-transcendence-degree-tower and algebraicity from the preceding step. If b<=a.toNat, cancel the finite cardinal b to get support bound a.toNat-b. Apply lem-kun-affine-support-vanishing, since q>a.toNat-b. If b>a.toNat the support is empty, so the geometric-stalk conservative family makes the sheaf zero, and its cohomology is zero. Use lem-weil-pbc-sheafH-ext-derived-comparison to express both conclusions in Sheaf.H.",
    "uses": [
     "lem-kun-transcendence-degree-tower",
+    "lem-kun-affine-support-vanishing",
     "lemma-weil-pbc-geometric-stalk-conservative",
-    "lem-kun-affine-support-vanishing"
+    "lem-weil-pbc-sheafH-ext-derived-comparison"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0F0X, lemma-interlude-I, vanishing via Tag 0F0W, including the negative support-bound case"
-   }
+   "elementary": false
   },
   {
-   "text": "The sheaves $F_i$ have the canonical pullback transition isomorphisms since all are inverse images of $F$ along the compatible maps to $X$. On $T$ their pullbacks are all $F_T$, so their filtered colimit is $F_T$. All schemes $T_i$ are affine, hence quasi-compact and quasi-separated; the index category is small and cofiltered, and transitions are affine by step 2. Apply [lem-weil-pbc-cofiltered-etale-cohomology-continuity] to get $H^q(T,F_T)=\\varinjlim_iH^q(T_i,F_i)=0$. Step 1 now gives $(R^qf_*F)_{\\bar y}=0$ for every geometric point above every $y$ with $b>a-q$. By [def-kun-support] this is precisely the claimed support containment. This also covers $q=0$, $q>a$, and the empty scheme.",
+   "text": "Apply lem-weil-pbc-cofiltered-etale-cohomology-cocone to the pulled-back model diagram and its natural transformation to X. Every stage cohomology group is zero; hence the entire diagram is zero and its colimit is zero. Its comparison isomorphism gives zero cohomology on the limit. Transport across the vertex isomorphism by cohomology invariance under scheme isomorphisms, the isomorphism case of prop-weil-pbc-universal-homeomorphism-topos, and inverse-image composition. Convert Sheaf.H to derived global sections by lem-weil-pbc-sheafH-ext-derived-comparison. Finally prop-weil-pbc-strict-henselization-stalk-formula identifies this zero group with the chosen geometric stalk. Unfolding def-kun-support proves the asserted containment.",
    "uses": [
-    "lem-weil-pbc-cofiltered-etale-cohomology-continuity",
+    "lem-weil-pbc-cofiltered-etale-cohomology-cocone",
+    "prop-weil-pbc-universal-homeomorphism-topos",
+    "lemma-openclosed-stalk-upperstar",
+    "lem-weil-pbc-sheafH-ext-derived-comparison",
+    "prop-weil-pbc-strict-henselization-stalk-formula",
     "def-kun-support"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0F0X, lemma-interlude-I, final passage to the limit by Tag 09YQ"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-affine-morphism-permanence",
-  "prop-weil-pbc-strict-henselization-stalk-formula",
-  "def-kun-support",
+  "lem-kun-finite-type-residue-trdeg",
   "lem-kun-strict-local-algebraic-residue-models",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-fibre-product-point-residue-field",
   "lemma-openclosed-stalk-upperstar",
   "lem-weil-pbc-torsion-sheaf-characterizations",
   "lem-kun-transcendence-degree-tower",
-  "lemma-weil-pbc-geometric-stalk-conservative",
   "lem-kun-affine-support-vanishing",
-  "lem-weil-pbc-cofiltered-etale-cohomology-continuity"
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "lem-weil-pbc-sheafH-ext-derived-comparison",
+  "lem-weil-pbc-cofiltered-etale-cohomology-cocone",
+  "prop-weil-pbc-universal-homeomorphism-topos",
+  "prop-weil-pbc-strict-henselization-stalk-formula",
+  "def-kun-support"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "worker",
+  "group": "K4",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tag 0F0X, lemma-interlude-I, with the compatible models of the proof of Tag 0F0U and direct treatment of affine f"
+  "place": "Tag 0F0X, lemma-interlude-I, using its strict-local models route directly for affine f; the compatible models are the existing declared dependency. Implemented in Lean using over-category pullback limits, integral tensor residue fields, the transcendence-degree tower, affine support vanishing, fixed-base continuity and the strict-henselization stalk formula."
  },
  "mathlib_searches": [
   {
@@ -234,8 +224,7 @@
   "prop-weil-pbc-strict-henselization-stalk-formula",
   "lemma-openclosed-stalk-upperstar",
   "lem-weil-pbc-torsion-sheaf-characterizations",
-  "lemma-weil-pbc-geometric-stalk-conservative",
-  "lem-weil-pbc-cofiltered-etale-cohomology-continuity"
+  "lemma-weil-pbc-geometric-stalk-conservative"
  ],
  "reviewed": {
   "date": "2026-10-14",
@@ -262,5 +251,15 @@
   "group": "NY",
   "result": "pass",
   "note": "Verified immutable files, source and all statement dependencies, exact signature, edge cases, report sections, and maintainer gates. Server-only scompile passed in 2.7 seconds. No repository or branch changes."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K4",
+  "result": "pass",
+  "landing": "20261018T071200-L-1670964",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
