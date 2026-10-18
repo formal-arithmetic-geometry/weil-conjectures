@@ -10,7 +10,8 @@
  "stmt_deps": [
   "def-trf-fs-log-blowup",
   "def-per-fs-log-smooth-etale",
-  "def-weil-pbc-geometric-stalks"
+  "def-weil-pbc-geometric-stalks",
+  "def-per-log-differential-stalk"
  ],
  "proof": [
   {
@@ -169,5 +170,23 @@
   "group": "Q52",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q52-bce661d10 (reviewer sub-agent of L); spot-checked: I read ILO XVI Prop. 3.6.3, printed p.252 (PDF p.258). The proof of Kato's Thm 3.5 there picks t_i in M_x̄ so that the dlog t_i form a basis of ω¹_{X/Y,x̄}. This item states the finite-freeness input to that choice (Kato Prop. 3.10; Kato is absent locally, so proof_origin=agent with a WANTED entry). The statement is true. Small cases checked: X = A¹ with trivial log structures gives s=1; the identity log morphism gives s=0; the toric chart N gives dt = t·dlog t; empty X is vacuous. Using M rather than M^gp makes no difference. Step 1 cites the existing unsplit node lem-per-log-smooth-infinitesimal-calculus. It is in the same unit and has the same hypotheses (locally Noetherian fs, chart log smoothness) and the same six relations. Its 'finite locally free, étale locally ≅ O_X^s' clause is exactly what the step uses. That node is strictly larger (it adds local finite presentation, lifts and the derivation torsor), so this is C5 reuse, not D1/D2. It has no proof_deps; its citers are only the kato-lattice node and this item, and this item is cited only by the generators node, so there is no cycle. Advisory: the future split of infinitesimal-calculus must not cite this item or the generators node. Lifting x̄ to the étale chart piece is elementary. Steps 2 and 3 compare the presented stalk module with W_x̄ through def-weil-pbc-geometric-stalks, the cofilteredness lemma and the sheafification-stalk bijection, all three Mathlib leaves. Each says what is used. Finite sums and finite relation witnesses commute with filtered colimits. The base relations go through the stalks at f(x̄), giving R and N_{f(x̄)}. Finite products of stalks are compared coordinatewise, and s=0 is handled. These steps are elementary. The two lem-weil-pbc-* tool_uses are generic Mathlib-leaf infrastructure, accepted. There are no new nodes, no statement change and no SGA. from.place was checked against the PDF. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.LogSmoothDifferentialLocalFreeness",
+  "declaration": "AlgebraicGeometry.EtaleLogHom.exists_logDifferential_linearEquiv",
+  "file": "lean/Sheaf/AlgebraicGeometry/LogSmoothDifferentialLocalFreeness.lean",
+  "statement": "theorem EtaleLogHom.exists_logDifferential_linearEquiv {X Y : FineSaturatedLogScheme.{u}} (f : EtaleLogHom X Y) (hf : f.IsLogSmooth) {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (t : Spec (.of Ω) ⟶ X.scheme) : ∃ s : ℕ, Nonempty (f.LogDifferential t ≃ₗ[strictLocalRing X.scheme t] (Fin s → strictLocalRing X.scheme t))",
+  "branch": "newtargets-dag",
+  "by": "Q20",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7bf5d28d9",
+  "group": "Q20",
+  "result": "pass",
+  "note": "The node changes only by adding its lean record and the landed definition def-per-log-differential-stalk to stmt_deps. Each clause matches: FineSaturatedLogScheme for locally Noetherian fs, IsLogSmooth for chart smoothness, any algebraically closed Ω geometric point, strictLocalRing as A, the landed LogDifferential quotient with all six relation families (base ones over all relative pointed étale neighbourhoods), and ∃ s, Nonempty (ω ≃ₗ[A] Fin s → A) with s = 0 allowed. The statement is true (Kato Prop. 3.10 at the stalk). Edge cases (identity, empty X, trivial log, toric) are fine. Not a duplicate: exists_logDifferential_generators is stronger, needs a global chart and cites this node. Docstrings and proof steps are present, the proof is sorry only, and the recorded statement matches the file verbatim. nt_compile --json on the snapshot: exit 0, 2.5 s, clean. Advisory only: the PointedEtaleStalk and Skyscraper imports are proof-plan imports not needed for the statement."
  }
 }

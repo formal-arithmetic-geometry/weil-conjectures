@@ -243,5 +243,23 @@
   "group": "Q59",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q59-7d0742d1d (reviewer sub-agent of L); spot-checked: Read ILO II Prop. 2.2.3 (printed p.27, PDF p.33). Its hypotheses are f locally of finite type and X Noetherian; the item states it faithfully and is not weakened. The proof follows the source: affine charts U=Spec A and V=Spec B at x and y; the field-valued lift t=j_y∘Spec(r^{-1}); then a common denominator d of ψ(b_i) in R=A/p. β=ι^{-1}ψ is well defined because ι:R[1/d]→Frac R is injective, so no relation lifting is needed; finite type suffices. Then Z=Spec R[1/d]→Spec A[1/a]→U→X is an immersion, and x∈j(Z) via j_x. The converse is the field-retraction argument with the closed and open residue isomorphisms. Every cited statement was read and says what its step takes from it. Edge cases checked: m=0, closed x, non-locally-closed generic point, nonreduced base, non-separated Y. The parent 2.2.4 use (étale u_i) is consistent. The declared tool_use lem-weil-pbc-closed-immersion-residue-field-iso (sk-thm-p1) is accepted as a generic black box. No new nodes, and no duplicate found in dag/nodes. One fault, C1/C4 in Step 3: the step took 'Spec of a surjection is a closed immersion' from the definition's affine-open criterion alone. FIX: Spec q is now factored through A[1/a]/ker q ≅ D and the step cites the Mathlib leaf lem-weil-pbc-spec-quotient-closed-immersion; uses and proof_deps are updated. Statement unchanged.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RationalLiftLocallyClosedSection",
+  "declaration": "AlgebraicGeometry.rationalLift_iff_locallyClosed_section",
+  "file": "lean/Sheaf/AlgebraicGeometry/RationalLiftLocallyClosedSection.lean",
+  "statement": "theorem rationalLift_iff_locallyClosed_section {X Y : Scheme.{u}} [IsNoetherian X] (f : Y ⟶ X) [LocallyOfFiniteType f] (x : X) : (∃ y : Y, f y = x ∧ IsIso (f.residueFieldMap y)) ↔ ∃ (Z : Scheme.{u}) (j : Z ⟶ X), IsImmersion j ∧ x ∈ Set.range j ∧ ∃ s : Z ⟶ Y, s ≫ f = j",
+  "branch": "newtargets-dag",
+  "by": "N5",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6e9879077",
+  "group": "N5",
+  "result": "pass",
+  "note": "Clause-by-clause match with the node and ILO II 2.2.3: [IsNoetherian X] = finite affine Noetherian cover; [LocallyOfFiniteType f], no qc/separation; IsIso (f.residueFieldMap y) is the induced map; IsImmersion j ∧ x ∈ range j ∧ ∃ s, s ≫ f = j matches the immersion definition in def-weil-closed-immersion (isImmersion_iff_exists). Edge cases (empty X/Y, closed and non-locally-closed points, nonreduced X, identity f, universe u) are fine. Only the item's lean field was added; the 5 stmt_dep records are identical to live; lean.statement is verbatim in the file; no duplicate in Mathlib or live Sheaf; docstrings carry the source place, blueprint tag and 5 proof steps; one sorry. nt_compile --json: clean, 2.2 s, exit 0. Advisory only: unused proof-only imports kept for stage 3."
  }
 }

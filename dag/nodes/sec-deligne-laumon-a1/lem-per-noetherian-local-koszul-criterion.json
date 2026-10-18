@@ -184,5 +184,23 @@
   "group": "Q101",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q101-9f67b45b2 (reviewer sub-agent of L); spot-checked: I read the item, the new node and both cited statements in full, plus the sources: Stacks 09CC (more-algebra l.7444-7470), the Koszul/H1-regular definition (l.7217), 062I with its full proof (l.7360ff), and Algebra 061N/061P/061S (l.16865/16878/17060). The item statement is unchanged and is 09CC (2)=>(1) with M=R. Step 1 is genuinely elementary: the empty sequence is regular because R is nonzero, and H_1=0 is the case i=1 of the hypothesis. Step 2 cites the new node, which is 062I with M=R written as the canonical map B[T] -> gr_I(R), T_j -> [f_j]_1; this map is the M=R case of 061N. Step 3 cites lem-pur-quasi-regular-noetherian-local (061S); it needs a nonzero Noetherian local ring, f_j in m and the same canonical isomorphism, and the item supplies all three. The step uses its statement only, and the closure of both cited nodes does not contain the item, so there is no cycle. I tested the new node on small cases. It holds for r=0, the zero ring, the unit ideal (1) and a nonzerodivisor t. For (0) over a field and for eps in k[eps]/(eps^2) the H_1 hypothesis fails, as it must. The node is strictly smaller than the item and does not restate it. It is statement-only, self-contained and cites its definitions. Its blueprint from.node matches the ancestor tool, and the blueprint search for quasi-regular found nothing. Mathlib's RegularSequence.lean:21 lists Koszul/H1/quasi-regular sequences as TODO. The DAG candidates for 062I/quasi-regular/Koszul are a definition only, degree-one conormal results, a prefix-quotient lemma and cotangent results; none is a duplicate. I accept the tool_use lem-pur-quasi-regular-noetherian-local: a generic commutative-algebra criterion from another unit, used as a black box exactly as 09CC uses it. The worker wrote that entry themselves, but it is correct as a record. There is no SGA citation. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.NoetherianLocalKoszulCriterion",
+  "declaration": "RingTheory.Sequence.isRegular_of_koszul_homology_vanishing",
+  "file": "lean/Sheaf/RingTheory/NoetherianLocalKoszulCriterion.lean",
+  "statement": "theorem isRegular_of_koszul_homology_vanishing (R : Type u) [CommRing R] [IsLocalRing R] [IsNoetherianRing R] (r : ℕ) (f : Fin r → R) (hf : ∀ j : Fin r, f j ∈ IsLocalRing.maximalIdeal R) (hK : ∀ i : ℕ, 0 < i → CategoryTheory.Limits.IsZero ((ExteriorAlgebra.koszulComplex R r f).homology i)) : RingTheory.Sequence.IsRegular R (List.ofFn f)",
+  "branch": "newtargets-dag",
+  "by": "Q74",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-31e1b2789",
+  "group": "Q74",
+  "result": "pass",
+  "note": "Clause-by-clause match with the node and Stacks 09CC (2)=>(1), M=R: nonzero commutative Noetherian local ring via [IsLocalRing][IsNoetherianRing]; r:ℕ includes the empty sequence; hf is maximal-ideal membership; hK is IsZero of koszulComplex homology for every i>0 (ChainComplex ℕ, homology i = H_i, degree 0 unrestricted); conclusion is the full IsRegular (weakly regular plus nonzero final quotient). No extra assumptions or universe restriction; lean.statement verbatim; node copy differs from live only in lean. Edge cases checked: r=0, fields, nilpotents, units excluded by hf. No definitions, proof is sorry, docstrings give source place and blueprint plus the 3 proof steps. No existing Mathlib or project result. nt_compile --json clean in 1.9 s; broken control copy fails. Advisory: ExteriorAlgebra.koszulComplex is declared both upstream (recorded) and in side Sheaf.Paper.KoszulComplex (39 importers), so a later proof importing both trees would clash; the copies should be unified."
  }
 }

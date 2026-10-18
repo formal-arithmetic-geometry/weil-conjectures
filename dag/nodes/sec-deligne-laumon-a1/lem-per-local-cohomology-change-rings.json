@@ -8,7 +8,8 @@
   "place": "Tag 0DXA (lemma-cd-change-rings), the inequality, restricted to Noetherian source and target rings so that local cohomology is also the right-derived ideal-torsion functor."
  },
  "stmt_deps": [
-  "def-weil-pbc-noetherian-ring"
+  "def-weil-pbc-noetherian-ring",
+  "def-per-local-cohomological-dimension"
  ],
  "proof": [
   {
@@ -171,5 +172,23 @@
   "group": "Q54",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q54-283913996 (reviewer sub-agent of L); spot-checked: Read the item, the new node lem-per-ideal-torsion-cech-computation, every cited statement, Stacks 0DXA (local-cohomology.tex lemma-cd-change-rings), 0BJB, 0ALZ and 0956 (dualizing.tex), and Mathlib LocalCohomology.lean lines 40-47. The item's statement and stmt_deps are byte-identical to the pre-delivery copy, so no target was changed or weakened. Step 1 picks generators by Noetherianity, and their images generate IB. Step 2 applies 0956 over A to the restricted module N_A (the node allows modules that are not finitely generated) and over B to N. It also shows the least q in the cd definition exists. Step 3 is the alternative proof of 0BJB written out: (N_A)_{t_S} = (N_{u_S})_A, because the fraction equality test is the same condition in both. The faces and signs agree, so the two cochain complexes are isomorphic after restriction of scalars. No flatness and no derived base change is used. Step 4 follows from the cd definition and covers q=-1, r=0 and zero rings. proof_deps equals the union of the uses. There is no route departure, no tool_use and no SGA. The new node is a self-contained, statement-only form of 0956 with the correct tag and label. It cites the Noetherian and torsion-functor definitions (n>=1 versus n in N makes no difference) and has all three kinds of search recorded. Mathlib lists the Cech description of local cohomology as future work, so the node is not a Mathlib leaf. I tested it on r=0, t=1, t=0 and k[x] with ideal (x) (H^1 = k[x,1/x]/k[x]), and checked that d1 composed with d0 is zero. It does not duplicate lem-sbc-local-cohomology-derived-torsion (an Ext colimit), lem-sbc-punctured-h-one-derived-torsion, lem-per-local-cohomology-generator-bound or the pbc/pc Cech nodes, and the blueprint has no local-cohomology node. Advisory: the item defines Gamma and cd inline instead of citing def-sbc-ideal-power-torsion-functor or def-per-local-cohomological-dimension. The inline definitions agree with those nodes, and the statement was unchanged from base, so I made no edit. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.LocalCohomologicalDimensionChangeRings",
+  "declaration": "ModuleCat.localCohomologicalDimension_map_le",
+  "file": "lean/Sheaf/Algebra/Homology/LocalCohomologicalDimensionChangeRings.lean",
+  "statement": "theorem localCohomologicalDimension_map_le {A : Type u} {B : Type v} [CommRing A] [CommRing B] [IsNoetherianRing A] [IsNoetherianRing B] (f : A →+* B) (I : Ideal A) : localCohomologicalDimension (I.map f) ≤ localCohomologicalDimension I",
+  "branch": "newtargets-dag",
+  "by": "Q36",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7ffe03bca",
+  "group": "Q36",
+  "result": "pass",
+  "note": "Lean matches the node clause by clause: commutative Noetherian A : Type u and B : Type v with independent universes, an arbitrary f : A →+* B with no flatness or algebra hypothesis, I : Ideal A, IB = I.map f (span of f '' I), conclusion localCohomologicalDimension (I.map f) ≤ localCohomologicalDimension I. Source is Stacks 0DXA, restricted to Noetherian rings as the node's source place says. cd reuses the landed def-per-local-cohomological-dimension (sSup over degrees where the rightDerived of idealPowerTorsion is nonzero, ⊥ = −1), not an inline redefinition. The item changes only lean and stmt_deps; the added stmt_dep is that landed node, which brief-stage2 l.140 allows; statement, proof and proof_deps are unchanged; lean.statement is verbatim from the file. Both dep records are identical to live and no dep module is delivered. Docstrings carry 0DXA/0BJB/0956, the blueprint id and the four proof steps; sorry only; no duplicate declaration in live, side or runs/2. Edge cases I = A, I = 0, zero rings and distinct universes are allowed. nt_compile --json is clean (2.2 s), and an ill-typed control copy errors as expected. No findings, no fixes."
  }
 }

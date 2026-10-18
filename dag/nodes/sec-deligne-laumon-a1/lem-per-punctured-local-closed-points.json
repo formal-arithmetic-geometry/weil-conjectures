@@ -205,5 +205,23 @@
   "group": "Q29",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q29-44229feea (reviewer sub-agent of L); spot-checked: Read Stacks 02IG (algebra.tex:14739-65), 02IM direct proof of (1) (properties.tex:818-58) and 02J6(4). The item statement is correct and unchanged; it is the locally-closed form of Jacobsonness of the punctured spectrum of a Noetherian local ring. Checked the six steps against the cited statements. Step 1: X is a Noetherian T0 space (radical chain plus finite generation). Step 2: W is compact, and 005E applied to W gives a point closed in W. Step 3: U is open, and {w}=O∩V(p), so {p} is open in V(p). Step 4: p⊊q⊊m, and A/p is a Noetherian local domain (quotient-local node with p⊆m). Step 5: the homeomorphism Spec B≅V(p) and a strict irreducible chain give dim≥2, and {(0)} is open. Step 6: this contradicts 02IG. Every other citation is a Mathlib leaf, so there is no route or tool_use issue. The new node lem-per-noetherian-local-domain-open-infinite states 02IG faithfully with all hypotheses. It is statement-only and self-contained, strictly smaller than the item, and has three recorded search kinds and correct blueprint.from. DVR shows the dim≥2 bound is necessary. No duplicate: rg over the DAG for 02IG/02IM/02J6/Jacobson/open-singleton/infinitely-many-primes, the main-20261015 blueprint and Mathlib (Spectrum/Prime/Jacobson.lean) found none. The parent prime-avoidance-slice uses the item exactly as stated. No cycle, no SGA source. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.PuncturedLocalClosedPoints",
+  "declaration": "PrimeSpectrum.exists_isClosed_singleton_of_isLocallyClosed_punctured",
+  "file": "lean/Sheaf/RingTheory/PuncturedLocalClosedPoints.lean",
+  "statement": "theorem exists_isClosed_singleton_of_isLocallyClosed_punctured (A : Type u) [CommRing A] [IsNoetherianRing A] [IsLocalRing A] (W : Set {x : AlgebraicGeometry.Spec (.of A) // x ≠ IsLocalRing.closedPoint A}) (hWnonempty : W.Nonempty) (hWlocallyClosed : IsLocallyClosed W) : ∃ w ∈ W, IsClosed ({w} : Set {x : AlgebraicGeometry.Spec (.of A) // x ≠ IsLocalRing.closedPoint A})",
+  "branch": "newtargets-dag",
+  "by": "N3",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-35e1ae54b",
+  "group": "N3",
+  "result": "pass",
+  "note": "Statement matches node clause by clause: IsNoetherianRing + IsLocalRing (gives nonzero) on A : Type u; U = subtype of Spec (.of A) minus closedPoint; W : Set U, Nonempty, IsLocallyClosed on U; conclusion ∃ w ∈ W with {w} closed in U. Matches Stacks 02J6(4)/02IM(1) via the 005U Jacobson characterization. lean.statement verbatim in file; no statement_change, no new nodes, no dep repairs. Edge cases: field/Artinian vacuous, DVR closed in U not X, no universe restriction. No Mathlib/side duplicate (JacobsonSpace results assume a Jacobson ring). Docstrings carry source place, blueprint tag and 6 proof steps; proof is sorry only. nt_compile --json: clean, exit 0, 2.3 s. No findings."
  }
 }

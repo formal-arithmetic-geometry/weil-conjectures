@@ -227,5 +227,23 @@
   "group": "NB",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NB-045cee9c8 (reviewer sub-agent of L); spot-checked: I read the item in full against Stacks simplicial.tex 016B(2),(3) (l.217-251), remark-relations (l.253-265) and 0167/0168. The statement is unchanged and its 'whenever defined' convention gives exactly Stacks' index ranges, checked for (a),(b),(d),(e). D is an arbitrary category, as in Stacks. Step 1: I reversed each of the six relations of P (two identities kept separate; they agree with Mathlib GeneratorsRelations/Basic.lean:54-69 up to reindexing), and each gives exactly one of the hypotheses. Descent through the generated congruence is written out. Step 2: W = 'has a J-preimage' is multiplicative and contains δ,σ. The generator lemma (morphismProperty_eq_top, MorphismProperty.lean:74-87) gives fullness and the faithful node gives unique lifts; both are used only through their statements. Steps 3-6 (functor laws, strict uniqueness via the equaliser property, naturality closure with endpoints m,n,r checked, converse by definition) are correct. Edge cases: degree 0 (d_0s_0=d_1s_0=1), maps to and from [0], empty words, and the constant object used by the citer lem-trf-comonad-simplicial-object step 8. Duplicate search (016B, characterize-simplicial, face-degeneracy-category, unique simplicial object, simplex-presentation) found nothing beyond the parent and the faithfulness-only node. There are no new nodes, no restated clauses and no cycle. Accepted tool use: lem-sc-module-cup-godement-simplex-presentation-faithful, a generic combinatorial fact about Δ with no presentation theorem in unit sk-i-curve-zero. No SGA citation; blueprint fields are inherited and correct. No repairs."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SimplicialOperatorsReconstruction",
+  "declaration": "CategoryTheory.simplicialObject_reconstruction",
+  "file": "lean/Sheaf/CategoryTheory/SimplicialOperatorsReconstruction.lean",
+  "statement": "theorem simplicialObject_reconstruction {D : Type u} [Category.{v} D] : (∀ (U : ℕ → D) (d : ∀ n : ℕ, Fin (n + 2) → (U (n + 1) ⟶ U n)) (s : ∀ n : ℕ, Fin (n + 1) → (U n ⟶ U (n + 1))), (∀ (n : ℕ) (i j : Fin (n + 2)), i ≤ j → d (n + 1) j.succ ≫ d n i = d (n + 1) i.castSucc ≫ d n j) → (∀ (n : ℕ) (i : Fin (n + 2)) (j : Fin (n + 1)), i ≤ j.castSucc → s (n + 1) j.succ ≫ d (n + 1) i.castSucc = d n i ≫ s n j) → (∀ (n : ℕ) (j : Fin (n + 1)), s n j ≫ d n j.castSucc = 𝟙 (U n)) → (∀ (n : ℕ) (j : Fin (n + 1)), s n j ≫ d n j.succ = 𝟙 (U n)) → (∀ (n : ℕ) (i : Fin (n + 2)) (j : Fin (n + 1)), j.castSucc < i → s (n + 1) j.castSucc ≫ d (n + 1) i.succ = d n i ≫ s n j) → (∀ (n : ℕ) (i j : Fin (n + 1)), i ≤ j → s n j ≫ s (n + 1) i.castSucc = s n i ≫ s (n + 1) j.succ) → ∃! X : SimplicialObject D, ∃ h : ∀ n : ℕ, X _⦋n⦌ = U n, (∀ (n : ℕ) (i : Fin (n + 2)), eqToHom (h (n + 1)).symm ≫ X.δ i ≫ eqToHom (h n) = d n i) ∧ (∀ (n : ℕ) (i : Fin (n + 1)), eqToHom (h n).symm ≫ X.σ i ≫ eqToHom (h (n + 1)) = s n i)) ∧ (∀ (X Y : SimplicialObject D) (f : ∀ n : ℕ, X _⦋n⦌ ⟶ Y _⦋n⦌), (∃ φ : X ⟶ Y, ∀ n : ℕ, φ.app (op (SimplexCategory.mk n)) = f n) ↔ (∀ (n : ℕ) (i : Fin (n + 2)), X.δ i ≫ f n = f (n + 1) ≫ Y.δ i) ∧ (∀ (n : ℕ) (i : Fin (n + 1)), X.σ i ≫ f (n + 1) = f n ≫ Y.σ i))",
+  "branch": "newtargets-dag",
+  "by": "Q29",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-16c6ec6a4",
+  "group": "Q29",
+  "result": "pass",
+  "note": "Single module Sheaf.CategoryTheory.SimplicialOperatorsReconstruction (theorem simplicialObject_reconstruction, sorry). The only node change is the lean field; the statement matches the file verbatim. Five relations (a)-(e) with both (c) identities checked against Stacks 016B (simplicial.tex l.218-251) and Mathlib δ_comp_δ/δ_comp_σ_of_le/self/succ/of_gt/σ_comp_σ: orientation and index ranges exact. ∃! strict reconstruction with transported δ/σ equalities; morphism clause is a full iff with all faces and degeneracies. Arbitrary category, independent universes, no extra instances. Edge cases degree 0/1 and equal/boundary indices OK. Only stmt_dep is the Mathlib SimplicialObject record. No duplicate in Mathlib GeneratorsRelations or side Sheaf/CategoryTheory. Docstrings carry source and blueprint id plus the 6 proof steps. nt_compile --json clean (1.6 s, exit 0); broken control copy fails. No findings."
  }
 }

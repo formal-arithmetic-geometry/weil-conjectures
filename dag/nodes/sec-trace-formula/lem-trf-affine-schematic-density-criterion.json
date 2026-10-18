@@ -10,7 +10,8 @@
  "stmt_deps": [
   "def-weil-affine-spectrum",
   "def-weil-ring-localization-away",
-  "def-weil-open-immersion"
+  "def-weil-open-immersion",
+  "def-trf-schematically-dense-open"
  ],
  "proof": [
   {
@@ -216,5 +217,23 @@
   "group": "Q27",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q27-dcadbdfeb (reviewer sub-agent of L); spot-checked: I read the full item (statement, 5 steps, dependencies, blueprint, split_report) and the statements of all five cited nodes. The statement is unchanged and matches its sources: Stacks Tag 0565 (algebra.tex:4405, applied to M=A), Tag 056C and Tag 01RE (morphisms.tex). It has no extra hypothesis, and the finite direct sum is the same as the finite product in 056C. Steps 1-2 follow 0565 exactly. The power-annihilator test comes from the fraction relation of def-weil-ring-localization-away. Step 2 is a properly set-up strong induction on the excess sum E=sum(e_i-1): both recursive calls strictly decrease E, and n=0 is the base case. Step 3 identifies O(X)=A and O(D(f_i))=A_{f_i} through restriction (section-vanishing clause (b), and (a) for the prime description of D(f_i)), so ker(A->O(U))=ker(lambda). This gives sheaf injectivity => lambda injective. Step 4 is an elementary few-line calculation: injectivity of mu passes to every A_g by taking the maximum exponent. Step 5 identifies D(g) intersect D(f_i) as the principal open of f_i/1 in D(g)=Spec A_g with ring (A_g)_{f_i/1}, then uses the basis lemma (i) and the sheaf axiom to get injectivity of O_X -> j_*O_U on every open; only principal opens of one affine scheme are involved. Together the steps prove all directions. All cited nodes are definitions or Mathlib leaves, so the unit route is fine and the declared tool_use is harmless and accepted. Small cases checked: n=0 (all three conditions hold exactly when A=0); k[e]/(e^2) with f=e (all fail); k[x,y]/(xy) with (x,y) (all hold with no individual nonzerodivisor); k[t] with f=t (all hold, so this is not the unit-ideal cover criterion). Duplicate search (0565, 056C, 01RE, scheme-theoretic density): only the parent lem-trf-schematic-density-generic-fibre-open cites it, and the parent uses the item as stated. The other candidates are the n=1 nonzerodivisor node and the Nagata definition, so there is no duplicate. No new nodes and no SGA. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineSchematicDensityCriterion",
+  "declaration": "AlgebraicGeometry.affine_schematic_density_criterion",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineSchematicDensityCriterion.lean",
+  "statement": "theorem affine_schematic_density_criterion (A : Type u) [CommRing A] (n : ℕ) (f : Fin n → A) : (Function.Injective (fun a : A ↦ fun i : Fin n ↦ algebraMap A (Localization.Away (f i)) a) ↔ Function.Injective (fun a : A ↦ fun i : Fin n ↦ f i * a)) ∧ (Function.Injective (fun a : A ↦ fun i : Fin n ↦ algebraMap A (Localization.Away (f i)) a) ↔ SchematicallyDenseOpen (Z := Spec (.of A)) (⨆ i : Fin n, PrimeSpectrum.basicOpen (f i)))",
+  "branch": "newtargets-dag",
+  "by": "Q27",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7e8d9c35e",
+  "group": "Q27",
+  "result": "pass",
+  "note": "Snapshot vs side: only the item node (lean record; stmt_deps gains the landed def-trf-schematically-dense-open, allowed under 'STMT_DEPS MAY GAIN LANDED NODES') and the new module Sheaf/AlgebraicGeometry/AffineSchematicDensityCriterion.lean. Lean matches the node clause by clause (Stacks 0565 with M=A, 056C/01RE): A : Type u CommRing with no Nontrivial assumption; f : Fin n → A with n=0 allowed; localization tuple via algebraMap into Localization.Away; multiplication tuple f i * a; (λ inj ↔ μ inj) ∧ (λ inj ↔ SchematicallyDenseOpen (Z := Spec (.of A)) (⨆ basicOpen (f i))). The landed def is ∀ W, injectivity of restriction W → W⊓U, i.e. O_X → j_*O_U injective. No extra hypothesis. Edge cases checked: n=0 (all three conditions ⇔ A=0), A=0, k[ε]/ε², Z/6 with (2,3), k[t] with t. No duplicate found in Mathlib or side lean/Sheaf. Docstrings carry the source place, the blueprint id and steps 1-5; proof is sorry only; lean.statement verbatim; lines ≤100. nt_compile --json exit 0 in 2.2 s with no warnings; a deliberately broken copy fails with a type error. Report has both sections; the second reading is by the same worker but matches each binder and map concretely. Advisory: unused plain imports ResidueField and Prime.Topology (H9, non-blocking)."
  }
 }
