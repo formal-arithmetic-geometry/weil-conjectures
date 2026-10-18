@@ -27,159 +27,43 @@
  ],
  "proof": [
   {
-   "text": "Let $G$ be a constructible etale $B$-module sheaf, with its finite global partition $i_k:S_k\\to T$. By [lem-weil-pbc-finite-locally-constant-module-values], its finite constant values give locally constant restrictions with finite stalks. The isomorphism $i_{k,\\mathrm{proet}}^*\\nu_T^*G\\cong\\nu_{S_k}^*i_{k,\\mathrm{Et}}^*G$ of [lem-weil-pbc-comparison-pullback] and clause (a) of [lem-sf-proetale-locally-constant-origin] show that each restriction of $\\nu_T^*G$ is lisse. The same partition, with the same subscheme structures, therefore witnesses intrinsic constructibility. No affine-local-to-global constructibility criterion is used.",
+   "text": "Restrict intrinsic modules to their constant scalars using [lem-weil-pbc-proetale-constant-module-encoding]. Identify the intrinsic and fixed-module pro-etale constructibility predicates by [lem-weil-pbc-proetale-constant-module-constructibility], and identify the etale constructibility predicates by lem-weil-pbc-constructible-etale-module-sheaf-comparison. The original positive global finite partitions and canonical tensor pullbacks are retained.",
    "uses": [
+    "lem-weil-pbc-proetale-constant-module-encoding",
+    "lem-weil-pbc-proetale-constant-module-constructibility",
+    "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
     "def-weil-pbc-etale-constructible-sheaf",
-    "lem-weil-pbc-finite-locally-constant-module-values",
-    "lem-weil-pbc-comparison-pullback",
-    "lem-sf-proetale-locally-constant-origin",
     "def-weil-proetale-constructible-sheaf"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09AK, lemma-compare-constructible, first two sentences of proof; Tag 099Y, lemma-compare-locally-constant"
-   }
+   "elementary": false
   },
   {
-   "text": "Write $F_T=\\nu_T^*$ and $R_T=\\nu_{T,*}$. The unit $\\eta_G:G\\to R_TF_TG$ is invertible for every etale $B$-module sheaf by [prop-weil-pbc-site-comparison-finite-level]. The adjunction [def-weil-pbc-site-comparison-morphism] identifies $\\operatorname{Hom}(F_TG,F_TH)$ with $\\operatorname{Hom}(G,R_TF_TH)$, and postcomposition with $\\eta_H^{-1}$ identifies the latter with $\\operatorname{Hom}(G,H)$. Thus $F_T$ is fully faithful on all module sheaves. Call a pro-etale sheaf classical if it is isomorphic to $F_TG$ for some etale sheaf. It is classical exactly when its counit $\\epsilon_P:F_TR_TP\\to P$ is invertible: one implication takes $G=R_TP$, and the other uses naturality and the triangle identity $\\epsilon_{F_TG}\\circ F_T\\eta_G=1$. In particular fully faithful $F_T$ lifts an isomorphism between two of its images uniquely, together with the inverse. Coefficients: the sheaves of $B_T$-modules on $T_{\\mathrm{proet}}$ of [def-weil-pbc-proetale-site] are the module sheaves over $\\Lambda_{T,\\Proet}$ of [def-weil-pbc-proetale-modules] with $\\Lambda=B$, used by the theorems cited in steps 3, 4 and 7. Indeed the ring map from the constant presheaf $U\\mapsto B$ to $U\\mapsto\\operatorname{Cont}(\\pi_0(|U|),B)$ sending $b$ to the constant function is injective for $U\\neq\\emptyset$; it is locally surjective, because a continuous function to the finite discrete $B$ is constant on the finitely many clopen open subschemes where it takes each value, which cover $U$. Hence both sheafifications agree, compatibly with the constant sections.",
+   "text": "Compose etale comparison pullback with the inverse encoding equivalence and restrict to the constructible full subcategories. The fixed-module constructible-origin theorem supplies essential surjectivity. Full faithfulness of comparison pullback, from its invertible unit, and of the encoding equivalence supplies full faithfulness. Hence this restricted functor is an equivalence.",
    "uses": [
-    "prop-weil-pbc-site-comparison-finite-level",
-    "def-weil-pbc-site-comparison-morphism",
-    "def-weil-pbc-proetale-modules"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 099T, lemma-fully-faithful; formal adjunction argument"
-   }
-  },
-  {
-   "text": "Being classical is Zariski-local. For an open immersion $v:V\\to T$, restriction of a pro-etale sheaf is evaluation on objects over $V$, by [lem-weil-proetale-weakly-etale-localization]. The explicit direct-image formula in [def-weil-pbc-site-comparison-morphism] consequently gives $(R_TP)|_V=R_V(P|_V)$: both evaluate to $P(W)$ for etale $W\\to V$. Together with [lem-weil-pbc-comparison-pullback], this identifies $\\epsilon_P|_V$ with $\\epsilon_{P|_V}$, since the evaluation counit and its adjoint restriction are the same maps. If $P$ is classical on an open cover, these restricted counits are invertible by step 2. The open family is a pro-etale cover: its pullbacks cover each affine object, and quasi-compactness of that object supplies a finite subcover by quasi-compact affine opens. Locality for covering families, clause (1) of [lem-cbc-proetale-stalk-conservative], then makes $\\epsilon_P$ invertible globally. Only covering locality is used, never conservativity of geometric stalks on arbitrary pro-etale sheaves.",
-   "uses": [
-    "lem-weil-proetale-weakly-etale-localization",
-    "def-weil-pbc-site-comparison-morphism",
-    "lem-weil-pbc-comparison-pullback",
-    "lem-cbc-proetale-stalk-conservative"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09AK, lemma-compare-constructible, local reduction; comparison counit on open localizations"
-   }
-  },
-  {
-   "text": "Classical $B$-module sheaves are closed under extensions. For $0\\to F_TG'\\to P\\to F_TG''\\to0$, [lem-sf-derived-ses-triangle] gives a distinguished triangle with boundary $\\delta:F_TG''[0]\\to F_TG'[0][1]$. Exactness of $F_T$ follows from [prop-weil-pbc-site-comparison-finite-level]; [lem-sf-exact-functor-derived-triangulated] makes its termwise derived functor triangulated. Full faithfulness on $D^+$ in [thm-weil-pbc-site-comparison] lifts $\\delta$ to $\\varphi:G''[0]\\to G'[0][1]$. By TR1 and inverse rotation TR2 in [def-weil-triangulated-category], complete it in the unbounded derived category to a triangle $G'[0]\\to H\\to G''[0]\\xrightarrow{\\varphi}G'[0][1]$. The long exact sequence [lem-sf-derived-homology-long-exact] gives $H^q(H)=0$ for $q\\ne0$. Thus [lem-sf-derived-concentrated-single] identifies $H\\cong G[0]$, where $G=H^0(H)$; in particular $H$ is bounded below. The image triangle and the extension triangle have the same boundary $\\delta$. Rotate both twice to start with $\\delta$; TR3 supplies a triangle morphism with identity first two components. By [lem-sf-triangle-morphism-iso] the third component is invertible, yielding $F_TH\\cong P[0]$. Take $H^0$ to obtain $F_TG\\cong P$. Exactness identifies $H^0(F_TG[0])=F_TG$ by preservation of the kernel and image defining cohomology. No constructibility of $G$ has been asserted.",
-   "uses": [
-    "lem-sf-derived-ses-triangle",
-    "prop-weil-pbc-site-comparison-finite-level",
-    "lem-sf-exact-functor-derived-triangulated",
-    "thm-weil-pbc-site-comparison",
-    "def-weil-triangulated-category",
-    "lem-sf-triangle-morphism-iso",
-    "lem-sf-derived-homology-long-exact",
-    "lem-sf-derived-concentrated-single"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09AK, lemma-compare-constructible, extension argument; derived full faithfulness and lifting the extension boundary"
-   }
-  },
-  {
-   "text": "For every $N\\geq0$, induct on the assertion that, for every scheme $Y$, a pro-etale $B$-module sheaf $P$ lisse on a finite constructible locally closed partition with at most $N$ nonempty strata is classical. For $N=0$, $Y$ is empty; the empty covering forces its module sheaf to be zero, the pullback of the zero etale sheaf. Assume the assertion for $N-1$. For $y\\in Y_k$, [lem-sf-constructible-partition-local-closed-stratum] gives an affine open $V\\ni y$ such that $Y_k\\cap V$ is closed and $U=V\\setminus(Y_k\\cap V)$ is quasi-compact. Use the fibre-product subschemes $S_i\\times_YV$ and $S_i\\times_YU$; they are immersions by clause (1) of [lem-weil-pbc-immersion-base-change-lft]. Their images remain locally closed and constructible: the former is preserved by intersection with an open, and for the latter use [def-weil-constructible-subset]. Indeed a retrocompact open restricts to a retrocompact open on any open subspace, because each quasi-compact open of that subspace is also a quasi-compact open of $Y$; restrict the finite unions and differences in the definition. The lisse restrictions remain lisse on these open subschemes of the original strata: restrict their trivializing covers, with the same constant values and the same geometric stalks. Thus $P|_U$ has at most $N-1$ nonempty strata, while $P$ restricted to $Z=S_k\\times_YV$ is lisse. The next two steps show $P|_V$ classical; step 3 will then glue these neighbourhoods.",
-   "uses": [
-    "lem-sf-constructible-partition-local-closed-stratum",
-    "lem-weil-pbc-immersion-base-change-lft",
-    "def-weil-constructible-subset"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09AK, lemma-compare-constructible, induction on strata; Tags 09AH, 09AF, 09A6"
-   }
-  },
-  {
-   "text": "The immersion $i:Z\\to V$ just obtained is a closed immersion, even when its stratum scheme structure is nonreduced. By [def-weil-closed-immersion] it factors as a closed immersion into an open $W\\subset V$. Its image $C=Y_k\\cap V$ is closed in $V$, so $W$ and $V\\setminus C$ cover $V$. The structure-sheaf map $\\mathcal O_V\\to i_*\\mathcal O_Z$ is surjective on $W$ by that factorization and on $V\\setminus C$ because its target there is zero; hence it is surjective. The underlying map is a homeomorphism onto $C$, giving the claimed closed immersion by the same definition. The complementary inclusion $j:U\\to V$ is quasi-compact: on the affine $V$, the quasi-compact open $U$ has a finite cover by principal opens $D(f_a)$, whose intersections with any principal open $D(g)$ are the finitely many affine $D(f_ag)$.",
-   "uses": [
-    "def-weil-closed-immersion"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09AK, lemma-compare-constructible, induction on strata; Tags 09AH, 09AF, 09A6"
-   }
-  },
-  {
-   "text": "Induction now gives $j^*P_V\\cong\\nu_U^*G_U$, and clause (b) of [lem-sf-proetale-locally-constant-origin] gives $i^*P_V\\cong\\nu_Z^*G_Z$. Apply [lem-sf-proetale-open-closed-sequence], whose quasi-compactness hypothesis was checked in step 6, to obtain $0\\to j_!j^*P_V\\to P_V\\to i_*i^*P_V\\to0$. By [lem-cbc-proetale-extension-zero-comparison] its first term is $\\nu_V^*(j_!G_U)$. Clause (b) of [lem-weil-pbc-closed-immersion-integral-separated-uc] makes $i$ affine; clause (3) of [lem-weil-pbc-affine-morphism-permanence] makes it quasi-compact and quasi-separated. Apply [prop-weil-pbc-comparison-direct-image] to $G_Z[0]\\in D^+(Z_{\\mathrm{Et}},B)$ and take $H^0$ to identify its last term with $\\nu_V^*(i_*G_Z)$. For this passage, [lem-weil-pbc-left-exact-injective-resolution-degree-zero] identifies degree-zero derived direct image with ordinary direct image: the latter preserves kernels as a right adjoint; the source module sheaf categories on our small sites are Grothendieck by [lem-weil-pbc-ring-sheaves-grothendieck] and have enough injectives by [lem-sp-grothendieck-enough-injectives]. Exactness of $\\nu_V^*$, already cited in step 4, commutes with degree-zero cohomology. Both end terms are therefore classical. Step 4 makes $P_V$ classical; step 3 makes $P$ classical. This completes the induction also when $N=1$ and $U$ is empty, without identifying a surjective stratum immersion with an isomorphism.",
-   "uses": [
-    "lem-sf-proetale-locally-constant-origin",
-    "lem-sf-proetale-open-closed-sequence",
-    "lem-cbc-proetale-extension-zero-comparison",
-    "lem-weil-pbc-closed-immersion-integral-separated-uc",
-    "lem-weil-pbc-affine-morphism-permanence",
-    "prop-weil-pbc-comparison-direct-image",
-    "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
-    "lem-weil-pbc-ring-sheaves-grothendieck",
-    "lem-sp-grothendieck-enough-injectives",
+    "lem-weil-pbc-fixed-module-constructible-origin",
     "prop-weil-pbc-site-comparison-finite-level"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09AK, lemma-compare-constructible, induction on strata; Tags 09AH, 09AF, 09A6"
-   }
+   "elementary": false
   },
   {
-   "text": "Let $P$ be intrinsically constructible, and choose $G$ with $\\nu_T^*G\\cong P$ by step 7. Retain the original global finite partition $i_k:S_k\\to T$ of $P$. By [lem-weil-pbc-comparison-pullback], $\\nu_{S_k}^*(i_k^{-1}G)\\cong i_k^*P$. Clause (b) of [lem-sf-proetale-locally-constant-origin] gives a lisse etale sheaf $H_k$ with $\\nu_{S_k}^*H_k\\cong i_k^*P$. Full faithfulness from step 2, applied on $S_k$, lifts the resulting isomorphism to $i_k^{-1}G\\cong H_k$. By [lem-weil-pbc-finite-locally-constant-module-values], each $H_k$ admits etale local trivializations with finite constant $B$-module values. Thus precisely the original partition witnesses constructibility of $G$ in [def-weil-pbc-etale-constructible-sheaf]. Combined with preservation in step 1 and full faithfulness in step 2, this proves the asserted equivalence. The argument works for arbitrary $T$, the zero finite ring, zero sheaves, and empty strata; it neither replaces $B$ by a valuation-ring quotient nor equates global finite partitions with affine-local constructibility.",
-   "uses": [
-    "lem-weil-pbc-comparison-pullback",
-    "lem-sf-proetale-locally-constant-origin",
-    "lem-weil-pbc-finite-locally-constant-module-values",
-    "def-weil-pbc-etale-constructible-sheaf"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09AK, lemma-compare-constructible, details omitted: constructibility of the etale preimage on the original partition"
-   }
+   "text": "The inverse encoding counit gives the natural additive comparison. Each component of this counit is a linear isomorphism over ULift B. Its linearity says exactly that constant scalar multiplication is multiplication by the image of b under the canonical constant-section map. This proves the precise final clause, not merely an abstract equivalence.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
+  "lem-weil-pbc-proetale-constant-module-encoding",
+  "lem-weil-pbc-proetale-constant-module-constructibility",
+  "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
   "def-weil-pbc-etale-constructible-sheaf",
-  "lem-weil-pbc-finite-locally-constant-module-values",
-  "lem-weil-pbc-comparison-pullback",
-  "lem-sf-proetale-locally-constant-origin",
   "def-weil-proetale-constructible-sheaf",
-  "prop-weil-pbc-site-comparison-finite-level",
-  "def-weil-pbc-site-comparison-morphism",
-  "lem-weil-proetale-weakly-etale-localization",
-  "lem-cbc-proetale-stalk-conservative",
-  "lem-sf-derived-ses-triangle",
-  "lem-sf-exact-functor-derived-triangulated",
-  "thm-weil-pbc-site-comparison",
-  "def-weil-triangulated-category",
-  "lem-sf-triangle-morphism-iso",
-  "lem-sf-derived-homology-long-exact",
-  "lem-sf-derived-concentrated-single",
-  "lem-sf-constructible-partition-local-closed-stratum",
-  "lem-weil-pbc-immersion-base-change-lft",
-  "def-weil-constructible-subset",
-  "def-weil-closed-immersion",
-  "lem-sf-proetale-open-closed-sequence",
-  "lem-cbc-proetale-extension-zero-comparison",
-  "lem-weil-pbc-closed-immersion-integral-separated-uc",
-  "lem-weil-pbc-affine-morphism-permanence",
-  "prop-weil-pbc-comparison-direct-image",
-  "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
-  "lem-weil-pbc-ring-sheaves-grothendieck",
-  "lem-sp-grothendieck-enough-injectives",
-  "def-weil-pbc-proetale-modules"
+  "lem-weil-pbc-fixed-module-constructible-origin",
+  "prop-weil-pbc-site-comparison-finite-level"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/proetale.tex",
-  "place": "Tag 09AK induction; global finite-partition refinement using Tags 099Y, 09AH, 09AF, 09A6 and derived extension lifting"
+  "place": "Tags 09AK and 099Y; reuse the existing fixed-module constructible-origin theorem after explicit constant-scalar encoding, pullback, and constructibility identifications (U1, 2026-10-18)."
  },
  "mathlib_searches": [
   {
@@ -464,27 +348,7 @@
  },
  "tool_uses": [
   "def-weil-pbc-etale-constructible-sheaf",
-  "lem-weil-pbc-finite-locally-constant-module-values",
-  "lem-sf-proetale-locally-constant-origin",
-  "def-weil-proetale-constructible-sheaf",
-  "lem-weil-proetale-weakly-etale-localization",
-  "lem-cbc-proetale-stalk-conservative",
-  "lem-sf-derived-ses-triangle",
-  "lem-sf-exact-functor-derived-triangulated",
-  "def-weil-triangulated-category",
-  "lem-sf-triangle-morphism-iso",
-  "lem-sf-derived-homology-long-exact",
-  "lem-sf-derived-concentrated-single",
-  "lem-sf-constructible-partition-local-closed-stratum",
-  "lem-sf-proetale-open-closed-sequence",
-  "lem-cbc-proetale-extension-zero-comparison",
-  "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
-  "def-weil-closed-immersion",
-  "lem-weil-pbc-closed-immersion-integral-separated-uc",
-  "lem-weil-pbc-affine-morphism-permanence",
-  "lem-sp-grothendieck-enough-injectives",
-  "lem-weil-pbc-immersion-base-change-lft",
-  "def-weil-constructible-subset"
+  "def-weil-proetale-constructible-sheaf"
  ],
  "reviewed": {
   "date": "2026-10-17",
@@ -511,5 +375,15 @@
   "by": "NL",
   "date": "2026-10-15",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261018T062923-L-683060",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

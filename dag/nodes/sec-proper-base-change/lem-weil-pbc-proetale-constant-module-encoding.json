@@ -1,0 +1,122 @@
+{
+ "id": "lem-weil-pbc-proetale-constant-module-encoding",
+ "kind": "statement",
+ "title": "Intrinsic constant-ring modules and fixed-module sheaves",
+ "statement": "For any scheme T and commutative ring B, restrict a sheaf of modules over the constant ring sheaf B_T on T_proet to the constant scalars using the sheafification unit. The resulting functor to sheaves valued in modules over ULift B is an equivalence. Its underlying additive sheaf is unchanged. The intrinsic category and constant module constructions are those of [def-weil-proetale-locally-constant-sheaf] and [def-weil-sheaf-of-modules-category]. No finiteness, nonzero-ring or nonempty-scheme assumption is required.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03CY (module sheafification) and 093I (constant sheaves)."
+ },
+ "stmt_deps": [
+  "def-weil-proetale-locally-constant-sheaf",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [
+  {
+   "text": "Construct restriction on each module of sections using the canonical constant-section map. Its underlying additive sections and restriction maps are unchanged.",
+   "uses": [
+    "def-weil-proetale-locally-constant-sheaf"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Embed fixed-module-valued presheaves fully faithfully into presheaves of modules over the constant ring presheaf. Module sheafification along the locally bijective constant-section map is adjoint to restriction. The right adjoint is fully faithful by the module-sheafification theorem (Mathlib PresheafOfModules.sheafificationAdjunction and its fully faithful restriction).",
+   "uses": [
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a fixed-module-valued sheaf, its module sheafification unit is already invertible: forgetting to abelian presheaves gives sheafification of an existing sheaf. Reflect invertibility through the fully faithful embedding to obtain essential surjectivity. Take the equivalence of this fully faithful essentially surjective functor.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-proetale-locally-constant-sheaf",
+  "def-weil-pbc-sheafification"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03CY (module sheafification) and 093I (constant sheaves).; explicit coefficient-encoding proof by U1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "restrictScalars|leftAdjointUniq|constantSheaf",
+   "results": "12 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean",
+   "date": "2026-10-18",
+   "verdict": "Generic module sheafification and adjunction APIs exist and are used; no direct theorem for the project coefficient encodings or constructibility predicates."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sheaves of modules over the sheafification of a constant ring presheaf are equivalent to sheaves valued in modules over that ring; restriction to constant scalars commutes with inverse image and constructibility",
+   "results": "8 hits: PresheafOfModules.sheafifyHomEquiv, PresheafOfModules.sheafifyHomEquiv', PresheafOfModules.sheafificationHomEquiv, SheafOfModules.mk, PresheafOfModules.comp_toPresheaf_map_sheafifyHomEquiv'_symm_hom, PresheafOfModules.sheafify, PresheafOfModules.sheafification, PresheafOfModules.toSheafify",
+   "date": "2026-10-18",
+   "verdict": "Generic module sheafification and adjunction APIs exist and are used; no direct theorem for the project coefficient encodings or constructibility predicates."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of scalars along sheafification is an equivalence on sheaves of modules and identifies locally constant sheaves and finite stalks",
+   "results": "8 hits: PresheafOfModules.sheafifyHomEquiv', PresheafOfModules.sheafifyHomEquiv, PresheafOfModules.sheafificationHomEquiv, PresheafOfModules.toSheaf_map_sheafificationHomEquiv_symm, LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat, PresheafOfModules.sheafificationAdjunction_homEquiv_apply, PresheafOfModules.sheafificationCompToSheaf, PresheafOfModules.sheafificationCompForgetCompToPresheaf",
+   "date": "2026-10-18",
+   "verdict": "Generic module sheafification and adjunction APIs exist and are used; no direct theorem for the project coefficient encodings or constructibility predicates."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteRingConstructibleSheafOrigin",
+  "date": "2026-10-18",
+  "group": "U1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-finite-ring-constructible-sheaf-origin",
+   "place": "Coefficient-encoding identifications used by the shorter fixed-module descent route",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ProEtaleConstantModuleEncoding",
+  "file": "lean/Sheaf/Paper/ProEtaleConstantModuleEncoding.lean",
+  "declaration": "AlgebraicGeometry.Scheme.proEtaleModuleRestriction_isEquivalence",
+  "statement": "theorem proEtaleModuleRestriction_isEquivalence :\n    (proEtaleModuleRestriction T B).IsEquivalence",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-18",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.proEtaleModuleScalarUnit",
+   "AlgebraicGeometry.Scheme.proEtaleModuleRestriction",
+   "AlgebraicGeometry.Scheme.proEtaleModuleRestriction_isEquivalence",
+   "AlgebraicGeometry.Scheme.proEtaleModuleEncoding"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261018T062923-L-683060",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261018T062923-L-683060",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

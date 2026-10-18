@@ -1,0 +1,126 @@
+{
+ "id": "lem-weil-pbc-proetale-constant-module-pullback-encoding",
+ "kind": "statement",
+ "title": "Restriction to constant scalars commutes with canonical pullback",
+ "statement": "Let f:X→Y be any scheme morphism, B any finite commutative ring, and F a sheaf of modules over B_Y. Under the restriction functors of [lem-weil-pbc-proetale-constant-module-encoding], the specified intrinsic tensor pullback [def-weil-pbc-proetale-operations] is isomorphic to the fixed-module sheaf inverse image: restriction_X(proEtaleConstantModulePullback f B F) ≅ upperStar_f(restriction_Y F). The coefficient map is the canonical constant-section inverse-image map, not an independently chosen identification.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03D3 (module pullback adjunction) and 093I; proetale.tex Tag 098T(2), finite-level clause."
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-proetale-constant-module-encoding",
+  "def-weil-pbc-proetale-operations"
+ ],
+ "proof": [
+  {
+   "text": "The canonical finite constant-ring inverse-image comparison is invertible. Specialize the finite-level clause of the profinite coefficient comparison to the constant tower with value ULift B. Its hom is exactly proEtaleCoefficientInverseImageMap f B.",
+   "uses": [
+    "lem-weil-pbc-profinite-coefficient-inverse-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The adjunct of this coefficient map is the canonical constant-section direct-image map by the adjunction triangle identity. The latter extends the sheafification unit, by the defining sheafification hom-equivalence.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Define the direct-image comparison on every module of sections by the identity linear equivalence. Its scalar compatibility is exactly the equality on constant sections from the preceding step. Naturality in site objects and modules is pointwise reflexivity.",
+   "uses": [
+    "def-weil-pbc-proetale-operations"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Conjugate the fixed-module upperStar/lowerStar adjunction by the two encoding equivalences. The direct-image comparison identifies its right adjoint with the intrinsic direct image. Uniqueness of left adjoints identifies its left adjoint with the specified intrinsic pullback. Apply restriction and the encoding counit to evaluate at F.",
+   "uses": [
+    "lem-weil-pbc-proetale-constant-module-encoding",
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-profinite-coefficient-inverse-image",
+  "def-weil-pbc-proetale-operations",
+  "lem-weil-pbc-proetale-constant-module-encoding",
+  "def-weil-proetale-inverse-image"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03D3 (module pullback adjunction) and 093I; proetale.tex Tag 098T(2), finite-level clause.; explicit coefficient-encoding proof by U1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "restrictScalars|leftAdjointUniq|constantSheaf",
+   "results": "12 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean",
+   "date": "2026-10-18",
+   "verdict": "Generic module sheafification and adjunction APIs exist and are used; no direct theorem for the project coefficient encodings or constructibility predicates."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sheaves of modules over the sheafification of a constant ring presheaf are equivalent to sheaves valued in modules over that ring; restriction to constant scalars commutes with inverse image and constructibility",
+   "results": "8 hits: PresheafOfModules.sheafifyHomEquiv, PresheafOfModules.sheafifyHomEquiv', PresheafOfModules.sheafificationHomEquiv, SheafOfModules.mk, PresheafOfModules.comp_toPresheaf_map_sheafifyHomEquiv'_symm_hom, PresheafOfModules.sheafify, PresheafOfModules.sheafification, PresheafOfModules.toSheafify",
+   "date": "2026-10-18",
+   "verdict": "Generic module sheafification and adjunction APIs exist and are used; no direct theorem for the project coefficient encodings or constructibility predicates."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of scalars along sheafification is an equivalence on sheaves of modules and identifies locally constant sheaves and finite stalks",
+   "results": "8 hits: PresheafOfModules.sheafifyHomEquiv', PresheafOfModules.sheafifyHomEquiv, PresheafOfModules.sheafificationHomEquiv, PresheafOfModules.toSheaf_map_sheafificationHomEquiv_symm, LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat, PresheafOfModules.sheafificationAdjunction_homEquiv_apply, PresheafOfModules.sheafificationCompToSheaf, PresheafOfModules.sheafificationCompForgetCompToPresheaf",
+   "date": "2026-10-18",
+   "verdict": "Generic module sheafification and adjunction APIs exist and are used; no direct theorem for the project coefficient encodings or constructibility predicates."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteRingConstructibleSheafOrigin",
+  "date": "2026-10-18",
+  "group": "U1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-finite-ring-constructible-sheaf-origin",
+   "place": "Coefficient-encoding identifications used by the shorter fixed-module descent route",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ProEtaleConstantModulePullbackEncoding",
+  "file": "lean/Sheaf/Paper/ProEtaleConstantModulePullbackEncoding.lean",
+  "declaration": "AlgebraicGeometry.Scheme.proEtaleModuleRestriction_pullback",
+  "statement": "theorem proEtaleModuleRestriction_pullback\n    (F : proEtaleRingModules Y (proEtaleConstantRing Y B)) :\n    Nonempty ((proEtaleModuleRestriction X B).obj (proEtaleConstantModulePullback f B F) ≅\n      (ProEtale.upperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} B)) f).obj\n        ((proEtaleModuleRestriction Y B).obj F))",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261018T062923-L-683060",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261018T062923-L-683060",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

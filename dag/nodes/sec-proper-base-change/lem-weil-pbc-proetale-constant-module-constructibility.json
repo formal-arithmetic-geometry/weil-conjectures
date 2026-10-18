@@ -1,0 +1,133 @@
+{
+ "id": "lem-weil-pbc-proetale-constant-module-constructibility",
+ "kind": "statement",
+ "title": "Constructibility is independent of the constant-module encoding",
+ "statement": "Let T be any scheme, B a finite commutative ring and F a sheaf of modules over the constant ring sheaf B_T. The intrinsic predicate IsConstructibleProEtaleModuleSheaf T B F [def-weil-proetale-constructible-sheaf] holds if and only if the fixed-module sheaf obtained by restriction [lem-weil-pbc-proetale-constant-module-encoding] is ProEtale.IsConstructible (ULift B), using a finite global stratification whose restrictions have finite constant models. The zero ring and empty scheme are included, and no affine-local substitute for global stratification is made.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03CY and 093I for constants; proetale.tex Tags 099Y and 09AK for finite local models and constructibility."
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-proetale-constant-module-encoding",
+  "def-weil-proetale-constructible-sheaf"
+ ],
+ "proof": [
+  {
+   "text": "On each slice, restrict along the localized constant-section map; local bijectivity is preserved. Restriction is fully faithful. Compare the module sheafification of the constant module presheaf with the fixed-module constant sheaf using the transposed module-sheafification unit. This comparison is locally bijective, hence an isomorphism. Transport the given coverwise trivializations in both directions to identify local constancy.",
+   "uses": [
+    "def-weil-proetale-locally-constant-sheaf"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For geometric stalks, the additive diagram is unchanged. The forgetful functor from modules to abelian groups preserves the filtered colimit defining the geometric stalk. Its canonical colimit isomorphism identifies the two underlying sets, so finiteness is equivalent.",
+   "uses": [
+    "def-weil-proetale-geometric-stalk"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Finite scheme-pullback models give slice local constancy and finite geometric stalks by the two finite-model lemmas. Conversely use finite_models_of_fixed_lisse to recover finite scheme-pullback models from slice local constancy and finite stalks. Thus fixed finite local constancy is equivalent to the intrinsic local condition after restriction.",
+   "uses": [
+    "lem-weil-pbc-proetale-finite-model-local-constancy",
+    "lem-weil-pbc-proetale-finite-model-stalks",
+    "lem-sf-proetale-lisse-finite-models"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use canonical pullback compatibility to transport this equivalence to every immersed stratum. In both directions keep the original stratification. A zero-stratum fixed-module partition forces T empty by its covering condition; replace it with the one-stratum identity partition. On an empty base every sheaf has finite local models on the empty pro-etale covering. This enforces positivity of the intrinsic stratum count.",
+   "uses": [
+    "lem-weil-pbc-proetale-constant-module-pullback-encoding",
+    "def-constructible-stratification"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-proetale-locally-constant-sheaf",
+  "def-weil-proetale-geometric-stalk",
+  "lem-weil-pbc-proetale-finite-model-local-constancy",
+  "lem-weil-pbc-proetale-finite-model-stalks",
+  "lem-sf-proetale-lisse-finite-models",
+  "lem-weil-pbc-proetale-constant-module-pullback-encoding",
+  "def-constructible-stratification"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03CY and 093I for constants; proetale.tex Tags 099Y and 09AK for finite local models and constructibility.; explicit coefficient-encoding proof by U1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "restrictScalars|leftAdjointUniq|constantSheaf",
+   "results": "12 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean",
+   "date": "2026-10-18",
+   "verdict": "Generic module sheafification and adjunction APIs exist and are used; no direct theorem for the project coefficient encodings or constructibility predicates."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sheaves of modules over the sheafification of a constant ring presheaf are equivalent to sheaves valued in modules over that ring; restriction to constant scalars commutes with inverse image and constructibility",
+   "results": "8 hits: PresheafOfModules.sheafifyHomEquiv, PresheafOfModules.sheafifyHomEquiv', PresheafOfModules.sheafificationHomEquiv, SheafOfModules.mk, PresheafOfModules.comp_toPresheaf_map_sheafifyHomEquiv'_symm_hom, PresheafOfModules.sheafify, PresheafOfModules.sheafification, PresheafOfModules.toSheafify",
+   "date": "2026-10-18",
+   "verdict": "Generic module sheafification and adjunction APIs exist and are used; no direct theorem for the project coefficient encodings or constructibility predicates."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of scalars along sheafification is an equivalence on sheaves of modules and identifies locally constant sheaves and finite stalks",
+   "results": "8 hits: PresheafOfModules.sheafifyHomEquiv', PresheafOfModules.sheafifyHomEquiv, PresheafOfModules.sheafificationHomEquiv, PresheafOfModules.toSheaf_map_sheafificationHomEquiv_symm, LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat, PresheafOfModules.sheafificationAdjunction_homEquiv_apply, PresheafOfModules.sheafificationCompToSheaf, PresheafOfModules.sheafificationCompForgetCompToPresheaf",
+   "date": "2026-10-18",
+   "verdict": "Generic module sheafification and adjunction APIs exist and are used; no direct theorem for the project coefficient encodings or constructibility predicates."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteRingConstructibleSheafOrigin",
+  "date": "2026-10-18",
+  "group": "U1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-finite-ring-constructible-sheaf-origin",
+   "place": "Coefficient-encoding identifications used by the shorter fixed-module descent route",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ProEtaleConstantModuleConstructibility",
+  "file": "lean/Sheaf/Paper/ProEtaleConstantModuleConstructibility.lean",
+  "declaration": "AlgebraicGeometry.Scheme.proEtaleModuleRestriction_constructible_iff",
+  "statement": "theorem proEtaleModuleRestriction_constructible_iff (T : Scheme.{u})\n    (B : Type u) [CommRing B] [Finite B]\n    (F : proEtaleRingModules T (proEtaleConstantRing T B)) :\n    IsConstructibleProEtaleModuleSheaf T B F ↔\n      ProEtale.IsConstructible (ULift.{u + 1, u} B)\n        ((proEtaleModuleRestriction T B).obj F)",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261018T062923-L-683060",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261018T062923-L-683060",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
