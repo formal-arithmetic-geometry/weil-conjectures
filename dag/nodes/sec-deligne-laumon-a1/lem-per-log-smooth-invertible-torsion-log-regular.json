@@ -171,5 +171,27 @@
   "group": "Q108",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q108-38a7bf05c (reviewer sub-agent of L); spot-checked: Read ILO VI 1.8 (p.70: log smooth over log regular implies log regular, proof deferred to Kato 1994 8.2); the item's chart reading with torsion of order invertible on the source matches Kato's criterion, and the statement is unchanged. Step 1: n invertible at x implies invertible at f(x), since kappa(f(x)) embeds in kappa(x); restricting to D(n) keeps the charts, the comparison and log regularity, which is checked pointwise at geometric points. Step 2: uses only what the new node states. Step 3: checked each hypothesis of lem-per-invertible-kummer-chart-log-regular (fs and locally Noetherian, where finite type comes from the monomial generators via the 01I4 node and 00FN; a injective; Kummer; finite cokernel annihilated by n, invertible on Y; identity comparison is etale). Step 4: checked each hypothesis of lem-trf-log-smooth-log-regular (b^gp injective with torsion-free cokernel Q^gp/H; smooth comparison through the pasted fibre products). New node lem-per-fs-chart-torsion-factorization: proved it myself. R^gp=H by the trick n(g+p2)=p1+(n-1)p2; R is saturated in H; R is finitely generated as the saturation of h(P) plus coset representatives, via lem-trf-fine-monoid-finite-saturation. Tested on N->N with 1->n, N->Z, N->N^2, 0->finite group and the identity: true. Not a duplicate of trf fs-chart-free-factorization (torsion-free cokernel), fine-monoid-finite-saturation (saturates in the monoid's own group) or log-regular-toric-refinement (P^gp=Q^gp), and not a restatement of the item. Fault C1/C4: Steps 3 and 4 took the associated log structure on Y_R and the log maps Y_R->Y and X->Y_R from def-trf-fs-log-blowup, which neither constructs the associated log structure nor states its universal property. FIX: steps 3 and 4 now cite lem-trf-associated-log-universal-stalks (existence, stalk formula, universal property), with Noetherianity proved first in step 3, and proof_deps updated. Batch 5: def-trf-fs-log-blowup is a general definition (closure: two trf defs); lem-trf-log-smooth-log-regular is generic VI 1.8 log geometry, and its closure holds only monoid/toric/Tor/Hilbert-Samuel/strict-henselization lemmas, with no thm-trf and no trace or duality content. Both accepted, and the added node is generic and already in that closure. No cycle, no SGA citation. tool_uses accepted; the maintainer should record lem-trf-associated-log-universal-stalks as a generic tool.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.LogSmoothInvertibleTorsionLogRegular",
+  "declaration": "AlgebraicGeometry.logSmooth_invertibleTorsion_logRegular",
+  "declarations": [
+   "AlgebraicGeometry.InvertibleTorsionFSLogChart",
+   "AlgebraicGeometry.logSmooth_invertibleTorsion_logRegular"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/LogSmoothInvertibleTorsionLogRegular.lean",
+  "statement": "theorem logSmooth_invertibleTorsion_logRegular (X Y : FineSaturatedLogScheme.{u}) (f : EtaleLogHom X Y) (hY : Y.IsLogRegular) (hcharts : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (t : Spec (.of Ω) ⟶ X.scheme), ∃ c : InvertibleTorsionFSLogChart X Y f, Nonempty ((Scheme.pointSmallEtale t).fiber.obj c.V) ∧ Smooth c.comparison) : X.IsLogRegular",
+  "branch": "newtargets-dag",
+  "by": "Q112",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-21e1726ba",
+  "group": "Q112",
+  "result": "pass",
+  "note": "Only the item's lean record changes; lean.statement matches the file verbatim. InvertibleTorsionFSLogChart copies the landed InjectiveFSLogChart (lem-trf-log-smooth-log-regular) field for field, replacing cokernel_torsion_free by the node's condition: finite torsion of the actual cokernel GG Q / range, with Nat.card a unit on the source chart V. No extra hypotheses or universe restrictions; conclusion exactly X.IsLogRegular; Smooth = recorded def-sbc-smooth-morphisms lean. Edge cases checked: empty X, trivial torsion, N->N times n, infinite torsion excluded. No duplicate notion in side lean/Sheaf or WeilConjectures. Plain imports are the stated proof_deps' modules. Docstrings with source, blueprint id and the 4 proof steps; sorry only; lines <=100. nt_compile --json clean (2.8 s); control compile with a broken field gave the expected error. Advisory: IsFineSaturatedMonoid comes from LogRegularPair, outside stmt_deps, as in the landed sibling."
  }
 }

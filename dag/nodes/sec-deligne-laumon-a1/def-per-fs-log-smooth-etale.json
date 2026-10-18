@@ -96,5 +96,34 @@
   "group": "Q02",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q02-acdeac43c (reviewer sub-agent of L); spot-checked: The definition is correct against ILO Travaux de Gabber X Prop 1.2 (printed pp.136-138: Kato 3.5 adaptation with smooth comparison and an fs refinement), XVI 3.6.1-3.6.3 (p.252) and its use in XVI 3.7 (pp.254-255). The log etale clause (finite kernel and cokernel, etale comparison) matches Kato 3.5. Kato itself is still WANTED locally. Small cases tested: identity charts and trivial log structures (ordinary smooth/etale); the Kummer chart N->N, 1|->n (n must be invertible; the tame trait extension S'->T is log etale); semistable N->N^r (log smooth); log blowup (log etale); 0->N (log smooth, not log etale); empty V. No duplicate: no other DAG node or blueprint snapshot defines general log smooth or log etale (lem-trf-log-smooth-log-regular only inlines a special chart hypothesis). The Mathlib searches are recorded with no match. No SGA is cited. There are no new nodes or proof steps, and no tool_uses. One fault (B3/C4): b_i:B_i->Spec Z[P_i] with B_i not affine, and the equation b_i f_i = Spec(Z[u_i]) a_i, need Mor(X,Spec R) = Hom(R, Gamma(X,O)). def-weil-affine-spectrum gives only maps between spectra. FIX: the statement now builds b_i and a_i through the existing Mathlib leaf lem-weil-pbc-morphism-into-affine-scheme (Mathlib ΓSpec.adjunction), and that id is added to stmt_deps. It depends only on def-pc-scheme and def-weil-affine-spectrum, so there is no cycle. Nothing else changed.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FSLogSmoothEtale",
+  "declaration": "AlgebraicGeometry.EtaleLogHom.IsLogSmooth",
+  "declarations": [
+   "AlgebraicGeometry.EtaleLogStructure.chartToSpec",
+   "AlgebraicGeometry.FSLogChart",
+   "AlgebraicGeometry.FSLogChart.comparison",
+   "AlgebraicGeometry.FSLogChart.groupMap",
+   "AlgebraicGeometry.FSLogChart.cokernel",
+   "AlgebraicGeometry.FSLogChart.IsSmoothChart",
+   "AlgebraicGeometry.FSLogChart.IsEtaleChart",
+   "AlgebraicGeometry.EtaleLogHom.IsLogSmooth",
+   "AlgebraicGeometry.EtaleLogHom.IsLogEtale"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FSLogSmoothEtale.lean",
+  "statement": "def EtaleLogHom.IsLogSmooth {X Y : FineSaturatedLogScheme.{u}} (f : EtaleLogHom X Y) : Prop",
+  "branch": "newtargets-dag",
+  "by": "NG",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-03a08b73a",
+  "group": "NG",
+  "result": "pass",
+  "note": "FSLogSmoothEtale matches def-per-fs-log-smooth-etale clause by clause: EtaleLogHom of locally Noetherian fs log schemes; etale chart squares with dependency IsChart and f.sectionMap compatibility; canonical chartToSpec via ΓSpec.adjunction.homEquiv and MonoidAlgebra.lift; comparison = pullback.lift; groupMap ker, quotient cokernel and CommGroup.torsion with Finite plus IsUnit of Nat.card in every stalk; Smooth/Etale comparison; pointwise cover equivalent to a covering family. The square field follows from chart_compatibility and f.compatibility (probe compiled, exit 0), so it adds no hypothesis. Edge cases (empty X, Kummer, 0->N, noninjective u, nonaffine W) correct. InjectiveFSLogChart is a specialised notion, not a duplicate. Node diff vs live only adds lean; statement verbatim from def. nt_compile --json clean in 2.1 s; broken control fails."
  }
 }
