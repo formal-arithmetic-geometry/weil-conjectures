@@ -1,0 +1,121 @@
+{
+ "id": "lem-fin-kinjective-derived-composition",
+ "kind": "statement",
+ "title": "Composition of unbounded right derived functors preserving K-injectives",
+ "statement": "Let C,D,E be abelian categories with chosen derived categories, and assume C,D admit K-injective resolutions [def-weil-abstract-derived-category]. Let F:C→D, G:D→E, H:C→E be additive functors. If F carries K-injective complexes to K-injective complexes and e:F⋙G≅H is a natural isomorphism, then the canonical unbounded right derived functors have a natural isomorphism RF⋙RG≅RH.",
+ "source": {
+  "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/RightDerivedFunctor/Comp.lean",
+  "place": "proved declaration CategoryTheory.Functor.rightDerivedFunctorCompIso'"
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Reuse the existing proved source construction rightDerivedFunctorCompIso'. A K-injective representative I computes RF. As F(I) is K-injective, the composite unit for RF⋙RG is an isomorphism on I. The K-injective derivability structure therefore identifies RF⋙RG as the right derived functor of F⋙G. Uniqueness of right derived functors gives R(F⋙G)≅RF⋙RG; invert this and apply the functorial derived isomorphism of e to obtain RF⋙RG≅RH. In the application F=i_* preserves K-injectives because it is right adjoint to the exact i^*.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/RightDerivedFunctor/Comp.lean",
+  "place": "existing proved source declaration CategoryTheory.Functor.rightDerivedFunctorCompIso'"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Finite direct image reflects zero objects and open closed localization triangle in derived etale sheaves",
+   "results": "8 hits: generic zero-object and localization results, including DerivedCategory.instHasZeroObject and CategoryTheory.Pretriangulated.Triangle.isZero₃_of_isZero₁₂; no etale direct-image or localization theorem.",
+   "date": "2026-10-18",
+   "verdict": "no match; exact source-library declaration reused"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Composition of total right derived functors for a functor preserving K injective complexes",
+   "results": "8 hits: mapDerivedCategoryFactorsh, NatTrans.rightDerived_comp, generic totalRightDerived and related factorization results; no K-injective composition theorem.",
+   "date": "2026-10-18",
+   "verdict": "no match; exact source-library declaration reused"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedFunctorCompIso|exists_distTriang_openClosed|isZero_of_isZero_lowerStar_of_isFinite",
+   "results": "0 Mathlib hits; local rg finds the exact declarations in WeilConjectures.",
+   "date": "2026-10-18",
+   "verdict": "no Mathlib match; source declarations reused"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteBoundaryComparison",
+  "date": "2026-10-18",
+  "group": "Q3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-fin-finite-boundary-comparison",
+   "place": "Proof: the displayed equality Rb_*Ri_*=R(bi)_*.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp",
+  "declaration": "CategoryTheory.Functor.rightDerivedFunctorCompIso'",
+  "statement": "noncomputable def rightDerivedFunctorCompIso' {H : C ⥤ E} [H.Additive]\n    [F.PreservesKInjectiveComplexes] (e : F ⋙ G ≅ H) :\n    F.rightDerivedFunctor ⋙ G.rightDerivedFunctor ≅ H.rightDerivedFunctor",
+  "branch": "sheaf-dag",
+  "by": "Q3",
+  "date": "2026-10-18",
+  "note": "Existing proved source declaration; no new Lean module or obligation. All section hypotheses retained; this node uses its specialization stated above."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "decls": [
+    {
+     "name": "CategoryTheory.Functor.rightDerivedFunctorCompIso'",
+     "module": "WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp",
+     "lines": [
+      233,
+      236
+     ],
+     "kind": "def",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261018T062853-L-670246",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261018T062853-L-670246",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

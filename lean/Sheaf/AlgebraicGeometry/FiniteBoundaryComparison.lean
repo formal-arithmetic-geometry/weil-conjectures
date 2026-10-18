@@ -9,23 +9,12 @@ public import Sheaf.AlgebraicGeometry.DerivedCategories
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarCoherence
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
-import Sheaf.AlgebraicGeometry.ModuleAbelianDerivedDirectImageComparison
-import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
-import Mathlib.Algebra.Homology.DerivedCategory.Plus
-import Mathlib.Algebra.Homology.DerivedCategory.Basic
-import WeilConjectures.AlgebraicGeometry.EtaleInverseImageExact
-import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
-import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
-import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
-import WeilConjectures.SixFunctors.Finite.Exact
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
-import Sheaf.AlgebraicGeometry.EtaleClosedImmersionEssentialImage
-import Sheaf.CategoryTheory.RingedToposDerivedPushforwardComposition
-import WeilConjectures.SixFunctors.Finite.Stalk
-import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
-import WeilConjectures.AlgebraicGeometry.DerivedCategories
-import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
+import WeilConjectures.SixFunctors.OpenClosed.Derived
+import WeilConjectures.SixFunctors.Finite.Counit
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 
 /-!
 # Detecting derived comparisons off a finite boundary
@@ -84,6 +73,57 @@ theorem isIso_of_finite_boundary
     (hopen : IsIso ((upperStar (ModuleCat.{u + 1} Λ) a).mapDerivedCategoryPlus.map c))
     (hpush : IsIso ((rightDerivedLowerStarPlus (ModuleCat.{u + 1} Λ) b).map c)) :
     IsIso c := by
-  sorry
+  -- Work in the ambient derived category through its fully faithful inclusion.
+  let A := ModuleCat.{u + 1} Λ
+  have hopen' : IsIso ((upperStar A a).mapDerivedCategory.map
+      (_root_.DerivedCategory.Plus.ι.map c)) := by
+    exact (NatIso.isIso_map_iff
+      (upperStar A a).mapDerivedCategoryPlusCompatibility c).mp
+        (inferInstanceAs (IsIso (_root_.DerivedCategory.Plus.ι.map
+          ((upperStar A a).mapDerivedCategoryPlus.map c))))
+  have hpush' : IsIso ((lowerStar A b).rightDerivedFunctor.map
+      (_root_.DerivedCategory.Plus.ι.map c)) := by
+    exact (NatIso.isIso_map_iff
+      (lowerStar A b).rightDerivedFunctorPlusCompatibility c).mp
+        (inferInstanceAs (IsIso (_root_.DerivedCategory.Plus.ι.map
+          ((rightDerivedLowerStarPlus A b).map c))))
+  obtain ⟨M, f, g, hT⟩ := Pretriangulated.distinguished_cocone_triangle
+    (_root_.DerivedCategory.Plus.ι.map c)
+  have hopenM : Limits.IsZero ((upperStar A a).mapDerivedCategory.obj M) :=
+    (Pretriangulated.Triangle.isZero₃_iff_isIso₁ _
+      ((upperStar A a).mapDerivedCategory.map_distinguished _ hT)).mpr hopen'
+  have hpushM : Limits.IsZero ((lowerStar A b).rightDerivedFunctor.obj M) :=
+    (Pretriangulated.Triangle.isZero₃_iff_isIso₁ _
+      ((lowerStar A b).rightDerivedFunctor.map_distinguished _ hT)).mpr hpush'
+  -- The cone is supported on the closed complement, hence recovered from it.
+  obtain ⟨w, hw⟩ := exists_distTriang_openClosed A a i hcomplement M
+  have hunit : IsIso ((mapDerivedUpperStarLowerStarAdjunction A i).unit.app M) :=
+    (Pretriangulated.Triangle.isZero₁_iff_isIso₂ _ hw).mp
+      ((openImmersionLowerShriek A a).mapDerivedCategory.map_isZero hopenM)
+  let N := (upperStar A i).mapDerivedCategory.obj M
+  let e : M ≅ (lowerStar A i).rightDerivedFunctor.obj N :=
+    asIso ((mapDerivedUpperStarLowerStarAdjunction A i).unit.app M)
+  let ecomp := Functor.rightDerivedFunctorCompIso' (lowerStar A i) (lowerStar A b)
+    (lowerStarComp A i b)
+  have hpushN : Limits.IsZero ((lowerStar A (i ≫ b)).rightDerivedFunctor.obj N) :=
+    hpushM.of_iso (((lowerStar A b).rightDerivedFunctor.mapIso e) ≪≫ ecomp.app N).symm
+  -- Finite exact pushforward detects zero on each cohomology sheaf.
+  have hN : Limits.IsZero N := by
+    apply (_root_.DerivedCategory.isZero_iff N).mpr
+    intro n
+    let en : (_root_.DerivedCategory.homologyFunctor _ n).obj
+        ((lowerStar A (i ≫ b)).rightDerivedFunctor.obj N) ≅
+        (lowerStar A (i ≫ b)).obj
+          ((_root_.DerivedCategory.homologyFunctor _ n).obj N) :=
+      (_root_.DerivedCategory.homologyFunctor _ n).mapIso
+          ((rightDerivedFunctorLowerStarIsoMapDerivedCategory A (i ≫ b)).app N) ≪≫
+        ((lowerStar A (i ≫ b)).mapDerivedCategoryHomologyFunctorIso n).symm.app N
+    exact isZero_of_isZero_lowerStar_of_isFinite A (i ≫ b)
+      (((_root_.DerivedCategory.homologyFunctor _ n).map_isZero hpushN).of_iso en.symm)
+  have hM : Limits.IsZero M :=
+    (((lowerStar A i).rightDerivedFunctor).map_isZero hN).of_iso e
+  have : IsIso (_root_.DerivedCategory.Plus.ι.map c) :=
+    (Pretriangulated.Triangle.isZero₃_iff_isIso₁ _ hT).mp hM
+  exact isIso_of_reflects_iso c _root_.DerivedCategory.Plus.ι
 
 end AlgebraicGeometry.Etale

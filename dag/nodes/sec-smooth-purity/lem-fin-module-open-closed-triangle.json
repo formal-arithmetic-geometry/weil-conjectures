@@ -1,0 +1,124 @@
+{
+ "id": "lem-fin-module-open-closed-triangle",
+ "kind": "statement",
+ "title": "Open-closed triangle for arbitrary constant module coefficients",
+ "statement": "Let Λ be any commutative ring in Type (u+1), let a:G→Y be an open immersion and i:Z→Y a closed immersion of schemes in universe u with range(i)=range(a)ᶜ. For every M in the ordinary unbounded derived category of ModuleCat Λ-valued sheaves on Y_et, the counit D(a_!)D(a^*)M→M and unit M→Ri_*D(i^*)M extend to a distinguished triangle. The functors and adjunctions are those of [def-weil-pbc-extension-by-zero], [def-weil-pbc-inverse-image], and [def-weil-pbc-direct-image]. No torsion, constructibility, Noetherian or quasi-compactness assumption is made.",
+ "source": {
+  "document": "lean/WeilConjectures/SixFunctors/OpenClosed/Derived.lean",
+  "place": "proved declaration AlgebraicGeometry.Etale.exists_distTriang_openClosed"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-extension-by-zero",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-direct-image",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Apply the existing proved source theorem exists_distTriang_openClosed with A=ModuleCat Λ. This theorem is stated for Grothendieck abelian symmetric closed monoidal coefficients with functorial flat resolutions, which ModuleCat Λ satisfies for every commutative Λ. Its formal proof completes the open counit to a triangle, checks the restrictions of its third term, identifies that term with Ri_*i^*M by open-closed conservativity, and uses naturality of the closed unit to identify the second arrow. No new Lean proof is required: the cited source declaration is already proved.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "lean/WeilConjectures/SixFunctors/OpenClosed/Derived.lean",
+  "place": "existing proved source declaration AlgebraicGeometry.Etale.exists_distTriang_openClosed"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Finite direct image reflects zero objects and open closed localization triangle in derived etale sheaves",
+   "results": "8 hits: generic zero-object and localization results, including DerivedCategory.instHasZeroObject and CategoryTheory.Pretriangulated.Triangle.isZero₃_of_isZero₁₂; no etale direct-image or localization theorem.",
+   "date": "2026-10-18",
+   "verdict": "no match; exact source-library declaration reused"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Composition of total right derived functors for a functor preserving K injective complexes",
+   "results": "8 hits: mapDerivedCategoryFactorsh, NatTrans.rightDerived_comp, generic totalRightDerived and related factorization results; no K-injective composition theorem.",
+   "date": "2026-10-18",
+   "verdict": "no match; exact source-library declaration reused"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedFunctorCompIso|exists_distTriang_openClosed|isZero_of_isZero_lowerStar_of_isFinite",
+   "results": "0 Mathlib hits; local rg finds the exact declarations in WeilConjectures.",
+   "date": "2026-10-18",
+   "verdict": "no Mathlib match; source declarations reused"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteBoundaryComparison",
+  "date": "2026-10-18",
+  "group": "Q3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-fin-finite-boundary-comparison",
+   "place": "Proof: the sentence identifying the cone with i_*i^*M by the termwise localization sequence.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.SixFunctors.OpenClosed.Derived",
+  "declaration": "AlgebraicGeometry.Etale.exists_distTriang_openClosed",
+  "statement": "theorem exists_distTriang_openClosed (hij : Set.range i.base = (Set.range j.base)ᶜ)\n    (M : DerivedCategory (Sheaf X.smallEtaleTopology A)) :\n    ∃ w, Pretriangulated.Triangle.mk\n      ((derivedOpenImmersionLowerShriekUpperStarAdjunction A j).counit.app M)\n      ((mapDerivedUpperStarLowerStarAdjunction A i).unit.app M) w ∈ distTriang _",
+  "branch": "sheaf-dag",
+  "by": "Q3",
+  "date": "2026-10-18",
+  "note": "Existing proved source declaration; no new Lean module or obligation. All section hypotheses retained; this node uses its specialization stated above."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Etale.exists_distTriang_openClosed",
+     "module": "WeilConjectures.SixFunctors.OpenClosed.Derived",
+     "lines": [
+      264,
+      305
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261018T062853-L-670246",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261018T062853-L-670246",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
