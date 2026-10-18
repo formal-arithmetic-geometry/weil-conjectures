@@ -27,7 +27,7 @@
  ],
  "proof": [
   {
-   "text": "Let A be a finite commutative ring, let f:X→S be separated finite type and compactifiable between Noetherian schemes, let u:U↪S be open, and put X_U=X×_S U with projection v:X_U→X and map f_U:X_U→U. For K∈D(S_et,A) and M∈D(X_et,A), specialize the general compact-support projection/exchange identity [lem-asd-compact-projection-exchange] to the base-change morphism u. Its cartesian pullback is X_U, its exchange b_M is the compactified exchange C_{f,u,M}, and its projection map Π is the compactified map P_{f,K,M}; the canonical pullback/tensor identifications in that statement are exactly those displayed here. This gives the required equality for any chosen compactification and its base change.",
+   "text": "Specialize compactProjectionMapCoeffFirst_baseChangeMap [lem-asd-compact-projection-exchange] to the cartesian square IsPullback.of_hasPullback f u, with source input M and base coefficient K. Its source and target use exactly the compactProjectionMapCoeffFirst, rightDerivedLowerShriekBaseChangeMap, leftDerivedUpperStarTensorComparison and derivedSquareUpperStarIsoInvApp occurring in this statement. The base-changed compactification and quasi-compactness instances follow from those for f. The specialized theorem is definitionally the displayed forward identity, so no separate refinement or tensor transport is required here.",
    "uses": [
     "lem-asd-compact-projection-exchange"
    ],
@@ -38,26 +38,8 @@
    }
   },
   {
-   "text": "The chosen-compactification maps in the specialization are the maps named in the item: [lem-amb-unbounded-compact-support-comparisons] says that compact-support direct image is independent of compactification and that, on a chosen compactification, the exchange is the proper exchange followed by the inverse degreewise open-extension comparison. [def-amb-etale-compact-support] identifies the compactified functor with Rr_* Dj_!, while [def-weil-pbc-etale-shriek-base-change-map] supplies the normalized open extension comparison. The derived open tensor factor is the canonical natural isomorphism of [lem-pur-etale-open-derived-tensor], and all displayed pullback/tensor transports are the canonical monoidal comparisons of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. Therefore the specialized equality is the equality of the actual compactified derived maps, and refinement independence transports it to the canonical C and P of the statement.",
-   "uses": [
-    "lem-amb-unbounded-compact-support-comparisons",
-    "def-amb-etale-compact-support",
-    "def-weil-pbc-etale-shriek-base-change-map",
-    "lem-pur-etale-open-derived-tensor",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 0E48 (remark-compatible-with-diagram) and 0GL1 (lemma-j-shriek-and-tensor); more-etale.tex Tag 0F7L"
-   }
-  },
-  {
-   "text": "If the four projection maps in the displayed equality are isomorphisms, compose the equality on the appropriate sides with their inverses and with the inverse exchange isomorphisms. Associativity of composition then gives the stated identity for the inverses; this is the elementary cancellation argument in any category.",
-   "uses": [
-    "lem-asd-compact-projection-exchange",
-    "lem-amb-unbounded-compact-support-comparisons"
-   ],
+   "text": "For the inverse clause, apply the forward identity and precompose both sides with the image under Lu* of the inverse projection map for f, then postcompose both sides with the inverse projection map for pullback.snd f u. Rewrite the image of an inverse as the inverse of its image, reassociate, and use inverse-hom and hom-inverse cancellation. This proves the displayed inverse equality from the two projection-isomorphism hypotheses alone; invertibility of the exchange is not needed.",
+   "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
@@ -66,17 +48,12 @@
   }
  ],
  "proof_deps": [
-  "def-amb-etale-compact-support",
-  "def-weil-pbc-etale-shriek-base-change-map",
-  "lem-amb-unbounded-compact-support-comparisons",
-  "lem-asd-compact-projection-exchange",
-  "lem-pur-etale-open-derived-tensor",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+  "lem-asd-compact-projection-exchange"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tags 0E48 and 0GL1, with more-etale.tex Tag 0F7L; specialization to the compact-support functor and refinement transport"
+  "place": "Tag 0E48 with more-etale.tex Tag 0F7L; X2 Lean proof specializes the existing coefficient-first compact-support exchange theorem and derives the inverse identity by categorical cancellation."
  },
  "mathlib_searches": [
   {
@@ -153,8 +130,7 @@
   ]
  },
  "tool_uses": [
-  "lem-asd-compact-projection-exchange",
-  "lem-pur-etale-open-derived-tensor"
+  "lem-asd-compact-projection-exchange"
  ],
  "reviewed": {
   "date": "2026-10-17",
@@ -187,5 +163,15 @@
   "group": "Q81",
   "result": "fix",
   "note": "Review recorded in review.md. Mathematics, dependencies, universes, edge cases and verbatim statement checked. Complete fixes add proof-dependency imports and replace the placeholder second reading. Original and replacement modules compile cleanly through scompile.py; branch unchanged."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261018T135944-L-2973459",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

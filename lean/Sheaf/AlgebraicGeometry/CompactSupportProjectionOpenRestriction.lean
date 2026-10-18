@@ -7,11 +7,6 @@ module
 
 public import Sheaf.AlgebraicGeometry.CompactProjectionExchange
 public import Mathlib.AlgebraicGeometry.Noetherian
-import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
-import WeilConjectures.AlgebraicGeometry.EtaleLowerShriekBaseChangeMap
-import Sheaf.AlgebraicGeometry.UnboundedEtaleCompactSupportComparisons
-import WeilConjectures.SixFunctors.Etale.Derived.OpenImmersionLowerShriekProjection
-import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
 
 /-!
 # Compact-support projection and open restriction
@@ -78,7 +73,7 @@ theorem compactSupportProjection_open_restriction
           ((rightDerivedLowerShriekBaseChangeMap Λ (IsPullback.of_hasPullback f u)).app M) ≫
         compactProjectionMapCoeffFirst Λ (pullback.snd f u) (L((u)^*[ModuleCat.{u + 1} Λ]).obj K)
           (L((pullback.fst f u)^*[ModuleCat.{u + 1} Λ]).obj M) := by
-  sorry
+  exact compactProjectionMapCoeffFirst_baseChangeMap Λ (IsPullback.of_hasPullback f u) M K
 
 /-- The corresponding identity for inverse projection maps, if both projection maps are
 isomorphisms. No extra invertibility assumption on the exchange is needed.
@@ -118,6 +113,14 @@ theorem compactSupportProjection_open_restriction_inverse
           ((R(f)_![ModuleCat.{u + 1} Λ]).obj M) ≫
         ((-⊗ᴸ-(U)[ModuleCat.{u + 1} Λ]).obj (L((u)^*[ModuleCat.{u + 1} Λ]).obj K)).map
           ((rightDerivedLowerShriekBaseChangeMap Λ (IsPullback.of_hasPullback f u)).app M) := by
-  sorry
+  have h := compactSupportProjection_open_restriction Λ f u K M
+  have h' := congrArg
+    (fun e ↦ L((u)^*[ModuleCat.{u + 1} Λ]).map
+      (inv (compactProjectionMapCoeffFirst Λ f K M)) ≫ e ≫
+        inv (compactProjectionMapCoeffFirst Λ (pullback.snd f u)
+          (L((u)^*[ModuleCat.{u + 1} Λ]).obj K)
+          (L((pullback.fst f u)^*[ModuleCat.{u + 1} Λ]).obj M))) h
+  simpa only [Functor.map_inv, Category.assoc, IsIso.inv_hom_id_assoc,
+    IsIso.hom_inv_id, Category.comp_id] using h'
 
 end AlgebraicGeometry.Etale
