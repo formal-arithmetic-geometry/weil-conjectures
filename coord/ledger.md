@@ -16022,3 +16022,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 06:27 L: merged deliver/F9/Sheaf.CategoryTheory.FiniteCoconeLimitCycles (stage 3; reviewer PASS; first push; landing 20261018T062754-L-650389 (proof); batch 20261018T062645; modules 1; new nodes 0)
 - 06:27 L: merged deliver/G1/Sheaf.CategoryTheory.Galois.StacksGaloisAxioms (stage 3; reviewer PASS; first push; landing 20261018T062755-L-650505 (proof); batch 20261018T062645; modules 1; new nodes 0)
 - 06:27 L: merged deliver/G1/Sheaf.Paper.ExtendedLocalizationCech (stage 3; reviewer PASS; first push; landing 20261018T062755-L-650637 (proof); batch 20261018T062645; modules 1; new nodes 0)
+- 06:27 L: merged deliver/G1/Sheaf.Paper.FiniteCtfTriangulated (stage 3; reviewer PASS; first push; landing 20261018T062756-L-650780 (interface); batch 20261018T062645; modules 1; new nodes 0; change records: coord/changes/finite-ctf-proof-scopes.md)
