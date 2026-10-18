@@ -246,5 +246,23 @@
   "group": "Q75",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q75-adb3f4eb3 (reviewer sub-agent of L); spot-checked: I read the item in full, along with the statements of all four nodes it cites, the parent lem-trf-flat-mittag-leffler-criterion, unit sk-i-curve-zero and Stacks algebra.tex lemma-minimal-contains (line 21534; tags/tags confirms 0AS6). Statement: it matches 0AS6 hypothesis by hypothesis. M is flat Mittag-Leffler, E is an arbitrary module, there is a least submodule whose tensor image contains x, and that submodule is finite. Nothing is weakened or added. Step 1 (elementary): the set I of supporting submodules contains E, and the kernel of q: E -> prod_{N in I} E/N is the intersection K; checked pointwise, and q is not assumed surjective. Step 2 (elementary): beta is the Mittag-Leffler map theta_{M,(E/N)} of def-trf-mittag-leffler-module conjugated by the factor swaps, checked on pure tensors; that definition covers families indexed by any set, so I is allowed. Step 3 (elementary): (q_N tensor 1)(x)=0 follows from the composition and zero-map clauses of the tensor-product node; the components of beta then show (q tensor 1)(x)=0, which is Stacks' use of 059M. Step 4: the first sentence of the Mathlib leaf lem-weil-pbc-flat-tensor-exact applied to K->E->P gives x in the image of K tensor M, so K is the least support. Step 5 (elementary): the coefficients f_j of one lift span a submodule L contained in K that is itself a support, so K=L is finitely generated. proof_deps equals the union of the uses. No new nodes. No cycle (the item does not cite its parent). No off-unit route: the only non-definition dependency is a Mathlib leaf, so no tool_uses are needed and none were accepted. No SGA citation. No base-change morphism or coefficient category is involved (commutative algebra, not a target node). Duplicates: rg over dag/nodes for 0AS6, minimal-contains, smallest/least submodule and Mittag finds no other node stating this. The parent is the finite-free criterion and uses this item for its forward direction, so the item is not a restated clause. Small cases: x=0, E=0 or M=0 give K=0. M=R gives K=Re. Over a field with x = sum e_j tensor b_j (b_j a basis), K is the span of the e_j. R=Z, M=Q, x=1 tensor 1 in Z tensor Q: every nZ is a support but the intersection 0 is not, so the Mittag-Leffler hypothesis is really used. Minor, no change: the report mentions citations.json and searches.jsonl, which are not on the branch. No fixes written; review.md is in the run directory."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FlatMittagLefflerMinimalSupport",
+  "declaration": "Module.exists_fg_least_tensor_support",
+  "file": "lean/Sheaf/RingTheory/FlatMittagLefflerMinimalSupport.lean",
+  "statement": "theorem exists_fg_least_tensor_support {R : Type u} [CommRing R] {M : Type v} [AddCommGroup M] [Module R M] [Module.Flat R M] {E : Type w} [AddCommGroup E] [Module R E] (hML : Module.IsMittagLeffler.{u, v, max u w, w} R M) (x : TensorProduct R E M) : ∃ E₀ : Submodule R E, E₀.FG ∧ x ∈ Set.range (LinearMap.rTensor M E₀.subtype) ∧ ∀ N : Submodule R E, x ∈ Set.range (LinearMap.rTensor M N.subtype) → E₀ ≤ N",
+  "branch": "newtargets-dag",
+  "by": "Q103",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1c29efb44",
+  "group": "Q103",
+  "result": "pass",
+  "note": "Statement matches Stacks 0AS6 and the node clause by clause: CommRing R, Module.Flat R M, Module.IsMittagLeffler.{u,v,max u w,w} (an instance implied by the node's ML; index universe >= u contains Submodule R E, test universe max u v w holds ULift (E/N)), arbitrary E : Type w, x : E ⊗ M, ∃ E₀ with E₀.FG, x ∈ range (rTensor M E₀.subtype), least over all supports. Universes u, v, w independent. The 0AS6 proof works at these universes. Node unchanged except lean; lean.statement verbatim; docstrings carry the source, blueprint tag and five steps; proof is sorry only; no definitions or new nodes; no duplicate in side Sheaf or Mathlib. nt_compile --json clean (1.7 s); broken control copy errors as expected. Advisory: TensorProduct.Map import possibly redundant; the citer flat_mittag_leffler_criterion will need a universe transport at stage 3."
  }
 }
