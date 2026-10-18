@@ -102,7 +102,40 @@ theorem kInjectiveDerivedMapComputation
       (HomotopyCategory.quotient C (.up ℤ)).obj J,
       DerivedCategory.Qh.map g = kInjectiveResolutionHomTarget a b h →
       F.kInjectiveDerivedResolutionMap enough a b h = F.kInjectiveHomotopyImage g) := by
-  sorry
+  constructor
+  · obtain ⟨g, hg⟩ := (CochainComplex.IsKInjective.Qh_map_bijective
+      ((HomotopyCategory.quotient C (.up ℤ)).obj I) J).surjective
+        (kInjectiveResolutionHomTarget a b h)
+    exact ⟨g, hg, fun g' hg' ↦
+      (CochainComplex.IsKInjective.Qh_map_bijective _ J).injective (hg'.trans hg.symm)⟩
+  · intro g hg
+    let R := F.rightDerivedFunctorOfQuasiIsoResolutions enough
+    let η := F.rightDerivedFunctorOfQuasiIsoResolutionsUnit enough
+    have := F.rightDerivedFunctorOfQuasiIsoResolutionsUnit_isIso enough I
+    have := F.rightDerivedFunctorOfQuasiIsoResolutionsUnit_isIso enough J
+    calc
+      F.kInjectiveDerivedResolutionMap enough a b h =
+          (DerivedCategory.quotientCompQhIso D).inv.app
+              ((F.mapHomologicalComplex (.up ℤ)).obj I) ≫
+            η.app ((HomotopyCategory.quotient C (.up ℤ)).obj I) ≫
+            R.map (DerivedCategory.Qh.map g) ≫
+            CategoryTheory.inv (η.app ((HomotopyCategory.quotient C (.up ℤ)).obj J)) ≫
+            (DerivedCategory.quotientCompQhIso D).hom.app
+              ((F.mapHomologicalComplex (.up ℤ)).obj J) := by
+              rw [hg]
+              simp [kInjectiveDerivedResolutionMap,
+                rightDerivedFunctorOfQuasiIsoResolutionsObjIso,
+                kInjectiveResolutionHomTarget, R, η, Category.assoc,
+                ← Functor.map_comp, ← Functor.map_comp_assoc, -Functor.map_inv,
+                -NatTrans.naturality]
+      _ = F.kInjectiveHomotopyImage g := by
+        have hn := η.naturality g
+        dsimp at hn
+        dsimp [kInjectiveHomotopyImage]
+        change _ ≫ η.app _ ≫ R.map (DerivedCategory.Qh.map g) ≫ _ ≫ _ = _
+        rw [← reassoc_of% hn]
+        simp
+        rfl
 
 /-- Identity and composition compatibility, both for the unique lifts and their computed
 images. Source: Stacks Tags 070I and 070Y
@@ -133,7 +166,13 @@ theorem kInjectiveDerivedMapComputation_functorial
     F.kInjectiveDerivedResolutionMap enough a d (h ≫ h') =
       F.kInjectiveDerivedResolutionMap enough a b h ≫
         F.kInjectiveDerivedResolutionMap enough b d h' := by
-  sorry
+  refine ⟨?_, ?_, ?_, ?_⟩
+  · simp [kInjectiveResolutionHomTarget, -NatTrans.naturality]
+  · simp [kInjectiveDerivedResolutionMap]
+  · intro g g' hg hg'
+    rw [Functor.map_comp, hg, hg']
+    simp [kInjectiveResolutionHomTarget, Category.assoc]
+  · simp [kInjectiveDerivedResolutionMap, Functor.map_comp, Category.assoc]
 
 /-- The transition is the image of the unique lift of Qa inverse followed by Qb.
 Source: Stacks Tags 070I and 070Y
@@ -153,7 +192,9 @@ theorem kInjectiveDerivedResolutionTransition_computation
       DerivedCategory.Qh.map k = kInjectiveResolutionHomTarget a b (𝟙 _) →
       (F.kInjectiveDerivedResolutionTransition enough a b).hom =
         F.kInjectiveHomotopyImage k) := by
-  sorry
+  obtain ⟨hex, hmap⟩ := F.kInjectiveDerivedMapComputation enough a b (𝟙 _)
+  refine ⟨hex, fun k hk ↦ ?_⟩
+  simpa [kInjectiveDerivedResolutionMap, kInjectiveDerivedResolutionTransition] using hmap k hk
 
 /-- Identity, inverse and cocycle laws for the transition isomorphisms.
 Source: Stacks Tag 070Y (blueprint: lem-sf-kinjective-derived-map-computation).
@@ -172,7 +213,13 @@ theorem kInjectiveDerivedResolutionTransition_laws
     F.kInjectiveDerivedResolutionTransition enough a b ≪≫
         F.kInjectiveDerivedResolutionTransition enough b d =
       F.kInjectiveDerivedResolutionTransition enough a d := by
-  sorry
+  refine ⟨?_, ?_, ?_⟩
+  · ext
+    simp [kInjectiveDerivedResolutionTransition]
+  · ext
+    simp [kInjectiveDerivedResolutionTransition]
+  · ext
+    simp [kInjectiveDerivedResolutionTransition]
 
 /-- The change-of-resolution square commutes for every derived morphism.
 Source: Stacks Tag 070Y (blueprint: lem-sf-kinjective-derived-map-computation).
@@ -191,6 +238,7 @@ theorem kInjectiveDerivedResolutionTransition_naturality
         (F.kInjectiveDerivedResolutionTransition enough b b').hom =
       (F.kInjectiveDerivedResolutionTransition enough a a').hom ≫
         F.kInjectiveDerivedResolutionMap enough a' b' h := by
-  sorry
+  simp [kInjectiveDerivedResolutionMap, kInjectiveDerivedResolutionTransition,
+    Category.assoc]
 
 end CategoryTheory.Functor
