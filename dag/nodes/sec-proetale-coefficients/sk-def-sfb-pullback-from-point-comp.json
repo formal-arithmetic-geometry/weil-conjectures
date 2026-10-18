@@ -268,5 +268,27 @@
     }
    ]
   }
+ },
+ "lean": {
+  "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic",
+  "declaration": "AlgebraicGeometry.ProEtale.upperStarFromPointComp",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.upperStarFromPointComp",
+   "AlgebraicGeometry.ProEtale.isMonoidal_upperStarFromPointComp"
+  ],
+  "statement": "noncomputable def upperStarFromPointComp :\n    upperStarFromPoint Y ⋙ (f)^*[Ab.{u + 1}] ≅ upperStarFromPoint X",
+  "branch": "slopmaster2",
+  "by": "N6",
+  "date": "2026-10-18",
+  "existing": true,
+  "note": "Exact existing comparison and monoidality instance in the published pro-etale framework (coord/pefw-upstream-framework.md), read at lean/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Basic.lean:339-354. The signature uses the explicitly bound context universe u and variables {X Y : Scheme.{u}} (f : X ⟶ Y). The definition is Functor.associator followed by isoWhiskerLeft pointUpperStar of (upperStarComp Ab f (toSpecZ Y)).symm and eqToIso induced by comp_toSpecZ f. Thus it is exactly the specified canonical comparison, not an arbitrary natural isomorphism. The second listed declaration states NatTrans.IsMonoidal (upperStarFromPointComp f).hom for the canonical strong monoidal functors and sheafified objectwise integer tensor. Its upstream proof remains sorry; this is a stage-2 statement binding, not a claim of proof completion. No new module or construction is needed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ed9791feb",
+  "group": "N6",
+  "result": "pass",
+  "note": "Existing binding to upperStarFromPointComp (no sorry; standard axioms only) and isMonoidal_upperStarFromPointComp (upstream sorry, allowed at stage 2) in ModuleObject/Basic.lean:205-215. Body: associator, then the inverse of upperStarComp (conjugate of lowerStarComp, matching det-pe clause 5) whiskered by p^*, then eqToIso of comp_toSpecZ; exactly the node's canonical iso. upperStarFromPoint is what the dependency's sfbPullbackFromPoint abbreviates; the sheaf tensor is Sheaf.monoidalCategory (checked by rfl); the composite's lax structure is LaxMonoidal.comp of the strong structures (checked by rfl). Universes Scheme.{u}/Profinite.{u}/Ab.{u+1} as in the dependency; no extra hypotheses; edge cases covered; statement field verbatim; no duplicate declaration; report has both sections. nt_compile probe clean in 2.1 s. No findings."
  }
 }
