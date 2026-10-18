@@ -12,7 +12,8 @@
   "def-trf-fs-log-blowup",
   "def-sbc-smooth-morphisms",
   "def-weil-etale-morphism",
-  "def-weil-affine-spectrum"
+  "def-weil-affine-spectrum",
+  "def-per-fs-log-smooth-etale"
  ],
  "proof": [
   {
@@ -295,5 +296,29 @@
   "group": "Q51",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q51-e5c6b6255 (reviewer sub-agent of L); spot-checked: FIX: the mathematics was read in full and the item is a correct split of ILO XVI 3.6.5 (printed p.253), using 3.6.3 and Definition 3.5.11 (pp.250-252) and VI 1.7-1.8 (p.70). The statement is unchanged.\n\nSteps checked:\n- Step 1: the canonical trait is log regular at both points.\n- Step 3: W is strict, hence log regular, and regular through both directions of the VI 1.7 criterion.\n- Step 4: F is a face, and face-sharpening gives P_F fs with units F^gp; the chart extends and c is étale by cancellation.\n- Step 5: P/H is the characteristic monoid and is free.\n- Step 6: P is N^r plus H, a basis exists, sign flips make all exponents nonnegative, and g(1)≠0.\n- Step 7: the correct comparison target is the torus-open principal open of V(S,π,e), not V itself.\n- Step 8: shrinking to a regular affine open.\nEdge cases tested: generic point with r=0, s=0, n=1, and invertible torsion P=N with g(1)=d (this rules out the torsion-free trf preservation lemma).\n\nFaults repaired (three):\n- C5: new lem-per-log-smooth-torsionfree-etale-chart duplicates the landed same-unit lem-per-trait-log-smooth-uniformizer-chart (XVI 3.6.3 with Q=N), which is identical in live. Step 2 now cites it plus def-per-fs-log-smooth-etale (kernel 0) and chooses w in a^{-1}(x) with a geometric point over it. Node dropped.\n- C5: new lem-per-log-regular-free-characteristic is word for word the first sentence of lem-trf-free-characteristic-regular-boundary (VI 1.7). Steps 3 and 5 now cite that node. Node dropped. A per copy is not justified for batch 5: that trf node is already in the base batch-5 closure, so citing it adds 0 nodes.\n- C1: Step 3 used 'étale hence smooth' without a node; it now cites lem-weil-pbc-etale-smooth-zero-dimensional-fibres.\nproof_deps, the summary and tool_uses were updated (two declarations added). No cycle; every step is under 2000 characters.\n\nKept: lem-per-log-smooth-invertible-torsion-log-regular, which is VI 1.8 with invertible torsion. It is a true generalization of lem-trf-log-smooth-log-regular, which requires a torsion-free cokernel, and Step 1 needs it.\n\nBatch 5: def-trf-fs-log-blowup (general definition), lem-trf-fs-face-sharpening (monoid algebra) and lem-trf-fg-torsionfree-group-free (f.g. abelian groups) are generic, not trace-formula or Poincaré-duality steps. All three are already in the base batch-5 closure, and the fixed delivery adds no trf or pod node. Accepted.\n\nAccepted tool_uses: face-sharpening, fg basis, algebraic closure, 01T6, étale composition/cancellation, VI 1.7 node, étale⇒smooth.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RegularLogSmoothMonomialChart",
+  "declaration": "AlgebraicGeometry.regular_logSmooth_monomial_chart",
+  "declarations": [
+   "AlgebraicGeometry.monomialTraitAlgebra",
+   "AlgebraicGeometry.monomialTraitAlgebraMap",
+   "AlgebraicGeometry.regular_logSmooth_monomial_chart"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/RegularLogSmoothMonomialChart.lean",
+  "statement": "theorem regular_logSmooth_monomial_chart (R : Type u) [CommRing R] [IsDomain R] [IsLocalRing R] [IsNoetherianRing R] (hdim : ringKrullDim R = 1) (π : R) (hπ : IsLocalRing.maximalIdeal R = Ideal.span {π}) (M : EtaleLogStructure (Spec (.of R))) (hfs : M.IsFineSaturated) (hcanonical : ∃ e : M.monoidSheaf.obj ≅ divisorialLogPresheaf ((Spec (.of R)).basicOpen ((Scheme.ΓSpecIso (.of R)).inv π)).ι, e.hom ≫ divisorialStructuralMap ((Spec (.of R)).basicOpen ((Scheme.ΓSpecIso (.of R)).inv π)).ι = M.alpha) (X : FineSaturatedLogScheme.{u}) (hregular : IsRegularScheme X.scheme) [IsNoetherian X.scheme] (x : X.scheme) (f : EtaleLogHom X ⟨Spec (.of R), inferInstance, M, hfs⟩) (hcharts : ∀ y : X.scheme, ∃ c : FSLogChart f, y ∈ Set.range c.V.hom ∧ ∃ e : c.P ≃* Multiplicative (ULift.{u} ℕ), (∃ π₀ : R, IsLocalRing.maximalIdeal R = Ideal.span {π₀} ∧ ∀ p : c.P, M.alpha.app (op c.W) (c.chartY p) = c.W.hom.appTop ((Scheme.ΓSpecIso (.of R)).inv π₀) ^ (e p).toAdd.down) ∧ Function.Injective c.groupMap ∧ Finite (CommGroup.torsion c.cokernel) ∧ (∀ v : c.V.left, IsUnit (Nat.card (CommGroup.torsion c.cokernel) : c.V.left.presheaf.stalk v)) ∧ Smooth c.comparison) : ∃ (U : Scheme.{u}) (a : U ⟶ X.scheme) (v : U), IsAffine U ∧ IsRegularScheme U ∧ IsNoetherian U ∧ Etale a ∧ a v = x ∧ ∃ (n : ℕ) (e : Fin n → ℕ), 0 < n ∧ (∃ i, e i ≠ 0) ∧ ∃ b : U ⟶ Spec (.of (monomialTraitAlgebra R π n e)), Etale b ∧ b ≫ Spec.map (CommRingCat.ofHom (monomialTraitAlgebraMap R π n e)) = a ≫ f.base",
+  "branch": "newtargets-dag",
+  "by": "Q101",
+  "date": "2026-10-18",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-3405735d4"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3405735d4",
+  "group": "Q101",
+  "result": "fix",
+  "note": "H3: hcharts pinned every base chart to 1↦π for the conclusion's own uniformizer π, while the node's log-smooth hypothesis does not depend on π (proof Step 2 needs XVI 3.6.3 to obtain π-charts). Fixed: base chart is 1↦π₀ for some uniformizer π₀ chosen per chart; docstring updated; lean.statement updated verbatim in fixes/lem-per-regular-log-smooth-monomial-chart.lean-record.json; fixes/RegularLogSmoothMonomialChart.lean compiles clean (nt_compile --json, exit 0, 6.3 s; delivered file also clean, 3.2 s). Everything else checked against the node and the dependency declarations: trait (domain, local, Noetherian, dim 1, maximal ideal = span π), canonical log structure via iso with divisorialLogPresheaf of the generic open D(π) commuting with the structural maps, FSLogChart with base monoid ≅ N, injective groupMap, finite cokernel torsion invertible in every stalk, smooth comparison; conclusion: U affine, regular, Noetherian, a étale with a v = x, n>0, exponents not all zero, literal quotient R[X]/(∏X^e − Cπ), b étale and over S. Edge cases (empty X, generic point r=0, s=0, invertible torsion, universes all u) OK. No duplicate notion; helpers are real data; no hollow defs; sorry only. Advisory: the report's second-reading section is the worker's self-check."
  }
 }

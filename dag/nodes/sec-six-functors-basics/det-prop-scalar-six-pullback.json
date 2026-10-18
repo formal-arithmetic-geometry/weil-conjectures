@@ -291,5 +291,23 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.ScalarSixPullback",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.scalarSixPullback",
+  "statement": "theorem scalarSixPullback : ∃ G : ScalarSixGeometry.{u}, ∃ C : ScalarSixPullbackData.{u}, ∀ (ell : ℕ) [Fact ell.Prime] (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ell)], ∃ E : LocallyClosedExtensionData.{u}, E.Coherent ∧ ∃ D : E.DerivedCoherence, ∃ O : ScalarSixOpenComparison E G k, ScalarSixExtensionData E D G C k O",
+  "branch": "newtargets-dag",
+  "by": "Q17",
+  "date": "2026-10-19",
+  "existing": false,
+  "file": "lean/Sheaf/SixFunctors/ScalarSixPullback.lean"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a66b7f536",
+  "group": "Q17",
+  "result": "pass",
+  "note": "Real rewrite answering all six earlier RETURNs. Clause (1): θ is pinned to scalarSixPullHom (the canonical non-flat comparison built from derivedComapUpperStarIso), with composition law for f,g, arbitrary Scheme.{u} morphisms and no flatness. Clause (2): sk-def-sfb-dc-setting binders (ℓ prime, char k = p ≠ ℓ, LocallyOfFiniteType/QuasiCompact/IsSeparated over Spec k); β over the published LocallyClosedExtensionData.derived, pinned by restriction normalization plus the DerivedCoherence Hom bijection; immersion-composition equation via D.gamma; open case equal to derivedOpenImmersionShriekIso; closed case on the actual push, pinned. Clause (3): canonical conjugate τ and both squares (θ and β). Existentials G/E/D/O are pinned (E and D follow the dependency's accepted pattern). No added hypotheses, universes bound, docstrings carry source and 8 steps, statement verbatim, only the theorem is sorry; node diff vs live is the lean record only. nt_compile --json: exit 0, 41.0 s, no errors or warnings. Advisories: statement uses decls of def-sfb-derived-open-immersion-shriek-iso and def-sfb-derived-comap-upper-star-iso, which are not stmt_deps; ∃ E per k rather than ∀ coherent E; G re-presents existing InternalModuleOperations comparisons in iso-coefficient form; record lacks declarations; 41 s is near the limit (genInjectivity off on the 3 structures if landing times out); strict compositionIdentifier equality is for stage 3."
  }
 }
