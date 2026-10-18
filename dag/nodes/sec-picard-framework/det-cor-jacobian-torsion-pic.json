@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "det-cor-jacobian-torsion-pic",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Divisibility of $J(C)(k)$ and the $n$-torsion of $\\operatorname{Pic}(C)$",
@@ -12,39 +12,136 @@
   "document": "literature/blueprint/main-20261015/blueprint/sec-picard-framework/sk-cor-jacobian-torsion/det-cor-jacobian-torsion-pic.md",
   "place": "node det-cor-jacobian-torsion-pic, order None"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "sk-def-curve",
+  "sk-def-av-jacobian",
+  "sk-def-av-mult-n",
+  "def-sc-picard-group",
+  "def-sc-pic0"
+ ],
  "proof": [
   {
-   "text": "Write $J=J(C)$; it is an abelian variety over $k$ by [sk-thm-picard-main].",
+   "text": "Put $J=J(C)$ and write the Picard group additively. By [sk-thm-picard-main], $J$ is an abelian variety and the identification $J(k)=\\operatorname{Pic}^0(C)$ is an identification of groups. By [lem-sc-pic-proper-decomposition], the degree is a surjective group homomorphism and its kernel is exactly $\\operatorname{Pic}^0(C)$. Thus, identifying $J(k)$ with its image, we have the short exact sequence $0\\to J(k)\\to\\operatorname{Pic}(C)\\xrightarrow{\\deg}\\mathbf Z\\to0$. The hypotheses of both statements are precisely that $k$ is algebraically closed and $C$ is a smooth proper connected curve.",
    "uses": [
-    "sk-thm-picard-main"
+    "sk-thm-picard-main",
+    "lem-sc-pic-proper-decomposition"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-picard-framework/sk-cor-jacobian-torsion/det-cor-jacobian-torsion-pic.proof.md",
+    "place": "Opening paragraph and (2), degree sequence"
+   }
   },
   {
-   "text": "*(1)* By [sk-prop-av-mult-surjective] and [sk-prop-av-isogeny],\n$[n]\\colon J\\to J$ is finite and surjective. Let $y\\in J(k)$, viewed as a\nclosed point $y\\colon\\Spec k\\to J$. The fibre\n$F=J\\times_{[n],J,y}\\Spec k$ is finite over $\\Spec k$ because $[n]$ is\nfinite, and nonempty because $[n]$ is surjective on underlying points and\n$y$ lies in the image. So $F=\\Spec B$ with $B$ a nonzero finite\n$k$-algebra. For a maximal ideal $\\mathfrak m\\subset B$, the field\n$B/\\mathfrak m$ is a finite extension of $k$, hence equal to $k$ since $k$\nis algebraically closed. The resulting $k$-point of $F$ is a point\n$x\\in J(k)$ with $[n](x)=y$, that is $nx=y$ in the group $J(k)$. Thus $J(k)$\nis divisible ([sk-prop-av-divisible]).",
-   "uses": [],
-   "elementary": null
+   "text": "Fix any $n\\ge1$. Apply [lem-sc-isogeny-surjective] to the abelian variety $J$ from step 1: for every $y\\in J(k)$ there is $x\\in J(k)$ with $nx=y$. This proves (1), and in particular $nJ(k)=J(k)$. This lemma requires only $n\\ge1$, including when the characteristic divides $n$; its surjectivity is the finite-surjective-fibre argument referred to in the blueprint.",
+   "uses": [
+    "lem-sc-isogeny-surjective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-picard-framework/sk-cor-jacobian-torsion/det-cor-jacobian-torsion-pic.proof.md",
+    "place": "(1), surjectivity on rational points"
+   }
   },
   {
-   "text": "*(2)* The identity $J[n](k)=J(k)[n]$ holds because $J[n](k)$ is the kernel\nof $[n]$ on $J(k)$ (universal property of the kernel). By\n[sk-thm-picard-main], $J(k)=\\operatorname{Pic}^0(C)$ as groups, and by\n[sk-cor-picard-degree] there is an exact sequence of abelian groups\n$$\n0\\longrightarrow J(k)\\longrightarrow\\operatorname{Pic}(C)\\xrightarrow{\\ \\deg\\ }\\Z\\longrightarrow0.\n$$\nApply the snake lemma to the endomorphism \"multiplication by $n$\" of this\nsequence. It gives an exact sequence\n$$\n0\\to J(k)[n]\\to\\operatorname{Pic}(C)[n]\\to\\Z[n]\\to J(k)/nJ(k)\\to\\operatorname{Pic}(C)/n\\operatorname{Pic}(C)\\xrightarrow{\\deg}\\Z/n\\Z\\to0 .\n$$\nHere $\\Z[n]=0$ since $\\Z$ is torsion free, and $J(k)/nJ(k)=0$ by (1).\nHence $J(k)[n]\\to\\operatorname{Pic}(C)[n]$ is an isomorphism, i.e. every\n$n$-torsion class in $\\operatorname{Pic}(C)$ has degree $0$ and lies in\n$J(k)[n]$; and $\\deg$ induces an isomorphism\n$\\operatorname{Pic}(C)/n\\operatorname{Pic}(C)\\simeq\\Z/n\\Z$.",
+   "text": "By [sk-def-av-mult-n], $J[n]=J\\times_{[n],J,e}\\operatorname{Spec}k$. A $k$-point of this fibre product is uniquely a point $a\\in J(k)$ satisfying $na=0$, so $J[n](k)=J(k)[n]$. If $L\\in\\operatorname{Pic}(C)$ satisfies $nL=0$, the degree homomorphism in step 1 gives $n\\deg L=0$ in $\\mathbf Z$. Since $n>0$, this forces $\\deg L=0$. Exactness therefore puts $L$ in $J(k)$, and its same equation says $L\\in J(k)[n]$. Conversely, the inclusion of this subgroup into $\\operatorname{Pic}(C)$ preserves $nL=0$. Hence the inclusion restricts to the asserted equality of torsion subgroups.",
    "uses": [
-    "sk-thm-picard-main"
+    "sk-def-av-mult-n",
+    "lem-sc-pic-proper-decomposition"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-picard-framework/sk-cor-jacobian-torsion/det-cor-jacobian-torsion-pic.proof.md",
+    "place": "(2), kernel identity and torsion part of the multiplication-by-n diagram"
+   }
+  },
+  {
+   "text": "Degree induces a homomorphism $\\overline{\\deg}:\\operatorname{Pic}(C)/n\\operatorname{Pic}(C)\\to\\mathbf Z/n\\mathbf Z$: replacing $L$ by $L+nM$ changes its degree by $n\\deg M$. It is surjective because the degree homomorphism is surjective by [lem-sc-pic-proper-decomposition]: for an integer representative $d$ choose $L$ of degree $d$, whose class maps to $d\\bmod n$.",
+   "uses": [
+    "lem-sc-pic-proper-decomposition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-picard-framework/sk-cor-jacobian-torsion/det-cor-jacobian-torsion-pic.proof.md",
+    "place": "(2), cokernel part of the multiplication-by-n diagram: induced degree and surjectivity"
+   }
+  },
+  {
+   "text": "For injectivity let $L$ represent a class in the kernel of $\\overline{\\deg}$. Then $\\deg L=nm$ for some $m\\in\\mathbf Z$. By [lem-sc-pic-proper-decomposition] choose $M\\in\\operatorname{Pic}(C)$ with $\\deg M=m$. The element $L-nM$ has degree zero, hence belongs to $J(k)$ by step 1. By step 2 choose $B\\in J(k)$ with $nB=L-nM$. Inside the Picard group this gives $L=n(M+B)$, so the original quotient class is zero. Thus $\\overline{\\deg}$ is injective as well as surjective. Its inverse is additive: the preimages of a sum and the sum of the preimages have the same image and hence coincide by injectivity. This is the claimed isomorphism induced by degree.",
+   "uses": [
+    "lem-sc-pic-proper-decomposition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-picard-framework/sk-cor-jacobian-torsion/det-cor-jacobian-torsion-pic.proof.md",
+    "place": "(2), cokernel part of the multiplication-by-n diagram: vanishing kernel"
+   }
   }
  ],
  "proof_deps": [
-  "sk-thm-picard-main"
+  "sk-thm-picard-main",
+  "lem-sc-pic-proper-decomposition",
+  "lem-sc-isogeny-surjective",
+  "sk-def-av-mult-n"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-picard-framework/sk-cor-jacobian-torsion/det-cor-jacobian-torsion-pic.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-picard-framework/sk-cor-jacobian-torsion/det-cor-jacobian-torsion-pic.proof.md",
+  "place": "Opening paragraph, (1) and (2); elementary kernel/cokernel diagram chase expanded"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "divisibility of Jacobian rational points and Picard n-torsion degree quotient over algebraically closed field",
+   "results": "FunctionField.classNumber; WeierstrassCurve.Jacobian.addMap_of_Z_ne_zero; WeierstrassCurve.Jacobian.addMap_of_Y_eq; WeierstrassCurve.Jacobian.Y_eq_iff'; WeierstrassCurve.Jacobian.dblXYZ_of_Y_eq; WeierstrassCurve.Jacobian.dblXYZ_of_Z_ne_zero; WeierstrassCurve.Jacobian.Y_eq_of_Y_ne'; WeierstrassCurve.Jacobian.eval_polynomial_of_Z_ne_zero",
+   "date": "2026-10-19",
+   "verdict": "no match: results concern Weierstrass coordinates or arithmetic class groups, not general curve Jacobians or their Picard degree quotient"
+  },
+  {
+   "tool": "loogle",
+   "query": "Function.Surjective, Picard, n-torsion, quotient",
+   "results": "loogle: unknown identifier 'Picard'",
+   "date": "2026-10-19",
+   "verdict": "query error: unknown identifier; not evidence of absence; retried with a name-substring search"
+  },
+  {
+   "tool": "grep",
+   "query": "divisible|surjective_npow|Picard.*degree|quotient.*n",
+   "results": "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Topology.lean; Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Topology.lean; Mathlib/AlgebraicGeometry/Geometrically/Connected.lean; Mathlib/AlgebraicGeometry/Geometrically/Connected.lean; Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean; Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean; Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean; Mathlib/AlgebraicGeometry/Sites/ConstantSheaf.lean (searched Mathlib/AlgebraicGeometry/)",
+   "date": "2026-10-19",
+   "verdict": "no match: geometric grep results concern quotient constructions or elliptic Jacobian coordinates, not this theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Jacobian of smooth proper curve over algebraically closed field is divisible and Picard group modulo n is integers modulo n",
+   "results": "WeierstrassCurve.Jacobian.Point.instAddCommGroup; WeierstrassCurve.Jacobian; WeierstrassCurve.Jacobian.Point.zero_point; WeierstrassCurve.Jacobian.Point; WeierstrassCurve.toJacobian; WeierstrassCurve.Jacobian.nonsingularLift_iff; WeierstrassCurve.Jacobian.Point.instAdd; WeierstrassCurve.Jacobian.neg_smul_equiv",
+   "date": "2026-10-19",
+   "verdict": "no match: all hits concern Weierstrass Jacobian coordinates and their group law"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Pic\"",
+   "results": "Lean.Meta.Closure.pickNextToProcess?; Lean.Meta.Closure.pickNextToProcessAux; Batteries.Tactic.tacticPick_goal_; unpickle; pickle; withUnpickle; Mathlib.CrossRef.PiBaseTopic; Mathlib.CrossRef.pibaseTopic",
+   "date": "2026-10-19",
+   "verdict": "no match: substring results are unrelated to Picard groups"
+  },
+  {
+   "tool": "grep",
+   "query": "Jacobian|AbelianVariety|Picard|picDegree",
+   "results": "Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean; Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean; Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean; Mathlib/AlgebraicGeometry/EllipticCurve/Jacobian/Formula.lean; Mathlib/AlgebraicGeometry/EllipticCurve/Jacobian/Formula.lean; Mathlib/AlgebraicGeometry/EllipticCurve/Jacobian/Formula.lean; Mathlib/AlgebraicGeometry/EllipticCurve/Jacobian/Formula.lean; Mathlib/AlgebraicGeometry/EllipticCurve/Jacobian/Formula.lean (searched Mathlib/AlgebraicGeometry/)",
+   "date": "2026-10-19",
+   "verdict": "no match: geometric grep results concern quotient constructions or elliptic Jacobian coordinates, not this theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an abelian variety over an algebraically closed field multiplication by a positive integer on rational points is surjective and the Picard degree induces an isomorphism modulo that integer",
+   "results": "ClassGroup.mkMMem_surjective; WeierstrassCurve.Jacobian.PointClass; WeierstrassCurve.Affine.Point.toClass_apply; WeierstrassCurve.Affine.Point.toClass; WeierstrassCurve.Affine.Point.toClass_injective; WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_mul_mk_XYIdeal'; WeierstrassCurve.Affine.Point.toClass_some; WeierstrassCurve.Affine.Point.toClass_eq_zero",
+   "date": "2026-10-19",
+   "verdict": "no match: results concern Weierstrass coordinates or arithmetic class groups, not general curve Jacobians or their Picard degree quotient"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "unreachable"
@@ -73,5 +170,29 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "det-cor-jacobian-torsion-pic",
+  "worker": "stage1",
+  "summary": "Kept the statement, supplied its notion dependencies, and replaced missing imported labels by the existing divisibility and Picard degree-sequence nodes. Expanded the multiplication-by-n kernel/cokernel calculation into explicit element arguments; no new node is needed. Checked all citations against their statements, the characteristic-dividing case, n=1 and genus zero.",
+  "blueprint": "Step 1 realizes the opening paragraph and degree sequence in (2); step 2 realizes (1) using the existing sk-prop-av-divisible unit lemma; step 3 realizes the kernel identity and torsion calculation in (2); steps 4–5 spell out the cokernel part of the same multiplication-by-n diagram. This is unit sk-cor-jacobian-torsion, step 4.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-pic-proper-decomposition",
+    "why": "Generic exact degree sequence for the same proper smooth connected curve, needed exactly as the unit step 4 cites sk-cor-picard-degree, whose id is absent from the current DAG. No node in this unit states that sequence; this existing lemma supplies it without changing the route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-pic-proper-decomposition"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q87-ae494ee78",
+  "group": "Q87",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q87-ae494ee78 (reviewer sub-agent of L); spot-checked: I read the item and every cited statement in full. The statement is verbatim the main-20261015 det-cor-jacobian-torsion-pic, and it is true for all n>0, including char p | n. I checked n=1, g=0 and n=p in characteristic p. Step 1: sk-thm-picard-main gives J abelian with J(k)=Pic^0(C) as groups, and lem-sc-pic-proper-decomposition gives the exact degree sequence with deg surjective under the same hypotheses. Step 2: lem-sc-isogeny-surjective holds for every n>=1 with no condition on the characteristic. It is the node of unit sk-prop-av-divisible, which is on the unit route. Its def-sc-abelian-variety is word for word sk-def-av. Steps 3-5 are elementary kernel and cokernel chases, correctly written, matching the blueprint snake-lemma proof. No new nodes. No duplicate: lem-sc-pic-proper-ntorsion needs n prime to p and gives only abstract isomorphisms; the structure and kernel nodes cover the other clauses of the unit. No cycle. The only citer (lem-per-sepclosed-regular-proper-curve-trace) uses the unchanged Pic/N clause. Tool use of lem-sc-pic-proper-decomposition accepted: unit sk-cor-picard-degree has no node, so nothing in the item's own route supplies the sequence. The worker wrote tool_uses themselves instead of leaving it to the maintainer (C8); I endorse the entry. Batch-5 check: sk-def-curve and sk-def-av-jacobian are notion definitions. Their closure and that of lem-sc-isogeny-surjective reach only general results: def-pod-ring-scalar-extension, the base-change lemma lem-pod-separated-finite-type-base-change, and lem-trf-proper-finite-fibre-finite-near. None of these is a step of the trace formula or Poincare duality proofs, so no citation must be replaced by an assumption leaf. No SGA cited. No fixes."
  }
 }
