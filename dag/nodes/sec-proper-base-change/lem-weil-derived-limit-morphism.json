@@ -25,7 +25,7 @@
  ],
  "proof": [
   {
-   "text": "Put $P=\\prod_nK_n$, $P\\prime=\\prod_nK\\prime_n$ and $a=\\prod_n\\varphi_n:P\\to P\\prime$. By the definition of the product morphism, $\\mathrm{pr}\\prime_n\\circ a=\\varphi_n\\circ\\mathrm{pr}_n$. Consequently $\\mathrm{pr}\\prime_n\\circ s\\prime\\circ a=f\\prime_n\\circ\\varphi_{n+1}\\circ\\mathrm{pr}_{n+1}=\\varphi_n\\circ f_n\\circ\\mathrm{pr}_{n+1}=\\mathrm{pr}\\prime_n\\circ a\\circ s$, using exactly the compatibility equation for a morphism of inverse systems. Uniqueness in the product universal property gives $s\\prime\\circ a=a\\circ s$. Subtracting from $a$ in the additive category gives $(1-s\\prime)\\circ a=a\\circ(1-s)$. This also follows directly from the compatibility clause of def-weil-tower-transition-endomorphism.",
+   "text": "Let a = Limits.Pi.map (fun n => φ.app ⟨n⟩). Naturality of φ on (homOfLE (Nat.le_add_right n 1)).op, simplified by Functor.ofOpSequence_map_homOfLE_succ, gives φ_(n+1) ≫ f′_n = f_n ≫ φ_n. Apply CategoryTheory.towerTransitionEndomorphism_natural_backward from def-weil-tower-transition-endomorphism to obtain a ≫ (1-s′) = (1-s) ≫ a. This lemma already proves the componentwise product calculation using the product universal property in def-weil-category-product and preadditivity in def-weil-triangulated-category.",
    "uses": [
     "def-weil-category-product",
     "def-weil-inverse-system",
@@ -39,7 +39,7 @@
    }
   },
   {
-   "text": "Rotate each given distinguished triangle once using TR2 in def-weil-triangulated-category, obtaining $P\\xrightarrow{1-s}P\\xrightarrow{\\delta}K[1]\\xrightarrow{-p[1]}P[1]$ and $P\\prime\\xrightarrow{1-s\\prime}P\\prime\\xrightarrow{\\delta\\prime}K\\prime[1]\\xrightarrow{-p\\prime[1]}P\\prime[1]$. The square on their first arrows, with vertical arrows $a,a$, commutes by step 1. Apply TR3, as stated in that same definition, to get $c:K[1]\\to K\\prime[1]$ with $c\\circ\\delta=\\delta\\prime\\circ a$ and $a[1]\\circ(-p[1])=(-p\\prime[1])\\circ c$. These are direct applications of the two defining axioms, rather than a separate triangle-completion lemma.",
+   "text": "Apply CategoryTheory.Pretriangulated.complete_distinguished_triangle_morphism₁ to Triangle.mk p (towerTransitionEndomorphism f) δ and Triangle.mk p′ (towerTransitionEndomorphism f′) δ′, distinguished by the supplied hypotheses, with both middle maps equal to a and commutation the symmetric equality of step 1. This Mathlib lemma implements TR2/TR3 of def-weil-triangulated-category: rotate both triangles, complete the square, and use full faithfulness and additivity of the shift to cancel the signs and descend the completed map to ψ : L ⟶ L′.",
    "uses": [
     "def-weil-triangulated-category"
    ],
@@ -50,7 +50,7 @@
    }
   },
   {
-   "text": "Since $[1]$ is an additive autoequivalence in def-weil-triangulated-category, it is full and faithful: choose $\\varphi:K\\to K\\prime$ with $\\varphi[1]=c$. Cancel the minus signs in the last equation of step 2 to get $a[1]\\circ p[1]=p\\prime[1]\\circ\\varphi[1]$. Faithfulness, together with preservation of composition by $[1]$, yields $a\\circ p=p\\prime\\circ\\varphi$. The other equation of step 2 is $\\varphi[1]\\circ\\delta=\\delta\\prime\\circ a$. Together with the middle square from step 1 these are precisely the three squares defining the required morphism of triangles. TR3 supplies an existence assertion, with no uniqueness condition; the final sentence of Tag 0H9J warns that the resulting map need not be unique, so this construction does not specify a canonical map or assert functorial choices.",
+   "text": "The completion lemma returns p ≫ a = ψ ≫ p′ and δ ≫ ψ⟦1⟧′ = a ≫ δ′. Reverse the first equality and package ψ with these two equations. The middle square is step 1, so these equations give the desired morphism of the specified Roos triangles. The existential completion makes no uniqueness or functorial-choice assertion.",
    "uses": [
     "def-weil-triangulated-category"
    ],
@@ -70,7 +70,7 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/derived.tex",
-  "place": "Tag 0H9J, remark-functoriality-derived-limit, with m(n)=n; Tag 0145, definition-triangulated-category, TR2 and TR3"
+  "place": "Tag 0H9J, remark-functoriality-derived-limit, with m(n)=n; Tag 0145, TR2/TR3, implemented by Mathlib Pretriangulated.complete_distinguished_triangle_morphism₁ and the proved towerTransitionEndomorphism_natural_backward."
  },
  "mathlib_searches": [
   {
@@ -167,5 +167,15 @@
   "group": "NQ",
   "result": "pass",
   "note": "Immutable delivery reviewed fully; no delivery faults found. Server compile passed in 0.8 seconds. External context-clone HEAD movement is documented; no branch was changed by this review."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261018T062914-L-677658",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

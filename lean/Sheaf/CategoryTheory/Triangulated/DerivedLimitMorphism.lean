@@ -9,7 +9,6 @@ public import Mathlib.CategoryTheory.Functor.OfSequence
 public import Mathlib.CategoryTheory.Triangulated.Triangulated
 public import Sheaf.CategoryTheory.Limits.TowerTransitionEndomorphism
 public import Sheaf.CategoryTheory.Triangulated.DerivedLimit
-import WeilConjectures.CategoryTheory.Limits.TowerTransitionEndomorphism
 
 /-!
 # Morphisms between specified derived limits
@@ -58,6 +57,17 @@ theorem exists_derivedLimit_morphism {C : Type u} [Category.{v} C]
       ψ ≫ p' = p ≫ Limits.Pi.map (f := K) (g := K') (fun n : ℕ ↦ φ.app ⟨n⟩) ∧
       δ ≫ ψ⟦(1 : ℤ)⟧' =
         Limits.Pi.map (f := K) (g := K') (fun n : ℕ ↦ φ.app ⟨n⟩) ≫ δ' := by
-  sorry
+  have hφ : ∀ n : ℕ, φ.app ⟨n + 1⟩ ≫ f' n = f n ≫ φ.app ⟨n⟩ := by
+    intro n
+    simpa only [Functor.ofOpSequence_map_homOfLE_succ] using
+      (φ.naturality (homOfLE (Nat.le_add_right n 1)).op).symm
+  have hcomm := towerTransitionEndomorphism_natural_backward f f'
+    (fun n : ℕ ↦ φ.app ⟨n⟩) hφ
+  obtain ⟨ψ, hψ, hδ⟩ := Pretriangulated.complete_distinguished_triangle_morphism₁
+    (Pretriangulated.Triangle.mk p (towerTransitionEndomorphism f) δ)
+    (Pretriangulated.Triangle.mk p' (towerTransitionEndomorphism f') δ')
+    hL hL' (Limits.Pi.map (fun n : ℕ ↦ φ.app ⟨n⟩))
+    (Limits.Pi.map (fun n : ℕ ↦ φ.app ⟨n⟩)) hcomm.symm
+  exact ⟨ψ, hψ.symm, hδ⟩
 
 end CategoryTheory
