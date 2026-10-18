@@ -16018,3 +16018,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 06:27 L: merged deliver/F6/Sheaf.Paper.DerivedSplittingUnique (stage 3; reviewer PASS; first push; landing 20261018T062752-L-649727 (proof); batch 20261018T062645; modules 1; new nodes 0)
 - 06:27 L: merged deliver/F8/Sheaf.AlgebraicGeometry.StrictHenselizationClosedLift (stage 3; reviewer PASS; first push; landing 20261018T062752-L-649846 (proof); batch 20261018T062645; modules 1; new nodes 0)
 - 06:27 L: merged deliver/F8/Sheaf.CategoryTheory.FilteredHomologyExactCouple (stage 3; reviewer PASS; first push; landing 20261018T062753-L-650150 (interface); batch 20261018T062645; modules 1; new nodes 0; change records: coord/changes/filtered-homology-exact-couple-explicit.md)
+- 06:27 L: merged deliver/F9/Sheaf.AlgebraicGeometry.StrictHenselizationCanonicalMap (stage 3; reviewer PASS; first push; landing 20261018T062754-L-650257 (proof); batch 20261018T062645; modules 1; new nodes 0)
