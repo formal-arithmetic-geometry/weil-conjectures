@@ -19,9 +19,142 @@
   "def-weil-pbc-etale-sheaves",
   "def-weil-pbc-etale-cohomology"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Reduce to $m=\\ell$ prime by strong induction on $m$. For $m=1$ the coefficient sheaf is zero. For composite $m$, choose a prime $p\\mid m$ and take $0\\to\\mathbf Z/(m/p)\\xrightarrow{p}\\mathbf Z/m\\to\\mathbf Z/p\\to0$. This is a sequence of finite $\\mathbf Z/m$-modules; [lem-constructible-constant-exact] gives the exact sequence of constant module sheaves, and [lem-weil-pbc-module-sheaves-colimits-forgetful] forgets scalars exactly. The long exact sequence [lem-weil-pbc-pullback-cohomology-long-exact-ladder], for the identity scheme map, gives vanishing in degree $q>e$ from the two outside vanishings. Both $p,m/p$ are invertible on $S$ and smaller than $m$. It remains to prove all prime-coefficient cases; fix such an $\\ell$.",
+   "uses": [
+    "lem-constructible-constant-exact",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-weil-pbc-pullback-cohomology-long-exact-ladder"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XV 1.2.3, prime reduction expanded."
+   }
+  },
+  {
+   "text": "Write $S=\\operatorname{Spec}R$ with maximal ideal $\\mathfrak m$, and $\\widehat R=\\varprojlim R/\\mathfrak m^n$. It is Noetherian by [lem-weil-pbc-adic-completion-noetherian], local with the same separably closed residue field by [lem-weil-pbc-local-completion-local-ring], and henselian by [lem-weil-pbc-complete-pair-henselian]. Hence $\\widehat S=\\operatorname{Spec}\\widehat R$ is strictly local and has dimension $e$ by [lem-weil-pbc-completion-dimension]. Quasi-excellence includes the G-ring condition [def-exc-excellent-ring]; applied at the maximal ideal, [def-weil-pbc-g-ring] says that $R\\to\\widehat R$ is regular. Thus the completion morphism is local and regular between Noetherian schemes. The element $\\ell$ remains invertible under the ring map.",
+   "uses": [
+    "lem-weil-pbc-adic-completion-noetherian",
+    "lem-weil-pbc-local-completion-local-ring",
+    "lem-weil-pbc-complete-pair-henselian",
+    "lem-weil-pbc-completion-dimension",
+    "def-exc-excellent-ring",
+    "def-weil-pbc-g-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XV 1.2.5–1.2.6."
+   }
+  },
+  {
+   "text": "Put $\\widehat U=U\\times_S\\widehat S$. The open immersion $j:U\\hookrightarrow S$ is quasi-compact and quasi-separated: a map between affine schemes is affine, with affine base changes, and this open immersion has isomorphic diagonal. Apply [lem-per-regular-etale-direct-image-base-change] with coefficient $\\mathbf Z/\\ell$, $h:\\widehat S\\to S$, $g=j$ and $K=\\underline{\\mathbf F_\\ell}[0]$. The exchange is an isomorphism; [lem-pe-constant-left-module-inverse-image] identifies the inverse image constant coefficient sheaf. At the closed geometric point its cohomology is exactly the pullback\n$$H^q(U,\\mathbf F_\\ell)\\xrightarrow{\\sim}H^q(\\widehat U,\\mathbf F_\\ell)$$\nby [lem-weil-pbc-strict-local-total-cohomology-exchange]. That comparison applies because both bases are strictly local and the map is local. It suffices to prove the bound after completion.",
+   "uses": [
+    "lem-per-regular-etale-direct-image-base-change",
+    "lem-pe-constant-left-module-inverse-image",
+    "lem-weil-pbc-strict-local-total-cohomology-exchange"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XV 1.2.5, regular base change and closed-point evaluation."
+   }
+  },
+  {
+   "text": "If $\\widehat U$ is empty its cohomology is zero. Otherwise let $X$ be the reduced induced closed subscheme on $\\overline{|\\widehat U|}$, using [lem-weil-pbc-reduced-induced-closed-subscheme]. Its intersection $V$ with $\\widehat U$ is $\\widehat U_{\\mathrm{red}}$: their ideals of functions vanishing at all points agree on this open, by that node's uniqueness. Hence $V$ is affine (closed in the affine $\\widehat U$), dense in $X$, and nonempty. The ring of $X$ is a quotient of $\\widehat R$ by a proper radical ideal; it is complete Noetherian local by [lem-weil-pbc-complete-local-quotient] and strictly henselian by [lem-weil-pbc-strictly-henselian-quotient]. Prime chains in the quotient are prime chains in $\\widehat R$, so $d=\\dim X\\leq e$. The reduction $V\\to\\widehat U$ is a universal homeomorphism by [lem-weil-pbc-reduction-universal-homeomorphism], and [thm-weil-pbc-universal-homeomorphism-invariance] gives its cohomology invariance. Constant inverse images are [lem-pe-constant-left-module-inverse-image]. It suffices to prove vanishing on $V$ above $d$.",
+   "uses": [
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "lem-weil-pbc-complete-local-quotient",
+    "lem-weil-pbc-strictly-henselian-quotient",
+    "lem-weil-pbc-reduction-universal-homeomorphism",
+    "thm-weil-pbc-universal-homeomorphism-invariance",
+    "lem-pe-constant-left-module-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XV 3.1.1–3.1.2; reduced-closure preparation to ensure a nowhere dense boundary."
+   }
+  },
+  {
+   "text": "Fix $q>d$ and set $L=q+1$. Apply [lem-per-complete-local-branch-approximation] to $(X,V,\\ell,L)$; the preceding step verifies its complete, reduced, strictly local and dense-open hypotheses. Obtain $X\\xrightarrow aT\\xleftarrow bT_0$, affine $W\\subseteq T$, and the hypercovers through degree $L$. Put $V_0=b^{-1}W$, while $a^{-1}W=V$. Both maps are local between Noetherian strictly henselian local schemes. The prime $\\ell$ is invertible on $T$ since its image in the closed residue field $k$ is nonzero. The section model $T_0$ is a strict localization of a finite-type scheme over a complete trait and has dimension exactly $d$; no dimension bound on $T$ is needed.",
+   "uses": [
+    "lem-per-complete-local-branch-approximation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XV 3.1–3.3.2: geometric approximation and close section."
+   }
+  },
+  {
+   "text": "Apply [lem-per-truncated-branch-descent] to $a:X\\to T$ and to $b:T_0\\to T$, with the hypercover $T_\\bullet\\to T$ of [lem-per-complete-local-branch-approximation]. Its clause (3) supplies both dominant reduced pullback hypercovers. Clause (4) supplies, at each closed-fibre geometric point and each level $0\\leq i\\leq L$, regularity, normal-crossing boundary equations, and their linear independence after pullback. These are exactly the descent hypotheses. Since $q<L$, its two isomorphisms give\n$$H^q(V,\\mathbf F_\\ell)\\xleftarrow{\\sim}H^q(W,\\mathbf F_\\ell)\\xrightarrow{\\sim}H^q(V_0,\\mathbf F_\\ell).$$\nThis compares degree $q$ with the section model without using the dimension of the intermediate model.",
+   "uses": [
+    "lem-per-truncated-branch-descent",
+    "lem-per-complete-local-branch-approximation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XV 3.2.6 and 3.3.2, truncated Proposition 2.2.4 with N=L-1."
+   }
+  },
+  {
+   "text": "The open $V_0\\subseteq T_0$ is affine: $W$ and $T_0$ are affine, and affine-open inverse images under maps of affine schemes are affine. It is quasi-compact by [lem-weil-pbc-affine-scheme-qcqs], so its open immersion is finite type by [lem-weil-pbc-qc-open-immersion-finite-type]. Apply [lem-per-trait-affine-lefschetz] to this affine finite-type morphism and the constant constructible sheaf $\\mathbf F_\\ell$. The one-stratum constant sheaf is constructible directly from [def-weil-pbc-etale-constructible-sheaf]. The open immersion induces equal residue fields at every point, so its transcendence-degree term is zero. The closure in $T_0$ of any point has dimension at most $d$, because its irreducible closed chains are chains in $T_0$. Thus $b=d$ bounds every value of $\\delta_{V_0}$ on the support, and the trait theorem gives $H^q(V_0,\\mathbf F_\\ell)=0$ for $q>d$.",
+   "uses": [
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-qc-open-immersion-finite-type",
+    "lem-per-trait-affine-lefschetz",
+    "def-weil-pbc-etale-constructible-sheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XV 3.3.2, trait case with the support dimension bound written out."
+   }
+  },
+  {
+   "text": "Step 6 now gives $H^q(V,\\mathbf F_\\ell)=0$ for every $q>d$, since $L=q+1$ can be chosen separately for every degree. Step 4 transfers this to $\\widehat U$ in degrees $q>e\\geq d$, and Step 3 transfers it to $U$. This proves all prime cases; the strong induction of Step 1 proves the assertion for every invertible $m\\geq1$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XV 3.3.2, then undo XV 1.2.5 and 1.2.3."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-constructible-constant-exact",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-pullback-cohomology-long-exact-ladder",
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-local-completion-local-ring",
+  "lem-weil-pbc-complete-pair-henselian",
+  "lem-weil-pbc-completion-dimension",
+  "def-exc-excellent-ring",
+  "def-weil-pbc-g-ring",
+  "lem-per-regular-etale-direct-image-base-change",
+  "lem-pe-constant-left-module-inverse-image",
+  "lem-weil-pbc-strict-local-total-cohomology-exchange",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-weil-pbc-complete-local-quotient",
+  "lem-weil-pbc-strictly-henselian-quotient",
+  "lem-weil-pbc-reduction-universal-homeomorphism",
+  "thm-weil-pbc-universal-homeomorphism-invariance",
+  "lem-per-complete-local-branch-approximation",
+  "lem-per-truncated-branch-descent",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-qc-open-immersion-finite-type",
+  "lem-per-trait-affine-lefschetz",
+  "def-weil-pbc-etale-constructible-sheaf"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "XV 1.2.3–1.2.6, 2.2.4 and 3.1–3.3.2; reduced-closure and coefficient reductions expanded. The original trait theorem is WANTED; its use is quoted in ILO."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -160,10 +293,105 @@
    },
    "date": "2026-10-19",
    "verdict": "no match: inspected returned hits; none states the constant-coefficient affine Lefschetz bound"
+  },
+  {
+   "tool": "grep",
+   "query": "Lefschetz|Gabber|StrictHenselian.*cohomolog",
+   "results": {
+    "t": "2026-10-18T22:48:54Z",
+    "tool": "grep",
+    "query": "Lefschetz|Gabber|StrictHenselian.*cohomolog",
+    "sub": "",
+    "ok": true,
+    "n_hits": 9,
+    "note": "",
+    "top": [
+     "Mathlib/FieldTheory/AxGrothendieck.lean",
+     "Mathlib/ModelTheory/Algebra/Field/IsAlgClosed.lean",
+     "Mathlib/ModelTheory/Algebra/Field/IsAlgClosed.lean",
+     "Mathlib/ModelTheory/Algebra/Field/IsAlgClosed.lean",
+     "Mathlib/ModelTheory/Algebra/Field/IsAlgClosed.lean",
+     "Mathlib/ModelTheory/Algebra/Field/IsAlgClosed.lean",
+     "Mathlib/CategoryTheory/Triangulated/TStructure/Heart.lean",
+     "Mathlib/CategoryTheory/Triangulated/TStructure/AbelianSubcategory.lean"
+    ],
+    "digest": "e9e44241ad7414d5"
+   },
+   "date": "2026-10-19",
+   "verdict": "no match: read the hits; basic etale sites, smooth rings, affine limits and unrelated Lefschetz/Popescu results do not state this result"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cohomology\", \"constantSheaf\"",
+   "results": {
+    "t": "2026-10-18T22:48:55Z",
+    "tool": "loogle",
+    "query": "\"cohomology\", \"constantSheaf\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-19",
+   "verdict": "no match: read the hits; basic etale sites, smooth rings, affine limits and unrelated Lefschetz/Popescu results do not state this result"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Constant etale cohomology on affine opens of strictly local schemes dimension bound",
+   "results": {
+    "t": "2026-10-18T22:48:55Z",
+    "tool": "leansearch",
+    "query": "Constant etale cohomology on affine opens of strictly local schemes dimension bound",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.affineOpensRestrict",
+     "AlgebraicGeometry.IsLocallyNoetherian.component_noetherian",
+     "AlgebraicGeometry.StructureSheaf.exists_const",
+     "AlgebraicGeometry.StructureSheaf.res_const'",
+     "RingHom.Etale.propertyIsLocal",
+     "AlgebraicGeometry.isLocallyArtinian_iff_of_isOpenCover",
+     "AlgebraicGeometry.StructureSheaf.locally_const_basicOpen",
+     "AlgebraicGeometry.AffineTargetMorphismProperty.IsLocal.mk"
+    ],
+    "digest": "63571df457386a91"
+   },
+   "date": "2026-10-19",
+   "verdict": "no match: read the hits; basic etale sites, smooth rings, affine limits and unrelated Lefschetz/Popescu results do not state this result"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale cohomology of affine opens in quasi excellent strictly henselian local schemes vanishes above Krull dimension",
+   "results": {
+    "t": "2026-10-18T22:48:57Z",
+    "tool": "leanfinder",
+    "query": "Etale cohomology of affine opens in quasi excellent strictly henselian local schemes vanishes above Krull dimension",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit",
+     "Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat",
+     "Algebra.FormallyEtale.subsingleton_h1Cotangent",
+     "AlgebraicGeometry.IsEtale.instFormallyUnramified",
+     "Algebra.IsEtaleAt",
+     "Algebra.etaleLocus_eq_compl_support",
+     "Algebra.etaleLocus",
+     "Algebra.Etale.formallyEtale"
+    ],
+    "digest": "f19931f8536aa015"
+   },
+   "date": "2026-10-19",
+   "verdict": "no match: read the hits; basic etale sites, smooth rings, affine limits and unrelated Lefschetz/Popescu results do not state this result"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-affine-open-strict-local-cd-constructible",
@@ -183,5 +411,104 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-affine-open-strict-local-constant-bound",
+  "worker": "stage1",
+  "summary": "Followed ILO XV: prime reduction, regular completion comparison, reduced dense-open preparation, finite-range geometric approximation, branch descent to a dimension-preserving trait section, then the independently established trait theorem. Three separate inputs remain unsplit; no dimension bound on the intermediate model is assumed.",
+  "blueprint": "The constant local dimension input of Step 1 of lem-per-artin-gabber-affine-curve, through the existing affine-open and constructible-bound ancestry. The unit route is unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-constructible-constant-exact",
+    "why": "Generic constant-sheaf, completion, local-ring or cohomology comparison tool in the ILO XV reduction; the unit supplies no replacement for this fact."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "why": "Generic constant-sheaf, completion, local-ring or cohomology comparison tool in the ILO XV reduction; the unit supplies no replacement for this fact."
+   },
+   {
+    "node": "lem-weil-pbc-pullback-cohomology-long-exact-ladder",
+    "why": "Generic constant-sheaf, completion, local-ring or cohomology comparison tool in the ILO XV reduction; the unit supplies no replacement for this fact."
+   },
+   {
+    "node": "lem-weil-pbc-adic-completion-noetherian",
+    "why": "Generic constant-sheaf, completion, local-ring or cohomology comparison tool in the ILO XV reduction; the unit supplies no replacement for this fact."
+   },
+   {
+    "node": "lem-weil-pbc-complete-pair-henselian",
+    "why": "Generic constant-sheaf, completion, local-ring or cohomology comparison tool in the ILO XV reduction; the unit supplies no replacement for this fact."
+   },
+   {
+    "node": "lem-weil-pbc-completion-dimension",
+    "why": "Generic constant-sheaf, completion, local-ring or cohomology comparison tool in the ILO XV reduction; the unit supplies no replacement for this fact."
+   },
+   {
+    "node": "def-exc-excellent-ring",
+    "why": "Generic constant-sheaf, completion, local-ring or cohomology comparison tool in the ILO XV reduction; the unit supplies no replacement for this fact."
+   },
+   {
+    "node": "def-weil-pbc-g-ring",
+    "why": "Generic constant-sheaf, completion, local-ring or cohomology comparison tool in the ILO XV reduction; the unit supplies no replacement for this fact."
+   },
+   {
+    "node": "lem-pe-constant-left-module-inverse-image",
+    "why": "Generic constant-sheaf, completion, local-ring or cohomology comparison tool in the ILO XV reduction; the unit supplies no replacement for this fact."
+   },
+   {
+    "node": "lem-weil-pbc-strict-local-total-cohomology-exchange",
+    "why": "Generic constant-sheaf, completion, local-ring or cohomology comparison tool in the ILO XV reduction; the unit supplies no replacement for this fact."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "why": "Generic constant-sheaf, completion, local-ring or cohomology comparison tool in the ILO XV reduction; the unit supplies no replacement for this fact."
+   },
+   {
+    "node": "lem-weil-pbc-complete-local-quotient",
+    "why": "Generic constant-sheaf, completion, local-ring or cohomology comparison tool in the ILO XV reduction; the unit supplies no replacement for this fact."
+   },
+   {
+    "node": "lem-weil-pbc-strictly-henselian-quotient",
+    "why": "Generic constant-sheaf, completion, local-ring or cohomology comparison tool in the ILO XV reduction; the unit supplies no replacement for this fact."
+   },
+   {
+    "node": "lem-weil-pbc-reduction-universal-homeomorphism",
+    "why": "Generic constant-sheaf, completion, local-ring or cohomology comparison tool in the ILO XV reduction; the unit supplies no replacement for this fact."
+   },
+   {
+    "node": "thm-weil-pbc-universal-homeomorphism-invariance",
+    "why": "Generic constant-sheaf, completion, local-ring or cohomology comparison tool in the ILO XV reduction; the unit supplies no replacement for this fact."
+   },
+   {
+    "node": "def-weil-pbc-etale-constructible-sheaf",
+    "why": "Generic constant-sheaf, completion, local-ring or cohomology comparison tool in the ILO XV reduction; the unit supplies no replacement for this fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-constructible-constant-exact",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-pullback-cohomology-long-exact-ladder",
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-complete-pair-henselian",
+  "lem-weil-pbc-completion-dimension",
+  "def-exc-excellent-ring",
+  "def-weil-pbc-g-ring",
+  "lem-pe-constant-left-module-inverse-image",
+  "lem-weil-pbc-strict-local-total-cohomology-exchange",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-weil-pbc-complete-local-quotient",
+  "lem-weil-pbc-strictly-henselian-quotient",
+  "lem-weil-pbc-reduction-universal-homeomorphism",
+  "thm-weil-pbc-universal-homeomorphism-invariance",
+  "def-weil-pbc-etale-constructible-sheaf"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q137-c99895779",
+  "group": "Q137",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q137-c99895779 (reviewer sub-agent of L); spot-checked: FIX. I read the item, all three new nodes, the statement of every cited node, and ILO XV 1.1–3.3.2 (pp. 219–224) in full. The item matches XV 1.2.4 with no change to hypotheses or conclusion. The steps follow 1.2.3/1.2.5, §3, 2.2.4 (L=N+1, iso for q<L) and 3.3.2: the bound is taken on the dimension-d section model T0, not on T. Each step's citations say what the step takes from them; edge cases checked: m=1, 4, 6, empty U-hat, d=0, r=0. No cycle; the off-unit tool_uses are generic and accepted. New nodes: trait-affine-lefschetz is true (XV 1.2.2 for an excellent strictly local T, the case 1.1.3 credits to Gabber 1994/Illusie 2003; Illusie 2003 is WANTED). branch-approximation packages XV 3.1.2–3.3.2. truncated-branch-descent is XV 2.1.7+2.2.2+2.2.4. None duplicates an existing node or restates a clause of the item or parent. Fix (E1/B2): XV 2.2.3 says the dominant-reduced pullback along any local map is again a hypercover; the descent node took this as automatic. It is not: pulling a blow-up back to the closed point gives a fibre that is not generically finite. I added that hypothesis to lem-per-truncated-branch-descent; the item supplies it through approximation clause (3), as Step 6 already says. In lem-per-complete-local-branch-approximation, clause (3) now names the l'-alteration topology. Batch-5: def-trf-strict-normal-crossings-boundary is a general definition (basic-def stmt_deps, no proof_deps) and not part of the trace formula or Poincare duality proofs; accepted. Advisory: Steps 2 and 4 use without a citation that R-hat is mR-hat-adically complete (Stacks 05GG).; 2 file(s) fixed by the reviewer"
  }
 }
