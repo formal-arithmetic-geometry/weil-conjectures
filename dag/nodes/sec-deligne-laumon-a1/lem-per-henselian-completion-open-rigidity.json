@@ -17,9 +17,64 @@
   "def-weil-pbc-inverse-image",
   "def-weil-pbc-etale-cohomology"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Since $C$ is Noetherian, $I$ is finitely generated. By [lem-weil-pbc-adic-completion-mod-ideal], $\\widehat C$ is $I\\widehat C$-adically complete and $\\widehat C/I\\widehat C\\cong C/I$, compatibly with the quotient maps. By [lem-weil-pbc-complete-pair-henselian], $(\\widehat C,I\\widehat C)$ is henselian. Thus both pairs needed in the completion argument are henselian. Also $\\pi^{-1}(V(I))=V(I\\widehat C)$: a prime of $\\widehat C$ contains the image of every element of $I$ exactly when its contraction contains $I$. Therefore the open $U'$ in the cited modification results is exactly the stated $\\widehat U$, with its stated map $\\pi_U$.",
+   "uses": [
+    "lem-weil-pbc-adic-completion-mod-ideal",
+    "lem-weil-pbc-complete-pair-henselian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0ALJ, lemma-complete-henselian, lines 2482--2499; completion algebra from algebra.tex Tag 05GG, lemma-hathat-finitely-generated, lines 22645--22680, as stated in lem-weil-pbc-adic-completion-mod-ideal."
+   }
+  },
+  {
+   "text": "Apply [lem-per-admissible-modification-cohomology-presentation] to $(C,I)$ and $F$. It gives the common closed-fibre limit topos $\\mathcal T$, coefficient sheaves $L_F^b,L_{\\pi_U^{-1}F}^b$, their exchange maps, and a morphism of first-quadrant spectral sequences\n$$H^a(\\mathcal T,L_F^b)\\Longrightarrow H^{a+b}(U,F),\\qquad H^a(\\mathcal T,L_{\\pi_U^{-1}F}^b)\\Longrightarrow H^{a+b}(\\widehat U,\\pi_U^{-1}F).$$\nThe abutment map is the canonical pullback asked for, not an unspecified comparison. In particular all its maps are natural in $F$.",
+   "uses": [
+    "lem-per-admissible-modification-cohomology-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XX 4.4, p.373, (**) and its limit; p.374 final Note."
+   }
+  },
+  {
+   "text": "Fix a geometric point in the conservative family of [lem-per-admissible-modification-valuative-stalks]. That statement identifies the stalk of $L_F^b\\to L_{\\pi_U^{-1}F}^b$ with pullback on $H^b$ for a dense inclusion $K_t\\hookrightarrow K'_t$ of henselian valued fields and a torsion sheaf $G_t$. These are exactly the hypotheses of [lem-per-dense-henselian-field-etale-comparison], so the stalk map is an isomorphism, for every $b\\geq0$. Conservativity of the stated family makes each exchange map of coefficient sheaves an isomorphism. Applying $H^a(\\mathcal T,-)$, a functor and hence preserving isomorphisms, proves that every map on the $E_2$ pages of Step 2 is an isomorphism.",
+   "uses": [
+    "lem-per-admissible-modification-valuative-stalks",
+    "lem-per-dense-henselian-field-etale-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XX 4.4, pp.373--374, valuative-stalk reduction and dense-field Galois comparison."
+   }
+  },
+  {
+   "text": "An isomorphism on a spectral-sequence page gives an isomorphism on the next: its inverse commutes with differentials, hence induces inverse maps on their kernels modulo images. Induct on the page. In a fixed bidegree $(a,b)$ of these first-quadrant sequences, for $r>\\max(a,b+1)$ both possible differentials to and from that bidegree have a negative coordinate, so are zero. Thus the maps on $E_\\infty$ are isomorphisms. For total degree $q$ the filtrations given in Step 2 have only the graded pieces indexed by $0\\leq a\\leq q$. Starting with their zero terminal terms, induction on this finite filtration proves the abutment map bijective: in each short exact sequence of successive filtration terms, injectivity follows by first mapping to the graded quotient and then to the subterm; surjectivity follows by lifting in the quotient and correcting the lift in the subterm. Therefore the specified pullback on $H^q$ is an isomorphism. This argument applies for $q=0$ too. If $I$ is nilpotent (including $I=0$), both open complements are empty and all the groups in the assertion are zero, so the assertion also holds directly in this degenerate case.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XX 4.4, p.373, spectral-sequence comparison; explicit page and finite-filtration argument."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-adic-completion-mod-ideal",
+  "lem-weil-pbc-complete-pair-henselian",
+  "lem-per-admissible-modification-cohomology-presentation",
+  "lem-per-admissible-modification-valuative-stalks",
+  "lem-per-dense-henselian-field-etale-comparison"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "XX 4.4, printed pp.373--374: the admissible-blowup limit spectral sequence and reduction of its stalks to dense henselian valued fields. The presentation is taken over V(I); the displayed closed-point case is its strictly local instance."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -55,10 +110,38 @@
    "results": "{\"t\": \"2026-10-18T20:34:21Z\", \"tool\": \"leanfinder\", \"query\": \"Gabber Fujiwara formal base change torsion etale cohomology invariant on punctured spectrum under completion of henselian local ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"BDeRham\", \"Algebra.Etale.of_isLocalizationAway\", \"Algebra.Etale.of_isLocalization_Away\", \"Algebra.etaleLocus\", \"Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq\", \"Algebra.IsEtaleAt\", \"RingHom.Etale.ofLocalizationSpan\", \"Algebra.exists_etale_of_isEtaleAt\"], \"digest\": \"bee1cdc8f1f5dd1c\"}",
    "date": "2026-10-19",
    "verdict": "no match: the returned declarations concern algebraic adic completion, local cohomology of modules, or etale ring maps; none states torsion small-etale cohomology invariance on the open complement of a henselian pair. Read the logged hit signatures or the referenced Mathlib source; module local cohomology is not etale cohomology."
+  },
+  {
+   "tool": "grep",
+   "query": "Fujiwara|ZariskiRiemann|henselian.*cohomology|cohomology.*completion",
+   "results": "{\"t\": \"2026-10-18T21:43:11Z\", \"tool\": \"grep\", \"query\": \"Fujiwara|ZariskiRiemann|henselian.*cohomology|cohomology.*completion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: inspected returned signatures; none states this etale comparison or its geometric presentation."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HenselianRing\", \"cohomology\"",
+   "results": "{\"t\": \"2026-10-18T21:43:11Z\", \"tool\": \"loogle\", \"query\": \"\\\"HenselianRing\\\", \\\"cohomology\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: inspected returned signatures; none states this etale comparison or its geometric presentation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Torsion etale cohomology comparison between punctured spectra of a henselian ring and its completion",
+   "results": "{\"t\": \"2026-10-18T21:43:11Z\", \"tool\": \"leansearch\", \"query\": \"Torsion etale cohomology comparison between punctured spectra of a henselian ring and its completion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HenselianLocalRing.TFAE\", \"HenselianRing.mk\", \"HenselianLocalRing\", \"IsAdicComplete.henselianRing\", \"HenselianLocalRing.toIsLocalRing\", \"instHenselianRingMaximalIdeal\", \"HenselianLocalRing.casesOn\", \"HenselianRing\"], \"digest\": \"7d81b21d9d95acf7\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: inspected returned signatures; none states this etale comparison or its geometric presentation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale cohomology of the complement of a henselian pair is invariant under adic completion",
+   "results": "{\"t\": \"2026-10-18T21:43:13Z\", \"tool\": \"leanfinder\", \"query\": \"Etale cohomology of the complement of a henselian pair is invariant under adic completion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"BDeRhamPlus\", \"BDeRham\", \"IsAdicComplete.henselianRing\", \"Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq\", \"StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot\", \"StandardEtalePair.instFormallyEtaleRing\", \"StandardEtalePair.instEtaleRing\", \"instCommRingBDeRhamPlus\"], \"digest\": \"7fb3c5cddeafb6ee\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: inspected returned signatures; none states this etale comparison or its geometric presentation."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-punctual-strict-completion-test",
@@ -84,5 +167,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-henselian-completion-open-rigidity",
+  "worker": "stage1",
+  "summary": "Kept the statement and all hypotheses. Expanded ILO XX 4.4 into the admissible-modification spectral sequence, valued-field stalk comparison, and explicit finite-filtration comparison. Three new statement-only inputs retain the substantive geometric and valued-field work; no restatement of the completion-invariance conclusion is introduced. Checked the general closed-fibre formulation against the strictly local display in the source; normalized TeX and used the existing sectionwise definition of torsion throughout.",
+  "blueprint": "Nearest blueprint ancestor lem-per-artin-gabber-affine-curve, proof Step 3, regular local-model purity input: completion part of the closed-point purity test, through lem-per-punctual-strict-completion-test.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-complete-pair-henselian",
+    "why": "Generic algebra input that an adically complete ring is a henselian pair; this perverse unit supplies no completion algebra theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-complete-pair-henselian"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q27-fa9f19217",
+  "group": "Q27",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q27-fa9f19217 (reviewer sub-agent of L); spot-checked: I read ILO XX §4.4, printed pp.373-374 (CTC, the strictly local case (*), admissible blowups, the limit spectral sequence (**), the reduction via Fujiwara to I-valuative rings, the Krasner Galois isomorphism, and the closing Note). The item statement is unchanged from base and true: CTC plus Gabber's affine proper base change on X and X̂, using Ĉ/IĈ=C/I (Fujiwara 6.6.4). It needs no excellence. I tested Z_(p)^h vs Z_p and the nilpotent-I and I=C edge cases. Step 1 uses exactly 05GG (1)-(2) and the 0ALJ hypothesis, and π^{-1}V(I)=V(IĈ) is elementary. Step 2 uses only the presentation node's statement. Step 3 composes the stalk identification of the valuative-stalks node with the dense-field node, then uses conservativity and H^a(T,-). Step 4's page and filtration comparison is correct, including the degree bounds r>max(a,b+1) and the q=0 case. On the new nodes: in the presentation node I checked directly that the closed fibres agree for non-Noetherian A, i.e. J^nÂ/I^mJ^nÂ=J^n/I^mJ^n once I^k⊂J. In the valuative-stalks node, φ is a non-zero-divisor in the maximal ideal and not in P, so the valuation is nontrivial, and A_t/φ^n=A'_t/φ^n gives density. The dense-field node is the source's Krasner sentence; I tested Q_p^h⊂Q_p and the excluded Q⊂Q_p. None of the three restates the item (no isomorphism asserted in the first two). I found no duplicates (grep for Zariski-Riemann, admissible blowup, Fujiwara, Krasner, valued field, completion comparison; lem-per-completion-supported-constant-comparison is a different statement and needs excellence). No SGA citation, and blueprint fields are correct. Batch-5: both flags cite def-trf-valuation-ring, the general Stacks 00I9 definition whose only deps are the normal-ring and field definitions. It is part of neither assumed statement nor of their proofs, and it is the only general valuation-ring definition node, so I accept both flags. Accepted tool_use: lem-weil-pbc-complete-pair-henselian (generic 0ALJ algebra; advisory: not strictly needed). No fixes."
  }
 }
