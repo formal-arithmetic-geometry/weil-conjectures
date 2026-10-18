@@ -12,9 +12,75 @@
   "def-weil-pbc-geometric-stalks",
   "def-weil-pbc-tor-modules"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $D=\\mathbf Z[Q]$. The ring $A=\\mathcal O_{S,\\bar s}$ of the statement is the colimit of $\\Gamma(V,\\mathcal O_V)$ over all pointed etale neighbourhoods $(V,\\bar v)$ [def-weil-pbc-geometric-stalks]; this filtered colimit of rings is computed on underlying sets. The affine pointed neighbourhoods form an initial full subcategory [lemma-weil-pbc-affine-neighbourhood-cofinal], so restricting the colimit to them, and then to the chosen representatives, is a canonical isomorphism [lem-weil-pbc-colimit-initial-full-subcategory] onto the ring $\\mathcal O^{\\mathrm{sh}}_{S,\\bar s}$ of [lem-trf-kato-tor-independence-chart], since $\\Gamma(V,\\mathcal O_V)=A_V$ for $V=\\operatorname{Spec}A_V$. It commutes with the coprojections, hence with the maps from $\\Gamma(S,\\mathcal O_S)$ through which the chart $Q\\to\\Gamma(S,M_S)\\to(A,\\cdot)$ and the $\\Lambda$-structure factor. Taking the pointed neighbourhood $(S,\\bar s)$ itself, the strict local ring and the characteristic-identifying chart in the statement then satisfy exactly the hypotheses of [lem-trf-kato-tor-independence-chart], with that node's monoid denoted here by $Q$. It gives $\\operatorname{Tor}^D_1(D/\\mathbf Z[I],A)=0$ for every monoid ideal $I\\subseteq Q$. The symmetry isomorphism [lem-weil-pbc-tor-symmetry] gives $\\operatorname{Tor}^D_1(A,D/\\mathbf Z[I])=0$. No ordinary flatness of $D\\to A$ is asserted or used.",
+   "uses": [
+    "lem-trf-kato-tor-independence-chart",
+    "lem-weil-pbc-tor-symmetry",
+    "def-weil-pbc-geometric-stalks",
+    "lemma-weil-pbc-affine-neighbourhood-cofinal",
+    "lem-weil-pbc-colimit-initial-full-subcategory"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose X 1.3(vii), printed p.140; Expose VIII 3.5, printed p.115, base-chart monomial ideal test."
+   }
+  },
+  {
+   "text": "Treat both assertions together. In the first case put $E=P$ and $H=J$. For the polynomial assertion put $E=P\\oplus\\mathbf N^s$ and let $H\\subseteq E$ consist of $(p,e)$ with either $p\\in J$ or $e_j>0$ for some $j\\in L$. In both cases $E$ is integral, so it embeds into $G=E^{\\rm gp}$; the homomorphism $Q\\to E\\to G$, $q\\mapsto(\\gamma(q),0)$ in the second case, is injective by the hypothesis on $\\gamma^{\\rm gp}$. Both $E$ and $H$ are stable under addition by $Q$. Apply [lem-per-monomial-module-tor-devissage] with $M=A$, $T=E$, $U=H$, using Step 1. With $V_{\\mathbf Z}=\\mathbf Z[E]/\\mathbf Z[H]$ it gives $\\operatorname{Tor}^D_i(A,V_{\\mathbf Z})=0$ for all $i>0$. Apply it also with $U=\\varnothing$ to get the same vanishing for $\\mathbf Z[E]$. These applications allow $H=\\varnothing$ and $H=E$.",
+   "uses": [
+    "lem-per-monomial-module-tor-devissage"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose X 1.3(vii), printed p.140, and Lemma 1.5, printed pp.141--142; agent monomial-module devissage makes the extension from the base-chart ideal test explicit."
+   }
+  },
+  {
+   "text": "The ring $\\mathbf Z[1/N,\\zeta_N]$ embeds into the characteristic-zero field $\\mathbf Q(\\zeta_N)$; its localization $\\Lambda$ is either zero or embeds into that field as well. Thus $\\Lambda$ is torsion free over $\\mathbf Z$, including the zero-ring case, and is flat by [lem-weil-pbc-pid-torsion-free-module-flat]. To see explicitly the effect of coefficients, let $F_\\bullet\\to V_{\\mathbf Z}$ be a $D$-free resolution [def-weil-pbc-tor-modules]. Tensoring its augmented sequence over $\\mathbf Z$ with $\\Lambda$ preserves exactness by [lem-weil-pbc-flat-tensor-exact]. Each $\\Lambda\\otimes_{\\mathbf Z}F_n$ is free over $C=\\Lambda[Q]$, so this is a $C$-free resolution of $V=\\Lambda[E]/(H)$. Termwise $A\\otimes_C(\\Lambda\\otimes_{\\mathbf Z}F_n)\\cong A\\otimes_DF_n$, by $(a\\otimes(\\lambda\\otimes f))\\mapsto\\lambda a\\otimes f$, with inverse $a\\otimes f\\mapsto a\\otimes(1\\otimes f)$. The maps commute with the differentials, being induced by the same maps of $F_\\bullet$. Tor symmetry [lem-weil-pbc-tor-symmetry] and Step 2 now give $\\operatorname{Tor}^C_i(A,V)=0$ for $i>0$. The identical argument for $\\mathbf Z[E]$ gives $\\operatorname{Tor}^C_i(A,\\Lambda[E])=0$.",
+   "uses": [
+    "lem-weil-pbc-pid-torsion-free-module-flat",
+    "def-weil-pbc-tor-modules",
+    "lem-weil-pbc-flat-tensor-exact",
+    "lem-weil-pbc-tor-symmetry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00LY (section-tor), Tag 00HD (lemma-flat), and More on Algebra Tag 0AUW (lemma-dedekind-torsion-free-flat); free-resolution calculation for the coefficient extension."
+   }
+  },
+  {
+   "text": "Write $R_E=\\Lambda[E]$ and $B_E=A\\otimes_C R_E$. Choose a $C$-free resolution $G_\\bullet\\to A$ [def-weil-pbc-tor-modules]. By the last vanishing of Step 3, $G_\\bullet\\otimes_C R_E\\to B_E$ is exact in positive degrees, and its degree-zero homology is $B_E$. Each term is $R_E$-free, so it is an $R_E$-free resolution of $B_E$. For $V=R_E/(H)$, its tensor with $V$ is termwise the same complex as $G_\\bullet\\otimes_C V$, by $(g\\otimes r)\\otimes v\\mapsto g\\otimes rv$, with inverse $g\\otimes v\\mapsto(g\\otimes1)\\otimes v$. Hence its positive homology is $\\operatorname{Tor}^C_i(A,V)=0$ by Step 3, proving $\\operatorname{Tor}^{R_E}_i(B_E,V)=0$. For $E=P$ this is the second displayed vanishing. For $E=P\\oplus\\mathbf N^s$, the basis bijection $z^{(p,e)}\\mapsto z^p y^e$ identifies $R_E$ with $R'$ and $(H)$ with $K$; indeed $H$ is precisely the monomial basis set of $(J,y_j:j\\in L)$. It identifies $B_E$ with $B'$ as well. Thus the same computations give both polynomial vanishings, including $s=0$, $L=\\varnothing$, and all variables killed.",
+   "uses": [
+    "def-weil-pbc-tor-modules"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00LY (section-tor): the Tor-independent change of rings is the displayed elementary free-resolution computation; ILO X 1.3(vii) and proof of Lemma 1.5 for its use."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-geometric-stalks",
+  "def-weil-pbc-tor-modules",
+  "lem-per-monomial-module-tor-devissage",
+  "lem-trf-kato-tor-independence-chart",
+  "lem-weil-pbc-colimit-initial-full-subcategory",
+  "lem-weil-pbc-flat-tensor-exact",
+  "lem-weil-pbc-pid-torsion-free-module-flat",
+  "lem-weil-pbc-tor-symmetry",
+  "lemma-weil-pbc-affine-neighbourhood-cofinal"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose X 1.3(vii) and proof of Lemma 1.5, printed pp.140--142, with the Kato base-chart test reused from the existing DAG; algebraic devissage and free-resolution comparisons supplied explicitly."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -46,7 +112,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-gabber-fixed-locus-log-chart",
@@ -73,5 +139,44 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-log-regular-chart-monomial-tor",
+  "worker": "stage1",
+  "summary": "Preserved all hypotheses and conclusions. Reduced the two coefficient-ring and polynomial claims to the existing Kato Tor-one base-chart statement via one general monomial-module devissage lemma. Wrote coefficient extension and Tor-independent change of rings by explicit free resolutions. No ordinary chart flatness assumed.",
+  "blueprint": "Realizes the inherited lem-per-artin-gabber-affine-curve proof-ancestry purity local-model substep, via lem-per-gabber-fixed-locus-log-chart Step 5: the two uses of Kato 6.1 in ILO X 1.3(vii) and Lemma 1.5. The current main-20261015 ancestor has no displayed proof; the inherited from.place identifies the already-seeded detailed ancestry.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-kato-tor-independence-chart",
+    "why": "Base-chart monomial ideal Tor-one vanishing, the Kato input explicitly required by Expose X; the current unit has no equivalent statement."
+   },
+   {
+    "node": "lem-weil-pbc-tor-symmetry",
+    "why": "Generic commutative-ring Tor symmetry, to put the Kato test and coefficient resolution in the required variable."
+   },
+   {
+    "node": "lem-weil-pbc-flat-tensor-exact",
+    "why": "Generic exactness of tensor with a flat module, for extending a free resolution from integer to cyclotomic coefficients."
+   },
+   {
+    "node": "lemma-weil-pbc-affine-neighbourhood-cofinal",
+    "why": "Generic cofinality of affine pointed etale neighbourhoods, to identify the geometric stalk of the structure sheaf with the affine-colimit strict henselization used by the Kato node; added by the maintainer reader."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-kato-tor-independence-chart",
+  "lem-weil-pbc-tor-symmetry",
+  "lem-weil-pbc-flat-tensor-exact",
+  "lemma-weil-pbc-affine-neighbourhood-cofinal"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q88-3d53a171e",
+  "group": "Q88",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q88-3d53a171e (reviewer sub-agent of L); spot-checked: The item statement is unchanged from the live base and is not weakened. It matches ILO X 1.3(vii), p.140, and the proof of Lemma 1.5(a)-(c), pp.141-142: Kato 6.1 gives the vanishing of Tor^{Lambda[Q]}_i(O_S, Lambda[P]/(I)), including the free Sym(V) factor. All four steps are mathematically correct. Step 2: Q->E^gp is injective via Q->Q^gp->P^gp, and H is exactly the monomial basis of K=(J, y_j : j in L). Step 3: Lambda is Z-torsion-free, so flat; Lambda tensor F_n is free over C=Lambda[Q]; the Tor arguments are swapped correctly. Step 4: G tensor_C R_E is an R_E-free resolution of B_E because Tor^C_i(A, R_E)=0. New node lem-per-monomial-module-tor-devissage: true. The orbit filtration has successive quotients D/Z[I_t], and the degree shift comes from Z[I] = Z[h(I)]. Tested on Q=0, Q=N with M=Z[t]/(t) (premise fails, as it should), Q a group, and U=T, T empty, U empty. It is a genuine algebra lemma, not a restated clause, and the DAG and blueprint contain no duplicate. Its searches cover grep, leansearch, loogle and leanfinder. One fault repaired (C1/C4): Step 1 silently identified the item's A, the geometric stalk of O_S taken over all pointed etale neighbourhoods, with the Kato node's ring (the colimit over chosen affine representatives). The fix adds that identification to Step 1 and cites lemma-weil-pbc-affine-neighbourhood-cofinal, lem-weil-pbc-colimit-initial-full-subcategory and def-weil-pbc-geometric-stalks. proof_deps is recomputed and the cofinality node is added to tool_uses. Batch-5 flag on lem-trf-kato-tor-independence-chart: accepted. It is Kato's log-regular Tor-independence (ILO VIII 3.4.3), general commutative algebra and not part of the trace formula or Poincare duality. Its full closure (571 nodes) reaches no thm-trf, sk-thm, nt- or sec-poincare-duality node. No cycle, no SGA source, all steps under 2000 characters.; 1 file(s) fixed by the reviewer"
  }
 }
