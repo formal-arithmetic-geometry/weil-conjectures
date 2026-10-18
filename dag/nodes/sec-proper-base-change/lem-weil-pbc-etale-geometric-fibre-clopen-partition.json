@@ -1,0 +1,142 @@
+{
+ "id": "lem-weil-pbc-etale-geometric-fibre-clopen-partition",
+ "kind": "statement",
+ "title": "Étale clopen partition with connected geometric fibre traces",
+ "statement": "Let f : X → S be a proper morphism of schemes and let s ∈ S. There exist an étale morphism g : U → S and u ∈ U over s, and finitely many pairwise disjoint clopen opens V_i of X ×_S U covering it, such that the inverse image of each V_i in the geometric fibre over u is connected (and hence nonempty). The empty family is allowed.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0BUI, proof: Stein factorization, Tags 03H2, 0E0M, and 0BSR"
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-stein-factorization-affine",
+  "lem-weil-pbc-stein-finite-fibres-residue-fields",
+  "lem-weil-pbc-integral-fibre-etale-splitting",
+  "def-pc-scheme-fibre",
+  "def-weil-algebraic-closure"
+ ],
+ "proof": [
+  {
+   "text": "Restrict around s to an affine base and apply affine Stein factorization. Its integral second map has finite point fibres and finite residue extensions by the Stein-fibre lemma. Apply integral fibre étale splitting to obtain an affine étale pointed neighbourhood and a finite clopen partition of the pulled-back Stein factor.",
+   "uses": [
+    "lem-weil-pbc-stein-factorization-affine",
+    "lem-weil-pbc-stein-finite-fibres-residue-fields",
+    "lem-weil-pbc-integral-fibre-etale-splitting"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Pull the clopen partition back along the first Stein map. After algebraic closure of the residue field at the pointed base point, each piece has exactly one point because its residue extension is purely inseparable. The corresponding fibre of the geometrically connected first Stein map is connected and nonempty; fibre-product associativity identifies it with the inverse image of the piece in the geometric fibre. Thus the pulled-back pieces have connected traces and cover the geometric fibre.",
+   "uses": [
+    "lem-weil-pbc-stein-factorization-affine",
+    "def-pc-scheme-fibre",
+    "def-weil-algebraic-closure"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-stein-factorization-affine",
+  "lem-weil-pbc-stein-finite-fibres-residue-fields",
+  "lem-weil-pbc-integral-fibre-etale-splitting",
+  "def-pc-scheme-fibre",
+  "def-weil-algebraic-closure"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0BUI proof, paragraphs after Stein factorization"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "proper morphism etale locally clopen partition with connected geometric fibre pieces",
+   "results": "No exact theorem; search returned only generic proper, etale, and connected-fibre declarations.",
+   "verdict": "no exact match",
+   "date": "2026-10-18"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsProper ?f → ∃ U g u m V, Etale g",
+   "results": "No matching declaration.",
+   "verdict": "no exact match",
+   "date": "2026-10-18"
+  },
+  {
+   "tool": "grep",
+   "query": "rg \"clopen.*geometric.*fiber|etale.*clopen.*partition\" lean/WeilConjectures lean/Sheaf Mathlib",
+   "results": "Only the three stated Stein factorization and integral splitting inputs; no duplicate partition theorem.",
+   "verdict": "no exact match",
+   "date": "2026-10-18"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FlatProperComponentCountLowerSemicontinuous",
+  "date": "2026-10-18",
+  "group": "V7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-flat-proper-component-count-lower-semicontinuous",
+   "place": "Tag 0BUI proof, steps 1–5",
+   "via": [
+    "lem-weil-pbc-stein-factorization-affine",
+    "lem-weil-pbc-stein-finite-fibres-residue-fields",
+    "lem-weil-pbc-integral-fibre-etale-splitting"
+   ]
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleGeometricFiberClopenPartition",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleGeometricFiberClopenPartition.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Hom.exists_etale_geometricFiber_clopen_partition",
+  "statement": "theorem Scheme.Hom.exists_etale_geometricFiber_clopen_partition\n    {X S : Scheme.{u}} (f : X ⟶ S) [IsProper f] (s : S) :\n    ∃ (U : Scheme.{u}) (g : U ⟶ S) (u : U), Etale g ∧ g u = s ∧\n      ∃ (m : ℕ) (V : Fin m → (pullback f g).Opens),\n        (∀ i, IsClosed (V i : Set ↥(pullback f g))) ∧\n        Pairwise (fun i j ↦ Disjoint (V i) (V j)) ∧ (⨆ i, V i) = ⊤ ∧\n        ∀ i, _root_.IsConnected\n          (pullback.fst (pullback.snd f g)\n            (Spec.map (CommRingCat.ofHom (algebraMap (U.residueField u)\n              (AlgebraicClosure (U.residueField u)))) ≫ U.fromSpecResidueField u) ⁻¹'\n            (V i : Set ↥(pullback f g)))",
+  "branch": "sheaf-dag",
+  "by": "V7",
+  "date": "2026-10-18"
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "Sheaf.AlgebraicGeometry.FlatProperComponentCountLowerSemicontinuous",
+  "worker": "stage3",
+  "summary": "The parent proof compiles from this strictly smaller local partition statement. The partition theorem isolates the Stein factorization and purely inseparable geometric-fibre argument; the parent handles component counting, flat-open images, and descent along the étale map."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V7",
+  "result": "pass",
+  "landing": "20261018T071237-L-1682116",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V7",
+  "result": "pass",
+  "landing": "20261018T071237-L-1682116",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

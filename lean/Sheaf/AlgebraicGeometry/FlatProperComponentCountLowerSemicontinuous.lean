@@ -13,19 +13,12 @@ public import Mathlib.AlgebraicGeometry.Fiber
 public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 public import Mathlib.Topology.Connected.Clopen
 public import Mathlib.SetTheory.Cardinal.Finite
-import Mathlib.Algebra.Algebra.Defs
-import Mathlib.AlgebraicGeometry.Geometrically.Irreducible
-import Mathlib.Topology.Connected.Basic
-import Mathlib.FieldTheory.PurelyInseparable.Basic
-import Mathlib.AlgebraicGeometry.Morphisms.UniversallyInjective
+import Sheaf.AlgebraicGeometry.EtaleGeometricFiberClopenPartition
+import Mathlib.AlgebraicGeometry.Noetherian
 import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen
-import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
-import Mathlib.RingTheory.Flat.FaithfullyFlat.Basic
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
-import Sheaf.AlgebraicGeometry.SteinFactorizationAffine
+import WeilConjectures.Mathlib.Topology.NoetherianSpace
+import Mathlib.Algebra.Algebra.Defs
 import Sheaf.AlgebraicGeometry.GeometricComponentCountBaseChange
-import Sheaf.AlgebraicGeometry.IntegralFibreEtaleSplitting
-import Sheaf.AlgebraicGeometry.SteinFiniteFibresResidueFields
 
 /-!
 # Lower semicontinuity of geometric connected component counts
@@ -42,6 +35,71 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry
+
+private noncomputable abbrev closurePoint (S : Scheme.{u}) (s : S) :=
+  Spec.map (CommRingCat.ofHom (algebraMap (S.residueField s)
+    (AlgebraicClosure (S.residueField s)))) ≫ S.fromSpecResidueField s
+
+private noncomputable abbrev geomFiber {X S : Scheme.{u}} (f : X ⟶ S) (s : S) :=
+  (pullback f (closurePoint S s) : Scheme.{u})
+
+private theorem finite_geomFiber_components {X S : Scheme.{u}} (f : X ⟶ S)
+    [IsProper f] (s : S) : Finite (ConnectedComponents (geomFiber f s)) := by
+  have : IsLocallyNoetherian (geomFiber f s) :=
+    LocallyOfFiniteType.isLocallyNoetherian (pullback.snd f (closurePoint S s))
+  have : CompactSpace (geomFiber f s) :=
+    QuasiCompact.compactSpace_of_compactSpace (pullback.snd f (closurePoint S s))
+  have : IsNoetherian (geomFiber f s) := {}
+  infer_instance
+
+private theorem geomFiber_count_baseChange {X S : Scheme.{u}} (f : X ⟶ S)
+    [IsProper f] {U : Scheme.{u}} (g : U ⟶ S) (u : U) :
+    Nat.card (ConnectedComponents (geomFiber (pullback.snd f g) u)) =
+      Nat.card (ConnectedComponents (geomFiber f (g u))) := by
+  have := finite_geomFiber_components f (g u)
+  have := finite_geomFiber_components (pullback.snd f g) u
+  have h := (geometricComponentCount_baseChange f).2 U g u
+    (AlgebraicClosure (S.residueField (g u))) (AlgebraicClosure (U.residueField u))
+    (CommRingCat.ofHom (algebraMap (S.residueField (g u))
+      (AlgebraicClosure (S.residueField (g u)))))
+    (CommRingCat.ofHom (algebraMap (U.residueField u)
+      (AlgebraicClosure (U.residueField u))))
+  simpa only [ENat.card_eq_coe_natCard, ENat.natCast_inj] using h
+
+private theorem geomFiber_projection_apply {X S : Scheme.{u}} (f : X ⟶ S)
+    (s : S) (x : geomFiber f s) :
+    f (pullback.fst f (closurePoint S s) x) = s := by
+  rw [← Scheme.Hom.comp_apply, pullback.condition, Scheme.Hom.comp_apply]
+  change S.fromSpecResidueField s _ = s
+  exact S.fromSpecResidueField_apply s _
+
+private theorem range_geomFiber_projection {X S : Scheme.{u}} (f : X ⟶ S) (s : S) :
+    Set.range (pullback.fst f (closurePoint S s)) = f ⁻¹' {s} := by
+  rw [Scheme.Pullback.range_fst]
+  have hrange : Set.range (closurePoint S s) = {s} := by
+    have hconst (y : Spec (.of (AlgebraicClosure (S.residueField s)))) :
+        closurePoint S s y = s := by
+      change S.fromSpecResidueField s _ = s
+      exact S.fromSpecResidueField_apply s _
+    ext t
+    simp only [Set.mem_range, Set.mem_singleton_iff, hconst, exists_const, eq_comm]
+  rw [hrange]
+
+private theorem card_le_components_of_disjoint_clopens
+    {Y : Type*} [TopologicalSpace Y] [Finite (ConnectedComponents Y)]
+    {m : ℕ} (V : Fin m → Set Y) (hc : ∀ i, IsClopen (V i))
+    (hd : Pairwise (fun i j ↦ Disjoint (V i) (V j)))
+    (hn : ∀ i, (V i).Nonempty) : m ≤ Nat.card (ConnectedComponents Y) := by
+  classical
+  choose y hy using hn
+  have hinj : Function.Injective (fun i ↦ ConnectedComponents.mk (y i)) := by
+    intro i j hij
+    apply hd.eq
+    rw [Set.not_disjoint_iff]
+    refine ⟨y i, hy i, ?_⟩
+    have heq := ConnectedComponents.coe_eq_coe.mp hij
+    exact (hc j).connectedComponent_subset (hy j) (heq ▸ mem_connectedComponent)
+  simpa only [Nat.card_fin] using Nat.card_le_card_of_injective _ hinj
 
 /-- Source: Stacks Project, More on Morphisms, Tag 0BUI.
 (blueprint: lem-weil-pbc-flat-proper-component-count-lower-semicontinuous)
@@ -99,6 +157,58 @@ theorem Scheme.Hom.geometricComponentCount_lowerSemicontinuous
           (AlgebraicClosure (S.residueField s)))) ≫ S.fromSpecResidueField s) : Scheme.{u}) →
         n s = 0) ∧
       ∀ s : S, ∃ V : S.Opens, s ∈ V ∧ ∀ t : S, t ∈ V → n s ≤ n t := by
-  sorry
+  refine ⟨fun s ↦ Nat.card (ConnectedComponents (geomFiber f s)), ?_, ?_, ?_⟩
+  · intro s
+    exact ⟨finite_geomFiber_components f s, rfl⟩
+  · intro s hs
+    have : IsEmpty (ConnectedComponents (geomFiber f s)) :=
+      ConnectedComponents.isEmpty_iff_isEmpty.mpr hs
+    exact Nat.card_of_isEmpty
+  intro s
+  obtain ⟨U, g, u, hg, hgu, m, V, hVc, hVd, hVcover, hVconn⟩ :=
+    f.exists_etale_geometricFiber_clopen_partition s
+  have : Etale g := hg
+  let p := pullback.snd f g
+  let C (w : U) (i : Fin m) : Set (geomFiber p w) :=
+    pullback.fst p (closurePoint U w) ⁻¹' (V i : Set ↥(pullback f g))
+  have hCc (w : U) (i : Fin m) : IsClopen (C w i) :=
+    (show IsClopen (V i : Set ↥(pullback f g)) from ⟨hVc i, (V i).isOpen⟩).preimage
+      (pullback.fst p (closurePoint U w)).continuous
+  have hCd (w : U) : Pairwise (fun i j ↦ Disjoint (C w i) (C w j)) := by
+    intro i j hij
+    exact ((TopologicalSpace.Opens.coe_disjoint).mpr (hVd hij)).preimage _
+  have hCcover (w : U) : ⋃ i, C w i = Set.univ := by
+    change (⋃ i, pullback.fst p (closurePoint U w) ⁻¹'
+      (V i : Set ↥(pullback f g))) = Set.univ
+    rw [← Set.preimage_iUnion]
+    have hv : ⋃ i, (V i : Set ↥(pullback f g)) = Set.univ := by
+      rw [← TopologicalSpace.Opens.coe_iSup, hVcover]
+      rfl
+    rw [hv, Set.preimage_univ]
+  have hcount : Nat.card (ConnectedComponents (geomFiber f s)) = m := by
+    rw [← hgu, ← geomFiber_count_baseChange f g u]
+    simpa only [Nat.card_fin] using Nat.card_congr
+      (ConnectedComponents.equivOfIsClopenOfIsConnected (hCc u) (hCd u) (hCcover u)
+        hVconn)
+  let W : Set U := ⋂ i, p '' (V i : Set ↥(pullback f g))
+  have hWo : IsOpen W := isOpen_iInter_of_finite fun i ↦ p.isOpenMap _ (V i).isOpen
+  have huW : u ∈ W := by
+    refine Set.mem_iInter.mpr fun i ↦ ?_
+    obtain ⟨z, hz⟩ := (hVconn i).nonempty
+    exact ⟨pullback.fst p (closurePoint U u) z, hz, geomFiber_projection_apply p u z⟩
+  refine ⟨⟨g '' W, g.isOpenMap _ hWo⟩, ⟨u, huW, hgu⟩, ?_⟩
+  rintro t ⟨w, hw, rfl⟩
+  change Nat.card (ConnectedComponents (geomFiber f s)) ≤
+    Nat.card (ConnectedComponents (geomFiber f (g w)))
+  rw [hcount, ← geomFiber_count_baseChange f g w]
+  have := finite_geomFiber_components p w
+  apply card_le_components_of_disjoint_clopens (C w) (hCc w) (hCd w)
+  intro i
+  obtain ⟨x, hxi, hxw⟩ := Set.mem_iInter.mp hw i
+  have hx : x ∈ Set.range (pullback.fst p (closurePoint U w)) := by
+    rw [range_geomFiber_projection]
+    exact hxw
+  obtain ⟨z, hz⟩ := hx
+  exact ⟨z, show pullback.fst p (closurePoint U w) z ∈ V i from hz.symm ▸ hxi⟩
 
 end AlgebraicGeometry
