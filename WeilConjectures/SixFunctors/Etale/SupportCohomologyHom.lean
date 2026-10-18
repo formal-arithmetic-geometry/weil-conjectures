@@ -31,7 +31,7 @@ support with morphisms in the derived category:
 
 ## Main definitions
 
-- `AlgebraicGeometry.Etale.supportedSectionsCompΓIso`: `Γ(X, 𝒢_Z -) ≅ Γ_Z(X, -)`.
+- `AlgebraicGeometry.Etale.sectionsWithSupportCompΓIso`: `Γ(X, 𝒢_Z -) ≅ Γ_Z(X, -)`.
 - `AlgebraicGeometry.Etale.closedUpperShriekCompΓIso`: `Γ(Z, i^! -) ≅ Γ_Z(X, -)`.
 - `AlgebraicGeometry.Etale.rightDerivedClosedUpperShriekCompIso`:
   `RΓ(Z, Ri^! -) ≅ RΓ_Z(X, -)`.
@@ -68,12 +68,12 @@ instance isIso_ΓRes_lowerStar_obj (G : Sheaf U.smallEtaleTopology A) :
 /-- The sections over `U` of the inclusion `𝒢_Z M ⟶ M` of the supported sections vanish, so the
 global sections of the inclusion restrict to zero on `U`. -/
 @[reassoc]
-lemma ΓMap_supportedSectionsι_app_comp_ΓRes (M : Sheaf X.smallEtaleTopology A) :
-    (Sheaf.Γ X.smallEtaleTopology A).map ((supportedSectionsι A j).app M) ≫
+lemma ΓMap_sectionsWithSupportι_app_comp_ΓRes (M : Sheaf X.smallEtaleTopology A) :
+    (Sheaf.Γ X.smallEtaleTopology A).map ((sectionsWithSupportι A j).app M) ≫
       M.ΓRes (op (Scheme.Etale.mk j)) = 0 := by
   erw [Sheaf.ΓRes_naturality]
-  have : IsZero (((supportedSections A j).obj M).obj.obj (op (Scheme.Etale.mk j))) :=
-    isZero_obj_of_isZero_upperStar (isZero_upperStar_obj_supportedSections A j M) _
+  have : IsZero (((sectionsWithSupport A j).obj M).obj.obj (op (Scheme.Etale.mk j))) :=
+    isZero_obj_of_isZero_upperStar (isZero_upperStar_sectionsWithSupport A j M) _
       subset_rfl
   rw [this.eq_of_tgt (Sheaf.ΓRes _ _) 0, zero_comp]
 
@@ -102,11 +102,11 @@ lemma ΓMap_unit_app_eq (M : Sheaf X.smallEtaleTopology A) :
 complement `Z` of `j` form a kernel of the restriction `Γ(X, M) ⟶ M(U)`: `Γ` preserves the kernel
 `𝒢_Z M` of `M ⟶ j_* j^* M`, and `Γ(X, M) ⟶ Γ(X, j_* j^* M)` is the restriction `Γ(X, M) ⟶ M(U)`
 followed by an isomorphism (`AlgebraicGeometry.Etale.ΓMap_unit_app_eq`). -/
-noncomputable def isLimitΓMapSupportedSectionsι (M : Sheaf X.smallEtaleTopology A) :
-    IsLimit (KernelFork.ofι _ (ΓMap_supportedSectionsι_app_comp_ΓRes A j M)) :=
+noncomputable def isLimitΓMapSectionsWithSupportι (M : Sheaf X.smallEtaleTopology A) :
+    IsLimit (KernelFork.ofι _ (ΓMap_sectionsWithSupportι_app_comp_ΓRes A j M)) :=
   isKernelOfComp _ _ (KernelFork.mapIsLimit _
     (kernelIsKernel ((upperStarLowerStarAdjunction A j).unit.app M))
-      (Sheaf.Γ X.smallEtaleTopology A)) (ΓMap_supportedSectionsι_app_comp_ΓRes A j M)
+      (Sheaf.Γ X.smallEtaleTopology A)) (ΓMap_sectionsWithSupportι_app_comp_ΓRes A j M)
     (ΓMap_unit_app_eq A j M).symm
 
 end Sections
@@ -125,30 +125,30 @@ noncomputable def isLimitSectionsWithSupport (M : Sheaf X.smallEtaleTopology A) 
 
 /-- The sections with support in `Z` are the global sections of the subsheaf of sections
 supported on `Z`: `Γ(X, 𝒢_Z M) ≅ Γ_Z(X, M)`, compatibly with the inclusions into `Γ(X, M)`. -/
-noncomputable def supportedSectionsCompΓIso :
-    supportedSections A i.openComplement.ι ⋙ Sheaf.Γ X.smallEtaleTopology A ≅
-      sectionsWithSupport A i :=
+noncomputable def sectionsWithSupportCompΓIso :
+    sectionsWithSupport A i.openComplement.ι ⋙ Sheaf.Γ X.smallEtaleTopology A ≅
+      globalSectionsWithSupport A i :=
   NatIso.ofComponents
-    (fun M ↦ (isLimitΓMapSupportedSectionsι A i.openComplement.ι M).conePointUniqueUpToIso
+    (fun M ↦ (isLimitΓMapSectionsWithSupportι A i.openComplement.ι M).conePointUniqueUpToIso
       (isLimitSectionsWithSupport A i M))
     (fun {M N} f ↦ by
       rw [← cancel_mono ((Sheaf.ΓSupportι X.smallEtaleTopology A _).app N)]
-      have h₁ := (isLimitΓMapSupportedSectionsι A i.openComplement.ι
+      have h₁ := (isLimitΓMapSectionsWithSupportι A i.openComplement.ι
         M).conePointUniqueUpToIso_hom_comp (isLimitSectionsWithSupport A i M) .zero
-      have h₂ := (isLimitΓMapSupportedSectionsι A i.openComplement.ι
+      have h₂ := (isLimitΓMapSectionsWithSupportι A i.openComplement.ι
         N).conePointUniqueUpToIso_hom_comp (isLimitSectionsWithSupport A i N) .zero
       simp only [KernelFork.ofι, Fork.ofι_π_app] at h₁ h₂
       simp only [Functor.comp_map, assoc, h₂]
       erw [(Sheaf.ΓSupportι X.smallEtaleTopology A _).naturality f, reassoc_of% h₁]
       erw [← Functor.map_comp, ← Functor.map_comp,
-        ← (supportedSectionsι A i.openComplement.ι).naturality f])
+        ← (sectionsWithSupportι A i.openComplement.ι).naturality f])
 
 @[reassoc (attr := simp)]
-lemma supportedSectionsCompΓIso_hom_app_comp (M : Sheaf X.smallEtaleTopology A) :
-    (supportedSectionsCompΓIso A i).hom.app M ≫
+lemma sectionsWithSupportCompΓIso_hom_app_comp (M : Sheaf X.smallEtaleTopology A) :
+    (sectionsWithSupportCompΓIso A i).hom.app M ≫
         (Sheaf.ΓSupportι X.smallEtaleTopology A _).app M =
-      (Sheaf.Γ X.smallEtaleTopology A).map ((supportedSectionsι A _).app M) := by
-  have h := (isLimitΓMapSupportedSectionsι A i.openComplement.ι M).conePointUniqueUpToIso_hom_comp
+      (Sheaf.Γ X.smallEtaleTopology A).map ((sectionsWithSupportι A _).app M) := by
+  have h := (isLimitΓMapSectionsWithSupportι A i.openComplement.ι M).conePointUniqueUpToIso_hom_comp
     (isLimitSectionsWithSupport A i M) WalkingParallelPair.zero
   simp only [KernelFork.ofι, Fork.ofι_π_app] at h
   exact h
@@ -157,35 +157,31 @@ lemma supportedSectionsCompΓIso_hom_app_comp (M : Sheaf X.smallEtaleTopology A)
 exceptional inverse image `i^! M` (`AlgebraicGeometry.Etale.closedUpperShriek`), through
 `Γ(Z, i^! M) ≅ Γ(X, i_* i^! M) ≅ Γ(X, 𝒢_Z M)`. -/
 noncomputable def closedUpperShriekCompΓIso :
-    closedUpperShriek A i.openComplement.ι i ⋙ Sheaf.Γ Z.smallEtaleTopology A ≅
-      sectionsWithSupport A i :=
+    closedUpperShriek A i i.openComplement.ι ⋙ Sheaf.Γ Z.smallEtaleTopology A ≅
+      globalSectionsWithSupport A i :=
   Functor.isoWhiskerLeft _ (lowerStarCompGlobalSectionsIso A i).symm ≪≫
     (Functor.associator _ _ _).symm ≪≫
-    Functor.isoWhiskerRight (closedUpperShriekCompLowerStarIso A _ i
+    Functor.isoWhiskerRight (closedUpperShriekCompLowerStarIso A i _
       i.range_eq_compl_range_openComplement_ι) _ ≪≫
-    supportedSectionsCompΓIso A i
+    sectionsWithSupportCompΓIso A i
 
 instance : PreservesFiniteColimits ((i)_*[A]) :=
-  have := (lowerStarClosedUpperShriekAdjunction A i.openComplement.ι i
+  have := (lowerStarClosedUpperShriekAdjunction A i i.openComplement.ι
     i.range_eq_compl_range_openComplement_ι).leftAdjoint_preservesColimits
   inferInstance
 
 instance : ((i)_*[A]).PreservesHomology where
 
-instance : (closedUpperShriek A i.openComplement.ι i).Additive :=
-  (lowerStarClosedUpperShriekAdjunction A i.openComplement.ι i
-    i.range_eq_compl_range_openComplement_ι).right_adjoint_additive
-
 /-- The exceptional inverse image `i^!` of a closed immersion preserves K-injective complexes,
 being right adjoint to the exact functor `i_*`. -/
-instance : (closedUpperShriek A i.openComplement.ι i).PreservesKInjectiveComplexes :=
-  (lowerStarClosedUpperShriekAdjunction A i.openComplement.ι i
+instance : (closedUpperShriek A i i.openComplement.ι).PreservesKInjectiveComplexes :=
+  (lowerStarClosedUpperShriekAdjunction A i i.openComplement.ι
     i.range_eq_compl_range_openComplement_ι).preservesKInjectiveComplexes
 
 /-- `RΓ(Z, Ri^! K) ≅ RΓ_Z(X, K)`: the derived sections with support in `Z` are the derived
 global sections of the derived exceptional inverse image `Ri^!` of the sheaf functor `i^!`. -/
 noncomputable def rightDerivedClosedUpperShriekCompIso :
-    (closedUpperShriek A i.openComplement.ι i).rightDerivedFunctor ⋙
+    (closedUpperShriek A i i.openComplement.ι).rightDerivedFunctor ⋙
         (Sheaf.Γ Z.smallEtaleTopology A).rightDerivedFunctor ≅
       rightDerivedSectionsWithSupport A i :=
   Functor.rightDerivedFunctorCompIso' _ _ (closedUpperShriekCompΓIso A i)
@@ -203,7 +199,7 @@ instance : Projective (ModuleCat.of Λ Λ) :=
 noncomputable instance (A : Type u') [Category.{u + 1} A] [Abelian A]
     [IsGrothendieckAbelian.{u + 1} A] :
     (rightDerivedSectionsWithSupport A i).CommShift ℤ :=
-  inferInstanceAs ((sectionsWithSupport A i).rightDerivedFunctor.CommShift ℤ)
+  inferInstanceAs ((globalSectionsWithSupport A i).rightDerivedFunctor.CommShift ℤ)
 
 /-- The functor `K ↦ Hom_{D(X)}(i_* Λ_Z, K[a])` to abelian groups is `K ↦ H^a_Z(X, K)`:
 
@@ -222,7 +218,7 @@ noncomputable def shiftFunctorCompPreadditiveCoyonedaLowerStarConstantIso (a : �
       derivedSupportCohomology (ModuleCat.{u + 1} Λ) i a ⋙
         forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat :=
   let C := ModuleCat.{u + 1} Λ
-  let adj₁ := (lowerStarClosedUpperShriekAdjunction C i.openComplement.ι i
+  let adj₁ := (lowerStarClosedUpperShriekAdjunction C i i.openComplement.ι
     i.range_eq_compl_range_openComplement_ι).mapDerivedCategoryRightDerivedAdjunction
   let adj₂ := (constantSheafΓAdj Z.smallEtaleTopology C).mapDerivedCategoryRightDerivedAdjunction
   let e₁ := ((i)_*[C].mapDerivedCategorySingleFunctor 0).app

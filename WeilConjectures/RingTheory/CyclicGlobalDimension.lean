@@ -10,6 +10,7 @@ public import Mathlib.RingTheory.Ideal.Quotient.Defs
 public import Mathlib.Algebra.Module.ULift
 import WeilConjectures.RingTheory.WellOrderedUnionProjectiveDimension
 import Mathlib.LinearAlgebra.Isomorphisms
+import WeilConjectures.RingTheory.BoundedProjectiveResolutionDimension
 
 @[expose] public section
 universe u v
@@ -86,6 +87,7 @@ theorem hasGlobalDimensionLE_of_cyclic
         (ModuleCat.of R (ULift.{v} (R ⧸ I))) n) :
     HasGlobalDimensionLE.{u, max u v} R n := by
   classical
+  rw [hasGlobalDimensionLE_iff]
   intro M
   obtain ⟨ord, wf⟩ := exists_wellFoundedLT M
   let : LinearOrder M := ord

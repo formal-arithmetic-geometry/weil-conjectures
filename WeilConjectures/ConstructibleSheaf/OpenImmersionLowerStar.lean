@@ -223,7 +223,7 @@ theorem isConstructibleSheaf_lowerStar_of_isOpenImmersion_aux {k : Type u} [Fiel
   -- the kernel `K` of the unit `F ⟶ h_* h^* F` vanishes on `V`
   let η := (upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) h).unit.app F
   have hK0 : IsZero ((h)^*[ModuleCat.{u + 1} Λ].obj (kernel η)) :=
-    isZero_upperStar_obj_supportedSections (ModuleCat.{u + 1} Λ) h F
+    isZero_upperStar_sectionsWithSupport (ModuleCat.{u + 1} Λ) h F
   have : IsConstructibleSheaf ((𝟭 (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ))).obj F) := ‹_›
   have : IsConstructibleSheaf (kernel η) := Scheme.IsConstructibleSheaf.of_mono (kernel.ι η)
   -- the closed complement `W` of `V`, and its trace `W_U` on `U`
@@ -239,7 +239,7 @@ theorem isConstructibleSheaf_lowerStar_of_isOpenImmersion_aux {k : Type u} [Fiel
     rw [Pullback.range_snd, hiW, hrange]
     rfl
   have : IsIso ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) i').unit.app (kernel η)) :=
-    isIso_unit_app_of_isZero_upperStar (ModuleCat.{u + 1} Λ) hi' hK0
+    isIso_upperStarLowerStarAdjunction_unit_app_of_isZero (ModuleCat.{u + 1} Λ) i' h hi' hK0
   -- `j_* K ≅ iW_* jW_* i'^* K` is constructible by induction
   let G := (i')^*[ModuleCat.{u + 1} Λ].obj (kernel η)
   have : IsConstructibleSheaf G := IsConstructibleSheaf.upperStar i' _

@@ -39,14 +39,17 @@ is the `ℓ`-adic sheaf `AlgebraicGeometry.Scheme.ellAdicSheaf` of mathlib, see
 
 The small pro-étale site of `X : Scheme.{u}` has `Hom`-types in `Type u`, so sheaves on it
 take values in `RingCat.{u + 1}` and `Ab.{u + 1}`, following the convention of the
-`SixFunctors` folder. The sections `C(U, T)`, which live in `Type u` for `T : Type`, are
-therefore lifted to `Type (u + 1)`.
+`SixFunctors` folder. The sections `C(U, T)`, which live in `Type (max u w)` for `T : Type w`,
+are therefore lifted by `ULift.{u + 1}`, so that the sheaf takes values in
+`RingCat.{max (u + 1) w}`. This is `RingCat.{u + 1}` both for `T : Type` (for instance
+`T = ℤ_ℓ`) and for `T : Type (u + 1)` (for instance a discrete quotient of a coefficient ring
+`Λ : Type (u + 1)`).
 
 -/
 
 @[expose] public section
 
-universe u
+universe w u
 
 open CategoryTheory MonoidalCategory MonObj Limits Opposite
 
@@ -58,11 +61,11 @@ variable (X : Scheme.{u})
 
 section Ring
 
-variable (T : Type) [TopologicalSpace T] [Ring T] [IsTopologicalRing T]
+variable (T : Type w) [TopologicalSpace T] [Ring T] [IsTopologicalRing T]
 
 /-- The presheaf of rings `U ↦ C(U, T)` of continuous maps into the topological ring `T` on
-the small pro-étale site of `X`, lifted to `Type (u + 1)`. -/
-noncomputable def continuousMapRingPresheaf : X.ProEtᵒᵖ ⥤ RingCat.{u + 1} where
+the small pro-étale site of `X`, lifted by `ULift.{u + 1}`. -/
+noncomputable def continuousMapRingPresheaf : X.ProEtᵒᵖ ⥤ RingCat.{max (u + 1) w} where
   obj U := RingCat.of (ULift.{u + 1} C(U.unop.left, T))
   map f := RingCat.ofHom
     (ULift.ringEquiv.symm.toRingHom.comp
@@ -84,7 +87,7 @@ lemma continuousMapRingPresheaf_map_apply {U V : X.ProEtᵒᵖ} (f : U ⟶ V)
 small pro-étale site of mathlib's presheaf `U ↦ C(U, T)` on all schemes, lifted by one
 universe. -/
 noncomputable def continuousMapRingPresheafForgetIso :
-    continuousMapRingPresheaf X T ⋙ forget RingCat.{u + 1} ≅
+    continuousMapRingPresheaf X T ⋙ forget RingCat.{max (u + 1) w} ≅
       (ProEt.forget X ⋙ Over.forget X).op ⋙ continuousMapPresheaf T ⋙ uliftFunctor.{u + 1} :=
   NatIso.ofComponents (fun _ ↦ Iso.refl _) (fun _ ↦ rfl)
 
@@ -92,8 +95,12 @@ noncomputable def continuousMapRingPresheafForgetIso :
 an fpqc sheaf. -/
 lemma isSheaf_continuousMapRingPresheaf :
     Presheaf.IsSheaf (ProEt.topology X) (continuousMapRingPresheaf X T) := by
-  rw [Presheaf.isSheaf_iff_isSheaf_forget _ _ (forget RingCat.{u + 1}),
-    Presheaf.isSheaf_of_iso_iff (continuousMapRingPresheafForgetIso X T)]
+  have : ReflectsLimitsOfSize.{max (u + 1) w, max (u + 1) w} (forget RingCat.{max (u + 1) w}) :=
+    reflectsLimits_of_reflectsIsomorphisms
+  have : ReflectsLimitsOfSize.{u, u + 1} (forget RingCat.{max (u + 1) w}) :=
+    reflectsLimitsOfSize_shrink.{u + 1, max (u + 1) w, u, max (u + 1) w} _
+  refine Presheaf.isSheaf_of_isSheaf_comp _ _ (forget RingCat.{max (u + 1) w}) ?_
+  rw [Presheaf.isSheaf_of_iso_iff (continuousMapRingPresheafForgetIso X T)]
   refine Functor.op_comp_isSheaf_of_isSheaf (F := ProEt.forget X ⋙ Over.forget X)
     (J := ProEt.topology X) (K := proetaleTopology) _ ?_
   rw [isSheaf_iff_isSheaf_of_type, Presieve.isSheaf_comp_uliftFunctor_iff,
@@ -104,14 +111,14 @@ lemma isSheaf_continuousMapRingPresheaf :
 small pro-étale site of `X`. Its underlying abelian sheaf
 `(sheafCompose _ (forget₂ RingCat Ab)).obj (continuousMapRingSheaf X T)` is a ring object
 with the pointwise multiplication. -/
-noncomputable def continuousMapRingSheaf : Sheaf (ProEt.topology X) RingCat.{u + 1} :=
+noncomputable def continuousMapRingSheaf : Sheaf (ProEt.topology X) RingCat.{max (u + 1) w} :=
   ⟨continuousMapRingPresheaf X T, isSheaf_continuousMapRingPresheaf X T⟩
 
 lemma continuousMapRingSheaf_obj :
     (continuousMapRingSheaf X T).obj = continuousMapRingPresheaf X T :=
   rfl
 
-variable {T} {T' : Type} [TopologicalSpace T'] [Ring T'] [IsTopologicalRing T']
+variable {T} {T' : Type w} [TopologicalSpace T'] [Ring T'] [IsTopologicalRing T']
   (φ : T →+* T') (hφ : Continuous φ)
 
 /-- Postcomposition with a continuous ring homomorphism `φ : T →+* T'`, as a morphism of
@@ -145,7 +152,8 @@ section CommRing
 variable (T : Type) [TopologicalSpace T] [CommRing T] [IsTopologicalRing T]
 
 /-- The sheaf of continuous maps into a commutative topological ring is a commutative ring
-object. -/
+object. This is stated for `T : Type`: the monoidal structure on abelian sheaves on `X_proét`
+is only found by instance search for coefficients in `Ab.{u + 1}`. -/
 instance isCommMonObj_continuousMapRingSheaf :
     IsCommMonObj ((sheafCompose (ProEt.topology X) (forget₂ RingCat.{u + 1} Ab.{u + 1})).obj
       (continuousMapRingSheaf X T)) :=

@@ -26,18 +26,19 @@ category (blueprint `def-pur-support-cohomology`).
 
 The functor of sections with support is defined for an arbitrary site `(C, J)` with global
 sections and an object `U` of `C` (`CategoryTheory.Sheaf.ΓSupport`), and specialised to the
-small étale site (`AlgebraicGeometry.Etale.sectionsWithSupport`) and to the small pro-étale
-site (`AlgebraicGeometry.ProEtale.sectionsWithSupport`), where `U` is the open complement of
+small étale site (`AlgebraicGeometry.Etale.globalSectionsWithSupport`) and to the small pro-étale
+site (`AlgebraicGeometry.ProEtale.globalSectionsWithSupport`), where `U` is the open complement of
 `Z`.
 
 ## Main definitions
 
 - `CategoryTheory.Sheaf.ΓSupport`: the sections with support away from an object `U`.
-- `AlgebraicGeometry.Etale.sectionsWithSupport`, `AlgebraicGeometry.Etale.supportCohomology`,
+- `AlgebraicGeometry.Etale.globalSectionsWithSupport`, `AlgebraicGeometry.Etale.supportCohomology`,
   `AlgebraicGeometry.Etale.rightDerivedSectionsWithSupport`,
   `AlgebraicGeometry.Etale.derivedSupportCohomology`: `Γ_Z(X, -)`, `H^q_Z(X, -)` on sheaves,
   `RΓ_Z(X, -)` and `H^q_Z(X, -)` on the derived category of the small étale site.
-- `AlgebraicGeometry.ProEtale.sectionsWithSupport`, `AlgebraicGeometry.ProEtale.supportCohomology`,
+- `AlgebraicGeometry.ProEtale.globalSectionsWithSupport`,
+  `AlgebraicGeometry.ProEtale.supportCohomology`,
   `AlgebraicGeometry.ProEtale.rightDerivedSectionsWithSupport`,
   `AlgebraicGeometry.ProEtale.derivedSupportCohomology`: the same on the small pro-étale site.
 -/
@@ -62,18 +63,18 @@ variable [HasSmallSiteSheafify A] {Z X : Scheme.{u}} (i : Z ⟶ X) [IsClosedImme
 
 The functor `Γ_Z(X, -)` of sections with support in the closed subscheme `i : Z ⟶ X` of étale
 sheaves on `X`: `Γ_Z(X, F) = ker (Γ(X, F) ⟶ F(U))` for the open complement `U` of `Z`. -/
-noncomputable def sectionsWithSupport : Sheaf X.smallEtaleTopology A ⥤ A :=
+noncomputable def globalSectionsWithSupport : Sheaf X.smallEtaleTopology A ⥤ A :=
   Sheaf.ΓSupport X.smallEtaleTopology A (op (Scheme.Etale.mk i.openComplement.ι))
 
-instance : (sectionsWithSupport A i).Additive := by
-  dsimp [sectionsWithSupport]; infer_instance
+instance : (globalSectionsWithSupport A i).Additive := by
+  dsimp [globalSectionsWithSupport]; infer_instance
 
 /-- Blueprint `def-pur-support-cohomology`: Cohomology with support.
 
 The cohomology with support `H^q_Z(X, F)` of an étale sheaf `F` on `X`: the `q`-th right
 derived functor of the sections with support in `Z`. -/
 noncomputable def supportCohomology (q : ℕ) : Sheaf X.smallEtaleTopology A ⥤ A :=
-  (sectionsWithSupport A i).rightDerived q
+  (globalSectionsWithSupport A i).rightDerived q
 
 /-- Blueprint `def-pur-support-cohomology`: Cohomology with support.
 
@@ -81,7 +82,7 @@ The derived sections with support `RΓ_Z(X, -) : D(X_ét) ⥤ D(A)`, the total r
 functor of the sections with support in `Z`. -/
 noncomputable def rightDerivedSectionsWithSupport :
     DerivedCategory (Sheaf X.smallEtaleTopology A) ⥤ DerivedCategory A :=
-  (sectionsWithSupport A i).rightDerivedFunctor
+  (globalSectionsWithSupport A i).rightDerivedFunctor
 
 /-- Blueprint `def-pur-support-cohomology`: Cohomology with support.
 

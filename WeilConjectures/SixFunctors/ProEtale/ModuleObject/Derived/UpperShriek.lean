@@ -101,6 +101,8 @@ variable {X Y : Over (Spec (.of k))}
   [QuasiCompact Y.hom] [IsSeparated Y.hom]
   {f : X ⟶ Y} (c : Compactification f.left)
 
+variable [IsFinitenessCoefficient ℓ Λ]
+
 variable [(boundedConstructibleLowerStar Λ ℓ c.overG).IsLeftAdjoint]
 
 /-- The exceptional inverse image `Rf^! : Dᵇc(Y)⟦Λ⟧ ⥤ Dᵇc(X)⟦Λ⟧` attached to a compactification
@@ -145,6 +147,8 @@ variable {X Y : Over (Spec (.of k))}
   [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Y.hom]
   [QuasiCompact Y.hom] [IsSeparated Y.hom]
   (f : X ⟶ Y)
+
+variable [IsFinitenessCoefficient ℓ Λ]
 
 variable [(boundedConstructibleLowerStar Λ ℓ (compactificationOverField f).overG).IsLeftAdjoint]
 

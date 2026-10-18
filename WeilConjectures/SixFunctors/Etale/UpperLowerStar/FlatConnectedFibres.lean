@@ -209,10 +209,10 @@ lemma unit_app_map_unit_app_map_upperStarComp_inv {R T T' : Scheme.{u}} (t : T �
       b = ψ' ≫ (MorphismProperty.Over.pullback @Etale ⊤ f).map ψ := by
     apply hom_ext_pullback_pullback
     subst ht
-    simp only [Functor.id_obj, Functor.comp_obj, Etale.comp_left_eq,
-      MorphismProperty.Over.pullbackComp_hom_app_left, pullback.map_id, Category.id_comp,
-      Functor.const_obj_obj, Category.assoc, MorphismProperty.Over.pullback_map_left,
-      limit.lift_π_assoc, cospan_left, PullbackCone.mk_π_app]
+    erw [MorphismProperty.Comma.comp_left, MorphismProperty.Comma.comp_left,
+      MorphismProperty.Over.pullbackComp_hom_app_left, MorphismProperty.Over.pullback_map_left]
+    simp only [pullback.map_id, Category.id_comp, Category.assoc, limit.lift_π_assoc,
+      cospan_left, PullbackCone.mk_π_app]
     erw [pullbackLeftPullbackSndIso_inv_fst]
     exact hχ
   calc _ = ((upperStarLowerStarAdjunction A t).unit.app G).hom.app (op b) ≫

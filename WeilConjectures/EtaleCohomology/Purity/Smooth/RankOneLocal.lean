@@ -119,7 +119,7 @@ variable {Z X : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i]
 adjoints of `Λ`-linear functors. -/
 instance linear_rightDerivedSectionsWithSupport :
     (rightDerivedSectionsWithSupport (ModuleCat.{u + 1} Λ) i).Linear Λ := by
-  have := (lowerStarClosedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) i.openComplement.ι i
+  have := (lowerStarClosedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) i i.openComplement.ι
     i.range_eq_compl_range_openComplement_ι).mapDerivedCategoryRightDerivedAdjunction
       |>.right_adjoint_linear (R := Λ)
   have := (constantSheafΓAdj Z.smallEtaleTopology

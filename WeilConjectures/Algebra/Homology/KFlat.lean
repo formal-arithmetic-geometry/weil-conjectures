@@ -348,9 +348,10 @@ set_option synthInstance.maxSize 256 in
 A cochain complex `K` of sheaves of `R`-modules is *K-flat* if for every acyclic complex `F` of
 `R`-modules (all cohomology sheaves vanish, `F.Acyclic`) the total tensor complex
 `Tot(F ⊗_R K) = mapBifunctor F K (curriedTensor _)` is acyclic (Stacks, Tag 06YN). The tensor
-product is `SheafOfModules.monoidalCategory R`. This differs from the source's
-`CochainComplex.KFlat` (`FromJoel`: tensoring on both sides preserves quasi-isomorphisms, for a
-monoidal preadditive abelian category), which is a different name and a different notion. -/
+product is `SheafOfModules.monoidalCategory R`. The general notion `CochainComplex.KFlat`
+(`CochainComplex.IsKFlat`) asks instead that tensoring with `K` on both sides preserve
+quasi-isomorphisms; for a site whose morphisms live in the universe of the rings the two agree
+(`CochainComplex.isKFlatTensor_iff_kFlat`, `CochainComplex.isKFlatTensor_iff_isKFlat`). -/
 def IsKFlatTensor
     (K : CochainComplex
       (SheafOfModules.{max u v} ((sheafCompose J

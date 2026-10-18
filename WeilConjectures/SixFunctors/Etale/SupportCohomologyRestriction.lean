@@ -73,8 +73,8 @@ noncomputable def mapDerivedCategoryLowerStarIsoRightDerivedLowerShriek :
 /-- `i_* ⊣ Ri^!_{sh}`: the derived adjunction of `i_* ⊣ i^!`. -/
 noncomputable def mapDerivedCategoryLowerStarClosedUpperShriekAdjunction :
     ((i)_*[A]).mapDerivedCategory ⊣
-      (closedUpperShriek A i.openComplement.ι i).rightDerivedFunctor :=
-  (lowerStarClosedUpperShriekAdjunction A i.openComplement.ι i
+      (closedUpperShriek A i i.openComplement.ι).rightDerivedFunctor :=
+  (lowerStarClosedUpperShriekAdjunction A i i.openComplement.ι
     i.range_eq_compl_range_openComplement_ι).mapDerivedCategoryRightDerivedAdjunction
 
 /-- For a closed immersion `i`, the derived lower shriek `Ri_!` is a left adjoint, with right
@@ -88,7 +88,7 @@ instance isLeftAdjoint_rightDerivedLowerShriek_of_isClosedImmersion :
 of the sheaf functor `i^!` of sections supported on `Z`, both being right adjoint to
 `Ri_! ≅ i_*`. -/
 noncomputable def rightDerivedClosedUpperShriekIso :
-    (closedUpperShriek A i.openComplement.ι i).rightDerivedFunctor ≅ R(i)^![A] :=
+    (closedUpperShriek A i i.openComplement.ι).rightDerivedFunctor ≅ R(i)^![A] :=
   ((mapDerivedCategoryLowerStarClosedUpperShriekAdjunction A i).ofNatIsoLeft
     (mapDerivedCategoryLowerStarIsoRightDerivedLowerShriek A i)).rightAdjointUniq
       (rightDerivedUpperShriekAdjunction A i)
