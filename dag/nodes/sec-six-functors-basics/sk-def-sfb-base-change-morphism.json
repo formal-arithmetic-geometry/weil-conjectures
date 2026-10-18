@@ -436,5 +436,31 @@
     }
    ]
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2317e67a2",
+  "group": "NH",
+  "result": "pass",
+  "note": "Matched every clause of the node to the Lean: ℓ, k with prime char ≠ ℓ, four separated finite-type schemes in Over (Spec k), arbitrary commutative condensed Λ (Sheaf Profinite Ab with MonObj/IsCommMonObj), the explicit preservation hypothesis H (PreservesBoundedConstructiblePushforwards, ∀ f K), CommSq g' f' f g only, θ_sq reused from MorphismDefs, and BC = unit(f') ≫ squareTransport(θ).hom ≫ counit(f) : Rf_* ⋙ Lg^* ⟶ Lg'^* ⋙ Rf'_*. No IsFinitenessCoefficient, cartesian or proper hypothesis. The §1(B) dependency module for sk-def-sfb-dc-restricted-functors restricts the ambient Rf_* (ObjectProperty.lift) and the ambient adjunction (restrictFullyFaithful) under H; it is real data and no other node cites it. Probe: under IsFinitenessCoefficient the new pushforward and base change are definitionally equal (rfl) to the published boundedConstructibleLowerStar and boundedConstructibleBaseChange, so this is a scope generalisation, not a duplicate notion. nt_compile on both files rc=0 with no warnings (4.2 s, 3.2 s); axioms are only propext/choice/Quot.sound; no sorry or theorem; docstrings carry source and blueprint id; universes as in the dependencies; statement fields verbatim; report sections present (second reading done by the writing worker, as the dispatcher required). Edge cases checked: identity and noncartesian squares, empty schemes, Λ=0. No findings."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.BoundedConstructibleBaseChange",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructibleBaseChangeOfPreserves",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructiblePullbackSquareComparison",
+   "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructibleBaseChangeUnitStepOfPreserves",
+   "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructibleBaseChangeSquareStepOfPreserves",
+   "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructibleBaseChangeCounitStepOfPreserves",
+   "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructibleBaseChangeOfPreserves"
+  ],
+  "file": "lean/Sheaf/Paper/BoundedConstructibleBaseChange.lean",
+  "statement": "def boundedConstructibleBaseChangeOfPreserves (sq : CommSq g' f' f g) : boundedConstructibleLowerStarOfPreserves Λ H f ⋙ boundedConstructibleUpperStar Λ ℓ g ⟶ boundedConstructibleUpperStar Λ ℓ g' ⋙ boundedConstructibleLowerStarOfPreserves Λ H f'",
+  "branch": "newtargets-dag",
+  "by": "NH",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "The existing pullback comparison is reused verbatim. The published base-change definition now requires IsFinitenessCoefficient, whereas this unit explicitly allows every commutative condensed coefficient whose pushforwards preserve bounded constructible complexes. The new OfPreserves interface uses exactly that preservation hypothesis and the canonical restricted ambient adjunction. No coefficient-class restriction or cartesian/proper assumption is added."
  }
 }

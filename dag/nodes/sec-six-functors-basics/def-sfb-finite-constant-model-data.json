@@ -1,0 +1,132 @@
+{
+ "id": "def-sfb-finite-constant-model-data",
+ "kind": "definition",
+ "title": "Canonical finite constant scalar model data",
+ "status": "split",
+ "statement": "For a commutative topological ring $A$ and a scheme $T$ [def-pc-scheme] [def-weil-size-convention] [def-weil-pbc-proetale-site] [sk-def-sfb-condensed-ring] [sk-def-sfb-pulled-back-coefficients] [def-weil-pbc-constant-sheaf] [def-sfb-modobj-relative-tensor] [def-weil-sheaf-of-modules-category], define the scalar realization functor $\\operatorname{scalarModules}_A$ on $A$-modules, the canonical constant-to-continuous scalar map $\\operatorname{scalarToContinuous}_A$, and the local model functor $\\operatorname{modelFunctor}_{A,T}$ obtained by constant sheafification, extension of scalars, and inverse image from the point. For a prime $\\ell$ and a finite extension $E/\\mathbf Q_\\ell$ [def-weil-l-adic-coefficient-extension], also define the continuous coefficient rings $\\operatorname{integralCoefficients}_{\\ell,E}$ and $\\operatorname{rationalCoefficients}_{\\ell,E}$ and their canonical model functors $\\operatorname{integralModel}_{\\ell,E,T}$ and $\\operatorname{rationalModel}_{\\ell,E,T}$.",
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-pc-scheme",
+  "def-weil-size-convention",
+  "def-weil-pbc-proetale-site",
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-pulled-back-coefficients",
+  "def-weil-pbc-constant-sheaf",
+  "def-sfb-modobj-relative-tensor",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-internal-hom.proof.md",
+  "place": "Paragraphs 2--3, the canonical scalar local-model functors used to realize the finite projective factors and their duals."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "canonical scalar realization functor from modules to pro-etale module sheaves with continuous coefficient ring",
+   "results": "No exact declaration combines scalarModules, scalarToContinuous, modelFunctor, and the integral/rational coefficient models.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical scalar realization functor constant sheaf extension of scalars inverse image from point for pro-etale coefficients",
+   "results": "No declaration gives the combined scalarModules/modelFunctor construction with the specified continuous coefficient rings.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "constantSheaf Mod.extendScalars upperStarFromPoint continuousCoefficientRingObj",
+   "results": "No exact combined declaration; only individual categorical APIs.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "scalarModules|modelFunctor|scalarToContinuous|integralCoefficients|rationalCoefficients",
+   "results": "The constructions occur in Sheaf.Paper.FiniteConstantModelResolution (helpers of lem-sfb-finite-constant-model-two-term-free-resolution); this node binds them as existing declarations, without copying or moving them.",
+   "date": "2026-10-18",
+   "verdict": "existing declarations bound with existing: true"
+  },
+  {
+   "tool": "grep",
+   "query": "finite-constant-model-data",
+   "results": "No existing DAG node with this id.",
+   "date": "2026-10-18",
+   "verdict": "new node id"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-internal-hom-dual-constructible-models",
+  "date": "2026-10-18",
+  "group": "Q108"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-thm-sf-ctf-stability-internal-hom",
+   "place": "Paragraphs 2--3, scalar local-model constructions used in the internal-Hom dual proof.",
+   "via": [
+    "lem-sfb-internal-hom-dual-constructible-models"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.Paper.FiniteConstantModelResolution",
+  "declaration": "AlgebraicGeometry.ProEtale.FiniteConstantModel.scalarModules",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.FiniteConstantModel.scalarAction",
+   "AlgebraicGeometry.ProEtale.FiniteConstantModel.scalarAction_laws",
+   "AlgebraicGeometry.ProEtale.FiniteConstantModel.scalarModule",
+   "AlgebraicGeometry.ProEtale.FiniteConstantModel.scalarMap_linear",
+   "AlgebraicGeometry.ProEtale.FiniteConstantModel.scalarModules",
+   "AlgebraicGeometry.ProEtale.FiniteConstantModel.constantFunctions",
+   "AlgebraicGeometry.ProEtale.FiniteConstantModel.scalarToContinuous",
+   "AlgebraicGeometry.ProEtale.FiniteConstantModel.scalarToContinuous_isMonHom",
+   "AlgebraicGeometry.ProEtale.FiniteConstantModel.constantScalars_commutative",
+   "AlgebraicGeometry.ProEtale.FiniteConstantModel.modelFunctor",
+   "AlgebraicGeometry.ProEtale.FiniteConstantModel.integralCoefficients",
+   "AlgebraicGeometry.ProEtale.FiniteConstantModel.rationalCoefficients",
+   "AlgebraicGeometry.ProEtale.FiniteConstantModel.integralModel",
+   "AlgebraicGeometry.ProEtale.FiniteConstantModel.rationalModel"
+  ],
+  "statement": "def scalarModules : ModuleCat.{u + 1} A ⥤ Mod Ab.{u + 1} (AddCommGrpCat.of (ULift.{u + 1} A))",
+  "branch": "newtargets-dag",
+  "by": "Q108",
+  "date": "2026-10-18",
+  "existing": true,
+  "note": "The published module already contains the canonical scalar realization data with these unchanged signatures. This definition node gives that data its own DAG ownership without copying or redeclaring it; the two-term theorem module is the same module and exposes the data it uses."
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-031c3fa39",
+  "group": "Q108",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-031c3fa39",
+  "group": "Q108",
+  "result": "fix",
+  "note": "Read the item, all 10 stmt_deps, the new node def-sfb-finite-constant-model-data, the module, report (Worker report + Second reading present), and the side sources. Clauses, quantifiers, hypotheses, edge cases, universes, docstrings, hollow-def and sorry gates and the verbatim statement are ok. F1 (substance, fixed): the Qbar_l case used padicAlgClRingObj (finite-subextension colimit), but sk-def-localizing-closure/sk-def-sfb-condensed-ring and the landed IsLocalizingAdmissibleCoefficient require C(-,Qbar_l) with the l-adic topology; the objects are not isomorphic. Replaced by algebraicCoefficients = continuousCoefficientRingObj (ULift (PadicAlgCl l)) with the canonical FiniteConstantModel.modelFunctor; removed 4 helper declarations; norm topology checked by rfl. F2 (wording, fixed): the report and the new node's search entry claimed a non-existent FiniteConstantModelDefinitions module; corrected. Compiles (nt_compile --json): delivered rc0 12.8s, fixed rc0 11.9s, diagnostics confirmed live with an injected error. Fixes: complete module, item lean-record.json, def-node json, report.md."
+ }
+}

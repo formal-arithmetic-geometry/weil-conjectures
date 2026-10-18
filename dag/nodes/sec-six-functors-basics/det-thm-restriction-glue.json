@@ -295,5 +295,28 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ff4b72f02",
+  "group": "Q01",
+  "result": "pass",
+  "note": "Read the node, the blueprint source place, every stmt_dep record and the exact declarations: CondensedConstantConstructibility (Dbc predicate), localizingClosureProEtale, localizingLowerShriek and the full signature of exists_localizingExceptionalAdjoint, padicSubfieldCondensedRing and padicAlgClRingObj (finite-subextension Qlbar ring, not C(-,Qlbar)). hΛ covers exactly the E and Qlbar cases of the existence theorem. The char/finite-type/separated hypotheses match the node and are no stronger. h, G and adj are exactly the data the existence theorem provides, not extra assumptions. Clause 1: finite I : Type w, iSup U = ⊤, restriction via upperStar along the open immersion. Clause 2: hX, hY, hF, hG are conclusions; adjbc is pinned to adj.homEquiv by an equation. Edge cases checked: empty I or empty X, zero objects, E = Q_l, universes (k : Type u, w free). The two helper lifts carry real data; the theorem's sorry is the only one; docstrings, line widths and stated-proof-dep imports are OK; no name clash. The node changed only in lean, and lean.statement is verbatim from the file. The report has a real Worker report and the Second reading by Q01 section is the standard note that this review is the second reading. nt_compile.py --json on the snapshot file: clean in 3.9 s; #check and #print axioms confirm the types and sorryAx. Observation outside this delivery: sk-def-sfb-qlbar-condensed still lacks a lean record."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.RationalRestrictionGlue",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.rationalRestrictionGlue",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.restrictionGlueLowerShriek",
+   "AlgebraicGeometry.ProEtale.CondensedRing.restrictionGlueUpperShriek",
+   "AlgebraicGeometry.ProEtale.CondensedRing.rationalRestrictionGlue"
+  ],
+  "file": "lean/Sheaf/Paper/RationalRestrictionGlue.lean",
+  "statement": "theorem rationalRestrictionGlue (ℓ : ℕ) [Fact ℓ.Prime] (E : IntermediateField ℚ_[ℓ] (PadicAlgCl ℓ)) [FiniteDimensional ℚ_[ℓ] E] (hΛ : Nonempty (Mon.mk Λ ≅ Mon.mk ((sheafCompose (coherentTopology Profinite.{u}) (forget₂ RingCat.{u + 1} Ab.{u + 1})).obj (Profinite.padicSubfieldCondensedRing ℓ E))) ∨ Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.padicAlgClRingObj ℓ))) (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (hpℓ : p ≠ ℓ) [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))] [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))] [IsSeparated (Y ↘ Spec (.of k))] (f : X ⟶ Y) [f.IsOver (Spec (.of k))] [LocallyOfFiniteType f] [QuasiCompact f] [IsSeparated f] (c : Compactification.BoundaryCompactification f) (h : ∀ A, localizingClosureProEtale Λ X A → localizingClosureProEtale Λ Y ((rightDerivedLowerShriekOfCompactification Λ c.obj.obj).obj A)) (G : (localizingClosureProEtale Λ Y).FullSubcategory ⥤ (localizingClosureProEtale Λ X).FullSubcategory) (adj : localizingLowerShriek Λ c.obj.obj h ⊣ G) : (∀ (I : Type w) [Finite I] (U : I → X.Opens), iSup U = ⊤ → ∀ M : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)), (∀ i : I, constantModelBoundedConstructible Λ (U i).toScheme (((upperStar Λ (U i).ι).mapDerivedCategory).obj M)) → constantModelBoundedConstructible Λ X M) ∧ ∃ (hX : constantModelBoundedConstructible Λ X ≤ localizingClosureProEtale Λ X) (hY : constantModelBoundedConstructible Λ Y ≤ localizingClosureProEtale Λ Y) (hF : ∀ A, constantModelBoundedConstructible Λ X A → constantModelBoundedConstructible Λ Y ((rightDerivedLowerShriekOfCompactification Λ c.obj.obj).obj A)) (hG : ∀ K : (localizingClosureProEtale Λ Y).FullSubcategory, constantModelBoundedConstructible Λ Y K.obj → constantModelBoundedConstructible Λ X (G.obj K).obj), ∃ adjbc : restrictionGlueLowerShriek Λ c.obj.obj hF ⊣ restrictionGlueUpperShriek Λ G hY hG, ∀ (A : ConstantModelBoundedConstructible Λ X) (K : ConstantModelBoundedConstructible Λ Y) (t : (restrictionGlueLowerShriek Λ c.obj.obj hF).obj A ⟶ K), (adjbc.homEquiv A K t).hom = (adj.homEquiv ⟨A.obj, hX A.obj A.property⟩ ⟨K.obj, hY K.obj K.property⟩ (ObjectProperty.homMk t.hom)).hom",
+  "branch": "newtargets-dag",
+  "by": "Q01",
+  "date": "2026-10-18",
+  "existing": false
  }
 }

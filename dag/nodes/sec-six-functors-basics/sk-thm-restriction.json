@@ -253,5 +253,27 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bc79e0ac8",
+  "group": "Q06",
+  "result": "pass",
+  "note": "Read every clause against the node, the six stmt_deps and the side-clone declarations. ℓ, k with char p>0 and p≠ℓ, E, Λ (iso to continuous maps into E or Qbar, matching sk-def-sfb-condensed-ring and sk-def-localizing-closure), separated finite-type X, Y and f: exact, nothing stronger. Dctf is the recorded ConstantModelConstructibleFiniteTor and Loc is localizingClosureProEtale. f^! is any right adjoint of localizingLowerShriek, which is unique up to iso. The restricted adjunction names explicit F₀ and G₀ pinned by strict equalities after the real full inclusion. The statement covers every boundary compactification; that is true, matches the existence interface, and includes the fixed one. Helper constantModelFiniteTorToLocalizing = ObjectProperty.ιOfLE, not hollow. §1(B) repair of sk-prop-sf-existence is justified: the old Qbar case used the colimit of finite subextensions, a different ring; the new theorem changes only the hypothesis to IsLocalizingAdmissibleCoefficient, keeps all conclusions, changes only lean with a note, and no file imports the old declaration. Statements verbatim; docstrings with source, blueprint tag and 8 steps; sorry only; universes unchanged; no pro-etale substitute. nt_compile --json of both files: exit 0, no errors or warnings except sorry. No findings.; reverted the delivery's change of existing node(s) sk-prop-sf-existence (--revert-nodes; kept as on newtargets-dag)"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.RationalExceptionalRestriction",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.rationalExceptional_preserves_constructibleFiniteTor",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.constantModelFiniteTorToLocalizing",
+   "AlgebraicGeometry.ProEtale.CondensedRing.rationalExceptional_preserves_constructibleFiniteTor"
+  ],
+  "file": "lean/Sheaf/Paper/RationalExceptionalRestriction.lean",
+  "statement": "theorem rationalExceptional_preserves_constructibleFiniteTor (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ] (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] {X Y : Scheme.{u}} [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))] [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))] [IsSeparated (Y ↘ Spec (.of k))] (f : X ⟶ Y) [f.IsOver (Spec (.of k))] [LocallyOfFiniteType f] [QuasiCompact f] [IsSeparated f] (E : PadicAlgCl.FiniteIntermediateField ℓ) (_hΛ : Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj E)) ∨ Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj (PadicAlgCl ℓ)))) (c : Compactification.BoundaryCompactification f) (h : ∀ K, localizingClosureProEtale Λ X K → localizingClosureProEtale Λ Y ((rightDerivedLowerShriekOfCompactification Λ c.obj.obj).obj K)) (G : (localizingClosureProEtale Λ Y).FullSubcategory ⥤ (localizingClosureProEtale Λ X).FullSubcategory) (_adj : localizingLowerShriek Λ c.obj.obj h ⊣ G) : (∀ K : (localizingClosureProEtale Λ Y).FullSubcategory, (constantModelBoundedConstructible Λ Y K.obj ∧ DerivedCategory.finiteTorAmplitude _ K.obj) → constantModelBoundedConstructible Λ X (G.obj K).obj ∧ DerivedCategory.finiteTorAmplitude _ (G.obj K).obj) ∧ ∃ (F₀ : ConstantModelConstructibleFiniteTor Λ X ⥤ ConstantModelConstructibleFiniteTor Λ Y) (G₀ : ConstantModelConstructibleFiniteTor Λ Y ⥤ ConstantModelConstructibleFiniteTor Λ X), F₀ ⋙ constantModelFiniteTorToLocalizing Λ Y = constantModelFiniteTorToLocalizing Λ X ⋙ localizingLowerShriek Λ c.obj.obj h ∧ G₀ ⋙ constantModelFiniteTorToLocalizing Λ X = constantModelFiniteTorToLocalizing Λ Y ⋙ G ∧ Nonempty (F₀ ⊣ G₀)",
+  "branch": "newtargets-dag",
+  "by": "Q06",
+  "date": "2026-10-18",
+  "existing": false
  }
 }

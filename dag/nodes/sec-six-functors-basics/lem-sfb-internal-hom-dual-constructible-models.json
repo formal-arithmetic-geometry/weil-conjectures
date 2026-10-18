@@ -16,7 +16,8 @@
   "sk-def-sfb-derived-tensor-hom",
   "sk-def-sfb-constructible",
   "lem-weil-pbc-completed-constant-sheaf-reduction",
-  "det-prop-sfb-qlbar-colimit-x-integral-limit"
+  "det-prop-sfb-qlbar-colimit-x-integral-limit",
+  "def-sfb-finite-constant-model-data"
  ],
  "proof": [
   {
@@ -443,5 +444,50 @@
   "group": "Q17",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q17-1720ebd93 (reviewer sub-agent of L); spot-checked: Read the full item, report, DAG/unit/chapter records, delivery errors A–F, blueprint route, every dependency statement, and cited sources. All ten proof steps are mathematically sound with hypotheses and coefficient categories preserved; the base-change morphism and dual differential are explicit. Edge cases and duplicate/cycle checks pass. No new nodes or repairs are required. Review written to review.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-031c3fa39",
+  "group": "Q108",
+  "result": "fix",
+  "note": "Read the item, all 10 stmt_deps, the new node def-sfb-finite-constant-model-data, the module, report (Worker report + Second reading present), and the side sources. Clauses, quantifiers, hypotheses, edge cases, universes, docstrings, hollow-def and sorry gates and the verbatim statement are ok. F1 (substance, fixed): the Qbar_l case used padicAlgClRingObj (finite-subextension colimit), but sk-def-localizing-closure/sk-def-sfb-condensed-ring and the landed IsLocalizingAdmissibleCoefficient require C(-,Qbar_l) with the l-adic topology; the objects are not isomorphic. Replaced by algebraicCoefficients = continuousCoefficientRingObj (ULift (PadicAlgCl l)) with the canonical FiniteConstantModel.modelFunctor; removed 4 helper declarations; norm topology checked by rfl. F2 (wording, fixed): the report and the new node's search entry claimed a non-existent FiniteConstantModelDefinitions module; corrected. Compiles (nt_compile --json): delivered rc0 12.8s, fixed rc0 11.9s, diagnostics confirmed live with an injected error. Fixes: complete module, item lean-record.json, def-node json, report.md."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.InternalHomDualConstructibleModels",
+  "declaration": "AlgebraicGeometry.ProEtale.InternalHomDualModels.internalHomDual_constructible_models",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.InternalHomDualModels.scalarDualDifferential",
+   "AlgebraicGeometry.ProEtale.InternalHomDualModels.scalarDualDifferential_laws",
+   "AlgebraicGeometry.ProEtale.InternalHomDualModels.scalarDual",
+   "AlgebraicGeometry.ProEtale.InternalHomDualModels.scalarModules_additive",
+   "AlgebraicGeometry.ProEtale.InternalHomDualModels.finiteModel",
+   "AlgebraicGeometry.ProEtale.InternalHomDualModels.finiteCoefficients",
+   "AlgebraicGeometry.ProEtale.InternalHomDualModels.baseIntegralCoefficients",
+   "AlgebraicGeometry.ProEtale.InternalHomDualModels.baseIntegralModel",
+   "AlgebraicGeometry.ProEtale.InternalHomDualModels.baseRationalCoefficients",
+   "AlgebraicGeometry.ProEtale.InternalHomDualModels.baseRationalModel",
+   "AlgebraicGeometry.ProEtale.InternalHomDualModels.algebraicCoefficients",
+   "AlgebraicGeometry.ProEtale.InternalHomDualModels.algebraicModel",
+   "AlgebraicGeometry.ProEtale.InternalHomDualModels.constantScalarsComm",
+   "AlgebraicGeometry.ProEtale.InternalHomDualModels.realization_additive",
+   "AlgebraicGeometry.ProEtale.InternalHomDualModels.continuousModelAdditive",
+   "AlgebraicGeometry.ProEtale.InternalHomDualModels.finiteModelAdditive",
+   "AlgebraicGeometry.ProEtale.InternalHomDualModels.baseIntegralModelAdditive",
+   "AlgebraicGeometry.ProEtale.InternalHomDualModels.baseRationalModelAdditive",
+   "AlgebraicGeometry.ProEtale.InternalHomDualModels.integralModelAdditive",
+   "AlgebraicGeometry.ProEtale.InternalHomDualModels.rationalModelAdditive",
+   "AlgebraicGeometry.ProEtale.InternalHomDualModels.algebraicModelAdditive",
+   "AlgebraicGeometry.ProEtale.InternalHomDualModels.Assertion",
+   "AlgebraicGeometry.ProEtale.InternalHomDualModels.internalHomDual_constructible_models"
+  ],
+  "file": "lean/Sheaf/Paper/InternalHomDualConstructibleModels.lean",
+  "statement": "theorem internalHomDual_constructible_models (l p : ℕ) [Fact l.Prime] (k : Type u) [Field k] [CharP k p] (hp : 0 < p) (hpl : p ≠ l) (S : Scheme.{u}) [S.Over (Spec (.of k))] [LocallyOfFiniteType (S ↘ Spec (.of k))] [QuasiCompact (S ↘ Spec (.of k))] [IsSeparated (S ↘ Spec (.of k))] : (∀ (A : Type u) [CommRing A] [Finite A], (∃ n : ℕ, (l : A) ^ n = 0) → Assertion A (finiteCoefficients A) (finiteModel A) S) ∧ Assertion (ULift.{u} ℤ_[l]) (baseIntegralCoefficients l) (baseIntegralModel l) S ∧ (∀ (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E], Assertion (Padic.coefficientExtensionIntegers l E) (FiniteConstantModel.integralCoefficients l E) (FiniteConstantModel.integralModel l E) S) ∧ Assertion (ULift.{u} ℚ_[l]) (baseRationalCoefficients l) (baseRationalModel l) S ∧ (∀ (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E], Assertion E (FiniteConstantModel.rationalCoefficients l E) (FiniteConstantModel.rationalModel l E) S) ∧ Assertion (ULift.{u} (PadicAlgCl l)) (algebraicCoefficients l) (algebraicModel l) S",
+  "branch": "newtargets-dag",
+  "by": "Q108",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Six explicit coefficient cases of the single local-model assertion: finite discrete A, Z_l, O_E, Q_l, E, and Qbar_l. Ordinary scalar realization reuses FiniteConstantModelResolution. Maintainer review fix: the Qbar_l case is the continuous condensed ring C(-,Qbar_l) for the l-adic norm topology (sk-def-sfb-condensed-ring; the coefficient convention of sk-def-localizing-closure, IsLocalizingAdmissibleCoefficient), realized by the same canonical modelFunctor as the other cases, replacing the delivered finite-subextension colimit object padicAlgClRingObj. The ordinary signed scalar dual is given by real degreewise data. ULift on the three Type-0 base rings only transports scalar coordinates to the scheme universe; all scalar module objects live in Type (u+1). No assumptions of scalar exactness, dualizability or constructibility are added.",
+  "fixed_by": "NT-stage2-cc-031c3fa39"
  }
 }
