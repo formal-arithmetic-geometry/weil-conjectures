@@ -2,7 +2,7 @@
  "id": "lem-per-free-finite-action-torsor",
  "kind": "statement",
  "title": "Free finite group action gives a finite etale torsor on its quotient locus",
- "statement": "Let $G$ be a finite group acting admissibly on an integral excellent Noetherian scheme $C$, and let $U\\subset C$ be a $G$-stable dense open on which the action is free on geometric points. Assume that the scheme quotient $q:C\\to C/G$ exists, with invariant structure sheaf, that $C/G$ is Noetherian and that $q$ is finite. Put $V=q(U)$. Then $V$ is open, $U= C\\times_{C/G}V$, and $U\\to V$ is a finite etale $G$-torsor: it is finite etale, the $G$-action is simply transitive on every geometric fibre, and $V$ is the orbit-space quotient. If $C$ is separated and $U$ is dense, $V$ is dense and the induced extension of function fields is Galois with group $G$.\n\nConventions for the notions used here: [def-pc-integral-scheme], [def-exc-excellent-ring], [def-weil-pbc-noetherian-ring], [def-weil-finite-integral-morphism], [def-weil-etale-morphism], [def-sbc-normal-dominant-galois].",
+ "statement": "Let $G$ be a finite group acting admissibly on an integral excellent Noetherian scheme $C$, and let $U\\subset C$ be a $G$-stable dense open on which the action is free on geometric points. Assume that the scheme quotient $q:C\\to C/G$ exists, with invariant structure sheaf, that $C/G$ is Noetherian and that $q$ is finite. Put $V=q(U)$. Then $V$ is open, $U= C\\times_{C/G}V$, and $U\\to V$ is a finite etale $G$-torsor: it is finite etale, the $G$-action is simply transitive on every geometric fibre, and $V$ is the orbit-space quotient. If $C$ is separated and $U$ is dense, $V$ is dense and the induced extension of function fields is Galois with group $G$.\n\nConventions for the notions used here: [def-pc-integral-scheme], [def-exc-excellent-ring], [def-weil-pbc-noetherian-ring], [def-weil-finite-integral-morphism], [def-weil-etale-morphism], [def-sbc-normal-dominant-galois]. Here admissible means that every $G$-orbit is contained in an affine open; free on geometric points means $g\\bar u=\\bar u$ implies $g=1$ for every geometric point $\\bar u:\\operatorname{Spec}\\Omega\\to U$ [def-weil-geometric-point]. The invariant structure sheaf assumption is the canonical isomorphism $\\mathcal O_{C/G}\\simeq(q_*\\mathcal O_C)^G$. Fibre products and separatedness have the meanings of [def-pc-fibre-product] and [def-weil-proper-morphism], respectively. The function field of an integral scheme $X$ is the stalk $\\mathcal O_{X,\\eta}$ [def-weil-pbc-module-stalk] of its structure sheaf at its generic point $\\eta$ [def-sc-generic-point], the unique point whose closure is $X$; the extension of function fields induced by $q$ is the germ map $\\mathcal O_{C/G,q(\\eta)}\\to\\mathcal O_{C,\\eta}$, where $q(\\eta)$ is the generic point of $C/G$.",
  "source": {
   "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
   "place": "Expose IX 1.4, p. 132: the action is free over the complement of the vertical boundary; the quotient over that open is the finite Galois torsor used in condition (*)."
@@ -13,11 +13,173 @@
   "def-weil-pbc-noetherian-ring",
   "def-weil-finite-integral-morphism",
   "def-weil-etale-morphism",
-  "def-sbc-normal-dominant-galois"
+  "def-sbc-normal-dominant-galois",
+  "def-weil-geometric-point",
+  "def-pc-fibre-product",
+  "def-weil-proper-morphism",
+  "def-sc-generic-point",
+  "def-weil-pbc-module-stalk"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $Y=C/G$. For an affine open $D=\\operatorname{Spec}A\\subset Y$, finiteness makes $W=q^{-1}D=\\operatorname{Spec}B$ affine, and the assumed invariant sheaf identifies $A=B^G$, with the given map $A\\to B$ the inclusion. Use the action groupoid $R=\\coprod_{g\\in G}W\\rightrightarrows W$: source is the identity on each component and target is $g$ on that component, with identity, inverse and composition supplied by the group laws. It is affine, namely $R=\\operatorname{Spec}(\\prod_G B)$. Both projections are finite locally free: for the source its algebra is the finite free module $B^{\\oplus G}$; for the target each summand is twisted by an automorphism and hence is again free of rank one. The product algebra is finitely presented, using the finitely many orthogonal idempotents $e_g$ with $\\sum e_g=1$; freeness gives flatness. Thus the finite, flat, locally finitely presented definition applies.",
+   "uses": [
+    "def-weil-finite-integral-morphism",
+    "def-weil-affine-spectrum",
+    "def-pc-finite-locally-free"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tags 03BL (lemma-points), 07S1 (definition-free-action): constant finite-group action groupoid"
+   }
+  },
+  {
+   "text": "Apply [lem-a1-affine-groupoid-orbit-fibres] to the groupoid of Step 1. Its invariant ring is $B^G=A$, so $q$ is surjective over $D$, and its ordinary and geometric fibres there are single $G$-orbits. These statements hold on the affine cover of $Y$, hence globally. In particular, since $U$ is $G$-stable, every fibre meeting $U$ lies entirely in $U$.",
+   "uses": [
+    "lem-a1-affine-groupoid-orbit-fibres"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 03BL (lemma-points), applied to the action groupoid"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-finite-closed-map-finite-fibres], $q(C\\setminus U)$ is closed. Step 2 and surjectivity give $q(U)=Y\\setminus q(C\\setminus U)$ and $q^{-1}(q(U))=U$. Thus $V=q(U)$ is open. The pullback of the open subscheme $V\\hookrightarrow Y$ is precisely the open subscheme on $q^{-1}V$: a morphism into $C$ factors through that open exactly when its composite into $Y$ factors through $V$. Hence $U\\simeq C\\times_YV$ with the given inclusions and projections. The restriction $p:U\\to V$ is finite by base-change permanence.",
+   "uses": [
+    "lem-weil-pbc-finite-closed-map-finite-fibres",
+    "def-weil-open-immersion",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-finite-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01WN (lemma-finite-proper), Tag 01WL (lemma-base-change-finite); open-subscheme pullback by its universal property"
+   }
+  },
+  {
+   "text": "The action on $U$ is free on arbitrary test schemes. Indeed, let two locally constant maps $g,h:|T|\\to G$ and $x:T\\to U$ satisfy $gx=hx$. On each open-and-closed part where $(g,h)$ is constant, a nonempty part has a point $t$ and a geometric point above it, obtained by choosing an algebraic closure of $\\kappa(t)$. Composing with $x$ gives a geometric point fixed by $h^{-1}g$, so $g=h$ on that part by the hypothesis. Thus $g=h$ everywhere, including when $T$ is empty. Consequently $(a,\\operatorname{pr}_2):G\\times U\\to U\\times_VU$ is a monomorphism: equality of its images first equates the $U$-maps, and then the preceding argument equates the $G$-maps. Reflexivity, symmetry and transitivity of its image are the identity, inverse and multiplication laws of $G$.",
+   "uses": [
+    "def-weil-geometric-point",
+    "def-weil-algebraic-closure",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tags 07S1 (definition-free-action), 07S2 (lemma-free-action); geometric-point test for a constant group"
+   }
+  },
+  {
+   "text": "For each affine open $D=\\operatorname{Spec}A\\subset V$, put $W=p^{-1}D=\\operatorname{Spec}B$. Step 1 gives $A=B^G$ and finite locally free source and target for $R=G\\times W$. Step 4 says that this action groupoid is an equivalence relation on every test scheme over $D$. Apply [lem-a1-finite-flat-affine-relation-quotient] with $S=D$. Its equalizer ring is exactly $B^G=A$, so its canonical quotient is the given $D$ and its canonical map is $p|_W$, by the affine spectrum correspondence. Therefore $p|_W$ is finite locally free and surjective, and $(g,w)\\mapsto(gw,w)$ identifies $G\\times W$ with $W\\times_DW$. These identifications use the actual action maps and projections, so on overlapping opens their inverses agree by uniqueness of an inverse. They give a global isomorphism $G\\times U\\simeq U\\times_VU$. Also $p$ is flat and locally of finite presentation: these are pointwise properties, verified on these affine neighbourhoods. Its finiteness was already established in Step 3.",
+   "uses": [
+    "lem-a1-finite-flat-affine-relation-quotient",
+    "def-weil-affine-spectrum",
+    "def-pc-finite-locally-free",
+    "def-weil-flat-morphism",
+    "def-sbc-locally-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 03BM (proposition-finite-flat-equivalence), the affine argument behind Tag 07S7 (lemma-quotient-scheme)"
+   }
+  },
+  {
+   "text": "The single map $p:U\\to V$ is an fpqc covering: it is flat by Step 5; over each affine open $D\\subset V$, its affine inverse image $W$ maps onto $D$, so one affine piece suffices in the definition of an fpqc covering. After this base change, $p$ is the second projection $U\\times_VU\\to U$, identified in Step 5 with $\\coprod_G U\\to U$. This projection is etale: each source component maps by the identity, and on affine identity charts the ring map $B\\to B$ is flat, finitely presented with zero relative differentials; equivalently its diagonal is the open-and-closed union of the equal-component parts. Thus it satisfies the etale definition. By [lem-galois-fpqc-descend-etale], $p$ is etale. Together with Step 3 this proves finite etaleness.",
+   "uses": [
+    "def-weil-pbc-fpqc-covering",
+    "def-weil-etale-morphism",
+    "def-weil-unramified-morphism",
+    "lem-galois-fpqc-descend-etale"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 02VN (lemma-descending-property-etale); constant-group projection checked directly on identity charts"
+   }
+  },
+  {
+   "text": "Every geometric fibre of $p$ is nonempty by Step 2. Given two of its geometric points $x,y$, the kernel-pair isomorphism of Step 5 supplies a unique $g\\in G$ with $gx=y$; hence the action is simply transitive. The restricted map is also the orbit-space quotient: it is surjective, its fibres are orbits, and it is closed because it is finite. If the inverse image of a subset $E\\subset V$ is closed, then $E=p(p^{-1}E)$ is closed, proving the quotient topology. The invariant sheaf identity restricts from $Y$ to $V$ by evaluating on its open subsets. These are exactly the stated quotient and finite etale torsor clauses.",
+   "uses": [
+    "lem-weil-pbc-finite-closed-map-finite-fibres",
+    "def-sbc-normal-dominant-galois"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01WN (lemma-finite-proper); torsor kernel-pair criterion in spaces-properties.tex Tag 07S7"
+   }
+  },
+  {
+   "text": "The open $V$ is dense in $Y$. For any nonempty open $D\\subset Y$, its inverse image under the surjection $q$ is nonempty open in $C$, hence meets the dense $U$; therefore $D$ meets $V$. Also $Y$ is integral: it is nonempty since $C$ is, and for every nonempty affine $D=\\operatorname{Spec}A\\subset Y$, Step 1 identifies $A$ with the subring $B^G$ of the domain $B$, since $q^{-1}D$ is a nonempty affine open of the integral $C$. This is precisely the affine definition of an integral scheme.",
+   "uses": [
+    "def-pc-integral-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 01OK (definition-integral); density by inverse images of opens"
+   }
+  },
+  {
+   "text": "Choose a nonempty affine $D\\subset V$ and write $W=q^{-1}D=\\operatorname{Spec}B$ and $D=\\operatorname{Spec}A$, where $A=B^G$. By [lem-sc-integral-function-field-affine-fraction], $L=k(C)=\\operatorname{Frac}B$ and $K=k(Y)=\\operatorname{Frac}A$, compatibly with $q$. The action on $L$ is $\\rho(g)=(g^{-1})^*$ so that it is a left action despite contravariance of pullback. Its fixed field is exactly $K$: if $z=b/c\\in L^G$ with $c\\ne0$, put $d=\\prod_{g\\in G}\\rho(g)(c)$. Then $d\\in B^G\\setminus\\{0\\}$ and $zd=b\\prod_{g\\ne1}\\rho(g)(c)\\in B$; as both $z$ and $d$ are invariant, $zd\\in B^G=A$. Thus $z=(zd)/d\\in\\operatorname{Frac}A$. The reverse inclusion follows by fixing numerators and denominators. This proves the field identification directly without assuming that invariants commute with arbitrary base change.",
+   "uses": [
+    "lem-sc-integral-function-field-affine-fraction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 09I3 (lemma-galois-over-fixed-field), applied after the elementary invariant-denominator calculation; function-field charts are Morphisms Tag 01RV"
+   }
+  },
+  {
+   "text": "The action $\\rho$ on $L$ is faithful. If $\\rho(g)$ is the identity, then $g$ fixes the geometric generic point $\\operatorname{Spec}\\overline L\\to C$: the generic point is preserved by every automorphism and the induced map on its residue field $L$ is the identity. This geometric point lies in $U$, since every nonempty open of an integral scheme contains its generic point, so the freeness hypothesis forces $g=1$. Apply [lem-wf-finite-field-action-fixed-degree] to $L$ and this finite faithful action. With $L^G=K$ from Step 9 it gives a finite Galois extension $L/K$ of degree $|G|$. The natural homomorphism $G\\to\\operatorname{Aut}_K(L)$ is injective by faithfulness, while [lem-weil-pbc-finite-galois-fixed-field] gives $|\\operatorname{Aut}_K(L)|=[L:K]=|G|$. An injection between these finite sets of the same cardinality is bijective. Thus this induced action identifies the Galois group with $G$, as required when $C$ is separated (the argument in fact does not need separatedness).",
+   "uses": [
+    "def-weil-geometric-point",
+    "def-weil-algebraic-closure",
+    "lem-sc-integral-function-field-affine-fraction",
+    "lem-wf-finite-field-action-fixed-degree",
+    "lem-weil-pbc-finite-galois-fixed-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 09I3 (lemma-galois-over-fixed-field) and Tag 09I1 (lemma-finite-Galois)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-integral-morphism",
+  "def-weil-affine-spectrum",
+  "def-pc-finite-locally-free",
+  "lem-a1-affine-groupoid-orbit-fibres",
+  "lem-weil-pbc-finite-closed-map-finite-fibres",
+  "def-weil-open-immersion",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-finite-morphism-permanence",
+  "def-weil-geometric-point",
+  "def-weil-algebraic-closure",
+  "lem-a1-finite-flat-affine-relation-quotient",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-weil-pbc-fpqc-covering",
+  "def-weil-etale-morphism",
+  "def-weil-unramified-morphism",
+  "lem-galois-fpqc-descend-etale",
+  "def-sbc-normal-dominant-galois",
+  "def-pc-integral-scheme",
+  "lem-sc-integral-function-field-affine-fraction",
+  "lem-wf-finite-field-action-fixed-degree",
+  "lem-weil-pbc-finite-galois-fixed-field"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/groupoids.tex",
+  "place": "Tags 03BL (lemma-points) and 03BM (proposition-finite-flat-equivalence), affine constant-group specialization; descent.tex Tag 02VN and fields.tex Tags 09I3, 09I1. This expands the quotient assertion used in ILO Expose IX 1.4, printed pp.132--133, condition (*)."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -53,10 +215,59 @@
    "results": "[loogle] OK 0 hit(s)",
    "date": "2026-10-19",
    "verdict": "no match: no scheme-theoretic torsor theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "torsor|free.*action|action.*free",
+   "results": "{\"t\": \"2026-10-18T21:33:26Z\", \"tool\": \"grep\", \"query\": \"torsor|free.*action|action.*free\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: read the results; no theorem about the scheme quotient and its free open locus. Abstract Galois-category and etale-property results do not prove this item."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"IsEtale\", \"quotient\"",
+   "results": "{\"t\": \"2026-10-18T21:33:26Z\", \"tool\": \"loogle\", \"query\": \"\\\"AlgebraicGeometry\\\", \\\"IsEtale\\\", \\\"quotient\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: read the results; no theorem about the scheme quotient and its free open locus. Abstract Galois-category and etale-property results do not prove this item."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An affine scheme with free finite group action has etale quotient morphism",
+   "results": "{\"t\": \"2026-10-18T21:33:26Z\", \"tool\": \"leansearch\", \"query\": \"An affine scheme with free finite group action has etale quotient morphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"AlgebraicGeometry.IsFinite.recOn\", \"AlgebraicGeometry.instIsAffineOfFiniteOfDiscreteTopologyCarrierCarrierCommRingCat\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.IsAffine.recOn\", \"AlgebraicGeometry.IsFinite.toIsAffineHom\"], \"digest\": \"e73096160873923e\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: read the results; no theorem about the scheme quotient and its free open locus. Abstract Galois-category and etale-property results do not prove this item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quotient of a scheme by a finite constant group is etale where all geometric stabilizers are trivial",
+   "results": "{\"t\": \"2026-10-18T21:33:27Z\", \"tool\": \"leanfinder\", \"query\": \"A quotient of a scheme by a finite constant group is etale where all geometric stabilizers are trivial\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"AlgebraicGeometry.IsEtale.of_comp\", \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"Algebra.isOpen_etaleLocus\"], \"digest\": \"d0619ec6168707f7\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: read the results; no theorem about the scheme quotient and its free open locus. Abstract Galois-category and etale-property results do not prove this item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite group acting freely on geometric points of a scheme with a finite invariant quotient gives a finite etale torsor on the invariant open subset",
+   "results": "{\"t\": \"2026-10-18T21:33:28Z\", \"tool\": \"leanfinder\", \"query\": \"A finite group acting freely on geometric points of a scheme with a finite invariant quotient gives a finite etale torsor on the invariant open subset\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.FintypeCat.instGaloisCategoryActionFintypeCat\", \"CategoryTheory.FintypeCat.instPreGaloisCategoryActionFintypeCat\", \"CategoryTheory.PreGaloisCategory.exists_lift_of_quotient_openSubgroup\", \"CategoryTheory.PreGaloisCategory.toAut_surjective_isGalois_finite_family\", \"CategoryTheory.PreGaloisCategory.instIsPretransitiveCarrierObjFintypeCatOfIsConnected\", \"CategoryTheory.PreGaloisCategory.has_decomp_quotients\", \"CategoryTheory.PreGaloisCategory.fiberIsoQuotientStabilizer\", \"CategoryTheory.FintypeCat.instFiberFunctorActionFintypeCatForget\"], \"digest\": \"51c0ed8ace665674\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: read the results; no theorem about the scheme quotient and its free open locus. Abstract Galois-category and etale-property results do not prove this item."
+  },
+  {
+   "tool": "grep",
+   "query": "(theorem|lemma|instance|def).*(isGalois|finrank|toAlgAut|algEquiv|card|bijective)",
+   "results": "{\"t\": \"2026-10-18T21:34:43Z\", \"tool\": \"grep\", \"query\": \"(theorem|lemma|instance|def).*(isGalois|finrank|toAlgAut|algEquiv|card|bijective)\", \"sub\": \"FieldTheory/Fixed\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: read the results; no theorem about the scheme quotient and its free open locus. Abstract Galois-category and etale-property results do not prove this item."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"FixedPoints\", \"IsGalois\"",
+   "results": "{\"t\": \"2026-10-18T21:34:44Z\", \"tool\": \"loogle\", \"query\": \"\\\"FixedPoints\\\", \\\"IsGalois\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"IsGaloisGroup.ringEquivFixedPoints\", \"IsGaloisGroup.ringEquivFixedPoints_apply_coe\", \"IsGaloisGroup.algebraMap_ringEquivFixedPoints_symm_apply\", \"IsGaloisGroup.fixedPoints\", \"IsGaloisGroup.fixedPoints_eq_bot\", \"IsGaloisGroup.fixingSubgroup_fixedPoints\", \"IsGaloisGroup.fixedPoints_eq_range_algebraMap\", \"IsGaloisGroup.le_fixedPoints_iff_le_fixingSubgroup\"], \"digest\": \"ee6306d683de7a38\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: read the results; no theorem about the scheme quotient and its free open locus. Abstract Galois-category and etale-property results do not prove this item."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-uniformization-nodal-quotient-reduction",
@@ -82,5 +293,49 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-free-finite-action-torsor",
+  "worker": "stage1",
+  "summary": "Expanded the free-open quotient argument in ten steps, reusing existing affine groupoid quotient/orbit results, fpqc etale descent and finite-field-action Mathlib leaves. No new nodes. Preserved all original hypotheses and conclusions; added explicit definitions of admissibility, geometric freeness and the invariant-sheaf convention, and the missing statement-definition dependencies.",
+  "blueprint": "IX 1.4, paragraph asserting freeness over the complement and using it to identify the normalized torsor; supports the Sylow reduction. Realizes the finite etale G-torsor assertion used in Expose IX 1.4 condition (*), through affine invariant quotients and generic field action.",
+  "tool_uses": [
+   {
+    "node": "lem-a1-affine-groupoid-orbit-fibres",
+    "why": "Generic scheme quotient, morphism permanence, or fpqc descent input for the free-open quotient argument; this unit contains no alternative statement of this tool, and no unit-level route is replaced."
+   },
+   {
+    "node": "lem-a1-finite-flat-affine-relation-quotient",
+    "why": "Generic scheme quotient, morphism permanence, or fpqc descent input for the free-open quotient argument; this unit contains no alternative statement of this tool, and no unit-level route is replaced."
+   },
+   {
+    "node": "lem-galois-fpqc-descend-etale",
+    "why": "Generic scheme quotient, morphism permanence, or fpqc descent input for the free-open quotient argument; this unit contains no alternative statement of this tool, and no unit-level route is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-finite-morphism-permanence",
+    "why": "Generic scheme quotient, morphism permanence, or fpqc descent input for the free-open quotient argument; this unit contains no alternative statement of this tool, and no unit-level route is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-finite-closed-map-finite-fibres",
+    "why": "Generic scheme quotient, morphism permanence, or fpqc descent input for the free-open quotient argument; this unit contains no alternative statement of this tool, and no unit-level route is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-a1-affine-groupoid-orbit-fibres",
+  "lem-a1-finite-flat-affine-relation-quotient",
+  "lem-galois-fpqc-descend-etale",
+  "lem-weil-pbc-finite-morphism-permanence",
+  "lem-weil-pbc-finite-closed-map-finite-fibres"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q137-ca1b6b872",
+  "group": "Q137",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q137-ca1b6b872 (reviewer sub-agent of L); spot-checked: Read the item, all ten steps, every cited statement, ILO IX 1.2(ii)/1.4 condition (*) (printed pp.131–133) and the unit/blueprint route. No new nodes. Statement: same mathematics as base with conventions added; no target weakened. Quotient existence, finiteness and Noetherianity are assumptions, consistent with the Nagarajan repair of lem-per-admissible-quotient-generic-degree. One fault, B3: the statement cites def-sc-function-field, which defines k(C) only for curves over k, but C is an arbitrary integral scheme. FIX: the function field is now defined as the stalk O_{X,η} at the generic point [def-weil-pbc-module-stalk, def-sc-generic-point], with the induced germ map at q(η); stmt_deps changed to match. Steps check out: (1) affine W=Spec B with A=B^G, and the action groupoid Spec ∏_G B is finite locally free both ways; (2) in 03BL the equalizer is B^G=A, so fibres are orbits, also on geometric points; (3) the finite closed map gives V open and q^{-1}V=U, with U≅C×_Y V and p finite by base change; (4) freeness on test schemes holds via geometric points on clopen pieces, including empty and nonreduced T; (5) 03BM applies with S=D and C=B^G=A, giving p finite locally free and surjective and G×U≅U×_V U; (6) {p} is an fpqc covering, the base change is ⊔_G U→U, hence étale, and 02VN descends this; (7) simply transitive because Spec Ω is connected, plus quotient topology; (8) V is dense and Y integral; (9) norm trick gives L^G=Frac A; (10) the generic geometric point gives faithfulness, then 09I3 and 09I1 give a bijection G→Aut_K(L). Small cases tested: G=1, a field, trivial action excluded, char p p-groups. Duplicates: lem-per-free-finite-group-affine-quotient (abstract quotient, no identification with the given q) and lem-per-admissible-quotient-generic-degree (finite type, no torsor) — not restatements. Batch-5 flag on lem-a1-finite-flat-affine-relation-quotient: its closure reaches only lem-trf-finite-presentation-module-descent-flat-local (Stacks 03C4, faithfully flat descent of finite presentation) and lem-trf-fppf-covering-base-change (021O). Both are generic algebra or topology, outside the trace formula and Poincaré duality statements and proofs, so accepted. tool_uses accepted (generic groupoid quotient and fpqc descent): a1 orbit-fibres, a1 relation-quotient, galois-fpqc-descend-etale. No SGA source. No cycle.; 1 file(s) fixed by the reviewer"
  }
 }
