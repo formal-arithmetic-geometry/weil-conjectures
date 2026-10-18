@@ -1,0 +1,119 @@
+{
+ "id": "def-per-strict-etale-system-interfaces",
+ "kind": "definition",
+ "title": "Strict etale system interfaces",
+ "status": "split",
+ "statement": "For a scheme $T$ and a commutative ring $O$ with element $e$, use the strict coefficient systems of [lem-pur-coefficient-system-derived-comparison], with positive levels $O/(e^{n+1})$. Define strictEtaleCoefficientSystem, strictEtaleLevel and StrictEtaleEvaluation by specializing that interface to the small etale site. For a compactification $c=(j,p)$ [def-weil-compactifications-refinements], StrictEtaleCompactSupport is the type of ordinary open extension and proper image, their universal derived images, endpoint evaluation packages, ordinary and derived adjunctions, and the representative and transpose equations fixing their canonical comparisons. Its functor is derivedOpen followed by properDerived.system.direct; its levelFunctor is levelDerivedOpen followed by properDerived.level.direct. Its evaluation is the composite of the recorded open and proper evaluation isomorphisms. StrictEtaleScalarAction is multiplication by $r\\in O$ on every section through the actual constant-ring unit, localized termwise. These are interfaces specifying data and normalizations, with no existence assertion and no finite-field restriction.",
+ "stmt_deps": [
+  "lem-pur-coefficient-system-derived-comparison",
+  "def-weil-compactifications-refinements"
+ ],
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1 and Constructions 5.14–5.15, Lemma 5.16: definitions of strict systems and simultaneous compact support"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "strict etale coefficient system compact support evaluation scalar action",
+   "results": "{\"t\": \"2026-10-18T19:31:25Z\", \"tool\": \"leansearch\", \"query\": \"strict etale coefficient system compact support evaluation scalar action\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CompactlySupportedContinuousMap.instIsCentralScalar\", \"ModuleCat.Tilde.smul_section_apply\", \"CompactlySupportedContinuousMap.smul_apply\", \"CompactlySupportedContinuousMap.instMulActionWithZeroOfContinuousConstSMul\", \"StandardEtalePresentation.toPresentation_algebra_smul\", \"CompactlySupportedContinuousMap.coe_smul\", \"Pi.evalMulActionHom\", \"ContDiffMapSupportedIn.coe_of_support_subset\"], \"digest\": \"0717f19d90ef97d8\"}",
+   "date": "2026-10-18",
+   "verdict": "No exact Mathlib interface. Existing project declarations inspected below."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical identity derived scalar extension comparison",
+   "results": "{\"t\": \"2026-10-18T19:31:27Z\", \"tool\": \"leanfinder\", \"query\": \"canonical identity derived scalar extension comparison\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.extendScalars_id_comp\", \"ModuleCat.extendScalars_comp_id\", \"ModuleCat.extendScalarsId\", \"ModuleCat.ExtendScalars.map'_id\", \"ModuleCat.extendScalars_id_comp_assoc\", \"ModuleCat.extendScalars_comp_id_assoc\", \"ModuleCat.homEquiv_extendScalarsId\", \"CommRingCat.moduleCatExtendScalarsPseudofunctor_mapId\"], \"digest\": \"e69cc3f803229a64\"}",
+   "date": "2026-10-18",
+   "verdict": "No exact Mathlib interface. Existing project declarations inspected below."
+  },
+  {
+   "tool": "grep",
+   "query": "StrictEtaleEvaluation|normalizedOriginScalarUnit",
+   "results": "{\"t\": \"2026-10-18T19:31:27Z\", \"tool\": \"grep\", \"query\": \"StrictEtaleEvaluation|normalizedOriginScalarUnit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "No exact Mathlib interface. Existing project declarations inspected below."
+  },
+  {
+   "tool": "grep",
+   "query": "rg StrictEtaleCompactSupport|normalizedOriginScalarUnit dag/nodes lean/Sheaf /home/ubuntu/weil-src-slopmaster2/WeilConjectures; tools/blueprint_refs.py search StrictEtale; tools/blueprint_refs.py search normalizedOriginScalarUnit",
+   "results": "No upstream match or separate general definition node. Project EtaleCoefficientSystemAdjoint defines the strict interfaces; NormalizedEtaleOriginWitnesses defines normalizedOriginScalarUnit. The old theorem nodes own existence results, not these plain definitions. ClopenStrictSystemComparison is a specialized clopen comparison.",
+   "date": "2026-10-18",
+   "verdict": "Record exact existing definitions without another Lean module."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-per-finite-exceptional-system-adjunction",
+  "date": "2026-10-18",
+  "group": "N5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Finite coefficient system compact-support and evaluation normalization in lem-per-finite-exceptional-system-adjunction",
+   "via": [
+    "lem-per-finite-exceptional-system-adjunction",
+    "lem-per-adic-exceptional-projection",
+    "lem-per-qbar-arbitrary-field-duality"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "lean": {
+  "module": "Sheaf.Paper.EtaleCoefficientSystemAdjoint",
+  "declaration": "AlgebraicGeometry.StrictEtaleCompactSupport",
+  "declarations": [
+   "AlgebraicGeometry.strictEtaleCoefficientSystem",
+   "AlgebraicGeometry.strictEtaleLevel",
+   "AlgebraicGeometry.strictEtaleSystemDerived",
+   "AlgebraicGeometry.strictEtaleLevelDerived",
+   "AlgebraicGeometry.StrictEtaleEvaluation",
+   "AlgebraicGeometry.StrictEtaleOrdinaryImage",
+   "AlgebraicGeometry.StrictEtaleCompactSupportData",
+   "AlgebraicGeometry.StrictEtaleCompactSupportCoherence",
+   "AlgebraicGeometry.StrictEtaleCompactSupport",
+   "AlgebraicGeometry.StrictEtaleCompactSupport.functor",
+   "AlgebraicGeometry.StrictEtaleCompactSupport.levelFunctor",
+   "AlgebraicGeometry.StrictEtaleCompactSupport.evaluation",
+   "AlgebraicGeometry.StrictEtaleScalarAction"
+  ],
+  "statement": "def StrictEtaleCompactSupport",
+  "branch": "newtargets-dag",
+  "by": "N5",
+  "date": "2026-10-18",
+  "existing": true,
+  "note": "Definition ownership required by return R1: exact existing plain definitions, not choices from the enclosing existence theorem. No module duplicated."
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-edd779f5b",
+  "group": "N5",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-edd779f5b",
+  "group": "N5",
+  "result": "pass",
+  "note": "Re-delivery after 6b716267 RETURN; all three findings fixed. R1: item stmt_deps add only definition nodes (new existing:true def-per-strict-etale-system-interfaces and def-per-scalar-extension-unit; existing def-per-exceptional-coefficient-maps, def-sfb-constant-ring-module-restriction, def-weil-pbc-witness-compatibility, def-sfb-site-derived-constant-module-functor). check_new_node passes, statements match the live signatures, dependency copies identical to live. R2: leftEvaluation_pinned = eqToHom ≫ S.evaluation ≫ levelRealization; every GeometricComparison/LevelComparison field is uniquely fixed (identity-on-sections HEq vs rightUnderlying, Hom transpose, Q.obj representative, counit and open_counit mates), so the unit twist is excluded; rightEvaluation follows from counit; support_evaluation ties PX/PY; shifts are canonical. R3: SemilinearSystemModels dropped. Clauses, edge cases, universes, docstrings, verbatim statement and declarations list re-checked. nt_compile --json clean, 45.9 s/60 s at load 48. Advisories: new def node cites theorem lem-pur-coefficient-system-derived-comparison for plain CoefficientSystem* interfaces (no owner def node); refinement comparisons pinned only by evaluation; system right shift lacks unit/counit compatibility (node says only exact); land at moderate load."
+ }
+}

@@ -14,7 +14,13 @@
   "def-amb-etale-compact-support",
   "def-weil-pbc-constructible-complexes",
   "def-kun-tor-amplitude",
-  "lem-coef-semilinear-derived-sections"
+  "lem-coef-semilinear-derived-sections",
+  "def-sfb-site-derived-constant-module-functor",
+  "def-per-strict-etale-system-interfaces",
+  "def-per-scalar-extension-unit",
+  "def-per-exceptional-coefficient-maps",
+  "def-sfb-constant-ring-module-restriction",
+  "def-weil-pbc-witness-compatibility"
  ],
  "proof": [
   {
@@ -634,5 +640,63 @@
   "group": "N8",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N8-d13a1c9e1 (reviewer sub-agent of L); spot-checked: I read all 16 steps and the full statements of all 57 proof_deps and 7 stmt_deps, and checked them against Bhatt–Scholze Lemmas 6.7.17–6.7.19 (pp. 57–58). The finite part follows BS 6.7.18: projection-formula square (step 3); local factorization into a closed immersion and affine space (step 10); g^! = g^*(d)[2d] through cor-amb-affine-space-adjunction with the explicit Kummer trace (steps 6–7); the closed case through the support triangle and the Rj_* constant-tensor isomorphism (step 9). The TR3 filler there is unique because i_* is fully faithful. Constructibility and finite Tor amplitude are proved, not assumed: by prop-exc-closed-tor with the hypotheses from det-geo-open-finiteness-ii-amplitude and cor-fin-deligne (step 8), and by the residue Tor test plus compact-support finiteness (step 4). The system part is sound. Brown representability applies to the Grothendieck category of systems because coproducts are computed levelwise. θ_n: L_nF_n ≅ F L_n holds because e_qθ_n = q_{n,q}, which step 3 makes invertible on unbounded inputs. The Hom chain gives e_nH ≅ G̃_n e_n, and its transition is G̃_n(t)∘b through σ_mn, an identity of actual maps. Normalized ctf systems are preserved without a uniform bound, and refinements are handled by conjugation. lem-sf-flat-model's constructible variant needs only a finite ring and a Noetherian scheme, so it holds over arbitrary k. I checked the unit equation in step 12 and small cases (id, empty X, A^1→pt, n=1, m=n, char 0). I accept the elementary mark on step 6. There are no new nodes. The candidates lem-pur-etale-coefficient-system-adjoint and lem-coef-finite-exceptional are F̄_q-only, so neither duplicates the item. There is no SGA citation. The only off-route citations are det-geo-open-finiteness-ii-amplitude and lem-fd-finite-ring-compact-support-finiteness, both declared generic tools. The undeclared lem-kun-derived-tensor-triangulated is Lean-closed. Batch 5: all three flagged citations are outside the assumptions. cor-amb-affine-space-adjunction is a finite-coefficient étale purity adjunction; the Poincaré-duality assumption takes pur_p as stmt_dep data, so this is not part of its proof, and batch 5 already reaches the node via thm-pur-finite-coefficient-smooth-purity. lem-amb-proper-coproducts is general coproduct preservation, already reached via thm-amb-etale-exceptional-adjoint. lem-fd-finite-ring-compact-support-finiteness is finiteness of H_c, a hypothesis of the trace formula, already reached via thm-fd-transform-well-defined. None is a step of the trace formula or Poincaré duality. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FiniteExceptionalSystemAdjunction",
+  "declaration": "AlgebraicGeometry.FiniteExceptionalSystems.finiteExceptionalSystemAdjunction",
+  "declarations": [
+   "AlgebraicGeometry.FiniteExceptionalSystems.Coeff",
+   "AlgebraicGeometry.FiniteExceptionalSystems.coefficientFinite",
+   "AlgebraicGeometry.FiniteExceptionalSystems.quotient",
+   "AlgebraicGeometry.FiniteExceptionalSystems.quotient_comp",
+   "AlgebraicGeometry.FiniteExceptionalSystems.quotient_id",
+   "AlgebraicGeometry.FiniteExceptionalSystems.Q",
+   "AlgebraicGeometry.FiniteExceptionalSystems.assoc",
+   "AlgebraicGeometry.FiniteExceptionalSystems.self",
+   "AlgebraicGeometry.FiniteExceptionalSystems.Ctf",
+   "AlgebraicGeometry.FiniteExceptionalSystems.Evaluation",
+   "AlgebraicGeometry.FiniteExceptionalSystems.Level",
+   "AlgebraicGeometry.FiniteExceptionalSystems.levelRestriction",
+   "AlgebraicGeometry.FiniteExceptionalSystems.levelRestriction_exact",
+   "AlgebraicGeometry.FiniteExceptionalSystems.levelRestriction_additive",
+   "AlgebraicGeometry.FiniteExceptionalSystems.levelRestriction_limits",
+   "AlgebraicGeometry.FiniteExceptionalSystems.levelRestriction_colimits",
+   "AlgebraicGeometry.FiniteExceptionalSystems.realization",
+   "AlgebraicGeometry.FiniteExceptionalSystems.NormalizedCtf",
+   "AlgebraicGeometry.FiniteExceptionalSystems.normalizedCtf_triangulated",
+   "AlgebraicGeometry.FiniteExceptionalSystems.F",
+   "AlgebraicGeometry.FiniteExceptionalSystems.FiniteData",
+   "AlgebraicGeometry.FiniteExceptionalSystems.Support",
+   "AlgebraicGeometry.FiniteExceptionalSystems.systemLeft",
+   "AlgebraicGeometry.FiniteExceptionalSystems.eval",
+   "AlgebraicGeometry.FiniteExceptionalSystems.Presentation",
+   "AlgebraicGeometry.FiniteExceptionalSystems.reduction",
+   "AlgebraicGeometry.FiniteExceptionalSystems.quotientShift",
+   "AlgebraicGeometry.FiniteExceptionalSystems.GeometricComparison",
+   "AlgebraicGeometry.FiniteExceptionalSystems.LevelComparison",
+   "AlgebraicGeometry.FiniteExceptionalSystems.levelRealization",
+   "AlgebraicGeometry.FiniteExceptionalSystems.supportOpenShift",
+   "AlgebraicGeometry.FiniteExceptionalSystems.supportInverseShift",
+   "AlgebraicGeometry.FiniteExceptionalSystems.supportDirectShift",
+   "AlgebraicGeometry.FiniteExceptionalSystems.supportShift",
+   "AlgebraicGeometry.FiniteExceptionalSystems.systemLeftShift",
+   "AlgebraicGeometry.FiniteExceptionalSystems.SystemData",
+   "AlgebraicGeometry.FiniteExceptionalSystems.Family",
+   "AlgebraicGeometry.FiniteExceptionalSystems.finiteExceptionalSystemAdjunction"
+  ],
+  "file": "lean/Sheaf/Paper/FiniteExceptionalSystemAdjunction.lean",
+  "statement": "theorem finiteExceptionalSystemAdjunction (k : Type u) [Field k] (_hl : IsUnit (l : k)) {X Y : Scheme.{u}} [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))] [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))] [IsSeparated (Y ↘ Spec (.of k))] (f : X ⟶ Y) [f.IsOver (Spec (.of k))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] : Nonempty (Family l E f)",
+  "branch": "newtargets-dag",
+  "by": "N5",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-edd779f5b",
+  "group": "N5",
+  "result": "pass",
+  "note": "Re-delivery after 6b716267 RETURN; all three findings fixed. R1: item stmt_deps add only definition nodes (new existing:true def-per-strict-etale-system-interfaces and def-per-scalar-extension-unit; existing def-per-exceptional-coefficient-maps, def-sfb-constant-ring-module-restriction, def-weil-pbc-witness-compatibility, def-sfb-site-derived-constant-module-functor). check_new_node passes, statements match the live signatures, dependency copies identical to live. R2: leftEvaluation_pinned = eqToHom ≫ S.evaluation ≫ levelRealization; every GeometricComparison/LevelComparison field is uniquely fixed (identity-on-sections HEq vs rightUnderlying, Hom transpose, Q.obj representative, counit and open_counit mates), so the unit twist is excluded; rightEvaluation follows from counit; support_evaluation ties PX/PY; shifts are canonical. R3: SemilinearSystemModels dropped. Clauses, edge cases, universes, docstrings, verbatim statement and declarations list re-checked. nt_compile --json clean, 45.9 s/60 s at load 48. Advisories: new def node cites theorem lem-pur-coefficient-system-derived-comparison for plain CoefficientSystem* interfaces (no owner def node); refinement comparisons pinned only by evaluation; system right shift lacks unit/counit compatibility (node says only exact); land at moderate load."
  }
 }

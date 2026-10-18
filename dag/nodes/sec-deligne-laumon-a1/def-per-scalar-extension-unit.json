@@ -1,0 +1,107 @@
+{
+ "id": "def-per-scalar-extension-unit",
+ "kind": "definition",
+ "title": "Canonical identity scalar-extension unit",
+ "status": "split",
+ "statement": "Let $C$ be a category with objects in universe $u+1$, morphisms in universe $u$, essentially small in universe $u+1$, and let $J$ be a Grothendieck topology. For a commutative ring $R$ in universe $u+1$ and $\\phi:R\\to R$ with $\\phi=\\mathrm{id}$, use the actual restriction and its derived left adjoint of [def-weil-pbc-witness-compatibility]. Define normalizedOriginRestrictionUnit as identity maps on sections, using the scalar-restriction identity and the sheaf-to-presheaf fully faithful functor. Define normalizedOriginScalarUnit as its derived adjunction mate, an isomorphism from derived scalar extension along $\\phi$ to the identity. It is the canonical tensor multiplication $x\\otimes a\\mapsto ax$, with no invertibility or boundedness assertion about other coefficient maps.",
+ "stmt_deps": [
+  "def-weil-pbc-witness-compatibility"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 06YY, identity coefficient extension and tensor unit"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "strict etale coefficient system compact support evaluation scalar action",
+   "results": "{\"t\": \"2026-10-18T19:31:25Z\", \"tool\": \"leansearch\", \"query\": \"strict etale coefficient system compact support evaluation scalar action\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CompactlySupportedContinuousMap.instIsCentralScalar\", \"ModuleCat.Tilde.smul_section_apply\", \"CompactlySupportedContinuousMap.smul_apply\", \"CompactlySupportedContinuousMap.instMulActionWithZeroOfContinuousConstSMul\", \"StandardEtalePresentation.toPresentation_algebra_smul\", \"CompactlySupportedContinuousMap.coe_smul\", \"Pi.evalMulActionHom\", \"ContDiffMapSupportedIn.coe_of_support_subset\"], \"digest\": \"0717f19d90ef97d8\"}",
+   "date": "2026-10-18",
+   "verdict": "No exact Mathlib interface. Existing project declarations inspected below."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical identity derived scalar extension comparison",
+   "results": "{\"t\": \"2026-10-18T19:31:27Z\", \"tool\": \"leanfinder\", \"query\": \"canonical identity derived scalar extension comparison\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.extendScalars_id_comp\", \"ModuleCat.extendScalars_comp_id\", \"ModuleCat.extendScalarsId\", \"ModuleCat.ExtendScalars.map'_id\", \"ModuleCat.extendScalars_id_comp_assoc\", \"ModuleCat.extendScalars_comp_id_assoc\", \"ModuleCat.homEquiv_extendScalarsId\", \"CommRingCat.moduleCatExtendScalarsPseudofunctor_mapId\"], \"digest\": \"e69cc3f803229a64\"}",
+   "date": "2026-10-18",
+   "verdict": "No exact Mathlib interface. Existing project declarations inspected below."
+  },
+  {
+   "tool": "grep",
+   "query": "StrictEtaleEvaluation|normalizedOriginScalarUnit",
+   "results": "{\"t\": \"2026-10-18T19:31:27Z\", \"tool\": \"grep\", \"query\": \"StrictEtaleEvaluation|normalizedOriginScalarUnit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "No exact Mathlib interface. Existing project declarations inspected below."
+  },
+  {
+   "tool": "grep",
+   "query": "rg StrictEtaleCompactSupport|normalizedOriginScalarUnit dag/nodes lean/Sheaf /home/ubuntu/weil-src-slopmaster2/WeilConjectures; tools/blueprint_refs.py search StrictEtale; tools/blueprint_refs.py search normalizedOriginScalarUnit",
+   "results": "No upstream match or separate general definition node. Project EtaleCoefficientSystemAdjoint defines the strict interfaces; NormalizedEtaleOriginWitnesses defines normalizedOriginScalarUnit. The old theorem nodes own existence results, not these plain definitions. ClopenStrictSystemComparison is a specialized clopen comparison.",
+   "date": "2026-10-18",
+   "verdict": "Record exact existing definitions without another Lean module."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-per-finite-exceptional-system-adjunction",
+  "date": "2026-10-18",
+  "group": "N5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Finite coefficient system compact-support and evaluation normalization in lem-per-finite-exceptional-system-adjunction",
+   "via": [
+    "lem-per-finite-exceptional-system-adjunction",
+    "lem-per-adic-exceptional-projection",
+    "lem-per-qbar-arbitrary-field-duality"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "lean": {
+  "module": "Sheaf.Paper.NormalizedEtaleOriginWitnesses",
+  "declaration": "AlgebraicGeometry.ProEtale.normalizedOriginScalarUnit",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.normalizedOriginRestrictionUnit",
+   "AlgebraicGeometry.ProEtale.normalizedOriginScalarUnit"
+  ],
+  "statement": "def normalizedOriginScalarUnit\n    {C : Type (u + 1)} [Category.{u} C] [EssentiallySmall.{u + 1} C]\n    (J : GrothendieckTopology C) {R : Type (u + 1)} [CommRing R]\n    (φ : R →+* R) (hφ : φ = RingHom.id R) :\n    pbcFixedScalarExtension J φ ≅ 𝟭 (DerivedCategory (Sheaf J (ModuleCat.{u + 1} R)))",
+  "branch": "newtargets-dag",
+  "by": "N5",
+  "date": "2026-10-18",
+  "existing": true,
+  "note": "Definition ownership required by return R1: exact existing plain definitions, not choices from the enclosing existence theorem. No module duplicated."
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-edd779f5b",
+  "group": "N5",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-edd779f5b",
+  "group": "N5",
+  "result": "pass",
+  "note": "Re-delivery after 6b716267 RETURN; all three findings fixed. R1: item stmt_deps add only definition nodes (new existing:true def-per-strict-etale-system-interfaces and def-per-scalar-extension-unit; existing def-per-exceptional-coefficient-maps, def-sfb-constant-ring-module-restriction, def-weil-pbc-witness-compatibility, def-sfb-site-derived-constant-module-functor). check_new_node passes, statements match the live signatures, dependency copies identical to live. R2: leftEvaluation_pinned = eqToHom ≫ S.evaluation ≫ levelRealization; every GeometricComparison/LevelComparison field is uniquely fixed (identity-on-sections HEq vs rightUnderlying, Hom transpose, Q.obj representative, counit and open_counit mates), so the unit twist is excluded; rightEvaluation follows from counit; support_evaluation ties PX/PY; shifts are canonical. R3: SemilinearSystemModels dropped. Clauses, edge cases, universes, docstrings, verbatim statement and declarations list re-checked. nt_compile --json clean, 45.9 s/60 s at load 48. Advisories: new def node cites theorem lem-pur-coefficient-system-derived-comparison for plain CoefficientSystem* interfaces (no owner def node); refinement comparisons pinned only by evaluation; system right shift lacks unit/counit compatibility (node says only exact); land at moderate load."
+ }
+}

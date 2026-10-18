@@ -16,7 +16,10 @@
   "def-kun-derived-tensor",
   "def-kun-constant-sheaf",
   "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lem-sbc-canonical-restrict-scalars-functor-comparisons"
+  "lem-sbc-canonical-restrict-scalars-functor-comparisons",
+  "def-kun-tor-amplitude",
+  "def-kun-projection-formula-map",
+  "lem-coef-finite-direct-image"
  ],
  "proof": [
   {
@@ -373,5 +376,30 @@
   "group": "NK",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NK-957b23c63 (reviewer sub-agent of L); spot-checked: PASS, no fixes written. I read the item, the ten steps and all 17 cited statements in full, plus Bhatt-Scholze Lemmas 6.5.11, 6.7.1, 6.7.2, 6.7.16 and 6.7.17. The statement is unchanged from the base and there are no new nodes. The delivery adapts the source proof because the source needs a uniform cohomological-dimension bound for g_*, which the existing finiteness node keeps only for proper g. Steps 3-4 replace it with bounds for the fixed L: Rg_*L lies in D^{<=c}, Rg_*(L(x)kappa) in D^{<=u}, and the ell-adic filtration then gives Rg_*(L(x)N) in D^{<=u} for every finite N. I checked this and it is valid. The Step 6 cone degrees are right: cone(Q_t->M) = N_t[t], and (ker eps)[1] for t=1. In Step 7 the cone bounds are u-t and c-t, the condition max(c,u)-t<q-1 makes both maps isomorphisms on H^q, and the square needs only plain naturality in Q. Step 9 is the residue Tor test with E=Q_ell, so A=Z/ell^m and kappa=F_ell. Step 10 uses the restriction unit/counit identities, and C_V L is bounded by Step 1. Step 2 meets the field theorem's hypotheses: F_ell is a finite field of characteristic ell, Noetherian gives qcqs, excellent gives quasi-excellent, ell is invertible. Advisory only: Steps 5 and 8 assume the projection map respects connecting maps, which is standard. Step 10's unit identity needs C_X Rg_*L bounded below, which follows from Step 9. Small cases checked: g=id, m=1, m=2 with M=Z/ell (infinite resolution), n=m, L=0, empty P. Duplicates: lem-sf-projection-finite-constant needs a uniform R^q f_* vanishing bound, lem-kun-0f0g is for proper maps only, lem-kun-0f12 is for global sections; none duplicates the item. Tool uses: all 16 are generic tools and are accepted. Batch-5: the cited lem-per-quasi-excellent-etale-direct-image-finiteness (Gabber finiteness over quasi-excellent bases) reaches lem-trf-g-ring-affine-cover (Stacks 0HA5, pure commutative algebra) through lem-per-quasi-excellent-finite-type-stability. Neither is the trace formula, Poincare duality or a step of their proofs. I recomputed the full closure: the other trf/pod nodes reached (J-2 affine cover 07R4, cone system 05RG, 02UP, 01KU base change, scalar extension, lisse-module chain, and others) are also generic. The citation is outside the assumed statements, so the flag is accepted."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ExcellentEtaleConstantProjection",
+  "declaration": "AlgebraicGeometry.Etale.excellent_etale_constant_projection",
+  "declarations": [
+   "AlgebraicGeometry.Etale.excellentConstantComplexPullbackIso",
+   "AlgebraicGeometry.Etale.excellentConstantComplexProjectionMap",
+   "AlgebraicGeometry.Etale.excellentConstantComplexProjectionMap_naturality",
+   "AlgebraicGeometry.Etale.excellent_etale_constant_projection"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ExcellentEtaleConstantProjection.lean",
+  "statement": "theorem excellent_etale_constant_projection (ell : ℕ) [Fact ell.Prime] (m : ℕ) (hm : 1 ≤ m) {V X : Scheme.{u}} [IsNoetherian V] [IsNoetherian X] (g : V ⟶ X) [LocallyOfFinitePresentation g] [QuasiCompact g] [QuasiSeparated g] (hV : ∀ U : V.affineOpens, IsExcellent Γ(V, U.1)) (hX : ∀ U : X.affineOpens, IsExcellent Γ(X, U.1)) (hVinvertible : ∀ v : V, IsUnit (ell : V.presheaf.stalk v)) (hXinvertible : ∀ x : X, IsUnit (ell : X.presheaf.stalk x)) (L : DerivedCategoryModule (ULift.{u + 1} (ZMod (ell ^ m))) V) (hL : DerivedCategory.isBoundedConstructible (ULift.{u + 1} (ZMod (ell ^ m))) V L) (hTor : ∃ a b : ℤ, a ≤ b ∧ DerivedCategory.hasTorAmplitudeIn (ULift.{u + 1} (ZMod (ell ^ m))) V a b L) : (DerivedCategory.isBoundedConstructible (ULift.{u + 1} (ZMod (ell ^ m))) X (Functor.obj (Functor.rightDerivedFunctor (lowerStar (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod (ell ^ m)))) g)) L) ∧ ∃ a b : ℤ, a ≤ b ∧ DerivedCategory.hasTorAmplitudeIn (ULift.{u + 1} (ZMod (ell ^ m))) X a b (Functor.obj (Functor.rightDerivedFunctor (lowerStar (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod (ell ^ m)))) g)) L)) ∧ (∀ P : CochainComplex (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod (ell ^ m)))) ℤ, (∃ a b : ℤ, a ≤ b ∧ ∀ i : ℤ, (i < a ∨ b < i) → IsZero (P.X i)) → (∀ i : ℤ, Module.Finite (ULift.{u + 1} (ZMod (ell ^ m))) (P.X i)) → IsIso ((excellentConstantComplexProjectionMap (ULift.{u + 1} (ZMod (ell ^ m))) g L).app (_root_.DerivedCategory.Q.obj P))) ∧ (∀ (n : ℕ) (hn : 1 ≤ n) (hnm : n ≤ m), IsIso (finiteCoefficientDirectImageMap ((ZMod.castHom (pow_dvd_pow ell hnm) (ZMod (ell ^ n))).ulift) g L))",
+  "branch": "newtargets-dag",
+  "by": "N8",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Reuses the published counit projection and finiteCoefficientDirectImageMap; helpers only compose the canonical exact constant-sheaf inverse-image identifications. Naturality is included as a natural transformation in the coefficient complex and a named theorem in the input. The three added statement dependencies are already landed records, as permitted by brief-stage2 §5."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1ce7844d9",
+  "group": "N8",
+  "result": "pass",
+  "note": "All node clauses match the Lean. Hypotheses: Noetherian, excellent on affine opens, finitely presented g, ell invertible on V and X, L bounded constructible with finite Tor amplitude. Conclusions: Rg_*L in D^b_ctf; the counit projection map iso at Q(P) for every bounded complex P of finitely generated modules, with no projectivity assumed; finiteCoefficientDirectImageMap iso for 1<=n<=m; naturality in P (natural transformation) and in L (theorem plus published naturality). The projection map is rightDerivedLowerStarProjectionMap (transpose of tensor comparison followed by counit tensor 1, by rfl) followed by the canonical constant pullback iso (leftAdjointUniq); no arbitrary maps. Mechanical stmt_dep finding: finiteCoefficientDirectImageMap is .choose of finiteCoefficientDirectImageMap_existsUnique, a declaration of theorem node lem-coef-finite-direct-image, so the statement depends on an object the theorem constructs; PASS on that point. The other two added landed deps are used by the signature. Inline affine-open IsExcellent is not an H4 duplicate. nt_compile --json clean in 6.6 s; lean.statement verbatim; docstrings carry source and blueprint tag; only sorry proofs; universes bound; no name collisions."
  }
 }
