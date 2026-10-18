@@ -13,6 +13,7 @@ public import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMap
 public import WeilConjectures.SixFunctors.Etale.Derived.HigherDirectImageAffine
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.CohomPresheaf
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.CohomologyMapEtale
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.CohomologyMapDelta
 
 /-!
 # Higher direct images whose classes die locally
@@ -35,7 +36,7 @@ that the pullback of cohomology classes along an étale morphism is the restrict
 
 - `AlgebraicGeometry.Etale.ClassesDieLocallyAb`: every class of the abelian cohomology of
   `A|_{W ×_X Y}`, `W` affine, dies on an étale cover of `W`.
-- `AlgebraicGeometry.Etale.ClassesDieLocally`: the same for the cohomology of a sheaf of
+- `AlgebraicGeometry.Etale.ModuleClassesDieLocally`: the same for the cohomology of a sheaf of
   `Λ`-modules, written as `Ext^n(h^* Λ[W], G)`.
 
 ## Main statements
@@ -189,14 +190,6 @@ section Connecting
 variable {X Y : Scheme.{u}} (f : X ⟶ Y)
   {S : ShortComplex (Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1})} (hS : S.ShortExact)
 
-/-- The comparison map on cohomology commutes with the connecting maps `Sheaf.H.δSucc`. -/
-lemma Etale.cohomologyMap_δSucc (n : ℕ) (x : Sheaf.H S.X₃ n) :
-    Etale.cohomologyMap f S.X₁ (n + 1) (Sheaf.H.δSucc hS n x) =
-      Sheaf.H.δSucc (hS.map_of_exact ((f)^*[AddCommGrpCat.{u + 1}])) n
-        (Etale.cohomologyMap f S.X₃ n x) := by
-  rw [Sheaf.H.δSucc_apply, Sheaf.H.δSucc_apply]
-  exact Etale.cohomologyMap_comp_extClass f hS x
-
 /-- If the image under the connecting map of a class `x` dies after pullback along `f`, then
 the pullback of `x` comes from the middle term. -/
 lemma Etale.exists_map_eq_cohomologyMap_of_δSucc (n : ℕ) (x : Sheaf.H S.X₃ n)
@@ -251,7 +244,7 @@ def Etale.ClassesDieLocallyAb (A : Sheaf Y.smallEtaleTopology AddCommGrpCat.{u +
 
 /-- Every class of `Ext^n(h^* Λ[W], G) = H^n(W ×_X Y, G|)`, for an affine scheme `W` étale over
 `X`, dies on an étale cover of `W`. -/
-def Etale.ClassesDieLocally (G : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (n : ℕ) :
+def Etale.ModuleClassesDieLocally (G : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (n : ℕ) :
     Prop :=
   ∀ (W : X.Etale), IsAffine W.left →
     ∀ β : Ext.{u + 1} ((h)^*[ModuleCat.{u + 1} Λ].obj ((Etale.freeSheaf Λ X).obj W)) G n,
@@ -273,8 +266,8 @@ lemma Etale.shortExact_injectiveShortComplex
 
 /-- The dimension-shifting step on the side of sheaves of `Λ`-modules. -/
 lemma Etale.classesDieLocally_succ (G : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))
-    (n : ℕ) (hC : Etale.ClassesDieLocally Λ h (cokernel (Injective.ι G)) n) :
-    Etale.ClassesDieLocally Λ h G (n + 1) := by
+    (n : ℕ) (hC : Etale.ModuleClassesDieLocally Λ h (cokernel (Injective.ι G)) n) :
+    Etale.ModuleClassesDieLocally Λ h G (n + 1) := by
   intro W hW β
   obtain ⟨γ, rfl⟩ := Ext.covariant_sequence_exact₁ _ (Etale.shortExact_injectiveShortComplex Λ G)
     β (Ext.eq_zero_of_injective _) rfl
@@ -360,7 +353,7 @@ are the pullbacks of the corresponding abelian classes. -/
 lemma Etale.classesDieLocally_zero (G : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))
     (hG : Etale.ClassesDieLocallyAb h
       ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj G) 0) :
-    Etale.ClassesDieLocally Λ h G 0 := by
+    Etale.ModuleClassesDieLocally Λ h G 0 := by
   intro W hW β
   obtain ⟨s, rfl⟩ := (Ext.mk₀_bijective _ _).2 β
   let F := MorphismProperty.Over.pullback @AlgebraicGeometry.Etale ⊤ h
@@ -387,7 +380,7 @@ side the obstruction to lifting is the connecting map. -/
 lemma Etale.classesDieLocally_one (G : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))
     (hG : Etale.ClassesDieLocallyAb h
       ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj G) 1) :
-    Etale.ClassesDieLocally Λ h G 1 := by
+    Etale.ModuleClassesDieLocally Λ h G 1 := by
   intro W hW β
   have hS := Etale.shortExact_injectiveShortComplex Λ G
   obtain ⟨γ, rfl⟩ := Ext.covariant_sequence_exact₁ _ hS β (Ext.eq_zero_of_injective _) rfl
@@ -451,7 +444,7 @@ theorem Etale.classesDieLocally_of_classesDieLocallyAb [QuasiCompact h] [QuasiSe
     (n : ℕ) (G : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))
     (hG : Etale.ClassesDieLocallyAb h
       ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj G) n) :
-    Etale.ClassesDieLocally Λ h G n := by
+    Etale.ModuleClassesDieLocally Λ h G n := by
   induction n generalizing G with
   | zero => exact Etale.classesDieLocally_zero Λ h G hG
   | succ n ih =>
