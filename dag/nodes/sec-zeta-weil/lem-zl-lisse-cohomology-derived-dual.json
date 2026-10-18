@@ -15,9 +15,153 @@
   "lem-tw-lisse-rational-realization",
   "def-weil-weil-sheaf-complex"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $D(M)=R\\mathcal Hom_T(M,\\Lambda_T)$. Use the bounded standard t-structure, its functorial truncation triangles and its cohomology functors from prop-constructible-truncations. Cohomology is cohomological, with the long exact sequence of lem-weil-heart-short-exact-triangles (5); its extension-closure assertion (2) will also be used. The ringed-site internal-Hom theorem makes $D$ contravariantly exact and gives $D(M[s])\\cong D(M)[-s]$. This applies over the completed integral ring sheaf, not over a discrete field sheaf. The rational operation is its linear scalar localization: a triangle represented by an integral triangle is sent to its reversed Hom triangle, and isomorphisms of triangles and fractional morphisms are preserved. The scalar-localization theorem therefore supplies the same exactness and shifts in the rational ambient category. At the algebraically closed stage every triangle and its finite diagrams are represented at a common finite field and the operations are the specified common-stage operations. We can compute in these ambient categories before invoking bounded constructibility of a dual; no assertion of internal-Hom preservation for arbitrary pairs is needed.",
+   "uses": [
+    "prop-constructible-truncations",
+    "lem-weil-heart-short-exact-triangles",
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "lem-weil-linear-scalar-localization-triangulated",
+    "def-weil-derived-pullback-tensor-hom",
+    "prop-weil-pbc-common-stage-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-prop-smooth-proper-purity/prop-zl-smooth-proper-relative-purity.proof.md",
+    "place": "Step 3: the truncation induction after the lisse local-Ext calculation; Stacks 08JC, label lemma-RHom-triangulated, and 08JB, label lemma-restriction-RHom-to-U, for the ambient input."
+   }
+  },
+  {
+   "text": "For a lisse heart object $P$, the stated lisse condition makes $P$ degree-zero finite projective in the coefficient convention of lem-sf-hom-finite-projective: locally it is a finite sum of units, hence in particular a direct summand of one. Its tensor functor is locally a finite sum of the identity and is exact, so $P$ has Tor amplitude $[0,0]$; the unit has the same property. Apply the finite-projective coefficient calculation with $N=\\Lambda_T$. Its degree-zero ordinary-dual presentation gives $D(P)\\cong P^\\vee[0]$, where $P^\\vee$ is lisse, and the comparison is normalized by evaluation. The lisse realization identifies this with ordinary sheaf duality over the continuous coefficient sheaf: on a free presentation the pairing is $(\\phi,x)\\mapsto\\phi(x)$, and a change of basis $A$ changes a dual vector by precomposition with $A^{-1}$. Thus these presentations glue to the intrinsic coefficient dual. All schemes here are separated finite type over $k$, and only the finite-projective calculation with the operations specified in the item is used, not an exceptional-adjoint or absolute Verdier-duality assertion. The field-stage convention of that lemma and the realization are essential; this is not a replacement of adic coefficients by a discrete constant field.",
+   "uses": [
+    "lem-sf-hom-finite-projective",
+    "lem-tw-lisse-rational-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-prop-smooth-proper-purity/prop-zl-smooth-proper-relative-purity.proof.md",
+    "place": "Step 3: the sentence applying lem-sf-hom-finite-projective to a lisse sheaf; Stacks 08JI, label lemma-Rhom-complex-of-direct-summands-finite-free, explains the local degree-zero calculation."
+   }
+  },
+  {
+   "text": "For a bounded complex $M$ with lisse cohomology supported in $[a,b]$, prove that $D(M)$ is supported in $[-b,-a]$ by induction on $b-a+1$. The zero object is the empty case. A single cohomology object gives $M\\cong\\mathcal H^a(M)[-a]$ by the truncation triangles, so step 2 and the shift rule give the assertion. For the induction step put $M'=\\tau^{\\le b-1}M$ and $P=\\mathcal H^b(M)$. The truncation triangle is $M'\\to M\\to P[-b]\\to M'[1]$. Its dual is $P^\\vee[b]\\to D(M)\\to D(M')\\to P^\\vee[b+1]$. The first term is supported in $\\{-b\\}$ and the third in $[-b+1,-a]$ by induction. The long exact cohomology sequence makes every degree of the middle term outside $[-b,-a]$ zero. The construction takes place in the ambient Hom category of step 1; the duals are obtained as finite extensions of the bounded constructible duals of step 2, so they lie in the bounded constructible category as well. In particular this reasoning applies to all truncations used below; it does not assume their duals constructible without justification.",
+   "uses": [
+    "prop-constructible-truncations",
+    "lem-weil-heart-short-exact-triangles"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-prop-smooth-proper-purity/prop-zl-smooth-proper-relative-purity.proof.md",
+    "place": "Step 3: induction on the truncation triangles of the bounded complex."
+   }
+  },
+  {
+   "text": "Fix $i\\in\\mathbf Z$, put $A=\\tau^{\\le i}K$, $B=\\tau^{\\ge i+1}K$, $L=\\tau^{\\le i-1}K$ and $P=\\mathcal H^i(K)$. Write $u:A\\to K$ and $v:A\\to P[-i]$ for the canonical maps. Step 3 shows $D(B)$ is supported in degrees at most $-i-1$, and $D(L)$ in degrees at least $-i+1$. The dual of $A\\to K\\to B\\to$ therefore gives an isomorphism $r=\\mathcal H^{-i}(D(u)):\\mathcal H^{-i}(D(K))\\to\\mathcal H^{-i}(D(A))$: both adjacent cohomologies of $D(B)$ are zero. Likewise the dual of $L\\to A\\to P[-i]\\to$ gives an isomorphism $j=\\mathcal H^{-i}(D(v)):\\mathcal H^{-i}(D(P[-i]))\\to\\mathcal H^{-i}(D(A))$, since the adjacent cohomologies of $D(L)$ vanish. Step 2 and the evaluation-normalized shift identification identify the source of $j$ with $P^\\vee$. Define $\\alpha_{K,i}=j^{-1}r$, with that last identification understood. These bounds hold also when a truncation is zero and for $i$ outside the support of $K$; then both sides are zero. The map is consequently an isomorphism in every integer degree.",
+   "uses": [
+    "prop-constructible-truncations",
+    "lem-weil-heart-short-exact-triangles"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-prop-smooth-proper-purity/prop-zl-smooth-proper-relative-purity.proof.md",
+    "place": "Step 3: explicit canonical maps in the truncation induction identifying degree -i with the dual of degree i."
+   }
+  },
+  {
+   "text": "The maps $u,v$ are functorial in $K$. Contravariant functoriality of $D$ therefore makes both squares defining $r$ and $j$ commute for every morphism $K\\to K'$; multiplying the latter square by the inverse of $j$ proves contravariant naturality of $\\alpha_{K,i}$. This is the evaluation comparison in the statement: precomposition by $u$ restricts the evaluation pairing to $A$, and precomposition by $v$ identifies its degree-$(i,-i)$ pairing with the ordinary evaluation $P\\otimes P^\\vee\\to\\Lambda_T$. The last identification in step 4 is normalized by this pairing, including the usual cochain shift sign, so the resulting functional sends a cohomology class $x$ to its evaluation against the dual class. No splitting of $K$ into its cohomology objects, and no choice of a local basis, enters $j^{-1}r$.",
+   "uses": [
+    "prop-constructible-truncations",
+    "def-weil-derived-pullback-tensor-hom",
+    "lem-sf-hom-finite-projective"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-prop-smooth-proper-purity/prop-zl-smooth-proper-relative-purity.proof.md",
+    "place": "Step 3: canonical cohomology identification, with evaluation and naturality made explicit."
+   }
+  },
+  {
+   "text": "Let $h:T'\\xrightarrow{\\sim}T$ be a scheme isomorphism (not necessarily $k$-linear). Pullback is an exact equivalence on completed module sheaves and on their derived categories, hence on the rationalized categories. It preserves the two halves of the standard t-structure and the coefficient unit. The general t-exact truncation comparison thus carries $u,v$ to the canonical truncation maps for $Lh^*K$. The evaluation-defined internal-Hom comparison of lem-pod-derived-automorphism-hom-evaluation is invertible, respects shifts and carries evaluation to evaluation. Apply these comparisons to the two squares defining $r,j$: naturality gives commuting squares, and inversion of $j$ gives $Lh^*(\\alpha_{K,i})=\\alpha_{Lh^*K,i}$ under the specified Hom and cohomology identifications. On the right-hand dual sheaf the comparison is the ordinary pullback-of-dual comparison, since the lisse realization preserves the tensor unit and evaluation on local basis vectors. The same argument works on representatives at a common finite field.",
+   "uses": [
+    "lem-pod-derived-automorphism-hom-evaluation",
+    "lem-pod-texact-truncation-comparison",
+    "lem-tw-lisse-rational-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-prop-smooth-proper-purity/prop-zl-smooth-proper-relative-purity.proof.md",
+    "place": "Step 3: compatibility with Frobenius structures, first proved for arbitrary scheme-isomorphism pullback."
+   }
+  },
+  {
+   "text": "For $E\\subset E'$ finite, put $R=\\widehat{\\mathcal O}_{E,T}$ and $S=\\widehat{\\mathcal O}_{E',T}$. The canonical completion map $\\chi_Z:Z\\otimes_R^L S\\xrightarrow{\\sim}C_{E'/E}Z$ identifies ordinary finite-free scalar extension with the specified completed extension. The identification lemma lem-zl-specified-hom-scalar-evaluation states for the actual coefficient-operation comparison $\\theta^{\\mathcal Hom}$ that\n$\\theta^{\\mathcal Hom}_{M,N}\\chi_{H_R(M,N)}=H_S(\\chi_M^{-1},\\chi_N)c_{M,N}$,\nwhere $c$ is the evaluation-transpose map of the finite-free ringed Hom theorem. Thus the particular comparison used by the common-stage operation definition preserves evaluation under these canonical identifications; this is not inferred from naturality or tower coherence. Rationalize this equality and take $N$ the coefficient unit. Since $S/R$ is finite free, extension is exact and t-exact. The constructible-truncation theorem and unique t-exact comparisons take the two canonical maps $u,v$ of step 4 to those for the extended $K$. Naturality of this same $\\theta^{\\mathcal Hom}$ gives commuting squares for $r,j$, so inversion of $j$ identifies scalar extension of $j^{-1}r$ with the corresponding composite. On a lisse presentation, uncurrying the now-identified $\\theta$ gives $\\phi\\otimes a\\mapsto(x\\otimes b\\mapsto ab\\phi(x))$, precisely the ordinary dual comparison. The identification lemma also supplies equality for identity and successive extensions with the specified associators. Hence this compatibility uses the same maps on both the derived and ordinary-dual sides.",
+   "uses": [
+    "lem-weil-finite-free-completed-scalar-comparison",
+    "lem-sf-ringed-finite-free-hom-base-change",
+    "lem-pur-integral-operations-scalar-extension",
+    "prop-constructible-truncations",
+    "lem-pod-texact-truncation-comparison",
+    "lem-zl-specified-hom-scalar-evaluation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-prop-smooth-proper-purity/prop-zl-smooth-proper-relative-purity.proof.md",
+    "place": "Step 3: finite coefficient-field naturality of evaluation and the truncation induction."
+   }
+  },
+  {
+   "text": "For $\\Lambda=\\Qlb$, work with the common-stage category in the statement. For any fixed integer $i$, the object $K$, its truncation triangles, and every map in $r,j$ are finite diagrams. They have representatives at a common finite field by the common-stage calculus. The same holds for the finite diagrams specifying a morphism, its inverse, or a Weil structure when one is present. Step 7 and lem-zl-specified-hom-scalar-evaluation identify the Hom comparisons with the very $\\theta^{\\mathcal Hom}$ used to conjugate common-stage arrows in def-weil-derived-pullback-tensor-hom, and give equality under identity and tower associators. Thus the evaluation-normalized comparison maps and all their equations agree after passage to a larger field, with those specified transitions. They therefore define $\\alpha_{K,i}$ independently of representatives; inverse equations, naturality and isomorphism-pullback compatibility hold in the common-stage category. Lisse local presentations and ordinary duals are interpreted using the common-stage clause of the lisse realization and the finite-projective lemma, not as modules over a discrete $\\Qlb$-sheaf. There is no assertion that infinitely many unrelated coefficient data descend simultaneously: only these finite diagrams for each $i$ are used.",
+   "uses": [
+    "prop-weil-pbc-common-stage-calculus",
+    "def-weil-pbc-qbar-category",
+    "lem-tw-lisse-rational-realization",
+    "lem-sf-hom-finite-projective",
+    "lem-zl-specified-hom-scalar-evaluation",
+    "def-weil-derived-pullback-tensor-hom"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-prop-smooth-proper-purity/prop-zl-smooth-proper-relative-purity.proof.md",
+    "place": "Step 3: the algebraically closed coefficient stage, with common-field descent of the finite truncation diagrams."
+   }
+  },
+  {
+   "text": "Finally let $g$ be the geometric-Frobenius automorphism of $T$ and $\\theta:Lg^*K\\xrightarrow{\\sim}K$ its Weil structure. With $c_g:Lg^*D(K)\\xrightarrow{\\sim}D(Lg^*K)$ the evaluation comparison of step 6, the contragredient structure is $\\theta_D=D(\\theta^{-1})c_g$. On $P^\\vee=(\\mathcal H^iK)^\\vee$ it is analogously $(\\mathcal H^i(\\theta^{-1}))^\\vee$ after the pullback-of-dual comparison. Step 6 identifies the pullback of $\\alpha_{K,i}$ with $\\alpha_{Lg^*K,i}$, and the contravariant naturality of step 5 for $\\theta^{-1}$ gives\n$\\alpha_{K,i}\\mathcal H^{-i}(\\theta_D)=\\theta_{P^\\vee}\\,Lg^*(\\alpha_{K,i})$.\nThis is exactly the morphism-of-Weil-pairs equation in def-weil-weil-sheaf-complex. Thus the isomorphisms are Weil morphisms for the contragredient structure, without a smoothness or regularity hypothesis on $T$.",
+   "uses": [
+    "def-weil-weil-sheaf-complex",
+    "lem-pod-derived-automorphism-hom-evaluation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-prop-smooth-proper-purity/prop-zl-smooth-proper-relative-purity.proof.md",
+    "place": "Step 3: the Frobenius-equivariance sentence after the dual cohomology identification."
+   }
+  }
+ ],
+ "proof_deps": [
+  "prop-constructible-truncations",
+  "lem-weil-heart-short-exact-triangles",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-weil-linear-scalar-localization-triangulated",
+  "def-weil-derived-pullback-tensor-hom",
+  "prop-weil-pbc-common-stage-calculus",
+  "lem-sf-hom-finite-projective",
+  "lem-tw-lisse-rational-realization",
+  "lem-pod-derived-automorphism-hom-evaluation",
+  "lem-pod-texact-truncation-comparison",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-sf-ringed-finite-free-hom-base-change",
+  "lem-pur-integral-operations-scalar-extension",
+  "lem-zl-specified-hom-scalar-evaluation",
+  "def-weil-pbc-qbar-category",
+  "def-weil-weil-sheaf-complex"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-prop-smooth-proper-purity/prop-zl-smooth-proper-relative-purity.proof.md",
+  "place": "Step 3, bounded truncation induction after the paragraph beginning By Step 1 the cohomology sheaves; expanded canonical-map and naturality argument using the cited existing DAG interfaces."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -53,10 +197,45 @@
    "results": "CategoryTheory.Sheaf.H; CategoryTheory.Sheaf.cohomologyPresheafFunctor; CategoryTheory.Sheaf.cohomologyPresheaf; CategoryTheory.Abelian.Ext.homLinearEquiv; CochainComplex.HomComplex.CohomologyClass.bijective_toSmallShiftedHom_of_isKProjective; CategoryTheory.Sheaf.instAddCommGroupH; CategoryTheory.ProjectiveResolution.extEquivCohomologyClass_symm_mk_hom; groupCohomologyIsoExt",
    "date": "2026-10-18",
    "verdict": "no match: results do not state this adic sheaf theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "internalHom.*cohomology|cohomology.*internalHom|sheafExt|hyperExt",
+   "results": "Mathlib/Condensed/Discrete/Colimit.lean; Mathlib/Condensed/Discrete/Colimit.lean; Mathlib/Condensed/Discrete/Colimit.lean; Mathlib/Condensed/Discrete/Colimit.lean; Mathlib/Condensed/Discrete/Colimit.lean",
+   "date": "2026-10-18",
+   "verdict": "no match: these hits do not give the adic sheaf cohomology-dual comparison with the stated naturality"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cohomology of the derived dual of a bounded complex of lisse adic sheaves is the dual of cohomology in the opposite degree",
+   "results": "HomologicalComplex.instHasHomologyOppositeOp; HomologicalComplex.homologyOpNatIso; CategoryTheory.ShortComplex.hasLeftHomology_iff_op; HomologicalComplex.instHasHomologyOppositeObjSymmOpFunctorOp; CochainComplex.homotopyOp; HomologicalComplex.homologyUnop; HomologicalComplex.instQuasiIsoAtOppositeMapSymmOpFunctorOp; HomologicalComplex.instHasHomologyUnopOfOpposite",
+   "date": "2026-10-18",
+   "verdict": "no match: these hits do not give the adic sheaf cohomology-dual comparison with the stated naturality"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, \"dual\"",
+   "results": "No hits",
+   "date": "2026-10-18",
+   "verdict": "no match: these hits do not give the adic sheaf cohomology-dual comparison with the stated naturality"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Universal coefficient theorem for derived sheaf Hom with locally finite projective cohomology",
+   "results": "CategoryTheory.Sheaf.H; CategoryTheory.Sheaf.cohomologyPresheafFunctor; CategoryTheory.Sheaf.cohomologyPresheaf; PresheafOfModules.sheafifyHomEquiv'; LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat; PresheafOfModules.sheafificationHomEquiv; PresheafOfModules.homEquivOfIsLocallyBijective; Ext",
+   "date": "2026-10-18",
+   "verdict": "no match: these hits do not give the adic sheaf cohomology-dual comparison with the stated naturality"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology of derived internal Hom of a bounded lisse sheaf complex into the adic coefficient unit equals the dual of its opposite cohomology",
+   "results": "groupCohomologyIsoExt; CategoryTheory.Sheaf.H; CategoryTheory.InjectiveResolution.extEquivCohomologyClass_symm_mk_hom; CategoryTheory.ProjectiveResolution.extEquivCohomologyClass_symm_mk_hom; CategoryTheory.Sheaf.cohomologyPresheaf; CochainComplex.HomComplex.CohomologyClass.toSmallShiftedHom_mk; CategoryTheory.Sheaf.cohomologyPresheafFunctor; CategoryTheory.Sheaf.instAddCommGroupH",
+   "date": "2026-10-18",
+   "verdict": "no match: these hits do not give the adic sheaf cohomology-dual comparison with the stated naturality"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "prop-zl-smooth-proper-relative-purity",
@@ -68,10 +247,89 @@
  "blueprint": {
   "from": {
    "node": "prop-zl-smooth-proper-relative-purity",
-   "place": "Proof Step 3, paragraph beginning \"By Step 1 the cohomology sheaves\": the bounded truncation/internal-dual cohomology comparison.",
+   "place": "Step 3, paragraph beginning \"By Step 1 the cohomology sheaves\": lisse finite-projective duals in degree zero, bounded truncation induction, and the ensuing Frobenius-equivariant cohomology identification.",
    "via": []
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-zl-lisse-cohomology-derived-dual",
+  "worker": "stage1",
+  "summary": "NN audited the current ancestor, coefficient categories, completed-ringed Hom and bounded t-structure interfaces. Retained the statement and all seeded metadata. Replaced the empty proof by the finite-projective heart calculation, an explicit bounded induction on cohomological support, two canonical truncation edge maps, evaluation naturality, scheme-isomorphism and finite-scalar comparisons, common-stage descent and the explicit contragredient Weil equation. Reused existing nodes throughout; no new nodes or Mathlib leaves. No complete project Lean attachment was found. Repair of return C4/E5: exposed the identification of the specified Hom scalar comparison with the evaluation transpose as a new statement-only generic lemma; steps 7–8 now cite its actual-map equality, including canonical completion, rationalization and tower normalization, rather than inferring it from naturality.",
+  "blueprint": "All steps realize the current ancestor prop-zl-smooth-proper-relative-purity, Step 3, paragraph beginning By Step 1 the cohomology sheaves and its subsequent Frobenius-equivariance sentence: steps 1–2 justify the local-Ext input, steps 3–5 expand the truncation induction and canonical evaluation, steps 6–9 supply the naturality invoked there.",
+  "tool_uses": [
+   {
+    "node": "prop-constructible-truncations",
+    "why": "Standard bounded t-structure and canonical truncation/cohomology maps for precisely the raw rationalized and common-stage coefficient categories; the unit contains no separate truncation theorem."
+   },
+   {
+    "node": "lem-weil-heart-short-exact-triangles",
+    "why": "General extension closure, uniqueness of truncation maps and long exact cohomology sequences for a bounded t-structure; these formal tools implement the unit’s truncation induction."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "why": "Ambient completed-ringed-site internal Hom exactness and signed shift rule, needed before assuming constructibility of intermediate duals."
+   },
+   {
+    "node": "lem-weil-linear-scalar-localization-triangulated",
+    "why": "Exactness of scalar localization transfers reversed Hom triangles to the raw rationalized category."
+   },
+   {
+    "node": "prop-weil-pbc-common-stage-calculus",
+    "why": "Finite diagram and equality descent for the specified common-stage coefficient category, needed for naturality and inverse equations."
+   },
+   {
+    "node": "lem-sf-hom-finite-projective",
+    "why": "The very finite-projective internal-Hom calculation cited in the ancestor proof; used only with the coefficient unit in the second slot."
+   },
+   {
+    "node": "lem-tw-lisse-rational-realization",
+    "why": "Identifies the lisse coefficient heart with continuous coefficient sheaves and normalizes ordinary dual evaluation, pullback and scalar extension."
+   },
+   {
+    "node": "lem-pod-derived-automorphism-hom-evaluation",
+    "why": "Evaluation-normalized Hom comparison for scheme isomorphisms, including non-k-linear Frobenius; no generic non-isomorphism base change is asserted."
+   },
+   {
+    "node": "lem-pod-texact-truncation-comparison",
+    "why": "Canonical truncation-map compatibility for t-exact equivalences and coefficient extension, required for naturality of the two edge isomorphisms."
+   },
+   {
+    "node": "lem-weil-finite-free-completed-scalar-comparison",
+    "why": "Identifies the specified completed scalar extension with ordinary finite-free ringed change of coefficients."
+   },
+   {
+    "node": "lem-sf-ringed-finite-free-hom-base-change",
+    "why": "Evaluation-defined Hom comparison for finite-free coefficient-ring extension, rather than an unspecified source/target isomorphism."
+   },
+   {
+    "node": "lem-pur-integral-operations-scalar-extension",
+    "why": "Supplies natural coefficient-operation isomorphisms and tower coherence only; the identification of its actual Hom component with evaluation is now cited separately from lem-zl-specified-hom-scalar-evaluation."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-constructible-truncations",
+  "lem-weil-heart-short-exact-triangles",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-weil-linear-scalar-localization-triangulated",
+  "prop-weil-pbc-common-stage-calculus",
+  "lem-sf-hom-finite-projective",
+  "lem-tw-lisse-rational-realization",
+  "lem-pod-derived-automorphism-hom-evaluation",
+  "lem-pod-texact-truncation-comparison",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-sf-ringed-finite-free-hom-base-change",
+  "lem-pur-integral-operations-scalar-extension"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-Codex-NN-a4be630d4",
+  "group": "NN",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NN-a4be630d4 (reviewer sub-agent of L); spot-checked: Read all delivered mathematics and cited statements; checked Stacks 08JI/08J9/08JB/08JC, coefficient constructions, truncation degrees, evaluation normalization, Weil variance, edge cases and duplicates. The new theta/chi lemma repairs the comparison gap without restating the parent. No long-step or forbidden-route violation found. Detailed checks and accepted tool uses are in review.md."
  }
 }
