@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.CategoryTheory.Monoidal.Mod.TensorExchange
+public import WeilConjectures.CategoryTheory.Monoidal.Mod.IsoAlgebraTensor
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ForgetCoherence
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseInternalHom
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.MonoidalIso
@@ -27,7 +27,6 @@ namespace AlgebraicGeometry.ProEtale
 
 variable {l : ℕ} [Fact l.Prime] {T₁ T₂ : Scheme.{u}}
 
-attribute [local instance] Sheaf.symmetricCategory
 
 variable (l) in
 /-- The exchange isomorphism `j^* ⋙ (a⁻¹)_* ≅ (b⁻¹)_* ⋙ j^*` of sheaves of `ℚ̄_ℓ`-modules
@@ -93,4 +92,46 @@ lemma adicUpperStarExchange_hom_app_hom (j : T₁ ⟶ T₂) (a : T₁ ≅ T₁) 
   rw [adicUpperStarExchange_hom_app_hom', upperStarExchange_hom_app]
   congr 1
 
+instance preservesColimitsOfShape_mapModComap_adicConstantSheafToLowerStar (g : T₁ ⟶ T₁)
+    [IsIso g] : PreservesColimitsOfShape WalkingParallelPair
+      (Mod.mapModComap (G := (g)_*[WeilCoefficients.{u} l]) (adicConstantSheafToLowerStar l g)) :=
+  have : (Mod.mapModComap (G := (g)_*[WeilCoefficients.{u} l])
+      (adicConstantSheafToLowerStar l g)).IsEquivalence :=
+    isEquivalence_adicLowerStar l g
+  inferInstance
+
+instance preservesColimitsOfShape_mapModComap_adicUpperStarRingHom (j : T₁ ⟶ T₂) :
+    PreservesColimitsOfShape WalkingParallelPair
+      (Mod.mapModComap (G := (j)^*[WeilCoefficients.{u} l]) (adicUpperStarRingHom l j)) :=
+  inferInstanceAs (PreservesColimitsOfShape WalkingParallelPair (j)^*ᵃ[l])
+
+/-- The exchange isomorphism of `ℓ`-adic pullbacks along a base change with the Frobenius
+pullbacks is that of the underlying sheaves. -/
+lemma adicUpperStarGeometricFiberMapCompFrobeniusIso_hom_app_hom' {k : Type u} [Field k]
+    [Finite k] {X₀ Y₀ : Scheme.{u}} {f : X₀ ⟶ Spec (.of k)} {g : Y₀ ⟶ Spec (.of k)}
+    (φ : X₀ ⟶ Y₀) (h : φ ≫ g = f) (M : AdicSheaf l g.geometricFiber) :
+    ((adicUpperStarGeometricFiberMapCompFrobeniusIso l φ h).hom.app M).hom =
+      (upperStarExchange l (Scheme.Hom.geometricFiberMap φ h) f.geometricGaloisFrobenius
+        g.geometricGaloisFrobenius
+        (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius φ h).symm).hom.app M.X := by
+  rw [adicUpperStarGeometricFiberMapCompFrobeniusIso_hom_app_hom, upperStarExchange_hom_app]
+  congr 1
+
 end AlgebraicGeometry.ProEtale
+
+namespace AlgebraicGeometry
+
+open ProEtale Endofunctor
+
+variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]
+variable {X Y : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
+  [Y.Over (Spec (CommRingCat.of k₀))]
+
+set_option hygiene false in
+local notation "𝐒" => Spec (CommRingCat.of k₀)
+
+set_option hygiene false in
+local notation "bc[" f "]" =>
+  Scheme.Hom.geometricFiberMap f (comp_over f (Spec (CommRingCat.of k₀)))
+
+end AlgebraicGeometry
