@@ -21,9 +21,130 @@
   "def-sp-injective-resolutions",
   "def-pur-etale-derived-supported-sections"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Keep the given resolution $G_1\\to J$ fixed. Abelian etale sheaves have enough injectives by [lem-weil-pbc-module-sheaves-enough-injectives]. Choose a nonnegative injective resolution $G_3\\xrightarrow{\\epsilon}K$ using [lem-weil-pbc-left-exact-injective-resolution-degree-zero], and apply [lem-sp-horseshoe-prescribed-resolutions] to the coefficient sequence with these two prescribed endpoint resolutions. Write its middle resolution as $I^q=J^q\\oplus K^q$ and its differential as $d_I^q(a,c)=(d_Ja+t^qc,d_Kc)$. Thus $d_Jt^q+t^{q+1}d_K=0$. Write the middle augmentation as $G_2\\to I^0$, $y\\mapsto(l(y),\\epsilon g(y))$, where $g:G_2\\to G_3$. The augmentation identities give $l|_{G_1}=\\epsilon_1$ and $d_Jl=-t^0\\epsilon g$.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-enough-injectives",
+    "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
+    "lem-sp-horseshoe-prescribed-resolutions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 013K (lemma-injective-resolutions-exist), 013T (lemma-injective-resolution-ses), prescribed endpoint resolutions and block differential"
+   }
+  },
+  {
+   "text": "Put $A=j_!\\mathbf Z_W$, $B=\\mathbf Z_T$ and write the open-closed sequence as $0\\to A\\xrightarrow{a}B\\xrightarrow{p}F\\to0$ [lem-weil-pbc-open-closed-short-exact]. A map $\\mathbf Z_T\\to M$ is determined by the image of $1$, and a section defines the map by integer multiplication and restriction. By [lem-weil-pbc-extension-by-zero-adjunction], $\\operatorname{Hom}(A,M)=M(W)$, with precomposition by $a$ equal to restriction. Injectivity of $K^0$ [def-sp-injective-resolutions] extends $\\epsilon h:A\\to K^0$ to a map $u:B\\to K^0$. Since $d_K\\epsilon h=0$, there is a unique $z:F\\to K^1$ with $zp=d_Ku$. Moreover $d_Kz=0$, since this is zero after the epimorphism $p$.",
+   "uses": [
+    "lem-weil-pbc-open-closed-short-exact",
+    "lem-weil-pbc-extension-by-zero-adjunction",
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 095L (lemma-ses-associated-to-open); adjunction: sites-modules.tex Tag 03DI (lemma-extension-by-zero)"
+   }
+  },
+  {
+   "text": "Let $E_h$ be the middle sheaf of the pushout defining $e_h$. The maps $\\epsilon:G_3\\to K^0$ and $u:B\\to K^0$ agree on $A$, hence induce $v:E_h\\to K^0$. Its differential factors as $z$ on the quotient $F$, so there is a morphism of short exact sequences from $0\\to G_3\\to E_h\\to F\\to0$ to $0\\to G_3\\to K^0\\to Z^1(K)\\to0$, with quotient map $\\bar z:F\\to Z^1(K)$. The latter row is exact because $K$ resolves $G_3$. Naturality [lem-sc-p1-ext-class-naturality] identifies $e_h$ with the pullback of its class by $\\bar z$. By [lem-amb-first-resolution-extension-class] that class is the negative of the cycles-inclusion cocycle. Thus, using [lem-weil-pbc-ext-via-injective-resolution], $e_h$ is represented by $-z:F\\to K^1$. This minus sign is essential.",
+   "uses": [
+    "lem-sc-p1-ext-class-naturality",
+    "lem-amb-first-resolution-extension-class",
+    "lem-weil-pbc-ext-via-injective-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 06XR (lemma-compute-ext-resolutions), 06XV (lemma-ext-1); explicit first-resolution sign from lem-amb-first-resolution-extension-class"
+   }
+  },
+  {
+   "text": "The identity $d_Jl=-t^0\\epsilon g$ from step 1 yields a morphism from the coefficient sequence to $0\\to G_1\\to J^0\\to Z^1(J)\\to0$, with quotient map $c:G_3\\to Z^1(J)$ whose cycles inclusion is $-t^0\\epsilon$. It is a cycles map since $d_Jt^0\\epsilon=-t^1d_K\\epsilon=0$. Naturality [lem-sc-p1-ext-class-naturality] and the first-row sign [lem-amb-first-resolution-extension-class] therefore give $k=-[c]=[t^0\\epsilon]$. The maps $t^q$ form a chain map $t:K\\to J[1]$, by $d_Jt+t d_K=0$ and the negative differential on $J[1]$. The resolution description [lem-weil-pbc-ext-via-injective-resolution] then says that this chain map represents $k$ after inverting $G_3\\to K$ and $G_1[1]\\to J[1]$. In particular its component in degree one is $t^1$, without an extra negation of a shifted chain map.",
+   "uses": [
+    "lem-sc-p1-ext-class-naturality",
+    "lem-amb-first-resolution-extension-class",
+    "lem-weil-pbc-ext-via-injective-resolution",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 06XR and 06XV; first-row sign, and the cochain shift convention"
+   }
+  },
+  {
+   "text": "By [lem-sc-ext-yoneda-composition-derived], the product in the question is obtained by shifting the representative of $k$ by one and composing with the representative of $e_h$. Steps 3 and 4 consequently give the cocycle $w=-t^1z:F\\to J^2$ for $k[1]\\circ e_h$. The cocycle-to-derived-morphism formula of [lem-weil-pbc-ext-via-injective-resolution] justifies canceling the intermediate resolution isomorphism: explicitly the two roofs compose to $F\\xrightarrow{-z}K[1]\\xrightarrow{t[1]}J[2]\\xleftarrow{\\epsilon_1[2]}G_1[2]$.",
+   "uses": [
+    "lem-sc-ext-yoneda-composition-derived",
+    "lem-weil-pbc-ext-via-injective-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 06XP (section-ext), composition paragraph following lemma-ext-1, and Tag 06XR"
+   }
+  },
+  {
+   "text": "Put $x=t^0u\\in J^1(T)$ and $b=x|_W=t^0\\epsilon h\\in J^1(W)$. In the split horseshoe of step 1 the section $r=(0,\\epsilon h)\\in I^0(W)$ lifts $h$, and $d_Ir=(b,0)$. The coefficient-boundary formula in [lem-pur-divisor-torsor-boundary-signs] therefore gives $\\delta_W(h)=[b]$. This application uses its clause for arbitrary short exact sequences of abelian sheaves; no torsion condition is imposed. Directly, $d_Jb=-t^1d_K\\epsilon h=0$.",
+   "uses": [
+    "lem-pur-divisor-torsor-boundary-signs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 03AJ (lemma-torsors-h1); ordinary lift-and-differentiate representative in the statement of lem-pur-divisor-torsor-boundary-signs"
+   }
+  },
+  {
+   "text": "The block differential identity now gives $d_Jx=-t^1d_Ku=-t^1zp=wp$. Thus $wp$ vanishes on $W$. Indeed $b$ is a cocycle and restriction commutes with $d_J$. Under [lem-amb-closed-support-hom] with $A=\\mathbf Z$, and the stipulated kernel normalization, the cocycle $w$ represents $(wp,0)=(d_Jx,0)$ in the signed relative complex [def-amb-relative-etale-cohomology]. This is also the kernel-of-restriction model of [def-pur-etale-derived-supported-sections]: $\\operatorname{Hom}(F,J^q)$ is the kernel of $J^q(T)\\to J^q(W)$ by the exact sequence and adjunction of step 2. Surjectivity of this restriction follows from the same injective lifting property used there. Consequently its inclusion into the signed fibre is a quasi-isomorphism: the quotient is the contractible complex on $J(W)$, with differential $(a,b)\\mapsto(da,a-db)$ and contraction $(a,b)\\mapsto(b,0)$.",
+   "uses": [
+    "lem-amb-closed-support-hom",
+    "def-amb-relative-etale-cohomology",
+    "def-pur-etale-derived-supported-sections"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 06XR and the kernel normalization; explicit signed-fibre quotient contraction"
+   }
+  },
+  {
+   "text": "Finally, in the prescribed signed coordinates $D(x,0)=(d_Jx,b)$. Hence $(d_Jx,0)-(0,-b)=D(x,0)$, so the two degree-two cocycles have the same class. The boundary convention of [lem-pur-divisor-torsor-boundary-signs] sends $[b]$ to $[(0,-b)]$. Together with steps 5–7 this is exactly $k[1]\\circ e_h=\\partial(\\delta_W(h))$ under the normalized supported-Hom identification. The calculation used the given arbitrary resolution $J$ and arbitrary abelian coefficient sheaves, so it proves the assertion for every resolution allowed in the statement, including nontorsion $G_2,G_3$.",
+   "uses": [
+    "lem-pur-divisor-torsor-boundary-signs"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 06XP; agent-written signed-fibre coboundary calculation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-amb-relative-etale-cohomology",
+  "def-pur-etale-derived-supported-sections",
+  "def-sp-injective-resolutions",
+  "def-weil-abstract-derived-category",
+  "lem-amb-closed-support-hom",
+  "lem-amb-first-resolution-extension-class",
+  "lem-pur-divisor-torsor-boundary-signs",
+  "lem-sc-ext-yoneda-composition-derived",
+  "lem-sc-p1-ext-class-naturality",
+  "lem-sp-horseshoe-prescribed-resolutions",
+  "lem-weil-pbc-ext-via-injective-resolution",
+  "lem-weil-pbc-extension-by-zero-adjunction",
+  "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
+  "lem-weil-pbc-module-sheaves-enough-injectives",
+  "lem-weil-pbc-open-closed-short-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 06XP, 06XR, 06XV; explicit signed horseshoe and Yoneda shift calculation using the existing first-resolution sign lemma."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -66,10 +187,52 @@
    "results": "{\"t\": \"2026-10-18T14:49:18Z\", \"tool\": \"leanfinder\", \"query\": \"The localization boundary in relative sheaf cohomology is the Yoneda product with the integer open closed exact sequence, with signed fibre differential d a, restriction a minus d b\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₁\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₃\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₂\", \"CategoryTheory.Sheaf.H\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_f\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_g\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact\"], \"digest\": \"e0038a7cc9cab5b6\"}",
    "date": "2026-10-18",
    "verdict": "no match: results read; none states this geometric construction or its specified signed supported-Hom comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "extClass|yoneda|localization",
+   "results": "{\"t\": \"2026-10-18T19:39:58Z\", \"tool\": \"grep\", \"query\": \"extClass|yoneda|localization\", \"sub\": \"Algebra/Homology/DerivedCategory/Ext\", \"ok\": true, \"n_hits\": 21, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/DerivedCategory/Ext/TStructure.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/Ext/EnoughProjectives.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/Ext/MapBijective.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/Ext/ExactSequences.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/Ext/ExactSequences.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/Ext/ExactSequences.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/Ext/ExactSequences.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/Ext/ExactSequences.lean\"], \"digest\": \"7b21b7d3047e4ab7\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: read the returned declarations; general Ext composition, resolution and Mayer-Vietoris APIs do not state this signed open-closed supported comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The Yoneda product of sheaf extensions agrees with the localization boundary for cohomology with closed support",
+   "results": "{\"t\": \"2026-10-18T19:39:58Z\", \"tool\": \"leansearch\", \"query\": \"The Yoneda product of sheaf extensions agrees with the localization boundary for cohomology with closed support\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.GrothendieckTopology.yonedaEquiv\", \"CategoryTheory.Functor.IsCoverDense.sheafHom\", \"CategoryTheory.Functor.IsCoverDense.sheafYonedaHom\", \"CategoryTheory.yoneda'_map_val\", \"CategoryTheory.GrothendieckTopology.hom_ext_yoneda\", \"CategoryTheory.Sheaf.isSheaf_yoneda_obj\", \"CategoryTheory.yoneda'\", \"CategoryTheory.GrothendieckTopology.yoneda_map_val\"], \"digest\": \"02752ac13ada63be\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: read the returned declarations; general Ext composition, resolution and Mayer-Vietoris APIs do not state this signed open-closed supported comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Abelian.Ext.comp, CategoryTheory.ShortComplex.ShortExact.extClass",
+   "results": "{\"t\": \"2026-10-18T19:39:58Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Abelian.Ext.comp, CategoryTheory.ShortComplex.ShortExact.extClass\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.ShortComplex.ShortExact.extClass_naturality\", \"CategoryTheory.ShortComplex.ShortExact.comp_extClass_assoc\", \"CategoryTheory.ShortComplex.ShortExact.extClass_comp_assoc\", \"CategoryTheory.ShortComplex.ShortExact.comp_extClass\", \"CategoryTheory.ShortComplex.ShortExact.extClass_comp\", \"CategoryTheory.Abelian.Ext.contravariant_sequence_exact₁\", \"CategoryTheory.Abelian.Ext.contravariant_sequence_exact₃\", \"CategoryTheory.Abelian.Ext.covariant_sequence_exact₁\"], \"digest\": \"acbfb303f4dd470f\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: read the returned declarations; general Ext composition, resolution and Mayer-Vietoris APIs do not state this signed open-closed supported comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Yoneda composition of a coefficient extension with the pushout of an open closed constant integer sheaf extension equals the signed localization boundary in supported cohomology",
+   "results": "{\"t\": \"2026-10-18T19:39:59Z\", \"tool\": \"leanfinder\", \"query\": \"Yoneda composition of a coefficient extension with the pushout of an open closed constant integer sheaf extension equals the signed localization boundary in supported cohomology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₃\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₁\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.isPushoutAddCommGrpFreeSheaf\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_f\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₂\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_g\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.isPushout\", \"AlgebraicGeometry.Scheme.LocalRepresentability.yonedaGluedToSheaf_app_comp\"], \"digest\": \"f3f8fc3216ec7744\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: read the returned declarations; general Ext composition, resolution and Mayer-Vietoris APIs do not state this signed open-closed supported comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology with support identifies the composite of two Yoneda extension classes with the boundary of the ordinary coefficient connecting map, computed with an injective horseshoe resolution and a mapping fibre",
+   "results": "{\"t\": \"2026-10-18T19:44:01Z\", \"tool\": \"leanfinder\", \"query\": \"Cohomology with support identifies the composite of two Yoneda extension classes with the boundary of the ordinary coefficient connecting map, computed with an injective horseshoe resolution and a mapping fibre\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.InjectiveResolution.extEquivCohomologyClass_extMk\", \"CategoryTheory.Abelian.Ext.preadditiveYoneda_homologySequenceδ_singleTriangle_apply\", \"CategoryTheory.InjectiveResolution.extMk_comp_mk₀\", \"CategoryTheory.Abelian.Ext.preadditiveCoyoneda_homologySequenceδ_singleTriangle_apply\", \"CategoryTheory.InjectiveResolution.mk₀_comp_extMk\", \"groupCohomology.δ_apply\", \"CategoryTheory.ShortComplex.ShortExact.extClass_hom\", \"CategoryTheory.ProjectiveResolution.extEquivCohomologyClass_extMk\"], \"digest\": \"2c8dae9ae600814f\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: read the returned declarations; general Ext composition, resolution and Mayer-Vietoris APIs do not state this signed open-closed supported comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "extMk|extClass|comp",
+   "results": "{\"t\": \"2026-10-18T19:44:01Z\", \"tool\": \"grep\", \"query\": \"extMk|extClass|comp\", \"sub\": \"CategoryTheory/Abelian/Injective\", \"ok\": true, \"n_hits\": 22, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Abelian/Injective/Ext.lean\", \"Mathlib/CategoryTheory/Abelian/Injective/Ext.lean\", \"Mathlib/CategoryTheory/Abelian/Injective/Ext.lean\", \"Mathlib/CategoryTheory/Abelian/Injective/Ext.lean\", \"Mathlib/CategoryTheory/Abelian/Injective/Ext.lean\", \"Mathlib/CategoryTheory/Abelian/Injective/Basic.lean\", \"Mathlib/CategoryTheory/Abelian/Injective/Basic.lean\", \"Mathlib/CategoryTheory/Abelian/Injective/Resolution.lean\"], \"digest\": \"fa4b3a035014af9d\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: read the returned declarations; general Ext composition, resolution and Mayer-Vietoris APIs do not state this signed open-closed supported comparison"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-cartier-gysin-kummer-boundary",
@@ -93,5 +256,59 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-supported-yoneda-localization",
+  "worker": "stage1 Q39",
+  "summary": "Preserved the statement and all imported provenance. Proved the positive sign by a prescribed-endpoint injective horseshoe: e_h is represented by -z, k by t, the splice by -t^1z, and its supported cocycle differs from (0,-b) by D(t^0u,0). All inputs already exist in the DAG; no new nodes. Project source has no matching declaration.",
+  "blueprint": "Proof Step 3 (the >=-direction), sentence beginning \"By the duality symmetry of the middle perverse t-structure\": finite-torsion regular local model underlying that duality, via lem-per-trait-gysin-residue; specifically the Cartier normalization in the present item.",
+  "tool_uses": [
+   {
+    "node": "lem-amb-closed-support-hom",
+    "why": "Generic sheaf, injective-resolution, Ext-sign or supported-cohomology tool for the signed Yoneda calculation; the perverse/Fourier unit supplies no replacement and no step of its route is replaced."
+   },
+   {
+    "node": "lem-amb-first-resolution-extension-class",
+    "why": "Generic sheaf, injective-resolution, Ext-sign or supported-cohomology tool for the signed Yoneda calculation; the perverse/Fourier unit supplies no replacement and no step of its route is replaced."
+   },
+   {
+    "node": "lem-pur-divisor-torsor-boundary-signs",
+    "why": "Generic sheaf, injective-resolution, Ext-sign or supported-cohomology tool for the signed Yoneda calculation; the perverse/Fourier unit supplies no replacement and no step of its route is replaced."
+   },
+   {
+    "node": "lem-sp-horseshoe-prescribed-resolutions",
+    "why": "Generic sheaf, injective-resolution, Ext-sign or supported-cohomology tool for the signed Yoneda calculation; the perverse/Fourier unit supplies no replacement and no step of its route is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-adjunction",
+    "why": "Generic sheaf, injective-resolution, Ext-sign or supported-cohomology tool for the signed Yoneda calculation; the perverse/Fourier unit supplies no replacement and no step of its route is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-enough-injectives",
+    "why": "Generic sheaf, injective-resolution, Ext-sign or supported-cohomology tool for the signed Yoneda calculation; the perverse/Fourier unit supplies no replacement and no step of its route is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-open-closed-short-exact",
+    "why": "Generic sheaf, injective-resolution, Ext-sign or supported-cohomology tool for the signed Yoneda calculation; the perverse/Fourier unit supplies no replacement and no step of its route is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-amb-closed-support-hom",
+  "lem-amb-first-resolution-extension-class",
+  "lem-pur-divisor-torsor-boundary-signs",
+  "lem-sp-horseshoe-prescribed-resolutions",
+  "lem-weil-pbc-extension-by-zero-adjunction",
+  "lem-weil-pbc-module-sheaves-enough-injectives",
+  "lem-weil-pbc-open-closed-short-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q39-07788408e",
+  "group": "Q39",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q39-07788408e (reviewer sub-agent of L); spot-checked: Read the item's unchanged statement (identical to the live unsplit node; one commit, item and report only; no new nodes; no cycle in the 328-node dependency closure; no SGA) and all 8 steps, against the full statements of all 15 proof_deps and the Stacks sources: tags 06XP, 06XR, 06XU, 06XV, 013K, 013T, 095L, 03DI and 03AJ, checked in tags/tags with 095L and 03DI read. I recomputed every step. (1) The prescribed-endpoint horseshoe I=J⊕K has d_I(a,c)=(d_Ja+tc,d_Kc), which gives d_Jt+td_K=0, l|G1=ε1 and d_Jl=−t⁰εg. (2) Injectivity extends εh to u, and d_Ku=zp. (3) Ext-class naturality together with the first-resolution sign gives e_h=−[z]. (4) The quotient map has cycles inclusion −t⁰ε, so k=[t⁰ε], and t:K→J[1] is a chain map. (5) The splice is w=−t¹z, using the unsigned shift of t. (6) The split lift (0,εh) gives b=t⁰εh, and the torsor-boundary split clause gives ∂δ_W(h)=[(0,−b)]. (7) The kernel model is quasi-isomorphic to the signed fibre: I checked the contraction H(a,b)=(b,0) with DH+HD=id, and wp=d_J(t⁰u). (8) (d_Jx,0)−(0,−b)=D(x,0). Independently, the positive sign survives any uniform change of extension-class or extMk sign convention, since both factors flip together. Small cases checked: W empty, Z empty, split sequence, h extending to T, and the citer's Kummer case. No duplicate found: the coef-yoneda splice/comparison and torsor-boundary nodes are generic or concern the termwise relative connecting map. The 7 declared tool_uses are generic black boxes and I accept them. Advisory, not a fault: step 6's 'δ_W(h)=[b]' is the ordinary snake-lemma value; the cited clause states ∂δ_W(h)=[(0,−dr)] directly, which is all step 8 needs. No fixes."
  }
 }
