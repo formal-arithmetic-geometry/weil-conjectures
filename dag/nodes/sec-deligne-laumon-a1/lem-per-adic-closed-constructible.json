@@ -16,9 +16,160 @@
   "def-weil-integral-scalar-extension",
   "lem-pur-integral-operations-scalar-extension"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $t=\\varpi$, $B=\\widehat R_T$ and $B_n=(R/t^n)_T$. The coefficient ring $R$ is a Noetherian DVR with finite residue field by [lem-weil-l-adic-extension-integers-dvr]. By [lem-weil-pbc-constant-completion-equivalence], $B$ is flat over the constant $R$-sheaf and $B/t^nB=B_n$. Thus $t$ acts injectively on $B$: tensor the injection $R\\xrightarrow{t}R$ with the flat sheaf $B$. The scheme $T$ is Noetherian by [lem-weil-pbc-finite-type-over-noetherian] (every ideal of a field is zero or the unit ideal) and finite-dimensional by [lem-kun-dimension-finite-type]. The one-stratum perfect model $R[0]$ gives $B\\in\\mathcal I_T$ by [lem-weil-pbc-integral-stratified-perfect-characterization]. In particular the proposed tensor unit is an actual complete constructible object.",
+   "uses": [
+    "lem-weil-l-adic-extension-integers-dvr",
+    "lem-weil-pbc-constant-completion-equivalence",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-kun-dimension-finite-type",
+    "lem-weil-pbc-integral-stratified-perfect-characterization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definition 6.5.1, Proposition 6.6.11; coefficient sheaf and uniform reduction conventions"
+   }
+  },
+  {
+   "text": "Let $C$ denote the completion reflector of [lem-weil-pbc-ringed-koszul-completion-reflector] for the ringed site $(T_{\\mathrm{proet}},B)$ and the single generator $t$. Its universal property is $\\operatorname{Hom}(CV,Q)=\\operatorname{Hom}(V,Q)$ when $Q$ is complete. By [lem-weil-pbc-constant-completion-equivalence], its Koszul model is canonically $R\\varprojlim_n(V\\otimes_B^LB_n)$, with the same unit. For K-flat representatives $F,G$ of $M,P$, termwise associativity and balancing give\n$$(F\\otimes_BG)\\otimes_BB_n\\cong(F\\otimes_BB_n)\\otimes_{B_n}(G\\otimes_BB_n),\\quad (f\\otimes g)\\otimes a\\mapsto(f\\otimes1)\\otimes(g\\otimes a).$$\nThe inverse multiplies the two coefficients. These maps commute with the total differential and all quotient transitions. Therefore the tower defining completed tensor in [def-pur-integral-derived-operations] is exactly the reduction tower of $M\\otimes_B^LP$, and $M\\widehat\\otimes_R^LP=C(M\\otimes_B^LP)$ compatibly with the completion unit. This verifies the comparison, rather than treating it as part of the definition.",
+   "uses": [
+    "lem-weil-pbc-ringed-koszul-completion-reflector",
+    "lem-weil-pbc-constant-completion-equivalence",
+    "def-pur-integral-derived-operations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Sections 3.4–3.5, Definition 3.4.10; comparison with the explicit strict reduction tower"
+   }
+  },
+  {
+   "text": "For $P,Q\\in\\mathcal I_T$ put $H=H_R(P,Q)$. Since $Q$ is complete, [lem-coef-integral-hom-reduction] proves that $H$ is complete and gives the evaluation-defined isomorphisms\n$$H\\otimes_B^LB_n\\cong R\\mathcal Hom_{B_n}(P\\otimes_B^LB_n,Q\\otimes_B^LB_n).$$\nWrite $P_1=P\\otimes_B^LB_1$, $Q_1=Q\\otimes_B^LB_1$. These are bounded constructible by the definition of $\\mathcal I_T$ [def-weil-derived-complete-integral-detailed]. The ring $A_1=R/t$ is a finite field by the DVR assertion in [lem-weil-l-adic-extension-integers-dvr]. A bounded complex of sheaves of vector spaces has finite Tor amplitude: tensoring with a degree-zero vector-space sheaf is exact, and so does not enlarge its cohomological interval. Equivalently this is checked on the etale-origin complexes here, where every vector-space stalk is flat, and pulled back to the pro-etale site. Thus $P_1,Q_1$ satisfy the finite-Tor hypotheses.",
+   "uses": [
+    "lem-coef-integral-hom-reduction",
+    "def-weil-derived-complete-integral-detailed",
+    "lem-weil-l-adic-extension-integers-dvr"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 3.4.11 and the reduction comparison of Lemma 6.7.13"
+   }
+  },
+  {
+   "text": "Apply [lem-per-finite-tor-internal-hom-any-field] to $X=T$, the given field $k$, and $n=1$, with $K=P_1$ and $M=Q_1$. All its coefficient, invertibility, finite-type and separatedness hypotheses are among the hypotheses of this item. Its conclusion and Step 3 give $H_1=H\\otimes_B^LB_1\\in D^b_c(T,A_1)$. Choose integers $a\\leq b$ containing its cohomology, taking $a=b=0$ if $H_1=0$. Only the residue coefficient field is used in this finiteness invocation; no assertion of a uniform bound over different coefficient rings is borrowed from that lemma.",
+   "uses": [
+    "lem-per-finite-tor-internal-hom-any-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.7.13 at the residue coefficient field"
+   }
+  },
+  {
+   "text": "Set $H_n=H\\otimes_B^LB_n$. For each $n>1$ the sequence\n$$0\\longrightarrow A_1\\xrightarrow{\\bar x\\mapsto t^{n-1}x}A_n\\longrightarrow A_{n-1}\\longrightarrow0$$\nis exact by cancellation in the DVR. Its constant sheaves, viewed as $B$-modules, give a distinguished triangle by [lem-sf-derived-ses-triangle]. Tensoring a flat-term K-flat representative of $H$ keeps it short exact. Hence there is a triangle $H_1\\to H_n\\to H_{n-1}\\to H_1[1]$, also in $A_n$-modules via the quotient coefficient actions. Induct on $n$. The base is Step 4. For the induction step, [lem-sf-derived-homology-long-exact] shows vanishing outside the SAME $[a,b]$. For each degree its middle cohomology is an extension of a cokernel involving $H^{q-1}(H_{n-1})$ and $H^q(H_1)$ by a kernel involving $H^q(H_{n-1})$ and $H^{q+1}(H_1)$. The weak Serre property [lem-sfb-discrete-noetherian-constructible-serre] makes these constructible in its affine-local sense; an $A_j$-sheaf viewed along $A_n\\twoheadrightarrow A_j$ keeps its finite locally constant models. On the Noetherian $T$ of Step 1 this sense agrees with the global partitions of [def-weil-finite-torsion-constructibility] (finite and finitely presented $A_n$-modules coincide): intersect a global partition with an affine open $U$, locally closed subsets of a Noetherian space being constructible; conversely, for a finite affine cover $U_1,\\dots,U_m$ with partitions $Z_{i,a}$ of $U_i$, the reduced strata $Z_{i,a}\\setminus(U_1\\cup\\dots\\cup U_{i-1})$ partition $T$, and inverse image along their immersions into $Z_{i,a}$ keeps local constancy and stalks. By [lem-weil-pbc-finite-ring-constructible-derived-origin] each $H_n$ has bounded constructible etale origin. Together with completeness from Step 3 and the uniform interval just proved, [def-weil-derived-complete-integral-detailed] gives $H\\in\\mathcal I_T$.",
+   "uses": [
+    "lem-sf-derived-ses-triangle",
+    "lem-sf-derived-homology-long-exact",
+    "lem-sfb-discrete-noetherian-constructible-serre",
+    "lem-weil-pbc-finite-ring-constructible-derived-origin",
+    "def-weil-derived-complete-integral-detailed",
+    "def-weil-finite-torsion-constructibility"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definition 6.5.1 and Lemma 6.5.3; explicit uniform-bound induction from the residue field"
+   }
+  },
+  {
+   "text": "The completed tensor of two objects of $\\mathcal I_T$ belongs to $\\mathcal I_T$ by [lem-pur-integral-operations-preserve-constructible]. For $M,P,Q\\in\\mathcal I_T$, Step 2 and the reflector property give\n$$\\operatorname{Hom}(M\\widehat\\otimes_R^LP,Q)=\\operatorname{Hom}(M\\otimes_B^LP,Q).$$\nThe ringed-site currying isomorphism of [lem-weil-pbc-ringed-internal-hom-exact-restriction], followed by $H^0$ global sections as in [lem-pur-rhom-global-sections], identifies the latter group with $\\operatorname{Hom}(M,H_R(P,Q))$. Since the subcategory is full and Step 5 places the Hom object in it, these are the required Hom groups in $\\mathcal I_T$. All maps are natural; uncurrying sends $u:M\\to H_R(P,Q)$ to evaluation composed with $u\\otimes1_P$, factored uniquely through completion. Thus the bijection and evaluation are those of the ambient ringed-site adjunction, with completed tensor.",
+   "uses": [
+    "lem-pur-integral-operations-preserve-constructible",
+    "lem-weil-pbc-ringed-koszul-completion-reflector",
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "lem-pur-rhom-global-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 3.4.11 and Lemma 6.7.12; Stacks 08J9 (lemma-internal-hom), 08JA (lemma-section-RHom-over-U)"
+   }
+  },
+  {
+   "text": "The ordinary tensor symmetry induces the completed symmetry, and $C(B\\otimes_B^LM)\\cong CM\\cong M$ gives the unit constraints. Here is also an explicit way to remove completion from intermediate bracketings. For a complete test object $Q$ and arbitrary $A,D$, [lem-coef-integral-hom-reduction] makes $H_R(D,Q)$ complete; currying and the reflector property identify\n$$\\operatorname{Hom}(C(CA\\otimes_B^LD),Q)\\cong\\operatorname{Hom}(CA,H_R(D,Q))\\cong\\operatorname{Hom}(A,H_R(D,Q))\\cong\\operatorname{Hom}(C(A\\otimes_B^LD),Q).$$\nConsequently completing the map $A\\otimes D\\to CA\\otimes D$ is invertible. Apply this to $A=M\\otimes P$ (and use symmetry for the other factor): both bracketings of a triple completed tensor identify canonically with $C(M\\otimes P\\otimes Q)$. This defines the associator. Pentagon, triangle and symmetry identities reduce, by the same bijections, to the corresponding total-tensor identities before completion; those identities are the usual rebracketing, unit multiplication and signed permutation of pure tensors. Thus their two sides are equal and remain equal after completion. With the unit from Step 1 and closure from Step 6 this gives the closed symmetric monoidal structure asserted.",
+   "uses": [
+    "lem-coef-integral-hom-reduction",
+    "lem-weil-pbc-ringed-koszul-completion-reflector",
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "lem-pur-rhom-global-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definition 3.4.10 and Lemma 3.4.11; universal-property verification of tensor constraints"
+   }
+  },
+  {
+   "text": "Let $S=\\mathcal O_L$, $B'=\\widehat S_T$, and $T_{L/E}$ denote integral scalar extension. By [lem-weil-finite-free-completed-scalar-comparison], $B'$ is finite free over $B$, and on EVERY complete input $V$ its ordinary extension $V\\otimes_B^LB'$ identifies canonically with $T_{L/E}V$. This applies to $P,Q,H_R(P,Q)$ by Steps 3–5. The evaluation-transposed isomorphism of [lem-sf-ringed-finite-free-hom-base-change] therefore gives\n$$T_{L/E}H_R(P,Q)\\xrightarrow{\\sim}H_S(T_{L/E}P,T_{L/E}Q).$$\nScalar extension preserves $\\mathcal I_T$ by [lem-weil-integral-scalar-extension-constructible]. To check the specified normalization, the ordinary tensor comparison on K-flat representatives sends $(x\\otimes s)\\otimes(y\\otimes t)$ to $(x\\otimes y)\\otimes st$. Taking its reductions and their limit gives exactly the completed tensor comparison of [lem-pur-integral-operations-scalar-extension], through the tower identifications of Step 2. Precomposing the completed evaluation with its completion unit recovers ordinary evaluation; the finite-free comparison is its transpose by its cited statement. Uniqueness in the completion and tensor-Hom adjunctions therefore identifies the displayed map with the comparison specified in the item. This uses no choice of a finite free basis to define the map.",
+   "uses": [
+    "lem-weil-finite-free-completed-scalar-comparison",
+    "lem-sf-ringed-finite-free-hom-base-change",
+    "lem-weil-integral-scalar-extension-constructible",
+    "lem-pur-integral-operations-scalar-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Ringed finite-free change of rings: tensor–Hom adjunction, Tags 08J9/08JA; Bhatt–Scholze completed tensor, Definition 3.4.10"
+   }
+  },
+  {
+   "text": "The comparison is natural by [lem-sf-ringed-finite-free-hom-base-change] and the natural completion comparison. For $E\\subset L\\subset L'$ put $B''=\\widehat{\\mathcal O}_{L',T}$. Identify two successive scalar extensions with direct extension using the composition isomorphisms in [lem-pur-integral-operations-scalar-extension]. Uncurry the two candidate Hom comparisons into $Q\\otimes_B^LB''$. On simultaneous representatives both evaluate\n$$(h\\otimes s\\otimes s',\\ p\\otimes u')\\longmapsto h(p)\\otimes ss'u'.$$\nThis identity holds in each degree, with the same Hom-complex differential and tensor signs on either route; coefficients have degree zero. Multiplication is associative, so balancing, quotient transitions and completion preserve this equality. The two uncurried maps are equal, hence their transposes are equal by Step 6. For the identity extension the formula is $(h,p)\\mapsto h(p)$; the completion unit is the canonical identification of the scalar-extension functor with the identity. Finally, for any $u:M\\to H_R(P,Q)$, both 'extend its uncurrying' and 'uncurry the extended $u$ followed by the comparison' send $(m\\otimes s,p\\otimes t)$ to $\\operatorname{ev}(u(m),p)\\otimes st$. Thus scalar extension intertwines evaluation and every tensor-Hom adjunction bijection, as well as the identity and tower comparisons.",
+   "uses": [
+    "lem-sf-ringed-finite-free-hom-base-change",
+    "lem-weil-finite-free-completed-scalar-comparison",
+    "lem-pur-integral-operations-scalar-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tensor universal maps and evaluation: Tags 08J9/08JA; explicit identity/tower calculation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-kun-dimension-finite-type",
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "lem-weil-pbc-ringed-koszul-completion-reflector",
+  "def-pur-integral-derived-operations",
+  "lem-coef-integral-hom-reduction",
+  "def-weil-derived-complete-integral-detailed",
+  "lem-per-finite-tor-internal-hom-any-field",
+  "lem-sf-derived-ses-triangle",
+  "lem-sf-derived-homology-long-exact",
+  "lem-sfb-discrete-noetherian-constructible-serre",
+  "lem-weil-pbc-finite-ring-constructible-derived-origin",
+  "lem-pur-integral-operations-preserve-constructible",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-pur-rhom-global-sections",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-sf-ringed-finite-free-hom-base-change",
+  "lem-weil-integral-scalar-extension-constructible",
+  "lem-pur-integral-operations-scalar-extension",
+  "def-weil-finite-torsion-constructibility"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemmas 3.4.11, 6.7.12–6.7.13; the residue-to-uniform-bound argument and evaluation/tower normalizations are expanded here from existing DAG statements."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -54,10 +205,66 @@
    "results": "{\"t\": \"2026-10-18T10:40:13Z\", \"tool\": \"grep\", \"query\": \"RHom|internalHom|internal.hom\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Over.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean\", \"Mathlib/AlgebraicGeometry/Pullbacks.lean\", \"Mathlib/AlgebraicGeometry/Pullbacks.lean\", \"Mathlib/AlgebraicGeometry/Pullbacks.lean\", \"Mathlib/AlgebraicGeometry/Pullbacks.lean\"], \"digest\": \"eb7464b2157c7896\"}",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*[hH]om|internal.*[hH]om",
+   "results": "{\"t\": \"2026-10-18T10:58:59Z\", \"tool\": \"grep\", \"query\": \"derived.*[hH]om|internal.*[hH]om\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} Hits concern topological constructible subsets, ordinary sheaf Hom or scheme morphisms, not finite-coefficient constructible derived internal Hom; zero hits where recorded.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Constructible adic complexes form a closed symmetric monoidal category",
+   "results": "{\"t\": \"2026-10-18T10:59:00Z\", \"tool\": \"leansearch\", \"query\": \"Constructible adic complexes form a closed symmetric monoidal category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instMonoidalClosedLightCondSet\", \"ModuleCat.MonoidalCategory.symmetricCategory\", \"CategoryTheory.MonoidalClosed.ctorIdx\", \"CategoryTheory.symmetricOfHasFiniteProducts\", \"CategoryTheory.binaryProductExponentiable\", \"CategoryTheory.MonoidalClosed\", \"CategoryTheory.Monoidal.Reflective.monoidalClosed\", \"LightCondensed.instSymmetricCategoryLightCondMod\"], \"digest\": \"6cb3dd481374cc98\"} The reflective-category and light-condensed-module results are categorical tools; none gives constructibility or the completed pro-etale operations. Read Mathlib/CategoryTheory/Monoidal/Braided/Reflection.lean and Mathlib/Condensed/Light/Monoidal.lean.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite type scheme over any field derived Hom preserves bounded constructible complexes with finite Tor amplitude over finite coefficients",
+   "results": "{\"t\": \"2026-10-18T10:59:01Z\", \"tool\": \"leanfinder\", \"query\": \"For a finite type scheme over any field derived Hom preserves bounded constructible complexes with finite Tor amplitude over finite coefficients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsFinite.instIsStableUnderCompositionScheme\", \"AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.IsFinite.instIsMultiplicativeScheme\", \"AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyOfFiniteType\", \"AlgebraicGeometry.IsFinite\", \"AlgebraicGeometry.instIsMultiplicativeSchemeLocallyOfFiniteType\", \"AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop\", \"AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyQuasiFinite\"], \"digest\": \"68ed0e3de0b29a10\"} Hits concern topological constructible subsets, ordinary sheaf Hom or scheme morphisms, not finite-coefficient constructible derived internal Hom; zero hits where recorded.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived internal Hom of bounded constructible adic sheaves is constructible and completed tensor Hom adjunction holds",
+   "results": "{\"t\": \"2026-10-18T10:59:03Z\", \"tool\": \"leanfinder\", \"query\": \"Derived internal Hom of bounded constructible adic sheaves is constructible and completed tensor Hom adjunction holds\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat\", \"LightCondensed.instMonoidalClosedLightCondMod\", \"LightCondensed.ihomPoints\", \"LightCondensed.ihomPoints_apply\", \"LightCondensed.ihomPoints_symm_comp\", \"LightCondensed.free_internallyProjective_iff_tensor_condition\", \"LightCondensed.free_internallyProjective_iff_tensor_condition'\", \"instMonoidalClosedCondensedSet\"], \"digest\": \"fd850ebd104153df\"} Hits concern topological constructible subsets, ordinary sheaf Hom or scheme morphisms, not finite-coefficient constructible derived internal Hom; zero hits where recorded.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible|finiteTor|TorAmplitude",
+   "results": "{\"t\": \"2026-10-18T10:59:12Z\", \"tool\": \"grep\", \"query\": \"constructible|finiteTor|TorAmplitude\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} Hits concern topological constructible subsets, ordinary sheaf Hom or scheme morphisms, not finite-coefficient constructible derived internal Hom; zero hits where recorded.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"TorAmplitude\"",
+   "results": "{\"t\": \"2026-10-18T10:59:12Z\", \"tool\": \"loogle\", \"query\": \"\\\"TorAmplitude\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} Hits concern topological constructible subsets, ordinary sheaf Hom or scheme morphisms, not finite-coefficient constructible derived internal Hom; zero hits where recorded.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived internal Hom of bounded constructible finite ring sheaves with finite Tor amplitude on schemes",
+   "results": "{\"t\": \"2026-10-18T10:59:13Z\", \"tool\": \"leansearch\", \"query\": \"Derived internal Hom of bounded constructible finite ring sheaves with finite Tor amplitude on schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.sheafHom'\", \"AlgebraicGeometry.Scheme.Modules.Hom\", \"CategoryTheory.sheafHom\", \"SheafOfModules.Hom\", \"SheafOfModules.Finite.hasFiniteLimits\", \"SheafOfModules.hasLimit\", \"SheafOfModules.Hom.recOn\", \"SheafOfModules.instAddCommGroupHom\"], \"digest\": \"a6f17c859e2aec2f\"} Hits concern topological constructible subsets, ordinary sheaf Hom or scheme morphisms, not finite-coefficient constructible derived internal Hom; zero hits where recorded.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On schemes finite type over a field internal sheaf Hom of two constructible perfect on strata finite coefficient complexes has bounded constructible cohomology",
+   "results": "{\"t\": \"2026-10-18T10:59:13Z\", \"tool\": \"leanfinder\", \"query\": \"On schemes finite type over a field internal sheaf Hom of two constructible perfect on strata finite coefficient complexes has bounded constructible cohomology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.isConstructible_image\", \"AlgebraicGeometry.Scheme.Hom.finiteType_appLE\", \"AlgebraicGeometry.LocallyOfFiniteType\", \"AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image\", \"AlgebraicGeometry.Scheme.Hom.finite_app\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop\", \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\"], \"digest\": \"b73510caac7406aa\"} Hits concern topological constructible subsets, ordinary sheaf Hom or scheme morphisms, not finite-coefficient constructible derived internal Hom; zero hits where recorded.",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-qbar-arbitrary-field-duality",
@@ -76,5 +283,114 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-per-adic-closed-constructible",
+  "worker": "stage1",
+  "summary": "Proved internal-Hom constructibility from residue-coefficient finiteness, completeness, and an explicit uniform reduction-bound induction; identified the strict-tower tensor with completion of ordinary tensor; restricted the ambient adjunction; verified monoidal constraints and evaluation-normalized scalar comparison with identity/tower compatibility. One new finite-coefficient finite-Tor lemma over arbitrary fields is left statement-only; all other tools are reused. Statement unchanged.",
+  "blueprint": "Realizes the closed tensor/internal-Hom input in Step 3 (Verdier exchange/biduality for the lower perverse bound) of lem-per-artin-gabber-affine-curve, through lem-per-qbar-arbitrary-field-duality; no change to the curve-perverse unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-l-adic-extension-integers-dvr",
+    "why": "Generic The valuation ring of a finite extension of $\\mathbf Q_\\ell$ is a discrete valuation ring with finite residue field input for the completed-coefficient reduction, tensor-Hom, or finite-free scalar argument; the curve-perverse unit does not supply this ringed-site/coefficient tool."
+   },
+   {
+    "node": "lem-weil-pbc-constant-completion-equivalence",
+    "why": "Generic Constant-to-completed coefficients on derived-complete categories input for the completed-coefficient reduction, tensor-Hom, or finite-free scalar argument; the curve-perverse unit does not supply this ringed-site/coefficient tool."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic A scheme of finite type over a Noetherian scheme is Noetherian (Stacks 01T6) input for the completed-coefficient reduction, tensor-Hom, or finite-free scalar argument; the curve-perverse unit does not supply this ringed-site/coefficient tool."
+   },
+   {
+    "node": "lem-kun-dimension-finite-type",
+    "why": "Generic Finiteness of the dimension of a finite type scheme input for the completed-coefficient reduction, tensor-Hom, or finite-free scalar argument; the curve-perverse unit does not supply this ringed-site/coefficient tool."
+   },
+   {
+    "node": "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "why": "Generic Stratified perfect description of the integral completed category input for the completed-coefficient reduction, tensor-Hom, or finite-free scalar argument; the curve-perverse unit does not supply this ringed-site/coefficient tool."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-koszul-completion-reflector",
+    "why": "Generic Ringed koszul reflector input for the completed-coefficient reduction, tensor-Hom, or finite-free scalar argument; the curve-perverse unit does not supply this ringed-site/coefficient tool."
+   },
+   {
+    "node": "lem-coef-integral-hom-reduction",
+    "why": "Generic Integral internal Hom and reduction input for the completed-coefficient reduction, tensor-Hom, or finite-free scalar argument; the curve-perverse unit does not supply this ringed-site/coefficient tool."
+   },
+   {
+    "node": "lem-sf-derived-ses-triangle",
+    "why": "Generic A short exact sequence gives a distinguished triangle in the derived category input for the completed-coefficient reduction, tensor-Hom, or finite-free scalar argument; the curve-perverse unit does not supply this ringed-site/coefficient tool."
+   },
+   {
+    "node": "lem-sf-derived-homology-long-exact",
+    "why": "Generic Long exact cohomology sequence of a distinguished triangle in the derived category input for the completed-coefficient reduction, tensor-Hom, or finite-free scalar argument; the curve-perverse unit does not supply this ringed-site/coefficient tool."
+   },
+   {
+    "node": "lem-sfb-discrete-noetherian-constructible-serre",
+    "why": "Generic Constructible sheaves over a discrete Noetherian ring form a weak Serre subcategory input for the completed-coefficient reduction, tensor-Hom, or finite-free scalar argument; the curve-perverse unit does not supply this ringed-site/coefficient tool."
+   },
+   {
+    "node": "lem-weil-pbc-finite-ring-constructible-derived-origin",
+    "why": "Generic Constructible derived comparison for arbitrary finite rings input for the completed-coefficient reduction, tensor-Hom, or finite-free scalar argument; the curve-perverse unit does not supply this ringed-site/coefficient tool."
+   },
+   {
+    "node": "lem-pur-integral-operations-preserve-constructible",
+    "why": "Generic Integral pullback and completed tensor product preserve constructibility input for the completed-coefficient reduction, tensor-Hom, or finite-free scalar argument; the curve-perverse unit does not supply this ringed-site/coefficient tool."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "why": "Generic Derived internal Hom calculus on small ringed sites input for the completed-coefficient reduction, tensor-Hom, or finite-free scalar argument; the curve-perverse unit does not supply this ringed-site/coefficient tool."
+   },
+   {
+    "node": "lem-pur-rhom-global-sections",
+    "why": "Generic Global sections of the derived internal Hom input for the completed-coefficient reduction, tensor-Hom, or finite-free scalar argument; the curve-perverse unit does not supply this ringed-site/coefficient tool."
+   },
+   {
+    "node": "lem-weil-finite-free-completed-scalar-comparison",
+    "why": "Generic Finite free completed coefficient extension is ordinary derived scalar extension input for the completed-coefficient reduction, tensor-Hom, or finite-free scalar argument; the curve-perverse unit does not supply this ringed-site/coefficient tool."
+   },
+   {
+    "node": "lem-sf-ringed-finite-free-hom-base-change",
+    "why": "Generic Evaluation comparison for a finite free change of ring sheaves input for the completed-coefficient reduction, tensor-Hom, or finite-free scalar argument; the curve-perverse unit does not supply this ringed-site/coefficient tool."
+   },
+   {
+    "node": "lem-weil-integral-scalar-extension-constructible",
+    "why": "Generic Integral scalar extension preserves bounded constructible integral complexes input for the completed-coefficient reduction, tensor-Hom, or finite-free scalar argument; the curve-perverse unit does not supply this ringed-site/coefficient tool."
+   },
+   {
+    "node": "lem-pur-integral-operations-scalar-extension",
+    "why": "Generic Integral derived operations commute with finite scalar extension input for the completed-coefficient reduction, tensor-Hom, or finite-free scalar argument; the curve-perverse unit does not supply this ringed-site/coefficient tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-kun-dimension-finite-type",
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "lem-weil-pbc-ringed-koszul-completion-reflector",
+  "lem-coef-integral-hom-reduction",
+  "lem-sf-derived-ses-triangle",
+  "lem-sf-derived-homology-long-exact",
+  "lem-sfb-discrete-noetherian-constructible-serre",
+  "lem-weil-pbc-finite-ring-constructible-derived-origin",
+  "lem-pur-integral-operations-preserve-constructible",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-pur-rhom-global-sections",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-sf-ringed-finite-free-hom-base-change",
+  "lem-weil-integral-scalar-extension-constructible",
+  "lem-pur-integral-operations-scalar-extension"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-NY-4b959f2e8",
+  "group": "NY",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NY-4b959f2e8 (reviewer sub-agent of L); spot-checked: I read the item, the new node, every cited statement, the full proof of lem-pur-integral-operations-scalar-extension, the unit record and the parent node. Source check: local Bhatt–Scholze §6.3, Def. 6.5.1, Lemmas 6.5.3–6.5.5, the §6.7 standing assumption (complete Noetherian local R with residue characteristic ℓ) and Lemmas 6.7.11–6.7.13. The item statement is unchanged and true for any field. The coefficient ring is the completed sheaf \\widehat R_T, identified with BS D_cons through lem-weil-pbc-integral-stratified-perfect-characterization. No SGA source is used. Steps 1–4 and 6–9 check out. Step 4 applies the new node at n=1 over the residue field; Step 5 keeps one interval for every n through the long exact sequence; Step 7 uses the Day-reflection condition C(CA⊗D)≅C(A⊗D); Steps 8–9 use the finite-free comparison and evaluation-transposed Hom base change. One fault (E6/C4), repaired: Step 5 used lem-sfb-discrete-noetherian-constructible-serre, whose constructibility is affine-local, but def-weil-finite-torsion-constructibility and the derived-origin lemma need a global partition. The fixed Step 5 writes out why the two agree on the Noetherian T (restrict to affines; refine a finite affine cover with Z_{i,a} minus the earlier opens; over the finite ring, finite and finitely presented modules coincide) and cites the definition, also added to proof_deps. The step is now 1846 characters. New node lem-per-finite-tor-internal-hom-any-field: statement-only, true by BS 6.7.13 with R=O_E/ϖ^n (constructible with finite Tor amplitude means perfect on strata; finite type over a field is quasi-excellent). Small cases tested: X empty, n=1, k=Q, and Z/ℓ over Z/ℓ² (unbounded, correctly excluded by the finite-Tor hypothesis). Not a duplicate: the existing nodes assume characteristic p>0, k=\\bar F_q or k separably closed; lem-per-finite-residue-dualizing, missing from the report, gives only H(−,Ω). Not a restatement of the item; all search kinds are recorded. Accepted the declared generic tool_uses. Advisory: the item names 'the tensor comparison of lem-pur-integral-operations-scalar-extension', but that lemma's statement does not pin a formula. Step 8 uses the canonical pure-tensor map that the lemma's proof constructs. The ambiguity comes from the unchanged item statement; the maintainer should pin the formula in that lemma's statement.; 1 file(s) fixed by the reviewer"
  }
 }
