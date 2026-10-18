@@ -21,79 +21,225 @@
  ],
  "proof": [
   {
-   "text": "Construct the open restrictions and the square comparison from the chosen Cartesian square. The sectionwise module restriction and direct image are the displayed ringed-site functors. The exact extension witnesses and their derived adjunctions are obtained by localization of the open-site adjunction. The unit, full faithfulness, and ordinary restriction equations are the resulting unit and triangle identities, with the section over an object factoring through the open unchanged.",
+   "text": "Identify $U_{\\mathrm{proet}}$ with $X_{\\mathrm{proet}}/U$ by [lem-weil-proetale-weakly-etale-localization]. Its clause (4) says every object has at most one map to $U$. Thus the restriction of the presheaf $P_F$ of [def-weil-extension-by-zero-presheaf] is $F$, with its original scalar action and restrictions: on an object $V\\to U$ the direct sum has exactly that one summand. The statement of [lem-pur-site-restriction-module-adjunction-exact] does not specify its Hom bijection, so we fix it as in Stacks 03DI. By [def-weil-extension-by-zero-presheaf], a map of presheaves of modules $P_F\\to G$ is a family of $B_X(V)$-linear maps $F(V\\to U)\\to G(V)$ over the objects with an arrow to $U$, compatible with restriction (elsewhere $P_F(V)=0$); this is exactly a map $F\\to j^*G$. With the universal property of module sheafification [def-weil-presheaf-modules-sheafification] this gives $\\operatorname{Hom}(j_!F,G)\\cong\\operatorname{Hom}(F,j^*G)$, natural in $F,G$; we use this adjunction throughout. Its unit $u_F$ is the identity $F=P_F|_U$ followed by the restricted sheafification unit. Restriction commutes with abelian sheafification, including its unit, by [lem-cbc-sieve-slice-sheafification], and module sheafification has this underlying abelian sheafification [def-weil-presheaf-modules-sheafification]. As $F$ is a sheaf, $u_F:F\\to j^*j_!F$ is an isomorphism, sending a section to that same section in the unique summand. The argument applies to $j'$ as well. This argument uses only a subterminal site object, not any property of a constant coefficient ring.",
    "uses": [
-    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-weil-proetale-weakly-etale-localization",
     "def-weil-extension-by-zero-presheaf",
-    "lem-cbc-sieve-slice-sheafification"
+    "lem-cbc-sieve-slice-sheafification",
+    "def-weil-presheaf-modules-sheafification",
+    "lem-pur-site-restriction-module-adjunction-exact"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tags 03DI, 03DJ and 0F6Z"
+    "place": "Tags 03DI (lemma-extension-by-zero), 03DJ (lemma-extension-by-zero-exact), 0F6Z (lemma-restrict-back), and 03CY (lemma-sheafification-presheaf-modules)."
    }
   },
   {
-   "text": "Resolve by flat-term K-flat complexes. The canonical tensor comparison is the signed total-complex comparison on pure sections, and restriction sends each pure section to the same two sections. Descent through the localization gives gamma and its adjunct formula; the two tensor comparison squares are the representative equations.",
+   "text": "The exact additive functors $j_!,j^*$ of [lem-pur-site-restriction-module-adjunction-exact] descend termwise to unbounded derived categories by [lem-sf-exact-functor-derived-triangulated]. Their units and counits descend too: naturality with respect to a quasi-isomorphism implies naturality with respect to its inverse, so it holds for all localized morphisms; their triangle identities remain equalities. This gives the derived adjunction, with the invertible unit of Step 1. For $M_1,M_2$, its Hom bijection followed by $u_{M_2}^{-1}$ gives $\\operatorname{Hom}(j_!M_1,j_!M_2)\\cong\\operatorname{Hom}(M_1,M_2)$; by naturality this is inverse to the map induced by $j_!$. Hence $j_!$ is fully faithful. The identical calculation gives full faithfulness of $j'_!$.",
+   "uses": [
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-sf-exact-functor-derived-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F (lemma-right-derived-exact-functor); localization of the termwise unit and counit is the argument written here."
+   }
+  },
+  {
+   "text": "Restriction preserves the underived tensor with its section normalization. Indeed [def-pur-sheaf-tensor-product] defines the tensor as sheafification of the sectionwise tensor. Over $V\\to U$, the ring is the same ring $B_X(V)$, and the two restricted presheaves both have value $A(V)\\otimes_{B_X(V)}C(V)$. Apply [lem-cbc-sieve-slice-sheafification] and [def-weil-presheaf-modules-sheafification] to identify their sheafifications. This gives $j^*(A\\otimes C)\\cong j^*A\\otimes j^*C$, carrying every local simple tensor $x\\otimes y$ to $x\\otimes y$, naturally in both variables.",
    "uses": [
     "def-pur-sheaf-tensor-product",
+    "lem-cbc-sieve-slice-sheafification",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Section 03EK (section-tensor-product) and Tag 03CY; slice sheafification compatibility as stated by the cited Mathlib leaf."
+   }
+  },
+  {
+   "text": "For module sheaves define $a_{G,F}:j_!(G\\otimes j^*F)\\to j_!G\\otimes F$ to be the $j_!\\dashv j^*$ transpose of $u_G\\otimes1$, using Step 3. In particular $j^*a_{G,F}\\circ u_{G\\otimes j^*F}=u_G\\otimes1$. The adjunction of [lem-pur-site-restriction-module-adjunction-exact] makes this construction natural in both variables. Its invertibility follows from the isomorphism $\\phi:j_!(G\\otimes j^*F)\\cong j_!G\\otimes F$ furnished by [lem-weil-pbc-ringed-slice-extension-tensor], without assuming that node specifies $\\phi$ on sections. Put $D=G\\otimes j^*F$. The sheaf-level Hom calculation of Step 2 writes $\\phi^{-1}a=j_!e$ for a unique endomorphism $e$ of $D$. Naturality of $u$ gives $u_D e=j^*(\\phi^{-1})(u_G\\otimes1)$, an isomorphism by Steps 1 and 3. Thus $e$ and $a$ are invertible. On restricting to the open, $a$ is precisely the identity under the unit identifications.",
+   "uses": [
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-weil-pbc-ringed-slice-extension-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 0E8I (lemma-j-shriek-and-tensor); the specified transpose is identified with an isomorphism by the explicit full-faithfulness argument."
+   }
+  },
+  {
+   "text": "Apply $a$ in every bidegree of two complexes $P,Q$. As a left adjoint $j_!$ commutes with direct sums [lem-weil-pbc-left-adjoint-preserves-colimits]. Naturality of $a$ separately for $d_P$ and $d_Q$ makes the resulting direct-sum isomorphism commute with $d_P\\otimes1+(-1)^p1\\otimes d_Q$, the differential of [def-pc-tensor-complex-sheaves]. It therefore gives a chain isomorphism $j_!\\operatorname{Tot}(P\\otimes j^*Q)\\cong\\operatorname{Tot}(j_!P\\otimes Q)$. If $P$ is K-flat and $E$ is acyclic, the same isomorphism with $Q=E$ identifies $(j_!P)\\otimes E$ with $j_!(P\\otimes j^*E)$. Exactness of both open functors [lem-pur-site-restriction-module-adjunction-exact] and the definition [def-pc-kflat-complex] show it is acyclic (interchanging the two tensor factors uses $x\\otimes y\\mapsto(-1)^{pq}y\\otimes x$). Thus $j_!P$ is K-flat. If $P^p$ is flat, then $F\\mapsto j_!P^p\\otimes F\\cong j_!(P^p\\otimes j^*F)$ is a composite of exact functors, so $j_!P^p$ is flat by [def-pc-flat-sheaf-modules]. These calculations also apply to $j'_!$.",
+   "uses": [
+    "lem-weil-pbc-left-adjoint-preserves-colimits",
     "def-pc-tensor-complex-sheaves",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "def-pc-kflat-complex",
+    "def-pc-flat-sheaf-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0GL1 (lemma-j-shriek-and-tensor), expanding its omitted totalization and K-flat details; sites-modules.tex Tag 0E8I."
+   }
+  },
+  {
+   "text": "Choose flat-term K-flat resolutions $P\\to M$, $Q\\to N$ by [lem-pc-kflat-resolution]. Step 5 shows $j_!P$ has these same properties; restriction of $Q$ does too by [lem-weil-pbc-ringed-pullback-preserves-kflat]. Hence the two sides of the chain isomorphism in Step 5 compute the two derived tensors in the statement. The resolving-class localization and natural tensor comparisons of [lem-weil-pbc-site-derived-tensor-descent] descend this isomorphism, natural in both resolution variables, to $\\gamma^{-1}$. The adjoint of the chain map is $u_P\\otimes1$, so its descended adjoint is $u_M\\otimes1$. The canonical derived restriction/tensor identification is that of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback], since on these models both comparisons are the sectionwise map of Step 3. Consequently $j^*\\gamma^{-1}\\circ u_{M\\otimes^Lj^*N}=u_M\\otimes1$ under that comparison. Inverting this equation gives the asserted identity restriction of $\\gamma$.",
+   "uses": [
     "lem-pc-kflat-resolution",
+    "lem-weil-pbc-ringed-pullback-preserves-kflat",
     "lem-weil-pbc-site-derived-tensor-descent",
     "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0GL1 and sites-modules.tex Tag 0E8I"
+    "place": "Tags 06YS (lemma-K-flat-resolution), 0G7E (lemma-pullback-K-flat), 06YU (definition-derived-tor), 07A4 (lemma-pullback-tensor-product), and 0GL1."
    }
   },
   {
-   "text": "The fibre-product projections identify the two ordinary direct-image routes on every section. Their adjunction mate is the ordinary base-change comparison; descent on the same K-flat representatives gives beta and the canonical pullback-composition comparison theta. The mate equation gives beta inverse and the beta restriction identity, and the tensor adjunct gives gamma inverse and its restriction identity.",
+   "text": "For base change first work with module sheaves. The site functor for $g$ is $V\\mapsto X'\\times_XV$ [def-weil-proetale-inverse-image]. Under [lem-weil-proetale-weakly-etale-localization] its localization at $U$ is the site functor for $g_U$, since $V\\times_UU'\\cong V\\times_XX'$ fixes both projections and commutes with all arrows $V\\to W$ over $U$. The structural ring map is exactly the restricted one assumed in the statement. Therefore [lem-weil-pbc-localize-ringed-site-morphism] supplies $t:j^*g_*\\cong g_{U*}j'^*$ and $s:g_U^*j^*\\cong j'^*g^*$. At $V\\to U$, $t$ identifies sections on the same fibre product with the same scalar action. The comparison $s$ sends a local pullback tensor $b\\otimes x$ to that same tensor after restricting the site object and ring map.",
    "uses": [
     "def-weil-proetale-inverse-image",
-    "lem-weil-pbc-localize-ringed-site-morphism",
-    "lem-weil-pbc-ringed-topoi-module-adjunction",
-    "lem-weil-pbc-ringed-topoi-derived-pullback"
+    "lem-weil-proetale-weakly-etale-localization",
+    "lem-weil-pbc-localize-ringed-site-morphism"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tags 04J0 and 03D7"
+    "place": "Tag 04J0 (lemma-localize-morphism-ringed-sites), together with sites.tex Tag 03CF (lemma-localize-morphism)."
    }
   },
   {
-   "text": "On the vertical product site the same sectionwise constructions preserve every coefficient transition, including nonflat transitions, because all maps are induced by restriction, pullback, tensor and their adjunction mates. Thus the ordinary derived category of the diagram-site modules satisfies the same assertion. For the canonical constant finite ring map, the published finite base-change and projection arrows are the corresponding mates, so their equations are the finite compatibility clauses.",
+   "text": "Compose the module adjunctions [lem-weil-pbc-ringed-topoi-module-adjunction] with the open adjunctions [lem-pur-site-restriction-module-adjunction-exact]. By [def-weil-pbc-composite-adjunction] they give $L_1=g^*j_!\\dashv R_1=j^*g_*$ and $L_2=j'_!g_U^*\\dashv R_2=g_{U*}j'^*$. The isomorphism $t:R_1\\cong R_2$ conjugates, by [lem-weil-pbc-conjugate-iso-unit-equation] with its adjunction indices exchanged, to an isomorphism $c:L_2\\to L_1$. To fix its normalization, transpose $1_{L_1F}$ successively along $L_1\\dashv R_1$, then $t$, then $L_2\\dashv R_2$. The first transpose is $j^*\\eta^g_{j_!F}\\circ u_F$; after $t$ its $g_U^*\\dashv g_{U*}$ transpose sends a local generator $b\\otimes x$ to $b\\otimes u_F(x)$ on the identical base-changed object of Step 7. This is $s_{j_!F}\\circ g_U^*u_F$. Such local generators generate the sheafified pullback tensor, so the two maps agree. The final open transpose consequently satisfies $j'^*c_F\\circ u'_{g_U^*F}=s_{j_!F}\\circ g_U^*u_F$. This proves invertibility independently of restricting $c$, and identifies its exact adjunct.",
    "uses": [
-    "lem-weil-pbc-diagram-site-realization",
-    "lem-cbc-proetale-extension-zero-base-change",
-    "lem-cbc-extension-zero-projection-formula",
-    "prop-weil-pbc-proetale-constant-exact",
-    "prop-weil-pbc-proetale-constant-ring-map"
+    "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "def-weil-pbc-composite-adjunction",
+    "lem-weil-pbc-conjugate-iso-unit-equation",
+    "def-weil-proetale-inverse-image"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
-    "place": "Open-factor and coefficient-comparison paragraphs"
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tags 0DV0 (lemma-compose-counits) and 0B65 (lemma-transformation-between-functors-and-adjoints); section calculation from sites-modules.tex Tag 04J0."
+   }
+  },
+  {
+   "text": "Take $P\\to M$ as in Step 6. By Step 5, $j_!P$ is flat-term K-flat, and [lem-weil-pbc-ringed-pullback-preserves-kflat] applies to $g,g_U,j,j'$, without flatness of any structural ring map. Thus $c_P$ computes an isomorphism $\\beta^{-1}:j'_!Lg_U^*M\\to Lg^*j_!M$, by the K-flat model comparisons of [lem-weil-pbc-ringed-topoi-derived-pullback] and the resolving-class localization in [lem-weil-pbc-site-derived-tensor-descent]. Likewise $s^{-1}$ on the same models is the canonical pullback-composition isomorphism $\\theta:j'^*Lg^*\\cong Lg_U^*j^*$. The equation of Step 8 becomes $j'^*\\beta_M^{-1}\\circ u'_{Lg_U^*M}=\\theta^{-1}_{j_!M}\\circ Lg_U^*u_M$. This is the stated adjunct formula. Both units and $\\theta$ are invertible, so after their identifications $j'^*\\beta^{-1}$, and therefore $j'^*\\beta$, are the identity. Naturality follows from the naturality of $c,s$ and the model comparisons.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-ringed-pullback-preserves-kflat",
+    "lem-weil-pbc-ringed-topoi-derived-pullback",
+    "lem-weil-pbc-site-derived-tensor-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YY (lemma-derived-base-change), 0G7E (lemma-pullback-K-flat), and 06YS; derived localization applied to the underived mate just constructed."
+   }
+  },
+  {
+   "text": "For constant finite $A$ use [prop-weil-pbc-proetale-constant-ring-map] and [prop-weil-pbc-proetale-constant-exact]: with the canonical constant-section structural map, module pullback is exact inverse image. The canonical arrow in [lem-cbc-proetale-extension-zero-base-change] is the isomorphism of left adjoints induced by the sectionwise equality $j^*g_*=g_{U*}j'^*$; this is the same $t$ as Step 7. Uniqueness in [lem-weil-pbc-conjugate-iso-unit-equation] identifies it with $\\beta$, in the stated forward direction. The canonical projection arrow in [lem-cbc-extension-zero-projection-formula] is the inverse of the open-adjunction projection map: its inverse is the transpose of $u_M\\otimes1$ using restriction/tensor. Step 6 has exactly this transpose, so injectivity of the adjunction bijection identifies it with $\\gamma^{-1}$, and the forward arrows agree. This uses the source's definition of its canonical arrows, not its proof of an additional theorem. In particular no arbitrary automorphism of the finite ring is identified with the fixed-scalar inverse image.",
+   "uses": [
+    "prop-weil-pbc-proetale-constant-ring-map",
+    "prop-weil-pbc-proetale-constant-exact",
+    "lem-cbc-proetale-extension-zero-base-change",
+    "lem-weil-pbc-conjugate-iso-unit-equation",
+    "lem-cbc-extension-zero-projection-formula"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-cbc-proetale-extension-zero-base-change.md",
+    "place": "Canonical comparison of the two right adjoints; lem-cbc-extension-zero-projection-formula.md, canonical projection arrow. Its inverse orientation is explicit in WeilConjectures/SixFunctors/ProEtale/Derived/OpenImmersionLowerShriekProjection.lean:175-214."
+   }
+  },
+  {
+   "text": "Now take the vertical diagram site $\\mathcal D_T=\\mathbf N\\times T_{\\mathrm{proet}}$ with the topology of [lem-weil-pbc-diagram-site-realization]. Its underlying sheaves are inverse diagrams, by that node with $J=\\mathbf N^{\\mathrm{op}}$. For an arbitrary ring sheaf $B$ on $\\mathcal D_T$, unpacking its action shows a $B$-module is a collection of $B_n$-modules with semilinear transitions: the action naturality equation is exactly $\\tau(bx)=\\tau(b)\\tau(x)$. Module sheafification is levelwise abelian sheafification with the extending action [def-weil-presheaf-modules-sheafification]: sheafify each vertical presheaf, extend each horizontal restriction uniquely to its sheafification, and uniqueness preserves their composition and module laws. Hence the tensor of [def-pur-sheaf-tensor-product] evaluates to the ordinary $B_n$-tensor. Let $H(n,V)$ be the singleton when $V\\to T$ factors through $U$ and the empty set otherwise. It is subterminal by the open-monomorphism clause of [lem-weil-proetale-weakly-etale-localization], and is a sheaf by [lem-weil-pbc-proetale-subcanonical]: at every level it is the representable sheaf of the open object $U$. The element site $\\mathcal D_T/H$ of [lem-weil-pbc-ringed-sheaf-slice-adjunction] is exactly $\\mathbf N\\times(T_{\\mathrm{proet}}/U)$, identified with $\\mathcal D_U$ by [lem-weil-proetale-weakly-etale-localization]. The cited slice adjunction is exact, and its direct-sum presheaf formula evaluates to the ordinary open extension at every level. It therefore is termwise $j_!$. As $H$ is subterminal, its Hom bijection is fixed exactly as in Step 1 (one summand, then module sheafification); levelwise it is the adjunction of Step 1, so units and counits are termwise. Step 1's unit calculation and Step 2's localization give the unit normalization and full faithfulness on the ordinary derived system categories.",
+   "uses": [
+    "lem-weil-pbc-diagram-site-realization",
+    "def-weil-presheaf-modules-sheafification",
+    "def-pur-sheaf-tensor-product",
+    "lem-weil-pbc-ringed-sheaf-slice-adjunction",
+    "lem-weil-proetale-weakly-etale-localization",
+    "lem-sf-exact-functor-derived-triangulated",
+    "lem-weil-pbc-proetale-subcanonical"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 0791 (lemma-localize-topos-site); sites-modules.tex Tags 04IE (lemma-localize-ringed-topos), 03CY and 03EK. The vertical-site unpacking is given explicitly here."
+   }
+  },
+  {
+   "text": "In these module-system categories define $a:j_!(G\\otimes j^*F)\\to j_!G\\otimes F$ by the open-unit transpose, just as in Step 4. Step 11 shows that its evaluation as a map of module sheaves is precisely $a_{G_n,F_n}$: the open functors, units, and tensor are those already identified levelwise. Thus it is an isomorphism of module sheaves, since all its component maps are isomorphisms by Step 4; their inverses commute with transitions by inverting the naturality squares. No derived evaluation claim is involved. Concretely its restricted tensor map sends $x\\otimes y$ to $x\\otimes y$, and applying a possibly nonflat coefficient transition gives $\\tau(x)\\otimes\\tau(y)$ in both orders. The direct-sum and signed-differential calculation of Step 5 now takes place on the entire ringed site $\\mathcal D_X$, using [lem-weil-pbc-left-adjoint-preserves-colimits] and [def-pc-tensor-complex-sheaves]. It proves that system $j_!$ preserves flat terms and K-flat complexes by exactly the acyclic-tensor test [def-pc-flat-sheaf-modules, def-pc-kflat-complex]. Choose resolutions on $\\mathcal D_U$ and $\\mathcal D_X$ themselves by [lem-pc-kflat-resolution]; restriction preserves these models by [lem-weil-pbc-ringed-pullback-preserves-kflat]. The localization comparison [lem-weil-pbc-site-derived-tensor-descent] gives system $\\gamma$ and its adjunct equation as in Step 6. We do not assume that an arbitrary levelwise resolution is a resolution suitable for the system tensor.",
+   "uses": [
+    "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "def-pc-tensor-complex-sheaves",
+    "def-pc-flat-sheaf-modules",
+    "def-pc-kflat-complex",
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-ringed-pullback-preserves-kflat",
+    "lem-weil-pbc-site-derived-tensor-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS, 0G7E, 06YU and 0GL1, applied to the single small ringed diagram site; underived componentwise construction from sites-modules.tex Tag 04IE."
+   }
+  },
+  {
+   "text": "On the diagram sites define $g^{-1}$ and $g_*$ levelwise by [def-weil-proetale-inverse-image], with transitions $g^{-1}(\\tau)$, $g_*(\\tau)$. Sheaves are inverse diagrams of sheaves [lem-weil-pbc-diagram-site-realization], with finite limits computed levelwise; the levelwise adjunctions are natural in the transitions, so they form an adjunction whose left adjoint preserves finite limits, a morphism of topoi. It is presented by $(n,V)\\mapsto(n,X'\\times_XV)$, so its direct image is evaluation on that object, so the restricted right-adjoint comparison $t:j^*g_*\\cong g_{U*}j'^*$ is again the identity on sections of $V\\times_UU'\\cong V\\times_XX'$, including the semilinear transition maps and the prescribed restricted scalar actions. Restriction of the sheaf pullback followed by scalar extension gives $s:g_U^*j^*\\cong j'^*g^*$: over the element site of Step 11 both constructions restrict the same inverse-image generators and send $b\\otimes x$ to the same tensor. The module adjunction [lem-weil-pbc-ringed-topoi-module-adjunction], the exact slice adjunction [lem-weil-pbc-ringed-sheaf-slice-adjunction], and the composite/conjugation statements [def-weil-pbc-composite-adjunction, lem-weil-pbc-conjugate-iso-unit-equation] give $c$ with the exact equation of Step 8 inside the system category. Step 12 provides K-flat preservation by system open extension. Apply [lem-weil-pbc-ringed-topoi-derived-pullback] and [lem-weil-pbc-ringed-pullback-preserves-kflat] on the whole diagram sites, with [lem-weil-pbc-site-derived-tensor-descent], to repeat Step 9. This constructs system $\\beta$, $\\theta$ and the equation $j'^*\\beta_M^{-1}u'=\\theta^{-1}Lg_U^*u_M$. Together with Step 12's system tensor-adjunct equation it proves both required restriction identities as equations in the derived system category itself, before evaluation. The structural maps need no flatness, and no completion or enhanced section category enters.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "lem-weil-pbc-ringed-sheaf-slice-adjunction",
+    "def-weil-pbc-composite-adjunction",
+    "lem-weil-pbc-conjugate-iso-unit-equation",
+    "lem-weil-pbc-ringed-topoi-derived-pullback",
+    "lem-weil-pbc-ringed-pullback-preserves-kflat",
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "def-weil-proetale-inverse-image",
+    "lem-weil-pbc-diagram-site-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 04IE and 03D7, with the sectionwise restriction calculation of 04J0; sites-cohomology.tex Tags 06YY and 0G7E, applied directly to ringed diagram sites."
    }
   }
  ],
  "proof_deps": [
+  "def-pc-flat-sheaf-modules",
+  "def-pc-kflat-complex",
   "def-pc-tensor-complex-sheaves",
   "def-pur-sheaf-tensor-product",
   "def-weil-extension-by-zero-presheaf",
+  "def-weil-pbc-composite-adjunction",
+  "def-weil-presheaf-modules-sheafification",
   "def-weil-proetale-inverse-image",
   "lem-cbc-extension-zero-projection-formula",
   "lem-cbc-proetale-extension-zero-base-change",
   "lem-cbc-sieve-slice-sheafification",
   "lem-pc-kflat-resolution",
   "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-weil-pbc-conjugate-iso-unit-equation",
   "lem-weil-pbc-diagram-site-realization",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
   "lem-weil-pbc-localize-ringed-site-morphism",
+  "lem-weil-pbc-proetale-subcanonical",
+  "lem-weil-pbc-ringed-pullback-preserves-kflat",
+  "lem-weil-pbc-ringed-sheaf-slice-adjunction",
+  "lem-weil-pbc-ringed-slice-extension-tensor",
   "lem-weil-pbc-ringed-topoi-derived-pullback",
   "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
   "lem-weil-pbc-ringed-topoi-module-adjunction",
   "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-weil-proetale-weakly-etale-localization",
   "prop-weil-pbc-proetale-constant-exact",
   "prop-weil-pbc-proetale-constant-ring-map"
  ],
@@ -158,10 +304,45 @@
    "results": "8 hits: ModuleCat.Tilde.res_apply, ModuleCat.Tilde.res_const, AlgebraicGeometry.Scheme.Modules.restrict, SheafOfModules.ιFree_mapFree_inv, ModuleCat.Tilde.toOpen_res, TopCat.Sheaf.objSupIsoProdEqLocus_inv_eq_iff, SheafOfModules.unitHomEquiv_symm_comp, SheafOfModules.ιFree_mapFree_inv_assoc",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "extensionByZero|extension_by_zero|jShriek|j_shriek|lowerShriek",
+   "results": "0 hits: ",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Open immersion derived module extension by zero projection formula base change identity on the open",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app, AlgebraicGeometry.isOpenImmersion_stableUnderBaseChange, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.isoRestrict_hom_ofRestrict_assoc, AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.toLocallyRingedSpaceHom, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor, AlgebraicGeometry.IsOpenImmersion, AlgebraicGeometry.SheafedSpace.IsOpenImmersion.isoRestrict_hom_ofRestrict_assoc, RingHom.IsStandardOpenImmersion.isStableUnderBaseChange",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.Sheaf",
+   "results": "12 hits: CategoryTheory.plusPlusAdjunction, CategoryTheory.sheafificationAdjunction, CategoryTheory.HasSheafify.mk', CategoryTheory.GrothendieckTopology.W_eq_inverseImage_isomorphisms_of_adjunction, CategoryTheory.GrothendieckTopology.W_iff_isIso_map_of_adjunction, CategoryTheory.GrothendieckTopology.W_adj_unit_app, CategoryTheory.sheafComposeNatIso, CategoryTheory.instIsIsoFunctorOppositeSheafSheafComposeNatTrans",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension by zero open immersion sheaves of modules commutes with unbounded derived tensor product and base change, with adjunction unit normalization",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app, SheafOfModules.map_ιFree_mapFree_hom_assoc, AlgebraicGeometry.Scheme.Modules.restrictAdjunction, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Ringed topos localization at an open subterminal sheaf has fully faithful exact extension by zero, commuting with derived tensor and inverse image for arbitrary strict inverse coefficient systems",
+   "results": "8 hits: CondensedMod.LocallyConstant.fullyFaithfulFunctor, LightCondMod.LocallyConstant.fullyFaithfulFunctor, AlgebraicGeometry.Scheme.AffineZariskiSite.PreservesLocalization, LightCondSet.LocallyConstant.functorFullyFaithful, AlgebraicGeometry.Scheme.Modules.instFullPushforward, AlgebraicGeometry.Scheme.preservesLocalization_toOpensFunctor, SheafOfModules.bijective_pushforwardSections, CategoryTheory.GrothendieckTopology.instIsLocalizationFunctorOppositeSheafPresheafToSheafW",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "fix-prop-coherence",
@@ -180,113 +361,11 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-17",
+  "date": "2026-10-18",
   "item": "lem-sf-open-tensor-normalization",
   "worker": "stage1",
-  "summary": "Five-step proof of the retained statement, repaired on second reading: subterminal open unit, explicit tensor/K-flat calculation, invertibility of base change by ringed-site right-adjoint comparison before deriving, canonical finite specialization, and coherent arbitrary strict-ring-system models. No new nodes.",
-  "blueprint": "Realizes the open-factor sentence in fix-prop-coherence.proof.md: the finite open projection/base-change maps are identified by restriction, and the same calculation is made in strict coefficient systems before realization.",
-  "tool_uses": [
-   {
-    "node": "def-pc-flat-sheaf-modules",
-    "why": "Generic definition or exact-localization tool used in the explicit open-site calculation."
-   },
-   {
-    "node": "def-pc-kflat-complex",
-    "why": "Generic definition or exact-localization tool used in the explicit open-site calculation."
-   },
-   {
-    "node": "def-pc-tensor-complex-sheaves",
-    "why": "Defines the signed total tensor differential checked in the chain-level comparison."
-   },
-   {
-    "node": "def-weil-extension-by-zero-presheaf",
-    "why": "Generic definition or exact-localization tool used in the explicit open-site calculation."
-   },
-   {
-    "node": "def-weil-pbc-composite-adjunction",
-    "why": "Defines the two composite adjunctions used in the underived comparison."
-   },
-   {
-    "node": "def-weil-proetale-inverse-image",
-    "why": "Generic definition or exact-localization tool used in the explicit open-site calculation."
-   },
-   {
-    "node": "lem-cbc-extension-zero-projection-formula",
-    "why": "Finite pro-etale specialization identifies the canonical tensor projection map required by the statement."
-   },
-   {
-    "node": "lem-cbc-proetale-extension-zero-base-change",
-    "why": "Finite pro-etale specialization identifies the canonical base-change mate required by the statement."
-   },
-   {
-    "node": "lem-coef-semilinear-derived-sections",
-    "why": "Supplies the normalized strict-system model, termwise extension by zero, and levelwise detection of equivalences."
-   },
-   {
-    "node": "lem-pc-kflat-resolution",
-    "why": "Existence of flat-term K-flat resolutions needed for unbounded derived tensor."
-   },
-   {
-    "node": "lem-pur-coefficient-system-derived-comparison",
-    "why": "Supplies evaluation-compatible derived operations and units/counits for strict coefficient systems."
-   },
-   {
-    "node": "lem-pur-site-restriction-module-adjunction-exact",
-    "why": "Generic exact localized-ringed-site extension/restriction adjunction and its unit; the six-functor package does not restate this construction."
-   },
-   {
-    "node": "lem-sf-exact-functor-derived-triangulated",
-    "why": "Generic definition or exact-localization tool used in the explicit open-site calculation."
-   },
-   {
-    "node": "lem-weil-pbc-conjugate-iso-unit-equation",
-    "why": "Generic adjunction uniqueness proves invertibility and identifies the canonical comparison."
-   },
-   {
-    "node": "lem-weil-pbc-left-adjoint-preserves-colimits",
-    "why": "Allows extension by zero to commute with the direct sums in totalization."
-   },
-   {
-    "node": "lem-weil-pbc-localize-ringed-site-morphism",
-    "why": "Generic ringed-site localization gives the actual invertible right-adjoint comparison for arbitrary coefficient ring maps."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-pullback-preserves-kflat",
-    "why": "Ensures restriction/pullback of the chosen K-flat resolution remains K-flat."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-slice-extension-tensor",
-    "why": "Generic underived tensor identity on a ringed localized site used to build the derived comparison."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-topoi-derived-pullback",
-    "why": "Generic K-flat model and natural comparison for arbitrary structural coefficient ring maps."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "why": "Generic pullback/tensor comparison supplies the canonical theta used in the base-change mate."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-topoi-module-adjunction",
-    "why": "Generic module pullback/direct-image adjunction needed before deriving the base-change comparison."
-   },
-   {
-    "node": "lem-weil-pbc-site-derived-tensor-descent",
-    "why": "Identifies total tensor on K-flat models with the derived tensor and extends naturality."
-   },
-   {
-    "node": "lem-weil-proetale-weakly-etale-localization",
-    "why": "Identifies the small pro-etale open sites with their slice sites and supplies the subterminal hypothesis."
-   },
-   {
-    "node": "prop-weil-pbc-proetale-constant-ring-map",
-    "why": "Identifies the finite constant coefficient specialization with exact inverse image, preserving its specified structural ring map."
-   },
-   {
-    "node": "prop-weil-pbc-proetale-constant-exact",
-    "why": "Identifies the finite constant coefficient specialization with exact inverse image, preserving its specified structural ring map."
-   }
-  ]
+  "summary": "Expanded the reopened four-step placeholder using the retained earlier proof where valid: explicit open unit, canonical underived tensor transpose and its invertibility, signed totalization and K-flat preservation, conjugation of the actual right-adjoint base-change comparison, finite canonical-map identification, and a direct argument on the ordinary ringed diagram site for arbitrary semilinear coefficient systems. Retained the corrected statement and its existing statement_change record. No new nodes.",
+  "blueprint": "The projection-diamond and coefficient-comparison sentences of fix-prop-coherence.proof.md: Steps 1-10 supply the normalized open projection/base-change factors; Steps 11-13 construct the corresponding maps and equations intrinsically in the ordinary ringed diagram category, without the rejected enhanced-section route."
  },
  "tool_uses": [
   "def-pc-flat-sheaf-modules",
@@ -316,12 +395,12 @@
   "prop-weil-pbc-proetale-constant-exact"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-18",
   "by": "L",
-  "reviewer": "NT-cc-Q36-e73a0ef93",
-  "group": "Q36",
+  "reviewer": "NT-cc-NA-1600dd67f",
+  "group": "NA",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q36-e73a0ef93 (reviewer sub-agent of L); spot-checked: I read the item, all 35 cited node statements, the proofs of the two finite pro-étale nodes, Stacks sites-modules 03DI (l.2058), 0F6Z (l.2338) and 0E8I (l.4051, a Yoneda proof), and the fix-prop-coherence blueprint sentence. The statement is true and retained. Small cases checked: U empty, U=X, g=id, the stalkwise check of γ, and a nonflat coefficient map (handled by the 0G7E node, which requires no flatness). The orientations of θ, β and γ match: the finite base-change node's map is the conjugate of t^{-1}, and the inverse of the projection-formula node's Yoneda map is the transpose of u⊗1. Step 3 proves invertibility before deriving, by conjugating the sectionwise comparison from 04J0 on ringed sites with an arbitrary ring map. Step 5 correctly uses lem-coef-semilinear-derived-sections for arbitrary strict ring systems and gets invertibility levelwise, and limits lem-pur-coefficient-system-derived-comparison to constant DVR towers. Every cited node is inside the route of sk-thm-sf-package, so no tool_uses are accepted. There is no cycle and no duplicate (lem-trf-open-tensor and lem-weil-pbc-extension-by-zero-unit-iso are special cases). No new nodes and no SGA citations. Two repairs, in fixes/dag/nodes/sec-six-functors/lem-sf-open-tensor-normalization.json (only proof and proof_deps changed). (1) C1/C4, Step 1: 'sheafifying this restriction changes nothing' had no node; it now cites the existing Mathlib leaf lem-cbc-sieve-slice-sheafification and def-weil-presheaf-modules-sheafification. (2) C3, Step 2: the step attributed a local formula to lem-weil-pbc-ringed-slice-extension-tensor, whose statement gives only some natural isomorphism, and its restriction/tensor comparison was uncited. a is now defined as the adjunct of u_G⊗1 and proved invertible from the bare isomorphism φ: φ^{-1}a=j_!e, and u∘e is invertible. The comparison is justified by def-pur-sheaf-tensor-product and the sieve-slice node.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NA-1600dd67f (reviewer sub-agent of L); spot-checked: I read the item in full: the statement, the statement_change record with its 48 citers, all 13 steps, and the statements of all 10 stmt_deps and 29 proof_deps. I also read the proofs of the four nodes whose 'canonical' maps the item has to pin down: the finite base-change node (beta is the conjugate of t^{-1}, with t=M(a_V)), the finite projection node (the adjoint of the unit/tensor projection), the 03DI adjunction node (Hom bijection built from summand injections) and the 07A4 tensor-pullback node (the comparison is defined on K-flat models). Stacks sources checked: 03DI, 0E8I (a Yoneda argument), 0GL1 ('details omitted') and 0D6D, plus the fix-prop-coherence blueprint sentence. Every proof_dep is on the route of sk-thm-sf-compatibility, so no tool_uses are needed and none are accepted. No new nodes, no cycle, no SGA source, and the statement is neither changed nor weakened. Small cases checked: U empty, U=X, g=id with the nonflat map Z->Z/2, a nonflat system transition Z/4->Z/2, the orientation of beta^{-1} and theta, and the F2xF2 swap counterexample. Repairs, made only in proof: (1) C3, Steps 1 and 11: the unit formula was read off the statements of the adjunction and slice-adjunction nodes, which never specify their Hom bijection. The steps now build the 03DI bijection explicitly (one summand, then module sheafification), and its unit is invertible because F is already a sheaf. (2) E5, Step 13: the diagram-site morphism of topoi was asserted, not built; N x T_proet has no final object. The step now defines g^{-1} and g_* levelwise, notes the levelwise adjunctions are natural in the transitions and that finite limits are levelwise, and adds lem-weil-pbc-diagram-site-realization to its uses. Noted but not counted against this delivery: theta has no ringed-site node, and Step 9 defines it concretely as s^{-1} on models; Step 6 applies the descent node to the two rings B_U and B_X, which its per-ring equivalence supports; the existing tool_uses field still lists two nodes the proof no longer cites, for the maintainer to prune.; 1 file(s) fixed by the reviewer"
  },
  "lean": {
   "module": "Sheaf.SixFunctors.OpenTensorNormalization",
