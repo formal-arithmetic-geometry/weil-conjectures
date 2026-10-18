@@ -2,7 +2,7 @@
  "id": "lem-weil-pbc-geometrically-normal-tensor-normal-domain-case",
  "kind": "statement",
  "title": "Geometrically normal tensor normal domains",
- "statement": "Let k be a field and A,B commutative k-algebras which are normal domains. If A is geometrically normal over k, then A tensor_k B is a normal ring.",
+ "statement": "Let k : Type u be a field [def-weil-field], and let A : Type v and B : Type w be commutative k-algebras which are normal domains [def-weil-pbc-normal-ring]. Assume geometric normality of A is tested on every field extension E/k [def-pc-field-extension] with E : Type (max u v w): each A tensor_k E is normal. Then A tensor_k B is normal. Tensor products are the commutative tensor-product algebras [def-weil-pbc-module-tensor-product]. The common test universe includes the fraction fields of both algebras and the lifted subalgebras used in the proof.",
  "source": {
   "document": "literature/stacks-project/algebra.tex",
   "place": "Tag 06DF, reduction to normal domains and finite-type tensor argument"
@@ -15,26 +15,94 @@
  ],
  "proof": [
   {
-   "text": "Use finite-type normal subalgebra extensions and the filtered tensor-product colimit to reduce B to finite type. The fraction field of A is separable by geometric reducedness; express it as a filtered colimit of smooth subalgebras. Smooth base change over the normal domain B is normal, and localization identifies the stages. The finite-type case then follows from the total-fraction-ring intersection argument and the reduced normal characterization.",
+   "text": "Lift A and B to the common universe, transporting along the ULift algebra equivalences at the end. For each finite-type k-subalgebra D of B, its integral closure N in Frac(D) is finite over D by Noether finiteness (the degree-one fraction-field extension). Embed Frac(D) in Frac(B). Elements of N are integral over B, so lie in B by integral closedness. The image is a normal finite-type subalgebra containing D. These images form a nonempty directed cover of B. The tensor-product universal property explicitly constructs the colimit cocone; normality of filtered colimits reduces to finite-type normal B.",
    "uses": [
-    "lem-weil-pbc-filtered-colimit-normal-ring",
+    "lem-weil-pbc-finite-type-field-integral-closure-finite",
+    "lem-weil-pbc-integral-closure-algebraic-extension-normal",
+    "lem-weil-pbc-localization-normal-domain",
+    "def-weil-pbc-finite-type-algebra",
+    "def-weil-pbc-category-colimit",
+    "lem-weil-pbc-filtered-colimit-normal-ring"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Put K=Frac(A) and L=Frac(B). Scalar extension commutes with localization, so K remains geometrically normal. A normal ring is reduced: its localizations at maximal ideals are domains, and reducedness is local. Thus all K tensor_k E are reduced. In positive characteristic use geometric reducedness to obtain separability; in characteristic zero use separable generation over the perfect base field.",
+   "uses": [
+    "lem-weil-pbc-localization-base-change",
+    "def-weil-pbc-normal-ring",
+    "lem-weil-pbc-geometrically-reduced-extension-separable",
+    "lem-weil-pbc-char-zero-field-extension-separable",
+    "def-weil-pbc-separable-field-extension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the declared directed cover of the separable field K by smooth finite-type subalgebras D. Base change makes B tensor_k D smooth over the normal ring B, hence normal. The explicit tensor-product colimit cocone and filtered-colimit normality show K tensor_k B is normal. Separately A tensor_k L is normal by geometric normality.",
+   "uses": [
+    "lem-kun-separable-smooth-colimit",
+    "lem-weil-pbc-smooth-ring-map-base-change-composition",
     "lem-weil-pbc-smooth-over-normal-ring-normal",
-    "lem-weil-pbc-separable-extension-fraction-field-of-smooth-algebra",
+    "lem-weil-pbc-filtered-colimit-normal-ring",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Write C=A tensor_k B and S=K tensor_k B. Tensor maps induced by injections of vector spaces are injective, so C embeds in S. Hence C is reduced, since S is normal. The ring S is finite type over K, so Noetherian and has finitely many minimal primes. For any injective ring map, every minimal prime of the source is the contraction of a minimal prime of the target: the comap of the zero ideal is zero and minimal-prime comap covers its minimal primes (Mathlib Ideal.minimalPrimes_comap_subset). Thus C has finitely many minimal primes; no going-down theorem is used.",
+   "uses": [
+    "lem-weil-pbc-module-over-field-flat",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-noetherian-finitely-many-minimal-primes"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The tensor maps C to S=K tensor_k B and U=A tensor_k L are injective localizations. Injectivity implies each inverted element is a nonzerodivisor. Embed S and U in Q(C), and embed T=K tensor_k L there by one more localization; the latter map is injective. The two embeddings of C agree by the localization universal property. Any x in Q(C) integral over C is integral over S and U. Localizing Q(C) also identifies it as the total fractions of S and U, so their normality puts x in both images.",
+   "uses": [
+    "lem-weil-pbc-localization-base-change",
+    "lem-weil-pbc-normal-ring-integrally-closed-total",
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the intersection, split the injective k-linear map f:A to K by a linear retraction p. If a in K tensor B and b in A tensor L have equal images in K tensor L, set z=(p tensor id)(a). Tensor functoriality and p composed with f=id show that z maps to b in A tensor L. Injectivity of id_K tensor(B to L) then shows that z maps to a in K tensor B. Apply this to the two representatives of x from the previous step, obtaining x in C. Thus C is integrally closed in Q(C). The reduced, finite-minimal-prime normality criterion proves C is normal. Transport from the universe lifts to the original algebras.",
+   "uses": [
+    "lem-weil-pbc-module-over-field-flat",
+    "def-weil-pbc-module-tensor-product",
     "lem-weil-pbc-reduced-normal-iff-integrally-closed-total-fractions"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
+  "lem-weil-pbc-finite-type-field-integral-closure-finite",
+  "lem-weil-pbc-integral-closure-algebraic-extension-normal",
+  "lem-weil-pbc-localization-normal-domain",
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-pbc-category-colimit",
   "lem-weil-pbc-filtered-colimit-normal-ring",
+  "lem-weil-pbc-localization-base-change",
+  "def-weil-pbc-normal-ring",
+  "lem-weil-pbc-geometrically-reduced-extension-separable",
+  "lem-weil-pbc-char-zero-field-extension-separable",
+  "def-weil-pbc-separable-field-extension",
+  "lem-kun-separable-smooth-colimit",
+  "lem-weil-pbc-smooth-ring-map-base-change-composition",
   "lem-weil-pbc-smooth-over-normal-ring-normal",
-  "lem-weil-pbc-separable-extension-fraction-field-of-smooth-algebra",
+  "lem-weil-pbc-module-over-field-flat",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-noetherian-finitely-many-minimal-primes",
+  "lem-weil-pbc-normal-ring-integrally-closed-total",
+  "def-weil-pbc-module-localization",
+  "def-weil-pbc-module-tensor-product",
   "lem-weil-pbc-reduced-normal-iff-integrally-closed-total-fractions"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Tag 06DF"
+  "place": "Tag 06DF, lemma-geometrically-normal-tensor-normal"
  },
  "mathlib_searches": [
   {
@@ -82,9 +150,9 @@
   "module": "Sheaf.RingTheory.GeometricallyNormalTensorNormal",
   "declaration": "Algebra.normal_domain_case",
   "file": "lean/Sheaf/RingTheory/GeometricallyNormalTensorNormal.lean",
-  "statement": "theorem normal_domain_case {k A B : Type*} [Field k] [CommRing A] [CommRing B] [Algebra k A] [Algebra k B] [IsDomain A] [IsIntegrallyClosed A] [IsDomain B] [IsIntegrallyClosed B] (hA : ∀ (E : Type*) [Field E] [Algebra k E], ∀ (p : Ideal (A ⊗[k] E)) [p.IsPrime], IsDomain (Localization.AtPrime p) ∧ IsIntegrallyClosed (Localization.AtPrime p)) (hB : ∀ (p : Ideal B) [p.IsPrime], IsDomain (Localization.AtPrime p) ∧ IsIntegrallyClosed (Localization.AtPrime p)) : ∀ (p : Ideal (A ⊗[k] B)) [p.IsPrime], IsDomain (Localization.AtPrime p) ∧ IsIntegrallyClosed (Localization.AtPrime p)",
+  "statement": "theorem normal_domain_case\n    {k : Type u} {A : Type v} {B : Type w}\n    [Field k] [CommRing A] [CommRing B]\n    [Algebra k A] [Algebra k B] [IsDomain A] [IsIntegrallyClosed A]\n    [IsDomain B] [IsIntegrallyClosed B]\n    (hA : ∀ (E : Type (max u v w)) [Field E] [Algebra k E],\n      ∀ (p : Ideal (A ⊗[k] E)) [p.IsPrime],\n        IsDomain (Localization.AtPrime p) ∧ IsIntegrallyClosed (Localization.AtPrime p))\n    (hB : ∀ (p : Ideal B) [p.IsPrime],\n      IsDomain (Localization.AtPrime p) ∧ IsIntegrallyClosed (Localization.AtPrime p)) :\n    ∀ (p : Ideal (A ⊗[k] B)) [p.IsPrime],\n      IsDomain (Localization.AtPrime p) ∧ IsIntegrallyClosed (Localization.AtPrime p)",
   "branch": "sheaf-dag",
-  "by": "R3",
+  "by": "Z9",
   "date": "2026-10-18",
   "existing": false
  },
@@ -101,11 +169,40 @@
  "reviewed_proof": {
   "date": "2026-10-18",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "R3",
+  "reviewer": "C-3d712",
+  "group": "Z9",
   "result": "pass",
-  "landing": "20261018T062901-L-672641",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "landing": "20261018T091415-L-3259812",
+  "kind": "interface",
+  "note": "independent cc review: delivered GeometricallyNormalTensorNormal.lean (compiles clean, axioms propext/Classical.choice/Quot.sound for normal_domain_case and main theorem) and its importer NormalAlgebraSeparableScalarExtension (compiles) with the domain-case and main nodes, the new existing:true leaf vs IntegralClosure.lean:299, and the change record vs rg users"
+ },
+ "statement_change": {
+  "date": "2026-10-18",
+  "by": "Z9 stage 2",
+  "old_statement": "Let k be a field and A,B commutative k-algebras which are normal domains. If A is geometrically normal over k, then A tensor_k B is a normal ring.",
+  "what": "Repair the elaborated Lean universes: an independent Type* for E could test a smaller universe with no field extension of the base. Use E : Type (max u v w), as in the unchanged main theorem, so the fraction fields used by Tag 06DF are among the tests. The mathematical statement is unchanged. This stage-3 interface repair also spells out the corrected universe scope in the natural-language statement.",
+  "source": {
+   "document": "literature/stacks-project/algebra.tex",
+   "place": "Tag 06DF, lemma-geometrically-normal-tensor-normal"
+  },
+  "citers": [],
+  "old_proof": [
+   {
+    "text": "Use finite-type normal subalgebra extensions and the filtered tensor-product colimit to reduce B to finite type. The fraction field of A is separable by geometric reducedness; express it as a filtered colimit of smooth subalgebras. Smooth base change over the normal domain B is normal, and localization identifies the stages. The finite-type case then follows from the total-fraction-ring intersection argument and the reduced normal characterization.",
+    "uses": [
+     "lem-weil-pbc-filtered-colimit-normal-ring",
+     "lem-weil-pbc-smooth-over-normal-ring-normal",
+     "lem-weil-pbc-separable-extension-fraction-field-of-smooth-algebra",
+     "lem-weil-pbc-reduced-normal-iff-integrally-closed-total-fractions"
+    ],
+    "elementary": false
+   }
+  ],
+  "old_proof_deps": [
+   "lem-weil-pbc-filtered-colimit-normal-ring",
+   "lem-weil-pbc-smooth-over-normal-ring-normal",
+   "lem-weil-pbc-separable-extension-fraction-field-of-smooth-algebra",
+   "lem-weil-pbc-reduced-normal-iff-integrally-closed-total-fractions"
+  ]
  }
 }

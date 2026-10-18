@@ -1,0 +1,130 @@
+{
+ "id": "lem-weil-pbc-finite-type-field-integral-closure-finite",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-normalization-exact-sequence",
+   "place": "Proof, second paragraph: normality after field extension; the finite normal-subalgebra reduction in supporting Tag 06DF.",
+   "via": [
+    "lem-weil-pbc-geometrically-normal-tensor-normal-domain-case",
+    "lem-weil-pbc-geometrically-normal-tensor-normal",
+    "lem-weil-pbc-normal-algebra-separable-scalar-extension",
+    "lem-weil-pbc-reduced-algebraic-normalization-field-change"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Noether finiteness for a finite-type domain over a field",
+ "statement": "Let k be a field [def-weil-field] and A an integral domain which is a finite-type k-algebra [def-weil-pbc-finite-type-algebra]. Let K be a fraction field of A and L/K a finite field extension [def-pc-field-extension], with compatible A-algebra structures. Then the integral closure of A in L [def-weil-pbc-integral-closure] is a finitely generated A-module [def-weil-finitely-generated-module].",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 0335, proposition-ubiquity-nagata, (1) and (5), with the definition of universally Japanese and N-2; already proved as Algebra.FiniteType.finite_integralClosure in lean/WeilConjectures/Mathlib/RingTheory/DedekindDomain/IntegralClosure.lean, lines 299-346."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-pbc-finite-type-algebra",
+  "def-pc-field-extension",
+  "def-weil-pbc-integral-closure",
+  "def-weil-finitely-generated-module"
+ ],
+ "proof": [
+  {
+   "text": "The attached declaration is already proved in the source library. Its proof first applies Noether normalization: choose an injective finite map from a polynomial ring P=k[X_1,...,X_n] into A. The fraction field K of A is then finite-dimensional over Frac(P), by localizing a finite P-spanning family of A. Transitivity makes L finite-dimensional over Frac(P) as well. All scalar structures are the compositions through A and K, so the required towers commute.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Apply the proved polynomial-ring case MvPolynomial.finite_integralClosure in that same source module to P and L. It gives a finite P-module N_P=integralClosure P L. (That source theorem handles inseparability by a finite coefficient-field and Frobenius root extension before applying the separable integral-closure finiteness theorem.)",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Since A is finite, hence integral, over P, every element of N_A=integralClosure A L is integral over P by transitivity. The inclusion N_A into N_P is an injective P-linear map. The polynomial ring P is Noetherian, so this submodule of a finite P-module is finite. Its P-module generators also generate N_A over A; hence N_A is finite over A. This is exactly the conclusion of the attached source theorem, whose axiom check has no sorryAx.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "lean/WeilConjectures/Mathlib/RingTheory/DedekindDomain/IntegralClosure.lean",
+  "place": "Algebra.FiniteType.finite_integralClosure, lines 299-346; existing proved source-library attachment, not an additional obligation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "integralClosure, Module.Finite",
+   "results": "0 hits: ; direct source-library search found Algebra.FiniteType.finite_integralClosure.",
+   "date": "2026-10-18",
+   "verdict": "No general Mathlib match; use the already proved source-library theorem. The Mathlib finiteness theorem requires a normal base and a separable extension."
+  },
+  {
+   "tool": "grep",
+   "query": "finite_integralClosure",
+   "results": "0 hits: ; direct source-library search found Algebra.FiniteType.finite_integralClosure.",
+   "date": "2026-10-18",
+   "verdict": "No general Mathlib match; use the already proved source-library theorem. The Mathlib finiteness theorem requires a normal base and a separable extension."
+  },
+  {
+   "tool": "leansearch",
+   "query": "the integral closure of a finitely generated domain over a field in a finite extension of its fraction field is a finite module",
+   "results": "8 hits: IsIntegralClosure.finite, IsIntegralClosure.of_isIntegrallyClosed, integralClosure.isIntegrallyClosedOfFiniteExtension, integralClosure.isIntegralClosure, IsIntegralClosure.isFractionRing_of_finite_extension, integralClosure.AlgebraIsIntegral, instIsIntegrallyClosedInSubtypeMemSubalgebraIntegralClosure, Ring.instFiniteNormalClosure_1; direct source-library search found Algebra.FiniteType.finite_integralClosure.",
+   "date": "2026-10-18",
+   "verdict": "No general Mathlib match; use the already proved source-library theorem. The Mathlib finiteness theorem requires a normal base and a separable extension."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.GeometricallyNormalTensorNormal",
+  "date": "2026-10-18",
+  "group": "Z9"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.Mathlib.RingTheory.DedekindDomain.IntegralClosure",
+  "declaration": "Algebra.FiniteType.finite_integralClosure",
+  "statement": "theorem Algebra.FiniteType.finite_integralClosure (k : Type*) {A : Type*} [Field k] [CommRing A]\n    [IsDomain A] [Algebra k A] [Algebra.FiniteType k A] (K L : Type*) [Field K] [Field L]\n    [Algebra A K] [IsFractionRing A K] [Algebra K L] [Algebra A L] [IsScalarTower A K L]\n    [FiniteDimensional K L] :\n    Module.Finite A (integralClosure A L)",
+  "branch": "sheaf-dag",
+  "by": "Z9",
+  "date": "2026-10-18",
+  "note": "Existing proved library theorem, attached without a new Lean declaration or proof hole. The domain reduction uses the degree-one extension K/K."
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "C-3d712",
+  "group": "Z9",
+  "result": "pass",
+  "landing": "20261018T091415-L-3259812",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "C-3d712",
+  "group": "Z9",
+  "result": "pass",
+  "landing": "20261018T091415-L-3259812",
+  "kind": "interface",
+  "note": "independent cc review: delivered GeometricallyNormalTensorNormal.lean (compiles clean, axioms propext/Classical.choice/Quot.sound for normal_domain_case and main theorem) and its importer NormalAlgebraSeparableScalarExtension (compiles) with the domain-case and main nodes, the new existing:true leaf vs IntegralClosure.lean:299, and the change record vs rg users"
+ }
+}
