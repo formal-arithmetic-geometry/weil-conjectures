@@ -240,5 +240,23 @@
   "group": "N1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N1-9373feb6c (reviewer sub-agent of L); spot-checked: I read the whole item: statement, six steps, every cited node's statement and the parent's citing step. Source: HRS 2305.18131 §3 (Λ_X=p_X^{-1}Λ; f^* exact) and the Lemma 4.5 proof, which asserts j^* is conservative for a w-contractible affine cover. The item's statement for arbitrary covering families, with the actual condensed coefficients, is true and stronger than that sentence, and the split proves it. Step 1: clause (1) of the localization lemma, clause 1 of the inverse-image restriction lemma (which holds for any ring sheaf), the ring isomorphism α (sfb Lan pullback, whose pointwise formula is the colimit over I_U in def-weil-proetale-inverse-image), and the exactness and scalar transport of def-weil-pbc-proetale-operations. No constant-ring clause is used. Step 2: clause 1 of det-pe-topos-functoriality-site gives the base-changed covering, which is the CoversTop hypothesis of Sheaf.isIso_of_coversTop (I read LocalProperties.lean:35). Step 3: the cancellation proving the inverse linear is correct. Step 4: the exact-functor cohomology isomorphism is natural in chain maps and descends through the localization Q (Q(s) and Q(s)^{-1} generate it). Step 5: DerivedCategory.isIso_iff covers all n and the unbounded category. Step 6 is elementary. Edge cases: empty X, empty family on nonempty X (not a covering), infinite families, Λ=0, unbounded complexes. No duplicate in the DAG or blueprint: the étale cover-detects-iso, Noetherian stratum detection, w-contractible sections and finite stalk-conservative nodes all differ. I accept both declared tool_uses (lem-sfb-proetale-object-inverse-image-restriction and det-pe-topos-functoriality-site) as generic site infrastructure. No SGA is cited. No changes were made."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-590242b79",
+  "group": "NM",
+  "result": "pass",
+  "note": "Clause-by-clause match: Λ is Profinite.CondensedRing.{u} with IsCommMonObj; X is any Scheme.{u}; the cover is Scheme.Cover.{v} proetalePrecoverage X (weakly etale, surjective; empty and infinite families allowed, free index universe); the inverse image is CondensedRing.upperStar Λ.X (𝒰.f i) |>.mapDerivedCategory, extension along the actual condensedPullbackHom iso, identified with the derived inverse image by leftDerivedUpperStarIsoMapDerivedCategory; the conclusion is the IsIso iff over all derived morphisms plus the IsZero detection, as in the node. No extra hypotheses; the shared u for Λ and X comes from the recorded condensedRingObj interface. The Mod-over-ring-object encoding is the published upstream framework encoding and matches the consumer condensed_dualizable_iff_proetale_cover exactly; no duplicate found by rg over side and slopmaster2. Edge cases checked: empty cover of the empty scheme, Λ=0, unbounded complexes. No defs, proof is sorry, docstrings give source place, blueprint id and the six proof steps, lines <=100, the lean.statement field is verbatim in the file, the node changed only in lean, both report sections present (the second-reading section is the accepted 2026-10-17 placeholder). nt_compile --json of the snapshot module is clean: 15.8 s, exit 0, no errors or warnings."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CondensedCoverRestrictionConservative",
+  "declaration": "AlgebraicGeometry.ProEtale.condensed_cover_restriction_conservative",
+  "file": "lean/Sheaf/AlgebraicGeometry/CondensedCoverRestrictionConservative.lean",
+  "statement": "theorem condensed_cover_restriction_conservative (Λ : Profinite.CondensedRing.{u}) [IsCommMonObj Λ.X] (X : Scheme.{u}) (𝒰 : Scheme.Cover.{v} Scheme.proetalePrecoverage X) : (∀ (K L : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ.X X))) (f : K ⟶ L), IsIso f ↔ ∀ i : 𝒰.I₀, IsIso ((CondensedRing.upperStar Λ.X (𝒰.f i)).mapDerivedCategory.map f)) ∧ (∀ K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ.X X)), (∀ i : 𝒰.I₀, IsZero ((CondensedRing.upperStar Λ.X (𝒰.f i)).mapDerivedCategory.obj K)) → IsZero K)",
+  "branch": "newtargets-dag",
+  "by": "NM",
+  "date": "2026-10-18",
+  "existing": false
  }
 }

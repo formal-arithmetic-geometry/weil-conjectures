@@ -225,5 +225,23 @@
   "group": "N2",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N2-caf131507 (reviewer sub-agent of L); spot-checked: Read in full: the item (statement unchanged from Q36, 8 steps), the report, the full statements of all four cited nodes (def-sfb-monoidal-category, def-sfb-strong-monoidal-functor, lem-sfb-dual-tensor-adjunctions, det-sp-unique-right-adjoint; all are Mathlib leaves, so no route or tool_uses issue), the parent lem-zl-condensed-lisse-proetale-locality steps 4-5, HRS Lemma 4.5 on p.10 (the lisse argument: monoidal, conservative, commutes with inner Hom), and Stacks 0FFL/0FFP/0FFQ/0FFR in categories.tex. Every step checks out. Step 1: the transported ev/coev are correct by tensorator naturality and the associativity and unit axioms. Step 3: P=L, D=E in the exact-pairing node gives -⊗L ⊣ -⊗E; I checked by both triangles that the explicit bijection is inverse both ways, and its counit 1⊗a matches gamma of det-sp-unique-right-adjoint, so phi^i_M = theta_M(1⊗q^{-1}) is invertible for all M. Step 4: the transpose hypothesis applied to epsilon, plus naturality of ev in the target, gives ev(u⊗1)=s^{-1}F(epsilon)mu. Step 5: both inverse transposes reduce to rho(1⊗s^{-1}F(epsilon)mu)alpha, using the associativity, naturality and right-unit axioms. Step 6: joint conservativity, with empty and infinite I handled. Step 7: untransposing phi_K c=j gives the K-triangle. Step 8: interchange plus the K-triangle gives epsilon(g⊗1)=epsilon, and injectivity of transpose gives g=1_D. Small cases: terminal category, identity family, empty family, infinite-dimensional vector spaces. Duplicate search: rg dualizab over the DAG; lem-pc-dualizable-evaluation-criterion and lem-pc-dualizable-tensor-hom-equivalences are scheme-specific, so neither is a duplicate. No new nodes, no SGA, no fixes, no accepted tool uses."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d3c75beb6",
+  "group": "NP",
+  "result": "pass",
+  "note": "Read the node, both stmt deps (MonoidalCategory; CoreMonoidal, whose record allows the Functor.Monoidal API), HRS Lemma 4.5 (pdftotext lines 625-628), the module and the report. Every clause matches: SymmetricCategory for the symmetry; MonoidalClosed with the node's transpose rendered as curry (β_ B A ≫ g), equivalent through the symmetry; hSymmetry exact; hConservative joint, with empty/infinite I allowed; h natural in T plus hHomNaturality via pre (both sides typed); hTranspose exact; ExactPairing orientation ev E⊗K, coev K⊗E. Universes u v w u' v' independent; lean.statement verbatim; no definitions, only sorry; docstrings carry source and blueprint tag plus the 8-step proof; no duplicate in DAG, Mathlib or project. nt_compile --json clean (3.4 s, exit 0). The report's second reading is an author self-check; this review is the only independent reading. No findings."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.DualizableJointlyConservativeLocality",
+  "declaration": "CategoryTheory.dualizable_iff_of_jointly_conservative",
+  "file": "lean/Sheaf/CategoryTheory/DualizableJointlyConservativeLocality.lean",
+  "statement": "theorem dualizable_iff_of_jointly_conservative {C : Type u} [Category.{v} C] [MonoidalCategory C] [SymmetricCategory C] [MonoidalClosed C] {I : Type w} (D : I → Type u') [∀ i, Category.{v'} (D i)] [∀ i, MonoidalCategory (D i)] [∀ i, SymmetricCategory (D i)] [∀ i, MonoidalClosed (D i)] (F : ∀ i, C ⥤ D i) [∀ i, (F i).Monoidal] (hSymmetry : ∀ (i : I) (A B : C), Functor.LaxMonoidal.μ (F i) A B ≫ (F i).map (β_ A B).hom = (β_ ((F i).obj A) ((F i).obj B)).hom ≫ Functor.LaxMonoidal.μ (F i) B A) (hConservative : ∀ {A B : C} (a : A ⟶ B), (∀ i : I, IsIso ((F i).map a)) → IsIso a) (h : ∀ (i : I) (B : C), ihom B ⋙ F i ≅ F i ⋙ ihom ((F i).obj B)) (hHomNaturality : ∀ (i : I) {A B : C} (f : A ⟶ B) (T : C), (F i).map ((pre f).app T) ≫ (h i A).hom.app T = (h i B).hom.app T ≫ (pre ((F i).map f)).app ((F i).obj T)) (hTranspose : ∀ (i : I) (A B T : C) (g : A ⊗ B ⟶ T), curry ((β_ ((F i).obj B) ((F i).obj A)).hom ≫ Functor.LaxMonoidal.μ (F i) A B ≫ (F i).map g) = (F i).map (curry ((β_ B A).hom ≫ g)) ≫ (h i B).hom.app T) (K : C) : (∃ E : C, Nonempty (ExactPairing K E)) ↔ ∀ i : I, ∃ E : D i, Nonempty (ExactPairing ((F i).obj K) E)",
+  "branch": "newtargets-dag",
+  "by": "NP",
+  "date": "2026-10-18",
+  "existing": false
  }
 }
