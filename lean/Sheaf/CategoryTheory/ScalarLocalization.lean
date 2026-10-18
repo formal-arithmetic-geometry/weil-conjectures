@@ -6,7 +6,6 @@ Authors: SHEAF group NF
 module
 
 public import Sheaf.CategoryTheory.LinearScalarLocalization
-public import Sheaf.NumberTheory.Padics.IntegersLocalizationUniformizer
 
 /-!
 # Scalar localization of a linear category
@@ -58,7 +57,8 @@ theorem composition_tmul (K L M : C) (f : L ⟶ M) (g : K ⟶ L)
     (a b : Localization.Away p) :
     composition R C p K L M (a ⊗ₜ[R] f) (b ⊗ₜ[R] g) =
       (a * b) ⊗ₜ[R] (g ≫ f) := by
-  sorry
+  exact Classical.choose_spec
+    ((exists_linear_scalarLocalization_category R C p).1 K L M).exists f g a b
 
 /-- Associativity and identity laws for the uniquely specified composition.
 Source: blueprint `def-weil-rationalization-karoubi`
@@ -77,7 +77,31 @@ theorem composition_laws :
         (h : Localization.Away p ⊗[R] (M ⟶ N)),
       composition R C p K M N h (composition R C p K L M g f) =
         composition R C p K L N (composition R C p L M N h g) f) := by
-  sorry
+  constructor
+  · intro K L f
+    induction f using TensorProduct.induction_on with
+    | zero => simp
+    | tmul a f => simp [composition_tmul]
+    | add f g hf hg => simp [map_add, hf, hg]
+  constructor
+  · intro K L f
+    induction f using TensorProduct.induction_on with
+    | zero => simp
+    | tmul a f => simp [composition_tmul]
+    | add f g hf hg => simp [map_add, hf, hg]
+  · intro K L M N f g h
+    induction h using TensorProduct.induction_on with
+    | zero => simp
+    | tmul c h =>
+      induction g using TensorProduct.induction_on with
+      | zero => simp
+      | tmul b g =>
+        induction f using TensorProduct.induction_on with
+        | zero => simp
+        | tmul a f => simp [composition_tmul, Category.assoc, mul_assoc]
+        | add f f' hf hf' => simp [map_add, hf, hf']
+      | add g g' hg hg' => simp [map_add, hg, hg']
+    | add h h' hh hh' => simp [map_add, hh, hh']
 
 /-- The tensor-Hom category, with identities tensored with one and extended composition.
 Source: blueprint `def-weil-rationalization-karoubi`
@@ -129,7 +153,7 @@ theorem localization_laws (K L M : C) (f : K ⟶ L) (g : L ⟶ M) :
     ((1 : Localization.Away p) ⊗ₜ[R] (f ≫ g)) =
       composition R C p K L M ((1 : Localization.Away p) ⊗ₜ[R] g)
         ((1 : Localization.Away p) ⊗ₜ[R] f) := by
-  sorry
+  simp [composition_tmul]
 
 /-- The localization functor: identity on objects, tensor with one on morphisms.
 Source: blueprint `def-weil-rationalization-karoubi`
@@ -148,7 +172,9 @@ is the balancing relation and restriction along the localization ring map. This 
 clause (3) of `lem-weil-linear-scalar-localization-category`. -/
 theorem localization_linear :
     (localization R C p).Additive ∧ (localization R C p).Linear R := by
-  sorry
+  constructor
+  · exact ⟨fun {K L} {f g} ↦ TensorProduct.tmul_add _ _ _⟩
+  · exact ⟨fun {K L} f a ↦ TensorProduct.tmul_smul _ _ _⟩
 
 /-- Additivity of Q. Source: blueprint `def-weil-rationalization-karoubi`
 (blueprint: def-weil-linear-scalar-localization). -/
@@ -184,7 +210,18 @@ theorem map_laws :
       mapHom R C p T K M (composition R C p K L M g f) =
         composition R C p (T.obj K) (T.obj L) (T.obj M)
           (mapHom R C p T L M g) (mapHom R C p T K L f)) := by
-  sorry
+  constructor
+  · intro K
+    simp [mapHom]
+  · intro K L M f g
+    induction g using TensorProduct.induction_on with
+    | zero => simp
+    | tmul b g =>
+      induction f using TensorProduct.induction_on with
+      | zero => simp
+      | tmul a f => simp [mapHom, composition_tmul]
+      | add f f' hf hf' => simp [map_add, hf, hf']
+    | add g g' hg hg' => simp [map_add, hg, hg']
 
 /-- The induced shift/endofunctor, sending `a ⊗ f` to `a ⊗ T.map f`.
 Source: blueprint `def-weil-rationalization-karoubi`
@@ -206,6 +243,41 @@ Source: blueprint `def-weil-rationalization-karoubi`
 noncomputable instance mapLinear : (map R C p T).Linear (Localization.Away p) where
   map_smul {K L} f a := (mapHom R C p T K.obj L.obj).map_smul a f
 
+private theorem map_comp (U : C ⥤ C) [U.Additive] [U.Linear R] :
+    map R C p T ⋙ map R C p U = map R C p (T ⋙ U) := by
+  refine Functor.ext (F := map R C p T ⋙ map R C p U)
+    (G := map R C p (T ⋙ U)) (fun _ ↦ rfl) ?_
+  intro K L f
+  simp only [eqToHom_refl, Category.id_comp, Category.comp_id]
+  change mapHom R C p U _ _ (mapHom R C p T _ _ f) =
+    mapHom R C p (T ⋙ U) _ _ f
+  dsimp only [mapHom]
+  induction f using TensorProduct.induction_on with
+  | zero => simp only [map_zero]
+  | tmul a f =>
+    simp only [LinearMap.baseChange_tmul]
+    rfl
+  | add f g hf hg => simp only [map_add, hf, hg]
+
+private theorem map_identity : map R C p (𝟭 C) = 𝟭 (ScalarLocalization R C p) := by
+  refine Functor.ext (F := map R C p (𝟭 C))
+    (G := 𝟭 (ScalarLocalization R C p)) (fun _ ↦ rfl) ?_
+  intro K L f
+  simp only [eqToHom_refl, Category.id_comp, Category.comp_id]
+  change mapHom R C p (𝟭 C) _ _ f = f
+  dsimp only [mapHom]
+  induction f using TensorProduct.induction_on with
+  | zero => simp only [map_zero]
+  | tmul a f =>
+    simp only [LinearMap.baseChange_tmul]
+    rfl
+  | add f g hf hg => simp only [map_add, hf, hg]
+
+private theorem map_congr (U : C ⥤ C) [U.Additive] [U.Linear R] (h : T = U) :
+    map R C p T = map R C p U := by
+  subst U
+  rfl
+
 /-- An R-linear strict automorphism induces a strict automorphism commuting with Q.
 Source: blueprint `def-weil-rationalization-karoubi`
 (blueprint: def-weil-linear-scalar-localization).
@@ -226,7 +298,20 @@ theorem map_automorphism (S : C ⥤ C) (hTS : T ⋙ S = 𝟭 C) (hST : S ⋙ T =
       (map R C p T) ⋙ S' = 𝟭 (ScalarLocalization R C p) ∧
       S' ⋙ (map R C p T) = 𝟭 (ScalarLocalization R C p)) ∧
     T ⋙ localization R C p = localization R C p ⋙ map R C p T := by
-  sorry
+  let e : C ≌ C := Equivalence.mk T S (eqToIso hTS.symm) (eqToIso hST)
+  have : e.functor.Additive := inferInstanceAs T.Additive
+  have : e.functor.Linear R := inferInstanceAs (T.Linear R)
+  have : S.Additive := Equivalence.inverse_additive e
+  have : S.Linear R := Equivalence.inverseLinear (R := R) e
+  constructor
+  · refine ⟨map R C p S, inferInstance, inferInstance, (fun _ ↦ rfl), ?_, ?_, ?_⟩
+    · intro K L f a
+      exact heq_of_eq (LinearMap.baseChange_tmul (S.mapLinearMap R) a f)
+    · exact (map_comp R C p T S).trans
+        ((map_congr R C p (T ⋙ S) (𝟭 C) hTS).trans (map_identity R C p))
+    · exact (map_comp R C p S T).trans
+        ((map_congr R C p (S ⋙ T) (𝟭 C) hST).trans (map_identity R C p))
+  · exact Functor.ext (fun _ ↦ rfl)
 
 end ScalarLocalization
 end CategoryTheory

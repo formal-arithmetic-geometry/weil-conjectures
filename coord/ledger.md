@@ -16147,3 +16147,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 06:29 L: merged deliver/S1/Sheaf.AlgebraicGeometry.RelativeSerreVanishing (stage 3; reviewer PASS; first push; landing 20261018T062905-L-674041 (proof); batch 20261018T062645; modules 1; new nodes 0)
 - 06:29 L: merged deliver/S2/Sheaf.AlgebraicGeometry.EtaleOpenProperInterchange (stage 3; reviewer PASS; first push; landing 20261018T062906-L-674168 (proof); batch 20261018T062645; modules 1; new nodes 0)
 - 06:29 L: merged deliver/S2/Sheaf.AlgebraicGeometry.ProperMorphismFpqcDescent (stage 3; reviewer PASS; first push; landing 20261018T062906-L-674281 (proof); batch 20261018T062645; modules 1; new nodes 1)
+- 06:29 L: merged deliver/S2/Sheaf.CategoryTheory.ScalarLocalization (stage 3; reviewer PASS; first push; landing 20261018T062907-L-674429 (interface); batch 20261018T062645; modules 1; new nodes 0; change records: coord/changes/scalar-localization-unused-coefficient-import.md)
