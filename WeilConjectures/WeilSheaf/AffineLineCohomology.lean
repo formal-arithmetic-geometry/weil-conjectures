@@ -30,6 +30,11 @@ curve `𝔸¹`, `Hʳ(𝔸¹, ℚ̄_ℓ(1))` is dual to `H_c^{2-r}(𝔸¹, ℚ̄_
 
 @[expose] public section
 
+-- `WeilConjectures.WeilSheaf.Localization` (through `FourierInversion.OtherSections`) brings in
+-- `AlgebraicGeometry.specOverSpec`, under which `Spec k₀` would lie over itself through
+-- `Algebra.id`; the canonical instance is given priority here.
+attribute [local instance 1100] CategoryTheory.instOverClass
+
 universe u
 
 open CategoryTheory Limits
