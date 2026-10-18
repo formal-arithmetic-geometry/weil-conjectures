@@ -74,7 +74,11 @@ theorem puncturedGeneralizations_le_preimage {T : Type u} [TopologicalSpace T]
     (⊤ : Opens (puncturedGeneralizations Z)) ≤
       (Opens.map (puncturedGeneralizationsInclusion Z)).obj
         (puncturedNeighborhoodOpen Z hZ N) := by
-  sorry
+  intro t _
+  change t.val ∈ N.val ∧ t.val ∉ Z
+  obtain ⟨z, hz, hzZ⟩ := t.property.1
+  obtain ⟨x, hxN, hxt⟩ := mem_closure_iff.mp hz N.val N.val.isOpen (N.property.1 hzZ)
+  exact ⟨Set.mem_singleton_iff.mp hxt ▸ hxN, t.property.2⟩
 
 /-- Canonical restriction from a punctured neighborhood to the generalization subspace.
 Source: Stacks Project, Cohomology, Tags 0A3D (2), 01F8 and 01FB.

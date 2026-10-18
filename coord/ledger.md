@@ -16349,3 +16349,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 07:12 L: merged deliver/U3/Sheaf.Paper.ProjectionFormulaTotalization (stage 3; reviewer PASS; first push; landing 20261018T071233-L-1680866 (interface); batch 20261018T071125; modules 2; new nodes 1)
 - 07:12 L: merged deliver/V1/Sheaf.Topology.SpectralLimitDescendOpens (stage 3; reviewer PASS; first push; landing 20261018T071233-L-1681131 (interface); batch 20261018T071125; modules 2; new nodes 1)
 - 07:12 L: merged deliver/V2/Sheaf.AlgebraicGeometry.ProjectiveConstructibilityFromLine (stage 3; reviewer PASS; first push; landing 20261018T071234-L-1681441 (proof); batch 20261018T071125; modules 1; new nodes 0)
+- 07:12 L: merged deliver/V2/Sheaf.Topology.PuncturedNeighborhoodCohomologyDiagram (stage 3; reviewer PASS; first push; landing 20261018T071235-L-1681705 (proof); batch 20261018T071125; modules 1; new nodes 0)
