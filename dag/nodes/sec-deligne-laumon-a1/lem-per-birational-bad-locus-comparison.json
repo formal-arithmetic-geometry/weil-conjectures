@@ -20,9 +20,157 @@
   "def-weil-finite-integral-morphism",
   "def-weil-pbc-krull-dimension-ring"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "We work throughout on ordinary small etale sites with constant coefficients $B$. Exact inverse image [prop-weil-pbc-inverse-image-modules-exact] and constructible pullback [lem-weil-pbc-constructible-etale-set-pullback] show that pullback preserves $D^b_c$: cohomology commutes with the exact functor, and its cohomological interval is unchanged. For the finite field $B$, the underlying sets of finite modules are finite, so the set-sheaf constructibility criterion is equivalent to the module criterion. The long exact cohomology sequence and [thm-constructible-serre] show that $D^b_c$ is closed under shifts and distinguished triangles; retracts are handled by the same kernel/image criterion. Derived direct image carries triangles to triangles by [lem-pc-right-derived-functor-triangulated]. A finite map has exact direct image on abelian sheaves by [lemma-weil-pbc-finite-direct-image-exact]; [lem-sbc-higher-direct-image-forget-comparison] gives exactness and vanishing also for $B$-module direct images. Extension by zero is exact by [lem-weil-pbc-extension-by-zero-exact]. Thus the open-closed short exact sequence [lem-weil-pbc-open-closed-short-exact], applied to complexes, gives its usual distinguished triangle, with underived closed direct image.",
+   "uses": [
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-weil-pbc-constructible-etale-set-pullback",
+    "thm-constructible-serre",
+    "lem-pc-right-derived-functor-triangulated",
+    "lemma-weil-pbc-finite-direct-image-exact",
+    "lem-sbc-higher-direct-image-forget-comparison",
+    "lem-weil-pbc-open-closed-short-exact",
+    "lem-weil-pbc-extension-by-zero-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XIII 3.3--3.4, elementary derived-category preliminaries"
+   }
+  },
+  {
+   "text": "Because $p$ is proper, it is finite type and quasi-compact. The stability statement [lem-per-quasi-excellent-finite-type-stability] makes $X'$, its open subschemes and its closed subschemes Noetherian quasi-excellent; the same applies to closed subschemes and opens of $X$. The prime $\\ell$ stays invertible under these restrictions and base changes. Step 1 gives $K'=p_U^*K\\in D^b_c(U',B)$. Apply the assumed induction hypothesis, with its same integer $c$, to $(X',j',K')$, obtaining a reduced closed subset $C\\subset X'$ all of whose points have height at least $c$, with $M:=Rj'_*K'$ bounded constructible on $X'\\setminus C$. Open restriction of all direct images and units is valid by [lem-weil-pbc-ringed-derived-slice-localization].",
+   "uses": [
+    "lem-per-quasi-excellent-finite-type-stability",
+    "lem-weil-pbc-ringed-derived-slice-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XIII 3.2.2, application of the induction hypothesis on X prime"
+   }
+  },
+  {
+   "text": "Let $D$ be an irreducible component of $C$, with generic point $y$, and put $s=p(y)$. Properness makes $p(D)=\\overline{\\{s\\}}$ closed. Since $p$ is an isomorphism over a dense open, its map on function fields is an isomorphism. The inequality of [lem-trf-local-dimension-formula], applied to $p$ at $y$, therefore gives $\\operatorname{ht}_{X'}(y)+\\operatorname{trdeg}_{\\kappa(s)}\\kappa(y)\\leq\\operatorname{ht}_X(s)$. If $t\\in p(D)$, then $s$ generalizes $t$, so $\\operatorname{ht}_X(s)\\leq c$. Together with $\\operatorname{ht}_{X'}(y)\\geq c$ this forces equality throughout and $s=t$: a strict specialization increases height by at least one, by appending a prime to a chain. It also forces $\\kappa(y)/\\kappa(t)$ algebraic. Remove the finitely many closed sets $p(D)$ for components not meeting the fibre over $t$. Every remaining component consequently maps onto $T$; the factorization through its reduced scheme structure follows on affine charts because an equation vanishing at every point of a reduced scheme is zero.",
+   "uses": [
+    "lem-trf-local-dimension-formula"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XIII 3.2.2, height inequality and removal of the other components"
+   }
+  },
+  {
+   "text": "For each remaining integral component $D\\to T$, the generic fibre is integral with algebraic function field over $\\kappa(t)$. Each nonempty affine chart of that fibre has coordinate domain a finitely generated $\\kappa(t)$-subalgebra of this algebraic field. Finitely many algebraic generators span a finite-dimensional algebra (bound each exponent by a polynomial relation), and a finite-dimensional domain over a field is a field: multiplication by a nonzero element is an injective, hence surjective, linear endomorphism. Each such chart therefore consists of one point. Irreducibility makes these the same point, so the generic fibre has one point. Apply [lem-weil-pbc-generic-finite-morphism-open-neighborhood] to each $D\\to T$; these maps are finite type, quasi-compact and separated, and $T$ is Noetherian. After shrinking $T$ about $t$, all are finite surjective. This is achieved by an open restriction of $X$, since every open of $T$ is induced from $X$. Distinct components have distinct generic points over $t$, so their intersections have closed proper images in $T$. Remove those images as well. With reduced structures the surviving closed set is now $T'=\\coprod_\\alpha T'_\\alpha$, a disjoint union of integral schemes finite surjective over $T$. The complement of $T'$ is the good complement of the restricted $C$ from Step 2. The construction also works when no component survives.",
+   "uses": [
+    "lem-weil-pbc-generic-finite-morphism-open-neighborhood"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XIII 3.2.2, finite and disjoint bad components"
+   }
+  },
+  {
+   "text": "For the generic point $y_\\alpha$ of each $T'_\\alpha$, complete decomposition gives an $i_\\alpha$ and a $\\kappa(y_\\alpha)$-point of $E_{i_\\alpha}$ above it, hence a section of $E_{i_\\alpha}\\times_{X'}T'_\\alpha$ at that generic point. The affine open neighbourhoods of $y_\\alpha$ form a small cofiltered system of qcqs schemes with affine transitions whose limit is $\\operatorname{Spec}\\mathcal O_{T'_\\alpha,y_\\alpha}=\\operatorname{Spec}\\kappa(y_\\alpha)$, by [lem-weil-pbc-local-ring-spec-limit-affine-neighbourhoods]. Its etale target is locally finitely presented. Thus [lem-sbc-pointed-section-stage-descent] extends the section to some open neighbourhood $V_\\alpha$ of $y_\\alpha$ in $T'_\\alpha$, still over $T'_\\alpha$. The closed set $T'_\\alpha\\setminus V_\\alpha$ has closed image under its finite map to $T$, missing $t$. Remove these finitely many images by an open restriction of $X$. The sections are then defined on every surviving $T'_\\alpha$. All previous properties persist under this restriction.",
+   "uses": [
+    "lem-weil-pbc-local-ring-spec-limit-affine-neighbourhoods",
+    "lem-sbc-pointed-section-stage-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XIII 3.5.1 and II Proposition 2.2.3, extension of the generic sections"
+   }
+  },
+  {
+   "text": "Choose a dense open $W\\subset U$ over which $p$ is an isomorphism, and let $a:Z=U\\setminus W\\hookrightarrow U$ be the reduced closed inclusion. The proper-finiteness statement [lem-per-proper-finite-coefficient-bounded-preservation] applies to the proper base change $p_U:U'\\to U$, with the Noetherian schemes of Step 2. Both $K$ and $Rp_{U*}p_U^*K$ are bounded constructible. Complete the unit to a triangle $K\\to Rp_{U*}p_U^*K\\to C_U\\to K[1]$. Step 1 gives $C_U\\in D^b_c(U,B)$. By open localization its restriction to $W$ is zero: there the unit is the unit of an isomorphism. Apply the open-closed triangle of Step 1 to $C_U$. Its open-extension term is zero, so $C_U\\simeq a_*H$ for $H=a^*C_U\\in D^b_c(Z,B)$.",
+   "uses": [
+    "lem-per-proper-finite-coefficient-bounded-preservation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XIII Proposition 3.4.2, construction of the proper-unit defect on Z"
+   }
+  },
+  {
+   "text": "Let $\\bar Z$ be the reduced closure of $Z$ in $X$, $b:\\bar Z\\hookrightarrow X$ its closed inclusion and $v:Z\\hookrightarrow\\bar Z$ the open inclusion. Since $W$ is dense in the integral scheme $X$, every component of $\\bar Z$ has positive height in $X$. Apply the induction hypothesis on the Noetherian quasi-excellent scheme $\\bar Z$ to $(v,H)$. It gives a closed $A\\subset\\bar Z$ with every point of height at least $c$ in $\\bar Z$, such that $Rv_*H$ is bounded constructible off $A$. Every point of $A$ has height at least $c+1$ in $X$: a chain of length $c$ in $\\bar Z$ can be prefixed by the generic point of $X$, which is outside $\\bar Z$. In particular $t\\notin A$. As $A$ is closed in $X$, remove $A$ from $X$. After this restriction $Rv_*H$ is bounded constructible on all of $\\bar Z$. Since $b$ is proper, [lem-per-proper-finite-coefficient-bounded-preservation] gives $Rb_*Rv_*H\\in D^b_c(X,B)$. The canonical composition isomorphisms of [lem-cbc-etale-derived-direct-image-coherence] identify $Rj_*a_*H=Rb_*Rv_*H$, since $ja=bv$ and closed direct image is exact (Step 1). Thus $i^*Rj_*a_*H\\in D^b_c(T,B)$. The case $Z=\\varnothing$ has $H=0$ and needs no induction.",
+   "uses": [
+    "lem-per-proper-finite-coefficient-bounded-preservation",
+    "lem-cbc-etale-derived-direct-image-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XIII Proposition 3.4.2, first stage: induction on the nowhere dense defect support"
+   }
+  },
+  {
+   "text": "Apply $i^*Rj_*$ to the triangle in Step 6. The last term is bounded constructible by Step 7. Write $F=X'\\times_XT$, $k:F\\hookrightarrow X'$ and $q:F\\to T$. Derived direct-image composition [lem-cbc-etale-derived-direct-image-coherence] identifies the middle term before restriction with $Rp_*M$. Proper base change [det-properbasechange-modules] for $p$ identifies its restriction with $Rq_*k^*M$. This is applicable in $D^+$ because $M$ is bounded below, and every cohomology sheaf is killed by $\\ell$. It follows that the canonical map $i^*Rj_*K\\to Rq_*k^*M$ has bounded constructible cone. This is the first part of the specified comparison: if $\\varepsilon_j$ is the counit for $j^*\\dashv Rj_*$, the transpose under $p^*\\dashv Rp_*$ of $Rj_*\\eta_{p_U,K}$, using the composition isomorphisms, is the exchange $p^*Rj_*K\\to Rj'_*p_U^*K$. Indeed transposing once more under $j'{}^*\\dashv Rj'_*$ gives $p_U^*\\varepsilon_{j,K}$; the other factors cancel by the two adjunction triangle identities. Transposing for $q$ after restricting gives exactly the proper base-change map followed by that unit.",
+   "uses": [
+    "lem-cbc-etale-derived-direct-image-coherence",
+    "det-properbasechange-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XIII Proposition 3.4.2, first comparison and its canonical unit"
+   }
+  },
+  {
+   "text": "Let $d:T'\\hookrightarrow F$ be the closed inclusion and $h:F\\setminus T'\\hookrightarrow F$ its complementary open. Put $L=k^*M$. Its restriction to $F\\setminus T'$ is bounded constructible, because $M$ is so on $X'\\setminus T'$ and pullback preserves this property (Steps 1--4). The open-closed triangle of Step 1 gives $h_!h^*L\\to L\\to d_*d^*L\\to h_!h^*L[1]$. By [lem-weil-pbc-extension-by-zero-exact], cohomology of the first term is extension by zero of that of $h^*L$. Adding the complementary closed stratum with zero module to each finite stratification proves constructibility, with the same bounded interval. Therefore $h_!h^*L\\in D^b_c(F,B)$. Apply the proper-finiteness input [lem-per-proper-finite-coefficient-bounded-preservation] to $q$. Its direct image of the first term is bounded constructible, so $Rq_*L\\to R(qd)_*d^*L$ has bounded constructible cone. The target is $R(p_T)_*i'{}^*M$ by direct-image composition, and the map is the direct image of the restriction unit. This argument permits $T'=\\varnothing$, in which case $d_*d^*L=0$.",
+   "uses": [
+    "lem-weil-pbc-extension-by-zero-exact",
+    "lem-per-proper-finite-coefficient-bounded-preservation",
+    "lem-cbc-etale-derived-direct-image-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XIII Proposition 3.4.2, second stage: remove the good part of the proper fibre"
+   }
+  },
+  {
+   "text": "The arrow of the statement is the composite of the two arrows of Steps 8 and 9, with their stated adjunction units and restriction. The octahedral axiom of [def-weil-triangulated-category] gives a distinguished triangle from the cone of the first arrow to a cone of the composite to the cone of the second arrow. Both outer terms are in $D^b_c(T,B)$; closure under distinguished triangles, proved in Step 1 from [thm-constructible-serre], places the middle term there too. The finite surjectivity, disjointness, reduced structures and sections were obtained in Steps 4 and 5. Only finitely many open restrictions have been made, each containing $t$, so their intersection is the required open neighbourhood.",
+   "uses": [
+    "def-weil-triangulated-category",
+    "thm-constructible-serre"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XIII Proposition 3.4.2 and 3.5.1, composition of the two comparisons"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-triangulated-category",
+  "det-properbasechange-modules",
+  "lem-cbc-etale-derived-direct-image-coherence",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-per-proper-finite-coefficient-bounded-preservation",
+  "lem-per-quasi-excellent-finite-type-stability",
+  "lem-sbc-higher-direct-image-forget-comparison",
+  "lem-sbc-pointed-section-stage-descent",
+  "lem-trf-local-dimension-formula",
+  "lem-weil-pbc-constructible-etale-set-pullback",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-weil-pbc-generic-finite-morphism-open-neighborhood",
+  "lem-weil-pbc-local-ring-spec-limit-affine-neighbourhoods",
+  "lem-weil-pbc-open-closed-short-exact",
+  "lem-weil-pbc-ringed-derived-slice-localization",
+  "lemma-weil-pbc-finite-direct-image-exact",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "thm-constructible-serre"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "XIII 3.2.2, Proposition 3.4.2, 3.5.1 and II Proposition 2.2.3; generic finiteness and section descent made explicit"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -58,10 +206,38 @@
    "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.range_g_subset\", \"chevalley_mvPolynomial_mvPolynomial\", \"AlgebraicGeometry.Scheme.Hom.isConstructible_image\", \"AlgebraicGeometry.exists_map_preimage_le_map_preimage\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image\"], \"digest\": \"ed95ce54b40b4f76\"}",
    "date": "2026-10-18",
    "verdict": "no match: inspected hits concern scheme structure sheaves, constructible subsets, general sheaf generators, or unrelated names; none states this ordinary etale finite-coefficient result"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proper birational comparison of derived etale direct images on finite bad loci modulo bounded constructible complexes",
+   "results": "{\"t\": \"2026-10-18T18:14:00Z\", \"tool\": \"leanfinder\", \"query\": \"Proper birational comparison of derived etale direct images on finite bad loci modulo bounded constructible complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale.of_comp\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"Algebra.isOpen_etaleLocus\", \"AlgebraicGeometry.IsEtale\", \"Algebra.basicOpen_subset_etaleLocus_iff\", \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\"], \"digest\": \"dcd82fa1de89f55f\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: results concern constructible subsets, scheme morphism properties or general sheaf pushforward, not bounded constructible ordinary etale finite-ring direct images"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Birational\", \"Constructible\"",
+   "results": "{\"t\": \"2026-10-18T18:14:02Z\", \"tool\": \"loogle\", \"query\": \"\\\"Birational\\\", \\\"Constructible\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: results concern constructible subsets, scheme morphism properties or general sheaf pushforward, not bounded constructible ordinary etale finite-ring direct images"
+  },
+  {
+   "tool": "grep",
+   "query": "birational.*constructib|constructib.*birational|codimension.*rightDerived",
+   "results": "{\"t\": \"2026-10-18T18:14:32Z\", \"tool\": \"grep\", \"query\": \"birational.*constructib|constructib.*birational|codimension.*rightDerived\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: results concern constructible subsets, scheme morphism properties or general sheaf pushforward, not bounded constructible ordinary etale finite-ring direct images"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Proper modification comparison has bounded constructible cone after restricting to generic codimension bad locus",
+   "results": "{\"t\": \"2026-10-18T18:14:32Z\", \"tool\": \"leansearch\", \"query\": \"Proper modification comparison has bounded constructible cone after restricting to generic codimension bad locus\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsProper.instMorphismRestrict\", \"ProperCone.ext\", \"ProperCone.ext_iff\", \"ProperCone.isClosed\", \"PrimeSpectrum.isClosed_of_stableUnderSpecialization_of_isConstructible\", \"AlgebraicGeometry.IsProper.isStableUnderBaseChange\", \"Topology.IsConstructible.isLocallyConstructible\", \"ProperCone.congr_simp\"], \"digest\": \"ed834ee55d9cd1b2\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: results concern constructible subsets, scheme morphism properties or general sheaf pushforward, not bounded constructible ordinary etale finite-ring direct images"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-gabber-open-immersion-sheaf-finiteness",
@@ -84,5 +260,104 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-birational-bad-locus-comparison",
+  "worker": "stage1",
+  "summary": "Preserved the statement and expanded both comparison cones following ILO. Used the dimension inequality without universal catenarity; spread generic sections by a cited limit theorem; added only the proper finite-ring bounded-preservation input over a possibly infinite-dimensional Noetherian base. Checked every citation and recorded verbatim quotes.",
+  "blueprint": "Ancestor lem-per-artin-gabber-affine-curve proof Step 3 (finite-residue duality), through open-immersion finiteness and ILO XIII 3.2.2/3.4.2/3.5.1: geometric finite bad locus in Steps 2--5 and its comparison modulo bounded constructible complexes in Steps 6--10. No chapter or unit route is replaced.",
+  "tool_uses": [
+   {
+    "node": "def-weil-triangulated-category",
+    "why": "General scheme or ordinary etale/derived-category tool used exactly as its quoted statement; the curve-perverse unit supplies no replacement for this basic input."
+   },
+   {
+    "node": "det-properbasechange-modules",
+    "why": "General scheme or ordinary etale/derived-category tool used exactly as its quoted statement; the curve-perverse unit supplies no replacement for this basic input."
+   },
+   {
+    "node": "lem-cbc-etale-derived-direct-image-coherence",
+    "why": "General scheme or ordinary etale/derived-category tool used exactly as its quoted statement; the curve-perverse unit supplies no replacement for this basic input."
+   },
+   {
+    "node": "lem-pc-right-derived-functor-triangulated",
+    "why": "General scheme or ordinary etale/derived-category tool used exactly as its quoted statement; the curve-perverse unit supplies no replacement for this basic input."
+   },
+   {
+    "node": "lem-sbc-higher-direct-image-forget-comparison",
+    "why": "General scheme or ordinary etale/derived-category tool used exactly as its quoted statement; the curve-perverse unit supplies no replacement for this basic input."
+   },
+   {
+    "node": "lem-sbc-pointed-section-stage-descent",
+    "why": "General locally finite-presentation section descent, used for generic rational lifts, without any smooth-base-change theorem."
+   },
+   {
+    "node": "lem-trf-local-dimension-formula",
+    "why": "Generic scheme-dimension inequality, independent of trace-formula assumptions; controls heights for the birational modification without catenarity."
+   },
+   {
+    "node": "lem-weil-pbc-constructible-etale-set-pullback",
+    "why": "General scheme or ordinary etale/derived-category tool used exactly as its quoted statement; the curve-perverse unit supplies no replacement for this basic input."
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-exact",
+    "why": "General scheme or ordinary etale/derived-category tool used exactly as its quoted statement; the curve-perverse unit supplies no replacement for this basic input."
+   },
+   {
+    "node": "lem-weil-pbc-generic-finite-morphism-open-neighborhood",
+    "why": "Generic finite-type scheme finiteness after shrinking, needed to turn zero-dimensional generic bad fibres into finite maps."
+   },
+   {
+    "node": "lem-weil-pbc-local-ring-spec-limit-affine-neighbourhoods",
+    "why": "General scheme or ordinary etale/derived-category tool used exactly as its quoted statement; the curve-perverse unit supplies no replacement for this basic input."
+   },
+   {
+    "node": "lem-weil-pbc-open-closed-short-exact",
+    "why": "General scheme or ordinary etale/derived-category tool used exactly as its quoted statement; the curve-perverse unit supplies no replacement for this basic input."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-derived-slice-localization",
+    "why": "General scheme or ordinary etale/derived-category tool used exactly as its quoted statement; the curve-perverse unit supplies no replacement for this basic input."
+   },
+   {
+    "node": "lemma-weil-pbc-finite-direct-image-exact",
+    "why": "General scheme or ordinary etale/derived-category tool used exactly as its quoted statement; the curve-perverse unit supplies no replacement for this basic input."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "General scheme or ordinary etale/derived-category tool used exactly as its quoted statement; the curve-perverse unit supplies no replacement for this basic input."
+   },
+   {
+    "node": "thm-constructible-serre",
+    "why": "General scheme or ordinary etale/derived-category tool used exactly as its quoted statement; the curve-perverse unit supplies no replacement for this basic input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-weil-triangulated-category",
+  "det-properbasechange-modules",
+  "lem-cbc-etale-derived-direct-image-coherence",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-sbc-higher-direct-image-forget-comparison",
+  "lem-sbc-pointed-section-stage-descent",
+  "lem-trf-local-dimension-formula",
+  "lem-weil-pbc-constructible-etale-set-pullback",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-weil-pbc-generic-finite-morphism-open-neighborhood",
+  "lem-weil-pbc-local-ring-spec-limit-affine-neighbourhoods",
+  "lem-weil-pbc-open-closed-short-exact",
+  "lem-weil-pbc-ringed-derived-slice-localization",
+  "lemma-weil-pbc-finite-direct-image-exact",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "thm-constructible-serre"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q21-a97ccdbf6",
+  "group": "Q21",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q21-a97ccdbf6 (reviewer sub-agent of L); spot-checked: I read the whole item. Its statement is unchanged from the Q23 import. I checked all ten steps against ILO XIII 3.2.2, 3.3, Prop 3.4.2 (both stages) and 3.5.1 in the local PDF. The route is the same: induction hypothesis on X'; the height argument through the 02JU dimension inequality (dominant, birational, so trdeg 0, giving s=t and kappa(y)/kappa(t) algebraic); one-point generic fibres, then 02NW makes the components finite surjective, and intersections miss t because the fibres over t are distinct points; generic sections spread by the affine-neighbourhood limit plus lfp section descent; the proper-unit triangle C ≅ a_*H; the induction hypothesis on Zbar, where prefixing (0) gives height ≥ c+1 so t is not in A; proper base change for M in D^+ with ell-torsion cohomology; the h_! triangle on F with q proper; the octahedral axiom. Every cited statement says what its step takes from it. I checked the edge cases: K=0, p an isomorphism, no surviving component, T'=∅, Z=∅, c=1. The new node lem-per-proper-finite-coefficient-bounded-preservation is statement-only and self-contained. It is true: Stacks 0GL0 (theorem-constructible-shriek) with the identity compactification, plus 095U (lemma-cohomological-dimension-proper) with a uniform fibre-dimension bound from finitely many charts; no finite dimension or invertibility is needed. It matches ILO's proper finiteness input and is not a clause of the item. On duplicates: lem-per-quasi-excellent-etale-direct-image-finiteness contains the proper case, but its closure reaches this item, so citing it would make a cycle. The pbc proper-finiteness nodes need finite dimension and invertibility, and the fd node needs a base over a field. Advisory: a later split of the new node can cite lem-weil-pbc-etale-compactification-constructibility and lem-kun-proper-torsion-cd-bound; neither reaches the item. Batch 5: the closure from both targets, stopping at the assumption leaves, grows by only the new node. All three flagged citations are already in the closure without this item and are generic: det-properbasechange-modules is general proper base change, given by neither assumption; lem-per-quasi-excellent-finite-type-stability is Stacks 07QU algebra, reaching lem-trf-g-ring-affine-cover only through G-ring algebra; lem-trf-local-dimension-formula is the 02JU inequality. All three are accepted. I accept all 16 tool_uses as generic inputs. There is no SGA citation. I made no changes."
  }
 }
