@@ -20,64 +20,45 @@
  ],
  "proof": [
   {
-   "text": "Let $\\{\\operatorname{Spec}B_i\\}$ be the family of all affine opens of $U$. For each $i$, [lem-weil-pbc-strict-w-cover] gives a faithfully flat ind-étale map $B_i\\to C_i$ whose spectrum is w-local and whose local rings at maximal ideals are strictly henselian; by the definition in [det-pe-wlocal-strict-contractible], $C_i$ is w-strictly local. Apply [det-pe-wc-cover-second-stage] with a Stonean cover of $\\pi_0(\\operatorname{Spec}C_i)$ to obtain a faithfully flat ind-Zariski map $C_i\\to D_i$ with $D_i$ w-contractible. The map $B_i\\to D_i$ is ind-étale by the composition clause of [lem-weil-pbc-ind-etale-stability]. It is faithfully flat as well: if a complex of $B_i$-modules becomes exact after tensoring with $D_i$, faithful flatness of $C_i\\to D_i$ reflects exactness after tensoring with $C_i$, and faithful flatness of $B_i\\to C_i$ then reflects exactness over $B_i$, using the criterion in [def-weil-pbc-faithfully-flat-ring-map].",
+   "text": "Take the Mathlib affine-open cover A of U.left. For every chart ring A.X j apply the already proved exists_isWContractibleRing, the declaration attached to [sk-thm-pe-wc-cover]. It gives D j in the same universe, its commutative ring and algebra structures, ind-etaleness, faithful flatness and w-contractibility. Let phi j be its algebra map. Eliminate these existential witnesses inside the theorem proof; no definition chooses data from an unproved existence theorem.",
    "uses": [
-    "lem-weil-pbc-strict-w-cover",
-    "det-pe-wlocal-strict-contractible",
-    "det-pe-wc-cover-second-stage",
-    "lem-weil-pbc-ind-etale-stability",
-    "def-weil-pbc-faithfully-flat-ring-map"
+    "sk-thm-pe-wc-cover"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-weakly-contractible-basis/det-pe-wcb-cover.proof.md",
-    "place": "proof, first paragraph"
-   }
+   "elementary": false
   },
   {
-   "text": "The composite $\\operatorname{Spec}D_i\\to\\operatorname{Spec}B_i\\to U\\to X$ is weakly étale. The first map is weakly étale by the affine ind-étale clause of [det-pe-morphisms-etale-comparison], and the second is weakly étale because an open immersion is étale by [lem-weil-pbc-open-immersion-etale] and étale morphisms are weakly étale by that same comparison node. The last map is weakly étale because $U$ is an object of the site [def-weil-pbc-proetale-site]. Composition is stable by [lem-weil-pbc-weakly-etale-composition-base-change]. Thus $\\operatorname{Spec}D_i$ is an object of $X_{\\mathrm{proét}}$, and its map to $U$ is a morphism there.",
+   "text": "For phi j, use the closed source-library RingHom.IndEtale.weaklyEtale and WeaklyEtale.Spec_iff API for [sk-def-pe-morphisms] to make Spec.map (phi j) weakly etale. Faithful flatness makes it surjective, by the flat-and-surjective spectrum criterion [lem-weil-pbc-faithfully-flat-surjective-spectrum]. Since both spectra are affine, each singleton belongs to the proetale precoverage [def-weil-pbc-proetale-covering] by Hom.singleton_mem_propQCPrecoverage. These are specializations of the existing source and Mathlib APIs; no general comparison theorem is assumed.",
    "uses": [
-    "det-pe-morphisms-etale-comparison",
+    "sk-def-pe-morphisms",
+    "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+    "def-weil-pbc-proetale-covering"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Weaken the affine-open cover to the proetale precoverage using Mathlib zariskiPrecoverage_le_propQCPrecoverage, which uses that open immersions are etale [lem-weil-pbc-open-immersion-etale] and hence weakly etale. Bind this cover with the singleton covers of the previous step. Cover.bind gives a covering B of U.left, indexed by the small dependent sum of the affine-cover indices and PUnit. By weak-etale composition [lem-weil-pbc-weakly-etale-composition-base-change], B.f i followed by U.hom defines a site object W i [def-weil-pbc-proetale-site], and B.f i defines its map to U. Mapping the presieve along the forgetful functor gives exactly B.presieve, whose membership is B.mem0. At i = (j, star), W i has underlying scheme Spec (D j); choose the identity isomorphism, A.X j, phi j and the affine-open inclusion A.f j. The factorization is Category.id_comp. This supplies all requested witnesses and keeps the finite refinement condition through precoverage composition, without indexing by all affine opens.",
+   "uses": [
     "lem-weil-pbc-open-immersion-etale",
+    "lem-weil-pbc-weakly-etale-composition-base-change",
     "def-weil-pbc-proetale-site",
-    "lem-weil-pbc-weakly-etale-composition-base-change"
+    "def-weil-pbc-proetale-covering"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-weakly-contractible-basis/det-pe-wcb-cover.proof.md",
-    "place": "proof, second paragraph"
-   }
-  },
-  {
-   "text": "The family is a pro-étale covering by [def-weil-pbc-proetale-covering]. Let $W\\subset U$ be an affine open. Since the family includes every affine open, $W=\\operatorname{Spec}B_i$ for some $i$. The pullback $\\operatorname{Spec}D_i\\times_U W$ is $\\operatorname{Spec}D_i$, because the map factors through $W$; this is affine, and its image is all of $W$ because $B_i\\to D_i$ is faithfully flat and faithfully flat maps induce surjections on spectra by [lem-weil-pbc-faithfully-flat-surjective-spectrum]. Hence the one index $i$ and this affine open satisfy the finite refinement condition for $W$.",
-   "uses": [
-    "def-weil-pbc-proetale-covering",
-    "lem-weil-pbc-faithfully-flat-surjective-spectrum"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-weakly-contractible-basis/det-pe-wcb-cover.proof.md",
-    "place": "proof, third paragraph"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-strict-w-cover",
-  "det-pe-wlocal-strict-contractible",
-  "det-pe-wc-cover-second-stage",
-  "lem-weil-pbc-ind-etale-stability",
-  "def-weil-pbc-faithfully-flat-ring-map",
-  "det-pe-morphisms-etale-comparison",
-  "lem-weil-pbc-open-immersion-etale",
-  "def-weil-pbc-proetale-site",
-  "lem-weil-pbc-weakly-etale-composition-base-change",
+  "sk-thm-pe-wc-cover",
+  "sk-def-pe-morphisms",
+  "lem-weil-pbc-faithfully-flat-surjective-spectrum",
   "def-weil-pbc-proetale-covering",
-  "lem-weil-pbc-faithfully-flat-surjective-spectrum"
+  "lem-weil-pbc-open-immersion-etale",
+  "lem-weil-pbc-weakly-etale-composition-base-change",
+  "def-weil-pbc-proetale-site"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-weakly-contractible-basis/det-pe-wcb-cover.proof.md",
-  "place": "Proof; the three paragraphs are expanded with explicit weak-étale and faithful-flatness citations."
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-weakly-contractible-basis/det-pe-wcb-cover.md",
+  "place": "M5 Lean proof: use the closed sk-thm-pe-wc-cover ring-extension theorem, then Mathlib affineOpenCover, singleton proetale covers and Cover.bind. This follows the first step of sk-thm-pe-weakly-contractible-basis without re-proving the ring-cover unit."
  },
  "mathlib_searches": [
   {
@@ -173,5 +154,15 @@
   "by": "Q82",
   "date": "2026-10-17",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M5",
+  "result": "pass",
+  "landing": "20261018T144411-L-3502101",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
