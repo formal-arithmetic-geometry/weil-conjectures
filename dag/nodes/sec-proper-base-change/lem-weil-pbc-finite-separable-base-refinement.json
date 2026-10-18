@@ -47,11 +47,10 @@
    }
   },
   {
-   "text": "Form $W=Z\\times_S T$ with projections $r:W\\to Z$ and $b:W\\to T$ [def-pc-fibre-product]. For any scheme $U$, maps $U\\to W$ are pairs $(u:U\\to Z,v:U\\to T)$ with $f\\circ u=a\\circ v$. Reading this pair as $(v,u)$ shows that $(W,b,r)$ is also the fibre product of $(a,f)$, with second projection $r$. Thus the second-projection statements cited next apply to $r$ directly. The map $r$ is the base change of $a$ along $f$, so is etale by [lem-weil-pbc-etale-scheme-base-change] and separated by [lem-weil-pbc-separated-base-change]. The identity $a\\circ q=f$ defines $\\gamma=(\\mathrm{id}_Z,q):Z\\to W$, with $r\\circ\\gamma=\\mathrm{id}_Z$ and $b\\circ\\gamma=q$. Thus [lem-weil-pbc-etale-section-clopen-immersion] applies to this actual section of the separated etale map $r$ and makes $\\gamma$ an open (and closed) immersion.",
+   "text": "Form $W=Z\\times_S T$ with projections $r:W\\to Z$ and $b:W\\to T$ [def-pc-fibre-product]. For any scheme $U$, maps $U\\to W$ are pairs $(u:U\\to Z,v:U\\to T)$ with $f\\circ u=a\\circ v$. Reading this pair as $(v,u)$ shows that $(W,b,r)$ is also the fibre product of $(a,f)$, with second projection $r$. Thus the second-projection statements cited next apply to $r$ directly. The map $r$ is the base change of $a$ along $f$, so is etale by [lem-weil-pbc-etale-scheme-base-change]. The identity $a\\circ q=f$ defines $\\gamma=(\\mathrm{id}_Z,q):Z\\to W$, with $r\\circ\\gamma=\\mathrm{id}_Z$ and $b\\circ\\gamma=q$. The open-immersion argument of [lem-weil-pbc-etale-section-clopen-immersion] makes $\\gamma$ an open immersion. Only this clause is needed: the section is a monomorphism, its composite with $r$ is the etale identity, so Etale.of_comp followed by IsOpenImmersion.of_flat_of_mono applies without needing separatedness of $r$.",
    "uses": [
     "def-pc-fibre-product",
     "lem-weil-pbc-etale-scheme-base-change",
-    "lem-weil-pbc-separated-base-change",
     "lem-weil-pbc-etale-section-clopen-immersion"
    ],
    "elementary": false,
@@ -73,7 +72,7 @@
    }
   },
   {
-   "text": "By projectivity of $f$ and [def-kun-projective], choose an integer $N\\geq0$ and a closed immersion $i:Z\\hookrightarrow\\mathbf P^N_S$ with structural composite $f$. By [lemma-nagata-projective-space-base-change-pullback], $\\mathbf P^N_T$ is $\\mathbf P^N_S\\times_S T$. The equality of the two maps $Z\\to S$ gives a morphism $j=(i,q):Z\\to\\mathbf P^N_T$ by [def-pc-fibre-product]. For the projections $p:\\mathbf P^N_T\\to\\mathbf P^N_S$ and $h:\\mathbf P^N_T\\to T$, the defining equations are $p\\circ j=i$ and $h\\circ j=q$. Here $N+1$ homogeneous coordinates are used on both projective spaces.",
+   "text": "By [def-kun-projective], choose a finite homogeneous-coordinate type $n$ and a closed immersion $i:Z\\hookrightarrow\\mathbf P(n;S)$ whose structural composite is $f$. By [lemma-nagata-projective-space-base-change-pullback] and [def-pc-fibre-product], the equality $\\pi\\circ i=f=a\\circ q$ gives $j:Z\\to\\mathbf P(n;T)$, implemented by ProjectiveSpace.liftBaseChange q i. Its composites with the projection to $\\mathbf P(n;S)$ and the structure map to $T$ are $i$ and $q$. The same finite coordinate type works over both fields, including the empty coordinate type.",
    "uses": [
     "def-kun-projective",
     "lemma-nagata-projective-space-base-change-pullback",
@@ -99,9 +98,9 @@
    }
   },
   {
-   "text": "Apply [lem-kun-projective-implies-proper] to the projective morphism $q$ established above. It is proper. Together with step 3 and step 5 this gives all three assertions.",
+   "text": "Apply the already proved upstream instance AlgebraicGeometry.IsHProjective.isProper, the projective-to-proper assertion of [lem-pc-projective-proper], to the H-projectivity of $q$ from step 5. This instance factors through the closed immersion and the proper finite projective-space projection. Together with steps 3 and 5 this proves all three assertions. The separate sorry-bearing hProjective_properness theorem of lem-kun-projective-implies-proper is unnecessary.",
    "uses": [
-    "lem-kun-projective-implies-proper"
+    "lem-pc-projective-proper"
    ],
    "elementary": false,
    "source": {
@@ -115,19 +114,19 @@
   "lem-weil-pbc-affine-source-morphism-separated",
   "def-pc-fibre-product",
   "lem-weil-pbc-etale-scheme-base-change",
-  "lem-weil-pbc-separated-base-change",
   "lem-weil-pbc-etale-section-clopen-immersion",
   "lem-pc-proper-base-change",
   "lem-pc-open-immersion-smooth-composition",
   "def-kun-projective",
   "lemma-nagata-projective-space-base-change-pullback",
+  "lem-weil-pbc-separated-base-change",
   "lem-weil-pbc-closed-immersion-cancellation",
-  "lem-kun-projective-implies-proper"
+  "lem-pc-projective-proper"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/morphisms.tex",
-  "place": "Tag 0C4Q finite-projective-space graph construction; smoothness by Tag 024T and Tags 01VB, 01VA, 01VC, proving the specialization of Tag 0G80"
+  "place": "V6 Lean proof, 2026-10-18: Tag 0C4Q finite-coordinate projective-space graph construction, smoothness by the etale graph section (Tag 024T) and smooth base change; properness by the proved upstream IsHProjective.isProper instance (lem-pc-projective-proper)."
  },
  "mathlib_searches": [
   {
@@ -228,8 +227,7 @@
   ]
  },
  "tool_uses": [
-  "lem-pc-proper-base-change",
-  "lem-kun-projective-implies-proper"
+  "lem-pc-proper-base-change"
  ],
  "reviewed": {
   "date": "2026-10-14",
@@ -268,5 +266,15 @@
   "by": "NI",
   "date": "2026-10-15",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V6",
+  "result": "pass",
+  "landing": "20261018T062937-L-687658",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
