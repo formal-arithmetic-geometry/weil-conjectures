@@ -13,7 +13,8 @@
   "def-sbc-affine-space",
   "def-weil-pbc-derived-categories",
   "prop-weil-pbc-inverse-image-modules-exact",
-  "def-weil-pbc-direct-image"
+  "def-weil-pbc-direct-image",
+  "def-asd-ordinary-finite-p1-arrows"
  ],
  "proof": [
   {
@@ -335,5 +336,23 @@
   "group": "Q100",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q100-7837477ce (reviewer sub-agent of L); spot-checked: I read the whole item. The statement is unchanged; the source is ILO Exposé XVI, Prop. 1.5, printed p. 227, where homotopy invariance comes from SGA 4 XV 2.2. The split replaces that with the P^1 duality argument and cites no SGA. The steps are correct: lem-asd-ordinary-finite-p1-adjunction (N=ℓ^n, A=Z/ℓ^n, B Noetherian) gives b, the trace t and the counit (1⊗t)π^{-1}. Then ε_K d = pr_2 and the first component of d is η_q (triangle identity). The composite counit of Fi_* ⊣ i^!G is invertible by uniqueness of right adjoints, so pr_2 u = 1. I redid the split-triangle algebra (∂=0, w(v in_1)=1, ((v in_1)w−1)v = −vu pr_2 = 0), and κ^D identifies the result with the canonical unit for p=qj. There is no cycle: the item is not in its own 10,564-node closure. There is no duplicate: lem-pur-affine-line-ordinary-invariance is over k-schemes only, and lem-per-geometric-affine-space-acyclicity is over an algebraically closed field. The citer lem-per-vector-extension-splitting-cohomology uses exactly this statement. I repaired three citation faults: (1) C4, Step 3: the π of lem-amb-proper-coproducts-projection is defined through def-kun-projection-formula-map, not the ringed-topoi node, so the text is corrected and that node is cited; (2) C1/E1, Step 4: clause (5) of the composition lemma needs termwise i_* to be exact, now cited from lem-per-etale-closed-sheaf-internal-adjunction (same unit); (3) E1, Step 7: the Grothendieck-abelian hypothesis of lem-sfb-derived-composition-adjunction-normalization is now cited from lem-weil-pbc-module-sheaves-grothendieck-abelian. proof_deps is updated to match. The worker wrote the generic tool_uses entries themselves (C8); I accept them as recorded.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NoetherianAffineLineUnit",
+  "declaration": "AlgebraicGeometry.Etale.isIso_noetherian_affineLine_unit",
+  "file": "lean/Sheaf/AlgebraicGeometry/NoetherianAffineLineUnit.lean",
+  "statement": "theorem isIso_noetherian_affineLine_unit (B : Scheme.{u}) [IsNoetherian B] (ell n : ℕ) (hell : ell.Prime) (hn : 0 < n) (hB : IsUnit (ell : Γ(B, ⊤))) : IsIso ((derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod (ell ^ n)))) (AffineSpace (ULift.{u} (Fin 1)) B ↘ B)).unit.app (ordinaryFiniteUnit (ULift.{u + 1} (ZMod (ell ^ n))) B) ≫ (ordinaryFinitePushforward (ULift.{u + 1} (ZMod (ell ^ n))) (AffineSpace (ULift.{u} (Fin 1)) B ↘ B)).map (ordinaryFiniteUnitPullback (ULift.{u + 1} (ZMod (ell ^ n))) (AffineSpace (ULift.{u} (Fin 1)) B ↘ B)).hom)",
+  "branch": "newtargets-dag",
+  "by": "Q51",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3b8ec1424",
+  "group": "Q51",
+  "result": "pass",
+  "note": "Statement matches node and ILO XVI 1.5 clause by clause: IsNoetherian B, ell prime with IsUnit (ell : Γ(B,⊤)), 0<n, Λ = ULift ZMod(ell^n), p = AffineSpace (ULift (Fin 1)) B ↘ B, ordinary small-etale DerivedCategoryModule. Conclusion: IsIso of the actual derived unit followed by Rp_*(ordinaryFiniteUnitPullback.hom), the same shape as landed ordinaryFiniteP1Unit; no extra hypotheses; project u/u+1 universe convention. Delivery changes only the item node (lean record + stmt_dep on landed def-asd-ordinary-finite-p1-arrows, which owns the arrows) and the new module. No duplicate: the k-scheme/field versions differ and no other group delivered this node. Proof only sorry, 7-step proof docstring, source/blueprint docstrings, lean.statement verbatim. nt_compile --json clean in 5.0 s; broken control fails."
  }
 }

@@ -257,5 +257,23 @@
   "group": "Q120",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q120-5ba0ee5da (reviewer sub-agent of L); spot-checked: I read the full item, all 11 proof_deps and the 8 stmt_deps, plus Stacks more-algebra.tex lemma-formally-catenary (0AW5, last two proof paragraphs). The statement is true and unchanged. There are no new nodes, no duplicates (checked lem-per-closed-fibre-polynomial-presentation and lem-per-flat-equidimensional-catenary-descent; no other node cites 0AW5 for this lemma) and no SGA. Step 1: Noetherianity, with the localization argument written out. Step 2: complete-local-excellence plus def-exc gives universal catenarity, and catenarity passes to D through the prime intervals inside n'. Step 3: correctly supplies the source's 'small detail omitted': a minimal prime p of C sits below Q∩C, (C/p)[x] is a domain, and q=pD. Step 4: D/q ≅ T_M, with the contraction of M equal to n/p because n' lies over n. Step 5: polynomial flatness via N⊗T≅⊕N, elementary. Step 6: the closed fibre is k[x]_{M0} with dimension r, valid for any maximal ideal. Step 7: the flat-height-formula leaf in its local form, with all hypotheses checked, gives dim(C/p)+r. Step 8: components are V(minimal primes) and equidimensionality gives dim(C/p)=dim C. Edge cases checked: r=0, k[[t]] with (t,x) vs (x), ℝ[[t]] with (t,x²+1), k[[u,v]]/(uv), nilpotents. Accepted tool_use: lem-weil-pbc-polynomial-ring-maximal-localization-dimension (generic Stacks 00OP); the other off-unit citations are Mathlib leaves. Batch-5 flag: lem-trf-regular-ring-universally-catenary is generic algebra (Stacks 00NM, regular ⇒ CM ⇒ universally catenary), not part of the trace formula or Poincaré duality, and the parent Ratliff node already cites lem-per-complete-local-excellence, so the b5 closure is unchanged. Accepted. Advisory: the inherited statement uses ring dim C without def-weil-pbc-krull-dimension-ring in stmt_deps and does not define 'equidimensional' inline. This is cosmetic."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.PolynomialClosedFibreComponents",
+  "declaration": "MvPolynomial.isCatenaryRing_equidimensional_localizationAtMaximal",
+  "file": "lean/Sheaf/RingTheory/PolynomialClosedFibreComponents.lean",
+  "statement": "theorem isCatenaryRing_equidimensional_localizationAtMaximal (C : Type u) [CommRing C] [IsNoetherianRing C] [IsLocalRing C] [IsAdicComplete (IsLocalRing.maximalIdeal C) C] (heq : ∀ (Z W : Set (Spec (.of C))), Z ∈ irreducibleComponents (Spec (.of C)) → W ∈ irreducibleComponents (Spec (.of C)) → topologicalKrullDim Z = topologicalKrullDim W) (r : ℕ) (M : Ideal (MvPolynomial (Fin r) C)) [M.IsMaximal] (hclosed : M.comap (MvPolynomial.C : C →+* MvPolynomial (Fin r) C) = IsLocalRing.maximalIdeal C) : IsCatenaryRing (Localization.AtPrime M) ∧ (∀ (Z W : Set (Spec (.of (Localization.AtPrime M)))), Z ∈ irreducibleComponents (Spec (.of (Localization.AtPrime M))) → W ∈ irreducibleComponents (Spec (.of (Localization.AtPrime M))) → topologicalKrullDim Z = topologicalKrullDim W) ∧ (∀ (Z : Set (Spec (.of (Localization.AtPrime M)))), Z ∈ irreducibleComponents (Spec (.of (Localization.AtPrime M))) → topologicalKrullDim Z = ringKrullDim C + (r : WithBot ℕ∞))",
+  "branch": "newtargets-dag",
+  "by": "NW",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4426258a1",
+  "group": "NW",
+  "result": "pass",
+  "note": "The statement matches node and Stacks 0AW5 clause by clause: Noetherian local complete C (IsAdicComplete), equidimensionality as pairwise equal topologicalKrullDim of irreducibleComponents, M maximal with comap equality (lies over n), conclusion IsCatenaryRing ∧ equidimensional ∧ every component of dim ringKrullDim C + r. No extra assumptions; universe u bound. Dep records are fine: def-weil-irreducible-components is a Mathlib leaf (mathlib_match irreducibleComponents); IsCatenaryRing in ExcellentRing is a real 00NI definition. Edge cases checked: r=0, field, uv, nilpotents, non-rational points, (x) excluded by hclosed. Gates: sorry only, source and blueprint docstrings with the 8 steps, statement verbatim, node changes only in lean, no duplicates found. nt_compile --json: 2.0 s, exit 0, clean; control fails; probe confirms Spec carrier = PrimeSpectrum and topologicalKrullDim = ringKrullDim. Advisory: ringKrullDim used without def-weil-pbc-krull-dimension-ring in stmt_deps (cosmetic, stage-1 noted)."
  }
 }

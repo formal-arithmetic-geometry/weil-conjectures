@@ -189,5 +189,23 @@
   "group": "Q73",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q73-b6db1bfa4 (reviewer sub-agent of L); spot-checked: Read both nodes and checked all seven proof steps against ILO VIII pp.103–104 and the pinned Mathlib unique-sums declarations. Mathematics, hypotheses, edge cases, and route checks pass. Repaired B9: both blueprint ancestry lists omitted three intermediate nodes. Corrected JSON files and detailed review.md written.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.MonoidAlgebraDomainFraction",
+  "declaration": "AddMonoidAlgebra.domain_fraction_of_fg_generating_submonoid",
+  "file": "lean/Sheaf/RingTheory/MonoidAlgebraDomainFraction.lean",
+  "statement": "theorem domain_fraction_of_fg_generating_submonoid (k : Type u) [Field k] (G : Type v) [AddCommGroup G] [IsAddTorsionFree G] (Q : AddSubmonoid G) (hfg : Q.FG) (hgen : AddSubgroup.closure (Q : Set G) = ⊤) : Function.Injective (mapDomainRingHom k Q.subtype) ∧ IsDomain (AddMonoidAlgebra k Q) ∧ IsDomain (AddMonoidAlgebra k G) ∧ (∃ e : FractionRing (AddMonoidAlgebra k Q) ≃+* FractionRing (AddMonoidAlgebra k G), ∀ f : AddMonoidAlgebra k Q, e (algebraMap (AddMonoidAlgebra k Q) (FractionRing (AddMonoidAlgebra k Q)) f) = algebraMap (AddMonoidAlgebra k G) (FractionRing (AddMonoidAlgebra k G)) (mapDomainRingHom k Q.subtype f)) ∧ (∀ g : G, ∃ a b : Q, single g (1 : k) * single (b : G) (1 : k) = single (a : G) (1 : k))",
+  "branch": "newtargets-dag",
+  "by": "Q57",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2859f9c44",
+  "group": "Q57",
+  "result": "pass",
+  "note": "Read node, ILO VIII 3.2.8-3.2.12 (pp.103-104), stmt_dep FineFanBlowup and the Lean module. Hypotheses match exactly: Field k, AddCommGroup+IsAddTorsionFree G, AddSubmonoid Q with Q.FG, AddSubgroup.closure Q = ⊤; no extra assumptions; universes u,v independent. Conclusions match: injectivity of canonical mapDomainRingHom k Q.subtype, IsDomain for both algebras, fraction-ring equivalence compatible with the inclusion (unique, so not hollow), and every monomial as a cross-multiplied quotient with a,b in Q. Edge cases (trivial G, Q=G, non-saturated ⟨2,3⟩, any characteristic) covered. No Mathlib or project duplicate (only partial domain instances). Node diff vs live is the lean record only; statement verbatim; docstrings carry source and blueprint tag; proof is sorry. nt_compile --json clean (FineFanBlowup 7.8 s, item 2.9 s, exit 0); BOGUS control fails. Advisory: the conventions-only stmt_dep import supplies no declaration."
  }
 }
