@@ -9,6 +9,9 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenImmersionUpperShriek
 public import WeilConjectures.TraceFormula.CompactCohomology
 public import WeilConjectures.TraceFormula.OpenPieceCoherence
+public import WeilConjectures.CategoryTheory.Triangulated.TriangleMorphismExtension
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.CompactlySupported
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperStarShift
 
 /-!
 
@@ -213,6 +216,127 @@ theorem compactLocalizationTriangle_distinguished
   distinguished_of_iso _ _ _ _ _ hδ
 
 end CompactTriangle
+
+/-! ### The Frobenius square with the connecting morphism on `X` -/
+
+section ConnectingSquare
+
+variable {X U Z : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
+  [IsSeparated X.hom] [LocallyOfFiniteType U.hom] [QuasiCompact U.hom] [IsSeparated U.hom]
+  [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom] [IsSeparated Z.hom]
+  {j : U ⟶ X} [IsOpenImmersion j.left] {i : Z ⟶ X}
+  {Φ : X ⟶ X} {ΦU : U ⟶ U} [IsUniversalHomeomorphism Φ.left] [IsUniversalHomeomorphism ΦU.left]
+
+variable (ℓ) in
+/-- No nonzero maps `(LΦ^* Rj_! N)[1] ⟶ Ri_* M` (blueprint `prop-trf-trace-additivity-open-closed`,
+Step 2(c)): by the base change `LΦ^* Rj_! ≅ Rj_! LΦ_U^*` along the cartesian square
+`Φ_U ≫ j = j ≫ Φ` and `Rj_! ≅ j_!`, the source is a shifted extension by zero, and the range of
+`i` misses that of `j`. -/
+lemma eq_zero_of_shift_upperStar_lowerShriek_to_lowerStar
+    (hcompl : IsCompl (Set.range j.left.base) (Set.range i.left.base)) (hj : ΦU ≫ j = j ≫ Φ)
+    (N : Dᵇc(U.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
+    (M : Dᵇc(Z.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
+    (d : (shiftFunctor _ (1 : ℤ)).obj
+      ((boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left)).ι.obj
+        ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ Φ).obj
+          ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ j).obj N))) ⟶
+      (boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left)).ι.obj
+        ((boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ i).obj M)) :
+    d = 0 := by
+  have := isIso_boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ
+    (isPullback_of_comp_eq_of_isOpenImmersion j hj)
+  let e := asIso ((boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ
+      (isPullback_of_comp_eq_of_isOpenImmersion j hj)).app N) ≪≫
+    (boundedConstructibleLowerShriekIsoOpenImmersionLowerShriek_padicAlgCl ℓ j).app
+      ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ ΦU).obj N)
+  rw [← cancel_mono ((boundedConstructibleLowerStarCompatibility
+      (Profinite.padicAlgClRingObj ℓ) ℓ i).hom.app M),
+    ← cancel_epi ((shiftFunctor _ (1 : ℤ)).map
+      ((boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left)).ι.map
+        e.inv)), zero_comp, comp_zero]
+  exact eq_zero_of_shift_openImmersionLowerShriek_to_lowerStar _ ℓ j i hcompl.disjoint _ _ _ _
+
+set_option maxHeartbeats 1000000 in
+-- the triangles are compared through the inclusions of the bounded constructible categories
+variable (ℓ) in
+/-- **The Frobenius endomorphisms of the localization triangle commute with its connecting
+morphism on `X`** (blueprint `prop-trf-trace-additivity-open-closed`, Step 2(c)): let
+`ψ_U : LΦ^* Rj_! Lj^* K ⟶ Rj_! Lj^* K`, `φ : LΦ^* K ⟶ K` and `ψ_Z : LΦ^* Ri_* Li^* K ⟶ Ri_* Li^* K`
+be compatible with the counit `ε` and the unit `η` of a localization triangle with connecting
+morphism `δ`. Then `δ ∘ ψ_Z = ψ_U[1] ∘ LΦ^* δ`, where `LΦ^* δ` is formed through the ambient
+derived pullback, which is triangulated: the third map of a morphism of triangles completing
+`(ψ_U, φ)` is unique, there being no nonzero maps `(LΦ^* Rj_! Lj^* K)[1] ⟶ Ri_* Li^* K`. -/
+theorem map_comp_connecting_eq_of_isCompl
+    (hcompl : IsCompl (Set.range j.left.base) (Set.range i.left.base)) (hj : ΦU ≫ j = j ≫ Φ)
+    (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧)
+    (δ : (boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left)).ι.obj
+          ((boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ i).obj
+            ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ i).obj K)) ⟶
+        (shiftFunctor _ (1 : ℤ)).obj
+          ((boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left)).ι.obj
+            ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ j).obj
+              ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j).obj K))))
+    (hδ : Triangle.mk
+        ((boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left)).ι.map
+          ((boundedConstructibleLowerShriekUpperStarAdjunction_padicAlgCl ℓ j).counit.app K))
+        ((boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left)).ι.map
+          ((boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+            i).unit.app K)) δ ∈ distTriang _)
+    (ψU : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ Φ).obj
+        ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ j).obj
+          ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j).obj K)) ⟶
+      (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ j).obj
+          ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j).obj K))
+    (φ : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ Φ).obj K ⟶ K)
+    (ψZ : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ Φ).obj
+        ((boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ i).obj
+          ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ i).obj K)) ⟶
+      (boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ i).obj
+          ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ i).obj K))
+    (ha : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ Φ).map
+        ((boundedConstructibleLowerShriekUpperStarAdjunction_padicAlgCl ℓ j).counit.app K) ≫ φ =
+      ψU ≫ (boundedConstructibleLowerShriekUpperStarAdjunction_padicAlgCl ℓ j).counit.app K)
+    (hb : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ Φ).map
+        ((boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+          i).unit.app K) ≫ ψZ =
+      φ ≫ (boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+          i).unit.app K) :
+    (boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left)).ι.map ψZ ≫
+        δ =
+      connectingOfIso (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ Φ)
+          (boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left)).ι
+          (boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left)).ι
+          L((Φ.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧)
+          (boundedConstructibleUpperStarCompatibility (Profinite.padicAlgClRingObj ℓ) ℓ Φ) δ ≫
+        (shiftFunctor _ (1 : ℤ)).map
+          ((boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left)).ι.map
+            ψU) := by
+  have hsub : Subsingleton ((shiftFunctor _ (1 : ℤ)).obj
+      ((boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left)).ι.obj
+        ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ Φ).obj
+          ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ j).obj
+            ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j).obj K)))) ⟶
+      (boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left)).ι.obj
+        ((boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ i).obj
+          ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ i).obj K))) :=
+    ⟨fun a b ↦ (eq_zero_of_shift_upperStar_lowerShriek_to_lowerStar ℓ hcompl hj _ _ a).trans
+      (eq_zero_of_shift_upperStar_lowerShriek_to_lowerStar ℓ hcompl hj _ _ b).symm⟩
+  have hT := distinguished_of_iso
+    (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ Φ)
+    (boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left)).ι
+    (boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left)).ι
+    L((Φ.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧)
+    (boundedConstructibleUpperStarCompatibility (Profinite.padicAlgClRingObj ℓ) ℓ Φ) hδ
+  obtain ⟨τ, -, -, -, h⟩ := ((triangle_morphism_extension _ _ hT hδ
+    ((boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left)).ι.map
+      φ)).2.1 hsub).2.2
+    ((boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left)).ι.map ψU)
+    ((boundedConstructible (condensedRingObj (Profinite.padicAlgClRingObj ℓ) X.left)).ι.map ψZ)
+    (by simp only [Triangle.mk_mor₁, ← Functor.map_comp, ha])
+    (by simp only [Triangle.mk_mor₂, ← Functor.map_comp, hb])
+  exact h.symm
+
+end ConnectingSquare
 
 /-! ### Triangle additivity of the trace -/
 
