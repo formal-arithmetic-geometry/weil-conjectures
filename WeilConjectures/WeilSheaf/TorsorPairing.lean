@@ -134,6 +134,8 @@ namespace CategoryTheory.Mod
 
 variable {C : Type*} [Category C] [MonoidalCategory C] {A : C} [MonObj A]
 
+/-- If the action of `A` on the algebra `P` is multiplication through `u : A ⟶ P`, the
+action commutes with the multiplication (blueprint `lem-fd-as-characters`). -/
 @[reassoc]
 lemma act_whiskerRight_mul {P : Mod C A} [MonObj P.X] (u : A ⟶ P.X)
     (hP : act P.X = u ▷ P.X ≫ MonObj.mul) :
@@ -157,6 +159,9 @@ lemma pairing_linear_left {P : Mod C A} [MonObj P.X] (u : A ⟶ P.X)
 
 variable [BraidedCategory C]
 
+/-- If the action of `A` on the commutative algebra `P` is multiplication through
+`u : A ⟶ P`, the action on the second factor commutes with the multiplication
+(blueprint `lem-fd-as-characters`). -/
 @[reassoc]
 lemma whiskerLeft_act_mul {P : Mod C A} [MonObj P.X] [IsCommMonObj P.X] (u : A ⟶ P.X)
     (hP : act P.X = u ▷ P.X ≫ MonObj.mul) :

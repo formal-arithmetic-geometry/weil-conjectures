@@ -67,7 +67,6 @@ lemma lowerStar_map_adicConstantSheafToLowerStar_comp_torsorTranslation (g : G) 
   · simp [MorphismProperty.Over.pullbackCongr, MorphismProperty.Over.pullbackComp,
       MorphismProperty.Over.pullback, MorphismProperty.Over.mk, hτs]
 
-
 /-- Pulling back functions along `s` commutes with pulling back along automorphisms `e_W`,
 `e_{W₁}` with `s ≫ e_{W₁} = e_W ≫ s`. -/
 lemma adicConstantSheafToLowerStar_lowerStarExchange (eW : W ⟶ W) (eW₁ : W₁ ⟶ W₁)
@@ -88,7 +87,6 @@ lemma adicConstantSheafToLowerStar_lowerStarExchange (eW : W ⟶ W) (eW₁ : W�
   congr 2
   simp [MorphismProperty.Over.pullbackCongr, MorphismProperty.Over.pullbackComp,
       MorphismProperty.Over.pullback, MorphismProperty.Over.mk]
-
 
 /-- The pullback of functions along `s` is compatible with the structure isomorphisms
 `(e_W⁻¹)_* ℚ̄_ℓ ≅ ℚ̄_ℓ` and `(e_{W₁}⁻¹)_* ℚ̄_ℓ ≅ ℚ̄_ℓ` for automorphisms with
@@ -122,11 +120,15 @@ noncomputable def adicUnitToLowerStar :
       adicConstantSheafToLowerStar l s ▷ _ ≫ MonObj.mul
     rw [IsMonHom.mul_hom, tensorHom_def', Category.assoc])
 
+/-- The underlying sheaf morphism of `AlgebraicGeometry.ProEtale.adicUnitToLowerStar`
+(blueprint `lem-fd-as-characters`). -/
 @[simp]
 lemma adicUnitToLowerStar_hom :
     (adicUnitToLowerStar l s).hom = adicConstantSheafToLowerStar l s :=
   rfl
 
+/-- The adjoint `s^* ℚ̄_ℓ ⟶ ℚ̄_ℓ` of the unit `ℚ̄_ℓ ⟶ s_* ℚ̄_ℓ` is invertible
+(blueprint `lem-fd-as-characters`). -/
 instance : IsIso ((adicUpperStarLowerStarAdjunction l s).homEquiv _ _ |>.symm
     (adicUnitToLowerStar l s)) := by
   have : IsIso ((adicUpperStarLowerStarAdjunction l s).homEquiv _ _ |>.symm
@@ -140,7 +142,6 @@ instance : IsIso ((adicUpperStarLowerStarAdjunction l s).homEquiv _ _ |>.symm
   have : IsIso ((Mod.forget _).map ((adicUpperStarLowerStarAdjunction l s).homEquiv _ _ |>.symm
       (adicUnitToLowerStar l s))) := this
   exact isIso_of_reflects_iso _ (Mod.forget _)
-
 
 /-- Composition of congruence isomorphisms of pushforwards. -/
 @[reassoc]
@@ -161,7 +162,8 @@ lemma lowerStarCongr_inv_app_eq {Y₁ Y₂ : Scheme.{u}} {f₁ f₂ : Y₁ ⟶ Y
 
 /-- `lowerStar_map_adicConstantSheafToLowerStar_comp_torsorTranslation` with the constant sheaf
 written as the underlying sheaf of `AdicSheaf.unit`. -/
-lemma lowerStar_map_adicConstantSheafToLowerStar_comp_torsorTranslation_unit (hs : s ≫ π₁ = π ≫ h) (g : G) (g₁ : G₁)
+lemma lowerStar_map_adicConstantSheafToLowerStar_comp_torsorTranslation_unit
+    (hs : s ≫ π₁ = π ≫ h) (g : G) (g₁ : G₁)
     (hτs : (τ g).hom ≫ s = s ≫ (τ₁ g₁).hom) :
     (π₁)_*[WeilCoefficients.{u} l].map (adicConstantSheafToLowerStar l s) ≫
       (lowerStarComp (WeilCoefficients.{u} l) s π₁).hom.app (AdicSheaf.unit l W).X ≫
@@ -179,8 +181,8 @@ lemma lowerStar_map_adicConstantSheafToLowerStar_comp_torsorTranslation_unit (hs
   ext ⟨U⟩ : 3
   simp only [hW, ObjectProperty.FullSubcategory.comp_hom, NatTrans.comp_app,
     lowerStar_map_hom_app', lowerStarComp_hom_app_hom_app, lowerStarCongr_hom_app_hom_app,
-    lowerStarComp_inv_app_hom_app, torsorTranslation_hom_app, adicConstantSheafToLowerStar_hom_app,
-    adicConstantSheaf_obj_map]
+    lowerStarComp_inv_app_hom_app, torsorTranslation_hom_app,
+    adicConstantSheafToLowerStar_hom_app]
   simp only [← Functor.map_comp, ← op_comp]
   congr 2
   apply pullback.hom_ext
@@ -236,7 +238,8 @@ lemma adicLowerStar_map_adicUnitToLowerStar_comp_torsorTranslation {m m' : W ⟶
     adicUnitToLowerStar_hom s
   simp only [a9, a1, a2, a3, a4, a5, a6]
   simp only [lowerStarCongr_inv_app_eq, lowerStarCongr_hom_app_comp_lowerStarCongr_hom_app_assoc]
-  exact lowerStar_map_adicConstantSheafToLowerStar_comp_torsorTranslation_unit π π₁ h s τ hτ τ₁ hτ₁ _ g g₁ hτs
+  exact lowerStar_map_adicConstantSheafToLowerStar_comp_torsorTranslation_unit π π₁ h s τ hτ τ₁ hτ₁
+    _ g g₁ hτs
 
 /-- Pulling back functions along equal morphisms. -/
 lemma adicConstantSheafToLowerStar_comp_lowerStarCongr {f f' : W ⟶ X} (e : f = f') :
@@ -375,6 +378,8 @@ variable {W W₁ : Scheme.{u}} [W.Over (Spec (CommRingCat.of k₀))]
 
 local notation "s̄" => Scheme.Hom.geometricFiberMap s (comp_over s (Spec (CommRingCat.of k₀)))
 
+/-- A morphism of iso-algebras whose underlying morphism is invertible is invertible
+(blueprint `lem-fd-as-characters`). -/
 lemma Endofunctor.IsoAlgebra.isIso_of_isIso_hom_f' {C : Type*} [Category C] {F : C ⥤ C}
     {K K' : Endofunctor.IsoAlgebra F} (f : K ⟶ K') [IsIso f.hom.f] : IsIso f := by
   have : f = (Endofunctor.IsoAlgebra.isoMk (asIso f.hom.f) f.hom.h).hom :=
@@ -382,6 +387,8 @@ lemma Endofunctor.IsoAlgebra.isIso_of_isIso_hom_f' {C : Type*} [Category C] {F :
   rw [this]
   infer_instance
 
+/-- The unit `ℚ̄_ℓ ⟶ s̄_* ℚ̄_ℓ` commutes with the Weil structures
+(blueprint `lem-fd-as-characters`). -/
 lemma ProEtaleWeilSheaf.unitToLowerStar_comm :
     (WeilSheaf.frobeniusPullback k₀ l W₁).map (adicUnitToLowerStar l s̄) ≫
       (ProEtaleWeilSheaf.torsorPushforward k₀ l s).str.hom =
@@ -396,13 +403,14 @@ lemma ProEtaleWeilSheaf.unitToLowerStar_comm :
     (W₁ ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius
     (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius_inv _ _)
 
-
 variable (k₀ l) in
 /-- The morphism `ℚ̄_ℓ ⟶ s_* ℚ̄_ℓ` of pro-étale Weil sheaves pulling back functions along `s`. -/
 noncomputable def ProEtaleWeilSheaf.unitToLowerStar :
     ProEtaleWeilSheaf.adicConstant k₀ l W₁ ⟶ ProEtaleWeilSheaf.torsorPushforward k₀ l s :=
   ObjectProperty.homMk ⟨adicUnitToLowerStar l s̄, ProEtaleWeilSheaf.unitToLowerStar_comm s⟩
 
+/-- The underlying morphism of `AlgebraicGeometry.ProEtaleWeilSheaf.unitToLowerStar`
+(blueprint `lem-fd-as-characters`). -/
 lemma ProEtaleWeilSheaf.unitToLowerStar_hom_f :
     (ProEtaleWeilSheaf.unitToLowerStar k₀ l s).hom.f = adicUnitToLowerStar l s̄ :=
   rfl
@@ -414,6 +422,8 @@ lemma ProEtaleWeilSheaf.unitToLowerStar_comp_torsorTranslation {G : Type u} (τ 
       ProEtaleWeilSheaf.unitToLowerStar k₀ l s :=
   Endofunctor.IsoAlgebra.hom_ext (ProEtale.adicUnitToLowerStar_comp_torsorTranslation _ _ _ g)
 
+/-- The adjoint `s^* ℚ̄_ℓ ⟶ ℚ̄_ℓ` of the unit `ℚ̄_ℓ ⟶ s_* ℚ̄_ℓ` of pro-étale Weil sheaves is
+invertible (blueprint `lem-fd-as-characters`). -/
 instance ProEtaleWeilSheaf.isIso_homEquiv_symm_unitToLowerStar :
     IsIso (((ProEtaleWeilSheaf.upperStarLowerStarAdjunction k₀ l s).homEquiv _ _).symm
       (ProEtaleWeilSheaf.unitToLowerStar k₀ l s)) := by
@@ -426,7 +436,6 @@ instance ProEtaleWeilSheaf.isIso_homEquiv_symm_unitToLowerStar :
     rw [Adjunction.homEquiv_counit] at h
     exact h
   exact Endofunctor.IsoAlgebra.isIso_of_isIso_hom_f' _
-
 
 variable (k₀ l) in
 /-- Pushforwards of pro-étale Weil sheaves along equal morphisms are isomorphic. -/
@@ -476,7 +485,8 @@ lemma ProEtaleWeilSheaf.isIso_homEquiv_symm_isotypicPullback (hs : s ≫ π₁ =
     (ProEtaleWeilSheaf.upperStarLowerStarAdjunction k₀ l s)
     (ProEtaleWeilSheaf.lowerStarSquareIso k₀ l hs) ι (ProEtaleWeilSheaf.unitToLowerStar k₀ l s)
 
-
+/-- The underlying morphism of the composition isomorphism of pushforwards
+(blueprint `lem-fd-as-characters`). -/
 lemma ProEtaleWeilSheaf.lowerStarCompIso_hom_app_hom_f {Y₁ Y₂ Y₃ : Scheme.{u}}
     [Y₁.Over (Spec (CommRingCat.of k₀))] [Y₂.Over (Spec (CommRingCat.of k₀))]
     [Y₃.Over (Spec (CommRingCat.of k₀))] (φ : Y₁ ⟶ Y₂) (ψ : Y₂ ⟶ Y₃)
@@ -489,7 +499,8 @@ lemma ProEtaleWeilSheaf.lowerStarCompIso_hom_app_hom_f {Y₁ Y₂ Y₃ : Scheme.
   rw [ProEtaleWeilSheaf.lowerStarCompIso]
   exact Endofunctor.IsoAlgebra.mapOfNatIsoCompIso_trans_mapOfNatIsoIsoOfIso_hom_app_hom_f _ _ _ _ K
 
-
+/-- The underlying morphism of the inverse composition isomorphism of pushforwards
+(blueprint `lem-fd-as-characters`). -/
 lemma ProEtaleWeilSheaf.lowerStarCompIso_inv_app_hom_f {Y₁ Y₂ Y₃ : Scheme.{u}}
     [Y₁.Over (Spec (CommRingCat.of k₀))] [Y₂.Over (Spec (CommRingCat.of k₀))]
     [Y₃.Over (Spec (CommRingCat.of k₀))] (φ : Y₁ ⟶ Y₂) (ψ : Y₂ ⟶ Y₃)
@@ -502,6 +513,8 @@ lemma ProEtaleWeilSheaf.lowerStarCompIso_inv_app_hom_f {Y₁ Y₂ Y₃ : Scheme.
   rw [ProEtaleWeilSheaf.lowerStarCompIso]
   exact Endofunctor.IsoAlgebra.mapOfNatIsoCompIso_trans_mapOfNatIsoIsoOfIso_inv_app_hom_f _ _ _ _ K
 
+/-- The underlying morphism of the isomorphism of pushforwards along equal morphisms
+(blueprint `lem-fd-as-characters`). -/
 lemma ProEtaleWeilSheaf.lowerStarCongrIso_hom_app_hom_f {Y₁ Y₂ : Scheme.{u}}
     [Y₁.Over (Spec (CommRingCat.of k₀))] [Y₂.Over (Spec (CommRingCat.of k₀))] {φ φ' : Y₁ ⟶ Y₂}
     [φ.IsOver (Spec (CommRingCat.of k₀))] [φ'.IsOver (Spec (CommRingCat.of k₀))] (e : φ = φ')
@@ -513,14 +526,14 @@ lemma ProEtaleWeilSheaf.lowerStarCongrIso_hom_app_hom_f {Y₁ Y₂ : Scheme.{u}}
   refine Mod.hom_ext _ _ ?_
   rfl
 
+/-- The underlying morphism of the pushforward of a morphism of pro-étale Weil sheaves
+(blueprint `lem-fd-as-characters`). -/
 lemma ProEtaleWeilSheaf.lowerStar_map_hom_f {Y₁ Y₂ : Scheme.{u}}
     [Y₁.Over (Spec (CommRingCat.of k₀))] [Y₂.Over (Spec (CommRingCat.of k₀))] (φ : Y₁ ⟶ Y₂)
     [φ.IsOver (Spec (CommRingCat.of k₀))] {K K' : ProEtaleWeilSheaf k₀ l Y₁} (f : K ⟶ K') :
     ((ProEtaleWeilSheaf.lowerStar k₀ l φ).map f).hom.f =
       (Scheme.Hom.geometricFiberMap φ (comp_over φ _))_*ᵃ[l].map f.hom.f :=
   rfl
-
-
 
 variable {G G₁ : Type u} (τ : G → (W ≅ W)) [∀ g, (τ g).hom.IsOver (Spec (CommRingCat.of k₀))]
   (hτ : ∀ g, (τ g).hom ≫ π = π) (τ₁ : G₁ → (W₁ ≅ W₁))
@@ -531,15 +544,18 @@ variable {π π₁ h s} in
 lemma ProEtaleWeilSheaf.isotypicPullback_key (hs : s ≫ π₁ = π ≫ h) (g : G) (g₁ : G₁)
     (hτs : (τ g).hom ≫ s = s ≫ (τ₁ g₁).hom) :
     (ProEtaleWeilSheaf.lowerStar k₀ l π₁).map (ProEtaleWeilSheaf.unitToLowerStar k₀ l s) ≫
-      (ProEtaleWeilSheaf.lowerStarSquareIso k₀ l hs).hom.app (ProEtaleWeilSheaf.adicConstant k₀ l W) ≫
+      (ProEtaleWeilSheaf.lowerStarSquareIso k₀ l hs).hom.app
+        (ProEtaleWeilSheaf.adicConstant k₀ l W) ≫
       (ProEtaleWeilSheaf.lowerStar k₀ l h).map (ProEtaleWeilSheaf.torsorTranslation π τ hτ g) =
     ProEtaleWeilSheaf.torsorTranslation π₁ τ₁ hτ₁ g₁ ≫
       (ProEtaleWeilSheaf.lowerStar k₀ l π₁).map (ProEtaleWeilSheaf.unitToLowerStar k₀ l s) ≫
-      (ProEtaleWeilSheaf.lowerStarSquareIso k₀ l hs).hom.app (ProEtaleWeilSheaf.adicConstant k₀ l W) := by
+      (ProEtaleWeilSheaf.lowerStarSquareIso k₀ l hs).hom.app
+        (ProEtaleWeilSheaf.adicConstant k₀ l W) := by
   apply Endofunctor.IsoAlgebra.hom_ext
   simp only [Endofunctor.IsoAlgebra.comp_hom_f, ProEtaleWeilSheaf.lowerStar_map_hom_f,
     ProEtaleWeilSheaf.lowerStarSquareIso, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
-    ProEtaleWeilSheaf.lowerStarCompIso_hom_app_hom_f, ProEtaleWeilSheaf.lowerStarCongrIso_hom_app_hom_f,
+    ProEtaleWeilSheaf.lowerStarCompIso_hom_app_hom_f,
+    ProEtaleWeilSheaf.lowerStarCongrIso_hom_app_hom_f,
     ProEtaleWeilSheaf.lowerStarCompIso_inv_app_hom_f, ProEtaleWeilSheaf.unitToLowerStar_hom_f,
     ProEtaleWeilSheaf.torsorTranslation_hom_f]
   simp only [Iso.trans_inv, NatTrans.comp_app, Category.assoc]

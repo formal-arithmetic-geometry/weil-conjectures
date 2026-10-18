@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.WeilSheaf.ArtinSchreierFunctions
+public import WeilConjectures.WeilSheaf.ArtinSchreierMul
 public import WeilConjectures.WeilSheaf.ArtinSchreierNeg
 public import WeilConjectures.WeilSheaf.UpperStarId
 
@@ -27,14 +28,6 @@ namespace AlgebraicGeometry
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
 
 variable {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
-
-/-- Blueprint `lem-fd-as-lisse` (multiplicativity of the Artin–Schreier sheaves, from the
-isotypic decomposition `lem-fd-as-characters`): `ℒ_{ψ,a} ⊗ ℒ_{ψ,b} ≅ ℒ_{ψ,a+b}`. -/
-theorem nonempty_iso_tensorObj_artinSchreierOf (ψ : AddChar k₀ (PadicAlgCl l))
-    (a b : Γ(X, ⊤)) :
-    Nonempty ((artinSchreierOf ψ a).tensorObj (artinSchreierOf ψ b)
-        (isLisse_artinSchreierOf ψ a) ≅ artinSchreierOf ψ (a + b)) :=
-  sorry
 
 /-- Blueprint `lem-fd-as-lisse` / `lem-fd-as-characters`: `ℒ_{ψ⁻¹,a} ≅ ℒ_{ψ,-a}`. -/
 theorem nonempty_iso_artinSchreierOf_inv (ψ : AddChar k₀ (PadicAlgCl l)) (a : Γ(X, ⊤)) :
