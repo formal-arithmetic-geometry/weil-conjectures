@@ -289,5 +289,23 @@
   "group": "Q17",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q17-3f5fe197d (reviewer sub-agent of L); spot-checked: I read the item, all 8 steps, the new chart node and every cited statement in full, and checked them against the Stacks sources: morphisms 035P (statement and proof), 0CDV, 035S and 0BAJ, plus the tag entries for 07QV, 07QU and 0HAB. The item gives its parent (lem-per-potential-dualizing-uniqueness Step 3) exactly what that step uses: a finite surjective map with normal source, an isomorphism over a dense open containing every generic point, and Noetherian excellence preserved. The Noetherian and excellent conventions it spells out are the standard ones and don't make the item easier. Steps: Step 2 gets finiteness from excellent ⇒ quasi-excellent ⇒ Nagata, then N-2 with L=K_i, product over the components and the finite-morphism definition. Step 3 gets surjectivity from lying over, with the V(p_i) covering Spec A. Step 4 gets normality from the integral closure being a normal domain, the affine stalk lemma and localization. Step 5 gets excellence from 07QU with S={1} and the 0HAB affine-cover lemma, and Noetherianness from a finite affine cover. Step 6 gets affine W_i around each generic point inside the complement of the other components, so R_i is a domain. Step 7 is the denominator argument, written out: s = product of generator denominators gives (C_i)_s = (R_i)_s. Step 8 glues the isomorphisms, and U is dense. Edge cases checked: empty X, a field, a normal domain, k[x,y]/(xy) and k[t²,t³]. New node lem-per-componentwise-normalization-affine-charts: it is 035P(1),(3),(4) plus 0CDV, and it is true. It is statement-only with the three kinds of search recorded. It restates no item clause, and searches of the DAG by 035P/0CDV and by normalization with Nagata/excellent found no duplicate. Tool uses accepted: 07QV, 07QU, 0HAB and Mathlib-leaf scheme facts, all generic. Batch-5 flag on lem-trf-excellent-scheme-affine-cover: it is the generic Stacks 0HAB locality of excellence. Its 92-node dependency closure contains only its own affine-locality sub-lemmas and reaches no node of the trace-formula or Poincaré duality proofs. Neither assumption gives this fact, so it is genuinely outside the assumed statements and the citation is accepted. No SGA source is cited. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ExcellentNormalizationPreparation",
+  "declaration": "AlgebraicGeometry.excellent_normalization_preparation",
+  "file": "lean/Sheaf/AlgebraicGeometry/ExcellentNormalizationPreparation.lean",
+  "statement": "theorem excellent_normalization_preparation (X : Scheme.{u}) [IsReduced X] [IsLocallyNoetherian X] [CompactSpace X] (hExcellent : ∀ U : X.affineOpens, IsExcellent Γ(X, U)) : IsFinite X.fromReducedNormalization ∧ Surjective X.fromReducedNormalization ∧ IsLocallyNoetherian X.reducedNormalization ∧ CompactSpace X.reducedNormalization ∧ (∀ V : X.reducedNormalization.affineOpens, IsExcellent Γ(X.reducedNormalization, V)) ∧ (∀ x : X.reducedNormalization, IsDomain (X.reducedNormalization.presheaf.stalk x) ∧ IsIntegrallyClosed (X.reducedNormalization.presheaf.stalk x)) ∧ ∃ U : X.Opens, Dense (U : Set X) ∧ (∀ Z : irreducibleComponents X, ∀ x : X, IsGenericPoint x Z.1 → x ∈ U) ∧ IsIso (X.fromReducedNormalization ∣_ U)",
+  "branch": "newtargets-dag",
+  "by": "Q10",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-40ad904d9",
+  "group": "Q10",
+  "result": "pass",
+  "note": "Every clause of the Lean statement matches the node and Stacks 035S/035Q/0BAJ (+07QV/07QU). Hypotheses: [IsReduced X] [IsLocallyNoetherian X] [CompactSpace X] and IsExcellent of Γ on every affine open; nothing stronger, one universe. Conclusions: IsFinite and Surjective of fromReducedNormalization, IsLocallyNoetherian and CompactSpace of the normalization, IsExcellent on every affine open of it, every stalk IsDomain and IsIntegrallyClosed, ∃ U : X.Opens dense, containing every IsGenericPoint of each irreducible component, with IsIso (ν ∣_ U). Empty X allowed. Uses the landed reducedNormalization/fromReducedNormalization construction and the IsExcellent def; lean.statement verbatim; node otherwise identical to live; docstrings carry source and blueprint; sorry only. nt_compile --json: exit 0, no warnings, 1.9 s; probe confirmed Surjective = AlgebraicGeometry.Surjective and ∣_ = morphismRestrict, and a deliberate failing line errored as expected. Advisory: Mathlib Surjective is also the declaration recorded for node def-weil-surjective-morphism, which is not in stmt_deps; same declaration, maintainer note only."
  }
 }

@@ -567,5 +567,23 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.Paper.IntegralStratumExtBound",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.integral_stratum_ext_bound",
+  "file": "lean/Sheaf/Paper/IntegralStratumExtBound.lean",
+  "statement": "theorem integral_stratum_ext_bound (D : WeilConjectures.FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p) (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (X : Scheme.{u}) [X.Over (Spec (.of D.k))] [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))] [IsSeparated (X ↘ Spec (.of D.k))] : (∀ (S Z V : Scheme.{u}) (v : S ⟶ Z) (i : Z ⟶ X) (j : V ⟶ X) [IsOpenImmersion v] [IsClosedImmersion i] [IsOpenImmersion j] [CompactSpace S] [QuasiSeparatedSpace S] [QuasiCompact j], Set.range j = (Set.range i)ᶜ → ∀ L : pulledBackModuleObjects (integralCoefficientRing l E) S, IsConstantModelConstructible (integralCoefficientRing l E) S L → HasFiniteConstantLocalModel (integralCoefficientRing l E) S L → ∃ d : ℕ, (d : WithTop ℕ) = relativeCohomologicalDimension l (Fact.out : l.Prime) j + cohomologicalDimension l (Fact.out : l.Prime) S + 3 ∧ ∀ N : pulledBackModuleObjects (integralCoefficientRing l E) X, IsConstantModelConstructible (integralCoefficientRing l E) X N → ∀ r : ℤ, (d : ℤ) < r → Subsingleton (((DerivedCategory.singleFunctor _ 0).obj ((lowerStar (integralCoefficientRing l E) i).obj ((openImmersionLowerShriek (integralCoefficientRing l E) v).obj L))) ⟶ ((DerivedCategory.singleFunctor _ 0).obj N) ⟦r⟧)) ∧ (∀ C : pulledBackModuleObjects (integralCoefficientRing l E) X, IsConstantModelConstructible (integralCoefficientRing l E) X C → ∃ d : ℕ, ∀ N : pulledBackModuleObjects (integralCoefficientRing l E) X, IsConstantModelConstructible (integralCoefficientRing l E) X N → ∀ r : ℤ, (d : ℤ) < r → Subsingleton (((DerivedCategory.singleFunctor _ 0).obj C) ⟶ ((DerivedCategory.singleFunctor _ 0).obj N) ⟦r⟧))",
+  "branch": "newtargets-dag",
+  "by": "NK",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-219c0f56f",
+  "group": "NK",
+  "result": "pass",
+  "note": "Read the item, all 4 stmt_dep records and their side-clone declarations (cohomologicalDimension/relativeCohomologicalDimension, HasFiniteConstantLocalModel/IsConstantModelConstructible, integralCoefficientRing, FiniteFieldDatum, the integral_stratum_filtration signature). Every clause matches: F̄_q datum with l≠p; separated finite-type X; completed integral coefficient (same alias as det-lem-int-ext-formula); v open, i closed, j the complement by range; L constructible with a finite constant local model, torsion allowed; ∃ d:ℕ equal to cd(j)+cd(S)+3 (finite by sk-def-cd); strict integer cutoff; Subsingleton Hom single₀(i_* v_! L) → single₀(N)⟦r⟧ in the unbounded derived category for every constructible N; second clause has d_C chosen before N. The qcqs instances are automatic for Noetherian X; no stronger assumptions. Edge cases (empty S/V/X, torsion L, C=0, negative r, single universe) are fine. Not a duplicate of the downstream integralConstructibleExt or det-uniform-constructible-ext-integral. The node changes only in lean; lean.statement is verbatim; sorry only; docstrings carry the source/blueprint tags and all 12 steps; lines ≤100. nt_compile --json: the first run timed out in dependency IntegralStratumHomFormula at load 126; the rerun at load 92 was clean, item module 3.4 s. Advisory: the unit-level sk-lem-int-ext Lean uses padicIntegersRingObj rather than integralCoefficientRing, so stage 3 needs that comparison."
  }
 }
