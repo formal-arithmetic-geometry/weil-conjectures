@@ -2,7 +2,7 @@
  "id": "lem-per-generic-fibre-finiteness-criterion",
  "kind": "statement",
  "title": "Generic residue extensions and finite generic fibres",
- "statement": "Let $S$ be a Noetherian scheme, meaning it admits a finite affine cover by spectra of Noetherian rings [def-pc-scheme, def-weil-pbc-noetherian-ring], and let $f:X\\to S$ be of finite type [def-weil-finite-type-morphism]. Assume every generic point of an irreducible component of $X$ maps to a generic point of a component of $S$ [def-weil-irreducible-components]. Then the following are equivalent: (i) for each such generic point $x$, $\\kappa(x)/\\kappa(f(x))$ is a finite field extension [def-weil-residue-field, def-pc-field-extension]; (ii) there is a dense open $V\\subseteq S$ such that $f^{-1}(V)\\to V$ is finite [def-weil-finite-integral-morphism]. Under either condition, for every generic point $s$ of $S$ the scheme fibre $X_s=X\\times_S\\operatorname{Spec}\\kappa(s)$ is finite over $\\kappa(s)$ [def-pc-fibre-product, def-weil-affine-spectrum].",
+ "statement": "Let $S$ be a Noetherian scheme, meaning it admits a finite affine cover by spectra of Noetherian rings [def-pc-scheme, def-weil-pbc-noetherian-ring], and let $f:X\\to S$ be of finite type [def-weil-finite-type-morphism]. Assume every generic point of an irreducible component of $X$ maps to a generic point of a component of $S$ [def-weil-irreducible-components, def-sc-generic-point]. Then the following are equivalent: (i) for each such generic point $x$, $\\kappa(x)/\\kappa(f(x))$ is a finite field extension [def-weil-residue-field, def-pc-field-extension]; (ii) there is a dense open $V\\subseteq S$ such that $f^{-1}(V)\\to V$ is finite [def-weil-finite-integral-morphism]. Under either condition, for every generic point $s$ of $S$ the scheme fibre $X_s=X\\times_S\\operatorname{Spec}\\kappa(s)$ is finite over $\\kappa(s)$ [def-pc-fibre-product, def-weil-affine-spectrum, def-pc-scheme-fibre].",
  "source": {
   "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
   "place": "Expose II Proposition 1.1.7, printed p. 24; the finite generic-fibre consequence is restriction of the finite map in (ii)."
@@ -16,11 +16,114 @@
   "def-pc-field-extension",
   "def-weil-finite-integral-morphism",
   "def-pc-fibre-product",
-  "def-weil-affine-spectrum"
+  "def-weil-affine-spectrum",
+  "def-sc-generic-point",
+  "def-pc-scheme-fibre"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Finite type includes local finite type and quasi-compactness. Since $S$ is Noetherian, $X$ is Noetherian by [lem-weil-pbc-finite-type-over-noetherian]. Its irreducible components are finite in number by [lem-weil-pbc-noetherian-finitely-many-components], and each has a unique generic point by [lem-sc-scheme-sober]. Also $X$ is quasi-separated by [lem-weil-pbc-locally-noetherian-quasi-separated], and hence $f$ is quasi-separated by clause (1) of [lem-weil-pbc-qcqs-morphism-permanence]. These conclusions hold without separatedness or reducedness assumptions on $f,X,S$.",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-noetherian-finitely-many-components",
+    "lem-sc-scheme-sober",
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01T6 (lemma-finite-type-noetherian) and 01T7 (lemma-finite-type-Noetherian-quasi-separated); properties.tex Tags 0BA8 and 01OY; schemes.tex Tag 01KV"
+   }
+  },
+  {
+   "text": "Assume (i), fix a component generic point $s$ of $S$, and take $x\\in f^{-1}(s)$. By [lem-sc-irreducible-components-cover] choose an irreducible component $C$ of $X$ containing $x$, and by [lem-sc-scheme-sober] let $\\xi$ be its generic point. Thus $x\\in\\overline{\\{\\xi\\}}$. Continuity gives $s\\in\\overline{\\{f(\\xi)\\}}$. Maximal dominance says $f(\\xi)$ is a component generic point. The inclusion of the component $\\overline{\\{s\\}}$ into the component $\\overline{\\{f(\\xi)\\}}$ must be equality by maximality; uniqueness of generic points then gives $f(\\xi)=s$. By (i), $\\kappa(\\xi)/\\kappa(s)$ is finite, so [lem-trf-finite-residue-point-closed-in-fibre] makes $\\xi$ closed in $X_s$. Under the subspace identification in [def-pc-scheme-fibre], $x$ is still a specialization of $\\xi$, so $x=\\xi$. Consequently $f^{-1}(s)$ is a subset of the finite set of component generic points of $X$ obtained in Step 1, and is finite (possibly empty).",
+   "uses": [
+    "lem-sc-irreducible-components-cover",
+    "lem-sc-scheme-sober",
+    "lem-trf-finite-residue-point-closed-in-fibre",
+    "def-pc-scheme-fibre"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01TE (lemma-algebraic-residue-field-extension-closed-point-fibre); schemes.tex Tags 01IS and 01K1; topology.tex Tag 004W; elaboration of ILO II Proposition 1.1.7, (ii) implies (i)"
+   }
+  },
+  {
+   "text": "Step 2 proves finite set-theoretic fibres over every component generic point of $S$. Step 1 gives quasi-compactness and quasi-separatedness of $f$, and local finite type, while $S$ is Noetherian by hypothesis. These are exactly the hypotheses of [lem-weil-pbc-generic-finite-morphism-open-neighborhood]. It supplies a dense open $V\\subseteq S$ containing every component generic point and with $f^{-1}(V)\\to V$ finite. This proves (i) implies (ii).",
+   "uses": [
+    "lem-weil-pbc-generic-finite-morphism-open-neighborhood"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02NW, lemma-generically-finite, (1) equivalent to (4), at all component generic points"
+   }
+  },
+  {
+   "text": "Now assume (ii). Every component generic point $s$ of $S$ belongs to $V$. Indeed, there are finitely many irreducible components of $S$ by [lem-weil-pbc-noetherian-finitely-many-components]. If $C=\\overline{\\{s\\}}$, let $W$ be the complement of the union of the other components. Their closedness and maximality imply $W$ is open, contains $s$, and is contained in $C$. Density gives $v\\in W\\cap V$. Since $v\\in\\overline{\\{s\\}}$, the open neighbourhood $V$ of $v$ contains $s$. The component and generic-point conventions are [def-weil-irreducible-components, def-sc-generic-point].",
+   "uses": [
+    "lem-weil-pbc-noetherian-finitely-many-components",
+    "def-weil-irreducible-components",
+    "def-sc-generic-point"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 0BA8 (lemma-Noetherian-irreducible-components); elementary open-set argument"
+   }
+  },
+  {
+   "text": "For any such $s\\in V$, the fibre $X_s\\to\\operatorname{Spec}\\kappa(s)$ is the base change of the finite restriction $f^{-1}(V)\\to V$ along $\\operatorname{Spec}\\kappa(s)\\to V$. The universal property of the fibre product identifies this base change with the fibre of $f$; the point morphism factors through $V$ because its image is $s$. By clause (a) of [lem-weil-pbc-finite-morphism-permanence], $X_s$ is finite over $\\kappa(s)$. This proves the final assertion under (ii), and under (i) by Step 3. Here [def-pc-scheme-fibre] specifies the fibre and its structure map.",
+   "uses": [
+    "lem-weil-pbc-finite-morphism-permanence",
+    "def-pc-scheme-fibre"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01WL, lemma-base-change-finite; schemes.tex Definition 01K0"
+   }
+  },
+  {
+   "text": "Let $x$ be a component generic point of $X$ and put $s=f(x)$, a component generic point by maximal dominance. By Steps 4 and 5, $X_s$ is finite over $k=\\kappa(s)$. By [def-weil-finite-integral-morphism] it is $\\operatorname{Spec}B$ for a finite-dimensional $k$-algebra $B$. The point induced by $x$ corresponds to a prime $\\mathfrak q$ of $B$. The quotient $B/\\mathfrak q$ is a finite-dimensional domain, hence a field by [lem-weil-pbc-finite-dimensional-domain-is-field]. It is therefore its own fraction field, so the residue field of this fibre point is $B/\\mathfrak q$, finite over $k$. Finally [lem-weil-pbc-fibre-product-point-residue-field] identifies that residue field with $\\kappa(x)$ as an extension of $k$: its tensor product is $\\kappa(x)\\otimes_k k\\cong\\kappa(x)$, whose sole prime is zero. Thus $\\kappa(x)/\\kappa(f(x))$ is finite, proving (ii) implies (i).",
+   "uses": [
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-finite-dimensional-domain-is-field",
+    "lem-weil-pbc-fibre-product-point-residue-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01JT, lemma-points-fibre-product, including the residue-field sentence; elementary finite-algebra argument in ILO II Proposition 1.1.7"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-finitely-many-components",
+  "lem-sc-scheme-sober",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-sc-irreducible-components-cover",
+  "lem-trf-finite-residue-point-closed-in-fibre",
+  "def-pc-scheme-fibre",
+  "lem-weil-pbc-generic-finite-morphism-open-neighborhood",
+  "def-weil-irreducible-components",
+  "def-sc-generic-point",
+  "lem-weil-pbc-finite-morphism-permanence",
+  "def-weil-finite-integral-morphism",
+  "lem-weil-pbc-finite-dimensional-domain-is-field",
+  "lem-weil-pbc-fibre-product-point-residue-field"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose II, Proposition 1.1.7, printed p. 24"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -56,10 +159,45 @@
    "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"line\": \"368\", \"text\": \"    (f : X ⟶ Spec (.of K)) [LocallyOfFinitePresentation f] : Dense (f.smoothLocus : Set X) := by\"}\n",
    "date": "2026-10-19",
    "verdict": "no match: none states the generic-finiteness criterion with these hypotheses."
+  },
+  {
+   "tool": "grep",
+   "query": "genericallyFinite|finite.*[Dd]ense|[Dd]ense.*finite",
+   "results": "OK 1 hits: Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean",
+   "date": "2026-10-19",
+   "verdict": "no match: hits concern finite-map definitions, restriction, base change, or stronger hypotheses; none gives the criterion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite type morphism with finite generic fibres is finite after restriction to a dense open of a Noetherian base",
+   "results": "OK 8 hits: AlgebraicGeometry.IsFinite.instMorphismRestrict, AlgebraicGeometry.IsFinite, AlgebraicGeometry.IsFinite.recOn, AlgebraicGeometry.instLocallyOfFiniteTypeMorphismRestrict, AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.IsFinite.iff_isIntegralHom_and_locallyOfFiniteType, AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, AlgebraicGeometry.instLocallyOfFiniteTypeResLE",
+   "date": "2026-10-19",
+   "verdict": "no match: hits concern finite-map definitions, restriction, base change, or stronger hypotheses; none gives the criterion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry.IsFinite\", \"dense\"",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-19",
+   "verdict": "no match: hits concern finite-map definitions, restriction, base change, or stronger hypotheses; none gives the criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite type maximally dominant morphism to a Noetherian scheme, finite generic residue field extensions imply the morphism is finite over a dense open",
+   "results": "OK 8 hits: AlgebraicGeometry.IsFinite, AlgebraicGeometry.finite_appTop_of_universallyClosed, AlgebraicGeometry.LocallyOfFiniteType, AlgebraicGeometry.isFinite_iff_locallyOfFiniteType_of_jacobsonSpace, AlgebraicGeometry.IsFinite.instLocallyOfFiniteType, AlgebraicGeometry.IsDominant, AlgebraicGeometry.LocallyQuasiFinite, AlgebraicGeometry.isFinite_iff",
+   "date": "2026-10-19",
+   "verdict": "no match: hits concern finite-map definitions, restriction, base change, or stronger hypotheses; none gives the criterion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite type scheme morphism with finite function field extensions on all dominating irreducible components becomes finite on a dense open of the Noetherian target",
+   "results": "OK 8 hits: AlgebraicGeometry.IsFinite, AlgebraicGeometry.IsFinite.instLocallyOfFiniteType, AlgebraicGeometry.finite_appTop_of_universallyClosed, AlgebraicGeometry.LocallyOfFiniteType, AlgebraicGeometry.finite_irreducibleComponents_of_isNoetherian, AlgebraicGeometry.LocallyQuasiFinite, AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite, AlgebraicGeometry.LocallyOfFiniteType.isLocallyNoetherian",
+   "date": "2026-10-19",
+   "verdict": "no match: hits concern finite-map definitions, restriction, base change, or stronger hypotheses; none gives the criterion."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-alteration-cover-calculus",
@@ -71,7 +209,7 @@
  "blueprint": {
   "from": {
    "node": "lem-per-artin-gabber-affine-curve",
-   "place": "Ancestor proof Step 3, finiteness/duality input through ILO IX 1.1, specifically the alteration-cover calculus used in the nodal quotient reduction: Expose II Proposition 1.1.7, printed p. 24; the finite generic-fibre consequence is restriction of the finite map in (i).",
+   "place": "Ancestor proof Step 3, finiteness/duality input through ILO IX 1.1, specifically the alteration-cover calculus used in the nodal quotient reduction: Expose II Proposition 1.1.7, printed p. 24; the finite generic-fibre consequence is restriction of the finite map in (ii).",
    "via": [
     "lem-per-alteration-cover-calculus",
     "lem-per-uniformization-nodal-quotient-reduction",
@@ -86,5 +224,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-generic-fibre-finiteness-criterion",
+  "worker": "stage1",
+  "summary": "Expanded both implications of ILO II 1.1.7 and the scheme-finite generic-fibre consequence using existing DAG nodes only. Verified nonreduced, empty, reducible and nonseparated cases; added explicit generic-point/fibre notion dependencies; repaired doubled TeX escapes without changing mathematical content.",
+  "blueprint": "Ancestor lem-per-artin-gabber-affine-curve proof Step 3, the finiteness/duality input refined through the alteration-cover calculus: the generic-finiteness equivalence ILO II 1.1.7.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-finite-residue-point-closed-in-fibre",
+    "why": "Converts the finite extension in (i) to closedness in the generic fibre. No node of this perverse-sheaf unit supplies this generic scheme-theoretic tool."
+   },
+   {
+    "node": "lem-weil-pbc-generic-finite-morphism-open-neighborhood",
+    "why": "Spreads the finite generic point sets established in Step 2 to a finite map on a dense open. No node of this perverse-sheaf unit supplies this generic scheme-theoretic tool."
+   },
+   {
+    "node": "lem-weil-pbc-fibre-product-point-residue-field",
+    "why": "Identifies the fibre-point residue field over kappa(s) with kappa(x). No node of this perverse-sheaf unit supplies this generic scheme-theoretic tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-finite-residue-point-closed-in-fibre",
+  "lem-weil-pbc-generic-finite-morphism-open-neighborhood",
+  "lem-weil-pbc-fibre-product-point-residue-field"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q148-91fa2ab0b",
+  "group": "Q148",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q148-91fa2ab0b (reviewer sub-agent of L); spot-checked: Read ILO II Prop. 1.1.7 (printed p. 24) with 1.1.1–1.1.2. The item states the same equivalence: Noetherian base, finite type, maximally dominant, numbering swapped. It adds no hypothesis, and its fibre clause is the base change of the finite restriction, which is what the parent alteration-cover-calculus Step 1 uses. Each step's citations match their statements. Step 1 gets X Noetherian, finitely many components and a quasi-separated f from 01T6, 0BA8, 01IS, 01OY and the qcqs node (1). Step 2 shows by maximality and uniqueness of generic points that f(ξ)=s, then the 01TE node makes ξ closed in X_s, so the fibre points are maximal points and finite in number. Step 3: the 02NW node's hypotheses (qc, qs, locally finite type, Noetherian target, finite generic fibres) all hold. Step 4 (elementary) shows every generic point lies in V. Step 5 uses 01WL base change. Step 6: B/q is a finite-dimensional domain and so a field, and 01JT with κ(x)⊗_k k=κ(x) identifies the residue fields. I tested empty X, open immersions, a non-maximally-dominant disjoint union, A^1 over a field, a nilpotent thickening, inseparable extensions and the doubled-origin line. No duplicate exists: the 02NW and 02ML nodes are spreading tools, and blueprint lem-fin-projective-generically-finite assumes a projective morphism over a domain. There are no new nodes, no cycle and no SGA citation. Batch-5 flag lem-trf-finite-residue-point-closed-in-fibre: it is Stacks 01TE, generic scheme theory. Its 80-node closure contains no sec-trace-formula, sec-poincare-duality, unit or assumption node, so it is outside both assumed results and is accepted. The tool_uses 01TE, 02NW and 01JT are accepted."
  }
 }
