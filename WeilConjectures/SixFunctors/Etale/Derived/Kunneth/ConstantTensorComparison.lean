@@ -5,8 +5,8 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.MapDerivedCategoryProjectionFlat
-public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.FiniteCoefficients.Constant
+public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.ConstantTensorTensorComparison
+public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.ConstantTensorHomEquiv
 
 /-!
 # The constant-tensor comparison is a projection map
@@ -40,25 +40,6 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
   [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
   [Abelian.HasFunctorialFlatResolution A] (W : Scheme.{u})
   [(constantSheaf W.smallEtaleTopology A).PreservesFlat]
-
-/-- The monoidal comparison of constant complexes is the tensor comparison
-`CategoryTheory.Functor.mapDerivedCategoryTensorComparison` of the functor induced by the
-constant sheaf functor. -/
-lemma derivedConstantSheafTensorComparison_eq (M N : DerivedCategory A) :
-    derivedConstantSheafTensorComparison A W M N =
-      ((Functor.mapDerivedCategoryTensorComparison
-        (constantSheaf W.smallEtaleTopology A)).app M).app N := by
-  rw [Functor.mapDerivedCategoryTensorComparison_app_app]
-  rfl
-
-/-- The constant-tensor comparison is the transpose of the monoidal comparison followed by the
-counit. -/
-lemma derivedConstantSheafProjectionMap_eq_homEquiv
-    (K : DerivedCategory (Sheaf W.smallEtaleTopology A)) (M : DerivedCategory A) :
-    derivedConstantSheafProjectionMap A W K M = (derivedConstantSheafAdjunction A W).homEquiv _ _
-      (derivedConstantSheafTensorComparison A W _ M ≫
-        (derivedConstantSheafAdjunction A W).counit.app K ▷ _) :=
-  rfl
 
 /-- The constant-tensor comparison `RΓ_W K ⊗ᴸ M ⟶ RΓ_W (K ⊗ᴸ c_W M)` is the projection map of
 the adjunction `c_W ⊣ RΓ_W` (`CategoryTheory.Functor.mapDerivedCategoryProjectionMap`). -/
