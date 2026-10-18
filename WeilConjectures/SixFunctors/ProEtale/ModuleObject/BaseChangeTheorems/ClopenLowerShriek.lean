@@ -111,6 +111,52 @@ theorem boundedConstructibleLowerShriekOfCompactificationIso_padicAlgCl_eq
 
 end Coherence
 
+/-! ### The abstract computation -/
+
+section Abstract
+
+/-- The computation behind `boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl_clopen`, for
+abstract functors: `jS ⊣ Lj` stands for `j_! ⊣ Lj^*`, `Lj ⊣ Rj` for `Lj^* ⊣ Rj_*`, `L1 ⊣ R1`
+for `L(𝟙 U)^* ⊣ R(𝟙 U)_*`, `iS` for the extension by zero `(𝟙 U)_!`, `RX1` for `R(𝟙 X)_*`,
+`BC` for the base change `j_! ⋙ Lj^* ≅ L(𝟙 U)^* ⋙ (𝟙 U)_!` and `Exch` for the exchange morphism
+`R(𝟙 U)_* ⋙ j_! ⟶ (𝟙 U)_! ⋙ Rj_*`. -/
+lemma clopen_comparison_aux {DU DX : Type*} [Category DU] [Category DX]
+    {jS : DU ⥤ DX} {Lj : DX ⥤ DU} {Rj : DU ⥤ DX} (a : jS ⊣ Lj) (b : Lj ⊣ Rj)
+    {L1 R1 iS : DU ⥤ DU} (b1 : L1 ⊣ R1) (ui : L1 ≅ 𝟭 DU) (idU : R1 ≅ 𝟭 DU) (ι : iS ≅ 𝟭 DU)
+    (BC : jS ⋙ Lj ≅ L1 ⋙ iS) {RX1 : DX ⥤ DX} (idX : RX1 ≅ 𝟭 DX) (comp : Rj ⋙ RX1 ≅ Rj)
+    (Exch : R1 ⋙ jS ⟶ iS ⋙ Rj)
+    (hF1 : ∀ N, idX.inv.app (Rj.obj N) ≫ comp.hom.app N = 𝟙 _)
+    (hF2 : ∀ M, idU.inv.app M ≫ ui.inv.app (R1.obj M) ≫ b1.counit.app M = 𝟙 _)
+    (hF3 : ∀ N, a.unit.app N ≫ BC.hom.app N ≫ ι.hom.app (L1.obj N) = ui.inv.app N)
+    (hEx : ∀ M, Exch.app M = b.unit.app (jS.obj (R1.obj M)) ≫
+      Rj.map (BC.hom.app (R1.obj M)) ≫ Rj.map (iS.map (b1.counit.app M)))
+    (M : DU) :
+    a.unit.app M ≫ Lj.map (idX.inv.app (jS.obj M) ≫
+        RX1.map (jS.map (idU.inv.app M) ≫ Exch.app M) ≫ comp.hom.app (iS.obj M) ≫
+          Rj.map (ι.hom.app M)) ≫ b.counit.app M = 𝟙 M := by
+  have h1 : idX.inv.app (jS.obj M) ≫ RX1.map (jS.map (idU.inv.app M) ≫ Exch.app M) ≫
+      comp.hom.app (iS.obj M) = jS.map (idU.inv.app M) ≫ Exch.app M := by
+    have hn : idX.inv.app (jS.obj M) ≫ RX1.map (jS.map (idU.inv.app M) ≫ Exch.app M) =
+        (jS.map (idU.inv.app M) ≫ Exch.app M) ≫ idX.inv.app (Rj.obj (iS.obj M)) :=
+      (idX.inv.naturality (jS.map (idU.inv.app M) ≫ Exch.app M)).symm
+    rw [reassoc_of% hn, hF1]
+    simp
+  have h2 : idX.inv.app (jS.obj M) ≫ RX1.map (jS.map (idU.inv.app M) ≫ Exch.app M) ≫
+      comp.hom.app (iS.obj M) ≫ Rj.map (ι.hom.app M) =
+        (jS.map (idU.inv.app M) ≫ Exch.app M) ≫ Rj.map (ι.hom.app M) := by
+    rw [reassoc_of% h1, Category.assoc]
+  rw [h2, hEx]
+  have hn1 := a.unit.naturality (idU.inv.app M)
+  have hn2 : iS.map (b1.counit.app M) ≫ ι.hom.app M =
+      ι.hom.app (L1.obj (R1.obj M)) ≫ b1.counit.app M := ι.hom.naturality (b1.counit.app M)
+  simp only [Functor.id_map] at hn1
+  simp only [Functor.map_comp, Category.assoc, Functor.id_obj, Adjunction.counit_naturality,
+    Adjunction.counit_naturality_assoc, Adjunction.left_triangle_components_assoc]
+  rw [← reassoc_of% hn1, hn2, reassoc_of% (hF3 (R1.obj M)), hF2]
+  rfl
+
+end Abstract
+
 /-! ### The refinement of an open and proper immersion -/
 
 section Clopen
