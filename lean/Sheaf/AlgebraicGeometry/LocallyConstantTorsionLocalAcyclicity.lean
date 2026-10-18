@@ -8,19 +8,12 @@ module
 public import Sheaf.AlgebraicGeometry.LocalAcyclicityAbelianSheaf
 public import WeilConjectures.ConstructibleSheaf.Defs
 public import Mathlib.GroupTheory.OrderOfElement
-import Sheaf.Paper.StrictHenselizationFunctoriality
-import WeilConjectures.AlgebraicGeometry.StrictlyHenselianSectionsStalk
-import WeilConjectures.AlgebraicGeometry.InverseImageStalkGerm
-import Sheaf.Paper.ConstantSheafSectionsLocallyConstant
-import Mathlib.GroupTheory.FiniteAbelian.Basic
-import Mathlib.CategoryTheory.Sites.GlobalSections
-import Sheaf.AlgebraicGeometry.KInjectiveResolutions
-import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
-import Sheaf.AlgebraicGeometry.KInjectiveResolutionsExist
+import Sheaf.AlgebraicGeometry.StrictLocalConstantComparison
+import Sheaf.AlgebraicGeometry.ConstantTorsionAcyclicDevissage
+import WeilConjectures.Mathlib.CategoryTheory.Sites.Point.ConstantSheaf
+import Mathlib.Algebra.Category.Grp.FilteredColimits
 import Mathlib.AlgebraicGeometry.Pullbacks
 import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
-import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.FreeSheaf
-import Sheaf.AlgebraicGeometry.StrictHenselizationClosedLift
 
 /-!
 # Local acyclicity for locally constant torsion coefficients
@@ -44,41 +37,26 @@ Source: Stacks Project, Tag 0GJR, lemma-locally-acyclic-locally-constant
 (blueprint: lem-weil-pbc-locally-constant-torsion-local-acyclicity).
 
 Proof:
-1. Fix a geometric point `x`. Pull a constant trivialization of `G` on an étale
-neighbourhood back to the strict localization `T` at `x`, using strict-henselization
-functoriality and `upperStarConstantSheafIso`. Sections of a constant sheaf on this
-local spectrum are constant (constantSheaf_sections_locallyConstant). The strict-local
-sections--stalk isomorphism and inverseImage_stalk_germ identify this coefficient group
-with the stalk `M`, compatibly with the germ map. Thus the restriction to `T` and to
-any strict-local fibre `V` is the constant sheaf with coefficient group `M`.
-2. The finitely generated subgroups of `M`, ordered by inclusion, form a nonempty
-directed system with colimit `M`. Each is finite: representatives in a finite generating
-set can have their integer coefficients reduced modulo the generators' finite orders.
-All their elements retain the required prime-to-characteristic orders. The colimit
-universal property follows by defining a map on an element in any subgroup containing it;
-directedness makes this independent of the choice and additive.
-3. The finitely generated abelian group structure theorem decomposes each finite subgroup
-as a finite sum of cyclic prime-power groups. The free rank is zero by finiteness, and
-each cyclic generator has order prime to the residue characteristic.
-4. Local acyclicity of `f` gives the constant-section isomorphism in degree zero and
-vanishing in positive degrees for each cyclic summand, on every fibre `V`. The
-characteristic of the residue field agrees with that of the geometric field.
-5. Constant sheaves preserve finite sums by their adjunction. Choose K-injective
-resolutions of the summands. Their finite sum is K-injective: its Hom complex from an
-acyclic complex is the finite sum of the acyclic Hom complexes. Kernels and images split
-componentwise, so the sum of resolution maps is a quasi-isomorphism. Global sections
-preserve finite products, hence finite sums. Cohomology therefore preserves these finite
-sums, including the empty sum. The degree-zero isomorphism sends a tuple to the sum of
-its constant sections.
-6. The strict-local fibre `V` is affine by the tensor-product description of fibre
-products of spectra, hence qcqs. The constant-sheaf left adjoint preserves the filtered
-colimit of finite subgroups. The qcqs cohomology filtered-colimit theorem applies in
-every nonnegative degree, without torsion or Noetherian hypotheses on `V`.
-7. Positive cohomology is a colimit of zero groups. In degree zero the finite-subgroup
-constant-section maps commute with inclusions, so their colimit is the constant-section
-isomorphism for `M`. The germ-compatible trivialization in step 1 identifies this with
-the specified canonical map `localAcyclicityAlpha`. Thus both defining clauses of local
-acyclicity relative to `G` hold at every `x` and every test geometric point. -/
+1. Fix a geometric point x and a test geometric point t, and put V equal to the
+strict-local fibre. The strict henselizations are affine, so V is affine and qcqs.
+The germ-compatible constant comparison identifies the pullback of G to V with the
+constant sheaf on its geometric stalk M. Under this comparison the specified alpha
+map is the constant-section unit followed by the sections of the comparison.
+2. Apply this same comparison first to every admissible constant cyclic sheaf on X.
+Its geometric stalk is canonically its coefficient group. Naturality of the
+constant-section unit and invariance of cohomology under isomorphism convert the
+hypothesis on f into invertibility of that unit and positive cohomology vanishing
+for the constant cyclic sheaf on V itself.
+3. Apply the constant-coefficient devissage lemma. The finitely generated subgroups
+of M form a directed colimit and are finite because M is torsion. A finite abelian
+group is a finite sum of cyclic groups; each cyclic generator retains its order in M,
+so its order is admissible. Additivity of derived cohomology handles these finite sums.
+Constant sheaves preserve colimits, and qcqs etale cohomology preserves filtered colimits
+at the coefficient universe, including degree zero through its comparison with sections.
+Thus the constant-section unit for M is invertible and its positive cohomology vanishes.
+4. Transport these two conclusions along the germ-compatible comparison from step 1.
+The equality for the specified alpha map gives its invertibility, and the cohomology
+isomorphism gives positive vanishing. This holds for every x and t. -/
 theorem isLocallyAcyclicRelative_of_locallyConstant_torsion
     {X S : Scheme.{u}} (f : X ⟶ S) (hf : IsLocallyAcyclic f)
     (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})
@@ -90,6 +68,66 @@ theorem isLocallyAcyclicRelative_of_locallyConstant_torsion
         (ringChar (X.residueField (x default)) = 0 ∨
           (addOrderOf m).Coprime (ringChar (X.residueField (x default))))) :
     IsLocallyAcyclicRelative f G := by
-  sorry
+  intro Ω _ _ x Ω' _ _ t
+  let M := (Scheme.pointSmallEtale x).sheafFiber.obj G
+  let V := localAcyclicityFiber f x t
+  let C := constantSheaf V.smallEtaleTopology AddCommGrpCat.{u + 1}
+  let Γ := Sheaf.Γ V.smallEtaleTopology AddCommGrpCat.{u + 1}
+  let η := (constantSheafΓAdj V.smallEtaleTopology AddCommGrpCat.{u + 1}).unit
+  have : Limits.PreservesFilteredColimitsOfSize.{u, u}
+      (forget AddCommGrpCat.{u + 1}) :=
+    Limits.preservesFilteredColimitsOfSize_shrink.{u, u + 1, u, u + 1} _
+  have : IsAffine (Scheme.strictHenselizationScheme x) := by
+    unfold Scheme.strictHenselizationScheme
+    infer_instance
+  have : IsAffine (Scheme.strictHenselizationScheme (x ≫ f)) := by
+    unfold Scheme.strictHenselizationScheme
+    infer_instance
+  have : IsAffine V := by
+    dsimp [V, localAcyclicityFiber]
+    infer_instance
+  have hcyclic (n : ℕ) (hn : 0 < n)
+      (hp : ringChar (X.residueField (x default)) = 0 ∨
+        n.Coprime (ringChar (X.residueField (x default)))) := hf Ω x n hn hp Ω' t
+  have hunit (n : ℕ) (hn : 0 < n)
+      (hp : ringChar (X.residueField (x default)) = 0 ∨
+        n.Coprime (ringChar (X.residueField (x default)))) :
+      IsIso (η.app (AddCommGrpCat.of (ULift.{u + 1} (ZMod n)))) ∧
+      ∀ q : ℕ, 0 < q → Limits.IsZero
+        ((cohomology AddCommGrpCat.{u + 1} V (q : ℤ)).obj
+          ((DerivedCategory.singleFunctor _ 0).obj
+            (C.obj (AddCommGrpCat.of (ULift.{u + 1} (ZMod n)))))) := by
+    let N := AddCommGrpCat.of (ULift.{u + 1} (ZMod n))
+    let F := (constantSheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}).obj N
+    have hc : F.IsConstant X.smallEtaleTopology := ⟨N, ⟨Iso.refl _⟩⟩
+    have : Scheme.IsLocallyConstantSheaf F := hc.isLocallyConstantSheaf
+    obtain ⟨e, he⟩ := exists_strictLocalConstantComparison f x t F
+    let a := (Scheme.pointSmallEtale x).sheafFiberConstantSheafIso N
+    have hα := (hcyclic n hn hp).1
+    rw [he] at hα
+    have hη : IsIso (η.app ((Scheme.pointSmallEtale x).sheafFiber.obj F)) :=
+      (isIso_comp_right_iff _ _).mp hα
+    have hnatur : η.app N =
+        a.inv ≫ η.app ((Scheme.pointSmallEtale x).sheafFiber.obj F) ≫
+          (C ⋙ Γ).map a.hom := by
+      rw [← η.naturality a.hom]
+      simp
+    constructor
+    · rw [hnatur]
+      infer_instance
+    · intro q hq
+      let H := DerivedCategory.singleFunctor _ 0 ⋙ cohomology AddCommGrpCat.{u + 1} V (q : ℤ)
+      exact Limits.IsZero.of_iso ((hcyclic n hn hp).2 q hq)
+        (H.mapIso ((C.mapIso a).symm ≪≫ e))
+  obtain ⟨hη, hH⟩ := constantTorsion_acyclic_of_cyclic V
+    (ringChar (X.residueField (x default))) hunit M (hG Ω x)
+  obtain ⟨e, he⟩ := exists_strictLocalConstantComparison f x t G
+  constructor
+  · rw [he]
+    infer_instance
+  · intro q hq
+    exact Limits.IsZero.of_iso (hH q hq)
+      (((DerivedCategory.singleFunctor _ 0 ⋙
+        cohomology AddCommGrpCat.{u + 1} V (q : ℤ)).mapIso e).symm)
 
 end AlgebraicGeometry.Etale

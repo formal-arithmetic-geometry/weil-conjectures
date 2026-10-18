@@ -1,0 +1,167 @@
+{
+ "id": "lem-weil-pbc-strict-local-constant-comparison",
+ "kind": "statement",
+ "title": "A germ-compatible constant model on every strict-local fibre",
+ "statement": "Let $f:X\\to S$ be a morphism of schemes [def-pc-scheme], let $\\bar x:\\operatorname{Spec}\\Omega\\to X$ be a geometric point [def-weil-pbc-geometric-stalks], and let $\\bar t:\\operatorname{Spec}\\Omega'\\to S_{(f(\\bar x))}$ be any geometric point. Write $T=X_{(\\bar x)}$, $V=T\\times_{S_{(f(\\bar x))}}\\operatorname{Spec}\\Omega'$, $j:T\\to X$ and $p:V\\to T$ for the maps in [def-weil-pbc-local-acyclicity-abelian-sheaf]. For a locally constant abelian sheaf $G$ [def-constructible-locally-constant] [def-weil-pbc-abelian-etale-sheaves], put $M=G_{\\bar x}$. There is an isomorphism $e:\\underline M_V\\simeq (j\\circ p)^*G$ such that the canonical map $\\alpha_{G,\\bar x,\\bar t}:G_{\\bar x}\\to\\Gamma(V,(j\\circ p)^*G)$ equals the constant-section adjunction unit $M\\to\\Gamma(V,\\underline M_V)$ [def-weil-pbc-global-sections-functor] followed by $\\Gamma(V,e)$. No acyclicity or torsion assumption is needed.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0GJR, lemma-locally-acyclic-locally-constant, proof"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-geometric-stalks",
+  "def-weil-pbc-local-acyclicity-abelian-sheaf",
+  "def-constructible-locally-constant",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-global-sections-functor"
+ ],
+ "proof": [
+  {
+   "text": "The chosen strict-local ring is strictly henselian local. Pull G back to T; pullback preserves local constancy. Choose a trivializing etale cover of T and a member with a point above its closed point. The etale-neighbourhood section theorem supplies a section of this member over T. Pulling its constant trivialization back along that section makes the sheaf F=j^*G constant. The composition and identity comparisons for inverse images identify this pullback with F.",
+   "uses": [
+    "lem-weil-pbc-strict-henselization-local-structure",
+    "lemma-constructible-pullback-locally-constant",
+    "lemma-constructible-pullback-constant",
+    "lem-sbc-strict-henselian-etale-neighbourhood-section"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0GJR, lemma-locally-acyclic-locally-constant, proof"
+   }
+  },
+  {
+   "text": "Every etale cover of T has a split member. Consequently sheafification of a constant presheaf does not change its value at the terminal etale object: the unit of constant sheaf adjoint to terminal evaluation is bijective. Thus the constant-sheaf functor is fully faithful. Its counit C(Γ(T,F))→F is invertible because F is constant. This is implemented using the proved bijective_toSheafify_app theorem and the general fully-faithful-adjunction API, without choosing any coefficient object from an unproved existence statement.",
+   "uses": [
+    "lem-sbc-strict-henselian-etale-neighbourhood-section",
+    "def-weil-pbc-global-sections-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0GJR, lemma-locally-acyclic-locally-constant, proof"
+   }
+  },
+  {
+   "text": "The unique canonical germ restriction r:M→Γ(T,F) is an isomorphism. Define e₀:C(M)≅F to be C(r) followed by the counit. The adjunction triangle, equivalently homEquiv.apply_symm_apply, gives η_M followed by Γ(e₀) equal to r.",
+   "uses": [
+    "lem-weil-pbc-strict-local-germ-restriction-iso",
+    "def-weil-pbc-global-sections-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0GJR, lemma-locally-acyclic-locally-constant, proof"
+   }
+  },
+  {
+   "text": "Pull e₀ back along p and compose with the inverse pullback-constant and inverse-image-composition comparisons to get e on V. For any coefficient N, the constant-section unit on T followed by pullback of sections and the pullback-constant isomorphism equals the unit on V. To verify this identity, transport sections to evaluation at the terminal etale object; the units under the right-adjoint uniqueness isomorphisms and then the left-adjoint uniqueness isomorphism give exactly the two units. The sections pullback map is natural by naturality of the inverse-image adjunction unit. Apply this naturality to e₀, cancel the pullback-constant isomorphisms, and use the preceding equality η;Γ(e₀)=r. The resulting composite is r followed by pullback of sections and the inverse composition comparison, which is the defining localAcyclicityAlpha.",
+   "uses": [
+    "lemma-constructible-pullback-constant",
+    "def-weil-pbc-local-acyclicity-abelian-sheaf",
+    "def-weil-pbc-global-sections-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0GJR, lemma-locally-acyclic-locally-constant, proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-strict-henselization-local-structure",
+  "lemma-constructible-pullback-locally-constant",
+  "lemma-constructible-pullback-constant",
+  "lem-sbc-strict-henselian-etale-neighbourhood-section",
+  "def-weil-pbc-global-sections-functor",
+  "lem-weil-pbc-strict-local-germ-restriction-iso",
+  "def-weil-pbc-local-acyclicity-abelian-sheaf"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0GJR, lemma-locally-acyclic-locally-constant, proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A locally constant abelian etale sheaf on a strictly henselian local scheme is a constant sheaf canonically identified with its geometric stalk",
+   "results": "8 hits: CategoryTheory.Sheaf.isConstant_of_iso, CategoryTheory.Sheaf.isConstant_iff_mem_essImage, CategoryTheory.Sheaf.IsConstant.mk, CategoryTheory.Sheaf.IsConstant.rec, CondensedSet.LocallyConstant.functorFullyFaithful, CategoryTheory.Sheaf.IsConstant, LightCondensed.IsDiscrete, CategoryTheory.Sheaf.IsConstant.casesOn",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On a strictly henselian local scheme every locally constant abelian sheaf is canonically constant on its geometric stalk, compatibly with sections pullback",
+   "results": "8 hits: Module.isLocallyConstant_rankAtStalk, CompHausLike.LocallyConstant.counit_app_val, Module.isLocallyConstant_rankAtStalk_freeLocus, CompHausLike.LocallyConstant.presheaf_ext, CompHausLike.LocallyConstant.unit_app, CategoryTheory.Sheaf.isConstant_iff_forget, AlgebraicGeometry.StructureSheaf.res_const, CompHausLike.LocallyConstantModule.functorToPresheaves_obj_obj_carrier",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsConstant.*[Hh]ensel|[Hh]ensel.*IsConstant|torsion.*acyclic",
+   "results": "0 hits: ",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.LocallyConstantTorsionLocalAcyclicity",
+  "date": "2026-10-18",
+  "group": "Y6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-direct-image-finiteness-proper",
+   "place": "Proof, first paragraph: \"the sheaves $R^qf_{\\Et,*}F_{\\Et}$ are constructible and zero for $q>2e$\". Constructibility clause, via the existing 0GL0 -> 0GKW -> 0GKV case (a) -> 0GKD branch; 0GKD invokes 0GJQ, 0GJR and 0GJW. This comparison realizes step 1 of the 0GJR coefficient argument: trivialize on the strict localization and identify the canonical germ map, before the finite-group devissage.",
+   "via": [
+    "lem-weil-pbc-locally-constant-torsion-local-acyclicity",
+    "lem-weil-pbc-smooth-proper-specialization-prime-to-characteristic",
+    "lem-weil-pbc-proper-smooth-curves-prime-coefficients",
+    "lem-weil-pbc-etale-proper-smooth-curves-finite-module",
+    "lem-weil-pbc-etale-constant-shriek-rel-dim-1",
+    "lem-weil-pbc-etale-lisse-open-relative-line-constructibility",
+    "lem-weil-pbc-etale-affine-line-shriek-sheaf-constructible",
+    "lem-weil-pbc-etale-compactification-constructibility",
+    "lem-weil-pbc-etale-proper-direct-image-finiteness"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.StrictLocalConstantComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/StrictLocalConstantComparison.lean",
+  "declaration": "AlgebraicGeometry.Etale.exists_strictLocalConstantComparison",
+  "statement": "theorem exists_strictLocalConstantComparison {X S : Scheme.{u}} (f : X ⟶ S) {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (x : Spec (.of Ω) ⟶ X) {Ω' : Type u} [Field Ω'] [IsAlgClosed Ω'] (t : Spec (.of Ω') ⟶ Scheme.strictHenselizationScheme (x ≫ f)) (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) [Scheme.IsLocallyConstantSheaf G] : ∃ e : (constantSheaf (localAcyclicityFiber f x t).smallEtaleTopology AddCommGrpCat.{u + 1}).obj ((Scheme.pointSmallEtale x).sheafFiber.obj G) ≅ (upperStar AddCommGrpCat.{u + 1} (pullback.fst (localAcyclicityStrictMap f x) t ≫ Scheme.strictHenselizationStructuralMap x)).obj G, localAcyclicityAlpha f x t G = (constantSheafΓAdj (localAcyclicityFiber f x t).smallEtaleTopology AddCommGrpCat.{u + 1}).unit.app _ ≫ (Sheaf.Γ (localAcyclicityFiber f x t).smallEtaleTopology AddCommGrpCat.{u + 1}).map e.hom",
+  "branch": "sheaf-dag",
+  "by": "Y6",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y6",
+  "result": "pass",
+  "landing": "20261018T062955-L-694348",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y6",
+  "result": "pass",
+  "landing": "20261018T062955-L-694348",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,155 @@
+{
+ "id": "lem-weil-pbc-constant-torsion-acyclic-devissage",
+ "kind": "statement",
+ "title": "Constant torsion acyclicity from admissible cyclic coefficients",
+ "statement": "Let $V$ be a quasi-compact quasi-separated scheme [def-pc-scheme] and $p\\in\\mathbf N$. For every integer $n>0$ such that $p=0$ or $\\gcd(n,p)=1$, assume the constant-section unit $\\mathbf Z/n\\mathbf Z\\to\\Gamma(V,\\underline{\\mathbf Z/n\\mathbf Z})$ [def-weil-pbc-global-sections-functor] is invertible and $H^q(V,\\underline{\\mathbf Z/n\\mathbf Z})=0$ for every $q>0$ [def-weil-pbc-etale-cohomology]. Let $M$ be any abelian group in the coefficient universe such that every $m\\in M$ has finite additive order, and $p=0$ or $\\gcd(\\operatorname{ord}(m),p)=1$. Then the constant-section unit $M\\to\\Gamma(V,\\underline M)$ is invertible and $H^q(V,\\underline M)=0$ for every $q>0$. There is no finite-generation or bounded-exponent assumption on $M$.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0GJR, lemma-locally-acyclic-locally-constant, proof"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-global-sections-functor",
+  "def-weil-pbc-etale-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "For a finite abelian group A with admissible element orders, use the finite abelian group structure theorem in Mathlib to identify A with a finite biproduct of lifted Z/n groups with n>1. The summand inclusion, followed by the inverse decomposition, is injective; therefore its generator has the same additive order n in A. The order condition on A makes n admissible, so the hypothesis applies to every summand. This includes the empty biproduct for A=0.",
+   "uses": [
+    "lem-sbc-finitely-generated-abelian-group-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0GJR, lemma-locally-acyclic-locally-constant, proof"
+   }
+  },
+  {
+   "text": "Constant sheaves and global sections preserve finite biproducts, and derived cohomology of sheaves in degree zero is additive. The latter uses the existing proved rightDerivedFunctor.Additive instance, followed by the additive homology functor. Naturality of the unit and preservation of the biproduct cocone make its value on the sum an isomorphism. The image under positive cohomology is a biproduct of zero objects, hence zero. Transport along the finite decomposition.",
+   "uses": [
+    "def-weil-pbc-global-sections-functor",
+    "def-weil-pbc-etale-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0GJR, lemma-locally-acyclic-locally-constant, proof"
+   }
+  },
+  {
+   "text": "Let I be the subtype of finitely generated additive subgroups of M, ordered by inclusion. Bottom gives nonemptiness and the join gives common upper bounds. The inclusion cocone has point M. The filtered-colimit criterion in Types applies: every element lies in its cyclic subgroup, and equality of elements in a subgroup is already subtype equality. The forgetful functor preserves filtered colimits and reflects isomorphisms, so it reflects this colimit. Every subgroup in I is finitely generated and torsion, hence finite by Mathlib; injectivity of its inclusion preserves additive orders. Step 2 applies to every stage.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0GJR, lemma-locally-acyclic-locally-constant, proof"
+   }
+  },
+  {
+   "text": "The constant-sheaf left adjoint preserves this colimit. The existing coefficient-size qcqs etale cohomology theorem shows that each nonnegative-degree cohomology functor preserves it; the size is u+1, the universe of the subgroup index and coefficients. Degree zero is naturally isomorphic to global sections by the derived-zero comparison, so sections also preserve this colimit. The stagewise unit isomorphisms yield an isomorphism on the colimit point by naturality. In positive degrees the image cocone has all objects zero, hence its colimit is zero. These are the two assertions for M.",
+   "uses": [
+    "lem-weil-pbc-etale-directed-cohomology-colimit",
+    "def-weil-pbc-global-sections-functor",
+    "def-weil-pbc-etale-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0GJR, lemma-locally-acyclic-locally-constant, proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sbc-finitely-generated-abelian-group-structure",
+  "def-weil-pbc-global-sections-functor",
+  "def-weil-pbc-etale-cohomology",
+  "lem-weil-pbc-etale-directed-cohomology-colimit"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0GJR, lemma-locally-acyclic-locally-constant, proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "On a quasi compact quasi separated scheme, acyclicity of admissible constant finite cyclic abelian sheaves implies acyclicity for every prime to characteristic torsion abelian coefficient group",
+   "results": "8 hits: AlgebraicGeometry.quasiCompact_of_compactSpace, AlgebraicGeometry.QuasiSeparated.of_quasiSeparatedSpace, AlgebraicGeometry.quasiSeparatedSpace_of_isAffine, AlgebraicGeometry.IsSeparated.instQuasiSeparated, AlgebraicGeometry.Scheme.instQuasiSeparatedSpaceCarrierCarrierCommRingCatOfIsSeparated, AlgebraicGeometry.quasiSeparated_eq_diagonal_is_quasiCompact, SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation, AlgebraicGeometry.quasiSeparatedSpace_iff_quasiSeparated",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Vanishing of etale cohomology and the constant sections isomorphism for cyclic coefficients imply the same for torsion abelian coefficient groups on a qcqs scheme",
+   "results": "8 hits: Algebra.FormallyEtale.subsingleton_h1Cotangent, Rep.FiniteCyclicGroup.resolution_quasiIso, Rep.FiniteCyclicGroup.groupCohomologyIso₀, Algebra.formallyEtale_iff, Rep.FiniteCyclicGroup.groupCohomologyπEven_eq_zero_iff, groupCohomology.H1ofAutOnUnitsUnique, Rep.FiniteCyclicGroup.groupCohomologyπOdd_eq_zero_iff, Algebra.Extension.subsingleton_h1Cotangent",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsConstant.*[Hh]ensel|[Hh]ensel.*IsConstant|torsion.*acyclic",
+   "results": "0 hits: ",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.LocallyConstantTorsionLocalAcyclicity",
+  "date": "2026-10-18",
+  "group": "Y6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-direct-image-finiteness-proper",
+   "place": "Proof, first paragraph: \"the sheaves $R^qf_{\\Et,*}F_{\\Et}$ are constructible and zero for $q>2e$\". Constructibility clause, via the existing 0GL0 -> 0GKW -> 0GKV case (a) -> 0GKD branch; 0GKD invokes 0GJQ, 0GJR and 0GJW. This coefficient lemma realizes steps 2, 3, 5, 6 and 7 of the 0GJR argument: finite subgroup approximation, cyclic decomposition, finite sums and filtered colimits.",
+   "via": [
+    "lem-weil-pbc-locally-constant-torsion-local-acyclicity",
+    "lem-weil-pbc-smooth-proper-specialization-prime-to-characteristic",
+    "lem-weil-pbc-proper-smooth-curves-prime-coefficients",
+    "lem-weil-pbc-etale-proper-smooth-curves-finite-module",
+    "lem-weil-pbc-etale-constant-shriek-rel-dim-1",
+    "lem-weil-pbc-etale-lisse-open-relative-line-constructibility",
+    "lem-weil-pbc-etale-affine-line-shriek-sheaf-constructible",
+    "lem-weil-pbc-etale-compactification-constructibility",
+    "lem-weil-pbc-etale-proper-direct-image-finiteness"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ConstantTorsionAcyclicDevissage",
+  "file": "lean/Sheaf/AlgebraicGeometry/ConstantTorsionAcyclicDevissage.lean",
+  "declaration": "AlgebraicGeometry.Etale.constantTorsion_acyclic_of_cyclic",
+  "statement": "theorem constantTorsion_acyclic_of_cyclic (V : Scheme.{u}) [CompactSpace V] [QuasiSeparatedSpace V] (p : ℕ) (hcyclic : ∀ n : ℕ, 0 < n → (p = 0 ∨ n.Coprime p) → IsIso ((constantSheafΓAdj V.smallEtaleTopology AddCommGrpCat.{u + 1}).unit.app (AddCommGrpCat.of (ULift.{u + 1} (ZMod n)))) ∧ ∀ q : ℕ, 0 < q → IsZero ((cohomology AddCommGrpCat.{u + 1} V (q : ℤ)).obj ((DerivedCategory.singleFunctor _ 0).obj ((constantSheaf V.smallEtaleTopology AddCommGrpCat.{u + 1}).obj (AddCommGrpCat.of (ULift.{u + 1} (ZMod n))))))) (M : AddCommGrpCat.{u + 1}) (hM : ∀ m : M, IsOfFinAddOrder m ∧ (p = 0 ∨ (addOrderOf m).Coprime p)) : IsIso ((constantSheafΓAdj V.smallEtaleTopology AddCommGrpCat.{u + 1}).unit.app M) ∧ ∀ q : ℕ, 0 < q → IsZero ((cohomology AddCommGrpCat.{u + 1} V (q : ℤ)).obj ((DerivedCategory.singleFunctor _ 0).obj ((constantSheaf V.smallEtaleTopology AddCommGrpCat.{u + 1}).obj M)))",
+  "branch": "sheaf-dag",
+  "by": "Y6",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y6",
+  "result": "pass",
+  "landing": "20261018T062955-L-694348",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y6",
+  "result": "pass",
+  "landing": "20261018T062955-L-694348",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
