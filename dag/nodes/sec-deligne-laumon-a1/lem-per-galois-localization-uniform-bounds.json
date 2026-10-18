@@ -20,11 +20,221 @@
   "def-weil-closed-immersion",
   "def-weil-open-immersion",
   "def-weil-pbc-inverse-image",
-  "def-weil-pbc-direct-image"
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-sheaf-of-modules-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The open subscheme $U$ is Noetherian by [lem-weil-pbc-noetherian-open-subscheme-noetherian]. A finite Noetherian affine cover of $X$ pulls back to charts $\\operatorname{Spec}(R/I)$ on $Z$; an increasing ideal chain in $R/I$ lifts to one in $R$, so $Z$ is Noetherian as well. By [lem-per-galois-partition-exact-refinement], replace any input partition by a directed refinement; inclusion of the old class in the new holds for every coefficient algebra. Apply [lem-per-directed-galois-finite-tensor-generators] to that refinement whenever a finite list $C_a$ is used below. Refining input partitions enlarges the class on which we prove the assertion, so it suffices to establish the desired conclusions there.",
+   "uses": [
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "def-weil-closed-immersion",
+    "def-weil-pbc-noetherian-ring",
+    "lem-per-galois-partition-exact-refinement",
+    "lem-per-directed-galois-finite-tensor-generators"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "7.3.6; 7.4.3-7.4.6; refinement at the start of 7.6.5-7.6.6."
+   }
+  },
+  {
+   "text": "We first record the restriction argument for $f:T\\hookrightarrow S$, with $S,T$ Noetherian and $f$ open or closed. Fix a partition of $S$ and its finite list $C_a$ from Step 1. Their inverse images $f^*C_a$ are constructible prime-field sheaves by [prop-constructible-pullback]. Choose one Galois partition of $T$ trivializing them all by [lem-per-noetherian-constructible-galois-partition]. Inverse image is exact by [lem-pe-constant-left-module-inverse-image], preserves colimits by [lem-weil-pbc-inverse-image-preserves-colimits, lem-weil-pbc-module-sheaves-colimits-forgetful], and preserves arbitrary constant modules by [lem-sfb-geometric-inverse-image-constant-module]. Hence $f^*(N_S\\otimes_\\Lambda C_a)=N_T\\otimes_\\Lambda f^*C_a$: choosing a $\\Lambda$-basis of $N$ proves this on underlying sheaves by the coproduct comparison, and naturality in endomorphisms of $N$ makes it $A$-linear. On a trivializing cover this is constant with value $N^{\\oplus e}$ for finite $e$. Apply exact inverse image to each finite filtration, each retract, and then the filtered colimit in the generator lemma. Closure in [lem-per-galois-partition-exact-refinement] gives a single output partition for the entire input class; its constructible subcategory gives constructibility for finite filtrations. Exactness also makes $H^q(f^*K)=f^*H^q(K)$, so restrictions preserve every cohomological bound. For an arbitrary constructible input, first choose a Galois partition by the same existence lemma.",
+   "uses": [
+    "prop-constructible-pullback",
+    "lem-per-noetherian-constructible-galois-partition",
+    "lem-pe-constant-left-module-inverse-image",
+    "lem-weil-pbc-inverse-image-preserves-colimits",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-sfb-geometric-inverse-image-constant-module",
+    "lem-per-galois-partition-exact-refinement",
+    "lem-per-directed-galois-finite-tensor-generators"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "7.3.4; 7.4.3-7.4.6; restriction refinements in the proof of 7.6.6."
+   }
+  },
+  {
+   "text": "Fix the dualizing complex $Q$ on $X$, and put $Q_U=j^*Q$ and $D_U=R\\mathcal Hom_\\Lambda(-,Q_U)$. Extension by zero is exact by [lem-weil-pbc-extension-by-zero-exact], and its stalk formula [lem-weil-pbc-extension-by-zero-stalks] gives $j^*j_!M=M$ and $i^*j_!M=0$. It preserves bounded constructibility: use the input strata in $U$ and any finite stratification of the complement with zero values. Restriction to the slice site, identified by [lem-weil-pbc-etale-site-localization-open], commutes with derived internal Hom by [lem-weil-pbc-ringed-internal-hom-exact-restriction]. Thus $D_UM=j^*D_X(j_!M)$ is bounded constructible for bounded constructible $M$. This comparison also identifies $j^*(\\eta_{j_!M})$ with $\\eta_M$: in the Hom-complex definition [def-pur-derived-internal-hom], restriction leaves the evaluation $(\\varphi,m)\\mapsto\\varphi(m)$, the Koszul symmetry and its transpose unchanged. Consequently the latter map is an isomorphism by the hypothesis on $Q$. This proves that the particular $Q_U=j^*Q$ is dualizing, including its canonical biduality maps.",
+   "uses": [
+    "lem-weil-pbc-extension-by-zero-exact",
+    "lem-weil-pbc-extension-by-zero-stalks",
+    "lem-weil-pbc-etale-site-localization-open",
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "7.6.3, p.311: the assertion that the restricted dualizing complex is dualizing, with the evaluation argument spelled out."
+   }
+  },
+  {
+   "text": "Apply [lem-per-etale-internal-hom-localization] with $K=j_!L$, $N=Q$ and finite-prime-field coefficients, for $L$ bounded constructible on $U$. By Step 3 the first term is zero and the middle and third terms identify as $D_Xj_!L$ and $Rj_*D_UL$. The cohomology sequence [lem-sf-derived-homology-long-exact] therefore makes the second arrow an isomorphism. Put $L=D_UM$ and use biduality from Step 3 to get $Rj_*M\\cong D_Xj_!D_UM$. Every object on the right is bounded constructible. This proves the prime-field finiteness assertion of 7.6.3 without a dimension bound or invertibility hypothesis.",
+   "uses": [
+    "lem-per-etale-internal-hom-localization",
+    "lem-sf-derived-homology-long-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "7.6.3, p.311; the internal-adjunction identity obtained from the existing localization triangle."
+   }
+  },
+  {
+   "text": "Fix now the input partition on $U$ and its finite prime-field list $C_1,\\ldots,C_r$ from Step 1. By Step 4 each $Rj_*C_a$ is bounded constructible. Choose $d\\ge0$ with $R^qj_*C_a=0$ for every $q>d$ and every $a$. The finite collection of all nonzero $R^qj_*C_a$ admits one trivializing Galois partition $\\mathcal Q$ of $X$ by [lem-per-noetherian-constructible-galois-partition]. Negative higher images vanish because a sheaf has an injective resolution in nonnegative degrees and direct image is applied termwise [def-weil-pbc-direct-image]. If the list is empty, take $d=0$ and any Galois partition of $X$. These choices involve only the input partition, the morphism, and the finite list, never the sheaf to which the functor will be applied.",
+   "uses": [
+    "lem-per-directed-galois-finite-tensor-generators",
+    "lem-per-noetherian-constructible-galois-partition",
+    "def-weil-pbc-direct-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "7.6.5, p.312: the finite family of prime-field simple constituents and their images."
+   }
+  },
+  {
+   "text": "For any $A$-module $N$ and prime-field sheaf $C$, there is a natural $A$-linear comparison $N_X\\otimes_\\Lambda R^qj_*C\\to R^qj_*(N_U\\otimes_\\Lambda C)$. For each $n\\in N$ it is induced by $C\\to N_U\\otimes C$, $c\\mapsto n\\otimes c$, and additivity makes these maps balanced and hence defines the sheaf tensor map. Choose a $\\Lambda$-basis of $N$. Both tensors become coproducts indexed by that basis. A coproduct is the filtered colimit of its finite subsums, and [lemma-weil-pbc-direct-image-filtered-colimit] makes $R^qj_*$ preserve that colimit; finite sums are preserved by additivity. For comparing coefficients, [lem-sbc-higher-direct-image-forget-comparison] identifies both module higher images with the higher image of the same underlying abelian sheaf, and [lem-weil-pbc-module-sheaves-colimits-forgetful] computes their coproducts there. Thus the displayed comparison is an isomorphism. Its construction commutes with multiplication by each $a\\in A$, so the isomorphism is $A$-linear, independent of the chosen basis. The continuity hypothesis holds since an open immersion into a Noetherian scheme is qcqs, and every sheaf here is killed by $\\ell$.",
+   "uses": [
+    "lemma-weil-pbc-direct-image-filtered-colimit",
+    "lem-sbc-higher-direct-image-forget-comparison",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "7.6.7, pp.312-313, prime-field tensor comparison (also 10.2.1); here the sheaf-degree case is the explicit basis-and-colimit calculation."
+   }
+  },
+  {
+   "text": "For $C=C_a$, Step 6 and Step 5 show that $R^qj_*(N_U\\otimes C_a)$ is zero for $q>d$ and belongs to $\\mathcal W_{\\mathcal Q}(A)$ for every $q$: on each chosen covering it is constant with value a finite direct sum of $N$. It is constructible when $N$ is $A$-finite. The constant tensor identification is the map on pure tensors; its stalks are the usual module tensor isomorphism by [lem-pod-etale-stalk-tensor-scalar] and clause (1) of [lem-pod-lisse-tensor-and-scalar-extension], and [lem-weil-pbc-sets-etale-iso-on-geometric-stalks] detects the isomorphism. Additivity preserves retracts. For a short exact sequence of input sheaves, the derived long exact sequence [lem-weil-pbc-right-derived-universal-delta-functor] writes each middle $R^qj_*$ as an extension of a cokernel by a kernel of images of the two ends. The exact, extension-closed categories in [lem-per-galois-partition-exact-refinement] therefore retain both membership and the bound $d$, and retain constructibility for finite filtrations. Apply the finite tensor filtrations of [lem-per-directed-galois-finite-tensor-generators]. It follows that these three conclusions hold for every constructible input in the fixed partition class.",
+   "uses": [
+    "lem-pod-etale-stalk-tensor-scalar",
+    "lem-pod-lisse-tensor-and-scalar-extension",
+    "lem-weil-pbc-sets-etale-iso-on-geometric-stalks",
+    "lem-weil-pbc-right-derived-universal-delta-functor",
+    "lem-per-galois-partition-exact-refinement",
+    "lem-per-directed-galois-finite-tensor-generators"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "7.6.5 and 7.6.7, pp.312-313: finite devissage, retaining A-constructibility via 7.4.6."
+   }
+  },
+  {
+   "text": "Every input sheaf in $\\mathcal W_{\\mathcal P_U}(A)$ is a filtered colimit of constructible subobjects of the refined class by [lem-per-directed-galois-finite-tensor-generators]. Its higher direct images are the colimits of theirs: apply [lemma-weil-pbc-direct-image-filtered-colimit] to the underlying torsion sheaves and [lem-sbc-higher-direct-image-forget-comparison, lem-weil-pbc-module-sheaves-colimits-forgetful] to retain module structures. Filtered-colimit closure in [lem-per-galois-partition-exact-refinement] then keeps the same $\\mathcal Q$ and vanishing bound $d$. This is precisely where arbitrary, possibly infinitely generated, cohomology sheaves are allowed. No uniform bound on the lengths of their finite filtrations is required.",
+   "uses": [
+    "lem-per-directed-galois-finite-tensor-generators",
+    "lemma-weil-pbc-direct-image-filtered-colimit",
+    "lem-sbc-higher-direct-image-forget-comparison",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-per-galois-partition-exact-refinement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "7.6.5, last sentence, p.312; 7.4.3-7.4.6 for arbitrary Noetherian prime-field algebras."
+   }
+  },
+  {
+   "text": "Let $K$ have cohomology in $[a,b]$ in the specified input class. Canonical truncations [lem-weil-pbc-truncation-cohomology, lem-weil-pbc-truncation-triangle] express it by finitely many triangles with terms $H^q(K)[-q]$, $a\\le q\\le b$. Derived direct image is triangulated by [lem-weil-pbc-derived-direct-image-triangulated]. Each such term has image cohomology only in $[q,q+d]$ by Steps 7-8. The triangle cohomology sequence [lem-sf-derived-homology-long-exact] and the kernel, cokernel and extension closure in [lem-per-galois-partition-exact-refinement] give image in $D^b_{\\mathcal Q}(X,A)$, with cohomology only in $[a,b+d]$. If $K\\in D^{\\le n}$ choose $b\\le n$, proving $d_j=d$. For a bounded constructible $K$, choose one Galois partition for its finitely many cohomology sheaves by [lem-per-noetherian-constructible-galois-partition] and repeat the finite-filtration part of Step 7 and this truncation induction. It remains bounded constructible. This proves all of (1).",
+   "uses": [
+    "lem-weil-pbc-truncation-cohomology",
+    "lem-weil-pbc-truncation-triangle",
+    "lem-weil-pbc-derived-direct-image-triangulated",
+    "lem-sf-derived-homology-long-exact",
+    "lem-per-galois-partition-exact-refinement",
+    "lem-per-noetherian-constructible-galois-partition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "7.6.4-7.6.5 and 7.6.7: passage from sheaves to bounded complexes by their finite canonical truncations."
+   }
+  },
+  {
+   "text": "For (2), fix the input partition $\\mathcal P$ on $X$. Step 2 with $f=j$ gives a partition $\\mathcal P_U$ for $j^*K$, with unchanged bounds. Apply (1) to this partition to obtain $\\mathcal Q_X$ and $d\\ge0$ for $Rj_*j^*K$. By [lem-per-galois-partition-exact-refinement], choose a directed common refinement $\\mathcal R_X$ of $\\mathcal P$ and $\\mathcal Q_X$; thus both $K$ and $Rj_*j^*K$ have cohomology in that single class. Step 2 with $f=i$ and input $\\mathcal R_X$ supplies a single partition $\\mathcal P_Z$ for both $i^*K$ and $i^*Rj_*j^*K$. All these choices depend only on the partitions and the fixed immersions. Constructibility of these objects follows from Step 2 and (1) when $K$ is constructible.",
+   "uses": [
+    "lem-per-galois-partition-exact-refinement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Proof of 7.6.6, p.312: successive refinements on U, X and Z."
+   }
+  },
+  {
+   "text": "For the coefficient ring $A$, apply [lem-per-etale-internal-hom-localization] with first argument $A_X[0]$ and second argument $K$. Internal Hom from the coefficient unit is the identity: in [def-pur-derived-internal-hom] its Hom complex into a K-injective representative $I$ has degree $q$ equal to $I^q$. Constant inverse image identifies $i^*A_X=A_Z$ and $j^*A_X=A_U$ by [lem-sfb-geometric-inverse-image-constant-module]. The resulting triangle is $i_*Ri^!K\\to K\\to Rj_*j^*K\\to(i_*Ri^!K)[1]$. Apply exact inverse image $i^*$ using [lem-pe-constant-left-module-inverse-image, lem-weil-pbc-exact-functor-derived-factorization], and use $i^*i_*\\cong1$ from [lem-trf-oriented-closed-base-localization]. This yields precisely\n$$Ri^!K\\longrightarrow i^*K\\longrightarrow i^*Rj_*j^*K\\longrightarrow(Ri^!K)[1].$$\nThe closed topos lemma applies to the actual small etale closed complement for any closed immersion, with arbitrary commutative constant coefficients; there is no finite-ring restriction.",
+   "uses": [
+    "lem-per-etale-internal-hom-localization",
+    "def-pur-derived-internal-hom",
+    "lem-sfb-geometric-inverse-image-constant-module",
+    "lem-pe-constant-left-module-inverse-image",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-trf-oriented-closed-base-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "7.6.6, displayed triangle, p.312, derived from the existing ordinary-etale internal-Hom localization lemma."
+   }
+  },
+  {
+   "text": "Put $B=i^*K$ and $C=i^*Rj_*j^*K$. By Step 10 both are bounded in the one partition $\\mathcal P_Z$. In the exact cohomology sequence of Step 11, each $H^q(Ri^!K)$ is an extension of $\\operatorname{coker}(H^{q-1}B\\to H^{q-1}C)$ by $\\ker(H^qB\\to H^qC)$ [lem-sf-derived-homology-long-exact]. These lie in $\\mathcal W_{\\mathcal P_Z}(A)$ by [lem-per-galois-partition-exact-refinement], as does their extension; the same assertion for its constructible subcategory proves constructibility. If $K$ is supported cohomologically in $[a,n]$, Step 9 gives $B$ in $[a,n]$ and $C$ in $[a,n+d]$. This sequence gives $Ri^!K$ in $[a,n+d+1]$. Thus take $d_i=d+1$. This proves (2), together with the exact restriction assertion of Step 2. If $U$ or $Z$ is empty the same argument uses the empty partition and zero sheaves; identity immersions satisfy the assertions with bound zero (the possibly larger displayed bounds remain valid).",
+   "uses": [
+    "lem-sf-derived-homology-long-exact",
+    "lem-per-galois-partition-exact-refinement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "7.6.6, p.312: the bound c=c\\prime+1 and the localization devissage; arbitrary coefficients as in 7.6.7."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-derived-internal-hom",
+  "def-weil-closed-immersion",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-noetherian-ring",
+  "lem-pe-constant-left-module-inverse-image",
+  "lem-per-directed-galois-finite-tensor-generators",
+  "lem-per-etale-internal-hom-localization",
+  "lem-per-galois-partition-exact-refinement",
+  "lem-per-noetherian-constructible-galois-partition",
+  "lem-pod-etale-stalk-tensor-scalar",
+  "lem-pod-lisse-tensor-and-scalar-extension",
+  "lem-sbc-higher-direct-image-forget-comparison",
+  "lem-sf-derived-homology-long-exact",
+  "lem-sfb-geometric-inverse-image-constant-module",
+  "lem-trf-oriented-closed-base-localization",
+  "lem-weil-pbc-derived-direct-image-triangulated",
+  "lem-weil-pbc-etale-site-localization-open",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-weil-pbc-extension-by-zero-stalks",
+  "lem-weil-pbc-inverse-image-preserves-colimits",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-right-derived-universal-delta-functor",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-weil-pbc-sets-etale-iso-on-geometric-stalks",
+  "lem-weil-pbc-truncation-cohomology",
+  "lem-weil-pbc-truncation-triangle",
+  "lemma-weil-pbc-direct-image-filtered-colimit",
+  "prop-constructible-pullback"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose XVII, 7.4.2-7.4.7, pp.305-308; 7.6.3-7.6.7, pp.311-313, with explicit coefficient tensor, restriction and truncation arguments."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -60,10 +270,45 @@
    "results": "8 hits; top: AlgebraicGeometry.Scheme.Opens.toScheme_presheaf_obj, TopCat.Presheaf.IsSheafOpensLeCover, AlgebraicGeometry.Scheme.IdealSheafData.gc, AlgebraicGeometry.Scheme.etaleTopology, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.Scheme.Modules.instHasColimits, AlgebraicGeometry.Scheme.Opens.topIso, AlgebraicGeometry.Scheme.IdealSheafData.gci; note: ; digest: d3537d9e1364e1cf",
    "date": "2026-10-18",
    "verdict": "no match: the results do not state uniform Galois-partition bounds for these etale localization functors"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Uniform bounds for derived direct image along an open immersion on sheaves adapted to a fixed Galois stratification assuming a dualizing complex",
+   "results": "8 hits; top: AlgebraicGeometry.Scheme.IsLocallyDirected.V, AlgebraicGeometry.Scheme.Modules.instFaithfulPushforward, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor, AlgebraicGeometry.Scheme.Modules.instFullPushforward, AlgebraicGeometry.SheafedSpace.IsOpenImmersion.image_preimage_is_empty, AlgebraicGeometry.Scheme.Modules.restrictFunctor, AlgebraicGeometry.Scheme.Modules.restrict, AlgebraicGeometry.Scheme.Modules.restrictAdjunction; note: ; digest: a6c71524be9ba14d",
+   "date": "2026-10-18",
+   "verdict": "no match: general sheaf colimits, finite-type local generators and scheme Noetherianity do not give the fixed-Galois-partition finite tensor generation statement"
+  },
+  {
+   "tool": "grep",
+   "query": "Galois.*partition|weakly.constructible|dualizing.*complex",
+   "results": "1 hits; top: Mathlib/Data/Setoid/Partition.lean; note: ; digest: 169f775172edefc5",
+   "date": "2026-10-18",
+   "verdict": "no match: general sheaf colimits, finite-type local generators and scheme Noetherianity do not give the fixed-Galois-partition finite tensor generation statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, DerivedCategory",
+   "results": "0 hits; top: none; note: ; digest: 4f53cda18c2baa0c",
+   "date": "2026-10-18",
+   "verdict": "no match: general sheaf colimits, finite-type local generators and scheme Noetherianity do not give the fixed-Galois-partition finite tensor generation statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Uniform Galois stratification bounds for open direct image and extraordinary inverse image of etale module sheaves",
+   "results": "8 hits; top: AlgebraicGeometry.Scheme.Modules.restrict_obj, AlgebraicGeometry.Scheme.IdealSheafData.map_gc, AlgebraicGeometry.Scheme.Opens.toScheme_presheaf_obj, AlgebraicGeometry.Scheme.Modules.restrictAdjunction, AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso, AlgebraicGeometry.Scheme.Modules, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app, AlgebraicGeometry.Scheme.Modules.hom_ext; note: ; digest: baf696b6dc59a777",
+   "date": "2026-10-18",
+   "verdict": "no match: general sheaf colimits, finite-type local generators and scheme Noetherianity do not give the fixed-Galois-partition finite tensor generation statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A dualizing complex on a noetherian scheme implies finite cohomological dimension for open direct images on a fixed category of Galois constructible sheaves",
+   "results": "8 hits; top: DerivedCategory.isGE_Q_obj_iff, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, CategoryTheory.HasInjectiveDimensionLE, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, DerivedCategory.isLE_Q_obj_iff, DerivedCategory.isLE_iff, CategoryTheory.HasInjectiveDimensionLT.mk, DerivedCategory.isGE_iff; note: ; digest: f2a3987cdd83d0f8",
+   "date": "2026-10-18",
+   "verdict": "no match: general sheaf colimits, finite-type local generators and scheme Noetherianity do not give the fixed-Galois-partition finite tensor generation statement"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-ctf-hom-localization-devissage",
@@ -88,5 +333,155 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-galois-localization-uniform-bounds",
+  "worker": "stage1",
+  "group": "Q52",
+  "summary": "Preserved the statement. Split the open-duality, finite-generator, tensor/colimit, truncation and closed-localization arguments. Added one statement-only coefficient-independent finite tensor generator lemma; reused existing exact-refinement, ordinary-etale internal-Hom localization and continuity nodes. Checked arbitrary A and non-finite stalks without adding invertibility or excellence.",
+  "blueprint": "Ancestor lem-per-artin-gabber-affine-curve, proof Step 1 duality input, through the recorded coefficient-change and condition-(B) localization chain: this item realizes ILO XVII 7.6.3-7.6.7 needed in 7.6.10.",
+  "tool_uses": [
+   {
+    "node": "def-pur-derived-internal-hom",
+    "why": "Generic Derived internal Hom on a ringed site used exactly as stated for ordinary small-etale module sheaves or their derived categories; the perverse unit has no replacement for this foundational operation."
+   },
+   {
+    "node": "def-weil-closed-immersion",
+    "why": "Generic Closed immersion of schemes used exactly as stated for ordinary small-etale module sheaves or their derived categories; the perverse unit has no replacement for this foundational operation."
+   },
+   {
+    "node": "def-weil-pbc-direct-image",
+    "why": "Generic Direct image and its derived functor used exactly as stated for ordinary small-etale module sheaves or their derived categories; the perverse unit has no replacement for this foundational operation."
+   },
+   {
+    "node": "def-weil-pbc-noetherian-ring",
+    "why": "Generic Noetherian ring used exactly as stated for ordinary small-etale module sheaves or their derived categories; the perverse unit has no replacement for this foundational operation."
+   },
+   {
+    "node": "lem-pe-constant-left-module-inverse-image",
+    "why": "Generic Exact geometric inverse image with arbitrary constant left-module coefficients used exactly as stated for ordinary small-etale module sheaves or their derived categories; the perverse unit has no replacement for this foundational operation."
+   },
+   {
+    "node": "lem-pod-etale-stalk-tensor-scalar",
+    "why": "Generic Geometric stalks commute with tensor products and scalar extension on the etale site used exactly as stated for ordinary small-etale module sheaves or their derived categories; the perverse unit has no replacement for this foundational operation."
+   },
+   {
+    "node": "lem-pod-lisse-tensor-and-scalar-extension",
+    "why": "Generic Tensor products, scalar extension and stalks of lisse sheaves of modules used exactly as stated for ordinary small-etale module sheaves or their derived categories; the perverse unit has no replacement for this foundational operation."
+   },
+   {
+    "node": "lem-sbc-higher-direct-image-forget-comparison",
+    "why": "Generic Underlying abelian sheaf commutes with higher direct image used exactly as stated for ordinary small-etale module sheaves or their derived categories; the perverse unit has no replacement for this foundational operation."
+   },
+   {
+    "node": "lem-sf-derived-homology-long-exact",
+    "why": "Generic Long exact cohomology sequence of a distinguished triangle in the derived category used exactly as stated for ordinary small-etale module sheaves or their derived categories; the perverse unit has no replacement for this foundational operation."
+   },
+   {
+    "node": "lem-sfb-geometric-inverse-image-constant-module",
+    "why": "Generic Geometric inverse image preserves constant module sheaves used exactly as stated for ordinary small-etale module sheaves or their derived categories; the perverse unit has no replacement for this foundational operation."
+   },
+   {
+    "node": "lem-trf-oriented-closed-base-localization",
+    "why": "Generic Closed complementary subtopoi: factorization and supported module sheaves used exactly as stated for ordinary small-etale module sheaves or their derived categories; the perverse unit has no replacement for this foundational operation."
+   },
+   {
+    "node": "lem-weil-pbc-derived-direct-image-triangulated",
+    "why": "Generic The derived direct image on bounded below derived categories is a triangulated functor used exactly as stated for ordinary small-etale module sheaves or their derived categories; the perverse unit has no replacement for this foundational operation."
+   },
+   {
+    "node": "lem-weil-pbc-etale-site-localization-open",
+    "why": "Generic The localized small etale site at an etale open is the small etale site of the open used exactly as stated for ordinary small-etale module sheaves or their derived categories; the perverse unit has no replacement for this foundational operation."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-factorization",
+    "why": "Generic The functor induced on derived categories by an exact functor, with its factorization through the localization functors used exactly as stated for ordinary small-etale module sheaves or their derived categories; the perverse unit has no replacement for this foundational operation."
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-exact",
+    "why": "Generic Extension by zero is exact (étale site) used exactly as stated for ordinary small-etale module sheaves or their derived categories; the perverse unit has no replacement for this foundational operation."
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-stalks",
+    "why": "Generic Geometric stalks of extension by zero along an open immersion used exactly as stated for ordinary small-etale module sheaves or their derived categories; the perverse unit has no replacement for this foundational operation."
+   },
+   {
+    "node": "lem-weil-pbc-inverse-image-preserves-colimits",
+    "why": "Generic Inverse image of etale abelian sheaves commutes with colimits used exactly as stated for ordinary small-etale module sheaves or their derived categories; the perverse unit has no replacement for this foundational operation."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "why": "Generic Colimits of sheaves of modules and the forgetful functor to abelian sheaves used exactly as stated for ordinary small-etale module sheaves or their derived categories; the perverse unit has no replacement for this foundational operation."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "why": "Generic An open subscheme of a Noetherian scheme is Noetherian used exactly as stated for ordinary small-etale module sheaves or their derived categories; the perverse unit has no replacement for this foundational operation."
+   },
+   {
+    "node": "lem-weil-pbc-right-derived-universal-delta-functor",
+    "why": "Generic Right derived functors form a universal delta-functor used exactly as stated for ordinary small-etale module sheaves or their derived categories; the perverse unit has no replacement for this foundational operation."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "why": "Generic Derived internal Hom calculus on small ringed sites used exactly as stated for ordinary small-etale module sheaves or their derived categories; the perverse unit has no replacement for this foundational operation."
+   },
+   {
+    "node": "lem-weil-pbc-sets-etale-iso-on-geometric-stalks",
+    "why": "Generic Geometric stalks detect isomorphisms of etale sheaves of sets used exactly as stated for ordinary small-etale module sheaves or their derived categories; the perverse unit has no replacement for this foundational operation."
+   },
+   {
+    "node": "lem-weil-pbc-truncation-cohomology",
+    "why": "Generic Cohomology of the canonical truncation used exactly as stated for ordinary small-etale module sheaves or their derived categories; the perverse unit has no replacement for this foundational operation."
+   },
+   {
+    "node": "lem-weil-pbc-truncation-triangle",
+    "why": "Generic The truncation triangle tau_{<=q-1}K -> tau_{<=q}K -> H^q(K)[-q] is distinguished used exactly as stated for ordinary small-etale module sheaves or their derived categories; the perverse unit has no replacement for this foundational operation."
+   },
+   {
+    "node": "lemma-weil-pbc-direct-image-filtered-colimit",
+    "why": "Generic Filtered colimits and higher direct image used exactly as stated for ordinary small-etale module sheaves or their derived categories; the perverse unit has no replacement for this foundational operation."
+   },
+   {
+    "node": "prop-constructible-pullback",
+    "why": "Generic Pullback of constructible sheaves used exactly as stated for ordinary small-etale module sheaves or their derived categories; the perverse unit has no replacement for this foundational operation."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-pur-derived-internal-hom",
+  "def-weil-closed-immersion",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-noetherian-ring",
+  "lem-pe-constant-left-module-inverse-image",
+  "lem-pod-etale-stalk-tensor-scalar",
+  "lem-pod-lisse-tensor-and-scalar-extension",
+  "lem-sbc-higher-direct-image-forget-comparison",
+  "lem-sf-derived-homology-long-exact",
+  "lem-sfb-geometric-inverse-image-constant-module",
+  "lem-trf-oriented-closed-base-localization",
+  "lem-weil-pbc-derived-direct-image-triangulated",
+  "lem-weil-pbc-etale-site-localization-open",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-weil-pbc-extension-by-zero-stalks",
+  "lem-weil-pbc-inverse-image-preserves-colimits",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-right-derived-universal-delta-functor",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-weil-pbc-sets-etale-iso-on-geometric-stalks",
+  "lem-weil-pbc-truncation-cohomology",
+  "lem-weil-pbc-truncation-triangle",
+  "lemma-weil-pbc-direct-image-filtered-colimit",
+  "prop-constructible-pullback"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q52-ba976265e",
+  "group": "Q52",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q52-ba976265e (reviewer sub-agent of L); spot-checked: I read in full the item (12 steps), the new node lem-per-directed-galois-finite-tensor-generators, every cited statement, and ILO XVII 7.3.1-7.4.7 and 7.6.3-7.6.10 (printed pp.303-314). Route: the item follows ILO. Step 4 is 7.6.3: the localization triangle with K=j_!L kills the first term, so Rj_*M = D_X j_! D_U M, and Step 3 shows j*Q is dualizing. Steps 5-8 are 7.6.5 extended to A by a Λ-basis comparison N_X⊗R^qj_*C = R^qj_*(N_U⊗C); the filtered-colimit lemma applies because j is qcqs and the sheaves are killed by ℓ. Steps 10-12 are 7.6.6 (the printed 'ouverte' is a typo), with d_i=d+1 matching ILO's c'+1. Every partition and bound is fixed before the complex. Hypotheses: the localization triangle (K bounded, N in D^+) is applied correctly in Steps 4 and 11; Step 11 uses the same Ri^! definition, RHom(A,-)=id and i*i_*=1. New node: true. It combines ILO 7.4.2, 7.4.3/7.4.4 and 7.4.6/7.4.7, with the finite list C = k_{i!}T(σ) for σ simple Λ[K_i]-modules, independent of A. ILO writes B=A[K]; Λ[K] is meant. I re-checked the one-stratum dévissage under the DAG's étale-locally-constant reading of W_P: the constant part descends, so the claim stays true. Small cases checked: X empty, E=0, K trivial, K=Z/ℓ. It does not restate a clause of the item. Not a duplicate of lem-per-constructible-finite-monodromy-filtration (stratification chosen per E), lem-per-prime-field-tensor-devissage (triangulated 7.4.1), the 7.4.7 module node, cover-module-descent, exact-refinement or tensor-closure. The node has no proof steps, the source is ILO with no SGA, and its blueprint fields and searches are recorded. Batch 5, all three accepted: the two pod nodes are generic sheaf algebra; their closure adds only def-pod-ring-scalar-extension, and Step 7 uses only clause (1) of the lisse node. lem-trf-oriented-closed-base-localization is the closed subtopos with i*i_*=1 (Stacks 08LY/08M3/04CA). Its closure holds only generic topos and site trf nodes, and the base parent lem-per-ctf-hom-localization-devissage already cites it. No cycle, steps are under 2000 characters, and I accept the 26 foundational tool_uses. Minor, not faults: the new node could cite def-per-galois-partition-modules instead of inlining it, and the report mentions a citations.json that was not committed."
  }
 }
