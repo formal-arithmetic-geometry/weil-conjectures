@@ -95,6 +95,7 @@ lemma mateEquiv_app_cube_converse
   have h₈ := bf'.unit.naturality (αg.app M)
   dsimp only [Functor.comp_obj, Functor.comp_map, Functor.id_obj, Functor.id_map] at h₂ h₄ h₆ h₈
   simp only [Adjunction.homEquiv_unit, Functor.map_comp]
+  dsimp only [Functor.comp_obj]
   rw [← reassoc_of% h₈, ← reassoc_of% h₁, ← h₂, ← PY'.map_comp_assoc, ← h₃,
     PY'.map_comp_assoc, ← reassoc_of% h₄, h (Lf.obj M), ← reassoc_of% h₅, ← reassoc_of% h₆,
     ← Gs.map_comp_assoc, ← h₇, Gs.map_comp_assoc]
