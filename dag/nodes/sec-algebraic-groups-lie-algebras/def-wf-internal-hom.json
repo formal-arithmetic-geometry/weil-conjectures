@@ -1,54 +1,145 @@
 {
-  "id": "def-wf-internal-hom",
-  "blueprint": {
-    "is": "def-wf-internal-hom",
-    "from": null,
-    "same_as": null
+ "id": "def-wf-internal-hom",
+ "blueprint": {
+  "is": "def-wf-internal-hom",
+  "from": null,
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "Internal Hom",
+ "statement": "Fix the finite-field, scheme and coefficient data of [def-wf-weil-category]: $k_0=\\mathbf F_q$, $k=\\overline{\\mathbf F}_q$, $\\ell\\ne\\operatorname{char}(k_0)$, a finite intermediate extension $E/\\mathbf Q_\\ell$ in the chosen algebraic closure, a separated finite-type $k_0$-scheme $X_0$, and $X=X_0\\times_{k_0}k$. Put $R=\\mathcal O_E$, choose its uniformizer $\\varpi$, and use the completed coefficient sheaf $B=R_X=\\varprojlim_{n\\geq1}(R/\\varpi^n)_X$ on the small pro-etale site of the adic coefficient datum [def-weil-pbc-adic-coefficient-datum] for $A=R$ and $I=(\\varpi)$; its hypotheses hold, since $R$ is Noetherian, $R/\\varpi$ is a finite field of characteristic $\\ell$, and each $R/\\varpi^n$ is finite and has the length-one free resolution $R\\xrightarrow{\\varpi^n}R$. This is the coefficient sheaf on which [def-wf-weil-category] defines its coefficient category. All sites are small in the chosen module universe.\n\nLet $D_{\\mathrm{comp}}(B)\\subseteq D(B)$ consist of objects whose completion map of [def-weil-pbc-intrinsic-completion] is an isomorphism. Use the ambient convention\n$$D(X,E)=D_{\\mathrm{comp}}(B)[1/\\varpi],$$\nwhere the brackets mean raw scalar localization [def-weil-linear-scalar-localization]. Its bounded constructible subcategory is the coefficient category of [def-wf-weil-category]. For integral representatives $M,N$, use the ringed-site derived internal Hom [def-pur-derived-internal-hom],\n$$H_B(M,N)=R\\mathcal Hom_B(M,N)=Q_B\\mathcal Hom_B^\\bullet(C,I),$$\nwhere $C$ represents $M$, $N\\to I$ is a K-injective replacement of a complex representing $N$, and $Q_B$ is localization at quasi-isomorphisms. The replacement is taken among all $B$-module sheaves. Completeness here agrees with local derived $(\\varpi)B$-completeness by [lem-weil-pbc-ringed-koszul-completion-reflector]; [lem-sf-ringed-rhom-derived-complete] ensures $H_B(M,N)\\in D_{\\mathrm{comp}}(B)$ when $N$ is complete. Define $R\\mathcal Hom_E$ on $D(X,E)$ by this construction on objects and by its bilinear scalar extension on morphisms:\n$$R\\mathcal Hom_E(a/\\varpi^r,b/\\varpi^s)=H_B(a,b)/\\varpi^{r+s}.$$\nHere $a:M'\\to M$ and $b:N\\to N'$ are integral morphisms; the displayed map goes from $R\\mathcal Hom_E(M,N)$ to $R\\mathcal Hom_E(M',N')$.\n\nWrite $\\Phi_X=\\operatorname{id}_{X_0}\\times\\operatorname{Spec}(z\\mapsto z^{1/q})$. Let $T$ be its exact module transport with the canonical completed coefficient identification $\\Phi_X^{-1}B\\cong B$ of [def-wf-automorphism-completed-transport]; its rationalized derived functor is the $\\Phi_X^*$ of [def-wf-weil-category]. The derived transport preserves $D_{\\mathrm{comp}}(B)$: the coefficient identification sends $\\varpi$ to $\\varpi$, so it carries the ideal $(\\varpi)B$ to itself, and [lem-weil-pbc-ringed-presentation-transport] shows that the local completeness tests of an object and of its transport are equivalent; by [lem-weil-pbc-ringed-koszul-completion-reflector] these tests characterize $D_{\\mathrm{comp}}(B)$. Hence $\\Phi_X^*$ is defined on all of $D(X,E)$. Denote by\n$$\\alpha_{K,L}:\\Phi_X^*R\\mathcal Hom_E(K,L)\\xrightarrow{\\sim}R\\mathcal Hom_E(\\Phi_X^*K,\\Phi_X^*L)$$\nthe derived-internal-Hom comparison of the ringed-topos equivalence [lem-weil-pbc-ringed-presentation-transport], followed by scalar localization. Concretely, on integral representatives it is induced by $T\\mathcal Hom_B^\\bullet(C,I)\\cong\\mathcal Hom_B^\\bullet(TC,TI)$, whose homogeneous components send a local map to its transported map; $TI$ is K-injective by the same cited equivalence statement.\n\nFor Weil complexes $(K,\\varphi_K)$ and $(L,\\varphi_L)$ of [def-wf-weil-category], define the internal-Hom Frobenius, in this ambient category, to be the composite\n$$\n\\varphi_{R\\mathcal Hom_E(K,L)}:\n\\Phi_X^*R\\mathcal Hom_E(K,L)\n\\xrightarrow{\\alpha_{K,L}}R\\mathcal Hom_E(\\Phi_X^*K,\\Phi_X^*L)\n\\xrightarrow{R\\mathcal Hom_E(\\varphi_K^{-1},\\varphi_L)}R\\mathcal Hom_E(K,L).\n$$\nThus the first argument uses $\\varphi_K^{-1}:K\\to\\Phi_X^*K$ contravariantly and the second uses $\\varphi_L:\\Phi_X^*L\\to L$ covariantly.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-algebraic-groups-lie-algebras/sk-p-cyclotomic/def-wf-internal-hom.md",
+  "place": "node def-wf-internal-hom, order 2570"
+ },
+ "stmt_deps": [
+  "def-wf-weil-category",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-intrinsic-completion",
+  "def-weil-linear-scalar-localization",
+  "def-pur-derived-internal-hom",
+  "lem-weil-pbc-ringed-koszul-completion-reflector",
+  "lem-sf-ringed-rhom-derived-complete",
+  "def-wf-automorphism-completed-transport",
+  "lem-weil-pbc-ringed-presentation-transport"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "WeilComplex|internalHomFrobenius|ihomObjIso|KInjective",
+   "results": "25 hits. Mathlib/CategoryTheory/Abelian/Injective/Ext.lean; Mathlib/CategoryTheory/Abelian/Injective/Ext.lean; Mathlib/CategoryTheory/Abelian/Injective/Ext.lean; Mathlib/CategoryTheory/Abelian/Injective/Ext.lean; Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean; Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean; Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean; Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: the 25 hits supply K-injectivity and derived-Hom calculations, not this completed coefficient category or Weil Frobenius."
   },
-  "kind": "definition",
-  "title": "Internal Hom",
-  "statement": "On $D(X,E)$ the internal Hom\n$R\\operatorname{Hom}_E(-,-)$ is computed from a $K$-injective\nreplacement in its second variable. For Weil complexes the\ninternal-Hom Frobenius is the conjugation\n\n$$\n\\Phi_X^*R\\mathcal Hom_E(K,L)\\stackrel{\\sim}{\\to}\nR\\mathcal Hom_E(\\Phi_X^*K,\\Phi_X^*L)\n\\xrightarrow{R\\mathcal Hom_E(\\varphi_K^{-1},\\varphi_L)}\nR\\mathcal Hom_E(K,L)\n$$\n\nof the conjugation displayed above; the Frobenius on the internal Hom is\nrecorded with the other properties of this construction.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-algebraic-groups-lie-algebras/sk-p-cyclotomic/def-wf-internal-hom.md",
-    "place": "node def-wf-internal-hom, order 2570"
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.Monoidal.ihomComparison, CategoryTheory.MonoidalClosed",
+   "results": "0 hits. ; loogle: unknown identifier 'CategoryTheory.Functor.Monoidal.ihomComparison'",
+   "date": "2026-10-17",
+   "verdict": "invalid query: unknown identifier CategoryTheory.Functor.Monoidal.ihomComparison; superseded by the valid CategoryTheory.MonoidalClosed search."
   },
-  "stmt_deps": [
-    "def-wf-weil-category"
-  ],
-  "proof": [],
-  "proof_deps": [],
-  "proof_origin": null,
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [],
-  "blueprint_kind": "definition",
-  "blueprint_order": 2570,
-  "blueprint_uses": [
-    "def-wf-weil-category"
-  ],
-  "uses_not_cited": [
-    "def-wf-weil-category"
-  ],
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
+  {
+   "tool": "leansearch",
+   "query": "Derived internal Hom of Weil complexes with Frobenius structure computed by K-injective resolution",
+   "results": "8 hits. CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality_assoc; CategoryTheory.InjectiveResolution.instIsKInjectiveCochainComplex; CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj_hom_naturality; CochainComplex.IsKInjective.mk; CochainComplex.IsKInjective.recOn; CategoryTheory.InjectiveResolution.isoRightDerivedObj; CochainComplex.isKInjective_of_injective; CategoryTheory.InjectiveResolution.extEquivCohomologyClass",
+   "date": "2026-10-17",
+   "verdict": "no match: object injective resolutions, K-injectivity and Ext computations do not state the Weil internal-Hom definition."
   },
-  "chapter": "sec-algebraic-groups-lie-algebras",
-  "unit": "sk-p-cyclotomic",
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "On $D(X,E)$ the internal Hom\n$R\\operatorname{Hom}_E(-,-)$ is computed from a $K$-injective\nreplacement in its second variable. For Weil complexes the\ninternal-Hom Frobenius is the composite\n\n$$\n\\Phi_X^*R\\mathcal Hom_E(K,L)\\stackrel{\\sim}{\\to}\nR\\mathcal Hom_E(\\Phi_X^*K,\\Phi_X^*L)\n\\xrightarrow{R\\mathcal Hom_E(\\varphi_K^{-1},\\varphi_L)}\nR\\mathcal Hom_E(K,L).\n$$",
-    "proof": [],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  {
+   "tool": "leanfinder",
+   "query": "Derived internal Hom of Weil complexes with Frobenius given by conjugation and computed using a K-injective replacement in the second variable",
+   "results": "8 hits. LightCondensed.ihomPoints; CategoryTheory.Sheaf.cohomologyPresheafFunctor; LightCondensed.ihomPoints_apply; LightCondensed.ihom_map_val_app; CategoryTheory.Sheaf.H; Ext; CategoryTheory.Sheaf.cohomologyPresheaf; LightCondensed.ihomPoints_symm_apply",
+   "date": "2026-10-17",
+   "verdict": "no match: light condensed internal Hom and sheaf cohomology are different objects, not the adic rationalized derived Hom with Weil Frobenius."
+  },
+  {
+   "tool": "grep",
+   "query": "WeilComplex|WeilD|IsoAlgebra|ihomObjIso|ihomComparison",
+   "results": "0 hits. ",
+   "date": "2026-10-17",
+   "verdict": "no match: no hits in CategoryTheory.",
+   "subdirectory": "CategoryTheory"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalClosed",
+   "results": "12 hits. CategoryTheory.MonoidalClosed; CategoryTheory.MonoidalClosed.closed; CategoryTheory.MonoidalClosed.mk; CategoryTheory.MonoidalClosed.internalHom; CategoryTheory.MonoidalClosed.internalHomAdjunction₂; CategoryTheory.MonoidalClosed.instIsRightAdjointObjOppositeFunctorInternalHom; CategoryTheory.MonoidalClosed.ofEquiv; CategoryTheory.MonoidalClosed.internalHom_obj",
+   "date": "2026-10-17",
+   "verdict": "no match: internalHom at Basic.lean:292 assumes an existing closed structure and ofEquiv transports one; neither constructs the coefficient-derived category or this Weil datum."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Internal Hom in the category of fixed pairs for a monoidal autoequivalence, action on Hom given by inverse action on the source and action on the target",
+   "results": "8 hits. Rep.ihom_obj_ρ_def; CategoryTheory.internalHom; Rep.homEquiv; CategoryTheory.MonoidalClosed.pre; Rep.MonoidalClosed.linearHomEquiv; CategoryTheory.pre; CategoryTheory.Functor.closedIhom_obj_map; CategoryTheory.MonoidalClosed.internalHom",
+   "date": "2026-10-17",
+   "verdict": "no match: Rep.ihom and groupoid functor-category internal Hom have the conjugation pattern but do not supply the twisted Frobenius transport or completed-coefficient derived category."
+  },
+  {
+   "tool": "grep",
+   "query": "closedIhom_obj_map|internalHom|ihom_obj_ρ_def|def ihom|ihom.*ρ",
+   "results": "4 hits. Mathlib/RepresentationTheory/Rep/Basic.lean; Mathlib/RepresentationTheory/Rep/Basic.lean; Mathlib/RepresentationTheory/Rep/Basic.lean; Mathlib/RepresentationTheory/Rep/Basic.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: Rep.ihom (Rep/Basic.lean:763) and conjugation at :770-774 are for ordinary group representations, not derived Weil complexes.",
+   "subdirectory": "RepresentationTheory"
+  },
+  {
+   "tool": "grep",
+   "query": "closedIhom|ihomComparison|ihomObjIso|def internalHom",
+   "results": "7 hits. Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean; Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean; Mathlib/CategoryTheory/Monoidal/Closed/FunctorCategory/Groupoid.lean; Mathlib/CategoryTheory/Monoidal/Closed/FunctorCategory/Groupoid.lean; Mathlib/CategoryTheory/Monoidal/Closed/FunctorCategory/Groupoid.lean; Mathlib/CategoryTheory/Monoidal/Closed/FunctorCategory/Groupoid.lean; Mathlib/CategoryTheory/Monoidal/Closed/FunctorCategory/Groupoid.lean",
+   "date": "2026-10-17",
+   "verdict": "no match: Basic.lean:292 and FunctorCategory/Groupoid.lean:39 are abstract closed-category and pointwise functor-category constructions, not the adic rationalized construction.",
+   "subdirectory": "CategoryTheory/Monoidal/Closed"
   }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "definition",
+ "blueprint_order": 2570,
+ "blueprint_uses": [
+  "def-wf-weil-category"
+ ],
+ "uses_not_cited": [
+  "def-wf-weil-category"
+ ],
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-algebraic-groups-lie-algebras",
+ "unit": "sk-p-cyclotomic",
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "On $D(X,E)$ the internal Hom\n$R\\operatorname{Hom}_E(-,-)$ is computed from a $K$-injective\nreplacement in its second variable. For Weil complexes the\ninternal-Hom Frobenius is the composite\n\n$$\n\\Phi_X^*R\\mathcal Hom_E(K,L)\\stackrel{\\sim}{\\to}\nR\\mathcal Hom_E(\\Phi_X^*K,\\Phi_X^*L)\n\\xrightarrow{R\\mathcal Hom_E(\\varphi_K^{-1},\\varphi_L)}\nR\\mathcal Hom_E(K,L).\n$$",
+  "proof": [],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "def-wf-internal-hom",
+  "worker": "stage1",
+  "summary": "Followed main-20261015 blueprint_update, replacing the duplicated conjugation wording by its typed composite. Made explicit the existing completed pro-etale coefficient model, ambient derived-complete rationalization, K-injective computation, bilinear action on localized morphisms, and the exact ringed-equivalence comparison. All constituent definitions and required well-definedness/completeness/transport facts already have DAG nodes; no new nodes. Finite etale-coefficient tagged Lean declarations do not give the same statement. Nine actual Mathlib searches, including a second semantic phrasing and corrected Loogle query, found no full match. Review FIX: coefficient sheaf cited from def-weil-pbc-adic-coefficient-datum (the model of def-wf-weil-category, intrinsic completion and the transport node) instead of def-weil-completed-integral-coefficients; added the preservation of D_comp(B) by the transport, from the presentation-transport and Koszul-reflector nodes already cited.",
+  "blueprint": "Realizes both sentences and the displayed formula of main-20261015 def-wf-internal-hom, order 2914. This recorded-in-advance definition is not the cyclotomic unit statement; no unit realization fields are changed.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q160-792cb3b50",
+  "group": "Q160",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q160-792cb3b50 (reviewer sub-agent of L); spot-checked: I read all of it: the item, the report, the master blueprint (order 2570) and the current blueprint (main-20261015, order 2914), unit sk-p-cyclotomic, the full statements of all nine cited nodes and of the related nodes (def-wf-tensor-product, def-weil-pbc-adic-coefficient-datum, def-weil-pbc-bounded-constructible-complete, def-weil-pbc-rational-category, def-weil-derived-pullback-tensor-hom, def-pur-integral-derived-operations, lem-weil-pbc-ringed-strict-tower-homotopy-limit, lem-wf-internal-hom-weil), and Stacks algebraization.tex 099A (lines 930-935) and sites-cohomology.tex 08J7. The item matches the current blueprint: the internal Hom uses a K-injective replacement in the second variable, and the Frobenius is the composite of alpha with RHom_E(phi_K^{-1}, phi_L), with every arrow's source and target checked. Phi_X agrees with def-wf-weil-category. The bilinear extension to rational morphisms is well defined because H_B is O_E-bilinear. Completeness of H_B(M,N) follows from the reflector (b_1 = varpi) and from lem-sf-ringed-rhom-derived-complete (Stacks 099A). The comparison alpha follows from presentation-transport, which keeps the transported injective complex K-injective. Small cases checked: on Spec F_q with scalar Frobenii lambda and mu the datum acts by mu/lambda (inverse in the first variable), zero objects, identity Frobenius, shifts, the empty scheme. No new nodes, no duplicate found (def-weil-derived-pullback-tensor-hom is consistent but only covers constructible pairs and has no Weil datum), no cycle, no SGA source, no tool_uses needed. Two small faults, repaired in the corrected item file. (1) E6/B3: the coefficient sheaf was cited from def-weil-completed-integral-coefficients, but def-wf-weil-category, intrinsic completion, the transport node and the landed def-wf-tensor-product all use A_T of def-weil-pbc-adic-coefficient-datum, and no DAG node identifies the two sheaves. The statement now cites the adic datum with A = O_E, I = (varpi), its hypotheses checked inline, and stmt_deps swaps the dependency accordingly. (2) A gap: the statement did not say that the transport preserves D_comp(B), which Phi_X^* needs on the ambient D(X,E). I added that it does, by presentation-transport (c(varpi) = varpi) and the Koszul reflector, both already cited. Details are in review.md.; 1 file(s) fixed by the reviewer"
+ }
 }

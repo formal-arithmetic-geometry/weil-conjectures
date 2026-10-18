@@ -16,9 +16,85 @@
   "d-real-boundary",
   "def-wf-middle-extension"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [prop-wf-weil-sheaf-representation-equivalence], the lisse Weil sheaf F on U_0 corresponds to its geometric generic stalk V=F_{\\bar\\eta} with a continuous Weil-group representation \\rho_U:W(U_0)\\to\\operatorname{Aut}(V). The local inertia action at each x\\in S_0 is the restriction of this representation to the subgroup I_x specified by [d-real-boundary].",
+   "uses": [
+    "prop-wf-weil-sheaf-representation-equivalence",
+    "d-real-boundary"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-d-dl-a1-setup/rem-dl-a1-conventions.md",
+    "place": "Second paragraph, equivalence between extension to a lisse sheaf and trivial inertia"
+   }
+  },
+  {
+   "text": "By [lem-dl-a1-weil-kernel-inertia], the kernel K of the restriction map r:W(U_0)\\to W(C_0) is the smallest closed normal subgroup of W(U_0) containing the images of the I_x. If every I_x acts trivially on V, then \\ker\\rho_U is a closed normal subgroup (\\rho_U is continuous and \\operatorname{Aut}(V) is Hausdorff) containing every image of I_x, hence contains K; conversely K contains the images of the I_x, so \\rho_U(K)=1 forces every I_x to act trivially. By part (2) of [lem-wf-dense-open-pi1-surjective], r is surjective and preserves degrees. Hence a representation killing K factors uniquely as \\rho_U=\\rho_C\\circ r for a homomorphism \\rho_C of W(C_0). It is continuous because r is open: r is the restriction of the continuous surjection of profinite groups \\pi_1(U_0)\\to\\pi_1(C_0), which is open, and since r preserves degrees the inverse image of W(C_0) is exactly W(U_0), so r(W(U_0)\\cap O)=W(C_0)\\cap r(O) for every open O; if instead W is topologized with its geometric subgroup open and profinite, r restricts there to the continuous surjection \\pi_1(U)\\to\\pi_1(C) of profinite groups, again open. Conversely a representation of the form \\rho_C\\circ r kills K and hence every I_x.",
+   "uses": [
+    "lem-dl-a1-weil-kernel-inertia",
+    "lem-wf-dense-open-pi1-surjective"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BTD, lemma-normal-pione-quotient-inertia, and the quotient criterion"
+   }
+  },
+  {
+   "text": "Apply [prop-wf-weil-sheaf-representation-equivalence] on C_0 (a curve in the sense of [d-real-setup]: nonempty, separated, smooth, finite type, pure dimension one, with connected C) to the descended W(C_0)-representation \\rho_C of Step 2; it gives a lisse Weil sheaf G on C_0 with (G_{\\bar\\eta},\\rho_G)\\simeq(V,\\rho_C). Take the base point \\bar\\eta in U. The Weil fundamental representation of j_0^*G is \\rho_G\\circ r: by [def-wf-fundamental-representation] its stalk is (j_0^*G)_{\\bar\\eta}=G_{\\bar\\eta}, the geometric action of \\pi_1(U,\\bar\\eta) on the fibre is through the map \\pi_1(U,\\bar\\eta)\\to\\pi_1(C,\\bar\\eta) induced by pullback of finite étale covers (a cover trivializing G pulls back to one trivializing j_0^*G, with the same fibre at \\bar\\eta), and the Weil structure of j_0^*G is the restriction of that of G, so for a Frobenius lift s\\in W(U_0) the operator T_s of j_0^*G is the operator T_{r(s)} of G. Hence j_0^*G and F have isomorphic Weil representations \\rho_C\\circ r=\\rho_U, and the equivalence on U_0 (U_0 is again such a curve, being a nonempty open of C_0 with U a nonempty open of the irreducible C) gives the Weil-equivariant isomorphism \\alpha:j_0^*G\\simeq F. Conversely, for an extension (G,\\alpha) the same computation shows \\rho_U\\simeq\\rho_G\\circ r, which kills K, so Step 2 forces every I_x to act trivially.",
+   "uses": [
+    "prop-wf-weil-sheaf-representation-equivalence",
+    "lem-dl-a1-weil-kernel-inertia",
+    "def-wf-fundamental-representation",
+    "d-real-setup"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-d-dl-a1-setup/rem-dl-a1-conventions.md",
+    "place": "Second paragraph, extension criterion and Weil descent"
+   }
+  },
+  {
+   "text": "Assume the equivalent conditions and choose (G,\\alpha). The geometric curve C is connected (C_0 is geometrically connected), Noetherian (finite type over k) and normal by [lem-sc-smooth-normal], since it is a separated smooth finite-type curve over the algebraically closed field k; and U, the inverse image of U_0 in C, is a dense open of C, because C\\to C_0 is open (base change to a field is universally open) and U_0 is dense in C_0. Part (3) of [lem-wf-dense-open-pi1-surjective], applied to the underlying lisse sheaf of G on C, says that the adjunction unit G\\to j_*j^*G is an isomorphism at every finite coefficient level, hence for the lisse \\overline{\\mathbf Q}_\\ell-sheaf. It is Weil-equivariant: the geometric Frobenius g commutes with j (g_C\\circ j=j\\circ g_U), the Weil structure of the ordinary direct image j_*F of [def-wf-middle-extension] is the one transported through g_C^*j_*\\simeq j_*g_U^* (pullback along the automorphism g), and the unit is natural, hence commutes with these identifications. Composing the unit with j_*\\alpha gives the morphism G\\to j_*F adjoint to \\alpha, an isomorphism of Weil sheaves. Hence j_*F is lisse and the asserted morphism is a Weil-equivariant isomorphism.",
+   "uses": [
+    "lem-wf-dense-open-pi1-surjective",
+    "lem-sc-smooth-normal",
+    "def-wf-middle-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-d-dl-a1-setup/rem-dl-a1-conventions.md",
+    "place": "Second paragraph, ordinary direct image and lisse extension"
+   }
+  },
+  {
+   "text": "If (G,\\alpha) and (G\\prime,\\alpha\\prime) are two extensions, the restriction functor on lisse Weil sheaves is fully faithful by part (4) of [lem-wf-dense-open-pi1-surjective], applied to the curve C_0 and its nonempty open U_0. Thus there is a unique morphism G\\to G\\prime restricting to \\alpha^{\\prime-1}\\circ\\alpha, and it is an isomorphism because its restriction is. This proves uniqueness with the specified restriction.",
+   "uses": [
+    "lem-wf-dense-open-pi1-surjective"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-d-dl-a1-setup/rem-dl-a1-conventions.md",
+    "place": "Second paragraph, uniqueness of the extension"
+   }
+  }
+ ],
+ "proof_deps": [
+  "d-real-boundary",
+  "d-real-setup",
+  "def-wf-fundamental-representation",
+  "def-wf-middle-extension",
+  "lem-dl-a1-weil-kernel-inertia",
+  "lem-sc-smooth-normal",
+  "lem-wf-dense-open-pi1-surjective",
+  "prop-wf-weil-sheaf-representation-equivalence"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/pione.tex",
+  "place": "Tag 0BTD, lemma-normal-pione-quotient-inertia, combined with the lisse sheaf–Weil representation equivalence and Weil descent"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -57,7 +133,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "rem-dl-a1-conventions",
@@ -74,5 +150,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-dl-a1-lisse-extension-inertia",
+  "worker": "stage1",
+  "summary": "Audited the imported extension criterion against the smooth-curve conventions. Added one genuine dependency, the kernel description generated by boundary inertia, then rewrote the proof as representation descent, construction and converse, ordinary direct-image recovery, and full-faithfulness uniqueness. No statement clause or hypothesis was changed. Maintainer reader (FIX): step 2 now cites clause (2) of lem-wf-dense-open-pi1-surjective for the surjectivity and writes out openness of r; step 3 writes out why j_0^*G has representation rho_G o r; step 4 uses clause (3) of lem-wf-dense-open-pi1-surjective on the geometric curve C (with lem-sc-smooth-normal) instead of lem-a1-lisse-middle-extension, whose statement is for sheaves on the k_0-curve C_0, and writes out the Weil equivariance of the unit; tool uses declared.",
+  "blueprint": "Realizes the second paragraph of rem-dl-a1-conventions: extension to a lisse sheaf over the boundary is equivalent to trivial local inertia, with uniqueness and ordinary direct-image identification.",
+  "tool_uses": [
+   {
+    "node": "prop-wf-weil-sheaf-representation-equivalence",
+    "why": "Steps 1 and 3 take the exact equivalence between lisse Weil sheaves on a curve and continuous Weil-group representations on the generic stalk; unit sk-d-dl-a1-setup is a conventions remark citing no unit and no node of it gives this equivalence."
+   },
+   {
+    "node": "lem-wf-dense-open-pi1-surjective",
+    "why": "Steps 2, 4 and 5 take clause (2) (surjective degree-preserving Weil restriction), clause (3) (unit N->k_*k^*N is an isomorphism for lisse N on a connected normal Noetherian scheme) and clause (4) (full faithfulness of restriction on curves) as black boxes; no node of the unit gives them."
+   },
+   {
+    "node": "lem-sc-smooth-normal",
+    "why": "Step 4 takes normality of the smooth geometric curve C, a hypothesis of clause (3) above; generic tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-wf-weil-sheaf-representation-equivalence",
+  "lem-wf-dense-open-pi1-surjective",
+  "lem-sc-smooth-normal"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q135-c92e87cf0",
+  "group": "Q135",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q135-c92e87cf0 (reviewer sub-agent of L); spot-checked: I read the whole delivery. The statement matches the second paragraph of rem-dl-a1-conventions (main-20261015), generalized to every boundary point of a smooth curve, which is what its citer needs; it is not weakened. The coefficients are adic Qbar_l Weil pairs. Small cases check out: no boundary point, the Kummer sheaf on G_m, Artin-Schreier at infinity, and a geometrically constant sheaf. New node lem-dl-a1-weil-kernel-inertia: it follows from Stacks 0BTD (pione.tex l.2984) applied to U_0 and C_0. It is not a duplicate (rg found none) and does not restate a clause of the item. Its Weil-group form holds because the kernel has degree 0, the closure argument works because W is dense in pi_1, and the path choice changes nothing up to conjugacy. I fixed three faults in fixes/.../lem-dl-a1-lisse-extension-inertia.json. (1) C1/C4: step 2 used surjectivity of W(U_0)->W(C_0) without citing it; it now cites lem-wf-dense-open-pi1-surjective (2) and writes out why the map is open. (2) C3/E5: step 3 assumed j_0^* corresponds to restricting the representation; this is now written out from def-wf-fundamental-representation, and d-real-setup is cited. (3) E1: step 4 applied lem-a1-lisse-middle-extension, which is stated for sheaves on the k_0-curve, to the sheaf on the geometric curve C; step 4 now uses lem-wf-dense-open-pi1-surjective (3), with lem-sc-smooth-normal for normality, and gives the Weil-equivariance argument. Steps 1 and 5 are correct. I declared and accept tool_uses prop-wf-weil-sheaf-representation-equivalence, lem-wf-dense-open-pi1-surjective and lem-sc-smooth-normal. Batch-5 check: lem-a1-lisse-middle-extension reached the PD chapter only through a definition, and its citation is now removed. The paths through cor-galois-lisse-representations reach only the general lisse-sheaf/representation equivalence (sk-lem-finite) and definitions. The closure has no node of sk-thm-trace-formula, sk-thm-trace-transport or sk-thm-poincare-duality and no nt-target, so I kept all of them. No SGA source is cited, the graph is acyclic, and proof_deps is the union of the step uses.; 1 file(s) fixed by the reviewer"
  }
 }

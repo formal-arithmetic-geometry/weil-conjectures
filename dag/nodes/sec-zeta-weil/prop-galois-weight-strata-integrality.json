@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "prop-galois-weight-strata-integrality",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Integrality of the normalized stratum polynomials",
@@ -14,30 +14,115 @@
  },
  "stmt_deps": [
   "prop-galois-weight-strata",
-  "def-weil-numbers"
+  "def-weil-numbers",
+  "def-weil-polynomial-ring"
  ],
  "proof": [
   {
-   "text": "Every element of $R_i$ is a root of the reciprocal polynomial\n$A^\\#$ or $B^\\#$ of [def-weil-ordinary-reciprocal-roots], and\nbecause $A,B\\in\\mathbf Z[T]$ have constant coefficient one these\nreciprocal polynomials are monic with integer coefficients, so their roots\nare algebraic integers; every elementary symmetric function of the elements\nof $R_i$, counted with multiplicities, is therefore an algebraic integer.\nThese elementary symmetric functions are, up to sign, the coefficients of\n\n$$\nQ_i(T)=\\prod_{\\alpha\\in R_i}(1-\\alpha T),\n$$\n\nand by [prop-galois-weight-strata] they are fixed by\n$\\operatorname{Gal}(\\overline{\\mathbf Q}/\\mathbf Q)$, hence rational;\nbeing rational algebraic integers, they lie in $\\mathbf Z$.",
+   "text": "Fix $0\\le i\\le2d$ and put $C=A$ for odd $i$, $C=B$ for even $i$, using the data and the submultiset $R_i$ of [prop-galois-weight-strata]. Thus $C\\in\\mathbf Z[T]$ and $C(0)=1$. Put $r=\\deg C$ and write $C=\\sum_{j=0}^{r}c_jT^j$, so $c_0=1$ and $c_r\\ne0$. Clause (1) of [lem-weil-reciprocal-polynomial] gives the monic integer polynomial $C^\\#(U)=\\sum_{j=0}^r c_jU^{r-j}$. Every $\\alpha$ in $R_i$ is a root of this polynomial by the specified definition of $R_i$. Hence every such $\\alpha$ is an algebraic integer by [def-weil-algebraic-integer]. If $r=0$, then $C=C^\\#=1$ and $R_i$ is empty, so the assertion about its elements is vacuous.",
    "uses": [
-    "def-weil-ordinary-reciprocal-roots",
+    "prop-galois-weight-strata",
+    "lem-weil-reciprocal-polynomial",
+    "def-weil-algebraic-integer"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-thm-intfactors/prop-galois-weight-strata-integrality.proof.md",
+    "place": "First sentence: reciprocal polynomials are monic with integer coefficients"
+   }
+  },
+  {
+   "text": "Apply [def-weil-pbc-integral-closure] to $\\mathbf Z\\to\\overline{\\mathbf Q}$. Its statement says that the elements integral over $\\mathbf Z$ form a subring $S$ containing the integers. Step 1 puts every occurrence $\\alpha$ of $R_i$ in $S$, so the coefficients $1,-\\alpha$ of each $1-\\alpha T$ lie in $S$. To verify the same for their product without assuming a symmetric-function theorem, enumerate the occurrences as $\\alpha_1,\\ldots,\\alpha_N$ and set $H_0=1$, $H_{m+1}=H_m(1-\\alpha_{m+1}T)$. By the convolution definition in [def-weil-polynomial-ring], $[T^n]H_{m+1}=[T^n]H_m-\\alpha_{m+1}[T^{n-1}]H_m$ for $n\\ge1$, and the constant coefficient is unchanged. Induction on $m$, using the subring operations, puts every coefficient of $H_N=Q_i$ in $S$. It also shows $Q_i(0)=1$ and $\\deg Q_i\\le N$. This treats multiplicities as separate occurrences and includes $N=0$.",
+   "uses": [
+    "def-weil-pbc-integral-closure",
+    "def-weil-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-thm-intfactors/prop-galois-weight-strata-integrality.proof.md",
+    "place": "First paragraph: elementary symmetric functions and coefficients are algebraic integers"
+   }
+  },
+  {
+   "text": "For every $\\sigma\\in\\operatorname{Gal}(\\overline{\\mathbf Q}/\\mathbf Q)$, [prop-galois-weight-strata] gives equality of multisets $\\sigma(R_i)=R_i$, including multiplicities. The coefficientwise ring homomorphism of [def-weil-coefficientwise-ring-hom-map] fixes $T$, sends $1-\\alpha T$ to $1-\\sigma(\\alpha)T$, and preserves finite products. Consequently\n$$\n\\sigma(Q_i)=\\prod_{\\alpha\\in R_i}(1-\\sigma(\\alpha)T)=\\prod_{\\beta\\in\\sigma(R_i)}(1-\\beta T)=Q_i.\n$$\nThe middle equality merely reindexes the same finite list of occurrences; the final equality uses the equality of multisets. Comparing the coefficient of $T^n$ yields $\\sigma([T^n]Q_i)=[T^n]Q_i$ for every $n$.",
+   "uses": [
+    "prop-galois-weight-strata",
+    "def-weil-coefficientwise-ring-hom-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-thm-intfactors/prop-galois-weight-strata-integrality.proof.md",
+    "place": "Last paragraph: coefficients fixed by Gal(Qbar/Q)"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-algebraic-closure-fixed-rational] to $\\Omega=\\overline{\\mathbf Q}$ and $x=[T^n]Q_i$. The field here is precisely the algebraic closure of $\\mathbf Q$ in the hypotheses of [prop-galois-weight-strata], and Step 3 verifies invariance under every $\\mathbf Q$-automorphism, not just one chosen embedding. Thus each coefficient is the image of some rational number. Step 2 says the same coefficient is integral over $\\mathbf Z$, so [lem-weil-rational-algebraic-integer] makes it the image of an integer $z_n$. Choose these integers for $0\\le n\\le N$ and set $P(T)=\\sum_{n=0}^{N}z_nT^n\\in\\mathbf Z[T]$. Above degree $N$ both its image and $Q_i$ have zero coefficients by Step 2, and at the remaining degrees their coefficients agree by construction. Hence the image of $P$ in $\\overline{\\mathbf Q}[T]$ is $Q_i$, which is exactly $Q_i\\in\\mathbf Z[T]$.",
+   "uses": [
+    "lem-weil-algebraic-closure-fixed-rational",
+    "lem-weil-rational-algebraic-integer",
     "prop-galois-weight-strata"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-thm-intfactors/prop-galois-weight-strata-integrality.proof.md",
+    "place": "Last paragraph: rational coefficients and rational algebraic integers are integers"
+   }
   }
  ],
  "proof_deps": [
-  "def-weil-ordinary-reciprocal-roots",
-  "prop-galois-weight-strata"
+  "prop-galois-weight-strata",
+  "lem-weil-reciprocal-polynomial",
+  "def-weil-algebraic-integer",
+  "def-weil-pbc-integral-closure",
+  "def-weil-polynomial-ring",
+  "def-weil-coefficientwise-ring-hom-map",
+  "lem-weil-algebraic-closure-fixed-rational",
+  "lem-weil-rational-algebraic-integer"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-zeta-weil/sk-thm-intfactors/prop-galois-weight-strata-integrality.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-zeta-weil/sk-thm-intfactors/prop-galois-weight-strata-integrality.proof.md",
+  "place": "Whole proof, with subring convolution and Galois coefficient action written out"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A Galois invariant multiset of algebraic integers gives a polynomial with integer coefficients as the product of one minus alpha times T",
+   "results": "8 hits; AlgebraicClosure.subProdXSubC, Algebra.IsInvariant.charpoly_mem_lifts, ConjRootClass.minpoly.map_eq_prod, prodXSubSMul, AlgebraicClosure.Monics.map_eq_prod, FixedPoints.minpoly, NumberField.RingOfIntegers.minpoly_coe, prodXSubSMul.monic; No declaration states the Weil-weight stratum integrality item. Search hits give ingredient statements only (integral polynomial coefficients, Galois invariant characteristic polynomials, cyclotomic polynomials). General algebra ingredients are used through the cited leaves.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The normalized product over a fixed Weil weight stratum of reciprocal roots of an integer polynomial has integer coefficients",
+   "results": "8 hits; IsLocalization.coeffIntegerNormalization, Polynomial.integralNormalization_coeff, DenomsClearable, Polynomial.isIntegral_of_mahlerMeasure_eq_one, IsLocalization.integerNormalization, IsLocalization.integerNormalization_spec, Polynomial.integralNormalization_mul_C_leadingCoeff, denomsClearable_natDegree; No declaration states the Weil-weight stratum integrality item. Search hits give ingredient statements only (integral polynomial coefficients, Galois invariant characteristic polynomials, cyclotomic polynomials). General algebra ingredients are used through the cited leaves.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "WeilNumber|weight.strat|weightFactor",
+   "results": "0 hits; ; No declaration states the Weil-weight stratum integrality item. Search hits give ingredient statements only (integral polynomial coefficients, Galois invariant characteristic polynomials, cyclotomic polynomials). General algebra ingredients are used through the cited leaves.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The polynomial product of one minus alpha times T over a Galois invariant Weil weight stratum of reciprocal roots has integer coefficients",
+   "results": "8 hits; Polynomial.isIntegral_coeff_prod, Polynomial.int_coeff_of_cyclotomic', prodXSubSMul.coeff, Polynomial.isIntegral_of_mahlerMeasure_eq_one, Polynomial.cyclotomic_eq_prod_X_sub_primitiveRoots, Polynomial.map_sub_sprod_roots_eq_prod_map_eval, Polynomial.unique_int_coeff_of_cycl, prodXSubSMul.monic; No declaration states the Weil-weight stratum integrality item. Search hits give ingredient statements only (integral polynomial coefficients, Galois invariant characteristic polynomials, cyclotomic polynomials). General algebra ingredients are used through the cited leaves.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Polynomial.roots, IsIntegral",
+   "results": "0 hits; ; No declaration states the Weil-weight stratum integrality item. Search hits give ingredient statements only (integral polynomial coefficients, Galois invariant characteristic polynomials, cyclotomic polynomials). General algebra ingredients are used through the cited leaves.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -67,5 +152,29 @@
   }
  },
  "chapter": "sec-zeta-weil",
- "unit": "sk-thm-intfactors"
+ "unit": "sk-thm-intfactors",
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "prop-galois-weight-strata-integrality",
+  "worker": "stage1",
+  "summary": "Kept the statement after reading both blueprint snapshots. Replaced the inappropriate reciprocal-root-definition citation by the explicit reciprocal-polynomial lemma. Expanded closure under symmetric expressions by coefficient convolution in the existing integral-closure subring leaf. Wrote the coefficientwise Galois action and supplied two exact Mathlib leaves for fixed-field descent and rational algebraic integers. Checked empty strata, degree-zero polynomials, multiplicities and nonrational conjugate roots.",
+  "blueprint": "The whole main-20261015 proof is realized: Step 1 monic reciprocal roots; Step 2 integral coefficients; Step 3 Galois-fixed coefficients; Step 4 rational and then integer coefficients. This follows sk-thm-intfactors point (ii), retaining point (i) Galois stability as a dependency.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-reciprocal-polynomial",
+    "why": "Clause (1) is the generic coefficient-reversal identity for a polynomial with constant coefficient one; the unit uses this calculation but contains no separate statement of it. This tool does not replace any unit step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-reciprocal-polynomial"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q145-a7fe86231",
+  "group": "Q145",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q145-a7fe86231 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes and every cited statement. The item statement matches the main-20261015 and master blueprint statements exactly, and steps 1-4 follow the four moves of the main-20261015 proof. Step 1: clause (1) of lem-weil-reciprocal-polynomial (c_0=1, c_r!=0, R=Z) gives a monic C^# with integer coefficients, so the roots in R_i are algebraic integers; when r=0, R_i is empty and the claim is vacuous. Step 2 is correctly marked elementary: the integral elements form a subring (def-weil-pbc-integral-closure), and an induction on the polynomial-ring convolution puts every coefficient of Q_i in it. Step 3 uses the with-multiplicities Galois stability of R_i from prop-galois-weight-strata and the coefficientwise ring homomorphism, which fixes T. Step 4 uses the two leaves and builds P in Z[T] explicitly. The leaves are verified in local Mathlib: InfiniteGalois.mem_range_algebraMap_iff_fixed at Infinite.lean:114-116, with IsGalois inferred through PerfectField.ofCharZero (Perfect.lean:306), IsSepClosure.of_isAlgClosure_of_perfectField (IsSepClosed.lean:251) and IsSepClosure.isGalois (IsSepClosed.lean:267); and IsIntegral.exists_int_iff_exists_rat at Niven.lean:34-39. Duplicate candidates checked: lem-weil-pbc-finite-galois-fixed-field assumes a finite extension. lem-exc-etale-galois-fixed-field-subgroup is a generalization, but using it would need an uncited separability fact for Qbar/Q, so the specialized leaf is justified. lem-weil-monic-divisor-integral and prop-weil-integral-rational-series state different facts. No cycle: the closure of the step citations does not reach the item. No SGA citation. Accepted tool_use: lem-weil-reciprocal-polynomial (unit sk-thm-rh), clause (1) only, used the same way in prop-galois-weight-strata-identification. Small cases checked: q=2 with {+-sqrt2} gives 1-2T^2 and {1+-i} gives 1-2T+2T^2; the non-stable set {sqrt2} fails. Minor: the report mentions a citations.json that is not in the commit. No fixes were needed."
+ }
 }

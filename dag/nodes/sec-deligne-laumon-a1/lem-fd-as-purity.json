@@ -3,34 +3,41 @@
  "blueprint": {
   "is": "lem-fd-as-purity",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Purity of the Artin–Schreier sheaf",
- "statement": "Let $k_0=\\mathbf F_q$ and fix\n$\\iota:\\Qlb\\xrightarrow{\\sim}\\mathbf C$ as in\n[def-weil-punctual-weights]. The Artin–Schreier sheaf\n$\\mathcal L_{\\psi,ax}$ on $\\mathbf A^1_{k_0}$ is punctually\n$\\iota$-pure of weight $0$.",
+ "statement": "Let $k_0=\\mathbf F_q$ and fix the nondegenerate additive character\n$\\psi$ of [def-fd-additive-character]. Let $a\\in k_0^\\times$ and fix\n$\\iota:\\Qlb\\xrightarrow{\\sim}\\mathbf C$ as in\n[def-weil-punctual-weights]. The Artin–Schreier sheaf\n$\\mathcal L_{\\psi,ax}$ on $\\mathbf A^1_{k_0}$, as defined in\n[def-fd-artin-schreier-sheaf], is punctually\n$\\iota$-pure of weight $0$.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-some-weight/lem-fd-as-purity.md",
   "place": "node lem-fd-as-purity, order 2771"
  },
  "stmt_deps": [
-  "def-weil-punctual-weights",
-  "def-fd-artin-schreier-sheaf"
+  "def-fd-additive-character",
+  "def-fd-artin-schreier-sheaf",
+  "def-weil-punctual-weights"
  ],
  "proof": [
   {
-   "text": "By [lem-fd-as-lisse] the sheaf is lisse of rank one, so at every\nclosed point $u$ its unique local Frobenius eigenvalue is the trace\nvalue $t_{\\mathcal L_{\\psi,ax}}(u)$ of [lem-fd-as-trace], namely\n$\\psi(\\operatorname{Tr}_{\\kappa(u)/k_0}(au))$: a root of unity,\nof modulus one by [lem-tw-root-of-unity-modulus]. Hence every\nlocal eigenvalue satisfies $|\\iota(\\alpha)|=1=q_u^{0/2}$, which is the\npunctual $\\iota$-purity of weight $0$ of\n[def-weil-punctual-weights].",
+   "text": "By [lem-fd-as-lisse], the sheaf $\\mathcal L_{\\psi,ax}$ is lisse of rank one, so at every closed point $u$ its unique local Frobenius eigenvalue is the trace value $t_{\\mathcal L_{\\psi,ax}}(u)$ of [lem-fd-as-trace], namely $\\psi(\\operatorname{Tr}_{\\kappa(u)/k_0}(au))$. The trace lies in the finite additive group $k_0$, so the homomorphism property of the additive character gives $\\psi(\\operatorname{Tr}_{\\kappa(u)/k_0}(au))^{q}=1$; it is therefore a root of unity. By [lem-tw-root-of-unity-modulus], its image under $\\iota$ has modulus one. Hence every local eigenvalue $\\alpha$ satisfies $|\\iota(\\alpha)|=1=q_u^{0/2}$, which is precisely punctual $\\iota$-purity of weight $0$ by [def-weil-punctual-weights].",
    "uses": [
     "lem-fd-as-lisse",
     "lem-fd-as-trace",
+    "def-fd-additive-character",
     "lem-tw-root-of-unity-modulus",
     "def-weil-punctual-weights"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-some-weight/lem-fd-as-purity.md",
+    "place": "## Proof"
+   }
   }
  ],
  "proof_deps": [
   "lem-fd-as-lisse",
   "lem-fd-as-trace",
+  "def-fd-additive-character",
   "lem-tw-root-of-unity-modulus",
   "def-weil-punctual-weights"
  ],
@@ -41,7 +48,7 @@
  },
  "mathlib_searches": [],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -94,5 +101,21 @@
   }
  },
  "chapter": "sec-deligne-laumon-a1",
- "unit": "sk-p-dl-a1-some-weight"
+ "unit": "sk-p-dl-a1-some-weight",
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-fd-as-purity",
+  "worker": "stage1",
+  "summary": "Corrected the imported statement by explicitly fixing the nondegenerate additive character ψ and a ∈ k₀ˣ, which are required by the trace lemma and were undeclared in the imported text. The proof is a single audited step using the existing lisse, trace, additive-character, root-of-unity-modulus, and punctual-weight nodes; it also spells out why the trace value is a root of unity.",
+  "blueprint": "Realizes the sole proof paragraph: lisse rank one identifies the local eigenvalue with the Artin–Schreier trace value, the finite additive-character argument makes it a root of unity, and the modulus calculation gives weight zero.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q140-e8746b831",
+  "group": "Q140",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q140-e8746b831 (reviewer sub-agent of L); spot-checked: I read the item, both blueprint snapshots (master order 2771 and main-20261015 order 3115, identical), the unit, the chapter and the full statements of every cited node. The delivery has no new nodes. The statement correction (fix psi = Psi∘Tr from def-fd-additive-character and require a in k0^x) is justified: these are exactly the hypotheses of lem-fd-as-trace, and they were undeclared in the source. It drops nothing a citer uses: lem-a1-exceptional-constituents assumes a in k0^x. The single step checks: lem-fd-as-lisse gives rank one, so the eigenvalue equals the trace; lem-fd-as-trace gives the value psi(Tr(au)); psi(t)^q = psi(qt) = psi(0) = 1, so it is a root of unity; lem-tw-root-of-unity-modulus gives |iota| = 1; def-weil-punctual-weights then gives weight 0. Edge cases checked: zero trace, q=2, high-degree points, and p dividing [k0:Fp]. Every cited unit is reached transitively from sk-p-dl-a1-some-weight, so no tool use is needed, and no SGA is cited. No duplicate exists in the DAG. The open Lean entry finiteLowerStar_singleFunctor_of_isAffine is a framework sorry that many reviewed nodes leave unattached the same way, and the item's proof does not use it. For the maintainer: the citer lem-fd-realified-kernel-real cites this lemma for the Fourier kernel K_psi (xy on A^2), which the source statement does not cover either; this is not a fault of this delivery. No fixes."
+ }
 }
