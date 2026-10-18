@@ -1,0 +1,156 @@
+{
+ "id": "lem-weil-pbc-good-curves-preimage-boundary",
+ "kind": "statement",
+ "title": "Geometric compactification and quasi-finite boundary of the good-curves preimage",
+ "statement": "Let $X,V$ be Noetherian schemes [def-pc-scheme] [pqf-def-locnoeth], and let $f:X\\to V$ be separated and of finite type [def-weil-pbc-scheme-conventions]. For a finite family indexed by $i\\in\\{0,\\ldots,n-1\\}$, let $t_i:T_i\\to V$ be finite etale [def-weil-pbc-finite-etale-category], $j_i:Y_i\\to\\overline Y_i$ open immersions [def-weil-open-immersion], and $p_i:\\overline Y_i\\to T_i$ smooth and proper [def-sbc-smooth-morphisms] [def-weil-proper-morphism]. Assume each $p_i j_i$ is smooth and surjective and each fibre of $p_i$ is geometrically connected of dimension at most one [def-pc-scheme-fibre] [def-pc-geometrically-irreducible] [def-kun-topological-krull-dimension]. Let $\\nu:\\coprod_iY_i\\to X$ be finite and surjective, with $f\\nu\\iota_i=t_i p_i j_i$ [lem-weil-pbc-scheme-coproduct-family]. Let $W\\subset X$ be open whose inverse image in each $Y_i$ is dense in every fibre of $p_i j_i$. Put $C=\\coprod_i\\overline Y_i$ and $P=(\\coprod_iY_i)\\times_X W$. Then $C$ is Noetherian, its natural map $c:C\\to V$ is proper, and there exist an open $O\\subset C$ and an isomorphism $e:P\\simeq O$ over $V$ and a closed immersion $i:Z\\to C$ with image $C\\setminus O$, such that $ci$ is quasi-finite [def-weil-closed-immersion] [pqf-def-quasifinite].",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0GKX, label lemma-constant-shriek-rel-dim-1, the open immersion of the inverse image of W into the disjoint union of proper models and the second boundary Zprime."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-scheme-conventions",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "def-weil-pbc-finite-etale-category",
+  "def-weil-open-immersion",
+  "def-sbc-smooth-morphisms",
+  "def-weil-proper-morphism",
+  "def-pc-scheme-fibre",
+  "def-pc-geometrically-irreducible",
+  "def-kun-topological-krull-dimension",
+  "def-weil-closed-immersion",
+  "pqf-def-quasifinite"
+ ],
+ "proof": [
+  {
+   "text": "Let P=(coproduct_i Y_i) times_X W, let W_i be the inverse image of W in Y_i, and let O_i=j_i(W_i). Pullback of the finite disjoint union identifies P with coproduct_i W_i. The j_i give an open immersion of P into C=coproduct_i Ybar_i, compatible with the maps to V by hcomm. Each Ybar_i to V is proper, since finite maps are proper and proper maps compose. Induction on the finite family using the proved binary proper-coproduct lemma gives properness of C to V; the empty case is the empty morphism. In particular C to V is separated of finite type, and C is Noetherian. The finite-coproduct qcqs lemma gives the required compactness and quasi-separatedness. The component open immersions identify P isomorphically with an open O of C. The equality over V follows from hcomm on every open component.",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family",
+    "lem-weil-pbc-finite-coproduct-lfp-qcqs",
+    "lem-weil-pbc-proper-coproduct",
+    "lem-weil-pbc-finite-proper",
+    "lem-weil-pbc-proper-composition",
+    "lem-weil-pbc-finite-type-over-noetherian"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0GKX, label lemma-constant-shriek-rel-dim-1, the open immersion of the inverse image of W into the disjoint union of proper models and the second boundary Zprime."
+   }
+  },
+  {
+   "text": "Surjectivity of Y_i to T_i and fibrewise density of W_i give a point of W_i over every point of T_i. Apply the good-curves-boundary lemma to O_i open in Ybar_i: its hypotheses are precisely smoothness, properness, geometrically connected fibres of dimension at most one, finite etale T_i to V, and the just-proved fibrewise nonemptiness. The reduced complement Z of P in C is separated, quasi-finite and finitely presented over V.",
+   "uses": [
+    "lem-weil-pbc-good-curves-boundary-quasifinite",
+    "lem-weil-pbc-reduced-induced-closed-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0GKX, label lemma-constant-shriek-rel-dim-1, the open immersion of the inverse image of W into the disjoint union of proper models and the second boundary Zprime."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-weil-pbc-finite-coproduct-lfp-qcqs",
+  "lem-weil-pbc-proper-coproduct",
+  "lem-weil-pbc-finite-proper",
+  "lem-weil-pbc-proper-composition",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-good-curves-boundary-quasifinite",
+  "lem-weil-pbc-reduced-induced-closed-subscheme"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0GKX, label lemma-constant-shriek-rel-dim-1, the open immersion of the inverse image of W into the disjoint union of proper models and the second boundary Zprime."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The inverse image of a fibrewise dense open under a finite good curves cover embeds into the finite coproduct of proper smooth curve models with quasi finite closed complement",
+   "results": "8 hits: sigmaOpenCover, coprodOpenCover, open-cover gluing and pullback-cover APIs. These supply pieces of the construction, not the quasi-finite boundary assertion.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsOpenImmersion, AlgebraicGeometry.LocallyQuasiFinite",
+   "results": "2 hits: instRespectsSchemeLocallyQuasiFiniteIsOpenImmersion and instIsOpenImmersionToNormalizationOfLocallyQuasiFiniteOfLocallyOfFiniteType. Neither states the good-curves boundary assertion.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "goodCurves.*boundary|good_curves.*boundary|preimage.*[Cc]omplement",
+   "results": "4 hits about immersion/submersion source subsets for manifolds; no algebraic-geometry match.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The inverse image of a fibrewise dense open under a finite good curves cover embeds into a coproduct of proper smooth curves with quasi finite boundary",
+   "results": "8 hits: AlgebraicGeometry.sigmaOpenCover (Mathlib.AlgebraicGeometry.Limits); IsCompactOpenCovered.image and IsCompactOpenCovered (Mathlib.Topology.Sets.CompactOpenCovered); TopologicalSpace.IsOpenCover.denseRange_iff_restrictPreimage and isOpenEmbedding_iff_restrictPreimage (Mathlib.Topology.LocalAtTarget); AlgebraicGeometry.Scheme.OpenCover.isOpenCover_opensRange (Mathlib.AlgebraicGeometry.Cover.Open); AlgebraicGeometry.Scheme.Hom.discrete_fiber (Mathlib.AlgebraicGeometry.Fiber); AlgebraicGeometry.isOpenEmbedding_isZariskiLocalAtTarget (Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap). These are component APIs, not the geometric embedding with quasi-finite boundary.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ConstantShriekRelativeDimensionOne",
+  "date": "2026-10-18",
+  "group": "H5"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-direct-image-finiteness-proper",
+   "place": "Tag 0GKX, label lemma-constant-shriek-rel-dim-1, the open immersion of the inverse image of W into the disjoint union of proper models and the second boundary Zprime.",
+   "via": [
+    "lem-weil-pbc-etale-lisse-open-relative-line-constructibility",
+    "lem-weil-pbc-etale-affine-line-shriek-sheaf-constructible",
+    "lem-weil-pbc-etale-compactification-constructibility",
+    "lem-weil-pbc-etale-proper-direct-image-finiteness",
+    "lem-weil-pbc-etale-constant-shriek-rel-dim-1",
+    "lem-weil-pbc-good-curves-preimage-constructible"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.GoodCurvesPreimageBoundary",
+  "file": "lean/Sheaf/AlgebraicGeometry/GoodCurvesPreimageBoundary.lean",
+  "declaration": "AlgebraicGeometry.Etale.goodCurvesPreimage_boundary",
+  "statement": "theorem goodCurvesPreimage_boundary\n    {X V : Scheme.{u}} [IsNoetherian X] [IsNoetherian V]\n    (f : X ⟶ V) [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]\n    (n : ℕ) (T Y Ybar : Fin n → Scheme.{u})\n    (t : ∀ i, T i ⟶ V) (j : ∀ i, Y i ⟶ Ybar i) (p : ∀ i, Ybar i ⟶ T i)\n    (ν : (∐ Y) ⟶ X) [IsFinite ν] [Surjective ν]\n    (hcomm : ∀ i, Limits.Sigma.ι Y i ≫ ν ≫ f = j i ≫ p i ≫ t i)\n    (ht : ∀ i, IsFinite (t i) ∧ AlgebraicGeometry.Etale (t i))\n    (hj : ∀ i, IsOpenImmersion (j i))\n    (hjp : ∀ i, Smooth (j i ≫ p i) ∧ Surjective (j i ≫ p i))\n    (hp : ∀ i, Smooth (p i) ∧ IsProper (p i) ∧\n      ∀ s : T i, GeometricallyConnected ((p i).fiberToSpecResidueField s) ∧\n        topologicalKrullDim ((p i).fiber s) ≤ 1)\n    (W : X.Opens)\n    (hWi : ∀ (i : Fin n) (s : T i),\n      Dense (((j i ≫ p i).fiberι s ≫ Limits.Sigma.ι Y i ≫ ν) ⁻¹' (W : Set X)))\n    : IsNoetherian (∐ Ybar) ∧\n      IsProper (Limits.Sigma.desc fun i ↦ p i ≫ t i) ∧\n      ∃ (O : (∐ Ybar : Scheme.{u}).Opens)\n        (e : Limits.pullback ν W.ι ≅ O.toScheme)\n        (Z : Scheme.{u}) (i : Z ⟶ (∐ Ybar)),\n        IsClosedImmersion i ∧ Set.range i.base = (O : Set (∐ Ybar : Scheme.{u}))ᶜ ∧\n        e.hom ≫ O.ι ≫ (Limits.Sigma.desc fun k ↦ p k ≫ t k) =\n          Limits.pullback.snd ν W.ι ≫ W.ι ≫ f ∧\n        (i ≫ (Limits.Sigma.desc fun k ↦ p k ≫ t k)).IsQuasiFinite",
+  "branch": "sheaf-dag",
+  "by": "H5",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H5",
+  "result": "pass",
+  "landing": "20261018T091403-L-3255148",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H5",
+  "result": "pass",
+  "landing": "20261018T091403-L-3255148",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

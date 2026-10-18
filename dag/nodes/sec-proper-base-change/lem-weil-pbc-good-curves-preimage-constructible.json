@@ -1,0 +1,181 @@
+{
+ "id": "lem-weil-pbc-good-curves-preimage-constructible",
+ "kind": "statement",
+ "title": "Constructible compact support on the open preimage in a good-curves diagram",
+ "statement": "Let $\\Lambda$ be a finite commutative ring, $M$ a finite $\\Lambda$-module, and $X,V$ Noetherian schemes [def-pc-scheme] [pqf-def-locnoeth]. Let $f:X\\to V$ be separated and of finite type [def-weil-pbc-scheme-conventions]. Fix $n\\geq0$ and schemes $T_i,Y_i,\\overline Y_i$ for $i\\in\\{0,\\ldots,n-1\\}$, with maps $t_i:T_i\\to V$, $j_i:Y_i\\to\\overline Y_i$ and $p_i:\\overline Y_i\\to T_i$, and a finite surjective map $\\nu:\\coprod_iY_i\\to X$ [lem-weil-pbc-scheme-coproduct-family]. Suppose $f\\nu\\iota_i=t_i p_i j_i$, every $t_i$ is finite etale [def-weil-pbc-finite-etale-category], every $j_i$ is an open immersion [def-weil-open-immersion], every $p_i j_i$ is smooth and surjective, and every $p_i$ is smooth and proper with geometrically connected fibres of topological dimension at most one [def-sbc-smooth-morphisms] [def-weil-proper-morphism] [def-pc-scheme-fibre] [def-pc-geometrically-irreducible] [def-kun-topological-krull-dimension]. Let $W\\subset X$ be open such that its inverse image $W_i$ in each $Y_i$ is dense in every fibre of $p_i j_i$. Suppose that for every $i$, every compactification $c_i$ of $t_i p_i$, and every integer $q$, the sheaf $\\mathcal H^q(R(t_i p_i)_!^{c_i}\\underline M)$ is constructible [def-weil-pbc-derived-categories] [def-weil-pbc-direct-image] [def-weil-pbc-projection-compactification] [def-weil-pbc-extension-by-zero] [def-weil-pbc-constant-sheaf] [def-weil-pbc-etale-constructible-sheaf]. Put $P=(\\coprod_iY_i)\\times_X W$ and let $a:P\\to V$ be its evident map. Then $\\mathcal H^q(Ra_!^c\\underline M)$ is constructible for every integer $q$ and every compactification $c$ of $a$.",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0GKX, label lemma-constant-shriek-rel-dim-1, proof after passage from W to its inverse image under nu: second boundary Zprime and finite disjoint union of proper smooth families."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-scheme-conventions",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "def-weil-pbc-finite-etale-category",
+  "def-weil-open-immersion",
+  "def-sbc-smooth-morphisms",
+  "def-weil-proper-morphism",
+  "def-pc-scheme-fibre",
+  "def-pc-geometrically-irreducible",
+  "def-kun-topological-krull-dimension",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-projection-compactification",
+  "def-weil-pbc-extension-by-zero",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-etale-constructible-sheaf"
+ ],
+ "proof": [
+  {
+   "text": "Apply the geometric good-curves-preimage boundary theorem. It supplies a Noetherian proper model C over V, an open O in C, an isomorphism P to O over V, and quasi-finiteness of its closed boundary Z over V. Compose the isomorphism with the open inclusion to obtain the open immersion w:P to C. Its range is O; its composite to V is the original map of P.",
+   "uses": [
+    "lem-weil-pbc-good-curves-preimage-boundary"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0GKX, label lemma-constant-shriek-rel-dim-1, proof after passage from W to its inverse image under nu: second boundary Zprime and finite disjoint union of proper smooth families."
+   }
+  },
+  {
+   "text": "The constant finite module on Z has a one-stratum finite locally constant stratification. Apply quasi-finite shriek constructibility and the comparison of finite-stalk and finite-constant-value constructibility to obtain constructible cohomology of R(Z to V)_!.",
+   "uses": [
+    "lem-weil-pbc-etale-quasifinite-shriek-constructible",
+    "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
+    "lemma-constructible-pullback-constant"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0GKX, label lemma-constant-shriek-rel-dim-1, proof after passage from W to its inverse image under nu: second boundary Zprime and finite disjoint union of proper smooth families."
+   }
+  },
+  {
+   "text": "Prove finite-coproduct constructibility by induction on Fin n. For n=0 every point would lie in an impossible component; sheaves on the empty source and their derived compact-support objects are zero. For n+1 use the zeroth component as an open and the remaining coproduct as its complementary closed immersion. Disjointness of the component open ranges proves the complement equality, and their cover proves exhaustiveness. Both embeddings preserve Noetherianity. Precompose the existing compactification by the two open component embeddings. Apply the open-closed compact-support triangle and the Serre homology property to the induction hypothesis and hmodels for the zeroth component.",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family",
+    "lem-weil-pbc-etale-compact-support-open-closed-triangle",
+    "thm-constructible-serre"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0GKX, label lemma-constant-shriek-rel-dim-1, proof after passage from W to its inverse image under nu: second boundary Zprime and finite disjoint union of proper smooth families."
+   }
+  },
+  {
+   "text": "Apply the open-closed compact-support triangle to w:P to C and Z to C, for the prescribed compactification of P and chosen compactifications of C and Z. Constant-pullback isomorphisms identify the three constant complexes. The proper-model coproduct has constructible cohomology by the preceding induction; the boundary has constructible cohomology by quasi-finite shriek. The Serre homology property is closed under the first vertex of a distinguished triangle, giving constructibility on P. Rewrite the composite-map equality to use cW without any extra compactification-independence assumption.",
+   "uses": [
+    "lem-weil-pbc-etale-compact-support-open-closed-triangle",
+    "thm-constructible-serre",
+    "lemma-constructible-pullback-constant"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0GKX, label lemma-constant-shriek-rel-dim-1, proof after passage from W to its inverse image under nu: second boundary Zprime and finite disjoint union of proper smooth families."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-good-curves-preimage-boundary",
+  "lem-weil-pbc-etale-quasifinite-shriek-constructible",
+  "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
+  "lemma-constructible-pullback-constant",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-weil-pbc-etale-compact-support-open-closed-triangle",
+  "thm-constructible-serre"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0GKX, label lemma-constant-shriek-rel-dim-1, proof after passage from W to its inverse image under nu: second boundary Zprime and finite disjoint union of proper smooth families.",
+  "note": "H5 proved the finite-coproduct and cohomological localization steps in Lean, reducing only the geometric open embedding and boundary to lem-weil-pbc-good-curves-preimage-boundary."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Compact support cohomology on a dense open in a finite disjoint union of proper smooth curves is constructible when the proper models have constructible compact support cohomology",
+   "results": "[leanfinder] OK 8 hit(s): IsCompact.isConstructible; Topology.IsLocallyConstructible.iff_isConstructible_of_isOpenCover; Topology.IsLocallyConstructible.of_isOpenCover'; IsRetrocompact.isConstructible; AlgebraicGeometry.Scheme.Hom.isConstructible_image; Topology.IsConstructible.empty_union_induction; Topology.IsLocallyConstructible.isConstructible; Topology.IsConstructible.preimage_of_isClosedEmbedding. These concern constructible subsets of topological spaces, not constructible cohomology sheaves.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"constructible\", \"shriek\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "goodCurves.*constructible|constructible.*goodCurves|shriek.*[Cc]oproduct",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compact support cohomology on a dense open in a finite disjoint union of proper smooth curves is constructible when the proper models have constructible compact support cohomology",
+   "results": "8 hits, all in Mathlib.Topology.Constructible: IsCompact.isConstructible, Topology.IsConstructible, IsRetrocompact.isConstructible, IsRetrocompact.isLocallyConstructible, Topology.IsLocallyConstructible.iff_isConstructible_of_isOpenCover, Topology.IsLocallyConstructible, Topology.IsConstructible.sUnion, Topology.IsConstructible.biUnion. These concern constructible subsets, not cohomology sheaves.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ConstantShriekRelativeDimensionOne",
+  "date": "2026-10-18",
+  "group": "H5"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-direct-image-finiteness-proper",
+   "place": "Tag 0GKY final reduction to Tag 0GKX; in the latter proof, the inverse image of W, its second boundary Zprime, and the finite sum of compact-support objects of the proper smooth models.",
+   "via": [
+    "lem-weil-pbc-etale-lisse-open-relative-line-constructibility",
+    "lem-weil-pbc-etale-affine-line-shriek-sheaf-constructible",
+    "lem-weil-pbc-etale-compactification-constructibility",
+    "lem-weil-pbc-etale-proper-direct-image-finiteness",
+    "lem-weil-pbc-etale-constant-shriek-rel-dim-1"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.GoodCurvesPreimageConstructible",
+  "file": "lean/Sheaf/AlgebraicGeometry/GoodCurvesPreimageConstructible.lean",
+  "declaration": "AlgebraicGeometry.Etale.goodCurvesPreimage_constantShriek_constructible",
+  "statement": "theorem goodCurvesPreimage_constantShriek_constructible\n    (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]\n    {X V : Scheme.{u}} [IsNoetherian X] [IsNoetherian V]\n    (f : X ⟶ V) [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]\n    (n : ℕ) (T Y Ybar : Fin n → Scheme.{u})\n    (t : ∀ i, T i ⟶ V) (j : ∀ i, Y i ⟶ Ybar i) (p : ∀ i, Ybar i ⟶ T i)\n    (ν : (∐ Y) ⟶ X) [IsFinite ν] [Surjective ν]\n    (hcomm : ∀ i, Limits.Sigma.ι Y i ≫ ν ≫ f = j i ≫ p i ≫ t i)\n    (ht : ∀ i, IsFinite (t i) ∧ AlgebraicGeometry.Etale (t i))\n    (hj : ∀ i, IsOpenImmersion (j i))\n    (hjp : ∀ i, Smooth (j i ≫ p i) ∧ Surjective (j i ≫ p i))\n    (hp : ∀ i, Smooth (p i) ∧ IsProper (p i) ∧\n      ∀ s : T i, GeometricallyConnected ((p i).fiberToSpecResidueField s) ∧\n        topologicalKrullDim ((p i).fiber s) ≤ 1)\n    (W : X.Opens)\n    (hWi : ∀ (i : Fin n) (s : T i),\n      Dense (((j i ≫ p i).fiberι s ≫ Limits.Sigma.ι Y i ≫ ν) ⁻¹' (W : Set X)))\n    (M : ModuleCat.{u + 1} Λ) [Finite M]\n    (hmodels : ∀ (i : Fin n) (ci : Compactification (p i ≫ t i)) (q : ℤ),\n      Scheme.IsConstructibleSheaf\n        ((_root_.DerivedCategory.Plus.homologyFunctor _ q).obj\n          ((rightDerivedLowerShriekOfCompactificationPlus (ModuleCat.{u + 1} Λ) ci).obj\n            ((_root_.DerivedCategory.Plus.singleFunctor _ 0).obj\n              ((constantSheaf (Ybar i).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M)))))\n    (cW : Compactification (Limits.pullback.snd ν W.ι ≫ W.ι ≫ f)) :\n    ∀ q : ℤ, Scheme.IsConstructibleSheaf\n      ((_root_.DerivedCategory.Plus.homologyFunctor _ q).obj\n        ((rightDerivedLowerShriekOfCompactificationPlus (ModuleCat.{u + 1} Λ) cW).obj\n          ((_root_.DerivedCategory.Plus.singleFunctor _ 0).obj\n            ((constantSheaf (Limits.pullback ν W.ι).smallEtaleTopology\n              (ModuleCat.{u + 1} Λ)).obj M))))",
+  "branch": "sheaf-dag",
+  "by": "H5",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H5",
+  "result": "pass",
+  "landing": "20261018T091403-L-3255148",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H5",
+  "result": "pass",
+  "landing": "20261018T091403-L-3255148",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

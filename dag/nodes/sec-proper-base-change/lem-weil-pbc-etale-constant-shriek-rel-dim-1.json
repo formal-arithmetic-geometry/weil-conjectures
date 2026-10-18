@@ -2,174 +2,138 @@
  "kind": "statement",
  "proof": [
   {
-   "text": "Fix a compactification c. The base S is Noetherian by the finite-type-over-Noetherian lemma. We use Noetherian induction on its closed subsets, rather than induction on its numerical dimension: prove the conclusion after base change to every reduced closed subscheme E of S, using the conclusion for proper closed subsets of E. Such E is affine of finite type over Z: on rings it is A/I. It is Noetherian by the same finite-type lemma. The smooth relative-dimension permanence lemma gives a smooth relative-dimension-one morphism X_E to E; affineness follows directly by tensoring its affine coordinate algebra with A/I, and separatedness is preserved by base change. These morphisms are of finite presentation, since smoothness gives local finite presentation and qcqs permanence gives quasi-compactness and quasi-separatedness. Base change and exact inverse image identify the restriction of the original cohomology sheaves with those of this new compact-support object, whose input is again constant by the constant-pullback lemma. The minimal-closed-subset lemma licenses the induction, and the empty closed subset is the immediate base case.",
+   "text": "Prove a general closed-subset induction criterion for a sheaf F on a Noetherian scheme S. For every closed immersion i:Z to S with nonempty Z, assume a nonempty open U of Z where i inverse F is constructible. Induct on the image closed subset of i using WellFoundedLT.induction. The image of the closed complement of U is strictly smaller because i is injective and U has a point. Glue the two restrictions using the proved open-closed criterion for constructible sheaves. Empty schemes have the empty stratification. Taking i to be the identity proves the criterion. It allows arbitrary nilpotent structures on closed bases, so no reduction of S is needed.",
+   "uses": [
+    "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+    "prop-constructible-open-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0GKX, label lemma-constant-shriek-rel-dim-1, proof"
+   }
+  },
+  {
+   "text": "Fix the original degree and use the criterion. The base is Noetherian by finite type over Z. Every closed subscheme is Noetherian and affine. Base-changing h to it preserves smooth relative dimension one, affineness and separatedness. The compact-support base-change natural isomorphism, exact inverse image and the constant-pullback isomorphism identify the restricted cohomology with compact support of the finite constant module on this new curve. The comparison between the two constructibility predicates lets us work with the existing finite-stalk API.",
    "uses": [
     "lem-weil-pbc-finite-type-over-noetherian",
-    "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
     "lem-sbc-smooth-relative-dimension-permanence",
     "lem-pod-separated-finite-type-base-change",
-    "lem-weil-pbc-qcqs-morphism-permanence",
     "lem-weil-pbc-etale-compact-support-base-change-qcqs",
     "prop-weil-pbc-inverse-image-modules-exact",
     "lemma-constructible-pullback-constant",
-    "def-sbc-smooth-morphisms",
-    "lem-weil-pbc-reduced-induced-closed-subscheme"
+    "lem-weil-pbc-constructible-etale-module-sheaf-comparison"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tag 0GKX, lemma-constant-shriek-rel-dim-1, proof"
+    "place": "Tag 0GKX, label lemma-constant-shriek-rel-dim-1, proof"
    }
   },
   {
-   "text": "For a nonempty induction base E, choose a generic point eta of an irreducible component. Apply the good-curves diagram to X_E to E. All schemes in this diagram are Noetherian and qcqs: U is an open of the Noetherian affine E, V is finite over U, T_i is finite etale over V, and the remaining schemes are of finite type over these. By shrinking U to an affine neighbourhood of eta and base changing the whole diagram, we may take U affine; all the displayed properties persist. Let a:X_V to V. By compact-support base change, constant pullback, and exactness of inverse image, the pullback to V of each cohomology sheaf on U is the cohomology of Ra_! constant M. Since V to U is surjective, the surjective-pullback constructibility criterion reduces constructibility on U to constructibility on V.",
+   "text": "Over a nonempty Noetherian affine base choose a generic point of an irreducible component and apply the good-curves generic diagram. The chosen generic fibre has dimension at most one by the smooth relative dimension bound. An open of a Noetherian scheme is quasi-compact; the finite cover V of U is therefore Noetherian and qcqs. Compact-support base change and constant pullback identify pullback of the original cohomology to V. Surjective-pullback descent reduces constructibility on U to constructibility over V.",
    "uses": [
     "lem-weil-pbc-good-curves-generic-diagram",
-    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-etale-constructible-surjective-pullback",
+    "lem-weil-pbc-etale-compact-support-base-change-qcqs",
+    "lemma-constructible-pullback-constant",
     "lem-weil-pbc-noetherian-open-subscheme-noetherian",
-    "lem-weil-pbc-etale-compact-support-base-change-qcqs",
-    "lemma-constructible-pullback-constant",
-    "prop-weil-pbc-inverse-image-modules-exact",
-    "lem-weil-pbc-etale-constructible-surjective-pullback"
+    "lem-weil-pbc-qcqs-morphism-permanence"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tag 0GKX, lemma-constant-shriek-rel-dim-1, proof"
+    "place": "Tag 0GKX, label lemma-constant-shriek-rel-dim-1, proof"
    }
   },
   {
-   "text": "Write Z=(X_V minus W)_red. Every nonempty fibre of X_V to V has dimension one; empty fibres are allowed. The open W is dense in every fibre. Consequently the closed complement has dimension at most zero in each fibre: a dimension-one component cannot be contained in the complement. Explicitly, a chain of two distinct irreducible closed subsets in that complement would have its larger member contained in an irreducible component of the fibre; if this containment were strict it would give a chain of length two in the dimension-one fibre. The larger member must therefore be a whole component, contrary to density of W. There are no such chains, so the complement has dimension at most zero. By the finite-type dimension-zero lemma these fibres are finite discrete spaces. Thus Z to V is quasi-finite by the definition (finite type and isolated fibre points). It is separated and of finite presentation, since it is a closed subscheme of the Noetherian separated finite-type X_V. The constant finite module sheaf on Z is constructible using the one-stratum partition. The quasi-finite shriek lemma makes its compact-support cohomology constructible. Apply the open-closed compact-support triangle to W in X_V. Its long exact sequence gives the short exact sequence 0 to coker(H^(q-1)(RZ_!) to H^q(RW_!)) to H^q(Ra_! constant M) to ker(H^q(RZ_!) to H^(q+1)(RW_!)) to 0. The Serre theorem therefore reduces the assertion to compact support on W.",
+   "text": "The closed complement Z of W in the curve over V is quasi-finite. On each fibre embed it as the complement of the given dense open. In a Noetherian sober space of dimension at most one, this complement has dimension at most zero: the generic point of each irreducible component is in the dense open, so adjoining it strictly extends every specialization chain in the complement. The finite-type fibre is then locally Artinian and discrete. This proves the required open-singleton fibre condition. The constant module in degree zero has constructible cohomology by its single finite locally constant stratum. Apply quasi-finite shriek constructibility to Z.",
    "uses": [
-    "lem-weil-pbc-good-curves-generic-diagram",
-    "lem-weil-pbc-finite-type-dim-zero-artinian",
     "pqf-def-quasifinite",
-    "lem-weil-pbc-finite-type-noetherian-finite-presentation",
-    "lem-weil-pbc-reduced-induced-closed-subscheme",
-    "def-weil-pbc-etale-constructible-sheaf",
+    "lem-weil-pbc-finite-type-dim-zero-artinian",
     "lem-weil-pbc-etale-quasifinite-shriek-constructible",
-    "lem-weil-pbc-etale-compact-support-open-closed-triangle",
-    "thm-constructible-serre",
-    "lemma-constructible-pullback-constant"
+    "def-weil-pbc-etale-constructible-sheaf"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tag 0GKX, lemma-constant-shriek-rel-dim-1, proof"
+    "place": "Tag 0GKX, label lemma-constant-shriek-rel-dim-1, proof"
    }
   },
   {
-   "text": "Put i:nu inverse W to W. The good-curves diagram says this is a closed immersion surjective on points, so its complementary open is empty. Apply the open-closed compact-support triangle to W to V, with K=constant M and this closed subscheme: the first term is compact support on the empty scheme and hence zero. Its middle-to-last map therefore identifies R(W to V)_! constant M with R(nu inverse W to V)_! i inverse constant M. Constant pullback identifies the latter input with constant M.",
-   "uses": [
-    "lem-weil-pbc-good-curves-generic-diagram",
-    "lem-weil-pbc-etale-compact-support-open-closed-triangle",
-    "lemma-constructible-pullback-constant"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tag 0GKX, lemma-constant-shriek-rel-dim-1, proof"
-   }
-  },
-  {
-   "text": "Set O_i=j_i(W_i) in Ybar_i, where W_i=nu inverse W intersect Y_i. Each Y_i to T_i is surjective and W_i is dense in each of its fibres, so O_i meets every fibre of Ybar_i to T_i. The diagram supplies the finite etale T_i to V and the smooth proper geometrically connected nonempty fibres of dimension at most one; V is Noetherian by step 2. Apply the boundary lemma to these O_i and C_i=Ybar_i. With Ybar=coproduct_i Ybar_i and Zprime=(Ybar minus coproduct_i O_i)_red, it gives that Zprime to V is separated, quasi-finite and of finite presentation, including an empty family. The constant finite M sheaf on Zprime is constructible by its one-stratum partition (and constant pullback). Thus the quasi-finite shriek lemma gives constructible cohomology for D=R(Zprime to V)_! constant M.",
-   "uses": [
-    "lem-weil-pbc-good-curves-generic-diagram",
-    "lem-weil-pbc-good-curves-boundary-quasifinite",
-    "def-weil-pbc-etale-constructible-sheaf",
-    "lemma-constructible-pullback-constant",
-    "lem-weil-pbc-etale-quasifinite-shriek-constructible"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tag 0GKX, lemma-constant-shriek-rel-dim-1, proof"
-   }
-  },
-  {
-   "text": "Write A=R(nu inverse W to V)_! constant M and B=R(Ybar to V)_! constant M. The complement Zprime has just been constructed with its reduced induced closed structure; the open immersion nu inverse W to Ybar is quasi-compact because Ybar is Noetherian. The open-closed compact-support triangle gives A to B to D to A[1]. Its long exact sequence gives 0 to coker(H^(q-1)(B) to H^(q-1)(D)) to H^q(A) to ker(H^q(B) to H^q(D)) to 0. Since D has constructible cohomology, the Serre theorem implies that constructibility of the cohomology of B implies that of A. Together with step 4, it suffices to prove constructibility of B.",
-   "uses": [
-    "lem-weil-pbc-etale-compact-support-open-closed-triangle",
-    "thm-constructible-serre"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tag 0GKX, lemma-constant-shriek-rel-dim-1, proof"
-   }
-  },
-  {
-   "text": "For each i let b_i:Ybar_i to T_i and t_i:T_i to V. Properness allows the compactification (identity,b_i), so Rb_i,! is Rb_i,* (extension by zero for the identity is the identity, by its definition). The proper-smooth-curves finite-module lemma gives constructible cohomology for Rb_i,* constant M; it applies without an invertibility assumption on M, because Lambda and M are finite. Since t_i is finite etale, the quasi-finite shriek constructibility lemma applies to this bounded-below complex. Composition identifies Rt_i,! Rb_i,! with R(t_i b_i)_! and hence gives constructible cohomology for every summand. To assemble the finite disjoint union, successively use the relative Mayer-Vietoris triangle with U a union of previous components and V the next component. Their intersection is empty, whose compact-support object is zero, so the triangle gives the finite direct sum of the summands. The Serre theorem closes constructible sheaves under finite sums (each binary sum is a split extension); the empty family gives zero. Independence of compactification permits every comparison just made for the original chosen candidates.",
+   "text": "For each proper smooth model p_i, use the identity compactification: identity extension by zero is the identity, so its compact-support functor is its derived direct image. Apply the proper-smooth-curves finite-module theorem. The finite etale map t_i is quasi-finite, so its shriek sends this complex to one with constructible cohomology. The qcqs composition isomorphism identifies it with compact support for p_i followed by t_i, for every prescribed compactification. These are exactly the model hypotheses of the new good-curves-preimage lemma.",
    "uses": [
     "lem-weil-pbc-etale-proper-smooth-curves-finite-module",
     "lem-weil-pbc-etale-quasifinite-shriek-constructible",
     "lem-weil-pbc-etale-shriek-qcqs-composition",
     "def-weil-pbc-projection-compactification",
-    "def-weil-pbc-extension-by-zero",
-    "lem-weil-pbc-etale-shriek-relative-mayer-vietoris",
-    "thm-constructible-serre",
-    "lem-weil-pbc-etale-shriek-compactification-independence"
+    "def-weil-pbc-extension-by-zero"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tag 0GKX, lemma-constant-shriek-rel-dim-1, proof"
+    "place": "Tag 0GKX, label lemma-constant-shriek-rel-dim-1, proof"
    }
   },
   {
-   "text": "Steps 2 to 5 prove constructibility on the nonempty open U of E for every degree. Let Eprime=(E minus U)_red. It is a proper closed subset of E, so the induction hypothesis applies there. Base change, constant pullback, and exactness of inverse image identify the restriction to Eprime of each cohomology sheaf with the constructible sheaf given by induction. For each fixed degree, take the finite constructible immersed stratification on U and the one on Eprime. Their composite immersions into E give a finite constructible immersed stratification of E: subsets locally closed in an open or closed subset are locally closed in E, and constructible subsets remain constructible because these immersions are quasi-compact on the Noetherian scheme E. On each resulting stratum the inverse image is the same finite locally constant sheaf as before. This proves constructibility directly from its definition and completes Noetherian induction. This yields constructibility on S_red. If S has nilpotents, apply compact-support base change to the surjection S_red to S and use exact inverse image and constant pullback to identify the pullbacks of the original cohomology sheaves with those just proved constructible. The surjective-pullback criterion then gives constructibility on S itself; it requires only qcqs, not flatness or etaleness of this reduction map. Finally use compactification independence to obtain the assertion for every compactification c.",
+   "text": "Apply the good-curves-preimage constructibility lemma using the models from the previous step. This gives constructibility on P=nu inverse W. The map P to W is a closed immersion surjective on points by the diagram. Its complementary open is empty. Apply the open-closed compact-support triangle with this closed immersion. The first object is zero: sheaves on the empty scheme are zero and the additive single, inverse-image, compact-support and inclusion functors preserve zero objects. The Serre homology property of the distinguished triangle therefore transfers constructibility from P to W.",
    "uses": [
-    "lem-weil-pbc-etale-compact-support-base-change-qcqs",
-    "lemma-constructible-pullback-constant",
-    "prop-weil-pbc-inverse-image-modules-exact",
-    "lem-weil-pbc-constructible-stratification-assembly",
-    "def-weil-constructible-subset",
-    "def-weil-pbc-etale-constructible-sheaf",
-    "lem-weil-pbc-etale-shriek-compactification-independence",
-    "lem-weil-pbc-etale-constructible-surjective-pullback"
+    "lem-weil-pbc-good-curves-preimage-constructible",
+    "lem-weil-pbc-etale-compact-support-open-closed-triangle",
+    "thm-constructible-serre",
+    "lemma-constructible-pullback-constant"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tag 0GKX, lemma-constant-shriek-rel-dim-1, proof"
+    "place": "Tag 0GKX, label lemma-constant-shriek-rel-dim-1, proof"
+   }
+  },
+  {
+   "text": "The open-closed compact-support triangle for W in the curve has constructible outer cohomology by the preceding steps. The constructible homology property is triangulated because constructible sheaves form a weak Serre class, so the middle object has constructible cohomology. This proves the generic step over V; descent proves it on the nonempty U. The closed-subset criterion from step 1 completes the original claim, and the comparison with finite-constant-value constructibility gives exactly the unchanged statement.",
+   "uses": [
+    "lem-weil-pbc-etale-compact-support-open-closed-triangle",
+    "thm-constructible-serre",
+    "lem-weil-pbc-constructible-etale-module-sheaf-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0GKX, label lemma-constant-shriek-rel-dim-1, proof"
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-finite-type-over-noetherian",
   "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+  "prop-constructible-open-closed",
+  "lem-weil-pbc-finite-type-over-noetherian",
   "lem-sbc-smooth-relative-dimension-permanence",
   "lem-pod-separated-finite-type-base-change",
-  "lem-weil-pbc-qcqs-morphism-permanence",
   "lem-weil-pbc-etale-compact-support-base-change-qcqs",
   "prop-weil-pbc-inverse-image-modules-exact",
   "lemma-constructible-pullback-constant",
-  "def-sbc-smooth-morphisms",
-  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
   "lem-weil-pbc-good-curves-generic-diagram",
-  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
   "lem-weil-pbc-etale-constructible-surjective-pullback",
-  "lem-weil-pbc-finite-type-dim-zero-artinian",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-qcqs-morphism-permanence",
   "pqf-def-quasifinite",
-  "lem-weil-pbc-finite-type-noetherian-finite-presentation",
-  "def-weil-pbc-etale-constructible-sheaf",
+  "lem-weil-pbc-finite-type-dim-zero-artinian",
   "lem-weil-pbc-etale-quasifinite-shriek-constructible",
-  "lem-weil-pbc-etale-compact-support-open-closed-triangle",
-  "thm-constructible-serre",
-  "lem-weil-pbc-good-curves-boundary-quasifinite",
+  "def-weil-pbc-etale-constructible-sheaf",
   "lem-weil-pbc-etale-proper-smooth-curves-finite-module",
   "lem-weil-pbc-etale-shriek-qcqs-composition",
   "def-weil-pbc-projection-compactification",
   "def-weil-pbc-extension-by-zero",
-  "lem-weil-pbc-etale-shriek-relative-mayer-vietoris",
-  "lem-weil-pbc-etale-shriek-compactification-independence",
-  "lem-weil-pbc-constructible-stratification-assembly",
-  "def-weil-constructible-subset"
+  "lem-weil-pbc-good-curves-preimage-constructible",
+  "lem-weil-pbc-etale-compact-support-open-closed-triangle",
+  "thm-constructible-serre"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/more-etale.tex",
-  "place": "Tag 0GKX proof; same good-curves/localization route, with Noetherian closed-subset induction replacing numerical dimension induction"
+  "place": "Tag 0GKX, label lemma-constant-shriek-rel-dim-1, proof",
+  "note": "H5 formalized Noetherian closed-subset induction, generic descent, the original quasi-finite boundary, proper-model pushforward, two uses of open-closed localization and the thickening step. The compactified dense-open calculation is isolated as lem-weil-pbc-good-curves-preimage-constructible."
  },
  "mathlib_match": null,
  "status": "split",
@@ -350,8 +314,7 @@
   ]
  },
  "tool_uses": [
-  "lem-sbc-smooth-relative-dimension-permanence",
-  "lem-sbc-smooth-connected-generic-geometry"
+  "lem-sbc-smooth-relative-dimension-permanence"
  ],
  "reviewed": {
   "date": "2026-10-17",
@@ -390,5 +353,15 @@
   "group": "NF",
   "result": "pass",
   "note": "Reviewed the immutable snapshot, all statement dependencies, source, declarations, and report. No faults found. Per-file scompile.py reproduction passed cleanly. Review recorded in review.md; no repository or branch changes."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H5",
+  "result": "pass",
+  "landing": "20261018T091403-L-3255148",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
