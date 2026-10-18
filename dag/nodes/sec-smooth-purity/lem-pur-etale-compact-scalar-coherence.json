@@ -1,0 +1,97 @@
+{
+ "id": "lem-pur-etale-compact-scalar-coherence",
+ "kind": "statement",
+ "title": "Ordinary etale compact-support scalar compatibility with projection and composition",
+ "statement": "Let $A\\to A'$ be a unital homomorphism of finite commutative rings, and let $f:X\\to Y$ be a separated finite-type morphism between Noetherian schemes, each admitting a finite affine cover by spectra of Noetherian rings [def-pc-scheme, def-weil-pbc-noetherian-ring, def-weil-scheme-morphism-properties]. Choose a compactification $f=pj$, with $j:X\\hookrightarrow\\overline X$ open and $p:\\overline X\\to Y$ proper [def-asd-compactifiable]. Work in the ordinary unbounded derived categories of constant-ring module sheaves on the small etale sites [def-weil-pbc-derived-categories], with $Q_T=(-)\\otimes_A^{\\mathbf L}A'$ [lem-pur-derived-change-of-rings]. Use the canonical K-flat tensor/pullback identifications [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] and the usual tensor unit $Q_T(A_T[0])\\cong A'_T[0]$ induced by multiplication.\n\nPut $F_{f,R}=Rf_{!,R}=Rp_{*,R}j_{!,R}$ for $R=A,A'$ [def-amb-etale-compact-support]. Define $q_f:Q_YF_{f,A}\\to F_{f,A'}Q_X$ by the proper scalar map of [lem-asd-proper-finite-coefficient-extension] evaluated at $j_{!,A}(-)$, followed by $Rp_{*,A'}$ of the open scalar tensor map $Q_{\\overline X}j_{!,A}\\cong j_{!,A'}Q_X$. The latter is the canonical balancing map: on the open it is scalar tensor, and off the open it is the zero-module map; its inverse is the open-adjunction transpose of the scalar extension of the open unit. Let $P_{f,R;K,M}:K\\otimes_R^{\\mathbf L}F_{f,R}M\\to F_{f,R}(f^*K\\otimes_R^{\\mathbf L}M)$ be the proper-counit/open-tensor projection transformation [lem-amb-proper-coproducts-projection, lem-pur-etale-open-derived-tensor].\n\nThen $q_f$ is a natural isomorphism on the entire derived category. For every $K\\in D(Y_{\\mathrm{et}},A)$ and $M\\in D(X_{\\mathrm{et}},A)$ the specified morphisms satisfy\n$$q_{f,f^*K\\otimes M}\\circ Q_Y(P_{f,A;K,M})=P_{f,A';Q_YK,Q_XM}\\circ(1\\otimes q_{f,M}),$$\nafter the canonical scalar tensor and scalar/pullback identifications of source and target. For composable compactifiable separated finite-type morphisms $X\\xrightarrow fY\\xrightarrow g Z$ between Noetherian schemes, use the proper/open triangle-normalized compact-support composition $\\alpha_R:F_{g,R}F_{f,R}\\cong F_{gf,R}$ [lem-amb-unbounded-compact-support-comparisons]. If $M\\in D^+(X_{\\mathrm{et}},A)$ and $Q_XM\\in D^+(X_{\\mathrm{et}},A')$, then\n$$q_{gf,M}\\circ Q_Z(\\alpha_{A,M})=\\alpha_{A',Q_XM}\\circ F_{g,A'}(q_{f,M})\\circ q_{g,F_{f,A}M}.$$\nFor an open immersion $v:V\\hookrightarrow Y$, put $X_V=f^{-1}(V)$, $f_V:X_V\\to V$, $v_X:X_V\\hookrightarrow X$, and give $f_V$ the restricted compactification $X_V\\hookrightarrow p^{-1}(V)\\to V$. Then, for every $M\\in D(X_{\\mathrm{et}},A)$, the specified maps satisfy $$C_{f,v,A'}(Q_XM)\\circ v^*(q_{f,M})=q_{f_V,v_X^*M}\\circ Q_V(C_{f,v,A}(M)),$$ where $C_{f,v,R}:v^*F_{f,R}\\cong F_{f_V,R}v_X^*$ is the compact-support exchange of [lem-amb-unbounded-compact-support-comparisons], and the source $v^*Q_YF_{f,A}M$ is identified with $Q_Vv^*F_{f,A}M$ and $v_X^*Q_XM$ with $Q_{X_V}v_X^*M$ by the canonical scalar/pullback identifications. These comparisons respect proper refinements of compactifications on these bounded-below inputs and the canonical coefficient-unit identification. No flatness or finite projective dimension of $A'$ over $A$, smoothness of $f$, orientation, or exceptional-pullback coefficient comparison is assumed.",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0GL6, remark-Rf-lower-shriek-change-of-rings; agent extraction of the normalized projection and proper/open composition comparisons, supplementing the commuting-functor assertion"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-scheme-morphism-properties",
+  "def-asd-compactifiable",
+  "def-weil-pbc-derived-categories",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "def-amb-etale-compact-support",
+  "lem-asd-proper-finite-coefficient-extension",
+  "lem-amb-proper-coproducts-projection",
+  "lem-pur-etale-open-derived-tensor",
+  "lem-amb-unbounded-compact-support-comparisons"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "scalar.*(projection|shriek)|changeOfRings.*(projection|shriek)|lowerShriek.*tensor",
+   "results": "none",
+   "date": "2026-10-18",
+   "verdict": "no match: the hits concern ordinary sheaf pushforward, algebraic tensor products, flat ring maps or topological bundles; none states the specified derived compact-support coefficient/projection/composition comparison or integration-normalized vector-bundle purity"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived change of rings compact support projection formula compatibility nonflat coefficients",
+   "results": "RingHom.Flat.isStableUnderBaseChange; RingHom.Flat; RingTheory.Sequence.IsWeaklyRegular.of_flat_of_isBaseChange; IsSMulRegular.of_flat_of_isBaseChange; RingHom.FaithfullyFlat.isStableUnderBaseChange; CategoryTheory.ProjectiveResolution.Hom.hom'_comp_π'; RingHom.Flat.propertyIsLocal; AlgebraicGeometry.Flat.instIsMultiplicativeScheme",
+   "date": "2026-10-18",
+   "verdict": "no match: the hits concern ordinary sheaf pushforward, algebraic tensor products, flat ring maps or topological bundles; none states the specified derived compact-support coefficient/projection/composition comparison or integration-normalized vector-bundle purity"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, tensor",
+   "results": "none; loogle: unknown identifier 'tensor'",
+   "date": "2026-10-18",
+   "verdict": "no match: the hits concern ordinary sheaf pushforward, algebraic tensor products, flat ring maps or topological bundles; none states the specified derived compact-support coefficient/projection/composition comparison or integration-normalized vector-bundle purity"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Change of coefficient rings compatibility of proper direct image tensor projection and extension by zero normalized derived tensor unit",
+   "results": "Algebra.IsPushout.cancelBaseChangeAux_symm_tmul; IsBaseChange.directSumPow; PolynomialLaw.toFun_eq_rTensor_φ_toFun'; AdicCompletion.tensor_map_id_left_eq_map; IsBaseChange.finitePow; TensorProduct.directLimitLeft_rTensor_of; AdicCompletion.ofTensorProduct_naturality; Submodule.FG.rTensor.directLimit_apply",
+   "date": "2026-10-18",
+   "verdict": "no match: the hits concern ordinary sheaf pushforward, algebraic tensor products, flat ring maps or topological bundles; none states the specified derived compact-support coefficient/projection/composition comparison or integration-normalized vector-bundle purity"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived scalar extension of sheaves of modules commutes with compact support direct image and its projection formula for an arbitrary nonflat map of finite rings",
+   "results": "SheafOfModules.pushforwardComp; SheafOfModules.pushforwardPushforwardAdj; SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous; SheafOfModules.pushforward_assoc; SheafOfModules.pushforward_map_val; SheafOfModules.pushforwardComp_inv_app_val_app; SheafOfModules.pushforwardComp_hom_app_val_app; SheafOfModules.pushforwardNatIso",
+   "date": "2026-10-18",
+   "verdict": "no match: the hits concern ordinary sheaf pushforward, algebraic tensor products, flat ring maps or topological bundles; none states the specified derived compact-support coefficient/projection/composition comparison or integration-normalized vector-bundle purity"
+  },
+  {
+   "tool": "grep",
+   "query": "def pushforwardComp|def pushforwardPushforwardAdj|theorem pushforward_assoc",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean",
+   "date": "2026-10-18",
+   "verdict": "no match: the hits concern ordinary sheaf pushforward, algebraic tensor products, flat ring maps or topological bundles; none states the specified derived compact-support coefficient/projection/composition comparison or integration-normalized vector-bundle purity"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pushforwardComp",
+   "results": "SheafOfModules.pushforwardComp; SheafOfModules.pushforward_id_comp; SheafOfModules.pushforward_comp_id; SheafOfModules.pushforward_assoc; SheafOfModules.pushforwardComp_hom_app_val_app; SheafOfModules.pushforwardComp_inv_app_val_app; SheafOfModules.conjugateEquiv_pullbackComp_inv",
+   "date": "2026-10-18",
+   "verdict": "no match: the hits concern ordinary sheaf pushforward, algebraic tensor products, flat ring maps or topological bundles; none states the specified derived compact-support coefficient/projection/composition comparison or integration-normalized vector-bundle purity"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "cor-pur-vector-bundle-purity",
+  "date": "2026-10-18",
+  "group": "NB"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "blueprint": {
+  "from": {
+   "node": "cor-pur-vector-bundle-purity",
+   "place": "proof, paragraph 2: the explicit projective-line trace commutes with coefficient reduction, and composition of its adjunctions gives the corresponding compatibilities for affine space; the scalar/projection and scalar/composition identifications needed before transposing",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ }
+}
