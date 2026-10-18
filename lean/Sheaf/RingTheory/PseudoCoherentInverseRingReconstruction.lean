@@ -9,17 +9,13 @@ public import Sheaf.RingTheory.RingPseudoCoherent
 public import Sheaf.CategoryTheory.Triangulated.DerivedLimit
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
-public import Sheaf.Algebra.Homology.DerivedChangeOfRings
-import Sheaf.Algebra.Homology.BoundedFlatKFlat
-import Sheaf.RingTheory.PseudoCoherentNilpotentInvariance
+import Sheaf.Algebra.Homology.ComplexTowerLimitProjectionComparison
+import Sheaf.RingTheory.NilpotentFiniteFreeComplexTower
+import Sheaf.RingTheory.FiniteFreeComplexTowerInverseLimit
 import Mathlib.Algebra.Homology.DerivedCategory.KProjective
-import Mathlib.RingTheory.TensorProduct.Basic
-import Mathlib.CategoryTheory.Triangulated.Pretriangulated
-import Mathlib.CategoryTheory.Triangulated.Triangulated
-import Sheaf.Algebra.Homology.SurjectiveModuleComplexTowerLimit
-import Sheaf.RingTheory.NilpotentMarkedFreeComplexLift
-import WeilConjectures.CategoryTheory.Triangulated.DerivedLimit
-import Sheaf.Algebra.Homology.DerivedChangeOfRingsIndependentCoefficients
+import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
+import Mathlib.Algebra.Category.ModuleCat.Projective
+import Mathlib.CategoryTheory.Adjunction.Additive
 
 /-!
 # Pseudo-coherent reconstruction over a tower of nilpotent quotients
@@ -32,12 +28,157 @@ lemma-Rlim-pseudo-coherent-gives-pseudo-coherent
 @[expose] public section
 
 set_option autoImplicit false
+set_option backward.defeqAttrib.useBackward true
+set_option backward.isDefEq.respectTransparency false
 
 universe u v w
 
 open CategoryTheory CategoryTheory.Limits
 
 namespace DerivedCategory
+
+private theorem localizedHom_bijective
+    {C : Type*} [Category C] [Abelian C] [HasDerivedCategory C]
+    (P H : CochainComplex C ℤ) [P.IsKProjective] :
+    Function.Bijective (fun f : (HomotopyCategory.quotient _ _).obj P ⟶
+        (HomotopyCategory.quotient _ _).obj H ↦
+      (quotientCompQhIso C).inv.app P ≫ Qh.map f ≫
+        (quotientCompQhIso C).hom.app H) := by
+  exact (Iso.homCongr ((quotientCompQhIso C).app P)
+    ((quotientCompQhIso C).app H)).bijective.comp
+      (CochainComplex.IsKProjective.Qh_map_bijective P _)
+
+private noncomputable def localizedHomEquiv
+    {C : Type*} [Category C] [Abelian C] [HasDerivedCategory C]
+    (P H : CochainComplex C ℤ) [P.IsKProjective] :
+    ((HomotopyCategory.quotient _ _).obj P ⟶ (HomotopyCategory.quotient _ _).obj H) ≃
+      (Q.obj P ⟶ Q.obj H) :=
+  Equiv.ofBijective _ (localizedHom_bijective P H)
+
+private theorem localizedHomEquiv_map
+    {C : Type*} [Category C] [Abelian C] [HasDerivedCategory C]
+    {P H : CochainComplex C ℤ} [P.IsKProjective] (f : P ⟶ H) :
+    localizedHomEquiv P H ((HomotopyCategory.quotient _ _).map f) = Q.map f := by
+  change (quotientCompQhIso C).inv.app P ≫ Qh.map _ ≫
+    (quotientCompQhIso C).hom.app H = _
+  rw [quotientCompQhIso_hom_naturality]
+  simp
+
+private theorem Q_map_surjective_of_projective
+    {C : Type*} [Category C] [Abelian C] [HasDerivedCategory C]
+    (P H : CochainComplex C ℤ) [P.IsKProjective] :
+    Function.Surjective (Q.map : (P ⟶ H) → (Q.obj P ⟶ Q.obj H)) := by
+  intro f
+  obtain ⟨g, hg⟩ := (localizedHomEquiv P H).surjective f
+  obtain ⟨g, rfl⟩ := (HomotopyCategory.quotient _ _).map_surjective g
+  exact ⟨g, (localizedHomEquiv_map g).symm.trans hg⟩
+
+private theorem localizedUnit_bijective
+    {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
+    [HasDerivedCategory C] [HasDerivedCategory D]
+    {F : C ⥤ D} {G : D ⥤ C} [F.Additive] [G.Additive]
+    [PreservesFiniteLimits G] [PreservesFiniteColimits G]
+    (a : F ⊣ G) (P : CochainComplex C ℤ) [P.IsKProjective]
+    [CochainComplex.IsKProjective ((F.mapHomologicalComplex (.up ℤ)).obj P)]
+    (H : CochainComplex D ℤ) :
+    Function.Bijective (fun f : Q.obj ((F.mapHomologicalComplex (.up ℤ)).obj P) ⟶
+        Q.obj H ↦
+      Q.map ((a.mapHomologicalComplex (.up ℤ)).unit.app P) ≫
+        G.mapDerivedCategoryFactors.inv.app ((F.mapHomologicalComplex (.up ℤ)).obj P) ≫
+        G.mapDerivedCategory.map f ≫ G.mapDerivedCategoryFactors.hom.app H) := by
+  let FP := (F.mapHomologicalComplex (.up ℤ)).obj P
+  let GH := (G.mapHomologicalComplex (.up ℤ)).obj H
+  let e := (localizedHomEquiv FP H).symm.trans
+    (((a.mapHomotopyCategory (.up ℤ)).homEquiv
+      ((HomotopyCategory.quotient _ _).obj P)
+      ((HomotopyCategory.quotient _ _).obj H)).trans (localizedHomEquiv P GH))
+  have he (f : FP ⟶ H) : e (Q.map f) =
+      Q.map ((a.mapHomologicalComplex (.up ℤ)).homEquiv P H f) := by
+    rw [← localizedHomEquiv_map f, Equiv.trans_apply, Equiv.trans_apply,
+      Equiv.symm_apply_apply]
+    change localizedHomEquiv P GH
+      ((a.mapHomotopyCategory (.up ℤ)).homEquiv _ _
+        ((HomotopyCategory.quotient _ _).map f)) = _
+    rw [Adjunction.homEquiv_unit,
+      Adjunction.mapHomotopyCategory_unit_app_quotient,
+      Functor.mapHomotopyCategory_map, ← Functor.map_comp]
+    exact localizedHomEquiv_map _
+  have hfun : (fun f : Q.obj FP ⟶ Q.obj H ↦
+      Q.map ((a.mapHomologicalComplex (.up ℤ)).unit.app P) ≫
+        G.mapDerivedCategoryFactors.inv.app FP ≫
+        G.mapDerivedCategory.map f ≫ G.mapDerivedCategoryFactors.hom.app H) =
+      (e : (Q.obj FP ⟶ Q.obj H) → (Q.obj P ⟶ Q.obj GH)) := by
+    funext f
+    obtain ⟨g, rfl⟩ := Q_map_surjective_of_projective FP H f
+    rw [he]
+    rw [G.mapDerivedCategoryFactors_hom_naturality]
+    simp only [Iso.inv_hom_id_app_assoc, ← Q.map_comp]
+    rfl
+  exact hfun.symm ▸ e.bijective
+
+private theorem isIso_of_coyoneda_Q_bijective
+    {C D : Type*} [Category C] [Abelian C] [HasDerivedCategory C] [Category D]
+    (F : CochainComplex C ℤ ⥤ D) [F.EssSurj]
+    {X Y : D} (f : X ⟶ Y)
+    (h : ∀ H, Function.Bijective (fun g : Y ⟶ F.obj H ↦ f ≫ g)) : IsIso f := by
+  apply isIso_of_coyoneda_map_bijective
+  intro T
+  let H := F.objPreimage T
+  let e := F.objObjPreimageIso T
+  let eY := Iso.homCongr (Iso.refl Y) e
+  let eX := Iso.homCongr (Iso.refl X) e
+  have hcomp := eX.bijective.comp ((h H).comp eY.symm.bijective)
+  simpa [eX, eY, Iso.homCongr, Function.comp_def, Category.assoc] using hcomp
+
+private theorem exists_normalized_projective_baseChange
+    {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
+    [HasDerivedCategory C] [HasDerivedCategory D]
+    {F : C ⥤ D} {G : D ⥤ C} [F.Additive] [G.Additive]
+    [PreservesFiniteLimits G] [PreservesFiniteColimits G]
+    (a : F ⊣ G)
+    (L : DerivedCategory C ⥤ DerivedCategory D) (adj : L ⊣ G.mapDerivedCategory)
+    (P : CochainComplex C ℤ) [P.IsKProjective]
+    [CochainComplex.IsKProjective ((F.mapHomologicalComplex (.up ℤ)).obj P)] :
+    ∃ γ : L.obj (Q.obj P) ≅ Q.obj ((F.mapHomologicalComplex (.up ℤ)).obj P),
+      adj.unit.app (Q.obj P) ≫ G.mapDerivedCategory.map γ.hom ≫
+        G.mapDerivedCategoryFactors.hom.app ((F.mapHomologicalComplex (.up ℤ)).obj P) =
+      Q.map ((a.mapHomologicalComplex (.up ℤ)).unit.app P) := by
+  let FP := (F.mapHomologicalComplex (.up ℤ)).obj P
+  let η := (a.mapHomologicalComplex (.up ℤ)).unit.app P
+  let f := (adj.homEquiv (Q.obj P) (Q.obj FP)).symm
+    (Q.map η ≫ G.mapDerivedCategoryFactors.inv.app FP)
+  have hf : adj.homEquiv _ _ f =
+      Q.map η ≫ G.mapDerivedCategoryFactors.inv.app FP := Equiv.apply_symm_apply _ _
+  have hfiso : IsIso f := by
+    apply isIso_of_coyoneda_Q_bijective Q
+    intro H
+    let e := (adj.homEquiv (Q.obj P) (Q.obj H)).trans
+      (Iso.homCongr (Iso.refl _) (G.mapDerivedCategoryFactors.app H))
+    have hh := localizedUnit_bijective a P H
+    have heq : (fun g : Q.obj FP ⟶ Q.obj H ↦ e (f ≫ g)) =
+        (fun g ↦ Q.map η ≫ G.mapDerivedCategoryFactors.inv.app FP ≫
+          G.mapDerivedCategory.map g ≫ G.mapDerivedCategoryFactors.hom.app H) := by
+      funext g
+      simp only [e, Equiv.trans_apply, Iso.homCongr_apply, Iso.refl_inv,
+        Category.id_comp]
+      change adj.homEquiv _ _ (f ≫ g) ≫ _ = _
+      rw [adj.homEquiv_naturality_right, hf]
+      simp only [Category.assoc]
+      rfl
+    have hh' : Function.Bijective (e ∘ (fun g : Q.obj FP ⟶ Q.obj H ↦ f ≫ g)) := by
+      change Function.Bijective (fun g ↦ e (f ≫ g))
+      rw [heq]
+      exact hh
+    exact (Function.Bijective.of_comp_iff' e.bijective _).mp hh'
+  refine ⟨asIso f, ?_⟩
+  change adj.unit.app (Q.obj P) ≫ G.mapDerivedCategory.map f ≫ _ = _
+  rw [← Category.assoc]
+  change adj.homEquiv _ _ f ≫ _ = _
+  rw [hf]
+  change (Q.map η ≫ G.mapDerivedCategoryFactors.inv.app FP) ≫
+    G.mapDerivedCategoryFactors.hom.app FP = Q.map η
+  simp only [Category.assoc, Iso.inv_hom_id_app]
+  exact Category.comp_id _
 
 /-- Reconstruction of a compatible pseudo-coherent tower, including its finite-free models.
 The index `0` denotes the paper's index `1`. The ring-limit universal property in `hlim`
@@ -50,90 +191,17 @@ so the last equality identifies the actual projection-induced comparison maps.
 Source: Stacks Project, More on Algebra, Tag 0CQF
 (blueprint: lem-weil-pbc-pseudocoherent-inverse-ring-reconstruction).
 
-Proof, following the node's six steps:
-
-1. Induct on $n$ to show that every $E_n$ is pseudo-coherent. The base $n=1$ is assumed. At the
-induction step apply nilpotent invariance to $A_{n+1}\twoheadrightarrow A_n$ and $E_{n+1}$: its
-derived reduction is isomorphic to $E_n$ by the specified transition. Thus the pseudo-coherence of
-$E_n$ implies that of $E_{n+1}$. Choose a bounded-above finite-free representative $P_1^\bullet$
-of $E_1$, an isomorphism $\beta_1:Q(P_1^\bullet)\xrightarrow{\sim}E_1$, and an integer $b$ above
-which it is zero.
-
-2. Suppose $P_n$, $\beta_n$, and the transitions through level $n$ have been chosen, with
-$P_n^i=0$ for $i>b$. Set $I=\ker(A_{n+1}\to A_n)$. If $I^N=0$, each $1+x$ with $x\in I$ has
-inverse $\sum_{j=0}^{N-1}(-x)^j$. Apply marked free-complex lifting to $R=A_{n+1}$, $R/I=A_n$,
-$K=E_{n+1}$, $F=P_n$, and the specified isomorphism $\alpha=\beta_n^{-1}\circ\overline
-t_n:E_{n+1}\otimes^L_{A_{n+1}}A_n\xrightarrow{\sim}Q(P_n)$, where $\overline t_n$ is induced by
-$t_n$. This gives $P_{n+1}$ zero above the same $b$, $\beta_{n+1}$, and
-$\theta_n:P_{n+1}\otimes_{A_{n+1}}A_n\xrightarrow{\sim}P_n$, with
-$Q(\theta_n)=\beta_n^{-1}\overline t_n(\beta_{n+1}\otimes^L A_n)$. Define $u_n:P_{n+1}\to P_n$ as
-the quotient map followed by $\theta_n$. It is a chain map, degreewise surjective, and the marking
-equation says that it represents the given transition $t_n$ under the $\beta$'s. Repeating this
-induction constructs the entire strictly compatible complex tower.
-
-3. Construct compatible finite bases separately in each degree $i$. Choose a basis of $P_1^i$ of
-size $r_i$. Given the basis at level $n$, lift its vectors through the surjection $u_n^i$ to
-$P_{n+1}^i$. They form a basis: put $R=A_{n+1}$ and let $f:R^{r_i}\to P_{n+1}^i$ send the standard
-vectors to these lifts. Its reduction modulo $I$ is an isomorphism. Since $P_{n+1}^i$ is finite
-free, lift the matrix of the inverse reduced map to an $R$-linear $g:P_{n+1}^i\to R^{r_i}$. Both
-$gf-1$ and $fg-1$ have matrices in $I$; their $N$th powers vanish, so geometric sums invert $gf$
-and $fg$. Consequently $f$ has a left inverse $(gf)^{-1}g$ and a right inverse $g(fg)^{-1}$; these
-coincide, and $f$ is an isomorphism. This also covers $r_i=0$. The bases so constructed make
-$u_n^i$ the coordinatewise ring reduction $A_{n+1}^{r_i}\to A_n^{r_i}$.
-
-4. Let $P^i=\varprojlim_n P_n^i$, with differential $(x_n)\mapsto(d_nx_n)$; compatibility follows
-from $u_nd_{n+1}=d_nu_n$, and $d^2=0$ holds coordinatewise. In the compatible bases of step 3, a
-compatible vector tuple is exactly $r_i$ compatible scalar tuples, so $P^i\cong(\varprojlim_n
-A_n)^{r_i}=A^{r_i}$. All $P^i$ vanish for $i>b$. Projection is coordinatewise $A^{r_i}\to
-A_n^{r_i}$. Therefore $P^i\otimes_A A_n\to P_n^i$, $(x_m)_m\otimes a\mapsto ax_n$, is an
-isomorphism. Its inverse in these bases sends the $j$th standard vector to the compatible $j$th
-basis tuple tensor $1$. The projections commute with differentials, so these degreewise maps
-assemble into chain isomorphisms $P^\bullet\otimes_A A_n\xrightarrow{\sim}P_n^\bullet$.
-
-5. Restrict all $P_n$ to $A$. The maps $u_n$ are degreewise surjective, so the surjective module-
-complex tower lemma identifies $Q(P)$, with its literal projections, as a derived limit of
-$(Q(P_n),Q(u_n))$ in $D(A)$. The compatible isomorphisms $\beta_n$ identify this system with
-$(E_n,t_n)$; the induced isomorphism of products is obtained componentwise, with inverse the
-product of the $\beta_n^{-1}$. It conjugates $1-s$ to $1-s$ because
-$\beta_nQ(u_n)=t_n\beta_{n+1}$. Write $B_P=\prod_nQ(P_n)$, $B_E=\prod_nE_n$,
-$v=\prod_n\beta_n:B_P\xrightarrow{\sim}B_E$, and let $j:Q(P)\to B_P$ and $\delta_P:B_P\to Q(P)[1]$
-be the arrows of its Roos triangle. The triangle
-$Q(P)\xrightarrow{vj}B_E\xrightarrow{1-s}B_E\xrightarrow{\delta_Pv^{-1}}Q(P)[1]$ is isomorphic to
-that triangle by $(1,v,v)$: the first square is $vj=vj$, the second is $v(1-s)=(1-s)v$, and the
-last is $(\delta_Pv^{-1})v=\delta_P$. Thus TR1 makes it distinguished, with projections
-$\beta_nQ(P\to P_n)$. Compare with the chosen Roos triangle defining $E$: rotate both triangles so
-$1-s$ is their first arrow, use TR3 with identities on the two product objects, and rotate back.
-The triangle isomorphism lemma makes the resulting map $Q(P)\to E$ an isomorphism. The first
-square says it respects every projection. No canonical choice of this isomorphism is asserted.
-
-6. A finite free module is flat: its tensor functor is a finite direct sum of the identity
-functor, hence preserves exact sequences componentwise. Thus the bounded-above complexes $P$ over
-$A$ and $P_n$ over $A_n$ are K-flat by the bounded-flat K-flat criterion. On the category with one
-object and only its identity morphism, a presheaf is its value at that object and the identity-
-cover sheaf condition imposes no restriction. Ring sheaves, module sheaves, their complexes and
-tensor products are therefore ordinary rings, modules, complexes and tensor products. Derived
-change of rings on this site computes $Q(P)\otimes_A^L A_n$ by the ordinary tensor complex
-$P\otimes_A A_n$. Under the projection-respecting isomorphism in step 5, the projection-induced
-comparison is represented by the chain map $P\otimes_A A_n\to P_n$, $x\otimes a\mapsto
-a\,\mathrm{pr}_n(x)$, followed by $\beta_n$. To justify that this is the specified derived map,
-use the scalar-extension Hom bijection degreewise: $f:P\to P_n$ corresponds to $\widetilde
-f:P\otimes_A A_n\to P_n$, $\widetilde f(x\otimes a)=af(x)$. The chain-map equations correspond
-under this bijection by evaluating on $x\otimes1$, and a homotopy $h$ corresponds to $\widetilde
-h(x\otimes a)=ah(x)$, since $d\widetilde h+\widetilde h d$ is the transpose of $dh+hd$. Hence it
-is a bijection on homotopy classes. Every finite free module is projective: lift a map through a
-surjection by choosing a preimage for each basis vector. Both $P$ over $A$ and $P\otimes_A A_n$
-over $A_n$ are bounded above projective. The derived-map-representative lemma identifies both
-homotopy Hom sets with their derived Hom sets. We therefore obtain a bijection
-$\operatorname{Hom}_{D(A_n)}(Q(P\otimes_A
-A_n),Q(P_n))\cong\operatorname{Hom}_{D(A)}(Q(P),Q(P_n))$, computed by composition with $x\mapsto
-x\otimes1$. In particular the transpose of the projection is exactly the displayed chain map.
-Composing with the markings and the projection-respecting isomorphism of step 5 gives precisely
-the projection-induced derived comparison. This calculation also justifies the transition-map
-representation from the marking equation in step 2, with $A_{n+1}\to A_n$ in place of $A\to A_n$.
-Step 4 proves this chain map is an isomorphism, so the derived comparison is an isomorphism.
-Finally $P$ is bounded above finite free by step 4 and represents $E$ by step 5, which proves
-pseudo-coherence by its definition and all the more precise clauses.
--/
+Proof: First construct the marked finite-free tower by the single-step nilpotent lift and
+explicit dependent recursion, retaining a common upper cutoff. Construct its finite-free
+termwise limit with the literal tuple projections. The surjective complex-tower Roos
+triangle and the normalized markings identify its localization with E, respecting all
+projections. For the final base-change comparison, use bounded-above projectivity directly:
+localization is bijective on homotopy Hom sets out of these complexes. The ordinary
+adjunction and these bijections show that the localized chain unit represents the derived
+adjunction. Its transpose is therefore an isomorphism, normalized by that unit. Naturality
+and the ordinary adjunction equation for the reduction chain isomorphisms identify their
+images with the actual projection-induced comparisons. These are composites of
+isomorphisms. The constructed model and its marking give pseudo-coherence by definition. -/
 theorem isPseudoCoherent_inverse_ring_reconstruction
     (R : ℕ → Type u) [∀ n, CommRing (R n)]
     (φ : ∀ n, R (n + 1) →+* R n)
@@ -220,7 +288,99 @@ theorem isPseudoCoherent_inverse_ring_reconstruction
           (((ModuleCat.extendScalars (q n)).mapHomologicalComplex (.up ℤ)).obj P) =
         Q.map (η n)) ∧
       (∀ n, (γ n).hom ≫ Q.map (θ n).hom ≫ (βₙ n).hom =
-        (M n).map β.hom ≫ ((adjq n).homEquiv E (Eₙ n)).symm (pE ≫ Pi.π _ n)) := by
-  sorry
+        (M n).map β.hom ≫ ((adjq n).homEquiv E (Eₙ n)).symm (pE ≫ Pi.π _ n))  := by
+  classical
+  obtain ⟨Pₙ, b, βₙ, uₙ, θₙ, hbound, hterms, hsurju, hθₙ, hu⟩ :=
+    exists_nilpotent_finiteFree_complexTower R φ hsurj hnil L adjφ Eₙ t hred hpc
+  obtain ⟨P, p, θ, hboundP, htermsP, hp, hP, hθ⟩ :=
+    exists_finiteFree_complexTower_inverseLimit R φ hsurj hnil A q hq hlim
+      Pₙ b uₙ θₙ hbound hterms hsurju hθₙ
+  obtain ⟨β, hβ⟩ := exists_complexTower_limit_projection_comparison
+    R φ A q hq hlim χ hχ Eₙ t E pE δ hE Pₙ βₙ uₙ hsurju hu P p hp hP
+  have : P.IsStrictlyLE b := hboundP
+  have (i : ℤ) : Module.Free A (P.X i) := (htermsP i).1
+  have (i : ℤ) : Projective (P.X i) := inferInstance
+  have : P.IsKProjective := CochainComplex.isKProjective_of_projective P b
+  have (n : ℕ) : (ModuleCat.extendScalars (q n)).Additive :=
+    (ModuleCat.extendRestrictScalarsAdj (q n)).left_adjoint_additive
+  let η := fun n ↦ ((ModuleCat.extendRestrictScalarsAdj (q n)).mapHomologicalComplex
+    (.up ℤ)).unit.app P
+  have hγ (n : ℕ) : ∃ γ : (M n).obj (Q.obj P) ≅
+      Q.obj (((ModuleCat.extendScalars (q n)).mapHomologicalComplex (.up ℤ)).obj P),
+      (adjq n).unit.app (Q.obj P) ≫
+        (ModuleCat.restrictScalars (q n)).mapDerivedCategory.map γ.hom ≫
+        (ModuleCat.restrictScalars (q n)).mapDerivedCategoryFactors.hom.app
+          (((ModuleCat.extendScalars (q n)).mapHomologicalComplex (.up ℤ)).obj P) =
+        Q.map (η n) := by
+    have : (Pₙ n).IsStrictlyLE b := hbound n
+    have (i : ℤ) : Module.Free (R n) ((Pₙ n).X i) := (hterms n i).1
+    have (i : ℤ) : Projective ((Pₙ n).X i) := inferInstance
+    have : (Pₙ n).IsKProjective := CochainComplex.isKProjective_of_projective (Pₙ n) b
+    have := CochainComplex.isKProjective_of_iso (θ n).symm
+    exact exists_normalized_projective_baseChange
+      (ModuleCat.extendRestrictScalarsAdj (q n)) (M n) (adjq n) P
+  choose γ hγ using hγ
+  have hcomp (n : ℕ) : (γ n).hom ≫ Q.map (θ n).hom ≫ (βₙ n).hom =
+      (M n).map β.hom ≫ ((adjq n).homEquiv E (Eₙ n)).symm (pE ≫ Pi.π _ n) := by
+    apply ((adjq n).homEquiv _ _).injective
+    rw [(adjq n).homEquiv_naturality_left, Equiv.apply_symm_apply]
+    rw [(adjq n).homEquiv_unit]
+    simp only [Functor.map_comp]
+    have hγ' : (adjq n).unit.app (Q.obj P) ≫
+        (ModuleCat.restrictScalars (q n)).mapDerivedCategory.map (γ n).hom =
+        Q.map (η n) ≫
+          (ModuleCat.restrictScalars (q n)).mapDerivedCategoryFactors.inv.app
+            (((ModuleCat.extendScalars (q n)).mapHomologicalComplex (.up ℤ)).obj P) := by
+      apply ((ModuleCat.restrictScalars (q n)).mapDerivedCategoryFactors.app _).eq_comp_inv.mpr
+      exact (Category.assoc _ _ _).trans (hγ n)
+    have hηθ : η n ≫
+        ((ModuleCat.restrictScalars (q n)).mapHomologicalComplex (.up ℤ)).map
+          (θ n).hom = p n := by
+      apply HomologicalComplex.Hom.ext
+      funext i
+      exact hθ n i
+    have hn := (ModuleCat.restrictScalars (q n)).mapDerivedCategoryFactors.inv.naturality
+      (θ n).hom
+    dsimp only [Functor.comp_map] at hn
+    calc
+      _ = ((adjq n).unit.app (Q.obj P) ≫
+          (ModuleCat.restrictScalars (q n)).mapDerivedCategory.map (γ n).hom) ≫
+          (ModuleCat.restrictScalars (q n)).mapDerivedCategory.map (Q.map (θ n).hom) ≫
+          (ModuleCat.restrictScalars (q n)).mapDerivedCategory.map (βₙ n).hom := by
+        simp only [Category.assoc]
+      _ = Q.map (η n) ≫
+          ((ModuleCat.restrictScalars (q n)).mapDerivedCategoryFactors.inv.app _ ≫
+            (ModuleCat.restrictScalars (q n)).mapDerivedCategory.map (Q.map (θ n).hom)) ≫
+          (ModuleCat.restrictScalars (q n)).mapDerivedCategory.map (βₙ n).hom := by
+        rw [hγ']
+        simp only [Category.assoc]
+      _ = Q.map (η n) ≫
+          (Q.map (((ModuleCat.restrictScalars (q n)).mapHomologicalComplex (.up ℤ)).map
+            (θ n).hom) ≫
+            (ModuleCat.restrictScalars (q n)).mapDerivedCategoryFactors.inv.app (Pₙ n)) ≫
+          (ModuleCat.restrictScalars (q n)).mapDerivedCategory.map (βₙ n).hom := by
+        rw [hn]
+      _ = Q.map (p n) ≫
+          (ModuleCat.restrictScalars (q n)).mapDerivedCategoryFactors.inv.app (Pₙ n) ≫
+          (ModuleCat.restrictScalars (q n)).mapDerivedCategory.map (βₙ n).hom := by
+        have hQP : Q.map (η n) ≫
+            Q.map (((ModuleCat.restrictScalars (q n)).mapHomologicalComplex (.up ℤ)).map
+              (θ n).hom) = Q.map (p n) := by
+          rw [← Functor.map_comp]
+          exact congrArg Q.map hηθ
+        simp only [← Category.assoc]
+        rw [hQP]
+      _ = _ := hβ n
+  have hiso (n : ℕ) : IsIso (((adjq n).homEquiv E (Eₙ n)).symm
+      (pE ≫ Pi.π _ n)) := by
+    have : IsIso ((M n).map β.hom ≫ ((adjq n).homEquiv E (Eₙ n)).symm
+        (pE ≫ Pi.π _ n)) := by
+      rw [← hcomp]
+      infer_instance
+    exact (isIso_comp_left_iff ((M n).map β.hom) _).mp this
+  refine ⟨⟨P, b, hboundP, htermsP, ⟨β⟩⟩, hiso, Pₙ, b, βₙ, uₙ, θₙ, P, β, p, θ, η, γ,
+    hbound, hterms, hsurju, hθₙ, hu, hboundP, htermsP, hp, hP, hβ, hθ, ?_, hγ, hcomp⟩
+  intro n i
+  rfl
 
 end DerivedCategory

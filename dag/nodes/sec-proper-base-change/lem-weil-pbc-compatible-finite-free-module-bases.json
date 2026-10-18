@@ -1,0 +1,121 @@
+{
+ "id": "lem-weil-pbc-compatible-finite-free-module-bases",
+ "kind": "lemma",
+ "title": "Compatible finite coordinates for a nilpotent module tower",
+ "statement": "Let R_n be commutative rings with surjective transition maps φ_n and nilpotent kernels. Let N_n be finite-free R_n-modules with surjective φ_n-semilinear maps u_n and isomorphisms θ_n:R_n tensor_(R_(n+1)) N_(n+1)≅N_n whose ordinary adjoints equal u_n. There exist a natural r and R_n-linear coordinate equivalences e_n:N_n≃R_n^r for all n such that e_n(u_n(x))_j=φ_n(e_(n+1)(x)_j). No inverse-limit ring or module is assumed.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0CQF, compatible-basis argument in the proof"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Choose the finite arbitrary basis of N_0, whose index type is finite also for the zero ring, and reindex it using Fin(card I). Its coordinate equivalence gives e_0. For any chosen e_n apply the single-step nilpotent finite-basis lift with θ_n, its adjunction equation and the surjection u_n. Dependent recursion chooses e_(n+1) from that result. Its successor equation is exactly the required compatibility in every coordinate.",
+   "uses": [
+    "lem-weil-pbc-nilpotent-finite-free-basis-lift"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-nilpotent-finite-free-basis-lift"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0CQF, compatible-basis argument in the proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A compatible tower of finite free complexes over nilpotent quotient rings admits marked bounded above finite free models and a finite free inverse limit",
+   "results": "Eight hits, including HomologicalComplex.instHasLimit, instHasLimitsOfShape and AdicCompletion. These provide general limits but do not assert finite freeness, compatible markings, or the projection-compatible derived comparison.",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatible bounded above finite free complexes reconstruct pseudo coherent objects over an inverse limit of nilpotent quotient rings",
+   "results": "Eight hits on condensed finite-free objects and local cohomology; no reconstruction or marked tower theorem.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "pseudo.?coherent|inverse.*limit.*free; compatible.*finite.free|projection.*Roos|marked.*tower",
+   "results": "Mathlib msearch grep returned zero hits. Source and Sheaf searches found the assigned theorem, normalized algebra tower, nilpotent marked lifting and surjective module-complex tower limit; their interfaces do not state these specific intermediate conclusions. Blueprint search finite free complex tower returned zero matches.",
+   "date": "2026-10-18",
+   "verdict": "existing general tools used; these three proper subarguments are not separately declared"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite free module with a prescribed basis modulo a nilpotent ideal admits a lifting of that basis",
+   "results": "Eight hits: formally smooth ring lifts, local-ring span of a lifted residue-field basis, Nakayama spanning-set lifts, adic lifts and idempotent lifting. None gives a prescribed finite basis lift for arbitrary commutative rings and nilpotent kernel.",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "nilpotent/jacobson with basis/free in Mathlib/RingTheory and Mathlib/LinearAlgebra; source MatrixComplexTower and MinimalMatrixComplex",
+   "results": "No general basis lift found. The source invertible-matrix lift assumes local rings. Module.Free.ChooseBasisIndex.fintype supplies the finite initial basis and includes zero rings; it is used for the tower induction.",
+   "date": "2026-10-18",
+   "verdict": "initial basis tools used; no exact lift or compatible-coordinate theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.PseudoCoherentInverseRingReconstruction",
+  "date": "2026-10-18",
+  "group": "B4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Compatible finite coordinates for a nilpotent module tower; degreewise algebra in the reconstruction argument.",
+   "via": [
+    "lem-weil-pbc-pseudocoherent-inverse-ring-reconstruction",
+    "lem-weil-pbc-rlim-perfect-complete",
+    "lem-weil-pbc-residue-lisse-perfect-lift",
+    "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "lem-weil-pbc-condensed-e-realization",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.CompatibleFiniteFreeModuleBases",
+  "file": "lean/Sheaf/RingTheory/CompatibleFiniteFreeModuleBases.lean",
+  "declaration": "ModuleCat.exists_compatible_finiteFree_module_coordinates",
+  "statement": "theorem exists_compatible_finiteFree_module_coordinates\n    (R : ℕ → Type u) [∀ n, CommRing (R n)]\n    (φ : ∀ n, R (n + 1) →+* R n)\n    (hsurj : ∀ n, Function.Surjective (φ n))\n    (hnil : ∀ n, IsNilpotent (RingHom.ker (φ n)))\n    (N : ∀ n, ModuleCat.{max u v} (R n))\n    (uₙ : ∀ n, N (n + 1) ⟶ (restrictScalars (φ n)).obj (N n))\n    (θₙ : ∀ n, (extendScalars (φ n)).obj (N (n + 1)) ≅ N n)\n    (hterms : ∀ n, Module.Free (R n) (N n) ∧ Module.Finite (R n) (N n))\n    (hsurju : ∀ n, Function.Surjective (uₙ n))\n    (hθₙ : ∀ n, (extendRestrictScalarsAdj (φ n)).homEquiv\n      (N (n + 1)) (N n) (θₙ n).hom = uₙ n) :\n    ∃ (r : ℕ) (e : ∀ n, N n ≃ₗ[R n] (Fin r → R n)),\n      ∀ n (x : N (n + 1)) j, e n (uₙ n x) j = φ n (e (n + 1) x j)",
+  "branch": "sheaf-dag",
+  "by": "B4",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261018T071136-L-1664003",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261018T071136-L-1664003",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,112 @@
+{
+ "id": "lem-weil-pbc-nilpotent-finite-free-complex-tower",
+ "kind": "lemma",
+ "title": "Compatible marked finite-free models for a nilpotent quotient tower",
+ "statement": "For a sequence of surjective maps of commutative rings with nilpotent kernels, let E_n be derived objects with transitions whose adjunction transposes are isomorphisms. If E_0 is pseudo-coherent [def-pc-ring-pseudo-coherent-complex], there exist bounded-above finite-free complex representatives P_n, markings beta_n, a common upper cutoff, degreewise surjective transitions u_n representing the given derived transitions, and ordinary scalar-extension isomorphisms theta_n whose adjoints degreewise equal u_n. The representing equality includes the canonical exact-derived-restriction factorization. The derived category, where present, is [def-weil-abstract-derived-category]. Pseudo-coherence means [def-pc-ring-pseudo-coherent-complex].",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0CQF, first induction; Tags 0H76, 0BCB and 0BCA for marked lifting"
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-pc-ring-pseudo-coherent-complex"
+ ],
+ "proof": [
+  {
+   "text": "Choose a bounded-above finite-free marked model P_0 from pseudo-coherence. Fix its upper cutoff b. At level n keep the model P_n and its marking as one dependent pair. Apply [lem-weil-pbc-nilpotent-marked-free-complex-step] to that pair and t_n to obtain the next model, its marking, the surjective transition and its scalar-extension isomorphism, all with cutoff b. Classical dependent recursion on the natural numbers iterates this one-step construction. Projecting the resulting pairs and witnesses gives exactly every asserted compatibility, bound and marking equation.",
+   "uses": [
+    "def-pc-ring-pseudo-coherent-complex",
+    "lem-weil-pbc-nilpotent-marked-free-complex-step"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pc-ring-pseudo-coherent-complex",
+  "lem-weil-pbc-nilpotent-marked-free-complex-step"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0CQF, first induction; Tags 0H76, 0BCB and 0BCA for marked lifting"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A compatible tower of finite free complexes over nilpotent quotient rings admits marked bounded above finite free models and a finite free inverse limit",
+   "results": "Eight hits, including HomologicalComplex.instHasLimit, instHasLimitsOfShape and AdicCompletion. These provide general limits but do not assert finite freeness, compatible markings, or the projection-compatible derived comparison.",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatible bounded above finite free complexes reconstruct pseudo coherent objects over an inverse limit of nilpotent quotient rings",
+   "results": "Eight hits on condensed finite-free objects and local cohomology; no reconstruction or marked tower theorem.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "pseudo.?coherent|inverse.*limit.*free; compatible.*finite.free|projection.*Roos|marked.*tower",
+   "results": "Mathlib msearch grep returned zero hits. Source and Sheaf searches found the assigned theorem, normalized algebra tower, nilpotent marked lifting and surjective module-complex tower limit; their interfaces do not state these specific intermediate conclusions. Blueprint search finite free complex tower returned zero matches.",
+   "date": "2026-10-18",
+   "verdict": "existing general tools used; these three proper subarguments are not separately declared"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.PseudoCoherentInverseRingReconstruction",
+  "date": "2026-10-18",
+  "group": "B4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Proof, first sentence: choose an integral lattice; the algebraic finite-level models underlying the integral lattice; weaker pseudo-coherent reconstruction used before the residue-field argument; reconstruction subargument: Compatible marked finite-free models for a nilpotent quotient tower",
+   "via": [
+    "lem-weil-pbc-pseudocoherent-inverse-ring-reconstruction",
+    "lem-weil-pbc-rlim-perfect-complete",
+    "lem-weil-pbc-residue-lisse-perfect-lift",
+    "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "lem-weil-pbc-condensed-e-realization",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.NilpotentFiniteFreeComplexTower",
+  "file": "lean/Sheaf/RingTheory/NilpotentFiniteFreeComplexTower.lean",
+  "declaration": "DerivedCategory.exists_nilpotent_finiteFree_complexTower",
+  "statement": "theorem exists_nilpotent_finiteFree_complexTower\n    (R : ℕ → Type u) [∀ n, CommRing (R n)]\n    (φ : ∀ n, R (n + 1) →+* R n)\n    (hsurj : ∀ n, Function.Surjective (φ n))\n    (hnil : ∀ n, IsNilpotent (RingHom.ker (φ n)))\n    [∀ n, HasDerivedCategory.{w} (ModuleCat.{max u v} (R n))]\n    (L : ∀ n, DerivedCategory (ModuleCat.{max u v} (R (n + 1))) ⥤\n      DerivedCategory (ModuleCat.{max u v} (R n)))\n    (adjφ : ∀ n, L n ⊣ (ModuleCat.restrictScalars (φ n)).mapDerivedCategory)\n    (Eₙ : ∀ n, DerivedCategory (ModuleCat.{max u v} (R n)))\n    (t : ∀ n, Eₙ (n + 1) ⟶\n      (ModuleCat.restrictScalars (φ n)).mapDerivedCategory.obj (Eₙ n))\n    (hred : ∀ n, IsIso (((adjφ n).homEquiv (Eₙ (n + 1)) (Eₙ n)).symm (t n)))\n    (hpc : IsPseudoCoherent (Eₙ 0))\n :\n    ∃ (Pₙ : ∀ n, CochainComplex (ModuleCat.{max u v} (R n)) ℤ)\n      (b : ℤ) (βₙ : ∀ n, Q.obj (Pₙ n) ≅ Eₙ n)\n      (uₙ : ∀ n, Pₙ (n + 1) ⟶\n        ((ModuleCat.restrictScalars (φ n)).mapHomologicalComplex (.up ℤ)).obj (Pₙ n))\n      (θₙ : ∀ n, ((ModuleCat.extendScalars (φ n)).mapHomologicalComplex (.up ℤ)).obj\n        (Pₙ (n + 1)) ≅ Pₙ n),\n      (∀ n, (Pₙ n).IsStrictlyLE b) ∧\n      (∀ n i, Module.Free (R n) ((Pₙ n).X i) ∧ Module.Finite (R n) ((Pₙ n).X i)) ∧\n      (∀ n i, Function.Surjective ((uₙ n).f i)) ∧\n      (∀ n i, ((ModuleCat.extendRestrictScalarsAdj (φ n)).homEquiv\n        ((Pₙ (n + 1)).X i) ((Pₙ n).X i) ((θₙ n).hom.f i)) = (uₙ n).f i) ∧\n      (∀ n, Q.map (uₙ n) = (βₙ (n + 1)).hom ≫ t n ≫\n        (ModuleCat.restrictScalars (φ n)).mapDerivedCategory.map (βₙ n).inv ≫\n        (ModuleCat.restrictScalars (φ n)).mapDerivedCategoryFactors.hom.app (Pₙ n))",
+  "branch": "sheaf-dag",
+  "by": "B4",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261018T071136-L-1664003",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261018T071136-L-1664003",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
