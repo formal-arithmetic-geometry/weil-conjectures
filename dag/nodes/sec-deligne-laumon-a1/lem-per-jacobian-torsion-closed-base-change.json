@@ -1,0 +1,83 @@
+{
+ "id": "lem-per-jacobian-torsion-closed-base-change",
+ "kind": "statement",
+ "title": "Closed base change preserves completed Jacobian torsion",
+ "statement": "Let $A$ be a commutative Noetherian ring [def-weil-pbc-noetherian-ring], $I\\subseteq A$ an ideal, and $P=\\widehat{A[x_1,\\ldots,x_r]}_I$ for $r\\geq0$ [def-weil-pbc-mv-polynomial-ring, def-weil-pbc-adic-completion]. Let $J\\subseteq P$ be an ideal and put $E=P/J$, assumed $I$-adically complete. Suppose some $c\\geq0$ satisfies $I^c\\ker\\delta=I^c\\operatorname{coker}\\delta=0$, where $\\delta:J/J^2\\to E^{\\oplus r}$ sends $f\\bmod J^2$ to $(\\partial f/\\partial x_i\\bmod J)_i$, using continuous polynomial derivatives. Let $H\\subseteq A$ be any ideal, put $A_0=A/H$, and let $K\\subseteq A_0$ be an ideal with $V(IA_0)=V(K)$ in $\\operatorname{Spec}A_0$ [def-weil-affine-spectrum]. Then $E_0=E/HE$ is $K$-adically complete and admits an $A_0$-algebra presentation $E_0\\cong\\widehat{A_0[y_1,\\ldots,y_s]}_K/J_0$ for some finite $s\\geq0$ and ideal $J_0$. For this presentation there is an integer $d\\geq0$ such that $K^d$ annihilates both kernel and cokernel of the continuous conormal differential $J_0/J_0^2\\to E_0^{\\oplus s}$, $f\\mapsto(\\partial f/\\partial y_j)_j$.",
+ "source": {
+  "document": "literature/stacks-project/restricted.tex",
+  "place": "Tag 0GB2 (lemma-base-change-rig-etale-homomorphism), with Tag 0AJU (lemma-equivalent-with-artin), condition (3); remark-take-bar / equation-base-change-to-closed and Tags 0AJP (lemma-topologically-finite-type), 0AJQ (lemma-topologically-finite-type-Noetherian) identify the complete quotient presentation."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-adic-completion",
+  "def-weil-affine-spectrum"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Rig etale complete algebras are preserved by base change to a quotient Noetherian ring",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.Etale.baseChange\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"[Etale R A] : Etale B (B ⊗[R] A)\", \"doc\": \"If $ A $ is an étale algebra over a commutative ring $ R $, and $ B $ is a commutative $ R $-algebra, then the tensor product $ B \\\\otimes_R A $ is an étale algebra over $ B $.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \": IsStableUnderBaseChange @IsEtale\", \"doc\": \"The property of being an étale morphism is stable under base change. That is, if a morphism of schemes is étale, then any base change (pullback) of this morphism is also étale.\"}\n  {\"name\": \"Algebra.FormallyEtale.localization_base\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"[FormallyEtale R Sₘ] : FormallyEtale Rₘ Sₘ\", \"doc\": \"If $ S $ is a formally étale $ R $-algebra, then the localization of $ S $ at a multiplicative set $ m $ is a formally étale $ R_m $-algebra. This asserts that the property of formal étaleness is pres\"}\n  {\"name\": \"Algebra.FormallyEtale.instTensorProduct\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"[FormallyEtale R A] : FormallyEtale B (B ⊗[R] A)\", \"doc\": \"If $ A $ is a formally étale $ R $-algebra, then the tensor product $ B \\\\otimes_R A $ is a formally étale $ B $-algebra.\"}\n  {\"name\": \"RingHom.Etale.isStableUnderBaseChange\", \"module\": \"Mathlib.RingTheory.RingHom.Etale\", \"type\": \": IsStableUnderBaseChange Etale\", \"doc\": \"If a ring homomorphism $ f : R \\\\to S $ is étale, then for any $ R $-algebra $ R' $, the base change homomorphism $ R' \\\\to S \\\\otimes_R R' $ is also étale. This means that étale morphisms preserve their\"}\n  {\"name\": \"Algebra.FormallyEtale.of_restrictScalars\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"[FormallyUnramified R A] [FormallyEtale R B] : FormallyEtale A B\", \"doc\": \"If $ A $ is a formally unramified $ R $-algebra and $ B $ is a formally étale $ R $-algebra, then $ B $ is a formally étale $ A $-algebra.\"}\n  {\"name\": \"Algebra.Unramified.baseChange\", \"module\": \"Mathlib.RingTheory.Unramified.Basic\", \"type\": \"[Unramified R A] : Unramified B (B ⊗[R] A)\", \"doc\": \"If $ A $ is an unramified algebra over a commutative ring $ R $, then for any commutative ring $ B $ extending $ R $, the base change $ B \\\\otimes_R A $ is an unramified algebra over $ B $.\"}\n  {\"name\": \"Algebra.FormallyEtale.iff_of_equiv\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"(e : A ≃ₐ[R] B) : FormallyEtale R A ↔ FormallyEtale R B\", \"doc\": \"Given an algebra isomorphism $ e : A \\\\simeq_R B $, the algebra $ A $ is formally étale over $ R $ if and only if $ B $ is formally étale over $ R $.\"}\n",
+   "date": "2026-10-19",
+   "verdict": "no match: ordinary cotangent, etale-locus, descent and completion constructions do not state this completed-presentation theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "rig.etale|cotangent.*baseChange|baseChange.*cotangent",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/RingTheory/Kaehler/JacobiZariski.lean\", \"line\": \"31\", \"text\": \"- `Algebra.H1Cotangent.exact_δ_mapBaseChange`\"}\n  {\"file\": \"Mathlib/RingTheory/Kaehler/JacobiZariski.lean\", \"line\": \"38\", \"text\": \"`Algebra.Generators.H1Cotangent.exact_liftBaseChange_map_of_flat`. Globally, this extends\"}\n  {\"file\": \"Mathlib/RingTheory/Kaehler/JacobiZariski.lean\", \"line\": \"43\", \"text\": \"The exactness lemma is `Algebra.H1Cotangent.exact_liftBaseChange_map_of_flat`.\"}\n  {\"file\": \"Mathlib/RingTheory/Kaehler/JacobiZariski.lean\", \"line\": \"47\", \"text\": \"The flatness assumption in `Algebra.H1Cotangent.exact_liftBaseChange_map_of_flat`\"}\n  {\"file\": \"Mathlib/RingTheory/Kaehler/JacobiZariski.lean\", \"line\": \"99\", \"text\": \"      ((Extension.Cotangent.map (Q.toComp P).toExtensionHom).liftBaseChange T)\"}\n  {\"file\": \"Mathlib/RingTheory/Etale/Kaehler.lean\", \"line\": \"44\", \"text\": \"  obtain ⟨x, rfl⟩ := (Algebra.H1Cotangent.exact_δ_mapBaseChange R S T x).mp hx\"}\n  {\"file\": \"Mathlib/RingTheory/Etale/Kaehler.lean\", \"line\": \"108\", \"text\": \"  { __ := (CotangentSpace.map f).liftBaseChange T\"}\n  {\"file\": \"Mathlib/RingTheory/Etale/Kaehler.lean\", \"line\": \"134\", \"text\": \"      change (((CotangentSpace.map f).liftBaseChange T).restrictScalars Q.Ring ∘ₗ\"}\n  {\"file\": \"Mathlib/RingTheory/Etale/Kaehler.lean\", \"line\": \"196\", \"text\": \"  trans tensorCotangentInvFun f halg H (.mk ((f.mapKer halg).liftBaseChange Q.Ring (x ⊗ₜ y)))\"}\n  {\"file\": \"Mathlib/RingTheory/Etale/Kaehler.lean\", \"line\": \"198\", \"text\": \"  change ((TensorProduct.mk _ _ _ 1).restrictScalars _ ∘ₗ Cotangent.mk).liftBaseChange _\"}\n  {\"file\": \"Mathlib/RingTheory/Etale/Descent.lean\", \"line\": \"10\", \"text\": \"public import Mathlib.RingTheory.Extension.Cotangent.BaseChange\"}\n  {\"file\": \"Mathlib/RingTheory/Kaehler/Basic.lean\", \"line\": \"39\", \"text\": \"- `KaehlerDifferential.exact_kerCotangentToTensor_mapBaseChange`:\"}\n  {\"file\": \"Mathlib/RingTheory/Kaehler/Basic.lean\", \"line\": \"839\", \"text\": \"theorem KaehlerDifferential.exact_kerCotangentToTensor_mapBaseChange\"}\n  {\"file\": \"Mathlib/RingTheory/Kaehler/Basic.lean\", \"line\": \"841\", \"text\": \"    Function.Exact (kerCotangentToTensor R A B) (KaehlerDifferential.mapBaseChange R A B) :=\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/Local.lean\", \"line\": \"48\", \"text\": \"theorem FormallySmooth.iff_injective_cotangentComplexBaseChange_residueField\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/Local.lean\", \"line\": \"53\", \"text\": \"      Function.Injective (cotangentComplexBaseChange R S P (ResidueField S)) := by\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/Local.lean\", \"line\": \"56\", \"text\": \"  rw [P'.cotangentComplexBaseChange_eq_lTensor_cotangentComplex (ResidueField S)]\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/Local.lean\", \"line\": \"60\", \"text\": \"    P'.cotangentEquiv.baseChange (A := _)).injective_comp _).symm\"}\n  {\"file\": \"Mathlib/RingTheory/Smooth/Local.lean\", \"line\": \"71\", \"text\": \"theorem FormallySmooth.iff_injective_cotangentComplexBaseChange\"}\n  {\"file\": \"Mathlib/RingTheory/Extension/Cotangent/BaseChange.lean\", \"line\": \"8\", \"text\": \"public import Mathlib.RingTheory.Ideal.CotangentBaseChange\"}\n  {\"file\": \"Mathlib/RingTheory/Extension/Cotangent/BaseChange.lean\", \"line\": \"22\", \"text\": \"  isomorphism `T ⊗[R] P.CotangentSpace ≃ₗ[T] (P.baseChange).CotangentSpace`.\"}\n  {\"file\": \"Mathlib/RingTheory/Extension/Cotangent/BaseChange.lean\", \"line\": \"24\", \"text\": \"  isomorphism `T ⊗[R] P.Cotangent ≃ₗ[T] (P.baseChange).Cotangent`.\"}\n  {\"file\": \"Mathlib/RingTheory/Extension/Cotangent/BaseChange.lean\", \"line\": \"26\", \"text\": \"  isomorphism `T ⊗[R] P.H1Cotangent ≃ₗ[T] (P.baseChange).H1Cotangent`.\"}\n  {\"file\": \"Mathlib/RingTheory/Extension/Cotangent/BaseChange.lean\", \"line\": \"49\", \"text\": \"    T ⊗[R] P.CotangentSpace ≃ₗ[T] (P.baseChange (T := T)).CotangentSpace :=\"}\n  {\"file\": \"Mathlib/RingTheory/Unramified/LocalRing.lean\", \"line\": \"104\", \"text\": \"  obtain ⟨x, rfl⟩ := (KaehlerDifferential.exact_kerCotangentToTensor_mapBaseChange R S\"}\n",
+   "date": "2026-10-19",
+   "verdict": "no match: ordinary cotangent, etale-locus, descent and completion constructions do not state this completed-presentation theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.H1Cotangent, Ideal.Quotient",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'Ideal.Quotient'\n",
+   "date": "2026-10-19",
+   "verdict": "invalid query (unknown identifier Ideal.Quotient); replaced by the valid H1Cotangent/AdicCompletion query recorded below"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Kernel and cokernel of a completed conormal Jacobian differential annihilated by an ideal power remain so after quotienting the base ring",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Ideal.mem_toCotangent_ker\", \"module\": \"Mathlib/RingTheory/Ideal/Cotangent\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (I : Ideal R) {x : ↥I}, x ∈ I.toCotangent.ker ↔ ↑x ∈ I ^ 2\", \"doc\": \"An element $ x $ of the ideal $ I $ lies in the kernel of the canonical quotient map $ I \\\\to I/I^2 $ if and only if $ x $ belongs to the ideal $ I^2 $ generated by products of elements of $ I $.\"}\n  {\"name\": \"Ideal.to_quotient_square_comp_toCotangent\", \"module\": \"Mathlib/RingTheory/Ideal/Cotangent\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (I : Ideal R),\\n  I.cotangentToQuotientSquare ∘ₗ I.toCotangent = Submodule.mkQ (I ^ 2) ∘ₗ Submodule.subtype I\", \"doc\": \"The composition of the canonical linear map from an ideal $ I $ to its cotangent module $ I/I^2 $ followed by the inclusion of $ I/I^2 $ into the quotient ring $ R/I^2 $ is equal to the composition of\"}\n  {\"name\": \"Ideal.toCotangent_to_quotient_square\", \"module\": \"Mathlib/RingTheory/Ideal/Cotangent\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (I : Ideal R) (x : ↥I),\\n  I.cotangentToQuotientSquare (I.toCotangent x) = (Submodule.mkQ (I ^ 2)) ↑x\", \"doc\": \"For any element $x$ in an ideal $I$ of a commutative ring $R$, the composition of the canonical quotient map from $I$ to its cotangent module $I/I^2$ followed by the inclusion of $I/I^2$ into $R/I^2$ \"}\n  {\"name\": \"Ideal.map_toCotangent_ker\", \"module\": \"Mathlib/RingTheory/Ideal/Cotangent\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (I : Ideal R), Submodule.map (Submodule.subtype I) I.toCotangent.ker = I ^ 2\", \"doc\": \"The image of the kernel of the canonical quotient map $ I \\\\to I/I^2 $ (where $ I $ is an ideal in a commutative ring) under the inclusion $ I \\\\subseteq R $ is equal to the square of the ideal $ I $, i\"}\n  {\"name\": \"Ideal.cotangentToQuotientSquare\", \"module\": \"Mathlib/RingTheory/Ideal/Cotangent\", \"type\": \"{R : Type u} → [inst : CommRing R] → (I : Ideal R) → I.Cotangent →ₗ[R] R ⧸ I ^ 2\", \"doc\": \"The canonical $ R $-linear map from the cotangent module $ I/I^2 $ to the quotient ring $ R/I^2 $, induced by the inclusion of the ideal $ I $ into $ R $. This map sends each equivalence class in $ I/\"}\n  {\"name\": \"Ideal.cotangentIdeal\", \"module\": \"Mathlib/RingTheory/Ideal/Cotangent\", \"type\": \"{R : Type u} → [inst : CommRing R] → (I : Ideal R) → Ideal (R ⧸ I ^ 2)\", \"doc\": \"For a commutative ring $ R $ and an ideal $ I $, the cotangent ideal is the image of $ I $ under the canonical quotient homomorphism $ R \\to R/I^2 $, which corresponds to the ideal $ I/I^2 $ in the quo\"}\n  {\"name\": \"Algebra.Generators.CotangentSpace.exact\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {T : Type u₃}\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T] {ι : Type w₁}\\n  {σ : Type w₂} (Q : Algebra.Generators S T ι) (P : Algebra.Generators R S σ\", \"doc\": \"Given algebra extensions $ P $ and $ Q $ with compatible generators, the sequence involving the cotangent spaces $ P.\\text{CotangentSpace} $, $ Q.\\text{CotangentSpace} $, and their composition is exact.\"}\n  {\"name\": \"Algebra.Generators.Cotangent.exact\", \"module\": \"Mathlib/RingTheory/Kaehler/JacobiZariski\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {T : Type u₃}\\n  [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T] [inst_6 : IsScalarTower R S T] {ι : Type w₁}\\n  {σ : Type w₂} (Q : Algebra.Generators S T ι) (P : Algebra.Generators R S σ\", \"doc\": \"The sequence involving the cotangent modules of algebra extensions induced by composition of generators is exact, meaning the image of the first cotangent map equals the kernel of the second cotangent\"}\n",
+   "date": "2026-10-19",
+   "verdict": "no match: ordinary cotangent, etale-locus, descent and completion constructions do not state this completed-presentation theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.H1Cotangent, AdicCompletion",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-rig-etale-jacobian-algebraization",
+  "date": "2026-10-19",
+  "group": "Q69"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Current split of the blueprint ancestor lem-per-artin-gabber-affine-curve, Step 1: the dimension-normalized Verdier duality input, through lem-per-qbar-arbitrary-field-duality and its finite-coefficient local-duality construction; this item's partial algebraization is used in Step 4 of lem-per-gabber-local-duality-general. Supporting input: Elkik equivalence for finite algebras etale away from the completion ideal; Algebraize the completed Jacobian presentation; this produces a finite TYPE model, whose finiteness is proved separately in the item. Subargument: Closed base change preserves completed Jacobian torsion.",
+   "via": [
+    "lem-per-rig-etale-jacobian-algebraization",
+    "lem-per-elkik-finite-etale-away-completion",
+    "lem-per-gabber-partial-algebraization",
+    "lem-per-gabber-local-duality-general",
+    "lem-per-potential-local-duality",
+    "lem-per-finite-residue-dualizing",
+    "lem-per-qbar-arbitrary-field-duality"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

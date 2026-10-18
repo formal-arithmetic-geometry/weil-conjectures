@@ -15,9 +15,110 @@
   "def-weil-affine-spectrum",
   "def-weil-etale-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "We prove the assertion simultaneously for every Noetherian base ring and every presentation in the statement, by induction on a finite list of generators $I=(a_1,\\ldots,a_t)$. Such a list exists by [def-weil-pbc-noetherian-ring]. If $t=0$, then $I=0$ and completion of $A[x_1,\\ldots,x_r]$ is that polynomial ring itself: all positive-power quotients are the ring. Thus $E=A[x_1,\\ldots,x_r]/J$ is finite type; take $D=E$. The complement of $V(0)$ is empty, so the etale assertion is vacuous. The same argument includes $r=0$ and the zero algebra.",
+   "uses": [
+    "def-weil-pbc-noetherian-ring",
+    "def-weil-pbc-finite-type-algebra",
+    "def-weil-pbc-adic-completion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/restricted.tex",
+    "place": "Tag 0AKA (lemma-approximate), induction and zero-generator case."
+   }
+  },
+  {
+   "text": "We will use the following elementary observation whenever a finite type model $C$ with $\\widehat C_I\\cong E$ has been constructed. Apply [lem-per-jacobian-torsion-etale-shrink] to this isomorphism and the original presentation of $E$ to obtain $g=1+x$, $x\\in IC$, with $C_g$ etale away from $V(I)$. Set $D=C_g=C[y]/(gy-1)$, a finite type $A$-algebra. For every $n\\geq1$, $x^n=0$ modulo $I^nC$, so $g$ has inverse $\\sum_{j=0}^{n-1}(-x)^j$ there. Consequently $C/I^nC\\to D/I^nD$ is an isomorphism, with inverse induced by that displayed polynomial in $x$; these maps commute with all quotient transitions. Taking compatible sequences gives $\\widehat C_I\\cong\\widehat D_I$ as $A$-algebras. Thus this observation supplies exactly the required $D$ from any finite type model, without altering its completion.",
+   "uses": [
+    "lem-per-jacobian-torsion-etale-shrink",
+    "def-weil-pbc-finite-type-algebra",
+    "def-weil-ring-localization-away",
+    "def-weil-pbc-adic-completion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/restricted.tex",
+    "place": "Tag 0AKG (lemma-approximate-by-etale-over-complement), omitted small detail; Tag 0ALQ (lemma-rig-etale), part (2)."
+   }
+  },
+  {
+   "text": "If $t=1$, apply [lem-per-principal-jacobian-algebraization] with $a=a_1$ to the given presentation and annihilator. It gives a finite type $A$-algebra $C$ with $\\widehat C_I\\cong E$. Step 2 then gives $D$. This completes the one-generator case. No regularity or non-zero-divisor assumption is made on $a_1$.",
+   "uses": [
+    "lem-per-principal-jacobian-algebraization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/restricted.tex",
+    "place": "Tag 0AKA (lemma-approximate), one-generator case; Tag 0ALS (lemma-approximate-principal)."
+   }
+  },
+  {
+   "text": "Assume $t>1$ and that the full assertion, including the etale complement, holds for ideals with a generating list of length at most $t-1$ over any Noetherian base. Put $a=a_t$ and $K=(a_1,\\ldots,a_{t-1})$. For each $m\\geq1$ put $A_m=A/(a^m)$ and $K_m=KA_m$. The ring $A_m$ is Noetherian by [lem-weil-pbc-finite-type-algebra-noetherian], since it is the quotient of $A$ and hence a finite type $A$-algebra. In $A_m$ the image of $a$ is nilpotent, so every prime contains it; therefore $V(IA_m)=V(K_m)$. Apply [lem-per-jacobian-torsion-closed-base-change] with $H=(a^m)$ and ideal $K_m$. We obtain that $E_m=E/a^mE$ is $K_m$-adically complete with a finite completed-polynomial presentation whose conormal kernel and cokernel are killed by a power of $K_m$. The exponent is allowed to depend on $m$; no flatness of $A\\to A_m$ is asserted.",
+   "uses": [
+    "lem-per-jacobian-torsion-closed-base-change",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "def-weil-pbc-finite-type-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/restricted.tex",
+    "place": "Tag 0AKA (lemma-approximate), reduction modulo powers of a_t; Tag 0GB2 (lemma-base-change-rig-etale-homomorphism)."
+   }
+  },
+  {
+   "text": "Apply the induction hypothesis to the presentations of Step 4 over $A_m$ and the generating list of $K_m$ of length $t-1$. For every $m\\geq1$ it gives a finite type $A_m$-algebra $C_m$, etale outside $V(K_m)$, and an $A_m$-algebra isomorphism $\\widehat{C_m}_{K_m}\\cong E/a^mE$. These choices need not be compatible. They are exactly the hypotheses of [lem-per-rig-etale-principal-reduction] for $I=K+(a)$ and the original $E$. That lemma produces an $(a)$-adically complete $A$-algebra $F$, with a finite completed-polynomial presentation having kernel and cokernel killed by a power of $a$, and an $A$-algebra isomorphism $\\widehat F_I\\cong E$. Its statement includes the assembly of independently chosen quotient models; no compatibility is inferred merely from equality of their completions.",
+   "uses": [
+    "lem-per-rig-etale-principal-reduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/restricted.tex",
+    "place": "Tag 0AKA (lemma-approximate), compatible-model construction and principal-complete intermediate algebra B-prime, before the last application of 0ALS."
+   }
+  },
+  {
+   "text": "Apply [lem-per-principal-jacobian-algebraization] to the presentation of $F$ from Step 5. We get a finite type $A$-algebra $C$ and $\\widehat C_{(a)}\\cong F$. By [lem-weil-pbc-finite-type-algebra-noetherian], $C$ is Noetherian. Fix $n\\geq1$. Complete the exact sequence $0\\to I^nC\\to C\\to C/I^nC\\to0$ for the ideal $(a)$, using [lem-weil-pbc-completion-exact-finite-modules]. Its modules are finite since $C$ is Noetherian. The image of the completed first term is $I^n\\widehat C_{(a)}$: choose finitely many generators of $I^nC$ and apply the same exactness statement to the surjection from the corresponding finite free $C$-module onto $I^nC$ (its kernel is finite). Since $a^n\\in I^n$, the $(a)$-adic completion of $C/I^nC$ is itself, its quotient tower being constant from index $n$ on. Hence the canonical map $C/I^nC\\to\\widehat C_{(a)}/I^n\\widehat C_{(a)}$ is an isomorphism. These are the maps induced by $C\\to\\widehat C_{(a)}$, so they commute with reduction in $n$. Taking compatible sequences and using $F\\cong\\widehat C_{(a)}$ gives $\\widehat C_I\\cong\\widehat F_I\\cong E$.",
+   "uses": [
+    "lem-per-principal-jacobian-algebraization",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-completion-exact-finite-modules",
+    "def-weil-pbc-adic-completion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/restricted.tex",
+    "place": "Tag 0AKA (lemma-approximate), final application of 0ALS; nested completion compatibility expanded using exact completion of finite modules (Algebra Tag 00MB, lemma-completion-flat)."
+   }
+  },
+  {
+   "text": "Apply the observation of Step 2 to the finite type model $C$ of Step 6 and the original isomorphism $\\widehat C_I\\cong E$. It provides the finite type $A$-algebra $D=C_g$, etale over $\\operatorname{Spec}A\\setminus V(I)$, and $\\widehat D_I\\cong E$. This closes the induction, and therefore proves every clause of the statement.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/restricted.tex",
+    "place": "Tag 0AKG (lemma-approximate-by-etale-over-complement), conclusion."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-ring-localization-away",
+  "lem-per-jacobian-torsion-closed-base-change",
+  "lem-per-jacobian-torsion-etale-shrink",
+  "lem-per-principal-jacobian-algebraization",
+  "lem-per-rig-etale-principal-reduction",
+  "lem-weil-pbc-completion-exact-finite-modules",
+  "lem-weil-pbc-finite-type-algebra-noetherian"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/restricted.tex",
+  "place": "Tags 0AKG (lemma-approximate-by-etale-over-complement) and 0AKA (lemma-approximate), with the principal case 0ALS and the cohomological formulation of 0AJU."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -46,10 +147,38 @@
    "results": "[grep] OK 0 hit(s)\nSearched Mathlib/RingTheory",
    "date": "2026-10-19",
    "verdict": "no match: the hits concern ordinary etale algebras, formal smoothness, cotangent definitions or completeness; none states this completion/algebraization or henselian lifting theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Elkik theorem a rig etale topologically finite type algebra is the completion of a finite type algebra etale outside an ideal",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.exists_etale_of_isEtaleAt\", \"module\": \"Mathlib.RingTheory.Etale.Locus\", \"type\": \"(P : Ideal A) [P.IsPrime] [IsEtaleAt R P] : ∃ f ∉ P, Algebra.Etale R (Localization.Away f)\", \"doc\": \"If an $ R $-algebra $ A $ is étale at a prime ideal $ \\\\mathfrak{p} $, then there exists an element $ f \\\\notin \\\\mathfrak{p} $ such that the localization of $ A $ away from $ f $ is an étale $ R $-algeb\"}\n  {\"name\": \"Algebra.Etale.finitePresentation\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A} [self : Algebra.Etale R A],\\n  Algebra.FinitePresentation R A\", \"doc\": \"Let $ R $ and $ A $ be commutative rings with an $ R $-algebra structure on $ A $. If $ A $ is étale over $ R $, then $ A $ is finitely presented as an $ R $-algebra.\"}\n  {\"name\": \"Algebra.FormallyEtale.of_isSeparable_aux\", \"module\": \"Mathlib.RingTheory.Etale.Field\", \"type\": \"[Algebra.IsSeparable K L] [EssFiniteType K L] : FormallyEtale K L\", \"doc\": \"If $ L $ is a separable algebra over a field $ K $ and is finitely generated as a $ K $-algebra, then $ L $ is formally étale over $ K $.\"}\n  {\"name\": \"RingHom.Etale\", \"module\": \"Mathlib.RingTheory.RingHom.Etale\", \"type\": \"{R S : Type*} [CommRing R] [CommRing S] (f : R →+* S) : Prop\", \"doc\": \"A ring homomorphism $ f : R \\\\to S $ between commutative rings is étale if the induced algebra structure on $ S $ over $ R $ via $ f $ satisfies the étale property, meaning $ S $ is finitely presented \"}\n  {\"name\": \"Algebra.FormallyEtale.iff_isSeparable\", \"module\": \"Mathlib.RingTheory.Etale.Field\", \"type\": \"[EssFiniteType K L] : FormallyEtale K L ↔ Algebra.IsSeparable K L\", \"doc\": \"For a commutative ring $ K $ and a $ K $-algebra $ L $ of essential finite type, $ L $ is formally étale over $ K $ if and only if $ L $ is separable over $ K $.\"}\n  {\"name\": \"Algebra.Etale.iff_exists_algEquiv_prod\", \"module\": \"Mathlib.RingTheory.Etale.Field\", \"type\": \":\\n  Etale K A ↔\\n    ∃ (I : Type u) (_ : Finite I) (Ai : I → Type u) (_ : ∀ i, Field (Ai i)) (_ : ∀ i, Algebra K (Ai i)) (_ :\\n      A ≃ₐ[K] Π i, Ai i), ∀ i, Module.Finite K (Ai i) ∧ Algebra.IsSeparable K (Ai i)\", \"doc\": \"An algebra $ A $ over a field $ K $ is étale if and only if there exists a finite index set $ I $ and a family of fields $ \\\\{A_i\\\\}_{i \\\\in I} $, each equipped with a $ K $-algebra structure, such that \"}\n  {\"name\": \"Algebra.Etale.exists_subalgebra_fg\", \"module\": \"Mathlib.RingTheory.Smooth.NoetherianDescent\", \"type\": \"[Etale A B] :\\n  ∃ (A₀ : Subalgebra R A) (B₀ : Type u) (_ : CommRing B₀) (_ : Algebra A₀ B₀),\\n    A₀.FG ∧ Etale A₀ B₀ ∧ Nonempty (B ≃ₐ[A] A ⊗[A₀] B₀)\", \"doc\": \"For any étale algebra $ B $ over a commutative ring $ A $, there exists a finitely generated $ R $-subalgebra $ A_0 \\\\subseteq A $, an étale $ A_0 $-algebra $ B_0 $, and an isomorphism of $ A $-algebra\"}\n  {\"name\": \"Algebra.isOpen_etaleLocus\", \"module\": \"Mathlib.RingTheory.Etale.Locus\", \"type\": \": IsOpen (etaleLocus R A)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ where the algebra $A$ over the commutative ring $R$ is étale forms an open subset of the prime spectrum $\\\\operatorname{Spec}(A)$ under\"}\n",
+   "date": "2026-10-19",
+   "verdict": "no match: ordinary cotangent, etale-locus, descent and completion constructions do not state this completed-presentation theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "Elkik|rig.etale|algebraization",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-19",
+   "verdict": "no match: ordinary cotangent, etale-locus, descent and completion constructions do not state this completed-presentation theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.FiniteType, AdicCompletion",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-19",
+   "verdict": "no match: ordinary cotangent, etale-locus, descent and completion constructions do not state this completed-presentation theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Algebraization of a completed polynomial quotient with ideal power torsion kernel and cokernel of the Jacobian differential",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Polynomial.IsDistinguishedAt.algEquivQuotient\", \"module\": \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation\", \"type\": \"{A : Type u_1} →\\n  [inst : CommRing A] →\\n    {g : Polynomial A} →\\n      {I : Ideal A} →\\n        g.IsDistinguishedAt I →\\n          [IsAdicComplete I A] → (Polynomial A ⧸ Ideal.span {g}) ≃ₐ[A] PowerSeries A ⧸ Ideal.span {↑g}\", \"doc\": \"An isomorphism of $ A $-algebras between the quotient ring $ A[X]/(g) $ and the quotient ring $ A⟦X⟧/(g) $, where $ g $ is a distinguished polynomial in $ A[X] $. This equivalence preserves the algebr\"}\n  {\"name\": \"Polynomial.IsDistinguishedAt.algEquivQuotient_apply\", \"module\": \"Mathlib/RingTheory/PowerSeries/WeierstrassPreparation\", \"type\": \"∀ {A : Type u_1} [inst : CommRing A] {g : Polynomial A} {I : Ideal A} (H : g.IsDistinguishedAt I)\\n  [inst_1 : IsAdicComplete I A] (a : Polynomial A ⧸ Ideal.span {g}),\\n  H.algEquivQuotient a = (Ideal.quotientMapₐ (Ideal.span {↑g}) (Polynomial.coeToPowerSeries.algHom A) ⋯) a\", \"doc\": \"For a commutative ring $ A $, a distinguished polynomial $ g $ at an ideal $ I $, and an element $ a $ in the quotient ring $ A[X]/(g) $, the algebra isomorphism $ H.\\\\text{algEquivQuotient} $ maps $ a\"}\n  {\"name\": \"Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete\", \"module\": \"Mathlib/RingTheory/Smooth/AdicCompletion\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {S : Type u_3}\\n  [inst_3 : CommRing S] [inst_4 : Algebra R S] [Algebra.FormallySmooth R A] {I : Ideal S} [IsAdicComplete I S]\\n  (f : A →ₐ[R] S ⧸ I), ∃ g, (Ideal.Quotient.mkₐ R I).comp g = f\", \"doc\": \"Let $ R $ be a commutative ring, $ A $ an $ R $-algebra, and $ S $ a commutative ring with an ideal $ I $. If $ S $ is adic complete with respect to $ I $, then for any $ R $-algebra homomorphism $ f \"}\n  {\"name\": \"Algebra.Extension.infinitesimal\", \"module\": \"Mathlib/RingTheory/Extension/Basic\", \"type\": \"{R : Type u} →\\n  {S : Type v} →\\n    [inst : CommRing R] → [inst_1 : CommRing S] → [inst_2 : Algebra R S] → Algebra.Extension R S → Algebra.Extension R S\", \"doc\": \"Given an algebra extension $ P $ of a commutative ring $ R $ over a commutative $ R $-algebra $ S $, the infinitesimal extension is constructed by quotienting the ring structure of $ P $ by the square\"}\n  {\"name\": \"Ideal.Algebra.kerSquareLift\", \"module\": \"Mathlib/RingTheory/Ideal/Cotangent\", \"type\": \"{R : Type u} →\\n  [inst : CommRing R] →\\n    {A : Type u_1} → [inst_1 : CommRing A] → [inst_2 : Algebra R A] → Algebra (R ⧸ RingHom.ker (algebraMap R A) ^ 2) A\", \"doc\": \"Given a commutative ring $ A $ with an $ R $-algebra structure and an ideal $ I $ (the kernel of the algebra map $ R \\to A $), the quotient ring $ R/I^2 $ inherits a canonical $ R $-algebra structure. \"}\n  {\"name\": \"IsAdicComplete.liftAlgHom\", \"module\": \"Mathlib/RingTheory/AdicCompletion/RingHom\", \"type\": \"{R : Type u_3} →\\n  {S : Type u_4} →\\n    {A : Type u_5} →\\n      [inst : CommRing R] →\\n        [inst_1 : CommRing S] →\\n          [inst_2 : Algebra R S] →\\n            (I : Ideal S) →\\n              [IsAdicComplete I S] →\\n                [inst_4 : CommRing A] →\\n                  [inst_5 : Algebra R A] →\\n\", \"doc\": \"Given a compatible family of $ R $-algebra homomorphisms $ f_n : A → S/I^n $ satisfying $ f_m = \\text{factor}_I^{m,n} ∘ f_n $ for all $ m ≤ n $, this constructs an $ R $-algebra homomorphism $ A → S $ \"}\n  {\"name\": \"Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq\", \"module\": \"Mathlib/RingTheory/Smooth/AdicCompletion\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {S : Type u_3}\\n  [inst_3 : CommRing S] [inst_4 : Algebra R S] [Algebra.FormallySmooth R A] {I : Ideal S} (f : A →ₐ[R] S ⧸ I),\\n  ∃ g, (AlgHom.restrictScalars R (AdicCompletion.evalOneₐ I)).comp g = f\", \"doc\": \"For any commutative rings $R$ and $S$, an ideal $I$ of $S$, and a formally smooth $R$-algebra $A$, given an $R$-algebra homomorphism $f : A \\\\to S/I$, there exists an $R$-algebra homomorphism $g : A \\\\t\"}\n  {\"name\": \"AdicCompletion.instAlgebra\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Algebra\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    [inst : CommRing R] → [inst_1 : CommRing S] → (I : Ideal R) → [Algebra S R] → Algebra S (AdicCompletion I R)\", \"doc\": \"Given commutative rings $ R $ and $ S $, an ideal $ I $ of $ R $, and an $ S $-algebra structure on $ R $, the $ I $-adic completion of $ R $ inherits a canonical $ S $-algebra structure. This structu\"}\n",
+   "date": "2026-10-19",
+   "verdict": "no match: ordinary cotangent, etale-locus, descent and completion constructions do not state this completed-presentation theorem"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-elkik-finite-etale-away-completion",
@@ -73,5 +202,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-rig-etale-jacobian-algebraization",
+  "worker": "stage1",
+  "summary": "Kept the statement; expanded Stacks 0AKG through the generator induction of 0AKA, distinguishing the principal case, closed-base-change torsion, intermediate principal-complete assembly, and etale shrinking. Four new statement-only nodes. Reused exact completion and finite-type Noetherianity Mathlib leaves; expanded both localization and nested-completion identifications explicitly.",
+  "blueprint": "Current split of the blueprint ancestor lem-per-artin-gabber-affine-curve, Step 1: the dimension-normalized Verdier duality input, through lem-per-qbar-arbitrary-field-duality and its finite-coefficient local-duality construction; this item's partial algebraization is used in Step 4 of lem-per-gabber-local-duality-general. Supporting input: Elkik equivalence for finite algebras etale away from the completion ideal; Algebraize the completed Jacobian presentation; this produces a finite TYPE model, whose finiteness is proved separately in the item. The induction and its final etale shrinking realize this supporting algebraization step; no change to the perverse unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q69-68f6a6e7b",
+  "group": "Q69",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q69-68f6a6e7b (reviewer sub-agent of L); spot-checked: I read the delivery in full and made no fixes; review.md has the details. The item keeps the statement of 0AKG(8) with 0AJU(3) unchanged. Its 7 steps follow the 0AKA induction, checked against restricted.tex l.2064-2205: t=0 base; Step 2 shrinks to the étale locus with g=1+x∈1+IC from 0ALQ(2), and the inverse mod I^n is written out; t=1 uses 0ALS; Step 4 base-changes to A/(a^m), and V(IA_m)=V(K_m) holds because a is nilpotent there (0GB2/0AL6); Step 5 combines the induction hypothesis with the conditional assembly node, taking the independent C_m to an (a)-complete F with F^_I≅E; Step 6 shows C/I^nC≅Ĉ_(a)/I^nĈ_(a) through exact completion on finite modules over Noetherian C, using a^n∈I^n; Step 7 closes the induction. The four new nodes are each true and strictly smaller than the item; I tested each on small cases. The principal case (0ALS) checks for a=0, for a unit, and for ℤ with x²−p. Closed base change (0GB2+0AL6) holds because E is Noetherian and the topologies agree under the radical equality. The assembly node is 0AKA from the compatibility claim to the rig-étaleness of B', and it keeps the original I^c-torsion hypothesis the source needs for the uniform bound; it algebraizes nothing, so it is not a restatement of the item. Shrinking (0ALQ(2)) checks on ℤ[x]/(x²−p) with g=1+p, which removes the prime (2,x+1). No duplicates in the snapshot or the live chapter: lem-per-completed-etale-jacobian-torsion goes the converse direction, lem-per-elkik-finite-etale-away-completion (a henselian finite-algebra equivalence) is the item's citer and no cycle arises, lem-per-etale-away-completion-hom-lifting is 0AKJ, and the live lem-per-conormal-torsion-algebraization is 0ALR with a different hypothesis. Everything stays in unit sk-p-dl-a1-perverse; no tool_uses, no SGA. The live item is still unsplit and this is its first delivery."
  }
 }
