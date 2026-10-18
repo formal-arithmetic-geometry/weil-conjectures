@@ -109,7 +109,8 @@ lemma isIso_rightDerivedUpperShriekBaseChangeMap_pullbackMapLeft_dualizingComple
 
 /-- The tensor map of the base change `i' : Z ×_k T ⟶ X ×_k T` of a closed immersion `i`, at
 `(ω_π, Lπ^* M)` for the projection `π : X ×_k T ⟶ T`, is an isomorphism once `ω_π` is pulled
-back from `ω_X` (`AlgebraicGeometry.Etale.isIso_rightDerivedUpperShriekTensorMap_of_isClosedImmersion`
+back from `ω_X`
+(`AlgebraicGeometry.Etale.isIso_rightDerivedUpperShriekTensorMap_of_isClosedImmersion`
 and the ordinary Künneth formula with an identity factor). -/
 lemma isIso_rightDerivedUpperShriekTensorMap_pullbackMapLeft
     (hA : IsIso ((rightDerivedUpperShriekBaseChangeMap Λ (IsPullback.of_hasPullback a b)).app
@@ -158,6 +159,7 @@ theorem coreProp_comp_of_isClosedImmersion (hE : RightDerivedLowerShriekCompCohe
 
 end ClosedImmersion
 
+omit [IsSeparated b] [LocallyOfFiniteType b] [QuasiCompact b] in
 /-- **Affine spaces.** The canonical maps of `AlgebraicGeometry.Etale.CoreProp` are isomorphisms
 for the affine space `𝔸ⁿ_k`, which is smooth of relative dimension `n` over `k`: the base change
 map by smooth base change for `R^!` (`prop-asd-smooth-base-change`), and `θ` for the smooth

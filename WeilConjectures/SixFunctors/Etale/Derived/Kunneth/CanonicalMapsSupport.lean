@@ -157,9 +157,11 @@ faithful. -/
 noncomputable def rightDerivedLowerShriekFullyFaithfulOfIsOpenImmersion :
     (R(j)_![ModuleCat.{u + 1} Λ]).FullyFaithful :=
   Functor.FullyFaithful.ofIso
-    (derivedOpenImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} Λ) j).fullyFaithfulLOfIsIsoUnit
+    (Adjunction.fullyFaithfulLOfIsIsoUnit
+      (derivedOpenImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} Λ) j))
     (rightDerivedLowerShriekIsoOfIsOpenImmersion Λ j).symm
 
+omit [IsClosedImmersion i] in
 /-- Objects supported on the closed complement of `j` receive no maps from objects `Rj_! M`. -/
 lemma subsingleton_hom_shift_rightDerivedLowerShriek_rightDerivedLowerStar_of_isOpenImmersion
     (hij : Set.range i.base = (Set.range j.base)ᶜ)
@@ -177,7 +179,8 @@ lemma subsingleton_hom_shift_rightDerivedLowerShriek_rightDerivedLowerStar_of_is
   have : Subsingleton (D((i)^*[ModuleCat.{u + 1} Λ]).obj
       (((R(j)_![ModuleCat.{u + 1} Λ]).obj M)⟦n⟧) ⟶ F) :=
     ⟨fun _ _ ↦ hz.eq_of_src _ _⟩
-  exact ((mapDerivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) i).homEquiv _ _).symm.subsingleton
+  exact ((mapDerivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) i).homEquiv _ _).symm
+    |>.subsingleton
 
 /-- **The tensor map of `Rj^!` for an open immersion.** For a quasi-compact open immersion `j`
 with closed complement `i`, the tensor map `Rj^! C ⊗ᴸ Lj^* B ⟶ Rj^!(C ⊗ᴸ B)` is an isomorphism:
@@ -193,8 +196,9 @@ theorem isIso_rightDerivedUpperShriekTensorMap_of_isOpenImmersion
   obtain ⟨w, hw⟩ := exists_distTriang_openClosed (ModuleCat.{u + 1} Λ) j i hij C
   obtain ⟨w', hw'⟩ := exists_distTriang_counit_of_subsingleton
     (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) j) hF hw
-    (fun M n ↦ subsingleton_hom_shift_rightDerivedLowerShriek_rightDerivedLowerStar_of_isOpenImmersion
-      Λ j i hij M n _)
+    (fun M n ↦
+      subsingleton_hom_shift_rightDerivedLowerShriek_rightDerivedLowerStar_of_isOpenImmersion
+        Λ j i hij M n _)
     ⟨_, ⟨(rightDerivedLowerShriekIsoOfIsOpenImmersion Λ j).app _⟩⟩
   have hT := ((derivedTensor (ModuleCat.{u + 1} Λ) X).flip.obj B).map_distinguished _ hw'
   have := isIso_rightDerivedLowerStarProjectionMap_of_finite Λ i

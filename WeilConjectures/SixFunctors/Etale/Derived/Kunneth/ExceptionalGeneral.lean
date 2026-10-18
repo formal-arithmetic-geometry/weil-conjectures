@@ -54,6 +54,10 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 
 variable {k : Type u} [Field k] [HasInvertibleExponent Λ (Spec (.of k))]
 
+-- The coefficient category `ModuleCat Λ`.
+set_option hygiene false in
+local notation "𝓜" => ModuleCat.{u + 1} Λ
+
 /-- The base change `f × 𝟙 : X ×_S W ⟶ Y ×_S W` of a compactifiable morphism admits a
 compactification. -/
 instance hasCompactification_pullbackMapLeft {S X Y W : Scheme.{u}} (b : Y ⟶ S) (c : W ⟶ S)
@@ -94,7 +98,8 @@ theorem nonempty_iso_rightDerivedUpperShriek_of_isPullback
     (hN : constructibleFiniteTor (ModuleCat.{u + 1} Λ) T N) :
     Nonempty ((R(π)^![ModuleCat.{u + 1} Λ]).obj N ≅
       ((derivedTensor (ModuleCat.{u + 1} Λ) P).obj ((L((q)^*[ModuleCat.{u + 1} Λ])).obj
-        (dualizingComplex (ModuleCat.{u + 1} Λ) a))).obj ((L((π)^*[ModuleCat.{u + 1} Λ])).obj N)) := by
+        (dualizingComplex (ModuleCat.{u + 1} Λ) a))).obj
+          ((L((π)^*[ModuleCat.{u + 1} Λ])).obj N)) := by
   obtain ⟨hA, hθ⟩ := coreProp Λ b hE a
   have := hθ N hN
   let e := sq.isoPullback
@@ -132,43 +137,46 @@ theorem exceptionalKunneth_pullbackMapLeft_snd (hE : RightDerivedLowerShriekComp
       (pullback.snd (pullback.snd a b ≫ b) c) (pullback.fst b c) (pullback.snd b c)
       (pullback.snd a b) (𝟙 W) (pullbackMapLeft b c (pullback.snd a b)) := by
   intro K M hK hM
-  have sqP : IsPullback (pullback.fst (pullback.snd a b ≫ b) c ≫ pullback.fst a b) (pullbackMapLeft b c (pullback.snd a b)) a (pullback.fst b c ≫ b) :=
-    (isPullback_pullbackMapLeft b c (pullback.snd a b)).paste_horiz (IsPullback.of_hasPullback a b)
-  have hKM : constructibleFiniteTor (ModuleCat.{u + 1} Λ) (pullback b c)
-      (((derivedTensor (ModuleCat.{u + 1} Λ) (pullback b c)).obj
-        ((L((pullback.fst b c)^*[ModuleCat.{u + 1} Λ])).obj K)).obj
-          ((L((pullback.snd b c)^*[ModuleCat.{u + 1} Λ])).obj M)) :=
+  have sqP : IsPullback (pullback.fst (pullback.snd a b ≫ b) c ≫ pullback.fst a b)
+      (pullbackMapLeft b c (pullback.snd a b)) a (pullback.fst b c ≫ b) :=
+    (isPullback_pullbackMapLeft b c (pullback.snd a b)).paste_horiz
+      (IsPullback.of_hasPullback a b)
+  have hKM : constructibleFiniteTor 𝓜 (pullback b c)
+      (((derivedTensor 𝓜 (pullback b c)).obj ((L((pullback.fst b c)^*[𝓜])).obj K)).obj
+        ((L((pullback.snd b c)^*[𝓜])).obj M)) :=
     constructibleFiniteTor_tensor Λ _ (constructibleFiniteTor_leftDerivedUpperStar _ _ hK)
       (constructibleFiniteTor_leftDerivedUpperStar _ _ hM)
-  obtain ⟨c₁⟩ := nonempty_iso_rightDerivedUpperShriek_of_isPullback Λ hE a b (pullback.fst a b) (pullback.snd a b)
-    (IsPullback.of_hasPullback a b) hK
+  obtain ⟨c₁⟩ := nonempty_iso_rightDerivedUpperShriek_of_isPullback Λ hE a b (pullback.fst a b)
+    (pullback.snd a b) (IsPullback.of_hasPullback a b) hK
   obtain ⟨c₂⟩ := nonempty_iso_rightDerivedUpperShriek_of_isPullback Λ hE a
     (pullback.fst b c ≫ b) _ (pullbackMapLeft b c (pullback.snd a b)) sqP hKM
-  let A₁ := (L(((pullback.fst (pullback.snd a b ≫ b) c))^*[ModuleCat.{u + 1} Λ])).obj ((L((pullback.fst a b)^*[ModuleCat.{u + 1} Λ])).obj
-    (dualizingComplex (ModuleCat.{u + 1} Λ) a))
-  let B₁ := (L(((pullback.fst (pullback.snd a b ≫ b) c))^*[ModuleCat.{u + 1} Λ])).obj ((L((pullback.snd a b)^*[ModuleCat.{u + 1} Λ])).obj K)
-  let C₁ := (L(((pullback.snd (pullback.snd a b ≫ b) c))^*[ModuleCat.{u + 1} Λ])).obj M
-  let s₁ : ((derivedTensor (ModuleCat.{u + 1} Λ) _).obj ((L(((pullback.fst (pullback.snd a b ≫ b) c))^*[ModuleCat.{u + 1} Λ])).obj
-      ((R(pullback.snd a b)^![ModuleCat.{u + 1} Λ]).obj K))).obj ((L(((pullback.snd (pullback.snd a b ≫ b) c))^*[ModuleCat.{u + 1} Λ])).obj
-        ((R(𝟙 W)^![ModuleCat.{u + 1} Λ]).obj M)) ≅
-      ((derivedTensor (ModuleCat.{u + 1} Λ) _).obj
-        (((derivedTensor (ModuleCat.{u + 1} Λ) _).obj A₁).obj B₁)).obj C₁ :=
-    derivedTensorMapIso Λ ((L(((pullback.fst (pullback.snd a b ≫ b) c))^*[ModuleCat.{u + 1} Λ])).mapIso c₁ ≪≫
+  let A₁ := (L((pullback.fst (pullback.snd a b ≫ b) c)^*[𝓜])).obj
+    ((L((pullback.fst a b)^*[𝓜])).obj (dualizingComplex 𝓜 a))
+  let B₁ := (L((pullback.fst (pullback.snd a b ≫ b) c)^*[𝓜])).obj
+    ((L((pullback.snd a b)^*[𝓜])).obj K)
+  let C₁ := (L((pullback.snd (pullback.snd a b ≫ b) c)^*[𝓜])).obj M
+  let s₁ : ((derivedTensor 𝓜 _).obj ((L((pullback.fst (pullback.snd a b ≫ b) c)^*[𝓜])).obj
+      ((R(pullback.snd a b)^![𝓜]).obj K))).obj
+        ((L((pullback.snd (pullback.snd a b ≫ b) c)^*[𝓜])).obj ((R(𝟙 W)^![𝓜]).obj M)) ≅
+      ((derivedTensor 𝓜 _).obj (((derivedTensor 𝓜 _).obj A₁).obj B₁)).obj C₁ :=
+    derivedTensorMapIso Λ ((L((pullback.fst (pullback.snd a b ≫ b) c)^*[𝓜])).mapIso c₁ ≪≫
       leftDerivedUpperStarTensorIso _ _ _ _)
-      ((L(((pullback.snd (pullback.snd a b ≫ b) c))^*[ModuleCat.{u + 1} Λ])).mapIso ((rightDerivedUpperShriekIdIso Λ W).app M))
-  let s₂ := derivedTensorAssociator (ModuleCat.{u + 1} Λ) (pullback (pullback.snd a b ≫ b) c) A₁ B₁ C₁
-  let s₃ : ((derivedTensor (ModuleCat.{u + 1} Λ) _).obj B₁).obj C₁ ≅
-      (L(((pullbackMapLeft b c (pullback.snd a b)))^*[ModuleCat.{u + 1} Λ])).obj (((derivedTensor (ModuleCat.{u + 1} Λ) _).obj
-        ((L((pullback.fst b c)^*[ModuleCat.{u + 1} Λ])).obj K)).obj
-          ((L((pullback.snd b c)^*[ModuleCat.{u + 1} Λ])).obj M)) :=
-    derivedTensorMapIso Λ (Iso.refl _) ((L(((pullback.snd (pullback.snd a b ≫ b) c))^*[ModuleCat.{u + 1} Λ])).mapIso
+      ((L((pullback.snd (pullback.snd a b ≫ b) c)^*[𝓜])).mapIso
+        ((rightDerivedUpperShriekIdIsoOfFinite Λ W).app M))
+  let s₂ := derivedTensorAssociator 𝓜 (pullback (pullback.snd a b ≫ b) c) A₁ B₁ C₁
+  let s₃ : ((derivedTensor 𝓜 _).obj B₁).obj C₁ ≅
+      (L((pullbackMapLeft b c (pullback.snd a b))^*[𝓜])).obj (((derivedTensor 𝓜 _).obj
+        ((L((pullback.fst b c)^*[𝓜])).obj K)).obj ((L((pullback.snd b c)^*[𝓜])).obj M)) :=
+    derivedTensorMapIso Λ (Iso.refl _) ((L((pullback.snd (pullback.snd a b ≫ b) c)^*[𝓜])).mapIso
         ((leftDerivedUpperStarId _ W).app M).symm) ≪≫
-      (leftDerivedUpperStarDerivedTensorPullbackIso Λ (pullback.fst (pullback.snd a b ≫ b) c) (pullback.snd (pullback.snd a b ≫ b) c) (pullback.fst b c)
-        (pullback.snd b c) (pullback.snd a b) (𝟙 W) (pullbackMapLeft b c (pullback.snd a b)) (isPullback_pullbackMapLeft b c (pullback.snd a b)).w.symm
-        (by simp) K M).symm
-  let s₄ : A₁ ≅ (L(((pullback.fst (pullback.snd a b ≫ b) c) ≫ pullback.fst a b)^*[ModuleCat.{u + 1} Λ])).obj
-      (dualizingComplex (ModuleCat.{u + 1} Λ) a) :=
-    ((leftDerivedUpperStarComp _ (pullback.fst (pullback.snd a b ≫ b) c) (pullback.fst a b)).app _).symm
+      (leftDerivedUpperStarDerivedTensorPullbackIso Λ (pullback.fst (pullback.snd a b ≫ b) c)
+        (pullback.snd (pullback.snd a b ≫ b) c) (pullback.fst b c) (pullback.snd b c)
+        (pullback.snd a b) (𝟙 W) (pullbackMapLeft b c (pullback.snd a b))
+        (isPullback_pullbackMapLeft b c (pullback.snd a b)).w.symm (by simp) K M).symm
+  let s₄ : A₁ ≅ (L((pullback.fst (pullback.snd a b ≫ b) c ≫ pullback.fst a b)^*[𝓜])).obj
+      (dualizingComplex 𝓜 a) :=
+    ((leftDerivedUpperStarComp _ (pullback.fst (pullback.snd a b ≫ b) c)
+      (pullback.fst a b)).app _).symm
   exact ⟨s₁ ≪≫ s₂ ≪≫ derivedTensorMapIso Λ s₄ s₃ ≪≫ c₂.symm⟩
 
 /-- **The exceptional Künneth formula for `f × 𝟙`** (`prop-trf-exceptional-kunneth`): for

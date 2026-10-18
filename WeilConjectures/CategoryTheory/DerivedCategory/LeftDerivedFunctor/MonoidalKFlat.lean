@@ -185,8 +185,24 @@ instance isIso_leftDerivedTensorComparisonOfKFlat :
 the comparison `CategoryTheory.Functor.leftDerivedTensorComparisonOfKFlat`. -/
 noncomputable def leftDerivedTensorIsoOfKFlat (K : DerivedCategory C) :
     (curriedTensor (DerivedCategory C)).obj K ⋙ F.leftDerivedFunctor ≅
-      F.leftDerivedFunctor ⋙ (curriedTensor (DerivedCategory D)).obj (F.leftDerivedFunctor.obj K) :=
+      F.leftDerivedFunctor ⋙
+        (curriedTensor (DerivedCategory D)).obj (F.leftDerivedFunctor.obj K) :=
   (asIso F.leftDerivedTensorComparisonOfKFlat).app K
+
+/-- The isomorphism `L(K ⊗ᴸ M) ≅ L K ⊗ᴸ L M`, natural in `M`, for any total left derived functor
+`L` of `F` (`CategoryTheory.Functor.leftDerivedTensorIsoOfKFlat` transported along the
+uniqueness of left derived functors). Applying it to a left derived functor `L` constructed in
+another context avoids comparing the instance arguments of the two constructions. -/
+noncomputable def leftDerivedTensorIsoOfKFlatOfIsLeftDerivedFunctor
+    (L : DerivedCategory C ⥤ DerivedCategory D)
+    (α : Qh ⋙ L ⟶ F.mapHomotopyCategory (.up ℤ) ⋙ Qh)
+    [L.IsLeftDerivedFunctor α (HomotopyCategory.quasiIso C (.up ℤ))] (K : DerivedCategory C) :
+    (curriedTensor (DerivedCategory C)).obj K ⋙ L ≅
+      L ⋙ (curriedTensor (DerivedCategory D)).obj (L.obj K) :=
+  let e : F.leftDerivedFunctor ≅ L := Functor.leftDerivedUnique _ _
+    F.leftDerivedFunctorCounit α (HomotopyCategory.quasiIso C (.up ℤ))
+  Functor.isoWhiskerLeft _ e.symm ≪≫ F.leftDerivedTensorIsoOfKFlat K ≪≫
+    Functor.isoWhiskerRight e _ ≪≫ Functor.isoWhiskerLeft L ((curriedTensor _).mapIso (e.app K))
 
 end Comparison
 

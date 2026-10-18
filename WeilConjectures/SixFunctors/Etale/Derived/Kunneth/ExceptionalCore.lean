@@ -26,7 +26,8 @@ auxiliary coefficient in the blueprint proof.
 
 The proof is the blueprint's: smooth morphisms are handled by smooth purity (here in the form
 of cohomological smoothness, `sk-prop-cohsm`), closed immersions by supported localization and
-the ordinary Künneth formula (`AlgebraicGeometry.Etale.isIso_rightDerivedUpperShriekTensorMap_of_isClosedImmersion`,
+the ordinary Künneth formula
+(`AlgebraicGeometry.Etale.isIso_rightDerivedUpperShriekTensorMap_of_isClosedImmersion`,
 `AlgebraicGeometry.Etale.isIso_rightDerivedUpperShriekBaseChangeMap_app_of_isClosedImmersion`), and
 an affine `X` embeds as a closed subscheme of an affine space. A general `X` is reduced to affine
 ones through the open–closed decomposition `X = U ⊔ Z` with `U` affine

@@ -95,6 +95,21 @@ noncomputable def derivedExtendScalars : 𝐃(X, Λ) ⥤ 𝐃(X, Λ') :=
   have := preservesKFlatQuasiIso_extendScalars hφ ha X
   (Sheaf.extendScalars X.smallEtaleTopology φ).leftDerivedFunctor
 
+/-- The counit of the derived extension of scalars, exhibiting it as the total left derived functor
+of the extension of scalars of étale sheaves. -/
+noncomputable def derivedExtendScalarsCounit :
+    _root_.DerivedCategory.Qh ⋙ derivedExtendScalars hφ ha X ⟶
+      (Sheaf.extendScalars X.smallEtaleTopology φ).mapHomotopyCategory (ComplexShape.up ℤ) ⋙
+        _root_.DerivedCategory.Qh :=
+  have := preservesKFlatQuasiIso_extendScalars hφ ha X
+  (Sheaf.extendScalars X.smallEtaleTopology φ).leftDerivedFunctorCounit
+
+instance : (derivedExtendScalars hφ ha X).IsLeftDerivedFunctor (derivedExtendScalarsCounit hφ ha X)
+    (HomotopyCategory.quasiIso _ (ComplexShape.up ℤ)) :=
+  have := preservesKFlatQuasiIso_extendScalars hφ ha X
+  inferInstanceAs ((Sheaf.extendScalars X.smallEtaleTopology φ).leftDerivedFunctor.IsLeftDerivedFunctor
+    (Sheaf.extendScalars X.smallEtaleTopology φ).leftDerivedFunctorCounit _)
+
 /-- The derived extension of scalars is left adjoint to the derived restriction of scalars. -/
 noncomputable def derivedExtendScalarsAdjunction :
     derivedExtendScalars hφ ha X ⊣ Sheaf.derivedRestrictScalars X.smallEtaleTopology φ :=
@@ -130,7 +145,8 @@ noncomputable def derivedExtendScalarsTensorIso (K : 𝐃(X, Λ)) :
         (derivedTensor (ModuleCat.{u + 1} Λ') X).obj ((derivedExtendScalars hφ ha X).obj K) :=
   have := preservesKFlatQuasiIso_extendScalars hφ ha X
   have := Sheaf.preservesFlat_extendScalars X.smallEtaleTopology hφ ha
-  (Sheaf.extendScalars X.smallEtaleTopology φ).leftDerivedTensorIsoOfKFlat K
+  ((Sheaf.extendScalars X.smallEtaleTopology φ).leftDerivedTensorIsoOfKFlatOfIsLeftDerivedFunctor
+    (derivedExtendScalars hφ ha X) (derivedExtendScalarsCounit hφ ha X) K :)
 
 /-- The extension–restriction adjunction for internal homs:
 `RHom_Λ(K, Res N) ≅ Res RHom_{Λ'}(K ⊗ᴸ_Λ Λ', N)`, naturally in `N`. Both sides are right

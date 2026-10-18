@@ -61,7 +61,7 @@ theorem nonempty_iso_rightDerivedUpperShriek_comp_of_eq {X Y Z : Scheme.{u}} (f 
   exact nonempty_iso_rightDerivedUpperShriek_comp Λ f g
 
 /-- `R𝟙^! ≅ 𝟭`. -/
-noncomputable def rightDerivedUpperShriekIdIso (X : Scheme.{u}) :
+noncomputable def rightDerivedUpperShriekIdIsoOfFinite (X : Scheme.{u}) :
     R(𝟙 X)^![ModuleCat.{u + 1} Λ] ≅ 𝟭 _ :=
   rightDerivedUpperShriekIsoOfIso (ModuleCat.{u + 1} Λ) (Iso.refl X) ≪≫
     leftDerivedUpperStarId (ModuleCat.{u + 1} Λ) X
@@ -205,7 +205,7 @@ theorem exceptionalKunneth_pullbackMapLeft_of_isClosedImmersion {k : Type u} [Fi
     h₁ h₂
   exact ⟨((derivedTensor (ModuleCat.{u + 1} Λ) _).obj _).mapIso
       ((L((pullback.snd (i ≫ b₁) b₂)^*[ModuleCat.{u + 1} Λ])).mapIso
-        ((rightDerivedUpperShriekIdIso Λ Y₂).app N₂)) ≪≫ e.symm⟩
+        ((rightDerivedUpperShriekIdIsoOfFinite Λ Y₂).app N₂)) ≪≫ e.symm⟩
 
 end Etale
 

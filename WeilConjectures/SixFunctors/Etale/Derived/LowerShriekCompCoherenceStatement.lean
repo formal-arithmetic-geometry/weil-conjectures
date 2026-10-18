@@ -42,7 +42,8 @@ namespace Etale
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 
 -- Search the braiding through the symmetric structure, as in the definition of the derived
--- tensor product (see `WeilConjectures.SixFunctors.Etale.Derived.UpperShriekCanonicalMapsCoherence`).
+-- tensor product (see
+-- `WeilConjectures.SixFunctors.Etale.Derived.UpperShriekCanonicalMapsCoherence`).
 attribute [local instance high] SymmetricCategory.toBraidedCategory
 
 section General

@@ -14,9 +14,9 @@ public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekCompCoherence
 
 The composition law `Rh_! ≅ Rf_! ⋙ Rg_!` for `h = f ≫ g`, compatible with the projection maps
 (`sk-prop-sf-pf-coherence`) and with compact-support base change (`sk-thm-sf-package` (2)), is
-recorded here as a hypothesis, `AlgebraicGeometry.Etale.RightDerivedLowerShriekCompCoherence`;
-it is the statement of `AlgebraicGeometry.Etale.exists_rightDerivedLowerShriekCompIso`. From it
-the canonical maps of `R^!` — the base change map and the tensor map `θ` — compose:
+taken as a hypothesis `AlgebraicGeometry.Etale.RightDerivedLowerShriekCompCoherence` (stated in
+`WeilConjectures.SixFunctors.Etale.Derived.LowerShriekCompCoherenceStatement`). From it the
+canonical maps of `R^!` — the base change map and the tensor map `θ` — compose:
 
 - `AlgebraicGeometry.Etale.isIso_rightDerivedUpperShriekBaseChangeMap_comp_iff_of_coherence`:
   the base change map of `R(f ≫ g)^!` is, up to the composition isomorphisms, the composite of
@@ -43,7 +43,8 @@ namespace Etale
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 
 -- Search the braiding through the symmetric structure, as in the definition of the derived
--- tensor product (see `WeilConjectures.SixFunctors.Etale.Derived.UpperShriekCanonicalMapsCoherence`).
+-- tensor product (see
+-- `WeilConjectures.SixFunctors.Etale.Derived.UpperShriekCanonicalMapsCoherence`).
 attribute [local instance high] SymmetricCategory.toBraidedCategory
 
 variable {Λ}

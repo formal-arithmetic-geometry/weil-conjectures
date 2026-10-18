@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekCompCoherenceStatement
 public import WeilConjectures.SixFunctors.Etale.Derived.Perfect.SitePerfect
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriekCanonicalMapsCoherence
 
@@ -103,7 +104,7 @@ theorem exists_rightDerivedLowerShriekCompIso :
         Adjunction.ExchangeCompCompatible (rightDerivedLowerShriekBaseChangeMap Λ sqf)
           (rightDerivedLowerShriekBaseChangeMap Λ sqg) (rightDerivedLowerShriekBaseChangeMap Λ sqh)
           (E f g h w) (E f' g' h' w')) :=
-  sorry
+  rightDerivedLowerShriekCompCoherence Λ
 
 omit [Finite Λ] in
 /-- Blueprint `def-weil-derived-pullback-tensor-hom`: Derived pullback, tensor product, and
