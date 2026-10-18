@@ -102,6 +102,14 @@ theorem trace_comp_idempotent {P Q : C} [HasRightDual P] [HasRightDual Q] (v : P
     (i : Q ⟶ P) (π : P ⟶ Q) : trace (v ≫ π ≫ i) = trace (i ≫ v ≫ π) := by
   rw [← Category.assoc, trace_comp_comm]
 
+/-- Blueprint `prop-trf-karoubi-independence`, representative independence of the summand trace:
+if an isomorphism `w : P ≅ P'` transports the idempotent `e` to `e'` and the endomorphism `v`
+to `v'`, the summand traces `tr(v ∘ e ∣ P)` and `tr(v' ∘ e' ∣ P')` agree. -/
+theorem trace_comp_idempotent_eq_of_iso {P P' : C} [HasRightDual P] [HasRightDual P'] (w : P ≅ P')
+    (e : P ⟶ P) (e' : P' ⟶ P') (v : P ⟶ P) (v' : P' ⟶ P') (he : e ≫ w.hom = w.hom ≫ e')
+    (hv : v ≫ w.hom = w.hom ≫ v') : trace (v ≫ e) = trace (v' ≫ e') :=
+  trace_eq_of_iso w _ _ (by rw [Category.assoc, he, reassoc_of% hv])
+
 /-- The trace of the identity of the monoidal unit is the identity, for any right dual of the
 unit. -/
 theorem trace_id_tensorUnit [HasRightDual (𝟙_ C)] : trace (𝟙 (𝟙_ C)) = 𝟙 _ := by
