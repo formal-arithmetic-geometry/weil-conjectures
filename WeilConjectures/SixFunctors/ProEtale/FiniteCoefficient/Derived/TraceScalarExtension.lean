@@ -17,7 +17,9 @@ finite coefficient rings `A_{E,n} → A_{E',n}` with `E'/E` unramified. Derived 
 `N = - ⊗ᴸ_R S = L(S ⊗_R -) : D(X_proét, R) ⥤ D(X_proét, S)` commutes with the operations:
 
 - with the derived pullbacks `Lf^*`
-  (`AlgebraicGeometry.ProEtale.leftDerivedSheafExtendScalarsCompUpperStarIso`);
+  (`AlgebraicGeometry.ProEtale.leftDerivedSheafExtendScalarsCompUpperStarIso`,
+  `AlgebraicGeometry.ProEtale.nonempty_leftDerivedUpperStar_comp_iso`), hence with geometric
+  stalks, and Weil structures extend (`AlgebraicGeometry.ProEtale.extendScalarsWeilStructure`);
 - with extension by zero along open immersions
   (`AlgebraicGeometry.ProEtale.mapDerivedCategoryOpenLowerShriekExtendScalarsIso`);
 - with the derived direct images `Rg_*`
@@ -32,7 +34,9 @@ particular of the Frobenius maps; by the scalar-extension law of the categorical
 (`CategoryTheory.Functor.trace_eq_unitEndRingHom_trace`, blueprint
 `prop-trf-trace-formal-laws`, item (3)), the trace of the scalar extension of an endomorphism
 of a compactly supported direct image is the image of its trace
-(`AlgebraicGeometry.ProEtale.trace_rightDerivedLowerShriekOfCompactification_map_extendScalars`).
+(`AlgebraicGeometry.ProEtale.trace_rightDerivedLowerShriekOfCompactification_map_extendScalars`),
+and similarly on derived pullbacks such as stalks
+(`AlgebraicGeometry.ProEtale.trace_leftDerivedUpperStar_extendScalars`).
 
 ## Gaps with respect to the blueprint
 
@@ -105,6 +109,59 @@ noncomputable def rightDerivedLowerStarExtendScalarsIso {Z Y : Scheme.{u}} (g : 
   asIso (mateEquiv (derivedUpperStarLowerStarAdjunction _ g)
     (derivedUpperStarLowerStarAdjunction _ g)
     (leftDerivedSheafExtendScalarsCompUpperStarIso (R := R) (S := S) g).hom)
+
+section UpperStar
+
+variable {Z Y : Scheme.{u}} (g : Z ⟶ Y)
+
+omit [Module.Finite R S] [Module.Free R S] [Nontrivial R] in
+/-- **Finite-level coefficient change commutes with `Lg^*`** (blueprint
+`thm-trf-finite-coefficient-map`): `(Lg^* L) ⊗ᴸ_R S ≅ Lg^*(L ⊗ᴸ_R S)`, the derived commutation
+`AlgebraicGeometry.ProEtale.leftDerivedSheafExtendScalarsCompUpperStarIso`. -/
+theorem nonempty_leftDerivedUpperStar_comp_iso :
+    Nonempty (L((g)^*[ModuleCat.{u + 1} R]) ⋙ L(sheafExtendScalars (algebraMap R S) Z) ≅
+      L(sheafExtendScalars (algebraMap R S) Y) ⋙ L((g)^*[ModuleCat.{u + 1} S])) :=
+  ⟨(leftDerivedSheafExtendScalarsCompUpperStarIso g).symm⟩
+
+/-- The scalar extension of a Weil structure (blueprint `thm-trf-finite-coefficient-map`): for an
+endomorphism `g` of `X` and `φ : Lg^* K ≅ K` over `R`, the structure
+`Lg^*(K ⊗ᴸ_R S) ≅ (Lg^* K) ⊗ᴸ_R S ≅ K ⊗ᴸ_R S` over `S`. -/
+noncomputable def extendScalarsWeilStructure (g : Y ⟶ Y)
+    {K : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} R))}
+    (φ : (L((g)^*[ModuleCat.{u + 1} R])).obj K ≅ K) :
+    (L((g)^*[ModuleCat.{u + 1} S])).obj ((L(sheafExtendScalars (algebraMap R S) Y)).obj K) ≅
+      (L(sheafExtendScalars (algebraMap R S) Y)).obj K :=
+  (leftDerivedSheafExtendScalarsCompUpperStarIso g).app K ≪≫
+    (L(sheafExtendScalars (algebraMap R S) Y)).mapIso φ
+
+omit [Module.Finite R S] [Module.Free R S] [Nontrivial R] in
+/-- **Scalar-extension law for the traces on derived pullbacks**, for instance on geometric
+stalks (blueprint `thm-trf-finite-coefficient-map`): an endomorphism `w` of `Lg^* K` and its
+transport `w'` to `Lg^*(K ⊗ᴸ_R S)` along the commutation of `Lg^*` with the scalar extension `N`
+(for instance a local Frobenius `F_{y,m}` and its scalar extension) satisfy
+`tr(w') = ρ_N(tr w)`. The braidings and the braided monoidal structure of `N` are arguments. -/
+theorem trace_leftDerivedUpperStar_extendScalars
+    [BraidedCategory (DerivedCategory (Sheaf (Scheme.ProEt.topology Z) (ModuleCat.{u + 1} R)))]
+    [BraidedCategory (DerivedCategory (Sheaf (Scheme.ProEt.topology Z) (ModuleCat.{u + 1} S)))]
+    [(L(sheafExtendScalars (algebraMap R S) Z)).Braided]
+    (K : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} R)))
+    (w : (L((g)^*[ModuleCat.{u + 1} R])).obj K ⟶ (L((g)^*[ModuleCat.{u + 1} R])).obj K)
+    [HasRightDual ((L((g)^*[ModuleCat.{u + 1} R])).obj K)]
+    [HasRightDual ((L(sheafExtendScalars (algebraMap R S) Z)).obj
+      ((L((g)^*[ModuleCat.{u + 1} R])).obj K))]
+    [HasRightDual ((L((g)^*[ModuleCat.{u + 1} S])).obj
+      ((L(sheafExtendScalars (algebraMap R S) Y)).obj K))] :
+    trace (X := (L((g)^*[ModuleCat.{u + 1} S])).obj
+        ((L(sheafExtendScalars (algebraMap R S) Y)).obj K))
+      ((leftDerivedSheafExtendScalarsCompUpperStarIso g).hom.app K ≫
+        (L(sheafExtendScalars (algebraMap R S) Z)).map w ≫
+          (leftDerivedSheafExtendScalarsCompUpperStarIso g).inv.app K) =
+      (L(sheafExtendScalars (algebraMap R S) Z)).unitEndRingHom (trace w) :=
+  Functor.trace_eq_unitEndRingHom_trace (L(sheafExtendScalars (algebraMap R S) Z))
+    (X' := (L((g)^*[ModuleCat.{u + 1} S])).obj ((L(sheafExtendScalars (algebraMap R S) Y)).obj K))
+    w _ ((leftDerivedSheafExtendScalarsCompUpperStarIso g).app K).symm (by simp)
+
+end UpperStar
 
 variable {X Y : Scheme.{u}} {f : X ⟶ Y}
 
