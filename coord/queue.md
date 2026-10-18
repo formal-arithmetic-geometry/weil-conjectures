@@ -1576,10 +1576,10 @@ Not items: an open Orchestra branch or PR of the source library proves the modul
 | `WeilConjectures.SixFunctors.Etale.Derived.IntegralCoefficients` | bundle/sec-six-functors-c1,bundle/sec-six-functors-d1 |
 | `WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Ordinary` | bundle/sec-smooth-purity-d2,prove2/sk-prop-sf-kunneth-ordinary |
 | `WeilConjectures.SixFunctors.Etale.Perverse.Operations` | bundle/sec-deligne-laumon-a1-d1 |
-| `WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Perfect` | bundle/sec-poincare-duality-c1 |
+| `WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Perfect` | bundle/sec-poincare-duality-c1,bundle/sec-poincare-duality-d1 |
 | `WeilConjectures.WeilSheaf.CurveEndpoints` | bundle/sec-deligne-laumon-a1-d1 |
-| `WeilConjectures.WeilSheaf.FourierInversion.OtherSections` | bundle/sec-poincare-duality-c1,bundle/sec-smooth-purity-d1,bundle/sec-smooth-purity-d3 |
+| `WeilConjectures.WeilSheaf.FourierInversion.OtherSections` | bundle/sec-fourier-transform-d1,bundle/sec-poincare-duality-c1,bundle/sec-poincare-duality-d1,bundle/sec-smooth-purity-d1,bundle/sec-smooth-purity-d3 |
 | `WeilConjectures.WeilSheaf.LowerShriekFunctoriality` | bundle/sec-six-functors-c1,bundle/sec-six-functors-d1,bundle/sec-smooth-purity-d3 |
 | `WeilConjectures.WeilSheaf.LowerShriekOperations` | bundle/sec-poincare-duality-c1,bundle/sec-six-functors-d1 |
-| `WeilConjectures.WeilSheaf.PoincareDuality` | bundle/sec-poincare-duality-c1 |
-| `WeilConjectures.WeilSheaf.TraceIsomorphism` | bundle/sec-poincare-duality-c1 |
+| `WeilConjectures.WeilSheaf.PoincareDuality` | bundle/sec-poincare-duality-c1,bundle/sec-poincare-duality-d1 |
+| `WeilConjectures.WeilSheaf.TraceIsomorphism` | bundle/sec-poincare-duality-c1,bundle/sec-poincare-duality-d1 |
