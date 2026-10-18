@@ -1,0 +1,112 @@
+{
+ "id": "lem-weil-pbc-locally-finite-type-limit-map-equality",
+ "kind": "statement",
+ "title": "Equality of maps to a locally finite type target descends",
+ "statement": "Let $J$ be a small cofiltered category and $D:J\\to\\mathrm{Sch}$ a diagram of quasi-compact schemes with affine transition maps [def-pc-scheme, def-weil-pbc-category-colimit, def-weil-pbc-scheme-conventions, pqf-def-affine-morphism]. Let $t_i:D_i\\to S$ be compatible structure maps, and let $(X,\\rho_i)$ be a limiting cone. Let $f:Y\\to S$ be locally of finite type [def-weil-finite-type-morphism]. For any $i\\in J$ and maps $a,b:D_i\\to Y$ with $af=bf=t_i$ and $\\rho_i a=\\rho_i b$, there exist $k\\in J$ and $h:k\\to i$ such that $D(h)a=D(h)b$.",
+ "source": {
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 01ZC, injective part of (1) implies (3); Mathlib.AlgebraicGeometry.AffineTransitionLimit, Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-scheme-conventions",
+  "pqf-def-affine-morphism",
+  "def-weil-finite-type-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Apply Mathlib Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType to D, t, f, the limiting cone and the two maps. Its hypotheses are exactly the stated ones; its index k and arrow h give the claimed equality. No quasi-separatedness is required.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/limits.tex",
+  "place": "Tag 01ZC, injectivity of the map from the filtered colimit of morphism sets"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Two morphisms from a stage of a cofiltered inverse system of quasi-compact schemes into a locally finite type scheme which agree on the limit agree at a later stage",
+   "results": "AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType; also the two-stage variant Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType.",
+   "date": "2026-10-18",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType",
+   "results": "One exact hit in Mathlib.AlgebraicGeometry.AffineTransitionLimit.",
+   "date": "2026-10-18",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "exists_hom_comp_eq_comp_of_locallyOfFiniteType in Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean",
+   "results": "Read variables at lines 37-38 and 407, affine transition binder at 630, full signature at 635-638, and proof through 675. Exactly the required result. DAG attachment and blueprint searches found no existing equality node.",
+   "date": "2026-10-18",
+   "verdict": "match"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType",
+  "file": "Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean",
+  "line": 635,
+  "how": "exact: include hc and section variables [IsCofiltered J], [forall i, CompactSpace (D.obj i)], [LocallyOfFiniteType f] and affine transitions"
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ClosedLimitLfpStabilization",
+  "group": "G9",
+  "date": "2026-10-18"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-direct-image-finiteness-proper",
+   "place": "Auxiliary Tag 081B stabilization argument: descend the inverse equation after descending the identity map of the limit.",
+   "via": [
+    "lem-weil-pbc-closed-limit-lfp-stabilization",
+    "lem-weil-pbc-quasifinite-fp-finite-factorization",
+    "lem-weil-pbc-etale-quasifinite-shriek-constructible",
+    "lem-weil-pbc-etale-compactification-constructibility",
+    "lem-weil-pbc-etale-proper-direct-image-finiteness"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": true,
+  "module": "Mathlib.AlgebraicGeometry.AffineTransitionLimit",
+  "declaration": "AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType",
+  "statement": "lemma Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType\n    {i : I} (a b : D.obj i ⟶ X) (ha : t.app i = a ≫ f) (hb : t.app i = b ≫ f)\n    (hab : c.π.app i ≫ a = c.π.app i ≫ b) :\n    ∃ (k : I) (hik : k ⟶ i), D.map hik ≫ a = D.map hik ≫ b",
+  "branch": "mathlib",
+  "by": "G9",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G9",
+  "result": "pass",
+  "landing": "20261018T062802-L-652869",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G9",
+  "result": "pass",
+  "landing": "20261018T062802-L-652869",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
