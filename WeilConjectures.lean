@@ -166,6 +166,7 @@ public import WeilConjectures.Algebra.LimitFinitePresentation
 public import WeilConjectures.Algebra.LimitFinitePresentation.Colimits
 public import WeilConjectures.Algebra.LimitFinitePresentation.Core
 public import WeilConjectures.Algebra.Module.AdicCompletionStableRanges
+public import WeilConjectures.Algebra.Module.AdicDualityTransport
 public import WeilConjectures.Algebra.Module.AdicPairingLimit
 public import WeilConjectures.Algebra.Module.InverseLimitFinite
 public import WeilConjectures.Algebra.Module.QuotientPrimaryComponentNoTorsion

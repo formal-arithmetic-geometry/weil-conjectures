@@ -170,8 +170,161 @@ theorem exists_isSimilitude_torsion_of_finiteLevel
   let Pm (m : ℕ) : (A ⧸ TA) →ₗ[ℤ_[p]] (B ⧸ TB) →ₗ[ℤ_[p]] ℤ_[p] := Matrix.toLinearMap₂ bA bB (G m)
   have hPm (m : ℕ) (a : A) (b : B) :
       Ideal.Quotient.mk _ (Pm m (TA.mkQ a) (TB.mkQ b)) = P0 m a b := by
-    sorry
-  sorry
+    have := eq_of_eq_on_lifts bA bB aI bJ haI hbJ
+      (((Pm m).compl₁₂ TA.mkQ TB.mkQ).compr₂ (Ideal.span {(p : ℤ_[p]) ^ m}).mkQ)
+      (P0 m) ?_ ?_ ?_
+    · exact congr($this a b)
+    · intro t ht
+      ext b
+      have : TA.mkQ t = 0 := (Submodule.Quotient.mk_eq_zero _).2 ht
+      simp [this, hP0, hcA t ht]
+    · intro t ht
+      ext a
+      have : TB.mkQ t = 0 := (Submodule.Quotient.mk_eq_zero _).2 ht
+      simp [this, hP0, hcB t ht]
+    · intro i j
+      simp only [compl₁₂_apply, compr₂_apply, haI, hbJ, Pm, Matrix.toLinearMap₂_apply_basis,
+        Submodule.mkQ_apply, G]
+      exact Quotient.out_eq _
+  have hmem {m : ℕ} {z : ℤ_[p]} :
+      z ∈ PadicInt.powOpenAddSubgroup p m ↔ Ideal.Quotient.mk _ z = 0 :=
+    (Ideal.Quotient.eq_zero_iff_mem).symm
+  have hlevel (m : ℕ) : IsLevelSimilitude FA' FB' c (e + cB + cA) m (Pm m) := by
+    refine ⟨fun x y ↦ ?_, fun x hx ↦ ?_, fun y hy ↦ ?_⟩
+    · obtain ⟨a, rfl⟩ := Submodule.mkQ_surjective TA x
+      obtain ⟨b, rfl⟩ := Submodule.mkQ_surjective TB y
+      have e1 : FA' (TA.mkQ a) = TA.mkQ (FA a) := rfl
+      have e2 : FB' (TB.mkQ b) = TB.mkQ (FB b) := rfl
+      rw [hmem, map_sub, map_mul, e1, e2, hPm, hPm, hP0, hP0, ← map_smul, ← map_smul,
+        hQF, ← Ideal.Quotient.algebraMap_eq,
+        ← Algebra.smul_def, sub_self]
+    · obtain ⟨a, rfl⟩ := Submodule.mkQ_surjective TA x
+      have hab (b : B) : P0 m a b = 0 := by
+        rw [← hPm]
+        exact hmem.1 (hx _)
+      set z := ρ m ((p : ℤ_[p]) ^ cB • (p : ℤ_[p]) ^ cA • a) with hzdef
+      have hz : (p : ℤ_[p]) ^ e • z = 0 := by
+        refine hQl m ?_
+        rw [map_zero]
+        ext y
+        obtain ⟨b, hb⟩ := hrangeF m y
+        rw [map_smul, smul_apply, ← map_smul, ← hb, zero_apply, hzdef, map_smul, map_smul,
+          smul_apply,
+          ← map_smul, ← map_smul]
+        exact hab b
+      rw [← map_smul] at hz
+      obtain ⟨a', ha'⟩ := hkerA m _ hz
+      refine ⟨TA.mkQ a', ?_⟩
+      rw [← map_smul, ← map_smul, ← ha', smul_smul, smul_smul, ← pow_add, ← pow_add]
+    · obtain ⟨b, rfl⟩ := Submodule.mkQ_surjective TB y
+      have hab (a : A) : P0 m a b = 0 := by
+        rw [← hPm]
+        exact hmem.1 (hy _)
+      set z := σ m ((p : ℤ_[p]) ^ cA • (p : ℤ_[p]) ^ cB • b) with hzdef
+      have hz : (p : ℤ_[p]) ^ e • z = 0 := by
+        refine hQr m ?_
+        rw [map_zero]
+        ext x
+        obtain ⟨a, ha⟩ := hrangeE m x
+        rw [flip_apply, map_smul, ← smul_apply, ← map_smul, ← ha, zero_apply, hzdef,
+          map_smul, map_smul, ← smul_apply, ← map_smul, ← map_smul]
+        exact hab a
+      rw [← map_smul] at hz
+      obtain ⟨b', hb'⟩ := hkerB m _ hz
+      refine ⟨TB.mkQ b', ?_⟩
+      rw [← map_smul, ← map_smul, ← hb', smul_smul, smul_smul, ← pow_add, ← pow_add,
+        add_right_comm e cA cB]
+  obtain ⟨Gr, hGF, hGl, hGr⟩ :=
+    exists_isSimilitude_of_forall_level FA' FB' c _ fun m ↦ ⟨Pm m, hlevel m⟩
+  refine ⟨Gr.compl₁₂ TA.mkQ TB.mkQ, fun a b ↦ ?_, fun a ha ↦ ?_, fun b hb ↦ ?_⟩
+  · have := hGF (TA.mkQ a) (TB.mkQ b)
+    erw [Submodule.mapQ_apply, Submodule.mapQ_apply] at this
+    exact this
+  · have h0 : Gr (TA.mkQ a) = 0 := LinearMap.ext fun y ↦ by
+      obtain ⟨b, rfl⟩ := Submodule.mkQ_surjective TB y
+      exact congr($ha b)
+    exact (Submodule.Quotient.mk_eq_zero _).1 (hGl _ h0)
+  · have h0 : Gr.flip (TB.mkQ b) = 0 := LinearMap.ext fun x ↦ by
+      obtain ⟨a, rfl⟩ := Submodule.mkQ_surjective TA x
+      exact congr($hb a)
+    exact (Submodule.Quotient.mk_eq_zero _).1 (hGr _ h0)
+
+omit [Module.Finite ℤ_[p] A] [Module.Finite ℤ_[p] B] in
+/-- The `K`-bilinear extension of a `ℤ_p`-bilinear pairing along base changes. -/
+noncomputable def baseChangePairing {K V W : Type*} [Field K] [Algebra ℤ_[p] K] [AddCommGroup V]
+    [Module K V] [Module ℤ_[p] V] [IsScalarTower ℤ_[p] K V] [AddCommGroup W] [Module K W]
+    [Module ℤ_[p] W] [IsScalarTower ℤ_[p] K W] {ι : A →ₗ[ℤ_[p]] V} (hι : IsBaseChange K ι)
+    {κ : B →ₗ[ℤ_[p]] W} (hκ : IsBaseChange K κ) (P : A →ₗ[ℤ_[p]] B →ₗ[ℤ_[p]] ℤ_[p]) :
+    V →ₗ[K] W →ₗ[K] K :=
+  hι.lift
+    { toFun a := hκ.lift ((Algebra.linearMap ℤ_[p] K) ∘ₗ P a)
+      map_add' a a' := hκ.algHom_ext _ _ fun b ↦ by
+        simp only [add_apply, IsBaseChange.lift_eq, coe_comp, Function.comp_apply, map_add,
+          Algebra.linearMap_apply]
+      map_smul' r a := hκ.algHom_ext _ _ fun b ↦ by
+        simp only [smul_apply, IsBaseChange.lift_eq, coe_comp, Function.comp_apply, map_smul,
+          Algebra.linearMap_apply, RingHom.id_apply, smul_eq_mul, map_mul, Algebra.smul_def] }
+
+omit [Module.Finite ℤ_[p] A] [Module.Finite ℤ_[p] B] in
+lemma baseChangePairing_apply {K V W : Type*} [Field K] [Algebra ℤ_[p] K] [AddCommGroup V]
+    [Module K V] [Module ℤ_[p] V] [IsScalarTower ℤ_[p] K V] [AddCommGroup W] [Module K W]
+    [Module ℤ_[p] W] [IsScalarTower ℤ_[p] K W] {ι : A →ₗ[ℤ_[p]] V} (hι : IsBaseChange K ι)
+    {κ : B →ₗ[ℤ_[p]] W} (hκ : IsBaseChange K κ) (P : A →ₗ[ℤ_[p]] B →ₗ[ℤ_[p]] ℤ_[p]) (a : A)
+    (b : B) : baseChangePairing hι hκ P (ι a) (κ b) = algebraMap ℤ_[p] K (P a b) := by
+  simp [baseChangePairing, IsBaseChange.lift_eq]
+
+/-- **Transport of finite-level duality to `K`** (the linear algebra of blueprint
+`thm-pod-qbar-coefficient-pairing`). Let `A`, `B` be finitely generated `ℤ_p`-modules with
+endomorphisms `F_A`, `F_B`, and `V`, `W` their extensions of scalars to a field `K ⊇ ℤ_p` with
+endomorphisms `F_V`, `F_W` extending them. Suppose that for every `m` there are maps
+`ρ : A ⟶ Eₘ`, `σ : B ⟶ Fₘ` with kernels in `pᵐ A`, `pᵐ B` and images containing `pᵉ Eₘ`,
+`pᵉ Fₘ`, and a pairing `Qₘ : Eₘ × Fₘ ⟶ ℤ_p / pᵐ`, nondegenerate on both sides, whose
+restriction along `ρ`, `σ` is a `c`-similitude. Then there is a perfect pairing `V × W ⟶ K`
+which is a `c`-similitude for `F_V`, `F_W`. -/
+theorem exists_isPerfPair_of_finiteLevel
+    (hkerA : ∀ m a, ρ m a = 0 → ∃ a', a = (p : ℤ_[p]) ^ m • a')
+    (hkerB : ∀ m b, σ m b = 0 → ∃ b', b = (p : ℤ_[p]) ^ m • b')
+    (hrangeE : ∀ m (y : E m), (p : ℤ_[p]) ^ e • y ∈ range (ρ m))
+    (hrangeF : ∀ m (y : F m), (p : ℤ_[p]) ^ e • y ∈ range (σ m))
+    (hQl : ∀ m, Injective (Q m)) (hQr : ∀ m, Injective (Q m).flip)
+    (hQF : ∀ m a b, Q m (ρ m (FA a)) (σ m (FB b)) = c • Q m (ρ m a) (σ m b))
+    {K V W : Type*} [Field K] [Algebra ℤ_[p] K] [FaithfulSMul ℤ_[p] K] [AddCommGroup V]
+    [Module K V] [Module ℤ_[p] V] [IsScalarTower ℤ_[p] K V] [AddCommGroup W] [Module K W]
+    [Module ℤ_[p] W] [IsScalarTower ℤ_[p] K W] {ι : A →ₗ[ℤ_[p]] V} (hι : IsBaseChange K ι)
+    {κ : B →ₗ[ℤ_[p]] W} (hκ : IsBaseChange K κ) (FV : V →ₗ[K] V) (FW : W →ₗ[K] W)
+    (hFV : ∀ a, FV (ι a) = ι (FA a)) (hFW : ∀ b, FW (κ b) = κ (FB b)) :
+    ∃ P : V →ₗ[K] W →ₗ[K] K, P.IsPerfPair ∧
+      ∀ x y, P (FV x) (FW y) = algebraMap ℤ_[p] K c * P x y := by
+  obtain ⟨P, hPF, hPl, hPr⟩ := exists_isSimilitude_torsion_of_finiteLevel FA FB c e ρ σ Q hkerA
+    hkerB hrangeE hrangeF hQl hQr hQF
+  have hspanV : Submodule.span K (Set.range ι) = ⊤ :=
+    eq_top_iff.2 fun v _ ↦ hι.inductionOn v _ (zero_mem _)
+      (fun m ↦ Submodule.subset_span ⟨m, rfl⟩) (fun s _ hn ↦ Submodule.smul_mem _ s hn)
+      (fun _ _ ↦ add_mem)
+  have hspanW : Submodule.span K (Set.range κ) = ⊤ :=
+    eq_top_iff.2 fun v _ ↦ hκ.inductionOn v _ (zero_mem _)
+      (fun m ↦ Submodule.subset_span ⟨m, rfl⟩) (fun s _ hn ↦ Submodule.smul_mem _ s hn)
+      (fun _ _ ↦ add_mem)
+  refine ⟨baseChangePairing hι hκ P, isPerfPair_of_span_eq_top ι κ hspanV hspanW P _
+    (baseChangePairing_apply hι hκ P) hPl hPr, fun x y ↦ ?_⟩
+  induction x using hι.inductionOn with
+  | zero => simp
+  | smul s x hx =>
+    simp only [map_smul, smul_apply, smul_eq_mul, hx]
+    ring
+  | add x x' hx hx' =>
+    simp only [map_add, add_apply, hx, hx']
+    ring
+  | tmul a =>
+    induction y using hκ.inductionOn with
+    | zero => simp
+    | smul s y hy =>
+      simp only [map_smul, smul_eq_mul, hy]
+      ring
+    | add y y' hy hy' =>
+      simp only [map_add, hy, hy']
+      ring
+    | tmul b => rw [hFV, hFW, baseChangePairing_apply, baseChangePairing_apply, hPF, map_mul]
 
 end Transport
 
