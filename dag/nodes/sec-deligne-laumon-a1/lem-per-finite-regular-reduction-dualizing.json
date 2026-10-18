@@ -23,9 +23,138 @@
   "def-weil-pbc-constructible-complexes",
   "lem-per-adic-exceptional-projection"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $s=\\operatorname{Spec}k$, $T=X_{\\mathrm{red}}$, $i:T\\hookrightarrow X$ and $b=a i$. Finite-type affine coordinate rings over $k$ are excellent: apply excellence of fields and stability under finite-type algebras (localizations included). Excellence includes Noetherianity, and finite type provides a finite affine cover. This applies to $X$ and to the quotient-coordinate rings of $T$. Thus both are Noetherian excellent and ell is invertible on them. Nagata compactification applies to $a$ and $b$, since the base $s$ is quasi-compact and quasi-separated and both structure maps are separated of finite type. The reduction inclusion is proper because it is a closed immersion. Its underlying space is $|X|$, so $T$ is nonempty and irreducible, in particular connected. The finite-type dimension bound makes $d$ a finite nonnegative integer. Since the base field is locally Noetherian, the locally-finite-type to locally-finitely-presented theorem applies to a and b; finite type gives quasi-compactness and separatedness gives quasi-separatedness, so both maps are finitely presented, as required for the coefficient comparison.",
+   "uses": [
+    "def-weil-pbc-scheme-reduction",
+    "lem-exc-fields-excellent",
+    "lem-exc-finite-type-localization-excellent",
+    "thm-nagata-compactification",
+    "lem-weil-pbc-closed-immersion-proper",
+    "lem-kun-dimension-finite-type",
+    "pqf-lem-lft-fp-locnoeth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, hypotheses for Proposition 4.1.2; Stacks excellence and compactification preparation"
+   }
+  },
+  {
+   "text": "For each $n$, apply the finite etale twist theorem with $A=\\mathbf Z/\\ell^n\\mathbf Z$ and exponent $\\ell^n$. It gives the etale rank-one line $\\Lambda_{n,X}(d)$ and its pullback identification $i^{-1}\\Lambda_{n,X}(d)\\cong\\Lambda_{n,T}(d)$. It also identifies the exponent-change comparison with the power map $u\\mapsto u^\\ell$. All coefficient and twist sheaves here are on the small etale sites. This supplies the claimed local freeness without assuming that $k$ contains roots of unity.",
+   "uses": [
+    "lem-asd-etale-finite-twist-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, Tate-twist conventions in 2.1 and 2.4"
+   }
+  },
+  {
+   "text": "Write $c(t)=\\dim\\mathcal O_{T,t}$. Since $T$ is irreducible and locally of finite type over $k$, its dimension at every point is $d$. The finite-type dimension formula therefore gives $d=c(t)+\\operatorname{trdeg}_k\\kappa(t)$. Hence the desired normalization on $T$ is $\\delta_T(t)=d-c(t)$. At the generic point $c=0$, so this normalization has value $d$. No smoothness or separability has been used.",
+   "uses": [
+    "lem-sc-dimension-locally-algebraic",
+    "lem-kun-dimension-formula"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, proof of Proposition 6.2.2.1, regular connected case; finite-type dimension formula"
+   }
+  },
+  {
+   "text": "The regular-unit theorem equips $\\Lambda_{n,s}$ with potential pinnings for the zero dimension function. Apply finite-type extraordinary pullback to $a$ and to $b$. It equips $a_n^!\\Lambda_{n,s}$ with the relative function $x\\mapsto\\operatorname{trdeg}_k\\kappa(x)$ and equips $b_n^!\\Lambda_{n,s}$ with the same function on $T$. The comparison $i_n^!a_n^!\\cong b_n^!$ preserves these pinnings. Since $T$ is regular, the regular-unit theorem with $m=d$ equips $\\Lambda_{n,T}(d)[2d]$ with potential pinnings for $d-c(t)$, which is exactly the function calculated in step 3.",
+   "uses": [
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-potential-dualizing-finite-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, Propositions 2.4.4.1 and 4.1.2 and Remark 4.1.3"
+   }
+  },
+  {
+   "text": "Apply uniqueness with fixed pinnings on $(T,\\delta_T)$ to the two objects from step 4. This gives a pinning-preserving isomorphism $\\theta_{n,T}:b_n^!\\Lambda_{n,s}\\xrightarrow{\\sim}\\Lambda_{n,T}(d)[2d]$. The same uniqueness theorem puts the normalized potential objects in $D^b_c$ with finite Tor amplitude, so this is also an isomorphism in the constructible category specified in the item. It is the fixed pinnings, rather than an arbitrary choice of a dualizing object, that select the isomorphism.",
+   "uses": [
+    "lem-per-potential-dualizing-uniqueness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, Theorem 5.1.1 and proof of Proposition 6.2.2.1"
+   }
+  },
+  {
+   "text": "The map $i$ is a universal homeomorphism: on every affine base change it is the spectrum of a quotient by an ideal generated by nilpotent elements, and such a quotient has exactly the same prime ideals. Topological invariance makes $i^{-1}$ and $i_*$ inverse exact equivalences of etale topoi. Their module versions are also exact inverse equivalences, since the coefficient sheaves are constant, and applying them termwise gives inverse derived equivalences. For proper $i$, its compactification with identity open immersion computes $Ri_!=Ri_*$; the compactification comparisons identify this with the compact-support functor in the adjunction. The right adjoint of the equivalence $Ri_*$ is its inverse $i^{-1}$, so uniqueness of right adjoints gives $i_n^!\\cong i^{-1}$. Together with step 4, this identifies $i^{-1}(a_n^!\\Lambda_{n,s})$ with $b_n^!\\Lambda_{n,s}$. Pullback of the twist was identified in step 2. Full faithfulness now lifts $\\theta_{n,T}$ uniquely to an isomorphism $\\theta_{n,X}:a_n^!\\Lambda_{n,s}\\xrightarrow{\\sim}\\Lambda_{n,X}(d)[2d]$. Finally, this is the constructible adjoint of the statement. The object $\\Lambda_{n,X}(d)[2d]$ lies in $D^b_c$, and by [lem-per-adic-exceptional-projection] $Ra_!$ restricts to the full subcategories $D^b_c\\subset D^+$ with a right adjoint $a_n^!$ there. For $K\\in D^b_c(X_{\\mathrm{et}},\\Lambda_n)$ the bounded-below adjunction gives $\\operatorname{Hom}(K,a^!_{+}\\Lambda_{n,s})=\\operatorname{Hom}(Ra_!K,\\Lambda_{n,s})$, where $a^!_{+}$ is the bounded-below adjoint of the potential nodes. So the bounded-constructible object $a^!_{+}\\Lambda_{n,s}$ represents the functor defining $a_n^!\\Lambda_{n,s}$. By Yoneda the two agree, with the same counit, and the same holds for $b$.",
+   "uses": [
+    "def-weil-pbc-scheme-reduction",
+    "thm-weil-pbc-universal-homeomorphism-invariance",
+    "def-amb-etale-compact-support",
+    "lem-amb-etale-compact-comparisons",
+    "lem-per-adic-exceptional-projection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, proof of Proposition 6.2.2.1: reduction to the reduced case; etale topological invariance"
+   }
+  },
+  {
+   "text": "Apply the normalized coefficient-tower theorem to the potential objects of step 4. Its extraordinary-pullback clause identifies the actual derived coefficient reductions of $a_n^!\\Lambda_{n,s}$ and $b_n^!\\Lambda_{n,s}$ with their normalized potential comparisons. The regular pinnings on $\\Lambda_{n,T}(d)[2d]$ reduce to those for $n$. Consequently both routes around the square comparing $\\theta_{n+1,T}\\otimes^L\\Lambda_n$ and $\\theta_{n,T}$ preserve the same pinnings; uniqueness makes the square commute. To identify the target transition explicitly, locally choose a generator $\\zeta$ of $\\mu_{\\ell^{n+1}}$; then $\\zeta^\\ell$ generates $\\mu_{\\ell^n}$. On these generators the power map is exactly the scalar quotient $\\Lambda_{n+1}\\to\\Lambda_n$. The tensor power of this calculation gives reduction of the $d$th twist, with no higher Tor since it is locally free. Shifting by $-2d$ therefore gives precisely the ordinary rank-one tower in the statement. The base object at $s$ is the coefficient unit, so the normalization is the relative transcendence-degree function, including for imperfect $k$.",
+   "uses": [
+    "lem-per-potential-dualizing-coefficient-tower",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-potential-dualizing-uniqueness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Bhatt–Scholze, Lemmas 6.7.18 and 6.7.20; ILO XVII, Theorem 5.1.1"
+   }
+  },
+  {
+   "text": "The lift in step 6 is also compatible with reduction. Let $\\iota_n:i^{-1}a_n^!\\Lambda_{n,s}\\cong i_n^!a_n^!\\Lambda_{n,s}\\cong b_n^!\\Lambda_{n,s}$ be the step-6 identification. It preserves pinnings by the transitivity clause of finite-type extraordinary pullback (step 4, applied to $i$ and $a$). Compare two maps $(b^!_{n+1}\\Lambda_{n+1,s})\\otimes^L\\Lambda_n\\to b^!_n\\Lambda_{n,s}$. The first is the coefficient-tower comparison $\\rho^b_n$ for $b$. The second is $\\iota_n\\circ i^{-1}\\rho^a_n\\circ(\\iota_{n+1}^{-1}\\otimes^L\\Lambda_n)$, using exactness of $i^{-1}$ and its commutation with constant-coefficient $\\otimes^L$. Both preserve the pinnings. For the second, $\\rho^a_n$ does by the tower theorem, and $i^{-1}=i^!$ carries pinning-preserving maps to pinning-preserving maps, since the pinnings of $i^!$ are natural. Uniqueness on $T$ makes the two maps equal. Hence $i^{-1}$ carries the coefficient square on $X$, formed by $\\theta_{n+1,X}\\otimes^L\\Lambda_n$, $\\theta_{n,X}$, $\\rho^a_n$ and the twist reduction, to the commuting square on $T$ of step 7. Faithfulness of the equivalence $i^{-1}$ makes the square on $X$ commute. This gives the asserted compatibility of the isomorphisms on $X$ with derived coefficient reduction.",
+   "uses": [
+    "lem-per-potential-dualizing-finite-pullback",
+    "lem-per-potential-dualizing-coefficient-tower",
+    "lem-per-potential-dualizing-uniqueness",
+    "thm-weil-pbc-universal-homeomorphism-invariance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.7.20, proof (uniqueness of the compatible reductions); ILO XVII Proposition 4.1.2, Remark 4.1.3 and Theorem 5.1.1"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-scheme-reduction",
+  "lem-exc-fields-excellent",
+  "lem-exc-finite-type-localization-excellent",
+  "thm-nagata-compactification",
+  "lem-weil-pbc-closed-immersion-proper",
+  "lem-kun-dimension-finite-type",
+  "pqf-lem-lft-fp-locnoeth",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-sc-dimension-locally-algebraic",
+  "lem-kun-dimension-formula",
+  "lem-per-potential-dualizing-regular-unit",
+  "lem-per-potential-dualizing-finite-pullback",
+  "lem-per-potential-dualizing-uniqueness",
+  "thm-weil-pbc-universal-homeomorphism-invariance",
+  "def-amb-etale-compact-support",
+  "lem-amb-etale-compact-comparisons",
+  "lem-per-adic-exceptional-projection",
+  "lem-per-potential-dualizing-coefficient-tower"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "XVII, Proposition 2.4.4.1, Proposition 4.1.2 and Remark 4.1.3, Theorem 5.1.1, proof of Proposition 6.2.2.1; coefficient coherence from Bhatt–Scholze Lemmas 6.7.18 and 6.7.20"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -61,10 +190,38 @@
    "results": "AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation; AlgebraicGeometry.Scheme.Hom.normalizationDiagram; AlgebraicGeometry.StructureSheaf.comap_const; AlgebraicGeometry.StructureSheaf.res_const; ModuleCat.Tilde.res_const; AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit; AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux; AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalized torsion etale dualizing complex of a scheme with regular reduction is a Tate twist shifted by twice its dimension",
+   "results": "{\"t\": \"2026-10-18T11:14:41Z\", \"tool\": \"leanfinder\", \"query\": \"Normalized torsion etale dualizing complex of a scheme with regular reduction is a Tate twist shifted by twice its dimension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.etaleLocus_eq_compl_support\", \"AlgebraicGeometry.Scheme.Hom.normalizationDiagram\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale\", \"AlgebraicGeometry.Scheme.Hom.preservesLocalization_normalizationDiagramMap\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_symm_D_algebraMap\", \"Algebra.basicOpen_subset_etaleLocus_iff\", \"Algebra.smoothLocus_eq_compl_support_inter\", \"Algebra.etaleLocus\"], \"digest\": \"e400c035de32968e\"}",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "potential.?dual|dualizing.?complex|pinning|residue.?compatib",
+   "results": "{\"t\": \"2026-10-18T11:15:46Z\", \"tool\": \"grep\", \"query\": \"potential.?dual|dualizing.?complex|pinning|residue.?compatib\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"dualizing\"",
+   "results": "{\"t\": \"2026-10-18T11:15:46Z\", \"tool\": \"loogle\", \"query\": \"\\\"dualizing\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite coefficient exceptional dualizing complex on a regular reduction over any field is a dimension Tate twist",
+   "results": "{\"t\": \"2026-10-18T11:15:50Z\", \"tool\": \"leansearch\", \"query\": \"Finite coefficient exceptional dualizing complex on a regular reduction over any field is a dimension Tate twist\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Subspace.instModuleDualFiniteDimensional\", \"FGModuleCat.FGModuleCatDual\", \"Subspace.dual_finrank_eq\", \"Basis.linearEquiv_dual_iff_finiteDimensional\", \"Subspace.finrank_dualCoannihilator_eq\", \"IsLocalRing.instFiniteDimensionalResidueFieldCotangentSpaceOfIsNoetherianRing\", \"Module.DualBases.coeffs_apply\", \"Module.instFiniteDimensionalOfIsReflexive\"], \"digest\": \"70e6332cdf54106b\"}",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-qbar-generic-duality-model",
@@ -84,5 +241,79 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-per-finite-regular-reduction-dualizing",
+  "worker": "stage1",
+  "summary": "Derive the regular-reduction model by the canonical regular pinned unit, finite-type extraordinary normalization, uniqueness, and exact etale invariance under reduction; track actual coefficient comparisons by normalized pinnings. Preserve the statement and arbitrary-field hypotheses. Five new prime-power interfaces; existing residue-field interfaces only allow F_ell.",
+  "blueprint": "lem-per-artin-gabber-affine-curve, proof Step 3: dimension-normalized Verdier duality underlying the generic shifted ordinary classes in Steps 2–3; this is the finite regular local model introduced by lem-per-qbar-generic-duality-model.",
+  "tool_uses": [
+   {
+    "node": "lem-exc-fields-excellent",
+    "why": "Generic geometric/etale interface used in the regular normalized local model: Fields are excellent. The perverse unit supplies no version of this auxiliary result; its Verdier-duality route is preserved."
+   },
+   {
+    "node": "lem-exc-finite-type-localization-excellent",
+    "why": "Generic geometric/etale interface used in the regular normalized local model: Excellence is preserved by finite type algebras and localization. The perverse unit supplies no version of this auxiliary result; its Verdier-duality route is preserved."
+   },
+   {
+    "node": "thm-nagata-compactification",
+    "why": "Generic geometric/etale interface used in the regular normalized local model: Nagata compactification, [stacks-project]. The perverse unit supplies no version of this auxiliary result; its Verdier-duality route is preserved."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-proper",
+    "why": "Generic geometric/etale interface used in the regular normalized local model: Closed immersions are proper. The perverse unit supplies no version of this auxiliary result; its Verdier-duality route is preserved."
+   },
+   {
+    "node": "lem-kun-dimension-finite-type",
+    "why": "Generic geometric/etale interface used in the regular normalized local model: Finiteness of the dimension of a finite type scheme. The perverse unit supplies no version of this auxiliary result; its Verdier-duality route is preserved."
+   },
+   {
+    "node": "lem-asd-etale-finite-twist-pullback",
+    "why": "Generic geometric/etale interface used in the regular normalized local model: Finite Tate lines on the small etale site and their pullback. The perverse unit supplies no version of this auxiliary result; its Verdier-duality route is preserved."
+   },
+   {
+    "node": "lem-sc-dimension-locally-algebraic",
+    "why": "Generic geometric/etale interface used in the regular normalized local model: Dimension of an irreducible locally algebraic scheme over a field. The perverse unit supplies no version of this auxiliary result; its Verdier-duality route is preserved."
+   },
+   {
+    "node": "lem-kun-dimension-formula",
+    "why": "Generic geometric/etale interface used in the regular normalized local model: Dimension formula for finite type schemes. The perverse unit supplies no version of this auxiliary result; its Verdier-duality route is preserved."
+   },
+   {
+    "node": "thm-weil-pbc-universal-homeomorphism-invariance",
+    "why": "Generic geometric/etale interface used in the regular normalized local model: Universal-homeomorphism invariance. The perverse unit supplies no version of this auxiliary result; its Verdier-duality route is preserved."
+   },
+   {
+    "node": "lem-amb-etale-compact-comparisons",
+    "why": "Generic geometric/etale interface used in the regular normalized local model: The etale compact-support comparisons. The perverse unit supplies no version of this auxiliary result; its Verdier-duality route is preserved."
+   },
+   {
+    "node": "pqf-lem-lft-fp-locnoeth",
+    "why": "The coefficient-reduction theorem requires finite presentation; this generic Noetherian-base fact supplies local finite presentation, with quasi-compactness and quasi-separatedness already present."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-exc-fields-excellent",
+  "lem-exc-finite-type-localization-excellent",
+  "thm-nagata-compactification",
+  "lem-weil-pbc-closed-immersion-proper",
+  "lem-kun-dimension-finite-type",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-sc-dimension-locally-algebraic",
+  "lem-kun-dimension-formula",
+  "thm-weil-pbc-universal-homeomorphism-invariance",
+  "lem-amb-etale-compact-comparisons",
+  "pqf-lem-lft-fp-locnoeth"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-NK-769edc05e",
+  "group": "NK",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NK-769edc05e (reviewer sub-agent of L); spot-checked: Read the item, all five new nodes and every cited statement, against ILO XVII Def. 1.3.1/1.4.1/2.1.1–2.1.2, Prop. 2.4.1.1/2.4.4.1, Prop. 4.1.2 + Rem. 4.1.3, Thm 5.1.1, Prop. 6.2.2.1 (proof p.294)/6.2.2.3, and BS Lemmas 6.7.18/6.7.20. The item statement is true and unchanged. Small cases checked: d=0 with a purely inseparable residue field, A^1 giving Λ(1)[2], a non-smooth regular curve over an imperfect field, and n=1. The new nodes are true theorems from those sources at the Z/ℓ^n stages. They generalize N3's F_ℓ-only def-per-potential-dualizing and lem-per-potential-extraordinary-pullback rather than duplicating them. The smooth/perfect-field purity nodes cannot replace regular-unit. No node restates a clause of the item, no SGA is cited, and the 11 tool_uses are generic infrastructure and accepted. Two E5 gaps fixed in the item. (1) Step 6: the item's a_n^! is the D^b_c adjoint of lem-per-adic-exceptional-projection, while the potential nodes compute the D^+ adjoint. Added the Yoneda identification on the full subcategory D^b_c and cited that node (same unit, already a stmt_dep). (2) Step 7: the lift of the reduction square to X through i^{-1} needed the transported comparison for a to equal the one for b, which no node states. Moved this into a new step 8: both maps are pinning-preserving isomorphisms between the same pinned potential complexes on T, so uniqueness makes them equal, and faithfulness of i^{-1} gives the square on X. All steps are under 2000 characters and proof_deps is the union of the uses. Advisory: the new nodes have no lean_audit field.; 1 file(s) fixed by the reviewer"
  }
 }

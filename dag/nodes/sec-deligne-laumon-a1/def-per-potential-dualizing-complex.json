@@ -1,0 +1,75 @@
+{
+ "id": "def-per-potential-dualizing-complex",
+ "kind": "definition",
+ "title": "Potential dualizing complexes with prime-power coefficients",
+ "statement": "Let $\\ell$ be a prime, $n\\geq1$, $\\Lambda=\\mathbf Z/\\ell^n\\mathbf Z$, and $T$ a Noetherian excellent scheme on which $\\ell$ is invertible. Noetherian means admitting a finite affine cover by spectra of Noetherian rings; excellent means that its affine coordinate rings are excellent [def-exc-excellent-ring]. Use the small etale derived category [def-weil-pbc-derived-categories]. Put $\\Lambda_T(1)=\\mu_{\\ell^n,T}$, the sheaf of units with $u^{\\ell^n}=1$, acted on by exponentiation; positive twists are tensor powers, the zeroth twist is $\\Lambda_T$, and negative twists are powers of the module dual [def-asd-finite-etale-tate-twist]. A dimension function $\\delta:|T|\\to\\mathbf Z$ satisfies $\\delta(y)=\\delta(x)+1$ at every immediate geometric specialization $y\\rightsquigarrow x$ (codimension one after strict localization at $x$). For a point $x$, let $R\\Gamma_xK$ be extraordinary restriction to the closed point after restriction to $\\operatorname{Spec}\\mathcal O_{T,x}$, an object on $\\operatorname{Spec}\\kappa(x)_{\\mathrm{et}}$ [def-weil-residue-field]; at a geometric point take its geometric fibre, equivalently supported cohomology on the strict henselization [def-weil-geometric-point, def-weil-pbc-strict-henselization-limit].\n\nA pinned potential dualizing complex for $(T,\\delta,\\Lambda)$ is $K\\in D^+(T_{\\mathrm{et}},\\Lambda)$ with isomorphisms $p_x:R\\Gamma_xK\\xrightarrow{\\sim}\\Lambda(\\delta(x))[2\\delta(x)]$ such that, after geometric restriction, $p_y=p_x(1)[2]\\circ\\operatorname{sp}_{y,x}$ for every immediate specialization. The normalized residue map $\\operatorname{sp}_{y,x}:R\\Gamma_yK\\to R\\Gamma_xK(1)[2]$ is constructed as follows. In the strict localization at $x$, take the reduced closure $Z$ of $y$ and its normalization $\\widetilde Z$ [def-sc-normalization], a strictly henselian trait. On that trait use the tame-inertia residue transition for extraordinary restriction of $K$ to $Z$, divided by the purely inseparable degree $[\\kappa(\\widetilde x):\\kappa(x)]$, which is invertible in $\\Lambda$. The trait transition is the map from the generic fibre twisted by $-1$ to the degree-two term of the supported-cohomology model $M_x\\to M_y^S\\to\\operatorname{Hom}_{\\Lambda[[G]]}(I_G,M_y^S)$: $S$ is wild inertia, $G$ tame inertia, $I_G$ its augmentation ideal; use averaging over $S$ and evaluation on $1-\\sigma$ for a tame generator $\\sigma$, termwise and totalized for complexes. A morphism of pinned complexes is a derived-category morphism whose induced maps on every $R\\Gamma_x$ respect $p_x$.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose XVII, Definitions 1.1.1, 1.2.3.1, 1.3.1, 1.4.1 and 2.1.1–2.1.2, with coefficient integer ell^n"
+ },
+ "stmt_deps": [
+  "def-exc-excellent-ring",
+  "def-weil-pbc-derived-categories",
+  "def-asd-finite-etale-tate-twist",
+  "def-weil-residue-field",
+  "def-weil-geometric-point",
+  "def-weil-pbc-strict-henselization-limit",
+  "def-sc-normalization"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Potential dualizing complex on an excellent scheme with local cohomology pinnings compatible with codimension one residue maps",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"localCohomology.diagram\", \"module\": \"Mathlib/Algebra/Homology/LocalCohomology\", \"type\": \"{R : Type u} →\\n  [inst : CommRing R] →\\n    {D : Type v} →\\n      [inst_1 : CategoryTheory.SmallCategory D] →\\n        CategoryTheory.Functor D (Ideal R) →\\n          ℕ → CategoryTheory.Functor Dᵒᵖ (CategoryTheory.Functor (ModuleCat R) (ModuleCat R))\", \"doc\": \"For a commutative ring $ R $, a small category $ \\\\mathcal{D} $, and a functor $ I : \\\\mathcal{D} \\\\to \\\\text{Ideal}(R) $, this constructs a functor from $ \\\\mathcal{D}^{\\\\text{op}} $ to the category of $ R\"}\n  {\"name\": \"BDeRham\", \"module\": \"Mathlib/RingTheory/Perfectoid/BDeRham\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    (p : ℕ) → [Fact (Nat.Prime p)] → [Fact ¬IsUnit ↑p] → [IsAdicComplete (Ideal.span {↑p}) R] → Type u\", \"doc\": \"The ring $\\\\mathbb{B}_{\\\\mathrm{dR}}^+$ is constructed as the localization of the adic completion of the kernel of the Fontaine theta homomorphism $\\\\Theta: \\\\mathbb{W}(R^\\\\flat) \\\\to R$ (which inverts the \"}\n  {\"name\": \"localCohomology.isoSelfLERadical\", \"module\": \"Mathlib/Algebra/Homology/LocalCohomology\", \"type\": \"{R : Type u} →\\n  [inst : CommRing R] →\\n    (J : Ideal R) → [IsNoetherian R R] → (i : ℕ) → localCohomology.ofSelfLERadical J i ≅ localCohomology J i\", \"doc\": \"For a Noetherian commutative ring $ R $, an ideal $ J $, and a natural number $ i $, this establishes a natural isomorphism between the $ i $-th local cohomology functor constructed using ideal powers\"}\n  {\"name\": \"AlgebraicGeometry.instIsGermInjectiveOfIsLocallyNoetherian\", \"module\": \"Mathlib/AlgebraicGeometry/SpreadingOut\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsLocallyNoetherian X], X.IsGermInjective\", \"doc\": \"Every locally Noetherian scheme is germ-injective, meaning that for every point in the scheme, the natural map from the local ring to the stalk of the structure sheaf at that point is injective.\"}\n  {\"name\": \"exact_of_isLocalized_maximal\", \"module\": \"Mathlib/RingTheory/LocalProperties/Exactness\", \"type\": \"∀ {R : Type u_1} {M : Type u_2} {N : Type u_3} {L : Type u_4} [inst : CommSemiring R] [inst_1 : AddCommMonoid M]\\n  [inst_2 : Module R M] [inst_3 : AddCommMonoid N] [inst_4 : Module R N] [inst_5 : AddCommMonoid L]\\n  [inst_6 : Module R L] (Mₚ : (P : Ideal R) → [P.IsMaximal] → Type u_6)\\n  [inst_7 : (P \", \"doc\": \"If for every maximal ideal $ J $ in a commutative semiring $ R $, the localized maps $ F_J $ and $ G_J $ (obtained by localizing at the submonoid $ R \\\\setminus J $) form an exact sequence, then the or\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} [C\", \"doc\": \"Given a cofiltered diagram of schemes with affine transition morphisms and compact topological spaces, if a global section becomes zero under the limit cone's projection map, then there exists a morph\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ (i : I), AlgebraicGeometry.IsAffine (D.obj i)] (i : I) (s : ↑((D.obj i).pr\", \"doc\": \"Given a cofiltered diagram of affine schemes with a limit cone, if a global section of the structure sheaf of some object in the diagram maps to zero under the projection to the limit, then there exis\"}\n  {\"name\": \"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [CompactSpace ↥X] [QuasiSeparatedSpace ↥X] {f s : ↑(X.presheaf.obj (Opposite.op ⊤))},\\n  TopCat.Presheaf.restrictOpen f (X.basicOpen s) ⋯ = 0 → ∃ n, s ^ n * f = 0\", \"doc\": \"Let $X$ be a quasi-compact and quasi-separated scheme, and let $f$ and $s$ be global sections of the structure sheaf $\\\\mathcal{O}_X$. If the restriction of $f$ to the basic open subset $D(s)$ defined \"}\n",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale local cohomology orientation normalized by a dimension function",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.exists_etale_of_isEtaleAt\", \"module\": \"Mathlib.RingTheory.Etale.Locus\", \"type\": \"(P : Ideal A) [P.IsPrime] [IsEtaleAt R P] : ∃ f ∉ P, Algebra.Etale R (Localization.Away f)\", \"doc\": \"If an $ R $-algebra $ A $ is étale at a prime ideal $ \\\\mathfrak{p} $, then there exists an element $ f \\\\notin \\\\mathfrak{p} $ such that the localization of $ A $ away from $ f $ is an étale $ R $-algeb\"}\n  {\"name\": \"Algebra.Etale.of_isLocalizationAway\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"(r : R) [IsLocalization.Away r A] : Etale R A\", \"doc\": \"If $ A $ is the localization of a commutative ring $ R $ at an element $ r $, then $ A $ is an étale $ R $-algebra.\"}\n  {\"name\": \"RingHom.Etale.propertyIsLocal\", \"module\": \"Mathlib.RingTheory.RingHom.Etale\", \"type\": \": PropertyIsLocal Etale\", \"doc\": \"The property of a ring homomorphism between commutative rings being étale is local, meaning it can be checked after localization or on an open cover.\"}\n  {\"name\": \"RingHom.Etale.ofLocalizationSpanTarget\", \"module\": \"Mathlib.RingTheory.RingHom.Etale\", \"type\": \": OfLocalizationSpanTarget Etale\", \"doc\": \"If $ S $ is a localization of a commutative ring $ R $, then the natural ring homomorphism $ R \\to S $ is étale, as $ S $ is finitely presented as an $ R $-algebra and the module of Kähler differential\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y)\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"Algebra.Etale.iff_isStandardSmoothOfRelativeDimension_zero\", \"module\": \"Mathlib.RingTheory.Smooth.StandardSmoothOfFree\", \"type\": \": Etale R S ↔ IsStandardSmoothOfRelativeDimension 0 R S\", \"doc\": \"An $ R $-algebra $ S $ is étale if and only if it is a standard smooth algebra of relative dimension $ 0 $ over $ R $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.etalePretopology\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.Etale\", \"type\": \": Pretopology Scheme.{u}\", \"doc\": \"The Grothendieck pretopology on the category of schemes generated by étale morphisms (smooth morphisms of relative dimension 0). This pretopology is constructed by intersecting the jointly surjective \"}\n  {\"name\": \"RingHom.Etale\", \"module\": \"Mathlib.RingTheory.RingHom.Etale\", \"type\": \"{R S : Type*} [CommRing R] [CommRing S] (f : R →+* S) : Prop\", \"doc\": \"A ring homomorphism $ f : R \\\\to S $ between commutative rings is étale if the induced algebra structure on $ S $ over $ R $ via $ f $ satisfies the étale property, meaning $ S $ is finitely presented \"}\n",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"dualizing\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "potential.?dual|dualizing.?complex|pinning|residue.?compatib",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-finite-regular-reduction-dualizing",
+  "date": "2026-10-18",
+  "group": "NK"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Proof, Step 3: dimension-normalized Verdier duality; finite torsion regular local model in the generic shifted ordinary classes, made precise by Potential dualizing complexes with prime-power coefficients.",
+   "via": [
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}
