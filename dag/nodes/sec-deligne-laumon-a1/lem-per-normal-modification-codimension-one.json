@@ -297,5 +297,23 @@
   "group": "Q103",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q103-e1b51ae30 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item statement, all 8 steps and the 4 new nodes, against Stacks 0BFP (statement and full proof), 0AB7, 0BAJ, 0BX3 and 0BX6, and Mathlib SpreadingOut.lean at lines 77, 170 and 374. The item restores the missing clause (4) of 0BFP and spells out Noetherian, birational and codimension. Nothing is weakened, and the one citer (surface-resolution) uses clauses (1) and (2), which still hold. The reduced hypothesis is needed: Y=Spec k[t,e]/(e^2,te) over Spec k[t] is a counterexample without it, and the item keeps it. Every cited statement says what its step takes from it, and each step's hypotheses hold. The finite-subalgebra node gives B finite over A and B_g=C_g. The affine-stalk-localization node gives R=A_p and O_{Y,y}=C_q. Normality gives B_p=R inside the common fraction field K, and localizing gives C_q=R on the actual stalk map. The spreading leaf needs g∘φ=a∘c_t, which holds through the canonical-morphism definition. In Step 6 the section is a closed immersion whose image contains the generic point; it is onto because the 0BAJ open from Step 1 makes the generic fibre a single point, and I=0 on a domain chart. Step 7 gets a nonempty fibre from the closed image and quasi-finiteness from the locqf node. Step 8 goes DVR, then PID, then Noetherian and normal, then the 0AB7 node, then finite fibres, then clause (3). The 0BAJ (separated and finitely presented case) and 0AB7 (condition (1)) nodes are exact, strictly smaller than the item and not duplicates; the existing 0BAJ and 0AB7 nodes in the trace-formula and proper-base-change chapters are narrower or different, and the blueprint has no hits. The two Mathlib leaves are exact with the locally Noetherian germ-injective instance, and their line numbers are correct. I accept the six tool_uses (pbc and pqf nodes), all generic tools. No SGA source and no trace-formula node is cited. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NormalModificationCodimensionOne",
+  "declaration": "AlgebraicGeometry.normal_modification_codimension_one",
+  "file": "lean/Sheaf/AlgebraicGeometry/NormalModificationCodimensionOne.lean",
+  "statement": "theorem normal_modification_codimension_one {X Y : Scheme.{u}} [IsLocallyNoetherian X] [CompactSpace X] [IsReduced Y] (f : Y ⟶ X) [IsProper f] (hgeneric : Set.BijOn f (genericPoints Y) (genericPoints X)) (hstalk : ∀ y ∈ genericPoints Y, IsIso (f.stalkMap y)) (U : X.Opens) (hU : IsIso (f ∣_ U)) (hmax : ∀ V : X.Opens, IsIso (f ∣_ V) → V ≤ U) : (∀ x : X, ringKrullDim (X.presheaf.stalk x) = 0 → x ∈ U) ∧ (∀ (x : X) [IsDomain (X.presheaf.stalk x)] [IsDiscreteValuationRing (X.presheaf.stalk x)], ringKrullDim (X.presheaf.stalk x) = 1 → x ∈ U) ∧ (∀ x : X, IsDomain (X.presheaf.stalk x) → IsIntegrallyClosed (X.presheaf.stalk x) → (f ⁻¹' {x}).Finite → x ∈ U) ∧ (∀ x : X, IsDomain (X.presheaf.stalk x) → IsIntegrallyClosed (X.presheaf.stalk x) → (∃ y : Y, f y = x ∧ f.IsQuasiFiniteAtPoint y) → x ∈ U)",
+  "branch": "newtargets-dag",
+  "by": "N9",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7ad3134c2",
+  "group": "N9",
+  "result": "pass",
+  "note": "Tag 0BFP statement matches node and source clause by clause: IsLocallyNoetherian+CompactSpace X, IsProper f, IsReduced Y; birational = Set.BijOn f on genericPoints plus IsIso f.stalkMap at generic points (Stacks 01RO); U given with hU and maximality hmax; (1) ringKrullDim stalk = 0; (2) IsDomain+IsDiscreteValuationRing and dim 1; (3) normal domain and finite f⁻¹'{x}; (4) normal and ∃ y over x with the recorded IsQuasiFiniteAtPoint. No extra hypotheses; empty scheme vacuous; hypotheses satisfiable; single forced universe. No new defs and no duplicate in Mathlib or project; name free. Node diff vs side is lean only, statement verbatim. Imports are stmt_dep modules plus proof-dep recorded or mathlib_match modules. Docstrings carry source, blueprint id and all 8 steps; proof is sorry only; max line 95. nt_compile --json clean: 1.6 s, rc 0. Advisory: def-sc-discrete-valuation-ring and def-weil-locally-ringed-space-morphism have only mathlib_match and no lean record; the exact declarations are used."
  }
 }
