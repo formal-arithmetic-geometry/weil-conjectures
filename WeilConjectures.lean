@@ -172,6 +172,7 @@ public import WeilConjectures.Algebra.Homology.DerivedCategory.ProjectiveHom
 public import WeilConjectures.Algebra.Homology.DerivedCategory.ReductionDatum
 public import WeilConjectures.Algebra.Homology.DerivedCategory.SingleHomology
 public import WeilConjectures.Algebra.Homology.DerivedCategory.TowerLimit
+public import WeilConjectures.Algebra.Homology.DerivedCategory.TowerLimitHomology
 public import WeilConjectures.Algebra.Homology.DerivedCategory.TowerLimitRange
 public import WeilConjectures.Algebra.Homology.DerivedCategory.TowerLimitReplete
 public import WeilConjectures.Algebra.Homology.DerivedChangeOfRings
@@ -8765,6 +8766,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.FiniteCompari
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.FlatModel
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.FlatModelReduction
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.Kunneth
+public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.LocallyConstantTower
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.Modification
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.Projective
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.ProjectiveCurve
