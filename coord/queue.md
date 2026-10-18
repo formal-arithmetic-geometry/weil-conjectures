@@ -1,6 +1,6 @@
 # Work queue
 
-1439 items; claim with `tools/claim.py next <group> [--stage N]`.
+1443 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (1439)
+## Stage 3: modules to prove (1443)
 
 On the sorry route of an open batch, or below a route sorry of one (the human, 2026-10-18: provable as soon as every dependency is stated, whatever the depth); route first, then nearest to a route sorry.
 
@@ -32,6 +32,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `WeilConjectures.WeilSheaf.DenseOpen` | 7 | 1 | proof | route |
 | `WeilConjectures.DeligneLaumon.AffineLine.MiddleExtension` | 8 | 4 | proof | route |
 | `WeilConjectures.WeilSheaf.ArtinSchreierDual` | 8 | 1 | proof | route |
+| `Sheaf.SixFunctors.FlatModel` | 9 | 4 | proof | route |
 | `WeilConjectures.WeilSheaf.FourierInversion.Composite` | 11 | 1 | proof | route |
 | `WeilConjectures.WeilSheaf.FourierInversion.UpperStar` | 12 | 3 | proof | route |
 | `Sheaf.Paper.DenseOpenPiOneSurjective` | - | 8 | proof | route |
@@ -544,6 +545,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.SmoothPurityNormalizedEquivalence` | - | 1 | proof | 2 |
 | `Sheaf.Paper.WeilMixedUpperBounds` | - | 6 | proof | 2 |
 | `Sheaf.SixFunctors.FiniteCoefficientVerdier` | - | 1 | proof | 2 |
+| `Sheaf.SixFunctors.ProperOpenProjectionMate` | - | 2 | proof | 2 |
 | `Sheaf.SixFunctors.SchemeGeometricFrobenius` | - | 3 | proof | 2 |
 | `Sheaf.AlgebraicGeometry.AffineSpaceAmbientAdjunction` | 4 | 1 | proof | 3 |
 | `Sheaf.AlgebraicGeometry.AffineSpaceLinearTraceInvariance` | 4 | 1 | proof | 3 |
@@ -792,7 +794,6 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.EtaleProEtaleAdjunctionTransfer` | 9 | 1 | proof | 3 |
 | `Sheaf.Paper.NormalProEtaleMonodromy` | 9 | 1 | proof | 3 |
 | `Sheaf.SecSmoothPurity.ReductionDirectImage` | 9 | 2 | proof | 3 |
-| `Sheaf.SixFunctors.FlatModel` | 9 | 5 | proof | 3 |
 | `Sheaf.TraceFormula.SmoothGeometricallyNormal` | 9 | 1 | proof | 3 |
 | `Sheaf.AlgebraicGeometry.AbsoluteFrobeniusUniversalHomeomorphism` | 10 | 1 | proof | 3 |
 | `Sheaf.Paper.SupportedCup` | 14 | 4 | proof | 3 |
@@ -1181,6 +1182,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.PullbackCoefficientIterateCoherence` | - | 2 | proof | 5 |
 | `Sheaf.Paper.RingedKunnethFactorizations` | - | 1 | proof | 5 |
 | `Sheaf.Paper.SmoothPurityTowerEvaluationAdjoint` | - | 1 | proof | 5 |
+| `Sheaf.Paper.SystemClopenTensorCompatibility` | - | 1 | proof | 5 |
 | `Sheaf.Paper.SystemTensorMateArrows` | - | 10 | proof | 5 |
 | `Sheaf.Paper.TrfWitnessedOpenPullback` | - | 1 | proof | 5 |
 | `Sheaf.Paper.VaryingRingGraphSummand` | - | 20 | proof | 5 |
@@ -1258,6 +1260,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.InternalHomDualTorAmplitude` | - | 1 | proof | 6 |
 | `Sheaf.Paper.KummerAdditivity` | - | 3 | proof | 6 |
 | `Sheaf.Paper.KunHigherExchangeCoefficientCube` | - | 1 | proof | 6 |
+| `Sheaf.Paper.PfRefinementCompatibility` | - | 1 | proof | 6 |
 | `Sheaf.Paper.ProjectiveBundleFormula` | - | 1 | proof | 6 |
 | `Sheaf.Paper.PurReductionLimitShiftAdjunction` | - | 1 | proof | 6 |
 | `Sheaf.Paper.PurityChernClasses` | - | 1 | proof | 6 |
@@ -1268,6 +1271,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.SecSmoothPurity.DerivedExchangeCube` | - | 1 | proof | 6 |
 | `Sheaf.SixFunctors.IntegralExpressionOccurrences` | - | 6 | proof | 6 |
 | `Sheaf.SixFunctors.IntegralOperationShiftData` | - | 4 | proof | 6 |
+| `Sheaf.SixFunctors.OpenAdjunctionShift` | - | 1 | proof | 6 |
 | `Sheaf.SixFunctors.SynchronizedCanonicalMaps` | - | 2 | proof | 6 |
 | `Sheaf.AlgebraicGeometry.ProEtaleVanishingDetection` | 9 | 3 | proof | 7 |
 | `Sheaf.AlgebraicGeometry.ProEtaleProperBoundaryCohomology` | 10 | 1 | proof | 7 |
@@ -1454,7 +1458,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Algebra.Homology.SplitCellComplexKFlat` | - | 1 | proof | 21 |
 | `Sheaf.CategoryTheory.BoundedFilteredPageFunctorNormalized` | - | 1 | proof | 21 |
 
-## Stage 3: waiting for statements of dependencies (80)
+## Stage 3: waiting for statements of dependencies (78)
 
 Not items: a node in the dependencies (stmt_deps or proof_deps) has no Lean statement yet (the human, 2026-10-17 and 2026-10-18).
 
@@ -1530,10 +1534,8 @@ Not items: a node in the dependencies (stmt_deps or proof_deps) has no Lean stat
 | `Sheaf.Paper.FrobeniusOperatorCompactDescription` | - | 1 | `lem-weil-frobenius-cohomology-transport-iso` |
 | `Sheaf.Paper.IntegralDirectImageTower` | - | 1 | `sk-lem-integral-models` |
 | `Sheaf.Paper.LocalFrobeniusConjugacyClass` | - | 1 | `lem-weil-frobenius-cohomology-transport-iso` |
-| `Sheaf.Paper.PfRefinementCompatibility` | - | 1 | `lem-sf-proper-open-projection-mate` |
 | `Sheaf.Paper.QuasiFiniteCompactSupportWeights` | - | 1 | `lem-a1-finite-weil-sections-decomposition` |
 | `Sheaf.Paper.RationalPurityPresentation` | - | 13 | `lem-pur-adic-purity-scalar-naturality` |
-| `Sheaf.Paper.SystemClopenTensorCompatibility` | - | 1 | `lem-sf-proper-open-projection-mate` |
 | `Sheaf.Paper.SystemCompactificationProjectionSubstitution` | - | 4 | `lem-sf-ambient-proper-open-pasting` |
 | `Sheaf.Paper.VerdierExchange` | - | 1 | `fix-lem-exchanges` |
 | `Sheaf.SecSmoothPurity.FiniteGeneralRing` | - | 1 | `lem-pur-dnc-coefficient-transport` |
