@@ -17,6 +17,8 @@ public import Mathlib.Algebra.Algebra.Shrink
 public import Mathlib.Algebra.Field.Shrink
 public import Mathlib.LinearAlgebra.Dimension.Free
 
+import Sheaf.Paper.BoundedConstructibleTower
+
 /-!
 # Exceptional-adjoint admissibility as optional ambient data
 
@@ -108,7 +110,9 @@ unbounded categories, including nonflat quotient maps. -/
 theorem exceptionalCoefficientRestriction_isRightAdjoint
     {A B : Type u} [CommRing A] [CommRing B] (φ : A →+* B) (T : Scheme.{u}) :
     ((proEtaleCoefficientRestrictScalars T φ).mapDerivedCategory).IsRightAdjoint := by
-  sorry
+  exact (pbcDerivedScalarAdjunction
+    ((constantSheaf (ProEt.topology T) CommRingCat.{u + 1}).map
+      (CommRingCat.ofHom φ.ulift))).isRightAdjoint
 
 /-- Actual derived coefficient extension; no arbitrary coefficient functor is input.
 Source: Stacks Tags 06YY and 07A6

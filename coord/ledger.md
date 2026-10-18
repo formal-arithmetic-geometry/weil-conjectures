@@ -16559,3 +16559,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 15:01 L: merged deliver/D6/Sheaf.AlgebraicGeometry.FrobeniusDetailed (stage 3; reviewer PASS; first push; landing 20261018T150146-L-3799263 (proof); batch 20261018T150141; modules 1; new nodes 0)
 - 15:01 L: merged deliver/E7/Sheaf.AlgebraicGeometry.SpecifiedExceptionalClassHom (stage 3; reviewer PASS; first push; landing 20261018T150146-L-3799369 (proof); batch 20261018T150141; modules 1; new nodes 0)
 - 15:01 L: merged deliver/G4/Sheaf.AlgebraicGeometry.ProEtaleModuleStalkFunctor (stage 3; reviewer PASS; first push; landing 20261018T150147-L-3799499 (proof); batch 20261018T150141; modules 1; new nodes 0)
+- 15:01 L: merged deliver/G6/Sheaf.Paper.ExceptionalAdjointAdmissibility (stage 3; reviewer PASS; first push; landing 20261018T150147-L-3799668 (proof); batch 20261018T150141; modules 1; new nodes 0)
