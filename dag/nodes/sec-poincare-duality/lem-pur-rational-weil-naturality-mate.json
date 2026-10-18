@@ -18,7 +18,12 @@
   "thm-pur-rational-and-qbar-purity",
   "def-pur-smooth-purity-map",
   "def-weil-frobenius-coefficient-twists",
-  "def-weil-pbc-adjunction-mate"
+  "def-weil-pbc-adjunction-mate",
+  "def-zl-field-weil-shriek-shift-data",
+  "def-zl-frobenius-compact-support-comparison",
+  "def-pur-smooth-trace",
+  "def-pur-canonical-rational-purity-realization",
+  "def-pur-canonical-purity-source-transports"
  ],
  "proof": [
   {
@@ -472,5 +477,46 @@
   "group": "Q23",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q23-fedfce9fc (reviewer sub-agent of L); spot-checked: I read every step of the item and the new node, and every cited statement in full. I checked the source (prop-weil-operations proof sentences 3-4), the parent's Steps 7 and 10, the returned head 8893bc1ecc9d with its review, and the blueprint files sk-prop-sp-tower-geometric-gamma.proof (clauses 1-2) and sk-prop-sp-rational. Kept as correct: (a) the descent to k_0, since the A^1 translation counterexample checks out; (b) the typed mate β^{-1}:FP_X→P_YF, a correct instance of def-weil-pbc-adjunction-mate whose counit equation matches; (c) Steps 1-4 and 6-11, including the fraction calculation and Step 10 now citing det-sp-field-extension-towers(2)-(3). Small cases checked: empty X, d=0, f=id, and θ=ℓ^{±1} on a point. The new node is not a restatement of a clause and not a duplicate of tower-gamma, adjunction-bijection, scalar-naturality, tensor-trace-transpose or rational-trace-coherence. Its integral claims hold: End(Ẑ_ℓ(d)[2d]) = H^0(X,Ẑ_ℓ) = lim H^0(X,Z/ℓ^n), so g_0 = a^T_0; t_E follows from the coefficient squares; γ^tr = γ^T follows from the projection-formula transpose. No SGA, no cycle, no pivot-dropped id; proof_deps match the step uses. Fix 1 (E1/C4): Step 5 combined base-change nodes that use the compactification pulled back along g_Y with the retagging lemma, which uses the same underlying compactification. For an arbitrary c no cited node compares the two. The statement now computes F and β with a compactification descended from f_0. Step 5 proves it exists and is stable, citing thm-nagata-compactification, the open-immersion and proper base-change leaves and lem-weil-frobenius-square-cartesian; the last two non-leaf nodes are added to tool_uses. Fix 2 (C3/B2): the new node's equality γ^rat = Q_E(γ^T) rests on the trace-transpose family that only the proof of lem-pur-adic-purity-scalar-naturality constructs; that node's statement is existential. The new node now cites that lemma and states the trace-transpose premise explicitly, and clause (1) is added to its source. Maintainer remark: lem-pur-adic-purity-scalar-naturality should state its construction (or thm-pur-adic-reconstruction should follow its blueprint_update) so that this premise follows from a statement. Separately, the existing DAG references a missing node def-weil-pbc-etale-morphism; this delivery does not cite it directly. All declared tool uses are accepted.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.RationalWeilPurityNaturalityMate",
+  "declaration": "WeilConjectures.rational_weil_purity_naturality_mate",
+  "declarations": [
+   "WeilConjectures.purityFrobeniusConjugate",
+   "WeilConjectures.PurityNaturalityMate",
+   "WeilConjectures.RationalWeilPurity.H",
+   "WeilConjectures.RationalWeilPurity.b",
+   "WeilConjectures.RationalWeilPurity.integralFrobenius",
+   "WeilConjectures.RationalWeilPurity.integralExchange",
+   "WeilConjectures.RationalWeilPurity.rationalExchange_existsUnique",
+   "WeilConjectures.RationalWeilPurity.rationalExchange",
+   "WeilConjectures.RationalWeilPurity.betaComponent",
+   "WeilConjectures.RationalWeilPurity.beta_naturality",
+   "WeilConjectures.RationalWeilPurity.beta",
+   "WeilConjectures.CommonWeilPurity.H",
+   "WeilConjectures.CommonWeilPurity.shiftedLineFrobenius",
+   "WeilConjectures.CommonWeilPurity.b",
+   "WeilConjectures.CommonWeilPurity.betaComponent",
+   "WeilConjectures.CommonWeilPurity.beta_naturality",
+   "WeilConjectures.CommonWeilPurity.beta",
+   "WeilConjectures.rationalWeilPurityGamma",
+   "WeilConjectures.commonWeilPurityGamma",
+   "WeilConjectures.rational_weil_purity_naturality_mate"
+  ],
+  "file": "lean/Sheaf/Paper/RationalWeilPurityNaturalityMate.lean",
+  "statement": "theorem rational_weil_purity_naturality_mate (d : ℕ) [SmoothOfRelativeDimension d (zlFiberMap P.field f₀)] : PurityNaturalityMate (sfWeilFrobeniusPullback P.field P.coefficients.l P.coefficients.different X₀ P.extension) (sfWeilFrobeniusPullback P.field P.coefficients.l P.coefficients.different Y₀ P.extension) (RationalWeilPurity.H P.field P.coefficients.l P.coefficients.different f₀ P.extension d) (S.ring.operation (zlGeometricCompactification P.field f₀ c₀) (.rational ⟨P.extension⟩)).F (S.ring.operation (zlGeometricCompactification P.field f₀ c₀) (.rational ⟨P.extension⟩)).G (S.ring.operation (zlGeometricCompactification P.field f₀ c₀) (.rational ⟨P.extension⟩)).adjunction (rationalWeilPurityGamma P f₀ c₀ S d) (RationalWeilPurity.b P.field P.coefficients.l P.coefficients.different f₀ P.extension d) (RationalWeilPurity.beta P.field P.coefficients.l P.coefficients.different f₀ P.extension P.coefficients.Qbar c₀ S) ∧ PurityNaturalityMate (sfCommonStageWeilFrobeniusPullback P.field P.coefficients.l P.coefficients.different X₀ P.coefficients.Qbar) (sfCommonStageWeilFrobeniusPullback P.field P.coefficients.l P.coefficients.different Y₀ P.coefficients.Qbar) (CommonWeilPurity.H P.field P.coefficients.l P.coefficients.different f₀ P.coefficients.Qbar d) (S.ring.operation (zlGeometricCompactification P.field f₀ c₀) .closed).F (S.ring.operation (zlGeometricCompactification P.field f₀ c₀) .closed).G (S.ring.operation (zlGeometricCompactification P.field f₀ c₀) .closed).adjunction (commonWeilPurityGamma P f₀ c₀ S d) (CommonWeilPurity.b P.field P.coefficients.l P.coefficients.different f₀ P.coefficients.Qbar d) (CommonWeilPurity.beta P.field P.coefficients.l P.coefficients.different f₀ P.coefficients.Qbar c₀ S)",
+  "branch": "newtargets-dag",
+  "by": "NA",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "L H5/H13 repair: the item imports the canonical realization defined by def-pur-canonical-rational-purity-realization. The original upstream rational-purity binding remains unchanged. Frobenius twists own only clauses 1-5; all purity sources and families belong to the new definition."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-64ae08ccc",
+  "group": "NA",
+  "result": "pass",
+  "note": "Re-delivery of 7d346b RETURN (H2). Only change: item Lean l.554/556/558 `.rational (AdicSmoothDualizing.fieldStage P)` -> `.rational ⟨P.extension⟩` (fieldStage is an abbrev for exactly that, same F/G/adjunction; compile confirms defeq with rationalWeilPurityGamma's type); other 3 modules byte-identical to the reviewed head. Item stmt_deps drop cor-pur-adic-and-rational-smooth-dualizing-complexes and thm-pur-adic-reconstruction, add new def node def-pur-canonical-purity-source-transports (owns rationalSource/commonSource/commonShiftedLine used by H and b); no added theorem stmt_deps remain. lean.statement verbatim for item, both new nodes and the twist (B) record. Dep records identical to live except the accepted twist (B) lean record; the derived-pullback record differs from the old snapshot only by live drift (NQ landing). No live collisions. Substance (clauses, edge cases, F1-F3 repairs, gates) unchanged from the prior review. nt_compile --json rc=0 clean: 14.9/29.7/23.8/18.8 s. Advisory: the realization def node still cites three theorem nodes for plain defs; second reading is a self-check; def-zl-weil-ind-sheaf-category is uncited (gap predates this delivery)."
  }
 }
