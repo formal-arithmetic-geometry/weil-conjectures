@@ -16574,3 +16574,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 15:07 L: merged deliver/S6/Sheaf.Compactification.DenseRefinementMorphisms (stage 3; reviewer PASS; first push; landing 20261018T150715-L-3837382 (proof); batch 20261018T150712; modules 1; new nodes 1)
 
 - 01:48 L: batch 20261018T174453 dependency take-out
+- 19:56 L: returned deliver/K2/Sheaf.Paper.BoundedConstructibleTower (reviewer RETURN: (reviewer C-c6f1c, head c6f1c05fd) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.Paper.BoundedConstru)
