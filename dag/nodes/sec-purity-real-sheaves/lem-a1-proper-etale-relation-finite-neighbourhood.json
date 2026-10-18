@@ -17,9 +17,116 @@
   "def-weil-finite-integral-morphism",
   "def-weil-open-immersion"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $f:U\\to T$ for the structure map. It is locally of finite type by [lem-weil-pbc-lqf-locally-finite-type], and separated by [lem-weil-pbc-affine-source-morphism-separated], since $U$ is affine. Local quasi-finiteness means in particular that $f$ is quasi-finite at the chosen $u$. Therefore $u$ is an isolated point of the scheme-theoretic fibre over $p=f(u)$ by [lem-weil-pbc-quasi-finite-at-point-isolated]. These are exactly the hypotheses needed for the isolated-point splitting theorem.",
+   "uses": [
+    "lem-weil-pbc-lqf-locally-finite-type",
+    "lem-weil-pbc-affine-source-morphism-separated",
+    "lem-weil-pbc-quasi-finite-at-point-isolated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01TD (definition-quasi-finite), 01TH (lemma-quasi-finite-at-point-characterize); separatedness: schemes.tex, Tags 01KN and 01KV"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-etale-splits-off-isolated-points-technical] to $f$, $p$, and the singleton list $(u)$. It gives an elementary etale neighbourhood $(S_1,p_1)\\to(T,p)$ and a decomposition $U\\times_TS_1=V\\amalg W_1$ into open and closed subschemes with $V\\to S_1$ finite and a point $v\\in V$ over both $u$ and $p_1$. In particular the induced map $\\kappa(p)\\to\\kappa(p_1)$ is an isomorphism. The order of the fibre-product factors is changed using the universal property [def-pc-fibre-product].",
+   "uses": [
+    "lem-weil-pbc-etale-splits-off-isolated-points-technical",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 02LN (lemma-etale-splits-off-quasi-finite-part-technical), n=1"
+   }
+  },
+  {
+   "text": "Choose an affine open neighbourhood $T'\\subseteq S_1$ of $p_1$ and denote the same point by $p'$. Its inclusion is etale, so $T'\\to T$ is etale by [lem-weil-pbc-etale-composition-cancellation]. The residue field at a point is unchanged on an open subscheme [def-weil-open-immersion], hence $\\kappa(p)\\to\\kappa(p')$ is still an isomorphism. Pulling back the decomposition gives $U\\times_TT'=U'\\amalg W$, where $U'=V\\times_{S_1}T'$ is finite by [lem-weil-pbc-finite-morphism-permanence](a). The point $v$ lies in this inverse image and gives $u'\\in U'$ over $u$ and $p'$. The open neighbourhood exists because schemes are locally affine [def-pc-scheme].",
+   "uses": [
+    "def-pc-scheme",
+    "def-weil-open-immersion",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-weil-pbc-finite-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 02LN, restriction to an affine neighbourhood; morphisms.tex Tags 01WL (lemma-base-change-finite), 02GP (lemma-open-immersion-etale), 02GN (lemma-composition-etale)"
+   }
+  },
+  {
+   "text": "Put $U_0=U\\times_TT'$, $R_0=R\\times_TT'$, and write $s_0,t_0:R_0\\to U_0$ for the pulled-back projections. Define $R'$ to be the induced open subscheme with underlying subset $s_0^{-1}(U')\\cap t_0^{-1}(U')$, and let $W'$ be its induced open complement. Both inverse images are open and closed, so their intersection and its complement are open and closed. Thus $R_0=R'\\amalg W'$. For every $T'$-scheme $H$, a map $H\\to R_0$ factors through $R'$ exactly when its two composites to $U_0$ factor through $U'$, and the factorizations are unique. By [def-pc-fibre-product] this identifies $R'$ with $U'\\times_{U_0,s_0}R_0\\times_{t_0,U_0}U'$ as schemes, with the stated projections. This also identifies $R'$ with the pullback of $j:R\\to U\\times_TU$ along $U'\\times_{T'}U'\\to U\\times_TU$.",
+   "uses": [
+    "def-weil-open-immersion",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 03X5 (lemma-quasi-finite-over-base-j-proper), restriction in (h); direct construction for closed j"
+   }
+  },
+  {
+   "text": "The map $R'\\to U'\\times_{T'}U'$ is a closed immersion: its pullback square with $j$ was identified in step 4, so apply [lem-weil-pbc-closed-immersion-base-change]. It is finite by [lem-weil-pbc-closed-immersion-finite]. The projection $U'\\times_{T'}U'\\to U'$ is a base change of the finite map $U'\\to T'$, hence finite; its composite with $U'\\to T'$ is finite. Composing once more with $R'\\to U'\\times_{T'}U'$ proves $R'\\to T'$ finite. The base-change and composition assertions here are precisely the finite-morphism clauses of [lem-trf-finite-radicial-basechange]; they do not require any radicial hypothesis.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-weil-pbc-closed-immersion-finite",
+    "lem-trf-finite-radicial-basechange"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01QR (lemma-base-change-closed-immersion), 035C (lemma-closed-immersion-finite), 01WL (lemma-base-change-finite), 01WK (lemma-composition-finite)"
+   }
+  },
+  {
+   "text": "The maps $s_0,t_0:R_0\\to U_0$ are base changes of $s,t$, hence etale by [lem-weil-pbc-etale-scheme-base-change]. Since $R'\\hookrightarrow R_0$ is an open immersion, the composites $R'\\to R_0\\rightrightarrows U_0$ are etale by [lem-weil-pbc-etale-composition-cancellation](1),(2). Each factors through the etale open immersion $U'\\hookrightarrow U_0$; part (3) of the same node then gives that the factors $s',t':R'\\to U'$ are etale.",
+   "uses": [
+    "lem-weil-pbc-etale-scheme-base-change",
+    "lem-weil-pbc-etale-composition-cancellation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 02GO (lemma-base-change-etale), 02GP (lemma-open-immersion-etale), 02GN (lemma-composition-etale), 02GW (lemma-etale-permanence)"
+   }
+  },
+  {
+   "text": "For a $T'$-scheme $H$, maps $H\\to U_0$ over $T'$ identify with maps $H\\to U$ over $T$, and similarly for $R_0$, by [def-pc-fibre-product]. Thus $R_0(H)$ is an equivalence relation on $U_0(H)$ by the hypothesis. The open immersion identifies $U'(H)$ with a subset of $U_0(H)$ [def-weil-open-immersion]. Step 4 says exactly that $R'(H)$ is the restriction of that relation to this subset. Reflexivity holds because $(a,a)$ is related for each $a\\in U'(H)$; symmetry holds because reversing a related pair still has both entries in the subset; transitivity holds because if $(a,b)$ and $(b,c)$ are related then so is $(a,c)$ and both endpoints remain in the subset. This proves the required equivalence-relation assertion for every $H$, completing all the conclusions.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-weil-open-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 03X5 (lemma-quasi-finite-over-base-j-proper), conclusion (h); restriction of the assumed functor-of-points equivalence relation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-lqf-locally-finite-type",
+  "lem-weil-pbc-affine-source-morphism-separated",
+  "lem-weil-pbc-quasi-finite-at-point-isolated",
+  "lem-weil-pbc-etale-splits-off-isolated-points-technical",
+  "def-pc-fibre-product",
+  "def-pc-scheme",
+  "def-weil-open-immersion",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-finite-morphism-permanence",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-closed-immersion-finite",
+  "lem-trf-finite-radicial-basechange",
+  "lem-weil-pbc-etale-scheme-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-groupoids.tex",
+  "place": "Tag 03X5, specialized argument using Tag 02LN (more-morphisms.tex). Since j is a closed immersion, any finite clopen U-piece yields a finite restricted relation; the orbit and shrinking argument required by the general universally closed case is unnecessary for the conclusions of this item."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -55,10 +162,45 @@
    "results": "{\"t\": \"2026-10-18T01:48:26Z\", \"tool\": \"leansearch\", \"query\": \"An affine etale equivalence relation proper over the square of a quasi finite affine scheme has a finite clopen restricted relation near any point after etale base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.LocallyQuasiFinite.recOn\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.instLocallyQuasiFiniteMorphismRestrict\", \"AlgebraicGeometry.IsFinite.iff_isProper_and_isAffineHom\", \"AlgebraicGeometry.sourceAffineLocally\", \"AlgebraicGeometry.AffineTargetMorphismProperty.IsStableUnderBaseChange\", \"AlgebraicGeometry.isAffineHom_isStableUnderBaseChange\"], \"digest\": \"59a543a08f365f49\"}",
    "date": "2026-10-18",
    "verdict": "no match: the 00UJ hit isolates a point of one affine morphism, not a finite restricted equivalence relation compatible with its two projections and composition"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A closed etale equivalence relation on an affine locally quasi finite scheme has a finite clopen restriction after an elementary etale base change",
+   "results": "{\"t\": \"2026-10-18T02:05:58Z\", \"tool\": \"leanfinder\", \"query\": \"A closed etale equivalence relation on an affine locally quasi finite scheme has a finite clopen restriction after an elementary etale base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Etale\", \"Algebra.isOpen_etaleLocus\", \"Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"Algebra.Etale.exists_subalgebra_fg\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.Scheme.smallEtalePretopology\", \"Algebra.etaleLocus\"], \"digest\": \"cc100aa3251a2f21\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: no elementary etale finite clopen restricted-relation theorem; ZariskisMainTheorem.lean:49 lacks the residue-field isomorphism, and the ring 00UJ hit supplies only the algebraic finite-piece ingredient, requiring scheme translation and a separate restricted-relation argument"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsFinite\", \"IsEtale\"",
+   "results": "{\"t\": \"2026-10-18T02:05:58Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsFinite\\\", \\\"IsEtale\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: no elementary etale finite clopen restricted-relation theorem; ZariskisMainTheorem.lean:49 lacks the residue-field isomorphism, and the ring 00UJ hit supplies only the algebraic finite-piece ingredient, requiring scheme translation and a separate restricted-relation argument"
+  },
+  {
+   "tool": "grep",
+   "query": "equivalence.relation.*etale|etale.*equivalence.relation|exists_etale_isCompl",
+   "results": "{\"t\": \"2026-10-18T02:05:58Z\", \"tool\": \"grep\", \"query\": \"equivalence.relation.*etale|etale.*equivalence.relation|exists_etale_isCompl\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\"], \"digest\": \"e29727c0b0067e05\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: no elementary etale finite clopen restricted-relation theorem; ZariskisMainTheorem.lean:49 lacks the residue-field isomorphism, and the ring 00UJ hit supplies only the algebraic finite-piece ingredient, requiring scheme translation and a separate restricted-relation argument"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Elementary etale neighbourhood of a quasi finite affine scheme with a finite open and closed subscheme through a given point and finite closed equivalence relation",
+   "results": "{\"t\": \"2026-10-18T02:05:59Z\", \"tool\": \"leansearch\", \"query\": \"Elementary etale neighbourhood of a quasi finite affine scheme with a finite open and closed subscheme through a given point and finite closed equivalence relation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsFinite.recOn\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite\", \"Algebra.isOpen_etaleLocus\", \"AlgebraicGeometry.LocallyQuasiFinite\", \"AlgebraicGeometry.LocallyQuasiFinite.recOn\", \"AlgebraicGeometry.Scheme.smallEtaleTopology\"], \"digest\": \"e16504ee344e966d\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: no elementary etale finite clopen restricted-relation theorem; ZariskisMainTheorem.lean:49 lacks the residue-field isomorphism, and the ring 00UJ hit supplies only the algebraic finite-piece ingredient, requiring scheme translation and a separate restricted-relation argument"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An elementary etale neighbourhood splits a separated locally quasi finite morphism into a finite clopen piece containing a prescribed point",
+   "results": "{\"t\": \"2026-10-18T02:06:13Z\", \"tool\": \"leanfinder\", \"query\": \"An elementary etale neighbourhood splits a separated locally quasi finite morphism into a finite clopen piece containing a prescribed point\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Etale\", \"Algebra.isOpen_etaleLocus\", \"AlgebraicGeometry.Scheme.smallEtalePretopology\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.Scheme.etalePretopology\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"Algebra.etaleLocus\", \"RingHom.Etale.propertyIsLocal\"], \"digest\": \"dae009f21de0f495\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: no elementary etale finite clopen restricted-relation theorem; ZariskisMainTheorem.lean:49 lacks the residue-field isomorphism, and the ring 00UJ hit supplies only the algebraic finite-piece ingredient, requiring scheme translation and a separate restricted-relation argument"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-a1-separated-locally-qf-space-representable",
@@ -78,5 +220,44 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-a1-proper-etale-relation-finite-neighbourhood",
+  "worker": "stage1",
+  "summary": "Checked 03X5 and 02LN. Retained the statement. Split off a single finite clopen U-piece by existing 02LN, shrink the base to an affine open, construct the restricted relation as a clopen inverse image, and prove its finiteness by closed immersion into the finite square. Etaleness follows by base change and cancellation against the target open immersion; the equivalence axioms restrict pointwise. No new nodes.",
+  "blueprint": "The inherited ancestor lem-a1-affine-hc0 is realized through the separated-etale-space and locally-quasi-finite-space representability branch: this item provides the finite clopen affine relation required in the fourth paragraph of the proof of Stacks 03XX. It is a created auxiliary node, not the key Rankin–Selberg unit statement.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-lqf-locally-finite-type",
+    "why": "Generic locality of finite type for the stated locally quasi-finite morphism; no node in this unit states it."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-finite-at-point-isolated",
+    "why": "Generic characterization of quasi-finiteness by isolated fibre points, needed to apply 02LN; this unit has no such characterization."
+   },
+   {
+    "node": "lem-weil-pbc-etale-splits-off-isolated-points-technical",
+    "why": "The existing elementary etale finite-piece splitting theorem 02LN is the geometric tool used by the 03X5 route, not a replacement for the unit argument."
+   },
+   {
+    "node": "lem-trf-finite-radicial-basechange",
+    "why": "Only its general finite-morphism base-change and composition clauses are used to make the restricted relation finite; this unit has no permanence theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-lqf-locally-finite-type",
+  "lem-weil-pbc-quasi-finite-at-point-isolated",
+  "lem-weil-pbc-etale-splits-off-isolated-points-technical",
+  "lem-trf-finite-radicial-basechange"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-N1-29d42e667",
+  "group": "N1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N1-29d42e667 (reviewer sub-agent of L); spot-checked: I read the whole item and its 7 steps, the statement of every cited node, the parent node that uses the item (lem-a1-separated-locally-qf-space-representable), and the unit record. On the source side I read Stacks 03X5 and 03X4 in full (more-groupoids.tex, lemma-quasi-finite-over-base-j-proper and lemma-quasi-finite-over-base) and 02LN (more-morphisms.tex, lemma-etale-splits-off-quasi-finite-part-technical). The statement is unchanged and keeps conclusions (a), (d), (g) and (h) of 03X5 for an affine étale equivalence relation whose relation map j is a closed immersion. It also adds étaleness of s' and t', which step 6 proves. The parent uses exactly these conclusions. Step checks: step 1 gives locally finite type (01TD remark), separatedness (01KN/01KV, since U is affine) and that u is isolated in its fibre (01TH). These are exactly the hypotheses of 02LN with n=1. Step 2 takes from the 02LN node the elementary étale neighbourhood, so κ(p)≅κ(p'). Step 3 shrinks to an affine open and uses only clause (a) of the finite-permanence node. Step 4 is genuinely elementary: R' is the clopen set s0^{-1}(U')∩t0^{-1}(U'), and as a scheme it is the pullback of j. Step 5 shows R'→U'×_{T'}U' is a closed immersion, hence finite (035C), and that the square is finite over T'. It uses only the finite base-change and composition clauses of a Mathlib leaf. Step 6 is étale base change, then composition with an open immersion, then cancellation (02GW). Step 7 restricts the equivalence relation to the subset U'(H). Edge cases tested: U=T=Spec k with the diagonal relation; two points with the total relation, where the chosen piece U' need not be R-invariant and the item does not claim it is; a base point whose residue field is not that of u; U empty. None breaks the statement or the proof. An rg search for 03X5, 03X4 and restricted relations found no duplicate (02WU is a different statement). There are no new nodes and no SGA citation. I accept the declared tool uses: three generic scheme lemmas from sk-thm-p1 and lem-trf-finite-radicial-basechange, which is a Mathlib leaf. None of them replaces a step of the unit's route. One cosmetic point: the same verdict text is copied into every search record. I made no fixes."
  }
 }
