@@ -37,97 +37,108 @@
  ],
  "proof": [
   {
-   "text": "Write $H=\\mathcal O^{\\mathrm{sh}}_{S,\\bar s}$ and $k=H/\\mathfrak m_H$. Functoriality (1) makes $H$ strictly henselian, identifies $k$ with the separable algebraic closure $K$ of $\\kappa(s)$ in $\\Omega$, and identifies $\\bar s'$ with the composite through the closed point. The equation $f'\\bar x'=\\bar s'a$ therefore identifies the image of $f'\\bar x'$ with the closed point and its residue embedding with $k\\hookrightarrow\\Omega\\hookrightarrow\\Xi$. The field map corresponding to $a$ is injective. All residue comparisons below use this fixed embedding.",
+   "text": "For any geometric point y, use the existing local-structure theorem for its chosen strict-local ring H_y. The canonical evaluation H_y -> Omega is the composite of its codomain restriction to the relative separable closure and the inclusion into Omega. The restriction is surjective, hence local, and the field inclusion is local. Thus evaluation is local and its spectrum sends the field point to the closed point of H_y. Composing the closed-point lift equation with the unique point of Spec Omega shows that the structural map j_y sends the closed point to the image of y.",
    "uses": [
+    "lem-weil-pbc-strict-henselization-local-structure",
+    "lem-weil-pbc-strict-henselization-point-evaluation-properties",
+    "def-weil-pbc-relative-separable-closure",
     "lem-weil-pbc-strict-henselization-functoriality"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0GJU, first paragraph; Tag 03PS conventions for strict localization"
-   }
-  },
-  {
-   "text": "For each affine pointed etale $S'$-neighbourhood $V=\\operatorname{Spec}E$ of $f'\\bar x'$, let $\\mathfrak q$ be its pointed prime. Its residue field is finite separable over $k$ by the etale residue-field lemma. As $k$ is separably closed, that field equals the specified copy of $k$ in $\\Xi$: the finite separable extension is trivial. Thus the pointed map induces a residue homomorphism $\\theta:E\\to k$ whose restriction along $H\\to E$ is the residue map $H\\to k$. Apply the henselian etale lifting lemma with $R=S=H$, $B=E$, the identity base map, and the residue surjection $H\\to k$. It gives a unique $H$-algebra map $r_E:E\\to H$ with this residue map. Uniqueness makes all the $r_E$ compatible with pointed neighbourhood morphisms. Hence the defining colimit gives $r:\\mathcal O^{\\mathrm{sh}}_{S',f'\\bar x'}\\to H$. If $i:H\\to\\mathcal O^{\\mathrm{sh}}_{S',f'\\bar x'}$ is the structural map, $ri=1$. For any coprojection $c_E$, the section $\\operatorname{Spec}r_E:S'\\to V$ is a pointed $S'$-map; the cocone equation for it gives $c_E=i r_E$. Consequently $ir=1$ by the colimit universal property. Taking spectra proves that the first canonical map, call it $j:L=S'_{(f'\\bar x')}\\to S'$, is an isomorphism.",
-   "uses": [
-    "lem-weil-pbc-strict-henselization-functoriality",
-    "lem-weil-pbc-etale-algebra-residue-field-separable",
-    "lem-sc-etale-henselian-ring-lift",
-    "def-weil-pbc-strict-henselization-limit"
-   ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0GJU first paragraph, expanded using algebra.tex Tag 08HQ, lemma-map-into-henselian"
+    "place": "Tags 0GJU and 0GJS; strict-local comparison"
    }
   },
   {
-   "text": "Let $k_0=\\kappa(s)$. The separable algebraic closure of $k_0$ in $\\Xi$ is precisely the image of $K$ under $\\Omega\\hookrightarrow\\Xi$. Indeed every separable polynomial over $k_0$ splits in its separable closure $K$; factoring it into linear factors shows any of its roots in $\\Xi$ is one of those images, while every element of $K$ is separable algebraic over $k_0$. This needs no algebraicity of $\\Xi/\\Omega$. Choose an affine open $U\\subset S$ containing $s$. The etale-local-ring-triples lemma presents the strict localizations at $\\bar s$ and at $\\bar u$ by the same etale residue triples over $U$: their point is $s$ and their residue targets are the identified copies of $K$. Postcomposition by the embedding $K\\hookrightarrow\\Xi$ gives an isomorphism of triple diagrams leaving all coordinate rings and transition maps unchanged. Their colimits therefore give an isomorphism $e:S'\\to S_{(\\bar u)}$ over $S$ with the prescribed residue embedding. The functorial map $L\\to S_{(\\bar u)}$ equals $e j$ by functoriality (3), since both have the same structural composite and residue map. Thus the middle map in the statement is exactly $e$, not just an unspecified isomorphism.",
-   "uses": [
-    "def-weil-pbc-relative-separable-closure",
-    "lem-weil-pbc-strict-henselization-functoriality",
-    "lem-weil-pbc-etale-local-ring-triples",
-    "def-weil-pbc-strict-henselization-limit"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 03PS and Tag 04HX, lemma-describe-etale-local-ring; Tag 0GJU first paragraph with the geometric-point convention retained"
-   }
-  },
-  {
-   "text": "Keep $U=\\operatorname{Spec}A$ and choose an affine open $V=\\operatorname{Spec}C\\subset f^{-1}(U)$ containing the image of $\\bar x$. Write $S'=\\operatorname{Spec}H$. Its structural map factors through $U$; the affine-chart ind-etale lemma gives that $A\\to H$ is ind-etale. Put $V'=V\\times_U S'$, an open neighbourhood of the image of $\\bar x'$ in $X'$. Apply the ind-etale affine strict-local base-change lemma to $A\\to H$, $A\\to C$, and the given $\\Xi$-point of $V'$. The etale-local-ring-triples lemma (2) allows restriction to these affine open charts without changing any strict-local ring or structural map. We obtain the canonical isomorphism\n$$c:X'_{(\\bar x')}\\longrightarrow L\\times_{S_{(\\bar u)}}X_{(\\bar x)}.$$\nIts two components are the functorial maps to $L$ and to $X_{(\\bar x)}$, so all maps here are the ones of the statement. This use of the base-change lemma puts the ind-etale condition on the base map $A\\to H$, never on $A\\to C$.",
+   "text": "Every j_y is weakly etale. Choose an affine open Spec R -> Y containing the image of y. Every point of Spec H_y generalizes its closed point, so j_y factors through that open. Write the factor as Spec alpha using full faithfulness of Spec. The affine-chart lemma makes alpha ind-etale, hence weakly etale. An open immersion is etale and therefore weakly etale; composition proves the assertion for j_y.",
    "uses": [
     "lem-weil-pbc-strict-henselization-affine-chart-ind-etale",
-    "lem-weil-pbc-ind-etale-affine-strict-local-base-change",
-    "lem-weil-pbc-etale-local-ring-triples",
+    "lem-weil-pbc-ind-etale-stability",
+    "lem-weil-pbc-open-immersion-etale",
+    "lem-weil-pbc-weakly-etale-composition-base-change",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 0GJU and 0GJS; strict-local comparison"
+   }
+  },
+  {
+   "text": "Base change of j_s in the given cartesian square makes p weakly etale. The equations q followed by j_x equals j_xprime followed by p, and b followed by j_u equals j_uprime followed by j_s, make these two composites weakly etale. Cancel the weakly etale maps j_x and j_u using Mathlib WeaklyEtale.of_comp. Its elementary diagonal argument is as follows: for maps r followed by g with both g and the composite weakly etale, the diagonal of g is weakly etale because it is flat and its own diagonal is an isomorphism (a diagonal is mono). The graph of r is its base change and therefore weakly etale. The projection after the graph is the base change of the weakly etale composite. Their composition is r, which is thus weakly etale. No affine base-change comparison is needed.",
+   "uses": [
+    "lem-weil-pbc-weakly-etale-composition-base-change",
+    "def-weil-weakly-etale-morphism",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0GJU first paragraph, with Mathlib AlgebraicGeometry/Morphisms/WeaklyEtale.lean:112-118 cancellation"
+   }
+  },
+  {
+   "text": "Evaluate the pointed equations for b and q at the unique point of Spec Xi. Step 1 identifies their evaluation images with the respective closed points, so b and q carry closed point to closed point; their corresponding ring homomorphisms are local. The target strict-local rings are strictly henselian. Olivier’s theorem for a local weakly etale ring map out of a strictly henselian ring therefore makes b and q isomorphisms. Also hclosed places xprime followed by fprime at the closed point of H_s: the map a sends the unique point of Spec Xi to the unique point of Spec Omega. Thus j_uprime is local on rings, and the same theorem makes it an isomorphism. Define e as the inverse of j_uprime followed by b. The equation j_uprime followed by e equals b and the equation e followed by j_u equals j_s follow by cancelling the inverse.",
+   "uses": [
+    "lem-weil-pbc-strict-henselization-local-structure",
+    "thm-weil-pbc-weak-etale-strict-local",
     "lem-weil-pbc-strict-henselization-functoriality"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0GJS displayed strict-local comparison; algebra.tex Tag 0GIP case (2); Tag 04HX affine chart computation"
+    "place": "Tag 0GJU first paragraph; Olivier theorem thm-weil-pbc-weak-etale-strict-local"
    }
   },
   {
-   "text": "Since $L\\to S_{(\\bar u)}$ is $e j$ and both $e,j$ are isomorphisms, the second projection $L\\times_{S_{(\\bar u)}}X_{(\\bar x)}\\to X_{(\\bar x)}$ is an isomorphism. Its inverse pairs the structure map $X_{(\\bar x)}\\to S_{(\\bar u)}$ followed by $(e j)^{-1}$ with the identity on $X_{(\\bar x)}$; the fibre-product identities check both composites. Composing it with $c$ proves that the last canonical map $q:X'_{(\\bar x')}\\to X_{(\\bar x)}$ is an isomorphism. The first projection of $c$ is the structure map to $L$, so the fibre-product equation is $e\\circ j\\circ\\operatorname{pr}_L\\circ c=(X_{(\\bar x)}\\to S_{(\\bar u)})\\circ q$. Composing with $e^{-1}$ proves compatibility with $S'$. Compatibility with $X$ follows from the structural-map equation for the functorial map $q$.",
+   "text": "Compare q followed by d and j_xprime followed by fprime followed by e. Their composites with j_u agree by hd, hq, the cartesian square and the base equation for e. Their composites with the distinguished evaluation of xprime agree by hqpoint, hdpoint, hbpoint, j_uprime followed by e equals b, and the closed-point lift equations. For each affine pointed etale neighbourhood of u, compose the two maps with its strict-local limit leg and its affine-scheme identification. Both maps have the same base and pointed composites. Etale pointed-map rigidity, applied to the local evaluation from H_xprime into Xi, identifies them. The strict-local limit universal property then identifies the original maps, giving the required compatibility with the new base.",
    "uses": [
-    "def-pc-fibre-product",
+    "lem-weil-pbc-etale-pointed-map-rigidity",
+    "def-weil-pbc-strict-henselization-limit",
+    "def-weil-pbc-strict-henselization-structural-map",
     "lem-weil-pbc-strict-henselization-functoriality"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0GJU first paragraph; Tag 0GJS comparison of vanishing-cycle fibres"
+    "place": "Tags 0GJU and 0GJS; strict-local comparison"
    }
   },
   {
-   "text": "For any $\\bar t:\\operatorname{Spec}\\Omega'\\to S'$, pair $q$ with the identity of $\\operatorname{Spec}\\Omega'$ using the compatibility equation just proved and use $e$ to identify the bases. The fibre-product universal property yields the displayed morphism of fibres. Pair $q^{-1}$ with the same identity to obtain its inverse; both composite pairs have identity projections, hence are identity morphisms. Their maps to $X$ agree because $q$ is over $X$. This calculation uses no field extension hypothesis on $\\Omega'$.",
+   "text": "For any geometric point t of the new base, form pullback.map using q on the first factors, the identity on Spec Omega-prime, and e on the bases. The preceding compatibility is its first commutative square, and the second is the identity equation. All three maps are isomorphisms; their inverses induce the inverse pullback map, as checked on the two projections. The standard pullback.map projection equations are exactly the two asserted equations. Together with hq, the first projection equation also gives compatibility over X. Nothing in the construction assumes an algebraic field extension.",
    "uses": [
     "def-pc-fibre-product"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0GJS displayed comparison of vanishing-cycle fibres, specialized to Tag 0GJU strict-local base change"
+    "place": "Tags 0GJU and 0GJS; strict-local comparison"
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-strict-henselization-functoriality",
-  "lem-weil-pbc-etale-algebra-residue-field-separable",
-  "lem-sc-etale-henselian-ring-lift",
-  "def-weil-pbc-strict-henselization-limit",
+  "lem-weil-pbc-strict-henselization-local-structure",
+  "lem-weil-pbc-strict-henselization-point-evaluation-properties",
   "def-weil-pbc-relative-separable-closure",
-  "lem-weil-pbc-etale-local-ring-triples",
+  "lem-weil-pbc-strict-henselization-functoriality",
   "lem-weil-pbc-strict-henselization-affine-chart-ind-etale",
-  "lem-weil-pbc-ind-etale-affine-strict-local-base-change",
-  "def-pc-fibre-product"
+  "lem-weil-pbc-ind-etale-stability",
+  "lem-weil-pbc-open-immersion-etale",
+  "lem-weil-pbc-weakly-etale-composition-base-change",
+  "def-weil-affine-spectrum",
+  "def-weil-weakly-etale-morphism",
+  "def-pc-fibre-product",
+  "thm-weil-pbc-weak-etale-strict-local",
+  "lem-weil-pbc-etale-pointed-map-rigidity",
+  "def-weil-pbc-strict-henselization-limit",
+  "def-weil-pbc-strict-henselization-structural-map"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tag 0GJU first paragraph and Tag 0GJS strict-local comparison; closed-point and field-embedding identifications expanded using algebra.tex Tag 08HQ and Tag 04HX"
+  "place": "Tags 0GJU first paragraph and 0GJS strict-local comparison",
+  "note": "E9: shorter proof via weak etaleness of structural maps from the affine-chart ind-etale lemma, Mathlib weakly etale base change and cancellation, and the proved Olivier theorem. Compatibility is proved by etale pointed-map rigidity and the strict-local limit; fibres use pullback.map. No new obligations or altered statements."
  },
  "mathlib_searches": [
   {
@@ -275,9 +286,6 @@
  },
  "tool_uses": [
   "lem-weil-pbc-strict-henselization-functoriality",
-  "lem-weil-pbc-etale-algebra-residue-field-separable",
-  "lem-sc-etale-henselian-ring-lift",
-  "lem-weil-pbc-etale-local-ring-triples",
   "lem-weil-pbc-strict-henselization-affine-chart-ind-etale"
  ],
  "reviewed": {
@@ -305,5 +313,15 @@
   "by": "NP",
   "date": "2026-10-15",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E9",
+  "result": "pass",
+  "landing": "20261018T062740-L-646295",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
