@@ -6,7 +6,8 @@ Authors: Claude
 module
 
 public import WeilConjectures.SixFunctors.ProEtale.Adic.SmoothProperLatticeModule
-public import WeilConjectures.SixFunctors.ProEtale.Adic.PadicIntModuleRationalization
+public import WeilConjectures.SixFunctors.ProEtale.Adic.PadicIntModuleRationalizationFree
+public import WeilConjectures.SixFunctors.ProEtale.Adic.PadicIntModuleRationalizationRegular
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ForgetAbRightDerivedLowerStar
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LowerStar
 
@@ -34,7 +35,8 @@ over which `Rf_*` is computed on `f⁻¹ U` by open base change, and the tower r
 (`padicIntModUpperStarLimitComparisonPadicIntModTowerIso`).
 
 The rationalization formula (`IsIso (rationalizationComparison l X)`, the comparison
-`⨁_B colim (M --ℓ--> M --ℓ--> ⋯) ⟶ ℚ̄_ℓ ⊗ M`) is not proved here and is a hypothesis.
+`⨁_B colim (M --ℓ--> M --ℓ--> ⋯) ⟶ ℚ̄_ℓ ⊗ M`) holds on every scheme
+(`isIso_rationalizationComparison_of_regular` and `isIso_rationalizationComparison_app_regular`).
 -/
 
 @[expose] public section
@@ -166,7 +168,7 @@ lemma _root_.AlgebraicGeometry.Scheme.exists_isOpenImmersion_connectedSpace_comp
     ⟨⟨⟨y, hyV⟩, mem_connectedComponent⟩, rfl⟩⟩
 
 /-- **The lattice case of lisse direct images along smooth proper morphisms**, for `Y` locally
-of finite type over a field `K`, granting the rationalization formula on all schemes: if
+of finite type over a field `K`: if
 `F ≅ ℚ̄_ℓ ⊗ M` where `M` is the limit of the transport to `ℤ_ℓ,X`-modules of an `ℓ`-adic tower
 of finite locally constant étale sheaves of torsion `ℤ_ℓ`-modules, every `Hⁿ(Rf_* F[0])` is a
 lisse `ℓ`-adic sheaf. Being lisse is local on `Y`, which is covered by connected quasi-compact
@@ -177,7 +179,6 @@ applies. -/
 theorem isAdicLisseSheaf_homology_rightDerivedFunctor_adicLowerStar_of_lattice
     {K : Type u} [Field K] {X Y : Scheme.{u}} (aY : Y ⟶ Spec (.of K)) [LocallyOfFiniteType aY]
     (f : X ⟶ Y) [Smooth f] [IsProper f]
-    (hrat : ∀ Z : Scheme.{u}, IsIso (rationalizationComparison l Z))
     (G : ℕᵒᵖ ⥤ Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} ℤ_[l])))
     (A : AdicTowerStructure G l) (I : ℕ → Ideal (ULift.{u + 1} ℤ_[l]))
     [∀ n, Finite (ULift.{u + 1} ℤ_[l] ⧸ I n)]
@@ -192,6 +193,8 @@ theorem isAdicLisseSheaf_homology_rightDerivedFunctor_adicLowerStar_of_lattice
     IsAdicLisseSheaf ((DerivedCategory.homologyFunctor _ n).obj
       ((f)_*ᵃ[l].rightDerivedFunctor.obj ((DerivedCategory.singleFunctor _ 0).obj F))) := by
   have := LocallyOfFiniteType.isLocallyNoetherian aY
+  have hrat : ∀ Z : Scheme.{u}, IsIso (rationalizationComparison l Z) := fun Z ↦
+    isIso_rationalizationComparison_of_regular l Z inferInstance
   choose U j hj hU hU' hy using Scheme.exists_isOpenImmersion_connectedSpace_compactSpace (Y := Y)
   refine IsAdicLisseSheaf.of_cover j (Scheme.zariskiPrecoverage_le_proetalePrecoverage _
     ((Scheme.ofArrows_mem_precoverage_iff (P := @IsOpenImmersion)).2

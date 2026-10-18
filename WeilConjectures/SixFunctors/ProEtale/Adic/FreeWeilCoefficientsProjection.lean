@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
+public import WeilConjectures.CategoryTheory.Sites.SheafComposePushforwardMonoidal
 public import WeilConjectures.SixFunctors.ProEtale.Adic.FreeWeilCoefficients
 
 /-!
@@ -57,48 +58,10 @@ end ModuleCat
 
 namespace CategoryTheory
 
-section SheafCompose
-
-variable {C : Type*} [Category* C] (J : GrothendieckTopology C)
-  {A : Type*} [Category* A] [MonoidalCategory A] [BraidedCategory A]
-  {B : Type*} [Category* B] [MonoidalCategory B] [BraidedCategory B]
-  [(J.W (A := A)).IsMonoidal] [HasWeakSheafify J A]
-  [(J.W (A := B)).IsMonoidal] [HasWeakSheafify J B]
-  (G : A ⥤ B) [J.HasSheafCompose G]
-
-attribute [local instance] Sheaf.monoidalCategory
-
-/-- The comparison between the postcomposition of the underlying presheaf and the underlying
-presheaf of the postcomposition is the identity. -/
-@[simp]
-lemma sheafToPresheafCompWhiskeringRightIsoSheafCompose_hom_app (P : Sheaf J A) :
-    (sheafToPresheafCompWhiskeringRightIsoSheafCompose J G).hom.app P = 𝟙 _ := by
-  simp [sheafToPresheafCompWhiskeringRightIsoSheafCompose,
-    sheafToPresheafCompWhiskeringRightCompPresheafToSheafIso]
-  rfl
-
-variable [G.LaxMonoidal]
-
-/-- The tensorator of `sheafCompose J G`, on underlying presheaves: it is the tensorator of the
-postcomposition with `G`, followed by the image under `G` of the tensorator of the inclusion
-of sheaves into presheaves. -/
-lemma μ_sheafToPresheaf_comp_map_μ_sheafCompose (P Q : Sheaf J A) :
-    μ (sheafToPresheaf J B) ((sheafCompose J G).obj P) ((sheafCompose J G).obj Q) ≫
-      (sheafToPresheaf J B).map (μ (sheafCompose J G) P Q) =
-      μ ((Functor.whiskeringRight _ _ _).obj G) P.obj Q.obj ≫
-        Functor.whiskerRight (μ (sheafToPresheaf J A) P Q) G := by
-  have h := NatTrans.IsMonoidal.tensor
-    (τ := (sheafToPresheafCompWhiskeringRightIsoSheafCompose J G).hom) P Q
-  simp only [sheafToPresheafCompWhiskeringRightIsoSheafCompose_hom_app,
-    Functor.LaxMonoidal.comp_μ] at h
-  simpa using h.symm
-
-end SheafCompose
-
 section
 
 variable {C : Type*} [Category* C] (J : GrothendieckTopology C)
-  {A : Type*} [Category* A] [MonoidalCategory A] [BraidedCategory A]
+  {A : Type*} [Category* A] [MonoidalCategory A]
   [(J.W (A := A)).IsMonoidal] [HasWeakSheafify J A]
 
 attribute [local instance] Sheaf.monoidalCategory
@@ -106,9 +69,7 @@ attribute [local instance] Sheaf.monoidalCategory
 /-- The tensorator `S ⊗ T ⟶ (S ⊗ T)^#` of the inclusion of sheaves into presheaves becomes an
 isomorphism after sheafification. -/
 lemma W_μ_sheafToPresheaf (S T : Sheaf J A) : J.W (μ (sheafToPresheaf J A) S T) := by
-  rw [J.W_iff]
-  dsimp only [sheafToPresheafLaxMonoidal]
-  rw [Adjunction.rightAdjointLaxMonoidal_μ, Adjunction.homEquiv_unit, Functor.map_comp]
+  rw [J.W_iff, Adjunction.rightAdjointLaxMonoidal_μ, Adjunction.homEquiv_unit, Functor.map_comp]
   have := (J.W_iff _).1 (J.W_toSheafify (S.obj ⊗ T.obj))
   infer_instance
 
@@ -146,9 +107,37 @@ lemma μ_comp_sheafToPresheaf_map_extendScalarsAbProjection (P : Sheaf J (Module
           (forget₂ _ _) ≫
         Functor.whiskerRight (μ (sheafToPresheaf J _) P ((extendScalarsAb J R).obj Z))
           (forget₂ _ _) := by
-  rw [extendScalarsAbProjection, Functor.map_comp, ← Functor.LaxMonoidal.μ_natural_right_assoc,
-    μ_sheafToPresheaf_comp_map_μ_sheafCompose, Sheaf.adjunction_unit_app_hom]
-  sorry
+  rw [extendScalarsAbProjection, Functor.map_comp, ← Functor.LaxMonoidal.μ_natural_right_assoc]
+  have h := μ_sheafToPresheaf_comp_map_μ_sheafCompose J (forget₂ (ModuleCat.{v} R) Ab.{v}) P
+    ((extendScalarsAb J R).obj Z)
+  simp only [Functor.comp_obj] at h ⊢
+  rw [h, ObjectProperty.ι_map, Sheaf.adjunction_unit_app_hom]
+  rw [MonoidalCategory.whiskerLeft_comp_assoc]
+  congr 1
+  exact Functor.LaxMonoidal.μ_natural_right_assoc
+    ((Functor.whiskeringRight Cᵒᵖ _ _).obj (forget₂ (ModuleCat.{v} R) Ab.{v})) P.obj
+    (toSheafify J (Z.obj ⋙ ModuleCat.extendScalarsAb R)) _
+
+/-- **The projection formula** for the sheafified free `R`-module functor `F`: the map
+`U P ⊗ Z ⟶ U (P ⊗ F Z)` is an isomorphism. On presheaves this is the isomorphism
+`M ⊗[ℤ] Z ≅ M ⊗[R] (R ⊗[ℤ] Z)`, the remaining maps becoming isomorphisms after
+sheafification. -/
+instance isIso_extendScalarsAbProjection (P : Sheaf J (ModuleCat.{v} R)) (Z : Sheaf J Ab.{v}) :
+    IsIso (extendScalarsAbProjection J R P Z) := by
+  have := ModuleCat.isLeftAdjoint_forget₂Ab R
+  have : J.PreservesSheafification (forget₂ (ModuleCat.{v} R) Ab.{v}) :=
+    Sheaf.preservesSheafification_of_adjunction J (Adjunction.ofIsLeftAdjoint _)
+  rw [← J.W_sheafToPresheaf_map_iff_isIso]
+  refine J.W.of_precomp _ _ (W_μ_sheafToPresheaf J _ Z) ?_
+  rw [μ_comp_sheafToPresheaf_map_extendScalarsAbProjection, ← Category.assoc]
+  refine J.W.comp_mem _ _ (@MorphismProperty.of_isIso _ _ _ _ _ _ _ _ ?_) (J.W.comp_mem _ _ ?_ ?_)
+  · rw [NatTrans.isIso_iff_isIso_app]
+    intro U
+    simp only [NatTrans.comp_app, Functor.LaxMonoidal.whiskeringRight_μ_app]
+    exact ModuleCat.isIso_whiskerLeft_unit_comp_μ R (P.obj.obj U) (Z.obj.obj U)
+  · exact J.W_of_preservesSheafification _ _
+      (MorphismProperty.IsMonoidal.whiskerLeft _ _ (J.W_toSheafify _))
+  · exact J.W_of_preservesSheafification _ _ (W_μ_sheafToPresheaf J _ _)
 
 end Sheaf
 
