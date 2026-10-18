@@ -9578,6 +9578,7 @@ public import WeilConjectures.WeilSheaf.ComplexWeights
 public import WeilConjectures.WeilSheaf.Constant
 public import WeilConjectures.WeilSheaf.ConstantTwistCohomology
 public import WeilConjectures.WeilSheaf.ConstantTwistWeight
+public import WeilConjectures.WeilSheaf.CupProductAdicConstant
 public import WeilConjectures.WeilSheaf.Curve
 public import WeilConjectures.WeilSheaf.CurveEndpoints
 public import WeilConjectures.WeilSheaf.CurveTopCohomology
