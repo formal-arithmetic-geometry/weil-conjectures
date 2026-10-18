@@ -14,9 +14,9 @@ public import WeilConjectures.WeilSheaf.ProjectionFormula.LisseDualityProof
 # Fourier inversion: inputs from other sections
 
 Statements of blueprint nodes of other sections (the projection formula, the open–closed
-recorded here; the projection formula is proved in
-`WeilConjectures.WeilSheaf.ProjectionFormula`, the other two are recorded with `sorry`.
-recorded here with `sorry`.
+recollement and the Thom isomorphism for Weil complexes) used in the proof of Fourier inversion.
+The projection formula is proved in `WeilConjectures.WeilSheaf.ProjectionFormula`; the other two
+are recorded here with `sorry`.
 -/
 
 @[expose] public section
