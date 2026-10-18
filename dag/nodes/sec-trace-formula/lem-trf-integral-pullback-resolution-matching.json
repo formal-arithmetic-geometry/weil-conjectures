@@ -19,7 +19,8 @@
   "def-weil-inverse-image-pullback-comparison",
   "lem-weil-pbc-proetale-derived-pullback-composition",
   "lem-trf-integral-pullback-comparison-realization",
-  "def-pur-kinjective-complex"
+  "def-pur-kinjective-complex",
+  "def-trf-integral-tower-inverse-image-unit"
  ],
  "proof": [
   {
@@ -262,5 +263,29 @@
   "group": "Q17",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q17-c4da22c66 (reviewer sub-agent of L); spot-checked: Read the item, all cited statements, unit/blueprint route, Stacks sources, and delivery errors A–F. Verified the repaired seven-step ordinary-derived argument, coefficient data, tower typing, counit normalization, edge cases, route-pivot compliance, and absence of duplicates, circularity, hidden long lemmas, or SGA usage. Wrote review.md."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.IntegralPullbackResolutionMatching",
+  "declaration": "WeilConjectures.integralPullbackResolutionMatching",
+  "declarations": [
+   "WeilConjectures.integralResolutionMatchingResidueInvertible",
+   "WeilConjectures.integralResolutionMatchingTower",
+   "WeilConjectures.integralResolutionMatchingEta",
+   "WeilConjectures.integralPullbackResolutionMatching"
+  ],
+  "file": "lean/Sheaf/Paper/IntegralPullbackResolutionMatching.lean",
+  "statement": "theorem integralPullbackResolutionMatching (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (D : IntegralComparisonSystem.{u} l) {V W Z : Scheme.{u}} (h : Z ⟶ W) (k : W ⟶ V) [IsIso h] [IsIso k] (hV : ∀ v : V, IsUnit (l : V.presheaf.stalk v)) (hW : ∀ w : W, IsUnit (l : W.presheaf.stalk w)) (hZ : ∀ z : Z, IsUnit (l : Z.presheaf.stalk z)) (N : sfIntegralConstructibleCategory l E V) : (integralComparisonConstantTower l E Z).map (inverseImagePullbackComparisonDerived l E h hZ hW ((integralDerivedPullback l E k).obj N.obj) ≫ (integralResolutionMatchingEta l E D h k hV hW hZ N).hom) ≫ (integralComparisonTowerCounit l E Z).app ((coefficientSequenceDerivedRestriction l E Z).obj ((integralComparisonDerivedSequencePullback l E h).obj (integralResolutionMatchingTower l E D k N))) = (integralTowerInverseImageDiagonal l E h).hom.app ((integralDerivedPullback l E k).obj N.obj) ≫ (integralDerivedTowerInverseImage l E h).map ((integralComparisonConstantTower l E W).map (((D.coefficient E).pullback k).realization.hom.app N.obj) ≫ (integralComparisonTowerCounit l E W).app ((coefficientSequenceDerivedRestriction l E W).obj (integralResolutionMatchingTower l E D k N))) ≫ (integralDerivedTowerInverseImageUnit l E h).hom.app (integralResolutionMatchingTower l E D k N)",
+  "branch": "newtargets-dag",
+  "by": "Q01",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-89e4453da",
+  "group": "Q01",
+  "result": "pass",
+  "note": "Clause-by-clause match of the item node against integralPullbackResolutionMatching: the tower C_k, its identification of M = Lk^*N with Rlim C (written explicitly via (D.coefficient E).pullback k realization), h^*C, both derived-limit counits (K-injective-normalized), kappa applied to M, the recorded eta, and the termwise unit; correct composition order; the equality holds in the derived category of whole strict towers. D quantified over all normalized IntegralComparisonSystems, matching the existential realization lemma; the single universe u is inherited from that recorded interface. New def-trf-integral-tower-inverse-image-unit is genuinely absent elsewhere; its unit is fixed on every section as x tensor 1 by a named sorried existsUnique theorem (accepted pattern); derived unit and diagonal are canonical. Node fields unchanged except lean and the added stmt_dep; statements verbatim; docstrings, sources and blueprint tags present; only sorry proofs. Both modules compile clean via nt_compile --json (4.4 s, 3.5 s, exit 0). No findings."
  }
 }

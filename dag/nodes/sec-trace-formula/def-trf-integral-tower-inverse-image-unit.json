@@ -1,0 +1,114 @@
+{
+ "id": "def-trf-integral-tower-inverse-image-unit",
+ "kind": "definition",
+ "title": "Canonical inverse-image tensor unit on entire quotient towers",
+ "status": "split",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$ and its positive quotient coefficient rings $A_{E,n}$ [def-weil-l-adic-coefficient-extension]. Let $g:X\\to Y$ be a scheme isomorphism, with the small pro-etale sites [def-weil-pbc-proetale-site] and completed coefficient sheaves $R_X,R_Y$ [def-weil-completed-integral-coefficients]. Let $H=g^{-1}$ be the exact completed-module inverse image with action transported through the specified coefficient isomorphism [def-weil-inverse-image-pullback-comparison]. Write $\\operatorname{Seq}_E(Y)$ for sheaves of modules over the quotient-ring sheaf on the sequence site, and $U_Y:\\operatorname{Seq}_E(Y)\\to\\operatorname{Tow}(\\operatorname{Mod}(R_Y))$ for exact termwise restriction [def-coef-ringed-sequence-site]; use the analogous notation on $X$. Let $g^*_{\\mathrm{seq}}$ be the actual whole-system pullback with its specified adjunction unit [def-trf-integral-comparison-sequence-systems]. Define $H_{\\mathrm{tow}}$ by applying $H$ at every level and transition. There is a unique natural isomorphism $u_g:H_{\\mathrm{tow}}\\circ U_Y\\xrightarrow{\\sim}U_X\\circ g^*_{\\mathrm{seq}}$ whose component, at every positive index and object $V$ of $X_{\\mathrm{proet}}$, sends a section $x$ over the postcomposition $gV$ to the sequence-pullback adjunction-unit generator at $gV$, restricted along the canonical comma arrow $V\\to g^*(gV)$. Equivalently it is the sheafified termwise map $x\\mapsto x\\otimes1$, with the actual quotient transitions. Define its derived natural isomorphism by localization of these exact functors and the canonical composition isomorphisms. With $\\Delta$ the constant-tower functor [def-trf-integral-comparison-realization-models], define the identification $\\Delta H\\cong H_{\\mathrm{tow}}\\Delta$ by localizing the ordinary constant-functor/whiskering identification, identity on every component.",
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-proetale-site",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-inverse-image-pullback-comparison",
+  "def-coef-ringed-sequence-site",
+  "def-trf-integral-comparison-sequence-systems",
+  "def-trf-integral-comparison-realization-models"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Definition definition-pushforward (Tag 03D6), Lemmas lemma-adjointness-tensor-restrict (Tag 03CZ) and lemma-adjoint-pullback-pushforward-modules; applied to the small sequence site of Tag 0941. Blueprint thm-trf-l-function-euler-product.proof.md, Step 1 Global powers: canonical pullback identifications."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The natural tensor unit from inverse image to module pullback on a tower of quotient coefficient sheaves",
+   "results": "8 hits: SheafOfModules.pullback, SheafOfModules.unitToPushforwardObjUnit, SheafOfModules.instIsLeftAdjointPullback, pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, and unrelated unit/section results. These provide the ordinary site pullback adjunction, not its specified comparison with sectionwise completed inverse image on whole quotient systems.",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural inverse image to pullback tensor unit on whole quotient coefficient towers",
+   "results": "8 hits: Algebra.Presentation.tensorModelOfHasCoeffsEquiv_symm_tmul, tensorModelOfHasCoeffsInv_aeval_val, tensorModelOfHasCoeffsInv, TensorProduct.quotTensorEquivQuotSMul_symm_mk, rTensor.inverse_apply, quotTensorEquivQuotSMul_symm_comp_mkQ, lTensor.inverse_apply, tensorQuotEquivQuotSMul_symm_mk. Ordinary module tensor results only.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "whiskeringRight|pullbackPushforwardAdjunction in Mathlib/Algebra/Category/ModuleCat/Sheaf; inverseImage.*(Tower|Sequence)|integralTowerInverseImageUnit in WeilConjectures and lean/Sheaf; tools/blueprint_refs.py search \"tower inverse image unit\"",
+   "results": "Mathlib: 10 generic pullback-adjunction hits. Upstream WeilConjectures: no tower inverse-image/unit match. lean/Sheaf: inverseImageIntegralModules and inverseImageReductionProduct in InverseImagePullbackComparison give the single-module and chosen-complex constructions, not a comparison on an arbitrary whole quotient system. No integralTowerInverseImageUnit declaration in either tree or dag/lean_names_upstream.json. Blueprint search: 0 matches; a broad DAG grep finds the present item and the existing realization-model node but neither defines this H-tower unit.",
+   "date": "2026-10-18",
+   "verdict": "no exact existing node or declaration"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-integral-pullback-resolution-matching",
+  "date": "2026-10-18",
+  "group": "Q01"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-trf-l-function-euler-product",
+   "place": "Step 1 Global powers; the termwise inverse-image/pullback unit used by the extracted whole-tower counit identity.",
+   "via": [
+    "lem-trf-integral-pullback-resolution-matching",
+    "lem-trf-integral-inverse-image-comparison-composition",
+    "lem-trf-integral-point-transport-tower-powers",
+    "lem-trf-integral-compact-transport-recurrence",
+    "lem-trf-rational-global-frobenius-powers"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-thm-trace-transport",
+ "lean": {
+  "module": "Sheaf.Paper.IntegralTowerInverseImageUnit",
+  "declaration": "WeilConjectures.integralDerivedTowerInverseImageUnit",
+  "declarations": [
+   "WeilConjectures.integralTowerInverseImage",
+   "WeilConjectures.integralTowerInverseImageLimits",
+   "WeilConjectures.integralTowerInverseImageColimits",
+   "WeilConjectures.integralTowerInverseImageUnit_existsUnique",
+   "WeilConjectures.integralTowerInverseImageUnit",
+   "WeilConjectures.integralDerivedTowerInverseImage",
+   "WeilConjectures.integralDerivedTowerInverseImageUnit",
+   "WeilConjectures.integralTowerInverseImageDiagonal"
+  ],
+  "file": "lean/Sheaf/Paper/IntegralTowerInverseImageUnit.lean",
+  "statement": "def integralDerivedTowerInverseImageUnit : coefficientSequenceDerivedRestriction l E Y ⋙ integralDerivedTowerInverseImage l E g ≅ integralComparisonDerivedSequencePullback l E g ⋙ coefficientSequenceDerivedRestriction l E X",
+  "branch": "newtargets-dag",
+  "by": "Q01",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-89e4453da",
+  "group": "Q01",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-89e4453da",
+  "group": "Q01",
+  "result": "pass",
+  "note": "Clause-by-clause match of the item node against integralPullbackResolutionMatching: the tower C_k, its identification of M = Lk^*N with Rlim C (written explicitly via (D.coefficient E).pullback k realization), h^*C, both derived-limit counits (K-injective-normalized), kappa applied to M, the recorded eta, and the termwise unit; correct composition order; the equality holds in the derived category of whole strict towers. D quantified over all normalized IntegralComparisonSystems, matching the existential realization lemma; the single universe u is inherited from that recorded interface. New def-trf-integral-tower-inverse-image-unit is genuinely absent elsewhere; its unit is fixed on every section as x tensor 1 by a named sorried existsUnique theorem (accepted pattern); derived unit and diagonal are canonical. Node fields unchanged except lean and the added stmt_dep; statements verbatim; docstrings, sources and blueprint tags present; only sorry proofs. Both modules compile clean via nt_compile --json (4.4 s, 3.5 s, exit 0). No findings."
+ }
+}
