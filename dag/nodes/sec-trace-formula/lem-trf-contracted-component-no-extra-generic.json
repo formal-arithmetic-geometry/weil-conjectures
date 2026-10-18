@@ -29,9 +29,157 @@
   "def-sc-generic-point",
   "def-weil-residue-field"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First prove the assertion about a contracted component in an arbitrary geometric fibre over an algebraically closed field $F$. Let $R\\hookrightarrow Z_F$ be that reduced component and suppose its image is $\\{w\\}$. By [lem-weil-pbc-proper-fp-permanence], $h_F$ is proper and its composite with this closed immersion is proper. Its image is closed by [def-weil-proper-morphism], hence $w$ is a closed point of $W_F$. By [lem-weil-pbc-closed-point-residue-field-base], $\\kappa(w)=F$. The map from the reduced scheme $R$ factors through this reduced point: on an affine neighbourhood of $w$, every element of its maximal ideal pulls back into every prime of each affine open of $R$, hence to zero. Thus $R$ is a closed subscheme of the proper fibre $h_F^{-1}(w)$. Properness under base change and composition, again [lem-weil-pbc-proper-fp-permanence], proves $R/F$ proper. This does not use properness of either ambient curve over $F$.",
+   "uses": [
+    "lem-weil-pbc-proper-fp-permanence",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-closed-point-residue-field-base"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Properness from the definition, morphisms.tex Tag 01W1, base change and closed immersions; algebra.tex Tag 00FV for the closed image point."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-finite-etale-generic-component-splitting] to $Z\\to T$, which is finite type because it is finitely presented. Obtain $U_0$, $S_0$ and $\\pi_0:S_0\\to U_0$. Write $K=\\kappa(\\xi)$ for the generic field of the integral affine $S_0$. The schemes $S_0,Z_{S_0},W_{S_0}$ are Noetherian by [lem-weil-pbc-finite-type-over-noetherian]. Hence the generic fibre has finitely many components. Give their closures in $Z_{S_0}$ the reduced induced closed structures $H_i$ using [lem-weil-pbc-reduced-induced-closed-subscheme]. Their generic fibres are the reduced generic components $C_i$: on affine charts this is the equality between the radical ideal of a closure and the contraction of the generic radical ideal, followed by localization to $K$.",
+   "uses": [
+    "lem-trf-finite-etale-generic-component-splitting",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-reduced-induced-closed-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tags 0551 and 055A, first reduction and the paragraph taking the closures of generic components."
+   }
+  },
+  {
+   "text": "Let $\\eta$ be the generic point of $T$, $k=\\kappa(\\eta)$, and $\\bar k$ the algebraic closure fixed in [def-weil-geometric-fibre]. The finite map $\\pi_0$ is closed by [lem-weil-pbc-finite-closed-map-finite-fibres] and surjective onto the irreducible $U_0$, so $\\pi_0(\\overline{\\{\\xi\\}})=\\overline{\\{\\pi_0(\\xi)\\}}=U_0$ and $\\pi_0(\\xi)=\\eta$; hence $k\\subseteq K$ and $Z_K=Z_k\\times_kK$. By hypothesis every nonsmooth point of the geometric generic fibre $Z_{\\bar k}$ has completed local ring $\\bar k[[u,v]]/(uv)$, so $Z_{\\bar k}$ is reduced by [lem-trf-nodal-points-reduced-algebraically-closed], and $Z_k$ is geometrically reduced by [lem-trf-geometric-reducedness-algebraic-closure-test]. So is $Z_K$, since $(Z_K)_L=(Z_k)_L$ for every $L/K$. Only the fixed algebraic closure of the hypothesis is used; no nodal property over larger algebraically closed fields is claimed. Each reduced component $C_i$ is geometrically reduced as well. Here are the local details needed for [lem-pur-geometric-reducedness-from-generic-stalks]: at its generic point choose an affine chart $\\operatorname{Spec}B\\subseteq Z_K$ and its minimal prime $\\mathfrak p$. Since $B$ is reduced, $B_{\\mathfrak p}$ is a field and is also the generic local ring of $C_i$. For every extension $L/K$, $B_{\\mathfrak p}\\otimes_K L$ is a localization of the reduced ring $B\\otimes_K L$, and is reduced (a nilpotent fraction has zero numerator after multiplication by a denominator). Thus the cited criterion applies to the reduced $C_i$. Together with the geometric irreducibility supplied in Step 2, $C_i$ is geometrically integral. No quotient by an arbitrary prime is being asserted geometrically reduced.",
+   "uses": [
+    "def-weil-geometric-fibre",
+    "lem-weil-pbc-finite-closed-map-finite-fibres",
+    "lem-trf-nodal-points-reduced-algebraically-closed",
+    "lem-trf-geometric-reducedness-algebraic-closure-test",
+    "lem-pur-geometric-reducedness-from-generic-stalks"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "curves.tex Tag 0E37; varieties.tex Tags 04KS and 035W, applied only at the minimal primes of the reduced generic fibre."
+   }
+  },
+  {
+   "text": "Every $H_i\\to S_0$ is finite type. It is finitely presented: on affine charts apply [lem-weil-pbc-finite-type-noetherian-finite-presentation], and use [lem-weil-pbc-locally-noetherian-quasi-separated] for quasi-separatedness, together with its quasi-compactness. Apply [lem-sbc-generic-flatness] to each $H_i/S_0$. Apply [lem-sbc-generic-geometric-irreducibility-shrink] and [lem-trf-generic-constancy-geometric-reducedness] to each $H_i/S_0$ using Step 3. Intersect the finitely many resulting nonempty opens of $S_0$. Over this open all $H_i$ are flat and finitely presented, and all their geometric fibres are nonempty, reduced and irreducible. Empty index sets require no shrinking.",
+   "uses": [
+    "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "lem-sbc-generic-flatness",
+    "lem-sbc-generic-geometric-irreducibility-shrink",
+    "lem-trf-generic-constancy-geometric-reducedness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tags 052A, 0559 and 0578; algebra.tex Tag 00FP and properties.tex Tag 01OY for the finite presentation hypotheses."
+   }
+  },
+  {
+   "text": "Arrange that these fibres enumerate all components, with no repetitions. The complement $B=Z_{S_0}\\setminus\\bigcup_i|H_i|$ has empty generic fibre. It is finite type and finitely presented over the Noetherian $S_0$, so [lem-weil-pbc-chevalley-constructible-image] makes its image constructible. A constructible subset missing the generic point of an irreducible Noetherian scheme is not dense: write it as a finite union of locally closed subsets as in [def-weil-constructible-subset]; a dense such piece would contain a nonempty open, hence the generic point. Remove the closure of this image. The $H_i$ now cover every fibre topologically, also after field extension by [lem-weil-pbc-surjective-base-change] applied to their finite disjoint union. Further apply [lem-trf-generic-fibre-component-lower-bound] to $Z_{S_0}/S_0$, whose ordinary generic fibre has exactly $n$ components. Each ordinary fibre has at least $n$ components and thus its geometric fibre has at least $n$: every ordinary component generic point has a lift after field extension, and a geometric irreducible component maps into only one ordinary component. But the geometric fibre is covered by $n$ nonempty irreducible closed sets $H_{i,\\bar s}$, so has at most $n$ components. Therefore these sets are exactly its components, each once. Reducedness from Step 4 and uniqueness in [lem-weil-pbc-reduced-induced-closed-subscheme] give the required closed subschemes. If $n=0$, the complement argument makes $Z$ empty here.",
+   "uses": [
+    "lem-weil-pbc-chevalley-constructible-image",
+    "def-weil-constructible-subset",
+    "lem-weil-pbc-surjective-base-change",
+    "lem-trf-generic-fibre-component-lower-bound",
+    "lem-weil-pbc-reduced-induced-closed-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 055A, closure-cover and component lower-bound argument; Tags 054J and 0554; topology.tex Tag 005L."
+   }
+  },
+  {
+   "text": "For each $i$ form the closed set $h(|H_i|)\\subseteq W_{S_0}$, closed because $H_i\\to W_{S_0}$ is proper by [lem-weil-pbc-proper-fp-permanence]. Let $Q_i$ be its reduced induced closed subscheme, from [lem-weil-pbc-reduced-induced-closed-subscheme]. There is a factorization $q_i:H_i\\to Q_i$: locally every element of the radical ideal defining $Q_i$ pulls back into every prime of the reduced $H_i$, hence to zero. This factorization is surjective by its construction. It is proper: its base change along the closed immersion $Q_i\\hookrightarrow W_{S_0}$ is $H_i\\to W_{S_0}$ pulled back to $Q_i$, with source canonically $H_i$ since the defining ideal already acts by zero. Use proper base change in [lem-weil-pbc-proper-fp-permanence]. Consequently [lem-weil-pbc-surjective-base-change] identifies the underlying set of $Q_{i,\\bar s}$ with the image of $H_{i,\\bar s}$ under $h_{\\bar s}$ for every geometric point. In particular this image is nonempty and irreducible. This is a topological image assertion; it does not assume that formation of a scheme-theoretic image commutes with arbitrary base change.",
+   "uses": [
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "lem-weil-pbc-surjective-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Closed-image construction following Tag 055A; properness from morphisms.tex Tag 01W1 and surjective base change Tag 01S1."
+   }
+  },
+  {
+   "text": "Each $Q_i/S_0$ is finite type, being a closed subscheme of the Noetherian finite type $W_{S_0}$. Its generic fibre is nonempty by the surjectivity in Step 6, and is a closed subset of the pure one-dimensional $W_K$, so $d_i=\\dim Q_{i,\\xi}$ is either $0$ or $1$. Apply [lem-trf-generic-fibre-dimension-neighborhood] to each $Q_i/S_0$ and shrink simultaneously so that all its ordinary fibres have dimension $d_i$. After any residue-field extension their dimensions are unchanged by [lem-sc-fibre-dimension-after-base-change]. Define $J=\\{i\\mid d_i=0\\}$. For a geometric point, $Q_{i,\\bar s}$ is nonempty and irreducible by Step 6. Such a zero-dimensional scheme has only one point: a distinct point specializing from its generic point would be a chain of two irreducible closed subsets. Conversely a singleton has dimension zero. Thus $h_{\\bar s}$ contracts $H_{i,\\bar s}$ exactly when $i\\in J$. No properness of $Q_i/S_0$ is used.",
+   "uses": [
+    "lem-trf-generic-fibre-dimension-neighborhood",
+    "lem-sc-fibre-dimension-after-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 05F7 (lemma-dimension-in-neighbourhood); morphisms.tex Tag 02FY for field extension of fibres."
+   }
+  },
+  {
+   "text": "For $i\\in J$, base change $H_{i,\\xi}=C_i$ to an algebraic closure $\\overline K$. Steps 5--7 show that it is a contracted reduced component of $Z_{\\overline K}$. Step 1 makes it proper over $\\overline K$. Apply [lem-pc-proper-descends-field] to the finite type $K$-scheme $C_i$ and the extension $\\overline K/K$ to obtain properness of $H_{i,\\xi}$ over $K$. This is only a statement about the generic fibre.",
+   "uses": [
+    "lem-pc-proper-descends-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "descent.tex Tag 02L1, properness descends under a field extension."
+   }
+  },
+  {
+   "text": "Finally retain a finite etale cover of an open of the original base, rather than merely an open of the covering scheme. Let $V\\subseteq S_0$ be the common open on which Steps 4--7 hold. Its complement is closed, and its image under the finite map $\\pi_0$ is closed by [lem-weil-pbc-finite-closed-map-finite-fibres]. This image misses the generic point of $U_0$: the generic fibre of the integral finite cover $S_0/U_0$ is the spectrum of its fraction field and has the single point $\\xi\\in V$. Choose a nonempty principal affine open $U$ in the complementary open of $U_0$. Set $S=S_0\\times_{U_0}U$ and restrict the $H_i$. This is an integral affine scheme (a nonzero principal localization of the domain of $S_0$); $S\\to U$ remains finite etale by the definitions and is surjective by [lem-weil-pbc-surjective-base-change]. Moreover $S\\subseteq V$. All conclusions established above therefore hold over $S$, with the same finite list, generic field and subset $J$.",
+   "uses": [
+    "lem-weil-pbc-finite-closed-map-finite-fibres",
+    "lem-weil-pbc-surjective-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0551, final closed-image shrinking; morphisms.tex Tags 01WN and 01S1."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-constructible-subset",
+  "def-weil-geometric-fibre",
+  "def-weil-proper-morphism",
+  "lem-pc-proper-descends-field",
+  "lem-pur-geometric-reducedness-from-generic-stalks",
+  "lem-sbc-generic-flatness",
+  "lem-sbc-generic-geometric-irreducibility-shrink",
+  "lem-sc-fibre-dimension-after-base-change",
+  "lem-trf-finite-etale-generic-component-splitting",
+  "lem-trf-generic-constancy-geometric-reducedness",
+  "lem-trf-generic-fibre-component-lower-bound",
+  "lem-trf-generic-fibre-dimension-neighborhood",
+  "lem-trf-geometric-reducedness-algebraic-closure-test",
+  "lem-trf-nodal-points-reduced-algebraically-closed",
+  "lem-weil-pbc-chevalley-constructible-image",
+  "lem-weil-pbc-closed-point-residue-field-base",
+  "lem-weil-pbc-finite-closed-map-finite-fibres",
+  "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-weil-pbc-surjective-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tags 0551, 055A and 05F7; agent combination with the reduced closed-image construction to keep a fixed contracted sublist."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -95,10 +243,73 @@
    "results": "{\"t\": \"2026-10-17T21:55:22Z\", \"tool\": \"leanfinder\", \"query\": \"Over a dense open finite etale cover the closures of generic geometric components enumerate all nodal fibre components with the same contracted labels\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.exists_index\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"AlgebraicGeometry.sigmaOpenCover_I₀\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.range_g_subset\", \"AlgebraicGeometry.Scheme.Hom.normalizationOpenCover\", \"AlgebraicGeometry.Scheme.Cover.exists_of_f_eq_f\", \"AlgebraicGeometry.Scheme.Cover.gluedCover_J\"], \"digest\": \"155b0078edb25902\"}",
    "date": "2026-10-17",
    "verdict": "no match: read the returned types and grep lines; these supply basic morphism properties, component definitions, rank or limit infrastructure, not this nodal component theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsEtale, AlgebraicGeometry.GeometricallyIrreducible",
+   "results": "{\"t\": \"2026-10-17T23:51:27Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.IsEtale, AlgebraicGeometry.GeometricallyIrreducible\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'AlgebraicGeometry.IsEtale'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the returned types and relevant source. Basic affine covers, geometric irreducibility, etale field algebras, and properness do not construct this generic splitting cover or enumerate contracted components. No exact or one-line specialization.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "generic.*component|component.*geometric|finite.*separable.*extension",
+   "results": "{\"t\": \"2026-10-17T23:51:28Z\", \"tool\": \"grep\", \"query\": \"generic.*component|component.*geometric|finite.*separable.*extension\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Irreducible.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Connected.lean\"], \"digest\": \"baca41db70ddefe5\"}; Read the returned types and relevant source. Basic affine covers, geometric irreducibility, etale field algebras, and properness do not construct this generic splitting cover or enumerate contracted components. No exact or one-line specialization.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite type scheme over an integral base has geometrically irreducible generic components after a finite etale surjective integral affine cover of a dense open",
+   "results": "{\"t\": \"2026-10-17T23:51:38Z\", \"tool\": \"leanfinder\", \"query\": \"A finite type scheme over an integral base has geometrically irreducible generic components after a finite etale surjective integral affine cover of a dense open\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.irreducibleSpace_of_isIntegral\", \"AlgebraicGeometry.IsIntegral\", \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"AlgebraicGeometry.instQuasiSoberCarrierCarrierCommRingCat\", \"AlgebraicGeometry.isField_of_universallyClosed\", \"AlgebraicGeometry.instOrderTopCarrierCarrierCommRingCatOfIsIntegral\", \"AlgebraicGeometry.IsIntegral.nonempty\", \"AlgebraicGeometry.isReduced_of_isIntegral\"], \"digest\": \"2e260ceb5c58be26\"}; Read the returned types and relevant source. Basic affine covers, geometric irreducibility, etale field algebras, and properness do not construct this generic splitting cover or enumerate contracted components. No exact or one-line specialization.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Split generic irreducible components of a finite type morphism after a finite separable base extension spread out to a finite etale integral cover",
+   "results": "{\"t\": \"2026-10-17T23:52:47Z\", \"tool\": \"leanfinder\", \"query\": \"Split generic irreducible components of a finite type morphism after a finite separable base extension spread out to a finite etale integral cover\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq\", \"Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime\", \"Algebra.Etale.iff_exists_algEquiv_prod\", \"Algebra.Etale.exists_subalgebra_fg\", \"Algebra.FormallyEtale.iff_exists_algEquiv_prod\", \"Algebra.FormallyEtale.of_isSeparable_aux\", \"Algebra.Smooth.exists_finiteType\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\"], \"digest\": \"e2b00ccb25fcdb4e\"}; Read the returned types and relevant source. Basic affine covers, geometric irreducibility, etale field algebras, and properness do not construct this generic splitting cover or enumerate contracted components. No exact or one-line specialization.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A proper map between nodal curve families has a fixed list of contracted geometric components after a finite etale cover of a dense open",
+   "results": "{\"t\": \"2026-10-17T23:52:47Z\", \"tool\": \"leansearch\", \"query\": \"A proper map between nodal curve families has a fixed list of contracted geometric components after a finite etale cover of a dense open\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsProperMap.casesOn\", \"AlgebraicGeometry.isProper_eq\", \"IsProperMap\", \"AlgebraicGeometry.IsProper.instCompScheme\", \"AlgebraicGeometry.IsProper\", \"AlgebraicGeometry.IsProper.mk\", \"AlgebraicGeometry.IsProper.instOfIsFinite\", \"AlgebraicGeometry.isProper_iff\"], \"digest\": \"3b5d9bfaa220eecf\"}; Read the returned types and relevant source. Basic affine covers, geometric irreducibility, etale field algebras, and properness do not construct this generic splitting cover or enumerate contracted components. No exact or one-line specialization.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a finite type morphism to an integral scheme there is a finite etale surjective integral affine cover of a nonempty open over which every generic fibre component is geometrically irreducible",
+   "results": "{\"t\": \"2026-10-17T23:54:01Z\", \"tool\": \"leansearch\", \"query\": \"For a finite type morphism to an integral scheme there is a finite etale surjective integral affine cover of a nonempty open over which every generic fibre component is geometrically irreducible\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.affineOpenCover\", \"AlgebraicGeometry.Scheme.affineCover\", \"AlgebraicGeometry.Scheme.directedAffineCover\", \"AlgebraicGeometry.Scheme.AffineCover.f\", \"AlgebraicGeometry.Scheme.AffineCover.J\", \"AlgebraicGeometry.Scheme.AffineCover.ctorIdx\", \"AlgebraicGeometry.IsFinite.recOn\", \"AlgebraicGeometry.Scheme.affineBasisCoverOfAffine\"], \"digest\": \"6578a6f858ec9b8d\"}; Read the returned types and relevant source. Basic affine covers, geometric irreducibility, etale field algebras, and properness do not construct this generic splitting cover or enumerate contracted components. No exact or one-line specialization.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Etale, AlgebraicGeometry.GeometricallyIrreducible",
+   "results": "{\"t\": \"2026-10-17T23:54:01Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Etale, AlgebraicGeometry.GeometricallyIrreducible\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the returned types and relevant source. Basic affine covers, geometric irreducibility, etale field algebras, and properness do not construct this generic splitting cover or enumerate contracted components. No exact or one-line specialization.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "After finite etale base change and shrinking enumerate all geometric irreducible components of a nodal curve family by flat closed subschemes and keep a constant subset contracted by a proper map",
+   "results": "{\"t\": \"2026-10-17T23:54:47Z\", \"tool\": \"leanfinder\", \"query\": \"After finite etale base change and shrinking enumerate all geometric irreducible components of a nodal curve family by flat closed subschemes and keep a constant subset contracted by a proper map\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.AffineSpace.not_isIntegralHom\", \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\"], \"digest\": \"e863250385e4aa32\"}; Read the returned types and relevant source. Basic affine covers, geometric irreducibility, etale field algebras, and properness do not construct this generic splitting cover or enumerate contracted components. No exact or one-line specialization.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "contract.*component|component.*contract|nodal|make.*components.*generic",
+   "results": "{\"t\": \"2026-10-17T23:54:47Z\", \"tool\": \"grep\", \"query\": \"contract.*component|component.*contract|nodal|make.*components.*generic\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the returned types and relevant source. Basic affine covers, geometric irreducibility, etale field algebras, and properness do not construct this generic splitting cover or enumerate contracted components. No exact or one-line specialization.",
+   "date": "2026-10-17",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-contracted-component-generic-data",
@@ -119,5 +330,54 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-contracted-component-no-extra-generic",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged. Constructed generic component closures after a general finite etale splitting cover, spread flatness, geometric reducedness and irreducibility, proved exhaustive nonrepeated enumeration, and detected contraction by dimensions of reduced proper images. Descended the common open along the finite cover. One new statement-only generic splitting lemma; all other inputs reused after reading their statements. Properness of ambient curves or component families over the base is never assumed.",
+  "blueprint": "Historical Temkin Lemma 5.1(ii) weighted-incidence paragraph recorded in the inherited ancestry: finite etale splitting and closures before generic constancy of contracted-component data. The current sk-i-curve-zero unit follows the normal-cone local-term route; this auxiliary retains its inherited historical ancestry and does not replace any unit step.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-proper-descends-field",
+    "why": "Generic scheme-theoretic tool used for finite-type component closures, fibre properties or field descent; it does not replace a trace-formula unit step, and no statement in this unit supplies this general tool."
+   },
+   {
+    "node": "lem-pur-geometric-reducedness-from-generic-stalks",
+    "why": "Generic scheme-theoretic tool used for finite-type component closures, fibre properties or field descent; it does not replace a trace-formula unit step, and no statement in this unit supplies this general tool."
+   },
+   {
+    "node": "lem-sbc-generic-flatness",
+    "why": "Generic scheme-theoretic tool used for finite-type component closures, fibre properties or field descent; it does not replace a trace-formula unit step, and no statement in this unit supplies this general tool."
+   },
+   {
+    "node": "lem-sbc-generic-geometric-irreducibility-shrink",
+    "why": "Generic scheme-theoretic tool used for finite-type component closures, fibre properties or field descent; it does not replace a trace-formula unit step, and no statement in this unit supplies this general tool."
+   },
+   {
+    "node": "lem-sc-fibre-dimension-after-base-change",
+    "why": "Generic scheme-theoretic tool used for finite-type component closures, fibre properties or field descent; it does not replace a trace-formula unit step, and no statement in this unit supplies this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "why": "Generic scheme-theoretic tool used for finite-type component closures, fibre properties or field descent; it does not replace a trace-formula unit step, and no statement in this unit supplies this general tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-proper-descends-field",
+  "lem-pur-geometric-reducedness-from-generic-stalks",
+  "lem-sbc-generic-flatness",
+  "lem-sbc-generic-geometric-irreducibility-shrink",
+  "lem-sc-fibre-dimension-after-base-change",
+  "lem-weil-pbc-reduced-induced-closed-subscheme"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q25-8b59f6bc0",
+  "group": "Q25",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q25-8b59f6bc0 (reviewer sub-agent of L); spot-checked: Read in full: the item, the new node, every cited statement, Stacks 0551 (more-morphisms.tex, statement and proof) and 025O (etale.tex). The new node lem-trf-finite-etale-generic-component-splitting is correct: it is 0551 over an integral Noetherian base, and S is integral because A' is finite over Noetherian A and étale over reduced local rings, so 025O applies. It is not a duplicate (I ran rg for 0551 and the label, and read lem-sbc-generic-components-split and lem-trf-geometric-component-count-generic-constancy) and not a restated clause. Steps 1, 2 and 4-9 check out against their cited statements: proper image closed and residue field F; reduced closures; finite presentation, generic flatness, irreducibility shrink and reducedness constancy; Chevalley with the non-dense constructible argument and exact component count; closed image Q_i under base change; dimension-0 test; field descent of properness; principal open under the finite map. One fault (E1/C4), repaired: Step 3 applied lem-trf-nodal-geometric-fibres-reduced to Z_K. That lemma needs, for every algebraically closed Omega/K, components of dimension 1 and an Omega-algebra isomorphism at nonsmooth points. The item and its parent assume this only over the fixed algebraic closure, and no cited node bridges the gap (lem-trf-node-algebraically-closed-extension gives only a ring isomorphism; no node transfers pure dimension). Fix: pi_0(xi)=eta by the closed finite map, so K contains k; Z_kbar is reduced by a new statement-only lemma lem-trf-nodal-points-reduced-algebraically-closed (algebraically closed F, lft C, ring isomorphism at nonsmooth closed points, conclusion C reduced; tested on F[x]/(x^2), F[x,y]/(y^2), F[x,y]/(xy) and the empty scheme); Z_k is geometrically reduced by the existing lem-trf-geometric-reducedness-algebraic-closure-test; then Z_K is too. The rest of the step is kept. proof_deps recomputed; no cycle; statement unchanged. The new node's Mathlib record has a grep search only; LeanSearch and LeanFinder must still be run on the Codex machine. Accepted tool_uses: the six listed. Details in review.md.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
  }
 }

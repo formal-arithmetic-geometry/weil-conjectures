@@ -22,9 +22,81 @@
   "def-weil-pbc-multivariate-power-series",
   "def-weil-pure-dimension"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Because $X$ and $Y$ are finite type over the field $k$, they are Noetherian by [lem-weil-pbc-finite-type-over-noetherian], and hence have finitely many irreducible components by [lem-weil-pbc-noetherian-finitely-many-components]. Every fibre of $f$ is finite: over an affine open $\\operatorname{Spec}R\\subseteq Y$ the finite morphism is $\\operatorname{Spec}A\\to\\operatorname{Spec}R$ with $A$ a finite $R$-module, so the fibre over $y$ is the spectrum of the finite-dimensional $\\kappa(y)$-algebra $A\\otimes_R\\kappa(y)$, which has finitely many prime ideals. Let $Z$ be an irreducible component of $X$ with generic point $\\xi$. If $f(\\xi)$ were a closed point $y$, then by continuity $Z=\\overline{\\{\\xi\\}}\\subseteq f^{-1}(y)$ would be finite, contradicting $\\dim Z=1$. So $f(\\xi)$ is a non-closed point of the one-dimensional scheme $Y$; its closure is irreducible of dimension one, hence an irreducible component of $Y$, and $f(\\xi)$ is its generic point. The open $U$ meets every component, so it contains every generic point of $Y$; thus every generic point of $X$ lies in $f^{-1}(U)$. The isomorphism $f^{-1}(U)\\simeq U$ therefore identifies the generic points of $X$ and $Y$ bijectively, component by component, with isomorphic local rings there; no two source components map to the same target component, and each target component is the image of exactly one source component. Restricting $f$ to corresponding reduced components gives a finite dominant morphism inducing an isomorphism of their function fields.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-noetherian-finitely-many-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01T6, finite type over a Noetherian base; Properties Tag 0BA8, finitely many irreducible components; generic-point argument for the dense open."
+   }
+  },
+  {
+   "text": "Let $\\nu:\\widetilde Y\\to Y$ be the disjoint union of the normalizations of the reduced irreducible components of $Y$. The map $\\mathcal O_Y\\to f_*\\mathcal O_X$ is injective: a local section $s$ of $\\mathcal O_Y$ killed by it vanishes on the dense open $U$, so the closed set where its germ lies in the maximal ideal is everything, $s$ is locally nilpotent, and $s=0$ because $Y$ is reduced. As $X$ is reduced, $f_*\\mathcal O_X$ embeds in the product of the pushforwards of the structure sheaves of its components. On a corresponding pair of components (Step 1), the finite ring map is integral by [lem-weil-pbc-finite-algebra-is-integral] and has the same function field. By the definition [def-sc-normalization], its image lies in the integral closure, so componentwise the structure sheaves fit into inclusions $\\mathcal O_Y\\subseteq f_*\\mathcal O_X\\subseteq\\nu_*\\mathcal O_{\\widetilde Y}$. The normalization properties [lem-sc-normalization-properties] identify $\\nu$ as finite and birational and make it an isomorphism over the normal locus. Let $y$ be a smooth point of $Y$; its local ring is regular, hence a domain, so $y$ lies on exactly one component $Y_i$. Choose an affine open $V\\ni y$ inside the smooth locus that misses every other component; then $V$ is integral, and it is a smooth curve over $k$ in the sense of [lem-sc-smooth-normal], so every local ring of $V$ is normal. By Step 1, $f^{-1}(V)$ is an open subset of the single corresponding component of $X$, hence integral, and $f^{-1}(V)\\to V$ is finite and maps generic point to generic point with an isomorphism of local rings there. By [lem-trf-finite-birational-normal-iso] it is an isomorphism. Thus the quotient between the first and second sheaves is supported only at the nodal points.",
+   "uses": [
+    "lem-weil-pbc-finite-algebra-is-integral",
+    "def-sc-normalization",
+    "lem-sc-normalization-properties",
+    "lem-sc-smooth-normal",
+    "lem-trf-finite-birational-normal-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0AB1, finite birational map over a normal target; Tag 035Q, normalization; nodal-curve smooth-locus argument."
+   }
+  },
+  {
+   "text": "Fix a nodal point $y\\in Y$. For the normalization in Step 2 write $B=(\\nu_*\\mathcal O_{\\widetilde Y})_y$ and write $R=\\mathcal O_{Y,y}$ and $A=(f_*\\mathcal O_X)_y$. The ordinary-point statement [lem-trf-ordinary-point-delta-branches] applies to $Y$ and says that a node has two normalization branches and $\\dim_k(B/R)=1$. Since $R\\subseteq A\\subseteq B$ are $k$-algebras, $A/R$ is a $k$-linear subspace of the one-dimensional $k$-vector space $B/R$. Hence either $A=R$ or $A=B$.",
+   "uses": [
+    "lem-trf-ordinary-point-delta-branches"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Appendix B, ordinary n-fold point characterization preceding Lemma B.1, printed pp. 56--57; local stalk quotient."
+   }
+  },
+  {
+   "text": "The case $A=B$ is impossible. Indeed, after tensoring with the residue field $k$ at $y$, the fibre algebra of $f$ is then the same as the fibre algebra of the normalization $\\nu$. The two normalization branches from Step 3 give two distinct points in this finite fibre; a finite $k$-scheme with two distinct points is a disjoint union of its two local factors and is disconnected. Since $k$ is algebraically closed, this is already the geometric fibre, contradicting the hypothesis that every geometric fibre of $f$ is connected. Therefore $A=R$ at every node.",
+   "uses": [
+    "lem-trf-ordinary-point-delta-branches"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Finite affine fibres and the two-branch normalization at an ordinary node; connectedness definition."
+   }
+  },
+  {
+   "text": "Step 2 gives equality of $\\mathcal O_Y$ and $f_*\\mathcal O_X$ on the smooth locus, and Step 4 gives equality at every node. Thus the natural map $\\mathcal O_Y\\to f_*\\mathcal O_X$ is an isomorphism on all stalks. A finite morphism is affine on affine opens, so equality of these structure sheaves makes the induced affine ring maps isomorphisms on an affine cover of $Y$; consequently $f$ is an isomorphism.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0AB1, final affine-local conclusion; finite morphisms are affine."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-normalization",
+  "lem-sc-normalization-properties",
+  "lem-sc-smooth-normal",
+  "lem-trf-finite-birational-normal-iso",
+  "lem-trf-ordinary-point-delta-branches",
+  "lem-weil-pbc-finite-algebra-is-integral",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-finitely-many-components"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tags 0AB1 and 035Q for the componentwise normalization comparison, together with Temkin Appendix B ordinary-node characterization; the cited Temkin PDF is unavailable locally."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -53,10 +125,38 @@
    "results": "{\"t\": \"2026-10-17T22:18:48Z\", \"tool\": \"grep\", \"query\": \"seminormal|semi_normal|nodal|finite.*birational|birational.*finite\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read returned signatures: The relative-normalization toNormalization isomorphism identifies an integral morphism with its relative normalization, not with the original target. General isomorphism criteria require closed immersion or stalk isomorphisms, which these hypotheses do not supply in one line; no seminormal or nodal finite-modification theorem was returned.",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite birational morphism from a reduced pure one-dimensional scheme to a nodal curve with connected geometric fibres is an isomorphism",
+   "results": "{\"t\": \"2026-10-17T23:55:43Z\", \"tool\": \"leanfinder\", \"query\": \"A finite birational morphism from a reduced pure one-dimensional scheme to a nodal curve with connected geometric fibres is an isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"AlgebraicGeometry.IsFinite.instOfIsIsoScheme\", \"AlgebraicGeometry.isIso_of_isClosedImmersion_of_surjective\", \"AlgebraicGeometry.IsDominant.respectsIso\", \"AlgebraicGeometry.instIsIsoSchemeSigmaSpecOfFinite\", \"AlgebraicGeometry.isIso_of_comp_eq_sigmaSpec\", \"AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization\", \"AlgebraicGeometry.isIso_iff_isIso_stalkMap\"], \"digest\": \"0ccc40fffb0d7a38\"}",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Hom, IsFinite, IsIso, nodal",
+   "results": "{\"t\": \"2026-10-17T23:55:43Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Scheme.Hom, IsFinite, IsIso, nodal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'IsFinite'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "nodal|seminormal|finite.*birational|connected.*fibr",
+   "results": "{\"t\": \"2026-10-17T23:55:43Z\", \"tool\": \"grep\", \"query\": \"nodal|seminormal|finite.*birational|connected.*fibr\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite birational nodal curve connected fibres isomorphism",
+   "results": "{\"t\": \"2026-10-17T23:55:44Z\", \"tool\": \"leansearch\", \"query\": \"finite birational nodal curve connected fibres isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite\", \"AlgebraicGeometry.IsFinite.finite_preimage_singleton\", \"AlgebraicGeometry.IsFinite.recOn\", \"AlgebraicGeometry.IsFinite\", \"AlgebraicGeometry.IsFinite.mk\", \"AlgebraicGeometry.isFinite_iff\", \"AlgebraicGeometry.Scheme.Hom.isIso_base\", \"AlgebraicGeometry.Scheme.Hom.discrete_fiber\"], \"digest\": \"2b5f882593714d11\"}",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-semistable-modification-fibre-contractions",
@@ -68,7 +168,7 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "Semistable-alteration input below lem-trf-local-term-locality, Temkin Lemma 4.4.2 and Appendix B: identify the terminal finite morphism using the nodal local rings, without Corollary 4.4.3(i) or stable-blowdown uniqueness",
+   "place": "Semistable-alteration input below lem-trf-local-term-locality, Temkin Lemma 4.4.2 and Appendix B: identify the terminal finite morphism using the nodal local rings, without Corollary 4.4.3(i) or stable-blowdown uniqueness.",
    "via": [
     "lem-trf-semistable-modification-fibre-contractions",
     "lem-trf-valuation-contracted-component-inclusion",
@@ -86,5 +186,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-finite-birational-nodal-connected-iso",
+  "worker": "stage1",
+  "summary": "Split the theorem into the componentwise generic-point comparison, the integral inclusion of the source structure sheaf between the target and component normalizations, the ordinary-node one-dimensional normalization quotient, the connected-fibre exclusion of the split normalization, and the final affine-local sheaf argument. I found no exact Lean declaration and no Mathlib theorem for the combined statement. The local nodal argument uses the existing ordinary-point delta/branch node; no new node was needed.",
+  "blueprint": "Realizes the ancestor's Temkin Appendix B terminal finite-morphism argument: the nodal local ring has exactly the target ring and its two-branch normalization as finite birational intermediates, and connected fibres exclude the latter.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-normalization-properties",
+    "why": "Generic finiteness, birationality and normal-locus identification of component normalizations (Lean-closed in slopmaster2); unit sk-i-curve-zero has no normalization node of its own."
+   },
+   {
+    "node": "lem-sc-smooth-normal",
+    "why": "Generic normality of the local rings of a smooth curve, applied on an affine open of the smooth locus (Lean-closed in slopmaster2); no node of sk-i-curve-zero states it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-normalization-properties",
+  "lem-sc-smooth-normal"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q74-8135450c6",
+  "group": "Q74",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q74-8135450c6 (reviewer sub-agent of L); spot-checked: I read all of it: the item, its 5 steps, every cited node's statement, unit sk-i-curve-zero, and the parent step 8 of lem-trf-semistable-modification-fibre-contractions, which uses exactly the item's hypotheses. Sources: Stacks 0AB1 (morphisms.tex line 14630, lemma and proof) and the tag labels for 01T6, 0BA8 and 035Q. The Temkin Appendix B PDF is not in literature; the report records it as WANTED and proof_origin is agent. The statement is true. Small cases: the empty scheme; the identity; smooth Y (reduces to 0AB1); two disjoint lines over a node (excluded by the connected-fibre hypothesis); the cusp normalization (shows the nodal hypothesis is needed); an isolated point over a node (shows pure dimension one is needed). rg over dag/nodes found no duplicate. No new nodes and no SGA. Steps 3–5 are correct: the node has b=2 and dim B/R=1, so A=R or A=B; A=B gives a two-point geometric fibre, which is disconnected; then every stalk map is an isomorphism and f is affine. Three repairs, in fixes/dag/nodes/sec-trace-formula/lem-trf-finite-birational-nodal-connected-iso.json. (1) Step 1 assumed without argument that every generic point of X lies over U. I added the argument: fibres of a finite map are finite, so a one-dimensional component cannot map to a closed point, and its generic point maps to a generic point of Y, which lies in U. (2) Step 2 applied lem-trf-finite-birational-normal-iso (integral schemes only) and lem-sc-smooth-normal (separated curves only) to Y, which is neither. I restricted both to an affine open in the smooth locus meeting one component, which is integral with integral preimage. I also justified why O_Y -> f_*O_X is injective (Y reduced, U dense). (3) The off-unit statements lem-sc-normalization-properties and lem-sc-smooth-normal (unit sk-thm-br, both Lean-closed in slopmaster2) were cited without a tool_uses declaration. I added split_report.tool_uses for both, matching the earlier merged delivery lem-trf-nodal-contraction-normalization-branches, and I accept them. Statement, uses and proof_deps are unchanged.; 1 file(s) fixed by the reviewer"
  }
 }
