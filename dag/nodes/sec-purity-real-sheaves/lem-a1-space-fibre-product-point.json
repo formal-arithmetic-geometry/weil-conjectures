@@ -2,7 +2,7 @@
  "id": "lem-a1-space-fibre-product-point",
  "kind": "statement",
  "title": "Pointwise nonemptiness of a fibre product over an algebraic space",
- "statement": "Let $S$ be a scheme [def-pc-scheme], let $E$ be an algebraic space over $S$ [def-trf-algebraic-space], and let $C$ and $U$ be schemes over $S$ with morphisms $c:C\to E$ and $u:U\to E$. If points $x\\in|C|$ and $y\\in|U|$ have the same image in the point set $|E|$ of the algebraic space (equivalently, their maps from spectra of fields become equal after a common field extension), then the scheme fibre product $C\times_EU$ has a point whose projections map to $x$ and $y$ (after that common field extension). In particular, if every point of $c(C)$ lies in the image of $u$, then the projection $C\times_EU\to C$ is surjective.",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], let $E$ be an algebraic space over $S$ [def-trf-algebraic-space], and let $C$ and $U$ be schemes over $S$ with morphisms $c:C\\to E$ and $u:U\\to E$. If points $x\\in|C|$ and $y\\in|U|$ have the same image in the point set $|E|$ of the algebraic space, the set of field-valued point classes of [def-trf-algebraic-space-jointly-surjective-family] (equivalently, their maps from spectra of fields [def-weil-field] become equal after a common field extension), then the sheaf fibre product $C\\times_EU$, which is represented by a scheme, has a point whose projections map to $x$ and $y$ (after that common field extension). In particular, if every point of $c(C)$ lies in the image of $u$, then the projection $C\\times_EU\\to C$ is surjective [def-weil-surjective-morphism].",
  "source": {
   "document": "literature/stacks-project/spaces-properties.tex",
   "place": "Tag 03H4 (spaces-properties, lemma-points-cartesian), the pointwise fibre-product criterion for an algebraic space; the equivalent common-field formulation is part of the definition of points of an algebraic space."
@@ -10,44 +10,82 @@
  "stmt_deps": [
   "def-pc-scheme",
   "def-trf-algebraic-space",
-  "def-pc-fibre-product",
-  "def-weil-field"
+  "def-weil-field",
+  "def-trf-algebraic-space-jointly-surjective-family",
+  "def-weil-surjective-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "mathlib_searches": [
+ "proof": [
   {
-   "tool": "grep",
-   "query": "fiberProduct|pullback.*point|PrimeSpectrum.*pullback [Mathlib/AlgebraicGeometry/]",
-   "results": "19 hits: Mathlib/CategoryTheory/Limits/Shapes/Pullback/PullbackCone.lean, Mathlib/CategoryTheory/Limits/Shapes/Pullback/Assoc.lean, Mathlib/CategoryTheory/Limits/Shapes/Pullback/HasPullback.lean, Mathlib/Topology/Sheaves/CommRingCat.lean, Mathlib/Topology/Sheaves/CommRingCat.lean, Mathlib/Topology/Sheaves/CommRingCat.lean, Mathlib/Topology/Sheaves/CommRingCat.lean, Mathlib/Topology/Sheaves/CommRingCat.lean",
-   "date": "2026-10-18",
-   "verdict": "no match: no algebraic-space point theorem in source grep."
+   "text": "The scheme product $C\\times_SU$ exists by [def-pc-fibre-product]. The diagonal of $E$ is representable by [def-trf-algebraic-space]. Pulling this diagonal back along the map $C\\times_SU\\to E\\times_SE$ induced by $c$ and $u$ therefore gives a scheme representing compatible pairs of maps to $C$ and $U$ with equal composites to $E$. This representing scheme is the sheaf fibre product $C\\times_EU$, with its two projection morphisms.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-trf-algebraic-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03H4 (lemma-points-cartesian), together with the representability-of-the-diagonal definition in Tag 025Y"
+   }
   },
   {
-   "tool": "leansearch",
-   "query": "Given two scheme points with equal image there is a point of their fibre product after extending the field",
-   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.fiber, AlgebraicGeometry.Scheme.Pullback.Triplet.mk'_s, AlgebraicGeometry.Scheme.exists_preimage_of_isPullback, AlgebraicGeometry.Scheme.Pullback.Triplet.mk, AlgebraicGeometry.Scheme.residue_residueFieldCongr_assoc, AlgebraicGeometry.Scheme.SpecToEquivOfField, AlgebraicGeometry.Scheme.Hom.fiberOverSpecResidueField, AlgebraicGeometry.Scheme.SpecToEquivOfField_eq_iff",
+   "text": "Choose representatives $a:\\operatorname{Spec}K\\to C$ and $b:\\operatorname{Spec}L\\to U$ for $x$ and $y$, with $K$ and $L$ fields [def-weil-field]. Equality of their images in $|E|$ means, by the common-field point-class relation [def-trf-algebraic-space-jointly-surjective-family], that there are a field $M$ and embeddings $K\\to M$, $L\\to M$ for which the two composites to $E$ agree. The resulting compatible pair gives, by the representing property in Step 1, a morphism $\\operatorname{Spec}M\\to C\\times_EU$ whose projections are the restrictions of $a$ and $b$; hence those projections represent $x$ and $y$. If every point of $c(C)$ lies in the image of $u$, apply this construction to each point $x$ of $C$ and a point $y$ lying over the same point of $E$. The projection then hits every underlying point of $C$, which is exactly surjectivity of a scheme morphism [def-weil-surjective-morphism].",
+   "uses": [
+    "def-weil-field",
+    "def-trf-algebraic-space-jointly-surjective-family",
+    "def-weil-surjective-morphism",
+    "def-trf-algebraic-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03H4 (lemma-points-cartesian), proof; the final assertion uses the definition of surjective morphism (Tag 01RZ)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-trf-algebraic-space",
+  "def-trf-algebraic-space-jointly-surjective-family",
+  "def-weil-field",
+  "def-weil-surjective-morphism"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-properties.tex",
+  "place": "Tag 03H4 (spaces-properties, lemma-points-cartesian); the common-field formulation is the point equivalence relation preceding Tag 03H4, and the final surjectivity clause is Tag 01RZ."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Points of a fibre product of schemes over an algebraic space with compatible field-valued points",
+   "results": "8 hits including AlgebraicGeometry.Scheme.Pullback.exists_preimage_pullback, Scheme.Pullback.Triplet.exists_preimage, Scheme.exists_preimage_of_isPullback, and related scheme pullback declarations; no algebraic-space theorem.",
    "date": "2026-10-18",
-   "verdict": "no match: no algebraic-space theorem."
+   "verdict": "no match: hits are scheme-only and do not cover algebraic-space bases."
   },
   {
    "tool": "loogle",
-   "query": "Scheme, pullback, point, field extension",
-   "results": "0 hits; loogle: unknown identifier 'Scheme'",
+   "query": "AlgebraicGeometry.Scheme.Pullback.exists_preimage_pullback, AlgebraicGeometry.Scheme.exists_preimage_of_isPullback",
+   "results": "0 hits.",
    "date": "2026-10-18",
-   "verdict": "unavailable/no match: unknown identifier Scheme."
+   "verdict": "no match."
   },
   {
-   "tool": "leanfinder",
-   "query": "Points of a scheme fibre product are obtained after a common field extension of compatible scheme points",
-   "results": "8 hits: AlgebraicGeometry.Scheme.Pullback.exists_preimage_pullback, AlgebraicGeometry.Scheme.Pullback.Triplet.exists_preimage, AlgebraicGeometry.Scheme.Pullback.Triplet.ofPoint, AlgebraicGeometry.Scheme.Pullback.carrierEquiv, AlgebraicGeometry.Scheme.Pullback.Triplet.ofPoint_SpecTensorTo, AlgebraicGeometry.Scheme.Pullback.SpecOfPoint, AlgebraicGeometry.Scheme.exists_preimage_of_isPullback, AlgebraicGeometry.Scheme.Pullback.ofPointTensor",
+   "tool": "grep",
+   "query": "AlgebraicSpace|algebraic.space|fibre.product.*point|fiber.*point [Mathlib/AlgebraicGeometry]",
+   "results": "0 hits.",
    "date": "2026-10-18",
-   "verdict": "no match: exact pullback-point lemmas are scheme-only and do not cover algebraic-space fibre products."
+   "verdict": "no match: Mathlib has no algebraic-space point/fibre-product theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Given compatible field-valued points of schemes mapping to an algebraic space, construct a point of their fibre product after a common field extension",
+   "results": "8 hits including Scheme.Pullback.Triplet.mk, Scheme.Pullback.carrierEquiv, and Scheme.SpecToEquivOfField; all are scheme-level.",
+   "date": "2026-10-18",
+   "verdict": "no match: no algebraic-space theorem."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-a1-qc-map-affine-etale-neighbourhood",
@@ -68,5 +106,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-a1-space-fibre-product-point",
+  "worker": "stage1",
+  "summary": "Audited the pointwise fibre-product criterion directly against Stacks Tag 03H4 and its preceding point-class definition. No child node is needed: the proof is the representability-of-the-diagonal construction followed by the common-field extension argument, with the final clause an immediate application to each point of C and the definition of surjective scheme morphism. Added the missing point-class and surjectivity definition dependencies; no Lean declaration attaches to the item.",
+  "blueprint": "Realizes the pointwise fibre-product lifting used in the algebraic-space representability branch associated to lem-a1-affine-hc0; the two proof steps implement the common-field point construction and its surjectivity consequence.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-N4-1fb11e0cc",
+  "group": "N4",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N4-1fb11e0cc (reviewer sub-agent of L); spot-checked: I read the whole item. Its statement is exactly the scheme special case of Stacks 03H4 (spaces-properties lemma-points-cartesian), with the point relation of 03BU (spaces-properties lines ~222-247); tags checked in tags/tags. The case E=S=Spec R, C=U=Spec C shows why the common field extension is needed; the empty-C and surjective-u cases also hold. Step 1: the diagonal of E is representable (def-trf-algebraic-space) and is pulled back along C x_S U -> E x E, so C x_E U is a scheme (a Yoneda check). Step 2: the common-field relation gives a compatible pair over Spec M, hence a point projecting to x and y; surjectivity then follows from def-weil-surjective-morphism. This is the Stacks proof written out and every cited statement says what is used. There are no new nodes. lem-trf-space-fibre-products-etale-covers and lem-weil-pbc-fibre-product-points are not duplicates. Batch-5 check: def-trf-algebraic-space-jointly-surjective-family is a general definition (point classes / joint surjectivity) whose dependencies are only definitions. It is not a step of the trace-formula or Poincare-duality proofs, so I accepted the citation. One B4 fault, repaired in fixes/: the statement JSON had single-escaped \\to and \\times, which decoded to TAB characters ('C<TAB>o E', 'C<TAB>imes_EU'). I rewrote it with correct escapes and inline citations of the point-set, field and surjectivity definitions. 'Scheme fibre product C x_E U' became 'sheaf fibre product, represented by a scheme', and def-pc-fibre-product was removed from stmt_deps but kept in the proof. The meaning of the statement is unchanged. No tool_uses.; 1 file(s) fixed by the reviewer"
  }
 }

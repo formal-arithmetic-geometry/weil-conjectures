@@ -14,9 +14,124 @@
   "def-pd-descent-datum",
   "def-pc-fibre-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $P$ denote exactly the quasi-affine-open condition in the statement. By [lem-a1-ind-quasi-affine-permanence], $P$ is stable under arbitrary base change and can be tested on an affine open cover of the target. It is preserved by finite disjoint unions: cover the disjoint target by affine opens lying in single components; on such an open its inverse image is the inverse image for that component, so it has $P$. The coproducts and their disjoint open components exist by [lem-weil-pbc-scheme-coproduct-family]; the empty coproduct case is vacuous. Thus [lem-galois-fpqc-descending-types-morphisms] reduces the assertion to proving effectivity for a flat surjective morphism $p:X\\to S$ of affines and a $P$-morphism $V\\to X$. We prove that case in the following steps; this is a reduction, not an induction or an invocation of the result being proved.",
+   "uses": [
+    "lem-a1-ind-quasi-affine-permanence",
+    "lem-weil-pbc-scheme-coproduct-family",
+    "lem-galois-fpqc-descending-types-morphisms"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 0APK, lemma-ind-quasi-affine, first paragraph (including the finite-coproduct hypothesis of 02W3)."
+   }
+  },
+  {
+   "text": "Write $S=\\operatorname{Spec}R$ and $X=\\operatorname{Spec}A$. By [lem-a1-ind-quasi-affine-permanence](3), $V$ is ind-quasi-affine as a scheme and is quasi-separated. The cover $p$ is fpqc: it is affine by [lem-weil-pbc-morphism-affine-schemes-affine], so the inverse image of each affine open $H\\subset S$ is affine; that single affine open has image $H$ by surjectivity, which verifies [def-weil-pbc-fpqc-covering]. Fix $v\\in V$. Apply [lem-a1-fpqc-invariant-intersection-neighbourhoods] to obtain $v\\in W\\subset E\\subset V$, with $W$ open, $E$ an intersection of a nonempty family of quasi-compact opens, and both invariant under the datum. We do not assume $E$ open, or give it a scheme structure.",
+   "uses": [
+    "lem-a1-ind-quasi-affine-permanence",
+    "lem-weil-pbc-morphism-affine-schemes-affine",
+    "def-weil-pbc-fpqc-covering",
+    "lem-a1-fpqc-invariant-intersection-neighbourhoods"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 0APK, lemma-ind-quasi-affine, affine setup and groupoid construction of invariant W and E."
+   }
+  },
+  {
+   "text": "Put $C=\\Gamma(E,\\mathcal O_V|_E)$, an $A$-algebra by restriction of the structure map. Write $E_0\\subset V\\times_S X$ and $E_1\\subset X\\times_S V$ for the inverse images of $E$. Invariance gives an isomorphism of their restricted locally ringed spaces. By [lem-a1-intersection-sections-flat-base-change], their section rings are $C\\otimes_R A$ and $A\\otimes_R C$, respectively, and the comorphism of $\\varphi|_{E_0}$ therefore gives an $A\\otimes_R A$-algebra isomorphism $\\psi:A\\otimes_R C\\xrightarrow{\\sim}C\\otimes_R A$. These identifications also apply after one further base change by $X\\to S$: flatness survives base change by [lem-weil-pbc-flat-morphism-base-change]. Naturality and iterated compatibility in the sections lemma identify the three pulled-back comorphisms with $\\psi_{01},\\psi_{12},\\psi_{02}$ on the triple tensor products. Restricting $\\varphi_{02}=\\varphi_{12}\\circ\\varphi_{01}$ to the corresponding inverse images of $E$ and taking sections reverses composition, hence $\\psi_{02}=\\psi_{01}\\circ\\psi_{12}$. This supplies the cocycle omitted in the source; no scheme structure on $E$ is used.",
+   "uses": [
+    "lem-a1-intersection-sections-flat-base-change",
+    "lem-weil-pbc-flat-morphism-base-change",
+    "def-pd-descent-datum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 0APK, lemma-ind-quasi-affine, displayed section-ring isomorphisms and the omitted cocycle verification."
+   }
+  },
+  {
+   "text": "Let $Z=\\operatorname{Spec}C$ over $X$. By [lem-weil-pbc-fibre-product-affine-spectra], its two pullbacks to $X\\times_S X$ are the spectra of $C\\otimes_R A$ and $A\\otimes_R C$. Contravariant functoriality of [def-weil-affine-spectrum] turns $\\psi$ into an isomorphism $\\theta$ between them, and turns the equality just proved into $\\theta_{02}=\\theta_{12}\\circ\\theta_{01}$. Thus $(Z,\\theta)$ is a scheme descent datum [def-pd-descent-datum]. Its structural morphism to $X$ is affine by [lem-weil-pbc-morphism-affine-schemes-affine]. Apply [lem-galois-fpqc-affine-descent-effective] to obtain a scheme $Z_0\\to S$ and a datum-compatible isomorphism $Z_0\\times_S X\\cong Z$. We need no affineness assertion about $Z_0$.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-weil-affine-spectrum",
+    "def-pd-descent-datum",
+    "lem-weil-pbc-morphism-affine-schemes-affine",
+    "lem-galois-fpqc-affine-descent-effective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 0APK, lemma-ind-quasi-affine, algebra descent and the resulting affine model (using the existing affine effectivity interface)."
+   }
+  },
+  {
+   "text": "By [lem-a1-intersection-canonical-affine-embedding], the canonical map $j_E$ identifies $W$ with an open $J\\subset Z$. Its open-image comparison under flat affine base change can be checked on affine opens $L\\subset W$. Write $D=\\Gamma(L,\\mathcal O_L)$. The map $L\\to Z$ is the morphism corresponding under [lem-weil-pbc-morphism-into-affine-scheme] to restriction $C\\to D$, by the restriction clause of the embedding lemma. After base change by $X\\to S$, [lem-weil-pbc-fibre-product-affine-spectra] identifies its square with the spectra of the tensor square $C\\to D$, $C\\otimes_R A\\to D\\otimes_R A$; it is cartesian. By naturality of [lem-a1-intersection-sections-flat-base-change], the canonical map from $L\\times_S X$ induced by restriction of sections on $E_0$ has precisely this ring map: $c\\otimes a$ maps to $(c|_L)\\otimes a$; since $L\\times_SX$ is affine, [lem-weil-pbc-morphism-into-affine-scheme] makes the two morphisms equal. The affine opens $L$ cover $W$, so these squares give an isomorphism $W\\times_S X\\cong J\\times_S X$ as opens of $\\operatorname{Spec}(C\\otimes_R A)$; the same argument gives $X\\times_S W\\cong X\\times_S J$ in $\\operatorname{Spec}(A\\otimes_R C)$. The definition of $\\psi$ as the comorphism of $\\varphi|_{E_0}$ makes the restrictions to $W\\times_S X$ commute with these canonical maps. Since $\\varphi$ carries this open onto $X\\times_S W$, $\\theta=\\operatorname{Spec}\\psi$ carries the first entire open inverse image of $J$ onto the second. Under $Z\\cong Z_0\\times_S X$, these are the two inverse images of $J$ on $Z\\times_{Z_0}Z$.",
+   "uses": [
+    "lem-a1-intersection-canonical-affine-embedding",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-a1-intersection-sections-flat-base-change",
+    "lem-weil-pbc-morphism-into-affine-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 0APK, lemma-ind-quasi-affine, canonical embedding j and final diagram, including the cartesian comparison for j(W)."
+   }
+  },
+  {
+   "text": "The morphism $Z\\cong Z_0\\times_S X\\to Z_0$ is an fpqc cover by [lem-galois-fpqc-covering-base-change]. The equality of inverse images just proved therefore permits [lem-weil-pbc-open-subscheme-fpqc-descent] to descend $J$ to an open subscheme $W_0\\subset Z_0$, with $W_0\\times_S X\\cong J\\cong W$. This isomorphism respects descent data: the datum on $J$ is the restriction of $\\theta$, since the preimages of $J$ agree; the canonical embedding intertwines its restriction with $\\varphi|_W$ by the restriction-of-sections calculation in step 5. Thus the restricted datum on $W$ is effective, not merely its underlying open scheme.",
+   "uses": [
+    "lem-galois-fpqc-covering-base-change",
+    "lem-weil-pbc-open-subscheme-fpqc-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 0APK, lemma-ind-quasi-affine, descent of the open j(W) and compatibility of the effective datum."
+   }
+  },
+  {
+   "text": "Do this for every $v\\in V$. The resulting invariant opens $W$ cover $V$, and their inclusions intertwine their restricted data with the datum on $V$, since both pullbacks are the same open restriction of $\\varphi$. By [lem-pd-effective-invariant-open-cover] their effective models glue, so $(V,\\varphi)$ is effective over $X/S$. This proves the affine case required in step 1; that reduction now gives the asserted $B$-scheme $V_0$ and datum-compatible isomorphism $V_0\\times_B A\\cong V$ for the original singleton fpqc cover. At no stage was $V\\to A$ assumed quasi-compact or locally of finite presentation. If $V$ is empty the empty invariant open cover is allowed and its model is the empty scheme.",
+   "uses": [
+    "lem-pd-effective-invariant-open-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 0APK, lemma-ind-quasi-affine, last sentence, local effectivity upstairs, then finish the affine reduction."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-a1-ind-quasi-affine-permanence",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-galois-fpqc-descending-types-morphisms",
+  "lem-weil-pbc-morphism-affine-schemes-affine",
+  "def-weil-pbc-fpqc-covering",
+  "lem-a1-fpqc-invariant-intersection-neighbourhoods",
+  "lem-a1-intersection-sections-flat-base-change",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "def-pd-descent-datum",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "def-weil-affine-spectrum",
+  "lem-galois-fpqc-affine-descent-effective",
+  "lem-a1-intersection-canonical-affine-embedding",
+  "lem-galois-fpqc-covering-base-change",
+  "lem-weil-pbc-open-subscheme-fpqc-descent",
+  "lem-pd-effective-invariant-open-cover",
+  "lem-weil-pbc-morphism-into-affine-scheme"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-groupoids.tex",
+  "place": "Tag 0APK, lemma-ind-quasi-affine (Gabber); affine algebra descent used through the existing scheme-level affine effectivity node, with the omitted cocycle and open-image comparisons made explicit."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -55,7 +170,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-a1-separated-lqf-fpqc-effective-descent",
@@ -77,5 +192,69 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-a1-ind-quasi-affine-fpqc-effective-descent",
+  "worker": "stage1",
+  "summary": "Expanded the Gabber proof into affine reduction, invariant neighbourhoods, flat base change on intersection sections, an affine descent datum, its compatible canonical open image, descent of that open, and gluing. Four statement-only geometric inputs are new; all reduction, affine effectivity and open descent/gluing results are reused. No change to the statement or hypotheses.",
+  "blueprint": "The same Gabber input in the existing ancestry from lem-a1-affine-hc0, through proetale representability and separated locally quasi-finite effectivity; no change of unit or chapter route.",
+  "tool_uses": [
+   {
+    "node": "lem-galois-fpqc-descending-types-morphisms",
+    "why": "Generic affine reduction for fpqc effectivity, whose three hypotheses are checked in steps 1-7; no such reduction is stated in this unit."
+   },
+   {
+    "node": "lem-galois-fpqc-affine-descent-effective",
+    "why": "Generic effective descent for an affine scheme, used only for Spec C after constructing its algebra cocycle."
+   },
+   {
+    "node": "lem-galois-fpqc-covering-base-change",
+    "why": "The fpqc cover of the descended affine model is a base change of the original cover."
+   },
+   {
+    "node": "lem-weil-pbc-open-subscheme-fpqc-descent",
+    "why": "Invariant open J descends inside the already effective scheme Z; it does not assert effectivity of V."
+   },
+   {
+    "node": "lem-pd-effective-invariant-open-cover",
+    "why": "Generic gluing of effective invariant open data, after constructing such an open around every point."
+   },
+   {
+    "node": "lem-weil-pbc-flat-morphism-base-change",
+    "why": "Flatness of iterated affine projections for the triple cocycle comparison."
+   },
+   {
+    "node": "lem-weil-pbc-scheme-coproduct-family",
+    "why": "Finite coproducts and their open components in the reduction lemma."
+   },
+   {
+    "node": "lem-weil-pbc-fibre-product-affine-spectra",
+    "why": "The two affine pullbacks of Spec C are spectra of the two tensor products."
+   },
+   {
+    "node": "lem-weil-pbc-morphism-affine-schemes-affine",
+    "why": "The affine-cover and affine-descent hypotheses for maps between affine schemes."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-galois-fpqc-descending-types-morphisms",
+  "lem-galois-fpqc-affine-descent-effective",
+  "lem-galois-fpqc-covering-base-change",
+  "lem-weil-pbc-open-subscheme-fpqc-descent",
+  "lem-pd-effective-invariant-open-cover",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-morphism-affine-schemes-affine"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-NZ-f8a29d514",
+  "group": "NZ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NZ-f8a29d514 (reviewer sub-agent of L); spot-checked: I read Stacks 0APK, 0API, 0APJ, Groupoids 0APA/0APB/constructing-invariant-opens/cartesian-descent-datum and More on Morphisms 0AP6/0F1U/0AP7 in full, plus the statement of every cited node. The item is the exact singleton-cover case of 0APK, and its property P is 0F1U(2), i.e. ind-quasi-affine. No hypothesis was dropped and the statement is not weakened. Step 1: all three 02W3 conditions are checked, including m=0. Step 2: quasi-separatedness of V and the fpqc condition are both derived. In the new invariant-neighbourhood node, s and t are base changes of p, so flat and quasi-compact, and W⊂Q⊂E=t(s^{-1}(Q)) gives the inclusion order the source needs. Step 3: the omitted cocycle is written out with the correct reversal ψ02=ψ01∘ψ12, and 0APJ's quasi-separated hypothesis holds for V and for V×_S X. Step 4: the affine-effectivity node applies to Spec C. Step 5: the cartesian square D⊗_C(C⊗_RA)=D⊗_RA and θ∘j'=j''∘φ give equal inverse images of J. Steps 6-7: open descent along Z→Z_0 (an fpqc base change), then gluing by 0AP4. All four new nodes are true, statement-only and self-contained; I tested them on E empty, T=R and V empty, and none restates a clause of the item. Duplicate search over the DAG (tags and key words) finds only narrower nodes: the quasi-affine-only 0247 node, the qc quasi-affine embedding, qcqs flat base change, and topology 0A31. The tool_uses 02W3, 0245, 022D, 03N0 and 0AP4 are accepted as generic black boxes; there is no SGA. FIX 1 (B3): lem-a1-intersection-canonical-affine-embedding now defines j_E itself, as the unique morphism of locally ringed spaces with global-sections map id_C, and adds the restriction clause j_E|_L = the map for C→Γ(L). FIX 2 (C1): item step 5 now cites lem-weil-pbc-morphism-into-affine-scheme in its uses and proof_deps. The corrected files are under fixes/dag/nodes/sec-purity-real-sheaves/.; 2 file(s) fixed by the reviewer"
  }
 }
