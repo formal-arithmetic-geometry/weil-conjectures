@@ -6,7 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebra
-public import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.MapHomologyIsoComp
+public import WeilConjectures.Algebra.Homology.ShortComplex.MapHomologyIsoComp
 
 /-!
 # The structure isomorphism of a homology object of algebras

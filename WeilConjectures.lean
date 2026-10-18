@@ -172,6 +172,7 @@ public import WeilConjectures.Algebra.Homology.DerivedCategory.Ext.TowerLimit
 public import WeilConjectures.Algebra.Homology.DerivedCategory.Ext.TowerLimitIso
 public import WeilConjectures.Algebra.Homology.DerivedCategory.HomToInjective
 public import WeilConjectures.Algebra.Homology.DerivedCategory.HomologyDevissage
+public import WeilConjectures.Algebra.Homology.DerivedCategory.InjectiveHom
 public import WeilConjectures.Algebra.Homology.DerivedCategory.MappingConeCoimage
 public import WeilConjectures.Algebra.Homology.DerivedCategory.PerfectTower
 public import WeilConjectures.Algebra.Homology.DerivedCategory.ProjectiveHom
@@ -498,6 +499,7 @@ public import WeilConjectures.Algebra.Homology.ScalarExtensionHomologySquare
 public import WeilConjectures.Algebra.Homology.SemilinearScalarExtensionHomologySquare
 public import WeilConjectures.Algebra.Homology.SequentialColimitDerivedHomologyRepresentative
 public import WeilConjectures.Algebra.Homology.ShortComplex.HomologyToMap
+public import WeilConjectures.Algebra.Homology.ShortComplex.MapHomologyIsoComp
 public import WeilConjectures.Algebra.Homology.ShortComplex.SplitHomology
 public import WeilConjectures.Algebra.Homology.SignedModuleDualComplex
 public import WeilConjectures.Algebra.Homology.SingleDegreeExactTermHomQuasiIso
@@ -5366,6 +5368,9 @@ public import WeilConjectures.CategoryTheory.Abelian.HorseshoeMorphismLiftExactS
 public import WeilConjectures.CategoryTheory.Abelian.HorseshoePrescribedResolutions
 public import WeilConjectures.CategoryTheory.Abelian.HorseshoePrescribedRows
 public import WeilConjectures.CategoryTheory.Abelian.HorseshoeResolutions
+public import WeilConjectures.CategoryTheory.Abelian.Injective.ExtHomology
+public import WeilConjectures.CategoryTheory.Abelian.Injective.ExtMap
+public import WeilConjectures.CategoryTheory.Abelian.Injective.ExtMapExactFunctor
 public import WeilConjectures.CategoryTheory.Abelian.InjectiveResolutionDerivedComparison
 public import WeilConjectures.CategoryTheory.Abelian.InjectiveResolutionDerivedComparisonNaturality
 public import WeilConjectures.CategoryTheory.Abelian.InjectiveSESBoundaryLift
@@ -5875,6 +5880,7 @@ public import WeilConjectures.CategoryTheory.Monoidal.Rigid.Flat
 public import WeilConjectures.CategoryTheory.Monoidal.Rigid.Trace
 public import WeilConjectures.CategoryTheory.Monoidal.ShiftProduct
 public import WeilConjectures.CategoryTheory.Monoidal.TensorInverse
+public import WeilConjectures.CategoryTheory.Monoidal.UnitIsoBijective
 public import WeilConjectures.CategoryTheory.MonoidalProjectionConjugate
 public import WeilConjectures.CategoryTheory.MorphismProperty.IndSpreads
 public import WeilConjectures.CategoryTheory.NatTransFromResolvingClass
@@ -5885,6 +5891,7 @@ public import WeilConjectures.CategoryTheory.OpcyclesTorKernelIso
 public import WeilConjectures.CategoryTheory.OpcyclesTorSurjection
 public import WeilConjectures.CategoryTheory.PBCFiltration
 public import WeilConjectures.CategoryTheory.PBCFiniteFiltrationInduction
+public import WeilConjectures.CategoryTheory.Preadditive.Injective.ResolutionMap
 public import WeilConjectures.CategoryTheory.PresheafChangeOfRingsAdjunction
 public import WeilConjectures.CategoryTheory.Pro.Basic
 public import WeilConjectures.CategoryTheory.Pro.Generating
@@ -6709,7 +6716,6 @@ public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Generators
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
-public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.SmulCokernel
 public import WeilConjectures.Mathlib.Algebra.Category.Ring.Basic
 public import WeilConjectures.Mathlib.Algebra.Category.Ring.Constructions
 public import WeilConjectures.Mathlib.Algebra.Category.Ring.FilteredColimits
@@ -6742,7 +6748,6 @@ public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.TStru
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.FullyFaithful
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.HomologyProperty
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
-public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.InjectiveHom
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.KInjective
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.KProjective
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Linear
@@ -6772,7 +6777,6 @@ public import WeilConjectures.Mathlib.Algebra.Homology.MonoidalShift
 public import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.Ab
 public import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.Exact
 public import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
-public import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.MapHomologyIsoComp
 public import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 public import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.ShortExact
 public import WeilConjectures.Mathlib.Algebra.Homology.SingleHomology
@@ -6904,9 +6908,6 @@ public import WeilConjectures.Mathlib.CategoryTheory.Abelian.GrothendieckCategor
 public import WeilConjectures.Mathlib.CategoryTheory.Abelian.GrothendieckCategory.ModuleEmbedding.GabrielPopescu
 public import WeilConjectures.Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Subobject
 public import WeilConjectures.Mathlib.CategoryTheory.Abelian.Injective.Basic
-public import WeilConjectures.Mathlib.CategoryTheory.Abelian.Injective.ExtHomology
-public import WeilConjectures.Mathlib.CategoryTheory.Abelian.Injective.ExtMap
-public import WeilConjectures.Mathlib.CategoryTheory.Abelian.Injective.ExtMapExactFunctor
 public import WeilConjectures.Mathlib.CategoryTheory.Abelian.Injective.Resolution
 public import WeilConjectures.Mathlib.CategoryTheory.Abelian.RightDerived
 public import WeilConjectures.Mathlib.CategoryTheory.Abelian.Subobject
@@ -7000,7 +7001,6 @@ public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.Braided
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.Comparison
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.OfEquivalence
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Subcategory
-public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.UnitIsoBijective
 public import WeilConjectures.Mathlib.CategoryTheory.MorphismProperty.Basic
 public import WeilConjectures.Mathlib.CategoryTheory.MorphismProperty.Comma
 public import WeilConjectures.Mathlib.CategoryTheory.MorphismProperty.CommaSites
@@ -7023,7 +7023,6 @@ public import WeilConjectures.Mathlib.CategoryTheory.Preadditive.Biproducts
 public import WeilConjectures.Mathlib.CategoryTheory.Preadditive.EndoFunctor
 public import WeilConjectures.Mathlib.CategoryTheory.Preadditive.Injective.Preserves
 public import WeilConjectures.Mathlib.CategoryTheory.Preadditive.Injective.Resolution
-public import WeilConjectures.Mathlib.CategoryTheory.Preadditive.Injective.ResolutionMap
 public import WeilConjectures.Mathlib.CategoryTheory.Preadditive.LiftToFinset
 public import WeilConjectures.Mathlib.CategoryTheory.Preadditive.Opposite
 public import WeilConjectures.Mathlib.CategoryTheory.Preadditive.Yoneda.Basic
@@ -7082,7 +7081,6 @@ public import WeilConjectures.Mathlib.CategoryTheory.Subobject.Limits
 public import WeilConjectures.Mathlib.CategoryTheory.Triangulated.Functor
 public import WeilConjectures.Mathlib.CategoryTheory.Triangulated.Generators
 public import WeilConjectures.Mathlib.CategoryTheory.Triangulated.HomologicalFunctor
-public import WeilConjectures.Mathlib.CategoryTheory.Triangulated.HomologySequenceShortExact
 public import WeilConjectures.Mathlib.CategoryTheory.Triangulated.Pretriangulated
 public import WeilConjectures.Mathlib.CategoryTheory.Triangulated.SpectralObject
 public import WeilConjectures.Mathlib.CategoryTheory.Triangulated.Subcategory
@@ -7142,7 +7140,6 @@ public import WeilConjectures.Mathlib.LinearAlgebra.Matrix.NonsingularInverse
 public import WeilConjectures.Mathlib.LinearAlgebra.Matrix.Rank
 public import WeilConjectures.Mathlib.LinearAlgebra.Matrix.SchurComplement
 public import WeilConjectures.Mathlib.LinearAlgebra.Matrix.ToLin
-public import WeilConjectures.Mathlib.LinearAlgebra.PerfectPairing.BaseChange
 public import WeilConjectures.Mathlib.LinearAlgebra.PiTensorProduct.Basic
 public import WeilConjectures.Mathlib.LinearAlgebra.TensorProduct.Associator
 public import WeilConjectures.Mathlib.LinearAlgebra.TensorProduct.Basic
@@ -7169,7 +7166,6 @@ public import WeilConjectures.Mathlib.RepresentationTheory.Irreducible
 public import WeilConjectures.Mathlib.RepresentationTheory.Semisimple
 public import WeilConjectures.Mathlib.RepresentationTheory.Subrepresentation
 public import WeilConjectures.Mathlib.RingTheory.AdicCompletion.Basic
-public import WeilConjectures.Mathlib.RingTheory.AdicCompletion.Divisible
 public import WeilConjectures.Mathlib.RingTheory.Adjoin.FG
 public import WeilConjectures.Mathlib.RingTheory.Algebraic.Basic
 public import WeilConjectures.Mathlib.RingTheory.Artinian.Ring

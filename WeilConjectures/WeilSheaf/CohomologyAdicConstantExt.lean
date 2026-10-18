@@ -5,8 +5,8 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.Mathlib.CategoryTheory.Abelian.Injective.ExtHomology
-public import WeilConjectures.Mathlib.CategoryTheory.Preadditive.Injective.ResolutionMap
+public import WeilConjectures.CategoryTheory.Abelian.Injective.ExtHomology
+public import WeilConjectures.CategoryTheory.Preadditive.Injective.ResolutionMap
 public import WeilConjectures.SixFunctors.ProEtale.Adic.GlobalSectionsExt
 public import WeilConjectures.WeilSheaf.CohomologyResolution
 public import WeilConjectures.WeilSheaf.Constant

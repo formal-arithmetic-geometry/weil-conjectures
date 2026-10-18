@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.Mathlib.CategoryTheory.Abelian.Injective.ExtMap
+public import WeilConjectures.CategoryTheory.Abelian.Injective.ExtMap
 public import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 
 /-!

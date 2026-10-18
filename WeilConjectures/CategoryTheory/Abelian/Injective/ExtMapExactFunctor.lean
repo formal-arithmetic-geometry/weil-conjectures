@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.CategoryTheory.ExtExactFunctorCocycle
 public import WeilConjectures.FromJoel.Algebra.Homology.Embedding.ExtendMap
-public import WeilConjectures.Mathlib.CategoryTheory.Preadditive.Injective.ResolutionMap
+public import WeilConjectures.CategoryTheory.Preadditive.Injective.ResolutionMap
 
 /-!
 # Exact functors on `Ext` classes of cocycles

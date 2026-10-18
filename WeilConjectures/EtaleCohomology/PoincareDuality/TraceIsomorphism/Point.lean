@@ -7,8 +7,8 @@ module
 
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
 public import WeilConjectures.EtaleCohomology.PoincareDuality.TraceCup
-public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.InjectiveHom
-public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.UnitIsoBijective
+public import WeilConjectures.Algebra.Homology.DerivedCategory.InjectiveHom
+public import WeilConjectures.CategoryTheory.Monoidal.UnitIsoBijective
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekBaseChangeShift
 public import WeilConjectures.SixFunctors.Etale.Derived.PointUnit
 public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula

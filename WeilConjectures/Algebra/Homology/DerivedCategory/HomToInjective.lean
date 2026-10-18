@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.InjectiveHom
+public import WeilConjectures.Algebra.Homology.DerivedCategory.InjectiveHom
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure
 
 /-!

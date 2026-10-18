@@ -5,9 +5,9 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.Mathlib.CategoryTheory.Abelian.Injective.ExtMap
-public import WeilConjectures.Mathlib.CategoryTheory.Abelian.Injective.ExtMapExactFunctor
-public import WeilConjectures.Mathlib.CategoryTheory.Preadditive.Injective.ResolutionMap
+public import WeilConjectures.CategoryTheory.Abelian.Injective.ExtMap
+public import WeilConjectures.CategoryTheory.Abelian.Injective.ExtMapExactFunctor
+public import WeilConjectures.CategoryTheory.Preadditive.Injective.ResolutionMap
 public import WeilConjectures.SixFunctors.ProEtale.Adic.GlobalSectionsExt
 
 /-!
