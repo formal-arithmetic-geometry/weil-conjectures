@@ -16098,3 +16098,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 06:28 L: merged deliver/N1/Sheaf.RingTheory.NilpotentProjectiveModuleLift (stage 3; reviewer PASS; first push; landing 20261018T062836-L-665378 (proof); batch 20261018T062645; modules 1; new nodes 1)
 - 06:28 L: merged deliver/N2/Sheaf.AlgebraicGeometry.ProperTorsionProjectionFormula (stage 3; reviewer PASS; first push; landing 20261018T062837-L-665614 (proof); batch 20261018T062645; modules 1; new nodes 0)
 - 06:28 L: merged deliver/N2/Sheaf.AlgebraicGeometry.ZeroDimIntegralPoint (stage 3; reviewer PASS; first push; landing 20261018T062837-L-665827 (proof); batch 20261018T062645; modules 1; new nodes 0)
+- 06:28 L: merged deliver/N3/Sheaf.AlgebraicGeometry.NoetherianChowModification (stage 3; reviewer PASS; first push; landing 20261018T062838-L-666118 (proof); batch 20261018T062645; modules 1; new nodes 0)

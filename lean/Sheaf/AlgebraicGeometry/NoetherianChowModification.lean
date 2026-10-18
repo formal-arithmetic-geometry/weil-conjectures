@@ -9,10 +9,6 @@ public import WeilConjectures.AlgebraicGeometry.Morphisms.Projective
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Properties
 import WeilConjectures.AlgebraicGeometry.ChowLemma
-import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 
 /-!
 # A projective modification of a reduced proper scheme
@@ -55,6 +51,19 @@ theorem exists_projective_modification_of_isAffine_isNoetherian
     [IsProper f] [IsReduced X] :
     ∃ (Y : Scheme.{u}) (π : Y ⟶ X) (U : X.Opens),
       IsProper π ∧ Dense (U : Set X) ∧ IsIso (π ∣_ U) ∧ IsProjective (π ≫ f) := by
-  sorry
+  obtain ⟨D⟩ := ChowModification.nonempty_data f
+  have : IsProper D.π := D.isProper_π
+  have : Finite D.N := D.finite_N
+  have : IsImmersion D.e := D.isImmersion_e
+  have : IsProper (D.e ≫ ℙ(D.N; S) ↘ S) := by
+    rw [D.w]
+    infer_instance
+  have : IsProper D.e := IsProper.of_comp D.e (ℙ(D.N; S) ↘ S)
+  have : IsClosedImmersion D.e :=
+    IsClosedImmersion.of_isPreimmersion D.e D.e.isClosedMap.isClosed_range
+  obtain ⟨U, hU, hπU⟩ := D.exists_dense_isIso
+  refine ⟨D.X', D.π, U, inferInstance, hU, hπU, ?_⟩
+  have : IsHProjective (D.π ≫ f) := ⟨D.N, inferInstance, D.e, inferInstance, D.w⟩
+  exact IsHProjective.isProjective (D.π ≫ f)
 
 end AlgebraicGeometry
