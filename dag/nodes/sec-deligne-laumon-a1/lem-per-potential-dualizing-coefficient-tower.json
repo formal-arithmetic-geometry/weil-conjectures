@@ -2,7 +2,7 @@
  "id": "lem-per-potential-dualizing-coefficient-tower",
  "kind": "statement",
  "title": "Normalized potential complexes and coefficient reduction",
- "statement": "Let $\\ell$ be a prime, $T$ a Noetherian excellent scheme on which $\\ell$ is invertible, and $\\delta$ a dimension function [def-exc-excellent-ring]. Put $\\Lambda_n=\\mathbf Z/\\ell^n\\mathbf Z$ for $n\\geq1$. For each $n$ let $K_n$ be a pinned potential dualizing complex for $(T,\\delta,\\Lambda_n)$ [def-per-potential-dualizing-complex]. Derived scalar reduction equips $K_{n+1}\\otimes^L_{\\Lambda_{n+1}}\\Lambda_n$ with the reduced pinnings, and there is a pinning-preserving isomorphism $\\rho_n:K_{n+1}\\otimes^L_{\\Lambda_{n+1}}\\Lambda_n\\xrightarrow{\\sim}K_n$ [def-kun-derived-tensor]. These comparisons are coherent for iterated coefficient reduction, and any family of pinning-preserving isomorphisms between two such systems intertwines the $\\rho_n$. On Tate twists the scalar-reduction comparison is induced by $u\\mapsto u^\\ell$ on roots of unity.\n\nIf $f:T\\to S$ is a separated finitely presented morphism of Noetherian excellent schemes with $\\ell$ invertible [def-weil-finite-type-morphism, def-sbc-locally-finite-presentation, def-weil-proper-morphism], use bounded constructible finite-Tor complexes and the finite-coefficient etale exceptional adjoints of compact support [def-weil-pbc-constructible-complexes, def-amb-etale-compact-support]. Their natural scalar-reduction comparison $(f_{n+1}^!M)\\otimes^L_{\\Lambda_{n+1}}\\Lambda_n\\cong f_n^!(M\\otimes^L_{\\Lambda_{n+1}}\\Lambda_n)$ is an isomorphism. When $M$ is potential, this comparison respects the induced local pinnings and thus gives the comparisons $\\rho_n$ for its extraordinary pullbacks.",
+ "statement": "Let $\\ell$ be a prime, $T$ a Noetherian excellent scheme on which $\\ell$ is invertible, and $\\delta$ a dimension function [def-exc-excellent-ring]. Put $\\Lambda_n=\\mathbf Z/\\ell^n\\mathbf Z$ for $n\\geq1$. For each $n$ let $K_n$ be a pinned potential dualizing complex for $(T,\\delta,\\Lambda_n)$ [def-per-potential-dualizing-complex]. Derived scalar reduction equips $K_{n+1}\\otimes^L_{\\Lambda_{n+1}}\\Lambda_n$ with the reduced pinnings, and there is a pinning-preserving isomorphism $\\rho_n:K_{n+1}\\otimes^L_{\\Lambda_{n+1}}\\Lambda_n\\xrightarrow{\\sim}K_n$ [def-kun-derived-tensor]. These comparisons are coherent for iterated coefficient reduction, and any family of pinning-preserving isomorphisms between two such systems intertwines the $\\rho_n$. On Tate twists the scalar-reduction comparison is induced by $u\\mapsto u^\\ell$ on roots of unity.\n\nIf $f:T\\to S$ is a separated finitely presented morphism of Noetherian excellent schemes with $\\ell$ invertible [def-weil-finite-type-morphism, def-sbc-locally-finite-presentation, def-weil-proper-morphism], use bounded constructible finite-Tor complexes and the finite-coefficient etale exceptional adjoints of compact support [def-weil-pbc-constructible-complexes, def-amb-etale-compact-support, thm-amb-etale-exceptional-adjoint]. Their natural scalar-reduction comparison $(f_{n+1}^!M)\\otimes^L_{\\Lambda_{n+1}}\\Lambda_n\\cong f_n^!(M\\otimes^L_{\\Lambda_{n+1}}\\Lambda_n)$ is an isomorphism. When $M$ is potential, this comparison respects the induced local pinnings and thus gives the comparisons $\\rho_n$ for its extraordinary pullbacks.",
  "source": {
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
   "place": "Lemmas 6.7.18 and 6.7.20, proof: normalized finite-level potential complexes and compatible derived reductions; ILO XVII 5.1.1 and 7.1.3"
@@ -15,11 +15,423 @@
   "def-sbc-locally-finite-presentation",
   "def-weil-proper-morphism",
   "def-weil-pbc-constructible-complexes",
-  "def-amb-etale-compact-support"
+  "def-amb-etale-compact-support",
+  "thm-amb-etale-exceptional-adjoint"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work throughout with $m\\geq n\\geq1$, $A=\\Lambda_m$, $B=\\Lambda_n$, and $S_W=-\\otimes_A^LB$ on the ordinary etale site of $W$. This proves all reductions, not just adjacent ones. Potential complexes have bounded constructible cohomology and finite Tor amplitude by fixed-pinning uniqueness. A finite Tor interval gives a bounded flat model by the ringed-site flat-model theorem, so its reduction is bounded: a bounded flat complex tensored with $B$ is a bounded flat $B$-complex. Exact inverse image commutes with this calculation. For $a\\in\\mathbf Z$, write $t_{m,n,a}:S_WA_W(a)\\cong B_W(a)$. For $a=1$, choose locally a primitive $\\ell^m$-root $\\zeta$. The map $\\zeta\\mapsto\\zeta^{\\ell^{m-n}}$ identifies the free rank-one module modulo $\\ell^n$ with $\\mu_{\\ell^n}$. It is independent of the generator since $(\\zeta^u)^{\\ell^{m-n}}=(\\zeta^{\\ell^{m-n}})^u$. Take tensor powers for positive $a$ and duals for negative $a$; evaluation on a rank-one basis shows the dual comparisons are isomorphisms too. Thus all $t$ are canonical, natural under inverse image, and their successive reductions agree by the exponent identity.",
+   "uses": [
+    "lem-per-potential-dualizing-uniqueness",
+    "lem-sp-ringed-site-tor-flat-model",
+    "lem-asd-finite-etale-twist-line",
+    "def-per-potential-dualizing-complex",
+    "lem-kun-inverse-image-monoidal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.7.20 proof; ILO XVII 2.1.1--2.1.2; explicit root-power calculation"
+   }
+  },
+  {
+   "text": "Construct the coefficient-labelled compact-support comparison on unbounded categories. Let $a_W:(W,B)\\to(W,A)$ be the identity of topoi with the coefficient map. Its direct image is exact restriction of scalars: kernels and cokernels are unchanged on underlying sheaves. The ringed-topos direct-image composition theorem applied to the equal composites $a_Sr_B=r_Aa_{\\bar T}$ gives $Rr_{*,A}\\operatorname{Res}\\cong\\operatorname{Res}Rr_{*,B}$ without a boundedness assumption. The ringed coefficient projection is the $B$-linear mate $S_SRr_{*,A}L\\to Rr_{*,B}S_{\\bar T}L$. After restriction, its defining counit is the ordinary proper projection map, so that map and hence this mate are invertible by proper projection. Restriction reflects isomorphisms since it preserves cohomology and reflects zero sheaves. For a Nagata compactification $f=rj$, compose with the open $B$-linear scalar map to obtain $q_L:S_SRf_{!,A}L\\cong Rf_{!,B}S_TL$ for every $L$.\nDefine $c_{f,M}:S_Tf_A^!M\\to f_B^!S_SM$ by\n$$\\epsilon_B\\,Rf_{!,B}(c_{f,M})=S_S\\epsilon_A\\,q_{f_A^!M}^{-1}.$$\nThis uses the ambient adjunction on the whole derived categories, including when $S_Tf_A^!M$ is not yet known bounded below. Proper/open comparisons, compactification comparison and mate-pasting identify its restrictions and its composites with the maps defined by this same equation.",
+   "uses": [
+    "thm-nagata-compactification",
+    "def-amb-etale-compact-support",
+    "lem-etale-proper-projection-formula-finite",
+    "lem-coef-etale-open-tensor",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "lem-pur-ringed-coefficient-projection-cocycle",
+    "thm-amb-etale-exceptional-adjoint",
+    "lem-amb-unbounded-compact-support-comparisons",
+    "lem-weil-pbc-mate-pasting",
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.7.18, with the counit-normalized coefficient calculation expanded by the worker"
+   }
+  },
+  {
+   "text": "For a closed immersion $i:Z\\hookrightarrow X$ with open complement $j$, first establish boundedness independently of $c_i$. For $M\\in D^b_{ctf}(X,A)$, $j^*M$ is still bounded constructible of finite Tor amplitude. The open immersion is finitely presented: a Noetherian open is Noetherian and quasi-compact, a quasi-compact open immersion is finite type, and a finite-type map between Noetherian schemes is finitely presented. The new ordinary-direct-image lemma therefore gives $Rj_*j^*M\\in D^b_{ctf}$. The closed-support triangle makes $i_*i_A^!M$ bounded constructible of finite Tor amplitude. Indeed cohomology bounds and constructibility are stable under this cone, and tensoring the triangle with any sheaf bounds its cohomology by the two finite Tor intervals. The closed stalk formula, exactness and conservativity of geometric stalks give $i^*i_*\\cong1$. Exact inverse image preserves constructibility, and inverse-image monoidality preserves the Tor bounds: for a module sheaf $N$ on $Z$, use $i_*N$ on $X$ and $i^*i_*N=N$. Thus $i_A^!M\\in D^b_{ctf}$ before any scalar comparison is used.",
+   "uses": [
+    "lem-exc-closed-support-triangle",
+    "lem-per-excellent-etale-constant-projection",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "lem-weil-pbc-qc-open-immersion-finite-type",
+    "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+    "lemma-openclosed-stalk-lowerstar",
+    "lemma-weil-pbc-geometric-stalk-conservative",
+    "prop-weil-pbc-geometric-stalks-exact",
+    "lem-kun-inverse-image-monoidal",
+    "prop-constructible-pullback",
+    "lem-pur-derived-change-of-rings",
+    "prop-constructible-derived-subcategory"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.7.18, with the counit-normalized coefficient calculation expanded by the worker"
+   }
+  },
+  {
+   "text": "Compare the scalar-reduced closed-support triangle with the $B$-triangle of $SM$. Its middle map is $1_{SM}$ and its right map is $\\chi_j:SRj_*j^*M\\cong Rj_*j^*SM$. The counit definition of $\\chi_j$ makes the open-unit square commute. Rotate both triangles; TR3 supplies a left map $a$ making all three squares commute, including the connecting square. The counit equation of Step 2 says that $b=i_*c_{i,M}$ also commutes with the first arrow, under the proper scalar identification of $Si_*$ with $i_*S$.\nThese left maps agree. Write their common source as $i_*X$ and their difference as $e$. Since the first arrow kills $e$, the weak-kernel consequence of TR3 factors $e$ through $Rj_*j^*SM[-1]\\to i_*i_B^!SM$. (Apply TR3 to the split triangle on $i_*X$ and the rotated target triangle.) But\n$$\\operatorname{Hom}(i_*X,Rj_*Y[-1])=\\operatorname{Hom}(j^*i_*X,Y[-1])=0,$$\nbecause $j^*i_*X=0$ by disjoint open/closed vanishing. Thus $a=b$, establishing the missing connecting square for the actual map. The triangle isomorphism criterion now gives $i_*c_i$ invertible; the same stalk formula and stalk conservativity give $c_i$ invertible.",
+   "uses": [
+    "lem-exc-closed-support-triangle",
+    "lem-per-excellent-etale-constant-projection",
+    "def-weil-triangulated-category",
+    "lem-sf-triangle-morphism-iso",
+    "lem-etale-proper-projection-formula-finite",
+    "lem-weil-pbc-mate-pasting",
+    "lemma-openclosed-stalk-lowerstar",
+    "lemma-weil-pbc-geometric-stalk-conservative",
+    "prop-weil-pbc-geometric-stalks-exact",
+    "lem-weil-pbc-ringed-projection-mate-exact",
+    "lemma-openclosed-vanishing-lowerstar"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.7.18, with the counit-normalized coefficient calculation expanded by the worker"
+   }
+  },
+  {
+   "text": "For the affine-line projection, compare the Kummer-normalized projective-line adjunctions at $A$ and $B$. The map of Kummer sequences has maps $u\\mapsto u^{\\ell^{m-n}}$ on roots of unity and on the middle $\\mathbf G_m$, and identity on the last $\\mathbf G_m$; its square commutes because $(u^{\\ell^{m-n}})^{\\ell^n}=u^{\\ell^m}$. Consequently the connecting classes of the same $\\mathcal O(1)$ reduce to one another. In the displayed decomposition $b_q$ of projective-line cohomology, scalar change therefore takes both the unit summand and the Chern-class summand to their $B$ versions. The proper scalar projection is invertible, so $t_{q,B}S(b_q)=S(t_{q,A}b_q)$ on both summands, or equivalently $t_{q,B}\\chi_q=S(t_{q,A})$. The given formula for the projective-line counit now shows that its scalar transpose, under $q^*(-)(1)[2]$, is the identity after $t_{m,n,1}$. Open restriction gives the same result for $\\mathbf A^1$. Iterating the coordinate-tower adjunction of the affine-space trace theorem and mate-pasting gives, for $p:\\mathbf A^d_X\\to X$,\n$$c_{p,M}:S(p^*M(d)[2d])\\cong p^*(SM)(d)[2d].$$\nThus $c_p$ is invertible with its specified orientation, including $d=0$.",
+   "uses": [
+    "lem-asd-ordinary-finite-p1-adjunction",
+    "def-amb-p1-trace",
+    "lem-amb-affine-space-top-trace",
+    "lem-coef-etale-open-tensor",
+    "lem-weil-pbc-mate-pasting",
+    "lem-etale-proper-projection-formula-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.7.18 proof, smooth projection case; diagonal/Kummer affine-line normalization"
+   }
+  },
+  {
+   "text": "Identify the smooth orientation used by $\\beta$, rather than assuming that a trace orientation is its orientation. For $p:\\mathbf A^d_V\\to V$, the first projection $p_1:\\mathbf A^d_V\\times_V\\mathbf A^d_V\\to\\mathbf A^d_V$ has diagonal section. Write the fibre coordinates as $z_j=y_j-x_j$; they carry that section to zero. The stated affine-translation trace identity with section $a=(x_1,\\ldots,x_d)$ preserves the coordinate-tower counit, so this translation introduces no change of orientation. In the finite-ring section-deformation statement its deformation has $z_j=t u_j$, and its normalized $\\kappa$ is the identity in the affine-space coordinate-tower orientation. Its normal-bundle orientation is exactly the inverse Kummer integration orientation. The first arrow in the diagonal orientation is the counit-defined base change of $\\omega_p$ to this section; the affine-space trace's base-change equation identifies it with the same coordinate orientation. Substituting these three stated arrows into the diagonal formula therefore gives $\\gamma_p=\\gamma_p^{\\mathrm{trace}}$ on the coefficient unit. Both arbitrary-input maps are tensor mates of the same projection and counit, so equality holds for every input. Consequently Step 5 proves coefficient compatibility for the actual diagonal orientation on affine space.",
+   "uses": [
+    "lem-trf-finite-ring-section-deformation",
+    "lem-trf-ambient-diagonal-purity-base-change",
+    "lem-amb-affine-space-top-trace",
+    "lem-weil-pbc-mate-pasting",
+    "lem-trf-ambient-affine-translation-trace"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.7.18, smooth case; expanded along the current blueprint diagonal/deformation route and the cited finite-ring coordinate normalization"
+   }
+  },
+  {
+   "text": "For a smooth factor, use an etale coordinate chart $e:U\\to\\mathbf A^d_V$. Smooth orientation composition and its dimension-zero clause identify $\\gamma_{pe}$ with $e^*\\gamma_p$ followed by the etale right-adjoint comparison. Etale sum extension is exact, and its counit sums the finitely supported entries; scalar tensor commutes with that sum termwise. Its scalar mate is therefore the identity under $e^!=e^*$. Mate-pasting and Step 6 give coefficient compatibility for $\\gamma_{pe}$. These are equalities of orientations globally: after the smooth identifications both orientations are maps of equally shifted locally free rank-one sheaves; single-complex full faithfulness makes them sheaf maps, and sheaf-Hom gluing detects their equality on these charts. The arbitrary-input equality again follows by taking the tensor mates. Thus the smooth maps appearing in the stated Gysin construction, with their diagonal/deformation normalization, have the required coefficient compatibility.",
+   "uses": [
+    "sbc-thm-etale-local-normal-form",
+    "lem-trf-ambient-diagonal-purity-base-change",
+    "lem-amb-etale-adjoint-locality",
+    "lem-weil-pbc-mate-pasting",
+    "lem-weil-pbc-derived-single-fully-faithful",
+    "lem-pur-sheaf-hom-cover-gluing",
+    "lem-asd-tensor-mate-etale-precomp"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.7.18, smooth case; expanded along the current blueprint diagonal/deformation route and the cited finite-ring coordinate normalization"
+   }
+  },
+  {
+   "text": "The preceding local calculations prove the exceptional isomorphism for general $f$. On affine charts $\\operatorname{Spec}C\\to\\operatorname{Spec}R$ of $f$, choose finitely many $R$-algebra generators of $C$. The surjection $R[x_1,\\ldots,x_d]\\twoheadrightarrow C$ exhibits a closed immersion $i$ into $\\mathbf A^d_R$, so $f=pi$ on this chart. Polynomial algebras over excellent rings remain excellent, as do their localizations. Right-adjoint transitivity identifies $f^!$ with $i^!p^!$, and mate-pasting identifies $c_f$ with $c_i$ followed by $i_B^!c_p$. Steps 4 and 5 prove these maps invertible. They also keep $f_A^!M$ in $D^b_{ctf}$ locally: $p^!M=p^*M(d)[2d]$ and Step 3 applies to it. Source open restriction is supplied by adjoint locality, and target open restriction by the normalized shriek/open exchange-adjoint theorem. Every geometric stalk belongs to one of these charts, so stalk conservativity proves the actual $c_f$ invertible globally. No uniform bound on residue-field cohomological dimension is used.",
+   "uses": [
+    "def-weil-pbc-finite-type-algebra",
+    "def-weil-closed-immersion",
+    "def-sbc-affine-space",
+    "lem-exc-finite-type-localization-excellent",
+    "lem-amb-etale-compact-comparisons",
+    "thm-amb-etale-exceptional-adjoint",
+    "lem-weil-pbc-mate-pasting",
+    "lem-amb-etale-adjoint-locality",
+    "lemma-weil-pbc-geometric-stalk-conservative",
+    "prop-weil-pbc-geometric-stalks-exact",
+    "lem-kun-inverse-image-monoidal",
+    "prop-constructible-pullback",
+    "lem-amb-unbounded-compact-support-comparisons",
+    "lem-amb-shriek-open-exchange-adjoint"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.7.18 proof, local closed/smooth factorization"
+   }
+  },
+  {
+   "text": "Check the schemes on which costalk reduction is used. Choose an excellent affine chart $\\operatorname{Spec}R\\subset X$ at $x$. Its local ring $R_{\\mathfrak p}$ is Noetherian by localization and excellent by excellent-localization stability. The strict-local scheme is $\\operatorname{Spec}H$, where $H=(R_{\\mathfrak p})^{\\mathrm{sh}}$, by the affine strict-local comparison. It is Noetherian by the strict-henselization theorem. Its map from $R$ is ind-etale by the strict-local chart theorem and therefore weakly etale. The weakly-etale excellence theorem now makes $H$ excellent. Closed reduced closures are excellent by finite-type stability, and their Noetherian property follows because quotients of Noetherian rings are Noetherian: lift an ideal to the original ring and project its finite generators. All closed-point complements are quasi-compact Noetherian opens. Thus Step 3 and the new projection lemma apply on the local and strict-local schemes, not only on $X$.",
+   "uses": [
+    "lem-exc-finite-type-localization-excellent",
+    "lem-weil-pbc-localization-noetherian",
+    "lem-sc-strict-henselization-noetherian",
+    "lem-exc-affine-strict-local-ring-comparison",
+    "lem-weil-pbc-strict-henselization-affine-chart-ind-etale",
+    "lem-weil-pbc-ind-etale-stability",
+    "lem-exc-weakly-etale-excellent",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "lem-per-excellent-etale-constant-projection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "The strict-local Noetherian and excellence chain cited separately, as in lem-per-codimension-one-costalk-reduction Step 3"
+   }
+  },
+  {
+   "text": "Apply the closed comparison of Step 4 after exact restriction to $\\operatorname{Spec}\\mathcal O_{X,x}$. This defines $h_{x,K}:SC_xK\\cong C_xSK$. On the strict localization its geometric fibre is the supported-cohomology comparison. To check coefficient naturality of the fixed-coefficient costalk identifications, use their constituent maps: the ind-etale closed-support comparison is explicitly the mate of closed direct-image base change, and closed transitivity is the composite-counit comparison. After scalar extension the two candidate maps have the same composite closed counit, so the uniqueness calculation of Step 4 makes them equal. Exact geometric fibres and the strict-henselian sections/stalk map commute with scalar tensor on flat models. Normalization is an exact equivalence of etale topoi; its inverse image preserves the terminal object, the generic open, and their restriction kernel, so its supported comparison and scalar extension agree on these same complexes. This proves that the fixed-$A$ and fixed-$B$ costalk chains commute with $h$, including the closed-closure and normalization chains. Composition of supports and successive coefficient quotients likewise commute: their open maps satisfy the ringed projection cocycle, and their closed maps have equal pasted counits; Step 4 again gives equality.",
+   "uses": [
+    "lem-per-prime-power-costalk-reduction",
+    "lem-per-ind-etale-closed-support-base-change",
+    "lem-weil-pbc-strictly-henselian-sections-stalk",
+    "prop-weil-pbc-geometric-stalks-exact",
+    "prop-weil-pbc-universal-homeomorphism-topos",
+    "def-pur-etale-derived-supported-sections",
+    "lem-kun-inverse-image-monoidal",
+    "lem-pur-ringed-coefficient-projection-cocycle",
+    "lem-sfb-successive-derived-quotient-normalization",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII 1.3–1.4, expanded coefficient naturality of the fixed-coefficient costalk chains"
+   }
+  },
+  {
+   "text": "Fix the normalization of the trait model relative to $h$. Its augmentation $F(P)\\to P_s$ is projection to the degree-zero closed stalk. For an injective sheaf $J$, the inclusion $\\Gamma_s(T,J)[0]\\to F(J)$ is the inclusion of the kernel of $J_s\\to J_{\\bar\\eta}^S$. It induces the identity on $H^0$; higher cohomology vanishes since $F(J)$ computes derived support of an injective. Hence it is a quasi-isomorphism and its augmentation is the actual supported-sections inclusion. Take a bounded-below injective representative $P\\to J^\\bullet$. Exactness of $F$ makes $F(P)\\to F(J^\\bullet)$ a quasi-isomorphism, while totalizing the preceding inclusions identifies $F(J^\\bullet)$ with $\\Gamma_s(T,J^\\bullet)$. The zigzag intertwines the augmentations, and therefore identifies $F(P)\\to P_s$ with the exceptional counit after sections. Its cone is the open term of the localization triangle, with the connecting map fixed by this cone convention. Thus this is an identification of the supported triangle, not an arbitrary natural isomorphism of its first object.",
+   "uses": [
+    "lem-per-prime-power-trait-residue-model",
+    "def-pur-etale-derived-supported-sections",
+    "lem-weil-pbc-dplus-injective-representative",
+    "lem-weil-pbc-strictly-henselian-sections-stalk",
+    "lem-exc-closed-support-triangle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII 1.2.2–1.2.3, identification of the three-term model with the actual support counit"
+   }
+  },
+  {
+   "text": "On the normalization trait choose a bounded flat model $P$ for the complex obtained by closed restriction. Each term of $F_A(P)$ is flat: its closed stalk is flat, wild invariants are the image of the averaging projector on the flat generic stalk, and evaluation at $1-\\sigma$ identifies the last term with those invariants. Stalk flatness follows by taking filtered colimits of the exact tensor sequences defining flatness; the image of an idempotent on a flat module is a flat direct summand. Thus $F_A(P)$ computes its own derived scalar reduction. Averaging commutes with scalar tensor, since its finite-group denominators are prime to $\\ell$. Evaluation at $1-\\sigma$ identifies the last-term comparison with the identity on these invariants. This gives a cochain isomorphism\n$$F_A(P)\\otimes_AB\\cong F_B(P\\otimes_AB).$$\nIt preserves the augmentation in Step 11. The next step identifies this explicit cochain map with the actual costalk comparison.",
+   "uses": [
+    "lem-per-prime-power-trait-residue-model",
+    "lem-sp-ringed-site-tor-flat-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII 1.2.2–1.2.3, bounded-flat model calculation, with the counit identification expanded"
+   }
+  },
+  {
+   "text": "Identify that cochain map with $h$ by the coefficient adjunction. Write $U$ for exact restriction of scalars and $S\\dashv U$ for derived scalar extension. The equality $i_*S_Z\\cong S_Ti_*$ identifies right adjoints as $i_A^!U_T\\cong U_Zi_B^!$; its counit normalization is obtained by composing these two adjunctions. Hence the scalar adjunct of $h:S_Zi_A^!P\\to i_B^!S_TP$ is\n$$i_A^!P\\xrightarrow{i_A^!\\eta_P}i_A^!U_TS_TP\\cong U_Zi_B^!S_TP.$$\nPasting the adjunctions gives exactly the defining equation for $c_i$ in Step 2, so this is the same $h$ as in Step 10.\nOn the trait, $F_A(UQ)=U F_B(Q)$ under evaluation at $1-\\sigma$: stalks, averaging and the augmentation agree. This is the canonical restriction comparison for derived support. Indeed a $B$-injective $J$ is sent to a support-acyclic $A$-sheaf, since $F_A(UJ)=UF_B(J)$ has no positive cohomology. The injective zigzags of Step 11 therefore derive the ordinary equality of restriction and supported sections and preserve its inclusion. Applying $F_A$ to the coefficient unit $P\\to U(P\\otimes_AB)$ gives termwise the scalar adjunct of the cochain map of Step 12. It is consequently the displayed adjunct of $h$. Uniqueness of adjuncts identifies the cochain map with $h$, including the costalk-reduction chains already checked in Step 10.",
+   "uses": [
+    "lem-per-prime-power-trait-residue-model",
+    "lem-weil-pbc-ringed-projection-mate-exact",
+    "lem-weil-pbc-mate-pasting",
+    "def-pur-etale-derived-supported-sections",
+    "lem-weil-pbc-dplus-injective-representative",
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII 1.2.2–1.2.3: worker expansion identifying the exact model scalar map with the coefficient-unit adjunct of the closed counit comparison"
+   }
+  },
+  {
+   "text": "In the trait residue cochain map, use the same tame generator $\\sigma$ at both levels. Averaging and evaluation at $1-\\sigma$ commute with tensor by Step 12. Evaluation at $\\sigma$ also commutes with tensor under the root-power identification of Step 1: the compatible tame generator has projections $\\zeta_m,\\zeta_n$ with $\\zeta_n=\\zeta_m^{\\ell^{m-n}}$, so the Hom-of-twist bases reduce to precisely these evaluation bases. Thus the cochain map $s_\\sigma$ reduces to its $B$ version. The trait-model statement makes this identity independent of generator and representative. By Steps 10–13 it is an identity for the actual $h$ and actual costalk chains. For an immediate specialization the reduced closure and its normalization are the same at both levels; its residue degree $d$ is prime to $\\ell$. Bezout's equation $ud+v\\ell^m=1$ reduces to $ud=1\\pmod {\\ell^n}$, so the normalizing multiplier $d^{-1}$ reduces to the same multiplier. Consequently the normalized specialization arrow commutes with $h$ and scalar reduction.",
+   "uses": [
+    "lem-per-prime-power-trait-residue-model",
+    "lem-per-prime-power-costalk-reduction",
+    "def-per-potential-dualizing-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII 1.2.3, 1.3.1, 1.4.1: the coefficient diagram for the residue cochain map and its degree normalization"
+   }
+  },
+  {
+   "text": "For the given $K_m$, define its reduced pinning by the actual composite\n$$p^B_x=t_{m,n,\\delta(x)}[2\\delta(x)]\\circ S(p^A_x)\\circ h_{x,K_m}^{-1}.$$\nStep 14 takes the equation $p_{\\bar y}=p_{\\bar x}(1)[2]\\operatorname{sp}_{\\bar y,\\bar x}$ to exactly that equation for $p^B$, so $SK_m$ is potential. It is bounded below by Step 1. This verifies every part of the definition; it does not deduce pinned potentiality from unpinned duality. Apply fixed-pinning uniqueness to $SK_m$ and the given $K_n$ to obtain a unique pinning-preserving $\\rho_{m,n}$. In particular $\\rho_n=\\rho_{n+1,n}$ has the asserted property.",
+   "uses": [
+    "def-per-potential-dualizing-complex",
+    "lem-per-potential-dualizing-uniqueness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.7.20 proof, finite-level choices; ILO XVII 5.1.1"
+   }
+  },
+  {
+   "text": "For $m\\geq n\\geq r$, use the successive-scalar isomorphism $\\tau:S_{n,r}S_{m,n}\\cong S_{m,r}$. The formula for $p^B$ in Step 15, the costalk cocycle of Step 10, and the root-power identity of Step 1 show that $\\tau$ preserves the reduced pinnings. Both $\\rho_{m,r}\\tau$ and $\\rho_{n,r}S_{n,r}(\\rho_{m,n})$ are therefore pinning-preserving isomorphisms with the same source and target. Uniqueness makes them equal; the identity coefficient map likewise gives the identity. For a pinning-preserving $\\phi:K_m\\to K'_m$, the naturality of $h$ in Step 10 gives\n$$p^{\\prime B}_x\\,R\\Gamma_x(S\\phi)=p^B_x,$$\nsince $p^{\\prime A}_xR\\Gamma_x\\phi=p^A_x$. Hence any pinning-preserving family $\\phi_n$ satisfies $\\phi_n\\rho_n=\\rho'_nS(\\phi_{n+1})$ by the same uniqueness. This proves both kinds of coherence using comparisons already proved for every $m\\geq n$.",
+   "uses": [
+    "lem-sfb-successive-derived-quotient-normalization",
+    "lem-per-potential-dualizing-uniqueness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.7.20 proof, coherent finite-level choices"
+   }
+  },
+  {
+   "text": "Specify and verify the induced pinnings instead of extracting an unstated formula from finite pullback. Write $s=f(t)$ and $r_t=\\operatorname{trdeg}_{\\kappa(s)}\\kappa(t)$. Define\n$$p^{f,A}_t=(a_t^*p^A_s)(r_t)[2r_t]\\,\\beta_{f,t,M}^{-1}.$$\nThe dimension function is the one in finite pullback; the formula is a pointwise isomorphism by the costalk-Gysin statement. For a closed immersion, its $\\beta$ is supported composition, so this is exactly the original pinning after closed restriction. For an immediate specialization inside the closed subscheme, strict localization is the quotient strict-local ring. Its reduced closure, normalization trait and degree are therefore the same as in the ambient scheme. Closed transitivity identifies the complex on that closure, with its counit. The residue equation for the original complex is then exactly the residue equation for these closed pinnings. Thus these explicitly specified pinnings are potential in the closed case.",
+   "uses": [
+    "lem-per-potential-dualizing-finite-pullback",
+    "lem-per-exceptional-costalk-gysin",
+    "def-per-potential-dualizing-complex",
+    "lem-sbc-strict-henselization-surjective-quotient-core",
+    "lem-per-prime-power-costalk-reduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII 4.4.1, construction of the induced pinnings; closed case expanded from the defining residue equation"
+   }
+  },
+  {
+   "text": "For $p:\\mathbf A^d_V\\to V$, the map is regular: the polynomial algebra is free, hence flat, and every field extension of a fibre is a polynomial ring over a field, hence regular. Regular-pullback pinnings make $p^*M$ potential. Tensor by $(d)[2d]$ preserves its residue equation: choose a basis of the Tate line on the strict-local scheme by a section of a trivializing etale neighbourhood, and pull it to the closure and normalization trait. In that basis all residue cochain maps are the original maps tensored with the identity; changing the basis commutes with every linear map. The smooth clause of costalk Gysin identifies these pinnings with exactly $p^{p,A}$ of Step 17 under the diagonal smooth map, with degree $\\delta_S(s)+r_t$.\nFor general $f$, use the closed/affine-space factorization of Step 8. The composition and open-restriction clauses of $\\beta$ identify the iterated local pinnings with exactly $p^{f,A}$, because substituting its formula composes the two inverse $\\beta$ maps. The closed and affine-space cases prove their potentiality locally. An open containing the special point also contains its generization, so every defining residue equation is checked on such a chart. This verifies the formula and potentiality for the globally specified induced pinnings, at both coefficient levels.",
+   "uses": [
+    "lem-per-regular-pullback-pinnings",
+    "lem-per-exceptional-costalk-gysin",
+    "def-weil-flat-morphism",
+    "lem-weil-pbc-polynomial-ring-field-regular-ring",
+    "lem-exc-finite-type-localization-excellent",
+    "lem-sbc-strict-henselian-etale-neighbourhood-section",
+    "lem-asd-finite-etale-twist-line",
+    "lem-per-prime-power-trait-residue-model",
+    "def-per-potential-dualizing-complex",
+    "sbc-lem-affine-space-smooth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII 4.1.1, 4.4.1 and proof of 4.1.2; the explicit pinning formula verified using closed and affine-space cases"
+   }
+  },
+  {
+   "text": "For the actual pointwise Gysin comparison prove\n$$C_t(c_f)h_{t,f_A^!M}S(\\beta_A)=\\beta_B(a_t^*h_{s,M})(r_t)[2r_t],$$\nwith the root-power twist identifications understood. The formula for $\\beta$ factors on a regular affine open of the fibre closure into regular-immersion class, diagonal smooth map, supported transitivity and generic restriction. The prime-power regular-Gysin statement identifies its regular-immersion Kummer product with the absolute-purity class itself; the closed-immersion Gysin statement explicitly identifies this with $\\operatorname{Cl}_i$ of absolute Gysin purity. Thus the coefficient clause of absolute Gysin purity applies to the actual class in $\\beta$, including its sign, rather than to another chosen class. Its smooth factor has coefficient compatibility by Steps 6–7 for precisely the diagonal orientation. Supported transitivity commutes by Step 10 and mate-pasting; exact generic restriction commutes with tensor. Composing these factor squares gives the displayed equation on that regular open and hence at its generic point. The normalization includes purely inseparable residue extensions: their Gysin class is multiplication by their actual degree by prime-power regular Gysin, and that integer reduces to the same unit. No appeal to an identification appearing only in a cited proof is used.",
+   "uses": [
+    "lem-per-exceptional-costalk-gysin",
+    "lem-per-prime-power-regular-gysin",
+    "lem-per-prime-power-closed-immersion-gysin",
+    "lem-per-absolute-gysin-purity",
+    "lem-weil-pbc-mate-pasting",
+    "lem-kun-inverse-image-monoidal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVI Gysin composition and XVII 4.4.1: coefficient diagram for each stated factor of the pointwise Gysin map"
+   }
+  },
+  {
+   "text": "Set $L_A=a_t^*A_s(\\delta_S(s))[2\\delta_S(s)](r_t)[2r_t]$, canonically the Tate line of degree $\\delta_T(t)$. By the pinning formula verified in Steps 17–18, the pinning on $f_A^!M$ is $(a_t^*p^A_s)(r_t)[2r_t]\\circ\\beta_A^{-1}$, and the same formula holds over $B$. Multiply the equality of Step 19 by the latter pinning. Substituting $p^B_s=t\\,S(p^A_s)h_{s,M}^{-1}$ from Step 15 cancels $a_t^*h_{s,M}$ and gives\n$$p^{f,B}_t\\,C_t(c_f)\\,h_{t,f_A^!M}=t_{m,n,\\delta_T(t)}\\,S(p^{f,A}_t).$$\nThis is precisely the assertion that $c_f$ preserves the reduced pinnings. Thus there is no unspecified locally constant unit. Only now apply fixed-pinning uniqueness: $c_f$ equals the $\\rho_{m,n}$ of Step 15 for this extraordinary-pullback system. Taking $m=n+1$ proves the last clause of the item, and Step 1 gives exactly $u\\mapsto u^\\ell$ on its Tate transition.",
+   "uses": [
+    "lem-per-exceptional-costalk-gysin",
+    "lem-per-potential-dualizing-uniqueness",
+    "def-per-potential-dualizing-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "ILO XVII 4.4.1, 5.1.1; Bhatt--Scholze 6.7.18 and 6.7.20"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-amb-etale-compact-support",
+  "def-amb-p1-trace",
+  "def-per-potential-dualizing-complex",
+  "def-pur-etale-derived-supported-sections",
+  "def-sbc-affine-space",
+  "def-weil-closed-immersion",
+  "def-weil-flat-morphism",
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-triangulated-category",
+  "lem-amb-affine-space-top-trace",
+  "lem-amb-etale-adjoint-locality",
+  "lem-amb-etale-compact-comparisons",
+  "lem-amb-shriek-open-exchange-adjoint",
+  "lem-amb-unbounded-compact-support-comparisons",
+  "lem-asd-finite-etale-twist-line",
+  "lem-asd-ordinary-finite-p1-adjunction",
+  "lem-asd-tensor-mate-etale-precomp",
+  "lem-coef-etale-open-tensor",
+  "lem-etale-proper-projection-formula-finite",
+  "lem-exc-affine-strict-local-ring-comparison",
+  "lem-exc-closed-support-triangle",
+  "lem-exc-finite-type-localization-excellent",
+  "lem-exc-weakly-etale-excellent",
+  "lem-kun-inverse-image-monoidal",
+  "lem-per-absolute-gysin-purity",
+  "lem-per-excellent-etale-constant-projection",
+  "lem-per-exceptional-costalk-gysin",
+  "lem-per-ind-etale-closed-support-base-change",
+  "lem-per-potential-dualizing-finite-pullback",
+  "lem-per-potential-dualizing-uniqueness",
+  "lem-per-prime-power-closed-immersion-gysin",
+  "lem-per-prime-power-costalk-reduction",
+  "lem-per-prime-power-regular-gysin",
+  "lem-per-prime-power-trait-residue-model",
+  "lem-per-regular-pullback-pinnings",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-ringed-coefficient-projection-cocycle",
+  "lem-pur-sheaf-hom-cover-gluing",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-sbc-strict-henselian-etale-neighbourhood-section",
+  "lem-sbc-strict-henselization-surjective-quotient-core",
+  "lem-sc-strict-henselization-noetherian",
+  "lem-sf-triangle-morphism-iso",
+  "lem-sfb-successive-derived-quotient-normalization",
+  "lem-sp-ringed-site-tor-flat-model",
+  "lem-trf-ambient-affine-translation-trace",
+  "lem-trf-ambient-diagonal-purity-base-change",
+  "lem-trf-finite-ring-section-deformation",
+  "lem-weil-pbc-derived-single-fully-faithful",
+  "lem-weil-pbc-dplus-injective-representative",
+  "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+  "lem-weil-pbc-ind-etale-stability",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-mate-pasting",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-polynomial-ring-field-regular-ring",
+  "lem-weil-pbc-qc-open-immersion-finite-type",
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-weil-pbc-strict-henselization-affine-chart-ind-etale",
+  "lem-weil-pbc-strictly-henselian-sections-stalk",
+  "lemma-openclosed-stalk-lowerstar",
+  "lemma-openclosed-vanishing-lowerstar",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "prop-constructible-derived-subcategory",
+  "prop-constructible-pullback",
+  "prop-weil-pbc-geometric-stalks-exact",
+  "prop-weil-pbc-universal-homeomorphism-topos",
+  "sbc-lem-affine-space-smooth",
+  "sbc-thm-etale-local-normal-form",
+  "thm-amb-etale-exceptional-adjoint",
+  "thm-nagata-compactification"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemmas 6.7.17--6.7.18 and 6.7.20, expanded using ILO XVII 1.2--1.4 and 4.4.1; explicit coefficient/Gysin compatibility calculations by N6"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -51,7 +463,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-finite-regular-reduction-dualizing",
@@ -63,7 +475,7 @@
  "blueprint": {
   "from": {
    "node": "lem-per-artin-gabber-affine-curve",
-   "place": "Proof, Step 3: dimension-normalized Verdier duality; finite torsion regular local model in the generic shifted ordinary classes, made precise by Normalized potential complexes and coefficient reduction.",
+   "place": "Proof Step 3: dimension-normalized Verdier duality, through the finite regular reduction and qbar generic duality model; normalized finite-level coefficient systems.",
    "via": [
     "lem-per-finite-regular-reduction-dualizing",
     "lem-per-qbar-generic-duality-model",
@@ -72,5 +484,234 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-per-potential-dualizing-coefficient-tower",
+  "worker": "stage1",
+  "summary": "Repair of all six latest return points: use unbounded ringed-topos composition for B-linearity; fill the support-triangle connecting square by TR3 and orthogonality; cite the full strict-local Noetherian/excellence chain; identify the trait flat-model map with the actual counit comparison and coefficient-compatible costalk chains; identify diagonal and affine trace orientations from the stated coordinate deformation; and verify the explicit beta pinning formula in the closed/affine-space cases before its cancellation. Retain the one independent ordinary-direct-image helper. Mathematical statement unchanged.",
+  "blueprint": "Realizes Step 3 of lem-per-artin-gabber-affine-curve via lem-per-finite-regular-reduction-dualizing, lem-per-qbar-generic-duality-model, lem-per-qbar-middle-tstructure.",
+  "tool_uses": [
+   {
+    "node": "lem-amb-affine-space-top-trace",
+    "why": "Generic The affine-space trace is an isomorphism: its stated comparison or geometric property supports the coefficient, support, or orientation calculation; it does not replace the perverse-duality unit route."
+   },
+   {
+    "node": "lem-amb-etale-adjoint-locality",
+    "why": "Generic Etale localization of the ambient adjoint: its stated comparison or geometric property supports the coefficient, support, or orientation calculation; it does not replace the perverse-duality unit route."
+   },
+   {
+    "node": "lem-amb-etale-compact-comparisons",
+    "why": "Generic The etale compact-support comparisons: its stated comparison or geometric property supports the coefficient, support, or orientation calculation; it does not replace the perverse-duality unit route."
+   },
+   {
+    "node": "lem-amb-shriek-open-exchange-adjoint",
+    "why": "Generic Open compact-support exchange is the extension-composition mate: its stated comparison or geometric property supports the coefficient, support, or orientation calculation; it does not replace the perverse-duality unit route."
+   },
+   {
+    "node": "lem-amb-unbounded-compact-support-comparisons",
+    "why": "Generic Unbounded ordinary etale compact-support comparisons: its stated comparison or geometric property supports the coefficient, support, or orientation calculation; it does not replace the perverse-duality unit route."
+   },
+   {
+    "node": "lem-asd-finite-etale-twist-line",
+    "why": "Generic Finite torsion Tate twists are etale locally free lines: its stated comparison or geometric property supports the coefficient, support, or orientation calculation; it does not replace the perverse-duality unit route."
+   },
+   {
+    "node": "lem-asd-ordinary-finite-p1-adjunction",
+    "why": "Generic Ordinary etale projective-line adjunction with arbitrary finite invertible-exponent coefficients: its stated comparison or geometric property supports the coefficient, support, or orientation calculation; it does not replace the perverse-duality unit route."
+   },
+   {
+    "node": "lem-asd-tensor-mate-etale-precomp",
+    "why": "Generic Canonical tensor mate is compatible with etale precomposition: its stated comparison or geometric property supports the coefficient, support, or orientation calculation; it does not replace the perverse-duality unit route."
+   },
+   {
+    "node": "lem-coef-etale-open-tensor",
+    "why": "Generic Etale open tensor and coefficient comparisons with counit normalization: its stated comparison or geometric property supports the coefficient, support, or orientation calculation; it does not replace the perverse-duality unit route."
+   },
+   {
+    "node": "lem-etale-proper-projection-formula-finite",
+    "why": "Generic Unbounded proper projection formula with finite coefficients: its stated comparison or geometric property supports the coefficient, support, or orientation calculation; it does not replace the perverse-duality unit route."
+   },
+   {
+    "node": "lem-exc-affine-strict-local-ring-comparison",
+    "why": "Generic Affine-chart comparison of geometric and algebraic strict local rings: its stated comparison or geometric property supports the coefficient, support, or orientation calculation; it does not replace the perverse-duality unit route."
+   },
+   {
+    "node": "lem-exc-closed-support-triangle",
+    "why": "Generic Closed-support triangle before restriction: its stated comparison or geometric property supports the coefficient, support, or orientation calculation; it does not replace the perverse-duality unit route."
+   },
+   {
+    "node": "lem-exc-finite-type-localization-excellent",
+    "why": "Generic Excellence is preserved by finite type algebras and localization: its stated comparison or geometric property supports the coefficient, support, or orientation calculation; it does not replace the perverse-duality unit route."
+   },
+   {
+    "node": "lem-exc-weakly-etale-excellent",
+    "why": "Generic Excellence ascends along weakly etale maps of Noetherian rings: its stated comparison or geometric property supports the coefficient, support, or orientation calculation; it does not replace the perverse-duality unit route."
+   },
+   {
+    "node": "lem-kun-inverse-image-monoidal",
+    "why": "Generic Monoidality of the derived inverse image: its stated comparison or geometric property supports the coefficient, support, or orientation calculation; it does not replace the perverse-duality unit route."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Generic Derived change of rings along a morphism of sheaves of rings, computed by K-flat resolutions: its stated comparison or geometric property supports the coefficient, support, or orientation calculation; it does not replace the perverse-duality unit route."
+   },
+   {
+    "node": "lem-pur-ringed-coefficient-projection-cocycle",
+    "why": "Generic Coefficient projection cocycle for ordinary derived ringed diagrams: its stated comparison or geometric property supports the coefficient, support, or orientation calculation; it does not replace the perverse-duality unit route."
+   },
+   {
+    "node": "lem-pur-sheaf-hom-cover-gluing",
+    "why": "Generic Gluing O-linear maps on one covering family: its stated comparison or geometric property supports the coefficient, support, or orientation calculation; it does not replace the perverse-duality unit route."
+   },
+   {
+    "node": "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "why": "Generic Derived change of rings along a map of ring sheaves is left adjoint to restriction of scalars, with normalized unit and transposes: its stated comparison or geometric property supports the coefficient, support, or orientation calculation; it does not replace the perverse-duality unit route."
+   },
+   {
+    "node": "lem-sbc-strict-henselian-etale-neighbourhood-section",
+    "why": "Generic An etale neighbourhood of a strictly henselian closed point has a section: its stated comparison or geometric property supports the coefficient, support, or orientation calculation; it does not replace the perverse-duality unit route."
+   },
+   {
+    "node": "lem-sbc-strict-henselization-surjective-quotient-core",
+    "why": "Generic Strict henselization after quotient given structures: its stated comparison or geometric property supports the coefficient, support, or orientation calculation; it does not replace the perverse-duality unit route."
+   },
+   {
+    "node": "lem-sc-strict-henselization-noetherian",
+    "why": "Generic Strict henselization preserves Noetherianity of local rings: its stated comparison or geometric property supports the coefficient, support, or orientation calculation; it does not replace the perverse-duality unit route."
+   },
+   {
+    "node": "lem-sfb-successive-derived-quotient-normalization",
+    "why": "Generic Successive derived scalar extensions agree with direct quotient extension: its stated comparison or geometric property supports the coefficient, support, or orientation calculation; it does not replace the perverse-duality unit route."
+   },
+   {
+    "node": "lem-sp-ringed-site-tor-flat-model",
+    "why": "Generic Finite Tor intervals and bounded flat models on a ringed site: its stated comparison or geometric property supports the coefficient, support, or orientation calculation; it does not replace the perverse-duality unit route."
+   },
+   {
+    "node": "lem-trf-ambient-affine-translation-trace",
+    "why": "Generic Translation invariance of the affine-space trace over a Noetherian base: its stated comparison or geometric property supports the coefficient, support, or orientation calculation; it does not replace the perverse-duality unit route."
+   },
+   {
+    "node": "lem-trf-ambient-diagonal-purity-base-change",
+    "why": "Generic Ambient diagonal purity and its normalized base-change map: its stated comparison or geometric property supports the coefficient, support, or orientation calculation; it does not replace the perverse-duality unit route."
+   },
+   {
+    "node": "lem-trf-finite-ring-section-deformation",
+    "why": "Generic Normalized section deformation with arbitrary finite etale coefficients: its stated comparison or geometric property supports the coefficient, support, or orientation calculation; it does not replace the perverse-duality unit route."
+   },
+   {
+    "node": "lem-weil-pbc-ind-etale-stability",
+    "why": "Generic Stability and diagonal of an ind-etale algebra: its stated comparison or geometric property supports the coefficient, support, or orientation calculation; it does not replace the perverse-duality unit route."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-projection-mate-exact",
+    "why": "Generic Exactness data for the ringed-topos projection mate: its stated comparison or geometric property supports the coefficient, support, or orientation calculation; it does not replace the perverse-duality unit route."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "why": "Generic Canonical composition comparison for unbounded ringed-topos direct images: its stated comparison or geometric property supports the coefficient, support, or orientation calculation; it does not replace the perverse-duality unit route."
+   },
+   {
+    "node": "lem-weil-pbc-strict-henselization-affine-chart-ind-etale",
+    "why": "Generic Strict henselization is ind-etale over an affine chart: its stated comparison or geometric property supports the coefficient, support, or orientation calculation; it does not replace the perverse-duality unit route."
+   },
+   {
+    "node": "lem-weil-pbc-strictly-henselian-sections-stalk",
+    "why": "Generic Global sections over a strictly henselian local scheme are the stalk at the closed point: its stated comparison or geometric property supports the coefficient, support, or orientation calculation; it does not replace the perverse-duality unit route."
+   },
+   {
+    "node": "lemma-openclosed-stalk-lowerstar",
+    "why": "Generic Stalks of $i_*$ on $Z$: its stated comparison or geometric property supports the coefficient, support, or orientation calculation; it does not replace the perverse-duality unit route."
+   },
+   {
+    "node": "lemma-openclosed-vanishing-lowerstar",
+    "why": "Generic $j^*i_*$ vanishes: its stated comparison or geometric property supports the coefficient, support, or orientation calculation; it does not replace the perverse-duality unit route."
+   },
+   {
+    "node": "lemma-weil-pbc-geometric-stalk-conservative",
+    "why": "Generic Conservativity of geometric stalks: its stated comparison or geometric property supports the coefficient, support, or orientation calculation; it does not replace the perverse-duality unit route."
+   },
+   {
+    "node": "prop-constructible-derived-subcategory",
+    "why": "Generic The constructible derived category: its stated comparison or geometric property supports the coefficient, support, or orientation calculation; it does not replace the perverse-duality unit route."
+   },
+   {
+    "node": "prop-constructible-pullback",
+    "why": "Generic Pullback of constructible sheaves: its stated comparison or geometric property supports the coefficient, support, or orientation calculation; it does not replace the perverse-duality unit route."
+   },
+   {
+    "node": "prop-weil-pbc-universal-homeomorphism-topos",
+    "why": "Generic Topological invariance of the small etale topos: its stated comparison or geometric property supports the coefficient, support, or orientation calculation; it does not replace the perverse-duality unit route."
+   },
+   {
+    "node": "sbc-lem-affine-space-smooth",
+    "why": "Generic Affine space is smooth: its stated comparison or geometric property supports the coefficient, support, or orientation calculation; it does not replace the perverse-duality unit route."
+   },
+   {
+    "node": "sbc-thm-etale-local-normal-form",
+    "why": "Generic Etale-local normal form of a smooth morphism: its stated comparison or geometric property supports the coefficient, support, or orientation calculation; it does not replace the perverse-duality unit route."
+   },
+   {
+    "node": "thm-amb-etale-exceptional-adjoint",
+    "why": "Generic The ordinary ambient exceptional adjoint: its stated comparison or geometric property supports the coefficient, support, or orientation calculation; it does not replace the perverse-duality unit route."
+   },
+   {
+    "node": "thm-nagata-compactification",
+    "why": "Generic Nagata compactification, [stacks-project]: its stated comparison or geometric property supports the coefficient, support, or orientation calculation; it does not replace the perverse-duality unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-amb-affine-space-top-trace",
+  "lem-amb-etale-adjoint-locality",
+  "lem-amb-etale-compact-comparisons",
+  "lem-amb-shriek-open-exchange-adjoint",
+  "lem-amb-unbounded-compact-support-comparisons",
+  "lem-asd-finite-etale-twist-line",
+  "lem-asd-ordinary-finite-p1-adjunction",
+  "lem-asd-tensor-mate-etale-precomp",
+  "lem-coef-etale-open-tensor",
+  "lem-etale-proper-projection-formula-finite",
+  "lem-exc-affine-strict-local-ring-comparison",
+  "lem-exc-closed-support-triangle",
+  "lem-exc-finite-type-localization-excellent",
+  "lem-exc-weakly-etale-excellent",
+  "lem-kun-inverse-image-monoidal",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-ringed-coefficient-projection-cocycle",
+  "lem-pur-sheaf-hom-cover-gluing",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-sbc-strict-henselian-etale-neighbourhood-section",
+  "lem-sbc-strict-henselization-surjective-quotient-core",
+  "lem-sc-strict-henselization-noetherian",
+  "lem-sfb-successive-derived-quotient-normalization",
+  "lem-sp-ringed-site-tor-flat-model",
+  "lem-trf-ambient-affine-translation-trace",
+  "lem-trf-ambient-diagonal-purity-base-change",
+  "lem-trf-finite-ring-section-deformation",
+  "lem-weil-pbc-ind-etale-stability",
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-weil-pbc-strict-henselization-affine-chart-ind-etale",
+  "lem-weil-pbc-strictly-henselian-sections-stalk",
+  "lemma-openclosed-stalk-lowerstar",
+  "lemma-openclosed-vanishing-lowerstar",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "prop-constructible-derived-subcategory",
+  "prop-constructible-pullback",
+  "prop-weil-pbc-universal-homeomorphism-topos",
+  "sbc-lem-affine-space-smooth",
+  "sbc-thm-etale-local-normal-form",
+  "thm-amb-etale-exceptional-adjoint",
+  "thm-nagata-compactification"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-N6-76e9cc919",
+  "group": "N6",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N6-76e9cc919 (reviewer sub-agent of L); spot-checked: I read the item (20 steps) and the one new node in full, with every cited statement, against Bhatt–Scholze 6.7.17, 6.7.18 and the 6.7.20 proof (pdftotext pp.55–60). The statement, stmt_deps and via are unchanged since 70dabe3a. The new node lem-per-excellent-etale-constant-projection is byte-identical to the previous head's: it is BS 6.7.17 with R=Z_ℓ (M an arbitrary bounded complex) and not a duplicate (lem-coef-finite-direct-image covers only F̄_q; the proper projection formula does not apply to an open immersion). All six points of the 70dabe3a return are repaired. (1) Step 2 gets B-linearity from unbounded ringed-topos composition. (2) Step 4: the TR3 fill-in a and the counit map b differ by e, which factors through Rj_*j^*SM[−1]; Hom(i_*X,Rj_*Y[−1])=0, so a=b and the connecting square holds for the actual map. (3) Step 9 cites the full strict-local chain (localization, strict henselization, ind-étale, weakly étale, then weakly-étale excellence with R excellent and S Noetherian). (4) Steps 10–13 identify the trait cochain map with h through the x↦x⊗1 unit, F_A∘U=U∘F_B and the ind-étale support counit equation. (5) Step 6 identifies the diagonal orientation with the trace orientation using only statements: the chart z=y−x for section-deformation (κ is the identity in coordinate normalization), the translation-trace identity with a=(x_j), and the base-change mate of the affine trace; Step 7 extends this to étale charts. (6) Steps 17–18 define the β pinnings (a_t^*p_s)(r)[2r]∘β^{-1} explicitly and prove them potential (closed case, regular-pullback plus the smooth costalk-Gysin clause, then composition). Step 19 links the Kummer product to absolute-Gysin Cl via prime-power regular and closed-immersion Gysin, and Step 20 cancels to pinning preservation. The Tate transition u↦u^ℓ is correct, and the Kummer-sequence map commutes. Edge cases checked: m=n, nonperfect n=1, d=0, closed immersions, inseparable degrees. Batch 5: the closure with and without the item is 16465 vs 16466 nodes, the only addition being the new helper. All 13 flagged citations are already in the batch-5 closure through base paths. The chains ending at lem-pod-* or at the trf bounded-below adjunction, strict-local invariance and excellent cover are generic. lem-trf-ambient-diagonal-purity-base-change, section-deformation and affine-translation-trace are Z/ℓ^n relative smooth purity over excellent bases, which neither assumption gives (the PD assumption is Q̄_ℓ over a field), and the base β of lem-per-exceptional-costalk-gysin is defined through that orientation, so the item cannot avoid it. I accepted these flags with a maintainer note recommending a per-chapter Z/ℓ^n orientation node. No SGA citation, no cycle, all steps under 2000 characters, citations consistent. No fixes."
  }
 }
