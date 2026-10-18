@@ -21,9 +21,228 @@
   "lem-pur-etale-open-derived-tensor",
   "lem-amb-unbounded-compact-support-comparisons"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $U_T$ for restriction of scalars and $\\lambda_u:u_{A'}^*Q_T\\cong Q_Wu_A^*$ for $u:W\\to T$. The cited derived tensor/pullback result applies both to $u$ and to the identity topos with ring map $A_T\\to A'_T$: it supplies K-flat representatives with flat terms and the scalar tensor comparison $\\mu:Q(H\\otimes_A^L K)\\cong QH\\otimes_{A'}^L QK$. These canonical comparisons are compatible with composition, symmetry and the unit. Here is the representative check needed below. The inverse of $\\mu$ sends $(x\\otimes a')\\otimes(y\\otimes b')$ to $(x\\otimes y)\\otimes a'b'$. Both iterated scalar/pullback comparisons send a pulled-back generator $x\\otimes a'$ to the same pulled-back $x\\otimes a'$. Associativity is $(a'b')c'=a'(b'c')$; symmetry has the same sign $(-1)^{|x||y|}$ on both paths, and the unit is $a\\otimes b'\\mapsto\\varphi(a)b'$. The sheaf inverse-image composition identifications are module-linear. These identities on total K-flat tensor complexes descend by the cited tensor-localization statement; no flatness of $A'$ over $A$ is involved.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "lem-weil-pbc-inverse-image-composition-module-linear"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A4 (lemma-pullback-tensor-product), 0G7E (lemma-pullback-K-flat); canonical tensor and composition maps on K-flat representatives"
+   }
+  },
+  {
+   "text": "For an open $j:U\\hookrightarrow T$, extension by zero carries K-flat complexes with flat terms to K-flat complexes with flat terms. Indeed the sheaf tensor identity, applied in each bidegree and summed along total degrees, gives $(j_!P)\\otimes_A H\\cong j_!(P\\otimes_A j^*H)$. Extension by zero commutes with these sums by its cited adjunction on sheaves: $\\operatorname{Hom}(j_!(\\bigoplus P_i),H)=\\prod_i\\operatorname{Hom}(P_i,j^*H)=\\operatorname{Hom}(\\bigoplus j_!P_i,H)$, naturally in $H$. If $H$ is acyclic, exactness of $j^*$ makes $j^*H$ acyclic, K-flatness of $P$ makes the inner tensor acyclic, and exactness of $j_!$ makes the result acyclic. For a single flat term $P^i$, apply the same identity to a short exact sequence $H$; this proves flatness of $j_!P^i$. This is just the defining acyclicity and exactness tests, not a finite Tor-amplitude assertion.",
+   "uses": [
+    "lem-weil-pbc-ringed-slice-extension-tensor",
+    "lem-weil-pbc-extension-by-zero-exact",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "def-weil-pbc-extension-by-zero",
+    "lem-weil-pbc-extension-by-zero-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0GL1 (lemma-j-shriek-and-tensor), proof, with sites-modules.tex Tag 0E8I; explicit K-flat test"
+   }
+  },
+  {
+   "text": "Choose a K-flat resolution $P\\to M$ with flat terms. Step 2 and derived change of rings compute $Q_Tj_{!,A}M$ by $(j_{!,A}P)\\otimes_A A'$. The balancing map gives an isomorphism of $A'$-module complexes\n$$(j_{!,A}P)\\otimes_A A'\\cong j_{!,A'}(P\\otimes_A A').$$\nIt is $A′$-linear because multiplication by $b′$ carries $m\\otimes a′$ to $m\\otimes a′b′$ on both sides. It is induced before sheafification by the identity on the summand over an object factoring through $U$, and the unique zero map otherwise. Thus it is precisely the open scalar map $\\beta_j$ specified in the statement. Its inverse has open-adjunction transpose $\\lambda_j^{-1}Q_U(\\eta_{j,A})$: restriction of the displayed map to $U$ is the scalar tensor identity and the open unit is the identity there. The open unit is invertible, since restricting the defining presheaf and its sheafification back to $U$ recovers $P$. The unbounded derived open adjunction in the cited locality node therefore determines this inverse uniquely. K-flat computation and its canonical resolution identifications make $\\beta_j$ natural in every unbounded $M$.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-pur-derived-change-of-rings",
+    "def-weil-pbc-extension-by-zero",
+    "lem-weil-pbc-extension-by-zero-adjunction",
+    "lem-amb-etale-adjoint-locality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0GL1, lemma-j-shriek-and-tensor; Tag 07A6, lemma-adjoint; sites-modules.tex extension-by-zero adjunction and the identity on the open"
+   }
+  },
+  {
+   "text": "On the fixed compactification put $\\chi_p=\\beta_p$ of [lem-asd-proper-finite-coefficient-extension]. It is an isomorphism on every derived input, normalized as the transpose of $Q(\\varepsilon_{p,A})\\lambda_p$. Step 3 gives an isomorphism $\\beta_j$. Hence\n$$q_f=Rp_{*,A'}(\\beta_j)\\circ\\chi_p(j_{!,A}(-))$$\nis a natural isomorphism on the entire category, with exactly the specified normalization. The ambient compactification is Noetherian because its proper map to $Y$ is finite type and $Y$ is Noetherian. Open subschemes used below are Noetherian as well, by the cited open-subscheme result. Thus the geometric hypotheses of the proper coefficient comparison hold here and on every restricted compactification.",
+   "uses": [
+    "lem-asd-proper-finite-coefficient-extension",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0GL6, remark-Rf-lower-shriek-change-of-rings, proper/open factorization"
+   }
+  },
+  {
+   "text": "Apply the ringed exchange/tensor coherence theorem to the square whose vertical arrows are $p$ with $A$- and $A'$-coefficients and whose horizontal arrows are identity topoi with structural ring maps $A\\to A'$. Its exchange is $\\chi_p$, since both are the transpose of $Q(\\varepsilon_{p,A})\\lambda_p$. The theorem gives compatibility of scalar extension with the proper projection map on arbitrary $K,E$. It states the projection with $Rp_*E$ first; apply the two tensor symmetries from [lem-amb-proper-coproducts-projection] and Step 1 to obtain, in the order used here,\n$$\\chi_{p,p^*K\\otimes E}\\,Q(P_{p,A;K,E})=P_{p,A';QK,QE}(1\\otimes\\chi_{p,E}).$$\nThe target uses $Q(p^*K\\otimes E)\\cong p^*QK\\otimes QE$. No cartesianness of the ringed-topos square, boundedness, or Tor-amplitude hypothesis is needed by that theorem.",
+   "uses": [
+    "lem-weil-pbc-ringed-exchange-tensor-coherence",
+    "lem-asd-proper-finite-coefficient-extension",
+    "lem-amb-proper-coproducts-projection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0E48, remark-compatible-with-diagram, coefficient identity-topos square; Tag 0B56, equation-projection-formula-map"
+   }
+  },
+  {
+   "text": "Let $O_{j,H,M}:H\\otimes_A^Lj_!M\\cong j_!(j^*H\\otimes_A^LM)$ be the open tensor map, obtained from the map in [lem-pur-etale-open-derived-tensor] by symmetry. For K-flat $H$ and $M$ with flat terms, Steps 1--3 compute its scalar extension and both open scalar maps by actual total tensor complexes. In each bidegree the two routes send a section $(h\\otimes m)\\otimes a'$ supported on $U$ to $(j^*h\\otimes m)\\otimes a'$; on the zero summand both maps are zero. The symmetries introduce the same Koszul signs. Consequently, after sheafification, totalization and localization, these routes are equal:\n$$\\beta_{j,j^*H\\otimes M}\\,Q(O_{j,H,M})=O_{j,QH,QM}(1\\otimes\\beta_{j,M}).$$\nThe canonical scalar tensor and pullback maps in this equation are those of Step 1. The cited K-flat localization statement makes the calculation natural on the whole pair of derived categories.",
+   "uses": [
+    "lem-pur-etale-open-derived-tensor",
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-site-derived-tensor-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0GL1, lemma-j-shriek-and-tensor; Tag 07A4, lemma-pullback-tensor-product, representative calculation"
+   }
+  },
+  {
+   "text": "By the definition of the compactified projection transformation,\n$$P_{f,R;K,M}=Rp_{*,R}(O_{j,p^*K,M})\\circ P_{p,R;K,j_!M}.$$\nSubstitute this formula and Step 4's formula for $q_f$ into the desired projection equation. Naturality of $\\chi_p$ moves $Q(O_{j,p^*K,M})$ through $\\chi_p$. Step 5 changes the adjacent proper projection/scalar composite to $P_{p,A'}(1\\otimes\\chi_p)$. Step 6 changes the adjacent open tensor/scalar composite to $O_{j,A'}(1\\otimes\\beta_j)$. Combining the last two factors gives $1\\otimes q_f$ by Step 4. The result is exactly $P_{f,A';QK,QM}(1\\otimes q_f)$; thus the claimed equation holds for every $K,M$. Only substitution and naturality remain after Steps 5--6.",
+   "uses": [
+    "lem-amb-proper-coproducts-projection",
+    "lem-pur-etale-open-derived-tensor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0GL6 and the proof of the preceding compact-support projection formula, lemma-projection-formula-Rf-lower-shriek"
+   }
+  },
+  {
+   "text": "There are two elementary composition identities for the constituent scalar maps. For composable proper maps $r,s$, identify $R(sr)_*$ with $Rs_*Rr_*$ by the cited canonical direct-image composition. Its K-injective normalization is the right-adjoint comparison: on resolved morphisms the canonical derived adjunction of [def-kun-projection-formula-map] is the composite termwise Hom bijection, using the module-linear inverse-image composition from Step 1. Mate pasting applied to the pullback/scalar squares of Step 1 gives\n$$\\chi_{sr}=Rs_{*,A'}(\\chi_r)\\circ\\chi_s(Rr_{*,A}(-)).$$\nIndeed the composite counit is $\\varepsilon_r\\circ r^*(\\varepsilon_s)$, so both transposes are $Q(\\varepsilon_r)\\,Qr^*(\\varepsilon_s)$ after the pullback identifications. For composable opens $a,b$, use the canonical extension composition. The inverses of $\\beta_{ba}$ and $b_{!,A'}\\beta_a\\circ\\beta_b(a_{!,A}(-))$ have identical transposes under $(ba)_!\\dashv(ba)^*$: both are scalar extension of the composite open unit. Equivalently they are the identity on the same unique open summand. This proves scalar compatibility with direct-image composition and open-extension composition, on unbounded inputs.",
+   "uses": [
+    "lem-weil-pbc-mate-pasting",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "lem-cbc-extension-zero-composition",
+    "lem-amb-etale-adjoint-locality",
+    "def-kun-projection-formula-map",
+    "lem-weil-pbc-inverse-image-composition-module-linear"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6E, lemma-derived-pushforward-composition; Tags 0E46--0E47, compose-base-change remarks; open composition units"
+   }
+  },
+  {
+   "text": "Consider a proper refinement $u:T_1\\to T_2$ of compactifications, with $uj_1=j_2$, and put $p_1=p_2u$. For $M$ and $Q_XM$ bounded below, apply [lem-sf-proper-open-coefficient-refinement] to exactly these maps and coefficient rings. Its displayed equality says\n$$Ru_{*,A'}(\\beta_{j_1})\\,\\chi_u\\,Q(\\alpha_{u,A})=\\alpha_{u,A'}\\,\\beta_{j_2}.$$\nIts $\\chi_u$ and $\\beta_{j_a}$ have precisely the counit and open-unit normalizations of Steps 3--4. Apply $Rp_{2,*,A'}$ to this equality and use Step 8 for $p_2u$. The result is the square comparing $q_f$ for the two compactifications and their proper-refinement maps. The cited compact-support comparison theorem identifies these with the specified refinement comparisons and gives their cocycle identity. It follows by composing these squares and inverting refinement isomorphisms that scalar compatibility also holds for comparisons through common refinements. This use is confined to the stated bounded-below pair of inputs.",
+   "uses": [
+    "lem-sf-proper-open-coefficient-refinement",
+    "lem-amb-unbounded-compact-support-comparisons"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7I, lemma-shriek-well-defined; Tag 0GL6, coefficient change, normalized refinement square"
+   }
+  },
+  {
+   "text": "Use the normalized tower in [lem-amb-unbounded-compact-support-comparisons]: $Y\\xrightarrow{i}\\overline Y\\xrightarrow{s}Z$, $X\\xrightarrow{a}\\overline X\\xrightarrow{p}\\overline Y$, and $V=p^{-1}(Y)$ with $b:V\\hookrightarrow\\overline X$, $r:V\\to Y$, $j:X\\hookrightarrow V$, $bj=a$. Thus $F_f=Rr_*j_!$, $F_g=Rs_*i_!$ and $F_{gf}=R(sp)_*(bj)_!$. The composition comparison is $Rs_*\\Gamma$, followed by proper and open composition, where $\\Gamma:i_!Rr_*\\cong Rp_*b_!$. For $E=j_{!,A}M$, exactness of open extension gives $E\\in D^+$, and Step 3 identifies $Q_VE$ with $j_{!,A'}Q_XM\\in D^+$. The coefficient clause of [lem-sp-proper-open-coefficient-mate] therefore applies to the cartesian proper/open square and gives\n$$Rp_{*,A'}\\beta_b\\,\\chi_p\\,Q\\Gamma_A=\\Gamma_{A'}\\,i_{!,A'}\\chi_r\\,\\beta_i.$$\nPaste this square with the scalar squares for $j_!$ and $Rs_*$ and Step 8's two composition identities. The left boundary is $q_{gf,M}Q_Z(\\alpha_{A,M})$, and the right boundary is $\\alpha_{A',Q_XM}F_{g,A'}(q_{f,M})q_{g,F_{f,A}M}$, as required. Step 9 permits all other compactification choices: for $gf$ and $f$ it is applied to $M$, and for $g$ to $F_{f,A}M$. The latter input satisfies the hypotheses of Step 9: $j_{!,A}M\\in D^+$ by exactness of open extension, a bounded-below complex has a bounded-below injective, hence K-injective, resolution, so $F_{f,A}M=Rr_{*,A}j_{!,A}M\\in D^+$ [def-weil-pbc-direct-image]; and by Step 4, $Q_YF_{f,A}M\\cong F_{f,A'}Q_XM$, which lies in $D^+$ by the same argument applied to $Q_XM\\in D^+$. All ambient schemes in this tower are Noetherian by the finite-type and open-subscheme facts used in Step 4.",
+   "uses": [
+    "lem-amb-unbounded-compact-support-comparisons",
+    "lem-sp-proper-open-coefficient-mate",
+    "lem-weil-pbc-extension-by-zero-exact",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "def-weil-pbc-direct-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7J, lemma-shriek-composition, tower construction; Tag 0F7B, lemma-shriek-proper-and-open, cartesian normalization"
+   }
+  },
+  {
+   "text": "For the proper part of the open restriction square write $w:p^{-1}(V)\\hookrightarrow\\overline X$, $p_V:p^{-1}(V)\\to V$, and $v:V\\hookrightarrow Y$. Let $B_R:v_R^*Rp_{*,R}\\to Rp_{V,*,R}w_R^*$ be the exchange of [def-kun-unbounded-exchange]. For every unbounded $E$ its coefficient square is\n$$Rp_{V,*,A'}\\lambda_w\\, B_{A'}\\,v_{A'}^*\\chi_p=\\chi_{p_V}\\,Q_VB_A\\,\\lambda_v.$$\nTo verify the equality, take adjuncts under $p_{V,A'}^*\\dashv Rp_{V,*,A'}$. By the defining exchange counit formula and the defining scalar counit formula, the transpose of the left side is $Q(w_A^*\\varepsilon_{p,A,E})$ after the canonical identifications\n$$p_{V,A'}^*v_{A'}^*Q_YRp_{*,A}E\\cong Q_{p^{-1}(V)}w_A^*p_A^*Rp_{*,A}E.$$\nFor the right side, substitute $\\varepsilon_{p_V,A}p_{V,A}^*B_A=w_A^*\\varepsilon_{p,A}$ from the exchange definition; naturality of $\\lambda$ gives the same map. The pullback identifications agree by Step 1. Injectivity of the adjunction bijection proves the square. This is precisely mate pasting, with no assumption that $Q$ preserves $D^+$.",
+   "uses": [
+    "def-kun-unbounded-exchange",
+    "lem-asd-proper-finite-coefficient-extension",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A7 (remark-base-change), 0E46--0E47 (composition of base-change maps), counit verification"
+   }
+  },
+  {
+   "text": "Let $j_V:X_V\\hookrightarrow p^{-1}(V)$ and let $e_R:w_R^*j_{!,R}\\cong j_{V!,R}v_{X,R}^*$ be the degreewise open base-change isomorphism. The cited open base-change node specifies $e_R^{-1}$ as the open adjunct of the pulled-back open unit. Steps 1 and 3 therefore give\n$$j_{V!,A'}\\lambda_{v_X}\\,e_{A'}\\,w_{A'}^*\\beta_j=\\beta_{j_V}\\,Q(e_A)\\,\\lambda_w.$$\nFor completeness, invert the open scalar and base-change isomorphisms and take their open adjuncts. Both are the scalar extension of $v_X^*\\eta_{j,A}$, followed by the same restriction/scalar identification from Step 1; hence their adjuncts, and then the original maps, agree. On a K-flat representative Step 2 allows the equivalent calculation before sheafification: both maps are $x\\otimes a'\\mapsto x\\otimes a'$ on the unique open summand and zero on the other summands. This proves the equation for arbitrary unbounded inputs, with the precise open-unit normalization.",
+   "uses": [
+    "lem-cbc-extension-zero-base-change",
+    "lem-amb-etale-adjoint-locality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "etale-cohomology.tex Tag 03S6 (lemma-shriek-base-change), open-unit normalization; sites-cohomology.tex Tag 0GL1"
+   }
+  },
+  {
+   "text": "On the restricted compactification the compact-support exchange is the proper exchange followed by the open exchange:\n$$C_{f,v,R}=Rp_{V,*,R}(e_R)\\circ B_R(j_{!,R}(-)).$$\nThis is exactly the normalization in [lem-amb-unbounded-compact-support-comparisons]. Substitute this and $q_f=Rp_{*,A'}\\beta_j\\circ\\chi_p$ into $C_{f,v,A'}v^*q_f$. Naturality of $B_{A'}$ moves $v^*Rp_{*,A'}\\beta_j$ through the proper exchange. Apply Step 11 to the adjacent proper coefficient/exchange factors, and Step 12 to the adjacent open coefficient/exchange factors. The result is\n$$q_{f_V,v_X^*M}\\,Q_V(C_{f,v,A}(M))$$\nunder $v^*Q_Y\\cong Q_Vv^*$ and $v_X^*Q_X\\cong Q_{X_V}v_X^*$. This gives the requested open-restriction equation on all of $D(X_{\\mathrm{et}},A)$.",
+   "uses": [
+    "lem-amb-unbounded-compact-support-comparisons"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7L, lemma-base-change-shriek, compactification formula; Tag 0GL6"
+   }
+  },
+  {
+   "text": "Finally insert the coefficient unit $Q_T(A_T[0])\\cong A'_T[0]$. On the representatives of Step 1 this is multiplication $a\\otimes b'\\mapsto\\varphi(a)b'$. In Step 3 the open comparison is the same map on the open and zero off it. For proper maps the cited unital projection-mate statement says that projection against the tensor unit is the identity. Thus the projection square at $K=A_Y[0]$ is the unit square, and the counit transposes and open-unit transposes used throughout preserve this identification. Identity proper maps and identity opens give identity scalar maps; the composition and refinement squares already proved consequently preserve the coefficient unit as well. These verifications use neither smooth purity nor exceptional-pullback coefficient comparison.",
+   "uses": [
+    "lem-weil-pbc-ringed-projection-mate-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A4 (pullback tensor), 0B56 (projection-formula-map), tensor-unit case"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-projection-formula-map",
+  "def-kun-unbounded-exchange",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-extension-by-zero",
+  "lem-amb-etale-adjoint-locality",
+  "lem-amb-proper-coproducts-projection",
+  "lem-amb-unbounded-compact-support-comparisons",
+  "lem-asd-proper-finite-coefficient-extension",
+  "lem-cbc-extension-zero-base-change",
+  "lem-cbc-extension-zero-composition",
+  "lem-pc-kflat-resolution",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-etale-open-derived-tensor",
+  "lem-sf-proper-open-coefficient-refinement",
+  "lem-sp-proper-open-coefficient-mate",
+  "lem-weil-pbc-extension-by-zero-adjunction",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-inverse-image-composition-module-linear",
+  "lem-weil-pbc-mate-pasting",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-ringed-exchange-tensor-coherence",
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "lem-weil-pbc-ringed-slice-extension-tensor",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "prop-weil-pbc-inverse-image-modules-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0GL6, remark-Rf-lower-shriek-change-of-rings; explicit coherence proof using Tags 0F7I, 0F7J, 0F7L and sites-cohomology.tex Tags 0GL1, 0E48, 0E46, 0E47"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -73,10 +292,38 @@
    "results": "SheafOfModules.pushforwardComp; SheafOfModules.pushforward_id_comp; SheafOfModules.pushforward_comp_id; SheafOfModules.pushforward_assoc; SheafOfModules.pushforwardComp_hom_app_val_app; SheafOfModules.pushforwardComp_inv_app_val_app; SheafOfModules.conjugateEquiv_pullbackComp_inv",
    "date": "2026-10-18",
    "verdict": "no match: the hits concern ordinary sheaf pushforward, algebraic tensor products, flat ring maps or topological bundles; none states the specified derived compact-support coefficient/projection/composition comparison or integration-normalized vector-bundle purity"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived scalar extension of ordinary etale sheaves commutes with compact support direct image and projection formula for a nonflat ring map",
+   "results": "Algebra.Etale.comp; RingHom.Etale.isStableUnderBaseChange; Algebra.Etale.baseChange; Algebra.FormallyEtale.of_restrictScalars; KaehlerDifferential.isBaseChange_of_formallyEtale; Algebra.FormallyEtale.Algebra.FormallyEtale.of_restrictScalars; KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply; Algebra.FormallyEtale.comp",
+   "date": "2026-10-18",
+   "verdict": "no match: hits concern underived scalar extension, ordinary sheaf pushforward, tensor presheaves or etale algebras; none gives the unbounded normalized compact-support scalar/projection/composition equations"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived extension of scalars commutes with compact support and projection formula on sheaves without flatness",
+   "results": "ModuleCat.ExtendScalars.map'_comp; AlgHom.extendScalars; ModuleCat.extendScalarsComp; ModuleCat.preservesFiniteLimits_extendScalars_of_flat; ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars; ModuleCat.extendRestrictScalarsAdj; LinearEquiv.extendScalarsOfIsLocalizationEquiv; ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars",
+   "date": "2026-10-18",
+   "verdict": "no match: hits concern underived scalar extension, ordinary sheaf pushforward, tensor presheaves or etale algebras; none gives the unbounded normalized compact-support scalar/projection/composition equations"
+  },
+  {
+   "tool": "grep",
+   "query": "def pushforwardComp|def pushforwardPushforwardAdj|theorem pushforward_assoc",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean; grep directory Mathlib/Algebra/Category/ModuleCat/Sheaf",
+   "date": "2026-10-18",
+   "verdict": "no match: hits concern underived scalar extension, ordinary sheaf pushforward, tensor presheaves or etale algebras; none gives the unbounded normalized compact-support scalar/projection/composition equations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a morphism of ringed topoi, the derived tensor projection morphism commutes with change of coefficient ring and extension by zero",
+   "results": "SheafOfModules.Presentation.map_π_eq; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom; PresheafOfModules.Monoidal.tensorObjMap; PresheafOfModules.Monoidal.tensorObj_map_tmul; PresheafOfModules.Monoidal.tensorObj; PresheafOfModules.Monoidal.tensorHom; ModuleCat.extendScalarsComp_hom_app_one_tmul",
+   "date": "2026-10-18",
+   "verdict": "no match: hits concern underived scalar extension, ordinary sheaf pushforward, tensor presheaves or etale algebras; none gives the unbounded normalized compact-support scalar/projection/composition equations"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "cor-pur-vector-bundle-purity",
@@ -93,5 +340,139 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-pur-etale-compact-scalar-coherence",
+  "worker": "stage1",
+  "summary": "Kept the statement verbatim. Proved the specified unbounded proper/open scalar isomorphism and its projection and open-restriction equations; proved composition and refinement on exactly the stated bounded-below pair of inputs. Reused existing generic ringed-topos tensor and mate nodes and the normalized proper/open coefficient/refinement nodes; no new nodes. Checked K-flat/open representatives, counit normalizations, tensor symmetry and units. No ordinary-etale/pro-etale identification and no preservation of D+ by nonflat scalar extension is assumed.",
+  "blueprint": "cor-pur-vector-bundle-purity, main-20261015 proof paragraph 2: the compact-support scalar/projection identifications used before transposing integration; scalar compatibility with ordered proper/open composition and restriction on a trivializing open. This supplies a generic tool for sk-prop-an integration and its coefficient comparison without changing the unit route.",
+  "tool_uses": [
+   {
+    "node": "def-kun-unbounded-exchange",
+    "why": "The explicit unbounded exchange counit formula is needed to identify the actual restriction map."
+   },
+   {
+    "node": "def-weil-pbc-extension-by-zero",
+    "why": "The sheafified unique-open-summand construction specifies the balancing map."
+   },
+   {
+    "node": "lem-amb-etale-adjoint-locality",
+    "why": "Unbounded ordinary open-extension adjunction determines the inverses from their units."
+   },
+   {
+    "node": "lem-amb-proper-coproducts-projection",
+    "why": "Specified ordered proper projection map, including its two symmetries."
+   },
+   {
+    "node": "lem-asd-proper-finite-coefficient-extension",
+    "why": "Proper scalar map on every derived input, with the actual counit normalization."
+   },
+   {
+    "node": "lem-cbc-extension-zero-base-change",
+    "why": "Degreewise ordinary open base-change isomorphism and the normalization by its open-unit transpose."
+   },
+   {
+    "node": "lem-cbc-extension-zero-composition",
+    "why": "The canonical open-extension composition used in that tower."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Existence of arbitrary unbounded K-flat resolutions with flat terms."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Ordinary derived scalar extension is computed on those resolutions."
+   },
+   {
+    "node": "lem-pur-etale-open-derived-tensor",
+    "why": "The unbounded ordinary open tensor map whose coefficient square is checked on representatives."
+   },
+   {
+    "node": "lem-sf-proper-open-coefficient-refinement",
+    "why": "Generic proper/open refinement coefficient square on the same bounded-below pair of inputs; the unit has no separate scalar-refinement node."
+   },
+   {
+    "node": "lem-sp-proper-open-coefficient-mate",
+    "why": "Only its ordinary-etale coefficient clause is used: the normalized proper/open tower coefficient square, not its pro-etale site clause."
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-adjunction",
+    "why": "The sheaf-level unit and counit normalize the open balancing map."
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-exact",
+    "why": "Exactness of ordinary open extension supplies the acyclicity and bounded-below tests."
+   },
+   {
+    "node": "lem-weil-pbc-inverse-image-composition-module-linear",
+    "why": "Module-linear inverse-image composition identifies the canonical pullback/scalar squares."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-exchange-tensor-coherence",
+    "why": "Generic projection/base-change coherence applied to the identity-topos coefficient square."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-projection-mate-exact",
+    "why": "Only the generic unitality clause is used to check the coefficient tensor unit."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-slice-extension-tensor",
+    "why": "Sheaf-level tensor identity used for the short K-flat test for open extension."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "why": "The canonical proper direct-image composition used in the compact-support tower."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic derived scalar/pullback tensor comparison and preservation of K-flat complexes, needed to specify the maps."
+   },
+   {
+    "node": "lem-weil-pbc-site-derived-tensor-descent",
+    "why": "Generic localization of K-flat tensor representatives, needed to descend the explicit comparisons."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Exact ordinary constant-ring inverse image supplies the acyclicity test."
+   },
+   {
+    "node": "def-kun-projection-formula-map",
+    "why": "Its canonical derived-adjunction normalization on resolved termwise Hom bijections identifies the direct-image composition comparison in Step 8."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-kun-unbounded-exchange",
+  "def-weil-pbc-extension-by-zero",
+  "lem-amb-etale-adjoint-locality",
+  "lem-amb-proper-coproducts-projection",
+  "lem-asd-proper-finite-coefficient-extension",
+  "lem-cbc-extension-zero-base-change",
+  "lem-cbc-extension-zero-composition",
+  "lem-pc-kflat-resolution",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-etale-open-derived-tensor",
+  "lem-sf-proper-open-coefficient-refinement",
+  "lem-sp-proper-open-coefficient-mate",
+  "lem-weil-pbc-extension-by-zero-adjunction",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-weil-pbc-inverse-image-composition-module-linear",
+  "lem-weil-pbc-ringed-exchange-tensor-coherence",
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "lem-weil-pbc-ringed-slice-extension-tensor",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "def-kun-projection-formula-map"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-NH-d1e390657",
+  "group": "NH",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NH-d1e390657 (reviewer sub-agent of L); spot-checked: Read the item's 14 steps, the statements of all 27 cited nodes, Stacks more-etale.tex Tag 0GL6 (remark-Rf-lower-shriek-change-of-rings) with the projection-formula lemma before it, and the ancestor cor-pur-vector-bundle-purity, proof paragraph 2. Every cited Stacks tag resolves to the stated label. No SGA is cited and there are no new nodes. The statement and stmt_deps are unchanged, and proof_deps equals the union of the uses. Step checks: Step 3's balancing map matches the extension-by-zero presheaf and has the open-unit transpose normalization. Steps 4 and 5: lem-asd-proper-finite-coefficient-extension applies (finite rings, any input, Noetherian compactification by finite type and the open-subscheme fact), and ringed-exchange-tensor-coherence on the identity-topos square needs no cartesianness. I redid the substitutions of Steps 7, 9 and 10. Step 10: Γ in lem-sp-proper-open-coefficient-mate (étale clause only) is the same map as in lem-amb-unbounded-compact-support-comparisons. Step 12: the open base change runs the direction C_{f,v} needs, via def-weil-pbc-etale-shriek-base-change-map and lem-cbc-extension-zero-base-change. Edge cases: identity φ, empty open, identity maps, and Z/4→Z/2, where Q_X M is unbounded below, so restricting composition and refinement to M, Q_X M ∈ D^+ is correct. No duplicate in the DAG: the 0GL6 and scalar-compact-support nodes are finite-Tor, finite-free or tower special cases. I accept all 23 declared tool_uses. FIX: Step 10 transferred the result to the item's chosen compactification of g through Step 9 with input F_{f,A}M, without checking that F_{f,A}M and Q_Y F_{f,A}M are bounded below, which Step 9 requires. I added that check: F_{f,A}M is in D^+ because a bounded-below injective resolution is K-injective [def-weil-pbc-direct-image], and Q_Y F_{f,A}M ≅ F_{f,A'} Q_X M is in D^+ by Step 4. def-weil-pbc-direct-image is added to that step's uses and to proof_deps. The corrected item is at fixes/dag/nodes/sec-smooth-purity/lem-pur-etale-compact-scalar-coherence.json.; 1 file(s) fixed by the reviewer"
  }
 }
