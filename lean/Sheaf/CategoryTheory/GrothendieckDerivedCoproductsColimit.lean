@@ -8,12 +8,12 @@ public import Sheaf.CategoryTheory.GrothendieckDerivedCoproducts
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Basic
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 public import Mathlib.Algebra.Homology.HomologicalComplexLimits
-import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
-import Mathlib.Algebra.Homology.DerivedCategory.KInjective
+import all Sheaf.CategoryTheory.GrothendieckDerivedCoproducts
 
 /-! # Statements of the new targets (batch 2) about `GrothendieckDerivedCoproducts`
 
-Kept in their own module so that `Sheaf.CategoryTheory.GrothendieckDerivedCoproducts`, which the first task's targets use, is unchanged.
+Kept in their own module so that `Sheaf.CategoryTheory.GrothendieckDerivedCoproducts`,
+which the first task's targets use, is unchanged.
 -/
 
 @[expose] public section
@@ -59,7 +59,16 @@ theorem isColimit_mapCocone_grothendieckSum
     [HasDerivedCategory.{t} A] (I : Type w) (K : I → CochainComplex A ℤ) :
     Nonempty (IsColimit ((Q (C := A)).mapCocone
       (HomologicalComplex.coconeOfHasColimitEval (Discrete.functor K)))) := by
-  sorry
+  classical
+  let : Abelian.HasKInjectiveResolutions A :=
+    Abelian.hasKInjectiveResolutions_of_isGrothendieckAbelian.{w}
+  have : PreservesColimit (Discrete.functor K) (Q (C := A)) := by
+    apply preservesColimit_of_preserves_colimit_cocone (coproductIsCoproduct K)
+    refine (isColimitMapCoconeCofanMkEquiv _ _ _).symm ?_
+    simpa using (CategoryTheory.derivedCoproductCofan I (fun i ↦ Q.obj (K i))
+      K (fun i ↦ Iso.refl _)).some
+  exact ⟨isColimitOfPreserves (Q (C := A))
+    (HomologicalComplex.isColimitCoconeOfHasColimitEval (Discrete.functor K))⟩
 
 end DerivedCategory
 
