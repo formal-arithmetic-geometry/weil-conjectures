@@ -16106,3 +16106,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 06:28 L: merged deliver/P1/Sheaf.Algebra.Homology.ChangeOfRingsKFlat (stage 3; reviewer PASS; first push; landing 20261018T062841-L-667205 (interface); batch 20261018T062645; modules 2; new nodes 1)
 - 06:28 L: merged deliver/P1/Sheaf.AlgebraicGeometry.ProjectiveLineGenusZero (stage 3; reviewer PASS; first push; landing 20261018T062841-L-667456 (proof); batch 20261018T062645; modules 1; new nodes 0)
 - 06:28 L: merged deliver/P1/Sheaf.Paper.RingedLocalizationRHomCalculus (stage 3; reviewer PASS; first push; landing 20261018T062842-L-667586 (proof); batch 20261018T062645; modules 1; new nodes 0)
+- 06:28 L: merged deliver/P2/Sheaf.Algebra.Homology.DiagramKFlatReplacements (stage 3; reviewer PASS; first push; landing 20261018T062843-L-667801 (interface); batch 20261018T062645; modules 1; new nodes 0; change records: coord/changes/P2-diagram-kflat-proof-context.md)
