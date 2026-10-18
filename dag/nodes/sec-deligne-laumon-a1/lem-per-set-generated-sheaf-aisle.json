@@ -286,5 +286,23 @@
   "group": "Q58",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q58-5b03af1a0 (reviewer sub-agent of L); spot-checked: I read the whole item and the new node, every cited statement, ILO XVII 5.2 (PDF p.293), and Step 2 of the blueprint ancestor. Item statement: unchanged from Q24 and true. It is the Alonso–Jeremías–Souto set-generated aisle theorem. I checked the t-structure sign for (U, U^⊥[1]) against all three axioms of def-weil-t-structure. Steps: (2) the test set is a set (079E, wellPowered), and the disk and identity-cone cokernels are acyclic. (3) disk tests are the Baer condition at each degree (079G). Cone extension is the same as a null-homotopy, so 079L applies with both size hypotheses from 079K. (4) componentwise 079F smallness holds at an uncountable regular μ. Monos are preserved by coproducts (AB4), pushouts and limit stages (AB5), so the hypothesis of the small-object leaf holds. (5) cell factorization; successor cokernels are acyclic complexes or P_G[k+1]. (6) shifting to E_β=(K_β/K_0)[-1] gives successor quotients ⊕G[k], k≥0, in U, and avoids needing U closed under [-1]. (7) K-injective Hom bijection with no boundedness. (8) W_B is closed under zero, S, [1], coproducts, summands and extensions (0149), so minimality applies. (9) the cone comparison (0152) and inverse rotation give the triangle. New node lem-per-preaisle-transfinite-monomorphism-closure: statement only, self-contained, with 4 kinds of search, correct blueprint from/via, and created.item set. It is true: filtered colimits in a Grothendieck category are ∞-colimits, and a subcategory closed under coproducts, [1] and extensions is closed under all ∞-colimits. Edge cases θ=0, a single successor, countable θ (telescope) and S=∅ all check. It is not a clause of the item. Duplicate search (rg over preaisle/aisle/hocolim) found only non-equal nodes: kun sequential hocolim, etale-support-aisle-generators, cotorsion smallness. Route: only lem-kun-grothendieck-derived-coproducts is outside the route, and it is declared in tool_uses; I accept it as generic. No SGA is used. Advisory: the item's inherited blueprint.from.place says 'Proof Step 1', but the middle t-structure input is Step 2 of lem-per-artin-gabber-affine-curve. This delivery did not change that field. I changed no files. Details are in review.md."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SetGeneratedSheafAisle",
+  "declaration": "DerivedCategory.setGenerated_sheaf_aisle",
+  "file": "lean/Sheaf/CategoryTheory/SetGeneratedSheafAisle.lean",
+  "statement": "theorem setGenerated_sheaf_aisle {C : Type u} [SmallCategory C] (J : GrothendieckTopology C) (R : Sheaf J RingCat.{u}) [HasDerivedCategory.{u} (ringedSiteModules.{u} R)] (S : Set (DerivedCategory (ringedSiteModules.{u} R))) [Small.{u} S] (U : ObjectProperty (DerivedCategory (ringedSiteModules.{u} R))) (hU : ∀ X, U X ↔ ∀ P : ObjectProperty (DerivedCategory (ringedSiteModules.{u} R)), P.IsClosedUnderIsomorphisms → P.ContainsZero → P.IsStableUnderRetracts → (∀ I : Type u, P.IsClosedUnderColimitsOfShape (Discrete I)) → (∀ Y, P Y → P (Y⟦(1 : ℤ)⟧)) → P.IsTriangulatedClosed₂ → (∀ G ∈ S, P G) → P X) : (∀ K, ∃ (A B : DerivedCategory (ringedSiteModules.{u} R)) (f : A ⟶ K) (g : K ⟶ B) (h : B ⟶ A⟦(1 : ℤ)⟧), Triangle.mk f g h ∈ distTriang _ ∧ U A ∧ U.rightOrthogonal B) ∧ (∃ t : CategoryTheory.Triangulated.TStructure (DerivedCategory (ringedSiteModules.{u} R)), t.le 0 = U ∧ t.ge 1 = U.rightOrthogonal) ∧ (∀ B, U.rightOrthogonal B ↔ ∀ G ∈ S, ∀ k : ℤ, 0 ≤ k → ∀ f : G⟦k⟧ ⟶ B, f = 0)",
+  "branch": "newtargets-dag",
+  "by": "N3",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-dd28c49c0",
+  "group": "N3",
+  "result": "pass",
+  "note": "Node diff = new lean record only; statement verbatim. Clauses match: small site/Sheaf J RingCat.{u} (noncommutative ok), ringedSiteModules.{u}=SheafOfModules.{u} by rfl, HasDerivedCategory.{u} recorded API, Small.{u} S size condition; U = intersection of iso-closed/zero/retract/Type-u-coproduct/[1]/IsTriangulatedClosed₂ properties containing S; rightOrthogonal; triangle clause; t.le 0=U, t.ge 1=U^⊥ = node pair (U,U^⊥[1]) under Mathlib zero'/exists_triangle_zero_one convention; generator iff with k≥0 both directions. True (Alonso-Jeremías-Souto); edge cases S=∅, empty coproducts, k=0 ok. No defs, no duplicates found, docstrings with ILO XVII 5.2 + blueprint + 9 proof steps. nt_compile --json clean 3.3 s; axioms std + sorryAx. Second-reading section is the accepted post-10-17 note. Advisory: inherited blueprint.from.place 'Step 1' should be Step 2."
  }
 }

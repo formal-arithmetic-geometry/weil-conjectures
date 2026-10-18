@@ -456,5 +456,48 @@
   "group": "Q51",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q51-17cf5ea13 (reviewer sub-agent of L); spot-checked: The mathematics is correct; I repaired three faults in the fixes directory. Read: the unit sk-thm-trace-transport, the blueprint prop-trf-rational-frobenius-integral-model.proof.md clause (3) second paragraph (the integral g^{m,*}_{γ,c} as the derived limit of the levelwise maps), the parent recurrence node (all 10 steps), the statement of every cited node, and the proofs of the tower-functor, point-tower-powers and derived-pullback nodes. Steps 3-6 recomputed: b = σR(κ^{-1}) with σ = β^{-1} (directions checked); the system compositor identity follows from naturality of σ, the κ-composition node (inputs N and P_kN in D^b_c) and the step-4 tensor identity; ν = ωκ^{-1} agrees with the point-tower ν at s. Repair 1 (C3/C4, step 1): the tower-functor statement only gives existence of a lift with given evaluations, yet step 1 read 'the same strict lift' off it. That node's proof defines T_f^c = U_Y∘RP_*^S∘J_D∘R_X, the item's own composite, so step 1 now states δ = identity of the named composite, with the coherence node carrying the section-model evaluations over. MAINTAINER: the statement of lem-weil-compact-support-reduction-tower-functor should record this defining composite. Repair 2 (E5, step 7): 'substituting θκ=G(u) and b=σR(κ^{-1})' does not by itself give α=ν. I wrote out unit naturality at κ^{-1}, the mate identity L(σ)u_I = ω_R I(u) (θ = ω^{-1}L(σ)μ, μκ = u_I), naturality of ω at e_C and the triangle identity, and added the citations to the coherence node, the evaluation calculus, def (b) and lem-cbc-exact-product-functor-strict-limit (tool use declared). Repair 3: removed three stale stmt_deps from lem-trf-compact-support-system-evaluation-coherence. Both new nodes are true and not duplicates. Completion-unit node tested at g=id, N=R̂, and incomplete N=E_Y (κ not invertible, as the node allows). Coherence node follows from uniqueness of right adjoints. Both are self-contained statement-only nodes with three kinds of search recorded, correct from/via, no SGA, no target weakened, no Tor hypothesis added. Generic tool_uses accepted; the definition entries need none. No cycle; proof_deps equal the union of uses. Details in review.md.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CompactSupportSystemRealizationNormalization",
+  "declaration": "WeilConjectures.CompactSupportNormalization.compactSupportSystemRealizationNormalization",
+  "declarations": [
+   "WeilConjectures.CompactSupportNormalization.RestrictionSpec",
+   "WeilConjectures.CompactSupportNormalization.derivedRestrictionComparison",
+   "WeilConjectures.CompactSupportNormalization.ConeSpec",
+   "WeilConjectures.CompactSupportNormalization.sigma",
+   "WeilConjectures.CompactSupportNormalization.operation",
+   "WeilConjectures.CompactSupportNormalization.compactSupportSystemTower",
+   "WeilConjectures.CompactSupportNormalization.canonicalEvaluation",
+   "WeilConjectures.CompactSupportNormalization.tower",
+   "WeilConjectures.CompactSupportNormalization.delta",
+   "WeilConjectures.CompactSupportNormalization.b",
+   "WeilConjectures.CompactSupportNormalization.kappa",
+   "WeilConjectures.CompactSupportNormalization.alphaCan",
+   "WeilConjectures.CompactSupportNormalization.betaCan",
+   "WeilConjectures.CompactSupportNormalization.Comparison",
+   "WeilConjectures.CompactSupportNormalization.nu",
+   "WeilConjectures.CompactSupportNormalization.models",
+   "WeilConjectures.CompactSupportNormalization.systemCompositor",
+   "WeilConjectures.CompactSupportNormalization.integralCompositor",
+   "WeilConjectures.CompactSupportNormalization.PowerNormalization",
+   "WeilConjectures.CompactSupportNormalization.Normalization",
+   "WeilConjectures.CompactSupportNormalization.PointSpec",
+   "WeilConjectures.CompactSupportNormalization.Laws",
+   "WeilConjectures.CompactSupportNormalization.compactSupportSystemRealizationNormalization"
+  ],
+  "file": "lean/Sheaf/Paper/CompactSupportSystemRealizationNormalization.lean",
+  "statement": "theorem compactSupportSystemRealizationNormalization (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p) {X₀ Y₀ : Over (Spec (.of D.k₀))} [LocallyOfFiniteType X₀.hom] [QuasiCompact X₀.hom] [LocallyOfFiniteType Y₀.hom] [QuasiCompact Y₀.hom] (f₀ : X₀ ⟶ Y₀) [IsSeparated f₀.left] [LocallyOfFiniteType f₀.left] [QuasiCompact f₀.left] (c₀ : Compactification f₀.left) : Laws l E D hl f₀ c₀",
+  "branch": "newtargets-dag",
+  "by": "Q30",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2e86a24d1",
+  "group": "Q30",
+  "result": "pass",
+  "note": "Re-delivery after RETURN of 1ccdc2574013. H13 fixed: the dependency node lem-weil-compact-support-reduction-tower-functor is byte-identical to NH's live record (11 declarations, main exists_compactSupportReductionTower); CompactSupportSystemTower.lean is removed; compactSupportSystemTower is a def in the item module and listed in its declarations, with no live name clash. H3 fixed: Normalization.evaluation_normalization sets each evaluation equal to canonicalEvaluation = isoWhiskerLeft(reduction ⋙ operation, coefficientRestrictedEvaluationIso Y n) ≪≫ isoWhiskerRight(compactFiniteEvaluation c n, scalarReductionDerivedRestriction Y n), built only from recorded canonical maps, so transition now constrains the canonical iso. The node differs from live only in lean (live lean is null); the statement matches the file verbatim; all 23 declarations are present; one sorry; no extra hypotheses or universe restriction; r=0, n=0, m=n and empty schemes are covered. nt_compile --json: 23.1 s, EXIT 0, clean. Advisory: PointSpec does not assert that a Comparison exists at the point."
  }
 }

@@ -15,7 +15,11 @@
   "def-weil-pbc-derived-categories",
   "def-amb-etale-compact-support",
   "thm-amb-etale-exceptional-adjoint",
-  "def-asd-finite-etale-tate-twist"
+  "def-asd-finite-etale-tate-twist",
+  "def-pur-finite-smooth-canonical-maps",
+  "def-pur-finite-smooth-adjunction-data",
+  "def-pur-finite-smooth-coefficient-arrows",
+  "def-amb-p1-trace"
  ],
  "proof": [
   {
@@ -555,5 +559,38 @@
   "group": "Q64",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q64-9db0f5aa1 (reviewer sub-agent of L); spot-checked: I read the whole item: the statement, all 16 steps, and the statement of every cited node (43 proof_deps and 8 stmt_deps). Sources checked: Scholze Six-Functor Formalisms Thm 7.19 and the paragraph after it (the source only sketches the argument; the node marks its proof by: agent), and the blueprint main-20261015 places the steps follow: sk-prop-sp-orientation (proof), sk-prop-sp-orientation-charts, sk-prop-sp-composition and sk-lem-sp-reduction. The statement is unchanged and not weakened. Cases I tested: r=0 (etale is smooth of relative dimension 0, Step 12), N=n, D+ input, the Kummer transition u -> u^(l^(N-n)) (it is an isomorphism mu_{l^N} tensor Z/l^n -> mu_{l^n}, with kernel (mu_{l^N})^{l^n}), and signs (even shifts, trivial swap on rank-one sheaves). No new nodes, no duplicate, no SGA citation. Three repairs, all in the item, in fixes/dag/nodes/sec-deligne-laumon-a1/lem-per-noetherian-prime-power-smooth-duality.json. (F1, C1/C4) Step 6 used, without citing them, the base change of the affine orientation along h, i.e. the equality t_{p'} C = h^* t of lem-amb-affine-space-top-trace transposed through the definition of beta in prop-asd-smooth-base-change. I added the sentence and both citations. (F2, E5) Step 9 computed alpha_p on charts, which already assumes the open-restriction case the step is proving. I added a factorwise proof: beta restricts by etale adjoint locality and mate pasting; delta restricts by the base-change and etale-neighbourhood clauses of lem-trf-finite-ring-section-deformation; v restricts by the uniqueness in def-amb-vector-integration. (F3, C4) Steps 12 and 16 apply pur nodes built on the deformation comparison of lem-pur-noetherian-etale-section-specialization, while Step 3 builds delta from the trf node. I added the identification (same Rees family, same fibre identifications, kappa unique with i_1^* kappa = 1) and added the pur node to Step 3's uses, to proof_deps and to tool_uses. It is already in the batch-5 closure and creates no cycle. Steps 13-16 check out: the quotient-cocycle hypothesis is discharged as in lem-pur-finite-smooth-adjunction-general-base Step 3, and c is never assumed invertible. Batch 5: I recomputed the closure from the two targets, stopping at the nt-assume leaves. It has 16527 nodes without the item's proof and 16528 with it. The one added node is lem-pur-diagonal-orientation-compatibility (coefficient reduction, generic; its flagged chain ends in the generic lem-pod-etale-stalk-tensor-scalar). Every other flagged citation (det-sp-p1-adjunction, lem-amb-shriek-tensor-composition, lem-asd-ordinary-supported-kummer, lem-asd-tensor-mate-etale-precomp, lem-pur-finite-smooth-gamma-normalization, lem-sp-tower-p1-arbitrary-base-integrals, thm-amb-vector-bundle-purity, and the trf nodes affine-translation-trace and finite-ring-section-deformation) was already in the closure and is generic six-functor or purity input, not a step of the trace-formula or Poincare-duality proofs. All accepted. I accept the declared tool_uses. Three repairable faults, so FIX.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.NoetherianPrimePowerSmoothDuality",
+  "declaration": "AlgebraicGeometry.Etale.NoetherianSmoothDuality.noetherianPrimePowerSmoothDuality",
+  "declarations": [
+   "AlgebraicGeometry.Etale.NoetherianSmoothDuality.linePullback",
+   "AlgebraicGeometry.Etale.NoetherianSmoothDuality.lineAppend",
+   "AlgebraicGeometry.Etale.NoetherianSmoothDuality.unitSource",
+   "AlgebraicGeometry.Etale.NoetherianSmoothDuality.Datum",
+   "AlgebraicGeometry.Etale.NoetherianSmoothDuality.Family",
+   "AlgebraicGeometry.Etale.NoetherianSmoothDuality.baseChangeSource",
+   "AlgebraicGeometry.Etale.NoetherianSmoothDuality.exceptionalComp",
+   "AlgebraicGeometry.Etale.NoetherianSmoothDuality.compositionSource",
+   "AlgebraicGeometry.Etale.NoetherianSmoothDuality.BaseChange",
+   "AlgebraicGeometry.Etale.NoetherianSmoothDuality.Composition",
+   "AlgebraicGeometry.Etale.NoetherianSmoothDuality.Reduction",
+   "AlgebraicGeometry.Etale.NoetherianSmoothDuality.noetherianPrimePowerSmoothDuality"
+  ],
+  "file": "lean/Sheaf/Paper/NoetherianPrimePowerSmoothDuality.lean",
+  "statement": "theorem noetherianPrimePowerSmoothDuality (ell : ℕ) [Fact ell.Prime] : ∃ a : Family.{u} ell, BaseChange ell a ∧ Composition ell a ∧ Reduction ell a",
+  "branch": "newtargets-dag",
+  "by": "Q12",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "All positive levels and all Noetherian smooth maps are assembled into one normalized family; Datum.alpha.inv is the requested gamma on the unit. Tensor maps act on arbitrary ordinary D+ inputs. All comparisons are explicit canonical composites, including scalar reduction and roots-power normalization; no ground field, excellence, constructibility or finite Tor assumption is imposed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b72d9086b",
+  "group": "Q12",
+  "result": "pass",
+  "note": "Every node clause matches the Lean. Hypotheses: prime ell, n>=1, Noetherian P and X, SmoothOfRelativeDimension r, separated + quasi-compact (finite type), HasCompactification, ell^n a unit. Orientation Datum.alpha is pinned by the landed OrientationNormalized (diagonal/DNC/Kummer-bundle equation). tensor_isIso holds for every D+ input. unit_normalization. BaseChange: dualizing and gamma clauses via the canonical smooth base-change maps, for any b with X' Noetherian. Composition via the conjugate compact-support composition iso, with the canonical source; source open/etale restriction = r=0 composition + dimension_zero. dimension_zero holds for every normalized C, and etale_comparison_exists shows it is not vacuous. Reduction: mateMap + unitIso against e^{tensor r}, with CoefficientLineComparison fully pinned (roots_power ell^(N-n), generators, derived_normalization). Extra binders (pullback Noetherian, unit witnesses, instances on composites) are derivable Props. Edge cases n=1, N=n, r=0, empty scheme, non-ctf D+ are covered. No duplicate: Q07 general-base theorem is field-based with ctf inputs; no competing delivery. Added stmt_deps are 4 landed def nodes (allowed); no theorem added, none dropped. 16 proof steps are verbatim in the docstring; statement record is verbatim; declaration list matches; lines <=100. nt_compile --json clean in 17.5 s. Advisory only: plain decls from nodes outside stmt_deps (SmoothExceptionalBaseChange maps, unboundedEtaleLowerShriekCompIso, mateMap, Geometry, vectorIntegrationBaseCoefficientPullback); an existing:true def node for the base-change maps is suggested."
  }
 }
