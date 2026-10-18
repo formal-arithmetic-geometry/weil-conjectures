@@ -15932,3 +15932,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 06:27 L: merged deliver/B6/Sheaf.Algebra.Homology.RingHomExtensionDifferential (stage 3; reviewer PASS; first push; landing 20261018T062702-L-631720 (proof); batch 20261018T062645; modules 1; new nodes 1)
 - 06:27 L: merged deliver/B6/Sheaf.AlgebraicGeometry.NagataAffineFpDescends (stage 3; reviewer PASS; first push; landing 20261018T062703-L-631915 (proof); batch 20261018T062645; modules 1; new nodes 0)
 - 06:27 L: merged deliver/B7/Sheaf.AlgebraicGeometry.ConstructibleFiniteSurjectionCancellation (stage 3; reviewer PASS; first push; landing 20261018T062704-L-632138 (proof); batch 20261018T062645; modules 1; new nodes 1)
+- 06:27 L: merged deliver/B7/Sheaf.AlgebraicGeometry.NagataMorphismDescends (stage 3; reviewer PASS; first push; landing 20261018T062704-L-632348 (proof); batch 20261018T062645; modules 1; new nodes 0)
