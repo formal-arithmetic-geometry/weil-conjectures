@@ -16,9 +16,205 @@
   "prop-asd-internal-adjunction",
   "lem-asd-internal-adjunction-evaluation"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "A finite morphism is proper by [lem-weil-pbc-finite-proper], so choose the compactification $(\\mathrm{id}_T,f)$. Its compact-support functor is $Rf_*$ by [def-amb-etale-compact-support]. The exactness assertion [lemma-weil-pbc-finite-direct-image-exact] applies first to underlying abelian sheaves. Direct image on constant-$A$ modules has that underlying abelian direct image [def-weil-pbc-direct-image]; kernels and cokernels have their induced $A$-actions, so the module direct image is exact as well. Apply [lem-weil-pbc-exact-functor-derived-functor]: on the entire unbounded categories $Rf_*$ is represented by applying $f_*$ termwise. In particular $H^i(f_*L)=f_*H^i(L)$: exactness preserves the kernels and images defining these cohomology modules.",
+   "uses": [
+    "lem-weil-pbc-finite-proper",
+    "def-amb-etale-compact-support",
+    "lemma-weil-pbc-finite-direct-image-exact",
+    "def-weil-pbc-direct-image",
+    "lem-weil-pbc-exact-functor-derived-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVII, Proposition 5.4.1, p.291, the finite pushforwards in the first dualized triangle; finite exactness is Stacks Tag 03QP (proposition-finite-higher-direct-image-zero)."
+   }
+  },
+  {
+   "text": "Let $G=f^\\times$ be the right adjoint supplied by [thm-amb-etale-exceptional-adjoint]. Step 1 shows that $L\\in D^{\\le m}(T,A)$ implies $Rf_!L=f_*L\\in D^{\\le m}(S,A)$ for every integer $m$, where the bounds are those of [def-sbc-standard-tstructure-derived-category]. Thus [lem-etale-upper-shriek-bounded-below-from-amplitude] applies with upper-amplitude bound zero and says exactly that the right adjoint preserves globally bounded-below objects. The chosen right adjoint in that lemma is identified with $G$ by the counit-compatible uniqueness of [det-sp-unique-right-adjoint], so $G$ preserves $D^+$.",
+   "uses": [
+    "thm-amb-etale-exceptional-adjoint",
+    "lem-etale-upper-shriek-bounded-below-from-amplitude",
+    "def-sbc-standard-tstructure-derived-category",
+    "det-sp-unique-right-adjoint"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVII, Proposition 5.4.1, pp.291,293, bounded-below exceptional images; amplitude-zero specialization of the adjunction argument recorded in lem-etale-upper-shriek-bounded-below-from-amplitude."
+   }
+  },
+  {
+   "text": "The subcategories $D^+$ are strictly full [def-weil-pbc-derived-categories]. Consequently the ambient bijection $\\operatorname{Hom}(f_*M,N)\\cong\\operatorname{Hom}(M,GN)$ restricts, by Step 2, to an adjunction on $D^+$. Identify its right adjoint with the named $f^!$ by [det-sp-unique-right-adjoint], using the unique isomorphism compatible with the counits. This specifies the identification even when $f^!$ was chosen independently; it is not a choice of an unnormalized isomorphism.",
+   "uses": [
+    "def-weil-pbc-derived-categories",
+    "det-sp-unique-right-adjoint"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVII, Proposition 5.4.1, pp.291,293: the notation for finite right adjoints; categorical uniqueness is the statement of det-sp-unique-right-adjoint."
+   }
+  },
+  {
+   "text": "Apply [prop-asd-internal-adjunction] to the compactification of Step 1 and to the given $M,N$. Its hypotheses are exactly a finite commutative coefficient ring, Noetherian source and target, and a compactifiable morphism; it allows arbitrary unbounded inputs. Substitute $Rf_!=Rf_*=f_*$ and $f^\\times N=f^!N$ from Steps 1--3. This gives the required isomorphism in $D(S_{\\mathrm{et}},A)$, without asserting that either internal Hom is bounded below. To fix its map, use [lem-asd-internal-adjunction-evaluation]: for a test complex $Q$ and a transpose $p:f^*Q\\otimes_A^LM\\to f^!N$, its image has tensor--Hom transpose\n$$Q\\otimes_A^Lf_*M\\xrightarrow{\\Pi_f}f_*(f^*Q\\otimes_A^LM)\\xrightarrow{f_*p}f_*f^!N\\xrightarrow{\\varepsilon_f}N.$$\nIn particular, for the universal evaluation $p$ this is exactly the evaluation--counit normalization in the item. Naturality in both inputs is inherited from the cited canonical isomorphism.",
+   "uses": [
+    "prop-asd-internal-adjunction",
+    "lem-asd-internal-adjunction-evaluation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVII, Proposition 5.4.1, p.291 and p.293, the two Hom identifications. The expanded normalization is the current blueprint prop-asd-internal-adjunction.proof.md, displayed Hom bijections and last sentence."
+   }
+  },
+  {
+   "text": "For shifts use the canonical shift structures, rather than arbitrary isomorphisms. Internal Hom commutes with shifts, with the sign in the contravariant variable, by [lem-weil-pbc-ringed-internal-hom-exact-restriction]. Termwise $f_*$ commutes with shifts. The shift structure on $f^!$ is the uniquely unit/counit-compatible one of [lem-weil-pbc-adjunction-shift-compatibility-unique]. The projection map commutes with these structures by [lem-weil-pbc-ringed-projection-mate-exact], applied to the constant-ring morphism of etale topoi; its pullback is the exact module inverse image by [prop-weil-pbc-inverse-image-modules-exact]. Hence shifting the displayed transpose in Step 4 gives the same evaluation and the same shifted counit. Transposition is a bijection, so the shifted internal-Hom maps agree, including the opposite shift in $M$.",
+   "uses": [
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "lem-weil-pbc-adjunction-shift-compatibility-unique",
+    "lem-weil-pbc-ringed-projection-mate-exact",
+    "prop-weil-pbc-inverse-image-modules-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/prop-asd-internal-adjunction.proof.md",
+    "place": "Current blueprint prop-asd-internal-adjunction.proof.md, chain of natural adjunction bijections; shift compatibility of these bijections."
+   }
+  },
+  {
+   "text": "Let $u:U\\to S$ be any etale object, $V=T\\times_SU$, $v:V\\to T$, and $f_U:V\\to U$. The map $f_U$ is finite: on affine charts, if $b_1,\\ldots,b_r$ generate the finite algebra as a module, then $1\\otimes b_1,\\ldots,1\\otimes b_r$ generate its base change [def-weil-finite-integral-morphism]. Write $u_{\\Sigma!},v_{\\Sigma!}$ for the sheafified sum extensions [def-weil-pbc-etale-sum-extension], without identifying them with compact support for a nonseparated etale map. There is a canonical sheaf map\n$$\\delta:u_{\\Sigma!}(f_U)_*L\\longrightarrow f_*v_{\\Sigma!}L.$$\nOn a test object $W\\to S$, the summand indexed by $s:W\\to U$ is $L(T\\times_SW\\to V)$; send it to the summand indexed by the induced lift $T\\times_SW\\to V$ in the presheaf defining $v_{\\Sigma!}L$, then sheafify. By [lemma-weil-pbc-finite-stalk-formula] and [lem-amb-etale-sum-stalks], its stalk is the canonical map\n$$\\bigoplus_{z\\in U_{\\bar s}}\\prod_{t\\in T_{\\bar s}}L_{(t,z)}\\longrightarrow\\prod_{t\\in T_{\\bar s}}\\bigoplus_{z\\in U_{\\bar s}}L_{(t,z)}.$$\nIt is invertible: $T_{\\bar s}$ is finite, so the union of the finitely many finite supports in $z$ is finite and defines an inverse. This also handles the empty fibre. Stalk conservativity [lemma-weil-pbc-geometric-stalk-conservative] gives the sheaf isomorphism, with its $A$-actions.",
+   "uses": [
+    "def-weil-finite-integral-morphism",
+    "def-weil-pbc-etale-sum-extension",
+    "lemma-weil-pbc-finite-stalk-formula",
+    "lem-amb-etale-sum-stalks",
+    "lemma-weil-pbc-geometric-stalk-conservative"
+   ],
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03QP (proposition-finite-higher-direct-image-zero), finite geometric stalks; Modules on Sites Tags 03DI (lemma-extension-by-zero) and 03DJ (lemma-extension-by-zero-exact), localized sum extension. Agent expansion of ILO XVII Proposition 5.4.1 etale locality."
+   },
+   "elementary": false
+  },
+  {
+   "text": "The restriction and sum-extension functors for a slice are exact adjoints by [lem-pur-site-restriction-module-adjunction-exact]. Apply them termwise and descend along localization [lem-weil-pbc-exact-functor-derived-factorization]; their units, counits and triangle identities descend as well, so the adjunctions hold on all unbounded derived categories. Step 6 similarly descends since finite direct image is exact. The finite map $f_U$, even if $U$ is not globally Noetherian, has compactification $(\\mathrm{id}_V,f_U)$ and an ambient right adjoint by [lem-etale-lower-shriek-adjoint-from-compactification]. For every complex $L$ on $V$ the resulting bijections are\n$$\\operatorname{Hom}(L,v^*f^\\times N)=\\operatorname{Hom}(v_{\\Sigma!}L,f^\\times N)=\\operatorname{Hom}(f_*v_{\\Sigma!}L,N)=\\operatorname{Hom}(u_{\\Sigma!}(f_U)_*L,N)=\\operatorname{Hom}(L,f_U^\\times u^*N).$$\nThey identify $v^*f^\\times N$ with $f_U^\\times u^*N$, naturally and compatibly with the counits; [det-sp-unique-right-adjoint] supplies the uniqueness. The zero-amplitude argument of Step 2 applies also to $f_U$, using [lem-etale-upper-shriek-bounded-below-from-amplitude], whose statement allows arbitrary schemes. On $D^+$ write these objects $v^*f^!N$ and $f_U^!u^*N$ as in Steps 2--3. This argument is for arbitrary slice objects, so it needs no quasi-compactness or separatedness hypothesis on $u$.",
+   "uses": [
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-etale-lower-shriek-adjoint-from-compactification",
+    "det-sp-unique-right-adjoint",
+    "lem-etale-upper-shriek-bounded-below-from-amplitude"
+   ],
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03QP (proposition-finite-higher-direct-image-zero), finite geometric stalks; Modules on Sites Tags 03DI (lemma-extension-by-zero) and 03DJ (lemma-extension-by-zero-exact), localized sum extension. Agent expansion of ILO XVII Proposition 5.4.1 etale locality."
+   },
+   "elementary": false
+  },
+  {
+   "text": "Restriction of $f_*$ to the slice at $U$ is $(f_U)_*v^*$ directly from $(f_*F)(W)=F(T\\times_SW)$ [def-weil-pbc-direct-image]; finite exactness gives the same identity on unbounded complexes. Internal Hom commutes with every slice restriction by [lem-weil-pbc-ringed-internal-hom-exact-restriction]. With the normalized exceptional comparison of Step 7, the restriction of the transpose of Step 4 is\n$$\\varepsilon_{f_U}\\circ(f_U)_*(p|_V)\\circ\\Pi_{f_U}.$$\nIndeed evaluation restricts to evaluation. The exceptional counit is the transpose used in Step 7, while the projection is the ordinary inverse-image counit mate [lem-weil-pbc-ringed-projection-mate-exact]. In the explicit map $\\delta$ of Step 6 every indexed summand is sent to its pullback indexed summand; hence restriction of these ordinary counits is the counit in the slice. The displayed transpose is therefore precisely the evaluation--counit map for $f_U$. The inverse of Step 4 restricts along with Step 4, proving its invertibility on the slice without invoking a Noetherian ambient-adjunction theorem on $U$. The same indexed-summand description and the successive-slice compatibility of internal Hom show compatibility with further etale restrictions. No assertion that restrictions detect arbitrary derived maps is needed.",
+   "uses": [
+    "def-weil-pbc-direct-image",
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "lem-weil-pbc-ringed-projection-mate-exact"
+   ],
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08JB (lemma-restriction-RHom-to-U); ILO XVII, Proposition 5.4.1, p.293, etale-local interpretation of the finite Hom identities."
+   },
+   "elementary": false
+  },
+  {
+   "text": "Let $g:V\\to T$ also be finite. The composition comparison for direct image is the sectionwise identity $f_*g_*=(fg)_*$, also agreeing with its derived comparison [lem-weil-pbc-ringed-topoi-derived-pushforward-composition]. The compact-support comparisons agree with these proper-map identifications by [lem-amb-unbounded-compact-support-comparisons]. Compose adjunctions: its right adjoint is $g^!f^!$, with counit $\\varepsilon_{fg}=\\varepsilon_f\\circ f_*(\\varepsilon_g)$, and identify it with $(fg)^!$ by [det-sp-unique-right-adjoint]. The counit formula and coherence under a third morphism are precisely the composite-adjunction formula and pasting in [lem-weil-pbc-mate-pasting], part 2. Therefore these are the right-adjoint composition identifications stipulated in the item.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "lem-amb-unbounded-compact-support-comparisons",
+    "det-sp-unique-right-adjoint",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVII, Proposition 5.4.1, pp.291,293: q=p i prime and the transitivity of finite exceptional images; Stacks Tags 0F7J,0F7K; composite-adjunction counit."
+   }
+  },
+  {
+   "text": "For a test map with transpose $p:(fg)^*Q\\otimes_A^LL\\to g^!f^!N$, the successive internal adjunctions have transpose\n$$\\varepsilon_f\\circ f_*(\\varepsilon_g)\\circ f_*g_*(p)\\circ f_*(\\Pi_{g,f^*Q,L})\\circ\\Pi_{f,Q,g_*L}.$$\nThe two projection factors equal $\\Pi_{fg,Q,L}$. To check this equality, take their ordinary pullback/direct-image adjoints: in both cases the tensor factor $Q$ is carried to $g^*f^*Q$ by the canonical tensor-pullback isomorphism, while the other factor is sent to $L$ by the composite ordinary counit $g^*f^*f_*g_*L\\to g^*g_*L\\to L$. The equality of these adjoints is [lem-weil-pbc-mate-pasting], part 2, applied to the counit-defined projections of [lem-weil-pbc-ringed-projection-mate-exact]. Substitute this equality and the counit identity from Step 9. The displayed transpose becomes $\\varepsilon_{fg}\\circ(fg)_*(p)\\circ\\Pi_{fg}$, which is exactly Step 4 for $fg$. Since transposition is bijective, the internal-Hom isomorphisms commute with composition.",
+   "uses": [
+    "lem-weil-pbc-mate-pasting",
+    "lem-weil-pbc-ringed-projection-mate-exact",
+    "lem-asd-internal-adjunction-evaluation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVII, Proposition 5.4.1, pp.291,293, compatibility of the q, p and closed-immersion Hom identifications; explicit counit/projection calculation."
+   }
+  },
+  {
+   "text": "Take $M=A_T[0]$. If $I$ is a K-injective representative of $f^!N$, [def-pur-derived-internal-hom] computes $R\\mathcal Hom_A(A_T,I)$ by its Hom complex. In the formula of [def-pur-hom-complex] only the degree-zero source term contributes. Evaluation at $1$ identifies $\\mathcal Hom_A(A_T,I^n)$ with $I^n$, and the Hom differential becomes $d_I$, since $d_{A_T}=0$. Thus the identification is natural and gives $R\\mathcal Hom_A(A_T,f^!N)=f^!N$. Substitute in Step 4 and invert its direction to obtain $R\\mathcal Hom_A(f_*A_T,N)\\cong f_*f^!N$.",
+   "uses": [
+    "def-pur-derived-internal-hom",
+    "def-pur-hom-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVII, Proposition 5.4.1, p.291: applying R Hom(-,K_X) to the constant-sheaf exact sequence."
+   }
+  },
+  {
+   "text": "Finally let $a:M\\to f^!N$ and let $b=\\varepsilon_f\\circ f_*a:f_*M\\to N$ be its adjoint. Precomposition by $f_*(\\varepsilon_{g,M}):f_*g_*g^!M\\to f_*M$ sends $b$ to\n$$\\varepsilon_f\\circ f_*a\\circ f_*\\varepsilon_{g,M}=\\varepsilon_f\\circ f_*\\varepsilon_{g,f^!N}\\circ f_*g_*(g^!a).$$\nThe equality is just naturality of $\\varepsilon_g$ at $a$. By Step 9 the last expression is the composite-adjunction transpose of $g^!a:g^!M\\to g^!f^!N$. Steps 4 and 10 identify precisely these transposes with the corresponding internal-Hom maps, proving the last assertion. The same equation with a test parameter is preserved by tensor--Hom transposition, by [lem-asd-internal-adjunction-evaluation] and [lem-weil-pbc-mate-pasting]; hence the assertion respects the canonical internal maps as well as individual morphisms.",
+   "uses": [
+    "lem-asd-internal-adjunction-evaluation",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVII, Proposition 5.4.1, p.293: the last sentence, that the resulting morphism induces the prescribed exceptional pullback morphisms."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-proper",
+  "def-amb-etale-compact-support",
+  "lemma-weil-pbc-finite-direct-image-exact",
+  "def-weil-pbc-direct-image",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "thm-amb-etale-exceptional-adjoint",
+  "lem-etale-upper-shriek-bounded-below-from-amplitude",
+  "def-sbc-standard-tstructure-derived-category",
+  "det-sp-unique-right-adjoint",
+  "def-weil-pbc-derived-categories",
+  "prop-asd-internal-adjunction",
+  "lem-asd-internal-adjunction-evaluation",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-weil-pbc-adjunction-shift-compatibility-unique",
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "def-weil-finite-integral-morphism",
+  "def-weil-pbc-etale-sum-extension",
+  "lemma-weil-pbc-finite-stalk-formula",
+  "lem-amb-etale-sum-stalks",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-etale-lower-shriek-adjoint-from-compactification",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-amb-unbounded-compact-support-comparisons",
+  "lem-weil-pbc-mate-pasting",
+  "def-pur-derived-internal-hom",
+  "def-pur-hom-complex"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose XVII, proof of Proposition 5.4.1, pp.291,293; expansion through the current blueprint internal-adjunction proof and existing ordinary-etale tool lemmas."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -54,10 +250,45 @@
    "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"TopCat.Sheaf.pullbackPushforwardAdjunction\", \"module\": \"Mathlib/Topology/Sheaves/Functors\", \"type\": \"{X Y : TopCat} →\\n  (A : Type u_1) →\\n    [inst : CategoryTheory.Category.{w, u_1} A] →\\n      {FA : A → A → Type u_2} →\\n        {CA : A → Type w} →\\n          [inst_1 : (X Y : A) → FunLike (FA X Y) (CA X) (CA Y)] →\\n            [inst_2 : CategoryTheory.ConcreteCategory A FA] →\\n              [inst_3 : Ca\", \"doc\": \"For any continuous map $ f: X \\to Y $ between topological spaces, the sheaf pullback functor $ f^* $ (mapping sheaves on $ Y $ to sheaves on $ X $) is left adjoint to the sheaf pushforward functor $ f_\"}\n  {\"name\": \"TopCat.Sheaf.instIsRightAdjointPushforward\", \"module\": \"Mathlib/Topology/Sheaves/Functors\", \"type\": \"∀ {X Y : TopCat} (f : X ⟶ Y) (A : Type u_1) [inst : CategoryTheory.Category.{w, u_1} A] {FA : A → A → Type u_2}\\n  {CA : A → Type w} [inst_1 : (X Y : A) → FunLike (FA X Y) (CA X) (CA Y)]\\n  [inst_2 : CategoryTheory.ConcreteCategory A FA] [CategoryTheory.Limits.HasColimits A]\\n  [CategoryTheory.Limits.H\", \"doc\": \"Given a category $\\\\mathcal{C}$ and a topological space $X$, the sheaves on $X$ with values in $\\\\mathcal{C}$ form a category. In this category: (1) objects are sheaves on $X$ valued in $\\\\mathcal{C}$; (\"}\n  {\"name\": \"SheafOfModules.pushforwardPushforwardAdj\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F : CategoryTheory.Functor C D} →\\n     \", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, and continuous functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ and $G : \\\\mathcal{D} \\\\to \\\\mathcal{C}$ forming an ad\"}\n  {\"name\": \"SheafOfModules.pullbackPushforwardAdjunction\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F : CategoryTheory.Functor C D} →\\n     \", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"CategoryTheory.Functor.sheafAdjunctionContinuous\", \"module\": \"Mathlib/CategoryTheory/Sites/Pullback\", \"type\": \"{C : Type u₂} →\\n  [inst : CategoryTheory.Category.{v₂, u₂} C] →\\n    {D : Type u₃} →\\n      [inst_1 : CategoryTheory.Category.{v₃, u₃} D] →\\n        (G : CategoryTheory.Functor C D) →\\n          (A : Type u₁) →\\n            [inst_2 : CategoryTheory.Category.{v₁, u₁} A] →\\n              (J : CategoryTheory\", \"doc\": \"Given a continuous functor $ G : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between sites with Grothendieck topologies $ J $ and $ K $, this defines an adjunction where the sheaf pullback functor (left adjoint) $ \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y), (AlgebraicGeometry.Scheme.Modules.pushforward f).IsRightAdjoint\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pushforward functor from the category of sheaves of modules over the structure sheaf of $ X $ to that over $ Y $ is a right adjoint. This means there ex\"}\n  {\"name\": \"CategoryTheory.Functor.sheafPullbackConstruction.sheafAdjunctionContinuous\", \"module\": \"Mathlib/CategoryTheory/Sites/Pullback\", \"type\": \"{C : Type u₂} →\\n  [inst : CategoryTheory.Category.{v₂, u₂} C] →\\n    {D : Type u₃} →\\n      [inst_1 : CategoryTheory.Category.{v₃, u₃} D] →\\n        (G : CategoryTheory.Functor C D) →\\n          (A : Type u₁) →\\n            [inst_2 : CategoryTheory.Category.{v₁, u₁} A] →\\n              (J : CategoryTheory\", \"doc\": \"Given a continuous functor $ G : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between sites with Grothendieck topologies $ J $ and $ K $, and assuming the existence of weak sheafifications for $ K $, this constructs\"}\n  {\"name\": \"SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {D' : Type u₃} [inst_2 : CategoryTheory.Category.{v₃, u₃} D'] {J : CategoryTheory.GrothendieckTopology C}\\n  {K : CategoryTheory.GrothendieckTopology D} {F : CategoryTheory.Functo\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n",
    "date": "2026-10-18",
    "verdict": "no match: hits concern ordinary pullback/pushforward, scheme morphism properties, or unrelated uses of support; none states this exceptional etale comparison or pinning criterion"
+  },
+  {
+   "tool": "grep",
+   "query": "upperShriek|exceptionalInverse|finite.*SheafHom",
+   "results": "Actual command returned 0 hits: . ",
+   "date": "2026-10-18",
+   "verdict": "no match: inspected hits concern ordinary sheaf pullback/pushforward, scheme modules, or sheaf Hom without the exceptional derived adjunction and its finite counit compatibilities."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"upperShriek\"",
+   "results": "Actual command returned 0 hits: . ",
+   "date": "2026-10-18",
+   "verdict": "no match: inspected hits concern ordinary sheaf pullback/pushforward, scheme modules, or sheaf Hom without the exceptional derived adjunction and its finite counit compatibilities."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite morphism of schemes the derived internal Hom of direct image and N equals direct image of internal Hom into exceptional inverse image N",
+   "results": "Actual command returned 8 hits: AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback, AlgebraicGeometry.Scheme.Modules.pushforward_map_app, AlgebraicGeometry.Scheme.Modules.restrictAdjunction, AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit. ",
+   "date": "2026-10-18",
+   "verdict": "no match: inspected hits concern ordinary sheaf pullback/pushforward, scheme modules, or sheaf Hom without the exceptional derived adjunction and its finite counit compatibilities."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Internal sheaf Hom adjunction for proper direct image and exceptional right adjoint on derived etale categories",
+   "results": "Actual command returned 8 hits: SheafOfModules.PullbackConstruction.adjunction, CategoryTheory.Functor.sheafAdjunctionContinuous, SheafOfModules.pushforwardPushforwardAdj, CategoryTheory.Functor.sheafPullbackConstruction.sheafAdjunctionContinuous, CategoryTheory.Functor.sheafAdjunctionCocontinuous, CategoryTheory.sheafHom', TopCat.Sheaf.pullbackPushforwardAdjunction, AlgebraicGeometry.Scheme.Modules.restrictAdjunction. ",
+   "date": "2026-10-18",
+   "verdict": "no match: inspected hits concern ordinary sheaf pullback/pushforward, scheme modules, or sheaf Hom without the exceptional derived adjunction and its finite counit compatibilities."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheaf Hom adjunction for proper direct image and exceptional inverse image",
+   "results": "Actual command returned 8 hits: TopCat.Sheaf.pullbackPushforwardAdjunction, TopCat.Sheaf.instIsRightAdjointPushforward, SheafOfModules.pushforwardPushforwardAdj, SheafOfModules.pullbackPushforwardAdjunction, CategoryTheory.Functor.sheafAdjunctionContinuous, AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, CategoryTheory.Functor.sheafPullbackConstruction.sheafAdjunctionContinuous, SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous. ",
+   "date": "2026-10-18",
+   "verdict": "no match: inspected hits concern ordinary sheaf pullback/pushforward, scheme modules, or sheaf Hom without the exceptional derived adjunction and its finite counit compatibilities."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-finite-modification-pinned-gluing",
@@ -82,5 +313,129 @@
    "prop-asd-internal-adjunction"
   ],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-per-finite-exceptional-internal-hom",
+  "worker": "stage1",
+  "summary": "Preserved every clause and coefficient hypothesis. Reused the ambient canonical internal adjunction and its evaluation normalization; proved the finite specialization, bounded-below restriction, shifts, etale-slice compatibility, composition, unit case and counit naturality in twelve steps. No new nodes. Checked the ILO finite Hom identities and the current blueprint proof; no source-library declaration covers every clause of the item.",
+  "blueprint": "Nearest blueprint ancestor lem-per-artin-gabber-affine-curve, Step 3 (dimension-normalized duality), via the recorded potential-dualizing and finite-modification gluing ancestors. This item supplies the two finite internal-Hom identifications used in ILO XVII 5.4.1, pp.291,293. The current blueprint prop-asd-internal-adjunction proof supplies the Hom-bijection route; it is reused rather than duplicated.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-proper",
+    "why": "Generic ordinary-etale or categorical tool: Finite morphisms are proper. Used in its stated generality to expand the finite internal-adjunction calculation; the perverse-curve unit has no replacement for this infrastructure."
+   },
+   {
+    "node": "lemma-weil-pbc-finite-direct-image-exact",
+    "why": "Generic ordinary-etale or categorical tool: Exactness of finite direct image. Used in its stated generality to expand the finite internal-adjunction calculation; the perverse-curve unit has no replacement for this infrastructure."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-functor",
+    "why": "Generic ordinary-etale or categorical tool: The functor induced by an exact functor is its own right and left derived functor. Used in its stated generality to expand the finite internal-adjunction calculation; the perverse-curve unit has no replacement for this infrastructure."
+   },
+   {
+    "node": "thm-amb-etale-exceptional-adjoint",
+    "why": "Generic ordinary-etale or categorical tool: The ordinary ambient exceptional adjoint. Used in its stated generality to expand the finite internal-adjunction calculation; the perverse-curve unit has no replacement for this infrastructure."
+   },
+   {
+    "node": "lem-etale-upper-shriek-bounded-below-from-amplitude",
+    "why": "Generic ordinary-etale or categorical tool: Exceptional inverse image preserves global boundedness under an upper-amplitude bound. Used in its stated generality to expand the finite internal-adjunction calculation; the perverse-curve unit has no replacement for this infrastructure."
+   },
+   {
+    "node": "det-sp-unique-right-adjoint",
+    "why": "Generic ordinary-etale or categorical tool: Right adjoints are unique up to a unique counit-compatible isomorphism. Used in its stated generality to expand the finite internal-adjunction calculation; the perverse-curve unit has no replacement for this infrastructure."
+   },
+   {
+    "node": "prop-asd-internal-adjunction",
+    "why": "Generic ordinary-etale or categorical tool: Internal ambient adjunction. Used in its stated generality to expand the finite internal-adjunction calculation; the perverse-curve unit has no replacement for this infrastructure."
+   },
+   {
+    "node": "lem-asd-internal-adjunction-evaluation",
+    "why": "Generic ordinary-etale or categorical tool: Evaluation formula for the canonical internal compact-support adjunction. Used in its stated generality to expand the finite internal-adjunction calculation; the perverse-curve unit has no replacement for this infrastructure."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "why": "Generic ordinary-etale or categorical tool: Derived internal Hom calculus on small ringed sites. Used in its stated generality to expand the finite internal-adjunction calculation; the perverse-curve unit has no replacement for this infrastructure."
+   },
+   {
+    "node": "lem-weil-pbc-adjunction-shift-compatibility-unique",
+    "why": "Generic ordinary-etale or categorical tool: Shift isomorphisms compatible with an adjunction: counit from unit, and uniqueness on the right adjoint. Used in its stated generality to expand the finite internal-adjunction calculation; the perverse-curve unit has no replacement for this infrastructure."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-projection-mate-exact",
+    "why": "Generic ordinary-etale or categorical tool: Exactness data for the ringed-topos projection mate. Used in its stated generality to expand the finite internal-adjunction calculation; the perverse-curve unit has no replacement for this infrastructure."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Generic ordinary-etale or categorical tool: Inverse image of etale sheaves of modules over a constant ring is exact. Used in its stated generality to expand the finite internal-adjunction calculation; the perverse-curve unit has no replacement for this infrastructure."
+   },
+   {
+    "node": "lemma-weil-pbc-finite-stalk-formula",
+    "why": "Generic ordinary-etale or categorical tool: Geometric stalk formula for finite direct image. Used in its stated generality to expand the finite internal-adjunction calculation; the perverse-curve unit has no replacement for this infrastructure."
+   },
+   {
+    "node": "lem-amb-etale-sum-stalks",
+    "why": "Generic ordinary-etale or categorical tool: Geometric stalks of etale sum extension. Used in its stated generality to expand the finite internal-adjunction calculation; the perverse-curve unit has no replacement for this infrastructure."
+   },
+   {
+    "node": "lemma-weil-pbc-geometric-stalk-conservative",
+    "why": "Generic ordinary-etale or categorical tool: Conservativity of geometric stalks. Used in its stated generality to expand the finite internal-adjunction calculation; the perverse-curve unit has no replacement for this infrastructure."
+   },
+   {
+    "node": "lem-pur-site-restriction-module-adjunction-exact",
+    "why": "Generic ordinary-etale or categorical tool: Restriction and extension by zero for modules on a localized site. Used in its stated generality to expand the finite internal-adjunction calculation; the perverse-curve unit has no replacement for this infrastructure."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-factorization",
+    "why": "Generic ordinary-etale or categorical tool: The functor induced on derived categories by an exact functor, with its factorization through the localization functors. Used in its stated generality to expand the finite internal-adjunction calculation; the perverse-curve unit has no replacement for this infrastructure."
+   },
+   {
+    "node": "lem-etale-lower-shriek-adjoint-from-compactification",
+    "why": "Generic ordinary-etale or categorical tool: Ambient exceptional adjoint by composition of compactification factors. Used in its stated generality to expand the finite internal-adjunction calculation; the perverse-curve unit has no replacement for this infrastructure."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "why": "Generic ordinary-etale or categorical tool: Canonical composition comparison for unbounded ringed-topos direct images. Used in its stated generality to expand the finite internal-adjunction calculation; the perverse-curve unit has no replacement for this infrastructure."
+   },
+   {
+    "node": "lem-amb-unbounded-compact-support-comparisons",
+    "why": "Generic ordinary-etale or categorical tool: Unbounded ordinary etale compact-support comparisons. Used in its stated generality to expand the finite internal-adjunction calculation; the perverse-curve unit has no replacement for this infrastructure."
+   },
+   {
+    "node": "lem-weil-pbc-mate-pasting",
+    "why": "Generic ordinary-etale or categorical tool: Mates of pasted squares and of conjugate-whiskered squares. Used in its stated generality to expand the finite internal-adjunction calculation; the perverse-curve unit has no replacement for this infrastructure."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-proper",
+  "lemma-weil-pbc-finite-direct-image-exact",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "thm-amb-etale-exceptional-adjoint",
+  "lem-etale-upper-shriek-bounded-below-from-amplitude",
+  "det-sp-unique-right-adjoint",
+  "prop-asd-internal-adjunction",
+  "lem-asd-internal-adjunction-evaluation",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-weil-pbc-adjunction-shift-compatibility-unique",
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lemma-weil-pbc-finite-stalk-formula",
+  "lem-amb-etale-sum-stalks",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-etale-lower-shriek-adjoint-from-compactification",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-amb-unbounded-compact-support-comparisons",
+  "lem-weil-pbc-mate-pasting"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q39-9b619c1ef",
+  "group": "Q39",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q39-9b619c1ef (reviewer sub-agent of L); spot-checked: I read the item in full; it has no new nodes and its statement is unchanged from the base. Source: ILO XVII Prop. 5.4.1. On p.291, RHom(-,K) applied to 0->Λ->i*Λ⊕p*Λ->q*Λ->0 needs RHom(q*Λ,K)=q*q^!K, which is the unit case (Step 11). On p.293, the triangle of RHom(K,L) uses p*RHom(p^!K,p^!L) and its compatibility with g^!, which is Steps 4 and 12. I checked all 12 steps against the statements of the 29 cited nodes. Finite implies proper, so (id,f) is a compactification and Rf_!=f_* termwise. With amplitude N=0 the right adjoint keeps D^+; I checked this by hand. The hypotheses of prop-asd-internal-adjunction and its evaluation normalization hold. Shift compatibility follows from the uniquely unit/counit-compatible shift structure and the projection mate. I recomputed the Step 6 stalk map ⊕_z∏_t L -> ∏_t⊕_z L: it is invertible because T_s̄ is finite, including an infinite U-fibre and an empty fibre. The Step 7 Yoneda chain for the étale slice is valid without any Noetherian or quasi-compact hypothesis on U. Steps 9–10 give the composite counit through mate-pasting part 2, Step 11 the sign of the Hom differential, and Step 12 counit naturality. Stacks labels 03DI, 03DJ, 03QP, 08JB, 0F7J and 0F7K are correct, and nothing cites SGA. No duplicates: lem-sc-finite-duality-derived-hom is the coherent analogue, and the trf internal-Hom exchange nodes state a different c^*/c^! exchange. I accept all 21 tool_uses as generic infrastructure. Batch-5: I accept both flagged citations, lem-etale-upper-shriek-bounded-below-from-amplitude and lem-etale-lower-shriek-adjoint-from-compactification. They are general six-functor results (existence of the Rf_! right adjoint and its D^+ preservation), given by neither assumption and not steps of the trace-formula or Poincaré-duality proofs. Their path reaches sec-poincare-duality only through the generic lem-pod-lisse-module-sheaves-as-module-objects, via the proper-base-change foundations. The item's base stmt_deps (thm-amb-etale-exceptional-adjoint, prop-asd-internal-adjunction) already reach the same nodes, so the new citations add no batch-5 exposure. In Step 7 both flagged citations are used correctly but could be avoided (representability and exactness of v^*); this is not a fault."
  }
 }
