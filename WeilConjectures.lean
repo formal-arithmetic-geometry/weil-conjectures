@@ -4613,6 +4613,7 @@ public import WeilConjectures.TraceFormula.CompactPullback
 public import WeilConjectures.TraceFormula.Correspondence
 public import WeilConjectures.TraceFormula.CorrespondencePair
 public import WeilConjectures.TraceFormula.CurvePieces
+public import WeilConjectures.TraceFormula.DegreeOne
 public import WeilConjectures.TraceFormula.Dualizing
 public import WeilConjectures.TraceFormula.FixedPoint
 public import WeilConjectures.TraceFormula.Frobenius
