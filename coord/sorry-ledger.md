@@ -4,13 +4,13 @@ Source scan; one hole per declaration, regardless of token count. Deleted declar
 Closure is the queue’s import upper bound. Classes use source references, not elaborated dependencies.
 Progress = closed − added in the closure, with pruning reported separately.
 
-Holes now: library **6587**, closure **144**, holes in definitions **9**, definitions with undetermined data **1007** (closure **3**).
+Holes now: library **6611**, closure **3941**, holes in definitions **9**, definitions with undetermined data **1008** (closure **766**).
 
 Definitions with holes (def/instance/structure field):
 
 - `Sheaf.TraceFormula.TotalSiteSimplexFreeResolution::CategoryTheory.simplexDifferential` (def, line 49)
-- `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible::AlgebraicGeometry.ProEtale.CondensedRing.isMonoidalClosed_boundedConstructible` (instance, line 458)
-- `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible::AlgebraicGeometry.ProEtale.CondensedRing.isMonoidal_boundedConstructible` (instance, line 449)
+- `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible::AlgebraicGeometry.ProEtale.CondensedRing.isMonoidalClosed_boundedConstructible` (instance, line 473)
+- `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible::AlgebraicGeometry.ProEtale.CondensedRing.isMonoidal_boundedConstructible` (instance, line 464)
 - `WeilConjectures.TraceFormula.Slop.Basic::AlgebraicGeometry.ProEtale.CondensedRing.Slop.boundedConstructibleLowerShriekComp` (def, line 144)
 - `WeilConjectures.TraceFormula.Slop.Basic::AlgebraicGeometry.ProEtale.CondensedRing.Slop.unitEndRingEquiv` (def, line 160)
 - `WeilConjectures.TraceFormula.Slop.Correspondence::AlgebraicGeometry.ProEtale.CondensedRing.Slop.Correspondence.traceClass` (def, line 206)
@@ -22,88 +22,88 @@ Definitions with undetermined data (class-1 exceptions in `coord/hollow-definiti
 
 - `Sheaf.Algebra.Homology.FilteredDerivedHomCalculus::CochainComplex.FiniteFiltered.coneι` (line 251), chosen from `CochainComplex.FiniteFiltered.cone_maps`
 - `Sheaf.Algebra.Homology.FilteredDerivedHomCalculus::CochainComplex.FiniteFiltered.coneπ` (line 256), chosen from `CochainComplex.FiniteFiltered.cone_maps`
-- `Sheaf.Algebra.Homology.FilteredGlobalHomExactAdjunction::CochainComplex.FiniteFiltered.exactFilteredGrIso` (line 156), chosen from `CochainComplex.FiniteFiltered.exactFiltered_graded_iso`
-- `Sheaf.Algebra.Homology.FilteredPageLocalization::CategoryTheory.finiteFilteredPageFirstIso` (line 101), chosen from `CategoryTheory.boundedFilteredComplex_pageFunctor_normalized`, `CategoryTheory.finiteFilteredPageTransition_projection`
-- `Sheaf.Algebra.Homology.FilteredPageLocalization::CategoryTheory.finiteFilteredPageFunctor` (line 92), chosen from `CategoryTheory.boundedFilteredComplex_pageFunctor_normalized`, `CategoryTheory.finiteFilteredPageTransition_projection`
-- `Sheaf.Algebra.Homology.FilteredPageLocalization::CategoryTheory.finiteFilteredPageImageIso` (line 111), chosen from `CategoryTheory.boundedFilteredComplex_pageFunctor_normalized`, `CategoryTheory.finiteFilteredPageTransition_projection`
-- `Sheaf.Algebra.Homology.FilteredTensorLocalization::CochainComplex.kunnethRepresentativeGradedComparison` (line 186), chosen from `CochainComplex.filteredTensor_graded_comparison`
-- `Sheaf.Algebra.Homology.KFlatRoosRepresentativeInvariance::SheafOfModules.KFlatRoos.algebraModuleMap` (line 80), chosen from `SheafOfModules.KFlatRoos.algebraModuleMap_existsUnique`
-- `Sheaf.Algebra.Homology.KFlatRoosRepresentativeInvariance::SheafOfModules.KFlatRoos.tensorUnit` (line 97), chosen from `SheafOfModules.KFlatRoos.tensorUnit_existsUnique`
-- `Sheaf.Algebra.Homology.RingedInternalHomShiftOfUniverses::CategoryTheory.RingedHomUniverses.homCommShift` (line 130), chosen from `CategoryTheory.RingedHomUniverses.rightShift_existsUnique`
-- `Sheaf.Algebra.Homology.RingedInternalHomShiftOfUniverses::CategoryTheory.RingedHomUniverses.sourceShift` (line 172), chosen from `CategoryTheory.RingedHomUniverses.leftShift_existsUnique`
+- `Sheaf.Algebra.Homology.FilteredGlobalHomExactAdjunction::CochainComplex.FiniteFiltered.exactFilteredGrIso` (line 158), chosen from `CochainComplex.FiniteFiltered.exactFiltered_graded_iso`
+- `Sheaf.Algebra.Homology.FilteredPageLocalization::CategoryTheory.finiteFilteredPageFirstIso` (line 104), chosen from `CategoryTheory.boundedFilteredComplex_pageFunctor_normalized`, `CategoryTheory.finiteFilteredPageTransition_projection`
+- `Sheaf.Algebra.Homology.FilteredPageLocalization::CategoryTheory.finiteFilteredPageFunctor` (line 95), chosen from `CategoryTheory.boundedFilteredComplex_pageFunctor_normalized`, `CategoryTheory.finiteFilteredPageTransition_projection`
+- `Sheaf.Algebra.Homology.FilteredPageLocalization::CategoryTheory.finiteFilteredPageImageIso` (line 114), chosen from `CategoryTheory.boundedFilteredComplex_pageFunctor_normalized`, `CategoryTheory.finiteFilteredPageTransition_projection`
+- `Sheaf.Algebra.Homology.FilteredTensorLocalization::CochainComplex.kunnethRepresentativeGradedComparison` (line 187), chosen from `CochainComplex.filteredTensor_graded_comparison`
+- `Sheaf.Algebra.Homology.KFlatRoosRepresentativeInvariance::SheafOfModules.KFlatRoos.algebraModuleMap` (line 81), chosen from `SheafOfModules.KFlatRoos.algebraModuleMap_existsUnique`
+- `Sheaf.Algebra.Homology.KFlatRoosRepresentativeInvariance::SheafOfModules.KFlatRoos.tensorUnit` (line 98), chosen from `SheafOfModules.KFlatRoos.tensorUnit_existsUnique`
+- `Sheaf.Algebra.Homology.RingedInternalHomShiftOfUniverses::CategoryTheory.RingedHomUniverses.homCommShift` (line 142), chosen from `CategoryTheory.RingedHomUniverses.rightShift_existsUnique`
+- `Sheaf.Algebra.Homology.RingedInternalHomShiftOfUniverses::CategoryTheory.RingedHomUniverses.sourceShift` (line 184), chosen from `CategoryTheory.RingedHomUniverses.leftShift_existsUnique`
 - `Sheaf.Algebra.Homology.RingedInternalHomSignedCalculus::CategoryTheory.SignedRingedHom.adjunction` (line 187), chosen from `CategoryTheory.SignedRingedHom.normalizedAdjunction_existsUnique`
-- `Sheaf.Algebra.Homology.RingedTensorCohomologicalBounds::SheafOfModules.ringedDerivedScalarExtension` (line 61), chosen from `SheafOfModules.derivedChangeOfRingsIndependentCoefficients`
-- `Sheaf.Algebra.Homology.ScalarInternalHomAdjunction::SheafOfModules.scalarRestriction_colimits` (line 76), chosen from `SheafOfModules.sheafRingDerivedCoefficientAdjunction`
-- `Sheaf.Algebra.Homology.ScalarInternalHomAdjunction::SheafOfModules.scalarRestriction_limits` (line 70), chosen from `SheafOfModules.sheafRingDerivedCoefficientAdjunction`
-- `Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients::SheafOfModules.siteDerivedTensorIndependentCoefficients` (line 157), chosen from `SheafOfModules.site_derived_tensor_descent_independentCoefficients`
-- `Sheaf.AlgebraicGeometry.AdicFiniteStratificationPullback::AlgebraicGeometry.Scheme.adicStratificationConstantMap` (line 211), chosen from `AlgebraicGeometry.Scheme.adicStratificationConstantMap_existsUnique`
-- `Sheaf.AlgebraicGeometry.AdicFiniteStratificationPullback::AlgebraicGeometry.Scheme.adicStratificationPushforwardComp` (line 274), chosen from `AlgebraicGeometry.Scheme.adicStratificationPushforwardComp_existsUnique`
+- `Sheaf.Algebra.Homology.RingedTensorCohomologicalBounds::SheafOfModules.ringedDerivedScalarExtension` (line 63), chosen from `SheafOfModules.derivedChangeOfRingsIndependentCoefficients`
+- `Sheaf.Algebra.Homology.ScalarInternalHomAdjunction::SheafOfModules.scalarRestriction_colimits` (line 78), chosen from `SheafOfModules.sheafRingDerivedCoefficientAdjunction`
+- `Sheaf.Algebra.Homology.ScalarInternalHomAdjunction::SheafOfModules.scalarRestriction_limits` (line 72), chosen from `SheafOfModules.sheafRingDerivedCoefficientAdjunction`
+- `Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients::SheafOfModules.siteDerivedTensorIndependentCoefficients` (line 162), chosen from `SheafOfModules.site_derived_tensor_descent_independentCoefficients`
+- `Sheaf.AlgebraicGeometry.AdicFiniteStratificationPullback::AlgebraicGeometry.Scheme.adicStratificationConstantMap` (line 215), chosen from `AlgebraicGeometry.Scheme.adicStratificationConstantMap_existsUnique`
+- `Sheaf.AlgebraicGeometry.AdicFiniteStratificationPullback::AlgebraicGeometry.Scheme.adicStratificationPushforwardComp` (line 278), chosen from `AlgebraicGeometry.Scheme.adicStratificationPushforwardComp_existsUnique`
 - `Sheaf.AlgebraicGeometry.AlgebraicSpaceModuleOperations::AlgebraicGeometry.AlgebraicSpace.moduleDirectImageModel` (line 173), chosen from `AlgebraicGeometry.AlgebraicSpace.moduleDirectImageModel_nonempty`
 - `Sheaf.AlgebraicGeometry.AmbientAffineTranslationTrace::AlgebraicGeometry.Etale.ambientAffineTraceDatum` (line 235), chosen from `AlgebraicGeometry.Etale.exists_affineSpaceTopTrace`
 - `Sheaf.AlgebraicGeometry.AmbientAffineTranslationTrace::AlgebraicGeometry.Etale.ambientAffineTraceTransport` (line 226), chosen from `AlgebraicGeometry.Etale.exists_affineSpaceTopTrace`
-- `Sheaf.AlgebraicGeometry.CartierKummerMap::AlgebraicGeometry.Etale.cartierKummerMap` (line 340), chosen from `AlgebraicGeometry.Etale.cartier_kummer_map`
+- `Sheaf.AlgebraicGeometry.CartierKummerMap::AlgebraicGeometry.Etale.cartierKummerMap` (line 341), chosen from `AlgebraicGeometry.Etale.cartier_kummer_map`
 - `Sheaf.AlgebraicGeometry.CartierReductionSiteComparison::AlgebraicGeometry.Etale.cartierPoleBoundary` (line 81), chosen from `AlgebraicGeometry.Etale.cartierPoleBoundary_existsUnique`
 - `Sheaf.AlgebraicGeometry.CartierReductionSiteComparison::AlgebraicGeometry.ProEtale.cartierReducedEtale` (line 344), chosen from `AlgebraicGeometry.ProEtale.cartierReduction_existsUnique`
 - `Sheaf.AlgebraicGeometry.CartierReductionSiteComparison::AlgebraicGeometry.ProEtale.cartierReducedPro` (line 353), chosen from `AlgebraicGeometry.ProEtale.cartierReduction_existsUnique`
 - `Sheaf.AlgebraicGeometry.CompleteFlagBundle::AlgebraicGeometry.completeFlagProjectivization` (line 73), chosen from `AlgebraicGeometry.exists_completeFlagProjectivization`
 - `Sheaf.AlgebraicGeometry.CompleteFlagBundle::AlgebraicGeometry.completeFlagStep` (line 243), chosen from `AlgebraicGeometry.completeFlagBundle_step_unique`
-- `Sheaf.AlgebraicGeometry.CondensedClosedSupportAdjunction::AlgebraicGeometry.ProEtale.CondensedRing.closedSupportAdjunction` (line 186), chosen from `AlgebraicGeometry.ProEtale.CondensedRing.existsUnique_closedSupportAdjunction`
+- `Sheaf.AlgebraicGeometry.CondensedClosedSupportAdjunction::AlgebraicGeometry.ProEtale.CondensedRing.closedSupportAdjunction` (line 192), chosen from `AlgebraicGeometry.ProEtale.CondensedRing.existsUnique_closedSupportAdjunction`
 - `Sheaf.AlgebraicGeometry.CondensedPullbackTensorComparison::AlgebraicGeometry.ProEtale.CondensedRing.supportComplexTensorComparison` (line 152), chosen from `AlgebraicGeometry.ProEtale.CondensedRing.existsUnique_supportComplexTensorComparison`
 - `Sheaf.AlgebraicGeometry.CondensedPullbackTensorComparison::AlgebraicGeometry.ProEtale.CondensedRing.supportDerivedTensorComparison` (line 237), chosen from `AlgebraicGeometry.ProEtale.CondensedRing.existsUnique_supportDerivedTensorComparison`
 - `Sheaf.AlgebraicGeometry.CondensedPullbackTensorComparison::AlgebraicGeometry.ProEtale.CondensedRing.supportTensorComparison` (line 85), chosen from `AlgebraicGeometry.ProEtale.CondensedRing.existsUnique_supportTensorComparison`
-- `Sheaf.AlgebraicGeometry.CondensedWContractibleLisseEvaluation::AlgebraicGeometry.ProEtale.CondensedRing.componentTests` (line 229), chosen from `AlgebraicGeometry.ProEtale.component_relative_profinite_site`
-- `Sheaf.AlgebraicGeometry.ConormalGradedAlgebra::AlgebraicGeometry.ConormalGradedAlgebra.presentation` (line 276), chosen from `AlgebraicGeometry.ConormalGradedAlgebra.exists_conormalGradedAlgebra`
+- `Sheaf.AlgebraicGeometry.CondensedWContractibleLisseEvaluation::AlgebraicGeometry.ProEtale.CondensedRing.componentTests` (line 233), chosen from `AlgebraicGeometry.ProEtale.component_relative_profinite_site`
+- `Sheaf.AlgebraicGeometry.ConormalGradedAlgebra::AlgebraicGeometry.ConormalGradedAlgebra.presentation` (line 287), chosen from `AlgebraicGeometry.ConormalGradedAlgebra.exists_conormalGradedAlgebra`
 - `Sheaf.AlgebraicGeometry.Curve.DegreeNormalizedTrace::AlgebraicGeometry.Scheme.degreeNormalizedCurveTrace` (line 70), chosen from `AlgebraicGeometry.Scheme.existsUnique_degreeNormalizedCurveTrace`
-- `Sheaf.AlgebraicGeometry.EnlargedEtaleRingedSite::AlgebraicGeometry.AlgebraicSpace.enlargedStructuralMap` (line 349), chosen from `AlgebraicGeometry.AlgebraicSpace.enlargedStructuralMap_existsUnique`
+- `Sheaf.AlgebraicGeometry.EnlargedEtaleRingedSite::AlgebraicGeometry.AlgebraicSpace.enlargedStructuralMap` (line 353), chosen from `AlgebraicGeometry.AlgebraicSpace.enlargedStructuralMap_existsUnique`
 - `Sheaf.AlgebraicGeometry.EtaleConstantProjectionMap::AlgebraicGeometry.Etale.etaleConstantPresheafMonoidal` (line 55), chosen from `AlgebraicGeometry.Etale.exists_etaleConstantPresheafCoreMonoidal`
 - `Sheaf.AlgebraicGeometry.EtaleCoordinateSupport::AlgebraicGeometry.Etale.coordinateGlobalToStalk` (line 158), chosen from `AlgebraicGeometry.Etale.coordinateGlobalToStalk_existsUnique`
 - `Sheaf.AlgebraicGeometry.EtaleCoordinateSupport::AlgebraicGeometry.Etale.coordinateStalkRestriction` (line 204), chosen from `AlgebraicGeometry.Etale.coordinateStalkRestriction_existsUnique`
-- `Sheaf.AlgebraicGeometry.EtaleOriginProperOpenInterchange::AlgebraicGeometry.Scheme.etaleOriginOpenEtaleInterchange` (line 119), chosen from `AlgebraicGeometry.Etale.unboundedProperOpenInterchange`
+- `Sheaf.AlgebraicGeometry.EtaleOriginProperOpenInterchange::AlgebraicGeometry.Scheme.etaleOriginOpenEtaleInterchange` (line 127), chosen from `AlgebraicGeometry.Etale.unboundedProperOpenInterchange`
 - `Sheaf.AlgebraicGeometry.FiniteConstantCoefficientTransport::AlgebraicGeometry.ProEtale.StrictTower.cDirect` (line 186), chosen from `AlgebraicGeometry.ProEtale.StrictTower.cDirect_existsUnique`
 - `Sheaf.AlgebraicGeometry.FiniteConstantCoefficientTransport::AlgebraicGeometry.ProEtale.StrictTower.cUnderlying` (line 156), chosen from `AlgebraicGeometry.ProEtale.StrictTower.cUnderlying_existsUnique`
-- `Sheaf.AlgebraicGeometry.FiniteDualityLocallyClosedComparison::AlgebraicGeometry.ProEtale.locallyClosedEtaleSheafIso` (line 161), chosen from `AlgebraicGeometry.etale_locallyClosed_extension_comparison`
-- `Sheaf.AlgebraicGeometry.FiniteOpenExchangeScalars::AlgebraicGeometry.ProEtale.StrictTower.FiniteOpenScalars.ambientRes` (line 333), chosen from `AlgebraicGeometry.ProEtale.StrictTower.FiniteOpenScalars.ambientRes_existsUnique`
-- `Sheaf.AlgebraicGeometry.FiniteOpenExchangeScalars::AlgebraicGeometry.ProEtale.StrictTower.FiniteOpenScalars.resId` (line 312), chosen from `AlgebraicGeometry.ProEtale.StrictTower.FiniteOpenScalars.resId_existsUnique`
+- `Sheaf.AlgebraicGeometry.FiniteDualityLocallyClosedComparison::AlgebraicGeometry.ProEtale.locallyClosedEtaleSheafIso` (line 169), chosen from `AlgebraicGeometry.etale_locallyClosed_extension_comparison`
+- `Sheaf.AlgebraicGeometry.FiniteOpenExchangeScalars::AlgebraicGeometry.ProEtale.StrictTower.FiniteOpenScalars.ambientRes` (line 339), chosen from `AlgebraicGeometry.ProEtale.StrictTower.FiniteOpenScalars.ambientRes_existsUnique`
+- `Sheaf.AlgebraicGeometry.FiniteOpenExchangeScalars::AlgebraicGeometry.ProEtale.StrictTower.FiniteOpenScalars.resId` (line 318), chosen from `AlgebraicGeometry.ProEtale.StrictTower.FiniteOpenScalars.resId_existsUnique`
 - `Sheaf.AlgebraicGeometry.FiniteOrdinaryPullback::WeilConjectures.finiteOrdinaryPointComparison` (line 61), chosen from `WeilConjectures.finiteOrdinaryPointComparison_existsUnique`
 - `Sheaf.AlgebraicGeometry.FirstFittingSingularSubscheme::AlgebraicGeometry.Scheme.firstFittingIdealSheaf` (line 69), chosen from `AlgebraicGeometry.Scheme.existsUnique_firstFittingIdealSheaf`
-- `Sheaf.AlgebraicGeometry.GenericFiberComponentsSection::AlgebraicGeometry.Scheme.ProEt.genericComponentContinuous` (line 65), chosen from `AlgebraicGeometry.Scheme.ProEt.affine_component_site_projection`
-- `Sheaf.AlgebraicGeometry.GenericFiberComponentsSection::AlgebraicGeometry.Scheme.ProEt.genericComponentCoordinates` (line 57), chosen from `AlgebraicGeometry.Scheme.ProEt.affine_component_site_projection`
-- `Sheaf.AlgebraicGeometry.GenericFiberComponentsSection::AlgebraicGeometry.Scheme.ProEt.genericComponentFunctor` (line 50), chosen from `AlgebraicGeometry.Scheme.ProEt.affine_component_site_projection`
-- `Sheaf.AlgebraicGeometry.GenericFiberComponentsSection::AlgebraicGeometry.Scheme.ProEt.genericComponentProjection` (line 74), chosen from `AlgebraicGeometry.Scheme.ProEt.affine_component_site_projection`
-- `Sheaf.AlgebraicGeometry.GeometricPointDerivedSectionsAdjunction::AlgebraicGeometry.Etale.geometricPointSectionsStalkAdditive` (line 50), chosen from `AlgebraicGeometry.Etale.nonempty_geometricPointDerivedConstantsData`
-- `Sheaf.AlgebraicGeometry.GeometricPointDerivedSectionsAdjunction::AlgebraicGeometry.Etale.geometricPointSectionsStalkAdjunction` (line 58), chosen from `AlgebraicGeometry.Etale.nonempty_geometricPointDerivedConstantsData`
+- `Sheaf.AlgebraicGeometry.GenericFiberComponentsSection::AlgebraicGeometry.Scheme.ProEt.genericComponentContinuous` (line 75), chosen from `AlgebraicGeometry.Scheme.ProEt.affine_component_site_projection`
+- `Sheaf.AlgebraicGeometry.GenericFiberComponentsSection::AlgebraicGeometry.Scheme.ProEt.genericComponentCoordinates` (line 67), chosen from `AlgebraicGeometry.Scheme.ProEt.affine_component_site_projection`
+- `Sheaf.AlgebraicGeometry.GenericFiberComponentsSection::AlgebraicGeometry.Scheme.ProEt.genericComponentFunctor` (line 60), chosen from `AlgebraicGeometry.Scheme.ProEt.affine_component_site_projection`
+- `Sheaf.AlgebraicGeometry.GenericFiberComponentsSection::AlgebraicGeometry.Scheme.ProEt.genericComponentProjection` (line 84), chosen from `AlgebraicGeometry.Scheme.ProEt.affine_component_site_projection`
+- `Sheaf.AlgebraicGeometry.GeometricPointDerivedSectionsAdjunction::AlgebraicGeometry.Etale.geometricPointSectionsStalkAdditive` (line 53), chosen from `AlgebraicGeometry.Etale.nonempty_geometricPointDerivedConstantsData`
+- `Sheaf.AlgebraicGeometry.GeometricPointDerivedSectionsAdjunction::AlgebraicGeometry.Etale.geometricPointSectionsStalkAdjunction` (line 61), chosen from `AlgebraicGeometry.Etale.nonempty_geometricPointDerivedConstantsData`
 - `Sheaf.AlgebraicGeometry.GeometricPointProjectionComparison::AlgebraicGeometry.Etale.geometricPointDerivedSectionsStalkUnitIsIso` (line 50), chosen from `AlgebraicGeometry.Etale.nonempty_geometricPointDerivedConstantsData`
 - `Sheaf.AlgebraicGeometry.GeometricPointProjectionComparison::AlgebraicGeometry.Etale.geometricPointDerivedStalkMonoidal` (line 42), chosen from `AlgebraicGeometry.Etale.nonempty_geometricPointDerivedConstantsData`
-- `Sheaf.AlgebraicGeometry.InternalModuleOperationsTransport::AlgebraicGeometry.ProEtale.InternalModuleOperations.coefficientMap` (line 94), chosen from `AlgebraicGeometry.ProEtale.InternalModuleOperations.coefficientMap_existsUnique`
-- `Sheaf.AlgebraicGeometry.InternalModuleOperationsTransport::AlgebraicGeometry.ProEtale.InternalModuleOperations.lowerComp` (line 238), chosen from `AlgebraicGeometry.ProEtale.InternalModuleOperations.lowerComp_existsUnique`
-- `Sheaf.AlgebraicGeometry.InternalModuleOperationsTransport::AlgebraicGeometry.ProEtale.InternalModuleOperations.lowerComparison` (line 148), chosen from `AlgebraicGeometry.ProEtale.InternalModuleOperations.lowerComparison_existsUnique`
-- `Sheaf.AlgebraicGeometry.InternalModuleOperationsTransport::AlgebraicGeometry.ProEtale.InternalModuleOperations.openComparison` (line 216), chosen from `AlgebraicGeometry.ProEtale.InternalModuleOperations.openComparison_existsUnique`
-- `Sheaf.AlgebraicGeometry.InternalModuleOperationsTransport::AlgebraicGeometry.ProEtale.InternalModuleOperations.upperComparison` (line 171), chosen from `AlgebraicGeometry.ProEtale.InternalModuleOperations.upperComparison_existsUnique`
-- `Sheaf.AlgebraicGeometry.NormalizedSupportTriangle::AlgebraicGeometry.Etale.supportInclusion` (line 74), chosen from `AlgebraicGeometry.Etale.exists_unique_supportInclusion`
-- `Sheaf.AlgebraicGeometry.NormalizedSupportTriangle::AlgebraicGeometry.Etale.supportLocalizationBoundary` (line 183), chosen from `AlgebraicGeometry.Etale.exists_unique_supportLocalizationBoundary`
-- `Sheaf.AlgebraicGeometry.NormalizedSupportTriangle::AlgebraicGeometry.Etale.supportOpenDerivedComparison` (line 213), chosen from `AlgebraicGeometry.Etale.exists_unique_supportOpenDerivedComparison`
-- `Sheaf.AlgebraicGeometry.NormalizedSupportTriangle::AlgebraicGeometry.Etale.supportOpenRestriction` (line 100), chosen from `AlgebraicGeometry.Etale.exists_unique_supportOpenRestriction`
-- `Sheaf.AlgebraicGeometry.NormalizedSupportTriangle::AlgebraicGeometry.Etale.supportTransport` (line 281), chosen from `AlgebraicGeometry.Etale.exists_unique_supportTransport`
-- `Sheaf.AlgebraicGeometry.NormalizedSupportTriangle::AlgebraicGeometry.Etale.supportTransportComparison` (line 312), chosen from `AlgebraicGeometry.Etale.exists_unique_supportTransportComparison`
+- `Sheaf.AlgebraicGeometry.InternalModuleOperationsTransport::AlgebraicGeometry.ProEtale.InternalModuleOperations.coefficientMap` (line 98), chosen from `AlgebraicGeometry.ProEtale.InternalModuleOperations.coefficientMap_existsUnique`
+- `Sheaf.AlgebraicGeometry.InternalModuleOperationsTransport::AlgebraicGeometry.ProEtale.InternalModuleOperations.lowerComp` (line 242), chosen from `AlgebraicGeometry.ProEtale.InternalModuleOperations.lowerComp_existsUnique`
+- `Sheaf.AlgebraicGeometry.InternalModuleOperationsTransport::AlgebraicGeometry.ProEtale.InternalModuleOperations.lowerComparison` (line 152), chosen from `AlgebraicGeometry.ProEtale.InternalModuleOperations.lowerComparison_existsUnique`
+- `Sheaf.AlgebraicGeometry.InternalModuleOperationsTransport::AlgebraicGeometry.ProEtale.InternalModuleOperations.openComparison` (line 220), chosen from `AlgebraicGeometry.ProEtale.InternalModuleOperations.openComparison_existsUnique`
+- `Sheaf.AlgebraicGeometry.InternalModuleOperationsTransport::AlgebraicGeometry.ProEtale.InternalModuleOperations.upperComparison` (line 175), chosen from `AlgebraicGeometry.ProEtale.InternalModuleOperations.upperComparison_existsUnique`
+- `Sheaf.AlgebraicGeometry.NormalizedSupportTriangle::AlgebraicGeometry.Etale.supportInclusion` (line 80), chosen from `AlgebraicGeometry.Etale.exists_unique_supportInclusion`
+- `Sheaf.AlgebraicGeometry.NormalizedSupportTriangle::AlgebraicGeometry.Etale.supportLocalizationBoundary` (line 189), chosen from `AlgebraicGeometry.Etale.exists_unique_supportLocalizationBoundary`
+- `Sheaf.AlgebraicGeometry.NormalizedSupportTriangle::AlgebraicGeometry.Etale.supportOpenDerivedComparison` (line 219), chosen from `AlgebraicGeometry.Etale.exists_unique_supportOpenDerivedComparison`
+- `Sheaf.AlgebraicGeometry.NormalizedSupportTriangle::AlgebraicGeometry.Etale.supportOpenRestriction` (line 106), chosen from `AlgebraicGeometry.Etale.exists_unique_supportOpenRestriction`
+- `Sheaf.AlgebraicGeometry.NormalizedSupportTriangle::AlgebraicGeometry.Etale.supportTransport` (line 287), chosen from `AlgebraicGeometry.Etale.exists_unique_supportTransport`
+- `Sheaf.AlgebraicGeometry.NormalizedSupportTriangle::AlgebraicGeometry.Etale.supportTransportComparison` (line 318), chosen from `AlgebraicGeometry.Etale.exists_unique_supportTransportComparison`
 - `Sheaf.AlgebraicGeometry.ProEtale.InverseImagePullbackComparison::AlgebraicGeometry.ProEtale.inverseImageFiniteComparisonComplex` (line 192), chosen from `AlgebraicGeometry.ProEtale.inverseImageFiniteComparison_existsUnique`
 - `Sheaf.AlgebraicGeometry.ProEtale.InverseImagePullbackComparison::AlgebraicGeometry.ProEtale.inverseImageReductionTheta` (line 258), chosen from `AlgebraicGeometry.ProEtale.inverseImageReductionTheta_existsUnique`
-- `Sheaf.AlgebraicGeometry.ProEtale.IsoSectionwiseInverseImage::AlgebraicGeometry.Scheme.isoSectionwiseConstantMap` (line 99), chosen from `AlgebraicGeometry.Scheme.isoSectionwiseConstantMap_existsUnique`
+- `Sheaf.AlgebraicGeometry.ProEtale.IsoSectionwiseInverseImage::AlgebraicGeometry.Scheme.isoSectionwiseConstantMap` (line 103), chosen from `AlgebraicGeometry.Scheme.isoSectionwiseConstantMap_existsUnique`
 - `Sheaf.AlgebraicGeometry.ProEtaleCanonicalPullbackComposition::AlgebraicGeometry.Scheme.proEtaleCanonicalPullbackComposition` (line 103), chosen from `AlgebraicGeometry.Scheme.proEtaleCanonicalPullbackComposition_existsUnique`
 - `Sheaf.AlgebraicGeometry.ProEtaleConstantModuleUnit::AlgebraicGeometry.Scheme.proEtaleConstantModuleUnit` (line 65), chosen from `AlgebraicGeometry.Scheme.proEtaleConstantModuleUnit_existsUnique`
 - `Sheaf.AlgebraicGeometry.ProEtaleConstantOpenSquareExchange::AlgebraicGeometry.Scheme.constantOpenSquareExchange` (line 113), chosen from `AlgebraicGeometry.Scheme.proEtale_openSquareExchange`
 - `Sheaf.AlgebraicGeometry.ProEtaleDirectImageRestrictionOfScalars::AlgebraicGeometry.Scheme.proEtaleCoefficientDirectImageComparison` (line 94), chosen from `AlgebraicGeometry.Scheme.proEtaleCoefficientDirectImageComparison_existsUnique`
 - `Sheaf.AlgebraicGeometry.ProEtaleFiniteModuleAdjunction::AlgebraicGeometry.ProEtale.finiteModuleAdjunction` (line 83), chosen from `AlgebraicGeometry.ProEtale.finiteModuleAdjunction_existsUnique`
-- `Sheaf.AlgebraicGeometry.ProEtaleInverseImageTensorComparison::AlgebraicGeometry.ProEtaleTensorComparison.coefficientQuotient` (line 124), chosen from `AlgebraicGeometry.ProEtaleTensorComparison.coefficientQuotient_exists`
-- `Sheaf.AlgebraicGeometry.ProEtaleInverseImageTensorComparison::AlgebraicGeometry.ProEtaleTensorComparison.comparison` (line 182), chosen from `AlgebraicGeometry.ProEtaleTensorComparison.comparison_exists`
-- `Sheaf.AlgebraicGeometry.ProEtaleInverseImageTensorComparison::AlgebraicGeometry.ProEtaleTensorComparison.moduleComp` (line 281), chosen from `AlgebraicGeometry.ProEtaleTensorComparison.moduleComp_exists`
-- `Sheaf.AlgebraicGeometry.ProEtaleInverseImageTensorComparison::AlgebraicGeometry.ProEtaleTensorComparison.moduleId` (line 312), chosen from `AlgebraicGeometry.ProEtaleTensorComparison.moduleId_exists`
-- `Sheaf.AlgebraicGeometry.ProEtaleInverseImageTensorComparison::AlgebraicGeometry.ProEtaleTensorComparison.moduleSetsIdentification` (line 249), chosen from `AlgebraicGeometry.ProEtaleTensorComparison.moduleSetsIdentification_exists`
-- `Sheaf.AlgebraicGeometry.ProEtaleInverseImageTensorComparison::AlgebraicGeometry.ProEtaleTensorComparison.ringSetsIdentification` (line 225), chosen from `AlgebraicGeometry.ProEtaleTensorComparison.ringSetsIdentification_exists`
-- `Sheaf.AlgebraicGeometry.ProEtaleInverseImageTensorComparison::AlgebraicGeometry.ProEtaleTensorComparison.scalarIdentification` (line 148), chosen from `AlgebraicGeometry.ProEtaleTensorComparison.scalarIdentification_exists`
+- `Sheaf.AlgebraicGeometry.ProEtaleInverseImageTensorComparison::AlgebraicGeometry.ProEtaleTensorComparison.coefficientQuotient` (line 126), chosen from `AlgebraicGeometry.ProEtaleTensorComparison.coefficientQuotient_exists`
+- `Sheaf.AlgebraicGeometry.ProEtaleInverseImageTensorComparison::AlgebraicGeometry.ProEtaleTensorComparison.comparison` (line 184), chosen from `AlgebraicGeometry.ProEtaleTensorComparison.comparison_exists`
+- `Sheaf.AlgebraicGeometry.ProEtaleInverseImageTensorComparison::AlgebraicGeometry.ProEtaleTensorComparison.moduleComp` (line 283), chosen from `AlgebraicGeometry.ProEtaleTensorComparison.moduleComp_exists`
+- `Sheaf.AlgebraicGeometry.ProEtaleInverseImageTensorComparison::AlgebraicGeometry.ProEtaleTensorComparison.moduleId` (line 314), chosen from `AlgebraicGeometry.ProEtaleTensorComparison.moduleId_exists`
+- `Sheaf.AlgebraicGeometry.ProEtaleInverseImageTensorComparison::AlgebraicGeometry.ProEtaleTensorComparison.moduleSetsIdentification` (line 251), chosen from `AlgebraicGeometry.ProEtaleTensorComparison.moduleSetsIdentification_exists`
+- `Sheaf.AlgebraicGeometry.ProEtaleInverseImageTensorComparison::AlgebraicGeometry.ProEtaleTensorComparison.ringSetsIdentification` (line 227), chosen from `AlgebraicGeometry.ProEtaleTensorComparison.ringSetsIdentification_exists`
+- `Sheaf.AlgebraicGeometry.ProEtaleInverseImageTensorComparison::AlgebraicGeometry.ProEtaleTensorComparison.scalarIdentification` (line 150), chosen from `AlgebraicGeometry.ProEtaleTensorComparison.scalarIdentification_exists`
 - `Sheaf.AlgebraicGeometry.ProEtaleIsomorphismInverseImage::AlgebraicGeometry.Scheme.proEtaleIsoInverseImageIdentification` (line 95), chosen from `AlgebraicGeometry.Scheme.existsUnique_proEtaleIsoInverseImageIdentification`
-- `Sheaf.AlgebraicGeometry.ProEtalePullbackStalkCoherence::AlgebraicGeometry.Scheme.proEtalePullbackStalkComparison` (line 115), chosen from `AlgebraicGeometry.Scheme.proEtalePullbackStalkComparison_existsUnique`
-- `Sheaf.AlgebraicGeometry.ProEtalePullbackStalkCoherence::AlgebraicGeometry.Scheme.proEtaleStalkIdentityPullback` (line 186), chosen from `AlgebraicGeometry.Scheme.proEtaleStalkIdentityPullback_existsUnique`
-- `Sheaf.AlgebraicGeometry.ProEtalePullbackStalkCoherence::AlgebraicGeometry.Scheme.proEtaleStalkReparam` (line 156), chosen from `AlgebraicGeometry.Scheme.proEtaleStalkReparam_existsUnique`
+- `Sheaf.AlgebraicGeometry.ProEtalePullbackStalkCoherence::AlgebraicGeometry.Scheme.proEtalePullbackStalkComparison` (line 119), chosen from `AlgebraicGeometry.Scheme.proEtalePullbackStalkComparison_existsUnique`
+- `Sheaf.AlgebraicGeometry.ProEtalePullbackStalkCoherence::AlgebraicGeometry.Scheme.proEtaleStalkIdentityPullback` (line 190), chosen from `AlgebraicGeometry.Scheme.proEtaleStalkIdentityPullback_existsUnique`
+- `Sheaf.AlgebraicGeometry.ProEtalePullbackStalkCoherence::AlgebraicGeometry.Scheme.proEtaleStalkReparam` (line 160), chosen from `AlgebraicGeometry.Scheme.proEtaleStalkReparam_existsUnique`
 - `Sheaf.AlgebraicGeometry.ProEtaleRootsOfUnityInverseImage::AlgebraicGeometry.Scheme.proEtaleRootsOfUnityDirectImageMap` (line 55), chosen from `AlgebraicGeometry.Scheme.existsUnique_proEtaleRootsOfUnityDirectImageMap`
 - `Sheaf.AlgebraicGeometry.ProEtaleSupportedExteriorProduct::AlgebraicGeometry.ProEtale.supportedCoefficientAdjunction` (line 299), chosen from `AlgebraicGeometry.ProEtale.exists_unique_supportedCoefficientAdjunction`
 - `Sheaf.AlgebraicGeometry.ProEtaleSupportedExteriorProduct::AlgebraicGeometry.ProEtale.supportedCoefficientTensor` (line 407), chosen from `AlgebraicGeometry.ProEtale.exists_unique_supportedCoefficientTensor`
@@ -114,51 +114,51 @@ Definitions with undetermined data (class-1 exceptions in `coord/hollow-definiti
 - `Sheaf.AlgebraicGeometry.RelativeDifferentialsPullbackMap::AlgebraicGeometry.Scheme.Hom.relativeDifferentialsPullbackMap` (line 73), chosen from `AlgebraicGeometry.Scheme.Hom.existsUnique_relativeDifferentialsPullbackMap`
 - `Sheaf.AlgebraicGeometry.RelativeDualizingPair::AlgebraicGeometry.relativeDualizingDiagonalMultiplication` (line 105), chosen from `AlgebraicGeometry.existsUnique_relativeDualizingDiagonalMultiplication`
 - `Sheaf.AlgebraicGeometry.RelativeProjectiveSpace::AlgebraicGeometry.RelativeProjectiveSpace.construction` (line 793), chosen from `AlgebraicGeometry.exists_relativeProjData`
-- `Sheaf.AlgebraicGeometry.RootsOfUnityInverseImageIso::AlgebraicGeometry.Scheme.proEtaleRootsOfUnityInverseImageAction` (line 106), chosen from `AlgebraicGeometry.Scheme.existsUnique_proEtaleRootsOfUnityInverseImageAction`
+- `Sheaf.AlgebraicGeometry.RootsOfUnityInverseImageIso::AlgebraicGeometry.Scheme.proEtaleRootsOfUnityInverseImageAction` (line 107), chosen from `AlgebraicGeometry.Scheme.existsUnique_proEtaleRootsOfUnityInverseImageAction`
 - `Sheaf.AlgebraicGeometry.SfIntrinsicRealizationTransport::AlgebraicGeometry.Scheme.sfIntrinsicDerivedDirectImageComparison` (line 119), chosen from `AlgebraicGeometry.Scheme.sfIntrinsicDerivedDirectImageComparison_existsUnique`
 - `Sheaf.AlgebraicGeometry.SfIntrinsicRealizationTransport::AlgebraicGeometry.Scheme.sfIntrinsicDirectImageComparison` (line 80), chosen from `AlgebraicGeometry.Scheme.sfIntrinsicDirectImageComparison_existsUnique`
-- `Sheaf.AlgebraicGeometry.StandardGroupSchemes::AlgebraicGeometry.StandardGroupSchemes.additiveGroup` (line 119), chosen from `AlgebraicGeometry.StandardGroupSchemes.additiveGroup_existsUnique`
-- `Sheaf.AlgebraicGeometry.StandardGroupSchemes::AlgebraicGeometry.StandardGroupSchemes.alphaGroup` (line 269), chosen from `AlgebraicGeometry.StandardGroupSchemes.alphaGroup_existsUnique`
-- `Sheaf.AlgebraicGeometry.StandardGroupSchemes::AlgebraicGeometry.StandardGroupSchemes.rootsGroup` (line 194), chosen from `AlgebraicGeometry.StandardGroupSchemes.rootsGroup_existsUnique`
+- `Sheaf.AlgebraicGeometry.StandardGroupSchemes::AlgebraicGeometry.StandardGroupSchemes.additiveGroup` (line 120), chosen from `AlgebraicGeometry.StandardGroupSchemes.additiveGroup_existsUnique`
+- `Sheaf.AlgebraicGeometry.StandardGroupSchemes::AlgebraicGeometry.StandardGroupSchemes.alphaGroup` (line 270), chosen from `AlgebraicGeometry.StandardGroupSchemes.alphaGroup_existsUnique`
+- `Sheaf.AlgebraicGeometry.StandardGroupSchemes::AlgebraicGeometry.StandardGroupSchemes.rootsGroup` (line 195), chosen from `AlgebraicGeometry.StandardGroupSchemes.rootsGroup_existsUnique`
 - `Sheaf.AlgebraicGeometry.StrictConstantTowerOperations::AlgebraicGeometry.ProEtale.StrictTower.moduleRComp` (line 236), chosen from `AlgebraicGeometry.ProEtale.StrictTower.moduleRComp_existsUnique`
 - `Sheaf.AlgebraicGeometry.StrictConstantTowerOperations::AlgebraicGeometry.ProEtale.StrictTower.moduleRId` (line 290), chosen from `AlgebraicGeometry.ProEtale.StrictTower.moduleRId_existsUnique`
-- `Sheaf.AlgebraicGeometry.SupportSiteComparison::AlgebraicGeometry.ProEtale.supportComparisonUnit` (line 98), chosen from `AlgebraicGeometry.ProEtale.supportComparisonUnit_existsUnique`
-- `Sheaf.AlgebraicGeometry.SupportSiteComparison::AlgebraicGeometry.ProEtale.supportKernelEvaluationIso` (line 150), chosen from `AlgebraicGeometry.ProEtale.supportKernelEvaluationIso_existsUnique`
-- `Sheaf.AlgebraicGeometry.SupportSiteComparison::AlgebraicGeometry.ProEtale.supportOpenConstantIso` (line 434), chosen from `AlgebraicGeometry.ProEtale.supportOpenConstantIso_existsUnique`
+- `Sheaf.AlgebraicGeometry.SupportSiteComparison::AlgebraicGeometry.ProEtale.supportComparisonUnit` (line 99), chosen from `AlgebraicGeometry.ProEtale.supportComparisonUnit_existsUnique`
+- `Sheaf.AlgebraicGeometry.SupportSiteComparison::AlgebraicGeometry.ProEtale.supportKernelEvaluationIso` (line 151), chosen from `AlgebraicGeometry.ProEtale.supportKernelEvaluationIso_existsUnique`
+- `Sheaf.AlgebraicGeometry.SupportSiteComparison::AlgebraicGeometry.ProEtale.supportOpenConstantIso` (line 435), chosen from `AlgebraicGeometry.ProEtale.supportOpenConstantIso_existsUnique`
 - `Sheaf.AlgebraicGeometry.SupportedExteriorProduct::AlgebraicGeometry.Etale.supportedCoefficientAdjunction` (line 226), chosen from `AlgebraicGeometry.Etale.exists_unique_supportedCoefficientAdjunction`
 - `Sheaf.AlgebraicGeometry.SupportedExteriorProduct::AlgebraicGeometry.Etale.supportedCoefficientTensor` (line 349), chosen from `AlgebraicGeometry.Etale.exists_unique_supportedCoefficientTensor`
 - `Sheaf.AlgebraicGeometry.SupportedExteriorProduct::AlgebraicGeometry.Etale.supportedCoefficientTensorComplex` (line 406), chosen from `AlgebraicGeometry.Etale.exists_unique_supportedCoefficientTensorComplex`
 - `Sheaf.AlgebraicGeometry.SupportedExteriorProduct::AlgebraicGeometry.Etale.supportedCoefficientTensorDerived` (line 497), chosen from `AlgebraicGeometry.Etale.exists_unique_supportedCoefficientTensorDerived`
 - `Sheaf.AlgebraicGeometry.SupportedLocalizationComparisons::AlgebraicGeometry.Etale.supportedFirstProductComplementIso` (line 384), chosen from `AlgebraicGeometry.Etale.exists_unique_supportedFirstProductComplementIso`
 - `Sheaf.AlgebraicGeometry.SupportedLocalizationComparisons::AlgebraicGeometry.Etale.supportedSecondProductComplementIso` (line 559), chosen from `AlgebraicGeometry.Etale.exists_unique_supportedSecondProductComplementIso`
-- `Sheaf.AlgebraicGeometry.SupportedProductQuotientModel::AlgebraicGeometry.Etale.supportQuotientOrdinaryIso` (line 118), chosen from `AlgebraicGeometry.Etale.supportQuotientOrdinary_existsUnique`
-- `Sheaf.AlgebraicGeometry.SupportedProductQuotientModel::AlgebraicGeometry.ProEtale.supportQuotientOrdinaryIso` (line 305), chosen from `AlgebraicGeometry.ProEtale.supportQuotientOrdinary_existsUnique`
+- `Sheaf.AlgebraicGeometry.SupportedProductQuotientModel::AlgebraicGeometry.Etale.supportQuotientOrdinaryIso` (line 121), chosen from `AlgebraicGeometry.Etale.supportQuotientOrdinary_existsUnique`
+- `Sheaf.AlgebraicGeometry.SupportedProductQuotientModel::AlgebraicGeometry.ProEtale.supportQuotientOrdinaryIso` (line 308), chosen from `AlgebraicGeometry.ProEtale.supportQuotientOrdinary_existsUnique`
 - `Sheaf.AlgebraicGeometry.VaryingRingOperations::AlgebraicGeometry.ProEtale.VaryingRing.moduleEvalG` (line 433), chosen from `AlgebraicGeometry.ProEtale.VaryingRing.moduleEvalG_existsUnique`
 - `Sheaf.AlgebraicGeometry.VaryingRingOperations::AlgebraicGeometry.ProEtale.VaryingRing.moduleEvalP` (line 410), chosen from `AlgebraicGeometry.ProEtale.VaryingRing.moduleEvalP_existsUnique`
 - `Sheaf.AlgebraicGeometry.VaryingRingOperations::AlgebraicGeometry.ProEtale.VaryingRing.modulePComp` (line 252), chosen from `AlgebraicGeometry.ProEtale.VaryingRing.modulePComp_existsUnique`
 - `Sheaf.AlgebraicGeometry.VaryingRingOperations::AlgebraicGeometry.ProEtale.VaryingRing.modulePId` (line 291), chosen from `AlgebraicGeometry.ProEtale.VaryingRing.modulePId_existsUnique`
 - `Sheaf.AlgebraicGeometry.VectorBundleIntegration::AlgebraicGeometry.Etale.vectorIntegrationGluing` (line 321), chosen from `AlgebraicGeometry.Etale.existsUnique_vectorIntegrationGluing`
-- `Sheaf.CategoryTheory.CoefficientBidualTriangles::CategoryTheory.CoefficientBidualTriangles.canonicalCommShift` (line 192), chosen from `CategoryTheory.CoefficientBidualTriangles.compatibility`
-- `Sheaf.CategoryTheory.CoefficientBidualTriangles::CategoryTheory.CoefficientBidualTriangles.coefficientLinear` (line 319), chosen from `CategoryTheory.CoefficientBidualTriangles.coefficientLinear_existsUnique`
-- `Sheaf.CategoryTheory.CoefficientBidualTriangles::CategoryTheory.CoefficientBidualTriangles.signedHomShift` (line 114), chosen from `CategoryTheory.SignedDoubleHomCone.comparison`
+- `Sheaf.CategoryTheory.CoefficientBidualTriangles::CategoryTheory.CoefficientBidualTriangles.canonicalCommShift` (line 198), chosen from `CategoryTheory.CoefficientBidualTriangles.compatibility`
+- `Sheaf.CategoryTheory.CoefficientBidualTriangles::CategoryTheory.CoefficientBidualTriangles.coefficientLinear` (line 325), chosen from `CategoryTheory.CoefficientBidualTriangles.coefficientLinear_existsUnique`
+- `Sheaf.CategoryTheory.CoefficientBidualTriangles::CategoryTheory.CoefficientBidualTriangles.signedHomShift` (line 120), chosen from `CategoryTheory.SignedDoubleHomCone.comparison`
 - `Sheaf.CategoryTheory.DerivedMorphismPresheaf::CategoryTheory.derivedLocalHomSheafComp` (line 254), chosen from `CategoryTheory.derivedLocalHomSheafComp_exists`
 - `Sheaf.CategoryTheory.DerivedMorphismPresheaf::CategoryTheory.derivedLocalIsoSheafComp` (line 288), chosen from `CategoryTheory.derivedLocalIsoSheafComp_exists`
-- `Sheaf.CategoryTheory.InjectiveTargetHomSymbol::CategoryTheory.FilteredObject.shiftedGradedMap` (line 88), chosen from `CategoryTheory.FilteredObject.exists_shiftedGradedMap`
-- `Sheaf.CategoryTheory.InjectiveTargetHomSymbol::CategoryTheory.FilteredObject.shiftedGradedMapHom` (line 110), chosen from `CategoryTheory.FilteredObject.exists_shiftedGradedMapHom`
-- `Sheaf.CategoryTheory.LocalizationInverseImageCoherence::CategoryTheory.scalarLocalizationUnit` (line 132), chosen from `CategoryTheory.existsUnique_scalarLocalizationUnit`
-- `Sheaf.CategoryTheory.LocalizedModuleExactForSystems::SheafOfModules.localizedSystemAdjunction` (line 137), chosen from `SheafOfModules.localizedSystemAdjunction_existsUnique`
+- `Sheaf.CategoryTheory.InjectiveTargetHomSymbol::CategoryTheory.FilteredObject.shiftedGradedMap` (line 89), chosen from `CategoryTheory.FilteredObject.exists_shiftedGradedMap`
+- `Sheaf.CategoryTheory.InjectiveTargetHomSymbol::CategoryTheory.FilteredObject.shiftedGradedMapHom` (line 111), chosen from `CategoryTheory.FilteredObject.exists_shiftedGradedMapHom`
+- `Sheaf.CategoryTheory.LocalizationInverseImageCoherence::CategoryTheory.scalarLocalizationUnit` (line 134), chosen from `CategoryTheory.existsUnique_scalarLocalizationUnit`
+- `Sheaf.CategoryTheory.LocalizedModuleExactForSystems::SheafOfModules.localizedSystemAdjunction` (line 142), chosen from `SheafOfModules.localizedSystemAdjunction_existsUnique`
 - `Sheaf.CategoryTheory.LocalizedModuleExactIndependent::SheafOfModules.localizedModuleAdjunctionIndependent` (line 143), chosen from `SheafOfModules.localizedModuleAdjunctionIndependent_existsUnique`
 - `Sheaf.CategoryTheory.RightDerivedFunctorOfQuasiIsoResolutionsExact::CategoryTheory.Functor.rightDerivedFunctorOfQuasiIsoResolutionsIsoMapDerivedCategory` (line 47), chosen from `CategoryTheory.Functor.rightDerivedFunctorOfQuasiIsoResolutions_unique`
-- `Sheaf.CategoryTheory.RingedSiteDualityMaps::CategoryTheory.ringedSiteOrdinaryBidual` (line 333), chosen from `CategoryTheory.ringedSiteOrdinaryBidual_existsUnique`
-- `Sheaf.CategoryTheory.RingedSiteDualityMaps::CategoryTheory.ringedSiteOrdinaryEvaluation` (line 383), chosen from `CategoryTheory.ringedSiteOrdinaryEvaluation_existsUnique`
+- `Sheaf.CategoryTheory.RingedSiteDualityMaps::CategoryTheory.ringedSiteOrdinaryBidual` (line 347), chosen from `CategoryTheory.ringedSiteOrdinaryBidual_existsUnique`
+- `Sheaf.CategoryTheory.RingedSiteDualityMaps::CategoryTheory.ringedSiteOrdinaryEvaluation` (line 397), chosen from `CategoryTheory.ringedSiteOrdinaryEvaluation_existsUnique`
 - `Sheaf.CategoryTheory.RingedSiteLocalizationCech::CategoryTheory.localization_fraction_iso` (line 68), chosen from `ModuleCat.localization_away_colimit`
-- `Sheaf.CategoryTheory.SemilinearScalarLocalization::CategoryTheory.ScalarLocalization.extensionHom` (line 87), chosen from `CategoryTheory.ScalarLocalization.existsUnique_semilinearHom`
-- `Sheaf.CategoryTheory.SitePointFibre::CategoryTheory.GrothendieckTopology.sitePointFiberComparison` (line 201), chosen from `CategoryTheory.GrothendieckTopology.site_point_fibre`
-- `Sheaf.CategoryTheory.SitePointFibre::CategoryTheory.GrothendieckTopology.sitePointInitialFiberIso` (line 220), chosen from `CategoryTheory.GrothendieckTopology.site_point_fibre`
-- `Sheaf.CategoryTheory.StageSystemFunctorDescent::CategoryTheory.StageSystem.coefficientPairFunctor` (line 84), chosen from `CategoryTheory.StageSystem.coefficientPairFunctor_exists`
-- `Sheaf.CategoryTheory.SystemLevelLeftExtension::SheafOfModules.strictRingSystemAbelian` (line 185), chosen from `SheafOfModules.strictRingSystem_abelian_exists`
+- `Sheaf.CategoryTheory.SemilinearScalarLocalization::CategoryTheory.ScalarLocalization.extensionHom` (line 88), chosen from `CategoryTheory.ScalarLocalization.existsUnique_semilinearHom`
+- `Sheaf.CategoryTheory.SitePointFibre::CategoryTheory.GrothendieckTopology.sitePointFiberComparison` (line 204), chosen from `CategoryTheory.GrothendieckTopology.site_point_fibre`
+- `Sheaf.CategoryTheory.SitePointFibre::CategoryTheory.GrothendieckTopology.sitePointInitialFiberIso` (line 223), chosen from `CategoryTheory.GrothendieckTopology.site_point_fibre`
+- `Sheaf.CategoryTheory.StageSystemFunctorDescent::CategoryTheory.StageSystem.coefficientPairFunctor` (line 85), chosen from `CategoryTheory.StageSystem.coefficientPairFunctor_exists`
+- `Sheaf.CategoryTheory.SystemLevelLeftExtension::SheafOfModules.strictRingSystemAbelian` (line 186), chosen from `SheafOfModules.strictRingSystem_abelian_exists`
 - `Sheaf.CategoryTheory.TorsionSheafConstantModule::CategoryTheory.torsionSheafModuleStructure` (line 65), chosen from `CategoryTheory.existsUnique_constantZModSheafModuleStructure`
-- `Sheaf.Paper.AdicClosedConstructible::WeilConjectures.AdicClosed.transpose` (line 163), chosen from `WeilConjectures.AdicClosed.transpose_existsUnique`
+- `Sheaf.Paper.AdicClosedConstructible::WeilConjectures.AdicClosed.transpose` (line 165), chosen from `WeilConjectures.AdicClosed.transpose_existsUnique`
 - `Sheaf.Paper.AdicCoefficientDatum::AlgebraicGeometry.Scheme.AdicCoefficients.finiteRingComparison` (line 187), chosen from `AlgebraicGeometry.Scheme.AdicCoefficients.finiteRingComparison_exists`
 - `Sheaf.Paper.AdicCoefficientDatum::AlgebraicGeometry.Scheme.coherenceReductionTowerCounit` (line 815), chosen from `AlgebraicGeometry.Scheme.completedReductionTower_exists`
 - `Sheaf.Paper.AdicCoefficientDatum::AlgebraicGeometry.Scheme.completedReductionDerivedNormalization` (line 794), chosen from `AlgebraicGeometry.Scheme.completedReductionDerivedNormalization_exists`
@@ -179,32 +179,32 @@ Definitions with undetermined data (class-1 exceptions in `coord/hollow-definiti
 - `Sheaf.Paper.AdicCoefficientDatumCompleted::AlgebraicGeometry.Scheme.adicDatumQuotients` (line 155), chosen from `AlgebraicGeometry.Scheme.adicDatumQuotients_exists`
 - `Sheaf.Paper.AdicCoefficientDatumCompleted::AlgebraicGeometry.Scheme.adicDatumScalar` (line 140), chosen from `AlgebraicGeometry.Scheme.adicDatumScalar_exists`
 - `Sheaf.Paper.AdicCoefficientDatumCompleted::AlgebraicGeometry.Scheme.adicDatumTensorSection` (line 230), chosen from `SheafOfModules.derivedChangeOfRingsIndependentCoefficients`
-- `Sheaf.Paper.AdicConstructibleFiniteReductions::AlgebraicGeometry.Scheme.adicFiniteChangeComp` (line 171), chosen from `AlgebraicGeometry.Scheme.adicFiniteChangeComp_existsUnique`
-- `Sheaf.Paper.AdicConstructibleFiniteReductions::AlgebraicGeometry.Scheme.adicFiniteComparison` (line 338), chosen from `AlgebraicGeometry.Scheme.adicFiniteComparison_existsUnique`
-- `Sheaf.Paper.AdicConstructibleFiniteReductions::AlgebraicGeometry.Scheme.adicFiniteComparisonData` (line 207), chosen from `CategoryTheory.ConstantCompletion.inverseImageData_exists`
-- `Sheaf.Paper.AdicConstructibleFiniteReductions::AlgebraicGeometry.Scheme.adicFiniteExtendComp` (line 197), chosen from `AlgebraicGeometry.Scheme.adicFiniteExtendComp_existsUnique`
-- `Sheaf.Paper.AdicConstructibleFiniteReductions::AlgebraicGeometry.Scheme.adicFiniteOrdinaryComparison` (line 291), chosen from `AlgebraicGeometry.Scheme.adicFiniteOrdinaryComparison_existsUnique`
-- `Sheaf.Paper.AdicConstructibleFiniteReductions::AlgebraicGeometry.Scheme.adicFiniteOrdinaryUnit` (line 82), chosen from `AlgebraicGeometry.Scheme.adicFiniteOrdinaryUnit_existsUnique`
-- `Sheaf.Paper.AdicConstructibleFiniteReductions::AlgebraicGeometry.Scheme.adicFiniteResComp` (line 132), chosen from `AlgebraicGeometry.Scheme.adicFiniteResComp_existsUnique`
-- `Sheaf.Paper.AdicConstructibleFiniteReductions::AlgebraicGeometry.Scheme.adicFiniteUnit` (line 113), chosen from `AlgebraicGeometry.Scheme.adicFiniteUnit_existsUnique`
-- `Sheaf.Paper.AdicHeartIntrinsicFibres::WeilConjectures.sfAdicRationalFiber` (line 55), chosen from `WeilConjectures.sfAdicRationalFiber_existsUnique`
+- `Sheaf.Paper.AdicConstructibleFiniteReductions::AlgebraicGeometry.Scheme.adicFiniteChangeComp` (line 180), chosen from `AlgebraicGeometry.Scheme.adicFiniteChangeComp_existsUnique`
+- `Sheaf.Paper.AdicConstructibleFiniteReductions::AlgebraicGeometry.Scheme.adicFiniteComparison` (line 347), chosen from `AlgebraicGeometry.Scheme.adicFiniteComparison_existsUnique`
+- `Sheaf.Paper.AdicConstructibleFiniteReductions::AlgebraicGeometry.Scheme.adicFiniteComparisonData` (line 216), chosen from `CategoryTheory.ConstantCompletion.inverseImageData_exists`
+- `Sheaf.Paper.AdicConstructibleFiniteReductions::AlgebraicGeometry.Scheme.adicFiniteExtendComp` (line 206), chosen from `AlgebraicGeometry.Scheme.adicFiniteExtendComp_existsUnique`
+- `Sheaf.Paper.AdicConstructibleFiniteReductions::AlgebraicGeometry.Scheme.adicFiniteOrdinaryComparison` (line 300), chosen from `AlgebraicGeometry.Scheme.adicFiniteOrdinaryComparison_existsUnique`
+- `Sheaf.Paper.AdicConstructibleFiniteReductions::AlgebraicGeometry.Scheme.adicFiniteOrdinaryUnit` (line 91), chosen from `AlgebraicGeometry.Scheme.adicFiniteOrdinaryUnit_existsUnique`
+- `Sheaf.Paper.AdicConstructibleFiniteReductions::AlgebraicGeometry.Scheme.adicFiniteResComp` (line 141), chosen from `AlgebraicGeometry.Scheme.adicFiniteResComp_existsUnique`
+- `Sheaf.Paper.AdicConstructibleFiniteReductions::AlgebraicGeometry.Scheme.adicFiniteUnit` (line 122), chosen from `AlgebraicGeometry.Scheme.adicFiniteUnit_existsUnique`
+- `Sheaf.Paper.AdicHeartIntrinsicFibres::WeilConjectures.sfAdicRationalFiber` (line 84), chosen from `WeilConjectures.sfAdicRationalFiber_existsUnique`
 - `Sheaf.Paper.AdicHeartPullbackFibres::AlgebraicGeometry.Scheme.PerAdic.commonT` (line 453), chosen from `AlgebraicGeometry.Scheme.PerAdic.commonT_existsUnique`
 - `Sheaf.Paper.AdicHeartPullbackFibres::AlgebraicGeometry.Scheme.PerAdic.fiber` (line 272), chosen from `AlgebraicGeometry.Scheme.PerAdic.fiber_existsUnique`
 - `Sheaf.Paper.AdicHeartPullbackFibres::AlgebraicGeometry.Scheme.PerAdic.pullFamily` (line 479), chosen from `AlgebraicGeometry.Scheme.PerAdic.pullFamily_existsUnique`
-- `Sheaf.Paper.AdicMiddleExtensionConstructible::WeilConjectures.adicMiddleExtensionWeilIso` (line 791), chosen from `WeilConjectures.adicMiddleExtensionWeilIso_existsUnique`
-- `Sheaf.Paper.AdicMiddleExtensionConstructible::WeilConjectures.adicPullAugmentation` (line 100), chosen from `WeilConjectures.adicPullAugmentation_existsUnique`
-- `Sheaf.Paper.AdicMiddleExtensionConstructible::WeilConjectures.adicPullComparison` (line 128), chosen from `WeilConjectures.adicPullComparison_existsUnique`
-- `Sheaf.Paper.AdicMiddleExtensionConstructible::WeilConjectures.adicSquareComplex` (line 198), chosen from `WeilConjectures.adicSquareComplex_existsUnique`
-- `Sheaf.Paper.AdicMiddleExtensionConstructible::WeilConjectures.adicSquareDerived` (line 229), chosen from `WeilConjectures.adicSquareDerived_existsUnique`
-- `Sheaf.Paper.AdicMiddleExtensionConstructible::WeilConjectures.adicSquarePush` (line 162), chosen from `WeilConjectures.adicSquarePush_existsUnique`
-- `Sheaf.Paper.AdicPullbackPresentationTransport::AlgebraicGeometry.Scheme.adicPresentationEvaluationIso` (line 313), chosen from `AlgebraicGeometry.Scheme.adicPresentationEvaluationIso_exists`
-- `Sheaf.Paper.AdicResidueLissePerfectLift::AlgebraicGeometry.Scheme.adicResidueComparisonData` (line 75), chosen from `CategoryTheory.ConstantCompletion.inverseImageData_exists`
-- `Sheaf.Paper.AdicSmoothDualizingComplexes::WeilConjectures.AdicSmoothDualizing.etalePowerComparison` (line 246), chosen from `WeilConjectures.AdicSmoothDualizing.existsUnique_etalePowerPresentation`
-- `Sheaf.Paper.AdicSmoothDualizingComplexes::WeilConjectures.AdicSmoothDualizing.etalePowerStep` (line 153), chosen from `WeilConjectures.AdicSmoothDualizing.existsUnique_etalePowerPositive`, `WeilConjectures.AdicSmoothDualizing.existsUnique_etalePowerZero`
-- `Sheaf.Paper.AdicSmoothDualizingComplexes::WeilConjectures.AdicSmoothDualizing.finiteRealization` (line 309), chosen from `WeilConjectures.AdicSmoothDualizing.existsUnique_finiteRealization`
-- `Sheaf.Paper.AdicSmoothDualizingComplexes::WeilConjectures.AdicSmoothDualizing.integralIdentification` (line 566), chosen from `WeilConjectures.AdicSmoothDualizing.existsUnique_integralIdentification`
-- `Sheaf.Paper.AdicSmoothDualizingComplexes::WeilConjectures.AdicSmoothDualizing.lineProjection` (line 103), chosen from `WeilConjectures.AdicSmoothDualizing.existsUnique_lineProjection`
-- `Sheaf.Paper.AdicSmoothDualizingComplexes::WeilConjectures.AdicSmoothDualizing.rootComparison` (line 272), chosen from `WeilConjectures.AdicSmoothDualizing.existsUnique_rootComparison`
+- `Sheaf.Paper.AdicMiddleExtensionConstructible::WeilConjectures.adicMiddleExtensionWeilIso` (line 793), chosen from `WeilConjectures.adicMiddleExtensionWeilIso_existsUnique`
+- `Sheaf.Paper.AdicMiddleExtensionConstructible::WeilConjectures.adicPullAugmentation` (line 102), chosen from `WeilConjectures.adicPullAugmentation_existsUnique`
+- `Sheaf.Paper.AdicMiddleExtensionConstructible::WeilConjectures.adicPullComparison` (line 130), chosen from `WeilConjectures.adicPullComparison_existsUnique`
+- `Sheaf.Paper.AdicMiddleExtensionConstructible::WeilConjectures.adicSquareComplex` (line 200), chosen from `WeilConjectures.adicSquareComplex_existsUnique`
+- `Sheaf.Paper.AdicMiddleExtensionConstructible::WeilConjectures.adicSquareDerived` (line 231), chosen from `WeilConjectures.adicSquareDerived_existsUnique`
+- `Sheaf.Paper.AdicMiddleExtensionConstructible::WeilConjectures.adicSquarePush` (line 164), chosen from `WeilConjectures.adicSquarePush_existsUnique`
+- `Sheaf.Paper.AdicPullbackPresentationTransport::AlgebraicGeometry.Scheme.adicPresentationEvaluationIso` (line 319), chosen from `AlgebraicGeometry.Scheme.adicPresentationEvaluationIso_exists`
+- `Sheaf.Paper.AdicResidueLissePerfectLift::AlgebraicGeometry.Scheme.adicResidueComparisonData` (line 81), chosen from `CategoryTheory.ConstantCompletion.inverseImageData_exists`
+- `Sheaf.Paper.AdicSmoothDualizingComplexes::WeilConjectures.AdicSmoothDualizing.etalePowerComparison` (line 249), chosen from `WeilConjectures.AdicSmoothDualizing.existsUnique_etalePowerPresentation`
+- `Sheaf.Paper.AdicSmoothDualizingComplexes::WeilConjectures.AdicSmoothDualizing.etalePowerStep` (line 156), chosen from `WeilConjectures.AdicSmoothDualizing.existsUnique_etalePowerPositive`, `WeilConjectures.AdicSmoothDualizing.existsUnique_etalePowerZero`
+- `Sheaf.Paper.AdicSmoothDualizingComplexes::WeilConjectures.AdicSmoothDualizing.finiteRealization` (line 312), chosen from `WeilConjectures.AdicSmoothDualizing.existsUnique_finiteRealization`
+- `Sheaf.Paper.AdicSmoothDualizingComplexes::WeilConjectures.AdicSmoothDualizing.integralIdentification` (line 569), chosen from `WeilConjectures.AdicSmoothDualizing.existsUnique_integralIdentification`
+- `Sheaf.Paper.AdicSmoothDualizingComplexes::WeilConjectures.AdicSmoothDualizing.lineProjection` (line 106), chosen from `WeilConjectures.AdicSmoothDualizing.existsUnique_lineProjection`
+- `Sheaf.Paper.AdicSmoothDualizingComplexes::WeilConjectures.AdicSmoothDualizing.rootComparison` (line 275), chosen from `WeilConjectures.AdicSmoothDualizing.existsUnique_rootComparison`
 - `Sheaf.Paper.AlgebraicallyClosedCoefficients::WeilConjectures.AlgebraicallyClosedCoefficients.hasShift` (line 456), chosen from `WeilConjectures.AlgebraicallyClosedCoefficients.shift_exists`
 - `Sheaf.Paper.AlgebraicallyClosedCoefficients::WeilConjectures.AlgebraicallyClosedCoefficients.homCoordinates` (line 347), chosen from `WeilConjectures.AlgebraicallyClosedCoefficients.homCoordinates_existsUnique`
 - `Sheaf.Paper.AlgebraicallyClosedCoefficients::WeilConjectures.AlgebraicallyClosedCoefficients.inclusionCommShift` (line 465), chosen from `WeilConjectures.AlgebraicallyClosedCoefficients.shift_exists`
@@ -223,20 +223,20 @@ Definitions with undetermined data (class-1 exceptions in `coord/hollow-definiti
 - `Sheaf.Paper.BoundedConstructibleTower::AlgebraicGeometry.Scheme.pbcLevelConstantComparison` (line 383), chosen from `AlgebraicGeometry.Scheme.pbcLevelConstantComparison_exists`
 - `Sheaf.Paper.BoundedConstructibleTower::AlgebraicGeometry.Scheme.pbcRestrictComp` (line 230), chosen from `AlgebraicGeometry.Scheme.pbcRestrictComp_exists`
 - `Sheaf.Paper.BoundedConstructibleTower::AlgebraicGeometry.Scheme.pbcScalarAdjunction` (line 175), chosen from `AlgebraicGeometry.Scheme.pbcScalarAdjunction_exists`
-- `Sheaf.Paper.CartesianCoefficientTwists::AlgebraicGeometry.ProEtale.spCoefficientIso` (line 99), chosen from `AlgebraicGeometry.ProEtale.spCoefficientIso_existsUnique`
-- `Sheaf.Paper.CartesianCoefficientTwists::AlgebraicGeometry.ProEtale.spIntegralComparison` (line 130), chosen from `AlgebraicGeometry.ProEtale.spIntegralComparison_existsUnique`
-- `Sheaf.Paper.CartesianCoefficients::AlgebraicGeometry.ProEtale.cartesianTwistMaps` (line 363), chosen from `AlgebraicGeometry.ProEtale.cartesianTwistMaps_existsUnique`
+- `Sheaf.Paper.CartesianCoefficientTwists::AlgebraicGeometry.ProEtale.spCoefficientIso` (line 100), chosen from `AlgebraicGeometry.ProEtale.spCoefficientIso_existsUnique`
+- `Sheaf.Paper.CartesianCoefficientTwists::AlgebraicGeometry.ProEtale.spIntegralComparison` (line 131), chosen from `AlgebraicGeometry.ProEtale.spIntegralComparison_existsUnique`
+- `Sheaf.Paper.CartesianCoefficients::AlgebraicGeometry.ProEtale.cartesianTwistMaps` (line 365), chosen from `AlgebraicGeometry.ProEtale.cartesianTwistMaps_existsUnique`
 - `Sheaf.Paper.ClopenStrictSystemComparison::WeilConjectures.PurityFiniteSetting.clopenExceptionalInput` (line 298), chosen from `WeilConjectures.coefficientDerivedSystemEvaluationCalculus`
 - `Sheaf.Paper.ClopenStrictSystemComparison::WeilConjectures.PurityFiniteSetting.clopenExceptionalSystem` (line 281), chosen from `WeilConjectures.coefficientDerivedSystemEvaluationCalculus`
-- `Sheaf.Paper.CoefDerivedSystemEvaluationCalculus::WeilConjectures.coefficientEvaluationTensorIso` (line 474), chosen from `WeilConjectures.coefficientEvaluationTensorIso_exists`
-- `Sheaf.Paper.CoefDerivedSystemEvaluationCalculus::WeilConjectures.coefficientMappingProjection` (line 174), chosen from `WeilConjectures.coefficientMappingProjection_exists`
-- `Sheaf.Paper.CoefDerivedSystemEvaluationCalculus::WeilConjectures.coefficientOrdinaryQuotient` (line 273), chosen from `WeilConjectures.coefficientOrdinaryQuotient_exists`
-- `Sheaf.Paper.CoefDerivedSystemEvaluationCalculus::WeilConjectures.coefficientScalarTensorIso` (line 421), chosen from `WeilConjectures.coefficientScalarTensorIso_exists`
-- `Sheaf.Paper.CoefDerivedSystemEvaluationCalculus::WeilConjectures.coefficientSectionsLimitIso` (line 1202), chosen from `WeilConjectures.coefficientSectionsLimitIso_exists`
-- `Sheaf.Paper.CoefTowerCoaugmentation::WeilConjectures.CoefTower.finiteSectionsRestriction` (line 178), chosen from `WeilConjectures.CoefTower.finiteSectionsRestriction_existsUnique`
-- `Sheaf.Paper.CoefTowerCoaugmentation::WeilConjectures.CoefTower.reductionAdjunction` (line 282), chosen from `WeilConjectures.CoefTower.reductionAdjunction_existsUnique`
-- `Sheaf.Paper.CoefficientChangeDualizing::AlgebraicGeometry.Etale.CoefficientChangeDualizing.homComparison` (line 69), chosen from `AlgebraicGeometry.Etale.etaleHomComparison_thickLocus`
-- `Sheaf.Paper.CoefficientEvaluationDerivedLeftAdjoint::SheafOfModules.siteCoefficientTensorAdj` (line 265), chosen from `SheafOfModules.siteCoefficientTensorAdj_exists`
+- `Sheaf.Paper.CoefDerivedSystemEvaluationCalculus::WeilConjectures.coefficientEvaluationTensorIso` (line 480), chosen from `WeilConjectures.coefficientEvaluationTensorIso_exists`
+- `Sheaf.Paper.CoefDerivedSystemEvaluationCalculus::WeilConjectures.coefficientMappingProjection` (line 180), chosen from `WeilConjectures.coefficientMappingProjection_exists`
+- `Sheaf.Paper.CoefDerivedSystemEvaluationCalculus::WeilConjectures.coefficientOrdinaryQuotient` (line 279), chosen from `WeilConjectures.coefficientOrdinaryQuotient_exists`
+- `Sheaf.Paper.CoefDerivedSystemEvaluationCalculus::WeilConjectures.coefficientScalarTensorIso` (line 427), chosen from `WeilConjectures.coefficientScalarTensorIso_exists`
+- `Sheaf.Paper.CoefDerivedSystemEvaluationCalculus::WeilConjectures.coefficientSectionsLimitIso` (line 1208), chosen from `WeilConjectures.coefficientSectionsLimitIso_exists`
+- `Sheaf.Paper.CoefTowerCoaugmentation::WeilConjectures.CoefTower.finiteSectionsRestriction` (line 181), chosen from `WeilConjectures.CoefTower.finiteSectionsRestriction_existsUnique`
+- `Sheaf.Paper.CoefTowerCoaugmentation::WeilConjectures.CoefTower.reductionAdjunction` (line 285), chosen from `WeilConjectures.CoefTower.reductionAdjunction_existsUnique`
+- `Sheaf.Paper.CoefficientChangeDualizing::AlgebraicGeometry.Etale.CoefficientChangeDualizing.homComparison` (line 70), chosen from `AlgebraicGeometry.Etale.etaleHomComparison_thickLocus`
+- `Sheaf.Paper.CoefficientEvaluationDerivedLeftAdjoint::SheafOfModules.siteCoefficientTensorAdj` (line 270), chosen from `SheafOfModules.siteCoefficientTensorAdj_exists`
 - `Sheaf.Paper.CoefficientHomZeroClass::WeilConjectures.coefficientHomZeroEquiv` (line 198), chosen from `WeilConjectures.coefficientHomZeroEquiv_exists`
 - `Sheaf.Paper.CoefficientRingedSequenceSite::WeilConjectures.coefficientConstantTowerProjection` (line 514), chosen from `WeilConjectures.coefficientConstantTowerProjection_exists`
 - `Sheaf.Paper.CoefficientRingedSequenceSite::WeilConjectures.coefficientSequenceRestriction` (line 385), chosen from `WeilConjectures.coefficientSequenceRestriction_exists`
@@ -247,13 +247,13 @@ Definitions with undetermined data (class-1 exceptions in `coord/hollow-definiti
 - `Sheaf.Paper.CoefficientTwistsDetailed::WeilConjectures.twistRationalOrdinaryComparison` (line 512), chosen from `WeilConjectures.twistRationalOrdinaryComparison_existsUnique`
 - `Sheaf.Paper.CoefficientTwistsDetailed::WeilConjectures.twistScalarMaps` (line 406), chosen from `WeilConjectures.twistScalarMaps_existsUnique`
 - `Sheaf.Paper.CoefficientTwistsDetailed::WeilConjectures.twistSheafScalarComparison` (line 458), chosen from `WeilConjectures.twistSheafScalarComparison_existsUnique`
-- `Sheaf.Paper.CommonStageCalculus::AlgebraicGeometry.Scheme.pbcRationalHasShift` (line 135), chosen from `AlgebraicGeometry.Scheme.pbcRationalShift_exists`
-- `Sheaf.Paper.CommonStageCalculus::AlgebraicGeometry.Scheme.pbcRationalizationCommShift` (line 168), chosen from `AlgebraicGeometry.Scheme.pbcRationalizationShift_exists`
-- `Sheaf.Paper.CommonStageCalculus::AlgebraicGeometry.Scheme.pbcScalarCommShift` (line 211), chosen from `AlgebraicGeometry.Scheme.pbcScalarShift_exists`
+- `Sheaf.Paper.CommonStageCalculus::AlgebraicGeometry.Scheme.pbcRationalHasShift` (line 136), chosen from `AlgebraicGeometry.Scheme.pbcRationalShift_exists`
+- `Sheaf.Paper.CommonStageCalculus::AlgebraicGeometry.Scheme.pbcRationalizationCommShift` (line 169), chosen from `AlgebraicGeometry.Scheme.pbcRationalizationShift_exists`
+- `Sheaf.Paper.CommonStageCalculus::AlgebraicGeometry.Scheme.pbcScalarCommShift` (line 212), chosen from `AlgebraicGeometry.Scheme.pbcScalarShift_exists`
 - `Sheaf.Paper.CommonStageConstituentNonexceptional::WeilConjectures.sfFourierCharacterScale` (line 68), chosen from `WeilConjectures.sfFourierCharacterScale_existsUnique`
 - `Sheaf.Paper.CompactSupportFiniteAction::WeilConjectures.sfCompactSupportFiniteIntegralFunctor` (line 65), chosen from `WeilConjectures.sfCompactSupportFiniteRealization`
-- `Sheaf.Paper.CompactSupportStaircaseExpansion::AlgebraicGeometry.Etale.compactSupportStaircaseInterchange` (line 42), chosen from `AlgebraicGeometry.Etale.unboundedProperOpenInterchange`
-- `Sheaf.Paper.CompleteCompactSupportProetale::AlgebraicGeometry.Scheme.cbcRestrictionUnit` (line 102), chosen from `AlgebraicGeometry.Scheme.cbcRestrictionUnit_existsUnique`
+- `Sheaf.Paper.CompactSupportStaircaseExpansion::AlgebraicGeometry.Etale.compactSupportStaircaseInterchange` (line 44), chosen from `AlgebraicGeometry.Etale.unboundedProperOpenInterchange`
+- `Sheaf.Paper.CompleteCompactSupportProetale::AlgebraicGeometry.Scheme.cbcRestrictionUnit` (line 109), chosen from `AlgebraicGeometry.Scheme.cbcRestrictionUnit_existsUnique`
 - `Sheaf.Paper.CompletedAdicCoefficientDatum::AlgebraicGeometry.Scheme.completedAdicBalance` (line 430), chosen from `AlgebraicGeometry.Scheme.completedAdicBalance_exists`
 - `Sheaf.Paper.CompletedAdicCoefficientDatum::AlgebraicGeometry.Scheme.completedAdicFiniteModuleStep` (line 197), chosen from `AlgebraicGeometry.Scheme.completedAdicFiniteModuleStep_exists`
 - `Sheaf.Paper.CompletedAdicCoefficientDatum::AlgebraicGeometry.Scheme.completedAdicReduction` (line 247), chosen from `AlgebraicGeometry.Scheme.completedAdicReduction_exists`
@@ -264,15 +264,15 @@ Definitions with undetermined data (class-1 exceptions in `coord/hollow-definiti
 - `Sheaf.Paper.CompletedCoefficientPresentationTransport::WeilConjectures.purOrdinaryScalarModel` (line 221), chosen from `WeilConjectures.purOrdinaryScalarModel_existsUnique`
 - `Sheaf.Paper.CompletedCoefficientPresentationTransport::WeilConjectures.purRawTensorSection` (line 188), chosen from `WeilConjectures.integralOrdinaryScalarWitness`
 - `Sheaf.Paper.CompletedCoefficientPresentationTransport::WeilConjectures.purScalarModel` (line 264), chosen from `WeilConjectures.purScalarModel_existsUnique`
-- `Sheaf.Paper.CompletedConstantFiniteComplexRealization::AlgebraicGeometry.Scheme.completedConstantExtension` (line 99), chosen from `SheafOfModules.derivedChangeOfRingsIndependentCoefficients`
-- `Sheaf.Paper.CompletedConstantFiniteComplexRealization::AlgebraicGeometry.Scheme.completedConstantExtension_additive` (line 108), chosen from `SheafOfModules.derivedChangeOfRingsIndependentCoefficients`
-- `Sheaf.Paper.CompletedConstantSheafReduction::AlgebraicGeometry.Scheme.CompletedConstantReduction.finiteReduction` (line 287), chosen from `AlgebraicGeometry.Scheme.CompletedConstantReduction.finiteReduction_exists`
-- `Sheaf.Paper.CompletedConstantSheafReduction::AlgebraicGeometry.Scheme.CompletedConstantReduction.reduction` (line 115), chosen from `AlgebraicGeometry.Scheme.CompletedConstantReduction.reduction_exists`
-- `Sheaf.Paper.CompletedDirectImageLimits::AlgebraicGeometry.Scheme.AdicCoefficientDatum.reductionTowerPullbackIso` (line 339), chosen from `AlgebraicGeometry.Scheme.completedReductionPullbackIso_existsUnique`
-- `Sheaf.Paper.CompletedDirectImageLimits::AlgebraicGeometry.Scheme.AdicCoefficientDatum.towerPushEvaluation` (line 138), chosen from `AlgebraicGeometry.Scheme.AdicCoefficientDatum.towerPushEvaluation_existsUnique`
-- `Sheaf.Paper.CompletedExchangeCoherence::AlgebraicGeometry.Scheme.AdicCoefficientDatum.completedPullComp` (line 150), chosen from `AlgebraicGeometry.Scheme.AdicCoefficientDatum.completedPullComp_existsUnique`
-- `Sheaf.Paper.CompletedExchangeCoherence::AlgebraicGeometry.Scheme.AdicCoefficientDatum.completedPullId` (line 170), chosen from `AlgebraicGeometry.Scheme.AdicCoefficientDatum.completedPullId_existsUnique`
-- `Sheaf.Paper.CompletedExchangeCoherence::AlgebraicGeometry.Scheme.AdicCoefficientDatum.modulePushId` (line 106), chosen from `AlgebraicGeometry.Scheme.AdicCoefficientDatum.modulePushId_existsUnique`
+- `Sheaf.Paper.CompletedConstantFiniteComplexRealization::AlgebraicGeometry.Scheme.completedConstantExtension` (line 107), chosen from `SheafOfModules.derivedChangeOfRingsIndependentCoefficients`
+- `Sheaf.Paper.CompletedConstantFiniteComplexRealization::AlgebraicGeometry.Scheme.completedConstantExtension_additive` (line 116), chosen from `SheafOfModules.derivedChangeOfRingsIndependentCoefficients`
+- `Sheaf.Paper.CompletedConstantSheafReduction::AlgebraicGeometry.Scheme.CompletedConstantReduction.finiteReduction` (line 292), chosen from `AlgebraicGeometry.Scheme.CompletedConstantReduction.finiteReduction_exists`
+- `Sheaf.Paper.CompletedConstantSheafReduction::AlgebraicGeometry.Scheme.CompletedConstantReduction.reduction` (line 120), chosen from `AlgebraicGeometry.Scheme.CompletedConstantReduction.reduction_exists`
+- `Sheaf.Paper.CompletedDirectImageLimits::AlgebraicGeometry.Scheme.AdicCoefficientDatum.reductionTowerPullbackIso` (line 353), chosen from `AlgebraicGeometry.Scheme.completedReductionPullbackIso_existsUnique`
+- `Sheaf.Paper.CompletedDirectImageLimits::AlgebraicGeometry.Scheme.AdicCoefficientDatum.towerPushEvaluation` (line 152), chosen from `AlgebraicGeometry.Scheme.AdicCoefficientDatum.towerPushEvaluation_existsUnique`
+- `Sheaf.Paper.CompletedExchangeCoherence::AlgebraicGeometry.Scheme.AdicCoefficientDatum.completedPullComp` (line 155), chosen from `AlgebraicGeometry.Scheme.AdicCoefficientDatum.completedPullComp_existsUnique`
+- `Sheaf.Paper.CompletedExchangeCoherence::AlgebraicGeometry.Scheme.AdicCoefficientDatum.completedPullId` (line 175), chosen from `AlgebraicGeometry.Scheme.AdicCoefficientDatum.completedPullId_existsUnique`
+- `Sheaf.Paper.CompletedExchangeCoherence::AlgebraicGeometry.Scheme.AdicCoefficientDatum.modulePushId` (line 111), chosen from `AlgebraicGeometry.Scheme.AdicCoefficientDatum.modulePushId_existsUnique`
 - `Sheaf.Paper.CompletedExtensionZeroComparison::AlgebraicGeometry.Scheme.cbcCompletedExchange` (line 532), chosen from `AlgebraicGeometry.Scheme.cbcCompletedExchange_exists`
 - `Sheaf.Paper.CompletedExtensionZeroComparison::AlgebraicGeometry.Scheme.cbcCompletedRestrictionMap` (line 336), chosen from `AlgebraicGeometry.Scheme.cbcCompletedRestrictionMap_exists`
 - `Sheaf.Paper.CompletedExtensionZeroComparison::AlgebraicGeometry.Scheme.cbcCompletedSliceMap` (line 215), chosen from `AlgebraicGeometry.Scheme.cbcCompletedSliceMap_exists`
@@ -282,13 +282,13 @@ Definitions with undetermined data (class-1 exceptions in `coord/hollow-definiti
 - `Sheaf.Paper.CompletedExtensionZeroComparison::AlgebraicGeometry.Scheme.cbcModulePullbackAdjunction` (line 117), chosen from `AlgebraicGeometry.Scheme.cbcModulePullbackAdjunction_exists`
 - `Sheaf.Paper.CompletedExtensionZeroComparison::AlgebraicGeometry.Scheme.cbcOpenAdjunction` (line 380), chosen from `AlgebraicGeometry.Scheme.cbcOpenAdjunction_exists`
 - `Sheaf.Paper.CompletedExtensionZeroComparison::AlgebraicGeometry.Scheme.cbcRightExchange` (line 409), chosen from `AlgebraicGeometry.Scheme.cbcRightExchange_exists`
-- `Sheaf.Paper.CompletedOpenExchangeTransport::AlgebraicGeometry.Scheme.cbcDatumOrdinaryTransport` (line 171), chosen from `AlgebraicGeometry.Scheme.cbcDatumOrdinaryTransport_exists`
-- `Sheaf.Paper.CompletedOpenExchangeTransport::AlgebraicGeometry.Scheme.cbcDatumTowerTransport` (line 193), chosen from `AlgebraicGeometry.Scheme.cbcDatumTowerTransport_exists`
-- `Sheaf.Paper.CompletedPullbackReduction::AlgebraicGeometry.Scheme.completedReductionFiniteEvaluation` (line 322), chosen from `AlgebraicGeometry.Scheme.completedReductionFiniteEvaluation_exists`
-- `Sheaf.Paper.CompletedPullbackReduction::AlgebraicGeometry.Scheme.completedReductionOrdinaryComparison` (line 245), chosen from `AlgebraicGeometry.Scheme.completedReductionOrdinaryComparison_exists`
-- `Sheaf.Paper.CompletedPullbackReduction::AlgebraicGeometry.Scheme.completedReductionOrdinaryTransition` (line 381), chosen from `AlgebraicGeometry.Scheme.completedReductionOrdinaryTransition_exists`
-- `Sheaf.Paper.CompletedPullbackReduction::AlgebraicGeometry.Scheme.completedReductionRestrictionUnit` (line 455), chosen from `AlgebraicGeometry.Scheme.completedReductionOrdinaryRestrictionUnit_exists`
-- `Sheaf.Paper.CompletedPullbackReduction::AlgebraicGeometry.Scheme.completedReductionTargetTransition` (line 428), chosen from `AlgebraicGeometry.Scheme.completedReductionTargetTransition_exists`
+- `Sheaf.Paper.CompletedOpenExchangeTransport::AlgebraicGeometry.Scheme.cbcDatumOrdinaryTransport` (line 179), chosen from `AlgebraicGeometry.Scheme.cbcDatumOrdinaryTransport_exists`
+- `Sheaf.Paper.CompletedOpenExchangeTransport::AlgebraicGeometry.Scheme.cbcDatumTowerTransport` (line 201), chosen from `AlgebraicGeometry.Scheme.cbcDatumTowerTransport_exists`
+- `Sheaf.Paper.CompletedPullbackReduction::AlgebraicGeometry.Scheme.completedReductionFiniteEvaluation` (line 329), chosen from `AlgebraicGeometry.Scheme.completedReductionFiniteEvaluation_exists`
+- `Sheaf.Paper.CompletedPullbackReduction::AlgebraicGeometry.Scheme.completedReductionOrdinaryComparison` (line 252), chosen from `AlgebraicGeometry.Scheme.completedReductionOrdinaryComparison_exists`
+- `Sheaf.Paper.CompletedPullbackReduction::AlgebraicGeometry.Scheme.completedReductionOrdinaryTransition` (line 388), chosen from `AlgebraicGeometry.Scheme.completedReductionOrdinaryTransition_exists`
+- `Sheaf.Paper.CompletedPullbackReduction::AlgebraicGeometry.Scheme.completedReductionRestrictionUnit` (line 462), chosen from `AlgebraicGeometry.Scheme.completedReductionOrdinaryRestrictionUnit_exists`
+- `Sheaf.Paper.CompletedPullbackReduction::AlgebraicGeometry.Scheme.completedReductionTargetTransition` (line 435), chosen from `AlgebraicGeometry.Scheme.completedReductionTargetTransition_exists`
 - `Sheaf.Paper.CompletedPullbackTensorComparison::WeilConjectures.canonicalCommonStagePullbackTensor` (line 1376), chosen from `WeilConjectures.canonicalCommonStagePullbackTensor_existsUnique`
 - `Sheaf.Paper.CompletedPullbackTensorComparison::WeilConjectures.canonicalRationalPullbackTensor` (line 1305), chosen from `WeilConjectures.canonicalRationalPullbackTensor_existsUnique`
 - `Sheaf.Paper.CompletedPullbackTensorComparison::WeilConjectures.pullbackTensorCalculus` (line 88), chosen from `WeilConjectures.coefficientDerivedSystemEvaluationCalculus`
@@ -308,14 +308,14 @@ Definitions with undetermined data (class-1 exceptions in `coord/hollow-definiti
 - `Sheaf.Paper.CompletedPullbackTensorComparison::WeilConjectures.pullbackTensorSequenceRing` (line 129), chosen from `WeilConjectures.pullbackTensorSequenceRing_existsUnique`
 - `Sheaf.Paper.CompletedPullbackTensorComparison::WeilConjectures.pullbackTensorSystemComparison` (line 853), chosen from `WeilConjectures.pullbackTensorSystemComparison_existsUnique`
 - `Sheaf.Paper.CompletedPullbackTensorComparison::WeilConjectures.pullbackTensorTensorTower` (line 621), chosen from `WeilConjectures.pullbackTensorTensorTower_existsUnique`
-- `Sheaf.Paper.CompletedPullbackUnitTower::AlgebraicGeometry.Scheme.CompletedPullbackUnitTower.canonicalInverseImageData` (line 210), chosen from `AlgebraicGeometry.Scheme.CompletedPullbackUnitTower.canonicalInverseImageData_existsUnique`
-- `Sheaf.Paper.CompletedStalkFrobeniusReduction::WeilConjectures.CompletedStalkFrobenius.sectionsReduction` (line 173), chosen from `WeilConjectures.pointReductionUnitNormalization`
-- `Sheaf.Paper.CompletedStalkReparametrizationCoherence::WeilConjectures.CompletedStalk.rationalComparison` (line 506), chosen from `WeilConjectures.CompletedStalk.rationalComparison_existsUnique`
-- `Sheaf.Paper.CompletedStalkReparametrizationCoherence::WeilConjectures.CompletedStalk.rationalReparam` (line 534), chosen from `WeilConjectures.CompletedStalk.rationalReparam_existsUnique`
-- `Sheaf.Paper.CompletedStalkReparametrizationCoherence::WeilConjectures.CompletedStalk.reparam` (line 252), chosen from `WeilConjectures.CompletedStalk.reparam_existsUnique`
-- `Sheaf.Paper.CompletedStalkReparametrizationCoherence::WeilConjectures.CompletedStalk.sectionRestriction` (line 290), chosen from `WeilConjectures.CompletedStalk.sectionRestriction_existsUnique`
-- `Sheaf.Paper.CompletedStalkReparametrizationCoherence::WeilConjectures.CompletedStalk.sectionsRoos` (line 193), chosen from `WeilConjectures.CompletedStalk.sectionsRoos_existsUnique`
-- `Sheaf.Paper.CompletedStalkReparametrizationCoherence::WeilConjectures.CompletedStalk.towerReparam` (line 148), chosen from `WeilConjectures.CompletedStalk.towerReparam_existsUnique`
+- `Sheaf.Paper.CompletedPullbackUnitTower::AlgebraicGeometry.Scheme.CompletedPullbackUnitTower.canonicalInverseImageData` (line 212), chosen from `AlgebraicGeometry.Scheme.CompletedPullbackUnitTower.canonicalInverseImageData_existsUnique`
+- `Sheaf.Paper.CompletedStalkFrobeniusReduction::WeilConjectures.CompletedStalkFrobenius.sectionsReduction` (line 174), chosen from `WeilConjectures.pointReductionUnitNormalization`
+- `Sheaf.Paper.CompletedStalkReparametrizationCoherence::WeilConjectures.CompletedStalk.rationalComparison` (line 513), chosen from `WeilConjectures.CompletedStalk.rationalComparison_existsUnique`
+- `Sheaf.Paper.CompletedStalkReparametrizationCoherence::WeilConjectures.CompletedStalk.rationalReparam` (line 541), chosen from `WeilConjectures.CompletedStalk.rationalReparam_existsUnique`
+- `Sheaf.Paper.CompletedStalkReparametrizationCoherence::WeilConjectures.CompletedStalk.reparam` (line 259), chosen from `WeilConjectures.CompletedStalk.reparam_existsUnique`
+- `Sheaf.Paper.CompletedStalkReparametrizationCoherence::WeilConjectures.CompletedStalk.sectionRestriction` (line 297), chosen from `WeilConjectures.CompletedStalk.sectionRestriction_existsUnique`
+- `Sheaf.Paper.CompletedStalkReparametrizationCoherence::WeilConjectures.CompletedStalk.sectionsRoos` (line 200), chosen from `WeilConjectures.CompletedStalk.sectionsRoos_existsUnique`
+- `Sheaf.Paper.CompletedStalkReparametrizationCoherence::WeilConjectures.CompletedStalk.towerReparam` (line 155), chosen from `WeilConjectures.CompletedStalk.towerReparam_existsUnique`
 - `Sheaf.Paper.CompletedTowerDerivedLimitFunctor::AlgebraicGeometry.Scheme.completedConstantRlimUnit` (line 129), chosen from `AlgebraicGeometry.Scheme.completedConstantRlimUnit_exists`
 - `Sheaf.Paper.CompletedTowerDirectImage::AlgebraicGeometry.Scheme.completedDerivedRestrictionDirectImageIso` (line 293), chosen from `AlgebraicGeometry.Scheme.completedDerivedRestrictionDirectImageIso_exists`
 - `Sheaf.Paper.CompletedTowerDirectImage::AlgebraicGeometry.Scheme.completedRestrictionDirectImageIso` (line 231), chosen from `AlgebraicGeometry.Scheme.completedRestrictionDirectImageIso_exists`
@@ -339,69 +339,69 @@ Definitions with undetermined data (class-1 exceptions in `coord/hollow-definiti
 - `Sheaf.Paper.CompletionMateComparison::CategoryTheory.AdicSites.Site.finiteModuleAdjunction` (line 880), chosen from `CategoryTheory.AdicSites.Site.finiteModuleAdjunction_existsUnique`
 - `Sheaf.Paper.CompletionMateComparison::CategoryTheory.AdicSites.Site.reflectorAdjunction` (line 304), chosen from `CategoryTheory.AdicSites.Site.reflectorAdjunction_existsUnique`
 - `Sheaf.Paper.CompletionMateComparison::CategoryTheory.AdicSites.moduleSquare` (line 465), chosen from `CategoryTheory.AdicSites.moduleSquare_existsUnique`
-- `Sheaf.Paper.CompositeIntegrationCounit::WeilConjectures.PurityIntegration.etaleCompositeOperations` (line 331), chosen from `WeilConjectures.PurityIntegration.etaleCompositeOperations_existsUnique`
-- `Sheaf.Paper.CompositeIntegrationCounit::WeilConjectures.PurityIntegration.etaleMorphOperations` (line 264), chosen from `WeilConjectures.PurityIntegration.etaleMorphOperations_existsUnique`
-- `Sheaf.Paper.CompositeIntegrationCounit::WeilConjectures.PurityIntegration.nativeBraiding` (line 408), chosen from `WeilConjectures.PurityIntegration.nativeBraiding_existsUnique`
-- `Sheaf.Paper.CompositeIntegrationCounit::WeilConjectures.PurityIntegration.proEtaleCompositeOperations` (line 374), chosen from `WeilConjectures.PurityIntegration.proEtaleCompositeOperations_existsUnique`
-- `Sheaf.Paper.CompositeIntegrationCounit::WeilConjectures.PurityIntegration.proEtaleMorphOperations` (line 295), chosen from `WeilConjectures.PurityIntegration.proEtaleMorphOperations_existsUnique`
-- `Sheaf.Paper.CondensedTateRealization::AlgebraicGeometry.ProEtale.CondensedTateRealization.balancedPower` (line 456), chosen from `AlgebraicGeometry.ProEtale.CondensedTateRealization.balancedPower_existsUnique`
-- `Sheaf.Paper.CondensedTateRealization::AlgebraicGeometry.ProEtale.CondensedTateRealization.encodedBalancedPower` (line 484), chosen from `AlgebraicGeometry.ProEtale.CondensedTateRealization.encodedBalancedPower_existsUnique`
-- `Sheaf.Paper.CondensedTateRealization::AlgebraicGeometry.ProEtale.CondensedTateRealization.integralComparison` (line 198), chosen from `AlgebraicGeometry.ProEtale.CondensedTateRealization.integralComparison_existsUnique`
-- `Sheaf.Paper.CondensedZlReduction::AlgebraicGeometry.ProEtale.purZlConstantPullbackIso` (line 66), chosen from `AlgebraicGeometry.ProEtale.sfb_completed_coefficients`
-- `Sheaf.Paper.CondensedZlReduction::AlgebraicGeometry.ProEtale.purZlPointReduction` (line 44), chosen from `AlgebraicGeometry.ProEtale.sfb_completed_coefficients`
-- `Sheaf.Paper.CondensedZlReduction::AlgebraicGeometry.ProEtale.purZlResidueTowerIso` (line 54), chosen from `AlgebraicGeometry.ProEtale.sfb_completed_coefficients`
-- `Sheaf.Paper.ConnectedConstantH0::WeilConjectures.connectedIntegralImage` (line 134), chosen from `WeilConjectures.finiteFieldDatumPrimeUnit`, `WeilConjectures.sfIntegralDirectImage_constructible`
-- `Sheaf.Paper.ConnectedConstantH0::WeilConjectures.connectedIntegralProduct` (line 122), chosen from `WeilConjectures.finiteFieldDatumPrimeUnit`, `WeilConjectures.sfIntegralDirectImage_constructible`
-- `Sheaf.Paper.ConnectedConstantH0::WeilConjectures.oneIntegral` (line 290), chosen from `WeilConjectures.connectedH0_integral_unit_existsUnique`
-- `Sheaf.Paper.ConstantCoefficientScalarNormalization::WeilConjectures.constantCoefficientRationalScalarIso` (line 121), chosen from `WeilConjectures.constantCoefficientRationalScalarIso_existsUnique`
-- `Sheaf.Paper.ConstantCoefficientScalarNormalization::WeilConjectures.constantCoefficientScalarUnit` (line 65), chosen from `WeilConjectures.constantCoefficientScalarUnit_existsUnique`
-- `Sheaf.Paper.ConstantCompletionEquivalence::CategoryTheory.ConstantCompletion.derivedExtension` (line 302), chosen from `CategoryTheory.ConstantCompletion.derivedExtension_exists`
-- `Sheaf.Paper.ConstantCompletionEquivalence::CategoryTheory.ConstantCompletion.derivedPull` (line 1039), chosen from `CategoryTheory.ConstantCompletion.derivedPull_exists`
-- `Sheaf.Paper.ConstantCompletionEquivalence::CategoryTheory.ConstantCompletion.derivedPullComparison` (line 1105), chosen from `CategoryTheory.ConstantCompletion.derivedPullComparison_existsUnique`
-- `Sheaf.Paper.ConstantCompletionEquivalence::CategoryTheory.ConstantCompletion.finiteComparison` (line 345), chosen from `CategoryTheory.ConstantCompletion.finiteComparison_existsUnique`
-- `Sheaf.Paper.ConstantCompletionEquivalence::CategoryTheory.ConstantCompletion.finitePull` (line 1168), chosen from `CategoryTheory.ConstantCompletion.finitePull_existsUnique`
-- `Sheaf.Paper.ConstantCompletionEquivalence::CategoryTheory.ConstantCompletion.insertion` (line 919), chosen from `CategoryTheory.ConstantCompletion.insertion_existsUnique`
-- `Sheaf.Paper.ConstantCompletionEquivalence::CategoryTheory.ConstantCompletion.kernelIdeal` (line 194), chosen from `CategoryTheory.ConstantCompletion.kernelIdeal_existsUnique`
-- `Sheaf.Paper.ConstantCompletionEquivalence::CategoryTheory.ConstantCompletion.limitRestriction` (line 874), chosen from `CategoryTheory.ConstantCompletion.limitRestriction_existsUnique`
-- `Sheaf.Paper.ConstantCompletionEquivalence::CategoryTheory.ConstantCompletion.ordinaryFinitePull` (line 1133), chosen from `CategoryTheory.ConstantCompletion.ordinaryFinitePull_existsUnique`
-- `Sheaf.Paper.ConstantCompletionEquivalence::CategoryTheory.ConstantCompletion.ordinaryPullComparison` (line 1066), chosen from `CategoryTheory.ConstantCompletion.ordinaryPullComparison_existsUnique`
-- `Sheaf.Paper.ConstantCompletionEquivalence::CategoryTheory.ConstantCompletion.ordinaryUnit` (line 545), chosen from `CategoryTheory.ConstantCompletion.ordinaryUnit_existsUnique`
-- `Sheaf.Paper.ConstantCompletionEquivalence::CategoryTheory.ConstantCompletion.quotientPresentation` (line 598), chosen from `CategoryTheory.ConstantCompletion.quotientPresentation_exists`
-- `Sheaf.Paper.ConstantCompletionEquivalence::CategoryTheory.ConstantCompletion.reductionStep` (line 428), chosen from `CategoryTheory.ConstantCompletion.reductionStep_existsUnique`
-- `Sheaf.Paper.ConstantCompletionEquivalence::CategoryTheory.ConstantCompletion.reductionTowerComparison` (line 784), chosen from `CategoryTheory.ConstantCompletion.reductionTowerComparison_existsUnique`
-- `Sheaf.Paper.ConstantCompletionEquivalence::CategoryTheory.ConstantCompletion.reductionUnit` (line 466), chosen from `CategoryTheory.ConstantCompletion.reductionUnit_existsUnique`
-- `Sheaf.Paper.ConstantCompletionEquivalence::CategoryTheory.ConstantCompletion.strictLimit` (line 512), chosen from `CategoryTheory.ConstantCompletion.strictLimit_exists`
-- `Sheaf.Paper.ConstantRealizationDerivedScalarExtension::CategoryTheory.ConstantScalarRealization.restrictionComposition` (line 446), chosen from `CategoryTheory.ConstantScalarRealization.restrictionComposition_existsUnique`
-- `Sheaf.Paper.ConstantRealizationDerivedScalarExtension::CategoryTheory.ConstantScalarRealization.restrictionIso` (line 132), chosen from `CategoryTheory.ConstantScalarRealization.restrictionIso_existsUnique`
-- `Sheaf.Paper.ConstantTowerDirectImageNormalization::AlgebraicGeometry.ProEtale.StrictTower.ConstantNormalization.ordinaryAugmentation` (line 313), chosen from `AlgebraicGeometry.ProEtale.StrictTower.ConstantNormalization.ordinaryAugmentation_existsUnique`
-- `Sheaf.Paper.ConstantTowerDirectImageNormalization::AlgebraicGeometry.ProEtale.StrictTower.ConstantNormalization.ordinaryReductionPull` (line 367), chosen from `AlgebraicGeometry.ProEtale.StrictTower.ConstantNormalization.ordinaryReductionPull_existsUnique`
-- `Sheaf.Paper.ConstantTowerDirectImageNormalization::AlgebraicGeometry.ProEtale.StrictTower.ConstantNormalization.reductionModel` (line 285), chosen from `AlgebraicGeometry.ProEtale.StrictTower.ConstantNormalization.reduction_exists`
-- `Sheaf.Paper.ConstantTowerDirectImageNormalization::AlgebraicGeometry.ProEtale.StrictTower.ConstantNormalization.reductionModule` (line 241), chosen from `AlgebraicGeometry.ProEtale.StrictTower.ConstantNormalization.step_existsUnique`
-- `Sheaf.Paper.ConstantTowerDirectImageNormalization::AlgebraicGeometry.ProEtale.StrictTower.ConstantNormalization.reductionPull` (line 390), chosen from `AlgebraicGeometry.ProEtale.StrictTower.ConstantNormalization.reductionPull_existsUnique`
+- `Sheaf.Paper.CompositeIntegrationCounit::WeilConjectures.PurityIntegration.etaleCompositeOperations` (line 332), chosen from `WeilConjectures.PurityIntegration.etaleCompositeOperations_existsUnique`
+- `Sheaf.Paper.CompositeIntegrationCounit::WeilConjectures.PurityIntegration.etaleMorphOperations` (line 265), chosen from `WeilConjectures.PurityIntegration.etaleMorphOperations_existsUnique`
+- `Sheaf.Paper.CompositeIntegrationCounit::WeilConjectures.PurityIntegration.nativeBraiding` (line 409), chosen from `WeilConjectures.PurityIntegration.nativeBraiding_existsUnique`
+- `Sheaf.Paper.CompositeIntegrationCounit::WeilConjectures.PurityIntegration.proEtaleCompositeOperations` (line 375), chosen from `WeilConjectures.PurityIntegration.proEtaleCompositeOperations_existsUnique`
+- `Sheaf.Paper.CompositeIntegrationCounit::WeilConjectures.PurityIntegration.proEtaleMorphOperations` (line 296), chosen from `WeilConjectures.PurityIntegration.proEtaleMorphOperations_existsUnique`
+- `Sheaf.Paper.CondensedTateRealization::AlgebraicGeometry.ProEtale.CondensedTateRealization.balancedPower` (line 460), chosen from `AlgebraicGeometry.ProEtale.CondensedTateRealization.balancedPower_existsUnique`
+- `Sheaf.Paper.CondensedTateRealization::AlgebraicGeometry.ProEtale.CondensedTateRealization.encodedBalancedPower` (line 488), chosen from `AlgebraicGeometry.ProEtale.CondensedTateRealization.encodedBalancedPower_existsUnique`
+- `Sheaf.Paper.CondensedTateRealization::AlgebraicGeometry.ProEtale.CondensedTateRealization.integralComparison` (line 202), chosen from `AlgebraicGeometry.ProEtale.CondensedTateRealization.integralComparison_existsUnique`
+- `Sheaf.Paper.CondensedZlReduction::AlgebraicGeometry.ProEtale.purZlConstantPullbackIso` (line 67), chosen from `AlgebraicGeometry.ProEtale.sfb_completed_coefficients`
+- `Sheaf.Paper.CondensedZlReduction::AlgebraicGeometry.ProEtale.purZlPointReduction` (line 45), chosen from `AlgebraicGeometry.ProEtale.sfb_completed_coefficients`
+- `Sheaf.Paper.CondensedZlReduction::AlgebraicGeometry.ProEtale.purZlResidueTowerIso` (line 55), chosen from `AlgebraicGeometry.ProEtale.sfb_completed_coefficients`
+- `Sheaf.Paper.ConnectedConstantH0::WeilConjectures.connectedIntegralImage` (line 143), chosen from `WeilConjectures.finiteFieldDatumPrimeUnit`, `WeilConjectures.sfIntegralDirectImage_constructible`
+- `Sheaf.Paper.ConnectedConstantH0::WeilConjectures.connectedIntegralProduct` (line 131), chosen from `WeilConjectures.finiteFieldDatumPrimeUnit`, `WeilConjectures.sfIntegralDirectImage_constructible`
+- `Sheaf.Paper.ConnectedConstantH0::WeilConjectures.oneIntegral` (line 299), chosen from `WeilConjectures.connectedH0_integral_unit_existsUnique`
+- `Sheaf.Paper.ConstantCoefficientScalarNormalization::WeilConjectures.constantCoefficientRationalScalarIso` (line 138), chosen from `WeilConjectures.constantCoefficientRationalScalarIso_existsUnique`
+- `Sheaf.Paper.ConstantCoefficientScalarNormalization::WeilConjectures.constantCoefficientScalarUnit` (line 82), chosen from `WeilConjectures.constantCoefficientScalarUnit_existsUnique`
+- `Sheaf.Paper.ConstantCompletionEquivalence::CategoryTheory.ConstantCompletion.derivedExtension` (line 305), chosen from `CategoryTheory.ConstantCompletion.derivedExtension_exists`
+- `Sheaf.Paper.ConstantCompletionEquivalence::CategoryTheory.ConstantCompletion.derivedPull` (line 1042), chosen from `CategoryTheory.ConstantCompletion.derivedPull_exists`
+- `Sheaf.Paper.ConstantCompletionEquivalence::CategoryTheory.ConstantCompletion.derivedPullComparison` (line 1108), chosen from `CategoryTheory.ConstantCompletion.derivedPullComparison_existsUnique`
+- `Sheaf.Paper.ConstantCompletionEquivalence::CategoryTheory.ConstantCompletion.finiteComparison` (line 348), chosen from `CategoryTheory.ConstantCompletion.finiteComparison_existsUnique`
+- `Sheaf.Paper.ConstantCompletionEquivalence::CategoryTheory.ConstantCompletion.finitePull` (line 1171), chosen from `CategoryTheory.ConstantCompletion.finitePull_existsUnique`
+- `Sheaf.Paper.ConstantCompletionEquivalence::CategoryTheory.ConstantCompletion.insertion` (line 922), chosen from `CategoryTheory.ConstantCompletion.insertion_existsUnique`
+- `Sheaf.Paper.ConstantCompletionEquivalence::CategoryTheory.ConstantCompletion.kernelIdeal` (line 197), chosen from `CategoryTheory.ConstantCompletion.kernelIdeal_existsUnique`
+- `Sheaf.Paper.ConstantCompletionEquivalence::CategoryTheory.ConstantCompletion.limitRestriction` (line 877), chosen from `CategoryTheory.ConstantCompletion.limitRestriction_existsUnique`
+- `Sheaf.Paper.ConstantCompletionEquivalence::CategoryTheory.ConstantCompletion.ordinaryFinitePull` (line 1136), chosen from `CategoryTheory.ConstantCompletion.ordinaryFinitePull_existsUnique`
+- `Sheaf.Paper.ConstantCompletionEquivalence::CategoryTheory.ConstantCompletion.ordinaryPullComparison` (line 1069), chosen from `CategoryTheory.ConstantCompletion.ordinaryPullComparison_existsUnique`
+- `Sheaf.Paper.ConstantCompletionEquivalence::CategoryTheory.ConstantCompletion.ordinaryUnit` (line 548), chosen from `CategoryTheory.ConstantCompletion.ordinaryUnit_existsUnique`
+- `Sheaf.Paper.ConstantCompletionEquivalence::CategoryTheory.ConstantCompletion.quotientPresentation` (line 601), chosen from `CategoryTheory.ConstantCompletion.quotientPresentation_exists`
+- `Sheaf.Paper.ConstantCompletionEquivalence::CategoryTheory.ConstantCompletion.reductionStep` (line 431), chosen from `CategoryTheory.ConstantCompletion.reductionStep_existsUnique`
+- `Sheaf.Paper.ConstantCompletionEquivalence::CategoryTheory.ConstantCompletion.reductionTowerComparison` (line 787), chosen from `CategoryTheory.ConstantCompletion.reductionTowerComparison_existsUnique`
+- `Sheaf.Paper.ConstantCompletionEquivalence::CategoryTheory.ConstantCompletion.reductionUnit` (line 469), chosen from `CategoryTheory.ConstantCompletion.reductionUnit_existsUnique`
+- `Sheaf.Paper.ConstantCompletionEquivalence::CategoryTheory.ConstantCompletion.strictLimit` (line 515), chosen from `CategoryTheory.ConstantCompletion.strictLimit_exists`
+- `Sheaf.Paper.ConstantRealizationDerivedScalarExtension::CategoryTheory.ConstantScalarRealization.restrictionComposition` (line 455), chosen from `CategoryTheory.ConstantScalarRealization.restrictionComposition_existsUnique`
+- `Sheaf.Paper.ConstantRealizationDerivedScalarExtension::CategoryTheory.ConstantScalarRealization.restrictionIso` (line 141), chosen from `CategoryTheory.ConstantScalarRealization.restrictionIso_existsUnique`
+- `Sheaf.Paper.ConstantTowerDirectImageNormalization::AlgebraicGeometry.ProEtale.StrictTower.ConstantNormalization.ordinaryAugmentation` (line 315), chosen from `AlgebraicGeometry.ProEtale.StrictTower.ConstantNormalization.ordinaryAugmentation_existsUnique`
+- `Sheaf.Paper.ConstantTowerDirectImageNormalization::AlgebraicGeometry.ProEtale.StrictTower.ConstantNormalization.ordinaryReductionPull` (line 369), chosen from `AlgebraicGeometry.ProEtale.StrictTower.ConstantNormalization.ordinaryReductionPull_existsUnique`
+- `Sheaf.Paper.ConstantTowerDirectImageNormalization::AlgebraicGeometry.ProEtale.StrictTower.ConstantNormalization.reductionModel` (line 287), chosen from `AlgebraicGeometry.ProEtale.StrictTower.ConstantNormalization.reduction_exists`
+- `Sheaf.Paper.ConstantTowerDirectImageNormalization::AlgebraicGeometry.ProEtale.StrictTower.ConstantNormalization.reductionModule` (line 243), chosen from `AlgebraicGeometry.ProEtale.StrictTower.ConstantNormalization.step_existsUnique`
+- `Sheaf.Paper.ConstantTowerDirectImageNormalization::AlgebraicGeometry.ProEtale.StrictTower.ConstantNormalization.reductionPull` (line 392), chosen from `AlgebraicGeometry.ProEtale.StrictTower.ConstantNormalization.reductionPull_existsUnique`
 - `Sheaf.Paper.ConstantWeilStructure::WeilConjectures.constantWeilChainUnit` (line 168), chosen from `WeilConjectures.constantWeilChainUnit_existsUnique`
 - `Sheaf.Paper.ConstructibleHeart::WeilConjectures.algebraicallyClosedConstructibleStandardTStructure` (line 180), chosen from `WeilConjectures.algebraicallyClosedConstructibleStandardTStructure_existsUnique`
 - `Sheaf.Paper.ConstructibleHeart::WeilConjectures.rationalConstructibleStandardTStructure` (line 111), chosen from `WeilConjectures.rationalConstructibleStandardTStructure_existsUnique`
-- `Sheaf.Paper.ConstructiblePullbackTExact::WeilConjectures.constructiblePullbackResidueUnits` (line 158), chosen from `WeilConjectures.constructibleTruncations_exists`
-- `Sheaf.Paper.ContinuousRationalDerivedRealization::AlgebraicGeometry.Scheme.ContinuousRational.localizedT` (line 151), chosen from `AlgebraicGeometry.Scheme.pbc_localized_tstructure`
-- `Sheaf.Paper.CoprojectionCompositionMate::AlgebraicGeometry.ProEtale.coprojectionProEtaleTensorMate` (line 276), chosen from `AlgebraicGeometry.ProEtale.coprojectionProEtaleTensorMate_existsUnique`
-- `Sheaf.Paper.CoprojectionCompositionMate::AlgebraicGeometry.ProEtale.coprojectionStandingKappa` (line 373), chosen from `AlgebraicGeometry.ProEtale.coprojectionStandingKappa_existsUnique`
-- `Sheaf.Paper.DegreeZeroCompactSupportSections::WeilConjectures.a1DegreeZeroLisseInclusion` (line 337), chosen from `WeilConjectures.a1DegreeZeroLisseInclusion_existsUnique`
-- `Sheaf.Paper.DeltaRestriction::AlgebraicGeometry.ProEtale.deltaRestrictionTensorIso` (line 470), chosen from `AlgebraicGeometry.ProEtale.deltaRestrictionTensorComparison_normalized`
-- `Sheaf.Paper.DerivedAutomorphismHomEvaluation::WeilConjectures.podCommonClosed` (line 439), chosen from `WeilConjectures.podCommonClosed_existsUnique`
-- `Sheaf.Paper.DerivedAutomorphismHomEvaluation::WeilConjectures.podCompletedModuleComp` (line 1162), chosen from `WeilConjectures.podCompletedModuleComp_existsUnique`
-- `Sheaf.Paper.DerivedAutomorphismHomEvaluation::WeilConjectures.podDerivedHomShift` (line 1002), chosen from `WeilConjectures.podDerivedHomShift_existsUnique`
-- `Sheaf.Paper.DerivedAutomorphismHomEvaluation::WeilConjectures.podFiniteRestrictionOrdinary` (line 649), chosen from `WeilConjectures.podFiniteRestrictionOrdinary_existsUnique`
-- `Sheaf.Paper.DerivedAutomorphismHomEvaluation::WeilConjectures.podHomComplexShift` (line 930), chosen from `WeilConjectures.podHomComplexShift_existsUnique`
-- `Sheaf.Paper.DerivedAutomorphismHomEvaluation::WeilConjectures.podIntegralClosed` (line 257), chosen from `WeilConjectures.podIntegralClosed_existsUnique`
-- `Sheaf.Paper.DerivedAutomorphismHomEvaluation::WeilConjectures.podIntegralHomShift` (line 1536), chosen from `WeilConjectures.podIntegralHomShift_existsUnique`
-- `Sheaf.Paper.DerivedAutomorphismHomEvaluation::WeilConjectures.podIntegralPullbackShift` (line 1562), chosen from `WeilConjectures.podIntegralPullbackShift_existsUnique`
-- `Sheaf.Paper.DerivedAutomorphismHomEvaluation::WeilConjectures.podKInjectiveHomModel` (line 965), chosen from `WeilConjectures.podKInjectiveHomModel_existsUnique`
-- `Sheaf.Paper.DerivedAutomorphismHomEvaluation::WeilConjectures.podLimitReindexing` (line 759), chosen from `WeilConjectures.podLimitReindexing_existsUnique`
-- `Sheaf.Paper.DerivedAutomorphismHomEvaluation::WeilConjectures.podOrdinaryLimitReindexing` (line 709), chosen from `WeilConjectures.podOrdinaryLimitReindexing_existsUnique`
-- `Sheaf.Paper.DerivedAutomorphismHomEvaluation::WeilConjectures.podRationalClosed` (line 338), chosen from `WeilConjectures.podRationalClosed_existsUnique`
-- `Sheaf.Paper.DerivedCompleteKoszulReconstruction::CategoryTheory.koszulRlim` (line 51), chosen from `CategoryTheory.ringedStrictTowerHomotopyLimitIndependentCoefficients`
-- `Sheaf.Paper.DerivedInternalHomFilteredColimit::WeilConjectures.SfbHomFilteredColimit.comparison` (line 166), chosen from `WeilConjectures.SfbHomFilteredColimit.comparison_existsUnique`
-- `Sheaf.Paper.DerivedInternalHomFilteredColimit::WeilConjectures.SfbHomFilteredColimit.scalarComparison` (line 359), chosen from `WeilConjectures.SfbHomFilteredColimit.scalarComparison_existsUnique`
+- `Sheaf.Paper.ConstructiblePullbackTExact::WeilConjectures.constructiblePullbackResidueUnits` (line 161), chosen from `WeilConjectures.constructibleTruncations_exists`
+- `Sheaf.Paper.ContinuousRationalDerivedRealization::AlgebraicGeometry.Scheme.ContinuousRational.localizedT` (line 153), chosen from `AlgebraicGeometry.Scheme.pbc_localized_tstructure`
+- `Sheaf.Paper.CoprojectionCompositionMate::AlgebraicGeometry.ProEtale.coprojectionProEtaleTensorMate` (line 279), chosen from `AlgebraicGeometry.ProEtale.coprojectionProEtaleTensorMate_existsUnique`
+- `Sheaf.Paper.CoprojectionCompositionMate::AlgebraicGeometry.ProEtale.coprojectionStandingKappa` (line 376), chosen from `AlgebraicGeometry.ProEtale.coprojectionStandingKappa_existsUnique`
+- `Sheaf.Paper.DegreeZeroCompactSupportSections::WeilConjectures.a1DegreeZeroLisseInclusion` (line 361), chosen from `WeilConjectures.a1DegreeZeroLisseInclusion_existsUnique`
+- `Sheaf.Paper.DeltaRestriction::AlgebraicGeometry.ProEtale.deltaRestrictionTensorIso` (line 478), chosen from `AlgebraicGeometry.ProEtale.deltaRestrictionTensorComparison_normalized`
+- `Sheaf.Paper.DerivedAutomorphismHomEvaluation::WeilConjectures.podCommonClosed` (line 440), chosen from `WeilConjectures.podCommonClosed_existsUnique`
+- `Sheaf.Paper.DerivedAutomorphismHomEvaluation::WeilConjectures.podCompletedModuleComp` (line 1163), chosen from `WeilConjectures.podCompletedModuleComp_existsUnique`
+- `Sheaf.Paper.DerivedAutomorphismHomEvaluation::WeilConjectures.podDerivedHomShift` (line 1003), chosen from `WeilConjectures.podDerivedHomShift_existsUnique`
+- `Sheaf.Paper.DerivedAutomorphismHomEvaluation::WeilConjectures.podFiniteRestrictionOrdinary` (line 650), chosen from `WeilConjectures.podFiniteRestrictionOrdinary_existsUnique`
+- `Sheaf.Paper.DerivedAutomorphismHomEvaluation::WeilConjectures.podHomComplexShift` (line 931), chosen from `WeilConjectures.podHomComplexShift_existsUnique`
+- `Sheaf.Paper.DerivedAutomorphismHomEvaluation::WeilConjectures.podIntegralClosed` (line 258), chosen from `WeilConjectures.podIntegralClosed_existsUnique`
+- `Sheaf.Paper.DerivedAutomorphismHomEvaluation::WeilConjectures.podIntegralHomShift` (line 1537), chosen from `WeilConjectures.podIntegralHomShift_existsUnique`
+- `Sheaf.Paper.DerivedAutomorphismHomEvaluation::WeilConjectures.podIntegralPullbackShift` (line 1563), chosen from `WeilConjectures.podIntegralPullbackShift_existsUnique`
+- `Sheaf.Paper.DerivedAutomorphismHomEvaluation::WeilConjectures.podKInjectiveHomModel` (line 966), chosen from `WeilConjectures.podKInjectiveHomModel_existsUnique`
+- `Sheaf.Paper.DerivedAutomorphismHomEvaluation::WeilConjectures.podLimitReindexing` (line 760), chosen from `WeilConjectures.podLimitReindexing_existsUnique`
+- `Sheaf.Paper.DerivedAutomorphismHomEvaluation::WeilConjectures.podOrdinaryLimitReindexing` (line 710), chosen from `WeilConjectures.podOrdinaryLimitReindexing_existsUnique`
+- `Sheaf.Paper.DerivedAutomorphismHomEvaluation::WeilConjectures.podRationalClosed` (line 339), chosen from `WeilConjectures.podRationalClosed_existsUnique`
+- `Sheaf.Paper.DerivedCompleteKoszulReconstruction::CategoryTheory.koszulRlim` (line 53), chosen from `CategoryTheory.ringedStrictTowerHomotopyLimitIndependentCoefficients`
+- `Sheaf.Paper.DerivedInternalHomFilteredColimit::WeilConjectures.SfbHomFilteredColimit.comparison` (line 174), chosen from `WeilConjectures.SfbHomFilteredColimit.comparison_existsUnique`
+- `Sheaf.Paper.DerivedInternalHomFilteredColimit::WeilConjectures.SfbHomFilteredColimit.scalarComparison` (line 367), chosen from `WeilConjectures.SfbHomFilteredColimit.scalarComparison_existsUnique`
 - `Sheaf.Paper.DerivedPullbackTensorHom::WeilConjectures.commonStageDerivedInternalHom` (line 842), chosen from `WeilConjectures.commonStageDerivedInternalHom_existsUnique`
 - `Sheaf.Paper.DerivedPullbackTensorHom::WeilConjectures.commonStageDerivedPullback` (line 599), chosen from `WeilConjectures.commonStageDerivedPullback_existsUnique`
 - `Sheaf.Paper.DerivedPullbackTensorHom::WeilConjectures.commonStageDerivedTensor` (line 691), chosen from `WeilConjectures.commonStageDerivedTensor_existsUnique`
@@ -414,28 +414,28 @@ Definitions with undetermined data (class-1 exceptions in `coord/hollow-definiti
 - `Sheaf.Paper.DerivedPullbackTensorHom::WeilConjectures.rationalHomScalarComparison` (line 520), chosen from `WeilConjectures.rationalHomScalarComparison_existsUnique`
 - `Sheaf.Paper.DerivedPullbackTensorHom::WeilConjectures.rationalPullbackScalarComparison` (line 397), chosen from `WeilConjectures.rationalPullbackScalarComparison_existsUnique`
 - `Sheaf.Paper.DerivedPullbackTensorHom::WeilConjectures.rationalTensorScalarComparison` (line 426), chosen from `WeilConjectures.rationalTensorScalarComparison_existsUnique`
-- `Sheaf.Paper.DerivedPullbackTensorIso::WeilConjectures.pullbackTensorCommonAssociator` (line 478), chosen from `WeilConjectures.pullbackTensorCommonAssociator_existsUnique`
-- `Sheaf.Paper.DerivedPullbackTensorIso::WeilConjectures.pullbackTensorCommonBraiding` (line 512), chosen from `WeilConjectures.pullbackTensorCommonBraiding_existsUnique`
-- `Sheaf.Paper.DerivedPullbackTensorIso::WeilConjectures.pullbackTensorCommonComposition` (line 160), chosen from `WeilConjectures.pullbackTensorCommonComposition_existsUnique`
-- `Sheaf.Paper.DerivedPullbackTensorIso::WeilConjectures.pullbackTensorCommonLeftUnitor` (line 776), chosen from `WeilConjectures.pullbackTensorCommonLeftUnitor_existsUnique`
-- `Sheaf.Paper.DerivedPullbackTensorIso::WeilConjectures.pullbackTensorCommonRightUnitor` (line 818), chosen from `WeilConjectures.pullbackTensorCommonRightUnitor_existsUnique`
-- `Sheaf.Paper.DerivedPullbackTensorIso::WeilConjectures.pullbackTensorIntegralAssociator` (line 327), chosen from `WeilConjectures.pullbackTensorIntegralAssociator_existsUnique`
-- `Sheaf.Paper.DerivedPullbackTensorIso::WeilConjectures.pullbackTensorIntegralBraiding` (line 383), chosen from `WeilConjectures.pullbackTensorIntegralBraiding_existsUnique`
-- `Sheaf.Paper.DerivedPullbackTensorIso::WeilConjectures.pullbackTensorIntegralComposition` (line 86), chosen from `WeilConjectures.integralPullbackComposition`
-- `Sheaf.Paper.DerivedPullbackTensorIso::WeilConjectures.pullbackTensorIntegralLeftUnitor` (line 588), chosen from `WeilConjectures.pullbackTensorIntegralLeftUnitor_existsUnique`
-- `Sheaf.Paper.DerivedPullbackTensorIso::WeilConjectures.pullbackTensorIntegralRightUnitor` (line 638), chosen from `WeilConjectures.pullbackTensorIntegralRightUnitor_existsUnique`
-- `Sheaf.Paper.DerivedPullbackTensorIso::WeilConjectures.pullbackTensorRationalAssociator` (line 352), chosen from `WeilConjectures.pullbackTensorRationalAssociator_existsUnique`
-- `Sheaf.Paper.DerivedPullbackTensorIso::WeilConjectures.pullbackTensorRationalBraiding` (line 406), chosen from `WeilConjectures.pullbackTensorRationalBraiding_existsUnique`
-- `Sheaf.Paper.DerivedPullbackTensorIso::WeilConjectures.pullbackTensorRationalComposition` (line 117), chosen from `WeilConjectures.pullbackTensorRationalComposition_existsUnique`
-- `Sheaf.Paper.DerivedPullbackTensorIso::WeilConjectures.pullbackTensorRationalLeftUnitor` (line 610), chosen from `WeilConjectures.pullbackTensorRationalLeftUnitor_existsUnique`
-- `Sheaf.Paper.DerivedPullbackTensorIso::WeilConjectures.pullbackTensorRationalRightUnitor` (line 660), chosen from `WeilConjectures.pullbackTensorRationalRightUnitor_existsUnique`
-- `Sheaf.Paper.DerivedPullbackTensorIso::WeilConjectures.pullbackTensorRationalScalarUnit` (line 701), chosen from `WeilConjectures.pullbackTensorRationalScalarUnit_existsUnique`
-- `Sheaf.Paper.DerivedReductionResolutionIndependence::SheafOfModules.PrincipalReduction.Setup.theta` (line 339), chosen from `SheafOfModules.PrincipalReduction.Setup.existsUnique_theta`
-- `Sheaf.Paper.DerivedReductionResolutionIndependence::SheafOfModules.PrincipalReduction.sectionMultiplication` (line 76), chosen from `SheafOfModules.PrincipalReduction.existsUnique_sectionMultiplication`
-- `Sheaf.Paper.DivisibleExtensionDerivedReduction::SheafOfModules.DivisibleReduction.coefficientIso` (line 349), chosen from `SheafOfModules.DivisibleReduction.coefficientIso_existsUnique`
-- `Sheaf.Paper.DivisibleExtensionDerivedReduction::SheafOfModules.DivisibleReduction.identifications` (line 313), chosen from `SheafOfModules.DivisibleReduction.divisible_extension_derived_reduction`
-- `Sheaf.Paper.DivisibleExtensionDerivedReduction::SheafOfModules.sheafScalarDerivedAdjunction` (line 136), chosen from `SheafOfModules.sheafDerivedScalarAdjunction_exists`
-- `Sheaf.Paper.DivisibleExtensionDerivedReduction::SheafOfModules.sheafScalarOrdinaryAdjunction` (line 131), chosen from `SheafOfModules.sheafDerivedScalarAdjunction_exists`
+- `Sheaf.Paper.DerivedPullbackTensorIso::WeilConjectures.pullbackTensorCommonAssociator` (line 484), chosen from `WeilConjectures.pullbackTensorCommonAssociator_existsUnique`
+- `Sheaf.Paper.DerivedPullbackTensorIso::WeilConjectures.pullbackTensorCommonBraiding` (line 518), chosen from `WeilConjectures.pullbackTensorCommonBraiding_existsUnique`
+- `Sheaf.Paper.DerivedPullbackTensorIso::WeilConjectures.pullbackTensorCommonComposition` (line 166), chosen from `WeilConjectures.pullbackTensorCommonComposition_existsUnique`
+- `Sheaf.Paper.DerivedPullbackTensorIso::WeilConjectures.pullbackTensorCommonLeftUnitor` (line 782), chosen from `WeilConjectures.pullbackTensorCommonLeftUnitor_existsUnique`
+- `Sheaf.Paper.DerivedPullbackTensorIso::WeilConjectures.pullbackTensorCommonRightUnitor` (line 824), chosen from `WeilConjectures.pullbackTensorCommonRightUnitor_existsUnique`
+- `Sheaf.Paper.DerivedPullbackTensorIso::WeilConjectures.pullbackTensorIntegralAssociator` (line 333), chosen from `WeilConjectures.pullbackTensorIntegralAssociator_existsUnique`
+- `Sheaf.Paper.DerivedPullbackTensorIso::WeilConjectures.pullbackTensorIntegralBraiding` (line 389), chosen from `WeilConjectures.pullbackTensorIntegralBraiding_existsUnique`
+- `Sheaf.Paper.DerivedPullbackTensorIso::WeilConjectures.pullbackTensorIntegralComposition` (line 92), chosen from `WeilConjectures.integralPullbackComposition`
+- `Sheaf.Paper.DerivedPullbackTensorIso::WeilConjectures.pullbackTensorIntegralLeftUnitor` (line 594), chosen from `WeilConjectures.pullbackTensorIntegralLeftUnitor_existsUnique`
+- `Sheaf.Paper.DerivedPullbackTensorIso::WeilConjectures.pullbackTensorIntegralRightUnitor` (line 644), chosen from `WeilConjectures.pullbackTensorIntegralRightUnitor_existsUnique`
+- `Sheaf.Paper.DerivedPullbackTensorIso::WeilConjectures.pullbackTensorRationalAssociator` (line 358), chosen from `WeilConjectures.pullbackTensorRationalAssociator_existsUnique`
+- `Sheaf.Paper.DerivedPullbackTensorIso::WeilConjectures.pullbackTensorRationalBraiding` (line 412), chosen from `WeilConjectures.pullbackTensorRationalBraiding_existsUnique`
+- `Sheaf.Paper.DerivedPullbackTensorIso::WeilConjectures.pullbackTensorRationalComposition` (line 123), chosen from `WeilConjectures.pullbackTensorRationalComposition_existsUnique`
+- `Sheaf.Paper.DerivedPullbackTensorIso::WeilConjectures.pullbackTensorRationalLeftUnitor` (line 616), chosen from `WeilConjectures.pullbackTensorRationalLeftUnitor_existsUnique`
+- `Sheaf.Paper.DerivedPullbackTensorIso::WeilConjectures.pullbackTensorRationalRightUnitor` (line 666), chosen from `WeilConjectures.pullbackTensorRationalRightUnitor_existsUnique`
+- `Sheaf.Paper.DerivedPullbackTensorIso::WeilConjectures.pullbackTensorRationalScalarUnit` (line 707), chosen from `WeilConjectures.pullbackTensorRationalScalarUnit_existsUnique`
+- `Sheaf.Paper.DerivedReductionResolutionIndependence::SheafOfModules.PrincipalReduction.Setup.theta` (line 340), chosen from `SheafOfModules.PrincipalReduction.Setup.existsUnique_theta`
+- `Sheaf.Paper.DerivedReductionResolutionIndependence::SheafOfModules.PrincipalReduction.sectionMultiplication` (line 77), chosen from `SheafOfModules.PrincipalReduction.existsUnique_sectionMultiplication`
+- `Sheaf.Paper.DivisibleExtensionDerivedReduction::SheafOfModules.DivisibleReduction.coefficientIso` (line 350), chosen from `SheafOfModules.DivisibleReduction.coefficientIso_existsUnique`
+- `Sheaf.Paper.DivisibleExtensionDerivedReduction::SheafOfModules.DivisibleReduction.identifications` (line 314), chosen from `SheafOfModules.DivisibleReduction.divisible_extension_derived_reduction`
+- `Sheaf.Paper.DivisibleExtensionDerivedReduction::SheafOfModules.sheafScalarDerivedAdjunction` (line 137), chosen from `SheafOfModules.sheafDerivedScalarAdjunction_exists`
+- `Sheaf.Paper.DivisibleExtensionDerivedReduction::SheafOfModules.sheafScalarOrdinaryAdjunction` (line 132), chosen from `SheafOfModules.sheafDerivedScalarAdjunction_exists`
 - `Sheaf.Paper.EtaleDerivedScalarTensor::AlgebraicGeometry.Etale.scalarTensorIso` (line 221), chosen from `AlgebraicGeometry.Etale.scalarTensorIso_existsUnique`
 - `Sheaf.Paper.EtaleFiniteCoefficientHomArrow::WeilConjectures.finiteHomDerivedBraiding` (line 121), chosen from `WeilConjectures.finiteHomDerivedBraiding_existsUnique`
 - `Sheaf.Paper.EtaleFiniteCoefficientHomArrow::WeilConjectures.finiteHomEtaleClosedGeneral` (line 165), chosen from `WeilConjectures.finiteHomEtaleClosed_existsUnique`
@@ -443,28 +443,28 @@ Definitions with undetermined data (class-1 exceptions in `coord/hollow-definiti
 - `Sheaf.Paper.EtaleFiniteCoefficientHomArrow::WeilConjectures.finiteHomEtaleRepresentativeData` (line 468), chosen from `WeilConjectures.finiteHomEtaleRepresentativeData_existsUnique`
 - `Sheaf.Paper.EtaleFiniteCoefficientHomArrow::WeilConjectures.finiteHomIntrinsicAssoc` (line 308), chosen from `WeilConjectures.coefficientDerivedSystemEvaluationCalculus`
 - `Sheaf.Paper.EtaleProEtaleCoefficientTransport::AlgebraicGeometry.ProEtale.CoefficientCompatibility.scalarPresentation` (line 53), chosen from `AlgebraicGeometry.Scheme.sfRealizationRestriction_existsUnique`
-- `Sheaf.Paper.EtaleRhoMonoidalMate::AlgebraicGeometry.ProEtale.EtaleProjectionMate.finiteKappa` (line 266), chosen from `AlgebraicGeometry.ProEtale.EtaleProjectionMate.finiteKappa_existsUnique`
+- `Sheaf.Paper.EtaleRhoMonoidalMate::AlgebraicGeometry.ProEtale.EtaleProjectionMate.finiteKappa` (line 280), chosen from `AlgebraicGeometry.ProEtale.EtaleProjectionMate.finiteKappa_existsUnique`
 - `Sheaf.Paper.EtaleWeilFundamentalRepresentation::AlgebraicGeometry.Scheme.etaleFinitePathIso` (line 67), chosen from `AlgebraicGeometry.Scheme.etaleFinitePathIso_exists`
 - `Sheaf.Paper.EtaleWeilFundamentalRepresentation::AlgebraicGeometry.Scheme.etaleFundamentalRep` (line 223), chosen from `AlgebraicGeometry.Scheme.etaleFundamentalRep_exists`
 - `Sheaf.Paper.EtaleWeilFundamentalRepresentation::AlgebraicGeometry.Scheme.etaleIntegralPathIso` (line 114), chosen from `AlgebraicGeometry.Scheme.etaleIntegralPathIso_exists`
-- `Sheaf.Paper.ExceptionalCoefficientComparison::AlgebraicGeometry.Etale.ExceptionalCoefficients.tensorIso` (line 178), chosen from `AlgebraicGeometry.Etale.ExceptionalCoefficients.siteTensorIso_existsUnique`
-- `Sheaf.Paper.ExceptionalCoefficientComparison::AlgebraicGeometry.Etale.ExceptionalCoefficients.unitIso` (line 219), chosen from `AlgebraicGeometry.Etale.ExceptionalCoefficients.unitIso_existsUnique`
-- `Sheaf.Paper.ExplicitExceptionalPreservation::AlgebraicGeometry.Scheme.explicitReductionAdjunction` (line 239), chosen from `AlgebraicGeometry.Scheme.explicitReductionAdjunction_existsUnique`
-- `Sheaf.Paper.ExplicitExceptionalPreservation::AlgebraicGeometry.Scheme.explicitReductionModuleAdjunction` (line 175), chosen from `AlgebraicGeometry.Scheme.explicitReductionModuleAdjunction_existsUnique`
+- `Sheaf.Paper.ExceptionalCoefficientComparison::AlgebraicGeometry.Etale.ExceptionalCoefficients.tensorIso` (line 193), chosen from `AlgebraicGeometry.Etale.ExceptionalCoefficients.siteTensorIso_existsUnique`
+- `Sheaf.Paper.ExceptionalCoefficientComparison::AlgebraicGeometry.Etale.ExceptionalCoefficients.unitIso` (line 234), chosen from `AlgebraicGeometry.Etale.ExceptionalCoefficients.unitIso_existsUnique`
+- `Sheaf.Paper.ExplicitExceptionalPreservation::AlgebraicGeometry.Scheme.explicitReductionAdjunction` (line 248), chosen from `AlgebraicGeometry.Scheme.explicitReductionAdjunction_existsUnique`
+- `Sheaf.Paper.ExplicitExceptionalPreservation::AlgebraicGeometry.Scheme.explicitReductionModuleAdjunction` (line 184), chosen from `AlgebraicGeometry.Scheme.explicitReductionModuleAdjunction_existsUnique`
 - `Sheaf.Paper.FieldDerivedScalarTower::DerivedCategory.fieldScalarTower` (line 84), chosen from `DerivedCategory.existsUnique_fieldScalarTower`
 - `Sheaf.Paper.FieldDerivedScalarTower::DerivedCategory.fieldScalarUnit` (line 91), chosen from `DerivedCategory.existsUnique_fieldScalarUnit`
-- `Sheaf.Paper.FieldShriekCompositionQcqs::WeilConjectures.sfFieldShriekCompositionIntegral` (line 275), chosen from `WeilConjectures.sfFieldShriekCompositionIntegral_existsUnique`
-- `Sheaf.Paper.FieldShriekCompositionQcqs::WeilConjectures.sfFieldShriekCompositionRational` (line 308), chosen from `WeilConjectures.sfFieldShriekCompositionRational_existsUnique`
-- `Sheaf.Paper.FieldStageOrdinaryRealization::WeilConjectures.OrdinaryFieldRealization.constantLinear` (line 149), chosen from `WeilConjectures.OrdinaryFieldRealization.constantLinear_existsUnique`
-- `Sheaf.Paper.FieldStageOrdinaryRealization::WeilConjectures.OrdinaryFieldRealization.extendComp` (line 257), chosen from `WeilConjectures.OrdinaryFieldRealization.extendComp_existsUnique`
-- `Sheaf.Paper.FieldStageOrdinaryRealization::WeilConjectures.OrdinaryFieldRealization.extendUnit` (line 289), chosen from `WeilConjectures.OrdinaryFieldRealization.extendUnit_existsUnique`
-- `Sheaf.Paper.FieldStageOrdinaryRealization::WeilConjectures.OrdinaryFieldRealization.pairLinear` (line 383), chosen from `WeilConjectures.OrdinaryFieldRealization.pairLinear_existsUnique`
+- `Sheaf.Paper.FieldShriekCompositionQcqs::WeilConjectures.sfFieldShriekCompositionIntegral` (line 280), chosen from `WeilConjectures.sfFieldShriekCompositionIntegral_existsUnique`
+- `Sheaf.Paper.FieldShriekCompositionQcqs::WeilConjectures.sfFieldShriekCompositionRational` (line 313), chosen from `WeilConjectures.sfFieldShriekCompositionRational_existsUnique`
+- `Sheaf.Paper.FieldStageOrdinaryRealization::WeilConjectures.OrdinaryFieldRealization.constantLinear` (line 152), chosen from `WeilConjectures.OrdinaryFieldRealization.constantLinear_existsUnique`
+- `Sheaf.Paper.FieldStageOrdinaryRealization::WeilConjectures.OrdinaryFieldRealization.extendComp` (line 260), chosen from `WeilConjectures.OrdinaryFieldRealization.extendComp_existsUnique`
+- `Sheaf.Paper.FieldStageOrdinaryRealization::WeilConjectures.OrdinaryFieldRealization.extendUnit` (line 292), chosen from `WeilConjectures.OrdinaryFieldRealization.extendUnit_existsUnique`
+- `Sheaf.Paper.FieldStageOrdinaryRealization::WeilConjectures.OrdinaryFieldRealization.pairLinear` (line 386), chosen from `WeilConjectures.OrdinaryFieldRealization.pairLinear_existsUnique`
 - `Sheaf.Paper.FieldWeilShriekShiftData::WeilConjectures.fieldCommonPullShift` (line 122), chosen from `WeilConjectures.fieldCommonPullShift_existsUnique`
 - `Sheaf.Paper.FieldWeilShriekShiftData::WeilConjectures.fieldIntegralPullShift` (line 56), chosen from `WeilConjectures.fieldIntegralPullShift_existsUnique`
 - `Sheaf.Paper.FieldWeilShriekShiftData::WeilConjectures.fieldRationalPullComp` (line 158), chosen from `WeilConjectures.fieldRationalPullComp_existsUnique`
 - `Sheaf.Paper.FieldWeilShriekShiftData::WeilConjectures.fieldRationalPullShift` (line 89), chosen from `WeilConjectures.fieldRationalPullShift_existsUnique`
-- `Sheaf.Paper.FiniteCoefficientDirectImage::AlgebraicGeometry.Etale.finiteCoefficientDirectImageMap` (line 121), chosen from `AlgebraicGeometry.Etale.finiteCoefficientDirectImageMap_existsUnique`
-- `Sheaf.Paper.FiniteCoefficientDirectImage::AlgebraicGeometry.ProEtale.finiteCoefficientChangeDirectImageMap` (line 192), chosen from `AlgebraicGeometry.ProEtale.finiteCoefficientDirectImageMap_existsUnique`
+- `Sheaf.Paper.FiniteCoefficientDirectImage::AlgebraicGeometry.Etale.finiteCoefficientDirectImageMap` (line 143), chosen from `AlgebraicGeometry.Etale.finiteCoefficientDirectImageMap_existsUnique`
+- `Sheaf.Paper.FiniteCoefficientDirectImage::AlgebraicGeometry.ProEtale.finiteCoefficientChangeDirectImageMap` (line 214), chosen from `AlgebraicGeometry.ProEtale.finiteCoefficientDirectImageMap_existsUnique`
 - `Sheaf.Paper.FiniteCoefficientPoint::WeilConjectures.pointFibreLiftDownIso` (line 351), chosen from `WeilConjectures.pointFibreLiftDown_existsUnique`
 - `Sheaf.Paper.FiniteCoefficientPoint::WeilConjectures.pointFibreRationalDownIso` (line 380), chosen from `WeilConjectures.pointFibreRationalDown_existsUnique`
 - `Sheaf.Paper.FiniteCoefficientPoint::WeilConjectures.pointFibreTensorLiftIso` (line 459), chosen from `WeilConjectures.pointFibreTensorLift_existsUnique`
@@ -475,16 +475,16 @@ Definitions with undetermined data (class-1 exceptions in `coord/hollow-definiti
 - `Sheaf.Paper.FiniteCoefficientSiteHomArrow::WeilConjectures.finiteHomNuTensor` (line 103), chosen from `WeilConjectures.finiteHomNuTensor_existsUnique`
 - `Sheaf.Paper.FiniteCoefficientSiteScalarArrow::WeilConjectures.finiteHomNuRestriction` (line 122), chosen from `WeilConjectures.finiteHomNuRestriction_existsUnique`
 - `Sheaf.Paper.FiniteCoefficientSiteScalarArrow::WeilConjectures.finiteHomSiteBeta` (line 141), chosen from `WeilConjectures.coefficientDerivedSystemEvaluationCalculus`
-- `Sheaf.Paper.FiniteEtaleAdicCohomology::AlgebraicGeometry.Scheme.FiniteEtaleAdic.finiteSectionsIso` (line 482), chosen from `AlgebraicGeometry.Scheme.FiniteEtaleAdic.finiteSectionsIso_exists`
-- `Sheaf.Paper.FiniteEtaleAdicCohomology::AlgebraicGeometry.Scheme.FiniteEtaleAdic.levelComparison` (line 180), chosen from `AlgebraicGeometry.Scheme.FiniteEtaleAdic.levelComparison_exists`
-- `Sheaf.Paper.FiniteEtaleAdicCohomology::AlgebraicGeometry.Scheme.FiniteEtaleAdic.sectionsComparison` (line 243), chosen from `AlgebraicGeometry.Scheme.FiniteEtaleAdic.sectionsComparison_exists`
-- `Sheaf.Paper.FiniteEtaleAdicCohomology::AlgebraicGeometry.Scheme.FiniteEtaleAdic.sectionsUniverseComparison` (line 352), chosen from `AlgebraicGeometry.Scheme.FiniteEtaleAdic.sectionsUniverseComparison_exists`
-- `Sheaf.Paper.FiniteFreeCompletedScalarComparison::WeilConjectures.completedCoefficientMap` (line 91), chosen from `WeilConjectures.completedCoefficientMap_existsUnique`
-- `Sheaf.Paper.FiniteFreeCompletedScalarComparison::WeilConjectures.completedScalarChainComparison` (line 192), chosen from `WeilConjectures.completedScalarChainComparison_existsUnique`
-- `Sheaf.Paper.FiniteFreeCompletedScalarComparison::WeilConjectures.completedScalarComparison` (line 217), chosen from `WeilConjectures.completedScalarComparison_existsUnique`
-- `Sheaf.Paper.FiniteFreeCompletedScalarComparison::WeilConjectures.completedScalarIdentityMultiplication` (line 249), chosen from `WeilConjectures.completedScalarIdentityMultiplication_existsUnique`
-- `Sheaf.Paper.FiniteFreeCompletedScalarComparison::WeilConjectures.completedScalarIdentityUnit` (line 283), chosen from `WeilConjectures.completedScalarIdentityUnit_existsUnique`
-- `Sheaf.Paper.FiniteProjectiveTensorProducts::AlgebraicGeometry.Scheme.finiteProjectiveTensorRightMap` (line 152), chosen from `AlgebraicGeometry.Scheme.finiteProjectiveTensorRightMap_exists`
+- `Sheaf.Paper.FiniteEtaleAdicCohomology::AlgebraicGeometry.Scheme.FiniteEtaleAdic.finiteSectionsIso` (line 486), chosen from `AlgebraicGeometry.Scheme.FiniteEtaleAdic.finiteSectionsIso_exists`
+- `Sheaf.Paper.FiniteEtaleAdicCohomology::AlgebraicGeometry.Scheme.FiniteEtaleAdic.levelComparison` (line 184), chosen from `AlgebraicGeometry.Scheme.FiniteEtaleAdic.levelComparison_exists`
+- `Sheaf.Paper.FiniteEtaleAdicCohomology::AlgebraicGeometry.Scheme.FiniteEtaleAdic.sectionsComparison` (line 247), chosen from `AlgebraicGeometry.Scheme.FiniteEtaleAdic.sectionsComparison_exists`
+- `Sheaf.Paper.FiniteEtaleAdicCohomology::AlgebraicGeometry.Scheme.FiniteEtaleAdic.sectionsUniverseComparison` (line 356), chosen from `AlgebraicGeometry.Scheme.FiniteEtaleAdic.sectionsUniverseComparison_exists`
+- `Sheaf.Paper.FiniteFreeCompletedScalarComparison::WeilConjectures.completedCoefficientMap` (line 102), chosen from `WeilConjectures.completedCoefficientMap_existsUnique`
+- `Sheaf.Paper.FiniteFreeCompletedScalarComparison::WeilConjectures.completedScalarChainComparison` (line 203), chosen from `WeilConjectures.completedScalarChainComparison_existsUnique`
+- `Sheaf.Paper.FiniteFreeCompletedScalarComparison::WeilConjectures.completedScalarComparison` (line 228), chosen from `WeilConjectures.completedScalarComparison_existsUnique`
+- `Sheaf.Paper.FiniteFreeCompletedScalarComparison::WeilConjectures.completedScalarIdentityMultiplication` (line 260), chosen from `WeilConjectures.completedScalarIdentityMultiplication_existsUnique`
+- `Sheaf.Paper.FiniteFreeCompletedScalarComparison::WeilConjectures.completedScalarIdentityUnit` (line 294), chosen from `WeilConjectures.completedScalarIdentityUnit_existsUnique`
+- `Sheaf.Paper.FiniteProjectiveTensorProducts::AlgebraicGeometry.Scheme.finiteProjectiveTensorRightMap` (line 154), chosen from `AlgebraicGeometry.Scheme.finiteProjectiveTensorRightMap_exists`
 - `Sheaf.Paper.FinitePullbackTensorComparison::WeilConjectures.pullbackTensorBraiding` (line 505), chosen from `WeilConjectures.pullbackTensorBraiding_existsUnique`
 - `Sheaf.Paper.FinitePullbackTensorComparison::WeilConjectures.pullbackTensorFiniteModel` (line 198), chosen from `WeilConjectures.pullbackTensorFiniteRepresentative_existsUnique`
 - `Sheaf.Paper.FinitePullbackTensorComparison::WeilConjectures.pullbackTensorFiniteRealization` (line 240), chosen from `WeilConjectures.pullbackTensorFiniteRealization_existsUnique`
@@ -510,14 +510,14 @@ Definitions with undetermined data (class-1 exceptions in `coord/hollow-definiti
 - `Sheaf.Paper.FiniteStagePairCategory::AlgebraicGeometry.Scheme.pbcScalarExtension` (line 163), chosen from `AlgebraicGeometry.Scheme.pbcRationalScalarExtension_exists`
 - `Sheaf.Paper.FiniteStagePairCategory::AlgebraicGeometry.Scheme.pbcScalarIntegralComparison` (line 276), chosen from `AlgebraicGeometry.Scheme.pbcScalarIntegralComparison_exists`
 - `Sheaf.Paper.FiniteStagePairCategory::CategoryTheory.StageSystem.pairPreadditive` (line 76), chosen from `CategoryTheory.StageSystem.pairPreadditive_exists`
-- `Sheaf.Paper.FiniteSystemPullbackCoherence::WeilConjectures.finiteSystemComposition` (line 250), chosen from `WeilConjectures.finiteSystemComposition_existsUnique`
-- `Sheaf.Paper.FiniteSystemPullbackCoherence::WeilConjectures.finiteSystemPullbackEvaluation` (line 296), chosen from `WeilConjectures.finiteSystemPullbackEvaluation_existsUnique`
+- `Sheaf.Paper.FiniteSystemPullbackCoherence::WeilConjectures.finiteSystemComposition` (line 251), chosen from `WeilConjectures.finiteSystemComposition_existsUnique`
+- `Sheaf.Paper.FiniteSystemPullbackCoherence::WeilConjectures.finiteSystemPullbackEvaluation` (line 297), chosen from `WeilConjectures.finiteSystemPullbackEvaluation_existsUnique`
 - `Sheaf.Paper.FiniteTorStability::WeilConjectures.sfStabilityDualizingReduction` (line 482), chosen from `WeilConjectures.coefficientDerivedSystemEvaluationCalculus`
 - `Sheaf.Paper.FiniteTorStability::WeilConjectures.sfStabilityIntegralDualizing` (line 644), chosen from `WeilConjectures.prop_coef_integral_dualizing`
 - `Sheaf.Paper.FiniteTorStability::WeilConjectures.sfStabilitySupportReduction` (line 461), chosen from `WeilConjectures.coefficientDerivedSystemEvaluationCalculus`
 - `Sheaf.Paper.FourierAdicArtinSchreier::WeilConjectures.fourierIntegralCharacter` (line 114), chosen from `WeilConjectures.fourierIntegralCharacter_existsUnique`
-- `Sheaf.Paper.FrobeniusCoefficientReductionCoherence::WeilConjectures.FiniteFieldDatum.frobeniusCoherenceIntegralComposition` (line 311), chosen from `WeilConjectures.integralPullbackComposition`
-- `Sheaf.Paper.FrobeniusCoefficientReductionCoherence::WeilConjectures.frobeniusReductionNormalization` (line 119), chosen from `WeilConjectures.frobeniusReductionNormalization_existsUnique`
+- `Sheaf.Paper.FrobeniusCoefficientReductionCoherence::WeilConjectures.FiniteFieldDatum.frobeniusCoherenceIntegralComposition` (line 314), chosen from `WeilConjectures.integralPullbackComposition`
+- `Sheaf.Paper.FrobeniusCoefficientReductionCoherence::WeilConjectures.frobeniusReductionNormalization` (line 122), chosen from `WeilConjectures.frobeniusReductionNormalization_existsUnique`
 - `Sheaf.Paper.FrobeniusSquareExchange::WeilConjectures.FrobeniusExchange.modelRationalScalar` (line 923), chosen from `WeilConjectures.FrobeniusExchange.modelRationalScalar_existsUnique`
 - `Sheaf.Paper.FrobeniusSquareExchange::WeilConjectures.FrobeniusExchange.pullScalar` (line 802), chosen from `WeilConjectures.FrobeniusExchange.pullScalar_existsUnique`
 - `Sheaf.Paper.GeneralAlgebraicallyClosedCoefficients::WeilConjectures.GeneralAlgebraicallyClosedCoefficients.associator` (line 259), chosen from `WeilConjectures.GeneralAlgebraicallyClosedCoefficients.associator_existsUnique`
@@ -527,12 +527,12 @@ Definitions with undetermined data (class-1 exceptions in `coord/hollow-definiti
 - `Sheaf.Paper.GeneralAlgebraicallyClosedCoefficients::WeilConjectures.GeneralAlgebraicallyClosedCoefficients.specialization_commShift` (line 886), chosen from `WeilConjectures.GeneralAlgebraicallyClosedCoefficients.specialization_commShift_existsUnique`
 - `Sheaf.Paper.GeneralAlgebraicallyClosedCoefficients::WeilConjectures.GeneralAlgebraicallyClosedCoefficients.stageSystem` (line 314), chosen from `WeilConjectures.GeneralAlgebraicallyClosedCoefficients.stageSystem_existsUnique`
 - `Sheaf.Paper.GeneralAlgebraicallyClosedCoefficients::WeilConjectures.GeneralAlgebraicallyClosedCoefficients.transitionCommShift` (line 197), chosen from `WeilConjectures.GeneralAlgebraicallyClosedCoefficients.transitionCommShift_existsUnique`
-- `Sheaf.Paper.IntegralCompactSupportCoefficientComparison::WeilConjectures.PurCompactSupport.recordedIdentification` (line 1132), chosen from `WeilConjectures.PurCompactSupport.recordedIdentification_existsUnique`
-- `Sheaf.Paper.IntegralCompactSupportCoefficientComparison::WeilConjectures.PurCompactSupport.refinementProperOpen` (line 1199), chosen from `WeilConjectures.PurCompactSupport.refinementProperOpen_existsUnique`
-- `Sheaf.Paper.IntegralCompactSupportCoefficientComparison::WeilConjectures.PurCompactSupport.scalarCommShift` (line 128), chosen from `WeilConjectures.PurCompactSupport.scalarCommShift_existsUnique`
-- `Sheaf.Paper.IntegralCompactSupportCoefficientComparison::WeilConjectures.PurCompactSupport.scalarOrdinaryTensor` (line 260), chosen from `WeilConjectures.PurCompactSupport.scalarOrdinaryTensor_existsUnique`
-- `Sheaf.Paper.IntegralCompactSupportCoefficientComparison::WeilConjectures.PurCompactSupport.scalarTensor` (line 333), chosen from `WeilConjectures.PurCompactSupport.scalarTensor_existsUnique`
-- `Sheaf.Paper.IntegralCompactSupportCoefficientComparison::WeilConjectures.PurCompactSupport.tensorIdentity` (line 199), chosen from `WeilConjectures.PurCompactSupport.restrictIdentity_existsUnique`
+- `Sheaf.Paper.IntegralCompactSupportCoefficientComparison::WeilConjectures.PurCompactSupport.recordedIdentification` (line 1136), chosen from `WeilConjectures.PurCompactSupport.recordedIdentification_existsUnique`
+- `Sheaf.Paper.IntegralCompactSupportCoefficientComparison::WeilConjectures.PurCompactSupport.refinementProperOpen` (line 1203), chosen from `WeilConjectures.PurCompactSupport.refinementProperOpen_existsUnique`
+- `Sheaf.Paper.IntegralCompactSupportCoefficientComparison::WeilConjectures.PurCompactSupport.scalarCommShift` (line 132), chosen from `WeilConjectures.PurCompactSupport.scalarCommShift_existsUnique`
+- `Sheaf.Paper.IntegralCompactSupportCoefficientComparison::WeilConjectures.PurCompactSupport.scalarOrdinaryTensor` (line 264), chosen from `WeilConjectures.PurCompactSupport.scalarOrdinaryTensor_existsUnique`
+- `Sheaf.Paper.IntegralCompactSupportCoefficientComparison::WeilConjectures.PurCompactSupport.scalarTensor` (line 337), chosen from `WeilConjectures.PurCompactSupport.scalarTensor_existsUnique`
+- `Sheaf.Paper.IntegralCompactSupportCoefficientComparison::WeilConjectures.PurCompactSupport.tensorIdentity` (line 203), chosen from `WeilConjectures.PurCompactSupport.restrictIdentity_existsUnique`
 - `Sheaf.Paper.IntegralCompactSupportCoefficientData::WeilConjectures.PurCompactSupport.geometricPullComposition` (line 238), chosen from `WeilConjectures.PurCompactSupport.modulePushComposition_existsUnique`
 - `Sheaf.Paper.IntegralCompactSupportCoefficientData::WeilConjectures.PurCompactSupport.projectionMap` (line 392), chosen from `WeilConjectures.PurCompactSupport.projectionComparisons_existsUnique`
 - `Sheaf.Paper.IntegralComparisonRealizationModels::WeilConjectures.integralComparisonLimitToRoos` (line 173), chosen from `WeilConjectures.integralComparisonLimitToRoos_existsUnique`
@@ -544,8 +544,8 @@ Definitions with undetermined data (class-1 exceptions in `coord/hollow-definiti
 - `Sheaf.Paper.IntegralComparisonSequenceSystems::WeilConjectures.integralComparisonSystemScalarPullback` (line 372), chosen from `WeilConjectures.integralComparisonSystemScalarPullback_existsUnique`
 - `Sheaf.Paper.IntegralComparisonSequenceSystems::WeilConjectures.integralComparisonSystemUnit` (line 397), chosen from `WeilConjectures.integralComparisonSequenceUnit_existsUnique`
 - `Sheaf.Paper.IntegralConstructibleLinear::WeilConjectures.integralCoefficientLinear` (line 223), chosen from `WeilConjectures.integralCoefficientLinear_existsUnique`
-- `Sheaf.Paper.IntegralCriterionReductions::AlgebraicGeometry.ProEtale.integralLimitAbComparison` (line 120), chosen from `AlgebraicGeometry.ProEtale.integralLimitAbComparison_existsUnique`
-- `Sheaf.Paper.IntegralCriterionReductions::AlgebraicGeometry.ProEtale.integralSectionRingIso` (line 181), chosen from `AlgebraicGeometry.ProEtale.integralSectionRingIso_existsUnique`
+- `Sheaf.Paper.IntegralCriterionReductions::AlgebraicGeometry.ProEtale.integralLimitAbComparison` (line 121), chosen from `AlgebraicGeometry.ProEtale.integralLimitAbComparison_existsUnique`
+- `Sheaf.Paper.IntegralCriterionReductions::AlgebraicGeometry.ProEtale.integralSectionRingIso` (line 182), chosen from `AlgebraicGeometry.ProEtale.integralSectionRingIso_existsUnique`
 - `Sheaf.Paper.IntegralDerivedOperations::WeilConjectures.integralCompletedTensor` (line 80), chosen from `WeilConjectures.integralOperationsWellDefined`
 - `Sheaf.Paper.IntegralDerivedOperations::WeilConjectures.integralCompletedTensorComparison` (line 91), chosen from `WeilConjectures.integralOperationsWellDefined`
 - `Sheaf.Paper.IntegralDerivedOperations::WeilConjectures.integralDerivedPullback` (line 59), chosen from `WeilConjectures.integralOperationsWellDefined`
@@ -557,32 +557,32 @@ Definitions with undetermined data (class-1 exceptions in `coord/hollow-definiti
 - `Sheaf.Paper.IntegralDerivedOperationsOnSlices::WeilConjectures.IntegralOnSlice.duality` (line 309), chosen from `CategoryTheory.ringedSiteDualityMaps_exists`
 - `Sheaf.Paper.IntegralDerivedOperationsOnSlices::WeilConjectures.IntegralOnSlice.transition` (line 186), chosen from `WeilConjectures.IntegralOnSlice.transition_existsUnique`
 - `Sheaf.Paper.IntegralHomReductionComparison::WeilConjectures.integralHomReductionComparison` (line 338), chosen from `WeilConjectures.integralHomReductionTensorData_exists`
-- `Sheaf.Paper.IntegralInverseImageComparisonComposition::AlgebraicGeometry.ProEtale.integralInverseImageComposition` (line 75), chosen from `AlgebraicGeometry.ProEtale.integralInverseImageComposition_existsUnique`
-- `Sheaf.Paper.IntegralOperationsScalarComparisons::WeilConjectures.scalarClosedTensor` (line 408), chosen from `WeilConjectures.scalarClosedTensor_existsUnique`
-- `Sheaf.Paper.IntegralOperationsScalarComparisons::WeilConjectures.scalarCompletion` (line 327), chosen from `WeilConjectures.scalarCompletion_existsUnique`
-- `Sheaf.Paper.IntegralOperationsScalarComparisons::WeilConjectures.scalarIntegralClosed` (line 333), chosen from `WeilConjectures.coefficientDerivedSystemEvaluationCalculus`
-- `Sheaf.Paper.IntegralOperationsScalarComparisons::WeilConjectures.scalarIntegralModels` (line 338), chosen from `WeilConjectures.coefficientDerivedSystemEvaluationCalculus`
-- `Sheaf.Paper.IntegralOperationsScalarComparisons::WeilConjectures.scalarOrdinaryTensorChain` (line 375), chosen from `WeilConjectures.scalarOrdinaryTensorChain_existsUnique`
-- `Sheaf.Paper.IntegralOperationsScalarComparisons::WeilConjectures.scalarPullbackLevel` (line 114), chosen from `WeilConjectures.scalarPullbackLevel_existsUnique`
-- `Sheaf.Paper.IntegralOperationsScalarComparisons::WeilConjectures.scalarPullbackOrdinary` (line 272), chosen from `WeilConjectures.scalarPullbackOrdinary_existsUnique`
-- `Sheaf.Paper.IntegralOperationsScalarComparisons::WeilConjectures.scalarPullbackTower` (line 137), chosen from `WeilConjectures.scalarPullbackTower_existsUnique`
-- `Sheaf.Paper.IntegralOperationsScalarComparisons::WeilConjectures.scalarRoosMap` (line 70), chosen from `WeilConjectures.scalarRoosMap_existsUnique`
-- `Sheaf.Paper.IntegralOperationsScalarComparisons::WeilConjectures.scalarTensorLevel` (line 190), chosen from `WeilConjectures.scalarTensorLevel_existsUnique`
-- `Sheaf.Paper.IntegralOperationsScalarComparisons::WeilConjectures.scalarTensorOrdinary` (line 304), chosen from `WeilConjectures.scalarTensorOrdinary_existsUnique`
-- `Sheaf.Paper.IntegralOperationsScalarComparisons::WeilConjectures.scalarTensorTower` (line 212), chosen from `WeilConjectures.scalarTensorTower_existsUnique`
-- `Sheaf.Paper.IntegralOperationsWellDefined::WeilConjectures.integralOperationsPullbackTransition` (line 221), chosen from `WeilConjectures.integralOperationsPullbackTransition_existsUnique`
-- `Sheaf.Paper.IntegralOperationsWellDefined::WeilConjectures.integralOperationsTensorTransition` (line 303), chosen from `WeilConjectures.integralOperationsTensorTransition_existsUnique`
-- `Sheaf.Paper.IntegralPointTransportTowerPowers::WeilConjectures.IntegralPointTransportTower.integralSigma` (line 537), chosen from `WeilConjectures.IntegralPointTransportTower.integralSigma_existsUnique`
-- `Sheaf.Paper.IntegralPointTransportTowerPowers::WeilConjectures.IntegralPointTransportTower.inverseLimitComparison` (line 315), chosen from `WeilConjectures.IntegralPointTransportTower.inverseLimitComparison_existsUnique`
-- `Sheaf.Paper.IntegralPointTransportTowerPowers::WeilConjectures.IntegralPointTransportTower.ordinaryEvaluationComparison` (line 453), chosen from `WeilConjectures.IntegralPointTransportTower.ordinaryEvaluationComparison_existsUnique`
-- `Sheaf.Paper.IntegralPointTransportTowerPowers::WeilConjectures.IntegralPointTransportTower.ordinaryTransport` (line 146), chosen from `WeilConjectures.IntegralPointTransportTower.ordinaryTransport_existsUnique`
-- `Sheaf.Paper.IntegralPointTransportTowerPowers::WeilConjectures.IntegralPointTransportTower.restrictionComparison` (line 247), chosen from `WeilConjectures.IntegralPointTransportTower.restrictionComparison_existsUnique`
-- `Sheaf.Paper.IntegralPointTransportTowerPowers::WeilConjectures.IntegralPointTransportTower.zeta` (line 340), chosen from `WeilConjectures.IntegralPointTransportTower.sectionsLimitComparison_existsUnique`
-- `Sheaf.Paper.IntegralPullbackCompletedComparison::WeilConjectures.IntegralCompletedComparison.towerIso` (line 187), chosen from `AlgebraicGeometry.Scheme.pbcActualCompletedPullback_tower`
+- `Sheaf.Paper.IntegralInverseImageComparisonComposition::AlgebraicGeometry.ProEtale.integralInverseImageComposition` (line 76), chosen from `AlgebraicGeometry.ProEtale.integralInverseImageComposition_existsUnique`
+- `Sheaf.Paper.IntegralOperationsScalarComparisons::WeilConjectures.scalarClosedTensor` (line 429), chosen from `WeilConjectures.scalarClosedTensor_existsUnique`
+- `Sheaf.Paper.IntegralOperationsScalarComparisons::WeilConjectures.scalarCompletion` (line 348), chosen from `WeilConjectures.scalarCompletion_existsUnique`
+- `Sheaf.Paper.IntegralOperationsScalarComparisons::WeilConjectures.scalarIntegralClosed` (line 354), chosen from `WeilConjectures.coefficientDerivedSystemEvaluationCalculus`
+- `Sheaf.Paper.IntegralOperationsScalarComparisons::WeilConjectures.scalarIntegralModels` (line 359), chosen from `WeilConjectures.coefficientDerivedSystemEvaluationCalculus`
+- `Sheaf.Paper.IntegralOperationsScalarComparisons::WeilConjectures.scalarOrdinaryTensorChain` (line 396), chosen from `WeilConjectures.scalarOrdinaryTensorChain_existsUnique`
+- `Sheaf.Paper.IntegralOperationsScalarComparisons::WeilConjectures.scalarPullbackLevel` (line 135), chosen from `WeilConjectures.scalarPullbackLevel_existsUnique`
+- `Sheaf.Paper.IntegralOperationsScalarComparisons::WeilConjectures.scalarPullbackOrdinary` (line 293), chosen from `WeilConjectures.scalarPullbackOrdinary_existsUnique`
+- `Sheaf.Paper.IntegralOperationsScalarComparisons::WeilConjectures.scalarPullbackTower` (line 158), chosen from `WeilConjectures.scalarPullbackTower_existsUnique`
+- `Sheaf.Paper.IntegralOperationsScalarComparisons::WeilConjectures.scalarRoosMap` (line 91), chosen from `WeilConjectures.scalarRoosMap_existsUnique`
+- `Sheaf.Paper.IntegralOperationsScalarComparisons::WeilConjectures.scalarTensorLevel` (line 211), chosen from `WeilConjectures.scalarTensorLevel_existsUnique`
+- `Sheaf.Paper.IntegralOperationsScalarComparisons::WeilConjectures.scalarTensorOrdinary` (line 325), chosen from `WeilConjectures.scalarTensorOrdinary_existsUnique`
+- `Sheaf.Paper.IntegralOperationsScalarComparisons::WeilConjectures.scalarTensorTower` (line 233), chosen from `WeilConjectures.scalarTensorTower_existsUnique`
+- `Sheaf.Paper.IntegralOperationsWellDefined::WeilConjectures.integralOperationsPullbackTransition` (line 225), chosen from `WeilConjectures.integralOperationsPullbackTransition_existsUnique`
+- `Sheaf.Paper.IntegralOperationsWellDefined::WeilConjectures.integralOperationsTensorTransition` (line 307), chosen from `WeilConjectures.integralOperationsTensorTransition_existsUnique`
+- `Sheaf.Paper.IntegralPointTransportTowerPowers::WeilConjectures.IntegralPointTransportTower.integralSigma` (line 549), chosen from `WeilConjectures.IntegralPointTransportTower.integralSigma_existsUnique`
+- `Sheaf.Paper.IntegralPointTransportTowerPowers::WeilConjectures.IntegralPointTransportTower.inverseLimitComparison` (line 327), chosen from `WeilConjectures.IntegralPointTransportTower.inverseLimitComparison_existsUnique`
+- `Sheaf.Paper.IntegralPointTransportTowerPowers::WeilConjectures.IntegralPointTransportTower.ordinaryEvaluationComparison` (line 465), chosen from `WeilConjectures.IntegralPointTransportTower.ordinaryEvaluationComparison_existsUnique`
+- `Sheaf.Paper.IntegralPointTransportTowerPowers::WeilConjectures.IntegralPointTransportTower.ordinaryTransport` (line 158), chosen from `WeilConjectures.IntegralPointTransportTower.ordinaryTransport_existsUnique`
+- `Sheaf.Paper.IntegralPointTransportTowerPowers::WeilConjectures.IntegralPointTransportTower.restrictionComparison` (line 259), chosen from `WeilConjectures.IntegralPointTransportTower.restrictionComparison_existsUnique`
+- `Sheaf.Paper.IntegralPointTransportTowerPowers::WeilConjectures.IntegralPointTransportTower.zeta` (line 352), chosen from `WeilConjectures.IntegralPointTransportTower.sectionsLimitComparison_existsUnique`
+- `Sheaf.Paper.IntegralPullbackCompletedComparison::WeilConjectures.IntegralCompletedComparison.towerIso` (line 188), chosen from `AlgebraicGeometry.Scheme.pbcActualCompletedPullback_tower`
 - `Sheaf.Paper.IntegralReductionTowerUnrestricted::WeilConjectures.unrestrictedIntegralTransition` (line 133), chosen from `WeilConjectures.unrestrictedIntegralTransition_existsUnique`
 - `Sheaf.Paper.IntegralReductionTowerWellDefined::WeilConjectures.integralTowerTransition` (line 208), chosen from `WeilConjectures.integralTowerMaps_existUnique`
 - `Sheaf.Paper.IntegralReductionTowerWellDefined::WeilConjectures.integralTowerUnit` (line 201), chosen from `WeilConjectures.integralTowerMaps_existUnique`
-- `Sheaf.Paper.IntegralReductionTowerWellDefinedUnrestricted::WeilConjectures.unrestrictedTowerUnit` (line 196), chosen from `WeilConjectures.unrestrictedTowerMaps_existUnique`
+- `Sheaf.Paper.IntegralReductionTowerWellDefinedUnrestricted::WeilConjectures.unrestrictedTowerUnit` (line 198), chosen from `WeilConjectures.unrestrictedTowerMaps_existUnique`
 - `Sheaf.Paper.IntegralScalarExtension::WeilConjectures.integralCompletedScalarMap` (line 87), chosen from `WeilConjectures.integralCompletedScalarMap_existsUnique`
 - `Sheaf.Paper.IntegralScalarExtension::WeilConjectures.integralOrdinaryScalar` (line 112), chosen from `WeilConjectures.integralOrdinaryScalarWitness`
 - `Sheaf.Paper.IntegralScalarExtension::WeilConjectures.integralScalarExtension` (line 41), chosen from `WeilConjectures.integralScalarExtensionWellDefined`
@@ -591,11 +591,11 @@ Definitions with undetermined data (class-1 exceptions in `coord/hollow-definiti
 - `Sheaf.Paper.IntegralScalarExtensionConstructible::WeilConjectures.integralScalarCompletionChain` (line 276), chosen from `WeilConjectures.integralScalarCompletionChain_existsUnique`
 - `Sheaf.Paper.IntegralScalarExtensionUniverses::WeilConjectures.integralScalarExtensionComparisonOfUniverses` (line 44), chosen from `WeilConjectures.integralScalarExtensionWellDefined`
 - `Sheaf.Paper.IntegralScalarExtensionUniverses::WeilConjectures.integralScalarExtensionOfUniverses` (line 36), chosen from `WeilConjectures.integralScalarExtensionWellDefined`
-- `Sheaf.Paper.IntegralScalarExtensionWellDefined::WeilConjectures.integralScalarChainAction` (line 305), chosen from `WeilConjectures.integralScalarChainAction_existsUnique`
-- `Sheaf.Paper.IntegralScalarExtensionWellDefined::WeilConjectures.integralScalarConstant` (line 282), chosen from `WeilConjectures.integralScalarConstant_existsUnique`
-- `Sheaf.Paper.IntegralScalarExtensionWellDefined::WeilConjectures.integralScalarTransition` (line 230), chosen from `WeilConjectures.integralScalarTransition_existsUnique`
-- `Sheaf.Paper.IntegralStratifiedPerfectCharacterization::AlgebraicGeometry.Scheme.integralCoefficientULift` (line 364), chosen from `AlgebraicGeometry.Scheme.integralCoefficientULift_exists`
-- `Sheaf.Paper.IntegralStratifiedPerfectCharacterization::AlgebraicGeometry.Scheme.integralDetailedCoefficientComparison` (line 408), chosen from `AlgebraicGeometry.Scheme.integralDetailedCoefficientComparison_exists`
+- `Sheaf.Paper.IntegralScalarExtensionWellDefined::WeilConjectures.integralScalarChainAction` (line 309), chosen from `WeilConjectures.integralScalarChainAction_existsUnique`
+- `Sheaf.Paper.IntegralScalarExtensionWellDefined::WeilConjectures.integralScalarConstant` (line 286), chosen from `WeilConjectures.integralScalarConstant_existsUnique`
+- `Sheaf.Paper.IntegralScalarExtensionWellDefined::WeilConjectures.integralScalarTransition` (line 234), chosen from `WeilConjectures.integralScalarTransition_existsUnique`
+- `Sheaf.Paper.IntegralStratifiedPerfectCharacterization::AlgebraicGeometry.Scheme.integralCoefficientULift` (line 375), chosen from `AlgebraicGeometry.Scheme.integralCoefficientULift_exists`
+- `Sheaf.Paper.IntegralStratifiedPerfectCharacterization::AlgebraicGeometry.Scheme.integralDetailedCoefficientComparison` (line 419), chosen from `AlgebraicGeometry.Scheme.integralDetailedCoefficientComparison_exists`
 - `Sheaf.Paper.IntegralTensorPullback::AlgebraicGeometry.ProEtale.IntegralTensorPullback.restrictionPullback` (line 321), chosen from `AlgebraicGeometry.ProEtale.IntegralTensorPullback.restrictionPullback_existsUnique`
 - `Sheaf.Paper.IntegralTowerInverseImageUnit::WeilConjectures.integralTowerInverseImageUnit` (line 83), chosen from `WeilConjectures.integralTowerInverseImageUnit_existsUnique`
 - `Sheaf.Paper.IntegralTwistDerivedScalarCanonical::WeilConjectures.integralTwistCompletedBeta` (line 50), chosen from `WeilConjectures.integral_twist_derived_scalar`
@@ -609,14 +609,14 @@ Definitions with undetermined data (class-1 exceptions in `coord/hollow-definiti
 - `Sheaf.Paper.IntrinsicCompletion::AlgebraicGeometry.Scheme.intrinsicPresentationRoundTrip` (line 68), chosen from `AlgebraicGeometry.Scheme.intrinsicPresentationRoundTrip_exists`
 - `Sheaf.Paper.IntrinsicCompletionCompleted::AlgebraicGeometry.Scheme.completedKoszulOne` (line 121), chosen from `AlgebraicGeometry.Scheme.completedKoszulOne_exists`
 - `Sheaf.Paper.IntrinsicQbarCategory::WeilConjectures.intrinsicQbarLinear` (line 109), chosen from `WeilConjectures.intrinsicQbarLinear_existsUnique`
-- `Sheaf.Paper.IsomorphismComparisonScalarExtension::WeilConjectures.isomorphismScalarSheafModel` (line 62), chosen from `WeilConjectures.isomorphismScalarSheafModel_existsUnique`
-- `Sheaf.Paper.IsomorphismComparisonScalarExtension::WeilConjectures.isomorphismScalarTensor` (line 118), chosen from `WeilConjectures.isomorphismScalarTensor_existsUnique`
-- `Sheaf.Paper.IsomorphismDerivedPullback::WeilConjectures.isomorphismCompletedCoefficientComparison` (line 65), chosen from `WeilConjectures.isomorphismCompletedCoefficientComparison_existsUnique`
-- `Sheaf.Paper.IsomorphismReductionTower::WeilConjectures.isoReductionCompletedMap` (line 96), chosen from `WeilConjectures.isoReductionCompletedMap_existsUnique`
-- `Sheaf.Paper.KoszulReconstruction::AlgebraicGeometry.Scheme.reconstructionCompletionUnit` (line 181), chosen from `AlgebraicGeometry.Scheme.reconstructionCompletionUnit_exists`
-- `Sheaf.Paper.KoszulReconstruction::AlgebraicGeometry.Scheme.reconstructionOrdinaryUnit` (line 116), chosen from `AlgebraicGeometry.Scheme.reconstructionOrdinaryUnit_exists`
-- `Sheaf.Paper.KoszulReconstruction::AlgebraicGeometry.Scheme.reconstructionQuotientUnit` (line 97), chosen from `AlgebraicGeometry.Scheme.reconstructionQuotientUnit_exists`
-- `Sheaf.Paper.KoszulReconstruction::AlgebraicGeometry.Scheme.reconstructionReductionCounit` (line 122), chosen from `AlgebraicGeometry.Scheme.completedAdicReduction_exists`
+- `Sheaf.Paper.IsomorphismComparisonScalarExtension::WeilConjectures.isomorphismScalarSheafModel` (line 67), chosen from `WeilConjectures.isomorphismScalarSheafModel_existsUnique`
+- `Sheaf.Paper.IsomorphismComparisonScalarExtension::WeilConjectures.isomorphismScalarTensor` (line 123), chosen from `WeilConjectures.isomorphismScalarTensor_existsUnique`
+- `Sheaf.Paper.IsomorphismDerivedPullback::WeilConjectures.isomorphismCompletedCoefficientComparison` (line 82), chosen from `WeilConjectures.isomorphismCompletedCoefficientComparison_existsUnique`
+- `Sheaf.Paper.IsomorphismReductionTower::WeilConjectures.isoReductionCompletedMap` (line 99), chosen from `WeilConjectures.isoReductionCompletedMap_existsUnique`
+- `Sheaf.Paper.KoszulReconstruction::AlgebraicGeometry.Scheme.reconstructionCompletionUnit` (line 184), chosen from `AlgebraicGeometry.Scheme.reconstructionCompletionUnit_exists`
+- `Sheaf.Paper.KoszulReconstruction::AlgebraicGeometry.Scheme.reconstructionOrdinaryUnit` (line 119), chosen from `AlgebraicGeometry.Scheme.reconstructionOrdinaryUnit_exists`
+- `Sheaf.Paper.KoszulReconstruction::AlgebraicGeometry.Scheme.reconstructionQuotientUnit` (line 100), chosen from `AlgebraicGeometry.Scheme.reconstructionQuotientUnit_exists`
+- `Sheaf.Paper.KoszulReconstruction::AlgebraicGeometry.Scheme.reconstructionReductionCounit` (line 125), chosen from `AlgebraicGeometry.Scheme.completedAdicReduction_exists`
 - `Sheaf.Paper.LisseAdicAutomorphismPullback::AlgebraicGeometry.Scheme.automorphismLisseCoefficientTransformation` (line 383), chosen from `AlgebraicGeometry.Scheme.automorphismLisseCoefficientTransformation_exists`
 - `Sheaf.Paper.LisseAdicAutomorphismPullback::AlgebraicGeometry.Scheme.automorphismModuleStalkIso` (line 122), chosen from `AlgebraicGeometry.Scheme.automorphismModuleStalkIso_exists`
 - `Sheaf.Paper.LisseAdicAutomorphismPullback::AlgebraicGeometry.Scheme.lisseIntegralAutomorphismFiberIso` (line 238), chosen from `AlgebraicGeometry.Scheme.lisseIntegralAutomorphismFiberIso_exists`
@@ -624,31 +624,31 @@ Definitions with undetermined data (class-1 exceptions in `coord/hollow-definiti
 - `Sheaf.Paper.LisseAdicAutomorphismPullback::AlgebraicGeometry.Scheme.lisseRationalAutomorphismPullback` (line 200), chosen from `AlgebraicGeometry.Scheme.lisseRationalAutomorphismPullback_exists`
 - `Sheaf.Paper.LisseAdicAutomorphismPullback::AlgebraicGeometry.Scheme.lisseRationalAutomorphismScalarIso` (line 322), chosen from `AlgebraicGeometry.Scheme.lisseRationalAutomorphismScalarIso_exists`
 - `Sheaf.Paper.LisseAdicSheaves::AlgebraicGeometry.Scheme.lisseCoefficientDiagramData` (line 527), chosen from `AlgebraicGeometry.Scheme.lisseCoefficientDiagram_exists`
-- `Sheaf.Paper.LocalFrobeniusConjugacy::AlgebraicGeometry.Scheme.proEtalePointStalkSections` (line 74), chosen from `AlgebraicGeometry.Scheme.proEtalePointStalkSections_existsUnique`
+- `Sheaf.Paper.LocalFrobeniusConjugacy::AlgebraicGeometry.Scheme.proEtalePointStalkSections` (line 75), chosen from `AlgebraicGeometry.Scheme.proEtalePointStalkSections_existsUnique`
 - `Sheaf.Paper.LocalFrobeniusTrace::WeilConjectures.localPullbackComposition` (line 52), chosen from `WeilConjectures.integralPullbackComposition`
-- `Sheaf.Paper.LocalFrobeniusTransportNormalization::WeilConjectures.LocalFrobeniusTransport.rationalScalar` (line 522), chosen from `WeilConjectures.LocalFrobeniusTransport.rationalScalar_existsUnique`
-- `Sheaf.Paper.LocalFrobeniusTransportNormalization::WeilConjectures.LocalFrobeniusTransport.sectionsRoos` (line 433), chosen from `WeilConjectures.LocalFrobeniusTransport.sectionsRoos_existsUnique`
-- `Sheaf.Paper.LocalFrobeniusTransportNormalization::WeilConjectures.LocalFrobeniusTransport.strictMap` (line 349), chosen from `WeilConjectures.LocalFrobeniusTransport.strictRecipe_existsUnique`
+- `Sheaf.Paper.LocalFrobeniusTransportNormalization::WeilConjectures.LocalFrobeniusTransport.rationalScalar` (line 523), chosen from `WeilConjectures.LocalFrobeniusTransport.rationalScalar_existsUnique`
+- `Sheaf.Paper.LocalFrobeniusTransportNormalization::WeilConjectures.LocalFrobeniusTransport.sectionsRoos` (line 434), chosen from `WeilConjectures.LocalFrobeniusTransport.sectionsRoos_existsUnique`
+- `Sheaf.Paper.LocalFrobeniusTransportNormalization::WeilConjectures.LocalFrobeniusTransport.strictMap` (line 350), chosen from `WeilConjectures.LocalFrobeniusTransport.strictRecipe_existsUnique`
 - `Sheaf.Paper.MixedReductionUnit::WeilConjectures.sfMixedReductionDerivedUnit` (line 116), chosen from `WeilConjectures.sfMixedReductionDerivedUnit_existsUnique`
 - `Sheaf.Paper.MixedReductionUnit::WeilConjectures.sfMixedReductionUnit` (line 54), chosen from `WeilConjectures.sfMixedReductionUnit_existsUnique`
-- `Sheaf.Paper.NearbySpecializationSlice::AlgebraicGeometry.OrientedNearbyCycles.SpecializationSlice.globalSquare` (line 208), chosen from `AlgebraicGeometry.OrientedNearbyCycles.SpecializationSlice.globalSquare_existsUnique`
-- `Sheaf.Paper.NearbySpecializationSlice::AlgebraicGeometry.OrientedNearbyCycles.SpecializationSlice.pointExtension` (line 183), chosen from `AlgebraicGeometry.OrientedNearbyCycles.SpecializationSlice.pointExtension_existsUnique`
-- `Sheaf.Paper.NearbySpecializationSlice::AlgebraicGeometry.OrientedNearbyCycles.SpecializationSlice.sliceSquare` (line 247), chosen from `AlgebraicGeometry.OrientedNearbyCycles.SpecializationSlice.sliceSquare_existsUnique`
-- `Sheaf.Paper.OrderedExchangeCoefficientComparison::AlgebraicGeometry.Scheme.OrderedExchange.lambda` (line 189), chosen from `AlgebraicGeometry.Scheme.OrderedExchange.lambda_existsUnique`
-- `Sheaf.Paper.OrderedExchangeCoefficientComparison::AlgebraicGeometry.Scheme.OrderedExchange.ordinaryLambda` (line 145), chosen from `AlgebraicGeometry.Scheme.OrderedExchange.ordinaryLambda_existsUnique`
-- `Sheaf.Paper.OrderedExchangeCoefficientComparison::AlgebraicGeometry.Scheme.OrderedExchange.ordinaryRho` (line 90), chosen from `AlgebraicGeometry.Scheme.OrderedExchange.ordinaryRho_existsUnique`
-- `Sheaf.Paper.OrderedExchangeCoefficientComparison::AlgebraicGeometry.Scheme.OrderedExchange.phi` (line 256), chosen from `AlgebraicGeometry.Scheme.OrderedExchange.phi_existsUnique`
-- `Sheaf.Paper.OrderedExchangeCoefficientComparison::AlgebraicGeometry.Scheme.OrderedExchange.rho` (line 125), chosen from `AlgebraicGeometry.Scheme.OrderedExchange.rho_existsUnique`
-- `Sheaf.Paper.OrdinaryAdjunctionScalarCompatibility::WeilConjectures.purRationalHom` (line 262), chosen from `WeilConjectures.purRationalHom_existsUnique`
-- `Sheaf.Paper.OrdinaryAdjunctionScalarCompatibility::WeilConjectures.purRationalModelHom` (line 467), chosen from `WeilConjectures.purRationalModelHom_existsUnique`
-- `Sheaf.Paper.OrdinaryAdjunctionScalarCompatibility::WeilConjectures.purRationalScalarMaps` (line 311), chosen from `WeilConjectures.purRationalScalarMaps_existsUnique`
-- `Sheaf.Paper.OrdinaryAdjunctionScalarCompatibility::WeilConjectures.purStrictPullComparison` (line 73), chosen from `AlgebraicGeometry.Scheme.pbcActualCompletedPullback_tower`
+- `Sheaf.Paper.NearbySpecializationSlice::AlgebraicGeometry.OrientedNearbyCycles.SpecializationSlice.globalSquare` (line 209), chosen from `AlgebraicGeometry.OrientedNearbyCycles.SpecializationSlice.globalSquare_existsUnique`
+- `Sheaf.Paper.NearbySpecializationSlice::AlgebraicGeometry.OrientedNearbyCycles.SpecializationSlice.pointExtension` (line 184), chosen from `AlgebraicGeometry.OrientedNearbyCycles.SpecializationSlice.pointExtension_existsUnique`
+- `Sheaf.Paper.NearbySpecializationSlice::AlgebraicGeometry.OrientedNearbyCycles.SpecializationSlice.sliceSquare` (line 248), chosen from `AlgebraicGeometry.OrientedNearbyCycles.SpecializationSlice.sliceSquare_existsUnique`
+- `Sheaf.Paper.OrderedExchangeCoefficientComparison::AlgebraicGeometry.Scheme.OrderedExchange.lambda` (line 194), chosen from `AlgebraicGeometry.Scheme.OrderedExchange.lambda_existsUnique`
+- `Sheaf.Paper.OrderedExchangeCoefficientComparison::AlgebraicGeometry.Scheme.OrderedExchange.ordinaryLambda` (line 150), chosen from `AlgebraicGeometry.Scheme.OrderedExchange.ordinaryLambda_existsUnique`
+- `Sheaf.Paper.OrderedExchangeCoefficientComparison::AlgebraicGeometry.Scheme.OrderedExchange.ordinaryRho` (line 95), chosen from `AlgebraicGeometry.Scheme.OrderedExchange.ordinaryRho_existsUnique`
+- `Sheaf.Paper.OrderedExchangeCoefficientComparison::AlgebraicGeometry.Scheme.OrderedExchange.phi` (line 261), chosen from `AlgebraicGeometry.Scheme.OrderedExchange.phi_existsUnique`
+- `Sheaf.Paper.OrderedExchangeCoefficientComparison::AlgebraicGeometry.Scheme.OrderedExchange.rho` (line 130), chosen from `AlgebraicGeometry.Scheme.OrderedExchange.rho_existsUnique`
+- `Sheaf.Paper.OrdinaryAdjunctionScalarCompatibility::WeilConjectures.purRationalHom` (line 264), chosen from `WeilConjectures.purRationalHom_existsUnique`
+- `Sheaf.Paper.OrdinaryAdjunctionScalarCompatibility::WeilConjectures.purRationalModelHom` (line 469), chosen from `WeilConjectures.purRationalModelHom_existsUnique`
+- `Sheaf.Paper.OrdinaryAdjunctionScalarCompatibility::WeilConjectures.purRationalScalarMaps` (line 313), chosen from `WeilConjectures.purRationalScalarMaps_existsUnique`
+- `Sheaf.Paper.OrdinaryAdjunctionScalarCompatibility::WeilConjectures.purStrictPullComparison` (line 75), chosen from `AlgebraicGeometry.Scheme.pbcActualCompletedPullback_tower`
 - `Sheaf.Paper.OrdinaryCompletedIntegralPullback::WeilConjectures.ordinaryIntegralCompletionComparison` (line 303), chosen from `WeilConjectures.ordinaryIntegralCompletionComparison_existsUnique`
 - `Sheaf.Paper.OrdinaryCompletedIntegralPullback::WeilConjectures.ordinaryIntegralDirectRingMap` (line 108), chosen from `WeilConjectures.ordinaryIntegralDirectRingMap_existsUnique`
 - `Sheaf.Paper.OrdinaryCompletedIntegralPullback::WeilConjectures.ordinaryIntegralQuotientAugmentation` (line 239), chosen from `WeilConjectures.ordinaryIntegralQuotientAugmentation_existsUnique`
-- `Sheaf.Paper.OrientedClosedBaseExtension::AlgebraicGeometry.OrientedNearbyCycles.ClosedBase.etaleIdentity` (line 61), chosen from `AlgebraicGeometry.OrientedNearbyCycles.ClosedBase.etaleIdentity_existsUnique`
-- `Sheaf.Paper.OrientedClosedBaseExtension::AlgebraicGeometry.OrientedNearbyCycles.ClosedBase.identityPull` (line 145), chosen from `AlgebraicGeometry.OrientedNearbyCycles.ClosedBase.moduleIdentity_existsUnique`
-- `Sheaf.Paper.OrientedClosedBaseExtension::AlgebraicGeometry.OrientedNearbyCycles.ClosedBase.square` (line 250), chosen from `AlgebraicGeometry.OrientedNearbyCycles.ClosedBase.square_existsUnique`
+- `Sheaf.Paper.OrientedClosedBaseExtension::AlgebraicGeometry.OrientedNearbyCycles.ClosedBase.etaleIdentity` (line 65), chosen from `AlgebraicGeometry.OrientedNearbyCycles.ClosedBase.etaleIdentity_existsUnique`
+- `Sheaf.Paper.OrientedClosedBaseExtension::AlgebraicGeometry.OrientedNearbyCycles.ClosedBase.identityPull` (line 149), chosen from `AlgebraicGeometry.OrientedNearbyCycles.ClosedBase.moduleIdentity_existsUnique`
+- `Sheaf.Paper.OrientedClosedBaseExtension::AlgebraicGeometry.OrientedNearbyCycles.ClosedBase.square` (line 254), chosen from `AlgebraicGeometry.OrientedNearbyCycles.ClosedBase.square_existsUnique`
 - `Sheaf.Paper.OrientedHypercoverDescentDatum::AlgebraicGeometry.OrientedNearbyCycles.Hypercover.pullComposition` (line 313), chosen from `AlgebraicGeometry.OrientedNearbyCycles.Hypercover.pullComposition_existsUnique`
 - `Sheaf.Paper.OrientedHypercoverDescentDatum::AlgebraicGeometry.OrientedNearbyCycles.Hypercover.rectangle` (line 202), chosen from `AlgebraicGeometry.OrientedNearbyCycles.Hypercover.rectangle_existsUnique`
 - `Sheaf.Paper.OrientedNearbyCycles::AlgebraicGeometry.OrientedNearbyCycles.lift` (line 253), chosen from `AlgebraicGeometry.OrientedNearbyCycles.orientation_universal`
@@ -657,13 +657,13 @@ Definitions with undetermined data (class-1 exceptions in `coord/hollow-definiti
 - `Sheaf.Paper.OrientedNearbyCycles::AlgebraicGeometry.OrientedNearbyCycles.squarePsi` (line 400), chosen from `AlgebraicGeometry.OrientedNearbyCycles.squarePsi_existsUnique`
 - `Sheaf.Paper.OrientedNearbyCycles::AlgebraicGeometry.OrientedNearbyCycles.tensorEdge` (line 596), chosen from `AlgebraicGeometry.OrientedNearbyCycles.modulePull_map`
 - `Sheaf.Paper.OrientedNearbyCycles::AlgebraicGeometry.OrientedNearbyCycles.tensorModel` (line 571), chosen from `AlgebraicGeometry.OrientedNearbyCycles.tensorModel_exists`
-- `Sheaf.Paper.OrientedNearbyStrictLocalDescription::AlgebraicGeometry.OrientedNearbyCycles.localDirectSections` (line 132), chosen from `AlgebraicGeometry.OrientedNearbyCycles.localDirectSections_existsUnique`
-- `Sheaf.Paper.OrientedNearbyStrictLocalDescription::AlgebraicGeometry.OrientedNearbyCycles.strictLocalIdentityPull` (line 235), chosen from `AlgebraicGeometry.OrientedNearbyCycles.strictLocalModuleIdentity_existsUnique`
-- `Sheaf.Paper.OrientedNearbyStrictLocalDescription::AlgebraicGeometry.OrientedNearbyCycles.strictLocalPointComp` (line 645), chosen from `AlgebraicGeometry.OrientedNearbyCycles.strictLocalPointComp_existsUnique`
-- `Sheaf.Paper.OrientedNearbyStrictLocalDescription::AlgebraicGeometry.OrientedNearbyCycles.strictLocalSigmaSquare` (line 812), chosen from `AlgebraicGeometry.OrientedNearbyCycles.strictLocalSigmaSquare_existsUnique`
-- `Sheaf.Paper.OrientedProperFibreExchange::AlgebraicGeometry.OrientedNearbyCycles.ProperFibre.baseSquare` (line 553), chosen from `AlgebraicGeometry.OrientedNearbyCycles.ProperFibre.baseSquare_existsUnique`
-- `Sheaf.Paper.OrientedProperFibreExchange::AlgebraicGeometry.OrientedNearbyCycles.ProperFibre.fibreSquare` (line 382), chosen from `AlgebraicGeometry.OrientedNearbyCycles.ProperFibre.fibreSquare_existsUnique`
-- `Sheaf.Paper.OrientedProperFibreExchange::AlgebraicGeometry.OrientedNearbyCycles.ProperFibre.strictLift` (line 122), chosen from `AlgebraicGeometry.OrientedNearbyCycles.ProperFibre.strictLift_existsUnique`
+- `Sheaf.Paper.OrientedNearbyStrictLocalDescription::AlgebraicGeometry.OrientedNearbyCycles.localDirectSections` (line 133), chosen from `AlgebraicGeometry.OrientedNearbyCycles.localDirectSections_existsUnique`
+- `Sheaf.Paper.OrientedNearbyStrictLocalDescription::AlgebraicGeometry.OrientedNearbyCycles.strictLocalIdentityPull` (line 236), chosen from `AlgebraicGeometry.OrientedNearbyCycles.strictLocalModuleIdentity_existsUnique`
+- `Sheaf.Paper.OrientedNearbyStrictLocalDescription::AlgebraicGeometry.OrientedNearbyCycles.strictLocalPointComp` (line 646), chosen from `AlgebraicGeometry.OrientedNearbyCycles.strictLocalPointComp_existsUnique`
+- `Sheaf.Paper.OrientedNearbyStrictLocalDescription::AlgebraicGeometry.OrientedNearbyCycles.strictLocalSigmaSquare` (line 813), chosen from `AlgebraicGeometry.OrientedNearbyCycles.strictLocalSigmaSquare_existsUnique`
+- `Sheaf.Paper.OrientedProperFibreExchange::AlgebraicGeometry.OrientedNearbyCycles.ProperFibre.baseSquare` (line 558), chosen from `AlgebraicGeometry.OrientedNearbyCycles.ProperFibre.baseSquare_existsUnique`
+- `Sheaf.Paper.OrientedProperFibreExchange::AlgebraicGeometry.OrientedNearbyCycles.ProperFibre.fibreSquare` (line 387), chosen from `AlgebraicGeometry.OrientedNearbyCycles.ProperFibre.fibreSquare_existsUnique`
+- `Sheaf.Paper.OrientedProperFibreExchange::AlgebraicGeometry.OrientedNearbyCycles.ProperFibre.strictLift` (line 127), chosen from `AlgebraicGeometry.OrientedNearbyCycles.ProperFibre.strictLift_existsUnique`
 - `Sheaf.Paper.PbcActualRingedExchange::AlgebraicGeometry.Scheme.pbcActualCompletedPullCompIso` (line 193), chosen from `AlgebraicGeometry.Scheme.pbcActualCompletedPullCompIso_exists`
 - `Sheaf.Paper.PbcActualRingedExchange::AlgebraicGeometry.Scheme.pbcActualCompletedPullIdIso` (line 211), chosen from `AlgebraicGeometry.Scheme.pbcActualCompletedPullIdIso_exists`
 - `Sheaf.Paper.PbcActualRingedExchange::AlgebraicGeometry.Scheme.pbcActualDerivedPullCompIso` (line 96), chosen from `AlgebraicGeometry.Scheme.pbcActualDerivedPullCompIso_exists`
@@ -684,28 +684,28 @@ Definitions with undetermined data (class-1 exceptions in `coord/hollow-definiti
 - `Sheaf.Paper.PbcCompletedPullbackActual::AlgebraicGeometry.Scheme.pbcActualModuleAdjunction` (line 96), chosen from `AlgebraicGeometry.Scheme.pbcActualModuleAdjunction_exists`
 - `Sheaf.Paper.PbcCompletedPullbackActual::AlgebraicGeometry.Scheme.pbcActualPullShift` (line 229), chosen from `AlgebraicGeometry.Scheme.pbcActualPullShift_exists`
 - `Sheaf.Paper.PbcCompletedPullbackActual::AlgebraicGeometry.Scheme.pbcActualPushShift` (line 246), chosen from `AlgebraicGeometry.Scheme.pbcActualPushShift_exists`
-- `Sheaf.Paper.PbcDescentFunctors::AlgebraicGeometry.Scheme.PbcDirectImageBetaSpec` (line 238), chosen from `AlgebraicGeometry.Scheme.pbcScalarDirectImage_rational`
-- `Sheaf.Paper.PbcDescentFunctors::AlgebraicGeometry.Scheme.PbcPullbackBetaSpec` (line 270), chosen from `AlgebraicGeometry.Scheme.pbcScalarCompletedPull_rational`
+- `Sheaf.Paper.PbcDescentFunctors::AlgebraicGeometry.Scheme.PbcDirectImageBetaSpec` (line 239), chosen from `AlgebraicGeometry.Scheme.pbcScalarDirectImage_rational`
+- `Sheaf.Paper.PbcDescentFunctors::AlgebraicGeometry.Scheme.PbcPullbackBetaSpec` (line 271), chosen from `AlgebraicGeometry.Scheme.pbcScalarCompletedPull_rational`
 - `Sheaf.Paper.PbcFiniteCompletedCoefficientMap::AlgebraicGeometry.Scheme.pbcCompletedScalarMap` (line 159), chosen from `AlgebraicGeometry.Scheme.pbcCompletedScalarMap_exists`
 - `Sheaf.Paper.PbcQbarCategory::AlgebraicGeometry.Scheme.qbarStageFieldEquiv` (line 208), chosen from `AlgebraicGeometry.Scheme.qbarStageFieldEquiv_exists`
 - `Sheaf.Paper.PbcQbarCompletedPullback::AlgebraicGeometry.Scheme.pbcQbarPullFamily` (line 72), chosen from `AlgebraicGeometry.Scheme.pbcQbarPullFamily_existsUnique`
 - `Sheaf.Paper.PbcQbarStandardCohomology::AlgebraicGeometry.Scheme.pbcQbarStandardT` (line 60), chosen from `AlgebraicGeometry.Scheme.pbcQbarStandardT_existsUnique`
-- `Sheaf.Paper.PbcScalarExtension::AlgebraicGeometry.Scheme.pbcAmbientScalarShift` (line 518), chosen from `AlgebraicGeometry.Scheme.pbcAmbientScalarShift_exists`
-- `Sheaf.Paper.PbcScalarExtension::AlgebraicGeometry.Scheme.pbcIntegralScalarShift` (line 547), chosen from `AlgebraicGeometry.Scheme.pbcIntegralScalarShift_exists`
-- `Sheaf.Paper.PbcScalarExtension::AlgebraicGeometry.Scheme.pbcRationalScalarHom` (line 302), chosen from `AlgebraicGeometry.Scheme.pbcRationalScalarHom_exists`
-- `Sheaf.Paper.PbcScalarExtension::AlgebraicGeometry.Scheme.pbcRationalScalarShift` (line 588), chosen from `AlgebraicGeometry.Scheme.pbcRationalScalarShift_exists`
-- `Sheaf.Paper.PbcScalarExtension::AlgebraicGeometry.Scheme.pbcScalarCoefficientMap` (line 236), chosen from `AlgebraicGeometry.Scheme.pbcScalarCoefficientMap_exists`
-- `Sheaf.Paper.PbcScalarExtension::AlgebraicGeometry.Scheme.pbcScalarCompletionIso` (line 848), chosen from `AlgebraicGeometry.Scheme.pbcScalarCompletionIso_exists`
-- `Sheaf.Paper.PbcScalarExtension::AlgebraicGeometry.Scheme.pbcScalarRestrictId` (line 439), chosen from `AlgebraicGeometry.Scheme.pbcScalarRestrictId_exists`
-- `Sheaf.Paper.PbcVerdierAxioms::CategoryTheory.StageSystem.qbarPairPretriangulated` (line 65), chosen from `CategoryTheory.StageSystem.commonStage_verdier_existsUnique`
+- `Sheaf.Paper.PbcScalarExtension::AlgebraicGeometry.Scheme.pbcAmbientScalarShift` (line 531), chosen from `AlgebraicGeometry.Scheme.pbcAmbientScalarShift_exists`
+- `Sheaf.Paper.PbcScalarExtension::AlgebraicGeometry.Scheme.pbcIntegralScalarShift` (line 560), chosen from `AlgebraicGeometry.Scheme.pbcIntegralScalarShift_exists`
+- `Sheaf.Paper.PbcScalarExtension::AlgebraicGeometry.Scheme.pbcRationalScalarHom` (line 315), chosen from `AlgebraicGeometry.Scheme.pbcRationalScalarHom_exists`
+- `Sheaf.Paper.PbcScalarExtension::AlgebraicGeometry.Scheme.pbcRationalScalarShift` (line 601), chosen from `AlgebraicGeometry.Scheme.pbcRationalScalarShift_exists`
+- `Sheaf.Paper.PbcScalarExtension::AlgebraicGeometry.Scheme.pbcScalarCoefficientMap` (line 249), chosen from `AlgebraicGeometry.Scheme.pbcScalarCoefficientMap_exists`
+- `Sheaf.Paper.PbcScalarExtension::AlgebraicGeometry.Scheme.pbcScalarCompletionIso` (line 861), chosen from `AlgebraicGeometry.Scheme.pbcScalarCompletionIso_exists`
+- `Sheaf.Paper.PbcScalarExtension::AlgebraicGeometry.Scheme.pbcScalarRestrictId` (line 452), chosen from `AlgebraicGeometry.Scheme.pbcScalarRestrictId_exists`
+- `Sheaf.Paper.PbcVerdierAxioms::CategoryTheory.StageSystem.qbarPairPretriangulated` (line 75), chosen from `CategoryTheory.StageSystem.commonStage_verdier_existsUnique`
 - `Sheaf.Paper.PbcWeilCategory::CategoryTheory.Endofunctor.IsoAlgebra.preadditive` (line 65), chosen from `CategoryTheory.Endofunctor.IsoAlgebra.preadditive_exists`
 - `Sheaf.Paper.PbcWeilCategory::WeilConjectures.weilScalarAssociator` (line 187), chosen from `WeilConjectures.weilScalarAssociator_exists`
-- `Sheaf.Paper.PerfectProjectionFormula::AlgebraicGeometry.Scheme.PerfectProjection.mixed` (line 332), chosen from `AlgebraicGeometry.Scheme.PerfectProjection.mixed_existsUnique`
-- `Sheaf.Paper.PerfectProjectionFormula::AlgebraicGeometry.Scheme.PerfectProjection.ordinaryUnit` (line 356), chosen from `AlgebraicGeometry.Scheme.PerfectProjection.ordinaryUnit_existsUnique`
-- `Sheaf.Paper.PerfectProjectionFormula::AlgebraicGeometry.Scheme.PerfectProjection.quotientModuleMap` (line 257), chosen from `AlgebraicGeometry.Scheme.PerfectProjection.quotientModuleMap_existsUnique`
-- `Sheaf.Paper.PerfectProjectionFormula::AlgebraicGeometry.Scheme.PerfectProjection.quotientPullback` (line 191), chosen from `AlgebraicGeometry.Scheme.PerfectProjection.quotientPullback_existsUnique`
-- `Sheaf.Paper.PointCompletedEvaluation::WeilConjectures.PointCompletedEvaluation.extension` (line 119), chosen from `WeilConjectures.PointCompletedEvaluation.extension_existsUnique`
-- `Sheaf.Paper.PointCompletedEvaluation::WeilConjectures.PointCompletedEvaluation.towerBalancing` (line 175), chosen from `WeilConjectures.PointCompletedEvaluation.towerBalancing_existsUnique`
+- `Sheaf.Paper.PerfectProjectionFormula::AlgebraicGeometry.Scheme.PerfectProjection.mixed` (line 333), chosen from `AlgebraicGeometry.Scheme.PerfectProjection.mixed_existsUnique`
+- `Sheaf.Paper.PerfectProjectionFormula::AlgebraicGeometry.Scheme.PerfectProjection.ordinaryUnit` (line 357), chosen from `AlgebraicGeometry.Scheme.PerfectProjection.ordinaryUnit_existsUnique`
+- `Sheaf.Paper.PerfectProjectionFormula::AlgebraicGeometry.Scheme.PerfectProjection.quotientModuleMap` (line 258), chosen from `AlgebraicGeometry.Scheme.PerfectProjection.quotientModuleMap_existsUnique`
+- `Sheaf.Paper.PerfectProjectionFormula::AlgebraicGeometry.Scheme.PerfectProjection.quotientPullback` (line 192), chosen from `AlgebraicGeometry.Scheme.PerfectProjection.quotientPullback_existsUnique`
+- `Sheaf.Paper.PointCompletedEvaluation::WeilConjectures.PointCompletedEvaluation.extension` (line 121), chosen from `WeilConjectures.PointCompletedEvaluation.extension_existsUnique`
+- `Sheaf.Paper.PointCompletedEvaluation::WeilConjectures.PointCompletedEvaluation.towerBalancing` (line 177), chosen from `WeilConjectures.PointCompletedEvaluation.towerBalancing_existsUnique`
 - `Sheaf.Paper.PointFibreDerivedTensorBasic::WeilConjectures.integralPointFibreTensorBifunctor` (line 82), chosen from `WeilConjectures.finiteFieldSpecCoefficientPrimeInvertible`
 - `Sheaf.Paper.PointFibreDerivedTensorBasic::WeilConjectures.pointQbarSourceTensor` (line 239), chosen from `WeilConjectures.finiteFieldSpecCoefficientPrimeInvertible`
 - `Sheaf.Paper.PointFibreDerivedTensorBasic::WeilConjectures.rationalPointFibreTensorBifunctor` (line 101), chosen from `WeilConjectures.finiteFieldSpecCoefficientPrimeInvertible`
@@ -720,21 +720,21 @@ Definitions with undetermined data (class-1 exceptions in `coord/hollow-definiti
 - `Sheaf.Paper.PointReductionUnits::WeilConjectures.pointUnitFiniteSheafUnit` (line 381), chosen from `WeilConjectures.pointUnitFiniteSheafAdjunction`
 - `Sheaf.Paper.PointReductionUnits::WeilConjectures.pointUnitIntegralModuleUnit` (line 361), chosen from `WeilConjectures.pointUnitIntegralModuleAdjunction`
 - `Sheaf.Paper.PointReductionUnits::WeilConjectures.pointUnitIntegralSectionsRestrictionIso` (line 141), chosen from `WeilConjectures.pointUnitIntegralSectionsRestriction`
-- `Sheaf.Paper.PointSectionsScalarExtension::WeilConjectures.pointDerivedTensorRationalization` (line 513), chosen from `WeilConjectures.pointTensorRationalization_existsUnique`
-- `Sheaf.Paper.PointSectionsScalarExtension::WeilConjectures.pointIntegralModuleDerivedAssoc` (line 400), chosen from `WeilConjectures.pointIntegralModuleAssoc_existsUnique`
-- `Sheaf.Paper.PointSectionsScalarExtension::WeilConjectures.pointIntegralModuleDerivedUnit` (line 370), chosen from `WeilConjectures.pointIntegralModuleUnit_existsUnique`
-- `Sheaf.Paper.PointSectionsScalarExtension::WeilConjectures.pointOrdinaryDerivedComparison` (line 263), chosen from `WeilConjectures.pointOrdinaryDerivedComparison_existsUnique`
-- `Sheaf.Paper.PointSectionsScalarExtension::WeilConjectures.pointOrdinaryTensorAssoc` (line 338), chosen from `WeilConjectures.pointOrdinaryTensorAssoc_existsUnique`
-- `Sheaf.Paper.PointSectionsScalarExtension::WeilConjectures.pointOrdinaryTensorUnit` (line 299), chosen from `WeilConjectures.pointOrdinaryTensorUnit_existsUnique`
-- `Sheaf.Paper.PointSectionsScalarExtension::WeilConjectures.pointSectionsTensor` (line 216), chosen from `WeilConjectures.pointSectionsTensor_existsUnique`
+- `Sheaf.Paper.PointSectionsScalarExtension::WeilConjectures.pointDerivedTensorRationalization` (line 516), chosen from `WeilConjectures.pointTensorRationalization_existsUnique`
+- `Sheaf.Paper.PointSectionsScalarExtension::WeilConjectures.pointIntegralModuleDerivedAssoc` (line 403), chosen from `WeilConjectures.pointIntegralModuleAssoc_existsUnique`
+- `Sheaf.Paper.PointSectionsScalarExtension::WeilConjectures.pointIntegralModuleDerivedUnit` (line 373), chosen from `WeilConjectures.pointIntegralModuleUnit_existsUnique`
+- `Sheaf.Paper.PointSectionsScalarExtension::WeilConjectures.pointOrdinaryDerivedComparison` (line 266), chosen from `WeilConjectures.pointOrdinaryDerivedComparison_existsUnique`
+- `Sheaf.Paper.PointSectionsScalarExtension::WeilConjectures.pointOrdinaryTensorAssoc` (line 341), chosen from `WeilConjectures.pointOrdinaryTensorAssoc_existsUnique`
+- `Sheaf.Paper.PointSectionsScalarExtension::WeilConjectures.pointOrdinaryTensorUnit` (line 302), chosen from `WeilConjectures.pointOrdinaryTensorUnit_existsUnique`
+- `Sheaf.Paper.PointSectionsScalarExtension::WeilConjectures.pointSectionsTensor` (line 219), chosen from `WeilConjectures.pointSectionsTensor_existsUnique`
 - `Sheaf.Paper.ProEtaleCanonicalTensorPullback::AlgebraicGeometry.Scheme.proEtaleCanonicalTensorComparison` (line 223), chosen from `AlgebraicGeometry.Scheme.proEtaleCanonicalTensorPullback`
 - `Sheaf.Paper.ProEtaleCanonicalTensorPullback::AlgebraicGeometry.Scheme.proEtaleOrdinaryTensorPullback` (line 129), chosen from `AlgebraicGeometry.Scheme.proEtaleOrdinaryTensorPullback_existsUnique`
-- `Sheaf.Paper.ProEtaleConstantReductionTower::AlgebraicGeometry.Scheme.OrderedExchange.augmentation` (line 198), chosen from `AlgebraicGeometry.Scheme.OrderedExchange.augmentation_existsUnique`
-- `Sheaf.Paper.ProEtaleConstantReductionTower::AlgebraicGeometry.Scheme.OrderedExchange.ordinaryAugmentation` (line 175), chosen from `AlgebraicGeometry.Scheme.OrderedExchange.ordinaryAugmentation_existsUnique`
-- `Sheaf.Paper.ProEtaleConstantReductionTower::AlgebraicGeometry.Scheme.OrderedExchange.reduction` (line 122), chosen from `AlgebraicGeometry.Scheme.OrderedExchange.reduction_exists`
-- `Sheaf.Paper.ProEtaleConstantReductionTower::AlgebraicGeometry.Scheme.OrderedExchange.reductionCounit` (line 126), chosen from `AlgebraicGeometry.Scheme.OrderedExchange.reduction_exists`
-- `Sheaf.Paper.ProEtaleConstantReductionTower::AlgebraicGeometry.Scheme.OrderedExchange.reductionPullIso` (line 361), chosen from `AlgebraicGeometry.Scheme.OrderedExchange.reductionPullIso_existsUnique`
-- `Sheaf.Paper.ProEtaleConstantReductionTower::AlgebraicGeometry.Scheme.OrderedExchange.step` (line 79), chosen from `AlgebraicGeometry.Scheme.OrderedExchange.step_existsUnique`
+- `Sheaf.Paper.ProEtaleConstantReductionTower::AlgebraicGeometry.Scheme.OrderedExchange.augmentation` (line 216), chosen from `AlgebraicGeometry.Scheme.OrderedExchange.augmentation_existsUnique`
+- `Sheaf.Paper.ProEtaleConstantReductionTower::AlgebraicGeometry.Scheme.OrderedExchange.ordinaryAugmentation` (line 193), chosen from `AlgebraicGeometry.Scheme.OrderedExchange.ordinaryAugmentation_existsUnique`
+- `Sheaf.Paper.ProEtaleConstantReductionTower::AlgebraicGeometry.Scheme.OrderedExchange.reduction` (line 140), chosen from `AlgebraicGeometry.Scheme.OrderedExchange.reduction_exists`
+- `Sheaf.Paper.ProEtaleConstantReductionTower::AlgebraicGeometry.Scheme.OrderedExchange.reductionCounit` (line 144), chosen from `AlgebraicGeometry.Scheme.OrderedExchange.reduction_exists`
+- `Sheaf.Paper.ProEtaleConstantReductionTower::AlgebraicGeometry.Scheme.OrderedExchange.reductionPullIso` (line 379), chosen from `AlgebraicGeometry.Scheme.OrderedExchange.reductionPullIso_existsUnique`
+- `Sheaf.Paper.ProEtaleConstantReductionTower::AlgebraicGeometry.Scheme.OrderedExchange.step` (line 97), chosen from `AlgebraicGeometry.Scheme.OrderedExchange.step_existsUnique`
 - `Sheaf.Paper.ProEtaleProjectionFormulaArrows::AlgebraicGeometry.Scheme.proEtaleMixedTensor` (line 99), chosen from `AlgebraicGeometry.Scheme.proEtaleMixedTensor_existsUnique`
 - `Sheaf.Paper.ProEtaleSectionModuleFunctors::AlgebraicGeometry.ProEtale.ModuleRingedComparison.internalPushLax` (line 177), chosen from `AlgebraicGeometry.ProEtale.ModuleRingedComparison.internalPushNormalized_existsUnique`
 - `Sheaf.Paper.ProEtaleSectionModuleFunctors::AlgebraicGeometry.ProEtale.ModuleRingedComparison.ordinaryTensorComparison` (line 295), chosen from `AlgebraicGeometry.ProEtale.ModuleRingedComparison.ordinaryTensorComparison_existsUnique`
@@ -754,36 +754,36 @@ Definitions with undetermined data (class-1 exceptions in `coord/hollow-definiti
 - `Sheaf.Paper.ProperBaseChangeFourCorners::AlgebraicGeometry.Scheme.fourCornerReductionPullback` (line 361), chosen from `AlgebraicGeometry.Scheme.fourCornerReductionPullback_exists`
 - `Sheaf.Paper.ProperBaseChangeFourCorners::AlgebraicGeometry.Scheme.fourCornerRestrictionPullback` (line 248), chosen from `AlgebraicGeometry.Scheme.fourCornerRestrictionPullback_exists`
 - `Sheaf.Paper.ProperOpenCoefficientMate::AlgebraicGeometry.Etale.properOpenCoefficientInterchange` (line 54), chosen from `AlgebraicGeometry.Etale.unboundedProperOpenInterchange`
-- `Sheaf.Paper.ProperOpenRefinementAdjointProjection::AlgebraicGeometry.Etale.unboundedProperOpenRefinementComparison` (line 39), chosen from `AlgebraicGeometry.Etale.unboundedProperOpenInterchange`
-- `Sheaf.Paper.PurEtaleScalarMateProjection::AlgebraicGeometry.Etale.scalarPullbackIso` (line 101), chosen from `AlgebraicGeometry.Etale.scalarPullbackIso_existsUnique`
-- `Sheaf.Paper.PurTwistSheafLocallyFree::AlgebraicGeometry.Scheme.purTwistCompletedScalarMap` (line 316), chosen from `AlgebraicGeometry.Scheme.purTwistCompletedScalarMap_existsUnique`
-- `Sheaf.Paper.PurTwistSheafLocallyFree::AlgebraicGeometry.Scheme.purTwistIntegersMap` (line 242), chosen from `AlgebraicGeometry.Scheme.purTwistIntegersMap_existsUnique`
-- `Sheaf.Paper.PurTwistSheafLocallyFree::AlgebraicGeometry.Scheme.purTwistIntegralAction` (line 393), chosen from `AlgebraicGeometry.Scheme.purTwistIntegralAction_existsUnique`
-- `Sheaf.Paper.PurTwistSheafLocallyFree::AlgebraicGeometry.Scheme.purTwistIntegralCompletionMap` (line 281), chosen from `AlgebraicGeometry.Scheme.purTwistIntegralCompletionMap_existsUnique`
-- `Sheaf.Paper.PurTwistSheafLocallyFree::AlgebraicGeometry.Scheme.purTwistZlAction` (line 204), chosen from `AlgebraicGeometry.Scheme.purTwistZlAction_existsUnique`
-- `Sheaf.Paper.PurTwistSheafLocallyFree::AlgebraicGeometry.Scheme.purTwistZlCompletionMap` (line 144), chosen from `AlgebraicGeometry.Scheme.purTwistZlCompletionMap_existsUnique`
+- `Sheaf.Paper.ProperOpenRefinementAdjointProjection::AlgebraicGeometry.Etale.unboundedProperOpenRefinementComparison` (line 45), chosen from `AlgebraicGeometry.Etale.unboundedProperOpenInterchange`
+- `Sheaf.Paper.PurEtaleScalarMateProjection::AlgebraicGeometry.Etale.scalarPullbackIso` (line 105), chosen from `AlgebraicGeometry.Etale.scalarPullbackIso_existsUnique`
+- `Sheaf.Paper.PurTwistSheafLocallyFree::AlgebraicGeometry.Scheme.purTwistCompletedScalarMap` (line 324), chosen from `AlgebraicGeometry.Scheme.purTwistCompletedScalarMap_existsUnique`
+- `Sheaf.Paper.PurTwistSheafLocallyFree::AlgebraicGeometry.Scheme.purTwistIntegersMap` (line 250), chosen from `AlgebraicGeometry.Scheme.purTwistIntegersMap_existsUnique`
+- `Sheaf.Paper.PurTwistSheafLocallyFree::AlgebraicGeometry.Scheme.purTwistIntegralAction` (line 401), chosen from `AlgebraicGeometry.Scheme.purTwistIntegralAction_existsUnique`
+- `Sheaf.Paper.PurTwistSheafLocallyFree::AlgebraicGeometry.Scheme.purTwistIntegralCompletionMap` (line 289), chosen from `AlgebraicGeometry.Scheme.purTwistIntegralCompletionMap_existsUnique`
+- `Sheaf.Paper.PurTwistSheafLocallyFree::AlgebraicGeometry.Scheme.purTwistZlAction` (line 212), chosen from `AlgebraicGeometry.Scheme.purTwistZlAction_existsUnique`
+- `Sheaf.Paper.PurTwistSheafLocallyFree::AlgebraicGeometry.Scheme.purTwistZlCompletionMap` (line 152), chosen from `AlgebraicGeometry.Scheme.purTwistZlCompletionMap_existsUnique`
 - `Sheaf.Paper.PurityAffineLineDatum::WeilConjectures.PurityFiniteSetting.puncturedMap` (line 198), chosen from `WeilConjectures.PurityFiniteSetting.existsUnique_puncturedMap`
 - `Sheaf.Paper.PurityAffineLineDatum::WeilConjectures.PurityFiniteSetting.rootCoefficientMap` (line 107), chosen from `WeilConjectures.PurityFiniteSetting.existsUnique_rootCoefficientMap`
 - `Sheaf.Paper.PurityAffineLineDatum::WeilConjectures.PurityFiniteSetting.rootPullback` (line 148), chosen from `WeilConjectures.PurityFiniteSetting.existsUnique_rootPullback`
 - `Sheaf.Paper.PurityAffineLineDatum::WeilConjectures.PurityFiniteSetting.twistEtalePullback` (line 170), chosen from `WeilConjectures.PurityFiniteSetting.existsUnique_twistEtalePullback`
 - `Sheaf.Paper.PurityChernClasses::WeilConjectures.PurityFiniteSetting.ordinaryFiniteChernClasses` (line 194), chosen from `WeilConjectures.PurityFiniteSetting.existsUniqueOrdinaryFiniteChernClasses`
-- `Sheaf.Paper.PurityCompositionCoherence::WeilConjectures.PurityFiniteSetting.compositionFixedPullbackComp` (line 338), chosen from `WeilConjectures.PurityFiniteSetting.existsUnique_compositionFixedPullbackComp`
-- `Sheaf.Paper.PurityCompositionCoherence::WeilConjectures.PurityFiniteSetting.compositionPullbackTensor` (line 225), chosen from `WeilConjectures.PurityFiniteSetting.existsUnique_compositionPullbackTensor`
-- `Sheaf.Paper.PurityCompositionCoherence::WeilConjectures.PurityFiniteSetting.compositionPullbackTensorFixed` (line 288), chosen from `WeilConjectures.PurityFiniteSetting.existsUnique_compositionPullbackTensorFixed`
-- `Sheaf.Paper.PurityCompositionCoherence::WeilConjectures.PurityFiniteSetting.compositionSourceFixed` (line 486), chosen from `WeilConjectures.PurityFiniteSetting.existsUnique_compositionSourceFixed`
-- `Sheaf.Paper.PurityCompositionCoherence::WeilConjectures.PurityFiniteSetting.compositionTensorAssociatorFixed` (line 376), chosen from `WeilConjectures.PurityFiniteSetting.existsUnique_compositionTensorAssociatorFixed`
+- `Sheaf.Paper.PurityCompositionCoherence::WeilConjectures.PurityFiniteSetting.compositionFixedPullbackComp` (line 351), chosen from `WeilConjectures.PurityFiniteSetting.existsUnique_compositionFixedPullbackComp`
+- `Sheaf.Paper.PurityCompositionCoherence::WeilConjectures.PurityFiniteSetting.compositionPullbackTensor` (line 238), chosen from `WeilConjectures.PurityFiniteSetting.existsUnique_compositionPullbackTensor`
+- `Sheaf.Paper.PurityCompositionCoherence::WeilConjectures.PurityFiniteSetting.compositionPullbackTensorFixed` (line 301), chosen from `WeilConjectures.PurityFiniteSetting.existsUnique_compositionPullbackTensorFixed`
+- `Sheaf.Paper.PurityCompositionCoherence::WeilConjectures.PurityFiniteSetting.compositionSourceFixed` (line 499), chosen from `WeilConjectures.PurityFiniteSetting.existsUnique_compositionSourceFixed`
+- `Sheaf.Paper.PurityCompositionCoherence::WeilConjectures.PurityFiniteSetting.compositionTensorAssociatorFixed` (line 389), chosen from `WeilConjectures.PurityFiniteSetting.existsUnique_compositionTensorAssociatorFixed`
 - `Sheaf.Paper.PurityConventions::WeilConjectures.PurityConventions.coefficientComparison` (line 147), chosen from `WeilConjectures.PurityConventions.coefficientComparison_existsUnique`
 - `Sheaf.Paper.PurityConventions::WeilConjectures.PurityConventions.finiteLinePullback` (line 215), chosen from `WeilConjectures.PurityConventions.finiteLinePullback_existsUnique`
 - `Sheaf.Paper.PurityConventions::WeilConjectures.PurityConventions.finiteLineTransition` (line 279), chosen from `WeilConjectures.PurityConventions.finiteLineTransition_existsUnique`
 - `Sheaf.Paper.PurityConventions::WeilConjectures.PurityConventions.rootRestriction` (line 98), chosen from `WeilConjectures.PurityConventions.rootRestriction_existsUnique`
-- `Sheaf.Paper.PurityDiagonalDualizingObject::WeilConjectures.PurityFiniteSetting.diagonalDualizingObject` (line 267), chosen from `WeilConjectures.PurityFiniteSetting.existsUnique_diagonalDualizingObject`
+- `Sheaf.Paper.PurityDiagonalDualizingObject::WeilConjectures.PurityFiniteSetting.diagonalDualizingObject` (line 282), chosen from `WeilConjectures.PurityFiniteSetting.existsUnique_diagonalDualizingObject`
 - `Sheaf.Paper.PurityFrameClass::WeilConjectures.PurityFiniteSetting.frameIntersectionIso` (line 102), chosen from `WeilConjectures.PurityFiniteSetting.frameIntersection_existsUnique`
 - `Sheaf.Paper.PurityRegularSection::AlgebraicGeometry.regularSectionGeometric` (line 130), chosen from `AlgebraicGeometry.regularSectionGeometric_existsUnique`
 - `Sheaf.Paper.PurityRegularSection::AlgebraicGeometry.regularSectionSumZeroComparison` (line 357), chosen from `AlgebraicGeometry.regularSectionSumZeroComparison_existsUnique`
-- `Sheaf.Paper.QbarCoefficientSmoothBaseChange::AlgebraicGeometry.Scheme.QbarCoefficientSmoothBaseChange.pullModel` (line 123), chosen from `AlgebraicGeometry.Scheme.pbcActualCompletedPullback_tower`
-- `Sheaf.Paper.QbarCohomologyFiniteLevelComparison::AlgebraicGeometry.Scheme.QbarFiniteLevel.completedPullUnit` (line 332), chosen from `AlgebraicGeometry.Scheme.QbarFiniteLevel.completedPullUnit_exists`
-- `Sheaf.Paper.QbarCohomologyFiniteLevelComparison::AlgebraicGeometry.Scheme.QbarFiniteLevel.pairPullShiftUnit` (line 414), chosen from `AlgebraicGeometry.Scheme.QbarFiniteLevel.pairPullShiftUnit_exists`
-- `Sheaf.Paper.QbarCohomologyFiniteLevelComparison::AlgebraicGeometry.Scheme.QbarFiniteLevel.pairPullUnit` (line 368), chosen from `AlgebraicGeometry.Scheme.QbarFiniteLevel.pairPullUnit_exists`
+- `Sheaf.Paper.QbarCoefficientSmoothBaseChange::AlgebraicGeometry.Scheme.QbarCoefficientSmoothBaseChange.pullModel` (line 124), chosen from `AlgebraicGeometry.Scheme.pbcActualCompletedPullback_tower`
+- `Sheaf.Paper.QbarCohomologyFiniteLevelComparison::AlgebraicGeometry.Scheme.QbarFiniteLevel.completedPullUnit` (line 337), chosen from `AlgebraicGeometry.Scheme.QbarFiniteLevel.completedPullUnit_exists`
+- `Sheaf.Paper.QbarCohomologyFiniteLevelComparison::AlgebraicGeometry.Scheme.QbarFiniteLevel.pairPullShiftUnit` (line 419), chosen from `AlgebraicGeometry.Scheme.QbarFiniteLevel.pairPullShiftUnit_exists`
+- `Sheaf.Paper.QbarCohomologyFiniteLevelComparison::AlgebraicGeometry.Scheme.QbarFiniteLevel.pairPullUnit` (line 373), chosen from `AlgebraicGeometry.Scheme.QbarFiniteLevel.pairPullUnit_exists`
 - `Sheaf.Paper.QcqsCompactSupportRealization::WeilConjectures.sfQcqsCompactSupportRealization` (line 83), chosen from `WeilConjectures.sfQcqsCompactSupportRealization_existsUnique`
 - `Sheaf.Paper.QuotientCornerFrobeniusStructures::AlgebraicGeometry.Scheme.QuotientFrobenius.evaluationPull` (line 711), chosen from `AlgebraicGeometry.Scheme.QuotientFrobenius.moduleEvaluationPull_exists`
 - `Sheaf.Paper.QuotientCornerFrobeniusStructures::AlgebraicGeometry.Scheme.QuotientFrobenius.evaluationPush` (line 765), chosen from `AlgebraicGeometry.Scheme.QuotientFrobenius.evaluationPush_exists`
@@ -798,13 +798,13 @@ Definitions with undetermined data (class-1 exceptions in `coord/hollow-definiti
 - `Sheaf.Paper.QuotientCornerFrobeniusStructures::AlgebraicGeometry.Scheme.QuotientFrobenius.restrictionEvaluation` (line 855), chosen from `AlgebraicGeometry.Scheme.QuotientFrobenius.moduleRestrictionEvaluation_exists`
 - `Sheaf.Paper.QuotientCornerFrobeniusStructures::AlgebraicGeometry.Scheme.QuotientFrobenius.restrictionPull` (line 558), chosen from `AlgebraicGeometry.Scheme.QuotientFrobenius.moduleRestrictionPull_exists`
 - `Sheaf.Paper.QuotientCornerFrobeniusStructures::AlgebraicGeometry.Scheme.QuotientFrobenius.restrictionPush` (line 593), chosen from `AlgebraicGeometry.Scheme.QuotientFrobenius.restrictionPush_exists`
-- `Sheaf.Paper.RationalLocalizingProjectionFormula::AlgebraicGeometry.ProEtale.CondensedRing.moduleObjectDerivedTensorComparison` (line 144), chosen from `AlgebraicGeometry.ProEtale.CondensedRing.existsUnique_moduleObjectDerivedTensorComparison`
+- `Sheaf.Paper.RationalLocalizingProjectionFormula::AlgebraicGeometry.ProEtale.CondensedRing.moduleObjectDerivedTensorComparison` (line 151), chosen from `AlgebraicGeometry.ProEtale.CondensedRing.existsUnique_moduleObjectDerivedTensorComparison`
 - `Sheaf.Paper.RationalPurityPresentation::AlgebraicGeometry.Scheme.pbcPurityDerivedScalarModel` (line 199), chosen from `AlgebraicGeometry.Scheme.pbcPurityDerivedScalarModel_existsUnique`
 - `Sheaf.Paper.RationalPurityPresentation::AlgebraicGeometry.Scheme.pbcPurityOrdinaryScalarModel` (line 177), chosen from `AlgebraicGeometry.Scheme.pbcPurityOrdinaryScalarModel_existsUnique`
 - `Sheaf.Paper.RationalPurityPresentation::AlgebraicGeometry.Scheme.pbcPurityOrdinaryTateModel` (line 145), chosen from `AlgebraicGeometry.Scheme.pbcPurityOrdinaryTateModel_existsUnique`
 - `Sheaf.Paper.RationalPurityPresentation::AlgebraicGeometry.Scheme.pbcPurityScalarNormalization` (line 441), chosen from `AlgebraicGeometry.Scheme.pbcPurityScalarNormalization_existsUnique`
-- `Sheaf.Paper.RationalThickEvaluation::WeilConjectures.IntegralOnSlice.linear` (line 120), chosen from `WeilConjectures.IntegralOnSlice.linear_existsUnique`
-- `Sheaf.Paper.RationalThickEvaluation::WeilConjectures.IntegralOnSlice.scalarChain` (line 93), chosen from `WeilConjectures.IntegralOnSlice.scalarChain_existsUnique`
+- `Sheaf.Paper.RationalThickEvaluation::WeilConjectures.IntegralOnSlice.linear` (line 125), chosen from `WeilConjectures.IntegralOnSlice.linear_existsUnique`
+- `Sheaf.Paper.RationalThickEvaluation::WeilConjectures.IntegralOnSlice.scalarChain` (line 98), chosen from `WeilConjectures.IntegralOnSlice.scalarChain_existsUnique`
 - `Sheaf.Paper.RationalizationKaroubi::WeilConjectures.rationalConstructibleHomCoordinates` (line 193), chosen from `WeilConjectures.rationalConstructibleHomCoordinates_existsUnique`
 - `Sheaf.Paper.RationalizationKaroubi::WeilConjectures.rationalOrdinaryComparison` (line 283), chosen from `WeilConjectures.rationalOrdinaryComparison_existsUnique`
 - `Sheaf.Paper.RationalizationKaroubi::WeilConjectures.rationalScalarExtension` (line 157), chosen from `WeilConjectures.rationalScalarExtension_existsUnique`
@@ -812,22 +812,22 @@ Definitions with undetermined data (class-1 exceptions in `coord/hollow-definiti
 - `Sheaf.Paper.RealSheafSections::AlgebraicGeometry.Scheme.etaleIntegralEvaluation` (line 87), chosen from `AlgebraicGeometry.Scheme.etaleIntegralEvaluation_exists`
 - `Sheaf.Paper.RealSheafSections::AlgebraicGeometry.Scheme.etaleSectionsFrobenius` (line 151), chosen from `AlgebraicGeometry.Scheme.etaleSectionsFrobenius_exists`
 - `Sheaf.Paper.RealSheafSections::AlgebraicGeometry.WeilGroup.sectionsGeometricCurve_invertible` (line 198), chosen from `AlgebraicGeometry.WeilGroup.sectionsGeometricCurve_properties`
-- `Sheaf.Paper.ReconstructionUniformTower::AlgebraicGeometry.Scheme.localReductionDerivedData` (line 159), chosen from `AlgebraicGeometry.Scheme.localReductionDerived_exists`
-- `Sheaf.Paper.ReconstructionUniformTower::AlgebraicGeometry.Scheme.localReductionEvaluation` (line 214), chosen from `AlgebraicGeometry.Scheme.localReductionEvaluation_exists`
-- `Sheaf.Paper.ReconstructionUniformTower::AlgebraicGeometry.Scheme.localReductionStep` (line 114), chosen from `AlgebraicGeometry.Scheme.localReductionStep_exists`
-- `Sheaf.Paper.RelativeSupportBottomDescent::AlgebraicGeometry.Etale.relativeSupportEvaluationIso` (line 191), chosen from `AlgebraicGeometry.Etale.relativeSupportEvaluationIso_existsUnique`
-- `Sheaf.Paper.RelativeSupportBottomDescent::AlgebraicGeometry.Etale.relativeSupportGlobalIso` (line 293), chosen from `AlgebraicGeometry.Etale.relativeSupportGlobalIso_existsUnique`
-- `Sheaf.Paper.RelativeSupportCoordinateModel::AlgebraicGeometry.coordinateTateProduct` (line 218), chosen from `AlgebraicGeometry.coordinateTateProduct_existsUnique`
-- `Sheaf.Paper.RelativeSupportCoordinateModel::AlgebraicGeometry.coordinateTatePullback` (line 158), chosen from `AlgebraicGeometry.coordinateTatePullback_existsUnique`
-- `Sheaf.Paper.ResidueLissePerfectLift::AlgebraicGeometry.Scheme.residueLisseConstantComparison` (line 157), chosen from `AlgebraicGeometry.Scheme.residueLisseConstantComparison_exists`
+- `Sheaf.Paper.ReconstructionUniformTower::AlgebraicGeometry.Scheme.localReductionDerivedData` (line 165), chosen from `AlgebraicGeometry.Scheme.localReductionDerived_exists`
+- `Sheaf.Paper.ReconstructionUniformTower::AlgebraicGeometry.Scheme.localReductionEvaluation` (line 220), chosen from `AlgebraicGeometry.Scheme.localReductionEvaluation_exists`
+- `Sheaf.Paper.ReconstructionUniformTower::AlgebraicGeometry.Scheme.localReductionStep` (line 120), chosen from `AlgebraicGeometry.Scheme.localReductionStep_exists`
+- `Sheaf.Paper.RelativeSupportBottomDescent::AlgebraicGeometry.Etale.relativeSupportEvaluationIso` (line 192), chosen from `AlgebraicGeometry.Etale.relativeSupportEvaluationIso_existsUnique`
+- `Sheaf.Paper.RelativeSupportBottomDescent::AlgebraicGeometry.Etale.relativeSupportGlobalIso` (line 294), chosen from `AlgebraicGeometry.Etale.relativeSupportGlobalIso_existsUnique`
+- `Sheaf.Paper.RelativeSupportCoordinateModel::AlgebraicGeometry.coordinateTateProduct` (line 221), chosen from `AlgebraicGeometry.coordinateTateProduct_existsUnique`
+- `Sheaf.Paper.RelativeSupportCoordinateModel::AlgebraicGeometry.coordinateTatePullback` (line 161), chosen from `AlgebraicGeometry.coordinateTatePullback_existsUnique`
+- `Sheaf.Paper.ResidueLissePerfectLift::AlgebraicGeometry.Scheme.residueLisseConstantComparison` (line 168), chosen from `AlgebraicGeometry.Scheme.residueLisseConstantComparison_exists`
 - `Sheaf.Paper.RingedTopoiCanonicalTensorPullback::SheafOfModules.ringedTopoiCanonicalDerivedTensorComparison` (line 760), chosen from `SheafOfModules.ringedTopoiCanonicalDerivedTensorPullback`
-- `Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses::SheafOfModules.CanonicalTensorPullbackOfUniverses.ringedTopoiCanonicalDerivedTensorComparison` (line 165), chosen from `SheafOfModules.CanonicalTensorPullbackOfUniverses.ringedTopoiCanonicalDerivedTensorPullback`
-- `Sheaf.Paper.SbcCompletedOperations::WeilConjectures.sbcAdjunction` (line 393), chosen from `WeilConjectures.sbcAdjunction_exists`
-- `Sheaf.Paper.SbcCompletedOperations::WeilConjectures.sbcOrdinaryDerivedIso` (line 296), chosen from `WeilConjectures.sbcOrdinaryDerivedIso_exists`
-- `Sheaf.Paper.SbcCompletedOperations::WeilConjectures.sbcPullComp` (line 462), chosen from `WeilConjectures.sbcPullComp_exists`
-- `Sheaf.Paper.SbcCompletedOperations::WeilConjectures.sbcStrictSourceComparison` (line 779), chosen from `WeilConjectures.sbcStrictSourceComparison_exists`
-- `Sheaf.Paper.SbcCompletedOperations::WeilConjectures.sbcStrictTargetComparison` (line 808), chosen from `WeilConjectures.sbcStrictTargetComparison_exists`
-- `Sheaf.Paper.SbcCompletedOperations::WeilConjectures.sbcTheta` (line 622), chosen from `WeilConjectures.sbcTheta_exists`
+- `Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses::SheafOfModules.CanonicalTensorPullbackOfUniverses.ringedTopoiCanonicalDerivedTensorComparison` (line 175), chosen from `SheafOfModules.CanonicalTensorPullbackOfUniverses.ringedTopoiCanonicalDerivedTensorPullback`
+- `Sheaf.Paper.SbcCompletedOperations::WeilConjectures.sbcAdjunction` (line 422), chosen from `WeilConjectures.sbcAdjunction_exists`
+- `Sheaf.Paper.SbcCompletedOperations::WeilConjectures.sbcOrdinaryDerivedIso` (line 325), chosen from `WeilConjectures.sbcOrdinaryDerivedIso_exists`
+- `Sheaf.Paper.SbcCompletedOperations::WeilConjectures.sbcPullComp` (line 491), chosen from `WeilConjectures.sbcPullComp_exists`
+- `Sheaf.Paper.SbcCompletedOperations::WeilConjectures.sbcStrictSourceComparison` (line 808), chosen from `WeilConjectures.sbcStrictSourceComparison_exists`
+- `Sheaf.Paper.SbcCompletedOperations::WeilConjectures.sbcStrictTargetComparison` (line 837), chosen from `WeilConjectures.sbcStrictTargetComparison_exists`
+- `Sheaf.Paper.SbcCompletedOperations::WeilConjectures.sbcTheta` (line 651), chosen from `WeilConjectures.sbcTheta_exists`
 - `Sheaf.Paper.ScalarExtensionComposition::WeilConjectures.integralConstructibleScalarComp` (line 253), chosen from `WeilConjectures.integralConstructibleScalarComp_existsUnique`
 - `Sheaf.Paper.ScalarExtensionComposition::WeilConjectures.integralConstructibleScalarUnit` (line 268), chosen from `WeilConjectures.integralConstructibleScalarUnit_existsUnique`
 - `Sheaf.Paper.ScalarExtensionComposition::WeilConjectures.integralOrdinaryScalarComp` (line 194), chosen from `WeilConjectures.integralOrdinaryScalarComp_existsUnique`
@@ -853,18 +853,18 @@ Definitions with undetermined data (class-1 exceptions in `coord/hollow-definiti
 - `Sheaf.Paper.SfAlgebraicallyClosedCoefficients::WeilConjectures.SfAlgebraicallyClosedCoefficients.pretriangulated` (line 616), chosen from `CategoryTheory.StageSystem.commonStage_verdier_existsUnique`
 - `Sheaf.Paper.SfAlgebraicallyClosedCoefficients::WeilConjectures.SfAlgebraicallyClosedCoefficients.stageSystem` (line 267), chosen from `WeilConjectures.SfAlgebraicallyClosedCoefficients.stageSystem_existsUnique`
 - `Sheaf.Paper.SfAlgebraicallyClosedCoefficients::WeilConjectures.SfAlgebraicallyClosedCoefficients.transitionCommShift` (line 180), chosen from `WeilConjectures.SfAlgebraicallyClosedCoefficients.transitionCommShift_existsUnique`
-- `Sheaf.Paper.SfCbcCompactSupportCompositionLimit::AlgebraicGeometry.Scheme.SfCbcLetter.q` (line 230), chosen from `AlgebraicGeometry.Scheme.sfCbcTensorComparison_existsUnique`
-- `Sheaf.Paper.SfCbcCompactSupportCompositionLimit::AlgebraicGeometry.Scheme.sfCbcMorphism` (line 115), chosen from `CategoryTheory.ConstantCompletion.inverseImageData_exists`
-- `Sheaf.Paper.SfCbcExtensionZeroCompletion::AlgebraicGeometry.Scheme.sfCbcCompletionModelIso` (line 690), chosen from `AlgebraicGeometry.Scheme.sfCbcCompletionModelIso_existsUnique`
-- `Sheaf.Paper.SfCbcExtensionZeroCompletion::AlgebraicGeometry.Scheme.sfCbcConstantSliceMap` (line 71), chosen from `AlgebraicGeometry.Scheme.sfCbcConstantSliceMap_existsUnique`
-- `Sheaf.Paper.SfCbcExtensionZeroCompletion::AlgebraicGeometry.Scheme.sfCbcExtensionModel` (line 302), chosen from `AlgebraicGeometry.Scheme.sfCbcExtensionModel_existsUnique`
-- `Sheaf.Paper.SfCbcExtensionZeroCompletion::AlgebraicGeometry.Scheme.sfCbcFiniteCompletedIso` (line 735), chosen from `AlgebraicGeometry.Scheme.sfCbcFiniteCompletedHom_inverse`
-- `Sheaf.Paper.SfCbcExtensionZeroCompletion::AlgebraicGeometry.Scheme.sfCbcFiniteEvaluationIso` (line 856), chosen from `AlgebraicGeometry.Scheme.sfCbcFiniteModelIso_existsUnique`
-- `Sheaf.Paper.SfCbcExtensionZeroCompletion::AlgebraicGeometry.Scheme.sfCbcModelRingMap` (line 168), chosen from `AlgebraicGeometry.Scheme.sfCbcModelRingMap_existsUnique`
-- `Sheaf.Paper.SfCbcExtensionZeroCompletion::AlgebraicGeometry.Scheme.sfCbcOrdinaryTensorComparison` (line 431), chosen from `AlgebraicGeometry.Scheme.sfCbcOrdinaryTensorComparison_existsUnique`
-- `Sheaf.Paper.SfCbcExtensionZeroCompletion::AlgebraicGeometry.Scheme.sfCbcRealizationExtensionIso` (line 970), chosen from `AlgebraicGeometry.Scheme.sfCbcRealizationExtensionIso_existsUnique`
-- `Sheaf.Paper.SfCbcExtensionZeroCompletion::AlgebraicGeometry.Scheme.sfCbcRestrictExtensionIso` (line 619), chosen from `AlgebraicGeometry.Scheme.sfCbcRestrictExtensionIso_existsUnique`
-- `Sheaf.Paper.SfCbcExtensionZeroCompletion::AlgebraicGeometry.Scheme.sfCbcTensorComparison` (line 517), chosen from `AlgebraicGeometry.Scheme.sfCbcTensorComparison_existsUnique`
+- `Sheaf.Paper.SfCbcCompactSupportCompositionLimit::AlgebraicGeometry.Scheme.SfCbcLetter.q` (line 237), chosen from `AlgebraicGeometry.Scheme.sfCbcTensorComparison_existsUnique`
+- `Sheaf.Paper.SfCbcCompactSupportCompositionLimit::AlgebraicGeometry.Scheme.sfCbcMorphism` (line 122), chosen from `CategoryTheory.ConstantCompletion.inverseImageData_exists`
+- `Sheaf.Paper.SfCbcExtensionZeroCompletion::AlgebraicGeometry.Scheme.sfCbcCompletionModelIso` (line 700), chosen from `AlgebraicGeometry.Scheme.sfCbcCompletionModelIso_existsUnique`
+- `Sheaf.Paper.SfCbcExtensionZeroCompletion::AlgebraicGeometry.Scheme.sfCbcConstantSliceMap` (line 81), chosen from `AlgebraicGeometry.Scheme.sfCbcConstantSliceMap_existsUnique`
+- `Sheaf.Paper.SfCbcExtensionZeroCompletion::AlgebraicGeometry.Scheme.sfCbcExtensionModel` (line 312), chosen from `AlgebraicGeometry.Scheme.sfCbcExtensionModel_existsUnique`
+- `Sheaf.Paper.SfCbcExtensionZeroCompletion::AlgebraicGeometry.Scheme.sfCbcFiniteCompletedIso` (line 745), chosen from `AlgebraicGeometry.Scheme.sfCbcFiniteCompletedHom_inverse`
+- `Sheaf.Paper.SfCbcExtensionZeroCompletion::AlgebraicGeometry.Scheme.sfCbcFiniteEvaluationIso` (line 866), chosen from `AlgebraicGeometry.Scheme.sfCbcFiniteModelIso_existsUnique`
+- `Sheaf.Paper.SfCbcExtensionZeroCompletion::AlgebraicGeometry.Scheme.sfCbcModelRingMap` (line 178), chosen from `AlgebraicGeometry.Scheme.sfCbcModelRingMap_existsUnique`
+- `Sheaf.Paper.SfCbcExtensionZeroCompletion::AlgebraicGeometry.Scheme.sfCbcOrdinaryTensorComparison` (line 441), chosen from `AlgebraicGeometry.Scheme.sfCbcOrdinaryTensorComparison_existsUnique`
+- `Sheaf.Paper.SfCbcExtensionZeroCompletion::AlgebraicGeometry.Scheme.sfCbcRealizationExtensionIso` (line 980), chosen from `AlgebraicGeometry.Scheme.sfCbcRealizationExtensionIso_existsUnique`
+- `Sheaf.Paper.SfCbcExtensionZeroCompletion::AlgebraicGeometry.Scheme.sfCbcRestrictExtensionIso` (line 629), chosen from `AlgebraicGeometry.Scheme.sfCbcRestrictExtensionIso_existsUnique`
+- `Sheaf.Paper.SfCbcExtensionZeroCompletion::AlgebraicGeometry.Scheme.sfCbcTensorComparison` (line 527), chosen from `AlgebraicGeometry.Scheme.sfCbcTensorComparison_existsUnique`
 - `Sheaf.Paper.SfCommonStageDirectImage::WeilConjectures.sfModelPullCommShift` (line 123), chosen from `WeilConjectures.constructible_pullback_t_exact`
 - `Sheaf.Paper.SfCommonStageDirectImage::WeilConjectures.sfModelWeilDerivedPushForget` (line 203), chosen from `WeilConjectures.sfModelWeilDerivedPush_forget`
 - `Sheaf.Paper.SfCommonStageWeilCohomology::WeilConjectures.sfCohomologyShift` (line 51), chosen from `WeilConjectures.sfTruncationShift_existsUnique`
@@ -878,54 +878,55 @@ Definitions with undetermined data (class-1 exceptions in `coord/hollow-definiti
 - `Sheaf.Paper.SfDerivedDirectImage::WeilConjectures.sfDerivedRestrictionComparison` (line 146), chosen from `WeilConjectures.sfDerivedRestrictionComparison_existsUnique`
 - `Sheaf.Paper.SfDerivedDirectImage::WeilConjectures.sfDirectImageRestrictionComparison` (line 103), chosen from `WeilConjectures.sfDirectImageRestrictionComparison_existsUnique`
 - `Sheaf.Paper.SfExchanges::AlgebraicGeometry.Scheme.sfExchangeShriek` (line 93), chosen from `AlgebraicGeometry.Scheme.proEtale_openSquareExchange`
-- `Sheaf.Paper.SfImmersionCompletedPullbackComparison::AlgebraicGeometry.Scheme.ImmersionCompletedPullback.completedRingIso` (line 106), chosen from `AlgebraicGeometry.Scheme.ImmersionCompletedPullback.completedRingIso_exists`
-- `Sheaf.Paper.SfImmersionCompletedPullbackComparison::AlgebraicGeometry.Scheme.ImmersionCompletedPullback.derivedIso` (line 171), chosen from `AlgebraicGeometry.Scheme.ImmersionCompletedPullback.derivedIso_exists`
-- `Sheaf.Paper.SfImmersionCompletedPullbackComparison::AlgebraicGeometry.Scheme.ImmersionCompletedPullback.quotientEquiv` (line 78), chosen from `AlgebraicGeometry.Scheme.ImmersionCompletedPullback.quotientEquiv_exists`
-- `Sheaf.Paper.SfImmersionCompletedPullbackComparison::AlgebraicGeometry.Scheme.ImmersionCompletedPullback.roosInclusion` (line 494), chosen from `AlgebraicGeometry.Scheme.ImmersionCompletedPullback.roosInclusion_exists`
-- `Sheaf.Paper.SfImmersionCompletedPullbackComparison::AlgebraicGeometry.Scheme.ImmersionCompletedPullback.roosIso` (line 454), chosen from `AlgebraicGeometry.Scheme.ImmersionCompletedPullback.roosIso_exists`
-- `Sheaf.Paper.SfImmersionCompletedPullbackComparison::AlgebraicGeometry.Scheme.ImmersionCompletedPullback.roosMap` (line 475), chosen from `AlgebraicGeometry.Scheme.ImmersionCompletedPullback.roosMap_exists`
-- `Sheaf.Paper.SfImmersionCompletedPullbackComparison::AlgebraicGeometry.Scheme.ImmersionCompletedPullback.roosRlim` (line 550), chosen from `AlgebraicGeometry.Scheme.ImmersionCompletedPullback.roosRlim_exists`
-- `Sheaf.Paper.SfImmersionCompletedPullbackComparison::AlgebraicGeometry.Scheme.ImmersionCompletedPullback.strictIso` (line 329), chosen from `AlgebraicGeometry.Scheme.ImmersionCompletedPullback.strictIso_exists`
-- `Sheaf.Paper.SfImmersionCompletedPullbackComparison::AlgebraicGeometry.Scheme.ImmersionCompletedPullback.termwiseLimitIso` (line 515), chosen from `AlgebraicGeometry.Scheme.ImmersionCompletedPullback.termwiseLimitIso_exists`
+- `Sheaf.Paper.SfImmersionCompletedPullbackComparison::AlgebraicGeometry.Scheme.ImmersionCompletedPullback.completedRingIso` (line 107), chosen from `AlgebraicGeometry.Scheme.ImmersionCompletedPullback.completedRingIso_exists`
+- `Sheaf.Paper.SfImmersionCompletedPullbackComparison::AlgebraicGeometry.Scheme.ImmersionCompletedPullback.derivedIso` (line 172), chosen from `AlgebraicGeometry.Scheme.ImmersionCompletedPullback.derivedIso_exists`
+- `Sheaf.Paper.SfImmersionCompletedPullbackComparison::AlgebraicGeometry.Scheme.ImmersionCompletedPullback.quotientEquiv` (line 79), chosen from `AlgebraicGeometry.Scheme.ImmersionCompletedPullback.quotientEquiv_exists`
+- `Sheaf.Paper.SfImmersionCompletedPullbackComparison::AlgebraicGeometry.Scheme.ImmersionCompletedPullback.roosInclusion` (line 495), chosen from `AlgebraicGeometry.Scheme.ImmersionCompletedPullback.roosInclusion_exists`
+- `Sheaf.Paper.SfImmersionCompletedPullbackComparison::AlgebraicGeometry.Scheme.ImmersionCompletedPullback.roosIso` (line 455), chosen from `AlgebraicGeometry.Scheme.ImmersionCompletedPullback.roosIso_exists`
+- `Sheaf.Paper.SfImmersionCompletedPullbackComparison::AlgebraicGeometry.Scheme.ImmersionCompletedPullback.roosMap` (line 476), chosen from `AlgebraicGeometry.Scheme.ImmersionCompletedPullback.roosMap_exists`
+- `Sheaf.Paper.SfImmersionCompletedPullbackComparison::AlgebraicGeometry.Scheme.ImmersionCompletedPullback.roosRlim` (line 551), chosen from `AlgebraicGeometry.Scheme.ImmersionCompletedPullback.roosRlim_exists`
+- `Sheaf.Paper.SfImmersionCompletedPullbackComparison::AlgebraicGeometry.Scheme.ImmersionCompletedPullback.strictIso` (line 330), chosen from `AlgebraicGeometry.Scheme.ImmersionCompletedPullback.strictIso_exists`
+- `Sheaf.Paper.SfImmersionCompletedPullbackComparison::AlgebraicGeometry.Scheme.ImmersionCompletedPullback.termwiseLimitIso` (line 516), chosen from `AlgebraicGeometry.Scheme.ImmersionCompletedPullback.termwiseLimitIso_exists`
 - `Sheaf.Paper.SfIntegralReductionTower::WeilConjectures.sfDerivedReductionTransition` (line 156), chosen from `WeilConjectures.sfDerivedReductionTransition_existsUnique`
 - `Sheaf.Paper.SfIntegralReductionTower::WeilConjectures.sfReductionTransition` (line 113), chosen from `WeilConjectures.sfReductionTransition_existsUnique`
 - `Sheaf.Paper.SfRationalizationKaroubi::WeilConjectures.sfRationalHomCoordinates` (line 144), chosen from `WeilConjectures.sfRationalHomCoordinates_existsUnique`
 - `Sheaf.Paper.SfRationalizationKaroubi::WeilConjectures.sfRationalScalarExtension` (line 187), chosen from `WeilConjectures.sfRationalScalarExtension_existsUnique`
-- `Sheaf.Paper.SfScalarExtensionComposition::WeilConjectures.sfIntegralOrdinaryComparison` (line 81), chosen from `WeilConjectures.sfIntegralOrdinaryComparison_existsUnique`
-- `Sheaf.Paper.SfScalarExtensionComposition::WeilConjectures.sfIntegralScalarComp` (line 115), chosen from `WeilConjectures.sfIntegralScalarComp_existsUnique`
-- `Sheaf.Paper.SfScalarExtensionComposition::WeilConjectures.sfIntegralScalarUnit` (line 136), chosen from `WeilConjectures.sfIntegralScalarUnit_existsUnique`
-- `Sheaf.Paper.SfScalarExtensionComposition::WeilConjectures.sfRationalScalarComp` (line 162), chosen from `WeilConjectures.sfRationalScalarComp_existsUnique`
-- `Sheaf.Paper.SfScalarExtensionComposition::WeilConjectures.sfRationalScalarUnit` (line 185), chosen from `WeilConjectures.sfRationalScalarUnit_existsUnique`
-- `Sheaf.Paper.ShiftedTensorMorphismCalculus::SheafOfModules.derivedTensorAssociator` (line 274), chosen from `SheafOfModules.derivedTensorAssociator_exists`
-- `Sheaf.Paper.ShiftedTensorMorphismCalculus::SheafOfModules.derivedTensorSymmetry` (line 200), chosen from `SheafOfModules.derivedTensorSymmetry_exists`
-- `Sheaf.Paper.ShiftedTensorMorphismCalculus::SheafOfModules.shiftedExactTensorPullback` (line 423), chosen from `SheafOfModules.shiftedExactTensorPullback_exists`
-- `Sheaf.Paper.ShiftedTensorMorphismCalculus::SheafOfModules.shiftedTensorCanonicalComparison` (line 158), chosen from `SheafOfModules.shiftedTensorCanonicalComparison_exists`
-- `Sheaf.Paper.SiteDerivedTensorRestriction::CategoryTheory.tensorDescentClass` (line 98), chosen from `SheafOfModules.site_derived_tensor_descent_independentCoefficients`
-- `Sheaf.Paper.SiteDerivedTensorRestriction::CategoryTheory.tensorDescentComplexIso` (line 104), chosen from `SheafOfModules.site_derived_tensor_descent_independentCoefficients`
-- `Sheaf.Paper.SiteDerivedTensorRestriction::CategoryTheory.tensorDescentDerivedIso` (line 112), chosen from `SheafOfModules.site_derived_tensor_descent_independentCoefficients`
+- `Sheaf.Paper.SfScalarExtensionComposition::WeilConjectures.sfIntegralOrdinaryComparison` (line 84), chosen from `WeilConjectures.sfIntegralOrdinaryComparison_existsUnique`
+- `Sheaf.Paper.SfScalarExtensionComposition::WeilConjectures.sfIntegralScalarComp` (line 118), chosen from `WeilConjectures.sfIntegralScalarComp_existsUnique`
+- `Sheaf.Paper.SfScalarExtensionComposition::WeilConjectures.sfIntegralScalarUnit` (line 139), chosen from `WeilConjectures.sfIntegralScalarUnit_existsUnique`
+- `Sheaf.Paper.SfScalarExtensionComposition::WeilConjectures.sfRationalScalarComp` (line 165), chosen from `WeilConjectures.sfRationalScalarComp_existsUnique`
+- `Sheaf.Paper.SfScalarExtensionComposition::WeilConjectures.sfRationalScalarUnit` (line 188), chosen from `WeilConjectures.sfRationalScalarUnit_existsUnique`
+- `Sheaf.Paper.ShiftedTensorMorphismCalculus::SheafOfModules.derivedTensorAssociator` (line 283), chosen from `SheafOfModules.derivedTensorAssociator_exists`
+- `Sheaf.Paper.ShiftedTensorMorphismCalculus::SheafOfModules.derivedTensorSymmetry` (line 209), chosen from `SheafOfModules.derivedTensorSymmetry_exists`
+- `Sheaf.Paper.ShiftedTensorMorphismCalculus::SheafOfModules.shiftedExactTensorPullback` (line 432), chosen from `SheafOfModules.shiftedExactTensorPullback_exists`
+- `Sheaf.Paper.ShiftedTensorMorphismCalculus::SheafOfModules.shiftedTensorCanonicalComparison` (line 167), chosen from `SheafOfModules.shiftedTensorCanonicalComparison_exists`
+- `Sheaf.Paper.SiteDerivedTensorRestriction::CategoryTheory.tensorDescentClass` (line 108), chosen from `SheafOfModules.site_derived_tensor_descent_independentCoefficients`
+- `Sheaf.Paper.SiteDerivedTensorRestriction::CategoryTheory.tensorDescentComplexIso` (line 114), chosen from `SheafOfModules.site_derived_tensor_descent_independentCoefficients`
+- `Sheaf.Paper.SiteDerivedTensorRestriction::CategoryTheory.tensorDescentDerivedIso` (line 122), chosen from `SheafOfModules.site_derived_tensor_descent_independentCoefficients`
 - `Sheaf.Paper.SmoothPurityMap::WeilConjectures.PurityFiniteSetting.smoothPurityTensorMap` (line 406), chosen from `WeilConjectures.PurityFiniteSetting.existsUnique_smoothPurityTensorMap`
 - `Sheaf.Paper.SmoothPurityMap::WeilConjectures.PurityFiniteSetting.smoothPurityTensorShiftCoefficients` (line 270), chosen from `WeilConjectures.PurityFiniteSetting.existsUnique_smoothPurityTensorShift`
-- `Sheaf.Paper.SmoothPurityReductionTowerNormalized::AlgebraicGeometry.ProEtale.spIntegralAbComparison` (line 119), chosen from `AlgebraicGeometry.ProEtale.sfb_integral_coefficient_limit`
-- `Sheaf.Paper.SmoothPurityReductionTowerNormalized::AlgebraicGeometry.ProEtale.spIntegralEllProjection` (line 126), chosen from `AlgebraicGeometry.ProEtale.sp_completed_coefficient_limit`
-- `Sheaf.Paper.SmoothPurityTowerInjectiveComponents::AlgebraicGeometry.ProEtale.spTowerEnoughInjectives` (line 53), chosen from `AlgebraicGeometry.ProEtale.sp_coefficient_towers_abelian`
-- `Sheaf.Paper.SmoothPurityTowerInjectiveComponents::AlgebraicGeometry.ProEtale.spTowerEvaluationIso` (line 224), chosen from `AlgebraicGeometry.ProEtale.spTowerEvaluationIso_existsUnique`
-- `Sheaf.Paper.SmoothPurityTowerLevels::AlgebraicGeometry.ProEtale.spTowerLevelEquivalence` (line 55), chosen from `AlgebraicGeometry.ProEtale.sp_coefficient_towers_abelian`
-- `Sheaf.Paper.SmoothPurityTowerLevels::AlgebraicGeometry.ProEtale.spTowerLevelEquivalenceAdditive` (line 66), chosen from `AlgebraicGeometry.ProEtale.sp_coefficient_towers_abelian`
-- `Sheaf.Paper.SmoothPurityTowerLevels::AlgebraicGeometry.ProEtale.spTowerLevelEvaluationColimits` (line 78), chosen from `AlgebraicGeometry.ProEtale.sp_coefficient_towers_abelian`
-- `Sheaf.Paper.SmoothPurityTowerLevels::AlgebraicGeometry.ProEtale.spTowerLevelEvaluationLimits` (line 72), chosen from `AlgebraicGeometry.ProEtale.sp_coefficient_towers_abelian`
-- `Sheaf.Paper.SmoothPurityTowerReconstruction::AlgebraicGeometry.ProEtale.spCompletedEllProjection` (line 71), chosen from `AlgebraicGeometry.ProEtale.sp_completed_coefficient_limit`
-- `Sheaf.Paper.SmoothPurityTowerReconstruction::AlgebraicGeometry.ProEtale.spCompletedTransition` (line 147), chosen from `AlgebraicGeometry.ProEtale.spCompletedTransition_existsUnique`
-- `Sheaf.Paper.SmoothPurityTowerReconstruction::AlgebraicGeometry.ProEtale.spDerivedCompletedTransition` (line 197), chosen from `AlgebraicGeometry.ProEtale.spDerivedCompletedTransition_existsUnique`
-- `Sheaf.Paper.StrictTowerExchangeMateNormalization::AlgebraicGeometry.Scheme.exchangeResPush` (line 270), chosen from `AlgebraicGeometry.Scheme.exchangeResPush_existsUnique`
-- `Sheaf.Paper.SupportedAffineLineHomotopy::AlgebraicGeometry.Etale.affineSupportUnit` (line 103), chosen from `AlgebraicGeometry.Etale.affineSupportUnit_existsUnique`
-- `Sheaf.Paper.SupportedAffineLineHomotopy::AlgebraicGeometry.ProEtale.affineSupportSiteUnit` (line 218), chosen from `AlgebraicGeometry.ProEtale.affineSupportSiteUnit_existsUnique`
-- `Sheaf.Paper.SupportedAffineLineHomotopy::AlgebraicGeometry.ProEtale.affineSupportUnit` (line 173), chosen from `AlgebraicGeometry.ProEtale.affineSupportUnit_existsUnique`
+- `Sheaf.Paper.SmoothPurityReductionTowerNormalized::AlgebraicGeometry.ProEtale.spIntegralAbComparison` (line 120), chosen from `AlgebraicGeometry.ProEtale.sfb_integral_coefficient_limit`
+- `Sheaf.Paper.SmoothPurityReductionTowerNormalized::AlgebraicGeometry.ProEtale.spIntegralEllProjection` (line 127), chosen from `AlgebraicGeometry.ProEtale.sp_completed_coefficient_limit`
+- `Sheaf.Paper.SmoothPurityTowerInjectiveComponents::AlgebraicGeometry.ProEtale.spTowerEnoughInjectives` (line 56), chosen from `AlgebraicGeometry.ProEtale.sp_coefficient_towers_abelian`
+- `Sheaf.Paper.SmoothPurityTowerInjectiveComponents::AlgebraicGeometry.ProEtale.spTowerEvaluationIso` (line 227), chosen from `AlgebraicGeometry.ProEtale.spTowerEvaluationIso_existsUnique`
+- `Sheaf.Paper.SmoothPurityTowerLevels::AlgebraicGeometry.ProEtale.spTowerLevelEquivalence` (line 59), chosen from `AlgebraicGeometry.ProEtale.sp_coefficient_towers_abelian`
+- `Sheaf.Paper.SmoothPurityTowerLevels::AlgebraicGeometry.ProEtale.spTowerLevelEquivalenceAdditive` (line 70), chosen from `AlgebraicGeometry.ProEtale.sp_coefficient_towers_abelian`
+- `Sheaf.Paper.SmoothPurityTowerLevels::AlgebraicGeometry.ProEtale.spTowerLevelEvaluationColimits` (line 82), chosen from `AlgebraicGeometry.ProEtale.sp_coefficient_towers_abelian`
+- `Sheaf.Paper.SmoothPurityTowerLevels::AlgebraicGeometry.ProEtale.spTowerLevelEvaluationLimits` (line 76), chosen from `AlgebraicGeometry.ProEtale.sp_coefficient_towers_abelian`
+- `Sheaf.Paper.SmoothPurityTowerReconstruction::AlgebraicGeometry.ProEtale.spCompletedEllProjection` (line 72), chosen from `AlgebraicGeometry.ProEtale.sp_completed_coefficient_limit`
+- `Sheaf.Paper.SmoothPurityTowerReconstruction::AlgebraicGeometry.ProEtale.spCompletedTransition` (line 148), chosen from `AlgebraicGeometry.ProEtale.spCompletedTransition_existsUnique`
+- `Sheaf.Paper.SmoothPurityTowerReconstruction::AlgebraicGeometry.ProEtale.spDerivedCompletedTransition` (line 198), chosen from `AlgebraicGeometry.ProEtale.spDerivedCompletedTransition_existsUnique`
+- `Sheaf.Paper.StrictTowerExchangeMateNormalization::AlgebraicGeometry.Scheme.exchangeResPush` (line 280), chosen from `AlgebraicGeometry.Scheme.exchangeResPush_existsUnique`
+- `Sheaf.Paper.SupportedAffineLineHomotopy::AlgebraicGeometry.Etale.affineSupportUnit` (line 105), chosen from `AlgebraicGeometry.Etale.affineSupportUnit_existsUnique`
+- `Sheaf.Paper.SupportedAffineLineHomotopy::AlgebraicGeometry.ProEtale.affineSupportSiteUnit` (line 220), chosen from `AlgebraicGeometry.ProEtale.affineSupportSiteUnit_existsUnique`
+- `Sheaf.Paper.SupportedAffineLineHomotopy::AlgebraicGeometry.ProEtale.affineSupportUnit` (line 175), chosen from `AlgebraicGeometry.ProEtale.affineSupportUnit_existsUnique`
 - `Sheaf.Paper.SupportedCup::AlgebraicGeometry.ProEtale.cupCoefficientMap` (line 173), chosen from `AlgebraicGeometry.ProEtale.cupCoefficientMap_existsUnique`
 - `Sheaf.Paper.SupportedCupFunctoriality::WeilConjectures.PurityFiniteSetting.functorialCupCompare` (line 877), chosen from `WeilConjectures.PurityFiniteSetting.functorialCupComparisonSource_existsUnique`
 - `Sheaf.Paper.SupportedCupFunctoriality::WeilConjectures.PurityFiniteSetting.functorialCupExchange` (line 419), chosen from `WeilConjectures.PurityFiniteSetting.functorialCupExchange_existsUnique`
 - `Sheaf.Paper.SupportedCupFunctoriality::WeilConjectures.PurityFiniteSetting.functorialCupOpenCompare` (line 918), chosen from `WeilConjectures.PurityFiniteSetting.functorialCupComparisonOpen_existsUnique`
 - `Sheaf.Paper.SupportedCupFunctoriality::WeilConjectures.PurityFiniteSetting.functorialCupOpenPullback` (line 811), chosen from `WeilConjectures.PurityFiniteSetting.functorialCupOpenExchange_existsUnique`
 - `Sheaf.Paper.SupportedCupFunctoriality::WeilConjectures.PurityFiniteSetting.functorialCupSupportMap` (line 460), chosen from `WeilConjectures.PurityFiniteSetting.functorialCupSupportMap_existsUnique`
+- `Sheaf.Paper.SystemCompactificationProjectionSubstitution::WeilConjectures.SystemTensorMate.refinementPullId` (line 107), chosen from `WeilConjectures.SystemTensorMate.refinementDirectId_existsUnique`
 - `Sheaf.Paper.SystemOperationExchangeRealization::WeilConjectures.FrobeniusExchange.compactRealization` (line 799), chosen from `WeilConjectures.FrobeniusExchange.compactRealization_existsUnique`
 - `Sheaf.Paper.SystemOperationExchangeRealization::WeilConjectures.FrobeniusExchange.models` (line 186), chosen from `WeilConjectures.integralPullbackComparisonRealization`
 - `Sheaf.Paper.SystemOperationExchangeRealization::WeilConjectures.FrobeniusExchange.scalarModels` (line 541), chosen from `WeilConjectures.integralPullbackComparisonRealization`
@@ -933,16 +934,16 @@ Definitions with undetermined data (class-1 exceptions in `coord/hollow-definiti
 - `Sheaf.Paper.SystemTensorMateArrows::WeilConjectures.SystemTensorMate.coefficient` (line 129), chosen from `WeilConjectures.SystemTensorMate.coefficient_existsUnique`
 - `Sheaf.Paper.SystemTensorMateArrows::WeilConjectures.SystemTensorMate.directComp` (line 213), chosen from `WeilConjectures.SystemTensorMate.directComp_existsUnique`
 - `Sheaf.Paper.SystemTensorMateArrows::WeilConjectures.SystemTensorMate.laxTensor` (line 194), chosen from `WeilConjectures.SystemTensorMate.laxTensor_existsUnique`
-- `Sheaf.Paper.TateInverseLimitBaseChange::AlgebraicGeometry.Scheme.tateFiniteAlgebraMap` (line 482), chosen from `AlgebraicGeometry.Scheme.tateFiniteAlgebraMap_existsUnique`
-- `Sheaf.Paper.TateInverseLimitBaseChange::AlgebraicGeometry.Scheme.tateFiniteModule` (line 272), chosen from `AlgebraicGeometry.Scheme.tateFinitePresentation_exists`
-- `Sheaf.Paper.TateInverseLimitBaseChange::AlgebraicGeometry.Scheme.tateFiniteModuleIso` (line 279), chosen from `AlgebraicGeometry.Scheme.tateFinitePresentation_exists`
-- `Sheaf.Paper.TateInverseLimitBaseChange::AlgebraicGeometry.Scheme.tatePullbackId` (line 357), chosen from `AlgebraicGeometry.Scheme.tatePullbackId_existsUnique`
-- `Sheaf.Paper.TateInverseLimitBaseChange::AlgebraicGeometry.Scheme.tateReduction` (line 221), chosen from `AlgebraicGeometry.Scheme.tateReduction_existsUnique`
-- `Sheaf.Paper.TateInverseLimitBaseChange::AlgebraicGeometry.Scheme.tateTensorMap` (line 176), chosen from `AlgebraicGeometry.Scheme.tateTensorMap_existsUnique`
-- `Sheaf.Paper.TateTwistLisseLine::AlgebraicGeometry.Scheme.perTateCommonModel` (line 623), chosen from `AlgebraicGeometry.Scheme.perTateCommonModel_existsUnique`
-- `Sheaf.Paper.TateTwistLisseLine::AlgebraicGeometry.Scheme.perTateIntegralScalarModel` (line 557), chosen from `AlgebraicGeometry.Scheme.perTateIntegralScalarModel_existsUnique`
-- `Sheaf.Paper.TateTwistLisseLine::AlgebraicGeometry.Scheme.perTateRationalModel` (line 471), chosen from `AlgebraicGeometry.Scheme.perTateRationalModel_existsUnique`
-- `Sheaf.Paper.TraceBaseChangeFirst::AlgebraicGeometry.ProEtale.CondensedRing.condensedTensorCore` (line 90), chosen from `AlgebraicGeometry.ProEtale.CondensedRing.condensedTensorCore_existsUnique`
+- `Sheaf.Paper.TateInverseLimitBaseChange::AlgebraicGeometry.Scheme.tateFiniteAlgebraMap` (line 485), chosen from `AlgebraicGeometry.Scheme.tateFiniteAlgebraMap_existsUnique`
+- `Sheaf.Paper.TateInverseLimitBaseChange::AlgebraicGeometry.Scheme.tateFiniteModule` (line 275), chosen from `AlgebraicGeometry.Scheme.tateFinitePresentation_exists`
+- `Sheaf.Paper.TateInverseLimitBaseChange::AlgebraicGeometry.Scheme.tateFiniteModuleIso` (line 282), chosen from `AlgebraicGeometry.Scheme.tateFinitePresentation_exists`
+- `Sheaf.Paper.TateInverseLimitBaseChange::AlgebraicGeometry.Scheme.tatePullbackId` (line 360), chosen from `AlgebraicGeometry.Scheme.tatePullbackId_existsUnique`
+- `Sheaf.Paper.TateInverseLimitBaseChange::AlgebraicGeometry.Scheme.tateReduction` (line 224), chosen from `AlgebraicGeometry.Scheme.tateReduction_existsUnique`
+- `Sheaf.Paper.TateInverseLimitBaseChange::AlgebraicGeometry.Scheme.tateTensorMap` (line 179), chosen from `AlgebraicGeometry.Scheme.tateTensorMap_existsUnique`
+- `Sheaf.Paper.TateTwistLisseLine::AlgebraicGeometry.Scheme.perTateCommonModel` (line 628), chosen from `AlgebraicGeometry.Scheme.perTateCommonModel_existsUnique`
+- `Sheaf.Paper.TateTwistLisseLine::AlgebraicGeometry.Scheme.perTateIntegralScalarModel` (line 562), chosen from `AlgebraicGeometry.Scheme.perTateIntegralScalarModel_existsUnique`
+- `Sheaf.Paper.TateTwistLisseLine::AlgebraicGeometry.Scheme.perTateRationalModel` (line 476), chosen from `AlgebraicGeometry.Scheme.perTateRationalModel_existsUnique`
+- `Sheaf.Paper.TraceBaseChangeFirst::AlgebraicGeometry.ProEtale.CondensedRing.condensedTensorCore` (line 93), chosen from `AlgebraicGeometry.ProEtale.CondensedRing.condensedTensorCore_existsUnique`
 - `Sheaf.Paper.VaryingRingGraphSummand::AlgebraicGeometry.ProEtale.VaryingRingGraph.graphMap` (line 306), chosen from `AlgebraicGeometry.ProEtale.VaryingRingGraph.graphMap_existsUnique`
 - `Sheaf.Paper.VaryingRingGraphSummand::AlgebraicGeometry.ProEtale.VaryingRingGraph.levelGraphMap` (line 508), chosen from `AlgebraicGeometry.ProEtale.VaryingRingGraph.levelGraphMap_existsUnique`
 - `Sheaf.Paper.VaryingRingGraphSummand::AlgebraicGeometry.ProEtale.VaryingRingGraph.levelRestrictionComparison` (line 457), chosen from `AlgebraicGeometry.ProEtale.VaryingRingGraph.levelRestrictionAdjunction_existsUnique`
@@ -971,73 +972,73 @@ Definitions with undetermined data (class-1 exceptions in `coord/hollow-definiti
 - `Sheaf.Paper.WeilTensorProduct::AlgebraicGeometry.Scheme.wfTensorModel` (line 133), chosen from `AlgebraicGeometry.Scheme.wfTensorRepresentative_exists`
 - `Sheaf.Paper.WeilTensorProduct::SheafOfModules.wfSiteDerivedTensor` (line 45), chosen from `SheafOfModules.wf_site_derived_tensor_descent`
 - `Sheaf.RingTheory.FiniteLocallyFreeNormCharacteristicPolynomial::Algebra.finiteLocallyFreeDeterminantNorm` (line 136), chosen from `Algebra.finiteLocallyFree_norm_characteristicPolynomial`
-- `Sheaf.SecPurityRealSheaves.LogExpValuationConvergence::Padic.coefficientExtensionValuation` (line 74), chosen from `Padic.coefficientExtensionUnitDecomposition`
+- `Sheaf.SecPurityRealSheaves.LogExpValuationConvergence::Padic.coefficientExtensionValuation` (line 75), chosen from `Padic.coefficientExtensionUnitDecomposition`
 - `Sheaf.SecSmoothPurity.CochainCoefficientArrows::CategoryTheory.CochainPullback.extensionAdjunction` (line 103), chosen from `CategoryTheory.CochainPullback.extensionAdjunction_existsUnique`
 - `Sheaf.SecSmoothPurity.CochainCoefficientArrows::CategoryTheory.CochainPullback.extensionComparison` (line 140), chosen from `CategoryTheory.CochainPullback.extensionFunctor_mapPresentation`, `SheafOfModules.CochainTensorComparison.canonicalRingedTensorComparison_existsUnique`
 - `Sheaf.SecSmoothPurity.CochainCoefficientArrows::CategoryTheory.CochainPullback.scalarAssociation` (line 248), chosen from `CategoryTheory.CochainPullback.scalarAssociation_existsUnique`
 - `Sheaf.SecSmoothPurity.CochainTensorCoherenceData::CategoryTheory.CochainPullback.moduleUnit` (line 361), chosen from `SheafOfModules.CochainTensorComparison.canonicalRingedTensorComparison_unit`
-- `Sheaf.SecSmoothPurity.FiniteEtaleDualizingNormalization::AlgebraicGeometry.ProEtale.FiniteEtaleNormalization.graphSupportModel` (line 231), chosen from `AlgebraicGeometry.Etale.etaleSupportMapCompatibility`
-- `Sheaf.SecSmoothPurity.ReductionExceptional::AlgebraicGeometry.ProEtale.reductionEtaleTateMap` (line 218), chosen from `AlgebraicGeometry.ProEtale.reductionEtaleTateMap_existsUnique`
-- `Sheaf.SecSmoothPurity.ScalarExtensionFunctor::AlgebraicGeometry.ProEtale.scalarExtensionFunctor_composition` (line 503), chosen from `AlgebraicGeometry.ProEtale.scalarExtensionFunctor_composition_existsUnique`
-- `Sheaf.SecSmoothPurity.ScalarExtensionFunctor::AlgebraicGeometry.ProEtale.scalarExtensionFunctor_identity` (line 550), chosen from `AlgebraicGeometry.ProEtale.scalarExtensionFunctor_identity_existsUnique`
-- `Sheaf.SecSmoothPurity.ScalarExtensionFunctor::AlgebraicGeometry.ProEtale.scalarExtensionTateIso` (line 311), chosen from `AlgebraicGeometry.ProEtale.scalarExtensionTateIso_existsUnique`
-- `Sheaf.SecSmoothPurity.ScalarExtensionFunctor::AlgebraicGeometry.ProEtale.scalarExtensionTateLevelIso` (line 434), chosen from `AlgebraicGeometry.ProEtale.scalarExtensionTateLevelIso_existsUnique`
-- `Sheaf.SecSmoothPurity.ScalarExtensionFunctor::AlgebraicGeometry.ProEtale.scalarExtensionTateMaps` (line 280), chosen from `AlgebraicGeometry.ProEtale.scalarExtensionTateMaps_existsUnique`
-- `Sheaf.SixFunctors.BoundaryAlphaNormalization::AlgebraicGeometry.Etale.boundarySigma` (line 69), chosen from `AlgebraicGeometry.Etale.etaleKoszulSymmetry`
-- `Sheaf.SixFunctors.CoefDualFormulaScalarTranspose::WeilConjectures.CoefDualFormulaScalarTranspose.dualValue` (line 402), chosen from `WeilConjectures.integral_verdier_biduality`
-- `Sheaf.SixFunctors.CoefDualFormulaScalarTranspose::WeilConjectures.CoefDualFormulaScalarTranspose.formulaIso` (line 382), chosen from `WeilConjectures.CoefDualFormulaScalarTranspose.formula_existsUnique`
-- `Sheaf.SixFunctors.CoefDualFormulaScalarTranspose::WeilConjectures.CoefDualFormulaScalarTranspose.pullCompletion` (line 289), chosen from `WeilConjectures.CoefDualFormulaScalarTranspose.pullCompletion_existsUnique`
-- `Sheaf.SixFunctors.CoefDualFormulaScalarTranspose::WeilConjectures.CoefDualFormulaScalarTranspose.trace` (line 215), chosen from `WeilConjectures.CoefDualFormulaScalarTranspose.trace_existsUnique`
-- `Sheaf.SixFunctors.CoefIntegralFiniteExtension::WeilConjectures.IntegralFiniteExtension.u` (line 267), chosen from `WeilConjectures.IntegralFiniteExtension.u_existsUnique`
+- `Sheaf.SecSmoothPurity.FiniteEtaleDualizingNormalization::AlgebraicGeometry.ProEtale.FiniteEtaleNormalization.graphSupportModel` (line 234), chosen from `AlgebraicGeometry.Etale.etaleSupportMapCompatibility`
+- `Sheaf.SecSmoothPurity.ReductionExceptional::AlgebraicGeometry.ProEtale.reductionEtaleTateMap` (line 236), chosen from `AlgebraicGeometry.ProEtale.reductionEtaleTateMap_existsUnique`
+- `Sheaf.SecSmoothPurity.ScalarExtensionFunctor::AlgebraicGeometry.ProEtale.scalarExtensionFunctor_composition` (line 506), chosen from `AlgebraicGeometry.ProEtale.scalarExtensionFunctor_composition_existsUnique`
+- `Sheaf.SecSmoothPurity.ScalarExtensionFunctor::AlgebraicGeometry.ProEtale.scalarExtensionFunctor_identity` (line 553), chosen from `AlgebraicGeometry.ProEtale.scalarExtensionFunctor_identity_existsUnique`
+- `Sheaf.SecSmoothPurity.ScalarExtensionFunctor::AlgebraicGeometry.ProEtale.scalarExtensionTateIso` (line 314), chosen from `AlgebraicGeometry.ProEtale.scalarExtensionTateIso_existsUnique`
+- `Sheaf.SecSmoothPurity.ScalarExtensionFunctor::AlgebraicGeometry.ProEtale.scalarExtensionTateLevelIso` (line 437), chosen from `AlgebraicGeometry.ProEtale.scalarExtensionTateLevelIso_existsUnique`
+- `Sheaf.SecSmoothPurity.ScalarExtensionFunctor::AlgebraicGeometry.ProEtale.scalarExtensionTateMaps` (line 283), chosen from `AlgebraicGeometry.ProEtale.scalarExtensionTateMaps_existsUnique`
+- `Sheaf.SixFunctors.BoundaryAlphaNormalization::AlgebraicGeometry.Etale.boundarySigma` (line 71), chosen from `AlgebraicGeometry.Etale.etaleKoszulSymmetry`
+- `Sheaf.SixFunctors.CoefDualFormulaScalarTranspose::WeilConjectures.CoefDualFormulaScalarTranspose.dualValue` (line 403), chosen from `WeilConjectures.integral_verdier_biduality`
+- `Sheaf.SixFunctors.CoefDualFormulaScalarTranspose::WeilConjectures.CoefDualFormulaScalarTranspose.formulaIso` (line 383), chosen from `WeilConjectures.CoefDualFormulaScalarTranspose.formula_existsUnique`
+- `Sheaf.SixFunctors.CoefDualFormulaScalarTranspose::WeilConjectures.CoefDualFormulaScalarTranspose.pullCompletion` (line 290), chosen from `WeilConjectures.CoefDualFormulaScalarTranspose.pullCompletion_existsUnique`
+- `Sheaf.SixFunctors.CoefDualFormulaScalarTranspose::WeilConjectures.CoefDualFormulaScalarTranspose.trace` (line 216), chosen from `WeilConjectures.CoefDualFormulaScalarTranspose.trace_existsUnique`
+- `Sheaf.SixFunctors.CoefIntegralFiniteExtension::WeilConjectures.IntegralFiniteExtension.u` (line 270), chosen from `WeilConjectures.IntegralFiniteExtension.u_existsUnique`
 - `Sheaf.SixFunctors.CompactificationOverField::AlgebraicGeometry.compactificationOverField` (line 47), chosen from `AlgebraicGeometry.compactification_over_base`
-- `Sheaf.SixFunctors.DetSfCompCompositionBaseChange::AlgebraicGeometry.ProEtale.CondensedRing.detSfCanonicalCompactificationComparison` (line 139), chosen from `AlgebraicGeometry.ProEtale.CondensedRing.compactification_coherence_cocycle`
-- `Sheaf.SixFunctors.EtaleHomComplexPullback::CategoryTheory.etaleHomSourceShift` (line 271), chosen from `CategoryTheory.etaleHomSourceShift_exists`
-- `Sheaf.SixFunctors.EtaleHomComplexPullback::CategoryTheory.etaleHomTensorEquiv` (line 159), chosen from `CategoryTheory.etaleHomTensorEquiv_exists`
-- `Sheaf.SixFunctors.EtaleHomComplexPullback::CategoryTheory.etaleHomTensorPullback` (line 192), chosen from `CategoryTheory.etaleHomTensorPullback_exists`
-- `Sheaf.SixFunctors.EtaleHomComplexPullback::CategoryTheory.homComplexPullbackComparison` (line 245), chosen from `CategoryTheory.homComplexPullbackComparison_exists`
-- `Sheaf.SixFunctors.EtaleHomThickLocus::AlgebraicGeometry.Etale.etaleHomTensorComparison` (line 146), chosen from `AlgebraicGeometry.Etale.etaleHomTensorComparison_existsUnique`
-- `Sheaf.SixFunctors.FiniteDualizing::WeilConjectures.finiteDualizingGenericDerivedRestriction` (line 381), chosen from `WeilConjectures.finiteDualizingRestriction_existsUnique`
-- `Sheaf.SixFunctors.FiniteDualizing::WeilConjectures.finiteDualizingIntrinsicRestriction` (line 417), chosen from `WeilConjectures.finiteDualizingIntrinsicRestriction_existsUnique`
-- `Sheaf.SixFunctors.FiniteDualizing::WeilConjectures.finiteDualizingIntrinsicUnit` (line 262), chosen from `WeilConjectures.finiteDualizingIntrinsicUnit_existsUnique`
+- `Sheaf.SixFunctors.DetSfCompCompositionBaseChange::AlgebraicGeometry.ProEtale.CondensedRing.detSfCanonicalCompactificationComparison` (line 156), chosen from `AlgebraicGeometry.ProEtale.CondensedRing.compactification_coherence_cocycle`
+- `Sheaf.SixFunctors.EtaleHomComplexPullback::CategoryTheory.etaleHomSourceShift` (line 273), chosen from `CategoryTheory.etaleHomSourceShift_exists`
+- `Sheaf.SixFunctors.EtaleHomComplexPullback::CategoryTheory.etaleHomTensorEquiv` (line 161), chosen from `CategoryTheory.etaleHomTensorEquiv_exists`
+- `Sheaf.SixFunctors.EtaleHomComplexPullback::CategoryTheory.etaleHomTensorPullback` (line 194), chosen from `CategoryTheory.etaleHomTensorPullback_exists`
+- `Sheaf.SixFunctors.EtaleHomComplexPullback::CategoryTheory.homComplexPullbackComparison` (line 247), chosen from `CategoryTheory.homComplexPullbackComparison_exists`
+- `Sheaf.SixFunctors.EtaleHomThickLocus::AlgebraicGeometry.Etale.etaleHomTensorComparison` (line 157), chosen from `AlgebraicGeometry.Etale.etaleHomTensorComparison_existsUnique`
+- `Sheaf.SixFunctors.FiniteDualizing::WeilConjectures.finiteDualizingGenericDerivedRestriction` (line 391), chosen from `WeilConjectures.finiteDualizingRestriction_existsUnique`
+- `Sheaf.SixFunctors.FiniteDualizing::WeilConjectures.finiteDualizingIntrinsicRestriction` (line 427), chosen from `WeilConjectures.finiteDualizingIntrinsicRestriction_existsUnique`
+- `Sheaf.SixFunctors.FiniteDualizing::WeilConjectures.finiteDualizingIntrinsicUnit` (line 272), chosen from `WeilConjectures.finiteDualizingIntrinsicUnit_existsUnique`
 - `Sheaf.SixFunctors.FrobeniusPointTransport::WeilConjectures.frobeniusPointFinitePullback` (line 260), chosen from `WeilConjectures.isomorphismFiniteDerivedPullback_termwise`
 - `Sheaf.SixFunctors.FrobeniusPointTransport::WeilConjectures.frobeniusPointFiniteSigma` (line 107), chosen from `WeilConjectures.frobeniusPointFiniteSigma_existsUnique`
 - `Sheaf.SixFunctors.FrobeniusPointTransport::WeilConjectures.frobeniusPointIntegralSigma` (line 140), chosen from `WeilConjectures.frobeniusPointIntegralSigma_existsUnique`
 - `Sheaf.SixFunctors.FrobeniusPointTransport::WeilConjectures.frobeniusPointTransportIntegral` (line 240), chosen from `WeilConjectures.frobeniusPointTransportIntegral_existsUnique`
-- `Sheaf.SixFunctors.IntegralDualizing::WeilConjectures.integralDualizingLimit` (line 146), chosen from `CategoryTheory.ringedStrictTowerHomotopyLimitOfUniverses`, `WeilConjectures.completedIntegralCoefficient_mul_commUnrestricted`
+- `Sheaf.SixFunctors.IntegralDualizing::WeilConjectures.integralDualizingLimit` (line 154), chosen from `CategoryTheory.ringedStrictTowerHomotopyLimitOfUniverses`, `WeilConjectures.completedIntegralCoefficient_mul_commUnrestricted`
 - `Sheaf.SixFunctors.RationalVerdier::WeilConjectures.RationalVerdier.completionChain` (line 84), chosen from `WeilConjectures.constructibleTensorCompletion`
-- `Sheaf.SixFunctors.SchemeGeometricFrobenius::WeilConjectures.PurityFiniteSetting.frobeniusAbsoluteTrivialization` (line 152), chosen from `AlgebraicGeometry.Scheme.absoluteFrobenius_proEtale_trivialization_pullback`
-- `Sheaf.SixFunctors.SchemeGeometricFrobenius::WeilConjectures.PurityFiniteSetting.frobeniusOrdinaryComposition` (line 128), chosen from `AlgebraicGeometry.Scheme.absoluteFrobenius_proEtale_trivialization_pullback`
-- `Sheaf.SixFunctors.SelectedSchemeGaloisComparison::WeilConjectures.FiniteFieldDatum.canonicalSchemeGaloisComparison` (line 33), chosen from `WeilConjectures.FiniteFieldDatum.schemeGaloisComparison`
-- `Sheaf.SixFunctors.SemilinearProperOpenMatePasting::AlgebraicGeometry.ProEtale.SemilinearProperOpen.coefficientMap` (line 134), chosen from `AlgebraicGeometry.ProEtale.SemilinearProperOpen.coefficientMap_existsUnique`
-- `Sheaf.SixFunctors.SemilinearProperOpenMatePasting::AlgebraicGeometry.ProEtale.SemilinearProperOpen.evalPullInv` (line 882), chosen from `AlgebraicGeometry.ProEtale.SemilinearProperOpen.evalPushOrdinary_existsUnique`
-- `Sheaf.SixFunctors.SemilinearProperOpenMatePasting::AlgebraicGeometry.ProEtale.SemilinearProperOpen.pId` (line 288), chosen from `AlgebraicGeometry.ProEtale.SemilinearProperOpen.pushId_existsUnique`
-- `Sheaf.SixFunctors.SemilinearProperOpenMatePasting::AlgebraicGeometry.ProEtale.SemilinearProperOpen.pushComp` (line 250), chosen from `AlgebraicGeometry.ProEtale.SemilinearProperOpen.pushComp_existsUnique`
-- `Sheaf.SixFunctors.SemilinearProperOpenMatePasting::AlgebraicGeometry.ProEtale.SemilinearProperOpen.rhoOrdinary` (line 704), chosen from `AlgebraicGeometry.ProEtale.SemilinearProperOpen.rhoOrdinary_existsUnique`
-- `Sheaf.SixFunctors.SemilinearProperOpenMatePasting::AlgebraicGeometry.ProEtale.SemilinearProperOpen.rhoPullInv` (line 756), chosen from `AlgebraicGeometry.ProEtale.SemilinearProperOpen.rhoPushOrdinary_existsUnique`
-- `Sheaf.TraceFormula.OrientedDerivedCohomologyContinuity::AlgebraicGeometry.OrientedDerivedContinuity.baseChangeComp` (line 285), chosen from `AlgebraicGeometry.OrientedDerivedContinuity.baseChangeComp_unique`
-- `Sheaf.TraceFormula.OrientedNearbySmoothSourcePullback::AlgebraicGeometry.OrientedNearbyCycles.smoothSourceVanishingSquare` (line 130), chosen from `AlgebraicGeometry.OrientedNearbyCycles.smoothSourceVanishingSquare_existsUnique`
-- `Sheaf.TraceFormula.OrientedPointCohomology::CategoryTheory.OrientedPointCohomology.Dmap` (line 130), chosen from `CategoryTheory.OrientedPointCohomology.D_map_unique`
-- `Sheaf.TraceFormula.OrientedPointCohomology::CategoryTheory.OrientedPointCohomology.liftMap` (line 263), chosen from `CategoryTheory.OrientedPointCohomology.lift_map_unique`
-- `Sheaf.TraceFormula.OrientedPointCohomology::CategoryTheory.OrientedPointCohomology.q` (line 333), chosen from `CategoryTheory.OrientedPointCohomology.q_unique`
-- `Sheaf.TraceFormula.OrientedPointCohomology::CategoryTheory.OrientedPointCohomology.restrictionFixed` (line 589), chosen from `CategoryTheory.OrientedPointCohomology.restrictionFixed_unique`
-- `Sheaf.TraceFormula.PhBigEtaleTorsionAcyclicity::AlgebraicGeometry.Scheme.bigSmallEtaleData` (line 102), chosen from `AlgebraicGeometry.bigSmallEtaleExactRetraction`
-- `Sheaf.TraceFormula.PointTransportComposition::WeilConjectures.pointPowerFinitePullback` (line 141), chosen from `WeilConjectures.isomorphismFiniteDerivedPullback_termwise`
-- `Sheaf.TraceFormula.PointTransportComposition::WeilConjectures.pointPowerFiniteSigma` (line 84), chosen from `WeilConjectures.pointPowerFiniteSigma_existsUnique`
-- `Sheaf.TraceFormula.SimplicialPhEtaleSquare::AlgebraicGeometry.SimplicialPhEtale.componentKanIso` (line 507), chosen from `AlgebraicGeometry.SimplicialPhEtale.componentKanExtension_comparison`
-- `Sheaf.TraceFormula.SimplicialPhEtaleSquare::AlgebraicGeometry.SimplicialPhEtale.sliceTransport` (line 132), chosen from `AlgebraicGeometry.SimplicialPhEtale.flatten_adjunction`
+- `Sheaf.SixFunctors.SchemeGeometricFrobenius::WeilConjectures.PurityFiniteSetting.frobeniusAbsoluteTrivialization` (line 156), chosen from `AlgebraicGeometry.Scheme.absoluteFrobenius_proEtale_trivialization_pullback`
+- `Sheaf.SixFunctors.SchemeGeometricFrobenius::WeilConjectures.PurityFiniteSetting.frobeniusOrdinaryComposition` (line 132), chosen from `AlgebraicGeometry.Scheme.absoluteFrobenius_proEtale_trivialization_pullback`
+- `Sheaf.SixFunctors.SelectedSchemeGaloisComparison::WeilConjectures.FiniteFieldDatum.canonicalSchemeGaloisComparison` (line 45), chosen from `WeilConjectures.FiniteFieldDatum.schemeGaloisComparison`
+- `Sheaf.SixFunctors.SemilinearProperOpenMatePasting::AlgebraicGeometry.ProEtale.SemilinearProperOpen.coefficientMap` (line 135), chosen from `AlgebraicGeometry.ProEtale.SemilinearProperOpen.coefficientMap_existsUnique`
+- `Sheaf.SixFunctors.SemilinearProperOpenMatePasting::AlgebraicGeometry.ProEtale.SemilinearProperOpen.evalPullInv` (line 883), chosen from `AlgebraicGeometry.ProEtale.SemilinearProperOpen.evalPushOrdinary_existsUnique`
+- `Sheaf.SixFunctors.SemilinearProperOpenMatePasting::AlgebraicGeometry.ProEtale.SemilinearProperOpen.pId` (line 289), chosen from `AlgebraicGeometry.ProEtale.SemilinearProperOpen.pushId_existsUnique`
+- `Sheaf.SixFunctors.SemilinearProperOpenMatePasting::AlgebraicGeometry.ProEtale.SemilinearProperOpen.pushComp` (line 251), chosen from `AlgebraicGeometry.ProEtale.SemilinearProperOpen.pushComp_existsUnique`
+- `Sheaf.SixFunctors.SemilinearProperOpenMatePasting::AlgebraicGeometry.ProEtale.SemilinearProperOpen.rhoOrdinary` (line 705), chosen from `AlgebraicGeometry.ProEtale.SemilinearProperOpen.rhoOrdinary_existsUnique`
+- `Sheaf.SixFunctors.SemilinearProperOpenMatePasting::AlgebraicGeometry.ProEtale.SemilinearProperOpen.rhoPullInv` (line 757), chosen from `AlgebraicGeometry.ProEtale.SemilinearProperOpen.rhoPushOrdinary_existsUnique`
+- `Sheaf.TraceFormula.OrientedDerivedCohomologyContinuity::AlgebraicGeometry.OrientedDerivedContinuity.baseChangeComp` (line 287), chosen from `AlgebraicGeometry.OrientedDerivedContinuity.baseChangeComp_unique`
+- `Sheaf.TraceFormula.OrientedNearbySmoothSourcePullback::AlgebraicGeometry.OrientedNearbyCycles.smoothSourceVanishingSquare` (line 131), chosen from `AlgebraicGeometry.OrientedNearbyCycles.smoothSourceVanishingSquare_existsUnique`
+- `Sheaf.TraceFormula.OrientedPointCohomology::CategoryTheory.OrientedPointCohomology.Dmap` (line 141), chosen from `CategoryTheory.OrientedPointCohomology.D_map_unique`
+- `Sheaf.TraceFormula.OrientedPointCohomology::CategoryTheory.OrientedPointCohomology.liftMap` (line 274), chosen from `CategoryTheory.OrientedPointCohomology.lift_map_unique`
+- `Sheaf.TraceFormula.OrientedPointCohomology::CategoryTheory.OrientedPointCohomology.q` (line 344), chosen from `CategoryTheory.OrientedPointCohomology.q_unique`
+- `Sheaf.TraceFormula.OrientedPointCohomology::CategoryTheory.OrientedPointCohomology.restrictionFixed` (line 600), chosen from `CategoryTheory.OrientedPointCohomology.restrictionFixed_unique`
+- `Sheaf.TraceFormula.PhBigEtaleTorsionAcyclicity::AlgebraicGeometry.Scheme.bigSmallEtaleData` (line 104), chosen from `AlgebraicGeometry.bigSmallEtaleExactRetraction`
+- `Sheaf.TraceFormula.PointTransportComposition::WeilConjectures.pointPowerFinitePullback` (line 148), chosen from `WeilConjectures.isomorphismFiniteDerivedPullback_termwise`
+- `Sheaf.TraceFormula.PointTransportComposition::WeilConjectures.pointPowerFiniteSigma` (line 91), chosen from `WeilConjectures.pointPowerFiniteSigma_existsUnique`
+- `Sheaf.TraceFormula.SimplicialPhEtaleSquare::AlgebraicGeometry.SimplicialPhEtale.componentKanIso` (line 510), chosen from `AlgebraicGeometry.SimplicialPhEtale.componentKanExtension_comparison`
+- `Sheaf.TraceFormula.SimplicialPhEtaleSquare::AlgebraicGeometry.SimplicialPhEtale.sliceTransport` (line 135), chosen from `AlgebraicGeometry.SimplicialPhEtale.flatten_adjunction`
 - `Sheaf.TraceFormula.SpaceLineModuleProjInput::AlgebraicGeometry.AlgebraicSpace.linePresentation` (line 181), chosen from `AlgebraicGeometry.AlgebraicSpace.exists_linePresentation`
 - `WeilConjectures.SmoothPurity.Defs::AlgebraicGeometry.ProEtale.CondensedRing.smoothPurityIso` (line 106), chosen from `AlgebraicGeometry.ProEtale.CondensedRing.exists_normalizedSmoothPurityMaps`
 
 | root | library | closure |
 |---|---:|---:|
-| Sheaf | 6421 | 47 |
-| WeilConjectures | 166 | 97 |
+| Sheaf | 6445 | 3836 |
+| WeilConjectures | 166 | 105 |
 
 | baseline | scope | closed | added | net | deleted | changed holed statements |
 |---|---|---:|---:|---:|---:|---:|
-| 889327369 (Queue at the start of stage 3) | library | 1808 | 6199 | -4391 | 733 | 14 |
-| 660345513 (Application of proof-dependency imports) | library | 1805 | 6198 | -4393 | 679 | 14 |
-| 660345513 (Application of proof-dependency imports) | closure | 1500 | 75 | 1425 | 603 | 0 |
+| 889327369 (Queue at the start of stage 3) | library | 1808 | 6223 | -4415 | 733 | 14 |
+| 660345513 (Application of proof-dependency imports) | library | 1805 | 6222 | -4417 | 679 | 14 |
+| 660345513 (Application of proof-dependency imports) | closure | 1500 | 3851 | -2351 | 603 | 0 |
 
 No closure delta is quoted across 660345513: proof-dependency imports changed the reached set.
 
@@ -1271,25 +1272,25 @@ Nearest targets (claims from the scanned git tree; live leases may differ):
 | module | distance | holes | group |
 |---|---:|---:|---|
 | Sheaf.SmoothPurity.NormalizedWitness | 1 | 1 | — |
+| Sheaf.Paper.FiniteSmoothAdjunctionGeneralBase | 2 | 2 | A4 |
 | WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible | 2 | 3 | D3 |
 | WeilConjectures.ZetaFunction.TraceFormula | 2 | 1 | — |
+| Sheaf.AlgebraicGeometry.AffineSpaceTopTrace | 3 | 1 | G1 |
+| Sheaf.AlgebraicGeometry.ConstructibleProEtaleComparison | 3 | 1 | X5 |
 | Sheaf.AlgebraicGeometry.EllAdicLocalizingExceptionalBounded | 3 | 1 | X2 |
 | Sheaf.AlgebraicGeometry.EllAdicLocalizingExceptionalConstructibleCohomology | 3 | 1 | C8 |
-| Sheaf.PoincareDuality.ProperProjectionFormulaBounded | 3 | 1 | C3 |
-| WeilConjectures.WeilSheaf.PoincareDuality | 3 | 1 | — |
-| Sheaf.CategoryTheory.RingedDerivedRestriction | 4 | 1 | — |
-| Sheaf.WeilSheaf.AdicFiniteCoefficientBound | 4 | 1 | — |
-| Sheaf.WeilSheaf.CohomologyGeometricConjugacy | 4 | 1 | — |
-| Sheaf.WeilSheaf.CompactSupportFiniteCoefficientComparison | 4 | 1 | — |
-| WeilConjectures.DeligneLaumon.Reduction.RealSheaves | 4 | 2 | — |
-| WeilConjectures.SixFunctors.Etale.Derived.Finiteness.CohomologicalDimension | 4 | 1 | — |
-| WeilConjectures.SixFunctors.Etale.Derived.Finiteness.DirectImage | 4 | 1 | — |
-| WeilConjectures.WeilSheaf.LowerShriekFunctoriality | 4 | 1 | — |
-| Sheaf.AlgebraicGeometry.BoundedBelowDerivedSmoothBaseChange | 5 | 1 | — |
-| Sheaf.AlgebraicGeometry.EllAdicProperTruncationBound | 5 | 1 | D4 |
-| Sheaf.CategoryTheory.Galois.GaloisTransitive | 5 | 1 | — |
-| Sheaf.WeilSheaf.AffineCurveRangePositive | 5 | 1 | — |
-| Sheaf.WeilSheaf.FiniteBoundaryPositive | 5 | 1 | — |
+| Sheaf.AlgebraicGeometry.FixedComparisonDirectImageMate | 3 | 2 | F2 |
+| Sheaf.AlgebraicGeometry.OrdinaryFiniteP1Adjunction | 3 | 1 | S8 |
+| Sheaf.AlgebraicGeometry.ProEtalePointPullback | 3 | 1 | E6 |
+| Sheaf.AlgebraicGeometry.SmoothExceptionalBaseChange | 3 | 1 | Y6 |
+| Sheaf.AlgebraicGeometry.SupportComparisonPullbackCoherence | 3 | 1 | H2 |
+| Sheaf.AlgebraicGeometry.VectorBundleIntegration | 3 | 3 | J4 |
+| Sheaf.CategoryTheory.RightDerivedFunctorOfQuasiIsoResolutions | 3 | 3 | — |
+| Sheaf.Paper.CompletedCondensedCoefficients | 3 | 6 | G5 |
+| Sheaf.Paper.CompletedDirectImageLimits | 3 | 9 | Q7 |
+| Sheaf.Paper.ExceptionalCoefficientComparison | 3 | 5 | S4 |
+| Sheaf.Paper.FiniteReductionConstructibility | 3 | 1 | V2 |
+| Sheaf.Paper.FiniteRingConstructibleDerivedOrigin | 3 | 1 | N3 |
 
 Modules pruned since the imports baseline:
 
@@ -1309,30 +1310,21 @@ Modules pruned since the imports baseline:
 - `Sheaf.Algebra.Homology.AcyclicLimitOrdinal`
 - `Sheaf.Algebra.Homology.AffineDerivedBaseChangeComparison`
 - `Sheaf.Algebra.Homology.BalancedDerivedTensorModel`
-- `Sheaf.Algebra.Homology.BaseChangeRHomPerfect`
-- `Sheaf.Algebra.Homology.BoundedBelowInjectiveResolutionMono`
 - `Sheaf.Algebra.Homology.DerivedTensorActionNaturality`
 - `Sheaf.Algebra.Homology.DerivedTensorLocalizationCohomology`
-- `Sheaf.Algebra.Homology.DerivedTensorSecondFactorFunctor`
 - `Sheaf.Algebra.Homology.DerivedTensorTransitivity`
 - `Sheaf.Algebra.Homology.DoubleComplexCokernelHomologyIso`
-- `Sheaf.Algebra.Homology.FilteredColimitDerivedTensor`
 - `Sheaf.Algebra.Homology.FilteredComplexZBDescription`
-- `Sheaf.Algebra.Homology.FlatOpcyclesTorCriterion`
 - `Sheaf.Algebra.Homology.FreeResolutionSesSplit`
 - `Sheaf.Algebra.Homology.FunctorialHomotopies`
 - `Sheaf.Algebra.Homology.KFlatDerivedTensorAssociator`
-- `Sheaf.Algebra.Homology.KInjectiveProducts`
 - `Sheaf.Algebra.Homology.KernelShiftedMappingCone`
 - `Sheaf.Algebra.Homology.LiftToInjectiveUniqueUpToHomotopy`
 - `Sheaf.Algebra.Homology.LowerTruncationStepSES`
 - `Sheaf.Algebra.Homology.MappingCylinderSplitFactorization`
 - `Sheaf.Algebra.Homology.MittagLefflerLimitHomology`
-- `Sheaf.Algebra.Homology.PerfectRHomBaseChangeMap`
-- `Sheaf.Algebra.Homology.RoosComplex`
 - `Sheaf.Algebra.Homology.RowCycleLiftsToZigzag`
 - `Sheaf.Algebra.Homology.SingleComplexAffineBaseChange`
-- `Sheaf.Algebra.Homology.SubcategoryRightResolution`
 - `Sheaf.Algebra.Homology.TermwiseTorAcyclicDerivedTensor`
 - `Sheaf.Algebra.Homology.TorIndependentProjectiveComplexTensor`
 - `Sheaf.Algebra.Homology.UnitEntrySplits`
@@ -1357,7 +1349,6 @@ Modules pruned since the imports baseline:
 - `Sheaf.Algebra.TwoTermHomotopyEquivalenceDirectSum`
 - `Sheaf.AlgebraicGeometry.AbelianStrictlyHenselianOpenGerm`
 - `Sheaf.AlgebraicGeometry.AffineCohomologyLocalization`
-- `Sheaf.AlgebraicGeometry.AffineComplementFiniteOnIntegralCurve`
 - `Sheaf.AlgebraicGeometry.AffineDerivedConcentration`
 - `Sheaf.AlgebraicGeometry.AffineEtaleSiteBaseChange`
 - `Sheaf.AlgebraicGeometry.AffineEtaleSiteColimit`
@@ -1370,50 +1361,27 @@ Modules pruned since the imports baseline:
 - `Sheaf.AlgebraicGeometry.AffineTruncationKernelFiniteLocallyFree`
 - `Sheaf.AlgebraicGeometry.AffineTruncationKernelFlat`
 - `Sheaf.AlgebraicGeometry.Ample`
-- `Sheaf.AlgebraicGeometry.AmpleFiniteAffineCover`
-- `Sheaf.AlgebraicGeometry.AmpleFinitePrincipalAffine`
-- `Sheaf.AlgebraicGeometry.AmpleFiniteSetAffine`
-- `Sheaf.AlgebraicGeometry.AmpleIdealSection`
-- `Sheaf.AlgebraicGeometry.AmpleOnReductionNoetherian`
-- `Sheaf.AlgebraicGeometry.AmpleProjCanonicalMap`
-- `Sheaf.AlgebraicGeometry.AmpleProjLocalChart`
-- `Sheaf.AlgebraicGeometry.AmpleProjOpen`
-- `Sheaf.AlgebraicGeometry.AmpleSeparated`
-- `Sheaf.AlgebraicGeometry.AmpleSquareZeroThickening`
 - `Sheaf.AlgebraicGeometry.AssociatedModule`
 - `Sheaf.AlgebraicGeometry.AssociatedModuleHom`
 - `Sheaf.AlgebraicGeometry.AssociatedModulePullback`
 - `Sheaf.AlgebraicGeometry.AssociatedSectionsLocalize`
-- `Sheaf.AlgebraicGeometry.BoundaryCechLocalLifts`
-- `Sheaf.AlgebraicGeometry.BoundsFiberDegreesFieldPoints`
-- `Sheaf.AlgebraicGeometry.CechH1Injective`
-- `Sheaf.AlgebraicGeometry.CechH1MapNatural`
 - `Sheaf.AlgebraicGeometry.ChowFiniteType`
 - `Sheaf.AlgebraicGeometry.ClosedImmersionConormalFlatBaseChange`
 - `Sheaf.AlgebraicGeometry.ClosedImmersionConormalFunctorial`
 - `Sheaf.AlgebraicGeometry.ClosedPushforwardStalks`
-- `Sheaf.AlgebraicGeometry.ClosedSubsetProperOverBase`
 - `Sheaf.AlgebraicGeometry.ClosedSubsetProperOverBaseProperties`
 - `Sheaf.AlgebraicGeometry.ClosedSubsetProperOverBaseUnionPreimage`
 - `Sheaf.AlgebraicGeometry.ClosedSubsetProperUniversallyClosedImage`
-- `Sheaf.AlgebraicGeometry.ClosedSubsetQcIdeal`
 - `Sheaf.AlgebraicGeometry.CoherentFormalModuleIsomorphismLocal`
 - `Sheaf.AlgebraicGeometry.CoherentFormalModulesLocalExactness`
 - `Sheaf.AlgebraicGeometry.CoherentProjRepresentation`
-- `Sheaf.AlgebraicGeometry.CohomologyPullbackDerivedUnit`
 - `Sheaf.AlgebraicGeometry.CommAlgebraSheaf`
-- `Sheaf.AlgebraicGeometry.ComponentIntersectionsFinite`
 - `Sheaf.AlgebraicGeometry.ConductorIdealRestriction`
-- `Sheaf.AlgebraicGeometry.ConductorIdealZeroIntersection`
-- `Sheaf.AlgebraicGeometry.ConductorSections`
-- `Sheaf.AlgebraicGeometry.ConstantEtaleSheafShortExact`
 - `Sheaf.AlgebraicGeometry.ConstantExtensionCover`
 - `Sheaf.AlgebraicGeometry.ConstantModuleSheavesForgetColimits`
 - `Sheaf.AlgebraicGeometry.ConstantPullbackCompositionCoherence`
 - `Sheaf.AlgebraicGeometry.ConstantPullbackIdentityCoherence`
 - `Sheaf.AlgebraicGeometry.ConstantRingModuleSheafEquivalence`
-- `Sheaf.AlgebraicGeometry.ConstantSheafGeometricStalk`
-- `Sheaf.AlgebraicGeometry.ConstantSheafSetSectionsConnectedNatural`
 - `Sheaf.AlgebraicGeometry.ConstantSubsheafGeneric`
 - `Sheaf.AlgebraicGeometry.ConstructibleClosedGenericCriterion`
 - `Sheaf.AlgebraicGeometry.ConstructibleModuleFiniteStalks`
@@ -1427,13 +1395,11 @@ Modules pruned since the imports baseline:
 - `Sheaf.AlgebraicGeometry.Curve.SepClosedComparisonCore`
 - `Sheaf.AlgebraicGeometry.Curve.SepClosedComparisonCurve`
 - `Sheaf.AlgebraicGeometry.DerivedBaseChangeMayerVietoris`
-- `Sheaf.AlgebraicGeometry.DerivedInverseImageComposition`
 - `Sheaf.AlgebraicGeometry.DerivedSectionsPushforwardComparison`
 - `Sheaf.AlgebraicGeometry.DescendAffine`
 - `Sheaf.AlgebraicGeometry.DescendQCOpenFGSubalgebra`
 - `Sheaf.AlgebraicGeometry.DescendSurjective`
 - `Sheaf.AlgebraicGeometry.DiagonalBaseChangeUpperShriek`
-- `Sheaf.AlgebraicGeometry.DimOneQuasiProjective`
 - `Sheaf.AlgebraicGeometry.DivisorClassCurve`
 - `Sheaf.AlgebraicGeometry.DivisorModuleLocal`
 - `Sheaf.AlgebraicGeometry.DvrFieldExtensionOrder`
@@ -1441,64 +1407,44 @@ Modules pruned since the imports baseline:
 - `Sheaf.AlgebraicGeometry.EtaleAwayOfLocalizedCotangentVanishing`
 - `Sheaf.AlgebraicGeometry.EtaleCechSectionwiseShortExact`
 - `Sheaf.AlgebraicGeometry.EtaleCechVanishingCriterion`
-- `Sheaf.AlgebraicGeometry.EtaleCohomologyOverOpen`
 - `Sheaf.AlgebraicGeometry.EtaleCohomologyPullbackDegreeZero`
 - `Sheaf.AlgebraicGeometry.EtaleCohomologyPullbackDegreeZeroAux`
 - `Sheaf.AlgebraicGeometry.EtaleCohomologyPullbackFunctorial`
-- `Sheaf.AlgebraicGeometry.EtaleConstantRingModuleEquivalence`
 - `Sheaf.AlgebraicGeometry.EtaleDirectedColimitDescent`
 - `Sheaf.AlgebraicGeometry.EtaleEdgeMapBaseChange`
 - `Sheaf.AlgebraicGeometry.EtaleFibreDiscreteSeparablePoints`
 - `Sheaf.AlgebraicGeometry.EtaleFinitePushforwardUnitEdgeCompatibility`
 - `Sheaf.AlgebraicGeometry.EtaleGeometricFibreConstantSections`
 - `Sheaf.AlgebraicGeometry.EtaleGeometricFibreInverseImageConstant`
-- `Sheaf.AlgebraicGeometry.EtaleInverseImageCompositionModuleLinear`
-- `Sheaf.AlgebraicGeometry.EtaleInverseImageExact`
 - `Sheaf.AlgebraicGeometry.EtaleInverseImageSectionDescription`
 - `Sheaf.AlgebraicGeometry.EtaleLocalFiniteAtPoint`
 - `Sheaf.AlgebraicGeometry.EtaleLocalFiniteMultiplePoints`
 - `Sheaf.AlgebraicGeometry.EtaleLocalFiniteMultiplePointsElementary`
 - `Sheaf.AlgebraicGeometry.EtaleLocalizeUpstairs`
-- `Sheaf.AlgebraicGeometry.EtaleLowerShriekBaseChangeMap`
-- `Sheaf.AlgebraicGeometry.EtaleLowerShriekBaseChangeModules`
 - `Sheaf.AlgebraicGeometry.EtaleMayerVietoris`
-- `Sheaf.AlgebraicGeometry.EtaleModuleEnoughInjectives`
 - `Sheaf.AlgebraicGeometry.EtaleModulePullbackForgetNaturality`
 - `Sheaf.AlgebraicGeometry.EtaleNeighbourhoodPrescribedResidueField`
-- `Sheaf.AlgebraicGeometry.EtaleNormalComponents`
-- `Sheaf.AlgebraicGeometry.EtaleOpenFpqcDescent`
 - `Sheaf.AlgebraicGeometry.EtalePullbackForgetModules`
-- `Sheaf.AlgebraicGeometry.EtaleQcqsCofinalFiniteCoverings`
-- `Sheaf.AlgebraicGeometry.EtaleResidueTriples`
 - `Sheaf.AlgebraicGeometry.EtaleSectionsSurjectiveOfCechH1`
-- `Sheaf.AlgebraicGeometry.EtaleSetInverseImageConstantSheaf`
 - `Sheaf.AlgebraicGeometry.EtaleSetInverseImageExact`
 - `Sheaf.AlgebraicGeometry.EtaleSheafHExtDerivedComparison`
 - `Sheaf.AlgebraicGeometry.EtaleSheaves`
 - `Sheaf.AlgebraicGeometry.EtaleShortExactLocalLift`
 - `Sheaf.AlgebraicGeometry.EtaleSiteCechComplexComparison`
-- `Sheaf.AlgebraicGeometry.EtaleSmoothZeroDimensionalFibres`
 - `Sheaf.AlgebraicGeometry.EtaleSplitsOffIsolatedPoints`
 - `Sheaf.AlgebraicGeometry.EtaleSplitsOffQuasiFinitePart`
 - `Sheaf.AlgebraicGeometry.EtaleStratificationLocalGluing`
 - `Sheaf.AlgebraicGeometry.EtaleSubsheafFinalOpen`
-- `Sheaf.AlgebraicGeometry.EtaleUnderivedExchangeModuleLinear`
 - `Sheaf.AlgebraicGeometry.EventuallyAffine`
 - `Sheaf.AlgebraicGeometry.EventuallyClosedImmersion`
-- `Sheaf.AlgebraicGeometry.ExistsAmpleOfDimLEOne`
-- `Sheaf.AlgebraicGeometry.ExistsAmpleOfEnoughGloballyGenerated`
-- `Sheaf.AlgebraicGeometry.ExistsAmpleOfReducedDimLEOne`
 - `Sheaf.AlgebraicGeometry.ExtEvaluation`
 - `Sheaf.AlgebraicGeometry.FiberDegreeBound`
 - `Sheaf.AlgebraicGeometry.FibreProductPointResidueField`
-- `Sheaf.AlgebraicGeometry.FieldDiscreteModules`
 - `Sheaf.AlgebraicGeometry.FieldPointFactorsThroughClosedImmersion`
 - `Sheaf.AlgebraicGeometry.FieldPointFactorsThroughImmersion`
 - `Sheaf.AlgebraicGeometry.FilteredColimitLocalizationAtPrime`
-- `Sheaf.AlgebraicGeometry.FindGloballyGenerated`
 - `Sheaf.AlgebraicGeometry.FiniteAffineFibreSections`
 - `Sheaf.AlgebraicGeometry.FiniteClopenOpenCoverSection`
-- `Sheaf.AlgebraicGeometry.FiniteDenseNormalOpen`
 - `Sheaf.AlgebraicGeometry.FiniteDimensionalResidueFieldOfIsolatedFiberPoint`
 - `Sheaf.AlgebraicGeometry.FiniteDiscreteSeparatedAffine`
 - `Sheaf.AlgebraicGeometry.FiniteEtaleDescent`
@@ -1510,15 +1456,11 @@ Modules pruned since the imports baseline:
 - `Sheaf.AlgebraicGeometry.FiniteFiberDegreeBaseChange`
 - `Sheaf.AlgebraicGeometry.FiniteFlatDualityEvaluation`
 - `Sheaf.AlgebraicGeometry.FiniteIsolatedPointsOfFiniteType`
-- `Sheaf.AlgebraicGeometry.FiniteLocallyConstantModuleValues`
 - `Sheaf.AlgebraicGeometry.FiniteLocallyFreeDegreeLocallyConstant`
 - `Sheaf.AlgebraicGeometry.FiniteLocallyFreeDerivedHom`
 - `Sheaf.AlgebraicGeometry.FiniteLocallyFreeStructureSheaf`
-- `Sheaf.AlgebraicGeometry.FiniteOfIsClosedOfClosedPoints`
 - `Sheaf.AlgebraicGeometry.FiniteOpenCoverDegreeSum`
 - `Sheaf.AlgebraicGeometry.FinitePiecePersistence`
-- `Sheaf.AlgebraicGeometry.FinitePushforwardLocallyFree`
-- `Sheaf.AlgebraicGeometry.FiniteSectionsCover`
 - `Sheaf.AlgebraicGeometry.FiniteSeparableMultiplicationEtale`
 - `Sheaf.AlgebraicGeometry.FiniteTypeEtaleModuleStalk`
 - `Sheaf.AlgebraicGeometry.FiniteUnramifiedEtaleLocal`
@@ -1533,26 +1475,15 @@ Modules pruned since the imports baseline:
 - `Sheaf.AlgebraicGeometry.FpqcAffineDescent`
 - `Sheaf.AlgebraicGeometry.FpqcAffineStandardRefinement`
 - `Sheaf.AlgebraicGeometry.FpqcDescendQuasiCompact`
-- `Sheaf.AlgebraicGeometry.FpqcFinerThanEtale`
 - `Sheaf.AlgebraicGeometry.FpqcLocalOnBaseCriterion`
-- `Sheaf.AlgebraicGeometry.FpqcMorphismsDescend`
 - `Sheaf.AlgebraicGeometry.FpqcOpenSubschemeDescent`
 - `Sheaf.AlgebraicGeometry.FpqcTensorSections`
-- `Sheaf.AlgebraicGeometry.FullAffineEtaleSite`
-- `Sheaf.AlgebraicGeometry.FullAffineEtaleTopos`
 - `Sheaf.AlgebraicGeometry.GeometricPointMorphismStalkBijection`
-- `Sheaf.AlgebraicGeometry.GlobalGenerationNonvanishingCover`
 - `Sheaf.AlgebraicGeometry.GlobalHomPullbackAdjunction`
 - `Sheaf.AlgebraicGeometry.GlobalSectionsLeftExact`
-- `Sheaf.AlgebraicGeometry.GlobalSectionsStalkComparison`
-- `Sheaf.AlgebraicGeometry.GlueComponentLineBundles`
-- `Sheaf.AlgebraicGeometry.GlueComponentReducedCoverSections`
-- `Sheaf.AlgebraicGeometry.GlueComponentTransitionCocycle`
-- `Sheaf.AlgebraicGeometry.GradedSheafStructures`
 - `Sheaf.AlgebraicGeometry.GrothendieckExistenceEasy`
 - `Sheaf.AlgebraicGeometry.HenselianFinitePushforwardH1Image`
 - `Sheaf.AlgebraicGeometry.HenselianFinitePushforwardH1Lift`
-- `Sheaf.AlgebraicGeometry.HomeomorphPurelyInseparableBaseChange`
 - `Sheaf.AlgebraicGeometry.ImmersionAffineConstructiblePieces`
 - `Sheaf.AlgebraicGeometry.ImmersionFiberDegreeOne`
 - `Sheaf.AlgebraicGeometry.InjectiveEtaleConstantRingModule`
@@ -1560,39 +1491,28 @@ Modules pruned since the imports baseline:
 - `Sheaf.AlgebraicGeometry.InjectiveModuleSheafH1`
 - `Sheaf.AlgebraicGeometry.IntegralClosureFiniteFibreChooseG`
 - `Sheaf.AlgebraicGeometry.IntegralClosureFiniteFibreImageClopen`
-- `Sheaf.AlgebraicGeometry.IntegralDimOneAmple`
-- `Sheaf.AlgebraicGeometry.IntegralOverringJacobsonPower`
-- `Sheaf.AlgebraicGeometry.InvertibleSectionRing`
 - `Sheaf.AlgebraicGeometry.InvertibleTensorQcoherent`
-- `Sheaf.AlgebraicGeometry.IsAffineOfFiniteClosedCover`
-- `Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf`
 - `Sheaf.AlgebraicGeometry.IsFiniteLocallyFreeOfDegreeOfEtaleCover`
 - `Sheaf.AlgebraicGeometry.IsFiniteOfFpqcCover`
-- `Sheaf.AlgebraicGeometry.IsFiniteTypeEtaleModuleSheaf`
 - `Sheaf.AlgebraicGeometry.IsSeparatedOfFlatSurjectiveBaseChange`
 - `Sheaf.AlgebraicGeometry.IsSeparatedOfSurjectiveUniversallyClosed`
 - `Sheaf.AlgebraicGeometry.IsolatedFibrePointBaseChange`
-- `Sheaf.AlgebraicGeometry.KInjectiveResolutionsExist`
 - `Sheaf.AlgebraicGeometry.KilledSheafModuleLift`
 - `Sheaf.AlgebraicGeometry.LftOverFieldIsolatedPointResidueFinite`
 - `Sheaf.AlgebraicGeometry.LimitContainedInConstructible`
 - `Sheaf.AlgebraicGeometry.LocallyConstantFiniteValuesFiniteType`
 - `Sheaf.AlgebraicGeometry.LocallyOfFinitePresentationFpqcDescent`
-- `Sheaf.AlgebraicGeometry.MLSetsTowerLimitNonempty`
 - `Sheaf.AlgebraicGeometry.MatchingObjectFibreProduct`
-- `Sheaf.AlgebraicGeometry.ModuleAbelianInverseImageComparison`
 - `Sheaf.AlgebraicGeometry.ModuleAcyclicCohomologyComparisonZero`
 - `Sheaf.AlgebraicGeometry.ModuleAcyclicUnderlyingSections`
 - `Sheaf.AlgebraicGeometry.ModuleCechVanishingBasis`
 - `Sheaf.AlgebraicGeometry.ModuleCechVanishingCriterion`
-- `Sheaf.AlgebraicGeometry.ModuleCohomologyBoundary`
 - `Sheaf.AlgebraicGeometry.ModuleInjectiveOpenCoverCechAcyclic`
 - `Sheaf.AlgebraicGeometry.ModuleSectionsSurjectiveOfCechH1`
 - `Sheaf.AlgebraicGeometry.ModuleStalkFilteredColimit`
 - `Sheaf.AlgebraicGeometry.ModuleSubobjectGenericConstancy`
 - `Sheaf.AlgebraicGeometry.ModuleSubobjectGenericNeighbourhood`
 - `Sheaf.AlgebraicGeometry.Modules.ExtensionByZeroAdjunction`
-- `Sheaf.AlgebraicGeometry.Modules.InvertiblePullbackTensor`
 - `Sheaf.AlgebraicGeometry.Modules.ModuleSkyscraperStalkAdjunction`
 - `Sheaf.AlgebraicGeometry.Modules.QuasicoherentBinarySum`
 - `Sheaf.AlgebraicGeometry.Modules.ResidueFiber`
@@ -1609,10 +1529,7 @@ Modules pruned since the imports baseline:
 - `Sheaf.AlgebraicGeometry.OpenRestrictionPullbackUnit`
 - `Sheaf.AlgebraicGeometry.PerfectDerivedTensorHom`
 - `Sheaf.AlgebraicGeometry.PerfectGenerationOpenInduction`
-- `Sheaf.AlgebraicGeometry.PicardH1RestrictionCompatibility`
-- `Sheaf.AlgebraicGeometry.PicardLift`
 - `Sheaf.AlgebraicGeometry.PopescuDelocalizeWeakLocalizationSmooth`
-- `Sheaf.AlgebraicGeometry.PositiveTensorFamily`
 - `Sheaf.AlgebraicGeometry.PresheafModuleStalkFilteredColimit`
 - `Sheaf.AlgebraicGeometry.PrincipalLocalizationNaiveCotangent`
 - `Sheaf.AlgebraicGeometry.ProjPolynomialTwistChart`
@@ -1622,13 +1539,10 @@ Modules pruned since the imports baseline:
 - `Sheaf.AlgebraicGeometry.ProjectiveLineTwistExists`
 - `Sheaf.AlgebraicGeometry.ProjectiveLineTwistMultiplication`
 - `Sheaf.AlgebraicGeometry.ProjectiveSpace.KoszulResolution`
-- `Sheaf.AlgebraicGeometry.ProjectiveSpaceStandardCharts`
 - `Sheaf.AlgebraicGeometry.ProjectiveSpaceTwistGluedIdentification`
 - `Sheaf.AlgebraicGeometry.ProjectiveSpaceTwistingSheafCharts`
-- `Sheaf.AlgebraicGeometry.ProperBasic`
 - `Sheaf.AlgebraicGeometry.ProperCoproduct`
 - `Sheaf.AlgebraicGeometry.ProperDerivedDirectImageComposition`
-- `Sheaf.AlgebraicGeometry.ProperGeometricPointExchange`
 - `Sheaf.AlgebraicGeometry.ProperGlobalSectionsFlatBaseChange`
 - `Sheaf.AlgebraicGeometry.PullbackCohomologyLongExactLadder`
 - `Sheaf.AlgebraicGeometry.PullbackIsoNsmulDevissage`
@@ -1641,36 +1555,24 @@ Modules pruned since the imports baseline:
 - `Sheaf.AlgebraicGeometry.QuasiCoherentIsoOnAffineCover`
 - `Sheaf.AlgebraicGeometry.QuasiCoherentMayerVietorisOpenCover`
 - `Sheaf.AlgebraicGeometry.QuasiCoherentModuleColimitAffineSections`
-- `Sheaf.AlgebraicGeometry.QuasiCompactOpenIntersection`
 - `Sheaf.AlgebraicGeometry.QuasicoherentSheafHom`
 - `Sheaf.AlgebraicGeometry.QuotientBaseChangeIdeal`
 - `Sheaf.AlgebraicGeometry.ReducedCurveNormalization`
-- `Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme`
-- `Sheaf.AlgebraicGeometry.ReductionUniversalHomeomorphism`
-- `Sheaf.AlgebraicGeometry.RelativeSpecBaseChange`
 - `Sheaf.AlgebraicGeometry.SchemeClopenIdempotent`
 - `Sheaf.AlgebraicGeometry.SchemeModulesEnoughInjectives`
 - `Sheaf.AlgebraicGeometry.SchemeModulesFunctorialInjectiveEmbeddings`
 - `Sheaf.AlgebraicGeometry.SchemeTheoreticUnion`
-- `Sheaf.AlgebraicGeometry.SectionAffineOpenKillsCohomology`
 - `Sheaf.AlgebraicGeometry.SectionsMorphismToProjPolynomialRing`
 - `Sheaf.AlgebraicGeometry.SemiRepresentableObject`
-- `Sheaf.AlgebraicGeometry.SemilocalDimOneConductor`
 - `Sheaf.AlgebraicGeometry.SeparatedAffineCoverCriterion`
-- `Sheaf.AlgebraicGeometry.SeparatedAffineFunctionFieldSurjective`
 - `Sheaf.AlgebraicGeometry.SerreSectionModuleComparison`
 - `Sheaf.AlgebraicGeometry.SerreSectionModuleFinite`
-- `Sheaf.AlgebraicGeometry.Sites.EtaleSheavesGsetsPoint`
 - `Sheaf.AlgebraicGeometry.Sites.FiniteEtaleCoproductSections`
 - `Sheaf.AlgebraicGeometry.Sites.SmallEtaleRepresentablePresheafSheaf`
-- `Sheaf.AlgebraicGeometry.SmoothDifferentialsFreeRankFibreDimension`
 - `Sheaf.AlgebraicGeometry.SmoothProjectiveCurve`
 - `Sheaf.AlgebraicGeometry.SmoothZeroDifferentialsAffineOpenEtale`
-- `Sheaf.AlgebraicGeometry.SpecAlgClosedEtaleSheafConstant`
 - `Sheaf.AlgebraicGeometry.SpecFieldPointResidueField`
-- `Sheaf.AlgebraicGeometry.SpecFiniteProductFields`
 - `Sheaf.AlgebraicGeometry.SpecStalkLimitAffineNeighbourhoods`
-- `Sheaf.AlgebraicGeometry.SpecSurjectiveBaseChange`
 - `Sheaf.AlgebraicGeometry.StandardFpqcQuotientTopology`
 - `Sheaf.AlgebraicGeometry.StandardSmoothAffineDiagonalGenerators`
 - `Sheaf.AlgebraicGeometry.SteinUniversallyClosedFactor`
@@ -1678,7 +1580,6 @@ Modules pruned since the imports baseline:
 - `Sheaf.AlgebraicGeometry.StrictlyHenselianSectionsStalk`
 - `Sheaf.AlgebraicGeometry.TensorGeneratingSections`
 - `Sheaf.AlgebraicGeometry.TensorGloballyGenerated`
-- `Sheaf.AlgebraicGeometry.TensorSectionAffineOpen`
 - `Sheaf.AlgebraicGeometry.TorsionFilteredUnion`
 - `Sheaf.AlgebraicGeometry.UniversalFirstOrderThickening`
 - `Sheaf.AlgebraicGeometry.UniversalFirstOrderThickeningExists`
@@ -1696,16 +1597,12 @@ Modules pruned since the imports baseline:
 - `Sheaf.AlgebraicGeometry.ZariskiCohomologyLocallyZero`
 - `Sheaf.AlgebraicGeometry.ZariskiExtensionByZeroAdjunction`
 - `Sheaf.AlgebraicGeometry.ZariskiOpenRestrictionInjectives`
-- `Sheaf.AlgebraicGeometry.ZariskiUnitsRestriction`
 - `Sheaf.AlgebraicGeometry.ZeroDimIntegralPoint`
-- `Sheaf.AlgebraicGeometry.ZeroDimNoetherianAffine`
-- `Sheaf.AlgebraicGeometry.ZeroDimensionalNoetherianFiniteDiscrete`
 - `Sheaf.AlgebraicTopology.CoskeletalMapTrivialKan`
 - `Sheaf.AlgebraicTopology.CoskeletonFreeHomologyComparison`
 - `Sheaf.AlgebraicTopology.SetCechNerveFreeResolution`
 - `Sheaf.CategoryTheory.Abelian.CompatibleNullHomotopyAssembly`
 - `Sheaf.CategoryTheory.Abelian.HorseshoeMorphismLift`
-- `Sheaf.CategoryTheory.Abelian.HorseshoeResolutions`
 - `Sheaf.CategoryTheory.AdjunctionTransferFunctorialInjectives`
 - `Sheaf.CategoryTheory.BoundedFilteredComplexSpectralSequence`
 - `Sheaf.CategoryTheory.BoundedSubobjectSize`
@@ -1716,28 +1613,18 @@ Modules pruned since the imports baseline:
 - `Sheaf.CategoryTheory.CartanEilenbergFunctorial`
 - `Sheaf.CategoryTheory.CartanEilenbergProperties`
 - `Sheaf.CategoryTheory.CartanEilenbergVerticalNullhomotopy`
-- `Sheaf.CategoryTheory.CohomologyColimitSites`
-- `Sheaf.CategoryTheory.ColimitSiteCechComplex`
 - `Sheaf.CategoryTheory.ColimitSiteSections`
-- `Sheaf.CategoryTheory.ColimitSites`
 - `Sheaf.CategoryTheory.CommAlgebraSheafModule`
-- `Sheaf.CategoryTheory.CoskeletonMatchingTuples`
 - `Sheaf.CategoryTheory.DeltaFunctor`
-- `Sheaf.CategoryTheory.DerivedCategory.AdjointFunctors`
 - `Sheaf.CategoryTheory.DerivedCategory.EssentiallyConstantIndHomColimit`
 - `Sheaf.CategoryTheory.DerivedCategory.ShiftIdentification`
 - `Sheaf.CategoryTheory.DerivedCoupleExact`
 - `Sheaf.CategoryTheory.DerivedFunctorInverts`
-- `Sheaf.CategoryTheory.DiscreteModulesAbelian`
 - `Sheaf.CategoryTheory.EdgeCollapse`
-- `Sheaf.CategoryTheory.EffaceableDeltaFunctorUniversal`
 - `Sheaf.CategoryTheory.EssentiallyConstantSplitting`
 - `Sheaf.CategoryTheory.EssentiallyConstantSystem`
-- `Sheaf.CategoryTheory.ExactCouple`
 - `Sheaf.CategoryTheory.ExistsDirectedReindexing`
-- `Sheaf.CategoryTheory.FilteredColimitCategories`
 - `Sheaf.CategoryTheory.FilteredHomotopySpectralSequence`
-- `Sheaf.CategoryTheory.FilteredPageTwoModel`
 - `Sheaf.CategoryTheory.FirstQuadrantRowCollapse`
 - `Sheaf.CategoryTheory.Galois.AbstractEquivalence`
 - `Sheaf.CategoryTheory.GrothendieckAbelian.AcyclicQuotientComplexesBoundedSize`
@@ -1746,7 +1633,6 @@ Modules pruned since the imports baseline:
 - `Sheaf.CategoryTheory.GrothendieckAbelian.KInjectiveDegreewiseExistence`
 - `Sheaf.CategoryTheory.GrothendieckAbelian.ObjectsSmall`
 - `Sheaf.CategoryTheory.GrothendieckSSDoubleComplexModel`
-- `Sheaf.CategoryTheory.GrothendieckSpectralSequence`
 - `Sheaf.CategoryTheory.HalfPlaneGradedCanonical`
 - `Sheaf.CategoryTheory.HomotopyHomExactOfInjective`
 - `Sheaf.CategoryTheory.HomotopyLimitVanishing`
@@ -1756,50 +1642,33 @@ Modules pruned since the imports baseline:
 - `Sheaf.CategoryTheory.InjectiveResolutionSESComplexes`
 - `Sheaf.CategoryTheory.InjectiveSheafCechAcyclic`
 - `Sheaf.CategoryTheory.Limits.TowerLimitAdditiveLeftExact`
-- `Sheaf.CategoryTheory.Limits.TowerTransitionEndomorphism`
 - `Sheaf.CategoryTheory.LocalizationHomColimit`
-- `Sheaf.CategoryTheory.LocalizedModuleAdjunctionExact`
 - `Sheaf.CategoryTheory.MatchingObjectCoskeleton`
 - `Sheaf.CategoryTheory.MittagLefflerExactSequence`
 - `Sheaf.CategoryTheory.MittagLefflerLimitExact`
 - `Sheaf.CategoryTheory.ModuleDirectedColimitUnderlyingSets`
-- `Sheaf.CategoryTheory.OpcyclesTorSurjection`
 - `Sheaf.CategoryTheory.PresheafChangeOfRingsAdjunction`
-- `Sheaf.CategoryTheory.PushoutShortExactSequence`
 - `Sheaf.CategoryTheory.QuotientJShriek`
 - `Sheaf.CategoryTheory.RightDerivedFunctorTruncationIso`
-- `Sheaf.CategoryTheory.RightDerivedUniversalDeltaFunctor`
 - `Sheaf.CategoryTheory.RightLocalizationHomColimit`
 - `Sheaf.CategoryTheory.SheafAlgebrasDirectedColimit`
-- `Sheaf.CategoryTheory.SheavesAlgebraicStructuresObjects`
-- `Sheaf.CategoryTheory.SiteCechComplex`
 - `Sheaf.CategoryTheory.SiteCechMathlibComparison`
-- `Sheaf.CategoryTheory.SiteCechVanishingCriterion`
-- `Sheaf.CategoryTheory.SiteCohomologyPullback`
-- `Sheaf.CategoryTheory.SiteContinuousPushforwardSheaf`
 - `Sheaf.CategoryTheory.SiteCoveringsCommonRefinement`
 - `Sheaf.CategoryTheory.SiteEquivalenceMorphismOfSites`
 - `Sheaf.CategoryTheory.SiteEquivalenceMorphismTransport`
 - `Sheaf.CategoryTheory.SiteExtensionByZeroPresheafAdjoint`
 - `Sheaf.CategoryTheory.SiteFilteredColimitSections`
 - `Sheaf.CategoryTheory.SiteInjectiveCechAcyclic`
-- `Sheaf.CategoryTheory.SiteLerayDegenerate`
-- `Sheaf.CategoryTheory.SiteMorphismComposition`
 - `Sheaf.CategoryTheory.SiteSesCechH1Surjective`
 - `Sheaf.CategoryTheory.SiteSystemStrictification`
 - `Sheaf.CategoryTheory.Sites.BinaryContractedProductPresentation`
 - `Sheaf.CategoryTheory.Sites.CoherentContractedPowers`
 - `Sheaf.CategoryTheory.Sites.CohomologyDerivedEvaluation`
-- `Sheaf.CategoryTheory.Sites.CohomologyOverObjectLocalization`
 - `Sheaf.CategoryTheory.Sites.CohomologySiteEquivalence`
 - `Sheaf.CategoryTheory.Sites.EtaleTorsorInverseImageExtension`
 - `Sheaf.CategoryTheory.Sites.EtaleTorsorPushoutExtension`
-- `Sheaf.CategoryTheory.Sites.InjectiveModuleCechAcyclic`
 - `Sheaf.CategoryTheory.Sites.SheafificationPlusTheorem`
 - `Sheaf.CategoryTheory.Sites.SitePlusConstructionPresheaf`
-- `Sheaf.CategoryTheory.Sites.TorsorExtensionPresentation`
-- `Sheaf.CategoryTheory.Sites.TorsorExtensionPushforward`
-- `Sheaf.CategoryTheory.Sites.TorsorH1BoundaryRepresentative`
 - `Sheaf.CategoryTheory.Sites.TorsorH1Functoriality`
 - `Sheaf.CategoryTheory.Sites.ZariskiContractedPowerExtension`
 - `Sheaf.CategoryTheory.Sites.ZariskiContractedPowerExtensionPresentation`
@@ -1811,12 +1680,8 @@ Modules pruned since the imports baseline:
 - `Sheaf.CategoryTheory.SpectralSequenceComparison`
 - `Sheaf.CategoryTheory.SpectralSequencePageInduction`
 - `Sheaf.CategoryTheory.TowerSplitEnvelope`
-- `Sheaf.CategoryTheory.Triangulated.DerivedLimit`
-- `Sheaf.CategoryTheory.Triangulated.DerivedLimitExistence`
 - `Sheaf.CategoryTheory.Triangulated.TriangleMorphismExtension`
-- `Sheaf.CategoryTheory.TruncatedCoskeletonFiniteLimits`
 - `Sheaf.CategoryTheory.TruncationCoupleExact`
-- `Sheaf.CategoryTheory.TruncationDescends`
 - `Sheaf.FieldTheory.ExistsPBasis`
 - `Sheaf.FieldTheory.FiniteGaloisReceivingSeparableExtensions`
 - `Sheaf.FieldTheory.FinitePurelyInseparableScalarDescent`
@@ -1825,7 +1690,6 @@ Modules pruned since the imports baseline:
 - `Sheaf.FieldTheory.GeometricallyReducedExtensionSeparable`
 - `Sheaf.FieldTheory.IntersectionSubfieldsDifferentials`
 - `Sheaf.FieldTheory.IntersectionSubfieldsSubspace`
-- `Sheaf.FieldTheory.MakeSeparable`
 - `Sheaf.FieldTheory.MakeSeparablyGenerated`
 - `Sheaf.FieldTheory.NormalExtensionFixedField`
 - `Sheaf.FieldTheory.PBasisDifferentialsBasis`
@@ -1834,7 +1698,6 @@ Modules pruned since the imports baseline:
 - `Sheaf.FieldTheory.PthRootsExtensionDegree`
 - `Sheaf.FieldTheory.PurelyInseparableDegreePIntermediate`
 - `Sheaf.FieldTheory.PurelyInseparablePthRootTower`
-- `Sheaf.FieldTheory.SeparableExtension`
 - `Sheaf.FieldTheory.SeparableRootPthPower`
 - `Sheaf.FieldTheory.SeparableSplitPurelyInseparableResidueFields`
 - `Sheaf.FieldTheory.SeparableTensorPurelyInseparable`
@@ -1843,7 +1706,6 @@ Modules pruned since the imports baseline:
 - `Sheaf.FieldTheory.SeparablyGeneratedTensorReduced`
 - `Sheaf.FieldTheory.SeparatingTranscendenceBasisFiniteSubextension`
 - `Sheaf.FieldTheory.TensorFieldExtensionGaloisInvariants`
-- `Sheaf.GroupTheory.GroupAlgebraFunctorialInjectiveEmbeddings`
 - `Sheaf.LinearAlgebra.IdempotentEndomorphismCharpolyField`
 - `Sheaf.LinearAlgebra.IdempotentImageBaseChange`
 - `Sheaf.LinearAlgebra.Matrix.CauchyBinet`
@@ -1856,12 +1718,8 @@ Modules pruned since the imports baseline:
 - `Sheaf.LinearAlgebra.TriangularChangeOfBasis`
 - `Sheaf.Paper.AffineProjectiveComplexDerivedHom`
 - `Sheaf.Paper.ArtinianIdealLengthOneFiltration`
-- `Sheaf.Paper.BoundaryCechCompatibility`
-- `Sheaf.Paper.BoundaryCechInjectiveMiddle`
-- `Sheaf.Paper.BoundaryDerivationSquareZero`
 - `Sheaf.Paper.CartanEilenbergLeftExactCohomology`
 - `Sheaf.Paper.CechNerveFreeHomology`
-- `Sheaf.Paper.ColimitSitesInjectiveSystem`
 - `Sheaf.Paper.ColimitSurjectiveRingMap`
 - `Sheaf.Paper.ConstantSheafOpenMaps`
 - `Sheaf.Paper.CyclicExtensionCocycle`
@@ -1872,7 +1730,6 @@ Modules pruned since the imports baseline:
 - `Sheaf.Paper.EtaleHypercohomologyPullbackFunctorial`
 - `Sheaf.Paper.EtaleRestrictionPullbackUnit`
 - `Sheaf.Paper.EtaleStandardCoverCech`
-- `Sheaf.Paper.FiniteEtaleEtaleLocalSplit`
 - `Sheaf.Paper.FiniteHypercoverDescent`
 - `Sheaf.Paper.FiniteSplitEtaleHypercover`
 - `Sheaf.Paper.FiniteSplitHypercoverRefinement`
@@ -1888,19 +1745,14 @@ Modules pruned since the imports baseline:
 - `Sheaf.Paper.IntegralClosureFiniteFibrePartLocalization`
 - `Sheaf.Paper.InverseImageExtensionByEmptyConstant`
 - `Sheaf.Paper.InverseImageFreeEtaleModule`
-- `Sheaf.Paper.InverseImageStalkGerm`
-- `Sheaf.Paper.KoszulComplex`
-- `Sheaf.Paper.KoszulDifferential`
 - `Sheaf.Paper.KoszulDifferentialSquareZero`
 - `Sheaf.Paper.PlusConstructionFunctorial`
 - `Sheaf.Paper.PolynomialIdealCoefficientsMonomial`
 - `Sheaf.Paper.PowerSetComplexContractible`
-- `Sheaf.Paper.ReducedSourceFactors`
 - `Sheaf.Paper.RelativeGlobalCompleteIntersection`
 - `Sheaf.Paper.RelativeGlobalCompleteIntersectionPresentation`
 - `Sheaf.Paper.SectionsOverQuasiCompactOpen`
 - `Sheaf.Paper.SeparableResidueCotangentInjective`
-- `Sheaf.Paper.SetsEtaleInverseImageConstantBaseChange`
 - `Sheaf.Paper.SheavesKilledByNZmodModules`
 - `Sheaf.Paper.SiteCoveringIsomorphicFamily`
 - `Sheaf.Paper.SiteCoveringMorphismsSameH0Map`
@@ -1909,39 +1761,22 @@ Modules pruned since the imports baseline:
 - `Sheaf.Paper.SitePlusOfSeparatedIsSheaf`
 - `Sheaf.Paper.SitePlusOfSheafIso`
 - `Sheaf.Paper.SitePlusSeparated`
-- `Sheaf.Paper.SiteSheafificationSectionsLocal`
 - `Sheaf.Paper.SmoothAtMaximalIdeal`
 - `Sheaf.Paper.SmoothRetractRelativeGlobalCompleteIntersection`
-- `Sheaf.Paper.StrictlyHenselianEtaleAcyclic`
 - `Sheaf.Paper.TorLongExactFirstVariable`
 - `Sheaf.Paper.TorsionModuleFlatBaseChangeIso`
 - `Sheaf.Paper.TrivialKanHomotopyEquivalence`
-- `Sheaf.Paper.WeilPbcNormalizationInResidueFieldExtension`
 - `Sheaf.Paper.ZariskiEtaleInclusionMorphismOfSites`
 - `Sheaf.Paper.ZariskiH0ProperHenselianPair`
-- `Sheaf.Paper.ZeroDimensionalCohomology`
-- `Sheaf.RepresentationTheory.CoinducedContinuousAcyclic`
-- `Sheaf.RepresentationTheory.CoinducedDiscreteEmbedding`
-- `Sheaf.RepresentationTheory.CoinducedHomotopyContinuous`
-- `Sheaf.RepresentationTheory.CoinducedHomotopyIdentity`
-- `Sheaf.RepresentationTheory.ContinuousCochainsDerivedInvariants`
-- `Sheaf.RepresentationTheory.ContinuousCochainsShortExact`
-- `Sheaf.RepresentationTheory.DiscreteContinuousCohomology`
-- `Sheaf.RepresentationTheory.DiscreteContinuousFunctorialInjectives`
-- `Sheaf.RepresentationTheory.DiscreteContinuousInjectives`
 - `Sheaf.RepresentationTheory.DiscreteContinuousRep`
-- `Sheaf.RepresentationTheory.DiscreteRep`
-- `Sheaf.RepresentationTheory.OpenStabilizerAdjunction`
 - `Sheaf.RepresentationTheory.SylowModuleFiltration`
 - `Sheaf.RingTheory.AffineBasicSetDifference`
 - `Sheaf.RingTheory.AffineBasicSetsDisjointRefinement`
-- `Sheaf.RingTheory.AnalyticallyUnramified`
 - `Sheaf.RingTheory.AnnihilatorAssociatedPrimes`
 - `Sheaf.RingTheory.AnnihilatorAssociatedPrimesExactSequence`
 - `Sheaf.RingTheory.AnnihilatorElementFlatBaseChange`
 - `Sheaf.RingTheory.AnnihilatorLocalizationAway`
 - `Sheaf.RingTheory.ArtinianLocalEssentiallyFiniteTypeResidue`
-- `Sheaf.RingTheory.AssociatedGradedRing`
 - `Sheaf.RingTheory.AssociatedPrimeLocalizeAtPrime`
 - `Sheaf.RingTheory.AssociatedPrimePowerQuotient`
 - `Sheaf.RingTheory.BijectiveQuotientMapPowOfFlat`
@@ -1953,7 +1788,6 @@ Modules pruned since the imports baseline:
 - `Sheaf.RingTheory.ConormalGeneratorsGlobalCompleteIntersection`
 - `Sheaf.RingTheory.DVRValuationRingCharacterization`
 - `Sheaf.RingTheory.DirectedUnionSubringsFlatModule`
-- `Sheaf.RingTheory.Etale.QuasiFiniteAtPrime`
 - `Sheaf.RingTheory.EtaleFiniteFactorDecomposition`
 - `Sheaf.RingTheory.EtaleLiftCoprimeFactorization`
 - `Sheaf.RingTheory.EtaleRetractionFiniteProductLocal`
@@ -1963,21 +1797,16 @@ Modules pruned since the imports baseline:
 - `Sheaf.RingTheory.FiniteGabberPolynomial`
 - `Sheaf.RingTheory.FiniteHomogeneousGenerators`
 - `Sheaf.RingTheory.FiniteIffFormalGlueing`
-- `Sheaf.RingTheory.FiniteIntegralConductor`
-- `Sheaf.RingTheory.FinitePresentationAndFlatOfFiniteFreeStandardCover`
 - `Sheaf.RingTheory.FiniteProjectiveOfStandardCover`
 - `Sheaf.RingTheory.FiniteProjectiveStandardFreeCover`
 - `Sheaf.RingTheory.FiniteQuotientComponentQuasiFinite`
-- `Sheaf.RingTheory.FiniteSeparableFibersOfEtaleColimit`
 - `Sheaf.RingTheory.FractionalPrincipalQuotientAssociatedPrimes`
 - `Sheaf.RingTheory.GradedAlgebra.ShortExactGradedComponent`
 - `Sheaf.RingTheory.GradedKernelFinite`
 - `Sheaf.RingTheory.GradedNakayamaFree`
 - `Sheaf.RingTheory.GradedNakayamaGeneration`
-- `Sheaf.RingTheory.GradedPrimeAvoidance`
 - `Sheaf.RingTheory.GradedSubmoduleFinite`
 - `Sheaf.RingTheory.GradedSyzygy`
-- `Sheaf.RingTheory.HenselianFiniteEtaleEquivalence`
 - `Sheaf.RingTheory.HenselianFiniteTypeProductDecomposition`
 - `Sheaf.RingTheory.HenselianLocalRootLifting`
 - `Sheaf.RingTheory.HenselianOfEtaleSectionLifting`
@@ -1986,20 +1815,16 @@ Modules pruned since the imports baseline:
 - `Sheaf.RingTheory.IntegralIdempotentAnnihilatingPolynomial`
 - `Sheaf.RingTheory.IsolatedPrimeResidueFinite`
 - `Sheaf.RingTheory.JacobianPresentationLift`
-- `Sheaf.RingTheory.JacobsonDenominatorFunctionField`
 - `Sheaf.RingTheory.KaehlerDifferentialsModPowerIdeal`
 - `Sheaf.RingTheory.KrullIntersectionLocalization`
 - `Sheaf.RingTheory.LiftMonicCoprimeFactorizationEtale`
 - `Sheaf.RingTheory.LocalCompleteIntersectionFieldChange`
 - `Sheaf.RingTheory.LocalDimensionZeroHenselian`
-- `Sheaf.RingTheory.LocalDomainDimOnePrincipalLocalization`
 - `Sheaf.RingTheory.MinimalGradedPresentation`
 - `Sheaf.RingTheory.MinimalPresentationTor`
-- `Sheaf.RingTheory.ModuleLocalizationFilteredColimit`
 - `Sheaf.RingTheory.MvPolynomial.TwoVariableSyzygy`
 - `Sheaf.RingTheory.NotQuasiFiniteAtPrimeOfReducedStronglyTranscendental`
 - `Sheaf.RingTheory.NotQuasiFiniteAtPrimeOfStronglyTranscendental`
-- `Sheaf.RingTheory.PolynomialDistinctLinearCRT`
 - `Sheaf.RingTheory.PopescuEnlargeSolutionModulo`
 - `Sheaf.RingTheory.PopescuLiftOnce`
 - `Sheaf.RingTheory.PopescuLiftTwice`
@@ -2009,7 +1834,6 @@ Modules pruned since the imports baseline:
 - `Sheaf.RingTheory.PresentationsHomotopyEquivalent`
 - `Sheaf.RingTheory.PrincipalMaximalDimOneRegular`
 - `Sheaf.RingTheory.ProjectiveDimensionSESKernel`
-- `Sheaf.RingTheory.PseudoCoherentBoundedFiniteFreeModel`
 - `Sheaf.RingTheory.QuasiFiniteAtPrimePermanence`
 - `Sheaf.RingTheory.QuasiFiniteAtPrimePrincipalLocalization`
 - `Sheaf.RingTheory.QuasiFiniteIntegralClosureOpen`
@@ -2020,8 +1844,6 @@ Modules pruned since the imports baseline:
 - `Sheaf.RingTheory.RegularSequenceShortExactSequence`
 - `Sheaf.RingTheory.RegularSequenceSwapTwo`
 - `Sheaf.RingTheory.RootLiftingEtaleRetraction`
-- `Sheaf.RingTheory.SemilocalDedekindDvrReduction`
-- `Sheaf.RingTheory.SemilocalNormalizationDimOne`
 - `Sheaf.RingTheory.SeparablePolynomialQuotientReduced`
 - `Sheaf.RingTheory.SeparateImageClosedFromClosed`
 - `Sheaf.RingTheory.SimpleFiltration`
@@ -2032,7 +1854,6 @@ Modules pruned since the imports baseline:
 - `Sheaf.RingTheory.TensorFiniteTypeLimit`
 - `Sheaf.RingTheory.TorStrictlyProZero`
 - `Sheaf.RingTheory.UniversalFirstOrderThickening`
-- `Sheaf.RingTheory.ValuationRingNormal`
 - `Sheaf.RingTheory.ZariskiPairFlatIntegralIsomorphism`
 - `Sheaf.RingTheory.ZariskiPairRankOnePropagation`
 - `Sheaf.RingTheory.ZariskisMainAway`
@@ -2042,19 +1863,15 @@ Modules pruned since the imports baseline:
 - `Sheaf.Topology.ClosedPushforwardConstantPresheaf`
 - `Sheaf.Topology.ClosedPushforwardConstantRestriction`
 - `Sheaf.Topology.ClosedPushforwardConstantStalks`
-- `Sheaf.Topology.ContinuousOpenNormalStabilizer`
 - `Sheaf.Topology.ExistsUniqueIsGenericPointOfFinite`
 - `Sheaf.Topology.FilteredInjectiveCechAcyclic`
 - `Sheaf.Topology.InverseImageClosedPushforwardConstant`
-- `Sheaf.Topology.InverseImageOperationExt`
 - `Sheaf.Topology.InverseImagePresheafModule`
 - `Sheaf.Topology.LocallyConstantGermEvaluation`
 - `Sheaf.Topology.LocallyConstantMapsPresheaf`
 - `Sheaf.Topology.LocallyConstantMapsSheaf`
-- `Sheaf.Topology.NoetherianCohomologyDimOne`
 - `Sheaf.Topology.SetsExtensionByEmpty`
 - `Sheaf.Topology.SetsExtensionByEmptyAdjunction`
-- `Sheaf.Topology.SetsInverseImageComposition`
 - `Sheaf.Topology.SheafBasisSurjection`
 - `Sheaf.Topology.SheafCokernelLocalImage`
 - `Sheaf.Topology.SheafDirectedColimitFiniteCoequalizers`
@@ -2063,17 +1880,10 @@ Modules pruned since the imports baseline:
 - `Sheaf.Topology.SheavesDirectedColimitSections`
 - `Sheaf.Topology.SheavesInjectiveDirectedColimitSections`
 - `Sheaf.Topology.SkyscraperConstantOnPointClosure`
-- `Sheaf.Topology.Spectral.ConstructibleTopologyHausdorff`
 - `Sheaf.Topology.SpectralClosedSubspace`
-- `Sheaf.Topology.SpectralDirectedLimit`
 - `Sheaf.Topology.SpectralDirectedLimitFiniteSober`
 - `Sheaf.Topology.SpectralFiniteCoequalizer`
 - `Sheaf.Topology.SpectralFiniteCoequalizerEmbedsConstant`
-- `Sheaf.Topology.SpectralLimitConstructibleClosed`
-- `Sheaf.Topology.SpectralLimitConstructibleClosedNonempty`
-- `Sheaf.Topology.SpectralLimitDescendOpens`
-- `Sheaf.Topology.SpectralLimitPullbackSections`
-- `Sheaf.Topology.SpectralMapConstructibleContinuous`
 - `Sheaf.Topology.SpectralSheafColimitConstantEmbeddings`
 - `Sheaf.Topology.SurjectionKernelPairCoequalizer`
 - `WeilConjectures.AlgebraicGeometry.Cohomology.Projective`
@@ -2084,157 +1894,158 @@ Scanner limitations: macro-generated declarations, elaborated anonymous/private 
 
 Diagnostics:
 
-- Sheaf.AlgebraicGeometry.AffineEtaleSplitNeighbourhood: unattributed sorry at line 26
-- Sheaf.AlgebraicGeometry.ClopenSectionComponent: unattributed sorry at line 28
-- Sheaf.AlgebraicGeometry.Curve.ValuationCommonStrictSemistableRefinement: unattributed sorry at line 26
-- Sheaf.AlgebraicGeometry.Curve.ValuationMarkedStrictification: unattributed sorry at line 26
-- Sheaf.AlgebraicGeometry.DerivedBaseChangeArrowLocalization: unattributed sorry at line 27
-- Sheaf.AlgebraicGeometry.EtaleHorizontalSupportMate: unattributed sorry at line 23
-- Sheaf.AlgebraicGeometry.FiniteAffineProetaleRefinement: unattributed sorry at line 19
+- Sheaf.AlgebraicGeometry.AffineEtaleSplitNeighbourhood: unattributed sorry at line 28
+- Sheaf.AlgebraicGeometry.ClopenSectionComponent: unattributed sorry at line 31
+- Sheaf.AlgebraicGeometry.Curve.ValuationCommonStrictSemistableRefinement: unattributed sorry at line 40
+- Sheaf.AlgebraicGeometry.Curve.ValuationMarkedStrictification: unattributed sorry at line 30
+- Sheaf.AlgebraicGeometry.DerivedBaseChangeArrowLocalization: unattributed sorry at line 31
+- Sheaf.AlgebraicGeometry.EtaleHorizontalSupportMate: unattributed sorry at line 25
+- Sheaf.AlgebraicGeometry.FiniteAffineProetaleRefinement: unattributed sorry at line 20
 - Sheaf.AlgebraicGeometry.FiniteCechAugmentationModules: unattributed sorry at line 45
-- Sheaf.AlgebraicGeometry.FiniteTypeFlatEtaleNeighborhood: unattributed sorry at line 50
+- Sheaf.AlgebraicGeometry.FiniteTypeFlatEtaleNeighborhood: unattributed sorry at line 51
 - Sheaf.AlgebraicGeometry.FsChartFreeFactorization: unattributed sorry at line 31
-- Sheaf.AlgebraicGeometry.InvertibleAffineLimitDescent: unattributed sorry at line 31
-- Sheaf.AlgebraicGeometry.Morphisms.GeometricallyConnectedFibreNeighbourhood: unattributed sorry at line 27
+- Sheaf.AlgebraicGeometry.InvertibleAffineLimitDescent: unattributed sorry at line 34
+- Sheaf.AlgebraicGeometry.Morphisms.GeometricallyConnectedFibreNeighbourhood: unattributed sorry at line 35
 - Sheaf.AlgebraicGeometry.ProEtale.ConstantRealizationDetectsZero: unattributed sorry at line 21
 - Sheaf.AlgebraicGeometry.PurityClopenAffineLineFiniteType: unattributed sorry at line 25
-- Sheaf.AlgebraicGeometry.SchemeFrobeniusFiniteRadicial: unattributed sorry at line 29
-- Sheaf.CategoryTheory.ConstantRealizationReflectsIsomorphism: unattributed sorry at line 22
-- Sheaf.CategoryTheory.EnoughStrictFilteredInjectives: unattributed sorry at line 30
+- Sheaf.AlgebraicGeometry.SchemeFrobeniusFiniteRadicial: unattributed sorry at line 32
+- Sheaf.CategoryTheory.ConstantRealizationReflectsIsomorphism: unattributed sorry at line 24
+- Sheaf.CategoryTheory.EnoughStrictFilteredInjectives: unattributed sorry at line 32
 - Sheaf.CategoryTheory.Sites.CoherentToposRepair: unattributed sorry at line 27
-- Sheaf.CategoryTheory.Sites.FiniteCoproductToposCoherent: unattributed sorry at line 28
+- Sheaf.CategoryTheory.Sites.FiniteCoproductToposCoherent: unattributed sorry at line 29
 - Sheaf.DeligneLaumon.Reduction.AffineCurveUpper: unattributed sorry at line 45
-- Sheaf.EtaleCohomology.ClopenStalkGlobalSectionsDetection: unattributed sorry at line 24
+- Sheaf.EtaleCohomology.ClopenStalkGlobalSectionsDetection: unattributed sorry at line 25
 - Sheaf.LinearAlgebra.FrobeniusModuleExtensionBounds: unattributed sorry at line 21
-- Sheaf.LinearAlgebra.FrobeniusModuleMixedSubquotient: unattributed sorry at line 27
+- Sheaf.LinearAlgebra.FrobeniusModuleMixedSubquotient: unattributed sorry at line 28
 - Sheaf.LinearAlgebra.FrobeniusModuleWeights: unattributed sorry at line 26
-- Sheaf.LinearAlgebra.SpectrumExactSequence: unattributed sorry at line 20
-- Sheaf.Paper.AcyclicFlatProperCoefficientModel: unattributed sorry at line 36
+- Sheaf.LinearAlgebra.SpectrumExactSequence: unattributed sorry at line 21
+- Sheaf.Paper.AcyclicFlatProperCoefficientModel: unattributed sorry at line 38
 - Sheaf.Paper.BoundedConstructibleTower: unattributed sorry at line 43
-- Sheaf.Paper.CompletedPullbackTriangles: unattributed sorry at line 30
-- Sheaf.Paper.FilteredCoefficientTensorBounds: unattributed sorry at line 46
-- Sheaf.Paper.FiniteFieldSheafScalarExtension: unattributed sorry at line 24
-- Sheaf.Paper.FiniteForwardProductSymmetry: unattributed sorry at line 41
+- Sheaf.Paper.CompletedPullbackTriangles: unattributed sorry at line 31
+- Sheaf.Paper.FilteredCoefficientTensorBounds: unattributed sorry at line 49
+- Sheaf.Paper.FiniteFieldSheafScalarExtension: unattributed sorry at line 30
+- Sheaf.Paper.FiniteForwardProductSymmetry: unattributed sorry at line 44
 - Sheaf.Paper.FiniteSmoothAdjunctionData: unattributed sorry at line 20
 - Sheaf.Paper.FiniteSmoothAdjunctionGeneralBase: unattributed sorry at line 55
 - Sheaf.Paper.FiniteSmoothCanonicalInterfaces: unattributed sorry at line 26
 - Sheaf.Paper.FiniteSmoothCoefficientArrows: unattributed sorry at line 26
 - Sheaf.Paper.FiniteSmoothPurityMaps: unattributed sorry at line 38
-- Sheaf.Paper.GeometricFrobeniusInternalHomComparison: unattributed sorry at line 53
-- Sheaf.Paper.IntegralStratifiedPerfectCharacterization: unattributed sorry at line 59
-- Sheaf.Paper.IteratedWeilCocycle: unattributed sorry at line 29
-- Sheaf.Paper.LevelwiseAdicTruncations: unattributed sorry at line 56
-- Sheaf.Paper.NearbyCycleSheafFiniteness: unattributed sorry at line 28
-- Sheaf.Paper.NearbyFiniteBaseDescent: unattributed sorry at line 25
-- Sheaf.Paper.NormalProEtaleMonodromy: unattributed sorry at line 34
+- Sheaf.Paper.GeometricFrobeniusInternalHomComparison: unattributed sorry at line 58
+- Sheaf.Paper.IntegralStratifiedPerfectCharacterization: unattributed sorry at line 70
+- Sheaf.Paper.IteratedWeilCocycle: unattributed sorry at line 31
+- Sheaf.Paper.LevelwiseAdicTruncations: unattributed sorry at line 61
+- Sheaf.Paper.NearbyCycleSheafFiniteness: unattributed sorry at line 44
+- Sheaf.Paper.NearbyFiniteBaseDescent: unattributed sorry at line 30
+- Sheaf.Paper.NormalProEtaleMonodromy: unattributed sorry at line 42
 - Sheaf.Paper.PointSystemRefine: unattributed sorry at line 27
-- Sheaf.Paper.PurAdicScalarExtensionTorBound: unattributed sorry at line 20
-- Sheaf.Paper.PurLisseMorphismRigidity: unattributed sorry at line 53
-- Sheaf.Paper.PurReductionLimitShiftAdjunction: unattributed sorry at line 29
+- Sheaf.Paper.PurAdicScalarExtensionTorBound: unattributed sorry at line 30
+- Sheaf.Paper.PurLisseMorphismRigidity: unattributed sorry at line 58
+- Sheaf.Paper.PurReductionLimitShiftAdjunction: unattributed sorry at line 38
 - Sheaf.Paper.PurityDiagonalOrientationCompatibility: unattributed sorry at line 38
-- Sheaf.Paper.QbarIdempotentComplete: unattributed sorry at line 26
-- Sheaf.Paper.RingedComparisonTensorAdjunction: unattributed sorry at line 34
-- Sheaf.Paper.SfRationalLocalGlobalPowerTorsion: unattributed sorry at line 37
-- Sheaf.Paper.ShiftedTensorMorphismCalculus: unattributed sorry at line 27
-- Sheaf.Paper.SpecifiedPullbackComparisonAlpha: unattributed sorry at line 36
-- Sheaf.Paper.StratifiedOrientedCover: unattributed sorry at line 36
-- Sheaf.Paper.TraitNearbyBaseChange: unattributed sorry at line 27
-- Sheaf.Paper.WeilComplexQbarIdempotentComplete: unattributed sorry at line 25
+- Sheaf.Paper.QbarIdempotentComplete: unattributed sorry at line 27
+- Sheaf.Paper.RingedComparisonTensorAdjunction: unattributed sorry at line 35
+- Sheaf.Paper.SfRationalLocalGlobalPowerTorsion: unattributed sorry at line 38
+- Sheaf.Paper.ShiftedTensorMorphismCalculus: unattributed sorry at line 36
+- Sheaf.Paper.SpecifiedPullbackComparisonAlpha: unattributed sorry at line 43
+- Sheaf.Paper.StratifiedOrientedCover: unattributed sorry at line 38
+- Sheaf.Paper.TraitNearbyBaseChange: unattributed sorry at line 38
+- Sheaf.Paper.WeilComplexQbarIdempotentComplete: unattributed sorry at line 26
 - Sheaf.RingTheory.FiniteTypeBaseChangeAdicQuotients: unattributed sorry at line 27
-- Sheaf.RingTheory.NormalizationPrincipalHeightOneRefinement: unattributed sorry at line 24
+- Sheaf.RingTheory.NormalizationPrincipalHeightOneRefinement: unattributed sorry at line 26
 - Sheaf.RingTheory.UniversalInjectiveLocalization: unattributed sorry at line 22
 - Sheaf.RingTheory.ValuationRingIdealCorrespondence: unattributed sorry at line 30
-- Sheaf.SecPurity.NormalLocallyConstantFiniteSection: unattributed sorry at line 24
-- Sheaf.SecSmoothPurity.EtaleCoprojectionRhoCompatibility: unattributed sorry at line 39
+- Sheaf.SecPurity.NormalLocallyConstantFiniteSection: unattributed sorry at line 27
+- Sheaf.SecSmoothPurity.EtaleCoprojectionRhoCompatibility: unattributed sorry at line 45
+- Sheaf.SecSmoothPurity.FiniteGeneralRing: unattributed sorry at line 59
 - Sheaf.SecSmoothPurity.ProEtaleFiniteConstantSections: unattributed sorry at line 27
-- Sheaf.SecSmoothPurity.ScalarExtensionFunctor: unattributed sorry at line 50
-- Sheaf.SixFunctors.CoefTowerEvaluationPairing: unattributed sorry at line 70
-- Sheaf.SixFunctors.CoefTowerTraceRectification: unattributed sorry at line 47
+- Sheaf.SecSmoothPurity.ScalarExtensionFunctor: unattributed sorry at line 53
+- Sheaf.SixFunctors.CoefTowerEvaluationPairing: unattributed sorry at line 71
+- Sheaf.SixFunctors.CoefTowerTraceRectification: unattributed sorry at line 48
 - Sheaf.SixFunctors.FrobeniusFixedPoints: unattributed sorry at line 50
 - Sheaf.SixFunctors.SchemeFrobenius: unattributed sorry at line 30
 - Sheaf.SixFunctors.SchemeGaloisComparison: unattributed sorry at line 39
-- Sheaf.SixFunctors.TraceFormula.DeJongArbitraryBaseMarkedSemistable: unattributed sorry at line 39
+- Sheaf.SixFunctors.TraceFormula.DeJongArbitraryBaseMarkedSemistable: unattributed sorry at line 61
 - Sheaf.SixFunctors.TraceFormula.FormalPowerSeriesContinuousFree: unattributed sorry at line 33
 - Sheaf.SixFunctors.TraceFormula.NodalEtaleChart: unattributed sorry at line 28
 - Sheaf.SixFunctors.TraceFormula.NodalFamilyEtaleLocalModel: unattributed sorry at line 27
-- Sheaf.TraceFormula.AbhyankarFiniteTypeFieldHeight: unattributed sorry at line 23
+- Sheaf.TraceFormula.AbhyankarFiniteTypeFieldHeight: unattributed sorry at line 26
 - Sheaf.TraceFormula.AlmostFiniteResidueFieldDegree: unattributed sorry at line 37
 - Sheaf.TraceFormula.AssociatedPrimesFibreBound: unattributed sorry at line 20
-- Sheaf.TraceFormula.BaseModificationComparisonFibreImage: unattributed sorry at line 24
+- Sheaf.TraceFormula.BaseModificationComparisonFibreImage: unattributed sorry at line 41
 - Sheaf.TraceFormula.BigSmallEtalePullbackFormula: unattributed sorry at line 21
 - Sheaf.TraceFormula.BiggerSiteRetraction: unattributed sorry at line 27
-- Sheaf.TraceFormula.CompactSupportSystemEvaluationCoherence: unattributed sorry at line 21
+- Sheaf.TraceFormula.CompactSupportSystemEvaluationCoherence: unattributed sorry at line 27
 - Sheaf.TraceFormula.CompactSupportSystemEvaluationDiagram: unattributed sorry at line 39
-- Sheaf.TraceFormula.CompletedJacobianDifferentials: unattributed sorry at line 43
-- Sheaf.TraceFormula.ConductorSmoothBaseChange: unattributed sorry at line 38
-- Sheaf.TraceFormula.EtaleNormalDomainFiniteFactors: unattributed sorry at line 18
-- Sheaf.TraceFormula.FgCommutativeMonoidFinitePresentation: unattributed sorry at line 25
-- Sheaf.TraceFormula.FinitarySiteCoherentGenerators: unattributed sorry at line 30
-- Sheaf.TraceFormula.FiniteProjectiveEnvelope: unattributed sorry at line 22
-- Sheaf.TraceFormula.FiniteSingletonFibreStalkRing: unattributed sorry at line 21
-- Sheaf.TraceFormula.FlatAssociatedEquidimensional: unattributed sorry at line 30
-- Sheaf.TraceFormula.FlatFiniteTypeDensePresentation: unattributed sorry at line 24
-- Sheaf.TraceFormula.FlatFiniteTypeFlatPointLocal: unattributed sorry at line 23
-- Sheaf.TraceFormula.FppfLocalQfNeighbourhood: unattributed sorry at line 22
-- Sheaf.TraceFormula.GabberNearbyCycleDimensionBound: unattributed sorry at line 36
+- Sheaf.TraceFormula.CompletedJacobianDifferentials: unattributed sorry at line 45
+- Sheaf.TraceFormula.ConductorSmoothBaseChange: unattributed sorry at line 43
+- Sheaf.TraceFormula.EtaleNormalDomainFiniteFactors: unattributed sorry at line 21
+- Sheaf.TraceFormula.FgCommutativeMonoidFinitePresentation: unattributed sorry at line 26
+- Sheaf.TraceFormula.FinitarySiteCoherentGenerators: unattributed sorry at line 33
+- Sheaf.TraceFormula.FiniteProjectiveEnvelope: unattributed sorry at line 34
+- Sheaf.TraceFormula.FiniteSingletonFibreStalkRing: unattributed sorry at line 23
+- Sheaf.TraceFormula.FlatAssociatedEquidimensional: unattributed sorry at line 33
+- Sheaf.TraceFormula.FlatFiniteTypeDensePresentation: unattributed sorry at line 26
+- Sheaf.TraceFormula.FlatFiniteTypeFlatPointLocal: unattributed sorry at line 26
+- Sheaf.TraceFormula.FppfLocalQfNeighbourhood: unattributed sorry at line 26
+- Sheaf.TraceFormula.GabberNearbyCycleDimensionBound: unattributed sorry at line 42
 - Sheaf.TraceFormula.GenericFibreComponentLowerBound: unattributed sorry at line 26
-- Sheaf.TraceFormula.GenericFibrePointsSmooth: unattributed sorry at line 21
+- Sheaf.TraceFormula.GenericFibrePointsSmooth: unattributed sorry at line 24
 - Sheaf.TraceFormula.GeometricComponentCountGenericConstancy: unattributed sorry at line 33
-- Sheaf.TraceFormula.GeometricReducedFibreLocusBaseChange: unattributed sorry at line 23
-- Sheaf.TraceFormula.GeometricReducedFibreLocusConstructible: unattributed sorry at line 26
-- Sheaf.TraceFormula.GeometricallyReducedFibresLimitDescent: unattributed sorry at line 26
-- Sheaf.TraceFormula.GradedImmersionAmpleCriterion: unattributed sorry at line 28
-- Sheaf.TraceFormula.IdealTwistVanishingImpliesAmple: unattributed sorry at line 25
-- Sheaf.TraceFormula.IntegralConeCounitRealization: unattributed sorry at line 17
+- Sheaf.TraceFormula.GeometricReducedFibreLocusBaseChange: unattributed sorry at line 25
+- Sheaf.TraceFormula.GeometricReducedFibreLocusConstructible: unattributed sorry at line 28
+- Sheaf.TraceFormula.GeometricallyReducedFibresLimitDescent: unattributed sorry at line 29
+- Sheaf.TraceFormula.GradedImmersionAmpleCriterion: unattributed sorry at line 33
+- Sheaf.TraceFormula.IdealTwistVanishingImpliesAmple: unattributed sorry at line 32
+- Sheaf.TraceFormula.IntegralConeCounitRealization: unattributed sorry at line 18
 - Sheaf.TraceFormula.InverseSystemSitePoint: unattributed sorry at line 30
 - Sheaf.TraceFormula.InvertibleModuleK0Class: unattributed sorry at line 19
-- Sheaf.TraceFormula.IsomorphismCompletionApproximation: unattributed sorry at line 31
-- Sheaf.TraceFormula.LciAffineOpenLocality: unattributed sorry at line 23
+- Sheaf.TraceFormula.IsomorphismCompletionApproximation: unattributed sorry at line 33
+- Sheaf.TraceFormula.LciAffineOpenLocality: unattributed sorry at line 24
 - Sheaf.TraceFormula.LciPointwiseCriterion: unattributed sorry at line 29
 - Sheaf.TraceFormula.LocalMapCompletionApproximation: unattributed sorry at line 28
-- Sheaf.TraceFormula.LocalQuasiFiniteProjection: unattributed sorry at line 20
+- Sheaf.TraceFormula.LocalQuasiFiniteProjection: unattributed sorry at line 21
 - Sheaf.TraceFormula.LocalUIFlatCokernel: unattributed sorry at line 19
-- Sheaf.TraceFormula.LogRegularDesingularization: unattributed sorry at line 30
-- Sheaf.TraceFormula.MittagLefflerEventualDomination: unattributed sorry at line 21
+- Sheaf.TraceFormula.LogRegularDesingularization: unattributed sorry at line 38
+- Sheaf.TraceFormula.MittagLefflerEventualDomination: unattributed sorry at line 22
 - Sheaf.TraceFormula.Modification: unattributed sorry at line 25
 - Sheaf.TraceFormula.NoIsolatedContractedFibreComponent: unattributed sorry at line 48
-- Sheaf.TraceFormula.NodalSubcurveBoundary: unattributed sorry at line 33
-- Sheaf.TraceFormula.NodeAlgebraicallyClosedExtension: unattributed sorry at line 21
-- Sheaf.TraceFormula.NormalizationFinitePrimeFibres: unattributed sorry at line 30
+- Sheaf.TraceFormula.NodalSubcurveBoundary: unattributed sorry at line 34
+- Sheaf.TraceFormula.NodeAlgebraicallyClosedExtension: unattributed sorry at line 24
+- Sheaf.TraceFormula.NormalizationFinitePrimeFibres: unattributed sorry at line 31
 - Sheaf.TraceFormula.PolynomialShearLeadingCoefficient: unattributed sorry at line 11
-- Sheaf.TraceFormula.ProjectiveBundleProper: unattributed sorry at line 24
-- Sheaf.TraceFormula.ProperBaseChangeCoherentConservative: unattributed sorry at line 23
-- Sheaf.TraceFormula.ProperCurveImagePositiveFibreComponent: unattributed sorry at line 21
+- Sheaf.TraceFormula.ProjectiveBundleProper: unattributed sorry at line 28
+- Sheaf.TraceFormula.ProperBaseChangeCoherentConservative: unattributed sorry at line 31
+- Sheaf.TraceFormula.ProperCurveImagePositiveFibreComponent: unattributed sorry at line 22
 - Sheaf.TraceFormula.PureSubmoduleMittagLeffler: unattributed sorry at line 22
 - Sheaf.TraceFormula.QCQSEtaleFinitarySite: unattributed sorry at line 22
-- Sheaf.TraceFormula.ReducedCurveNormalizationGenus: unattributed sorry at line 31
-- Sheaf.TraceFormula.ReducedFibreModification: unattributed sorry at line 41
-- Sheaf.TraceFormula.ReducedSchemeImage: unattributed sorry at line 33
-- Sheaf.TraceFormula.ReducednessTensorChosenAlgebraicClosure: unattributed sorry at line 22
-- Sheaf.TraceFormula.RefinedNoetherNormalizationPrime: unattributed sorry at line 13
+- Sheaf.TraceFormula.ReducedCurveNormalizationGenus: unattributed sorry at line 43
+- Sheaf.TraceFormula.ReducedFibreModification: unattributed sorry at line 42
+- Sheaf.TraceFormula.ReducedSchemeImage: unattributed sorry at line 34
+- Sheaf.TraceFormula.ReducednessTensorChosenAlgebraicClosure: unattributed sorry at line 23
+- Sheaf.TraceFormula.RefinedNoetherNormalizationPrime: unattributed sorry at line 14
 - Sheaf.TraceFormula.SchematicallyDenseOpen: unattributed sorry at line 19
-- Sheaf.TraceFormula.SieveSheavesCoveringSite: unattributed sorry at line 23
+- Sheaf.TraceFormula.SieveSheavesCoveringSite: unattributed sorry at line 24
 - Sheaf.TraceFormula.SiteQuasicompactSheafificationCriterion: unattributed sorry at line 25
-- Sheaf.TraceFormula.StableModificationConstructibility: unattributed sorry at line 31
-- Sheaf.TraceFormula.StableModificationSpreading: unattributed sorry at line 25
-- Sheaf.TraceFormula.StandardEtaleFiniteFreePrimeLifts: unattributed sorry at line 18
+- Sheaf.TraceFormula.StableModificationConstructibility: unattributed sorry at line 35
+- Sheaf.TraceFormula.StableModificationSpreading: unattributed sorry at line 26
+- Sheaf.TraceFormula.StandardEtaleFiniteFreePrimeLifts: unattributed sorry at line 19
 - Sheaf.TraceFormula.StrictSemistableCurve: unattributed sorry at line 32
-- Sheaf.TraceFormula.TemkinStableModification: unattributed sorry at line 30
+- Sheaf.TraceFormula.TemkinStableModification: unattributed sorry at line 42
 - Sheaf.TraceFormula.TotalSiteComponentRestriction: unattributed sorry at line 33
-- Sheaf.TraceFormula.TotalSiteDerivedComponents: unattributed sorry at line 41
-- Sheaf.TraceFormula.TotalSiteFreeModuleResolution: unattributed sorry at line 31
+- Sheaf.TraceFormula.TotalSiteDerivedComponents: unattributed sorry at line 42
+- Sheaf.TraceFormula.TotalSiteFreeModuleResolution: unattributed sorry at line 32
 - Sheaf.TraceFormula.TotalSiteInjectiveAugmentationExactness: unattributed sorry at line 28
-- Sheaf.TraceFormula.TotalSiteInjectiveCechResolution: unattributed sorry at line 36
+- Sheaf.TraceFormula.TotalSiteInjectiveCechResolution: unattributed sorry at line 38
 - Sheaf.TraceFormula.TotalSiteSimplexFreeResolution: unattributed sorry at line 22
 - Sheaf.TraceFormula.TwoTermPerfectDeterminant: unattributed sorry at line 55
 - Sheaf.TraceFormula.UniversallyExactFlatSubmodule: unattributed sorry at line 20
 - Sheaf.TraceFormula.ValuationClosedFibreNoetherian: unattributed sorry at line 30
-- Sheaf.TraceFormula.ValuationFiniteModuleInjectivity: unattributed sorry at line 34
-- Sheaf.TraceFormula.ValuationFiniteTypeModulePresentation: unattributed sorry at line 36
-- Sheaf.TraceFormula.ValuationFlatFiniteModulePresentation: unattributed sorry at line 33
-- Sheaf.TraceFormula.ValuationStrictSemistableCofinality: unattributed sorry at line 26
+- Sheaf.TraceFormula.ValuationFiniteModuleInjectivity: unattributed sorry at line 37
+- Sheaf.TraceFormula.ValuationFiniteTypeModulePresentation: unattributed sorry at line 38
+- Sheaf.TraceFormula.ValuationFlatFiniteModulePresentation: unattributed sorry at line 35
+- Sheaf.TraceFormula.ValuationStrictSemistableCofinality: unattributed sorry at line 30
 - Sheaf.TraceFormula.ValuationStrictSemistableLocalUniformization: unattributed sorry at line 45
-- Sheaf.TraceFormula.ValuativeDominationEtaNormal: unattributed sorry at line 38
+- Sheaf.TraceFormula.ValuativeDominationEtaNormal: unattributed sorry at line 40
 - WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat: duplicate source declaration: <anonymous:instance : (quasiIso A (.up ℤ)).kFlat.ContainsZero>
 - WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat: duplicate source declaration: <anonymous:instance : (quasiIso A (.up ℤ)).kFlat.IsStableUnderRetracts>
 - WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat: duplicate source declaration: <anonymous:instance : (quasiIso A (.up ℤ)).kFlat.IsStableUnderShift ℤ>
