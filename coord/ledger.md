@@ -16575,3 +16575,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 
 - 01:48 L: batch 20261018T174453 dependency take-out
 - 19:56 L: returned deliver/K2/Sheaf.Paper.BoundedConstructibleTower (reviewer RETURN: (reviewer C-c6f1c, head c6f1c05fd) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.Paper.BoundedConstru)
+- 20:38 L: returned deliver/K8/Sheaf.Paper.RationalExceptionalRestriction (reviewer RETURN: (reviewer C-07a95, head 07a957d88) H3/H7 (brief point 2, worst fault): the delivery changes the Q̄_ℓ disjunct of _hΛ fro)
