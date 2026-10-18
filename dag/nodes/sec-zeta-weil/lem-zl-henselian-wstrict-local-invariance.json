@@ -13,9 +13,159 @@
   "def-weil-pbc-henselian-terminology",
   "sk-def-pe-wlocal"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $X=\\operatorname{Spec}A$, $R=A/I$ and $Z=\\operatorname{Spec}R$. The henselian factorization criterion gives $I\\subseteq\\operatorname{Jac}(A)$. Identify $Z$ with $V(I)\\subseteq X$: inverse image along $A\\to R$ bijects primes of $R$ with primes of $A$ containing $I$, with inverse $\\mathfrak p\\mapsto\\mathfrak p/I$, and takes $D(\\bar a)$ to $D(a)\\cap V(I)$. These formulas prove the homeomorphism. Maximal ideals correspond because all maximal ideals of $A$ contain $I$ and $R/(\\mathfrak m/I)=A/\\mathfrak m$. Thus $Z^c=X^c$ as subsets of $X$.",
+   "uses": [
+    "lem-weil-pbc-henselian-factorization-criterion",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 2.2.13, closed points and locality along the quotient"
+   }
+  },
+  {
+   "text": "Assume first that $A$ is w-strictly local. The subset $Z^c=X^c$ is closed in $Z$, because it is closed in $X$. If $\\bar{\\mathfrak p}$ is a prime of $R$, its inverse image $\\mathfrak p$ is contained in exactly one maximal ideal $\\mathfrak m$ of $A$. Containment is preserved and reflected by the quotient correspondence, so $\\bar{\\mathfrak p}$ is contained in exactly one maximal ideal $\\mathfrak m/I$ of $R$. This proves w-locality of $R$ directly from the definition.",
+   "uses": [
+    "sk-def-pe-wlocal"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemmas 2.2.13 and 2.1.3, quotient topology"
+   }
+  },
+  {
+   "text": "For each maximal ideal $\\mathfrak m$ of $A$, the ring $A_{\\mathfrak m}$ is strictly henselian. The quotient-localization isomorphism is $R_{\\mathfrak m/I}\\cong A_{\\mathfrak m}/IA_{\\mathfrak m}$. Since $I\\subseteq\\mathfrak m$, the ideal $IA_{\\mathfrak m}$ lies in the maximal ideal, so the strictly henselian quotient lemma applies. All maximal localizations of $R$ are therefore strictly henselian. Together with the preceding step this proves that $R$ is w-strictly local.",
+   "uses": [
+    "lem-weil-pbc-localization-at-prime-of-quotient",
+    "lem-weil-pbc-strictly-henselian-quotient",
+    "sk-def-pe-wlocal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 2.2.15, local-ring argument for the forward implication of Lemma 2.2.13"
+   }
+  },
+  {
+   "text": "Now assume $R$ is w-strictly local. Its closed-point subset is closed in $Z$, hence $X^c=Z^c$ is closed in $X$ because $Z=V(I)$ is closed. For any prime $\\mathfrak p$ of $A$, the henselian connectedness lemma makes $C=V(\\mathfrak p+I)$ a nonempty connected subset of $Z$. The component lemma supplies a continuous retraction $r:Z\\to Z^c$ onto a profinite space. Its image $r(C)$ is a singleton: otherwise two points are separated by a clopen subset of the profinite space, disconnecting $C$. Every maximal ideal of $A$ containing $\\mathfrak p$ belongs to $C$, since it contains $I$, and is fixed by $r$. Moreover, for any $q\\in C$, its closed specialization $r(q)$ still contains $\\mathfrak p$, so there is such a maximal ideal. Hence there is exactly one. Together with closedness of $X^c$, this proves w-locality of $A$.",
+   "uses": [
+    "lem-weil-pbc-henselian-pair-prime-connected",
+    "det-pe-wlocal-components",
+    "sk-def-pe-wlocal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 2.2.13, use of Lemma 2.1.7; its component argument expanded using Stacks Tag 09Y6"
+   }
+  },
+  {
+   "text": "Fix an arbitrary faithfully flat etale $A$-algebra $B$. Faithful flatness makes $\\operatorname{Spec}B\\to X$ surjective. Apply etale-covering base change to the singleton covering and $Z\\to X$: the projection $Z\\times_X\\operatorname{Spec}B\\to Z$ is etale and surjective. By the affine fibre-product identification this fibre product is $\\operatorname{Spec}(R\\otimes_AB)$ with first projection $\\operatorname{Spec}$ of $r\\mapsto r\\otimes1$; with $\\bar B=B/IB=R\\otimes_A B$, the map $\\operatorname{Spec}\\bar B\\to Z$ is therefore etale and surjective. The displayed algebra identification follows by sending $\\bar a\\otimes b$ to $ab$ modulo $IB$, with inverse $b\\bmod IB\\mapsto 1\\otimes b$.",
+   "uses": [
+    "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+    "lem-weil-pbc-etale-covering-base-change",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 2.2.13, base change of the faithfully flat etale algebra"
+   }
+  },
+  {
+   "text": "For every maximal ideal $\\mathfrak n$ of $R$, base change this etale surjection to $\\operatorname{Spec}R_{\\mathfrak n}$. It remains an etale surjection, so there is a point above its closed point. The ring $R_{\\mathfrak n}$ is strictly henselian by the hypothesis on $R$; the strictly henselian etale-neighbourhood section lemma gives a section over $\\operatorname{Spec}R_{\\mathfrak n}$. By the affine spectrum correspondence it gives an $R$-algebra map $\\bar B\\to R_{\\mathfrak n}$.",
+   "uses": [
+    "lem-weil-pbc-etale-covering-base-change",
+    "lem-sbc-strict-henselian-etale-neighbourhood-section",
+    "sk-def-pe-wlocal",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 2.2.9, sections over the local rings at closed points"
+   }
+  },
+  {
+   "text": "The affine etale criterion says that $\\bar B$ is finitely presented as an $R$-algebra. Apply the finitely presented localization factorization theorem to $\\bar B\\to R_{\\mathfrak n}$ with multiplicative set $R\\setminus\\mathfrak n$. It gives $f_{\\mathfrak n}\\notin\\mathfrak n$ and an $R$-algebra map $\\bar B\\to R_{f_{\\mathfrak n}}$. Because this is an $R$-algebra map it is a section on the whole principal open $D(f_{\\mathfrak n})$; there is no additional section equation to descend.",
+   "uses": [
+    "lem-weil-pbc-etale-ring-map-iff-etale-affine",
+    "lem-factors-through-localization-of-smooth",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 2.2.9, spreading out by finite presentation"
+   }
+  },
+  {
+   "text": "The principal opens just obtained cover $Z^c$. By the component lemma, the space $Z$, w-local in the sense of the w-strict-locality definition, is w-local in the sense used by the w-local partition lemma, and $Z^c$ is profinite. Its profiniteness gives a finite clopen partition subordinate to this cover: choose a clopen neighbourhood inside a covering open at each point, take a finite subcover by compactness, and replace it by successive differences. The w-local partition lemma extends that partition uniquely to a finite clopen partition of $Z$, whose parts lie in the corresponding principal opens, because those opens contain the corresponding components. Restrict the local sections to these parts and glue them. The parts are disjoint, so there are no overlap equations. This is a global section of $\\operatorname{Spec}\\bar B\\to Z$, or equivalently an $R$-algebra map $\\rho_0:\\bar B\\to R$.",
+   "uses": [
+    "lem-weil-pbc-w-local-partition",
+    "def-weil-affine-spectrum",
+    "det-pe-wlocal-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 2.2.9, gluing the sections using w-locality"
+   }
+  },
+  {
+   "text": "Compose $B\\to\\bar B$ with $\\rho_0$ to obtain an $A$-algebra map $\\sigma:B\\to A/I$. The affine etale criterion gives finite presentation, $H_1(L_{B/A})=0$ and $\\Omega_{B/A}=0$. The zero module is finite projective (a summand of the rank-zero free module), so the definition of a smooth ring map shows that $B$ is smooth over $A$. Apply henselian smooth-algebra lifting with base ring $A$, smooth algebra $B$, target algebra $A$ and the original ideal $I$. It gives an $A$-algebra map $\\rho:B\\to A$ lifting $\\sigma$. Such a map is a retraction of the structural map by its $A$-linearity: $\\rho(a\\cdot1)=a$.",
+   "uses": [
+    "lem-weil-pbc-etale-ring-map-iff-etale-affine",
+    "def-weil-pbc-smooth-ring-map",
+    "lem-trf-henselian-smooth-algebra-lifting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0H74, lemma-lift-smooth-henselian; lifting step of BS Lemma 2.2.13"
+   }
+  },
+  {
+   "text": "The algebra $B$ in step 5 was arbitrary, so every faithfully flat etale $A$-algebra has an $A$-algebra retraction. The split-etale-cover maximal-local criterion now implies that every maximal localization $A_{\\mathfrak m}$ is strictly henselian. Combine this with w-locality proved in step 4 and the definition of w-strict locality. Thus $A$ is w-strictly local whenever $A/I$ is, completing the equivalence.",
+   "uses": [
+    "lem-weil-pbc-split-etale-covers-maximal-local-criterion",
+    "sk-def-pe-wlocal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 097V, lemma-have-sections-strictly-henselian; BS Lemma 2.2.13 conclusion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-henselian-factorization-criterion",
+  "def-weil-affine-spectrum",
+  "sk-def-pe-wlocal",
+  "lem-weil-pbc-localization-at-prime-of-quotient",
+  "lem-weil-pbc-strictly-henselian-quotient",
+  "lem-weil-pbc-henselian-pair-prime-connected",
+  "det-pe-wlocal-components",
+  "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+  "lem-weil-pbc-etale-covering-base-change",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-sbc-strict-henselian-etale-neighbourhood-section",
+  "lem-weil-pbc-etale-ring-map-iff-etale-affine",
+  "lem-factors-through-localization-of-smooth",
+  "lem-weil-pbc-w-local-partition",
+  "def-weil-pbc-smooth-ring-map",
+  "lem-trf-henselian-smooth-algebra-lifting",
+  "lem-weil-pbc-split-etale-covers-maximal-local-criterion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemmas 2.2.13, 2.2.9 and 2.2.15; topology expanded with Stacks 09Y6, lifting via 0H74, and recognition via 097V"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -51,10 +201,17 @@
    "results": "Returned HenselianLocalRing.toIsLocalRing, HenselianLocalRing, HenselianLocalRing.TFAE, HenselianRing, instHenselianRingMaximalIdeal, IsAdicComplete.henselianRing, HenselianRing.is_henselian, HenselianRing.jac. ",
    "date": "2026-10-18",
    "verdict": "no match: henselian ring definitions and root-lifting declarations do not compare w-strict locality of a ring and its quotient."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Henselian reduction preserves and reflects w strictly local rings",
+   "results": "Returned HenselianLocalRing.TFAE, HenselianLocalRing, HenselianLocalRing.is_henselian, instHenselianRingMaximalIdeal, IsAdicComplete.henselianRing, HenselianRing, HenselianRing.jac, HenselianRing.recOn",
+   "date": "2026-10-18",
+   "verdict": "no match: these are henselian root-lifting notions, not w-strict locality or its henselian-quotient invariance."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-zl-condensed-henselian-lisse-rigidity",
@@ -74,5 +231,89 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-zl-henselian-wstrict-local-invariance",
+  "worker": "stage1",
+  "summary": "Proved both implications of BS 2.2.13 using only existing nodes. Quotient local rings give descent; henselian prime-connectedness gives ascent of w-locality; local etale sections spread and glue on clopen pieces, then lift across the henselian pair. Stacks 097V recognizes strictly henselian maximal localizations. No statement correction or new nodes.",
+  "blueprint": "Realizes prop-zl-smooth-proper-relative-purity Step 3, continuous-coefficient local-perfect model argument, through the existing ancestry recorded in blueprint.from: henselian reduction of w-strict locality used by HRS Corollary 4.4(2).",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-henselian-factorization-criterion",
+    "why": "Generic Factorization criterion for henselian pairs used in the BS henselian-reduction argument; the smooth-proper-purity unit has no ring-theoretic replacement."
+   },
+   {
+    "node": "lem-weil-pbc-localization-at-prime-of-quotient",
+    "why": "Generic Localizing a quotient at a prime is the quotient of the localization used in the BS henselian-reduction argument; the smooth-proper-purity unit has no ring-theoretic replacement."
+   },
+   {
+    "node": "lem-weil-pbc-strictly-henselian-quotient",
+    "why": "Generic A quotient of a strictly henselian local ring by a proper ideal is strictly henselian (Stacks 05WS for a strictly henselian ring) used in the BS henselian-reduction argument; the smooth-proper-purity unit has no ring-theoretic replacement."
+   },
+   {
+    "node": "lem-weil-pbc-henselian-pair-prime-connected",
+    "why": "Generic Over a henselian pair, $V(\\mathfrak p+I)$ is connected used in the BS henselian-reduction argument; the smooth-proper-purity unit has no ring-theoretic replacement."
+   },
+   {
+    "node": "det-pe-wlocal-components",
+    "why": "Generic Components of a w-local space used in the BS henselian-reduction argument; the smooth-proper-purity unit has no ring-theoretic replacement."
+   },
+   {
+    "node": "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+    "why": "Generic A faithfully flat ring map is surjective on spectra used in the BS henselian-reduction argument; the smooth-proper-purity unit has no ring-theoretic replacement."
+   },
+   {
+    "node": "lem-weil-pbc-etale-covering-base-change",
+    "why": "Generic Base change of an etale covering is an etale covering used in the BS henselian-reduction argument; the smooth-proper-purity unit has no ring-theoretic replacement."
+   },
+   {
+    "node": "lem-sbc-strict-henselian-etale-neighbourhood-section",
+    "why": "Generic An etale neighbourhood of a strictly henselian closed point has a section used in the BS henselian-reduction argument; the smooth-proper-purity unit has no ring-theoretic replacement."
+   },
+   {
+    "node": "lem-weil-pbc-etale-ring-map-iff-etale-affine",
+    "why": "Generic Spec of a ring map is etale iff the ring map is etale (finitely presented with H_1 = 0 and Omega = 0) used in the BS henselian-reduction argument; the smooth-proper-purity unit has no ring-theoretic replacement."
+   },
+   {
+    "node": "lem-factors-through-localization-of-smooth",
+    "why": "Generic Finitely presented maps into localizations factor through a principal localization used in the BS henselian-reduction argument; the smooth-proper-purity unit has no ring-theoretic replacement."
+   },
+   {
+    "node": "lem-weil-pbc-w-local-partition",
+    "why": "Generic Clopen partitions on a w-local affine scheme used in the BS henselian-reduction argument; the smooth-proper-purity unit has no ring-theoretic replacement."
+   },
+   {
+    "node": "lem-trf-henselian-smooth-algebra-lifting",
+    "why": "Generic Smooth algebra homomorphisms lift across a henselian pair used in the BS henselian-reduction argument; the smooth-proper-purity unit has no ring-theoretic replacement."
+   },
+   {
+    "node": "lem-weil-pbc-split-etale-covers-maximal-local-criterion",
+    "why": "Generic Retractions of etale covers imply strict henselianity at maximal ideals used in the BS henselian-reduction argument; the smooth-proper-purity unit has no ring-theoretic replacement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-henselian-factorization-criterion",
+  "lem-weil-pbc-localization-at-prime-of-quotient",
+  "lem-weil-pbc-strictly-henselian-quotient",
+  "lem-weil-pbc-henselian-pair-prime-connected",
+  "det-pe-wlocal-components",
+  "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+  "lem-weil-pbc-etale-covering-base-change",
+  "lem-sbc-strict-henselian-etale-neighbourhood-section",
+  "lem-weil-pbc-etale-ring-map-iff-etale-affine",
+  "lem-factors-through-localization-of-smooth",
+  "lem-weil-pbc-w-local-partition",
+  "lem-trf-henselian-smooth-algebra-lifting",
+  "lem-weil-pbc-split-etale-covers-maximal-local-criterion"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-NN-5ec668208",
+  "group": "NN",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NN-5ec668208 (reviewer sub-agent of L); spot-checked: I read the item in full: 10 steps, no new nodes, statement unchanged. I checked it against the extracted text of Bhatt–Scholze Lemmas 2.1.7, 2.2.9, 2.2.13 and 2.2.15. The statement agrees with BS 2.2.13 hypothesis by hypothesis (any ring, any ideal, (A,I) a henselian pair, two-way conclusion). The DAG definition of w-strictly local uses strictly henselian maximal localizations; BS 2.2.9 shows this agrees with BS's own definition, and the proof uses 097V for the converse. Step checks: 09XI gives I in the Jacobian radical, so the closed points of Spec A and Spec A/I coincide. 00CT and 05WS give the descent of strict henselianity to the quotient. For the ascent, 09Y6 makes V(p+I) connected, and the continuous retraction onto the profinite closed-point set forces a unique closed specialization. The local sections over strictly henselian local rings spread out through the finite-presentation factorization and glue over a clopen partition. 0H74 lifts the section, with (A,I) henselian and B étale hence smooth (Omega=0). 097V then gives strictly henselian maximal localizations. Edge cases checked: I=0, A=0, I=A, A local, A a finite product. No duplicate: rg over the DAG finds only the item and its parent. Two fixes (C1/C4), written to fixes/dag/nodes/sec-zeta-weil/lem-zl-henselian-wstrict-local-invariance.json: (1) step 5 identifies Z x_X Spec B with Spec(B/IB) without citing a node; it now cites the Mathlib leaf lem-weil-pbc-fibre-product-affine-spectra (pullbackSpecIso). (2) Step 8 applies lem-weil-pbc-w-local-partition, which is stated for def-weil-pbc-w-local; it now cites det-pe-wlocal-components (clauses 1 and 3) for the agreement of the two definitions and the profiniteness of the closed points. proof_deps is updated to the union of the steps' uses. Batch-5 flag on lem-trf-henselian-smooth-algebra-lifting: accepted as genuinely outside the assumptions. It is Stacks 0H74, pure commutative algebra that neither the trace-formula leaf nor the Poincare-duality leaf gives, created as a generic tool. Its whole closure (276 nodes) contains no other sec-trace-formula or sec-poincare-duality node and no nt-target or sk-thm-trace node, so citing it imports no proof of either assumed theorem. All 13 declared tool_uses are accepted as generic algebra/topology tools; the unit's duality route is unchanged and no SGA is cited.; 1 file(s) fixed by the reviewer"
  }
 }
