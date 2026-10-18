@@ -36,69 +36,69 @@
  ],
  "proof": [
   {
-   "text": "Fix $\\bar s,\\bar t$ and use the schemes and maps $S',X',p,i,h$ of [lem-weil-pbc-local-acyclicity-closed-fibre-unit], with $G'=p^{-1}G$ and $K=G[0]$. The ring defining $S'$ is strictly henselian and the lift of $\\bar s$ lies over its closed point by [lem-weil-pbc-strict-henselization-functoriality](1). The base change $f':X'\\to S'$ is proper by [lem-weil-pbc-proper-fp-permanence](b). Both $f$ and $f'$ are qcqs: their finite-type condition gives quasi-compactness; their diagonal is a closed immersion, whose inverse image of an affine open is affine and hence quasi-compact, giving quasi-separatedness. These are exactly the definitions in [def-weil-pbc-scheme-conventions] and [def-weil-closed-immersion]. The morphism $\\bar t:\\operatorname{Spec}\\Omega'\\to S'$ is between affine schemes, hence affine by [lem-weil-pbc-morphism-affine-schemes-affine]; its base change $h$ is affine and therefore qcqs by [lem-weil-pbc-affine-morphism-permanence](1),(3).",
+   "text": "Form the strict-local base change f prime and its two fibre inclusions. Properness and the qcqs conditions are inferred from the existing Mathlib permanence instances. The strict-local ring is strictly henselian by strictHenselizationLocalStructure. Canonical evaluation factors through its surjective map to the relative separable closure; the surjection is local, and its inclusion into the geometric-point field is local. Thus canonical evaluation is a local homomorphism. The residue field of an algebraically closed field is algebraically closed by the bijective residue homomorphism.",
    "uses": [
-    "lem-weil-pbc-local-acyclicity-closed-fibre-unit",
-    "lem-weil-pbc-strict-henselization-functoriality",
+    "lem-weil-pbc-strict-henselization-local-structure",
+    "lem-weil-pbc-strict-henselization-point-evaluation-properties",
     "lem-weil-pbc-proper-fp-permanence",
     "def-weil-pbc-scheme-conventions",
-    "def-weil-closed-immersion",
     "lem-weil-pbc-morphism-affine-schemes-affine",
-    "lem-weil-pbc-affine-morphism-permanence"
+    "lem-weil-pbc-affine-morphism-permanence",
+    "def-weil-pbc-henselian-terminology"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0GJW, lemma-sp-isom-proper-torsion-loc-ac, setup of f prime and h; affine qcqs verification"
+    "place": "Tag 0GJW, proof specialized to G[0]; step 1"
    }
   },
   {
-   "text": "For any proper $v:Z\\to T$ and any bounded below abelian etale complex $E$ with torsion cohomology, apply [thm-weil-pbc-bounded-below] to the cartesian square over a geometric point $u:P\\to T$. It gives $u^{-1}Rv_*E\\cong Ra_{u,*}(E|_{Z_u})$. Apply $R\\Gamma(P,-)$ and [lem-weil-pbc-cohomology-pullback-derived-unit](1) to $a_u:Z_u\\to P$. By [lem-weil-pbc-geometric-point-pullback-stalk], global sections on $P$ are exact and naturally identify $\\Gamma(P,u^{-1}F)$ with $F_u$. Exact inverse image is computed termwise by [def-weil-pbc-derived-inverse-image]; thus applying these exact functors termwise gives the derived stalk on the left. We obtain the canonical fibre isomorphism $\\rho_u:(Rv_*E)_u\\xrightarrow{\\sim}R\\Gamma(Z_u,E|_{Z_u})$, and it is the exchange fibre map by construction. Apply this to $v=f$, $E=K$, at both $u=\\bar s$ and the composite point $u=\\bar t$ of $S$. The hypothesis holds because $K$ has only $G$ as its cohomology sheaf. Hence both $\\rho_{\\bar s}$ and $\\rho_{\\bar t}$ in [lem-weil-pbc-specialization-cospecialization-compatibility] are isomorphisms.",
+   "text": "A torsion sheaf G placed in degree zero has torsion homology: H^0 is G and all other homology objects are zero. For any proper geometric fibre square, proper base change makes derived exchange invertible. The definition etaleDerivedFiberMap is inverse geometric-point stalk comparison, stalk of this exchange, and inverse derived global germ; all are invertible. Paste the two pullback squares and compose with the inverse-image composition and single-functor comparison to obtain invertibility of strictBaseSheafFiberMap. The closed fibre map additionally contains only an equality transport, hence is invertible too.",
    "uses": [
     "thm-weil-pbc-bounded-below",
-    "lem-weil-pbc-cohomology-pullback-derived-unit",
     "lem-weil-pbc-geometric-point-pullback-stalk",
     "def-weil-pbc-derived-inverse-image",
-    "lem-weil-pbc-specialization-cospecialization-compatibility"
+    "def-weil-pbc-direct-image"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0GJW proof, first sentence; Tag 0DDF, lemma-proper-base-change-stalk (2)"
+    "place": "Tag 0GJW, proof specialized to G[0]; step 2"
    }
   },
   {
-   "text": "The hypothesis of local acyclicity applies directly to [lem-weil-pbc-local-acyclicity-closed-fibre-unit]: $i^{-1}\\beta:i^{-1}G'[0]\\to i^{-1}Rh_*(G_{\\bar t}[0])$ is invertible. Put $K'=Rh_*(G_{\\bar t}[0])$. It is bounded below because the derived direct image in [def-weil-pbc-direct-image] maps $D^+$ to $D^+$. The pullback $G_{\\bar t}$ is torsion: [lem-weil-pbc-inverse-image-stalk-germ] identifies each stalk with a stalk of $G$, so each element has a positive annihilator. Apply [lem-sbc-qcqs-higher-images-prime-torsion] to $h$ (qcqs by step 1) and $G_{\\bar t}$, with $\\mathcal P$ the set of all primes. It says every stalk element of every $R^nh_*G_{\\bar t}$ has a positive annihilator, which is the torsion sheaf condition. Explicitly, a stalk germ killed by $m$ has a representative killed by $m$ on some pointed etale neighbourhood, by the filtered-colimit definition of a stalk; these neighbourhoods, for all geometric points of a given section, supply the required local annihilators. The cohomology sheaves of $K'$ are these higher images, so all are torsion. No finite stalks or common annihilator have been used.",
+   "text": "Inverse image preserves torsion by the existing isTorsion_upperStar theorem. Apply qcqs_higherDirectImages_prime_torsion to h and the pulled-back sheaf with the set of all primes. The torsion-sheaf characterization using algebraically closed geometric points turns its elementwise positive annihilators into the torsion condition on every nonnegative homology sheaf. Negative homology vanishes by preservation of the lower cohomological bound under right derivation. Transport along the exact-inverse-image single-functor comparison. This proves torsion homology for K prime = Rh_*h^{-1}G prime[0]. Local acyclicity makes the closed-fibre inverse image of the derived unit invertible.",
    "uses": [
-    "lem-weil-pbc-local-acyclicity-closed-fibre-unit",
-    "def-weil-pbc-direct-image",
-    "lem-weil-pbc-inverse-image-stalk-germ",
-    "lem-sbc-qcqs-higher-images-prime-torsion"
+    "lem-weil-pbc-inverse-image-torsion",
+    "lem-sbc-qcqs-higher-images-prime-torsion",
+    "lem-weil-pbc-torsion-sheaf-characterizations",
+    "lem-weil-pbc-derived-functor-negative-vanishing",
+    "def-weil-pbc-derived-inverse-image",
+    "lem-weil-pbc-local-acyclicity-closed-fibre-unit"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0GJW proof, K prime; Tag 0DDD, lemma-torsion-direct-image (1), using the existing fixed-prime version"
+    "place": "Tag 0GJW, proof specialized to G[0]; step 3"
    }
   },
   {
-   "text": "Let $\\bar s':\\operatorname{Spec}\\Omega\\to S'$ be the closed lift of step 1, so $X_{\\bar s}=X'\\times_{S'}\\operatorname{Spec}\\Omega$ with projections $i$ and $f_{\\bar s}:X_{\\bar s}\\to\\operatorname{Spec}\\Omega$. Apply [thm-weil-pbc-bounded-below] to this cartesian square and $K'$: $f'$ is proper by step 1, and $K'$ is bounded below with torsion cohomology by step 3. So the derived exchange $\\bar s'^{-1}Rf'_*K'\\to Rf_{\\bar s,*}i^{-1}K'$ is invertible, hence so is the stalk $e_t$ of its degree-$q$ homology at the identity geometric point $t$ of $\\operatorname{Spec}\\Omega$, for every $q$. The ring of $S'$ is strictly henselian by [lem-weil-pbc-strict-henselization-functoriality](1), and $\\bar s'$ lands at the closed point, so its ring map to $\\Omega$ is local. The field $\\Omega$ is strictly henselian by [def-weil-pbc-henselian-terminology]: for a finite $\\Omega$-algebra $B$ and the zero ideal, $B/0B=B$, and its residue field is algebraically closed. Hence [lem-weil-pbc-strict-local-derived-global-exchange] applies with this local map, $f'$ in place of $f$, $g'=i$ and $K=K'$. It gives bijections $c_1,c_2$ with $c_2e_t=p\\,c_1$, where $p$ is $H^q$ of $R\\Gamma(X',-)$ applied to the derived unit $K'\\to Ri_*i^{-1}K'$, followed by Leray. Since $e_t$ is bijective, so is $p$, for every $q$. By [lem-weil-pbc-cohomology-pullback-derived-unit](2), $p$ is $H^q$ of the restriction $i^*:R\\Gamma(X',K')\\to R\\Gamma(X_{\\bar s},i^{-1}K')$. So $i^*$ is a quasi-isomorphism, hence an isomorphism in $D^+(\\operatorname{Ab})$. The map $cosp$ of [lem-weil-pbc-specialization-cospecialization-compatibility] is the inverse Leray identification, then this restriction $i^*$, then $R\\Gamma(X_{\\bar s},(i^{-1}\\beta)^{-1})$. All three are isomorphisms, so $cosp$ is invertible.",
+   "text": "For any proper cartesian square over a local map of strictly henselian rings and any bounded-below torsion complex K, proper base change makes exchange invertible. In each integer degree the strict-local derived-global-exchange theorem gives additive equivalences c1,c2 and c2 e = p c1. Since e and the equivalences are bijective, the homology of derived restriction p is bijective. The homology criterion in D plus makes restriction itself invertible. Apply this to canonical evaluation and K prime from step 3. Expand etaleCospecialization: inverse Leray, this invertible restriction, and derived global sections of the inverse closed-fibre unit. Consequently cospecialization is invertible.",
    "uses": [
     "thm-weil-pbc-bounded-below",
-    "lem-weil-pbc-strict-henselization-functoriality",
-    "def-weil-pbc-henselian-terminology",
     "lem-weil-pbc-strict-local-derived-global-exchange",
     "lem-weil-pbc-cohomology-pullback-derived-unit",
-    "lem-weil-pbc-specialization-cospecialization-compatibility"
+    "def-weil-pbc-henselian-terminology",
+    "lem-weil-pbc-local-acyclicity-closed-fibre-unit"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0GJW proof, displayed restriction map: source equals (Rf'_*K')_s, target R Gamma(X_s,K'), isomorphism by Tag 0DDF; identification as in Tag 03QO/095T via the existing strict-local node"
+    "place": "Tag 0GJW, proof specialized to G[0]; step 4"
    }
   },
   {
-   "text": "By [lem-weil-pbc-specialization-cospecialization-compatibility], $cosp\\,\\rho_{\\bar t}\\,sp=\\rho_{\\bar s}$ for the pointed-neighbourhood specialization map. Steps 2 and 4 make the three other arrows invertible. Thus $sp=\\rho_{\\bar t}^{-1}cosp^{-1}\\rho_{\\bar s}$ is an isomorphism. Apply degree-$q$ cohomology. The exact geometric inverse image of [def-weil-pbc-derived-inverse-image], followed by exact global sections over the geometric point from [lem-weil-pbc-geometric-point-pullback-stalk], preserves kernels, images and their quotient, so $H^q((Rf_*G[0])_u)=(R^qf_*G)_u$. Termwise pointed-neighbourhood restriction induces exactly the homomorphism in the item, because specialization there is defined by those same germ restrictions. Hence the claimed homomorphism is an isomorphism for every $q\\ge0$.",
+   "text": "Specialization-cospecialization compatibility gives sp followed by the other fibre map and cospecialization equal to the closed fibre map. Cancel the invertible other factors to prove derived specialization invertible. Its definition conjugates the derived natural transformation induced by underived specialization by exact-functor comparisons, so that derived natural transformation is invertible at Rf_*G[0]. To pass to degree q, choose a bounded-below complex representative. The natural-transformation derived-unit equation and invertibility of the units for exact stalk functors make the termwise transformation a quasi-isomorphism at this representative. The homology comparison with localization and NatTrans.app_homology identify its degree-q homology with the underived transformation evaluated on H^q. Isomorphism invariance transports this along the representative comparison. This is exactly the displayed etaleStalkSpecialization.",
    "uses": [
     "lem-weil-pbc-specialization-cospecialization-compatibility",
     "def-weil-pbc-derived-inverse-image",
@@ -107,33 +107,35 @@
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0GJW proof, final sentence, using Tag 0GJV, lemma-specialization-cospecialization"
+    "place": "Tag 0GJW, proof specialized to G[0]; step 5"
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-local-acyclicity-closed-fibre-unit",
-  "lem-weil-pbc-strict-henselization-functoriality",
+  "lem-weil-pbc-strict-henselization-local-structure",
+  "lem-weil-pbc-strict-henselization-point-evaluation-properties",
   "lem-weil-pbc-proper-fp-permanence",
   "def-weil-pbc-scheme-conventions",
-  "def-weil-closed-immersion",
   "lem-weil-pbc-morphism-affine-schemes-affine",
   "lem-weil-pbc-affine-morphism-permanence",
+  "def-weil-pbc-henselian-terminology",
   "thm-weil-pbc-bounded-below",
-  "lem-weil-pbc-cohomology-pullback-derived-unit",
   "lem-weil-pbc-geometric-point-pullback-stalk",
   "def-weil-pbc-derived-inverse-image",
-  "lem-weil-pbc-specialization-cospecialization-compatibility",
   "def-weil-pbc-direct-image",
-  "lem-weil-pbc-inverse-image-stalk-germ",
+  "lem-weil-pbc-inverse-image-torsion",
   "lem-sbc-qcqs-higher-images-prime-torsion",
-  "def-weil-pbc-henselian-terminology",
-  "lem-weil-pbc-strict-local-derived-global-exchange"
+  "lem-weil-pbc-torsion-sheaf-characterizations",
+  "lem-weil-pbc-derived-functor-negative-vanishing",
+  "lem-weil-pbc-local-acyclicity-closed-fibre-unit",
+  "lem-weil-pbc-strict-local-derived-global-exchange",
+  "lem-weil-pbc-cohomology-pullback-derived-unit",
+  "lem-weil-pbc-specialization-cospecialization-compatibility"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tag 0GJW, lemma-sp-isom-proper-torsion-loc-ac, proof specialized to G[0]"
+  "place": "Tag 0GJW, proof specialized to G[0], made into Lean by Z6; exact-stalk homology passage uses the derived-unit equation and NatTrans.app_homology"
  },
  "mathlib_searches": [
   {
@@ -249,15 +251,8 @@
   ]
  },
  "tool_uses": [
-  "lem-weil-pbc-strict-henselization-functoriality",
   "lem-weil-pbc-cohomology-pullback-derived-unit",
-  "lem-weil-pbc-inverse-image-stalk-germ",
-  "lem-sbc-qcqs-higher-images-prime-torsion",
-  "lem-weil-pbc-strictly-henselian-etale-acyclic",
-  "lem-weil-pbc-strictly-henselian-sections-stalk",
-  "lem-weil-pbc-derived-exchange-termwise",
-  "def-weil-pbc-underived-exchange",
-  "def-weil-pbc-cohomology-pullback"
+  "lem-sbc-qcqs-higher-images-prime-torsion"
  ],
  "reviewed": {
   "date": "2026-10-17",
@@ -296,5 +291,15 @@
   "by": "NQ",
   "date": "2026-10-15",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Z6",
+  "result": "pass",
+  "landing": "20261018T062957-L-695359",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
