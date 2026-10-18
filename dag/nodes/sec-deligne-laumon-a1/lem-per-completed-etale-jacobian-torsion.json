@@ -1,0 +1,77 @@
+{
+ "id": "lem-per-completed-etale-jacobian-torsion",
+ "kind": "statement",
+ "title": "Completed Jacobian presentation of a finite algebra etale off an ideal",
+ "statement": "Let $A$ be a commutative Noetherian ring, $I\\subseteq A$ an ideal, and suppose $A$ is $I$-adically complete [def-weil-pbc-noetherian-ring, def-weil-pbc-adic-completion]. Let $E$ be a commutative $A$-algebra finite as an $A$-module [def-weil-finitely-generated-module] such that $\\operatorname{Spec}E\\to\\operatorname{Spec}A$ is etale over $\\operatorname{Spec}A\\setminus V(I)$ [def-weil-affine-spectrum, def-weil-etale-morphism]. Then there exist an integer $r\\geq0$, a surjective $A$-algebra homomorphism $P=A[x_1,\\ldots,x_r]^\\wedge\\to E$ from the $I$-adic completion of the polynomial ring [def-weil-pbc-mv-polynomial-ring], its kernel $J$, and an integer $c\\geq0$ such that $I^c$ annihilates both the kernel and the cokernel of the $E$-linear map $\\delta:J/J^2\\to E^{\\oplus r}$, $f\\bmod J^2\\mapsto (\\partial f/\\partial x_i\\bmod J)_{i=1}^r$. The partial derivatives on $P$ are obtained by continuity from polynomial differentiation. The ring $E$ is $I$-adically complete and $E/IE$ is a finite type $A/I$-algebra.",
+ "source": {
+  "document": "literature/stacks-project/restricted.tex",
+  "place": "Tags 0AJP (lemma-topologically-finite-type), 0ALQ (lemma-rig-etale), part (1), and 0AJU (lemma-equivalent-with-artin), condition (3), applied to a finite algebra over a complete base; finiteness implies completeness over the complete Noetherian base by algebra.tex Tag 00MA (lemma-completion-tensor), part (3)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-adic-completion",
+  "def-weil-finitely-generated-module",
+  "def-weil-affine-spectrum",
+  "def-weil-etale-morphism",
+  "def-weil-pbc-mv-polynomial-ring"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Etale outside an ideal implies the two term completed Jacobian conormal complex has cohomology annihilated by a power of the ideal",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.IsEtaleAt\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"(R : Type u_1) →\\n  {A : Type u_2} → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → (q : Ideal A) → [q.IsPrime] → Prop\", \"doc\": \"An algebra $ A $ over a commutative ring $ R $ is said to be étale at a prime ideal $ q $ if the localization of $ A $ at $ q $ is formally étale, meaning the localized algebra satisfies the infinites\"}\n  {\"name\": \"Algebra.exists_etale_of_isEtaleAt\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [Algebra.FinitePresentation R A] (P : Ideal A) [inst_4 : P.IsPrime] [Algebra.IsEtaleAt R P],\\n  ∃ f ∉ P, Algebra.Etale R (Localization.Away f)\", \"doc\": \"If an $ R $-algebra $ A $ is étale at a prime ideal $ \\\\mathfrak{p} $, then there exists an element $ f \\\\notin \\\\mathfrak{p} $ such that the localization of $ A $ away from $ f $ is an étale $ R $-algeb\"}\n  {\"name\": \"Algebra.FormallyEtale.comp_bijective\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ (R : Type u) (A : Type v) {B : Type u_1} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A]\\n  [inst_3 : CommRing B] [inst_4 : Algebra R B] [Algebra.FormallyEtale R A] (I : Ideal B),\\n  I ^ 2 = ⊥ → Function.Bijective (Ideal.Quotient.mkₐ R I).comp\", \"doc\": \"Given a formally étale algebra $ A $ over a commutative semiring $ R $, and an ideal $ I $ of a ring $ B $ with $ I^2 = 0 $, the function obtained by composing the canonical quotient homomorphism $ B \"}\n  {\"name\": \"StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  (P : StandardEtalePair R) (I : Ideal S),\\n  I ^ 2 = ⊥ → ∀ (x : S), P.HasMap ((Ideal.Quotient.mk I) x) → ∃! ε, ε ∈ I ∧ P.HasMap (x + ε)\", \"doc\": \"Let $S$ be a commutative algebra over a commutative ring $R$, and let $I$ be an ideal of $S$ such that $I^2 = \\\\{0\\\\}$. Let $P$ be a standard étale pair over $R$. If the image of an element $x \\\\in S$ in\"}\n  {\"name\": \"Algebra.etaleLocus_eq_compl_support\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.etaleLocus R A = (Module.support A Ω[A⁄R])ᶜ ∩ (Module.support A (Algebra.H1Cotangent R A))ᶜ\", \"doc\": \"The étale locus of an $ R $-algebra $ A $ is equal to the intersection of the complements of the supports of the module of Kähler differentials $ \\\\Omega_{A/R} $ and the first cotangent cohomology modu\"}\n  {\"name\": \"Algebra.mem_etaleLocus_iff\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {p : PrimeSpectrum A},\\n  p ∈ Algebra.etaleLocus R A ↔ Algebra.IsEtaleAt R p.asIdeal\", \"doc\": \"A prime ideal $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ belongs to the étale locus of the $R$-algebra $A$ if and only if $A$ is étale at the prime ideal $\\\\mathfrak{p}$. This equivalence characterizes \"}\n  {\"name\": \"Algebra.FormallyEtale.iff_comp_bijective\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.FormallyEtale R A ↔\\n    ∀ ⦃B : Type (max u v)⦄ [inst_3 : CommRing B] [inst_4 : Algebra R B] (I : Ideal B),\\n      I ^ 2 = ⊥ → Function.Bijective (Ideal.Quotient.mkₐ R I).comp\", \"doc\": \"An $ R $-algebra $ A $ is formally étale if and only if for every $ R $-algebra $ B $ and every ideal $ I \\\\subseteq B $ with $ I^2 = 0 $, the natural map $ \\\\text{Hom}_R(A, B) \\\\to \\\\text{Hom}_R(A, B/I) \"}\n  {\"name\": \"Algebra.Etale.formallyEtale\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A} [self : Algebra.Etale R A],\\n  Algebra.FormallyEtale R A\", \"doc\": \"If $ A $ is an étale algebra over a commutative ring $ R $, then $ A $ is formally étale over $ R $. This establishes that the property of being étale implies formal étaleness in the context of commut\"}\n",
+   "date": "2026-10-19",
+   "verdict": "no match: the hits concern ordinary etale algebras, formal smoothness, cotangent definitions or completeness; none states this completion/algebraization or henselian lifting theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "kernel and cokernel of conormal differential for a complete algebra etale on the complement are killed by a power of the ideal",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Ideal.mem_toCotangent_ker\", \"module\": \"Mathlib.RingTheory.Ideal.Cotangent\", \"type\": \"{x : I} : x ∈ LinearMap.ker I.toCotangent ↔ (x : R) ∈ I ^ 2\", \"doc\": \"An element $ x $ of the ideal $ I $ lies in the kernel of the canonical quotient map $ I \\\\to I/I^2 $ if and only if $ x $ belongs to the ideal $ I^2 $ generated by products of elements of $ I $.\"}\n  {\"name\": \"Algebra.Extension.Cotangent.ker_mk\", \"module\": \"Mathlib.RingTheory.Extension.Basic\", \"type\": \": LinearMap.ker (mk (P := P)) = P.ker • ⊤\", \"doc\": \"The kernel of the canonical quotient map from the kernel ideal $\\\\ker(\\\\phi)$ to its cotangent module $\\\\ker(\\\\phi)/\\\\ker(\\\\phi)^2$ is equal to the square of the ideal $\\\\ker(\\\\phi)^2$.\"}\n  {\"name\": \"Algebra.FormallyEtale.subsingleton_kaehlerDifferential\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A}\\n  [self : Algebra.FormallyEtale R A], Subsingleton Ω[A⁄R]\", \"doc\": \"If $ A $ is a formally étale $ R $-algebra, then the module of Kähler differentials $ \\\\Omega_{A/R} $ is trivial (i.e., contains at most one element).\"}\n  {\"name\": \"Algebra.Extension.Cotangent.smul_eq_zero_of_mem\", \"module\": \"Mathlib.RingTheory.Extension.Basic\", \"type\": \"(p : P.Ring) (hp : p ∈ P.ker) (m : P.ker.Cotangent) : p • m = 0\", \"doc\": \"For any element $ p $ in the kernel ideal $ P.\\\\text{ker} $ of an algebra extension and any element $ m $ in the cotangent module $ P.\\\\text{ker}.\\\\text{Cotangent} $, the scalar multiplication $ p \\\\cdot \"}\n  {\"name\": \"Algebra.Extension.Cotangent\", \"module\": \"Mathlib.RingTheory.Extension.Basic\", \"type\": \": Type _\", \"doc\": \"The cotangent module of the kernel ideal $\\\\ker(\\\\phi)$ of the canonical ring homomorphism $\\\\phi: R \\\\to S$ in an $R$-algebra extension, defined as the quotient $\\\\ker(\\\\phi)/\\\\ker(\\\\phi)^2$. This generalize\"}\n  {\"name\": \"Algebra.Extension.H1Cotangent\", \"module\": \"Mathlib.RingTheory.Extension.Cotangent.Basic\", \"type\": \": Type _\", \"doc\": \"The kernel of the cotangent complex map $\\\\ker(\\\\phi)/\\\\ker(\\\\phi)^2 \\\\to S \\\\otimes_R \\\\Omega_{S/R}$ in an $R$-algebra extension $S$, representing the first derived functor in the cotangent complex construc\"}\n  {\"name\": \"Algebra.Extension.Cotangent.mk_eq_zero_iff\", \"module\": \"Mathlib.RingTheory.Extension.Basic\", \"type\": \"{P : Extension R S} (x : P.ker) : Cotangent.mk x = 0 ↔ x.val ∈ P.ker ^ 2\", \"doc\": \"For any algebra extension $ P $ of commutative rings $ R $ and $ S $, an element $ x $ in the kernel ideal $ \\\\ker(\\\\phi) $ of the canonical homomorphism $ \\\\phi: R \\\\to S $ maps to zero in the cotangent \"}\n  {\"name\": \"Algebra.etaleLocus_eq_compl_support\", \"module\": \"Mathlib.RingTheory.Etale.Locus\", \"type\": \": etaleLocus R A = (Module.support A Ω[A⁄R])ᶜ ∩ (Module.support A (H1Cotangent R A))ᶜ\", \"doc\": \"The étale locus of an $ R $-algebra $ A $ is equal to the intersection of the complements of the supports of the module of Kähler differentials $ \\\\Omega_{A/R} $ and the first cotangent cohomology modu\"}\n",
+   "date": "2026-10-19",
+   "verdict": "no match: the hits concern ordinary etale algebras, formal smoothness, cotangent definitions or completeness; none states this completion/algebraization or henselian lifting theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.H1Cotangent, AdicCompletion",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-19",
+   "verdict": "no match: the hits concern ordinary etale algebras, formal smoothness, cotangent definitions or completeness; none states this completion/algebraization or henselian lifting theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "rig.etale|completed.*cotangent|cotangent.*completion",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/RingTheory/AdicCompletion/LocalRing.lean\", \"line\": \"161\", \"text\": \"  let f := Ideal.mapCotangent _ _ (Algebra.ofId R (AdicCompletion (maximalIdeal R) R))\"}\nSearched Mathlib/RingTheory",
+   "date": "2026-10-19",
+   "verdict": "no match: the hits concern ordinary etale algebras, formal smoothness, cotangent definitions or completeness; none states this completion/algebraization or henselian lifting theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-elkik-finite-etale-away-completion",
+  "date": "2026-10-19",
+  "group": "N0"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Current split of the blueprint ancestor lem-per-artin-gabber-affine-curve, Step 1: the dimension-normalized Verdier duality input, through lem-per-qbar-arbitrary-field-duality and its finite-coefficient local-duality construction; this item's partial algebraization is used in Step 4 of lem-per-gabber-local-duality-general. Supporting input: Elkik equivalence for finite algebras etale away from the completion ideal; The Jacobian input used to algebraize the completed finite algebra.",
+   "via": [
+    "lem-per-elkik-finite-etale-away-completion",
+    "lem-per-gabber-partial-algebraization",
+    "lem-per-gabber-local-duality-general",
+    "lem-per-potential-local-duality",
+    "lem-per-finite-residue-dualizing",
+    "lem-per-qbar-arbitrary-field-duality"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

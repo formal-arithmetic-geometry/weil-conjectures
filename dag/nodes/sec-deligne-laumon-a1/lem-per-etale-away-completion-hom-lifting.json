@@ -1,0 +1,77 @@
+{
+ "id": "lem-per-etale-away-completion-hom-lifting",
+ "kind": "statement",
+ "title": "Unique lifting of maps from completions into a henselian target",
+ "statement": "Let $A$ be a commutative Noetherian ring, $I\\subseteq A$ an ideal, and $D$ a finite type commutative $A$-algebra [def-weil-pbc-noetherian-ring, def-weil-pbc-finite-type-algebra]. Suppose $\\operatorname{Spec}D\\to\\operatorname{Spec}A$ is etale over $\\operatorname{Spec}A\\setminus V(I)$ [def-weil-affine-spectrum, def-weil-etale-morphism]. Let $C$ be a commutative Noetherian $A$-algebra such that $(C,IC)$ is a henselian pair [def-weil-pbc-henselian-terminology]. Write $D^\\wedge=\\varprojlim_nD/I^nD$ and $C^\\wedge=\\varprojlim_n C/I^nC$ [def-weil-pbc-adic-completion]. Every $A$-algebra homomorphism $\\varphi:D^\\wedge\\to C^\\wedge$ is the completion of a unique $A$-algebra homomorphism $u:D\\to C$. Equivalently, composition with $C\\to C^\\wedge$ sends $u$ to the restriction of $\\varphi$ along $D\\to D^\\wedge$; the completion of $u$ equals $\\varphi$.",
+ "source": {
+  "document": "literature/stacks-project/restricted.tex",
+  "place": "Tag 0AKJ (lemma-fully-faithful-etale-over-complement), specialized to a henselian target, whose pair henselization is itself. All algebra homomorphisms of completions are I-adically continuous, since they preserve I^n."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-affine-spectrum",
+  "def-weil-etale-morphism",
+  "def-weil-pbc-henselian-terminology",
+  "def-weil-pbc-adic-completion"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Maps between adic completions from a finite type algebra etale outside the ideal uniquely lift to the henselization of the target",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq\", \"module\": \"Mathlib/RingTheory/Smooth/AdicCompletion\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {S : Type u_3}\\n  [inst_3 : CommRing S] [inst_4 : Algebra R S] [Algebra.FormallySmooth R A] {I : Ideal S} (f : A →ₐ[R] S ⧸ I),\\n  ∃ g, (AlgHom.restrictScalars R (AdicCompletion.evalOneₐ I)).comp g = f\", \"doc\": \"For any commutative rings $R$ and $S$, an ideal $I$ of $S$, and a formally smooth $R$-algebra $A$, given an $R$-algebra homomorphism $f : A \\\\to S/I$, there exists an $R$-algebra homomorphism $g : A \\\\t\"}\n  {\"name\": \"IsAdicComplete.henselianRing\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] (I : Ideal R) [IsAdicComplete I R], HenselianRing R I\", \"doc\": \"For any commutative ring $ R $ and ideal $ I $, if $ R $ is adic complete with respect to $ I $, then $ R $ is Henselian with respect to $ I $.\"}\n  {\"name\": \"Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete\", \"module\": \"Mathlib/RingTheory/Smooth/AdicCompletion\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {S : Type u_3}\\n  [inst_3 : CommRing S] [inst_4 : Algebra R S] [Algebra.FormallySmooth R A] {I : Ideal S} [IsAdicComplete I S]\\n  (f : A →ₐ[R] S ⧸ I), ∃ g, (Ideal.Quotient.mkₐ R I).comp g = f\", \"doc\": \"Let $ R $ be a commutative ring, $ A $ an $ R $-algebra, and $ S $ a commutative ring with an ideal $ I $. If $ S $ is adic complete with respect to $ I $, then for any $ R $-algebra homomorphism $ f \"}\n  {\"name\": \"StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  (P : StandardEtalePair R) (I : Ideal S),\\n  I ^ 2 = ⊥ → ∀ (x : S), P.HasMap ((Ideal.Quotient.mk I) x) → ∃! ε, ε ∈ I ∧ P.HasMap (x + ε)\", \"doc\": \"Let $S$ be a commutative algebra over a commutative ring $R$, and let $I$ be an ideal of $S$ such that $I^2 = \\\\{0\\\\}$. Let $P$ be a standard étale pair over $R$. If the image of an element $x \\\\in S$ in\"}\n  {\"name\": \"IsAdicComplete.liftAlgHom\", \"module\": \"Mathlib/RingTheory/AdicCompletion/RingHom\", \"type\": \"{R : Type u_3} →\\n  {S : Type u_4} →\\n    {A : Type u_5} →\\n      [inst : CommRing R] →\\n        [inst_1 : CommRing S] →\\n          [inst_2 : Algebra R S] →\\n            (I : Ideal S) →\\n              [IsAdicComplete I S] →\\n                [inst_4 : CommRing A] →\\n                  [inst_5 : Algebra R A] →\\n\", \"doc\": \"Given a compatible family of $ R $-algebra homomorphisms $ f_n : A → S/I^n $ satisfying $ f_m = \\text{factor}_I^{m,n} ∘ f_n $ for all $ m ≤ n $, this constructs an $ R $-algebra homomorphism $ A → S $ \"}\n  {\"name\": \"AdicCompletion.liftAlgHom\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Algebra\", \"type\": \"{S : Type u_5} →\\n  [inst : CommRing S] →\\n    (I : Ideal S) →\\n      {R : Type u_6} →\\n        {A : Type u_7} →\\n          [inst_1 : CommRing R] →\\n            [inst_2 : CommRing A] →\\n              [inst_3 : Algebra R A] →\\n                [inst_4 : Algebra R S] →\\n                  (f : (n : ℕ) → A →ₐ[R] \", \"doc\": \"Given commutative rings $ R $ and $ S $, an ideal $ I $ of $ S $, and an $ R $-algebra $ A $, this constructs an $ R $-algebra homomorphism from $ A $ to the $ I $-adic completion of $ S $, given a co\"}\n  {\"name\": \"StandardEtalePair.lift\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] → [inst_2 : Algebra R S] → (P : StandardEtalePair R) → (x : S) → P.HasMap x → P.Ring →ₐ[R] S\", \"doc\": \"Given a commutative ring $ R $, a standard étale pair $ (f, g) $ over $ R $, and an element $ x $ in a commutative $ R $-algebra $ S $ satisfying $ f(x) = 0 $ and $ g(x) $ invertible in $ S $, this co\"}\n  {\"name\": \"IsAdicComplete.mk_liftAlgHom\", \"module\": \"Mathlib/RingTheory/AdicCompletion/RingHom\", \"type\": \"∀ {R : Type u_3} {S : Type u_4} {A : Type u_5} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  (I : Ideal S) [inst_3 : IsAdicComplete I S] [inst_4 : CommRing A] [inst_5 : Algebra R A]\\n  (f : (n : ℕ) → A →ₐ[R] S ⧸ I ^ n) (hf : ∀ {m n : ℕ} (hle : m ≤ n), (Ideal.Quotient.factorₐ R ⋯)\", \"doc\": \"Let `R` be a commutative ring, and let `A` and `S` be commutative `R`-algebras. Let `I` be an ideal of `S` such that `S` is `I`-adically complete. Let `(f_n : A \\\\to S/I^n)_{n \\\\in \\\\mathbb{N}}` be a com\"}\n",
+   "date": "2026-10-19",
+   "verdict": "no match: the hits concern ordinary etale algebras, formal smoothness, cotangent definitions or completeness; none states this completion/algebraization or henselian lifting theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "homomorphism from completed algebra etale away from closed subset into completed Noetherian algebra lifts uniquely into henselian target",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"IsAdicComplete.algHom_ext\", \"module\": \"Mathlib.RingTheory.AdicCompletion.RingHom\", \"type\": \"{f g : A →ₐ[R] S} (H : ∀ n, (Ideal.Quotient.mkₐ R (I ^ n)).comp f = (Ideal.Quotient.mkₐ R (I ^ n)).comp g) : f = g\", \"doc\": \"Let $ R $ be a commutative semiring, $ A $ an $ R $-algebra, $ I $ an ideal of $ R $, and $ S $ an $ R $-algebra that is adic complete with respect to $ I $. If two algebra homomorphisms $ f, g : A \\\\t\"}\n  {\"name\": \"IsAdicComplete.StrictMono.liftRingHom.congr_simp\", \"module\": \"Mathlib.RingTheory.AdicCompletion.RingHom\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : NonAssocSemiring R] [inst_1 : CommRing S] (I : Ideal S) {a : ℕ → ℕ}\\n  (ha : StrictMono a) (f f_1 : (n : ℕ) → R →+* S ⧸ I ^ a n) (e_f : f = f_1)\\n  (hf : ∀ {m : ℕ}, (Ideal.Quotient.factorPow I ⋯).comp (f (m + 1)) = f m) [inst_2 : IsAdicComplete I S],\\n  IsAdicCom\", \"doc\": \"Given a commutative ring $ R $, an ideal $ I $ in a commutative ring $ S $, a strictly increasing sequence $ a : \\\\mathbb{N} \\\\to \\\\mathbb{N} $, and two families of ring homomorphisms $ f, f_1 : \\\\mathbb{\"}\n  {\"name\": \"Ideal.ResidueField.liftₐ.congr_simp\", \"module\": \"Mathlib.RingTheory.Polynomial.UniversalFactorizationRing\", \"type\": \"∀ {R : Type u_1} {A : Type u_3} {B : Type u_4} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : CommRing B]\\n  [inst_3 : Algebra R A] [inst_4 : Algebra R B] (I : Ideal A) [inst_5 : I.IsPrime] (f f_1 : A →ₐ[R] B) (e_f : f = f_1)\\n  (hf₁ : I ≤ RingHom.ker f) (hf₂ : I.primeCompl ≤ Submonoid.comap f (I\", \"doc\": \"Given a prime ideal $ I $ in a commutative ring $ A $, two $ R $-algebra homomorphisms $ f, f_1 : A → B $, and conditions that $ I $ is contained in the kernel of both $ f $ and $ f_1 $, and the compl\"}\n  {\"name\": \"IsAdicComplete.liftRingHom.congr_simp\", \"module\": \"Mathlib.RingTheory.AdicCompletion.RingHom\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : NonAssocSemiring R] [inst_1 : CommRing S] (I : Ideal S)\\n  [inst_2 : IsAdicComplete I S] (f f_1 : (n : ℕ) → R →+* S ⧸ I ^ n) (e_f : f = f_1)\\n  (hf : ∀ {m n : ℕ} (hle : m ≤ n), (Ideal.Quotient.factorPow I hle).comp (f n) = f m),\\n  IsAdicComplete.liftRingHom I f \", \"doc\": \"Given a commutative ring $ R $, an ideal $ I $ of a commutative ring $ S $, and an $ I $-adically complete ring $ S $, if two sequences of ring homomorphisms $ f, f_1 : \\\\mathbb{N} \\\\to \\\\mathrm{RingHom}\"}\n  {\"name\": \"Hausdorffification.lift_eq\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \"(f : M →ₗ[R] N) (g : Hausdorffification I M →ₗ[R] N) (hg : g.comp (of I M) = f) : g = lift I f\", \"doc\": \"Given a commutative ring $ R $, an ideal $ I $, $ R $-modules $ M $ and $ N $ with $ N $ satisfying the Hausdorff condition $ \\\\bigcap_{n \\\\geq 1} I^n N = 0 $, and linear maps $ f : M \\\\to N $ and $ g : \"}\n  {\"name\": \"AdicCompletion.liftAlgHom\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Algebra\", \"type\": \"{S : Type u_5} →\\n  [inst : CommRing S] →\\n    (I : Ideal S) →\\n      {R : Type u_6} →\\n        {A : Type u_7} →\\n          [inst_1 : CommRing R] →\\n            [inst_2 : CommRing A] →\\n              [inst_3 : Algebra R A] →\\n                [inst_4 : Algebra R S] →\\n                  (f : (n : ℕ) → A →ₐ[R] \", \"doc\": \"Given commutative rings $ R $ and $ S $, an ideal $ I $ of $ S $, and an $ R $-algebra $ A $, this constructs an $ R $-algebra homomorphism from $ A $ to the $ I $-adic completion of $ S $, given a co\"}\n  {\"name\": \"Ideal.ResidueField.liftₐ\", \"module\": \"Mathlib.RingTheory.LocalRing.ResidueField.Ideal\", \"type\": \"(I : Ideal A) [I.IsPrime] (f : A →ₐ[R] B) (hf₁ : I ≤ RingHom.ker f)\\n  (hf₂ : I.primeCompl ≤ (IsUnit.submonoid B).comap f) : I.ResidueField →ₐ[R] B\", \"doc\": \"Given a prime ideal $ I $ in a commutative ring $ A $, an $ R $-algebra homomorphism $ f : A →ₐ[R] B $, and conditions that $ I $ is contained in the kernel of $ f $ and the complement of $ I $ maps i\"}\n  {\"name\": \"Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq\", \"module\": \"Mathlib.RingTheory.Smooth.AdicCompletion\", \"type\": \"{I : Ideal S} (f : A →ₐ[R] S ⧸ I) :\\n  ∃ (g : A →ₐ[R] AdicCompletion I S), ((AdicCompletion.evalOneₐ I).restrictScalars R).comp g = f\", \"doc\": \"For any commutative rings $R$ and $S$, an ideal $I$ of $S$, and a formally smooth $R$-algebra $A$, given an $R$-algebra homomorphism $f : A \\\\to S/I$, there exists an $R$-algebra homomorphism $g : A \\\\t\"}\n",
+   "date": "2026-10-19",
+   "verdict": "no match: the hits concern ordinary etale algebras, formal smoothness, cotangent definitions or completeness; none states this completion/algebraization or henselian lifting theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "HenselianRing, AlgHom",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-19",
+   "verdict": "no match: the hits concern ordinary etale algebras, formal smoothness, cotangent definitions or completeness; none states this completion/algebraization or henselian lifting theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "hensel.*hom|hom.*hensel|completion.*etale|etale.*completion",
+   "results": "[grep] OK 0 hit(s)\nSearched Mathlib/RingTheory",
+   "date": "2026-10-19",
+   "verdict": "no match: the hits concern ordinary etale algebras, formal smoothness, cotangent definitions or completeness; none states this completion/algebraization or henselian lifting theorem"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-elkik-finite-etale-away-completion",
+  "date": "2026-10-19",
+  "group": "N0"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Current split of the blueprint ancestor lem-per-artin-gabber-affine-curve, Step 1: the dimension-normalized Verdier duality input, through lem-per-qbar-arbitrary-field-duality and its finite-coefficient local-duality construction; this item's partial algebraization is used in Step 4 of lem-per-gabber-local-duality-general. Supporting input: Elkik equivalence for finite algebras etale away from the completion ideal; The generic homomorphism-lifting input; the source is only finite type and the target need not be finite or etale.",
+   "via": [
+    "lem-per-elkik-finite-etale-away-completion",
+    "lem-per-gabber-partial-algebraization",
+    "lem-per-gabber-local-duality-general",
+    "lem-per-potential-local-duality",
+    "lem-per-finite-residue-dualizing",
+    "lem-per-qbar-arbitrary-field-duality"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}
