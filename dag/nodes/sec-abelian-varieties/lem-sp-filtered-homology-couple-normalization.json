@@ -1,0 +1,132 @@
+{
+ "id": "lem-sp-filtered-homology-couple-normalization",
+ "kind": "statement",
+ "title": "Inclusion and quotient-map normalization of the concrete homology couple",
+ "statement": "For an abelian category C [def-sp-abelian], a cochain complex K with decreasing filtration F [def-sp-filtration] and its graded quotients [def-sp-filtered-complex-subquotients], let X be the concrete filtered homology exact couple [def-sp-filtered-homology-exact-couple]. There exist comparisons eD(P,Q):X.D(P,Q) isomorphic to H^(P+Q)(F^(-Q)K) identifying alpha with homology of the filtration inclusion and initialG, followed by the reindexing equality and filteredHomologyEIso, with homology of the graded quotient projection. All integer transports and equations are exactly those in the Lean statement. This asserts no quotient-page or spectral-sequence differential comparison.",
+ "source": {
+  "document": "Stacks Project, Homological Algebra",
+  "place": "Tags 012K and 011Q; the shifted differential-object construction of Tag 0AMK, alpha induced by inclusion and g induced by quotient"
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-sp-filtration",
+  "def-sp-filtered-homology-exact-couple",
+  "def-sp-convergence",
+  "def-sp-filtered-complex-subquotients"
+ ],
+ "proof": [
+  {
+   "text": "Unfold the concrete homology couple of the existing definition. Its D terms are filteredHomologyD, so take eD to be identity isomorphisms. The alpha equation is exactly the definition filteredHomologyAlpha, with proof-irrelevant index equality transports.",
+   "uses": [
+    "def-sp-filtered-homology-exact-couple",
+    "def-sp-filtered-homology-couple-data"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Unfold initialG and the explicit filteredHomologyG. The base E isomorphism is an equality isomorphism. Associate the composition to cancel the integer equality morphisms: 2(-Q)+(P+2Q)=P, -(-Q)=Q, and -Q+(P+2Q)=P+Q. The remaining map is homology of the quotient projection. This construction also applies to zero and constant filtrations, without finiteness.",
+   "uses": [
+    "def-sp-filtered-homology-exact-couple",
+    "def-sp-filtered-homology-couple-data",
+    "def-sp-convergence"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sp-convergence",
+  "def-sp-filtered-homology-couple-data",
+  "def-sp-filtered-homology-exact-couple"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, Homological Algebra",
+  "place": "Tags 012K, 011Q and 0AMK",
+  "note": "Only the concrete inclusion/projection normalization of the initial couple; the target theorem combines this with existing first-connecting and all-page quotient comparisons."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.homologyMap",
+   "date": "2026-10-18",
+   "results": "HomologicalComplex.homologyMap, HomologicalComplex.homologyMap_id, HomologicalComplex.instIsIsoHomologyMap, HomologicalComplex.epi_homologyMap_of_epi_of_not_rel, HomologicalComplex.mono_homologyMap_of_mono_of_not_rel, HomologicalComplex.homologyMapIso_hom, HomologicalComplex.homologyMapIso_inv, HomologicalComplex.homologyFunctor_map",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The homology exact couple of a filtered complex has D terms filtration step homology and inclusion and quotient homology maps",
+   "date": "2026-10-18",
+   "results": "HomologicalComplex.HomologySequence.composableArrows₃, HomologicalComplex.HomologySequence.composableArrows₅, CategoryTheory.ShortComplex.ShortExact.homology_exact₁, CategoryTheory.ShortComplex.ShortExact.homology_exact₂, CategoryTheory.ShortComplex.ShortExact.homology_exact₃, HomologicalComplex.HomologySequence.composableArrows₃_exact, HomologicalComplex.HomologySequence.snakeInput, HomologicalComplex.opcycles_right_exact",
+   "verdict": "partial match"
+  },
+  {
+   "tool": "grep",
+   "query": "filteredHomologyCouple_normalization|filteredHomologyExactCouple|filteredHomologyEIso in the project CategoryTheory sources; exactCouple|ExactCouple|filteredHomology in Mathlib/Algebra/Homology/SpectralSequence",
+   "date": "2026-10-18",
+   "results": "The concrete couple and base E isomorphism exist in Sheaf.CategoryTheory.FilteredHomologyExactCouple; their bodies were reset to sorry at upstream sync. No normalization theorem exists. No exact-couple construction occurs in the Mathlib spectral-sequence directory.",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "homology exact couple filtered cochain complex inclusion quotient homology maps",
+   "date": "2026-10-18",
+   "results": "CategoryTheory.ShortComplex.ShortExact.homology_exact₂, CochainComplex.HomComplex.leftHomologyData', HomologicalComplex.iCycles, CategoryTheory.ShortComplex.LeftHomologyData.canonical_i, HomologicalComplex.homology_π_ι, CochainComplex.HomComplex.leftHomologyData_i_hom_apply, HomologicalComplex.HomologySequence.composableArrows₂_exact, CochainComplex.HomComplex.leftHomologyData'_i. These give homology-map exactness and homology data, not normalization of the project-specific concrete exact couple.",
+   "verdict": "partial match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.FilteredQuotientCanonicalStructure",
+  "date": "2026-10-18",
+  "group": "Q1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sp-spectral-object-yields",
+   "place": "Construction steps 1--2, concrete homology maps of the initial exact couple",
+   "via": [
+    "lem-sp-filtered-quotient-canonical-structure",
+    "lem-sp-filtered-quotient-page-realization",
+    "lem-sp-bounded-filtered-page-construction",
+    "lem-sp-bounded-filtered-page-core",
+    "thm-sp-spectral-object-yields-canonical-pages"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-pqf-finite",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.FilteredHomologyCoupleNormalization",
+  "file": "lean/Sheaf/CategoryTheory/FilteredHomologyCoupleNormalization.lean",
+  "declaration": "CategoryTheory.filteredHomologyCouple_normalization",
+  "statement": "theorem filteredHomologyCouple_normalization\n    (C : Type u) [Category.{v} C] [Abelian C]\n    (K : CochainComplex C ℤ) (F : DecreasingFiltration K) :\n    ∃ (eD : ∀ P Q : ℤ, (filteredHomologyExactCouple K F).D P Q ≅\n        (F.step (-Q) : CochainComplex C ℤ).homology (P + Q)),\n      (∀ P Q : ℤ,\n        (filteredHomologyExactCouple K F).alpha P Q ≫\n            (eD (P - 1) (Q + 1)).hom =\n          (eD P Q).hom ≫ HomologicalComplex.homologyMap\n            (Subobject.ofLE (F.step (-Q)) (F.step (-(Q + 1)))\n              (F.antitone_step (by omega))) (P + Q) ≫\n            eqToHom (by rw [show P - 1 + (Q + 1) = P + Q by omega])) ∧\n      (∀ P Q : ℤ,\n        (filteredHomologyExactCouple K F).initialG P Q ≫\n            eqToHom (by congr 1 <;> omega) ≫\n            (filteredHomologyEIso K F (-Q) (P + 2 * Q)).hom ≫\n            eqToHom (by\n              rw [show -Q + (P + 2 * Q) = P + Q by omega]\n              rfl) =\n          (eD P Q).hom ≫ HomologicalComplex.homologyMap\n            (F.complexQuotientπ (-Q) (-Q + 1) (by omega)) (P + Q)) ",
+  "branch": "sheaf-dag",
+  "by": "Q1",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261018T071212-L-1674565",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q1",
+  "result": "pass",
+  "landing": "20261018T071212-L-1674565",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

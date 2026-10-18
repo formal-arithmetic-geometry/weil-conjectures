@@ -24,16 +24,18 @@
    "elementary": true
   },
   {
-   "text": "Take the concrete homology couple X and its identity D comparisons. Obtain eQ and its initial normalization and differential equations from the derived quotient comparison. Define eC=eQ followed by eZ inverse, in the proof of the existential statement. The alpha comparison follows by definition of the explicit inclusion map.",
+   "text": "Take the concrete homology couple X. The normalization theorem supplies eD and its inclusion and quotient-map equations. Obtain eQ and its initial normalization and differential equations from the existing derived quotient comparison. Define eC as eQ followed by eZ inverse in the existential proof. The alpha equation is exactly the supplied normalization.",
    "uses": [
-    "def-sp-filtered-homology-exact-couple",
-    "lem-sp-filtered-homology-couple-quotient-pages"
+    "lem-sp-filtered-homology-couple-normalization",
+    "lem-sp-filtered-homology-couple-quotient-pages",
+    "def-sp-filtered-homology-exact-couple"
    ],
    "elementary": true
   },
   {
-   "text": "In the initialG equation expand eC, substitute the base eQ normalization, cancel eZ inverse/hom and eH inverse/hom, and compose the index equality morphisms. For the derived differential equation postcompose with the epic-and-monic page isomorphism eZ hom, rewrite hd, cancel eZ inverse/hom, and apply the eQ differential equation.",
+   "text": "For initialG, expand eC, cancel eZ inverse followed by eZ hom (using definitional conversion of page zero plus one), substitute the base eQ normalization and cancel eH inverse followed by eH hom. Apply the quotient-map normalization of the concrete couple. For derived differentials, postcompose by eZ hom, rewrite hd, cancel isomorphism inverses, and apply the eQ differential equation.",
    "uses": [
+    "lem-sp-filtered-homology-couple-normalization",
     "lem-sp-filtered-homology-couple-quotient-pages"
    ],
    "elementary": true
@@ -41,6 +43,7 @@
  ],
  "proof_deps": [
   "def-sp-filtered-homology-exact-couple",
+  "lem-sp-filtered-homology-couple-normalization",
   "lem-sp-filtered-homology-couple-quotient-pages",
   "lem-sp-filtered-quotient-first-connecting"
  ],
@@ -48,7 +51,7 @@
   "by": "agent",
   "document": "Stacks Project, Homological Algebra",
   "place": "Tag 012K, Lemmas 12.24.2 and 12.24.3(1); blueprint construction steps 1--2",
-  "note": "Lean reduction to explicit homology-map exactness, derived quotient comparisons, and first connecting comparison, composed by an unchanged-statement proof."
+  "note": "Q1: compiled reduction using the existing first-connecting and derived quotient-page comparisons, with only the concrete inclusion/projection normalization isolated. All spectral-sequence transport and cancellation is proved in the item module."
  },
  "mathlib_searches": [
   {
@@ -125,14 +128,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-18",
   "by": "L",
-  "reviewer": "X-fef74",
-  "group": "C3",
+  "reviewer": "COMPILER",
+  "group": "Q1",
   "result": "pass",
-  "landing": "20261013T072340-L-1115686",
+  "landing": "20261018T071212-L-1674565",
   "kind": "interface",
-  "note": "independent Codex review: Matched delivered Lean with node statements and dependencies; existing signature unchanged; all six modules and direct importer FilteredQuotientPageRealization compile cleanly; axioms and three documented postponed lemmas satisfy the brief."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
  "lean_audit": {
   "master": {

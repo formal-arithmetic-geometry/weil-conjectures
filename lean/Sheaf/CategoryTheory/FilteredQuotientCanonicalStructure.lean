@@ -14,6 +14,7 @@ public import Mathlib.Algebra.Homology.HomologySequence
 import Sheaf.CategoryTheory.FilteredHomologyCoupleQuotientPages
 import Sheaf.CategoryTheory.FilteredQuotientFirstConnecting
 import Sheaf.CategoryTheory.FilteredHomologyExactCouple
+import Sheaf.CategoryTheory.FilteredHomologyCoupleNormalization
 /-!
 # Exact-couple comparison for representative quotient differentials
 
@@ -141,6 +142,32 @@ theorem filteredQuotient_canonical_structure
               (X.pageCouple s).d (2 * p + q) (-p) ≫
                 eqToHom (by congr 1 <;> omega) ≫
                   (eC s (p + (s + 1)) (q - (s + 1) + 1)).hom)) := by
-  sorry
+  constructor
+  · intro p q
+    obtain ⟨i, j, hij, hS, hi, hj, hδ⟩ :=
+      filteredQuotient_first_connecting C hBZ eH hH U (D 1 (by omega)) p q
+    refine ⟨i, j, hij, hS, hi, hj, ?_⟩
+    simp only [Iso.trans_hom, Category.assoc]
+    rw [← Category.assoc, hd p q (p + 1) q 1 (by omega), Category.assoc, hδ]
+  · obtain ⟨eQ, hQ₀, hQd⟩ := filteredHomologyCouple_quotient_pages C hBZ eH hH U D
+    let X := filteredHomologyExactCouple U.obj.obj U.obj.filtration
+    let eC := fun (s : ℕ) (p q : ℤ) ↦ eQ s p q ≪≫ (eZ p q (s + 1) (by omega)).symm
+    obtain ⟨eD, hα, hG⟩ :=
+      filteredHomologyCouple_normalization C U.obj.obj U.obj.filtration
+    refine ⟨X, eD, eC, hα, ?_, ?_⟩
+    · intro P Q
+      dsimp only [eC, Iso.trans_hom, Iso.symm_hom]
+      simp only [Category.assoc]
+      erw [(eZ (-Q) (P + 2 * Q) 1 (by omega)).inv_hom_id_assoc]
+      rw [eq_of_heq (hQ₀ (-Q) (P + 2 * Q))]
+      simp only [Iso.trans_hom, Iso.symm_hom, Category.assoc]
+      rw [Iso.inv_hom_id_assoc]
+      exact hG P Q
+    · intro s p q
+      apply (cancel_mono (eZ (p + (s + 1)) (q - (s + 1) + 1)
+        (s + 1) (by omega)).hom).1
+      dsimp only [eC, Iso.trans_hom, Iso.symm_hom]
+      simp only [Category.assoc, hd, Iso.inv_hom_id_assoc, Iso.inv_hom_id, Category.comp_id]
+      simpa only [X] using hQd s p q
 
 end CategoryTheory
