@@ -431,5 +431,32 @@
     }
    ]
   }
+ },
+ "lean": {
+  "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LowerShriek",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.rightDerivedLowerShriekOfCompactification",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.rightDerivedLowerShriekOfCompactification",
+   "AlgebraicGeometry.ProEtale.CondensedRing.rightDerivedLowerShriekOfCompactificationPlus",
+   "AlgebraicGeometry.ProEtale.CondensedRing.rightDerivedLowerShriekOfCompactificationPlusCompatibility",
+   "AlgebraicGeometry.ProEtale.CondensedRing.rightDerivedLowerShriek",
+   "AlgebraicGeometry.ProEtale.CondensedRing.rightDerivedLowerShriekPlus",
+   "AlgebraicGeometry.ProEtale.CondensedRing.rightDerivedLowerShriekPlusCompatibility"
+  ],
+  "statement": "noncomputable abbrev rightDerivedLowerShriekOfCompactification :\n    DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) ⥤\n      DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})\n        (condensedRingObj Λ Y))",
+  "branch": "slopmaster2",
+  "by": "NE",
+  "date": "2026-10-18",
+  "existing": true,
+  "note": "The published module defines the complete six-declaration construction exactly: the unbounded and bounded-below compactification composites, their restriction compatibility, and the corresponding chosen-compactification functors and compatibility. The compactification clause uses exact extension by zero followed by total right-derived pushforward; the chosen clause uses HasCompactification.compactification. Its module documentation records the construction convention and the bounded-below restriction. The degree-zero clause in the blueprint is the stated normalization of these canonical functors, while the six declarations are the blueprint Lean interface.",
+  "fixed_by": "NT-stage2-cc-c94fb5373"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c94fb5373",
+  "group": "NE",
+  "result": "fix",
+  "note": "Existing slopmaster2 binding to WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LowerShriek checked clause by clause: Rf^c_! = D((c.i)_!open) ⋙ R((c.g)_*), R^+ version, both PlusCompatibility isos, chosen versions via HasCompactification (same choice as landed lowerShriek). pulledBackModuleObjects is defeq to the Mod(condensedRingObj) category (rfl); BoundaryCompactification maps to Compactification (more general hypothesis, not stronger); universes Ab.{u+1}/Scheme.{u}. No sorry axioms; statement verbatim; only the lean field changed. nt_compile check file clean (1.9 s). The H^0 degree-zero remark has no Lean declaration: accepted, since it is a source remark proved in proof step 5 and unused by citers. FIX: lean.declarations omitted rightDerivedLowerShriekOfCompactificationPlusCompatibility (the note and report say six); fixes/sk-def-sfb-module-derived-lower-shriek.lean-record.json gives all six."
  }
 }

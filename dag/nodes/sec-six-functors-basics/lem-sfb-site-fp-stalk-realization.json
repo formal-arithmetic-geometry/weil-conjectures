@@ -13,7 +13,8 @@
   "def-sc-finitely-presented-module",
   "def-pur-localized-ringed-site",
   "def-weil-sheaf-of-modules-category",
-  "def-weil-pbc-sheafification"
+  "def-weil-pbc-sheafification",
+  "lem-trf-site-point-reconstruction-sets"
  ],
  "proof": [
   {
@@ -233,5 +234,41 @@
   "group": "Q21",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q21-bafa6c3a0 (reviewer sub-agent of L); spot-checked: Read the item, new leaf, cited statements and source passages in full. All five proof steps, the localized-point coefficient map and the Mathlib slice-adjoint match check out. Completed the new leaf’s missing metadata in fixes; mathematics unchanged. Detailed checks and unavailable Git-only pivot-record limitations are documented in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.Sites.FpStalkRealization",
+  "declaration": "CategoryTheory.SiteFpStalkRealization.exists_fp_stalk_realization",
+  "declarations": [
+   "CategoryTheory.SiteFpStalkRealization.ringDiagram",
+   "CategoryTheory.SiteFpStalkRealization.modules",
+   "CategoryTheory.SiteFpStalkRealization.sets",
+   "CategoryTheory.SiteFpStalkRealization.neighborhoods",
+   "CategoryTheory.SiteFpStalkRealization.stalkRing",
+   "CategoryTheory.SiteFpStalkRealization.stalkModules",
+   "CategoryTheory.SiteFpStalkRealization.localizedNeighborhoods",
+   "CategoryTheory.SiteFpStalkRealization.localizedRingCocone",
+   "CategoryTheory.SiteFpStalkRealization.localizedRingIsColimit",
+   "CategoryTheory.SiteFpStalkRealization.localizedRingIso",
+   "CategoryTheory.SiteFpStalkRealization.localizedModules",
+   "CategoryTheory.SiteFpStalkRealization.moduleGerm",
+   "CategoryTheory.SiteFpStalkRealization.stalkModuleGerm",
+   "CategoryTheory.SiteFpStalkRealization.localizedModuleGerm",
+   "CategoryTheory.SiteFpStalkRealization.exists_fp_stalk_realization"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/Sites/FpStalkRealization.lean",
+  "statement": "theorem exists_fp_stalk_realization (hJ : J.IsSiteForCoverings) (R : Sheaf J.toGrothendieck CommRingCat.{u}) (M : ModuleCat.{u} (stalkRing J p R)) [Module.FinitePresentation (stalkRing J p R) M] : ∃ (n : sitePointNeighbourhood J p) (q : GeometricMorphism (Type u) (Sheaf (J.toGrothendieck.over n.1) (Type u))) (e : J.toGrothendieck.overPullback (Type u) n.1 ⋙ sets (localizedNeighborhoods J p n) (J.toGrothendieck.over n.1) ≅ p.inverse) (comparison : SheafOfModules.overFunctor ((sheafCompose J.toGrothendieck (forget₂ CommRingCat RingCat)).obj R) n.1 ⋙ localizedModules J p hJ R n ≅ stalkModules J p hJ R) (F : ringedSiteModules.{u} (((sheafCompose J.toGrothendieck (forget₂ CommRingCat RingCat)).obj R).over n.1)) (a b : ℕ) (A : Fin b → Fin a → R.obj.obj (op n.1)) (α : SheafOfModules.free (R := ((sheafCompose J.toGrothendieck (forget₂ CommRingCat RingCat)).obj R).over n.1) (ULift.{u} (Fin a)) ⟶ SheafOfModules.free (ULift.{u} (Fin b))), q.inverse = sets (localizedNeighborhoods J p n) (J.toGrothendieck.over n.1) ∧ (∀ (G : Sheaf J.toGrothendieck (Type u)) (z : Over n) (s : G.obj.obj (op z.left.1)), e.hom.app G (colimit.ι ((localizedNeighborhoods J p n).op ⋙ (G.over n.1).obj) (op z) s) = p.inverse.map (sitePointSectionHom J G s) z.left.2) ∧ (∀ (G : ringedSiteModules.{u} ((sheafCompose J.toGrothendieck (forget₂ CommRingCat RingCat)).obj R)) (z : Over n) (s : G.val.obj (op z.left.1)), (comparison.hom.app G) (localizedModuleGerm J p hJ R n (G.over n.1) z s) = stalkModuleGerm J p hJ R G z.left s) ∧ Nonempty ((localizedModules J p hJ R n).obj F ≅ M) ∧ Nonempty (F ≅ cokernel α) ∧ (∀ (i : Fin a) (V : Over n.1), (SheafOfModules.freeHomEquiv _ α ⟨i⟩).val (op V) = ∑ j : Fin b, R.obj.map V.hom.op (A j i) • @id ((SheafOfModules.free (R := ((sheafCompose J.toGrothendieck (forget₂ CommRingCat RingCat)).obj R).over n.1) (ULift.{u} (Fin b))).val.obj (op V)) ((SheafOfModules.freeSection (R := ((sheafCompose J.toGrothendieck (forget₂ CommRingCat RingCat)).obj R).over n.1) (I := ULift.{u} (Fin b)) ⟨j⟩).val (op V)))",
+  "branch": "newtargets-dag",
+  "by": "N3",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "The canonical stalks are constructed with Mathlib varying-ring module colimits; localized scalars use the initial restriction cocone and localizedRingIso. The slice point inverse image and both natural comparisons are fixed on section germs. Helpers are constructions for the same local-realization statement, not additional postponed assertions."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2e7b394fa",
+  "group": "N3",
+  "result": "pass",
+  "note": "Every node clause matches the Lean statement and the node's statement text is unchanged. U and x are the existential n : sitePointNeighbourhood. q.inverse is the colimit over neighbourhoods mapping to (U,x). The comparisons e (j_U q ≅ p) and comparison (q^-1(G|_U) ≅ p^-1 G, natural) are fixed on section germs. The ring identification is the canonical initial-restriction cocone. Nonempty(q^-1F ≅ M) is R_p-linear. F ≅ cokernel α, with α pinned on every object over U to the matrix A over R(U). a=0/b=0 are allowed; one universe u; no extra hypotheses. Mechanical stmt_dep finding: the statement does depend on the theorem's conclusion, because stalkModules, localizedModules and localizedRingIsColimit use its IsCofiltered conjunct (.2.2.1), which colimitFunctor requires; so this passes. Docstrings carry source and blueprint; the only proof is sorry; the lean.statement appears verbatim; Worker report and Second reading sections are present (the second reading is a self-check by the same worker). nt_compile of the snapshot file: clean in 12.7 s; axioms are sorryAx plus the standard ones."
  }
 }

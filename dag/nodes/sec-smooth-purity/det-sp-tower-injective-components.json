@@ -19,7 +19,8 @@
   "def-sp-acyclic",
   "def-weil-pbc-proetale-operations",
   "lem-weil-pbc-right-derived-plus-injective",
-  "det-sp-coefficient-towers-abelian"
+  "det-sp-coefficient-towers-abelian",
+  "def-weil-proetale-inverse-image"
  ],
  "proof": [
   {
@@ -343,5 +344,54 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SmoothPurityTowerInjectiveComponents",
+  "declaration": "AlgebraicGeometry.ProEtale.sp_tower_injective_components",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.spTowerEnoughInjectives",
+   "AlgebraicGeometry.ProEtale.spTowerHasDerived",
+   "AlgebraicGeometry.ProEtale.spRingModulesEnoughInjectives",
+   "AlgebraicGeometry.ProEtale.spRingModulesHasDerived",
+   "AlgebraicGeometry.ProEtale.spModuleEvaluationAdditive",
+   "AlgebraicGeometry.ProEtale.spTowerEvaluationAdditive",
+   "AlgebraicGeometry.ProEtale.spTowerEvaluationLimits",
+   "AlgebraicGeometry.ProEtale.spTowerEvaluationColimits",
+   "AlgebraicGeometry.ProEtale.spTowerBaseChange",
+   "AlgebraicGeometry.ProEtale.spTowerRingMapApp",
+   "AlgebraicGeometry.ProEtale.spTowerRingMap_naturality",
+   "AlgebraicGeometry.ProEtale.spTowerRingMap",
+   "AlgebraicGeometry.ProEtale.spTowerPush_sheaf",
+   "AlgebraicGeometry.ProEtale.spTowerPush",
+   "AlgebraicGeometry.ProEtale.spLevelPush",
+   "AlgebraicGeometry.ProEtale.spTowerPush_properties",
+   "AlgebraicGeometry.ProEtale.spTowerPushAdditive",
+   "AlgebraicGeometry.ProEtale.spTowerPushLimits",
+   "AlgebraicGeometry.ProEtale.spCoefficientModulePushAdditive",
+   "AlgebraicGeometry.ProEtale.spLevelPushLimits",
+   "AlgebraicGeometry.ProEtale.spTowerEvaluationIso_existsUnique",
+   "AlgebraicGeometry.ProEtale.spTowerEvaluationIso",
+   "AlgebraicGeometry.ProEtale.spTowerEvaluationHomotopyIso",
+   "AlgebraicGeometry.ProEtale.sp_tower_injective_components",
+   "AlgebraicGeometry.ProEtale.sp_tower_injective_complex_computes",
+   "AlgebraicGeometry.ProEtale.sp_tower_injective_resolution_computes",
+   "AlgebraicGeometry.ProEtale.sp_tower_evaluation_derived_unit",
+   "AlgebraicGeometry.ProEtale.sp_tower_derived_direct_image_evaluation"
+  ],
+  "file": "lean/Sheaf/Paper/SmoothPurityTowerInjectiveComponents.lean",
+  "statement": "theorem sp_tower_injective_components (I : spCoefficientTowers l E T) [Injective I] : (∀ r : ℕ, ∃ J : (n : Fin (r + 1)) → systemLevel.{t + 1, t, max u (t + 1)} (spCoefficientCommRings l E T) n.val, (∀ n : Fin (r + 1), Injective (J n)) ∧ Nonempty (Retract ((spCoefficientEvaluation l E T dT.equivalence r).obj I) (∏ᶜ fun n : Fin (r + 1) ↦ (systemRestriction.{t + 1, t, max u (t + 1)} (spCoefficientCommRings l E T) (Nat.le_of_lt_succ n.isLt)).obj (J n)))) ∧ (∀ (r : ℕ) (U : T.ProEt), (SheafOfModules.evaluation.{max u (t + 1)} (spCoefficientRing l E T r) (op U)).rightAcyclic ((spCoefficientEvaluation l E T dT.equivalence r).obj I)) ∧ (∀ r : ℕ, (spLevelPush l E g r).rightAcyclic ((spCoefficientEvaluation l E T dT.equivalence r).obj I))",
+  "branch": "newtargets-dag",
+  "by": "Q96",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "All clauses are stated in this module: finite-product retract and section/direct-image acyclicity, the supplied injective-resolution computation, and the unique natural derived evaluation comparison normalized by both derived units. Tower direct image is the actual product-site module pushforward through the published constant-section coefficient map. Index n is the paper's positive level n+1. Existing independent-universe direct-image and sheafification interfaces retain site object universe t+1 and morphism universe t; no universe equality, arbitrary scalar map or extra finiteness hypothesis is imposed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b04595a58",
+  "group": "Q96",
+  "result": "pass",
+  "note": "Read node, 8 stmt_deps and their Lean records, full module, report, side-clone declarations (SpCoefficientTowersAbelian HEq normalizations, systemLevel/systemRestriction, rightAcyclic, coefficientProEtaleModuleDirectImage). Every clause matches: Fin(r+1) retract onto restricted injective J_n (paper levels 1..r+1), section and g_*-acyclicity via Functor.rightAcyclic (def-sp-acyclic record), real product-site tower pushforward via canonical constant-section ring map, D+ rightDerivedFunctorPlus with unit-pinned resolution computation and a unique unit-compatible natural comparison (checked true). No added hypotheses or universe restriction; witnesses dT/dS are published inhabited data. No hollow defs, all theorems sorry, docstrings with source/blueprint tag, lines <=100. Node differs only in lean and stmt_deps (+landed def-weil-proetale-inverse-image, permitted); lean.statement verbatim. nt_compile --json exit 0, 21.5 s, no errors/warnings (negative control fails as expected). Non-blocking notes: second-reading section is the post-10-17 stub; the def-weil-proetale-inverse-image record could list the universe-independent coefficientProEtaleModuleDirectImage."
  }
 }

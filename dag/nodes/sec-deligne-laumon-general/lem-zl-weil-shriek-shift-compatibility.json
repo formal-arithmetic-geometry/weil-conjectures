@@ -28,7 +28,8 @@
   "def-weil-weil-sheaf-complex",
   "def-weil-integral-rational-qbar-compact-support",
   "lem-zl-field-shriek-lower-bound",
-  "lem-fix-weil-operations"
+  "lem-fix-weil-operations",
+  "def-zl-field-weil-shriek-shift-data"
  ],
  "proof": [
   {
@@ -150,5 +151,26 @@
   "group": "N6",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N6-3a4956a20 (reviewer sub-agent of L); spot-checked: Corrected fixes/dag/nodes/sec-deligne-laumon-general/lem-zl-weil-shriek-shift-compatibility.json: the delivered claim that rational/common-stage Frobenius pullbacks are computed termwise was overstrong; the cited definition gives derived reduction, rationalization, and common-stage transport. Replaced it with canonical shift identifications and adjusted Step 1. The Weil-morphism equation, hypotheses, coefficient categories, exchange direction, route, edge cases, and source checks pass. Full audit is in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.WeilShriekShiftCompatibility",
+  "declaration": "WeilConjectures.weilShriek_shift_compatibility",
+  "declarations": [
+   "WeilConjectures.weilShriek_shift_compatibility"
+  ],
+  "file": "lean/Sheaf/Paper/WeilShriekShiftCompatibility.lean",
+  "statement": "theorem weilShriek_shift_compatibility (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p) (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω] (ι : E →ₐ[Padic l] Ω) {X₀ Y₀ : Over (Spec (.of D.k₀))} [LocallyOfFiniteType X₀.hom] [QuasiCompact X₀.hom] [QuasiSeparated X₀.hom] [LocallyOfFiniteType Y₀.hom] [QuasiCompact Y₀.hom] [QuasiSeparated Y₀.hom] (f₀ : X₀ ⟶ Y₀) [IsSeparated f₀.left] [LocallyOfFiniteType f₀.left] [QuasiCompact f₀.left] (c : Compactification f₀.left) : (∀ (K : sfWeilComplex D l hl X₀ E) (r : ℤ), (fieldWeilShriekExchange D l hl E f₀ c).hom.app (K.carrier⟦r⟧) ≫ (fieldWeilShriek D l hl E f₀ c).map (((sfWeilFrobeniusPullback D l hl X₀ E).commShiftIso r).hom.app K.carrier ≫ K.str.hom⟦r⟧') ≫ ((fieldWeilShriek D l hl E f₀ c).commShiftIso r).hom.app K.carrier = (sfWeilFrobeniusPullback D l hl Y₀ E).map (((fieldWeilShriek D l hl E f₀ c).commShiftIso r).hom.app K.carrier) ≫ ((sfWeilFrobeniusPullback D l hl Y₀ E).commShiftIso r).hom.app ((fieldWeilShriek D l hl E f₀ c).obj K.carrier) ≫ ((fieldWeilShriekExchange D l hl E f₀ c).hom.app K.carrier ≫ (fieldWeilShriek D l hl E f₀ c).map K.str.hom)⟦r⟧') ∧ (∀ (K : sfCommonStageWeilComplex D l hl X₀ Ω) (r : ℤ), (zlShriekFrobenius D l hl Ω f₀ c).hom.app (K.carrier⟦r⟧) ≫ (zlCommonStageShriek D l hl Ω f₀ c).map (((sfCommonStageWeilFrobeniusPullback D l hl X₀ Ω).commShiftIso r).hom.app K.carrier ≫ K.str.hom⟦r⟧') ≫ ((zlCommonStageShriek D l hl Ω f₀ c).commShiftIso r).hom.app K.carrier = (sfCommonStageWeilFrobeniusPullback D l hl Y₀ Ω).map (((zlCommonStageShriek D l hl Ω f₀ c).commShiftIso r).hom.app K.carrier) ≫ ((sfCommonStageWeilFrobeniusPullback D l hl Y₀ Ω).commShiftIso r).hom.app ((zlCommonStageShriek D l hl Ω f₀ c).obj K.carrier) ≫ ((zlShriekFrobenius D l hl Ω f₀ c).hom.app K.carrier ≫ (zlCommonStageShriek D l hl Ω f₀ c).map K.str.hom)⟦r⟧')",
+  "branch": "newtargets-dag",
+  "by": "Q78",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0ade19cb6",
+  "group": "Q78",
+  "result": "pass",
+  "note": "Every hypothesis and conclusion clause matches the node: k0 datum, prime l != p, E finite in Omega, quasi-separated finite-type X0/Y0 with no separatedness over k0, separated finite-type f0, both E and Qbar branches, all K and all r in Z. The equation is sigma∘theta_{Rf!(K[r])} = theta_{Rf!K}[r]∘Lg_Y*(sigma) with the pullback shift inside theta[r]; types and directions were checked. lean.statement matches the file verbatim; statement unchanged; stmt_deps only gains the new §1(A) node. New node def-zl-field-weil-shriek-shift-data has exactly the §5 fields. Its shifts are fixed uniquely by recorded predicates (signed Roos ShiftCoordinates/ShiftDescent, localization at 1, stage representatives); the upstream rationalization specifies shift 1 and an identity localization comparison, so the HEq conditions are well typed. Proper/open exchanges are mates mirroring the landed def-zl-common-stage-weil-shriek, with Mathlib adjunction shifts; no arbitrary maps or hollow definitions. Existence facts are sorry theorems with proof docstrings, and the recorded-action comparison holds for every geometric compactification. Gates: source/blueprint docstrings, nothing proved beyond sorry, no pro-etale substitute, report sections present. nt_compile.py --json on both files: exit 0 (15.6 s, 7.0 s), no errors or warnings. Observation, not blocking: a later Lean binding of def-weil-frobenius-square-exchange at E should record its agreement with fieldWeilShriekExchange."
  }
 }

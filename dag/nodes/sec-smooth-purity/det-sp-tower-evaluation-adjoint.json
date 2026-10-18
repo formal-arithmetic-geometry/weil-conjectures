@@ -193,5 +193,28 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SmoothPurityTowerEvaluationAdjoint",
+  "declaration": "AlgebraicGeometry.ProEtale.sp_tower_evaluation_adjoint",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.SpTowerEvaluationAdjoint",
+   "AlgebraicGeometry.ProEtale.sp_tower_evaluation_adjoint"
+  ],
+  "file": "lean/Sheaf/Paper/SmoothPurityTowerEvaluationAdjoint.lean",
+  "statement": "theorem sp_tower_evaluation_adjoint (A : SpCoefficientTowersAbelian l E T) : Nonempty (SpTowerEvaluationAdjoint l E T A)",
+  "branch": "newtargets-dag",
+  "by": "Q95",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "The normalized right adjoints are specified on the recorded strict-system presentation, transported back to the actual tower category by the dependency equivalence. The structure fixes every level, iterated transition and morphism, and includes exactness, adjunctions, preservation of injectives, and injective-level product embeddings. It is an interface for this theorem; no arbitrary chosen functor or new tower category is defined. Indices n correspond to the paper’s positive levels n+1."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cc0553022",
+  "group": "Q95",
+  "result": "pass",
+  "note": "The delivery adds lean/Sheaf/Paper/SmoothPurityTowerEvaluationAdjoint.lean and fills the item's lean record; nothing else changes. Every clause matches the node and blueprint (paper level n = Lean index n-1): restricted J at levels >= n via systemRestriction (the right direction), zero below, identity iterated transitions above, zero transitions into lower levels, morphisms fixed, exact, adjoint to spCoefficientEvaluation, PreservesInjectiveObjects, embedding into a limiting Fan with injective J_n and mono i_n. Taking A : SpCoefficientTowersAbelian as a parameter is not an extra hypothesis, and the structure can be filled. Edge cases (first level, equal indices, zero objects, empty scheme, universes t/u independent) are fine. Docstrings and gates OK; the instance erase/restore is the same pattern as the landed dependency. nt_compile --json at the intended path: rc=0 and clean, with a deliberate-error control showing diagnostics are reported. No findings."
  }
 }

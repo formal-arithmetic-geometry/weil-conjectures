@@ -454,5 +454,24 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.IntTensorProjection",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.locallyClosedImmersionTensorProjection",
+  "file": "lean/Sheaf/SixFunctors/IntTensorProjection.lean",
+  "statement": "theorem locallyClosedImmersionTensorProjection (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ] (k : Type u) [Field k] {S Sbar X : Scheme.{u}} [S.Over (Spec (.of k))] [Sbar.Over (Spec (.of k))] [X.Over (Spec (.of k))] [IsSeparated (S ↘ Spec (.of k))] [LocallyOfFiniteType (S ↘ Spec (.of k))] [QuasiCompact (S ↘ Spec (.of k))] [IsSeparated (Sbar ↘ Spec (.of k))] [LocallyOfFiniteType (Sbar ↘ Spec (.of k))] [QuasiCompact (Sbar ↘ Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] (a : S ⟶ X) (u : S ⟶ Sbar) (i : Sbar ⟶ X) (ha : a = u ≫ i) [a.IsOver (Spec (.of k))] [u.IsOver (Spec (.of k))] [i.IsOver (Spec (.of k))] [IsOpenImmersion u] [IsClosedImmersion i] : Nonempty ( (((Functor.whiskeringLeft₂ _).obj ((openImmersionLowerShriek Λ u).mapDerivedCategory ⋙ (lowerStar Λ i).rightDerivedFunctor)).obj (𝟭 _)).obj (derivedTensor Λ X) ≅ (Functor.postcompose₂.obj ((openImmersionLowerShriek Λ u).mapDerivedCategory ⋙ (lowerStar Λ i).rightDerivedFunctor)).obj ((((Functor.whiskeringLeft₂ _).obj (𝟭 _)).obj ((a)^*⟦Λ⟧.mapDerivedCategory)).obj (derivedTensor Λ S)))",
+  "branch": "newtargets-dag",
+  "by": "Q45",
+  "date": "2026-10-18",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-77019e240"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-77019e240",
+  "group": "Q45",
+  "result": "fix",
+  "note": "Statement correct against node and source: commutative condensed ring Λ (Sheaf coherentTopology Profinite, MonObj/IsCommMonObj); standing X over field k (separated, locally finite type, quasi-compact) with redundant but consistent hypotheses on S and Sbar; a = u ≫ i with open u and closed i; iso of curried bifunctors (M,L) ↦ (i_* u_! M) ⊗ᴸ_X L ≅ i_* u_!(M ⊗ᴸ_S a^* L), natural in both variables, orientation correct; one universe u, nothing unbound; lean.statement verbatim; all 13 proof steps and every proof use named in the docstring; no hollow definition or extra assumption. Acceptable deviations: R i_* (rightDerivedFunctor) instead of termwise i_*, equivalent for the exact closed-immersion pushforward because the conclusion is a Nonempty iso; the setting's char p and ℓ are omitted, which only generalizes a true statement and matches the setting's Lean record. Finding (H9, mechanical): the file had no copyright header and no `module` keyword, used plain import instead of public import, and lacked the rule-7 imports of stated statement and proof dependency modules. Fixed in fixes/IntTensorProjection.lean (complete replacement, statement byte-identical). nt_compile: delivered file rc 0 in 3.2 s; deliberately broken copy errors as expected; fixed file rc 0 in 3.1 s, no warnings beyond sorry."
  }
 }

@@ -26,7 +26,8 @@
   "sk-def-sfb-constructible",
   "def-constructible-stratification",
   "det-def-sfb-constructible-local-model",
-  "def-weil-pbc-proetale-site"
+  "def-weil-pbc-proetale-site",
+  "lemma-constructible-pullback-stratification"
  ],
  "proof": [
   {
@@ -211,5 +212,29 @@
   "group": "Q159",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q159-43ad1d3c9 (reviewer sub-agent of L); spot-checked: Read the whole item and every cited statement: lemma-constructible-pullback-stratification, lem-pur-scheme-constructible-preimage, det-pe-topos-functoriality-inverse-image clause 1, sk-prop-sfb-cartesian-coefficients, sk-def-sfb-module-pushforward-pullback, sk-def-sfb-pulled-back-coefficients, sk-def-sfb-coefficient-morphisms, det-def-sfb-constructible-local-model, sk-def-sfb-constructible, and def-constructible-stratification with its blueprint_update. Sources checked: Stacks 054I (morphisms.tex l.4340); Mathlib Scheme.Hom.isConstructible_preimage at FinitePresentation.lean:171-179, for arbitrary schemes; Bhatt–Scholze Lemma 6.3.8 proof; and the main-20261015 pullback proof paragraph 'Constructible complexes'. Step 1: the strata are locally closed by the stratification lemma and constructible by the Mathlib leaf; no finite-type hypothesis is needed. Step 2: covers base-change along an arbitrary g. Step 4: naturality of alpha_h plus the ring-map property keeps the scalar matrix the same, and the composition isomorphism gives (g^*M)|_V. Step 5: the qcqs definition applies. Hypotheses and the coefficient category match the parent det-proper-base-change-unbounded-pullback, which applies the item to qcqs finite-type schemes and to H^i. Edge cases checked: Y' empty, empty strata, P=0, g=id, field coefficients. No false statement. There are no new nodes, and the item duplicates no existing node (checked lem-sfb-adic-finite-stratification-pullback, lem-sfb-dc-upper-star-preserves and the constructible-preimage nodes). Route is fine: sk-thm-p1 and sk-def-sfb-finite-pushforward-pullback are both on the unit's transitive route. The tool_use for det-pe-topos-functoriality-inverse-image is accepted but not needed. One repair (C3): Steps 3 and 4 got 'M|_U ≅ coker(A) for the chosen presentation of the given P' from the existential (1)<=>(2) lemma of det-def-sfb-constructible-local-model, whose statement only gives some matrix. I replaced this with the elementary argument: constant sheaves are exact and Λ_U⊗- is right exact. Only those two step texts are changed; statement, uses and proof_deps are unchanged. Corrected file: fixes/dag/nodes/sec-six-functors-basics/lem-sfb-pullback-constant-model-constructible.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PullbackConstantModelConstructible",
+  "declaration": "AlgebraicGeometry.ProEtale.pullback_constantModelConstructible",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.constantModelPullbackStratification",
+   "AlgebraicGeometry.ProEtale.ConstantModelPullbackStatement",
+   "AlgebraicGeometry.ProEtale.pullback_constantModelConstructible"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/PullbackConstantModelConstructible.lean",
+  "statement": "theorem pullback_constantModelConstructible (ℓ : ℕ) [Fact ℓ.Prime] (L : Sheaf (coherentTopology Profinite.{u}) RingCat.{u + 1}) [IsCommMonObj ((sheafCompose (coherentTopology Profinite.{u}) (forget₂ RingCat.{u + 1} Ab.{u + 1})).obj L)] (hL : (∃ A : CommRingCat.{u + 1}, Finite A ∧ (∃ n : ℕ, ∀ a : A, (ℓ ^ n) • a = 0) ∧ Nonempty (L ≅ (constantSheaf (coherentTopology Profinite.{u}) RingCat.{u + 1}).obj ((forget₂ CommRingCat.{u + 1} RingCat.{u + 1}).obj A))) ∨ L = Profinite.padicIntCondensedRing ℓ ∨ L = Profinite.padicCondensedRing ℓ ∨ (∃ E : IntermediateField ℚ_[ℓ] (PadicAlgCl ℓ), FiniteDimensional ℚ_[ℓ] E ∧ (L = Profinite.padicIntegersCondensedRing ℓ E ∨ L = Profinite.padicSubfieldCondensedRing ℓ E)) ∨ L = Profinite.padicAlgClCondensedRing ℓ) : ConstantModelPullbackStatement ((sheafCompose (coherentTopology Profinite.{u}) (forget₂ RingCat.{u + 1} Ab.{u + 1})).obj L)",
+  "branch": "newtargets-dag",
+  "by": "Q29",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "The auxiliary Prop unfolds the complete two-clause statement without generalizing its coefficient hypothesis. The canonical stratification is constructed from the recorded finite locally closed stratification plus its explicit constructibility witnesses using the existing upstream pullback. Finite discrete coefficients are represented by the constant ring sheaf; the algebraic-closure alternative uses padicAlgClCondensedRing, whose sections land in a finite subextension. Each output local model uses the same input scalar module and the canonical base-changed cover."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5d90a8967",
+  "group": "Q29",
+  "result": "pass",
+  "note": "Read node, all 11 stmt_deps and the declarations they name (IsConstantModelConstructible, finiteConstantScalarExtension, FiniteLocallyClosedStratification, Scheme.Stratification.pullback at ConstructibleSheaf/Pullback.lean:174-188, EllAdic condensed rings). All coefficient cases (finite A as constant ring sheaf, Z_l, Q_l, O_E/E for finite E in PadicAlgCl, finite-subextension Qlbar), qcqs Y,Y' with arbitrary g, recorded upperStar/condensedRingObj, constructibility conclusion and the precise clause (pulled-back stratification, pullback₂ cover, same P) match the node; no stronger assumptions. Mechanical stmt_dep finding: lemma-constructible-pullback-stratification's Lean is the sorry-free def Scheme.Stratification.pullback, an object the statement uses directly (its immersions), so it passes on that point. Edge cases (empty schemes/strata/covers, P=0, zero ring, g=id, E=Q_l) covered; universes as framework. Gates: real defs, docstrings with source and blueprint, only sorry, statement verbatim, report sections present. nt_compile.py on snapshot: exit 0, no messages."
  }
 }
