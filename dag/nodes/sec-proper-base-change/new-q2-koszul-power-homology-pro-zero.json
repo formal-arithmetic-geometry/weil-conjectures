@@ -1,0 +1,128 @@
+{
+ "id": "new-q2-koszul-power-homology-pro-zero",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-noetherian-koszul-augmentation-pro-zero",
+   "place": "Artin–Rees and signed insertion step",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Positive Koszul homology transitions are pro-zero",
+ "statement": "Let $A$ be a commutative Noetherian ring [def-weil-pbc-noetherian-ring], $r\\in\\mathbb N$, and $a:\\operatorname{Fin}(r)\\to A$. Write $K_m$ for the Koszul chain complex [def-weil-pbc-koszul-complex] on $(a_i^{m+1})$. Suppose $t_{m,k}:K_k\\to K_m$, for $m\\le k$, has degree-$n$ component the $n$th exterior power of the diagonal $e_i\\mapsto a_i^{k-m}e_i$. For every $n>0$ and $m$ there exists $k\\ge m$ such that the induced homology map $H_n(t_{m,k})$ is zero [def-weil-pbc-module-chain-complex-homology]. Compatibility between distinct transitions is unnecessary.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0921, Artin–Rees paragraph"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-koszul-complex",
+  "def-weil-pbc-module-chain-complex-homology"
+ ],
+ "proof": [
+  {
+   "text": "For a degree-(n+1) cycle z, insert e_i by left exterior multiplication. The contraction identity d(e_i wedge z)=f_i z-e_i wedge dz gives f_i z as a boundary. Span induction gives (f_i) times the cycle submodule contained in the boundary submodule.",
+   "uses": [
+    "def-weil-pbc-koszul-complex"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Fix target m and degree n+1. The exterior power is finite by its finite subset basis. Apply Ideal.exists_pow_inf_eq_pow_smul (Artin-Rees) to J_m=(a_i^(m+1)) and the kernel of its outgoing differential. Choose the Artin-Rees index c.",
+   "uses": [
+    "lem-weil-pbc-exterior-power-free-basis",
+    "lem-weil-pbc-artin-rees"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take k=m+(m+1)(c+1). On each exterior basis vector the transition is multiplication by the product of a_i^((m+1)(c+1)) over its nonempty set of indices. At least one factor belongs to J_m^(c+1), so the transition image lies in J_m^(c+1) times the entire term. Chain-map commutativity puts the image of a cycle in the cycle kernel. Artin-Rees puts this intersection in J_m times cycles, hence in boundaries by step 1. Cancel the epimorphism from cycles to homology and the monomorphism from homology to opcycles to conclude the homology map is zero. Empty bases and the zero ring require no exception.",
+   "uses": [
+    "def-weil-pbc-module-chain-complex-homology"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-koszul-complex",
+  "lem-weil-pbc-exterior-power-free-basis",
+  "lem-weil-pbc-artin-rees",
+  "def-weil-pbc-module-chain-complex-homology"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0921 (lemma-sequence-Koszul-complexes), the Artin–Rees and generator insertion argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Koszul complex positive homology powers Noetherian ring pro zero Artin Rees",
+   "results": "localCohomology.ideal_powers_initial, Ideal.exists_pow_inf_eq_pow_smul, IsNoetherianRing.exists_relSeries_isQuotientEquivQuotientPrime, localCohomology.isoSelfLERadical, IsHausdorff.of_isTorsionFree, IsSemiprimaryRing.finite_of_isNoetherian, Ideal.iInf_pow_smul_eq_bot_of_isLocalRing, IsHausdorff.of_isLocalRing",
+   "verdict": "No exact Koszul pro-zero theorem; Artin-Rees and the ordinary homology API are used in the proof.",
+   "date": "2026-10-18"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homologyMap\"",
+   "results": "CategoryTheory.ShortComplex.LeftHomologyMapData.id, CategoryTheory.ShortComplex.LeftHomologyMapData, CategoryTheory.ShortComplex.leftHomologyMapIso, CategoryTheory.ShortComplex.leftHomologyMapIso', CategoryTheory.ShortComplex.leftHomologyMapData, CategoryTheory.ShortComplex.LeftHomologyMapData.instInhabited, CategoryTheory.ShortComplex.LeftHomologyMapData.instSubsingleton, CategoryTheory.ShortComplex.LeftHomologyMapData.instUnique",
+   "verdict": "No exact Koszul pro-zero theorem; Artin-Rees and the ordinary homology API are used in the proof.",
+   "date": "2026-10-18"
+  },
+  {
+   "tool": "grep",
+   "query": "koszul.*pro_zero|[Pp]roregular",
+   "results": "No hits.",
+   "verdict": "No exact Koszul pro-zero theorem; Artin-Rees and the ordinary homology API are used in the proof.",
+   "date": "2026-10-18"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Koszul homology transitions for powers of generators over a Noetherian ring are eventually zero by Artin Rees",
+   "results": "Ideal.exists_pow_inf_eq_pow_smul, IsArtinian.range_smul_pow_stabilizes, reesAlgebra, LinearMap.eventually_isCompl_ker_pow_range_pow, LinearMap.eventually_iSup_ker_pow_eq, Ideal.iInf_pow_smul_eq_bot_of_isLocalRing, Ideal.iInf_pow_smul_eq_bot_of_noZeroSMulDivisors, LinearMap.isCompl_iSup_ker_pow_iInf_range_pow",
+   "verdict": "No exact theorem. The Artin–Rees theorem and homology cycle/boundary API are used directly.",
+   "date": "2026-10-18"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.NoetherianKoszulAugmentationProZero",
+  "date": "2026-10-18",
+  "group": "Q2"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.KoszulPowerHomologyProZero",
+  "file": "lean/Sheaf/RingTheory/KoszulPowerHomologyProZero.lean",
+  "declaration": "ExteriorAlgebra.koszul_power_homology_pro_zero",
+  "statement": "theorem koszul_power_homology_pro_zero\n    (A : Type u) [CommRing A] [IsNoetherianRing A] (r : ℕ) (a : Fin r → A)\n    (t : ∀ m k : ℕ, m ≤ k →\n      (koszulComplex A r (fun i ↦ a i ^ (k + 1)) ⟶\n        koszulComplex A r (fun i ↦ a i ^ (m + 1))))\n    (ht : ∀ m k h n, (t m k h).f n = ModuleCat.ofHom\n      (exteriorPower.map n (Finsupp.linearCombination A\n        (fun i ↦ Finsupp.single i (a i ^ (k - m)))))) :\n    ∀ (n : ℕ), 0 < n → ∀ m : ℕ, ∃ (k : ℕ) (h : m ≤ k),\n      HomologicalComplex.homologyMap (t m k h) n = 0",
+  "branch": "sheaf-dag",
+  "by": "Q2",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261018T091410-L-3258148",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q2",
+  "result": "pass",
+  "landing": "20261018T091410-L-3258148",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
