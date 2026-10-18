@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Shift
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerShriekTriangulated
 
 /-!
 # The pro-étale derived functors are triangulated
@@ -16,7 +16,8 @@ for the commutations with shifts of
 
 * `Rg_*` is a right derived functor, hence triangulated;
 * `Rf_!(c) = D(i_!) ⋙ Rg_*` for a compactification `c = (i, g)` is a composite of two
-  triangulated functors;
+  triangulated functors
+  (`WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerShriekTriangulated`);
 * `Lg^*` is left adjoint to the triangulated functor `Rg_*`, and its commutation with shifts is
   the one induced by the adjunction, so it is triangulated by
   `Adjunction.isTriangulated_leftAdjoint`.
@@ -45,18 +46,6 @@ is. -/
 instance isTriangulated_rightDerivedLowerStar {Z Y : Scheme.{u}} (g : Z ⟶ Y) :
     (R((g)_*[A])).IsTriangulated :=
   inferInstance
-
-/-- The derived lower shriek `Rf_!(c)` of a compactification `c = (i, g)` commutes with shifts,
-being the composite of `D(i_!)` and `Rg_*`. -/
-noncomputable instance commShift_rightDerivedLowerShriekOfCompactification {X Y : Scheme.{u}}
-    {f : X ⟶ Y} (c : Compactification f) : (Rf_!(c)[A]).CommShift ℤ :=
-  inferInstanceAs ((D((c.i)_!open[A]) ⋙ R((c.g)_*[A])).CommShift ℤ)
-
-/-- The derived lower shriek `Rf_!(c)` of a compactification `c = (i, g)` is triangulated, being
-the composite of the triangulated functors `D(i_!)` and `Rg_*`. -/
-instance isTriangulated_rightDerivedLowerShriekOfCompactification {X Y : Scheme.{u}}
-    {f : X ⟶ Y} (c : Compactification f) : (Rf_!(c)[A]).IsTriangulated :=
-  inferInstanceAs ((D((c.i)_!open[A]) ⋙ R((c.g)_*[A])).IsTriangulated)
 
 variable [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
   [Abelian.HasFunctorialFlatResolution A]

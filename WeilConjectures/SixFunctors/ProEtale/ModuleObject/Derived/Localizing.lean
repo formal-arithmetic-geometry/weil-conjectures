@@ -12,14 +12,16 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 public import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategory
 public import WeilConjectures.CategoryTheory.Triangulated.LocalizingDetermination
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperShriekLocalizing
 
 /-!
 # The localizing categories `Loc(Dbc(X, Λ))` of module objects over `Λ_X`
 
 Let `Λ` be a commutative condensed ring, for instance `𝒪̲_E`, `E̲` or `ℚ̲̄_ℓ`, and for a scheme `X`
 let `D(X_proét, Λ) = D(Mod_{Λ_X})` be the derived category of module objects over
-`Λ_X = p_X^* Λ` (`WeilConjectures.SixFunctors.ProEtale.ModuleObject`). This file introduces the
-localizing closure `Loc(Dbc(X, Λ))` of the bounded constructible complexes
+`Λ_X = p_X^* Λ` (`WeilConjectures.SixFunctors.ProEtale.ModuleObject`). This file is about the
+localizing closure `Loc(Dbc(X, Λ))` of the bounded constructible complexes, defined in
+`WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperShriekLocalizing`
 (`AlgebraicGeometry.ProEtale.CondensedRing.localizingBoundedConstructible`, blueprint
 `sk-def-localizing-closure`; for `Λ = 𝒪̲_E, E̲, ℚ̲̄_ℓ` one has `Dctf(X, Λ) = Dbc(X, Λ)`), the
 projection map and the base change map of the ambient categories, and the formal arguments of
@@ -28,7 +30,6 @@ tensor closure from `Dbc` to `Loc(Dbc)`.
 
 ## Main definitions
 
-- `AlgebraicGeometry.ProEtale.CondensedRing.localizingBoundedConstructible Λ X`: `Loc(Dbc(X, Λ))`.
 - `AlgebraicGeometry.ProEtale.CondensedRing.projectionMap Λ p`: the projection map
   `Rp_*M ⊗ᴸ L ⟶ Rp_*(M ⊗ᴸ Lp^*L)` on `D(Mod_{Λ_Y})`.
 - `AlgebraicGeometry.ProEtale.CondensedRing.baseChangeMap Λ sq`: the base change map
@@ -64,14 +65,6 @@ local notation "𝔻(" X ")" =>
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
 
 /-! ### The localizing closure of `Dbc` -/
-
-/-- Blueprint `sk-def-localizing-closure`: The localizing closure `Loc(Dbc(X, Λ))`, the smallest
-full triangulated subcategory of `D(X_proét, Λ) = D(Mod_{Λ_X})` containing the bounded
-constructible complexes `Dbc(X, Λ)` and closed under isomorphisms and direct sums (indexed by
-`Type (u + 1)`). For `Λ = 𝒪̲_E, E̲, ℚ̲̄_ℓ` one has `Dctf(X, Λ) = Dbc(X, Λ)`, so this is
-`Loc(Dctf(X, Λ))`. -/
-noncomputable def localizingBoundedConstructible (X : Scheme.{u}) : ObjectProperty 𝔻(X) :=
-  (boundedConstructible (condensedRingObj Λ X)).localizingClosure
 
 omit [IsCommMonObj Λ] in
 lemma le_localizingBoundedConstructible (X : Scheme.{u}) :
