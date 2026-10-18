@@ -2,7 +2,7 @@
  "id": "lem-per-galois-partition-exact-refinement",
  "kind": "statement",
  "title": "Exactness and common refinements for weak Galois constructibility",
- "statement": "Let $\\ell$ be prime, $\\Lambda=\\mathbf F_\\ell$, let $X$ be a Noetherian scheme [def-pc-scheme], [def-weil-pbc-noetherian-ring], and let $A$ be a commutative Noetherian $\\Lambda$-algebra. Work with module sheaves and their ordinary derived categories on the small etale site [def-weil-pbc-etale-site], [def-weil-pbc-derived-categories]. Constructible means locally constant with finitely generated stalks on a finite locally closed stratification [def-constructible-stratification], [def-weil-pbc-locally-constant-finite-type-modules], [def-weil-finitely-generated-module]. A Galois partition $\\mathcal P$ is a finite locally closed stratification of $X$ by connected reduced subschemes $S_i$, with a connected finite etale Galois covering $V_i\\to S_i$ for each stratum. Here Galois means that a finite group acts on the cover and acts simply transitively on every geometric fibre. Let $\\mathcal W_{\\mathcal P}(A)$ be the class of sheaves whose restriction to each $S_i$ is a filtered colimit of sheaves obtained by finite successive extensions of locally constant $A$-module sheaves which become constant on $V_i$. No finite-generation condition is imposed in $\\mathcal W_{\\mathcal P}(A)$. Write $D^b_{\\mathcal P}(X,A)$ for bounded complexes whose cohomology sheaves belong to this class. The full subcategory $\\mathcal W_{\\mathcal P}(A)$ is abelian, its inclusion into module sheaves is exact, and it is closed under extensions and all filtered colimits. Its full subcategory of constructible objects is also closed under kernels, cokernels and extensions. Given finitely many Galois partitions, there exists a common Galois refinement $\\mathcal R$: for every commutative coefficient algebra $B$, each corresponding $\\mathcal W_{\\mathcal P}(B)$ is contained in $\\mathcal W_{\\mathcal R}(B)$. One may choose the refinement directed, meaning that its strata can be ordered so that each is open in the reduced closed complement of its predecessors.",
+ "statement": "Let $\\ell$ be prime, $\\Lambda=\\mathbf F_\\ell$, let $X$ be a Noetherian scheme [def-pc-scheme], [def-weil-pbc-noetherian-ring], and let $A$ be a commutative Noetherian $\\Lambda$-algebra. Work with modules over the constant ring sheaf $A_X$ [def-weil-pbc-constant-sheaf, def-weil-sheaf-of-modules-category] and their ordinary derived categories on the small etale site [def-weil-pbc-etale-site], [def-weil-pbc-derived-categories]. Constructible means locally constant with finitely generated stalks on a finite locally closed stratification [def-constructible-stratification], [def-weil-pbc-locally-constant-finite-type-modules], [def-weil-finitely-generated-module]. A Galois partition $\\mathcal P$ is a finite locally closed stratification of $X$ by connected reduced subschemes $S_i$, with a connected finite etale Galois covering $V_i\\to S_i$ for each stratum. Here Galois [def-galois-object] means that a finite group acts on the cover and acts simply transitively on every geometric fibre. Let $\\mathcal W_{\\mathcal P}(A)$ be the class of sheaves whose restriction to each $S_i$ is a filtered colimit of sheaves obtained by finite successive extensions of locally constant $A$-module sheaves which become constant on $V_i$. No finite-generation condition is imposed in $\\mathcal W_{\\mathcal P}(A)$. Write $D^b_{\\mathcal P}(X,A)$ for bounded complexes whose cohomology sheaves belong to this class. The full subcategory $\\mathcal W_{\\mathcal P}(A)$ is abelian, its inclusion into module sheaves is exact, and it is closed under extensions and all filtered colimits. Its full subcategory of constructible objects is also closed under kernels, cokernels and extensions. Given finitely many Galois partitions, there exists a common Galois refinement $\\mathcal R$: for every commutative coefficient algebra $B$, each corresponding $\\mathcal W_{\\mathcal P}(B)$ is contained in $\\mathcal W_{\\mathcal R}(B)$. One may choose the refinement directed, meaning that its strata can be ordered so that each is open in the reduced closed complement of its predecessors.",
  "source": {
   "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
   "place": "Expose XVII, Definitions 7.3.1-7.3.5, Proposition 7.3.4, Proposition 7.3.6, Exercise 7.3.8 and Definition 7.4.5, pp. 303-307. These are Galois-partition results, not statements supplied by a Stacks tag."
@@ -15,11 +15,144 @@
   "def-constructible-stratification",
   "def-weil-pbc-locally-constant-finite-type-modules",
   "def-weil-finitely-generated-module",
-  "def-weil-pbc-category-colimit"
+  "def-weil-pbc-category-colimit",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-sheaf-of-modules-category",
+  "def-galois-object"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "All restrictions below are ordinary inverse images with constant coefficients. By [lem-pe-constant-left-module-inverse-image], restriction to a stratum is exact, and its underlying abelian inverse image agrees with the usual one. By [lem-weil-pbc-inverse-image-preserves-colimits] and [lem-weil-pbc-module-sheaves-colimits-forgetful] it also preserves small filtered colimits: apply the abelian colimit comparison and forget scalars; both sides carry the induced scalar action, so the comparison is linear. The latter node supplies the ambient abelian category and its kernels and cokernels. These observations hold for every commutative coefficient ring, with no finite-generation assumption.",
+   "uses": [
+    "lem-pe-constant-left-module-inverse-image",
+    "lem-weil-pbc-inverse-image-preserves-colimits",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "7.3.4; fixed-ring restriction: sites.tex Tag 00YV (proposition-functoriality-algebraic-structures-topoi); sites-modules.tex Tags 03DA, 03DB (lemma-abelian, lemma-limits-colimits)."
+   }
+  },
+  {
+   "text": "Fix a stratum $S_i$, write $c:V_i\\to S_i$ for its cover, and fix a geometric point of $V_i$. Put $G_i=\\pi_1(S_i)$ and $H_i=c_*\\pi_1(V_i)$ as in [lem-per-torsion-local-system-monodromy]. By [thm-galois-fundamental], $H_i$ is the open stabilizer of a point of the geometric fibre of $c$. By [def-galois-object] the deck group acts simply transitively on that fibre, commuting with $G_i$, so all points have the same stabilizer, which is the kernel of the action: $H_i$ is open normal. A sheaf $L$ on $S_i$ with $c^{-1}L$ constant is a local system by the descent clause of [lem-per-torsion-local-system-monodromy] (a constant sheaf on the connected $V_i$ is a local system), and is locally constant since $c$ is an etale covering. By the pullback clause of that node these are exactly the local systems whose discrete module has trivial $H_i$-action. Since $\\ell A=0$, its torsion-extension clause keeps finite successive ambient extensions of such sheaves in the local-system category, and the exact equivalence transports finite filtrations in both directions: these extensions correspond exactly to $H_i$-unipotent modules. Requiring the generators to be locally constant of finite type does not change the filtered-colimit class: exhaust a discrete module $M$ by the $A$-spans $N$ of finite unions of $G_i$-orbits (orbits are finite, stabilizers being open in a compact group). Each $N$ is $G_i$-stable and finitely generated, ind-unipotent by submodule closure in [lem-per-normal-subgroup-ind-unipotence], hence unipotent by its finite-generation clause. The quotients of that filtration are subquotients of $N$, finitely generated by [lem-weil-pbc-noetherian-submodule-finite] as $A$ is Noetherian, so their local systems are locally constant of finite type by the finite-type clause of the monodromy lemma. Hence the class in the item is exactly the class of $H_i$-ind-unipotent modules.",
+   "uses": [
+    "lem-per-torsion-local-system-monodromy",
+    "def-galois-object",
+    "thm-galois-fundamental",
+    "lem-per-normal-subgroup-ind-unipotence",
+    "lem-weil-pbc-noetherian-submodule-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "7.2.3-7.2.5 (descent clause: 7.2.4, p. 302); 7.3.2-7.3.4; 11.2.1(ix),(xi), 11.3.2-11.3.4."
+   }
+  },
+  {
+   "text": "For a map $E\\to F$ with $E,F\\in\\mathcal W_{\\mathcal P}(A)$, Step 1 computes its restricted ambient kernel and cokernel on each $S_i$. The local-system lemma [lem-per-torsion-local-system-monodromy] identifies these with the kernel and cokernel of the corresponding monodromy map. They are $H_i$-ind-unipotent by [lem-per-normal-subgroup-ind-unipotence], so Step 2 puts both global sheaves in $\\mathcal W_{\\mathcal P}(A)$. For an ambient short exact sequence with endpoints in this class, the torsion local-system extension assertion first puts the restricted middle term in the local-system category; ind-unipotent extension closure then applies to its discrete representation. For a filtered diagram, restriction and the monodromy equivalence commute with its colimit, and ind-unipotent closure gives the same conclusion. Zero and finite direct sums belong as well (a direct sum is an extension). Thus the full additive subcategory has the ambient kernels and cokernels; the ambient coimage-image isomorphism belongs to it by fullness. It is abelian with exact inclusion and has the claimed closure properties.",
+   "uses": [
+    "lem-per-torsion-local-system-monodromy",
+    "lem-per-normal-subgroup-ind-unipotence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "7.3.4, using 7.2.4-7.2.5 and 11.3.4."
+   }
+  },
+  {
+   "text": "Within $\\mathcal W_{\\mathcal P}(A)$, constructibility is equivalent to finite generation of all geometric stalks. In one direction this follows from the definition of a finite constructible stratification. In the other, on each connected $S_i$ the restriction is a local system by Step 2, and [lem-per-torsion-local-system-monodromy] makes it locally constant of finite type when its stalk is finite over $A$. The given finite partition is therefore a constructible stratification. On a stratum, exactness in the monodromy equivalence computes the stalk kernel, cokernel and extension as those of $A$-modules. The kernel is finite by [lem-weil-pbc-noetherian-submodule-finite], since $A$ is Noetherian; a cokernel is generated by the images of finitely many generators. An extension of finite modules is generated by generators of the submodule and finitely many lifts of generators of the quotient. Step 3 and this criterion prove closure of the constructible subcategory under all three operations.",
+   "uses": [
+    "lem-per-torsion-local-system-monodromy",
+    "lem-weil-pbc-noetherian-submodule-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "7.4.5, with 7.2.3 and finite-type module arithmetic; algebra.tex Tag 00IK (lemma-Noetherian-basic)."
+   }
+  },
+  {
+   "text": "For the geometric refinement, first intersect the finitely many underlying stratifications, using actual fibre products of their stratum immersions as in [lem-weil-pbc-constructible-stratification-intersection]. Locally closed subsets of a Noetherian space are constructible: every open subset is quasi-compact, so the expression open intersect closed is constructible. Hence the hypotheses of that node hold. Repeating the binary construction gives finitely many locally closed pieces; discard empty ones. Apply [lem-sfb-noetherian-good-stratification-refinement] to this finite partition to get a finite good refinement $(Q_a)$, whose closures are unions of pieces. Give each $Q_a$ its reduced locally closed structure: in an open neighborhood in the corresponding fibre-product piece where $Q_a$ is closed, use [lem-weil-pbc-reduced-induced-closed-subscheme]. This construction supplies actual morphisms from the new strata to each old stratum, not merely containment of images. If the input family is empty, start with the single underlying piece $X$, and if $X$ is empty use the empty partition.",
+   "uses": [
+    "lem-weil-pbc-constructible-stratification-intersection",
+    "lem-sfb-noetherian-good-stratification-refinement",
+    "lem-weil-pbc-reduced-induced-closed-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "7.3.6-7.3.8; topology.tex Tag 09Y5 (lemma-noetherian-partition-refined-by-stratification); schemes.tex Tag 01J3 (lemma-reduced-closed-subscheme)."
+   }
+  },
+  {
+   "text": "Order the good pieces by successively removing a piece $Q$ with maximal closure among the remaining pieces. Two distinct locally closed disjoint pieces cannot have the same closure: each would be open dense in that closure, so their intersection would be nonempty. If $Q$ met the closure of another remaining piece $Q'$, goodness would give $\\overline Q\\subseteq\\overline {Q'}$, contradicting maximality and this distinctness. Thus the union of the other closures is the complement of $Q$ in the remaining space, which proves $Q$ is open there. The remaining space is closed and the goodness property persists, so this finite procedure gives the required ordering. By [lem-sfb-noetherian-connected-components-open], split each $Q$ into its finitely many nonempty clopen connected components, and list those components consecutively where $Q$ occurred. Each component is open in the current complement; removing earlier components of the same $Q$ does not change this. With the reduced structures from Step 5, these connected pieces form the desired directed underlying stratification.",
+   "uses": [
+    "lem-sfb-noetherian-connected-components-open"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "7.3.5-7.3.6; topology.tex Tags 04MF, 04ME (lemma-locally-Noetherian-locally-connected, lemma-locally-connected); finite ordering argument written out."
+   }
+  },
+  {
+   "text": "Fix a connected new stratum $T$ and a geometric point. Pull back the old covers over all the old strata containing it, and form their finite fibre product $W\\to T$. These are finite etale covers and their product is finite etale by [lem-fet-finite-limits]. Its geometric fibre is a nonempty finite product of nonempty finite fibres. By [lem-fet-galois-category] and [def-galois-category], $W$ is a finite coproduct of connected objects in $\\mathrm{F\\acute Et}(T)$; choose one whose fibre is nonempty. By [lem-galois-object-exists] there is a Galois object $Z$ mapping to that component, hence to every pulled-back cover. It is a connected scheme: a nontrivial clopen decomposition would give a proper noninitial monomorphism in $\\mathrm{F\\acute Et}(T)$, contradicting categorical connectedness. Its automorphism action is simply transitive by [lem-galois-axioms](6). Thus $Z\\to T$ is a connected finite etale Galois cover as required by [def-galois-object]. With no old covers use the identity of $T$. Choose such a cover independently on each of the finitely many new strata.",
+   "uses": [
+    "lem-fet-finite-limits",
+    "lem-fet-galois-category",
+    "def-galois-category",
+    "lem-galois-object-exists",
+    "lem-galois-axioms",
+    "def-galois-object"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "7.3.7-7.3.8; finite etale Galois domination: pione.tex Tag 0BN2 (lemma-galois)."
+   }
+  },
+  {
+   "text": "Let $B$ now be any commutative coefficient ring. Fix an old stratum, its cover $V$, and a new stratum $T$ mapping to it. The chosen cover $Z\\to T$ maps to $V$. If an old generator $L$ becomes constant on $V$, its pullback to $T$ becomes constant on $Z$, because inverse image composes and preserves arbitrary constant modules by [lem-sfb-geometric-inverse-image-constant-module]. In particular that pullback is locally constant: $Z\\to T$ itself is an etale covering trivializing it. Exactness from [lem-pe-constant-left-module-inverse-image] pulls back each finite extension filtration. Finally [lem-weil-pbc-inverse-image-preserves-colimits] and [lem-weil-pbc-module-sheaves-colimits-forgetful] pull back its filtered colimit. This puts the restricted old weakly constructible sheaf in the new class on every $T$. The construction of $Z$ is independent of $B$, so these inclusions hold simultaneously for every $B$. The ordered strata from Step 6 make this common Galois refinement directed.",
+   "uses": [
+    "lem-sfb-geometric-inverse-image-constant-module",
+    "lem-pe-constant-left-module-inverse-image",
+    "lem-weil-pbc-inverse-image-preserves-colimits",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "7.3.6-7.3.8; arbitrary-coefficient constant pullback: sites.tex Tags 0H7J, 00YV (example-constant-sheaf, proposition-functoriality-algebraic-structures-topoi)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-galois-category",
+  "def-galois-object",
+  "lem-fet-finite-limits",
+  "lem-fet-galois-category",
+  "lem-galois-axioms",
+  "lem-galois-object-exists",
+  "lem-pe-constant-left-module-inverse-image",
+  "lem-per-normal-subgroup-ind-unipotence",
+  "lem-per-torsion-local-system-monodromy",
+  "lem-sfb-geometric-inverse-image-constant-module",
+  "lem-sfb-noetherian-connected-components-open",
+  "lem-sfb-noetherian-good-stratification-refinement",
+  "lem-weil-pbc-constructible-stratification-intersection",
+  "lem-weil-pbc-inverse-image-preserves-colimits",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-noetherian-submodule-finite",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "thm-galois-fundamental"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose XVII, 7.2.3-7.2.5, 7.3.2-7.3.8, 7.4.5, 11.2.1 and 11.3.1-11.3.4. The exercise 7.3.8 is expanded using existing Galois-category and good-stratification nodes."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -55,10 +188,45 @@
    "results": "8 hits; top: LightCondensed.instIsGrothendieckAbelianLightCondMod, Condensed.instAB5CondensedMod, Profinite.NobelingProof.succ_exact, CategoryTheory.PreGaloisCategory.PointedGaloisObject.instIsCofilteredOrEmpty, CategoryTheory.PreGaloisCategory.has_decomp_connected_components, CategoryTheory.PreGaloisCategory.has_decomp_connected_components', CategoryTheory.PreGaloisCategory.exists_set_ker_evaluation_subset_of_isOpen, CategoryTheory.PreGaloisCategory.fiber_in_connected_component; note: ; digest: f04478571e86b51f",
    "date": "2026-10-18",
    "verdict": "no match: generic category, scheme, or condensed-module infrastructure does not state this theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Weakly constructible etale module sheaves adapted to a Galois stratification form an exact abelian subcategory closed under filtered colimits and extensions, and Galois stratifications admit directed common refinements",
+   "results": "8 hits; top: LightCondensed.instIsGrothendieckAbelianLightCondMod, Profinite.NobelingProof.succ_exact, instAbelianCondensedMod, Condensed.instAB5CondensedMod, Condensed.instAB4CondensedMod, Condensed.instAB4StarCondensedMod, LightCondensed.instCountableAB4StarLightCondMod, Profinite.NobelingProof.CC_exact; note: ; digest: e069c1370bd6a6db",
+   "date": "2026-10-18",
+   "verdict": "no match: generic sheaf abelianness, Serre classes and set partitions do not give the fixed-Galois-partition theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, IsNoetherian",
+   "results": "0 hits; top: none; note: ; digest: 4f53cda18c2baa0c",
+   "date": "2026-10-18",
+   "verdict": "no match: generic sheaf abelianness, Serre classes and set partitions do not give the fixed-Galois-partition theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "Galois.*partition|weakly.constructible|indUnipotent",
+   "results": "1 hits; top: Mathlib/Data/Setoid/Partition.lean; note: ; digest: 169f775172edefc5",
+   "date": "2026-10-18",
+   "verdict": "no match: generic sheaf abelianness, Serre classes and set partitions do not give the fixed-Galois-partition theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Galois partitions common refinement weakly constructible etale sheaves exact abelian subcategory",
+   "results": "8 hits; top: CategoryTheory.sheafIsAbelian, CategoryTheory.GaloisCategory, CategoryTheory.PreGaloisCategory.IsGalois, CategoryTheory.PreGaloisCategory.GaloisCategory.getFiberFunctor, CategoryTheory.Sheaf.instIsGrothendieckAbelian, CategoryTheory.GaloisCategory.rec, CategoryTheory.PreGaloisCategory.instHasEqualizers, CategoryTheory.GaloisCategory.toPreGaloisCategory; note: ; digest: d47e4fd98a1889a2",
+   "date": "2026-10-18",
+   "verdict": "no match: generic sheaf abelianness, Serre classes and set partitions do not give the fixed-Galois-partition theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Ind unipotent monodromy local systems closed under subobjects quotients extensions and filtered colimits",
+   "results": "8 hits; top: CategoryTheory.ObjectProperty.instIsMultiplicativeMonoModSerre, CategoryTheory.IsGrothendieckAbelian.IsPresentable.injectivity₀, CategoryTheory.ObjectProperty.monoModSerre_of_mono, CategoryTheory.IsGrothendieckAbelian.subobjectMk_of_isColimit_eq_iSup, CategoryTheory.ObjectProperty.monomorphisms_le_monoModSerre, CategoryTheory.IsGrothendieckAbelian.mono_of_isColimit_monoOver, CategoryTheory.IsGrothendieckAbelian.isColimitMapCoconeOfSubobjectMkEqISup, CategoryTheory.IsGrothendieckAbelian.exists_isIso_of_functor_from_monoOver; note: ; digest: 7d05a9bb1e781830",
+   "date": "2026-10-18",
+   "verdict": "no match: generic sheaf abelianness, Serre classes and set partitions do not give the fixed-Galois-partition theorem"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-ctf-hom-condition-b",
@@ -82,5 +250,94 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-galois-partition-exact-refinement",
+  "worker": "stage1",
+  "summary": "Eight steps prove ambient exactness and filtered-colimit/extension closure via torsion local systems and normal-subgroup ind-unipotence, then the constructible closure by Noetherian stalk arithmetic. Common covers are constructed on a directed connected reduced good refinement. Two statement-only children; no Mathlib leaves. Only definition citations were added to the item statement; all coefficient hypotheses and conclusions are unchanged.",
+  "blueprint": "Proof, Step 1 of lem-per-artin-gabber-affine-curve: 'Relative Verdier duality, biduality ... over the same arbitrary field $k$', through lem-per-qbar-arbitrary-field-duality, lem-per-finite-residue-dualizing and lem-per-potential-local-duality; the last node's Step 2 extends finite-field coefficients.; coefficient comparison via ILO XVII 7.6.1, proof p. 314. Subargument: Expose XVII, Definitions 7.3.1-7.3.5, Proposition 7.3.4, Proposition 7.3.6, Exercise 7.3.8 and Definition 7.4.5, pp. 303-307. These are Galois-partition results, not statements supplied by a Stacks tag. The split supplies exactness and simultaneous refinement used in condition-(B) devissage (parent Step 1), below ancestor duality Step 1; it changes neither chapter nor unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-fet-finite-limits",
+    "why": "Generic finite etale base change and finite products used as a black box; no node of the Fourier-perverse unit supplies this foundational input."
+   },
+   {
+    "node": "lem-fet-galois-category",
+    "why": "Generic finite etale Galois-category structure used as a black box; no node of the Fourier-perverse unit supplies this foundational input."
+   },
+   {
+    "node": "lem-galois-axioms",
+    "why": "Generic simple transitivity of automorphisms of Galois objects used as a black box; no node of the Fourier-perverse unit supplies this foundational input."
+   },
+   {
+    "node": "lem-galois-object-exists",
+    "why": "Generic Galois domination of a connected finite cover used as a black box; no node of the Fourier-perverse unit supplies this foundational input."
+   },
+   {
+    "node": "lem-pe-constant-left-module-inverse-image",
+    "why": "Generic constant-coefficient sheaf inverse-image or colimit infrastructure used as a black box; no node of the Fourier-perverse unit supplies this foundational input."
+   },
+   {
+    "node": "lem-sfb-geometric-inverse-image-constant-module",
+    "why": "Generic constant-coefficient sheaf inverse-image or colimit infrastructure used as a black box; no node of the Fourier-perverse unit supplies this foundational input."
+   },
+   {
+    "node": "lem-sfb-noetherian-connected-components-open",
+    "why": "Generic finite clopen component decomposition used as a black box; no node of the Fourier-perverse unit supplies this foundational input."
+   },
+   {
+    "node": "lem-sfb-noetherian-good-stratification-refinement",
+    "why": "Generic topological good refinement used as a black box; no node of the Fourier-perverse unit supplies this foundational input."
+   },
+   {
+    "node": "lem-weil-pbc-constructible-stratification-intersection",
+    "why": "Generic scheme fibre products for common strata used as a black box; no node of the Fourier-perverse unit supplies this foundational input."
+   },
+   {
+    "node": "lem-weil-pbc-inverse-image-preserves-colimits",
+    "why": "Generic constant-coefficient sheaf inverse-image or colimit infrastructure used as a black box; no node of the Fourier-perverse unit supplies this foundational input."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "why": "Generic constant-coefficient sheaf inverse-image or colimit infrastructure used as a black box; no node of the Fourier-perverse unit supplies this foundational input."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-submodule-finite",
+    "why": "Generic finite generation of stalk kernels used as a black box; no node of the Fourier-perverse unit supplies this foundational input."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "why": "Generic actual reduced scheme structures on new strata used as a black box; no node of the Fourier-perverse unit supplies this foundational input."
+   },
+   {
+    "node": "thm-galois-fundamental",
+    "why": "Generic finite-cover monodromy and the subgroup attached to a cover used as a black box; no node of the Fourier-perverse unit supplies this foundational input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-fet-finite-limits",
+  "lem-fet-galois-category",
+  "lem-galois-axioms",
+  "lem-galois-object-exists",
+  "lem-pe-constant-left-module-inverse-image",
+  "lem-sfb-geometric-inverse-image-constant-module",
+  "lem-sfb-noetherian-connected-components-open",
+  "lem-sfb-noetherian-good-stratification-refinement",
+  "lem-weil-pbc-constructible-stratification-intersection",
+  "lem-weil-pbc-inverse-image-preserves-colimits",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-noetherian-submodule-finite",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "thm-galois-fundamental"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q28-91fb14653",
+  "group": "Q28",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q28-91fb14653 (reviewer sub-agent of L); spot-checked: Read in full: the item (8 steps), both new statement-only nodes, the statements of all cited nodes, unit sk-p-dl-a1-perverse, and ILO XVII 7.2.2-7.2.7, 7.3.1-7.3.8, 7.4.3-7.4.5 and 11.1-11.3.4 in the local PDF. The item statement matches ILO 7.3.1-7.3.4, 7.3.6/7.3.8 and 7.4.5. Against live it only adds definition citations, and live is still unsplit. One fault found (C4/E5): Step 2 credited lem-per-torsion-local-system-monodromy with showing that any sheaf L with c^{-1}L constant is a local system. That node only characterizes local systems among local systems, and ILO 7.2.7 shows an étale-locally constant sheaf need not be one. The missing fact is ILO 7.2.4: descent of local systems along a surjective finite étale cover. Repair: I added this as a clause to the new child, whose source already cites 7.2.2-7.2.5, and rewrote Step 2 to cite it. Step 2 also had a small gap, now filled: under the finite-type reading, the subquotients of the finite-orbit span are finitely generated because A is Noetherian (lem-weil-pbc-noetherian-submodule-finite). Steps 1 and 3-8 checked: module-level colimits come via the forgetful node; the reduced strata come from fibre-product pieces, so the old strata really receive maps (no E3); I verified the elementary ordering argument of Step 6; the Galois domination and simple transitivity of Step 7 come from lem-galois-object-exists and lem-galois-axioms(6); Step 8 proves the refinement for every B via inverse image of constant modules. Both new nodes are true (tested on R=0, F_l[t], H=1, Z/l acting on F_l[Z/l], and the nodal cubic). Neither duplicates an existing node or restates a clause of the item. The 14 generic tool_uses are accepted. No SGA citations. Advisory: the plain 'locally constant' in the item's W_P definition cites no definition node (inherited); repaired Step 2 covers both readings.; 2 file(s) fixed by the reviewer"
  }
 }
