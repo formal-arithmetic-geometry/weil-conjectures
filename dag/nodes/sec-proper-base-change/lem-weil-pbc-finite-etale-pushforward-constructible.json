@@ -31,100 +31,91 @@
  ],
  "proof": [
   {
-   "text": "Put $F=h_*G$. By [lem-weil-pbc-constructible-qcqs-affine-local] it suffices to show that $F$ is constructible on every affine open $A\\subseteq U$. We will use inverse image and restriction interchangeably along etale maps: [lem-weil-pbc-etale-inverse-image-restriction] gives the identification on underlying abelian sheaves, and [lemma-weil-pbc-etale-pullback-forget-modules] identifies the underlying abelian inverse image of a module sheaf. This identification is $\\Lambda$-linear: for each $\\lambda\\in\\Lambda$, naturality with respect to the abelian sheaf endomorphism $m\\mapsto\\lambda m$ gives $\\rho(\\lambda m)=\\lambda\\rho(m)$. Local sections of the constant ring are etale locally constant scalars, so the same equality holds for all sections of $\\Lambda_T$. Thus these identifications are isomorphisms of module sheaves, not a change of coefficient category.",
+   "text": "Convert the given finite-module-value constructibility witness to IsConstructibleSheaf by [lem-weil-pbc-constructible-etale-module-sheaf-comparison]. Finite products preserve this predicate: the zero sheaf has the trivial stratification, and binary biproducts are constructible by the common-refinement proof in thm-constructible-serre. Identify biproducts with binary products and use finite-product induction, including the empty product. Isomorphism invariance transports the result.",
    "uses": [
-    "lem-weil-pbc-constructible-qcqs-affine-local",
-    "lem-weil-pbc-etale-inverse-image-restriction",
-    "lemma-weil-pbc-etale-pullback-forget-modules"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 095H, label lemma-pushforward-constructible, proof (module clause)"
-   }
-  },
-  {
-   "text": "For each point $a\\in A$, apply [lem-weil-pbc-finite-etale-etale-local-split] to $h$ at $a\\in U$. Pull the resulting etale neighbourhood back to $A$; [lem-weil-pbc-etale-scheme-base-change] makes it etale over $A$, and the specified point still lies above $a$. The decomposition into copies of the neighbourhood pulls back to the same finite number of copies, by the fibre-product universal property. These neighbourhoods cover $A$. The affine scheme $A$ is qcqs by [lem-weil-pbc-affine-scheme-qcqs]. Apply the covering-refinement clause of [lem-weil-pbc-etale-qcqs-cofinal-finite-coverings] to obtain a finite etale covering $q_b:B_b\\to A$ with each $B_b$ affine and factoring through one such neighbourhood. Pull back the splitting once more. Thus $V\\times_U B_b$ is a finite disjoint union of copies of $B_b$, with sheet maps $s_{bj}:B_b\\to V\\times_U B_b$. Form $B=\\coprod_b B_b$ using [lem-weil-pbc-scheme-coproduct-family]. Its map $q:B\\to A$ is surjective. It is etale by [lem-weil-pbc-etale-local-on-source], since its restriction to each open component is the etale map $q_b$. It is quasi-compact because it is a finite union of quasi-compact affine components, and quasi-separated by [lem-weil-pbc-quasi-separated-affine-cover-criterion], clause (2): the component affine opens have intersections $B_b$ when the indices agree and the empty scheme otherwise, all quasi-compact by [lem-weil-pbc-affine-scheme-qcqs]. Hence $B$ and $A$ meet the qcqs hypotheses of constructibility descent. The finite sheet number is allowed to depend on $b$; no constant rank on the whole base is assumed.",
-   "uses": [
-    "lem-weil-pbc-finite-etale-etale-local-split",
-    "lem-weil-pbc-etale-scheme-base-change",
-    "lem-weil-pbc-etale-qcqs-cofinal-finite-coverings",
-    "lem-weil-pbc-scheme-coproduct-family",
-    "lem-weil-pbc-affine-scheme-qcqs",
-    "lem-weil-pbc-quasi-separated-affine-cover-criterion",
-    "lem-weil-pbc-etale-local-on-source"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale.tex",
-    "place": "Tag 04HN, label lemma-finite-etale-etale-local; literature/stacks-project/topologies.tex Tag 0218, label lemma-etale-affine"
-   }
-  },
-  {
-   "text": "For fixed $b$, put $V_b=V\\times_U B_b$, $h_b:V_b\\to B_b$, and $G_b=G|_{V_b}$. The projection $V_b\\to V$ is etale by [lem-weil-pbc-etale-scheme-base-change], applied to the etale composite $B_b\\to A\\to U$; the open immersion $A\\to U$ and this composite are etale by clauses (1) and (2) of [lem-weil-pbc-etale-composition-cancellation]. Each sheet map is an open immersion, so its composite $B_b\\to V_b\\to V$ is etale by the same clauses. Thus all restrictions used in this step are defined on the small etale sites and are identified with module inverse images by step 1. The restriction of $F$ to $B_b$ is canonically $h_{b*}G_b$. Indeed, on an etale object $W\\to B_b$, the two sides have sections $G(W\\times_U V)$ and $G(W\\times_{B_b}(B_b\\times_U V))$ by [def-weil-pbc-direct-image]. The isomorphism of fibre products is $(w,v)\\mapsto(w,(q_b(w),v))$, with inverse $(w,(b,v))\\mapsto(w,v)$. These maps commute with every $W\\to W_1$ over $B_b$, so they induce inverse sheaf morphisms. They preserve scalar multiplication because the scalar section on each fibre product is the pullback of the same section on $W$. This is the restriction identification of step 1, applied in the module category. By [lem-weil-pbc-direct-image-split-cover-product], $h_{b*}G_b\\cong\\prod_j G_b|_{s_{bj}}$. Each factor is the restriction of $G$ along the composite sheet map $B_b\\to V$. It is constructible by [prop-constructible-pullback], read in $\\mathrm{ModuleCat}(\\Lambda)$; [lem-weil-pbc-constructible-etale-module-sheaf-comparison] identifies its predicate with the finite-module-stratum predicate used here.",
-   "uses": [
-    "def-weil-pbc-direct-image",
-    "lem-weil-pbc-direct-image-split-cover-product",
-    "prop-constructible-pullback",
     "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
-    "lem-weil-pbc-etale-scheme-base-change",
-    "lem-weil-pbc-etale-composition-cancellation"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 095H, label lemma-pushforward-constructible, proof (module clause)"
-   }
-  },
-  {
-   "text": "A finite product of these constructible module sheaves is constructible by an explicit induction using [thm-constructible-serre], clause (2). The product with no factors is the zero sheaf, constant with finite value $0$ on the single stratum $B_b$. If $P$ is the product of the first $r$ factors and $H$ the next factor, the sectionwise sequence $0\\to P\\to P\\times H\\to H\\to0$, with maps $p\\mapsto(p,0)$ and $(p,t)\\mapsto t$, is split exact: its splitting is $t\\mapsto(0,t)$ and its kernel is exactly $P\\times\\{0\\}$. Clause (2) therefore makes $P\\times H$ constructible. This proves the induction for any finite number of factors. Transport the resulting stratum witnesses through the module isomorphisms in step 3; their pullbacks remain isomorphic to the same finite constant modules. Consequently $F|_{B_b}$ is constructible for every $b$.",
-   "uses": [
     "thm-constructible-serre",
+    "lemma-constructible-iso-invariance",
     "def-weil-pbc-etale-constructible-sheaf"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 095H, label lemma-pushforward-constructible, proof (module clause)"
-   }
+   "elementary": false
   },
   {
-   "text": "By [lem-weil-pbc-constructible-qcqs-affine-local], the open cover of $B$ by its finitely many components $B_b$ shows that $q^{-1}(F|_A)$ is constructible. Here its restriction to $B_b$ is $F|_{B_b}$ by step 1, so step 4 provides the local witnesses. Apply [lem-weil-pbc-etale-constructible-surjective-pullback] to the surjective morphism $q:B\\to A$: both schemes are qcqs by step 2 and the coefficient ring is the given finite commutative ring. It follows that $F|_A$ is constructible. Since this holds for every affine open $A\\subseteq U$, the affine-local criterion of step 1 makes $F=h_*G$ constructible on $U$ in precisely the stated global finite-stratification sense.",
+   "text": "For an explicitly split finite cover with clopen coprojections i_j and isomorphisms e_j from the sheets to the base, put s_j = e_j^{-1};i_j. The two inverse identities follow from the isomorphism identities. Apply [lem-weil-pbc-direct-image-split-cover-product]. Each factor is constructible by [prop-constructible-pullback] and [lem-weil-pbc-etale-inverse-image-restriction], applied directly in ModuleCat. Apply step 1 and transport along the product isomorphism.",
    "uses": [
-    "lem-weil-pbc-constructible-qcqs-affine-local",
+    "lem-weil-pbc-direct-image-split-cover-product",
+    "prop-constructible-pullback",
+    "lem-weil-pbc-etale-inverse-image-restriction",
+    "lemma-constructible-iso-invariance"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "At every point x of U choose the neighbourhood g_x:W_x -> U and splitting given by [lem-weil-pbc-finite-etale-etale-local-split]. Pull G back to the fibre product; this is constructible by [prop-constructible-pullback]. Step 2 proves constructibility of its pushforward to W_x. The etale base-change isomorphism [lem-weil-pbc-etale-underived-exchange-restriction], whose existing Lean theorem is generic in the coefficient category, identifies this pushforward with g_x^*(h_*G). Thus h_*G is constructible after pullback to each W_x. The chosen points prove that these neighbourhoods cover U.",
+   "uses": [
+    "lem-weil-pbc-finite-etale-etale-local-split",
+    "prop-constructible-pullback",
+    "lem-weil-pbc-etale-underived-exchange-restriction",
+    "lemma-constructible-iso-invariance",
+    "lem-weil-pbc-etale-scheme-base-change"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply [lem-weil-pbc-etale-qcqs-cofinal-finite-coverings] directly to this cover of the qcqs scheme U. Obtain a finite affine covering D_b -> U and actual morphisms D_b -> W_{a(b)} over U. Pull back the witnesses from step 3 along these morphisms. The inverse-image composition isomorphism and the factorization equality give constructibility of (D_b -> U)^*(h_*G).",
+   "uses": [
+    "lem-weil-pbc-etale-qcqs-cofinal-finite-coverings",
+    "prop-constructible-pullback",
+    "lem-weil-pbc-inverse-image-composition",
+    "lemma-constructible-iso-invariance"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Let D be the coproduct of the finitely many affine D_b. By [lem-weil-pbc-scheme-coproduct-family] its coprojections are an open cover. The finite coproduct is affine (Mathlib AlgebraicGeometry/Limits.lean, finite-family IsAffine instance), hence qcqs by [lem-weil-pbc-affine-scheme-qcqs]. Its induced map q:D -> U is surjective because the D_b cover U. For the pullback q^*(h_*G), restriction to each coprojection agrees, by inverse-image composition and Sigma.ι_desc, with the constructible sheaf of step 4.",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-inverse-image-composition",
+    "lemma-constructible-iso-invariance"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Constructibility on a finite affine open cover implies global constructibility by [lem-weil-pbc-etale-stratification-local-gluing-core]: replace each open immersion by its isomorphic open range, choose a constructible stratification there, and apply the theorem to obtain a global partition with actual factorization maps into the local strata. Pull their finite locally constant sheaves back along those maps; the composition isomorphisms identify the results with the global stratum restrictions. This proves q^*(h_*G) constructible. Convert back by the module-sheaf comparison and apply [lem-weil-pbc-etale-constructible-surjective-pullback] to q. Both D and U are qcqs, and q is surjective, so h_*G is constructible. All empty-index cases are retained.",
+   "uses": [
+    "lem-weil-pbc-etale-stratification-local-gluing-core",
+    "prop-constructible-pullback",
+    "lem-weil-pbc-inverse-image-composition",
+    "lemma-constructible-iso-invariance",
+    "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
     "lem-weil-pbc-etale-constructible-surjective-pullback"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 095H, label lemma-pushforward-constructible, proof (module clause)"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-constructible-qcqs-affine-local",
-  "lem-weil-pbc-etale-inverse-image-restriction",
-  "lemma-weil-pbc-etale-pullback-forget-modules",
-  "lem-weil-pbc-finite-etale-etale-local-split",
-  "lem-weil-pbc-etale-scheme-base-change",
-  "lem-weil-pbc-etale-qcqs-cofinal-finite-coverings",
-  "lem-weil-pbc-scheme-coproduct-family",
-  "lem-weil-pbc-affine-scheme-qcqs",
-  "lem-weil-pbc-quasi-separated-affine-cover-criterion",
-  "def-weil-pbc-direct-image",
-  "lem-weil-pbc-direct-image-split-cover-product",
-  "prop-constructible-pullback",
   "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
   "thm-constructible-serre",
+  "lemma-constructible-iso-invariance",
   "def-weil-pbc-etale-constructible-sheaf",
-  "lem-weil-pbc-etale-constructible-surjective-pullback",
-  "lem-weil-pbc-etale-local-on-source",
-  "lem-weil-pbc-etale-composition-cancellation"
+  "lem-weil-pbc-direct-image-split-cover-product",
+  "prop-constructible-pullback",
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "lem-weil-pbc-finite-etale-etale-local-split",
+  "lem-weil-pbc-etale-underived-exchange-restriction",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "lem-weil-pbc-etale-qcqs-cofinal-finite-coverings",
+  "lem-weil-pbc-inverse-image-composition",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-etale-stratification-local-gluing-core",
+  "lem-weil-pbc-etale-constructible-surjective-pullback"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tag 095H, label lemma-pushforward-constructible, proof (module clause)"
+  "place": "Tag 095H, label lemma-pushforward-constructible, module clause and proof; finite affine refinement is applied globally on U, and the existing global stratification-factoring theorem glues over the finite affine coproduct."
  },
  "mathlib_searches": [
   {
@@ -378,5 +369,15 @@
   "by": "NG",
   "date": "2026-10-15",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H8",
+  "result": "pass",
+  "landing": "20261018T062809-L-656027",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
