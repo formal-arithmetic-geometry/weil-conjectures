@@ -4617,6 +4617,7 @@ public import WeilConjectures.TraceFormula.Correspondence
 public import WeilConjectures.TraceFormula.CorrespondencePair
 public import WeilConjectures.TraceFormula.CurvePieces
 public import WeilConjectures.TraceFormula.DegreeOne
+public import WeilConjectures.TraceFormula.DimensionZero
 public import WeilConjectures.TraceFormula.Dualizing
 public import WeilConjectures.TraceFormula.Fibration
 public import WeilConjectures.TraceFormula.FixedPoint

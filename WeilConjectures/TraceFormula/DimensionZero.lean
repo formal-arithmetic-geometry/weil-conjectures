@@ -302,12 +302,11 @@ noncomputable def weilUpperStarIdIso {Φ : X ⟶ X} (h : Φ ≫ 𝟙 X = 𝟙 X 
     rw [h₂, reassoc_of% (boundedConstructibleUpperStarComp_id_left_app _ ℓ Φ K.carrier)]
     simp)
 
+-- The instances on `Φ` are needed to state the trace formula.
+set_option linter.overlappingInstances false in
 /-- **The degree one trace formula over the empty scheme**: by additivity along the decomposition
 of the empty scheme into two copies of itself (`trace_compactFrobenius_eq_add`), the trace of the
 compactly supported Frobenius is twice itself, hence zero, and there are no rational points. -/
--- The instances `IsFinite Φ.left` and `IsUniversalHomeomorphism Φ.left` are needed to state
--- `TraceFormulaOne`.
-set_option linter.overlappingInstances false in
 theorem traceFormulaOne_of_isEmpty [IsSepClosed k] {Φ : X ⟶ X} [IsFinite Φ.left]
     [IsUniversalHomeomorphism Φ.left] [IsEmpty X.left] (K : WeilBoundedConstructible ℓ Φ) :
     K.TraceFormulaOne := by
