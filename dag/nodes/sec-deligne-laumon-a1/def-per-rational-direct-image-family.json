@@ -1,0 +1,116 @@
+{
+ "id": "def-per-rational-direct-image-family",
+ "kind": "definition",
+ "title": "Actual rational direct image and its normalized scalar comparison",
+ "status": "split",
+ "statement": "Fix a prime $\\ell$, an algebraic closure $\\Omega/\\mathbf Q_\\ell$, and a morphism $f:X\\to Y$ between Noetherian finite-dimensional schemes on which $\\ell$ is invertible. At every finite coefficient field $E$, assume the actual integral derived direct image of [def-weil-derived-direct-image] preserves the bounded constructible complete objects of [def-weil-pbc-bounded-constructible-complete]. Define $D_E$ by restricting that actual integral operation and applying the raw rationalization of [def-weil-pbc-rational-category]. For a coherent morphism $D$ of the scalar systems [prop-weil-pbc-scalar-extension] with components $D_E$, define its normalized direct-image comparison predicate as follows: for every $E\\subset F$, conjugating its comparison by the integral-to-rational scalar comparisons gives the localized canonical ambient direct-image scalar mate on every integral representative. This includes $E=F$. The induced functor on the pair category [def-weil-pbc-finite-stage-pair-category] is the coherent-family descent functor, with its usual comparison-conjugated representative formula.",
+ "stmt_deps": [
+  "def-weil-derived-direct-image",
+  "def-weil-pbc-bounded-constructible-complete",
+  "def-weil-pbc-rational-category",
+  "prop-weil-pbc-scalar-extension",
+  "def-weil-pbc-finite-stage-pair-category"
+ ],
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Section 6.8, Proposition 6.8.14, Remark 6.8.15; explicit common finite coefficient stages"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Rationalized adic derived direct image with coefficient scalar comparison specified by the canonical adjunction mate",
+   "results": "8 hits: CategoryTheory.frobeniusMorphism_mate, SheafOfModules.PullbackConstruction.adjunction, ModuleCat.extendRestrictScalarsAdj, ModuleCat.restrictCoextendScalarsAdj, ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction, CategoryTheory.Adjunction.derivedε, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars, CategoryTheory.Adjunction.derivedε.congr_simp",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical rationalized derived direct image on bounded constructible l adic categories with normalized scalar extension comparison",
+   "results": "8 hits: Condensed.profiniteSolid, localCohomology.diagram, Condensed.profiniteSolidification, CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory, Condensed.profiniteSolidCounit, CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Functor.mapDerivedCategoryFactors, Condensed.profiniteFree",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "pbcDescentDirectImage|PbcDirectImageBetaSpec|PerAdic|structure Base",
+   "results": "3 hits: Mathlib/CategoryTheory/FiberedCategory/BasedCategory.lean, Mathlib/CategoryTheory/FiberedCategory/BasedCategory.lean, Mathlib/CategoryTheory/FiberedCategory/BasedCategory.lean",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.StageSystem, AlgebraicGeometry.Scheme.PerAdic.Base",
+   "results": "0 hits: . loogle: unknown identifier 'CategoryTheory.StageSystem'",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "PerAdic.Base|pbcDescentDirectImage|PbcDirectImageBetaSpec in dag/nodes, WeilConjectures and lean/Sheaf; blueprint_refs.py search finite type scheme / descent direct image",
+   "results": "No existing definition node for these interfaces. No upstream WeilConjectures match. Existing definitions found in Sheaf.Paper.AdicHeartPullbackFibres and Sheaf.Paper.PbcDescentFunctors; bind them unchanged. Other Base structures have different hypotheses and coefficient categories.",
+   "date": "2026-10-18",
+   "verdict": "existing project declarations; no definition node"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-per-qbar-ordinary-adjunction",
+  "date": "2026-10-18",
+  "group": "NA"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Step 2: actual finite-stage ordinary adjunction and descent to the coefficient pair category",
+   "via": [
+    "lem-per-qbar-ordinary-adjunction"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "lean": {
+  "module": "Sheaf.Paper.PbcDescentFunctors",
+  "declaration": "AlgebraicGeometry.Scheme.pbcDescentDirectImage",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.pbcDescentDirectImage",
+   "AlgebraicGeometry.Scheme.PbcDirectImageBetaSpec"
+  ],
+  "statement": "def pbcDescentDirectImage {X Y : Scheme.{u}} (f : X ⟶ Y)\n    (h : ∀ (E : Padic.FiniteCoefficientFields l Ω) (K : pbcIntegralStage l Ω X E),\n      PbcIsBoundedConstructibleComplete Y (pbcStageDatum.{u} l Ω E)\n        ((pbcActualDerivedPush f (pbcStageDatum.{u} l Ω E)).obj K.obj))\n    (E : Padic.FiniteCoefficientFields l Ω) :\n    pbcStageCategory l Ω X E ⥤ pbcStageCategory l Ω Y E",
+  "branch": "newtargets-dag",
+  "by": "NA",
+  "date": "2026-10-18",
+  "existing": true,
+  "note": "R2: binds the unchanged operation definition and canonical scalar-mate predicate, not prop-weil-pbc-descent-functors as a theorem dependency. The choice inside the predicate is the uniquely normalized comparison of pbcScalarDirectImage_rational."
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-de4ce2b47",
+  "group": "NA",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-de4ce2b47",
+  "group": "NA",
+  "result": "pass",
+  "note": "Re-delivery after RETURN e5b4e9e8. R1 fixed: def-weil-pbc-qbar-category record identical to live; item imports NM's IntrinsicQbarCategory. R2 fixed: new existing:true def nodes def-per-adic-base-stages (AdicHeartPullbackFibres: Base/baseNoetherian/baseDimension/basePrimeUnit/stages/inclusion, a module no live node owns) and def-per-rational-direct-image-family (PbcDescentFunctors: pbcDescentDirectImage/PbcDirectImageBetaSpec), recorded signatures verbatim, node texts accurate, no id collision; both theorem stmt_deps dropped. R3 fixed: ip/ir pinned to pbcConditionalIntegral; ep/er/qp/qr have identity components (HEq pins satisfiable, objects defeq or provably equal) and must commute with shifts; with faithful ι, rationalization keeping the same objects, and ιCompFunctorIso commuting with shifts, sIP/sIR/sPE/sRE/sP/sR are all determined, so (a E).CommShift, adj.CommShift and IsTriangulated have content; #synth confirms canonical named instances (commShiftι, pbcRationalizationCommShift, pbcStageInclusionCommShift, pbcActualCompletedPullShift, pbcActualPushShift). Advisory addressed: ai pinned to pbcActualDerivedAdjunction + completed unit, a E to its localization. Statement verbatim; all hypotheses and clauses match; edge cases empty X/Y, f=id, E=F, char 0, all n. nt_compile --json 10.9 s EXIT 0 clean. Advisories only: some used declarations owned by nodes outside stmt_deps or by no node (as in the returned head); adj typed with pbcQbarPullFamily.functor, equal by definition to pbcQbarCompletedPull."
+ }
+}
