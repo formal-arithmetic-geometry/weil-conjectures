@@ -51,6 +51,16 @@ theorem proZero_middle_of_distinguished_tower
       (T.map (homOfLE hnk).op).hom₁ = 0 ∧
       (T.map (homOfLE hnk).op).hom₃ = 0) :
     ∀ n : ℕ, ∃ (k : ℕ) (hnk : n ≤ k), (T.map (homOfLE hnk).op).hom₂ = 0 := by
-  sorry
+  intro n
+  obtain ⟨m, hnm, ha, _⟩ := hAC n
+  obtain ⟨h, hh⟩ := Triangle.yoneda_exact₂ _ (hT m)
+    (T.map (homOfLE hnm).op).hom₂ (by
+      rw [(T.map (homOfLE hnm).op).comm₁, ha, zero_comp])
+  obtain ⟨k, hmk, _, hc⟩ := hAC m
+  refine ⟨k, hnm.trans hmk, ?_⟩
+  have hcomp : (homOfLE (hnm.trans hmk)).op =
+      (homOfLE hmk).op ≫ (homOfLE hnm).op := Subsingleton.elim _ _
+  rw [hcomp, T.map_comp, comp_hom₂, hh, ← Category.assoc,
+    ← (T.map (homOfLE hmk).op).comm₂, hc, comp_zero, zero_comp]
 
 end CategoryTheory.Pretriangulated
