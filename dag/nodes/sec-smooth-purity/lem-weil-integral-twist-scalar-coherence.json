@@ -16,11 +16,167 @@
   "def-weil-pbc-proetale-site",
   "def-weil-derived-complete-integral-detailed",
   "def-weil-completed-integral-coefficients",
-  "def-weil-rationalization-karoubi"
+  "def-weil-rationalization-karoubi",
+  "lem-weil-integral-twist-base-change",
+  "lem-pc-kflat-resolution",
+  "def-coefficient-twists-detailed"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $L_H=\\mathcal O_H(m)$, $W_H(K)=K(m)$, $T_{J/H}(K)=K\\otimes^L_{R_H}R_J$, and $B_{J/H}=\\operatorname{Ext}_{J/H}$. Write $\\theta_{J/H}:L_H\\otimes_{R_H}R_J\\xrightarrow{\\sim}L_J$ for [lem-weil-integral-twist-base-change]. Its tower clause gives, for every local section $l$ of $L_E$,\n$$\\theta_{G/F}(\\theta_{F/E}(l\\otimes1)\\otimes1)=\\theta_{G/E}(l\\otimes1).$$\nThis holds for every integer $m$, including dual twists. By [lem-weil-integral-twist-derived-scalar], the ordinary comparison $\\alpha_{J/H,K}:T_{J/H}W_HK\\to W_JT_{J/H}K$ has the displayed chain formula in that node and its conjugate is $\\beta_{J/H,K}$. In particular that node gives the comparisons in the completed integral categories, so $(B_{J/H}K)(m)\\in D^b_c(S,\\mathcal O_J)$ for $K\\in D^b_c(S,\\mathcal O_H)$. For $C(m)$ itself apply its case $F=E$: $(B_{E/E}C)(m)\\in D^b_c(S,\\mathcal O_E)$, and $C\\cong B_{E/E}C$ by $\\chi_{E/E,C}$ after the multiplication isomorphism; so $C(m)$ lies in this full subcategory, defined by isomorphism-invariant conditions, and is derived complete. The natural isomorphisms $\\chi_{J/H,K}:T_{J/H}K\\to B_{J/H}K$ are those of [lem-weil-finite-free-completed-scalar-comparison]. Derived completeness of $C$ follows from [def-weil-derived-complete-integral-detailed]; [lem-weil-integral-scalar-extension-constructible] keeps the successive completed extensions in the integral categories, so every displayed comparison is applicable.",
+   "uses": [
+    "lem-weil-integral-twist-base-change",
+    "lem-weil-integral-twist-derived-scalar",
+    "lem-weil-finite-free-completed-scalar-comparison",
+    "def-weil-derived-complete-integral-detailed",
+    "lem-weil-integral-scalar-extension-constructible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-existence/prop-weil-twist-preserves.proof.md",
+    "place": "Final integral/common-finite-stage sentence: specify the twist-line maps and the ordinary-to-completed comparisons."
+   }
+  },
+  {
+   "text": "The rank-one first twist in clause 3 of [lem-pur-twist-sheaf-locally-free] trivializes on a pro-etale cover. Tensor restriction [lem-sfb-localized-site-tensor-restriction], the tensor-power definition [def-coefficient-twists-detailed], and the localized definition of sheaf Hom [def-pur-sheaf-hom] show that $L_H$ and its dual are free of rank one on that same cover for all signs of $m$. The evaluation maps $L_H\\otimes L_H^\\vee\\to R_H$ and $L_H^\\vee\\otimes L_H\\to R_H$ are locally multiplication, hence isomorphisms: their unique local inverses agree and glue. By [lem-pc-sheaf-modules-tensor-closed], tensor with these two lines gives inverse additive equivalences. These are exact: an inverse equivalence identifies each kernel or cokernel universal problem with the original one. Thus $L_H$ is flat in the sense of [def-pc-flat-sheaf-modules], and tensor with it preserves acyclic complexes by [lem-weil-pbc-exact-functor-complex-cohomology].",
+   "uses": [
+    "lem-pur-twist-sheaf-locally-free",
+    "lem-sfb-localized-site-tensor-restriction",
+    "def-coefficient-twists-detailed",
+    "def-pur-sheaf-hom",
+    "lem-pc-sheaf-modules-tensor-closed",
+    "def-pc-flat-sheaf-modules",
+    "lem-weil-pbc-exact-functor-complex-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-existence/prop-weil-twist-preserves.proof.md",
+    "place": "First and tensor-power/internal-Hom sentences: rank-one lines; exact tensor by the inverse line."
+   }
+  },
+  {
+   "text": "Choose $P\\to C$ K-flat with flat terms by [lem-pc-kflat-resolution]. Then $P\\otimes_{R_E}L_E$ is also K-flat with flat terms. Indeed its terms are flat because their tensor functors are composites of exact tensor functors; for any acyclic $Q$, associativity identifies $Q\\otimes(P\\otimes L_E)$ with $(Q\\otimes P)\\otimes L_E$, acyclic by [def-pc-kflat-complex] and step 2. In total tensor [def-pc-tensor-complex-sheaves], the line is concentrated in degree zero. Rebracketing sums is valid because the tensor-Hom adjunction of [lem-pc-sheaf-modules-tensor-closed] implies preservation of direct sums (both sides represent the product of the Hom sets of the summands). There are no additional differential signs. Apply [lem-pur-kflat-change-of-rings] to $R_E\\to R_F$ and then $R_F\\to R_G$, both for $P$ and for $P\\otimes L_E$. Thus all iterated scalar extensions in the square are computed on these same complexes by [lem-pur-derived-change-of-rings]. Step 1's chain comparison computes $\\alpha$ on them.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "def-pc-kflat-complex",
+    "def-pc-tensor-complex-sheaves",
+    "lem-pc-sheaf-modules-tensor-closed",
+    "lem-pur-kflat-change-of-rings",
+    "lem-pur-derived-change-of-rings"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS (lemma-K-flat-resolution), 0G7E (lemma-pullback-K-flat), 06YY (lemma-derived-base-change); degree-zero line specialization of total tensor."
+   }
+  },
+  {
+   "text": "For $K=C$ or $C(m)$, the ordinary associator $\\mu_K:T_{G/F}T_{F/E}K\\to T_{G/E}K$ is represented on the models of step 3 by\n$$((x\\otimes b)\\otimes c)\\longmapsto x\\otimes\\iota_{FG}(b)c,$$\nwith inverse $x\\otimes c\\mapsto(x\\otimes1)\\otimes c$, where $\\iota_{FG}:R_F\\to R_G$ is the coefficient inclusion. These maps are balanced; their less immediate composite is the identity because $(x\\otimes b)\\otimes c=(x\\otimes1)\\otimes\\iota_{FG}(b)c$. The bilinear universal property [lem-pc-sites-sheaf-tensor-bilinear-universal] and its extension through sheafification [lem-pc-sites-module-sheafification-bilinear-extension] make the formulas sheaf morphisms and allow equality to be checked on these inputs. Since only $x$ has nonzero degree, they are inverse chain maps. By [lem-pur-derived-change-of-rings] they compute the required ordinary derived associativity map. The formulas commute with every chain map of $P$. In a sufficiently large module universe the small pro-etale site meets the size hypothesis of [lem-weil-pbc-site-derived-tensor-descent]; its equivalence from the localization of K-flat flat-term models to the derived category extends this naturality to every derived morphism, since naturality for a quasi-isomorphism also gives naturality for its inverse. Thus $\\mu$ is natural and independent of the model, not merely an objectwise isomorphism.",
+   "uses": [
+    "lem-pc-sites-sheaf-tensor-bilinear-universal",
+    "lem-pc-sites-module-sheafification-bilinear-extension",
+    "lem-pur-derived-change-of-rings",
+    "lem-weil-pbc-site-derived-tensor-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK, section-tensor-product and bilinear universal property after Tag 0GMW; mixed coefficient associator written explicitly."
+   }
+  },
+  {
+   "text": "Start with $u=(((x\\otimes l)\\otimes b)\\otimes c)$ in the common model $((P\\otimes_{R_E}L_E)\\otimes_{R_E}R_F)\\otimes_{R_F}R_G$. By the formula for $\\alpha$ in [lem-weil-integral-twist-derived-scalar], the path that first commutes each extension with twisting gives successively\n$$((x\\otimes b)\\otimes\\theta_{F/E}(l\\otimes1))\\otimes c,$$\n$$((x\\otimes b)\\otimes c)\\otimes\\theta_{G/F}(\\theta_{F/E}(l\\otimes1)\\otimes1),$$\nand finally\n$$(x\\otimes\\iota_{FG}(b)c)\\otimes\\theta_{G/F}(\\theta_{F/E}(l\\otimes1)\\otimes1).$$\nThe other path applies $\\mu_{C(m)}$ and then $\\alpha_{G/E,C}$, giving\n$$(x\\otimes\\iota_{FG}(b)c)\\otimes\\theta_{G/E}(l\\otimes1).$$\nThe tower clause of [lem-weil-integral-twist-base-change] equates these outputs. Repeated use of the bilinear/sheafification universal properties cited in step 4 makes this equality an equality of chain maps, without assuming that global sections are sums of global pure tensors. Therefore, after passage to the derived category,\n$$W_G(\\mu_C)\\,\\alpha_{G/F,T_{F/E}C}\\,T_{G/F}(\\alpha_{F/E,C})=\\alpha_{G/E,C}\\,\\mu_{W_EC}.$$\nThis is the asserted tensor formula, with $bc$ meaning $\\iota_{FG}(b)c$ and $l\\otimes1$ interpreted by $\\theta_{G/E}$.",
+   "uses": [
+    "lem-weil-integral-twist-derived-scalar",
+    "lem-weil-integral-twist-base-change",
+    "lem-pc-sites-sheaf-tensor-bilinear-universal",
+    "lem-pc-sites-module-sheafification-bilinear-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-existence/prop-weil-twist-preserves.proof.md",
+    "place": "Final sentence: common finite stages; compute both ordinary tensor paths using the tower compatibility of twist lines."
+   }
+  },
+  {
+   "text": "For compact notation put $T_1=T_{F/E}$, $T_2=T_{G/F}$, $T_3=T_{G/E}$ and similarly $B_i,\\chi_i,\\alpha_i,\\beta_i$; put $W_0=W_E$, $W_1=W_F$, $W_2=W_G$. Composition in the next equations is read right to left. Define\n$$d_K=\\chi_{2,B_1K}\\,T_2(\\chi_{1,K}):T_2T_1K\\xrightarrow{\\sim}B_2B_1K.$$\nBy naturality of the specified $\\chi$ in [lem-weil-finite-free-completed-scalar-comparison], this also equals $B_2(\\chi_{1,K})\\,\\chi_{2,T_1K}$. The stipulated transport defining $a$ is exactly\n$$a_K=\\chi_{3,K}\\,\\mu_K\\,d_K^{-1}.$$\nThe conjugation defining the specified twist comparison in [lem-weil-integral-twist-derived-scalar] is exactly\n$$\\beta_{i,K}=W_j(\\chi_{i,K})\\,\\alpha_{i,K}\\,\\chi_{i,W_hK}^{-1}$$\nfor $i=(j/h)$. These equations use the fixed natural comparisons, rather than any chosen isomorphisms between complete objects.",
+   "uses": [
+    "lem-weil-finite-free-completed-scalar-comparison",
+    "lem-weil-integral-twist-derived-scalar"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-existence/prop-weil-twist-preserves.proof.md",
+    "place": "Final integral/common-stage sentence: expand the specified conjugations before checking coherence."
+   }
+  },
+  {
+   "text": "Here is the cancellation in the left-hand path. Naturality of $\\chi_2$ for $\\beta_{1,C}$ gives\n$$B_2(\\beta_{1,C})\\,\\chi_{2,B_1W_0C}=\\chi_{2,W_1B_1C}\\,T_2(\\beta_{1,C}).$$\nNaturality of $\\alpha_2$ for $\\chi_{1,C}$ gives\n$$\\alpha_{2,B_1C}\\,T_2W_1(\\chi_{1,C})=W_2T_2(\\chi_{1,C})\\,\\alpha_{2,T_1C}.$$\nThe first is supplied by [lem-weil-finite-free-completed-scalar-comparison]. The second follows from [lem-weil-integral-twist-derived-scalar]: its $\\beta$ is natural, and conjugating by natural $\\chi$ makes $\\alpha$ natural as well. Expanding $d_{W_0C}$ and both $\\beta$ maps in step 6 and using the first equation cancels $\\chi_{2,W_1B_1C}^{-1}\\chi_{2,W_1B_1C}$ and $T_2(\\chi_{1,W_0C}^{-1}\\chi_{1,W_0C})$. The second equation then gives\n$$\\beta_{2,B_1C}\\,B_2(\\beta_{1,C})\\,d_{W_0C}=W_2(d_C)\\,\\alpha_{2,T_1C}\\,T_2(\\alpha_{1,C}).$$\nMultiplying by $W_2(a_C)$ cancels $W_2(d_C^{-1}d_C)$, leaving $W_2(\\chi_{3,C})$ followed by the left side of the ordinary equality in step 5. Expanding the right-hand path gives\n$$\\beta_{3,C}\\,a_{W_0C}\\,d_{W_0C}=W_2(\\chi_{3,C})\\,\\alpha_{3,C}\\,\\mu_{W_0C}.$$\nStep 5 equates these expressions. Cancel the isomorphism $d_{W_0C}$ to obtain precisely the required completed coherence identity. Since the integral categories are full [def-weil-derived-complete-integral-detailed], the equality holds there as well.",
+   "uses": [
+    "lem-weil-finite-free-completed-scalar-comparison",
+    "lem-weil-integral-twist-derived-scalar",
+    "def-weil-derived-complete-integral-detailed"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-existence/prop-weil-twist-preserves.proof.md",
+    "place": "Final sentence: explicit naturality equations and cancellation transport the tensor calculation to completed scalar extension."
+   }
+  },
+  {
+   "text": "For the identity coefficient extension $H=J$, the map $\\theta_{H/H}$ of [lem-weil-integral-twist-base-change] is the tensor unit. Indeed, on the local generator $e^m$ from step 2 its associativity construction sends $e^m\\otimes b$ to $be^m$ for $m\\geq0$; for $m<0$ its dual-base-change construction has the same formula, as evaluation on $e^{-m}$ shows. Let $u_K:K\\otimes^L_{R_H}R_H\\to K$ be multiplication. The ordinary twist comparison satisfies\n$$W_H(u_K)\\,\\alpha_{H/H,K}=u_{W_HK}:$$\non $(x\\otimes l)\\otimes b$ both sides give $bx\\otimes l=x\\otimes bl$. The ordinary associator of step 4 with $F=E$ gives $x\\otimes bc=bx\\otimes c$; with $G=F$ it gives the target multiplication unit. By [lem-weil-finite-free-completed-scalar-comparison], $\\chi_{H/H,K}$ is the derived-completeness unit after the multiplication identification. Hence the completed identity comparison is $u_K\\chi_{H/H,K}^{-1}$, and substituting it into the displayed equality proves the identity-extension assertion for $\\beta$ and $a$. All calculations include $m=0$, negative $m$, $C=0$ and the empty site; no faithful-fibre argument is used.",
+   "uses": [
+    "lem-weil-integral-twist-base-change",
+    "lem-weil-finite-free-completed-scalar-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-scalar-extension-composition.proof.md",
+    "place": "Integral tensor associativity and identity compatibility; explicit unit formulas, transported by the specified completion map."
+   }
+  },
+  {
+   "text": "By [def-weil-rationalization-karoubi], rationalization retains the same integral objects and tensors Hom groups with the coefficient field. It therefore sends the isomorphism $a_C$ and its inverse to inverse morphisms, preserving all equations above. The resulting map\n$$(C\\otimes_EF)\\otimes_FG\\longrightarrow C\\otimes_EG$$\nis natural even for rational morphisms: for $f\\otimes t$, $t\\in E$, tensor the integral naturality equation by $t$, and extend additively to finite sums. It is the scalar-extension composition isomorphism named in [lem-weil-scalar-extension-composition]: its source constructs that canonical map by integral tensor associativity followed by rationalization. More explicitly, representing both sides through $\\chi$ gives the multiplication formula $((x\\otimes b)\\otimes c)\\mapsto x\\otimes\\iota_{FG}(b)c$ from step 4, so the integral map before rationalization is exactly $\\chi_{3,C}\\mu_Cd_C^{-1}$, not an arbitrary natural isomorphism. This identifies the specified maps and proves the last clause.",
+   "uses": [
+    "def-weil-rationalization-karoubi",
+    "lem-weil-scalar-extension-composition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-scalar-extension-composition.proof.md",
+    "place": "Both proof paragraphs: integral associativity followed by rationalization is the specified canonical rational comparison."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-integral-twist-base-change",
+  "lem-weil-integral-twist-derived-scalar",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "def-weil-derived-complete-integral-detailed",
+  "lem-weil-integral-scalar-extension-constructible",
+  "lem-pur-twist-sheaf-locally-free",
+  "lem-sfb-localized-site-tensor-restriction",
+  "def-coefficient-twists-detailed",
+  "def-pur-sheaf-hom",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "def-pc-flat-sheaf-modules",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-pc-kflat-resolution",
+  "def-pc-kflat-complex",
+  "def-pc-tensor-complex-sheaves",
+  "lem-pur-kflat-change-of-rings",
+  "lem-pur-derived-change-of-rings",
+  "lem-pc-sites-sheaf-tensor-bilinear-universal",
+  "lem-pc-sites-module-sheafification-bilinear-extension",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "def-weil-rationalization-karoubi",
+  "lem-weil-scalar-extension-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-existence/prop-weil-twist-preserves.proof.md",
+  "place": "Final integral/common-finite-stage sentence; explicit tensor calculation and naturality cancellation, supported by Stacks 03EK, 0GMW, 06YS, 0G7E, 06YY and the current scalar-extension-composition proof."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -56,9 +212,51 @@
    "results": "IsBaseChange.comp",
    "date": "2026-10-17",
    "verdict": "no match: generic localization, module base change or colimits of types do not state this completed-sheaf/coefficient-category assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "twist.*scalar|scalar.*twist|completed.*tensor",
+   "results": "No hits",
+   "date": "2026-10-18",
+   "verdict": "no match: ordinary module associativity/base-change or adic completion infrastructure does not state the specified twist/completed-scalar comparison in the derived category of completed coefficient sheaves"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The natural isomorphisms commuting Tate twists with extension of scalars satisfy the associativity coherence square for a tower of coefficient fields",
+   "results": "ModuleCat.extendScalars_assoc; ModuleCat.extendScalars_assoc'; ModuleCat.extendScalars_assoc_assoc; CategoryTheory.MonoidalCoherence.assoc; Algebra.TensorProduct.assoc; TensorProduct.tensorTensorTensorAssoc; Coalgebra.TensorProduct.assoc; CategoryTheory.NatTrans.CommShift.associator",
+   "date": "2026-10-18",
+   "verdict": "no match: ordinary module associativity/base-change or adic completion infrastructure does not state the specified twist/completed-scalar comparison in the derived category of completed coefficient sheaves"
+  },
+  {
+   "tool": "loogle",
+   "query": "TensorProduct.assoc",
+   "results": "TensorProduct.assoc; TensorProduct.assoc_tmul; TensorProduct.lid_tensor; TensorProduct.assoc_symm_tmul; TensorProduct.leftComm_def; TensorProduct.rightComm_def; LinearMap.lTensor_rTensor_comp_assoc; Equiv.tensorProductAssoc_def",
+   "date": "2026-10-18",
+   "verdict": "no match: ordinary module associativity/base-change or adic completion infrastructure does not state the specified twist/completed-scalar comparison in the derived category of completed coefficient sheaves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Completed scalar extension of a derived complete sheaf complex commutes with Tate twist compatibly with a tower of finite l-adic fields",
+   "results": "AdicCompletion.instIsScalarTower; LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat; LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat; AdicCompletion.instIsScalarTower_1; LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf; AdicCompletion.ofTensorProduct_tmul; Condensed.profiniteSolid; AdicCompletion.ofTensorProduct_naturality",
+   "date": "2026-10-18",
+   "verdict": "no match: ordinary module associativity/base-change or adic completion infrastructure does not state the specified twist/completed-scalar comparison in the derived category of completed coefficient sheaves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatibility of the tensor base change natural map for an invertible sheaf with composition of two extension of scalars functors",
+   "results": "IsBaseChange.of_comp; IsBaseChange.comp; IsBaseChange.comp_iff; ModuleCat.extendScalarsComp_hom_app_one_tmul; isBaseChange_tensorProduct_map; LinearMap.baseChange_baseChange; TensorProduct.AlgebraTensorModule.lTensor_comp_cancelBaseChange; LinearMap.rTensor_baseChange",
+   "date": "2026-10-18",
+   "verdict": "no match: ordinary module associativity/base-change or adic completion infrastructure does not state the specified twist/completed-scalar comparison in the derived category of completed coefficient sheaves"
+  },
+  {
+   "tool": "grep",
+   "query": "extendScalars_assoc|def assoc|theorem assoc_tmul",
+   "results": "Mathlib/Analysis/InnerProductSpace/TensorProduct.lean; Mathlib/LinearAlgebra/TensorProduct/Associator.lean; Mathlib/LinearAlgebra/TensorProduct/Associator.lean; Mathlib/LinearAlgebra/TensorProduct/Tower.lean; Mathlib/LinearAlgebra/TensorProduct/Tower.lean; Mathlib/Algebra/GCDMonoid/Basic.lean; Mathlib/Algebra/GCDMonoid/Nat.lean; Mathlib/LinearAlgebra/QuadraticForm/Basic.lean",
+   "date": "2026-10-18",
+   "verdict": "no match: ordinary module associativity/base-change or adic completion infrastructure does not state the specified twist/completed-scalar comparison in the derived category of completed coefficient sheaves"
   }
  ],
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "prop-weil-twist-preserves",
@@ -76,5 +274,89 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-weil-integral-twist-scalar-coherence",
+  "worker": "stage1",
+  "summary": "No exact sorry-free project declaration found. Proved coherence by the existing twist-line tower comparison, a common K-flat tensor calculation, and explicit cancellation of the specified natural completion maps. Checked identity extensions and identified the rationalized map. No new nodes, no change to the statement.",
+  "blueprint": "Realizes prop-weil-twist-preserves, final proof sentence: integral twists and passage to common finite stages. The item retains its historical blueprint ancestor and unit metadata; the current source is in sec-six-functors-basics.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-finite-free-completed-scalar-comparison",
+    "why": "Supplies the specified natural ordinary-to-completed map and its identity-unit normalization; generic completed coefficient tensor tool. No node of this unit supplies that generic statement."
+   },
+   {
+    "node": "lem-weil-integral-scalar-extension-constructible",
+    "why": "Ensures successive coefficient extensions stay in the stated integral category; generic coefficient functor tool. No node of this unit supplies that generic statement."
+   },
+   {
+    "node": "lem-sfb-localized-site-tensor-restriction",
+    "why": "Identifies restrictions of twist tensor powers on a trivializing cover; generic sheaf tensor tool. No node of this unit supplies that generic statement."
+   },
+   {
+    "node": "lem-pc-sheaf-modules-tensor-closed",
+    "why": "Supplies associativity, units and the tensor-Hom adjunction for module sheaves; generic ringed-site tool. No node of this unit supplies that generic statement."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-complex-cohomology",
+    "why": "Exact tensor with an invertible line preserves acyclic complexes via its cohomology formula; generic abelian-category tool. No node of this unit supplies that generic statement."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Supplies a K-flat resolution with flat terms on the ringed site; generic derived-category tool. No node of this unit supplies that generic statement."
+   },
+   {
+    "node": "lem-pur-kflat-change-of-rings",
+    "why": "Preserves the K-flat flat-term hypotheses through each coefficient extension; generic ringed-site tool. No node of this unit supplies that generic statement."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Computes scalar extension on those models and makes the computation independent of resolution; generic derived tool. No node of this unit supplies that generic statement."
+   },
+   {
+    "node": "lem-pc-sites-sheaf-tensor-bilinear-universal",
+    "why": "Makes pure-input calculations determine sheaf tensor maps; generic ringed-site universal property. No node of this unit supplies that generic statement."
+   },
+   {
+    "node": "lem-pc-sites-module-sheafification-bilinear-extension",
+    "why": "Extends bilinear section formulas through the nested sheaf tensors; generic ringed-site universal property. No node of this unit supplies that generic statement."
+   },
+   {
+    "node": "lem-weil-scalar-extension-composition",
+    "why": "Names the rational scalar-composition comparison with which the item requires agreement; generic coefficient comparison, not a replacement route. No node of this unit supplies that generic statement."
+   },
+   {
+    "node": "lem-pur-twist-sheaf-locally-free",
+    "why": "Supplies the locally free rank-one first twist over the completed coefficient sheaf, for the elementary tensor-power/dual calculation. No node of this unit supplies that generic twist-line fact; this does not replace any six-functor route."
+   },
+   {
+    "node": "lem-weil-pbc-site-derived-tensor-descent",
+    "why": "Supplies the localization equivalence for K-flat flat-term models of a ringed-site derived category, so the explicit chain comparison is natural for derived morphisms. The module universe is enlarged to meet its small-site hypothesis. No node of this unit supplies that generic resolving-class tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-weil-integral-scalar-extension-constructible",
+  "lem-sfb-localized-site-tensor-restriction",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-pc-kflat-resolution",
+  "lem-pur-kflat-change-of-rings",
+  "lem-pur-derived-change-of-rings",
+  "lem-pc-sites-sheaf-tensor-bilinear-universal",
+  "lem-pc-sites-module-sheafification-bilinear-extension",
+  "lem-weil-scalar-extension-composition",
+  "lem-pur-twist-sheaf-locally-free",
+  "lem-weil-pbc-site-derived-tensor-descent"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-NA-42dfea6b7",
+  "group": "NA",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NA-42dfea6b7 (reviewer sub-agent of L); spot-checked: Read in full: the item (unchanged statement, 9 steps), the statements of all 22 proof deps and 12 stmt deps, the proofs of twist-derived-scalar, twist-base-change and scalar-extension-composition, the blueprint prop-weil-twist-preserves (main-20261015, final sentence), and Stacks tags 03EK, 0GMW, 06YS, 0G7E and 06YY, which resolve correctly. No new nodes and no SGA source. The square's types check. I recomputed the step-5 chain paths: both give (x⊗ι(b)c)⊗θ(l⊗1), equal by the base-change node's tower clause. I redid the step-7 cancellation independently (LHS∘d = W(χ3)α3μ = RHS∘d). Step 8 unit normalizations are correct via the χ_{E/E} unit clause. Edge cases checked: m=0, m<0, E=F, F=G, ramified tower, C=0, S empty. No cycle (2307-node closure). I accept all 13 tool_uses as generic tools. FIX: step 1 asserted without derivation that C(m) is in D^b_c(S,O_E) and derived complete, which χ at C(m) and a_{C(m)} need. I added a derivation from the E=F case of lem-weil-integral-twist-derived-scalar plus χ_{E/E} and the iso-invariance of the full subcategory, with no new citation; the corrected item is under fixes/. Maintainer note: step 9 identifies a_C with lem-weil-scalar-extension-composition from that node's proof construction, because its statement only says 'canonical isomorphism'. The map is literally the same, so I accept it here, but that node's statement should name its map.; 1 file(s) fixed by the reviewer"
  }
 }

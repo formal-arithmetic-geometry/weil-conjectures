@@ -3,7 +3,9 @@
  "blueprint": {
   "is": "thm-a1-line-middle-extension-upper",
   "from": null,
-  "same_as": null
+  "same_as": [
+   "sk-thm-dl-a1-upper"
+  ]
  },
  "kind": "statement",
  "title": "Deligne–Laumon affine-line estimate for the middle extension",
@@ -13,6 +15,7 @@
   "place": "node thm-a1-line-middle-extension-upper, order 2806"
  },
  "stmt_deps": [
+  "rem-dl-a1-conventions",
   "def-weil-punctual-weights",
   "def-wf-middle-extension",
   "def-weil-ordinary-compact-cohomology",
@@ -20,80 +23,202 @@
  ],
  "proof": [
   {
-   "text": "*Degrees other than one.* $A_0$ is a smooth geometrically connected\naffine curve, so [lem-a1-middle-extension-endpoints] applied to $j$\ngives $H_c^0(A,j_*\\mathcal F)=0$, the vanishing outside degrees\n$0,1,2$, and the purity of weight $w+2$ of $H_c^2(A,j_*\\mathcal F)$.\nThese are the assertions in all degrees $r\\neq1$.",
+   "text": "The affine line $A_0=\\operatorname{Spec}k_0[t]$ is a smooth geometrically connected affine curve. Apply [lem-a1-middle-extension-endpoints] to the given dense open $j$ and pure lisse sheaf $\\mathcal F$. It gives $H_c^0(A,j_*\\mathcal F)=0$, $H_c^r(A,j_*\\mathcal F)=0$ for $r\\notin\\{0,1,2\\}$, and purity of weight $w+2$ in degree two. A pure Frobenius module of weight $w+2$ has a one-step filtration exhibiting weights at most $w+2$ by [def-weil-frobenius-module-weights]; a zero module has the empty filtration and satisfies every upper bound. Thus only degree one remains.",
    "uses": [
-    "lem-a1-middle-extension-endpoints"
+    "lem-a1-middle-extension-endpoints",
+    "def-weil-frobenius-module-weights"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-thm-dl-a1-upper/thm-a1-line-middle-extension-upper.proof.md",
+    "place": "Degrees other than one"
+   }
   },
   {
-   "text": "*Step 1: a finite constant extension is harmless.* Let\n$k'_0=\\mathbf F_{q^m}$ and replace $U_0\\subset A_0$ and $\\mathcal F$\nby their base changes to $k'_0$. The geometric objects $U\\subset A$,\nthe geometric generic stalk with its geometric monodromy, the sheaf\n$j_*\\mathcal F$ on $A$ and the group $H_c^1(A,j_*\\mathcal F)$ do not\nchange; only the Weil structure is replaced by its $m$-th power, so\nthe Frobenius on $H_c^1$ becomes $F^m$. The base-changed sheaf is still\nlisse, punctually $\\iota$-pure of weight $w$ (a closed point over $x$\nof degree $e$ over $\\kappa(x)$ has local Frobenius $F_x^e$ and norm\n$q_x^e$) and unramified at infinity (the inertia at $\\infty$ is a\nsubgroup of the unchanged geometric fundamental group). By\n[lem-a1-weight-bound-constant-extension] with $b=w+1$, a bound $w+1$\nfor $H_c^1(A,j_*\\mathcal F)$ over $k'_0$ implies the bound over\n$k_0$. We may therefore pass to finite constant extensions freely.",
+   "text": "For a finite constant extension $k'_0=\\mathbf F_{q^m}$, use the same algebraic closure $k$. Then $(U_0\\times_{k_0}k'_0)\\times_{k'_0}k=U$ and likewise the geometric affine line is still $A$. Restricting the Weil structure to this extension retains the underlying sheaf and replaces its Frobenius isomorphism by its $m$-fold composite: [lem-wf-weil-group-constant-extension] identifies the new degree-one element with $s^m$. By [def-weil-frobenius-detailed] the semilinear geometric map is $g_A^m$, not the absolute Frobenius. The underlying open $j:U\\hookrightarrow A$ and the section formula for its ordinary direct image [def-wf-middle-extension] are identical, so the underlying $j_*\\mathcal F$ is identical. Functoriality on the composite Weil isomorphism, using [prop-weil-operations] and [def-weil-ordinary-compact-cohomology], makes its cohomology operator $F^m$. Local Frobenius at a point of residue degree $e$ over $x$ is $F_x^e$, with norm $q_x^e$, so punctual purity retains weight $w$. The geometric inertia group at infinity and its action are unchanged, so unramifiedness is retained. We will descend the bound after working over this extension.",
    "uses": [
-    "lem-a1-weight-bound-constant-extension"
+    "lem-wf-weil-group-constant-extension",
+    "def-weil-frobenius-detailed",
+    "def-wf-middle-extension",
+    "prop-weil-operations",
+    "def-weil-ordinary-compact-cohomology"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-thm-dl-a1-upper/thm-a1-line-middle-extension-upper.proof.md",
+    "place": "Step 1: finite constant extension"
+   }
   },
   {
-   "text": "*Step 2: a composition filtration.* By\n[lem-a1-geometric-constituent-reduction], after a finite constant\nextension $\\mathcal F$ has a finite filtration by lisse Weil subsheaves\n\n$$\n0=\\mathcal F^0\\subset\\mathcal F^1\\subset\\cdots\\subset\\mathcal F^n=\\mathcal F\n$$\n\nwhose graded pieces $\\mathcal M_i=\\mathcal F^i/\\mathcal F^{i-1}$, after\ndiscarding repeated terms, are nonzero, geometrically irreducible and\npunctually $\\iota$-pure of weight $w$. Each $\\mathcal F^i$ is\npunctually $\\iota$-pure of weight $w$ as well: at a closed point $x$\nthe stalk $\\mathcal F^i_{\\bar x}$ is an $F_x$-stable subspace of\n$\\mathcal F_{\\bar x}$, so its eigenvalues are among those of\n$\\mathcal F_{\\bar x}$ by [lem-a1-spectrum-exact-sequence]. Each\n$\\mathcal M_i$ is unramified at infinity: the inertia group at\n$\\infty$ acts trivially on $\\mathcal F_{\\bar\\eta}$, hence on its\nsubquotient $(\\mathcal M_i)_{\\bar\\eta}$\n([def-wf-fundamental-representation]).",
+   "text": "Apply [lem-zl-geometric-constituents-any-base] to $\\mathcal F$ on $U_0$, which is smooth and geometrically connected over $k_0$ (a dense open of the geometrically integral line). After one finite constant extension, harmless by Step 2, there is a filtration $0=\\mathcal F^0\\subset\\cdots\\subset\\mathcal F^n=\\mathcal F$ by lisse Weil subsheaves; remove repeated terms, so the quotients $\\mathcal M_i=\\mathcal F^i/\\mathcal F^{i-1}$ are nonzero, lisse and geometrically irreducible. (The blueprint's geometric-constituent lemma of this unit states only a filtration by Weil subsheaves; Step 4 needs lisse terms.) At a closed point $x$ the stalks give short exact sequences of local Frobenius modules $0\\to\\mathcal F^i_{\\bar x}\\to\\mathcal F_{\\bar x}\\to(\\mathcal F/\\mathcal F^i)_{\\bar x}\\to0$ and $0\\to\\mathcal F^{i-1}_{\\bar x}\\to\\mathcal F^i_{\\bar x}\\to\\mathcal M_{i,\\bar x}\\to0$, so [lem-a1-spectrum-exact-sequence] puts the eigenvalues on $\\mathcal F^i_{\\bar x}$ and on $\\mathcal M_{i,\\bar x}$ among those on $\\mathcal F_{\\bar x}$: every $\\mathcal F^i$ and $\\mathcal M_i$ is punctually pure of weight $w$. In the fundamental representation of [def-wf-fundamental-representation], inertia at infinity acts trivially on the original generic stalk, hence also on every subspace and quotient. Thus each $\\mathcal M_i$ is unramified at infinity. A Weil-stable subspace is in particular geometrically stable, so geometric irreducibility implies irreducibility as a lisse Weil sheaf, with the meaning fixed in [rem-dl-a1-conventions].",
    "uses": [
-    "lem-a1-geometric-constituent-reduction",
+    "lem-zl-geometric-constituents-any-base",
     "lem-a1-spectrum-exact-sequence",
-    "def-wf-fundamental-representation"
+    "def-wf-fundamental-representation",
+    "rem-dl-a1-conventions"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-thm-dl-a1-upper/thm-a1-line-middle-extension-upper.proof.md",
+    "place": "Step 2: composition filtration"
+   }
   },
   {
-   "text": "*Step 3: exactness of the middle extension along the filtration.* For\neach $i$ the sequence $0\\to\\mathcal F^{i-1}\\to\\mathcal F^i\\to\n\\mathcal M_i\\to0$ consists of lisse Weil sheaves on $U_0$ that are all\npunctually $\\iota$-pure of weight $w$. By [p-dl-a1-exact] (with\n$C_0=A_0$),\n\n$$\n0\\longrightarrow j_*\\mathcal F^{i-1}\\longrightarrow j_*\\mathcal F^i\n\\longrightarrow j_*\\mathcal M_i\\longrightarrow0\n$$\n\nis an exact sequence of Weil sheaves on $A_0$. Its long exact\nsequence of compactly supported cohomology, which is\nFrobenius-equivariant because it comes from a triangle of Weil\ncomplexes, contains the exact segment\n\n$$\nH_c^1(A,j_*\\mathcal F^{i-1})\\longrightarrow H_c^1(A,j_*\\mathcal F^{i})\n\\longrightarrow H_c^1(A,j_*\\mathcal M_i).\n$$\n\nHence $H_c^1(A,j_*\\mathcal F^i)$ is an extension of a\nFrobenius-stable subobject of $H_c^1(A,j_*\\mathcal M_i)$ by a\nFrobenius-stable quotient of $H_c^1(A,j_*\\mathcal F^{i-1})$. By\n[lem-a1-subquotient-extension-bounds] and [lem-a1-extension-bounds],\ninduction on $i$ (starting from $H_c^1(A,j_*\\mathcal F^0)=0$) shows\nthat the bound $w+1$ for $H_c^1(A,j_*\\mathcal F)$ follows from the\nsame bound for every $H_c^1(A,j_*\\mathcal M_i)$. No splitting of the\nfiltration is used.",
+   "text": "For each $1\\le i\\le n$, the sequence $0\\to\\mathcal F^{i-1}\\to\\mathcal F^i\\to\\mathcal M_i\\to0$ is short exact in lisse $\\Qlb$-Weil sheaves. By Step 3 its outer terms $\\mathcal F^{i-1}$ and $\\mathcal M_i$ are punctually pure of the same weight $w$ (including the zero first term). The base $A_0$ is smooth of relative dimension one. The dense open $U_0\\subset A_0$ is quasi-compact: its closed complement is $V(f)$ for a nonzero polynomial $f\\in k_0[t]$, so $U_0=D(f)$ is affine; if the complement is empty take $f=1$. Thus the current statement of [p-dl-a1-exact] applies with $C_0=A_0$ and $Z_0=A_0\\setminus U_0$, giving the exact sequence $0\\to j_*\\mathcal F^{i-1}\\to j_*\\mathcal F^i\\to j_*\\mathcal M_i\\to0$ of Weil sheaves. This invocation uses the outer-term purity hypotheses of the current node.",
    "uses": [
-    "p-dl-a1-exact",
+    "p-dl-a1-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-thm-dl-a1-upper/thm-a1-line-middle-extension-upper.proof.md",
+    "place": "Step 3: exactness of ordinary middle extension"
+   }
+  },
+  {
+   "text": "Forget the Weil structures in this short exact sequence. By [lem-a1-adic-middle-extension-constructible] (with $C_0=A_0$) the terms are objects of the constructible heart [def-weil-constructible-heart], with their induced Weil structures. Clause 4 of [lem-weil-heart-short-exact-triangles] produces a distinguished triangle in the underlying $D^b_c(A,\\Qlb)$. Apply the exact compact-support operation for $a_A:A\\to\\operatorname{Spec}k$, whose Weil lift is [prop-weil-operations], and then clause 5 of [lem-weil-heart-short-exact-triangles]. By the definition [def-weil-ordinary-compact-cohomology], this yields an exact triple $V_{i-1}\\xrightarrow{a_i}V_i\\xrightarrow{b_i}W_i$, where $V_i=H_c^1(A,j_*\\mathcal F^i)$ and $W_i=H_c^1(A,j_*\\mathcal M_i)$. Both arrows commute with Frobenius because the original sheaf arrows are Weil morphisms and compact-support cohomology is functorial on them. We require neither a triangulated structure on the category of Weil pairs nor a choice of a Weil-equivariant cone: exactness comes from the underlying triangle and equivariance of these two arrows comes from functoriality.",
+   "uses": [
+    "lem-a1-adic-middle-extension-constructible",
+    "def-weil-constructible-heart",
+    "lem-weil-heart-short-exact-triangles",
+    "prop-weil-operations",
+    "def-weil-ordinary-compact-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-thm-dl-a1-upper/thm-a1-line-middle-extension-upper.proof.md",
+    "place": "Step 3: compact-support exact triple"
+   }
+  },
+  {
+   "text": "Fix one graded piece $\\mathcal M$. If it is geometrically constant, its geometric representation is both trivial and irreducible, so any line is stable and its rank must be one. Its Weil action is therefore given by one scalar $b\\ne0$ raised to the degree, namely the constant Weil twist [def-wf-constant-weil-twist], using the representation [def-wf-fundamental-representation]. Apply [lem-a1-exceptional-constituents] to this rank-one constant sheaf on $U_0$ (without an Artin–Schreier factor). Its $H_c^1(U,\\mathcal M)$ has weights at most $w+1$. The boundary sequence [prop-a1-curve-boundary-sequence] gives a surjection $g$ from this module onto $H_c^1(A,j_*\\mathcal M)$; its statement does not assert Frobenius compatibility. By that statement $g$ is induced by the first arrow $j_!j^*(j_*\\mathcal M)\\to j_*\\mathcal M$ of the open–closed triangle, where $j^*j_*\\mathcal M=\\mathcal M$ by the section formula of [def-wf-middle-extension]. Here $A$, $U$, $Z$ come from $k_0$ and $j_*\\mathcal M$ is a constructible Weil sheaf by [lem-a1-adic-middle-extension-constructible], so this arrow is Weil-equivariant by the last clause of [prop-sf-open-closed-triangle-all-stages]. Compact-support direct image and the composition isomorphism $R(a_Aj)_!\\simeq Ra_{A!}j_!$ are morphisms of Weil complexes by [prop-weil-operations]. Hence $g$ commutes with Frobenius. The quotient bound [lem-a1-subquotient-extension-bounds] gives the required bound for $W_i$. This uses the statement of the exceptional-constituents node, rather than the computation inside its proof.",
+   "uses": [
+    "def-wf-constant-weil-twist",
+    "def-wf-fundamental-representation",
+    "lem-a1-exceptional-constituents",
+    "prop-a1-curve-boundary-sequence",
+    "def-wf-middle-extension",
+    "lem-a1-adic-middle-extension-constructible",
+    "prop-sf-open-closed-triangle-all-stages",
+    "prop-weil-operations",
+    "lem-a1-subquotient-extension-bounds"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-thm-dl-a1-upper/thm-a1-line-middle-extension-upper.proof.md",
+    "place": "Step 4(a): geometrically constant factor"
+   }
+  },
+  {
+   "text": "Choose a nontrivial additive character $\\psi$ of the current finite constant field, in the sense of [def-fd-additive-character]. Such a choice is elementary: choose a nonzero $\\mathbf F_p$-linear functional $L:k'_0\\to\\mathbf F_p$ and a nontrivial $p$-th root of unity $\\zeta\\in\\Qlb$, and put $\\psi(x)=\\zeta^{L(x)}$. The functional is surjective; since $p$ is prime and $\\Qlb$ is algebraically closed of characteristic zero, $\\zeta$ has order $p$. Hence this is a nontrivial homomorphism. If $\\mathcal M$ is not geometrically constant, its nonzero irreducible lisse status and unramifiedness at infinity satisfy [lem-a1-unramified-nonexceptional] for this $\\psi$. It is therefore constituent-nonexceptional, including exclusion of the trivial constituent at $a=0$. Apply the current [cor-a1-fourier-middle-hc1] directly with this character: $j$ is dense in the affine line, $\\mathcal M$ is irreducible lisse, punctually pure of weight $w$, and constituent-nonexceptional. Its conclusion is the bound $w+1$ for $W_i$.",
+   "uses": [
+    "def-fd-additive-character",
+    "lem-a1-unramified-nonexceptional",
+    "cor-a1-fourier-middle-hc1"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-thm-dl-a1-upper/thm-a1-line-middle-extension-upper.proof.md",
+    "place": "Step 4(b): nonconstant factor"
+   }
+  },
+  {
+   "text": "Induct on $i$ in the filtration. The initial term is $V_0=H_c^1(A,j_*0)=0$, so the bound holds by the empty filtration. Suppose it holds for $V_{i-1}$. In the exact triple of Step 5 set $I_i=\\operatorname{im}a_i$ and $J_i=\\operatorname{im}b_i$. These are Frobenius-stable, and $0\\to I_i\\to V_i\\to J_i\\to0$ is exact: its kernel is $\\ker b_i=\\operatorname{im}a_i$. The module $I_i$ is a quotient of $V_{i-1}$, while $J_i$ is a submodule of $W_i$. Steps 6–7 bound $W_i$ by $w+1$; [lem-a1-subquotient-extension-bounds] bounds $I_i$ and $J_i$, and [lem-a1-extension-bounds] bounds their extension $V_i$. Thus the bound holds for $V_n$ over $k'_0$. The argument allows nonsplit sequences and does not assume semisimplicity.",
+   "uses": [
     "lem-a1-subquotient-extension-bounds",
     "lem-a1-extension-bounds"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-thm-dl-a1-upper/thm-a1-line-middle-extension-upper.proof.md",
+    "place": "Step 3: induction through filtration"
+   }
   },
   {
-   "text": "*Step 4: one factor.* Let $\\mathcal M=\\mathcal M_i$; it is a nonzero\nlisse Weil sheaf on $U_0$, geometrically irreducible, punctually\n$\\iota$-pure of weight $w$ and unramified at infinity. A\ngeometrically irreducible sheaf is irreducible as a Weil sheaf, since a\nWeil-stable subspace of $\\mathcal M_{\\bar\\eta}$ is stable under the\ngeometric fundamental group.\n\n(a) *$\\mathcal M$ geometrically constant.* The geometric fundamental\nrepresentation is then trivial and irreducible, so $\\mathcal M$ has\nrank one and is a constant Weil twist in the sense of\n[def-wf-constant-weil-twist]. By [lem-a1-exceptional-constituents]\n(the case without Artin–Schreier factor), $H_c^1(U,\\mathcal M)$ has\nweights at most $w+1$. The boundary sequence\n[prop-a1-curve-boundary-sequence] for $j$ gives a\nFrobenius-equivariant surjection\n$H_c^1(U,\\mathcal M)\\twoheadrightarrow H_c^1(A,j_*\\mathcal M)$, so\n$H_c^1(A,j_*\\mathcal M)$ has weights at most $w+1$ by\n[lem-a1-subquotient-extension-bounds]. (In fact $j_*\\mathcal M$ is the\nlisse constant twist on $A_0$ and $H_c^1(A,j_*\\mathcal M)=0$, as in\nStep 1 of the proof of [lem-a1-exceptional-constituents]; only the\nbound is needed.)\n\n(b) *$\\mathcal M$ not geometrically constant.* Since $\\mathcal M$ is\nirreducible, unramified at infinity and not geometrically constant,\nit is constituent-nonexceptional by\n[lem-a1-unramified-nonexceptional]; by part (1) of\n[lem-a1-constituent-nonexceptional-comparison] its middle extension\n$j_*\\mathcal M$ is Fourier-nonexceptional. Thus $\\mathcal M$ is an\nirreducible lisse Weil sheaf on $U_0$, unramified at infinity,\npunctually $\\iota$-pure of weight $w$, with irreducible geometric\nfundamental representation and Fourier-nonexceptional middle\nextension, and [cor-a1-fourier-middle-hc1] shows that\n$H_c^1(A,j_*\\mathcal M)$ has weights at most $w+1$.",
+   "text": "Return to the original field and put $V=H_c^1(A,j_*\\mathcal F)$, with its original Frobenius $F$. Step 2 identifies the module bounded in Step 8 with $(V,F^m)$ over $\\mathbf F_{q^m}$. A mixed filtration of this module has pure quotients of weights $b_j\\le w+1$. Successive application of [lem-a1-spectrum-exact-sequence] shows that each eigenvalue $\\lambda$ of $F^m$ belongs to a quotient and satisfies $|\\iota\\lambda|^2=(q^m)^{b_j}\\le(q^m)^{w+1}$. Apply [lem-a1-weight-bound-constant-extension] with $b=w+1$. Each eigenvalue $\\alpha$ of $F$ then satisfies $|\\iota\\alpha|^2\\le q^{w+1}$, equivalently $|\\iota\\alpha|\\le q^{(w+1)/2}$ since both sides are nonnegative. The statement [lem-a1-punctual-bound-module-mixed] turns this bound into mixedness of weights at most $w+1$ in the precise filtration sense of the theorem. Together with Step 1 this proves all the assertions, including the case $\\mathcal F=0$ (an empty filtration).",
    "uses": [
-    "def-wf-constant-weil-twist",
-    "lem-a1-exceptional-constituents",
-    "prop-a1-curve-boundary-sequence",
-    "lem-a1-subquotient-extension-bounds",
-    "lem-a1-unramified-nonexceptional",
-    "lem-a1-constituent-nonexceptional-comparison",
-    "cor-a1-fourier-middle-hc1"
+    "lem-a1-spectrum-exact-sequence",
+    "lem-a1-weight-bound-constant-extension",
+    "lem-a1-punctual-bound-module-mixed"
    ],
-   "elementary": false
-  },
-  {
-   "text": "*Conclusion.* By Step 4 every factor satisfies the bound $w+1$; by\nStep 3 so does $H_c^1(A,j_*\\mathcal F)$ over the extended field, and\nby Step 1 over $k_0$. Together with the degrees other than one this\nproves the theorem.",
-   "uses": [],
-   "elementary": null
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-thm-dl-a1-upper/thm-a1-line-middle-extension-upper.proof.md",
+    "place": "Step 1 and Conclusion: descend the mixed bound"
+   }
   }
  ],
  "proof_deps": [
   "lem-a1-middle-extension-endpoints",
-  "lem-a1-weight-bound-constant-extension",
-  "lem-a1-geometric-constituent-reduction",
+  "def-weil-frobenius-module-weights",
+  "lem-wf-weil-group-constant-extension",
+  "def-weil-frobenius-detailed",
+  "def-wf-middle-extension",
+  "prop-weil-operations",
+  "def-weil-ordinary-compact-cohomology",
+  "lem-zl-geometric-constituents-any-base",
   "lem-a1-spectrum-exact-sequence",
   "def-wf-fundamental-representation",
+  "rem-dl-a1-conventions",
   "p-dl-a1-exact",
-  "lem-a1-subquotient-extension-bounds",
-  "lem-a1-extension-bounds",
+  "lem-a1-adic-middle-extension-constructible",
+  "def-weil-constructible-heart",
+  "lem-weil-heart-short-exact-triangles",
   "def-wf-constant-weil-twist",
   "lem-a1-exceptional-constituents",
   "prop-a1-curve-boundary-sequence",
+  "prop-sf-open-closed-triangle-all-stages",
+  "lem-a1-subquotient-extension-bounds",
+  "def-fd-additive-character",
   "lem-a1-unramified-nonexceptional",
-  "lem-a1-constituent-nonexceptional-comparison",
-  "cor-a1-fourier-middle-hc1"
+  "cor-a1-fourier-middle-hc1",
+  "lem-a1-extension-bounds",
+  "lem-a1-weight-bound-constant-extension",
+  "lem-a1-punctual-bound-module-mixed"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-a1/sk-thm-dl-a1-upper/thm-a1-line-middle-extension-upper.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-thm-dl-a1-upper/thm-a1-line-middle-extension-upper.proof.md",
+  "place": "Degrees other than one; Steps 1–4 and Conclusion; expanded exact-triple and mixedness arguments"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Weights of compactly supported cohomology of the middle extension of a pure lisse Weil sheaf on the affine line",
+   "results": "LieModule.exists₂_genWeightSpace_smul_add_eq_bot, CompHausLike.LocallyConstantModule.functor, CategoryTheory.Sheaf.H, Rep.FiniteCyclicGroup.moduleCatCochainComplex, ContinuousCohomology.homogeneousCochains, LieModule.exists_genWeightSpace_smul_add_eq_bot, CompHausLike.LocallyConstantModule.functor_obj_val, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "WeilSheaf|HasWeightsAtMost|compactlySupportedCohomology",
+   "results": "0 hits",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Deligne weight bound for compactly supported cohomology of a pure sheaf",
+   "results": "PrimeSpectrum.ConstructibleSetData.degBound, Condensed, RootPairing.coxeterWeightIn_le_four, RootPairing.coxeterWeightIn_mem_set_of_isCrystallographic, ExistsContDiffBumpBase.w_compact_support, Finsupp.le_weight_of_ne_zero, MvPolynomial.IsWeightedHomogeneous, MvPowerSeries.weightedHomogeneousComponent_of_lt_weightedOrder_eq_zero",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "WeilSheaf, HasWeightsAtMost",
+   "results": "loogle: unknown identifier 'WeilSheaf'",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Frobenius eigenvalues on etale cohomology of pure lisse sheaves have absolute value bounded by q to the half weight",
+   "results": "AlgHom.IsArithFrobAt.apply_of_pow_eq_one, IsArithFrobAt.exists_of_isInvariant, IsArithFrobAt.arithFrobAt, WittVector.StandardOneDimIsocrystal.frobenius_apply, WittVector.isocrystal_classification, WittVector.exists_frobenius_solution_fractionRing, WittVector.instIsocrystalStandardOneDimIsocrystal, arithFrobAt",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_remark",
@@ -731,5 +856,49 @@
   }
  },
  "chapter": "sec-deligne-laumon-a1",
- "unit": "sk-thm-dl-a1-upper"
+ "unit": "sk-thm-dl-a1-upper",
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "thm-a1-line-middle-extension-upper",
+  "worker": "stage1",
+  "summary": "Q144 checked the unchanged statement and the current blueprint proof against all cited node statements. Retained the finite-constant-extension/geometric-constituent/Fourier route. Added existing generic heart triangle and Weil-operation citations for the exact triple, explicitly avoided treating the category of Weil pairs as triangulated, supplied the image/kernel induction, and used the existing punctual-bound-to-mixedness lemma for descent. No new nodes. Actual source still has sorry in the upper-bound theorem; the recorded audit line numbers refer to a different source revision. Repair of the stale-citation return: re-read all current dependency statements; Step 4 now verifies quasi-compactness and the outer-term-only purity assumptions of the current p-dl-a1-exact. Step 7 now supplies a nontrivial additive character and applies the current Fourier corollary directly from constituent-nonexceptionality. Regenerated every verbatim citation against the current DAG and restored the missing unit realization file. Maintainer-reader FIX (2026-10-18): Step 3 now takes the lisse filtration from lem-zl-geometric-constituents-any-base and derives purity of all F^i and M_i from the spectrum lemma; Step 5 cites lem-a1-adic-middle-extension-constructible for membership in the constructible heart; Step 6 proves Frobenius compatibility of the boundary surjection from the equivariant open-closed triangle and the Weil lift of compact support.",
+  "blueprint": "Current main-20261015 thm-a1-line-middle-extension-upper.proof.md: endpoint paragraph -> step 1; finite-extension Step 1 -> steps 2,9; composition Step 2 -> step 3; exactness and induction Step 3 -> steps 4,5,8; one-factor Step 4(a),(b) -> steps 6,7. Both unit proof paragraphs are realized without replacing the Fourier route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-heart-short-exact-triangles",
+    "why": "Generic standard-heart short-exact-to-triangle and cohomology exact-sequence theorem needed to justify the unit’s explicitly invoked compact-support exact triple; no affine-line node states this categorical fact."
+   },
+   {
+    "node": "prop-weil-operations",
+    "why": "The exact compact-support operation and functorial Frobenius lift justify the unit’s compact-support exact triple and powers under constant extension; this is a six-functor tool, not a replacement for its Fourier proof."
+   },
+   {
+    "node": "lem-wf-weil-group-constant-extension",
+    "why": "Identifies the degree-one Weil element over the extended constant field with s^m, supporting the blueprint’s constant-extension step."
+   },
+   {
+    "node": "lem-zl-geometric-constituents-any-base",
+    "why": "Lean-closed statement giving the composition filtration by LISSE Weil subsheaves with geometrically irreducible quotients; the unit's own lem-a1-geometric-constituent-reduction states only 'Weil subsheaves', while p-dl-a1-exact needs lisse terms. Same coefficient conventions (def-wf-fundamental-representation)."
+   },
+   {
+    "node": "prop-sf-open-closed-triangle-all-stages",
+    "why": "Generic open-closed recollement triangle with its Weil-equivariance clause, needed for Frobenius compatibility of the boundary surjection, which prop-a1-curve-boundary-sequence's statement does not assert."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-heart-short-exact-triangles",
+  "prop-weil-operations",
+  "lem-wf-weil-group-constant-extension",
+  "lem-zl-geometric-constituents-any-base",
+  "prop-sf-open-closed-triangle-all-stages"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q144-68b73f17b",
+  "group": "Q144",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q144-68b73f17b (reviewer sub-agent of L); spot-checked: I read the whole delivery: item statement, all 9 steps, every cited node's statement, and the main-20261015 and master blueprint statement and proof. The statement is unchanged and matches the source. I tested it on F constant on A, F trivial on G_m and F=0. I found two repairable faults and wrote a corrected item to fixes/dag/nodes/sec-deligne-laumon-a1/thm-a1-line-middle-extension-upper.json. (1) E1/C4, Step 3: lem-a1-geometric-constituent-reduction only promises a filtration by 'Weil subsheaves', but Step 4 applies p-dl-a1-exact, which needs every F^i to be lisse. Step 3 now cites lem-zl-geometric-constituents-any-base instead: the same filtration by lisse Weil subsheaves, in the same conventions, and its Lean is closed. Purity of every F^i and M_i is now derived from lem-a1-spectrum-exact-sequence. (2) C4, Step 6: prop-a1-curve-boundary-sequence gives the surjection H_c^1(U,M)->H_c^1(A,j_*M) but not its Frobenius compatibility; its own proof says no compatibility is asserted. Step 6 now gets it from the equivariance clause of prop-sf-open-closed-triangle-all-stages, with j_*M a constructible Weil sheaf by lem-a1-adic-middle-extension-constructible, and the Weil lift of compact support in prop-weil-operations. I also added that constructibility citation to Step 5. Other steps checked: D(f) is quasi-compact and the outer terms are pure of one weight for p-dl-a1-exact; the triangle is taken in the underlying category with no equivariant cone; the additive character is built explicitly; constituent-nonexceptionality is what the current Fourier corollary asks for; the image/kernel induction is explicit; descent is via lem-a1-weight-bound-constant-extension and lem-a1-punctual-bound-module-mixed. I accept the three declared tool_uses and added two: lem-zl-geometric-constituents-any-base and prop-sf-open-closed-triangle-all-stages. Batch-5 check, each flagged citation kept as outside both assumptions: rem-dl-a1-conventions reaches only the definition of lisse sheaves. lem-wf-weil-group-constant-extension reaches only the general lisse-sheaf/representation equivalence. lem-a1-punctual-bound-module-mixed reaches only the Frobenius-module definition. prop-weil-operations lifts the six operations to Weil complexes. No trace-formula or Poincare-duality theorem cites it, and it is not in the closure of sk-thm-poincare-duality. Its only PD theorem dependency serves the duality-isomorphism clause, which the item does not use. The nodes my fix adds reach no trace-formula or PD theorem; I deliberately avoided prop-functor-package, which does. The delivery has no new nodes and no duplicates; prop-a1-middle-extension-curve-upper uses this item rather than duplicating it.; 1 file(s) fixed by the reviewer"
+ }
 }
