@@ -15,16 +15,25 @@
  "stmt_deps": [],
  "proof": [
   {
-   "text": "*2 $\\Rightarrow$ 3.* Apply the lifting property to $p=q$ and $f=\\mathrm{id}_S$. Its lift $\\sigma:S\\to P$ is continuous and satisfies $q\\circ\\sigma=\\mathrm{id}_S$, which is precisely a section.",
+   "text": "Apply Mathlib CompactT2.projective_iff_extremallyDisconnected, reversing the equivalence. Its proof is Gleason's minimal closed surjecting source argument, so the unit's projectivity characterization is retained.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "Mathlib/Topology/ExtremallyDisconnected.lean",
+    "place": "CompactT2.projective_iff_extremallyDisconnected, lines 285–287; the forward and reverse implications are Projective.extremallyDisconnected and ExtremallyDisconnected.projective."
+   }
+  },
+  {
+   "text": "A projective S has sections of compact Hausdorff surjections onto S: apply its lifting property to the identity S → S and the given surjection q.",
    "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/topology.tex",
-    "place": "Tag 08YN, proof, implication (3) to (2) in the source numbering."
+    "place": "Tag 08YN, proposition-projective-in-category-hausdorff-qc, lifting the identity."
    }
   },
   {
-   "text": "*3 $\\Rightarrow$ 2, admissibility of the pullback.* Given $p:X\\to Y$ and $f:S\\to Y$ as in 2, set $P=\\{(s,x)\\in S\\times X:f(s)=p(x)\\}$ with the subspace topology. The product $S\\times X$ is quasi-compact by [lem-weil-pbc-tychonoff-product-quasi-compact] with a two-element index set. It is Hausdorff: distinct pairs differ in a coordinate, whose disjoint neighbourhoods pull back to disjoint product neighbourhoods. The subset $P$ is closed: if $f(s)\\ne p(x)$, disjoint open neighbourhoods of these points in $Y$ pull back to a product neighbourhood of $(s,x)$ avoiding $P$. Thus [lem-weil-pbc-closed-in-quasi-compact] makes $P$ quasi-compact, and intersecting disjoint ambient neighbourhoods with $P$ makes it Hausdorff.",
+   "text": "Conversely, let p : X → Y be a continuous surjection of compact Hausdorff spaces and f : S → Y continuous. The product S × X is compact by the finite-product case of [lem-weil-pbc-tychonoff-product-quasi-compact] and Hausdorff by the product instance. Its equalizer P = {(s,x) | f(s) = p(x)} is closed by isClosed_eq, since Y is Hausdorff. Thus P is compact by [lem-weil-pbc-closed-in-quasi-compact] and Hausdorff as a subtype. The first projection q is continuous and surjective, by surjectivity of p. Apply the section hypothesis to q. The second projection of its continuous section σ is the lift: membership of σ(s) in P gives p(pr₂(σ(s))) = f(pr₁(σ(s))) = f(s).",
    "uses": [
     "lem-weil-pbc-tychonoff-product-quasi-compact",
     "lem-weil-pbc-closed-in-quasi-compact"
@@ -32,139 +41,27 @@
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/topology.tex",
-    "place": "Tag 08YN, proof, pullback argument; Tag 08ZU, theorem-tychonov; Tag 005C, lemma-closed-in-quasi-compact."
+    "place": "Tag 08YN, pullback argument for projectivity from sections."
    }
   },
   {
-   "text": "*3 $\\Rightarrow$ 2, lift.* The projection $q:P\\to S$ is continuous, and it is surjective because for any $s$ surjectivity of $p$ supplies $x$ with $p(x)=f(s)$. Apply 3 to this compact Hausdorff source to obtain a continuous section $\\sigma$. The second projection gives $g=\\mathrm{pr}_X\\circ\\sigma$; for each $s$, membership $\\sigma(s)\\in P$ gives $p(g(s))=f(q(\\sigma(s)))=f(s)$.",
+   "text": "Under ExtremallyDisconnected S, Mathlib's instance in Topology/ExtremallyDisconnected.lean gives TotallySeparatedSpace S using Hausdorffness, and the standard instance gives TotallyDisconnectedSpace S.",
    "uses": [],
    "elementary": true,
    "source": {
-    "document": "literature/stacks-project/topology.tex",
-    "place": "Tag 08YN, proof, pullback argument, with its omitted details supplied."
-   }
-  },
-  {
-   "text": "*3 $\\Rightarrow$ 1, the test surjection.* For open $U\\subset S$, put $A=\\overline U$ and $B=S\\setminus U$ with their subspace topologies. Both are closed in $S$, hence quasi-compact by [lem-weil-pbc-closed-in-quasi-compact], and Hausdorff by restriction of disjoint neighbourhoods in $S$. Give $P=A\\sqcup B$ the disjoint union topology. It is quasi-compact: restrict an open covering to each summand, take finite subcoverings there, and unite the two finite families. It is Hausdorff by separation within a summand and by the disjoint open summands for points in different summands. The two inclusions define a continuous surjection $q:P\\to S$, since $A\\cup B=S$. By 3 it has a continuous section $\\sigma$.",
-   "uses": [
-    "lem-weil-pbc-closed-in-quasi-compact"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/topology.tex",
-    "place": "Tag 08YN, proof, last paragraph: the surjection from the disjoint union of the closure and complement."
-   }
-  },
-  {
-   "text": "*3 $\\Rightarrow$ 1, identify the clopen inverse image.* The first summand of $P$ is clopen, so $C=\\sigma^{-1}(A\\text{ in the first summand})$ is clopen in $S$. For $s\\in U$, its fibre under $q$ has no point in the second summand, hence $U\\subset C$. Closedness gives $\\overline U\\subset C$. Conversely $s\\in C$ implies $s=q(\\sigma(s))\\in A=\\overline U$. Thus $C=\\overline U$, so $\\overline U$ is open.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/topology.tex",
-    "place": "Tag 08YN, proof, last paragraph, equality of the inverse image with the closure expanded."
-   }
-  },
-  {
-   "text": "*1 $\\Rightarrow$ 3, chain intersections.* Fix a continuous surjection $q:P\\to S$ with $P$ compact Hausdorff and assume 1. Let $\\mathcal E$ be the set of closed subsets $E\\subseteq P$ with $q(E)=S$; it contains $P$. For a nonempty inclusion chain $\\mathcal C\\subseteq\\mathcal E$ put $E_{\\mathcal C}=\\bigcap_{E\\in\\mathcal C}E$, a closed subset of $P$. Fix $s\\in S$. The fibre $q^{-1}(\\{s\\})$ is closed: a singleton is closed in a Hausdorff space, since every other point has an open neighbourhood avoiding it; now use continuity. The closed sets $E\\cap q^{-1}(\\{s\\})$ are nonempty and have nonempty finite intersections, since a finite nonempty subchain has a smallest member. If their total intersection were empty, their open complements in $P$ would cover $P$, and a finite subcover would contradict that finite-intersection property. (The empty finite subfamily also has nonempty intersection $P$, because $s$ has a preimage.) Thus $s\\in q(E_{\\mathcal C})$, so $E_{\\mathcal C}\\in\\mathcal E$. For the empty chain use the lower bound $P$.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/topology.tex",
-    "place": "Tag 08YM, lemma-find-compact-subset, chain/fibre argument; the finite-intersection fact is proved directly by the open-cover definition of compactness."
-   }
-  },
-  {
-   "text": "*Minimal closed source.* To use [lem-weil-pbc-zorn-lemma] in its stated upper-bound form, apply it to $\\mathcal O=\\{P\\setminus E:E\\in\\mathcal E\\}\\subseteq\\mathcal P(P)$. Complementation turns a chain in $\\mathcal O$ into a chain in $\\mathcal E$. Step 6 makes the complement of its intersection an upper bound in $\\mathcal O$; for the empty chain the upper bound is $\\varnothing=P\\setminus P$. Hence Zorn gives a maximal $O_0\\in\\mathcal O$. Set $P_0=P\\setminus O_0$. It is closed, maps onto $S$, and is minimal among closed subsets of $P$ mapping onto $S$. It is compact by [lem-weil-pbc-closed-in-quasi-compact] and Hausdorff by restricting separating neighbourhoods in $P$. Write $q_0=q|_{P_0}$. A closed subset $F$ of $P_0$ is closed in $P$, since $P_0$ is closed; consequently no proper closed $F\\subset P_0$ maps onto $S$.",
-   "uses": [
-    "lem-weil-pbc-zorn-lemma",
-    "lem-weil-pbc-closed-in-quasi-compact"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/topology.tex",
-    "place": "Tag 08YM, lemma-find-compact-subset, Zorn argument; complement duality supplies the upper-bound form of the existing Mathlib leaf."
-   }
-  },
-  {
-   "text": "*The restricted map is closed.* For any closed $F\\subseteq P_0$, [lem-weil-pbc-closed-in-quasi-compact] makes $F$ compact. If $s\\notin q_0(F)$, choose for each $x\\in F$ disjoint open neighbourhoods $U_x\\ni q_0(x)$ and $N_x\\ni s$ in $S$. The sets $F\\cap q_0^{-1}(U_x)$ cover $F$, so finitely many suffice. The intersection of the corresponding $N_x$ is an open neighbourhood of $s$ avoiding $q_0(F)$. For $F=\\varnothing$ take that neighbourhood to be $S$. Thus $q_0(F)$ is closed. This proves closedness directly from compactness and Hausdorff separation, rather than importing an unrecorded closed-map theorem.",
-   "uses": [
-    "lem-weil-pbc-closed-in-quasi-compact"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/topology.tex",
-    "place": "Tag 08YL, lemma-isomorphism, closedness input; Tag 08YD, lemma-closed-map. The elementary finite-subcover proof of closedness is supplied here."
-   }
-  },
-  {
-   "text": "*The opens $V^*$.* For each open $V\\subseteq P_0$ set $V^*=S\\setminus q_0(P_0\\setminus V)$. Step 8 shows $V^*$ is open. Every fibre of $q_0$ is nonempty, and a point lies in $V^*$ exactly when its whole fibre lies in $V$; in particular $V^*\\subseteq q_0(V)$. If $V\\ne\\varnothing$, then $P_0\\setminus V$ is proper closed, so minimality from Step 7 makes $V^*$ nonempty. If $V\\subseteq W$ then $V^*\\subseteq W^*$ by the same fibre description.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/topology.tex",
-    "place": "Tag 08YJ, lemma-image-open-technical; the definition and elementary properties of V-star are those of the current blueprint, paragraph following the minimal-source construction."
-   }
-  },
-  {
-   "text": "*Density at an image point.* If $a\\in A\\subseteq P_0$ with $A$ open and $s=q_0(a)$, then $s\\in\\overline{A^*}$. Indeed for any open neighbourhood $N$ of $s$, the set $V=A\\cap q_0^{-1}(N)$ is nonempty open, since it contains $a$. Step 9 gives $\\varnothing\\ne V^*\\subseteq A^*$ and $V^*\\subseteq q_0(V)\\subseteq N$. Thus every such $N$ meets $A^*$, which is precisely membership in its closure.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/topology.tex",
-    "place": "Tag 08YJ, lemma-image-open-technical, neighbourhood argument, in the V-star notation of the current blueprint."
-   }
-  },
-  {
-   "text": "*Injectivity from extremal disconnectedness.* Suppose $a\\ne b$ in $P_0$ with $q_0(a)=q_0(b)=s$. Hausdorffness of $P_0$ gives disjoint open neighbourhoods $A\\ni a$, $B\\ni b$. Their opens $A^*$ and $B^*$ are disjoint: a common point would have a nonempty fibre contained in $A\\cap B=\\varnothing$. Step 10 gives $s\\in\\overline{A^*}\\cap\\overline{B^*}$. Condition 1 makes $\\overline{A^*}$ open, and this open neighbourhood of $s\\in\\overline{B^*}$ must meet $B^*$. But an open set $B^*$ disjoint from $A^*$ is disjoint from $\\overline{A^*}$, because any point of their intersection would have the neighbourhood $B^*$ meeting $A^*$. This contradiction proves $q_0$ injective.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/topology.tex",
-    "place": "Tags 08YK, lemma-intersection-empty, and 08YL, lemma-isomorphism, injectivity argument. The disjoint-open/closure argument is written out, as in the current blueprint."
-   }
-  },
-  {
-   "text": "*The section.* Now $q_0:P_0\\to S$ is a continuous bijection, with compact source and Hausdorff target. Apply [lem-weil-pbc-compact-hausdorff-bijection] with its ambient spaces $P,S$ and subsets $P_0,S$: $q_0$ is a homeomorphism. Its inverse composed with the continuous subspace inclusion $P_0\\hookrightarrow P$ is a continuous section of $q$, since $q\\circ(P_0\\hookrightarrow P)\\circ q_0^{-1}=q_0\\circ q_0^{-1}=\\mathrm{id}_S$. This proves 3; together with Steps 1–5 it proves all three equivalences.",
-   "uses": [
-    "lem-weil-pbc-compact-hausdorff-bijection"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/topology.tex",
-    "place": "Tag 08YN, proposition-projective-in-category-hausdorff-qc, extremally disconnected implies sections, via Tags 08YM and 08YL; Tag 08YE, lemma-bijective-map."
-   }
-  },
-  {
-   "text": "*Total disconnectedness.* Assume 1. If $x\\ne y$, choose disjoint open neighbourhoods $U\\ni x$ and $V\\ni y$ by Hausdorffness. The closure $\\overline U$ is clopen and contains $x$. It misses $y$, because the open neighbourhood $V$ avoids $U$. Any connected subset containing both $x$ and $y$ would then be separated into its nonempty intersections with $\\overline U$ and its complement. Hence every connected subset has at most one point, which is total disconnectedness.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/topology.tex",
-    "place": "Tag 08YI, paragraph after definition-extremally-disconnected; the separating-clopen argument of the blueprint, final paragraph."
-   }
-  },
-  {
-   "text": "*Profinite realization, including the empty space.* If $S=\\varnothing$, it is the inverse limit of the diagram consisting of the empty finite discrete space. Assume now that $S\\ne\\varnothing$. Let $\\mathcal P$ be the set of finite partitions of $S$ into nonempty clopen subsets. It contains $\\{S\\}$. Give it an arrow $\\mathcal Q'\\to\\mathcal Q$ when $\\mathcal Q'$ refines $\\mathcal Q$, and send each block of $\\mathcal Q'$ to its unique containing block of $\\mathcal Q$. Nonempty intersections of blocks give common refinements; thus this is a cofiltered inverse system of finite discrete block sets. The map $h:S\\to L=\\varprojlim_{\\mathcal Q\\in\\mathcal P}\\mathcal Q$ sends a point to its block. It is continuous: the inverse image of a basic product neighbourhood restricted to $L$ is a finite intersection of unions of clopen blocks, hence open. Step 13 separates distinct points by clopens, and the partition into such a clopen and its complement separates their images, so $h$ is injective. For a compatible family $(C_{\\mathcal Q})_{\\mathcal Q}\\in L$ and finitely many partitions $\\mathcal Q_1,\\ldots,\\mathcal Q_n$, choose a common refinement $\\mathcal R$. Compatibility gives $\\varnothing\\ne C_{\\mathcal R}\\subseteq\\bigcap_{i=1}^n C_{\\mathcal Q_i}$. Thus these selected closed blocks have the finite intersection property. If their total intersection were empty, their open complements would cover $S$; a finite subcover would contradict the displayed nonempty finite intersection. Any point in the total intersection maps to the given family, proving surjectivity. Distinct points of $L$, as a subspace of a product of finite discrete spaces, differ in a coordinate and have disjoint coordinate neighbourhoods, so $L$ is Hausdorff. Apply [lem-weil-pbc-compact-hausdorff-bijection] to $h$ (taking both subsets there to be the entire spaces): it is a homeomorphism. Thus $S$ is profinite in the inverse-limit definition.",
-   "uses": [
-    "lem-weil-pbc-compact-hausdorff-bijection"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/topology.tex",
-    "place": "Tag 08ZY, lemma-profinite, proof of (2) implies (1); Tag 08YE, lemma-bijective-map. The clopen separation needed in that proof is established in Step 13."
+    "document": "Mathlib/Topology/ExtremallyDisconnected.lean",
+    "place": "TotallySeparated section, instance at line 58; this is the clopen separation argument of Tag 08YI."
    }
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-tychonoff-product-quasi-compact",
-  "lem-weil-pbc-closed-in-quasi-compact",
-  "lem-weil-pbc-zorn-lemma",
-  "lem-weil-pbc-compact-hausdorff-bijection"
+  "lem-weil-pbc-closed-in-quasi-compact"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/topology.tex",
-  "place": "Tags 08YN (proposition-projective-in-category-hausdorff-qc), 08YM (lemma-find-compact-subset), 08YJ (lemma-image-open-technical), 08YK (lemma-intersection-empty), 08YL (lemma-isomorphism), 08YI (paragraph after definition-extremally-disconnected), and 08ZY (lemma-profinite). The full minimal-closed-surjective-subspace route of the current blueprint is realized in Steps 6–12; elementary compactness and closure arguments are expanded."
+  "place": "Tag 08YN, Gleason characterization and pullback argument; Tag 08YI, total disconnectedness. Gleason's minimal-source proof is reused from Mathlib CompactT2.projective_iff_extremallyDisconnected, rather than reconstructed. The Lean statement does not include an inverse-limit presentation of profiniteness."
  },
  "mathlib_searches": [
   {
@@ -365,5 +262,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G6",
+  "result": "pass",
+  "landing": "20261018T135908-L-2960521",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
