@@ -16577,3 +16577,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 19:56 L: returned deliver/K2/Sheaf.Paper.BoundedConstructibleTower (reviewer RETURN: (reviewer C-c6f1c, head c6f1c05fd) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.Paper.BoundedConstru)
 - 20:38 L: returned deliver/K8/Sheaf.Paper.RationalExceptionalRestriction (reviewer RETURN: (reviewer C-07a95, head 07a957d88) H3/H7 (brief point 2, worst fault): the delivery changes the Q̄_ℓ disjunct of _hΛ fro)
 - 20:41 L: returned deliver/Q6/Sheaf.AlgebraicGeometry.ConstructibleProEtaleClassical (reviewer RETURN: (reviewer C-68837, head 6883735ff) Brief §2 (nothing others see changed by accident): lean/Sheaf/Paper/ProEtaleConstantM)
+- 22:25 L: returned deliver/U4/Sheaf.Paper.RationalLocalizingProjectionFormula (reviewer RETURN: (reviewer C-d9ca5, head d9ca5425f) H2 (point 6): (a) dag/nodes/sec-six-functors-basics/def-sfb-proetale-rational-localiz)
