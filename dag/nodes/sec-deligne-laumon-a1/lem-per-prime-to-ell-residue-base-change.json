@@ -12,11 +12,95 @@
   "def-pc-field-extension",
   "def-weil-affine-spectrum",
   "def-pc-fibre-product",
-  "def-weil-residue-field"
+  "def-weil-residue-field",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-vector-space-dimension"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $A=L\\otimes_k K$, viewed as a $K$-algebra through $b\\mapsto1\\otimes b$. The affine fibre-product theorem [lem-weil-pbc-fibre-product-affine-spectra] identifies $P$ with $\\operatorname{Spec}A$, compatibly with its projection to $\\operatorname{Spec}K$. Each of $\\operatorname{Spec}L$, $\\operatorname{Spec}k$, and $\\operatorname{Spec}K$ has one point with residue field the indicated field [def-weil-affine-spectrum]. Hence [lem-weil-pbc-fibre-product-points] gives a bijection between points $z$ of $P$ and prime ideals $\\mathfrak p$ of $A$. The comparison [lem-weil-pbc-fibre-product-point-residue-field] identifies $\\kappa(z)$ with the fraction field of $A/\\mathfrak p$, as an extension of $K$. In particular, whenever $A/\\mathfrak p$ is a field, it is precisely $\\kappa(z)$ as a $K$-field.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-fibre-product-points",
+    "lem-weil-pbc-fibre-product-point-residue-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01I4 (lemma-fibre-product-affine-schemes) and 01JT (lemma-points-fibre-product), including the residue-field sentence"
+   }
+  },
+  {
+   "text": "Choose a $k$-basis $e_1,\\ldots,e_d$ of $L$ and its coordinate maps $\\lambda_i:L\\to k$. The tensors $e_i\\otimes1$ form a $K$-basis of $A$: the tensor relations [def-weil-pbc-module-tensor-product] give $a\\otimes b=\\sum_i(e_i\\otimes1)\\lambda_i(a)b$, so they span. For independence the bilinear maps $(a,b)\\mapsto\\lambda_i(a)b$ induce $K$-linear maps $A\\to K$ taking $e_j\\otimes1$ to $\\delta_{ij}$; applying these to any relation makes every coefficient zero. Thus $\\dim_K A=d>0$ [def-weil-vector-space-dimension]. This uses a finite basis of $L/k$ only; $K/k$ can have arbitrary dimension.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-vector-space-dimension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose II Proposition 1.2.7, printed pp. 25--26; elementary scalar-extension basis calculation making the dimension input explicit"
+   }
+  },
+  {
+   "text": "For any prime ideal $\\mathfrak p$ of $A$, the quotient $A/\\mathfrak p$ is a nonzero domain and is spanned over $K$ by the images of the $d$ basis vectors from Step 2. In particular it is finite-dimensional. Apply [lem-weil-pbc-finite-dimensional-domain-is-field] to obtain that $A/\\mathfrak p$ is a field. Step 1 therefore identifies it with $\\kappa(z)$ over $K$, proving that every residue degree in the statement is finite.",
+   "uses": [
+    "lem-weil-pbc-finite-dimensional-domain-is-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Elementary finite-dimensional domain argument; compare Tag 00J6 (lemma-finite-dimensional-algebra) and the domain-is-field node"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-finite-dim-algebra-artinian], the finite-dimensional commutative $K$-algebra $A$ is Artinian. Apply [lem-weil-pbc-artinian-ideal-length-one-filtration] with $B=A$ and the unit ideal $J=A$. This gives $0=J_0\\subseteq\\cdots\\subseteq J_r=A$ with each $Q_i=J_i/J_{i-1}$ nonzero and having only the $A$-submodules $0$ and $Q_i$. Since $A\\ne0$ by Step 2, $r>0$. These are also $K$-vector spaces with the induced scalar action.",
+   "uses": [
+    "lem-weil-pbc-finite-dim-algebra-artinian",
+    "lem-weil-pbc-artinian-ideal-length-one-filtration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00J6 (lemma-finite-dimensional-algebra), 00JB (lemma-artinian-finite-length), 00J3 (lemma-simple-pieces), applied to the unit ideal"
+   }
+  },
+  {
+   "text": "For each $i$, choose $0\\ne q_i\\in Q_i$. The image of $A\\to Q_i$, $a\\mapsto aq_i$, is a nonzero submodule, hence is all of $Q_i$. With $\\mathfrak m_i=\\{a:aq_i=0\\}$, the formula $a\\bmod\\mathfrak m_i\\mapsto aq_i$ is consequently a $K$-linear and $A$-linear bijection $A/\\mathfrak m_i\\simeq Q_i$. Every ideal strictly between $\\mathfrak m_i$ and $A$ would give a nonzero proper submodule of this quotient, contradicting simplicity, so $\\mathfrak m_i$ is maximal. Thus it is a prime ideal, and Step 3 and Step 1 identify $A/\\mathfrak m_i$ with the residue field at a point $z_i\\in P$. The scalar compatibility is built into the displayed formula: $(1\\otimes c)aq_i=c(aq_i)$ for $c\\in K$. Therefore $\\dim_K Q_i=[\\kappa(z_i):K]$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00J2 (lemma-characterize-length-1), elementary cyclic-generator argument written out; no new lemma is used"
+   }
+  },
+  {
+   "text": "For every $i$, lift a $K$-basis of $Q_i$ to $J_i$ and adjoin a $K$-basis of $J_{i-1}$. The union spans $J_i$ because its images span the quotient, and is independent because reducing a relation modulo $J_{i-1}$ first kills the lifted coefficients and then the remaining coefficients. Hence $\\dim_K J_i=\\dim_K J_{i-1}+\\dim_K Q_i$. (All these spaces are finite-dimensional subquotients of $A$.) Summing these equalities, and using Steps 2 and 5, yields $d=\\sum_{i=1}^{r}[\\kappa(z_i):K]$. If every summand were divisible by $\\ell$, so would their sum $d$ be, contrary to the hypothesis. Choose a summand not divisible by $\\ell$ and its point $z_i$. Together with Step 3 this proves both clauses. Repeated points in the list are allowed; they retain the multiplicities coming from nilpotents, so no reducedness or separability was assumed.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose II Proposition 1.2.7, printed pp. 25--26: degree-sum argument, extended to nonreduced tensor algebras by the simple filtration of Steps 4--5"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-fibre-product-points",
+  "lem-weil-pbc-fibre-product-point-residue-field",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-vector-space-dimension",
+  "lem-weil-pbc-finite-dimensional-domain-is-field",
+  "lem-weil-pbc-finite-dim-algebra-artinian",
+  "lem-weil-pbc-artinian-ideal-length-one-filtration"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose II Proposition 1.2.7, printed pp. 25--26; same degree-sum principle, using a composition filtration to handle both separable and inseparable parts at once, with Stacks Tags 01I4, 01JT, 00J6, 00JB, 00J3 and the elementary argument of 00J2"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -52,10 +136,52 @@
    "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/FieldTheory/SplittingField/Construction.lean\", \"line\": \"77\", \"text\": \"lemma isCoprime_iff_aeval_ne_zero (f g : K[X]) : IsCoprime f g ↔ ∀ {A : Type v} [CommRing A]\"}\n  {\"file\": \"Mathlib/FieldTheory/SplittingField/Construction.lean\", \"line\": \"79\", \"text\": \"  refine ⟨fun h => aeval_ne_zero_of_isCoprime h, fun h => isCoprime_of_dvd _ _ ?_ fun x hx _ => ?_⟩\"}\n  {\"file\": \"Mathlib/FieldTheory/Perfect.lean\", \"line\": \"324\", \"text\": \"  simp [separable_def, isCoprime_zero_right, isUnit_iff_degree_eq_zero,\"}\n  {\"file\": \"Mathlib/FieldTheory/Perfect.lean\", \"line\": \"328\", \"text\": \"  refine ⟨Separable.squarefree, fun sqf ↦ isCoprime_of_irreducible_dvd (sqf.ne_zero ·.1) ?_⟩\"}\n  {\"file\": \"Mathlib/FieldTheory/IsAlgClosed/Basic.lean\", \"line\": \"251\", \"text\": \"lemma Polynomial.isCoprime_iff_aeval_ne_zero_of_isAlgClosed (K : Type v) [Field K] [IsAlgClosed K]\"}\n  {\"file\": \"Mathlib/FieldTheory/IsAlgClosed/Basic.lean\", \"line\": \"252\", \"text\": \"    [Algebra k K] (p q : k[X]) : IsCoprime p q ↔ ∀ a : K, aeval a p ≠ 0 ∨ aeval a q ≠ 0 := by\"}\n  {\"file\": \"Mathlib/FieldTheory/IsAlgClosed/Basic.lean\", \"line\": \"253\", \"text\": \"  refine ⟨fun h => aeval_ne_zero_of_isCoprime h, fun h => isCoprime_of_dvd _ _ ?_ fun x hu h0 => ?_⟩\"}\n  {\"file\": \"Mathlib/FieldTheory/Finite/GaloisField.lean\", \"line\": \"284\", \"text\": \"    simpa [← hK, hK', hKK', hp'.ne_one] using Nat.coprime_pow_primes n n' hp hp' hne\"}\n  {\"file\": \"Mathlib/FieldTheory/Finite/Basic.lean\", \"line\": \"466\", \"text\": \"    convert! isCoprime_one_right.neg_right (R := K[X]) using 1\"}\n  {\"file\": \"Mathlib/FieldTheory/Finite/Basic.lean\", \"line\": \"560\", \"text\": \"theorem Nat.ModEq.pow_totient {x n : ℕ} (h : Nat.Coprime x n) : x ^ φ n ≡ 1 [MOD n] := by\"}\n  {\"file\": \"Mathlib/FieldTheory/Finite/Basic.lean\", \"line\": \"562\", \"text\": \"  let x' : Units (ZMod n) := ZMod.unitOfCoprime _ h\"}\n  {\"file\": \"Mathlib/FieldTheory/Finite/Basic.lean\", \"line\": \"566\", \"text\": \"    coe_unitOfCoprime, Units.val_pow_eq_pow_val]\"}\n  {\"file\": \"Mathlib/FieldTheory/Finite/Basic.lean\", \"line\": \"633\", \"text\": \"/-- **Fermat's Little Theorem**: for all `a : ℤ` coprime to `p`, we have\"}\n  {\"file\": \"Mathlib/FieldTheory/KummerPolynomial.lean\", \"line\": \"117\", \"text\": \"  -- Since `a ^ (deg g)` is a `p`-power, and `p` is coprime to `deg g`, we conclude that `a` is\"}\n  {\"file\": \"Mathlib/FieldTheory/KummerPolynomial.lean\", \"line\": \"119\", \"text\": \"  have : p.Coprime (natDegree g) := hp.coprime_iff_not_dvd.mpr (fun e ↦ h (((natDegree_le_of_dvd hg'\"}\n  {\"file\": \"Mathlib/FieldTheory/KummerPolynomial.lean\", \"line\": \"122\", \"text\": \"  exact ha _ ((pow_mem_range_pow_of_coprime this.symm a).mp ⟨_, key⟩).choose_spec\"}\n  {\"file\": \"Mathlib/FieldTheory/SeparableDegree.lean\", \"line\": \"435\", \"text\": \"    (f * g).natSepDegree = f.natSepDegree + g.natSepDegree ↔ (f = 0 ∧ g = 0) ∨ IsCoprime f g := by\"}\n  {\"file\": \"Mathlib/FieldTheory/SeparableDegree.lean\", \"line\": \"440\", \"text\": \"        isCoprime_comm] using this g f h.symm (h.resolve_left hf)\"}\n  {\"file\": \"Mathlib/FieldTheory/SeparableDegree.lean\", \"line\": \"441\", \"text\": \"    rw [hf, zero_mul, natSepDegree_zero, zero_add, isCoprime_zero_left, isUnit_iff, eq_comm,\"}\n  {\"file\": \"Mathlib/FieldTheory/SeparableDegree.lean\", \"line\": \"454\", \"text\": \"  refine ⟨fun H ↦ .inr (isCoprime_of_irreducible_dvd (not_and.2 fun _ ↦ h.2)\"}\n  {\"file\": \"Mathlib/FieldTheory/SeparableDegree.lean\", \"line\": \"467\", \"text\": \"theorem natSepDegree_mul_of_isCoprime (g : F[X]) (hc : IsCoprime f g) :\"}\n  {\"file\": \"Mathlib/FieldTheory/LinearDisjoint.lean\", \"line\": \"120\", \"text\": \"- `IntermediateField.LinearDisjoint.of_finrank_coprime`:\"}\n  {\"file\": \"Mathlib/FieldTheory/LinearDisjoint.lean\", \"line\": \"121\", \"text\": \"  if the rank of `A` and `B` are coprime,\"}\n  {\"file\": \"Mathlib/FieldTheory/LinearDisjoint.lean\", \"line\": \"607\", \"text\": \"/-- If `A` and `L` have coprime degree over `F`, then they are linearly disjoint. -/\"}\n  {\"file\": \"Mathlib/FieldTheory/LinearDisjoint.lean\", \"line\": \"608\", \"text\": \"theorem of_finrank_coprime (H : (finrank F A).Coprime (finrank F L)) : A.LinearDisjoint L :=\"}\n",
    "date": "2026-10-19",
    "verdict": "no match: the returned types do not state this assertion or specialize to it in one line."
+  },
+  {
+   "tool": "grep",
+   "query": "finrank.*[Rr]esidue|[Rr]esidue.*finrank",
+   "results": "25 hits: span finrank, residue-field map degree, fiber rank, cotangent dimension, inertia degree and IsLocalRing.finrank_eq_finrank_residueField; no coprime-degree existence assertion.",
+   "date": "2026-10-19",
+   "verdict": "no match: ingredients only; no exact statement or one-line specialization of the item."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite field extension tensor arbitrary field extension has a residue field with degree coprime to a given prime",
+   "results": "FiniteField.Extension; Algebra.TensorProduct.isField_of_isAlgebraic; IntermediateField.LinearDisjoint.of_finrank_coprime; Algebra.instFiniteResidueFieldOfQuasiFiniteAt. No prime-to-ell residue-degree conclusion for arbitrary K/k.",
+   "date": "2026-10-19",
+   "verdict": "no match: ingredients only; no exact statement or one-line specialization of the item."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"finrank\", \"ResidueField\"",
+   "results": "TensorProduct.spanFinrank_top_eq_of_residueField; IsLocalRing.finrank_eq_finrank_residueField. The latter requires a finite etale extension of local rings; no such condition holds for the tensor algebra in general.",
+   "date": "2026-10-19",
+   "verdict": "no match: ingredients only; no exact statement or one-line specialization of the item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite dimensional commutative algebra of dimension prime to a prime has a residue field of degree prime to that prime",
+   "results": "Algebra.instFiniteResidueFieldOfFormallyUnramified; IsLocalRing.instFiniteResidueField; Algebra.QuasiFinite.instFiniteResidueField; residue separability and etale lifting results. None gives a prime-to-ell degree existence statement.",
+   "date": "2026-10-19",
+   "verdict": "no match: ingredients only; no exact statement or one-line specialization of the item."
+  },
+  {
+   "tool": "grep",
+   "query": "finrank.*length|length.*finrank",
+   "results": "Seven RingTheory hits: RamificationInertia/Basic.lean:62--67 and Length.lean:276--297, relating local length and finrank and length of free modules. Ingredients for a sum argument, not the item.",
+   "date": "2026-10-19",
+   "verdict": "no match: ingredients only; no exact statement or one-line specialization of the item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The dimension of a finite commutative algebra over a field is a sum of degrees of its residue fields with composition multiplicities",
+   "results": "Ideal.finrank_quotient_map; Ideal.inertiaDeg_le_finrank; Ideal.finrank_quotient_eq_sum; finrank_quotient_span_eq_natDegree_norm; Ideal.Factors.finrank_pow_ramificationIdx; Ideal.inertiaDeg_algebraMap; IsLocalRing.finrank_quotient_map; FiniteField.natCard_algHom_of_finrank_dvd. These impose Dedekind, PID, polynomial or finite-field hypotheses and do not specialize to the item in one line.",
+   "date": "2026-10-19",
+   "verdict": "no match: ingredients only; no exact statement or one-line specialization of the item."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-alteration-cover-calculus",
@@ -82,5 +208,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-prime-to-ell-residue-base-change",
+  "worker": "stage1",
+  "summary": "Kept the statement, including arbitrary K/k and both residue-field clauses. Expanded the ILO II 1.2.7 field argument using a basis and an Artinian simple filtration; all non-elementary inputs are existing nodes. Wrote out cyclic simple factors, scalar compatibility, dimension additivity and the divisibility contradiction. No new nodes or Lean changes.",
+  "blueprint": "Ancestor lem-per-artin-gabber-affine-curve, proof Step 3 finiteness/duality input, through the inherited alteration-cover-calculus ancestry: this proves the ILO II 1.2.7 residue-degree base-change input; it does not replace the perverse unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-fibre-product-point-residue-field",
+    "why": "Generic geometric identification of a fibre-product point residue field as the fraction field of the tensor quotient, with both base-field maps; not a replacement for a unit step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-fibre-product-point-residue-field"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q151-b951b3890",
+  "group": "Q151",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q151-b951b3890 (reviewer sub-agent of L); spot-checked: I read the whole delivery and found nothing to fix. Shape: one commit containing the report and the item node, with no new nodes. The statement is byte-identical to the live unsplit node. stmt_deps gained only the tensor-product and vector-space-dimension definitions, which the statement uses. No SGA is cited. Source: ILO, Travaux de Gabber, Exposé II, Prop. 1.2.7 (printed pp. 25–26) says that for k'/k finite of degree prime to ℓ and any K/k, some residue field of k'⊗_k K has degree prime to ℓ over K. The item states exactly this, plus finiteness of every residue degree, which is true and is what the parent lem-per-alteration-cover-calculus uses in Steps 3 and 8 (with k=κ(x), L=κ(u), K=κ(y)). Small cases tested: L=k; C/R with K=C; Q(2^{1/3}) with K=R and with K=Q(2^{1/3}); the inseparable F_p(t^{1/p}) case, whose tensor algebra is nonreduced. Step 1 checked: it cites 01I4 (affine fibre product), 01JT (points), the residue-field sentence of 01JT (compatible with the map from K) and Spec of a field; each cited statement says what the step uses. Step 2 checked: the elementary basis argument gives dim_K A = d, with K-linearity checked and no finiteness of K/k used. Step 3 checked: A/p is a finite-dimensional domain, so the domain-is-field leaf applies with all its hypotheses, and Step 1 then gives κ(z) ≅ A/p over K. Step 4 checked: A is Artinian (00J6) and has a length-one filtration (00JB+00J3; that node allows non-local rings), with r>0. Step 5 checked: it writes out 00J2, Q_i ≅ A/m_i with m_i maximal, and the maximality argument is correct. Step 6 checked: dimension additivity gives d = Σ[κ(z_i):K] counted with multiplicity, and the divisibility contradiction follows. Tag labels 00J2/00J6/00JB/00J3/01I4/01JT checked against tags/tags. Route: the proof uses only definitions, Mathlib leaves and two nodes already proved in slopmaster2, which count as tools. The declared tool_use of lem-weil-pbc-fibre-product-point-residue-field is accepted. The filtration degree sum covers both of ILO's cases (étale and radicial) at once; this is not a route departure. Duplicate grep ('1.2.7', 'prime to ... residue degree', 'maximalement', the item id) found no existing node stating the item."
  }
 }
