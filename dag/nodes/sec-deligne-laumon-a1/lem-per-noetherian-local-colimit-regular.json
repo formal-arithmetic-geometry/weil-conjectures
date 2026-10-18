@@ -12,9 +12,119 @@
   "def-weil-pbc-category-colimit",
   "def-weil-pbc-noetherian-ring"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $v_i:L_i\\to L$ for the coprojections and put $\\mathfrak m=\\{v_i(a):i\\in I,\\ a\\in\\mathfrak m_i\\}$. The representation and equality assertions of [lem-pc-filtered-colimit-commrings-elementwise] apply because the small nonempty directed poset is filtered. To add two such elements, move their representatives to a common upper stage; both remain in that stage's maximal ideal by locality, so their sum represents an element of $\\mathfrak m$. Negatives stay there as well. To multiply by any element of $L$, represent the latter at a stage and move both representatives to a common upper stage; the product is again in its maximal ideal. Thus $\\mathfrak m$ is an ideal. It is proper: if $v_i(a)=1$ with $a\\in\\mathfrak m_i$, the equality assertion gives $k\\ge i$ with $u_{ik}(a)=1$; the left side belongs to $\\mathfrak m_k$, a contradiction.",
+   "uses": [
+    "lem-pc-filtered-colimit-commrings-elementwise"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 07DX, lemma-colimit-regular, opening sentence; elementwise details from Tags 00D6 and 00D7."
+   }
+  },
+  {
+   "text": "Every element $b\\notin\\mathfrak m$ has a representative $a\\in L_i$ by [lem-pc-filtered-colimit-commrings-elementwise]. Necessarily $a\\notin\\mathfrak m_i$, hence $a$ is a unit by [lem-weil-pbc-local-ring-unit-criterion], and its inverse maps to an inverse of $b$. Since $\\mathfrak m$ is proper, no element of it is a unit. Consequently $L/\\mathfrak m$ is a nonzero field, so $\\mathfrak m$ is maximal; every proper ideal is contained in $\\mathfrak m$, since an element outside it is a unit. Therefore $L$ is a nonzero local ring with unique maximal ideal $\\mathfrak m$. Moreover $v_i^{-1}(\\mathfrak m)=\\mathfrak m_i$: one inclusion is by construction; for the reverse, $a\\notin\\mathfrak m_i$ is a unit, whose image cannot belong to the proper ideal $\\mathfrak m$. In particular each coprojection is local.",
+   "uses": [
+    "lem-pc-filtered-colimit-commrings-elementwise",
+    "lem-weil-pbc-local-ring-unit-criterion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 07DX, lemma-colimit-regular, opening sentence expanded; Tag 00E9, lemma-characterize-local-ring."
+   }
+  },
+  {
+   "text": "By [lem-sc-regular-local-domain], every $L_i$ is a domain. If $ab=0$ in $L$, represent $a,b$ at a common stage $i$ using [lem-pc-filtered-colimit-commrings-elementwise], say by $a_i,b_i$. Its equality assertion, applied to the image of $a_i b_i$ and zero, gives $j\\ge i$ with $u_{ij}(a_i)u_{ij}(b_i)=0$. The domain $L_j$ forces one factor to be zero, hence $a=0$ or $b=0$. Together with $1\\ne0$ from step 2 this proves that $L$ is a domain. This argument does not require injective transition maps.",
+   "uses": [
+    "lem-sc-regular-local-domain",
+    "lem-pc-filtered-colimit-commrings-elementwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 07DX, lemma-colimit-regular, penultimate sentence; domain input is Tag 00NP, lemma-regular-domain (deduced there from 00NO)."
+   }
+  },
+  {
+   "text": "For all diagrams in the statement simultaneously, prove the result by strong induction on the least number $n$ of generators of the maximal ideal of their Noetherian colimit. This number exists by [def-weil-pbc-noetherian-ring]. Steps 1--3 apply to every such diagram, independently of the induction. If $n=0$, then $\\mathfrak m=0$ and step 2 makes $L$ a field. Its only prime ideal is zero, so $\\dim L=0$ and it is regular by [def-weil-regular-scheme]. Suppose $n>0$ and assume the assertion for all diagrams whose colimit maximal ideal needs fewer than $n$ generators. Choose generators $x,x_2,\\ldots,x_n$ of $\\mathfrak m$ of minimal cardinality. Then $x\\notin\\mathfrak m^2$: otherwise the images of $x_2,\\ldots,x_n$ span $\\mathfrak m/\\mathfrak m^2$ and [lem-weil-pbc-nakayama-local-generators], with the finitely generated $L$-module $M=\\mathfrak m$, says that these $n-1$ elements generate $\\mathfrak m$, contrary to minimality. In particular $x\\ne0$.",
+   "uses": [
+    "def-weil-pbc-noetherian-ring",
+    "def-weil-regular-scheme",
+    "lem-weil-pbc-nakayama-local-generators"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 07DX, lemma-colimit-regular, induction and choice of x; minimal-generator formulation of its cotangent-dimension induction, using Tag 00DV, lemma-NAK (4), (8)."
+   }
+  },
+  {
+   "text": "Represent $x$ by $x_i\\in L_i$ using [lem-pc-filtered-colimit-commrings-elementwise]. Step 2 gives $x_i\\in\\mathfrak m_i$. For $j\\ge i$ put $x_j=u_{ij}(x_i)$. These belong to $\\mathfrak m_j$ and not to $\\mathfrak m_j^2$: membership in that square would express $x_j$ as a finite sum of products of elements of $\\mathfrak m_j$, whose image would express $x$ as an element of $\\mathfrak m^2$, contradicting step 4. Thus [lem-weil-pbc-regular-local-hypersurface-criterion] gives regular local rings $Q_j=L_j/x_jL_j$ for every $j\\ge i$. The transition maps descend to $Q_j\\to Q_k$ because $u_{jk}(x_j)=x_k$.",
+   "uses": [
+    "lem-pc-filtered-colimit-commrings-elementwise",
+    "lem-weil-pbc-regular-local-hypersurface-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 07DX, lemma-colimit-regular, choice of x_i and application of Tag 00NQ, lemma-regular-ring-CM, with c=1."
+   }
+  },
+  {
+   "text": "The tail $I_{\\ge i}$ is small, nonempty and directed. It still has colimit $L$: extend any compatible ring cocone $f_j:L_j\\to T$ on the tail to an arbitrary index $h$ by $f_k u_{hk}$ for a common upper bound $k\\ge h,i$. Two choices agree after passing to an upper bound of both, and the extension is compatible. The universal property [def-weil-pbc-category-colimit] for $L$ now gives existence and uniqueness of the induced map. For a ring $T$, compatible maps $Q_j\\to T$ are exactly compatible maps $L_j\\to T$ on this tail which kill $x_j$. Their unique map $L\\to T$ kills $x$, and hence factors uniquely through $L/xL$. Conversely a map $L/xL\\to T$ gives these maps $Q_j\\to T$. Thus the natural quotient cocone exhibits $\\overline L=L/xL$ as the colimit of the $Q_j$ in commutative rings. This is a direct verification of the universal property, not an assumption that arbitrary colimits preserve underlying sets.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 07DX, lemma-colimit-regular, displayed identification of the quotient colimit; Categories Tag 002F, definition-colimit, used directly."
+   }
+  },
+  {
+   "text": "The quotient $\\overline L$ is local with maximal ideal $\\overline{\\mathfrak m}=\\mathfrak m/xL$: this ideal is proper and every element outside it is the image of a unit of $L$ (step 2). Likewise the maximal ideal of $Q_j$ is $\\mathfrak m_j/x_jL_j$; the same quotient argument applies to $L_j$ using [lem-weil-pbc-local-ring-unit-criterion]. For $j\\le k$ in the tail, a class represented by $a\\in L_j$ maps into the maximal ideal of $Q_k$ if and only if $u_{jk}(a)\\in\\mathfrak m_k$, if and only if $a\\in\\mathfrak m_j$. Thus every quotient transition map is local. The quotient $\\overline L$ is Noetherian by [def-weil-pbc-noetherian-ring]: the inverse image of any ideal is a finitely generated ideal of $L$, whose generator images generate the given ideal. Finally $\\overline{\\mathfrak m}$ is generated by the images of $x_2,\\ldots,x_n$, since the image of $x$ is zero. Its least number of generators is therefore at most $n-1$. The diagram of $Q_j$ now meets every hypothesis of the strong induction hypothesis from step 4, so $\\overline L$ is regular local.",
+   "uses": [
+    "lem-weil-pbc-local-ring-unit-criterion",
+    "def-weil-pbc-noetherian-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 07DX, lemma-colimit-regular, application of induction to the Noetherian quotient; quotient locality and generator count expanded from the definitions."
+   }
+  },
+  {
+   "text": "Step 3 and $x\\ne0$ show that $x$ is a nonzerodivisor of $L$. The hypotheses of [lem-weil-pbc-dimension-quotient-nonzerodivisor] hold: $L$ is Noetherian and local, and $x\\in\\mathfrak m$. Hence $\\dim L=\\dim\\overline L+1$. Since $\\overline L$ is regular, [def-weil-regular-scheme] supplies generators of its maximal ideal numbering $\\dim\\overline L$. Lift them to $y_1,\\ldots,y_r\\in\\mathfrak m$, where $r=\\dim\\overline L$. For $a\\in\\mathfrak m$, express its quotient class as $\\sum\\overline c_t\\overline y_t$ and lift the coefficients. The difference $a-\\sum c_t y_t$ lies in $xL$. Thus $x,y_1,\\ldots,y_r$ generate $\\mathfrak m$ and number $\\dim L$. The Noetherian local ring $L$ is regular by that definition. This completes the induction and the proof.",
+   "uses": [
+    "lem-weil-pbc-dimension-quotient-nonzerodivisor",
+    "def-weil-regular-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 07DX, lemma-colimit-regular, final sentence; Tag 00NU, lemma-regular-mod-x, expanded using Tag 00KW, lemma-one-equation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-filtered-colimit-commrings-elementwise",
+  "lem-weil-pbc-local-ring-unit-criterion",
+  "lem-sc-regular-local-domain",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-regular-scheme",
+  "lem-weil-pbc-nakayama-local-generators",
+  "lem-weil-pbc-regular-local-hypersurface-criterion",
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-dimension-quotient-nonzerodivisor"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 07DX, lemma-colimit-regular, proof; all colimit and quotient details expanded; induction on the minimal generator number, equivalent to the source cotangent-dimension induction by Nakayama (00DV)."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -57,10 +167,24 @@
    "results": "{\"t\": \"2026-10-18T20:50:26Z\", \"tool\": \"leanfinder\", \"query\": \"Regular local rings are closed under directed direct limits when the limit ring is Noetherian\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instFiniteRingKrullDimOfIsNoetherianRingOfIsLocalRing\", \"tfae_of_isNoetherianRing_of_isLocalRing_of_isDomain\", \"IsNoetherianRing.of_isLocalization_maximal\", \"Ring.DirectLimit.induction_on\", \"Ring.DirectLimit.exists_of\", \"Ring.DirectLimit\", \"Ring.DirectLimit.commRing\", \"Ring.DirectLimit.ring\"], \"digest\": \"4e2d5d74eba90556\"}",
    "date": "2026-10-18",
    "verdict": "no match: only regular sequences, finite Krull dimension, polynomial regular rings, or direct-limit constructions; no regular-local-ring colimit theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsRegularLocalRing, DirectLimit",
+   "results": "{\"t\": \"2026-10-18T21:36:38Z\", \"tool\": \"loogle\", \"query\": \"IsRegularLocalRing, DirectLimit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: hits are direct-limit constructions, finite dimension, regular sequences, DVR characterizations or polynomial regular rings; none states regularity of this Noetherian local colimit"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A Noetherian directed colimit of regular local rings with local transition maps is a regular local ring",
+   "results": "{\"t\": \"2026-10-18T21:36:38Z\", \"tool\": \"leanfinder\", \"query\": \"A Noetherian directed colimit of regular local rings with local transition maps is a regular local ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instFiniteRingKrullDimOfIsNoetherianRingOfIsLocalRing\", \"RingTheory.Sequence.IsWeaklyRegular.isRegular_of_isLocalizedModule_of_mem\", \"RingTheory.Sequence.IsWeaklyRegular.isRegular_of_isLocalization_of_mem\", \"AlgebraicGeometry.instIsNoetherianRingCarrierStalkCommRingCatPresheafOfIsLocallyNoetherian\", \"tfae_of_isNoetherianRing_of_isLocalRing_of_isDomain\", \"IsLocalRing.isWeaklyRegular_of_perm_of_subset_maximalIdeal\", \"IsNoetherianRing.of_isLocalization_maximal\", \"IsLocalRing.isRegular_iff_isWeaklyRegular_of_subset_maximalIdeal\"], \"digest\": \"f42e76848c20e896\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: hits are direct-limit constructions, finite dimension, regular sequences, DVR characterizations or polynomial regular rings; none states regularity of this Noetherian local colimit"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-smooth-colimit-regular",
@@ -86,5 +210,54 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-noetherian-local-colimit-regular",
+  "worker": "stage1",
+  "summary": "Checked Stacks 07DX and all cited statements. Kept the statement and statement dependencies. Expanded the maximal-ideal and domain arguments without injectivity assumptions, the quotient colimit via its universal property, and the induction with its strict decrease. Reused existing elementary-colimit, Nakayama, domain, regular-hypersurface and dimension-drop nodes; no new nodes. No Lean declaration states the item, and Mathlib searches found no match.",
+  "blueprint": "The inherited ancestry points to lem-per-artin-gabber-affine-curve, initial regular strict-local reduction, through lem-per-smooth-colimit-regular. These eight steps supply precisely its 07DX local algebra input to the 07EP argument; no chapter or unit route is replaced. The current blueprint ancestor file has only its statement, while the finer regular-reduction place is recorded by the existing ancestry.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-filtered-colimit-commrings-elementwise",
+    "why": "Element representation and eventual equality for the ring colimit; a generic algebra tool, no perverse-unit argument is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-local-ring-unit-criterion",
+    "why": "Units outside a local maximal ideal, used to establish locality of the colimit and its quotients."
+   },
+   {
+    "node": "lem-sc-regular-local-domain",
+    "why": "Regular local stages are domains; this is the domain input explicitly used in 07DX."
+   },
+   {
+    "node": "lem-weil-pbc-nakayama-local-generators",
+    "why": "Nakayama for the finite module m makes the minimal-generator induction strictly decrease."
+   },
+   {
+    "node": "lem-weil-pbc-regular-local-hypersurface-criterion",
+    "why": "The 00NQ parameter-quotient theorem makes the stages of the quotient system regular."
+   },
+   {
+    "node": "lem-weil-pbc-dimension-quotient-nonzerodivisor",
+    "why": "The 00KW dimension equality expands the 00NU lifting step at the end of 07DX."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-filtered-colimit-commrings-elementwise",
+  "lem-weil-pbc-local-ring-unit-criterion",
+  "lem-sc-regular-local-domain",
+  "lem-weil-pbc-nakayama-local-generators",
+  "lem-weil-pbc-regular-local-hypersurface-criterion",
+  "lem-weil-pbc-dimension-quotient-nonzerodivisor"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-N6-a66a21bd7",
+  "group": "N6",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N6-a66a21bd7 (reviewer sub-agent of L); spot-checked: I read Stacks algebra.tex 07DX (statement and proof), plus 00NQ, 00NU, 00KW, and every cited node statement. The item's statement is unchanged from live and matches 07DX: nonempty directed system, local transition maps, regular local stages, Noetherian colimit. All 8 steps are correct. Steps 1-2 show the colimit is local with v_i^{-1}(m)=m_i, with no injectivity assumed. Step 3 shows L is a domain because a zero product vanishes at some later stage. Step 4 is a strong induction on the minimal number of generators of m: the base case is a field, and x is outside m^2 by Nakayama with M=m. Step 5 applies 00NQ to every tail stage, since x_j in m_j^2 would put x in m^2. Step 6 identifies the tail colimit and the quotient colimit by the universal property. Step 7 checks that the quotient maps are local, that L/xL is Noetherian, and that its maximal ideal needs at most n-1 generators. Step 8 is the 00NU argument written out: dim L = dim L/xL + 1 by 00KW, and lifts of generators. Edge cases checked: a field, a DVR, and k[t]_(t)->k, where the maps are local but not injective. There are no new nodes, no duplicate of 07DX in the DAG (grep), and no SGA. Blueprint fields are present and every step is under 2000 characters. I accept the six tool_uses: they are generic algebra and four are Mathlib leaves. The other two, the regular-local domain and hypersurface lemmas, are Lean-closed in slopmaster2. No fixes."
  }
 }
