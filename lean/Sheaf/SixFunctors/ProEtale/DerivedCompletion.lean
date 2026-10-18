@@ -39,6 +39,7 @@ import Sheaf.Algebra.Homology.ChangeOfRingsKFlat
 import Sheaf.Paper.ProfinitePointPullback
 import Sheaf.CategoryTheory.SitePullbackAbelianExact
 import Sheaf.Algebra.Homology.BoundedAboveFlatSheafKFlat
+import Sheaf.Topology.ProfiniteCondensedRing
 
 /-!
 # Derived completion for pulled-back continuous integral coefficients

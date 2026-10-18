@@ -88,6 +88,23 @@ import WeilConjectures.Mathlib.CategoryTheory.Sites.Monoidal
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Defs
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Defs
 import WeilConjectures.SixFunctors.ProEtale.LowerShriek.OpenImmersion.Defs
+import Sheaf.AlgebraicGeometry.AbelianEtaleProEtaleCohomologyComparison
+import Sheaf.AlgebraicGeometry.AffinePuncturedLineAlgebra
+import Sheaf.AlgebraicGeometry.CompactSupportComparisonUnit
+import Sheaf.AlgebraicGeometry.ComparisonGlobalCohomologyFiniteNormalized
+import Sheaf.AlgebraicGeometry.FixedComparisonDirectImageMate
+import Sheaf.AlgebraicGeometry.KummerCoefficientBaseChange
+import Sheaf.CategoryTheory.LeftModuleDerivedEvaluationForget
+import Sheaf.Paper.ComparisonPullbackExact
+import Sheaf.Paper.FiniteDirectImageComposition
+import Sheaf.Paper.PurityFiniteKummerLevel
+import Sheaf.Paper.PurityFiniteSetting
+import Sheaf.Paper.SiteComparisonEdgeSection
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
+import WeilConjectures.CategoryTheory.Abelian.HorseshoeDeltaFunctor
+import WeilConjectures.CategoryTheory.Abelian.RightDerived.AcyclicComparisonNatural
+import WeilConjectures.CategoryTheory.Abelian.RightDerived.FullLongExactSequence
+import WeilConjectures.SixFunctors.ProEtale.Comparison.CohomologicalDimension
 /-!
 # Relative affine-line acyclicity and the actual Kummer generator
 

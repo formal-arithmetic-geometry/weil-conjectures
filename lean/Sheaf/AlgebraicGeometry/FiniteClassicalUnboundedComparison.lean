@@ -20,6 +20,7 @@ import Sheaf.CategoryTheory.KInjectiveTotalDerived
 import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
 import Sheaf.AlgebraicGeometry.BoundedBelowProEtaleComparison
 import Sheaf.AlgebraicGeometry.ProEtaleClassicalSheaves
+import Sheaf.AlgebraicGeometry.ProEtaleSiteComparison
 
 /-!
 # Classical essential image of unbounded finite-coefficient comparison

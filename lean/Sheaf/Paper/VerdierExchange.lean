@@ -18,6 +18,11 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree
 public import Sheaf.Paper.FieldShriekCompositionQcqs
 
 public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
+import Sheaf.Paper.CanonicalOriginCompactSupportComposition
+import Sheaf.Paper.EtaleProEtaleCoefficientCompatibility
+import Sheaf.Paper.FiniteCoefficientAdjointComparisons
+import Sheaf.Paper.SemilinearDerivedSections
+import Sheaf.SixFunctors.IntegralCompactificationSystemRealization
 /-! # Verdier-duality exchange
 
 Source: blueprint main-20261015, sec-six-functors/sk-thm-sf-verdier-exchange,

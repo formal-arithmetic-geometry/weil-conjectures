@@ -62,6 +62,8 @@ import Sheaf.Paper.LocalizedTStructure
 import Sheaf.Paper.PbcRationalTransport
 import Sheaf.Paper.PbcScalarExtension
 import WeilConjectures.SixFunctors.Finite.Exact
+import Sheaf.AlgebraicGeometry.FiniteFpProEtalePushforwardExact
+import Sheaf.Paper.SfCommonStageDirectImage
 
 /-! # Finite direct image at rational adic coefficients
 
