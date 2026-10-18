@@ -3,7 +3,9 @@
  "blueprint": {
   "is": "sk-l-dl-a1-endpoints",
   "from": null,
-  "same_as": null
+  "same_as": [
+   "lem-a1-middle-extension-endpoints"
+  ]
  },
  "kind": "statement",
  "title": "Degree zero and degree two",
@@ -13,27 +15,179 @@
   "place": "node sk-l-dl-a1-endpoints, order 3073"
  },
  "stmt_deps": [
-  "sk-d-dl-a1-setup"
+  "sk-d-dl-a1-setup",
+  "def-wf-middle-extension",
+  "def-wf-fundamental-representation",
+  "def-real-weil-representation-operations",
+  "def-weil-ordinary-compact-cohomology"
  ],
  "proof": [
   {
-   "text": "A nonzero global section of a lisse sheaf has nonzero germs throughout\nthe connected open $U$. Its extension to $C$ therefore has support all\nof the nonproper affine curve, so cannot be compactly supported.\nThe boundary has finite support and no positive cohomology; localization\nidentifies $H_c^2(C,j_*F)$ with $H_c^2(U,F)$. Global Verdier duality,\nwith $\\mathbb D_UF=F^\\vee(1)[2]$, applies to the smooth nonproper curve\n$U$. Its degreewise form in [sk-thm-derived-duality] identifies the\nlatter group with $H^0(U,F^\\vee)^\\vee(-1)=V_{\\pi_1(U)}(-1)$.\nThe coinvariants are the maximal geometrically constant quotient of $F$.\nWhen $F$ is pure of weight $w$, at a closed point of degree $d$ the\ncoinvariants' Frobenius is the $d$th power of\nthe constant quotient's Frobenius, so purity of the stalk quotient gives\nweight $w$ for that module. The twist adds two. Curve cohomological\ndimension gives the remaining vanishings.",
-   "uses": [],
-   "elementary": null
+   "text": "Use the finite-field and adic coefficient conventions of [sk-d-dl-a1-setup]. After extension to $k$, smoothness of relative dimension one is preserved by [lem-sbc-smooth-relative-dimension-permanence](1), and dimension is one by [lem-sbc-smooth-fixed-dimension-over-field]. Geometric connectedness makes $C$ nonempty and connected. Thus [lem-sc-smooth-connected-curve-local-rings](1) makes $C$ Noetherian and integral. The nonempty dense open $U$ is consequently integral and connected, and is a smooth separated finite-type curve. Affineness of $C$ is preserved by this field extension (if $C_0=\\operatorname{Spec}B$, then $C=\\operatorname{Spec}(B\\otimes_{k_0}k)$). If $C$ were proper, [lem-sc-proper-affine-finite] would give dimension zero. Hence $C$ is not proper. These observations verify the geometric hypotheses needed below; no affineness assertion about $U$ is needed.",
+   "uses": [
+    "sk-d-dl-a1-setup",
+    "lem-sbc-smooth-relative-dimension-permanence",
+    "lem-sbc-smooth-fixed-dimension-over-field",
+    "lem-sc-smooth-connected-curve-local-rings",
+    "lem-sc-proper-affine-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-endpoints/sk-l-dl-a1-endpoints.proof.md",
+    "place": "First sentence, geometric hypotheses for the support and duality arguments"
+   }
+  },
+  {
+   "text": "Set $J=j_*F$, always the ordinary degree-zero direct image of [def-wf-middle-extension], rather than $Rj_*F$. By [lem-a1-adic-middle-extension-constructible], $J$ is a constructible Weil sheaf on $C_0$ in the specified adic heart. Apply [lem-zl-affine-curve-range] to $C_0$ and this $J$: its hypotheses are exactly smooth affine curve, constructible degree-zero Weil sheaf, and $\\ell\\ne\\operatorname{char}(k_0)$. This proves $H_c^r(C,J)=0$ for $r\\notin\\{0,1,2\\}$.",
+   "uses": [
+    "def-wf-middle-extension",
+    "lem-a1-adic-middle-extension-constructible",
+    "lem-zl-affine-curve-range"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-endpoints/sk-l-dl-a1-endpoints.proof.md",
+    "place": "Last sentence: curve cohomological dimension"
+   }
+  },
+  {
+   "text": "Let $c\\in H_c^0(C,J)$. By [lem-a1-constructible-degree-zero-proper-support], it has an ordinary global adic section $s=\\alpha_{C,J}(c)$ and a closed proper-over-$k$ subset $Z\\subseteq C$ such that $s$ vanishes on $C\\setminus Z$; the map $c\\mapsto s$ is injective. By the section formula in [def-wf-middle-extension], global sections of $J=j_*F$ on $C$ are precisely global sections of $F$ on $U$; this is an equality of section functors, so also of their inverse-limit, rationalized and common-stage realizations. In particular $s=0$ if and only if $s|_U=0$. The lisse realization of $s|_U$ is the ordinary adic section of [lem-a1-degree-zero-compact-support-sections].",
+   "uses": [
+    "lem-a1-constructible-degree-zero-proper-support",
+    "def-wf-middle-extension",
+    "lem-a1-degree-zero-compact-support-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-endpoints/sk-l-dl-a1-endpoints.proof.md",
+    "place": "First two sentences: interpret a compactly supported section"
+   }
+  },
+  {
+   "text": "Suppose $s\\ne0$. By [cor-galois-lisse-representations](2), the fibre functor on lisse adic sheaves on the connected Noetherian separated $U$ is an equivalence and sends the coefficient unit to the trivial line. Its faithfulness implies that the nonzero section $s|_U$, a morphism from that unit, is nonzero on every geometric fibre: a zero fibre map at any chosen base point would force the morphism to be zero. If a point of $U$ lay outside $Z$, its fibre map would instead be zero, by step 3. Thus $U\\subseteq Z$. Closedness of $Z$ and density of $U$ give $Z=C$. Since $C$ is reduced by step 1, properness of the reduced closed subscheme on $Z=C$ is properness of $C$, a contradiction. Therefore $s=0$ and injectivity in step 3 gives $c=0$.",
+   "uses": [
+    "cor-galois-lisse-representations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-endpoints/sk-l-dl-a1-endpoints.proof.md",
+    "place": "First two sentences: full support forces vanishing"
+   }
+  },
+  {
+   "text": "Apply [prop-a1-curve-boundary-sequence] to $j$, with $i:Z=C\\setminus U\\hookrightarrow C$. It gives the compact-support triangle with first term $R\\Gamma_c(U,F)$, middle term $R\\Gamma_c(C,J)$ and finite-boundary term $R\\Gamma_c(Z,i^*J)$ concentrated in degree zero. The long exact cohomology sequence [lem-sf-derived-homology-long-exact] at degree two has zero terms on both sides of $H_c^2(U,F)\\to H_c^2(C,J)$, since they are the boundary cohomology in degrees one and two. Therefore this map is an isomorphism. All maps arise from the localization of the Weil sheaf over $k_0$, so this is an isomorphism with Frobenius action.",
+   "uses": [
+    "prop-a1-curve-boundary-sequence",
+    "lem-sf-derived-homology-long-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-endpoints/sk-l-dl-a1-endpoints.proof.md",
+    "place": "Third sentence: finite-boundary localization in degree two"
+   }
+  },
+  {
+   "text": "The coefficient linear dual $F^\\vee$ is a lisse degree-zero adic sheaf with geometric fibre $V^\\vee$, and realizes the derived internal dual, by [lem-per-adic-lisse-cohomology-calculus]. The tensor equivalence of [cor-galois-lisse-representations](2) transports the usual finite-dimensional evaluation and coevaluation of $V$ and $V^\\vee$ to $F$ and $F^\\vee$: both triangle identities are checked by the faithful fibre functor. Thus $F$ is perfect by the dualizable definition [sk-def-perfect]. For the smooth structure morphism $a_U$, [sk-thm-purity-transport] supplies its canonical orientation at $\\overline{\\mathbf Q}_\\ell$. Consequently [sk-thm-sf-dual-perfect], with $d=1$, identifies $\\mathbb D_UF=F^\\vee(1)[2]$. Apply [sk-thm-sf-global-duality]: $U$ is smooth, geometrically connected, separated and finite type and descends to $U_0$, so its nonproper case applies. It gives $R\\Gamma_c(U,F)^\\vee\\simeq R\\Gamma(U,F^\\vee(1))[2]$.",
+   "uses": [
+    "lem-per-adic-lisse-cohomology-calculus",
+    "cor-galois-lisse-representations",
+    "sk-def-perfect",
+    "sk-thm-purity-transport",
+    "sk-thm-sf-dual-perfect",
+    "sk-thm-sf-global-duality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-endpoints/sk-l-dl-a1-endpoints.proof.md",
+    "place": "Fourth and fifth sentences: the smooth nonproper global-duality argument"
+   }
+  },
+  {
+   "text": "Take $H^{-2}$ of step 6 using [lem-sf-point](2),(3),(4): point evaluation identifies internal dual with coefficient $R\\operatorname{Hom}$, is exact, and identifies the two pushforwards with compact and ordinary cohomology. At a common finite coefficient field $E$, the evaluated compact-support object is a bounded finite-dimensional complex $C_E$. Apply [lem-pod-cohomology-of-dual-over-field] with $i=2$ to obtain $H^{-2}(C_E^\\vee)=H^2(C_E)^\\vee$. Extending scalars gives the same formula over $\\overline{\\mathbf Q}_\\ell$: a finite basis identifies the extended dual with the dual of the extension, and exact scalar extension commutes with kernels and images. The common-stage cohomology clause of [lem-sf-point] identifies these extensions with the groups here. Since $H^{-2}(B[2])=H^0(B)$, step 6 gives $H_c^2(U,F)^\\vee\\simeq H^0(U,F^\\vee(1))$, with finite-dimensional spaces. By [lem-a1-degree-zero-compact-support-sections] and [cor-galois-lisse-representations](2), the latter sections are maps from the trivial line, hence invariants of the fibre. All prime-to-characteristic roots of unity lie in $k$, so [def-coefficient-twists-detailed] makes the Tate line geometrically constant. Tensoring invariant vectors with that line, with inverse computed in any basis of the line, gives the basis-independent identification $H^0(U,F^\\vee(1))=(V^\\vee)^{\\pi_1(U)}(1)$.",
+   "uses": [
+    "lem-sf-point",
+    "lem-pod-cohomology-of-dual-over-field",
+    "lem-a1-degree-zero-compact-support-sections",
+    "cor-galois-lisse-representations",
+    "def-coefficient-twists-detailed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-endpoints/sk-l-dl-a1-endpoints.proof.md",
+    "place": "Fifth sentence: take degree two and identify dual sections"
+   }
+  },
+  {
+   "text": "Here is Frobenius compatibility of steps 6–7. Put $a=a_U$ and $s=\\operatorname{Spec}k$. The exchange arrow is $Ra_*D_UF\\to D_sRa_!F$, whose inverse is used in [sk-thm-sf-global-duality]. It is the adjunction mate of the duality evaluation followed by the trace $Ra_!\\omega_U\\to\\Lambda_s$. By [cor-coef-verdier-weil-equivariance], $F\\otimes D_UF\\to\\omega_U$ and the $Ra_!\\dashv Ra^!$ counit giving this trace are Weil equivariant. Taking their mate therefore commutes with Weil descent: both sides transpose to the same evaluation-and-counit composite. The point-evaluation arrow is the canonical mate $\\operatorname{Fib}_sD_sC\\to R\\operatorname{Hom}(\\operatorname{Fib}_sC,\\Lambda)$ used by the global theorem; it is transposed from the evaluated $C\\otimes D_sC\\to\\omega_s$ and $\\omega_s\\cong\\Lambda_s$. The same equivariant evaluation and identity-adjunction counit at $s$ make this mate equivariant. The orientation $\\Lambda_U(1)[2]\\to Ra^!\\Lambda_s$ commutes with $g_U$: apply the base-change compatibility of [sk-thm-purity-transport] to $a\\circ g_U=g_s\\circ a$, using the functorial roots-of-unity Tate identification. Its inverse and the evaluation transpose defining $D_UF\\cong F^\\vee(1)[2]$ also commute. Thus the whole global arrow and its $H^{-2}$ map are Frobenius equivariant. The linear-algebra comparison in step 7 is induced by evaluation, hence natural in automorphisms; the section/invariant identification is natural as well. Scalar extension preserves these squares by the coefficient clause of the equivariance corollary. No Frobenius-stable integral lattice is required.",
+   "uses": [
+    "sk-thm-sf-global-duality",
+    "cor-coef-verdier-weil-equivariance",
+    "sk-thm-purity-transport"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-endpoints/sk-l-dl-a1-endpoints.proof.md",
+    "place": "Fourth and fifth sentences: Frobenius compatibility of the canonical global-duality and orientation arrows"
+   }
+  },
+  {
+   "text": "Write $N=\\langle gv-v:g\\in\\pi_1(U),\\ v\\in V\\rangle$, so $W=V/N=V_{\\pi_1(U)}$ by [def-real-weil-representation-operations]. A functional $\\lambda\\in V^\\vee$ is invariant precisely when $\\lambda(gv-v)=0$ for every $g,v$; hence $(V^\\vee)^{\\pi_1(U)}$ is the annihilator of $N$, canonically $W^\\vee$. Its dual is canonically $W$: every functional on the annihilator extends to $V^\\vee$ by extending a basis, so the evaluation map $V\\to((V^\\vee)^{\\pi_1(U)})^\\vee$ is surjective with kernel $N$. This is a construction by evaluation, so it commutes with every automorphism preserving $N$, including Frobenius. Dualize the Frobenius-equivariant identification of steps 7–8, cancel the finite-dimensional double dual and the one-dimensional Tate line, and compose with the inverse of the localization isomorphism in step 5. This gives the stated Frobenius-equivariant $H_c^2(C,J)\\simeq W(-1)$.",
+   "uses": [
+    "def-real-weil-representation-operations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-endpoints/sk-l-dl-a1-endpoints.proof.md",
+    "place": "Fifth and sixth sentences: invariant-dual equals the coinvariant quotient"
+   }
+  },
+  {
+   "text": "If $F$ is pure of weight $w$, apply [lem-a1-geometric-coinvariants-pure] on $U_0$. Its hypotheses hold by step 1: $U_0$ is nonempty smooth and geometrically connected, and $F$ is lisse and punctually pure. Thus $W$ with its induced Frobenius is pure of weight $w$. The Tate convention in [sk-d-dl-a1-setup] raises weights by two under $(-1)$, so $W(-1)$ is pure of weight $w+2$. Explicitly, its eigenvalues are $q\\alpha$ for eigenvalues $\\alpha$ on $W$, and $|\\iota(q\\alpha)|=q\\,q^{w/2}=q^{(w+2)/2}$. Step 9 transfers this to $H_c^2(C,J)$. When $W=0$ the eigenvalue condition is vacuous, as required.",
+   "uses": [
+    "lem-a1-geometric-coinvariants-pure",
+    "sk-d-dl-a1-setup"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-endpoints/sk-l-dl-a1-endpoints.proof.md",
+    "place": "Final four sentences: purity of coinvariants and the Tate weight shift"
+   }
   }
  ],
  "proof_deps": [
+  "cor-coef-verdier-weil-equivariance",
+  "cor-galois-lisse-representations",
+  "def-coefficient-twists-detailed",
+  "def-real-weil-representation-operations",
+  "def-wf-middle-extension",
+  "lem-a1-adic-middle-extension-constructible",
+  "lem-a1-constructible-degree-zero-proper-support",
+  "lem-a1-degree-zero-compact-support-sections",
+  "lem-a1-geometric-coinvariants-pure",
+  "lem-per-adic-lisse-cohomology-calculus",
+  "lem-pod-cohomology-of-dual-over-field",
+  "lem-sbc-smooth-fixed-dimension-over-field",
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "lem-sc-proper-affine-finite",
+  "lem-sc-smooth-connected-curve-local-rings",
+  "lem-sf-derived-homology-long-exact",
+  "lem-sf-point",
+  "lem-zl-affine-curve-range",
+  "prop-a1-curve-boundary-sequence",
+  "sk-d-dl-a1-setup",
+  "sk-def-perfect",
+  "sk-thm-purity-transport",
   "sk-thm-sf-dual-perfect",
   "sk-thm-sf-global-duality"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-endpoints/_section.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-endpoints/sk-l-dl-a1-endpoints.proof.md",
+  "place": "Entire proof, expanded in nine steps; degree-zero adic proper-support comparison isolated as a new statement"
  },
  "mathlib_searches": [],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "lean_not_found",
@@ -142,5 +296,114 @@
     }
    ]
   }
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "sk-l-dl-a1-endpoints",
+  "worker": "stage1",
+  "summary": "Kept the endpoint statement and its smooth-nonproper duality route. Expanded support vanishing, finite-boundary localization, range, perfectness, duality and the invariant/coinvariant calculation. Added one general constructible-adic degree-zero section comparison, because the existing lisse comparison does not apply to j_*F. Reused the other existing nodes. Repair of batch-5 C7/C8/E5: replaced the degreewise Poincare-duality citation by point evaluation and finite-field dual-cohomology linear algebra; isolated explicit Frobenius compatibility; wrote individual tool-use reasons.",
+  "blueprint": "Steps 1,3,4 realize the first two sentences; step 5 realizes boundary localization; steps 6–9 realize smooth nonproper Verdier duality, point evaluation, finite-field dual linear algebra, Frobenius compatibility and the invariant-dual calculation; step 10 realizes purity; step 2 realizes the final range sentence.",
+  "tool_uses": [
+   {
+    "node": "cor-galois-lisse-representations",
+    "why": "Steps 4, 6 and 7 use the faithful tensor/unit fibre equivalence: it detects a nonzero section at each point, gives the dual pair, and identifies sections with invariants. The endpoint unit does not construct the lisse/fundamental-group dictionary."
+   },
+   {
+    "node": "lem-a1-adic-middle-extension-constructible",
+    "why": "Step 2 needs ordinary j_*F in the constructible adic heart, including its Weil structure, before applying range and support. The unit specifies ordinary j_* but has no coefficient-realization theorem."
+   },
+   {
+    "node": "lem-a1-degree-zero-compact-support-sections",
+    "why": "Steps 3 and 7 use the ordinary H^0-to-lisse-section comparison on U, after forgetting Weil structure; they do not apply its lisse support assertion to j_*F. This adic realization comparison is absent from the endpoint unit."
+   },
+   {
+    "node": "lem-a1-geometric-coinvariants-pure",
+    "why": "Step 10 uses purity of the induced Frobenius on the maximal geometric-constant quotient, before the explicit Tate shift. This general quotient-purity input is needed for the unit’s last weight argument."
+   },
+   {
+    "node": "lem-per-adic-lisse-cohomology-calculus",
+    "why": "Step 6 uses that the coefficient dual of a finite-rank lisse sheaf is lisse with dual fibre and represents derived internal Hom. The unit does not supply this completed/common-stage coefficient calculation."
+   },
+   {
+    "node": "lem-sbc-smooth-fixed-dimension-over-field",
+    "why": "Step 1 turns smooth relative dimension one into dimension one on the nonempty geometric curve. This general dimension input verifies the curve hypotheses rather than proving an endpoint."
+   },
+   {
+    "node": "lem-sbc-smooth-relative-dimension-permanence",
+    "why": "Step 1 uses preservation of smooth relative dimension one by extension from k_0 to k. The unit has no general smooth-base-change permanence statement."
+   },
+   {
+    "node": "lem-sc-proper-affine-finite",
+    "why": "Step 1 excludes properness of the affine dimension-one curve, needed for the support contradiction. The unit’s support argument presupposes this general proper-affine geometry fact."
+   },
+   {
+    "node": "lem-sc-smooth-connected-curve-local-rings",
+    "why": "Step 1 uses only clause (1), Noetherian integrality of the smooth connected geometric curve, to get connected U and reduced C. The unit does not prove these curve-geometry prerequisites."
+   },
+   {
+    "node": "lem-sf-derived-homology-long-exact",
+    "why": "Step 5 takes the long exact sequence of the boundary triangle and uses its adjacent zero terms in degrees one and two. The unit calls for localization but does not state this general derived-category cohomology rule."
+   },
+   {
+    "node": "lem-zl-affine-curve-range",
+    "why": "Step 2 applies the constructible adic range theorem to J on C_0; it does not assume U affine or replace the endpoint calculation. The unit’s final dimension-bound sentence needs this coefficient-specific range input."
+   },
+   {
+    "node": "prop-a1-curve-boundary-sequence",
+    "why": "Step 5 uses its compact-support triangle and degree-zero concentration of the finite boundary, then derives the top-degree isomorphism. This is the localization input prescribed by the unit, not another endpoint theorem."
+   },
+   {
+    "node": "sk-thm-purity-transport",
+    "why": "Step 6 uses the canonical smooth orientation in relative dimension one; step 8 uses its base-change square under geometric Frobenius. These are smooth-purity infrastructure for the unit’s prescribed global Verdier argument."
+   },
+   {
+    "node": "sk-thm-sf-dual-perfect",
+    "why": "Step 6 applies its explicit evaluation/ orientation/twist composite to the perfect lisse F, obtaining D_UF=F^vee(1)[2]. This is the general six-functor tool named by the unit itself."
+   },
+   {
+    "node": "sk-thm-sf-global-duality",
+    "why": "Step 6 applies the smooth nonproper case descending to U_0; step 8 identifies its exchange and point-evaluation arrows. This is the global Verdier input named by the unit, not Poincare duality."
+   },
+   {
+    "node": "cor-coef-verdier-weil-equivariance",
+    "why": "Step 8 uses equivariance of duality evaluation, exceptional-adjunction counits and coefficient comparisons; taking their mates proves equivariance of the specific exchange and point-evaluation arrows. The unit has no general Weil descent compatibility theorem."
+   },
+   {
+    "node": "lem-sf-point",
+    "why": "Step 7 uses clauses (2)–(4) and the common-stage clause to evaluate point duals and the two pushforwards in bounded finite-dimensional coefficient complexes. The unit does not provide these point-category comparisons."
+   },
+   {
+    "node": "lem-pod-cohomology-of-dual-over-field",
+    "why": "Step 7 uses only finite-dimensional complex linear algebra at a finite field E: H^(-2)(C_E^vee)=H^2(C_E)^vee. Its closure contains no derived Poincare or global Verdier duality theorem; the endpoint unit supplies no such linear-algebra calculation."
+   }
+  ]
+ },
+ "tool_uses": [
+  "cor-galois-lisse-representations",
+  "lem-a1-adic-middle-extension-constructible",
+  "lem-a1-degree-zero-compact-support-sections",
+  "lem-a1-geometric-coinvariants-pure",
+  "lem-per-adic-lisse-cohomology-calculus",
+  "lem-sbc-smooth-fixed-dimension-over-field",
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "lem-sc-proper-affine-finite",
+  "lem-sc-smooth-connected-curve-local-rings",
+  "lem-sf-derived-homology-long-exact",
+  "lem-zl-affine-curve-range",
+  "prop-a1-curve-boundary-sequence",
+  "sk-thm-purity-transport",
+  "sk-thm-sf-dual-perfect",
+  "sk-thm-sf-global-duality",
+  "cor-coef-verdier-weil-equivariance",
+  "lem-sf-point",
+  "lem-pod-cohomology-of-dual-over-field"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q91-5605d6f81",
+  "group": "Q91",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q91-5605d6f81 (reviewer sub-agent of L); spot-checked: PASS with no fixes; full review in review.md. I read the item, the new node and every cited statement, plus the blueprint main-20261015 section and proofs and Milne LEC Def 18.1 and Prop 18.2/18.3(b) with proofs (pp. 118-121). The item statement matches _section.md verbatim. Steps: (1) the geometry lemmas apply, since C is integral and affine and hence not proper; (2) J=j_*F is a constructible Weil sheaf by lem-a1-adic-middle-extension-constructible, so lem-zl-affine-curve-range applies on C; (3)-(4) the support argument (faithful fibre functor of cor-galois(2), closed Z containing dense U, C reduced) is correct and does not borrow a proof; (5) the boundary term is in degree 0, so the degree-2 isomorphism is Weil-equivariant; (6)-(7) F is perfect, D_UF=F^vee(1)[2], and nonproper sk-thm-sf-global-duality applies; the H^{-2} sign is right (H^{-2}(B[2])=H^0(B)) and the Tate line is geometrically constant; (8) the Frobenius squares are written out and the earlier E5 point is repaired; (9) the annihilator step is genuinely elementary; (10) the coinvariant-purity hypotheses hold, also under its blueprint_update, and (-1) adds 2. New node lem-a1-constructible-degree-zero-proper-support: true; checked on X empty, G=0, X proper, a skyscraper, and j_*F with nontrivial inertia. It is statement-only and self-contained, the source is honest, the searches ran, and it is no duplicate (the existing comparisons are lisse-only or finite-ring). Small cases for the item (A^1 with constant coefficients, a Kummer sheaf with nontrivial character) agree. Batch-5 check: every listed citation is genuinely outside both assumptions. They are definitions (def-pod-lisse-l-adic-sheaves), the Galois dictionary (cor-galois-lisse-representations), Weil equivariance (outside PD's stated scope), finite-dimensional linear algebra (lem-pod-cohomology-of-dual-over-field), point-category facts (lem-sf-point), lattice and finiteness facts (lem-trf-curve-integral-lattice; finiteness is a trace-formula hypothesis), and the purity orientation and pro-etale topology. Not flagged mechanically: sk-thm-sf-global-duality is a pre-existing unit route node proved through sk-thm-sf-verdier-exchange. It is not given by the constant-coefficient PD leaf and is already in the batch-5 closure via sk-thm-sf-package and lem-fd-convolution-kernel, so it is noted for the maintainer, not a return reason. I accept the declared tool_uses; C7/C8/E5 are repaired. Same statement as lem-a1-middle-extension-endpoints, recorded in same_as and not cited."
  }
 }
