@@ -1,0 +1,134 @@
+{
+ "id": "lem-weil-pbc-ringed-site-localization-fraction-comparison",
+ "kind": "statement",
+ "title": "Sequential coefficient localization is sheafified fraction localization",
+ "statement": "Let C be a small site with topology J and sheaf of commutative rings R [def-weil-sheaf-of-modules-category]. For U in C and f in R(U), the module-sheaf defined as the sequential colimit of O_U under multiplication by f [def-weil-pbc-ringed-site-section-localization] is isomorphic to the sheafification of the fraction presheaf W↦R(W)[1/f|W] [def-weil-pbc-ringed-section-localization]. The isomorphism is one of O_U-modules.",
+ "source": {
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 0997, the sequential-colimit definition of A_f and its ordinary fraction interpretation."
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-ringed-site-section-localization",
+  "def-weil-pbc-ringed-section-localization"
+ ],
+ "proof": [
+  {
+   "text": "Send x at stage n of the rank-one presheaf sequence to x/f^n in each sectionwise fraction localization. Localization restriction maps extend ring restrictions, so this is a natural compatible cocone.",
+   "uses": [
+    "def-weil-pbc-ringed-section-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 0997, the sequential-colimit definition of A_f and its ordinary fraction interpretation."
+   }
+  },
+  {
+   "text": "For any presheaf-module cocone, send x/f^n to the image of x from stage n. Equality of fractions means a further power of f annihilates the difference of cross products; transition compatibility makes the two cocone images equal. The maps are linear and commute with restriction, and uniqueness holds because every fraction has this form. Thus the fraction presheaf is the colimit. Zero and nilpotent denominators are included.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 0997, the sequential-colimit definition of A_f and its ordinary fraction interpretation."
+   }
+  },
+  {
+   "text": "Sheafification preserves colimits as a left adjoint. The isomorphic counit identifies the sheafified unit presheaf, and its multiplication map, with the actual unit sheaf and multiplication map. Consequently sheafifying the colimit in the previous step gives the recorded sequential localization.",
+   "uses": [
+    "def-weil-pbc-ringed-site-section-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 0997, the sequential-colimit definition of A_f and its ordinary fraction interpretation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-ringed-section-localization",
+  "def-weil-pbc-ringed-site-section-localization"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 0997, the sequential-colimit definition of A_f and its ordinary fraction interpretation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Localization of a module at powers of an element is the colimit of the sequence with transition multiplication by that element",
+   "results": "[leanfinder] OK 8 hits, including LocalizedModule.Away, IsLocalizedModule.Away, LocalizedModule and localizedModuleIsLocalizedModule.",
+   "verdict": "The constructors and localization universal properties are available, but no sequential-colimit comparison theorem was found.",
+   "date": "2026-10-18"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Localization\", \"colimit\"",
+   "results": "[loogle] OK 3 hits: ModuleCat.instPreservesFiniteColimitsLocalizationLocalizedModuleFunctor and two SerreClassLocalization preservation lemmas.",
+   "verdict": "No sequential-colimit localization theorem.",
+   "date": "2026-10-18"
+  },
+  {
+   "tool": "grep",
+   "query": "(Localization|IsLocalizedModule).*(DirectLimit|ofSequence|[Cc]olimit)",
+   "results": "[grep] OK 1 hit, SmallAffineZariski.PreservesLocalization.colimitDesc_preimage.",
+   "verdict": "This concerns preservation on the small affine Zariski site, not the rank-one module sequence.",
+   "date": "2026-10-18"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Localization at powers of f is the sequential colimit of multiplication by f",
+   "results": "[leansearch] OK 8 hits. LocalizedModule.Away, IsLocalizedModule.recOn, IsLocalizedModule.mk, IsLocalizedModule.Away, and four ordinary localization results.",
+   "date": "2026-10-18",
+   "verdict": "No match: the universal properties support the pointwise argument, but no sequential-colimit or module-sheaf comparison theorem was found."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.RingedSiteCompleteElementsIdeal",
+  "date": "2026-10-18",
+  "group": "H3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-ringed-derived-complete-elements-ideal",
+   "place": "Coefficient-model comparison needed in proof steps 2 and 3."
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.RingedSiteLocalizationFractionComparison",
+  "file": "lean/Sheaf/CategoryTheory/RingedSiteLocalizationFractionComparison.lean",
+  "declaration": "CategoryTheory.ringedSite_localization_fraction_comparison",
+  "statement": "theorem ringedSite_localization_fraction_comparison\n    {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)\n    (R : Sheaf J CommRingCat.{u}) (U : C) (f : R.obj.obj (op U)) :\n    let R₀ := (sheafCompose J (forget₂ CommRingCat RingCat)).obj R\n    Nonempty (ringedSiteSectionLocalization R₀ U f ≅\n      ringedSectionLocalization (R.over U) (ringedSliceSection R U f))",
+  "branch": "sheaf-dag",
+  "by": "H3",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261018T071156-L-1669426",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261018T071156-L-1669426",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

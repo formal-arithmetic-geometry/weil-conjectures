@@ -27,9 +27,10 @@
  ],
  "proof": [
   {
-   "text": "On the slice over $U$, write $F_f=R\\mathcal Hom_{\\mathcal O_U}(\\mathcal O_U[1/f],K|_U)$. Localization at zero is the zero module, so $F_0=0$ by the Hom-complex formula. Thus $0\\in S_K(U)$.",
+   "text": "Localization at zero is zero, proved by colimit extensionality and the zero transition map. The contravariant exact derived-Hom functor sends its degree-zero object to zero.",
    "uses": [
-    "def-pur-derived-internal-hom"
+    "def-weil-pbc-ringed-site-section-localization",
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction"
    ],
    "elementary": true,
    "source": {
@@ -38,10 +39,9 @@
    }
   },
   {
-   "text": "For $f\\in S_K(U)$ and $a\\in\\mathcal O(U)$ apply the localization internal-Hom identity with $P=\\mathcal O_U[1/f]$ and localizing section $a$. It gives $F_{af}\\cong R\\mathcal Hom_{\\mathcal O_U}(\\mathcal O_U[1/a],F_f)=0$. This also applies when either section is zero; in particular $a=-1$ proves closure under negatives.",
+   "text": "Use multiplicative stability for arbitrary a to close the complete-element predicate under multiplication.",
    "uses": [
-    "lem-weil-pbc-ringed-localization-rhom-calculus",
-    "def-pur-derived-internal-hom"
+    "lem-weil-pbc-ringed-complete-element-mul"
    ],
    "elementary": false,
    "source": {
@@ -50,10 +50,10 @@
    }
   },
   {
-   "text": "For $f,g\\in S_K(U)$ put $h=f+g$. For each $V\\to U$ take $R=\\mathcal O(V)[1/h]$. The images of $f,g$ generate its unit ideal because $f/h+g/h=1$. The standard-covering gluing statement gives injectivity and middle exactness of $0\\to R\\to R[1/f]\\oplus R[1/g]\\to R[1/(fg)]$, with diagonal and difference maps. For surjectivity, represent an element of the last term as $z/(fg)^n$, increasing $n$ to be positive. The binomial expansion of $(f/h+g/h)^{2n-1}=1$ gives $u f^n+v g^n=1$ for some $u,v\\in R$. The pair $(vz/f^n,-uz/g^n)$ maps to $z/(fg)^n$. Sheafifying this sectionwise exact sequence gives $0\\to\\mathcal O_U[1/h]\\to\\mathcal O_U[1/(fh)]\\oplus\\mathcal O_U[1/(gh)]\\to\\mathcal O_U[1/(fgh)]\\to0$; iterated localization agrees with localization at the product by its universal property.",
+   "text": "For f and g complete, use the short exact localization sequence with h=f+g. Multiplicative stability makes the derived Homs of L(fh), L(gh), and L(fgh) zero. The biproduct identity decomposition gives vanishing for L(fh)⊕L(gh).",
    "uses": [
-    "lem-weil-pbc-standard-covering-glue",
-    "lem-weil-pbc-ringed-site-module-sheafification-exact"
+    "lem-weil-pbc-ringed-localization-sum-sequence",
+    "lem-weil-pbc-ringed-complete-element-mul"
    ],
    "elementary": false,
    "source": {
@@ -62,24 +62,10 @@
    }
   },
   {
-   "text": "Write $A=\\mathcal O_U[1/h]$, $B=\\mathcal O_U[1/(fh)]\\oplus\\mathcal O_U[1/(gh)]$, $D=\\mathcal O_U[1/(fgh)]$, and let $i:A\\to B$ be the injection of step 3. In degree-zero complexes its cone $T=C(i)$ is $A\\xrightarrow{i}B$ in degrees $-1,0$. The projection $T\\to D[0]$ is a quasi-isomorphism: its degree $-1$ cohomology is $\\ker i=0$, and its degree $0$ cohomology is $\\operatorname{coker}i=D$. Choose a K-injective representative $I^\\bullet$ of $K|_U$, and write $H(X)=\\mathcal Hom^\\bullet(X,I^\\bullet)$. The quasi-isomorphism clause of the derived internal-Hom definition gives a quasi-isomorphism $H(D)\\to H(T)$. Step 2 gives $F_{fh}=F_{gh}=F_{fgh}=0$ (multipliers $h,h,gh$ respectively), so $H(T)$ and $H(B)=H(\\mathcal O_U[1/(fh)])\\oplus H(\\mathcal O_U[1/(gh)])$ are acyclic. The degreewise split sequence $0\\to B\\to T\\to A[1]\\to0$ gives $0\\to H(A[1])\\to H(T)\\to H(B)\\to0$, also degreewise split: restriction to the graded summand $B$ is surjective, with kernel the maps factoring through the graded quotient $A[1]$, and the Hom differential preserves this kernel. Its kernel is acyclic by the following local boundary chase. For a closed local section $x$ of the kernel, acyclicity of $H(T)$ gives locally $y$ with $dy=x$; its image $\\bar y$ is closed in $H(B)$, so locally $\\bar y=dz$. Lift $z$ using the degreewise splitting; then $y-d\\widetilde z$ lies in the kernel and has differential $x$. Thus $H(A[1])$ has zero cohomology sheaves. Its degree $n$ term is $\\mathcal Hom(A,I^{n-1})$, with the differential of $I$, so its cohomology is that of $H(A)$ shifted by one degree. Therefore $F_h=0$ and $f+g\\in S_K(U)$.",
+   "text": "The degree-zero short exact sequence gives a distinguished triangle. Apply the contravariant triangulated derived-Hom functor; two terms vanish, so the third vanishes. This proves addition without a separate cone calculation.",
    "uses": [
-    "def-pur-derived-internal-hom",
     "def-weil-abstract-derived-category",
-    "def-weil-sheaf-of-modules-category"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebraization.tex",
-    "place": "Tag 0998 (lemma-ideal-of-elements-complete-wrt), with Tag 0997 (lemma-hom-from-Af) identifying its vanishing criterion with derived internal Hom."
-   }
-  },
-  {
-   "text": "For any arrow $V\\to U$, the restriction identity for localization internal Hom gives $F_f|_V\\cong F_{f|_V}$. Hence membership is preserved by restriction. Conversely, suppose $f|_{U_i}\\in S_K(U_i)$ for a covering family of $U$. Then $F_f|_{U_i}=0$ for all $i$. Slice restriction is evaluation of module sheaves on objects lying over $U_i$, so preserves kernels and the locally defined images; it therefore commutes with cohomology. Every cohomology sheaf of $F_f$ restricts to zero on the cover. A section of such a sheaf over any $V\\to U$ vanishes on the pulled-back covering sieve and is zero by the uniqueness axiom for a sheaf. Thus all cohomology sheaves vanish, the representative complex is quasi-isomorphic to zero, and $F_f=0$. A compatible family in $S_K$ glues uniquely in $\\mathcal O$, and this local criterion puts its glued section in $S_K$. Together with steps 1--4 this proves that $S_K$ is a sheaf of ideals.",
-   "uses": [
-    "lem-weil-pbc-ringed-localization-rhom-calculus",
-    "def-weil-sheaf-of-modules-category",
-    "def-weil-abstract-derived-category"
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction"
    ],
    "elementary": false,
    "source": {
@@ -88,8 +74,21 @@
    }
   },
   {
-   "text": "On a slice where $b_1,\\ldots,b_r$ generate the ideal sheaf and belong to $S_K$, a section of the generated ideal is locally a finite sum $\\sum_i a_i b_i$. Step 2 puts each summand in $S_K$, and repeated application of step 4 puts the sum in $S_K$. Step 5 glues the local membership. For $r=0$ the generated ideal is zero and step 1 applies.",
-   "uses": [],
+   "text": "Build the ideal whose carrier is exactly the complete-element predicate. The locality theorem gives restriction by taking the maximal sieve, and descent on every covering sieve.",
+   "uses": [
+    "lem-weil-pbc-ringed-complete-element-local"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 0998 (lemma-ideal-of-elements-complete-wrt), with Tag 0997 (lemma-hom-from-Af) identifying its vanishing criterion with derived internal Hom."
+   }
+  },
+  {
+   "text": "The locally generated ideal conclusion follows from Ideal.span_le and descent: every generator lies in the constructed ideal, hence every finite-span combination does.",
+   "uses": [
+    "lem-weil-pbc-ringed-complete-element-local"
+   ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/algebraization.tex",
@@ -98,17 +97,17 @@
   }
  ],
  "proof_deps": [
-  "def-pur-derived-internal-hom",
-  "lem-weil-pbc-ringed-localization-rhom-calculus",
-  "lem-weil-pbc-standard-covering-glue",
-  "lem-weil-pbc-ringed-site-module-sheafification-exact",
+  "def-weil-pbc-ringed-site-section-localization",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-weil-pbc-ringed-complete-element-mul",
+  "lem-weil-pbc-ringed-localization-sum-sequence",
   "def-weil-abstract-derived-category",
-  "def-weil-sheaf-of-modules-category"
+  "lem-weil-pbc-ringed-complete-element-local"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/algebraization.tex",
-  "place": "Tag 0998 (lemma-ideal-of-elements-complete-wrt), with the omitted sheaf verification written out using Tag 08JB"
+  "place": "Tag 0998; the six steps are implemented using the exact derived-Hom and distinguished-triangle APIs. Covering-sieve locality is proved via cohomology and separatedness."
  },
  "mathlib_searches": [
   {
@@ -242,5 +241,15 @@
   "by": "NH",
   "date": "2026-10-15",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261018T071156-L-1669426",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

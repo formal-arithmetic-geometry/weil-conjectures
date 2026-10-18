@@ -1,0 +1,157 @@
+{
+ "id": "lem-weil-pbc-ringed-complete-element-mul",
+ "kind": "statement",
+ "title": "Multiples of complete sections remain complete",
+ "statement": "Let C be a small site with topology J, R a sheaf of commutative rings, and K an arbitrary unbounded derived R-module, with derived categories on C and all slices [def-weil-abstract-derived-category, def-weil-sheaf-of-modules-category]. For U in C and a,f in R(U), if IsRingedSiteCompleteElement J R K U f [def-weil-pbc-ringed-site-complete-element], then IsRingedSiteCompleteElement J R K U (a*f).",
+ "source": {
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tags 0998 and 0996; multiplicative-stability step."
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-ringed-site-complete-element"
+ ],
+ "proof": [
+  {
+   "text": "Use the coefficient-model comparison to turn the hypothesis into vanishing of RHom of the degree-zero fraction coefficient at f. Choose a K-injective representative I of K|U and compute that derived Hom by the ordinary Hom complex.",
+   "uses": [
+    "lem-weil-pbc-ringed-site-localization-fraction-comparison",
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tags 0998 and 0996; multiplicative-stability step."
+   }
+  },
+  {
+   "text": "The existing localization K-flat-model theorem, applied with the zero bounded localization complex, says that the fraction coefficient at f in degree zero is K-flat. Hence Hom(O[1/f][0],I) is K-injective.",
+   "uses": [
+    "lem-weil-pbc-ringed-localization-rhom-calculus",
+    "lem-pur-hom-kflat-into-kinjective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tags 0998 and 0996; multiplicative-stability step."
+   }
+  },
+  {
+   "text": "The covariant exact derived-Hom functor at the coefficient O[1/a][0] sends the zero inner object to zero. Compute this outer Hom using the K-injective ordinary inner Hom complex, then apply the ordinary Hom-total-tensor currying isomorphism.",
+   "uses": [
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "def-pur-derived-internal-hom",
+    "lem-sc-derived-hom-tensor-total"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tags 0998 and 0996; multiplicative-stability step."
+   }
+  },
+  {
+   "text": "The existing fraction-coefficient tensor-product comparison and the degree-zero total-tensor comparison identify the total tensor with O[1/(af)][0]. Compute its derived Hom using I, transport vanishing through these isomorphisms, and return to the sequential coefficient via the first comparison.",
+   "uses": [
+    "lem-weil-pbc-ringed-localization-rhom-calculus",
+    "def-pur-derived-internal-hom",
+    "lem-weil-pbc-ringed-site-localization-fraction-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tags 0998 and 0996; multiplicative-stability step."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ringed-site-localization-fraction-comparison",
+  "def-pur-derived-internal-hom",
+  "lem-weil-pbc-ringed-localization-rhom-calculus",
+  "lem-pur-hom-kflat-into-kinjective",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-sc-derived-hom-tensor-total"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tags 0998 and 0996. The Lean proof uses ordinary Hom-total-tensor on K-injective representatives; only the plain coefficient-model comparison remains below it, so no change of derived-category universe is needed."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived internal Hom from localization at a product is the iterated derived internal Hom from each localization",
+   "results": "[leanfinder] OK 8 hits, including derived-category localization, linearity, and Tor declarations.",
+   "verdict": "No derived internal-Hom localization formula on a general ringed site.",
+   "date": "2026-10-18"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Hom\", \"tensor\", \"localization\"",
+   "results": "[loogle] OK 6 hits, all involving CategoryTheory.Localization.Monoidal and categorical monoidal localization.",
+   "verdict": "No coefficient ring localization or derived internal-Hom formula.",
+   "date": "2026-10-18"
+  },
+  {
+   "tool": "grep",
+   "query": "derivedInternalHom|localization.*currying",
+   "results": "[grep] OK 0 hits.",
+   "verdict": "No matching Mathlib theorem.",
+   "date": "2026-10-18"
+  },
+  {
+   "tool": "leansearch",
+   "query": "If derived Hom from localization at f into K vanishes then it vanishes for localization at a times f",
+   "results": "[leansearch] OK 8 hits. IsLocalization.Away.map, awayToAwayLeft, and six ordinary localization-map results.",
+   "date": "2026-10-18",
+   "verdict": "No match: these construct ring maps, not the internal derived-Hom vanishing implication."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.RingedSiteCompleteElementsIdeal",
+  "date": "2026-10-18",
+  "group": "H3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-ringed-derived-complete-elements-ideal",
+   "place": "Tags 0998 and 0996; multiplicative-stability step."
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.RingedSiteCompleteElementMul",
+  "file": "lean/Sheaf/CategoryTheory/RingedSiteCompleteElementMul.lean",
+  "declaration": "CategoryTheory.ringedSite_complete_element_mul",
+  "statement": "theorem ringedSite_complete_element_mul\n    {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)\n    (R : Sheaf J CommRingCat.{u})\n    [HasDerivedCategory.{w} (ringedSiteModules.{u}\n      ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))]\n    [∀ U : C, HasDerivedCategory.{w} (SheafOfModules.{u}\n      (((sheafCompose J (forget₂ CommRingCat RingCat)).obj R).over U))]\n    (K : DerivedCategory (ringedSiteModules.{u}\n      ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))) (U : C) (a f : R.obj.obj (op U))\n    (hf : IsRingedSiteCompleteElement J R K U f) :\n    IsRingedSiteCompleteElement J R K U (a * f)",
+  "branch": "sheaf-dag",
+  "by": "H3",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261018T071156-L-1669426",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261018T071156-L-1669426",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

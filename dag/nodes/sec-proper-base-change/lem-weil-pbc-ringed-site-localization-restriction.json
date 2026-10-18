@@ -1,0 +1,130 @@
+{
+ "id": "lem-weil-pbc-ringed-site-localization-restriction",
+ "kind": "statement",
+ "title": "Sequential localization commutes with slice restriction",
+ "statement": "Let C be a small site with topology J and sheaf of commutative rings R [def-weil-sheaf-of-modules-category]. For a:V→U and f in R(U), restriction along Over.map a identifies the module-sheaf O_U[1/f] with O_V[1/R(a)(f)], where both localizations are the sequential colimits [def-weil-pbc-ringed-site-section-localization]. This is an isomorphism of modules over O_V.",
+ "source": {
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 0997; slice restriction as in sites-cohomology.tex, Tag 08JB."
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-ringed-site-section-localization"
+ ],
+ "proof": [
+  {
+   "text": "Restriction along Over.map a commutes with sheafification. Restrict its unit, extend by the slice sheafification adjunction, and show that this extension is an isomorphism: the restricted unit and slice unit are both locally injective and locally surjective. Covering sieves on an object over V are precisely the underlying covering sieves on its domain.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 0997; slice restriction as in sites-cohomology.tex, Tag 08JB."
+   }
+  },
+  {
+   "text": "Presheaf restriction preserves colimits by the sectionwise criterion. Sheafification preserves colimits as a left adjoint. The comparison of step 1 therefore shows that sheaf restriction preserves sequential colimits: first apply it to the presheaf diagram, then use the isomorphic sheafification counit to recover any sheaf diagram.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 0997; slice restriction as in sites-cohomology.tex, Tag 08JB."
+   }
+  },
+  {
+   "text": "The restricted unit module is the unit module, and multiplication by f becomes multiplication by R(a)(f), by functoriality of R. Construct the natural isomorphism of sequential diagrams using this equality. Colimit preservation and the induced colimit isomorphism give the claimed comparison, including f=0.",
+   "uses": [
+    "def-weil-pbc-ringed-site-section-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 0997; slice restriction as in sites-cohomology.tex, Tag 08JB."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-ringed-site-section-localization"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 0997; slice restriction as in sites-cohomology.tex, Tag 08JB."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of module sheaves to a slice site commutes with sheafification and colimits",
+   "results": "[leanfinder] OK 8 hits, including PresheafOfModules.sheafificationCompForgetCompToPresheaf, PresheafOfModules.toPresheaf_map_sheafificationHomEquiv, and PresheafOfModules.sheafificationCompToSheaf.",
+   "verdict": "These give the ordinary sheafification API, but no slice restriction or localization comparison.",
+   "date": "2026-10-18"
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.mapDerivedCategorySingleFunctor",
+   "results": "[loogle] OK 0 hits; unknown identifier in the search index. The declaration was located and read directly in Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean.",
+   "verdict": "Use the directly located exact-functor comparison for degree-zero complexes.",
+   "date": "2026-10-18"
+  },
+  {
+   "tool": "grep",
+   "query": "localization.*restriction|overMap.*colimit",
+   "results": "[grep] OK 4 hits; model-category localization restrictions and RingTheory/LocalProperties/Basic. No module-sheaf localization restriction result.",
+   "verdict": "No matching theorem.",
+   "date": "2026-10-18"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction between slice sites preserves the sequential colimit localization module sheaf",
+   "results": "[leansearch] OK 8 hits. SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesValRingCat, SheafOfModules.instHasColimitsOfSizeOfPresheafOfModulesValRingCat in Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits, and six other results.",
+   "date": "2026-10-18",
+   "verdict": "No match: existence of sheaf colimits and restriction of scheme modules do not identify this sequential localization under arbitrary slice restriction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.RingedSiteCompleteElementsIdeal",
+  "date": "2026-10-18",
+  "group": "H3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-ringed-derived-complete-elements-ideal",
+   "place": "Tag 0997; slice restriction as in sites-cohomology.tex, Tag 08JB."
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.RingedSiteLocalizationRestriction",
+  "file": "lean/Sheaf/CategoryTheory/RingedSiteLocalizationRestriction.lean",
+  "declaration": "CategoryTheory.ringedSite_localization_restriction",
+  "statement": "theorem ringedSite_localization_restriction\n    {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)\n    (R : Sheaf J CommRingCat.{u}) (U V : C) (a : V ⟶ U)\n    (f : R.obj.obj (op U)) :\n    let R₀ := (sheafCompose J (forget₂ CommRingCat RingCat)).obj R\n    Nonempty ((SheafOfModules.overMap.{u} R₀ a).obj\n      (ringedSiteSectionLocalization R₀ U f) ≅\n      ringedSiteSectionLocalization R₀ V (R.obj.map a.op f))",
+  "branch": "sheaf-dag",
+  "by": "H3",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261018T071156-L-1669426",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261018T071156-L-1669426",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
