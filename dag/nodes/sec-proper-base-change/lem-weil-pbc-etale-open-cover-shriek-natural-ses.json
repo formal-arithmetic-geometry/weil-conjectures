@@ -1,0 +1,153 @@
+{
+ "id": "lem-weil-pbc-etale-open-cover-shriek-natural-ses",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-direct-image-finiteness-proper",
+   "place": "Classical constructibility input: relative Mayer--Vietoris reduction, via Stacks Tags 0GL0, 0GKN and 0GKK. Natural extension-by-zero short exact sequences for a two-open etale cover",
+   "via": [
+    "lem-weil-pbc-etale-shriek-relative-mayer-vietoris",
+    "lem-weil-pbc-etale-compactification-constructibility",
+    "lem-weil-pbc-etale-proper-direct-image-finiteness"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Natural extension-by-zero short exact sequences for a two-open etale cover",
+ "statement": "Let Λ be any commutative ring and X a scheme [def-pc-scheme]. For opens U,V of X with U ∪ V = X set W = U ∩ V. For T = U,V,W let jT:T→X be the inclusion and E(T)=jT* ⋙ jT!, where jT* is inverse image [def-weil-pbc-inverse-image] and jT! is extension by zero [def-weil-pbc-extension-by-zero] on sheaves of Λ-modules. There exist natural transformations iU:E(W)→E(U) and iV:E(W)→E(V) such that for every sheaf F the signed pair (iU(F),−iV(F)), followed by the pair of adjunction counits (εU(F),εV(F)), has composite zero and gives a short exact sequence 0→E(W)(F)→E(U)(F)⊕E(V)(F)→F→0 [def-weil-pbc-exact-sequence].",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0GKK, lemma-mayer-vietoris-shriek, proof"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-extension-by-zero",
+  "def-weil-pbc-exact-sequence"
+ ],
+ "proof": [
+  {
+   "text": "Use the generic categorical construction SheafOfModules.nestedMate from WeilConjectures.Algebra.Homology.OpenCoverMateComplexShortExact, imported with import all because these helpers are private. It transposes the restriction of the outer unit, conjugated by the restriction-composition isomorphism, giving a natural transformation. Apply the existing SheafOfModules.nestedMate_app and SheafOfModules.nestedTranspose_counit to identify its composite with the outer counit with the intersection counit. These helpers quantify over arbitrary categories, functors and adjunctions, so specialize directly to small etale sheaves. The signed pair therefore has composite zero.",
+   "uses": [
+    "def-weil-pbc-extension-by-zero",
+    "def-weil-pbc-inverse-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0GKK, lemma-mayer-vietoris-shriek, proof"
+   }
+  },
+  {
+   "text": "At a geometric point in both opens, all three counits are isomorphisms. The two equal-composite identities identify the sequence with diagonal difference followed by addition, with explicit retraction and section. At a point in precisely one open, the intersection and the other-open stalk vanish, and the remaining counit is invertible. The covering excludes all other points. Transport along the stalk functor biproduct comparison. The exact conservative family of geometric stalk functors reflects short exactness.",
+   "uses": [
+    "lem-weil-pbc-extension-by-zero-stalks",
+    "prop-weil-pbc-geometric-stalks-exact",
+    "lemma-weil-pbc-geometric-stalk-conservative",
+    "lem-weil-pbc-jointly-reflect-short-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0GKK, lemma-mayer-vietoris-shriek, proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-extension-by-zero",
+  "def-weil-pbc-inverse-image",
+  "lem-weil-pbc-extension-by-zero-stalks",
+  "prop-weil-pbc-geometric-stalks-exact",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "lem-weil-pbc-jointly-reflect-short-exact"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0GKK, lemma-mayer-vietoris-shriek, proof; natural maps, degreewise exactness and associated derived triangle"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A two open covering of a scheme gives a natural short exact sequence of extension by zero etale sheaves",
+   "results": "AlgebraicGeometry.Scheme.Cover.gluedCover_t'; AlgebraicGeometry.Scheme.zero_of_zero_cover; CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_shortExact; CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact; CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex; AlgebraicGeometry.Scheme.OpenCover.ext_elem; CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₂; CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_g Only free additive representable sheaf Mayer--Vietoris; not arbitrary sheaves.",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"shortExact_iff\"",
+   "results": "Found generic shortExact_iff, iso transport, and degreewise criteria; none supplies the etale open-cover maps and exactness.",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "shortExact_iff|shortExact_of_degreewise_shortExact",
+   "results": "Mathlib CategoryTheory/Functor/ReflectsIso/Exact.lean:81 gives the generic detection criterion; no etale-extension sequence.",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A cover by two open subschemes gives a natural short exact sequence of extension by zero etale sheaves",
+   "results": "AlgebraicGeometry.Scheme.openCoverOfIsOpenCover; AlgebraicGeometry.Scheme.zero_of_zero_cover; AlgebraicGeometry.Scheme.OpenCover.ext_elem; AlgebraicGeometry.Scheme.OpenCover; AlgebraicGeometry.Scheme.openCoverOfISupEqTop; AlgebraicGeometry.coprodOpenCover; AlgebraicGeometry.Scheme.OpenCover.restrict; AlgebraicGeometry.Scheme.LocalRepresentability.glueData_openCover_map. Only scheme open-cover and structure-sheaf section APIs; no arbitrary etale module-sheaf sequence.",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleShriekRelativeMayerVietoris",
+  "date": "2026-10-18",
+  "group": "U4"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleOpenCoverShriekNaturalSES",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleOpenCoverShriekNaturalSES.lean",
+  "declaration": "AlgebraicGeometry.Etale.exists_natural_shortExact_openCover_lowerShriek",
+  "statement": "theorem exists_natural_shortExact_openCover_lowerShriek\n    (Λ : Type (u + 1)) [CommRing Λ] {X : Scheme.{u}}\n    (U V : X.Opens) (hcover : U ⊔ V = ⊤) :\n    let E (T : X.Opens) := upperStar (ModuleCat.{u + 1} Λ) T.ι ⋙\n      openImmersionLowerShriek (ModuleCat.{u + 1} Λ) T.ι\n    ∃ (iU : E (U ⊓ V) ⟶ E U) (iV : E (U ⊓ V) ⟶ E V),\n      ∀ F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ),\n      ∃ hz : biprod.lift (iU.app F) (-(iV.app F)) ≫\n          biprod.desc\n            ((openImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} Λ)\n              U.ι).counit.app F)\n            ((openImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} Λ)\n              V.ι).counit.app F) = 0,\n        (ShortComplex.mk (biprod.lift (iU.app F) (-(iV.app F)))\n          (biprod.desc\n            ((openImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} Λ)\n              U.ι).counit.app F)\n            ((openImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} Λ)\n              V.ι).counit.app F)) hz).ShortExact",
+  "branch": "sheaf-dag",
+  "by": "U4",
+  "date": "2026-10-18"
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-weil-pbc-etale-shriek-relative-mayer-vietoris",
+  "worker": "U4",
+  "summary": "Formal proof of the sheaf-level portion of Tag 0GKK with natural adjunction-mate maps; all helper lemmas proved.",
+  "tool_uses": [
+   {
+    "node": "lemma-weil-pbc-geometric-stalk-conservative",
+    "why": "Generic detection of sheaf isomorphisms by geometric stalks, used only to reflect the explicit short exact stalk sequences, as in the existing open-cover sheaf-SES node."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U4",
+  "result": "pass",
+  "landing": "20261018T091413-L-3259363",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U4",
+  "result": "pass",
+  "landing": "20261018T091413-L-3259363",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -29,101 +29,40 @@
  ],
  "proof": [
   {
-   "text": "Put $W=U\\cap V$ and write $k_T:T\\hookrightarrow X$ for $T=U,V,W$. The affine-intersection criterion [lem-weil-pbc-quasi-separated-affine-cover-criterion] shows that opens of $X$ are quasi-separated. Choose finite affine covers of $U$ and $V$; the intersections of their members are quasi-compact by the same criterion, so their finite union $W$ is quasi-compact. Thus all three sources are qcqs. By [lem-weil-pbc-qcqs-morphism-permanence], each $k_T$ is quasi-compact. An open immersion is locally of finite type: inside an affine neighbourhood, principal opens contained in the open subscheme have coordinate ring $A[t]/(at-1)$. It is separated since its diagonal is an isomorphism. The same principal-open calculation applied to affine finite-type presentations for $f$ proves that $fk_T$ is locally of finite type; it is quasi-compact by the cited permanence lemma (source qc, target qs), hence finite type. Its diagonal is the restriction of the closed diagonal of $f$, hence closed. Therefore composition may be applied to $k_T,f$.",
+   "text": "Use the derived extension-by-zero triangle for the open cover.",
    "uses": [
-    "lem-weil-pbc-quasi-separated-affine-cover-criterion",
-    "lem-weil-pbc-qcqs-morphism-permanence",
-    "def-weil-open-immersion",
-    "def-weil-pbc-scheme-conventions"
+    "lem-weil-pbc-etale-open-cover-shriek-triangle"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tag 0GKN, label lemma-relative-mayer-vietoris, hypotheses for open inclusions"
+    "place": "Tag 0GKK"
    }
   },
   {
-   "text": "Use [lem-weil-pbc-etale-constant-ring-module-equivalence] to identify sheaves valued in $\\Lambda$-modules, used in the extension-by-zero definition, with sheaves of modules over the constant ring sheaf $\\Lambda_X$, used in [def-weil-pbc-derived-categories]. This equivalence keeps the underlying abelian presheaves and their maps unchanged and is exact. Restriction and the sheafification defining extension by zero agree under it: restrict the scalar action to constant sections, or extend it uniquely along the constant-ring sheafification map. Thus the following maps and exact sequences are in the coefficient category of the statement. For a sheaf $F$ of $\\Lambda$-modules on $X_{\\Et}$ put $A(F)=k_{W!}(F|_W)$ and $B(F)=k_{U!}(F|_U)\\oplus k_{V!}(F|_V)$. By [lem-weil-pbc-etale-open-cover-shriek-ses], applied to the open cover $X=U\\cup V$, the maps $(\\iota_U,-\\iota_V):A(F)\\to B(F)$ and $\\varepsilon_U+\\varepsilon_V:B(F)\\to F$ (the nested-open maps and the counits of extension by zero) give a short exact sequence $0\\to A(F)\\to B(F)\\to F\\to0$ of module sheaves, natural in $F$.",
+   "text": "Apply the triangulated right derived compactification pushforward and transport each open term through the qcqs compactification composition isomorphism.",
    "uses": [
-    "lem-weil-pbc-etale-constant-ring-module-equivalence",
-    "lem-weil-pbc-etale-open-cover-shriek-ses"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tag 0GKK, label lemma-mayer-vietoris-shriek, short exact sequence in its proof"
-   }
-  },
-  {
-   "text": "Represent $K$ by a bounded-below complex $L$. Restriction is exact by [prop-weil-pbc-inverse-image-modules-exact] and extension by zero is exact by [lem-weil-pbc-extension-by-zero-exact], so their termwise operations represent $K|_T$ and $k_{T!}(K|_T)$ and preserve a common lower bound. Naturality of the maps in step 2 makes its sequences in degrees $L^n$ a short exact sequence of complexes $0\\to A(L)\\to B(L)\\to L\\to0$. The module category is abelian by [lem-weil-pbc-module-sheaves-grothendieck-abelian]. Apply [lem-weil-pbc-complex-ses-triangle] to obtain the distinguished triangle $k_{W!}K|_W\\to k_{U!}K|_U\\oplus k_{V!}K|_V\\to K\\to(k_{W!}K|_W)[1]$. All its objects lie in $D^+$; the same mapping-cone construction gives the bounded-below triangle.",
-   "uses": [
-    "prop-weil-pbc-inverse-image-modules-exact",
-    "lem-weil-pbc-extension-by-zero-exact",
-    "lem-weil-pbc-module-sheaves-grothendieck-abelian",
-    "lem-weil-pbc-complex-ses-triangle"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tag 0GKK, label lemma-mayer-vietoris-shriek; Tag 0152, label lemma-derived-canonical-delta-functor"
-   }
-  },
-  {
-   "text": "Fix the compactification $(j,p)$ chosen for $f$. The functor $j_!$ is exact by [lem-weil-pbc-extension-by-zero-exact], hence its termwise derived functor is triangulated by [lem-sf-exact-functor-derived-triangulated]. The module categories on $\\overline X$ and $Y$ are Grothendieck abelian by [lem-weil-pbc-module-sheaves-grothendieck-abelian] and have K-injective resolutions by [lem-weil-pbc-kinjective-functorial-existence]. The module direct image $p_*$ is additive and left exact by [lem-weil-pbc-module-direct-image-left-exact]. Apply [lem-pc-right-derived-functor-triangulated] to $p_*$: $Rp_*$ preserves distinguished triangles and commutes with shifts. By [lem-weil-pbc-derived-functor-negative-vanishing] it preserves bounded-below objects; $j_!$ also does so termwise. Thus $Rf_!^{(j,p)}=Rp_*j_!$ is triangulated on $D^+$. Apply it to step 3. Additivity identifies the middle vertex with $Rf_!k_{U!}K|_U\\oplus Rf_!k_{V!}K|_V$, and shift compatibility identifies the last vertex with $(Rf_!k_{W!}K|_W)[1]$.",
-   "uses": [
-    "lem-weil-pbc-extension-by-zero-exact",
-    "lem-sf-exact-functor-derived-triangulated",
-    "lem-weil-pbc-module-sheaves-grothendieck-abelian",
-    "lem-weil-pbc-kinjective-functorial-existence",
-    "lem-weil-pbc-module-direct-image-left-exact",
-    "lem-pc-right-derived-functor-triangulated",
-    "lem-weil-pbc-derived-functor-negative-vanishing",
-    "def-weil-pbc-projection-compactification"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tag 0GKN, label lemma-relative-mayer-vietoris, applying the triangulated compact-support functor; Tag 0159, label lemma-right-derived-properties"
-   }
-  },
-  {
-   "text": "For each $T=U,V,W$, choose the compactification $(k_T,1_X)$ of $k_T$. Here $1_X$ is proper (its diagonal is an isomorphism, its affine presentation is the identity, and every base change is an identity closed map). By [def-weil-pbc-projection-compactification], $R(k_T)_!^{(k_T,1_X)}=R(1_X)_*k_{T!}=k_{T!}$: identity direct image is the identity, and applying it to a resolution gives the same object in the derived category. Apply [lem-weil-pbc-etale-shriek-qcqs-composition] to $T\\xrightarrow{k_T}X\\xrightarrow{f}Y$, choosing for the composite exactly the compactification specified in the statement for $a,b,d$. This gives natural isomorphisms $Rf_!k_{U!}\\cong Ra_!$, $Rf_!k_{V!}\\cong Rb_!$, $Rf_!k_{W!}\\cong Rd_!$. Let their evaluations on the restricted complexes be $e_U,e_V,e_W$. The isomorphism on the middle vertex is $e_U\\oplus e_V$, on the third vertex the identity, and on the last vertex $e_W[1]$. If the arrows of the triangle in step 4 are $u,v,w$, define the new arrows by $(e_U\\oplus e_V)u e_W^{-1}$, $v(e_U\\oplus e_V)^{-1}$, and $e_W[1]w$. These formulas give an isomorphism of triangles, so the resulting triangle is distinguished and is exactly the triangle asserted for the chosen candidates.",
-   "uses": [
-    "def-weil-pbc-projection-compactification",
     "lem-weil-pbc-etale-shriek-qcqs-composition",
+    "def-weil-pbc-projection-compactification",
     "def-weil-triangulated-category"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tag 0GKN, label lemma-relative-mayer-vietoris, composition identification (Tag 0F7J, label lemma-shriek-composition)"
+    "place": "Tag 0GKN"
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-quasi-separated-affine-cover-criterion",
-  "lem-weil-pbc-qcqs-morphism-permanence",
-  "def-weil-open-immersion",
-  "def-weil-pbc-scheme-conventions",
-  "lem-weil-pbc-etale-constant-ring-module-equivalence",
-  "lem-weil-pbc-etale-open-cover-shriek-ses",
-  "prop-weil-pbc-inverse-image-modules-exact",
-  "lem-weil-pbc-extension-by-zero-exact",
-  "lem-weil-pbc-module-sheaves-grothendieck-abelian",
-  "lem-weil-pbc-complex-ses-triangle",
-  "lem-sf-exact-functor-derived-triangulated",
-  "lem-weil-pbc-kinjective-functorial-existence",
-  "lem-weil-pbc-module-direct-image-left-exact",
-  "lem-pc-right-derived-functor-triangulated",
-  "lem-weil-pbc-derived-functor-negative-vanishing",
-  "def-weil-pbc-projection-compactification",
+  "lem-weil-pbc-etale-open-cover-shriek-triangle",
   "lem-weil-pbc-etale-shriek-qcqs-composition",
+  "def-weil-pbc-projection-compactification",
   "def-weil-triangulated-category"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/more-etale.tex",
-  "place": "Tags 0GKN and 0GKK, labels lemma-relative-mayer-vietoris and lemma-mayer-vietoris-shriek; signed stalk proof expanded"
+  "place": "Tags 0GKN, 0GKK; derived compactification transport"
  },
  "mathlib_searches": [
   {
@@ -339,12 +278,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-weil-pbc-module-sheaves-colimits-forgetful",
-  "prop-weil-pbc-inverse-image-modules-exact",
-  "lem-weil-pbc-module-sheaves-grothendieck-abelian",
-  "lem-weil-pbc-module-direct-image-left-exact"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-17",
   "by": "L",
@@ -382,5 +316,15 @@
   "by": "ND",
   "date": "2026-10-15",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U4",
+  "result": "pass",
+  "landing": "20261018T091413-L-3259363",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

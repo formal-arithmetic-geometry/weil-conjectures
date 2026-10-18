@@ -8,27 +8,8 @@ module
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 public import Sheaf.AlgebraicGeometry.DerivedCategories
 import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
-import Mathlib.AlgebraicGeometry.OpenImmersion
-import WeilConjectures.AlgebraicGeometry.EtaleConstantRingModuleEquivalence
-import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
-import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.FiniteComparison
-import Sheaf.AlgebraicGeometry.ModuleSheavesColimitsForgetful
-import Mathlib.CategoryTheory.Sites.Point.Basic
-import Mathlib.CategoryTheory.Sites.Point.Skyscraper
-import Mathlib.Algebra.Homology.ShortComplex.ShortExact
-import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
-import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
-import Sheaf.AlgebraicGeometry.EtaleModuleSheavesGrothendieckAbelian
-import Mathlib.Algebra.Homology.DerivedCategory.ShortExact
-import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
-import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
-import Sheaf.AlgebraicGeometry.EtaleConstantModuleDirectImageLeftExact
-import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
-import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
-import Mathlib.CategoryTheory.Triangulated.Pretriangulated
 import Sheaf.AlgebraicGeometry.EtaleShriekQcqsComposition
-import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
-import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
+import Sheaf.AlgebraicGeometry.EtaleOpenCoverShriekTriangle
 
 /-!
 # Relative Mayer--Vietoris for etale compact support
@@ -51,28 +32,18 @@ Source: Stacks Project, Tag 0GKN, lemma-relative-mayer-vietoris.
 (blueprint: lem-weil-pbc-etale-shriek-relative-mayer-vietoris).
 
 Proof:
-1. The quasi-separated affine-cover criterion and qcqs morphism permanence show that
-   U, V and their intersection are qcqs and their inclusions are quasi-compact;
-   their composites with f remain separated and of finite type.
-2. Use the constant-ring module equivalence to work with module-valued sheaves.
-   Extension by zero and its adjunction give the signed maps from the intersection
-   to the two opens and the sum of counits to the original sheaf. Their stalks
-   are the exact sequences with maps (1,-1) and (1,1), or the identity off the
-   intersection. Exactness and conservativity of geometric stalks, together with
-   the faithful scalar-forgetting functor, give a short exact sequence of sheaves.
-3. Represent K by a bounded-below complex. Exact restriction and extension by zero
-   give a short exact sequence of complexes, hence the distinguished triangle
-   by the complex-SES triangle lemma; all objects retain the common lower bound.
-4. For the compactification cX, extension by zero induces a triangulated functor.
-   Grothendieck abelian module categories have functorial K-injective resolutions,
-   and the left-exact additive proper pushforward has a triangulated right derived
-   functor. Negative vanishing preserves the bounded-below subcategory. Apply
-   this composite to the triangle, using additivity and shift compatibility.
-5. For each open inclusion use its compactification by the identity of X.
-   Its shriek is extension by zero. The qcqs shriek-composition lemma identifies
-   its composite with the candidate attached to each prescribed cU, cV and cW.
-   Transport the three arrows by these isomorphisms and their shifted versions;
-   invariance of distinguished triangles under isomorphism yields the assertion.
+1. Compact opens in a quasi-separated scheme have compact intersection. The open
+   subschemes inherit quasi-separatedness. Thus the qcqs shriek-composition
+   theorem applies to each of the three open inclusions followed by f.
+2. For an open inclusion T.ι, use its compactification with proper part the
+   identity. The derived identity-pushforward comparison identifies its shriek
+   with the exact extension-by-zero functor on D⁺. Composition then identifies
+   extension by zero followed by the candidate for cX with the candidate for cT.
+3. Apply the existing triangulated functor associated to cX to the absolute
+   open-cover extension-by-zero triangle. Additivity identifies the middle
+   biproduct. Transport its vertices through the three composition isomorphisms,
+   and its last arrow through the shifted intersection isomorphism. The resulting
+   triangle is isomorphic to a distinguished triangle, hence distinguished.
 -/
 theorem exists_distinguished_relativeMayerVietoris
     (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
@@ -101,6 +72,50 @@ theorem exists_distinguished_relativeMayerVietoris
         (((upperStar (ModuleCat.{u + 1} Λ) (U ⊓ V).ι).mapDerivedCategoryPlus).obj K))⟦(1 : ℤ)⟧),
       Triangle.mk α β δ ∈ distTriang
         (_root_.DerivedCategory.Plus (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) := by
-  sorry
+  have hW : IsCompact ((U ⊓ V : X.Opens) : Set X) :=
+    hU.inter_of_isOpen hV U.isOpen V.isOpen
+  let F := rightDerivedLowerShriekOfCompactificationPlus (ModuleCat.{u + 1} Λ) cX
+  have : F.Additive := inferInstance
+  have : PreservesBinaryBiproducts F := preservesBinaryBiproducts_of_preservesBiproducts F
+  have hcomp (T : X.Opens) (hT : IsCompact (T : Set X))
+      (cT : Compactification (T.ι ≫ f)) :
+      Nonempty
+        ((openImmersionLowerShriek (ModuleCat.{u + 1} Λ) T.ι).mapDerivedCategoryPlus ⋙ F ≅
+          rightDerivedLowerShriekOfCompactificationPlus (ModuleCat.{u + 1} Λ) cT) := by
+    have : CompactSpace T := isCompact_iff_compactSpace.mp hT
+    have : QuasiSeparatedSpace T := T.ι.isOpenEmbedding.quasiSeparatedSpace
+    obtain ⟨e⟩ := nonempty_iso_etaleShriek_qcqs_compactification_comp
+      Λ T.ι f (Compactification.ofIsOpenImmersion T.ι) cX cT
+    let eid := Functor.rightDerivedFunctorPlusNatIso
+      (lowerStarId (ModuleCat.{u + 1} Λ) X) ≪≫
+      Functor.rightDerivedFunctorPlusIdIso _
+    let eopen :
+        rightDerivedLowerShriekOfCompactificationPlus (ModuleCat.{u + 1} Λ)
+          (Compactification.ofIsOpenImmersion T.ι) ≅
+        (openImmersionLowerShriek (ModuleCat.{u + 1} Λ) T.ι).mapDerivedCategoryPlus :=
+      Functor.isoWhiskerLeft _ eid ≪≫ Functor.rightUnitor _
+    exact ⟨Functor.isoWhiskerRight eopen.symm F ≪≫ e⟩
+  obtain ⟨eU⟩ := hcomp U hU cU
+  obtain ⟨eV⟩ := hcomp V hV cV
+  obtain ⟨eW⟩ := hcomp (U ⊓ V) hW cW
+  obtain ⟨α, β, δ, hdist⟩ := exists_distinguished_openCover_lowerShriek Λ U V hcover K
+  let T := F.mapTriangle.obj (Triangle.mk α β δ)
+  have hT : T ∈ distTriang _ := F.map_distinguished _ hdist
+  let iW := eW.app
+    (((upperStar (ModuleCat.{u + 1} Λ) (U ⊓ V).ι).mapDerivedCategoryPlus).obj K)
+  let iB := F.mapBiprod
+    ((openImmersionLowerShriek (ModuleCat.{u + 1} Λ) U.ι).mapDerivedCategoryPlus.obj
+      (((upperStar (ModuleCat.{u + 1} Λ) U.ι).mapDerivedCategoryPlus).obj K))
+    ((openImmersionLowerShriek (ModuleCat.{u + 1} Λ) V.ι).mapDerivedCategoryPlus.obj
+      (((upperStar (ModuleCat.{u + 1} Λ) V.ι).mapDerivedCategoryPlus).obj K)) ≪≫ biprod.mapIso
+    (eU.app (((upperStar (ModuleCat.{u + 1} Λ) U.ι).mapDerivedCategoryPlus).obj K))
+    (eV.app (((upperStar (ModuleCat.{u + 1} Λ) V.ι).mapDerivedCategoryPlus).obj K))
+  refine ⟨iW.inv ≫ T.mor₁ ≫ iB.hom, iB.inv ≫ T.mor₂,
+    T.mor₃ ≫ (shiftFunctor _ (1 : ℤ)).map iW.hom, ?_⟩
+  apply isomorphic_distinguished T hT
+  refine (Triangle.isoMk T (Triangle.mk _ _ _) iW iB (Iso.refl _) ?_ ?_ ?_).symm
+  · simp
+  · simp
+  · simp
 
 end AlgebraicGeometry.Etale
