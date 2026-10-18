@@ -13,9 +13,131 @@
   "def-trf-fs-log-blowup",
   "def-weil-pbc-geometric-stalks"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For an affine open $V=\\operatorname{Spec}D\\subset Y$, finiteness gives $q^{-1}V=\\operatorname{Spec}R$ with $R$ finite as a $D$-module. The invariant structure-sheaf hypothesis identifies the structure map with $D=R^G\\hookrightarrow R$. Since this inverse image is an affine open of the Noetherian scheme $X$, [pqf-lem-affine-open-locnoeth] makes $R$ Noetherian. Apply [lem-per-finite-quotient-noetherian-descent] to this injective finite map. Thus every such $D$ is Noetherian, so the affine opens of $Y$ form a covering by spectra of Noetherian rings, and $Y$ is locally Noetherian [pqf-def-locnoeth].",
+   "uses": [
+    "def-weil-finite-integral-morphism",
+    "pqf-lem-affine-open-locnoeth",
+    "lem-per-finite-quotient-noetherian-descent",
+    "pqf-def-locnoeth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI, quotient background after Proposition 3.5; Noetherian descent is the separately stated Eakin–Nagata input."
+   }
+  },
+  {
+   "text": "The scheme $X$ is quasi-compact. Pull back any open covering of $Y$ to $X$, take a finite subcover there, and use surjectivity of $q$ to see that the corresponding finitely many opens cover $Y$. Thus $Y$ is quasi-compact, and together with Step 1 it is Noetherian. If $X$ is empty, surjectivity makes $Y$ empty and all remaining assertions about points are vacuous.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI, finite quotient setting; elementary open-cover argument."
+   }
+  },
+  {
+   "text": "Fix a geometric point $\\bar y:\\operatorname{Spec}\\Omega\\to Y$, an affine open $V=\\operatorname{Spec}D$ containing its image, and $q^{-1}V=\\operatorname{Spec}R$. Write $B=\\mathcal O_{Y,\\bar y}$. The affine-neighbourhood cofinality [lemma-weil-pbc-affine-neighbourhood-cofinal] identifies the stalk colimit with the coordinate-ring colimit defining strict henselization, hence identifies this with $\\mathcal O^{\\rm sh}_{Y,\\bar y}$; the same identification applies on $X$. By [lem-sbc-affine-strict-henselization-structural-flat], $D\\to B$ is flat, and by [lem-weil-pbc-strict-henselization-functoriality], $B$ is local. Put $C=B\\otimes_D R$. By [lem-weil-pbc-fibre-product-affine-spectra] and the canonical finite decomposition [lem-trf-finite-base-strict-localization],\n$$C\\cong\\prod_{\\bar x\\in P(\\bar y)} A_{\\bar x},\\qquad A_{\\bar x}=\\mathcal O_{X,\\bar x},$$\nwhere $P(\\bar y)$ is the finite set of lifts with field $\\Omega$, and each $A_{\\bar x}$ is a finite local $B$-algebra. All maps are structural maps. The decomposition is $G$-equivariant: the action permutes the lifts, and its induced maps on strict localizations commute with the canonical decomposition maps.",
+   "uses": [
+    "def-weil-pbc-geometric-stalks",
+    "def-weil-pbc-strict-henselization-limit",
+    "lem-sbc-affine-strict-henselization-structural-flat",
+    "lem-weil-pbc-strict-henselization-functoriality",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-trf-finite-base-strict-localization",
+    "lemma-weil-pbc-affine-neighbourhood-cofinal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 03PS, 04HX, and 03QP proof; finite decomposition as in algebra.tex Tags 04GH and 05WR."
+   }
+  },
+  {
+   "text": "Compute the invariants without dividing by $|G|$. Since $D=R^G$, the sequence\n$$0\\longrightarrow D\\longrightarrow R\\xrightarrow{\\delta}\\bigoplus_{g\\in G}R,\\qquad \\delta(r)=(g(r)-r)_g$$\nis exact. Apply [lem-weil-pbc-flat-tensor-exact] with the flat $D$-module $B$. Tensor product commutes with this finite direct sum by its universal property, and the resulting difference map on $C$ is $(g(c)-c)_g$. Its kernel is $C^G$, so the canonical map identifies $B=C^G$ as rings, including injectivity.",
+   "uses": [
+    "lem-weil-pbc-flat-tensor-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0BRH (lemma-base-change-invariants), first paragraph of proof, written out as the kernel of the finite difference map."
+   }
+  },
+  {
+   "text": "The action of $G$ on $P(\\bar y)$ is transitive. It is nonempty whenever $\\bar y$ exists: otherwise the product in Step 3 is the zero ring, contradicting the injection of the nonzero local ring $B$ in Step 4. If there were two orbits, the tuple equal to $1$ on one orbit and $0$ elsewhere would be a nontrivial idempotent in $C^G=B$. A local ring has no such idempotent: for $e^2=e$, one of $e,1-e$ is a unit, forcing $e=1$ or $e=0$. This proves the geometric-fibre assertion, including nonreduced fibres, since the index set in Step 3 is precisely the set of geometric points of the fibre.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 0BRH and 0BRI (lemma-one-orbit); elementary idempotent proof after finite strict-local decomposition."
+   }
+  },
+  {
+   "text": "Fix $\\bar x\\in P(\\bar y)$, let $H=\\operatorname{Stab}_G(\\bar x)$ and $A=A_{\\bar x}$. Evaluation at $\\bar x$ gives $C^G\\to A^H$. Its inverse sends $a\\in A^H$ to the tuple whose component at $g\\bar x$ is $g(a)$. This is well-defined because two choices of $g$ differ by an element of $H$, and the tuple is $G$-invariant. The two maps are inverse ring maps. Together with Step 4 this identifies the canonical map $B\\to A$ with $B\\simeq A^H\\hookrightarrow A$. Finiteness of $A$ over $B$ was supplied by Step 3.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI, paragraph after Proposition 3.5 and 3.7(b), opening strict-local reduction; explicit invariant-tuple calculation."
+   }
+  },
+  {
+   "text": "Taking invariants of a sheaf is a finite limit, namely the equalizer of the diagonal and action maps to its $G$-fold product. Apply [lem-weil-pbc-sets-etale-stalk-finite-limits] to $q_*M$: it gives $N_{\\bar y}=((q_*M)_{\\bar y})^G$. The natural restriction bijection of [lem-weil-pbc-sets-finite-pushforward-stalk] identifies the latter stalk with $\\prod_{\\bar z\\in P(\\bar y)}M_{\\bar z}$. These restriction maps preserve monoid operations and are $G$-equivariant, since restrictions commute with the action maps. Consequently\n$$N_{\\bar y}\\cong\\left(\\prod_{\\bar z\\in P(\\bar y)}M_{\\bar z}\\right)^G.$$",
+   "uses": [
+    "lem-weil-pbc-sets-etale-stalk-finite-limits",
+    "lem-weil-pbc-sets-finite-pushforward-stalk"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03QP (proposition-finite-higher-direct-image-zero), part (1), with finite-limit preservation of geometric stalks."
+   }
+  },
+  {
+   "text": "Apply the same tuple formula as in Step 6 to the monoids in Step 7: an $H$-fixed $m\\in M_{\\bar x}$ determines the invariant tuple with component $g(m)$ at $g\\bar x$, independently of the representative $g$. Evaluation at $\\bar x$ is its inverse. Thus $N_{\\bar y}\\simeq M_{\\bar x}^H$ canonically. The structural map is componentwise and commutes with every action map; evaluating at $\\bar x$ therefore gives the commutative square with the canonical $B\\hookrightarrow A$ of Step 6.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI, paragraph after Proposition 3.5: invariant log structure; explicit evaluation and structural-map compatibility."
+   }
+  },
+  {
+   "text": "Finally, $(A^\\times)^H=(A^H)^\\times$: the inverse in $A$ of an invariant unit is invariant, and the reverse inclusion is immediate. The log-structure axiom identifies $M_{\\bar x}^\\times$ with $A^\\times$, equivariantly. Likewise a tuple of units is invertible componentwise, and the inverse of an invariant tuple is invariant. The evaluations above therefore restrict to the same unit subgroups, identifying them with $B^\\times$. No tameness, log regularity, or freeness hypothesis entered the argument.",
+   "uses": [
+    "def-trf-fs-log-blowup"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI, invariant log structure after Proposition 3.5; elementary inverse calculation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-fs-log-blowup",
+  "def-weil-finite-integral-morphism",
+  "def-weil-pbc-geometric-stalks",
+  "def-weil-pbc-strict-henselization-limit",
+  "lem-per-finite-quotient-noetherian-descent",
+  "lem-sbc-affine-strict-henselization-structural-flat",
+  "lem-trf-finite-base-strict-localization",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-flat-tensor-exact",
+  "lem-weil-pbc-sets-etale-stalk-finite-limits",
+  "lem-weil-pbc-sets-finite-pushforward-stalk",
+  "lem-weil-pbc-strict-henselization-functoriality",
+  "lemma-weil-pbc-affine-neighbourhood-cofinal",
+  "pqf-def-locnoeth",
+  "pqf-lem-affine-open-locnoeth"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VI, paragraph following Proposition 3.5 and opening of 3.7(b), justified under the stated general hypotheses by Stacks Tags 0BRH, 04GH, 05WR and 03QP, plus Eakin–Nagata descent."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -51,10 +173,140 @@
    "results": "{\"t\": \"2026-10-18T21:06:16Z\", \"tool\": \"grep\", \"query\": \"invariant.*hensel|hensel.*invariant|Eakin|noetherian.*of.*finite\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 20, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Finiteness/Cofinite.lean\", \"Mathlib/RingTheory/Finiteness/Cofinite.lean\", \"Mathlib/RingTheory/Artinian/Module.lean\", \"Mathlib/RingTheory/Artinian/Defs.lean\", \"Mathlib/RingTheory/PowerSeries/Ideal.lean\", \"Mathlib/RingTheory/HopkinsLevitzki.lean\", \"Mathlib/RingTheory/Noetherian/OfPrime.lean\", \"Mathlib/RingTheory/Jacobson/Ring.lean\"], \"digest\": \"f38698264f2aa6c2\"}; RingTheory hits are finiteness/Noetherian ascent facts, not the strict-local quotient comparison.",
    "date": "2026-10-19",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Strict henselization of finite group scheme quotient is invariant ring of geometric stabilizer",
+   "results": "{\"t\": \"2026-10-18T21:34:53Z\", \"tool\": \"leanfinder\", \"query\": \"Strict henselization of finite group scheme quotient is invariant ring of geometric stabilizer\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsFractionRing.stabilizerHom_surjective\", \"arithFrobAt\", \"IsArithFrobAt.arithFrobAt\", \"IsArithFrobAt.exists_of_isInvariant\", \"Ideal.Quotient.stabilizerHom_surjective\", \"IsFractionRing.stabilizerHom\", \"Ideal.Quotient.stabilizerHom_surjective_of_profinite\", \"Ideal.Quotient.stabilizerHomSurjectiveAuxFunctor\"], \"digest\": \"4371c8eb1cf55d77\"}; The returned signatures do not state the combined scheme-quotient, strict-local and log-stalk theorem.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"invariants\"",
+   "results": "{\"t\": \"2026-10-18T21:34:55Z\", \"tool\": \"loogle\", \"query\": \"\\\"invariants\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"_private.Init.Data.String.Lemmas.Pattern.String.ForwardSearcher.0.String.Slice.Pattern.Model.ForwardSliceSearcher.Invariants.isEmpty_eq_false\", \"_private.Init.Data.String.Lemmas.Pattern.String.ForwardSearcher.0.String.Slice.Pattern.Model.ForwardSliceSearcher.Invariants.isValidForSlice'\", \"_private.Init.Data.String.Lemmas.Pattern.String.ForwardSearcher.0.String.Slice.Pattern.Model.ForwardSliceSearcher.Invariants.partialMatch\", \"Lean.Parser.Tactic.invariantsKW\", \"Aesop.checkInvariantsIfEnabled\", \"Aesop.MVarClusterRef.checkInvariants\", \"Aesop.MVarClusterRef.checkInvariantsIfEnabled\", \"Lean.Meta.Grind.Solvers.checkInvariants\"], \"digest\": \"b5059f59bd6e8fe1\"}; The returned signatures do not state the combined scheme-quotient, strict-local and log-stalk theorem.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "strict.*[Hh]ensel|[Hh]ensel.*invariant",
+   "results": "{\"t\": \"2026-10-18T21:34:55Z\", \"tool\": \"grep\", \"query\": \"strict.*[Hh]ensel|[Hh]ensel.*invariant\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; The returned signatures do not state the combined scheme-quotient, strict-local and log-stalk theorem.",
+   "date": "2026-10-19",
+   "verdict": "no match",
+   "subdirectory": "AlgebraicGeometry"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Eakin Nagata theorem a subring R of a Noetherian commutative ring S is Noetherian if S is a finite R module",
+   "results": "{\"t\": \"2026-10-18T21:36:35Z\", \"tool\": \"leanfinder\", \"query\": \"Eakin Nagata theorem a subring R of a Noetherian commutative ring S is Noetherian if S is a finite R module\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FiniteType.isNoetherianRing\", \"Algebra.EssFiniteType.isNoetherianRing\", \"IsNoetherianRing.of_finite\", \"isNoetherianRing_of_fg\", \"isNoetherian_of_isNoetherianRing_of_finite\", \"is_noetherian_subring_closure\", \"isNoetherian_adjoin_finset\", \"Module.instFiniteSubtypeMemIdealOfIsNoetherian\"], \"digest\": \"5b20ed0e1ef064d3\"}; The returned signatures do not state the combined scheme-quotient, strict-local and log-stalk theorem.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite group invariants of a commutative ring commute with flat base change",
+   "results": "{\"t\": \"2026-10-18T21:36:36Z\", \"tool\": \"leanfinder\", \"query\": \"Finite group invariants of a commutative ring commute with flat base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsBaseChange.finitePow\", \"RingHom.Flat.isStableUnderBaseChange\", \"RingHom.finite_isStableUnderBaseChange\", \"Algebra.IsInvariant.isIntegral\", \"Rep.instLinearModuleCatInvariantsFunctor\", \"RingHom.EssFiniteType.isStableUnderBaseChange\", \"RingHom.FaithfullyFlat.isStableUnderBaseChange\", \"RingHom.finiteType_isStableUnderBaseChange\"], \"digest\": \"d624538bc29c2d75\"}; The returned signatures do not state the combined scheme-quotient, strict-local and log-stalk theorem.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsNoetherianRing, Module.Finite",
+   "results": "{\"t\": \"2026-10-18T21:36:36Z\", \"tool\": \"loogle\", \"query\": \"IsNoetherianRing, Module.Finite\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"isNoetherian_of_isNoetherianRing_of_finite\", \"IsNoetherianRing.of_finite\", \"FGModuleCat.instFiniteCarrierLimitModuleCatCompForget₂LinearMapIdObjIsFG\", \"Ideal.Filtration.Stable.inter_left\", \"Ideal.Filtration.Stable.inter_right\", \"Ideal.Filtration.Stable.of_le\", \"Ideal.iInf_pow_smul_eq_bot_of_isLocalRing\", \"Ideal.iInf_pow_smul_eq_bot_of_isTorsionFree\"], \"digest\": \"9ee2fb74a0d3c05d\"}; The returned signatures do not state the combined scheme-quotient, strict-local and log-stalk theorem.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Eakin|isNoetherianRing.*(finite|Finite)|[Nn]oetherian.*[Ii]nvariant",
+   "results": "{\"t\": \"2026-10-18T21:36:36Z\", \"tool\": \"grep\", \"query\": \"Eakin|isNoetherianRing.*(finite|Finite)|[Nn]oetherian.*[Ii]nvariant\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/QuasiFinite/Basic.lean\", \"Mathlib/RingTheory/QuasiFinite/Basic.lean\", \"Mathlib/RingTheory/QuasiFinite/Basic.lean\", \"Mathlib/RingTheory/Artinian/Module.lean\", \"Mathlib/RingTheory/Localization/Submodule.lean\", \"Mathlib/RingTheory/Artinian/Defs.lean\", \"Mathlib/RingTheory/Jacobson/Artinian.lean\", \"Mathlib/RingTheory/ReesAlgebra.lean\"], \"digest\": \"7261208c5d31f8bb\"}; The returned signatures do not state the combined scheme-quotient, strict-local and log-stalk theorem.",
+   "date": "2026-10-19",
+   "verdict": "no match",
+   "subdirectory": "RingTheory"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Flat, Algebra.IsInvariant",
+   "results": "{\"t\": \"2026-10-18T21:36:36Z\", \"tool\": \"loogle\", \"query\": \"Module.Flat, Algebra.IsInvariant\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; The returned signatures do not state the combined scheme-quotient, strict-local and log-stalk theorem.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A module finite extension of commutative rings with injective structure map and Noetherian target has Noetherian source",
+   "results": "{\"t\": \"2026-10-18T21:36:36Z\", \"tool\": \"leansearch\", \"query\": \"A module finite extension of commutative rings with injective structure map and Noetherian target has Noetherian source\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"isNoetherian_of_injective\", \"Module.Finite.of_injective\", \"Algebra.FiniteType.isNoetherianRing\", \"IsNoetherian\", \"isNoetherian_of_isNoetherianRing_of_finite\", \"IsNoetherianRing.of_finite\", \"fg_of_injective\", \"fg_of_ker_bot\"], \"digest\": \"814e29597fa113a5\"}; The returned signatures do not state the combined scheme-quotient, strict-local and log-stalk theorem.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "invariant.*[Tt]ensor|[Tt]ensor.*invariant|[Ff]lat.*[Ii]nvariant|[Ii]nvariant.*[Ff]lat",
+   "results": "{\"t\": \"2026-10-18T21:36:36Z\", \"tool\": \"grep\", \"query\": \"invariant.*[Tt]ensor|[Tt]ensor.*invariant|[Ff]lat.*[Ii]nvariant|[Ii]nvariant.*[Ff]lat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RepresentationTheory/Induced.lean\", \"Mathlib/RepresentationTheory/Induced.lean\", \"Mathlib/RepresentationTheory/Induced.lean\", \"Mathlib/RepresentationTheory/Induced.lean\", \"Mathlib/RepresentationTheory/Induced.lean\", \"Mathlib/RepresentationTheory/Homological/GroupHomology/FiniteCyclic.lean\", \"Mathlib/RepresentationTheory/Homological/GroupHomology/FiniteCyclic.lean\", \"Mathlib/RepresentationTheory/Homological/GroupHomology/FiniteCyclic.lean\"], \"digest\": \"62c7d09943da1974\"}; The returned signatures do not state the combined scheme-quotient, strict-local and log-stalk theorem.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tensor product with a flat algebra commutes with invariants under finite group action",
+   "results": "{\"t\": \"2026-10-18T21:36:37Z\", \"tool\": \"leansearch\", \"query\": \"Tensor product with a flat algebra commutes with invariants under finite group action\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CommRingCat.Under.instPreservesFiniteLimitsUnderTensorProdOfFlatCarrier\", \"ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat\", \"Module.Flat.instTensorProduct\", \"TensorProduct.LinearIndepOn.tmul_of_flat_left\", \"Module.Flat.tensorSubmoduleAlgebraEquivMul\", \"IsReduced.tensorProduct_of_flat_of_forall_fg\", \"LinearMap.tensorEqLocusEquiv\", \"Module.Flat.instPreservesFiniteLimitsModuleCatTensorLeftOfCarrier\"], \"digest\": \"f9975ecafad0a10d\"}; The returned signatures do not state the combined scheme-quotient, strict-local and log-stalk theorem.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Noetherianity descends along injective finite ring extension Eakin Nagata",
+   "results": "{\"t\": \"2026-10-18T21:39:06Z\", \"tool\": \"leanfinder\", \"query\": \"Noetherianity descends along injective finite ring extension Eakin Nagata\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.EssFiniteType.isNoetherianRing\", \"fg_of_fg_of_fg\", \"Algebra.FiniteType.isNoetherianRing\", \"IsNoetherianRing.of_finite\", \"isNoetherian_of_liesOver\", \"AlgHom.isNoetherianRing_range\", \"isNoetherianRing_of_fg\", \"isNoetherian_adjoin_finset\"], \"digest\": \"56d12e1db1a50dbb\"}; The returned signatures do not state the combined scheme-quotient, strict-local and log-stalk theorem.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Eakin|Nagata|of_finite|of_injective",
+   "results": "{\"t\": \"2026-10-18T21:39:06Z\", \"tool\": \"grep\", \"query\": \"Eakin|Nagata|of_finite|of_injective\", \"sub\": \"RingTheory/Noetherian\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Noetherian/Orzech.lean\", \"Mathlib/RingTheory/Noetherian/Orzech.lean\", \"Mathlib/RingTheory/Noetherian/Orzech.lean\", \"Mathlib/RingTheory/Noetherian/Orzech.lean\", \"Mathlib/RingTheory/Noetherian/Orzech.lean\", \"Mathlib/RingTheory/Noetherian/Basic.lean\", \"Mathlib/RingTheory/Noetherian/Basic.lean\", \"Mathlib/RingTheory/Noetherian/Basic.lean\"], \"digest\": \"b62ead2b43f54e2b\"}; The returned signatures do not state the combined scheme-quotient, strict-local and log-stalk theorem.",
+   "date": "2026-10-19",
+   "verdict": "no match",
+   "subdirectory": "RingTheory/Noetherian"
+  },
+  {
+   "tool": "grep",
+   "query": "Eakin|Nagata|Noetherian.*[Ss]ubring|[Ss]ubring.*Noetherian",
+   "results": "{\"t\": \"2026-10-18T22:18:12Z\", \"tool\": \"grep\", \"query\": \"Eakin|Nagata|Noetherian.*[Ss]ubring|[Ss]ubring.*Noetherian\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Artinian/Defs.lean\", \"Mathlib/RingTheory/Adjoin/FG.lean\", \"Mathlib/RingTheory/Adjoin/FG.lean\", \"Mathlib/RingTheory/Adjoin/FG.lean\", \"Mathlib/RingTheory/FiniteType.lean\", \"Mathlib/RingTheory/NoetherNormalization.lean\", \"Mathlib/RingTheory/Valuation/Basic.lean\"], \"digest\": \"c5662af9424d70e0\"}; The returned signatures do not state the combined scheme-quotient, strict-local and log-stalk theorem.",
+   "date": "2026-10-19",
+   "verdict": "no match",
+   "subdirectory": "RingTheory"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Strict henselization of a finite group quotient and invariant logarithmic structure at a geometric point",
+   "results": "{\"t\": \"2026-10-18T22:18:12Z\", \"tool\": \"leansearch\", \"query\": \"Strict henselization of a finite group quotient and invariant logarithmic structure at a geometric point\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HenselianLocalRing.toIsLocalRing\", \"HenselianLocalRing\", \"HenselianLocalRing.mk\", \"instHenselianRingMaximalIdeal\", \"Finite.of_finite_quot_finite_subgroup\", \"QuotientGroup.finite\", \"Finite.of_subgroup_quotient\", \"AddSubgroup.finiteIndex_of_finite_quotient\"], \"digest\": \"8f6feca4a03e445d\"}; The returned signatures do not state the combined scheme-quotient, strict-local and log-stalk theorem.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Algebra.IsInvariant\"",
+   "results": "{\"t\": \"2026-10-18T22:18:12Z\", \"tool\": \"loogle\", \"query\": \"\\\"Algebra.IsInvariant\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Algebra.IsInvariant\", \"Algebra.IsInvariant.isInvariant\", \"Algebra.IsInvariant.mk\", \"Algebra.isInvariant_iff\", \"Algebra.IsInvariant.isIntegral\", \"Algebra.IsInvariant.charpoly_mem_lifts\", \"Algebra.IsInvariant.orbit_eq_primesOver\", \"Algebra.IsInvariant.exists_smul_of_under_eq\"], \"digest\": \"258c88cf69dffc35\"}; The returned signatures do not state the combined scheme-quotient, strict-local and log-stalk theorem.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The invariants of a ring under a finite group action commute with flat scalar extension",
+   "results": "{\"t\": \"2026-10-18T22:18:13Z\", \"tool\": \"leanfinder\", \"query\": \"The invariants of a ring under a finite group action commute with flat scalar extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsInvariant.isIntegral\", \"IsGaloisGroup.isInvariant\", \"IsGaloisGroup.commutes\", \"Algebra.IsInvariant.isInvariant\", \"instSMulCommClassQuotientSubgroupSubtypeMemSubalgebraSubalgebra\", \"FixedPoints.normal\", \"Algebra.IsInvariant\", \"Algebra.isInvariant_iff\"], \"digest\": \"37d32070a3afd5da\"}; The returned signatures do not state the combined scheme-quotient, strict-local and log-stalk theorem.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If a Noetherian ring is module finite over a subring then the subring is Noetherian",
+   "results": "{\"t\": \"2026-10-18T22:18:14Z\", \"tool\": \"leanfinder\", \"query\": \"If a Noetherian ring is module finite over a subring then the subring is Noetherian\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsNoetherianRing.of_finite\", \"isNoetherianRing_of_fg\", \"Algebra.EssFiniteType.isNoetherianRing\", \"Algebra.FiniteType.isNoetherianRing\", \"isNoetherian_of_fg_of_noetherian\", \"isNoetherian_of_isNoetherianRing_of_finite\", \"is_noetherian_subring_closure\", \"Module.instFiniteSubtypeMemIdealOfIsNoetherian\"], \"digest\": \"d29f1a303c7f99e0\"}; The returned signatures do not state the combined scheme-quotient, strict-local and log-stalk theorem.",
+   "date": "2026-10-19",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-very-tame-quotient-log-regular",
@@ -81,5 +333,44 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-finite-quotient-strict-local-invariants",
+  "worker": "stage1",
+  "summary": "Wrote the affine Noetherian descent, flat difference-kernel calculation, finite strict-local product, invariant-idempotent orbit argument, explicit stabilizer-tuple inverse and log-stalk/unit compatibility. Only Eakin–Nagata descent is new; all geometric and sheaf inputs reuse existing nodes. The statement is unchanged.",
+  "blueprint": "Supports arbitrary-field duality/local uniformization in the ancestor lem-per-artin-gabber-affine-curve through the recorded quotient chain; realizes the finite strict-local quotient reduction used by lem-per-very-tame-quotient-log-regular, Step 1.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-finite-base-strict-localization",
+    "why": "The generic finite strict-local decomposition supplies the canonical product and module-finite local factors; no log quotient conclusion is imported."
+   },
+   {
+    "node": "lem-sbc-affine-strict-henselization-structural-flat",
+    "why": "Flatness of the affine strict-local structural map is the generic base-change input to the difference-kernel calculation."
+   },
+   {
+    "node": "lem-weil-pbc-strict-henselization-functoriality",
+    "why": "Locality and functorial structural maps identify the chosen strict-local factors."
+   },
+   {
+    "node": "lem-weil-pbc-sets-finite-pushforward-stalk",
+    "why": "The generic sets-valued finite pushforward formula applies to the underlying sheaf of a log structure."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-finite-base-strict-localization",
+  "lem-sbc-affine-strict-henselization-structural-flat",
+  "lem-weil-pbc-strict-henselization-functoriality",
+  "lem-weil-pbc-sets-finite-pushforward-stalk"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q130-04daee7ae",
+  "group": "Q130",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q130-04daee7ae (reviewer sub-agent of L); spot-checked: I read the item, its 9 steps and the new Eakin–Nagata node in full. I opened every cited statement and checked ILO VI 3.5, its following paragraph and 3.7(b) (printed pp.74–75), and Stacks 0BRH. Step 4 is 0BRH's difference-kernel sequence tensored with the flat map D→O^sh; it does not divide by |G|. Step 5 proves nonemptiness and transitivity by invariant idempotents in the local ring B=C^G. Step 3 uses lem-trf-finite-base-strict-localization: components of the geometric fibre biject with Ω-lifts because Ω is algebraically closed, and the G-action is equivariant by uniqueness in functoriality (3). Step 7 uses the sets-valued finite-limit stalk lemma and the sets-valued finite pushforward lemma on the underlying sheaf of M. Steps 6, 8 and 9 (tuple inverses and units) check out. The new node is true. I tested it on k[x²,x³]⊂k[x], and showed injectivity and finiteness are both needed with k[t_i]→k and k[x,xy,xy²,…]. Neither Mathlib (grep) nor the DAG has it, and Stacks only names Eakin in examples.tex; WANTED is acceptable for an unsplit node. Batch-5 flag on lem-trf-finite-base-strict-localization: accepted. That node's closure has no sec-poincare-duality node, no sk-thm-trace-transport and no batch-4 target. Its only sec-trace-formula nodes are generic algebra (Stacks 04GH, 05WR, 0GIP, 092Y), so it is outside both assumptions and not a step of their proofs. I accept all four declared tool_uses as generic. FIX (B3): Step 1 concludes 'Y is locally Noetherian' without citing the definition; I added pqf-def-locnoeth to its text, uses and proof_deps. Advisory: 'Noetherian scheme' has no definition node (the statement dates from Q109). The report names a citations.json that is not in the commit.; 1 file(s) fixed by the reviewer"
  }
 }
