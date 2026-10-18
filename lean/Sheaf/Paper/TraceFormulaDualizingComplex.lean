@@ -7,8 +7,6 @@ module
 
 public import Sheaf.Paper.TraceFormulaCoefficientConventions
 public import Sheaf.SixFunctors.FiniteDualizing
-public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-public import Mathlib.AlgebraicGeometry.Sites.Proetale
 public import Sheaf.Algebra.Homology.RingedInternalHomSignedCalculus
 public import Sheaf.Algebra.Homology.RingedInternalHomExactRestriction
 public import Sheaf.Paper.CoefficientRingedTensorHomModel
