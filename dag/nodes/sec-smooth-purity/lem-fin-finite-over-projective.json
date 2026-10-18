@@ -22,112 +22,77 @@
  ],
  "proof": [
   {
-   "text": "Fix an affine open $U=\\operatorname{Spec}A\\subseteq S$. Choose the global embedding $T\\hookrightarrow\\mathbf P^n_S$ supplied by [def-pc-projective-morphism]. Restrict it to the inverse image of $U$. The affine-quotient description of a closed immersion [def-weil-closed-immersion] still holds on every affine open of this open subscheme of the target, so the restriction $T_U\\hookrightarrow\\mathbf P^n_U$ is closed. The base-change presentation [def-nagata-projective-space-base-change] identifies this target with $\\mathbf P^n_U$, whose relative-Proj chart interface is [def-nagata-relative-projective-space]. The restricted map $h_U:Y_U\\to T_U$ is finite: on each affine open of $T_U$, which is also an affine open of $T$, its inverse image and finite ring map are exactly those in [def-weil-finite-integral-morphism]. For every affine open $W\\subseteq U$, the $n+1$ standard projective charts over $W$ cover $\\mathbf P^n_W$, and their inverse images in $T_W$ are affine by [def-weil-closed-immersion]. Thus $T_W$ is a finite union of quasi-compact affine opens. By [def-weil-finite-type-morphism], $T_U\\to U$ is quasi-compact. Together with the restricted closed embedding, this proves it is projective under the stated convention.",
+   "text": "For an affine base, extract the finite coordinate type n and the closed immersion T into projective space from [def-pc-projective-morphism]. Apply the existing, proved source-library theorem AlgebraicGeometry.ProjectiveSpace.exists_isClosedImmersion_of_isFinite to that immersion and the finite map h [def-weil-finite-integral-morphism]. This theorem already implements the coordinate-section argument of this node: the twist [def-pc-projective-space-twist] has coordinate sections whose nonvanishing loci are the standard affine charts; inverse images under the finite map followed by the closed immersion [def-weil-closed-immersion] are affine and cover Y. The native ample-family immersion theorem applies using finite type [def-weil-finite-type-morphism]. The composite is proper by [lem-pc-projective-proper], [lem-weil-pbc-finite-proper] and [lem-weil-pbc-proper-composition], with properness as in [def-weil-proper-morphism]. Projective space is separated [lem-weil-pbc-projective-space-proj-separated], so the immersion is proper by [lem-weil-pbc-proper-to-separated] and closed by [lem-weil-pbc-proper-immersion-closed]. The source theorem returns a closed immersion into projective space indexed by an arbitrary finite type m.",
    "uses": [
     "def-pc-projective-morphism",
-    "def-weil-closed-immersion",
-    "def-nagata-projective-space-base-change",
-    "def-nagata-relative-projective-space",
     "def-weil-finite-integral-morphism",
-    "def-weil-finite-type-morphism"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-fin-finite-over-projective.md",
-    "place": "Proof, first sentence: work over an affine open of S"
-   }
-  },
-  {
-   "text": "The morphism $T_U\\to U$ is proper by [lem-pc-projective-proper], and $h_U$ is proper by [lem-weil-pbc-finite-proper]. Their composite $f_U:Y_U\\to U$ is proper by [lem-weil-pbc-proper-composition]. By [def-weil-proper-morphism] it is of finite type. Thus [def-weil-finite-type-morphism] supplies local finite type and quasi-compactness; since $U$ itself is affine, $Y_U=f_U^{-1}(U)$ is quasi-compact.",
-   "uses": [
+    "def-pc-projective-space-twist",
+    "def-weil-closed-immersion",
+    "def-weil-finite-type-morphism",
     "lem-pc-projective-proper",
     "lem-weil-pbc-finite-proper",
     "lem-weil-pbc-proper-composition",
     "def-weil-proper-morphism",
-    "def-weil-finite-type-morphism"
+    "lem-weil-pbc-projective-space-proj-separated",
+    "lem-weil-pbc-proper-to-separated",
+    "lem-weil-pbc-proper-immersion-closed"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tags 01W3 (lemma-composition-proper), 01WC (lemma-locally-projective-proper), 01WN (lemma-finite-proper); proper definition 01W1"
+    "document": "lean/WeilConjectures/AlgebraicGeometry/ProjectiveSpace/FiniteMorphism.lean",
+    "place": "exists_isClosedImmersion_of_isFinite; complete proved affine-base argument"
    }
   },
   {
-   "text": "Let $a:Y_U\\to\\mathbf P^n_U$ be the embedding of $T_U$ composed with $h_U$, and put $\\mathcal L=a^*\\mathcal O(1)$. The twist is invertible by its glued free rank-one presentation [def-pc-projective-space-twist], and its pullback is invertible by clause (1) of [lem-weil-pbc-invertible-pullback-tensor]. For each homogeneous coordinate $x_i$, the formulas $x_i=(x_i/x_j)e_j$ on the standard chart $D_+(x_j)$ define a global section of $\\mathcal O(1)$: on overlaps this follows from $e_j=(x_j/x_k)e_k$, the transition rule in [def-pc-projective-space-twist]. Write $s_i=a^*x_i$.",
+   "text": "Normalize the finite coordinate type to ULift (Fin (N+1)) using [lem-weil-pbc-projective-space-finite-index-iso] when m is nonempty. Compose the closed immersion with the supplied isomorphism over the base. If m is empty then its projective space is empty by its standard-chart cover [def-nagata-projective-space-base-change], so Y is empty; its unique map into projective zero-space is a closed immersion and is over the base. In either case [def-pc-projective-morphism] gives H-projectivity. Properness of H-projective maps [lem-pc-projective-proper] gives quasi-compactness, hence projectivity.",
    "uses": [
-    "def-pc-projective-space-twist",
-    "lem-weil-pbc-invertible-pullback-tensor"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-fin-finite-over-projective.md",
-    "place": "Proof, first paragraph: coordinate sections and their corresponding pullback sections on Y; Modules Tags 0B8L and 0098"
-   }
-  },
-  {
-   "text": "The standard chart $D_+(x_i)$ over $U$ is $\\operatorname{Spec}A[x_j/x_i:j\\ne i]$: a degree-zero fraction $F/x_i^d$, with $F$ homogeneous of degree $d$, is a sum of terms $c\\prod_{j\\ne i}(x_j/x_i)^{a_j}$ after cancelling the power of $x_i$; conversely every monomial in the ratios has such a homogeneous numerator [def-nagata-relative-projective-space]. By [def-weil-closed-immersion], $T_i=T_U\\cap D_+(x_i)$ is affine, with coordinate ring a quotient of that polynomial ring. By [def-weil-finite-integral-morphism], $V_i=h_U^{-1}(T_i)$ is affine. These finitely many opens cover $Y_U$. Clause (3) of [lem-weil-pbc-invertible-pullback-tensor] identifies the value of $s_i$ at $y$ with $x_i(a(y))\\otimes1$; on a chart $D_+(x_j)$ containing $a(y)$, its value is $(x_i/x_j)(a(y))e_j$. This is nonzero exactly when $x_i$ is absent from the homogeneous prime representing $a(y)$, that is, when $a(y)\\in D_+(x_i)$. A nonzero vector remains nonzero under the residue-field extension $\\kappa(a(y))\\to\\kappa(y)$ (identify the one-dimensional space with its field). Thus $(Y_U)_{s_i}=V_i$. Together with the quasi-compactness in step 2, the sections $s_i$ (all of power one) satisfy both conditions in [def-weil-pbc-ample-invertible-module]. Hence $\\mathcal L$ is ample on $Y_U$.",
-   "uses": [
-    "def-nagata-relative-projective-space",
+    "lem-weil-pbc-projective-space-finite-index-iso",
+    "def-nagata-projective-space-base-change",
+    "def-pc-projective-morphism",
     "def-weil-closed-immersion",
-    "def-weil-finite-integral-morphism",
-    "lem-weil-pbc-invertible-pullback-tensor",
-    "def-weil-pbc-ample-invertible-module"
+    "lem-pc-projective-proper"
    ],
    "elementary": true,
    "source": {
-    "document": "literature/stacks-project/properties.tex",
-    "place": "Tag 01PS (definition-ample); affine charts from Constructions 01NF; pullback fibres from Sheaves 0098"
+    "document": "lean/WeilConjectures/AlgebraicGeometry/ProjectiveSpace/FiniteMorphism.lean",
+    "place": "finite coordinate normalization of the conclusion; ProjectiveSpaceFiniteIndexIso.lean, exists_finite_index_iso"
    }
   },
   {
-   "text": "Apply [lem-weil-pbc-ample-very-ample-immersion-affine-base] to the ring $A$, the locally finite type morphism $f_U:Y_U\\to\\operatorname{Spec}A$ of step 2, and the invertible ample module $\\mathcal L$ of steps 3–4. It gives $N\\geq0$ and an immersion $v:Y_U\\to\\operatorname{Proj}(A[z_0,\\ldots,z_N])=\\mathbf P^N_U$ over $U$. We use only its immersion and structure-map equation, not its additional twist-isomorphism clause. This packages precisely the clearing-denominators and chart-generator argument of the imported proof.",
+   "text": "For each affine open U of S, restrict the closed immersion of T into projective space using the cartesian square for projective-space base change [def-nagata-projective-space-base-change]. Closed immersions are preserved under this base change [def-weil-closed-immersion], giving H-projectivity of the restricted map [def-pc-projective-morphism]. The restriction of h is finite [def-weil-finite-integral-morphism]. Apply the affine-base result and use morphismRestrict_comp to identify the composite with the restriction of h followed by p. This proves the explicit local embedding and local projectivity. When S itself is affine, apply the same affine-base result directly.",
    "uses": [
-    "lem-weil-pbc-ample-very-ample-immersion-affine-base"
+    "def-nagata-projective-space-base-change",
+    "def-weil-closed-immersion",
+    "def-pc-projective-morphism",
+    "def-weil-finite-integral-morphism"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tag 01VS (lemma-quasi-projective-finite-type-over-S), affine-base case; Tag 01VT (lemma-finite-type-over-affine-ample-very-ample), (1) implies (5)"
-   }
-  },
-  {
-   "text": "Projective space $\\mathbf P^N_U$ is separated over $U$ by [lem-weil-pbc-projective-space-proj-separated]. Its composite with $v$ is the proper $f_U$, so [lem-weil-pbc-proper-to-separated] makes $v$ proper. It is an immersion by step 5, hence a closed immersion by [lem-weil-pbc-proper-immersion-closed]. The morphism $f_U$ is quasi-compact by step 2. The embedding and this quasi-compactness are exactly [def-pc-projective-morphism], proving $Y_U\\to U$ projective. As $U$ was arbitrary, the corrected local assertion follows. For affine $S$, take $U=S$.",
-   "uses": [
-    "lem-weil-pbc-projective-space-proj-separated",
-    "lem-weil-pbc-proper-to-separated",
-    "lem-weil-pbc-proper-immersion-closed",
-    "def-pc-projective-morphism"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tag 01W6 (lemma-image-proper-scheme-closed), with Schemes 01IQ (lemma-immersion-when-closed); local-projectivity distinction in 01W8 (definition-projective) and 01WB (lemma-characterize-locally-projective)"
+    "document": "lean/WeilConjectures/AlgebraicGeometry/ProjectiveSpace/FiniteMorphism.lean",
+    "place": "affine localization of exists_isClosedImmersion_of_isFinite; ProjectiveSpace.isPullback_liftBaseChange"
    }
   }
  ],
  "proof_deps": [
   "def-pc-projective-morphism",
-  "def-weil-closed-immersion",
-  "def-nagata-projective-space-base-change",
-  "def-nagata-relative-projective-space",
   "def-weil-finite-integral-morphism",
+  "def-pc-projective-space-twist",
+  "def-weil-closed-immersion",
   "def-weil-finite-type-morphism",
   "lem-pc-projective-proper",
   "lem-weil-pbc-finite-proper",
   "lem-weil-pbc-proper-composition",
   "def-weil-proper-morphism",
-  "def-pc-projective-space-twist",
-  "lem-weil-pbc-invertible-pullback-tensor",
-  "def-weil-pbc-ample-invertible-module",
-  "lem-weil-pbc-ample-very-ample-immersion-affine-base",
   "lem-weil-pbc-projective-space-proj-separated",
   "lem-weil-pbc-proper-to-separated",
-  "lem-weil-pbc-proper-immersion-closed"
+  "lem-weil-pbc-proper-immersion-closed",
+  "lem-weil-pbc-projective-space-finite-index-iso",
+  "def-nagata-projective-space-base-change"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-fin-finite-over-projective.md",
-  "place": "Proof: affine-local coordinate construction; streamlined using Properties 01PS and Morphisms 01VS/01VT; corrected local conclusion"
+  "document": "lean/WeilConjectures/AlgebraicGeometry/ProjectiveSpace/FiniteMorphism.lean",
+  "place": "Reuses the proved exists_isClosedImmersion_of_isFinite, which already realizes the blueprint coordinate-section argument; adds finite coordinate normalization and affine-open base change (E3, 2026-10-18)."
  },
  "mathlib_searches": [
   {
@@ -240,12 +205,7 @@
    }
   ]
  },
- "tool_uses": [
-  "def-nagata-relative-projective-space",
-  "lem-weil-pbc-invertible-pullback-tensor",
-  "def-weil-pbc-ample-invertible-module",
-  "lem-weil-pbc-ample-very-ample-immersion-affine-base"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-14",
   "by": "L",
@@ -271,5 +231,15 @@
   "by": "NU",
   "date": "2026-10-15",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261018T062734-L-643323",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
