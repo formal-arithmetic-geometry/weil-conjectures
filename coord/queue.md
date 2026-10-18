@@ -1,6 +1,6 @@
 # Work queue
 
-85 items; claim with `tools/claim.py next <group> [--stage N]`.
+87 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,13 +8,15 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (85)
+## Stage 3: modules to prove (87)
 
 On the sorry route of an open batch, or below a route sorry of one (the human, 2026-10-18: provable as soon as every dependency is stated, whatever the depth); route first, then nearest to a route sorry.
 
 | module | distance to a target | sorry | kind | route / steps to the nearest route sorry |
 |---|---|---|---|---|
 | `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible` | 2 | 3 | proof | route |
+| `Sheaf.AlgebraicGeometry.EllAdicLocalizingExceptionalBounded` | 3 | 1 | proof | route |
+| `Sheaf.AlgebraicGeometry.EllAdicLocalizingExceptionalConstructibleCohomology` | 3 | 1 | proof | route |
 | `Sheaf.CategoryTheory.RingedDerivedRestriction` | 4 | 1 | proof | route |
 | `Sheaf.WeilSheaf.AdicFiniteCoefficientBound` | 4 | 1 | proof | route |
 | `Sheaf.WeilSheaf.CompactSupportFiniteCoefficientComparison` | 4 | 1 | proof | route |
@@ -100,7 +102,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.AlgebraicGeometry.ClosedPointSheafApproximation` | - | 1 | proof | 16 |
 | `Sheaf.AlgebraicGeometry.FiniteClosedPoints` | - | 1 | proof | 17 |
 
-## Stage 3: waiting for statements of dependencies (11)
+## Stage 3: waiting for statements of dependencies (9)
 
 Not items: a node in the dependencies (stmt_deps or proof_deps) has no Lean statement yet (the human, 2026-10-17 and 2026-10-18).
 
@@ -108,8 +110,6 @@ Not items: a node in the dependencies (stmt_deps or proof_deps) has no Lean stat
 |---|---|---|---|
 | `Sheaf.SmoothPurity.NormalizedWitness` | 1 | 1 | `lem-pur-finite-smooth-adjunction-general-base` |
 | `WeilConjectures.ZetaFunction.TraceFormula` | 2 | 1 | `def-weil-global-geometric-frobenius` |
-| `Sheaf.AlgebraicGeometry.EllAdicLocalizingExceptionalBounded` | 3 | 1 | `sk-thm-int-restriction` |
-| `Sheaf.AlgebraicGeometry.EllAdicLocalizingExceptionalConstructibleCohomology` | 3 | 1 | `sk-thm-int-restriction` |
 | `Sheaf.PoincareDuality.ProperProjectionFormulaBounded` | 3 | 1 | `det-thm-sfb-proper-base-change-integral` |
 | `Sheaf.WeilSheaf.CohomologyGeometricConjugacy` | 4 | 1 | `def-weil-global-geometric-frobenius` |
 | `Sheaf.AlgebraicGeometry.EllAdicProperTruncationBound` | 5 | 1 | `det-proper-unbounded-window-arbitrary` |
@@ -142,7 +142,7 @@ Not items: an open Orchestra branch or PR of the source library proves the modul
 | `WeilConjectures.WeilSheaf.DenseOpen` | bundle/sec-purity-real-sheaves-d1 |
 | `WeilConjectures.WeilSheaf.FourierInversion.Composite` | bundle/sec-fourier-transform-d1 |
 | `WeilConjectures.WeilSheaf.FourierInversion.Delta` | bundle/sec-fourier-transform-d1 |
-| `WeilConjectures.WeilSheaf.FourierInversion.OtherSections` | bundle/sec-smooth-purity-d1,bundle/sec-smooth-purity-d3 |
+| `WeilConjectures.WeilSheaf.FourierInversion.OtherSections` | bundle/sec-poincare-duality-c1,bundle/sec-smooth-purity-d1,bundle/sec-smooth-purity-d3 |
 | `WeilConjectures.WeilSheaf.FourierInversion.UpperStar` | bundle/sec-fourier-transform-d1 |
 | `WeilConjectures.WeilSheaf.LowerShriekFunctoriality` | bundle/sec-six-functors-c1,bundle/sec-smooth-purity-d3 |
 | `WeilConjectures.WeilSheaf.LowerShriekOperations` | bundle/sec-poincare-duality-c1 |
