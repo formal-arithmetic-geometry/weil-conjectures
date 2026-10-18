@@ -25,91 +25,52 @@
  ],
  "proof": [
   {
-   "text": "A Noetherian scheme is locally Noetherian and quasi-compact [pqf-def-locnoeth, def-weil-pbc-quasi-compact-scheme]. Choose finitely many affine opens with Noetherian coordinate rings covering $S$. Their underlying spaces are Noetherian by [lem-sc-affine-noetherian-underlying-space]. Every open $W$ of $S$ is quasi-compact: intersect a covering of $W$ with each of these finitely many charts, select a finite subcover on each chart intersection, and take their union. Thus the underlying space of $S$ is Noetherian. In particular every open of $S$ is retrocompact, so every finite union of locally closed subsets is constructible by [def-weil-constructible-subset].",
+   "text": "Since f is projective, it is locally of finite type and X is locally Noetherian. Coherence gives quasi-coherence and finite type by [pqf-lem-coherent-ft-locnoeth]. On each affine open its sections form a finite module by [lem-weil-pbc-coherent-affine-sections-finite], hence a finitely presented module over its Noetherian coordinate ring. The affine presentation equivalence of [lem-weil-pbc-quasi-coherent-finite-type-affine] and descent of finite presentation give G.IsFinitePresentation. Package local Noetherianity and compactness as IsNoetherian S.",
    "uses": [
     "pqf-def-locnoeth",
     "def-weil-pbc-quasi-compact-scheme",
-    "lem-sc-affine-noetherian-underlying-space",
-    "def-weil-constructible-subset"
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-weil-pbc-coherent-affine-sections-finite",
+    "lem-weil-pbc-quasi-coherent-finite-type-affine"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 0BDN, lemma-jump-loci-geometric, proof; Tag 0BDI, lemma-jump-loci, proof of (3)"
-   }
+   "elementary": false
   },
   {
-   "text": "Put $E=Rf_*\\mathcal G$. The hypotheses of [lem-pc-projective-noetherian-rf-perfect] hold: $S$ is locally Noetherian, $f$ is projective, and $\\mathcal G$ is coherent and flat over $S$. Hence $E$ is perfect. By [def-pc-perfect-complex] there is an affine open cover on which $E$ is represented by bounded complexes of finite projective modules. Select a finite subcover. On each affine chart apply [lem-weil-pbc-finite-projective-standard-free-cover] to each of the finitely many nonzero terms and take all intersections of the resulting finite principal-open covers. Localization of a free frame remains a free frame. We obtain a finite affine open cover $U_j=\\operatorname{Spec}(A_j)$ and bounded finite free complexes $C_j^\\bullet$ representing $E|_{U_j}$.",
+   "text": "Choose the closed immersion into finite projective space supplied by projectivity. Apply the existing source-library theorem Scheme.Modules.finite_range_and_isConstructible_finrankH_geometricFibre in WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.GeometricFibreRank to G and degree r. This theorem already proves this blueprint result for the source-library H convention: its proof identifies geometric dimensions with residue-field dimensions, uses upper semicontinuity [thm-pc-semicontinuity-base-change], and obtains finite range and constructible level sets on the Noetherian base. Use its function as beta. This invokes an existing proved implementation rather than reconstructing perfect models.",
    "uses": [
-    "lem-pc-projective-noetherian-rf-perfect",
-    "def-pc-perfect-complex",
-    "lem-weil-pbc-finite-projective-standard-free-cover"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 0BDN, lemma-jump-loci-geometric, proof; Tag 0BDI, lemma-jump-loci, proof of (3)"
-   }
-  },
-  {
-   "text": "Fix $s\\in U_j$ and write $k=\\kappa(s)$ and $\\Omega=\\kappa(\\bar s)$. Apply [cor-pc-projective-noetherian-rf-perfect-base-change] to the geometric-point morphism $g:\\operatorname{Spec}(\\Omega)\\to S$. It gives $Lg^*E\\cong Rf_{\\bar s,*}\\mathcal G_{\\bar s}$ with ordinary pullback of $\\mathcal G$ on the right, precisely the geometric fibre of [def-weil-geometric-fibre]. The local model comparison [lem-pc-localized-pullback-perfect-model] computes the left side by ordinary termwise pullback. By the tensor-product definition [def-pc-module-pullback], a term $\\mathcal O_{U_j}^{c}$ pulls back to $\\Omega^{c}$ and a differential matrix pulls back by applying $A_j\\to\\Omega$ to its entries; thus this is $C_j^\\bullet\\otimes_{A_j}\\Omega$. The spectrum of the field $\\Omega$ has one point [def-weil-affine-spectrum], so an $\\mathcal O$-module on it is just its module of global sections, and taking global sections is exact. If $I^\\bullet$ is an injective resolution of $\\mathcal G_{\\bar s}$, then taking global sections of $f_{\\bar s,*}I^\\bullet$ gives exactly $\\Gamma(X_{\\bar s},I^\\bullet)$. By [pqf-def-cohomology] its degree-$r$ homology is $H^r(X_{\\bar s},\\mathcal G_{\\bar s})$. Exact global sections on the point also preserves the derived-category isomorphism and computes the homology of the displayed module complex. Consequently the dimension in the statement is $\\dim_\\Omega H^r(C_j^\\bullet\\otimes_{A_j}\\Omega)$. This equals $b_{j,r}(s):=\\dim_k H^r(C_j^\\bullet\\otimes_{A_j}k)$: split the finite-dimensional $k$-complex in degree $r$ into incoming boundaries, a complement representing homology, and a complement to outgoing cycles. Bases of these spaces remain bases after extension to $\\Omega$, and the outgoing map restricts to an isomorphism from the last complement onto its image. The same homology basis therefore counts both dimensions. This also shows independence of the algebraic closure.",
-   "uses": [
-    "cor-pc-projective-noetherian-rf-perfect-base-change",
+    "thm-pc-semicontinuity-base-change",
     "def-weil-geometric-fibre",
-    "lem-pc-localized-pullback-perfect-model",
-    "pqf-def-cohomology",
-    "def-pc-module-pullback",
-    "def-weil-affine-spectrum"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 0BDN, lemma-jump-loci-geometric, proof; Tag 0BDI, lemma-jump-loci, proof of (3)"
-   }
-  },
-  {
-   "text": "Apply [lem-sc-finite-free-complex-homology-upper-semicontinuous] to $A_j$, $C_j^\\bullet$, and the integer $r$. For every integer $t$, the set $O_{j,t}=\\{s\\in U_j:b_{j,r}(s)<t\\}$ is open in $U_j$. For every $n\\geq0$ its level set is $L_{j,n}=O_{j,n+1}\\setminus O_{j,n}$, hence is locally closed in $U_j$ and also in $S$: both $O_{j,n+1}$ and $O_{j,n}$ are open in $S$. Moreover $0\\leq b_{j,r}(s)\\leq c_{j,r}$, where $c_{j,r}$ is the finite free rank of $C_j^r$, because homology is a quotient of a subspace of the $c_{j,r}$-dimensional middle term. Therefore the finitely many sets $L_{j,n}$ with $0\\leq n\\leq c_{j,r}$ partition $U_j$.",
-   "uses": [
-    "lem-sc-finite-free-complex-homology-upper-semicontinuous"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 0BDN, lemma-jump-loci-geometric, proof; Tag 0BDI, lemma-jump-loci, proof of (3)"
-   }
-  },
-  {
-   "text": "By Step 3, the geometric fibre dimension $h_r$ restricts to $b_{j,r}$ on every $U_j$. Its image is contained in $\\{0,\\ldots,N\\}$ for $N=\\max_j c_{j,r}$, and $h_r^{-1}(n)=\\bigcup_j L_{j,n}$, a finite union of locally closed subsets of $S$, hence constructible by [def-weil-constructible-subset] and Step 1. These fibres are disjoint and cover $S$, giving a finite constructible partition on which $h_r$ is constant. This is constructibility of the function. If $S$ is empty its image and this partition are empty, so the assertion holds without taking a maximum.",
-   "uses": [
     "def-weil-constructible-subset"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 0BDN, lemma-jump-loci-geometric, proof; Tag 0BDI, lemma-jump-loci, proof of (3)"
-   }
+   "elementary": false
+  },
+  {
+   "text": "The tensor-formula pullback and the source-library ordinary pullback are left adjoint to the same pushforward [def-pc-module-pullback], so uniqueness of left adjoints gives an isomorphism of the pulled-back coefficient modules. For any field k and structure morphism g:Y to Spec k, use the natural additive comparison [lem-sc-module-cohomology-source-comparison] between moduleCohomology and H. Apply its naturality to multiplication by the global image of each c in k. The scalar-endomorphism theorem [lem-weil-pbc-module-cohomology-scalar-endomorphism] says the module cohomology map is multiplication by that scalar; H defines its scalar action by exactly the same multiplication endomorphism. Hence the comparison is k-linear and preserves finrank. Compose with the pullback isomorphism and functorial invariance of finrankH to identify beta with the dimension in the statement. The existing finite-range and level-set conclusions now apply verbatim. Zero coefficients, degree zero and an empty base are included without choosing a point or a maximum.",
+   "uses": [
+    "def-pc-module-pullback",
+    "lem-sc-module-cohomology-source-comparison",
+    "lem-weil-pbc-module-cohomology-scalar-endomorphism"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
   "pqf-def-locnoeth",
   "def-weil-pbc-quasi-compact-scheme",
-  "lem-sc-affine-noetherian-underlying-space",
-  "def-weil-constructible-subset",
-  "lem-pc-projective-noetherian-rf-perfect",
-  "def-pc-perfect-complex",
-  "lem-weil-pbc-finite-projective-standard-free-cover",
-  "cor-pc-projective-noetherian-rf-perfect-base-change",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-weil-pbc-coherent-affine-sections-finite",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "thm-pc-semicontinuity-base-change",
   "def-weil-geometric-fibre",
-  "lem-pc-localized-pullback-perfect-model",
-  "pqf-def-cohomology",
-  "lem-sc-finite-free-complex-homology-upper-semicontinuous",
+  "def-weil-constructible-subset",
   "def-pc-module-pullback",
-  "def-weil-affine-spectrum"
+  "lem-sc-module-cohomology-source-comparison",
+  "lem-weil-pbc-module-cohomology-scalar-endomorphism"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/perfect.tex",
-  "place": "Tag 0BDN, lemma-jump-loci-geometric, proof; Tag 0BDI, lemma-jump-loci, proof of (3)"
+  "place": "Tags 0BDN and 0BDI; W7 specialization of the existing GeometricFibreRank implementation, with scalar-compatible cohomology and tensor-pullback comparisons, 2026-10-18."
  },
  "mathlib_searches": [
   {
@@ -222,13 +183,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-pc-projective-noetherian-rf-perfect",
-  "cor-pc-projective-noetherian-rf-perfect-base-change",
-  "lem-weil-pbc-finite-projective-standard-free-cover",
-  "lem-pc-localized-pullback-perfect-model",
-  "lem-sc-finite-free-complex-homology-upper-semicontinuous"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-14",
   "by": "L",
@@ -254,5 +209,15 @@
   "group": "NW",
   "result": "pass",
   "note": "Verified immutable files, all nine statement dependencies, source correspondence, edge cases, exact signature, and pilot gates. Server-only compilation passed in 1.6 seconds. No fixes required."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W7",
+  "result": "pass",
+  "landing": "20261018T062944-L-689898",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

@@ -13,16 +13,12 @@ public import Mathlib.Topology.Constructible
 public import Sheaf.AlgebraicGeometry.Coherent
 public import Sheaf.AlgebraicGeometry.TensorPullback
 public import Sheaf.Paper.PQFCohomology
-import Sheaf.AlgebraicGeometry.PerfectComplex
-import Sheaf.RingTheory.FiniteProjectiveStandardFreeCover
-import Sheaf.AlgebraicGeometry.LocalizedPullbackPerfectModel
-import Sheaf.AlgebraicGeometry.FiniteFreeComplexHomologyUpperSemicontinuous
-import Sheaf.AlgebraicGeometry.ProjectiveNoetherianDirectImagePerfect
-import Sheaf.AlgebraicGeometry.ProjectiveNoetherianPerfectBaseChange
-import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.RfPerfect
-import WeilConjectures.AlgebraicGeometry.PQFCohomology
-import WeilConjectures.AlgebraicGeometry.TensorPullback
-import WeilConjectures.RingTheory.FiniteProjectiveStandardFreeCover
+import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.GeometricFibreRank
+import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import WeilConjectures.AlgebraicGeometry.CoherentAffineSectionsFinite
+import WeilConjectures.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
+import WeilConjectures.AlgebraicGeometry.ModuleCohomologySourceComparison
+import WeilConjectures.AlgebraicGeometry.ModuleCohomologyScalarEndomorphism
 
 /-! # Constructible geometric fibre dimensions of coherent cohomology
 
@@ -38,6 +34,42 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry
+
+private theorem coherent_finitePresentation
+    (X : Scheme.{u}) [IsLocallyNoetherian X] (F : X.Modules)
+    (hc : RingedSpace.IsCoherent X.toRingedSpace F) : F.IsFinitePresentation := by
+  have hq := (Scheme.Modules.isCoherent_iff_isQuasicoherent_and_isFiniteType X F).mp hc
+  have hfp (U : X.affineOpens) : (F.over U.1).IsFinitePresentation := by
+    have := IsLocallyNoetherian.component_noetherian U
+    have := Scheme.Modules.coherent_affine_sections_finite X F hc U.1 U.2
+    have hp := Module.finitePresentation_of_finite Γ(X, U.1) Γ(F, U.1)
+    exact (((Scheme.Modules.quasicoherent_finite_type_affine.{u, u} X).2 F hq.1).1
+      U.1 U.2).2.mpr hp
+  exact @SheafOfModules.IsFinitePresentation.of_coversTop _ _ _ _ _ _ _ _ F
+    X.affineOpens (fun U ↦ U.1) (by
+      rw [Opens.coversTop_iff]
+      exact iSup_affineOpens_eq_top X) hfp
+
+private theorem finrank_moduleCohomology_eq_finrankH
+    {k : Type u} [Field k] {Y : Scheme.{u}} (g : Y ⟶ Spec (.of k))
+    (F : Y.Modules) (r : ℕ) :
+    Module.finrank k ((RingedSpace.moduleCohomology Y.toRingedSpace r ⋙
+      ModuleCat.restrictScalars ((Scheme.ΓSpecIso (.of k)).inv ≫ g.appTop).hom).obj F) =
+      (letI : Y.Over (Spec (.of k)) := ⟨g⟩; F.finrankH k r) := by
+  let : Y.Over (Spec (.of k)) := ⟨g⟩
+  obtain ⟨a, ha⟩ := Scheme.Modules.exists_moduleCohomology_source_comparison Y r
+  let C := (RingedSpace.moduleCohomology Y.toRingedSpace r ⋙
+    ModuleCat.restrictScalars ((Scheme.ΓSpecIso (.of k)).inv ≫ g.appTop).hom).obj F
+  let e : C ≃ₗ[k] F.H r :=
+    { a F with
+      map_smul' := fun c x ↦ by
+        let b := Scheme.globalSectionsRingHom k (X := Y) c
+        have hn := ha F F (F.smulHom b) x
+        have hm := moduleCohomology_scalar_endomorphism F (F.smulHom b) b
+          (fun U t ↦ Scheme.Modules.smulHom_app_apply F b U t) r x
+        rw [hm] at hn
+        exact hn }
+  exact e.finrank_eq
 
 /-- Geometric fibre coherent cohomology dimensions of a coherent module flat over a
 Noetherian base of a projective morphism form a constructible function: its range is finite
@@ -89,6 +121,34 @@ theorem projectiveFlatCoherent_geometricCohomology_constructible
                   S.fromSpecResidueField s))).obj G))) ∧
       (Set.range β).Finite ∧
       ∀ n : ℕ, Topology.IsConstructible {s : S | β s = n} := by
-  sorry
+  classical
+  let : IsNoetherian S := ⟨⟩
+  let : IsLocallyNoetherian X := LocallyOfFiniteType.isLocallyNoetherian f
+  have : G.IsQuasicoherent :=
+    ((Scheme.Modules.isCoherent_iff_isQuasicoherent_and_isFiniteType X G).mp hG).1
+  have : G.IsFinitePresentation := coherent_finitePresentation X G hG
+  obtain ⟨n, hn, i, hi, hif⟩ := IsHProjective.exists_isClosedImmersion (f := f)
+  have : Finite n := hn
+  have : IsClosedImmersion i := hi
+  obtain ⟨hfinite, hcon⟩ :=
+    Scheme.Modules.finite_range_and_isConstructible_finrankH_geometricFibre f i hif G hflat r
+  let β : S → ℕ := fun s ↦
+    letI : (pullback f (S.geometricPointAt s)).Over
+        (Spec (.of (AlgebraicClosure (S.residueField s)))) := ⟨pullback.snd _ _⟩
+    ((Scheme.Modules.pullback (pullback.fst f (S.geometricPointAt s))).obj G).finrankH
+      (AlgebraicClosure (S.residueField s)) r
+  refine ⟨β, ?_, hfinite, ?_⟩
+  · intro s
+    let g := S.geometricPointAt s
+    let Y := pullback f g
+    let p : Y ⟶ X := pullback.fst f g
+    let q := pullback.snd f g
+    let : Y.Over (Spec (.of (AlgebraicClosure (S.residueField s)))) := ⟨q⟩
+    obtain ⟨adj⟩ := Scheme.Modules.nonempty_tensorPullbackAdjunction p
+    let e := (adj.leftAdjointUniq (Scheme.Modules.pullbackPushforwardAdjunction p)).app G
+    rw [finrank_moduleCohomology_eq_finrankH q]
+    exact (Scheme.Modules.finrankH_congr (AlgebraicClosure (S.residueField s)) e r).symm
+  · intro n
+    exact hcon n
 
 end AlgebraicGeometry
