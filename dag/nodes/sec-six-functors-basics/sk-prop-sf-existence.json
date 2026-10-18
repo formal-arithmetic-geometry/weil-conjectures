@@ -462,5 +462,29 @@
     }
    ]
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-fa77cd485",
+  "group": "NI",
+  "result": "pass",
+  "note": "Clause-by-clause match of the hypotheses and conclusion with the node; dependency declarations used as recorded; real lift helper; coproducts indexed by Type(u+1), matching the landed Brown-hypotheses module; uniqueness compatible with the counits; only the lean field changed; statement verbatim; report sections present. Compiled cleanly with nt_compile.py in 5.4 s with no errors or warnings, and a check file shows sorry is the only extra axiom. Minor, not blocking: the shift structure on the right adjoint is existential, and the Qbar_l case follows the project's finite-subextension convention."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.LocalizingExceptionalAdjoint",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.exists_localizingExceptionalAdjoint",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.localizingLowerShriek",
+   "AlgebraicGeometry.ProEtale.CondensedRing.localizingLowerShriekCommShift",
+   "AlgebraicGeometry.ProEtale.CondensedRing.exists_localizingExceptionalAdjoint"
+  ],
+  "file": "lean/Sheaf/Paper/LocalizingExceptionalAdjoint.lean",
+  "statement": "theorem exists_localizingExceptionalAdjoint (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))] [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))] [IsSeparated (Y ↘ Spec (.of k))] (f : X ⟶ Y) [f.IsOver (Spec (.of k))] [LocallyOfFiniteType f] [QuasiCompact f] [IsSeparated f] (c : Compactification.BoundaryCompactification f) (_hΛ : (∃ (A : Type u) (_ : CommRing A) (_ : Finite A) (_ : TopologicalSpace A) (_ : DiscreteTopology A) (_ : IsTopologicalRing A), (∃ n : ℕ, (ℓ ^ n : A) = 0) ∧ Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousCoefficientRingObj A))) ∨ Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj ℤ_[ℓ])) ∨ Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj ℚ_[ℓ])) ∨ (∃ E : PadicAlgCl.FiniteIntermediateField ℓ, Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.padicIntegersRingObj ℓ E.1)) ∨ Nonempty (Mon.mk Λ ≅ Mon.mk ((sheafCompose (coherentTopology Profinite.{u}) (forget₂ RingCat.{u + 1} Ab.{u + 1})).obj (Profinite.padicSubfieldCondensedRing ℓ E.1)))) ∨ Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.padicAlgClRingObj ℓ))) : ∃ (h : ∀ K, localizingClosureProEtale Λ X K → localizingClosureProEtale Λ Y ((rightDerivedLowerShriekOfCompactification Λ c.obj.obj).obj K)) (hX : (localizingClosureProEtale Λ X).IsTriangulated) (hY : (localizingClosureProEtale Λ Y).IsTriangulated), (fun [triX : (localizingClosureProEtale Λ X).IsTriangulated] [triY : (localizingClosureProEtale Λ Y).IsTriangulated] ↦ (localizingLowerShriek Λ c.obj.obj h).IsTriangulated ∧ Nonempty (HasCoproducts.{u + 1} (localizingClosureProEtale Λ X).FullSubcategory) ∧ Nonempty (HasCoproducts.{u + 1} (localizingClosureProEtale Λ Y).FullSubcategory) ∧ (∀ I : Type (u + 1), PreservesColimitsOfShape (Discrete I) (localizingLowerShriek Λ c.obj.obj h)) ∧ ∃ G : (localizingClosureProEtale Λ Y).FullSubcategory ⥤ (localizingClosureProEtale Λ X).FullSubcategory, ∃ s : G.CommShift ℤ, (fun [comm : G.CommShift ℤ] ↦ G.IsTriangulated ∧ (∀ I : Type (u + 1), PreservesColimitsOfShape (Discrete I) G) ∧ ∃ adj : localizingLowerShriek Λ c.obj.obj h ⊣ G, ∀ (J : (localizingClosureProEtale Λ Y).FullSubcategory ⥤ (localizingClosureProEtale Λ X).FullSubcategory) (adjJ : localizingLowerShriek Λ c.obj.obj h ⊣ J), ∃! e : G ≅ J, ∀ N, (localizingLowerShriek Λ c.obj.obj h).map (e.hom.app N) ≫ adjJ.counit.app N = adj.counit.app N) (comm := s)) (triX := hX) (triY := hY)",
+  "branch": "newtargets-dag",
+  "by": "NI",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "The canonical lift uses exactly the recorded localizing object properties and compactification composite. Triangulated-closure proofs are existential conclusions, not hypotheses; the inherited shift comparison is constructed through the fully faithful inclusions. The existential right adjoint has coherent shifts, exactness, small coproduct preservation and unique counit-compatible comparison with every other right adjoint."
  }
 }

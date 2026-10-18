@@ -24,7 +24,9 @@
  },
  "stmt_deps": [
   "sk-def-sfb-constructible",
-  "det-def-sfb-constructible-local-model"
+  "det-def-sfb-constructible-local-model",
+  "def-sfb-lisse-coefficient-module",
+  "sk-def-sfb-condensed-ring"
  ],
  "proof": [
   {
@@ -385,5 +387,23 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-dd31078cf",
+  "group": "Q17",
+  "result": "pass",
+  "note": "Node statement matches blueprint main-20261015 sk-lem-coefficient-heart-closure.md verbatim. Lean renders each clause: Lambda = finite IntermediateField E of Q_l in PadicAlgCl (padicSubfieldCondensedRing) or padicAlgClCondensedRing (finite-subextension-valued); IsCommMonObj is a Prop instance true for both, so no extra assumption. Local clause over all NoetherianSpace S: Mathlib IsClosedUnderExtensions/Kernels/Cokernels of IsLisseCoefficientModule (pro-etale cover, Mod.IsFree, rank 0 and varying ranks allowed). Global clause over IsNoetherian X: the three closure classes for IsConstantModelConstructible in the real Mod(ProEt X, condensedRingObj), Nonempty Abelian of the full subcategory (preadditive structure unique), PreservesFiniteLimits/Colimits of the inclusion, and constructible iff lisse on each stratum of a FiniteLocallyClosedStratification (true for Noetherian X: locally closed = constructible, field scalars, nilpotent-insensitive topos). Edge cases fine: empty scheme, n=0, rank 0, no l-invertibility, single universe u, no unbound variables. stmt_deps repaired (def-sfb-lisse-coefficient-module, sk-def-sfb-condensed-ring); common-stratification only in proof_deps. Node diff touches only lean and stmt_deps; lean.statement verbatim; lines <=100. No definitions, sorry-only proof, source/blueprint docstrings with 8-step plan; Worker report and Second reading by Q17 present. nt_compile.py --json on snapshot text: exit 0, about 2.6 s, no diagnostics; a deliberately broken copy fails, so the file is really elaborated. Only a cosmetic report wording nit."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CoefficientHeartClosure",
+  "declaration": "AlgebraicGeometry.ProEtale.coefficientHeart_closure",
+  "file": "lean/Sheaf/Paper/CoefficientHeartClosure.lean",
+  "statement": "theorem coefficientHeart_closure (ℓ : ℕ) [Fact ℓ.Prime] (Λ : Sheaf (coherentTopology Profinite.{u}) RingCat.{u + 1}) [IsCommMonObj ((sheafCompose (coherentTopology Profinite.{u}) (forget₂ RingCat.{u + 1} Ab.{u + 1})).obj Λ)] (hΛ : (∃ E : IntermediateField ℚ_[ℓ] (PadicAlgCl ℓ), FiniteDimensional ℚ_[ℓ] E ∧ Λ = Profinite.padicSubfieldCondensedRing ℓ E) ∨ Λ = Profinite.padicAlgClCondensedRing ℓ) : (∀ (S : Scheme.{u}) [TopologicalSpace.NoetherianSpace S], ObjectProperty.IsClosedUnderExtensions (IsLisseCoefficientModule ((sheafCompose (coherentTopology Profinite.{u}) (forget₂ RingCat.{u + 1} Ab.{u + 1})).obj Λ) (X := S)) ∧ ObjectProperty.IsClosedUnderKernels (IsLisseCoefficientModule ((sheafCompose (coherentTopology Profinite.{u}) (forget₂ RingCat.{u + 1} Ab.{u + 1})).obj Λ) (X := S)) ∧ ObjectProperty.IsClosedUnderCokernels (IsLisseCoefficientModule ((sheafCompose (coherentTopology Profinite.{u}) (forget₂ RingCat.{u + 1} Ab.{u + 1})).obj Λ) (X := S))) ∧ (∀ (X : Scheme.{u}) [IsNoetherian X], ObjectProperty.IsClosedUnderKernels (IsConstantModelConstructible ((sheafCompose (coherentTopology Profinite.{u}) (forget₂ RingCat.{u + 1} Ab.{u + 1})).obj Λ) X) ∧ ObjectProperty.IsClosedUnderCokernels (IsConstantModelConstructible ((sheafCompose (coherentTopology Profinite.{u}) (forget₂ RingCat.{u + 1} Ab.{u + 1})).obj Λ) X) ∧ ObjectProperty.IsClosedUnderExtensions (IsConstantModelConstructible ((sheafCompose (coherentTopology Profinite.{u}) (forget₂ RingCat.{u + 1} Ab.{u + 1})).obj Λ) X) ∧ Nonempty (Abelian (ConstantModelConstructible ((sheafCompose (coherentTopology Profinite.{u}) (forget₂ RingCat.{u + 1} Ab.{u + 1})).obj Λ) X)) ∧ PreservesFiniteLimits (ObjectProperty.ι (IsConstantModelConstructible ((sheafCompose (coherentTopology Profinite.{u}) (forget₂ RingCat.{u + 1} Ab.{u + 1})).obj Λ) X)) ∧ PreservesFiniteColimits (ObjectProperty.ι (IsConstantModelConstructible ((sheafCompose (coherentTopology Profinite.{u}) (forget₂ RingCat.{u + 1} Ab.{u + 1})).obj Λ) X)) ∧ ∀ M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj ((sheafCompose (coherentTopology Profinite.{u}) (forget₂ RingCat.{u + 1} Ab.{u + 1})).obj Λ) X), IsConstantModelConstructible ((sheafCompose (coherentTopology Profinite.{u}) (forget₂ RingCat.{u + 1} Ab.{u + 1})).obj Λ) X M ↔ ∃ R : X.FiniteLocallyClosedStratification, ∀ a : Fin R.n, IsLisseCoefficientModule ((sheafCompose (coherentTopology Profinite.{u}) (forget₂ RingCat.{u + 1} Ab.{u + 1})).obj Λ) ((CondensedRing.upperStar ((sheafCompose (coherentTopology Profinite.{u}) (forget₂ RingCat.{u + 1} Ab.{u + 1})).obj Λ) (R.immersion a)).obj M))",
+  "branch": "newtargets-dag",
+  "by": "Q17",
+  "date": "2026-10-18",
+  "existing": false
  }
 }

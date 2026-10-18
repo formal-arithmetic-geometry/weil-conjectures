@@ -14,7 +14,9 @@
   "def-weil-weil-sheaf-complex",
   "def-pod-lisse-l-adic-sheaves",
   "def-weil-derived-direct-image",
-  "prop-weil-operations"
+  "prop-weil-operations",
+  "def-zl-common-stage-weil-shriek",
+  "def-a1-common-stage-lisse-lattice"
  ],
  "proof": [
   {
@@ -334,21 +336,27 @@
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q147-fdb73d6b6 (reviewer sub-agent of L); spot-checked: Read in full: the item and all 7 steps, the statement of each of the 22 cited nodes, the main-20261015 proof of lem-a1-reduction-lisse-pure, and the Stacks lemmas 04HN, 095B, 0959 and 015F. In the blueprint, lissity was only claimed through lem-a1-finite-map-purity, which proves purity alone, so this item fills a real gap. The statement is true and unchanged. Small cases checked: empty source or target, the identity, a split cover with sheets of different ranks, disconnected targets with varying degree, and the zero sheaf. Coefficient category: the steps keep the pro-etale D^b_c of def-weil-derived-direct-image and use the etale towers only for the def-pod lissity clause. Batch-5 check: cor-galois-lisse-representations (the lisse sheaf / pi_1-representation dictionary) and lem-pod-profinite-stable-lattice (stable lattice for a compact group) are general foundations. Their closures contain no trace-formula or Poincare-duality theorem node, and neither assumption leaf states or implies them. They are also genuinely needed, because a lattice taken straight from the definition can have torsion stalks, and then the levels are not locally free. Accepted. Two faults, fixed in fixes/dag/nodes/sec-deligne-laumon-a1/lem-a1-finite-map-lisse.json. (1) C1 in step 1: the Noetherian property of Y was used without a node, so I cited lem-weil-pbc-finite-type-over-noetherian, and I added why every local value of M_n is free. (2) E1/E3 in step 5: the claim that N is derived complete because its reductions are constructible does not follow, and the input M was never shown to lie in D^b_c(Y,O_E), which the definition of Rg_* requires. I replaced this with the Roos-triangle argument for both M and N (P is the limit of P_n, and 1-T is an epimorphism by det-pe-milnor-epimorphic), citing def-weil-derived-complete. The declared tool_uses are accepted. There are no new nodes, no duplicate found among about 10 candidate nodes, and no SGA source.; 1 file(s) fixed by the reviewer"
  },
  "lean": {
-  "module": "Sheaf.DeligneLaumon.Reduction.FiniteMapLisse",
-  "declaration": "AlgebraicGeometry.WeilSheaf.isLisse_lowerStar_of_isFiniteEtale",
-  "file": "lean/Sheaf/DeligneLaumon/Reduction/FiniteMapLisse.lean",
-  "statement": "theorem isLisse_lowerStar_of_isFiniteEtale (D : WeilConjectures.FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p) {X₀ Y₀ : Scheme.{u}} [X₀.Over (Spec (CommRingCat.of D.k₀))] [Y₀.Over (Spec (CommRingCat.of D.k₀))] [IsSeparated (X₀ ↘ Spec (CommRingCat.of D.k₀))] [IsSeparated (Y₀ ↘ Spec (CommRingCat.of D.k₀))] [LocallyOfFiniteType (X₀ ↘ Spec (CommRingCat.of D.k₀))] [QuasiCompact (X₀ ↘ Spec (CommRingCat.of D.k₀))] [LocallyOfFiniteType (Y₀ ↘ Spec (CommRingCat.of D.k₀))] [QuasiCompact (Y₀ ↘ Spec (CommRingCat.of D.k₀))] (g₀ : Y₀ ⟶ X₀) [g₀.IsOver (Spec (CommRingCat.of D.k₀))] [IsFinite g₀] [Etale g₀] [QuasiCompact g₀] [QuasiSeparated g₀] [LocallyOfFiniteType g₀] [Fact (ringChar D.k₀ ≠ l)] (F : WeilSheaf D.k₀ l Y₀) (hF : F.IsLisse) : Nonempty ((WeilComplex.derivedLowerStar (k₀ := D.k₀) (l := l) g₀).obj (toComplex.obj F) ≅ toComplex.obj ((lowerStar g₀).obj F)) ∧ ((lowerStar g₀).obj F).IsLisse",
+  "module": "Sheaf.Paper.FiniteEtaleLisseWeilImage",
+  "declaration": "WeilConjectures.a1FiniteEtaleWeilImage_lisse",
+  "declarations": [
+   "WeilConjectures.a1FiniteEtaleWeilImage",
+   "WeilConjectures.A1FiniteEtaleImageRealization",
+   "WeilConjectures.a1FiniteEtaleWeilImage_lisse"
+  ],
+  "file": "lean/Sheaf/Paper/FiniteEtaleLisseWeilImage.lean",
+  "statement": "theorem a1FiniteEtaleWeilImage_lisse (F : sfCommonStageWeilSheaf D l hl Y₀ Ω) (_hF : HasCommonStageLisseLattice l Ω (D.geometricFiber Y₀).left F.obj.carrier) : sfCommonStageHeartProperty l (D.geometricFiber X₀).left Ω (((a1FiniteEtaleWeilImage D l hl Ω g₀).obj F.obj).carrier) ∧ HasCommonStageLisseLattice l Ω (D.geometricFiber X₀).left (((a1FiniteEtaleWeilImage D l hl Ω g₀).obj F.obj).carrier) ∧ Nonempty (A1FiniteEtaleImageRealization D l hl Ω g₀ F)",
   "branch": "newtargets-dag",
-  "by": "Q31",
+  "by": "N1",
   "date": "2026-10-18",
-  "existing": false
+  "existing": false,
+  "note": "Uses the recorded SfWeilSheafComplex fixed-pair category, the actual D.geometricFiber, and independent scheme/coefficient universes. The recently published DeligneLaumon.Reduction.FiniteMapLisse declaration uses the distinct upstream derived category of Weil sheaves, which def-weil-weil-sheaf-complex explicitly excludes. Reuses the already landed canonical proper image/Frobenius mate and common-stage lisse-lattice notion, adding their nodes to stmt_deps. The realization certificate expresses g_*F = Rg_*F using the actual underived completed-module image and the recorded finite-level Roos derived image, with no new axioms or hollow constructions."
  },
  "reviewed_lean": {
   "date": "2026-10-18",
   "by": "L",
-  "reviewer": "NT-stage2-cc-e1cef0579",
-  "group": "Q31",
-  "result": "fix",
-  "note": "Statement matches node lem-a1-finite-map-lisse clause by clause in the chapter's upstream WeilSheaf/WeilComplex API (as prop-weil-operations' record and sibling lem-a1-finite-map-purity): FiniteFieldDatum D, l prime with hl (Fact ringChar k0 != l derivable), X0/Y0 separated+LOFT+QC, g0 IsOver+IsFinite+Etale (extra QC/QS/LOFT implied by IsFinite), F : WeilSheaf with IsLisse; conclusion Nonempty(derivedLowerStar g0 (toComplex F) ≅ toComplex (lowerStar g0 F)) ∧ IsLisse. No stronger hypotheses, universes u per upstream convention, edge cases (empty schemes/fibres, zero, varying degree) covered, node changed only in lean, statement verbatim, sorry only. Upstream IsLisse.lowerStar_of_finite_etale states only conjunct 2 (report's search claim wrong); conjunction not upstream, so module legit. Fixes: H8 docstring now gives the 7 proof steps; H9 unused imports Operations/SfWeilSheafComplex/SfDerivedDirectImage replaced by Sheaf.Paper.FiniteFieldFiber; H11 report fix with full Second reading by Q31 and corrected search. nt_compile delivered rc0 2.7s clean, fixed rc0 2.3s clean."
+  "reviewer": "NT-stage2-cc-74e92ae24",
+  "group": "N1",
+  "result": "pass",
+  "note": "Every hypothesis matches the node with nothing stronger: separated finite-type X0/Y0 over k0, finite étale g0 (properness derived from IsFinite), l prime with l != p, F a constructible common-stage Weil sheaf (recorded fixed pairs) that is lisse via the landed HasCommonStageLisseLattice. Conclusions: heart property, lissity, and a realization certificate tying the canonical proper-image Weil lift (Ex_* then Rg_*theta, checked against mapOfNatIso_obj_str) to the underived completed image and the recorded Roos-triangle SfIntegralDirectImage. A #check probe confirms all hypotheses are bound and universes u, v are independent; axioms are standard plus sorryAx. Edge cases (empty schemes or fibres, rank 0, varying degree) are covered. Only lean and stmt_deps change (two landed nodes added); the statement field is verbatim; all imports are dependency modules; docstrings and the 7 proof steps are present; no hollow definitions; the only sorry is the theorem proof. nt_compile rc 0, 8.5 s, clean. Notes: this replaces Q31's landed upstream-WeilSheaf record, which is justified because def-weil-weil-sheaf-complex excludes that category; Q31's FiniteMapLisse.lean will belong to no node (no importers); the stale Q31 review record is overwritten by the merge; the proof-only citers' upstream Lean will need a stage-3 bridge."
  }
 }

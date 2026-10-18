@@ -305,27 +305,29 @@
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q41-a2a4909e5 (reviewer sub-agent of L); spot-checked: I read the item, all 7 steps, both new nodes, every cited statement, the main-20261015 blueprint statement and proof, unit sk-thm-smooth-purity Step 1 and Stacks proetale.tex section-morphism (09A5). The route is kept: base change via thm-pur-cohomological-smoothness clause 3 (sk-prop-cohsm), with u=p_2, v=f, f'=p_1 and the symmetric case. Then LΔ^* is applied, and pullback composition uses p_2Δ=id_X as an equality of morphisms, so L(p_2Δ)^* is literally L(id)^* with coefficient c^{id}. The coefficient category is the finite A_{E,n} pro-étale one throughout. Step 1 geometry (Cartesian swap, Δ closed by separatedness, permanence, finite type of W) satisfies def-pur-section-invariant. New lem-pur-proetale-constant-ring-composition: types check, and the statement is true because both sides have adjunct a↦constant a on Z×_V T. Tested on h=id, empty schemes and A=0. It supplies exactly the coefficient hypothesis of lem-weil-pbc-proetale-derived-pullback-composition. New lem-pur-proetale-derived-pullback-identity: e_{A_X}=c^{id}, it is linear after scalar transport, and the termwise isomorphism descends because u^* is exact. True, including X empty and A=0. Neither new node restates a parent clause. No DAG duplicates: the étale, ringed-space and topos composition nodes differ. Fixes: (1) B9: the blueprint definition pur713-def-pullback-comparison contains the composition claim inline (a claim inside a definition, so the new statement node is justified); recorded it in the composition node's blueprint.same_as. (2) Removed the stale split_report.tool_uses entry lem-weil-proetale-isomorphism-inverse-image, which no step uses any more. Accepted tool uses: lem-sbc-smooth-relative-dimension-permanence and lem-weil-pbc-proetale-derived-pullback-composition. I could not cross-check the search records against searches.jsonl from this machine. Corrected files are in fixes/dag/nodes/sec-smooth-purity/; details are in review.md.; 2 file(s) fixed by the reviewer"
  },
  "reviewed_lean": {
-  "date": "2026-10-16",
+  "date": "2026-10-18",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-819753ec9",
-  "group": "Q03",
+  "reviewer": "NT-stage2-cc-693b6794d",
+  "group": "Q21",
   "result": "pass",
-  "note": "Reviewed immutable statements, dependencies, sources, canonical maps, universes, edge cases, and report. All four modules passed per-file scompile.py checks. No defects found; review.md written and branch unchanged."
+  "note": "Read the item node, all 18 stmt_deps, the report and all five snapshot modules in full; diffed the three 1(B) dependency modules against the landed legacy modules (co-smoothness: import family and seven renames only; section invariant and diagonal base change keep the same canonical chains, in etale coordinates with pro-etale transport). Every node clause matches the Lean: Lambda=A_{E,n}, n>=1; smooth separated finite-type f,g of dims d,e over finite-type k-schemes; sigma = conjugate compositor inverse after the published theta (omega first); alpha = diagonal inverse-beta chain; gammaF, gammaG, kappa from the genuine Cartesian squares; Equation kappa;alpha_gf = (alpha_f (x) f*alpha_g);sigma_fg compared on the pro-etale site; OpenEquation gives seven squares for arbitrary compatible opens without assuming Cartesian squares; ChartEquation uses ordered literal difference coordinates and nu. Edge cases d=0, e=0, empty schemes or opens, n>=1 and universes (schemes u, coefficients u+1, pro-etale site u+1/u) are covered. Mechanical finding: the statement uses the unique iso that lem-amb-etale-adjoint-locality constructs (Classical.choose of its exists-unique statement for etaleRestriction), not just definitions in its module, so PASS on that point. No hollow definitions; every sorry is a named theorem with a proof docstring; thetaIsIso matches the upstream statement for every K; record fields, verbatim signatures, declaration lists, docstrings and line lengths all check. nt_compile.py --json on all five files: exit 0, no errors or warnings (item 25.3 s), consistent with the delivery's dry run at 58f8c1813c. Notes only: landed citers still use the legacy dependency declarations; diagonalComparedRestriction duplicates finiteDiagonalRestriction; the new compositor node could cite def-weil-pbc-adjunction-conjugate."
  },
  "lean": {
-  "module": "Sheaf.Paper.PurityDiagonalBaseChange",
-  "declaration": "WeilConjectures.PurityFiniteSetting.diagonalBaseChange",
+  "module": "Sheaf.Paper.PurityDiagonalBaseChangeCompared",
+  "declaration": "WeilConjectures.PurityFiniteSetting.comparedDiagonalBaseChange",
   "declarations": [
-   "WeilConjectures.PurityFiniteSetting.diagonalRestrictionIso",
-   "WeilConjectures.PurityFiniteSetting.DiagonalBaseChangeConclusion",
-   "WeilConjectures.PurityFiniteSetting.diagonalBaseChange"
+   "WeilConjectures.PurityFiniteSetting.finiteDiagonalRestriction",
+   "WeilConjectures.PurityFiniteSetting.diagonalComparedRestriction",
+   "WeilConjectures.PurityFiniteSetting.diagonalComparedProEtale",
+   "WeilConjectures.PurityFiniteSetting.comparedDiagonalBaseChange"
   ],
-  "file": "lean/Sheaf/Paper/PurityDiagonalBaseChange.lean",
-  "statement": "theorem diagonalBaseChange (P : PurityFiniteSetting.{u}) {X Y : Scheme.{u}} (d : ℕ) (f : X ⟶ Y) [IsSeparated f] [SmoothOfRelativeDimension d f] (aX : X ⟶ Spec (.of P.field.k)) [LocallyOfFiniteType aX] [QuasiCompact aX] (aY : Y ⟶ Spec (.of P.field.k)) [LocallyOfFiniteType aY] [QuasiCompact aY] (hf : f ≫ aY = aX) : P.DiagonalBaseChangeConclusion d f aX aY",
+  "file": "lean/Sheaf/Paper/PurityDiagonalBaseChangeCompared.lean",
+  "statement": "theorem comparedDiagonalBaseChange (P : PurityFiniteSetting.{u}) {X Y : Scheme.{u}} (d : ℕ) (f : X ⟶ Y) [HasCompactification f] [QuasiCompact f] [IsSeparated f] [SmoothOfRelativeDimension d f] (aX : X ⟶ Spec (.of P.field.k)) [LocallyOfFiniteType aX] [QuasiCompact aX] (aY : Y ⟶ Spec (.of P.field.k)) [LocallyOfFiniteType aY] [QuasiCompact aY] (hf : f ≫ aY = aX) : IsPullback (pullback.snd f f) (pullback.fst f f) f f ∧ SmoothOfRelativeDimension d (pullback.fst f f) ∧ SmoothOfRelativeDimension d (pullback.snd f f) ∧ IsIso (Etale.dualizingComplexBaseChangeMap P.Coefficient (IsPullback.of_hasPullback f f).flip) ∧ IsIso (Etale.dualizingComplexBaseChangeMap P.Coefficient (IsPullback.of_hasPullback f f))",
   "branch": "newtargets-dag",
-  "by": "Q03",
-  "date": "2026-10-16",
-  "existing": false
+  "by": "Q21",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "The recorded diagonal module imports the incompatible legacy section-invariant and smoothness interfaces. This replacement uses the same specified dualizing base-change mates, supplies the explicit inverse-beta/diagonal/composition chain and its actual pro-etale transport, and states invertibility for both self-product projections. Compactification binders are consequences of the existing finite-type setting. The identical diagonal restriction chain is also exposed with a coefficient-ring variable as finiteDiagonalRestriction, for specialization only after elaborating the pasting proposition."
  },
  "blueprint_update": {
   "snapshot": "main-20261015",

@@ -185,32 +185,32 @@
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NS-2b5379cd4 (reviewer sub-agent of L); spot-checked: Read the full definition, all eighteen cited dependency statements, master source locations, report, and unit/chapter route. Both canonical mates have correct directions and justified inverse arrows; finite coefficients, finite-Tor hypotheses, and arbitrary base change are preserved. Small cases pass. No new nodes, duplicates, or dependency path back to the item. Detailed checks are in review.md; no repairs needed."
  },
  "lean": {
-  "module": "Sheaf.Paper.CohomologicalSmoothnessComparison",
-  "declaration": "AlgebraicGeometry.ProEtale.IsCohomologicallySmoothCompared",
+  "module": "Sheaf.Paper.CohomologicalSmoothnessFiniteComparison",
+  "declaration": "AlgebraicGeometry.ProEtale.IsCohomologicallySmoothFiniteCompared",
   "declarations": [
-   "WeilConjectures.PurityFiniteSetting.comparedCoefficientFinite",
-   "WeilConjectures.PurityFiniteSetting.comparedCompactification",
-   "AlgebraicGeometry.ProEtale.comparedDualizing",
-   "AlgebraicGeometry.ProEtale.comparedInvertibilityClause",
-   "AlgebraicGeometry.ProEtale.comparedTensorClause",
-   "AlgebraicGeometry.ProEtale.comparedBaseChangeClause",
-   "AlgebraicGeometry.ProEtale.IsCohomologicallySmoothCompared"
+   "WeilConjectures.PurityFiniteSetting.finiteComparedCoefficientFinite",
+   "WeilConjectures.PurityFiniteSetting.finiteComparedCompactification",
+   "AlgebraicGeometry.ProEtale.finiteComparedDualizing",
+   "AlgebraicGeometry.ProEtale.finiteComparedInvertibilityClause",
+   "AlgebraicGeometry.ProEtale.finiteComparedTensorClause",
+   "AlgebraicGeometry.ProEtale.finiteComparedBaseChangeClause",
+   "AlgebraicGeometry.ProEtale.IsCohomologicallySmoothFiniteCompared"
   ],
-  "file": "lean/Sheaf/Paper/CohomologicalSmoothnessComparison.lean",
-  "statement": "def IsCohomologicallySmoothCompared (P : WeilConjectures.PurityFiniteSetting.{u}) {X Y : Scheme.{u}} [X.Over (Spec (.of P.field.k))] [Y.Over (Spec (.of P.field.k))] [LocallyOfFiniteType (X ↘ Spec (.of P.field.k))] [QuasiCompact (X ↘ Spec (.of P.field.k))] [LocallyOfFiniteType (Y ↘ Spec (.of P.field.k))] [QuasiCompact (Y ↘ Spec (.of P.field.k))] (f : X ⟶ Y) [f.IsOver (Spec (.of P.field.k))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] : Prop",
+  "statement": "def IsCohomologicallySmoothFiniteCompared (P : WeilConjectures.PurityFiniteSetting.{u}) {X Y : Scheme.{u}} [X.Over (Spec (.of P.field.k))] [Y.Over (Spec (.of P.field.k))] [LocallyOfFiniteType (X ↘ Spec (.of P.field.k))] [QuasiCompact (X ↘ Spec (.of P.field.k))] [LocallyOfFiniteType (Y ↘ Spec (.of P.field.k))] [QuasiCompact (Y ↘ Spec (.of P.field.k))] (f : X ⟶ Y) [f.IsOver (Spec (.of P.field.k))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] : Prop",
   "branch": "newtargets-dag",
-  "by": "Q97",
-  "date": "2026-10-17",
+  "by": "Q21",
+  "date": "2026-10-18",
   "existing": false,
-  "note": "Section 1(B) repair: the recorded CohomologicalSmoothness module imports ExchangeProjection and the legacy UpperLowerStar.Iso, which collides with the published FiniteCoefficient.UpperLowerStar.Iso (duplicate upperStarIsoLowerStarInv) even with only statement imports. This module supplies the same three finite-level conditions in canonical etale-origin comparison coordinates, preserving pro-etale tensor invertibility with a Dctf inverse, the actual tensor counit mate for every representative of every pro-etale Dctf input, and the actual compact-support base-change counit mate for all finite-type changes of base. It uses the published canonical etale maps and exact comparison pullback, never arbitrary maps or endpoint isomorphisms; canonical unit/tensor/pullback/compact-support comparisons identify these with the node maps. Small-site and coefficient universes are unchanged. All helper data are existing constructions; Nagata and quotient finiteness are supplied internally without extra hypotheses."
+  "note": "Section 1(B), repair of return e70ddfb5a03d R1: importing the recorded legacy CohomologicalSmoothnessComparison with the actual FiniteCoefficient section pullback collides on AlgebraicGeometry.ProEtale.derivedComparisonAdjunctionPlus. Changing the legacy owning file instead breaks its landed TensorTraceTranspose and CohomologicalSmoothEtaleLocality importers (duplicate laxMonoidal_Q), and TraceTransposeBaseChange (duplicate derivedComparisonAdjunctionPlus). Leave that file byte-identical. This separate FiniteCoefficient-family module uses seven non-colliding names and states exactly the same three comparison-coordinate conditions: an actual pro-etale Dctf two-sided inverse, the specified tensor counit mate on every Dctf representative, and the specified base-change counit mate on every finite-type Cartesian square. All canonical data, universes and mathematical hypotheses are retained; no arbitrary map replaces a counit mate.",
+  "file": "lean/Sheaf/Paper/CohomologicalSmoothnessFiniteComparison.lean"
  },
  "reviewed_lean": {
-  "date": "2026-10-17",
+  "date": "2026-10-18",
   "by": "L",
-  "reviewer": "NT-stage2-cc-d4c2ed897",
-  "group": "Q97",
+  "reviewer": "NT-stage2-cc-693b6794d",
+  "group": "Q21",
   "result": "pass",
-  "note": "Item statement (2 sorry theorems) matches node clause by clause: U,X separated, Y not; f/e/e≫f separatedness via instances; QuasiCompact e automatic; 2nd theorem needs only IsSeparated e (weaker than node's separated schemes), ω_u≅𝟙_ with the predicate's compactification. §1(B) repair of def-pur-co-smoothness justified: reproduced the import failure of legacy Sheaf.Paper.CohomologicalSmoothness (duplicate upperStarIsoLowerStarInv). New IsCohomologicallySmoothCompared matches the node: ω=ν*f^!Λ; Dctf two-sided inverse; ν* of Etale.dualizingComplexTensorMap (projection inverse then counit) on all étale reps of Dctf; ν* of dualizingComplexBaseChangeMap (mate of inverse Ex_!) for all finite-type Cartesian squares, g unrestricted. Helpers have real data (Nagata, quotient finiteness). Landed citers do not use the old predicate in statements. Only `lean` changed in both nodes; statements verbatim; source/blueprint docstrings present; nt_compile clean (5.3 s, 4.4 s). Maintainer notes: legacy module now unused and unimportable (also breaks PurityDiagonalBaseChange import); stale reviewed_lean on def-pur-co-smoothness."
+  "note": "Read the item node, all 18 stmt_deps, the report and all five snapshot modules in full; diffed the three 1(B) dependency modules against the landed legacy modules (co-smoothness: import family and seven renames only; section invariant and diagonal base change keep the same canonical chains, in etale coordinates with pro-etale transport). Every node clause matches the Lean: Lambda=A_{E,n}, n>=1; smooth separated finite-type f,g of dims d,e over finite-type k-schemes; sigma = conjugate compositor inverse after the published theta (omega first); alpha = diagonal inverse-beta chain; gammaF, gammaG, kappa from the genuine Cartesian squares; Equation kappa;alpha_gf = (alpha_f (x) f*alpha_g);sigma_fg compared on the pro-etale site; OpenEquation gives seven squares for arbitrary compatible opens without assuming Cartesian squares; ChartEquation uses ordered literal difference coordinates and nu. Edge cases d=0, e=0, empty schemes or opens, n>=1 and universes (schemes u, coefficients u+1, pro-etale site u+1/u) are covered. Mechanical finding: the statement uses the unique iso that lem-amb-etale-adjoint-locality constructs (Classical.choose of its exists-unique statement for etaleRestriction), not just definitions in its module, so PASS on that point. No hollow definitions; every sorry is a named theorem with a proof docstring; thetaIsIso matches the upstream statement for every K; record fields, verbatim signatures, declaration lists, docstrings and line lengths all check. nt_compile.py --json on all five files: exit 0, no errors or warnings (item 25.3 s), consistent with the delivery's dry run at 58f8c1813c. Notes only: landed citers still use the legacy dependency declarations; diagonalComparedRestriction duplicates finiteDiagonalRestriction; the new compositor node could cite def-weil-pbc-adjunction-conjugate."
  },
  "blueprint_update": {
   "snapshot": "main-20261015",

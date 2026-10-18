@@ -318,26 +318,27 @@
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q40-51edd1985 (reviewer sub-agent of L); spot-checked: Read the contract docs A-F, packet and report, both blueprint versions of def-pur-section-invariant (identical text; its 'invertible by def-pur-co-smoothness' cites a definition, and the split rightly uses thm-pur-cohomological-smoothness instead), Stacks 04TS/sites-lemma-mapping-property-glue at sites.tex 5909-5926, and the full statement of every cited node, including all of def-weil-exceptional-inverse-image. The item's statement, stmt_deps and lean are byte-identical to the side-DAG copy, so nothing is weakened. Steps 1-7 check out: clopen relative-dimension loci V_d from 02G1, finitely many by quasi-compactness; g_d smooth, separated and of finite type with exact relative dimension d; componentwise inverses glue through new node 1; s is separated and of finite type via the closed-immersion leaf, so lem-sf-pullback-tor-amplitude keeps the exact Tor interval; that interval passes to every integral reduction through clause 1 of lem-pur-integral-operations-preserve-constructible; unit pullback uses clause 2 of lem-weil-constant-coefficient-objects-constructible; the ambient and coherent tensor comparison comes from lem-pur-derived-pullback-tensor-iso. proof_deps equals the union of uses; no cited id is missing or merged; a reachability check finds no cycle. New node 1 is true: clopen glueing, exact restriction commuting with R lim, finite common bounds, and localization/Karoubi/2-colimit commuting with finite products. Tested on one piece, Spec k ⊔ Spec k, two different Tor intervals and the empty cover. New node 2 is true: K = ⊕ j_{i!}K_i, then a Hom chain giving j_i^* g^× ≅ g_i^×, lifted through the system-level R lim construction; Y may be non-separated, as the definition allows. Neither node restates a clause of the item. det-sf-mate-open-restriction is a different functor (the Brown adjoint on Loc(D_ctf) for separated schemes), so it is not a duplicate; the clopen-sheaf and biproduct candidates are not duplicates either. Both nodes are statement-only with three kinds of Mathlib search recorded. Accepted the declared tool_uses. No SGA source is cited. No fixes."
  },
  "reviewed_lean": {
-  "date": "2026-10-16",
+  "date": "2026-10-18",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-819753ec9",
-  "group": "Q03",
+  "reviewer": "NT-stage2-cc-693b6794d",
+  "group": "Q21",
   "result": "pass",
-  "note": "Reviewed immutable statements, dependencies, sources, canonical maps, universes, edge cases, and report. All four modules passed per-file scompile.py checks. No defects found; review.md written and branch unchanged."
+  "note": "Read the item node, all 18 stmt_deps, the report and all five snapshot modules in full; diffed the three 1(B) dependency modules against the landed legacy modules (co-smoothness: import family and seven renames only; section invariant and diagonal base change keep the same canonical chains, in etale coordinates with pro-etale transport). Every node clause matches the Lean: Lambda=A_{E,n}, n>=1; smooth separated finite-type f,g of dims d,e over finite-type k-schemes; sigma = conjugate compositor inverse after the published theta (omega first); alpha = diagonal inverse-beta chain; gammaF, gammaG, kappa from the genuine Cartesian squares; Equation kappa;alpha_gf = (alpha_f (x) f*alpha_g);sigma_fg compared on the pro-etale site; OpenEquation gives seven squares for arbitrary compatible opens without assuming Cartesian squares; ChartEquation uses ordered literal difference coordinates and nu. Edge cases d=0, e=0, empty schemes or opens, n>=1 and universes (schemes u, coefficients u+1, pro-etale site u+1/u) are covered. Mechanical finding: the statement uses the unique iso that lem-amb-etale-adjoint-locality constructs (Classical.choose of its exists-unique statement for etaleRestriction), not just definitions in its module, so PASS on that point. No hollow definitions; every sorry is a named theorem with a proof docstring; thetaIsIso matches the upstream statement for every K; record fields, verbatim signatures, declaration lists, docstrings and line lengths all check. nt_compile.py --json on all five files: exit 0, no errors or warnings (item 25.3 s), consistent with the delivery's dry run at 58f8c1813c. Notes only: landed citers still use the legacy dependency declarations; diagonalComparedRestriction duplicates finiteDiagonalRestriction; the new compositor node could cite def-weil-pbc-adjunction-conjugate."
  },
  "lean": {
-  "module": "Sheaf.Paper.PuritySectionInvariant",
-  "declaration": "WeilConjectures.PurityFiniteSetting.sectionInvariant",
+  "module": "Sheaf.Paper.PuritySectionInvariantCompared",
+  "declaration": "WeilConjectures.PurityFiniteSetting.comparedSectionInvariant",
   "declarations": [
-   "WeilConjectures.PurityFiniteSetting.sectionInvariant",
-   "WeilConjectures.PurityFiniteSetting.sectionInvariant_invertible"
+   "WeilConjectures.PurityFiniteSetting.comparedSectionInvariant",
+   "WeilConjectures.PurityFiniteSetting.comparedSectionPresentation",
+   "WeilConjectures.PurityFiniteSetting.comparedSectionInvariant_invertible"
   ],
-  "file": "lean/Sheaf/Paper/PuritySectionInvariant.lean",
-  "statement": "def sectionInvariant (P : PurityFiniteSetting.{u}) {V B : Scheme.{u}} (g : V ⟶ B) [HasCompactification g] (aB : B ⟶ Spec (.of P.field.k)) [LocallyOfFiniteType aB] [QuasiCompact aB] (s : B ⟶ V)",
+  "file": "lean/Sheaf/Paper/PuritySectionInvariantCompared.lean",
+  "statement": "def comparedSectionInvariant (P : PurityFiniteSetting.{u}) {V B : Scheme.{u}} (g : V ⟶ B) [HasCompactification g] (s : B ⟶ V)",
   "branch": "newtargets-dag",
-  "by": "Q03",
-  "date": "2026-10-16",
+  "by": "Q21",
+  "date": "2026-10-18",
   "existing": false,
-  "note": "Previously unstated dependency: finite-coefficient interface required by def-pur-conventions. Uses the actual published pro-etale operations on ModuleCat-valued sheaves; no ambient pro-etale adjoint or orientation is assumed. All definition data is explicit. Higher coefficient stages are the transports specified in the conventions."
+  "note": "The recorded module imports the retired pro-etale operations through CohomologicalSmoothness and cannot be combined with the finite-coefficient exceptional functor. This module defines the same actual Ls* omega_g on the small pro-etale site, supplies its canonical etale-origin presentation using the published site/pullback comparison, and states tensor invertibility with a Dctf inverse."
  }
 }

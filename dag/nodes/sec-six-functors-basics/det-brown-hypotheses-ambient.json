@@ -256,19 +256,20 @@
  "reviewed_lean": {
   "date": "2026-10-18",
   "by": "L",
-  "reviewer": "NT-stage2-cc-d05fe3700",
-  "group": "Q34",
+  "reviewer": "NT-stage2-cc-40ea356b5",
+  "group": "NW",
   "result": "pass",
-  "note": "Read the item node, its 3 stmt_deps, LocalizingClosure/CondensedConstantConstructibility, the HasDerivedCategory.ofIsGrothendieckAbelian Hom universe and Mathlib Subcategory.lean:182/693/722. All four clauses are present and faithful: LocallySmall.{u+1}, P.IsTriangulated (gives a Pretriangulated/IsTriangulated full subcategory), HasCoproducts.{u+1}, IsIdempotentComplete with orientation i≫p=𝟙 and p≫i=e matching the node. Λ uses the landed generic comm condensed ring interface (more general, no extra assumption); only u is bound; no added hypotheses. Edge cases checked: empty X, empty family, e=0/id, zero ring. No duplicate (rg over lean/Sheaf). Node diff is the lean field only; lean.statement matches the file verbatim; docstrings carry the source, the blueprint tag and 6 proof steps; proof is only sorry; no definitions; Worker report and Second reading by Q34 present. nt_compile --json: clean in 2.1 s; probe compile confirms the signature and Hom : Type (u+1). No findings."
+  "note": "Re-delivery of det_brown_hypotheses_ambient adds l, A (finite, discrete, l-power torsion), E (finite subextension) and _hΛ: six Mon-isomorphism alternatives to the listed condensed rings A, Z_l, O_E, Q_l, E, PadicAlgCl l, using existing project ring objects; this is exactly the node's coefficient list (the earlier landed signature allowed any commutative ring). The isomorphisms use the same monoidal structure as the closure. Topologies are correct (probe: the topology on E is the subtype topology, by rfl). No stronger assumptions; universe u only. Conclusion: LocallySmall.{u+1}, IsTriangulated, HasCoproducts.{u+1} and IsIdempotentComplete of the recorded localizingClosureProEtale, with the node's orientation. Edge cases (empty X, empty family, e=0/id, zero A, E=bottom) are covered. lean.statement is verbatim; docstrings carry the source, blueprint tag and six steps; sorry only; no definitions; proof-dep imports follow the rule; Worker report and Second reading by NW present. No Lean citers. nt_compile --json: rc=0, 2.5 s, no errors; a probe confirmed elaboration (#check signature, a false line rejected). No findings."
  },
  "lean": {
   "module": "Sheaf.SixFunctors.BrownHypothesesAmbient",
   "declaration": "AlgebraicGeometry.ProEtale.det_brown_hypotheses_ambient",
-  "statement": "theorem det_brown_hypotheses_ambient (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ] (X : Scheme.{u}) : let P := localizingClosureProEtale Λ X LocallySmall.{u + 1} P.FullSubcategory ∧ P.IsTriangulated ∧ HasCoproducts.{u + 1} P.FullSubcategory ∧ IsIdempotentComplete P.FullSubcategory",
+  "file": "lean/Sheaf/SixFunctors/BrownHypothesesAmbient.lean",
+  "statement": "theorem det_brown_hypotheses_ambient (l : ℕ) [Fact l.Prime] (A : Type u) [CommRing A] [Finite A] [TopologicalSpace A] [DiscreteTopology A] (_hA : ∃ n : ℕ, (l ^ n : A) = 0) (E : PadicAlgCl.FiniteIntermediateField l) (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ] (_hΛ : Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousCoefficientRingObj A)) ∨ Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj ℤ_[l])) ∨ Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.padicIntegersRingObj l E)) ∨ Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj ℚ_[l])) ∨ Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj E)) ∨ Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj (PadicAlgCl l)))) (X : Scheme.{u}) : LocallySmall.{u + 1} (localizingClosureProEtale Λ X).FullSubcategory ∧ (localizingClosureProEtale Λ X).IsTriangulated ∧ HasCoproducts.{u + 1} (localizingClosureProEtale Λ X).FullSubcategory ∧ IsIdempotentComplete (localizingClosureProEtale Λ X).FullSubcategory",
   "branch": "newtargets-dag",
-  "by": "Q34",
+  "by": "NW",
   "date": "2026-10-18",
   "existing": false,
-  "file": "lean/Sheaf/SixFunctors/BrownHypothesesAmbient.lean"
+  "note": "Repairs the earlier unrestricted commutative-coefficient signature: the six ring-object-isomorphism alternatives express exactly the admissible coefficient list, including its specified valuation topology on the algebraic closure. The conclusion uses the recorded localizing closure directly, without a let binder; recorded proof dependencies are imported non-publicly."
  }
 }

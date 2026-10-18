@@ -345,5 +345,37 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-339dd6af3",
+  "group": "Q107",
+  "result": "pass",
+  "note": "Node diff vs newtargets-dag is lean-only; lean.statement verbatim; 12 declarations match the module; no name collisions in side lean or slopmaster2; nt_compile --json exit 0, module 2.9 s/3.1 s, no warnings. Clauses checked: arbitrary g : T ⟶ S (Scheme.{t}); exact sk-def-sp-coefficient-towers coefficient context; Tow = spCoefficientTowers; g_{*,•} = published spTowerPush (sections M_n(T×_S V), constant-section scalar map), level push = published spLevelPush; g^*_• = leftAdjoint with exactness (PreservesFiniteLimits ∧ PreservesFiniteColimits) and levelwise iso to spLevelPush.leftAdjoint; Rg_{*,•} and Rg_{*,n} = rightDerivedFunctorPlus on DerivedCategory.Plus; evaluation = normalized exact evaluation via mapDerivedCategoryPlus; both sides in D+ of spCoefficientRing S n modules; ∀ n ∀ C. Universes t, u independent; the operations node's unbounded Rg_* would force equal universes, so the universe-general direct image plus the step-8 D+ identification is correct. Edge cases n=0 (level 1), g=id, empty schemes, zero tower, cohomologically bounded-below C, ramified E. No hollow definitions, theorems sorry only, docstrings with source and blueprint, report sections present. Observations only: det-sp-tower-injective-components already has the ∃! natural version (sp_tower_derived_direct_image_evaluation); its declarations are used from proof_deps (upstream, no cycle). No findings."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SmoothPurityTowerLevels",
+  "declaration": "AlgebraicGeometry.ProEtale.sp_tower_levels",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.spTowerLevelEquivalence",
+   "AlgebraicGeometry.ProEtale.spTowerLevelEvaluation",
+   "AlgebraicGeometry.ProEtale.spTowerLevelEquivalenceAdditive",
+   "AlgebraicGeometry.ProEtale.spTowerLevelEvaluationLimits",
+   "AlgebraicGeometry.ProEtale.spTowerLevelEvaluationColimits",
+   "AlgebraicGeometry.ProEtale.sp_tower_operations_exist",
+   "AlgebraicGeometry.ProEtale.spTowerPushforwardRightAdjoint",
+   "AlgebraicGeometry.ProEtale.spTowerPullback",
+   "AlgebraicGeometry.ProEtale.sp_tower_operations_properties",
+   "AlgebraicGeometry.ProEtale.spTowerDerivedPushforward",
+   "AlgebraicGeometry.ProEtale.spTowerLevelDerivedPushforward",
+   "AlgebraicGeometry.ProEtale.sp_tower_levels"
+  ],
+  "file": "lean/Sheaf/Paper/SmoothPurityTowerLevels.lean",
+  "statement": "theorem sp_tower_levels (n : ℕ) (C : DerivedCategory.Plus (spCoefficientTowers l E T)) : Nonempty ((spTowerLevelEvaluation l E S n).mapDerivedCategoryPlus.obj ((spTowerDerivedPushforward l E g).obj C) ≅ (spTowerLevelDerivedPushforward l E g n).obj ((spTowerLevelEvaluation l E T n).mapDerivedCategoryPlus.obj C))",
+  "branch": "newtargets-dag",
+  "by": "Q107",
+  "date": "2026-10-18",
+  "existing": false
  }
 }

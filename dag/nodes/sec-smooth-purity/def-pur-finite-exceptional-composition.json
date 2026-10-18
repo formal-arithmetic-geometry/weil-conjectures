@@ -1,0 +1,106 @@
+{
+ "id": "def-pur-finite-exceptional-composition",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-composition-coherence",
+   "place": "Proof Step 1: canonical exceptional compositor used in the diagonal section pasting comparison",
+   "via": [
+    "lem-pur-diagonal-section-pasting"
+   ]
+  },
+  "same_as": []
+ },
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-diagonal-section-pasting",
+  "date": "2026-10-18",
+  "group": "Q21"
+ },
+ "kind": "definition",
+ "title": "Finite-coefficient canonical exceptional composition",
+ "statement": "For a finite commutative coefficient ring $\\Lambda$ and composable morphisms $f:X\\to Y$ and $g:Y\\to Z$ of schemes with compactifications and quasi-compactness as required by the canonical etale compact-support comparison, define the finite-coefficient exceptional composition isomorphism\n$$\n c^{!}_{g,f}:R(gf)^!_{\\Lambda}\\xrightarrow{\\sim}R f^!_{\\Lambda} R g^!_{\\Lambda}\n$$\nas the adjunction conjugate of the specified canonical unbounded etale compact-support compositor [lem-amb-unbounded-compact-support-comparisons], namely $\\operatorname{unboundedEtaleLowerShriekCompIso}(\\Lambda,f,g)$. Thus its data are the published canonical compositor and the actual etale right-derived upper-shriek adjunctions, with the normalization of [pur9-def-upper-shriek-composition]; no arbitrary natural isomorphism is chosen.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-composition/thm-pur-composition-coherence.proof.md",
+  "place": "proof Step 1, sigma and the exceptional composition comparison"
+ },
+ "stmt_deps": [
+  "lem-amb-unbounded-compact-support-comparisons",
+  "pur9-def-upper-shriek-composition"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "finite coefficient exceptional inverse image composition adjunction conjugate compact support compositor",
+   "results": "No exact finite-coefficient declaration; only generic conjugateIsoEquiv and etale adjunction APIs.",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite coefficient exceptional inverse image composition adjunction conjugate compact support compositor",
+   "results": "No exact finite-coefficient declaration; generic adjunction conjugation and etale compositor APIs only.",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.conjugateIsoEquiv, Etale.rightDerivedUpperShriekAdjunction, unboundedEtaleLowerShriekCompIso",
+   "results": "Generic conjugation candidates only; no existing finite exceptional compositor declaration.",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "finiteExceptionalComposition|unboundedEtaleLowerShriekCompIso",
+   "results": "The canonical unbounded compositor exists in Sheaf/AlgebraicGeometry/UnboundedEtaleCompactSupportComparisons.lean; no finiteExceptionalComposition declaration outside this delivery.",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "lean": {
+  "module": "Sheaf.Paper.PurityFiniteExceptionalComposition",
+  "declaration": "WeilConjectures.PurityFiniteSetting.finiteExceptionalComposition",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.finiteExceptionalComposition"
+  ],
+  "file": "lean/Sheaf/Paper/PurityFiniteExceptionalComposition.lean",
+  "statement": "def finiteExceptionalComposition (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)] [QuasiCompact f] [QuasiCompact (f ≫ g)] : Etale.rightDerivedUpperShriek (ModuleCat.{u + 1} Λ) (f ≫ g) ≅ Etale.rightDerivedUpperShriek (ModuleCat.{u + 1} Λ) g ⋙ Etale.rightDerivedUpperShriek (ModuleCat.{u + 1} Λ) f",
+  "branch": "newtargets-dag",
+  "by": "Q21",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "The compositor is relocated from the item module into this definition node. Its body is the canonical adjunction conjugate of Etale.unboundedEtaleLowerShriekCompIso, and the normalization is checked against pur9-def-upper-shriek-composition."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-693b6794d",
+  "group": "Q21",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-693b6794d",
+  "group": "Q21",
+  "result": "pass",
+  "note": "Read the item node, all 18 stmt_deps, the report and all five snapshot modules in full; diffed the three 1(B) dependency modules against the landed legacy modules (co-smoothness: import family and seven renames only; section invariant and diagonal base change keep the same canonical chains, in etale coordinates with pro-etale transport). Every node clause matches the Lean: Lambda=A_{E,n}, n>=1; smooth separated finite-type f,g of dims d,e over finite-type k-schemes; sigma = conjugate compositor inverse after the published theta (omega first); alpha = diagonal inverse-beta chain; gammaF, gammaG, kappa from the genuine Cartesian squares; Equation kappa;alpha_gf = (alpha_f (x) f*alpha_g);sigma_fg compared on the pro-etale site; OpenEquation gives seven squares for arbitrary compatible opens without assuming Cartesian squares; ChartEquation uses ordered literal difference coordinates and nu. Edge cases d=0, e=0, empty schemes or opens, n>=1 and universes (schemes u, coefficients u+1, pro-etale site u+1/u) are covered. Mechanical finding: the statement uses the unique iso that lem-amb-etale-adjoint-locality constructs (Classical.choose of its exists-unique statement for etaleRestriction), not just definitions in its module, so PASS on that point. No hollow definitions; every sorry is a named theorem with a proof docstring; thetaIsIso matches the upstream statement for every K; record fields, verbatim signatures, declaration lists, docstrings and line lengths all check. nt_compile.py --json on all five files: exit 0, no errors or warnings (item 25.3 s), consistent with the delivery's dry run at 58f8c1813c. Notes only: landed citers still use the legacy dependency declarations; diagonalComparedRestriction duplicates finiteDiagonalRestriction; the new compositor node could cite def-weil-pbc-adjunction-conjugate."
+ }
+}
