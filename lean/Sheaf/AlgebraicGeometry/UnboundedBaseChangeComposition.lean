@@ -8,14 +8,8 @@ module
 public import Sheaf.AlgebraicGeometry.BaseChangeInverseImageIso
 public import Sheaf.AlgebraicGeometry.DerivedCategories
 public import WeilConjectures.SixFunctors.BaseChange.DerivedUnbounded
-import Sheaf.AlgebraicGeometry.DerivedSquareIsoPasting
-import WeilConjectures.AlgebraicGeometry.EtaleInverseImageExact
-import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.MorphismDefs
+import WeilConjectures.SixFunctors.Etale.Derived.UpperStarCompCoherence
 import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Mates
-import Mathlib.CategoryTheory.Localization.Predicate
-import Sheaf.AlgebraicGeometry.BaseChangeMapAbelianAndSets
-import Sheaf.AlgebraicGeometry.ExactUnboundedExchange
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-!
 # Base change for a composite square on unbounded derived categories
@@ -29,12 +23,95 @@ to abelian groups in the coefficient universe. No boundedness or torsion is assu
 
 @[expose] public section
 
-universe u
+universe u v
 
 open CategoryTheory
 open scoped CategoryTheory.Functor
 
 namespace AlgebraicGeometry.Etale
+
+section Pasting
+
+variable (A : Type v) [Category.{u + 1} A] [Abelian A]
+  [IsGrothendieckAbelian.{u + 1} A] [MonoidalCategory A] [MonoidalPreadditive A]
+  [SymmetricCategory A] [MonoidalClosed A] [Abelian.HasFunctorialFlatResolution A]
+  [HasSmallSiteSheafify A]
+  {X'' X' X Y'' Y' Y : Scheme.{u}} {g'' : X'' ⟶ X'} {g' : X' ⟶ X}
+  {f'' : X'' ⟶ Y''} {f' : X' ⟶ Y'} {f : X ⟶ Y} {h : Y'' ⟶ Y'} {g : Y' ⟶ Y}
+
+omit [HasSmallSiteSheafify A] in
+open scoped TwoSquare in
+/-- **Horizontal pasting of the square isomorphisms**: the square isomorphism of two squares
+pasted horizontally is the horizontal composite of the two square isomorphisms, modulo the
+composition isomorphisms of the pullbacks along the horizontal maps. -/
+private lemma unbounded_derivedSquareUpperStarIso_paste_horiz_hom (sq₁ : CommSq g' f' f g)
+    (sq₂ : CommSq g'' f'' f' h) (sq : CommSq (g'' ≫ g') f'' f (h ≫ g)) :
+    (derivedSquareUpperStarIso A sq).hom =
+      Functor.whiskerRight (leftDerivedUpperStarComp A h g).hom L((f'')^*[A]) ≫
+        (TwoSquare.mk _ _ _ _ (derivedSquareUpperStarIso A sq₁).hom ≫ₕ
+          TwoSquare.mk _ _ _ _ (derivedSquareUpperStarIso A sq₂).hom).natTrans ≫
+        Functor.whiskerLeft L((f)^*[A]) (leftDerivedUpperStarComp A g'' g').inv := by
+  refine NatTrans.ext (funext fun F => ?_)
+  simp only [derivedSquareUpperStarIso, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
+    Functor.comp_obj, TwoSquare.hComp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app,
+    Functor.map_comp, Category.assoc]
+  rw [map_leftDerivedUpperStarComp_hom_app_leftDerivedUpperStarComp_inv_app_assoc
+      A f'' h g (g'' ≫ f')
+    (h ≫ g) ((g'' ≫ g') ≫ f) sq₂.w rfl (by rw [Category.assoc, sq₁.w, Category.assoc]),
+    leftDerivedUpperStarComp_hom_app_map_leftDerivedUpperStarComp_inv_app_assoc
+      A g'' f' g (g'' ≫ f')
+    (g' ≫ f) ((g'' ≫ g') ≫ f) rfl sq₁.w (by rw [Category.assoc, sq₁.w, Category.assoc]),
+    map_leftDerivedUpperStarComp_hom_app_leftDerivedUpperStarComp_inv_app
+      A g'' g' f (g'' ≫ g') (g' ≫ f)
+    ((g'' ≫ g') ≫ f) rfl rfl rfl, Iso.hom_inv_id_app_assoc, Iso.hom_inv_id_app_assoc]
+
+omit [HasSmallSiteSheafify A] in
+open scoped TwoSquare in
+/-- **Horizontal pasting of the base change squares**, in the language of `TwoSquare`: the
+base change square of two squares pasted horizontally is the vertical composite (in the sense
+of `CategoryTheory.TwoSquare.vComp`: the mates correspondence exchanges the two directions)
+of the two base change squares, whiskered by the composition isomorphisms of the pullbacks
+along the horizontal maps. -/
+private lemma unbounded_derivedBaseChangeSquare_paste_horiz (sq₁ : CommSq g' f' f g)
+    (sq₂ : CommSq g'' f'' f' h)
+    (sq : CommSq (g'' ≫ g') f'' f (h ≫ g)) :
+    derivedBaseChangeSquare A sq =
+      ((derivedBaseChangeSquare A sq₁ ≫ᵥ derivedBaseChangeSquare A sq₂).whiskerRight
+        (leftDerivedUpperStarComp A h g).hom).whiskerLeft
+        (leftDerivedUpperStarComp A g'' g').inv := by
+  have h1 : TwoSquare.mk _ _ _ _ (derivedSquareUpperStarIso A sq).hom =
+      ((TwoSquare.mk _ _ _ _ (derivedSquareUpperStarIso A sq₁).hom ≫ₕ
+        TwoSquare.mk _ _ _ _ (derivedSquareUpperStarIso A sq₂).hom).whiskerTop
+          (leftDerivedUpperStarComp A h g).hom).whiskerBottom
+          (leftDerivedUpperStarComp A g'' g').inv := by
+    refine TwoSquare.ext _ _ fun F => ?_
+    have := NatTrans.congr_app (unbounded_derivedSquareUpperStarIso_paste_horiz_hom A sq₁ sq₂ sq) F
+    simpa only [TwoSquare.whiskerBottom_app, TwoSquare.whiskerTop_app, NatTrans.comp_app,
+      Functor.whiskerRight_app, Functor.whiskerLeft_app, Category.assoc] using this
+  rw [derivedBaseChangeSquare, h1, mateEquiv_whiskerTop_whiskerBottom, mateEquiv_vcomp]
+
+omit [HasSmallSiteSheafify A] in
+/-- **Horizontal pasting of the base change maps**, component form: for two squares pasted
+horizontally and a sheaf `F` on `X`, the base change map of the pasted square is the
+composite `(h ≫ g)^* f_* F ≅ h^* g^* f_* F ⟶ h^* f'_* g'^* F ⟶ f''_* g''^* g'^* F ≅
+f''_* (g'' ≫ g')^* F` of the base change maps of the two squares, modulo the composition
+isomorphisms of the pullbacks along the horizontal maps. -/
+private lemma unbounded_derivedBaseChangeMap_paste_horiz_app (sq₁ : CommSq g' f' f g)
+    (sq₂ : CommSq g'' f'' f' h)
+    (sq : CommSq (g'' ≫ g') f'' f (h ≫ g))
+    (F : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :
+    (derivedBaseChangeMap A sq).app F =
+      (leftDerivedUpperStarComp A h g).hom.app ((R((f)_*[A])).obj F) ≫
+        L((h)^*[A]).map ((derivedBaseChangeMap A sq₁).app F) ≫
+        (derivedBaseChangeMap A sq₂).app ((L((g')^*[A])).obj F) ≫
+        R((f'')_*[A]).map ((leftDerivedUpperStarComp A g'' g').inv.app F) := by
+  have := NatTrans.congr_app (unbounded_derivedBaseChangeSquare_paste_horiz A sq₁ sq₂ sq) F
+  simp only [TwoSquare.whiskerLeft_app, TwoSquare.whiskerRight_app, TwoSquare.vComp_app,
+    Functor.comp_obj, Category.assoc] at this
+  simp only [derivedBaseChangeMap]
+  exact this
+
+end Pasting
 
 /-- Source: Stacks Project, Tag 0EZS (blueprint: sbc-lem-base-change-composition).
 For the tower of Cartesian squares, invertibility of the two exchange components implies
@@ -58,7 +135,12 @@ theorem isIso_derivedBaseChangeMap_app_of_cartesian_tower
         ((L((e)^*[ModuleCat.{u + 1} (ULift.{u + 1} ℤ)])).obj K))) :
     IsIso ((derivedBaseChangeMap (ModuleCat.{u + 1} (ULift.{u + 1} ℤ))
       (upper.toCommSq.flip.horiz_comp lower.toCommSq.flip)).app K) := by
-  sorry
+  have := hLower
+  have := hUpper
+  rw [unbounded_derivedBaseChangeMap_paste_horiz_app
+    (ModuleCat.{u + 1} (ULift.{u + 1} ℤ)) lower.toCommSq.flip upper.toCommSq.flip
+    (upper.toCommSq.flip.horiz_comp lower.toCommSq.flip)]
+  infer_instance
 
 /-- Source: Stacks Project, Tag 0EZS (blueprint: sbc-lem-base-change-composition).
 The independent degreewise assertion for an abelian sheaf and a single nonnegative degree.
@@ -88,6 +170,37 @@ theorem isIso_homology_derivedBaseChangeMap_of_cartesian_tower
       ((derivedBaseChangeMap (ModuleCat.{u + 1} (ULift.{u + 1} ℤ))
         (upper.toCommSq.flip.horiz_comp lower.toCommSq.flip)).app
           ((_root_.DerivedCategory.singleFunctor _ 0).obj F))) := by
-  sorry
+  let A := ModuleCat.{u + 1} (ULift.{u + 1} ℤ)
+  let K := (_root_.DerivedCategory.singleFunctor _ 0).obj F
+  let β := (derivedBaseChangeMap A lower.toCommSq.flip).app K
+  let τ := derivedBaseChangeMap A upper.toCommSq.flip
+  let H := _root_.DerivedCategory.homologyFunctor
+    (Sheaf W.smallEtaleTopology A) (q : ℤ)
+  have := hLower
+  have := hUpper
+  have hβ : IsIso (H.map ((L((i)^*[A])).map β)) := by
+    apply (NatIso.isIso_map_iff (leftDerivedUpperStarHomologyFunctorIso A i (q : ℤ)) β).mp
+    change IsIso ((upperStar A i).map
+      ((_root_.DerivedCategory.homologyFunctor _ (q : ℤ)).map β))
+    infer_instance
+  have hτ : IsIso (H.map (τ.app ((L((e)^*[A])).obj K))) := by
+    let c := (singleFunctorCompLeftDerivedUpperStarIso A e).app F
+    have heq : τ.app ((L((e)^*[A])).obj K) =
+        (R((h)_*[A]) ⋙ L((i)^*[A])).map c.hom ≫
+          τ.app ((_root_.DerivedCategory.singleFunctor _ 0).obj ((upperStar A e).obj F)) ≫
+          (L((k)^*[A]) ⋙ R((j)_*[A])).map c.inv := by
+      have hn := τ.naturality c.hom
+      dsimp only [Functor.comp_obj] at hn
+      rw [← Category.assoc, hn, Category.assoc, ← Functor.map_comp]
+      simp only [Iso.hom_inv_id, CategoryTheory.Functor.map_id]
+      exact (CategoryTheory.Category.comp_id _).symm
+    rw [heq, H.map_comp, H.map_comp]
+    infer_instance
+  change IsIso (H.map ((derivedBaseChangeMap A
+    (upper.toCommSq.flip.horiz_comp lower.toCommSq.flip)).app K))
+  rw [unbounded_derivedBaseChangeMap_paste_horiz_app A lower.toCommSq.flip
+    upper.toCommSq.flip (upper.toCommSq.flip.horiz_comp lower.toCommSq.flip)]
+  simp only [Functor.map_comp]
+  infer_instance
 
 end AlgebraicGeometry.Etale
