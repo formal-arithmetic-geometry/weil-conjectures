@@ -18,9 +18,189 @@
   "lem-galois-pi1-functoriality",
   "thm-galois-lc-etale"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For a finite intermediate field $E$, the map $\\operatorname{Spec}E\\to\\operatorname{Spec}K$ is finite: its algebra is the finite-dimensional $K$-vector space $E$, hence a finite module. It is etale because $K$ is perfect. Finiteness and etaleness survive base change, so $Y_E\\to Y_0$ is finite etale. The one-point map $\\operatorname{Spec}L\\to\\operatorname{Spec}E$ is surjective; its base change $Y\\to Y_E$ is therefore surjective. A separation of $Y_E$ into two nonempty clopens would pull back to a separation of the connected $Y$. Thus every $Y_E$, including $Y_0$, is connected. Their basepoints are the composites of $\\bar y$.",
+   "uses": [
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-finite-separable-extension-etale",
+    "lem-weil-pbc-finite-morphism-permanence",
+    "lem-weil-pbc-etale-scheme-base-change",
+    "lem-weil-pbc-surjective-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BTX, lemma-ses-field, first proof paragraph; Tag 0BNE, finite constant covers"
+   }
+  },
+  {
+   "text": "Construct the quotient map with its precise convention. For a finite Galois intermediate field $N/K$, identify the fibre of $Y_N\\to Y_0$ with $\\operatorname{Gal}(N/K)$ using $i$. A natural automorphism $u\\in G$ commutes with the deck maps, which act on embeddings by right composition. Consequently its permutation is left multiplication by $u_N(1)$: $u_N(\\tau)=u_N(1)\\tau$. Naturality for projections $Y_{N'}\\to Y_N$ makes these left multipliers compatible under restriction. Since $L/K$ is algebraic, normal (minimal polynomials split in the algebraic closure) and separable (perfectness), [lem-exc-galois-krull-finite-limit] gives a unique $r(u)\\in\\operatorname{Gal}(L/K)$ with these restrictions. Every finite $E$ is contained in a finite Galois $N$ by [lem-weil-pbc-finite-set-in-finite-galois-subextension], applied to a finite $K$-basis of $E$. Every embedding $E\\to L$ is the restriction of an element of $\\operatorname{Gal}(L/K)$ by the transitivity clause of [lem-exc-etale-field-galois-classification]. Naturality for the maps of constant covers induced by these embeddings gives $u_E(\\tau)=r(u)\\circ\\tau$ for all $E,\\tau$. Composition of these permutations proves that $r$ is a homomorphism. Its finite-coordinate maps are continuous evaluations on finite fibres, hence $r$ is continuous for the specified inverse-limit topology. This also identifies it with the map of structure morphisms: restriction of an automorphism of $F_0$ to the constant covers is exactly that construction.",
+   "uses": [
+    "def-galois-fibre-functor",
+    "lem-exc-galois-krull-finite-limit",
+    "lem-weil-pbc-finite-set-in-finite-galois-subextension",
+    "lem-exc-etale-field-galois-classification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BNE, lemma-fundamental-group-Galois-group, and Remark 0BQ9, remark-variance; finite-cover construction of the structure homomorphism"
+   }
+  },
+  {
+   "text": "For each finite Galois $N/K$, the connected cover $Y_N$ is a connected object of the finite etale Galois category, by [lem-galois-finite-etale-connected-object] and [lem-fet-galois-category]. Its fibre is therefore a transitive $G$-set by [lem-galois-transitive]. In the left-translation description of step 2, this says $r_N:G\\to\\operatorname{Gal}(N/K)$ is surjective. Fix $\\sigma\\in\\operatorname{Gal}(L/K)$. The closed subsets $C_N=\\{u:r_N(u)=\\sigma|_N\\}$ of the compact group $G$ are nonempty. Any finite collection contains the nonempty $C_M$ for a common finite Galois overfield $M$. Thus their intersection is nonempty: otherwise their open complements would cover $G$, and a finite subcover would contradict this finite-intersection property. Any element in the intersection maps to $\\sigma$. This proves surjectivity without choosing a compatible family of arbitrary lifts. Compactness here follows from the profiniteness of the fibre-functor automorphism group [lem-galois-aut-profinite].",
+   "uses": [
+    "lem-fet-galois-category",
+    "lem-galois-finite-etale-connected-object",
+    "lem-galois-transitive",
+    "lem-galois-aut-profinite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BTX, lemma-ses-field, surjectivity paragraph; Tag 0BN3, lemma-tame, applied to each constant cover"
+   }
+  },
+  {
+   "text": "For each finite intermediate $E$, [thm-galois-fundamental] identifies $\\pi_1(Y_E,\\bar y_E)$ injectively with the stabilizer $H_E$ of the point $i|_E$ in $F_0(Y_E)$. By step 2, $H_E=\\{u\\in G:r(u)|_E=\\operatorname{id}_E\\}$. Under these embeddings, every transition map for $E\\subseteq E'$ is the inclusion $H_{E'}\\subseteq H_E$: both composites to $G$ act identically on every pulled-back finite cover, by [lem-galois-pi1-functoriality]. Apply [lem-wf-pi1-algebraic-field-limit] with the connectedness proved in step 1. A compatible family in these subgroups is exactly a single element of $\\bigcap_E H_E$; its coordinate at $E=K$ is that element. Therefore $j:P\\to G$ is injective with image $\\bigcap_E H_E=\\ker r$. The map $j$ is continuous by functoriality, and is a topological identification with its image by [lem-weil-pbc-compact-hausdorff-bijection], since its domain is compact and its image is a subspace of the Hausdorff group $G$. Together with step 3 this gives the asserted exact sequence of profinite groups.",
+   "uses": [
+    "thm-galois-fundamental",
+    "lem-galois-pi1-functoriality",
+    "lem-wf-pi1-algebraic-field-limit",
+    "lem-weil-pbc-compact-hausdorff-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BTV, lemma-limit, second assertion; Tag 0BTX, lemma-ses-field, geometric kernel and injection"
+   }
+  },
+  {
+   "text": "For a finite etale $Q_E\\to Y_E$, its composite to $Y_0$ is finite etale: finite morphisms compose by [lem-trf-finite-radicial-basechange], and etale morphisms compose by [lem-weil-pbc-etale-composition-cancellation]. A point of $Q=Q_E\\times_E L$ over $h_\\sigma\\bar y$ is, by the fibre-product universal property, a point of $Q_E$ over $\\bar y_0$ whose $E$-map is $i\\circ\\sigma|_E$, together with the already fixed constants map $i:L\\to\\Omega$. Forgetting that second component is injective, and its image is exactly that labelled fibre. For $\\sigma=1$ it gives $\\iota_1$ and label $i|_E$. Thus the two injections in the statement exist with exactly their stated images; no invariance of $E$ under $\\sigma$ is needed.",
+   "uses": [
+    "lem-trf-finite-radicial-basechange",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "def-pc-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BTX, lemma-ses-field, finite-stage cover construction and its open-and-closed summand; fibre-product interpretation"
+   }
+  },
+  {
+   "text": "Let $s\\in r^{-1}(\\sigma)$. Naturality of the automorphism $s^{-1}$ of $F_0$ for $Q_E\\to Y_E$ and step 2 show that $s^{-1}$ sends the label $i\\sigma|_E$ to $i\\sigma^{-1}\\sigma|_E=i|_E$. It restricts to a bijection between the two labelled fibres; its inverse is the restriction of $s$. Define $\\lambda_{s,Q}$ by that restriction and the injections of step 5. This proves exactly $\\iota_1\\lambda_{s,Q}=s^{-1}\\iota_\\sigma$, including the inverse convention.",
+   "uses": [
+    "def-galois-fibre-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tags 0BNE and 0BQ9, action on embeddings; agent-written restriction of this action to the finite-stage fibres"
+   }
+  },
+  {
+   "text": "Every finite etale $Y$-cover has a finite model by clause (1) of [lem-wf-finite-etale-field-limit-descent]. If two models represent the same cover, pass to a common finite overfield; clause (2) descends the comparison isomorphism and its inverse, and clause (3) makes their inverse equations hold after further enlargement. Each comparison is then also a morphism of finite etale $Y_0$-covers, so naturality of $s^{-1}$ makes the restrictions in step 6 agree. Enlargement of a model is itself compatible: forgetting to the old model commutes with $s^{-1}$, and on each of the two fixed labelled fibres that forgetting map is bijective by the fibre-product universal property. This proves independence of the model and its identifying isomorphism. For an arbitrary morphism of $Y$-covers, descend it after a common enlargement by clause (2); its $Y_0$-naturality square gives the desired square for $\\lambda_s$. Thus these bijections constitute a natural isomorphism on the entire finite etale category, not just on descended morphisms at an initially chosen stage.",
+   "uses": [
+    "lem-wf-finite-etale-field-limit-descent",
+    "def-galois-fibre-functor",
+    "def-pc-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BTV, lemma-limit, objects, morphisms and eventual equalities; agent-written compatibility of the restricted arithmetic action"
+   }
+  },
+  {
+   "text": "Record precisely how $P$ acts on the two injections. Put $A=Q_E$, regarded as a $Y_0$-cover. There is a morphism of $Y$-covers $Q\\to A\\times_{Y_0}Y$ using the first projection to $Q_E$ and the structure map to $Y$. There is also a morphism $h_\\sigma^*Q\\to A\\times_{Y_0}Y$ using its projection to $Q$, then $Q_E$, and its own structure map to $Y$; this is over $Y$ since $h_\\sigma$ lies over $Y_0$. On fibres at $\\bar y$ these maps are precisely $\\iota_1$ and $\\iota_\\sigma$ after forgetting the $Y$-pullback. Naturality and the evaluation identity of [lem-galois-pi1-functoriality] therefore give\n$$\\iota_1(b\\cdot x)=j(b)\\cdot\\iota_1(x),\\qquad\\iota_\\sigma(b\\cdot z)=j(b)\\cdot\\iota_\\sigma(z).$$\nThe second action is on $F_{\\bar y}(h_\\sigma^*Q)$; the canonical identification with $F_{h_\\sigma\\bar y}(Q)$ sends a lifted point to its first projection, directly by the fibre-product universal property.",
+   "uses": [
+    "lem-galois-pi1-functoriality",
+    "def-galois-fibre-functor",
+    "def-pc-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BND, theorem-fundamental-group (3), first-projection fibre identification and naturality"
+   }
+  },
+  {
+   "text": "Since $P=\\ker r$ is normal, $s^{-1}gs\\in P$. Using step 8 twice and step 6, compute\n$$\\iota_1(\\lambda_s(gz))=s^{-1}g\\iota_\\sigma(z)=(s^{-1}gs)s^{-1}\\iota_\\sigma(z)=\\iota_1((s^{-1}gs)\\lambda_s(z)).$$\nInjectivity of $\\iota_1$ proves the required conjugation identity. This is independent of the finite model by step 7 and hence holds on every cover.",
+   "uses": [
+    "def-galois-fibre-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Agent-written group calculation using the fibre actions of Tag 0BND (3)"
+   }
+  },
+  {
+   "text": "For $a\\in P$, the same restriction calculation gives\n$$\\iota_1\\lambda_{as}(z)=(as)^{-1}\\iota_\\sigma(z)=s^{-1}a^{-1}\\iota_\\sigma(z)=\\iota_1\\lambda_s(a^{-1}z).$$\nBy injectivity this is $\\lambda_{as,Q}=\\lambda_{s,Q}\\circ a^{-1}_{h_\\sigma^*Q}$ with exactly the action specified in the statement.",
+   "uses": [
+    "def-galois-fibre-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Agent-written inverse-product calculation for the normalized arithmetic restriction"
+   }
+  },
+  {
+   "text": "It remains to prove that all natural paths are obtained, uniquely. Choose $t\\in r^{-1}(\\sigma)$, possible by step 3, and let $\\lambda:F_{h_\\sigma\\bar y}\\xrightarrow{\\sim}F$ be any natural path. Then $b=\\lambda\\lambda_t^{-1}$ is a natural automorphism of $F$, hence $b\\in P$ by definition. Set $s=t b^{-1}\\in G$. It has image $\\sigma$, and on each finite model\n$$s^{-1}\\iota_\\sigma=j(b)t^{-1}\\iota_\\sigma=\\iota_1 b\\lambda_t=\\iota_1\\lambda.$$\nThus $\\lambda_s=\\lambda$. If $s'=a s$ is another lift with the same path, step 10 gives $a^{-1}_{h_\\sigma^*Q}=1$ on every fibre. Pullback by the scheme automorphism $h_\\sigma$ is an equivalence, with inverse pullback by $h_{\\sigma^{-1}}$ (the two iterated fibre products identify with the original cover by their projections). Hence $a$ acts trivially on the fibre of every cover, so $a=1$ as a natural automorphism of $F$ and $s'=s$. The construction of the forward map used no chosen $t$, so the bijection is canonical.",
+   "uses": [
+    "def-galois-fibre-functor",
+    "def-pc-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Agent-written torsor argument from natural automorphisms and the explicit finite-model evaluation rule"
+   }
+  },
+  {
+   "text": "Finally [thm-galois-lc-etale] is an equivalence compatible with base change and the fibre functors. Transport the natural isomorphisms just constructed along this equivalence. Its fibre comparison identifies evaluation on a represented finite etale cover with evaluation on the corresponding finite locally constant sheaf. Consequently the evaluation rule, conjugation equation and lift-change equation become exactly the same equations for stalk functors; they are equalities of the same finite-set maps under these comparisons. This uses only finite locally constant sets, with no coefficient-module or adic extension.",
+   "uses": [
+    "thm-galois-lc-etale"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Stacks finite-locally-constant/finite-etale equivalence and its fibre/base-change compatibility, as recorded in thm-galois-lc-etale"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-integral-morphism",
+  "lem-weil-pbc-finite-separable-extension-etale",
+  "lem-weil-pbc-finite-morphism-permanence",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "lem-weil-pbc-surjective-base-change",
+  "def-galois-fibre-functor",
+  "lem-exc-galois-krull-finite-limit",
+  "lem-weil-pbc-finite-set-in-finite-galois-subextension",
+  "lem-exc-etale-field-galois-classification",
+  "lem-fet-galois-category",
+  "lem-galois-finite-etale-connected-object",
+  "lem-galois-transitive",
+  "lem-galois-aut-profinite",
+  "thm-galois-fundamental",
+  "lem-galois-pi1-functoriality",
+  "lem-wf-pi1-algebraic-field-limit",
+  "lem-weil-pbc-compact-hausdorff-bijection",
+  "lem-trf-finite-radicial-basechange",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "def-pc-base-change",
+  "lem-wf-finite-etale-field-limit-descent",
+  "thm-galois-lc-etale"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/pione.tex",
+  "place": "Tags 0BTX, 0BTV, 0BNE, 0BQ9 and 0BND; explicit finite-model restriction, naturality, torsor and conjugation arguments supplied by NC, consistent with Weil II (1.1.12), p.152"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -56,10 +236,45 @@
    "results": "8 hits: CategoryTheory.PreGaloisCategory.instIsFundamentalGroupAutFunctorFintypeCat, CategoryTheory.PreGaloisCategory.toAutMulEquiv_apply, CategoryTheory.PreGaloisCategory.instIsPretransitiveAutCarrierVFintypeCatFunctorObjActionFunctorToActionOfIsGalois, CategoryTheory.PreGaloisCategory.action_ext_of_isGalois, CategoryTheory.PreGaloisCategory.FiberFunctor.isPretransitive_of_isGalois, CategoryTheory.PreGaloisCategory.IsFundamentalGroup.transitive_of_isGalois, finGaloisGroupMap, CategoryTheory.PreGaloisCategory.isPretransitive_of_isGalois",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Arithmetic fundamental group lifts correspond to natural isomorphisms between semilinearly translated finite etale fibre functors",
+   "results": "8 hits: CategoryTheory.PreGaloisCategory.toAutMulEquiv_apply, CategoryTheory.PreGaloisCategory.toAutMulEquiv, CategoryTheory.PreGaloisCategory.instIsFundamentalGroupAutFunctorFintypeCat, CategoryTheory.PreGaloisCategory.toAutHomeo_apply, CategoryTheory.PreGaloisCategory.autIsoFibers, CategoryTheory.PreGaloisCategory.autMulEquivAutGalois_π, CategoryTheory.PreGaloisCategory.exists_lift_of_continuous, CategoryTheory.PreGaloisCategory.endEquivAutGalois",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "semilinear|fundamentalGroup.*(exact|field)|ses_field",
+   "results": "4 hits: Mathlib/AlgebraicGeometry/StructureSheaf.lean, Mathlib/AlgebraicGeometry/StructureSheaf.lean, Mathlib/AlgebraicGeometry/StructureSheaf.lean, Mathlib/AlgebraicGeometry/StructureSheaf.lean; Mathlib/AlgebraicGeometry",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Arithmetic etale fundamental group lifts give paths between semilinear geometric fibre functors",
+   "results": "8 hits: CategoryTheory.PreGaloisCategory.instIsFundamentalGroupAutFunctorFintypeCat, FundamentalGroup.fundamentalGroupMulEquivOfPath, CategoryTheory.PreGaloisCategory.exists_lift_of_mono, IsCoveringMap.liftPath_trans, CategoryTheory.PreGaloisCategory.autMap, IsCoveringMap.liftPath, IsCoveringMap.monodromy, CategoryTheory.Paths.lift_spec",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.PreGaloisCategory.FiberFunctor, CategoryTheory.Aut",
+   "results": "12 hits: CategoryTheory.PreGaloisCategory.card_aut_le_card_fiber_of_connected, CategoryTheory.PreGaloisCategory.evaluation_aut_injective_of_isConnected, CategoryTheory.PreGaloisCategory.isPretransitive_of_isGalois, CategoryTheory.PreGaloisCategory.isGalois_iff_pretransitive, CategoryTheory.PreGaloisCategory.evaluationEquivOfIsGalois, CategoryTheory.PreGaloisCategory.stabilizer_normal_of_isGalois, CategoryTheory.PreGaloisCategory.quotientByAutTerminalEquivUniqueQuotient, CategoryTheory.PreGaloisCategory.evaluation_aut_bijective_of_isGalois",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An arithmetic group element over a Galois automorphism acts by its inverse from the conjugate geometric fibre of a descended finite etale cover to its original fibre",
+   "results": "8 hits: CategoryTheory.PreGaloisCategory.autMulEquivAutGalois_π, CategoryTheory.PreGaloisCategory.action_ext_of_isGalois, CategoryTheory.PreGaloisCategory.toAut_surjective_isGalois_finite_family, CategoryTheory.PreGaloisCategory.autIsoFibers_inv_app, CategoryTheory.PreGaloisCategory.evaluationEquivOfIsGalois_symm_fiber, IsGaloisGroup.mulEquivAlgEquiv_apply_symm_apply, CategoryTheory.PreGaloisCategory.evaluationEquivOfIsGalois_apply, CategoryTheory.PreGaloisCategory.FiberFunctor.isPretransitive_of_isGalois",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "def-wf-fundamental-representation",
@@ -76,5 +291,59 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-wf-arithmetic-lift-fibre-path",
+  "worker": "stage1",
+  "summary": "Prove the arithmetic exact sequence through finite constant covers, their stabilizers and the field-limit fundamental-group lemma, rather than making the exact-sequence clause a new node. Construct the specified s-inverse path on labelled fibres, prove model independence for all morphisms, and calculate both conjugation and lift change. Prove bijectivity by the natural-automorphism torsor argument and transfer to finite locally constant sets. One new statement-only limit lemma; no statement change, Lean writing or compilation.",
+  "blueprint": [
+   "main-20261015 def-wf-fundamental-representation, choose a lift s of geometric Frobenius: steps 1–4 establish the coefficient-free arithmetic exact sequence",
+   "same definition, After the usual transport of the stalk: steps 5–8 construct the normalized finite path and its pullback-fibre identification",
+   "same definition, displayed conjugation identity: steps 9–11 prove the inverse-conjugation convention and its lift-change formula before the defining phi composite is used",
+   "same definition, usual stalk transport: step 12 passes only to finite locally constant sets; adic extension remains the separate existing basepoint-transport item"
+  ],
+  "tool_uses": [
+   {
+    "node": "lem-exc-etale-field-galois-classification",
+    "why": "Generic finite-etale fibre-functor or field-descent tool used in the finite-cover realization of the blueprint usual-transport sentence; the affine-matrix unit has no replacement for this statement."
+   },
+   {
+    "node": "lem-galois-transitive",
+    "why": "Generic finite-etale fibre-functor or field-descent tool used in the finite-cover realization of the blueprint usual-transport sentence; the affine-matrix unit has no replacement for this statement."
+   },
+   {
+    "node": "lem-galois-aut-profinite",
+    "why": "Generic finite-etale fibre-functor or field-descent tool used in the finite-cover realization of the blueprint usual-transport sentence; the affine-matrix unit has no replacement for this statement."
+   },
+   {
+    "node": "thm-galois-fundamental",
+    "why": "Generic finite-etale fibre-functor or field-descent tool used in the finite-cover realization of the blueprint usual-transport sentence; the affine-matrix unit has no replacement for this statement."
+   },
+   {
+    "node": "lem-wf-finite-etale-field-limit-descent",
+    "why": "Generic finite-etale fibre-functor or field-descent tool used in the finite-cover realization of the blueprint usual-transport sentence; the affine-matrix unit has no replacement for this statement."
+   },
+   {
+    "node": "thm-galois-lc-etale",
+    "why": "Generic finite-etale fibre-functor or field-descent tool used in the finite-cover realization of the blueprint usual-transport sentence; the affine-matrix unit has no replacement for this statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-exc-etale-field-galois-classification",
+  "lem-galois-transitive",
+  "lem-galois-aut-profinite",
+  "thm-galois-fundamental",
+  "lem-wf-finite-etale-field-limit-descent",
+  "thm-galois-lc-etale"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-NC-7dfa97c6e",
+  "group": "NC",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NC-7dfa97c6e (reviewer sub-agent of L); spot-checked: I read the item's statement (unchanged and not weakened) and all 12 steps against the statement of every cited node and against Stacks pione.tex 0BTX (l.3469), 0BTV (l.3428), 0BN3, 0BND, 0BNE and 0BQ9. The tags and labels match. I recomputed the conventions myself. In step 2, the permutation is left multiplication u_N(1)τ, which gives r(g)∘τ, and it is a homomorphism. In step 6, s^{-1} moves the label iσ|_E to i|_E. Step 9 gives s^{-1}gs. Step 10 gives λ_{as}=λ_s∘a^{-1}. Step 11: s=tb^{-1} recovers any path λ, and λ_{as}=λ_s forces a=1 because h_σ^* is an equivalence. Every hypothesis holds where it is used: Y_E and Y_0 are connected by step 1; L/K is separable, algebraic and normal because K is perfect; Y_0 is separated of finite type for both limit nodes. The new node lem-wf-pi1-algebraic-field-limit is the second assertion of 0BTV, specialised to the constant-field system. Its extra assumption that X_L is connected is harmless and holds where step 4 uses it. I tested it on L=K and on finite L/K. It has no proof, its searches are recorded, its blueprint fields are correct, it does not restate a clause of the item, and rg over the DAG finds no duplicate of it or of the 0BTX exact sequence. The item is not a duplicate of the finite-field transport and twisted-path nodes either. Accepted tool uses: the six declared ones, and the undeclared generic off-unit Galois-category nodes lem-galois-pi1-functoriality, lem-galois-finite-etale-connected-object and lem-fet-galois-category. Batch-5 check: the new citation lem-wf-finite-etale-field-limit-descent reaches lem-trf-finite-morphism-finite-presentation, which only says that a finite, locally finitely presented morphism is finitely presented (Stacks 01TR/01TQ). That is a general scheme fact; neither the trace-formula nor the Poincaré-duality assumption gives it, and it is not a step specific to their proofs, so I judge it outside the assumed statements. No SGA is cited. No fixes."
  }
 }

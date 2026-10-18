@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-wf-boundary-stalk-invariants",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Boundary stalk as inertia invariants",
@@ -18,36 +18,135 @@
  ],
  "proof": [
   {
-   "text": "The strict-henselization stalk formula of\n[prop-weil-pbc-strict-henselization-stalk-formula] is a statement about\ntorsion sheaves, and a lisse $\\Qlb$-sheaf is in general not trivialized\nby any finite etale cover (the unipotent Kummer extension on\n$\\mathbf G_m$ has infinite geometric monodromy), so the formula is\napplied at the finite levels $\\mathcal F_n$ of an $\\mathcal O_E$-model\nof $\\mathcal F$, which are locally constant sheaves of finite\n$\\mathcal O_E/\\mathfrak m_E^n$-modules. For each $n$ the stalk of\n$j_*\\mathcal F_n$ at the geometric point $\\bar x$ is computed on the\npunctured strict henselian trait\n$\\operatorname{Spec}\\mathcal O^{\\mathrm{sh}}_{C_0,\\bar x}\\setminus\\{x\\}$,\nthe spectrum of a field with absolute Galois group the inertia group\n$I_x=\\operatorname{Gal}(\\overline{\\kappa(\\eta_x)}/\\kappa(\\eta_x))$: the\nsections of the locally constant sheaf $\\mathcal F_n$ over it are the\ninvariants $M_n^{I_x}$ of the finite-level geometric generic stalk\n$M_n$. The geometric stalk of the adic sheaf $j_*\\mathcal F$ (in the\nsense of [def-weil-pbc-geometric-stalks], formed levelwise) is\n$(\\varprojlim_nM_n^{I_x})\\otimes_{\\mathcal O_E}E$. Invariants commute\nwith inverse limits, so $\\varprojlim_nM_n^{I_x}=M^{I_x}$ for the lattice\n$M=\\varprojlim_nM_n$ of $\\mathcal F_{\\bar\\eta}$, and\n$M^{I_x}=M\\cap\\mathcal F_{\\bar\\eta}^{I_x}$ is saturated in $M$, so\n$M^{I_x}\\otimes_{\\mathcal O_E}E=\\mathcal F_{\\bar\\eta}^{I_x}$; the tower\n$(M_n^{I_x})_n$ need not be adic, but only its limit enters. This is the\ndisplayed identification.",
+   "text": "Put $A=\\mathcal O_{C_0,x}$. By [lem-sc-smooth-regular], $A$ is regular and hence Noetherian. The pure dimension-one convention of [def-wf-middle-extension, def-weil-pure-dimension] and the codimension formula of [lem-sc-scheme-stalk-dimension-generalization-chains] give $\\dim A=1$: the closed singleton $\\{x\\}$ is properly contained in an irreducible component of dimension one, so there is a chain of length one, and a longer chain would contradict that component's dimension. Hence [lem-sc-regular-dim1-dvr] makes $A$ a DVR. By [lem-sc-strict-henselization-dvr], $R=\\mathcal O^{\\mathrm{sh}}_{C_0,\\bar x}$ is a DVR and $A\\to R$ is injective and local. A DVR has just the primes $(0)$ and its maximal ideal: by [def-sc-discrete-valuation-ring], a nonzero prime is $(a)$; if $a=bc$, primality and cancellation force one factor to be a unit. Any principal ideal properly containing $(a)$ is therefore the unit ideal, so $(a)$ is maximal. Thus $\\operatorname{Spec}R$ has just its generic and closed point. The closed point maps to $x\\notin U_0$; the generic point contracts to $(0)$ in $A$, hence maps to the generic point of the component of $C_0$ through $x$, which lies in $U_0$ by density. Base change of the open immersion therefore gives\n$$U_0\\times_{C_0}\\operatorname{Spec}R=\\operatorname{Spec}R\\setminus\\{\\mathfrak m_R\\}=\\operatorname{Spec}\\operatorname{Frac}(R).$$",
    "uses": [
-    "prop-weil-pbc-strict-henselization-stalk-formula",
-    "def-weil-pbc-geometric-stalks"
+    "lem-sc-smooth-regular",
+    "def-wf-middle-extension",
+    "def-weil-pure-dimension",
+    "lem-sc-scheme-stalk-dimension-generalization-chains",
+    "lem-sc-regular-dim1-dvr",
+    "lem-sc-strict-henselization-dvr",
+    "def-sc-discrete-valuation-ring"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0AP3 (lemma-henselization-dvr); varieties.tex Tag 056S (lemma-smooth-regular); properties.tex Tag 02IZ; elementary puncturing of a DVR spectrum"
+   }
   },
   {
-   "text": "For the Frobenius equivariance, let $D_x=\\operatorname{Gal}(\\overline K_x/K_x)$\nbe the decomposition group of [d-real-boundary], $K_x$ the fraction\nfield of the henselization $\\mathcal O^{\\mathrm h}_{C_0,x}$, so that\n$D_x/I_x=\\operatorname{Gal}(\\overline{\\kappa(x)}/\\kappa(x))$ and\n$\\overline K_x^{I_x}$ is the fraction field of\n$\\mathcal O^{\\mathrm{sh}}_{C_0,\\bar x}$. The identification above is\nthe restriction of sections of $\\mathcal F$ from the punctured strict\nhenselian trait to its geometric generic point, which is natural in\nautomorphisms of $\\mathcal O^{\\mathrm{sh}}_{C_0,\\bar x}$ over\n$\\mathcal O^{\\mathrm h}_{C_0,x}$. An element $\\sigma\\in D_x$ induces\nsuch an automorphism, acting on $(j_*\\mathcal F)_{\\bar x}$ through its\nimage in $\\operatorname{Gal}(\\overline{\\kappa(x)}/\\kappa(x))$ and on\n$\\mathcal F_{\\bar\\eta}$ through the Weil fundamental representation of\n[def-wf-fundamental-representation]; naturality says that these actions\ncorrespond on $\\mathcal F_{\\bar\\eta}^{I_x}$. Taking $\\sigma$ a lift of\nthe geometric Frobenius of $\\kappa(x)$ (in the local Weil group, so that\nthe action on $\\mathcal F_{\\bar\\eta}$ is defined for a Weil sheaf) gives\nthe stated equivariance; two lifts differ by an element of $I_x$, which\nacts trivially on the invariants.",
+   "text": "Apply [lem-wf-strict-henselian-fraction-inertia] to $A$. With $H=A^{\\mathrm h}$, $K_x=\\operatorname{Frac}(H)$, $L=\\operatorname{Frac}(R)$, a compatible separable closure $\\Omega$ of $K_x$ and $D_x=\\operatorname{Gal}(\\Omega/K_x)$, the residue kernel in $\\operatorname{Gal}(\\Omega/K_x)$ is precisely $\\operatorname{Gal}(\\Omega/L)$. This is the group $I_x$ defined as the residue kernel in [d-real-boundary], since the henselization has residue field $\\kappa(x)$. There the Galois group is formed with an algebraic closure $\\overline K_x\\supset\\Omega$; restriction $\\operatorname{Gal}(\\overline K_x/K_x)\\to\\operatorname{Gal}(\\Omega/K_x)$ is an isomorphism: automorphisms preserve the separable elements, one fixing $\\Omega$ fixes each $a$ since $a^{p^m}\\in\\Omega$ has a unique $p^m$-th root, and each automorphism of $\\Omega$ extends to its algebraic closure. It respects the residue maps, $\\kappa(x)$ being finite hence perfect, so the two residue kernels correspond. Fix the geometric point and path of [d-real-boundary]; they give a homomorphism $\\theta_x:D_x\\to\\pi_1(U_0)$, whose restriction to $W(K_x)$ lands in $W(U_0)$. No injectivity of $\\theta_x$ is required. Thus the punctured strict henselian trait in Step 1 is the spectrum of a field with absolute Galois group $I_x$, not the full decomposition group. The same lemma identifies $D_x/I_x$, the automorphisms of $R$ over $H$, and $\\operatorname{Gal}(\\overline{\\kappa(x)}/\\kappa(x))$; the residue field is finite here, so its separable closure is its algebraic closure.",
    "uses": [
+    "lem-wf-strict-henselian-fraction-inertia",
+    "d-real-boundary"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BSW (lemma-identify-inertia), specialized to the henselian local fraction field in d-real-boundary"
+   }
+  },
+  {
+   "text": "Work at the finite coefficient levels $\\mathcal F_n$ of a lisse $\\mathcal O_E$-model, as in [def-pod-lisse-l-adic-sheaves]; these are torsion abelian sheaves. The open immersion $j$ is qcqs (the curves are separated finite-type over a field and hence Noetherian), so the $q=0$ clause of [prop-weil-pbc-strict-henselization-stalk-formula] identifies $(j_*\\mathcal F_n)_{\\bar x}$ with $\\Gamma(\\operatorname{Spec}L,p^{-1}\\mathcal F_n)$ by canonical restriction. By [lem-exc-abelian-sheaves-gmodules], this sheaf on the field corresponds to its geometric generic stalk $M_n$ as a discrete $\\operatorname{Gal}(\\Omega/L)=I_x$-module. Here $M_n=(\\mathcal F_n)_{\\bar\\eta}$: by [lem-weil-pbc-geometric-point-pullback-stalk](2) both are sections of the inverse image to $\\operatorname{Spec}\\overline K_x$, and inverse images compose since direct images do. The lift-change action of $\\sigma\\in I_x$ on these stalks, transported along the fixed path, is the action of $\\theta_x(\\sigma)$, which [d-real-boundary] defines as path transport of the map of $\\operatorname{Spec}K_x\\to U_0$, and at finite level [def-wf-fundamental-representation] is evaluation of that fibre-functor automorphism; so the invariants are those of $\\rho\\circ\\theta_x|_{I_x}$. Sections are invariants: $\\Gamma(\\operatorname{Spec}L,G)=\\operatorname{Hom}(\\underline{\\mathbf Z},G)$, and the equivalence sends the constant sheaf $\\underline{\\mathbf Z}$ to $\\mathbf Z$ with trivial action, so these morphisms are the equivariant maps $\\mathbf Z\\to M_n$, determined by an invariant image of $1$. Consequently $(j_*\\mathcal F_n)_{\\bar x}\\simeq M_n^{I_x}$, compatibly in $n$. The finite-level direct-image convention is that of [d-real-boundary, def-wf-middle-extension], and stalks use [def-weil-pbc-geometric-stalks]. No finite cover trivializing the rational lisse sheaf is assumed.",
+   "uses": [
+    "def-pod-lisse-l-adic-sheaves",
+    "prop-weil-pbc-strict-henselization-stalk-formula",
+    "lem-exc-abelian-sheaves-gmodules",
     "d-real-boundary",
+    "def-wf-middle-extension",
+    "def-weil-pbc-geometric-stalks",
+    "lem-weil-pbc-geometric-point-pullback-stalk",
     "def-wf-fundamental-representation"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 03Q9 (theorem-higher-direct-images), q=0, and 04JQ (lemma-equivalence-abelian-sheaves-point); main-20261015 item proof, first paragraph"
+   }
+  },
+  {
+   "text": "Write $M=\\varprojlim_n M_n$ and $V=M\\otimes_{\\mathcal O_E}E$ at the chosen coefficient stage [def-pod-lisse-l-adic-sheaves]. The coefficientwise direct-image convention [d-real-boundary] gives the boundary fibre $(\\varprojlim_n M_n^{I_x})\\otimes_{\\mathcal O_E}E$. A compatible tuple is fixed exactly when each coordinate is fixed, hence $\\varprojlim_n M_n^{I_x}=M^{I_x}$. Since $M\\subset V$ is an invariant lattice, $M^{I_x}=M\\cap V^{I_x}$ is saturated: if $av$ is fixed, $a\\ne0$ and $v\\in M$, then $a(gv-v)=0$ in the torsion-free $M$, so $v$ is fixed. Conversely each vector in $V^{I_x}$ can be multiplied by a nonzero scalar to lie in $M^{I_x}$. Thus $M^{I_x}\\otimes E=V^{I_x}$. Extending from $E$ to $\\Qlb$ preserves this equality: in the finite-dimensional $V$, the intersection $\\bigcap_{g\\in I_x}\\ker(g-1)$ equals a finite subintersection (choose one with minimal dimension), and finite kernels commute with field extension by row reduction. This proves the displayed identification in the coefficient convention of the item. The tower $(M_n^{I_x})_n$ need not itself be adic; only its limit is used.",
+   "uses": [
+    "def-pod-lisse-l-adic-sheaves",
+    "d-real-boundary"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-i-real-boundary/lem-wf-boundary-stalk-invariants.proof.md",
+    "place": "First paragraph, inverse limit, saturation and rationalization; explicit coordinate and denominator arguments"
+   }
+  },
+  {
+   "text": "Write $c$ for the restriction comparison of Steps 3-4. For $\\sigma\\in W(K_x)$, [lem-wf-strict-henselian-fraction-inertia] gives an automorphism of $R$ over $H$ with residue action $\\mathrm{res}(\\sigma)$. Restriction commutes with it: restricting $\\sigma^*s$ is pulling back the restriction of $s$, since both evaluate along the same composite geometric generic point. The field-sheaf equivalence [lem-exc-abelian-sheaves-gmodules] uses exactly this action by changing pointed etale lifts. Restriction is also natural in coefficient morphisms: for $u:\\mathcal F_n\\to\\mathcal G_n$, evaluation gives $c_{\\mathcal G_n}(j_*u)_{\\bar x}=u_{\\bar\\eta}c_{\\mathcal F_n}$ [def-wf-middle-extension]. This equality passes to limits and scalar extension. For a rational morphism, choose a common finite coefficient field and write $u=a^{-1}v$ with $a\\ne0$ and $v$ an integral model morphism [def-pod-lisse-l-adic-sheaves]; divide the equality for $v$ by $a$. Thus it applies to Weil descent without requiring a Frobenius-stable lattice. By [def-wf-fundamental-representation], the Weil operator is the composite of the descent map and inverse path transport, $T_s=\\varphi_{\\bar\\eta}L_s^{-1}$; general degrees use the displayed extension formula. Both constituent maps commute with $c$ by the preceding identities. Consequently the residue Weil action on the boundary fibre corresponds to $\\rho\\circ\\theta_x|_{W(K_x)}$ on its inertia invariants [d-real-boundary]. Taking $\\sigma$ over geometric Frobenius of $\\kappa(x)$ gives the claimed equivariance (its degree over $k_0$ is $[\\kappa(x):k_0]$). Two lifts differ by $I_x$ [d-real-boundary], so act equally on invariants. Only local Weil elements act on the rational fibre.",
+   "uses": [
+    "lem-wf-strict-henselian-fraction-inertia",
+    "lem-exc-abelian-sheaves-gmodules",
+    "d-real-boundary",
+    "def-wf-fundamental-representation",
+    "def-wf-middle-extension",
+    "def-pod-lisse-l-adic-sheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-i-real-boundary/lem-wf-boundary-stalk-invariants.proof.md",
+    "place": "Second paragraph, restriction naturality, local Weil action and residue Frobenius lift"
+   }
   }
  ],
  "proof_deps": [
-  "prop-weil-pbc-strict-henselization-stalk-formula",
-  "def-weil-pbc-geometric-stalks",
+  "lem-sc-smooth-regular",
+  "def-wf-middle-extension",
+  "def-weil-pure-dimension",
+  "lem-sc-scheme-stalk-dimension-generalization-chains",
+  "lem-sc-regular-dim1-dvr",
+  "lem-sc-strict-henselization-dvr",
+  "def-sc-discrete-valuation-ring",
+  "lem-wf-strict-henselian-fraction-inertia",
   "d-real-boundary",
+  "def-pod-lisse-l-adic-sheaves",
+  "prop-weil-pbc-strict-henselization-stalk-formula",
+  "lem-exc-abelian-sheaves-gmodules",
+  "def-weil-pbc-geometric-stalks",
+  "lem-weil-pbc-geometric-point-pullback-stalk",
   "def-wf-fundamental-representation"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-i-real-boundary/lem-wf-boundary-stalk-invariants.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-i-real-boundary/lem-wf-boundary-stalk-invariants.proof.md",
+  "place": "Both proof paragraphs, expanded with Stacks Tags 0BSW, 0AP3, 03Q9 and 04JQ and explicit elementary linear algebra."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "inertia.*stalk|stalk.*inertia|invariants.*lowerStar|lowerStar.*invariants",
+   "results": "0 hits: none",
+   "date": "2026-10-18",
+   "verdict": "no match: the hits concern structure-sheaf stalks and open immersion maps, not etale boundary stalks or inertia invariants."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"stalk\", \"invariants\"",
+   "results": "0 hits: none",
+   "date": "2026-10-18",
+   "verdict": "no match: the hits concern structure-sheaf stalks and open immersion maps, not etale boundary stalks or inertia invariants."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The stalk at a boundary point of the direct image of a lisse etale sheaf on an open curve is the invariants of its generic stalk under inertia.",
+   "results": "8 hits: AlgebraicGeometry.Scheme.germ_stalkClosedPointTo, AlgebraicGeometry.Scheme.stalkClosedPointTo, AlgebraicGeometry.stalkClosedPointIso_inv, AlgebraicGeometry.Scheme.germ_stalkClosedPointTo_Spec_fromSpecStalk, AlgebraicGeometry.Scheme.stalkClosedPointTo_fromSpecStalk, AlgebraicGeometry.Scheme.germ_stalkClosedPointTo_assoc, AlgebraicGeometry.ΓSpecIso_hom_stalkClosedPointIso_inv, AlgebraicGeometry.Scheme.germ_stalkClosedPointTo_Spec_fromSpecStalk_assoc",
+   "date": "2026-10-18",
+   "verdict": "no match: the hits concern structure-sheaf stalks and open immersion maps, not etale boundary stalks or inertia invariants."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For an open immersion of curves the geometric boundary stalk of the pushforward is the fixed part under the inertia group.",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso, AlgebraicGeometry.IsOpenImmersion.instIsIsoCommRingCatStalkMap, AlgebraicGeometry.SurjectiveOnStalks.instOfIsOpenImmersion, AlgebraicGeometry.IsOpenImmersion.of_isIso_stalkMap, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.stalk_iso, AlgebraicGeometry.Scheme.Modules.germ_restrictStalkNatIso_inv_app, AlgebraicGeometry.IsOpenImmersion.iff_isIso_stalkMap, AlgebraicGeometry.IsPreimmersion.instOfIsOpenImmersion",
+   "date": "2026-10-18",
+   "verdict": "no match: the hits concern structure-sheaf stalks and open immersion maps, not etale boundary stalks or inertia invariants."
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -76,5 +175,49 @@
   }
  },
  "chapter": "sec-purity-real-sheaves",
- "unit": "sk-i-real-boundary"
+ "unit": "sk-i-real-boundary",
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-wf-boundary-stalk-invariants",
+  "worker": "stage1",
+  "summary": "Repair of all four return points: proved the local DVR and punctured-field identification over k_0 from existing statements, added one statement-only inertia/fraction-field lemma sourced to Stacks 0BSW, replaced the pi_1 fibre citation by the field-Galois abelian-sheaf equivalence, declared off-unit generic tools, and corrected source.document to main-20261015. Statement unchanged. The five proof steps retain the finite-level, inverse-limit and Frobenius arguments. Latest landing return repaired against the current DAG: re-read the changed d-real-boundary statement, specify its path-dependent homomorphism theta_x and pullback local Weil action without assuming injectivity, and replace the four stale quotation certificates by current clause-specific verbatim quotes. All other cited statement certificates still match the current DAG. Current landing return (head abbc8408f9) repaired: re-read the changed def-wf-fundamental-representation, replace its stale Step 5 quotation, and spell out naturality for the specified descent/path composite. Rational descent morphisms are handled by clearing one denominator between integral models, without a Frobenius-stable lattice; Step 5 now explicitly cites the morphism and direct-image conventions it uses. All current cited statements revalidated.",
+  "blueprint": "Steps 1-4 realize the first proof paragraph, including its field-with-absolute-Galois-group-I_x sentence; Step 5 realizes the second paragraph. The new lemma isolates the local ramification identification used by both paragraphs.",
+  "tool_uses": [
+   {
+    "node": "prop-weil-pbc-strict-henselization-stalk-formula",
+    "why": "The q=0 qcqs torsion stalk calculation is the exact generic strict-local tool explicitly named in the unit Step 2 and detailed blueprint proof; no statement of sk-i-real-boundary supplies that formula."
+   },
+   {
+    "node": "lem-exc-abelian-sheaves-gmodules",
+    "why": "The field-specific stalk equivalence with discrete absolute-Galois modules gives sections as invariants by Hom from the constant integers. It is in sk-prop-h2 with the stalk formula and is foundational, not a substitute route for the boundary argument."
+   },
+   {
+    "node": "lem-sc-strict-henselization-dvr",
+    "why": "Preservation of the DVR property and the injective local map allow the punctured strict-local scheme to be identified with a field spectrum; no node of the boundary unit proves this local-algebra fact."
+   },
+   {
+    "node": "lem-sc-scheme-stalk-dimension-generalization-chains",
+    "why": "The local-ring dimension/codimension formula converts the closed point of a pure dimension-one curve to a one-dimensional local ring over k_0; the boundary unit has no dimension comparison statement."
+   },
+   {
+    "node": "lem-weil-pbc-geometric-point-pullback-stalk",
+    "why": "Step 3 identifies the stalk of the pulled-back finite-level sheaf on Spec L with the geometric generic stalk via global sections of inverse images to an algebraically closed point; generic stalk tool, no node of sk-i-real-boundary states it (added by the maintainer reader)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-weil-pbc-strict-henselization-stalk-formula",
+  "lem-exc-abelian-sheaves-gmodules",
+  "lem-sc-strict-henselization-dvr",
+  "lem-sc-scheme-stalk-dimension-generalization-chains",
+  "lem-weil-pbc-geometric-point-pullback-stalk"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q135-52a405ce9",
+  "group": "Q135",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q135-52a405ce9 (reviewer sub-agent of L); spot-checked: I read all of the mathematics: the item, the new node, every cited statement, main-20261015 order 2988 (statement identical to master), the unit's Step 2 route, and Stacks 0BSD/0BSW in pione.tex. Batch-5 check: def-pod-lisse-l-adic-sheaves is a general definition (Weil II 1.1.1 lisse coefficient category, proof_deps empty). Its 103-node closure has no trace-formula nodes; the only Poincare-duality nodes in it are itself and the definition def-pod-ring-scalar-extension. It is not a step of either assumed proof, so it is accepted. New node lem-wf-strict-henselian-fraction-inertia: I checked it against 0BSW applied to the henselian ring A^h, where D=G, so L=Omega^I and G/I = Aut(A^sh/A^h) = Gal(kappa^sep/kappa). It holds on the small cases (strictly henselian A, F_q[[t]] where L is the maximal unramified extension, imperfect residue field). It is statement-only, all notions are cited, rg finds no duplicate, and it is not a clause of the item. Steps 1, 4 and 5 are correct (dimension one via the chain formula, DVR, punctured trait = Spec Frac R; saturation and Qlbar extension; naturality without a stable lattice, lifts differ by I_x). Two repairable faults fixed in fixes/: (1) E1/E4 in Step 2: d-real-boundary uses an algebraic closure of the imperfect field K_x, but the step used a separable closure Omega without identifying the two Galois groups. I added the written-out restriction isomorphism, compatible with the residue maps because kappa(x) is finite. (2) C1/C4 in Step 3: the stalk of p^{-1}F_n at the geometric generic point was identified with (F_n)_etabar without a node, and the link between the lift-change Galois action and rho∘theta_x was implicit. Step 3 now cites lem-weil-pbc-geometric-point-pullback-stalk (declared as a tool use; its closure has no trace-formula or Poincare-duality node) and def-wf-fundamental-representation, and explains the path-transport compatibility; proof_deps was recomputed. One note for the maintainer: the report says source.document was moved to main-20261015, but the JSON still has master order 2644. Source is not split-owned and the statement text is identical, so I left it unchanged.; 1 file(s) fixed by the reviewer"
+ }
 }

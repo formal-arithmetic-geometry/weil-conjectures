@@ -2,7 +2,7 @@
  "id": "lem-a1-affine-groupoid-polynomial-norm-invariant",
  "kind": "statement",
  "title": "The polynomial source norm of a target function is invariant",
- "statement": "Let $U=\\operatorname{Spec}A$ and $R=\\operatorname{Spec}B$ be affine schemes [def-pc-scheme, def-weil-affine-spectrum]. Let $s,t:R\\to U$, $e:U\\to R$, $i:R\\to R$, and $c:R\\times_{s,U,t}R\\to R$ [def-pc-fibre-product] define a groupoid: functorially in every test scheme $H$, they make $U(H)$ the objects and $R(H)$ the arrows, with source $s$, target $t$, identity $e$, inverse $i$, and composition $c$. Assume $s,t$ are finite locally free [def-pc-finite-locally-free]. Write $\\sigma=s^\\sharp,\\tau=t^\\sharp:A\\to B$ and $C=\\{a\\in A:\\sigma(a)=\\tau(a)\\}$. For an indeterminate $T$, write $\\sigma[T],\\tau[T]:A[T]\\to B[T]$ for the coefficientwise extensions fixing $T$ [def-weil-polynomial-ring]. For every $F\\in A[T]$, the determinant norm satisfies\n$$\nQ_F(T):=N_{\\sigma[T]}\\bigl(\\tau[T](F)\\bigr)\\in C[T]\\subset A[T].\n$$\nEquivalently, $\\sigma[T](Q_F)=\\tau[T](Q_F)$ in $B[T]$. The norm here is the finite locally free norm: locally on $\\operatorname{Spec}(A[T])$ where $B[T]$ is free as an $A[T]$-module via $\\sigma[T]$, it is the determinant of multiplication by the indicated element; these local determinants are glued. No constant rank or reducedness is assumed.",
+ "statement": "Let $U=\\operatorname{Spec}A$ and $R=\\operatorname{Spec}B$ be affine schemes [def-pc-scheme, def-weil-affine-spectrum]. Let $s,t:R\\to U$, $e:U\\to R$, $i:R\\to R$, and $c:R\\times_{s,U,t}R\\to R$ [def-pc-fibre-product] define a groupoid: functorially in every test scheme $H$, they make $U(H)$ the objects and $R(H)$ the arrows, with source $s$, target $t$, identity $e$, inverse $i$, and composition $c$. Assume $s,t$ are finite locally free [def-pc-finite-locally-free]. Write $\\sigma=s^\\sharp,\\tau=t^\\sharp:A\\to B$ and $C=\\{a\\in A:\\sigma(a)=\\tau(a)\\}$. For an indeterminate $T$, write $\\sigma[T],\\tau[T]:A[T]\\to B[T]$ for the coefficientwise extensions fixing $T$ [def-weil-polynomial-ring]. For every $F\\in A[T]$, the determinant norm satisfies\n$$\nQ_F(T):=N_{\\sigma[T]}\\bigl(\\tau[T](F)\\bigr)\\in C[T]\\subset A[T].\n$$\nEquivalently, $\\sigma[T](Q_F)=\\tau[T](Q_F)$ in $B[T]$. The norm here is the finite locally free norm section of [lem-pd-finite-locally-free-norm-charts]: locally on $\\operatorname{Spec}(A[T])$ where $B[T]$ is free as an $A[T]$-module via $\\sigma[T]$, it is the determinant [def-weil-endomorphism-determinant] of multiplication by the indicated element; these local determinants are glued. No constant rank or reducedness is assumed.",
  "source": {
   "document": "literature/stacks-project/groupoids.tex; literature/stacks-project/exercises.tex",
   "place": "Tag 03BH (groupoids-lemma-determinant-trick), applied to the groupoid after adjoining a common polynomial coordinate, as in the second paragraph of lemma-integral-over-invariants; determinant norm and base change are Tag 02DV (exercises-exercise-trace-det-rings)(1),(3)."
@@ -12,11 +12,49 @@
   "def-weil-affine-spectrum",
   "def-pc-fibre-product",
   "def-pc-finite-locally-free",
-  "def-weil-polynomial-ring"
+  "def-weil-polynomial-ring",
+  "lem-pd-finite-locally-free-norm-charts",
+  "def-weil-endomorphism-determinant"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Adjoin one common polynomial coordinate to both affine schemes, replacing A and B by A[T] and B[T] and the structure maps by their coefficientwise extensions. The groupoid identities remain true coefficientwise, so this is the product of the given groupoid with the affine line. Finite locally free morphisms remain finite locally free after this base change, with the rank allowed to vary on the same open charts.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex; literature/stacks-project/exercises.tex",
+    "place": "Tag 03BH, after adjoining a common polynomial coordinate; Tag 02DV (exercises-exercise-trace-det-rings)(3) for finite locally free base change"
+   }
+  },
+  {
+   "text": "Apply the source-norm invariance lemma to this polynomial-coordinate groupoid and to the element F of A[T]. Its statement gives N_{\\sigma[T]}(\\tau[T](F)) in the equalizer of \\sigma[T] and \\tau[T], hence the source and target images of this norm agree in B[T]. The norm is the local determinant norm, so it is the Q_F specified in the statement.",
+   "uses": [
+    "lem-a1-affine-groupoid-invariant-norm"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 03BH (groupoids-lemma-determinant-trick), applied to the polynomial-coordinate groupoid"
+   }
+  },
+  {
+   "text": "A polynomial lies in the equalizer of the coefficientwise maps \\sigma[T] and \\tau[T] exactly when each coefficient lies in C=\\{a\\in A:\\sigma(a)=\\tau(a)\\}. Therefore Q_F(T) belongs to C[T], and this coefficientwise assertion is equivalent to \\sigma[T](Q_F)=\\tau[T](Q_F).",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex; literature/stacks-project/exercises.tex",
+    "place": "Tag 03BH conclusion after coefficient comparison; Tag 02DV(1),(3)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-a1-affine-groupoid-invariant-norm"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/groupoids.tex; literature/stacks-project/exercises.tex",
+  "place": "Tag 03BH (groupoids-lemma-determinant-trick), with Tag 02DV (exercises-exercise-trace-det-rings)(1),(3) for determinant norm and polynomial base change"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -45,10 +83,17 @@
    "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Representation.norm_comp_self\", \"module\": \"Mathlib.RepresentationTheory.Basic\", \"type\": \"(g : G) : norm ρ ∘ₗ ρ g = norm ρ\", \"doc\": \"For any element $g$ in a finite group $G$, the composition of the norm of the representation $\\\\rho: G \\\\to \\\\mathrm{End}_k(V)$ with the linear map $\\\\rho(g)$ equals the norm itself. Symbolically, $\\\\sum_{\"}\n  {\"name\": \"Representation.self_comp_norm\", \"module\": \"Mathlib.RepresentationTheory.Basic\", \"type\": \"(g : G) : ρ g ∘ₗ norm ρ = norm ρ\", \"doc\": \"For any element $g$ in the monoid $G$, the composition of the linear map $\\\\rho(g)$ with the norm of the representation $\\\\rho$ equals the norm itself, i.e., $\\\\rho(g) \\\\circ \\\\left(\\\\sum_{h \\\\in G} \\\\rho(h)\\\\\"}\n  {\"name\": \"Representation.norm_self_apply\", \"module\": \"Mathlib.RepresentationTheory.Basic\", \"type\": \"(g : G) (x : V) : norm ρ (ρ g x) = norm ρ x\", \"doc\": \"Let $ G $ be a finite group and $ \\\\rho: G \\\\to \\\\mathrm{End}_R(V) $ a representation of $ G $ on an $ R $-module $ V $. For any $ g \\\\in G $ and $ x \\\\in V $, the norm operator $ N = \\\\sum_{g \\\\in G} \\\\rho(g\"}\n  {\"name\": \"Representation.self_norm_apply\", \"module\": \"Mathlib.RepresentationTheory.Basic\", \"type\": \"(g : G) (x : V) : ρ g (norm ρ x) = norm ρ x\", \"doc\": \"For any element $g$ in the monoid $G$ and any vector $x$ in the module $V$, applying the representation $\\\\rho(g)$ to the norm $\\\\sum_{h \\\\in G} \\\\rho(h)(x)$ leaves the norm unchanged, i.e., $\\\\rho(g)\\\\left\"}\n  {\"name\": \"GroupNorm\", \"module\": \"Mathlib.Analysis.Normed.Group.Seminorm\", \"type\": \"(G : Type u_6) → [Group G] → Type u_6\", \"doc\": \"A seminorm on a group $G$ is a function $\\\\|\\\\cdot\\\\| : G \\\\to \\\\mathbb{R}_{\\\\geq 0}$ satisfying $\\\\|x \\\\cdot y\\\\| \\\\leq \\\\|x\\\\| + \\\\|y\\\\|$ and $\\\\|x^{-1}\\\\| = \\\\|x\\\\|$ for all $x, y \\\\in G$.\"}\n  {\"name\": \"pi_norm_const_le'\", \"module\": \"Mathlib.Analysis.Normed.Group.Constructions\", \"type\": \"(a : E) : ‖fun _ : ι => a‖ ≤ ‖a‖\", \"doc\": \"For any element $ a $ in a seminormed group $ E $, the norm of the constant function from a finite index type $ \\\\iota $ to $ E $ mapping each element to $ a $ is less than or equal to the norm of $ a \"}\n  {\"name\": \"GroupNormClass.toNormedGroup_norm_eq\", \"module\": \"Mathlib.Analysis.Normed.Order.Hom.Basic\", \"type\": \"[Group α] [GroupNormClass F α ℝ] (f : F) (x : α) : @norm _ (GroupNormClass.toNormedGroup f).toNorm x = f x\", \"doc\": \"For any group $\\\\alpha$ equipped with a `GroupNormClass` $F$ to $\\\\mathbb{R}$, and for any $f \\\\in F$ and $x \\\\in \\\\alpha$, the norm of $x$ in the normed group structure constructed via $f$ satisfies $\\\\|x\\\\\"}\n  {\"name\": \"GroupNorm.funLike\", \"module\": \"Mathlib.Analysis.Normed.Group.Seminorm\", \"type\": \": FunLike (GroupNorm E) E ℝ\", \"doc\": \"The group norm on a group $ E $ is equipped with a function-like structure, mapping each element of $ E $ to its seminorm value in the real numbers $ \\\\mathbb{R} $.\"}",
    "date": "2026-10-18",
    "verdict": "no match: representation norm sums are not finite locally free algebra determinant norms"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Determinant norm of a target pullback in a finite locally free affine groupoid has coefficients fixed by source and target",
+   "results": "[leanfinder] OK 8 hit(s): Algebra.PreSubmersivePresentation.jacobian; Algebra.SubmersivePresentation.map_jacobianOfHasCoeffs; Algebra.SubmersivePresentation.jacobianRelations_spec; FractionalIdeal.abs_det_basis_change; Algebra.SubmersivePresentation.aevalDifferentialEquiv; Algebra.SubmersivePresentation.exists_sum_eq_σ_jacobian_mul_σ_jacobian_inv_sub_one; IsBaseChange.det_endHom; LinearEquiv.det_baseChange. None states affine groupoid determinant norm invariance.",
+   "date": "2026-10-18",
+   "verdict": "no match: determinant and base-change hits do not state the affine groupoid norm theorem"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-a1-affine-groupoid-integral-invariants",
@@ -70,5 +115,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-a1-affine-groupoid-polynomial-norm-invariant",
+  "worker": "stage1",
+  "summary": "Checked the polynomial norm statement against Stacks Tags 03BH and 02DV and the existing affine-groupoid invariant-norm node. The proof is split into forming the polynomial-coordinate groupoid by finite-locally-free base change, applying the existing scalar determinant-norm invariance to F, and comparing coefficients in the equalizer; no new node is needed. I did not cite the constant-degree norm-characteristic-polynomial node because this item explicitly allows varying rank.",
+  "blueprint": "Realizes the ancestor proof's determinant-trick paragraph by adjoining the common polynomial coordinate and applying the norm argument to F; the coefficient comparison is the final equalizer step."
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q62-3df4ccafd",
+  "group": "Q62",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q62-3df4ccafd (reviewer sub-agent of L); spot-checked: Read the item, its three steps, the cited node lem-a1-affine-groupoid-invariant-norm, the item's stmt deps including lem-pd-finite-locally-free-norm-charts, the only citer (step 4 of lem-a1-affine-groupoid-integral-invariants) and the sources. Sources: Stacks Tag 03BH (groupoids.tex l.4252-4287), the A^1 paragraph of lemma-integral-over-invariants (l.4343-4357), and Tag 02DV(1),(3) (exercises.tex l.1605-1625). The statement agrees with 03BH after taking the product of the groupoid with A^1. It assumes no constant rank, which is right because the scalar node does not need one either, and nothing is weakened. Step 1: R x A^1 is again a groupoid (the product with the discrete groupoid A^1(H)). B[T] = B tensor_A A[T] is finite, flat and finitely presented over A[T], so s and t stay finite locally free; marking this elementary is acceptable. Step 2 meets the scalar node's hypotheses exactly, and the two norms are the same local-determinant section. Step 3 is the coefficient comparison in the free module B[T]. Small cases checked: A=0, the identity groupoid, the pair groupoid k -> k x k (Q_F = F^2), and different ranks on different components. There are no new nodes, it is not a relabelling, there is no cycle, and the delivery declares no tool_uses (the cited node is in the same unit, sk-p-real-rankin). One B3 fault, repaired in fixes/dag/nodes/sec-purity-real-sheaves/lem-a1-affine-groupoid-polynomial-norm-invariant.json: the statement used the finite locally free norm and the determinant without citing them. I added [lem-pd-finite-locally-free-norm-charts] and [def-weil-endomorphism-determinant] inline and to stmt_deps, and checked that this creates no cycle. The full checks are in review.md.; 1 file(s) fixed by the reviewer"
  }
 }
