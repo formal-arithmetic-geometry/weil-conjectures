@@ -25,9 +25,143 @@
   "lem-pur-integral-operations-scalar-extension",
   "lem-fix-operation-reduction"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Set $F=Lg^*$ and $H=R\\mathcal Hom$. At finite coefficients we use the ambient derived category and its adjunction $M\\otimes^L-\\dashv H(M,-)$, as in [sk-def-sf-operations] (i). At integral coefficients work first on the full category $\\mathcal C=D^b_c(X,\\mathcal O_E)$, even without site-perfectness of either input. By [cor-coef-integral-internal-hom], $H(M,N)$ lies in $\\mathcal C$ for all $M,N\\in\\mathcal C$. By [lem-pur-integral-operations-preserve-constructible], $F$ and completed tensor preserve $\\mathcal C$. The completed tensor-Hom adjunction on this full category is the natural bijection of [lem-coef-completed-tensor-hom-transpose]. Thus all terms of the displayed definition of $\\alpha$ and its transpose are in the required categories; in particular $\\mu_{g;M,H(M,N)}$ is defined. The integral Hom here is the ambient Hom over $\\widehat{\\mathcal O}_{E,X}$, and the tensor in this adjunction is completed tensor.",
+   "uses": [
+    "sk-def-sf-operations",
+    "cor-coef-integral-internal-hom",
+    "lem-pur-integral-operations-preserve-constructible",
+    "lem-coef-completed-tensor-hom-transpose"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-def-sf-weil-complexes/def-pod-dual-tate-datum.md",
+    "place": "First displayed arrow in the contragredient datum; agent expansion by tensor-Hom adjunction and exact Frobenius transport."
+   }
+  },
+  {
+   "text": "The morphism $g$ is the scheme automorphism of [def-trf-scheme-frobenius], with inverse induced by $z\\mapsto z^q$. At finite coefficients $F$ is an equivalence on the ambient derived category by [lem-weil-isomorphism-derived-pullback-equivalence]. At integral coefficients apply [lem-weil-isomorphism-derived-pullback] to both $g$ and its inverse. It identifies their completed pullbacks, naturally on $\\mathcal C$, with the two termwise inverse-image transports. To check their inverse identities, use the site equivalences of [lem-weil-proetale-isomorphism-inverse-image] (1): relabelling $U\\to X$ by $g$ and then by $g^{-1}$ returns that object and every restriction map. Clause (3), followed by the limit comparison of clause (2), identifies the completed coefficient ring with its relabelling. Transporting a module action and then transporting it back therefore returns the same action and module map. These inverse identities hold degreewise on complexes, and hence after localization at quasi-isomorphisms. Both transports preserve the full constructible integral subcategories by [lem-weil-isomorphism-derived-pullback]. Consequently $F:\\mathcal C\\to\\mathcal C$ is an equivalence. No $k$-linearity of $g$ is required by these scheme-isomorphism lemmas.",
+   "uses": [
+    "def-trf-scheme-frobenius",
+    "lem-weil-isomorphism-derived-pullback-equivalence",
+    "lem-weil-isomorphism-derived-pullback",
+    "lem-weil-proetale-isomorphism-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-def-sf-weil-complexes/def-pod-dual-tate-datum.md",
+    "place": "First displayed arrow in the contragredient datum; agent expansion by tensor-Hom adjunction and exact Frobenius transport."
+   }
+  },
+  {
+   "text": "Fix $M$ and apply [lem-weil-mate-iso-along-equivalences] with $L=M\\otimes^L-$, $R=H(M,-)$, $L'=FM\\otimes^L-$, $R'=H(FM,-)$, $G=G'=F$, and $\\theta_T=\\mu_{g;M,T}^{-1}:FM\\otimes^L FT\\to F(M\\otimes^L T)$. The natural tensor isomorphism is supplied by [lem-pur-derived-pullback-tensor-iso]. Step 2 verifies both equivalence hypotheses. The mate's component at $N$ is the transpose of $F(\\operatorname{ev}_{M,N})\\mu_{g;M,H(M,N)}^{-1}$: this is exactly the unit--$R'\\theta R$--$R'F\\operatorname{ev}$ formula in the cited lemma. It is therefore the specified $\\alpha_{g;M,N}$, and is invertible. This argument applies to arbitrary finite ambient pairs and arbitrary integral constructible pairs, not only to the site-perfect pairs required by the item. In the stated finite site-perfect case the canonical comparison of [thm-trf-internal-hom-pullback] is this evaluation transpose, so it is the same map. All adjunctions used here are those of Step 1, rather than an adjunction on an unproved subcategory.",
+   "uses": [
+    "lem-weil-mate-iso-along-equivalences",
+    "lem-pur-derived-pullback-tensor-iso",
+    "thm-trf-internal-hom-pullback",
+    "sk-def-sf-operations",
+    "lem-coef-completed-tensor-hom-transpose"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-def-sf-weil-complexes/def-pod-dual-tate-datum.md",
+    "place": "First displayed arrow in the contragredient datum; agent expansion by tensor-Hom adjunction and exact Frobenius transport."
+   }
+  },
+  {
+   "text": "The defining transpose gives the evaluation identity\n$$\\operatorname{ev}_{FM,FN}(1_{FM}\\otimes^L\\alpha_{M,N})=F(\\operatorname{ev}_{M,N})\\mu_{g;M,H(M,N)}^{-1}.$$\nFor $a:M'\\to M$ and $b:N\\to N'$, compare $H(Fa,Fb)\\alpha_{M,N}$ and $\\alpha_{M',N'}F(H(a,b))$. Uncurrying both, naturality of evaluation and of $\\mu$ makes each the map\n$$FM'\\otimes^L F H(M,N)\\xrightarrow{Fa\\otimes1}FM\\otimes^L F H(M,N)\\xrightarrow{\\mu^{-1}}F(M\\otimes^L H(M,N))\\xrightarrow{F\\operatorname{ev}}FN\\xrightarrow{Fb}FN'.$$\nInjectivity of the adjunction bijection proves equality. This proves the two asserted variances at finite and integral coefficients without changing the chosen comparison.",
+   "uses": [
+    "sk-def-sf-operations",
+    "lem-coef-completed-tensor-hom-transpose",
+    "lem-pur-derived-pullback-tensor-iso"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-def-sf-weil-complexes/def-pod-dual-tate-datum.md",
+    "place": "First displayed arrow in the contragredient datum; agent expansion by tensor-Hom adjunction and exact Frobenius transport."
+   }
+  },
+  {
+   "text": "For integral coefficients let $R_n$ denote derived reduction. Write $\\rho_T:R_nFT\\xrightarrow{\\sim}F_nR_nT$ and $\\beta_{A,B}:R_nH(A,B)\\xrightarrow{\\sim}H_n(R_nA,R_nB)$ for the canonical comparisons of [lem-fix-operation-reduction]. Set\n$$r_n=F_n(\\beta_{M,N})\\rho_{H(M,N)},\\qquad b_n=H_n(\\rho_M^{-1},\\rho_N)\\beta_{FM,FN}.$$\nThen the precise reduction assertion is\n$$b_nR_n(\\alpha_{M,N})=\\alpha_{M_n,N_n}r_n.$$\nTo prove it, uncurry in the finite category. The preservation of evaluation in [lem-fix-operation-reduction] replaces $R_n\\operatorname{ev}$ by $\\operatorname{ev}_n$; the reduction compatibility of [lem-pur-derived-pullback-tensor-iso] replaces $R_n\\mu^{-1}$ by $\\mu_n^{-1}$. Both uncurried sides are consequently the reduction of the pairing $F(\\operatorname{ev})\\mu^{-1}$, with its first input identified by $\\rho_M$. The finite adjunction in [sk-def-sf-operations] gives the equation. This uses the integral-to-finite Hom comparison, whose statement imposes no perfectness restriction. For successive-quotient compatibility, [def-weil-site-perfect-complex] shows that reducing a bounded local finite-projective complex preserves its split idempotents; pulling it back does the same, by the tensor unit and finite-sum comparisons. Thus the finite first inputs remain site-perfect. Apply the finite-quotient comparisons of [lem-fix-operation-reduction] to $A_{E,m}\\to A_{E,n}$. The direct and successive Hom comparisons are both transposes of the same successively reduced evaluation, by the associative tensor comparisons in that lemma. Uniqueness of transpose identifies them, and identifies the two reduced $\\alpha$ equations. This proves compatibility with every successive quotient, without assuming those quotient maps are flat.",
+   "uses": [
+    "lem-fix-operation-reduction",
+    "lem-pur-derived-pullback-tensor-iso",
+    "sk-def-sf-operations",
+    "def-weil-site-perfect-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-def-sf-weil-complexes/def-pod-dual-tate-datum.md",
+    "place": "First displayed arrow in the contragredient datum; agent expansion by tensor-Hom adjunction and exact Frobenius transport."
+   }
+  },
+  {
+   "text": "Rationalize the integral natural isomorphism of Step 3 on all of $D^b_c(X,\\mathcal O_E)$ using [def-weil-rationalization-karoubi]. Its image is invertible because the images of its inverse satisfy the two inverse identities. These are exactly the rational operations on objects and morphisms specified in [def-weil-derived-pullback-tensor-hom]. The rational tensor-Hom bijection of [lem-coef-completed-tensor-hom-transpose] identifies the rationalized evaluation equation of Step 4 with the defining equation for $\\alpha$ over $E$; uniqueness of transpose proves that it is the specified rational map. Naturality holds for every rational morphism: express a morphism as an integral morphism times a power of $\\varpi_E^{-1}$, apply integral naturality and linearity in each variable. This treats all rational objects, since the localization has the same objects. In particular it does not assume that an arbitrary integral representative of a rational site-perfect object is itself site-perfect.",
+   "uses": [
+    "def-weil-rationalization-karoubi",
+    "def-weil-derived-pullback-tensor-hom",
+    "lem-coef-completed-tensor-hom-transpose"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-def-sf-weil-complexes/def-pod-dual-tate-datum.md",
+    "place": "First displayed arrow in the contragredient datum; agent expansion by tensor-Hom adjunction and exact Frobenius transport."
+   }
+  },
+  {
+   "text": "Let $T=-\\otimes_{\\mathcal O_E}\\mathcal O_L$. Denote the pullback comparison by $\\rho_A:TF_EA\\xrightarrow{\\sim}F_LTA$, and the internal-Hom comparison by $\\beta_{A,B}:TH_E(A,B)\\xrightarrow{\\sim}H_L(TA,TB)$, as in [lem-pur-integral-operations-scalar-extension]. Define\n$$r_T=F_L(\\beta_{M,N})\\rho_{H_E(M,N)},\\qquad b_T=H_L(\\rho_M^{-1},\\rho_N)\\beta_{F_EM,F_EN}.$$\nThe required scalar square is\n$$b_TT(\\alpha_E)=\\alpha_Lr_T.$$\nApply [lem-coef-monoidal-square-hom-transport] with its horizontal functors $F_E,F_L$ and vertical functors both $T$; its square is $\\rho^{-1}:F_LT\\cong TF_E$. Its hypotheses hold: [lem-pur-derived-pullback-tensor-iso] supplies the strong symmetric tensor structures and their compatibility with scalar change; [lem-pur-integral-operations-scalar-extension] supplies the natural isomorphisms; [lem-fix-operation-reduction] states that the coefficient comparisons preserve tensor associativity, evaluation, units and counits. Thus the internal-Hom comparisons are the evaluation-defined ones required by the square lemma, and its displayed identity is precisely the equation above. Equivalently, uncurrying gives $TF_E(\\operatorname{ev})$ after the same inverse tensor comparisons on each side. For $L=E$ these identifications are identities. For $E\\subset L\\subset L'$ the composition identifications of the scalar-extension lemma and the tensor coherence identify the direct square with the pasted squares; their middle comparisons and inverses cancel. This proves identity and successive-extension compatibility as identities of the specified maps. Rationalizing this equation proves the same assertion for the rationalizations of these comparisons.",
+   "uses": [
+    "lem-pur-integral-operations-scalar-extension",
+    "lem-coef-monoidal-square-hom-transport",
+    "lem-pur-derived-pullback-tensor-iso",
+    "lem-fix-operation-reduction",
+    "def-weil-rationalization-karoubi"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-def-sf-weil-complexes/def-pod-dual-tate-datum.md",
+    "place": "First displayed arrow in the contragredient datum; agent expansion by tensor-Hom adjunction and exact Frobenius transport."
+   }
+  },
+  {
+   "text": "Represent $M,N$ and the finitely many arrows in a naturality or evaluation equation over one common finite coefficient field, as permitted by [def-weil-algebraically-closed-coefficients]. Define the common-stage comparison by the class of the rational $\\alpha$ over that field. Step 7 says that extending the field carries this representative to the specified comparison over the larger field. Two choices therefore agree over their compositum and define the same class. The class of the rational inverse is its inverse, since both compositions are the identity at that common field. The formulas for the common-stage operations in [def-weil-derived-pullback-tensor-hom] now identify this class with the comparison in the question: its uncurried pairing is the class of $F(\\operatorname{ev})\\mu^{-1}$. The evaluation identity and naturality of Step 4 hold as common-stage identities, and the identity and successive-extension identities of Step 7 show independence of the finite field of definition.",
+   "uses": [
+    "def-weil-algebraically-closed-coefficients",
+    "def-weil-derived-pullback-tensor-hom"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-def-sf-weil-complexes/def-pod-dual-tate-datum.md",
+    "place": "First displayed arrow in the contragredient datum; agent expansion by tensor-Hom adjunction and exact Frobenius transport."
+   }
+  }
+ ],
+ "proof_deps": [
+  "cor-coef-integral-internal-hom",
+  "def-trf-scheme-frobenius",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-rationalization-karoubi",
+  "def-weil-site-perfect-complex",
+  "lem-coef-completed-tensor-hom-transpose",
+  "lem-coef-monoidal-square-hom-transport",
+  "lem-fix-operation-reduction",
+  "lem-pur-derived-pullback-tensor-iso",
+  "lem-pur-integral-operations-preserve-constructible",
+  "lem-pur-integral-operations-scalar-extension",
+  "lem-weil-isomorphism-derived-pullback",
+  "lem-weil-isomorphism-derived-pullback-equivalence",
+  "lem-weil-mate-iso-along-equivalences",
+  "lem-weil-proetale-isomorphism-inverse-image",
+  "sk-def-sf-operations",
+  "thm-trf-internal-hom-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-def-sf-weil-complexes/def-pod-dual-tate-datum.md",
+  "place": "First displayed arrow in the contragredient datum; agent expansion by tensor-Hom adjunction and exact Frobenius transport."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -77,10 +211,66 @@
    "results": "8 hits: LightCondensed.ihomPoints_symm_comp, LightCondensed.ihomPoints, LightCondensed.ihom_map_val_app, LightCondensed.ihomPoints_symm_apply, LightCondensed.ihomPoints_apply, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalClosedLightCondMod, SheafOfModules.freeHomEquiv_symm_comp",
    "date": "2026-10-18",
    "verdict": "no match: sheaf pullback and light-condensed internal-Hom declarations do not identify completed pullback with ringed-site derived Hom at the four coefficient stages"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pullback commutes with derived internal Hom for site perfect complexes with completed integral and rational coefficients",
+   "results": "8 hits: SheafOfModules.pullbackIso, SheafOfModules.pullbackComp, SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.pullbackObjFreeIso, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc. Read the logged hits; inspected Closed/Functor.lean lines 41-46 and 76-88 for the Cartesian hypotheses and Basic.lean lines 180-210 for currying.",
+   "date": "2026-10-18",
+   "verdict": "no match: sheaf pullback comparisons or Cartesian exponential comparisons do not state the derived completed four-stage Frobenius comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "ihomComparison|internalHom.*pullback|pullback.*internalHom",
+   "results": "1 hits: Mathlib/CategoryTheory/Monoidal/PushoutProduct.lean; searched Mathlib/CategoryTheory. Read the logged hits; inspected Closed/Functor.lean lines 41-46 and 76-88 for the Cartesian hypotheses and Basic.lean lines 180-210 for currying.",
+   "date": "2026-10-18",
+   "verdict": "no match: arrow-category Leibniz pullback or general closed-category currying/Cartesian exponential comparison only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived pullback internal Hom evaluation perfect complex complete adic coefficients Frobenius",
+   "results": "8 hits: IsAdicComplete.mk_lift, Perfection.coeff_frobenius, Perfection.lift_apply_apply_coe, AdicCompletion.factor_evalₐ_eq_eval, coe_frobeniusEquiv, frobenius_comp_frobeniusEquiv_symm, AdicCompletion.evalₐ_liftRingHom, AdicCompletion.eval_lift. Read the logged hits; inspected Closed/Functor.lean lines 41-46 and 76-88 for the Cartesian hypotheses and Basic.lean lines 180-210 for currying.",
+   "date": "2026-10-18",
+   "verdict": "no match: ordinary adic algebra or Cartesian closed comparison/transport declarations do not give these coefficient categories and specified comparisons"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ihomComparison\"",
+   "results": "0 hits: . Read the logged hits; inspected Closed/Functor.lean lines 41-46 and 76-88 for the Cartesian hypotheses and Basic.lean lines 180-210 for currying.",
+   "date": "2026-10-18",
+   "verdict": "no match: no ihomComparison hit; internalHom hits define general closed structures without the derived completed comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A strong monoidal functor preserves the canonical internal Hom comparison and evaluation under coefficient reduction for perfect complexes",
+   "results": "8 hits: CategoryTheory.MonoidalClosedFunctor.comparison_iso, CategoryTheory.expComparison_ev, CategoryTheory.coev_expComparison, HomologicalComplex.Monoidal.inducingFunctorData, CategoryTheory.frobeniusMorphism_iso_of_expComparison_iso, CategoryTheory.expComparison_iso_of_frobeniusMorphism_iso, CategoryTheory.expComparison, CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app. Read the logged hits; inspected Closed/Functor.lean lines 41-46 and 76-88 for the Cartesian hypotheses and Basic.lean lines 180-210 for currying.",
+   "date": "2026-10-18",
+   "verdict": "no match: sheaf pullback comparisons or Cartesian exponential comparisons do not state the derived completed four-stage Frobenius comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"internalHom\"",
+   "results": "12 hits: CategoryTheory.MonoidalClosed.internalHom, CategoryTheory.MonoidalClosed.internalHomAdjunction₂, CategoryTheory.MonoidalClosed.instIsRightAdjointObjOppositeFunctorInternalHom, CategoryTheory.MonoidalClosed.internalHom_obj, CategoryTheory.MonoidalClosed.internalHomAdjunction₂_adj, CategoryTheory.MonoidalClosed.internalHom_map, CategoryTheory.ihom.instPreservesLimitsOfShapeOppositeObjFunctorFlipInternalHom, CategoryTheory.MonoidalCategory.DayConvolutionInternalHom. Read the logged hits; inspected Closed/Functor.lean lines 41-46 and 76-88 for the Cartesian hypotheses and Basic.lean lines 180-210 for currying.",
+   "date": "2026-10-18",
+   "verdict": "no match: no ihomComparison hit; internalHom hits define general closed structures without the derived completed comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "ihom|internalHom|expComparison",
+   "results": "25 hits: Mathlib/CategoryTheory/Monoidal/Closed/InternalCurrying.lean, Mathlib/CategoryTheory/Monoidal/Closed/InternalCurrying.lean, Mathlib/CategoryTheory/Monoidal/Closed/InternalCurrying.lean, Mathlib/CategoryTheory/Monoidal/Closed/InternalCurrying.lean, Mathlib/CategoryTheory/Monoidal/Closed/InternalCurrying.lean, Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean, Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean, Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean; searched Mathlib/CategoryTheory/Monoidal/Closed. Read the logged hits; inspected Closed/Functor.lean lines 41-46 and 76-88 for the Cartesian hypotheses and Basic.lean lines 180-210 for currying.",
+   "date": "2026-10-18",
+   "verdict": "no match: arrow-category Leibniz pullback or general closed-category currying/Cartesian exponential comparison only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An equivalence of closed monoidal categories commutes with internal Hom and the comparison is the transpose of transported evaluation",
+   "results": "8 hits: CategoryTheory.expComparison_ev, CategoryTheory.MonoidalClosed.ofEquiv, CategoryTheory.MonoidalClosedFunctor.comparison_iso, CategoryTheory.expComparison, CategoryTheory.Monoidal.transportStruct, CategoryTheory.cartesianClosedOfEquiv, CategoryTheory.MonoidalClosed.instTransported, CategoryTheory.MonoidalClosed.ofEquiv_curry_def. Read the logged hits; inspected Closed/Functor.lean lines 41-46 and 76-88 for the Cartesian hypotheses and Basic.lean lines 180-210 for currying.",
+   "date": "2026-10-18",
+   "verdict": "no match: ordinary adic algebra or Cartesian closed comparison/transport declarations do not give these coefficient categories and specified comparisons"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "def-pod-dual-tate-datum",
@@ -97,5 +287,84 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-pod-geometric-frobenius-internal-hom-comparison",
+  "worker": "stage1",
+  "summary": "Expanded the first contragredient arrow into a mate of the specified tensor comparison, using exact scheme-automorphism transport. Reused existing DAG statements only; no new nodes. Checked the completed integral Hom domain, constructed the actual evaluation transpose, and wrote the reduction and scalar-change squares explicitly. Proved the integral comparison for arbitrary constructible representatives so that rational passage needs no unjustified perfect integral lattice. Statement unchanged.",
+  "blueprint": "def-pod-dual-tate-datum, first displayed arrow: Steps 1-4 give its typed canonical isomorphism and naturality, Step 5 its finite-reduction normalization, Step 6 its rationalization, and Steps 7-8 its coherent scalar-extension and common-stage interpretation.",
+  "tool_uses": [
+   {
+    "node": "cor-coef-integral-internal-hom",
+    "why": "Constructibility of the ambient completed-coefficient internal Hom ensures the integral closed adjunction is on its actual domain. No statement of the strict-Weil-definition unit gives this generic interface."
+   },
+   {
+    "node": "lem-pur-integral-operations-preserve-constructible",
+    "why": "Preservation puts completed pullback and tensor on the full integral category used for mate calculus. No statement of the strict-Weil-definition unit gives this generic interface."
+   },
+   {
+    "node": "lem-coef-completed-tensor-hom-transpose",
+    "why": "The actual completed and rational tensor-Hom bijections identify the specified evaluation transposes. No statement of the strict-Weil-definition unit gives this generic interface."
+   },
+   {
+    "node": "lem-weil-isomorphism-derived-pullback-equivalence",
+    "why": "The finite ambient derived equivalence provides the equivalence hypothesis of the abstract mate theorem. No statement of the strict-Weil-definition unit gives this generic interface."
+   },
+   {
+    "node": "lem-weil-isomorphism-derived-pullback",
+    "why": "Identifies completed pullback with exact inverse-image transport on the full constructible category. No statement of the strict-Weil-definition unit gives this generic interface."
+   },
+   {
+    "node": "lem-weil-proetale-isomorphism-inverse-image",
+    "why": "Exact site relabelling and compatibility of coefficient rings give inverse transport, including completed rings. No statement of the strict-Weil-definition unit gives this generic interface."
+   },
+   {
+    "node": "lem-weil-mate-iso-along-equivalences",
+    "why": "Generic categorical invertibility of a mate along equivalences; it does not restate the coefficient-stage item. No statement of the strict-Weil-definition unit gives this generic interface."
+   },
+   {
+    "node": "lem-pur-derived-pullback-tensor-iso",
+    "why": "Specifies the tensor comparison whose mate is the map in the item, including its coefficient coherence. No statement of the strict-Weil-definition unit gives this generic interface."
+   },
+   {
+    "node": "thm-trf-internal-hom-pullback",
+    "why": "Identifies the finite site-perfect comparison already named in the item. No statement of the strict-Weil-definition unit gives this generic interface."
+   },
+   {
+    "node": "lem-fix-operation-reduction",
+    "why": "Supplies evaluation-compatible coefficient comparisons, with the correct site-perfect restriction between finite quotients. No statement of the strict-Weil-definition unit gives this generic interface."
+   },
+   {
+    "node": "lem-pur-integral-operations-scalar-extension",
+    "why": "Supplies coherent finite field-extension comparisons for the three elementary operations. No statement of the strict-Weil-definition unit gives this generic interface."
+   },
+   {
+    "node": "lem-coef-monoidal-square-hom-transport",
+    "why": "Generic evaluation-transpose square calculation for coefficient change, used without replacing the unit route. No statement of the strict-Weil-definition unit gives this generic interface."
+   }
+  ]
+ },
+ "tool_uses": [
+  "cor-coef-integral-internal-hom",
+  "lem-pur-integral-operations-preserve-constructible",
+  "lem-coef-completed-tensor-hom-transpose",
+  "lem-weil-isomorphism-derived-pullback-equivalence",
+  "lem-weil-isomorphism-derived-pullback",
+  "lem-weil-proetale-isomorphism-inverse-image",
+  "lem-weil-mate-iso-along-equivalences",
+  "lem-pur-derived-pullback-tensor-iso",
+  "thm-trf-internal-hom-pullback",
+  "lem-fix-operation-reduction",
+  "lem-pur-integral-operations-scalar-extension",
+  "lem-coef-monoidal-square-hom-transport"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-NQ-a0130c6cd",
+  "group": "NQ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NQ-a0130c6cd (reviewer sub-agent of L); spot-checked: I read all of it: the item and its 8 steps, the statement of every cited node, the main-20261015 def-pod-dual-tate-datum text (identical in main-20261017), the sk-thm-sf-internal-hom-pullback proof and Stacks 0GMX. The delivery adds no new nodes. The statement is unchanged and covers the parent's use (perfect K, second variable A_X); perfect means site-perfect by def-pod-perfect-complex-on-x. g_gamma = id x Spec(gamma) is a scheme automorphism that is not k-linear, and every lemma used accepts arbitrary isomorphisms. X is separated of finite type over k, which is what cor-coef-integral-internal-hom needs. Step 1: the integral adjunction is on the full D^b_c(X,O_E), via cor-coef-integral-internal-hom, preserve-constructible (1)-(2) and the completed transpose bijection. Step 2: F is an equivalence; at finite level by the ambient equivalence, at integral level by lambda for g and g^{-1} plus the relabelling clauses (1)-(3). Step 3: I matched the mate data (theta = mu^{-1}, G = G' = F). The mate formula is exactly the transpose of F(ev)mu^{-1}, and the lemma is true by the Yoneda argument. 'Canonical comparison' in thm-trf is by definition this adjoint of Lg^*ev (blueprint proof); the M-tensor-H versus H-tensor-M order is absorbed by mu's symmetry compatibility. Step 4: types and uncurrying check. Step 5: I typed r_n and b_n, with rho_M^{-1} in the contravariant slot. Integral-to-finite Hom reduction allows any first variable; between finite quotients the first variables M_m and F_mM_m are site-perfect; no flatness of A_m to A_n is used. Step 6: rationalization works on all integral pairs, so no site-perfect integral lattice is assumed. Step 7: in the monoidal-square lemma with F = G = T, U_A = F_E, U_B = F_L and h = rho^{-1}, its identity rearranges exactly to b_T T(alpha_E) = alpha_L r_T. Step 8: common-stage classes are well defined by Step 7. Checks: proof_deps equals the union of uses; no cycle (DFS over 13535 nodes); no SGA source; 15 Mathlib searches of all kinds. No duplicate among the DAG's pullback/internal-Hom nodes (lem-pur-isomorphism-inverse-image-tensor-hom, thm-sf-hom-comparison-constructible, lem-pc-perfect-internal-hom-pullback-isIso, lem-weil-pbc-etale-pullback-internal-hom). The route is kept: unit sk-def-weil names this arrow as the '(pullback)' factor. I accept all 12 declared tool_uses as generic interfaces. No fixes."
  }
 }
