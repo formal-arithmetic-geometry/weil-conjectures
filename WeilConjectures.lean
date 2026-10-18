@@ -4739,6 +4739,7 @@ public import WeilConjectures.WeilSheaf.OpenImmersionRestriction
 public import WeilConjectures.WeilSheaf.Operations
 public import WeilConjectures.WeilSheaf.PoincareDuality
 public import WeilConjectures.WeilSheaf.ProjectionFormula.LisseTensor
+public import WeilConjectures.WeilSheaf.ProjectionFormula.LowerStarIhom
 public import WeilConjectures.WeilSheaf.ProjectionFormula.UpperStarTensor
 public import WeilConjectures.WeilSheaf.ProjectionFormula.UpperStarTensorCompat
 public import WeilConjectures.WeilSheaf.ProjectionFormula.UpperStarTensorWeil
