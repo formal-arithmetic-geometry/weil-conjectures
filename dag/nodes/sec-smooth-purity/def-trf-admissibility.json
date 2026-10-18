@@ -172,5 +172,40 @@
   "group": "Q59",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q59-f3bb3b8bb (reviewer sub-agent of L); spot-checked: I read the full item against the main-20261015 source def-trf-admissibility.md (order 1871), its blueprint_update and the sk-def-sf-admissible unit. Hypotheses match: finite-field datum, l≠p, A_{E,n} with n≥1, X and Y of finite type over k, f separated of finite type, and no separatedness required of Y. I read all 20 cited statements in full. Rf_! on D^b_ctf comes from Rp_*j_!: lem-trf-open-ctf covers j_!, and cor-sf-direct-image-ctf-proetale covers Rp_*. Rf^! is defined, and its cohomological and Tor bounds [a-2D, b+2dimY+1] are proved independent of n, for arbitrary finite-type Y, in def-weil-exceptional-inverse-image. thm-sf-preservation-class is cited only when Y is separated, which is correct. The adjunction is the restriction of the natural bijection of thm-sf-ambient-adjoint-class (2) to full subcategories that both functors preserve. Composition: the conjugate (def-weil-pbc-adjunction-conjugate) of thm-sf-comp-composition under the composite adjunction gives R(hf)^! ≅ Rf^!Rh^!, in the displayed direction. Base change: the conjugate of the exchange of thm-cbc-finite-level-proetale (with g^{-1}=Lg^* at finite level, by def-weil-derived-pullback-tensor-hom) under Lg^*Rf_! ⊣ Rf^!Rg_* and Rf'_!Lg'^* ⊣ Rg'_*Rf'^! has type Rg'_*Rf'^! → Rf^!Rg_* and is an isomorphism. Lg^* ⊣ Rg_* comes from def-weil-pbc-proetale-operations. The D^b_ctf restrictions use lem-sf-pullback-tor-amplitude and the corollary, with g and g' separated of finite type. This direction matches fix-prop-adjunctions (4) and the downstream use in thm-trf-fixed-point-base-change. The item avoids the other mate, which is not invertible in general. Edge cases checked: f=id, g=id, X or Y empty, n=1, nonseparated Y, and the elliptic-curve case, which separates this notion from the ambient datum. There are no new nodes. My own dependency walk finds no cycle, and all dependencies exist and are unmerged. No duplicate definition exists in the DAG. No SGA source is used, there are no tool_uses, and I made no changes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ba08b7fca",
+  "group": "Q09",
+  "result": "pass",
+  "note": "Read the node, all 20 stmt deps, the blueprint source places (main-20261015 order 1871, master order 1512) and the full module. Every hypothesis matches the node: F, l prime with l≠p, E finite over Q_l, A_{E,n+1} for all n≥1, X and Y finite type over k, f separated finite type, no separatedness of Y. D^b_ctf is the recorded finiteTorConstructible pulled back along the canonical sfIntrinsicDerivedEquivalence. Rf_! is the recorded rightDerivedLowerShriek and Rf^! is literally sfFiniteExceptionalAt. The adjunction is a real Mathlib Adjunction (unit, counit, both triangle identities) and the predicate is Nonempty of it. Composition is conjugateIsoEquiv of the restricted originCompositionAmbient, giving R(hf)^!≅Rf^!Rh^!. Base change is the conjugate under the composite adjunctions of the compactification base-change map plus the canonical compactification comparison, of type Rg'_*Rf'^!≅Rf^!Rg_*. Uniform signed shifts are quantified before the stage. The origin field is the recorded theorem constructible_proEtale_origin, not an extra hypothesis. No hollow data, no local proof or sorry, docstrings cite source and blueprint, no duplicate notion, no FullCD or ambient adjoint, no extra universe restriction. nt_compile of the snapshot module: 16.1 s, rc 0, no errors or warnings. Only the lean field of the node changes and lean.statement is verbatim in the file."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.TraceExceptionalAdmissibility",
+  "declaration": "WeilConjectures.IsExceptionallyAdmissible",
+  "declarations": [
+   "WeilConjectures.trfFiniteTorFixed",
+   "WeilConjectures.trfExceptional",
+   "WeilConjectures.TrfExceptionalStage",
+   "WeilConjectures.TrfExceptionalStage.support",
+   "WeilConjectures.TrfExceptionalStage.exceptional",
+   "WeilConjectures.TrfExceptionalStage.composition",
+   "WeilConjectures.TrfOrdinaryStage",
+   "WeilConjectures.TrfOrdinaryStage.pullback",
+   "WeilConjectures.TrfOrdinaryStage.directImage",
+   "WeilConjectures.TrfOrdinaryStage.adjunction",
+   "WeilConjectures.trfOriginCompactificationComparison",
+   "WeilConjectures.TrfExceptionalStage.baseChange",
+   "WeilConjectures.IsExceptionallyAdmissibleAt",
+   "WeilConjectures.IsExceptionallyAdmissible"
+  ],
+  "file": "lean/Sheaf/Paper/TraceExceptionalAdmissibility.lean",
+  "statement": "def IsExceptionallyAdmissible (F : FiniteFieldDatum.{u}) (_hl : l ≠ F.p) (X Y : Over (Spec (.of F.k))) [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] (f : X ⟶ Y) [IsSeparated f.left] [LocallyOfFiniteType f.left] [QuasiCompact f.left] : Prop",
+  "branch": "newtargets-dag",
+  "by": "Q09",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Finite-stage adjunction data on the canonical fixed-scalar presentation of the recorded intrinsic finite-Tor category; the exceptional functor is sfFiniteExceptionalAt. Composition and base-change comparisons are explicit conjugateIsoEquiv constructions from the specified left comparisons. Positive stages are indexed by n+1. The public predicates obtain compactifiability from the existing theorem, with no added geometric hypothesis."
  }
 }

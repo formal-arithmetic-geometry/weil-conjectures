@@ -366,40 +366,29 @@
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q60-0bacb92a4 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item and all nine steps. It is a proof repair with no new nodes, and the statement, source, Lean record and tool_uses are unchanged. The statement matches the master blueprint verbatim (main-20261015 has the same text minus the Stacks parenthesis), and the route is the blueprint's: restrict the direct image, then take left adjoints. I read Stacks 03S6 (etale-cohomology.tex 11492-11514, lemma-shriek-base-change) and 04J0 (sites-modules.tex 2368-2411); Steps 1-2 adapt exactly that argument to the pro-etale sites with finite constant A. I checked the direction of b_g against lem-weil-pbc-conjugate-iso-unit-equation: its input is delta_g^{-1}, so b_g runs Lg^*j_! -> j'_!Lg_U^* as stated. The new Steps 5-8 replace the returned vertical-pasting step. Step 5 is the fibre-product section identity delta^{ji}=(delta^i j'^*)(i^* delta^j), checked on T->V; it is genuinely elementary. Step 6 builds the unit-preserving composites (ji)_! = j_!i_!. In Step 7 I re-derived both whiskering formulas from clause 2 of lem-weil-pbc-mate-pasting: alpha=id with beta=b^j gives i^*(delta^j)^{-1}, and beta=id with alpha=b^i gives (delta^i)^{-1}j'^*. Conjugation reverses composition, so c(B) is the inverse of delta^{ji}; bijectivity of conjugation then gives b^{ji}=j'_!b^i o b^j i_!, and its domain and codomain match. Step 8 covers the identity open. I read Mathlib Mates.lean (mateEquiv_hcomp at line 209, conjugateEquiv_comp at 350). The newly cited nodes are Mathlib leaves, proof_deps equals the union of the steps' uses, every step is under 2000 characters, there is no cycle among the 336 dependencies, no SGA source is cited, and nothing that adds boundedness, an etale/pro-etale identification or stalk detection is used. The existing pro-etale extension-zero base-change nodes lack the normalization and pasting clauses, so none duplicates the item. I made no fixes and accept the existing tool_uses."
  },
  "reviewed_lean": {
-  "date": "2026-10-16",
+  "date": "2026-10-18",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-f689b9209",
-  "group": "NJ",
+  "reviewer": "NT-stage2-cc-1cca41a54",
+  "group": "Q16",
   "result": "pass",
-  "note": "Wrote review.md. Checked immutable statements, dependencies, sources, canonical constructions, coherence, universes, edge cases, docstrings, and report sections. Both modules compiled through scompile.py with exit 0 and no diagnostics. No fixes required."
+  "note": "Item theorem graphFrobenius_open_exchange matches the node clause by clause: T fixes the finite-field datum, A=O_E/ϖ^n with n>=1 and separated finite-type X₀; Y₀ is LOFT+QC+separated; j₀ is an open immersion; j is the Over.pullback base change with its instance from Mathlib overPullbackMap; m>=1. The equation whiskerLeft ι (j_!κ_Y ≫ b_g) = whiskerLeft ι (b_Φ ≫ j_!κ_X) gives the node's composites on D^b_ctf, natural in M. The exchanges come from frobenius_open_square .1/.2.1 in the node's direction. §1(B) deps: selectedSchemeGaloisComparison selects κ from schemeGaloisComparison, whose last clause fixes r (projection), τ (unit equation) and κ, so it is not an arbitrary choice; the annihilator theorem is a true sorry'd theorem; Finite is a real instance. constantOpenSquareExchange conjugates the canonical-field-fixed recorded exchange by the unique unit-normalized identification of the tensor and sfIntrinsic pullbacks; no duplicate exists in live or side. Records change only lean with a note; statements are verbatim; docstrings have source and blueprint ids; sorry only in theorems; lines <=100; report sections present (the second reading is the author's own pass, noted). nt_compile --json of all 3 files: 4.3/2.1/10.6 s, no diagnostics. Edge cases empty X₀/Y₀, j=id, M=0, m=1, n=1 covered."
  },
  "lean": {
-  "module": "Sheaf.AlgebraicGeometry.ProEtaleOpenSquareExchange",
-  "declaration": "AlgebraicGeometry.Scheme.proEtale_openSquareExchange",
-  "declarations": [
-   "AlgebraicGeometry.Scheme.sfIntrinsicOpenAdjunction",
-   "AlgebraicGeometry.Scheme.sfIntrinsicOpenComp",
-   "AlgebraicGeometry.Scheme.sfIntrinsicOpenId",
-   "AlgebraicGeometry.Scheme.sfIntrinsicSquarePullback",
-   "AlgebraicGeometry.Scheme.sfIntrinsicOpenMate",
-   "AlgebraicGeometry.Scheme.sfIntrinsicDerivedOpen",
-   "AlgebraicGeometry.Scheme.sfIntrinsicDeriveMap",
-   "AlgebraicGeometry.Scheme.sfIntrinsicDerivedOpenMate",
-   "AlgebraicGeometry.Scheme.sfIntrinsicDerivedOpenUnit",
-   "AlgebraicGeometry.Scheme.sfIntrinsicDerivedPullbackComp",
-   "AlgebraicGeometry.Scheme.sfIntrinsicDerivedOpenComp",
-   "AlgebraicGeometry.Scheme.sfIntrinsicDerivedPullbackId",
-   "AlgebraicGeometry.Scheme.sfIntrinsicDerivedOpenId",
-   "AlgebraicGeometry.Scheme.sfIntrinsicDerivedSquarePullback",
-   "AlgebraicGeometry.Scheme.SfOpenSquareExchangeData",
-   "AlgebraicGeometry.Scheme.proEtale_openSquareExchange"
-  ],
-  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleOpenSquareExchange.lean",
-  "statement": "theorem proEtale_openSquareExchange (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ) (hn : 1 ≤ n) : Nonempty (@SfOpenSquareExchangeData (Padic.coefficientExtensionRing l E n) _ (Padic.finite_coefficientExtensionRing l E n hn))",
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleConstantOpenSquareExchange",
+  "declaration": "AlgebraicGeometry.Scheme.constantOpenSquareExchange",
+  "statement": "def constantOpenSquareExchange (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ) (hn : 1 ≤ n) {U' U Y' Y : Scheme.{u}} (gU : U' ⟶ U) (j' : U' ⟶ Y') (j : U ⟶ Y) (g : Y' ⟶ Y) [IsOpenImmersion j] [IsOpenImmersion j'] (sq : IsPullback gU j' j g) : @sfIntrinsicDerivedOpen (Padic.coefficientExtensionRing l E n) _ (Padic.finite_coefficientExtensionRing l E n hn) _ _ j _ ⋙ proEtaleConstantRingDerivedPullback (Padic.coefficientExtensionRing l E n) g ≅ proEtaleConstantRingDerivedPullback (Padic.coefficientExtensionRing l E n) gU ⋙ @sfIntrinsicDerivedOpen (Padic.coefficientExtensionRing l E n) _ (Padic.finite_coefficientExtensionRing l E n hn) _ _ j' _",
   "branch": "newtargets-dag",
-  "by": "NJ",
-  "date": "2026-10-16",
-  "existing": false
+  "by": "Q16",
+  "date": "2026-10-18",
+  "existing": false,
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleConstantOpenSquareExchange.lean",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.openSquarePullbackModel_existsUnique",
+   "AlgebraicGeometry.Scheme.openSquarePullbackModel",
+   "AlgebraicGeometry.Scheme.openSquareDerivedPullbackModel",
+   "AlgebraicGeometry.Scheme.constantOpenSquareExchange"
+  ],
+  "note": "§1(B): The recorded exchange uses sfIntrinsicDerivedPullback, whereas the recorded scheme/Galois comparison uses proEtaleConstantRingDerivedPullback on the same categories. This module reexports the complete original exchange datum (including restriction, identities and pasting), supplies the unique section-unit-normalized ordinary identification, descends it termwise and conjugates the original canonical exchange. No replacement open extension or coefficient category is introduced."
  },
  "blueprint_update": {
   "snapshot": "main-20261015",

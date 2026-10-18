@@ -10,7 +10,10 @@
  "stmt_deps": [
   "def-weil-sheaf-of-modules-category",
   "def-pur-sheaf-tensor-product",
-  "def-pc-tensor-complex-sheaves"
+  "def-pc-tensor-complex-sheaves",
+  "def-pur-cochain-tensor-coherence-data",
+  "def-pur-cochain-coefficient-arrows",
+  "def-pur-cochain-coefficient-universe-transport"
  ],
  "proof": [
   {
@@ -239,5 +242,30 @@
   "group": "Q06",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q06-5b9fce69b (reviewer sub-agent of L); spot-checked: I read the item, its parent and sibling citers, every cited statement, the unit sk-def-purity-conv and the chapter, and Stacks 03EL (lemma-tensor-product-pullback, including its proof) and 07A4 (lemma-pullback-tensor-product). The statement is true. I checked by hand on pure tensors: the insertion/contraction inverses, the chain-map sign (-1)^p, the Koszul symmetry, the unitors, and both sides of the composition equation. Edge cases checked: zero complexes, the zero ring, the identity morphism, one-term complexes, negative degrees, and unbounded complexes (u^* is a left adjoint, so it preserves the infinite sums). Hypotheses and coefficient category: general ringed topoi with a ring map u^{-1}R->S. No coefficient identification and no other base-change morphism occurs. Duplicates: none found in the DAG. lem-pur-proetale-inverse-image-tensor-comparison, lem-sf-proetale-tensor-composition-unit, lem-sfb-general-sheaf-pullback-monoidal-comparisons and the derived tensor-pullback nodes differ in setting or level. There are no new nodes. Three repairs are in fixes/: (1) C3/C4: step 1 attributed the insertion-of-1 formula to lem-weil-pbc-ringed-topoi-module-pullback-tensor, whose statement gives no formula. The step now derives the formula from the 03EL Hom/Bilin chain, citing lem-pc-sites-sheaf-tensor-bilinear-universal and the module adjunction, and says explicitly that the infinite direct sums are preserved. (2) Route: lem-weil-pbc-ringed-topoi-module-adjunction (sk-thm-properbasechange) was cited but not declared. I added tool_uses for it and for lem-pc-sites-sheaf-tensor-bilinear-universal. I accept those two and the declared module-pullback-tensor and sheaf-modules-tensor-closed. (3) E5: the coefficient square and the 'strict quotient towers' clause were left vague, and step 6 relied on 'transitions preserve +,*,1'. The statement now names the maps epsilon, kappa and tau and displays the square and transition equations. This makes the clause precise without weakening it, and it matches lem-pur-scalar-extension-tower-coherence. Step 6 checks both routes on generators, including the balancing checks that use the commutative-square hypothesis. Steps 6 and 7 rewritten; proof_deps recomputed. Details are in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bfecfad67",
+  "group": "Q46",
+  "result": "fix",
+  "note": "Head bfecfad67760 repairs the landing tool's RETURN of 0e2341929dd3 (word-for-word duplicate statements): total_isIso is removed and totalIso uses the published tensorPullbackTotal_isIso; existsUnique and unit now bind their full context explicitly (independent uC/vC/uD/vD/u, fresh-namespace structure), which is genuinely more general than the published shared-universe versions. import_prune_check.py exits 0 on all 5 modules. nt_compile --json of all 5 modules: no errors or warnings (data module 36.3 s, arrows 16.6 s, item 2.8 s). All lean.statement fields match their file signatures and all declaration inventories match their files. The clause-by-clause match is unchanged and confirmed: RingedPullback pinned to changeOfRings, comparison = totalIso.symm with unique k, IsCoherent (naturality, associator, Koszul braiding, both unitors), the composition equation via the conjugate normalized on generators, and the coefficient/transition equations with no inverse; no added hypotheses; edge cases covered. FIX (H3/H8, unrepaired from 0e2341929dd3, item module byte-identical): the primary declaration cochainPullbackTensorCoherenceOfUniverses is only the ULift-lifted-ring special case, and its docstring claims an original-size transport that the statement lacks. fixes/ has the complete item module with that docstring corrected, and lean-record.json making cochainPullbackTensorCoherence primary with its verbatim statement; it compiles cleanly with its siblings."
+ },
+ "lean": {
+  "module": "Sheaf.SecSmoothPurity.CochainPullbackTensorCoherence",
+  "declaration": "CategoryTheory.CochainPullback.cochainPullbackTensorCoherence",
+  "declarations": [
+   "CategoryTheory.CochainPullback.HasTensorCoherence",
+   "CategoryTheory.CochainPullback.cochainPullbackTensorCoherence",
+   "CategoryTheory.CochainPullback.cochainPullbackTensorCoherenceOfUniverses"
+  ],
+  "file": "lean/Sheaf/SecSmoothPurity/CochainPullbackTensorCoherence.lean",
+  "statement": "theorem cochainPullbackTensorCoherence (f : RingedPullback R S) (k : Comparison f) : HasTensorCoherence.{w, uC, vC, uD, vD, uE, vE} f k",
+  "branch": "newtargets-dag",
+  "by": "Q46",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Returned-delivery repair: usual cochain monoidal maps, actual composable ringed morphisms, normalized coefficient maps and both chain-map equations. The primary declaration is the common theorem for arbitrary ring sheaves R, S with modules in the rings' universe w (the universe of the sheaf monoidal structure) and independent site object/Hom universes. cochainPullbackTensorCoherenceOfUniverses is its specialization to the ULift coefficient rings of the universe-transport node. The node statement is unchanged.",
+  "fixed_by": "NT-stage2-cc-bfecfad67"
  }
 }

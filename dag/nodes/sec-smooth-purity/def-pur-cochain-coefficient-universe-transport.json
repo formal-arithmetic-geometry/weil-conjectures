@@ -1,0 +1,139 @@
+{
+ "id": "def-pur-cochain-coefficient-universe-transport",
+ "kind": "definition",
+ "title": "Canonical common-universe transport of ring and module sheaves",
+ "status": "split",
+ "statement": "For a site C,J with independent object and Hom universes, a commutative ring sheaf R in universe r, module sheaves [def-weil-sheaf-of-modules-category] in independent universe m, and an additional ambient size t, lift each ring section to ULift of R(U) and each module section to ULift of M(U), both in max(r,m,t). Ring and module restriction maps apply the original restrictions to ULift.down and then ULift.up; the lifted scalar acts by its descended scalar. The sheaf condition transports through up/down. On homomorphisms use the same up/down formula. This defines a fully faithful additive common-universe embedding. It preserves the existing sheaf tensor [def-pur-sheaf-tensor-product], via the unique isomorphism taking the lifted sheafification of x tensor y to the sheafification of ULift.up(x) tensor ULift.up(y), and preserves the small coproducts used in unbounded cochain totals. Thus all independent sizes can be handled in a common ambient universe without identifying any of them.",
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03DA, 03CY, 03D7 and 03EL; sites-cohomology.tex Tag 07A4, homogeneous tensor construction; composition normalized by Tag 0D6D."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical coefficient universe lift and scalar-association transition for tensor complexes of sheaf modules",
+   "results": "8 hits: PiTensorProduct.lifts_smul, TensorProduct.liftAux.smul, PiTensorProduct.liftAux_tprodCoeff, ULift.smulLeft, LinearMap.lift_lsmul_mul_eq_lsmul_lift_lsmul, TensorProduct.liftAux.smulₛₗ, TensorProduct.AlgebraTensorModule.lift_apply, PiTensorProduct.hasSMul'",
+   "date": "2026-10-17",
+   "verdict": "No complete sheaf-module size or coefficient/cochain presentation; reuse the ULift scalar action."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical scalar association natural isomorphism for compatible change of coefficient rings on ringed topoi, including semilinear transition maps",
+   "results": "8 hits: SheafOfModules.map_ιFree_mapFree_hom_assoc, SheafOfModules.map_ιFree_mapFree_hom, SheafOfModules.ιFree_mapFree_inv_assoc, PresheafOfModules.restrictScalarsCompToPresheaf, SheafOfModules.ιFree_mapFree_inv, SheafOfModules.restrictScalars, SheafOfModules.pushforwardCongr, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc",
+   "date": "2026-10-17",
+   "verdict": "No matching total-cochain coefficient/composition presentation; use existing scalar restriction and tensor constructions."
+  },
+  {
+   "tool": "loogle",
+   "query": "ULift.module, SheafOfModules.restrictScalars",
+   "results": "0 hits",
+   "date": "2026-10-17",
+   "verdict": "No complete interface."
+  },
+  {
+   "tool": "grep",
+   "query": "scalarAssociation|coefficient.*(tensor|transition), Mathlib/Algebra/Category/ModuleCat/Sheaf",
+   "results": "0 hits",
+   "date": "2026-10-17",
+   "verdict": "No matching interface."
+  },
+  {
+   "tool": "rg",
+   "query": "structure (RingedPullback|CompositePresentation|CoefficientSquare)|def (kappa|tau)|scalarAssociation_existsUnique|CochainUniverseTransport; source WeilConjectures, Mathlib Sheaf modules, project lean/Sheaf, DAG",
+   "results": "Only unrelated tau/tautological/kappaSmallSubdiagrams declarations; no exact record or canonical maps. Separate ULift coefficient search in source/Mathlib/project module-sheaf directories: no hits.",
+   "date": "2026-10-17",
+   "verdict": "New canonical presentation helpers are missing; retain underlying existing categories, tensors, and scalar extension."
+  },
+  {
+   "tool": "blueprint_refs.py search",
+   "query": "cochain coefficient; coefficient universe",
+   "results": "0 blueprint nodes match each query",
+   "date": "2026-10-17",
+   "verdict": "No duplicate blueprint notion."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-cochain-pullback-tensor-coherence",
+  "date": "2026-10-17",
+  "group": "Q46"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-frobenius-coefficient-twists",
+   "place": "Canonical cochain tensor comparison, signed coherence, composition and coefficient transitions, with explicit universe transport.",
+   "via": [
+    "lem-pur-cochain-pullback-tensor-coherence",
+    "lem-pur-derived-pullback-tensor-iso"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CochainCoefficientUniverseTransport",
+  "declaration": "SheafOfModules.CochainUniverseTransport.functor",
+  "declarations": [
+   "SheafOfModules.CochainUniverseTransport.ringFunctor",
+   "SheafOfModules.CochainUniverseTransport.ringFunctor_hasSheafCompose",
+   "SheafOfModules.CochainUniverseTransport.ring",
+   "SheafOfModules.CochainUniverseTransport.liftedRingForgetHasSheafCompose",
+   "SheafOfModules.CochainUniverseTransport.OriginalModules",
+   "SheafOfModules.CochainUniverseTransport.moduleAction",
+   "SheafOfModules.CochainUniverseTransport.moduleMap",
+   "SheafOfModules.CochainUniverseTransport.moduleMap_laws",
+   "SheafOfModules.CochainUniverseTransport.modulePresheaf",
+   "SheafOfModules.CochainUniverseTransport.modulePresheaf_isSheaf",
+   "SheafOfModules.CochainUniverseTransport.module",
+   "SheafOfModules.CochainUniverseTransport.moduleHomComponent",
+   "SheafOfModules.CochainUniverseTransport.moduleHomComponent_naturality",
+   "SheafOfModules.CochainUniverseTransport.moduleHom",
+   "SheafOfModules.CochainUniverseTransport.moduleHom_laws",
+   "SheafOfModules.CochainUniverseTransport.functor",
+   "SheafOfModules.CochainUniverseTransport.functor_fullyFaithful_additive",
+   "SheafOfModules.CochainUniverseTransport.functorAdditive",
+   "SheafOfModules.CochainUniverseTransport.tensor_existsUnique",
+   "SheafOfModules.CochainUniverseTransport.functor_preservesSmallColimits"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/CochainCoefficientUniverseTransport.lean",
+  "statement": "def functor : OriginalModules.{uC, vC, r, m} R ⥤ ringedSiteModules.{max r m w} ((sheafCompose J (forget₂ CommRingCat.{max r m w} RingCat.{max r m w})).obj (ring.{uC, vC, r, m, w} R))",
+  "branch": "newtargets-dag",
+  "by": "Q46",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bfecfad67",
+  "group": "Q46",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bfecfad67",
+  "group": "Q46",
+  "result": "fix",
+  "note": "Head bfecfad67760 repairs the landing tool's RETURN of 0e2341929dd3 (word-for-word duplicate statements): total_isIso is removed and totalIso uses the published tensorPullbackTotal_isIso; existsUnique and unit now bind their full context explicitly (independent uC/vC/uD/vD/u, fresh-namespace structure), which is genuinely more general than the published shared-universe versions. import_prune_check.py exits 0 on all 5 modules. nt_compile --json of all 5 modules: no errors or warnings (data module 36.3 s, arrows 16.6 s, item 2.8 s). All lean.statement fields match their file signatures and all declaration inventories match their files. The clause-by-clause match is unchanged and confirmed: RingedPullback pinned to changeOfRings, comparison = totalIso.symm with unique k, IsCoherent (naturality, associator, Koszul braiding, both unitors), the composition equation via the conjugate normalized on generators, and the coefficient/transition equations with no inverse; no added hypotheses; edge cases covered. FIX (H3/H8, unrepaired from 0e2341929dd3, item module byte-identical): the primary declaration cochainPullbackTensorCoherenceOfUniverses is only the ULift-lifted-ring special case, and its docstring claims an original-size transport that the statement lacks. fixes/ has the complete item module with that docstring corrected, and lean-record.json making cochainPullbackTensorCoherence primary with its verbatim statement; it compiles cleanly with its siblings."
+ }
+}

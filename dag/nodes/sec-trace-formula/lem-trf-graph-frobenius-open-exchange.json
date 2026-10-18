@@ -291,5 +291,30 @@
   "group": "Q155",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q155-f018a7aae (reviewer sub-agent of L); spot-checked: I read the whole item and every cited statement. I also read the parent's citing step, the blueprint (main-20261015) prop-trf-graph-frobenius-operator proof Step 2, and the blueprint_update construction of kappa in prop-trf-scheme-galois-comparison. The delivery has no new nodes and leaves the statement unchanged. Statement checks: g_X and g_Y are the geometric Frobenius g_gamma = g_sigma^{-1}, the same as in lem-trf-frobenius-open-square. The coefficient category is the ordinary D(Z_proet, A) with A = O_E/varpi^n, which is annihilated by l^n with l != p. Both squares are Cartesian by lem-trf-frobenius-open-square, and b goes Lh^*j_! -> j_!Lh^*, the direction of lem-trf-open-square-exchange. X_0 is of finite type because it is open in the noetherian Y_0. Step 1: Fr^{(q^m)} = g_sigma^m Phi^m, so Phi^m = g^m F^{am}; I checked this on sections and on Spec k_0. kappa = t∘c is exactly the specified construction. Step 2: I recomputed both reassociations from the local formula of lem-sf-proetale-tensor-composition-unit and got v⊗c_h c_k(a) c_h(b) d both times. Exactness and clause (3) of the localization node carry the equality to the derived category. Step 3: lem-pur-frobenius-trivialization-pullback with u = j, b = am gives the restriction equation, and its trivialization is the same iterate as in Step 1. Steps 4 to 7: I recomputed every composite and its types. The naturality of t, the two normalization equations, cancelling the invertible nu, and the full-faithfulness lift through b_P^{-1} all hold. Edge cases j = id, X_0 empty, M = 0 and m = 1 behave correctly. Duplicate search: no node in the DAG or the blueprint states this square; lem-trf-compactification-graph-operator gives only the exchange b_m, without kappa. I accept the declared tool_uses: each is a coherence interface that the item's statement or the blueprint's Step 2 already prescribes. No SGA source is used and no fixes were written."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1cca41a54",
+  "group": "Q16",
+  "result": "pass",
+  "note": "Item theorem graphFrobenius_open_exchange matches the node clause by clause: T fixes the finite-field datum, A=O_E/ϖ^n with n>=1 and separated finite-type X₀; Y₀ is LOFT+QC+separated; j₀ is an open immersion; j is the Over.pullback base change with its instance from Mathlib overPullbackMap; m>=1. The equation whiskerLeft ι (j_!κ_Y ≫ b_g) = whiskerLeft ι (b_Φ ≫ j_!κ_X) gives the node's composites on D^b_ctf, natural in M. The exchanges come from frobenius_open_square .1/.2.1 in the node's direction. §1(B) deps: selectedSchemeGaloisComparison selects κ from schemeGaloisComparison, whose last clause fixes r (projection), τ (unit equation) and κ, so it is not an arbitrary choice; the annihilator theorem is a true sorry'd theorem; Finite is a real instance. constantOpenSquareExchange conjugates the canonical-field-fixed recorded exchange by the unique unit-normalized identification of the tensor and sfIntrinsic pullbacks; no duplicate exists in live or side. Records change only lean with a note; statements are verbatim; docstrings have source and blueprint ids; sorry only in theorems; lines <=100; report sections present (the second reading is the author's own pass, noted). nt_compile --json of all 3 files: 4.3/2.1/10.6 s, no diagnostics. Edge cases empty X₀/Y₀, j=id, M=0, m=1, n=1 covered."
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.GraphFrobeniusOpenExchange",
+  "declaration": "WeilConjectures.TraceFormulaCoefficientConventions.graphFrobenius_open_exchange",
+  "statement": "theorem graphFrobenius_open_exchange (T : TraceFormulaCoefficientConventions.{u}) (Y₀ : Over (Spec (CommRingCat.of T.datum.k₀))) [LocallyOfFiniteType Y₀.hom] [QuasiCompact Y₀.hom] [IsSeparated Y₀.hom] (j₀ : T.X₀ ⟶ Y₀) [IsOpenImmersion j₀.left] (m : ℕ) (hm : 1 ≤ m) : Functor.whiskerLeft T.boundedConstructibleFiniteTor.ι (Functor.whiskerLeft (sfIntrinsicDerivedOpen T.coefficientRing (T.graphFrobeniusBaseChangedOpen Y₀ j₀)) (T.selectedSchemeGaloisComparison Y₀ m hm).hom ≫ (T.graphFrobeniusGaloisExchange Y₀ j₀ m).hom) = Functor.whiskerLeft T.boundedConstructibleFiniteTor.ι ((T.graphFrobeniusSchemeExchange Y₀ j₀ m).hom ≫ Functor.whiskerRight (T.selectedSchemeGaloisComparison T.X₀ m hm).hom (sfIntrinsicDerivedOpen T.coefficientRing (T.graphFrobeniusBaseChangedOpen Y₀ j₀)))",
+  "branch": "newtargets-dag",
+  "by": "Q16",
+  "date": "2026-10-18",
+  "existing": false,
+  "file": "lean/Sheaf/SixFunctors/GraphFrobeniusOpenExchange.lean",
+  "declarations": [
+   "WeilConjectures.TraceFormulaCoefficientConventions.graphFrobeniusBaseChangedOpen",
+   "WeilConjectures.TraceFormulaCoefficientConventions.graphFrobeniusBaseChangedOpen_isOpenImmersion",
+   "WeilConjectures.TraceFormulaCoefficientConventions.graphFrobeniusSchemeExchange",
+   "WeilConjectures.TraceFormulaCoefficientConventions.graphFrobeniusGaloisExchange",
+   "WeilConjectures.TraceFormulaCoefficientConventions.graphFrobenius_open_exchange"
+  ]
  }
 }

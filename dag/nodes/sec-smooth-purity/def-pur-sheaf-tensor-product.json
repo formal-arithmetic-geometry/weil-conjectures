@@ -249,32 +249,31 @@
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-stp2420 (reviewer sub-agent of L); spot-checked: Item statement unchanged (diff: only blueprint place, stmt_deps, status, split_report), so citers unaffected (E7/C4); matches Stacks 03EK; no proof steps. New leaf def-pur-presheaf-tensor-product read at Monoidal.lean:63 (tensorObj, R : Cop => CommRingCat): one-line specialization to R = O. FIX more, RETURN less: (1) B3 the grep search record '0 hits' for tensorObj was false (17 hits locally); replaced with reviewer grep, verdict match; (2) mathlib_match.file carried a line range and 'how' said exact; file made a path, how restated as one-line specialization with lines 63/45. Second reading by J1 missed (1).; 1 file(s) fixed by the reviewer"
  },
  "lean": {
-  "module": "Sheaf.Algebra.Category.ModuleCat.Sheaf.SiteTensorFunctoriality",
-  "declaration": "SheafOfModules.siteSheafTensorRightMap",
-  "file": "lean/Sheaf/Algebra/Category/ModuleCat/Sheaf/SiteTensorFunctoriality.lean",
-  "statement": "def siteSheafTensorRightMap {N N' : SheafOfModules.{m} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj A)} (g : N ⟶ N') : siteSheafTensorRight N ⟶ siteSheafTensorRight N'",
-  "branch": "newtargets-dag",
-  "by": "Q74",
-  "date": "2026-10-17",
-  "existing": false,
+  "module": "Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses",
+  "declaration": "SheafOfModules.cochainModulesMonoidal",
   "declarations": [
-   "SheafOfModules.siteSheafTensorRight_preservesZeroMorphisms",
-   "SheafOfModules.siteTensorSecondMap_naturality",
-   "SheafOfModules.siteTensorSecondMap",
-   "SheafOfModules.siteSheafTensorSecondMap",
-   "SheafOfModules.siteSheafTensorSecondMap_naturality",
-   "SheafOfModules.siteSheafTensorRightMap",
-   "SheafOfModules.siteSheafTensorTmul"
+   "SheafOfModules.cochainTensorLocalizationIsMonoidal",
+   "SheafOfModules.cochainModulesMonoidal",
+   "SheafOfModules.cochainModulesSymmetric",
+   "SheafOfModules.cochainModulesPreadditive",
+   "SheafOfModules.cochainTensorLeftPreservesColimits",
+   "SheafOfModules.cochainTensorRightPreservesColimits"
   ],
-  "note": "Dependency interface repair under brief-stage2 §1(B): the independent-universe tensor objects and first-factor maps were already correct, but the interface did not expose zero preservation for termwise tensor complexes, second-factor functoriality for joint naturality, or the local pure-tensor map. This module publicly imports the recorded TensorProductOfUniverses module unchanged (retaining sheaf tensor, change of rings, and positive powers) and supplies those canonical interfaces using sectionwise TensorProduct.map and the existing module-sheafification unit. No tensor construction is replaced and no universe equality is imposed."
+  "file": "lean/Sheaf/Algebra/Category/ModuleCat/Sheaf/CochainTensorUniverses.lean",
+  "statement": "instance cochainModulesMonoidal : MonoidalCategory (SheafOfModules.{w} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))",
+  "branch": "newtargets-dag",
+  "by": "Q46",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "§1(B): the recorded independent-universe tensor bifunctor is retained by public import. Its interface lacked the monoidal localization instance at independent site object and Hom universes, additivity, and countable-colimit preservation needed for actual unbounded tensor associators and unitors. This module supplies those instances for the existing localization construction, without a new tensor."
  },
  "reviewed_lean": {
-  "date": "2026-10-17",
+  "date": "2026-10-18",
   "by": "L",
-  "reviewer": "NT-stage2-cc-3f6dab25e",
-  "group": "Q74",
-  "result": "pass",
-  "note": "Item statement matches the node clause by clause: constant sheaf via Mathlib constantSheaf; ringedSiteModules with only the instances its dependencies need; unbounded ℤ cochain complex; T_N termwise complex; homology as Ker/Im; iso oriented H^i(C)⊗N→H^i(C⊗N); naturality in K and in N; local formula [z]⊗y↦[z⊗y] via an existential cycle w. §1(B) module SiteTensorFunctoriality has real data (sectionwise id⊗g, its sheafification, NatTrans, unit-based tmul) and 3 needed sorry theorems with docstrings; only lean changed on def-pur-sheaf-tensor-product. Both files compile clean with nt_compile.py in dependency order (2.2 s, 2.4 s, no warnings). Test instantiation compiles for a small site with equal universes; the extra sheafify instances are inherited from the dependencies. Statements verbatim, Stacks tags verified, edge cases (N=0, any i, unbounded, empty covers, kappa_C(U)≠kappa) fine. Observations only: the record repointing orphans TensorProductOfUniverses.lean from lean.file and leaves stale reviewed_proof on def-pur-sheaf-tensor-product; second reading is brief but real."
+  "reviewer": "NT-stage2-cc-bfecfad67",
+  "group": "Q46",
+  "result": "fix",
+  "note": "Head bfecfad67760 repairs the landing tool's RETURN of 0e2341929dd3 (word-for-word duplicate statements): total_isIso is removed and totalIso uses the published tensorPullbackTotal_isIso; existsUnique and unit now bind their full context explicitly (independent uC/vC/uD/vD/u, fresh-namespace structure), which is genuinely more general than the published shared-universe versions. import_prune_check.py exits 0 on all 5 modules. nt_compile --json of all 5 modules: no errors or warnings (data module 36.3 s, arrows 16.6 s, item 2.8 s). All lean.statement fields match their file signatures and all declaration inventories match their files. The clause-by-clause match is unchanged and confirmed: RingedPullback pinned to changeOfRings, comparison = totalIso.symm with unique k, IsCoherent (naturality, associator, Koszul braiding, both unitors), the composition equation via the conjugate normalized on generators, and the coefficient/transition equations with no inverse; no added hypotheses; edge cases covered. FIX (H3/H8, unrepaired from 0e2341929dd3, item module byte-identical): the primary declaration cochainPullbackTensorCoherenceOfUniverses is only the ULift-lifted-ring special case, and its docstring claims an original-size transport that the statement lacks. fixes/ has the complete item module with that docstring corrected, and lean-record.json making cochainPullbackTensorCoherence primary with its verbatim statement; it compiles cleanly with its siblings."
  },
  "reviewed_proof": {
   "date": "2026-10-15",
