@@ -2309,6 +2309,7 @@ public import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategoryB
 public import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategorySymmetric
 public import WeilConjectures.CategoryTheory.Monoidal.Instances.HomotopyCategory
 public import WeilConjectures.CategoryTheory.Monoidal.IntTensorFamily
+public import WeilConjectures.CategoryTheory.Monoidal.KFlatEquivalence
 public import WeilConjectures.CategoryTheory.Monoidal.Mod.Abelian
 public import WeilConjectures.CategoryTheory.Monoidal.Mod.Cofree
 public import WeilConjectures.CategoryTheory.Monoidal.Mod.Curry

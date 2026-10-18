@@ -73,6 +73,7 @@ constructible complexes `Dbc(X, Λ)` and closed under isomorphisms and direct su
 noncomputable def localizingBoundedConstructible (X : Scheme.{u}) : ObjectProperty 𝔻(X) :=
   (boundedConstructible (condensedRingObj Λ X)).localizingClosure.{u + 1}
 
+omit [IsCommMonObj Λ] in
 lemma le_localizingBoundedConstructible (X : Scheme.{u}) :
     boundedConstructible (condensedRingObj Λ X) ≤ localizingBoundedConstructible Λ X :=
   ObjectProperty.le_localizingClosure _
@@ -86,16 +87,41 @@ section Shift
 
 variable {X Y : Scheme.{u}} (f : X ⟶ Y)
 
-/-- The derived pullback `Lf^*` commutes with the shifts, as the left adjoint of `Rf_*`. -/
+/-- The derived pullback `Lf^*` commutes with the shifts, being isomorphic to the functor
+`D(f^*)` induced by the exact pullback
+(`AlgebraicGeometry.ProEtale.CondensedRing.leftDerivedUpperStarIsoMapDerivedCategory`). -/
 noncomputable instance commShift_leftDerivedUpperStar : (L((f)^*⟦Λ⟧)).CommShift ℤ :=
-  (derivedUpperStarLowerStarAdjunction Λ f).leftAdjointCommShift ℤ
+  Functor.CommShift.ofIso (leftDerivedUpperStarIsoMapDerivedCategory Λ f).symm ℤ
+
+/-- The derived pushforward `Rf_*` commutes with the shifts, as the right adjoint of `Lf^*`.
+This structure (rather than the one transported from K-injective complexes) is the one for
+which the adjunction `Lf^* ⊣ Rf_*` commutes with the shifts. -/
+noncomputable instance commShift_rightDerivedLowerStar : (R((f)_*⟦Λ⟧)).CommShift ℤ :=
+  (derivedUpperStarLowerStarAdjunction Λ f).rightAdjointCommShift ℤ
 
 instance commShift_derivedUpperStarLowerStarAdjunction :
     (derivedUpperStarLowerStarAdjunction Λ f).CommShift ℤ :=
-  (derivedUpperStarLowerStarAdjunction Λ f).commShift_of_rightAdjoint ℤ
+  (derivedUpperStarLowerStarAdjunction Λ f).commShift_of_leftAdjoint ℤ
 
-instance isTriangulated_leftDerivedUpperStar : (L((f)^*⟦Λ⟧)).IsTriangulated :=
-  (derivedUpperStarLowerStarAdjunction Λ f).isTriangulated_leftAdjoint
+instance isTriangulated_leftDerivedUpperStar : (L((f)^*⟦Λ⟧)).IsTriangulated := by
+  have := Functor.CommShift.ofIso_compatibility
+    (leftDerivedUpperStarIsoMapDerivedCategory Λ f).symm ℤ
+  exact Functor.isTriangulated_of_iso (leftDerivedUpperStarIsoMapDerivedCategory Λ f).symm
+
+instance isTriangulated_rightDerivedLowerStar : (R((f)_*⟦Λ⟧)).IsTriangulated :=
+  (derivedUpperStarLowerStarAdjunction Λ f).isTriangulated_rightAdjoint
+
+/-- The counit `Qh ⋙ Lf^* ⟶ f^* ⋙ Qh` of the derived pullback commutes with the shifts. -/
+instance commShift_leftDerivedFunctorCounit_upperStar :
+    NatTrans.CommShift (f)^*⟦Λ⟧.leftDerivedFunctorCounit ℤ := by
+  have : NatTrans.CommShift (leftDerivedUpperStarIsoMapDerivedCategory Λ f).symm.hom ℤ :=
+    Functor.CommShift.ofIso_compatibility (leftDerivedUpperStarIsoMapDerivedCategory Λ f).symm ℤ
+  have : NatTrans.CommShift (leftDerivedUpperStarIsoMapDerivedCategory Λ f).hom ℤ :=
+    inferInstanceAs
+      (NatTrans.CommShift (leftDerivedUpperStarIsoMapDerivedCategory Λ f).symm.inv ℤ)
+  rw [← (f)^*⟦Λ⟧.leftDerivedFunctorIsoMapDerivedCategory_hom_fac]
+  exact inferInstanceAs (NatTrans.CommShift (Functor.whiskerLeft DerivedCategory.Qh
+    (leftDerivedUpperStarIsoMapDerivedCategory Λ f).hom ≫ _) ℤ)
 
 /-- The derived pullback preserves direct sums, being a left adjoint. -/
 instance preservesColimitsOfShape_leftDerivedUpperStar (J : Type (u + 1)) :
