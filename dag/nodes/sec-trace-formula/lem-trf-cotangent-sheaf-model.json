@@ -14,9 +14,120 @@
   "lem-trf-derived-colimit-bar",
   "lem-trf-cotangent-resolution-coherence"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $\\mathcal D=\\mathcal C_{B/A}^{op}$, the category of polynomial $A$-algebras augmented to $B$ in the statement. Use its chosen small skeleton and transport the resolutions to it; the stipulated common infinite bound contains the sets of generators of their terms and of the standard resolution. A presheaf on $\\mathcal C_{B/A}$ is a covariant functor on $\\mathcal D$. By [lem-trf-derived-colimit-bar], $L\\pi_!F$ is the left derived colimit of this functor. There is a sign convention to fix when using [lem-trf-simplicial-derived-colimit-computation]: the chain $U_n\\to\\cdots\\to U_0$ in $\\mathcal C$ becomes $T_0\\to\\cdots\\to T_n$ in $\\mathcal D$, with $T_i=U_i$. The former bar deletes the last vertex first, while the latter deletes the first vertex first. Thus $d_{\\mathcal C,n}=(-1)^n d_{\\mathcal D,n}$. Multiplication in degree $-n$ by $\\lambda_n=(-1)^{n(n+1)/2}$ gives a chain isomorphism $j_F:K_{\\mathcal C}(F)\\to K_{\\mathcal D}(F)$, since $\\lambda_n=(-1)^n\\lambda_{n-1}$. It is the identity in degree zero, respects augmentations, and commutes with every bar map induced by a functor and coefficient transformation. We use this explicit identification throughout.",
+   "uses": [
+    "def-weil-size-convention",
+    "lem-trf-derived-colimit-bar",
+    "lem-trf-simplicial-derived-colimit-computation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 08PG (example-left-derived-colimits), 08PH (example-morphism-categories), 08Q9 (lemma-compute-by-cosimplicial-resolution); reversal of the bar face order written explicitly"
+   }
+  },
+  {
+   "text": "Let $P_\\bullet\\to B$ be any polynomial resolution specified in [lem-trf-cotangent-resolution-coherence]. Regard it as a morphism of simplicial abelian groups to the constant simplicial group $B$. By the definition in that node every $P_n\\to B$ is surjective, so the morphism is termwise surjective. The alternating complex $s(B)$ of constant $B$ has differential $\\sum_{i=0}^n(-1)^i\\mathrm{id}_B$ from degree $n$, which is zero for odd $n$ and the identity for even $n\\geq2$; hence $H_0(s(B))=B$, $H_n(s(B))=0$ for $n\\geq1$, and $s(B)\\to B[0]$ is a quasi-isomorphism. Since $s(P_\\bullet)\\to B[0]$ is a quasi-isomorphism by the definition of resolution and factors through $s(B)$, the map $s(P_\\bullet)\\to s(B)$ is a quasi-isomorphism. By [lem-trf-surjective-qis-simplicial-group-trivial-kan] (Stacks Tag 08P1) the underlying map of simplicial sets $P_\\bullet\\to B$ is a trivial Kan fibration in the sense of [def-weil-pbc-trivial-kan-fibration]: surjective on vertices, with boundary fillers for all $n\\geq1$. This applies to the standard resolution too, since [lem-trf-cotangent-resolution-coherence] states that it is a resolution, and its terms surject onto $B$ by that definition.",
+   "uses": [
+    "lem-trf-cotangent-resolution-coherence",
+    "lem-trf-surjective-qis-simplicial-group-trivial-kan",
+    "def-weil-pbc-trivial-kan-fibration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tags 08PT (lemma-pi-shriek-standard), 08QI (remark-resolution); simplicial Tag 08P1 (lemma-qis-simplicial-abelian-groups)"
+   }
+  },
+  {
+   "text": "For an object $T=A[E]\\to B$ of $\\mathcal D$, a simplex of $S_T=\\operatorname{Hom}_{\\mathcal D}(T,P_\\bullet)$ is a choice, for each $e\\in E$, of a simplex of $P_\\bullet$ mapping to the prescribed element $\\epsilon_T(e)$ of $B$. This follows from the universal property of a polynomial algebra and commutes with all simplicial operators. A lifting problem for $S_T\\to *$ against $\\partial\\Delta[n]\\hookrightarrow\\Delta[n]$ therefore gives, for each generator, a boundary lifting problem for $P_\\bullet\\to B$ over the constant simplex $\\epsilon_T(e)$. Step 2 and [def-weil-pbc-trivial-kan-fibration] provide fillers; choose them for all generators and extend uniquely to an algebra map $T\\to P_n$. For $n=0$ choose generator lifts by the same condition. Hence $S_T\\to *$ is a trivial Kan fibration. By [lem-weil-pbc-trivial-kan-homotopy-equivalence] it is homotopy equivalent to a singleton. This includes the empty generator set and arbitrary sets of generators within the size bound.",
+   "uses": [
+    "def-weil-pbc-trivial-kan-fibration",
+    "lem-weil-pbc-trivial-kan-homotopy-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08PS (lemma-identify-pi-shriek), representables expressed as choices of lifts of generators; simplicial Tag 08NS (lemma-trivial-kan-homotopy)"
+   }
+  },
+  {
+   "text": "Steps 1 and 3 verify the smallness and representable-contractibility hypotheses of [lem-trf-simplicial-derived-colimit-computation], with $R=B$, $Q=P_\\bullet$, and the covariant functor corresponding to any module presheaf $F$. It gives $a_{P,F}:s(F(P_\\bullet))\\xrightarrow{\\sim}\\mathbf H(\\mathcal D,F)$. Composing with the inverse of Step 1's bar identification gives $\\alpha_{P,F}:s(F(P_\\bullet))\\xrightarrow{\\sim}L\\pi_!F$. Its naturality in $F$ and in augmented simplicial maps $P\\to Q$ is the naturality asserted by that node; in particular $\\alpha_{Q,F}s(F(h))=\\alpha_{P,F}$. Inverting $\\alpha_{P,F}$ proves the general resolution formula in the item. No flatness or exactness assumption on $F$ is used.",
+   "uses": [
+    "lem-trf-simplicial-derived-colimit-computation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08Q9 (lemma-compute-by-cosimplicial-resolution), specialized as in cotangent Tags 08PS and 08QI"
+   }
+  },
+  {
+   "text": "The maps $dp\\otimes r\\mapsto d(v(p))\\otimes r$ for an augmented algebra map $v:P\\to Q$ define the coefficient functor $F_{B/A}$: additivity, the Leibniz relation, and the vanishing of differentials of elements of $A$ are preserved, using the defining relations in [def-weil-pbc-kahler-differentials]. The tensor relation is preserved because both augmentations give the same action on $B$. Identity and composition hold on these generating symbols. For $P=P^{\\mathrm{std}}$, [lem-trf-cotangent-resolution-coherence] identifies $s(F_{B/A}(P))$ with its defining complex $L_{B/A}$. Define $\\theta_{B/A}=\\alpha_{\\mathrm{std},F_{B/A}}^{-1}$. For any other resolution the induced comparison is $\\theta_{B/A}\\alpha_{P,F_{B/A}}$. These are the polynomial-resolution comparisons of Tags 08PU and 08QI: evaluate the sheaf on the standard resolution to define $L_{B/A}$, and identify its evaluation on any other resolution through the same $L\\pi_!F_{B/A}$. This fixes the canonical comparison convention in [lem-trf-cotangent-resolution-coherence], rather than choosing an arbitrary isomorphism. If the comparison of [lem-trf-cotangent-resolution-coherence] is formed on the larger category of all small augmented polynomial algebras rather than on the skeleton, the reindexing clause of [lem-trf-simplicial-derived-colimit-computation] for the inclusion $i$, identity coefficients and $k$ the transport isomorphism gives $a^{\\mathrm{big}}_P=\\mathbf H(i,\\mathrm{id})a_P$ for $P$ and for the standard resolution alike, so $a_{\\mathrm{std}}^{-1}a_P$ is the same in both.",
+   "uses": [
+    "def-weil-pbc-kahler-differentials",
+    "lem-trf-cotangent-resolution-coherence",
+    "lem-trf-simplicial-derived-colimit-computation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tags 08PU (lemma-compute-cotangent-complex) and 08QI (remark-resolution), with the defining complex of Tag 08PN"
+   }
+  },
+  {
+   "text": "For the arbitrary square $(a,b)$ in the statement, write $v:\\mathcal D_{B/A}\\to\\mathcal D_{B'/A'}$ for $P\\mapsto P\\otimes_A A'$; its opposite is $u$. It lands in polynomial presentations: $A[E]\\otimes_A A'\\simeq A'[E]$, with the inverse maps fixing the variables and coefficients, and the augmentation sends $p\\otimes a'$ to $b(\\epsilon_P(p))a'$. The formula $t_P(dp\\otimes r)=d(p\\otimes1)\\otimes b(r)$ respects the differential relations of [def-weil-pbc-kahler-differentials]. It is balanced because $d(p\\otimes1)(q\\otimes1)\\otimes b(r)=d(p\\otimes1)\\otimes b(\\epsilon_P(q)r)$, and is $b$-semilinear. For an augmented map $h:P\\to Q$, both naturality composites send $dp\\otimes r$ to $d(h(p)\\otimes1)\\otimes b(r)$. Thus this is the coefficient transformation for the general reindexing comparison, without conditions on $a,b$.",
+   "uses": [
+    "def-weil-pbc-kahler-differentials"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08QL (section-functoriality), category functor u and the coefficient transformation"
+   }
+  },
+  {
+   "text": "Let $P=P^{\\mathrm{std}}(B/A)$ and $P'=P^{\\mathrm{std}}(B'/A')$. The standard semilinear augmented simplicial map $h:P\\to P'$ is supplied by [lem-trf-cotangent-resolution-coherence]. Its extension $k:vP\\to P'$ sends $p\\otimes a'$ to $h(p)a'$. It is well defined by $a$-semilinearity; it commutes with each simplicial operator and augmentation because $h$ does. The composite coefficient map in degree $n$ is explicitly $F_{B'/A'}(k_n)t_{P_n}(dp\\otimes r)=d(h_n(p))\\otimes b(r)$. Therefore its alternating chain map is precisely the standard differential-complex map $f^{\\mathrm{std}}_{a,b}$ in that node. This uses only the construction of $k$ and the differential relations in [def-weil-pbc-kahler-differentials].",
+   "uses": [
+    "lem-trf-cotangent-resolution-coherence",
+    "def-weil-pbc-kahler-differentials"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08QL (section-functoriality), explicit standard-resolution maps and their differential maps"
+   }
+  },
+  {
+   "text": "Apply the reindexing clause of [lem-trf-simplicial-derived-colimit-computation] to $v,t,k$ of Steps 6 and 7. Both endpoints $P,P'$ satisfy its hypothesis by Step 3. It gives $a_{P',F'}f^{\\mathrm{std}}_{a,b}=\\mathbf H(v,t)a_{P,F}$ after restriction to $B$. By the bar-chain formula in [lem-trf-derived-colimit-bar], and the sign identification of Step 1, $\\mathbf H(v,t)$ corresponds exactly to the specified map $T=L\\pi_!(u,t)$: both send a chain with coefficient $x$ to its image chain with coefficient $t(x)$, and the scalar $\\lambda_n$ commutes with this operation. Thus $\\alpha_{P',F'}f^{\\mathrm{std}}_{a,b}=T\\alpha_{P,F}$. Multiply on the left by $\\alpha_{P',F'}^{-1}$ and on the right by $\\alpha_{P,F}^{-1}$ to obtain $\\theta_{B'/A'}T=f^{\\mathrm{std}}_{a,b}\\theta_{B/A}$. Restriction of scalars here is degreewise restriction on these bar models, as expressly provided by the comparison node. Its naturality clause requires no contractibility of $vP$; in particular nothing assumes $P\\otimes_A A'\\to B'$ to be a resolution. This proves the identity for every ring square.",
+   "uses": [
+    "lem-trf-simplicial-derived-colimit-computation",
+    "lem-trf-derived-colimit-bar"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08QL (section-functoriality), omitted agreement supplied by the reindexing comparison of sites-cohomology Tag 08Q9 and bar formulas of Tags 08PH,08PD"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-size-convention",
+  "lem-trf-derived-colimit-bar",
+  "lem-trf-simplicial-derived-colimit-computation",
+  "lem-trf-cotangent-resolution-coherence",
+  "lem-trf-surjective-qis-simplicial-group-trivial-kan",
+  "def-weil-pbc-trivial-kan-fibration",
+  "lem-weil-pbc-trivial-kan-homotopy-equivalence",
+  "def-weil-pbc-kahler-differentials"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cotangent.tex",
+  "place": "Tags 08PS,08PT,08PU,08QI; Tag 08QL omitted agreement is written using the existing general reindexing comparison and explicit bar-sign identification."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -52,10 +163,45 @@
    "results": "12 hits: Algebra.Extension.cotangentComplex, KaehlerDifferential.cotangentComplexBaseChange, Algebra.Extension.exact_hCotangentι_cotangentComplex, Algebra.Extension.exact_cotangentComplex_toKaehler, Algebra.Extension.cotangentComplex_mk, Algebra.Extension.Cotangent.mk_C_mem_ker_cotangentComplex, Algebra.Extension.CotangentSpace.map_cotangentComplex, KaehlerDifferential.cotangentComplexBaseChange_tmul.  Mathlib subdirectory: all. Full returned types retained in search-model-*.txt; candidates were read and are not the stated assertion.",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "cotangent.*colimit|colimit.*cotangent|cotangent.*resolution",
+   "results": "0 hits; top=[]; note=; digest=4f53cda18c2baa0c. Full actual returned results in search-0.txt through search-4.txt. Grep subdirectory: RingTheory.",
+   "date": "2026-10-18",
+   "verdict": "no match: returned naive presentation cotangent maps, ordinary Kähler presheaf universal properties, or finite smooth presentation results; none identifies derived colimits with the full simplicial cotangent complex and its arbitrary-square functoriality. Read Extension/Cotangent/Basic.lean:15-90 and the returned signatures."
+  },
+  {
+   "tool": "leansearch",
+   "query": "cotangent complex computed by evaluating a sheaf on a simplicial polynomial resolution",
+   "results": "8 hits; top=['Algebra.PreSubmersivePresentation.cotangentComplexAux_apply', 'Algebra.SubmersivePresentation.cotangentEquiv', 'Algebra.Presentation.differentials.comm₁₂', 'Algebra.Extension.H1Cotangent', 'Algebra.SubmersivePresentation.cotangentEquiv_apply', 'Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange_residueField', 'Algebra.Extension.exact_cotangentComplex_toKaehler', 'Algebra.SubmersivePresentation.cotangentComplex_injective']; note=; digest=579ad0e7dc1e6ff1. Full actual returned results in search-0.txt through search-4.txt. Grep subdirectory: all.",
+   "date": "2026-10-18",
+   "verdict": "no match: returned naive presentation cotangent maps, ordinary Kähler presheaf universal properties, or finite smooth presentation results; none identifies derived colimits with the full simplicial cotangent complex and its arbitrary-square functoriality. Read Extension/Cotangent/Basic.lean:15-90 and the returned signatures."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cotangentComplex\"",
+   "results": "12 hits; top=['Algebra.Extension.cotangentComplex', 'KaehlerDifferential.cotangentComplexBaseChange', 'Algebra.Extension.exact_hCotangentι_cotangentComplex', 'Algebra.Extension.exact_cotangentComplex_toKaehler', 'Algebra.Extension.cotangentComplex_mk', 'Algebra.Extension.Cotangent.mk_C_mem_ker_cotangentComplex', 'Algebra.Extension.CotangentSpace.map_cotangentComplex', 'KaehlerDifferential.cotangentComplexBaseChange_tmul']; note=; digest=c450dbfdfcd77a73. Full actual returned results in search-0.txt through search-4.txt. Grep subdirectory: all.",
+   "date": "2026-10-18",
+   "verdict": "no match: returned naive presentation cotangent maps, ordinary Kähler presheaf universal properties, or finite smooth presentation results; none identifies derived colimits with the full simplicial cotangent complex and its arbitrary-square functoriality. Read Extension/Cotangent/Basic.lean:15-90 and the returned signatures."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "cotangent complex as left derived colimit of differential module presheaf over polynomial presentations natural for all ring squares",
+   "results": "8 hits; top=[\"PresheafOfModules.DifferentialsConstruction.isUniversal'\", 'Algebra.Extension.cotangentComplex', 'Algebra.Extension.cotangentComplex_mk', \"PresheafOfModules.DifferentialsConstruction.derivation'\", 'Algebra.Extension.CotangentSpace.map_cotangentComplex', 'Algebra.Extension.toKaehler', \"KaehlerDifferential.endEquivDerivation'\", 'Derivation.liftKaehlerDifferential_apply']; note=; digest=7a2b44c5ef36a5c0. Full actual returned results in search-0.txt through search-4.txt. Grep subdirectory: all.",
+   "date": "2026-10-18",
+   "verdict": "no match: returned naive presentation cotangent maps, ordinary Kähler presheaf universal properties, or finite smooth presentation results; none identifies derived colimits with the full simplicial cotangent complex and its arbitrary-square functoriality. Read Extension/Cotangent/Basic.lean:15-90 and the returned signatures."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived colimit over polynomial algebras computes cotangent complex functoriality without flatness",
+   "results": "8 hits; top=['Algebra.Extension.CotangentSpace.map_cotangentComplex', 'Algebra.Extension.CotangentSpace.map_comp_cotangentComplex', 'Algebra.Extension.cotangentComplex', 'Algebra.H1Cotangent.map', 'Algebra.Extension.CotangentSpace.map', 'Algebra.Extension.tensorCotangentSpace', 'Algebra.Presentation.differentials.comm₁₂', 'Algebra.Extension.Cotangent.map']; note=; digest=4efb50742f83680d. Full actual returned results in search-0.txt through search-4.txt. Grep subdirectory: all.",
+   "date": "2026-10-18",
+   "verdict": "no match: returned naive presentation cotangent maps, ordinary Kähler presheaf universal properties, or finite smooth presentation results; none identifies derived colimits with the full simplicial cotangent complex and its arbitrary-square functoriality. Read Extension/Cotangent/Basic.lean:15-90 and the returned signatures."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-cotangent-transitivity-triangle",
@@ -85,5 +231,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-cotangent-sheaf-model",
+  "worker": "stage1",
+  "summary": "Eight steps realize the sheaf-model comparison and all-ring-square functoriality with no new nodes. Checked the standard and arbitrary resolution contractibility hypotheses, coefficient balancing, and the reversal of bar face conventions. Every non-elementary input is an existing node; no Lean attachment covers the full statement. Statement unchanged. Maintainer review: Step 2 now uses the new statement-only node lem-trf-surjective-qis-simplicial-group-trivial-kan (Stacks 08P1) instead of the two citations of dropped machinery nodes.",
+  "blueprint": "Supports lem-trf-local-term-locality proof (1)-(2), semistable-alteration/nearby-cycle branch, via the inherited marked-dualizing/LCI/cotangent-transitivity chain in blueprint.from. This is the sheaf-model and map-identification input to the transitivity triangle, not a replacement of the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-trivial-kan-homotopy-equivalence",
+    "why": "Generic simplicial-set fact (a trivial Kan fibration is a homotopy equivalence with a section) used in Step 3 to turn the trivial Kan fibration S_T -> * into a homotopy equivalence with a singleton, as Stacks 08PS requires; the trace-formula unit has no such statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-trivial-kan-homotopy-equivalence"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q30-3851021cf",
+  "group": "Q30",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q30-3851021cf (reviewer sub-agent of L); spot-checked: Read the whole item, every cited node's statement, the proof of lem-trf-cotangent-resolution-coherence (it defines the canonical comparison as c_Q=a_std^{-1}a_Q), and the sources: Stacks 08PS/08PT/08PU/08QI/08QL, sites-cohomology 08Q9, simplicial.tex section-complexes, definition-trivial-kan, 08P1 and 08NZ. The statement matches Stacks and is not weakened; it is a supporting ring lemma, not a target node. Step 1: checked the face conventions. d_C=(-1)^n d_D, and lambda_n=(-1)^{n(n+1)/2} satisfies lambda_n=(-1)^n lambda_{n-1}, so it is a chain isomorphism that commutes with the bar maps. Step 3: the generator-wise boundary filling is correct, including n=0, empty E and infinite E. Step 4: the hypotheses of the computation node are exactly Steps 1 and 3. Steps 6-7: checked the polynomial base change, the balance d(p⊗1)(q⊗1)⊗b(r)=d(p⊗1)⊗b(eps(q)r), and that k is well defined and equals the standard map. Step 8: the algebra theta'T=f theta checks; only the endpoints need to be resolutions, which covers the non-flat case Z→F2. Route pivot: Step 2 cited the dropped nodes lem-cbc-simplicial-module-model and lem-coef-kan-quillen-right-proper, with 'model structure'/'Quillen' wording, only to make a polynomial resolution a trivial Kan fibration. The delivery did not justify them, and Stacks 08PU takes the elementary route through 08P1. Fixed: added the statement-only node lem-trf-surjective-qis-simplicial-group-trivial-kan (Stacks simplicial 08P1, lemma-qis-simplicial-abelian-groups). I tested it on f=id, on Y=0, and on the non-surjective counterexample, and found no duplicate in a DAG-wide rg or in Mathlib. Step 2 now uses it: the maps P_n→B are surjective, s(const B)→B[0] is a quasi-isomorphism, and two-out-of-three gives the rest. I removed both dropped nodes and the now-unneeded normalized-alternating node from proof_deps and tool_uses. 'simplicial set' still appears, but only in its plain combinatorial sense. I also added one sentence to Step 5: the reindexing clause along the skeleton inclusion shows that c_P is the same whether the coherence node's large category or the skeleton is used. Accepted tool_use: lem-weil-pbc-trivial-kan-homotopy-equivalence, used in Step 3 as a black box, as in 08PS. No SGA, no cycle, statement unchanged.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
  }
 }

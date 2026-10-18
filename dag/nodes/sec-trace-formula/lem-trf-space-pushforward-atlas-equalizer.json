@@ -2,7 +2,7 @@
  "id": "lem-trf-space-pushforward-atlas-equalizer",
  "kind": "statement",
  "title": "Etale atlas equalizer for module direct image on an algebraic space",
- "statement": "Let $S$ be a scheme [def-pc-scheme], let $f:X\\to Y$ be a morphism of algebraic spaces over $S$ [def-trf-algebraic-space], and let $p:U\\to X$ be a surjective etale morphism from an affine scheme $U$. Put $R=U\\times_XU$ with projections $p_1,p_2:R\\to U$, and let $a=f\\circ p:U\\to Y$ and $b=a\\circ p_1=a\\circ p_2:R\\to Y$. For every $\\mathcal O_X$-module $F$ on the small etale site [def-weil-sheaf-of-modules-category], write $F_U=p^*F$ and $F_R=p_1^*F$ (identified with $p_2^*F$ by the canonical fibre-product identification). Then the canonical map $f_*F\\to a_*F_U$ identifies $f_*F$ with the kernel of the difference of the two restriction maps $a_*F_U\\rightrightarrows b_*F_R$ induced by $p_1$ and $p_2$; equivalently, $0\\to f_*F\\to a_*F_U\\rightrightarrows b_*F_R$ is exact at the first two terms in the category of $\\mathcal O_Y$-modules.",
+ "statement": "Let $S$ be a scheme [def-pc-scheme], let $f:X\\to Y$ be a morphism of algebraic spaces over $S$ [def-trf-algebraic-space], and let $p:U\\to X$ be a surjective etale morphism from an affine scheme $U$. Put $R=U\\times_XU$ [lem-trf-space-fibre-products-etale-covers] with projections $p_1,p_2:R\\to U$, and let $a=f\\circ p:U\\to Y$ and $b=a\\circ p_1=a\\circ p_2:R\\to Y$. For every $\\mathcal O_X$-module $F$ on the small etale site [def-weil-sheaf-of-modules-category], write $F_U=p^*F$ and $F_R=p_1^*F_U$ (identified with $p_2^*F_U$ by the canonical fibre-product identification). Then the canonical map $f_*F\\to a_*F_U$ identifies $f_*F$ with the kernel of the difference of the two restriction maps $a_*F_U\\rightrightarrows b_*F_R$ induced by $p_1$ and $p_2$; equivalently, $0\\to f_*F\\to a_*F_U\\rightrightarrows b_*F_R$ is exact at the first two terms in the category of $\\mathcal O_Y$-modules.",
  "source": {
   "document": "literature/stacks-project/spaces-morphisms.tex",
   "place": "Tag 03M8 (lemma-compute-pushforward), proof and displayed exact sequence; the two maps are the restrictions along the projections U \\times_X U \\rightrightarrows U."
@@ -11,12 +11,98 @@
   "def-pc-scheme",
   "def-trf-algebraic-space",
   "def-weil-sheaf-of-modules-category",
-  "def-pc-fibre-product",
-  "def-trf-space-etale-module-functors"
+  "def-trf-space-etale-module-functors",
+  "lem-trf-space-fibre-products-etale-covers"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Extend $F$ to the enlarged etale site $\\mathcal C_X$ as the module sheaf $\\widetilde F$ using [lem-trf-space-enlarged-etale-ringed-site-model]. The same node identifies the canonical ringed-topos map for any morphism $g:A\\to Y$ with the continuous functor $V\\mapsto A\\times_YV$. Direct image is precomposition by that functor, by [def-weil-pbc-sites-and-cohomology](3), with scalars restricted along pullback of regular functions. Thus for an etale scheme $V\\to Y$ we have $(f_*F)(V)=\\widetilde F(X\\times_YV)$. Apply the same description also to $a$ and $b$ and their respective modules. These are the canonical direct images of [def-trf-space-etale-module-functors], since the model supplies precisely the canonical morphisms of ringed topoi, rather than an arbitrary choice of adjoints.",
+   "uses": [
+    "lem-trf-space-enlarged-etale-ringed-site-model",
+    "def-weil-pbc-sites-and-cohomology",
+    "def-trf-space-etale-module-functors"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03M8 (lemma-compute-pushforward), first four sentences of proof; spaces-properties.tex Tags 03H7 and 03G2/03G8 for the enlarged-site and ringed-topos interpretation"
+   }
+  },
+  {
+   "text": "Fix $V\\to Y$ etale from a scheme and put $W=V\\times_YX$, $Z=V\\times_YU$ and $Q=V\\times_YR$. By [lem-trf-space-fibre-products-etale-covers], $W$ is an algebraic space and $Z\\to W$ is the pullback of the singleton surjective etale covering $U\\to X$, hence is a covering. The maps $Z\\to U$ and $Q\\to R$ are etale, being pullbacks of $V\\to Y$, and are schemes by representability. Likewise $R=U\\times_XU$ is a scheme and its projections are etale. The base-change and composition assertions of [lem-trf-space-chartwise-etale-permanence] put all these objects and maps in the enlarged etale sites in question. In particular $W\\to X$ is etale, and $Z\\to W$ is a scheme chart to which the sheaf axiom applies.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers",
+    "lem-trf-space-chartwise-etale-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03M8 (lemma-compute-pushforward), covering sentence; base-change geometry is spaces-topologies.tex Tag 041F(3)"
+   }
+  },
+  {
+   "text": "The overlap of this covering is $Z\\times_WZ\\cong Q$. Indeed a map from a test scheme $T$ into $Z\\times_WZ$ is a triple $(v,u_1,u_2)$ with $v:T\\to V$, $u_i:T\\to U$, $a u_1=a u_2$ equal to the image of $v$ in $Y$, and $p u_1=p u_2$ in $X$. The last equality gives a unique map $r:T\\to R$ with projections $u_1,u_2$, and $b r$ is the image of $v$. Thus the triple is exactly a map $T\\to V\\times_YR$, with the two projections given by $p_1,p_2$. This construction and its inverse commute with test maps, so the fibre-product universal property in [lem-trf-space-fibre-products-etale-covers] gives the asserted canonical isomorphism. The base of the overlap here is $W$, not $X$.",
+   "uses": [
+    "lem-trf-space-fibre-products-etale-covers"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03M8 (lemma-compute-pushforward), overlap formula, correcting its printed subscript X to V times_Y X"
+   }
+  },
+  {
+   "text": "For an etale map, tensor pullback is restriction to the localized etale site by [lem-trf-space-etale-module-pushforward-restriction]. Hence $F_U=p^*F$ is the restriction of $\\widetilde F$ to $U$, and $F_R=p_1^*F_U$ is its restriction to $R$; the other restriction along $p_2$ agrees since $p p_1=p p_2$. Using the localization identifications of [lem-trf-space-enlarged-etale-ringed-site-model], step 1 consequently gives $(a_*F_U)(V)=\\widetilde F(Z)$ and $(b_*F_R)(V)=\\widetilde F(Q)$. The canonical map from $(f_*F)(V)$ is restriction along $Z\\to W$, and the two maps to $(b_*F_R)(V)$ are restriction along the two projections of step 3. The identifications preserve the specified chart projections of [def-trf-space-etale-module-functors], so they identify the canonical maps, not just the three objects.",
+   "uses": [
+    "lem-trf-space-etale-module-pushforward-restriction",
+    "lem-trf-space-enlarged-etale-ringed-site-model",
+    "def-trf-space-etale-module-functors"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03M8 (lemma-compute-pushforward), restrictions in the displayed sequence; spaces-properties.tex Tag 03LV (lemma-etale-exact-pullback) and equation 03LW (equation-restrict-modules)"
+   }
+  },
+  {
+   "text": "The equalizer sheaf axiom in [def-weil-pbc-sites-and-cohomology](1), applied to the singleton cover $Z\\to W$ and the underlying abelian sheaf of $\\widetilde F$, gives injectivity of $\\widetilde F(W)\\to\\widetilde F(Z)$ and a unique antecedent for each $s\\in\\widetilde F(Z)$ whose two restrictions to $Q$ agree. For abelian groups this condition is exactly that their difference is zero. All maps are $\\mathcal O_Y(V)$-linear: restrictions are semilinear over the structure-sheaf restrictions by [def-weil-sheaf-of-modules-category], and the scalar actions here are induced from the same map to $V$. Thus the sequence of sections is exact at the first two terms as a sequence of $\\mathcal O_Y(V)$-modules.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03M8 (lemma-compute-pushforward), application of the sheaf condition and displayed sequence (exact at the first two terms only)"
+   }
+  },
+  {
+   "text": "For a map $V'\\to V$ of etale schemes over $Y$, all the maps just constructed are restrictions along the induced fibre-product maps, so functoriality of restriction makes the square for every arrow commute. For a module morphism $F\\to G$ the same assertion is its naturality on each chart, as in [def-trf-space-etale-module-functors]. The sequences of step 5 therefore form the stated sequence of module sheaves on $Y$. Kernels of module sheaves are computed sectionwise by [def-weil-sheaf-of-modules-category]. The sectionwise bijections from $f_*F$ onto the kernel give an isomorphism of module sheaves: their inverses commute with restrictions and addition and scalar multiplication by uniqueness of the sectionwise antecedent. This proves the canonical equalizer assertion and both exactness clauses.",
+   "uses": [
+    "def-trf-space-etale-module-functors",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 03M8 (lemma-compute-pushforward), final sentence: functoriality in V and conclusion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-space-etale-module-functors",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-sheaf-of-modules-category",
+  "lem-trf-space-chartwise-etale-permanence",
+  "lem-trf-space-enlarged-etale-ringed-site-model",
+  "lem-trf-space-etale-module-pushforward-restriction",
+  "lem-trf-space-fibre-products-etale-covers"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 03M8 (lemma-compute-pushforward), full proof; expanded using Properties of Spaces Tags 03H7, 03G2/03G8 and 03LV. The overlap is taken over V times_Y X, correcting the printed subscript X."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -45,10 +131,45 @@
    "results": "{\"top\": [\"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"AlgebraicGeometry.Scheme.etaleTopology\", \"AlgebraicGeometry.Scheme.Hom.ker\", \"AlgebraicGeometry.Scheme.etalePretopology\", \"TopCat.Presheaf.SheafConditionEqualizerProducts.fork_ι\", \"TopCat.Presheaf.SheafConditionPairwiseIntersections.coneEquivFunctor\", \"AlgebraicGeometry.PresheafedSpace.GlueData.opensImagePreimageMap_app'\", \"TopCat.Presheaf.SheafConditionPairwiseIntersections.coneEquivFunctorObj\"], \"n_hits\": 8, \"note\": \"\", \"sub\": \"\"}",
    "date": "2026-10-18",
    "verdict": "no match: search results are scheme-only or generic site infrastructure"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Equalizer computing module direct image along an algebraic space from a surjective etale atlas and its two projections",
+   "results": "{\"top\": [\"AlgebraicGeometry.Scheme.LocalRepresentability.glueData_f\", \"AlgebraicGeometry.Scheme.LocalRepresentability.glueData_V\", \"AlgebraicGeometry.Scheme.LocalRepresentability.glueData_t'\", \"AlgebraicGeometry.Scheme.Etale.forget\", \"AlgebraicGeometry.IsImmersion.instιScheme\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.D'\", \"AlgebraicGeometry.Scheme.instHasPullbacksEtale\", \"AlgebraicGeometry.Scheme.instCategoryEtale\"], \"n_hits\": 8, \"note\": \"\", \"sub\": \"\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: scheme Zariski modules and quasicoherent presentations do not state the algebraic-space etale-atlas direct-image equalizer"
+  },
+  {
+   "tool": "grep",
+   "query": "AlgebraicSpace|atlas.*equalizer|equalizer.*atlas",
+   "results": "{\"top\": [], \"n_hits\": 0, \"note\": \"\", \"sub\": \"\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: scheme Zariski modules and quasicoherent presentations do not state the algebraic-space etale-atlas direct-image equalizer"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Direct image of a module sheaf on an algebraic space is the equalizer of restrictions from a surjective etale scheme atlas",
+   "results": "{\"top\": [\"AlgebraicGeometry.Scheme.Modules.restrict_obj\", \"AlgebraicGeometry.Scheme.Modules\", \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction\", \"AlgebraicGeometry.Scheme.Modules.pushforward_obj_obj\", \"AlgebraicGeometry.Scheme.Modules.instAdditivePushforward\", \"AlgebraicGeometry.Scheme.Modules.instFaithfulPushforward\", \"ModuleCat.tildeInModuleCat\", \"AlgebraicGeometry.Scheme.Opens.toScheme_presheaf_obj\"], \"n_hits\": 8, \"note\": \"\", \"sub\": \"\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: scheme Zariski modules and quasicoherent presentations do not state the algebraic-space etale-atlas direct-image equalizer"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, CategoryTheory.Limits.equalizer",
+   "results": "{\"top\": [], \"n_hits\": 0, \"note\": \"\", \"sub\": \"\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: scheme Zariski modules and quasicoherent presentations do not state the algebraic-space etale-atlas direct-image equalizer"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A sheaf of modules on an algebraic space satisfies descent along an etale cover and its direct image is a Cech kernel",
+   "results": "{\"top\": [\"SheafOfModules.QuasicoherentData\", \"SheafOfModules.Presentation\", \"SheafOfModules.QuasicoherentData.presentation\", \"SheafOfModules.IsQuasicoherent\", \"SheafOfModules.isQuasicoherent\", \"SheafOfModules.QuasicoherentData.I\", \"SheafOfModules.Presentation.map\", \"SheafOfModules.IsFinitePresentation\"], \"n_hits\": 8, \"note\": \"\", \"sub\": \"\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: scheme Zariski modules and quasicoherent presentations do not state the algebraic-space etale-atlas direct-image equalizer"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-space-qc-separated-quasi-coherent-pushforward",
@@ -79,5 +200,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-space-pushforward-atlas-equalizer",
+  "worker": "stage1",
+  "summary": "Split the Stacks 03M8 atlas equalizer through the existing enlarged ringed-site model, base-change permanence, the actual overlap fibre product, etale pullback as restriction, the singleton-cover sheaf axiom, and sectionwise module kernels. Corrected the ill-typed F_R=p_1^*F to F_R=p_1^*F_U and recorded the source overlap typo; no hypotheses or conclusions are changed. No new nodes.",
+  "blueprint": "Realizes the retained historical ancestry place: Stacks 03M9 affine-target paragraph invoking 03M8 in the section-algebra descent chain under lem-trf-local-term-locality. Steps 1-4 identify the atlas diagram; steps 5-6 prove its kernel property. This does not replace any step of the current contracting-correspondence unit.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q42-812b2c486",
+  "group": "Q42",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q42-812b2c486 (reviewer sub-agent of L); spot-checked: I read the whole item. I checked it against Stacks 03M8 (spaces-morphisms lemma-compute-pushforward, statement and proof) and against the cited places 03H7, 03G2/03G8, 03LV/03LW and 041F(3). Hypotheses: S, f, a surjective étale atlas and an arbitrary O_X-module are all kept. The extra 'U affine' comes from the import and is unused; it is harmless for the only citer (qc-separated pushforward). The coefficient category is Mod(O_X) on the small étale site, as in the source. Statement change: 'F_R=p_1^*F' was ill-typed and is now 'F_R=p_1^*F_U ≅ p_2^*F_U', which only fixes the types and is accepted. Source error confirmed: the printed (V×_YU)×_X(V×_YU)=V×_YR fails for Y=X=U=Spec k with V two points (4 points against 2); the overlap must be taken over W=V×_YX, and step 3 proves that version. Steps: (1) the enlarged-site model and the sites definition give f_*F(V)=F̃(X×_YV), consistent with the chart-limit definition of f_*. (2) The fibre-product and permanence nodes show Z→W is a covering and Z, Q, R are schemes. (3) The overlap computation is elementary and I re-derived it. (4) Étale tensor pullback is restriction, by the pushforward-restriction node and the model's localization clause. (5) The singleton-cover equalizer axiom gives the sequence, with O_Y(V)-linearity. (6) Kernels are sectionwise. Edge cases checked: empty X, F=0, the identity atlas, and the two-affine atlas of P^1. Duplicate searches (03M8 and equalizer terms over dag/nodes, and blueprint_refs) found nothing. All cited statements are in sk-i-curve-zero; the off-unit citations are definitions only, so no tool_uses. No cycle, proof_deps equals the union of uses, no new nodes, no SGA, and no fixes."
  }
 }
