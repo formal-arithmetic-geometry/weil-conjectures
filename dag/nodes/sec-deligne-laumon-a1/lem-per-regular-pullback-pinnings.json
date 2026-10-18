@@ -2,7 +2,7 @@
  "id": "lem-per-regular-pullback-pinnings",
  "kind": "statement",
  "title": "Regular ordinary pullback with fibrewise pinnings",
- "statement": "Let $\\ell$ be a prime, $n\\geq1$, $\\Lambda=\\mathbf Z/\\ell^n\\mathbf Z$, and let $h:Y\\to X$ be a regular morphism between Noetherian excellent schemes on which $\\ell$ is invertible [def-exc-excellent-ring]. Regular means flat [def-weil-flat-morphism] with geometrically regular fibres: every field extension of a residue field gives a regular fibre [def-weil-regular-scheme, def-pc-scheme-fibre]. Let $\\delta_X$ be a dimension function and $K\\in D^+(X_{\\mathrm{et}},\\Lambda)$ a pinned potential dualizing complex [def-per-potential-dualizing-complex]. Set\n$$c_h(y)=\\dim\\mathcal O_{Y_{h(y)},y},\\qquad \\delta_h(y)=\\delta_X(h(y))-c_h(y),$$\nwhere the dimension is the Krull dimension of the local ring [def-weil-pbc-krull-dimension-ring]. Then $\\delta_h$ is a dimension function, and $h^*K$ has potential pinnings for $\\delta_h$. The pinnings are the following fibrewise ones. After localization of $X$ at $x=h(y)$, write $i:Y_x\\hookrightarrow Y\\times_X\\operatorname{Spec}\\mathcal O_{X,x}$ and $q:Y_x\\to\\operatorname{Spec}\\kappa(x)$. The supported base-change comparison identifies $i^!h^*K$ with $q^*R\\Gamma_xK$; apply the pinning of $K$ at $x$, and then the inverse absolute-purity class at $y$ on the regular fibre $Y_x$. Thus the resulting costalk is $\\Lambda(\\delta_X(x)-c_h(y))[2\\delta_X(x)-2c_h(y)]$. These constructions are natural in pinning-preserving maps of $K$, restrict to open subsets, and respect composition of regular morphisms. No finite-type or perfect-field assumption on $h$ is imposed.",
+ "statement": "Let $\\ell$ be a prime, $n\\geq1$, $\\Lambda=\\mathbf Z/\\ell^n\\mathbf Z$, and let $h:Y\\to X$ be a regular morphism between Noetherian excellent schemes on which $\\ell$ is invertible [def-exc-excellent-ring]. Regular means flat [def-weil-flat-morphism] with geometrically regular fibres: every finite extension of a residue field gives a regular fibre [def-weil-regular-scheme, def-pc-scheme-fibre]. Let $\\delta_X$ be a dimension function and $K\\in D^+(X_{\\mathrm{et}},\\Lambda)$ a pinned potential dualizing complex [def-per-potential-dualizing-complex]. Set\n$$c_h(y)=\\dim\\mathcal O_{Y_{h(y)},y},\\qquad \\delta_h(y)=\\delta_X(h(y))-c_h(y),$$\nwhere the dimension is the Krull dimension of the local ring [def-weil-pbc-krull-dimension-ring]. Then $\\delta_h$ is a dimension function, and ordinary inverse image $h^*K$ [def-weil-pbc-inverse-image] has potential pinnings for $\\delta_h$. The pinnings are the following fibrewise ones. After localization of $X$ at $x=h(y)$, write $i:Y_x\\hookrightarrow Y\\times_X\\operatorname{Spec}\\mathcal O_{X,x}$ and $q:Y_x\\to\\operatorname{Spec}\\kappa(x)$. The supported base-change comparison [lem-per-regular-supported-base-change] identifies $i^!h^*K$ with $q^*R\\Gamma_xK$; apply the pinning of $K$ at $x$, and then the inverse absolute-purity class [lem-per-absolute-gysin-purity] of $\\operatorname{Spec}\\kappa(y)\\hookrightarrow\\operatorname{Spec}\\mathcal O_{Y_x,y}$ on the regular fibre $Y_x$. Thus the resulting costalk is $\\Lambda(\\delta_X(x)-c_h(y))[2\\delta_X(x)-2c_h(y)]$. These constructions are natural in pinning-preserving maps of $K$, restrict to open subsets, and respect composition of regular morphisms. No finite-type or perfect-field assumption on $h$ is imposed.",
  "source": {
   "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
   "place": "XIV, Proposition 2.5.4; XVII, Proposition 4.1.1, Lemma 4.3.1.1, Remark 4.3.1.3, and Section 4.3.2"
@@ -13,11 +13,142 @@
   "def-weil-regular-scheme",
   "def-pc-scheme-fibre",
   "def-per-potential-dualizing-complex",
-  "def-weil-pbc-krull-dimension-ring"
+  "def-weil-pbc-krull-dimension-ring",
+  "def-weil-pbc-inverse-image",
+  "lem-per-regular-supported-base-change",
+  "lem-per-absolute-gysin-purity"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For a geometric specialization $\\bar y'\\rightsquigarrow\\bar y$ of codimension $b$, let $a$ be the codimension of its image specialization $\\bar x'\\rightsquigarrow\\bar x$. The geometric rectangle lemma gives $c_h(y')+b=a+c_h(y)$. Factor the base arrow into a saturated chain of immediate arrows, as the rectangle lemma allows; by the composition clause of higher-residue transitivity codimensions add along composites, so the chain has exactly $a$ immediate arrows (and possibly a codimension-zero transport). The definition of a dimension function gives $\\delta_X(x')-\\delta_X(x)=a$, including $a=0$. Consequently\n$$\\delta_h(y')-\\delta_h(y)=a-c_h(y')+c_h(y)=b.$$\nFor $b=1$ this is exactly the defining condition for $\\delta_h$ to be a dimension function. This argument uses geometric codimension throughout, so it also checks the convention involving strict localization.",
+   "uses": [
+    "lem-per-regular-specialization-rectangle",
+    "def-per-potential-dualizing-complex",
+    "lem-per-higher-residue-transitivity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XIV, Proposition 2.5.4; XVII, Lemmas 4.3.2.4–4.3.2.6"
+   }
+  },
+  {
+   "text": "Fix $y\\in Y$, put $x=h(y)$, $X_x=\\operatorname{Spec}\\mathcal O_{X,x}$, $Y'=Y\\times_X X_x$, and denote $j:Y'\\to Y$, $h_x:Y'\\to X_x$, $i:F=Y_x\\hookrightarrow Y'$, $q:F\\to\\operatorname{Spec}\\kappa(x)$. On affine charts $Y'$ is obtained by localization, and $F$ by quotient followed by localization. The excellence-stability lemma therefore makes them excellent; they are Noetherian. Flat base change makes $h_x$ flat, and its residue-field fibres are the same fibres as those of $h$, so $h_x$ is regular. The definition of regularity makes $F$ regular. Closed-support exchange gives the natural isomorphism\n$$q^*R\\Gamma_xK\\xrightarrow{\\sim}i^!j^*h^*K.$$\nTaking a further supported restriction at $y$ identifies its right side with $R\\Gamma_y(h^*K)$, by the successive-supported-restriction assertion of the same lemma. Notice the explicit $j^*$: all extraordinary restrictions are performed on the localized schemes. No exceptional pullback for the non-finite-type morphism $h$ is being used.",
+   "uses": [
+    "lem-exc-finite-type-localization-excellent",
+    "def-weil-regular-scheme",
+    "lem-per-regular-supported-base-change",
+    "lem-weil-pbc-flat-morphism-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, Corollary 4.2.3 and Lemma 4.3.1.1"
+   }
+  },
+  {
+   "text": "Apply $q^*p_x$ to the left side of Step 2. The resulting complex on $F$ is $\\Lambda_F(\\delta_X(x))[2\\delta_X(x)]$. For each $y$ use the regular-unit theorem on the connected local regular excellent scheme $\\operatorname{Spec}\\mathcal O_{F,y}$. Its twist-and-shift assertion, with $m=\\delta_X(x)$, gives the pinning\n$$R\\Gamma_y(\\Lambda_F(m)[2m])\\xrightarrow{\\sim}\\Lambda(m-c_h(y))[2m-2c_h(y)].$$\nThe regular-pinning clause of the prime-power Gysin lemma identifies this pinning with the inverse point class $\\operatorname{Cl}_{y}^{-1}$ of [lem-per-absolute-gysin-purity], twisted and shifted by $m$, so the composite is exactly the fibrewise pinning specified in the statement. Localizations give the same class, hence the pointwise constructions agree wherever computed. On each regular fibre these pinnings are potential: apply the regular-unit theorem on local neighbourhoods of any specialization. Thus all immediate residue maps lying in one fibre respect the constructed pinnings.",
+   "uses": [
+    "def-per-potential-dualizing-complex",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-prime-power-closed-immersion-gysin",
+    "lem-per-absolute-gysin-purity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, Lemma 4.3.1.1 and Proposition 2.4.4.1; XVI, Theorem 3.1.1"
+   }
+  },
+  {
+   "text": "For each geometric costalk of $h^*K$, Step 3 leaves just one nonzero cohomology group, in degree $-2\\delta_h(y)$, identified with its Tate line. Use the higher residue transitions to formulate compatibility for arbitrary geometric specializations. Their composition law implies that compatibility along an immediate chain implies compatibility along its composite. It also implies cancellation in a commutative specialization square whenever the already-compatible vertical arrows induce isomorphisms of the normalized Tate lines. Equality of the maps in the unique nonzero degree implies equality of the pinning maps in the derived category: after shifting both objects to degree zero, this is the full faithfulness of the embedding of modules in their derived category.",
+   "uses": [
+    "lem-per-higher-residue-transitivity",
+    "def-per-potential-dualizing-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, Theorem 3.1.2 and section 4.3.2, introductory paragraph"
+   }
+  },
+  {
+   "text": "Take an arbitrary geometric specialization $\\bar y'\\rightsquigarrow\\bar y$ above $\\bar x'\\rightsquigarrow\\bar x$. Choose the commutative rectangle $\\bar\\eta'\\rightsquigarrow\\bar\\eta$ over it given by the geometric rectangle lemma. Factor its top arrow into the lifted saturated chain over the base, with any codimension-zero transport included. Each lifted arrow has base codimension at most one, so the low-codimension residue comparison applies. Its degree hypothesis holds by Step 1. Composing these compatibilities by higher-residue transitivity makes the top arrow compatible. Both vertical arrows lie in fibres; their compatibilities follow from Step 3 and transitivity along immediate chains in the regular fibres. The residue square commutes by higher-residue transitivity. In normalized Tate-line coordinates its top and vertical arrows are identities; hence its bottom arrow is the identity too. Explicitly, if $A$ is the top map, $B$ the left vertical map, $D$ the right vertical map and $C$ the bottom map, then $CB=DA$, and $A=B=D=1$ gives $C=1$. By Step 4 this proves pinning compatibility, in particular for every immediate specialization. Thus $h^*K$ is potential.",
+   "uses": [
+    "lem-per-regular-specialization-rectangle",
+    "lem-per-regular-codimension-one-residues",
+    "lem-per-higher-residue-transitivity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, section 4.3.3, using Lemmas 4.3.2.1, 4.3.2.5 and 4.3.2.6"
+   }
+  },
+  {
+   "text": "Every map in the construction is natural in $K$: supported exchange is natural, $q^*$ takes a pinning-preserving map to the corresponding map between coefficient lines, and the inverse point class is fixed independently of $K$. Substituting these three naturality equalities into their composite proves naturality of the resulting pinnings. Open restriction commutes with supported exchange, and the fundamental classes are compatible with localization and etale base change by [lem-per-absolute-gysin-purity], so the same composite computes the restricted pinning.",
+   "uses": [
+    "lem-per-regular-supported-base-change",
+    "lem-per-prime-power-closed-immersion-gysin",
+    "lem-per-absolute-gysin-purity"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, Lemma 4.3.1.1 (construction and its locality)"
+   }
+  },
+  {
+   "text": "First let $r:V\\to U$ be regular with $U,V$ regular excellent. Localize at $v$ and $u=r(v)$; the localized map is again regular and both local schemes are regular affine. The regular-base-change clause of the prime-power Gysin lemma, applied to the closed point $u\\hookrightarrow U$, shows that the closed fibre $V_u\\hookrightarrow V$ is a regular immersion of codimension $c_U(u)$ and that the pullback of $\\operatorname{Cl}_{u\\hookrightarrow U}$ is $\\operatorname{Cl}_{V_u\\hookrightarrow V}$, under the supported exchange. The fibre $V_u$ is regular, and the composition compatibility of [lem-per-absolute-gysin-purity] for $v\\hookrightarrow V_u\\hookrightarrow V$ gives $\\operatorname{Cl}_{v\\hookrightarrow V}=j^!(\\operatorname{Cl}_{V_u\\hookrightarrow V})\\circ\\operatorname{Cl}_{v\\hookrightarrow V_u}(-c_U(u))[-2c_U(u)]$, $j:v\\hookrightarrow V_u$, with virtual dimensions adding: $c_V(v)=c_U(u)+c_r(v)$. By the regular-pinning clause of the prime-power Gysin lemma, the pinnings of $\\Lambda_U$ at $u$, of $\\Lambda_{V_u}$ at $v$ and of $\\Lambda_V$ at $v$ are the inverses of these three classes. Inverting the displayed identity shows that the fibrewise pinning of $r^*\\Lambda_U$ is the canonical regular pinning of $\\Lambda_V$. Twisting and shifting gives the same assertion for $\\Lambda_U(m)[2m]$. This is a comparison of the specified classes, including their normalization.",
+   "uses": [
+    "lem-per-prime-power-closed-immersion-gysin",
+    "lem-per-regular-supported-base-change",
+    "lem-per-absolute-gysin-purity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, Lemma 4.3.1.2, with its product-of-classes calculation"
+   }
+  },
+  {
+   "text": "For composable regular $Z\\xrightarrow gY\\xrightarrow hX$, fix $z$, $y=g(z)$ and $x=h(y)$. On Noetherian affine charts the composite has Noetherian fibre rings: its fibre ring is a quotient of a localization of a source coordinate ring. The regular-composition lemma therefore makes $hg$ regular. Localizing at $x$ and then forming the closed fibre is a localization followed by a finite-type quotient base change. The regular-base-change lemma applies to that quotient; localization leaves the fibre regularity conditions unchanged. Thus $Z_x\\to Y_x$ is regular. The fibre $Y_x$ is regular, and regular-map ascent makes $Z_x$ regular; excellence follows as in Step 2. Supported exchange is compatible with composition, so applying $p_x$ reduces comparison of the two pinnings to this regular map and $\\Lambda_{Y_x}(\\delta_X(x))[2\\delta_X(x)]$. Step 7 identifies its pulled-back regular pinning with the regular pinning on $Z_x$. Hence the iterated and direct constructions coincide. Its codimension sum gives $c_{hg}(z)=c_h(y)+c_g(z)$, so the dimension functions and twist-shifts agree too. This proves compatibility under $g^*h^*\\cong(hg)^*$.",
+   "uses": [
+    "lem-per-regular-supported-base-change",
+    "lem-per-prime-power-closed-immersion-gysin",
+    "lem-exc-finite-type-localization-excellent",
+    "lem-weil-pbc-regular-composition",
+    "lem-weil-pbc-regular-base-change",
+    "lem-weil-pbc-regular-map-ascent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, Remark 4.3.1.3"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-per-regular-specialization-rectangle",
+  "def-per-potential-dualizing-complex",
+  "lem-per-higher-residue-transitivity",
+  "lem-exc-finite-type-localization-excellent",
+  "def-weil-regular-scheme",
+  "lem-per-regular-supported-base-change",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-per-potential-dualizing-regular-unit",
+  "lem-per-prime-power-closed-immersion-gysin",
+  "lem-per-absolute-gysin-purity",
+  "lem-per-regular-codimension-one-residues",
+  "lem-weil-pbc-regular-composition",
+  "lem-weil-pbc-regular-base-change",
+  "lem-weil-pbc-regular-map-ascent"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "XIV, Proposition 2.5.4; XVII, Lemma 4.3.1.1, Lemma 4.3.1.2, Remark 4.3.1.3, sections 4.3.2–4.3.3"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -46,10 +177,38 @@
    "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/Algebra/Order/Group/Lattice.lean\", \"line\": \"14\", \"text\": \"underpinnings of vector lattices, Banach lattices, AL-space, AM-space etc.\"}\n",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Ordinary etale pullback along a regular morphism preserves potential dualizing complexes with fibre codimension pinnings",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsEtale\", \"doc\": \"The property of being an étale morphism is stable under base change. That is, if a morphism of schemes is étale, then any base change (pullback) of this morphism is also étale.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instHasPullbacksEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme), CategoryTheory.Limits.HasPullbacks X.Etale\", \"doc\": \"For any scheme $ X $, the category of étale morphisms to $ X $ has all pullbacks. This means that for any pair of étale morphisms $ Y \\to X $ and $ Z \\to X $, and any morphism $ Y \\to Z $, the fiber prod\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty @AlgebraicGeometry.IsEtale @AlgebraicGeometry.IsEtale\", \"doc\": \"The composition of two étale morphisms of schemes is also an étale morphism.\"}\n  {\"name\": \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"CategoryTheory.MorphismProperty.IsStableUnderBaseChange @AlgebraicGeometry.IsSmooth\", \"doc\": \"The property of being a smooth morphism is stable under base change. That is, if $ f: X \\\\to Y $ is a smooth morphism of schemes, then any base change of $ f $ is also smooth.\"}\n  {\"name\": \"RingHom.Etale.isStableUnderBaseChange\", \"module\": \"Mathlib/RingTheory/RingHom/Etale\", \"type\": \"RingHom.IsStableUnderBaseChange fun {R S} [CommRing R] [CommRing S] => RingHom.Etale\", \"doc\": \"If a ring homomorphism $ f : R \\\\to S $ is étale, then for any $ R $-algebra $ R' $, the base change homomorphism $ R' \\\\to S \\\\otimes_R R' $ is also étale. This means that étale morphisms preserve their\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ), CategoryTheory.MorphismProperty.IsStableUnderBaseChange (@AlgebraicGeometry.IsSmoothOfRelativeDimension n)\", \"doc\": \"For any morphism $ f: X \\\\to Y $ of schemes, if $ f $ is smooth of relative dimension $ n $, then any base change (pullback) of $ f $ is also smooth of relative dimension $ n $.\"}\n",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"dualizing\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "potential.?dualiz|pinning|costalk",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/Algebra/Order/Group/Lattice.lean\", \"line\": \"14\", \"text\": \"underpinnings of vector lattices, Banach lattices, AL-space, AM-space etc.\"}\n",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Regular morphisms preserve normalized local cohomology residue pinnings of dualizing complexes",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \"[IsAffineHom f] : IsAffineHom f.toNormalization\", \"doc\": \"For any scheme morphism $ f: X \\to Y $, the induced morphism from $ X $ to the normalization of $ f $ is affine.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.ι_toNormalization_assoc\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] (U : ↑Y.affineOpens) {Z : AlgebraicGeometry.Scheme}\\n  (h : AlgebraicGeometry.Scheme.Hom.normalization f ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp ((TopologicalSpa\", \"doc\": \"Given a quasi-compact and quasi-separated morphism $ f: X \\to Y $ of schemes, there exists a morphism from $ X $ to the normalization of $ f $, constructed by gluing local integral closure maps over an\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \"(H : f = f₁ ≫ f₂) : f.normalization ⟶ T\", \"doc\": \"A morphism from the normalization of a scheme morphism $ f: X \\to Y $ to another scheme $ T $, constructed as the colimit in the category of schemes of a diagram involving the affine Zariski site of $ \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \": X ⟶ f.normalization\", \"doc\": \"The morphism from a scheme $ X $ to the normalization of a scheme morphism $ f: X \\to Y $, constructed by gluing local normalization maps defined via the integral closure of structure sheaves over an a\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.preservesLocalization_normalizationDiagramMap\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \": PreservesLocalization _ ((toOpensFunctor Y).op.whiskerLeft f.normalizationDiagramMap)\", \"doc\": \"For a scheme morphism $ f $, the normalization diagram functor $ F $ equipped with a natural transformation $ \\\\alpha: \\\\mathcal{O}_Y \\\\Rightarrow F $ satisfies the localization condition: for every affi\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \": IsIntegralHom f.fromNormalization\", \"doc\": \"The canonical morphism from the normalization of a scheme morphism $ f: X \\to Y $ to the target scheme $ Y $ is an integral morphism of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \"[IsIntegralHom f] : IsIso f.toNormalization\", \"doc\": \"For any integral morphism $ f: X \\to Y $ of schemes, the normalization morphism from $ X $ to the normalization of $ f $ is an isomorphism.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \": Y.presheaf ⟶ f.normalizationDiagram\", \"doc\": \"A morphism from the presheaf of a scheme $ Y $ to the normalization diagram associated with a morphism $ f $, which encodes the integral closure data of $ Y $ in the context of the morphism $ f $.\"}\n",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-potential-dualizing-finite-pullback",
@@ -61,7 +220,7 @@
  "blueprint": {
   "from": {
    "node": "lem-per-artin-gabber-affine-curve",
-   "place": "Proof, Step 3: dimension-normalized Verdier duality in the lower perverse bound; finite prime-power normalization underlying the regular generic duality model. Regular ordinary pullback with fibrewise pinnings.",
+   "place": "Proof, Step 1: dimension-normalized Verdier duality in the lower perverse bound, via lem-per-qbar-arbitrary-field-duality and the regular generic duality model; the finite prime-power potential-dualizing pullback underlying that model. Regular ordinary pullback with fibrewise pinnings.",
    "via": [
     "lem-per-potential-dualizing-finite-pullback",
     "lem-per-finite-regular-reduction-dualizing",
@@ -71,5 +230,44 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-per-regular-pullback-pinnings",
+  "worker": "stage1",
+  "summary": "Checked ILO XIV 2.5.4 and XVII 4.3. Constructed pointwise pinnings by supported exchange and existing prime-power regular-unit pinnings; proved all-specialization compatibility using generic-fibre rectangles, lifted base chains and transitive higher residues; wrote the Gysin product argument for composition. Five statement-only helpers, all searched in Mathlib. No Lean attachment; corrected the geometric-regularity test from arbitrary to finite residue-field extensions (STATEMENT-DISPUTED), preserving the standard non-finite-type theorem. Maintainer FIX (Q30 reader, 2026-10-18): the closed-immersion Gysin classes and their composition are now taken from the existing lem-per-absolute-gysin-purity; lem-per-prime-power-closed-immersion-gysin keeps only regular base change and the regular-unit pinning identification. Re-applied by the Q30 reader on re-delivery c9a244db (2026-10-18), after the rename: the earlier fix had been lost with the collision return.",
+  "blueprint": "Proof, Step 1: dimension-normalized Verdier duality in the lower perverse bound, via lem-per-qbar-arbitrary-field-duality and the regular generic duality model; the finite prime-power potential-dualizing pullback underlying that model. Steps 1–8 supply the regular-pullback input to the finite prime-power regular generic duality model. The original inherited reference to Step 3 was stale: the current ancestor places dimension-normalized duality in Step 1.",
+  "tool_uses": [
+   {
+    "node": "lem-exc-finite-type-localization-excellent",
+    "why": "Generic excellence stability under quotient and localization is needed to apply regular-unit purity on local fibres; the perverse unit supplies no commutative-algebra replacement."
+   },
+   {
+    "node": "lem-weil-pbc-regular-composition",
+    "why": "Generic ring-map permanence, with Noetherian fibre rings checked on the scheme charts, ensures that the direct composite has the required regularity."
+   },
+   {
+    "node": "lem-weil-pbc-regular-base-change",
+    "why": "Generic regularity under a finite-type quotient is used only after localization to form Z_x over Y_x; no arbitrary-base-change conclusion is taken from this node."
+   },
+   {
+    "node": "lem-weil-pbc-regular-map-ascent",
+    "why": "Generic ascent of regularity from a regular base and regular fibres makes the composite fibre Z_x regular; the perverse unit contains no substitute."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-exc-finite-type-localization-excellent",
+  "lem-weil-pbc-regular-composition",
+  "lem-weil-pbc-regular-base-change",
+  "lem-weil-pbc-regular-map-ascent"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q30-c9a244dbb",
+  "group": "Q30",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q30-c9a244dbb (reviewer sub-agent of L); spot-checked: I read the item, the five new nodes and every cited statement in full. I diffed every file against the earlier delivery 65d2e22a, which I reviewed against ILO XVII 3.1.2, 4.1.1–4.1.3, 4.2.3, 4.3.1.1–4.3.3 and XVI 2.2.3.1/2.3.1/2.3.2. The only change is a rename of the Gysin helper, lem-per-prime-power-regular-gysin → lem-per-prime-power-closed-immersion-gysin, because Q19 landed a node with the old id. None of the twelve cited existing statements changed between the two bases. The split follows ILO 4.3. Fibrewise pinnings come from Cor 4.2.3 and regular-unit; potentiality comes from the 4.3.2.6 rectangle, the 4.3.2.5 lifted chains and 4.3.2.1; composition comes from 4.3.1.2 and Rem 4.3.1.3. The change from every field extension to every finite extension is correct (EGA IV 6.8.1; F⊗_Q F for F=Q(t_1,t_2,...) is not Noetherian) and does not weaken the target. Small cases checked: identity, A^1 over a DVR, a closed point of a regular scheme over a field. The four tool uses are accepted, with the extra hypotheses of 07QI, 07C1 and the excellence lemma checked at Steps 2 and 8. No SGA source is cited. My 65d2e22a FIX was lost with the collision return, and the renamed helper again restates the closed-immersion Z/ℓ^n class, localization, composition and identity normalization of the same-unit lem-per-absolute-gysin-purity (C5/§3.4). I re-applied that fix: the helper now takes Cl from absolute-gysin-purity and keeps only regular base change (XVI 2.2.3.1) and the identification of the regular-unit pinning with Cl^{-1}. The item statement and Steps 1, 3, 6 and 7, plus codimension-one-residues, are repointed. Step 1 again cites higher-residue transitivity for the chain length a. I did not cite Q19's node: it brings in lem-trf-ambient-diagonal-purity-base-change and a separately specified class. Batch-5: every listed citation (def-per-potential-dualizing-complex, lem-per-potential-dualizing-regular-unit) reaches only lem-trf-bounded-below-derived-adjunction, lem-trf-ind-etale-strict-local-invariance and lem-trf-integral-component-henselian-permanence. These are generic homological and commutative algebra, outside both assumptions and not steps of their proofs, so all flags are accepted; absolute-gysin-purity adds no closure. Fixes: 3 files in fixes/dag/nodes/sec-deligne-laumon-a1/. All ids exist, uses = proof_deps, there are no cycles, and every step is under 2000 characters. Maintainer note: Q19's lem-per-prime-power-regular-gysin and Q07's lem-per-absolute-gysin-purity overlap on closed immersions, and the equality of their classes should be stated once.; 3 file(s) fixed by the reviewer"
  }
 }
