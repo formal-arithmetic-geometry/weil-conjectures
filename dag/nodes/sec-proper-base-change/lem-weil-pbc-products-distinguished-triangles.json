@@ -1,0 +1,118 @@
+{
+ "id": "lem-weil-pbc-products-distinguished-triangles",
+ "kind": "statement",
+ "title": "Products of distinguished triangles are distinguished",
+ "statement": "Let $\\mathcal C$ be a pre-triangulated category [def-weil-triangulated-category]. Let $J$ be a set and let $T_j=(X_j\\to Y_j\\to Z_j\\to X_j[1])$ be distinguished triangles for $j\\in J$. Assume the products of the $X_j$, $Y_j$, $Z_j$, and $X_j[1]$ exist [def-weil-category-product]. Then the componentwise product triangle $\\prod X_j\\to\\prod Y_j\\to\\prod Z_j\\to(\\prod X_j)[1]$ is distinguished, with the last arrow using the canonical product/shift isomorphism.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 0CRG, lemma-products-sums-shifts-triangles, parts (1)(a) and (2)(a)"
+ },
+ "stmt_deps": [
+  "def-weil-triangulated-category",
+  "def-weil-category-product"
+ ],
+ "proof": [
+  {
+   "text": "Apply Mathlib CategoryTheory.Pretriangulated.productTriangle_distinguished to the family T. This is exactly Stacks 0CRG(2)(a): complete the product of first arrows to a distinguished triangle, extend each pair of projections by TR3, and assemble the third components by the product universal property. Hom exactness and exact products of abelian groups show that the resulting third component is an isomorphism, so transport the distinguished triangle along it. The shift autoequivalence preserves the product, giving the required last arrow.",
+   "uses": [
+    "def-weil-triangulated-category",
+    "def-weil-category-product",
+    "lem-weil-pbc-hom-into-triangle-exact"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-triangulated-category",
+  "def-weil-category-product",
+  "lem-weil-pbc-hom-into-triangle-exact"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 0CRG, lemma-products-sums-shifts-triangles, parts (1)(a) and (2)(a)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A product of distinguished triangles in a pretriangulated category is distinguished",
+   "results": "CategoryTheory.Pretriangulated.productTriangle_distinguished (first result); signature checked against source.",
+   "date": "2026-10-18",
+   "verdict": "exact Mathlib match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Pretriangulated.productTriangle_distinguished",
+   "results": "One exact result, in Mathlib.CategoryTheory.Triangulated.Pretriangulated.",
+   "date": "2026-10-18",
+   "verdict": "exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "productTriangle_distinguished; lemma-products-sums-shifts-triangles; DAG titles product/triangle; blueprint_refs search products triangles",
+   "results": "Mathlib declaration at Pretriangulated.lean:625; Stacks proof in derived.tex:762ff. Existing lem-weil-finite-sums-distinguished-triangles only states the finite specialization; no node states arbitrary products. No blueprint node matched products triangles.",
+   "date": "2026-10-18",
+   "verdict": "exact Mathlib match, no existing DAG node for arbitrary products"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Pretriangulated.productTriangle_distinguished",
+  "file": "Mathlib/CategoryTheory/Triangulated/Pretriangulated.lean",
+  "how": "Exact statement for any index type J, with the four component product instances; no finiteness or TR4 required."
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.DerivedCompleteProductsTriangles",
+  "date": "2026-10-18",
+  "group": "B2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Proof, first sentence: choose an integral lattice; derived completeness of the reconstructed integral lattice as the limit of its finite torsion reductions; closure under products and triangles used in reconstructing the lattice",
+   "via": [
+    "lem-weil-pbc-module-derived-complete-products-triangles",
+    "lem-weil-pbc-nilpotent-torsion-derived-limit-complete",
+    "lem-weil-pbc-rlim-perfect-complete",
+    "lem-weil-pbc-residue-lisse-perfect-lift",
+    "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "lem-weil-pbc-condensed-e-realization",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": true,
+  "module": "Mathlib.CategoryTheory.Triangulated.Pretriangulated",
+  "declaration": "CategoryTheory.Pretriangulated.productTriangle_distinguished",
+  "statement": "lemma productTriangle_distinguished {J : Type*} (T : J → Triangle C) (hT : ∀ j, T j ∈ distTriang C) [HasProduct (fun j => (T j).obj₁)] [HasProduct (fun j => (T j).obj₂)] [HasProduct (fun j => (T j).obj₃)] [HasProduct (fun j => (T j).obj₁⟦(1 : ℤ)⟧)] : productTriangle T ∈ distTriang C",
+  "branch": "sheaf-dag",
+  "by": "B2",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261018T062658-L-630687",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261018T062658-L-630687",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

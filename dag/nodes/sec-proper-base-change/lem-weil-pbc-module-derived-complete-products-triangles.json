@@ -31,65 +31,54 @@
  ],
  "proof": [
   {
-   "text": "Products of $A$-modules are exact: a product of injections is injective coordinatewise; a tuple in the kernel of a product map has a preimage coordinatewise in the corresponding images; and a tuple in a product of quotients has a tuple of lifts (choice). Thus the abelian category of $A$-modules has exact countable products. Clause (2) of [lem-weil-derived-limit-existence] supplies countable products in $D(A)$, for arbitrary unbounded representatives. Clause (1) then supplies the multiplication-tower derived limits and says that any two choices are isomorphic. In particular the universal quantifier over such limits in [def-weil-point-derived-complete-module-complex] is equivalent to vanishing of one choice.",
+   "text": "Products of modules are exact even with independent ring and module universes: the forgetful functor to abelian groups preserves kernels and epimorphisms, hence homology and finite colimits, and reflects finite colimits. Pull exact countable products back along it. Apply [lem-weil-derived-countable-products-existence] to obtain countable products in D(A). This is the private Lean lemma module_countableAB4Star followed by derivedCategory_hasCountableProducts.",
    "uses": [
-    "lem-weil-derived-limit-existence",
-    "def-weil-point-derived-complete-module-complex"
+    "lem-weil-derived-countable-products-existence"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 091S, definition-derived-complete and following paragraph, using Tag 091P, lemma-hom-from-Af"
-   }
+   "elementary": true
   },
   {
-   "text": "For each $f\\in I$, apply [lem-weil-pbc-module-localization-tower-vanishing]. By [def-weil-point-derived-complete-module-complex], an object $L$ is derived $I$-complete exactly when every morphism $A_f[0][q]\\to L$ is zero for every $f\\in I$ and $q\\in\\mathbf Z$. The sign of the shift causes no restriction because $q$ ranges over all integers.",
+   "text": "Fix f in I and write t_K = 1-s_f on the countable power of K [def-weil-tower-transition-endomorphism]. By TR1 and inverse rotation [def-weil-triangulated-category], t_K occurs as the second morphism of a distinguished Roos triangle L -> product K -> product K -> L[1]. Its first object is zero if and only if the second morphism is invertible (Mathlib Triangle.isZero1_iff_isIso2, from Hom exactness [lem-weil-pbc-hom-into-triangle-exact]). Thus [def-weil-point-derived-complete-module-complex] is equivalent to invertibility of every t_K. In the forward direction use one Roos triangle; in the reverse direction apply the same zero/isomorphism equivalence to each triangle quantified by the definition. This is complete_iff_isIso and uses no arbitrary witness to define data.",
    "uses": [
-    "lem-weil-pbc-module-localization-tower-vanishing",
-    "def-weil-point-derived-complete-module-complex"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 091S, definition-derived-complete and following paragraph, using Tag 091P, lemma-hom-from-Af"
-   }
-  },
-  {
-   "text": "Let $P=\\prod_{n\\geq1}K_n$, existing by step 1. Fix $f\\in I$, $q\\in\\mathbf Z$ and $a:A_f[0][q]\\to P$. Each composite $\\mathrm{pr}_n\\circ a$ is zero by completeness of $K_n$ and step 2. By the uniqueness clause of [def-weil-category-product], $a$ equals the zero morphism, which has the same composites with all projections. Step 2 now gives completeness of $P$. This argument uses no interchange of tensor products with infinite products.",
-   "uses": [
-    "def-weil-category-product"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 091S, definition-derived-complete and following paragraph, using Tag 091P, lemma-hom-from-Af"
-   }
-  },
-  {
-   "text": "First, completeness is stable under every shift: the shift automorphism in [def-weil-triangulated-category] identifies maps $A_f[0][q]\\to L[r]$ with maps $A_f[0]\\lbrack q-r\\rbrack\\to L$, by applying $[-r]$. If $L$ is complete these maps vanish for all $f,q$, so step 2 makes $L[r]$ complete. For a distinguished triangle with complete first and third objects $X,Z$, fix $W=A_f[0][q]$ and $a:W\\to Y$. Since $Z$ is complete, $v\\circ a=0$. Clause (ii) of [lem-weil-pbc-hom-into-triangle-exact] gives $b:W\\to X$ with $a=u\\circ b$. Completeness of $X$ gives $b=0$, hence $a=0$. Step 2 proves completeness of $Y$. If instead $X,Y$ are complete, rotate once to $Y\\to Z\\to X[1]\\to Y[1]$; its endpoints $Y,X[1]$ are complete, so the same middle-object argument proves completeness of $Z$. If $Y,Z$ are complete, rotate backwards to $Z[-1]\\to X\\to Y\\to Z$ (up to the conventional signs); its endpoints $Z[-1],Y$ are complete, so the same argument proves completeness of $X$. These rotations are allowed by TR2 in [def-weil-triangulated-category].",
-   "uses": [
+    "def-weil-tower-transition-endomorphism",
     "def-weil-triangulated-category",
-    "lem-weil-pbc-hom-into-triangle-exact"
+    "lem-weil-pbc-hom-into-triangle-exact",
+    "def-weil-point-derived-complete-module-complex"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 091S, definition-derived-complete and following paragraph, using Tag 091P, lemma-hom-from-Af"
-   }
+   "elementary": true
+  },
+  {
+   "text": "For K = product_i K_i let gamma_i : product_n K -> product_n K_i be the componentwise projection [def-weil-category-product]. Naturality [def-weil-tower-transition-endomorphism] gives t_K;gamma_i = gamma_i;t_Ki. Each t_Ki is invertible by the preceding step. Define q by its (n,i) component gamma_i;t_Ki^{-1};pr_n. The two product universal properties give q;gamma_i = gamma_i;t_Ki^{-1}; the family gamma_i is jointly monic by applying product extensionality twice. Consequently t_K;q and q;t_K both have composites gamma_i, and hence both are identities. Thus t_K is invertible, proving completeness of the product. This is the explicit private proof tower_isIso_product.",
+   "uses": [
+    "def-weil-category-product",
+    "def-weil-tower-transition-endomorphism"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For a distinguished triangle T, its countable power P is distinguished by [lem-weil-pbc-products-distinguished-triangles]. Since shifts are A-linear, f times the identity is a triangle endomorphism of T. Let tau be the endomorphism of P with nth component pr_(n+1);(f times identity_T). Then phi = identity_P - tau has components exactly t_T.obj1, t_T.obj2 and t_T.obj3 by their definitions. Apply [lem-sf-triangle-morphism-iso] to phi : P -> P for each pair of invertible components. The zero/isomorphism criterion in step 2 gives all three completeness implications. No localization module, tensor-product comparison, or auxiliary shift-stability theorem is needed.",
+   "uses": [
+    "lem-weil-pbc-products-distinguished-triangles",
+    "lem-sf-triangle-morphism-iso"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-derived-limit-existence",
-  "def-weil-point-derived-complete-module-complex",
-  "lem-weil-pbc-module-localization-tower-vanishing",
-  "def-weil-category-product",
+  "lem-weil-derived-countable-products-existence",
+  "def-weil-tower-transition-endomorphism",
   "def-weil-triangulated-category",
-  "lem-weil-pbc-hom-into-triangle-exact"
+  "lem-weil-pbc-hom-into-triangle-exact",
+  "def-weil-point-derived-complete-module-complex",
+  "def-weil-category-product",
+  "lem-weil-pbc-products-distinguished-triangles",
+  "lem-sf-triangle-morphism-iso"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Tag 091S, definition-derived-complete and following paragraph, using Tag 091P, lemma-hom-from-Af"
+  "place": "Tag 091P, lemma-hom-from-Af, condition (7), and Tag 091S, definition-derived-complete and following paragraph",
+  "note": "B2: direct Roos-endomorphism proof. Product inverse constructed coordinatewise; triangle case uses products of triangles (Stacks 0CRG) and two-out-of-three for triangle morphisms (014A)."
  },
  "mathlib_searches": [
   {
@@ -196,5 +185,15 @@
   "by": "ND",
   "date": "2026-10-15",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261018T062658-L-630687",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
