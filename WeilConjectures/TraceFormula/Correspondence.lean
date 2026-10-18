@@ -71,6 +71,22 @@ The trace class and the theorems about it are in `WeilConjectures.TraceFormula.T
 - `ProEtale.CondensedRing.Correspondence.ofEnd`: the diagonal correspondence of an endomorphism.
 - `ProEtale.CondensedRing.WeilBoundedConstructible.graph`: the Frobenius graph correspondence.
 - `ProEtale.CondensedRing.Correspondence.FixedLocus`: the fixed locus, an equalizer of `c₁, c₂`.
+- `ProEtale.CondensedRing.Correspondence.ofGraph`: the graph correspondence `(𝟙 X, h)` of a map
+  `v : Lh^* K ⟶ K`.
+- `ProEtale.CondensedRing.Correspondence.frobeniusGraph`: the graph map in degree `m` of a
+  Frobenius coefficient morphism `ψ : LΦ^* K ⟶ K`.
+
+## Main statements
+
+- `ProEtale.CondensedRing.Correspondence.globalOperator_naturality`,
+  `ProEtale.CondensedRing.Correspondence.globalOperator_add`: naturality of `T_c(u)` in `(u, K)`
+  and linearity in `u` (blueprint `lem-trf-global-operator-naturality`).
+- `ProEtale.CondensedRing.Correspondence.nonempty_hasRightDual_globalOperator`: the complexes of
+  the definition of `T_c(u)` are perfect (blueprint `lem-trf-global-operator-perfect`).
+- `ProEtale.CondensedRing.Correspondence.globalOperator_ofGraph` and its naturality and
+  composition laws (blueprint `prop-trf-graph-operator`).
+- `ProEtale.CondensedRing.WeilBoundedConstructible.globalOperator_eq_correspondenceGlobalOperator`
+  (blueprint `prop-trf-graph-frobenius-operator`).
 
 -/
 
