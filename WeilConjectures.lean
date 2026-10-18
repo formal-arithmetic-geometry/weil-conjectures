@@ -4332,6 +4332,8 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.MayerVietoris
 public import WeilConjectures.SixFunctors.ProEtale.Adic.Module
 public import WeilConjectures.SixFunctors.ProEtale.Adic.OpenImmersion
 public import WeilConjectures.SixFunctors.ProEtale.Adic.PadicAlgClSheafComparison
+public import WeilConjectures.SixFunctors.ProEtale.Adic.PadicAlgClSheafIso
+public import WeilConjectures.SixFunctors.ProEtale.Adic.ProEtOpenCover
 public import WeilConjectures.SixFunctors.ProEtale.Adic.Ring
 public import WeilConjectures.SixFunctors.ProEtale.Adic.StalkEvaluation
 public import WeilConjectures.SixFunctors.ProEtale.Adic.StalkIhomDual
