@@ -24,9 +24,113 @@
   "lem-asd-etale-finite-twist-pullback",
   "lem-weil-pbc-symmetric-algebra-sheaf-construction"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-per-modified-blowup-generalized-class] with $X=T$, $Y=W$, $I=\\mathcal J$, and $n=1$, identifying $\\mathbf Z/\\ell\\mathbf Z$ with $\\mathbf F_\\ell$. Its hypotheses are exactly the given Noetherian closed immersion, invertibility of $\\ell$, and rank-$r>0$ locally free conormal presentation. Its degree-$a$ fibre product and coefficientwise multiplication are the algebra displayed in the item. It supplies projectivity of $b$, its identification with the identity over $V$, $b^{-1}W=P(E)$, and invertibility and the canonical trivialization over $V$ of $\\mathcal O_{B_E}(1)$. No regularity of the immersion is required.",
+   "uses": [
+    "lem-per-modified-blowup-generalized-class"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVI 2.2.1.1-2.2.1.4"
+   }
+  },
+  {
+   "text": "For the ordinary-blowup clause, suppose $E=C$ and $\\psi:\\operatorname{Sym}(C)\\to\\bigoplus_a\\mathcal J^a/\\mathcal J^{a+1}$ is an isomorphism. The conormal map and its products are those of [lem-pur-conormal-graded-algebra]. Projection from the fibre product in degree $a$ to $\\mathcal J^a$ has inverse $u\\mapsto(u,\\psi_a^{-1}(u\\bmod\\mathcal J^{a+1}))$. These maps respect multiplication since $\\psi$ does, and commute with restrictions. Thus the displayed algebra is the sheaf Rees algebra of [def-nagata-sheaf-rees-algebra]. By [lemma-nagata-relative-proj-exists], its Proj restricts on every affine open to Proj of the corresponding Rees algebra, the affine blowup of [def-nagata-affine-blowup]. The global datum of [def-nagata-global-blowup-glue-data] glues these same affine schemes by the same restriction maps, and [def-nagata-global-blowup] names its glued scheme. Consequently the two gluings agree canonically. This argument uses the stated isomorphism $\\psi$, rather than imposing a regular-sequence hypothesis.",
+   "uses": [
+    "lem-pur-conormal-graded-algebra",
+    "def-nagata-sheaf-rees-algebra",
+    "lemma-nagata-relative-proj-exists",
+    "def-nagata-affine-blowup",
+    "def-nagata-global-blowup-glue-data",
+    "def-nagata-global-blowup"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVI Remark 2.2.1.2, with its graded-algebra argument under the stated symmetric-conormal isomorphism; Stacks 0630 (divisors-definition-conormal-sheaf), 0631 (divisors-equation-conormal-in-degree-n)"
+   }
+  },
+  {
+   "text": "Use [lem-per-noetherian-etale-chern-identities] at $n=1$ for the ordinary small-etale Chern classes of $E$. It gives $c_0(E)=1$, the projective-bundle relation with $\\xi=c_1(\\mathcal O_P(1))$, and the decomposition whose degree-zero summand is pullback from $W$. By [lem-per-noetherian-supported-product-calculus], the relative Kummer class of $(\\mathcal O_{B_E}(1),1_V)$ defines $G_E$, restriction of $G_E(z)$ to $P$ is $\\xi z$, and dualizing the line with its trivialization negates its supported first Chern class. That statement also identifies the supported action with supported-Hom composition and makes it associative and functorial under pullbacks of pairs. These apply to precisely the pseudo-divisor and products in the item.",
+   "uses": [
+    "lem-per-noetherian-etale-chern-identities",
+    "lem-per-noetherian-supported-product-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVI Theorems 1.2-1.3, 2.1 and Lemma 2.2.2.4"
+   }
+  },
+  {
+   "text": "The all-bidegree support exact sequence of [lem-per-modified-blowup-generalized-class] at $n=1$ gives injectivity of $b^*$ for every integers $p,q$. Set $z=G_E(Q_E(\\xi))$. The restriction formula of [lem-per-noetherian-supported-product-calculus] and the projective-bundle relation of [lem-per-noetherian-etale-chern-identities] give\n$$z|_P=\\xi Q_E(\\xi)=-\\sum_{j=0}^{r-1}(-1)^jp^*c_j(E)\\xi^{r-j}=(-1)^rp^*c_r(E).$$\nHere $p:P\\to W$ is the projection; the last equality moves the $j=r$ term in the relation to the other side. This lies in the image of $p^*$. Its class in $H^{2r}(P,\\Lambda(r))/p^*H^{2r}(W,\\Lambda(r))$ is therefore zero. Exactness gives a preimage $A_{a,E}$ under $b^*$, and injectivity makes it unique. The identical defining equation identifies it with $\\gamma_{a,E}$ in the generalized theorem.",
+   "uses": [
+    "lem-per-modified-blowup-generalized-class",
+    "lem-per-noetherian-supported-product-calculus",
+    "lem-per-noetherian-etale-chern-identities"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVI Corollary 2.2.2.3 (including its following all-bidegree remark), Lemmas 2.2.2.4 and 2.2.2.6, Definitions 2.2.2.5 and 2.2.2.7"
+   }
+  },
+  {
+   "text": "Restrict the defining equation $b^*A_{a,E}=z$ to $P$. Since $b|_P=a\\circ p$, this gives $p^*(A_{a,E}|_W)=z|_P=(-1)^rp^*c_r(E)$ by Step 4. The projective-bundle decomposition of [lem-per-noetherian-etale-chern-identities] contains $p^*$ as its direct-summand inclusion for $a=0$, so $p^*$ on cohomology is injective. Cancelling it proves $A_{a,E}|_W=(-1)^rc_r(E)$.",
+   "uses": [
+    "lem-per-noetherian-etale-chern-identities"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVI Theorem 1.2, Lemma 2.2.2.6 and Definition 2.2.2.7"
+   }
+  },
+  {
+   "text": "For any $v:T'\\to T$ with $T'$ Noetherian, the arbitrary-base-change clause of [lem-per-modified-blowup-generalized-class] supplies the canonical presentation $v_W^*E\\twoheadrightarrow C_{W'/T'}$ and gives $v^*\\gamma_{a,E}=\\gamma_{a',v_W^*E}$. Step 4 identifies these two $\\gamma$ classes with the respective $A$ classes, proving the required equality. Pullback of the Tate lines and its tensor/evaluation compatibility are the canonical isomorphisms in [lem-asd-etale-finite-twist-pullback]. This applies to arbitrary $v$, without a flatness hypothesis or an assertion that the modified blowup is its scheme-theoretic base change.",
+   "uses": [
+    "lem-per-modified-blowup-generalized-class",
+    "lem-asd-etale-finite-twist-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVI Proposition 2.2.3.1 (using Proposition 2.2.1.5 in the source)"
+   }
+  },
+  {
+   "text": "Let $u:E'\\xrightarrow{\\sim}E$ be an isomorphism respecting the maps to $C$. Apply the vector-bundle-surjection formula in [lem-per-modified-blowup-generalized-class] to $u$. Its kernel is the zero bundle and $r'=r$, so it reads $\\gamma_{a,E'}=(-1)^0c_0(0)\\cdot\\gamma_{a,E}$. The rank-zero convention in [lem-per-noetherian-etale-chern-identities] gives $c_0(0)=1$, and the supported composition product of [lem-per-noetherian-supported-product-calculus] has the identity class as unit. Hence $A_{a,E'}=A_{a,E}$ by Step 4. This checks isomorphic presentations without choosing local flags. The associative, pullback-functorial supported products asserted in the last sentence are already the supported-Hom products identified in Step 3.",
+   "uses": [
+    "lem-per-modified-blowup-generalized-class",
+    "lem-per-noetherian-etale-chern-identities",
+    "lem-per-noetherian-supported-product-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVI Proposition 2.2.3.2, specialized to an isomorphism, and 2.1"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-nagata-affine-blowup",
+  "def-nagata-global-blowup",
+  "def-nagata-global-blowup-glue-data",
+  "def-nagata-sheaf-rees-algebra",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-per-modified-blowup-generalized-class",
+  "lem-per-noetherian-etale-chern-identities",
+  "lem-per-noetherian-supported-product-calculus",
+  "lem-pur-conormal-graded-algebra",
+  "lemma-nagata-relative-proj-exists"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose XVI 1.2-1.3, 2.1-2.2.3.2; algebraic identification and rank-zero specialization expanded explicitly"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -69,10 +173,94 @@
    "results": "[loogle] OK 0 hit(s)",
    "date": "2026-10-18",
    "verdict": "no match: inspected hits concern scheme maps, algebraic cotangent modules, Proj charts or unrelated names; no supported etale class or Chern identity"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "modified blowup generalized supported etale cohomology class conormal presentation",
+   "results": "Actual msearch receipt: 8 hits; StandardEtalePresentation, StandardEtalePresentation.P, StandardEtalePresentation.toPresentation_σ', StandardEtalePresentation.toPresentation, StandardEtalePresentation.hasMap, StandardEtalePresentation.toPresentation_val, Algebra.etaleLocus_eq_compl_support, StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot",
+   "date": "2026-10-18",
+   "verdict": "no match: the hits do not state the modified-blowup supported etale class or its Chern formula"
+  },
+  {
+   "tool": "loogle",
+   "query": "Scheme.Proj, AlgebraicGeometry.Scheme, Chern",
+   "results": "Actual msearch receipt: 0 hits; ; loogle: unknown identifier 'Scheme.Proj'",
+   "date": "2026-10-18",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "Proj.*Sym|blowup|Chern|Gysin",
+   "results": "Actual msearch receipt: 0 hits; ; subtree Mathlib/AlgebraicGeometry",
+   "date": "2026-10-18",
+   "verdict": "no match: the hits do not state the modified-blowup supported etale class or its Chern formula"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Generalized supported etale cohomology class for a closed immersion with a vector bundle surjecting onto the conormal, constructed by a modified blowup and Chern polynomial",
+   "results": "Actual msearch receipt: 8 hits; AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.IsEtale, Algebra.etaleLocus_eq_compl_support, AlgebraicGeometry.IsEtale.instFormallyUnramified, Algebra.basicOpen_subset_etaleLocus_iff, Algebra.isOpen_etaleLocus, Algebra.etaleLocus, AlgebraicGeometry.Scheme.instCategoryEtale",
+   "date": "2026-10-18",
+   "verdict": "no match: the hits do not state the modified-blowup supported etale class or its Chern formula"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Proj, AlgebraicGeometry.Scheme, Chern",
+   "results": "Actual msearch receipt: 0 hits; ; loogle: unknown identifier 'Chern'",
+   "date": "2026-10-18",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "modified.*blowup|generalized.*class|Chern|Gysin|conormal",
+   "results": "Actual msearch receipt: 0 hits; ; subtree Mathlib/AlgebraicGeometry",
+   "date": "2026-10-18",
+   "verdict": "no match: the hits do not state the modified-blowup supported etale class or its Chern formula"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Modified blowup gives injective pullback on supported etale cohomology and a canonical generalized class natural under arbitrary base change",
+   "results": "Actual msearch receipt: 8 hits; AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, Algebra.Etale.baseChange, RingHom.Etale.isStableUnderBaseChange, CategoryTheory.MorphismProperty.instIsStableUnderBaseChangePullbacks, AlgebraicGeometry.Scheme.instHasPullbacksEtale, AlgebraicGeometry.UniversallyInjective.isStableUnderBaseChange, AlgebraicGeometry.Flat.isStableUnderBaseChange, AlgebraicGeometry.SurjectiveOnStalks.stableUnderBaseChange",
+   "date": "2026-10-18",
+   "verdict": "no match: the hits do not state the modified-blowup supported etale class or its Chern formula"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale cohomology class of a closed immersion from the Chern polynomial on the exceptional projective bundle",
+   "results": "Actual msearch receipt: 8 hits; AlgebraicGeometry.Proj.pullbackAwayιIso, AlgebraicGeometry.instIsClosedImmersionLiftCoborder, AlgebraicGeometry.Scheme.Hom.liftCoborder, AlgebraicGeometry.Proj.instIsOpenImmersionAwayι, AlgebraicGeometry.Proj.fromOfGlobalSections, AlgebraicGeometry.IsClosedImmersion.lift, AlgebraicGeometry.Proj.fromOfGlobalSections_morphismRestrict, AlgebraicGeometry.liftCoborder_app",
+   "date": "2026-10-18",
+   "verdict": "no match: the hits do not state the modified-blowup supported etale class or its Chern formula"
+  },
+  {
+   "tool": "loogle",
+   "query": "Proj, ProjectiveSpectrum, first Chern",
+   "results": "Actual msearch receipt: 0 hits; ; loogle: unknown identifier 'Proj'",
+   "date": "2026-10-18",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "Chern|firstChern|projective.*bundle|Proj",
+   "results": "Actual msearch receipt: 0 hits; ; subtree Mathlib/AlgebraicGeometry",
+   "date": "2026-10-18",
+   "verdict": "no match: the hits do not state the modified-blowup supported etale class or its Chern formula"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Supported Gysin class for a conormal vector bundle presentation is natural under pullback",
+   "results": "Actual msearch receipt: 8 hits; Bundle.Pullback, VectorBundle.pullback, VectorField.mpullback, VectorField.mpullback_smul_apply, VectorField.mpullback_add, ContMDiffVectorBundle.pullback, VectorField.pullback, VectorField.mpullback_neg",
+   "date": "2026-10-18",
+   "verdict": "no match: the hits do not state the modified-blowup supported etale class or its Chern formula"
+  },
+  {
+   "tool": "grep",
+   "query": "Chern|Gysin|conormal|modified.*[Bb]low|generalized.*[Cc]lass",
+   "results": "Actual msearch receipt: 0 hits; ; subtree AlgebraicGeometry",
+   "date": "2026-10-18",
+   "verdict": "no match: the hits do not state the modified-blowup supported etale class or its Chern formula"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-immersion-class-calculus",
@@ -95,5 +283,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-generalized-blowup-class",
+  "worker": "stage1",
+  "summary": "Seven-step split using the existing prime-power modified-blowup theorem at n=1 and the existing Chern/product calculus; explicitly proves the ordinary-Rees case, the quotient obstruction vanishing, uniqueness, restriction, arbitrary base change, and isomorphic-presentation invariance. Statement unchanged; no new nodes.",
+  "blueprint": "lem-per-artin-gabber-affine-curve proof Step 3, dimension-normalized duality, via the existing regular-immersion and Gysin-normalization ancestry; the Expose XVI 2.2 construction supplies the supported class used in that normalization.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-conormal-graded-algebra",
+    "why": "Generic conormal-graded-algebra identification used to recognize the Rees algebra; the current unit has no such algebraic interface."
+   },
+   {
+    "node": "lemma-nagata-relative-proj-exists",
+    "why": "Generic existence and affine-chart compatibility of relative Proj used to compare the modified construction with the glued ordinary blowup."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-conormal-graded-algebra",
+  "lemma-nagata-relative-proj-exists"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-NY-b735359cd",
+  "group": "NY",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NY-b735359cd (reviewer sub-agent of L); spot-checked: I read all 7 steps and every cited statement, plus ILO XVI 2.2.1.1-2.2.3.2 (pp. 229-233) and the Stacks conormal tags. The split adds no new nodes and leaves the statement unchanged. Step 1 applies lem-per-modified-blowup-generalized-class at n=1, and its hypotheses match. Step 2 proves the ordinary-blowup clause directly from psi being an isomorphism (the generalized node only covers regular i): the fibre product projects isomorphically onto J^a, so A is the Rees algebra, and relative Proj and the main-20261015 glue datum both build the scheme from the same affine models. The local-model definition is used but not cited; this is advisory only. Steps 3-5 are correct: xi*Q_E = (-1)^r c_r agrees with ILO Def. 2.2.2.5 and Lemma 2.2.2.6, existence and uniqueness come from the exact sequence for support Y, and p^* is injective as the degree-zero summand of the projective-bundle decomposition. Step 6 uses the node's arbitrary-base-change clause and never claims the blowup itself commutes with base change, consistent with the nil-immersion in ILO 2.2.1.5. Step 7 uses the surjection formula with K=0 and c_0(0)=1. Edge cases checked: r=1, empty W, W=T, l=2, and the effective Cartier sign. The item's dependency closure does not contain the item, so there is no cycle. The item is now essentially the n=1 case of a pre-existing Z/l^n node (the known per-family overlap); maintainer note: its citers could cite the generalized node directly. I accept the requested tool_uses (conormal graded algebra, relative-Proj existence). No SGA source is used. No changes."
  }
 }
