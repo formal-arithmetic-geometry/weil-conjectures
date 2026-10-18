@@ -16,9 +16,223 @@
   "def-weil-pbc-derived-categories",
   "def-pur-derived-internal-hom"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Normalize dimensions before taking truncations. Excellence gives universal catenarity. In the normal integral scheme, a saturated chain from the generic point to $x$ has length $r_x=\\dim\\mathcal O_{X,x}$. Immediate geometric and Zariski specializations agree by [lem-per-immediate-specialization-criterion]. The dimension-function rule along the chain gives $\\delta(x)=-r_x$, so the stated function is exactly the source's $\\varphi(x)=\\max(0,2r_x-2)$. It is nondecreasing under specialization. Apply [lem-per-perversity-localization-calculus] to obtain the t-structure and the perverse generic extension. At the generic point $\\varphi=0$, so $\\Lambda$ belongs to its heart, $T$ belongs to the heart on $X$, and $j^*T=\\Lambda$ by the counit. Since $\\Lambda_X\\in D^{\\leq\\varphi}$, its ordinary adjunction map to $Rj_*\\Lambda$ factors uniquely through $T$ by truncation adjunction; denote this map by $u:\\Lambda_X\\to T$.",
+   "uses": [
+    "def-exc-excellent-ring",
+    "def-per-potential-dualizing-complex",
+    "lem-per-immediate-specialization-criterion",
+    "lem-per-perversity-localization-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "5.3.1, definition of phi and beginning of (a); 5.2.2"
+   }
+  },
+  {
+   "text": "All the costalk assertions can be checked after strict localization at a geometric point $\\bar x$. The local ring is Noetherian by localization and [lem-sc-strict-henselization-noetherian]; it is a normal domain by [lem-weil-pbc-etale-colimit-normal-local-domain], applied to its etale-colimit presentation [lem-weil-pbc-strict-henselization-triples]. It remains excellent: first localize by [lem-exc-finite-type-localization-excellent], then use that ind-etale maps are weakly etale and [lem-exc-weakly-etale-excellent]. Dimension is unchanged by [lem-sc-strict-henselization-dimension]. The perverse generic extension and $u$ restrict to those of this normal strict-local scheme by [lem-per-perversity-localization-calculus]. The geometric costalk is the supported cohomology on this strict localization by [lem-per-prime-power-costalk-reduction]; the residue maps are defined on these same strict-local schemes by [def-per-potential-dualizing-complex]. Thus it suffices to prove (a) by strong induction on the finite local dimension $d$. This is an induction simultaneously for every such strict-local scheme; on its punctured spectrum every point has smaller local dimension, so the induction hypothesis applies there.",
+   "uses": [
+    "lem-weil-pbc-localization-noetherian",
+    "lem-sc-strict-henselization-noetherian",
+    "lem-weil-pbc-etale-colimit-normal-local-domain",
+    "lem-weil-pbc-strict-henselization-triples",
+    "lem-exc-finite-type-localization-excellent",
+    "lem-weil-pbc-ind-etale-stability",
+    "lem-exc-weakly-etale-excellent",
+    "lem-sc-strict-henselization-dimension",
+    "lem-per-perversity-localization-calculus",
+    "def-per-potential-dualizing-complex",
+    "lem-per-prime-power-costalk-reduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "5.3.1(a), first strict-local reduction and induction"
+   }
+  },
+  {
+   "text": "For $d=0$, the strict-local scheme is a separably closed field and $T=\\Lambda$, with identity pinning. For $d=1$, its punctured spectrum is its generic point, and $\\varphi=0$ everywhere. Consequently $T=\\tau^{\\mathrm{ord}}_{\\leq0}Rj_*\\Lambda=j_*\\Lambda=\\Lambda_X$ by [lem-weil-pbc-normal-constant-generic]. The localization triangle and the same constant-sheaf unit show $H_x^q(X,\\Lambda)=0$ for $q<2$: in degrees zero and one the relevant map is the isomorphism $\\Lambda\\to H^0(U,\\Lambda)$, and negative groups vanish. Here derived global sections on $X$ equal the closed stalk, since the germ isomorphism of [lem-weil-pbc-strictly-henselian-sections-stalk] makes global sections exact. The top-class theorem gives vanishing above degree two and the canonical generator in degree two. Its residue compatibility supplies the pinnings. This establishes (a) in both initial dimensions without invoking a prime-coefficient-only trait lemma.",
+   "uses": [
+    "lem-weil-pbc-normal-constant-generic",
+    "lem-exc-closed-support-triangle",
+    "lem-weil-pbc-strictly-henselian-sections-stalk",
+    "lem-per-normal-top-residue-class",
+    "lem-asd-finite-etale-twist-line"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "5.3.1(a), cases d=0 and d=1; 3.1.1"
+   }
+  },
+  {
+   "text": "Let $d\\geq2$, $g:U=X-\\{x\\}\\hookrightarrow X$, and $L=T|_U$. By induction $L$ is potential. Put $N=2d-2$. Transitivity of perverse extension identifies $T=g_*^\\varphi L$. For $y\\in U$, $r_y\\leq d-1$, hence $\\varphi(y)\\leq2d-4\\leq N$; the stalk condition therefore bounds $L$ ordinarily above by $N$. The last clause of [lem-per-perversity-localization-calculus] gives $T=\\tau^{\\mathrm{ord}}_{\\leq N}Rg_*L$, with its truncation map to $Rg_*L$. Apply the closed-support triangle. Exactness of global sections on the strict-local $X$ identifies $R\\Gamma(X,T)$ with its closed stalk. Its map to $R\\Gamma(U,L)$ is an isomorphism on cohomology in degrees $q\\leq N$, and its source is zero for $q>N$. The long exact sequence therefore gives\n$$H_x^q(X,T)=0\\ (q\\leq N+1),\\qquad H_x^q(X,T)\\cong H^{q-1}(U,L)\\ (q\\geq N+2).$$\nAlso $L$ is ordinarily nonnegative with degree zero $\\Lambda_U$ by [lem-per-normal-potential-low-degrees]. Thus $T$ has no negative cohomology and $\\mathcal H^0T=g_*\\Lambda_U=\\Lambda_X$, using [lem-weil-pbc-normal-constant-generic]. These identifications are induced by $u$.",
+   "uses": [
+    "lem-per-perversity-localization-calculus",
+    "lem-exc-closed-support-triangle",
+    "lem-weil-pbc-strictly-henselian-sections-stalk",
+    "lem-per-normal-potential-low-degrees",
+    "lem-weil-pbc-normal-constant-generic"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "5.3.1(a), ordinary truncation and localization sequence, printed p. 288"
+   }
+  },
+  {
+   "text": "Apply [lem-per-punctured-perverse-high-comparison] to $M=L$: it has the required upper stalk bounds since it is perverse, and its specified zeroth truncation is constant by the preceding step. It identifies $H^{q-1}(U,\\Lambda)$ with $H^{q-1}(U,L)$ for $q\\geq2d$. For constant coefficients the strict-local acyclicity and localization triangle identify $H^{q-1}(U,\\Lambda)$ with $H_x^q(X,\\Lambda)$ in these positive degrees. Naturality of the triangle therefore identifies the resulting map with $H_x^q(u)$. The top-class theorem makes it zero for $q>2d$ and an isomorphism in degree $2d$. Combined with the preceding vanishing, $R\\Gamma_{\\bar x}T$ is concentrated in degree $2d=-2\\delta(x)$, with generator the image of $[x]$ under $u$. This defines the pinning $R\\Gamma_{\\bar x}T\\cong\\Lambda(-d)[-2d]$.",
+   "uses": [
+    "lem-per-punctured-perverse-high-comparison",
+    "lem-exc-closed-support-triangle",
+    "lem-weil-pbc-strictly-henselian-sections-stalk",
+    "lem-per-normal-top-residue-class",
+    "lem-asd-finite-etale-twist-line"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "5.3.1(a), application of 5.3.2 and 3.1.1"
+   }
+  },
+  {
+   "text": "These geometric generators descend to the residue fields because the classes of [lem-per-normal-top-residue-class] are invariant under the geometric-point automorphisms and $u$ is defined over $X$. For any immediate geometric specialization $\\bar y\\rightsquigarrow\\bar x$, naturality of its transition with respect to $u$ carries the compatible top classes of the constant sheaf to the two chosen generators of $T$. Thus these generators obey exactly the residue compatibility of [def-per-potential-dualizing-complex]. This proves that $T$ with these pinnings is potential; the generic generator is $1$, so the generic pinning is the identity. Notice that only the top local cohomology of the constant sheaf is used: no purity assertion about its lower local cohomology on a singular normal scheme was made.",
+   "uses": [
+    "lem-per-normal-top-residue-class",
+    "def-per-potential-dualizing-complex",
+    "lem-asd-finite-etale-twist-line"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "5.3.1(a), final construction of the potential pinnings; 3.1.1–3.1.2"
+   }
+  },
+  {
+   "text": "Let $K$ be a pinned potential. Its costalk at $x$ is concentrated in degree $2r_x$, which is at least $\\varphi(x)$, so it lies in the lower perverse class. To prove the upper stalk bound, use the same strict-local dimension induction as in Step 2, now for all pinned potentials; their restrictions remain pinned potentials by the costalk and residue definition. Dimension zero is immediate. Write $L=K|_U$ for $d\\geq1$. Induction gives $L\\in\\operatorname{Perv}^{\\varphi|_U}(U)$, and [lem-per-normal-potential-low-degrees] gives the canonical map $v:\\Lambda_X\\to K$ and $\\tau^{\\mathrm{ord}}_{\\leq0}L=\\Lambda_U$. For $d\\geq2$ use [lem-per-punctured-perverse-high-comparison]. For $d=1$, $U$ is the generic point and $L=\\Lambda_U$ by the generic pinning, so the same comparison is the identity. The constant-coefficient localization triangle and top-class vanishing now imply\n$$H^a(U,L)=0\\quad(a\\geq2d),\\qquad H^{2d-1}(U,\\Lambda)\\xrightarrow{\\sim}H^{2d-1}(U,L).$$",
+   "uses": [
+    "def-per-potential-dualizing-complex",
+    "lem-per-perversity-localization-calculus",
+    "lem-per-normal-potential-low-degrees",
+    "lem-per-punctured-perverse-high-comparison",
+    "lem-exc-closed-support-triangle",
+    "lem-weil-pbc-strictly-henselian-sections-stalk",
+    "lem-per-normal-top-residue-class"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "5.3.1(b), lower class and induction for upper class, printed p. 289"
+   }
+  },
+  {
+   "text": "Choose a geometric specialization from the generic point to $x$. The general transition theorem gives a square, natural in $v$, from the degree-zero generic groups of $\\Lambda$ and $K$ to their degree-$2d$ costalk groups after twist by $d$. On the top row the transition carries $1$ to the top class and is an isomorphism. On the bottom row it is an isomorphism because the normalized immediate transitions of the pinned potential are isomorphisms, and the general transition is their composite along a saturated chain. The left vertical map is the identity in the generic pinnings. Therefore $H_x^{2d}(v(d))$ is an isomorphism. In the natural square of boundary maps for the two closed-support triangles, the upper boundary $H^{2d-1}(U,\\Lambda(d))\\to H_x^{2d}(X,\\Lambda(d))$ is an isomorphism by strict-local acyclicity. Both vertical arrows are now isomorphisms, the left one by Step 7. Hence the lower boundary $H^{2d-1}(U,L(d))\\to H_x^{2d}(X,K(d))$ is an isomorphism as well.",
+   "uses": [
+    "lem-per-normal-top-residue-class",
+    "def-per-potential-dualizing-complex",
+    "lem-exc-closed-support-triangle",
+    "lem-weil-pbc-strictly-henselian-sections-stalk",
+    "lem-asd-finite-etale-twist-line"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "5.3.1(b), first specialization square, printed pp. 289–290"
+   }
+  },
+  {
+   "text": "The closed-support sequence for $K$ has zero supported terms except in degree $2d$. Step 7 gives $H^a(U,L)=0$ for $a\\geq2d$, so $(\\mathcal H^aK)_{\\bar x}=0$ for $a\\geq2d+1$ and it leaves precisely\n$$0\\to(\\mathcal H^{2d-1}K)_{\\bar x}\\to H^{2d-1}(U,L)\\to H_x^{2d}(X,K)\\to(\\mathcal H^{2d}K)_{\\bar x}\\to0.$$\nThe middle arrow is the isomorphism of Step 8 (untwist its rank-one Tate line). Both end terms vanish. Thus the stalk is ordinarily bounded above by $2d-2$ for $d\\geq2$, and by zero for $d=1$. This is exactly the required $\\varphi(x)$ bound and proves $K\\in\\operatorname{Perv}^{\\varphi}(X)$.",
+   "uses": [
+    "lem-exc-closed-support-triangle",
+    "lem-weil-pbc-strictly-henselian-sections-stalk",
+    "def-per-potential-dualizing-complex",
+    "lem-per-perversity-localization-calculus",
+    "lem-asd-finite-etale-twist-line"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "5.3.1(b), exact sequence and conclusion of perverse membership"
+   }
+  },
+  {
+   "text": "Use the generic pinning $j^*K\\cong\\Lambda$ and perverse adjunction to obtain $f:K\\to j_*^\\varphi\\Lambda=T$. Prove it is an isomorphism by the same strict-local dimension induction. At dimension zero it is the generic pinning; on $U$ it is an isomorphism by induction. The natural specialization square for $f$, from the generic degree-zero groups to degree-$2d$ closed costalk groups twisted by $d$, has isomorphisms on both horizontal arrows since $K$ and $T$ are potential. Its left arrow is the generic pinning, so its right arrow is an isomorphism. All other costalk degrees vanish; hence $i^!f$ is an isomorphism. The two localization triangles then show that $f$ is an isomorphism. The same square identifies the chosen generator at $x$, so $f$ preserves the pinning there as well as at the generic point. Finally the adjunction bijection\n$$\\operatorname{Hom}(K,T)=\\operatorname{Hom}(j^*K,\\Lambda)$$\nsays that a morphism with this generic pinning is unique. This proves the asserted uniqueness among pinning-preserving isomorphisms.",
+   "uses": [
+    "lem-per-perversity-localization-calculus",
+    "lem-per-normal-top-residue-class",
+    "def-per-potential-dualizing-complex",
+    "lem-exc-closed-support-triangle",
+    "lem-asd-finite-etale-twist-line"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "5.3.1(b), adjunction and second specialization square, printed p. 290"
+   }
+  },
+  {
+   "text": "It remains to identify the scalar map of internal derived Hom. Work etale locally on connected affine etale schemes $V\\to X$. Such a $V$ is normal integral by [lem-fin-etale-normal-components] (connectedness selects one component), and excellent by [lem-exc-finite-type-localization-excellent]. The perverse construction restricts by the localization-calculus statement. The costalk comparison of [lem-per-prime-power-costalk-reduction] identifies geometric costalks on the two sites via their identical strict localizations; the top-class theorem identifies their immediate residue maps. Hence the pinned data restrict as well. By what was proved, $K|_V$ is in the corresponding perverse heart and is the perverse generic direct image of $\\Lambda$. Orthogonality for this t-structure gives $\\operatorname{Hom}(K|_V,K|_V[q])=0$ for $q<0$. Full faithfulness of the perverse generic direct image gives\n$$\\operatorname{End}(K|_V)\\cong\\operatorname{End}(\\Lambda_{\\eta_V})=\\Lambda.$$\nThe last identification sends a homomorphism of the constant rank-one $\\Lambda$-module to its value at $1$; it holds over the generic field with its etale topology because both source and target have trivial Galois action. Under it the scalar map is the identity of $\\Lambda$.",
+   "uses": [
+    "lem-per-perversity-localization-calculus",
+    "def-per-potential-dualizing-complex",
+    "lem-fin-etale-normal-components",
+    "lem-exc-finite-type-localization-excellent",
+    "lem-per-prime-power-costalk-reduction",
+    "lem-per-normal-top-residue-class"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "5.3.1(c), negative Hom vanishing and fully faithful generic extension"
+   }
+  },
+  {
+   "text": "Put $E=R\\mathcal Hom_\\Lambda(K,K)$. By [lem-weil-pbc-ringed-internal-hom-exact-restriction], $E|_V=R\\mathcal Hom_\\Lambda(K|_V,K|_V)$, and internal Hom commutes with the target shift. Applying [lem-pur-rhom-global-sections] on $V_{\\mathrm{et}}$ therefore identifies $H^q(V,E)$ with $\\operatorname{Hom}(K|_V,K|_V[q])$. The cohomology sheaf $\\mathcal H^qE$ is the sheafification of $V\\mapsto H^q(V,E)$: represent $E$ by a K-injective complex, compute sections, and sheafify the kernels modulo images; sheafification commutes with this cohomology by [lem-weil-pbc-site-module-presheaf-sheafification-exact]. Step 11 on the connected affine etale basis thus gives $\\mathcal H^qE=0$ for $q<0$ and identifies $\\mathcal H^0E$ with the constant sheaf $\\Lambda_X$, compatibly with scalar multiplication. Consequently the scalar map factors through ordinary $\\tau_{\\leq0}E$ and is an isomorphism onto it, which is clause (c).",
+   "uses": [
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "lem-pur-rhom-global-sections",
+    "lem-weil-pbc-site-module-presheaf-sheafification-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "5.3.1(c), passage from local derived Hom groups to internal Hom"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-exc-excellent-ring",
+  "def-per-potential-dualizing-complex",
+  "lem-per-immediate-specialization-criterion",
+  "lem-per-perversity-localization-calculus",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-sc-strict-henselization-noetherian",
+  "lem-weil-pbc-etale-colimit-normal-local-domain",
+  "lem-weil-pbc-strict-henselization-triples",
+  "lem-exc-finite-type-localization-excellent",
+  "lem-weil-pbc-ind-etale-stability",
+  "lem-exc-weakly-etale-excellent",
+  "lem-sc-strict-henselization-dimension",
+  "lem-per-prime-power-costalk-reduction",
+  "lem-weil-pbc-normal-constant-generic",
+  "lem-exc-closed-support-triangle",
+  "lem-weil-pbc-strictly-henselian-sections-stalk",
+  "lem-per-normal-top-residue-class",
+  "lem-asd-finite-etale-twist-line",
+  "lem-per-normal-potential-low-degrees",
+  "lem-per-punctured-perverse-high-comparison",
+  "lem-fin-etale-normal-components",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-pur-rhom-global-sections",
+  "lem-weil-pbc-site-module-presheaf-sheafification-exact"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose XVII, Proposition 5.3.1(a)-(c), printed pp. 288–290"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -47,10 +261,38 @@
    "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/Algebra/Order/Group/Lattice.lean\", \"line\": \"14\", \"text\": \"underpinnings of vector lattices, Banach lattices, AL-space, AM-space etc.\"}\n",
    "date": "2026-10-18",
    "verdict": "no match: returned declarations do not assert this statement for these objects and hypotheses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Perverse extension from the generic point of a normal excellent scheme is the unique pinned potential dualizing complex",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.IsGermInjective\", \"module\": \"Mathlib/AlgebraicGeometry/SpreadingOut\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A scheme $ X $ is called germ-injective if, for every point $ x $ in $ X $, the natural map from the local ring $ \\\\mathcal{O}_{X,x} $ to the stalk of the structure sheaf at $ x $ is injective.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.fromSpecStalkOfMem_ofFromSpecStalk\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} (sX : X ⟶ S) (sY : Y ⟶ S) [inst : IrreducibleSpace ↥X]\\n  [inst_1 : AlgebraicGeometry.LocallyOfFiniteType sY] {x : ↥X} [inst_2 : X.IsGermInjectiveAt x]\\n  (φ : AlgebraicGeometry.Spec (X.presheaf.stalk x) ⟶ Y)\\n  (h : CategoryTheory.CategoryStruct.comp φ sY = Categor\", \"doc\": \"Given schemes $X,Y,S$ with morphisms $s_X:X\\\\to S$ and $s_Y:Y\\\\to S$ locally of finite type, a point $x\\\\in X$ with injective germ map, and a morphism $\\\\phi:\\\\operatorname{Spec}(\\\\mathcal{O}_{X,x})\\\\to Y$ s\"}\n  {\"name\": \"AlgebraicGeometry.instQuasiSoberCarrierCarrierCommRingCat\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme), QuasiSober ↥X\", \"doc\": \"The underlying topological space of a scheme is quasi-sober, meaning every irreducible closed subset is the closure of exactly one point.\"}\n  {\"name\": \"AlgebraicGeometry.spread_out_unique_of_isGermInjective'\", \"module\": \"Mathlib/AlgebraicGeometry/SpreadingOut\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {x : ↥X} [X.IsGermInjectiveAt x] (f g : X ⟶ Y),\\n  CategoryTheory.CategoryStruct.comp (X.fromSpecStalk x) f = CategoryTheory.CategoryStruct.comp (X.fromSpecStalk x) g →\\n    ∃ U, x ∈ U ∧ CategoryTheory.CategoryStruct.comp U.ι f = CategoryTheory.CategoryStruct.comp U.\", \"doc\": \"Given a scheme $X$ with injective germ at a point $x$, if two morphisms $f,g : X \\\\to Y$ satisfy $\\\\operatorname{Spec}(\\\\mathcal{O}_{X,x}) \\\\to X \\\\xrightarrow{f} Y = \\\\operatorname{Spec}(\\\\mathcal{O}_{X,x})\"}\n  {\"name\": \"AlgebraicGeometry.exists_lift_of_germInjective_aux\", \"module\": \"Mathlib/AlgebraicGeometry/SpreadingOut\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {R A : CommRingCat} {U : X.Opens} {x : ↥X} (hxU : x ∈ U) (φ : A ⟶ X.presheaf.stalk x)\\n  (φRA : R ⟶ A) (φRX : R ⟶ X.presheaf.obj (Opposite.op U)),\\n  (CommRingCat.Hom.hom φRA).FiniteType →\\n    CategoryTheory.CategoryStruct.comp φRA φ = CategoryTheory.CategoryStruct.com\", \"doc\": \"Given a point $x$ in an open subset $U$ of a scheme $X$, a morphism $\\\\phi: A \\\\to \\\\mathcal{F}_x$ to the stalk of a presheaf $\\\\mathcal{F}$ at $x$, and compatible ring homomorphisms $\\\\phi_{RA}: R \\\\to A$ \"}\n  {\"name\": \"AlgebraicGeometry.exists_lift_of_germInjective\", \"module\": \"Mathlib/AlgebraicGeometry/SpreadingOut\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {R A : CommRingCat} {x : ↥X} [X.IsGermInjectiveAt x] {U : X.Opens} (hxU : x ∈ U)\\n  (φ : A ⟶ X.presheaf.stalk x) (φRA : R ⟶ A) (φRX : R ⟶ X.presheaf.obj (Opposite.op U)),\\n  (CommRingCat.Hom.hom φRA).FiniteType →\\n    CategoryTheory.CategoryStruct.comp φRA φ = CategoryT\", \"doc\": \"Given a scheme $X$ with injective germ at a point $x$, an open subset $U$ containing $x$, and morphisms $\\\\phi: A \\\\to \\\\mathcal{F}_x$, $\\\\phi_{RA}: R \\\\to A$, and $\\\\phi_{RX}: R \\\\to \\\\Gamma(U, \\\\mathcal{F})$\"}\n  {\"name\": \"AlgebraicGeometry.instIsGermInjectiveOfIsIntegral\", \"module\": \"Mathlib/AlgebraicGeometry/SpreadingOut\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsIntegral X], X.IsGermInjective\", \"doc\": \"Every integral scheme is germ-injective. That is, for every point $ x $ in an integral scheme $ X $, the natural map from the local ring $ \\\\mathcal{O}_{X,x} $ to the stalk of the structure sheaf at $ \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsGermInjectiveAt\", \"module\": \"Mathlib/AlgebraicGeometry/SpreadingOut\", \"type\": \"(X : AlgebraicGeometry.Scheme) → ↥X → Prop\", \"doc\": \"For a scheme $X$ and a point $x$ in its underlying topological space, the proposition that the germ at $x$ is injective.\"}\n",
+   "date": "2026-10-18",
+   "verdict": "no match: the hits concern ordinary derived truncation, scheme stalks, ring-theoretic local cohomology, or unrelated uses of the words; none gives this etale perverse/potential-dualizing statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A normal excellent scheme has a dualizing potential complex constructed by perverse truncation of generic direct image",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \"(H : f = f₁ ≫ f₂) : f.normalization ⟶ T\", \"doc\": \"A morphism from the normalization of a scheme morphism $ f: X \\to Y $ to another scheme $ T $, constructed as the colimit in the category of schemes of a diagram involving the affine Zariski site of $ \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \": X ⟶ f.normalization\", \"doc\": \"The morphism from a scheme $ X $ to the normalization of a scheme morphism $ f: X \\to Y $, constructed by gluing local normalization maps defined via the integral closure of structure sheaves over an a\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \"[IsIntegral X] : IsIntegral f.normalization\", \"doc\": \"If $ X $ is an integral scheme, then the normalization of a morphism $ f: X \\\\to Y $ is also an integral scheme. This instance asserts that the categorical construction of normalization preserves the i\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalization\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \": Scheme\", \"doc\": \"The normalization of a scheme morphism $ f: X \\to Y $ is defined as the colimit in the category of schemes of a diagram constructed by composing the opposite of the affine Zariski site inclusion functo\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.ker_toNormalization\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \": f.toNormalization.ker = ⊥\", \"doc\": \"For a scheme morphism $ f: X \\to Y $, the kernel of the morphism from $ X $ to its normalization is equal to the bottom element $ \\bot $ in the relevant order structure of subschemes.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \"[IsIntegralHom f] : IsIso f.toNormalization\", \"doc\": \"For any integral morphism $ f: X \\to Y $ of schemes, the normalization morphism from $ X $ to the normalization of $ f $ is an isomorphism.\"}\n  {\"name\": \"HomologicalComplex.shortComplexTruncLE\", \"module\": \"Mathlib.Algebra.Homology.Embedding.TruncLEHomology\", \"type\": \": ShortComplex (HomologicalComplex C c')\", \"doc\": \"The short complex constructed from a homological complex $ K $ in an abelian category $ \\\\mathcal{C} $, using the canonical truncation morphism $ \\\\iota_{\\\\text{truncLE}}(e) : K.\\\\text{truncLE}(e) \\\\to K $\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \"[IsReduced X] : IsReduced f.normalization\", \"doc\": \"If $ X $ is a reduced scheme, then the normalization of any morphism $ f: X \\\\to Y $ is also a reduced scheme. This instance asserts that the categorical normalization construction preserves the reduce\"}\n",
+   "date": "2026-10-18",
+   "verdict": "no match: the hits concern ordinary derived truncation, scheme stalks, ring-theoretic local cohomology, or unrelated uses of the words; none gives this etale perverse/potential-dualizing statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"perverse\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-18",
+   "verdict": "no match: the hits concern ordinary derived truncation, scheme stalks, ring-theoretic local cohomology, or unrelated uses of the words; none gives this etale perverse/potential-dualizing statement"
+  },
+  {
+   "tool": "grep",
+   "query": "perverse|potential.?dualizing|pinned",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-18",
+   "verdict": "no match: the hits concern ordinary derived truncation, scheme stalks, ring-theoretic local cohomology, or unrelated uses of the words; none gives this etale perverse/potential-dualizing statement"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-potential-dualizing-uniqueness",
@@ -62,7 +304,7 @@
  "blueprint": {
   "from": {
    "node": "lem-per-artin-gabber-affine-curve",
-   "place": "Proof Step 3, dimension-normalized Verdier duality: Perverse generic extension on a normal excellent scheme.",
+   "place": "Proof Step 1: dimension-normalized Verdier duality and the middle t-structure (historically Step 3 when this child was created); the finite-coefficient potential-dualizing construction underlying the qbar generic duality model.",
    "via": [
     "lem-per-potential-dualizing-uniqueness",
     "lem-per-finite-regular-reduction-dualizing",
@@ -72,5 +314,94 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-per-normal-pinned-extension",
+  "worker": "stage1",
+  "summary": "Retained previous sandbox and logged Mathlib searches; split XVII 5.3.1 into the strict-local dimension induction, top-class pinning comparison, perverse adjunction uniqueness, and etale-local scalar Hom calculation. Four strictly smaller statement-only inputs; geometry, closed-support triangles, and ringed-site Hom reused from the DAG. No statement correction, coefficient change, SGA route, Lean writing, or compilation.",
+  "blueprint": "Current ancestor lem-per-artin-gabber-affine-curve, Proof Step 1: dimension-normalized Verdier duality and the middle t-structure (historically Step 3). The finite-coefficient potential-dualizing construction serves that duality step via the existing dependency chain; neither chapter nor unit route is replaced.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-strict-henselization-noetherian",
+    "why": "Generic tool for the strict-local geometry, ordinary closed-support triangle, or ringed-site internal Hom in the finite-coefficient proof of XVII 5.3.1; no node of this Fourier/perverse unit supplies that statement."
+   },
+   {
+    "node": "lem-weil-pbc-etale-colimit-normal-local-domain",
+    "why": "Generic tool for the strict-local geometry, ordinary closed-support triangle, or ringed-site internal Hom in the finite-coefficient proof of XVII 5.3.1; no node of this Fourier/perverse unit supplies that statement."
+   },
+   {
+    "node": "lem-weil-pbc-strict-henselization-triples",
+    "why": "Generic tool for the strict-local geometry, ordinary closed-support triangle, or ringed-site internal Hom in the finite-coefficient proof of XVII 5.3.1; no node of this Fourier/perverse unit supplies that statement."
+   },
+   {
+    "node": "lem-exc-finite-type-localization-excellent",
+    "why": "Generic tool for the strict-local geometry, ordinary closed-support triangle, or ringed-site internal Hom in the finite-coefficient proof of XVII 5.3.1; no node of this Fourier/perverse unit supplies that statement."
+   },
+   {
+    "node": "lem-weil-pbc-ind-etale-stability",
+    "why": "Generic tool for the strict-local geometry, ordinary closed-support triangle, or ringed-site internal Hom in the finite-coefficient proof of XVII 5.3.1; no node of this Fourier/perverse unit supplies that statement."
+   },
+   {
+    "node": "lem-exc-weakly-etale-excellent",
+    "why": "Generic tool for the strict-local geometry, ordinary closed-support triangle, or ringed-site internal Hom in the finite-coefficient proof of XVII 5.3.1; no node of this Fourier/perverse unit supplies that statement."
+   },
+   {
+    "node": "lem-sc-strict-henselization-dimension",
+    "why": "Generic tool for the strict-local geometry, ordinary closed-support triangle, or ringed-site internal Hom in the finite-coefficient proof of XVII 5.3.1; no node of this Fourier/perverse unit supplies that statement."
+   },
+   {
+    "node": "lem-weil-pbc-normal-constant-generic",
+    "why": "Generic tool for the strict-local geometry, ordinary closed-support triangle, or ringed-site internal Hom in the finite-coefficient proof of XVII 5.3.1; no node of this Fourier/perverse unit supplies that statement."
+   },
+   {
+    "node": "lem-exc-closed-support-triangle",
+    "why": "Generic tool for the strict-local geometry, ordinary closed-support triangle, or ringed-site internal Hom in the finite-coefficient proof of XVII 5.3.1; no node of this Fourier/perverse unit supplies that statement."
+   },
+   {
+    "node": "lem-weil-pbc-strictly-henselian-sections-stalk",
+    "why": "Generic tool for the strict-local geometry, ordinary closed-support triangle, or ringed-site internal Hom in the finite-coefficient proof of XVII 5.3.1; no node of this Fourier/perverse unit supplies that statement."
+   },
+   {
+    "node": "lem-asd-finite-etale-twist-line",
+    "why": "Generic tool for the strict-local geometry, ordinary closed-support triangle, or ringed-site internal Hom in the finite-coefficient proof of XVII 5.3.1; no node of this Fourier/perverse unit supplies that statement."
+   },
+   {
+    "node": "lem-fin-etale-normal-components",
+    "why": "Generic tool for the strict-local geometry, ordinary closed-support triangle, or ringed-site internal Hom in the finite-coefficient proof of XVII 5.3.1; no node of this Fourier/perverse unit supplies that statement."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "why": "Generic tool for the strict-local geometry, ordinary closed-support triangle, or ringed-site internal Hom in the finite-coefficient proof of XVII 5.3.1; no node of this Fourier/perverse unit supplies that statement."
+   },
+   {
+    "node": "lem-pur-rhom-global-sections",
+    "why": "Generic tool for the strict-local geometry, ordinary closed-support triangle, or ringed-site internal Hom in the finite-coefficient proof of XVII 5.3.1; no node of this Fourier/perverse unit supplies that statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-strict-henselization-noetherian",
+  "lem-weil-pbc-etale-colimit-normal-local-domain",
+  "lem-weil-pbc-strict-henselization-triples",
+  "lem-exc-finite-type-localization-excellent",
+  "lem-weil-pbc-ind-etale-stability",
+  "lem-exc-weakly-etale-excellent",
+  "lem-sc-strict-henselization-dimension",
+  "lem-weil-pbc-normal-constant-generic",
+  "lem-exc-closed-support-triangle",
+  "lem-weil-pbc-strictly-henselian-sections-stalk",
+  "lem-asd-finite-etale-twist-line",
+  "lem-fin-etale-normal-components",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-pur-rhom-global-sections"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q24-28546c9f7",
+  "group": "Q24",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q24-28546c9f7 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item, all four new nodes, the statements of all 24 proof_deps and 7 stmt_deps, the parent (lem-per-potential-dualizing-uniqueness Step 2) and the ancestor's Step 1. Source read: ILO XVII 2.2.1, 2.4.2.1, 3.1.1-3.1.2, 3.2.1, 3.6.1-3.6.4, 5.1.1, 5.2-5.2.2 and 5.3.1(a)-(c) with 5.3.2, pp. 268-290. The live item is still unsplit and none of the new ids exists live. The item's statement and stmt_deps are unchanged, so no target is weakened. The twelve steps follow 5.3.1 exactly. Step 1: phi=max(0,-2delta-2) equals the source's max(0,2r-2) via universal catenarity and the immediate-specialization criterion; u is obtained by truncation adjunction because Lambda_X is in D^{<=phi}. Step 2: the strict-local reduction citations are correct, and the generic fibre of X_(xbar) is one point (Frac O^sh). Steps 3-6: d=1 uses the standard t-structure (phi=0); for d>=2, T=tau^ord_{<=2d-2}Rg_*L, H^q_x(T)=0 for q<=2d-1, and the shift H^{q-1}(U,L)=H^q_x(T); then 5.3.2 and the top class give concentration in degree 2d, and descent and compatibility come from 3.6.1 and naturality of the transitions. Steps 7-10: the boundary-square and five-term argument for perverse membership is correct; the adjunction map f is an iso via i^!f; uniqueness follows from Hom(K,T)=Hom(j^*K,Lambda). Steps 11-12: heart orthogonality and full faithfulness give the local Homs, then the RHom slice restriction, global-sections Hom and exact sheafification give clause (c). The source typo (T for K in (b)) is correctly repaired. New nodes, all true, smaller than the item, not duplicates and statement-only: (1) perversity-localization-calculus = 5.2.2 plus Gabber's D^+ t-structure; I verified the extra strict-local ordinary-truncation formula by hand. (2) top-residue-class = 3.1.1, 3.1.2 and 3.6.1 for arbitrary M and codimension c. (3) low-degrees = 3.6.4. (4) high-comparison = 5.3.2; I re-derived it: the cone lies in [1,2d-4], the closure-dimension bound d-i-1 and 3.2.1 give vanishing for q>=2d-2, and d=2 is trivial. Blueprint from/via, created and the three search kinds are present; no SGA is cited. I accept the 14 generic tool_uses (strict-local algebra, constant units, support triangle, Tate line, etale components, ringed Hom). Notes: Step 11 should take V over an affine open of X so that lem-exc-finite-type-localization-excellent applies (precision only). A future split of top-residue-class (3.6.3) must cite the 2.4.4.1 regular-unit node, not uniqueness, or it closes a cycle through this item. No fixes."
  }
 }
