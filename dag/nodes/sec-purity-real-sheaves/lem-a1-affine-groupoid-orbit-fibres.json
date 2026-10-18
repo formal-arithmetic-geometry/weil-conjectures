@@ -352,5 +352,25 @@
   "group": "Q05",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q05-d819aeabb (reviewer sub-agent of L); spot-checked: Read the item, both new nodes, the statement of every cited node, the parent's steps 3 and 7, the unit record, and Stacks groupoids.tex 03BH-03BL in full. The item matches 03BL; the source/target orientation is swapped, which the inverse makes equivalent, and nothing is weakened. All ten steps are correct with their hypotheses checked. Step 1: integral-invariants (03BJ) plus lying over, injective because C is a subring of A. Step 2: residue extension plus embedding into an arbitrary algebraically closed k. Step 3: finite, flat and lfp base-change permanence. Step 4: elementary determinant scalar extension; the norm-charts node is existential, and comparing on pulled-back charts uses basis independence and gluing, which is a few lines. Step 5 replaces 03BK(2) with a polynomial lift: G in C[T], phi(G) = 1 tensor (sum c(c_a) lambda^a) is a scalar, so alpha_0(g) = alpha_1(g). This is correct and avoids non-flat invariants. Steps 6-8: finite fibre with residue fields k, prime avoidance on distinct maximal ideals, and the norm prime criterion on free charts, which fill Stacks' 'future reference' gaps. Steps 9-10: the one-arrow relation is an equivalence relation, and ordinary points follow through a common algebraic closure. The new node invariant-norm is exactly 03BH, statement only, with no duplicate found by grep for 03BH, determinant trick or groupoid norms. The new leaf instIsAlgebraicResidueFieldOfIsIntegral was checked at Instances.lean:62-83 (LiesOver, line 70, no injectivity needed). All declared tool_uses are accepted as generic tools. There are no SGA citations. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineGroupoidOrbitFibres",
+  "declaration": "AlgebraicGeometry.affineGroupoid_orbit_fibres",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineGroupoidOrbitFibres.lean",
+  "statement": "theorem affineGroupoid_orbit_fibres {A B : CommRingCat.{u}} (s t : Spec B ⟶ Spec A) (e : Spec A ⟶ Spec B) (i : Spec B ⟶ Spec B) (c : pullback s t ⟶ Spec B) (hgroupoid : IsGroupoidScheme s t e i c) [s.IsFiniteLocallyFree] [t.IsFiniteLocallyFree] : Function.Surjective (PrimeSpectrum.comap ((Spec.homEquiv s).hom.eqLocus (Spec.homEquiv t).hom).subtype) ∧ (∀ u₀ u₁ : Spec A, PrimeSpectrum.comap ((Spec.homEquiv s).hom.eqLocus (Spec.homEquiv t).hom).subtype u₀ = PrimeSpectrum.comap ((Spec.homEquiv s).hom.eqLocus (Spec.homEquiv t).hom).subtype u₁ ↔ ∃ r : Spec B, s r = u₀ ∧ t r = u₁) ∧ ∀ (k : Type (max u v)) [Field k] [IsAlgClosed k], Function.Surjective (fun a : A →+* k ↦ a.comp ((Spec.homEquiv s).hom.eqLocus (Spec.homEquiv t).hom).subtype) ∧ ∀ a₀ a₁ : A →+* k, a₀.comp ((Spec.homEquiv s).hom.eqLocus (Spec.homEquiv t).hom).subtype = a₁.comp ((Spec.homEquiv s).hom.eqLocus (Spec.homEquiv t).hom).subtype ↔ Relation.EqvGen (fun x y : A →+* k ↦ ∃ r : B →+* k, r.comp (Spec.homEquiv s).hom = x ∧ r.comp (Spec.homEquiv t).hom = y) a₀ a₁",
+  "branch": "newtargets-dag",
+  "by": "Q41",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Uses the already landed def-a1-groupoid-scheme: AlgebraicGeometry.IsGroupoidScheme from Sheaf.AlgebraicGeometry.GroupoidScheme. Drop the concurrent duplicate new node def-a1-scheme-groupoid and its owned module with --drop-nodes def-a1-scheme-groupoid. The prescribed maps and all groupoid laws are unchanged.",
+  "fixed_by": "NT-stage2-Codex-aa28bbf3b"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-aa28bbf3b",
+  "group": "Q41",
+  "result": "fix",
+  "note": "Statement matches Stacks 03BL clause by clause; immutable modules and corrected theorem compile cleanly. Complete fixes reuse landed IsGroupoidScheme, remove the concurrent duplicate, and supply a real second-reading report. Apply fixes with --drop-nodes def-a1-scheme-groupoid.; dropped duplicate new node(s) def-a1-scheme-groupoid (--drop-nodes; not merged, the item points at the landed declaration)"
  }
 }

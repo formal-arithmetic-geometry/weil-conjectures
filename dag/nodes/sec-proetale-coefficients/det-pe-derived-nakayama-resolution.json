@@ -288,32 +288,39 @@
  "reviewed_lean": {
   "date": "2026-10-18",
   "by": "L",
-  "reviewer": "NT-stage2-cc-825c95486",
-  "group": "Q30",
+  "reviewer": "NT-stage2-Codex-2c77cde3f",
+  "group": "Q11",
   "result": "pass",
-  "note": "Read node, source md/proof.md, all 8 stmt deps' declarations (coefficient-extension integers/uniformizer/ideal/ring, continuousMapRingObj (T : Type), upperStarFromPoint/condensedRingObj, Mod, DerivedCategory, CondensedRing.derivedTensor = curriedTensor, ProEt.topology) and the delivered module. Every clause matches the node, none stronger: s pinned by s.hom = p_X^*(mul π); B/q/e tied to the actual pulled-back O_E/π^n sheaves and reduction, forced canonical since q epi; ShortExact for n≥1; natural iso to the fixed two-term mappingCone tensor model plus natural distinguished scalar triangle for every unbounded K, with uR pinned by uR.hom = ε Qh; quotient-power i/r uniquely characterized, triangles K◁i, K◁r distinguished for 1≤m≤n, m=1 instance. Edge cases n=0 (B 0 = 0, no false clause), m=1 and m=n, empty scheme, unbounded K, no extra hypotheses. Site universes u+1/u kept distinct; E : Type forced by the recorded condensed-ring interface (T : Type), disclosed and harmless up to isomorphism (Shrink available): non-blocking. No hollow definitions, docstrings with source and blueprint tag, only sorry in the main theorem, statement field verbatim, all declarations listed, no name collisions, upstream padicIntegersRingObj needs an embedding into Qbar_l so is not the DAG's O_E. Second-reading section is the standard 2026-10-17 notice. nt_compile.py of the snapshot file rc=0 twice, no errors or warnings (19.3 s, 17.8 s); no build, no repository changes."
+  "note": "Wrote review.md. Checked all clauses, eight statement dependencies, source and declarations, universes, edge cases, normalized maps, docstrings, and route-pivot compliance. Immutable module compiled cleanly through scompile.py in both modes. No fixes required; no repository or branch changes made."
  },
  "lean": {
   "module": "Sheaf.Paper.DerivedNakayamaResolution",
-  "declaration": "AlgebraicGeometry.ProEtale.derived_nakayama_resolution",
+  "declaration": "AlgebraicGeometry.ProEtale.DerivedNakayama.derived_nakayama_resolution",
   "declarations": [
-   "AlgebraicGeometry.ProEtale.nakayamaCondensedAddMap",
-   "AlgebraicGeometry.ProEtale.nakayamaIntegers",
-   "AlgebraicGeometry.ProEtale.nakayamaFiniteCoefficients",
-   "AlgebraicGeometry.ProEtale.nakayamaPointMultiply",
-   "AlgebraicGeometry.ProEtale.nakayamaPointReduction",
-   "AlgebraicGeometry.ProEtale.NakayamaModules",
-   "AlgebraicGeometry.ProEtale.nakayamaReductionFunctor",
-   "AlgebraicGeometry.ProEtale.nakayamaConeFunctor",
-   "AlgebraicGeometry.ProEtale.nakayamaDerivedScalar",
-   "AlgebraicGeometry.ProEtale.derived_nakayama_resolution"
+   "AlgebraicGeometry.ProEtale.DerivedNakayama.integerRingSheaf",
+   "AlgebraicGeometry.ProEtale.DerivedNakayama.quotientRingSheaf",
+   "AlgebraicGeometry.ProEtale.DerivedNakayama.reductionRingSheaf",
+   "AlgebraicGeometry.ProEtale.DerivedNakayama.integerRing",
+   "AlgebraicGeometry.ProEtale.DerivedNakayama.integerRing_isCommMonObj",
+   "AlgebraicGeometry.ProEtale.DerivedNakayama.quotientRing",
+   "AlgebraicGeometry.ProEtale.DerivedNakayama.reductionRing",
+   "AlgebraicGeometry.ProEtale.DerivedNakayama.quotientModule",
+   "AlgebraicGeometry.ProEtale.DerivedNakayama.pullback",
+   "AlgebraicGeometry.ProEtale.DerivedNakayama.Derived",
+   "AlgebraicGeometry.ProEtale.DerivedNakayama.reductionFunctor",
+   "AlgebraicGeometry.ProEtale.DerivedNakayama.reductionMap",
+   "AlgebraicGeometry.ProEtale.DerivedNakayama.pullback_regular",
+   "AlgebraicGeometry.ProEtale.DerivedNakayama.regularPullbackIso",
+   "AlgebraicGeometry.ProEtale.DerivedNakayama.scalarOnModules",
+   "AlgebraicGeometry.ProEtale.DerivedNakayama.scalarOnComplex",
+   "AlgebraicGeometry.ProEtale.DerivedNakayama.coneFunctor",
+   "AlgebraicGeometry.ProEtale.DerivedNakayama.derived_nakayama_resolution"
   ],
   "file": "lean/Sheaf/Paper/DerivedNakayamaResolution.lean",
-  "statement": "theorem derived_nakayama_resolution (l : ℕ) [Fact l.Prime] (E : Type) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (X : Scheme.{u}) : ∃ (uR : 𝟙_ (DerivedCategory (NakayamaModules l E X)) ≅ (DerivedCategory.singleFunctor (NakayamaModules l E X) 0).obj (𝟙_ (NakayamaModules l E X))) (s : End (𝟙_ (NakayamaModules l E X))) (B : ℕ → NakayamaModules l E X) (q : ∀ n : ℕ, 𝟙_ (NakayamaModules l E X) ⟶ B n) (e : ∀ n : ℕ, (B n).X ≅ (upperStarFromPoint X).obj (nakayamaFiniteCoefficients l E n)), uR.hom = Functor.LaxMonoidal.ε (DerivedCategory.Qh (C := NakayamaModules l E X)) ∧ s.hom = (upperStarFromPoint X).map (nakayamaPointMultiply l E 1) ∧ (∀ n : ℕ, (q n).hom ≫ (e n).hom = (upperStarFromPoint X).map (nakayamaPointReduction l E n)) ∧ (∀ n : ℕ, 1 ≤ n → ∃ w : (s ^ n) ≫ q n = 0, (ShortComplex.mk (s ^ n) (q n) w).ShortExact ∧ Nonempty (nakayamaReductionFunctor l E X (B n) ≅ nakayamaConeFunctor l E X (s ^ n)) ∧ ∃ (β : 𝟭 (DerivedCategory (NakayamaModules l E X)) ⟶ nakayamaReductionFunctor l E X (B n)) (γ : nakayamaReductionFunctor l E X (B n) ⟶ 𝟭 (DerivedCategory (NakayamaModules l E X)) ⋙ shiftFunctor (DerivedCategory (NakayamaModules l E X)) (1 : ℤ)), ∀ K : DerivedCategory (NakayamaModules l E X), Triangle.mk (nakayamaDerivedScalar l E X uR (s ^ n) K) (β.app K) (γ.app K) ∈ distTriang (DerivedCategory (NakayamaModules l E X))) ∧ (∀ m n : ℕ, 1 ≤ m → m ≤ n → ∃ (i : B m ⟶ B (n + m)) (r : B (n + m) ⟶ B n), q m ≫ i = (s ^ n) ≫ q (n + m) ∧ q (n + m) ≫ r = q n ∧ ∀ K : DerivedCategory (NakayamaModules l E X), ∃ δ : (nakayamaReductionFunctor l E X (B n)).obj K ⟶ ((nakayamaReductionFunctor l E X (B m)).obj K)⟦(1 : ℤ)⟧, Triangle.mk (K ◁ (DerivedCategory.singleFunctor (NakayamaModules l E X) 0).map i) (K ◁ (DerivedCategory.singleFunctor (NakayamaModules l E X) 0).map r) δ ∈ distTriang (DerivedCategory (NakayamaModules l E X)))",
+  "statement": "theorem derived_nakayama_resolution : ∃ (d : End (Mod.regular (integerRing l E))), (∀ (S : Profinite.{u}ᵒᵖ) (f : (integerRing l E).obj.obj S) (s : S.unop), ((d.hom.hom.app S) f).down s = Padic.coefficientExtensionUniformizer l E * f.down s) ∧ ∃ (r : ∀ n : ℕ, Mod.regular (integerRing l E) ⟶ quotientModule l E n), (∀ n : ℕ, (r n).hom = reductionRing l E n) ∧ ∃ (i : ∀ m n : ℕ, quotientModule l E m ⟶ quotientModule l E (n + m)) (q : ∀ m n : ℕ, quotientModule l E (n + m) ⟶ quotientModule l E n), (∀ m n : ℕ, r m ≫ i m n = (d ^ n) ≫ r (n + m)) ∧ (∀ m n : ℕ, r (n + m) ≫ q m n = r n) ∧ ∀ (X : Scheme.{u}) (n : ℕ), 1 ≤ n → (∃ h : (pullback l E X).map (d ^ n) ≫ (pullback l E X).map (r n) = 0, (ShortComplex.mk _ _ h).ShortExact) ∧ Nonempty (DerivedCategory.Q ⋙ reductionFunctor l E X n ≅ coneFunctor l E X (d ^ n)) ∧ (∀ (m : ℕ), 1 ≤ m → m ≤ n → ∀ K : Derived l E X, ∃ δ : (reductionFunctor l E X n).obj K ⟶ ((reductionFunctor l E X m).obj K)⟦(1 : ℤ)⟧, Triangle.mk ((reductionMap l E X (i m n)).app K) ((reductionMap l E X (q m n)).app K) δ ∈ distTriang (Derived l E X))",
   "branch": "newtargets-dag",
-  "by": "Q30",
+  "by": "Q11",
   "date": "2026-10-18",
-  "existing": false,
-  "note": "The quotient modules are presented by their actual pulled-back condensed underlying sheaves and canonical reduction maps. Faithfulness and the short-exactness clauses uniquely determine the scalar arrow and quotient-power arrows. The natural cone is the fixed two-term tensor model, supplemented by a natural distinguished scalar triangle for every unbounded derived object. The canonical derived unit is characterized by the existing Qh lax-monoidal unit comparison; no extra hypothesis or chosen arbitrary map is used."
+  "existing": false
  }
 }

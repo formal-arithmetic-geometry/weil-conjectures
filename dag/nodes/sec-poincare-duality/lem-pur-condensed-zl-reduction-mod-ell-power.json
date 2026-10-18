@@ -338,5 +338,35 @@
   "group": "Q44",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q44-265c12994 (reviewer sub-agent of L); spot-checked: Read the item in full: statement, all 6 steps, split_report and tool_uses. Also read the cited statements: sk-prop-sfb-qlbar-colimit-x (E=Q_l, a ring isomorphism R_X ≅ lim A_n for any scheme), sectionwise-limits 00W2, constant sheaf 0H7J, sections-local 00WK, algebra-hom-quotient, locally-bijective criterion and sheafification 00WH. Checked the main-20261015 Tate-twist unit and sk-prop source texts, and verified the Stacks labels in sites.tex. Coefficient check: R_X = p_X^* C(-,Z_l), the same object as O_{E,X} in sk-prop. rho_r is defined precisely as that isomorphism followed by the r-th projection. There is no base change, the statement is unchanged and not weakened, and the scope is arbitrary X with no l-invertibility needed. Steps: the cancellation l^{n+r} | l^r k <=> l^n | k gives the finite-label injection and its kernel. Labels pass to sections by local representatives and local equality. The identity red∘j_{n+1,r} = j_{n,r}∘red gives the compatible divided tuple, so ker rho_r(U) = l^r R_X(U) on every U. Integer lifts give local surjectivity. The presheaf quotient is sectionwise injective and locally surjective, so its sheafification is A_r; ring and module structures and the transition compatibility are checked on local representatives. All steps are correct and the elementary flags are fair. Small cases: empty X, r=1, characteristic l, a w-contractible U (C(S,Z_l)/l^r = C(S,Z/l^r)). Routes: sk-prop is on the unit's route, the three generic site-lemma tool_uses are accepted, the graph is acyclic, and there are no new nodes. Two notes, not faults: (1) the report missed an overlap with lem-weil-pbc-completed-constant-sheaf-reduction and clause 1 of det-prop-integral-criterion-constant-coefficients; the item is more specific (rho_r-induced ring/module isomorphism plus transitions), so this is a possible future merge or pointer. (2) The existing node lem-weil-pbc-site-sheafification-iso-locally-bijective cites the wrong Stacks tag (00WM is a definition; the right ones are 00WN with 00WK). I left it unedited because this item does not own that node. blueprint.from.node is null, as already accepted at the Q95 target review. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CondensedZlReduction",
+  "declaration": "AlgebraicGeometry.ProEtale.pur_condensed_zl_reduction_mod_ell_power",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.purZlPointReduction",
+   "AlgebraicGeometry.ProEtale.purZlResidueTowerIso",
+   "AlgebraicGeometry.ProEtale.purZlConstantPullbackIso",
+   "AlgebraicGeometry.ProEtale.purZlReduction",
+   "AlgebraicGeometry.ProEtale.purZlPowerMultiplication",
+   "AlgebraicGeometry.ProEtale.purZlQuotient",
+   "AlgebraicGeometry.ProEtale.purZlQuotientProjection",
+   "AlgebraicGeometry.ProEtale.purZlResidueModule",
+   "AlgebraicGeometry.ProEtale.pur_condensed_zl_reduction_mod_ell_power"
+  ],
+  "file": "lean/Sheaf/Paper/CondensedZlReduction.lean",
+  "statement": "theorem pur_condensed_zl_reduction_mod_ell_power (ℓ : ℕ) [Fact ℓ.Prime] (X : Scheme.{u}) : ∃ (m : ∀ n : ℕ, MonObj (purZlQuotient ℓ X (n + 1)).X) (e : ∀ n : ℕ, purZlQuotient ℓ X (n + 1) ≅ purZlResidueModule ℓ X (n + 1)), (∀ n : ℕ, @IsMonHom _ _ _ _ _ (coefficientRing X (Mon.mk (Profinite.continuousMapRingObj ℤ_[ℓ]))).mon (m n) (purZlQuotientProjection ℓ X (n + 1)).hom ∧ @IsMonHom _ _ _ _ _ (m n) ((sfbConstantRing X).obj ((sfbZModCoefficientTower ℓ).obj (op (n + 1)))).mon (e n).hom.hom ∧ @IsMonHom _ _ _ _ _ ((sfbConstantRing X).obj ((sfbZModCoefficientTower ℓ).obj (op (n + 1)))).mon (m n) (e n).inv.hom ∧ (purZlQuotientProjection ℓ X (n + 1)).hom ≫ (e n).hom.hom = (purZlReduction ℓ X (n + 1)).hom) ∧ (∀ n : ℕ, purZlReduction ℓ X (n + 2) ≫ (sfbZModCoefficientTower ℓ ⋙ sfbConstantRing X).map (homOfLE (Nat.le_succ (n + 1))).op = purZlReduction ℓ X (n + 1)) ∧ (∀ n : ℕ, ∃ t : purZlQuotient ℓ X (n + 2) ⟶ purZlQuotient ℓ X (n + 1), purZlQuotientProjection ℓ X (n + 2) ≫ t = purZlQuotientProjection ℓ X (n + 1) ∧ t.hom ≫ (e n).hom.hom = (e (n + 1)).hom.hom ≫ ((sfbZModCoefficientTower ℓ ⋙ sfbConstantRing X).map (homOfLE (Nat.le_succ (n + 1))).op).hom)",
+  "branch": "newtargets-dag",
+  "by": "Q10",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "The canonical reduction is the normalized completed-coefficient limit projection, transported through its cyclic constant-ring comparisons. The sheaf quotient is Mod.cokernelObj of scalar multiplication. The single theorem supplies its quotient ring operations and a module isomorphism preserving ring operations in both directions, with the quotient projection equation and all positive-exponent transition squares. Helper definitions expose precisely these constructions; no dependency or natural-language statement is changed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-a49b46060",
+  "group": "Q10",
+  "result": "pass",
+  "note": "Reviewed node, dependencies, source, declarations, edge cases, docstrings, route, and report; scompile.py passed sandbox and library compilation with exit 0. Review recorded in review.md."
  }
 }

@@ -303,19 +303,26 @@
  "reviewed_lean": {
   "date": "2026-10-18",
   "by": "L",
-  "reviewer": "NT-stage2-cc-2bbacc819",
-  "group": "Q29",
-  "result": "fix",
-  "note": "Statement correct clause by clause: CompactSpace+IsLocallyNoetherian X; A=latticeCoefficientIntegers (valuation topology via WithAbs); B_X=coefficientRing X (Mon.mk integralCondensedRing), rfl-checked equal to condensedRingObj/upperStarFromPoint; (i)=upstream IsConstructibleModuleObject (finite constructible locally closed Scheme.Stratification, pro-etale-local Mod.IsFinitelyPresented); (ii)=IsConstantModelConstructible (qcqs branch: stratified finite constant models p^*P with P finitely presented over the condensed ring on the point, i.e. B⊗_A P); no extra assumptions; torsion, empty scheme, zero and rank-zero cases covered; E in universe u justified and no case lost. Dependency records for IsConstructibleModuleObject/IsLocallyFinitelyPresented are exact; the sk-def-sfb-condensed-ring record (generic continuousMapRingObjOfUniverse) is acceptable. Upstream padicIntegersRingObj needs E:Type 0 embedded in PadicAlgCl, so it is not a duplicate. Finding H8, fixed: the five helpers in lean.declarations lacked source/blueprint docstrings and the theorem docstring did not give the node proof step by step; fixes/IntegralLfpConstantModelComparison.lean adds them, comments only, signature byte-identical. nt_compile (--json, side overlay): snapshot and fixed file both compile with no errors; only the theorem's sorry (#print axioms)."
+  "reviewer": "NT-stage2-Codex-2c77cde3f",
+  "group": "Q11",
+  "result": "pass",
+  "note": "Wrote review.md. Checked all clauses, eight statement dependencies, source and declarations, universes, edge cases, normalized maps, docstrings, and route-pivot compliance. Immutable module compiled cleanly through scompile.py in both modes. No fixes required; no repository or branch changes made."
  },
  "lean": {
-  "module": "Sheaf.Topology.ContinuousMapCondensedRing",
-  "declaration": "Profinite.continuousMapRingObjOfUniverse",
-  "statement": "def continuousMapRingObjOfUniverse (T : Type v) [TopologicalSpace T] [Ring T] [IsTopologicalRing T] : Sheaf (coherentTopology Profinite.{u}) AddCommGrpCat.{max u v + 1}",
+  "module": "Sheaf.AlgebraicGeometry.ContinuousCoefficientCommRing",
+  "declaration": "Profinite.isCommMonObj_continuousCoefficientRingObj",
+  "declarations": [
+   "Profinite.continuousCoefficientRingPresheaf",
+   "Profinite.continuousCoefficientRingSheaf",
+   "Profinite.continuousCoefficientRingObj",
+   "Profinite.isCommMonObj_continuousCoefficientRingObj",
+   "Profinite.continuousMapRingSheafMap"
+  ],
+  "statement": "instance isCommMonObj_continuousCoefficientRingObj :\n    IsCommMonObj (continuousCoefficientRingObj T)",
   "branch": "newtargets-dag",
-  "by": "Q29",
+  "by": "Q11",
   "date": "2026-10-18",
   "existing": true,
-  "note": "§1(B): the generic condensed-ring notion is represented by the existing ring-object interface; this exact universe-polymorphic declaration supplies the continuous-function condensed ring used for the valuation ring A in the item, with its MonObj and commutative instances."
+  "note": "§1(B), existing universe-generalized binding. The closed upstream audit gives Profinite.continuousMapRingObj only for a coefficient carrier T : Type 0. This is too small to form the continuous condensed ring of the node's arbitrary finite extension E : Type u without a size restriction. The already published ContinuousCoefficientUniverse/ContinuousCoefficientCommRing interface gives exactly the same sections ULift C(S,T), precomposition and pointwise operations for T : Type u, and exports its commutative internal ring structure. The original continuousMapRingSheafMap remains available for Type 0 coefficients through ModuleObject.Basic; the item specializes continuous quotient postcomposition directly at Type u. No second definition of condensed rings is introduced, and no source or natural statement changes. The primary declaration is physically defined in ContinuousCoefficientCommRing; its public import exports the listed continuous ring constructors from ContinuousCoefficientUniverse."
  }
 }
