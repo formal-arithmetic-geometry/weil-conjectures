@@ -13,11 +13,117 @@
   "def-pc-fibre-product",
   "def-weil-geometric-point",
   "def-weil-pbc-strict-henselization-limit",
-  "def-kun-projection-formula-map"
+  "def-kun-projection-formula-map",
+  "def-weil-pbc-derived-categories"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The spectra defining $U$ and $V$ are affine, and strict-henselization functoriality makes $g$ local. Write $U=\\operatorname{Spec}B$, $V=\\operatorname{Spec}A$. For any affine open $\\operatorname{Spec}C$ in $V$, its inverse image is the affine fibre product $\\operatorname{Spec}(B\\otimes_A C)$. Thus $g$ is affine by the definition of an affine morphism. Thus affine-morphism permanence makes $g$ quasi-compact and quasi-separated. Apply the universal (*) assertion to the chosen base change $f'$ and the point $x'$: one covering member containing $x'$ supplies an integer $c$ with $R^qg_*F=0$ for every module sheaf $F$ and $q>c$. This is the single-sheaf vanishing bound for $\\Lambda$-module sheaves which the finite-dimension coproduct theorem takes as its finite cohomological dimension hypothesis (every $\\Lambda$-module sheaf is torsion since $m\\Lambda=0$, and $R^qg_*$ of a module sheaf has the underlying abelian higher direct image). That theorem therefore applies to the actual $Rg_*$ for our arbitrary torsion ring $\\Lambda$, and says that it preserves all set-indexed coproducts.",
+   "uses": [
+    "def-weil-pbc-strict-henselization-limit",
+    "lem-weil-pbc-strict-henselization-functoriality",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-trf-finite-type-torsion-universal-star",
+    "lem-etale-qcqs-finite-dimension-derived-coproducts",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/zheng-kunneth-nearby-cycles-appendix.pdf",
+    "place": "Definition A.1 and assertion preceding Remark A.2, p. 1; locally unavailable. Coproduct consequence: Stacks Tag 0F11, with module coefficients."
+   }
+  },
+  {
+   "text": "Fix a finite $p:T\\to V$ and put $W=U\\times_VT$, with $q:W\\to U$ and $r:W\\to T$; finite-morphism permanence makes $q$ finite. At closed geometric points, a strict localization localized again is itself, by ind-etale strict-local invariance. The finite strict-localization decomposition therefore writes $T=\\coprod_iT_i$, each $T_i$ strictly local and finite local over $V$, with purely inseparable closed residue extension. The corresponding $W_i=U\\times_VT_i$ is strictly local: its closed geometric fibre over $U$ has one point, because a finite purely inseparable residue extension admits exactly one embedding into an algebraic closure over the base field (every element has a uniquely prescribed $p$-power root; in characteristic zero the extension is trivial). Apply the same finite decomposition over $U$; with this singleton indexing set it identifies $W_i$ with its strict localization at that point. The second clause of the finite strict-localization node identifies the resulting square with the square of strict localizations. In particular $r_i:W_i\\to T_i$ and $q_i:W_i\\to U$ are local and the canonical $W_i\\to U\\times_VT_i$ is a strict localization. These are exactly the hypotheses of the assumed localized base-change invariance.",
+   "uses": [
+    "lem-trf-finite-base-strict-localization",
+    "lem-trf-ind-etale-strict-local-invariance",
+    "lem-weil-pbc-finite-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03QP, proposition-finite-higher-direct-image-zero, finite-over-strictly-henselian decomposition; strict-local cartesian identification: algebra.tex Tag 0GIP."
+   }
+  },
+  {
+   "text": "The hypothesis now gives $e_i:p_i^*Rg_*E\\xrightarrow{\\sim}Rr_{i*}q_i^*E$. Restriction to the open-and-closed pieces $T_i$ identifies the ordinary finite-square exchange $e:p^*Rg_*E\\to Rr_*q^*E$ with these maps: its adjunct on the $i$th piece is $r_i^*p_i^*Rg_*E=q_i^*g^*Rg_*E\\xrightarrow{q_i^*\\varepsilon_g}q_i^*E$, exactly the adjunct in the hypothesis. This componentwise assertion follows directly from sheaf restriction to a disjoint union, and remains true for complexes because all restrictions are exact. A map of complexes of sheaves on a finite disjoint union is a quasi-isomorphism precisely when each restriction is; consequently $e$ is an isomorphism. If $T$ is empty both its derived category and this assertion are zero.",
+   "uses": [
+    "lem-trf-finite-base-strict-localization",
+    "def-kun-projection-formula-map"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03QP, finite decomposition; the comparison is checked by its defining adjunction counit."
+   }
+  },
+  {
+   "text": "Put $A=Rg_*E$ and $N=Rp_*\\Lambda_T$. The finite morphisms $p,q$ are proper. Their ordinary projection maps are invertible for the torsion ring $\\Lambda$; proper base change for $p$ also gives the canonical isomorphism $\\theta:g^*N\\xrightarrow{\\sim}Rq_*\\Lambda_W$. Form the composite\n$$\\begin{aligned}\nA\\otimes^LN&\\xrightarrow{\\sim}Rp_*p^*A\n\\xrightarrow{Rp_*e}Rp_*Rr_*q^*E\n\\xrightarrow{\\sim}Rg_*Rq_*q^*E\\\\\n&\\xrightarrow{\\sim}Rg_*(E\\otimes^LRq_*\\Lambda_W)\n\\xrightarrow{Rg_*(1\\otimes\\theta^{-1})}Rg_*(E\\otimes^Lg^*N).\n\\end{aligned}$$\nThe first arrow is the forward projection map for $p$; the fourth is the inverse projection map for $q$, using tensor symmetry and their coefficient units. The middle identification is derived direct-image composition for $pr=gq$. Thus every arrow is invertible. No boundedness of $A$, $E\\otimes^Lg^*N$, or $N$ is needed by the cited unbounded proper statements.",
+   "uses": [
+    "lem-weil-pbc-finite-proper",
+    "lem-kun-0f0g",
+    "lem-kun-proper-base-change-torsion-ring",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "def-kun-projection-formula-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F0G, lemma-projection-formula-proper-mod-n, and unbounded proper base change; derived.tex composition comparison. Applied only to finite p and q."
+   }
+  },
+  {
+   "text": "To identify the step-4 composite with $\\mathrm{PF}_g(E,N)$, compose the latter with $Rg_*(1\\otimes\\theta)$ and then $Rg_*(\\mathrm{PF}_q(\\Lambda_W,E))$, using symmetry to view the latter as $E\\otimes^LRq_*\\Lambda_W\\to Rq_*q^*E$. Compare it with the initial segment $\\kappa\\circ Rp_*e\\circ\\mathrm{PF}_p(\\Lambda_T,A)$ of step 4, with source symmetry understood. Both maps land in $Rg_*Rq_*q^*E=Rp_*Rr_*q^*E$. Transpose under the common composite adjunction $(gq)^*=(pr)^*\\dashv Rg_*Rq_*$. For the first map, expansion of the two projection maps and of $\\theta$ gives the adjunct\n$$q^*g^*A\\otimes^Lr^*p^*N\\xrightarrow{q^*\\varepsilon_{g,E}\\otimes r^*\\varepsilon_{p,\\Lambda_T}}q^*E\\otimes^L\\Lambda_W\\simeq q^*E.$$\nFor the second map, expansion of the forward $p$-projection gives the same formula because $\\varepsilon_r\\circ r^*e=q^*\\varepsilon_g$, the defining adjunct equation of $e$. In the first expansion one uses $\\varepsilon_q\\circ q^*\\theta=r^*\\varepsilon_p$, the defining adjunct equation of $\\theta$. Equality of adjuncts proves equality of these composites. Cancel the two invertible target maps; their inverses are precisely the last two arrows of step 4. Thus that composite is the canonical $\\mathrm{PF}_g(E,N)$.",
+   "uses": [
+    "def-kun-projection-formula-map",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Section projection-formula, equation-projection-formula-map: expansion of the counit-defined mates; elementary adjunction calculation."
+   }
+  },
+  {
+   "text": "Let $\\mathcal L$ be the strictly full subcategory of $D(V_{\\mathrm{Et}},\\Lambda)$ on which $\\mathrm{PF}_g(E,-)$ is invertible. The coefficient category of $\\Lambda$-modules satisfies the hypotheses of triangle closure: it is Grothendieck abelian, closed symmetric monoidal with additive tensor, has functorial (free) flat resolutions, and etale inverse image preserves flat module sheaves because flatness is tested on stalks and $g^*$ preserves stalks. Hence $\\mathcal L$ is closed under shifts and distinguished triangles by triangle closure. Both functors of this natural transformation preserve coproducts: derived tensor does, $g^*$ does since it is a left adjoint, and $Rg_*$ does by step 1. Naturality with the coprojections then identifies its component on a coproduct with the coproduct of its components. Hence $\\mathcal L$ is closed under every set-indexed coproduct. Step 5 places each $Rp_*\\Lambda_T$ for finite $p:T\\to V$ in $\\mathcal L$. Since $V$ is affine, finite constant derived generation gives $\\mathcal L=D(V_{\\mathrm{Et}},\\Lambda)$. In particular it contains the given $M\\in D^-$, proving the assertion with the original coefficient category and the original canonical morphism.",
+   "uses": [
+    "lem-etale-projection-formula-triangle-closure",
+    "lem-kun-derived-tensor-direct-sums",
+    "def-kun-projection-formula-map",
+    "lem-trf-finite-constant-derived-generation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 05K0 finite compactification, via the separately stated derived-generation lemma; sites-cohomology.tex projection-formula and etale-cohomology.tex Tag 0F11 for coproduct closure."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-strict-henselization-limit",
+  "lem-weil-pbc-strict-henselization-functoriality",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-trf-finite-type-torsion-universal-star",
+  "lem-etale-qcqs-finite-dimension-derived-coproducts",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-trf-finite-base-strict-localization",
+  "lem-trf-ind-etale-strict-local-invariance",
+  "lem-weil-pbc-finite-morphism-permanence",
+  "def-kun-projection-formula-map",
+  "lem-weil-pbc-finite-proper",
+  "lem-kun-0f0g",
+  "lem-kun-proper-base-change-torsion-ring",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-etale-projection-formula-triangle-closure",
+  "lem-kun-derived-tensor-direct-sums",
+  "lem-trf-finite-constant-derived-generation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Agent proof of the strict-local projection-formula input to Zheng Theorem A.3, using Tag 05K0 finite generators, finite proper projection/base change, and universal (*) for finite cohomological dimension. Zheng local PDF WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -39,10 +145,38 @@
    "results": "0 hits: ",
    "date": "2026-10-17",
    "verdict": "no match: inspected signatures concern ordinary scheme properties, sheaf composition/restriction or homological-complex cycles, not the strict-local etale cohomological assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Projection formula for derived direct image of etale sheaves commuting with localized base change on strictly local schemes",
+   "results": "8 hits: AlgebraicGeometry.StructureSheaf.toOpen_comp_comap, AlgebraicGeometry.StructureSheaf.toPushforwardStalk_comp, AlgebraicGeometry.LocallyRingedSpace.toΓSpecSheafedSpace_app_spec, AlgebraicGeometry.LocallyRingedSpace.toΓSpecSheafedSpace_app_spec_assoc, AlgebraicGeometry.StructureSheaf.toPushforwardStalk_comp_assoc, Algebra.basicOpen_subset_etaleLocus_iff, AlgebraicGeometry.LocallyRingedSpace.toΓSpecCApp_iff, AlgebraicGeometry.StructureSheaf.toOpen_comp_comap_assoc",
+   "date": "2026-10-18",
+   "verdict": "no match: returned signatures concern local generators, ordinary scheme properties, localization, or abstract separators, not generation of the etale derived category by finite constant direct images"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalCategory, CategoryTheory.Adjunction",
+   "results": "12 hits: CategoryTheory.Adjunction.leftAdjointOplaxMonoidal, CategoryTheory.Adjunction.rightAdjointLaxMonoidal, CategoryTheory.Adjunction.IsMonoidal, CategoryTheory.Adjunction.laxMonoidalEquivOplaxMonoidal, CategoryTheory.Adjunction.instIsMonoidal, CategoryTheory.Adjunction.instIsMonoidal_1, CategoryTheory.Adjunction.isMonoidal_comp, CategoryTheory.Adjunction.IsMonoidal.leftAdjoint_ε",
+   "date": "2026-10-18",
+   "verdict": "no match: returned signatures concern local generators, ordinary scheme properties, localization, or abstract separators, not generation of the etale derived category by finite constant direct images"
+  },
+  {
+   "tool": "grep",
+   "query": "projectionFormula|projection_formula|strictLocalization",
+   "results": "0 hits: ",
+   "date": "2026-10-18",
+   "verdict": "no match: returned signatures concern local generators, ordinary scheme properties, localization, or abstract separators, not generation of the etale derived category by finite constant direct images"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived etale projection formula under finite base change invariance",
+   "results": "8 hits: Algebra.Etale.baseChange, AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, RingHom.Etale.isStableUnderBaseChange, Algebra.FormallyEtale.iff_of_equiv, AlgebraicGeometry.isSmooth_isStableUnderBaseChange, AlgebraicGeometry.IsProper.isStableUnderBaseChange, AlgebraicGeometry.quasiCompact_isStableUnderBaseChange",
+   "date": "2026-10-18",
+   "verdict": "no match: returned signatures concern local generators, ordinary scheme properties, localization, or abstract separators, not generation of the etale derived category by finite constant direct images"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-good-oriented-nearby-kunneth",
@@ -63,5 +197,79 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-strict-local-base-invariant-projection",
+  "worker": "stage1",
+  "summary": "Preserved the statement; derived ordinary finite base change from the strict-local hypothesis and finite decomposition; proved the canonical projection map on finite constant direct images, checked its adjunct, and extended by a new independent generation lemma. Arbitrary torsion rings retained; no constructibility, Noetherian or finite-Tor hypotheses added.",
+  "blueprint": "Realizes the normal-cone external-product supporting input to lem-trf-local-term-locality, via lem-trf-trace-specialization, lem-trf-specialization-external-product and lem-trf-good-oriented-nearby-kunneth. This is the projection-formula factor of the local Kunneth comparison; the chapter and unit route are unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-strict-henselization-functoriality",
+    "why": "General scheme, derived-functor or tensor tool used with its stated hypotheses in the local projection argument; it supplies no replacement for the trace-formula unit route."
+   },
+   {
+    "node": "lem-weil-pbc-affine-morphism-permanence",
+    "why": "General scheme, derived-functor or tensor tool used with its stated hypotheses in the local projection argument; it supplies no replacement for the trace-formula unit route."
+   },
+   {
+    "node": "lem-etale-qcqs-finite-dimension-derived-coproducts",
+    "why": "General scheme, derived-functor or tensor tool used with its stated hypotheses in the local projection argument; it supplies no replacement for the trace-formula unit route."
+   },
+   {
+    "node": "lem-weil-pbc-finite-proper",
+    "why": "General scheme, derived-functor or tensor tool used with its stated hypotheses in the local projection argument; it supplies no replacement for the trace-formula unit route."
+   },
+   {
+    "node": "lem-kun-0f0g",
+    "why": "Used only for finite morphisms p and q, never for g; supplies the two finite tensor identifications in the test-object calculation."
+   },
+   {
+    "node": "lem-kun-proper-base-change-torsion-ring",
+    "why": "Used only for the finite horizontal p to identify g^*Rp_*Lambda with Rq_*Lambda, not to assume the desired exchange for g."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "why": "General scheme, derived-functor or tensor tool used with its stated hypotheses in the local projection argument; it supplies no replacement for the trace-formula unit route."
+   },
+   {
+    "node": "lem-etale-projection-formula-triangle-closure",
+    "why": "General scheme, derived-functor or tensor tool used with its stated hypotheses in the local projection argument; it supplies no replacement for the trace-formula unit route."
+   },
+   {
+    "node": "lem-kun-derived-tensor-direct-sums",
+    "why": "General scheme, derived-functor or tensor tool used with its stated hypotheses in the local projection argument; it supplies no replacement for the trace-formula unit route."
+   },
+   {
+    "node": "lem-weil-pbc-fibre-product-affine-spectra",
+    "why": "Affine fibre products and finite base-change permanence verify the geometric hypotheses of the strict-local comparison; generic scheme tools without a replacement of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-finite-morphism-permanence",
+    "why": "Affine fibre products and finite base-change permanence verify the geometric hypotheses of the strict-local comparison; generic scheme tools without a replacement of the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-strict-henselization-functoriality",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-etale-qcqs-finite-dimension-derived-coproducts",
+  "lem-weil-pbc-finite-proper",
+  "lem-kun-0f0g",
+  "lem-kun-proper-base-change-torsion-ring",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-etale-projection-formula-triangle-closure",
+  "lem-kun-derived-tensor-direct-sums",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-finite-morphism-permanence"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-NE-6f46af114",
+  "group": "NE",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NE-6f46af114 (reviewer sub-agent of L); spot-checked: I read the item, its six steps, the new node lem-trf-finite-constant-derived-generation and the statement of every cited node in full; the item's proof is correct. The item statement is unchanged against the live and side DAGs; the only addition is the stmt_dep def-weil-pbc-derived-categories, which D^- needs. Zheng's appendix is not in literature/; it is listed as WANTED and the proof is marked agent-written, which is the right handling. Step 2: each T_i, and each W_i = U x_V T_i, is strictly local with one closed point, because a finite purely inseparable extension of a separably closed residue field stays local. So the localized base-change hypothesis applies exactly to the finite square, and step 3 then makes the exchange map an isomorphism componentwise. Step 4: the finite projection formula (lem-kun-0f0g, checked against Stacks 0F0G) and proper base change are applied only to the finite maps p and q. Step 5: I recomputed both adjuncts as q^*eps_g tensor r^*eps_p, so the composite is the canonical PF_g and not just some isomorphism. Step 6: the localizing argument with V affine is valid. New node: it is statement-only, self-contained and searched in Mathlib, and it is not a restatement of the item. I re-derived it from Stacks 05K0 (local copy, line 12457): j_! of each affine etale object is the cone of two finite constant direct images, and telescopes give the unbounded category (AB5). It is true for any ring Lambda, also non-Noetherian or zero, and on the empty scheme, a separably closed point and a strictly henselian trait. A search of dag/nodes found no duplicate (det-sf-determination-localizing, det-ctf-*, det-brown-* and lem-pc-derived-qcoh-* are other settings). The DAG stays acyclic and no SGA is cited. I accept the eleven declared generic tool_uses as black boxes used with their stated hypotheses. Fixes (text of the item's steps 1 and 6 only): step 1 now says the universal-(*) bound is the Lambda-module single-sheaf finite-cd hypothesis that lem-etale-qcqs-finite-dimension-derived-coproducts takes; step 6 now checks the coefficient-category hypotheses of lem-etale-projection-formula-triangle-closure for Lambda-modules (Grothendieck, closed monoidal, flat resolutions, etale pullback preserves flatness).; 1 file(s) fixed by the reviewer"
  }
 }
