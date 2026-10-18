@@ -2,7 +2,7 @@
  "id": "lem-trf-colimit-unramified-algebra",
  "kind": "statement",
  "title": "Unramified algebra maps descend along directed colimits",
- "statement": "Let $I$ be a nonempty directed set and let $A=\\varinjlim_{i\\in I}A_i$ be a directed colimit of commutative rings. Fix $i_0\\in I$ and a map of $A_{i_0}$-algebras $\\varphi_0:B_0\\to C_0$. Put $B_i=A_i\\otimes_{A_{i_0}}B_0$, $C_i=A_i\\otimes_{A_{i_0}}C_0$, and $B=A\\otimes_{A_{i_0}}B_0$, $C=A\\otimes_{A_{i_0}}C_0$. Assume that $B\\to C$ is unramified as a ring map, meaning that $C$ is a finitely generated $B$-algebra and its module of Kähler differentials $\\Omega_{C/B}$ is zero [def-weil-pbc-kahler-differentials], and assume that $C_0$ is a finitely generated $B_0$-algebra. Then there exists $i\\ge i_0$ such that $B_i\\to C_i$ is unramified: $C_i$ is finitely generated over $B_i$ and $\\Omega_{C_i/B_i}=0$.",
+ "statement": "Let $I$ be a nonempty directed set and let $A=\\varinjlim_{i\\in I}A_i$ be a directed colimit of commutative rings. Fix $i_0\\in I$ and a map of $A_{i_0}$-algebras $\\varphi_0:B_0\\to C_0$. For $i\\ge i_0$ put $B_i=A_i\\otimes_{A_{i_0}}B_0$, $C_i=A_i\\otimes_{A_{i_0}}C_0$, and $B=A\\otimes_{A_{i_0}}B_0$, $C=A\\otimes_{A_{i_0}}C_0$. Assume that $B\\to C$ is unramified as a ring map, meaning that $C$ is a finitely generated $B$-algebra and its module of Kähler differentials $\\Omega_{C/B}$ is zero [def-weil-pbc-kahler-differentials], and assume that $C_0$ is a finitely generated $B_0$-algebra. Then there exists $i\\ge i_0$ such that $B_i\\to C_i$ is unramified: $C_i$ is finitely generated over $B_i$ and $\\Omega_{C_i/B_i}=0$.",
  "source": {
   "document": "literature/stacks-project/algebra.tex",
   "place": "Tag 0C4F (algebra-lemma-colimit-unramified), statement and proof"
@@ -11,9 +11,78 @@
   "def-weil-pbc-category-colimit",
   "def-weil-pbc-kahler-differentials"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose algebra generators $x_1,\\ldots,x_m$ of $C_0$ over $B_0$, allowing $m=0$, and write $x_{r,i}=1\\otimes x_r\\in C_i$. For $i\\ge i_0$, every element of $C_i$ is a finite sum of tensors $a\\otimes c$. Write $c$ as a polynomial in the $x_r$ with coefficients in $B_0$. Then $a\\otimes c$ is the same polynomial in the $x_{r,i}$, with each coefficient $b$ replaced by $a\\otimes b\\in B_i$ (distribute the scalar $a$ across the coefficients). Thus the $x_{r,i}$ generate $C_i$ over $B_i$. The identical computation with $A$ gives generators of $C$ over $B$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0C4F (lemma-colimit-unramified), proof: choose algebra generators; tensor expansion"
+   }
+  },
+  {
+   "text": "Set $M_0=\\Omega_{C_0/B_0}$ and $v_r=\\mathrm d x_r$. The presentation in [def-weil-pbc-kahler-differentials] says that differentials $\\mathrm d c$ generate $M_0$. For a monomial $b x_1^{e_1}\\cdots x_m^{e_m}$, repeated Leibniz gives $\\mathrm d(b x_1^{e_1}\\cdots x_m^{e_m})=\\sum_{r:e_r>0} e_r b x_1^{e_1}\\cdots x_r^{e_r-1}\\cdots x_m^{e_m}\\mathrm d x_r$, since $\\mathrm d b=0$. Additivity extends this to every polynomial expression for $c$. Hence the $v_r$ generate $M_0$. Applied to the generators from step 1, the same calculation shows that $\\mathrm d x_{r,i}$ generate $\\Omega_{C_i/B_i}$ for every $i\\ge i_0$. If $m=0$, all these modules are zero.",
+   "uses": [
+    "def-weil-pbc-kahler-differentials"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0C4F (lemma-colimit-unramified), first generator sentence; the Leibniz calculation in Tag 00RX (lemma-differentials-polynomial-ring), first proof paragraph"
+   }
+  },
+  {
+   "text": "For any $A_{i_0}$-algebra $T$ put $B_T=T\\otimes_{A_{i_0}}B_0$ and $C_T=T\\otimes_{A_{i_0}}C_0$. The ring map $B_T\\otimes_{B_0}C_0\\to C_T$, $(t\\otimes b)\\otimes c\\mapsto t\\otimes\\varphi_0(b)c$, has inverse $t\\otimes c\\mapsto(t\\otimes1)\\otimes c$. The balancing relations verify both composites on pure tensors. Also $C_T\\otimes_{C_0}M_0\\cong T\\otimes_{A_{i_0}}M_0$: send $(t\\otimes c)\\otimes\\omega$ to $t\\otimes c\\omega$, with inverse $t\\otimes\\omega\\mapsto(t\\otimes1)\\otimes\\omega$. Again balancing verifies the formulas and their inverse identities. These identifications apply to $T=A_i$ and to $T=A$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0C4F (lemma-colimit-unramified), base-changed rings in the proof; explicit tensor identifications for applying Tag 00RV"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-kahler-differentials-base-change] to $B_0\\to B_T$ and $B_0\\to C_0$, using the ring identification of step 3. Its $C_T$-module form gives $\\Omega_{C_T/B_T}\\cong C_T\\otimes_{C_0}M_0$. Combining with step 3 gives an isomorphism $F_T:T\\otimes_{A_{i_0}}M_0\\longrightarrow\\Omega_{C_T/B_T}$ that sends $1\\otimes v_r$ to $\\mathrm d(1\\otimes x_r)$. This generator formula follows from the stated formula for the canonical base-change map. In particular $F_A(1\\otimes v_r)=0$, because the hypothesis that $B\\to C$ is unramified includes $\\Omega_{C/B}=0$. Injectivity of $F_A$ implies $1\\otimes v_r=0$ in $A\\otimes_{A_{i_0}}M_0$ for every $r$.",
+   "uses": [
+    "lem-weil-pbc-kahler-differentials-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00RV (lemma-differentials-base-change); Tag 0C4F (lemma-colimit-unramified), vanishing in the colimit"
+   }
+  },
+  {
+   "text": "Apply clause (2) of [lem-weil-pbc-directed-colimit-base-change-elementwise] with initial index $i_0$ and the arbitrary $A_{i_0}$-module $M_0$. For each $r$ apply it to $1\\otimes v_r\\in A_{i_0}\\otimes_{A_{i_0}}M_0$: step 4 says its image in $A\\otimes_{A_{i_0}}M_0$ is zero. Obtain $j_r\\ge i_0$ with $1\\otimes v_r=0$ in $A_{j_r}\\otimes_{A_{i_0}}M_0$. Choose $i\\ge i_0,j_1,\\ldots,j_m$ by finitely many applications of directedness (take $i=i_0$ if $m=0$). The transition map sends $a\\otimes\\omega$ to $\\alpha_{i j_r}(a)\\otimes\\omega$, so it sends these zero elements to $1\\otimes v_r=0$ in $A_i\\otimes_{A_{i_0}}M_0$. Applying $F_{A_i}$ from step 4 yields $\\mathrm d x_{r,i}=0$ for every $r$.",
+   "uses": [
+    "lem-weil-pbc-directed-colimit-base-change-elementwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0C4F (lemma-colimit-unramified), final sentence; Tags 00D7 (lemma-zero-directed-limit) and 00DD (lemma-tensor-products-commute-with-limits) for the existing elementwise tensor-colimit lemma"
+   }
+  },
+  {
+   "text": "At the index $i$ of step 5, every generator $\\mathrm d x_{r,i}$ of $\\Omega_{C_i/B_i}$ from step 2 is zero; a linear combination of zero generators is zero, so $\\Omega_{C_i/B_i}=0$. Step 1 already proves that $C_i$ is a finitely generated $B_i$-algebra. These are exactly the two conditions defining unramified in the statement, and $i\\ge i_0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0C4F (lemma-colimit-unramified), last sentence"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-kahler-differentials",
+  "lem-weil-pbc-kahler-differentials-base-change",
+  "lem-weil-pbc-directed-colimit-base-change-elementwise"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 0C4F (lemma-colimit-unramified), proof; the colimit-of-differentials sentence is implemented using Tag 00RV and the existing elementwise tensor-colimit node (00D6, 00D7, 00DD)."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -42,10 +111,45 @@
    "results": "AlgebraicGeometry.FormallyUnramified.recOn; Algebra.Unramified.mk; RingHom.FormallyUnramified; Algebra.Unramified; no finite-stage colimit descent theorem",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "colimit.*[Uu]nramified|[Uu]nramified.*colimit|Unramified.*[Dd]irect[Ll]imit",
+   "results": "0 hits: none. No theorem descending unramified maps to a finite stage.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Descent of unramified finite type ring homomorphisms from a filtered colimit to one of its stages",
+   "results": "8 hits: AlgebraicGeometry.FormallyUnramified.recOn; CommRingCat.FilteredColimits.colimit; AlgebraicGeometry.FormallyUnramified.casesOn; RingHom.EssFiniteType.exists_eq_comp_ι_app_of_isColimit; RingHom.FormallyUnramified; CommRingCat.FilteredColimits.colimitCoconeIsColimit; RingCat.FilteredColimits.colimit; CommRingCat.FilteredColimits.colimitCocone. No theorem descending unramified maps to a finite stage.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.Unramified",
+   "results": "12 hits: Algebra.Unramified; Algebra.Unramified.formallyUnramified; Algebra.Unramified.finiteType; Algebra.Unramified.of_isLocalization_Away; Algebra.Unramified.mk; Algebra.Unramified.of_equiv; Algebra.Unramified.comp; Algebra.Unramified.baseChange. No theorem descending unramified maps to a finite stage.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite type algebra map over a directed system of rings which becomes unramified over the colimit becomes unramified at a finite stage",
+   "results": "8 hits: Algebra.FormallyUnramified.instForall; Algebra.FormallyUnramified.pi_iff; Algebra.Unramified.finiteType; Algebra.IsUnramifiedAt.of_liesOver; Algebra.IsUnramifiedAt.of_restrictScalars; IsUnramifiedAt.of_liesOver_of_ne_bot; Algebra.IsUnramifiedAt.comp; Algebra.Unramified.comp. No theorem descending unramified maps to a finite stage.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If the module of Kähler differentials of a finitely generated algebra vanishes after extension to a directed colimit, it vanishes after extension to some ring in the system",
+   "results": "8 hits: Algebra.Extension.Cotangent.finite; KaehlerDifferential.finite; KaehlerDifferential.ideal_fg; Algebra.FormallySmooth.instFinitePresentationKaehlerDifferentialOfEssFiniteType; Algebra.instFinitePresentationKaehlerDifferentialOfFinitePresentation; Algebra.Generators.CotangentSpace.exact; Algebra.Generators.Cotangent.exact; Algebra.instFiniteH1CotangentOfFinitePresentationOfProjectiveKaehlerDifferential. No theorem descending unramified maps to a finite stage.",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-unramified-limit-descent",
@@ -73,5 +177,22 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-colimit-unramified-algebra",
+  "worker": "stage1",
+  "group": "Q08",
+  "summary": "Read Stacks 0C4F and its differential/colimit inputs. Six steps give algebra generators at every stage, compute their differentials by Leibniz, write inverse tensor identifications, use the existing differential base-change leaf, kill the finitely many differentials using the existing Lean-closed elementwise tensor-colimit theorem, and conclude. No new nodes. Clarified that B_i and C_i are defined only for i >= i_0, as in the source; no mathematical hypothesis or conclusion changed.",
+  "blueprint": "Historical ancestry retained: the unramified affine-algebra input to the nodal-family approximation under lem-trf-local-term-locality, via lem-trf-unramified-limit-descent. This realizes the complete proof of Stacks 0C4F; it does not restore the obsolete nearby-duality route to the revised blueprint local-term theorem.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q08-1d9e16391",
+  "group": "Q08",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q08-1d9e16391 (reviewer sub-agent of L); spot-checked: I read the item, the parent lem-trf-unramified-limit-descent, the unit sk-i-curve-zero, all four cited nodes, and Stacks algebra.tex Tags 0C4F (lemma-colimit-unramified) and 031G (lemma-colimit-differentials). The statement matches 0C4F hypothesis by hypothesis, with unramified meaning finite type plus Omega=0 (00UT); the only change is that B_i and C_i are defined for i>=i_0, which weakens nothing. The parent applies the item with i_0=0 and a finite-type phi, matching the statement. Step 1: tensor expansion gives generators of C_i over B_i, correct. Step 2: Leibniz with dphi_0(b)=0 from the def node's presentation, correct; m=0 works. Step 3: explicit tensor isomorphisms, and the ring isomorphism is compatible with B_T->C_T. Step 4: the base-change Mathlib leaf (tensorKaehlerEquiv) with R=B_0, R'=B_T, S=C_0; the generator formula follows from the stated r' tensor ds formula, and Omega_{C/B}=0 gives 1 tensor v_r=0. Step 5: clause (2) of the slopmaster2-closed elementwise tensor-colimit node for an arbitrary module, then directedness, correct. Step 6 concludes both clauses. proof_deps equals the union of uses. All non-definition citations are Mathlib leaves or Lean-closed, so no tool_uses are needed and none are accepted. There are no new nodes. rg for 0C4F, 0C4W, 031G and unramified with colimit found no duplicate. Edge cases checked: m=0, C_0=0, A=0, one-element I, and the case A_i=Z[1/n!] with C_0=Z[x]/(2x). No SGA is used. No fixes were made."
  }
 }

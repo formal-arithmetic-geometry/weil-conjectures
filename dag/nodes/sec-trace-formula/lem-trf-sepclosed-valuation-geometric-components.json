@@ -20,9 +20,127 @@
   "def-weil-algebraic-closure",
   "def-pc-reduced-scheme"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $S=\\operatorname{Spec}V$. By [lem-weil-pbc-spec-domain-stalks-function-field], $S$ is integral, has function field $K$, and its stalk at a prime $\\mathfrak q$ is $V_{\\mathfrak q}$. Regard $V_{\\mathfrak q}$ as a subring of $K$. It contains $V$, has the same fraction field $K$, and for every nonzero $a\\in K$, either $a$ or $a^{-1}$ already lies in $V$, hence in $V_{\\mathfrak q}$. Thus each $V_{\\mathfrak q}$ is a valuation ring. Apply [lem-weil-pbc-valuation-ring-normal] to each one: every stalk of $S$ is a normal domain. This proves exactly the normality needed below, without a height or Noetherian assumption.",
+   "uses": [
+    "lem-weil-pbc-spec-domain-stalks-function-field",
+    "lem-weil-pbc-valuation-ring-normal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00IC, lemma-valuation-ring-normal; schemes.tex Tag 01HV, lemma-spec-sheaves; properties.tex Tag 01ON, lemma-characterize-integral; morphisms.tex Tag 01RW, definition-function-field"
+   }
+  },
+  {
+   "text": "Apply clause (2) of [sbc-lem-etale-over-normal] to the integral normal scheme $S$ of Step 1, whose function field $K$ is separably closed. Every $V_{\\mathfrak p}$ is strictly henselian, hence its residue field is separably closed by [def-weil-pbc-henselian-terminology]. Its residue field is $V_{\\mathfrak p}/\\mathfrak pV_{\\mathfrak p}=\\operatorname{Frac}(V/\\mathfrak p)$: reduction sends $a/s$ to $\\bar a/\\bar s$ for $s\\notin\\mathfrak p$, and every nonzero element of $V/\\mathfrak p$ is the image of such a denominator. This proves the first assertion for every prime, including $\\mathfrak p=(0)$.",
+   "uses": [
+    "sbc-lem-etale-over-normal",
+    "def-weil-pbc-henselian-terminology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 09Z9, lemma-normal-scheme-with-alg-closed-function-field, clause (2)"
+   }
+  },
+  {
+   "text": "Fix the stated $k$, $Z$, and an irreducible component $C$ with its reduced induced structure. By [lem-weil-pbc-reduced-induced-closed-subscheme], $i:C\\hookrightarrow Z$ is a closed immersion and $C$ is reduced. Apply [lem-sbc-subset-geometric-irreducibility] to $X=Z$, $A=|C|$, and the separably closed extension $\\Omega=k$ with its identity map. The inverse image at this extension is $|C|$ itself, irreducible and nonempty. Hence its inverse image in $Z_L$ is irreducible and nonempty for every $L/k$. It is exactly $|C_L|$: [lem-weil-pbc-closed-immersion-base-change] gives a closed immersion $C_L\\hookrightarrow Z_L$, and on an affine chart its image is $V(I(A\\otimes_k L))$, since $(A/I)\\otimes_kL=(A\\otimes_kL)/I(A\\otimes_kL)$ by the tensor-product universal property. This is the inverse image of $V(I)$. The affine fibre-product description is [lem-weil-pbc-fibre-product-affine-spectra]. Thus every $C_L$ is irreducible.",
+   "uses": [
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "lem-sbc-subset-geometric-irreducibility",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 020J, lemma-separably-closed-irreducible; Tag 038I, subset formulation; affine closed-subscheme calculation"
+   }
+  },
+  {
+   "text": "Choose an affine open $U=\\operatorname{Spec}A$ of $Z$ meeting $C$. By [lem-weil-pbc-spec-irreducible-closed-subsets-primes], $C\\cap U=V(\\mathfrak q)$ for a prime $\\mathfrak q$. This prime is minimal: an irreducible closed subset of $U$ strictly containing $C\\cap U$ would have irreducible closure in $Z$ containing $C$, contradicting its maximality. Here the closure of $C\\cap U$ is $C$, since a nonempty open of an irreducible space is dense. The point $\\xi$ corresponding to $\\mathfrak q$ is therefore the generic point of $C$. The reduced induced structure gives $C\\cap U=\\operatorname{Spec}(A/\\mathfrak q)$ by [lem-weil-pbc-reduced-induced-closed-subscheme]. The scheme $Z$ is reduced by the hypothesis with $L=k$, so $A$ is reduced by [def-pc-reduced-scheme]. By [lem-weil-pbc-minimal-prime-reduced-localization-field], $A_{\\mathfrak q}$ is a field and $\\mathfrak q A_{\\mathfrak q}=0$. Consequently the stalk maps identify $\\mathcal O_{C,\\xi}=(A/\\mathfrak q)_{\\mathfrak q/\\mathfrak q}=A_{\\mathfrak q}/\\mathfrak q A_{\\mathfrak q}=A_{\\mathfrak q}=\\mathcal O_{Z,\\xi}$; the affine stalk identifications, including their scalar maps, are [lem-weil-pbc-affine-open-stalk-localization].",
+   "uses": [
+    "lem-weil-pbc-spec-irreducible-closed-subsets-primes",
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "def-pc-reduced-scheme",
+    "lem-weil-pbc-minimal-prime-reduced-localization-field",
+    "lem-weil-pbc-affine-open-stalk-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 04KS, lemma-generic-points-geometrically-reduced; generic local ring of a reduced component; algebra.tex Tag 00EU, lemma-minimal-prime-reduced-ring"
+   }
+  },
+  {
+   "text": "Let $L/k$ be any field extension and use the chart and minimal prime of Step 4. By [lem-weil-pbc-open-immersion-base-change], $U_L$ is an open subscheme of the reduced scheme $Z_L$, and [lem-weil-pbc-fibre-product-affine-spectra] identifies it with $\\operatorname{Spec}(A\\otimes_k L)$. Hence $A\\otimes_kL$ is reduced by [def-pc-reduced-scheme]. Apply [lem-weil-pbc-localization-tensor-over-base] with base ring $k$, algebra and module $A$, multiplicative subset $T=A\\setminus\\mathfrak q$, and $N=L$. It identifies $A_{\\mathfrak q}\\otimes_kL$ with $T^{-1}(A\\otimes_kL)$ as rings: its displayed map sends $(a\\otimes l)/t$ to $(a/t)\\otimes l$ and preserves products and units on generators. This localization is reduced. Indeed, if $(b/t)^d=0$, some denominator $s$ satisfies $sb^d=0$; then $(sb)^d=0$, so $sb=0$ in the reduced ring, and $b/t=0$. Step 4 now gives that $\\mathcal O_{C,\\xi}\\otimes_kL$ is reduced for every $L/k$.",
+   "uses": [
+    "lem-weil-pbc-open-immersion-base-change",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-pc-reduced-scheme",
+    "lem-weil-pbc-localization-tensor-over-base"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 04KS, lemma-generic-points-geometrically-reduced, and Tag 035W, lemma-geometrically-reduced-at-point; localization calculation expanded"
+   }
+  },
+  {
+   "text": "The reduced scheme $C$ is irreducible and has the single generic point $\\xi$ of Step 4. Step 5 verifies the generic-local-ring hypothesis of [lem-pur-geometric-reducedness-from-generic-stalks] for $X=C$, so $C_L$ is reduced for every field extension $L/k$. Step 3 makes the same scheme irreducible and nonempty. Thus $C_L$ is integral by [def-pc-integral-scheme]. This proves the entire geometric-integrality assertion, with no properness, smoothness, or perfection assumption on $k$.",
+   "uses": [
+    "lem-pur-geometric-reducedness-from-generic-stalks",
+    "def-pc-integral-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 04KS, lemma-generic-points-geometrically-reduced, clause (3)"
+   }
+  },
+  {
+   "text": "Put $\\Omega=\\overline k$. For every field extension $E/k$, [lem-weil-pbc-field-tensor-irreducible] gives irreducibility of $\\operatorname{Spec}(\\Omega\\otimes_kE)$. By [lem-weil-pbc-fibre-product-affine-spectra] this is $(\\operatorname{Spec}\\Omega)_E$, so $\\operatorname{Spec}\\Omega$ is geometrically irreducible. Apply [lem-sc-product-irreducible-components-bijection] with $U=\\operatorname{Spec}\\Omega$ and $V=Z$. Thus the projection $Z_\\Omega\\to Z$ induces a bijection on irreducible components. If $D$ is the component corresponding to $C$, its image is contained in $C$, so $D\\subseteq |C_\\Omega|$, using the inverse-image description in Step 3. The latter is irreducible by Step 3; maximality of the component $D$ forces $D=|C_\\Omega|$. Hence the inverse bijection is precisely $C\\mapsto C_\\Omega$. By Step 6, $C_\\Omega$ is reduced, and its immersion into $Z_\\Omega$ is closed by [lem-weil-pbc-closed-immersion-base-change]. The uniqueness clause of [lem-weil-pbc-reduced-induced-closed-subscheme] therefore identifies it with the reduced induced structure on that component. This includes the empty scheme, when both component sets are empty.",
+   "uses": [
+    "lem-weil-pbc-field-tensor-irreducible",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-sc-product-irreducible-components-bijection",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-weil-pbc-reduced-induced-closed-subscheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 038H, lemma-separably-closed-field-irreducible-components, via Tag 038F, lemma-bijection-irreducible-components; Algebra Tag 00I7"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-spec-domain-stalks-function-field",
+  "lem-weil-pbc-valuation-ring-normal",
+  "sbc-lem-etale-over-normal",
+  "def-weil-pbc-henselian-terminology",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-sbc-subset-geometric-irreducibility",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-spec-irreducible-closed-subsets-primes",
+  "def-pc-reduced-scheme",
+  "lem-weil-pbc-minimal-prime-reduced-localization-field",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-open-immersion-base-change",
+  "lem-weil-pbc-localization-tensor-over-base",
+  "lem-pur-geometric-reducedness-from-generic-stalks",
+  "def-pc-integral-scheme",
+  "lem-weil-pbc-field-tensor-irreducible",
+  "lem-sc-product-irreducible-components-bijection"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tags 020J, 038H and 04KS, combined with etale-cohomology.tex Tag 09Z9(2) and algebra.tex Tag 00IC; the generic-stalk comparison and localization formulas are expanded in the steps."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -72,10 +190,45 @@
    "results": "16 hits; top=['Mathlib/AlgebraicGeometry/Geometrically/Integral.lean', 'Mathlib/AlgebraicGeometry/Geometrically/Integral.lean', 'Mathlib/AlgebraicGeometry/Geometrically/Integral.lean', 'Mathlib/AlgebraicGeometry/Geometrically/Integral.lean', 'Mathlib/AlgebraicGeometry/Geometrically/Integral.lean', 'Mathlib/AlgebraicGeometry/Geometrically/Basic.lean', 'Mathlib/AlgebraicGeometry/Geometrically/Irreducible.lean', 'Mathlib/AlgebraicGeometry/Geometrically/Irreducible.lean']; note=; digest=de9a5ed3eb886500. Read the returned signatures and Geometrically/Irreducible.lean: definitions, base-change permanence, and combining already given geometric reducedness and irreducibility do not prove that the valuation residue fields are separably closed or split their components.",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "isSepClosed.*residue|geometrically.*[Cc]omponent|[Cc]omponent.*[Gg]eometrically",
+   "results": "{\"t\": \"2026-10-17T23:51:13Z\", \"tool\": \"grep\", \"query\": \"isSepClosed.*residue|geometrically.*[Cc]omponent|[Cc]omponent.*[Gg]eometrically\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Irreducible.lean\", \"Mathlib/AlgebraicGeometry/Geometrically/Connected.lean\"], \"digest\": \"a69b4efd394bc74a\"} Read returned signatures and Mathlib AlgebraicGeometry/Geometrically/{Reduced,Irreducible,Integral}.lean: the hits combine existing geometric hypotheses or compare components for a morphism already known geometrically irreducible; none supplies the valuation residue-field and component assertions together.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsSepClosed, ValuationRing",
+   "results": "{\"t\": \"2026-10-17T23:51:13Z\", \"tool\": \"loogle\", \"query\": \"IsSepClosed, ValuationRing\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} Read returned signatures and Mathlib AlgebraicGeometry/Geometrically/{Reduced,Irreducible,Integral}.lean: the hits combine existing geometric hypotheses or compare components for a morphism already known geometrically irreducible; none supplies the valuation residue-field and component assertions together.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Residue fields of valuation rings in a separably closed field are separably closed and irreducible components of geometrically reduced finite type schemes over them are geometrically integral",
+   "results": "{\"t\": \"2026-10-17T23:51:24Z\", \"tool\": \"leanfinder\", \"query\": \"Residue fields of valuation rings in a separably closed field are separably closed and irreducible components of geometrically reduced finite type schemes over them are geometrically integral\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.instIsSeparableResidueFieldOfFormallyUnramified\", \"AlgebraicGeometry.Scheme.instFieldCarrierResidueField\", \"instIsSeparableResidueFieldOfQuotientIdeal\", \"Algebra.isSeparable_residueField_iff\", \"AlgebraicGeometry.Scheme.instUniqueCarrierCarrierCommRingCatSpecResidueField\", \"Algebra.instFormallyUnramifiedResidueField\", \"Algebra.FormallyUnramified.isField_of_isAlgClosed_of_isLocalRing\", \"instIsSeparableQuotientIdealOfResidueField\"], \"digest\": \"e5fe783be61e1e2c\"} Read returned signatures and Mathlib AlgebraicGeometry/Geometrically/{Reduced,Irreducible,Integral}.lean: the hits combine existing geometric hypotheses or compare components for a morphism already known geometrically irreducible; none supplies the valuation residue-field and component assertions together.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A valuation ring with separably closed fraction field has separably closed residue fields",
+   "results": "{\"t\": \"2026-10-17T23:51:30Z\", \"tool\": \"leansearch\", \"query\": \"A valuation ring with separably closed fraction field has separably closed residue fields\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsSepClosed\", \"IsSepClosed.casesOn\", \"IsSepClosure.recOn\", \"Algebra.instIsSeparableResidueFieldOfFormallyUnramified\", \"Valuation.Integers.integrallyClosed\", \"separableClosure\", \"Valuation.Integers.isIntegrallyClosed\", \"IsSepClosure.sep_closed\"], \"digest\": \"7b4433a6d6fbc0f4\"} Read returned signatures and Mathlib AlgebraicGeometry/Geometrically/{Reduced,Irreducible,Integral}.lean: the hits combine existing geometric hypotheses or compare components for a morphism already known geometrically irreducible; none supplies the valuation residue-field and component assertions together.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Over a separably closed field every reduced irreducible component of a geometrically reduced scheme remains integral after arbitrary field extension",
+   "results": "{\"t\": \"2026-10-17T23:51:40Z\", \"tool\": \"leanfinder\", \"query\": \"Over a separably closed field every reduced irreducible component of a geometrically reduced scheme remains integral after arbitrary field extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isIntegral_of_irreducibleSpace_of_isReduced\", \"AlgebraicGeometry.IsIntegral\", \"Algebra.IsGeometricallyReduced\", \"Algebra.isReduced_of_isGeometricallyReduced\", \"AlgebraicGeometry.isIntegral_iff_irreducibleSpace_and_isReduced\", \"AlgebraicGeometry.isReduced_of_isIntegral\", \"Algebra.isGeometricallyReduced_iff\", \"AlgebraicGeometry.irreducibleSpace_of_isIntegral\"], \"digest\": \"a23215879e2d558f\"} Read returned signatures and Mathlib AlgebraicGeometry/Geometrically/{Reduced,Irreducible,Integral}.lean: the hits combine existing geometric hypotheses or compare components for a morphism already known geometrically irreducible; none supplies the valuation residue-field and component assertions together.",
+   "date": "2026-10-17",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-valuation-exceptional-closed-image-criterion",
@@ -104,5 +257,49 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-sepclosed-valuation-geometric-components",
+  "worker": "stage1",
+  "summary": "Retained the full statement and all statement dependencies. Proved separable closedness of every residue field using existing normal-valuation and strict-henselian-stalk results. Proved geometric irreducibility using the existing subset criterion; proved component geometric reducedness by explicitly identifying its generic local ring with that of the reduced ambient scheme and localizing the geometrically reduced affine base changes. Identified the canonical algebraic-closure component bijection and its reduced induced scheme structures. No new nodes.",
+  "blueprint": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification; specifically Proposition 4.4.6 and its successive exceptional blow-down construction, printed pp. 30--33.; substep: Lemma 4.4.4, printed pp. 31--32, with the identification and finiteness of Gamma_0 in Lemma 4.2.2, printed p. 26; Temkin Lemma 4.4.4: translating geometric exceptional components to actual fibre components before specialization.",
+  "tool_uses": [
+   {
+    "node": "sbc-lem-etale-over-normal",
+    "why": "The generic normal-scheme theorem supplies strict henselianity of the stalks of Spec V; this is a field-theoretic tool, not a replacement for a step of the trace unit."
+   },
+   {
+    "node": "lem-sbc-subset-geometric-irreducibility",
+    "why": "The separably closed field subset criterion supplies geometric irreducibility of a component; no trace-unit node states this generic criterion."
+   },
+   {
+    "node": "lem-pur-geometric-reducedness-from-generic-stalks",
+    "why": "The generic-point criterion supplies geometric reducedness after the stalk hypothesis is verified explicitly; it is a generic geometry tool, not the purity route."
+   },
+   {
+    "node": "lem-sc-product-irreducible-components-bijection",
+    "why": "The product-component theorem supplies the canonical component bijection after geometric irreducibility of Spec Omega has been verified."
+   },
+   {
+    "node": "lem-weil-pbc-valuation-ring-normal",
+    "why": "Generic affine, valuation, or tensor-product tool used with its exact stated hypotheses; it supplies a local algebra/geometry fact not stated by this trace unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "sbc-lem-etale-over-normal",
+  "lem-sbc-subset-geometric-irreducibility",
+  "lem-pur-geometric-reducedness-from-generic-stalks",
+  "lem-sc-product-irreducible-components-bijection",
+  "lem-weil-pbc-valuation-ring-normal"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q22-0b58faa4a",
+  "group": "Q22",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q22-0b58faa4a (reviewer sub-agent of L); spot-checked: Read the item in full: 7 steps, no new nodes. Read all 24 cited node statements, the unit sk-i-curve-zero, and Stacks 09Z9 and 038F (statements and proofs). Step 1: each V_q is a valuation ring, hence normal (00IC), with no height or Noetherian assumption. Step 2: 09Z9(2) applies to Spec V (integral, normal, separably closed function field). So V_p is strictly henselian, and its residue field is Frac(V/p), which is separably closed. Step 3: the subset criterion with Omega=k, the identity extension, and A=|C| makes the preimage in Z_E irreducible and nonempty; this preimage is |C_E| by the closed-immersion base-change computation. Step 4: the minimal-prime argument is correct, and O_{C,xi}=A_q=O_{Z,xi} because A is reduced (00EU). Step 5: A_q tensor_k L is a localization of the reduced ring A tensor_k L, hence reduced. Step 6: the 04KS(3) node applied to X=C gives C_L reduced; with Step 3, C_L is integral. Step 7: Spec(kbar) is geometrically irreducible (00I7); 038F gives a bijection D -> closure of p(D); maximality gives D=|C_kbar|; the scheme structures agree by the uniqueness clause of the reduced induced structure. Small cases tested: p=0, Spec k[x,y]/(xy), Z empty, and the imperfect k(a^{1/p}) case, which shows why the geometric-reducedness hypothesis is needed. I found no duplicate in the DAG. The 5 declared tool_uses are accepted. The 2 undeclared off-unit statements are Lean-closed, so they count as tools. No SGA source is used. One remark, with no change made: the item's maintainer-owned source.place still mentions the old monic-polynomial argument, while the proof uses 09Z9(2)."
  }
 }

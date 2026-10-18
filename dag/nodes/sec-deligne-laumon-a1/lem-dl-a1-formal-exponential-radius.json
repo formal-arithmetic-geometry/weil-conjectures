@@ -12,9 +12,76 @@
   "def-weil-power-series-exponential",
   "d-real-series"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix a real $\\rho\\ge0$ for which $\\sum_{n\\ge1}|u_n|t^n$ converges for every $0\\le t<\\rho$, as in [d-real-series]. Fix any such $t$, and put $a_0=0$ and $a_n=|u_n|t^n$ for $n\\ge1$. This is a summable nonnegative real sequence. Let $S$ be its sum. Clause (i) of [lem-dl-a1-nonnegative-series-partial-sums] gives $\\sum_{j=1}^{N}a_j\\le S$ for every $N$, and $S\\ge0$ by applying it to the empty finite subset.",
+   "uses": [
+    "d-real-series",
+    "lem-dl-a1-nonnegative-series-partial-sums"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-energy/sk-l-dl-a1-energy.proof.md",
+    "place": "Last paragraph, convergence of the exponent series: choose an admissible disk and a nonnegative scalar majorant."
+   }
+  },
+  {
+   "text": "Write $E(T)=\\sum_{n\\ge0}e_nT^n$. By [def-weil-power-series-exponential], $e_0=1$ and its displayed finite coefficient formula gives, for $n\\ge1$,\n$$|e_n|t^n\\le b_n:=\\sum_{r=1}^{n}\\frac1{r!}\\sum_{\\substack{n_1+\\cdots+n_r=n,\\ n_j\\ge1}}\\prod_{j=1}^{r}a_{n_j}.$$\nIndeed apply the triangle inequality to the finite sums, use $|\\prod u_{n_j}|=\\prod|u_{n_j}|$ from [def-weil-complex-absolute-value], and replace $t^n$ by $\\prod t^{n_j}$. Set $b_0=1$. All terms in these finite real sums are nonnegative, including at $t=0$.",
+   "uses": [
+    "def-weil-power-series-exponential",
+    "def-weil-complex-absolute-value"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-energy/sk-l-dl-a1-energy.proof.md",
+    "place": "Last paragraph, coefficientwise comparison; expand the finite coefficient formula in the cited definition (Finite coefficient formulas, 49_zeta_linear_algebra.tex:114–131)."
+   }
+  },
+  {
+   "text": "For every $N\\ge0$, regrouping the finite sums just obtained yields\n$$\\sum_{n=0}^{N}|e_n|t^n\\le\\sum_{n=0}^{N}b_n\n=\\sum_{r=0}^{N}\\frac1{r!}\\sum_{\\substack{n_1,\\ldots,n_r\\ge1,\\ n_1+\\cdots+n_r\\le N}}\\prod_{j=1}^{r}a_{n_j}\n\\le\\sum_{r=0}^{N}\\frac{(\\sum_{j=1}^{N}a_j)^r}{r!}\n\\le\\sum_{r=0}^{N}\\frac{S^r}{r!}.$$\nFor the middle inequality, every tuple in the inner sum belongs to $\\{1,\\ldots,N\\}^r$; remove the total-degree restriction, adding only nonnegative terms. Repeated distributivity identifies the unrestricted finite tuple sum with $(\\sum_{j=1}^{N}a_j)^r$. The $r=0$ tuple is empty, its index sum is $0$ and its product is $1$; this also verifies $N=0$. The last inequality uses $0\\le\\sum_{j=1}^{N}a_j\\le S$ and monotonicity of nonnegative integer powers.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-energy/sk-l-dl-a1-energy.proof.md",
+    "place": "Last paragraph, finite-sum majorization of the formal exponential; the finite distributive calculation is written out here."
+   }
+  },
+  {
+   "text": "By [lem-dl-a1-real-factorial-series-summable], $\\sum_{r\\ge0}S^r/r!$ is summable. Its terms are nonnegative since $S\\ge0$. Let $B$ be its real sum. Clause (i) of [lem-dl-a1-nonnegative-series-partial-sums] bounds every partial sum $\\sum_{r=0}^{N}S^r/r!$ by $B$. The preceding finite calculation therefore bounds every nonempty initial partial sum of $\\sum_n |e_n|t^n$ by $B$; the empty one is $0\\le B$. Clause (ii) of that same node, applied to the nonnegative sequence $n\\mapsto |e_n|t^n$, proves its summability.",
+   "uses": [
+    "lem-dl-a1-real-factorial-series-summable",
+    "lem-dl-a1-nonnegative-series-partial-sums"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-energy/sk-l-dl-a1-energy.proof.md",
+    "place": "Last paragraph, convergence of the exponential series on the same disk; general scalar summability inputs."
+   }
+  },
+  {
+   "text": "The argument applies to every $0\\le t<\\rho$, so every real $\\rho\\ge0$ admissible in the defining supremum for $R(U)$ is admissible for $R(E)$ in [d-real-series]. Inclusion of these sets gives $R(U)\\le R(E)$. The admissible radius $\\rho=0$ is vacuous; if $R(U)=0$ the inequality follows from nonnegativity, and if $R(U)=\\infty$ the same inclusion makes the admissible radii for $E$ unbounded. No convergence at a boundary point is asserted.",
+   "uses": [
+    "d-real-series"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-energy/sk-l-dl-a1-energy.proof.md",
+    "place": "Last paragraph, conclusion by the defining supremum of radii, including 0 and infinity."
+   }
+  }
+ ],
+ "proof_deps": [
+  "d-real-series",
+  "lem-dl-a1-nonnegative-series-partial-sums",
+  "def-weil-power-series-exponential",
+  "def-weil-complex-absolute-value",
+  "lem-dl-a1-real-factorial-series-summable"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-l-dl-a1-energy/sk-l-dl-a1-energy.proof.md",
+  "place": "Last paragraph: expand the omitted absolute-convergence justification by finite coefficient bounds, without analytic composition or infinite-sum rearrangement."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -64,10 +131,52 @@
    "results": "8 hits: NormedSpace.hasFPowerSeriesAt_exp_zero_of_radius_pos; NormedSpace.hasFPowerSeriesOnBall_exp_of_radius_pos; NormedSpace.exp_hasFPowerSeriesOnBall; HasSum.exp; NormedSpace.expSeries_hasSum_exp_of_mem_ball; NormedSpace.exp_hasFPowerSeriesAt_zero; NormedSpace.expSeries_hasSum_exp_of_mem_ball'; NormedSpace.expSeries_summable_of_mem_ball",
    "date": "2026-10-17",
    "verdict": "no match: Mathlib gives the radius of expSeries itself and composition bounds conditional on summability; it does not identify the scalar formal exponential of an arbitrary U or prove this radius inequality in one specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"radius\", \"exp\"",
+   "results": "9 hits: NormedSpace.expSeries_radius_eq_top; NormedSpace.expSeries_radius_pos; NormedSpace.hasFPowerSeriesAt_exp_zero_of_radius_pos; NormedSpace.hasFPowerSeriesOnBall_exp_of_radius_pos; hasDerivAt_exp_zero_of_radius_pos; hasStrictDerivAt_exp_zero_of_radius_pos; hasFDerivAt_exp_zero_of_radius_pos; hasStrictFDerivAt_exp_zero_of_radius_pos",
+   "date": "2026-10-17",
+   "verdict": "no match for the full item: generic expSeries results do not identify scalar formal substitution; le_comp_radius_of_summable assumes a separate composition summability estimate (Composition.lean:508–511)."
+  },
+  {
+   "tool": "grep",
+   "query": "(exp|subst).*(radius|summable)|(radius|summable).*(exp|subst)",
+   "results": "25 hits: Mathlib/Analysis/SpecificLimits/Normed.lean; Mathlib/Analysis/SpecificLimits/Normed.lean; Mathlib/Analysis/Analytic/ConvergenceRadius.lean; Mathlib/Analysis/Analytic/ConvergenceRadius.lean; Mathlib/Analysis/Analytic/ConvergenceRadius.lean; Mathlib/Analysis/SpecialFunctions/Exp.lean; Mathlib/Analysis/SpecialFunctions/Exp.lean; Mathlib/Analysis/SpecialFunctions/Exp.lean",
+   "date": "2026-10-17",
+   "verdict": "no match for the full item: generic expSeries results do not identify scalar formal substitution; le_comp_radius_of_summable assumes a separate composition summability estimate (Composition.lean:508–511)."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The formal exponential of a scalar power series converges absolutely wherever that series converges absolutely",
+   "results": "8 hits: NormedSpace.expSeries_hasSum_exp_of_mem_ball'; NormedSpace.expSeries; NormedSpace.expSeries_summable_of_mem_ball; NormedSpace.exp_series_hasSum_exp'; NormedSpace.exp_eq_ofScalarsSum; NormedSpace.exp_hasFPowerSeriesOnBall; NormedSpace.expSeries_radius_eq_top; NormedSpace.expSeries_eq_ofScalars",
+   "date": "2026-10-17",
+   "verdict": "no match for the full item: generic expSeries results do not identify scalar formal substitution; le_comp_radius_of_summable assumes a separate composition summability estimate (Composition.lean:508–511)."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A complex formal power series with zero constant coefficient has formal exponential with at least the same convergence radius",
+   "results": "8 hits: NormedSpace.hasFPowerSeriesAt_exp_zero_of_radius_pos; NormedSpace.hasFPowerSeriesOnBall_exp_of_radius_pos; NormedSpace.expSeries_radius_pos; NormedSpace.expSeries_radius_eq_top; NormedSpace.expSeries_div_hasSum_exp_of_mem_ball; NormedSpace.expSeries_hasSum_exp_of_mem_ball; NormedSpace.exp_hasFPowerSeriesOnBall; NormedSpace.expSeries_hasSum_exp_of_mem_ball'",
+   "date": "2026-10-17",
+   "verdict": "no match for the full item: generic expSeries results do not identify scalar formal substitution; le_comp_radius_of_summable assumes a separate composition summability estimate (Composition.lean:508–511)."
+  },
+  {
+   "tool": "loogle",
+   "query": "FormalMultilinearSeries, \"comp\", \"radius\"",
+   "results": "8 hits: FormalMultilinearSeries.radius_le_radius_continuousLinearMap_comp; FormalMultilinearSeries.le_radius_compContinuousLinearMap; FormalMultilinearSeries.radius_compNeg; FormalMultilinearSeries.radius_compContinuousLinearMap_linearIsometryEquiv_eq; FormalMultilinearSeries.radius_compContinuousLinearMap_eq; FormalMultilinearSeries.div_le_radius_compContinuousLinearMap; FormalMultilinearSeries.radius_compContinuousLinearMap_le; FormalMultilinearSeries.le_comp_radius_of_summable",
+   "date": "2026-10-17",
+   "verdict": "no match for the full item: generic expSeries results do not identify scalar formal substitution; le_comp_radius_of_summable assumes a separate composition summability estimate (Composition.lean:508–511)."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The formal exponential of a complex series with vanishing constant term is absolutely summable on every smaller disk than the input series",
+   "results": "8 hits: NormedSpace.expSeries_summable_of_mem_ball; NormedSpace.norm_expSeries_summable_of_mem_ball; NormedSpace.expSeries_div_summable_of_mem_ball; NormedSpace.expSeries_hasSum_exp_of_mem_ball; NormedSpace.norm_expSeries_div_summable_of_mem_ball; NormedSpace.expSeries_div_hasSum_exp_of_mem_ball; NormedSpace.hasFPowerSeriesOnBall_exp_of_radius_pos; NormedSpace.expSeries_summable_of_mem_ball'",
+   "date": "2026-10-17",
+   "verdict": "no match for the full item: generic expSeries results do not identify scalar formal substitution; le_comp_radius_of_summable assumes a separate composition summability estimate (Composition.lean:508–511)."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "sk-l-dl-a1-energy",
@@ -92,5 +201,21 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-dl-a1-formal-exponential-radius",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged and supplied the coefficient majorant proof. Two new exact Mathlib leaves state the scalar factorial-series convergence theorem and the two nonnegative partial-sum bounds. All finite combinatorics stays in the item. No analytic/formal composition comparison, positivity of u_n, or boundary convergence is assumed.",
+  "blueprint": "Realizes the last paragraph of sk-l-dl-a1-energy.proof.md: the exponential of the convergent trace series has at least the convergence radius of its exponent. Steps 1 and 5 use admissible-radius sets; steps 2–3 give the finite coefficient bound; step 4 proves absolute convergence. This is below the fixed energy-detection unit route.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q83-97f7f482e",
+  "group": "Q83",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q83-97f7f482e (reviewer sub-agent of L); spot-checked: I read the item, both new leaves, the cited statements (d-real-series, def-weil-power-series-exponential, def-weil-formal-power-series, def-weil-complex-absolute-value), the parent sk-l-dl-a1-energy (step 9 is the only citer) and the last paragraph of main-20261015 sk-l-dl-a1-energy.proof.md. The item statement is unchanged and true; I tested U=0, U=T, U=T/(1-T) and the cases R(U)=0 and R(U)=infinity. I re-derived every step. Step 1 uses clause (i) with F={1..N}; F=empty gives S>=0. Step 2 uses e_0=1 and the N>=1 formula from the definition's statement (not its proof), the triangle inequality and |zw|=|z||w|, including t=0. Step 3: the regrouping identity holds exactly (the r=0 empty tuple gives b_0; tuples with r>N contribute nothing), and the bound by (sum_{j<=N} a_j)^r <= S^r is finite and correct. Step 4: every hypothesis of leaf B and of clauses (i)/(ii) is met, including N=0. Step 5 is inclusion of the admissible-radius sets. The item reads 'converges' in d-real-series as summability of a nonnegative sequence, the same as the existing DAG (lem-rp-nonnegative-summable-comparison, parent step 9). The leaves are valid: I checked Mathlib Real.lean:89 summable_of_sum_range_le, Order.lean:121 to_additive Multipliable.prod_le_tprod giving Summable.sum_le_tsum, and Normed.lean:896 Real.summable_pow_div_factorial for every real x. Both are generic scalar facts strictly smaller than the item, not restated clauses. An rg of the whole DAG finds no duplicate; lem-rp-nonnegative-summable-comparison, lem-wf-summable-finite-subset-products and lem-rp-positive-product-radius state different things. The route is fine: only definitions and Mathlib leaves are cited, tool_uses is empty, there is no SGA and no cycle. One fix: the factorial leaf's mathlib_match.how gave Normed.lean:896–915; I corrected it to 893–909 (declaration at 896) in fixes/dag/nodes/sec-deligne-laumon-a1/lem-dl-a1-real-factorial-series-summable.json. No mathematical change.; 1 file(s) fixed by the reviewer"
  }
 }

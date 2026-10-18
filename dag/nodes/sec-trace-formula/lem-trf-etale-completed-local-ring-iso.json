@@ -17,9 +17,115 @@
   "def-weil-closed-points",
   "def-weil-pbc-adic-completion"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $A=\\mathcal O_{C,x}$, $B=\\mathcal O_{D,y}$ and let $\\varphi:A\\to B$ be the actual stalk map of $e$. By [def-weil-etale-morphism], $e$ is flat and unramified; by [def-weil-unramified-morphism] it is locally of finite type. By [def-weil-flat-morphism], $\\varphi$ is a flat local homomorphism. Thus neither flatness nor locality is being inferred from a merely abstract isomorphism of rings.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "def-weil-unramified-morphism",
+    "def-weil-flat-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 02GI (definition-etale), 02GE (lemma-diagonal-unramified-morphism), and 01U3 (definition-flat)"
+   }
+  },
+  {
+   "text": "Apply implication (i)$\\Rightarrow$(ii) of [lem-trf-unramified-maximal-ideal-residue-criterion] to $e$ at $y$, using the whole source $D$ as the unramified neighbourhood. Its locally-finite-type hypothesis holds by Step 1. It gives $\\mathfrak m_A B=\\mathfrak m_B$ for $\\varphi$, and says that the actual induced map $\\alpha:\\kappa(x)\\to\\kappa(y)$ is a finite separable algebraic field extension.",
+   "uses": [
+    "lem-trf-unramified-maximal-ideal-residue-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02GF (lemma-unramified-at-point), (1) implies (6)"
+   }
+  },
+  {
+   "text": "Write $i:k\\to\\kappa(x)$ and $j:k\\to\\kappa(y)$ for the structural field maps. Functoriality of the maps induced on stalk quotients in [def-weil-residue-field] gives $j=\\alpha i$. If $i$ is an isomorphism, every element of $\\kappa(y)$ is algebraic over the image of $j$, by Step 2. Apply [lem-weil-pbc-algebraic-over-algebraically-closed-subfield] to each element: every element lies in $j(k)$. Thus $j$ is surjective, and $\\alpha$ is surjective as well. Field maps are injective, so both are isomorphisms. If instead $j$ is an isomorphism, then for $a\\in\\kappa(x)$ take $c\\in k$ with $j(c)=\\alpha(a)$; injectivity of $\\alpha$ gives $i(c)=a$. Thus $i$ is an isomorphism, and $\\alpha=j i^{-1}$ is one too. In both cases the structural maps $i,j$, as well as $\\alpha$, are isomorphisms, not just abstract field identifications.",
+   "uses": [
+    "def-weil-residue-field",
+    "lem-weil-pbc-algebraic-over-algebraically-closed-subfield"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tags 09GQ (definition-algebraically-closed) and 09GR (lemma-algebraically-closed); elementary factorization for the second case"
+   }
+  },
+  {
+   "text": "Apply [lem-trf-finite-residue-point-closed-in-fibre] to the structural morphism $C\\to\\operatorname{Spec}k$. It is locally of finite type by hypothesis, and Step 3 says that its residue-field extension at $x$ has degree one. Hence $x$ is closed in the scheme-theoretic fibre over the unique point of $\\operatorname{Spec}k$. By [def-weil-affine-spectrum] this base has one point; by [def-pc-scheme-fibre] that fibre is homeomorphic to all of $C$. Consequently $x$ is closed in $C$.",
+   "uses": [
+    "lem-trf-finite-residue-point-closed-in-fibre",
+    "def-weil-affine-spectrum",
+    "def-pc-scheme-fibre"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01TE (lemma-algebraic-residue-field-extension-closed-point-fibre), applied to C over Spec k"
+   }
+  },
+  {
+   "text": "Apply [lem-trf-finite-residue-point-closed-in-fibre] to $e$, which is locally of finite type by Step 1. The residue extension at $y$ is finite by Step 2 (indeed degree one by Step 3). Thus $y$ is closed in $D_x$. By [def-pc-scheme-fibre], $D_x$ is homeomorphic to the subspace $e^{-1}(\\{x\\})$. This subspace is closed in $D$, because $x$ is closed by Step 4 and $e$ is continuous. A subset closed in a closed subspace is closed in the ambient space, so $y$ is closed in $D$.",
+   "uses": [
+    "lem-trf-finite-residue-point-closed-in-fibre",
+    "def-pc-scheme-fibre"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01TE, closedness in the fibre and elementary topology in its proof"
+   }
+  },
+  {
+   "text": "The field $k$ is Noetherian: its only ideals are $(0)$ and $(1)$, both finitely generated. Hence $\\operatorname{Spec}k$ is locally Noetherian by [pqf-def-locnoeth]. Apply [pqf-lem-locnoeth-lft] first to $C\\to\\operatorname{Spec}k$, then to $e:D\\to C$, using its local finite type from Step 1. Both $C$ and $D$ are locally Noetherian. Choose, from the affine covers in [pqf-def-locnoeth], an affine neighbourhood $U=\\operatorname{Spec}R$ of $x$ and one $V=\\operatorname{Spec}S$ of $y$ with $R,S$ Noetherian. By clause (c) of [lem-weil-pbc-affine-open-stalk-localization], the germ maps $R\\to A$ and $S\\to B$ are localizations at the corresponding primes. Apply [lem-weil-pbc-localization-noetherian] to these two maps. Thus $A$ and $B$ are Noetherian local rings, as required for the completion theorem. No global quasi-compactness is needed.",
+   "uses": [
+    "pqf-def-locnoeth",
+    "pqf-lem-locnoeth-lft",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-weil-pbc-localization-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex; literature/stacks-project/schemes.tex; literature/stacks-project/algebra.tex",
+    "place": "Tags 01T6 (lemma-finite-type-noetherian), 01HV (lemma-spec-sheaves), and 00FN (lemma-Noetherian-permanence)"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-flat-local-completion-iso] to the actual map $\\varphi:A\\to B$. Its hypotheses are verified separately: Noetherian local rings by Step 6, flatness and locality by Step 1, $\\mathfrak m_AB=\\mathfrak m_B$ by Step 2, and an isomorphism on residue fields by Step 3. Its conclusion is that $\\varphi^\\wedge:A^\\wedge\\to B^\\wedge$ is an isomorphism. The cited statement specifies this very map on compatible residue classes by $(a_n\\bmod\\mathfrak m_A^n)_n\\mapsto(\\varphi(a_n)\\bmod\\mathfrak m_B^n)_n$, so it is exactly the induced completed-local-ring map in the item. Together with Steps 3--5 this proves all the required clauses.",
+   "uses": [
+    "lem-weil-pbc-flat-local-completion-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0AGX (lemma-flat-unramified), also invoked in Curves Tag 0C57 (lemma-node-etale-local)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-etale-morphism",
+  "def-weil-unramified-morphism",
+  "def-weil-flat-morphism",
+  "lem-trf-unramified-maximal-ideal-residue-criterion",
+  "def-weil-residue-field",
+  "lem-weil-pbc-algebraic-over-algebraically-closed-subfield",
+  "lem-trf-finite-residue-point-closed-in-fibre",
+  "def-weil-affine-spectrum",
+  "def-pc-scheme-fibre",
+  "pqf-def-locnoeth",
+  "pqf-lem-locnoeth-lft",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-flat-local-completion-iso"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/curves.tex; literature/stacks-project/morphisms.tex; literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0C57 proof, completion argument using 0AGX; expanded with 02GF, 01TE, 01T6, 01HV, 00FN, and Fields 09GQ/09GR to check both residue-field hypotheses and Noetherianity"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -48,10 +154,52 @@
    "results": "hits are generic residue-field and etale APIs; no completed-local-ring invariance theorem",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "etale.*complet|complet.*etale|completedLocal|completion.*residue",
+   "results": "{\"t\": \"2026-10-17T23:50:40Z\", \"tool\": \"grep\", \"query\": \"etale.*complet|complet.*etale|completedLocal|completion.*residue\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/AdicCompletion/LocalRing.lean\", \"Mathlib/RingTheory/Etale/QuasiFinite.lean\", \"Mathlib/RingTheory/Etale/QuasiFinite.lean\", \"Mathlib/RingTheory/Etale/QuasiFinite.lean\", \"Mathlib/RingTheory/Etale/QuasiFinite.lean\", \"Mathlib/RingTheory/Etale/QuasiFinite.lean\"], \"digest\": \"097e0c3ef905ece4\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: read hits are only etale/formally unramified interfaces, residue-field maps for open immersions, completion residue-field invariance, flatness of a completion, or equivalences requiring an existing equivalence; none states the item"
+  },
+  {
+   "tool": "loogle",
+   "query": "AdicCompletion, RingEquiv",
+   "results": "{\"t\": \"2026-10-17T23:50:41Z\", \"tool\": \"loogle\", \"query\": \"AdicCompletion, RingEquiv\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: read hits are only etale/formally unramified interfaces, residue-field maps for open immersions, completion residue-field invariance, flatness of a completion, or equivalences requiring an existing equivalence; none states the item"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale morphisms induce isomorphic completions of local rings when the residue field map is an isomorphism",
+   "results": "{\"t\": \"2026-10-17T23:50:41Z\", \"tool\": \"leansearch\", \"query\": \"Etale morphisms induce isomorphic completions of local rings when the residue field map is an isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.Etale\", \"AlgebraicGeometry.IsEtale\", \"RingHom.FormallyEtale\", \"AlgebraicGeometry.Scheme.instIsIsoCommRingCatResidueFieldMapOfIsOpenImmersion\", \"RingHom.Etale.respectsIso\", \"RingHom.Etale.propertyIsLocal\", \"Algebra.Etale.of_isLocalizationAway\", \"RingHom.Etale.ofLocalizationSpanTarget\"], \"digest\": \"26ae9e33207d0a1f\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: read hits are only etale/formally unramified interfaces, residue-field maps for open immersions, completion residue-field invariance, flatness of a completion, or equivalences requiring an existing equivalence; none states the item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An etale morphism of schemes over an algebraically closed field induces isomorphic completed local rings at rational points",
+   "results": "{\"t\": \"2026-10-17T23:50:47Z\", \"tool\": \"leanfinder\", \"query\": \"An etale morphism of schemes over an algebraically closed field induces isomorphic completed local rings at rational points\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.Scheme.Etale\", \"RingHom.Etale.respectsIso\", \"Algebra.IsEtaleAt\", \"Algebra.mem_etaleLocus_iff\", \"Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat\", \"AlgebraicGeometry.IsEtale.of_comp\"], \"digest\": \"2dd30b87c3e216a5\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: read hits are only etale/formally unramified interfaces, residue-field maps for open immersions, completion residue-field invariance, flatness of a completion, or equivalences requiring an existing equivalence; none states the item"
+  },
+  {
+   "tool": "grep",
+   "query": "AdicCompletion.*(equiv|Equiv)|completion.*(isIso|bijective)|[Ee]tale",
+   "results": "{\"t\": \"2026-10-17T23:51:03Z\", \"tool\": \"grep\", \"query\": \"AdicCompletion.*(equiv|Equiv)|completion.*(isIso|bijective)|[Ee]tale\", \"sub\": \"RingTheory/AdicCompletion\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/AdicCompletion/Completeness.lean\", \"Mathlib/RingTheory/AdicCompletion/Completeness.lean\", \"Mathlib/RingTheory/AdicCompletion/LocalRing.lean\"], \"digest\": \"fc2780b1c09be690\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: read hits are only etale/formally unramified interfaces, residue-field maps for open immersions, completion residue-field invariance, flatness of a completion, or equivalences requiring an existing equivalence; none states the item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A flat local map of Noetherian local rings with equal maximal ideals and identical residue fields induces an isomorphism of adic completions",
+   "results": "{\"t\": \"2026-10-17T23:51:12Z\", \"tool\": \"leanfinder\", \"query\": \"A flat local map of Noetherian local rings with equal maximal ideals and identical residue fields induces an isomorphism of adic completions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AdicCompletion.flat_of_isNoetherian\", \"AdicCompletion.ofAlgEquiv\", \"AdicCompletion.congr\", \"AdicCompletion.ofAlgEquiv_apply\", \"IsDedekindDomain.HeightOneSpectrum.algebraMap_adicCompletion\", \"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian\", \"AdicCompletion.congr_apply\", \"AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian\"], \"digest\": \"e92e6f4fbf5754ca\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: read hits are only etale/formally unramified interfaces, residue-field maps for open immersions, completion residue-field invariance, flatness of a completion, or equivalences requiring an existing equivalence; none states the item"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-nodal-point-etale-locality",
@@ -84,5 +232,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-etale-completed-local-ring-iso",
+  "worker": "stage1",
+  "summary": "Statement preserved. Seven proof steps follow the completion argument of Stacks 0C57 through the local unramified criterion 02GF and completion comparison 0AGX. Both structural residue-field cases, both closedness assertions, and the Noetherian and flat-local hypotheses are explicitly verified. Reused existing nodes throughout; no new nodes. No matching project declaration or Mathlib theorem was found.",
+  "blueprint": "Realizes the historical semistable auxiliary clause of lem-trf-local-term-locality, Proof (1)--(2), recorded in blueprint.from: the etale invariance of residue fields and completed local rings used by lem-trf-nodal-point-etale-locality. The current sk-i-curve-zero contraction proof is not replaced; the item is a generic local algebra tool in the pre-existing historical branch. Whole-blueprint searches for etale completed local ring residue field algebraically closed and completed local found no same-statement blueprint node.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-flat-local-completion-iso",
+    "why": "Step 7 uses the generic Noetherian flat-local completion comparison 0AGX. It is explicitly the item source route (also 0C57), and no node of sk-i-curve-zero supplies this commutative-algebra tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-flat-local-completion-iso"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q69-dea4adc9c",
+  "group": "Q69",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q69-dea4adc9c (reviewer sub-agent of L); spot-checked: I read the item, all 7 steps and the statement of every cited node against Stacks 0C57, 0AGX, 02GF (1)<=>(6), 01TE, 01T6 and 00FN; all seven tags are confirmed in tags/tags. The delivery has no new nodes and preserves the item statement. Small cases support the statement: x -> x^2 from G_m to A^1 in characteristic other than 2 behaves as claimed; at the generic point the hypothesis fails as it should; Spec C -> Spec R shows algebraic closedness is needed. Step 1 only unpacks definitions: étale gives flat and unramified, unramified includes locally finite type, and the flat-morphism definition makes the stalk map a flat local homomorphism. Step 2 applies the 02GF criterion with V=D. Step 3 handles both cases using the structural maps (j = alpha i), and the hypothesis of the algebraic-over-algebraically-closed leaf holds. Steps 4 and 5 use 01TE, the one-point base Spec k and the homeomorphism of the fibre onto the preimage. Step 6 gets Noetherian stalks from local Noetherianity (01T6, used twice) and localization (00FN). Step 7 checks all four hypotheses of lem-weil-pbc-flat-local-completion-iso, whose completed map is exactly the induced map in the item. I found no cycle: the item's 132-node dependency closure does not contain it. Searches for 0AGX/039M and for étale plus completion plus residue field found no duplicate. Accepted tool_use: lem-weil-pbc-flat-local-completion-iso (unit sk-thm-p1), a generic commutative-algebra result used as a black box. It is the lemma 0C57 itself cites and replaces no step of sk-i-curve-zero. Every other off-unit citation is a Mathlib leaf or a definition. No SGA source is used. No fixes."
  }
 }
