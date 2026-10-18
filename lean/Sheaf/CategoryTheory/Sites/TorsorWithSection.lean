@@ -44,7 +44,19 @@ isomorphisms respectively reverse and compose the equality of specified sections
 theorem WithSection.isIsomorphic_equivalence {C : Type u} [Category.{v} C]
     {J : GrothendieckTopology C} (G : Sheaf J AddCommGrpCat.{w}) (U : C) :
     _root_.Equivalence (@WithSection.IsIsomorphic C _ J G U) := by
-  sorry
+  refine ⟨?_, ?_, ?_⟩
+  · intro P
+    exact ⟨Iso.refl P.1, rfl⟩
+  · rintro P Q ⟨e, he⟩
+    refine ⟨e.symm, ?_⟩
+    change e.iso.inv.hom.app (op U) Q.2 = P.2
+    rw [← he]
+    exact CategoryTheory.Iso.hom_inv_id_apply
+      (((sheafSections J (Type w)).obj (op U)).mapIso e.iso) P.2
+  · rintro P Q R ⟨e, he⟩ ⟨f, hf⟩
+    refine ⟨e.trans f, ?_⟩
+    change f.iso.hom.hom.app (op U) (e.iso.hom.hom.app (op U) P.2) = R.2
+    rw [he, hf]
 
 /-- The setoid of section-preserving torsor isomorphisms.
 Source: Stacks Project, Tag 03AJ, relative refinement
