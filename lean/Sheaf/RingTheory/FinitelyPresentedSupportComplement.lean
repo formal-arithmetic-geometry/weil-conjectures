@@ -8,8 +8,7 @@ module
 public import Mathlib.Algebra.Module.FinitePresentation
 public import Mathlib.AlgebraicGeometry.Scheme
 public import Mathlib.RingTheory.Spectrum.Prime.Module
-import WeilConjectures.LinearAlgebra.Matrix.CauchyBinet
-import Mathlib.LinearAlgebra.Matrix.Adjugate
+import Sheaf.RingTheory.FinitelyPresentedSupportIdeal
 
 /-!
 # The support of a finitely presented module
@@ -50,6 +49,10 @@ theorem isClosed_support_and_isCompact_compl
     (B : Type u) (M : Type v) [CommRing B] [AddCommGroup M] [Module B M]
     [Module.FinitePresentation B M] :
     IsClosed (Module.support B M) ∧ IsCompact (Module.support B M)ᶜ := by
-  sorry
+  obtain ⟨I, hI, hsupport⟩ := Module.exists_fg_ideal_eq_support B M
+  constructor
+  · exact Module.isClosed_support
+  · apply (PrimeSpectrum.isCompact_isOpen_iff_ideal.mpr ⟨I, hI, ?_⟩).1
+    rw [← hsupport]
 
 end Module
