@@ -1,0 +1,105 @@
+{
+ "id": "lem-kun-integer-module-abelian-equivalence",
+ "kind": "statement",
+ "title": "Integer-module etale sheaves and abelian etale sheaves are equivalent",
+ "statement": "For any scheme X [def-pc-scheme], the functor from sheaves of modules over ULift Z on X_et to abelian sheaves on X_et, obtained by composing with the ordinary coefficient forgetful functor, is an equivalence. Here both are functor-valued etale sheaves [def-weil-pbc-abelian-etale-sheaves, def-weil-pbc-etale-sheaves], rather than modules over a sheaf of rings.",
+ "source": {
+  "document": "lean/WeilConjectures/SixFunctors/BaseChange/DerivedForget.lean",
+  "place": "isEquivalence_sheafCompose_forget₂_uliftInt, lines 43–88."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-etale-sheaves"
+ ],
+ "proof": [
+  {
+   "text": "The forgetful functor from ULift Z-modules to abelian groups is full and faithful: additive maps commute with integer scalar multiplication. Lift an abelian sheaf map sectionwise through that functor; faithfulness proves naturality. This proves fullness and faithfulness on sheaves.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply the inverse equivalence on coefficients to an abelian sheaf. Since an equivalence preserves limits it preserves the sheaf condition, so this gives a module sheaf. The coefficient counit induces a natural isomorphism from its underlying abelian sheaf to the original sheaf. Thus the sheaf functor is essentially surjective and hence an equivalence.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "document": "lean/WeilConjectures/SixFunctors/BaseChange/DerivedForget.lean",
+  "place": "isEquivalence_sheafCompose_forget₂_uliftInt, lines 43–88.",
+  "note": "Complete existing source proof, or its torsion-abelian extension, checked in Lean."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Sheaves of modules over lifted integers are equivalent to abelian sheaves on the small etale site",
+   "results": "8 hits on SheafOfModules and scheme modules; no small-etale integer coefficient equivalence.",
+   "date": "2026-10-18",
+   "verdict": "No exact Mathlib match; the proved source-library API is used."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"higherDirectImage\"",
+   "results": "0 hits; coefficient bridge also read directly in the source library.",
+   "date": "2026-10-18",
+   "verdict": "No exact Mathlib match; the proved source-library API is used."
+  },
+  {
+   "tool": "grep",
+   "query": "exists_topologicalKrullDim_le_of_isPullback|isZero_higherDirectImage_of_isLimit_of_mono|mono_higherDirectImageOverMap|isZero_higherDirectImage_of_two_mul_lt_of_acyclic|isEquivalence_sheafCompose_forget₂_uliftInt",
+   "results": "msearch.py: 0 Mathlib hits. Local rg found the source declarations read below.",
+   "date": "2026-10-18",
+   "verdict": "No exact Mathlib match; the proved source-library API is used."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Sites.FiniteTorsionEtaleCohomologicalDimension",
+  "date": "2026-10-18",
+  "group": "C3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-kun-0f10",
+   "place": "Clause (1), finite relative torsion cohomological dimension; source-library separable-closure route replacing the affine/Mayer–Vietoris argument.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-kunneth-ordinary",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.SixFunctors.BaseChange.DerivedForget",
+  "declaration": "AlgebraicGeometry.Etale.isEquivalence_sheafCompose_forget₂_uliftInt",
+  "statement": "instance isEquivalence_sheafCompose_forget₂_uliftInt : (Φ X).IsEquivalence",
+  "branch": "sheaf-dag",
+  "by": "C3",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261018T062712-L-635894",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261018T062712-L-635894",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -15945,3 +15945,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 06:27 L: merged deliver/C2/Sheaf.RingTheory.PseudoCoherentNilpotentInvariance (stage 3; reviewer PASS; first push; landing 20261018T062710-L-634950 (proof); batch 20261018T062645; modules 1; new nodes 0)
 - 06:27 L: merged deliver/C3/Sheaf.AlgebraicGeometry.EtaleAmbientAdjointLocality (stage 3; reviewer PASS; first push; landing 20261018T062711-L-635316 (proof); batch 20261018T062645; modules 1; new nodes 0)
 - 06:27 L: merged deliver/C3/Sheaf.AlgebraicGeometry.IsIsoIffOfJointlySurjectiveEtaleFamily (stage 3; reviewer PASS; first push; landing 20261018T062712-L-635558 (proof); batch 20261018T062645; modules 1; new nodes 0)
+- 06:27 L: merged deliver/C3/Sheaf.AlgebraicGeometry.Sites.FiniteTorsionEtaleCohomologicalDimension (stage 3; reviewer PASS; first push; landing 20261018T062712-L-635894 (interface); batch 20261018T062645; modules 2; new nodes 7)

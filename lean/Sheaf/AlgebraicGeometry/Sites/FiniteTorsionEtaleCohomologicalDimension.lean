@@ -10,24 +10,11 @@ public import Mathlib.AlgebraicGeometry.Over
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.FieldTheory.IsSepClosed
-import WeilConjectures.Mathlib.Topology.KrullDimension
-import Sheaf.AlgebraicGeometry.EtaleSupport
-import Sheaf.AlgebraicGeometry.Sites.CohomologicalDimension
-import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-import Sheaf.AlgebraicGeometry.FiniteTypeDimensionFormula
-import Sheaf.AlgebraicGeometry.QuasiCompactOpenInduction
-import Sheaf.CategoryTheory.Sites.CohomologyOverObjectLocalization
-import WeilConjectures.AlgebraicGeometry.EtaleMayerVietoris
-import Sheaf.AlgebraicGeometry.EtaleMayerVietorisPullback
-import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtaleOver
-import WeilConjectures.AlgebraicGeometry.HigherDirectImageSheafifiedPresheaf
-import Sheaf.AlgebraicGeometry.TorsionSheafCharacterizations
-import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
-import Sheaf.AlgebraicGeometry.AffineDirectImageSupportBound
-import Sheaf.AlgebraicGeometry.EtaleHigherDirectImageStalkCriterion
-import Sheaf.AlgebraicGeometry.Sites.AffineTorsionCohomologicalDimensionOfAffine
-import Sheaf.AlgebraicGeometry.Sites.SeparablyClosedPointCohomologicalDimension
-import WeilConjectures.AlgebraicGeometry.TorsionSheafCharacterizations
+
+import Sheaf.AlgebraicGeometry.Sites.TorsionAbelianDirectImageVanishing
+import WeilConjectures.AlgebraicGeometry.BaseChangeDimension
+import WeilConjectures.AlgebraicGeometry.Sites.CohomologicalDimension
+import WeilConjectures.AlgebraicGeometry.EtaleSheafHExtDerivedComparison
 
 /-!
 # Finiteness of torsion étale cohomological dimension
@@ -48,27 +35,16 @@ namespace AlgebraicGeometry
 cohomological dimension; over a separably closed field each such scheme has finite dimension.
 Source: Stacks Project, Tag 0F10 (blueprint: lem-kun-0f10).
 
-Proof plan:
-1. Finite-type schemes over a field are Noetherian and qcqs, as are their opens.
-   This uses finite-type algebra Noetherianity, affine Noetherianity, the affine-cover
-   quasi-separatedness criterion and finite type of quasi-compact open immersions.
-2. Localize the étale Mayer–Vietoris sequence over each étale object of the target.
-   Pullback compatibility, exact sheafification and the sheafified-presheaf description
-   of higher direct images give the relative exact segment in Tag 0EYK.
-3. Over an affine target V, an affine open W of its preimage maps affinely over K to V.
-   Finite dimension and the dimension formula give E_d(W) = W for some d.
-   The affine direct-image support bound makes R^q vanish for q > d, by
-   conservativity of geometric stalks. The empty affine has bound zero.
-4. Apply quasi-compact-open induction. Bounds a, b, c on A, B, A ∩ B give
-   max(a,b,c+1) on A ∪ B via step 2. Restrictions remain torsion by the
-   local-section characterization of torsion sheaves.
-5. Choose a finite affine cover of Y and take the maximum of its bounds.
-   Étale neighbourhoods contained in a chosen open are cofinal, so the stalk criterion
-   transfers these bounds to f. Empty Y has bound zero. This proves clause (1).
-6. A separably closed point has torsion dimension zero. The affine torsion dimension
-   theorem gives finite bounds for affine finite-type schemes over K. Absolute
-   Mayer–Vietoris and the same quasi-compact-open induction prove clause (2).
-The dependency nodes in the recorded proof supply these six steps. -/
+Proof: Choose a natural uniform bound for the dimensions of all extensions of the
+source's ground field, using a finite affine cover and finite algebra generators.
+The torsion abelian higher-direct-image bound then vanishes above twice this bound:
+its proof passes to a separable closure, applies absolute torsion cohomological
+vanishing there, and descends through monic finite-separable transition maps.
+Thus a finite natural number belongs to the set defining the relative dimension.
+Over a separably closed field, the existing finite-type cohomology theorem gives
+the absolute bound twice a natural upper bound for the dimension of X. Compare
+Ext cohomology with derived global sections and again use the defining infimum.
+Both arguments include empty schemes without a nonemptiness hypothesis. -/
 theorem torsionEtaleCohomologicalDimension_finite_of_finiteType
     (K : Type u) [Field K]
     (X Y : Scheme.{u}) [X.Over (Spec (.of K))] [Y.Over (Spec (.of K))]
@@ -87,7 +63,28 @@ theorem torsionEtaleCohomologicalDimension_finite_of_finiteType
       (@Scheme.torsionEtaleCohomologicalDimension X
         ((quasiCompact_iff_compactSpace (X ↘ Spec (.of K))).mp inferInstance)
         (@IsLocallyNoetherian.quasiSeparatedSpace X
-          (LocallyOfFiniteType.isLocallyNoetherian (X ↘ Spec (.of K))))) < ⊤) :=
-  sorry
+          (LocallyOfFiniteType.isLocallyNoetherian (X ↘ Spec (.of K))))) < ⊤) := by
+  have : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace
+    (X ↘ Spec (.of K))
+  constructor
+  · obtain ⟨n, hn⟩ := exists_topologicalKrullDim_le_of_isPullback
+      (X ↘ Spec (.of K))
+    apply lt_of_le_of_lt (sInf_le ?_) (ENat.natCast_lt_top (2 * n))
+    refine ⟨2 * n, rfl, ?_⟩
+    intro F hF q hq
+    exact Etale.isZero_torsion_higherDirectImage_of_forall_field_dimension_le
+      (X ↘ Spec (.of K)) (Y ↘ Spec (.of K)) f (comp_over f _) n hn F hF q
+      (by exact_mod_cast hq)
+  · intro hK
+    have : IsSepClosed K := hK
+    obtain ⟨d, hd⟩ := exists_topologicalKrullDim_le (X ↘ Spec (.of K))
+    apply lt_of_le_of_lt (sInf_le ?_) (ENat.natCast_lt_top (2 * d))
+    refine ⟨2 * d, rfl, ?_⟩
+    intro F hF q hq
+    have hH := Scheme.subsingleton_H_of_two_mul_lt_of_isSepClosed d
+      (X ↘ Spec (.of K)) hd F hF q hq
+    obtain ⟨e⟩ := Scheme.nonempty_sheafH_extDerivedIso X q
+    have : Subsingleton ((Sheaf.functorH X.smallEtaleTopology q).obj F) := hH
+    exact (e.app F).addCommGroupIsoToAddEquiv.symm.injective.subsingleton
 
 end AlgebraicGeometry

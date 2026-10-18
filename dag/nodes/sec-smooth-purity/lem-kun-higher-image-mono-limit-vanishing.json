@@ -1,0 +1,115 @@
+{
+ "id": "lem-kun-higher-image-mono-limit-vanishing",
+ "kind": "statement",
+ "title": "Vanishing descends through monic transitions from a scheme limit",
+ "statement": "Let Λ be a commutative ring, k:W→S a morphism of schemes, and G an etale Λ-module sheaf on W. Let D:I→Over W be a small cofiltered system with affine transitions and all structure maps to S quasi-compact and quasi-separated. Let c be a scheme limit cone, also quasi-compact and quasi-separated over S. Fix q∈Z and V over W. Suppose some D(i₀) maps to V and every transition from the higher image for V to one for D(i) induced by any map D(i)→V is monic. If the higher image for c.pt with the pulled-back G vanishes, then the higher image for V with the pulled-back G vanishes. Use [def-sbc-module-higher-image-transitions] for transitions and [def-weil-pbc-direct-image] for higher images.",
+ "source": {
+  "document": "lean/WeilConjectures/SixFunctors/Etale/SmoothBaseChange/HigherDirectImage/TransitionMono.lean",
+  "place": "isZero_higherDirectImage_of_isLimit_of_mono, lines 157–209."
+ },
+ "stmt_deps": [
+  "def-sbc-module-higher-image-transitions",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-inverse-system"
+ ],
+ "proof": [
+  {
+   "text": "Test the higher image for V on a geometric stalk. Map any element to the chosen stage i₀. Its image at the limit is zero by the vanishing hypothesis. Stalk continuity gives a later stage where this element is zero. Composition of canonical transitions identifies that map with the transition induced by the composite D(j)→D(i₀)→V. It is monic by hypothesis, so the initial stalk element was zero.",
+   "uses": [
+    "sbc-lem-higher-image-pulledback-stalk-continuity",
+    "sbc-lem-higher-image-over-transition-coherence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "All geometric stalks are zero, so the map to the zero sheaf is an isomorphism by conservativity. Hence the original higher-image sheaf is zero.",
+   "uses": [
+    "lemma-weil-pbc-geometric-stalk-conservative"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "sbc-lem-higher-image-over-transition-coherence",
+  "sbc-lem-higher-image-pulledback-stalk-continuity"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "lean/WeilConjectures/SixFunctors/Etale/SmoothBaseChange/HigherDirectImage/TransitionMono.lean",
+  "place": "isZero_higherDirectImage_of_isLimit_of_mono, lines 157–209.",
+  "note": "Complete existing source proof, or its torsion-abelian extension, checked in Lean."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Higher direct images vanish when their transition maps to an inverse system are monomorphisms and the limit higher direct image vanishes",
+   "results": "8 hits including DirectLimit.mk_injective and Module.DirectLimit.of.zero_exact; no etale sheaf theorem.",
+   "date": "2026-10-18",
+   "verdict": "No exact Mathlib match; the proved source-library API is used."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"higherDirectImage\"",
+   "results": "0 hits.",
+   "date": "2026-10-18",
+   "verdict": "No exact Mathlib match; the proved source-library API is used."
+  },
+  {
+   "tool": "grep",
+   "query": "exists_topologicalKrullDim_le_of_isPullback|isZero_higherDirectImage_of_isLimit_of_mono|mono_higherDirectImageOverMap|isZero_higherDirectImage_of_two_mul_lt_of_acyclic|isEquivalence_sheafCompose_forget₂_uliftInt",
+   "results": "msearch.py: 0 Mathlib hits. Local rg found the source declarations read below.",
+   "date": "2026-10-18",
+   "verdict": "No exact Mathlib match; the proved source-library API is used."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Sites.FiniteTorsionEtaleCohomologicalDimension",
+  "date": "2026-10-18",
+  "group": "C3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-kun-0f10",
+   "place": "Clause (1), finite relative torsion cohomological dimension; source-library separable-closure route replacing the affine/Mayer–Vietoris argument.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-kunneth-ordinary",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.TransitionMono",
+  "declaration": "AlgebraicGeometry.Etale.isZero_higherDirectImage_of_isLimit_of_mono",
+  "statement": "theorem Etale.isZero_higherDirectImage_of_isLimit_of_mono {W S : Scheme.{u}} (k : W ⟶ S)\n    (G : Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ)) {I : Type u} [Category.{u} I]\n    [IsCofiltered I] (D : I ⥤ Over W) [∀ {i j : I} (f : i ⟶ j), IsAffineHom (D.map f).left]\n    [∀ i, QuasiCompact ((D.obj i).hom ≫ k)] [∀ i, QuasiSeparated ((D.obj i).hom ≫ k)]\n    (c : Cone D) (hc : IsLimit ((Over.forget W).mapCone c))\n    [QuasiCompact (c.pt.hom ≫ k)] [QuasiSeparated (c.pt.hom ≫ k)] (q : ℤ) {V : Over W}\n    {i₀ : I} (τ : D.obj i₀ ⟶ V)\n    (hmono : ∀ (i : I) (ψ : D.obj i ⟶ V), Mono (Etale.higherDirectImageOverMap Λ k G q ψ))\n    (hT : IsZero (Etale.higherDirectImage Λ (c.pt.hom ≫ k) q\n      ((c.pt.hom)^*[ModuleCat.{u + 1} Λ].obj G))) :\n    IsZero (Etale.higherDirectImage Λ (V.hom ≫ k) q ((V.hom)^*[ModuleCat.{u + 1} Λ].obj G))",
+  "branch": "sheaf-dag",
+  "by": "C3",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261018T062712-L-635894",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261018T062712-L-635894",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

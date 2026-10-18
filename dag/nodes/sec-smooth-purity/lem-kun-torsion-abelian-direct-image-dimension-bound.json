@@ -1,0 +1,136 @@
+{
+ "id": "lem-kun-torsion-abelian-direct-image-dimension-bound",
+ "kind": "statement",
+ "title": "A uniform field-extension dimension bound controls torsion abelian higher images",
+ "statement": "Let K be a field and let aX:X→Spec K and aY:Y→Spec K be finite-type structure morphisms [def-weil-finite-type-morphism]. Let f:X→Y satisfy f≫aY=aX. Fix a natural n and assume every base change X_L to every field L over K has topological Krull dimension at most n [def-kun-dimension, def-pc-fibre-product]. For every torsion abelian etale sheaf F on X and every integer q>2n, the higher direct image R^q f_*F is zero [def-weil-pbc-abelian-etale-sheaves, def-weil-pbc-direct-image]. Higher images are homology of rightDerivedLowerStarPlus applied to F in degree zero.",
+ "source": {
+  "document": "lean/Sheaf/AlgebraicGeometry/Sites/TorsionAbelianDirectImageVanishing.lean",
+  "place": "Complete proof; generalizes the separable-closure argument in WeilConjectures.SixFunctors.Etale.Derived.Kunneth.CohomologicalDimension, isZero_higherDirectImage_of_forall_topologicalKrullDim_le, to torsion abelian sheaves."
+ },
+ "stmt_deps": [
+  "def-weil-finite-type-morphism",
+  "def-kun-dimension",
+  "def-pc-fibre-product",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-direct-image"
+ ],
+ "proof": [
+  {
+   "text": "Use the exact equivalence between abelian sheaves and ULift Z-module sheaves. The forgetful functor commutes with inverse image via upperStarForget₂. Torsion is preserved by inverse image and by isomorphisms, so the underlying abelian sheaves of every restriction of the chosen module sheaf remain torsion. Injective integer-module sheaves have injective underlying abelian sheaves because the forgetful functor is an equivalence; hence they have zero positive cohomology.",
+   "uses": [
+    "lem-kun-integer-module-abelian-equivalence",
+    "lem-weil-pbc-torsion-sheaf-characterizations"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Let Ks be a separable closure of K and index its finite subextensions. Use the canonical spectrum limit and base change it along aX to form D(j)=X×_K L_j over X with limit X×_K Ks. Its transitions are affine. Finite-type schemes over a field are Noetherian and qcqs; these properties give the qcqs hypotheses on all maps to Y required by the limit theorem. The chosen dimension hypothesis applies to the limit, so the separably closed acyclic-coefficient bound makes its degree-q higher image vanish.",
+   "uses": [
+    "lem-kun-algebraic-subextensions-spec-limit",
+    "lem-kun-sepclosed-acyclic-module-higher-image-bound"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each finite subextension L_j/K, Y×_K L_j→Y is etale and surjective. The projection after this base change factors through X×_K L_j by the universal property of the two cartesian squares; the compatibility f≫aY=aX is exactly the equality needed to define this factorization. The higher-image transition from X to this stage is therefore monic. Apply vanishing through monic limit transitions to deduce vanishing on X.",
+   "uses": [
+    "lem-kun-higher-image-factorization-mono",
+    "lem-kun-higher-image-mono-limit-vanishing"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Finally take the underlying abelian higher image. The exact coefficient equivalence commutes with homology, single-degree complexes, and derived pushforward: use mapDerivedCategoryPlusHomologyFunctorIso, rightDerivedLowerStarForget₂ and mapDerivedCategoryPlusSingleFunctor. The counit identifies the chosen module sheaf with the original abelian sheaf. Transport IsZero through this explicit composite of isomorphisms. No arbitrary witness of an existence theorem is used: the equivalence determines the object up to exactly the isomorphism used here.",
+   "uses": [
+    "lem-kun-integer-module-abelian-equivalence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-kun-algebraic-subextensions-spec-limit",
+  "lem-kun-higher-image-factorization-mono",
+  "lem-kun-higher-image-mono-limit-vanishing",
+  "lem-kun-integer-module-abelian-equivalence",
+  "lem-kun-sepclosed-acyclic-module-higher-image-bound",
+  "lem-weil-pbc-torsion-sheaf-characterizations"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "lean/Sheaf/AlgebraicGeometry/Sites/TorsionAbelianDirectImageVanishing.lean",
+  "place": "Complete proof; generalizes the separable-closure argument in WeilConjectures.SixFunctors.Etale.Derived.Kunneth.CohomologicalDimension, isZero_higherDirectImage_of_forall_topologicalKrullDim_le, to torsion abelian sheaves.",
+  "note": "Complete existing source proof, or its torsion-abelian extension, checked in Lean."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "uniform vanishing of higher direct images of torsion abelian etale sheaves over a field",
+   "results": "8 results about sections, ordinary sheaves, and etaleness; no higher-direct-image dimension bound.",
+   "date": "2026-10-18",
+   "verdict": "No exact Mathlib match; the proved source-library API is used."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"higherDirectImage\"",
+   "results": "0 hits.",
+   "date": "2026-10-18",
+   "verdict": "No exact Mathlib match; the proved source-library API is used."
+  },
+  {
+   "tool": "grep",
+   "query": "exists_topologicalKrullDim_le_of_isPullback|isZero_higherDirectImage_of_isLimit_of_mono|mono_higherDirectImageOverMap|isZero_higherDirectImage_of_two_mul_lt_of_acyclic|isEquivalence_sheafCompose_forget₂_uliftInt",
+   "results": "msearch.py: 0 Mathlib hits. Local rg found the source declarations read below.",
+   "date": "2026-10-18",
+   "verdict": "No exact Mathlib match; the proved source-library API is used."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Sites.FiniteTorsionEtaleCohomologicalDimension",
+  "date": "2026-10-18",
+  "group": "C3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-kun-0f10",
+   "place": "Clause (1), finite relative torsion cohomological dimension; source-library separable-closure route replacing the affine/Mayer–Vietoris argument.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-kunneth-ordinary",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Sites.TorsionAbelianDirectImageVanishing",
+  "declaration": "AlgebraicGeometry.Etale.isZero_torsion_higherDirectImage_of_forall_field_dimension_le",
+  "statement": "theorem isZero_torsion_higherDirectImage_of_forall_field_dimension_le\n    {K : Type u} [Field K] {X Y : Scheme.{u}}\n    (aX : X ⟶ Spec (.of K)) (aY : Y ⟶ Spec (.of K))\n    [LocallyOfFiniteType aX] [QuasiCompact aX] [LocallyOfFiniteType aY] [QuasiCompact aY]\n    (f : X ⟶ Y) (hf : f ≫ aY = aX) (n : ℕ)\n    (hn : ∀ (L : Type u) [Field L] (s : Spec (.of L) ⟶ Spec (.of K)) {P : Scheme.{u}}\n      (p₁ : P ⟶ X) (p₂ : P ⟶ Spec (.of L)), IsPullback p₁ p₂ aX s →\n        topologicalKrullDim P ≤ (n : WithBot ℕ∞))\n    (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (hF : F.IsTorsion)\n    (q : ℤ) (hq : (2 * n : ℤ) < q) :\n    IsZero ((DerivedCategory.Plus.homologyFunctor\n      (Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}) q).obj\n        ((rightDerivedLowerStarPlus AddCommGrpCat.{u + 1} f).obj\n          ((DerivedCategory.Plus.singleFunctor _ 0).obj F)))",
+  "branch": "sheaf-dag",
+  "by": "C3",
+  "date": "2026-10-18",
+  "file": "lean/Sheaf/AlgebraicGeometry/Sites/TorsionAbelianDirectImageVanishing.lean"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261018T062712-L-635894",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261018T062712-L-635894",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

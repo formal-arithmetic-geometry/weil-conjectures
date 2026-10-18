@@ -1,0 +1,113 @@
+{
+ "id": "lem-kun-higher-image-factorization-mono",
+ "kind": "statement",
+ "title": "A factorization after etale surjective base change makes higher-image transitions monic",
+ "statement": "Let Λ be a commutative ring, k:T→S a scheme morphism, G an etale Λ-module sheaf on T, q an integer, and φ:U→V a morphism of schemes over T. Suppose g:S′→S is etale and surjective and a cartesian square P→V, P→S′ over V→S and g is given. If the projection P→V factors through φ:U→V, then the canonical higher-image transition R^q(V→S)_*(G|V)→R^q(U→S)_*(G|U) is monic [def-weil-pbc-etale-sheaves, def-sbc-module-higher-image-transitions, def-weil-pbc-cartesian-square, def-weil-surjective-morphism].",
+ "source": {
+  "document": "lean/WeilConjectures/SixFunctors/Etale/SmoothBaseChange/HigherDirectImage/TransitionMono.lean",
+  "place": "mono_higherDirectImageOverMap, lines 125–146, using the proved preceding transition theorem."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-etale-sheaves",
+  "def-sbc-module-higher-image-transitions",
+  "def-weil-pbc-cartesian-square",
+  "def-weil-surjective-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Apply etale base change along g. The pasting identity for the canonical adjunction-unit base-change maps identifies the pullback of the transition, followed by the map from the given factorization, with the cartesian base-change isomorphism. Thus the pulled-back map is split monic; applying homology preserves the splitting.",
+   "uses": [
+    "lem-weil-pbc-etale-localization-exchange"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The surjective inverse image is exact and faithful. It therefore reflects monomorphisms of sheaves. The coefficient inverse-composition and single-functor comparisons in higherDirectImageOverMap are isomorphisms, so composition with them preserves monicity.",
+   "uses": [
+    "lem-weil-pbc-surjective-module-pullback-faithful"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-etale-localization-exchange",
+  "lem-weil-pbc-surjective-module-pullback-faithful"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "lean/WeilConjectures/SixFunctors/Etale/SmoothBaseChange/HigherDirectImage/TransitionMono.lean",
+  "place": "mono_higherDirectImageOverMap, lines 125–146, using the proved preceding transition theorem.",
+  "note": "Complete existing source proof, or its torsion-abelian extension, checked in Lean."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Higher direct images vanish when their transition maps to an inverse system are monomorphisms and the limit higher direct image vanishes",
+   "results": "8 hits on general direct limits and limit monomorphisms; no etale higher-image transition criterion.",
+   "date": "2026-10-18",
+   "verdict": "No exact Mathlib match; the proved source-library API is used."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Higher direct image transition is monic if an etale surjective base change factors through it",
+   "results": "8 hits on ordinary sheaf-space monomorphisms and Mayer–Vietoris; no higher-image transition criterion.",
+   "date": "2026-10-18",
+   "verdict": "No exact Mathlib match; the proved source-library API is used."
+  },
+  {
+   "tool": "grep",
+   "query": "exists_topologicalKrullDim_le_of_isPullback|isZero_higherDirectImage_of_isLimit_of_mono|mono_higherDirectImageOverMap|isZero_higherDirectImage_of_two_mul_lt_of_acyclic|isEquivalence_sheafCompose_forget₂_uliftInt",
+   "results": "msearch.py: 0 Mathlib hits. Local rg found the source declarations read below.",
+   "date": "2026-10-18",
+   "verdict": "No exact Mathlib match; the proved source-library API is used."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Sites.FiniteTorsionEtaleCohomologicalDimension",
+  "date": "2026-10-18",
+  "group": "C3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-kun-0f10",
+   "place": "Clause (1), finite relative torsion cohomological dimension; source-library separable-closure route replacing the affine/Mayer–Vietoris argument.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-kunneth-ordinary",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.TransitionMono",
+  "declaration": "AlgebraicGeometry.Etale.mono_higherDirectImageOverMap",
+  "statement": "theorem Etale.mono_higherDirectImageOverMap {T S S' P : Scheme.{u}} (k : T ⟶ S)\n    (G : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℤ) {U V : Over T}\n    (φ : U ⟶ V) (g : S' ⟶ S) [Etale g] (hg : Function.Surjective g.base) {pr : P ⟶ V.left}\n    {h' : P ⟶ S'} (sq : IsPullback pr h' (V.hom ≫ k) g) (pr₁ : P ⟶ U.left)\n    (hpr : pr₁ ≫ φ.left = pr) :\n    Mono (Etale.higherDirectImageOverMap Λ k G q φ)",
+  "branch": "sheaf-dag",
+  "by": "C3",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261018T062712-L-635894",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261018T062712-L-635894",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
