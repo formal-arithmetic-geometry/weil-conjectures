@@ -16,9 +16,206 @@
   "def-weil-pbc-strict-henselization-limit",
   "def-kun-topological-krull-dimension"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First fix the coefficient ring throughout. Potential duality preserves $D^b_c$ by the preservation lemma, without using the biduality theorem to be proved. Its evaluation-transpose transformation is natural and takes distinguished triangles to morphisms of triangles, including their connecting maps. Consequently, if evaluation biduality holds for every ordinary constructible sheaf on a scheme, it holds for every bounded constructible complex: use the finite truncation filtration with successive quotients $\\mathcal H^a(M)[-a]$ and the two-out-of-three property for a morphism of triangles. Conversely the sheaf assertion is a special case. We will use this implication for each induction hypothesis, in particular for the complex $R\\pi_*M$, not just for sheaves.",
+   "uses": [
+    "lem-per-potential-dual-constructible-preservation",
+    "lem-per-relative-bidual-triangles",
+    "lem-weil-pbc-truncation-triangle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII 6.2.3.1, 6.4.1 and the last argument of 6.4.2"
+   }
+  },
+  {
+   "text": "The assertion is independent of the dimension-function normalization. Indeed, for two dimension functions $\\delta,\\delta'$ their difference has equal values at any specialization, since both differences along that specialization equal the same local codimension. On each irreducible component it is therefore constant; the constants agree on intersecting components. There are finitely many irreducible components, so the difference is locally constant. On each resulting open-and-closed piece write $\\delta'=\\delta+m$. Tensoring the potential pinnings by the invertible line-shift $\\Lambda(m)[2m]$ gives potential pinnings for $\\delta'$: both ends of each defining residue equation acquire the same twist-shift. Uniqueness identifies the chosen potential with this twist-shift. Apply evaluation-compatible twisted-bidual transport with $g=\\mathrm{id}$; the Hom pullback maps are identities and the line is invertible since it is etale locally free of rank one. Thus $D_{K(m)[2m]}^2M\\cong D_K^2M$ identifies the evaluation maps. These calculations also handle comparison of a chosen potential with an induced one on every scheme below.",
+   "uses": [
+    "lem-per-local-dimension-function-calculus",
+    "def-per-potential-dualizing-complex",
+    "lem-per-potential-dualizing-uniqueness",
+    "lem-asd-etale-finite-twist-pullback",
+    "lem-sf-etale-twisted-bidual-transport"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII 6.5, paragraph after Definition 6.5.1"
+   }
+  },
+  {
+   "text": "Biduality on a scheme implies it on a locally closed subscheme. For an open immersion $j:U\\hookrightarrow T$, extend a constructible sheaf $F$ by zero: a finite lisse stratification of $U$, together with the closed complement carrying zero, is a constructible stratification of $j_!F$. The open-closed adjunction gives $j^*j_!F=F$. The open immersion is regular (its fibres are empty or a single reduced point), and regular pullback pinnings and the internal-Hom comparison identify $j^*\\eta_{j_!F}$ with $\\eta_F$ for $j^*K_T$. For a closed immersion $i:Z\\hookrightarrow T$, use $K_Z=i^!K_T$ with its potential pinnings. Finite pushforward preserves constructibility, and the finite bidual comparison identifies $i_*\\eta_F$ with $\\eta_{i_*F}$. Its exactness and conservativity give invertibility of $\\eta_F$. Apply step 2 for a different dimension function or potential, and compose an open and a closed restriction. This proves in particular Zariski locality: to test an evaluation map use its geometric stalks, or the strict-local testing criterion.",
+   "uses": [
+    "def-weil-pbc-constructible-complexes",
+    "lem-cbc-open-closed-recollement",
+    "lem-per-potential-regular-base-change",
+    "lem-per-regular-pullback-pinnings",
+    "lem-per-potential-dualizing-finite-pullback",
+    "lem-per-potential-finite-bidual-comparison",
+    "lem-weil-pbc-finite-pushforward-constructible-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII 6.4.2, reduction to products of projective lines"
+   }
+  },
+  {
+   "text": "For an integer $e\\geq0$, let $A_e$ mean the conclusion for all finite-type schemes over excellent Noetherian bases of dimension at most $e$, and for all their strict localizations, with every available dimension function and potential. Prove $A_e$ successively for $e=0,\\ldots,d$. At stage $e$ the hypothesis of the item supplies biduality for every base of dimension at most $e$. Assume $A_{e-1}$ if $e>0$; at $e=0$ the corresponding negative-dimensional case consists only of the empty scheme and requires no argument. For fixed $e$, prove by induction on $n$ the assertion for $Z_n=(\\mathbf P^1)^n\\times S$ for all such bases $S$. Once this holds for every $n$, it gives the finite-type assertion: cover the base and source by affine opens; an affine finite-type algebra has finitely many generators, yielding a closed immersion into $\\mathbf A^m_S$. Embed $\\mathbf A^m_S$ as the product of the standard affine charts in $(\\mathbf P^1)^m_S$, and use step 3 and Zariski locality. Bases admit dimension functions locally by local existence; the finite-type dimension-function lemma supplies the induced function on each product. Step 2 handles all other chosen functions.",
+   "uses": [
+    "lem-chow-affine-immersion",
+    "lem-per-local-dimension-function-calculus",
+    "lem-per-finite-type-dimension-function"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII 6.4.2, first paragraph of the proof"
+   }
+  },
+  {
+   "text": "The case $n=0$ is the hypothesis on schemes of dimension at most $e$. For $n\\geq1$ assume the product assertion for $n-1$, simultaneously for every base of dimension at most $e$. It is enough to work with strictly henselian local bases $S$. To see this, pull back the evaluation cone to $Z_n\\times_SS_{(\\bar s)}$ for every geometric $\\bar s$ of $S$. Strict localization is regular, Noetherian and excellent; its dimension equals $\\dim\\mathcal O_{S,s}\\leq e$. The map on products is regular by finite-type base change, so regular Hom comparison and regular pullback pinnings identify the pulled-back cone with the cone formed there. Every geometric point of $Z_n$ lifts to one of these base changes, so vanishing there detects vanishing of the original cone. Thus one may take $S$ strictly henselian local. If its dimension is less than $e$, the outer induction already gives the result; otherwise it has dimension $e$. Let $s$ be its closed point and let $M$ be an arbitrary ordinary constructible sheaf on $Z_n$.",
+   "uses": [
+    "lem-per-potential-regular-base-change",
+    "lem-per-regular-pullback-pinnings",
+    "lem-sc-strict-henselization-dimension",
+    "lem-weil-pbc-regular-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII 6.4.2, second paragraph: strict-local base reduction"
+   }
+  },
+  {
+   "text": "Choose a potential complex on $S$ and take $K_{Z_n}=\\pi^!K_S$ for the proper projection $\\pi:Z_n\\to S$; this is potential by exceptional pullback. Its induced dimension function exists, and step 2 permits this normalization. Put $C=\\operatorname{Cone}(M\\xrightarrow{\\eta_M}D_{Z_n}^2M)$. Both duals of $M$ are bounded constructible by preservation, hence so is $C$ by triangulated closure. At a nonclosed point $t$ of $S$ the local ring has dimension less than $e$: a prime chain ending at its nonmaximal prime can be extended by the maximal prime in the local ring. Strict henselization preserves that dimension. Pulling to $S_{(\\bar t)}$ commutes with duality and carries potentials to potentials, as in step 5. The outer induction gives biduality on the finite-type product over this base; therefore $C$ has zero geometric stalk at every point over $t$. For $e=0$ there are no nonclosed points. Thus the support of every cohomology sheaf of $C$ is contained in the closed fibre $Z_{n,s}$.",
+   "uses": [
+    "lem-per-potential-dualizing-finite-pullback",
+    "lem-per-potential-dual-constructible-preservation",
+    "prop-constructible-derived-subcategory",
+    "lem-per-potential-regular-base-change",
+    "lem-per-regular-pullback-pinnings",
+    "lem-sc-strict-henselization-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII 6.4.2, cone and support over the closed base point"
+   }
+  },
+  {
+   "text": "Let $y$ be the generic point of the closed fibre of $\\mathbf P^1_S\\to S$, and put $T=\\operatorname{Spec}\\mathcal O_{\\mathbf P^1_S,y}$. Write $S=\\operatorname{Spec}A$ with maximal ideal $\\mathfrak m$. The point $y$ lies in the standard affine chart and corresponds to $\\mathfrak mA[t]$. The polynomial algebra is a free, hence flat, $A$-module; the flat height formula gives\n$$\\dim A[t]_{\\mathfrak mA[t]}=\\dim A+\\dim\\kappa(s)(t)=e.$$\nIts fibre local ring is the field $\\kappa(s)(t)$, of dimension zero. Thus $T$ is Noetherian excellent of dimension $e$, by finite-type localization of excellence, and admits a dimension function because it is local universally catenary. Localization maps are regular, and finite-type base change makes the maps $(\\mathbf P^1)^{n-1}_T\\to Z_n$ regular. These facts verify the base and dimension hypotheses of the inner induction; the full dimension of $Z_n$ is never used as a base bound.",
+   "uses": [
+    "lem-weil-pbc-flat-height-formula",
+    "lem-exc-finite-type-localization-excellent",
+    "lem-per-local-dimension-function-calculus",
+    "lem-weil-pbc-localization-regular",
+    "lem-weil-pbc-regular-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII 6.4.2, dimension of the localization at the generic point of the closed projective-line fibre"
+   }
+  },
+  {
+   "text": "For each of the $n$ coordinate projections $q_i:Z_n\\to\\mathbf P^1_S$, base change by $T\\to\\mathbf P^1_S$. The resulting scheme is $(\\mathbf P^1)^{n-1}_T$. The inner induction hypothesis applies since $\\dim T=e$. Regular pullback of potentials and the regular internal-Hom comparison identify the pullback of $C$ with its evaluation cone; hence that pullback vanishes. A point $z$ in the support of $C$ already lies over $s$ by step 6. Its image $q_i(z)$ cannot be $y$: if it were, $z$ would lift to this localization, where the pullback has zero geometric stalks. Every point of $\\mathbf P^1_{\\kappa(s)}$ other than its generic point is closed, so all $q_i(z)$ are closed. Iterating the closed-points-of-product criterion over the field $\\kappa(s)$ shows that $z$ is closed in $Z_{n,s}$. Thus $C$ has cohomology supported at closed points of that fibre.",
+   "uses": [
+    "lem-per-potential-regular-base-change",
+    "lem-per-regular-pullback-pinnings",
+    "lem-kun-closed-points-of-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII 6.4.2, the n projections and the closed-point support conclusion"
+   }
+  },
+  {
+   "text": "The proper direct image $R\\pi_*M$ is bounded constructible. The $2^n$ standard affine charts of $Z_n$ have rings $A[t_1,\\ldots,t_n]$; the Noetherian polynomial dimension formula gives dimension $e+n$. These finitely many charts cover $Z_n$, so it is finite-dimensional. Its geometric fibres are likewise covered by polynomial rings over fields of dimension $n$. Thus all schemes here are finite-dimensional Noetherian, the geometric fibres of $\\pi$ have dimension $n$, and the finite coefficient ring has invertible orders; proper direct-image finiteness gives constructibility and vanishing above $2n$. The hypothesis on the base $S$, together with step 1, therefore makes $\\eta_{R\\pi_*M}$ an isomorphism. The proper potential bidual comparison applies to $K_{Z_n}=\\pi^!K_S$; its preservation hypotheses are supplied by the preservation lemma. It identifies $R\\pi_*\\eta_M$ with $\\eta_{R\\pi_*M}$. Since derived direct image is triangulated, it follows that $R\\pi_*C=0$. This uses relative adjunction into $K_S$, and requires no assertion that $S$ is regular or a scheme over a field.",
+   "uses": [
+    "lem-sf-noetherian-polynomial-dimension",
+    "lem-weil-pbc-etale-proper-direct-image-finiteness",
+    "lem-per-potential-dual-constructible-preservation",
+    "lem-per-proper-potential-bidual-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII 6.4.2, final proper-image argument"
+   }
+  },
+  {
+   "text": "Apply proper base change to the closed geometric point $\\bar s$ of $S$. It gives\n$$R\\Gamma(Z_{n,\\bar s},C|_{Z_{n,\\bar s}})=(R\\pi_*C)_{\\bar s}=0.$$\nThe residue field of $S$ is separably closed. One may take it as the field of this geometric point; passing to an algebraic closure, if desired, does not change the conclusion. Step 8 says that the restricted complex has nonzero stalks only at closed points of the fibre, a finite-type scheme over this separably closed field. The closed-point support detection lemma therefore gives $C|_{Z_{n,\\bar s}}=0$. Combined with step 6, all geometric stalks of $C$ vanish. The strict-local testing criterion (or its geometric-stalk formulation) gives $C=0$. This completes the induction on $n$, and the reduction in step 4 proves biduality for all finite-type schemes over bases of dimension at most $e$.",
+   "uses": [
+    "lem-kun-proper-base-change-torsion-ring",
+    "lem-kun-0f1g",
+    "lem-per-potential-regular-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII 6.4.2, detection of the closed-point-supported cone; Stacks Tag 0F1G"
+   }
+  },
+  {
+   "text": "It remains at this same outer induction stage to justify the strict-localization clause for arbitrary constructible sheaves there; checking only sheaves pulled back from the original scheme would not suffice. Let $Y$ be finite type over a base of dimension at most $e$ and let $V=Y_{(\\bar y)}$. Its affine pointed etale neighbourhoods form the small cofiltered inverse-limit presentation in the strict-localization definition. Their transition morphisms are affine: both schemes are affine. Reindex by a directed set and use constructible-module limit descent to write any constructible $F$ on $V$ as $p^*F_a$ for a constructible sheaf on one affine etale neighbourhood $Y_a\\to Y$. Such a neighbourhood is finite type over $Y$, hence over the original base; it has an induced dimension function, after restricting the original base to an affine neighbourhood if necessary. The finite-type result just proved gives biduality for $F_a$. The map $V\\to Y_a$ is its strict localization, so is regular; regular pullback pinnings and Hom comparison identify $p^*\\eta_{F_a}$ with $\\eta_F$. Step 2 accommodates the chosen potential and dimension function on $V$. This proves $A_e$ including its strict-localizations, completing the induction on $e$ and hence the assertion at $e=d$.",
+   "uses": [
+    "def-weil-pbc-strict-henselization-limit",
+    "lem-weil-pbc-cofiltered-limit-directed-reindex",
+    "lem-weil-pbc-constructible-module-limit-descent",
+    "lem-per-finite-type-dimension-function",
+    "lem-per-potential-regular-base-change",
+    "lem-per-regular-pullback-pinnings"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII 6.4.2, strict-localizations in the outer induction; Stacks Tag 09YU (3)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-per-potential-dual-constructible-preservation",
+  "lem-per-relative-bidual-triangles",
+  "lem-weil-pbc-truncation-triangle",
+  "lem-per-local-dimension-function-calculus",
+  "def-per-potential-dualizing-complex",
+  "lem-per-potential-dualizing-uniqueness",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-sf-etale-twisted-bidual-transport",
+  "def-weil-pbc-constructible-complexes",
+  "lem-cbc-open-closed-recollement",
+  "lem-per-potential-regular-base-change",
+  "lem-per-regular-pullback-pinnings",
+  "lem-per-potential-dualizing-finite-pullback",
+  "lem-per-potential-finite-bidual-comparison",
+  "lem-weil-pbc-finite-pushforward-constructible-noetherian",
+  "lem-chow-affine-immersion",
+  "lem-per-finite-type-dimension-function",
+  "lem-sc-strict-henselization-dimension",
+  "lem-weil-pbc-regular-base-change",
+  "prop-constructible-derived-subcategory",
+  "lem-weil-pbc-flat-height-formula",
+  "lem-exc-finite-type-localization-excellent",
+  "lem-weil-pbc-localization-regular",
+  "lem-kun-closed-points-of-product",
+  "lem-sf-noetherian-polynomial-dimension",
+  "lem-weil-pbc-etale-proper-direct-image-finiteness",
+  "lem-per-proper-potential-bidual-comparison",
+  "lem-kun-proper-base-change-torsion-ring",
+  "lem-kun-0f1g",
+  "def-weil-pbc-strict-henselization-limit",
+  "lem-weil-pbc-cofiltered-limit-directed-reindex",
+  "lem-weil-pbc-constructible-module-limit-descent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "XVII Proposition 6.4.2, pp.297–298; follows its product induction, with explicit locality, normalization and strict-local descent details and a relative-adjunction proper-duality input"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -50,7 +247,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-gabber-local-duality-general",
@@ -72,5 +269,119 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-biduality-finite-type-propagation",
+  "worker": "stage1",
+  "summary": "Followed ILO XVII 6.4.2 with the nested dimension/product induction fully quantified; supplied locality, arbitrary dimension-function normalization and strict-local sheaf descent. Created only independent preservation and relative proper bidual-comparison lemmas. Reused the flat height formula and closed-point detection; no Lean or builds and no forbidden source route.",
+  "blueprint": "Realizes the local duality input of lem-per-artin-gabber-affine-curve proof Step 3 through ILO XVII 6.4.2, used in the final dimension induction of XVII 6.5.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-truncation-triangle",
+    "why": "Generic locality, constructibility, triangulated-category, limit, or excellence tool whose statement supplies the indicated calculation; the perverse Fourier unit has no replacement for it."
+   },
+   {
+    "node": "lem-asd-etale-finite-twist-pullback",
+    "why": "Generic locality, constructibility, triangulated-category, limit, or excellence tool whose statement supplies the indicated calculation; the perverse Fourier unit has no replacement for it."
+   },
+   {
+    "node": "lem-sf-etale-twisted-bidual-transport",
+    "why": "Evaluation-compatible cancellation of an invertible twist-shift; no geometric biduality is imported."
+   },
+   {
+    "node": "lem-cbc-open-closed-recollement",
+    "why": "Generic locality, constructibility, triangulated-category, limit, or excellence tool whose statement supplies the indicated calculation; the perverse Fourier unit has no replacement for it."
+   },
+   {
+    "node": "lem-weil-pbc-finite-pushforward-constructible-noetherian",
+    "why": "Generic locality, constructibility, triangulated-category, limit, or excellence tool whose statement supplies the indicated calculation; the perverse Fourier unit has no replacement for it."
+   },
+   {
+    "node": "lem-chow-affine-immersion",
+    "why": "Finite generators give the affine closed immersion used for locality."
+   },
+   {
+    "node": "lem-sc-strict-henselization-dimension",
+    "why": "Generic locality, constructibility, triangulated-category, limit, or excellence tool whose statement supplies the indicated calculation; the perverse Fourier unit has no replacement for it."
+   },
+   {
+    "node": "lem-weil-pbc-regular-base-change",
+    "why": "Generic locality, constructibility, triangulated-category, limit, or excellence tool whose statement supplies the indicated calculation; the perverse Fourier unit has no replacement for it."
+   },
+   {
+    "node": "prop-constructible-derived-subcategory",
+    "why": "Generic locality, constructibility, triangulated-category, limit, or excellence tool whose statement supplies the indicated calculation; the perverse Fourier unit has no replacement for it."
+   },
+   {
+    "node": "lem-weil-pbc-flat-height-formula",
+    "why": "Flat local dimension formula, a commutative-algebra tool, used with zero-dimensional generic fibre."
+   },
+   {
+    "node": "lem-exc-finite-type-localization-excellent",
+    "why": "Generic locality, constructibility, triangulated-category, limit, or excellence tool whose statement supplies the indicated calculation; the perverse Fourier unit has no replacement for it."
+   },
+   {
+    "node": "lem-weil-pbc-localization-regular",
+    "why": "Generic locality, constructibility, triangulated-category, limit, or excellence tool whose statement supplies the indicated calculation; the perverse Fourier unit has no replacement for it."
+   },
+   {
+    "node": "lem-kun-closed-points-of-product",
+    "why": "Pure algebraic geometry over the residue field in the support calculation."
+   },
+   {
+    "node": "lem-sf-noetherian-polynomial-dimension",
+    "why": "Generic locality, constructibility, triangulated-category, limit, or excellence tool whose statement supplies the indicated calculation; the perverse Fourier unit has no replacement for it."
+   },
+   {
+    "node": "lem-weil-pbc-etale-proper-direct-image-finiteness",
+    "why": "Proper direct-image constructibility and the fibre-dimension bound for the projective product."
+   },
+   {
+    "node": "lem-kun-proper-base-change-torsion-ring",
+    "why": "Ordinary torsion proper base change for the cone, a generic etale-cohomology tool."
+   },
+   {
+    "node": "lem-kun-0f1g",
+    "why": "Conservativity of cohomology for closed-point-supported etale complexes over a separably closed field."
+   },
+   {
+    "node": "lem-weil-pbc-cofiltered-limit-directed-reindex",
+    "why": "Generic locality, constructibility, triangulated-category, limit, or excellence tool whose statement supplies the indicated calculation; the perverse Fourier unit has no replacement for it."
+   },
+   {
+    "node": "lem-weil-pbc-constructible-module-limit-descent",
+    "why": "Generic locality, constructibility, triangulated-category, limit, or excellence tool whose statement supplies the indicated calculation; the perverse Fourier unit has no replacement for it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-truncation-triangle",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-sf-etale-twisted-bidual-transport",
+  "lem-cbc-open-closed-recollement",
+  "lem-weil-pbc-finite-pushforward-constructible-noetherian",
+  "lem-chow-affine-immersion",
+  "lem-sc-strict-henselization-dimension",
+  "lem-weil-pbc-regular-base-change",
+  "prop-constructible-derived-subcategory",
+  "lem-weil-pbc-flat-height-formula",
+  "lem-exc-finite-type-localization-excellent",
+  "lem-weil-pbc-localization-regular",
+  "lem-kun-closed-points-of-product",
+  "lem-sf-noetherian-polynomial-dimension",
+  "lem-weil-pbc-etale-proper-direct-image-finiteness",
+  "lem-kun-proper-base-change-torsion-ring",
+  "lem-kun-0f1g",
+  "lem-weil-pbc-cofiltered-limit-directed-reindex",
+  "lem-weil-pbc-constructible-module-limit-descent"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q10-fd89f7757",
+  "group": "Q10",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q10-fd89f7757 (reviewer sub-agent of L); spot-checked: I read ILO XVII 6.2.3.1, 6.2.3.2, 6.4.1–6.4.2 with its proof and §6.5 (pp. 295–300), the item, both new nodes and all 30 cited statements. Verdict: the item is a faithful 6.4.2 with Λ=Z/ℓ^r; the strict-localization clause comes from ILO's outer induction; the statement is unchanged and not weakened. The 11 steps are correct. The outer induction on e and the inner induction on n are stated explicitly. Step 5 reduces to a strictly local base by regular base change. Step 6: a non-closed t has dim O_{S,t} < e. Step 7: I recomputed dim A[t]_{mA[t]} = e from the flat height formula, with fibre κ(s)(t). Step 8: closed points via q_i and the closed-points-of-product lemma. Step 9: proper finiteness, then the new proper comparison gives Rπ_*C = 0. Step 10: proper base change plus 0F1G. Step 11: limit descent for arbitrary sheaves on strict localizations. There is no cycle (closure check; the parent gabber-local-duality-general is not cited) and no SGA citation. New preservation node = 6.2.3.1 as stated. Its only general-X duplicate is the clause of gabber-local-duality-general, which depends on the item, so it is not a C5 duplicate. New proper node: a_M is the prop-asd internal adjunction for proper f. b_M type-checks, and b_M∘Rf_*η = η is true; tested on f = id, a closed immersion and P¹ over a separably closed field. It generalizes lem-weil-delta-proper-pushforward from a field to excellent bases. Batch 5: the closure from both targets, ± the item's proof, adds only the two new nodes and no trf/pd node. Each flagged chain ends in a generic node (0HAB excellence, the Mathlib uncurry leaf, the derivedPlus adjunction, 05WR, the 0DV5 lisse-module node) or comes from the already-present base edge potential-dualizing-finite-pullback → lem-trf-ambient-diagonal-purity-base-change. No step is a step of the trace formula or Poincaré duality, so all are accepted. All 19 declared tool_uses are generic and accepted. Maintainer notes: Step 3 relies on Step 1 for the preservation hypotheses rather than re-citing the node; gabber-local-duality-general Steps 2–4 could later cite the new preservation node."
  }
 }
