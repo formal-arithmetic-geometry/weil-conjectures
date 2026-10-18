@@ -16,9 +16,175 @@
   "def-weil-pbc-strict-henselization-limit",
   "def-kun-topological-krull-dimension"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $T_X(M)=\\mathcal H^q(D_{K_X}^2M)$. The category of sheaves here is the ordinary small etale category. First verify dimension-function independence. On each irreducible component, two dimension functions have constant difference: follow a saturated chain from its generic point to a given point, and subtract the two dimension-function equalities at each immediate specialization. Differences agree on intersecting components, so on the finitely many components through a point they agree; after removing the other components this difference is constant on a neighbourhood. Thus it is locally constant. On a locus where the difference is $m$, tensoring the pinnings with $\\Lambda(m)[2m]$ changes the costalk normalization to the new dimension function. Uniqueness [lem-per-potential-dualizing-uniqueness] identifies the new potential with this twist-shift. The Tate sheaf is an invertible line by [lem-asd-finite-etale-twist-line] (negative twists use its dual). Apply [lem-sf-etale-twisted-bidual-transport] with the identity morphism and $J=\\Lambda(m)[2m]$. Its Hom comparisons are identities, and its conclusion identifies both double duals and their evaluation-transpose maps. These canonical comparisons agree on overlaps by pinning-preserving uniqueness.",
+   "uses": [
+    "lem-per-potential-dualizing-uniqueness",
+    "lem-asd-finite-etale-twist-line",
+    "lem-sf-etale-twisted-bidual-transport"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII 6.5, paragraph following Definition 6.5.1"
+   }
+  },
+  {
+   "text": "For a short exact sequence $0\\to A\\to B\\to C\\to0$ of constructible sheaves on a scheme of dimension at most $d$, [lem-sf-derived-ses-triangle], applied in the abelian category of etale $\\Lambda$-module sheaves, gives a distinguished triangle $A\\to B\\to C\\to A[1]$ of the complexes concentrated in degree zero. Applying twice the contravariantly triangulated functor of [lem-per-relative-bidual-triangles] and then [lem-sf-derived-homology-long-exact] gives the cohomology exact sequence. If $q>1$, the term $\\mathcal H^{q-1}(D^2C)$ is zero by the lower-degree induction hypothesis. If $q=1$, the preceding map $\\mathcal H^0(D^2B)\\to\\mathcal H^0(D^2C)$ identifies with the epimorphism $B\\to C$ by naturality of the assumed degree-zero isomorphisms. In both cases the connecting map into $T_X(A)$ is zero, and hence $0\\to T_X(A)\\to T_X(B)\\to T_X(C)$ is exact. Therefore the class $T_X=0$ is closed under constructible subobjects and extensions. For a constructible subobject $A\\subseteq B$ the quotient $C=B/A$ is constructible by [thm-constructible-serre](1), and in an extension of constructible $A$ and $C$ the middle term is constructible by [thm-constructible-serre](2); so hypothesis (ii) and the degree-zero assumption apply to all three terms. It is closed under finite sums and direct summands as well: the functor $D^2$ is additive, and inclusion and retraction remain inclusion and retraction after applying $T_X$.",
+   "uses": [
+    "lem-sf-derived-ses-triangle",
+    "lem-per-relative-bidual-triangles",
+    "lem-sf-derived-homology-long-exact",
+    "thm-constructible-serre"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII Lemma 6.5.2, including its separate q=1 argument"
+   }
+  },
+  {
+   "text": "For a finite map $p:Y\\to X$ the comparison [lem-per-potential-finite-bidual-comparison] gives $p_*T_Y(N)\\cong T_X(p_*N)$, and $p_*$ is exact and conservative. Here $K_Y=p^!K_X$ has the inherited potential pinnings, and both duality functors preserve bounded constructibility by the standing hypothesis. Thus vanishing is equivalent before and after finite pushforward. Schemes finite over an excellent Noetherian scheme are excellent by [lem-exc-finite-type-localization-excellent]; they remain Noetherian. They have dimension at most that of the target: on affine charts every strict chain of primes contracts strictly by [lem-weil-pbc-integral-incomparability]. Consequently all uses of step 2 on a finite source stay within the bound $d$.",
+   "uses": [
+    "lem-per-potential-finite-bidual-comparison",
+    "lem-exc-finite-type-localization-excellent",
+    "lem-weil-pbc-integral-incomparability"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII Lemma 6.5.3"
+   }
+  },
+  {
+   "text": "It suffices to prove $T_Y(\\Lambda_Y)=0$ for normal Noetherian excellent schemes $Y$ of dimension at most $d$, with any potential normalization. Indeed first treat constructible $\\mathbf F_\\ell$-sheaves as $\\Lambda$-sheaves killed by $\\ell$, without changing the duality coefficient ring. Their vanishing class is closed under extensions, finite sums and summands by step 2. By [lem-per-constructible-finite-open-constant-generation] it is enough to treat $p_*j_!\\mathbf F_\\ell$ for a finite $p:Y\\to X$ with $Y$ integral and an open $j:U\\hookrightarrow Y$. These generators are constructible: $j_!\\mathbf F_\\ell$ is lisse on the strata $U$ and $Y\\setminus U$, and finite direct image preserves constructibility by [lem-weil-pbc-finite-fp-pushforward-constructible] (a finite morphism to a Noetherian scheme is of finite type, hence of finite presentation, and Noetherian schemes are quasi-compact and quasi-separated). Let $\\nu:Y^\\nu\\to Y$ be normalization. Its source is normal Noetherian excellent and $\\nu$ is finite surjective by [lem-per-excellent-normalization-preparation]; $\\nu_*\\Lambda_{Y^\\nu}$ is constructible by the same pushforward lemma. The module injection $\\mathbf F_\\ell\\to\\Lambda$, $a\\mapsto\\ell^{r-1}a$, and [lem-weil-pbc-open-closed-short-exact] give $j_!\\mathbf F_\\ell\\hookrightarrow\\Lambda_Y$. The finite comparison gives the monomorphism $\\Lambda_Y\\hookrightarrow\\nu_*\\Lambda_{Y^\\nu}$. The proposed normal constant case, step 3, and closure under subobjects now give $T_Y(j_!\\mathbf F_\\ell)=0$, and step 3 gives the same for $p_*j_!\\mathbf F_\\ell$. Finally any constructible $\\Lambda$-sheaf $M$ has the finite filtration $M\\supset\\ell M\\supset\\cdots\\supset\\ell^rM=0$. Its factors $\\ell^iM/\\ell^{i+1}M$ are killed by $\\ell$ and are constructible by [thm-constructible-serre](1), as images and cokernels of multiplication by powers of $\\ell$. Extension closure proves the claim for $M$.",
+   "uses": [
+    "lem-per-constructible-finite-open-constant-generation",
+    "lem-per-excellent-normalization-preparation",
+    "lem-weil-pbc-open-closed-short-exact",
+    "lem-per-potential-finite-bidual-comparison",
+    "lem-weil-pbc-finite-fp-pushforward-constructible",
+    "thm-constructible-serre"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII Lemmas 6.5.4–6.5.5; XIII 3.7.2 for the existing integral-source generation node"
+   }
+  },
+  {
+   "text": "It remains to establish the normal constant case used in step 4. Test it on every strict localization $V=X_{(\\bar x)}$. The regular comparison [lem-per-potential-regular-base-change] and the pinnings [lem-per-regular-pullback-pinnings] identify the pullback of the double dual and the evaluation map with those on $V$. The source is Noetherian excellent. The strict henselization of a normal local domain is a normal domain by [lem-weil-pbc-etale-colimit-normal-local-domain]. Its dimension is $\\dim\\mathcal O_{X,x}\\leq d$ by [lem-sc-strict-henselization-dimension]. The local ring is the filtered etale colimit appearing in that normality statement. Thus $V$ is normal strictly local. If its dimension is less than $d$, hypothesis (i) already gives its biduality and therefore its positive cohomology vanishing. The strict-local tests detect vanishing: apply their stated isomorphism detection to $0\\to T_X(\\Lambda_X)$ regarded in degree zero; exact pullback commutes with $\\mathcal H^q$. It therefore suffices to handle normal strictly local schemes of dimension exactly $d$.",
+   "uses": [
+    "lem-per-potential-regular-base-change",
+    "lem-per-regular-pullback-pinnings",
+    "lem-weil-pbc-etale-colimit-normal-local-domain",
+    "lem-sc-strict-henselization-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII 6.5, etale locality paragraph and reduction following Lemma 6.5.5"
+   }
+  },
+  {
+   "text": "If $d=0$, the normal local domain is a field: its only prime is its zero ideal, so its maximal ideal is zero. If $d=1$, [lem-weil-pbc-regular-local-dim-one-iff-normal] says it is regular local. In either case all localizations are regular by [lem-weil-pbc-regular-local-localization]. Choose the dimension function whose value at the generic point is zero. The constant sheaf has potential pinnings for it by [lem-per-potential-dualizing-regular-unit], and any pinned potential for that function is isomorphic to it by [lem-per-potential-dualizing-uniqueness]. For $K=\\Lambda$ the identities $R\\mathcal Hom_\\Lambda(\\Lambda,\\Lambda)=\\Lambda$ give $D_K^2\\Lambda=\\Lambda$, so its degree-$q$ cohomology is zero for $q\\geq1$. Step 1 makes this independent of the initial dimension function. Thus neither of these dimensions needs an additional constant-sheaf hypothesis.",
+   "uses": [
+    "lem-weil-pbc-regular-local-dim-one-iff-normal",
+    "lem-weil-pbc-regular-local-localization",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-potential-dualizing-uniqueness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII 6.5, normal strictly local dimension at most one paragraph"
+   }
+  },
+  {
+   "text": "Now let $d\\geq2$ and write the remaining strictly local normal scheme as $V=\\operatorname{Spec}A$. Set $\\widehat V=\\operatorname{Spec}\\widehat A$. The completion is Noetherian by [lem-weil-pbc-adic-completion-noetherian]. Its local ring and residue field are given by [lem-weil-pbc-local-completion-local-ring]. It is complete for its maximal ideal: [lem-weil-pbc-module-completion-complete] applied to $M=A$ gives completeness for $\\mathfrak m\\widehat A$, which is the maximal ideal by the local-ring statement. This application is valid since $A$ is Noetherian and $\\mathfrak m$ is finitely generated; $(\\mathfrak m\\widehat A)^n=\\mathfrak m^n\\widehat A$. It is henselian by [lem-weil-pbc-complete-pair-henselian], and its unchanged residue field is separably closed; thus it is strictly henselian. Its dimension equals $d$ by [lem-weil-pbc-completion-dimension-eq]. Invertibility of $\\ell$ is preserved by the ring map.",
+   "uses": [
+    "lem-weil-pbc-adic-completion-noetherian",
+    "lem-weil-pbc-local-completion-local-ring",
+    "lem-weil-pbc-module-completion-complete",
+    "lem-weil-pbc-complete-pair-henselian",
+    "lem-weil-pbc-completion-dimension-eq"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII 6.5, completion reduction immediately before Lemma 6.5.6"
+   }
+  },
+  {
+   "text": "The completion is excellent by [lem-per-complete-local-excellence], using its Noetherian local completeness from step 7. To check normality, excellence of $A$ includes the G-ring condition. Thus [lem-weil-pbc-g-ring-completion-regular] makes $A\\to\\widehat A$ flat with Noetherian geometrically regular fibres. Each fibre is regular by taking the trivial field extension, and hence normal by [rem-pc-regular-normal](1), applied to its spectrum. The hypotheses of [lem-weil-pbc-flat-normal-fibres-noetherian-normal] hold: both rings are Noetherian, the map is flat, its fibres are normal, and $A$ is normal. Therefore $\\widehat A$ is normal. Since it is local, its localization at its maximal ideal is itself, so it is a normal domain by the definition of a normal ring. Together with step 7 this verifies every hypothesis of the additional constant-sheaf assumption for $\\widehat V$.",
+   "uses": [
+    "lem-per-complete-local-excellence",
+    "lem-weil-pbc-g-ring-completion-regular",
+    "rem-pc-regular-normal",
+    "lem-weil-pbc-flat-normal-fibres-noetherian-normal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07QW, proposition-ubiquity-excellent (2); Tag 0C23, lemma-completion-normal-local-ring and its cited Tag 0C22, algebra.tex lemma-normal-goes-up-noetherian"
+   }
+  },
+  {
+   "text": "The completion morphism $h:\\widehat V\\to V$ is regular by [lem-weil-pbc-g-ring-completion-regular], since excellence includes the G-ring condition, and is surjective by [lem-weil-pbc-local-completion-faithfully-flat]. Give $h^*K_V$ the potential pinnings of [lem-per-regular-pullback-pinnings]. Apply [lem-per-potential-regular-base-change] twice, to $\\Lambda_V$ and to its bounded constructible dual. Exact pullback identifies $h^*T_V(\\Lambda_V)$ with $T_{\\widehat V}(\\Lambda_{\\widehat V})=0$, where the last equality is the additional hypothesis, now justified by steps 7–8. Apply [lem-etale-sheaf-jointly-surjective-conservative] to the singleton family consisting of $h$ and the sheaf map $0\\to T_V(\\Lambda_V)$; its inverse image is an isomorphism because its target is zero. Hence $T_V(\\Lambda_V)=0$. Step 5 proves the normal constant case on all schemes of dimension at most $d$, and step 4 then proves $T_X(M)=0$ for every constructible $M$, as required.",
+   "uses": [
+    "lem-weil-pbc-g-ring-completion-regular",
+    "lem-weil-pbc-local-completion-faithfully-flat",
+    "lem-per-regular-pullback-pinnings",
+    "lem-per-potential-regular-base-change",
+    "lem-etale-sheaf-jointly-surjective-conservative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII Lemma 6.5.6 and the preceding reduction"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-per-potential-dualizing-uniqueness",
+  "lem-asd-finite-etale-twist-line",
+  "lem-sf-etale-twisted-bidual-transport",
+  "lem-sf-derived-ses-triangle",
+  "lem-per-relative-bidual-triangles",
+  "lem-sf-derived-homology-long-exact",
+  "thm-constructible-serre",
+  "lem-per-potential-finite-bidual-comparison",
+  "lem-exc-finite-type-localization-excellent",
+  "lem-weil-pbc-integral-incomparability",
+  "lem-per-constructible-finite-open-constant-generation",
+  "lem-per-excellent-normalization-preparation",
+  "lem-weil-pbc-open-closed-short-exact",
+  "lem-weil-pbc-finite-fp-pushforward-constructible",
+  "lem-per-potential-regular-base-change",
+  "lem-per-regular-pullback-pinnings",
+  "lem-weil-pbc-etale-colimit-normal-local-domain",
+  "lem-sc-strict-henselization-dimension",
+  "lem-weil-pbc-regular-local-dim-one-iff-normal",
+  "lem-weil-pbc-regular-local-localization",
+  "lem-per-potential-dualizing-regular-unit",
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-local-completion-local-ring",
+  "lem-weil-pbc-module-completion-complete",
+  "lem-weil-pbc-complete-pair-henselian",
+  "lem-weil-pbc-completion-dimension-eq",
+  "lem-per-complete-local-excellence",
+  "lem-weil-pbc-g-ring-completion-regular",
+  "rem-pc-regular-normal",
+  "lem-weil-pbc-flat-normal-fibres-noetherian-normal",
+  "lem-weil-pbc-local-completion-faithfully-flat",
+  "lem-etale-sheaf-jointly-surjective-conservative"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "XVII 6.5.1–6.5.6; XIII 3.7.2, using existing integral-source devissage and normalization rather than introducing a duplicate normal-source generator"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -47,10 +213,24 @@
    "results": "[grep] OK 0 hit(s)",
    "date": "2026-10-18",
    "verdict": "no match: the returned declarations concern ordinary module duals, generic derived categories, sheaf infrastructure or algebra descent; none states this etale potential-duality assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inductive reduction of positive etale bidual cohomology to constant sheaves on complete normal strictly henselian schemes",
+   "results": "Returned 8 hits: AlgebraicGeometry.Scheme.Etale, Algebra.FormallyEtale.subsingleton_h1Cotangent, AlgebraicGeometry.IsEtale.instFormallyUnramified, AlgebraicGeometry.IsEtale, Algebra.Etale.formallyEtale, StandardEtalePair.instFormallyEtaleRing, Algebra.instEtaleOfIsStandardEtale, Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Vanishing of positive double dual cohomology for constructible etale sheaves reduces to constants on complete normal local schemes",
+   "results": "Returned 8 hits: AddChar.doubleDualEmb_eq_zero, DomAddAct.instNormalSpace, DomAddAct.instCompactSpace, Subspace.dualAnnihilator_dualAnnihilator_eq, AddChar.doubleDualEquiv, DomAddAct.instTopologicalSpace, DomAddAct.instRegularSpace, Module.erange_coe",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-gabber-local-duality-general",
@@ -72,5 +252,109 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-biduality-normal-complete-reduction",
+  "worker": "stage1",
+  "summary": "Expanded ILO XVII 6.5 reduction with q=1, fixed coefficient-ring devissage, normal strict localization, low dimension, completion hypotheses and pinning comparisons. Removed the uncommitted completion node after finding existing flat-normal-fibre ascent and complete-local-excellence interfaces; no new nodes. Retained all prior Mathlib searches.",
+  "blueprint": "lem-per-artin-gabber-affine-curve proof Step 3 local duality input, through the gabber-local-duality-general positive cohomology induction.",
+  "tool_uses": [
+   {
+    "node": "lem-asd-finite-etale-twist-line",
+    "why": "Generic Finite torsion Tate twists are etale locally free lines interface: used in the cited proof step with its stated hypotheses; this unit has no replacement for this categorical or commutative-algebra tool."
+   },
+   {
+    "node": "lem-sf-etale-twisted-bidual-transport",
+    "why": "Generic Transport of evaluation biduality across an invertible dualizing twist interface: used in the cited proof step with its stated hypotheses; this unit has no replacement for this categorical or commutative-algebra tool."
+   },
+   {
+    "node": "lem-exc-finite-type-localization-excellent",
+    "why": "Generic Excellence is preserved by finite type algebras and localization interface: used in the cited proof step with its stated hypotheses; this unit has no replacement for this categorical or commutative-algebra tool."
+   },
+   {
+    "node": "lem-weil-pbc-open-closed-short-exact",
+    "why": "Generic The open-closed short exact sequence of an etale sheaf interface: used in the cited proof step with its stated hypotheses; this unit has no replacement for this categorical or commutative-algebra tool."
+   },
+   {
+    "node": "lem-weil-pbc-etale-colimit-normal-local-domain",
+    "why": "Generic A local filtered colimit of etale algebras over a normal domain is a normal domain interface: used in the cited proof step with its stated hypotheses; this unit has no replacement for this categorical or commutative-algebra tool."
+   },
+   {
+    "node": "lem-sc-strict-henselization-dimension",
+    "why": "Generic Strict henselization preserves local Krull dimension interface: used in the cited proof step with its stated hypotheses; this unit has no replacement for this categorical or commutative-algebra tool."
+   },
+   {
+    "node": "lem-weil-pbc-regular-local-dim-one-iff-normal",
+    "why": "Generic A Noetherian local ring of dimension one is regular iff it is a normal domain interface: used in the cited proof step with its stated hypotheses; this unit has no replacement for this categorical or commutative-algebra tool."
+   },
+   {
+    "node": "lem-weil-pbc-regular-local-localization",
+    "why": "Generic A localization of a regular local ring at a prime is a regular local ring interface: used in the cited proof step with its stated hypotheses; this unit has no replacement for this categorical or commutative-algebra tool."
+   },
+   {
+    "node": "lem-weil-pbc-adic-completion-noetherian",
+    "why": "Generic The completion of a Noetherian ring is Noetherian interface: used in the cited proof step with its stated hypotheses; this unit has no replacement for this categorical or commutative-algebra tool."
+   },
+   {
+    "node": "lem-weil-pbc-complete-pair-henselian",
+    "why": "Generic A complete pair is henselian interface: used in the cited proof step with its stated hypotheses; this unit has no replacement for this categorical or commutative-algebra tool."
+   },
+   {
+    "node": "lem-weil-pbc-completion-dimension-eq",
+    "why": "Generic Dimension equality for maximal-ideal completion interface: used in the cited proof step with its stated hypotheses; this unit has no replacement for this categorical or commutative-algebra tool."
+   },
+   {
+    "node": "lem-weil-pbc-g-ring-completion-regular",
+    "why": "Generic The completion of a G-ring along an ideal is a regular ring map interface: used in the cited proof step with its stated hypotheses; this unit has no replacement for this categorical or commutative-algebra tool."
+   },
+   {
+    "node": "rem-pc-regular-normal",
+    "why": "Generic Regular schemes are normal; the normal decomposition interface: used in the cited proof step with its stated hypotheses; this unit has no replacement for this categorical or commutative-algebra tool."
+   },
+   {
+    "node": "lem-weil-pbc-flat-normal-fibres-noetherian-normal",
+    "why": "Generic Normality ascends along flat maps of Noetherian rings with normal fibres interface: used in the cited proof step with its stated hypotheses; this unit has no replacement for this categorical or commutative-algebra tool."
+   },
+   {
+    "node": "lem-etale-sheaf-jointly-surjective-conservative",
+    "why": "Generic Existing arbitrary jointly-surjective inverse-image conservativity interface: used in the cited proof step with its stated hypotheses; this unit has no replacement for this categorical or commutative-algebra tool."
+   },
+   {
+    "node": "thm-constructible-serre",
+    "why": "Generic closure of constructible etale module sheaves under kernels, cokernels and extensions (proper-base-change unit): steps 2 and 4 need the quotient, extension and l-filtration factors constructible so that hypothesis (ii) applies; no node of this unit states it."
+   },
+   {
+    "node": "lem-weil-pbc-finite-fp-pushforward-constructible",
+    "why": "Generic preservation of constructible module sheaves by finite finitely presented direct image (proper-base-change unit): step 4 needs the generators p_*j_!F_l and nu_*Lambda constructible; no node of this unit states it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-asd-finite-etale-twist-line",
+  "lem-sf-etale-twisted-bidual-transport",
+  "lem-exc-finite-type-localization-excellent",
+  "lem-weil-pbc-open-closed-short-exact",
+  "lem-weil-pbc-etale-colimit-normal-local-domain",
+  "lem-sc-strict-henselization-dimension",
+  "lem-weil-pbc-regular-local-dim-one-iff-normal",
+  "lem-weil-pbc-regular-local-localization",
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-complete-pair-henselian",
+  "lem-weil-pbc-completion-dimension-eq",
+  "lem-weil-pbc-g-ring-completion-regular",
+  "rem-pc-regular-normal",
+  "lem-weil-pbc-flat-normal-fibres-noetherian-normal",
+  "lem-etale-sheaf-jointly-surjective-conservative",
+  "thm-constructible-serre",
+  "lem-weil-pbc-finite-fp-pushforward-constructible"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q27-f6413ee27",
+  "group": "Q27",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q27-f6413ee27 (reviewer sub-agent of L); spot-checked: I read the item, all nine steps, every cited statement, and ILO XVII 6.5 (Def 6.5.1, Lemmas 6.5.2-6.5.6 and the final paragraph, pp. 298-300). The statement matches the source and is not weakened. There are no new nodes. Steps 1, 3 and 5-9 are correct: δ-independence via uniqueness, the twist line and the twisted bidual transport with g=id; finite comparison with the dimension bound; normal strict localization; d≤1 regular; completion Noetherian, complete, strictly henselian, of dimension d, excellent and normal via the G-ring property and normal fibres; descent along the surjective regular completion. Edge cases checked: q=1, d=0 and d=1, r=1, the empty scheme, A already complete. Three faults, repaired in fixes/dag/nodes/sec-deligne-laumon-a1/lem-per-biduality-normal-complete-reduction.json. (1) C4, step 2: the triangle cited lem-weil-heart-short-exact-triangles, an abstract t-structure heart statement with no link to étale sheaves; replaced by the Mathlib leaf lem-sf-derived-ses-triangle. (2) C1, steps 2 and 4: constructibility of quotients, extensions and the ℓ-filtration factors, which hypothesis (ii) needs, had no citation; added thm-constructible-serre (1)/(2). (3) C1, step 4: constructibility of p_*j_!F_ℓ and ν_*Λ had no citation; added lem-weil-pbc-finite-fp-pushforward-constructible (a finite map to a Noetherian scheme is of finite presentation). I also corrected j! to j_!, recomputed proof_deps, and adjusted split_report.tool_uses (removed the heart node, added the two proper-base-change tools). Batch-5: with the item treated as unsplit, the closure already contains lem-trf-excellent-scheme-affine-cover, lem-pod-closed-uncurry-laws, lem-trf-bounded-below-derived-adjunction and lem-trf-finite-base-strict-localization, because the parent already cites the same per nodes. The split, with or without my fix, adds 0 nodes. All four are generic (affine-local excellence, closed monoidal curry laws, derived adjunction, strict localization of a finite base change) and are not part of the trace formula or Poincaré duality, so I accept them. Maintainer note: step 1 relies, as ILO does with 'canoniquement', on the pinnings and residue transitions commuting with tensoring by Λ(m)[2m]. No node states this; if stage 2 needs it, it would be a small node.; 1 file(s) fixed by the reviewer"
  }
 }
