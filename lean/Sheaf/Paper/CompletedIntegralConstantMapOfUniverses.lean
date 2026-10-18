@@ -51,7 +51,11 @@ theorem integralConstantQuotientOfUniverses_compatibility (n : ℕ) :
         (homOfLE (Nat.le_succ n)).op ≫ integralConstantQuotientOfUniverses l E W n =
       integralConstantQuotientOfUniverses l E W (n + 1) ≫
         (integralCoefficientSheafSystem l E W).map (homOfLE (Nat.le_succ n)).op := by
-  sorry
+  simp only [Functor.const_obj_map, integralCoefficientSheafSystem,
+    Functor.ofOpSequence_map_homOfLE_succ]
+  unfold integralConstantQuotientOfUniverses integralCoefficientSheafTransition
+  rw [← Functor.map_comp, ← Functor.map_comp]
+  congr 2
 
 /-- The cone of constant scalars, with its actual finite quotient legs.
 Source: blueprint order 1455 (blueprint: def-weil-completed-integral-coefficients). -/
