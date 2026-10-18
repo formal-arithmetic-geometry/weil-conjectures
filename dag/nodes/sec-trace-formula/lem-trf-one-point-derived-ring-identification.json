@@ -18,9 +18,171 @@
   "lem-pur-left-derived-from-kflat-class",
   "lem-pur-derived-change-of-rings"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "On $\\mathcal T$, a presheaf is determined by its value at $*$: its only restriction is the identity. A matching family on the maximal sieve consists of one element $x$ at the identity arrow, and its unique amalgamation is $x$. Thus every presheaf is a sheaf. By [def-weil-sheaf-of-modules-category], a $\\underline A$-module sheaf is precisely an $A$-module at $*$, and a sheaf morphism is precisely an $A$-linear map there. Define $I_A(M)(*)=M$, with identity restriction, and define $I_A(u)$ by its sole component $u$. Then $E_AI_A=1$ and the map $I_AE_A\\mathcal F\\to\\mathcal F$ whose component is the identity is a natural isomorphism. Both inverse identities are identities at the only object. This constructs the asserted equivalence.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03CW (definition-sheaf-modules), explicit matching-family computation for the maximal sieve on the singleton identity category"
+   }
+  },
+  {
+   "text": "Kernels in [def-weil-sheaf-of-modules-category] are sectionwise, and cokernels are sheafified sectionwise cokernels. Step 1 makes that sheafification the identity up to its canonical isomorphism. Thus $E_A$ and $I_A$ preserve kernels, cokernels and hence images and exact sequences: exactness here is exactly ordinary module exactness. For any family $(M_i)$, the one-object sheaf with value $\\bigoplus_iM_i$, with the usual inclusions, is a coproduct: a sheaf map out of it is exactly a linear map from that direct sum, hence exactly a family of linear maps from the $M_i$. Evaluation therefore also identifies arbitrary direct sums, including the empty direct sum.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03CW and 03DA (lemma-abelian), with sectionwise kernels/cokernels and the direct-sum universal property on this site"
+   }
+  },
+  {
+   "text": "By [def-pur-sheaf-tensor-product], $\\mathcal F\\otimes_{\\underline A}\\mathcal G$ is the sheafification of the presheaf with sole value $\\mathcal F(*)\\otimes_A\\mathcal G(*)$. It is already a sheaf by step 1. The comparison with ordinary tensor sends the section represented by $x\\otimes y$ to $x\\otimes y$. For maps $u,v$, both tensor maps send this generator to $u(x)\\otimes v(y)$; generation and uniqueness in [def-weil-pbc-module-tensor-product] make the square commute. The inverse comparison has the same formula. These formulas also identify the unit $\\underline A$ with $A$ and all iterated tensor comparisons: the two possible composites act identically on pure tensors.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK (section-tensor-product), the two displayed tensor definitions, evaluated at the unique object"
+   }
+  },
+  {
+   "text": "The equivalence in step 1 preserves zero maps, since its action on morphisms is evaluation. Apply [lem-weil-equivalence-map-homological-complex] to obtain inverse termwise equivalences on integer-indexed cochain complexes. Their differentials are exactly $E_A(d^n)$ and $I_A(d^n)$. By [def-pc-tensor-complex-sheaves], a total tensor has degree $n$ equal to $\\bigoplus_{p+q=n}\\mathcal F^p\\otimes\\mathcal G^q$ and differential $d_{\\mathcal F}\\otimes1+(-1)^p1\\otimes d_{\\mathcal G}$. Steps 2 and 3 identify each summand and both differential terms with the corresponding module maps. Consequently the degreewise tensor comparison is a natural chain isomorphism of the direct-sum total tensors, even for unbounded complexes.",
+   "uses": [
+    "lem-weil-equivalence-map-homological-complex",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Section 06YL (section-flat), direct-sum tensor complex; termwise equivalence: Mathlib Algebra/Homology/Additive.lean:224-232"
+   }
+  },
+  {
+   "text": "By the formula $H^n(K)=\\ker(d^n)/\\operatorname{im}(d^{n-1})$ in [def-weil-abstract-derived-category], step 2 gives $E_AH^n(K)\\cong H^n(E_AK)$, naturally in chain maps, and the inverse functor gives the reverse identification. Thus acyclicity and quasi-isomorphisms correspond in both directions. Every acyclic module complex is $E_AI_AF$ for an acyclic sheaf complex $I_AF$. Using the total tensor comparison of step 4, the assertion that $\\operatorname{Tot}(F\\otimes K)$ is acyclic for every acyclic $F$ is consequently identical on the two sides. This is exactly K-flatness in [def-pc-kflat-complex] and [def-pc-module-kflat-complex]; the same observation identifies K-flat resolutions.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-pc-kflat-complex",
+    "def-pc-module-kflat-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Definition 06YN (definition-K-flat), compared directly with more-algebra.tex Definition 06XZ"
+   }
+  },
+  {
+   "text": "In the homotopy category, cochain maps $u,v:K\\to L$ are identified when there are maps $h^n:K^n\\to L^{n-1}$ satisfying $u^n-v^n=d_L^{n-1}h^n+h^{n+1}d_K^n$. Evaluation and its inverse preserve this equality termwise, including its sums and compositions. They therefore give inverse functors $e_A:K(\\underline A)\\rightleftarrows K(A):i_A$ with the same termwise unit and counit. This proves the homotopy-category equivalence. The shift and the cone matrices in [def-weil-abstract-derived-category] are also preserved termwise, because both functors preserve sums, negatives and the differentials.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Section 05RN (section-homotopy), explicit degree-minus-one homotopy equation; shift and cone formulas of the homotopy category"
+   }
+  },
+  {
+   "text": "Write $Q_s:K(\\underline A)\\to D(\\underline A)$ and $Q_m:K(A)\\to D(A)$ for localization. By step 5, $Q_me_A$ and $Q_si_A$ invert quasi-isomorphisms. Parts (1) and (2) of [lem-weil-pbc-localization-universal-property] give $d_A:D(\\underline A)\\to D(A)$ and $j_A:D(A)\\to D(\\underline A)$ with $d_AQ_s\\cong Q_me_A$ and $j_AQ_m\\cong Q_si_A$. They also lift the unit and counit of $e_A\\dashv i_A$ to $1\\cong j_Ad_A$ and $d_Aj_A\\cong1$. Their inverse and triangle equations hold after precomposition with $Q_s$ or $Q_m$, since there they are the equations in step 6; part (3) makes them hold on the derived categories. Hence $d_A,j_A$ are the desired inverse derived equivalences, with the stated localization comparisons.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Definition 05RU (definition-unbounded-derived-category); categories.tex Tags 04VG/04VK, with the natural-transformation localization property stated in the cited node"
+   }
+  },
+  {
+   "text": "Fix $f:A\\to A\\prime$. Denote termwise sheaf change of rings by $T_s$ and module extension of scalars by $T_m$. Steps 1 and 3 identify the value of $T_s\\mathcal F$ with $\\mathcal F(*)\\otimes_A A\\prime$. The $A\\prime$-action sends $x\\otimes b$ to $x\\otimes ab$, and the map induced by $u$ sends $x\\otimes b$ to $u(x)\\otimes b$. These are precisely the object, scalar-action and morphism formulas of [def-weil-module-base-change]. Thus the identity on these tensors gives $e_{A\\prime}T_s\\cong T_me_A$ on homotopy categories; differential compatibility is the same termwise formula. Here $T_s$ is the sheaf change of rings of [def-pur-sheaf-tensor-product].",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-weil-module-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK, change of rings; algebra.tex Tag 05G3 (section-base-change), including the tensor formula on morphisms"
+   }
+  },
+  {
+   "text": "Apply [lem-pur-left-derived-from-kflat-class] on $\\mathcal T$ with $\\mathcal A=\\operatorname{Mod}(\\underline A)$, the functor $F_s=Q_s'T_s:K(\\underline A)\\to D(\\underline{A'})$ and the class $\\mathcal P$ of K-flat sheaf complexes [def-pc-kflat-complex]; primes denote the target ring, and likewise $F_m=Q_m'T_m$. Exactness of $F_s$: $T_s$ is additive termwise (step 8), so it commutes with the shift and carries the cone matrices of [def-weil-abstract-derived-category] to those of $T_sf$; $Q_s'$ commutes with shifts and sends cone triangles to distinguished triangles by that definition. Hypothesis (1): [lem-pc-kflat-resolution] gives every sheaf complex a K-flat resolution. Hypothesis (2): a quasi-isomorphism of $K(\\underline A)$ between K-flat complexes is represented by a chain quasi-isomorphism; clause (1) of [lem-pur-derived-change-of-rings], applied to $\\underline f:\\underline A\\to\\underline{A'}$ (sheaves of commutative rings on the site $\\mathcal T$, step 1), makes its $T_s$ image a quasi-isomorphism, so its $F_s$ image is invertible. The lemma gives a universal pair $(L_s,\\varepsilon_s:L_sQ_s\\to F_s)$ with $\\varepsilon_{s,P}$ invertible for every K-flat $P$. Clause (2) of [lem-pur-derived-change-of-rings] is the left derived functor of the same $F_s$; a universal pair is unique up to the unique isomorphism compatible with the counits, so $L_s$ is that derived change of rings, and its resolution isomorphism for a K-flat resolution $q$ is $\\varepsilon_{s,P}\\circ L_s(Q_sq)^{-1}$. No flatness of $f$ or boundedness of complexes is assumed.",
+   "uses": [
+    "lem-pur-left-derived-from-kflat-class",
+    "lem-pc-kflat-resolution",
+    "lem-pur-derived-change-of-rings",
+    "def-weil-abstract-derived-category",
+    "def-pc-kflat-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 06XN (lemma-find-existence-computes), dual part, applied as in sites-cohomology.tex Tag 06YY (lemma-derived-base-change) proof; K-flat resolutions as in lem-pc-kflat-resolution"
+   }
+  },
+  {
+   "text": "Define $L_m=d_{A\\prime}L_sj_A$. For a module complex $M$, define $\\gamma_M:L_mQ_mM\\to F_mM$ by the composite $d_{A\\prime}L_sj_AQ_mM\\cong d_{A\\prime}L_sQ_si_AM\\xrightarrow{d_{A\\prime}(\\varepsilon_{s,i_AM})}d_{A\\prime}F_si_AM\\cong F_mM$. The first comparison is step 7; the last uses steps 7 and 8 and $e_Ai_A\\cong1$. Each comparison and $\\varepsilon_s$ is natural, so these arrows form a natural transformation $\\gamma:L_mQ_m\\to F_m$. This specifies the transported counit, rather than merely an isomorphism between the values of two functors.",
+   "uses": [
+    "lem-pur-left-derived-from-kflat-class"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05S9 and equation-everywhere: direct conjugation of the universal pair, using the explicit localization comparisons"
+   }
+  },
+  {
+   "text": "To check universality, let $H:D(A)\\to D(A\\prime)$ be any functor. The inverse equivalences in step 7 and their units/counits give bijections $\\operatorname{Nat}(H,L_m)\\cong\\operatorname{Nat}(j_{A\\prime}Hd_A,L_s)$ and $\\operatorname{Nat}(j_{A\\prime}Hd_AQ_s,F_s)\\cong\\operatorname{Nat}(HQ_m,F_m)$: apply the inverse functors to components and insert the unit/counit isomorphisms, reversing with the forward functors. These operations are inverse by the two triangle identities; for the second bijection also substitute $d_AQ_s\\cong Q_me_A$ and $d_{A\\prime}F_s\\cong F_me_A$, then precompose with $i_A$. Between these bijections, the universal property in [lem-pur-left-derived-from-kflat-class] sends $\\beta:j_{A\\prime}Hd_A\\to L_s$ to $\\varepsilon_s\\circ(\\beta Q_s)$. By the formula of step 10, the resulting composite sends $\\alpha:H\\to L_m$ precisely to $\\gamma\\circ(\\alpha Q_m)$. This proves the required bijection for every $H$, hence $(L_m,\\gamma)$ is a universal total left derived pair for ordinary scalar extension.",
+   "uses": [
+    "lem-pur-left-derived-from-kflat-class"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Universal-pair convention of Tag 05S9 and equation-everywhere; explicit natural-transformation bijection using the already constructed inverse equivalences"
+   }
+  },
+  {
+   "text": "Let $q:P\\to M$ be any ordinary K-flat resolution. Step 5 makes $i_Aq$ a K-flat sheaf resolution. By [lem-pur-derived-change-of-rings] and the K-flat counit clause of [lem-pur-left-derived-from-kflat-class], $\\gamma_P$ is invertible, and so is $L_m(Q_mq)$. The resolution computation is therefore $L_m(Q_mM)\\xrightarrow{L_m(Q_mq)^{-1}}L_m(Q_mP)\\xrightarrow{\\gamma_P}Q_m\\prime(T_mP)$. This is exactly evaluation of the sheaf resolution computation. Naturality gives $\\gamma_M=F_m(q)\\circ\\gamma_P\\circ L_m(Q_mq)^{-1}$, so its derived-to-ordinary comparison is the same localized tensor-augmentation map. Comparisons between two resolutions are the composites of these isomorphisms, hence their cocycle identities are preserved too. For an object placed in degree zero this identifies $M\\otimes_A^{\\mathbf L}A\\prime\\to(M\\otimes_AA\\prime)[0]$ with the sheaf counit. All constructions above use the full unbounded categories and make no flatness assumption.",
+   "uses": [
+    "lem-pur-derived-change-of-rings",
+    "lem-pur-left-derived-from-kflat-class"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YY and derived.tex Tag 06XN: K-flat resolution computation and naturality of the universal derived counit"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-pbc-module-tensor-product",
+  "lem-weil-equivalence-map-homological-complex",
+  "def-pc-tensor-complex-sheaves",
+  "def-weil-abstract-derived-category",
+  "def-pc-kflat-complex",
+  "def-pc-module-kflat-complex",
+  "lem-weil-pbc-localization-universal-property",
+  "def-weil-module-base-change",
+  "lem-pc-kflat-resolution",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-left-derived-from-kflat-class"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Explicit terminal-site specialization of Tags 03CW and 03EK; complexes and K-flatness: 06YN/06XZ; localization: 05RU; universal pair: 05S9/06XN. The equivalence and its counit transport are written out here, not quoted as a theorem of 03CW."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -77,10 +239,52 @@
    "results": "8 hits; top=['SheafOfModules.evaluation', 'SheafOfModules.unitHomEquiv', 'SheafOfModules.unit_val', 'SheafOfModules.forgetToSheafModuleCat_obj_val', 'SheafOfModules.unitHomEquiv_apply_coe', 'SheafOfModules.unit', 'CategoryTheory.evalEquiv_apply', 'SheafOfModules.forgetToSheafModuleCat']; note=; digest=f7fab6ccb15496b8 Read Sheaf.lean:33-56, evaluation and pushforwardPushforwardEquivalence: these give sheaf structures, evaluation, and equivalences induced by equivalent sites, not evaluation as an equivalence with ordinary modules or its derived-pair transport.",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "terminal.*(site|[Ee]quivalence)|SheafOfModules.*[Ee]quivalence|one.object|one.point",
+   "results": "25 hits; top=['Mathlib/CategoryTheory/Adjunction/Comma.lean', 'Mathlib/CategoryTheory/Adjunction/Limits.lean', 'Mathlib/CategoryTheory/Adjunction/Limits.lean', 'Mathlib/CategoryTheory/Adjunction/Limits.lean', 'Mathlib/CategoryTheory/Adjunction/Limits.lean', 'Mathlib/CategoryTheory/Adjunction/Limits.lean', 'Mathlib/CategoryTheory/Functor/KanExtension/Basic.lean', 'Mathlib/CategoryTheory/Shift/CommShift.lean']; note=; digest=45f3310f8518818a; subdirectory=CategoryTheory",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sheaves of modules on the trivial singleton site are equivalent to modules and derived scalar extension is preserved by this evaluation equivalence",
+   "results": "8 hits; top=['CategoryTheory.evalEquiv', 'SheafOfModules.evaluation', 'LightCondMod.LocallyConstant.functorIsoDiscreteAux₁', 'SheafOfModules.unitHomEquiv_apply_coe', 'SheafOfModules.evaluationPreservesLimit', 'PresheafOfModules.unitHomEquiv', 'SheafOfModules.evaluationPreservesLimitsOfShape', 'ModuleCat.tildeInModuleCat']; note=; digest=1db121292a687055",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.evaluation, CategoryTheory.Equivalence",
+   "results": "0 hits; top=[]; note=; digest=4f53cda18c2baa0c",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation of sheaves of modules on the category with one object and only its identity morphism identifies tensor products and the universal derived extension of scalars with ordinary modules",
+   "results": "8 hits; top=['ModuleCat.extendScalarsId_inv_app_apply', 'SheafOfModules.unit_val', 'SheafOfModules.unitHomEquiv', 'SheafOfModules.unit', 'SheafOfModules.unitHomEquiv_apply_coe', 'ModuleCat.extendRestrictScalarsAdj_unit_app_apply', 'FGModuleCat.tensorUnit_obj', 'SheafOfModules.unitHomEquiv_symm_freeHomEquiv_apply']; note=; digest=5f5811c1f06cc0e6",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "equivalence|evaluation",
+   "results": "12 hits; top=['Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean', 'Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean', 'Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean', 'Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean', 'Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean', 'Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean', 'Mathlib/Algebra/Category/ModuleCat/Sheaf/Limits.lean', 'Mathlib/Algebra/Category/ModuleCat/Sheaf/Limits.lean']; note=; digest=4694160d3456a09e; subdirectory=Algebra/Category/ModuleCat/Sheaf",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Modules on the singleton identity category with bottom Grothendieck topology: evaluation is a tensor equivalence inducing equivalences of unbounded derived categories and identifying derived change of rings",
+   "results": "8 hits; top=['CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory', 'CategoryTheory.Functor.mapDerivedCategorySingleFunctor', 'DerivedCategory.instLinearSingleFunctor', 'DerivedCategory.singleFunctors', 'DerivedCategory.singleFunctorsPostcompQIso', 'DerivedCategory.singleFunctorsPostcompQIso_hom_hom', 'DerivedCategory.singleFunctor', 'DerivedCategory.Qh_obj_singleFunctors_obj']; note=; digest=87d8353dea6fc6fa",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-tor-independent-cotangent-base-change",
@@ -110,5 +314,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-one-point-derived-ring-identification",
+  "worker": "stage1",
+  "summary": "Wrote twelve explicit steps using only existing nodes. Constructed terminal-site evaluation and its inverse; checked tensor maps, unbounded total tensors, cohomology, homotopies and K-flatness; lifted the inverse functors through localization; explicitly conjugated the derived counit and proved its universal property by a bijection of natural transformations. Checked ordinary K-flat resolution augmentations. Statement and imported metadata unchanged; no new nodes.",
+  "blueprint": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Supporting ring/sheaf input: Polynomial resolutions remain resolutions under Tor-independent tensoring. In the Stacks 08QP resolution computation, identify the one-object ringed-site K-flat scalar-extension construction with ordinary ring-module scalar extension, including the universal derived counit.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Generic unbounded ringed-site change-of-rings theorem, applied to the singleton site; the curve-local-term unit has no replacement for this homological algebra input."
+   },
+   {
+    "node": "lem-pur-left-derived-from-kflat-class",
+    "why": "Generic universal total left derived pair and K-flat counit convention, used to retain the natural transformation under the explicit equivalences; no geometric route is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-left-derived-from-kflat-class"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q38-21d8524f3",
+  "group": "Q38",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q38-21d8524f3 (reviewer sub-agent of L); spot-checked: Read the item, all 12 steps, every cited statement, lem-pc-kflat-resolution and the Stacks places 05S9, equation-everywhere, 06XN, 06YY, 03CW/03DA/03EK, 06YL/06YN/06XZ, 05RN/05RU, 05G3. The statement is true and unchanged; tested on A=0, A'=0, f=id and Z->Z/2 with M=Z/2, where Tor_1 is nonzero so the counit is not an isomorphism. Steps 1-8 and 10-12 are correct; localization clauses (1)-(3), the conjugated counit and the Kan-extension direction were checked. One fault (C4/E1), now repaired: step 9 took the universal pair and the K-flat counit isomorphisms from lem-pur-left-derived-from-kflat-class without checking that lemma's hypotheses (F_s exact, resolutions from the K-flat class exist, F_s inverts quasi-isomorphisms between K-flat complexes), and resolution existence had no citation; the statement of lem-pur-derived-change-of-rings does not give it. Stacks 06XN needs it and the proof of 06YY supplies it. The fix rewrites step 9 to apply the lemma with these three checks, citing lem-pc-kflat-resolution (unit on route, no cycle) and clause (1) of lem-pur-derived-change-of-rings, and identifies L_s with the derived change of rings by uniqueness of the universal pair. proof_deps gains lem-pc-kflat-resolution; nothing else changed. There are no new nodes and no duplicate was found. The two declared tool uses are accepted; both units are on the sk-i-curve-zero route anyway.; 1 file(s) fixed by the reviewer"
  }
 }

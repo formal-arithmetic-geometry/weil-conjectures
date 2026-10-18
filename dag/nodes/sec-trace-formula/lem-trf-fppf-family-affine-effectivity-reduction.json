@@ -19,9 +19,134 @@
   "def-pc-fppf-site",
   "def-weil-size-convention"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $A=\\coprod_iT_i$ and $Z=\\coprod_iV_i$. We first express the family datum as a singleton datum $D$ on $Z\\to A$ over $T$. For any $H\\to A$, the inverse images $H_i$ of the disjoint open components $T_i$ are disjoint opens covering $H$. They represent $H\\times_AT_i$: a morphism to $H$ whose composite lands in $T_i$ factors uniquely through that open subscheme. Thus $H\\cong\\coprod_iH_i$, by gluing the inverse component maps. Applying this to the relevant projections gives $A\\times_TA=\\coprod_{i,j}(T_i\\times_TT_j)$ and the corresponding decompositions for $Z\\times_TA$, $A\\times_TZ$, and triple products. On component $(i,j)$ define the transport of $D$ to be $\\phi_{ij}$; the component inverses glue too. The cocycle follows component by component from the given family cocycle, and equality on the open cover implies equality globally. Conversely, restricting $D$ to those components recovers exactly the original datum. This is the explicit construction of Tag 023X, rather than an invocation of an uncited equivalence.",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family",
+    "def-weil-open-immersion",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-scheme-morphism-gluing",
+    "def-pd-descent-datum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 02W3, affine-base proof using Tag 023X (lemma-family-is-one); explicit disjoint-open construction in the proof of 023X"
+   }
+  },
+  {
+   "text": "The singleton $f:A\\to T$ is fpqc. At a point in the component $T_i$, its local ring map is that of $T_i\\to T$, so it is flat. For every affine open $U\\subset T$, the family $\\{T_i\\times_TU\\to U\\}$ is fppf by the cited base-change lemma. The affine-refinement lemma supplies finitely many affine opens $W_j\\subset T_{i(j)}\\times_TU$ whose images cover $U$. Each $T_i\\times_TU$ is the open inverse image of $U$ in $T_i$, by the same factorization through open subschemes as in step 1; hence each $W_j$ is an affine open of $A$. Their images under $f$ have union exactly $U$. Together with flatness this is precisely the definition of an fpqc singleton covering. This argument applies to any fppf family, without assuming its index set finite.",
+   "uses": [
+    "def-weil-flat-morphism",
+    "lem-trf-fppf-covering-base-change",
+    "lem-pc-fppf-affine-refinement",
+    "def-weil-pbc-fpqc-covering",
+    "lem-weil-pbc-scheme-coproduct-family",
+    "def-weil-open-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 02W3, preliminary refinement argument and affine-base paragraph; Topologies Tag 021P (lemma-fppf-affine), and fpqc definition Tag 022B"
+   }
+  },
+  {
+   "text": "Fix an affine open $U\\subset T$. Write $A_U=A\\times_TU$ and $Z_U=Z\\times_AA_U$. Restrict $D$ to a datum $D_U$ over $A_U/U$: the identity $A_U\\times_UA_U\\cong(A\\times_TA)\\times_TU$ follows by the two fibre-product universal properties, and the analogous identity in degree three shows that the restricted transport satisfies the cocycle. The projection $Z_U\\to Z$ intertwines these transports. Choose the finite refinement $W_j\\subset T_{i(j)}\\times_TU$ of step 2, and let $C=\\coprod_{j=1}^mW_j$. The refinement maps give $h:C\\to A_U$ over $U$. By the coproduct and fibre-product descriptions of step 1, $Z_U\\times_{A_U}C\\cong\\coprod_jQ_j$, where $Q_j=V_{i(j)}\\times_{T_{i(j)}}W_j$. Each $Q_j\\to W_j$ has $\\mathcal P$ by hypothesis (i). Notice that no property of the infinite coproduct $Z\\to A$ is asserted.",
+   "uses": [
+    "lem-trf-fppf-covering-base-change",
+    "lem-pc-fppf-affine-refinement",
+    "def-pc-fibre-product",
+    "def-pd-descent-datum",
+    "lem-weil-pbc-scheme-coproduct-family"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 02W3, preliminary observation about preservation of the property under pullback, affine-base proof, and restriction to an affine open in the general-base proof"
+   }
+  },
+  {
+   "text": "The morphism $p:C\\to U$ is flat, surjective, and of finite presentation between affine schemes. Indeed, $C$ is affine by the finite-coproduct clause of the affine-permanence lemma. Flatness follows at every point from the local ring map on its open component $W_j$, and surjectivity follows from the chosen joint coverage. Every $W_j\\to U$ is locally of finite presentation by the refinement lemma, so $p$ is locally of finite presentation by the finite-coproduct lemma. A morphism between affine schemes is affine, hence quasi-compact and separated, in particular quasi-separated, by affine permanence. These properties give finite presentation with exactly the convention in the statement. Also $\\{p\\}$ is an fpqc covering: for every affine open $B\\subset U$, its preimage is affine because $p$ is affine, and this one affine open has image $B$ by surjectivity. If $m=0$, the refinement covers only $U=\\varnothing$ and the same conclusions hold vacuously.",
+   "uses": [
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-weil-pbc-morphism-affine-schemes-affine",
+    "lem-weil-pbc-finite-coproduct-lfp-qcqs",
+    "lem-pc-fppf-affine-refinement",
+    "def-weil-flat-morphism",
+    "def-sbc-locally-finite-presentation",
+    "def-weil-pbc-fpqc-covering"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 02W3, affine-base paragraph: the finite standard fppf family is replaced by its single affine coproduct cover; Topologies Tags 021P and 021Q"
+   }
+  },
+  {
+   "text": "Pull $D_U$ back along $h:C\\to A_U$ using the canonical-pullback-datum lemma. Its underlying scheme is $Z_U\\times_{A_U}C=\\coprod_jQ_j$ as in step 3, and its projection to $Z_U$ is cartesian over $h$ and intertwines transports. Hypothesis (ii) gives $\\mathcal P(\\coprod_jQ_j\\to C)$; invariance under isomorphism gives the property for the chosen pullback. For $m=0$ this uses precisely the explicitly assumed empty coproduct case. Step 4 verifies every hypothesis on $p$ required by (iii), so (iii) makes this pulled-back datum effective over $U$.",
+   "uses": [
+    "lem-galois-fpqc-canonical-pullback-datum",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-scheme-coproduct-family"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 02W3, affine-base paragraph, application of assumptions (2) and (3) after Tag 023X"
+   }
+  },
+  {
+   "text": "The singleton $A_U\\to U$ is fpqc, being the base change of $f:A\\to T$ from step 2. The singleton $C\\to U$ is fpqc by step 4 and factors through it by $h$. The datum of step 5 is the cartesian pullback of $D_U$ with transport compatibility, exactly the additional hypotheses of the cited refinement-reflects-effectivity lemma. Applying that lemma to its effective pullback shows that $D_U$ itself is effective. Thus for every affine open $U\\subset T$ we have effective data $D_U$ on $Z_U\\to A_U$, with the transport compatibility to $D$ proved in step 3.",
+   "uses": [
+    "lem-galois-fpqc-covering-base-change",
+    "lem-galois-fpqc-refinement-reflects-effectivity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 02W3, affine-base paragraph invoking Tag 02W0 (lemma-refine-coverings-fully-faithful), expressed via the existing singleton refinement lemma"
+   }
+  },
+  {
+   "text": "Apply the cited effectivity-open-local lemma to $f:A\\to T$ and $D$. Step 2 provides its singleton fpqc hypothesis; steps 3 and 6 provide effective restricted data on every affine open and the required projection/transport compatibility. It yields a $T$-scheme $V_0$ and an isomorphism $V_0\\times_TA\\cong Z$ identifying its canonical datum with $D$. Restrict this isomorphism to the open component $T_i\\subset A$. The fibre-product universal property identifies its left side with $V_0\\times_TT_i$ and its right side with $V_i$, as in step 1. Compatibility with $D$ on the component $T_i\\times_TT_j$ is exactly compatibility with $\\phi_{ij}$. These are the required compatible isomorphisms for the original family. No claim that $V_0\\to T$ has $\\mathcal P$ is needed or made.",
+   "uses": [
+    "lem-galois-fpqc-effectivity-open-local",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-scheme-coproduct-family",
+    "def-pd-descent-datum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 02W3, general-base proof: relative gluing over all affine opens, and the final recovery of the family isomorphisms"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-scheme-coproduct-family",
+  "def-weil-open-immersion",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-scheme-morphism-gluing",
+  "def-pd-descent-datum",
+  "def-weil-flat-morphism",
+  "lem-trf-fppf-covering-base-change",
+  "lem-pc-fppf-affine-refinement",
+  "def-weil-pbc-fpqc-covering",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-morphism-affine-schemes-affine",
+  "lem-weil-pbc-finite-coproduct-lfp-qcqs",
+  "def-sbc-locally-finite-presentation",
+  "lem-galois-fpqc-canonical-pullback-datum",
+  "lem-galois-fpqc-covering-base-change",
+  "lem-galois-fpqc-refinement-reflects-effectivity",
+  "lem-galois-fpqc-effectivity-open-local"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tag 02W3, lemma-descending-types-morphisms, proof for tau=fppf; Tag 023X gives the explicit family-to-singleton construction; the existing singleton refinement and open-local-effectivity lemmas realize Tag 02W0 and the general-base gluing paragraph."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -57,10 +182,38 @@
    "results": "{\"t\": \"2026-10-17T21:09:53Z\", \"tool\": \"leanfinder\", \"query\": \"Effectivity for arbitrary fppf covering families follows from effectivity for a singleton affine covering and finite coproduct stability\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"CategoryTheory.EffectiveEpiFamily.transitive_of_finite\", \"CategoryTheory.coherentTopology.exists_effectiveEpiFamily_iff_mem_induced\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"CategoryTheory.coherentTopology.mem_sieves_iff_hasEffectiveEpiFamily\", \"CategoryTheory.Functor.instEffectiveEpiEffectiveEpiOver\", \"CategoryTheory.instEffectiveEpiFamily\", \"CategoryTheory.coherentTopology.mem_sieves_of_hasEffectiveEpiFamily\"], \"digest\": \"a9cdabcaf722134b\"}",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Scheme descent data for a morphism property stable under base change and finite disjoint unions are effective for all fppf families if effective for flat surjective finite presentation affine covers",
+   "results": "{\"t\": \"2026-10-17T23:53:51Z\", \"tool\": \"leanfinder\", \"query\": \"Scheme descent data for a morphism property stable under base change and finite disjoint unions are effective for all fppf families if effective for flat surjective finite presentation affine covers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"AlgebraicGeometry.HasAffineProperty.descendsAlong_of_affineAnd\", \"AlgebraicGeometry.descendsAlong_universallyOpen_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.HasRingHomProperty.descendsAlong\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\"], \"digest\": \"3726667db0065765\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: morphism-property descent and flat affine criteria do not construct schemes realizing arbitrary descent data"
+  },
+  {
+   "tool": "grep",
+   "query": "DescentDatum|effective.*descent|isEffective",
+   "results": "{\"t\": \"2026-10-17T23:54:35Z\", \"tool\": \"grep\", \"query\": \"DescentDatum|effective.*descent|isEffective\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: morphism-property descent and flat affine criteria do not construct schemes realizing arbitrary descent data"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Effective descent for scheme objects over arbitrary fppf covering families can be reduced to surjective flat finite presentation morphisms of affine schemes",
+   "results": "{\"t\": \"2026-10-17T23:54:36Z\", \"tool\": \"leansearch\", \"query\": \"Effective descent for scheme objects over arbitrary fppf covering families can be reduced to surjective flat finite presentation morphisms of affine schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\", \"AlgebraicGeometry.Flat.flat_and_surjective_iff_faithfullyFlat_of_isAffine\", \"AlgebraicGeometry.Flat.epi_of_flat_of_surjective\", \"AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.Flat.surjective_descendsAlong_surjective_inf_flat_inf_quasicompact\", \"AlgebraicGeometry.Scheme.Hom.cover\", \"AlgebraicGeometry.flat_iff\"], \"digest\": \"b6d88c5dccc9636d\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: morphism-property descent and flat affine criteria do not construct schemes realizing arbitrary descent data"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DescentDatum\"",
+   "results": "{\"t\": \"2026-10-17T23:54:36Z\", \"tool\": \"loogle\", \"query\": \"\\\"DescentDatum\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: morphism-property descent and flat affine criteria do not construct schemes realizing arbitrary descent data"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-separated-lqf-fppf-effective-descent",
@@ -91,5 +244,49 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-fppf-family-affine-effectivity-reduction",
+  "worker": "stage1",
+  "summary": "Checked Stacks 02W3 for tau=fppf. Kept the statement, made the disjoint-open family-to-singleton construction explicit, verified the coproduct singleton is fpqc, applied the finite affine refinement and hypotheses (i)-(iii), and reused existing singleton refinement reflection and affine-open effectivity gluing. The only new node is the Mathlib leaf for fppf base change (021O(3)); no additional unsplit lemma is created. Hypothesis (ii) is applied only to a finite refinement, not to the original possibly infinite family.",
+  "blueprint": "The ancestor lem-trf-local-term-locality uses geometric quotient-presentation support (0265 -> 02W8); this item realizes the reduction paragraph of 02W8 via the fppf specialization of 02W3, keeping the finite affine refinement, coproduct, and affine-open gluing route.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-fppf-affine-refinement",
+    "why": "Generic Stacks 021P finite affine refinement of an fppf family over an affine base (steps 2-4), the refinement step of 02W3; the curve-zero unit has no scheme-topology refinement lemma."
+   },
+   {
+    "node": "lem-weil-pbc-finite-coproduct-lfp-qcqs",
+    "why": "Generic: a finite coproduct of lfp morphisms is lfp (step 4), needed to verify finite presentation of the affine refinement for hypothesis (iii); no node of this unit states it."
+   },
+   {
+    "node": "lem-galois-fpqc-canonical-pullback-datum",
+    "why": "Generic Stacks 023Y pullback of a descent datum along a refinement (step 5); the unit has no descent-datum pullback lemma."
+   },
+   {
+    "node": "lem-galois-fpqc-refinement-reflects-effectivity",
+    "why": "Generic Stacks 02W0 consequence: effectivity after pullback to a singleton fpqc refinement implies effectivity (step 6), exactly the 02W3 affine-base inference; no unit node replaces it."
+   },
+   {
+    "node": "lem-galois-fpqc-effectivity-open-local",
+    "why": "Generic 02W3 general-base relative gluing of effective data over all affine opens (step 7); the unit has no scheme-gluing lemma."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-fppf-affine-refinement",
+  "lem-weil-pbc-finite-coproduct-lfp-qcqs",
+  "lem-galois-fpqc-canonical-pullback-datum",
+  "lem-galois-fpqc-refinement-reflects-effectivity",
+  "lem-galois-fpqc-effectivity-open-local"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q49-c32b45b1f",
+  "group": "Q49",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q49-c32b45b1f (reviewer sub-agent of L); spot-checked: I read the item, all 7 steps, the new leaf and every cited node's statement against Stacks descent.tex: 02W3 lemma-descending-types-morphisms (statement and full proof, l.9028-9128), 023X lemma-family-is-one and 02W0 lemma-refine-coverings-fully-faithful, plus topologies.tex 021O lemma-fppf(3). The item's statement, stmt_deps and blueprint are unchanged (compared with the side DAG). Each step matches its source. Step 1 writes out 023X with disjoint open components and gluing. Step 2 shows the infinite coproduct is an fpqc singleton via 021O(3) and the 021P refinement, without assuming I is finite. Step 3 identifies Z_U x_{A_U} C with the coproduct of the Q_j = V_{i(j)} x W_j, which have P by (i). Step 4 shows C -> U is affine, flat, surjective, lfp and qcqs, hence of finite presentation and fpqc. Step 5 uses the canonical pullback datum, then (ii) and (iii). Step 6 is the 02W0 reflection. Step 7 applies open-local effectivity and restricts to the components. Edge cases I=empty, T=empty and m=0 hold, and no hypothesis is used outside its scope. New leaf lem-trf-fppf-covering-base-change: true (021O(3)), a one-line specialization of Precoverage.mem_coverings_of_isPullback (Precoverage.lean:132) to Scheme.fppfPrecoverage (Fpqc.lean:40-42); it duplicates no existing node (the nearest are fpqc or etale versions, or definitions only). FIX: the item now declares the five off-unit tool uses in split_report.tool_uses, which the brief requires and the delivery omitted. I accept all five as generic 02W3 tools (affine refinement, finite-coproduct lfp, canonical pullback datum, refinement reflects effectivity, open-local effectivity). The leaf's `how` now also names ofArrows_mem_precoverage_iff (MorphismProperty.lean:82) and IsPullback.of_hasPullback. No drops.; 2 file(s) fixed by the reviewer"
  }
 }

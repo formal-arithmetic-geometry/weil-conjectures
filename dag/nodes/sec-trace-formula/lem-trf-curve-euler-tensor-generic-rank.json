@@ -1,0 +1,96 @@
+{
+ "id": "lem-trf-curve-euler-tensor-generic-rank",
+ "kind": "statement",
+ "title": "Euler characteristic of an invertible twist on an integral proper curve",
+ "statement": "Let $k$ be a field [def-weil-field] and let $C$ be an integral scheme [def-pc-integral-scheme] proper over $k$ [def-weil-proper-morphism] of topological Krull dimension one [def-kun-topological-krull-dimension]. Let $\\mathcal L$ be an invertible $\\mathcal O_C$-module [def-sc-invertible-module] and $\\mathcal F$ a coherent $\\mathcal O_C$-module [pqf-def-coherent]. Let $\\xi$ be the generic point, characterized by $\\overline{\\{\\xi\\}}=C$. Its local ring is the residue field $\\mathcal O_{C,\\xi}=\\kappa(\\xi)$ [def-weil-residue-field]. Set $r=\\dim_{\\kappa(\\xi)}\\mathcal F_\\xi$, the finite dimension of the generic stalk [def-weil-pbc-module-stalk, def-weil-vector-space-dimension]. For the sheaf tensor product [def-pur-sheaf-tensor-product], Euler characteristic [def-pc-euler-characteristic] and degree [def-pc-degree-line-bundle],\n$$\\chi(C,\\mathcal L\\otimes_{\\mathcal O_C}\\mathcal F)=r\\deg_k(\\mathcal L)+\\chi(C,\\mathcal F).$$\nThe generic rank $r$ may be zero; no local freeness of $\\mathcal F$ or smoothness of $C$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0AYV, lemma-degree-on-proper-curve, specialization to an invertible first factor (n=1)."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-integral-scheme",
+  "def-weil-proper-morphism",
+  "def-kun-topological-krull-dimension",
+  "def-sc-invertible-module",
+  "pqf-def-coherent",
+  "def-weil-residue-field",
+  "def-weil-pbc-module-stalk",
+  "def-weil-vector-space-dimension",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-euler-characteristic",
+  "def-pc-degree-line-bundle"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "On a proper integral curve twisting a coherent sheaf F by a line bundle L changes its Euler characteristic by generic rank of F times degree of L",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.map_smul\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (M : X.Modules) {U V : X.Opens} (i : U ⟶ V) (r : ↑(X.presheaf.obj (Opposite.op V)))\\n  (x : ↑(M.presheaf.obj (Opposite.op V))),\\n  (CategoryTheory.ConcreteCategory.hom (M.presheaf.map i.op)) (r • x) =\\n    (CategoryTheory.ConcreteCategory.hom (X.presheaf.map i.op)) r •\\n\", \"doc\": \"For a scheme $X$, a sheaf of modules $M$ over its structure sheaf, and open subsets $U \\\\subseteq V$ of $X$, the restriction map commutes with scalar multiplication. Specifically, for any section $r$ o\"}\n  {\"name\": \"WeierstrassCurve.Affine.baseChange_slope\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Formula\", \"type\": \"∀ {R : Type r} {S : Type s} {F : Type u} {K : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Field F]\\n  [inst_3 : Field K] {W' : WeierstrassCurve.Affine R} [inst_4 : Algebra R S] [inst_5 : DecidableEq F]\\n  [inst_6 : DecidableEq K] [inst_7 : Algebra R F] [inst_8 : Algebra S F] [IsScalarT\", \"doc\": \"For an affine Weierstrass curve $ W' $ over a field $ F $, given an $ S $-algebra homomorphism $ f : F → K $, the slope of two points $ (x_1, y_1) $ and $ (x_2, y_2) $ computed after base change to $ \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.Hom.app_smul\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {M N : X.Modules} {U : X.Opens} (φ : M ⟶ N) (r : ↑(X.presheaf.obj (Opposite.op U)))\\n  (x : ↑(M.presheaf.obj (Opposite.op U))),\\n  (CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.Scheme.Modules.Hom.app φ U)) (r • x) =\\n    r • (CategoryTheory.ConcreteCategory.ho\", \"doc\": \"For a scheme $X$ and sheaves of modules $M,N$ over its structure sheaf, any homomorphism $\\\\phi:M\\\\to N$ satisfies scalar multiplication compatibility: for any open subset $U\\\\subseteq X$, section $r\\\\in \"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.comp_homOfVector\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} {S X Y : AlgebraicGeometry.Scheme} (v : n → ↑(Y.presheaf.obj (Opposite.op ⊤))) (f : X ⟶ Y) (g : Y ⟶ S),\\n  CategoryTheory.CategoryStruct.comp f (AlgebraicGeometry.AffineSpace.homOfVector g v) =\\n    AlgebraicGeometry.AffineSpace.homOfVector (CategoryTheory.CategoryStruct.comp f g)\\n     \", \"doc\": \"For schemes $X, Y$ over a base scheme $S$, given a vector $v$ of global sections of the structure sheaf of $Y$, and morphisms $f : X \\\\to Y$ and $g : Y \\\\to S$, the composition $f \\\\circ \\\\text{homOfVecto\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instAdditivePushforward\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y), (AlgebraicGeometry.Scheme.Modules.pushforward f).Additive\", \"doc\": \"Given a morphism $ f : X \\to Y $ of schemes, the pushforward functor from the category of sheaves of modules over the structure sheaf of $ X $ to the category of sheaves of modules over the structure s\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instAdditivePullback\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y), (AlgebraicGeometry.Scheme.Modules.pullback f).Additive\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pullback functor from the category of sheaves of modules over $ Y $'s structure sheaf to that over $ X $'s structure sheaf is additive, meaning it prese\"}\n  {\"name\": \"IsIntegralCurve.comp_mul\", \"module\": \"Mathlib/Geometry/Manifold/IntegralCurve/Transform\", \"type\": \"∀ {E : Type u_1} [inst : NormedAddCommGroup E] [inst_1 : NormedSpace ℝ E] {H : Type u_2} [inst_2 : TopologicalSpace H]\\n  {I : ModelWithCorners ℝ E H} {M : Type u_3} [inst_3 : TopologicalSpace M] [inst_4 : ChartedSpace H M] {γ : ℝ → M}\\n  {v : (x : M) → TangentSpace I x}, IsMIntegralCurve γ v → ∀ (a :\", \"doc\": \"For any real number $a$ and integral curve $\\\\gamma : \\\\mathbb{R} \\\\to M$ of a vector field $v$ on a manifold $M$, the curve $\\\\gamma \\\\circ (\\\\cdot a)$ obtained by scaling the parameter of $\\\\gamma$ by $a$ \"}\n  {\"name\": \"IsMIntegralCurve.comp_mul\", \"module\": \"Mathlib/Geometry/Manifold/IntegralCurve/Transform\", \"type\": \"∀ {E : Type u_1} [inst : NormedAddCommGroup E] [inst_1 : NormedSpace ℝ E] {H : Type u_2} [inst_2 : TopologicalSpace H]\\n  {I : ModelWithCorners ℝ E H} {M : Type u_3} [inst_3 : TopologicalSpace M] [inst_4 : ChartedSpace H M] {γ : ℝ → M}\\n  {v : (x : M) → TangentSpace I x}, IsMIntegralCurve γ v → ∀ (a :\", \"doc\": \"For a manifold $ M $ modeled on a normed vector space $ E $, if $ \\\\gamma $ is an integral curve of a vector field $ v $ on $ M $, then the curve obtained by scaling the parameter of $ \\\\gamma $ by a re\"}\nRead the returned statements: none gives the scheme-theoretic Euler-characteristic formula or a one-line specialization. ",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Euler characteristic of L tensor F on a proper integral algebraic curve equals generic rank F times degree L plus Euler characteristic F",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"IncidenceAlgebra.eulerChar_prod\", \"module\": \"Mathlib.Combinatorics.Enumerative.IncidenceAlgebra\", \"type\": \"[BoundedOrder α] [BoundedOrder β] : eulerChar 𝕜 (α × β) = eulerChar 𝕜 α * eulerChar 𝕜 β\", \"doc\": \"For bounded posets $\\\\alpha$ and $\\\\beta$ with a field $\\\\mathbb{K}$, the Euler characteristic of their product poset $\\\\alpha \\\\times \\\\beta$ in the incidence algebra equals the product of their individual\"}\n  {\"name\": \"Module.rankAtStalk_tensorProduct\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.FreeLocus\", \"type\": \"(N : Type*) [AddCommGroup N] [Module R N] [Module.Finite R N] [Module.Flat R N] :\\n  rankAtStalk (M ⊗[R] N) = rankAtStalk M * rankAtStalk (R := R) N\", \"doc\": \"For modules $M$ and $N$ over a commutative semiring $R$, if both are finitely generated and flat, then the rank of their tensor product $M \\\\otimes_R N$ at the stalk corresponding to a prime ideal $\\\\ma\"}\n  {\"name\": \"LinearMap.charpoly_natDegree\", \"module\": \"Mathlib.LinearAlgebra.Charpoly.Basic\", \"type\": \"[Nontrivial R] [StrongRankCondition R] : natDegree (charpoly f) = finrank R M\", \"doc\": \"Under the assumptions that $ R $ is a nontrivial ring satisfying the strong rank condition, the natural degree of the characteristic polynomial of a linear map $ f $ on a finite-dimensional module $ M\"}\n  {\"name\": \"IncidenceAlgebra.eulerChar\", \"module\": \"Mathlib.Combinatorics.Enumerative.IncidenceAlgebra\", \"type\": \"[BoundedOrder α] : 𝕜\", \"doc\": \"For a bounded poset $\\\\alpha$ with a field $\\\\mathbb{K}$, the Euler characteristic is defined as the value of the Möbius function $\\\\mu$ evaluated at the interval $[\\\\bot, \\\\top]$, where $\\\\bot$ and $\\\\top$ \"}\n  {\"name\": \"Field.finSepDegree_mul_finInsepDegree\", \"module\": \"Mathlib.FieldTheory.PurelyInseparable.Basic\", \"type\": \": finSepDegree F E * finInsepDegree F E = finrank F E\", \"doc\": \"For a field extension $ E $ over $ F $, the product of the separable degree $[E:F]_s$ and the finite inseparable degree $[E:F]_i$ equals the finite rank $[E:F]_f$ of $ E $ over $ F $, i.e., $[E:F]_s \\\\\"}\n  {\"name\": \"LinearMap.polyCharpoly_natDegree\", \"module\": \"Mathlib.Algebra.Module.LinearMap.Polynomial\", \"type\": \"[Nontrivial R] : (polyCharpoly φ b).natDegree = finrank R M\", \"doc\": \"For a nontrivial semiring $ R $, the natural degree of the characteristic polynomial of a linear map $ \\\\varphi $ with respect to a basis $ b $ is equal to the finite rank of the $ R $-module $ M $, i.\"}\n  {\"name\": \"IntermediateField.LinearDisjoint.lift_adjoin_rank_eq_lift_rank_right_of_isAlgebraic_left\", \"module\": \"Mathlib.FieldTheory.LinearDisjoint\", \"type\": \"(H : A.LinearDisjoint L) [Algebra.IsAlgebraic F A] :\\n  Cardinal.lift.{w}\\n      (Module.rank A\\n        (extendScalars (show A ≤ (adjoin L (A : Set E)).restrictScalars F from subset_adjoin L (A : Set E)))) =\\n    Cardinal.lift.{v} (Module.rank F L)\", \"doc\": \"If $ A $ is an intermediate field between $ F $ and $ L $ that is algebraic over $ F $ and linearly disjoint from $ L $, then the rank of $ A $ as a module over the scalar extension of its adjoined fi\"}\n  {\"name\": \"IntermediateField.LinearDisjoint.adjoin_rank_eq_rank_right_of_isAlgebraic_left\", \"module\": \"Mathlib.FieldTheory.LinearDisjoint\", \"type\": \"(H : A.LinearDisjoint L) [Algebra.IsAlgebraic F A] :\\n  Module.rank A (extendScalars (show A ≤ (adjoin L (A : Set E)).restrictScalars F from subset_adjoin L (A : Set E))) =\\n    Module.rank F L\", \"doc\": \"If $ A $ is algebraic over $ F $ and $ A $ is linearly disjoint from $ L $ over $ E $, then the rank of the field extension obtained by adjoining $ A $ to $ L $ (and restricting scalars to $ F $) over\"}\nRead the returned statements: none gives the scheme-theoretic Euler-characteristic formula or a one-line specialization. ",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"eulerChar\", \"tensor\"",
+   "results": "[loogle] OK 0 hit(s)\nRead the returned statements: none gives the scheme-theoretic Euler-characteristic formula or a one-line specialization. ",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "eulerChar.*tensor|tensor.*eulerChar|chi.*generic|generic.*chi",
+   "results": "[grep] OK 0 hit(s)\nRead the returned statements: none gives the scheme-theoretic Euler-characteristic formula or a one-line specialization. Grep directory: Mathlib/AlgebraicGeometry.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Riemann Roch formula chi(E tensor F) equals rank(F) degree(E) plus rank(E) chi(F) for a vector bundle E and coherent sheaf F on any proper integral curve",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Module.rankAtStalk_tensorProduct\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus\", \"type\": \"∀ {R : Type uR} {M : Type uM} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] [Module.Flat R M]\\n  [Module.Finite R M] (N : Type u_1) [inst_5 : AddCommGroup N] [inst_6 : Module R N] [Module.Finite R N]\\n  [Module.Flat R N], Module.rankAtStalk (TensorProduct R M N) = Module.rankAtSt\", \"doc\": \"For modules $M$ and $N$ over a commutative semiring $R$, if both are finitely generated and flat, then the rank of their tensor product $M \\\\otimes_R N$ at the stalk corresponding to a prime ideal $\\\\ma\"}\n  {\"name\": \"Module.rankAtStalk_tensorProduct_of_isScalarTower\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus\", \"type\": \"∀ {R : Type uR} {M : Type uM} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] [Module.Flat R M]\\n  [Module.Finite R M] {S : Type u_1} [inst_5 : CommRing S] [inst_6 : Algebra R S] (N : Type u_2)\\n  [inst_7 : AddCommGroup N] [inst_8 : Module R N] [inst_9 : Module S N] [inst_10 : IsSc\", \"doc\": \"Given commutative rings $R$ and $S$ with $S$ an $R$-algebra, an $S$-module $N$ that is finitely generated and flat over $S$ with compatible $R$-action (via scalar tower), and a prime ideal $\\\\mathfrak{\"}\n  {\"name\": \"Module.rankAtStalk_baseChange\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus\", \"type\": \"∀ {R : Type uR} {M : Type uM} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] [Module.Flat R M]\\n  [Module.Finite R M] {S : Type u_1} [inst_5 : CommRing S] [inst_6 : Algebra R S] (p : PrimeSpectrum S),\\n  Module.rankAtStalk (TensorProduct R S M) p = Module.rankAtStalk M (PrimeSpect\", \"doc\": \"For a commutative ring homomorphism $ R \\\\to S $, a prime ideal $ \\\\mathfrak{p} \\\\in \\\\text{Spec}(S) $, and an $ R $-module $ M $, the rank of the base-changed module $ S \\\\otimes_R M $ at $ \\\\mathfrak{p} $\"}\n  {\"name\": \"Module.rankAtStalk_eq_finrank_tensorProduct\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus\", \"type\": \"∀ {R : Type uR} {M : Type uM} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] (p : PrimeSpectrum R),\\n  Module.rankAtStalk M p =\\n    Module.finrank (Localization.AtPrime p.asIdeal) (TensorProduct R (Localization.AtPrime p.asIdeal) M)\", \"doc\": \"For a prime ideal $\\\\mathfrak{p}$ in the prime spectrum of a commutative semiring $R$, the finite rank of the module $M$ localized at $\\\\mathfrak{p}$ is equal to the finite rank of the tensor product of\"}\n  {\"name\": \"Module.rankAtStalk_eq\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus\", \"type\": \"∀ {R : Type uR} {M : Type uM} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] [Module.Flat R M]\\n  [Module.Finite R M] (p : PrimeSpectrum R),\\n  Module.rankAtStalk M p = Module.finrank p.asIdeal.ResidueField (TensorProduct R p.asIdeal.ResidueField M)\", \"doc\": \"For a prime ideal $\\\\mathfrak{p}$ in the prime spectrum of a commutative semiring $R$, the finite rank of the module $M$ localized at $\\\\mathfrak{p}$ (converted to a natural number) equals the finite ra\"}\n  {\"name\": \"Module.rankAtStalk_prod\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus\", \"type\": \"∀ {R : Type uR} (M : Type uM) [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] [Module.Flat R M]\\n  [Module.Finite R M] (N : Type u_1) [inst_5 : AddCommGroup N] [inst_6 : Module R N] [Module.Flat R N]\\n  [Module.Finite R N], Module.rankAtStalk (M × N) = Module.rankAtStalk M + Module\", \"doc\": \"For a commutative semiring $R$ and flat, finitely generated $R$-modules $M$ and $N$, the rank at the stalk of the product module $M \\\\times N$ is equal to the sum of the ranks at the stalks of $M$ and \"}\n  {\"name\": \"Module.rankAtStalk_pi\", \"module\": \"Mathlib/RingTheory/Spectrum/Prime/FreeLocus\", \"type\": \"∀ {R : Type uR} [inst : CommRing R] {ι : Type u_1} [Finite ι] (M : ι → Type u_2) [inst_2 : (i : ι) → AddCommGroup (M i)]\\n  [inst_3 : (i : ι) → Module R (M i)] [∀ (i : ι), Module.Flat R (M i)] [∀ (i : ι), Module.Finite R (M i)]\\n  (p : PrimeSpectrum R), Module.rankAtStalk ((i : ι) → M i) p = ∑ᶠ (i : ι\", \"doc\": \"Let $ R $ be a commutative semiring, and let $ \\\\{M_i\\\\}_{i \\\\in \\\\iota} $ be a finite family of finitely generated flat $ R $-modules, each equipped with an additive commutative group structure. For any \"}\n  {\"name\": \"CommRing.Pic.mul_eq_tensor\", \"module\": \"Mathlib/RingTheory/PicardGroup\", \"type\": \"∀ {R : Type u} [inst : CommSemiring R] (M N : CommRing.Pic R),\\n  M * N = CommRing.Pic.mk R (TensorProduct R M.AsModule N.AsModule)\", \"doc\": \"For any commutative semiring $ R $ and elements $ M, N $ in the Picard group $ \\\\mathrm{Pic}(R) $, the group multiplication satisfies $ M \\\\cdot N = [M \\\\otimes_R N] $, where $ [M \\\\otimes_R N] $ denotes \"}\nRead the returned statements: none gives the scheme-theoretic Euler-characteristic formula or a one-line specialization. ",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-curve-degree-tensor-additive",
+  "date": "2026-10-18",
+  "group": "Q14"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "The fibrewise ampleness-to-projectivity argument: positivity on normalized geometric-fibre components is converted to relative ampleness and then to a projective-bundle embedding. Supporting input: the proper integral curve degree criterion (0B5X). In the 0B5X proof this is the tensor-product degree formula used to pass from the degree of a positive tensor power to the degree of the line bundle and to obtain linear Euler-characteristic growth. Supporting input: the integral-curve Euler-characteristic calculation in the proof of Stacks 0AYX (via 0AYV).",
+   "via": [
+    "lem-trf-curve-degree-tensor-additive",
+    "lem-trf-proper-integral-curve-ample-degree",
+    "lem-trf-fibre-degree-ample-criterion",
+    "lem-trf-proper-fibrewise-ample-projective",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

@@ -2,7 +2,7 @@
  "id": "lem-trf-derived-colimit-change-rings",
  "kind": "statement",
  "title": "Derived category homology commutes with coefficient extension",
- "statement": "Let $\\mathcal E$ be a small category with identity-cover topology, let $R\\to S$ be a homomorphism of commutative rings, and use the constant-ring module categories, maps $\\pi_{\\mathcal E}^R,\\pi_{\\mathcal E}^S$ and bar complexes of [lem-trf-derived-colimit-bar]. Let $h:(\\operatorname{Sh}(\\mathcal E),\\underline S)\\to(\\operatorname{Sh}(\\mathcal E),\\underline R)$ and $f:(*,S)\\to(*,R)$ be the ringed-topos morphisms with identity underlying topoi and structural maps $R\\to S$ [def-weil-pbc-ringed-topos-morphism]. Derived extension of scalars means $Lh^*(-)=-\\otimes_{\\underline R}^{\\mathbf L}\\underline S$ and $Lf^*(-)=-\\otimes_R^{\\mathbf L}S$ [lem-pur-derived-change-of-rings]. For every bounded-above complex $M$ of $\\underline R$-modules there is a canonical natural isomorphism in $D(S)$\n$$L\\pi_{\\mathcal E,!}^S(M\\otimes_{\\underline R}^{\\mathbf L}\\underline S)\\ \\simeq\\ (L\\pi_{\\mathcal E,!}^R M)\\otimes_R^{\\mathbf L}S.$$\nFor a presheaf $F$ whose every value $F(U)$ is a flat $R$-module (flat means tensoring with it preserves short exact sequences), the derived presheaf tensor may be replaced by $F\\otimes_{\\underline R}\\underline S$, and this isomorphism is represented by the termwise identification\n$$K_{\\mathcal E}(F\\otimes_R S)\\cong K_{\\mathcal E}(F)\\otimes_R S,\\qquad (U_n\\to\\cdots\\to U_0,x\\otimes s)\\longleftrightarrow(U_n\\to\\cdots\\to U_0,x)\\otimes s.$$\nThe latter bounded-above complex of flat $R$-modules computes the derived tensor on the right. These isomorphisms are compatible with maps of module presheaves, functors between small indexing categories, and commutative squares of coefficient-ring maps, using the semilinear derived-colimit maps of [lem-trf-derived-colimit-bar]. No flatness of $S$ over $R$ is assumed.",
+ "statement": "Let $\\mathcal E$ be a small category with identity-cover topology, let $R\\to S$ be a homomorphism of commutative rings, and use the constant-ring module categories, maps $\\pi_{\\mathcal E}^R,\\pi_{\\mathcal E}^S$ and bar complexes of [lem-trf-derived-colimit-bar]. Let $h:(\\operatorname{Sh}(\\mathcal E),\\underline S)\\to(\\operatorname{Sh}(\\mathcal E),\\underline R)$ and $f:(*,S)\\to(*,R)$ be the ringed-topos morphisms with identity underlying topoi and structural maps $R\\to S$ [def-weil-pbc-ringed-topos-morphism]. Derived extension of scalars means $Lh^*(-)=-\\otimes_{\\underline R}^{\\mathbf L}\\underline S$ and $Lf^*(-)=-\\otimes_R^{\\mathbf L}S$ [lem-pur-derived-change-of-rings]. For every bounded-above complex $M$ of $\\underline R$-modules there is a canonical natural isomorphism in $D(S)$\n$$L\\pi_{\\mathcal E,!}^S(M\\otimes_{\\underline R}^{\\mathbf L}\\underline S)\\ \\simeq\\ (L\\pi_{\\mathcal E,!}^R M)\\otimes_R^{\\mathbf L}S.$$\nFor a presheaf $F$ whose every value $F(U)$ is a flat $R$-module (flat means tensoring with it preserves short exact sequences), the derived presheaf tensor may be replaced by $F\\otimes_{\\underline R}\\underline S$, and this isomorphism is represented by the termwise identification\n$$K_{\\mathcal E}(F\\otimes_R S)\\cong K_{\\mathcal E}(F)\\otimes_R S,\\qquad (U_n\\to\\cdots\\to U_0,x\\otimes s)\\longleftrightarrow(U_n\\to\\cdots\\to U_0,x)\\otimes s.$$\nHere $K_{\\mathcal E}(F)$ is a bounded-above complex of flat $R$-modules, so $K_{\\mathcal E}(F)\\otimes_R S$ computes the derived tensor on the right. These isomorphisms are compatible with maps of module presheaves, functors between small indexing categories, and commutative squares of coefficient-ring maps, using the semilinear derived-colimit maps of [lem-trf-derived-colimit-bar]. No flatness of $S$ over $R$ is assumed.",
  "source": {
   "document": "literature/stacks-project/sites-cohomology.tex",
   "place": "Tag 08Q8 (lemma-change-of-rings) with the correctly typed order Lπ^S_! Lh* ≅ Lf* Lπ^R_!; Tags 08PG/08PH for the explicit flat-presheaf bar comparison and its naturality."
@@ -12,9 +12,165 @@
   "def-weil-pbc-ringed-topos-morphism",
   "lem-pur-derived-change-of-rings"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $r_{\\mathcal E}:D(\\underline S)\\to D(\\underline R)$ and $r_*:D(S)\\to D(R)$ for restriction of scalars. These leave the underlying abelian presheaves or groups unchanged [def-pc-sheaf-restrict-scalars]. Kernels and cokernels are objectwise on the identity-cover site [def-weil-sheaf-of-modules-category], so both functors are exact. Consequently their termwise descents are their total right derived functors [lem-weil-pbc-exact-functor-derived-functor]. Apply the module pullback--pushforward adjunction [lem-weil-pbc-ringed-topoi-module-adjunction] to the identity-topos coefficient morphisms $h$ and $f$: their pullbacks are tensor with $\\underline S$ and $S$, respectively, and their pushforwards are these restrictions. The total left derived functors exist by [lem-pur-derived-change-of-rings]; therefore [lem-pc-derived-adjoint-functors] gives $Lh^*\\dashv r_{\\mathcal E}$ and $Lf^*\\dashv r_*$. Their Hom bijections are characterized on fraction representatives by the ordinary chain-level adjunction [lem-pc-pre-derived-adjoint-functors-general]: for a K-flat complex $P$ (take $t=\\mathrm{id}_P$, with $u_t$ the K-flat identification of [lem-pur-derived-change-of-rings]) and a chain map $a:P\\to rQ$, the transpose is represented by $p\\otimes s\\mapsto s\\,a(p)$; in particular the unit at $P$ is represented by $x\\mapsto x\\otimes1$.",
+   "uses": [
+    "def-pc-sheaf-restrict-scalars",
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-pbc-exact-functor-derived-functor",
+    "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "lem-pur-derived-change-of-rings",
+    "lem-pc-derived-adjoint-functors",
+    "lem-pc-pre-derived-adjoint-functors-general"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A6 (lemma-adjoint), applied to identity-topos coefficient changes; Tag 06YY (lemma-derived-base-change)."
+   }
+  },
+  {
+   "text": "Let $C_R:D(R)\\to D(\\underline R)$ and $C_S:D(S)\\to D(\\underline S)$ be the exact constant-presheaf functors. By [lem-trf-derived-colimit-bar], $L\\pi_!^R\\dashv C_R$ and $L\\pi_!^S\\dashv C_S$. There is an equality $r_{\\mathcal E}C_S=C_Rr_*$: on every object of $\\mathcal E$ both sides take an $S$-complex to its underlying $R$-complex, and every restriction map is the identity. The equality also holds on maps and termwise differentials [def-pc-sheaf-restrict-scalars].",
+   "uses": [
+    "lem-trf-derived-colimit-bar",
+    "def-pc-sheaf-restrict-scalars"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 08PF (example-category-to-point), 08Q8 (lemma-change-of-rings)."
+   }
+  },
+  {
+   "text": "Using the composite adjunction [def-weil-pbc-composite-adjunction], for $M\\in D(\\underline R)$ and $N\\in D(S)$ we have the natural bijections\n$$\\operatorname{Hom}_S(L\\pi_!^S Lh^*M,N)\\cong\\operatorname{Hom}_{\\underline R}(M,r_{\\mathcal E}C_SN)=\\operatorname{Hom}_{\\underline R}(M,C_Rr_*N)\\cong\\operatorname{Hom}_S(Lf^*L\\pi_!^RM,N).$$\nThus the two composites are left adjoints to the same functor. The unit-normalized uniqueness theorem [lem-weil-pbc-conjugate-iso-unit-equation] gives the canonical natural isomorphism $A=L\\pi_!^SLh^*\\xrightarrow{\\sim}B=Lf^*L\\pi_!^R$. This proves the first assertion for every bounded-above $M$ (indeed the cited adjunctions exist unbounded). Neither restriction of scalars nor the existence of derived extension requires $S$ to be flat over $R$.",
+   "uses": [
+    "def-weil-pbc-composite-adjunction",
+    "lem-trf-derived-colimit-bar",
+    "lem-pc-derived-adjoint-functors",
+    "lem-weil-pbc-conjugate-iso-unit-equation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08Q8 (lemma-change-of-rings), with the types and adjoint direction corrected; categories.tex Tag 0B65 (lemma-transformation-between-functors-and-adjoints)."
+   }
+  },
+  {
+   "text": "Now suppose every $F(U)$ is flat over $R$. The sheaf tensor product is sectionwise on this site [def-pur-sheaf-tensor-product], and exactness is sectionwise [def-weil-sheaf-of-modules-category], so $F$ is tensor-flat as a presheaf. To use [lem-sfb-bounded-above-flat-kflat], check its ambient assumptions: module sheaves on this small site, and modules on the one-object point site, are Grothendieck abelian [lem-pur-ringed-site-grothendieck-abelian]; their tensors are additive symmetric monoidal closed [lem-pc-sheaf-modules-tensor-closed] and preserve the required countable coproducts and integer-indexed colimits [lem-weil-pbc-independent-sheaf-tensor-colimits]. The ordered category $\\mathbf Z$ is small and filtered, so those colimits are exact by the defining Grothendieck condition [def-sp-grothendieck-abelian]. Symmetry gives the same preservation in the other variable. Hence $F[0]$ is K-flat by [lem-sfb-bounded-above-flat-kflat]. This is K-flatness in the sense of [def-pc-kflat-complex] used by [lem-pur-derived-change-of-rings]: for an acyclic $A$ the map $0\\to A$ is a quasi-isomorphism, so its tensor $0\\to\\operatorname{Tot}(A\\otimes F[0])$ is one too. Its derived scalar extension is therefore represented by $F\\otimes_{\\underline R}\\underline S$ [lem-pur-derived-change-of-rings].",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-weil-sheaf-of-modules-category",
+    "lem-pur-ringed-site-grothendieck-abelian",
+    "lem-pc-sheaf-modules-tensor-closed",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits",
+    "def-sp-grothendieck-abelian",
+    "lem-sfb-bounded-above-flat-kflat",
+    "lem-pur-derived-change-of-rings",
+    "def-pc-kflat-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YL/06YU (flat resolutions and derived tensor), together with sites-modules.tex Tags 03EP/03EU and more-algebra.tex Tag 064K."
+   }
+  },
+  {
+   "text": "By [lem-trf-derived-colimit-bar], the two degree-zero presheaf inputs $F$ and $F\\otimes_R S$ have derived colimits represented by their displayed bar complexes. Each term $K_{\\mathcal E}(F)^{-n}$ is a small direct sum of the flat modules $F(U_0)$ and hence is flat by [lem-weil-pbc-flat-coproduct], applied in $\\operatorname{Mod}(R)$. Since $P\\otimes-$ is additive and right exact (a left adjoint), preserving finite limits there is the same as preserving short exact sequences, so the two flatness notions agree. Its Grothendieck and braided closed hypotheses are provided by [lem-pur-ringed-site-grothendieck-abelian] and [lem-pc-sheaf-modules-tensor-closed] on the point site. The ambient colimit hypotheses for [lem-sfb-bounded-above-flat-kflat] are exactly those verified in step 4, using [lem-weil-pbc-independent-sheaf-tensor-colimits] and [def-sp-grothendieck-abelian]. Since this complex vanishes above degree zero, it is K-flat. Consequently [lem-pur-derived-change-of-rings] identifies $(L\\pi_!^R F)\\otimes_R^{\\mathbf L}S$ with $K_{\\mathcal E}(F)\\otimes_R S$. It is $K_{\\mathcal E}(F)$ that is flat over $R$; its scalar extension need not be flat over $R$.",
+   "uses": [
+    "lem-trf-derived-colimit-bar",
+    "lem-weil-pbc-flat-coproduct",
+    "lem-pur-ringed-site-grothendieck-abelian",
+    "lem-pc-sheaf-modules-tensor-closed",
+    "lem-sfb-bounded-above-flat-kflat",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits",
+    "def-sp-grothendieck-abelian",
+    "lem-pur-derived-change-of-rings"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08PG (example-left-derived-colimits); sites-modules.tex Tag 03EU (lemma-colimits-flat); more-algebra.tex Tag 064K (lemma-derived-tor-quasi-isomorphism)."
+   }
+  },
+  {
+   "text": "For each string $\\sigma=(U_n\\to\\cdots\\to U_0)$ define $\\Phi_n(\\sigma,x\\otimes s)=(\\sigma,x)\\otimes s$. An inverse sends $(\\sum_\\sigma(\\sigma,x_\\sigma))\\otimes s$ to $\\sum_\\sigma(\\sigma,x_\\sigma\\otimes s)$; the sum is finite, and additivity and the $R$-balancing relation make both maps well-defined. These maps are inverse and $S$-linear by these same formulas. For every face other than the last the coefficient stays $x$, so $\\Phi d_j=d_j\\Phi$; for the last face both routes send $x\\otimes s$ to $(x|_{U_1})\\otimes s$. Thus they commute with the signed sum differential of [lem-trf-derived-colimit-bar]. This is the required chain isomorphism $\\Phi:K_{\\mathcal E}(F\\otimes_R S)\\to K_{\\mathcal E}(F)\\otimes_R S$.",
+   "uses": [
+    "lem-trf-derived-colimit-bar"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 08PG/08PH, explicit direct-sum bar differential and semilinear maps."
+   }
+  },
+  {
+   "text": "To identify $\\Phi$ with the canonical comparison of step 3, use the coefficient-extension unit $t:F\\to r_{\\mathcal E}(F\\otimes_R S)$, $x\\mapsto x\\otimes1$. Its canonical semilinear derived-colimit map is, by [lem-trf-derived-colimit-bar], $a:K_{\\mathcal E}(F)\\to r_*K_{\\mathcal E}(F\\otimes_R S)$, $(\\sigma,x)\\mapsto(\\sigma,x\\otimes1)$. Transpose $a$ under $Lf^*\\dashv r_*$ from [lem-pc-derived-adjoint-functors], computed on representatives by [lem-pc-pre-derived-adjoint-functors-general] as in step 1. By the K-flat model of [lem-pur-derived-change-of-rings] established in step 5, its transpose is the $S$-linear map $(\\sigma,x)\\otimes s\\mapsto(\\sigma,x\\otimes s)$, namely $\\Phi^{-1}$. The semilinear colimit map is induced by $t$ and the colimit unit; its transpose is therefore the comparison $B\\to A$ obtained by the Hom bijections of step 3. Equivalently, its further transpose under the composite adjunction is the unit of $A$; this is the unit equation uniquely characterizing that comparison [def-weil-pbc-composite-adjunction, lem-weil-pbc-conjugate-iso-unit-equation]. Thus the inverse comparison $A\\to B$ is represented by $\\Phi$, as asserted.",
+   "uses": [
+    "lem-trf-derived-colimit-bar",
+    "lem-pc-derived-adjoint-functors",
+    "lem-pur-derived-change-of-rings",
+    "def-weil-pbc-composite-adjunction",
+    "lem-weil-pbc-conjugate-iso-unit-equation",
+    "lem-pc-pre-derived-adjoint-functors-general"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 08Q8 and 08PH; Tag 07A6 for the tensor/restriction adjunction; categories.tex Tag 0B65 for its unit normalization."
+   }
+  },
+  {
+   "text": "For the explicit naturality, let $u:\\mathcal E\\to\\mathcal F$, let coefficient maps $a:R\\to R'$, $b:S\\to S'$ form a commutative square with $R\\to S$ and $R'\\to S'$, and let $t:F\\to u^{-1}G$ be $a$-semilinear. The induced tensor map sends $x\\otimes s$ to $t(x)\\otimes b(s)$: it is balanced since $t(rx)=a(r)t(x)$ and $b(rs)=a(r)b(s)$ in $S'$. Both orders around the bar-comparison square send $(\\sigma,x\\otimes s)$ to $(u\\sigma,t(x))\\otimes b(s)$. Thus the square commutes on generators, hence on all terms. The semilinear maps are the canonical derived-colimit maps by [lem-trf-derived-colimit-bar], so this verifies the required compatibility in the explicit flat case, including identity functors, maps of presheaves, and coefficient identities. The formulas do not require $G$ to be flat to define the square; the flat-model interpretation is used when its right derived tensor is also computed this way.",
+   "uses": [
+    "lem-trf-derived-colimit-bar"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08PH (example-morphism-categories), and the termwise coefficient formula of Tag 08PG."
+   }
+  },
+  {
+   "text": "For the derived comparisons, the same compatibility is forced by the defining Hom bijections, without choosing flat resolutions functorially. Naturality in $M$ and in the target $N$ is part of [lem-pc-derived-adjoint-functors] and the colimit adjunction of [lem-trf-derived-colimit-bar]. For an indexing functor $u$, precomposition commutes literally with constant presheaves and coefficient restriction. A derived map $t:M\\to u^{-1}M'$ gives the colimit map by transposing the composite $M\\xrightarrow{t}u^{-1}M'\\to u^{-1}C L\\pi_!M'=C L\\pi_!M'$. Under the Hom bijections in step 3, either order of applying coefficient comparison and this map is this same composite with scalars restricted. For a commutative coefficient square, the two restriction-of-scalars composites are equal on actions, elements and differentials; after transposition either route has this same unit equation. Equality follows from uniqueness in [lem-weil-pbc-conjugate-iso-unit-equation]. Composite units are those of [def-weil-pbc-composite-adjunction], so the argument also respects composition of coefficient maps. This proves the stated derived naturality, and step 7 identifies it with the explicit formula in step 8.",
+   "uses": [
+    "lem-pc-derived-adjoint-functors",
+    "lem-trf-derived-colimit-bar",
+    "lem-weil-pbc-conjugate-iso-unit-equation",
+    "def-weil-pbc-composite-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08Q8 (uniqueness of the common left adjoint), Tag 08PH (canonical indexing maps); agent expansion of functoriality via the displayed Hom bijections."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-sheaf-restrict-scalars",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "lem-pur-derived-change-of-rings",
+  "lem-pc-derived-adjoint-functors",
+  "lem-pc-pre-derived-adjoint-functors-general",
+  "lem-trf-derived-colimit-bar",
+  "def-weil-pbc-composite-adjunction",
+  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "def-pur-sheaf-tensor-product",
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits",
+  "def-sp-grothendieck-abelian",
+  "lem-sfb-bounded-above-flat-kflat",
+  "def-pc-kflat-complex",
+  "lem-weil-pbc-flat-coproduct"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 08Q8 (lemma-change-of-rings), with the typed order and left-adjoint correction; Tags 08PG/08PH and the elementary tensor-generator checks for the explicit comparison."
+ },
  "mathlib_searches": [
   {
    "tool": "loogle",
@@ -50,10 +206,59 @@
    "results": "8 hits: ModuleCat.preservesColimit_restrictScalars, PresheafOfModules.instHasColimitModuleCatCarrierObjOppositeRingCatCompEvaluationRestrictScalarsHomMap, localCohomology.ofDiagram, ModuleCat.instPreservesFiniteColimitsLocalizationLocalizedModule_functor, ModuleCat.HasColimit.coconePointSMul_apply, CategoryTheory.Tor'_obj_obj, ModuleCat.HasColimit.isColimitColimitCocone, PresheafOfModules.evaluation_preservesColimit.  Mathlib subdirectory: all. Full returned types retained in search-coefficient-*.txt; candidates were read and are not the stated assertion.",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "[Dd]erived.*[Cc]olimit|[Cc]olimit.*[Dd]erived|extendScalars.*[Cc]olimit",
+   "results": "1 hits: Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived.lean; read the returned candidates. Ordinary colimit preservation, scalar-extension adjunctions, Tor, and group bar complexes do not state this derived category-homology comparison for arbitrary small categories.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived extension of scalars commutes with homotopy colimits of diagrams of modules",
+   "results": "8 hits: ModuleCat.preservesColimit_restrictScalars, CommRingCat.moduleCatExtendScalarsPseudofunctor_map, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply, ModuleCat.preservesFiniteLimits_extendScalars_of_flat, ModuleCat.HasColimit.coconePointSMul_apply, ModuleCat.ExtendRestrictScalarsAdj.homEquiv, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars, ModuleCat.extendScalarsComp; read the returned candidates. Ordinary colimit preservation, scalar-extension adjunctions, Tor, and group bar complexes do not state this derived category-homology comparison for arbitrary small categories.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "ModuleCat.extendScalars, CategoryTheory.colimit",
+   "results": "0 hits: ; loogle: unknown identifier 'CategoryTheory.colimit'; read the returned candidates. Ordinary colimit preservation, scalar-extension adjunctions, Tor, and group bar complexes do not state this derived category-homology comparison for arbitrary small categories.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived colimit of a module presheaf commutes with derived extension of coefficient rings",
+   "results": "8 hits: PresheafOfModules.instHasColimitModuleCatCarrierObjOppositeRingCatCompEvaluationRestrictScalarsHomMap, PresheafOfModules.colimitPresheafOfModules_map, PresheafOfModules.colimitPresheafOfModules, PresheafOfModules.evaluation_preservesColimit, PresheafOfModules.isColimitColimitCocone, PresheafOfModules.colimitPresheafOfModules_obj, PresheafOfModules.toPresheaf_preservesColimit, PresheafOfModules.hasColimit; read the returned candidates. Ordinary colimit preservation, scalar-extension adjunctions, Tor, and group bar complexes do not state this derived category-homology comparison for arbitrary small categories.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "barComplex|[Bb]ar.*[Rr]esolution|[Dd]erived.*extendScalars|extendScalars.*[Dd]erived",
+   "results": "19 hits: Mathlib/RepresentationTheory/Homological/GroupHomology/Basic.lean, Mathlib/RepresentationTheory/Homological/GroupHomology/Basic.lean, Mathlib/RepresentationTheory/Homological/GroupHomology/Basic.lean, Mathlib/RepresentationTheory/Homological/GroupHomology/Basic.lean, Mathlib/RepresentationTheory/Homological/GroupHomology/Basic.lean, Mathlib/RepresentationTheory/Homological/GroupHomology/Shapiro.lean, Mathlib/RepresentationTheory/Homological/GroupHomology/Shapiro.lean, Mathlib/RepresentationTheory/Homological/Resolution.lean; read the returned candidates. Ordinary colimit preservation, scalar-extension adjunctions, Tor, and group bar complexes do not state this derived category-homology comparison for arbitrary small categories.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"colimit\", \"tensor\"",
+   "results": "12 hits: CategoryTheory.instPreservesColimitsTensorLeft, CategoryTheory.Functor.Monoidal.instPreservesColimitsOfShapeTensorLeftOfHasColimitsOfShape, CategoryTheory.MonoidalCategory.Limits.preservesColimit_of_braided_and_preservesColimit_tensor_left, CategoryTheory.MonoidalCategory.Limits.preservesColimit_of_braided_and_preservesColimit_tensor_right, CategoryTheory.MonoidalCategory.Limits.preservesCoLimit_curriedTensor, CategoryTheory.MonoidalCategory.Limits.preservesColimit_curriedTensor, CategoryTheory.Limits.IsColimit.tensor₂, CategoryTheory.Limits.IsColimit.tensor; read the returned candidates. Ordinary colimit preservation, scalar-extension adjunctions, Tor, and group bar complexes do not state this derived category-homology comparison for arbitrary small categories.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "left derived tensor scalar extension commutes with left derived colimit by adjunction to constant module diagrams",
+   "results": "8 hits: CategoryTheory.Tor'_map_app, CategoryTheory.Tor'_obj_map, CategoryTheory.Tor'_obj_obj, CategoryTheory.Tor, CategoryTheory.Tor', CategoryTheory.Tor_map, Rep.Tor_map, CategoryTheory.Tor_obj; read the returned candidates. Ordinary colimit preservation, scalar-extension adjunctions, Tor, and group bar complexes do not state this derived category-homology comparison for arbitrary small categories.",
+   "date": "2026-10-17",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-cotangent-transitivity-triangle",
@@ -83,5 +288,74 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-derived-colimit-change-rings",
+  "worker": "stage1",
+  "summary": "Proved the typed coefficient comparison by the shared right adjoint; checked the flat-presheaf bar model, its unit normalization, and semilinear naturality. Reused existing DAG tools only; clarified that K_E(F), not its scalar extension, has flat R-terms. Source 08Q8 has an ill-typed functor order and mislabels the adjoints; reported both. No Lean or build operations.",
+  "blueprint": "Supporting derived-colimit coefficient comparison in the cotangent-transitivity input of the local-term-locality ancestry; realizes the inherited from.place, without changing the local-term unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-functor",
+    "why": "Exact restriction of scalars is its own derived functor; the local-term unit has no general exact-functor localization lemma."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "why": "Ordinary scalar extension is left adjoint to restriction on the identity topoi; used as a general module-category tool."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Existence and K-flat models for derived coefficient extension, already a statement dependency of this item."
+   },
+   {
+    "node": "lem-pc-derived-adjoint-functors",
+    "why": "Derives the ordinary coefficient adjunction, a general homological-algebra tool."
+   },
+   {
+    "node": "lem-pur-ringed-site-grothendieck-abelian",
+    "why": "Verifies exact filtered colimits for module presheaves and ordinary modules."
+   },
+   {
+    "node": "lem-pc-sheaf-modules-tensor-closed",
+    "why": "Verifies the additive symmetric closed tensor hypotheses for flat coproducts and K-flatness."
+   },
+   {
+    "node": "lem-weil-pbc-independent-sheaf-tensor-colimits",
+    "why": "Supplies the colimit-preservation hypotheses for the bounded-above flat K-flat criterion."
+   },
+   {
+    "node": "lem-sfb-bounded-above-flat-kflat",
+    "why": "Applies the general K-flat criterion to F[0] and its bounded-above bar complex."
+   },
+   {
+    "node": "lem-weil-pbc-flat-coproduct",
+    "why": "Makes each small direct-sum bar term flat, with no assumption that S is R-flat."
+   },
+   {
+    "node": "lem-pc-pre-derived-adjoint-functors-general",
+    "why": "Characterizes the derived coefficient adjunction's Hom bijection on fraction representatives by the ordinary tensor/restriction adjunction; needed to compute transposes and units on K-flat bar models (steps 1, 7)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "lem-pur-derived-change-of-rings",
+  "lem-pc-derived-adjoint-functors",
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits",
+  "lem-sfb-bounded-above-flat-kflat",
+  "lem-weil-pbc-flat-coproduct",
+  "lem-pc-pre-derived-adjoint-functors-general"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q32-380e636c8",
+  "group": "Q32",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q32-380e636c8 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item (9 steps, no new nodes), every cited statement, the parent cotangent-transitivity steps 3/4/7, and Stacks sites-cohomology 08PF (l.10016), 08PG (l.10044), 08PH (l.10117) and 08Q8 (l.10209). The worker's source error is confirmed. As printed, 08Q8's Lπ_!∘Lh* does not compose. The correct form is Lπ'_!∘Lh* = Lf*∘Lπ_!, and both sides are LEFT adjoints of restriction followed by the constant functor. The item states this corrected form. Its coefficient category is ordinary modules over constant rings on a chaotic site. The flatness sentence was corrected, not weakened: with R=Z, S=Z/2, F=Z, K(F)⊗S does not have flat terms, while K(F) does. Steps 2, 3, 6, 8 and 9 check out. The A≅B comparison follows from the equal right adjoints r_E C_S = C_R r_* and the conjugate-iso uniqueness lemma, and the bar face and naturality formulas hold on generators. Small cases tested: E empty, E=*, and the Z→Z/2 cases with flat F=Z and non-flat M=Z/2 (both sides Z/2⊕Z/2[1]); R=S gives Φ=id. No duplicates and no SGA. FIX (one citation gap, C3/C4, plus two notion bridges). (1) Steps 1 and 7 need the derived adjunction's unit and transposes to be the ordinary formulas on K-flat representatives. The statement of lem-pc-derived-adjoint-functors gives only a 'canonical bijection'. I now cite the existing node lem-pc-pre-derived-adjoint-functors-general, whose fraction-representative formula with t=id_P gives this, and added it to split_report.tool_uses. (2) Step 4: lem-sfb-bounded-above-flat-kflat gives K-flatness in the def-sfb sense (tensor preserves quasi-isomorphisms), while lem-pur-derived-change-of-rings uses def-pc-kflat-complex (Tot with an acyclic complex is acyclic). I added the one-line bridge (0→A is a quasi-isomorphism) and cited def-pc-kflat-complex. (3) Step 5: added that 'P⊗- preserves finite limits' (flat-coproduct node) and 'preserves short exact sequences' (lem-sfb) agree for a right-exact additive tensor. I recomputed proof_deps, found no cycle, and left the statement unchanged. Corrected file: fixes/dag/nodes/sec-trace-formula/lem-trf-derived-colimit-change-rings.json; details in review.md.; 1 file(s) fixed by the reviewer"
  }
 }

@@ -1,0 +1,97 @@
+{
+ "id": "lem-trf-degree-weighted-irreducible-components",
+ "kind": "statement",
+ "title": "Degree as a multiplicity-weighted sum over integral components",
+ "statement": "Let $k$ be a field [def-weil-field], let $X$ be proper over $k$ [def-weil-proper-morphism] with topological Krull dimension at most one [def-kun-topological-krull-dimension], and let $\\mathcal N$ be an invertible $\\mathcal O_X$-module [def-sc-invertible-module]. Let $C_1,\\ldots,C_t$ be the irreducible components of dimension one [def-weil-irreducible-components], each equipped with its reduced induced closed subscheme structure (on an affine open this is the quotient by the prime ideal of the component) [def-pc-reduced-scheme, def-weil-closed-immersion]. This is a finite list; each $C_i$ is an integral scheme [def-pc-integral-scheme] proper over $k$ of dimension one. Let $\\xi_i$ be its generic point, meaning $\\overline{\\{\\xi_i\\}}=C_i$, and put $m_i=\\operatorname{length}_{\\mathcal O_{X,\\xi_i}}(\\mathcal O_{X,\\xi_i})$, using the stalk [def-weil-pbc-module-stalk] and module length [def-weil-pbc-module-length]. Each $m_i$ is a finite positive integer. Write $\\mathcal N|_{C_i}=j_i^*\\mathcal N$ for pullback along the closed immersion $j_i:C_i\\to X$ [def-pc-module-pullback]. With $\\deg_k(\\mathcal P)=\\chi(Y,\\mathcal P)-\\chi(Y,\\mathcal O_Y)$ on any proper $Y/k$ [def-pc-degree-line-bundle, def-pc-euler-characteristic], one has\n$$\\deg_k(\\mathcal N)=\\sum_{i=1}^t m_i\\deg_k(\\mathcal N|_{C_i}).$$\nThe sum is zero when $t=0$, including when $X$ is empty or has dimension at most zero.",
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0AYW, lemma-degree-in-terms-of-components, rank-one specialization; multiplicity definition immediately before the lemma."
+ },
+ "stmt_deps": [
+  "def-weil-field",
+  "def-weil-proper-morphism",
+  "def-kun-topological-krull-dimension",
+  "def-sc-invertible-module",
+  "def-weil-irreducible-components",
+  "def-pc-reduced-scheme",
+  "def-weil-closed-immersion",
+  "def-pc-integral-scheme",
+  "def-weil-pbc-module-stalk",
+  "def-weil-pbc-module-length",
+  "def-pc-module-pullback",
+  "def-pc-degree-line-bundle",
+  "def-pc-euler-characteristic"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Degree of an invertible sheaf on a proper scheme of dimension at most one is the sum of the degrees on reduced irreducible components weighted by generic multiplicities",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) {U : X.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ (x f : ↑(X.presheaf.obj (Opposite.op U))),\\n      TopCat.Presheaf.restrictOpen x (X.basicOpen f) ⋯ = 0 → ∃ n, f ^ n * x = 0\", \"doc\": \"For an affine open subset $ U $ of a scheme $ X $, if a section $ x $ of the structure sheaf $ \\\\mathcal{O}_X $ over $ U $ vanishes on the basic open set $ D(f) $ defined by a section $ f \\\\in \\\\Gamma(U,\"}\n  {\"name\": \"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [CompactSpace ↥X] [QuasiSeparatedSpace ↥X] {f s : ↑(X.presheaf.obj (Opposite.op ⊤))},\\n  TopCat.Presheaf.restrictOpen f (X.basicOpen s) ⋯ = 0 → ∃ n, s ^ n * f = 0\", \"doc\": \"Let $X$ be a quasi-compact and quasi-separated scheme, and let $f$ and $s$ be global sections of the structure sheaf $\\\\mathcal{O}_X$. If the restriction of $f$ to the basic open subset $D(s)$ defined \"}\n  {\"name\": \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) {U : X.Opens},\\n  IsCompact U.carrier →\\n    ∀ (x f : ↑(X.presheaf.obj (Opposite.op U))),\\n      TopCat.Presheaf.restrictOpen x (X.basicOpen f) ⋯ = 0 → ∃ n, f ^ n * x = 0\", \"doc\": \"Let $X$ be a scheme and $U$ be a compact open subset of $X$. For any sections $f, x \\\\in \\\\mathcal{O}_X(U)$ of the structure sheaf, if $x$ vanishes on the basic open subset $D(f) \\\\subseteq U$ (the locus\"}\n  {\"name\": \"AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) (U : X.Opens),\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ (f : ↑(X.presheaf.obj (Opposite.op U))) (x : ↑(X.presheaf.obj (Opposite.op (X.basicOpen f)))),\\n      ∃ n y, TopCat.Presheaf.restrictOpen y (X.basicOpen f) ⋯ = TopCat.Presheaf.restrictOpen f (X.basicOpen f) ⋯ ^\", \"doc\": \"For any affine open subset $ U $ of a scheme $ X $, a section $ f $ over $ U $, and a section $ x $ over the basic open set $ D(f) $ defined by $ f $, there exists a natural number $ n $ and a section\"}\n  {\"name\": \"AlgebraicGeometry.exists_of_res_zero_of_qcqs\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {U : TopologicalSpace.Opens ↥X},\\n  IsCompact U.carrier →\\n    IsQuasiSeparated U.carrier →\\n      ∀ {f s : ↑(X.presheaf.obj (Opposite.op U))},\\n        TopCat.Presheaf.restrictOpen f (X.basicOpen s) ⋯ = 0 → ∃ n, s ^ n * f = 0\", \"doc\": \"Let $ X $ be a scheme and $ U $ an open subset of $ X $ that is both quasi-compact and quasi-separated. Suppose $ f $ and $ s $ are sections of the structure sheaf $ \\\\mathcal{O}_X $ over $ U $, and th\"}\n  {\"name\": \"AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) (U : X.Opens),\\n  IsCompact U.carrier →\\n    IsQuasiSeparated U.carrier →\\n      ∀ (f : ↑(X.presheaf.obj (Opposite.op U))) (x : ↑(X.presheaf.obj (Opposite.op (X.basicOpen f)))),\\n        ∃ n y,\\n          TopCat.Presheaf.restrictOpen y (X.basicOpen f) ⋯ = TopCat.Presheaf.\", \"doc\": \"For a scheme $X$, an open subset $U \\\\subseteq X$ that is both compact and quasi-separated, a section $f$ of the structure sheaf $\\\\mathcal{O}_X$ over $U$, and a section $x$ of $\\\\mathcal{O}_X$ over the \"}\n  {\"name\": \"AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [CompactSpace ↥X] [QuasiSeparatedSpace ↥X] {f g s : ↑(X.presheaf.obj (Opposite.op ⊤))},\\n  TopCat.Presheaf.restrictOpen f (X.basicOpen s) ⋯ = TopCat.Presheaf.restrictOpen g (X.basicOpen s) ⋯ →\\n    ∃ n, s ^ n * f = s ^ n * g\", \"doc\": \"For a compact and quasi-separated scheme $X$, given global sections $f, g, s$ of the structure sheaf $\\\\mathcal{O}_X$, if the restrictions of $f$ and $g$ to the basic open set $D(s)$ (where $s$ is a un\"}\n  {\"name\": \"AlgebraicGeometry.isIntegral_of_irreducibleSpace_of_isReduced\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsReduced X] [H : IrreducibleSpace ↥X],\\n  AlgebraicGeometry.IsIntegral X\", \"doc\": \"If a scheme $X$ is irreducible as a topological space and has no nonzero nilpotent elements in its structure sheaf (i.e., is reduced), then $X$ is an integral scheme.\"}\nRead the returned statements: none gives the scheme-theoretic Euler-characteristic formula or a one-line specialization. ",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Euler characteristic degree of a line bundle is the sum of generic lengths times degrees on irreducible components",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Finsupp.degree_eq_sum\", \"module\": \"Mathlib.Data.Finsupp.Weight\", \"type\": \"[Fintype σ] (f : σ →₀ R) : f.degree = ∑ i, f i\", \"doc\": \"For a finite type $\\\\sigma$ and a finite support function $f : \\\\sigma \\\\to_0 R$, the degree of $f$ is equal to the sum of $f(i)$ over all elements $i \\\\in \\\\sigma$, i.e., $\\\\deg(f) = \\\\sum_{i \\\\in \\\\sigma} f(\"}\n  {\"name\": \"IncidenceAlgebra.eulerChar_prod\", \"module\": \"Mathlib.Combinatorics.Enumerative.IncidenceAlgebra\", \"type\": \"[BoundedOrder α] [BoundedOrder β] : eulerChar 𝕜 (α × β) = eulerChar 𝕜 α * eulerChar 𝕜 β\", \"doc\": \"For bounded posets $\\\\alpha$ and $\\\\beta$ with a field $\\\\mathbb{K}$, the Euler characteristic of their product poset $\\\\alpha \\\\times \\\\beta$ in the incidence algebra equals the product of their individual\"}\n  {\"name\": \"IncidenceAlgebra.eulerChar\", \"module\": \"Mathlib.Combinatorics.Enumerative.IncidenceAlgebra\", \"type\": \"[BoundedOrder α] : 𝕜\", \"doc\": \"For a bounded poset $\\\\alpha$ with a field $\\\\mathbb{K}$, the Euler characteristic is defined as the value of the Möbius function $\\\\mu$ evaluated at the interval $[\\\\bot, \\\\top]$, where $\\\\bot$ and $\\\\top$ \"}\n  {\"name\": \"RatFunc.intDegree_mul\", \"module\": \"Mathlib.FieldTheory.RatFunc.Degree\", \"type\": \"{x y : RatFunc K} (hx : x ≠ 0) (hy : y ≠ 0) : intDegree (x * y) = intDegree x + intDegree y\", \"doc\": \"For any non-zero rational functions $x$ and $y$ over a commutative ring $K$, the integer degree of their product satisfies $\\\\deg_{\\\\mathbb{Z}}(x \\\\cdot y) = \\\\deg_{\\\\mathbb{Z}}(x) + \\\\deg_{\\\\mathbb{Z}}(y)$,\"}\n  {\"name\": \"LinearMap.charpoly_natDegree\", \"module\": \"Mathlib.LinearAlgebra.Charpoly.Basic\", \"type\": \"[Nontrivial R] [StrongRankCondition R] : natDegree (charpoly f) = finrank R M\", \"doc\": \"Under the assumptions that $ R $ is a nontrivial ring satisfying the strong rank condition, the natural degree of the characteristic polynomial of a linear map $ f $ on a finite-dimensional module $ M\"}\n  {\"name\": \"IsLocalFrameOn.coeff_sum_eq\", \"module\": \"Mathlib.Geometry.Manifold.VectorBundle.LocalFrame\", \"type\": \"[Fintype ι] (hs : IsLocalFrameOn I F n s u) (t : Π x : M, V x) (hx : x ∈ u) : t x = ∑ i, (hs.coeff i t x) • (s i x)\", \"doc\": \"For any local frame $ s $ of a vector bundle over a set $ u $ in the base space, modeled on a nontrivially normed field $ \\\\mathbb{K} $, and for any section $ t $ of the bundle, the evaluation of $ t $\"}\n  {\"name\": \"HomogeneousLocalization.NumDenSameDeg.deg_mul\", \"module\": \"Mathlib.RingTheory.GradedAlgebra.HomogeneousLocalization\", \"type\": \"(c1 c2 : NumDenSameDeg 𝒜 x) : (c1 * c2).deg = c1.deg + c2.deg\", \"doc\": \"For any two elements $c_1$ and $c_2$ in the homogeneous localization with same-degree numerators and denominators, the degree of their product $c_1 \\\\cdot c_2$ equals the sum of their individual degree\"}\n  {\"name\": \"HomogeneousLocalization.NumDenSameDeg.deg_add\", \"module\": \"Mathlib.RingTheory.GradedAlgebra.HomogeneousLocalization\", \"type\": \"(c1 c2 : NumDenSameDeg 𝒜 x) : (c1 + c2).deg = c1.deg + c2.deg\", \"doc\": \"For any two elements $ c_1 $ and $ c_2 $ in the homogeneous localization structure with numerators and denominators of the same degree, the degree of their sum $ c_1 + c_2 $ is equal to the sum of the\"}\nRead the returned statements: none gives the scheme-theoretic Euler-characteristic formula or a one-line specialization. ",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"degree\", \"component\"",
+   "results": "[loogle] OK 0 hit(s)\nRead the returned statements: none gives the scheme-theoretic Euler-characteristic formula or a one-line specialization. ",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "degree.*component|component.*degree|degree.*multiplicit|multiplicit.*degree",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean\", \"line\": \"73\", \"text\": \"* `ProjIsoSpecTopComponent.ToSpec.preimage_eq`: for any `a: A`, if `a/f^m` has degree zero,\"}\nRead the returned statements: none gives the scheme-theoretic Euler-characteristic formula or a one-line specialization. Grep directory: Mathlib/AlgebraicGeometry.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a nonreduced proper curve the Euler characteristic difference chi(L)-chi(O) is a sum over integral components with coefficients length of the local rings at generic points",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"WeierstrassCurve.valuation_Δ_aux_eq_of_isIntegral\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] [inst_1 : IsDomain R] [inst_2 : IsDiscreteValuationRing R] {K : Type u_2}\\n  [inst_3 : Field K] [inst_4 : Algebra R K] [inst_5 : IsFractionRing R K] (W : WeierstrassCurve K)\\n  [hW : WeierstrassCurve.IsIntegral R W],\\n  ↑(WeierstrassCurve.valuation_Δ_aux R W) =\\n    \", \"doc\": \"For a discrete valuation ring $ R $ with fraction field $ K $, and an integral Weierstrass curve $ W $ over $ K $, the valuation of the discriminant $ \\\\Delta(W) $ computed via the auxiliary valuation \"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_mul_mk_XYIdeal'\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {F : Type u} [inst : Field F] {W : WeierstrassCurve.Affine F} [inst_1 : DecidableEq F] {x₁ x₂ y₁ y₂ : F}\\n  (h₁ : W.Nonsingular x₁ y₁) (h₂ : W.Nonsingular x₂ y₂) (hxy : ¬(x₁ = x₂ ∧ y₁ = W.negY x₂ y₂)),\\n  ClassGroup.mk (WeierstrassCurve.Affine.CoordinateRing.XYIdeal' h₁) *\\n      ClassGroup.mk (Weier\", \"doc\": \"For an affine Weierstrass curve $ W $ over a field $ F $, if $ (x_1, y_1) $ and $ (x_2, y_2) $ are nonsingular points on $ W $ that are not inverses (i.e., $ x_1 \\neq x_2 $ or $ y_1 \\neq -y_2 - a_1 x_2 \"}\n  {\"name\": \"WeierstrassCurve.valuation_Δ_aux\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Reduction\", \"type\": \"(R : Type u_1) →\\n  [inst : CommRing R] →\\n    [inst_1 : IsDomain R] →\\n      [IsDiscreteValuationRing R] →\\n        {K : Type u_2} →\\n          [inst_3 : Field K] → [inst_4 : Algebra R K] → [IsFractionRing R K] → WeierstrassCurve K → { v // v ≤ 1 }\", \"doc\": \"For a discrete valuation ring $ R $ with fraction field $ K $, and an integral Weierstrass curve $ W $ over $ K $, the valuation at the unique maximal ideal of $ R $ of the discriminant $ \\\\Delta(W) $ \"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.degree_norm_ne_one\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {R : Type r} [inst : CommRing R] {W' : WeierstrassCurve.Affine R} [IsDomain R] (x : W'.CoordinateRing),\\n  ((Algebra.norm (Polynomial R)) x).degree ≠ 1\", \"doc\": \"For any element $ x $ in the coordinate ring of an affine Weierstrass curve over a domain $ R $, the degree of the norm of $ x $ as an element of $ R[X] $ is not equal to 1. This norm arises from the \"}\n  {\"name\": \"Ideal.sum_ramification_inertia\", \"module\": \"Mathlib/NumberTheory/RamificationInertia/Basic\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (S : Type v) [inst_1 : CommRing S] [inst_2 : IsDedekindDomain S]\\n  [inst_3 : Algebra R S] (K : Type u_1) (L : Type u_2) [inst_4 : Field K] [inst_5 : Field L] [IsDedekindDomain R]\\n  [inst_7 : Algebra R K] [IsFractionRing R K] [inst_9 : Algebra S L] [IsFractionRing S\", \"doc\": \"For a maximal ideal $\\\\mathfrak{p}$ in a commutative ring $R$, with $B$ a Dedekind domain over $R$, and $\\\\mathfrak{P}_1, \\\\ldots, \\\\mathfrak{P}_n$ the prime ideals in $B$ lying over $\\\\mathfrak{p}$, the s\"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.degree_norm_smul_basis\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {R : Type r} [inst : CommRing R] {W' : WeierstrassCurve.Affine R} [IsDomain R] (p q : Polynomial R),\\n  ((Algebra.norm (Polynomial R)) (p • 1 + q • (WeierstrassCurve.Affine.CoordinateRing.mk W') Polynomial.X)).degree =\\n    max (2 • p.degree) (2 • q.degree + 3)\", \"doc\": \"For an integral domain $ R $, and polynomials $ p, q \\\\in R[X] $, the degree of the norm of the element $ p \\\\cdot 1 + q \\\\cdot Y $ in the coordinate ring of an affine Weierstrass curve over $ R $ is equ\"}\n  {\"name\": \"WeierstrassCurve.Affine.CoordinateRing.natDegree_norm_ne_one\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"∀ {R : Type r} [inst : CommRing R] {W' : WeierstrassCurve.Affine R} [IsDomain R] (x : W'.CoordinateRing),\\n  ((Algebra.norm (Polynomial R)) x).natDegree ≠ 1\", \"doc\": \"For any element $x$ in the coordinate ring of an affine Weierstrass curve over a domain $R$, the natural degree of the norm of $x$ in the polynomial ring $R[X]$ is not equal to 1.\"}\n  {\"name\": \"FunctionField.classNumber\", \"module\": \"Mathlib/NumberTheory/ClassNumber/FunctionField\", \"type\": \"(Fq : Type u_1) →\\n  (F : Type u_2) →\\n    [inst : Field Fq] →\\n      [Fintype Fq] →\\n        [inst_2 : Field F] →\\n          [inst_3 : Algebra (Polynomial Fq) F] →\\n            [inst_4 : Algebra (RatFunc Fq) F] →\\n              [IsScalarTower (Polynomial Fq) (RatFunc Fq) F] →\\n                [FunctionFiel\", \"doc\": \"The class number is defined as the cardinality of the class group of the ring of integers $\\\\mathcal{O}_F$ (the integral closure of $\\\\mathbb{F}_q[X]$) in a function field $F$ over the finite field $\\\\ma\"}\nRead the returned statements: none gives the scheme-theoretic Euler-characteristic formula or a one-line specialization. ",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-curve-degree-tensor-additive",
+  "date": "2026-10-18",
+  "group": "Q14"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "The fibrewise ampleness-to-projectivity argument: positivity on normalized geometric-fibre components is converted to relative ampleness and then to a projective-bundle embedding. Supporting input: the proper integral curve degree criterion (0B5X). In the 0B5X proof this is the tensor-product degree formula used to pass from the degree of a positive tensor power to the degree of the line bundle and to obtain linear Euler-characteristic growth. Supporting input: the multiplicity-weighted reduction to reduced integral components in the proof of Stacks 0AYX (via 0AYW).",
+   "via": [
+    "lem-trf-curve-degree-tensor-additive",
+    "lem-trf-proper-integral-curve-ample-degree",
+    "lem-trf-fibre-degree-ample-criterion",
+    "lem-trf-proper-fibrewise-ample-projective",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}
