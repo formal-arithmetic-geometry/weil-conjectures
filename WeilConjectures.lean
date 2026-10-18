@@ -10387,6 +10387,8 @@ public import WeilConjectures.RingTheory.ProEtale.ClosedLiftUnits
 public import WeilConjectures.RingTheory.ProEtale.Contraction.Covers
 public import WeilConjectures.RingTheory.ProEtale.Etale
 public import WeilConjectures.RingTheory.ProEtale.FaithfullyFlat
+public import WeilConjectures.RingTheory.ProEtale.FiniteWContractible
+public import WeilConjectures.RingTheory.ProEtale.FiniteWStrictlyLocal
 public import WeilConjectures.RingTheory.ProEtale.HenselianLocalRing
 public import WeilConjectures.RingTheory.ProEtale.IdentifiesLocalRings
 public import WeilConjectures.RingTheory.ProEtale.Ind
@@ -11353,6 +11355,7 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerS
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Detection
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.DetectionAb
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.FactorGerm
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Finite
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.FlatModuleCat
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Germ
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.GermComp
@@ -11625,6 +11628,7 @@ public import WeilConjectures.WeilSheaf.BoundaryStalkSpecialization
 public import WeilConjectures.WeilSheaf.BoundaryStrictHenselization
 public import WeilConjectures.WeilSheaf.Category
 public import WeilConjectures.WeilSheaf.CohomologicalRange
+public import WeilConjectures.WeilSheaf.CohomologicalRangeAffine
 public import WeilConjectures.WeilSheaf.Cohomology
 public import WeilConjectures.WeilSheaf.CohomologyDegreeZero
 public import WeilConjectures.WeilSheaf.CohomologyExact
@@ -11655,6 +11659,7 @@ public import WeilConjectures.WeilSheaf.FiniteEtale
 public import WeilConjectures.WeilSheaf.FiniteEtaleLisse
 public import WeilConjectures.WeilSheaf.FiniteLength
 public import WeilConjectures.WeilSheaf.FiniteLeray
+public import WeilConjectures.WeilSheaf.FiniteLowerStar
 public import WeilConjectures.WeilSheaf.FinitePointCohomology
 public import WeilConjectures.WeilSheaf.Finiteness
 public import WeilConjectures.WeilSheaf.Fourier
