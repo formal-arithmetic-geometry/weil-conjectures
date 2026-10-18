@@ -39,6 +39,13 @@ import Sheaf.Algebra.Category.ModuleCat.Sheaf.LocalizedSiteTensorRestriction
 import WeilConjectures.Mathlib.Topology.NoetherianSpace
 import Sheaf.Paper.IntegralStratifiedPerfectCharacterization
 import Sheaf.Paper.KoszulReconstruction
+import Sheaf.AlgebraicGeometry.ProEtaleIntegralCoefficientLimit
+import Sheaf.CategoryTheory.LocalizedModuleExactForSystems
+import Sheaf.Paper.IntegralTensorProduct
+import Sheaf.Paper.IntrinsicQbarCategory
+import Sheaf.Paper.LisseCompletedSystemComparison
+import Sheaf.Paper.LisseIntegralSmallCoefficients
+import Sheaf.Paper.SfCommonStageWeilCohomology
 
 /-! # Cohomology and coefficient duals of adic lisse sheaves
 

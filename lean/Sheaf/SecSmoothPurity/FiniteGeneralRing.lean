@@ -27,6 +27,11 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstruc
 import Sheaf.AlgebraicGeometry.SmoothTensorDuality
 import Sheaf.Paper.FiniteSmoothGammaNormalization
 import Sheaf.Paper.NoetherianEtaleSectionSpecialization
+import Sheaf.AlgebraicGeometry.FiniteRingSiteTensorTranspose
+import Sheaf.Paper.CohomologicalSmoothnessTheorem
+import Sheaf.Paper.FiniteComparisonLocalizing
+import Sheaf.Paper.PurityDncFamilyIntrinsic
+import Sheaf.Paper.PurityDncInvariance
 
 /-! # Smooth purity over an arbitrary finite coefficient ring
 

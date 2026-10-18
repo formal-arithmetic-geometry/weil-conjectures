@@ -62,6 +62,16 @@ import Sheaf.AlgebraicGeometry.CanonicalCompactSupportSiteComparison
 import Sheaf.AlgebraicGeometry.ProEtaleSiteComparison
 import Sheaf.AlgebraicGeometry.ProEtaleIntrinsicExtensionByZeroAdjunction
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.OpenLowerShriekProj
+import Sheaf.AlgebraicGeometry.FixedEtaleOriginWitness
+import Sheaf.AlgebraicGeometry.OpenComparisonTensorNormalization
+import Sheaf.AlgebraicGeometry.OpenComparisonUnitNormalization
+import Sheaf.AlgebraicGeometry.ProEtaleExtensionZero
+import Sheaf.CategoryTheory.LocalizedModuleExactForSystems
+import Sheaf.Paper.ExchangeProjectionSuppliedDomains
+import Sheaf.Paper.FiniteCoefficientFlatModel
+import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
+import Sheaf.SixFunctors.OpenTensorNormalization
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 
 /-!
 # Finite-coefficient compact-support projection formula

@@ -14,6 +14,16 @@ public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.ConstantCover
 public import Sheaf.AlgebraicGeometry.FundamentalGroup.FiniteEtaleWeilTransport
 public import Sheaf.AlgebraicGeometry.FundamentalGroup.FiniteEtaleFieldLimitDescent
 import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Functoriality
+import Sheaf.AlgebraicGeometry.FundamentalGroup.AlgebraicFieldLimit
+import Sheaf.AlgebraicGeometry.FundamentalGroup.FLCFiber
+import Sheaf.AlgebraicGeometry.FundamentalGroup.FiberEquivalence
+import Sheaf.CategoryTheory.Galois.AutProfinite
+import Sheaf.CategoryTheory.Galois.GaloisTransitive
+import Sheaf.FieldTheory.EtaleFieldGaloisClassification
+import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
+import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Basic
+import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Connected
+import WeilConjectures.Mathlib.RingTheory.Etale.Field
 
 /-!
 # Arithmetic lifts and semilinear paths of finite fibre functors

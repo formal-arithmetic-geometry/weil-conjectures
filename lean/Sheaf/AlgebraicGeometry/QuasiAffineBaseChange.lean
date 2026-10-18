@@ -8,6 +8,7 @@ module
 public import WeilConjectures.Mathlib.AlgebraicGeometry.QuasiAffine
 public import Mathlib.AlgebraicGeometry.Pullbacks
 import Sheaf.AlgebraicGeometry.RelativeSpecBaseChange
+import Sheaf.AlgebraicGeometry.QuasiAffineRelativeSpecEmbedding
 
 /-!
 # Base change of quasi-affine morphisms

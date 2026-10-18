@@ -44,6 +44,10 @@ public import Mathlib.Topology.Sober
 public import Mathlib.Topology.Defs.Filter
 
 public import Sheaf.RingTheory.ExcellentRing
+import Sheaf.AlgebraicGeometry.ClosedDominantDimension
+import Sheaf.AlgebraicGeometry.ExcellentBaseMarkedSemistableCurve
+import Sheaf.AlgebraicGeometry.GeometricallyIntegralCurveFactorization
+import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
 
 /-!
 # de Jong geometrically irreducible alteration tower

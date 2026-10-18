@@ -4,6 +4,18 @@ public import Mathlib.Algebra.MvPolynomial.Eval
 public import Mathlib.AlgebraicGeometry.Fiber
 public import Mathlib.RingTheory.FiniteType
 public import Mathlib.Topology.KrullDimension
+import Sheaf.AlgebraicGeometry.AffineLimitFibreDimensionBound
+import Sheaf.AlgebraicGeometry.CompositeFibreDimensionInequality
+import Sheaf.AlgebraicGeometry.FibreDimensionAfterBaseChange
+import Sheaf.AlgebraicGeometry.FiniteTypeFibreImageDimensionBounds
+import Sheaf.AlgebraicGeometry.FlatCompositeFibreDimensionAtPoint
+import Sheaf.AlgebraicGeometry.GenericFlatFinitePresentation
+import Sheaf.AlgebraicGeometry.GenericOpenFibreDensity
+import Sheaf.AlgebraicGeometry.NowhereDenseDimensionDrop
+import Sheaf.RingTheory.LimitModuleFinitePresentation
+import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+import WeilConjectures.Mathlib.Topology.KrullDimension
+import WeilConjectures.Topology.DimensionSupremumLocalDimensions
 
 /-!
 # High-power perturbations preserve a fibre-dimension bound

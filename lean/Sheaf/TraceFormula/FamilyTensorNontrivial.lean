@@ -7,6 +7,7 @@ module
 
 public import Mathlib.Algebra.Category.CommAlgCat.Basic
 public import Mathlib.CategoryTheory.Limits.Shapes.Multiequalizer
+import Sheaf.FieldTheory.FiniteFamilyTensorNontrivial
 
 /-!
 # Nontriviality of a small family tensor coproduct

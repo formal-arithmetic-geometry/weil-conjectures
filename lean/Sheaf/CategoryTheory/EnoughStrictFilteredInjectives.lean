@@ -5,6 +5,8 @@ module
 
 public import Sheaf.CategoryTheory.Filtration
 public import Mathlib.CategoryTheory.Preadditive.Injective.Basic
+import Sheaf.CategoryTheory.InjectiveGradedFiltrationSplits
+import WeilConjectures.CategoryTheory.Abelian.Filtration
 
 /-!
 # Enough injectives for strict finite filtered objects

@@ -12,6 +12,10 @@ public import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 import Sheaf.AlgebraicGeometry.ProEtaleToposFunctorialityInverseImage
 import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
+import Sheaf.Paper.CartesianCoefficients
+import Sheaf.Paper.CondensedConstantConstructibility
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs
 
 /-!
 # Pullback of constructible modules with finite constant scalar models

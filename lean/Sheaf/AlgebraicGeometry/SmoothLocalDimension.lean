@@ -17,6 +17,7 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
 import Sheaf.AlgebraicGeometry.SmoothDifferentialsFreeRankFibreDimension
 
 import Mathlib.AlgebraicGeometry.AffineScheme
+import Sheaf.AlgebraicGeometry.FlatConstantRelativeDimension
 /-!
 # Local topological dimension of a smooth morphism
 

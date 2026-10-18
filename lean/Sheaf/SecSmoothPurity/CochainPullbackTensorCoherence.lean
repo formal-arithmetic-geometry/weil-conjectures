@@ -14,6 +14,8 @@ import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorBilinearUniversal
 import Sheaf.CategoryTheory.ModulePullbackPushforwardAdjunction
 import Sheaf.CategoryTheory.ModulePullbackTensorIso
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorBilinearUniversal
 
 /-! # Signed tensor comparison and coherence on cochain sheaves
 

@@ -15,6 +15,9 @@ import Mathlib.CategoryTheory.Sites.Limits
 import Mathlib.AlgebraicGeometry.Sites.Fpqc
 import Sheaf.RingTheory.IndPrincipalZariski
 import Sheaf.RingTheory.WeaklyEtaleField
+import Sheaf.AlgebraicGeometry.PointedEtaleStalk
+import Sheaf.AlgebraicGeometry.ProEtaleModuleStalkFunctor
+import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.WeaklyEtale
 
 /-!
 # Geometric stalks as inverse images of topos points

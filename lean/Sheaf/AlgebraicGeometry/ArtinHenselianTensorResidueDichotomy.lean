@@ -12,6 +12,11 @@ public import Sheaf.RingTheory.IndPrincipalZariski
 public import Sheaf.TraceFormula.AffineEtaleCoverComponentCriterion
 public import WeilConjectures.Mathlib.RingTheory.Henselian
 import Sheaf.RingTheory.IndEtaleStability
+import Sheaf.AlgebraicGeometry.ArtinJoinTheorem63
+import Sheaf.RingTheory.TensorComponentFromFactorComponents
+import Sheaf.TraceFormula.ComponentQuotientIndEtale
+import Sheaf.TraceFormula.IndEtaleLocalHenselianIntegral
+import WeilConjectures.RingTheory.ProEtale.IndEtale
 
 /-!
 # Artin henselian tensor residue dichotomy

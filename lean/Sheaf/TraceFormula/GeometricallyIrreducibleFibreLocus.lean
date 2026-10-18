@@ -8,6 +8,11 @@ public import Mathlib.AlgebraicGeometry.Geometrically.Irreducible
 public import Mathlib.RingTheory.FinitePresentation
 public import Mathlib.RingTheory.LocalRing.ResidueField.Fiber
 public import Mathlib.Topology.Constructible
+import Sheaf.AlgebraicGeometry.NoetherianConstructibleSubsetCriterion
+import Sheaf.AlgebraicGeometry.RadicialPreparationFibreComparison
+import Sheaf.AlgebraicGeometry.SubsetGeometricIrreducibility
+import Sheaf.TraceFormula.GeometricComponentCountGenericConstancy
+import WeilConjectures.Mathlib.FieldTheory.IsSepClosed
 
 /-!
 # Constructibility of the geometrically irreducible fibre locus

@@ -9,6 +9,8 @@ public import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimitIndependentCoef
 import Sheaf.CategoryTheory.Triangulated.DerivedLimitLevelwiseIsomorphism
 
 public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
+import Sheaf.Algebra.Homology.KFlat
+import WeilConjectures.CategoryTheory.Triangulated.DerivedLimit
 /-! # Koszul reconstruction of a derived-complete reduction tower
 
 Source: Stacks Project, algebraization.tex Tag 0A0E and sites-cohomology.tex Tag 0941

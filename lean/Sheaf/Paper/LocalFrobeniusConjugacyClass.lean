@@ -6,6 +6,13 @@ Authors: SHEAF group Q154
 module
 
 public import Sheaf.Paper.LocalFrobeniusTrace
+import Sheaf.AlgebraicGeometry.ClosedPointField
+import Sheaf.AlgebraicGeometry.FrobeniusDetailed
+import Sheaf.Paper.CoefficientCohomologyModules
+import Sheaf.Paper.DerivedPullbackTensorHom
+import Sheaf.Paper.IntegralPullbackComposition
+import Sheaf.SixFunctors.FrobeniusPointTransport
+import Sheaf.SixFunctors.FrobeniusPointTransportNatural
 
 /-! # Independence of the local Frobenius operator from the embedding
 

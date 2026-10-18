@@ -45,6 +45,7 @@ import Sheaf.CategoryTheory.RingedTowerPushforwardLimitComparison
 import Sheaf.CategoryTheory.RingedToposMorphism
 import Mathlib.Algebra.Homology.DerivedCategory.Basic
 import WeilConjectures.Algebra.Homology.TowerEvaluationKInjective
+import Sheaf.Paper.SemilinearDerivedSections
 
 /-! # Evaluation and compact support before taking inverse limits
 

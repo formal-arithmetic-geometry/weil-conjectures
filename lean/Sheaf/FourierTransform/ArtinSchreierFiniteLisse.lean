@@ -25,6 +25,8 @@ import Sheaf.RingTheory.LocalRing.ArtinSchreierKernel
 import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtaleOver
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.LocalizedSiteTensorRestriction
+import WeilConjectures.ConstructibleSheaf.Defs
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-!
 # Artin–Schreier character sheaves over finite rings

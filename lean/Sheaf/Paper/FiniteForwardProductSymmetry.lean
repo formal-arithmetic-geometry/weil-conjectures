@@ -21,6 +21,9 @@ import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Sheaf
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.TensorResolution
 import Sheaf.Paper.FiniteDirectImageComposition
 import Sheaf.Paper.IntegralFinitePullbackComposition
+import Sheaf.CategoryTheory.DerivedCategory.CompositionAdjunctionNormalization
+import Sheaf.Paper.DerivedPullbackTensorIso
+import Sheaf.SixFunctors.OpenTensorNormalization
 
 /-! # Symmetry of the concrete finite forward compact-support product
 

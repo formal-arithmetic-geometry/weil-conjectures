@@ -24,6 +24,9 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtaleOver
 import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
 import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheaf
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.HomCoverGluing
+import Sheaf.CategoryTheory.LocalizedModuleExactForSystems
+import Sheaf.CategoryTheory.RingedSiteModules
+import Sheaf.Paper.SfCommonStageWeilCohomology
 
 /-!
 # Unique gluing of derived maps locally concentrated in degree zero

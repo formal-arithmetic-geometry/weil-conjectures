@@ -13,6 +13,7 @@ public import Mathlib.Topology.JacobsonSpace
 public import WeilConjectures.ZetaSeries
 import WeilConjectures.PointCount
 import WeilConjectures.EulerProduct
+import WeilConjectures.Statement
 
 /-!
 # Rationality and the Euler product: the first Weil conjecture

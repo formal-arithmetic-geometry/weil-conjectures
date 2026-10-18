@@ -18,6 +18,11 @@ import Sheaf.AlgebraicGeometry.EtaleReducedCartierDescent
 import Mathlib.RingTheory.LocalRing.Module
 import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
 import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen
+import Sheaf.AlgebraicGeometry.LogRegularMonoidalIdealContraction
+import Sheaf.AlgebraicGeometry.LogRegularSharpChart
+import Sheaf.RingTheory.IsRegularSystemOfParameters
+import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Invertible
+import WeilConjectures.Mathlib.RingTheory.RegularLocalRing.Defs
 
 /-!
 # Free characteristic monoids and the regular normal crossings boundary

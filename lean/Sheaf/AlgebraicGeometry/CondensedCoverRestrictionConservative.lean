@@ -16,6 +16,7 @@ import Sheaf.AlgebraicGeometry.Sites.ProetaleSiteProperties
 import Mathlib.CategoryTheory.Sites.LocalProperties
 import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
 import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
 
 /-! # Conservativity of covering restrictions with condensed coefficients
 

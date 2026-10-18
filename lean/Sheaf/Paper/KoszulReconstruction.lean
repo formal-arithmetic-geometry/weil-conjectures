@@ -14,6 +14,9 @@ import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimit
 import Sheaf.Algebra.Homology.SiteDerivedTensorDescent
 
 public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
+import Sheaf.Paper.AdicCoefficientDatum
+import Sheaf.Paper.CompletedConstantSheafReduction
+import Sheaf.Paper.ConstantCompletionEquivalence
 /-! # Koszul and quotient reconstruction over completed coefficients
 
 Source: blueprint sec-proper-base-change/sk-thm-properbasechange, order 1248;

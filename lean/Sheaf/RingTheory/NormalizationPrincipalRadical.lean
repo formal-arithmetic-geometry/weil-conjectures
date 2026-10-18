@@ -14,6 +14,8 @@ public import Mathlib.RingTheory.Ideal.Operations
 
 import Mathlib.RingTheory.FiniteType
 import Mathlib.RingTheory.IntegralClosure.IsIntegralClosure.Basic
+import Sheaf.RingTheory.KrullPrincipalPrimaryDecomposition
+import Sheaf.RingTheory.NormalizationIntegralClosureKrull
 
 /-!
 # Finite prime intersections for principal radicals in a normalization

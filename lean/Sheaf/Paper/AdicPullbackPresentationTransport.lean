@@ -22,6 +22,12 @@ import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
 import WeilConjectures.CategoryTheory.ExtensionByZeroPresheaf
 
 public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
+import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
+import Sheaf.CategoryTheory.LocalizedModuleExactForSystems
+import Sheaf.Paper.AdicCoefficientDatum
+import Sheaf.Paper.LocalizeRingedSiteMorphismGeneral
+import Sheaf.Paper.PbcQbarCompletedPullback
 /-!
 # Counit-normalized transport of adic pullback presentations
 

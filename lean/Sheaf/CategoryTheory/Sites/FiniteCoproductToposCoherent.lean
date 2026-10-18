@@ -11,6 +11,7 @@ public import Mathlib.CategoryTheory.Sigma.Basic
 public import Mathlib.CategoryTheory.Pi.Basic
 public import Mathlib.CategoryTheory.Limits.Shapes.Products
 import Mathlib.CategoryTheory.Sites.LeftExact
+import Sheaf.CategoryTheory.Sites.GeometricMorphism
 
 /-!
 # Finite coproducts of coherent topoi

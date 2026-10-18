@@ -21,6 +21,7 @@ import Sheaf.AlgebraicGeometry.RegularNormalDecomposition
 import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Reduced
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.SmoothFiber
 import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen
+import WeilConjectures.Mathlib.AlgebraicGeometry.Normalization
 
 /-!
 # Normalized blowups and smooth comparison

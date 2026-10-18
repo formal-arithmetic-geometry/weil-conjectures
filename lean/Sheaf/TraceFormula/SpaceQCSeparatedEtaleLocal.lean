@@ -7,6 +7,9 @@ public import Sheaf.AlgebraicGeometry.AlgebraicSpace
 public import Mathlib.AlgebraicGeometry.AffineScheme
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.Topology.Compactness.Compact
+import Sheaf.AlgebraicGeometry.AlgebraicSpaceFibreProductsEtaleCovers
+import Sheaf.AlgebraicGeometry.FpqcClosedImmersionDescent
+import Sheaf.AlgebraicGeometry.FpqcFinerThanEtale
 
 /-!
 # Étale locality of quasi-compact separated algebraic-space morphisms

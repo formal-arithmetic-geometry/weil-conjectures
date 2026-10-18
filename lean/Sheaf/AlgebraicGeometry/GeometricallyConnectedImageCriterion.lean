@@ -4,6 +4,10 @@ module
 public import Mathlib.AlgebraicGeometry.Geometrically.Connected
 public import Mathlib.AlgebraicGeometry.Geometrically.Integral
 public import Mathlib.AlgebraicGeometry.Over
+import Sheaf.AlgebraicGeometry.GaloisInvariantClosedSubsetDescends
+import Sheaf.AlgebraicGeometry.GeometricallyConnectedFiniteSeparableTest
+import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
+import WeilConjectures.FieldTheory.FiniteGaloisReceivingSeparableExtensions
 
 /-!
 # Geometric connectedness of a connected scheme receiving a geometrically connected map

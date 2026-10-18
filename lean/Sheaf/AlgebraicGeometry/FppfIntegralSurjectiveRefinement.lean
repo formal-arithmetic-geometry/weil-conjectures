@@ -9,6 +9,11 @@ public import Mathlib.AlgebraicGeometry.Sites.Fpqc
 public import Mathlib.AlgebraicGeometry.Morphisms.Integral
 public import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
 public import Mathlib.AlgebraicGeometry.OpenImmersion
+import Sheaf.AlgebraicGeometry.AffineInfiniteProductExistence
+import Sheaf.AlgebraicGeometry.FppfLocalFiniteFreeRefinement
+import Sheaf.AlgebraicGeometry.InfiniteProductIntegral
+import Sheaf.AlgebraicGeometry.InfiniteProductSurjective
+import Sheaf.AlgebraicGeometry.IntegralSurjectiveOpenExtension
 
 /-!
 # Integral surjective refinements of fppf coverings

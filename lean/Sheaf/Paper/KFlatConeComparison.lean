@@ -15,6 +15,7 @@ import WeilConjectures.FromJoel.Algebra.Homology.BifunctorMappingCone
 import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
 
 public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
+import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
 /-!
 # The two-resolution tensor augmentation square
 

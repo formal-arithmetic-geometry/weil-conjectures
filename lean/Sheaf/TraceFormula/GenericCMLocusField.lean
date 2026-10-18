@@ -7,6 +7,8 @@ public import Mathlib.AlgebraicGeometry.Scheme
 public import Sheaf.RingTheory.Depth
 
 import Sheaf.AlgebraicGeometry.FibreCohenMacaulayLocus
+import Sheaf.RingTheory.DepthLeDimAssociatedPrime
+import Sheaf.TraceFormula.MinimalPrimesDenseSpectrum
 
 /-! # Dense Cohen--Macaulay locus for a finite type algebra over a field
 

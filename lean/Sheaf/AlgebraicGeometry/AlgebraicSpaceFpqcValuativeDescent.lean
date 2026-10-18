@@ -17,6 +17,8 @@ import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
 import Mathlib.RingTheory.TensorProduct.Maps
 import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 import Mathlib.AlgebraicGeometry.Morphisms.Flat
+import Sheaf.AlgebraicGeometry.AlgebraicSpaceFpqcSheaf
+import Sheaf.AlgebraicGeometry.FlatValuationLifting
 
 /-!
 # Fpqc descent of separatedness and full valuative lifting for algebraic spaces

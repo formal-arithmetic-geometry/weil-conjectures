@@ -18,6 +18,11 @@ import Sheaf.Algebra.Homology.SiteDerivedTensorDescent
 import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
 import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
 import Mathlib.Algebra.Homology.BifunctorShift
+import Sheaf.Algebra.Homology.KFlat
+import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
+import Sheaf.CategoryTheory.LocalizedModuleExactForSystems
+import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
+import Sheaf.Paper.StrictPerfectCoefficientPackageOfUniverses
 
 /-!
 # The open-immersion piece of the projection formula

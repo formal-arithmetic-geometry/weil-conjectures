@@ -11,6 +11,9 @@ import Sheaf.Paper.AdicCoefficientDatum
 import Sheaf.Paper.FourCorners
 import Sheaf.AlgebraicGeometry.ProEtaleAmbientRingedExchange
 import Sheaf.Paper.ProjectionFormulaBaseChangeNaturality
+import Sheaf.Paper.CondensedAmbientExchange
+import Sheaf.Paper.FiniteLevelRectangle
+import Sheaf.Paper.PerfectProjectionFormula
 
 /-!
 # The specified four corners and arrows in the derived category of strict towers

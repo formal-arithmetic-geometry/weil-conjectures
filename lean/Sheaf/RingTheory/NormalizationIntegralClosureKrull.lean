@@ -5,6 +5,16 @@ public import Mathlib.RingTheory.IntegralClosure.Algebra.Basic
 public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Mathlib.RingTheory.Localization.FractionRing
+import Sheaf.RingTheory.InjectivePiLocalizationAssociatedPrimes
+import Sheaf.RingTheory.IntegralClosureFiniteNormalProduct
+import Sheaf.RingTheory.JapaneseDomain
+import Sheaf.RingTheory.KrullAkizukiNoetherian
+import Sheaf.RingTheory.NagataOfCompleteLocal
+import Sheaf.RingTheory.NormalDomainPrincipalQuotientAssociatedHeight
+import Sheaf.RingTheory.NormalizationPrincipalHeightOneRefinement
+import Sheaf.TraceFormula.NormalizationFiniteLocalModel
+import Sheaf.TraceFormula.NormalizationFinitePrimeFibres
+import WeilConjectures.AlgebraicGeometry.Regular
 
 /-!
 # Mori–Nagata normalization is Krull

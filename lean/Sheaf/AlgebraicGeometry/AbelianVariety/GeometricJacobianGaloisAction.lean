@@ -9,6 +9,8 @@ public import WeilConjectures.AlgebraicGeometry.AbelianVariety.Jacobian
 public import WeilConjectures.AlgebraicGeometry.AbelianVariety.TateModule
 import WeilConjectures.Mathlib.CategoryTheory.Yoneda
 import Mathlib.CategoryTheory.Functor.FullyFaithful
+import WeilConjectures.AlgebraicGeometry.Picard.Jacobian
+import WeilConjectures.GroupTheory.TateModule
 
 /-!
 # The canonical semilinear action on a geometric Jacobian

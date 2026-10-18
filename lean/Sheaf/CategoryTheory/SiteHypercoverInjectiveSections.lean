@@ -12,6 +12,7 @@ public import Mathlib.CategoryTheory.Limits.Shapes.FiniteLimits
 public import Mathlib.Algebra.Exact.Basic
 import Mathlib.CategoryTheory.Generator.Sheaf
 import Mathlib.Algebra.Category.Grp.ForgetCorepresentable
+import Sheaf.CategoryTheory.SiteHypercoverFreeResolution
 
 /-!
 # Injective abelian sections on a hypercover of an arbitrary site

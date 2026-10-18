@@ -10,6 +10,8 @@ public import Mathlib.CategoryTheory.Sites.Limits
 import Sheaf.AlgebraicGeometry.FppfAffineRefinement
 import Sheaf.CategoryTheory.SetSheafCoverDescent
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
+import Sheaf.CategoryTheory.SiteCoveringAxioms
+import WeilConjectures.CategoryTheory.Comma.Over.DescentDatum
 
 /-! # Locally representable fppf sheaves and scheme descent data
 

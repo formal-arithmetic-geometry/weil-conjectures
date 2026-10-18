@@ -13,6 +13,11 @@ public import Sheaf.AlgebraicGeometry.ProEtaleConstantRingPullbackComparison
 public import Sheaf.AlgebraicGeometry.OpenImmersionSquare
 public import Sheaf.AlgebraicGeometry.ProEtaleRingSheafChangeAdjunction
 public import Sheaf.AlgebraicGeometry.FiniteOpenBaseChangeNormalized
+import Sheaf.Algebra.Homology.SheafRingDerivedCoefficientAdjunction
+import Sheaf.AlgebraicGeometry.FiniteOpenExchangeScalars
+import Sheaf.AlgebraicGeometry.ProEtaleDerivedExtensionZeroBaseChange
+import Sheaf.AlgebraicGeometry.ProEtaleExtensionZero
+import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
 
 /-! Scalar extension respects the open base-change comparison.
 Source: Stacks Project, Tag 03S6, label `lemma-shriek-base-change`, together with

@@ -6,6 +6,8 @@ public import Mathlib.RingTheory.IntegralClosure.Algebra.Basic
 public import Mathlib.RingTheory.Localization.FractionRing
 public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.Topology.NoetherianSpace
+import Sheaf.RingTheory.NormalizationPrincipalRadical
+import Sheaf.TraceFormula.AlmostFiniteResidueFieldDegree
 
 /-!
 # Noetherian spectrum of a finite fraction-field integral closure

@@ -19,6 +19,7 @@ import Sheaf.RepresentationTheory.ContinuousCochainsDeltaFunctor
 import Sheaf.RepresentationTheory.CoinducedContinuousAcyclic
 import Sheaf.RepresentationTheory.ContinuousCochainsShortExact
 import Mathlib.Algebra.Homology.DerivedCategory.Basic
+import WeilConjectures.CategoryTheory.EffaceableDeltaFunctorUniversal
 
 /-!
 # Two-term continuous cohomology of the additive l-adic integers

@@ -10,6 +10,7 @@ public import WeilConjectures.CategoryTheory.ModuleObjects.Abelian
 import Mathlib.CategoryTheory.Sites.Limits
 import Mathlib.CategoryTheory.Sites.LocallyBijective
 import WeilConjectures.AlgebraicGeometry.SiteSheafificationSectionsLocal
+import Sheaf.Paper.CompletedCondensedCoefficients
 
 /-!
 # Reduction of pulled-back condensed ell-adic integers

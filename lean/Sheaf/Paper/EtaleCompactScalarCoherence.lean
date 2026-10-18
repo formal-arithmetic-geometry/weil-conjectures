@@ -40,6 +40,7 @@ import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
 import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 import Mathlib.AlgebraicGeometry.Noetherian
 import Mathlib.CategoryTheory.Adjunction.Mates
+import WeilConjectures.SixFunctors.Etale.Derived.OpenImmersionLowerShriekProjection
 
 /-!
 # Scalar coherence for ordinary etale compact support

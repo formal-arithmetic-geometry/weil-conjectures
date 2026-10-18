@@ -24,6 +24,7 @@ import Sheaf.CategoryTheory.RingedSiteModules
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorHomAdjunction
 import WeilConjectures.AlgebraicGeometry.PQFCohomology
 import WeilConjectures.CategoryTheory.RightDerivedExactComposite
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
 
 /-!
 # The canonical locally free Ext comparison

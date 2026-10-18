@@ -24,6 +24,7 @@ import Sheaf.Paper.ProjectionMateExact
 import Mathlib.Algebra.Homology.DerivedCategory.ShortExact
 import Sheaf.Algebra.Homology.ComplexColimitHomotopyColimit
 import Sheaf.AlgebraicGeometry.EtaleDerivedTensorDirectSums
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 
 /-!
 # Constant coefficient tensor comparison for an open immersion

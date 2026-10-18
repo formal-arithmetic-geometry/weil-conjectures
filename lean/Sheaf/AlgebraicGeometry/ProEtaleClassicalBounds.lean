@@ -38,6 +38,8 @@ import Sheaf.CategoryTheory.Sites.CohomologyOverObjectLocalization
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtaleOver
 import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 import Mathlib.CategoryTheory.Sites.Sheafification
+import Sheaf.AlgebraicGeometry.BoundedBelowProEtaleComparison
+import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
 
 /-!
 # Uniform classical pro-étale cohomological bounds

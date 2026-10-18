@@ -56,6 +56,15 @@ import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 import Sheaf.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
+import Sheaf.AlgebraicGeometry.PointedEtaleStalk
+import WeilConjectures.AlgebraicGeometry.ClosedSubsetProperOverBaseProperties
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
+import WeilConjectures.AlgebraicGeometry.EtaleLocalFiniteMultiplePoints
+import WeilConjectures.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
+import WeilConjectures.AlgebraicGeometry.EtaleSetSectionsGeometricGermExt
+import WeilConjectures.AlgebraicGeometry.GeometricStalkColimits
+import WeilConjectures.AlgebraicGeometry.InverseImageStalkGerm
+import WeilConjectures.AlgebraicGeometry.Morphisms.ProperQuasiFinite
 /-!
 # Finite-parts generators and relations for quasi-finite proper support
 

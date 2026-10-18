@@ -23,6 +23,10 @@ public import Mathlib.CategoryTheory.Localization.Predicate
 import Sheaf.Algebra.Homology.ChangeOfRingsKFlatQuasiIso
 import Sheaf.Algebra.Homology.SiteDerivedTensorDescent
 import Sheaf.CategoryTheory.Triangulated.DerivedLimitExistence
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
+import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
+import Sheaf.Paper.CompletedIntegralConstantMapOfUniverses
+import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitExistence
 
 /-! # Well-defined completed integral scalar extension
 

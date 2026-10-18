@@ -11,6 +11,35 @@ public import Sheaf.Paper.BoundedConstructibleTower
 public import Sheaf.AlgebraicGeometry.ProEtaleRingSheafChangeAdjunction
 public import Sheaf.AlgebraicGeometry.ProEtaleAmbientRingedExchange
 public import Sheaf.AlgebraicGeometry.ProfiniteCoefficientInverseImage
+import Sheaf.Algebra.Homology.KFlat
+import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
+import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
+import Sheaf.AlgebraicGeometry.ProEtaleConstantRingOperations
+import Sheaf.CategoryTheory.DerivedCategory.AdjointSquareComparison
+import Sheaf.CategoryTheory.DerivedCategory.PerfectRingComplexGeneral
+import Sheaf.CategoryTheory.DiagramSiteRealization
+import Sheaf.CategoryTheory.KInjectiveTotalDerived
+import Sheaf.CategoryTheory.ModulePullbackPushforwardAdjunction
+import Sheaf.CategoryTheory.PreDerivedAdjointFunctorsGeneral
+import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
+import Sheaf.NumberTheory.Padics.ExtensionIntegersDvr
+import Sheaf.Paper.AdicCoefficientDatum
+import Sheaf.Paper.CompletedDirectImageLimits
+import Sheaf.Paper.CompletedPullbackReduction
+import Sheaf.Paper.CompletedRlimFunctor
+import Sheaf.Paper.CondensedAmbientExchange
+import Sheaf.Paper.ConstantCompletionEquivalence
+import Sheaf.Paper.IntegralFinitePullbackComposition
+import Sheaf.Paper.IntrinsicCompletionCompleted
+import Sheaf.Paper.PbcQbarCompletedPullback
+import Sheaf.Paper.PerfectProjectionFormula
+import Sheaf.Paper.ProjectionFormulaBaseChangeNaturality
+import Sheaf.Paper.RingedExchangeTensorCoherence
+import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
+import Sheaf.Paper.RingedTopoiDerivedPullback
+import Sheaf.Paper.WeilCompletedTensorReflector
+import WeilConjectures.Algebra.Homology.TowerEvaluationKInjective
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
 
 /-! # Linear completed operations and their canonical exchange
 Source: blueprint order 1442, Stacks Tags 099N, 099K and 07A7

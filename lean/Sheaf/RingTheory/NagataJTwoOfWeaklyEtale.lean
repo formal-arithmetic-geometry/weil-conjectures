@@ -29,6 +29,10 @@ import Sheaf.RingTheory.RegularMapAscent
 import Sheaf.RingTheory.JTwoResidueFieldCriterion
 import Mathlib.CategoryTheory.MorphismProperty.Limits
 import Mathlib.AlgebraicGeometry.Morphisms.WeaklyEtale
+import Sheaf.AlgebraicGeometry.IsRegularScheme
+import Sheaf.RingTheory.IndEtaleUniverseTransport
+import Sheaf.RingTheory.LocalizationPrimeResidueFieldIso
+import WeilConjectures.AlgebraicGeometry.AffineChartBaseChangeIso
 
 /-!
 # Nagata and J-2 ascent along weakly etale homomorphisms

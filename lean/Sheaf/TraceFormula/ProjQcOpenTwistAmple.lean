@@ -10,6 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
 public import Mathlib.AlgebraicGeometry.OpenImmersion
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.SiteTensorFunctoriality
 import Sheaf.AlgebraicGeometry.ProjStandardOpenProperties
+import Sheaf.AlgebraicGeometry.ProjTwistSectionBasicOpen
 
 /-!
 # Sufficiently divisible twists on a quasi-compact Proj open

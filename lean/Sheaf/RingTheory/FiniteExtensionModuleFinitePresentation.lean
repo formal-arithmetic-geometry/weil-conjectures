@@ -10,6 +10,7 @@ public import Mathlib.RingTheory.FinitePresentation
 public import Mathlib.Algebra.Module.FinitePresentation
 import Mathlib.RingTheory.Finiteness.ModuleFinitePresentation
 import Mathlib.RingTheory.FiniteType
+import Sheaf.RingTheory.FinitelyPresentedOverSubring
 
 /-!
 # Finite presentation of modules over finite finitely presented extensions

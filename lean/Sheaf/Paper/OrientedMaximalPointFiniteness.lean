@@ -1,5 +1,10 @@
 import Sheaf.Paper.OrientedNearbyCycles
 import Sheaf.CategoryTheory.Sites.GeometricMorphism
+import Sheaf.AlgebraicGeometry.EtaleToposPointsGeometric
+import Sheaf.AlgebraicGeometry.GeometricSpecializationStrictLocalLift
+import Sheaf.AlgebraicGeometry.NormalizedBaseChangeNoetherianTopology
+import Sheaf.CategoryTheory.Sites.OrientedProductLargeSites
+import Sheaf.TraceFormula.OrientedPointNormalizedStratum
 
 universe u v w
 

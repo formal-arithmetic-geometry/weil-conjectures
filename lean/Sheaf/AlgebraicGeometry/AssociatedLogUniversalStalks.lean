@@ -11,6 +11,7 @@ import Mathlib.CategoryTheory.Sites.LocallyBijective
 import Mathlib.CategoryTheory.Sites.Point.Skyscraper
 import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 import WeilConjectures.AlgebraicGeometry.SiteSheafificationSectionsLocal
+import Sheaf.AlgebraicGeometry.PointedEtaleStalk
 
 /-!
 # Associated log structures, their universal property, and geometric stalks

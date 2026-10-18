@@ -6,6 +6,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Geometrically.Irreducible
 public import Mathlib.FieldTheory.IntermediateField.Adjoin.Basic
+import Sheaf.FieldTheory.GeometricIrreducibilityTranscendental
 
 /-!
 # Adding a transcendental variable preserves geometric irreducibility

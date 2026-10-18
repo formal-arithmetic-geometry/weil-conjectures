@@ -14,6 +14,7 @@ public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatRe
 import Sheaf.Algebra.Homology.KFlatModuleBaseChange
 import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
 import Mathlib.RingTheory.Ideal.Maximal
+import WeilConjectures.FromJoel.CategoryTheory.Monoidal.KFlat
 
 /-!
 # Relative Tor amplitude and simultaneous prime localization

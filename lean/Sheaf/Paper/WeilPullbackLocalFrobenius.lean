@@ -17,6 +17,9 @@ import Sheaf.Paper.GeneralAlgebraicallyClosedCoefficients
 import Sheaf.Paper.ConstructiblePullbackTExact
 import Sheaf.AlgebraicGeometry.ClosedPointField
 import Sheaf.Paper.PointSectionsScalarExtension
+import Sheaf.Paper.IntegralPullbackComparisonRealization
+import Sheaf.Paper.LocalFrobeniusTransportNormalization
+import Sheaf.SixFunctors.FrobeniusPointTransportNatural
 
 /-! # Local Frobenius under rational Weil-sheaf pullback
 

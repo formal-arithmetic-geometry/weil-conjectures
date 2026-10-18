@@ -30,6 +30,11 @@ import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 import Sheaf.CategoryTheory.RingedSiteModules
 import Sheaf.CategoryTheory.Triangulated.LocalizingIsoLocus
 import Sheaf.CategoryTheory.RingedToposDerivedPushforwardComposition
+import Sheaf.Paper.CompactificationLocalizing
+import Sheaf.Paper.CondensedModuleDerivedPushpull
+import Sheaf.Paper.FiniteProperBaseChange
+import Sheaf.Paper.IntegralProperBaseChange
+import Sheaf.Paper.ProperBaseChangeRational
 
 /-!
 # Compactification refinement on the ambient localizing category

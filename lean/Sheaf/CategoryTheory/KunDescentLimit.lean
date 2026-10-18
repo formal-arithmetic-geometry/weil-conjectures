@@ -17,6 +17,9 @@ import Sheaf.CategoryTheory.SiteCoveringAxioms
 import Sheaf.CategoryTheory.ColimitSiteSections
 
 import Sheaf.CategoryTheory.SiteFilteredColimitSections
+import WeilConjectures.AlgebraicGeometry.FullAffineEtaleTopos
+import WeilConjectures.CategoryTheory.ColimitSiteSections
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 /-!
 # Descent of torsion étale sheaves along affine inverse limits
 

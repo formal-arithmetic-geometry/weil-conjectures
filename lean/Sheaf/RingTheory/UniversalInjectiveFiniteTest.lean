@@ -14,6 +14,7 @@ import Mathlib.CategoryTheory.Limits.Preserves.Basic
 import Mathlib.Algebra.Category.ModuleCat.Monoidal.Closed
 import Mathlib.Algebra.Category.ModuleCat.FilteredColimits
 import Mathlib.CategoryTheory.Limits.ConcreteCategory.Basic
+import Sheaf.TraceFormula.ModuleDirectedColimitFP
 
 /-!
 # Universal injectivity detected on finitely presented tensor tests

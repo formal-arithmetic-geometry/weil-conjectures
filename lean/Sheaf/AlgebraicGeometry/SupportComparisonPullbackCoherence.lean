@@ -18,6 +18,8 @@ public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasLeftKanExten
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Proetale
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Continuous
+import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 /-!
 # Coherent comparison of etale and pro-etale inverse images
 

@@ -22,6 +22,9 @@ import Sheaf.CategoryTheory.RingedSliceExtensionTensor
 import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
 import WeilConjectures.SixFunctors.ProEtale.BaseChange.SmoothBaseChange
 import Sheaf.AlgebraicGeometry.ProEtaleConstantRingMap
+import Sheaf.AlgebraicGeometry.ProEtaleConstantRingOperations
+import Sheaf.AlgebraicGeometry.ProEtaleIntrinsicExtensionByZero
+import Sheaf.SecSmoothPurity.ScalarExtensionFunctor
 
 /-!
 # Mixed finite-coefficient base change

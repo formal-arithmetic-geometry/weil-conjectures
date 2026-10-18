@@ -29,6 +29,9 @@ import Sheaf.RingTheory.GlobalCompleteIntersectionPrincipalLocalization
 import Sheaf.RingTheory.RelativeGlobalCompleteIntersectionLocalRegularSequence
 import Sheaf.RingTheory.SyntomicAtPrimeRelativeGlobalCompleteIntersection
 import Sheaf.AlgebraicGeometry.UnramifiedQuasiFinite
+import Sheaf.AlgebraicGeometry.FlatLCICanonicalAdjunction
+import Sheaf.AlgebraicGeometry.NodalNormalizationAdjunction
+import Sheaf.TraceFormula.NoIsolatedContractedFibreComponent
 
 /-!
 # Marked nodal dualizing degrees

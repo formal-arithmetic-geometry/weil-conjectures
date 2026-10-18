@@ -6,6 +6,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Basic
 public import Mathlib.CategoryTheory.Category.Preorder
 public import Mathlib.CategoryTheory.Limits.HasLimits
 import Sheaf.RingTheory.MittagLefflerHomSystems
+import Sheaf.RingTheory.FinitePresentationTensorProducts
 
 /-!
 # Mittag--Leffler characterization by eventual tensor-kernel domination

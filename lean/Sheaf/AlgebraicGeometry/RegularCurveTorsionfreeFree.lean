@@ -14,6 +14,8 @@ import Sheaf.AlgebraicGeometry.FunctionField
 import Sheaf.AlgebraicGeometry.IsFiniteLocallyFreeOfCoherentFreeStalks
 import WeilConjectures.Mathlib.RingTheory.RegularLocalRing.Defs
 import WeilConjectures.AlgebraicGeometry.Coherent
+import Sheaf.AlgebraicGeometry.CoherentFiniteType
+import Sheaf.AlgebraicGeometry.IsRegularScheme
 
 /-!
 # Torsion-free coherent modules on regular curves

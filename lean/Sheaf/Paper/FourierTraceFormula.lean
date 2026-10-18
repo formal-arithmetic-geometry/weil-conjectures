@@ -10,6 +10,12 @@ public import Sheaf.Paper.FourierTraceFunctions
 import Sheaf.Paper.DerivedPullbackTensorIso
 import WeilConjectures.WeilSheaf.LowerShriekFunctoriality
 import WeilConjectures.FourierTransform.Properties.Stalk
+import Sheaf.Paper.FourierSetting
+import Sheaf.Paper.LocalFrobeniusTrace
+import Sheaf.Paper.SfWeilSheafComplex
+import WeilConjectures.FourierTransform.Defs
+import WeilConjectures.Mathlib.NumberTheory.LegendreSymbol.AddCharacter
+import WeilConjectures.SixFunctors.Etale.Derived.WeilFrobenius
 
 /-! # The Fourier trace formula
 

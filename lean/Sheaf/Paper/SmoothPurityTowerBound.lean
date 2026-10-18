@@ -11,6 +11,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import Mathlib.Topology.KrullDimension
 import Sheaf.Paper.SmoothPurityTowerLevels
 import Sheaf.Paper.ConstantModelTorAmplitude
+import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
+import Sheaf.Paper.SmoothPurityCoefficientTowers
 
 /-!
 # Compactly supported direct image preserves constructible towers

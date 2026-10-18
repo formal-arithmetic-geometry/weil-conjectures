@@ -16,6 +16,8 @@ public import Sheaf.AlgebraicGeometry.SupportComparisonPullbackCoherence
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusBaseChange
 import Sheaf.AlgebraicGeometry.SupportLongExact
+import Sheaf.Paper.AffineLineOrdinaryInvariance
+import Sheaf.Paper.SupportedCupFunctoriality
 
 /-!
 # Affine-line invariance with closed supports

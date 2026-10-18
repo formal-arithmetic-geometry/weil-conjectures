@@ -10,6 +10,11 @@ public import Sheaf.Paper.SfWeilSheafComplex
 public import Sheaf.Paper.LocalFrobeniusTrace
 import Sheaf.Paper.IntegralPullbackComposition
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
+import Sheaf.Paper.DlConstructibleFibresExact
+import Sheaf.Paper.GeneralAlgebraicallyClosedCoefficients
+import Sheaf.Paper.IntegralPullbackComparisonRealization
+import Sheaf.Paper.LocalFrobeniusTransportNormalization
+import Sheaf.SixFunctors.FrobeniusPointTransportNatural
 
 /-!
 # Exact rational coefficient fibres with local Frobenius

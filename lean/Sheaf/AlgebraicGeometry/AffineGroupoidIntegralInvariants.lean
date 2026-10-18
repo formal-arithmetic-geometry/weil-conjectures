@@ -13,6 +13,9 @@ public import Mathlib.Algebra.Polynomial.Eval.Defs
 public import Mathlib.Algebra.Polynomial.Monic
 import Mathlib.Topology.Sheaves.SheafCondition.PairwiseIntersections
 import Mathlib.Topology.Sheaves.CommRingCat
+import Sheaf.AlgebraicGeometry.AffineGroupoidInvariantRankStrata
+import Sheaf.AlgebraicGeometry.AffineGroupoidPolynomialNormInvariant
+import Sheaf.RingTheory.FiniteLocallyFreeNormCharacteristicPolynomial
 
 /-!
 # Integrality over the invariant ring of an affine groupoid

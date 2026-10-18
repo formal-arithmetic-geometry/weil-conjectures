@@ -47,6 +47,10 @@ import Mathlib.CategoryTheory.Adjunction.Limits
 import Mathlib.AlgebraicGeometry.Morphisms.Separated
 import Mathlib.AlgebraicGeometry.Noetherian
 import Mathlib.CategoryTheory.Abelian.DiagramLemmas.Four
+import Sheaf.AlgebraicGeometry.ClassicalDerivedEquivalence
+import Sheaf.Paper.CondensedModuleDerivedPushpull
+import Sheaf.Paper.IntegralCohomologicalAdicCriterion
+import Sheaf.Paper.IntegralProperBaseChange
 
 /-!
 # Integral proper direct image on localizing categories

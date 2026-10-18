@@ -14,6 +14,10 @@ public import Sheaf.Paper.DirectImagesConstructible
 public import WeilConjectures.ZetaSeries
 import Sheaf.Paper.SfRationalizationKaroubi
 import Sheaf.Paper.CompactSupportFiniteFieldIndependence
+import Sheaf.Paper.DerivedPullbackTensorHom
+import Sheaf.Paper.GeneralAlgebraicallyClosedCoefficients
+import Sheaf.Paper.IntrinsicCoefficientTwistsUnrestricted
+import Sheaf.Paper.QcqsCompactSupportRealization
 
 /-! # Smooth purity with algebraically closed coefficients
 

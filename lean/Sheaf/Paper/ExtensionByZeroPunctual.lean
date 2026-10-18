@@ -16,6 +16,11 @@ import WeilConjectures.WeilSheaf.LowerShriekFunctoriality
 import Sheaf.Paper.CompletedOpenExchangeTransport
 import Sheaf.AlgebraicGeometry.ProEtaleExtensionZero
 import Sheaf.AlgebraicGeometry.FrobeniusOpenSquare
+import Sheaf.CategoryTheory.LocalizedModuleExactForSystems
+import Sheaf.Paper.DlConstructibleFibresExact
+import Sheaf.Paper.LocalFrobeniusTrace
+import Sheaf.Paper.SfWeilSheafComplex
+import Sheaf.SixFunctors.IntegralOpenReductionComparison
 
 /-! # Exact extension by zero and punctual weights
 

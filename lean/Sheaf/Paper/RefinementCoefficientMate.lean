@@ -7,6 +7,24 @@ module
 
 public import Sheaf.Paper.ProperOpenCoefficientRefinement
 public import Sheaf.Paper.ProEtaleProperOpenComparison
+import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
+import Sheaf.AlgebraicGeometry.ClopenSectionComponent
+import Sheaf.AlgebraicGeometry.ClopenSectionDirectImage
+import Sheaf.AlgebraicGeometry.DerivedOpenRestriction
+import Sheaf.AlgebraicGeometry.EtaleSheafClopenProduct
+import Sheaf.AlgebraicGeometry.ExactUnboundedExchange
+import Sheaf.AlgebraicGeometry.FixedComparisonDirectImageMate
+import Sheaf.AlgebraicGeometry.IntrinsicDerivedOpenAdjunction
+import Sheaf.AlgebraicGeometry.ProEtaleExtensionZeroComparison
+import Sheaf.AlgebraicGeometry.ProperOpenComparison
+import Sheaf.AlgebraicGeometry.ProperOpenSection
+import Sheaf.AlgebraicGeometry.SupportComparisonPullbackCoherence
+import Sheaf.Paper.ComparisonPullbackExact
+import Sheaf.SixFunctors.OpenTensorNormalization
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.BaseChangeSquare
+import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 
 /-!
 # Coefficient and site squares for the explicit refinement theta

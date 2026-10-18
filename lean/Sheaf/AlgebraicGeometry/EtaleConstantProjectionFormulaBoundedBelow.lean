@@ -30,6 +30,10 @@ import Sheaf.CategoryTheory.TruncationTriangle
 import Mathlib.Algebra.Homology.Embedding.CochainComplex
 import Mathlib.Algebra.Homology.Single
 import Mathlib.CategoryTheory.Triangulated.Triangulated
+import Sheaf.Algebra.Homology.IntegerFlatRepresentative
+import Sheaf.RingTheory.Flat.LazardPresentation
+import WeilConjectures.CategoryTheory.RightDerivedFunctorTruncationIso
+import WeilConjectures.CategoryTheory.TruncationTriangle
 /-!
 # Tensoring derived global sections with a bounded-below constant integer complex
 

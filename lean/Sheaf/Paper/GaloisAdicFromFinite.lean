@@ -11,6 +11,7 @@ import Sheaf.NumberTheory.Padics.FiniteCoefficientFields
 import Sheaf.RepresentationTheory.ProfiniteStableLattice
 import Sheaf.Paper.LisseAdicFiberFunctors
 import Sheaf.RepresentationTheory.LAdic
+import Sheaf.Paper.LisseIntegralSmallCoefficients
 
 /-! # Adic reconstruction from finite Galois modules -/
 

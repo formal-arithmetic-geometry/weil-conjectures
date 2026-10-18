@@ -28,6 +28,16 @@ import Sheaf.AlgebraicGeometry.SmoothExceptionalBaseChange
 import Sheaf.Paper.PurityAffineLineOrientation
 import Sheaf.Paper.PurityCompositionCoherence
 import Sheaf.Paper.PurityDiagonalDualizingObject
+import Sheaf.AlgebraicGeometry.CartierKummerMap
+import Sheaf.AlgebraicGeometry.FiniteCompactProjectionFormula
+import Sheaf.Paper.BasicOperationsCoefficientReduction
+import Sheaf.Paper.CohomologicalSmoothnessFiniteComparison
+import Sheaf.Paper.CohomologicalSmoothnessTheorem
+import Sheaf.Paper.IntrinsicCoefficientTwistsUnrestricted
+import Sheaf.Paper.PurityDiagonalBaseChangeCompared
+import Sheaf.Paper.PurityDncInvariance
+import Sheaf.Paper.PuritySectionInvariantIntrinsic
+import Sheaf.Paper.VectorBundlePurity
 
 /-! # Reduction of the canonical finite-coefficient purity maps
 

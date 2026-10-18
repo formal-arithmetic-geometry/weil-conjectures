@@ -17,6 +17,9 @@ import Sheaf.AlgebraicGeometry.CompactSupportComparisonUnit
 import Sheaf.Paper.FiniteDiscreteCondensedRing
 import Sheaf.Paper.FiniteDiscreteSchemeRing
 import Sheaf.CategoryTheory.InternalAbelianSheafModuleEquivalence
+import Sheaf.AlgebraicGeometry.ProEtaleFiniteModules
+import Sheaf.Paper.FiniteLocalizingExceptionalPreservation
+import Sheaf.Paper.LocalizingAdmissibleCoefficients
 
 /-! # Transfer of finite-coefficient adjunctions
 

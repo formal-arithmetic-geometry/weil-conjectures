@@ -16,6 +16,10 @@ public import Mathlib.Topology.KrullDimension
 import Sheaf.Paper.ProEtaleConstructibleOrigin
 import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 import Mathlib.AlgebraicGeometry.Morphisms.Immersion
+import Sheaf.AlgebraicGeometry.ComparisonDirectImage
+import Sheaf.Paper.ComparisonTorAmplitude
+import Sheaf.Paper.FiniteTorAmplitudeSites
+import Sheaf.Paper.SfDirectImageCTFNonproper
 
 /-!
 # Pro-étale direct image for finite-Tor constructible complexes

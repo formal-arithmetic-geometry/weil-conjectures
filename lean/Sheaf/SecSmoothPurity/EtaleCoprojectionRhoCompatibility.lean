@@ -14,6 +14,12 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
 public import WeilConjectures.SixFunctors.Etale.Derived.Tensor
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.RegularImmersionReduction
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Comparison
+import Sheaf.Paper.CanonicalOriginCompactSupportComposition
+import Sheaf.Paper.CoprojectionCompositionMate
+import Sheaf.Paper.EtaleRhoMonoidalMate
+import Sheaf.Paper.ExchangeProjectionSuppliedDomains
+import Sheaf.Paper.PurityCoprojection
+import Sheaf.Paper.StandingExceptionalComposition
 
 /-!
 # Étale co-projection compatibility with normalized exceptional pullback

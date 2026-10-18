@@ -33,6 +33,9 @@ import Mathlib.AlgebraicGeometry.Morphisms.RingHomProperties
 import Sheaf.AlgebraicGeometry.ClosedPointField
 import Sheaf.AlgebraicGeometry.EtaleGloballyGenerated
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
+import Sheaf.AlgebraicGeometry.ClosedPointSupportGlobalGeneration
+import Sheaf.AlgebraicGeometry.ClosedPointSupportVanishing
+import Sheaf.AlgebraicGeometry.UnboundedEtaleCohomologyAcyclicBasis
 
 /-!
 # Detection of derived etale sheaves supported at closed points

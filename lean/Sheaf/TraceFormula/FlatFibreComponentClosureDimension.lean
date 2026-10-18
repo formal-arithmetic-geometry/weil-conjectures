@@ -11,6 +11,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.Topology.Irreducible
 public import Mathlib.Topology.KrullDimension
 public import Mathlib.Topology.Sober
+import Sheaf.TraceFormula.FibreComponentRelativeAssociated
+import Sheaf.TraceFormula.FlatAssociatedEquidimensional
 
 /-! # Dimension of fibres in a fibre-component closure inside a flat family
 

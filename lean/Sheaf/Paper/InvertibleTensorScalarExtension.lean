@@ -8,6 +8,11 @@ module
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.SiteTensorFunctoriality
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
+import Sheaf.Algebra.Category.ModuleCat.Presheaf.SheafificationBilinearExtension
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.LocalizedSiteTensorRestriction
+import Sheaf.CategoryTheory.RingedSiteModules
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorBilinearUniversal
 
 /-!
 # Tensor powers and duals under scalar extension

@@ -10,6 +10,7 @@ public import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Basic
 public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.Basic
 
 import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat
+import Sheaf.Algebra.Homology.SubcategoryTruncationResolutionSystem
 
 /-!
 # Unbounded K-flat replacements from functorial flat covers

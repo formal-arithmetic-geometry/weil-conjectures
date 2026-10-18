@@ -26,6 +26,10 @@ import WeilConjectures.CategoryTheory.TruncationHypercohomology
 import WeilConjectures.CategoryTheory.TruncationTriangle
 import Sheaf.AlgebraicGeometry.BoundedContinuityDirectImage
 import Mathlib.CategoryTheory.Limits.FilteredColimitCommutesFiniteLimit
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
+import Sheaf.AlgebraicGeometry.CondensedClosedSupportAdjunction
+import Sheaf.CategoryTheory.RingedSiteModules
+import Sheaf.Paper.CartesianCoefficients
 
 /-!
 # Continuity of derived Hom out of a stratum extension

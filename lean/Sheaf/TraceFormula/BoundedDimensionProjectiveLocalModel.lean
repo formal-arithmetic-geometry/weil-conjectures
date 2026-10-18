@@ -14,6 +14,16 @@ public import WeilConjectures.AlgebraicGeometry.Morphisms.Projective
 public import Sheaf.AlgebraicGeometry.StrictHenselizationCanonicalMap
 public import Sheaf.AlgebraicGeometry.StrictHenselizationStructuralMap
 import Sheaf.AlgebraicGeometry.StrictHenselizationClosedLift
+import Sheaf.AlgebraicGeometry.FibreDimensionAfterBaseChange
+import Sheaf.AlgebraicGeometry.IndEtaleStrictLocalInvariance
+import Sheaf.AlgebraicGeometry.StrictBaseClosedPointLocalizations
+import Sheaf.AlgebraicGeometry.StrictHenselization
+import Sheaf.Paper.StrictHenselizationFunctoriality
+import Sheaf.TraceFormula.FiniteProjectiveEnvelope
+import Sheaf.TraceFormula.LocalQuasiFiniteProjection
+import WeilConjectures.AlgebraicGeometry.Morphisms.QuasiFiniteFactorization
+import WeilConjectures.Mathlib.Topology.KrullDimension
+import WeilConjectures.Topology.DimensionSupremumLocalDimensions
 
 /-!
 # Dimension-preserving projective model of a strict localization

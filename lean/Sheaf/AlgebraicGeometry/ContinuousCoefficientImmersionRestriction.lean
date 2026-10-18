@@ -21,6 +21,7 @@ import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
 import Sheaf.AlgebraicGeometry.ProEtaleConstantRingMap
 import Mathlib.Analysis.Normed.Unbundled.SpectralNorm
 import Mathlib.Topology.Algebra.Valued.LocallyCompact
+import Sheaf.NumberTheory.Padics.ExtensionIntegersDvr
 
 /-!
 # Continuous coefficient sheaves and immersion restriction

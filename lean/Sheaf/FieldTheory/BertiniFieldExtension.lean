@@ -9,6 +9,11 @@ public import Mathlib.AlgebraicGeometry.Geometrically.Irreducible
 public import Mathlib.RingTheory.AlgebraicIndependent.Basic
 public import Mathlib.RingTheory.Localization.FractionRing
 public import Mathlib.FieldTheory.IntermediateField.Adjoin.Basic
+import Sheaf.AlgebraicGeometry.GeometricIrreducibilitySubextension
+import Sheaf.FieldTheory.FiniteSeparableClosure
+import Sheaf.FieldTheory.GeometricIrreducibilityAddTranscendental
+import Sheaf.FieldTheory.GeometricIrreducibilitySeparable
+import Sheaf.FieldTheory.GeometricIrreducibilityTranscendental
 
 /-!
 # Algebraic Bertini lemma for a generic linear combination

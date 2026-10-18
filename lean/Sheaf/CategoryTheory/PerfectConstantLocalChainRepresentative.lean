@@ -22,6 +22,7 @@ import WeilConjectures.CategoryTheory.SiteCoveringsCommonRefinement
 import Mathlib.CategoryTheory.Abelian.FunctorCategory
 import Mathlib.CategoryTheory.Sites.Abelian
 import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
+import Sheaf.CategoryTheory.SiteConstantModuleFunctorGeneral
 
 /-!
 # Local chain representatives from a perfect constant complex

@@ -43,6 +43,10 @@ import WeilConjectures.ConstructibleSheaf.GenericConstancy
 import WeilConjectures.SixFunctors.OpenClosed.ClosedImmersion
 import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 import WeilConjectures.ConstructibleSheaf.KernelCokernel
+import Sheaf.Algebra.Homology.RingedInternalHomShiftOfUniverses
+import Sheaf.AlgebraicGeometry.LisseSplitHomFlatConstructible
+import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
+import Sheaf.Paper.DirectImageCtfOpenTor
 
 /-!
 # Internal Hom preserves constructibility and finite Tor amplitude

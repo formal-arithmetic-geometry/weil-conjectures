@@ -11,6 +11,7 @@ public import Mathlib.RingTheory.Ideal.Quotient.Operations
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.Defs
 
 import Mathlib.Algebra.CharP.Frobenius
+import WeilConjectures.Mathlib.Algebra.CharP.Lemmas
 
 /-!
 # Multiplicative, additive, roots-of-unity and Frobenius-kernel group schemes

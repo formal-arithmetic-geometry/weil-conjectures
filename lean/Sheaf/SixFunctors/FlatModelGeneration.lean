@@ -64,6 +64,17 @@ public import Sheaf.AlgebraicGeometry.ProEtaleIntrinsicExtensionByZero
 public import Sheaf.AlgebraicGeometry.ProEtaleModuleStalkFunctor
 public import Sheaf.Paper.ProEtaleFixedModuleLocalConstancy
 public import WeilConjectures.ConstructibleSheaf.Monoidal
+import Sheaf.AlgebraicGeometry.ConstructibleProEtaleComparison
+import Sheaf.AlgebraicGeometry.FiniteLocallyClosedStratification
+import Sheaf.AlgebraicGeometry.LocallyClosedExtensionCoherence
+import Sheaf.AlgebraicGeometry.ProEtaleConstantRingOperations
+import Sheaf.AlgebraicGeometry.ProEtaleFiniteTorComparisonNoetherian
+import Sheaf.AlgebraicGeometry.SurjectiveClosedModuleInvariance
+import Sheaf.Paper.ProEtaleConstructibleSheaf
+import Sheaf.SixFunctors.EtaleLocallyClosedExtensionComparison
+import Sheaf.SixFunctors.OpenClosedFlatness
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Tensor
 
 /-!
 # Ordered strata, sheaf filtrations, and thick generation over finite rings

@@ -7,6 +7,15 @@ module
 
 public import Sheaf.Paper.SmoothPurityMap
 public import Sheaf.Paper.FiniteCoefficientSmoothPurity
+import Sheaf.Algebra.Homology.DerivedTensorResolutionIndependent
+import Sheaf.AlgebraicGeometry.SpecifiedExceptionalClassHom
+import Sheaf.Paper.CohomologicalSmoothnessFiniteComparison
+import Sheaf.Paper.CohomologicalSmoothnessTheorem
+import Sheaf.Paper.IntrinsicCoefficientTwistsUnrestricted
+import Sheaf.Paper.PurityDiagonalDualizingObject
+import Sheaf.Paper.PurityDncInvariance
+import Sheaf.Targets.VectorBundlePurity
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.TensorResolution
 
 /-!
 # Naturality and choice-independence of the smooth purity map

@@ -24,6 +24,11 @@ import Sheaf.CategoryTheory.LocalizedModuleExactIndependent
 import WeilConjectures.FromJoel.Algebra.Homology.BifunctorMappingCone
 import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
 import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
+import Sheaf.Algebra.Homology.KFlat
+import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
+import Sheaf.CategoryTheory.LocalizedModuleExactForSystems
+import Sheaf.Paper.SfCommonStageWeilCohomology
+import WeilConjectures.CategoryTheory.RingedSiteGrothendieckAbelian
 
 /-!
 # Tor intervals survive slice restriction

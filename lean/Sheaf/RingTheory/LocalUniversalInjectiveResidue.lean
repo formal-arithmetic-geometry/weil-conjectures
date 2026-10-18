@@ -18,6 +18,7 @@ import Mathlib.Algebra.Category.ModuleCat.Monoidal.Closed
 import Mathlib.CategoryTheory.Adjunction.Limits
 import Sheaf.RingTheory.Flat.LazardPresentation
 import Sheaf.RingTheory.FiniteFreeMapResidueLocalizationStrong
+import Sheaf.RingTheory.ProjectiveOverLocalFree
 
 /-! # Local residue-field criterion for universal injectivity
 

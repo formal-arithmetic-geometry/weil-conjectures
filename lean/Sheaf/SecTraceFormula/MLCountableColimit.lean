@@ -12,6 +12,7 @@ public import Mathlib.Algebra.Category.ModuleCat.FilteredColimits
 public import Mathlib.CategoryTheory.Filtered.Basic
 public import Mathlib.CategoryTheory.Category.Preorder
 public import Mathlib.CategoryTheory.Limits.HasLimits
+import Sheaf.RingTheory.MittagLefflerHomSystems
 
 /-!
 # Countable extraction from a finitely presented Mittag-Leffler presentation

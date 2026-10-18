@@ -26,6 +26,9 @@ import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
 import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
 import Mathlib.Algebra.Homology.BifunctorShift
 import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Shift
+import Sheaf.NumberTheory.Padics.ExtensionIntegersDvr
+import Sheaf.Topology.ProfiniteCondensedRing
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
 
 /-!
 # The two-term resolution of the finite coefficient sheaves

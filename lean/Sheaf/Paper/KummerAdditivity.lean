@@ -23,6 +23,11 @@ import WeilConjectures.AlgebraicGeometry.EtaleModulePullbackForgetNaturality
 import WeilConjectures.CategoryTheory.Abelian.RightDerived.LongExactSequence
 import Sheaf.Paper.ComparisonPullbackExact
 import Sheaf.CategoryTheory.SiteMorphismComposition
+import Sheaf.AlgebraicGeometry.EtaleFiniteTwistPullback
+import Sheaf.Paper.CartesianCoefficientTwists
+import Sheaf.Paper.IntrinsicCoefficientTwistsUnrestricted
+import WeilConjectures.AlgebraicGeometry.Sites.Kummer
+import WeilConjectures.CategoryTheory.Sites.Torsor
 
 /-!
 # Additivity and pullback of the finite Kummer first Chern class

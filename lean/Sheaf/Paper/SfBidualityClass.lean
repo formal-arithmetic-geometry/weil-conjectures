@@ -39,6 +39,12 @@ import Sheaf.AlgebraicGeometry.ProEtaleTorAmplitude
 import Sheaf.Paper.IntrinsicFiniteTorsionConstructibility
 import Sheaf.Paper.SfIntegralConstructible
 import Sheaf.Paper.SfDerivedComplete
+import Sheaf.Paper.ConstructibleExceptionalAdjunctionCoefficients
+import Sheaf.Paper.FiniteStageVerdierBiduality
+import Sheaf.SixFunctors.FiniteDualitySiteComparison
+import Sheaf.SixFunctors.IntegralVerdier
+import Sheaf.SixFunctors.RationalOperations
+import Sheaf.SixFunctors.RationalVerdier
 /-! # Verdier biduality on the four coefficient stages
 
 Source: Weil blueprint, main-20261015, sec-six-functors/sk-thm-sf-package,

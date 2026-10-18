@@ -13,6 +13,7 @@ import Mathlib.AlgebraicGeometry.Morphisms.Etale
 import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
 import Sheaf.AlgebraicGeometry.EtaleComparison
 import Sheaf.AlgebraicGeometry.WeaklyEtaleStability
+import Sheaf.RingTheory.WContractibleGeometricCriterion
 
 /-!
 # Clopen partitions refining coverings of w-contractible affine schemes

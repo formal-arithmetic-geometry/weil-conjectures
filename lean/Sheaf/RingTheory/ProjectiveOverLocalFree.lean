@@ -8,6 +8,9 @@ module
 public import Mathlib.Algebra.Module.Projective
 public import Mathlib.LinearAlgebra.FreeModule.Basic
 public import Mathlib.RingTheory.LocalRing.Defs
+import Sheaf.LinearAlgebra.CountablyGeneratedFreenessCriterion
+import Sheaf.RingTheory.ProjectiveCountableDecomposition
+import Sheaf.SecTraceFormula.ProjectiveElementFreeSummand
 
 /-!
 # Projective modules over local rings are free in arbitrary rank

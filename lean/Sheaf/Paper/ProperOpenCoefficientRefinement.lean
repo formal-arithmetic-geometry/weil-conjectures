@@ -33,6 +33,9 @@ import Sheaf.AlgebraicGeometry.ProperOpenSection
 import Sheaf.Paper.KFlatRingedToposPullback
 import Sheaf.CategoryTheory.RingedSliceExtensionTensor
 import Sheaf.Algebra.Homology.WeilSiteDerivedTensorDescent
+import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
+import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
+import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 
 /-!
 # Coefficient naturality of the proper/open refinement

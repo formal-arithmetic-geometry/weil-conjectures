@@ -18,6 +18,7 @@ import Sheaf.TraceFormula.SmoothSourceConstructibleLocalAcyclicity
 import Sheaf.Paper.OrientedProductPointsConservative
 import Sheaf.CategoryTheory.Sites.OrientedProductLargeSites
 import Mathlib.CategoryTheory.Adjunction.Mates
+import Sheaf.AlgebraicGeometry.BoundedConstructibleComplexes
 
 /-! # Smooth source pullback of oriented nearby cycles
 

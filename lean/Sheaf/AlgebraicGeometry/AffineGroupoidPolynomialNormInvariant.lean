@@ -11,6 +11,7 @@ public import Mathlib.Algebra.Polynomial.Eval.Defs
 public import Mathlib.CategoryTheory.Groupoid
 public import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
 public import Sheaf.AlgebraicGeometry.FiniteLocallyFreeNormCharts
+import Sheaf.AlgebraicGeometry.AffineGroupoidInvariantNorm
 
 /-!
 # Polynomial source norms are invariant under an affine groupoid

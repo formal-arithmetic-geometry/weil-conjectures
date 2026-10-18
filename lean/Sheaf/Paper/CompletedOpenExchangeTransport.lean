@@ -58,6 +58,14 @@ import Sheaf.AlgebraicGeometry.FiniteOpenBaseChangeNormalized
 import Sheaf.CategoryTheory.SiteMorphismComposition
 import Sheaf.CategoryTheory.SiteContinuousPushforwardSheaf
 import Sheaf.Paper.ConstantCompletionEquivalence
+import Sheaf.AlgebraicGeometry.FiniteOpenExchangeScalars
+import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
+import Sheaf.CategoryTheory.LocalizedModuleExactForSystems
+import Sheaf.Paper.AdicPullbackPresentationTransport
+import Sheaf.Paper.ExactProductFunctorStrictLimit
+import Sheaf.Paper.PbcQbarCompletedPullback
+import WeilConjectures.CategoryTheory.ExtensionByZeroPresheaf
+import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitProducts
 
 /-! # Completed open exchange on the shared pullback presentation
 

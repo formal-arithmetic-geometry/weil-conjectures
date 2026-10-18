@@ -20,6 +20,12 @@ import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 import Sheaf.AlgebraicGeometry.ProEtaleRingedOpenClosed
 import Sheaf.CategoryTheory.RingedSiteModulesGrothendieckOfUniverses
 import Sheaf.CategoryTheory.SitePullbackAbelianExact
+import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
+import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
+import Sheaf.CategoryTheory.KInjectiveTotalDerived
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
+import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
 
 /-!
 # Closed support for arbitrary condensed coefficients

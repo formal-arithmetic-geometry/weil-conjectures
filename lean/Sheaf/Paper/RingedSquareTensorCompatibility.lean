@@ -8,6 +8,7 @@ module
 public import Sheaf.Paper.RingedTensorSquarePresentation
 import Sheaf.CategoryTheory.ModulePullbackTensorIso
 import Sheaf.Paper.KFlatRingedToposPullback
+import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
 
 /-!
 # Tensor compatibility of a ringed square on flat K-flat representatives

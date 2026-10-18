@@ -21,6 +21,13 @@ import Sheaf.CategoryTheory.RingedTowerPushforwardLimitComparison
 
 import Sheaf.CategoryTheory.RingedToposMorphism
 import Mathlib.Algebra.Homology.DerivedCategory.Basic
+import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimitIndependentCoefficients
+import Sheaf.Paper.CompletedPullbackUnitTower
+import Sheaf.Paper.ConstantCompletionEquivalence
+import Sheaf.Paper.ConstantTowerDirectImageNormalization
+import Sheaf.Paper.IntegralFinitePullbackComposition
+import Sheaf.Paper.PbcQbarCompletedPullback
+import Sheaf.Paper.ProEtaleConstantReductionTower
 /-! # Normalized reconstruction of composable completed operations
 
 Source: blueprint fix-lem-exchanges, Proof Step 5, and its strict-diagram refinement

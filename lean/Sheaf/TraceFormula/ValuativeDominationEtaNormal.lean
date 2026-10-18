@@ -25,6 +25,8 @@ import Sheaf.AlgebraicGeometry.NagataMorphismDescends
 import Mathlib.AlgebraicGeometry.Noetherian
 import Mathlib.RingTheory.FinitePresentation
 import Mathlib.AlgebraicGeometry.ZariskisMainTheorem
+import Sheaf.AlgebraicGeometry.BirationalQuasiModificationCommonCover
+import Sheaf.TraceFormula.BaseModificationComparisonFibreImage
 
 /-! # Valuative domination for eta-normal schemes
 

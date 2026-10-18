@@ -9,6 +9,30 @@ public import Sheaf.Paper.TowerPreservation
 public import Sheaf.Paper.WitnessCompatibility
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
+import Sheaf.AlgebraicGeometry.AmplificationConsequences
+import Sheaf.AlgebraicGeometry.CompactSupportComparisonUnit
+import Sheaf.AlgebraicGeometry.ComparisonDirectImage
+import Sheaf.AlgebraicGeometry.FibreDimensionAfterBaseChange
+import Sheaf.AlgebraicGeometry.FixedComparisonDirectImageMate
+import Sheaf.AlgebraicGeometry.FixedEtaleOriginWitness
+import Sheaf.AlgebraicGeometry.ProEtaleFiniteModules
+import Sheaf.AlgebraicGeometry.ProEtaleSiteComparisonFiniteLevel
+import Sheaf.AlgebraicGeometry.ProperTorsionProjectionFormula
+import Sheaf.AlgebraicGeometry.PullbackBoundedConstructible
+import Sheaf.AlgebraicGeometry.SupportComparisonPullbackCoherence
+import Sheaf.Paper.AdicCoefficientDatum
+import Sheaf.Paper.BoundedConstructibleTower
+import Sheaf.Paper.CompletedDirectImageLimits
+import Sheaf.Paper.ConstantCompletionEquivalence
+import Sheaf.Paper.FiniteLevelAmplification
+import Sheaf.Paper.NormalizedConstructibleTowerLocalEffectivity
+import Sheaf.Paper.PbcQbarCompletedPullback
+import Sheaf.Paper.ProEtaleConstructibleSheaf
+import Sheaf.Paper.ProperDirectImageFiniteness
+import Sheaf.Paper.RingedExchangeTensorCoherence
+import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
+import Sheaf.RingTheory.UniformPerfectQuotientBound
+import WeilConjectures.Topology.DimensionSupremumLocalDimensions
 
 /-!
 # Amplification for proper base-change squares

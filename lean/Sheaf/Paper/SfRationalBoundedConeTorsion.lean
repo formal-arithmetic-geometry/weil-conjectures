@@ -22,6 +22,7 @@ import Sheaf.CategoryTheory.ScalarLocalization
 import Sheaf.NumberTheory.Padics.IntegersLocalizationUniformizer
 import Mathlib.LinearAlgebra.TensorProduct.Basic
 import Mathlib.RingTheory.Localization.Away.Basic
+import Sheaf.Paper.CompletedIntegralConstantMapOfUniverses
 /-!
 # Bounded cohomological power torsion implies rational vanishing
 

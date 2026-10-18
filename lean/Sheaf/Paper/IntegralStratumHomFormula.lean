@@ -40,6 +40,7 @@ import Mathlib.RingTheory.FiniteType
 import Mathlib.RingTheory.Spectrum.Prime.Noetherian
 import Mathlib.CategoryTheory.Triangulated.Triangulated
 import Mathlib.CategoryTheory.Adjunction.Limits
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs
 
 /-!
 # Integral stratum filtrations and the global derived Hom formula

@@ -23,6 +23,7 @@ import Mathlib.RingTheory.DedekindDomain.Dvr
 import Mathlib.RingTheory.Localization.Integral
 import Mathlib.GroupTheory.Perm.Cycle.Type
 import Sheaf.AlgebraicGeometry.IntegralClosureDedekindSurjectiveFibres
+import Sheaf.FieldTheory.FiniteDVRInertiaOrderPrimePart
 
 /-!
 # Finite DVR normalization and its tame inertia character

@@ -21,6 +21,8 @@ import Sheaf.AlgebraicGeometry.ProperUnboundedBaseChange
 import Sheaf.AlgebraicGeometry.ProjectiveSpaceStandardCharts
 import Mathlib.AlgebraicGeometry.Pullbacks
 import Mathlib.CategoryTheory.Adjunction.Mates
+import WeilConjectures.AlgebraicGeometry.EffectiveCartier
+import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
 
 /-! # Projective-line splitting and diagonal integrals over arbitrary bases
 

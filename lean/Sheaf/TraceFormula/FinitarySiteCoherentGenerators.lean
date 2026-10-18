@@ -14,6 +14,9 @@ public import Mathlib.CategoryTheory.Sites.LeftExact
 import Sheaf.CategoryTheory.Sites.CoveringRepresentableCoequalizer
 import WeilConjectures.AlgebraicGeometry.SiteSheafificationSectionsLocal
 import Mathlib.CategoryTheory.Sites.LocallySurjective
+import Sheaf.CategoryTheory.Sites.CoherentEpimorphicQuotient
+import Sheaf.CategoryTheory.Sites.CoherentToposRepair
+import Sheaf.TraceFormula.SiteQuasicompactSheafificationCriterion
 
 /-!
 # Coherent generators for finitary sites

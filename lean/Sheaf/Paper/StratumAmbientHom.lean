@@ -48,6 +48,10 @@ import Sheaf.AlgebraicGeometry.ProEtaleRingedOpenClosed
 import Sheaf.AlgebraicGeometry.ProEtaleExtensionZero
 
 import Sheaf.Paper.ProEtaleCanonicalTensorPullback
+import Sheaf.Algebra.Homology.RhomGlobalSectionsOfUniverses
+import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
+import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.OpenLowerShriekProj
 
 /-! # Internal Hom from extension along a stratum
 

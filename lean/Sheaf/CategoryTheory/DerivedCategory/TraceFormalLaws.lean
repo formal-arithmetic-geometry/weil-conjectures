@@ -19,6 +19,10 @@ import Sheaf.Algebra.Homology.KFlatScalarExtensionCounit
 import Mathlib.Algebra.Homology.DerivedCategory.KProjective
 import Mathlib.RingTheory.Flat.Basic
 import Mathlib.LinearAlgebra.Basis.VectorSpace
+import Sheaf.Algebra.Homology.BoundedFlatKFlat
+import Sheaf.CategoryTheory.DerivedCategory.PerfectRingComplexGeneral
+import Sheaf.Paper.FieldComplexScalarExtension
+import Sheaf.Paper.PointFdComplexes
 
 /-!
 # Formal laws for the categorical trace

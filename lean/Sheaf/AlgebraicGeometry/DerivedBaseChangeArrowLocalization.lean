@@ -13,6 +13,10 @@ import WeilConjectures.AlgebraicGeometry.EtaleInverseImageExact
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
 import Mathlib.CategoryTheory.Adjunction.CompositionIso
 import Sheaf.Paper.RingedDerivedSliceLocalization
+import Sheaf.AlgebraicGeometry.BaseChangeMapAbelianAndSets
+import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtaleOver
+import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-!
 # Derived base-change arrow under étale localization

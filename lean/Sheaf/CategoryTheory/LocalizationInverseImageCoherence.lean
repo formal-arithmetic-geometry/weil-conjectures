@@ -25,6 +25,8 @@ import Mathlib.CategoryTheory.Sites.Sheafification
 import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 import Mathlib.Algebra.Module.LocalizedModule.Exact
 import Mathlib.RingTheory.Localization.BaseChange
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
+import Sheaf.CategoryTheory.ModulePullbackPushforwardAdjunction
 
 /-!
 # Localization and geometric inverse image

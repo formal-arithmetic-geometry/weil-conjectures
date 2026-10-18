@@ -12,6 +12,8 @@ public import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
 public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
 public import Mathlib.CategoryTheory.Preadditive.Yoneda.Basic
 public import Mathlib.Algebra.Homology.HomologicalComplexLimits
+import Sheaf.Paper.IntegralStratumExtBound
+import Sheaf.SixFunctors.IntegralExtHomContinuity
 
 /-!
 # Continuity and boundedness of integral constructible Ext

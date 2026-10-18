@@ -13,6 +13,10 @@ public import WeilConjectures.Mathlib.RingTheory.Henselian
 import Sheaf.AlgebraicGeometry.EtaleLocalRingTriples
 import Sheaf.RingTheory.StrictHenselizationTriples
 import Sheaf.RingTheory.EtaleHenselianRingLift
+import Sheaf.AlgebraicGeometry.StrictHenselization
+import Sheaf.RingTheory.StrictHenselizationPresentationIn
+import WeilConjectures.AlgebraicGeometry.EtaleLocalRingTriples
+import WeilConjectures.AlgebraicGeometry.EtaleResidueTriples
 
 /-! # Affine comparison of geometric and algebraic strict local rings
 

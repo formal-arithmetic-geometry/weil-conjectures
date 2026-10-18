@@ -25,6 +25,8 @@ import Sheaf.AlgebraicGeometry.Morphisms.NormalDenseOpenIntegralSection
 import Sheaf.RingTheory.SerreCriterionReduced
 import Sheaf.RingTheory.FlatLocalDepthFormula
 import Sheaf.AlgebraicGeometry.Morphisms.DepthTwoHartogsRestriction
+import Sheaf.TraceFormula.GenericFibrePointsSmooth
+import Sheaf.TraceFormula.GeometricallyReducedFibresLimitDescent
 
 /-!
 # Normal Noetherian approximation of a finite generic modification

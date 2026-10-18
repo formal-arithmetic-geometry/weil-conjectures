@@ -28,6 +28,11 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Coh
 import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimitIndependentCoefficients
 import Sheaf.Paper.DerivedPullbackTensorHom
 import Sheaf.Paper.DerivedCompleteOnSlices
+import Sheaf.AlgebraicGeometry.SfIntrinsicCompactSupport
+import Sheaf.AlgebraicGeometry.SpecifiedExceptionalClassHom
+import Sheaf.CategoryTheory.LocalizedModuleExactForSystems
+import Sheaf.Paper.CompactificationCoherence
+import Sheaf.Paper.ConstructibleExceptionalAdjunctionCoefficients
 
 /-! # Exceptional inverse image on finite clopen components
 

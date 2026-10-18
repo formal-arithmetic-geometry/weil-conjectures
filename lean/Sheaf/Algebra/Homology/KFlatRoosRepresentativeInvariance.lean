@@ -22,6 +22,7 @@ import Mathlib.CategoryTheory.Localization.CalculusOfFractions
 import Mathlib.CategoryTheory.Abelian.FunctorCategory
 
 public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
 /-!
 # Invariance of augmented scalar-extension Roos complexes
 

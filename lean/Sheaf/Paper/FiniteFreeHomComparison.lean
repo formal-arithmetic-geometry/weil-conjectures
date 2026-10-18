@@ -43,6 +43,8 @@ import Sheaf.Algebra.Homology.RingedSiteBoundedFreeRHomModel
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 import Sheaf.CategoryTheory.ModulePullbackTensorIso
+import Sheaf.Algebra.Homology.HomComplex
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
 
 /-! # Evaluation comparison for a bounded finite free etale complex
 

@@ -7,6 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.AffineInfiniteProductExistence
 public import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
+import Sheaf.FieldTheory.FamilyCommonExtensionFields
 
 /-!
 # Surjectivity of products of affine morphisms

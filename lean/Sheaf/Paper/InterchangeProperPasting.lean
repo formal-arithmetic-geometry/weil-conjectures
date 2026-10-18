@@ -10,6 +10,10 @@ public import Sheaf.CategoryTheory.RingedToposDerivedPushforwardComposition
 public import Sheaf.CategoryTheory.RightDerivedFunctorOfQuasiIsoResolutions
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
 import Sheaf.AlgebraicGeometry.ProEtaleOpenRestrictionCounit
+import Sheaf.AlgebraicGeometry.ProEtaleOpenClosedSequenceRingSheaf
+import Sheaf.Paper.CartesianCoefficients
+import Sheaf.Paper.CondensedModuleDerivedPushpull
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs
 
 /-!
 # Proper-map pasting of normalized proper-open interchange

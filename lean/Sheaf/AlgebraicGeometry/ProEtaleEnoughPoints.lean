@@ -12,6 +12,8 @@ import Mathlib.CategoryTheory.Limits.Constructions.LimitsOfProductsAndEqualizers
 import Mathlib.CategoryTheory.Sites.Sheafification
 import Sheaf.CategoryTheory.SiteCoveringAxioms
 import Sheaf.RingTheory.IndEtaleStability
+import Sheaf.AlgebraicGeometry.ProEtaleAffineSubsiteEquivalence
+import Sheaf.CategoryTheory.Sites.FinitarySliceEnoughPoints
 
 /-!
 # Enough points of the small pro-étale topos

@@ -24,6 +24,7 @@ import WeilConjectures.Mathlib.Topology.KrullDimension
 import WeilConjectures.AlgebraicGeometry.Coherent
 import WeilConjectures.AlgebraicGeometry.FiniteTypeModuleSupportClosed
 import WeilConjectures.AlgebraicGeometry.SchemeTheoreticSupport
+import Sheaf.AlgebraicGeometry.CoherentFiniteType
 
 /-! # Finite scheme supporting a coherent module
 

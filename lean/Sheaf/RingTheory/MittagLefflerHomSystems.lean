@@ -13,6 +13,8 @@ public import Mathlib.CategoryTheory.Limits.HasLimits
 import Mathlib.LinearAlgebra.TensorProduct.DirectLimit
 import Mathlib.Algebra.Category.ModuleCat.FilteredColimits
 import Mathlib.CategoryTheory.Limits.ConcreteCategory.WithAlgebraicStructures
+import Sheaf.RingTheory.FinitePresentationTensorProducts
+import Sheaf.SecTraceFormula.TensorKernelFactorization
 
 /-!
 # Mittag-Leffler Hom systems from the tensor-product condition

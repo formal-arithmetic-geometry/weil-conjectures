@@ -8,6 +8,18 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.OpenImmersion
 public import Mathlib.AlgebraicGeometry.Fiber
 public import Mathlib.Topology.KrullDimension
+import Sheaf.AlgebraicGeometry.Morphisms.FiniteProjectiveBundle
+import Sheaf.AlgebraicGeometry.Morphisms.HProjectiveComposition
+import Sheaf.AlgebraicGeometry.ProjectiveBundleToHProjective
+import Sheaf.AlgebraicGeometry.ProjectiveSpaceStandardCharts
+import Sheaf.AlgebraicGeometry.QuasiFiniteMorphism
+import Sheaf.RingTheory.DimensionQuasiFiniteOverPolynomialAlgebra
+import Sheaf.RingTheory.FiniteRingMapQuasiFinite
+import WeilConjectures.AlgebraicGeometry.Morphisms.ProperQuasiFinite
+import WeilConjectures.AlgebraicGeometry.Morphisms.QuasiFiniteFactorization
+import WeilConjectures.AlgebraicGeometry.ProjectiveAmpleInvertible
+import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
+import WeilConjectures.Mathlib.Topology.KrullDimension
 
 /-!
 # Finite projective envelopes

@@ -12,6 +12,7 @@ public import Sheaf.Paper.PbcQbarCategory
 public import Sheaf.Paper.PbcCoefficientTwists
 public import Sheaf.AlgebraicGeometry.ContinuousCoefficientCommRing
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+import Sheaf.SmoothPurity.NormalizedWitness
 
 /-!
 # Smooth purity at the condensed algebraic-closure coefficient unit

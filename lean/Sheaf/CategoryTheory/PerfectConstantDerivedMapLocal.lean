@@ -19,6 +19,7 @@ import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafOver
 import Mathlib.CategoryTheory.Sites.CoverLifting
 import Mathlib.CategoryTheory.Sites.PreservesSheafification
 import WeilConjectures.AlgebraicGeometry.SiteSheafificationSectionsLocal
+import Sheaf.CategoryTheory.PerfectConstantLocalChainRepresentative
 
 /-!
 # Derived maps out of a perfect constant complex are locally algebraic

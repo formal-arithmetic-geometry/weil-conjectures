@@ -7,6 +7,8 @@ public import Mathlib.CategoryTheory.Idempotents.Basic
 public import Mathlib.CategoryTheory.ObjectProperty.Small
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible
 import Sheaf.SixFunctors.BrownHypothesesAmbient
+import Sheaf.Paper.BrownHypothesesGeneration
+import Sheaf.SixFunctors.BrownHypothesesSmall
 
 /-!
 # Hypotheses of Brown representability

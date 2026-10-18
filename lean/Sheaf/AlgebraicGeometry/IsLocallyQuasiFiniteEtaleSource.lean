@@ -21,6 +21,8 @@ import Sheaf.AlgebraicGeometry.LocallyOfFiniteTypeOfIsLocallyQuasiFinite
 import Sheaf.AlgebraicGeometry.IsLocallyQuasiFiniteResLE
 import WeilConjectures.AlgebraicGeometry.Morphisms.ProperQuasiFinite
 import Sheaf.AlgebraicGeometry.QuasiFiniteLocallyQuasiFinite
+import Sheaf.AlgebraicGeometry.IsLocallyQuasiFiniteAffineCriterion
+import Sheaf.AlgebraicGeometry.Morphisms.LocallyOfFiniteTypeOfFlatLfpSource
 
 /-!
 # Local quasi-finiteness is etale local on the source

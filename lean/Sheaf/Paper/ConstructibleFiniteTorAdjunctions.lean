@@ -12,6 +12,8 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperLow
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Hom
 public import Mathlib.CategoryTheory.Adjunction.Restrict
 public import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategoryBraided
+import Sheaf.Paper.DetThmSfCtfStabilityInternalHom
+import Sheaf.SixFunctors.CtfStabilityDirectImages
 
 /-!
 # Restricted adjunctions on constructible finite-Tor complexes

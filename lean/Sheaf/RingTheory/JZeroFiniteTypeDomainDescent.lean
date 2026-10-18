@@ -18,6 +18,7 @@ import Mathlib.RingTheory.Flat.FaithfullyFlat.Basic
 import Sheaf.RingTheory.NoetherianAlgebraModuleGenericFreeness
 import Sheaf.RingTheory.LocalizationOfRegularRing
 import Sheaf.RingTheory.RegularRingFaithfullyFlatDescent
+import Sheaf.AlgebraicGeometry.IsRegularScheme
 
 /-!
 # A nonempty regular open descends along a finite type inclusion of domains

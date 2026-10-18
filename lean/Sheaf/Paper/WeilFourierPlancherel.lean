@@ -10,6 +10,7 @@ public import Sheaf.Paper.FourierTraceFunctions
 public import Mathlib.Analysis.Complex.Norm
 import WeilConjectures.WeilSheaf.FourierTrace
 import WeilConjectures.Mathlib.NumberTheory.LegendreSymbol.AddCharacter
+import Sheaf.Paper.FourierTraceFormula
 
 /-!
 # Plancherel for the trace functions of adic Weil complexes

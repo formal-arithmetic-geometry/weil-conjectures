@@ -11,6 +11,8 @@ public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 import Mathlib.CategoryTheory.Adjunction.Limits
 import Mathlib.CategoryTheory.Monoidal.Braided.Reflection
 import Sheaf.CategoryTheory.SheafificationTensorLocalIso
+import Sheaf.CategoryTheory.PresheafTensorInternalHom
+import Sheaf.CategoryTheory.SheafTensorClosed
 
 /-!
 # Closed symmetric tensor product of sheaves

@@ -50,6 +50,12 @@ import Sheaf.AlgebraicGeometry.ProEtaleCountableProductsExact
 import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
 
 public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
+import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
+import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimitIndependentCoefficients
+import Sheaf.Paper.AdicConstructibleFiniteReductions
+import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
+import Sheaf.Paper.WContractibleConstantReductionsML
+import Sheaf.SixFunctors.ConnectedEtalePerfectConstant
 /-!
 # Local perfect lifting from lisse residue complexes
 

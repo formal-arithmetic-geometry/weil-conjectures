@@ -21,6 +21,7 @@ public import Mathlib.RingTheory.Ideal.Quotient.Operations
 import Sheaf.Algebra.Homology.DiagramKFlatReplacements
 
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
 /-!
 # Resolution independence of exact-sections derived reduction
 

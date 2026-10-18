@@ -17,6 +17,10 @@ import Sheaf.Paper.FiniteStagePairCategory
 import Sheaf.Paper.CommonStageCalculus
 import Sheaf.Paper.PbcVerdierAxioms
 import Sheaf.Algebra.Homology.DerivedChangeOfRingsIndependentCoefficients
+import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
+import Sheaf.Paper.IntrinsicQbarCategory
+import Sheaf.Paper.PbcQbarIdempotentComplete
+import Sheaf.Paper.PbcScalarExtension
 
 /-! # Idempotent-complete triangulation over the algebraic closure
 

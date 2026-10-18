@@ -10,6 +10,10 @@ public import Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import Mathlib.CategoryTheory.Adjunction.Basic
+import Sheaf.Algebra.Homology.HomComplex
+import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
 
 /-! # Localization orthogonality for derived internal Hom
 

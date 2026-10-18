@@ -11,6 +11,12 @@ public import Mathlib.Algebra.Polynomial.Eval.Defs
 public import Mathlib.RingTheory.FiniteType
 public import Mathlib.RingTheory.Localization.Away.Basic
 public import Mathlib.Topology.KrullDimension
+import Sheaf.AlgebraicGeometry.ClosedIrreducibleDimensionTrdeg
+import Sheaf.AlgebraicGeometry.GenericFibreClosedAvoidance
+import Sheaf.AlgebraicGeometry.LocalFibreDimensionOpen
+import Sheaf.RingTheory.DimensionAtPointLocalRingTrdeg
+import Sheaf.RingTheory.FinitePrimeTranscendentalCoordinate
+import Sheaf.TraceFormula.GenericFibreDimensionNeighborhood
 
 /-! # Generic principal coordinate dimension drop
 

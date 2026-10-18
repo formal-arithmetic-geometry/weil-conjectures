@@ -42,6 +42,10 @@ import Sheaf.Paper.CompletedDirectImageLimits
 import Sheaf.Paper.KoszulReconstruction
 
 public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
+import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimitIndependentCoefficients
+import Sheaf.Paper.DerivedCompleteOnSlices
+import Sheaf.Paper.IntegralReductionTowerCanonical
+import Sheaf.Paper.PbcQbarCompletedPullback
 /-!
 # Completed-coefficient direct image and its strict quotient tower
 

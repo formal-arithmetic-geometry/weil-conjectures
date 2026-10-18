@@ -9,6 +9,7 @@ public import Sheaf.CategoryTheory.InjectiveGradedFiltrationSplits
 public import WeilConjectures.CategoryTheory.FiniteFiltrationInduction
 public import Mathlib.Algebra.DirectSum.Basic
 public import Mathlib.Algebra.Group.Subgroup.Basic
+import WeilConjectures.CategoryTheory.Abelian.Filtration
 
 /-!
 # Symbols of filtered morphisms into an injective filtered object

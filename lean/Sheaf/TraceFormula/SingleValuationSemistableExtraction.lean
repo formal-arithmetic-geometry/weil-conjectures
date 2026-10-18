@@ -15,6 +15,10 @@ public import Mathlib.FieldTheory.IsSepClosed
 
 import WeilConjectures.Blowup.Affine.ChartAlgebra
 import Sheaf.AlgebraicGeometry.StrictlySemistableModelNormal
+import Sheaf.SecTraceFormula.RationalValuationLinearResidue
+import Sheaf.TraceFormula.FiniteFibreValuationDomination
+import Sheaf.TraceFormula.ResidualCurveValueGroup
+import Sheaf.TraceFormula.ValuationHorizontalCurveModels
 
 /-!
 # Single valuation semistable extraction

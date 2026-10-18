@@ -17,6 +17,9 @@ import Sheaf.AlgebraicGeometry.CompactSupportComparisonUnit
 import Sheaf.AlgebraicGeometry.SupportComparisonPullbackCoherence
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
+import Sheaf.AlgebraicGeometry.SpecifiedExceptionalClassHom
+import Sheaf.Paper.ConstructibleExceptionalAdjunctionCoefficients
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-!
 # The two etale origins of restricted relative exceptional values

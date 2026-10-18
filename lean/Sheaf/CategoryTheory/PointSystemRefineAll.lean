@@ -10,6 +10,7 @@ public import Mathlib.CategoryTheory.Category.Preorder
 public import Mathlib.CategoryTheory.Limits.Types.Colimits
 public import Mathlib.CategoryTheory.Yoneda
 import Mathlib.CategoryTheory.Limits.Types.Filtered
+import Sheaf.Paper.PointSystemRefine
 
 /-!
 # Simultaneous refinement of an inverse system on a site

@@ -10,6 +10,20 @@ public import Sheaf.Paper.IntegralDerivedOperationsOnSlices
 public import Sheaf.Paper.GeneralAlgebraicallyClosedCoefficients
 public import Sheaf.AlgebraicGeometry.FixedEtaleOriginWitness
 public import Sheaf.AlgebraicGeometry.BoundedConstructibleComplexes
+import Sheaf.AlgebraicGeometry.FiniteCompactProjectionFormula
+import Sheaf.Paper.BasicOperationsCoefficientReduction
+import Sheaf.Paper.ComparisonTorAmplitude
+import Sheaf.Paper.ExchangeProjectionSuppliedDomains
+import Sheaf.Paper.FiniteTorAmplitudeSites
+import Sheaf.Paper.IntegralResidueTor
+import Sheaf.Paper.ProEtaleConstructibleOrigin
+import Sheaf.Paper.QcqsCompactSupportRealization
+import Sheaf.Paper.SfIntegralConstructible
+import Sheaf.Paper.SfRationalizationKaroubi
+import WeilConjectures.Compactification.Noetherian
+import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
+import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula.Rational
+import WeilConjectures.SixFunctors.Etale.Derived.ReductionConservative
 
 /-! # The pro-etale projection formula at the four coefficient stages
 

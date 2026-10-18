@@ -12,6 +12,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedC
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
 public import Mathlib.CategoryTheory.Limits.Preserves.Basic
 import Sheaf.Paper.OpenImmersionLocalizing
+import Sheaf.SixFunctors.ProperImageLocalizingProper
 
 /-!
 # Compact support along a single compactification on the localizing category

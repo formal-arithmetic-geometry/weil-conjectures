@@ -18,6 +18,9 @@ import Mathlib.Algebra.Category.Grp.AB
 import Mathlib.CategoryTheory.Abelian.DiagramLemmas.Four
 import Mathlib.AlgebraicGeometry.Morphisms.Immersion
 import Mathlib.Algebra.Homology.DerivedCategory.SingleTriangle
+import Sheaf.AlgebraicGeometry.CoefficientBoundedConstructibleProEtale
+import Sheaf.AlgebraicGeometry.ConstructibleExtContinuityStratum
+import Sheaf.Paper.CoefficientHeartGeneration
 
 /-!
 # Continuity of Ext from constructible complexes

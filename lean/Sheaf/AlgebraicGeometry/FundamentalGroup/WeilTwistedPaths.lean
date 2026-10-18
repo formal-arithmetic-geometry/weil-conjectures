@@ -9,6 +9,11 @@ public import Sheaf.AlgebraicGeometry.FundamentalGroup.FiniteEtaleWeilTransport
 import WeilConjectures.AlgebraicGeometry.GroupScheme.Defs
 import WeilConjectures.GroupTheory.WeilGroup
 import Mathlib.FieldTheory.Finite.GaloisField
+import Sheaf.AlgebraicGeometry.FrobeniusDetailed
+import Sheaf.AlgebraicGeometry.FundamentalGroup.ArithmeticLiftFibrePath
+import Sheaf.AlgebraicGeometry.FundamentalGroup.FLCFiber
+import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Functoriality
+import WeilConjectures.AlgebraicGeometry.FundamentalGroup.WeilGroup
 
 /-!
 # The coefficient-free twisted-path description of the Weil group

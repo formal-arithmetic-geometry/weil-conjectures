@@ -17,6 +17,11 @@ import Sheaf.RingTheory.ProEtale.ClosedLiftMap
 import WeilConjectures.RingTheory.ProEtale.ClosedLift
 import Sheaf.RingTheory.IndEtaleUniverseTransport
 import Sheaf.RingTheory.IndEtaleStability
+import Sheaf.AlgebraicGeometry.CondensedHenselianLisseRigidity
+import Sheaf.AlgebraicGeometry.CondensedLisseProEtaleLocality
+import Sheaf.AlgebraicGeometry.CondensedWContractibleLisseEvaluation
+import Sheaf.AlgebraicGeometry.GenericFiberComponentsSection
+import Sheaf.RingTheory.ProEtale.HenselianClosedLift
 
 /-! # Dualizable condensed complexes and local perfect scalar models
 

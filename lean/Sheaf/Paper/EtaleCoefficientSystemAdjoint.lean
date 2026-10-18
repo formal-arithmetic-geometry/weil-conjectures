@@ -33,6 +33,10 @@ import Mathlib.AlgebraicGeometry.Noetherian
 import Sheaf.CategoryTheory.GrothendieckDerivedBrownRightAdjoint
 import Sheaf.RingTheory.FiniteOverCompleteRing
 public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
+import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
+import Sheaf.CategoryTheory.ModulePullbackPushforwardAdjunction
+import Sheaf.CategoryTheory.SystemLevelLeftExtension
+import Sheaf.Paper.SemilinearDerivedSections
 /-!
 # The strict étale coefficient-system adjoint
 Source: Zheng, Six Operations and Lefschetz--Verdier, Constructions 5.14--5.15,

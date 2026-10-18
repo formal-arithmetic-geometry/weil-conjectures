@@ -45,6 +45,10 @@ import WeilConjectures.SixFunctors.Finite.Stalk
 import Sheaf.Paper.CompletedDirectImageLimits
 import Sheaf.AlgebraicGeometry.ProEtaleDirectImageComparison
 import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
+import Sheaf.AlgebraicGeometry.ProEtaleContinuousCohomologyLimit
+import Sheaf.Paper.DerivedNakayama
+import Sheaf.Paper.IntrinsicQbarCategory
+import Sheaf.Paper.LisseCompletedSystemComparison
 
 /-! # Finite etale direct image and ordinary adic cohomology
 

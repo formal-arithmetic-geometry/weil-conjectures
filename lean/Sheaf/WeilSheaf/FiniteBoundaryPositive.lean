@@ -9,6 +9,11 @@ public import WeilConjectures.WeilSheaf.LowerShriek
 import WeilConjectures.AlgebraicGeometry.ZeroDimensionalCohomology
 import WeilConjectures.WeilSheaf.Category
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerShriek
+import Sheaf.AlgebraicGeometry.SfIntrinsicCompactSupport
+import Sheaf.Paper.CompletedDirectImageLimits
+import Sheaf.Paper.FiniteMittagLeffler
+import Sheaf.Paper.IntrinsicQbarCategory
+import Sheaf.Paper.SfWeilSheafComplex
 
 @[expose] public section
 

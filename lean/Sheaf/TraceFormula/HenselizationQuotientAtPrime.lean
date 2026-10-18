@@ -6,6 +6,8 @@ Authors: SHEAF group NQ
 module
 
 public import Sheaf.RingTheory.HenselizationAtPrime
+import Sheaf.RingTheory.FiniteRingMapQuasiFinite
+import Sheaf.TraceFormula.HenselizationQuasiFiniteRing
 
 /-!
 # Ordinary henselization commutes with a local quotient

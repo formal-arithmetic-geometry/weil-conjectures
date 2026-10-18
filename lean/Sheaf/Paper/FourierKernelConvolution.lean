@@ -22,6 +22,11 @@ import WeilConjectures.FourierTransform.ArtinSchreierCohomology
 import Sheaf.Paper.SfRationalLocalGlobalPowerTorsion
 import Sheaf.Paper.SfRationalBoundedConeTorsion
 import Sheaf.Paper.SfOpenClosedTriangleAllStages
+import Sheaf.Paper.CommonStageFourierTransform
+import Sheaf.Paper.GeneralAlgebraicallyClosedCoefficients
+import WeilConjectures.FourierTransform.ArtinSchreier
+import WeilConjectures.FourierTransform.Defs
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Perfect
 
 /-!
 # The convolution of the Fourier kernels

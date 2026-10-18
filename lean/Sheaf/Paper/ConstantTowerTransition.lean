@@ -15,6 +15,7 @@ import Sheaf.CategoryTheory.NormalizedDerivedComparisonCommonResolution
 import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
 import Mathlib.Algebra.Homology.DerivedCategory.KInjective
 import Mathlib.Algebra.Homology.DerivedCategory.Plus
+import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
 
 /-!
 # Degree-zero direct image and coefficient transition maps

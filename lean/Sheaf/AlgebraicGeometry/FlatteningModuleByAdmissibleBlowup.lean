@@ -34,6 +34,16 @@ import Mathlib.AlgebraicGeometry.Morphisms.Proper
 import Sheaf.AlgebraicGeometry.DimensionBaseChange
 import Mathlib.RingTheory.Spectrum.Prime.Chevalley
 import Sheaf.AlgebraicGeometry.ModuleFinitePresentationCokernel
+import Sheaf.AlgebraicGeometry.GenericFreeBlowup
+import Sheaf.AlgebraicGeometry.ModuleAdmissibleBlowupCalculus
+import Sheaf.AlgebraicGeometry.ModuleStrictTransformAffinePushforward
+import Sheaf.AlgebraicGeometry.ModuleStrictTransformUniversalExact
+import Sheaf.AlgebraicGeometry.NagataBoundaryDivisorCartier
+import Sheaf.AlgebraicGeometry.UnramifiedMorphism
+import Sheaf.RingTheory.FreeSubtractionFlatness
+import Sheaf.TraceFormula.ElementaryModuleDevissage
+import Sheaf.TraceFormula.EtaleFlatteningDescent
+import Sheaf.TraceFormula.FlatFiniteTypeDensePresentation
 
 /-!
 # Flattening a module by an admissible blowup

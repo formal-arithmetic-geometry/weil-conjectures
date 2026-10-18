@@ -35,6 +35,8 @@ import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import Mathlib.CategoryTheory.Triangulated.HomologicalFunctor
 import Mathlib.Algebra.Category.Grp.AB
 import Mathlib.CategoryTheory.Abelian.DiagramLemmas.Four
+import Sheaf.CategoryTheory.DerivedCategory.CompositionAdjunctionNormalization
+import Sheaf.Paper.OrientedTripleLimitDescent
 
 /-! # Continuity of derived cohomology of oriented étale products
 

@@ -30,6 +30,8 @@ import WeilConjectures.AlgebraicGeometry.CoherentKernelCokernelLocallyNoetherian
 import Mathlib.AlgebraicGeometry.Noetherian
 import WeilConjectures.AlgebraicGeometry.PQFCohomology
 import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import Sheaf.AlgebraicGeometry.CurveSectionDegreePositivity
+import Sheaf.TraceFormula.IdealTwistVanishingImpliesAmple
 
 /-!
 # Positive degree characterizes ampleness on a proper integral curve

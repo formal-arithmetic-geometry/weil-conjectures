@@ -54,6 +54,14 @@ import Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
 import Mathlib.CategoryTheory.Sites.Point.Basic
 import Mathlib.CategoryTheory.Sites.Point.Skyscraper
 import Mathlib.Algebra.Homology.ShortComplex.ShortExact
+import Sheaf.AlgebraicGeometry.NormalizedSupportTriangle
+import Sheaf.AlgebraicGeometry.SupportedExteriorProduct
+import Sheaf.Paper.ExternalRHomConePairing
+import Sheaf.SixFunctors.OpenClosedFlatness
+import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
+import WeilConjectures.AlgebraicGeometry.ConstantSheafGeometricStalk
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
+import WeilConjectures.AlgebraicGeometry.GlobalSectionsStalkComparison
 
 /-!
 # Supported exterior products and localization triangles

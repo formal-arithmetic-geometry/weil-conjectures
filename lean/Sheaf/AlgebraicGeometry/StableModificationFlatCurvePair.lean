@@ -30,6 +30,7 @@ import Mathlib.AlgebraicGeometry.Morphisms.Immersion
 import Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
 import WeilConjectures.AlgebraicGeometry.RelativeProj.BaseChange
+import Sheaf.TraceFormula.TemkinStableModification
 
 /-!
 # Stable modification of a flat multipointed relative curve

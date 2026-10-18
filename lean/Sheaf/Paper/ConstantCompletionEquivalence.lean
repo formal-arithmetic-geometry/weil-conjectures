@@ -50,6 +50,9 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
 import Sheaf.RingTheory.NoetherianKoszulAugmentationProZero
 
 import Sheaf.Paper.KoszulComplex
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
+import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
+import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimitIndependentCoefficients
 /-!
 # Constant coefficients and their sheafwise adic completion
 

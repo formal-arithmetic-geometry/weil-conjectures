@@ -24,6 +24,8 @@ import WeilConjectures.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
 import WeilConjectures.AlgebraicGeometry.EtaleSetInverseImageRestriction
 import Mathlib.Algebra.MvPolynomial.Basic
 import Mathlib.RingTheory.Spectrum.Prime.Topology
+import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
+import Sheaf.CategoryTheory.ConstantLeftModuleInverseImage
 
 /-!
 # Endomorphism rigidity for an affine-line pullback

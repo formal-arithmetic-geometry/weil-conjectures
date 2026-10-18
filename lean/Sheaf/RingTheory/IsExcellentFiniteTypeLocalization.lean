@@ -16,6 +16,7 @@ import Sheaf.RingTheory.GRing
 import Sheaf.RingTheory.RegularRingEquiv
 import Mathlib.RingTheory.Spectrum.Prime.Topology
 import Mathlib.RingTheory.RegularLocalRing.Defs
+import Sheaf.AlgebraicGeometry.IsRegularScheme
 
 /-!
 # Excellence of finite type algebras and their localizations

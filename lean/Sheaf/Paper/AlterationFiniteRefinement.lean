@@ -21,6 +21,10 @@ import WeilConjectures.Compactification.StrictTransform
 import WeilConjectures.Blowup.Principalization
 import Sheaf.Compactification.NagataSketchClosure
 import Mathlib.AlgebraicGeometry.ZariskisMainTheorem
+import Sheaf.AlgebraicGeometry.FiniteAfterBlowup
+import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
+import WeilConjectures.Blowup.FiniteDegree.Algebra
+import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 
 /-!
 # Finite refinement of an alteration

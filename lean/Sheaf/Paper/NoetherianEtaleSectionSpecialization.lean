@@ -56,6 +56,8 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
 import Sheaf.AlgebraicGeometry.EtaleLocalNormalForm
 import Sheaf.AlgebraicGeometry.SmoothTensorDuality
 import WeilConjectures.Compactification.NagataCompactification
+import WeilConjectures.AlgebraicGeometry.DerivedCategories
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 
 /-! # Normalized ordinary etale specialization along a smooth section
 

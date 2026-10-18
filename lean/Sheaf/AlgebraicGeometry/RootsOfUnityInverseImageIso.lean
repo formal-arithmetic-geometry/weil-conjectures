@@ -14,6 +14,7 @@ import Sheaf.AlgebraicGeometry.ProEtaleStructureSheaf
 import Sheaf.CategoryTheory.TorsionSheafConstantModule
 import Sheaf.CategoryTheory.RingedSiteModules
 import Mathlib.CategoryTheory.Sites.Sheafification
+import Sheaf.AlgebraicGeometry.ProEtale.IsoSectionwiseInverseImage
 
 /-! # Compatibility of inverse-image roots of unity
 

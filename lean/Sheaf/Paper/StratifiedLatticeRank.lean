@@ -22,6 +22,7 @@ import Mathlib.LinearAlgebra.Dimension.Finrank
 import Sheaf.AlgebraicGeometry.EtaleOpenFpqcDescent
 import Mathlib.CategoryTheory.Sites.Precoverage
 import Sheaf.AlgebraicGeometry.WeaklyEtaleStability
+import Sheaf.Paper.CartesianCoefficients
 
 /-!
 # The clopen rank decomposition of a lisse coefficient module

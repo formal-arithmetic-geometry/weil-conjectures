@@ -18,6 +18,9 @@ import WeilConjectures.EtaleCohomology.Purity.Smooth.Adic
 import WeilConjectures.EtaleCohomology.Purity.Smooth.Rational
 import WeilConjectures.EtaleCohomology.Purity.Smooth.Reduction
 import WeilConjectures.EtaleCohomology.Purity.Smooth.Normalization
+import Sheaf.Paper.ConstantCoefficientScalarNormalization
+import Sheaf.Paper.DerivedPullbackTensorHom
+import Sheaf.Paper.FiniteTorAmplitudeSites
 
 /-! # Adic and rational smooth dualizing complexes
 

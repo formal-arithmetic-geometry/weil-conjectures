@@ -12,6 +12,7 @@ public import Sheaf.AlgebraicGeometry.BoundedConstructibleComplexes
 public import Sheaf.SixFunctors.EtaleHomThickLocus
 import Sheaf.Algebra.Homology.ScalarInternalHomAdjunction
 import Sheaf.SmoothPurity.InternalAdjunctionEvaluation
+import Sheaf.Paper.EtaleLocallyClosedShriek
 
 /-! # Coefficient change of the stratum internal-adjunction pairing
 

@@ -29,6 +29,7 @@ import Sheaf.Paper.CondensedConstantConstructibility
 import Sheaf.Paper.SmoothPurityCoefficientTowers
 
 public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
+import Sheaf.Paper.LocalizingClosureCtfEqualsBc
 /-!
 # The reduction tower is normalized
 

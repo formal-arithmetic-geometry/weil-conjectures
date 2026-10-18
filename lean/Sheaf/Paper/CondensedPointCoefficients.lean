@@ -22,6 +22,8 @@ import Sheaf.RingTheory.IndEtaleStability
 import WeilConjectures.AlgebraicGeometry.ProEtale.Comparison.Affine
 import Sheaf.AlgebraicGeometry.ConstantSheafSetsRepresentable
 import Sheaf.AlgebraicGeometry.ProEtaleComparisonSections
+import Sheaf.Topology.ProfiniteCondensedRing
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
 
 /-!
 # Coefficients on the pro-etale geometric point

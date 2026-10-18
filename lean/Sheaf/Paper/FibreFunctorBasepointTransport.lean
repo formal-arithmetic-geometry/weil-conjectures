@@ -21,6 +21,7 @@ import Sheaf.AlgebraicGeometry.FundamentalGroup.LocallyConstantEquivalence
 import Mathlib.CategoryTheory.Adjunction.Limits
 import Sheaf.Paper.LisseTensorScalarExtension
 import Sheaf.Paper.LisseAdicFiberFunctors
+import Sheaf.CategoryTheory.Galois.ExactFiniteGsetsForgetful
 
 /-! # Etale paths and transport of finite and adic stalks
 

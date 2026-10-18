@@ -10,6 +10,14 @@ public import Sheaf.Paper.IntegralUniformCoefficient
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.HomModule
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 public import Mathlib.CategoryTheory.Triangulated.Basic
+import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
+import Sheaf.Algebra.Homology.KFlat
+import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
+import Sheaf.Paper.CompletedConstantSheafReduction
+import Sheaf.Paper.ConstantModuleSectionProperties
+import Sheaf.Paper.SfCommonStageWeilCohomology
+import WeilConjectures.FromJoel.Algebra.Homology.BifunctorMappingCone
+import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
 
 /-!
 # Uniformizer cone comparison and uniform reduction bound

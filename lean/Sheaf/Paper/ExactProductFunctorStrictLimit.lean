@@ -13,6 +13,7 @@ public import Mathlib.CategoryTheory.Limits.Preserves.FunctorCategory
 import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitProducts
 import Mathlib.Algebra.Homology.DerivedCategory.KInjective
 import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
+import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimitIndependentCoefficients
 
 /-!
 # Canonical strict derived-limit comparison for exact product-preserving functors

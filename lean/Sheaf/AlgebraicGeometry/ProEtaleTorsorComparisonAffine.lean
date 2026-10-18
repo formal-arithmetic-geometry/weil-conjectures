@@ -15,6 +15,9 @@ import Sheaf.RingTheory.IndPrincipalZariski
 import Sheaf.AlgebraicGeometry.ProEtaleComparisonSections
 import Sheaf.CategoryTheory.SetSheafCoverDescent
 import WeilConjectures.AlgebraicGeometry.ProEtale.Comparison.Affine
+import Sheaf.AlgebraicGeometry.ProEtaleClassicalSheavesImage
+import Sheaf.AlgebraicGeometry.ProEtaleSiteComparison
+import Sheaf.RingTheory.IndEtaleUniverseTransport
 
 /-! # Affine comparison for torsors under classical group sheaves
 

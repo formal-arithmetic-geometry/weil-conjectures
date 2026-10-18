@@ -17,6 +17,7 @@ import Mathlib.LinearAlgebra.Basis.VectorSpace
 import Mathlib.Algebra.Module.Projective
 import Mathlib.RingTheory.Flat.Basic
 import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
 
 /-!
 # Cohomology and tensor product over a constant field sheaf

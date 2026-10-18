@@ -11,6 +11,12 @@ import Sheaf.AlgebraicGeometry.Curve.EtaleCohomologicalDimension
 import WeilConjectures.AlgebraicGeometry.Curve.Compactification
 import WeilConjectures.WeilSheaf.Category
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerShriek
+import Sheaf.AlgebraicGeometry.FiniteTypeSheafFiniteness
+import Sheaf.AlgebraicGeometry.SfIntrinsicCompactSupport
+import Sheaf.Paper.CompletedDirectImageLimits
+import Sheaf.Paper.FiniteMittagLeffler
+import Sheaf.Paper.IntrinsicQbarCategory
+import Sheaf.Paper.SfWeilSheafComplex
 
 @[expose] public section
 

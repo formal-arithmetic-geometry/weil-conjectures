@@ -12,6 +12,9 @@ import Mathlib.CategoryTheory.Adjunction.CompositionIso
 import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
 import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
 import Sheaf.Paper.KFlatRingedToposPullback
+import Sheaf.AlgebraicGeometry.ProEtaleConstantRingOperations
+import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
+import Sheaf.Paper.IntegralFinitePullbackComposition
 
 /-!
 # Associativity of canonical finite-coefficient derived pro-etale pullback comparisons

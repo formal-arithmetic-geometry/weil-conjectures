@@ -18,6 +18,7 @@ public import Sheaf.AlgebraicGeometry.ProEtaleConstantDerivedDirectImage
 public import Sheaf.Paper.SfIntegralReductionTower
 public import Sheaf.Paper.DerivedScalarExtensionRestrictionAdjunction
 public import WeilConjectures.CategoryTheory.Triangulated.DerivedLimit
+import Sheaf.Paper.AdicPunctualWeights
 /-! # Purity under finite étale pushforward
 
 Source: the blueprint of the Weil conjectures, chapter `sec-deligne-laumon-a1`,

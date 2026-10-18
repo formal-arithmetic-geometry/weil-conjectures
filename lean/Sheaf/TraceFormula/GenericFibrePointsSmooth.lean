@@ -7,6 +7,9 @@ public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import Mathlib.Topology.Irreducible
 public import Mathlib.Topology.Sober
+import Sheaf.AlgebraicGeometry.SmoothAtPointFibreCriterion
+import Sheaf.RingTheory.GeometricReducednessFiniteInseparableTest
+import WeilConjectures.AlgebraicGeometry.Morphisms.SlicingFlat
 
 /-! # Smoothness at generic points of geometrically reduced fibres
 

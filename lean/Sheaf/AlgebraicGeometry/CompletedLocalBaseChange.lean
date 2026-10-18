@@ -14,6 +14,7 @@ import Mathlib.RingTheory.AdicCompletion.AsTensorProduct
 import WeilConjectures.AlgebraicGeometry.FibreProductPointResidueField
 import WeilConjectures.RingTheory.AdicCompletionNoetherian
 import Sheaf.RingTheory.FiniteTypeBaseChangeAdicQuotients
+import Sheaf.NumberTheory.Padics.AdicInverseLimitIso
 
 /-!
 # Completed local rings after base change to the completed base

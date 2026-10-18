@@ -4,6 +4,8 @@ import Mathlib.AlgebraicGeometry.Morphisms.Integral
 import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 import Mathlib.AlgebraicGeometry.OpenImmersion
 import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
+import Sheaf.AlgebraicGeometry.FppfIntegralSurjectiveRefinement
+import WeilConjectures.AlgebraicGeometry.Morphisms.Integral.FinitePresentationApproximation
 
 /-! # Finite surjective refinements of fppf coverings
 

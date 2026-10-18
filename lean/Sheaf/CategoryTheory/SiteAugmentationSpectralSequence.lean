@@ -14,6 +14,9 @@ import Sheaf.TraceFormula.TotalSiteComponentRestriction
 import Sheaf.CategoryTheory.RingedSiteModulesGrothendieckOfUniverses
 public import WeilConjectures.Mathlib.Algebra.Homology.SpectralSequence.Basic
 public import WeilConjectures.Mathlib.Algebra.Homology.TotalComplex
+import Sheaf.CategoryTheory.Sites.GeometricMorphism
+import Sheaf.CategoryTheory.SliceSiteSimplicialAugmentation
+import Sheaf.TraceFormula.TotalSiteInjectiveAugmentationExactness
 
 /-!
 # Augmentation spectral sequence for a total simplicial site

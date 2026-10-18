@@ -10,6 +10,11 @@ public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.Algebra.Category.Grp.Abelian
 import Sheaf.Paper.InverseImageStalkGerm
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
+import Sheaf.AlgebraicGeometry.OpenImmersionRestriction
+import Sheaf.AlgebraicGeometry.PointedEtaleStalk
+import WeilConjectures.AlgebraicGeometry.InverseImageStalkGerm
+import WeilConjectures.SixFunctors.BaseChange.Square
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-!
 # Underived étale base change for an open and closed immersion

@@ -13,6 +13,9 @@ public import Sheaf.AlgebraicGeometry.SfIntrinsicRealizationTransport
 public import Sheaf.AlgebraicGeometry.ProEtaleConstantRingPullbackComparison
 public import Sheaf.Paper.StrictTowerOperations
 import Sheaf.AlgebraicGeometry.ProEtaleToposFunctorialityInverseImage
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
+import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
+import Sheaf.AlgebraicGeometry.ProEtaleInverseImageTensorComparison
 
 /-!
 # Base change of an inverse-limit tower and its finite tensor reduction

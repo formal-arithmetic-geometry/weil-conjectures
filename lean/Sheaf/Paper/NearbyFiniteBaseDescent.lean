@@ -12,6 +12,11 @@ public import WeilConjectures.AlgebraicGeometry.InvertibleExponent
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.AlgebraicGeometry.Noetherian
+import Sheaf.AlgebraicGeometry.FiniteBaseCechComponents
+import Sheaf.CategoryTheory.BoundedBelowCechConeComparison
+import Sheaf.Paper.OrientedProductPointsConservative
+import Sheaf.TraceFormula.FiniteBaseCechHypercohomology
+import Sheaf.TraceFormula.FiniteCoverTubeComparison
 
 /-!
 # Finite surjective descent for nearby-cycle comparisons

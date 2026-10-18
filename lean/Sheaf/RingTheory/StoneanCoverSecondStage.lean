@@ -16,6 +16,7 @@ import Mathlib.AlgebraicGeometry.Limits
 import Mathlib.CategoryTheory.Limits.ConcreteCategory.Basic
 import Mathlib.CategoryTheory.Limits.FilteredColimitCommutesFiniteLimit
 import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
+import Sheaf.RingTheory.IndEtaleUniverseTransport
 
 /-!
 # Realizing a Stonean cover of the components

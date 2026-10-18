@@ -39,6 +39,10 @@ import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
 import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
 
 public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
+import Sheaf.Paper.IntegralTensorProduct
+import Sheaf.Paper.IntegralTensorPullback
+import Sheaf.Paper.SmoothPurityNormalizedEquivalence
+import Sheaf.SixFunctors.ProEtale.DerivedCompletion
 /-!
 # Integral compact support and its strict reduction tower
 

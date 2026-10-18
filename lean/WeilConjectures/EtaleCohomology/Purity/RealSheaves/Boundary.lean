@@ -19,6 +19,10 @@ import Sheaf.AlgebraicGeometry.StrictHenselizationDVR
 import Sheaf.AlgebraicGeometry.StrictHenselizationStalkFormula
 import WeilConjectures.AlgebraicGeometry.Regular
 import WeilConjectures.Mathlib.RingTheory.RegularLocalRing.Defs
+import Sheaf.AlgebraicGeometry.PointedEtaleStalk
+import Sheaf.FieldTheory.StrictHenselianFractionInertia
+import Sheaf.Paper.CommonStageCurveWeilMiddleExtension
+import Sheaf.Paper.LisseIntegralSmallCoefficients
 
 /-!
 # Boundary extension of a lisse Weil sheaf on a curve

@@ -36,6 +36,14 @@ import Sheaf.AlgebraicGeometry.LocallyClosedStratification
 import WeilConjectures.Topology.Stratification
 import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
 import Mathlib.AlgebraicGeometry.Noetherian
+import Sheaf.Algebra.Homology.RhomGlobalSectionsOfUniverses
+import Sheaf.Algebra.Homology.RingedInternalHomShiftOfUniverses
+import Sheaf.AlgebraicGeometry.FiniteLocallyClosedStratification
+import Sheaf.AlgebraicGeometry.ProEtaleClosedLocalization
+import Sheaf.AlgebraicGeometry.ProEtaleConstantRingOperations
+import Sheaf.Paper.IntegralStratifiedPerfectCharacterization
+import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
+import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 
 /-! # Integral constructible complexes and uniformly bounded below sums
 

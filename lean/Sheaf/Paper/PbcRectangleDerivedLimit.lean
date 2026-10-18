@@ -7,6 +7,8 @@ module
 
 public import Sheaf.Paper.PbcRoosTriangle
 public import Sheaf.Paper.SequentialDerivedInverseLimitFunctor
+import Sheaf.Paper.CompletedRlimFunctor
+import Sheaf.Paper.CompletedTowerCompatibility
 
 /-!
 # The proper base change rectangle after sequential derived inverse limit

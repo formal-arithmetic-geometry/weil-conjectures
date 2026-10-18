@@ -44,6 +44,11 @@ public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 public import Sheaf.Paper.IntegralDerivedOperationsOnSlices
 
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
+import Sheaf.Algebra.Homology.RingedInternalHomDerivedComplete
+import Sheaf.Algebra.Homology.RingedInternalHomShiftOfUniverses
+import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
+import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimitIndependentCoefficients
+import Sheaf.CategoryTheory.ScalarLocalization
 
 /-!
 # The rational completed-evaluation locus is thick

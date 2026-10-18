@@ -11,6 +11,7 @@ public import Sheaf.AlgebraicGeometry.EtaleTensorSections
 import Mathlib.CategoryTheory.Sites.Limits
 import Sheaf.CategoryTheory.SiteCoveringAxioms
 import Sheaf.CategoryTheory.RingedSiteModules
+import Sheaf.SixFunctors.TraceFormula.SchemeEtaleInvertibleComparison
 
 /-!
 # Descent of invertible modules on an algebraic space

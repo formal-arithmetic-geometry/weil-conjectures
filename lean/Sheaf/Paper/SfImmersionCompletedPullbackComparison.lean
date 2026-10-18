@@ -30,6 +30,7 @@ import Sheaf.CategoryTheory.ModulePullbackTensorIso
 import Sheaf.CategoryTheory.DerivedCategory.StandardQuotientsPerfect
 import Sheaf.AlgebraicGeometry.ProEtaleCountableProductsExact
 import Mathlib.Topology.Algebra.Valued.LocallyCompact
+import Sheaf.Paper.PbcQbarCompletedPullback
 
 /-!
 # Ordinary immersion pullback and strict completed pullback

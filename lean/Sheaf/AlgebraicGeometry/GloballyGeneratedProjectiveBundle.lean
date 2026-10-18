@@ -12,6 +12,11 @@ import WeilConjectures.AlgebraicGeometry.RelativeProj.BaseChange
 import WeilConjectures.AlgebraicGeometry.RelativeProj.Universal
 import Sheaf.AlgebraicGeometry.RelativeProjectiveSpace
 import Mathlib.LinearAlgebra.SymmetricAlgebra.Basis
+import Sheaf.AlgebraicGeometry.QuasiCoherentSymmetricAlgebra
+import WeilConjectures.AlgebraicGeometry.Morphisms.Projective
+import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
+import WeilConjectures.AlgebraicGeometry.RelativeProj.Basic
+import WeilConjectures.LinearAlgebra.SymmetricAlgebra.Graded
 
 /-!
 # H-projectivity of a finitely globally generated projective bundle

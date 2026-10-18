@@ -29,6 +29,13 @@ import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 import Sheaf.Paper.ProEtaleCanonicalTensorPullback
 import Sheaf.Paper.AdicCoefficientDatum
 import Sheaf.Paper.NormalizedConstructibleTowerLocalEffectivity
+import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
+import Sheaf.AlgebraicGeometry.CompactSupportComparisonUnit
+import Sheaf.AlgebraicGeometry.SupportComparisonPullbackCoherence
+import Sheaf.Paper.IntegralUniformCoefficient
+import Sheaf.Paper.IntrinsicCompletionCompleted
+import Sheaf.Paper.ProEtaleConstructibleSheaf
+import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
 
 /-! # Triangulation of the compatible uniform integral category
 

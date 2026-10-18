@@ -21,6 +21,9 @@ import Sheaf.AlgebraicGeometry.ClosedImmersionResidueFieldIso
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 import WeilConjectures.AlgebraicGeometry.ModulePullbackFiniteType
 import WeilConjectures.AlgebraicGeometry.AffinePushforwardBaseChange
+import Sheaf.AlgebraicGeometry.FiniteTypeSheafFinitePresentationSupport
+import Sheaf.AlgebraicGeometry.TensorPullbackSectionAdjunction
+import Sheaf.TraceFormula.EtaleFiniteSmoothLocalStructure
 
 /-! # Elementary étale dévissage of a finite-type module
 

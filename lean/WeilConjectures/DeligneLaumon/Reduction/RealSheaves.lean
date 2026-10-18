@@ -27,6 +27,29 @@ import Sheaf.AlgebraicGeometry.ClosedPointField
 import Sheaf.RingTheory.SmoothPushoutFilteredColimitStage
 import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Purity
 import WeilConjectures.Mathlib.LinearAlgebra.Eigenspace.Triangularizable
+import Sheaf.AlgebraicGeometry.FiniteFieldClosedSubschemeDescent
+import Sheaf.AlgebraicGeometry.ProEtaleIntegralCoefficientLimit
+import Sheaf.DeligneLaumon.SmoothAffineFrontierStratification
+import Sheaf.Paper.AdicHeartIntrinsicFibres
+import Sheaf.Paper.AdicPunctualWeights
+import Sheaf.Paper.CondensedERealization
+import Sheaf.Paper.ConstantExtensionWeilHeartEquivalence
+import Sheaf.Paper.ContinuousRationalDerivedRealization
+import Sheaf.Paper.EtaleWeilFundamentalRepresentation
+import Sheaf.Paper.IntegralPullbackCompletedComparison
+import Sheaf.Paper.IntrinsicQbarCategory
+import Sheaf.Paper.LisseCompletedSystemComparison
+import Sheaf.Paper.LisseIntegralSmallCoefficients
+import Sheaf.Paper.LocalFrobeniusTrace
+import Sheaf.Paper.MixedWeightsStability
+import Sheaf.Paper.PointFibreEquivalence
+import Sheaf.Paper.RationalCoefficientCategoryComparison
+import Sheaf.Paper.SfConstructibleHeart
+import Sheaf.Paper.SfOpenClosedTriangleAllStages
+import Sheaf.Paper.SfWeilSheafComplex
+import Sheaf.Paper.StratifiedLattice
+import Sheaf.Paper.ZlFiniteAdicDirectImage
+import Sheaf.Paper.ZlImmersionWeilLocalBehavior
 
 /-!
 # Real Weil sheaves on an arbitrary base are mixed

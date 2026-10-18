@@ -17,6 +17,9 @@ import Sheaf.CategoryTheory.RingedSiteModulesGrothendieckOfUniverses
 import Sheaf.AlgebraicGeometry.ProEtaleClassicalSheavesModules
 import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 import Sheaf.AlgebraicGeometry.ProEtaleRestrictionInjectives
+import Sheaf.AlgebraicGeometry.BoundedBelowProEtaleComparison
+import Sheaf.AlgebraicGeometry.EtaleModuleAffineBound
+import Sheaf.CategoryTheory.ConstantLeftModuleInverseImage
 
 /-!
 # Uniform affine evaluation bound for classical pro-etale module sheaves

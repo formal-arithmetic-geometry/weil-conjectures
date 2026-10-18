@@ -37,6 +37,9 @@ import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
 import Sheaf.CategoryTheory.RingedSliceExtensionTensor
 import Mathlib.CategoryTheory.Adjunction.Limits
 import Sheaf.CategoryTheory.SiteMorphismComposition
+import Sheaf.AlgebraicGeometry.CoefficientBoundedConstructibleProEtale
+import Sheaf.AlgebraicGeometry.IntegralConstantCompletion
+import Sheaf.Paper.CartesianCoefficients
 
 /-!
 # Operations on bounded constructible integral coefficient complexes

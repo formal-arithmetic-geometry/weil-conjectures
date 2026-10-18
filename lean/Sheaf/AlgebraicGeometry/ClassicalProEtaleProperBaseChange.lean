@@ -31,6 +31,8 @@ import Sheaf.CategoryTheory.ThreeStepAdjunctionComparison
 import Sheaf.AlgebraicGeometry.ProEtaleDirectImageComparison
 public import WeilConjectures.SixFunctors.BaseChange.Derived
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.BaseChangeProperty
+import Sheaf.AlgebraicGeometry.ClassicalDerivedEquivalence
+import Sheaf.Paper.CondensedAmbientExchange
 
 /-!
 # Proper base change on classical pro-etale complexes

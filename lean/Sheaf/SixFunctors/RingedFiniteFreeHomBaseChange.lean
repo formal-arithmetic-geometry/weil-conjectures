@@ -22,6 +22,10 @@ public import Sheaf.Algebra.Homology.RhomGlobalSectionsOfUniverses
 import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
 
 public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
+import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
+import Sheaf.Algebra.Homology.RingedInternalHomShiftOfUniverses
+import Sheaf.Algebra.Homology.ScalarInternalHomAdjunction
 /-! # Finite free scalar extension and derived internal Hom
 
 Source: Stacks Project, sites-cohomology.tex, Tag 08J9, lemma-internal-hom,

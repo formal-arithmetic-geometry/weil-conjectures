@@ -8,6 +8,7 @@ module
 public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 public import Mathlib.RingTheory.TensorProduct.Basic
 public import Mathlib.RingTheory.TensorProduct.Maps
+import Sheaf.RingTheory.ReducednessTensorAlgEquiv
 
 /-!
 # Reducedness after tensoring with a chosen algebraic closure

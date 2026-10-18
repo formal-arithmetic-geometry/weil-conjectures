@@ -7,6 +7,8 @@ module
 
 import Sheaf.Paper.PbcScalarExtension
 public import Sheaf.Paper.PbcCommonStageCones
+import Sheaf.Paper.CommonStageCalculus
+import Sheaf.Paper.FiniteStagePairCategory
 
 /-! # Compatibility and independence of common-stage cone triangles
 

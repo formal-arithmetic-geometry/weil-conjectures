@@ -6,6 +6,10 @@ Authors: SHEAF group F3
 module
 
 public import Sheaf.WeilSheaf.CohomologyGeometricEquivalence
+import Sheaf.Paper.CommonStageCompactWeilCohomology
+import Sheaf.Paper.ConstantWeilStructure
+import Sheaf.Paper.PointProEtaleSectionsExact
+import Sheaf.SixFunctors.FrobeniusCohomologyTransport
 
 /-!
 # Cohomology and conjugate geometric Frobenius automorphisms

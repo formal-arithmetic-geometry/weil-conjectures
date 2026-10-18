@@ -14,6 +14,10 @@ public import Sheaf.Paper.ProEtaleLisseOrigin
 public import WeilConjectures.AlgebraicGeometry.AffineSpace.ZeroSection
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 import Sheaf.AlgebraicGeometry.ProEtaleConstantRingMap
+import Sheaf.AlgebraicGeometry.ProEtaleConstantRingOperations
+import Sheaf.AlgebraicGeometry.ProEtaleInverseImageStalk
+import Sheaf.AlgebraicGeometry.PurityAffineLineComponents
+import Sheaf.Paper.PurLisseMorphismRigidity
 
 /-!
 # Uniqueness for lisse sheaf maps

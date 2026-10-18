@@ -18,6 +18,9 @@ import Sheaf.CategoryTheory.RingedSiteModulesGrothendieckOfUniverses
 import WeilConjectures.CategoryTheory.Sites.InjectiveModuleAbelianAcyclic
 import Sheaf.CategoryTheory.ModuleAbelianEvaluationComparison
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusHomology
+import Sheaf.CategoryTheory.RingedSiteModules
+import Sheaf.Paper.SmoothPurityCoefficientTowers
+import Sheaf.Paper.SmoothPurityTowerEvaluationAdjoint
 
 /-!
 # Acyclic components of injective coefficient towers

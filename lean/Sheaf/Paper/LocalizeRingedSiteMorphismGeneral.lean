@@ -15,6 +15,7 @@ public import Mathlib.CategoryTheory.Sites.Pullback
 import Sheaf.Paper.SliceSiteLocalization
 import Sheaf.CategoryTheory.SiteCoveringAxioms
 import Sheaf.CategoryTheory.ModulePullbackPushforwardAdjunction
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
 
 /-!
 # Localization of ringed-site morphisms without extra covering axioms

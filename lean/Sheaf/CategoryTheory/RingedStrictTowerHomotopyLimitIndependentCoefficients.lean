@@ -7,6 +7,13 @@ module
 
 public import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimitOfUniverses
 public import Sheaf.Algebra.Homology.KFlat
+import Sheaf.Algebra.Homology.KInjectiveProductsTermwise
+import Sheaf.CategoryTheory.KInjectiveTotalDerived
+import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
+import Sheaf.CategoryTheory.RingedSiteModules
+import WeilConjectures.Algebra.Homology.TowerEvaluationKInjective
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
+import WeilConjectures.CategoryTheory.Triangulated.DerivedLimit
 
 /-!
 # Total derived inverse limits with independent site and coefficient universes

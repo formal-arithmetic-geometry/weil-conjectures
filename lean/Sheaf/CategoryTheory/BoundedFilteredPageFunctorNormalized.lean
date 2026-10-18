@@ -17,6 +17,8 @@ import Sheaf.Algebra.Homology.FilteredComplexRepresentativeEpis
 import Sheaf.CategoryTheory.FilteredQuotientMapRestrictions
 import Sheaf.CategoryTheory.FilteredQuotientCanonicalStructure
 import Sheaf.CategoryTheory.BoundedFilteredCoupleAbutment
+import Sheaf.Algebra.Homology.FilteredComplexSubquotients
+import WeilConjectures.CategoryTheory.Abelian.Filtration
 
 /-!
 # Finite filtered page functor with normalized successor maps

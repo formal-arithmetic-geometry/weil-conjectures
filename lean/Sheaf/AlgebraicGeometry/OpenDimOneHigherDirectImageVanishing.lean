@@ -18,6 +18,8 @@ import Mathlib.AlgebraicGeometry.AffineScheme
 import Mathlib.RingTheory.Flat.Localization
 import WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar
 import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.AffineVanishing
+import Sheaf.AlgebraicGeometry.LocalSpectrumOpenClassification
+import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.AffineMorphism
 
 /-!
 # Higher direct images of retrocompact opens in local dimension at most one

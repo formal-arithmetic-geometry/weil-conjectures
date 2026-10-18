@@ -18,6 +18,8 @@ import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
 import Sheaf.AlgebraicGeometry.ProEtaleDerivedPullbackComposition
 import Sheaf.Paper.RingedExchangeTensorCoherence
 import Sheaf.Paper.ProjectionMateExact
+import Sheaf.Paper.IntegralFinitePullbackComposition
+import Sheaf.SixFunctors.OpenTensorNormalization
 
 
 /-!

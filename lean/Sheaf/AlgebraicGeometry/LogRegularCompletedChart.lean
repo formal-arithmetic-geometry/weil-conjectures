@@ -16,6 +16,8 @@ import Sheaf.RingTheory.PowerSeriesFieldCohenRegularComplete
 import WeilConjectures.RingTheory.AdicCompletionNoetherian
 import Mathlib.RingTheory.AdicCompletion.Functoriality
 import Mathlib.RingTheory.AdicCompletion.Completeness
+import Sheaf.AlgebraicGeometry.FineSaturatedLogBlowup
+import WeilConjectures.RingTheory.CohenRing
 
 /-!
 # Completed sharp charts of log regular schemes

@@ -14,6 +14,11 @@ import Sheaf.RingTheory.SmoothOverFieldRegularLocal
 import Sheaf.AlgebraicGeometry.StrictHenselizationCompatibility
 import WeilConjectures.Mathlib.RingTheory.RegularLocalRing.Defs
 import WeilConjectures.RingTheory.HenselianLocalRootLifting
+import Sheaf.AlgebraicGeometry.FundamentalGroup.ArithmeticLiftFibrePath
+import Sheaf.FieldTheory.StrictHenselianFractionInertia
+import Sheaf.Paper.RealSheavesSetup
+import Sheaf.RingTheory.GeneralizedHenselizationAtPrime
+import Sheaf.RingTheory.HenselianResidueGaloisAction
 
 /-!
 # Residue Galois surjectivity and arithmetic constants at a boundary point

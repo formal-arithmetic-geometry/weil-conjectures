@@ -14,6 +14,7 @@ import Sheaf.AlgebraicGeometry.FunctionField
 import Sheaf.Topology.PresheafModuleStalkFunctor
 import WeilConjectures.AlgebraicGeometry.Coherent
 import WeilConjectures.Topology.PresheafModuleStalkFunctor
+import Sheaf.AlgebraicGeometry.CoherentFiniteType
 
 /-!
 # Torsion sections detected at the generic point

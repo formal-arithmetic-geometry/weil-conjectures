@@ -22,6 +22,7 @@ import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
 import Sheaf.Paper.SfIntegralConstructibleTriangulated
 import Sheaf.AlgebraicGeometry.IsomorphismDerivedPullbackEquivalence
 import Sheaf.CategoryTheory.MateIsoAlongEquivalences
+import Sheaf.Paper.CompactificationCoherence
 
 /-! # Compact-support exchange for geometric Frobenius
 

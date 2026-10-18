@@ -19,6 +19,8 @@ import Sheaf.CategoryTheory.BoundedInjectiveFibreDescent
 import WeilConjectures.CategoryTheory.Abelian.HorseshoeResolutions
 import WeilConjectures.AlgebraicGeometry.EtaleCohomologyPullbackFunctorial
 import Mathlib.Algebra.Homology.HomologySequenceLemmas
+import Sheaf.AlgebraicGeometry.RelativeEtaleCohomology
+import WeilConjectures.CategoryTheory.Sites.Torsor
 
 /-!
 # Relative torsor representatives and boundary signs

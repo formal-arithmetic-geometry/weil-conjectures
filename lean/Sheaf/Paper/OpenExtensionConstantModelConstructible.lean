@@ -19,6 +19,11 @@ import Sheaf.CategoryTheory.RingedSiteModules
 import Sheaf.Paper.ModuleObjects
 import WeilConjectures.CategoryTheory.ModuleObjects.ChangeOfScalarsSquare
 import Mathlib.CategoryTheory.Adjunction.Mates
+import WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalars
+import WeilConjectures.CategoryTheory.RingObjects.RingPresheaf
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs
+import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Defs
 
 /-!
 # Extension by zero and finite constant local models

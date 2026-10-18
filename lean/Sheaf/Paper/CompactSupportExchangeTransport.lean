@@ -19,6 +19,13 @@ import Sheaf.AlgebraicGeometry.Etale.DerivedExtensionZeroBaseChange
 import Sheaf.AlgebraicGeometry.FiniteOpenBaseChangeNormalized
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
+import Sheaf.AlgebraicGeometry.FixSiteOpenExchange
+import Sheaf.AlgebraicGeometry.FixedComparisonDirectImageMate
+import Sheaf.AlgebraicGeometry.FixedEtaleOriginWitness
+import Sheaf.AlgebraicGeometry.ProEtaleDerivedExtensionZeroBaseChange
+import Sheaf.Paper.ExchangeProjectionSuppliedDomains
+import WeilConjectures.Compactification.BaseChange
+import WeilConjectures.SixFunctors.ProEtale.BaseChange.SmoothBaseChange
 
 /-!
 # Transport of the chosen compact-support exchange

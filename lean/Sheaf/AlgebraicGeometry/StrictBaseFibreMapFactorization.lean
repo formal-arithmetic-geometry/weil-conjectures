@@ -11,6 +11,7 @@ import WeilConjectures.SixFunctors.BaseChange.DerivedPasting
 import Sheaf.Paper.StrictHenselizationPointEvaluationPointed
 import WeilConjectures.AlgebraicGeometry.InverseImageStalkGerm
 import Sheaf.AlgebraicGeometry.StrictHenselizationRestriction
+import Sheaf.AlgebraicGeometry.PointedEtaleStalk
 
 /-! # Fibre maps factor through restriction on the strict-local base
 

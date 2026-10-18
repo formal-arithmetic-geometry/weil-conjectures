@@ -33,6 +33,11 @@ import Sheaf.CategoryTheory.CompactGeneratorsBuildObjects
 import Sheaf.AlgebraicGeometry.UnboundedSiteComparison
 import Sheaf.AlgebraicGeometry.ProEtaleOpenTensor
 import Sheaf.AlgebraicGeometry.ProEtaleIntrinsicExtensionByZeroAdjunction
+import Sheaf.AlgebraicGeometry.ProEtaleIntrinsicExtensionByZeroExact
+import Sheaf.AlgebraicGeometry.UnboundedDirectImageComparison
+import WeilConjectures.SixFunctors.Etale.Derived.LowerStarProjection
+import WeilConjectures.SixFunctors.Etale.Derived.OpenImmersionLowerShriekProjection
+import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 
 /-!
 # Finite-ring transport of projection maps and integration transposes

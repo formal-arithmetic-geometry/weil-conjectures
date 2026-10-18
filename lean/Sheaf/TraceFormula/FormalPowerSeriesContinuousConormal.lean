@@ -12,6 +12,7 @@ public import Sheaf.RingTheory.ContinuousKaehlerDifferential
 import WeilConjectures.RingTheory.FiniteModuleComplete
 import Mathlib.RingTheory.MvPowerSeries.Equiv
 import Mathlib.RingTheory.AdicCompletion.Completeness
+import Sheaf.SixFunctors.TraceFormula.FormalPowerSeriesContinuousFree
 
 /-!
 # Continuous conormal sequence for a formal power series quotient

@@ -11,6 +11,12 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
 public import Mathlib.Algebra.Homology.DerivedCategory.ShortExact
+import Sheaf.AlgebraicGeometry.EtaleModuleEnoughInjectives
+import Sheaf.CategoryTheory.RingedSiteModules
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
+import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMap
+import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
+import WeilConjectures.SixFunctors.OpenClosed.Exact
 
 /-!
 # Canonically normalized support localization

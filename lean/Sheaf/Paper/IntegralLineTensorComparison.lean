@@ -24,6 +24,8 @@ import Sheaf.Algebra.Homology.AcyclicKFlatTensor
 import Sheaf.Algebra.Homology.SheafRingDerivedCoefficientAdjunction
 
 public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
+import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
+import Sheaf.CategoryTheory.LocalizedModuleExactForSystems
 /-!
 # Ordinary and completed tensor with an integral coefficient line
 

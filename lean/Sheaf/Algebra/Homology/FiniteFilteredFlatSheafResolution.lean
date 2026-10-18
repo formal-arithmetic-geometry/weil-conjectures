@@ -13,6 +13,14 @@ import Sheaf.CategoryTheory.RightFractionDenseSubcategory
 import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
 
 public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
+import Sheaf.Algebra.Homology.FilteredComplexSubquotients
+import Sheaf.Algebra.Homology.KFlat
+import Sheaf.Algebra.Homology.UniformFiniteFilteredLocalization
+import Sheaf.CategoryTheory.DgAbcHomotopyCategoryTriangulated
+import Sheaf.CategoryTheory.RingedSiteModules
+import WeilConjectures.CategoryTheory.Abelian.Filtration
+import WeilConjectures.CategoryTheory.RingedSiteGrothendieckAbelian
 /-!
 # Flat resolutions for a fixed finite filtration
 

@@ -11,6 +11,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
 import Mathlib.AlgebraicGeometry.Morphisms.Proper
+import Sheaf.AlgebraicGeometry.EtaleSpaceLocallyQuasiFinite
+import Sheaf.AlgebraicGeometry.SeparatedLocallyQuasiFiniteSpaceRepresentable
 
 /-!
 # Separated étale algebraic spaces over schemes are schemes

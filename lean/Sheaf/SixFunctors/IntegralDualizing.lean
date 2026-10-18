@@ -52,6 +52,14 @@ import Sheaf.CategoryTheory.SequentialTowerEvaluationFull
 import Mathlib.CategoryTheory.Limits.FunctorCategory.Basic
 import Sheaf.Paper.PointFibreEquivalence
 import Sheaf.Paper.WeilVerdierPreservationStrata
+import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
+import Sheaf.Algebra.Homology.RingedInternalHomShiftOfUniverses
+import Sheaf.AlgebraicGeometry.BoundedConstructibleComplexes
+import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimitIndependentCoefficients
+import Sheaf.Paper.ConstantCoefficientScalarNormalization
+import Sheaf.SixFunctors.CoefTowerEvaluationPairing
+import Sheaf.SixFunctors.CoefTowerTraceRectification
+import Sheaf.SixFunctors.FiniteDualitySiteComparison
 
 /- Stage-2 statement delivery metadata: Q117, 2026-10-18. -/
 /-!

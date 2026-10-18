@@ -20,6 +20,8 @@ import Sheaf.Algebra.Homology.SurjectiveModuleComplexTowerLimit
 import Sheaf.RingTheory.NilpotentMarkedFreeComplexLift
 import WeilConjectures.CategoryTheory.Triangulated.DerivedLimit
 import Sheaf.Algebra.Homology.DerivedChangeOfRingsIndependentCoefficients
+import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
+import Sheaf.Algebra.Homology.SheafRingDerivedCoefficientAdjunction
 
 /-!
 # Pseudo-coherent reconstruction over a tower of nilpotent quotients

@@ -26,6 +26,8 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
 import Sheaf.AlgebraicGeometry.EtaleInverseImageExact
 import Mathlib.CategoryTheory.Sites.GlobalSections
 import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageExact
+import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 
 /-!
 # Restriction and Leray for an open immersion

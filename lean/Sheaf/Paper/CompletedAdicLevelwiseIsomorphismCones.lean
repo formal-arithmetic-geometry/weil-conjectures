@@ -12,6 +12,10 @@ import Sheaf.Algebra.Homology.KFlatClosure
 import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
 import Sheaf.Algebra.Homology.DerivedChangeOfRingsIndependentCoefficients
 import Mathlib.CategoryTheory.Triangulated.Pretriangulated
+import Sheaf.Paper.AdicCoefficientDatum
+import Sheaf.Paper.CompletedRlimFunctor
+import Sheaf.Paper.IntrinsicCompletionCompleted
+import Sheaf.Paper.KoszulReconstruction
 
 /-! # Levelwise isomorphisms and complete cones
 

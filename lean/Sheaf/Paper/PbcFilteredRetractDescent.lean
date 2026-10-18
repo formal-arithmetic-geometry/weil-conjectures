@@ -9,6 +9,7 @@ public import Sheaf.Paper.FiniteStagePairCategory
 public import Mathlib.CategoryTheory.Idempotents.Basic
 
 import Sheaf.Paper.CommonStageCalculus
+import Sheaf.Paper.PbcScalarExtension
 
 /-!
 # Filtered retract descent for finite PBC coefficient stages

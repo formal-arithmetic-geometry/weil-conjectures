@@ -38,6 +38,9 @@ import Sheaf.CategoryTheory.ExactFunctorDerivedFunctor
 import Sheaf.Paper.ProEtaleCanonicalTensorPullback
 import Sheaf.CategoryTheory.SheavesAlgebraicStructuresObjects
 import Sheaf.AlgebraicGeometry.ProEtaleSiteComparisonFiniteLevel
+import Sheaf.AlgebraicGeometry.CoefficientProEtaleTorAmplitude
+import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Tensor
 
 /-!
 # Comparison of étale and pro-étale Tor amplitude

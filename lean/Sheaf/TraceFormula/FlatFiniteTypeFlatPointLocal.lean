@@ -9,6 +9,9 @@ public import Mathlib.RingTheory.Finiteness.ModuleFinitePresentation
 public import Mathlib.RingTheory.Localization.Finiteness
 public import Mathlib.Algebra.Module.LocalizedModule.AtPrime
 public import Mathlib.RingTheory.FinitePresentation
+import Sheaf.AlgebraicGeometry.FiniteTypeFlatEtaleNeighborhood
+import WeilConjectures.Mathlib.RingTheory.Finiteness.Descent
+import WeilConjectures.Topology.PresheafModuleStalkFunctor
 
 /-!
 # Finite type flat module has a finitely presented stalk

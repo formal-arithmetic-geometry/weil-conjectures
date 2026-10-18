@@ -6,6 +6,12 @@ Authors: SHEAF group N7
 module
 
 public import Sheaf.Paper.BoundaryQTransport
+import Sheaf.AlgebraicGeometry.ComparisonDerivedPullbackFixed
+import Sheaf.AlgebraicGeometry.SupportComparisonPullbackCoherence
+import Sheaf.Paper.DualityPairing
+import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
+import Sheaf.SixFunctors.FiniteDualitySiteComparison
+import WeilConjectures.SixFunctors.Etale.Derived.LowerStarProjection
 
 /-! # Boundary q and evaluation under site comparison
 

@@ -21,6 +21,7 @@ import Mathlib.AlgebraicGeometry.Morphisms.UniversallyInjective
 import Sheaf.AlgebraicGeometry.RelativelyFlatModulePullback
 import Sheaf.TraceFormula.GeometricReducedFibreLocusBaseChange
 import Sheaf.AlgebraicGeometry.FlatInvertibleSectionsTorsionFree
+import Sheaf.TraceFormula.ValuationReducedFibreNormalization
 
 /-!
 # Reduced fibres after a separable alteration

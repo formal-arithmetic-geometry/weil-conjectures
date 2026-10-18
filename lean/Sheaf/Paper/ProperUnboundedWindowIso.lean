@@ -21,6 +21,9 @@ import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
 import Mathlib.CategoryTheory.Triangulated.TStructure.TruncLEGT
 import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
+import Sheaf.Paper.CondensedModuleDerivedPushpull
+import Sheaf.Paper.ProperIndConstructibleUnbounded
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs
 
 /-!
 # The window isomorphisms for proper direct image

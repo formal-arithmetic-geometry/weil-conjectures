@@ -35,6 +35,7 @@ import Mathlib.CategoryTheory.Monoidal.Mod
 import Sheaf.Paper.CompletedCondensedCoefficients
 import Sheaf.CategoryTheory.Monoidal.ModuleEqualizerInternalHom
 import Sheaf.CategoryTheory.RingedSiteModulesGrothendieckOfUniverses
+import Sheaf.Paper.CartesianCoefficients
 
 /-!
 # Closure of lisse and constructible coefficient sheaves

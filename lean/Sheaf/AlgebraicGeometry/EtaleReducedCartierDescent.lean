@@ -10,6 +10,11 @@ public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Invertible
 public import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
+import Sheaf.AlgebraicGeometry.FpqcFinerThanEtale
+import WeilConjectures.AlgebraicGeometry.Descent
+import WeilConjectures.AlgebraicGeometry.Modules.VeryAmple
+import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.EffectiveCartier
+import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Etale
 
 /-!
 # Étale descent of reduced Cartier divisors

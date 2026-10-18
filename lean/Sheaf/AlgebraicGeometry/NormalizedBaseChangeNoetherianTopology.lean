@@ -14,6 +14,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Normalization
 public import WeilConjectures.AlgebraicGeometry.Modules.HilbertPolynomial
 
 import Sheaf.AlgebraicGeometry.FiniteTypeNoetherianSpectrum
+import Sheaf.TraceFormula.IntegralExtensionNoetherianSpectrum
 
 /-!
 # Noetherianity of a normalized base change

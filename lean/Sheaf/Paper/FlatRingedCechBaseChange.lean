@@ -14,6 +14,10 @@ import Sheaf.Paper.FlatExtendedCechComparison
 import Sheaf.Paper.SiteRestrictionExact
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.SliceRestrictionFlat
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
+import Sheaf.CategoryTheory.RingedSiteModules
+import WeilConjectures.AlgebraicGeometry.SiteRestrictionExact
 
 /-! # Flat base change of the global augmented Cech model
 

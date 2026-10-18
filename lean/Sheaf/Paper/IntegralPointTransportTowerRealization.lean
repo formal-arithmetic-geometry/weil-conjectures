@@ -17,6 +17,8 @@ import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
 import Sheaf.AlgebraicGeometry.ProEtaleCountableProductsExact
 import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitExistence
 import Sheaf.Paper.PointProEtaleSectionsExact
+import Sheaf.Paper.IntegralOperationsWellDefined
+import Sheaf.Paper.InverseImagePullbackComparisonDerived
 
 /-!
 # Integral point transport as the realization of the finite transports

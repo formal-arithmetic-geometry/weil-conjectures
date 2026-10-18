@@ -32,6 +32,10 @@ public import Mathlib.Algebra.Category.ModuleCat.AB
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
 public import Mathlib.AlgebraicGeometry.Over
 import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
+import Sheaf.AlgebraicGeometry.ProEtaleIntrinsicExtensionByZeroExact
+import Sheaf.AlgebraicGeometry.ProEtaleModuleDirectImageLeftExact
+import Sheaf.AlgebraicGeometry.SfIntrinsicCompactSupport
+import Sheaf.Paper.SfCommonStageDirectImage
 
 /-!
 # Triangulated compactly supported direct image at a finite coefficient level

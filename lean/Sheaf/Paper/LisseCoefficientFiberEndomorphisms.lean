@@ -7,6 +7,7 @@ module
 
 public import Sheaf.Paper.LisseRationalScalarFiberMaps
 import Sheaf.NumberTheory.Padics.FiniteCoefficientFields
+import Sheaf.Paper.LisseIntegralSmallCoefficients
 
 /-!
 # Endomorphisms of geometric fibres under coefficient extension

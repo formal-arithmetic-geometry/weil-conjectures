@@ -8,6 +8,7 @@ module
 public import Sheaf.CategoryTheory.Sites.GrothendieckTopos
 public import Sheaf.CategoryTheory.SiteCoveringAxioms
 public import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
+import Sheaf.CategoryTheory.SmallSetOfCoveringFamilies
 
 /-!
 # Covering-family presentation of a sieve sheaf category

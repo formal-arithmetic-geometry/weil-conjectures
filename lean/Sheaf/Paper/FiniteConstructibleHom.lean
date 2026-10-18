@@ -27,6 +27,12 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Hom
 public import WeilConjectures.SixFunctors.Etale.Derived.TorAmplitude
 import Sheaf.Algebra.Homology.RingedInternalHomExactRestriction
 import Sheaf.Paper.ProEtaleConstructibleOrigin
+import Sheaf.Algebra.Homology.RingedInternalHomShiftOfUniverses
+import Sheaf.Paper.ComparisonTorAmplitude
+import Sheaf.Paper.FiniteCoefficientTensorCtf
+import Sheaf.Paper.FiniteStageVerdierBiduality
+import Sheaf.Paper.WeilVerdierPreservationStrata
+import Sheaf.SixFunctors.FiniteDualitySiteComparison
 
 /-!
 # Internal Hom of finite-stage constructible complexes

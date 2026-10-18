@@ -15,6 +15,7 @@ public import Mathlib.Algebra.Category.Grp.AB
 import Sheaf.CategoryTheory.ContinuousCocontinuousToposAdjunctionForCoverings
 import Sheaf.CategoryTheory.ConstantLeftModuleInverseImage
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusHomology
+import Sheaf.CategoryTheory.Sites.PullbackInjectiveEvaluationAcyclic
 
 /-! # Derived sections under a continuous cocontinuous site functor
 

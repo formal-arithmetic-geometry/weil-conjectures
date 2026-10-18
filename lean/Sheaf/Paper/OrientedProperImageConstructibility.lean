@@ -30,6 +30,15 @@ import WeilConjectures.AlgebraicGeometry.ZeroDimensionalCohomology
 import Sheaf.CategoryTheory.Sites.CoherentTopos
 import Sheaf.CategoryTheory.LeftModuleDerivedEvaluationForget
 import Sheaf.Paper.QcqsOrientedTriplePresentation
+import Sheaf.CategoryTheory.SitePointFibre
+import Sheaf.CategoryTheory.Sites.CoherentToposRepair
+import Sheaf.Paper.CoherentSetCriterion
+import Sheaf.Paper.OrientedConstructibleSheafVanishing
+import Sheaf.Paper.OrientedConstructibleSubquotients
+import Sheaf.Paper.OrientedProperFibreExchange
+import Sheaf.Paper.PsiConstructibilityDescent
+import Sheaf.TraceFormula.FinitarySiteCoherentGenerators
+import Sheaf.TraceFormula.FiniteBaseSplitsEtale
 
 /-!
 # Proper source direct image on vanishing topoi

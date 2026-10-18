@@ -42,6 +42,15 @@ import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 import Sheaf.Paper.LocallyConstantTensor
 
 public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
+import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
+import Sheaf.AlgebraicGeometry.AdicFiniteStratificationPullback
+import Sheaf.AlgebraicGeometry.CoefficientProEtaleTorAmplitude
+import Sheaf.AlgebraicGeometry.ConstructibleProEtaleComparison
+import Sheaf.AlgebraicGeometry.ProEtaleClassicalSheaves
+import Sheaf.AlgebraicGeometry.ProEtaleConstantRingOperations
+import Sheaf.AlgebraicGeometry.ProEtaleFiniteTorComparisonNoetherian
+import Sheaf.CategoryTheory.StrictRoosComparison
+import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
 /-! # Finite reductions of a derived-complete constructible complex
 
 Source: Stacks Project, proetale.tex, Tag 09C2, with Tag 09AL for compatible etale origins

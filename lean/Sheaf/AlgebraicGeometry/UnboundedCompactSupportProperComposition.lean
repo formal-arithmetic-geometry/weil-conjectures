@@ -19,6 +19,9 @@ import WeilConjectures.Compactification.CategoryBaseChange
 import Sheaf.AlgebraicGeometry.CompactifiableCompatibleTower
 import Sheaf.AlgebraicGeometry.Etale.OpenImmersionLowerShriekCoherence
 import Mathlib.AlgebraicGeometry.Noetherian
+import Sheaf.AlgebraicGeometry.UnboundedEtaleCompactSupportComparisons
+import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
+import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 
 /-!
 # Unbounded compact support composed with a proper direct image

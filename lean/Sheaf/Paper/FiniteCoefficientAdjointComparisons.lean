@@ -62,6 +62,11 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtaleOver
 import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
 import WeilConjectures.FromJoel.CategoryTheory.Monoidal.KFlat
 import Sheaf.Algebra.Homology.SheafRingDerivedCoefficientAdjunction
+import Sheaf.Paper.EtaleProEtaleAdjunctionTransfer
+import Sheaf.Paper.EtaleProEtaleCoefficientCompatibility
+import Sheaf.SecSmoothPurity.ReductionExceptional
+import Sheaf.SecSmoothPurity.ScalarExtensionFunctor
+import Sheaf.Targets.VectorBundlePurity
 
 /-! # Ordinary finite-coefficient exceptional adjunctions
 

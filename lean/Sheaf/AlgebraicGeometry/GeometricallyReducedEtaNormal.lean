@@ -25,6 +25,8 @@ import Sheaf.RingTheory.FlatLocalDepthFormula
 import Sheaf.RingTheory.SerreCriterionReduced
 import Sheaf.RingTheory.SmoothNormalRing
 import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Reduced
+import Sheaf.AlgebraicGeometry.Morphisms.NormalApproximationFiniteEtaModification
+import Sheaf.TraceFormula.GenericFibrePointsSmooth
 
 /-!
 # Geometrically reduced families are eta-normal

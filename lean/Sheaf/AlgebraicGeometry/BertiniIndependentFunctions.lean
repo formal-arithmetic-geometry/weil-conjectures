@@ -19,6 +19,7 @@ import Mathlib.RingTheory.KrullDimension.Polynomial
 import Mathlib.RingTheory.Spectrum.Prime.Noetherian
 import Mathlib.Topology.NoetherianSpace
 import Sheaf.RingTheory.FiniteTypeDomainDimensionTrdeg
+import Sheaf.RingTheory.FiniteTypeFibreComponentLowerBound
 
 /-!
 # Independent generic linear combinations from a codimension-two intersection

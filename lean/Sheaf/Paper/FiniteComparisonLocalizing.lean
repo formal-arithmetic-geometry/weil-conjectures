@@ -14,6 +14,12 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Low
 public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 import Sheaf.AlgebraicGeometry.ProEtaleIntrinsicExtensionByZeroExact
+import Sheaf.AlgebraicGeometry.ProEtaleDirectImageComparison
+import Sheaf.AlgebraicGeometry.ProEtaleExtensionZeroComparison
+import Sheaf.AlgebraicGeometry.ProEtaleFiniteTorComparisonNoetherian
+import Sheaf.AlgebraicGeometry.UnboundedSiteComparison
+import Sheaf.Paper.LocalizingAdmissibleCoefficients
+import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 
 /-!
 # Finite coefficient comparison on localizing closures

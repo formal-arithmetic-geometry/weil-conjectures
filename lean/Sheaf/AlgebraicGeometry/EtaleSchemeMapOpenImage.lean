@@ -7,6 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.AlgebraicSpace
 public import Mathlib.AlgebraicGeometry.OpenImmersion
+import Sheaf.AlgebraicGeometry.AlgebraicSpaceEtaleOpenImage
 
 /-!
 # The open image of an étale scheme map to an algebraic space

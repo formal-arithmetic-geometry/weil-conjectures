@@ -12,6 +12,7 @@ public import WeilConjectures.AlgebraicGeometry.Morphisms.Projective
 import Sheaf.AlgebraicGeometry.AbelianVariety.GeometricJacobianGaloisAction
 import WeilConjectures.AlgebraicGeometry.AbelianVariety.TateModule
 import WeilConjectures.GroupTheory.TateModule
+import Sheaf.AlgebraicGeometry.AbelianVariety.FiniteFieldTateNoFixed
 
 /-! # No fixed compatible first cohomology class on a proper curve
 

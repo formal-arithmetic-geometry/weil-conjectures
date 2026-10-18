@@ -16,6 +16,7 @@ import Sheaf.Paper.ProEtaleConstructibleOrigin
 import Sheaf.Paper.ComparisonTorAmplitude
 import Sheaf.AlgebraicGeometry.FiniteTypeFibreDimensionBound
 import Sheaf.Paper.EtaleHomFiniteTorAmplitude
+import Sheaf.Paper.ConstructibleHomComparison
 
 /-!
 # Finite-Tor constructible pro-etale internal Hom without separatedness

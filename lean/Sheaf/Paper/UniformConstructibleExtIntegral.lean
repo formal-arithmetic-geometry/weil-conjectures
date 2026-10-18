@@ -12,6 +12,7 @@ import Sheaf.Paper.FormalClosedSupportII
 import Sheaf.CategoryTheory.Sites.RGammaDerivedLimit
 import Sheaf.CategoryTheory.Triangulated.MilnorSequence
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoefficients
+import Sheaf.SixFunctors.ProEtale.DerivedCompletion
 
 /-!
 # The integral stratum Ext bound

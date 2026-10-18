@@ -16,6 +16,13 @@ import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimitIndependentCoefficient
 import Sheaf.Paper.IntegralOperationsPreserveConstructible
 import Sheaf.Paper.IntegralOperationsWellDefined
 import Mathlib.CategoryTheory.Localization.Predicate
+import Sheaf.AlgebraicGeometry.ProEtale.IsoSectionwiseInverseImage
+import Sheaf.AlgebraicGeometry.ProEtaleModuleStalkFunctor
+import Sheaf.Paper.FiniteCoefficientPoint
+import Sheaf.Paper.IntegralDerivedOperationsOnSlices
+import Sheaf.Paper.SfIntegralConstructible
+import Sheaf.Paper.SfRationalizationKaroubi
+import Sheaf.TraceFormula.IsomorphismDerivedPullbackComparisonNormalization
 
 /-!
 # Completed stalks and source reparametrization

@@ -16,6 +16,11 @@ public import Mathlib.Topology.KrullDimension
 public import Mathlib.Data.Finset.Lattice.Fold
 public import Mathlib.Data.Fintype.EquivFin
 public import Sheaf.Paper.FiniteFieldFiber
+import Sheaf.AlgebraicGeometry.IntrinsicConstructibleIntervals
+import Sheaf.AlgebraicGeometry.OpenComplementCondition
+import Sheaf.Paper.FiniteTorAmplitudeSites
+import Sheaf.Paper.OpenComplementUnconditional
+import Sheaf.Paper.PurityGeneralAdmissibility
 
 /-!
 # Affine-chart assembly for constructible exceptional inverse image

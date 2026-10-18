@@ -12,6 +12,8 @@ public import Sheaf.Paper.PbcCoefficientTwists
 public import Sheaf.CategoryTheory.StageSystemFunctorDescent
 import Sheaf.Paper.SfScalarExtensionComposition
 import Sheaf.Paper.IntegralTwistBaseChange
+import Sheaf.Paper.IntrinsicCoefficientTwistsUnrestricted
+import Sheaf.Paper.SfRationalizationKaroubi
 
 /-! # Tate twists descend through common finite coefficient stages
 

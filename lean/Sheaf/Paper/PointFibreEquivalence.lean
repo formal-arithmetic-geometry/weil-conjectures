@@ -59,6 +59,9 @@ import Sheaf.Algebra.Homology.RhomIntoKInjectiveLocal
 import Mathlib.LinearAlgebra.Basis.VectorSpace
 import Sheaf.Paper.PointSectionsScalarExtension
 import Mathlib.Algebra.Colimit.Module
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
+import Sheaf.Paper.CompletedScalarShift
+import Sheaf.Paper.PointSectionsTensorShift
 
 /-!
 # Exact equivalences given by the four geometric-point fibre functors

@@ -8,6 +8,9 @@ module
 public import Sheaf.AlgebraicGeometry.ProEtaleOperations
 public import Sheaf.Algebra.Homology.DerivedTensor
 import Sheaf.Paper.ProEtaleSheafificationTensorComparison
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.ConstantFieldTensorCohomology
+import Sheaf.AlgebraicGeometry.ProEtaleConstantRingOperations
 
 /-!
 # The field-module calculation for a principal residue quotient

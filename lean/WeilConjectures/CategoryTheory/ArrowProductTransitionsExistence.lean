@@ -10,6 +10,7 @@ public import Mathlib.CategoryTheory.Sites.Continuous
 public import Mathlib.CategoryTheory.Sites.Limits
 public import Mathlib.Algebra.Category.Grp.Limits
 public import Mathlib.CategoryTheory.Limits.Shapes.Products
+import Sheaf.CategoryTheory.SiteCoveringAxioms
 
 @[expose] public section
 universe u

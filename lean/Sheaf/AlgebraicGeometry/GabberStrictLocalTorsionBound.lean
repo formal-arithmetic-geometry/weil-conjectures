@@ -27,6 +27,12 @@ import Sheaf.AlgebraicGeometry.SmoothBaseChange.HigherDirectImageLargeFilteredCo
 import Sheaf.AlgebraicGeometry.ConstructibleEtaleModuleLimitDescent
 import WeilConjectures.AlgebraicGeometry.EtaleLowerShriekBaseChangeModules
 import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMap
+import Sheaf.AlgebraicGeometry.IndEtaleStrictLocalInvariance
+import Sheaf.CategoryTheory.ConstantLeftModuleInverseImage
+import Sheaf.CategoryTheory.LeftModuleDerivedEvaluationForget
+import Sheaf.Paper.StrictHenselizationFunctoriality
+import Sheaf.TraceFormula.GabberNearbyCycleDimensionBound
+import Sheaf.TraceFormula.OrientedPointCohomology
 
 /-!
 # Gabber's strict-local torsion cohomological bound

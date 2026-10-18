@@ -9,6 +9,23 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Fiber
 public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
 public import Sheaf.TraceFormula.Modification
+import Sheaf.AlgebraicGeometry.ClosedDominantDimension
+import Sheaf.AlgebraicGeometry.ClosedPointField
+import Sheaf.AlgebraicGeometry.ConnectedPointGeometricallyConnected
+import Sheaf.AlgebraicGeometry.FiniteDominantFibrePurity
+import Sheaf.AlgebraicGeometry.FlatInvertibleSectionsTorsionFree
+import Sheaf.AlgebraicGeometry.GeometricReducedFiniteTypePerfectField
+import Sheaf.AlgebraicGeometry.LocallyNoetherianComponentsLocallyFinite
+import Sheaf.AlgebraicGeometry.ProperFiniteFibreFiniteNeighbourhood
+import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
+import Sheaf.AlgebraicGeometry.SteinFactorizationAffine
+import Sheaf.FieldTheory.CommonExtensionFields
+import Sheaf.TraceFormula.FlatFibreComponentClosureDimension
+import Sheaf.TraceFormula.RelativeDimensionBaseChange
+import WeilConjectures.AlgebraicGeometry.AbelianVariety.Rigidity
+import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.FiniteFreeComplex
+import WeilConjectures.Mathlib.Topology.KrullDimension
 
 /-!
 # Finite image of a projection fibre under a proper comparison after modifying the base

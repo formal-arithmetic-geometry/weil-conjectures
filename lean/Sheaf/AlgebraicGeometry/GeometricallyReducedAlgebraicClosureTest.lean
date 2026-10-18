@@ -11,6 +11,7 @@ public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
 import Mathlib.AlgebraicGeometry.Pullbacks
 import Mathlib.RingTheory.Nilpotent.GeometricallyReduced
+import Sheaf.TraceFormula.ReducednessTensorChosenAlgebraicClosure
 
 /-!
 # Geometric reducedness tested on a chosen algebraic closure

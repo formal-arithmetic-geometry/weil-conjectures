@@ -24,6 +24,7 @@ import Sheaf.Algebra.Homology.BoundedAboveFlatSheafKFlat
 import Mathlib.CategoryTheory.Sites.Sheafification
 import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
 public import Sheaf.Algebra.Homology.TensorColimitsIndependentCoefficients
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
 
 /-! # The constant prime-power resolution on a small site
 

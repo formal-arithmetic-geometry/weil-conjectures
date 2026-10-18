@@ -17,6 +17,7 @@ public import Sheaf.CategoryTheory.RingedDerivedRestrictionGeneral
 public import Mathlib.AlgebraicGeometry.Sites.Proetale
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
+import Sheaf.CategoryTheory.LocalizedModuleExactForSystems
 
 /-!
 # Finite-cover scalar localization gives uniform power torsion

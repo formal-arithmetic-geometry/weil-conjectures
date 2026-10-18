@@ -36,6 +36,7 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.QuasiAffine
 import Mathlib.AlgebraicGeometry.Sites.Fpqc
 import Sheaf.AlgebraicGeometry.FppfSheafRepresentabilityDescentData
 import Sheaf.AlgebraicGeometry.QuasiAffineFpqcDescent
+import Sheaf.AlgebraicGeometry.AlgebraicSpaceEtaleOpenImage
 
 /-!
 # Étale quasi-affine image is schematic

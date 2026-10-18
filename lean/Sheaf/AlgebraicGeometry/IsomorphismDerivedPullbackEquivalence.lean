@@ -12,6 +12,8 @@ public import Sheaf.AlgebraicGeometry.ProEtaleDerivedCategory
 public import Sheaf.AlgebraicGeometry.ProEtaleFiniteCoefficientDirectImage
 import Sheaf.CategoryTheory.RingedSiteModules
 import Mathlib.Algebra.Homology.DerivedCategory.Basic
+import Sheaf.AlgebraicGeometry.ProEtale.IsoSectionwiseInverseImage
+import Sheaf.Paper.DerivedPullbackTensorHom
 
 /-!
 # Derived pro-etale pullback along a scheme isomorphism

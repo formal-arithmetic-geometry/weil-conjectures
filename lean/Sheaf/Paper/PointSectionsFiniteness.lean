@@ -44,6 +44,11 @@ import Sheaf.RingTheory.NilpotentTorsionDerivedLimitComplete
 import Sheaf.AlgebraicGeometry.SpecAlgClosedEtaleSheafConstant
 import Sheaf.AlgebraicGeometry.ProEtaleCountableProductsExact
 import Sheaf.AlgebraicGeometry.ProEtaleSiteComparisonFiniteLevel
+import Sheaf.Paper.DerivedCompleteOnSlices
+import Sheaf.RingTheory.DerivedCompleteModuleFinite
+import WeilConjectures.AlgebraicGeometry.FiniteLocallyConstantModuleValues
+import WeilConjectures.AlgebraicGeometry.SpecAlgClosedEtaleSheafConstant
+import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitExistence
 
 /-!
 # Finiteness of sections over the algebraically closed coefficient point

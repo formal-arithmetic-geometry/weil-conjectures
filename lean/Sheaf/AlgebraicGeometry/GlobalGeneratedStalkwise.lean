@@ -13,6 +13,8 @@ import Mathlib.CategoryTheory.Preadditive.Basic
 import Mathlib.CategoryTheory.Sites.Point.Skyscraper
 import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
+import Sheaf.AlgebraicGeometry.PointedEtaleStalk
+import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 
 /-!
 # Global generation detected on geometric stalks

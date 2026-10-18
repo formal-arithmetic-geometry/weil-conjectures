@@ -7,6 +7,7 @@ module
 public import Mathlib.RingTheory.RegularLocalRing.Defs
 public import Mathlib.RingTheory.Spectrum.Prime.Topology
 import Sheaf.RingTheory.RegularLocalUFDBoundaryFactorization
+import Sheaf.AlgebraicGeometry.IsRegularScheme
 
 /-!
 # Coprime generators in a regular local surface

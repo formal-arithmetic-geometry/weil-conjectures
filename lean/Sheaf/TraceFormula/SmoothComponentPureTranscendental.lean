@@ -17,6 +17,8 @@ import Mathlib.RingTheory.FiniteType
 import Mathlib.RingTheory.Spectrum.Prime.Noetherian
 import WeilConjectures.Mathlib.Topology.NoetherianSpace
 import Sheaf.AlgebraicGeometry.RegularNormalDecomposition
+import Sheaf.AlgebraicGeometry.ConnectedPointGeometricallyConnected
+import Sheaf.TraceFormula.SmoothGeometricallyNormal
 
 /-!
 # Geometrically integral component at a purely transcendental point

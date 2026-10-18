@@ -7,6 +7,33 @@ public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.CategoryTheory.EssentiallySmall
 public import Mathlib.CategoryTheory.Triangulated.Subcategory
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
+import Sheaf.AlgebraicGeometry.ConstructibleAffineFreePresentationGeneral
+import Sheaf.AlgebraicGeometry.FiniteLocallyClosedStratification
+import Sheaf.AlgebraicGeometry.NoetherianStratumDetection
+import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
+import Sheaf.CategoryTheory.InternalAbelianSheafModuleEquivalence
+import Sheaf.CategoryTheory.RingedSiteModules
+import Sheaf.CategoryTheory.RingedSiteModulesGrothendieckOfUniverses
+import Sheaf.CategoryTheory.SheafTensorStructure
+import Sheaf.CategoryTheory.SiteCoveringAxioms
+import Sheaf.Paper.CartesianCoefficients
+import Sheaf.Paper.CoefficientHeartClosure
+import Sheaf.Paper.CoefficientHeartSmall
+import Sheaf.Paper.CohomologyInWeakSerreSubcategory
+import Sheaf.Paper.CondensedConstantConstructibility
+import Sheaf.Paper.FiniteDiscreteCoefficientEncoding
+import Sheaf.Paper.FiniteDiscreteCondensedRing
+import Sheaf.Paper.FiniteDiscreteConstructibleEncoding
+import Sheaf.Paper.FiniteDiscreteRestrictionEncoding
+import Sheaf.Paper.FiniteDiscreteSchemeRing
+import Sheaf.Paper.FiniteRingConstructibleSheafOrigin
+import Sheaf.Paper.IntegralConstantModelHeartClosure
+import Sheaf.Paper.InternalModuleAbEquivalence
+import Sheaf.Paper.ProEtaleBoundedConstructibleTriangulated
+import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
+import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
+import WeilConjectures.CategoryTheory.TruncationTriangle
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs
 
 /-!
 # Thick and essentially small constructible finite-Tor complexes

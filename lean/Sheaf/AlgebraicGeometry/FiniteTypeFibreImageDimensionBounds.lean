@@ -18,6 +18,7 @@ import Mathlib.AlgebraicGeometry.Noetherian
 import WeilConjectures.AlgebraicGeometry.Modules.VeryAmple
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 import WeilConjectures.Mathlib.Topology.KrullDimension
+import Sheaf.DeligneLaumon.IrreducibleFibreDimensionLowerBound
 
 /-!
 # Fibre and image dimension bounds over a field

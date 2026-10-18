@@ -15,6 +15,8 @@ public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunc
 import Sheaf.Algebra.Homology.LocalizedRestrictionAdjunction
 import Sheaf.CategoryTheory.RingedSiteModulesGrothendieckOfUniverses
 import WeilConjectures.Mathlib.CategoryTheory.Preadditive.Injective.Preserves
+import Sheaf.CategoryTheory.ConstantLeftModuleInverseImage
+import Sheaf.CategoryTheory.RingedSiteModules
 
 /-!
 # Compatible slice section models from one injective complex

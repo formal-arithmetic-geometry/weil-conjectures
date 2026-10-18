@@ -7,6 +7,7 @@ module
 
 public import Sheaf.CategoryTheory.CoherentPairFunctorDescent
 public import WeilConjectures.CategoryTheory.StageSystem.Basic
+import Sheaf.NumberTheory.Padics.FiniteCoefficientFields
 
 /-! # Coherent functor descent on the existing StageSystem quotient
 

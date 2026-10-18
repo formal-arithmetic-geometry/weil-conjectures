@@ -7,6 +7,7 @@ module
 
 public import Sheaf.RingTheory.ExcellentRing
 public import Mathlib.AlgebraicGeometry.Noetherian
+import Sheaf.TraceFormula.CatenaryAffineOpenCover
 
 /-!
 # Universal catenarity on affine opens

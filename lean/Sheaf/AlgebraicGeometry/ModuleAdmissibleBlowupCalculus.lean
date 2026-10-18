@@ -17,6 +17,12 @@ import WeilConjectures.AlgebraicGeometry.Modules.TensorPullbackStalk
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 import Mathlib.RingTheory.Flat.Basic
 import Mathlib.LinearAlgebra.TensorProduct.RightExactness
+import Sheaf.AlgebraicGeometry.CoherentFiniteType
+import Sheaf.AlgebraicGeometry.ModuleStrictTransformKernel
+import Sheaf.AlgebraicGeometry.StrictTransformDifferentCenters
+import Sheaf.AlgebraicGeometry.TensorPullbackSectionAdjunction
+import WeilConjectures.Blowup.Principalization
+import WeilConjectures.Blowup.Proper
 
 /-!
 # Composition and flatness for admissible module strict transforms

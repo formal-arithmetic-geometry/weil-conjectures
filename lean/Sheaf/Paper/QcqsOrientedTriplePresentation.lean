@@ -10,6 +10,8 @@ public import Mathlib.CategoryTheory.Skeletal
 import Sheaf.CategoryTheory.SiteInverseImageTensor
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 import WeilConjectures.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
+import Sheaf.CategoryTheory.Sites.OrientedProductLargeSites
+import Sheaf.TraceFormula.QCQSEtaleFinitarySite
 
 /-! # A finite-cover triple site for oriented products of qcqs schemes
 

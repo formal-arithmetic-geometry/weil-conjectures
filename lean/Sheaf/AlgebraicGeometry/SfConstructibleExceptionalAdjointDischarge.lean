@@ -8,6 +8,11 @@ module
 public import Sheaf.AlgebraicGeometry.SfClassFullCohomologicalDimension
 public import Sheaf.Paper.FiniteFieldFiber
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+import Sheaf.AlgebraicGeometry.AmbientExceptionalRightAdjoint
+import Sheaf.AlgebraicGeometry.SpecifiedExceptionalClassHom
+import Sheaf.Paper.ConstructibleExceptionalAdjunctionCoefficients
+import Sheaf.Paper.ExceptionalAdjointAdmissibility
+import WeilConjectures.SixFunctors.ProEtale.FullCohomologicalDimension
 
 /-!
 # The relative interpretation of the exceptional adjoint

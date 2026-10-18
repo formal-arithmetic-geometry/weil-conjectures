@@ -42,6 +42,10 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
 import Mathlib.AlgebraicGeometry.Morphisms.Finite
 import Mathlib.Algebra.Homology.HomotopyCategory.ShortExact
 import Mathlib.Algebra.Homology.DerivedCategory.Basic
+import Sheaf.AlgebraicGeometry.BoundedBelowProEtaleComparison
+import Sheaf.Paper.ConstructibleExceptionalAdjunctionCoefficients
+import Sheaf.Paper.FiniteDirectImageComposition
+import Sheaf.Paper.SfCommonStageWeilCohomology
 
 /-!
 # The localization triangle of a retracted closed section

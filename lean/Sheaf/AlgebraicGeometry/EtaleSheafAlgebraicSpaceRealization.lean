@@ -15,6 +15,8 @@ import WeilConjectures.AlgebraicGeometry.EtaleSubsheafFinalOpen
 import Sheaf.AlgebraicGeometry.FpqcFinerThanEtale
 import WeilConjectures.AlgebraicGeometry.Sites.SmallEtaleRepresentablePresheafSheaf
 import Sheaf.AlgebraicGeometry.WeaklyEtaleStability
+import Sheaf.AlgebraicGeometry.AlgebraicSpaceFpqcSheaf
+import Sheaf.AlgebraicGeometry.ChartwiseEtalePermanence
 
 /-!
 # Algebraic-space realization of étale sheaves

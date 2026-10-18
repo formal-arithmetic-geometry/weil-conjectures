@@ -19,6 +19,9 @@ public import Sheaf.AlgebraicGeometry.ChosenCartesianSquare
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Hom
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.CategoryTheory.Adjunction.Mates
+import Sheaf.Paper.ProjectionMateExact
+import Sheaf.Paper.RingedProjectionTensorComposition
+import Sheaf.SixFunctors.RingedDerivedMonoidalComparisons
 
 
 /-!

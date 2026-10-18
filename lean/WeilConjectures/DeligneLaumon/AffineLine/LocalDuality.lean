@@ -18,6 +18,18 @@ import WeilConjectures.WeilSheaf.TateTwist
 import WeilConjectures.CategoryTheory.DerivedCategory.Perfect
 import WeilConjectures.EtaleCohomology.Purity.Smooth.Rational
 import WeilConjectures.SixFunctors.Etale.Derived.WeilFrobenius
+import Sheaf.AlgebraicGeometry.ProEtaleOpenRestrictionCounit
+import Sheaf.Paper.AdicMiddleExtensionConstructible
+import Sheaf.Paper.CommonStageCompactWeilCohomology
+import Sheaf.Paper.CommonStageCurveWeilMiddleExtension
+import Sheaf.Paper.DerivedPullbackTensorHom
+import Sheaf.Paper.FiniteTorAmplitudeSites
+import Sheaf.Paper.PointFdQbarCategory
+import Sheaf.Paper.PointFibreEquivalence
+import Sheaf.Paper.SfCommonStageDirectImage
+import Sheaf.Paper.SfLocalizationAllStages
+import Sheaf.Paper.SfOpenClosedTriangleAllStages
+import Sheaf.SixFunctors.CoefQbarVerdier
 
 /-!
 # Local boundary duality on a curve

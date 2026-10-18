@@ -8,6 +8,8 @@ public import Sheaf.AlgebraicGeometry.IntrinsicDerivedOpenAdjunction
 public import Mathlib.CategoryTheory.Adjunction.Mates
 import Mathlib.CategoryTheory.Adjunction.Unique
 import Sheaf.AlgebraicGeometry.ProEtaleDerivedPullbackComposition
+import Sheaf.Paper.DerivedPullbackTensorHom
+import Sheaf.Paper.IntegralFinitePullbackComposition
 
 /-!
 # Base change for an exceptional right adjoint reduces to the proper part

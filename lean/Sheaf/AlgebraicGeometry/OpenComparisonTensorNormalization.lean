@@ -19,6 +19,8 @@ import Sheaf.CategoryTheory.LocalizedModuleExactIndependent
 import Sheaf.Paper.ComparisonPullbackExact
 import Sheaf.Paper.RingedTopoiInverseImageTensorComparison
 import Sheaf.Paper.RingedTopoiTensorSections
+import Sheaf.CategoryTheory.LocalizedModuleExactForSystems
+import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 
 /-!
 # Tensor normalization for the open comparison

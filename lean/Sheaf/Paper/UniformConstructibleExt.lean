@@ -14,6 +14,10 @@ import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible
 import Sheaf.AlgebraicGeometry.BaseFieldCohomologicalDimension
 import Mathlib.Algebra.Homology.DerivedCategory.Ext.ExactSequences
+import Sheaf.Paper.FormalClosedSupportII
+import Sheaf.Paper.UniformConstructibleExtIntegral
+import Sheaf.Paper.UniformConstructibleExtRational
+import Sheaf.Paper.UniformConstructibleExtTorsion
 
 /-!
 # A uniform Ext bound for rational constructible sheaves

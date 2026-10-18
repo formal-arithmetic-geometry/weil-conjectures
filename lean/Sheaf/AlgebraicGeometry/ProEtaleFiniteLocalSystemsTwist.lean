@@ -8,6 +8,20 @@ public import Sheaf.Paper.ProEtaleFixedModuleLocalConstancy
 public import Sheaf.AlgebraicGeometry.ClassicalContinuityMap
 public import WeilConjectures.ConstructibleSheaf.Defs
 public import Mathlib.Algebra.Module.FinitePresentation
+import Sheaf.AlgebraicGeometry.ProEtaleClassicalSheavesModules
+import Sheaf.AlgebraicGeometry.ProEtaleComparisonTorsor
+import Sheaf.AlgebraicGeometry.ProEtaleFiniteConstantHom
+import Sheaf.AlgebraicGeometry.ProEtaleFiniteLocalSystemsType
+import Sheaf.AlgebraicGeometry.ProEtaleSiteComparison
+import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
+import Sheaf.AlgebraicGeometry.TorsorComparisonGlue
+import Sheaf.CategoryTheory.RingedSiteModules
+import Sheaf.CategoryTheory.SiteCoveringAxioms
+import Sheaf.CategoryTheory.SiteModuleSheafGluing
+import Sheaf.CategoryTheory.Sites.ConstructibleTorsor
+import Sheaf.Paper.ProEtaleLocallyConstantSheafOfUniverses
+import Sheaf.Paper.SliceSiteLocalization
+import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtaleOver
 
 /-!
 # Finite-presentation local systems and the pro-etale twist

@@ -13,6 +13,22 @@ public import WeilConjectures.Mathlib.RingTheory.Henselian
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 public import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
+import Sheaf.AlgebraicGeometry.FiniteTypeFibreDimensionBound
+import Sheaf.AlgebraicGeometry.GabberStrictLocalTorsionBound
+import Sheaf.AlgebraicGeometry.StrictHenselization
+import Sheaf.AlgebraicGeometry.UniversalHomeomorphismInvariance
+import Sheaf.CategoryTheory.Sites.OrientedProductLargeSites
+import Sheaf.Paper.NearbyGeometricSlice
+import Sheaf.Paper.OrientedNearbyCycles
+import Sheaf.Paper.OrientedNearbyStrictLocalDescription
+import Sheaf.Paper.PsiGoodOrientedCohomologyStrata
+import Sheaf.Paper.TraitNearbyBaseChange
+import Sheaf.RingTheory.EtaleHenselianRingLift
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
+import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism
+import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
+import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
+import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.FiniteComparison
 
 /-!
 # Standard nearby-cycle constructibility and vanishing

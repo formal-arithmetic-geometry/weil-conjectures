@@ -13,6 +13,9 @@ import Mathlib.FieldTheory.PurelyInseparable.Basic
 import Mathlib.FieldTheory.SeparableClosure
 import Sheaf.FieldTheory.SeparableTensorAlgebraicClosure
 import Sheaf.RingTheory.PowerGeneratedSpectrumHomeomorphism
+import Sheaf.AlgebraicGeometry.GeometricallyIrreducibleAlgebraClosure
+import Sheaf.FieldTheory.FieldExtensionGeometricallyIrreducible
+import WeilConjectures.FieldTheory.SeparableExtension
 
 /-!
 # Geometric irreducibility and separable elements

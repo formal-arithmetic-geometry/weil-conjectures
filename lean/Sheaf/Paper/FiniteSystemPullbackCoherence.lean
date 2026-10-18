@@ -14,6 +14,7 @@ import Sheaf.CategoryTheory.GeometricModuleTransport
 import Sheaf.CategoryTheory.ModulePullbackPushforwardAdjunction
 import Mathlib.CategoryTheory.Adjunction.CompositionIso
 import Mathlib.CategoryTheory.Localization.Predicate
+import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
 
 /-! # Coherent composition of finite-coefficient pullback on strict systems
 

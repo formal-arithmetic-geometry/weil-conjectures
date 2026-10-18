@@ -28,6 +28,9 @@ import Sheaf.Paper.ProEtaleProjectionFormulaArrows
 import Sheaf.Paper.ProjectionFormulaTotalization
 
 import Sheaf.Algebra.Homology.KFlatCoefficientUniverse
+import Sheaf.Algebra.Homology.RingedDerivedClosedSymmetricMonoidal
+import Sheaf.Algebra.Homology.RingedInternalHomDerivedComplete
+import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimitIndependentCoefficients
 /-!
 # Completion coherence of the projection mate
 

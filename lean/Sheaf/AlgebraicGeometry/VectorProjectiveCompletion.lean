@@ -18,6 +18,8 @@ import WeilConjectures.AlgebraicGeometry.RelativeProj.Universal
 import Mathlib.LinearAlgebra.SymmetricAlgebra.Basis
 import WeilConjectures.LinearAlgebra.SymmetricAlgebra.Graded
 import Mathlib.AlgebraicGeometry.Gluing
+import Sheaf.AlgebraicGeometry.ProjectiveBundleTautologicalGeometry
+import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 
 /-! # Projective completion of a vector bundle
 

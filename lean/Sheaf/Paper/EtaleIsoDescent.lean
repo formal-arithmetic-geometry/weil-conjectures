@@ -24,6 +24,8 @@ import Sheaf.CategoryTheory.LocalizedModuleExactIndependent
 import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
 import Sheaf.CategoryTheory.SiteCoveringAxioms
 import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
+import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
+import Sheaf.CategoryTheory.LocalizedModuleExactForSystems
 
 /-!
 # Isomorphisms descend along étale surjections

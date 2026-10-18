@@ -13,6 +13,9 @@ public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.HomologyP
 public import WeilConjectures.SixFunctors.ProEtale.Adic.Constructible
 import Sheaf.AlgebraicGeometry.OpenDirectImageFiniteCoefficients
 import Sheaf.AlgebraicGeometry.Sites.FiniteTorsionEtaleCohomologicalDimension
+import Sheaf.Paper.GeneralAlgebraicallyClosedCoefficients
+import Sheaf.Paper.LisseEConstructibleIntegralLattice
+import Sheaf.Paper.SfIntegralDirectImageConstructible
 
 /-!
 # Adic finiteness for a dense open immersion with affine source

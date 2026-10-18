@@ -21,6 +21,8 @@ import Sheaf.Algebra.Homology.ProjectiveHomEvaluationModel
 import Sheaf.Algebra.Homology.QuasiIsoHomComplexMap
 import Mathlib.Algebra.Homology.DerivedCategory.KProjective
 import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
+import Sheaf.Algebra.Homology.DerivedCoinductionAdjunction
+import WeilConjectures.FromJoel.CategoryTheory.Monoidal.KFlat
 
 /-! # Perfect-algebra coinduction is tensor with its algebra-valued dual
 

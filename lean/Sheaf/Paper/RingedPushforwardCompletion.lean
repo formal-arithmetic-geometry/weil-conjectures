@@ -40,6 +40,11 @@ import Sheaf.CategoryTheory.RingedTowerPushforwardLimitComparison
 import Sheaf.Paper.ProjectionFormulaTotalization
 
 import Sheaf.Algebra.Homology.KFlatCoefficientUniverse
+import Sheaf.Algebra.Homology.RingedInternalHomShiftOfUniverses
+import Sheaf.CategoryTheory.RingedPresentationTransport
+import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimitIndependentCoefficients
+import Sheaf.CategoryTheory.Sites.UnboundedSectionsLocalization
+import Sheaf.Paper.RingedDerivedSliceLocalization
 -- The high-priority successor-universe sheafification instance gets stuck on coefficient-universe goals.
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
 

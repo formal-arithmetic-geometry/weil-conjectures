@@ -23,6 +23,7 @@ import Sheaf.Algebra.Homology.DerivedChangeOfRingsIndependentCoefficients
 import Mathlib.RingTheory.Flat.Localization
 import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 import Sheaf.Algebra.Homology.SheafRingDerivedCoefficientAdjunction
+import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
 
 /-!
 # Scalar localization of shifted derived Hom

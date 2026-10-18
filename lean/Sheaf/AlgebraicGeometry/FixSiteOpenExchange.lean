@@ -14,6 +14,11 @@ public import Sheaf.AlgebraicGeometry.OpenImmersionSquare
 public import Sheaf.AlgebraicGeometry.OpenComparisonUnitNormalization
 public import Sheaf.AlgebraicGeometry.ProEtaleDerivedExtensionZeroBaseChange
 public import WeilConjectures.AlgebraicGeometry.DerivedCategories
+import Sheaf.AlgebraicGeometry.ChosenCartesianSquare
+import Sheaf.AlgebraicGeometry.Etale.DerivedExtensionZeroBaseChangeUnderivedCompatibility
+import Sheaf.AlgebraicGeometry.FiniteOpenExchangeScalars
+import Sheaf.AlgebraicGeometry.ProEtaleExtensionZero
+import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 
 /-!
 # Site comparison respects the normalized open base-change map

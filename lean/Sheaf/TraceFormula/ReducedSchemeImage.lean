@@ -10,6 +10,7 @@ public import Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
 import Sheaf.Paper.ReducedSourceFactors
+import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 
 /-!
 # Scheme theoretic image of a reduced scheme

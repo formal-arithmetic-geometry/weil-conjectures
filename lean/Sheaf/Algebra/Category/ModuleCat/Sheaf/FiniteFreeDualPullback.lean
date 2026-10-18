@@ -16,6 +16,8 @@ import Sheaf.CategoryTheory.ModulePullbackTensorIso
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 import Sheaf.Paper.LocalizeRingedSiteMorphism
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.HomCoverGluing
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
+import Sheaf.Paper.LocalizeRingedSiteMorphismGeneral
 
 /-!
 # Pullback of the dual of a finite locally free module on a ringed site

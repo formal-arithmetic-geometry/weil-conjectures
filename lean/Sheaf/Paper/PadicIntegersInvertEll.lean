@@ -12,6 +12,7 @@ import Sheaf.AlgebraicGeometry.ProEtalePointPullback
 import Sheaf.CategoryTheory.SheafTensor
 import Sheaf.Algebra.Homology.FilteredColimitsTensor
 import Mathlib.CategoryTheory.Limits.FilteredColimitCommutesFiniteLimit
+import Sheaf.Topology.ProfiniteCondensedRing
 
 /-!
 # Inverting the prime in the integral pro-étale coefficient ring

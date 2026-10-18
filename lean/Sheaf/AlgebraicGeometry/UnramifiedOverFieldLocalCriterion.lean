@@ -17,6 +17,7 @@ import Mathlib.RingTheory.Unramified.Basic
 import Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified
 import Sheaf.AlgebraicGeometry.Morphisms.FormallyUnramifiedStalkNeighbourhood
 import WeilConjectures.AlgebraicGeometry.Thickening
+import Sheaf.AlgebraicGeometry.UnramifiedFieldFibreDecomposition
 
 /-!
 # Local criterion for unramified schemes over a field

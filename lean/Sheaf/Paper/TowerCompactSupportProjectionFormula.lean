@@ -25,6 +25,11 @@ import Sheaf.Paper.FiniteDiscreteSchemeRing
 import Sheaf.Paper.KFlatRingedToposPullback
 import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
 import Sheaf.Paper.CondensedConstantConstructibility
+import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
+import Sheaf.Paper.FiniteDiscreteOrdinaryEquivalence
+import Sheaf.Paper.FiniteProperBaseChange
+import Sheaf.Paper.SemilinearDerivedSections
+import Sheaf.Paper.SmoothPurityCoefficientTowersAbelian
 
 /-!
 # Tower compact-support projection over an arbitrary standing field

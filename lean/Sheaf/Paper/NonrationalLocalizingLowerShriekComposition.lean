@@ -23,6 +23,15 @@ import Sheaf.Paper.CompactificationLocalizing
 import Sheaf.Paper.CompactificationRefinementLocalizing
 import Sheaf.Compactification.CommonDenseRefinement
 import Sheaf.Compactification.DenseRefinementMorphisms
+import Sheaf.Algebra.Homology.KInjectiveRestrictLocalized
+import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
+import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
+import Sheaf.CategoryTheory.RightDerivedFunctorOfQuasiIsoResolutions
+import Sheaf.Compactification.BoundaryRefinement
+import Sheaf.Paper.LocalizeRingedSiteMorphismGeneral
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Defs
+import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Defs
 
 /-!
 # Composition of finite and integral lower shriek on localizing constructible categories

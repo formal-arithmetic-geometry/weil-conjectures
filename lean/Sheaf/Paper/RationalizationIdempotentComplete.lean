@@ -12,6 +12,8 @@ public import WeilConjectures.CategoryTheory.Idempotents.Pretriangulated
 import WeilConjectures.CategoryTheory.Idempotents.TStructure
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
+import Sheaf.Paper.ConstructibleTruncations
+import Sheaf.Paper.SfRationalizationKaroubi
 
 /-!
 # Idempotent completeness of rationalized constructible complexes

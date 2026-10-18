@@ -21,6 +21,8 @@ import Sheaf.SixFunctors.TraceFormula.NodalGeometricFibresReduced
 import Sheaf.RingTheory.ProjectiveOverLocalFree
 import Sheaf.AlgebraicGeometry.SemistableMarkedBaseChange
 import Sheaf.AlgebraicGeometry.UnramifiedLocusBaseChange
+import Sheaf.TraceFormula.MultipointedCurve
+import Sheaf.TraceFormula.ValuationCurveProjectivePreparation
 
 /-! # The valuation-curve exceptional-tree local criterion
 

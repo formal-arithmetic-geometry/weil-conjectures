@@ -24,6 +24,16 @@ import Mathlib.CategoryTheory.Abelian.FunctorCategory
 import Mathlib.CategoryTheory.Sites.Limits
 import Sheaf.Paper.CompletedPullbackAdjunction
 import Sheaf.CategoryTheory.RingedSliceExtensionTensor
+import Sheaf.Algebra.Homology.KFlat
+import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
+import Sheaf.AlgebraicGeometry.FixedEtaleOriginWitness
+import Sheaf.AlgebraicGeometry.ProEtaleExtensionZero
+import Sheaf.AlgebraicGeometry.ProEtaleIntrinsicExtensionByZero
+import Sheaf.AlgebraicGeometry.ProEtaleSiteComparison
+import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
+import Sheaf.CategoryTheory.LocalizedModuleExactForSystems
+import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimitIndependentCoefficients
+import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 
 /-!
 # Strict reduction of completed extension by zero

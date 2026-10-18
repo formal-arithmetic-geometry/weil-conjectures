@@ -6,6 +6,10 @@ module
 
 public import Sheaf.AlgebraicGeometry.ProEtaleSiteComparisonDerived
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusBaseChange
+import Sheaf.AlgebraicGeometry.CompactSupportComparisonUnit
+import Sheaf.AlgebraicGeometry.ProEtaleSiteComparison
+import Sheaf.AlgebraicGeometry.ProEtaleSiteComparisonFiniteLevel
+import WeilConjectures.SixFunctors.ProEtale.Comparison.CohomologicalDimension
 
 /-!
 # Canonical finite-coefficient global comparison

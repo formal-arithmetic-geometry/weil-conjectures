@@ -36,6 +36,10 @@ import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
 import Sheaf.Paper.RingedExchangeTensorCoherence
 import Sheaf.Paper.ProjectionMateExact
 import Mathlib.Algebra.Homology.DerivedCategory.Basic
+import Sheaf.AlgebraicGeometry.ProEtaleConstantRingOperations
+import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
+import Sheaf.Paper.LocalizeRingedSiteMorphismGeneral
+import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
 
 /-!
 # Canonical localization comparisons for the projection mate

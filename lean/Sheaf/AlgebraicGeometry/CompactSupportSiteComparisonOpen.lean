@@ -19,6 +19,13 @@ public import Sheaf.AlgebraicGeometry.ProEtaleConstantRingOperations
 import Sheaf.AlgebraicGeometry.ProEtaleExtensionZero
 import Sheaf.Paper.ComparisonPullbackExact
 import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
+import Sheaf.AlgebraicGeometry.FixSiteOpenExchange
+import Sheaf.AlgebraicGeometry.FixedComparisonDirectImageMate
+import Sheaf.AlgebraicGeometry.SupportComparisonPullbackCoherence
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
+import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
+import WeilConjectures.SixFunctors.ProEtale.BaseChange.SmoothBaseChange
 
 /-! # Compactified site comparison and open restriction
 

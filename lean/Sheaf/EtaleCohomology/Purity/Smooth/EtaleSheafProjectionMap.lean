@@ -21,6 +21,10 @@ import Sheaf.Algebra.Category.ModuleCat.Presheaf.SheafificationBilinearExtension
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorBilinearUniversal
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 import Mathlib.CategoryTheory.Sites.Sheafification
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
+import Sheaf.AlgebraicGeometry.PointedEtaleStalk
+import WeilConjectures.AlgebraicGeometry.InverseImageStalkGerm
+import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMap
 
 /-!
 # The canonical projection map for étale sum extension

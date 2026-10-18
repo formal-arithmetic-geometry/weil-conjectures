@@ -12,6 +12,10 @@ public import Mathlib.AlgebraicGeometry.ResidueField
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import Mathlib.Topology.KrullDimension
 public import Mathlib.Topology.Sober
+import Sheaf.AlgebraicGeometry.ConstantLocalDimensionComponents
+import Sheaf.AlgebraicGeometry.EquidimensionalOpenLocalDimension
+import Sheaf.AlgebraicGeometry.FibreDimensionAfterBaseChange
+import Sheaf.TraceFormula.FlatFibreComponentClosureDimension
 
 /-! # Pure dimension of fibres of a flat family with dense pure-dimensional generic fibre
 

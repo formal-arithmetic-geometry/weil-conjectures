@@ -11,6 +11,13 @@ public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 public import WeilConjectures.WeilSheaf.Cohomology
 public import WeilConjectures.WeilSheaf.Constant
 import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
+import Sheaf.Paper.CommonStageCompactWeilCohomology
+import Sheaf.Paper.ConstantCoefficientScalarNormalization
+import Sheaf.Paper.ConstantWeilStructure
+import Sheaf.Paper.FiniteCoefficientPoint
+import Sheaf.Paper.FiniteCompactSupportConstructibility
+import Sheaf.Paper.FiniteMittagLeffler
+import Sheaf.Paper.QcqsCompactSupportRealization
 
 /-!
 # A finite-coefficient comparison for compactly supported constant cohomology

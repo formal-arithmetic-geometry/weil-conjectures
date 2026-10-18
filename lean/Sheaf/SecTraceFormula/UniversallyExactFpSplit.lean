@@ -3,6 +3,7 @@ module
 public import Mathlib.Algebra.Exact.Basic
 public import Mathlib.Algebra.Module.FinitePresentation
 public import Mathlib.LinearAlgebra.TensorProduct.Map
+import Sheaf.RingTheory.UniversalInjectiveFiniteTest
 
 /-!
 # A universally exact sequence with finitely presented quotient splits

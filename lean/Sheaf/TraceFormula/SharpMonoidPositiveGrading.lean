@@ -7,6 +7,7 @@ module
 
 public import Mathlib.LinearAlgebra.FreeModule.Basic
 public import Mathlib.GroupTheory.Finiteness
+import Sheaf.TraceFormula.RationalConeDualFinite
 
 /-!
 # Strictly positive integral grading of a sharp lattice monoid

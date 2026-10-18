@@ -19,6 +19,7 @@ import Sheaf.Paper.ProjectionFormulaTotalization
 import Sheaf.Paper.RingedProjectionRestriction
 public import Sheaf.Paper.CompletedConstantSheafReduction
 import Mathlib.Algebra.Homology.HomotopyCategory.DegreewiseSplit
+import Sheaf.AlgebraicGeometry.ProEtaleConstantRingOperations
 
 /-!
 # Perfect projection formula for completed coefficient reductions

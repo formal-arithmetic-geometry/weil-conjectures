@@ -16,6 +16,7 @@ import Sheaf.CategoryTheory.KInjectiveDerivedMapComputation
 import Sheaf.CategoryTheory.KInjectiveTotalDerived
 import Sheaf.CategoryTheory.RingedToposDerivedPushforwardComposition
 import Sheaf.CategoryTheory.PreDerivedAdjointFunctorsGeneral
+import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
 
 /-!
 # The ordinary pro-etale unit--Leray chain formula

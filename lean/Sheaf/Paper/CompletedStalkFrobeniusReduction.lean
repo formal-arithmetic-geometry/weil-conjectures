@@ -32,6 +32,7 @@ import Sheaf.Paper.FrobeniusCoefficientReductionCoherence
 import Sheaf.Paper.PointSectionsFiniteReduction
 import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
 import Sheaf.Paper.PointProEtaleSectionsExact
+import Sheaf.Paper.TraceFormulaLocalFrobeniusOperator
 
 /-!
 # Reduction of completed stalk Frobenius transport

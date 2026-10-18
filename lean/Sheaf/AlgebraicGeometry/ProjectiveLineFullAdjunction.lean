@@ -23,6 +23,8 @@ import Mathlib.AlgebraicGeometry.Morphisms.Proper
 import Mathlib.AlgebraicGeometry.ZariskisMainTheorem
 import Mathlib.AlgebraicGeometry.Noetherian
 import Sheaf.Paper.RingedExchangeTensorCoherence
+import Sheaf.AlgebraicGeometry.OrdinaryFiniteP1Decomposition
+import Sheaf.AlgebraicGeometry.ProjectiveLineDiagonalIntegrals
 
 /-!
 # The full projective-line adjunction

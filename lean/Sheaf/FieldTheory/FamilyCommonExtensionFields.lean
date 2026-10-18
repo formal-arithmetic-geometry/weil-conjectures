@@ -11,6 +11,7 @@ public import Mathlib.Algebra.Field.Defs
 import Mathlib.Algebra.Category.CommAlgCat.Basic
 import Mathlib.RingTheory.Spectrum.Maximal.Basic
 import Mathlib.RingTheory.Ideal.Quotient.Basic
+import Sheaf.TraceFormula.FamilyTensorNontrivial
 
 /-!
 # A common extension field for a small family

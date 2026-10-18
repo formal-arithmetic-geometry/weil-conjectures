@@ -17,6 +17,10 @@ import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 import Mathlib.AlgebraicGeometry.Morphisms.Immersion
 import WeilConjectures.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
 import Sheaf.Paper.LocalizeRingedSiteMorphism
+import Sheaf.AlgebraicGeometry.FiniteLocallyClosedStratification
+import Sheaf.CategoryTheory.ConstantLeftModuleInverseImage
+import Sheaf.Paper.LocalizeRingedSiteMorphismGeneral
+import Sheaf.SixFunctors.GeometricInverseImageConstantModule
 
 /-!
 # Common finite stratifications and pullback of chosen module trivializations

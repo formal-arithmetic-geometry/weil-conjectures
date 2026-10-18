@@ -17,6 +17,7 @@ import Mathlib.Algebra.Homology.Embedding.CochainComplex
 import Mathlib.CategoryTheory.Triangulated.Pretriangulated
 import Sheaf.Paper.LocalizingClosureExistence
 import Sheaf.Paper.DetIndHeartIISums
+import Sheaf.Paper.AmbientIndDerivedSums
 
 /-!
 # Constructible compactness for uniformly bounded ind-constructible families

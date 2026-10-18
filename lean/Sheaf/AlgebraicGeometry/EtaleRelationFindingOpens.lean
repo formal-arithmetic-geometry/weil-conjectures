@@ -7,6 +7,9 @@ public import Mathlib.AlgebraicGeometry.Sites.Fpqc
 public import Mathlib.CategoryTheory.Sites.Over
 public import Mathlib.CategoryTheory.Sites.Sheafification
 public import Sheaf.AlgebraicGeometry.AlgebraicSpace
+import Sheaf.AlgebraicGeometry.EtaleRelationKernelPair
+import WeilConjectures.AlgebraicGeometry.FpqcOpenSubschemeDescent
+import WeilConjectures.AlgebraicGeometry.SiteSheafificationSectionsLocal
 
 /-!
 # Restriction of a quotient by an fppf relation is an open subspace

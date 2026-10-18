@@ -11,6 +11,15 @@ import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimitIndependentCoefficient
 import WeilConjectures.CategoryTheory.Triangulated.DerivedLimit
 
 public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
+import Sheaf.Algebra.Homology.KInjectiveProductsTermwise
+import Sheaf.CategoryTheory.ExactFunctorDerivedFunctor
+import Sheaf.CategoryTheory.ModulePullbackPushforwardAdjunction
+import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
+import Sheaf.CategoryTheory.RingedToposDerivedPushforwardComposition
+import Sheaf.Paper.CoefficientRingedSequenceSite
+import Sheaf.Paper.RingedTopoiDerivedPullback
+import WeilConjectures.Algebra.Homology.RoosSplitComparison
+import WeilConjectures.Algebra.Homology.TowerEvaluationKInjective
 /-!
 # Shift compatibility of the coefficient reduction/limit adjunction
 

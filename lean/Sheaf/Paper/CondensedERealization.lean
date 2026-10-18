@@ -68,6 +68,21 @@ import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 import Mathlib.AlgebraicGeometry.Morphisms.Immersion
 import Sheaf.AlgebraicGeometry.ProEtaleRingSheafChangeAdjunction
 import Sheaf.Paper.StrictTowerExchangeMateNormalization
+import Sheaf.Algebra.Homology.RhomGlobalSectionsOfUniverses
+import Sheaf.AlgebraicGeometry.ProEtaleConstantRingOperations
+import Sheaf.CategoryTheory.DirectedTriangulatedImage
+import Sheaf.CategoryTheory.InternalAbelianSheafModuleEquivalence
+import Sheaf.CategoryTheory.LocalizationInverseImageCoherence
+import Sheaf.CategoryTheory.ScalarLocalizationDerivedHom
+import Sheaf.Paper.ContinuousCoefficientRealizations
+import Sheaf.Paper.ContinuousIntegralCoefficients
+import Sheaf.Paper.ContinuousIntegralLocalizationContinuity
+import Sheaf.Paper.ContinuousModuleEncodingScalarExtension
+import Sheaf.Paper.FiniteModelStratumFiltration
+import Sheaf.Paper.PbcQbarCompletedPullback
+import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
+import WeilConjectures.CategoryTheory.Triangulated.TStructure.Homology
+import WeilConjectures.ConstructibleSheaf.Pullback
 
 /-!
 # Realization of rationalized integral coefficients in condensed E-module objects

@@ -16,6 +16,7 @@ import Mathlib.AlgebraicGeometry.FunctionField
 import Mathlib.RingTheory.Ideal.MinimalPrime.Noetherian
 import Mathlib.RingTheory.Spectrum.Prime.Topology
 import Mathlib.Topology.Irreducible
+import WeilConjectures.Mathlib.AlgebraicGeometry.Normalization
 
 /-!
 # Affine charts of componentwise normalization

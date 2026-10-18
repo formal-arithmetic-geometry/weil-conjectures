@@ -20,6 +20,11 @@ import Sheaf.TraceFormula.GenusZeroSmoothProperLine
 import WeilConjectures.AlgebraicGeometry.Regular
 import Mathlib.RingTheory.Etale.Field
 import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
+import Sheaf.AlgebraicGeometry.SemistableMultipointedPair
+import Sheaf.TraceFormula.MultipointedCurve
+import Sheaf.TraceFormula.NodalContractionNormalizationBranches
+import Sheaf.TraceFormula.NodalSubcurveBoundary
+import Sheaf.TraceFormula.ReducedCurveNormalizationGenus
 
 /-! # The exceptional-tree criterion for a marked curve contraction
 

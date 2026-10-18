@@ -19,6 +19,11 @@ import Sheaf.Paper.NormalizedDVREffectivity
 import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimitIndependentCoefficients
 
 public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
+import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
+import Sheaf.Algebra.Homology.KFlat
+import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
+import Sheaf.Paper.CompletedIntegralConstantMapOfUniverses
+import Sheaf.Paper.NormalizedDVRTower
 /-! # Integral coherence before and after the derived limit
 
 Source: Stacks Project, sites-cohomology.tex, Tags 07A4 and 0941;

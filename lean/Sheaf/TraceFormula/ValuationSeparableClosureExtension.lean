@@ -3,6 +3,8 @@ module
 public import Mathlib.FieldTheory.IsSepClosed
 public import Mathlib.RingTheory.Valuation.ValuationSubring
 public import Mathlib.AlgebraicGeometry.Sites.Fpqc
+import Sheaf.RingTheory.ValuationAlgebraicHeight
+import WeilConjectures.Mathlib.RingTheory.Valuation.LocalSubring
 @[expose] public section
 
 universe u

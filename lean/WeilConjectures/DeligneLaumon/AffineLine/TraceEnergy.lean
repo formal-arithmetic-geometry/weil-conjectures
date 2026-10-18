@@ -32,6 +32,19 @@ import WeilConjectures.ZetaLinearAlgebra.DetTrace
 import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Boundary
 import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Chebotarev
 import WeilConjectures.EtaleCohomology.Purity.RealSheaves.LinearAlgebra
+import Sheaf.DeligneLaumon.RationalSeriesPoleRadius
+import Sheaf.LinearAlgebra.FrobeniusModuleWeights
+import Sheaf.LinearAlgebra.SpectrumExactSequence
+import Sheaf.Paper.AdicPunctualWeights
+import Sheaf.Paper.CommonStageCalculus
+import Sheaf.Paper.CommonStageCurveWeilMiddleExtension
+import Sheaf.Paper.EvenTensorPositivity
+import Sheaf.Paper.IntrinsicQbarCategory
+import Sheaf.Paper.LocalFrobeniusTrace
+import Sheaf.Paper.LocalFrobeniusTransportNormalization
+import Sheaf.Paper.PointFibreEquivalence
+import Sheaf.Paper.RationalStalkExact
+import Sheaf.Paper.SfWeilSheafComplex
 
 /-!
 # Detecting a weight from the growth of the squared trace sums

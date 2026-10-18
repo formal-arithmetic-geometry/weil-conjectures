@@ -8,6 +8,21 @@ public import Sheaf.AlgebraicGeometry.EtaleSumFlatKFlat
 public import Sheaf.SixFunctors.EtaleHomThickLocus
 
 public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.LocalizedSiteTensorRestriction
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.SliceRestrictionFlat
+import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
+import Sheaf.Algebra.Homology.KFlat
+import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
+import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
+import Sheaf.CategoryTheory.LocalizedModuleExactForSystems
+import Sheaf.CategoryTheory.RingedSliceExtensionTensor
+import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
+import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
+import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtaleOver
+import WeilConjectures.SixFunctors.Etale.Derived.Tensor
+import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
+import WeilConjectures.SixFunctors.OpenClosed.Complex
 /-!
 # Canonical étale open tensor and coefficient comparisons
 

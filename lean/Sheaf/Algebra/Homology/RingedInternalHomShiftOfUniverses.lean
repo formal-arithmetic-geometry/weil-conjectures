@@ -15,6 +15,18 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.HasMonoidalDerivedC
 public import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategory
 public import Sheaf.CategoryTheory.RingedSiteDualityMaps
 public import Mathlib.CategoryTheory.Triangulated.Functor
+import Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses
+import Sheaf.Algebra.Homology.DerivedInternalHomShiftLeft
+import Sheaf.Algebra.Homology.DerivedInternalHomShiftRight
+import Sheaf.Algebra.Homology.HomComplex
+import Sheaf.Algebra.Homology.HomComplexMappingCone
+import Sheaf.Algebra.Homology.HomTensorTotal
+import Sheaf.Algebra.Homology.KFlat
+import Sheaf.Algebra.Homology.KInjectiveHomComplex
+import Sheaf.Algebra.Homology.KInjectiveRestrictLocalized
+import Sheaf.Algebra.Homology.QuasiIsoHomComplexMap
+import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
 
 /-! # Normalized internal-Hom shifts with independent site universes
 

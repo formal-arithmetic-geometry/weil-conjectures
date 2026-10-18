@@ -10,6 +10,8 @@ public import Sheaf.AlgebraicGeometry.ProEtaleFiniteModuleAdjunction
 public import Sheaf.AlgebraicGeometry.ProEtale.IsoSectionwiseInverseImage
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.ScalarExtensionRingIso
 import Mathlib.CategoryTheory.Localization.Predicate
+import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
+import Sheaf.CategoryTheory.RingedSiteModules
 
 /-!
 # Identity normalization of ordinary pro-etale derived pullback

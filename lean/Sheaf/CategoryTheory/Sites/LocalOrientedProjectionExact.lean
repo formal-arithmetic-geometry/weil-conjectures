@@ -15,6 +15,10 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 import Mathlib.CategoryTheory.Yoneda
 import Mathlib.CategoryTheory.Limits.ConcreteCategory.Basic
 import Mathlib.Algebra.Category.ModuleCat.FilteredColimits
+import Sheaf.CategoryTheory.ConstantLeftModuleInverseImage
+import Sheaf.CategoryTheory.SitePointFibre
+import Sheaf.CategoryTheory.Sites.GeometricMorphism
+import Sheaf.CategoryTheory.Sites.OrientedProductLargeSites
 
 /-!
 # Gabber exactness of the local oriented-product projection

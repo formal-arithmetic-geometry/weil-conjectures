@@ -12,6 +12,9 @@ import Sheaf.Algebra.Homology.KFlatRHomCurrying
 import Sheaf.Algebra.Homology.KInjectiveHomComplex
 import Sheaf.Algebra.Homology.KInjectiveRestrictLocalized
 import Sheaf.Paper.RingedModelCurrying
+import Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses
+import Sheaf.CategoryTheory.LocalizedModuleExactForSystems
+import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
 
 /-! # Restriction preserves evaluation-normalized currying
 

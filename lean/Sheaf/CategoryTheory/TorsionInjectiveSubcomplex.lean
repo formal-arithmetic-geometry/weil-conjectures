@@ -9,6 +9,7 @@ public import Sheaf.CategoryTheory.SiteCoveringAxioms
 public import Mathlib.CategoryTheory.Sites.Abelian
 public import Mathlib.Algebra.Homology.HomologySequence
 public import Mathlib.CategoryTheory.Preadditive.Injective.Basic
+import WeilConjectures.CategoryTheory.Sites.SheafCohomologyTorsion
 
 /-!
 # Torsion subsheaf of an injective complex

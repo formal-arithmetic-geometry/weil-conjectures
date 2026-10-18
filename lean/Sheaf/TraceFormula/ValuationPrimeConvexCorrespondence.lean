@@ -8,6 +8,7 @@ module
 public import Mathlib.RingTheory.Valuation.ValuationSubring
 public import Mathlib.GroupTheory.QuotientGroup.Basic
 import Sheaf.GroupTheory.OrderedGroupPrimeIdealConvex
+import Sheaf.RingTheory.ValuationRingIdealCorrespondence
 
 /-!
 # Prime ideals and convex subgroups of a valuation ring

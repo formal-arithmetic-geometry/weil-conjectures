@@ -4,6 +4,13 @@ public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Finite
 public import WeilConjectures.SixFunctors.OpenClosed.ClosedImmersion
 public import Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 public import Mathlib.AlgebraicGeometry.Noetherian
+import Sheaf.AlgebraicGeometry.EtaleClosedImmersionEssentialImage
+import Sheaf.CategoryTheory.RingedSiteModules
+import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.SchemeTheoreticallyDominant
+import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import WeilConjectures.SixFunctors.OpenClosed.Complex
 
 /-!
 # Étale extension by zero for locally closed immersions

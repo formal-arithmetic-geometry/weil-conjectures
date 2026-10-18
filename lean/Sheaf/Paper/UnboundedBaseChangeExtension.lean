@@ -18,6 +18,8 @@ import Mathlib.CategoryTheory.Adjunction.CompositionIso
 import Mathlib.CategoryTheory.Shift.Adjunction
 import Mathlib.CategoryTheory.Triangulated.Adjunction
 import Mathlib.CategoryTheory.Triangulated.Subcategory
+import Sheaf.Paper.CondensedModuleDerivedPushpull
+import Sheaf.SixFunctors.ProperImageLocalizingProper
 
 /-!
 # Extending proper base change to the localizing closure

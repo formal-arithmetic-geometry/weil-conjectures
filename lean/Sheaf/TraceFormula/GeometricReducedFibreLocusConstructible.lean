@@ -10,6 +10,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.AlgebraicGeometry.Properties
 public import Mathlib.Topology.Constructible
 public import WeilConjectures.Mathlib.AlgebraicGeometry.ResidueField
+import Sheaf.AlgebraicGeometry.GeometricallyReducedAlgebraicClosureTest
+import Sheaf.AlgebraicGeometry.GeometricallyReducedFibreLocus
 
 /-!
 # Constructibility of the geometrically reduced fibre locus

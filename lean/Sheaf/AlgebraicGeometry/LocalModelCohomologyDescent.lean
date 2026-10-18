@@ -18,6 +18,7 @@ import Sheaf.AlgebraicGeometry.FiniteLocallyClosedStratification
 import Mathlib.Topology.Constructible
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
 
 /-!
 # Cohomology descent from finite scalar local models

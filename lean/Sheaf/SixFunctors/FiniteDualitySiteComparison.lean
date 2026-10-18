@@ -56,6 +56,11 @@ import Sheaf.AlgebraicGeometry.ComparisonDirectImage
 import Sheaf.AlgebraicGeometry.EtaleOriginAdjointClass
 import Sheaf.Paper.EtaleGeometricBiduality
 import Sheaf.AlgebraicGeometry.CompactSupportComparisonUnit
+import Sheaf.AlgebraicGeometry.FiniteDualityLocallyClosedComparison
+import Sheaf.AlgebraicGeometry.SpecifiedExceptionalClassHom
+import Sheaf.Paper.ConstructibleExceptionalAdjunctionCoefficients
+import Sheaf.Paper.SfPreservationClass
+import Sheaf.SixFunctors.FiniteDualityClosedComparison
 
 /-! # Finite-stage duality under the site comparison
 

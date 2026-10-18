@@ -28,6 +28,7 @@ import WeilConjectures.AlgebraicGeometry.RelativeEffectiveCartier
 import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Invertible
 import Mathlib.AlgebraicGeometry.Morphisms.Flat
 import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
+import Sheaf.RingTheory.Flat.LocalizationPreservesFlatness
 
 /-!
 # Local regular equations for a closed immersion of smooth schemes

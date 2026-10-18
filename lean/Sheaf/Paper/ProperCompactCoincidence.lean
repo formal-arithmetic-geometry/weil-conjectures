@@ -16,6 +16,14 @@ import WeilConjectures.Compactification.Refinement
 import Sheaf.AlgebraicGeometry.ProEtaleIntrinsicExtensionByZero
 import Sheaf.Paper.ProEtaleConstructibleOrigin
 import Sheaf.AlgebraicGeometry.CompactSupportRestrictionOfScalars
+import Sheaf.AlgebraicGeometry.SfIntrinsicCompactSupport
+import Sheaf.Paper.CommonStageCompactWeilCohomology
+import Sheaf.Paper.CompactificationCoherence
+import Sheaf.Paper.GeneralAlgebraicallyClosedCoefficients
+import Sheaf.Paper.QcqsCompactSupportRealization
+import Sheaf.Paper.SfCommonStageDirectImage
+import Sheaf.Paper.SfRationalizationKaroubi
+import Sheaf.SecSmoothPurity.IntrinsicCompactSupportRestriction
 /-!
 # Proper coincidence of compact-support and ordinary cohomology
 

@@ -36,6 +36,8 @@ import Sheaf.Algebra.Homology.BoundedAboveFlatSheafKFlat
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Hom
 import Sheaf.CategoryTheory.DerivedCategory.ChainSupertrace
 import Sheaf.CategoryTheory.DerivedCategory.TraceFormalLaws
+import Sheaf.AlgebraicGeometry.CoefficientBoundedConstructibleProEtale
+import WeilConjectures.ConstructibleSheaf.ProEtaleModule.Def
 
 /-! # Finite-dimensional realization and supertraces at a condensed coefficient point
 

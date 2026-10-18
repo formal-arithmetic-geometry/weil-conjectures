@@ -15,6 +15,8 @@ public import WeilConjectures.Mathlib.NumberTheory.Padics.RingHoms
 import Sheaf.CategoryTheory.SheafTensor
 import Sheaf.AlgebraicGeometry.Sites.ProetaleSiteProperties
 import Sheaf.AlgebraicGeometry.ProEtaleToposFunctorialityInverseImage
+import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
 
 /-!
 # Comparison with completed condensed coefficients

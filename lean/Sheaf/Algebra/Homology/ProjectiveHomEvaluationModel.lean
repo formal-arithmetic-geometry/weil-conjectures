@@ -18,6 +18,7 @@ import Sheaf.Algebra.Homology.ModuleHomComplexQuotient
 import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
 import Mathlib.Algebra.Homology.DerivedCategory.KProjective
 import Mathlib.RingTheory.Flat.Basic
+import WeilConjectures.FromJoel.CategoryTheory.Monoidal.KFlat
 
 /-! # Projective Hom complexes and the derived evaluation
 

@@ -7,6 +7,14 @@ module
 
 public import Sheaf.SecSmoothPurity.ReductionDirectImageComparison
 public import Sheaf.Paper.SfCompactSupportRestrictionOfScalars
+import Sheaf.AlgebraicGeometry.ProEtaleConstantRingOperations
+import Sheaf.AlgebraicGeometry.ProEtaleFixedScalarRestrictionDirectImage
+import Sheaf.AlgebraicGeometry.ProEtaleIntrinsicExtensionByZero
+import Sheaf.AlgebraicGeometry.ProEtaleIntrinsicExtensionByZeroExact
+import Sheaf.CategoryTheory.KInjectiveDerivedMapComputation
+import Sheaf.CategoryTheory.NormalizedDerivedComparisonCommonResolution
+import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
+import Sheaf.CategoryTheory.RingedSiteModules
 
 /-!
 # Intrinsic compact-support restriction of scalars

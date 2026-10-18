@@ -17,6 +17,8 @@ import Mathlib.Algebra.Module.LocalizedModule.Basic
 import Mathlib.Algebra.Module.LocalizedModule.Exact
 import Mathlib.RingTheory.PrincipalIdealDomain
 import Mathlib.RingTheory.DiscreteValuationRing.Basic
+import Sheaf.RingTheory.DvrLatticeDistanceDeterminant
+import Sheaf.RingTheory.SemilocalRestrictionLength
 
 /-!
 # Valuation of a field norm over a finite semilocal DVR algebra

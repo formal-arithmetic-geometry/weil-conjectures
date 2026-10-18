@@ -16,6 +16,11 @@ import Sheaf.CategoryTheory.InternalAbelianSheafModuleEquivalence
 import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
 import Sheaf.CategoryTheory.KInjectiveDerivedMapComputation
 import Sheaf.AlgebraicGeometry.ProEtaleOpenRestrictionCounit
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LowerShriek.Defs
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs
+import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Defs
 
 /-!
 # Coherence of derived direct image and open restriction

@@ -8,6 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.BaseChangeMapAbelianAndSets
 public import WeilConjectures.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
 import Mathlib.CategoryTheory.Functor.Flat
+import Sheaf.AlgebraicGeometry.ChosenCartesianSquare
 
 /-!
 # Sectionwise formula for the underived exchange of sheaves of sets

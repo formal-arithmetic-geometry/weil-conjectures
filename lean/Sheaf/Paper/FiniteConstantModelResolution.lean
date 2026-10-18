@@ -19,6 +19,9 @@ import Sheaf.Paper.CompletedConstantSheafReduction
 import Mathlib.LinearAlgebra.FreeModule.PID
 import Mathlib.RingTheory.Polynomial.RationalRoot
 import Mathlib.CategoryTheory.Abelian.FunctorCategory
+import Sheaf.AlgebraicGeometry.ProEtaleIntegralCoefficientLimit
+import Sheaf.NumberTheory.Padics.ExtensionIntegersDvr
+import WeilConjectures.CategoryTheory.ModuleObjects.Monoidal
 
 /-!
 # Two-term resolutions of finite constant scalar models

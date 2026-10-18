@@ -26,6 +26,13 @@ import Sheaf.CategoryTheory.Galois.GaloisTransitive
 import Sheaf.AlgebraicGeometry.GeometricallyConnectedAlgebraicClosure
 import Sheaf.AlgebraicGeometry.RegularNormalDecomposition
 import Sheaf.AlgebraicGeometry.FundamentalGroup.FiberEquivalence
+import Sheaf.AlgebraicGeometry.FundamentalGroup.FLCFiber
+import Sheaf.Paper.EtaleWeilFundamentalRepresentation
+import Sheaf.Paper.EtaleWeilSheafEquivalence
+import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Basic
+import WeilConjectures.AlgebraicGeometry.FundamentalGroup.WeilGroup
+import WeilConjectures.AlgebraicGeometry.Regular
+import WeilConjectures.GroupTheory.WeilGroup
 
 /-!
 # Dense open immersions and fundamental groups

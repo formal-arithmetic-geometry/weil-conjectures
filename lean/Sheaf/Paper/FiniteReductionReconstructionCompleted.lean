@@ -8,6 +8,11 @@ module
 public import Sheaf.Paper.IntrinsicCompletionCompleted
 public import Sheaf.Paper.SequentialDerivedInverseLimitCompleted
 public import Mathlib.CategoryTheory.Limits.Shapes.Products
+import Sheaf.Paper.AdicCoefficientDatum
+import Sheaf.Paper.CompletedConstantSheafReduction
+import Sheaf.Paper.FiniteProjectiveTensorProducts
+import Sheaf.Paper.KoszulReconstruction
+import Sheaf.Paper.PbcRoosTriangle
 
 /-! # Finite reduction of reconstruction over completed coefficients
 

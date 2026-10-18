@@ -11,6 +11,8 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Invertible
 import WeilConjectures.Blowup.BlowupUniversal
 import Sheaf.AlgebraicGeometry.CartierDivisorNowhereDense
+import WeilConjectures.Blowup.Principalization
+import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Basic
 
 /-!
 # Cartier boundary and dense interior after blowing up a boundary ideal

@@ -11,6 +11,7 @@ public import Mathlib.RingTheory.Localization.FractionRing
 public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
 public import WeilConjectures.Mathlib.RingTheory.Henselian
 public import Sheaf.RingTheory.HenselizationAtPrime
+import Sheaf.RingTheory.GeneralizedHenselizationAtPrime
 
 /-!
 # Artin theorem for an embedded join of henselizations

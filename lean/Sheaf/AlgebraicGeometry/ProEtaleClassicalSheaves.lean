@@ -14,6 +14,7 @@ import Sheaf.AlgebraicGeometry.ProEtaleClassicalSheavesUnit
 import Sheaf.AlgebraicGeometry.ProEtaleClassicalSheavesImage
 import Sheaf.AlgebraicGeometry.ProEtaleClassicalSheavesModules
 import Sheaf.AlgebraicGeometry.ProEtaleSiteComparisonFiniteLevel
+import Sheaf.SixFunctors.ClassicalDefinition
 
 /-! # Recognizing the classical part
 

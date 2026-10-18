@@ -6,6 +6,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Geometrically.Irreducible
 public import Mathlib.RingTheory.Algebraic.Defs
+import Sheaf.AlgebraicGeometry.GeometricIrreducibilityFiniteSeparableTest
 
 /-!
 # Algebraic closure in a field extension implies geometric irreducibility

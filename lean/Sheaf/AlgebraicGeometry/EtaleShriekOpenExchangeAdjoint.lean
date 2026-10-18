@@ -3,6 +3,11 @@ module
 public import Sheaf.AlgebraicGeometry.UnboundedEtaleCompactSupportComparisons
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability.OpenImmersion
 public import WeilConjectures.SixFunctors.Etale.Derived.OpenImmersionLowerShriek
+import Sheaf.AlgebraicGeometry.Etale.DerivedExtensionZeroBaseChangeUnderivedCompatibility
+import Sheaf.AlgebraicGeometry.Etale.OpenImmersionLowerShriekCoherence
+import Sheaf.AlgebraicGeometry.EtaleAmbientAdjointLocality
+import Sheaf.Paper.UnboundedProperOpenInterchange
+import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 
 /-!
 # Open compact-support exchange and the extension-composition mate

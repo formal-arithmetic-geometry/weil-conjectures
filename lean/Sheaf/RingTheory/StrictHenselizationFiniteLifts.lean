@@ -28,6 +28,7 @@ import Sheaf.RingTheory.EtaleResidueTriplesStrictHenselization
 import Sheaf.RingTheory.MapIntoHenselianColimit
 import Mathlib.FieldTheory.SeparableClosure
 import WeilConjectures.AlgebraicGeometry.EtaleChartResidueTriplesEquivalence
+import WeilConjectures.Mathlib.RingTheory.Henselian
 
 /-!
 # Strict henselization from finite local lifts

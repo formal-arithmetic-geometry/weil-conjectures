@@ -23,6 +23,10 @@ import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
 import Sheaf.CategoryTheory.KInjectiveComputes
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
 import Sheaf.Algebra.Homology.FirstQuadrantAugmentation
+import Sheaf.AlgebraicGeometry.TotalSimplicialEtaleSite
+import Sheaf.CategoryTheory.DerivedCategory.CompositionAdjunctionNormalization
+import Sheaf.CategoryTheory.RingedSiteModules
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-!
 # Canonical simplicial direct images and their augmentation spectral sequence

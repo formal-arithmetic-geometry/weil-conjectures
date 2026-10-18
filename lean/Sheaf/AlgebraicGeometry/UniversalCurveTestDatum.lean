@@ -15,6 +15,8 @@ import Sheaf.AlgebraicGeometry.ExchangeForgetCoefficients
 import Sheaf.AlgebraicGeometry.BaseChangeMapAbelianAndSets
 import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Injectivity.CriticalMap
 import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.FailureOverField.Detection
+import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
+import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.IntegralBaseChange
 
 /-!
 # Universal curve-test data with a signed annihilator

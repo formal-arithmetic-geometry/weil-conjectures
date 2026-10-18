@@ -33,6 +33,7 @@ import Sheaf.CategoryTheory.DerivedCategory.AdjointFunctors
 import Sheaf.Paper.DerivedCompleteOnSlices
 import Sheaf.SecSmoothPurity.ScalarExtensionFunctor
 import Sheaf.AlgebraicGeometry.ProEtaleTorAmplitude
+import Sheaf.AlgebraicGeometry.CoefficientProEtaleTorAmplitude
 
 /-!
 # Reconstruction of a normalized smooth-purity coefficient tower

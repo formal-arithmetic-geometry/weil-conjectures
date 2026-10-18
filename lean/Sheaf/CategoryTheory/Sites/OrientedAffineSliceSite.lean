@@ -10,6 +10,9 @@ public import Mathlib.CategoryTheory.Comma.StructuredArrow.Small
 public import Mathlib.CategoryTheory.Sites.Over
 public import Mathlib.CategoryTheory.Sites.Sheafification
 public import Sheaf.Paper.OrientedNearbyCycles
+import Sheaf.CategoryTheory.Sites.OrientedProductLargeSites
+import Sheaf.CategoryTheory.Sites.OrientedProductSliceLocalization
+import WeilConjectures.AlgebraicGeometry.FullAffineEtaleTopos
 
 /-!
 # Affine slice sites for oriented products

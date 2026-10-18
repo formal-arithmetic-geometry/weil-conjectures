@@ -19,6 +19,8 @@ import Sheaf.Algebra.Homology.StalkKFlatTensorHomology
 import Sheaf.Topology.RingedModuleSkyscraper
 import Sheaf.Topology.SkyscraperComplexStalk
 import WeilConjectures.Topology.InverseImageStalk
+import Sheaf.Algebra.Homology.RelativeTorAmplitudeLocalization
+import WeilConjectures.Topology.InverseImageModule
 
 /-! # Relative Tor amplitude on an affine scheme
 

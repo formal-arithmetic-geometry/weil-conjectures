@@ -7,6 +7,10 @@ module
 
 public import Sheaf.AlgebraicGeometry.StrictHenselizationCanonicalMap
 public import Mathlib.RingTheory.TensorProduct.Basic
+import Sheaf.Paper.StrictHenselizationFunctoriality
+import Sheaf.RingTheory.FiniteRingMapQuasiFinite
+import Sheaf.TraceFormula.StrictHenselizationQuasiFiniteRing
+import WeilConjectures.RingTheory.ProEtale.IntegralLocal
 
 /-!
 # Tensor compatibility of strict henselizations for a finite map

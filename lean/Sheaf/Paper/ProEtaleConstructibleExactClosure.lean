@@ -13,6 +13,13 @@ import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
 import Sheaf.CategoryTheory.FiniteTypeLocallyConstantSerre
 import Sheaf.RingTheory.WeaklyEtaleField
 import WeilConjectures.ConstructibleSheaf.Refinement
+import Sheaf.AlgebraicGeometry.ProEtaleConstantRingMap
+import Sheaf.AlgebraicGeometry.ProEtaleConstantRingOperations
+import Sheaf.AlgebraicGeometry.ProEtaleInverseImageStalk
+import Sheaf.AlgebraicGeometry.ProEtaleModulePullbackComposition
+import Sheaf.AlgebraicGeometry.ProEtaleObjectInverseImageRestriction
+import Sheaf.AlgebraicGeometry.ProEtalePullbackLocallyConstant
+import Sheaf.Paper.ProEtaleLocallyConstantSheafOfUniverses
 
 /-!
 # Exactness closure of globally constructible pro-etale sheaves

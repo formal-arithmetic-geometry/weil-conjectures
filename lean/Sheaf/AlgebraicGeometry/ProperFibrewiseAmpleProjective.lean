@@ -17,6 +17,11 @@ import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.FiniteFreeComple
 import WeilConjectures.AlgebraicGeometry.Modules.Ample
 import WeilConjectures.AlgebraicGeometry.CoherentModuleLocalOnOpenCover
 import Sheaf.AlgebraicGeometry.CoherentFiniteType
+import Sheaf.AlgebraicGeometry.AlgebraicSpaceAmpleLocal
+import Sheaf.AlgebraicGeometry.AmpleIffNormalizedComponentDegreePos
+import Sheaf.TraceFormula.AmpleNeighbourhood
+import Sheaf.TraceFormula.ProjectiveBundleSeparated
+import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 
 /-! # Positive fibre degrees give a projective-bundle embedding
 

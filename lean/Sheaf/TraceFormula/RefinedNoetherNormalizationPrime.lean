@@ -6,6 +6,7 @@ public import Mathlib.RingTheory.AlgebraicIndependent.Basic
 public import Mathlib.RingTheory.AlgebraicIndependent.TranscendenceBasis
 public import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
 public import Mathlib.RingTheory.RingHom.Finite
+import Sheaf.TraceFormula.PolynomialShearLeadingCoefficient
 
 @[expose] public section
 

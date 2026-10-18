@@ -6,6 +6,13 @@ Authors: SHEAF group ND
 module
 
 public import Sheaf.Paper.PurityAffineChartBounds
+import Sheaf.AlgebraicGeometry.IntrinsicConstructibleIntervals
+import Sheaf.AlgebraicGeometry.SfConstructibleExceptionalAdjointDischarge
+import Sheaf.Paper.ConstructibleExceptionalAdjunctionCoefficients
+import Sheaf.Paper.ExceptionalAdjointAdmissibility
+import Sheaf.Paper.FiniteTorAmplitudeSites
+import Sheaf.Paper.ProEtaleConstructibleOrigin
+import Sheaf.Paper.PurityFiniteSetting
 /-!
 # Uniform finite-stage exceptional inverse-image preservation
 

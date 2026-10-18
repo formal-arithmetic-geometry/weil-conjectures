@@ -34,6 +34,10 @@ import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimitOfUniverses
 import Sheaf.CategoryTheory.RingedCechKoszulDualLimit
 import Sheaf.Paper.ExtendedCechCompletionModel
 import Sheaf.Algebra.Homology.WeilSiteDerivedTensorDescent
+import Sheaf.Algebra.Homology.RingedInternalHomShiftOfUniverses
+import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
+import Sheaf.CategoryTheory.LocalizedModuleExactForSystems
+import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimitIndependentCoefficients
 
 /-!
 # Restriction of completed integral operations and rational evaluation

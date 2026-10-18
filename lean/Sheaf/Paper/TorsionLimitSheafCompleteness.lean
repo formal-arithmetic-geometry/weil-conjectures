@@ -32,6 +32,8 @@ import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Basic
 import Sheaf.Paper.LocalHomTowerCriterion
 import Sheaf.AlgebraicGeometry.ProEtaleCountableProductsExact
 import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
+import Sheaf.CategoryTheory.LocalizedModuleExactForSystems
+import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitProducts
 
 /-! # Completeness of limits of power-torsion pro-etale sheaves
 

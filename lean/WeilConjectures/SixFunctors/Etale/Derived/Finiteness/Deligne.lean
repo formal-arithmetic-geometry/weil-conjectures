@@ -20,6 +20,7 @@ import WeilConjectures.ConstructibleSheaf.Refinement
 import WeilConjectures.ConstructibleSheaf.UniversalHomeomorphism
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
+import Sheaf.AlgebraicGeometry.ModuleExchangeCompositeBaseChange
 
 /-!
 # Deligne's generic constructibility for an open immersion

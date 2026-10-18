@@ -12,6 +12,7 @@ import Sheaf.AlgebraicGeometry.DescendFlatFinitePresentation
 import Sheaf.AlgebraicGeometry.EventuallyProper
 import Sheaf.AlgebraicGeometry.ProperLimitNoetherian
 import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
+import Sheaf.TraceFormula.PureRelativeDimensionFiniteStage
 
 /-! # Finite-presentation spreading of a prescribed marked modification
 

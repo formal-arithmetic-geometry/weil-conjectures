@@ -12,6 +12,8 @@ public import Mathlib.LinearAlgebra.TensorProduct.Basic
 import Mathlib.AlgebraicGeometry.Scheme
 import Mathlib.AlgebraicGeometry.Noetherian
 import Mathlib.AlgebraicGeometry.Morphisms.Etale
+import Sheaf.AlgebraicGeometry.AssociatedLogUniversalStalks
+import Sheaf.AlgebraicGeometry.LogSmoothLogRegular
 
 /-!
 # Log regularity under saturated toric chart refinements

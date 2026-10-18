@@ -20,6 +20,9 @@ import WeilConjectures.Mathlib.Topology.KrullDimension
 import WeilConjectures.AlgebraicGeometry.Morphisms.ProperQuasiFinite
 import Mathlib.AlgebraicGeometry.Noetherian
 import Mathlib.AlgebraicGeometry.Morphisms.Proper
+import Sheaf.AlgebraicGeometry.Curve.NormalSmoothProjectiveCompactification
+import Sheaf.AlgebraicGeometry.Curve.UniformizerDifferentialBasis
+import Sheaf.AlgebraicGeometry.NonzeroDifferentialGenericallyEtale
 
 /-!
 # A finite generically étale map from an open enlargement of an affine curve

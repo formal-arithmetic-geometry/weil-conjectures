@@ -8,6 +8,7 @@ module
 public import Sheaf.Paper.RingedExchangeTensorCoherence
 public import Sheaf.CategoryTheory.RingedToposDerivedPushforwardComposition
 public import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
+import Sheaf.Paper.RingedComparisonTensorAdjunction
 
 /-!
 # The two factorizations of the ringed-topos external product

@@ -28,6 +28,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 import Sheaf.Paper.FiniteCoefficientFlatModel
 import Sheaf.Paper.ProEtaleConstructibleOrigin
 import Sheaf.Paper.ComparisonTorAmplitude
+import Sheaf.Paper.WeilVerdierPreservationStrata
+import Sheaf.SixFunctors.FiniteDualitySiteComparison
 
 /-! # Finite-stage Verdier biduality on both small sites
 

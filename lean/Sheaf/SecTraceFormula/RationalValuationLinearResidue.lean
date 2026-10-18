@@ -13,6 +13,7 @@ public import Sheaf.RingTheory.ValuationComapResidue
 import Sheaf.FieldTheory.NormalizedPolynomialResidueGeneration
 import Sheaf.TraceFormula.ResidualCurveValueGroup
 import Sheaf.FieldTheory.ValueGroupDivisible
+import Sheaf.TraceFormula.SeparablePerturbationFactorSelection
 
 /-!
 # A linear rational coordinate with transcendental residue

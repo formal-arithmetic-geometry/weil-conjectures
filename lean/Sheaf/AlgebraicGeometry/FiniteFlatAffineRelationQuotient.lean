@@ -37,6 +37,10 @@ import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 import Mathlib.CategoryTheory.Sites.LocallyBijective
 import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen
 import Mathlib.CategoryTheory.Sites.Precoverage
+import Sheaf.AlgebraicGeometry.AffineGroupoidBasisDescent
+import Sheaf.AlgebraicGeometry.AffineGroupoidIntegralInvariants
+import Sheaf.AlgebraicGeometry.AffineGroupoidOrbitFibres
+import Sheaf.RingTheory.SemilocalSubmoduleBasis
 
 /-!
 # The affine quotient of a finite locally free equivalence relation

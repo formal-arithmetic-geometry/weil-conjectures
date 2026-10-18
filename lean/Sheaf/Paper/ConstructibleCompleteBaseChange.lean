@@ -28,6 +28,8 @@ import Sheaf.Paper.BoundedConstructibleTower
 import Sheaf.Paper.AdicCoefficientDatum
 import Sheaf.Paper.CompletedPullback
 import Sheaf.Paper.CompletedRlimFunctor
+import Sheaf.Paper.PbcQbarCompletedPullback
+import Sheaf.Paper.PbcUniformCompleteTriangulated
 
 /-! # Constructible complete proper base change
 

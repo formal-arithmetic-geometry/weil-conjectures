@@ -8,6 +8,17 @@ module
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjectionBaseChange
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
 public import Sheaf.AlgebraicGeometry.EtaleDerivedTensorSymmetry
+import Sheaf.AlgebraicGeometry.BaseChangeMapAbelianAndSets
+import Sheaf.AlgebraicGeometry.DerivedPullbackCompositionMonoidal
+import Sheaf.AlgebraicGeometry.EtaleOpenProjectionExchange
+import Sheaf.AlgebraicGeometry.OpenImmersionExtensionZeroBaseChange
+import Sheaf.AlgebraicGeometry.ProperProjectionFormula
+import Sheaf.Paper.ProjectionMateExact
+import Sheaf.Paper.RingedExchangeTensorCoherence
+import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
+import WeilConjectures.SixFunctors.Etale.Derived.LowerStarProjection
+import WeilConjectures.SixFunctors.Etale.Derived.OpenImmersionLowerShriekProjection
+import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Comparison
 
 /-!
 # Coefficient-first compact-support projection maps commute with etale exchange

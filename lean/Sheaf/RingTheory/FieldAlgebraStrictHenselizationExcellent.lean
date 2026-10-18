@@ -13,6 +13,11 @@ import Sheaf.RingTheory.StrictHenselizationNoetherian
 import Sheaf.RingTheory.PointedEtaleSmallFiltered
 import Sheaf.RingTheory.IndPrincipalZariski
 import Sheaf.RingTheory.IndEtaleStability
+import Sheaf.RingTheory.ExcellentOfWeaklyEtale
+import Sheaf.RingTheory.FieldsExcellent
+import Sheaf.RingTheory.IndEtaleUniverseTransport
+import Sheaf.RingTheory.IsExcellentFiniteTypeLocalization
+import Sheaf.RingTheory.StrictHenselizationPresentationIn
 
 /-!
 # Excellence of strict local rings of finite-type field algebras

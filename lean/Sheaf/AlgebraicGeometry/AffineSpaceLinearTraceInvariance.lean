@@ -28,6 +28,7 @@ import Sheaf.Paper.ConstantSheafSectionsLocallyConstant
 import Mathlib.CategoryTheory.Sites.ConstantSheaf
 import Mathlib.CategoryTheory.Sites.LocallyBijective
 import Mathlib.Topology.LocallyConstant.Basic
+import Sheaf.AlgebraicGeometry.CompactSupportActionBaseChange
 
 /-!
 # Linear changes of coordinates preserve the affine-space counit trace

@@ -34,6 +34,14 @@ import Sheaf.Paper.TorsionLimitSheafCompleteness
 import Sheaf.AlgebraicGeometry.ProEtaleCountableProductsExact
 import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
+import Sheaf.Algebra.Homology.BoundedAboveFlatSheafKFlat
+import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
+import Sheaf.AlgebraicGeometry.ConstructibleProEtaleComparison
+import Sheaf.AlgebraicGeometry.DiscreteNoetherianConstructibleSerre
+import Sheaf.AlgebraicGeometry.NoetherianGlobalConstructibility
+import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimitIndependentCoefficients
+import Sheaf.Paper.AdicResidueLissePerfectLift
+import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
 
 /-!
 # Adic constructibility and stratified perfect models

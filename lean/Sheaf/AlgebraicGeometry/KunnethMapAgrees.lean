@@ -49,6 +49,18 @@ import Mathlib.GroupTheory.Torsion
 import Sheaf.AlgebraicGeometry.ProperUnboundedBaseChangeModN
 import Sheaf.AlgebraicGeometry.Sites.FiniteTorsionEtaleCohomologicalDimension
 import Sheaf.AlgebraicGeometry.EtaleConstantProjectionFormula
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
+import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
+import Sheaf.AlgebraicGeometry.AbelianSheavesGModules
+import Sheaf.AlgebraicGeometry.EtaleModuleSheavesGrothendieckAbelian
+import Sheaf.AlgebraicGeometry.FieldDiscreteModules
+import Sheaf.AlgebraicGeometry.KunnethGlobalSections
+import Sheaf.AlgebraicGeometry.RGammaUnboundedBounded
+import Sheaf.AlgebraicGeometry.UnboundedExchangeAgrees
+import Sheaf.CategoryTheory.DerivedCategory.CompositionAdjunctionNormalization
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
+import WeilConjectures.AlgebraicGeometry.Sites.TorsionSheaf
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-!
 # Compatibility of the Künneth map with Leray and projection

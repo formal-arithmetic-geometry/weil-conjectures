@@ -12,6 +12,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 import Sheaf.CategoryTheory.SiteCoveringAxioms
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatEquationalCriterion
 import Sheaf.CategoryTheory.LocalizedModuleExactIndependent
+import Sheaf.CategoryTheory.LocalizedModuleExactForSystems
 
 /-!
 # Flat finitely presented module sheaves are locally finite free retracts

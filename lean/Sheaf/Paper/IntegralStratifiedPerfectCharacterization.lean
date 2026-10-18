@@ -35,6 +35,17 @@ import Sheaf.Paper.ProEtaleCanonicalTensorPullback
 import Sheaf.Paper.DerivedComplete
 import Sheaf.Paper.IntrinsicFiniteTorsionConstructibility
 import Sheaf.CategoryTheory.RingedKoszulCompletionReflector
+import Sheaf.AlgebraicGeometry.CompactSupportComparisonUnit
+import Sheaf.AlgebraicGeometry.SupportComparisonPullbackCoherence
+import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimitIndependentCoefficients
+import Sheaf.Paper.DerivedCompleteOnSlices
+import Sheaf.Paper.IntegralUniformCoefficient
+import Sheaf.Paper.NormalizedConstructibleTowerLocalEffectivity
+import Sheaf.Paper.PbcUniformCompleteTriangulated
+import Sheaf.Paper.ProEtaleConstructibleSheaf
+import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
+import Sheaf.Paper.WeilCompletedTensorReflector
+import WeilConjectures.CategoryTheory.Triangulated.DerivedCountableProductsCore
 
 /-!
 # Integral stratified perfect characterization

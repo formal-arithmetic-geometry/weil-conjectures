@@ -21,6 +21,14 @@ import Sheaf.CategoryTheory.BoundedBelowCechConeComparison
 import Sheaf.Algebra.Homology.FunctorialBoundedInjectiveResolution
 import Sheaf.AlgebraicGeometry.KInjectiveResolutionsExist
 import WeilConjectures.Mathlib.Algebra.Homology.TotalComplex
+import Sheaf.AlgebraicGeometry.EtaleModuleSheavesGrothendieckAbelian
+import Sheaf.AlgebraicGeometry.FiniteCechAugmentationModules
+import Sheaf.AlgebraicGeometry.RGammaUnboundedWellDefined
+import Sheaf.TraceFormula.DerivedCechDiagramFunctorialModules
+import Sheaf.TraceFormula.DerivedSectionsFinitePushforwardModules
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
+import WeilConjectures.CategoryTheory.Abelian.Filtration
+import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 
 /-! # Natural finite-cover Čech hypercohomology descent
 

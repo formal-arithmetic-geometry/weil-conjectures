@@ -24,6 +24,8 @@ import Sheaf.Paper.FiniteCoefficientTensorCtf
 import Sheaf.Algebra.Homology.DerivedTensor
 import Sheaf.Paper.FiniteCompactSupportConstructibility
 import Sheaf.Algebra.Homology.RingedDerivedClosedSymmetricMonoidal
+import Sheaf.Paper.ExchangeProjectionSuppliedDomains
+import Sheaf.SixFunctors.OpenTensorNormalization
 /-!
 # Unit and coefficient associativity for a fixed compactification
 Source: Stacks Project, sites-cohomology.tex, Tags 0B56 and 0GL1;

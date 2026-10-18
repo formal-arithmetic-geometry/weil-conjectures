@@ -8,6 +8,7 @@ module
 public import Mathlib.RepresentationTheory.Homological.GroupCohomology.FiniteCyclic
 public import Mathlib.RepresentationTheory.Homological.GroupCohomology.Functoriality
 public import Mathlib.Algebra.Ring.ULift
+import Sheaf.RepresentationTheory.ResolutionInflationComparison
 
 /-!
 # Inflation between finite cyclic groups

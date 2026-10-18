@@ -4,6 +4,7 @@ public import Mathlib.AlgebraicGeometry.Sites.Proetale
 public import Mathlib.AlgebraicGeometry.Cover.QuasiCompact
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 import Sheaf.AlgebraicGeometry.WeaklyEtaleStability
+import WeilConjectures.AlgebraicGeometry.Morphisms.ProAffineEtale
 
 /-!
 # Finite affine refinement of a pro-etale cover

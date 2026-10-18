@@ -6,6 +6,20 @@ import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 import Mathlib.RingTheory.AdicCompletion.Algebra
 import Mathlib.RingTheory.MvPowerSeries.Basic
 import Sheaf.AlgebraicGeometry.PureDimension
+import Sheaf.AlgebraicGeometry.DimensionLocallyAlgebraic
+import Sheaf.AlgebraicGeometry.DthFittingSmoothLocus
+import Sheaf.AlgebraicGeometry.EquidimensionalOpenLocalDimension
+import Sheaf.AlgebraicGeometry.FibreDimensionAfterBaseChange
+import Sheaf.AlgebraicGeometry.FirstFittingSingularSubscheme
+import Sheaf.AlgebraicGeometry.NodalCurveLCICriterion
+import Sheaf.RingTheory.PresentationFittingIdeal
+import Sheaf.SixFunctors.TraceFormula.NodalFamilyFittingSingular
+import Sheaf.TraceFormula.CompleteIntersectionFibresLimitDescent
+import Sheaf.TraceFormula.PureRelativeDimensionFiniteStage
+import Sheaf.TraceFormula.UnramifiedLimitDescent
+import WeilConjectures.AlgebraicGeometry.Morphisms.UnramifiedBaseChangeOpen
+import WeilConjectures.AlgebraicGeometry.UnramifiedOverFieldDiscrete
+import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
 
 /-! # Finite-type approximation of an affine nodal family
 

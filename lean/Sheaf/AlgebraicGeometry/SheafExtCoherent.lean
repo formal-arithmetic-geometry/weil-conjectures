@@ -15,6 +15,7 @@ import Sheaf.Paper.DerivedInternalHomRestrictOpen
 import WeilConjectures.AlgebraicGeometry.Coherent
 import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import WeilConjectures.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
+import Sheaf.AlgebraicGeometry.CoherentFiniteType
 
 /-! # Coherence of sheaf Ext
 

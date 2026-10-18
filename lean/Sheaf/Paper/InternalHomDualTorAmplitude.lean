@@ -33,6 +33,8 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
 import Sheaf.Algebra.Homology.RingedSiteTorFlatModel
 import Sheaf.CategoryTheory.LocalizedModuleExactForSystems
 import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
+import Sheaf.Algebra.Homology.RingedInternalHomShiftOfUniverses
+import Sheaf.Paper.ModuleObjectRingedSiteDerivedComparison
 
 /-!
 # Finite Tor amplitude of locally constant perfect duals

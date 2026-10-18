@@ -36,6 +36,7 @@ import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
 import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
 import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
 import Sheaf.AlgebraicGeometry.CompactSupportComparisonUnit
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
 
 /-!
 # Comparison of ordinary supported sections between the two sites

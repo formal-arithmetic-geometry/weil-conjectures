@@ -24,6 +24,9 @@ import Mathlib.RingTheory.Kaehler.TensorProduct
 import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 import Mathlib.RingTheory.Jacobson.Ring
+import Sheaf.AlgebraicGeometry.UnramifiedLocusBaseChange
+import Sheaf.TraceFormula.FiniteResiduePointClosedInFibre
+import Sheaf.TraceFormula.LciPointwiseCriterion
 
 /-! # The nodal open locus in a flat family
 

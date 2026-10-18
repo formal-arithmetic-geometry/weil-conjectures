@@ -10,6 +10,7 @@ public import Mathlib.AlgebraicGeometry.Restrict
 public import Mathlib.FieldTheory.IsSepClosed
 import Mathlib.CategoryTheory.Filtered.Final
 import Sheaf.AlgebraicGeometry.ClopenEtaleNeighbourhoodCofinality
+import Sheaf.AlgebraicGeometry.PointedEtaleStalk
 
 /-!
 # Clopen computation of geometric étale stalks

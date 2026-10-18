@@ -35,6 +35,7 @@ import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
 import Sheaf.Paper.SfProEtaleProjectionFormula
 import Sheaf.Paper.CanonicalFiniteLevelCompactSupportBaseChange
 import Mathlib.Algebra.Homology.DerivedCategory.ShortExact
+import Sheaf.Paper.SmoothPurityTowerInjectiveComponents
 
 /-!
 # Compact-support operations on varying-coefficient towers

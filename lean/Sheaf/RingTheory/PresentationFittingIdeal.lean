@@ -12,6 +12,7 @@ public import Mathlib.LinearAlgebra.TensorProduct.Tower
 public import Mathlib.RingTheory.Finiteness.Defs
 public import Mathlib.RingTheory.Localization.BaseChange
 import Mathlib.LinearAlgebra.TensorProduct.RightExactness
+import Sheaf.LinearAlgebra.Matrix.MinorIdealInclusions
 
 /-!
 # Kernel-row Fitting ideals and change of scalars

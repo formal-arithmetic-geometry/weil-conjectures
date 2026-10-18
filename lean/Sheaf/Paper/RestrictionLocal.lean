@@ -13,6 +13,16 @@ public import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
 public import Mathlib.AlgebraicGeometry.AffineSpace
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.AlgebraicGeometry.OpenImmersion
+import Sheaf.CategoryTheory.RightDerivedFunctorOfQuasiIsoResolutions
+import Sheaf.Paper.AffineSpaceRationalInduction
+import Sheaf.Paper.ClosedAdjointConstructibleYoneda
+import Sheaf.Paper.ClosedSupportConstructible
+import Sheaf.Paper.CompactificationCoherenceCocycle
+import Sheaf.Paper.LocalizingClosureCtfEqualsBc
+import Sheaf.Paper.LocalizingLowerShriekComposition
+import Sheaf.Paper.MateOpenRestriction
+import Sheaf.Paper.RationalClosedSupportConstructible
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LowerShriek
 
 /-!
 # Local factorization of the exceptional inverse image

@@ -17,6 +17,10 @@ public import WeilConjectures.WeilSheaf.Category
 import Sheaf.Paper.PointFibreEquivalence
 import Sheaf.Paper.LocalFrobeniusTrace
 import Sheaf.LinearAlgebra.FrobeniusModuleWeights
+import Sheaf.Paper.AdicPunctualWeights
+import Sheaf.Paper.CartesianCoefficientTwists
+import Sheaf.Paper.DerivedPullbackTensorIso
+import WeilConjectures.WeilSheaf.TateTwistCohomology
 
 /-! # Weight shift under a Tate twist
 

@@ -9,6 +9,7 @@ public import Sheaf.Paper.FiniteFieldFiber
 public import WeilConjectures.ZetaFunction.Weights
 public import WeilConjectures.ZetaFunction.CohomologicalFamily
 public import WeilConjectures.ZetaLinearAlgebra.ReciprocalRoots
+import Sheaf.LinearAlgebra.FrobeniusModuleWeights
 
 /-!
 # Weight of reciprocal roots

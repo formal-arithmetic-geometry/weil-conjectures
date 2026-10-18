@@ -12,6 +12,21 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
 public import Sheaf.AlgebraicGeometry.EtaleDerivedTensorSymmetry
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtaleOver
 public import Mathlib.AlgebraicGeometry.Scheme
+import Sheaf.Algebra.Homology.RingedDerivedClosedSymmetricMonoidal
+import Sheaf.Algebra.Homology.RingedInternalHomShiftOfUniverses
+import Sheaf.Algebra.Homology.RingedSiteBoundedFreeRHomModel
+import Sheaf.Algebra.Homology.RingedSliceEvaluationTranspose
+import Sheaf.AlgebraicGeometry.EtaleLocalDualInterval
+import Sheaf.CategoryTheory.RingedSitePerfectDuality
+import Sheaf.CategoryTheory.TruncationsAndHomotopyColimits
+import Sheaf.Paper.CoefficientHomRepresentativeEvaluation
+import Sheaf.Paper.CoefficientRingedTensorHomModel
+import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
+import Sheaf.SixFunctors.EtaleFiniteProjectivePullbackHom
+import Sheaf.SixFunctors.EtaleHomComplexPullback
+import Sheaf.SixFunctors.RingedDerivedMonoidalComparisons
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
+import WeilConjectures.SixFunctors.Etale.Derived.Triangulated
 
 /-!
 Finite-projective internal-Hom exchange on an étale stratum.

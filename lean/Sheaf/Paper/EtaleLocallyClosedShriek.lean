@@ -29,6 +29,7 @@ import WeilConjectures.ConstructibleSheaf.Pullback
 import WeilConjectures.SixFunctors.OpenClosed.Stalk
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 import WeilConjectures.ConstructibleSheaf.OpenClosed
+import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
 
 /-!
 # Ordinary étale locally closed exceptional restriction and coefficient change

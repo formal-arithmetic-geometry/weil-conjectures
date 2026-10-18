@@ -39,6 +39,8 @@ import Sheaf.RingTheory.ProjectiveResolutionKernelProjective
 import Sheaf.CategoryTheory.DerivedCategory.PerfectRingComplexGeneral
 import Mathlib.AlgebraicGeometry.Noetherian
 import Sheaf.Algebra.Homology.BaseChangeRHomPerfect
+import Sheaf.Algebra.Homology.PerfectAlgebraCoinductionTensor
+import Sheaf.Algebra.Homology.PseudoCoherentRHomFlatBaseChange
 
 /-! # Polynomial models for algebraic upper shriek
 

@@ -5,6 +5,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.AlgebraicGeometry.Stalk
 public import Mathlib.RingTheory.FinitePresentation
+import Sheaf.RingTheory.UniquePrimeLocalization
+import WeilConjectures.Topology.PresheafModuleStalkFunctor
 
 
 /-!

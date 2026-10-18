@@ -18,6 +18,9 @@ import Sheaf.RingTheory.FlatUnderRegular
 import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.SchemeTheoreticallyDominant
 import WeilConjectures.Blowup.Complement
+import Sheaf.AlgebraicGeometry.CoordinateBlowupBranchDrop
+import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
+import Sheaf.TraceFormula.CoordinateMaximalBranchStratum
 
 /-!
 # Blowing up the maximal geometric branch locus

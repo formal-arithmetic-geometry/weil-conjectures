@@ -19,6 +19,10 @@ import Sheaf.Paper.LocalizeRingedSiteMorphism
 import Sheaf.CategoryTheory.FiniteTypeLocallyConstantSerre
 import Mathlib.Algebra.Module.FinitePresentation
 import Mathlib.AlgebraicGeometry.Sites.MorphismProperty
+import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
+import Sheaf.CategoryTheory.RingedSiteModules
+import Sheaf.CategoryTheory.SiteMorphismComposition
+import Sheaf.Paper.LocalizeRingedSiteMorphismGeneral
 
 /-!
 # Constructible sheaves over discrete Noetherian rings form weak Serre subcategories

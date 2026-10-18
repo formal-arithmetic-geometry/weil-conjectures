@@ -33,6 +33,8 @@ import WeilConjectures.AlgebraicGeometry.GroupScheme.Defs
 import Sheaf.AlgebraicGeometry.GeonormalDimOneSmooth
 import Sheaf.AlgebraicGeometry.NormalizationGeonormalInsep
 import Sheaf.AlgebraicGeometry.ReducedAlgebraicNormalizationFieldChange
+import Sheaf.AlgebraicGeometry.NormalizationInseparableBaseChange
+import Sheaf.TraceFormula.ProjectiveInseparableSpreadNormalization
 
 /-!
 # Generic smooth curve and finite étale boundary preparation

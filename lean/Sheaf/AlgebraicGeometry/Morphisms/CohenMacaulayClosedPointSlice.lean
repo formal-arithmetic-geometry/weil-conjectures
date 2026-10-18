@@ -26,6 +26,7 @@ import Sheaf.AlgebraicGeometry.FibreStalkQuotient
 import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 import Mathlib.RingTheory.Regular.RegularSequence
 import Sheaf.RingTheory.DepthQuotientNonzerodivisor
+import Sheaf.AlgebraicGeometry.Morphisms.FibreRegularElementFlatHypersurface
 
 /-!
 # A flat quasi-finite slice through a closed Cohen-Macaulay fibre point

@@ -21,6 +21,7 @@ import Mathlib.RingTheory.Jacobson.Ring
 import Sheaf.AlgebraicGeometry.FlatInvertibleSectionsTorsionFree
 import Sheaf.AlgebraicGeometry.LocallyQuasiFiniteRelativeDimension
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+import Sheaf.TraceFormula.ProperCurveImagePositiveFibreComponent
 
 /-! # Factorization of curve modifications detected on contracted components
 

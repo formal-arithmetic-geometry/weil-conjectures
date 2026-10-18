@@ -7,6 +7,23 @@ module
 public import Sheaf.AlgebraicGeometry.SemistableMultipointedPair
 public import Sheaf.AlgebraicGeometry.MultipointedCurveModification
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+import Sheaf.AlgebraicGeometry.DthFittingSmoothLocus
+import Sheaf.AlgebraicGeometry.FpqcDescentEtale
+import Sheaf.AlgebraicGeometry.ProductIrreducibleComponentsBijection
+import Sheaf.AlgebraicGeometry.SemistableMarkedBaseChange
+import Sheaf.AlgebraicGeometry.UnramifiedFieldFibreDecomposition
+import Sheaf.FieldTheory.FieldExtensionGeometricallyIrreducible
+import Sheaf.RingTheory.FlatCompletion
+import Sheaf.RingTheory.FlatLocalDepthFormula
+import Sheaf.RingTheory.PresentationFittingIdeal
+import Sheaf.RingTheory.SeparableClosedPointFormalPresentation
+import Sheaf.SixFunctors.TraceFormula.NodalFamilyFittingSingular
+import Sheaf.TraceFormula.FlatDenseGenericFibrePureDimension
+import Sheaf.TraceFormula.FormalJacobianQuadraticCriterion
+import Sheaf.TraceFormula.MultipointedCurve
+import Sheaf.TraceFormula.NodeAlgebraicallyClosedExtension
+import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
+import WeilConjectures.RingTheory.AdicCompletionNoetherian
 
 /-!
 # Field descent of semistability and geometric stability

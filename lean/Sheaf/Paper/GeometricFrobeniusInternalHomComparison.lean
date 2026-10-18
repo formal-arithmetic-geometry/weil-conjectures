@@ -29,6 +29,11 @@ import Sheaf.AlgebraicGeometry.IsomorphismDerivedPullbackEquivalence
 import Sheaf.CategoryTheory.MateIsoAlongEquivalences
 import Sheaf.AlgebraicGeometry.ProEtale.IsoSectionwiseInverseImage
 import WeilConjectures.SixFunctors.Etale.Derived.Exchange
+import Sheaf.Paper.BasicOperationsCoefficientReduction
+import Sheaf.Paper.GeneralAlgebraicallyClosedCoefficients
+import Sheaf.Paper.IntegralOperationsPreserveConstructible
+import Sheaf.Paper.InternalHomPullback
+import Sheaf.Paper.SfRationalizationKaroubi
 
 
 

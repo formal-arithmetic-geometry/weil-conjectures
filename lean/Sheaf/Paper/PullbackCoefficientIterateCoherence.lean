@@ -16,6 +16,8 @@ import Sheaf.AlgebraicGeometry.SfIntrinsicRealizationTransport
 import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
 import Mathlib.CategoryTheory.Adjunction.Mates
 import Mathlib.CategoryTheory.Localization.Predicate
+import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
+import Sheaf.Paper.IntegralFinitePullbackComposition
 
 /-!
 # Pullback comparisons and coefficient-map iterates

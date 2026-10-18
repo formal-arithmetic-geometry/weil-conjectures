@@ -25,6 +25,10 @@ import Sheaf.Algebra.Homology.SiteFlatOpcyclesTorCriterion
 import WeilConjectures.SixFunctors.ProEtale.Comparison.Flat
 import Sheaf.Algebra.Homology.DerivedTensor
 import Sheaf.Paper.PbcActualScalarPullback
+import Sheaf.AlgebraicGeometry.CoefficientProEtaleTorAmplitude
+import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
+import WeilConjectures.SixFunctors.Etale.Derived.Tensor
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Tensor
 
 /-!
 # Comparison preserves and detects Tor intervals

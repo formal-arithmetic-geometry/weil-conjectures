@@ -34,6 +34,12 @@ import Sheaf.Paper.FiniteMittagLeffler
 import Sheaf.CategoryTheory.Triangulated.MilnorSequence
 import Sheaf.RingTheory.PseudoCoherentBoundedFiniteFreeModel
 import Sheaf.Paper.CompletedConstantFiniteComplexRealization
+import Sheaf.AlgebraicGeometry.CompactSupportComparisonUnit
+import Sheaf.AlgebraicGeometry.FiniteLocallyClosedStratification
+import Sheaf.AlgebraicGeometry.PointedEtaleStalk
+import Sheaf.AlgebraicGeometry.ProEtaleFiniteModules
+import Sheaf.AlgebraicGeometry.SupportComparisonPullbackCoherence
+import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
 
 /-!
 # Local effectivity of normalized bounded constructible towers

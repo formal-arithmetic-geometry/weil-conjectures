@@ -17,6 +17,7 @@ import Sheaf.CategoryTheory.KInjectiveComputes
 import Sheaf.CategoryTheory.RingedSiteModulesGrothendieckOfUniverses
 import Mathlib.Algebra.Homology.DerivedCategory.DerivabilityStructureInjectives
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
+import Sheaf.CategoryTheory.SiteCoveringAxioms
 
 /-!
 # Derived images and units on components of total simplicial sites

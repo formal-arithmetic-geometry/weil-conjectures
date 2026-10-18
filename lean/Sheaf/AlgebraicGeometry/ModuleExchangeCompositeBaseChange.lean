@@ -10,6 +10,8 @@ public import Sheaf.AlgebraicGeometry.ExactUnboundedExchange
 public import WeilConjectures.AlgebraicGeometry.DerivedCategories
 public import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 public import Sheaf.AlgebraicGeometry.BaseChangeMapAbelianAndSets
+import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Mates
+import WeilConjectures.SixFunctors.BaseChange.Pasting
 
 /-!
 # Composition of base change for unbounded module exchange

@@ -11,6 +11,8 @@ public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 import WeilConjectures.AlgebraicGeometry.Morphisms.UnramifiedBaseChangeOpen
 import Sheaf.AlgebraicGeometry.FieldExtensionFpqcCover
 import Sheaf.AlgebraicGeometry.Morphisms.UnramifiedDescent
+import Sheaf.AlgebraicGeometry.UnramifiedFieldFibreDecomposition
+import Sheaf.AlgebraicGeometry.UnramifiedOrdinaryFibreCriterion
 
 /-!
 # Unramifiedness tested on geometric fibres

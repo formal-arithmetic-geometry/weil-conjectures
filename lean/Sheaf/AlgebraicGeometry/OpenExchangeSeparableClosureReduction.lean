@@ -17,6 +17,10 @@ import Sheaf.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
 import Sheaf.AlgebraicGeometry.GeometricStalkAsPullback
 import Sheaf.AlgebraicGeometry.DerivedInverseImageComposition
 import Sheaf.Paper.ExchangeIdentityPasting
+import Sheaf.AlgebraicGeometry.FieldExtensionExchange
+import Sheaf.AlgebraicGeometry.SeparableClosureConservative
+import Sheaf.AlgebraicGeometry.UnboundedExchangeAgrees
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 
 /-!
 # Reduction of open-immersion exchange to a separable closure

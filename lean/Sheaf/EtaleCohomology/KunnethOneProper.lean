@@ -31,6 +31,10 @@ import Sheaf.AlgebraicGeometry.IntegralProperProjectionFormula
 import Sheaf.CategoryTheory.RingedToposDerivedPushforwardComposition
 import Sheaf.AlgebraicGeometry.EtaleDerivedTensorSymmetry
 import Sheaf.AlgebraicGeometry.EtaleConstantProjectionFormulaBoundedBelow
+import Sheaf.AlgebraicGeometry.KunnethGlobalSections
+import Sheaf.AlgebraicGeometry.KunnethMapAgrees
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageExact
+import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 
 /-!
 # Künneth formula with one proper factor

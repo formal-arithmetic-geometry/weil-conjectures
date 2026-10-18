@@ -14,6 +14,7 @@ import Sheaf.AlgebraicGeometry.EtaleFieldGsets
 import Sheaf.AlgebraicGeometry.Sites.EtaleSheavesGsetsPoint
 import Sheaf.CategoryTheory.DiscreteModulesAbelian
 import Sheaf.RepresentationTheory.DiscreteContinuousCohomology
+import Sheaf.AlgebraicGeometry.PointedEtaleStalk
 
 /-!
 # Etale modules on a field and discrete Galois modules

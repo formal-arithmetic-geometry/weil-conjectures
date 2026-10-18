@@ -18,6 +18,18 @@ public import Mathlib.AlgebraicGeometry.Limits
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
+import Sheaf.AlgebraicGeometry.DimensionBaseChange
+import Sheaf.AlgebraicGeometry.ExcellentSchemeAffineCover
+import Sheaf.AlgebraicGeometry.Morphisms.NormalIntegralGenericHomFull
+import Sheaf.FieldTheory.GenericSeparableAlgebraSplitting
+import Sheaf.RingTheory.IsExcellentFiniteTypeLocalization
+import Sheaf.RingTheory.JapaneseDomain
+import Sheaf.RingTheory.NagataDomainN2
+import Sheaf.RingTheory.QuasiExcellentNagata
+import WeilConjectures.AlgebraicGeometry.EtaleFibreDiscreteSeparablePoints
+import WeilConjectures.AlgebraicGeometry.Morphisms.ProperQuasiFinite
+import WeilConjectures.AlgebraicGeometry.WeilPbcNormalizationInResidueFieldExtension
+import WeilConjectures.Mathlib.AlgebraicGeometry.Normalization
 
 /-!
 # Splitting a finite étale marking into disjoint sections after alteration

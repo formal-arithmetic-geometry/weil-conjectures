@@ -16,6 +16,11 @@ import Sheaf.Paper.ConstantModuleSectionProperties
 import Sheaf.RingTheory.LimitFlatModules
 import Sheaf.Algebra.Category.ModuleCat.Presheaf.SheafificationFlat
 import Sheaf.Algebra.Homology.DerivedTensor
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
+import Sheaf.Algebra.Homology.KFlat
+import Sheaf.AlgebraicGeometry.ProEtaleFiniteModules
+import Sheaf.CategoryTheory.RingedSiteModules
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Tensor
 
 /-!
 # Completed constant sheaves and finite reduction

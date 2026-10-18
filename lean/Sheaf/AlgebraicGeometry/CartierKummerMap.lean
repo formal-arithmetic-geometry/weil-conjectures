@@ -50,6 +50,7 @@ import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
 import Sheaf.AlgebraicGeometry.ProEtaleSiteComparison
 import Sheaf.CategoryTheory.SiteInverseImageTensor
 import Sheaf.AlgebraicGeometry.ProEtaleConstantRingMap
+import Sheaf.Paper.IntrinsicCoefficientTwistsUnrestricted
 
 /-! # The supported Cartier Kummer morphism
 

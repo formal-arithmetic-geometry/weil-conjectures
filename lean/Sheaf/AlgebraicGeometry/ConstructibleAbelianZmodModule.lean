@@ -17,6 +17,8 @@ import WeilConjectures.AlgebraicGeometry.ConstantSheafGeometricStalk
 import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 import Mathlib.Algebra.Module.ZMod
+import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
+import Sheaf.AlgebraicGeometry.PointedEtaleStalk
 
 /-!
 # Constructibility of an abelian sheaf with its cyclic coefficient structure

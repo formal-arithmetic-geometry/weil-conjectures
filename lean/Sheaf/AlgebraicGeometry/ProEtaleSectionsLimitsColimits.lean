@@ -18,6 +18,7 @@ import Mathlib.CategoryTheory.Sites.PreservesSheafification
 import WeilConjectures.AlgebraicGeometry.SiteSheafificationSectionsLocal
 import Sheaf.AlgebraicGeometry.ProEtaleWeaklyContractibleEvaluationColimits
 import Mathlib.CategoryTheory.Sites.LocallySurjective
+import Sheaf.AlgebraicGeometry.ProEtale.WeakContractibleEquivalences
 
 /-!
 # Sections over weakly contractible affine pro-étale objects

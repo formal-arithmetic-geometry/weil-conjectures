@@ -9,6 +9,26 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Upp
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Comparison
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarCoherence
 public import Sheaf.AlgebraicGeometry.ProEtaleSiteComparison
+import Sheaf.AlgebraicGeometry.ComparisonGlobalCohomologyFiniteNormalized
+import Sheaf.AlgebraicGeometry.DerivedCohomologyContinuity
+import Sheaf.AlgebraicGeometry.ProEtale.BasisDerivedDetection
+import Sheaf.AlgebraicGeometry.ProEtaleComparisonSections
+import Sheaf.AlgebraicGeometry.ProEtaleConstantExact
+import Sheaf.AlgebraicGeometry.ProEtaleConstantRingOperations
+import Sheaf.AlgebraicGeometry.ProEtaleRestrictionInjectives
+import Sheaf.AlgebraicGeometry.SupportComparisonPullbackCoherence
+import Sheaf.CategoryTheory.PreDerivedAdjointFunctorsGeneral
+import Sheaf.CategoryTheory.RingedSiteModules
+import Sheaf.CategoryTheory.RingedSiteModulesGrothendieckOfUniverses
+import Sheaf.RingTheory.IndEtaleStability
+import Sheaf.RingTheory.IndEtaleUniverseTransport
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
+import WeilConjectures.AlgebraicGeometry.ProEtale.Comparison.Affine
+import WeilConjectures.CategoryTheory.Abelian.RightDerived.LongExactSequence
+import WeilConjectures.Mathlib.CategoryTheory.Preadditive.Injective.Preserves
+import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMap
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStarAcyclic
 
 /-!
 # Canonical direct-image mate in fixed coefficients

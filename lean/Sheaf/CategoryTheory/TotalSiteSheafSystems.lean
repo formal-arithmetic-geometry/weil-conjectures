@@ -10,6 +10,7 @@ public import Mathlib.CategoryTheory.Sites.Pullback
 public import Mathlib.CategoryTheory.Sites.LeftExact
 public import Mathlib.CategoryTheory.Adjunction.CompositionIso
 import WeilConjectures.CategoryTheory.SiteContinuousPushforwardSheaf
+import Sheaf.CategoryTheory.SiteCoveringAxioms
 
 /-!
 # Sheaves on a coherent total site as compatible systems

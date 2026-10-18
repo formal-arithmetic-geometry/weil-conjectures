@@ -14,6 +14,10 @@ import Sheaf.CategoryTheory.SheavesAlgebraicStructuresObjects
 import Sheaf.CategoryTheory.SiteInverseImageTensor
 import Sheaf.CategoryTheory.SiteMorphismComposition
 import Sheaf.CategoryTheory.RingedToposMorphism
+import Sheaf.AlgebraicGeometry.AlgebraicSpace
+import Sheaf.CategoryTheory.RingedSiteModules
+import Sheaf.CategoryTheory.SiteCoveringAxioms
+import WeilConjectures.CategoryTheory.SpecialCocontinuousCoverings
 
 /-!
 # Enlarged étale ringed sites of algebraic spaces

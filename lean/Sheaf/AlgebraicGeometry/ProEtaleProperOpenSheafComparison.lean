@@ -17,6 +17,10 @@ import Sheaf.AlgebraicGeometry.ProEtaleShriekSpecializationZero
 import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
+import Sheaf.AlgebraicGeometry.ProEtaleConstantRingOperations
+import Sheaf.AlgebraicGeometry.ProEtaleDerivedExtensionZeroBaseChange
+import Sheaf.AlgebraicGeometry.ProEtaleIntrinsicExtensionByZero
+import Sheaf.AlgebraicGeometry.ProEtaleIntrinsicExtensionByZeroAdjunction
 
 /-!
 # Proper/open comparison for all pro-etale module sheaves

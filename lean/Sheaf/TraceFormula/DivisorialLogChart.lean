@@ -9,6 +9,16 @@ public import Sheaf.AlgebraicGeometry.SmoothStrictNormalCrossingsDivisor
 public import Sheaf.AlgebraicGeometry.LogRegularPair
 public import Sheaf.RingTheory.IsRegularSystemOfParameters
 public import WeilConjectures.ConstructibleSheaf.OpenClosedStratification
+import Sheaf.AlgebraicGeometry.AffineStrictLocalRingComparison
+import Sheaf.AlgebraicGeometry.GeometricRegularitySmoothFieldCriterion
+import Sheaf.AlgebraicGeometry.PointedEtaleStalk
+import Sheaf.AlgebraicGeometry.SmoothPairLocalCoordinates
+import Sheaf.RingTheory.DimensionAtPointLocalRingTrdeg
+import Sheaf.RingTheory.RegularLocalGeneratorsRegularSequence
+import Sheaf.RingTheory.RegularLocalUFDBoundaryFactorization
+import Sheaf.RingTheory.StrictHenselizationCotangentDimension
+import Sheaf.RingTheory.StrictHenselizationRegular
+import WeilConjectures.Mathlib.RingTheory.RegularLocalRing.Defs
 
 /-!
 # Divisorial charts for smooth strict normal crossings divisors

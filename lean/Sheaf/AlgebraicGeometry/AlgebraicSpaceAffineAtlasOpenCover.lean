@@ -8,6 +8,8 @@ module
 public import Sheaf.AlgebraicGeometry.AlgebraicSpaceJointSurjectivity
 public import Mathlib.AlgebraicGeometry.AffineScheme
 public import Mathlib.AlgebraicGeometry.OpenImmersion
+import Sheaf.AlgebraicGeometry.AlgebraicSpace
+import Sheaf.AlgebraicGeometry.EtaleSchemeMapOpenImage
 
 /-!
 # Open covers of algebraic spaces by spaces with affine étale atlases

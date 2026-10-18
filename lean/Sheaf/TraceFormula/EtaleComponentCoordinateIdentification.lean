@@ -24,6 +24,7 @@ import WeilConjectures.Mathlib.RingTheory.RegularLocalRing.Defs
 import Sheaf.AlgebraicGeometry.EtaleSmoothZeroDimensionalFibres
 import Sheaf.RingTheory.RegularRingSmoothAscent
 import Sheaf.RingTheory.RegularLocalUFDBoundaryFactorization
+import Sheaf.AlgebraicGeometry.IsRegularScheme
 
 /-!
 # Étale local coordinates for regular boundary components

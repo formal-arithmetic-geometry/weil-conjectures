@@ -21,6 +21,12 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 import WeilConjectures.SixFunctors.Finite.BaseChange
 import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 import Sheaf.AlgebraicGeometry.CompactSupportComparisonUnit
+import Sheaf.AlgebraicGeometry.SupportLongExact
+import Sheaf.Paper.ConstructibleExceptionalAdjunctionCoefficients
+import Sheaf.Paper.FiniteTorAmplitudeSites
+import Sheaf.Paper.PurityAffineLineDatum
+import Sheaf.Paper.PurityRelativeKummer
+import Sheaf.Paper.SupportedCohomologyHom
 
 /-! # Global affine-line orientation and its geometric normalization
 

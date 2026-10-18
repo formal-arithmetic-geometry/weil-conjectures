@@ -16,6 +16,10 @@ public import Sheaf.Paper.SfDerivedComplete
 public import WeilConjectures.SixFunctors.Etale.Derived.TensorStructure
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerShriekProjection
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.FlatModuleCat
+import Sheaf.Paper.CohomologicalSmoothnessFiniteComparison
+import Sheaf.Paper.ConstructibleExceptionalAdjunctionCoefficients
+import Sheaf.Paper.DerivedPullbackTensorHom
+import Sheaf.Paper.ExchangeProjectionSuppliedDomains
 
 /-!
 # Tensoring a trace transpose and the exceptional tensor arrow

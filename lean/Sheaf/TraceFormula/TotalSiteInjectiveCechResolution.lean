@@ -7,6 +7,8 @@ module
 public import Sheaf.TraceFormula.TotalSiteInjectiveAugmentationExactness
 public import Sheaf.TraceFormula.TotalSiteFreeModuleResolution
 public import Mathlib.CategoryTheory.Sites.ConstantSheaf
+import Sheaf.CategoryTheory.ConstantLeftModuleInverseImage
+import Sheaf.CategoryTheory.GeometricModuleTransport
 
 /-!
 # Injective augmented Čech resolution on a total simplicial site

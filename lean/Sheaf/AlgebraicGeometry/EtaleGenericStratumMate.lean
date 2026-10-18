@@ -12,6 +12,10 @@ import Sheaf.CategoryTheory.KInjectiveTotalDerived
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
 import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
 import Mathlib.Algebra.Homology.DerivedCategory.KInjective
+import Sheaf.AlgebraicGeometry.EtaleClosedAmbientAdjoint
+import Sheaf.AlgebraicGeometry.KInjectiveResolutionsExist
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
+import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 
 /-! # The evaluation-normalized internal-Hom formula for an immersion
 

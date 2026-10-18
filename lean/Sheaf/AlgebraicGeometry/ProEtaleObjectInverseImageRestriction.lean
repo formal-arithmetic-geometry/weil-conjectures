@@ -13,6 +13,8 @@ import Sheaf.Algebra.Category.ModuleCat.Sheaf.SiteTensorFunctoriality
 import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
 import Mathlib.CategoryTheory.Sites.Pullback
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
+import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
 
 /-!
 # Inverse image along an object of the small pro-etale site

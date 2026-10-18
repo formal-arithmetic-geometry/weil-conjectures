@@ -7,6 +7,7 @@ module
 
 public import Sheaf.Paper.LocalizingAdmissibleCoefficients
 public import Mathlib.CategoryTheory.Limits.Preserves.Basic
+import Sheaf.Paper.LocalizingClosureExistence
 
 
 /-!

@@ -20,6 +20,7 @@ import Sheaf.AlgebraicGeometry.FrobeniusTrivializationPullback
 import Sheaf.AlgebraicGeometry.ProEtaleTensorCompositionUnit
 import Sheaf.AlgebraicGeometry.ProEtaleConstantRingMap
 import Sheaf.AlgebraicGeometry.ProEtaleConstantExact
+import Sheaf.SixFunctors.OpenTensorNormalization
 
 /-!
 # Open extension commutes with the canonical scheme/Galois comparison

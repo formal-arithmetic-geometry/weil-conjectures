@@ -9,6 +9,8 @@ public import Sheaf.Algebra.Homology.FiniteFilteredModuleHomotopy
 public import Mathlib.CategoryTheory.Localization.CalculusOfFractions
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
+import Sheaf.Algebra.Homology.FilteredComplexSubquotients
+import WeilConjectures.CategoryTheory.Abelian.Filtration
 
 /-!
 # Right fractions for finite filtered module complexes

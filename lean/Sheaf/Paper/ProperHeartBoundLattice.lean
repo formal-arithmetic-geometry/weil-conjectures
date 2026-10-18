@@ -24,6 +24,7 @@ import Sheaf.CategoryTheory.KInjectiveComputes
 import Sheaf.CategoryTheory.ModuleAbelianEvaluationComparison
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerShriek
 import Sheaf.CategoryTheory.Triangulated.MilnorSequence
+import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
 
 /-!
 # The integral lattice bound for proper morphisms

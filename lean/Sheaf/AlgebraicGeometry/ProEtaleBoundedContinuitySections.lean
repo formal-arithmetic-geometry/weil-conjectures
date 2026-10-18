@@ -13,6 +13,10 @@ public import Mathlib.CategoryTheory.Limits.Preserves.Limits
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolutionInjective
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 import Mathlib.Algebra.Category.Grp.AB
+import Sheaf.AlgebraicGeometry.ProEtale.HypercoverComplex
+import Sheaf.AlgebraicGeometry.ProEtale.HypercoverExistence
+import Sheaf.AlgebraicGeometry.ProEtaleSectionsLimitsColimits
+import Sheaf.CategoryTheory.RingedSiteModulesGrothendieckOfUniverses
 
 /-!
 # Bounded-below filtered-colimit continuity of pro-etale hypercohomology

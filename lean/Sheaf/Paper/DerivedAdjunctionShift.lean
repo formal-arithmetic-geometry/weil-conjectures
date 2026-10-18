@@ -17,6 +17,8 @@ import Mathlib.Algebra.Homology.DerivedCategory.KInjective
 import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
 import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
 public import Sheaf.Paper.RingedTopoiDerivedPullback
+import Sheaf.Algebra.Homology.KFlat
+import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
 
 /-!
 # Shift compatibility of a derived adjunction

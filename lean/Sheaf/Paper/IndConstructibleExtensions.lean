@@ -18,6 +18,8 @@ import WeilConjectures.CategoryTheory.PushoutShortExactSequence
 import Mathlib.CategoryTheory.Abelian.Basic
 import Sheaf.CategoryTheory.YonedaDerivedExtComparison
 import Sheaf.Paper.IndConstructibleFilteredColimits
+import Sheaf.Paper.CoefficientHeartClosure
+import Sheaf.Paper.ConstructibleExtContinuity
 
 /-!
 # Extensions of ind-constructible module sheaves

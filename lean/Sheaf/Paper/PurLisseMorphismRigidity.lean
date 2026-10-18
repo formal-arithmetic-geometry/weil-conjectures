@@ -33,6 +33,11 @@ import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafOver
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
 import Sheaf.AlgebraicGeometry.ConstantSheafGeometricStalk
 import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen
+import Sheaf.AlgebraicGeometry.ProEtaleModuleStalkFunctor
+import Sheaf.AlgebraicGeometry.SupportComparisonPullbackCoherence
+import Sheaf.CategoryTheory.SiteConstantModuleHom
+import WeilConjectures.AlgebraicGeometry.ConstantSheafGeometricStalk
+import WeilConjectures.AlgebraicGeometry.FiniteLocallyConstantModuleValues
 
 /-!
 # Rigidity of morphisms between finite lisse sheaves

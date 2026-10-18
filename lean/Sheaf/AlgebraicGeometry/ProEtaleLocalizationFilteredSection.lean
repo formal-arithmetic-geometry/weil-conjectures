@@ -25,6 +25,9 @@ import Sheaf.CategoryTheory.ExactFunctorDerivedFunctor
 import Sheaf.Paper.LocalizeRingedSiteMorphism
 import Sheaf.AlgebraicGeometry.ProEtaleRingedOpenClosed
 import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
+import Sheaf.AlgebraicGeometry.ProEtaleDerivedExtensionZeroBaseChange
+import Sheaf.Paper.IntegralFinitePullbackComposition
+import Sheaf.Paper.LocalizeRingedSiteMorphismGeneral
 
 /-!
 # The ordinary pro-etale localization section and its filtered pullback

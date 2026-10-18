@@ -58,6 +58,8 @@ import Sheaf.AlgebraicGeometry.DerivedDirectImageComposition
 import WeilConjectures.SixFunctors.Etale.Derived.LowerStarProjectionBaseChange
 import Sheaf.AlgebraicGeometry.DerivedGeometricStalkConservative
 import Sheaf.AlgebraicGeometry.UnboundedAbelianExchangeComparison
+import Sheaf.AlgebraicGeometry.ArbitrarySchemeUntensoredBaseChange
+import Sheaf.AlgebraicGeometry.FinitePushforwardTensorComparison
 
 /-!
 # Punctual base change with a tensor factor

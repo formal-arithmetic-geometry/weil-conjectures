@@ -26,6 +26,7 @@ import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 import Mathlib.CategoryTheory.Monoidal.Mod
 import Sheaf.SixFunctors.IntegralTensorInverseImage
 import Sheaf.Paper.CartesianCoefficients
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LowerShriek.Defs
 
 /-!
 # Integral extension by zero

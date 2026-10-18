@@ -72,6 +72,10 @@ import Sheaf.Paper.CompletedOpenExchangeTransport
 import Sheaf.Paper.CompletedDirectImageLimits
 import Sheaf.Paper.DerivedAdjunctionShift
 import Sheaf.Paper.IntegralScalarExtensionWellDefined
+import Sheaf.CategoryTheory.LocalizedModuleExactForSystems
+import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimitIndependentCoefficients
+import Sheaf.Paper.EtaleCompactSupportCoefficientChange
+import Sheaf.Paper.FiniteTorAmplitudeSites
 
 /-! # Integral compact-support coefficient comparison
 

@@ -23,6 +23,9 @@ import Sheaf.Paper.CoefficientHomRepresentativeEvaluation
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalClosed
 import WeilConjectures.CategoryTheory.DerivedCategory.HasMonoidalDerivedCategory
 import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategory
+import Sheaf.Algebra.Homology.KFlat
+import Sheaf.Algebra.Homology.RingedInternalHomShiftOfUniverses
+import Sheaf.CategoryTheory.InternalAbelianSheafModuleEquivalence
 /-! # Internal-module and ringed-site derived Hom
 
 Source: Stacks Project, Tags 08J9, 08JA and 08JB; blueprint module objects and

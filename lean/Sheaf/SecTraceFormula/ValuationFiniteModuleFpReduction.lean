@@ -9,6 +9,7 @@ public import Mathlib.RingTheory.RingHom.EssFiniteType
 public import Mathlib.Algebra.Module.FinitePresentation
 public import Mathlib.Algebra.Category.ModuleCat.Basic
 public import Mathlib.CategoryTheory.Filtered.Basic
+import Sheaf.TraceFormula.ValuationClosedFibreNoetherian
 
 /-!
 # Finite modules admit a finitely presented approximation with stable closed fibre

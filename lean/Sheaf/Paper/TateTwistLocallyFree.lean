@@ -9,6 +9,9 @@ public import Sheaf.Paper.IntrinsicCoefficientTwists
 public import Sheaf.Paper.PurInverseImageTensorHom
 
 import Sheaf.Paper.PurTwistSheafLocallyFree
+import Sheaf.AlgebraicGeometry.ProEtaleIntegralCoefficientLimit
+import Sheaf.Paper.IntrinsicCoefficientTwistsUnrestricted
+import Sheaf.Paper.PadicIntegersInvertEll
 
 /-! # Tate twists are well defined and locally free of rank one
 

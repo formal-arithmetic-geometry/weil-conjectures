@@ -37,6 +37,12 @@ import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
 import Sheaf.AlgebraicGeometry.ProEtaleDirectImageRestrictionOfScalars
 import Mathlib.Algebra.Homology.DerivedCategory.KInjective
+import Sheaf.AlgebraicGeometry.ProEtaleFixedScalarRestrictionDirectImage
+import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
+import Sheaf.CategoryTheory.LocalizedModuleExactForSystems
+import Sheaf.Paper.CoefficientSystemDerivedComparison
+import Sheaf.Paper.SemilinearDerivedSections
+import Sheaf.SecSmoothPurity.IntrinsicCompactSupportRestriction
 
 /-!
 # Coherent compact-support reduction towers

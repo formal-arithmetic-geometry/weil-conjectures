@@ -21,6 +21,8 @@ import Sheaf.RepresentationTheory.LocallyConstantCochainsEffaceable
 import Sheaf.CategoryTheory.EffaceableDeltaFunctorUniversal
 import Sheaf.CategoryTheory.RightDerivedUniversalDeltaFunctor
 import Mathlib.Algebra.Category.Grp.AB
+import WeilConjectures.CategoryTheory.EffaceableDeltaFunctorUniversal
+import WeilConjectures.CategoryTheory.RightDerivedUniversalDeltaFunctor
 
 /-!
 # Continuous cochains compute Galois cohomology

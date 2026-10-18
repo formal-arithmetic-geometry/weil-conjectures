@@ -24,6 +24,12 @@ import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism
 import Sheaf.Paper.CondensedSurjectiveClosedEquivalence
 import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
 import WeilConjectures.Mathlib.Topology.KrullDimension
+import Sheaf.Paper.CartesianCoefficients
+import Sheaf.Paper.CoefficientHeartClosure
+import Sheaf.Paper.CoefficientHeartCommonStratification
+import Sheaf.Paper.CondensedConstantConstructibility
+import Sheaf.Paper.LocalizingClosureCtfEqualsBc
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LowerShriek.Defs
 
 /-!
 # The constructible coefficient heart

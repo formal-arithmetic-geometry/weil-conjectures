@@ -27,6 +27,7 @@ import Sheaf.AlgebraicGeometry.EtaleModuleSheavesGrothendieckAbelian
 import Mathlib.Topology.Algebra.Valued.LocallyCompact
 import Sheaf.AlgebraicGeometry.FiniteTypeDirectImageConstructibility
 import WeilConjectures.CategoryTheory.TruncationHypercohomology
+import Sheaf.AlgebraicGeometry.BoundedConstructibleComplexes
 
 /-!
 # Finite-stage direct image with the dimension Tor bound

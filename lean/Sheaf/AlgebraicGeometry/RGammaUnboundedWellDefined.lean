@@ -3,6 +3,7 @@ module
 public import Sheaf.AlgebraicGeometry.KInjectiveResolutions
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 import Mathlib.Algebra.Homology.DerivedCategory.KInjective
+import WeilConjectures.AlgebraicGeometry.DerivedCategories
 
 /-!
 # Independence of unbounded derived global sections from a K-injective resolution

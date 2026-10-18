@@ -8,6 +8,10 @@ public import Sheaf.AlgebraicGeometry.ProjectiveBundleMorphism
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 import Sheaf.AlgebraicGeometry.GloballyGeneratedProjectiveBundle
 import Sheaf.AlgebraicGeometry.Morphisms.ProjectiveImpliesProper
+import Sheaf.AlgebraicGeometry.CoherentFiniteType
+import Sheaf.AlgebraicGeometry.QuasiCoherentSymmetricAlgebra
+import WeilConjectures.AlgebraicGeometry.RelativeProj.Basic
+import WeilConjectures.LinearAlgebra.SymmetricAlgebra.Graded
 
 /-!
 # Properness of projective-bundle morphisms

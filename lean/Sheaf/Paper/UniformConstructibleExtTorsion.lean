@@ -32,6 +32,9 @@ import Mathlib.CategoryTheory.Abelian.RightDerived
 import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
 import Mathlib.AlgebraicGeometry.Noetherian
 import Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
+import Sheaf.AlgebraicGeometry.IntegralConstantCompletion
+import Sheaf.AlgebraicGeometry.ProEtaleExtensionZeroComparison
+import Sheaf.Paper.FormalClosedSupportII
 
 /-!
 # The torsion stratum bound

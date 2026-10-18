@@ -6,6 +6,9 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import Mathlib.RingTheory.AdicCompletion.Algebra
 public import Mathlib.RingTheory.MvPowerSeries.Basic
+import Sheaf.AlgebraicGeometry.ClosedPointField
+import Sheaf.RingTheory.SeparableClosedPointFormalPresentation
+import Sheaf.TraceFormula.FormalJacobianQuadraticCriterion
 
 /-!
 # Nodes persist under extension of algebraically closed fields

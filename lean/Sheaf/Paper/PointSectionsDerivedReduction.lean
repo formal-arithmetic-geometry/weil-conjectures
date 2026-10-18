@@ -30,6 +30,10 @@ import Sheaf.Algebra.Homology.DerivedChangeOfRingsIndependentCoefficients
 import Sheaf.Algebra.Homology.BoundedFlatKFlat
 import Sheaf.Algebra.Homology.MixedTensorKFlatQuasiIso
 import Mathlib.Algebra.Homology.BifunctorShift
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
+import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
+import Sheaf.Algebra.Homology.MixedTensorPointwiseLeftDerived
+import Sheaf.Paper.DerivedReductionResolutionIndependence
 
 /-!
 # Point sections and derived integral reduction

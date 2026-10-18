@@ -33,6 +33,11 @@ import Sheaf.Paper.SfScalarExtensionComposition
 import Sheaf.CategoryTheory.StageSystemFunctorDescent
 import Sheaf.AlgebraicGeometry.CompactSupportRestrictionOfScalars
 import Sheaf.AlgebraicGeometry.ProEtaleFixedScalarRestrictionDirectImage
+import Sheaf.AlgebraicGeometry.CompactificationRefinementCoherence
+import Sheaf.Paper.BasicOperationsCoefficientReduction
+import Sheaf.Paper.SfIntegralCompactSupportConstructible
+import Sheaf.SecSmoothPurity.IntrinsicCompactSupportRestriction
+import Sheaf.SixFunctors.IntegralCompactificationSystemRealization
 
 /-! # Canonical compact-support composition with field coefficients on qcqs schemes
 

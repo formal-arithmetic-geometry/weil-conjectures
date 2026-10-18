@@ -19,6 +19,11 @@ import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
 
 
 public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorClosed
+import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
+import Sheaf.CategoryTheory.RingedSiteModules
+import WeilConjectures.FromJoel.Algebra.Homology.BifunctorMappingCone
 -- r4: side KFlat instances (global there), as local instances of the live theorems
 attribute [local instance] SheafOfModules.isMonoidal_W_independentCoefficients
   SheafOfModules.preservesZeroMorphisms_curriedTensor_independentCoefficients

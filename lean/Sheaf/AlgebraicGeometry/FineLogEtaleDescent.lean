@@ -9,6 +9,8 @@ public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 
 import Sheaf.CategoryTheory.SetSheafCoverDescent
+import Sheaf.AlgebraicGeometry.FineSaturatedLogBlowup
+import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtaleOver
 
 /-!
 # Étale descent of fine log structures and arbitrary prelog morphisms

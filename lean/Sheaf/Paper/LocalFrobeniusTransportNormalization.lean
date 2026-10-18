@@ -37,6 +37,7 @@ public import Sheaf.Paper.LocalFrobeniusTrace
 public import Mathlib.Algebra.Homology.DerivedCategory.FullyFaithful
 public import Sheaf.TraceFormula.PointTransportComposition
 public import Sheaf.Paper.FrobeniusCoefficientReductionCoherence
+import Sheaf.SixFunctors.FrobeniusFixedPoints
 
 /-!
 # Rational-point transport and scheme-Frobenius normalization

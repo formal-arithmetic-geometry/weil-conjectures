@@ -8,6 +8,15 @@ module
 public import Sheaf.AlgebraicGeometry.SchemeCoverDescentDatum
 public import Sheaf.AlgebraicGeometry.QuasiFiniteMorphism
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
+import Sheaf.AlgebraicGeometry.FppfAffineRefinement
+import Sheaf.AlgebraicGeometry.FppfFamilyAffineEffectivityReduction
+import Sheaf.AlgebraicGeometry.InvariantOpenEffectiveDescent
+import Sheaf.AlgebraicGeometry.IsLocallyQuasiFiniteResLE
+import Sheaf.AlgebraicGeometry.LocallyOfFiniteTypeOfIsLocallyQuasiFinite
+import Sheaf.AlgebraicGeometry.QuasiAffineFpqcDescent
+import Sheaf.AlgebraicGeometry.SeparatedLqfBaseChange
+import WeilConjectures.CategoryTheory.Comma.Over.DescentDatum
+import WeilConjectures.Mathlib.AlgebraicGeometry.QuasiAffine
 
 /-!
 # Effective fppf descent for separated locally quasi-finite schemes

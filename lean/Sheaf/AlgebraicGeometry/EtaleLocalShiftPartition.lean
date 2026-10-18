@@ -18,6 +18,9 @@ import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
 import Mathlib.AlgebraicGeometry.Sites.Fpqc
 import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen
+import Sheaf.Paper.ProEtaleLocallyConstantSheafOfUniverses
+import Sheaf.Paper.SfCommonStageWeilCohomology
+import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.WeaklyEtale
 
 /-!
 # Finite clopen shift loci for etale-local rank-one complexes

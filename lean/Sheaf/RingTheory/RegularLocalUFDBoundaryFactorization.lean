@@ -8,6 +8,10 @@ module
 public import Mathlib.RingTheory.Localization.Away.Basic
 public import WeilConjectures.Mathlib.RingTheory.RegularLocalRing.Defs
 public import Sheaf.RingTheory.IsRegularSystemOfParameters
+import Sheaf.AlgebraicGeometry.IsRegularScheme
+import Sheaf.RingTheory.RegularLocalLocalization
+import Sheaf.RingTheory.RegularLocalPicardZero
+import Sheaf.TraceFormula.NagataInvertPrime
 
 /-!
 # Boundary-unit factorization in a regular local ring

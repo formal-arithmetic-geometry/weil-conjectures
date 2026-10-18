@@ -24,6 +24,7 @@ import WeilConjectures.CategoryTheory.Abelian.Flat.Basic
 import Sheaf.Paper.KFlatRingedToposPullback
 import Sheaf.CategoryTheory.ModulePullbackTensorIso
 import Sheaf.AlgebraicGeometry.ProEtaleConstantExact
+import Sheaf.Paper.IntegralDerivedOperationsOnSlices
 
 /-!
 # Integral pullback and completed tensor preserve constructibility

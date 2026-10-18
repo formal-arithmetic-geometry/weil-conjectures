@@ -39,6 +39,17 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 import Sheaf.Paper.RingedExchangeTensorCoherence
 import Sheaf.AlgebraicGeometry.CompactSupportFiniteTorsion
+import Sheaf.AlgebraicGeometry.CompactificationProjectionExchangeCoherence
+import Sheaf.AlgebraicGeometry.PullbackBoundedConstructible
+import Sheaf.Paper.CanonicalFiniteLevelCompactSupportBaseChange
+import Sheaf.Paper.CanonicalOriginCompactSupportComposition
+import Sheaf.Paper.CohomologicalSmoothnessFiniteComparison
+import Sheaf.Paper.CompactSupportExchangeTransport
+import Sheaf.Paper.ConstructibleExceptionalAdjunctionCoefficients
+import Sheaf.Paper.FiniteCoefficientFlatModel
+import Sheaf.Paper.IntegralFinitePullbackComposition
+import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
+import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekPlusBaseChange
 
 /-! # Composition of cohomologically smooth morphisms
 

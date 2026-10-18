@@ -15,6 +15,9 @@ import Sheaf.Paper.CompactificationLocalizing
 import WeilConjectures.Compactification.Dense
 import Mathlib.CategoryTheory.Triangulated.Adjunction
 import Mathlib.CategoryTheory.Yoneda
+import Sheaf.CategoryTheory.CompactObject
+import Sheaf.Paper.BrownHypothesesGeneration
+import Sheaf.SixFunctorsBasics.BrownHypotheses
 
 /-!
 # Exceptional inverse image on the localizing constructible closure

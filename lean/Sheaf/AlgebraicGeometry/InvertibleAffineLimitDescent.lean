@@ -17,6 +17,9 @@ import Sheaf.AlgebraicGeometry.TensorPullbackFinitePresentation
 import WeilConjectures.AlgebraicGeometry.ModulePullbackTensor
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.SiteTensorFunctoriality
 import Sheaf.CategoryTheory.RingedSiteModules
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
+import Sheaf.AlgebraicGeometry.FinitePresentationAffineLimitDescent
+import Sheaf.AlgebraicGeometry.TensorPullbackSectionAdjunction
 
 /-! # Invertible modules descend along affine transition limits
 

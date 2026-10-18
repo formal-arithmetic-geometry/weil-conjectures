@@ -10,6 +10,7 @@ public import Sheaf.AlgebraicGeometry.MultipointedCurveModification
 public import Sheaf.AlgebraicGeometry.RiemannZariskiFiniteRefinement
 import Sheaf.AlgebraicGeometry.StableModificationFinitePresentationSpread
 import Sheaf.AlgebraicGeometry.SemistableMarkedBaseChange
+import Sheaf.AlgebraicGeometry.StableModificationStabilityLocus
 
 /-!
 # Spreading a prescribed stable valuation model

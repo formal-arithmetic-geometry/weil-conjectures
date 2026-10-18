@@ -8,6 +8,10 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Sheaf.AlgebraicGeometry.QuasiFiniteMorphism
+import Sheaf.AlgebraicGeometry.CompositeFibreLocalModels
+import Sheaf.AlgebraicGeometry.FibreCohenMacaulayLocus
+import Sheaf.AlgebraicGeometry.Morphisms.CohenMacaulayClosedPointSlice
+import Sheaf.TraceFormula.FlatLFPCMLocusFibreDense
 
 /-!
 # Flat locally finitely presented quasi-finite neighbourhoods

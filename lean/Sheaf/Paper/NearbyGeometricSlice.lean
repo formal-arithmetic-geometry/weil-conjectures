@@ -21,6 +21,10 @@ import Sheaf.AlgebraicGeometry.StrictBaseClosedPointLocalizations
 import WeilConjectures.AlgebraicGeometry.Sites.EtaleTopologicalInvariance
 import WeilConjectures.CategoryTheory.TruncationHypercohomology
 import Mathlib.FieldTheory.PurelyInseparable.Basic
+import Sheaf.AlgebraicGeometry.StrictHenselization
+import Sheaf.Paper.OrientedNearbyCycles
+import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
+import Sheaf.Paper.StrictHenselizationFunctoriality
 
 /-!
 # The geometric generic slice of nearby cycles over a trait

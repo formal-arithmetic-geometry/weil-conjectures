@@ -50,6 +50,8 @@ import Sheaf.Paper.SfOpenClosedTriangleAllStages
 import Mathlib.CategoryTheory.Functor.ReflectsIso.Exact
 import Sheaf.Paper.SfWeilSheafComplex
 import Mathlib.CategoryTheory.Endofunctor.Algebra
+import Sheaf.Paper.CondensedERealization
+import Sheaf.Paper.StratifiedLatticeRank
 
 /-! # Exact and jointly conservative constructible adic coefficient fibres
 

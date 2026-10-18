@@ -15,6 +15,7 @@ import Sheaf.CategoryTheory.Sites.LocalizedSheavesOverRepresentable
 import Sheaf.CategoryTheory.SheafSubcategoryComparison
 import Mathlib.CategoryTheory.Sites.Limits
 import Mathlib.CategoryTheory.Sites.Sheafification
+import Sheaf.TraceFormula.SieveSheavesCoveringSite
 
 /-!
 # Finite-limit site presentation adapted to an object

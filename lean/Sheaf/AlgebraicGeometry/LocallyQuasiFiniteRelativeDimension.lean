@@ -7,6 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.QuasiFiniteMorphism
 public import WeilConjectures.Mathlib.Topology.KrullDimension
+import Sheaf.RingTheory.QuasiFiniteAtPrimeZeroFibreDimension
+import WeilConjectures.RingTheory.QuasiFiniteAtPrime
 
 /-!
 # Locally quasi-finite morphisms and relative dimension zero

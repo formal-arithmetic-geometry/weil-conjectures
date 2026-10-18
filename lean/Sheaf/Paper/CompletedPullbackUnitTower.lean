@@ -30,6 +30,8 @@ import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
 import Sheaf.Paper.AdicCompletionReduction
 
 import Sheaf.Paper.CompletionMap
+import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
+import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimitIndependentCoefficients
 /-! # The completion unit and completed pullback on strict quotient towers
 
 Source: smooth-purity blueprint, fix-lem-exchanges, Proof Steps 2 and 5;

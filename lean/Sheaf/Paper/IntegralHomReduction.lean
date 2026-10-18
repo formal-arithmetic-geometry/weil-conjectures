@@ -32,6 +32,13 @@ import Sheaf.AlgebraicGeometry.ProEtaleCountableProductsExact
 import Sheaf.CategoryTheory.Triangulated.DerivedLimitExistence
 import Mathlib.CategoryTheory.Yoneda
 import Mathlib.CategoryTheory.Adjunction.Limits
+import Sheaf.Algebra.Homology.RhomGlobalSectionsOfUniverses
+import Sheaf.Algebra.Homology.RingedInternalHomShiftOfUniverses
+import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
+import Sheaf.CategoryTheory.DerivedCategory.StandardQuotientsPerfect
+import Sheaf.Paper.DerivedCompleteOnSlices
+import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
+import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitExistence
 
 -- The high-priority successor-universe sheafification instance gets stuck on coefficient-universe goals.
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall

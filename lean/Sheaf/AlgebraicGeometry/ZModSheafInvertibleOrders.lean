@@ -13,6 +13,7 @@ public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import Mathlib.Data.ZMod.Basic
 import Mathlib.CategoryTheory.Sites.Sheafification
 import Mathlib.CategoryTheory.Sites.Point.Basic
+import Sheaf.AlgebraicGeometry.PointedEtaleStalk
 
 /-!
 # Invertible orders of sheaves of Z/nZ-modules

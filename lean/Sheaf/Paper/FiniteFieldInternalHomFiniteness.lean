@@ -36,6 +36,7 @@ import WeilConjectures.CategoryTheory.DerivedCategory.HasMonoidalDerivedCategory
 import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategory
 import Sheaf.Paper.StratumAmbientHom
 import Sheaf.Paper.CondensedOpenClosedRecollement
+import Sheaf.Algebra.Homology.RingedInternalHomShiftOfUniverses
 
 /-!
 # Finite-field internal Hom finiteness over an arbitrary ground field

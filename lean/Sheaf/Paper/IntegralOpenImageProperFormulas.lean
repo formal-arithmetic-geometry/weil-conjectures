@@ -16,6 +16,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 
 import Sheaf.Paper.IntegralLocalizingProperBaseChange
 import Sheaf.Paper.IntegralProperProjectionFormula
+import Sheaf.Paper.LocalizingClosureCtfEqualsBc
+import Sheaf.SixFunctors.ProEtale.IntegralOpenDirectImage
 
 /-!
 # Integral open direct image and proper formulas

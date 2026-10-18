@@ -46,6 +46,8 @@ import Sheaf.AlgebraicGeometry.SmoothAtPointFibreCriterion
 import WeilConjectures.AlgebraicGeometry.Modules.InvertiblePullbackTensor
 import WeilConjectures.CategoryTheory.RightDerivedUniversalDeltaFunctor
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Etale
+import Sheaf.AlgebraicGeometry.CurveSectionDegreePositivity
+import Sheaf.RingTheory.HenselianSmoothAlgebraLifting
 
 /-! # Polar sections on a proper valuation curve
 

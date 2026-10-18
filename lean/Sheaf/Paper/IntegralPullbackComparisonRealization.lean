@@ -20,6 +20,8 @@ import Sheaf.Paper.IntegralOperationsPreserveConstructible
 import Sheaf.Paper.IntegralFinitePullbackComposition
 import Sheaf.Paper.IntegralOperationsWellDefined
 import Sheaf.Paper.IntegralScalarExtensionWellDefined
+import Sheaf.Paper.CoefficientExtensionReductionModel
+import Sheaf.Paper.ScalarExtensionTowerCoherence
 
 /-!
 # Realization of integral pullback comparisons

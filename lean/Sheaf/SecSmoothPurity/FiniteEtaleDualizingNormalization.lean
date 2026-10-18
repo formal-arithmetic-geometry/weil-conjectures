@@ -39,6 +39,9 @@ import Sheaf.Paper.ProjectionMateExact
 import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
 import Sheaf.Paper.GlobalFiniteLevelCompactSupportBaseChange
 import Sheaf.AlgebraicGeometry.CompactSupportComparisonUnit
+import Sheaf.Paper.CanonicalFiniteLevelCompactSupportBaseChange
+import Sheaf.Paper.CohomologicalSmoothnessFiniteComparison
+import Sheaf.Paper.ConstructibleExceptionalAdjunctionCoefficients
 
 /-!
 # Finite etale dualizing normalization

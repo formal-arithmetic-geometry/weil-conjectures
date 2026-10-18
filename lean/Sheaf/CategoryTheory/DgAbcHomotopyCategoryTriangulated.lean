@@ -6,6 +6,8 @@ Authors: SHEAF group NB
 module
 
 public import Sheaf.CategoryTheory.DgAbcData
+import Sheaf.CategoryTheory.DgAbcConeHomotopy
+import Sheaf.SixFunctors.DgAbcAdmissibleReplacement
 
 /-!
 # Triangulation from the dg axioms A, B and C

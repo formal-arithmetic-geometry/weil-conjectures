@@ -20,6 +20,28 @@ public import Mathlib.AlgebraicGeometry.Geometrically.Integral
 public import Mathlib.AlgebraicGeometry.Fiber
 public import Mathlib.Topology.Sober
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.EffectiveCartier
+import Sheaf.AlgebraicGeometry.ChowProjectiveClosedImmersions
+import Sheaf.AlgebraicGeometry.ClosedIrreducibleDimensionTrdeg
+import Sheaf.AlgebraicGeometry.ExcellentSchemeAffineCover
+import Sheaf.AlgebraicGeometry.FlatInvertibleSectionsTorsionFree
+import Sheaf.AlgebraicGeometry.FlatProperComponentCountLowerSemicontinuous
+import Sheaf.AlgebraicGeometry.FlatificationHorizontalCurvePair
+import Sheaf.AlgebraicGeometry.Morphisms.GenericFiniteOpenNeighborhood
+import Sheaf.AlgebraicGeometry.Morphisms.ProjectiveBaseChange
+import Sheaf.AlgebraicGeometry.ProperBirationalNormalCurveIso
+import Sheaf.AlgebraicGeometry.StableModificationFlatCurvePair
+import Sheaf.AlgebraicGeometry.SteinSmoothGenericCurve
+import Sheaf.AlgebraicGeometry.UnramifiedQuasiFinite
+import Sheaf.RingTheory.IsExcellentFiniteTypeLocalization
+import Sheaf.SixFunctors.TraceFormula.NodalFamilyFittingSingular
+import Sheaf.TraceFormula.ProjectiveBundleProper
+import WeilConjectures.AlgebraicGeometry.ChowLemma
+import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
+import WeilConjectures.AlgebraicGeometry.Regular
+import WeilConjectures.AlgebraicGeometry.RelativeEffectiveCartier
+import WeilConjectures.Blowup.Proper
+import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Reduced
+import WeilConjectures.Mathlib.RingTheory.Etale.Field
 
 /-! # Arbitrary-base marked semistable alteration
 

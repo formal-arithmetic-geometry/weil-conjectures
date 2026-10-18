@@ -7,6 +7,7 @@ module
 
 public import Mathlib.RingTheory.FiniteType
 public import Mathlib.Algebra.Module.FinitePresentation
+import Sheaf.RingTheory.PolynomialActionReduction
 
 /-!
 # Finite presentation over a finite type algebra

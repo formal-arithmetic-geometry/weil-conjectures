@@ -37,6 +37,9 @@ import Sheaf.AlgebraicGeometry.CompactSupportComparisonUnit
 import Mathlib.AlgebraicGeometry.Morphisms.Finite
 import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen
 import Mathlib.Algebra.Category.Grp.AB
+import Sheaf.AlgebraicGeometry.CartierKummerMap
+import Sheaf.Paper.ConstructibleExceptionalAdjunctionCoefficients
+import Sheaf.Paper.SupportedCupFunctoriality
 
 /-!
 # Relative supported stalks in simultaneous etale coordinates

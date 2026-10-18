@@ -26,6 +26,11 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalClosed
 import WeilConjectures.CategoryTheory.DerivedCategory.HasMonoidalDerivedCategory
 import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategory
 import Sheaf.Algebra.Homology.RingedSliceEvaluationTranspose
+import Sheaf.Algebra.Homology.RingedInternalHomShiftOfUniverses
+import Sheaf.AlgebraicGeometry.CondensedCoverRestrictionConservative
+import Sheaf.CategoryTheory.CommutativeSiteDerivedConstantModuleFunctor
+import Sheaf.CategoryTheory.DualizableJointlyConservativeLocality
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
 
 /-! # Pro-etale locality and pullback of dualizable condensed complexes
 

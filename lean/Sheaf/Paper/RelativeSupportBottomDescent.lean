@@ -35,6 +35,7 @@ import Sheaf.Paper.PurityRankOneLocalCalculation
 import Sheaf.AlgebraicGeometry.SupportLongExact
 import Sheaf.CategoryTheory.GrothendieckSpectralSequence
 import Sheaf.AlgebraicGeometry.CompactSupportComparisonUnit
+import Sheaf.Paper.IntrinsicCoefficientTwistsUnrestricted
 
 /-! # Descent in the bottom supported degree of a smooth pair
 

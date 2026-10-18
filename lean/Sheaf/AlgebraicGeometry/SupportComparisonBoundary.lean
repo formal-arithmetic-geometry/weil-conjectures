@@ -17,6 +17,14 @@ public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.AlgebraicGeometry.OpenImmersion
+import Sheaf.AlgebraicGeometry.CompactSupportComparisonUnit
+import Sheaf.AlgebraicGeometry.ProEtaleRestrictionInjectives
+import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
+import Sheaf.Paper.ComparisonPullbackExact
+import Sheaf.Paper.PurityComparisonUnitInjectiveModel
+import WeilConjectures.CategoryTheory.InjectiveModulePresheaf
+import WeilConjectures.Mathlib.CategoryTheory.Preadditive.Injective.Preserves
+import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMap
 
 /-!
 # Site-comparison compatibility of the support boundary

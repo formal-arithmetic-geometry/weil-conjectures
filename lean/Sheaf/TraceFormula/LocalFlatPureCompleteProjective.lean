@@ -7,6 +7,10 @@ public import Mathlib.RingTheory.Flat.Basic
 public import Mathlib.RingTheory.LocalRing.ResidueField.Fiber
 public import Mathlib.RingTheory.Noetherian.Defs
 public import Sheaf.RingTheory.AnnihilatorAssociatedPrimes
+import Sheaf.RingTheory.CompletionFlatMittagLeffler
+import Sheaf.RingTheory.FlatCompletionUniversallyInjective
+import Sheaf.RingTheory.IsMittagLeffler
+import Sheaf.SecTraceFormula.CountableFlatMittagLefflerProjective
 
 /-!
 # Projectivity over a complete Noetherian base from a projective reduction

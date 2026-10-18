@@ -10,6 +10,14 @@ public import Sheaf.CategoryTheory.Sites.CoherentToposRepair
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
+import Sheaf.AlgebraicGeometry.EtaleToposPointsGeometric
+import Sheaf.CategoryTheory.Sites.GeometricMorphism
+import Sheaf.CategoryTheory.Sites.OrientedProductLargeSites
+import Sheaf.Paper.FinitarySiteEnoughPoints
+import Sheaf.Paper.QcqsOrientedTriplePresentation
+import Sheaf.TraceFormula.FinitarySiteCoherentGenerators
+import Sheaf.TraceFormula.ProperGeometricSpecializationLift
+import WeilConjectures.AlgebraicGeometry.GeometricPointMorphismStalkBijection
 
 /-!
 # Proper base change and coherent conservative vanishing topoi

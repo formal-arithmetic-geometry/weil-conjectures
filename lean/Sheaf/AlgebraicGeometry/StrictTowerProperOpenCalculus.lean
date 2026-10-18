@@ -27,6 +27,25 @@ import Sheaf.AlgebraicGeometry.DerivedOpenRestriction
 import Sheaf.CategoryTheory.RingedToposDerivedPushforwardComposition
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
 import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
+import Sheaf.AlgebraicGeometry.ComparisonDirectImage
+import Sheaf.AlgebraicGeometry.FixedComparisonDirectImageMate
+import Sheaf.AlgebraicGeometry.ProEtaleConstantRingOperations
+import Sheaf.AlgebraicGeometry.ProEtaleDerivedExtensionZeroBaseChange
+import Sheaf.AlgebraicGeometry.ProEtaleExtensionZeroComparison
+import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
+import Sheaf.AlgebraicGeometry.ProperSupportSheafComposition
+import Sheaf.AlgebraicGeometry.StrictConstantTowerOperations
+import Sheaf.AlgebraicGeometry.StrictTowerOpenExtension
+import Sheaf.AlgebraicGeometry.SupportComparisonPullbackCoherence
+import Sheaf.CategoryTheory.Adjunction.CoefficientExchange
+import Sheaf.CategoryTheory.Adjunction.LiftsGroupRingObjects
+import Sheaf.CategoryTheory.LocalizedModuleExactForSystems
+import Sheaf.CategoryTheory.RingedSiteModules
+import Sheaf.Paper.IntegralFinitePullbackComposition
+import Sheaf.Paper.LocalizeRingedSiteMorphismGeneral
+import WeilConjectures.Algebra.Homology.TowerEvaluationKInjective
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
+import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 
 /-!
 # Normalized proper/open calculus on strict pro-etale towers

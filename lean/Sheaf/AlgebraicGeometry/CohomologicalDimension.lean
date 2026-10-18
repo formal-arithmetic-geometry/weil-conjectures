@@ -29,6 +29,8 @@ import Mathlib.CategoryTheory.Limits.ConcreteCategory.Basic
 import Mathlib.Algebra.Category.ModuleCat.FilteredColimits
 import Mathlib.CategoryTheory.Sites.Point.Skyscraper
 import Mathlib.Algebra.Homology.ShortComplex.ShortExact
+import Sheaf.AlgebraicGeometry.BoundedBelowProEtaleComparison
+import Sheaf.AlgebraicGeometry.ProEtaleDirectImageComparison
 
 /-!
 # Prime-power cohomological dimension

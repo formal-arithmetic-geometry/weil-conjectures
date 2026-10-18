@@ -7,6 +7,15 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjective
+import Sheaf.AlgebraicGeometry.ExactUnboundedExchange
+import Sheaf.AlgebraicGeometry.KInjectiveResolutionsExist
+import Sheaf.CategoryTheory.ExactFunctorDerivedFunctor
+import Sheaf.CategoryTheory.KInjectiveTotalDerived
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
+import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-!
 # Derived counit on a K-injective representative

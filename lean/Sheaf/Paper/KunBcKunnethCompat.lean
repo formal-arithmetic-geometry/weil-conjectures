@@ -19,6 +19,13 @@ import Mathlib.RingTheory.Etale.Field
 import Mathlib.CategoryTheory.Adjunction.Unique
 import Sheaf.AlgebraicGeometry.Morphisms.ProjectiveImpliesProper
 import Sheaf.Algebra.Homology.SiteDerivedTensorDescent
+import Sheaf.AlgebraicGeometry.DerivedPullbackCompositionMonoidal
+import Sheaf.AlgebraicGeometry.EtaleInverseImageCompositionModuleLinear
+import Sheaf.AlgebraicGeometry.KunnethGlobalSections
+import Sheaf.EtaleCohomology.SepClosedFieldVanishing
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
+import WeilConjectures.SixFunctors.Etale.Derived.TensorStructure
+import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Comparison
 
 /-!
 # Cohomology of the base change map through the Künneth identification

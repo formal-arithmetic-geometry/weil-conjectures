@@ -5,6 +5,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.AlgebraicGeometry.LogRegularPair
+import Sheaf.GroupTheory.SharpConeLatticeIntersection
+import Sheaf.TraceFormula.RationalConeDualIntegralForms
 
 /-!
 # Lattice-intersection embedding of a sharp fs monoid

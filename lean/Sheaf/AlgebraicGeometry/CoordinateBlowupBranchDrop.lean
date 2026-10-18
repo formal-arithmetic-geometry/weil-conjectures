@@ -19,6 +19,11 @@ import Mathlib.RingTheory.Unramified.LocalRing
 import Mathlib.RingTheory.FiniteType
 import Mathlib.RingTheory.Flat.Basic
 import WeilConjectures.Blowup.BaseChange
+import Sheaf.AlgebraicGeometry.NormalCrossingsDivisor
+import Sheaf.RingTheory.IsRegularSystemOfParameters
+import Sheaf.TraceFormula.CoordinateMaximalBranchStratum
+import WeilConjectures.Blowup.FiniteDegree.Algebra
+import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Invertible
 
 /-!
 # Coordinate blowups lower the branch number

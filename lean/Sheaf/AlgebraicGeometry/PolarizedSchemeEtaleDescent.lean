@@ -13,6 +13,9 @@ public import Sheaf.AlgebraicGeometry.TensorPullbackCompositionIso
 
 import Sheaf.AlgebraicGeometry.AlgebraicSpace
 import WeilConjectures.AlgebraicGeometry.Sites.SmallEtaleRepresentablePresheafSheaf
+import Sheaf.AlgebraicGeometry.AlgebraicSpaceAmpleLocal
+import Sheaf.AlgebraicGeometry.AlgebraicSpaceInvertibleDescent
+import Sheaf.AlgebraicGeometry.EtaleRelationQuotient
 
 /-! # Effective étale descent for polarized schemes
 

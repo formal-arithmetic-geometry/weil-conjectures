@@ -28,6 +28,9 @@ import Sheaf.RingTheory.LocalizationPrimeResidueFieldIso
 import Sheaf.RingTheory.QuasiFiniteAtPrimePrincipalLocalization
 import Sheaf.RingTheory.QuasiFiniteLocusOpen
 import WeilConjectures.AlgebraicGeometry.Morphisms.ProperQuasiFinite
+import Sheaf.RingTheory.QuasiFiniteComposition
+import Sheaf.TraceFormula.RefinedNoetherNormalizationPrime
+import WeilConjectures.RingTheory.QuasiFiniteAtPrime
 
 /-!
 # Refined quasi-finite affine-space charts

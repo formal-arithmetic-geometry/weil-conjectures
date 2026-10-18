@@ -31,6 +31,14 @@ import Mathlib.CategoryTheory.Sites.Over
 import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import Mathlib.AlgebraicGeometry.Morphisms.WeaklyEtale
 import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen
+import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
+import Sheaf.AlgebraicGeometry.UnramifiedMorphism
+import Sheaf.CategoryTheory.LocalizedModuleExactForSystems
+import Sheaf.Paper.DerivedPullbackTensorHom
+import Sheaf.Paper.SfCommonStageDirectImage
+import WeilConjectures.AlgebraicGeometry.FiniteEtaleEtaleLocalSplit
+import WeilConjectures.CategoryTheory.ExtensionByZeroPresheaf
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerShriek
 
 /-!
 # The reverse adjunction for a finite etale pro-etale direct image

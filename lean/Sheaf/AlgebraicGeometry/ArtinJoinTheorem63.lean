@@ -17,6 +17,7 @@ public import Sheaf.TraceFormula.NormalTensorComponentJoinModel
 public import Sheaf.TraceFormula.ArtinEmbeddedHenselJoin
 public import Sheaf.TraceFormula.IndEtaleLocalHenselianIntegral
 public import Sheaf.RingTheory.IntegralComponentHenselianPermanence
+import Sheaf.RingTheory.NonlocalJoinInternalNormalization
 
 /-!
 # Artin's henselian tensor join theorem

@@ -13,6 +13,7 @@ import Sheaf.Paper.PbcRationalTransport
 import Sheaf.Paper.FiniteStagePairCategory
 import Sheaf.Paper.CommonStageCalculus
 import Sheaf.Paper.PbcCommonStageCones
+import Sheaf.Paper.IntrinsicQbarCategory
 
 /-!
 # Descent of scalar-compatible exact functors

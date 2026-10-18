@@ -20,6 +20,16 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusComp
 public import Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
 import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarCoherence
+import Sheaf.AlgebraicGeometry.BaseChangeMapAbelianAndSets
+import Sheaf.AlgebraicGeometry.BoundedBelowProEtaleComparison
+import Sheaf.AlgebraicGeometry.ClassicalDerivedEquivalence
+import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
+import Sheaf.AlgebraicGeometry.ProEtaleSiteComparison
+import Sheaf.AlgebraicGeometry.SupportComparisonPullbackCoherence
+import Sheaf.CategoryTheory.RingedSiteModules
+import Sheaf.CategoryTheory.SitePullbackAbelianExact
+import Sheaf.SixFunctors.ClassicalDefinition
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-!
 # Direct-image comparison for discrete coefficients

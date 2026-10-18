@@ -22,6 +22,10 @@ import Sheaf.Paper.HigherDirectImageSheafifiedPresheaf
 import WeilConjectures.ConstructibleSheaf.Defs
 import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 import Mathlib.CategoryTheory.Sites.LocallyBijective
+import Sheaf.AlgebraicGeometry.CumulativeUniversalBaseChangeProperty
+import WeilConjectures.AlgebraicGeometry.ConstantPullbackCompositionCoherence
+import WeilConjectures.AlgebraicGeometry.EtaleCohomologyPullbackFunctorial
+import WeilConjectures.AlgebraicGeometry.HigherDirectImageSheafifiedPresheaf
 
 /-!
 # Failure of base change over an algebraically closed function field

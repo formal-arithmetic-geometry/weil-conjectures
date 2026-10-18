@@ -15,6 +15,12 @@ import Sheaf.AlgebraicGeometry.Sites.ProetaleSiteProperties
 import Sheaf.AlgebraicGeometry.ProEtaleToposFunctorialityInverseImage
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs
 import Sheaf.CategoryTheory.SheafTensor
+import Sheaf.AlgebraicGeometry.ProEtalePointPullback
+import Sheaf.Topology.ProfiniteCondensedRing
+import WeilConjectures.CategoryTheory.ModuleObjects.EllAdicRationalization
+import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
+import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Defs
 
 /-!
 # Inverse image of the three coefficient comparisons

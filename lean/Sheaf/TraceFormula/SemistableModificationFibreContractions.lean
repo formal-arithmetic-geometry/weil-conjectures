@@ -18,6 +18,9 @@ import Sheaf.AlgebraicGeometry.SemistableMarkedBaseChange
 import Sheaf.TraceFormula.ValuationHorizontalCurveModels
 import Mathlib.AlgebraicGeometry.ZariskisMainTheorem
 import Mathlib.AlgebraicGeometry.Noetherian
+import Sheaf.TraceFormula.NodalSubcurveBoundary
+import Sheaf.TraceFormula.ValuationCurveProjectivePreparation
+import Sheaf.TraceFormula.ValuationExceptionalLocalCriterion
 
 /-! # Elementary contraction sequences on geometric fibres of semistable modifications
 

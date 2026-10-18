@@ -30,6 +30,9 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
 import Mathlib.RingTheory.KrullDimension.Polynomial
 import Mathlib.RingTheory.Spectrum.Prime.Noetherian
+import Sheaf.AlgebraicGeometry.OpenComplementKnown
+import Sheaf.Paper.FiniteFieldFiber
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-!
 # Unconditional bounds for open complements

@@ -30,6 +30,7 @@ import Sheaf.CategoryTheory.ScalarLocalization
 import Sheaf.NumberTheory.Padics.IntegersLocalizationUniformizer
 import Mathlib.LinearAlgebra.TensorProduct.Basic
 import Mathlib.RingTheory.Localization.Away.Basic
+import Sheaf.Paper.PbcScalarExtension
 /-! # The actual common-stage additive structure and shift
 
 Source: blueprint `prop-weil-pbc-common-stage-calculus`.

@@ -18,6 +18,8 @@ import Sheaf.CategoryTheory.TruncationsAndHomotopyColimits
 import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 import Mathlib.CategoryTheory.Triangulated.Pretriangulated
 import Mathlib.CategoryTheory.Triangulated.Triangulated
+import Sheaf.Paper.AmbientIndDerivedSums
+import Sheaf.Paper.IndHeartIIVanishing
 
 /-!
 # Lower-tail vanishing for bounded ind-constructible complexes

@@ -20,6 +20,7 @@ import WeilConjectures.Blowup.Density
 import WeilConjectures.Blowup.Extension
 import WeilConjectures.Compactification.StrictTransform
 import WeilConjectures.Compactification.EliminationOfIndeterminacy
+import Sheaf.Compactification.NagataSketchBlowups
 
 /-!
 # Common refinements of modifications on a finite Zariski cover

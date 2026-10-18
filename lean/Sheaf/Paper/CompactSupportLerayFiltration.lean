@@ -14,6 +14,13 @@ import WeilConjectures.CategoryTheory.ExactCouple
 import WeilConjectures.CategoryTheory.DerivedCoupleExact
 import WeilConjectures.CategoryTheory.HalfPlaneConvergence
 import WeilConjectures.CategoryTheory.ExactCoupleConvergence
+import Sheaf.Paper.DerivedPullbackTensorHom
+import Sheaf.Paper.FieldShriekCompositionQcqs
+import Sheaf.Paper.FieldShriekLowerBound
+import Sheaf.Paper.SfConstructibleHeart
+import Sheaf.Paper.SfWeilSheafComplex
+import Sheaf.Paper.WeilShriekShiftCompatibility
+import WeilConjectures.SixFunctors.Etale.Derived.WeilFrobenius
 
 /-! # Finite compact-support Leray filtrations of constructible Weil sheaves
 

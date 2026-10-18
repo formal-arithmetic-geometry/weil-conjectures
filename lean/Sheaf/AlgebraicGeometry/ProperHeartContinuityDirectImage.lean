@@ -9,6 +9,8 @@ public import Sheaf.AlgebraicGeometry.ProEtaleBoundedContinuityDirectImage
 import Sheaf.Algebra.Homology.BoundedBelowInjectiveResolution
 import Sheaf.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 import Sheaf.AlgebraicGeometry.ProEtaleToposFunctorialityInverseImage
+import Sheaf.CategoryTheory.RightDerivedFunctorOfQuasiIsoResolutions
+import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 
 /-!
 # Higher direct images commute with filtered colimits and direct sums

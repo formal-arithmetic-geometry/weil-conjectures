@@ -30,6 +30,7 @@ import Sheaf.AlgebraicGeometry.QuasiFiniteLocallyQuasiFinite
 import Sheaf.AlgebraicGeometry.SeparatedLqfBaseChange
 import Sheaf.RingTheory.LimitModuleFinitePresentation
 import Sheaf.RingTheory.PowerPerturbationFibreDimension
+import Sheaf.TraceFormula.GenericPrincipalCoordinateDimensionDrop
 
 /-!
 # Weak relative Noether normalization

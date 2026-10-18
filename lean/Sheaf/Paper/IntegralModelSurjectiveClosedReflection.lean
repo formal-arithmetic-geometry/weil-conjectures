@@ -14,6 +14,9 @@ import Sheaf.CategoryTheory.SiteInverseImageTensor
 import Sheaf.Paper.ProEtaleSurjectiveClosedCoverRefinement
 import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism
 import Sheaf.Paper.CondensedSurjectiveClosedEquivalence
+import Sheaf.Paper.CartesianCoefficients
+import WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalars
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs
 
 /-!
 # Reflection of integral finite constant models across surjective closed immersions

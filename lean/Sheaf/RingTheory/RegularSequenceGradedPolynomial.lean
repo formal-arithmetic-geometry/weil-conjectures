@@ -10,6 +10,7 @@ public import Mathlib.RingTheory.Regular.RegularSequence
 public import Mathlib.RingTheory.MvPolynomial.Homogeneous
 public import Mathlib.LinearAlgebra.FreeModule.Basic
 import Sheaf.RingTheory.AssociatedGradedRingStructure
+import WeilConjectures.RingTheory.AssociatedGradedRing
 
 /-!
 # The associated graded algebra of a regular-sequence ideal

@@ -6,6 +6,9 @@ import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
 import Sheaf.AlgebraicGeometry.ProEtaleClosedEssentialImage
 import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 import Sheaf.CategoryTheory.RingedSiteModules
+import Sheaf.AlgebraicGeometry.ProEtaleConstantRingMap
+import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
+import Sheaf.AlgebraicGeometry.ProEtaleOpenUnitEvaluation
 
 /-!
 # Exact sequence of supported sections for injective pro-etale complexes

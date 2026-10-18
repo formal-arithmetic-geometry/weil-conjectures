@@ -19,6 +19,14 @@ import Sheaf.CategoryTheory.RingedSiteModules
 import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
 import Mathlib.CategoryTheory.Localization.Adjunction
 import Mathlib.AlgebraicGeometry.Morphisms.Proper
+import Sheaf.Paper.CartesianCoefficients
+import Sheaf.Paper.CompactificationLocalizing
+import Sheaf.Paper.CondensedConstantConstructibility
+import Sheaf.Paper.CondensedModuleDerivedPushpull
+import Sheaf.Paper.FiniteProperBaseChange
+import Sheaf.Paper.IntegralProperBaseChange
+import Sheaf.Paper.OpenImmersionLocalizing
+import Sheaf.Paper.ProperBaseChangeRational
 
 /-!
 # Proper direct image and open extension by zero

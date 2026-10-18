@@ -14,6 +14,18 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
+import Sheaf.AlgebraicGeometry.DescendClosedImmersion
+import Sheaf.AlgebraicGeometry.DescendSmoothQcqs
+import Sheaf.AlgebraicGeometry.FiniteFieldClosedSubschemeDescent
+import Sheaf.AlgebraicGeometry.GeometricReducedFiniteTypePerfectField
+import Sheaf.AlgebraicGeometry.OpenImmersionInverseLimitDescent
+import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
+import Sheaf.DeligneLaumon.AffineGeometricComponentsFiniteExtension
+import Sheaf.Topology.NoetherianGoodStratificationRefinement
+import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
+import WeilConjectures.AlgebraicGeometry.Morphisms.SlicingFlat
+import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
+import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
 
 /-!
 # Smooth affine frontier stratification over a finite subfield

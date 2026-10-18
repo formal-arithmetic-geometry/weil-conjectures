@@ -7,6 +7,10 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 public import WeilConjectures.AlgebraicGeometry.ConstantSheafGeometricStalk
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 public import Mathlib.CategoryTheory.Sites.ConstantSheaf
+import Sheaf.AlgebraicGeometry.EtaleInverseImageCompositionModuleLinear
+import Sheaf.AlgebraicGeometry.GeometricPointCanonicalGerm
+import Sheaf.AlgebraicGeometry.PointedEtaleStalk
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 
 /-!
 # Derived geometric stalk of a constant local model

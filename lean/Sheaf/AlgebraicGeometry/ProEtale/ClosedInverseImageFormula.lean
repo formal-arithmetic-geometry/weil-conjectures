@@ -14,6 +14,8 @@ import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
 import Sheaf.AlgebraicGeometry.ProEtaleConstantRingMap
 import Mathlib.CategoryTheory.Adjunction.Mates
 import WeilConjectures.AlgebraicGeometry.ProEtale.Comparison.Affine
+import Sheaf.AlgebraicGeometry.ProEtaleConstantRingOperations
+import Sheaf.AlgebraicGeometry.ProEtaleFiniteModules
 
 /-!
 # Closed inverse image as sheafification on the affine basis

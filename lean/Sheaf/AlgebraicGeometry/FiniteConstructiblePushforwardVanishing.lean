@@ -19,6 +19,7 @@ public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+import Sheaf.AlgebraicGeometry.FiniteMorphismsConstructible
 
 /-!
 # Constructibility and vanishing for finite pushforward

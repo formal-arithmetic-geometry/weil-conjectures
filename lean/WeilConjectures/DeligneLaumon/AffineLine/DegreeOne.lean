@@ -16,6 +16,10 @@ import WeilConjectures.FourierTransform.Defs
 import WeilConjectures.FourierTransform.Properties.Stalk
 import WeilConjectures.FourierTransform.ArtinSchreier
 import WeilConjectures.WeilSheaf.Cohomology
+import Sheaf.Paper.AdicMiddleExtensionConstructible
+import Sheaf.Paper.CommonStageCompactWeilCohomology
+import Sheaf.Paper.CommonStageCurveWeilMiddleExtension
+import Sheaf.Paper.MiddleExtensionHcZero
 
 /-!
 # The degree-one estimate for an irreducible factor

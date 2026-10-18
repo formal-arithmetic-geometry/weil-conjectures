@@ -22,6 +22,7 @@ import Sheaf.RingTheory.PowerSeriesFieldCohenRegularComplete
 import Sheaf.RingTheory.RegularLocalLocalization
 import Sheaf.RingTheory.RegularLocalQuotientKernelParameters
 import WeilConjectures.RingTheory.AdicCompletionNoetherian
+import Sheaf.TraceFormula.FsFaceSharpening
 
 /-!
 # Formal models after a group-isomorphism monoid extension

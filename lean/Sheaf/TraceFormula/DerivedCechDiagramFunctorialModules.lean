@@ -15,6 +15,8 @@ import Sheaf.AlgebraicGeometry.EtaleModuleSheavesGrothendieckAbelian
 import Sheaf.AlgebraicGeometry.KInjectiveResolutionsExist
 import Sheaf.AlgebraicGeometry.RGammaUnboundedWellDefined
 import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
+import Sheaf.CategoryTheory.RingedSiteModules
+import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 
 /-!
 # Compatible roofs for restriction of resolved cosimplicial module complexes

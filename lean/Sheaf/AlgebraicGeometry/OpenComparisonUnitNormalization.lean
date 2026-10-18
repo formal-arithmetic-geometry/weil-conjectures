@@ -14,6 +14,11 @@ public import Sheaf.AlgebraicGeometry.ProEtaleIntrinsicExtensionByZero
 import Sheaf.AlgebraicGeometry.ProEtaleIntrinsicExtensionByZeroAdjunction
 import Sheaf.AlgebraicGeometry.SfIntrinsicRealizationTransport
 import Sheaf.AlgebraicGeometry.ProEtaleOpenUnitEvaluation
+import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
+import Sheaf.AlgebraicGeometry.ProEtaleSiteComparison
+import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
+import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-!
 # Unit normalization of the open etale/pro-etale comparison

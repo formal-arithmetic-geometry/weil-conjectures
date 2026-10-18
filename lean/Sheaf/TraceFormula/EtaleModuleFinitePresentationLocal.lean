@@ -11,6 +11,8 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Generators
 public import Sheaf.AlgebraicGeometry.CoherentFiniteType
 public import Sheaf.AlgebraicGeometry.TensorPullbackSectionAdjunction
+import Sheaf.AlgebraicGeometry.TensorPullbackFinitePresentation
+import WeilConjectures.AlgebraicGeometry.Descent
 
 /-!
 # Étale-local finite presentation of a module

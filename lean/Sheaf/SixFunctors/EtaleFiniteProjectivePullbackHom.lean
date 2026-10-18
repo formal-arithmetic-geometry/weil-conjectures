@@ -13,6 +13,10 @@ public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Symmetric
 public import WeilConjectures.CategoryTheory.Monoidal.Mod.InternalHom
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.TensorColimits
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Monoidal
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorClosed
+import Sheaf.CategoryTheory.ModulePullbackTensorIso
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 
 /-! # Pullback of internal Hom from a finite projective constant module
 

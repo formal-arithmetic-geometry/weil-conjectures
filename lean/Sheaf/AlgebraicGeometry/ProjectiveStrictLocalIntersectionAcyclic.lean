@@ -15,6 +15,8 @@ import WeilConjectures.Mathlib.RingTheory.Henselian
 import Sheaf.AlgebraicGeometry.IndEtaleStrictLocalInvariance
 import Sheaf.AlgebraicGeometry.StrictHenselizationAffineChartIndEtale
 import Sheaf.AlgebraicGeometry.StrictHenselizationClosedLift
+import Sheaf.AlgebraicGeometry.ArtinTensorEtaleAcyclic
+import Sheaf.Paper.StrictHenselizationFunctoriality
 
 /-!
 # Acyclicity of intersections of projective strict localizations

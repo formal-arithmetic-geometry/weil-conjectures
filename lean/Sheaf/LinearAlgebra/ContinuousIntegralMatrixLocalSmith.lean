@@ -11,6 +11,8 @@ public import Mathlib.LinearAlgebra.Quotient.Defs
 public import Mathlib.Topology.Algebra.Nonarchimedean.AdicTopology
 public import Mathlib.Topology.Sets.Opens
 import Mathlib.LinearAlgebra.FreeModule.PID
+import Sheaf.LinearAlgebra.ContinuousIntegralPivotSplitting
+import Sheaf.RingTheory.DvrCyclicSummandCancellation
 
 /-!
 # Local continuous Smith reduction of integral matrices

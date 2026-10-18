@@ -8,6 +8,11 @@ module
 public import Sheaf.RingTheory.LocalCompletionQuotient
 public import Mathlib.RingTheory.AdicCompletion.LocalRing
 public import Mathlib.RingTheory.Regular.RegularSequence
+import Sheaf.RingTheory.LocalGeneratingTuples
+import Sheaf.RingTheory.QuasiRegularNoetherianLocal
+import Sheaf.RingTheory.RegularSequenceConormal
+import Sheaf.RingTheory.RegularSequenceGradedPolynomial
+import WeilConjectures.RingTheory.AdicCompletionNoetherian
 
 /-!
 # Regular sequences and completed quotients

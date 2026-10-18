@@ -40,6 +40,7 @@ public import Sheaf.Paper.SfRationalizationKaroubi
 import Sheaf.Paper.IntegralOperationsScalarComparisons
 import Sheaf.Algebra.Homology.ScalarInternalHomAdjunction
 public import Sheaf.Paper.GeneralAlgebraicallyClosedCoefficients
+import Sheaf.Algebra.Homology.RingedInternalHomShiftOfUniverses
 
 /-! # Internal Hom and evaluation under coefficient-site isomorphisms
 

@@ -8,6 +8,7 @@ module
 public import Sheaf.Paper.ProjectionCompactification
 public import Sheaf.Paper.ProEtaleProjectionFormulaArrows
 import Sheaf.Paper.ProjectionFormulaTotalization
+import Sheaf.Paper.StrictPerfectCoefficientPackageOfUniverses
 
 /-!
 # The proper compactification piece of the perfect projection formula

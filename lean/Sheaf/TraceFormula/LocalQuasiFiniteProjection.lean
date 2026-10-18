@@ -6,6 +6,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 public import Mathlib.Topology.KrullDimension
 public import Sheaf.AlgebraicGeometry.QuasiFiniteMorphism
+import Sheaf.TraceFormula.WeakRelativeNoetherNormalization
 
 /-!
 # Local quasi-finite projection with bounded relative dimension

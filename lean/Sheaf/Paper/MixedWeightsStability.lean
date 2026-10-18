@@ -15,6 +15,7 @@ public import Sheaf.Paper.SfConstructibleHeart
 public import Sheaf.LinearAlgebra.FrobeniusModuleWeights
 import Sheaf.LinearAlgebra.FrobeniusModuleMixedSubquotient
 import Sheaf.LinearAlgebra.FrobeniusModuleExtensionBounds
+import Sheaf.Paper.AdicPunctualWeights
 
 /-! # Stability of mixed upper weight bounds
 

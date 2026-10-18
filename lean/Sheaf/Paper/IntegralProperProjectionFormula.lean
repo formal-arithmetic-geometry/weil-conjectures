@@ -20,6 +20,12 @@ import Mathlib.CategoryTheory.Shift.Adjunction
 import Mathlib.CategoryTheory.Triangulated.Pretriangulated
 import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
+import Sheaf.Paper.IntegralProperBaseChange
+import Sheaf.Paper.LocalizingClosureCtfEqualsBc
+import Sheaf.Paper.LocalizingClosureExistence
+import Sheaf.Paper.ModuleRingedToposDerivedComparison
+import Sheaf.Paper.UnboundedLocalizingPullback
+import Sheaf.SixFunctors.ProperImageLocalizingProper
 
 /-!
 # The integral proper projection formula

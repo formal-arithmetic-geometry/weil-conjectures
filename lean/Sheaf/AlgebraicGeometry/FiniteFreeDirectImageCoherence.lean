@@ -22,6 +22,8 @@ public import Mathlib.CategoryTheory.Shift.Adjunction
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
 
 public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
+import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
 /-!
 # Finite-free direct-image coefficient coherence
 

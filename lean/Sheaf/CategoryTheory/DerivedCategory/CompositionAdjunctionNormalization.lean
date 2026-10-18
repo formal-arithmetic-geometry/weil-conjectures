@@ -12,6 +12,8 @@ public import Sheaf.CategoryTheory.DerivedCategory.AdjointFunctors
 import Sheaf.CategoryTheory.RightDerivedFunctorOfQuasiIsoResolutions
 import Sheaf.CategoryTheory.PreDerivedAdjointFunctorsGeneral
 import Mathlib.Algebra.Homology.DerivedCategory.KInjective
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
+import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
 
 /-! # Normalization of derived composition by the specified adjunctions
 

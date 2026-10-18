@@ -22,6 +22,8 @@ import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
 import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
 import Sheaf.CategoryTheory.SiteCoveringAxioms
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Monoidal
+import Sheaf.Paper.CartesianCoefficients
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs
 
 /-!
 # Essential smallness of the constructible coefficient heart

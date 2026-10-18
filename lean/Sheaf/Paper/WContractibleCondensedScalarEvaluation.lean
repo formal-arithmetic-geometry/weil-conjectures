@@ -22,6 +22,8 @@ import Sheaf.Paper.KFlatRingedToposPullback
 import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
 import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
 import Sheaf.CategoryTheory.RingedDerivedRestrictionGeneral
+import Sheaf.AlgebraicGeometry.ProEtaleWContractibleSectionsExact
+import WeilConjectures.RingTheory.ProEtale.WContractible
 
 /-!
 # Condensed scalar extension on w-contractible affines

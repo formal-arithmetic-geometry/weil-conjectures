@@ -24,6 +24,8 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
 public import Mathlib.CategoryTheory.HomCongr
 import Sheaf.Algebra.Homology.RingedInternalHomExactRestriction
 import Sheaf.Algebra.Homology.RhomGlobalSections
+import Sheaf.Algebra.Homology.RhomGlobalSectionsOfUniverses
+import Sheaf.Algebra.Homology.RingedInternalHomShiftOfUniverses
 
 /-!
 # Evaluation-normalized boundary alpha on the ordinary etale derived categories

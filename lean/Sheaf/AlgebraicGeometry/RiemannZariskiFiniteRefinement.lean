@@ -26,6 +26,9 @@ import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
 import WeilConjectures.Compactification.ProjectiveSpace
 import WeilConjectures.Compactification.NagataCompactification
 import WeilConjectures.Mathlib.RingTheory.Valuation.LocalSubring
+import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
+import Sheaf.RingTheory.ValuationAlgebraicHeight
+import Sheaf.TraceFormula.AbhyankarFiniteTypeFieldHeight
 
 /-!
 # Valuation neighbourhoods and common finite Riemann--Zariski refinement

@@ -31,6 +31,8 @@ import Mathlib.RingTheory.Ideal.GoingUp
 import Mathlib.AlgebraicGeometry.AlgClosed.Basic
 import Mathlib.RingTheory.Ideal.Operations
 import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
+import Sheaf.AlgebraicGeometry.AffineGroupoidIntegralInvariants
+import Sheaf.AlgebraicGeometry.AffineGroupoidInvariantNorm
 
 /-!
 # Orbit fibres of the affine invariant spectrum

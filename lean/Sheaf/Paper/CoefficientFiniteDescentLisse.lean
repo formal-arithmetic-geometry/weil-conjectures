@@ -15,6 +15,8 @@ import Sheaf.CategoryTheory.SheafTensor
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
 import Sheaf.CategoryTheory.SiteModuleSheafGluing
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.HomCoverGluing
+import Sheaf.Paper.CoefficientFiniteDescentSections
+import WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalars
 
 /-!
 # Finite coefficient descent of lisse modules and morphisms

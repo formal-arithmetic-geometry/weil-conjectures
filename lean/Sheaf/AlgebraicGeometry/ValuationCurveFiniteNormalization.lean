@@ -29,6 +29,8 @@ import Sheaf.AlgebraicGeometry.GeometricallyReducedEtaNormal
 import Sheaf.TraceFormula.FlatDenseGenericFibrePureDimension
 import WeilConjectures.AlgebraicGeometry.Regular
 import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Reduced
+import Sheaf.TraceFormula.GeometricReducedFibreLocusBaseChange
+import Sheaf.TraceFormula.ReducedFibreModification
 
 /-!
 # Finite normalization of a generically smooth curve over a separably closed valuation base

@@ -10,6 +10,11 @@ public import Mathlib.CategoryTheory.Pi.Basic
 public import WeilConjectures.ConstructibleSheaf.Defs
 public import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import Sheaf.AlgebraicGeometry.FiniteLocallyClosedStratification
+import Sheaf.CategoryTheory.RingedSiteModules
+import WeilConjectures.AlgebraicGeometry.FiniteLocallyConstantModuleValues
+import WeilConjectures.AlgebraicGeometry.ModuleAbelianInverseImageComparison
+import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 
 /-!
 # Constructibility of a finite clopen componentwise constant module sheaf

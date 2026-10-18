@@ -53,6 +53,14 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Defs
 import WeilConjectures.SixFunctors.ProEtale.LowerShriek.OpenImmersion.Defs
 import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Defs
 import Sheaf.Paper.FiniteLevelProEtaleBaseChange
+import Sheaf.AlgebraicGeometry.CompatibleCompactificationTriangle
+import Sheaf.AlgebraicGeometry.FixedComparisonDirectImageMate
+import Sheaf.AlgebraicGeometry.ProEtaleConstantOpenSquareExchange
+import Sheaf.AlgebraicGeometry.ProEtaleExtensionZeroComparison
+import Sheaf.Paper.CondensedAmbientExchange
+import Sheaf.Paper.EtaleOriginDerivedCategory
+import Sheaf.Paper.ProperOpenCoefficientMate
+import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 
 /-!
 # Normalization on a compatible pro-etale compactification tower

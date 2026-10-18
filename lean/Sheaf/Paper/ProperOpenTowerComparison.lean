@@ -25,6 +25,8 @@ import Sheaf.CategoryTheory.KInjectiveTotalDerived
 import Sheaf.Paper.LocalizeRingedSiteMorphism
 import Sheaf.CategoryTheory.RingedToposDerivedPushforwardComposition
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
+import Sheaf.CategoryTheory.LocalizedModuleExactForSystems
+import Sheaf.Paper.LocalizeRingedSiteMorphismGeneral
 
 /-!
 # Open-adjunction normalization of proper/open comparison on strict towers

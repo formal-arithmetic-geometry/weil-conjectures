@@ -18,6 +18,11 @@ import Sheaf.NumberTheory.Padics.IntegersLocalizationUniformizer
 import Mathlib.LinearAlgebra.TensorProduct.Basic
 import Mathlib.RingTheory.Localization.Away.Basic
 import Mathlib.Algebra.Homology.DerivedCategory.KInjective
+import Sheaf.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
+import Sheaf.CategoryTheory.KInjectiveTotalDerived
+import Sheaf.Paper.ConstantCompletionEquivalence
+import Sheaf.Paper.IntrinsicCompletionCompleted
+import Sheaf.Paper.PbcQbarCompletedPullback
 
 /-! # Proper base change over a finite extension
 

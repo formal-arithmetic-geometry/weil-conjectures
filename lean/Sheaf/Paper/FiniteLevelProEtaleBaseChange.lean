@@ -10,6 +10,10 @@ public import Sheaf.AlgebraicGeometry.ProEtaleAmbientRingedExchange
 public import Sheaf.AlgebraicGeometry.ProfiniteCoefficientInverseImage
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Proper
+import Sheaf.AlgebraicGeometry.CompactSupportComparisonUnit
+import Sheaf.AlgebraicGeometry.FixedEtaleOriginWitness
+import Sheaf.Paper.CondensedAmbientExchange
+import WeilConjectures.SixFunctors.ProEtale.BaseChange.SmoothBaseChange
 
 /-!
 # Finite-level pro-etale proper base change

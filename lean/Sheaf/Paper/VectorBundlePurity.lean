@@ -8,6 +8,29 @@ public import Sheaf.Paper.VectorPurityBaseChange
 public import Sheaf.Paper.VectorPurityDirectSum
 public import Sheaf.Paper.VectorPurityFiniteReduction
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
+import Sheaf.Algebra.Homology.ScalarExtensionUnitTriangles
+import Sheaf.Algebra.Homology.SheafRingDerivedCoefficientAdjunction
+import Sheaf.AlgebraicGeometry.AffineSpaceLinearTraceInvariance
+import Sheaf.AlgebraicGeometry.AffineSpaceTopTrace
+import Sheaf.AlgebraicGeometry.CompactProjectionExchange
+import Sheaf.AlgebraicGeometry.EtaleFiniteTwistPullback
+import Sheaf.AlgebraicGeometry.FiniteEtaleTwistLine
+import Sheaf.AlgebraicGeometry.OrdinaryFiniteP1Adjunction
+import Sheaf.AlgebraicGeometry.OrdinarySupportedCartierKummer
+import Sheaf.AlgebraicGeometry.ProjectiveLineTrace
+import Sheaf.AlgebraicGeometry.ShriekTensorComposition
+import Sheaf.AlgebraicGeometry.UnboundedEtaleCompactSupportComparisons
+import Sheaf.AlgebraicGeometry.VectorBundleIntegration
+import Sheaf.AlgebraicGeometry.VectorBundleZeroSection
+import Sheaf.Paper.DegreeZeroDerivedMapGluing
+import Sheaf.Paper.EtaleCompactScalarCoherence
+import Sheaf.Paper.PurityFiniteSetting
+import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
+import Sheaf.Paper.VectorPurityNormalization
+import Sheaf.Paper.VectorPurityScalarSingle
+import Sheaf.SecSmoothPurity.ProperFiniteCoefficientExtension
+import Sheaf.Targets.VectorBundlePurity
 
 /-! # Vector-bundle purity
 

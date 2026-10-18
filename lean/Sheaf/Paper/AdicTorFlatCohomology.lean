@@ -41,6 +41,12 @@ import Sheaf.Paper.TorsionLimitSheafCompleteness
 import Sheaf.AlgebraicGeometry.ProEtaleCountableProductsExact
 import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
 import Sheaf.Paper.KoszulReconstruction
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
+import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
+import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
+import Sheaf.AlgebraicGeometry.ProEtaleFiniteModules
+import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimitIndependentCoefficients
+import WeilConjectures.CategoryTheory.Triangulated.DerivedCountableProductsCore
 
 /-!
 # Higher Tor and flat cohomology for complete integral coefficients

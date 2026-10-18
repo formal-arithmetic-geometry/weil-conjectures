@@ -27,6 +27,11 @@ import Mathlib.Algebra.Homology.BifunctorShift
 import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import Mathlib.CategoryTheory.Adjunction.Limits
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
+import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
+import Sheaf.AlgebraicGeometry.ProEtaleIntrinsicExtensionByZero
+import Sheaf.CategoryTheory.LocalizedModuleExactForSystems
+import Sheaf.Paper.DerivedPullbackTensorHom
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Tensor
 
 /-!
 # Tensoring an extension by zero

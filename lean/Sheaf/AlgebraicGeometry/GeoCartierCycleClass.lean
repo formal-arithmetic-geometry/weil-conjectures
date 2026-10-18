@@ -44,6 +44,8 @@ import Mathlib.CategoryTheory.Abelian.RightDerived
 import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
 import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
 import WeilConjectures.CategoryTheory.ModuleObjects.DerivedExtendScalars
+import Sheaf.Paper.DivisibleExtensionDerivedReduction
+import Sheaf.Paper.GeoCartierExponentIndependence
 
 /-!
 # The cycle class of an effective Cartier divisor

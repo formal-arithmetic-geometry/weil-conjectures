@@ -8,6 +8,9 @@ module
 public import Mathlib.RingTheory.RingHom.FaithfullyFlat
 public import Mathlib.Algebra.Module.Projective
 public import Mathlib.LinearAlgebra.TensorProduct.Basic
+import Sheaf.LinearAlgebra.CountableSubmoduleAdaptedToBaseChangeSum
+import Sheaf.RingTheory.CountableProjectiveFaithfullyFlatDescent
+import Sheaf.RingTheory.ProjectiveCountableDecomposition
 
 /-!
 # Projectivity descends along faithfully flat maps

@@ -12,6 +12,8 @@ import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
 import Mathlib.CategoryTheory.Triangulated.Subcategory
 import Mathlib.CategoryTheory.Localization.CalculusOfFractions
+import Sheaf.CategoryTheory.DgAbcHomotopyCategoryTriangulated
+import WeilConjectures.CategoryTheory.Abelian.Filtration
 
 /-!
 # Cochain bounds in uniformly finite filtered localizations

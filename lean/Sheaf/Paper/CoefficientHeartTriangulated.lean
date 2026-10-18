@@ -16,6 +16,8 @@ import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 import Mathlib.CategoryTheory.Abelian.Basic
 import Mathlib.CategoryTheory.Triangulated.Pretriangulated
 import Mathlib.Algebra.Homology.DerivedCategory.Basic
+import Sheaf.Paper.CoefficientHeartClosure
+import Sheaf.Paper.SfCommonStageWeilCohomology
 
 /-!
 # Bounded constructible field-coefficient complexes form a thick triangulated subcategory

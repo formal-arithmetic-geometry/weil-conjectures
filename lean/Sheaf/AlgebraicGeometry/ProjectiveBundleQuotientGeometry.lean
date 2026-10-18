@@ -23,6 +23,8 @@ import Mathlib.AlgebraicGeometry.AffineScheme
 import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 import Sheaf.AlgebraicGeometry.QuasiCoherentSymmetricAlgebra
 import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
+import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist.Modules
+import WeilConjectures.AlgebraicGeometry.RelativeProj.Basic
 
 /-!
 # Projective bundles classify invertible quotients

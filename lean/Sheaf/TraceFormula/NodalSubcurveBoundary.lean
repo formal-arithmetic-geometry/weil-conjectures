@@ -20,6 +20,7 @@ import Sheaf.TraceFormula.ReducedSchemeImage
 import Mathlib.AlgebraicGeometry.AlgClosed.Basic
 import Mathlib.AlgebraicGeometry.Noetherian
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.SchemeTheoreticallyDominant
+import Sheaf.AlgebraicGeometry.ComplementaryPureSubcurveComponents
 
 /-! # Reduced nodal subcurves and their boundary
 

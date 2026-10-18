@@ -28,6 +28,11 @@ import Sheaf.AlgebraicGeometry.ProperOpenComparisonSiteNormalization
 import Sheaf.Paper.FiniteDirectImageComposition
 import Sheaf.AlgebraicGeometry.ComparisonDirectImage
 import WeilConjectures.SixFunctors.ProEtale.BaseChange.SmoothBaseChange
+import Sheaf.AlgebraicGeometry.FixedComparisonDirectImageMate
+import Sheaf.AlgebraicGeometry.ProEtaleExtensionZeroComparison
+import Sheaf.Paper.ProEtaleCompositionTowerNormalization
+import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
+import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 
 /-! # Proper-factor composition and site comparison
 

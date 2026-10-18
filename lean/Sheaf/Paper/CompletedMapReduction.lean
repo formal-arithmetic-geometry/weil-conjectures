@@ -18,6 +18,24 @@ import Sheaf.Paper.CompletedTowerCompatibility
 import Sheaf.Paper.CompletedDirectImageLimits
 import Sheaf.Paper.PbcRectangleDerivedLimit
 import Sheaf.Paper.CompletedRlimFunctor
+import Sheaf.Algebra.Homology.SheafRingDerivedCoefficientAdjunction
+import Sheaf.AlgebraicGeometry.ProEtaleConstantRingOperations
+import Sheaf.AlgebraicGeometry.ProEtaleRingSheafChangeAdjunction
+import Sheaf.AlgebraicGeometry.ProfiniteCoefficientInverseImage
+import Sheaf.CategoryTheory.DiagramSiteRealization
+import Sheaf.CategoryTheory.ModulePullbackPushforwardAdjunction
+import Sheaf.CategoryTheory.PreDerivedAdjointFunctorsGeneral
+import Sheaf.CategoryTheory.RingedToposDerivedPushforwardComposition
+import Sheaf.CategoryTheory.RingedTowerPushforwardLimitComparison
+import Sheaf.Paper.AdicCoefficientDatum
+import Sheaf.Paper.CondensedAmbientExchange
+import Sheaf.Paper.FiniteLevelRectangle
+import Sheaf.Paper.PbcRoosTriangle
+import Sheaf.Paper.QuotientCornerFrobeniusStructures
+import Sheaf.Paper.RingedExchangeTensorCoherence
+import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
+import Sheaf.Paper.StrictTowerExchangeMateNormalization
+import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Mates
 
 /-!
 # Finite reduction of the completed base-change map

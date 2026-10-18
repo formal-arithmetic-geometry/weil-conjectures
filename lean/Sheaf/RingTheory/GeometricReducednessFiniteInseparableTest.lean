@@ -7,6 +7,8 @@ module
 public import Mathlib.FieldTheory.PurelyInseparable.Basic
 public import Mathlib.RingTheory.Nilpotent.Defs
 public import Mathlib.RingTheory.TensorProduct.Basic
+import WeilConjectures.FieldTheory.MakeSeparablyGenerated
+import WeilConjectures.FieldTheory.SeparablyGeneratedTensorReduced
 
 /-!
 # Finite purely inseparable test for geometric reducedness

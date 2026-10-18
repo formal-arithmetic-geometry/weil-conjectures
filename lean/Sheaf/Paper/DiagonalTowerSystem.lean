@@ -60,6 +60,7 @@ import Sheaf.CategoryTheory.SmallModuleDiagramsGrothendieck
 import WeilConjectures.SixFunctors.Finite.Stalk
 
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
+import Sheaf.Paper.ProEtaleTateTwistsOfUniverses
 
 /-!
 # The diagonal class in the derived category of strict torsion towers

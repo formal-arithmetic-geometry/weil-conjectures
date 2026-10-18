@@ -8,6 +8,35 @@ module
 public import Sheaf.Paper.AdicHeartPullbackFibres
 public import Sheaf.Paper.CompletedCoefficientPresentationTransport
 public import Sheaf.Paper.GeneralAlgebraicallyClosedCoefficients
+import Sheaf.Algebra.Homology.BoundedAboveFlatSheafKFlat
+import Sheaf.AlgebraicGeometry.FiniteTypeFibreDimensionBound
+import Sheaf.AlgebraicGeometry.NoetherianStratumDetection
+import Sheaf.CategoryTheory.SemilinearScalarLocalization
+import Sheaf.CategoryTheory.StageSystemFunctorDescent
+import Sheaf.CategoryTheory.Triangulated.TExactTruncationComparison
+import Sheaf.NumberTheory.Padics.AdicLimitFiniteModules
+import Sheaf.Paper.CoefficientHeartClosure
+import Sheaf.Paper.CoefficientHeartCommonStratification
+import Sheaf.Paper.CompletedPullbackTriangles
+import Sheaf.Paper.ContinuousAffineEtaleLattice
+import Sheaf.Paper.ContinuousRationalDerivedRealization
+import Sheaf.Paper.FiniteFreeCompletedScalarComparison
+import Sheaf.Paper.GaloisLisseRepresentations
+import Sheaf.Paper.IntegralOperationsPreserveConstructible
+import Sheaf.Paper.IntegralOperationsScalarComparisons
+import Sheaf.Paper.IntegralPullbackCompletedComparison
+import Sheaf.Paper.IntegralTStructure
+import Sheaf.Paper.IntrinsicQbarCategory
+import Sheaf.Paper.LisseCompletedSystemComparison
+import Sheaf.Paper.LisseIntegralSmallCoefficients
+import Sheaf.Paper.LisseTensorScalarExtension
+import Sheaf.Paper.LocalizedTStructure
+import Sheaf.Paper.PbcDescentFunctors
+import Sheaf.Paper.PbcRationalCategory
+import Sheaf.Paper.PbcScalarExtension
+import WeilConjectures.CategoryTheory.Triangulated.TStructure.Homology
+import WeilConjectures.ConstructibleSheaf.Pullback
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
 
 /-! # Adic coefficient fibres in the intrinsic coefficient presentation
 

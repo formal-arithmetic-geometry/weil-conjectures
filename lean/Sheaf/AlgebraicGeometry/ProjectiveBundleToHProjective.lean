@@ -10,6 +10,8 @@ public import WeilConjectures.AlgebraicGeometry.Ample
 public import WeilConjectures.AlgebraicGeometry.Morphisms.Projective
 import Sheaf.AlgebraicGeometry.Morphisms.HProjectiveComposition
 import WeilConjectures.AlgebraicGeometry.AmpleTwistGlobalGeneration
+import Sheaf.AlgebraicGeometry.GloballyGeneratedProjectiveBundle
+import Sheaf.AlgebraicGeometry.RelativeProjInvertibleTwist
 
 /-!
 # Projective-bundle projectivity over a base admitting an ample invertible module

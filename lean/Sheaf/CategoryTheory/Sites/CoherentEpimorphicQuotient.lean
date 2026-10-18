@@ -10,6 +10,7 @@ import Mathlib.CategoryTheory.Sites.Sheafification
 import Mathlib.CategoryTheory.Sites.LocallySurjective
 import Mathlib.CategoryTheory.Sites.Limits
 import WeilConjectures.AlgebraicGeometry.SiteSheafificationSectionsLocal
+import Sheaf.CategoryTheory.Sites.CoherentToposRepair
 
 /-!
 # Coherence of an epimorphic quotient with quasi-compact kernel pair

@@ -8,6 +8,14 @@ module
 public import Sheaf.Paper.PurityNormalBundle
 public import WeilConjectures.AlgebraicGeometry.DeformationToNormalCone
 public import Sheaf.RingTheory.AssociatedGradedRing
+import Sheaf.AlgebraicGeometry.ConormalGradedAlgebra
+import Sheaf.AlgebraicGeometry.IsFiniteLocallyFreeOfCoherentFreeStalks
+import Sheaf.AlgebraicGeometry.QuasiCoherentSymmetricAlgebraCore
+import Sheaf.AlgebraicGeometry.RegularImmersionPureCodimension
+import Sheaf.Paper.PurityVectorBundleZeroSection
+import Sheaf.RingTheory.RegularSequenceConormal
+import Sheaf.RingTheory.RegularSequenceGradedPolynomial
+import WeilConjectures.AlgebraicGeometry.AffineMorphismRelativeSpec
 
 /-! # The actual normal cone and its regular-immersion bundle description
 

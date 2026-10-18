@@ -11,6 +11,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
 import Sheaf.Paper.DerivedNakayamaResolution
 import Sheaf.CategoryTheory.DerivedCategory.StandardQuotientsPerfect
 import Sheaf.Paper.StrictPerfectCoefficientPackageOfUniverses
+import Sheaf.Paper.DerivedNakayamaFirstReduction
 
 /-!
 # Reduction and derived Nakayama

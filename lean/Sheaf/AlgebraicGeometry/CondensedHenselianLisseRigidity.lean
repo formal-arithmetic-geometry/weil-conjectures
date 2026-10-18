@@ -13,6 +13,11 @@ public import WeilConjectures.RingTheory.ProEtale.WContractible
 public import Sheaf.AlgebraicGeometry.ContinuousCoefficientCommRing
 public import Sheaf.Topology.SpectralSpace.ConnectedComponentsProfinite
 public import Sheaf.AlgebraicGeometry.CondensedScalarRealization
+import Sheaf.AlgebraicGeometry.CondensedLisseProEtaleLocality
+import Sheaf.AlgebraicGeometry.CondensedWContractibleLisseEvaluation
+import Sheaf.RingTheory.HenselianWStrictLocalInvariance
+import WeilConjectures.Mathlib.RingTheory.Henselian
+import WeilConjectures.Topology.SpectralSpace.ConnectedComponent
 
 /-!
 # Henselian rigidity of lisse condensed-coefficient complexes

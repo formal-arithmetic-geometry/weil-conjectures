@@ -16,6 +16,8 @@ import Sheaf.Algebra.Homology.BoundedAboveFlatSheafKFlat
 import Sheaf.Paper.ProjectionMateExact
 import Mathlib.Algebra.Homology.BifunctorShift
 import Mathlib.CategoryTheory.Triangulated.TStructure.TruncLEGT
+import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
+import Sheaf.Paper.SfCommonStageWeilCohomology
 
 /-! # Finite truncation windows for derived tensor
 

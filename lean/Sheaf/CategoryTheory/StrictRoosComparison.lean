@@ -19,6 +19,7 @@ import Mathlib.Algebra.Homology.DerivedCategory.ShortExact
 import Mathlib.CategoryTheory.Abelian.FunctorCategory
 import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
 import Mathlib.CategoryTheory.Triangulated.Pretriangulated
+import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimitIndependentCoefficients
 
 /-!
 # Natural strict Roos comparison with total derived inverse limit

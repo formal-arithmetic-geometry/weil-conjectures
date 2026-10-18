@@ -35,6 +35,9 @@ import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
 import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
 import Sheaf.AlgebraicGeometry.ProEtaleConstantExact
 import Sheaf.AlgebraicGeometry.ProEtaleConstantRingMap
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
+import Sheaf.CategoryTheory.LocalizedModuleExactForSystems
+import Sheaf.CategoryTheory.RingedSheafSliceAdjunction
 
 /-!
 # Normalized open extension, tensor and base change

@@ -22,6 +22,11 @@ public import WeilConjectures.AlgebraicGeometry.Sites.GmPicard
 public import WeilConjectures.AlgebraicGeometry.EffectiveCartier
 public import Sheaf.AlgebraicGeometry.OrdinarySupportedKummerBoundary
 public import Sheaf.Paper.SupportedCupFunctoriality
+import Sheaf.AlgebraicGeometry.DivisorTorsorBoundarySigns
+import Sheaf.AlgebraicGeometry.PurityRelativeCone
+import Sheaf.AlgebraicGeometry.SmoothPairLocalCoordinates
+import Sheaf.Paper.PurityFrameIndependence
+import WeilConjectures.AlgebraicGeometry.Sites.Kummer
 
 /-!
 # The canonical Kummer class of a Cartier divisor

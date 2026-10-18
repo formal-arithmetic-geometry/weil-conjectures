@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.CategoryTheory.ModuleObjects.GrothendieckAbelian
 public import WeilConjectures.CategoryTheory.Monoidal.Mod.InternalHom
+import WeilConjectures.CategoryTheory.ModuleObjects.Monoidal
 
 /-!
 # The equalizer internal hom for the relative monoidal tensor

@@ -12,6 +12,9 @@ import Sheaf.CategoryTheory.RingedToposDerivedPushforwardComposition
 import Sheaf.Algebra.Homology.SheafRingDerivedCoefficientAdjunction
 import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
 import Sheaf.Paper.ProEtaleProjectionFormulaArrows
+import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
+import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
+import Sheaf.Paper.RingedTopoiDerivedPullback
 
 /-!
 # Derived ringed-topos counit under coefficient restriction

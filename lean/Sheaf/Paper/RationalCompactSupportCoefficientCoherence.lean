@@ -35,6 +35,20 @@ import Sheaf.Paper.PbcUniformCompleteTriangulated
 import Sheaf.Paper.CompletedDirectImageLimits
 import Sheaf.Paper.KoszulReconstruction
 import Sheaf.Paper.PreservationConstructible
+import Sheaf.AlgebraicGeometry.FiniteFreeDirectImageCoherence
+import Sheaf.AlgebraicGeometry.ProEtaleDerivedExtensionZeroBaseChange
+import Sheaf.CategoryTheory.LocalizedModuleExactForSystems
+import Sheaf.CategoryTheory.RingedSliceExtensionTensor
+import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimitIndependentCoefficients
+import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
+import Sheaf.Paper.CondensedAmbientExchange
+import Sheaf.Paper.IntegralUniformCoefficient
+import Sheaf.Paper.PbcQbarCompletedPullback
+import Sheaf.Paper.PbcRationalCategory
+import Sheaf.Paper.PbcRationalTransport
+import Sheaf.Paper.PbcScalarExtension
+import Sheaf.Paper.ProjectionCompactification
+import Sheaf.SixFunctors.OpenTensorNormalization
 
 
 /-! # Coefficient coherence of the normalized compact-support exchange

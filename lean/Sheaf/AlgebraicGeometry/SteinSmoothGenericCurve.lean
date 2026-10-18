@@ -36,6 +36,7 @@ import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 import Sheaf.RingTheory.SmoothOverFieldRegularLocal
 import Sheaf.AlgebraicGeometry.SteinFactorizationAffine
 import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Reduced
+import Sheaf.AlgebraicGeometry.Morphisms.FiniteProjectiveBundle
 
 /-!
 # Finite Stein base of a proper smooth generic curve

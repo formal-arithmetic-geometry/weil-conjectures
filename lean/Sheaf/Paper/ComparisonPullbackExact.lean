@@ -19,6 +19,9 @@ import Sheaf.CategoryTheory.Adjunction.LiftsGroupRingObjects
 import Sheaf.CategoryTheory.SheavesAlgebraicStructuresObjects
 import Sheaf.CategoryTheory.ModulePullbackPushforwardAdjunction
 import Sheaf.CategoryTheory.SitePullbackAbelianExact
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
+import Sheaf.Paper.SfCommonStageWeilCohomology
+import WeilConjectures.AlgebraicGeometry.DerivedCategories
 
 /-!
 # Exactness of the etale to pro-etale comparison pullback

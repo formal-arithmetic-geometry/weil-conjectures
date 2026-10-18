@@ -16,6 +16,8 @@ import Sheaf.TraceFormula.FinitarySiteCoherentGenerators
 import Sheaf.Paper.FinitarySiteEnoughPoints
 import Sheaf.Paper.QcqsOrientedTriplePresentation
 import WeilConjectures.AlgebraicGeometry.EtaleSetInverseImageStalkGerm
+import Sheaf.CategoryTheory.Sites.CoherentToposRepair
+import Sheaf.CategoryTheory.Sites.GeometricMorphism
 
 /-!
 # The coherent conservative cover by stratified oriented products

@@ -16,6 +16,8 @@ import Sheaf.AlgebraicGeometry.EtaleStalkTensorScalar
 import Sheaf.Paper.EtaleFlatKFlatResolution
 import Mathlib.Algebra.Homology.Additive
 import WeilConjectures.FromJoel.CategoryTheory.Monoidal.KFlat
+import Sheaf.Algebra.Homology.KFlat
+import WeilConjectures.SixFunctors.Etale.Derived.Tensor
 
 /-!
 # Geometric étale stalks and unbounded derived tensor products

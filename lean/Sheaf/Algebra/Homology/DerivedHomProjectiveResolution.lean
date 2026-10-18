@@ -9,6 +9,7 @@ public import Sheaf.Algebra.Homology.DerivedInternalHom
 public import Sheaf.Algebra.Homology.KFlatTensorQuasiIso
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 public import Mathlib.Algebra.Homology.HomotopyCategory.KProjective
+import Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses
 
 /-!
 # Derived Hom computed by a bounded-above projective resolution

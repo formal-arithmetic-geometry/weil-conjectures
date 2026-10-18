@@ -18,6 +18,8 @@ public import Mathlib.CategoryTheory.Filtered.Final
 import Sheaf.CategoryTheory.Sites.LocalizedSheavesOverRepresentable
 import Mathlib.CategoryTheory.Comma.Over.Pullback
 import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Over
+import Sheaf.CategoryTheory.Sites.GeometricInverseImageExact
+import Sheaf.CategoryTheory.Sites.GeometricMorphism
 
 /-!
 # Realizing a finitely presented stalk module on a localized site

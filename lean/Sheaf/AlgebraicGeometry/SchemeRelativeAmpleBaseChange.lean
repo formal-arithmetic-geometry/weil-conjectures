@@ -12,6 +12,8 @@ import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 import Mathlib.AlgebraicGeometry.Morphisms.Affine
 import WeilConjectures.AlgebraicGeometry.Modules.InvertiblePullbackTensor
 import WeilConjectures.AlgebraicGeometry.AmplePullback
+import Sheaf.AlgebraicGeometry.TensorPullbackSectionAdjunction
+import Sheaf.TraceFormula.SchemeRelativeAmpleAffineCover
 
 /-!
 # Relative ampleness for schemes under arbitrary base change

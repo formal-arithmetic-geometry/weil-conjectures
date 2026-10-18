@@ -8,6 +8,7 @@ module
 public import Sheaf.CategoryTheory.FiniteFiltrationInduction
 public import Mathlib.CategoryTheory.Subobject.Limits
 import Mathlib.Algebra.Homology.HomologySequence
+import WeilConjectures.CategoryTheory.Abelian.Filtration
 
 /-! # Finite filtered graded exactness
 

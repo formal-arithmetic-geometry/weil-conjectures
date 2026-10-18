@@ -8,6 +8,8 @@ module
 public import Sheaf.Paper.FieldWeilShriekShiftData
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 import WeilConjectures.SixFunctors.Etale.Derived.WeilFrobenius
+import Sheaf.Paper.DerivedPullbackTensorHom
+import Sheaf.Paper.FieldShriekLowerBound
 
 /-! # Weil equivariance of the compact-support shift comparison
 

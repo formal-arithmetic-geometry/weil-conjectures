@@ -6,6 +6,10 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.FieldTheory.IsSepClosed
 public import Mathlib.RingTheory.Valuation.ValuationSubring
+import Sheaf.SixFunctors.TraceFormula.NodalFamilyFittingSingular
+import Sheaf.TraceFormula.ValuationSmoothBranchesStrictChart
+import Sheaf.TraceFormula.ValuationSymmetricNodalBlowup
+import WeilConjectures.AlgebraicGeometry.UnramifiedOverFieldDiscrete
 
 /-! # Marked strictification of a semistable curve model
 

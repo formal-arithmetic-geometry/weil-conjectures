@@ -19,6 +19,9 @@ import Mathlib.Algebra.Homology.DerivedCategory.Basic
 import WeilConjectures.CategoryTheory.Abelian.RightDerived.FullLongExactSequence
 import Mathlib.CategoryTheory.Abelian.RightDerived
 import Mathlib.Algebra.Homology.ShortComplex.ShortExact
+import Sheaf.AlgebraicGeometry.BoundedBelowProEtaleComparison
+import Sheaf.AlgebraicGeometry.ProEtaleClassicalSheavesModules
+import Sheaf.AlgebraicGeometry.ProEtaleSiteComparison
 
 /-!
 # Classical module sheaves form a weak Serre subcategory

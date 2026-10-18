@@ -12,6 +12,8 @@ public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.RingHom.Flat
 public import Sheaf.RingTheory.IsMittagLeffler
 import Mathlib.LinearAlgebra.TensorProduct.Basic
+import Sheaf.RingTheory.CompletedFreeFlatMittagLeffler
+import Sheaf.SecTraceFormula.FlatProjectiveReductionCompletionSplitting
 
 /-!
 # Flat Mittag-Leffler completed modules

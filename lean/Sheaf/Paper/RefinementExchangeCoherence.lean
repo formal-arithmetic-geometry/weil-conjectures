@@ -9,6 +9,10 @@ public import Sheaf.AlgebraicGeometry.FiniteConstantCoefficientTransport
 import WeilConjectures.Compactification.CategoryBaseChange
 import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 import Sheaf.AlgebraicGeometry.SupportComparisonPullbackCoherence
+import Sheaf.AlgebraicGeometry.StrictConstantTowerOperations
+import Sheaf.AlgebraicGeometry.StrictTowerOpenExtension
+import Sheaf.AlgebraicGeometry.StrictTowerProperOpenCalculus
+import Sheaf.Paper.ProjectionCompactification
 
 /-!
 # Refinement exchange coherence for strict pro-etale towers

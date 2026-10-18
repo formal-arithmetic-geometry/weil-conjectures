@@ -28,6 +28,16 @@ import Sheaf.Paper.FiniteLevelRectangle
 import Sheaf.Algebra.Homology.SiteDerivedTensorDescent
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
+import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
+import Sheaf.AlgebraicGeometry.ProfiniteCoefficientInverseImage
+import Sheaf.CategoryTheory.FlatRingedDiagramRestriction
+import Sheaf.Paper.AdicCoefficientDatum
+import Sheaf.Paper.CompletedDirectImageLimits
+import Sheaf.Paper.FourArrows
+import Sheaf.Paper.FourCorners
+import Sheaf.Paper.IntegralFinitePullbackComposition
+import Sheaf.Paper.ProjectionFormulaBaseChangeNaturality
+import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
 
 /-! # Strict tower exchange and the canonical mate
 

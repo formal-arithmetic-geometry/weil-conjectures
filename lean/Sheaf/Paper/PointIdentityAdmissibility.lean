@@ -12,6 +12,17 @@ import Sheaf.Paper.FiniteCoefficientPoint
 import Mathlib.AlgebraicGeometry.Morphisms.Separated
 import Mathlib.CategoryTheory.Adjunction.Unique
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
+import Sheaf.AlgebraicGeometry.AmbientExceptionalRightAdjoint
+import Sheaf.AlgebraicGeometry.IntrinsicConstructibleIntervals
+import Sheaf.AlgebraicGeometry.ProEtaleIntrinsicExtensionByZero
+import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
+import Sheaf.AlgebraicGeometry.SfFullCohomologicalDimension
+import Sheaf.Paper.FiniteDirectImageComposition
+import Sheaf.Paper.FiniteTorAmplitudeSites
+import Sheaf.Paper.SfCommonStageDirectImage
+import Sheaf.Paper.SfCommonStageWeilCohomology
+import WeilConjectures.Compactification.Refinement
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerShriek
 
 /-!
 # Admissibility of the identity of the geometric point

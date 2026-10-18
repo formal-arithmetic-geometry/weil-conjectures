@@ -19,6 +19,8 @@ import Mathlib.RingTheory.Noetherian.Defs
 import Mathlib.RingTheory.LocalRing.Module
 import Mathlib.RingTheory.RegularLocalRing.Polynomial
 import Mathlib.RingTheory.Extension.Presentation.Basic
+import Sheaf.SixFunctors.TraceFormula.LciConormalFibreFieldChange
+import Sheaf.TraceFormula.LciPointwiseCriterion
 
 /-!
 # Complete-intersection local rings under extension of the base field

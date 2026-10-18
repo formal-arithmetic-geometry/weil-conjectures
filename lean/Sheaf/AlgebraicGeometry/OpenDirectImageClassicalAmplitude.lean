@@ -23,6 +23,7 @@ import WeilConjectures.AlgebraicGeometry.HigherDirectImageSheafifiedPresheaf
 import Sheaf.AlgebraicGeometry.ComparisonDirectImage
 import Sheaf.AlgebraicGeometry.ProEtaleSiteComparisonFiniteLevel
 import WeilConjectures.CategoryTheory.TruncationHypercohomology
+import Sheaf.CategoryTheory.RingedSiteModulesGrothendieckOfUniverses
 
 /-!
 # Amplitude of open direct image on classical finite-coefficient sheaves

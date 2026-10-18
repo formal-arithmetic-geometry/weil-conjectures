@@ -14,6 +14,7 @@ import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatEquationalCriterion
 import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 import Mathlib.CategoryTheory.Sites.PreservesSheafification
 import Sheaf.Paper.SiteSheafificationSectionsLocal
+import WeilConjectures.AlgebraicGeometry.SiteSheafificationSectionsLocal
 
 /-!
 # Bounded flat subextensions

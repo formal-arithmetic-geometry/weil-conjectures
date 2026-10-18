@@ -37,6 +37,7 @@ import Mathlib.CategoryTheory.Sites.Sheafification
 import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
 public import Sheaf.Paper.SfImmersionCompletedPullbackComparison
 public import Sheaf.Paper.CompletedPullbackReduction
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
 
 /-! # Integral and strict-tower completed pullback
 

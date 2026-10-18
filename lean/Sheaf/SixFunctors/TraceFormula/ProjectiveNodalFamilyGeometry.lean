@@ -18,6 +18,8 @@ import WeilConjectures.AlgebraicGeometry.Curve.SmoothProjective
 import Sheaf.AlgebraicGeometry.ZeroDimensionalClosedSubschemeFinite
 import WeilConjectures.AlgebraicGeometry.Morphisms.UnramifiedBaseChangeOpen
 import WeilConjectures.AlgebraicGeometry.UnramifiedOverFieldDiscrete
+import Sheaf.AlgebraicGeometry.FirstFittingSingularSubscheme
+import Sheaf.SixFunctors.TraceFormula.NodalFamilyFittingSingular
 
 /-! # Base change and the unramified singular subscheme of a nodal family
 

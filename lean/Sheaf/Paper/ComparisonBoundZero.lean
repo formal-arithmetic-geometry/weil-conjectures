@@ -42,6 +42,9 @@ import Sheaf.Paper.SiteHigherDirectImageSheafifiedPresheaf
 import Sheaf.CategoryTheory.SitePullbackAbelianExact
 import Sheaf.Paper.SiteSheafificationSectionsLocal
 import WeilConjectures.CategoryTheory.Abelian.RightDerived.LongExactSequence
+import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
+import WeilConjectures.AlgebraicGeometry.SiteSheafificationSectionsLocal
+import WeilConjectures.CategoryTheory.RingedSiteGrothendieckAbelian
 
 /-!
 # The comparison bound for sheaves of étale origin

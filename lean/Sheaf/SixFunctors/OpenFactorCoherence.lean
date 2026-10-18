@@ -55,6 +55,7 @@ import Mathlib.Topology.Compactness.Compact
 import Mathlib.RingTheory.Ideal.Operations
 import Mathlib.RingTheory.LocalRing.Basic
 import Mathlib.RingTheory.Ideal.Quotient.Defs
+import Sheaf.CategoryTheory.LocalizedModuleExactForSystems
 
 /-! # Completion coherence for the open factor
 

@@ -12,6 +12,8 @@ import Sheaf.AlgebraicGeometry.ProEtaleConstantRingComposition
 import Sheaf.Paper.IntegralFinitePullbackComposition
 import Sheaf.AlgebraicGeometry.ProEtaleDerivedPullbackCoherence
 import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
+import Sheaf.Paper.TraceFormulaStrictWeilComplex
+import Sheaf.SixFunctors.SchemeFrobenius
 
 /-!
 # Cocycle identity for iterated Weil isomorphisms

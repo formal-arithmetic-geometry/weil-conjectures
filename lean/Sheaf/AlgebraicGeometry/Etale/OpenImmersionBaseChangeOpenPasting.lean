@@ -11,6 +11,8 @@ public import Sheaf.AlgebraicGeometry.Etale.OpenImmersionLowerShriekCoherence
 public import Sheaf.AlgebraicGeometry.EtaleInverseImageCompositionModuleLinear
 import Sheaf.AlgebraicGeometry.DerivedInverseImageComposition
 import Mathlib.CategoryTheory.Adjunction.Mates
+import Sheaf.AlgebraicGeometry.Etale.OpenInverseImageRestrictionComposition
+import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 
 /-!
 # Open-immersion pasting for extension-by-zero base change

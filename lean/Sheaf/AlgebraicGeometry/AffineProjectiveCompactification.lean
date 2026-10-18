@@ -15,6 +15,7 @@ import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.AffineImmersion
 import WeilConjectures.AlgebraicGeometry.ChowLemma.ClosedModel
 import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 import Mathlib.AlgebraicGeometry.Morphisms.SchemeTheoreticallyDominant
+import Sheaf.AlgebraicGeometry.DimensionExtension
 
 /-!
 # Projective compactification of an affine scheme

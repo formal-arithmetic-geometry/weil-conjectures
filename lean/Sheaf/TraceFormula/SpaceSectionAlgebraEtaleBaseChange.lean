@@ -16,6 +16,10 @@ public import Sheaf.Algebra.Category.ModuleCat.Sheaf.SiteTensorFunctoriality
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 import Sheaf.CategoryTheory.ModulePullbackPushforwardAdjunction
 import Sheaf.CategoryTheory.ModulePullbackTensorIso
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
+import Sheaf.AlgebraicGeometry.AlgebraicSpace
+import Sheaf.AlgebraicGeometry.AlgebraicSpaceQuasiCoherentModule
+import Sheaf.AlgebraicGeometry.AlgebraicSpaceQuasiCoherentPushforward
 
 /-!
 # The graded section algebra of a line module and étale base change

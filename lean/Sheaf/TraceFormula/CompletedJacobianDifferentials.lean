@@ -16,6 +16,8 @@ public import Mathlib.RingTheory.Kaehler.Basic
 public import Mathlib.LinearAlgebra.TensorProduct.Basic
 
 import Mathlib.RingTheory.Unramified.Field
+import Sheaf.RingTheory.CompletionKaehlerDifferentialComparison
+import Sheaf.RingTheory.FormalPowerSeriesContinuousDifferentials
 
 /-!
 # Jacobian presentation of completed Kähler differentials

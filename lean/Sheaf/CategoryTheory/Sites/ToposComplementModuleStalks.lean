@@ -12,6 +12,7 @@ import Sheaf.CategoryTheory.Sites.ToposLocalizationSitePresentation
 import Sheaf.CategoryTheory.LocalizedModuleExactIndependent
 import WeilConjectures.CategoryTheory.ExtensionByZeroPresheaf
 import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
+import Sheaf.CategoryTheory.LocalizedModuleExactForSystems
 
 /-!
 # Module support and stalks for complementary subtopoi

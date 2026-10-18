@@ -16,6 +16,9 @@ import Sheaf.Algebra.Homology.KFlat
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
 import Sheaf.Algebra.Homology.DerivedChangeOfRingsIndependentCoefficients
 import Sheaf.Paper.ProEtaleResidueTorTest
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
+import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
+import Sheaf.Paper.FiniteTorAmplitudeSites
 
 /-!
 # Residue reduction controls integral Tor amplitude

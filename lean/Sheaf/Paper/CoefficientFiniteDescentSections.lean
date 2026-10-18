@@ -26,6 +26,7 @@ import Sheaf.AlgebraicGeometry.ProEtalePointPullback
 import Sheaf.CategoryTheory.SiteInverseImageTensor
 import Sheaf.AlgebraicGeometry.ProEtaleToposFunctorialityInverseImage
 import Sheaf.Paper.CompletedCondensedCoefficients
+import Sheaf.Topology.ProfiniteCondensedRing
 
 /-!
 # Finite coefficient descent on quasi-compact pro-étale objects

@@ -11,6 +11,8 @@ public import Sheaf.CategoryTheory.Sites.CoherentTopos
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.CategoryTheory.Limits.Types.Colimits
+import Sheaf.Paper.CoherentSetCriterion
+import Sheaf.Paper.OrientedConstructibleSheafVanishing
 
 /-!
 # Constructibility and coherence on a vanishing topos

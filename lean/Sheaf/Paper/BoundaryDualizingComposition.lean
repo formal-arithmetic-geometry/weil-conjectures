@@ -20,6 +20,12 @@ import Sheaf.AlgebraicGeometry.EtaleCompactSupportComparisons
 import Sheaf.AlgebraicGeometry.CompactifiableOverField
 import Sheaf.AlgebraicGeometry.DerivedCategories
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+import Sheaf.AlgebraicGeometry.EtaleExceptionalAdjoint
+import Sheaf.AlgebraicGeometry.SpecifiedExceptionalClassHom
+import Sheaf.CategoryTheory.ConstantLeftModuleInverseImage
+import Sheaf.Paper.ConstructibleExceptionalAdjunctionCoefficients
+import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
+import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 
 /-!
 # Composition and boundary dualizing objects on the comparison class

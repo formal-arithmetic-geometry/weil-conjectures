@@ -8,6 +8,22 @@ public import Sheaf.Paper.FormalClosedSupport
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Tensor
 public import WeilConjectures.CategoryTheory.Triangulated.DerivedLimit
 public import Mathlib.CategoryTheory.Triangulated.Functor
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.LocalizedSiteTensorRestriction
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorClosed
+import Sheaf.Algebra.Homology.KFlat
+import Sheaf.Algebra.Homology.KInjectiveProductsTermwise
+import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
+import Sheaf.AlgebraicGeometry.ProEtaleImmersionLimitPreservation
+import Sheaf.AlgebraicGeometry.ProEtaleProductsDerived
+import Sheaf.CategoryTheory.RightDerivedFunctorOfQuasiIsoResolutions
+import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
+import Sheaf.Paper.CartesianCoefficients
+import Sheaf.Paper.CondensedFiniteFreeTensorExact
+import WeilConjectures.CategoryTheory.DerivedCategory.HasMonoidalDerivedCategory
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
+import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitExistence
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs
 
 /-!
 # Closed support and sequential derived limits

@@ -8,6 +8,10 @@ module
 public import WeilConjectures.Blowup.AdmissibleBlowup
 public import Mathlib.AlgebraicGeometry.Morphisms.SchemeTheoreticallyDominant
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Invertible
+import Sheaf.AlgebraicGeometry.CartierDivisorNowhereDense
+import WeilConjectures.Blowup.BlowupUniversal
+import WeilConjectures.Blowup.Principalization
+import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Basic
 
 /-!
 # Cartier boundary after an admissible blow-up

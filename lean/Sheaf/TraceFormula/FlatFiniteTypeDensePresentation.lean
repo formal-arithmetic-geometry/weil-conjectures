@@ -9,6 +9,8 @@ public import Mathlib.AlgebraicGeometry.Restrict
 public import Sheaf.AlgebraicGeometry.CoherentFiniteType
 public import Sheaf.TraceFormula.SchematicallyDenseOpen
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
+import Sheaf.RingTheory.OpenFlatLocus
+import Sheaf.TraceFormula.FlatFiniteTypeFlatPointLocal
 
 /-!
 # Relative flatness extends finite presentation from a dense open

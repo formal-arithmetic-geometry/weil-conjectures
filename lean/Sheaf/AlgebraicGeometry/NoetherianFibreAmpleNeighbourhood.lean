@@ -26,6 +26,7 @@ import Sheaf.AlgebraicGeometry.ProjectiveMorphismChartPreimage
 import Sheaf.AlgebraicGeometry.ProjectiveSpaceStandardCharts
 import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
 import Sheaf.AlgebraicGeometry.ProperBasic
+import Sheaf.AlgebraicGeometry.ProjectiveBundleQuotientGeometry
 
 /-! # Fibre ampleness near a point of a Noetherian base
 

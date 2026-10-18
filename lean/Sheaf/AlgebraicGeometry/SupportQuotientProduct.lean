@@ -7,6 +7,23 @@ module
 
 public import Sheaf.AlgebraicGeometry.SupportQuotientFlat
 public import Sheaf.AlgebraicGeometry.ProEtaleSupportedExteriorProduct
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.RingedToposFlatPullback
+import Sheaf.Algebra.Homology.KFlat
+import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
+import Sheaf.AlgebraicGeometry.ClosedImmersionProducts
+import Sheaf.AlgebraicGeometry.EtaleInverseImageCompositionModuleLinear
+import Sheaf.AlgebraicGeometry.EtaleStalkTensorScalar
+import Sheaf.AlgebraicGeometry.SupportComparisonPullbackCoherence
+import Sheaf.Paper.ComparisonPullbackExact
+import Sheaf.SecSmoothPurity.CochainPullbackTensorCoherence
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
+import WeilConjectures.AlgebraicGeometry.InverseImageStalkGerm
+import WeilConjectures.ConstructibleSheaf.ConstantModuleLocallyConstant
+import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
+import WeilConjectures.SixFunctors.Etale.Derived.Tensor
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Tensor
 
 /-!
 # Normalized multiplication of support quotients

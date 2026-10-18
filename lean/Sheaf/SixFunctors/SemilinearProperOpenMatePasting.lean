@@ -12,6 +12,7 @@ public import Sheaf.AlgebraicGeometry.FixedEtaleOriginWitness
 public import Sheaf.AlgebraicGeometry.ProEtaleRingSheafChangeAdjunction
 public import Mathlib.CategoryTheory.Adjunction.CompositionIso
 import Mathlib.CategoryTheory.Adjunction.Mates
+import Sheaf.AlgebraicGeometry.VaryingRingProperOpenPasting
 
 /-! # Intrinsic proper/open mates for semilinear coefficient systems
 

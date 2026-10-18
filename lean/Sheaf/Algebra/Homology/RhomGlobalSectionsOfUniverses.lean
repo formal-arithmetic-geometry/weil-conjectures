@@ -10,6 +10,7 @@ public import Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses
 public import Sheaf.Algebra.Homology.RingedSiteZerothHypercohomologyOfUniverses
 import Sheaf.Algebra.Homology.HomComplexHypercohomology
 import Mathlib.Algebra.Homology.DerivedCategory.KInjective
+import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
 
 /-!
 # Global sections of derived internal Hom with independent site universes

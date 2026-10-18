@@ -9,6 +9,10 @@ public import Sheaf.Paper.OrgogozoInductionData
 public import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 public import Sheaf.CategoryTheory.ProperFaceMatchingObject
 import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
+import Sheaf.AlgebraicGeometry.ProperHypercoverEtaleDescent
+import Sheaf.Paper.GeneralNearbySliceTest
+import Sheaf.Paper.OrientedNearbyCycles
+import Sheaf.TraceFormula.SimplicialDerivedImageSpectralSequence
 
 /-!
 # Truncated nearby-cycle descent along a proper hypercover

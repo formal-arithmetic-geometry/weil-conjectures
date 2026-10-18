@@ -19,6 +19,7 @@ public import Mathlib.CategoryTheory.Functor.OfSequence
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 import Mathlib.LinearAlgebra.TensorProduct.Basic
 import Mathlib.Algebra.Homology.HomologicalComplexLimits
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
 
 /-!
 # Cofinality of the arithmetic Roos tower

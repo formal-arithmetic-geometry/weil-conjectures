@@ -21,6 +21,8 @@ import Sheaf.AlgebraicGeometry.RadicialPreparationFibreComparison
 import Mathlib.AlgebraicGeometry.Properties
 import Sheaf.AlgebraicGeometry.LimitAffineTransition
 import WeilConjectures.AlgebraicGeometry.LimitContainedInConstructible
+import Sheaf.AlgebraicGeometry.GeometricallyReducedFibreLocus
+import Sheaf.TraceFormula.GeometricallyIrreducibleFibreLocus
 
 /-!
 # Noetherian approximation with geometrically integral fibres

@@ -18,6 +18,7 @@ import Mathlib.AlgebraicGeometry.GammaSpecAdjunction
 import Mathlib.RingTheory.Spectrum.Prime.Topology
 import Sheaf.AlgebraicGeometry.AffineFpqcDescent
 import Sheaf.AlgebraicGeometry.FpqcDescendingTypesMorphisms
+import Sheaf.AlgebraicGeometry.QuasiAffineBaseChange
 
 /-!
 # Effective fpqc descent of quasi-affine morphisms

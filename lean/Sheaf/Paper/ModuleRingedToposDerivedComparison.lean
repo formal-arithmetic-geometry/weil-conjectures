@@ -49,6 +49,8 @@ import Sheaf.CategoryTheory.RightDerivedFunctorOfQuasiIsoResolutions
 import Sheaf.CategoryTheory.SheafTensor
 
 public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
+import Sheaf.Paper.CondensedModuleDerivedPushpull
+import Sheaf.Paper.SectionModuleOperationsData
 /-! # Module-object and ringed-topos derived comparison
 
 Source: Stacks Project, Sites, Tag 00YV; Modules on Sites, Tags 03EK, 03EL,

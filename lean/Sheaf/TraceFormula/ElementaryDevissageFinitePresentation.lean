@@ -12,6 +12,10 @@ public import Mathlib.Algebra.Module.FinitePresentation
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 
 import WeilConjectures.Mathlib.RingTheory.Finiteness.Descent
+import Sheaf.AlgebraicGeometry.FinitePresentationOfFiniteLocallyOfFinitePresentation
+import Sheaf.AlgebraicGeometry.FinitePushforwardModuleFinitePresentation
+import Sheaf.RingTheory.FiniteExtensionModuleFinitePresentation
+import Sheaf.TraceFormula.EtaleModuleFinitePresentationLocal
 
 /-! # Finite presentation across elementary module dévissage
 

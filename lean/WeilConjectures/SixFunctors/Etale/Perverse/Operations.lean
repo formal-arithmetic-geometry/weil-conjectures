@@ -17,6 +17,16 @@ import Sheaf.Paper.LisseAdicSheaves
 import WeilConjectures.WeilSheaf.LowerShriekFunctoriality
 import Sheaf.AlgebraicGeometry.FibreDimensionAfterBaseChange
 import WeilConjectures.CategoryTheory.Triangulated.TStructure.Homology
+import Sheaf.AlgebraicGeometry.FiniteTypeFibreImageDimensionBounds
+import Sheaf.Paper.AdicHeartIntrinsicFibres
+import Sheaf.Paper.AdicLisseCohomologyCalculus
+import Sheaf.Paper.DerivedPullbackTensorHom
+import Sheaf.Paper.IntrinsicQbarCategory
+import Sheaf.Paper.LisseIntegralSmallCoefficients
+import Sheaf.Paper.QbarPerverseSubcategories
+import Sheaf.Paper.QbarPerverseSupportCondition
+import Sheaf.Paper.SmoothPullbackSupportDimension
+import Sheaf.Paper.TateTwistSupportCondition
 
 /-!
 # The perverse classes under the operations

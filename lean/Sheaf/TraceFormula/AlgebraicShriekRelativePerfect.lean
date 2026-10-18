@@ -20,6 +20,8 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
 import Sheaf.TraceFormula.AlgebraicShriekCalculus
 import Sheaf.TraceFormula.FlatPolynomialQuotientPerfect
 import Sheaf.RingTheory.NoetherianPseudoCoherentCohomologyCriterion
+import Sheaf.CategoryTheory.DerivedCategory.PerfectComplexDerivedBiduality
+import Sheaf.TraceFormula.UpperShriekBoundedCoherent
 
 /-! # Relative perfection of the algebraic polynomial upper-shriek model
 

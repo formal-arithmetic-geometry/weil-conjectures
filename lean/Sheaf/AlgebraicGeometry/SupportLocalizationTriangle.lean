@@ -29,6 +29,9 @@ import Mathlib.Algebra.Homology.HomotopyCategory.ShortExact
 import Mathlib.Algebra.Homology.DerivedCategory.Basic
 import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
+import Sheaf.AlgebraicGeometry.ProEtalePairFlasque
+import Sheaf.AlgebraicGeometry.SupportTriangleConstruction
 
 /-!
 # Localization for the ambient bounded-below exceptional inverse image

@@ -22,6 +22,7 @@ import Sheaf.CategoryTheory.SiteCoveringAxioms
 import Sheaf.CategoryTheory.TruncationDescends
 import Sheaf.Paper.BoundedTopMorphisms
 import Sheaf.Paper.LocalFiniteEpiLifts
+import Sheaf.CategoryTheory.LocalizedModuleExactForSystems
 
 
 /-! # Local models with constant finite graded terms

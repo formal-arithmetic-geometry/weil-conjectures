@@ -23,6 +23,7 @@ import Mathlib.AlgebraicGeometry.Morphisms.Proper
 import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen
 import Mathlib.RingTheory.Unramified.LocalRing
 import Mathlib.AlgebraicGeometry.Gluing
+import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Separated
 
 /-!
 # Extending a finite etale cover by normalization

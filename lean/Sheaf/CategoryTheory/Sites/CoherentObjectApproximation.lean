@@ -15,6 +15,7 @@ import Mathlib.CategoryTheory.Sites.Limits
 import Mathlib.CategoryTheory.Sites.LeftExact
 import WeilConjectures.AlgebraicGeometry.SiteSheafificationSectionsLocal
 import Sheaf.CategoryTheory.SiteCoveringAxioms
+import Sheaf.CategoryTheory.Sites.CoherentToposRepair
 
 /-!
 # Coherent objects: finite images and filtered approximation

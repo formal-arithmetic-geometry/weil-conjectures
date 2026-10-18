@@ -27,6 +27,9 @@ import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
 import Sheaf.Paper.LocallyConstantTensor
 import WeilConjectures.AlgebraicGeometry.FiniteLocallyConstantModuleValues
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.SiteTensorFunctoriality
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
+import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
+import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
 
 /-!
 # Finite reduction and constructibility

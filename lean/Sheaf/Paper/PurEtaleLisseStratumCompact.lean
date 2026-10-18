@@ -11,6 +11,21 @@ public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.AlgebraicGeometry.OpenImmersion
+import Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses
+import Sheaf.Algebra.Homology.RhomGlobalSectionsOfUniverses
+import Sheaf.Algebra.Homology.RingedInternalHomShiftOfUniverses
+import Sheaf.AlgebraicGeometry.EtaleClosedAmbientAdjoint
+import Sheaf.AlgebraicGeometry.EtaleClosedSupportTriangle
+import Sheaf.AlgebraicGeometry.EtaleModuleSheavesGrothendieckAbelian
+import Sheaf.AlgebraicGeometry.OpenClosedRecollement
+import Sheaf.AlgebraicGeometry.OrdinaryDerivedOpenClosedAdjunctions
+import Sheaf.CategoryTheory.GrothendieckDerivedCoproductsColimit
+import Sheaf.Paper.StrictPerfectCoefficientPackageOfUniverses
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
+import WeilConjectures.AlgebraicGeometry.SpecAlgClosedEtaleSheafConstant
+import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
+import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.CohomologicalDimension
+import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Coproducts
 
 /-!
 # Compactness of a lisse sheaf extended from a locally closed stratum

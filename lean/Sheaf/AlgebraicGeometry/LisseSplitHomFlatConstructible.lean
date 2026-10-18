@@ -20,6 +20,8 @@ import Sheaf.Algebra.Category.ModuleCat.Sheaf.RingedToposFlatPullback
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 import Mathlib.Algebra.Homology.ShortComplex.ShortExact
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
+import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 
 /-!
 # Hom from an étale locally split finite projective sheaf

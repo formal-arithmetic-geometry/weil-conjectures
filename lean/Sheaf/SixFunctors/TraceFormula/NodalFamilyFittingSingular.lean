@@ -16,6 +16,9 @@ public import Sheaf.AlgebraicGeometry.FirstFittingSingularSubscheme
 public import Sheaf.AlgebraicGeometry.PureDimension
 public import Sheaf.AlgebraicGeometry.ProjectiveNodalTower
 import Sheaf.AlgebraicGeometry.GeometricFibreUnramifiedCriterion
+import Sheaf.AlgebraicGeometry.DthFittingSmoothLocus
+import Sheaf.AlgebraicGeometry.NodalCurveLCICriterion
+import Sheaf.AlgebraicGeometry.UnramifiedMorphism
 
 /-!
 # Fitting singular subscheme of a nodal relative curve

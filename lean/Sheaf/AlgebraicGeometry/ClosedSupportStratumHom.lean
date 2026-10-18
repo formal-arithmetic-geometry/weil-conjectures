@@ -22,6 +22,11 @@ import Sheaf.Algebra.Homology.KFlat
 import Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses
 import Sheaf.Algebra.Homology.KInjectiveHomComplex
 import Mathlib.Algebra.Homology.DerivedCategory.KInjective
+import Sheaf.AlgebraicGeometry.CondensedClosedSupportAdjunction
+import Sheaf.CategoryTheory.RingedSiteModules
+import Sheaf.Paper.CartesianCoefficients
+import Sheaf.Paper.FormalClosedSupportDerived
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LowerShriek.Defs
 
 /-!
 # Global derived Hom out of a stratum extension

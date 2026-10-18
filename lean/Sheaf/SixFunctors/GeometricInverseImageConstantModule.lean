@@ -11,6 +11,7 @@ import Mathlib.CategoryTheory.Sites.Sheafification
 import Mathlib.CategoryTheory.Sites.PreservesSheafification
 import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 import Mathlib.CategoryTheory.Adjunction.Limits
+import Sheaf.CategoryTheory.RingedSiteModules
 
 /-!
 # Geometric inverse image preserves constant module sheaves

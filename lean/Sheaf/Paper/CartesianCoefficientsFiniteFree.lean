@@ -29,6 +29,8 @@ import Sheaf.NumberTheory.Padics.ExtensionIntegersDvr
 import Sheaf.NumberTheory.Padics.PadicIntegersIntegralClosure
 import Sheaf.AlgebraicGeometry.ProEtalePointPullback
 import Sheaf.CategoryTheory.SheafTensor
+import Sheaf.Paper.PadicIntegersInvertEll
+import Sheaf.Topology.ProfiniteCondensedRing
 
 /-!
 # Finite free integral and rational pro-etale coefficients

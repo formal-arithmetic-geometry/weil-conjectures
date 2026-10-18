@@ -19,6 +19,7 @@ import Mathlib.RingTheory.Ideal.MinimalPrime.Noetherian
 import Mathlib.AlgebraicGeometry.Limits
 import Mathlib.AlgebraicGeometry.FunctionField
 import Mathlib.AlgebraicGeometry.Gluing
+import Sheaf.AlgebraicGeometry.IsRegularScheme
 
 /-!
 # Regular schemes and the normal decomposition

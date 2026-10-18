@@ -20,6 +20,8 @@ import Sheaf.Algebra.Homology.WeilSiteDerivedTensorDescent
 import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
 
 public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
+import Sheaf.Algebra.Homology.RingedInternalHomShiftOfUniverses
+import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
 /-! # Internal Hom and arbitrary changes of ring-sheaf coefficients
 
 Source: Bhatt--Scholze, Remark 6.8.15 (ambient derived operations);

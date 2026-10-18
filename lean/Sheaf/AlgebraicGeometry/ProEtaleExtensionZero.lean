@@ -21,6 +21,9 @@ import Sheaf.CategoryTheory.ExtensionByZeroPresheaf
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
 import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.ConcreteCoefficients
+import Sheaf.AlgebraicGeometry.ProEtaleIntrinsicExtensionByZero
+import Sheaf.AlgebraicGeometry.ProEtaleModuleStalkFunctor
+import Sheaf.CategoryTheory.LocalizedModuleExactForSystems
 
 /-!
 # Extension by zero on the small pro-etale site

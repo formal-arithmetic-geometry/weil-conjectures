@@ -17,6 +17,11 @@ import Sheaf.CategoryTheory.RingedSiteModulesGrothendieckOfUniverses
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
 import Mathlib.CategoryTheory.Sites.CoverLifting
+import Sheaf.AlgebraicGeometry.ProEtaleConstantRingMap
+import Sheaf.AlgebraicGeometry.ProEtaleFiniteModules
+import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
+import Sheaf.AlgebraicGeometry.ProEtaleObjectInverseImageRestriction
+import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
 
 /-!
 # Open direct image and its unit on K-injective pro-etale complexes

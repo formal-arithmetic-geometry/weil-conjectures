@@ -30,6 +30,8 @@ import WeilConjectures.AlgebraicGeometry.QuasicoherentPushforwardQcqs
 import WeilConjectures.AlgebraicGeometry.TensorPullback
 import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
+import Sheaf.AlgebraicGeometry.AlgebraicSpaceEtaleModulePushforwardRestriction
+import Sheaf.AlgebraicGeometry.AlgebraicSpaceQuasiCoherentModule
 
 /-!
 # Quasi-coherent modules on the Zariski and small étale sites

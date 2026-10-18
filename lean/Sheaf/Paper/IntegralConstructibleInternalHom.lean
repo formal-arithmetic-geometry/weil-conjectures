@@ -14,6 +14,11 @@ public import Mathlib.Topology.KrullDimension
 import Sheaf.Algebra.Homology.DerivedTensor
 import Sheaf.Paper.IntegralResidueTor
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+import Sheaf.AlgebraicGeometry.CoefficientProEtaleTorAmplitude
+import Sheaf.Paper.FiniteConstructibleHom
+import Sheaf.Paper.IntegralHomReduction
+import Sheaf.Paper.SfIntegralConstructible
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Tensor
 
 /-! # Constructible integral internal Hom
 

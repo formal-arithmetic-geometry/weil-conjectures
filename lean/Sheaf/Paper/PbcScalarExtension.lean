@@ -47,6 +47,19 @@ import Mathlib.CategoryTheory.Sites.Limits
 import Sheaf.CategoryTheory.RingedKoszulCompletionReflector
 import Sheaf.Paper.ProjectionMateExact
 import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimit
+import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
+import Sheaf.Algebra.Homology.SheafRingDerivedCoefficientAdjunction
+import Sheaf.AlgebraicGeometry.ProEtaleConstantRingOperations
+import Sheaf.CategoryTheory.ModulePullbackPushforwardAdjunction
+import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimitIndependentCoefficients
+import Sheaf.CategoryTheory.RingedToposDerivedPushforwardComposition
+import Sheaf.Paper.CompletedDirectImageLimits
+import Sheaf.Paper.CondensedAmbientExchange
+import Sheaf.Paper.IntegralFinitePullbackComposition
+import Sheaf.Paper.PerfectProjectionFormula
+import Sheaf.Paper.RingedPushforwardCompletion
+import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
+import Sheaf.Paper.WeilCompletedTensorReflector
 
 /-! # Finite scalar extension on the actual proper-base-change categories
 

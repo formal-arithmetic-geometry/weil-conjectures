@@ -71,6 +71,9 @@ import WeilConjectures.SixFunctors.Etale.Derived.Tensor
 import Sheaf.AlgebraicGeometry.Etale.DerivedExtensionZeroBaseChange
 import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekPlusBaseChange
 import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.BaseChangeSquare
+import Sheaf.AlgebraicGeometry.ExactUnboundedExchange
+import Sheaf.AlgebraicGeometry.ProjectiveLineTrace
+import WeilConjectures.SixFunctors.Etale.Derived.OpenImmersionLowerShriekProjection
 
 /-!
 # The actual affine-space counit trace

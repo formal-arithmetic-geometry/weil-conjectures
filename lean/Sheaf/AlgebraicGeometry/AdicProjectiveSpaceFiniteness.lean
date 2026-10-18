@@ -14,6 +14,9 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.Constructible
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
 import Sheaf.AlgebraicGeometry.ProperBoundedConstructible
 import Sheaf.AlgebraicGeometry.ProperCaseConstructibility
+import Sheaf.Paper.GeneralAlgebraicallyClosedCoefficients
+import Sheaf.Paper.LisseEConstructibleIntegralLattice
+import Sheaf.Paper.SfIntegralDirectImageConstructible
 
 /-!
 # Adic finiteness for projection from relative projective space

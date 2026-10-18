@@ -18,6 +18,7 @@ import Mathlib.CategoryTheory.Idempotents.Karoubi
 import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import WeilConjectures.CategoryTheory.StageSystem.Functor
+import Sheaf.Paper.IntrinsicQbarCategory
 
 /-! # Smooth base change with algebraically closed ℓ-adic coefficients
 

@@ -14,6 +14,7 @@ import Sheaf.Paper.FourArrows
 import Sheaf.Paper.CompletedTowerCompatibility
 import Sheaf.Paper.CompletedAdicLevelwiseIsomorphismCones
 import Sheaf.Paper.CompletedDirectImageLimits
+import Sheaf.Paper.CompletedMapReduction
 
 /-! # Completed proper base change with compatible retained origins
 

@@ -8,6 +8,8 @@ module
 public import WeilConjectures.AlgebraicGeometry.AbelianVariety.TateModule
 public import WeilConjectures.Mathlib.FieldTheory.Finite.Basic
 import Sheaf.FieldTheory.UniqueSubfieldOfClosure
+import WeilConjectures.GroupTheory.TateModule
+import WeilConjectures.NumberTheory.TateModule
 
 /-!
 # Frobenius-fixed vectors on the Tate modules of an abelian variety

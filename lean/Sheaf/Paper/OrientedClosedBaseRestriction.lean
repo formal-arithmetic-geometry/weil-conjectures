@@ -16,6 +16,12 @@ import Sheaf.TraceFormula.EtaleClosedComplementSets
 import Sheaf.SixFunctors.GeometricInverseImageConstantModule
 import WeilConjectures.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
 import WeilConjectures.AlgebraicGeometry.Sites.SmallEtaleRepresentablePresheafSheaf
+import Sheaf.AlgebraicGeometry.FiniteLocallyClosedStratification
+import Sheaf.CategoryTheory.Sites.GeometricMorphism
+import Sheaf.CategoryTheory.Sites.OrientedClosedBaseLocalization
+import Sheaf.CategoryTheory.Sites.OrientedProductLargeSites
+import Sheaf.Paper.OrientedConstructibleSheafVanishing
+import Sheaf.Paper.OrientedNearbyCycles
 
 /-!
 # Closed base restriction of an oriented vanishing topos

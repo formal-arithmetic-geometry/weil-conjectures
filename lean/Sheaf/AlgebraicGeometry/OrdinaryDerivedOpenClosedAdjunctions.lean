@@ -36,6 +36,16 @@ public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasLeftKanExten
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasSheafify
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Proetale
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.Continuous
+import Sheaf.AlgebraicGeometry.FiniteOpenClosedRecollement
+import Sheaf.AlgebraicGeometry.ProEtaleConstantExact
+import Sheaf.AlgebraicGeometry.ProEtaleConstantRingOperations
+import Sheaf.AlgebraicGeometry.ProEtaleIntrinsicExtensionByZeroAdjunction
+import Sheaf.AlgebraicGeometry.ProEtaleIntrinsicExtensionByZeroExact
+import Sheaf.AlgebraicGeometry.ProEtaleIntrinsicOpenUnit
+import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
+import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.ClosedImmersion
 /-!
 # The ordinary derived open-closed adjunctions
 

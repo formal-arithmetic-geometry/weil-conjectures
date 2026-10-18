@@ -21,6 +21,24 @@ public import WeilConjectures.CategoryTheory.ModuleObjects.EllAdicRationalizatio
 import Mathlib.AlgebraicGeometry.OpenImmersion
 import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
+import Sheaf.AlgebraicGeometry.CoefficientBoundedConstructibleProEtale
+import Sheaf.AlgebraicGeometry.ConstructibleProEtaleClassical
+import Sheaf.AlgebraicGeometry.IntegralConstantCompletion
+import Sheaf.AlgebraicGeometry.LocallyClosedExtensionCoherence
+import Sheaf.AlgebraicGeometry.ProEtaleRingedOpenClosed
+import Sheaf.CategoryTheory.RightDerivedFunctorOfQuasiIsoResolutions
+import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
+import Sheaf.Paper.CartesianCoefficients
+import Sheaf.Paper.CoefficientFiniteDescentObjects
+import Sheaf.Paper.CoefficientHeartCommonStratification
+import Sheaf.Paper.CoefficientHeartFiltration
+import Sheaf.Paper.CoefficientHeartGeneration
+import Sheaf.Paper.IntegralModelsOperations
+import Sheaf.Paper.PadicIntegersInvertEll
+import Sheaf.Paper.StratifiedLattice
+import WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalars
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible
 
 /-!
 # Integral generators and their finite reductions

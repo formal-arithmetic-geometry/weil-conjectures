@@ -11,6 +11,7 @@ public import Mathlib.Algebra.Module.LocalizedModule.Basic
 import Mathlib.RingTheory.Flat.Localization
 import Mathlib.RingTheory.Localization.BaseChange
 import Mathlib.RingTheory.LocalProperties.Exactness
+import Sheaf.RingTheory.TorFlatBaseChange
 
 /-! # Localization of Tor in the coefficient ring
 

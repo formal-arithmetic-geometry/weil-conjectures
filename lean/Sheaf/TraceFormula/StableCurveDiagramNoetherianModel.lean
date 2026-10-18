@@ -36,6 +36,7 @@ import Sheaf.AlgebraicGeometry.Morphisms.NormalFiniteStageUniversal
 import Mathlib.AlgebraicGeometry.Morphisms.Finite
 import Sheaf.AlgebraicGeometry.EtaleSmoothZeroDimensionalFibres
 import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Reduced
+import Sheaf.TraceFormula.StableModificationStabilityFieldDescent
 
 /-!
 # Normal finite-type models of finite semistable modification diagrams

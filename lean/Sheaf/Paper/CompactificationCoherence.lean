@@ -24,6 +24,13 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Def
 import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 import Sheaf.AlgebraicGeometry.ComparisonDerivedPullbackFixed
 import Sheaf.AlgebraicGeometry.ComparisonGlobalCohomologyFiniteNormalized
+import Sheaf.AlgebraicGeometry.CompactSupportComparisonUnit
+import Sheaf.AlgebraicGeometry.ComparisonDirectImage
+import Sheaf.AlgebraicGeometry.ProperOpenComparisonSiteNormalization
+import Sheaf.Paper.EtaleOriginDerivedCategory
+import Sheaf.Paper.FiniteDirectImageComposition
+import Sheaf.Paper.ProEtaleProperOpenComparison
+import WeilConjectures.Compactification.Refinement
 
 /-!
 # Compactification coherence on the witnessed etale-origin domain

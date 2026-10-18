@@ -20,6 +20,9 @@ import Sheaf.CategoryTheory.Sites.SliceSubtoposSitePresentation
 import Sheaf.RingTheory.IndEtaleStability
 import Sheaf.Paper.ProfiniteTestObjectFunctor
 import Mathlib.AlgebraicGeometry.Morphisms.Affine
+import Sheaf.AlgebraicGeometry.AffineComponentSiteProjection
+import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
 
 /-!
 # Relative profinite tests over an affine scheme's component space

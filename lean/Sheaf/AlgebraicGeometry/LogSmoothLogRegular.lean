@@ -26,6 +26,8 @@ import Sheaf.RingTheory.StrictHenselizationDimension
 import Sheaf.AlgebraicGeometry.IndEtaleStrictLocalInvariance
 import Sheaf.TraceFormula.LogRegularDivisorialStructure
 import Sheaf.AlgebraicGeometry.LogRegularPair
+import Sheaf.RingTheory.FormalMonoidExtensionModel
+import Sheaf.TraceFormula.FsFaceSharpening
 
 /-!
 # Log-smooth preservation of log regularity

@@ -13,6 +13,7 @@ public import Sheaf.RingTheory.IsRegularSystemOfParameters
 public import Sheaf.LinearAlgebra.Matrix.MinorIdeal
 import WeilConjectures.LinearAlgebra.Matrix.CauchyBinet
 import Sheaf.LinearAlgebra.Matrix.MinorIdealInclusions
+import Sheaf.RingTheory.FormalJacobianCoordinateChainRule
 
 /-!
 # Invariance of formal Jacobian minor ideals

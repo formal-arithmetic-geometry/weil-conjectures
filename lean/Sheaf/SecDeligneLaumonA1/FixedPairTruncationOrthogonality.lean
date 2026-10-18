@@ -8,6 +8,7 @@ public import Mathlib.CategoryTheory.Endofunctor.Algebra
 public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
 public import Mathlib.CategoryTheory.Triangulated.TStructure.TruncLEGT
 public import Mathlib.CategoryTheory.Triangulated.Functor
+import WeilConjectures.CategoryTheory.Triangulated.TStructure.Homology
 
 /-!
 # Truncation adjunctions and orthogonality for fixed pairs

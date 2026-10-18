@@ -16,6 +16,8 @@ import Sheaf.TraceFormula.QCQSEtaleFinitarySite
 import Sheaf.CategoryTheory.PseudofunctorSplitFamily
 import Sheaf.CategoryTheory.SiteInverseImageTensor
 import WeilConjectures.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
+import Sheaf.CategoryTheory.Sites.OrientedProductLargeSites
+import WeilConjectures.CategoryTheory.FilteredColimitCategories
 
 /-! # Oriented triple sites along affine inverse limits
 

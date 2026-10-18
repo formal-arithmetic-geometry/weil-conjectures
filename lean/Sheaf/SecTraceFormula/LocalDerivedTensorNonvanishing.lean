@@ -5,6 +5,10 @@ public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.LocalRing.Basic
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution
 public import WeilConjectures.CategoryTheory.DerivedCategory.HasMonoidalDerivedCategory
+import Sheaf.Algebra.Homology.BoundedFlatKFlat
+import Sheaf.RingTheory.NoetherianPseudoCoherentCohomologyCriterion
+import Sheaf.RingTheory.ProjectiveOverLocalFree
+import Sheaf.RingTheory.RingPseudoCoherent
 
 /-!
 # Tensor nonvanishing over a local ring

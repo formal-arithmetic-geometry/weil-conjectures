@@ -12,6 +12,7 @@ import Sheaf.RingTheory.ProEtale.ClosedLiftAdjunction
 import Sheaf.RingTheory.IndEtaleStability
 import WeilConjectures.RingTheory.HenselianOfEtaleSectionLifting
 import Mathlib.RingTheory.Etale.Basic
+import WeilConjectures.RingTheory.ProEtale.ClosedLift
 
 /-! # Henselianity of the ind-etale closed lift
 

@@ -13,6 +13,9 @@ import WeilConjectures.AlgebraicGeometry.GroupScheme.Defs
 import WeilConjectures.GroupTheory.WeilGroup
 import Mathlib.FieldTheory.Finite.GaloisField
 import Mathlib.AlgebraicGeometry.Morphisms.UniversallyInjective
+import Sheaf.AlgebraicGeometry.FundamentalGroup.FLCFiber
+import Sheaf.AlgebraicGeometry.FundamentalGroup.FiniteEtaleFieldLimitDescent
+import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Functoriality
 
 /-!
 # Weil transport on finite étale fibres

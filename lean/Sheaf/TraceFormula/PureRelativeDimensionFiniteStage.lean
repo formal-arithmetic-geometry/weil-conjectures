@@ -11,6 +11,15 @@ public import Mathlib.AlgebraicGeometry.Fiber
 public import Mathlib.AlgebraicGeometry.Pullbacks
 public import Sheaf.AlgebraicGeometry.LimitAffineTransition
 public import Sheaf.AlgebraicGeometry.PureDimension
+import Sheaf.AlgebraicGeometry.DimensionLocallyAlgebraic
+import Sheaf.AlgebraicGeometry.FibreDimensionAfterBaseChange
+import Sheaf.AlgebraicGeometry.LimitFibreDimensionBound
+import Sheaf.AlgebraicGeometry.RetrocompactBoundedFibreDimension
+import Sheaf.RingTheory.DimensionAtPointComponents
+import Sheaf.TraceFormula.RelativeDimensionBaseChange
+import WeilConjectures.AlgebraicGeometry.LimitContainedInConstructible
+import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
+import WeilConjectures.Mathlib.Topology.KrullDimension
 
 /-!
 # Pure relative dimension descends to a finite stage

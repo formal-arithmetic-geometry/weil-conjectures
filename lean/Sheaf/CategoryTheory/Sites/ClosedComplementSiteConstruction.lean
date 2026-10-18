@@ -11,6 +11,7 @@ public import Mathlib.CategoryTheory.Sites.Limits
 public import Mathlib.CategoryTheory.EssentialImage
 import Mathlib.CategoryTheory.Sites.Pullback
 import Mathlib.CategoryTheory.Sites.LeftExact
+import Sheaf.CategoryTheory.Sites.GrothendieckTopos
 
 /-!
 # The site of the closed complement of a representable subterminal

@@ -14,6 +14,8 @@ import WeilConjectures.RingTheory.PairHenselization
 import Sheaf.RingTheory.IndEtaleStability
 import Sheaf.RingTheory.LocalizationColimitPrincipalLocalizations
 import Sheaf.RingTheory.MapIntoHenselianColimit
+import Sheaf.RingTheory.GeneralizedHenselizationAtPrime
+import Sheaf.RingTheory.IndEtaleUniverseTransport
 
 /-!
 # Ind-étaleness of a henselization at a prime

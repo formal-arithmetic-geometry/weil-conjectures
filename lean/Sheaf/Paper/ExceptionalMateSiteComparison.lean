@@ -14,6 +14,11 @@ public import Sheaf.AlgebraicGeometry.CompactSupportComparisonUnit
 public import Sheaf.AlgebraicGeometry.FixedFiniteExceptionalAt
 import Sheaf.AlgebraicGeometry.FiniteComparisonClassAdjunction
 import Mathlib.CategoryTheory.Adjunction.Mates
+import Sheaf.AlgebraicGeometry.EtaleExceptionalAdjoint
+import Sheaf.AlgebraicGeometry.SpecifiedExceptionalClassHom
+import Sheaf.AlgebraicGeometry.SupportComparisonPullbackCoherence
+import Sheaf.Paper.CanonicalFiniteLevelCompactSupportBaseChange
+import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekPlusBaseChange
 
 /-! # The normalized exceptional mate under site comparison
 

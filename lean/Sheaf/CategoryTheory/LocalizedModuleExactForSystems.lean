@@ -6,6 +6,11 @@ module
 
 public import Sheaf.CategoryTheory.LocalizedModuleExactIndependent
 public import Sheaf.Algebra.Homology.KFlat
+import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
+import WeilConjectures.AlgebraicGeometry.SiteRestrictionExact
+import WeilConjectures.CategoryTheory.ExtensionByZeroPresheaf
+import WeilConjectures.CategoryTheory.SiteExtensionByZeroExact
+import WeilConjectures.CategoryTheory.SiteExtensionByZeroPresheafAdjoint
 
 /-! # Localized module adjunction for independent site universes
 

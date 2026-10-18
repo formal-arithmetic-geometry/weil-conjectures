@@ -4,6 +4,7 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperShriek
 public import WeilConjectures.TateTwist.ProEtale
+import Sheaf.Paper.FiniteSmoothAdjunctionGeneralBase
 
 @[expose] public section
 

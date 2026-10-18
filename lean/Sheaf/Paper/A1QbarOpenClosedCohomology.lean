@@ -38,6 +38,7 @@ import Sheaf.CategoryTheory.ModulePullbackPushforwardAdjunction
 import Sheaf.AlgebraicGeometry.ProEtale.IsoSectionwiseInverseImage
 import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
 import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
+import Sheaf.Paper.IntrinsicQbarCategory
 
 /-! # Ordinary constructible cohomology and open--closed restriction on a curve
 

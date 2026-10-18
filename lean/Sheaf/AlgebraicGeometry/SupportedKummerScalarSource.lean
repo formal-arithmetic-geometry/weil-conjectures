@@ -23,6 +23,10 @@ import WeilConjectures.SixFunctors.Finite.Stalk
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 import WeilConjectures.SixFunctors.Etale.Derived.Tensor
 import Mathlib.AlgebraicGeometry.Morphisms.Finite
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
+import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import WeilConjectures.SixFunctors.Finite.BaseChange
 
 /-!
 # Derived scalar extension of a closed supported constant sheaf

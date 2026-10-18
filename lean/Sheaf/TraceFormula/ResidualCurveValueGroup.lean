@@ -10,6 +10,8 @@ public import Mathlib.FieldTheory.IntermediateField.Adjoin.Basic
 public import Mathlib.RingTheory.AlgebraicIndependent.Basic
 public import Sheaf.RingTheory.ValuationComapResidue
 import Sheaf.GroupTheory.RationalRankZeroTorsion
+import Sheaf.FieldTheory.AbhyankarInequality
+import Sheaf.FieldTheory.ValueGroupDivisible
 
 /-!
 # Values in a residually transcendental curve extension

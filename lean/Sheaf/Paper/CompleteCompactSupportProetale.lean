@@ -51,6 +51,13 @@ import Sheaf.AlgebraicGeometry.CompactifiableCompatibleTower
 import Sheaf.AlgebraicGeometry.ProperOpenInterchangeCoherence
 import Sheaf.CategoryTheory.RingedToposDerivedPushforwardComposition
 import Sheaf.AlgebraicGeometry.ComparisonDirectImage
+import Sheaf.AlgebraicGeometry.FixedEtaleOriginWitness
+import Sheaf.AlgebraicGeometry.StrictTowerCompositionPasting
+import Sheaf.CategoryTheory.LocalizedModuleExactForSystems
+import Sheaf.Paper.ExactProductFunctorStrictLimit
+import Sheaf.Paper.IntegralFinitePullbackComposition
+import Sheaf.Paper.PbcQbarCompletedPullback
+import Sheaf.Paper.RefinementExchangeCoherence
 
 /-!
 # Complete pro-etale compact-support base change

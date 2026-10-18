@@ -16,6 +16,11 @@ import Sheaf.CategoryTheory.Sites.CoherentConservativeReflection
 import Sheaf.Paper.QcqsOrientedTriplePresentation
 import Sheaf.AlgebraicGeometry.EtaleStratifiedFinite
 import WeilConjectures.AlgebraicGeometry.HenselianFiniteEtale
+import Sheaf.AlgebraicGeometry.FiniteLocallyClosedStratification
+import Sheaf.CategoryTheory.Sites.CoherentToposRepair
+import Sheaf.CategoryTheory.Sites.FiniteLocallyConstantCoherent
+import Sheaf.CategoryTheory.Sites.OrientedProductLargeSites
+import Sheaf.Paper.StratifiedOrientedCover
 
 /-!
 # Coherent set sheaves on a vanishing topos

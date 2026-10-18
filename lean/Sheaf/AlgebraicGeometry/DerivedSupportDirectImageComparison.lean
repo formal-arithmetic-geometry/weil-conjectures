@@ -22,6 +22,9 @@ import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
 import Sheaf.AlgebraicGeometry.ProEtaleObjectInverseImageRestriction
 import Sheaf.Algebra.Homology.KInjectiveRestrictLocalized
 import Sheaf.CategoryTheory.DerivedCategory.AdjointFunctors
+import Sheaf.AlgebraicGeometry.ComparisonPullbackOpenUnit
+import Sheaf.AlgebraicGeometry.ProEtaleSiteComparison
+import Sheaf.CategoryTheory.RingedSiteModules
 
 /-!
 # Unbounded supported sections and etale/pro-etale direct image

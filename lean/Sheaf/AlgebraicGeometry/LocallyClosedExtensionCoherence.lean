@@ -22,6 +22,11 @@ import WeilConjectures.CategoryTheory.SiteMorphismComposition
 import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
 import Mathlib.CategoryTheory.Sites.CoverLifting
 import Mathlib.CategoryTheory.Localization.Predicate
+import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
+import Sheaf.AlgebraicGeometry.ProEtaleOpenRestrictionCounit
+import Sheaf.AlgebraicGeometry.ProEtaleSupportedReconstruction
+import Sheaf.CategoryTheory.ModulePullbackPushforwardAdjunction
+import Sheaf.CategoryTheory.SiteMorphismComposition
 
 /-!
 # Normalized locally closed extensions with arbitrary pro-etale coefficients

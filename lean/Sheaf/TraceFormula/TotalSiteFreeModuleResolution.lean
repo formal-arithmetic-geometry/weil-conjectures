@@ -10,6 +10,7 @@ public import Sheaf.CategoryTheory.Sites.GeometricMorphism
 public import Sheaf.CategoryTheory.ConstantLeftModuleInverseImage
 public import Mathlib.Algebra.BigOperators.Fin
 public import Mathlib.Algebra.Homology.ExactSequence
+import Sheaf.TraceFormula.TotalSiteSimplexFreeResolution
 
 /-!
 # The free module resolution on a coherent total simplicial site

@@ -11,6 +11,7 @@ public import WeilConjectures.RingTheory.ProEtale.WContractible
 public import Mathlib.CategoryTheory.Sites.Subcanonical
 import Sheaf.AlgebraicGeometry.Sites.ProetaleSiteProperties
 import Mathlib.CategoryTheory.Sites.LocallySurjective
+import Sheaf.AlgebraicGeometry.ProEtale.WContractibleClopenPartition
 
 /-!
 # Projectivity of representables on the pro-étale site

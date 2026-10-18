@@ -21,6 +21,12 @@ import Sheaf.AlgebraicGeometry.ProEtaleConstantExact
 import Sheaf.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits
 import Sheaf.AlgebraicGeometry.ProEtaleImmersionLimitPreservation
+import Sheaf.AlgebraicGeometry.ModuleSheafCoproductLocalSupport
+import Sheaf.AlgebraicGeometry.ProEtaleClosedEssentialImage
+import Sheaf.AlgebraicGeometry.ProEtaleConstantRingOperations
+import Sheaf.AlgebraicGeometry.ProEtaleIntrinsicClosedSupport
+import Sheaf.AlgebraicGeometry.ProEtaleOpenUnitEvaluation
+import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 
 /-!
 # Supported sections and flasqueness for a pro-etale open-closed pair

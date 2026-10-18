@@ -9,6 +9,23 @@ public import Sheaf.AlgebraicGeometry.MultipointedCurveModification
 public import Sheaf.AlgebraicGeometry.StrictlySemistableCurve
 public import Mathlib.FieldTheory.IsSepClosed
 public import Mathlib.RingTheory.Valuation.ValuationSubring
+import Sheaf.AlgebraicGeometry.GeometricallyReducedEtaNormal
+import Sheaf.AlgebraicGeometry.QuasiFiniteMorphism
+import Sheaf.AlgebraicGeometry.ValuationSemistableStableContraction
+import Sheaf.RingTheory.QuasiFiniteAtPrimeZeroFibreDimension
+import Sheaf.TraceFormula.SmoothTargetModificationExceptionalTree
+import Sheaf.TraceFormula.ValuationHorizontalCurveModels
+import Sheaf.TraceFormula.ValuationStrictSemistableCofinality
+import WeilConjectures.AlgebraicGeometry.EtaleFibreDiscreteSeparablePoints
+import WeilConjectures.Blowup.AdmissibleBlowup
+import WeilConjectures.Blowup.Affine.ChartAlgebra
+import WeilConjectures.Blowup.Affine.Defs
+import WeilConjectures.Blowup.BlowupUniversal
+import WeilConjectures.Blowup.Complement
+import WeilConjectures.Blowup.Gluing
+import WeilConjectures.Blowup.Proper
+import WeilConjectures.Compactification.FiniteTypeExtension
+import WeilConjectures.Compactification.StrictTransform
 
 /-! # Semistable separation of a marking over a valuation ring
 

@@ -15,6 +15,12 @@ import WeilConjectures.DeligneLaumon.AffineLine.LocalDuality
 import WeilConjectures.Mathlib.LinearAlgebra.Charpoly.Basic
 import WeilConjectures.Mathlib.LinearAlgebra.Eigenspace.Triangularizable
 import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Operations
+import Sheaf.LinearAlgebra.SpectrumExactSequence
+import Sheaf.Paper.CommonStageCurveWeilMiddleExtension
+import Sheaf.Paper.DlConstructibleFibresExact
+import Sheaf.Paper.LisseIntegralSmallCoefficients
+import Sheaf.Paper.RealSheavesSetup
+import Sheaf.Paper.WeilOpenImageDelta
 
 /-!
 # Exactness of the ordinary direct image at a fixed pure weight

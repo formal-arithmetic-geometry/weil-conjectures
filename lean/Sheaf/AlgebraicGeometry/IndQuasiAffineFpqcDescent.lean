@@ -17,6 +17,10 @@ import Sheaf.AlgebraicGeometry.FpqcDescendingTypesMorphisms
 import Sheaf.AlgebraicGeometry.AffineFpqcDescent
 import WeilConjectures.AlgebraicGeometry.FpqcOpenSubschemeDescent
 import Sheaf.AlgebraicGeometry.InvariantOpenEffectiveDescent
+import Sheaf.AlgebraicGeometry.FpqcInvariantIntersectionNeighbourhoods
+import Sheaf.AlgebraicGeometry.IndQuasiAffinePermanence
+import Sheaf.AlgebraicGeometry.IntersectionCanonicalAffineEmbedding
+import Sheaf.AlgebraicGeometry.IntersectionSectionsFlatBaseChange
 
 /-!
 # Effective fpqc descent for ind-quasi-affine morphisms

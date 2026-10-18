@@ -7,6 +7,18 @@ module
 
 public import Sheaf.SixFunctors.SchemeGaloisComparison
 public import Sheaf.Paper.TraceFormulaCoefficientConventions
+import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
+import Sheaf.AlgebraicGeometry.AbsoluteFrobeniusSite
+import Sheaf.AlgebraicGeometry.FrobeniusFactorization
+import Sheaf.AlgebraicGeometry.FrobeniusTrivializationPullback
+import Sheaf.AlgebraicGeometry.ProEtaleConstantExact
+import Sheaf.AlgebraicGeometry.ProEtaleConstantRingMap
+import Sheaf.AlgebraicGeometry.ProEtaleConstantRingOperations
+import Sheaf.Paper.FiniteFieldFiber
+import Sheaf.Paper.IntegralFinitePullbackComposition
+import Sheaf.RingTheory.PowerGeneratedSpectrumHomeomorphism
+import Sheaf.SixFunctors.SchemeFrobenius
+import WeilConjectures.AlgebraicGeometry.AbsoluteFrobenius
 
 /-!
 # The specified scheme/Galois comparison at finite coefficient level

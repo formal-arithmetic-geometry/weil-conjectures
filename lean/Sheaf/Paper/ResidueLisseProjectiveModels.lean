@@ -25,6 +25,13 @@ import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
 import Mathlib.Algebra.Homology.DerivedCategory.Basic
 import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
 import Sheaf.Algebra.Homology.DerivedChangeOfRingsIndependentCoefficients
+import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
+import Sheaf.AlgebraicGeometry.EtaleComparison
+import Sheaf.AlgebraicGeometry.IntegralConstantCompletion
+import Sheaf.AlgebraicGeometry.Sites.ProetaleSiteProperties
+import Sheaf.Paper.CompleteResidueCohomologyBounds
+import Sheaf.Paper.DerivedNakayamaFirstReduction
+import Sheaf.SixFunctors.ProEtale.DerivedCompletion
 
 /-!
 # Projective models from lisse residue cohomology

@@ -14,6 +14,21 @@ public import Sheaf.Paper.PurEtaleScalarMateProjection
 public import WeilConjectures.SixFunctors.Etale.Derived.OpenImmersionLowerShriek
 public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 public import WeilConjectures.Algebra.Homology.Monoidal.MapHomologicalComplex
+import Sheaf.AlgebraicGeometry.ConstructibleEtaleSetPullback
+import Sheaf.AlgebraicGeometry.ConstructibleSurjectivePullback
+import Sheaf.AlgebraicGeometry.EtaleExceptionalAdjoint
+import Sheaf.AlgebraicGeometry.EtaleQcqsCofinalFiniteCoverings
+import Sheaf.AlgebraicGeometry.ProEtaleFiniteTorComparisonNoetherian
+import Sheaf.AlgebraicGeometry.ProperProjectionFormula
+import Sheaf.AlgebraicGeometry.SmoothTensorDuality
+import Sheaf.AlgebraicGeometry.UnboundedEtaleCompactSupportComparisons
+import Sheaf.Paper.FiniteRingConstructibleDerivedOrigin
+import Sheaf.Paper.KFlatRingedToposPullback
+import Sheaf.Paper.RingedExchangeTensorCoherence
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
+import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
+import WeilConjectures.SixFunctors.Etale.Derived.OpenImmersionLowerShriekProjection
+import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.FiniteComparison
 
 /-! # Exceptional coefficient comparisons
 

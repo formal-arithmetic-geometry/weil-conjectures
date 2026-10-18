@@ -40,6 +40,13 @@ import Sheaf.Paper.SfDerivedDirectImage
 import Mathlib.CategoryTheory.Triangulated.Pretriangulated
 import Sheaf.AlgebraicGeometry.ProEtaleDirectImageRestrictionOfScalars
 import Sheaf.Paper.DerivedScalarExtensionRestrictionAdjunction
+import Sheaf.AlgebraicGeometry.ProEtaleFixedScalarRestrictionDirectImage
+import Sheaf.Paper.DerivedCompleteOnSlices
+import Sheaf.Paper.IntegralReductionTowerWellDefinedUnrestricted
+import Sheaf.Paper.SfCommonStageDirectImage
+import Sheaf.SecSmoothPurity.IntrinsicCompactSupportRestriction
+import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitExistence
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerShriek
 /-!
 # Integral compact-support constructibility
 

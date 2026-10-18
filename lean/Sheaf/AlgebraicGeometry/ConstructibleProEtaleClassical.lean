@@ -37,6 +37,16 @@ import Mathlib.CategoryTheory.Adjunction.Unique
 import Mathlib.AlgebraicGeometry.Morphisms.Separated
 import Mathlib.AlgebraicGeometry.Morphisms.Integral
 import Mathlib.AlgebraicGeometry.Morphisms.UniversallyClosed
+import Sheaf.AlgebraicGeometry.ClassicalModuleWeakSerre
+import Sheaf.AlgebraicGeometry.ProEtaleClassicalSheavesModules
+import Sheaf.AlgebraicGeometry.ProEtaleClassicalZariskiLocal
+import Sheaf.AlgebraicGeometry.ProEtaleDirectImageComparison
+import Sheaf.AlgebraicGeometry.ProEtaleFiniteConstantHom
+import Sheaf.AlgebraicGeometry.ProEtaleFiniteLocalSystemsType
+import Sheaf.AlgebraicGeometry.ProEtaleSiteComparison
+import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
+import Sheaf.CategoryTheory.LocalizedModuleExactForSystems
+import Sheaf.Paper.ProEtaleLocallyConstantSheafOfUniverses
 
 /-! # Constructible pro-etale module sheaves are classical
 

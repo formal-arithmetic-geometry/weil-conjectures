@@ -14,6 +14,8 @@ import Sheaf.CategoryTheory.Triangulated.DerivedLimitExistence
 import WeilConjectures.CategoryTheory.Triangulated.DerivedLimit
 import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 import Sheaf.RingTheory.FiniteModuleComplete
+import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitExistence
+import WeilConjectures.RingTheory.FiniteModuleComplete
 
 /-!
 # Finiteness of derived-complete modules with finite residue

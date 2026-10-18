@@ -8,6 +8,7 @@ module
 public import Mathlib.LinearAlgebra.TensorProduct.Tower
 public import Mathlib.Algebra.DirectSum.Module
 public import Mathlib.Data.Set.Countable
+import Sheaf.LinearAlgebra.LiftCountablyGeneratedSubmodule
 
 /-!
 # Countable submodules adapted to a scalar-extension direct sum

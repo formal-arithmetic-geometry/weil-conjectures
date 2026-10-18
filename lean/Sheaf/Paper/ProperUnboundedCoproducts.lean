@@ -10,6 +10,8 @@ public import Sheaf.Topology.ProfiniteCondensedRing
 public import Sheaf.CategoryTheory.RightDerivedFunctorOfQuasiIsoResolutions
 import Sheaf.CategoryTheory.TruncationsAndHomotopyColimits
 import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
+import Sheaf.Paper.AmbientIndDerivedSums
+import Sheaf.Paper.ProperUnboundedWindowBounded
 
 /-!
 # Proper direct image preserves arbitrary small direct sums

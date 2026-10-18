@@ -19,6 +19,10 @@ import WeilConjectures.AlgebraicGeometry.Ample
 import WeilConjectures.AlgebraicGeometry.ProjectiveAmpleInvertible
 import Sheaf.AlgebraicGeometry.UnramifiedQuasiFinite
 import Mathlib.AlgebraicGeometry.ZariskisMainTheorem
+import Sheaf.AlgebraicGeometry.DeJongRelativeMarkedSemistable
+import Sheaf.AlgebraicGeometry.Morphisms.HProjectiveComposition
+import Sheaf.AlgebraicGeometry.ProjectiveBundleMorphism
+import Sheaf.AlgebraicGeometry.ProjectiveBundleToHProjective
 
 /-!
 # Marked nodal reduction of a relative curve

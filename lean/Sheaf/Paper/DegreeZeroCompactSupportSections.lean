@@ -12,6 +12,30 @@ public import Sheaf.Paper.LisseIntegralCompletedRealization
 public import Sheaf.Paper.LisseAdicFiberFunctors
 public import WeilConjectures.AlgebraicGeometry.ClosedSubsetProperOverBase
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
+import Sheaf.AlgebraicGeometry.ProEtaleClassicalSheaves
+import Sheaf.AlgebraicGeometry.ProEtaleDirectImageComparison
+import Sheaf.AlgebraicGeometry.ProEtaleExtensionZeroComparison
+import Sheaf.AlgebraicGeometry.ProperSupportSheafComposition
+import Sheaf.CategoryTheory.RingedTowerPushforwardLimitComparison
+import Sheaf.CategoryTheory.Triangulated.MilnorSequence
+import Sheaf.Paper.CoefficientCohomologyModules
+import Sheaf.Paper.FiniteCoefficientPoint
+import Sheaf.Paper.GaloisLisseRepresentations
+import Sheaf.Paper.IntegralCompactSupportCoefficientComparison
+import Sheaf.Paper.IntegralCompactSupportPrescribedReductions
+import Sheaf.Paper.IntegralStratifiedPerfectCharacterization
+import Sheaf.Paper.LisseCompletedSystemComparison
+import Sheaf.Paper.LisseIntegralSmallCoefficients
+import Sheaf.Paper.PointProEtaleSectionsExact
+import Sheaf.Paper.PointSectionsScalarExtension
+import Sheaf.Paper.QcqsCompactSupportRealization
+import Sheaf.Paper.SfCommonStageDirectImage
+import Sheaf.Paper.SmoothLisseIntegralLattice
+import Sheaf.Paper.TraceCompactificationCohomology
+import Sheaf.SecSmoothPurity.IntrinsicCompactSupportRestriction
+import WeilConjectures.Compactification.NagataCompactification
+import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+import WeilConjectures.Mathlib.Topology.NoetherianSpace
 
 
 /-! # Degree-zero compact support as ordinary adic sections

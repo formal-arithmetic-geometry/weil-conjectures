@@ -30,6 +30,7 @@ import WeilConjectures.CategoryTheory.RightDerivedFunctorTruncationIso
 import WeilConjectures.CategoryTheory.TruncationTriangle
 import Mathlib.CategoryTheory.Triangulated.HomologicalFunctor
 import Sheaf.CategoryTheory.RingedToposDerivedPushforwardComposition
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
 
 /-!
 # Cohomology comparison through a vanishing bound

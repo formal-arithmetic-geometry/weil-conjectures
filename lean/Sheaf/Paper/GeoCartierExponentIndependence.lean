@@ -17,6 +17,7 @@ import Sheaf.Algebra.Homology.SheafRingDerivedCoefficientAdjunction
 import Mathlib.Algebra.Homology.DerivedCategory.ShortExact
 import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 import Mathlib.Algebra.Homology.DerivedCategory.FullyFaithful
+import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
 
 /-!
 # Modulus change of normalized derived reduction

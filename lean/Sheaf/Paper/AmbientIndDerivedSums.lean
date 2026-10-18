@@ -18,6 +18,7 @@ import Sheaf.Paper.IndConstructibleFilteredColimits
 import Sheaf.CategoryTheory.RingedSiteModulesGrothendieckOfUniverses
 import Sheaf.CategoryTheory.SheafTensor
 import Mathlib.Algebra.Homology.Embedding.CochainComplex
+import Sheaf.AlgebraicGeometry.CoefficientBoundedConstructibleProEtale
 
 /-!
 # Sums and truncations for ind-constructible cohomology

@@ -32,6 +32,9 @@ import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
 import Sheaf.Algebra.Homology.BoundedFlatIndependentCoefficients
 import Sheaf.Paper.InvertibleTensorScalarExtension
 import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
+import Sheaf.Paper.ProEtaleConstructibleSheaf
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Tensor
 
 /-! # Derived scalar extension on the small pro-etale site
 

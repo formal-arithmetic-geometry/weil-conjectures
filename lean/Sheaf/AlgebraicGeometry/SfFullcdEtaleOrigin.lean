@@ -28,6 +28,7 @@ import Sheaf.AlgebraicGeometry.ProEtaleConstantExact
 import Sheaf.Paper.FiniteLevelProEtaleBaseChange
 import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
 import Sheaf.Paper.RingedEtaleOriginWitness
+import Sheaf.AlgebraicGeometry.FixedEtaleOriginWitness
 
 /-!
 # Uniform higher-direct-image vanishing for sheaves of etale origin

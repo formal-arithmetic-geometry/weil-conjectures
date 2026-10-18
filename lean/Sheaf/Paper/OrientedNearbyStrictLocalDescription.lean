@@ -27,6 +27,7 @@ import Mathlib.AlgebraicGeometry.Pullbacks
 import Sheaf.AlgebraicGeometry.StrictBaseClosedPointLocalizations
 public import Sheaf.AlgebraicGeometry.StrictHenselizationClosedLift
 import Sheaf.AlgebraicGeometry.StrictHenselizationStalkFormula
+import Sheaf.Paper.StrictHenselizationFunctoriality
 
 /-!
 # Strict-local sections and the localized base-change test for nearby cycles

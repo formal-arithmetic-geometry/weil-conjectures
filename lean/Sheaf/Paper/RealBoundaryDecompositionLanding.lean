@@ -14,6 +14,9 @@ public import Mathlib.RingTheory.Localization.FractionRing
 import Sheaf.AlgebraicGeometry.ClosedPointField
 import Sheaf.RingTheory.SmoothOverFieldRegularLocal
 import Sheaf.AlgebraicGeometry.RegularNormalDecomposition
+import Sheaf.AlgebraicGeometry.FundamentalGroup.FLCFiber
+import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Functoriality
+import WeilConjectures.GroupTheory.WeilGroup
 
 /-!
 # The local decomposition homomorphism and its subgroup inclusions

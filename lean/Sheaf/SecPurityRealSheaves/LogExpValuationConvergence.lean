@@ -6,6 +6,7 @@ module
 
 public import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
 import Mathlib.Analysis.Normed.Group.FunctionSeries
+import Sheaf.NumberTheory.Padics.ExtensionIntegersDvr
 
 /-!
 # Valuation convergence of the deep p-adic logarithm and exponential

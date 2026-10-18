@@ -32,6 +32,10 @@ import Sheaf.AlgebraicGeometry.FixedComparisonDirectImageMate
 import Sheaf.AlgebraicGeometry.SupportComparisonPullbackCoherence
 import Sheaf.AlgebraicGeometry.ProEtaleComparisonPullbackSections
 import Mathlib.AlgebraicGeometry.Morphisms.Proper
+import Sheaf.AlgebraicGeometry.ProEtaleExtensionZeroComparison
+import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
+import Sheaf.AlgebraicGeometry.RelativeAdjointOpenOrigin
+import Sheaf.AlgebraicGeometry.SpecifiedExceptionalClassHom
 
 /-!
 # Proper exceptional inverse image and arbitrary open restriction

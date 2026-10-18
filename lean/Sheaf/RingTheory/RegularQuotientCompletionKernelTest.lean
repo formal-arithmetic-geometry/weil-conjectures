@@ -8,6 +8,10 @@ module
 public import Mathlib.RingTheory.RegularLocalRing.Defs
 public import Mathlib.RingTheory.Regular.RegularSequence
 public import Mathlib.RingTheory.AdicCompletion.Algebra
+import Sheaf.RingTheory.CompletionRegularKernelPreservation
+import Sheaf.RingTheory.CompletionRegularLocal
+import Sheaf.TraceFormula.CompleteLocalCIPresentationIndependence
+import WeilConjectures.RingTheory.AdicCompletionNoetherian
 
 /-!
 # Regular-sequence kernels and completed quotients

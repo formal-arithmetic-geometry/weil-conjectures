@@ -33,6 +33,8 @@ import Sheaf.Paper.PbcDescentFunctors
 import WeilConjectures.SixFunctors.Etale.Derived.WeilFrobenius
 import Sheaf.CategoryTheory.LocalizedModuleExactForSystems
 import Sheaf.Paper.LisseIntegralSmallCoefficients
+import Sheaf.Paper.A1QbarOpenClosedCohomology
+import Sheaf.Paper.DlConstructibleFibresExact
 
 /-! # The natural low-degree open-image sequence for adic Weil sheaves
 

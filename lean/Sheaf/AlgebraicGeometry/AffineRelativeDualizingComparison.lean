@@ -42,6 +42,7 @@ import Sheaf.Paper.DerivedInternalHomRestrictOpen
 import Sheaf.AlgebraicGeometry.AffinePseudoCoherentRHomQuasiCoherent
 import Sheaf.Algebra.Homology.DerivedHomFiniteFreeModel
 import Sheaf.Algebra.Homology.HomTensorTotal
+import Sheaf.AlgebraicGeometry.AffineRelativeTorAmplitudeCriterion
 
 /-! # Affine comparison of coherent relative dualizing pairs
 

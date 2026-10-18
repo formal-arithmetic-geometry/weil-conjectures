@@ -10,6 +10,10 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.Topology.Defs.Filter
 public import Sheaf.AlgebraicGeometry.QuasiFiniteMorphism
+import Sheaf.AlgebraicGeometry.AlgebraicSpaceAffineEtaleCover
+import Sheaf.AlgebraicGeometry.AlgebraicSpaceFibreProductPoint
+import Sheaf.AlgebraicGeometry.EtaleSpaceLocallyQuasiFinite
+import Sheaf.AlgebraicGeometry.SeparatedEtaleChart
 
 /-!
 # Affine étale neighbourhood of a quasi-compact scheme map

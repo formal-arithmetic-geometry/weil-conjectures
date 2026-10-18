@@ -9,6 +9,8 @@ public import WeilConjectures.AlgebraicGeometry.Curve.SmoothProjective
 public import Sheaf.AlgebraicGeometry.FunctionField
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
+import Sheaf.AlgebraicGeometry.FiniteBirationalNormalIso
+import Sheaf.AlgebraicGeometry.ProperBirationalCurveFinite
 
 /-!
 # Proper birational maps to normal integral curves

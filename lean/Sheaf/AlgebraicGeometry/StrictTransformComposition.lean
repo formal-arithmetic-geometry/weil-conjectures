@@ -1,6 +1,11 @@
 
 import WeilConjectures.Blowup.AdmissibleBlowup
 import WeilConjectures.Compactification.StrictTransform
+import Sheaf.AlgebraicGeometry.ModuleStrictTransform
+import Sheaf.AlgebraicGeometry.ModuleStrictTransformAffinePushforward
+import Sheaf.AlgebraicGeometry.ModuleStrictTransformKernel
+import Sheaf.AlgebraicGeometry.StrictTransformDifferentCenters
+import WeilConjectures.Blowup.Principalization
 
 /-!
 # Strict transforms under a composition of blow-ups

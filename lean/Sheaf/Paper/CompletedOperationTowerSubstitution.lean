@@ -22,6 +22,9 @@ import Sheaf.Paper.KFlatRingedToposPullback
 import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
 import Sheaf.AlgebraicGeometry.ProEtaleCountableProductsExact
 import Sheaf.AlgebraicGeometry.ProEtaleConstantExact
+import Sheaf.Paper.CoefDerivedSystemEvaluationCalculus
+import Sheaf.Paper.IntegralOperationsWellDefined
+import Sheaf.Paper.NormalizedDVRTower
 
 /-! # Substitution into completed tensor and pullback
 

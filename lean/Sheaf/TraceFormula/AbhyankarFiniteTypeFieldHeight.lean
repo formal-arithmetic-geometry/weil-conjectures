@@ -8,6 +8,9 @@ module
 public import Mathlib.FieldTheory.FinTrdeg
 public import Mathlib.FieldTheory.PrimeField
 public import Mathlib.RingTheory.Valuation.ValuationSubring
+import Sheaf.FieldTheory.AbhyankarInequality
+import Sheaf.RingTheory.PrimeFieldValuationRank
+import Sheaf.TraceFormula.ValuationHeightRank
 
 /-!
 # Abhyankar height bound for valuations of finitely generated fields

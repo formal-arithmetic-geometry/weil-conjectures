@@ -28,6 +28,8 @@ public import Sheaf.AlgebraicGeometry.ProEtaleFiniteModules
 import Sheaf.AlgebraicGeometry.ProperBasic
 import Sheaf.AlgebraicGeometry.ProEtaleIntrinsicExtensionByZeroExact
 import Sheaf.Paper.ComparisonPullbackExact
+import Sheaf.AlgebraicGeometry.SpecifiedExceptionalClassHom
+import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 
 /-! # Chosen-compactification normalization of bounded site adjunction transposes
 

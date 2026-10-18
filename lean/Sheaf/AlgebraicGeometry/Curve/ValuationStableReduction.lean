@@ -12,6 +12,12 @@ public import Mathlib.RingTheory.Valuation.ValuationSubring
 import Sheaf.AlgebraicGeometry.ValuationSemistableStableContraction
 import Mathlib.AlgebraicGeometry.Gluing
 import Mathlib.AlgebraicGeometry.Morphisms.Proper
+import Sheaf.AlgebraicGeometry.BirationalQuasiModificationCommonCover
+import Sheaf.AlgebraicGeometry.Curve.StableModificationUniquenessNormal
+import Sheaf.TraceFormula.ValuationHorizontalCurveModels
+import Sheaf.TraceFormula.ValuationMarkingSemistableSeparation
+import Sheaf.TraceFormula.ValuationStrictSemistableCofinality
+import Sheaf.TraceFormula.ValuationStrictSemistableLocalUniformization
 
 /-! # Stable reduction over a finite-height separably closed valuation field
 

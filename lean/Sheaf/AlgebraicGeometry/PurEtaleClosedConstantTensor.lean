@@ -14,6 +14,22 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
+import Sheaf.Algebra.Homology.BoundedAboveFlatSheafKFlat
+import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
+import Sheaf.AlgebraicGeometry.EtaleStalkTensorScalar
+import Sheaf.AlgebraicGeometry.PointedEtaleStalk
+import Sheaf.CategoryTheory.RingedSiteModules
+import Sheaf.Paper.RingedTopoiTensorComparisonConstruction
+import Sheaf.Paper.RingedTopoiTensorComparisonData
+import WeilConjectures.AlgebraicGeometry.ConstantSheafGeometricStalk
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
+import WeilConjectures.AlgebraicGeometry.InverseImageStalkGerm
+import WeilConjectures.ConstructibleSheaf.ConstantModuleLocallyConstant
+import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import WeilConjectures.SixFunctors.OpenClosed.Stalk
 
 /-!
 # Closed constant coefficient tensors on the small étale site

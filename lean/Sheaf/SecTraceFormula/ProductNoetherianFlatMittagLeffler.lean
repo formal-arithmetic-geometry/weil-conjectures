@@ -8,6 +8,9 @@ module
 public import Mathlib.RingTheory.Noetherian.Basic
 public import Mathlib.RingTheory.Flat.Basic
 public import Sheaf.RingTheory.IsMittagLeffler
+import Sheaf.RingTheory.FinitePresentationTensorProducts
+import Sheaf.SecTraceFormula.CoherentProductFlat
+import Sheaf.SecTraceFormula.FlatMittagLefflerCriterion
 
 /-!
 # Product of copies of a Noetherian ring is flat Mittag-Leffler

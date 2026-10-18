@@ -8,6 +8,13 @@ public import Sheaf.AlgebraicGeometry.ProEtaleOperations
 public import Sheaf.AlgebraicGeometry.ProEtaleConstantRingOperations
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
 public import WeilConjectures.CategoryTheory.Abelian.Flat.Basic
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.RingedToposFlatPullback
+import Sheaf.AlgebraicGeometry.ProEtaleImmersionLimitPreservation
+import Sheaf.CategoryTheory.ModulePullbackTensorIso
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
+import WeilConjectures.SixFunctors.OpenClosed.ClosedImmersion
+import WeilConjectures.SixFunctors.OpenClosed.Complex
+import WeilConjectures.SixFunctors.OpenClosed.Vanishing
 
 /-!
 # Flatness on an open--closed decomposition

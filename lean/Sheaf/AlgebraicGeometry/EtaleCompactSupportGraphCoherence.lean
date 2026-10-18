@@ -9,6 +9,8 @@ public import Sheaf.AlgebraicGeometry.EtaleCompactSupportGraphDerivedIso
 import Sheaf.AlgebraicGeometry.ExactUnboundedExchange
 import Sheaf.CategoryTheory.RingedToposDerivedPushforwardComposition
 import WeilConjectures.AlgebraicGeometry.EtaleLowerShriekBaseChangeMap
+import Sheaf.Paper.ProperOpenRefinementAdjointProjection
+import Sheaf.Paper.UnboundedProperOpenInterchange
 
 /-!
 # Coherence of the specified compact-support graph map

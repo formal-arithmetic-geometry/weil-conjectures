@@ -9,6 +9,12 @@ public import Sheaf.Paper.ProEtaleConstructibleCoefficientSheaf
 public import Sheaf.Paper.BoundedConstructibleTower
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
+import Sheaf.Algebra.Category.ModuleCat.Presheaf.SheafificationTensor
+import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
+import Sheaf.AlgebraicGeometry.ProEtaleModuleStalkFunctor
+import Sheaf.CategoryTheory.ConstantLeftModuleInverseImage
+import Sheaf.CategoryTheory.ModulePullbackTensorIso
+import Sheaf.Paper.ProEtaleConstructibleSheaf
 
 /-!
 # Finite-field scalar extension of constructible pro-etale complexes

@@ -13,6 +13,7 @@ import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekCoherence
 import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 import Sheaf.AlgebraicGeometry.EtaleModuleEnoughInjectives
 import Mathlib.Algebra.Homology.DerivedCategory.KInjective
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-! # Normalized composition of bounded-below étale direct images
 

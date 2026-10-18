@@ -12,6 +12,18 @@ public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Compar
 public import Mathlib.CategoryTheory.Triangulated.Opposite.Pretriangulated
 public import WeilConjectures.SixFunctors.Etale.Derived.Shift
 public import WeilConjectures.SixFunctors.Etale.Derived.AdjunctionShift
+import Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses
+import Sheaf.Algebra.Homology.HomComplex
+import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
+import Sheaf.Algebra.Homology.QuasiIsoHomComplexMap
+import Sheaf.Algebra.Homology.RingedDerivedClosedSymmetricMonoidal
+import Sheaf.Algebra.Homology.RingedInternalHomShiftOfUniverses
+import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
+import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
+import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
+import Sheaf.Paper.SfHomTriangulated
+import Sheaf.SixFunctors.EtaleHomComplexPullback
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 
 /-!
 # Étale pullback comparison for internal Hom triangles

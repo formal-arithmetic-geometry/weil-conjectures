@@ -27,6 +27,18 @@ import Sheaf.Paper.CohomologicalSmoothComposition
 import Sheaf.CategoryTheory.CompositeTensorTranspose
 import Sheaf.Paper.ExchangeProjectionSuppliedDomains
 import Sheaf.Paper.FiniteCompactSupportConstructibility
+import Sheaf.AlgebraicGeometry.CanonicalCompactSupportSiteComparison
+import Sheaf.AlgebraicGeometry.CompactSupportComparisonUnit
+import Sheaf.AlgebraicGeometry.ProjectionComparisonEtaleOrigin
+import Sheaf.AlgebraicGeometry.SpecifiedExceptionalClassHom
+import Sheaf.Paper.CanonicalFiniteLevelCompactSupportBaseChange
+import Sheaf.Paper.CanonicalOriginCompactSupportComposition
+import Sheaf.Paper.CohomologicalSmoothnessFiniteComparison
+import Sheaf.Paper.ConstructibleExceptionalAdjunctionCoefficients
+import Sheaf.Paper.DerivedPullbackTensorIso
+import Sheaf.Paper.ProjectionFormulaCoefficientCoherence
+import Sheaf.Paper.PurityAffineLineOrientationUniqueness
+import Sheaf.Paper.SmoothExceptionalBaseChangeStatement
 
 /-!
 # Cohomological smoothness for smooth morphisms

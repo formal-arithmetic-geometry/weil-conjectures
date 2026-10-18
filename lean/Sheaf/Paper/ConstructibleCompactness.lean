@@ -21,6 +21,9 @@ import Sheaf.Paper.ConstructibleCompactnessBounded
 import Sheaf.CategoryTheory.CompactObjectsThick
 import Sheaf.CategoryTheory.TruncationsAndHomotopyColimits
 import WeilConjectures.CategoryTheory.TruncationTriangle
+import Sheaf.Paper.AmbientIndDerivedSums
+import Sheaf.Paper.FiniteWindow
+import Sheaf.Paper.UniformConstructibleExt
 
 /-!
 # Compactness with rational coefficients

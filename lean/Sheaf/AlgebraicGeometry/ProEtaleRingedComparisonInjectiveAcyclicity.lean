@@ -15,6 +15,8 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
 import Sheaf.CategoryTheory.ModuleAbelianEvaluationComparison
 import Sheaf.AlgebraicGeometry.AbelianEtaleProEtaleCohomologyComparison
+import Sheaf.CategoryTheory.RingedSiteModules
+import Sheaf.CategoryTheory.RingedSiteModulesGrothendieckOfUniverses
 
 /-!
 # Acyclicity of comparison pullbacks of injective constant-ring modules

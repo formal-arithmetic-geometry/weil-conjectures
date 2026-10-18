@@ -8,6 +8,7 @@ module
 public import Mathlib.Algebra.Algebra.Defs
 public import Mathlib.RingTheory.Algebraic.Defs
 public import Mathlib.RingTheory.Valuation.ValuationSubring
+import Sheaf.RingTheory.ValuationValueGroupTorsion
 
 /-!
 # Algebraic extensions preserve valuation height

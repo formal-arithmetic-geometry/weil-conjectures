@@ -28,6 +28,9 @@ import Sheaf.Paper.FiniteRingConstructibleDerivedOrigin
 import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
 import Sheaf.AlgebraicGeometry.ProEtaleSiteComparisonFiniteLevel
 import Sheaf.AlgebraicGeometry.ProEtaleSiteComparisonDerived
+import Sheaf.AlgebraicGeometry.FiniteProetaleSmoothBaseChange
+import Sheaf.AlgebraicGeometry.ProEtaleFiniteModules
+import Sheaf.Paper.NormalizedEtaleOriginWitnesses
 
 /-! # Adic smooth base change
 

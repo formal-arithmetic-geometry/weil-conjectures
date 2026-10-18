@@ -30,6 +30,9 @@ import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 import Mathlib.CategoryTheory.Sites.CoverLifting
 
 public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
+import Sheaf.Algebra.Homology.RingedInternalHomShiftOfUniverses
+import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
 /-! # Slice restriction of evaluation, transpose and Koszul symmetry
 
 Source: Stacks Project, Tags 07A4, 08J9, 08JB, 08FI and 03EL;

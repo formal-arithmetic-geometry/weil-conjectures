@@ -15,6 +15,8 @@ import Mathlib.RingTheory.Regular.RegularSequence
 import Sheaf.RingTheory.Depth
 import Sheaf.RingTheory.DepthLeSupportDimension
 import Sheaf.RingTheory.RegularLocalGeneratorsRegularSequence
+import Sheaf.AlgebraicGeometry.IsRegularScheme
+import Sheaf.RingTheory.CohenMacaulayRingUniversallyCatenary
 
 /-!
 # Regular rings are universally catenary

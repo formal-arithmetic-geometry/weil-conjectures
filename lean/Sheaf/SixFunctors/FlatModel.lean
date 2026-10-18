@@ -44,6 +44,8 @@ import Mathlib.AlgebraicGeometry.Morphisms.Immersion
 import Sheaf.AlgebraicGeometry.OpenClosedRecollement
 import Sheaf.AlgebraicGeometry.ProEtaleRingedOpenClosed
 import Sheaf.CategoryTheory.ExactFunctorDerivedFunctor
+import Sheaf.AlgebraicGeometry.ProEtaleFiniteTorComparisonNoetherian
+import Sheaf.SixFunctors.FlatModelGeneration
 
 /-!
 # Flat models and generators

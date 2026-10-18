@@ -24,6 +24,7 @@ import Mathlib.AlgebraicGeometry.Morphisms.Etale
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
 import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Reduced
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Proper
+import Sheaf.Paper.DegreeZeroCompactSupportSections
 
 /-! # Degree-zero compact-support vanishing on a lisse affine curve
 

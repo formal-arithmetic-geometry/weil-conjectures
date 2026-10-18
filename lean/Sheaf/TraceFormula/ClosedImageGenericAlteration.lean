@@ -6,6 +6,12 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Properties
+import Sheaf.AlgebraicGeometry.ClosedPointField
+import Sheaf.AlgebraicGeometry.Morphisms.GenericFiniteOpenNeighborhood
+import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
+import WeilConjectures.AlgebraicGeometry.FibreProductPointResidueField
+import WeilConjectures.AlgebraicGeometry.FieldPointFactorsThroughImmersion
+import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 
 /-!
 # Generic-point closure gives an alteration of an image stratum

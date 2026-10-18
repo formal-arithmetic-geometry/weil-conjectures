@@ -10,6 +10,10 @@ public import Mathlib.FieldTheory.IsSepClosed
 public import Mathlib.RingTheory.Valuation.ValuationSubring
 
 import Mathlib.AlgebraicGeometry.Morphisms.Proper
+import Sheaf.AlgebraicGeometry.StrictlySemistableModelNormal
+import Sheaf.TraceFormula.FiniteFibreValuationDomination
+import Sheaf.TraceFormula.SingleValuationSemistableExtraction
+import Sheaf.TraceFormula.ValuationHorizontalCurveModels
 
 /-! # Strictly semistable modifications are cofinal over a strict model
 

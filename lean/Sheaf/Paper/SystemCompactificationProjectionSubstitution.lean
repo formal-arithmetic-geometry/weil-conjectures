@@ -19,6 +19,11 @@ import Sheaf.Paper.ProEtaleConstructibleOrigin
 import Sheaf.Paper.RefinementComparisonIsomorphism
 import Sheaf.CategoryTheory.RingedToposDerivedPushforwardComposition
 import WeilConjectures.Compactification.CategoryBaseChange
+import Sheaf.AlgebraicGeometry.StrictTowerProperOpenCalculus
+import Sheaf.AlgebraicGeometry.VaryingRingProperOpenPasting
+import Sheaf.Paper.ExchangeProjectionSuppliedDomains
+import Sheaf.Paper.SemilinearDerivedSections
+import Sheaf.SixFunctors.OpenTensorNormalization
 
 /-! # Refinement substitution in strict-system projection maps
 

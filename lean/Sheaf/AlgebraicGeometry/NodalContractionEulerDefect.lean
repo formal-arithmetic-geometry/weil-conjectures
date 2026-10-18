@@ -19,6 +19,7 @@ import WeilConjectures.AlgebraicGeometry.Cohomology.LongExact
 import WeilConjectures.AlgebraicGeometry.Regular
 import Sheaf.AlgebraicGeometry.FiniteBirationalNormalIso
 import WeilConjectures.AlgebraicGeometry.Morphisms.ProperQuasiFinite
+import Sheaf.TraceFormula.NodalSubcurveBoundary
 
 /-! # Euler defect of a nodal subcurve contracted to a smooth point
 

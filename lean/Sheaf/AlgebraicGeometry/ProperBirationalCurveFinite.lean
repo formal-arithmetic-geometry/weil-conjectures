@@ -11,6 +11,7 @@ public import Mathlib.Topology.KrullDimension
 import Mathlib.AlgebraicGeometry.Noetherian
 import Mathlib.AlgebraicGeometry.ZariskisMainTheorem
 import Sheaf.AlgebraicGeometry.QuasiFiniteMorphism
+import Sheaf.AlgebraicGeometry.DominantIntegralCurveQuasiFinite
 
 /-!
 # Proper birational morphisms of integral curves are finite

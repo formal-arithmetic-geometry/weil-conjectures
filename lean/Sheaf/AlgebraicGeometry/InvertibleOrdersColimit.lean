@@ -19,6 +19,8 @@ import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 import Sheaf.AlgebraicGeometry.TorsionFilteredUnion
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 import Mathlib.CategoryTheory.Sites.Point.Skyscraper
+import Sheaf.AlgebraicGeometry.PointedEtaleStalk
+import WeilConjectures.AlgebraicGeometry.GeometricStalkColimits
 
 /-!
 # The colimit description of invertible orders

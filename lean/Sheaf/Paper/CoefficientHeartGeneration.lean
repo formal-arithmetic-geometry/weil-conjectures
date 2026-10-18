@@ -17,6 +17,9 @@ import Sheaf.Paper.CoefficientHeartFiltration
 import Mathlib.Algebra.Homology.DerivedCategory.ShortExact
 import Sheaf.CategoryTheory.TruncationsAndHomotopyColimits
 import WeilConjectures.CategoryTheory.TruncationTriangle
+import Sheaf.Paper.CartesianCoefficients
+import Sheaf.Paper.CoefficientHeartTriangulated
+import Sheaf.Paper.CondensedConstantConstructibility
 
 /-!
 # Finite cone generation of the bounded constructible coefficient category

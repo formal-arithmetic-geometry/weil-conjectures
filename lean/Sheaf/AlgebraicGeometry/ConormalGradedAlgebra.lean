@@ -54,6 +54,17 @@ import Mathlib.Algebra.Module.FinitePresentation
 import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 
 import Sheaf.AlgebraicGeometry.Coherent
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
+import Sheaf.AlgebraicGeometry.TensorPullbackSectionAdjunction
+import WeilConjectures.AlgebraicGeometry.AffineConormalSections
+import WeilConjectures.AlgebraicGeometry.ClosedImmersionPushforwardAnnihilated
+import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import WeilConjectures.AlgebraicGeometry.GradedSheafStructures
+import WeilConjectures.AlgebraicGeometry.ModulePullbackAffineSections
+import WeilConjectures.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
+import WeilConjectures.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
+import WeilConjectures.RingTheory.AssociatedGradedRing
+import WeilConjectures.Topology.PresheafModuleStalkFunctor
 /-!
 # The conormal graded algebra of a closed immersion
 

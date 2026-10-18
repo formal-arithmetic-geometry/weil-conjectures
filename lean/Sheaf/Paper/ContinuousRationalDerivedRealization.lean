@@ -42,6 +42,8 @@ import Sheaf.CategoryTheory.ScalarLocalizationDerivedHom
 import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
 import WeilConjectures.ConstructibleSheaf.Pullback
 import Sheaf.Paper.IntegralTStructure
+import Sheaf.Paper.FiniteModelStratumFiltration
+import Sheaf.Paper.SfCommonStageWeilCohomology
 
 /-! # Continuous rational derived realization
 

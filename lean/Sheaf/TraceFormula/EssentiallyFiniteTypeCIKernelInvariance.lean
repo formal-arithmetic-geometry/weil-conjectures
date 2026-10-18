@@ -13,6 +13,7 @@ import Mathlib.Algebra.MvPolynomial.Basic
 import Mathlib.RingTheory.Localization.AtPrime.Basic
 import Mathlib.RingTheory.Localization.Defs
 import Mathlib.RingTheory.RegularLocalRing.Polynomial
+import Sheaf.TraceFormula.RegularLocalSurjectionKernelComparison
 
 /-!
 # Independence of essentially finite type complete-intersection presentations

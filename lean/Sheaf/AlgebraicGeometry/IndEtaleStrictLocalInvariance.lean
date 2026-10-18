@@ -9,6 +9,11 @@ public import Sheaf.AlgebraicGeometry.StrictHenselization
 public import Sheaf.AlgebraicGeometry.StrictHenselizationStructuralMap
 import Mathlib.AlgebraicGeometry.Pullbacks
 public import WeilConjectures.AlgebraicGeometry.Morphisms.ProAffineEtale
+import Sheaf.AlgebraicGeometry.StrictHenselizationAffineChartIndEtale
+import Sheaf.Paper.StrictHenselizationFunctoriality
+import Sheaf.RingTheory.IndEtaleStability
+import WeilConjectures.AlgebraicGeometry.StrictHenselizationStructuralMap
+import WeilConjectures.RingTheory.ProEtale.HenselianLocalRing
 
 /-! # Ind-etale invariance of strict localizations
 

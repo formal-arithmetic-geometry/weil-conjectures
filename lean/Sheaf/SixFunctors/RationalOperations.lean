@@ -55,6 +55,9 @@ import Sheaf.Paper.NormalizedDVRTower
 import Sheaf.Paper.PbcRationalTransport
 import Sheaf.SixFunctors.CoefIntegralFiniteExtension
 import Sheaf.SixFunctors.IntegralVerdier
+import Sheaf.SecSmoothPurity.IntrinsicCompactSupportRestriction
+import Sheaf.SixFunctors.CoefDualFormulaScalarTranspose
+import WeilConjectures.SixFunctors.Etale.Derived.IntegralCoefficients
 
 /-! # Identification of rational internal Hom and exceptional inverse image
 

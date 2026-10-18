@@ -19,6 +19,10 @@ import Sheaf.CategoryTheory.StrictRoosComparison
 import Sheaf.Paper.FiniteFreeCompletedScalarComparison
 import Sheaf.Paper.IntegralReductionTowerWellDefinedUnrestricted
 import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
+import Sheaf.AlgebraicGeometry.ProEtale.IsoSectionwiseInverseImage
+import Sheaf.Paper.ConstantCoefficientScalarNormalization
+import Sheaf.Paper.InverseImagePullbackComparisonDerived
 
 /-!
 # Canonical coefficient pullback and its finite quotient projections

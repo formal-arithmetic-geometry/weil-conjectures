@@ -13,6 +13,7 @@ import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits
 import Mathlib.CategoryTheory.Sites.EpiMono
 import Mathlib.CategoryTheory.Sites.LocallySurjective
+import Sheaf.AlgebraicGeometry.ProEtale.Projective
 
 /-!
 # Exact sections over a w-contractible affine pro-etale object

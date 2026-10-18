@@ -11,6 +11,7 @@ public import Sheaf.AlgebraicGeometry.AlgebraicSpaceJointSurjectivity
 public import Sheaf.AlgebraicGeometry.AlgebraicSpaceFibreProductsEtaleCovers
 public import Mathlib.AlgebraicGeometry.Scheme
 public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
+import Sheaf.AlgebraicGeometry.EtaleDescentThroughSourceCover
 
 /-!
 # Chartwise étale permanence for algebraic spaces

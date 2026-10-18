@@ -42,6 +42,10 @@ import Mathlib.AlgebraicGeometry.Morphisms.Etale
 import WeilConjectures.AlgebraicGeometry.RelativeEffectiveCartier
 import WeilConjectures.AlgebraicGeometry.EffectiveCartier
 import Mathlib.AlgebraicGeometry.Geometrically.Integral
+import Sheaf.AlgebraicGeometry.AlterationRelativeCurvePreparation
+import Sheaf.AlgebraicGeometry.NodalPairProjectiveResolution
+import Sheaf.AlgebraicGeometry.RelativeMarkedNodalReduction
+import Sheaf.SixFunctors.TraceFormula.ProjectiveNodalFamilyGeometry
 
 /-!
 # Plurinodal alteration over a trait and smooth alteration over a field

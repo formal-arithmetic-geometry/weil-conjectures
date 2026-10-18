@@ -2,6 +2,8 @@ import Mathlib.AlgebraicGeometry.Limits
 import Mathlib.AlgebraicGeometry.Morphisms.Etale
 import Mathlib.AlgebraicGeometry.ResidueField
 import Mathlib.AlgebraicGeometry.AlgClosed.Basic
+import WeilConjectures.AlgebraicGeometry.EtaleFibreDiscreteSeparablePoints
+import WeilConjectures.AlgebraicGeometry.UnramifiedEtaleLocalDecomposition
 
 /-!
 # Split an affine étale morphism near a marked geometric fibre

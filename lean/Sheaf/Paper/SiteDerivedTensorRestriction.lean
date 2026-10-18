@@ -12,6 +12,16 @@ public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 
 public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
+import Sheaf.Algebra.Category.ModuleCat.Presheaf.SheafificationBilinearExtension
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorClosed
+import Sheaf.Algebra.Homology.ChangeOfRingsKFlat
+import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
+import Sheaf.Algebra.Homology.KFlat
+import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
+import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
+import WeilConjectures.FromJoel.Algebra.Homology.BifunctorMappingCone
+import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
 -- r4: side KFlat instances (global there), as local instances of the live theorems
 attribute [local instance] SheafOfModules.isMonoidal_W_independentCoefficients
   SheafOfModules.preservesZeroMorphisms_curriedTensor_independentCoefficients

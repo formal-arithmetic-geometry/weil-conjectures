@@ -16,6 +16,19 @@ import Sheaf.AlgebraicGeometry.EtaleLocalNormalForm
 import Sheaf.AlgebraicGeometry.DiagonalRegularPureCodimension
 import Sheaf.Paper.PurTwistSheafLocallyFree
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.HomCoverGluing
+import Sheaf.Paper.CanonicalOriginCompactSupportComposition
+import Sheaf.Paper.CartesianCoefficientTwists
+import Sheaf.Paper.CohomologicalSmoothComposition
+import Sheaf.Paper.CohomologicalSmoothnessFiniteComparison
+import Sheaf.Paper.CohomologicalSmoothnessTheorem
+import Sheaf.Paper.ConstructibleExceptionalAdjunctionCoefficients
+import Sheaf.Paper.IntegralFinitePullbackComposition
+import Sheaf.Paper.IntrinsicCoefficientTwistsUnrestricted
+import Sheaf.Paper.ProEtaleConstructibleOrigin
+import Sheaf.Paper.PurityDiagonalDualizingObject
+import Sheaf.Paper.PurityDiagonalSectionPasting
+import Sheaf.Paper.PurityDncComparisons
+import Sheaf.Paper.VectorBundlePurity
 
 /-! # Composition coherence for the specified smooth purity maps
 

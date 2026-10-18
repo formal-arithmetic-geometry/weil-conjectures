@@ -11,6 +11,9 @@ public import Mathlib.RingTheory.Flat.Basic
 public import Mathlib.RingTheory.LocalRing.Basic
 public import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
 public import Mathlib.LinearAlgebra.Quotient.Basic
+import Sheaf.RingTheory.LocalEssentiallyFinitePresentationModInjective
+import Sheaf.SecTraceFormula.ValuationFiniteModuleFpReduction
+import Sheaf.TraceFormula.ValuationFlatFiniteModulePresentation
 
 /-!
 # Injectivity from the closed fibre over a valuation ring

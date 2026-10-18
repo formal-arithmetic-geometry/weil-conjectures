@@ -15,6 +15,9 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 import Mathlib.CategoryTheory.Yoneda
 import Mathlib.CategoryTheory.Adjunction.Unique
+import Sheaf.AlgebraicGeometry.SfIntrinsicCompactSupport
+import Sheaf.AlgebraicGeometry.SpecifiedExceptionalClassHom
+import WeilConjectures.Compactification.Refinement
 
 /-!
 # Closed support and the transported exceptional inverse image

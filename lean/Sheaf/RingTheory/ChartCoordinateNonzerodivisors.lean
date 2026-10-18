@@ -3,6 +3,9 @@ import Mathlib.RingTheory.MvPowerSeries.Basic
 import Mathlib.RingTheory.Ideal.Quotient.Index
 import Mathlib.RingTheory.MvPolynomial.Basic
 import Sheaf.RingTheory.IsRegularSystemOfParameters
+import Sheaf.AlgebraicGeometry.BlowupChartRegularSequencePresentation
+import Sheaf.RingTheory.RegularLocalGeneratorsRegularSequence
+import WeilConjectures.Blowup.Affine.Principalization
 
 /-!
 # Nonzerodivisors in regular coordinate charts

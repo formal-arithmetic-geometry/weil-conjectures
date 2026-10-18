@@ -13,6 +13,9 @@ import Sheaf.Paper.ProjectiveBundleFormula
 import Sheaf.AlgebraicGeometry.ProjectiveBundleTautologicalGeometry
 import WeilConjectures.AlgebraicGeometry.EffectiveCartier
 import Sheaf.Paper.SupportedCohomologyHom
+import Sheaf.AlgebraicGeometry.CartierKummerMap
+import Sheaf.Paper.ClosedSupportedCupVanishing
+import Sheaf.Paper.SupportedCupFunctoriality
 
 /-!
 # The Chern polynomial of a bundle filtered by line quotients

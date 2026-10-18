@@ -15,6 +15,10 @@ public import Mathlib.AlgebraicGeometry.Geometrically.Connected
 import Sheaf.AlgebraicGeometry.Curve.DenseOpenFiniteComplement
 import WeilConjectures.CategoryTheory.Triangulated.TStructure.Homology
 import WeilConjectures.DeligneLaumon.AffineLine.Perverse
+import Sheaf.Paper.A1QbarOpenClosedCohomology
+import Sheaf.Paper.BoundaryHomVanishing
+import Sheaf.Paper.CommonStageCurveWeilMiddleExtension
+import Sheaf.Paper.SfWeilSheafComplex
 
 /-! # Ordinary and perverse intermediate extension on a smooth curve
 

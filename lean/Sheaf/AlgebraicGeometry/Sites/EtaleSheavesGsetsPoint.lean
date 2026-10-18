@@ -13,6 +13,7 @@ public import Sheaf.AlgebraicGeometry.EtaleFieldGsets
 import WeilConjectures.AlgebraicGeometry.EtaleFibreDiscreteSeparablePoints
 import Sheaf.AlgebraicGeometry.Sites.FieldSectionsStalkInvariants
 import WeilConjectures.AlgebraicGeometry.Sites.SmallEtaleRepresentablePresheafSheaf
+import Sheaf.AlgebraicGeometry.PointedEtaleStalk
 
 /-!
 # Étale sheaves and discrete Galois sets

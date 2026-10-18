@@ -7,6 +7,10 @@ module
 public import Sheaf.AlgebraicGeometry.ProEtaleIsomorphismInverseImage
 public import Sheaf.Paper.CompletedIntegralCoefficients
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.ScalarExtensionRingIso
+import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
+import Sheaf.CategoryTheory.RingedSiteModules
+import WeilConjectures.CategoryTheory.SiteEquivalenceMorphismOfSites
 
 /-!
 # Sectionwise inverse image along a scheme isomorphism

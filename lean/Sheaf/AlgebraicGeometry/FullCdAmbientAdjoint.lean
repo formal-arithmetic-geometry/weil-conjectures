@@ -55,6 +55,16 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
 import WeilConjectures.Compactification.CategoryBaseChange
 import Mathlib.CategoryTheory.Adjunction.Basic
 public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products
+import Sheaf.Algebra.Homology.KInjectiveRestrictLocalized
+import Sheaf.AlgebraicGeometry.ClopenSectionComponent
+import Sheaf.AlgebraicGeometry.IntrinsicDerivedOpenAdjunction
+import Sheaf.AlgebraicGeometry.ProEtaleConstantRingOperations
+import Sheaf.AlgebraicGeometry.ProEtaleDerivedExtensionZeroBaseChange
+import Sheaf.AlgebraicGeometry.ProperOpenDerivedSupport
+import Sheaf.Paper.FiniteDirectImageComposition
+import Sheaf.Paper.RingedProjectionRestriction
+import Sheaf.Paper.SfCommonStageDirectImage
+import WeilConjectures.CategoryTheory.RingedSiteGrothendieckAbelian
 
 /-! # Full cohomological dimension and the ambient exceptional adjoint
 

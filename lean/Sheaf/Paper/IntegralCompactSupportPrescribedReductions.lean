@@ -36,6 +36,13 @@ import Sheaf.Paper.SfCompactSupportRestrictionOfScalars
 import Sheaf.Paper.NormalizedDVRTower
 import Mathlib.Algebra.Homology.DerivedCategory.Fractions
 import Sheaf.Paper.NormalizedDVREffectivity
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
+import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
+import Sheaf.Paper.CompactificationCoherence
+import Sheaf.Paper.EtaleCompactSupportCoefficientChange
+import Sheaf.Paper.QcqsCompactSupportRealization
+import Sheaf.Paper.SfIntegralConstructible
+import Sheaf.SecSmoothPurity.IntrinsicCompactSupportRestriction
 
 /-!
 # Integral compact supports have the prescribed reductions

@@ -13,6 +13,12 @@ public import Sheaf.AlgebraicGeometry.ModuleStrictTransform
 public import Sheaf.AlgebraicGeometry.FiniteTypeIdealModule
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
 public import WeilConjectures.AlgebraicGeometry.TensorPullback
+import Sheaf.AlgebraicGeometry.ModuleAdmissibleBlowupCalculus
+import Sheaf.AlgebraicGeometry.RelativeFlatnessSourceCover
+import Sheaf.RingTheory.EtaleIdealLocalFactor
+import WeilConjectures.Blowup.Extension
+import WeilConjectures.Blowup.Principalization
+import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Invertible
 
 /-!
 # Etale descent of local module flatifications

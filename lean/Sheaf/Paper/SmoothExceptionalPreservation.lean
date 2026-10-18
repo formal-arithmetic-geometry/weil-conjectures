@@ -39,6 +39,13 @@ import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
 import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
+import Sheaf.AlgebraicGeometry.ConstructibleModuleUnderlyingSets
+import Sheaf.AlgebraicGeometry.EtaleLocalIsomorphismConstructible
+import Sheaf.Paper.ComparisonTorAmplitude
+import Sheaf.Paper.FiniteTorAmplitudeSites
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
+import WeilConjectures.AlgebraicGeometry.FiniteLocallyConstantModuleValues
+import WeilConjectures.AlgebraicGeometry.ModuleLocalConstancyOfFiniteUnderlying
 /-! # Smooth exceptional inverse image preserves the two finite coefficient classes
 
 Source: blueprint sec-six-functors/sk-prop-sf-rf-shriek-preservation,

@@ -6,6 +6,7 @@ public import Mathlib.RingTheory.Ideal.Quotient.Defs
 public import Mathlib.CategoryTheory.Functor.Derived.LeftDerived
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import Mathlib.Algebra.Homology.DerivedCategory.KProjective
+import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
 
 @[expose] public section
 set_option autoImplicit false

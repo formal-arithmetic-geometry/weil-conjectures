@@ -4,6 +4,8 @@ public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.IntegralClosure.Algebra.Basic
 public import Mathlib.RingTheory.Localization.FractionRing
 public import Mathlib.RingTheory.LocalRing.Basic
+import Sheaf.RingTheory.LocalizationPrimeResidueFieldIso
+import Sheaf.TraceFormula.NormalizationFiniteLocalModel
 
 /-!
 # Principal height-one refinement in a normalization

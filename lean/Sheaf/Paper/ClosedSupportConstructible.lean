@@ -28,6 +28,10 @@ import Mathlib.CategoryTheory.Functor.Derived.Adjunction
 import Mathlib.CategoryTheory.Adjunction.FullyFaithful
 import Sheaf.CategoryTheory.OrthogonalTriangleCounitNormalization
 import Sheaf.Paper.CoefficientHeartTriangulated
+import Sheaf.Paper.CondensedModuleDerivedPushpull
+import Sheaf.Paper.FormalClosedSupportDerived
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs
 
 /-!
 # Constructibility of sections with closed support

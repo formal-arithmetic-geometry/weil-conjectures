@@ -17,6 +17,7 @@ import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
 import WeilConjectures.AlgebraicGeometry.Modules.InvertiblePullbackTensor
 import WeilConjectures.AlgebraicGeometry.NonvanishingSectionTrivializes
 import WeilConjectures.AlgebraicGeometry.TensorPullback
+import Sheaf.AlgebraicGeometry.TensorPullbackSectionAdjunction
 
 /-!
 # Chart preimages and coordinate ratios for generating sections

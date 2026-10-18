@@ -15,6 +15,7 @@ import Sheaf.AlgebraicGeometry.ConstructibleEtaleModuleLimitDescent
 import Sheaf.CategoryTheory.SitePullbackAbelianExact
 import WeilConjectures.CategoryTheory.TruncationTriangle
 import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
+import Sheaf.TraceFormula.BoundedConstructibleDerivedHomContinuity
 
 /-! # Spread out finite-type nearby-cycle input to an arithmetic base
 

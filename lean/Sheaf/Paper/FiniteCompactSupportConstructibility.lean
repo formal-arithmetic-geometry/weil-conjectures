@@ -28,6 +28,20 @@ import Sheaf.AlgebraicGeometry.EtaleRestrictScalarsFunctorComparisons
 import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
 import Sheaf.AlgebraicGeometry.EtaleRestrictScalarsAdjunctionIdentities
 import Sheaf.Algebra.Homology.ChangeOfRingsTensorComparison
+import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
+import Sheaf.Algebra.Homology.KFlat
+import Sheaf.AlgebraicGeometry.CanonicalCompactSupportSiteComparison
+import Sheaf.AlgebraicGeometry.FiniteTypeSheafFiniteness
+import Sheaf.CategoryTheory.BoundedHeartAmplitude
+import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
+import Sheaf.Paper.CompactSupportDirectImageTriangulated
+import Sheaf.Paper.CompactificationCoherence
+import Sheaf.Paper.PurEtaleScalarMateProjection
+import Sheaf.SecSmoothPurity.IntrinsicCompactSupportRestriction
+import WeilConjectures.ConstructibleSheaf.OpenClosed
+import WeilConjectures.SixFunctors.Etale.Derived.LowerStarProjection
+import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerShriek
 
 /-!
 # Finite-level bounded constructibility for proper support

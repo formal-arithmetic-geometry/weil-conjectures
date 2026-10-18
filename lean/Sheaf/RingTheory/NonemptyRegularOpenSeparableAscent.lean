@@ -15,6 +15,8 @@ public import Mathlib.RingTheory.Localization.FractionRing
 import Mathlib.RingTheory.Localization.Submodule
 import Mathlib.AlgebraicGeometry.OpenImmersion
 import Sheaf.RingTheory.RegularRingSmoothAscent
+import Sheaf.AlgebraicGeometry.IsRegularScheme
+import Sheaf.RingTheory.GenericSmoothDomain
 
 /-!
 # Ascent of a nonempty regular open for separable fraction fields

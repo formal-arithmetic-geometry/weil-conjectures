@@ -8,6 +8,8 @@ public import Sheaf.AlgebraicGeometry.ProEtaleDerivedCategory
 public import Sheaf.CategoryTheory.SiteDerivedConstantModuleFunctor
 public import Sheaf.CategoryTheory.RingedDerivedRestrictionGeneral
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
+import Sheaf.AlgebraicGeometry.ProEtale.ConstantRealizationDetectsZero
+import Sheaf.CategoryTheory.CommutativeSiteDerivedConstantModuleFunctor
 
 /-!
 # Constant realization reflects derived isomorphisms on a nonempty pro-étale object

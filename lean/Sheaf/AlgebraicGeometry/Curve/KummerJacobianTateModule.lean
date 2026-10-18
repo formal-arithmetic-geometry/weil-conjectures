@@ -21,6 +21,9 @@ import WeilConjectures.AlgebraicGeometry.EtaleCohomologyPullbackFunctorial
 import WeilConjectures.AlgebraicGeometry.GlobalSectionsBijective
 import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 import WeilConjectures.CategoryTheory.Sites.Torsor
+import WeilConjectures.AlgebraicGeometry.AbelianVariety.TateModule
+import WeilConjectures.AlgebraicGeometry.Curve
+import WeilConjectures.AlgebraicGeometry.Sites.Gm
 
 /-! # Kummer comparison with the geometric Jacobian
 

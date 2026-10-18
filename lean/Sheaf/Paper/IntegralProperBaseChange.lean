@@ -12,6 +12,21 @@ public import Sheaf.AlgebraicGeometry.ChosenCartesianSquare
 public import Sheaf.Paper.CondensedAmbientExchange
 public import Sheaf.Paper.ModuleObjectProjectionMap
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+import Sheaf.AlgebraicGeometry.ConstructibleProEtaleComparison
+import Sheaf.AlgebraicGeometry.IntegralConstantCompletion
+import Sheaf.AlgebraicGeometry.ProEtaleIntegralCoefficientLimit
+import Sheaf.CategoryTheory.DerivedCategory.StandardQuotientsPerfect
+import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
+import Sheaf.NumberTheory.Padics.ExtensionIntegersDvr
+import Sheaf.Paper.BasicOperationsCoefficientReduction
+import Sheaf.Paper.CartesianCoefficients
+import Sheaf.Paper.CompletedDirectImageLimits
+import Sheaf.Paper.DerivedNakayamaFirstReduction
+import Sheaf.Paper.DerivedNakayamaResolution
+import Sheaf.Paper.FiniteProperBaseChange
+import Sheaf.Paper.IntegralCriterionReductions
+import Sheaf.Paper.ProjectionFormulaBaseChangeNaturality
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible
 /-!
 # Proper base change with integral adic coefficients
 

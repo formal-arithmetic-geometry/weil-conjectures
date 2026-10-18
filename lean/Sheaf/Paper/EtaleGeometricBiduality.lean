@@ -112,6 +112,23 @@ import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 import Mathlib.Topology.Constructible
 import Mathlib.AlgebraicGeometry.Properties
+import Sheaf.AlgebraicGeometry.AffineSpaceAmbientAdjunction
+import Sheaf.AlgebraicGeometry.EtaleClosedCoprojection
+import Sheaf.AlgebraicGeometry.EtaleGenericExchangeAlgClosed
+import Sheaf.AlgebraicGeometry.EtaleLocalDualInterval
+import Sheaf.AlgebraicGeometry.EtaleTwistedBidualTransport
+import Sheaf.AlgebraicGeometry.SmoothStratificationFiniteTor
+import Sheaf.AlgebraicGeometry.UnboundedCompactSupportProperComposition
+import Sheaf.CategoryTheory.DerivedCategory.NoetherianFlatComplexPerfect
+import Sheaf.Paper.DirectImageTorAmplitude
+import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
+import Sheaf.Paper.StratumAmbientHom
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
+import WeilConjectures.AlgebraicGeometry.InverseImageStalkGerm
+import WeilConjectures.AlgebraicGeometry.ZeroDimensionalCohomology
+import WeilConjectures.CategoryTheory.TruncationHypercohomology
+import WeilConjectures.SixFunctors.Etale.Derived.OpenImmersionLowerShriekProjection
+import WeilConjectures.SixFunctors.Etale.Derived.Triangulated
 
 /-! # Finite-stage geometric Verdier biduality on the etale site
 

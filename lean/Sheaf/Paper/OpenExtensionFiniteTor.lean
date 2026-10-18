@@ -14,6 +14,12 @@ import Mathlib.Topology.LocallyClosed
 import Sheaf.AlgebraicGeometry.ProEtaleRingedOpenClosed
 import Sheaf.AlgebraicGeometry.ProEtaleDerivedPullbackComposition
 import Sheaf.AlgebraicGeometry.ProEtaleOperations
+import Sheaf.AlgebraicGeometry.ProEtaleOpenTensor
+import Sheaf.Paper.DerivedPullbackTensorHom
+import Sheaf.Paper.FiniteTorAmplitudeSites
+import Sheaf.Paper.IntegralFinitePullbackComposition
+import Sheaf.Paper.IntrinsicFiniteTorsionConstructibility
+import Sheaf.Paper.SfCommonStageWeilCohomology
 
 /-!
 # Extension by zero preserves finite-Tor constructibility

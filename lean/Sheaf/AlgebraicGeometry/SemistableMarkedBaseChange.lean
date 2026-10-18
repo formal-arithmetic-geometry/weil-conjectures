@@ -30,6 +30,9 @@ import Sheaf.RingTheory.LocalCompletionQuotient
 import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
 import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.TransitionUnits
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
+import Sheaf.SixFunctors.TraceFormula.NodalFamilyEtaleLocalModel
+import Sheaf.SixFunctors.TraceFormula.NodalFamilyFittingSingular
+import Sheaf.TraceFormula.NodeAlgebraicallyClosedExtension
 
 /-! # Base change of semistable multipointed curves
 

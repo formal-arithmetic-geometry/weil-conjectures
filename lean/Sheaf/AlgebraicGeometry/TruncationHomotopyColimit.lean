@@ -12,6 +12,7 @@ public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
 import Sheaf.Algebra.Homology.ComplexColimitHomotopyColimit
+import WeilConjectures.AlgebraicGeometry.DerivedCategories
 
 /-!
 # Recovery of an etale complex from its upper truncations

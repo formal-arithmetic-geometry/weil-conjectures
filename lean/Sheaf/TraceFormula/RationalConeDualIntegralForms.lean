@@ -7,6 +7,7 @@ module
 
 public import Mathlib.RingTheory.TensorProduct.Basic
 public import Mathlib.LinearAlgebra.Dimension.Finite
+import Sheaf.TraceFormula.RationalConeDualFinite
 
 /-!
 # Integral dual forms for pointed rational cones

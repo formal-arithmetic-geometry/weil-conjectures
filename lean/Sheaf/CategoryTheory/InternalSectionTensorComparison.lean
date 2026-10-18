@@ -19,6 +19,9 @@ import Sheaf.CategoryTheory.RingedSiteModules
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 
 public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
+import Sheaf.Algebra.Homology.KFlat
+import Sheaf.CategoryTheory.SheafTensorStructure
+import WeilConjectures.CategoryTheory.ModuleObjects.Monoidal
 /-! # Internal and sectionwise tensor products
 
 Source: Stacks Project, Modules on Sites, Tags 03EK and 0GMW;

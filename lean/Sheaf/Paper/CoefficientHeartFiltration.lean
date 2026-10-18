@@ -12,6 +12,8 @@ public import Mathlib.CategoryTheory.Subobject.Lattice
 import Sheaf.AlgebraicGeometry.ProEtaleOpenClosedSequenceRingSheaf
 import Sheaf.AlgebraicGeometry.LocallyClosedExtensionCoherence
 import Mathlib.AlgebraicGeometry.Noetherian
+import Sheaf.Paper.CartesianCoefficients
+import Sheaf.Paper.CoefficientHeartClosure
 
 /-!
 # The filtration associated to an adapted coefficient stratification

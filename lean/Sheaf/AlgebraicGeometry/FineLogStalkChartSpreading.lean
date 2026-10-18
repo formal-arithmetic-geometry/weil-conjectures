@@ -13,6 +13,7 @@ import Mathlib.CategoryTheory.Limits.FilteredColimitCommutesFiniteLimit
 import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 import Sheaf.TraceFormula.FgCommutativeMonoidFinitePresentation
 import Sheaf.AlgebraicGeometry.AssociatedLogUniversalStalks
+import Sheaf.AlgebraicGeometry.PointedEtaleStalk
 
 /-!
 # Spreading a specified chart of a fine log stalk

@@ -14,6 +14,8 @@ import WeilConjectures.ConstructibleSheaf.Pullback
 import Mathlib.AlgebraicGeometry.Sites.MorphismProperty
 import Mathlib.CategoryTheory.Limits.MorphismProperty
 import Mathlib.Topology.NoetherianSpace
+import Sheaf.CategoryTheory.ConstantLeftModuleInverseImage
+import Sheaf.SixFunctors.GeometricInverseImageConstantModule
 
 /-!
 # Affine-local and global constructibility on Noetherian schemes

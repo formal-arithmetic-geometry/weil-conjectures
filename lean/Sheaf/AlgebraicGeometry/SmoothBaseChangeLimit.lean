@@ -18,6 +18,15 @@ import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Affine
 public import WeilConjectures.SixFunctors.BaseChange.Derived
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import Sheaf.AlgebraicGeometry.HigherDirectImagesLimits
+import Sheaf.AlgebraicGeometry.HypercohomologyConvergenceStatement
+import Sheaf.AlgebraicGeometry.HypercohomologyFiltrations
+import Sheaf.AlgebraicGeometry.TruncationExchangeAbutment
+import Sheaf.AlgebraicGeometry.TruncationExchangeCouple
+import Sheaf.CategoryTheory.ExactCoupleMorphism
+import Sheaf.CategoryTheory.FiniteFiltrationInduction
+import Sheaf.Paper.KunBcMapOnCohomology
+import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Theorem
 
 /-!
 # Smooth base change for limits of smooth schemes

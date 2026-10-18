@@ -25,6 +25,7 @@ import Sheaf.Paper.CompactificationRefinementLocalizing
 import Sheaf.Compactification.CommonDenseRefinement
 import Sheaf.Compactification.DenseRefinementMorphisms
 import Sheaf.Paper.InterchangeProperPasting
+import Sheaf.Compactification.BoundaryRefinement
 
 /-!
 # Composition of rational lower shriek on localizing constructible categories

@@ -6,6 +6,7 @@ Authors: SHEAF Q44
 module
 
 public import Sheaf.LinearAlgebra.FrobeniusModuleWeights
+import WeilConjectures.Mathlib.LinearAlgebra.Charpoly.Basic
 
 /-!
 # Spectrum of an exact Frobenius sequence

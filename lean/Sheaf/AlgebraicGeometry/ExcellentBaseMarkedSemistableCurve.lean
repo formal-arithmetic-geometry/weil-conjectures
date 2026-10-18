@@ -17,6 +17,9 @@ public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Fiber
 public import Mathlib.Topology.KrullDimension
 public import Mathlib.Topology.Sober
+import Sheaf.AlgebraicGeometry.ExcellentBaseGenericCurvePreparation
+import Sheaf.SixFunctors.TraceFormula.DeJongArbitraryBaseMarkedSemistable
+import Sheaf.SixFunctors.TraceFormula.FiniteEtaleMarkingSections
 
 /-!
 # Marked semistable curve after alteration over an excellent base

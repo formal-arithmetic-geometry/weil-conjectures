@@ -22,6 +22,8 @@ import Sheaf.Algebra.Homology.FilteredColimitsTensor
 import Sheaf.CategoryTheory.TruncationsAndHomotopyColimits
 import Sheaf.Algebra.Homology.KFlat
 import Mathlib.Algebra.Homology.BifunctorShift
+import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
+import WeilConjectures.CategoryTheory.TruncationTriangle
 
 /-!
 # Cohomological bounds for derived extension of ring-sheaf scalars

@@ -12,6 +12,14 @@ public import Mathlib.RingTheory.LocalRing.ResidueField.Fiber
 public import Mathlib.RingTheory.RingHom.Flat
 import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Sheaf.RingTheory.CompleteIntersectionOverField
+import Sheaf.Paper.NoetherianApproximation
+import Sheaf.Paper.RelativeGlobalCompleteIntersectionBaseChange
+import Sheaf.RingTheory.FilteredColimitFiniteData
+import Sheaf.RingTheory.FinitePresentationModelStage
+import Sheaf.RingTheory.RelativeGlobalCompleteIntersectionFlat
+import Sheaf.RingTheory.SyntomicAtPrimeRelativeGlobalCompleteIntersection
+import WeilConjectures.Algebra.LimitFinitePresentation.Colimits
+import WeilConjectures.AlgebraicGeometry.RelativeGlobalCompleteIntersectionPresentation
 
 /-!
 # Descent of syntomic ring maps along filtered colimits

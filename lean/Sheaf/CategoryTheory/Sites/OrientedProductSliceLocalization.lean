@@ -8,6 +8,10 @@ module
 public import Sheaf.Paper.OrientedAffineNeighbourhoodLimit
 public import Mathlib.CategoryTheory.Comma.Over.Pullback
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
+import Sheaf.CategoryTheory.SiteInverseImageTensor
+import Sheaf.CategoryTheory.Sites.LocalizedSheavesOverRepresentable
+import Sheaf.CategoryTheory.Sites.OrientedProductLargeSites
+import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtaleOver
 
 /-!
 # Localization of an oriented product at a representable triple

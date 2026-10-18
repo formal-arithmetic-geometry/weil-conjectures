@@ -43,6 +43,8 @@ import Mathlib.AlgebraicGeometry.Morphisms.Proper
 import Mathlib.AlgebraicGeometry.Sites.Fpqc
 import Mathlib.AlgebraicGeometry.Sites.Proetale
 import Mathlib.Topology.Constructible
+import Sheaf.Compactification.BoundaryRefinement
+import Sheaf.SixFunctorsBasics.BrownHypotheses
 
 /-!
 # Open restriction of the Brown exceptional inverse image

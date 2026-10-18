@@ -22,6 +22,11 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Normalization
 import Sheaf.AlgebraicGeometry.ReducedNormalization
 import WeilConjectures.AlgebraicGeometry.FinitePushforwardCoherent
 import WeilConjectures.AlgebraicGeometry.CoherentKernelCokernelSum
+import Sheaf.AlgebraicGeometry.NormalizedBlowupCalculus
+import Sheaf.AlgebraicGeometry.ReducedAlgebraicNormalizationFieldChange
+import Sheaf.RingTheory.AnnihilatorFiniteFlatBaseChange
+import Sheaf.RingTheory.AnnihilatorLocalizationAway
+import WeilConjectures.AlgebraicGeometry.SchemeTheoreticSupport
 
 /-!
 # Conductor and smooth base change

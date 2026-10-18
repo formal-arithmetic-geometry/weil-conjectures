@@ -15,6 +15,8 @@ import Mathlib.CategoryTheory.Sites.Sheafification
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorBilinearUniversal
 import Sheaf.Paper.RingedTopoiTensorComparisonConstruction
 import Sheaf.AlgebraicGeometry.RingedTopoiModuleAdjunctionRepair
+import Sheaf.CategoryTheory.ModulePullbackPushforwardAdjunction
+import Sheaf.CategoryTheory.SiteInverseImageCompositionGenerators
 
 /-!
 # Normalized tensor comparison for pro-etale inverse image

@@ -40,6 +40,9 @@ import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolutionInjective
 import Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
 import Sheaf.CategoryTheory.Abelian.RHomDerivedRoof
+import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
+import Sheaf.CategoryTheory.LocalizedModuleExactForSystems
+import WeilConjectures.CategoryTheory.ExtensionByZeroPresheaf
 
 /-!
 # Supported cohomology as morphisms

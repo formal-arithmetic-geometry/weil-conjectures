@@ -6,6 +6,9 @@ module
 
 public import Sheaf.CategoryTheory.LocalizedModuleExactIndependent
 public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+import Sheaf.CategoryTheory.LocalizedModuleExactForSystems
+import Sheaf.CategoryTheory.RingedSiteModules
+import WeilConjectures.CategoryTheory.ExtensionByZeroPresheaf
 
 /-!
 # Linearity of localized extension by zero on derived module sheaves

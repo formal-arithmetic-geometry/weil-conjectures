@@ -24,6 +24,7 @@ import Mathlib.CategoryTheory.Preadditive.Injective.Basic
 import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
 import Sheaf.CategoryTheory.KInjectiveTotalDerived
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-!
 # Naturality of the supported Hom identification under base change

@@ -9,6 +9,10 @@ public import Sheaf.Paper.PbcQbarCategory
 public import WeilConjectures.CategoryTheory.Idempotents.Triangulated
 
 import Sheaf.Paper.PbcFilteredRetractDescent
+import Sheaf.Paper.FiniteStagePairCategory
+import Sheaf.Paper.IntrinsicQbarCategory
+import Sheaf.Paper.PbcFiniteStageKaroubian
+import Sheaf.Paper.PbcVerdierAxioms
 
 /-! # Idempotent completeness of the Qbar coefficient category
 

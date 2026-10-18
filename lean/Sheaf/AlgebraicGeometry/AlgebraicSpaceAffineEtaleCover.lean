@@ -10,6 +10,7 @@ public import Mathlib.AlgebraicGeometry.Limits
 public import Mathlib.Topology.Defs.Induced
 import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen
 import Sheaf.AlgebraicGeometry.AlgebraicSpaceFibreProductPoint
+import Sheaf.AlgebraicGeometry.AlgebraicSpace
 
 /-!
 # Affine étale atlases and the topology of an algebraic space

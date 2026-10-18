@@ -22,6 +22,11 @@ import Sheaf.Paper.ProEtaleSurjectiveClosedCoverRefinement
 import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 import Sheaf.AlgebraicGeometry.ProEtaleConstantRingMap
 import Sheaf.AlgebraicGeometry.UniversalHomeomorphismInvariance
+import Sheaf.AlgebraicGeometry.ProEtaleObjectInverseImageRestriction
+import Sheaf.CategoryTheory.ConstantLeftModuleInverseImage
+import Sheaf.CategoryTheory.ModulePullbackPushforwardAdjunction
+import Sheaf.Paper.ProEtaleLocallyConstantSheafOfUniverses
+import Sheaf.SixFunctors.GeometricInverseImageConstantModule
 
 /-!
 # Surjective closed immersions and ordinary module sheaves

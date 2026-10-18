@@ -39,6 +39,8 @@ import Mathlib.AlgebraicGeometry.Morphisms.Separated
 import Mathlib.AlgebraicGeometry.Limits
 import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 import Mathlib.RingTheory.Spectrum.Prime.Topology
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
+import Sheaf.TraceFormula.IdealTwistVanishingImpliesAmple
 
 /-! # Finite surjective reflection of ampleness
 

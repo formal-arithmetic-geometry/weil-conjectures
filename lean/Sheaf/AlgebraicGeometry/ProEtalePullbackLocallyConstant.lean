@@ -10,6 +10,10 @@ public import Sheaf.AlgebraicGeometry.ProEtaleConstantRingMap
 public import Sheaf.Paper.ProEtaleFixedModuleLocalConstancy
 import Sheaf.CategoryTheory.SiteInverseImageTensor
 import Sheaf.Paper.LocalizeRingedSiteMorphism
+import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
+import Sheaf.CategoryTheory.ConstantLeftModuleInverseImage
+import Sheaf.Paper.LocalizeRingedSiteMorphismGeneral
+import Sheaf.SixFunctors.GeometricInverseImageConstantModule
 
 /-!
 # Pullback of locally constant finite module sheaves

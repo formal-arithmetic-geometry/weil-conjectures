@@ -31,6 +31,9 @@ import Sheaf.Algebra.Homology.KInjectiveProducts
 import WeilConjectures.CategoryTheory.Triangulated.DerivedLimit
 import Sheaf.AlgebraicGeometry.ProEtaleAffineWeaklyContractibleCover
 import Sheaf.CategoryTheory.SiteTruncationDerivedLimit
+import Sheaf.AlgebraicGeometry.ProEtale.ClosedInverseImageFormula
+import Sheaf.AlgebraicGeometry.ProEtaleConstantRingOperations
+import Sheaf.AlgebraicGeometry.ProEtaleOpenInjectiveProperAcyclic
 
 /-!
 # Proper direct image preserves open support on the full pro-etale derived category

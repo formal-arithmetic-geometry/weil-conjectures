@@ -19,6 +19,7 @@ import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
 import Sheaf.AlgebraicGeometry.ProEtaleBoundedContinuitySections
 public import Sheaf.AlgebraicGeometry.SupportComparisonPullbackCoherence
+import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
 
 /-!
 # Completed lisse sheaves and normalized finite etale systems

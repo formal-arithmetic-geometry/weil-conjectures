@@ -22,6 +22,7 @@ import WeilConjectures.AlgebraicGeometry.FiniteTypeModuleSupportClosed
 import WeilConjectures.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
 import WeilConjectures.AlgebraicGeometry.FiniteTypeModuleSupportPullback
 import WeilConjectures.AlgebraicGeometry.TensorPullbackTilde
+import Sheaf.AlgebraicGeometry.TensorPullbackSectionAdjunction
 
 /-!
 # A finitely presented closed subscheme supporting a finite type sheaf on one fibre

@@ -23,6 +23,8 @@ import Sheaf.CategoryTheory.ExtensionByZeroPresheaf
 import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
 import Sheaf.CategoryTheory.ModulePullbackPushforwardAdjunction
 import Sheaf.CategoryTheory.DerivedCategory.AdjointFunctors
+import Sheaf.CategoryTheory.LocalizedModuleExactForSystems
+import WeilConjectures.CategoryTheory.ExtensionByZeroPresheaf
 
 /-!
 # Binary derived open descent for modules on a ringed topos

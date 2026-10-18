@@ -17,6 +17,7 @@ import Mathlib.Algebra.Homology.ShortComplex.SnakeLemma
 import Mathlib.CategoryTheory.Abelian.Refinements
 import Mathlib.Algebra.Homology.ShortComplex.Exact
 public import Mathlib.CategoryTheory.Preadditive.Injective.Basic
+import WeilConjectures.CategoryTheory.PushoutShortExactSequence
 
 /-! # Disk, sphere and degreewise split extension calculations
 

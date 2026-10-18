@@ -15,6 +15,10 @@ import Sheaf.AlgebraicGeometry.AbsoluteFrobeniusUniversalHomeomorphism
 public import Sheaf.AlgebraicGeometry.UniversalHomeomorphismInvariance
 import Sheaf.SixFunctors.FrobeniusSquareCartesian
 import Mathlib.AlgebraicGeometry.Pullbacks
+import Sheaf.AlgebraicGeometry.ProEtaleConstantRingOperations
+import Sheaf.Paper.IntegralFinitePullbackComposition
+import WeilConjectures.AlgebraicGeometry.AbsoluteFrobenius
+import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
 
 /-!
 # Scheme and geometric Frobenius of a purity datum

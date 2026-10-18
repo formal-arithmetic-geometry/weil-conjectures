@@ -17,6 +17,7 @@ public import Mathlib.Algebra.Category.Grp.AB
 public import WeilConjectures.Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Sheaf
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
 public import Sheaf.CategoryTheory.RightDerivedSingleUnitHomologyComparison
+import Sheaf.CategoryTheory.Sites.GeometricMorphism
 
 /-!
 # Čech computation for componentwise acyclic sheaves on a total slice site

@@ -13,6 +13,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.AlgebraicGeometry.Pullbacks
 public import Mathlib.AlgebraicGeometry.ResidueField
 public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
+import Sheaf.AlgebraicGeometry.DimensionAtPointFieldExtension
+import Sheaf.AlgebraicGeometry.EquidimensionalOpenLocalDimension
 
 /-!
 # The d-th Fitting ideal and the smooth locus

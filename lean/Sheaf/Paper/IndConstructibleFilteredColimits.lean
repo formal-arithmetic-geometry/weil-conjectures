@@ -10,6 +10,8 @@ public import WeilConjectures.CategoryTheory.RingObjects.Condensed.FiniteSubexte
 public import Mathlib.CategoryTheory.ObjectProperty.Ind
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
+import Sheaf.Paper.CoefficientHeart
+import Sheaf.Paper.IndHeartCanonicalPresentation
 
 /-!
 # Filtered colimits and sums of ind-constructible module sheaves

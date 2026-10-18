@@ -14,6 +14,7 @@ import Sheaf.RepresentationTheory.BaseFieldContinuousCochains
 import Sheaf.AlgebraicGeometry.Sites.SeparablyClosedTorsionCohomologicalDimension
 import Sheaf.FieldTheory.FiniteFieldAbsoluteGalois
 import Sheaf.GroupTheory.CyclicInflation
+import Sheaf.AlgebraicGeometry.EllCohomologicalDimensionComparison
 
 /-!
 # Cohomological dimension of the base field

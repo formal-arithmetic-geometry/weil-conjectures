@@ -71,6 +71,8 @@ import WeilConjectures.SixFunctors.ProEtale.Comparison.Flat
 import Sheaf.Paper.ProEtaleConstructibleOrigin
 import Sheaf.Paper.ComparisonTorAmplitude
 import Sheaf.SixFunctors.CoefMonoidalSquareHomTransport
+import Sheaf.Algebra.Homology.RingedInternalHomShiftOfUniverses
+import Sheaf.SixFunctors.FiniteDualitySiteComparison
 
 /-! # Finite coefficient change for internal Hom
 

@@ -56,6 +56,13 @@ import Sheaf.CategoryTheory.RingedToposDerivedPushforwardComposition
 import Sheaf.CategoryTheory.ModulePullbackPushforwardAdjunction
 import Sheaf.AlgebraicGeometry.EtaleExceptionalAdjoint
 import Sheaf.AlgebraicGeometry.CompactSupportComparisonUnit
+import Sheaf.AlgebraicGeometry.CanonicalCompactSupportSiteComparison
+import Sheaf.AlgebraicGeometry.ProEtaleExtensionZeroComparison
+import Sheaf.AlgebraicGeometry.SpecifiedExceptionalClassHom
+import Sheaf.Paper.CompactificationCoherence
+import Sheaf.Paper.EtaleCoefficientSystemAdjoint
+import Sheaf.Paper.FiniteTorAmplitudeSites
+import Sheaf.Paper.PurityAffineChartBounds
 
 /-! # Constructible exceptional adjunction and coefficients
 

@@ -29,6 +29,10 @@ import Sheaf.Paper.RingedTopoiDerivedPullback
 import Sheaf.CategoryTheory.ModulePullbackPushforwardAdjunction
 import Sheaf.CategoryTheory.ModulePullbackTensorIso
 import Sheaf.Algebra.Homology.SiteDerivedTensorDescent
+import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
+import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
+import Sheaf.Paper.DerivedAdjunctionShift
+import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
 
 /-!
 # Exact projection mates for ringed topoi

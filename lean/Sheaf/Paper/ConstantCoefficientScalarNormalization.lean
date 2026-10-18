@@ -8,6 +8,23 @@ module
 public import Sheaf.Paper.ConstantWeilStructure
 public import Sheaf.Paper.IntegralScalarExtensionUniverses
 public import Sheaf.Paper.FiniteFreeCompletedScalarComparison
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
+import Sheaf.AlgebraicGeometry.ProEtaleCohomologicalSupport
+import Sheaf.AlgebraicGeometry.ProEtaleConstantSheafStalk
+import Sheaf.AlgebraicGeometry.ProEtaleModuleStalkFunctor
+import Sheaf.AlgebraicGeometry.ProEtaleSurjectiveTowerDerivedLimit
+import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
+import Sheaf.Paper.CompletedIntegralConstantMapOfUniverses
+import Sheaf.Paper.DerivedCompleteOnSlices
+import Sheaf.Paper.DerivedScalarExtensionRestrictionAdjunction
+import Sheaf.Paper.GeneralAlgebraicallyClosedCoefficients
+import Sheaf.Paper.IntrinsicFiniteTorsionConstructibility
+import Sheaf.Paper.ProEtaleConstructibleSheaf
+import Sheaf.Paper.ProEtaleLocallyConstantSheafOfUniverses
+import Sheaf.Paper.SfCommonStageWeilCohomology
+import Sheaf.Paper.SfIntegralConstructible
+import Sheaf.Paper.SfRationalizationKaroubi
+import WeilConjectures.CategoryTheory.Triangulated.DerivedLimit
 
 /-! # Normalized scalar extension of constant coefficient objects
 

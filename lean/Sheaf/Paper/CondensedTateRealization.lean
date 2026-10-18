@@ -25,6 +25,10 @@ import Sheaf.Algebra.Homology.ChangeOfRingsKFlat
 public import Sheaf.Paper.CompletedCondensedCoefficients
 public import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimitIndependentCoefficients
 public import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
+import Sheaf.CategoryTheory.InternalAbelianSheafModuleEquivalence
+import Sheaf.Paper.AdicCoefficientDatum
 
 /-!
 # Realization of the reconstructed positive Tate tower

@@ -13,6 +13,13 @@ public import WeilConjectures.AlgebraicGeometry.PQFCohomology
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.SiteTensorFunctoriality
 public import WeilConjectures.AlgebraicGeometry.Ample
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
+import Sheaf.AlgebraicGeometry.ProperBasic
+import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
+import Sheaf.CategoryTheory.RingedSiteModules
+import WeilConjectures.AlgebraicGeometry.Modules.ZeroLocus
+import WeilConjectures.CategoryTheory.RightDerivedUniversalDeltaFunctor
+import WeilConjectures.Topology.RingedSpaceModuleEnoughInjectives
 
 /-! # Vanishing of ideal twists implies ampleness
 

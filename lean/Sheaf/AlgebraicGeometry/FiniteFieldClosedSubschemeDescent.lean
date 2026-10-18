@@ -9,6 +9,8 @@ public import Sheaf.AlgebraicGeometry.FrobeniusDetailed
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 import Sheaf.AlgebraicGeometry.LimitAffineTransition
 import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
+import Sheaf.FieldTheory.UniqueSubfieldOfClosure
+import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
 
 /-!
 # Descent of closed subschemes to finite constant fields

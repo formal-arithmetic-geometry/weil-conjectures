@@ -18,6 +18,8 @@ import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 import Sheaf.AlgebraicGeometry.EtaleSmoothZeroDimensionalFibres
 import Sheaf.AlgebraicGeometry.EquidimensionalOpenLocalDimension
 import Sheaf.AlgebraicGeometry.ConstantLocalDimensionComponents
+import Sheaf.AlgebraicGeometry.NodalPointEtaleLocality
+import Sheaf.AlgebraicGeometry.SmoothEtaleLocalSource
 
 /-!
 # Nodal families are étale local on the source

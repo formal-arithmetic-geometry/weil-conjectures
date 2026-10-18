@@ -11,6 +11,7 @@ public import Mathlib.RingTheory.Localization.Away.Basic
 public import Mathlib.CategoryTheory.Shift.CommShift
 import Mathlib.RingTheory.Localization.BaseChange
 import Mathlib.Algebra.Module.LocalizedModule.Basic
+import Sheaf.CategoryTheory.ScalarLocalization
 
 /-!
 # Semilinear functors under raw scalar localization

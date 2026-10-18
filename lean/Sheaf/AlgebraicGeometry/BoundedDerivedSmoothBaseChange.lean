@@ -27,6 +27,7 @@ import WeilConjectures.SixFunctors.BaseChange.Derived
 import Sheaf.AlgebraicGeometry.ChosenCartesianSquare
 import Sheaf.AlgebraicGeometry.HypercohomologyFiltrations
 import Sheaf.AlgebraicGeometry.AbelianDerivedExchangePlusCompatibility
+import Sheaf.AlgebraicGeometry.HypercohomologyConvergenceStatement
 
 /-!
 # Bounded derived smooth base change

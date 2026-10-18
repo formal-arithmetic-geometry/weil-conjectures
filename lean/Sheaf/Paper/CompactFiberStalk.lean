@@ -44,6 +44,8 @@ import Sheaf.Paper.PbcRationalTransport
 import Sheaf.Paper.CompleteCompactSupportProetale
 import Sheaf.Paper.FiniteExtensionCompactSupportBaseChange
 import Sheaf.Paper.GlobalFiniteLevelCompactSupportBaseChange
+import Sheaf.Paper.CanonicalFiniteLevelCompactSupportBaseChange
+import Sheaf.Paper.IntrinsicQbarCategory
 
 /-!
 # The geometric fibre of compactly supported direct image

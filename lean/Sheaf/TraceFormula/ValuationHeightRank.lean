@@ -7,6 +7,8 @@ module
 
 public import Mathlib.RingTheory.Valuation.ValuationSubring
 public import Sheaf.GroupTheory.RationalRank
+import Sheaf.TraceFormula.ConvexChainRationalRank
+import Sheaf.TraceFormula.ValuationPrimeConvexCorrespondence
 
 /-!
 # Prime-chain length versus valuation rational rank

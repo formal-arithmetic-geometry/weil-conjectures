@@ -31,6 +31,9 @@ import Sheaf.Paper.FiniteCoefficientFlatModel
 import Sheaf.Paper.ProjectionMateExact
 import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
 import Sheaf.AlgebraicGeometry.ProEtaleConstantRingMap
+import Sheaf.AlgebraicGeometry.ProEtaleSiteComparison
+import Sheaf.Paper.ConstructibleExceptionalAdjunctionCoefficients
+import Sheaf.SixFunctors.RingedDerivedMonoidalComparisons
 
 /-!
 # The boundary comparison of exceptional counits and projection transformations

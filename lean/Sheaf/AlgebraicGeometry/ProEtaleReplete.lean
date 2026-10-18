@@ -7,6 +7,9 @@ module
 
 public import Mathlib.AlgebraicGeometry.Sites.Proetale
 public import Sheaf.CategoryTheory.RepleteSheafTopos
+import Sheaf.AlgebraicGeometry.ProEtale.RepleteOnContractible
+import Sheaf.AlgebraicGeometry.ProEtale.WeakContractibleEquivalences
+import Sheaf.AlgebraicGeometry.WContractibleAffineCover
 
 /-!
 # Repleteness of the pro-étale topos

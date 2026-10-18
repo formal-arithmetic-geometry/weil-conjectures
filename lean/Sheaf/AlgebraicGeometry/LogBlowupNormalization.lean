@@ -17,6 +17,9 @@ import WeilConjectures.Blowup.BlowupUniversal
 import Sheaf.AlgebraicGeometry.FpqcFinerThanEtale
 import Mathlib.AlgebraicGeometry.Sites.Fpqc
 import Mathlib.RingTheory.IntegralClosure.Algebra.Basic
+import Sheaf.AlgebraicGeometry.LogRegularMonomialTensor
+import Sheaf.TraceFormula.LogRegularDivisorialStructure
+import Sheaf.TraceFormula.LogRegularToricRefinement
 
 /-!
 # Saturated log blowups and normalized ordinary blowups

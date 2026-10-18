@@ -29,6 +29,12 @@ import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
 import WeilConjectures.CategoryTheory.RingedSiteGrothendieckAbelian
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Hom
+import Sheaf.AlgebraicGeometry.PullbackConstantModelConstructible
+import Sheaf.CategoryTheory.Triangulated.LocalizingFunctor
+import Sheaf.Paper.CartesianCoefficients
+import Sheaf.Paper.CondensedModuleDerivedPushpull
+import Sheaf.Paper.LocalizingAdmissibleCoefficients
+import Sheaf.Paper.LocalizingClosureCtfEqualsBc
 
 /-! # Inverse image on localizing categories
 

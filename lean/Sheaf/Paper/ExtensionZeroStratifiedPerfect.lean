@@ -23,6 +23,13 @@ public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Sheaf.Paper.BoundedConstructibleComplete
 public import Sheaf.Paper.CompletedExtensionZeroComparison
 public import Sheaf.Paper.IntegralStratifiedPerfectCharacterization
+import Sheaf.AlgebraicGeometry.FiniteLocallyClosedStratification
+import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
+import Sheaf.AlgebraicGeometry.ProEtaleRingedOpenClosed
+import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
+import Sheaf.CategoryTheory.LocalizedModuleExactForSystems
+import Sheaf.CategoryTheory.SiteInverseImageTensor
+import Sheaf.CategoryTheory.SiteMorphismComposition
 
 /-!
 # Extension by zero preserves stratified perfect local models

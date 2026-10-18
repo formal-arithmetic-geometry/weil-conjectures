@@ -17,6 +17,10 @@ import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
+import Sheaf.Paper.MateOpenRestriction
+import Sheaf.SixFunctors.IntegralRestrictionClosed
+import Sheaf.SixFunctors.IntegralRestrictionGlue
+import Sheaf.SixFunctors.IntegralRestrictionLine
 
 /-!
 # Restriction of the integral exceptional inverse image

@@ -16,6 +16,7 @@ import Mathlib.RingTheory.AlgebraicIndependent.Basic
 import Mathlib.RingTheory.FiniteType
 import Mathlib.RingTheory.Ideal.Height
 import Mathlib.RingTheory.Ideal.Maximal
+import Sheaf.RingTheory.UniversallyCatenaryDimensionFormula
 
 /-!
 # Dimension of maximal localizations of a finite normalization

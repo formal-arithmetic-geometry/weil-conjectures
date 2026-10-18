@@ -37,6 +37,9 @@ import Sheaf.Algebra.Homology.SiteDerivedTensorDescent
 import Sheaf.AlgebraicGeometry.EtaleDerivedTensorDirectSums
 import Mathlib.CategoryTheory.Triangulated.Pretriangulated
 import Sheaf.CategoryTheory.DerivedModuleFreeGeneration
+import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
+import Sheaf.Paper.ProjectionMateExact
+import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 
 /-!
 # Tensoring derived global sections with a constant complex

@@ -25,6 +25,7 @@ import WeilConjectures.Mathlib.CategoryTheory.Sites.Monoidal
 import Sheaf.AlgebraicGeometry.ProEtaleEnoughPoints
 import Sheaf.Algebra.Homology.RingedSiteKFlatStalkCriterion
 import Sheaf.CategoryTheory.SheafTensor
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Monoidal
 
 /-!
 # Pullback transport preserves K-flat module complexes

@@ -37,6 +37,7 @@ import Mathlib.Algebra.Homology.HomotopyCategory.Triangulated
 import Mathlib.CategoryTheory.Adjunction.Mates
 
 public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
 /-! # Derived left extension of arbitrary semilinear systems
 
 Source: Zheng, Six Operations and Lefschetz--Verdier, Construction 4.1, printed p. 21;

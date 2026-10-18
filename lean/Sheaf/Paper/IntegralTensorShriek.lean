@@ -53,6 +53,10 @@ import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 import Mathlib.AlgebraicGeometry.Morphisms.Separated
 import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 import Mathlib.AlgebraicGeometry.Morphisms.Immersion
+import Sheaf.AlgebraicGeometry.CoefficientBoundedConstructibleProEtale
+import Sheaf.AlgebraicGeometry.ConstructibleProEtaleComparison
+import Sheaf.Paper.CartesianCoefficients
+import Sheaf.SixFunctors.ProEtale.DerivedCompletion
 
 /-!
 # Integral constructibility under immersions and generation by strata

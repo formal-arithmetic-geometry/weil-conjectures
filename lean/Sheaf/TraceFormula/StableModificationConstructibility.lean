@@ -18,6 +18,10 @@ import Sheaf.AlgebraicGeometry.ProjectiveLineGenusZero
 
 import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
+import Sheaf.AlgebraicGeometry.NodalNormalizationAdjunction
+import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
+import Sheaf.TraceFormula.ContractedComponentGenericData
+import Sheaf.TraceFormula.NodalOpenLocus
 /-! # Constructibility of semistable and stable geometric fibres
 
 Source: Temkin, *Stable modification of relative curves*, Lemma 5.1(ii), printed p. 34

@@ -11,6 +11,12 @@ public import Mathlib.CategoryTheory.Limits.Types.Colimits
 public import Mathlib.CategoryTheory.Limits.FunctorCategory.Basic
 public import Mathlib.CategoryTheory.Sites.Sheafification
 import Sheaf.AlgebraicGeometry.FpqcDescentEtale
+import Sheaf.AlgebraicGeometry.AlgebraicSpaceCoproduct
+import Sheaf.AlgebraicGeometry.AlgebraicSpaceOpenGluing
+import Sheaf.AlgebraicGeometry.EtaleAffineQuotientRepresentable
+import Sheaf.AlgebraicGeometry.EtaleRelationFindingOpens
+import Sheaf.AlgebraicGeometry.EtaleRelationKernelPair
+import Sheaf.AlgebraicGeometry.EtaleRelationRestrictionQuotient
 
 /-!
 # Quotients of étale equivalence relations

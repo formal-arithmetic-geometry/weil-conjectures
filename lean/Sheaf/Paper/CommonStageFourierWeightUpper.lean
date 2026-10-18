@@ -25,6 +25,11 @@ import WeilConjectures.DeligneLaumon.AffineLine.ZeroExtension
 import WeilConjectures.WeilSheaf.LowerShriekFunctoriality
 import WeilConjectures.WeilSheaf.FourierInversion.OtherSections
 import Sheaf.Paper.CommonStageCalculus
+import Sheaf.Paper.CommonStageCurveWeilMiddleExtension
+import Sheaf.Paper.CommonStageFourierTransform
+import Sheaf.Paper.IntrinsicCoefficientTwistsUnrestricted
+import Sheaf.Paper.IntrinsicQbarCategory
+import WeilConjectures.DeligneLaumon.AffineLine.TraceEnergy
 
 /-! # Upper weight of a Fourier partner in the common-stage Weil category
 

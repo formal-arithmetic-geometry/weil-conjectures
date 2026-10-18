@@ -14,6 +14,10 @@ public import Mathlib.AlgebraicGeometry.Geometrically.Connected
 import Sheaf.Paper.DenseOpenPiOneSurjective
 import WeilConjectures.EtaleCohomology.Purity.RealSheaves.BoundaryInertia
 import WeilConjectures.AlgebraicGeometry.Regular
+import Sheaf.Paper.CommonStageCurveWeilMiddleExtension
+import Sheaf.Paper.EtaleWeilFundamentalRepresentation
+import Sheaf.Paper.EtaleWeilSheafEquivalence
+import Sheaf.Paper.RealSheavesSetup
 
 /-! # Lisse extension and trivial boundary inertia
 

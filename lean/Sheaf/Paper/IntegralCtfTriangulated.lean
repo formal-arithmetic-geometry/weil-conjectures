@@ -11,6 +11,12 @@ import Sheaf.Paper.FiniteCtfTriangulated
 import Mathlib.CategoryTheory.Triangulated.Subcategory
 import Sheaf.Algebra.Homology.DerivedChangeOfRingsIndependentCoefficients
 import Sheaf.Algebra.Homology.DerivedTensor
+import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
+import Sheaf.AlgebraicGeometry.CoefficientProEtaleTorAmplitude
+import Sheaf.Paper.DerivedScalarExtensionRestrictionAdjunction
+import Sheaf.Paper.SfIntegralConstructible
+import Sheaf.Paper.SfIntegralConstructibleTriangulated
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Tensor
 
 /-!
 # Integral constructible complexes with uniformly finite Tor amplitude

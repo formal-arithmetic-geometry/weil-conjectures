@@ -6,6 +6,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.Topology.Irreducible
 public import Mathlib.Topology.JacobsonSpace
 public import Mathlib.Topology.KrullDimension
+import Sheaf.AlgebraicGeometry.FiniteTypeFibreImageDimensionBounds
 
 /-!
 # Proper curve image and positive-dimensional fibre component

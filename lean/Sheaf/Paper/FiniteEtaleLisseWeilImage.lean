@@ -34,6 +34,13 @@ import WeilConjectures.AlgebraicGeometry.FiniteEtalePushforwardLocallyConstant
 import WeilConjectures.SixFunctors.Finite.BaseChange
 import Sheaf.AlgebraicGeometry.ProEtaleMilnorEpimorphic
 import Sheaf.Paper.DerivedCompleteOnSlices
+import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
+import Sheaf.Paper.IntrinsicFiniteTorsionConstructibility
+import Sheaf.Paper.SfCommonStageDirectImage
+import Sheaf.Paper.SfConstructibleHeart
+import Sheaf.Paper.SfIntegralConstructible
+import Sheaf.Paper.SfWeilSheafComplex
+import WeilConjectures.WeilSheaf.FourierInversion.OtherSections
 
 /-! # Lissity of finite etale direct image on the actual Weil fixed pairs
 

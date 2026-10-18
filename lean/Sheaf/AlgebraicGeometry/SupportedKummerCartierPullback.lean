@@ -7,6 +7,11 @@ module
 public import WeilConjectures.AlgebraicGeometry.EffectiveCartier
 public import Sheaf.AlgebraicGeometry.TensorPullbackStructureSheaf
 public import Sheaf.AlgebraicGeometry.PicardTensorDualComparisonIso
+import Sheaf.AlgebraicGeometry.ClosedSubschemeBaseChangeIdealImage
+import Sheaf.AlgebraicGeometry.TensorPullbackSectionAdjunction
+import Sheaf.Topology.GlueSheavesOfModules
+import WeilConjectures.AlgebraicGeometry.TensorPullbackStructureSheaf
+import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Invertible
 
 /-!
 # Cartier line bundle and canonical section under Cartier-preserving pullback

@@ -31,6 +31,9 @@ import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Shift
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.LocalizedSiteTensorRestriction
 import Sheaf.Algebra.Homology.WeilSiteDerivedTensorDescent
 import WeilConjectures.CategoryTheory.TruncationTriangle
+import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
+import Sheaf.CategoryTheory.LocalizedModuleExactForSystems
+import Sheaf.Paper.SfCommonStageWeilCohomology
 
 /-!
 # Bounded locally constant residue cohomology gives Tor bounds on every slice

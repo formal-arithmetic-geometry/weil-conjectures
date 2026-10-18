@@ -21,6 +21,8 @@ public import Sheaf.AlgebraicGeometry.ProperStability
 public import Sheaf.AlgebraicGeometry.ClosedImmersionProducts
 public import Sheaf.RingTheory.PurelyInseparableBaseChangeLocalRing
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
+import Sheaf.AlgebraicGeometry.ExcellentSchemeAffineCover
+import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
 
 /-!
 # Projective spreading and normalization after a purely inseparable generic extension

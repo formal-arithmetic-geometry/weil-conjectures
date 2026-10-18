@@ -12,6 +12,9 @@ public import Sheaf.AlgebraicGeometry.SfIntrinsicRealizationTransport
 public import Sheaf.AlgebraicGeometry.ProEtaleConstantExact
 import Sheaf.AlgebraicGeometry.ProEtaleConstantRingMap
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
+import Sheaf.AlgebraicGeometry.ProEtaleFiniteModules
+import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
 
 /-!
 # Open pro-etale pullback evaluation and its specified adjunction unit

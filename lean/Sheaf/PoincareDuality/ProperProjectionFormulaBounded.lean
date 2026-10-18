@@ -6,6 +6,9 @@ module
 
 public import WeilConjectures.PoincareDuality.Abstract
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible
+import Sheaf.Paper.IntegralProperBaseChange
+import Sheaf.Paper.ModuleRingedToposDerivedComparison
+import Sheaf.Paper.ProperBaseChangeRational
 
 /-! Proper direct-image input to the exceptional projection formula. -/
 

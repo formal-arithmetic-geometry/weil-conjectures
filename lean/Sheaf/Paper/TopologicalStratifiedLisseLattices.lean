@@ -19,6 +19,8 @@ import Sheaf.Paper.ContinuousCoefficientModuleEncoding
 import Sheaf.Paper.ContinuousModuleEncodingSliceFreeness
 import Sheaf.Paper.ContinuousModuleEncodingRestriction
 import Sheaf.Paper.ContinuousModuleEncodingLattices
+import Sheaf.Paper.CartesianCoefficients
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs
 
 /-!
 # Lisse integral lattices on finite strata

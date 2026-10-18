@@ -29,6 +29,10 @@ import Mathlib.AlgebraicGeometry.ResidueField
 import Mathlib.FieldTheory.IsSepClosed
 import Sheaf.AlgebraicGeometry.ProEtaleSiteComparisonDerived
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
+import Sheaf.AlgebraicGeometry.CompactSupportComparisonUnit
+import Sheaf.AlgebraicGeometry.ProEtaleRestrictionInjectives
+import Sheaf.AlgebraicGeometry.ProEtaleSiteComparison
+import Sheaf.RingTheory.IndEtaleUniverseTransport
 
 /-! # Detecting isomorphisms on the pro-etale site
 

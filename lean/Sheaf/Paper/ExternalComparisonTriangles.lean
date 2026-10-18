@@ -20,6 +20,9 @@ import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
 import Sheaf.Algebra.Homology.WeilSiteDerivedTensorDescent
 import Sheaf.Paper.ProjectionMateExact
+import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
+import WeilConjectures.SixFunctors.Etale.Derived.Tensor
 
 /-!
 # Triangles for the external exchange and projection comparison

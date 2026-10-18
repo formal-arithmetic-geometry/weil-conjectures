@@ -7,6 +7,10 @@ module
 
 public import Sheaf.AlgebraicGeometry.OpenImmersionSquare
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.BaseChangeSquare
+import Sheaf.AlgebraicGeometry.DerivedInverseImageComposition
+import Sheaf.AlgebraicGeometry.Etale.DerivedExtensionZeroBaseChangeUnderivedCompatibility
+import Sheaf.AlgebraicGeometry.EtaleInverseImageCompositionModuleLinear
+import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 
 /-!
 # Underived vertical pasting for open base change

@@ -33,6 +33,18 @@ import WeilConjectures.CategoryTheory.TruncationTriangle
 import WeilConjectures.SixFunctors.Finite.Exact
 import WeilConjectures.SixFunctors.Finite.Stalk
 import WeilConjectures.ConstructibleSheaf.KernelCokernel
+import Sheaf.AlgebraicGeometry.NagataAffineOpensProjective
+import Sheaf.Paper.AlterationFiniteRefinement
+import Sheaf.Paper.ModificationClosedImageLifting
+import Sheaf.Paper.ModificationsZariskiRefinement
+import Sheaf.Paper.NearbyClosedImage
+import Sheaf.Paper.NearbyCyclesDimensionBound
+import Sheaf.Paper.NearbyFiniteBaseDescent
+import Sheaf.Paper.NearbyProperHyperdescent
+import Sheaf.Paper.NearbySpreadOut
+import Sheaf.Paper.OrgogozoInductionData
+import Sheaf.Paper.OrientedNearbyStrictLocalDescription
+import Sheaf.Paper.PlurinodalProperHypercover
 
 /-!
 # A modification making nearby cycles universally compatible with base change

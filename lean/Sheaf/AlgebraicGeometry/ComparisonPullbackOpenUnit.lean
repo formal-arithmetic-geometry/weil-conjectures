@@ -7,6 +7,12 @@ module
 
 public import Sheaf.AlgebraicGeometry.OpenComparisonUnitNormalization
 public import Sheaf.AlgebraicGeometry.SupportComparisonPullbackCoherence
+import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
+import Sheaf.AlgebraicGeometry.ProEtaleObjectInverseImageRestriction
+import Sheaf.AlgebraicGeometry.ProEtaleSiteComparison
+import Sheaf.CategoryTheory.RingedSiteModules
+import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-!
 # Open-restriction normalization for the comparison adjunction unit

@@ -9,6 +9,7 @@ import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 import Sheaf.EtaleCohomology.EtaleSectionZeroOpen
 import Sheaf.AlgebraicGeometry.ClosedProperSupportLocality
 import WeilConjectures.AlgebraicGeometry.ClosedSubsetProperOverBaseProperties
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-! # Canonical proper-support pullback map
 

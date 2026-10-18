@@ -58,6 +58,11 @@ import Mathlib.AlgebraicGeometry.GammaSpecAdjunction
 import Mathlib.RingTheory.Flat.Basic
 import Mathlib.RingTheory.AlgebraicIndependent.TranscendenceBasis
 import Mathlib.RingTheory.AlgebraicIndependent.Transcendental
+import Sheaf.AlgebraicGeometry.ClosedDominantDimension
+import Sheaf.AlgebraicGeometry.CoherentFiniteType
+import Sheaf.AlgebraicGeometry.ExcellentSchemeAffineCover
+import Sheaf.FieldTheory.FiniteSeparableClosure
+import Sheaf.RingTheory.GeometricReducednessSeparableScalarRestriction
 
 /-!
 # Factorization with a geometrically integral generic curve

@@ -27,6 +27,8 @@ import Sheaf.RingTheory.ReducedNoetherianTotalRingFractions
 import Sheaf.RingTheory.LocalCurvePrincipalTotalFractions
 import Mathlib.Algebra.Module.LocalizedModule.Basic
 import Mathlib.AlgebraicGeometry.OpenImmersion
+import Sheaf.RingTheory.IsExcellentFiniteTypeLocalization
+import WeilConjectures.RingTheory.FiniteOverHenselianLocalProduct
 
 /-!
 # DVR branches of a punctured strictly local curve

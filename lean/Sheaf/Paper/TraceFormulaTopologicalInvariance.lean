@@ -28,6 +28,8 @@ import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 import WeilConjectures.WeilSheaf.LowerShriekFunctoriality
 import WeilConjectures.AlgebraicGeometry.ReductionUniversalHomeomorphism
+import Sheaf.Paper.FiniteTorStability
+import Sheaf.Paper.SfCommonStageDirectImage
 
 /-!
 # Topological invariance of the trace-formula coefficient category

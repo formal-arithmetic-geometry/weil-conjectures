@@ -12,6 +12,10 @@ public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 public import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
 public import Mathlib.CategoryTheory.Preadditive.Injective.Basic
+import Sheaf.CategoryTheory.LocalizedModuleExactForSystems
+import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtaleOver
+import WeilConjectures.Mathlib.CategoryTheory.Preadditive.Injective.Preserves
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-!
 # Split finite ordered Čech rows for injective étale module sheaves

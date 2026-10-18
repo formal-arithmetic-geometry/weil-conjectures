@@ -22,6 +22,12 @@ import Sheaf.CategoryTheory.Sites.ToposLocalizationSitePresentation
 import Sheaf.Paper.KFlatRingedToposPullback
 
 public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
+import Sheaf.Algebra.Homology.RingedSiteRestrictionKFlat
+import Sheaf.Algebra.Homology.UniversalAcyclicModuleKFlat
+import Sheaf.CategoryTheory.Sites.FpStalkRealization
+import Sheaf.CategoryTheory.Sites.GeometricInverseImageExact
+import Sheaf.CategoryTheory.Sites.GeometricMorphism
+import WeilConjectures.FromJoel.CategoryTheory.Monoidal.KFlat
 /-!
 # K-flatness and stalks of a ringed site
 

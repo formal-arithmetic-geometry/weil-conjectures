@@ -17,6 +17,8 @@ import Sheaf.CategoryTheory.KInjectiveTotalDerived
 import Sheaf.CategoryTheory.ExactFunctorDerivedFunctor
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
 public import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
+import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
+import Sheaf.CategoryTheory.ModulePullbackPushforwardAdjunction
 
 /-! # The arbitrary-ring-sheaf closed support adjoint
 

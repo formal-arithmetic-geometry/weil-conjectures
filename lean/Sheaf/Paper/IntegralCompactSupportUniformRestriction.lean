@@ -36,6 +36,17 @@ import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import Mathlib.Algebra.Homology.DerivedCategory.Linear
+import Sheaf.AlgebraicGeometry.FiniteTypeGeometryFibreBound
+import Sheaf.AlgebraicGeometry.ProEtaleConstantRingOperations
+import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
+import Sheaf.AlgebraicGeometry.ProfiniteCoefficientInverseImage
+import Sheaf.CategoryTheory.DerivedCategory.StandardQuotientsPerfect
+import Sheaf.Paper.CompletedDirectImageLimits
+import Sheaf.Paper.ExtensionZeroStratifiedPerfect
+import Sheaf.Paper.PbcUniformCompleteTriangulated
+import Sheaf.Paper.PreservationConstructible
+import Sheaf.Paper.SbcCompletedOperations
+import Sheaf.SecSmoothPurity.LocalizedExtensionZeroLinearDerived
 
 /-!
 # Integral compact support preserves the compatible uniform constructible category

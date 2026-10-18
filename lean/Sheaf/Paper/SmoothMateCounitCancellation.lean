@@ -12,6 +12,13 @@ public import Sheaf.AlgebraicGeometry.CompactSupportFiniteTorsion
 public import Sheaf.AlgebraicGeometry.CompactSupportComparisonUnit
 public import Sheaf.AlgebraicGeometry.ComparisonDerivedPullbackFixed
 public import Sheaf.AlgebraicGeometry.SfFiniteExceptionalInverseImage
+import Sheaf.AlgebraicGeometry.CanonicalCompactSupportSiteComparison
+import Sheaf.AlgebraicGeometry.EtaleExceptionalAdjoint
+import Sheaf.AlgebraicGeometry.SpecifiedExceptionalClassHom
+import Sheaf.AlgebraicGeometry.SupportComparisonPullbackCoherence
+import Sheaf.Paper.ConstructibleExceptionalAdjunctionCoefficients
+import WeilConjectures.Compactification.BaseChange
+import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekPlusBaseChange
 
 /-!
 # Counit cancellation and transposition under site comparison

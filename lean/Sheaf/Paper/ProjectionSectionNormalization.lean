@@ -14,6 +14,10 @@ public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 import Sheaf.Paper.RingedProjectionTensorComposition
 import Sheaf.CategoryTheory.RingedToposDerivedPushforwardComposition
 import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
+import Sheaf.Paper.CondensedModuleDerivedPushpull
+import Sheaf.Paper.ModuleRingedToposDerivedComparison
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperLowerStar
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs
 
 /-!
 # Projection normalization for a proper retraction and its closed section

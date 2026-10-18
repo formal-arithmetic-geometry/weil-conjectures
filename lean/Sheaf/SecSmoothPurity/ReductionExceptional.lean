@@ -36,6 +36,24 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FiniteEtale
 public import Sheaf.SecSmoothPurity.DirectImageScalarExchange
 
 public import Sheaf.Paper.PurEtaleScalarMateProjection
+import Sheaf.AlgebraicGeometry.CompactSupportComparisonUnit
+import Sheaf.AlgebraicGeometry.EtaleCompactSupportComparisons
+import Sheaf.AlgebraicGeometry.EtaleLocalNormalForm
+import Sheaf.AlgebraicGeometry.EtaleSumStalks
+import Sheaf.AlgebraicGeometry.FiniteEtaleTwistLine
+import Sheaf.AlgebraicGeometry.OrdinaryFiniteP1Adjunction
+import Sheaf.AlgebraicGeometry.ProEtaleFiniteTorComparisonNoetherian
+import Sheaf.AlgebraicGeometry.ProjectiveLineTrace
+import Sheaf.Paper.ComparisonPullbackExact
+import Sheaf.Paper.EtaleProEtaleAdjunctionTransfer
+import Sheaf.Paper.EtaleProEtaleCoefficientCompatibility
+import Sheaf.Paper.FiniteRingConstructibleDerivedOrigin
+import Sheaf.Paper.MateOpenRestriction
+import Sheaf.Paper.RingedExchangeTensorCoherence
+import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
+import Sheaf.Paper.UnboundedLocalizingPullback
+import Sheaf.SecSmoothPurity.ScalarExtensionFunctor
+import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMap
 
 
 /-!

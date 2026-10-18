@@ -11,6 +11,7 @@ public import Mathlib.CategoryTheory.ObjectProperty.ContainsZero
 public import Mathlib.CategoryTheory.ObjectProperty.ClosedUnderIsomorphisms
 public import Mathlib.CategoryTheory.ObjectProperty.Kernels
 public import Mathlib.CategoryTheory.ObjectProperty.Extensions
+import Sheaf.Paper.CohomologyInWeakSerreSubcategory
 
 /-!
 # Finite-filtration devissage through a triangulated derived functor

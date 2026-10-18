@@ -6,6 +6,10 @@ Authors: SHEAF group Q115
 module
 
 public import Sheaf.AlgebraicGeometry.EtaleTorAmplitude
+import Sheaf.AlgebraicGeometry.TorAmplitudeKFlatResolution
+import Sheaf.CategoryTheory.TruncationsAndHomotopyColimits
+import WeilConjectures.AlgebraicGeometry.DerivedCategories
+import WeilConjectures.SixFunctors.Etale.Derived.Tensor
 
 /-!
 # Connectivity of the derived tensor product

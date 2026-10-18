@@ -18,6 +18,8 @@ import Sheaf.AlgebraicGeometry.GeometricSpecializationStrictLocalLift
 import Sheaf.Paper.WeilPbcNormalizationInResidueFieldExtension
 import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 import Mathlib.Topology.Sober
+import Sheaf.CategoryTheory.Sites.OrientedProductLargeSites
+import WeilConjectures.AlgebraicGeometry.WeilPbcNormalizationInResidueFieldExtension
 
 /-!
 # Fixed-support points of the vanishing topos and the normalized stratum

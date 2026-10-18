@@ -43,6 +43,7 @@ import WeilConjectures.CategoryTheory.Triangulated.DerivedLimit
 import Sheaf.Paper.DerivedCompleteOnSlices
 import Sheaf.Paper.IntrinsicFiniteTorsionConstructibility
 import Sheaf.AlgebraicGeometry.ProEtaleCohomologicalSupport
+import Sheaf.AlgebraicGeometry.IntegralConstantCompletion
 
 /-!
 # Constructibility of all integral reductions from the first

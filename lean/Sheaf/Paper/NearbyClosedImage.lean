@@ -19,6 +19,9 @@ import Sheaf.Paper.OrientedProductPointsConservative
 import Sheaf.AlgebraicGeometry.CohomologyPullbackCanonicalArrows
 import Sheaf.AlgebraicGeometry.StrictHenselizationClosedLift
 import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
+import Sheaf.AlgebraicGeometry.StrictHenselizationClosedImmersionCartesian
+import Sheaf.CategoryTheory.LeftModuleDerivedEvaluationForget
+import Sheaf.Paper.StrictHenselizationFunctoriality
 
 /-!
 # Nearby-cycle comparison through a closed image

@@ -31,6 +31,9 @@ import Sheaf.AlgebraicGeometry.EtaleInverseImageExact
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
 import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+import Sheaf.AlgebraicGeometry.StalkFaithfulDerived
+import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageExact
 
 /-!
 # Conservativity of base change to a separable closure

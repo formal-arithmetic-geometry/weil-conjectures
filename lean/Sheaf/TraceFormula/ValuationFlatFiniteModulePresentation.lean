@@ -9,6 +9,8 @@ public import Mathlib.RingTheory.EssentialFiniteness
 public import Mathlib.RingTheory.RingHom.Flat
 public import Mathlib.Algebra.Module.FinitePresentation
 public import Mathlib.RingTheory.LocalRing.RingHom.Basic
+import Sheaf.RingTheory.FinitelyPresentedOverSubring
+import Sheaf.TraceFormula.ValuationFiniteTypeModulePresentation
 
 /-!
 # Finite presentation of a flat finite module over a valuation algebra

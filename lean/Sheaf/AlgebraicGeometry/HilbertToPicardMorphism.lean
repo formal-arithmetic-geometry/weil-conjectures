@@ -24,6 +24,7 @@ import WeilConjectures.AlgebraicGeometry.PicardFunctor
 import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
 import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
 import WeilConjectures.AlgebraicGeometry.TensorPullback
+import Sheaf.AlgebraicGeometry.TensorPullbackSectionAdjunction
 
 /-!
 # The morphism from the Hilbert scheme to the degree component of the Picard scheme

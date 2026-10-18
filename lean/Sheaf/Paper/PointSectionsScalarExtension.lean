@@ -22,6 +22,9 @@ import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
 import Sheaf.Algebra.Homology.DerivedChangeOfRingsIndependentCoefficients
 import Sheaf.Algebra.Homology.ChangeOfRingsKFlat
 import Sheaf.NumberTheory.Padics.ExtensionIntegersDvr
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
+import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
+import Sheaf.Paper.IntegralScalarExtensionConstructibleIntrinsic
 
 /-! # Sections of the geometric point and integral coefficient extension
 

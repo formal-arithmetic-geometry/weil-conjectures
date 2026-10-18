@@ -7,6 +7,7 @@ module
 public import Sheaf.Paper.SfRationalizationKaroubi
 public import Sheaf.Paper.IntrinsicCoefficientTwists
 import Sheaf.CategoryTheory.SemilinearScalarLocalization
+import Sheaf.Paper.IntrinsicCoefficientTwistsUnrestricted
 
 /-! # Rationalization of inverse integral twists
 

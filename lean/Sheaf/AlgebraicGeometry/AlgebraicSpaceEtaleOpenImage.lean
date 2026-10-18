@@ -13,6 +13,8 @@ import Sheaf.AlgebraicGeometry.EtaleRelationQuotient
 import Sheaf.AlgebraicGeometry.EtaleRelationFindingOpens
 import Mathlib.AlgebraicGeometry.Limits
 import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
+import Sheaf.AlgebraicGeometry.AlgebraicSpace
+import Sheaf.AlgebraicGeometry.EtaleAtlasPresentation
 
 /-!
 # Open images of representable étale morphisms of algebraic spaces

@@ -10,6 +10,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Pullbacks
 public import WeilConjectures.Mathlib.AlgebraicGeometry.QuasiAffine
 import Sheaf.AlgebraicGeometry.QuasiAffineBaseChange
+import Sheaf.AlgebraicGeometry.QuasiAffineTargetLocality
 
 /-!
 # Permanence and separation for ind-quasi-affine morphisms

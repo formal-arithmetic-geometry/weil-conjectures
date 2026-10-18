@@ -9,6 +9,11 @@ public import Sheaf.Paper.ProperBaseChangeFourArrows
 import Sheaf.Paper.ProjectionFormulaBaseChangeNaturality
 import Sheaf.AlgebraicGeometry.ProfiniteCoefficientInverseImage
 import Sheaf.AlgebraicGeometry.ProEtaleAmbientRingedExchange
+import Sheaf.Paper.AdicCoefficientDatum
+import Sheaf.Paper.CondensedAmbientExchange
+import Sheaf.Paper.FourArrows
+import Sheaf.Paper.FourCorners
+import Sheaf.Paper.PerfectProjectionFormula
 
 /-!
 # Finite-level exchange rectangle

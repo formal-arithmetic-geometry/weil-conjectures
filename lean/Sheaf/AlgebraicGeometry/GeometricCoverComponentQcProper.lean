@@ -34,6 +34,7 @@ import Mathlib.AlgebraicGeometry.ZariskisMainTheorem
 import Mathlib.AlgebraicGeometry.Normalization
 import Mathlib.AlgebraicGeometry.GammaSpecAdjunction
 import WeilConjectures.AlgebraicGeometry.Morphisms.ProperQuasiFinite
+import Sheaf.AlgebraicGeometry.NormalEtaleComponentsClopen
 
 /-!
 # Quasi-compactness and properness of a geometric-cover component

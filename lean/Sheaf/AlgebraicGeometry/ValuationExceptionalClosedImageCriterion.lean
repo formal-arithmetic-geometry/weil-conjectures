@@ -10,6 +10,7 @@ public import Mathlib.FieldTheory.IsSepClosed
 public import Mathlib.RingTheory.Valuation.ValuationSubring
 
 import Mathlib.AlgebraicGeometry.Noetherian
+import Sheaf.SixFunctors.TraceFormula.NodalGeometricFibresReduced
 
 /-! # Closed-image exceptional components detect stability
 

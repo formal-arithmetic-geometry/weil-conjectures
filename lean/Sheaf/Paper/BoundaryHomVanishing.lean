@@ -10,6 +10,8 @@ public import Sheaf.Paper.LisseIntegralSmallCoefficients
 public import Mathlib.AlgebraicGeometry.Geometrically.Connected
 import WeilConjectures.CategoryTheory.Triangulated.TStructure.Homology
 import Mathlib.CategoryTheory.Triangulated.Pretriangulated
+import Sheaf.Paper.A1QbarOpenClosedCohomology
+import Sheaf.Paper.SfWeilSheafComplex
 
 /-! # Boundary-supported maps to and from the shifted ordinary middle extension
 

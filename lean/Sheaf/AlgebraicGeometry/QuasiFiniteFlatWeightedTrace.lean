@@ -79,6 +79,10 @@ import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 import Sheaf.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
+import Sheaf.AlgebraicGeometry.QuasiFiniteFinitePartsPresentation
+import WeilConjectures.AlgebraicGeometry.EtaleGeometricFibreInverseImageConstant
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
+import WeilConjectures.RingTheory.SimpleFiltration
 /-!
 # Weighted trace for a quasi-finite flat morphism
 

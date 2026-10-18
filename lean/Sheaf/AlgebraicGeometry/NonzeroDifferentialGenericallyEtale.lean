@@ -20,6 +20,9 @@ import Mathlib.Algebra.Module.LocalizedModule.Exact
 import Sheaf.RingTheory.DimensionAtPointLocalRingTrdeg
 import Sheaf.AlgebraicGeometry.UnramifiedAlgebraOverFieldProduct
 import WeilConjectures.AlgebraicGeometry.Regular
+import Sheaf.AlgebraicGeometry.Curve.NonconstantNormalCurveMapFlat
+import Sheaf.AlgebraicGeometry.TensorPullbackSectionAdjunction
+import Sheaf.AlgebraicGeometry.UnramifiedMorphism
 
 /-!
 # Nonzero differential and generic etaleness of smooth curves

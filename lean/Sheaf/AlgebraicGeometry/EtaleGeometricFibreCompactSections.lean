@@ -6,6 +6,13 @@ public import Mathlib.AlgebraicGeometry.Limits
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
+import Sheaf.AlgebraicGeometry.EtaleSheafClopenProduct
+import Sheaf.AlgebraicGeometry.GeometricPointCohomology
+import Sheaf.AlgebraicGeometry.PointedEtaleStalk
+import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
+import WeilConjectures.AlgebraicGeometry.ClosedSubsetProperOverBaseUnionPreimage
+import WeilConjectures.AlgebraicGeometry.InverseImageStalkGerm
+import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Etale
 
 /-!
 # Compact sections of a quasi-compact étale geometric fibre

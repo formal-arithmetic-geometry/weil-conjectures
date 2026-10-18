@@ -14,6 +14,7 @@ import Mathlib.AlgebraicGeometry.Noetherian
 import Sheaf.RingTheory.FiniteTypeGRing
 import Sheaf.AlgebraicGeometry.GRingAffineCover
 import Sheaf.AlgebraicGeometry.JTwoAffineCover
+import Sheaf.RingTheory.GRing
 
 /-!
 # Quasi-excellence under locally finite-type morphisms

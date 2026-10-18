@@ -13,6 +13,8 @@ public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
 public import Mathlib.Topology.Connected.Clopen
 import WeilConjectures.AlgebraicGeometry.Morphisms.ProperQuasiFinite
 import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen
+import Sheaf.AlgebraicGeometry.GeometricCoverComponentQcProper
+import Sheaf.AlgebraicGeometry.NormalEtaleComponentsClopen
 
 /-!
 # Connected components of geometric coverings over a normal base

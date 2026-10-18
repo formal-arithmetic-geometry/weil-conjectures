@@ -13,6 +13,8 @@ public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products
 public import Sheaf.Algebra.Homology.DerivedTensor
 import Sheaf.AlgebraicGeometry.ProEtaleCountableProductsExact
 import Mathlib.Algebra.Homology.BifunctorShift
+import Sheaf.Paper.CompletedDerivedInverseLimit
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Tensor
 
 /-!
 # Finite-projective tensor and countable derived products

@@ -23,6 +23,10 @@ import Mathlib.CategoryTheory.Triangulated.Pretriangulated
 import Mathlib.CategoryTheory.Localization.Predicate
 import Sheaf.Algebra.Homology.SiteDerivedTensorDescent
 import Mathlib.CategoryTheory.Adjunction.Additive
+import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
+import Sheaf.AlgebraicGeometry.ProEtaleConstantExact
+import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
+import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitExistence
 
 /-! # Well-definedness of integral pullback and completed tensor product
 

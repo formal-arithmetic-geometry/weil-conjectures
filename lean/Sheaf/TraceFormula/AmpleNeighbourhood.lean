@@ -8,6 +8,17 @@ module
 public import WeilConjectures.AlgebraicGeometry.Ample
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Fiber
+import Sheaf.AlgebraicGeometry.AmpleAffineLimitDescent
+import Sheaf.AlgebraicGeometry.InvertibleAffineLimitDescent
+import Sheaf.AlgebraicGeometry.LimitAffineTransition
+import Sheaf.AlgebraicGeometry.LimitFibreProducts
+import Sheaf.AlgebraicGeometry.LimitResidueField
+import Sheaf.AlgebraicGeometry.NoetherianFibreAmpleNeighbourhood
+import Sheaf.AlgebraicGeometry.ProperLimitNoetherian
+import Sheaf.AlgebraicGeometry.TensorPullbackSectionAdjunction
+import WeilConjectures.AlgebraicGeometry.AmpleIso
+import WeilConjectures.AlgebraicGeometry.AmplePullback
+import WeilConjectures.AlgebraicGeometry.Modules.InvertiblePullbackTensor
 
 /-! # Ample invertible modules near a fibre
 

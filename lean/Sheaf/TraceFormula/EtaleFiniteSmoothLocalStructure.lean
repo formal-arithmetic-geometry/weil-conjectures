@@ -10,6 +10,12 @@ public import Mathlib.AlgebraicGeometry.ResidueField
 public import Mathlib.AlgebraicGeometry.Scheme
 public import Sheaf.FieldTheory.PurelyTranscendentalExtension
 public import WeilConjectures.Mathlib.Topology.KrullDimension
+import Sheaf.AlgebraicGeometry.Morphisms.GeometricallyIntegralFibreNeighbourhood
+import Sheaf.AlgebraicGeometry.RefinedQuasiFinitePolynomialPureTranscendental
+import Sheaf.TraceFormula.SmoothComponentPureTranscendental
+import WeilConjectures.AlgebraicGeometry.EtaleLocalFiniteAtPoint
+import WeilConjectures.AlgebraicGeometry.FibreProductPointResidueField
+import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
 
 /-!
 # Affine elementary etale finite-over-smooth local structure

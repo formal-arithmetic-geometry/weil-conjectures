@@ -8,6 +8,10 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 public import Mathlib.Algebra.Category.ModuleCat.AB
 public import Mathlib.AlgebraicGeometry.OpenImmersion
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import Sheaf.AlgebraicGeometry.EtaleInverseImageCompositionModuleLinear
+import Sheaf.AlgebraicGeometry.UniversalHomeomorphismInvariance
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
+import WeilConjectures.AlgebraicGeometry.ReductionUniversalHomeomorphism
 
 /-!
 # Open direct image and reduction

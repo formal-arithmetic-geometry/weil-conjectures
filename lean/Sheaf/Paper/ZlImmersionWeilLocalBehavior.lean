@@ -29,6 +29,12 @@ import Sheaf.CategoryTheory.LocalizedModuleExactIndependent
 import Sheaf.Paper.SfIntegralCompactSupportConstructible
 import Sheaf.AlgebraicGeometry.ProEtaleOpenExtensionProducts
 import Sheaf.Paper.CompletedOpenExchangeTransport
+import Sheaf.CategoryTheory.LocalizedModuleExactForSystems
+import Sheaf.Paper.IntegralPullbackCompletedComparison
+import Sheaf.Paper.QcqsCompactSupportRealization
+import Sheaf.SixFunctors.FrobeniusPointTransportNatural
+import Sheaf.SixFunctors.IntegralOpenReductionComparison
+import Sheaf.SixFunctors.OpenTensorNormalization
 
 /-! # Exact immersion operations and local Frobenius on Weil stalks
 

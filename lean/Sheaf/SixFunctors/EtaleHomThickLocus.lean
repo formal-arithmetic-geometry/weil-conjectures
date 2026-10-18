@@ -10,6 +10,17 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Shift
 public import WeilConjectures.Mathlib.Algebra.Homology.Monoidal
 public import Mathlib.CategoryTheory.Shift.Adjunction
 public import Mathlib.CategoryTheory.Triangulated.Opposite.Pretriangulated
+import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
+import Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses
+import Sheaf.Algebra.Homology.DerivedScalarExtensionCounitShift
+import Sheaf.Algebra.Homology.HomComplex
+import Sheaf.Algebra.Homology.HomTensorTotal
+import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
+import Sheaf.Algebra.Homology.RhomGlobalSectionsOfUniverses
+import Sheaf.Algebra.Homology.RingedInternalHomShiftOfUniverses
+import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
+import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
+import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
 
 /-! # Scalar extension and the derived internal-Hom comparison
 

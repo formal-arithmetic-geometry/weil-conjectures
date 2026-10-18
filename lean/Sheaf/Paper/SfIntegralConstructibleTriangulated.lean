@@ -38,6 +38,15 @@ import Sheaf.Paper.ProEtaleConstructibleCoefficientSheaf
 import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 import Mathlib.CategoryTheory.Shift.ShiftSequence
 import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
+import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
+import Sheaf.Algebra.Homology.RingedInternalHomShiftOfUniverses
+import Sheaf.CategoryTheory.RingedSiteModulesGrothendieckOfUniverses
+import Sheaf.Paper.CompletedIntegralConstantMapOfUniverses
+import Sheaf.Paper.DerivedCompleteOnSlices
+import Sheaf.Paper.IntegralReductionTowerCanonical
+import Sheaf.Paper.ProEtaleConstructibleSheaf
+import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitExistence
+import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitTowerTriangle
 
 /-!
 # Triangulation of the intrinsic integral constructible category

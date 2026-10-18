@@ -13,6 +13,9 @@ import Sheaf.AlgebraicGeometry.FundamentalGroup.LocallyConstantEquivalence
 import Sheaf.AlgebraicGeometry.FundamentalGroup.FiberEquivalence
 import WeilConjectures.CategoryTheory.Sites.Torsor
 import WeilConjectures.GroupTheory.WeilGroup
+import Sheaf.AlgebraicGeometry.FundamentalGroup.FLCFiber
+import Sheaf.AlgebraicGeometry.FundamentalGroup.FiniteEtaleWeilTransport
+import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Torsor
 
 /-!
 # Finite constant cohomology and geometric monodromy

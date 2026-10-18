@@ -24,6 +24,8 @@ import Sheaf.RingTheory.WeaklyEtaleField
 import Mathlib.CategoryTheory.MorphismProperty.Composition
 import Mathlib.CategoryTheory.MorphismProperty.Limits
 import Mathlib.AlgebraicGeometry.Morphisms.WeaklyEtale
+import Sheaf.RingTheory.IndEtaleUniverseTransport
+import WeilConjectures.AlgebraicGeometry.AffineChartBaseChangeIso
 
 /-! # Nagata ascent along weakly etale ring maps
 

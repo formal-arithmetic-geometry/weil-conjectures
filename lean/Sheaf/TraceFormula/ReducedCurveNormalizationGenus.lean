@@ -16,6 +16,18 @@ public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
 public import WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar
 public import WeilConjectures.AlgebraicGeometry.Curve
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Normalization
+import Sheaf.AlgebraicGeometry.EulerCharZeroDimSupport
+import Sheaf.AlgebraicGeometry.ReducedAlgebraicNormalizationFieldChange
+import WeilConjectures.AlgebraicGeometry.AffineMorphismCohomologyEdge
+import WeilConjectures.AlgebraicGeometry.CoherentKernelCokernelLocallyNoetherian
+import WeilConjectures.AlgebraicGeometry.Cohomology.EulerCharProper
+import WeilConjectures.AlgebraicGeometry.Cohomology.LongExact
+import WeilConjectures.AlgebraicGeometry.FinitePushforwardCoherent
+import WeilConjectures.AlgebraicGeometry.FiniteTypeModuleSupportClosed
+import WeilConjectures.AlgebraicGeometry.GlobalSectionsBijective
+import WeilConjectures.AlgebraicGeometry.Regular
+import WeilConjectures.AlgebraicGeometry.WeilPbcNormalizationInResidueFieldExtension
+import WeilConjectures.Mathlib.Topology.KrullDimension
 
 /-!
 # Normalization formula for the arithmetic genus of a reduced proper curve

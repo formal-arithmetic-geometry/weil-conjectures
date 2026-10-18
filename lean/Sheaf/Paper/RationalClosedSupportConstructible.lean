@@ -21,6 +21,8 @@ import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 import Mathlib.RingTheory.Noetherian.Defs
 import Sheaf.CategoryTheory.RightDerivedFunctorOfQuasiIsoResolutions
 import Sheaf.Paper.CartesianCoefficients
+import Sheaf.Paper.FormalClosedSupportDerived
+import Sheaf.Paper.RationalOpenDirectImageConstructible
 
 /-!
 # Rational closed support preserves finite constant constructibility

@@ -33,6 +33,11 @@ import Sheaf.Algebra.Homology.RhomGlobalSections
 import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Comparison
 import Sheaf.AlgebraicGeometry.CompactifiableOverField
 import Mathlib.AlgebraicGeometry.Noetherian
+import Sheaf.Algebra.Homology.RhomGlobalSectionsOfUniverses
+import Sheaf.Algebra.Homology.RingedInternalHomShiftOfUniverses
+import Sheaf.AlgebraicGeometry.UnboundedCompactSupportProperComposition
+import Sheaf.SixFunctors.TensorProjectionAdjunct
+import Sheaf.SmoothPurity.InternalAdjunctionEvaluation
 
 /-! # The double-dual morphism under proper direct image
 

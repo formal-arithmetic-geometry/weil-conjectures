@@ -14,6 +14,8 @@ import WeilConjectures.CategoryTheory.RingedSiteGrothendieckAbelian
 import Sheaf.CategoryTheory.RingedSiteInjectiveMonoRestriction
 import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 import Sheaf.CategoryTheory.ModuleAbelianEvaluationComparison
+import Sheaf.CategoryTheory.RingedSiteModules
+import Sheaf.CategoryTheory.SiteCoveringAxioms
 
 /-! # Forgetting scalars and derived restriction kernels
 

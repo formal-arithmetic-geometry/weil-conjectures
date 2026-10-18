@@ -26,6 +26,21 @@ import Sheaf.AlgebraicGeometry.ProEtaleConstantExact
 import Sheaf.Paper.EtaleOriginDerivedCategory
 import Sheaf.Paper.ComparisonPullbackExact
 import Sheaf.AlgebraicGeometry.ProEtaleComparisonPullbackSections
+import Sheaf.AlgebraicGeometry.CanonicalCompactSupportSiteComparison
+import Sheaf.AlgebraicGeometry.CompactSupportComparisonUnit
+import Sheaf.AlgebraicGeometry.ProEtaleExtensionZeroComparison
+import Sheaf.AlgebraicGeometry.ProEtaleIntrinsicExtensionByZero
+import Sheaf.AlgebraicGeometry.ProEtaleIntrinsicExtensionByZeroExact
+import Sheaf.AlgebraicGeometry.ProperExceptionalOpenBaseChange
+import Sheaf.AlgebraicGeometry.SfFullCohomologicalDimension
+import Sheaf.AlgebraicGeometry.SpecifiedExceptionalClassHom
+import Sheaf.Paper.ConstructibleExceptionalAdjunctionCoefficients
+import Sheaf.Paper.EtaleCoefficientSystemAdjoint
+import Sheaf.Paper.FullCDClassRestriction
+import Sheaf.Paper.IntegralFinitePullbackComposition
+import Sheaf.Paper.ProEtaleConstructibleOrigin
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
+import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 
 /-!
 # Exceptional base change along an arbitrary open immersion

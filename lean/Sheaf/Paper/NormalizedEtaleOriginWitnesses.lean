@@ -12,6 +12,10 @@ public import Sheaf.Algebra.Homology.DerivedChangeOfRingsIndependentCoefficients
 public import Sheaf.Paper.PbcActualScalarPullback
 import Sheaf.AlgebraicGeometry.ProEtaleSiteComparisonFiniteLevel
 import Sheaf.AlgebraicGeometry.ProEtaleSiteComparisonDerived
+import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
+import Sheaf.AlgebraicGeometry.CompactSupportComparisonUnit
+import Sheaf.AlgebraicGeometry.ProEtaleFiniteModules
+import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
 
 /-!
 # Compatible etale origins of normalized finite-coefficient towers

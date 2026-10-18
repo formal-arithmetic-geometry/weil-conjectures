@@ -8,6 +8,12 @@ module
 public import Sheaf.RingTheory.Depth
 public import Mathlib.RingTheory.RegularLocalRing.Defs
 public import Mathlib.RingTheory.LocalRing.Quotient
+import Sheaf.AlgebraicGeometry.IsRegularScheme
+import Sheaf.RingTheory.DepthLeSupportDimension
+import Sheaf.RingTheory.RegularLocalGeneratorsRegularSequence
+import Sheaf.RingTheory.RegularLocalUFDBoundaryFactorization
+import Sheaf.TraceFormula.CoprimeGeneratorsMprimaryOrUnit
+import WeilConjectures.RingTheory.AnnihilatorAssociatedPrimesExactSequence
 
 /-!
 # A depth-one quotient of a regular local surface has principal kernel

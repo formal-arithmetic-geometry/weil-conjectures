@@ -20,6 +20,8 @@ import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
 import Mathlib.AlgebraicGeometry.AffineScheme
 import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
+import Sheaf.AlgebraicGeometry.ProEtaleIntrinsicExtensionByZero
+import Sheaf.SecSmoothPurity.ProEtaleFiniteConstantSections
 
 /-!
 # Cokernel presentation of the supported constant pro-etale module

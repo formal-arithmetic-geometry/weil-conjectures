@@ -41,6 +41,17 @@ import Mathlib.Algebra.Category.ModuleCat.ChangeOfRingsExact
 import Mathlib.RingTheory.Ideal.Quotient.PowTransition
 import WeilConjectures.CategoryTheory.Triangulated.DerivedLimit
 import Sheaf.Algebra.Homology.DerivedChangeOfRings
+import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
+import Sheaf.AlgebraicGeometry.CompactSupportComparisonUnit
+import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimitIndependentCoefficients
+import Sheaf.Paper.AdicCoefficientDatum
+import Sheaf.Paper.CompletedConstantSheafReduction
+import Sheaf.Paper.ConstantCompletionEquivalence
+import Sheaf.Paper.FiniteRingConstructibleDerivedOrigin
+import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
+import WeilConjectures.AlgebraicGeometry.ConstantEtaleSheafShortExact
+import WeilConjectures.AlgebraicGeometry.ConstantSheafGeometricStalk
+import WeilConjectures.CategoryTheory.Triangulated.DerivedCountableProductsCore
 /-!
 # Perfect local lifting of a lisse residue reduction
 

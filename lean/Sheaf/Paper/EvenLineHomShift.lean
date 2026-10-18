@@ -14,6 +14,10 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.HasMonoidalDerivedC
 public import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategory
 public import Sheaf.CategoryTheory.SiteCoveringAxioms
 import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
+import Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses
+import Sheaf.Algebra.Homology.HomComplex
+import Sheaf.Algebra.Homology.KFlat
+import Sheaf.Algebra.Homology.RingedInternalHomShiftOfUniverses
 
 /-! # Even line twists and the signed source shift of internal Hom
 

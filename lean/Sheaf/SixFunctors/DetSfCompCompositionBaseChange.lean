@@ -19,6 +19,23 @@ import Sheaf.Paper.CompactificationLocalizing
 import Sheaf.Paper.UnboundedBaseChangeExtension
 import Sheaf.CategoryTheory.InternalAbelianSheafModuleEquivalence
 import Sheaf.CategoryTheory.DerivedCategory.CompositionAdjunctionNormalization
+import Sheaf.AlgebraicGeometry.ProEtaleRingedOpenClosed
+import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
+import Sheaf.CategoryTheory.RightDerivedFunctorOfQuasiIsoResolutions
+import Sheaf.CategoryTheory.RingedSiteModulesGrothendieckOfUniverses
+import Sheaf.CategoryTheory.RingedToposDerivedPushforwardComposition
+import Sheaf.Compactification.CommonDenseRefinement
+import Sheaf.Compactification.DenseRefinementMorphisms
+import Sheaf.Paper.CartesianCoefficients
+import Sheaf.Paper.CondensedModuleDerivedPushpull
+import Sheaf.Paper.FiniteProperBaseChange
+import Sheaf.Paper.IntegralProperBaseChange
+import Sheaf.Paper.ProEtaleProperOpenInterchange
+import Sheaf.Paper.ProperBaseChangeRational
+import Sheaf.SixFunctors.BaseChangeIdentityOpenRestriction
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LowerShriek.Defs
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs
+import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Defs
 
 /-!
 # Base change for `Rf_!` on the localizing category

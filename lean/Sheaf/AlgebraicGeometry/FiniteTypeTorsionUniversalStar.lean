@@ -12,6 +12,9 @@ public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarCoherence
 public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
 public import Sheaf.AlgebraicGeometry.StrictHenselization
 public import Sheaf.AlgebraicGeometry.StrictHenselizationCanonicalMap
+import Sheaf.AlgebraicGeometry.FiniteTypeFibreDimensionBound
+import Sheaf.AlgebraicGeometry.GabberStrictLocalTorsionBound
+import Sheaf.Paper.StrictHenselizationFunctoriality
 
 /-!
 # Universal finite cohomological dimension for torsion coefficients

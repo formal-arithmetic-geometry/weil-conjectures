@@ -8,6 +8,15 @@ public import Sheaf.AlgebraicGeometry.PhSchemeSite
 public import Sheaf.CategoryTheory.Sites.GeometricMorphism
 public import Sheaf.TraceFormula.BigSmallEtaleExactRetraction
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
+import Sheaf.AlgebraicGeometry.PhAffineStandardSieveBasis
+import Sheaf.AlgebraicGeometry.PointedEtaleStalk
+import Sheaf.AlgebraicGeometry.ProperSurjectionEtaleSectionEqualizer
+import Sheaf.AlgebraicGeometry.QcqsHigherImagesPrimeTorsion
+import Sheaf.CategoryTheory.SiteCoveringAxioms
+import Sheaf.CategoryTheory.SitePullbackAbelianExact
+import Sheaf.TraceFormula.BigSmallEtalePullbackFormula
+import WeilConjectures.AlgebraicGeometry.EtaleSheaves
+import WeilConjectures.AlgebraicGeometry.InverseImageStalkGerm
 
 /-!
 # Proper and étale hypotheses for the ph/étale comparison

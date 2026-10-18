@@ -22,6 +22,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 public import Mathlib.CategoryTheory.Abelian.FunctorCategory
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Ordinary
 public import WeilConjectures.SixFunctors.Etale.Derived.GeometricPoint
+import Sheaf.Paper.SemilinearDerivedSections
 
 /-!
 # Finite counits on the dualizing compact-support tower

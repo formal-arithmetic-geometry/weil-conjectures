@@ -2,6 +2,8 @@ module
 
 public import Mathlib.Algebra.Module.FinitePresentation
 public import Mathlib.LinearAlgebra.TensorProduct.Basic
+import Sheaf.RingTheory.UniversalInjectiveFiniteTest
+import Sheaf.SecTraceFormula.UniversallyExactFpSplit
 
 /-!
 # Finite tensor-kernel tests detect factorization

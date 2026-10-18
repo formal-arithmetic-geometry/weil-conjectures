@@ -11,6 +11,11 @@ public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.FullyFait
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Defs
 public import Sheaf.CategoryTheory.RightDerivedFunctorOfQuasiIsoResolutions
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
+import Sheaf.AlgebraicGeometry.BoundedComplexDirectImagePresheaf
+import Sheaf.AlgebraicGeometry.ProEtaleBoundedContinuitySections
+import Sheaf.AlgebraicGeometry.ProEtaleToposFunctorialityInverseImage
+import Sheaf.AlgebraicGeometry.WContractibleAffineCover
+import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 
 /-!
 # Bounded-below filtered-colimit continuity of pro-etale direct images

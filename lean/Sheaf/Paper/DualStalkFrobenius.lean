@@ -14,6 +14,9 @@ public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.LinearAlgebra
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.HomCoverGluing
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.FiniteFreeDualPullback
 import Sheaf.Paper.PointFibreDerivedTensor
+import Sheaf.Paper.SfWeilSheafComplex
+import Sheaf.SixFunctors.FrobeniusPointTransport
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
 
 /-! # Dual stalks and contragredient local Frobenius
 

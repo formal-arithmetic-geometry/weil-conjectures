@@ -25,6 +25,10 @@ import Sheaf.AlgebraicGeometry.FiniteTypeFibreDimensionBound
 import Mathlib.AlgebraicGeometry.Geometrically.Irreducible
 import Mathlib.AlgebraicGeometry.ZariskisMainTheorem
 import Mathlib.RingTheory.Ideal.GoingDown
+import Sheaf.AlgebraicGeometry.ClosedDominantDimension
+import Sheaf.AlgebraicGeometry.DeJongGeometricallyIrreducibleTower
+import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
+import Sheaf.SixFunctors.TraceFormula.NodalFamilyFittingSingular
 
 /-!
 # An almost plurinodal first term of a proper hypercover

@@ -12,6 +12,8 @@ import WeilConjectures.AlgebraicGeometry.ReductionUniversalHomeomorphism
 import Sheaf.AlgebraicGeometry.ClosedImmersionResidueFieldIso
 import Mathlib.AlgebraicGeometry.FunctionField
 import WeilConjectures.Topology.PresheafModuleStalkFunctor
+import Sheaf.AlgebraicGeometry.GeometricIrreducibilityAffineLocal
+import Sheaf.AlgebraicGeometry.GeometricallyIrreducibleAlgebraClosure
 
 /-!
 # Geometric irreducibility and the generic residue field

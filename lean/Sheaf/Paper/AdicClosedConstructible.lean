@@ -50,6 +50,8 @@ import Sheaf.Paper.IntrinsicFiniteTorsionConstructibility
 import Mathlib.AlgebraicGeometry.Noetherian
 import Mathlib.Algebra.Homology.DerivedCategory.SingleTriangle
 import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
+import Sheaf.Paper.FiniteTorInternalHomAnyField
+import Sheaf.Paper.IntegralHomReduction
 
 /-!
 # Closed tensor structure on integral constructible adic complexes

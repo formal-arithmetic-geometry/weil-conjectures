@@ -36,6 +36,16 @@ import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
 import Mathlib.AlgebraicGeometry.Noetherian
 import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 import Mathlib.AlgebraicGeometry.ZariskisMainTheorem
+import Sheaf.AlgebraicGeometry.CompactSupportComparisonUnit
+import Sheaf.AlgebraicGeometry.FiniteCompactProjectionFormula
+import Sheaf.AlgebraicGeometry.FixedComparisonDirectImageMate
+import Sheaf.AlgebraicGeometry.SpecifiedExceptionalClassHom
+import Sheaf.Paper.BoundaryDualizingComposition
+import Sheaf.Paper.BoundaryProEtaleProjectionComparison
+import Sheaf.Paper.BoundaryProEtaleQCompatibility
+import Sheaf.Paper.ConstructibleExceptionalAdjunctionCoefficients
+import Sheaf.SixFunctors.BoundaryAlphaNormalization
+import Sheaf.SixFunctors.FiniteDualitySiteComparison
 
 /-!
 # Discharge of the finite-stage boundary duality input

@@ -7,6 +7,7 @@ module
 
 public import Sheaf.CategoryTheory.FiniteFilteredDerivedPresentation
 import Mathlib.CategoryTheory.Triangulated.Pretriangulated
+import Sheaf.Algebra.Homology.FilteredTruncationTriangle
 
 /-!
 # Graded comparisons for supplied filtered lifts

@@ -35,6 +35,10 @@ import Sheaf.Paper.SiteRestrictionInjectives
 import Sheaf.RingTheory.IndEtaleStability
 import WeilConjectures.Mathlib.CategoryTheory.Preadditive.Injective.Preserves
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
+import Sheaf.AlgebraicGeometry.ProEtaleConstantExact
+import Sheaf.AlgebraicGeometry.ProEtaleConstantRingOperations
+import Sheaf.CategoryTheory.RingedSiteModulesGrothendieckOfUniverses
+import WeilConjectures.CategoryTheory.ExtensionByZeroPresheaf
 
 /-!
 # Pro-etale restriction preserves injectives

@@ -20,6 +20,11 @@ import Mathlib.RingTheory.Kaehler.TensorProduct
 import Mathlib.RingTheory.Etale.Kaehler
 import Mathlib.RingTheory.AdicCompletion.AsTensorProduct
 import Mathlib.RingTheory.AdicCompletion.LocalRing
+import Sheaf.RingTheory.GeometricFieldStalkDescent
+import Sheaf.RingTheory.PresentationFittingIdeal
+import Sheaf.RingTheory.SeparableClosedPointFormalPresentation
+import Sheaf.TraceFormula.CompletionLocalCompleteIntersection
+import Sheaf.TraceFormula.FormalJacobianQuadraticCriterion
 
 /-!
 # Pointwise nodal criterion using the first Fitting ideal

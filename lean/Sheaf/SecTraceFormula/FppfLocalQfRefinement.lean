@@ -8,6 +8,7 @@ public import Mathlib.AlgebraicGeometry.Sites.Fpqc
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Sheaf.AlgebraicGeometry.QuasiFiniteMorphism
+import Sheaf.TraceFormula.FppfLocalQfNeighbourhood
 
 /-!
 # Locally quasi-finite refinements of fppf coverings

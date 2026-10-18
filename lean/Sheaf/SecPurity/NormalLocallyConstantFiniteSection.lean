@@ -9,6 +9,9 @@ public import Mathlib.AlgebraicGeometry.Sites.Proetale
 public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Proetale
 public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Defs
+import Sheaf.AlgebraicGeometry.NormalGeometricCoverComponents
+import Sheaf.AlgebraicGeometry.ProEtaleLocalSystemRepresentability
+import Sheaf.AlgebraicGeometry.ProEtaleSiteComparison
 
 /-!
 # Finite-cover sections of locally constant pro-étale sheaves on a normal scheme

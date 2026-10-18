@@ -10,6 +10,12 @@ public import WeilConjectures.AlgebraicGeometry.DeformationSpace.Coordinates
 public import WeilConjectures.AlgebraicGeometry.DeformationSpace.BaseChange
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.Deformation
 public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality
+import Sheaf.AlgebraicGeometry.EtaleLocalNormalForm
+import Sheaf.Paper.CohomologicalSmoothnessFiniteComparison
+import Sheaf.Paper.PurityDncFamilyIntrinsic
+import Sheaf.Paper.PurityNormalCone
+import Sheaf.Paper.PuritySectionInvariantIntrinsic
+import Sheaf.Paper.VectorBundlePurity
 
 /-! # Canonical fibre comparisons for the deformation of a smooth section
 

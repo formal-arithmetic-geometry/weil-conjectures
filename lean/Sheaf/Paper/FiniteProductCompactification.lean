@@ -11,6 +11,13 @@ public import Sheaf.Paper.FiniteDirectImageComposition
 public import Sheaf.AlgebraicGeometry.ProEtaleIntrinsicExtensionByZero
 import Sheaf.Paper.PfRefinementCompatibility
 import Sheaf.SecSmoothPurity.ProEtaleDerivedOpenRestriction
+import Sheaf.AlgebraicGeometry.FixedEtaleOriginWitness
+import Sheaf.Paper.CanonicalOriginCompactSupportComposition
+import Sheaf.Paper.CompactificationCoherence
+import Sheaf.Paper.DerivedPullbackTensorHom
+import Sheaf.Paper.ExchangeProjectionSuppliedDomains
+import Sheaf.Paper.PurityFiniteSetting
+import WeilConjectures.Compactification.Refinement
 
 /-! # The finite forward product in compactification coordinates
 

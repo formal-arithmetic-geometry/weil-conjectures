@@ -15,6 +15,9 @@ import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunc
 import Sheaf.CategoryTheory.RingedSiteModulesGrothendieckOfUniverses
 import Sheaf.CategoryTheory.RingedToposDerivedPushforwardComposition
 import Mathlib.CategoryTheory.Adjunction.Mates
+import Sheaf.AlgebraicGeometry.ProperHypercoverEtaleDescent
+import Sheaf.CategoryTheory.DerivedCategory.CompositionAdjunctionNormalization
+import Sheaf.Paper.OrientedNearbyCycles
 
 /-!
 # Proper hypercover descent for oriented nearby cycles

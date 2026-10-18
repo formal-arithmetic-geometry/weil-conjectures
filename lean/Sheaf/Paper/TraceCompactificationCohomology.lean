@@ -20,6 +20,15 @@ import WeilConjectures.CategoryTheory.Triangulated.DerivedLimit
 import Mathlib.AlgebraicGeometry.Morphisms.Proper
 import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+import Sheaf.AlgebraicGeometry.SfIntrinsicCompactSupport
+import Sheaf.Paper.CommonStageCompactWeilCohomology
+import Sheaf.Paper.CompactificationCoherence
+import Sheaf.Paper.EtaleOriginDerivedCategory
+import Sheaf.Paper.FiniteCoefficientPoint
+import Sheaf.Paper.IntrinsicFiniteTorsionConstructibility
+import Sheaf.Paper.SfCommonStageDirectImage
+import WeilConjectures.Compactification.Refinement
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerShriek
 
 /-!
 # Cohomology on a chosen compactification

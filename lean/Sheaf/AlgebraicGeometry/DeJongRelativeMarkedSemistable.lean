@@ -50,6 +50,12 @@ import Mathlib.AlgebraicGeometry.Morphisms.Separated
 import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 import Mathlib.AlgebraicGeometry.Morphisms.Immersion
 import Sheaf.AlgebraicGeometry.UnramifiedQuasiFinite
+import Sheaf.AlgebraicGeometry.ChowProjectiveClosedImmersions
+import Sheaf.AlgebraicGeometry.FlatificationHorizontalCurvePair
+import Sheaf.AlgebraicGeometry.ProjectiveBundleToHProjective
+import Sheaf.AlgebraicGeometry.StableModificationFlatCurvePair
+import Sheaf.AlgebraicGeometry.SteinSmoothGenericCurve
+import Sheaf.SixFunctors.TraceFormula.NodalFamilyFittingSingular
 
 /-!
 # De Jong marked semistable model in the projective-bundle convention

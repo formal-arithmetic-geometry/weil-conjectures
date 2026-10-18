@@ -31,6 +31,12 @@ import Sheaf.CategoryTheory.Triangulated.DerivedLimitProducts
 
 import Mathlib.Algebra.Homology.HomologicalComplexLimits
 import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Basic
+import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
+import Sheaf.CategoryTheory.StrictRoosDerivedLimitComparison
+import Sheaf.Paper.DerivedScalarExtensionRestrictionAdjunction
+import Sheaf.Paper.FiniteFieldSheafScalarExtension
+import Sheaf.Paper.IntegralScalarExtensionUniverses
+import Sheaf.Paper.ProEtaleConstructibleSheaf
 /-!
 # Integral scalar extension preserves intrinsic bounded constructibility
 

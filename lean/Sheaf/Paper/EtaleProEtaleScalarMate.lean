@@ -19,6 +19,11 @@ public import Sheaf.Paper.WitnessCompatibility
 public import Sheaf.Paper.EtaleUnboundedRestrictionComparison
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.RestrictScalars
 public import Mathlib.CategoryTheory.Adjunction.Mates
+import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
+import Sheaf.AlgebraicGeometry.ProEtaleConstantRingOperations
+import Sheaf.AlgebraicGeometry.ProEtaleDirectImageComparison
+import Sheaf.SixFunctors.RingedDerivedMonoidalComparisons
+import WeilConjectures.SixFunctors.Etale.Derived.LowerStarProjection
 
 /-!
 # Scalar mates commute with the etale/pro-etale comparison

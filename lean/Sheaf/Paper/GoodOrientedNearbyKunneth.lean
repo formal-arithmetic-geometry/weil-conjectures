@@ -9,6 +9,9 @@ public import Sheaf.Paper.OrientedNearbyCycles
 public import WeilConjectures.AlgebraicGeometry.InvertibleExponent
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
+import Sheaf.AlgebraicGeometry.FiniteTypeTorsionUniversalStar
+import Sheaf.Paper.OrientedNearbyStrictLocalDescription
+import WeilConjectures.SixFunctors.Etale.Derived.LowerStarProjection
 
 /-!
 # Conditional Künneth formula for oriented nearby cycles

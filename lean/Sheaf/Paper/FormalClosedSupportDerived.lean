@@ -24,6 +24,8 @@ import Mathlib.CategoryTheory.Triangulated.Triangulated
 import Mathlib.RingTheory.FiniteType
 import Mathlib.RingTheory.Spectrum.Prime.Noetherian
 import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs
 
 /-!
 # Derived sections with closed support

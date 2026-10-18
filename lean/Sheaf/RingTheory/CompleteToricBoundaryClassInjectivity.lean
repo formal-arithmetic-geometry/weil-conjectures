@@ -13,6 +13,10 @@ public import Mathlib.RingTheory.DiscreteValuationRing.Basic
 import Sheaf.RingTheory.CompletedMonoidSupportProjection
 import Sheaf.RingTheory.SerreCriterionNormal
 import Sheaf.RingTheory.SerreS2TotalFractionMembership
+import Sheaf.GroupTheory.SharpConeLatticeIntersection
+import Sheaf.RingTheory.CompleteToricFacetValuations
+import Sheaf.RingTheory.LogRegularSaturationNormality
+import WeilConjectures.RingTheory.CohenRing
 
 /-!
 # Injection of toric boundary divisor classes into the complete local class group

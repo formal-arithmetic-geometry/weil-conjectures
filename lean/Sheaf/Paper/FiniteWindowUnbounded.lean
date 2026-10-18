@@ -17,6 +17,7 @@ import Sheaf.AlgebraicGeometry.ProEtaleProductsDerived
 import Sheaf.CategoryTheory.TruncationsAndHomotopyColimits
 import Mathlib.CategoryTheory.Triangulated.Pretriangulated
 import Mathlib.CategoryTheory.Triangulated.TStructure.TruncLEGT
+import Sheaf.Paper.FiniteWindowBounded
 
 /-!
 # Lower-tail vanishing without a lower cohomology bound

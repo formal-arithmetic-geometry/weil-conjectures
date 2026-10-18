@@ -19,6 +19,7 @@ import Sheaf.Paper.SiteSheafificationSectionsLocal
 import Mathlib.CategoryTheory.Sites.Sheafification
 import Mathlib.CategoryTheory.Sites.CoverLifting
 import Mathlib.CategoryTheory.Sites.LocallyBijective
+import WeilConjectures.AlgebraicGeometry.SiteSheafificationSectionsLocal
 
 /-! # Internal Hom of constant module sheaves
 

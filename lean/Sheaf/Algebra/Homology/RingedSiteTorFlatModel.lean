@@ -21,6 +21,7 @@ import Mathlib.Algebra.Homology.BifunctorShift
 import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 import Sheaf.Algebra.Homology.BoundedFlatReplacement
 import Sheaf.Algebra.Homology.SiteFlatOpcyclesTorCriterion
+import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
 
 /-!
 # Bounded flat models on a ringed site

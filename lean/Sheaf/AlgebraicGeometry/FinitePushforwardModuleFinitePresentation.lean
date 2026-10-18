@@ -17,6 +17,8 @@ import WeilConjectures.AlgebraicGeometry.Modules.PullbackTilde
 import WeilConjectures.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
 import Mathlib.AlgebraicGeometry.Morphisms.Proper
 import Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
+import Sheaf.RingTheory.FiniteExtensionModuleFinitePresentation
+import Sheaf.TraceFormula.FiniteSingletonFibreStalkRing
 
 /-!
 # Finite presentation under finite pushforward near a singleton fibre

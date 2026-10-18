@@ -36,6 +36,7 @@ import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 import WeilConjectures.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
 import WeilConjectures.AlgebraicGeometry.EtaleSetInverseImageRestriction
 import WeilConjectures.AlgebraicGeometry.Sites.InverseImageRepresentable
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
 @[expose] public section
 universe u
 open CategoryTheory CategoryTheory.Limits MonoidalCategory

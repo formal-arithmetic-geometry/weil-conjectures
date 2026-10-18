@@ -21,6 +21,9 @@ import Mathlib.AlgebraicGeometry.Morphisms.Finite
 import Mathlib.RingTheory.Noetherian.Defs
 import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 import WeilConjectures.AlgebraicGeometry.Modules.InvertiblePullbackTensor
+import Sheaf.AlgebraicGeometry.FiniteSurjectiveAmpleReflection
+import Sheaf.AlgebraicGeometry.ProperIntegralCurveAmpleDegree
+import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
 
 /-!
 # Ampleness and degrees on normalized components of a proper curve

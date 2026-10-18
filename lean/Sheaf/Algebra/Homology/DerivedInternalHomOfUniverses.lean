@@ -8,6 +8,8 @@ module
 public import Sheaf.Algebra.Homology.DerivedInternalHom
 public import WeilConjectures.SixFunctors.Etale.Derived.Hom
 public import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
+import Sheaf.Algebra.Homology.HomComplex
+import Sheaf.Algebra.Homology.QuasiIsoHomComplexMap
 
 /-! # Derived internal Hom without identifying the site universes
 

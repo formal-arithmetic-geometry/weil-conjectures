@@ -14,6 +14,15 @@ import Sheaf.Paper.ConstantTowerTransition
 import Sheaf.Paper.FiniteMittagLeffler
 import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
 import Mathlib.AlgebraicGeometry.Sites.ConstantSheaf
+import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
+import Sheaf.AlgebraicGeometry.ProEtaleModuleDirectImageLeftExact
+import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
+import Sheaf.Paper.CompletedIntegralConstantMapOfUniverses
+import Sheaf.Paper.ConstantCoefficientScalarNormalization
+import Sheaf.Paper.FiniteCoefficientPoint
+import Sheaf.Paper.PointProEtaleSectionsExact
+import Sheaf.Paper.SfCommonStageDirectImage
+import Sheaf.Paper.SfRationalizationKaroubi
 
 /-!
 # Degree-zero constant cohomology on a connected scheme

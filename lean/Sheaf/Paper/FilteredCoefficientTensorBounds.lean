@@ -18,6 +18,9 @@ import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
 import Sheaf.CategoryTheory.RingedSiteModules
 import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 import Mathlib.CategoryTheory.Sites.Sheafification
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
+import Sheaf.Paper.ProEtaleConstructibleSheaf
+import Sheaf.Paper.SfCommonStageWeilCohomology
 
 /-!
 # Finite coefficient filtrations preserve constructibility and cohomological bounds

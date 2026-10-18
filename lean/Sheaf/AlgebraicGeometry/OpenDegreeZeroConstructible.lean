@@ -35,6 +35,13 @@ import WeilConjectures.SixFunctors.Finite.Stalk
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 import WeilConjectures.ConstructibleSheaf.Pullback
 import Sheaf.Paper.InverseImageStalkGerm
+import Sheaf.AlgebraicGeometry.OpenImmersionRestriction
+import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
+import Sheaf.SecSmoothPurity.FinReductionOpenDirectImage
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
+import WeilConjectures.AlgebraicGeometry.InverseImageStalkGerm
+import WeilConjectures.AlgebraicGeometry.ReductionUniversalHomeomorphism
+import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 
 /-!
 # Constructibility of degree-zero open direct images over a field

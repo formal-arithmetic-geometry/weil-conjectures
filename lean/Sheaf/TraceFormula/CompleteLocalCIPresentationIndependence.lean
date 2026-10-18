@@ -8,6 +8,15 @@ public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.AdicCompletion.Basic
 public import Mathlib.RingTheory.RegularLocalRing.Defs
 public import Mathlib.RingTheory.Regular.RegularSequence
+import Sheaf.AlgebraicGeometry.IsRegularScheme
+import Sheaf.RingTheory.CohenStructurePowerSeriesSurjection
+import Sheaf.RingTheory.CompletionRegularKernelPreservation
+import Sheaf.RingTheory.CompletionRegularLocal
+import Sheaf.RingTheory.FormallySmoothAdicLiftIntoComplete
+import Sheaf.RingTheory.PowerSeriesAdicEvaluation
+import Sheaf.RingTheory.PowerSeriesFieldCohenFsAdic
+import Sheaf.RingTheory.PowerSeriesFieldCohenRegularComplete
+import Sheaf.TraceFormula.RegularLocalSurjectionKernelComparison
 
 /-!
 # Independence of a regular-sequence kernel from the regular-local presentation

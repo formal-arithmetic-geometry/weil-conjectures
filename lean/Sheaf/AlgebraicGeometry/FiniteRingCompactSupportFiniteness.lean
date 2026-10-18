@@ -31,6 +31,7 @@ import Sheaf.AlgebraicGeometry.EtaleModuleSheavesGrothendieckAbelian
 import Sheaf.AlgebraicGeometry.KInjectiveResolutionsExist
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
 import WeilConjectures.CategoryTheory.TruncationHypercohomology
+import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 
 /-!
 # Compact-support finiteness over arbitrary finite rings

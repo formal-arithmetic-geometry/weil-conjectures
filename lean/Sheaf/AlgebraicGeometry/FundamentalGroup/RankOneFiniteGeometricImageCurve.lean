@@ -15,6 +15,10 @@ import Sheaf.AlgebraicGeometry.FundamentalGroup.PadicCharactersH1
 import Sheaf.CategoryTheory.Galois.AutProfinite
 import Sheaf.NumberTheory.Padics.ExtensionIntegersDvr
 import Mathlib.Topology.Algebra.Module.FiniteDimension
+import Sheaf.AlgebraicGeometry.FundamentalGroup.FLCFiber
+import Sheaf.NumberTheory.Padics.DeepPrincipalUnitLog
+import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Frobenius
+import WeilConjectures.GroupTheory.WeilGroup
 
 /-!
 # Finite geometric image of a rank-one Weil character on a curve

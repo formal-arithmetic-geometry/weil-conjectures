@@ -24,6 +24,20 @@ import Sheaf.Paper.KoszulReconstruction
 import Sheaf.Paper.PbcRoosTriangle
 
 public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
+import Sheaf.Algebra.Homology.KInjectiveProductsTermwise
+import Sheaf.AlgebraicGeometry.ProEtaleConstantRingOperations
+import Sheaf.AlgebraicGeometry.ProEtaleCountableProductsExact
+import Sheaf.AlgebraicGeometry.ProfiniteCoefficientInverseImage
+import Sheaf.CategoryTheory.DiagramSiteRealization
+import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimitIndependentCoefficients
+import Sheaf.Paper.IntrinsicCompletionCompleted
+import Sheaf.Paper.PerfectProjectionFormula
+import Sheaf.Paper.ProjectionMateExact
+import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
+import WeilConjectures.Algebra.Homology.RoosComplex
+import WeilConjectures.Algebra.Homology.TowerEvaluationKInjective
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
+import WeilConjectures.CategoryTheory.RingedSiteGrothendieckAbelian
 /-!
 # The canonical direct-image/derived-limit comparison
 

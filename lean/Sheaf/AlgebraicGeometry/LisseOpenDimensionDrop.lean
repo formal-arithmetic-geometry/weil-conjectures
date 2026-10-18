@@ -28,6 +28,8 @@ import WeilConjectures.ConstructibleSheaf.Defs
 import WeilConjectures.ConstructibleSheaf.GenericConstancy
 import WeilConjectures.Mathlib.Topology.KrullDimension
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+import Sheaf.AlgebraicGeometry.FiniteLocallyClosedStratification
+import WeilConjectures.AlgebraicGeometry.FiniteLocallyConstantModuleValues
 
 /-!
 # A lisse open with smaller-dimensional complement

@@ -10,6 +10,29 @@ public import Sheaf.Paper.FiniteTorAmplitudeProEtaleModule
 public import Sheaf.AlgebraicGeometry.SfFiniteExceptionalInverseImage
 public import Sheaf.AlgebraicGeometry.CompactSupportRestrictionOfScalars
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ClosedUpperShriek
+import Sheaf.Algebra.Homology.ChangeOfRingsKFlat
+import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
+import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
+import Sheaf.Algebra.Homology.SheafRingDerivedCoefficientAdjunction
+import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
+import Sheaf.AlgebraicGeometry.EtaleFlatConstructibleModel
+import Sheaf.AlgebraicGeometry.IntrinsicDerivedOpenAdjunction
+import Sheaf.AlgebraicGeometry.SfIntrinsicCompactSupport
+import Sheaf.Paper.CanonicalOriginCompactSupportComposition
+import Sheaf.Paper.ComparisonTorAmplitude
+import Sheaf.Paper.ConstructibleExceptionalAdjunctionCoefficients
+import Sheaf.Paper.DerivedPullbackTensorIso
+import Sheaf.Paper.EtaleKFlatCriteria
+import Sheaf.Paper.ExchangeProjectionSuppliedDomains
+import Sheaf.Paper.FiniteDirectImageComposition
+import Sheaf.Paper.ProEtaleConstructibleOrigin
+import Sheaf.Paper.PullbackTorAmplitude
+import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
+import Sheaf.Paper.SfLocalizationAllStages
+import Sheaf.Paper.SfPreservationClass
+import Sheaf.SecSmoothPurity.ClosedUnitAllStages
+import WeilConjectures.ConstructibleSheaf.KernelCokernel
+import WeilConjectures.SixFunctors.Etale.Derived.Adjunctions
 
 /-! # Finite coefficient change for closed exceptional inverse image
 

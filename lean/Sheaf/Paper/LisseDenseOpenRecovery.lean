@@ -16,6 +16,9 @@ import Sheaf.AlgebraicGeometry.EtaleNormalComponents
 import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen
 import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 import Sheaf.AlgebraicGeometry.NormalConstantOpenImage
+import Sheaf.Paper.CommonStageCurveWeilMiddleExtension
+import Sheaf.Paper.LisseIntegralSmallCoefficients
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-!
 # Recovery of a lisse algebraic-coefficient sheaf from a dense open

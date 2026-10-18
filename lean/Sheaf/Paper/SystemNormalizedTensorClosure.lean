@@ -7,6 +7,7 @@ module
 
 public import Sheaf.Paper.SemilinearDerivedSections
 import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
+import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
 
 /-!
 # Tensor and inverse image preserve normalized semilinear systems

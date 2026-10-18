@@ -47,6 +47,20 @@ import Sheaf.Paper.ProjectionMateExact
 import Sheaf.AlgebraicGeometry.ComparisonDirectImage
 import Sheaf.AlgebraicGeometry.ProEtaleSiteComparison
 import WeilConjectures.Compactification.NagataCompactification
+import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
+import Sheaf.AlgebraicGeometry.CanonicalCompactSupportSiteComparison
+import Sheaf.Paper.BoundedBelowCtfReflection
+import Sheaf.Paper.ComparisonTorAmplitude
+import Sheaf.Paper.ExchangeProjectionSuppliedDomains
+import Sheaf.Paper.FiniteCoefficientDirectImage
+import Sheaf.Paper.FiniteCoefficientFlatModel
+import Sheaf.Paper.FiniteCoefficientReductionFlatModel
+import Sheaf.Paper.FiniteTensorConstructibleCohomology
+import Sheaf.Paper.OpenExtensionFiniteTor
+import Sheaf.Paper.ProEtaleConstructibleOrigin
+import Sheaf.Paper.ProEtaleFiniteCoefficientDirectImage
+import Sheaf.Paper.ProperOpenCoefficientRefinement
+import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
 
 /-! # Finite coefficient comparison and compact-support composition
 

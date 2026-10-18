@@ -9,6 +9,14 @@ public import WeilConjectures.AlgebraicGeometry.EtaleLowerShriekBaseChangeMap
 public import Sheaf.AlgebraicGeometry.OpenImmersionSquare
 public import Sheaf.AlgebraicGeometry.Etale.OpenExtensionZeroEtaleAdjunctionAgreement
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.BaseChangeSquare
+import Sheaf.AlgebraicGeometry.EtaleInverseImageCompositionModuleLinear
+import Sheaf.AlgebraicGeometry.EtaleUnderivedExchangeModuleLinear
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
+import WeilConjectures.AlgebraicGeometry.EtaleLowerShriekBaseChangeModules
+import WeilConjectures.SixFunctors.BaseChange.Square
+import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMap
+import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
+import WeilConjectures.SixFunctors.OpenClosed.Complex
 
 /-!
 # Underived canonical open base-change compatibility

@@ -10,6 +10,9 @@ public import Mathlib.CategoryTheory.Limits.Shapes.Kernels
 import Sheaf.CategoryTheory.RingedSiteModulesGrothendieckOfUniverses
 import Sheaf.CategoryTheory.SheafTensor
 import Sheaf.CategoryTheory.InternalAbelianSheafModuleEquivalence
+import Sheaf.Paper.CoefficientHeart
+import Sheaf.Paper.IndHeartFullFaithfulness
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
 
 /-!
 # Kernels and cokernels of ind-constructible sheaves

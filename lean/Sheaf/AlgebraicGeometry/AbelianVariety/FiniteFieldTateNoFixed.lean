@@ -8,6 +8,13 @@ module
 public import Sheaf.AlgebraicGeometry.AbelianVariety.GeometricJacobianGaloisAction
 import Sheaf.AlgebraicGeometry.AbelianVariety.FrobeniusFixedTateModules
 import WeilConjectures.AlgebraicGeometry.AbelianVariety.Final
+import Sheaf.AlgebraicGeometry.IsRegularScheme
+import Sheaf.RingTheory.RegularRingSmoothAscent
+import WeilConjectures.AlgebraicGeometry.AbelianVariety.Jacobian
+import WeilConjectures.AlgebraicGeometry.AbelianVariety.TateModule
+import WeilConjectures.AlgebraicGeometry.Picard.Jacobian
+import WeilConjectures.GroupTheory.TateModule
+import WeilConjectures.Mathlib.FieldTheory.Finite.Basic
 
 /-! # Arithmetic Frobenius has no fixed vector on the Jacobian Tate module
 

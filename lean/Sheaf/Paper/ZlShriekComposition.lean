@@ -13,6 +13,7 @@ import Mathlib.AlgebraicGeometry.Morphisms.Separated
 import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 import WeilConjectures.WeilSheaf.LowerShriekFunctoriality
+import WeilConjectures.SixFunctors.Etale.Derived.WeilFrobenius
 
 /-! # Composition of exceptional direct images, compatibly with Frobenius
 

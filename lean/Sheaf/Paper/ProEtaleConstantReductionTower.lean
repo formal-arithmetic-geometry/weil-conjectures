@@ -9,6 +9,24 @@ public import Sheaf.Paper.StrictTowerExchangeMateNormalization
 public import Sheaf.Paper.CompletionMateComparison
 
 public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
+import Sheaf.Algebra.Homology.KFlat
+import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
+import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
+import Sheaf.CategoryTheory.DiagramSiteRealization
+import Sheaf.CategoryTheory.KInjectiveTotalDerived
+import Sheaf.CategoryTheory.PreDerivedAdjointFunctorsGeneral
+import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
+import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimitIndependentCoefficients
+import Sheaf.CategoryTheory.RingedToposDerivedPushforwardComposition
+import Sheaf.CategoryTheory.RingedTowerPushforwardLimitComparison
+import Sheaf.Paper.CompletedPullbackAdjunction
+import Sheaf.Paper.ProEtaleProjectionFormulaArrows
+import Sheaf.Paper.ProjectionFormulaTotalization
+import Sheaf.Paper.ProjectionMateExact
+import Sheaf.Paper.RingedExchangeTensorCoherence
+import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
+import WeilConjectures.Algebra.Homology.TowerEvaluationKInjective
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
 /-! # Constant-coefficient strict reduction on the original pro-etale site
 
 Source: Stacks Tags 099M, 099N and 0E48; smooth-purity blueprint, fix-lem-exchanges,

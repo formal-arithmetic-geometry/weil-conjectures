@@ -8,6 +8,12 @@ module
 public import Sheaf.Paper.FiniteFreeCompletedScalarComparison
 public import Mathlib.Algebra.Homology.HomotopyCategory.Pretriangulated
 public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products
+import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
+import Sheaf.Algebra.Homology.KFlat
+import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
+import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
+import Sheaf.Paper.IntegralScalarExtensionUniverses
+import Sheaf.Paper.IntegralScalarExtensionWellDefined
 
 /-!
 # Completed scalar extension and cochain shifts

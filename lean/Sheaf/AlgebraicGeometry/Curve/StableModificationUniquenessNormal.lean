@@ -7,6 +7,11 @@ module
 
 public import Sheaf.AlgebraicGeometry.MultipointedCurveModification
 import Sheaf.AlgebraicGeometry.FlatInvertibleSectionsTorsionFree
+import Sheaf.AlgebraicGeometry.GeometricallyReducedEtaNormal
+import Sheaf.AlgebraicGeometry.SemistableMarkedBaseChange
+import Sheaf.TraceFormula.StableCurveDiagramNoetherianModel
+import Sheaf.TraceFormula.ValuationSemistableDominatesStable
+import Sheaf.TraceFormula.ValuativeDominationEtaNormal
 
 /-! # Uniqueness of stable modifications over a normal integral base
 

@@ -11,6 +11,10 @@ public import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
 public import Mathlib.CategoryTheory.Sites.Abelian
 public import Mathlib.Algebra.Category.Grp.AB
 public import Mathlib.CategoryTheory.Adjunction.Additive
+import Sheaf.CategoryTheory.SimplicialToposAugmentation
+import Sheaf.CategoryTheory.Sites.SliceSiteBaseChangeLocalization
+import Sheaf.CategoryTheory.TotalSitePseudofunctor
+import Sheaf.CategoryTheory.TotalSiteSheafSystems
 
 /-! # The total site of slices over a simplicial object
 

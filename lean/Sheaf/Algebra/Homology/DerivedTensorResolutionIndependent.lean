@@ -17,6 +17,7 @@ import WeilConjectures.FromJoel.Algebra.Homology.BifunctorMappingCone
 import Mathlib.Algebra.Homology.DerivedCategory.Fractions
 import Mathlib.CategoryTheory.Localization.CalculusOfFractions
 import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Tensor
 
 /-!
 # Resolution independence of the pro-etale derived tensor product

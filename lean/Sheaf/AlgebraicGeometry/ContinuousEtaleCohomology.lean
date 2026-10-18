@@ -25,6 +25,8 @@ import Sheaf.AlgebraicGeometry.BoundedBelowProEtaleComparison
 import Sheaf.CategoryTheory.StrictRoosComparison
 import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitExistence
 import Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
+import Sheaf.AlgebraicGeometry.ProEtaleContinuousCohomologyLimit
+import Sheaf.CategoryTheory.RingedSiteModules
 
 /-!
 # Continuous etale cohomology

@@ -31,6 +31,7 @@ import Sheaf.Algebra.Category.ModuleCat.Sheaf.ExtensionByZeroFlat
 import WeilConjectures.SixFunctors.Etale.Derived.Tensor
 import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 import Mathlib.Algebra.Homology.DerivedCategory.Basic
+import Sheaf.Paper.PurEtaleLisseStratumCompact
 
 /-!
 # Compact generators on finite-type étale sites

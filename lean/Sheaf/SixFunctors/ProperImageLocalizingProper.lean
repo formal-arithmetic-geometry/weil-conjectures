@@ -12,6 +12,16 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible
 import Sheaf.AlgebraicGeometry.FiniteTypeFibreDimensionBound
+import Sheaf.Paper.AmbientIndDerivedSums
+import Sheaf.Paper.CondensedModuleDerivedPushpull
+import Sheaf.Paper.FiniteProperLocalizing
+import Sheaf.Paper.IntegralProperBaseChange
+import Sheaf.Paper.IntegralProperDirectSums
+import Sheaf.Paper.LocalizingAdmissibleCoefficients
+import Sheaf.Paper.LocalizingClosureCtfEqualsBc
+import Sheaf.Paper.ProperBaseChangeRational
+import Sheaf.Paper.ProperUnboundedCoproducts
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs
 
 /-!
 # Proper direct image on localizing categories

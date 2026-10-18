@@ -6,6 +6,7 @@ public import Mathlib.LinearAlgebra.FreeModule.Basic
 public import Mathlib.RingTheory.Localization.Away.Basic
 public import Mathlib.RingTheory.Ideal.Quotient.Basic
 public import Mathlib.Algebra.Polynomial.Derivative
+import Sheaf.FieldTheory.ResidueFactorRootSelection
 
 /-!
 # Finite free domination of a standard étale algebra with prescribed prime lifts

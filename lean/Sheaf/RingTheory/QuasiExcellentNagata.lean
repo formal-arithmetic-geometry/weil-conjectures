@@ -18,6 +18,11 @@ import Mathlib.RingTheory.Noetherian.Defs
 import Sheaf.RingTheory.IsN1OfIsAnalyticallyUnramified
 import Sheaf.RingTheory.AnalyticallyUnramified
 import Sheaf.RingTheory.IsN1OfLocalCharacterization
+import Sheaf.AlgebraicGeometry.IsRegularScheme
+import Sheaf.RingTheory.GRing
+import Sheaf.RingTheory.RegularMapReducedTarget
+import Sheaf.RingTheory.UniversallyJapaneseN1Criterion
+import WeilConjectures.RingTheory.AdicCompletionNoetherian
 
 /-!
 # Quasi-excellent rings are Nagata

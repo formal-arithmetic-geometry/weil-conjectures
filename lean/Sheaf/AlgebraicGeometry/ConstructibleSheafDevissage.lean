@@ -15,6 +15,8 @@ import WeilConjectures.SixFunctors.OpenClosed.Exact
 import WeilConjectures.ConstructibleSheaf.Pullback
 import Sheaf.AlgebraicGeometry.OpenClosedRecollement
 import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.BaseChangeSquare
+import Sheaf.AlgebraicGeometry.LisseOpenDimensionDrop
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-!
 # Devissage of a constructible etale module sheaf

@@ -18,6 +18,7 @@ import Mathlib.AlgebraicGeometry.Morphisms.Proper
 import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Reduced
 import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
 import Sheaf.AlgebraicGeometry.Morphisms.SmoothConnectedGenericGeometryCore
+import Sheaf.AlgebraicGeometry.Morphisms.GeometricallyConnectedFibreNeighbourhood
 
 /-!
 # Spreading a geometrically irreducible smooth-fibre open

@@ -14,6 +14,8 @@ import Sheaf.CategoryTheory.SiteCoveringAxioms
 import Sheaf.CategoryTheory.RingedSiteDerivedRestrictionUniverses
 import Sheaf.Algebra.Homology.WeilSiteDerivedTensorDescent
 import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
+import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
+import Sheaf.CategoryTheory.LocalizedModuleExactForSystems
 
 /-!
 # Local and global finite Tor dimension on a quasi-compact pro-etale site

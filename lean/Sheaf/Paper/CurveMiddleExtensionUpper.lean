@@ -22,6 +22,10 @@ import WeilConjectures.WeilSheaf.Stalk
 import WeilConjectures.DeligneLaumon.AffineLine.LocalDuality
 import Sheaf.Paper.LisseDenseOpenRecovery
 import Sheaf.LinearAlgebra.FrobeniusModuleMixedSubquotient
+import Sheaf.DeligneLaumon.Reduction.AffineCurveUpper
+import Sheaf.Paper.FiniteBoundaryWeights
+import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Boundary
+import WeilConjectures.WeilSheaf.Cohomology
 
 /-!
 # The upper weight bound for ordinary middle extensions on curves

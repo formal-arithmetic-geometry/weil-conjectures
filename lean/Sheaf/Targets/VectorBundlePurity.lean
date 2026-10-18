@@ -57,6 +57,7 @@ import Mathlib.Algebra.Homology.DerivedCategory.FullyFaithful
 import Mathlib.AlgebraicGeometry.Noetherian
 import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
+import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 
 /-!
 # Vector-bundle purity before smooth orientation

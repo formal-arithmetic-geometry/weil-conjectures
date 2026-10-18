@@ -39,6 +39,8 @@ import Sheaf.Paper.CompletedConstantSheafReduction
 import Sheaf.Paper.ConstantModuleSectionProperties
 import Mathlib.RingTheory.Flat.Tensor
 import Sheaf.CategoryTheory.DerivedCategory.StandardQuotientsPerfect
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
+import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
 
 /-! # Unit normalization of point coefficient reduction
 

@@ -8,6 +8,9 @@ module
 public import Sheaf.AlgebraicGeometry.ProEtaleConstantExact
 public import Sheaf.AlgebraicGeometry.SfIntrinsicRealizationTransport
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
+import Sheaf.AlgebraicGeometry.ProEtaleConstantRingMap
+import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
+import Sheaf.CategoryTheory.RingedSiteModules
 
 /-!
 # Finite scalar restriction and pro-etale adjunction units

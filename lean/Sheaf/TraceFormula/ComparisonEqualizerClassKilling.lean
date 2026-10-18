@@ -7,6 +7,11 @@ module
 
 public import Sheaf.TraceFormula.ComparisonInductionStep
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
+import Sheaf.CategoryTheory.SiteCoveringAxioms
+import Sheaf.CategoryTheory.Sites.CohomologyOverObjectLocalization
+import Sheaf.CategoryTheory.Sites.GeometricMorphism
+import Sheaf.Paper.SiteHigherDirectImageSheafifiedPresheaf
+import WeilConjectures.AlgebraicGeometry.SiteSheafificationSectionsLocal
 
 /-!
 # Local killing of an equalizer cohomology class

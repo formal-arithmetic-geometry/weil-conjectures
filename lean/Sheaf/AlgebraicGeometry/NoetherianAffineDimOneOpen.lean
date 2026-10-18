@@ -22,6 +22,7 @@ import WeilConjectures.AlgebraicGeometry.QuasicoherentPushforwardQcqs
 import Sheaf.AlgebraicGeometry.AffineOpenModuleCohomologyVanishing
 import Sheaf.AlgebraicGeometry.LerayAcyclicPushforwardLinearComparison
 import Sheaf.Paper.QuasiCompactH1Zero
+import Sheaf.AlgebraicGeometry.OpenDimOneHigherDirectImageVanishing
 
 /-!
 # Open subschemes of a Noetherian affine scheme of dimension at most one

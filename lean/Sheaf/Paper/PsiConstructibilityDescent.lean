@@ -12,6 +12,9 @@ public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
+import Sheaf.CategoryTheory.Sites.CoherentConservativeReflection
+import Sheaf.Paper.OrientedConstructibleCoherent
+import Sheaf.TraceFormula.ProperBaseChangeCoherentConservative
 
 /-!
 # Proper-surjective descent of constructibility on a vanishing topos

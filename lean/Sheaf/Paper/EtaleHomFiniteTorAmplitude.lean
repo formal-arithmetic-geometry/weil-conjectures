@@ -48,6 +48,11 @@ import Sheaf.Algebra.Homology.HomComplex
 import Mathlib.Algebra.Homology.HomologySequence
 import Sheaf.Algebra.Homology.KFlat
 import Sheaf.Paper.EtaleSitePerfectConstructibleHom
+import Sheaf.Algebra.Homology.RingedInternalHomShiftOfUniverses
+import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
+import Sheaf.Algebra.Homology.SitePerfectTorWindow
+import Sheaf.AlgebraicGeometry.EtaleSheafZeroOnCover
+import WeilConjectures.AlgebraicGeometry.SiteRestrictionExact
 
 /-!
 # Derived internal Hom at finite coefficients on the etale site

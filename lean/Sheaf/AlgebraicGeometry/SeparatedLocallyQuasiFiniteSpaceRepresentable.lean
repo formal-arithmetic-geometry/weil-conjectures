@@ -21,6 +21,10 @@ import Mathlib.AlgebraicGeometry.Sites.Fpqc
 import Mathlib.AlgebraicGeometry.Morphisms.Etale
 import Mathlib.AlgebraicGeometry.Morphisms.Finite
 import Mathlib.AlgebraicGeometry.Pullbacks
+import Sheaf.AlgebraicGeometry.AlgebraicSpaceAffineAtlasOpenCover
+import Sheaf.AlgebraicGeometry.EtaleQuasiAffineImageScheme
+import Sheaf.AlgebraicGeometry.FiniteFlatAffineRelationQuotient
+import Sheaf.AlgebraicGeometry.ProperEtaleRelationFiniteNeighbourhood
 
 /-!
 # Separated locally quasi-finite algebraic spaces over schemes are schemes

@@ -31,6 +31,11 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.EffectiveCartier
 import WeilConjectures.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
 import WeilConjectures.Blowup.Extension
 import Mathlib.Algebra.Module.LocalizedModule.Basic
+import Sheaf.AlgebraicGeometry.ModuleAdmissibleBlowupCalculus
+import Sheaf.AlgebraicGeometry.NagataBoundaryDivisorCartier
+import Sheaf.TraceFormula.AffineGenericRankBlowup
+import Sheaf.TraceFormula.FlatFibreFreeNeighbourhood
+import WeilConjectures.Blowup.FiniteDegree.Algebra
 
 /-!
 # A fibrewise nonempty free locus after a preliminary blowup

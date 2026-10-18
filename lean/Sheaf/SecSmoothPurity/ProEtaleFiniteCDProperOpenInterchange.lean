@@ -11,6 +11,9 @@ public import Sheaf.CategoryTheory.FiniteCohomologicalDimensionAcyclicComplex
 public import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
 public import Sheaf.AlgebraicGeometry.ProEtaleIntrinsicExtensionByZeroExact
 public import Sheaf.AlgebraicGeometry.ProEtaleConstantDerivedDirectImage
+import Sheaf.AlgebraicGeometry.IntrinsicDerivedOpenAdjunction
+import Sheaf.AlgebraicGeometry.ProEtaleConstantRingOperations
+import Sheaf.AlgebraicGeometry.ProEtaleProperOpenSheafComparison
 
 /-!
 # Finite-CD proper/open interchange on the small pro-etale site

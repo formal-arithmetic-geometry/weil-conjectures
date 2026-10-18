@@ -15,6 +15,7 @@ import Sheaf.TraceFormula.KatoTorIndependenceChart
 import Sheaf.RingTheory.TorFlatBaseChange
 import Sheaf.RingTheory.TorCoefficientLocalization
 import WeilConjectures.AlgebraicGeometry.TorLongExactFirstVariable
+import Sheaf.TraceFormula.FsFaceSharpening
 
 /-!
 # Tensor injectivity for monomial ideals in log regular charts

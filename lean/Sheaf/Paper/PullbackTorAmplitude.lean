@@ -12,6 +12,12 @@ import Sheaf.Paper.FiniteCoefficientFlatModel
 import Sheaf.Paper.ProEtaleConstructibleOrigin
 import Sheaf.Paper.KFlatRingedToposPullback
 import Sheaf.Algebra.Homology.BoundedAboveFlatSheafKFlat
+import Sheaf.AlgebraicGeometry.PullbackBoundedConstructible
+import Sheaf.CategoryTheory.DerivedCategory.StandardQuotientsPerfect
+import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
+import Sheaf.Paper.DerivedPullbackTensorHom
+import Sheaf.Paper.FiniteTorAmplitudeSites
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Tensor
 
 /-!
 # Pullback preserves finite Tor amplitude

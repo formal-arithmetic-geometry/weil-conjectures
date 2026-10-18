@@ -14,6 +14,8 @@ public import WeilConjectures.AlgebraicGeometry.Modules.PullbackFreeGenerator
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import Mathlib.LinearAlgebra.Basis.Defs
 import Mathlib.AlgebraicGeometry.Morphisms.Proper
+import Sheaf.AlgebraicGeometry.BertiniSingularLocusDimension
+import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
 
 /-!
 # Smooth general members of an immersive linear system

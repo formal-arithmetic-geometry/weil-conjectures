@@ -24,6 +24,9 @@ import WeilConjectures.AlgebraicGeometry.Sites.ConstantSheafSections
 import WeilConjectures.AlgebraicGeometry.PullbackCohomologyLongExactLadder
 import WeilConjectures.CategoryTheory.RightDerivedUniversalDeltaFunctor
 import Sheaf.AlgebraicGeometry.KummerAffineLine
+import Sheaf.AlgebraicGeometry.SupportComparisonBoundary
+import Sheaf.AlgebraicGeometry.SupportSiteComparison
+import WeilConjectures.AlgebraicGeometry.Sites.Kummer
 
 /-!
 # The finite rank-one Kummer residue

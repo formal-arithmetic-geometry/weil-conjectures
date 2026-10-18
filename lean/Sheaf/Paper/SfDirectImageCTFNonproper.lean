@@ -17,6 +17,10 @@ public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.Topology.KrullDimension
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability.DirectImage
+import Sheaf.AlgebraicGeometry.EtaleDirectImageVanishing
+import Sheaf.Paper.DirectImageTorAmplitude
+import Sheaf.Paper.FiniteCoefficientFlatModel
+import WeilConjectures.SixFunctors.Etale.Derived.DirectImageVanishing
 
 /-!
 # Direct image and finite Tor amplitude without properness

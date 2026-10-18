@@ -11,6 +11,9 @@ public import Sheaf.Paper.ProjectionMateExact
 public import Sheaf.Paper.ProjectionFormulaArrows
 import Sheaf.Paper.ProjectionFormulaTotalization
 import Sheaf.Paper.RingedExchangeTensorCoherence
+import Sheaf.Paper.CondensedAmbientExchange
+import Sheaf.Paper.ProEtaleProjectionFormulaArrows
+import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
 
 /-!
 # Operator and base-change naturality of the projection formula

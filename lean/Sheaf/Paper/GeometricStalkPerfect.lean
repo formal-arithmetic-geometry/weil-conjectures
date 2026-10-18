@@ -37,6 +37,20 @@ import Mathlib.RingTheory.AdicCompletion.Basic
 import Mathlib.RingTheory.Ideal.Quotient.PowTransition
 import WeilConjectures.CategoryTheory.Triangulated.DerivedLimit
 import Sheaf.Algebra.Homology.DerivedChangeOfRings
+import Sheaf.AlgebraicGeometry.GeometricStalkToposPoint
+import Sheaf.AlgebraicGeometry.PointedEtaleStalk
+import Sheaf.AlgebraicGeometry.ProEtaleConstantSheafStalk
+import Sheaf.CategoryTheory.DerivedCategory.FiniteTorAmplitudePerfect
+import Sheaf.Paper.DerivedCompleteOnSlices
+import Sheaf.Paper.DerivedScalarExtensionRestrictionAdjunction
+import Sheaf.Paper.FiniteTorAmplitudeSites
+import Sheaf.Paper.GeneralAlgebraicallyClosedCoefficients
+import Sheaf.Paper.IntrinsicFiniteTorsionConstructibility
+import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
+import Sheaf.Paper.SfIntegralConstructible
+import Sheaf.Paper.SfRationalizationKaroubi
+import WeilConjectures.AlgebraicGeometry.ConstantSheafGeometricStalk
+import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitProducts
 /-!
 # Perfect geometric stalks
 

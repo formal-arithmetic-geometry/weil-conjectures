@@ -15,6 +15,8 @@ import Sheaf.Paper.PbcQbarCategory
 import Sheaf.EtaleCohomology.EtaleSectionZeroOpen
 import Sheaf.Paper.PurLisseMorphismRigidity
 import WeilConjectures.Mathlib.Topology.NoetherianSpace
+import Sheaf.Paper.IntegralConstructibleReductionFibres
+import Sheaf.Paper.IntrinsicQbarCategory
 
 /-! # Closed support of a constructible rational adic section
 

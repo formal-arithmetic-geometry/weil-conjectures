@@ -18,6 +18,13 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs
 import Sheaf.CategoryTheory.RightDerivedFunctorOfQuasiIsoResolutions
 import Sheaf.Paper.IntegralFinitePullbackComposition
 import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Defs
+import Sheaf.Paper.CartesianCoefficients
+import Sheaf.Paper.CondensedModuleDerivedPushpull
+import Sheaf.Paper.IntegralProperBaseChange
+import Sheaf.Paper.LocalizingAdmissibleCoefficients
+import Sheaf.Paper.UnboundedBaseChangeExtension
+import Sheaf.Paper.UnboundedLocalizingPullback
+import Sheaf.SixFunctors.ProperImageLocalizingProper
 
 /-!
 # Integral proper base change on localizing categories

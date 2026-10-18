@@ -15,6 +15,10 @@ import Sheaf.CategoryTheory.DerivedCategory.PerfectRingComplexGeneral
 import Sheaf.Paper.ProEtaleCanonicalTensorPullback
 import Sheaf.AlgebraicGeometry.ProEtaleSiteComparisonFiniteLevel
 import Sheaf.AlgebraicGeometry.ProEtaleSiteComparisonDerived
+import Sheaf.CategoryTheory.ScalarLocalization
+import Sheaf.Paper.AdicSmoothBaseChange
+import Sheaf.Paper.IntegralUniformCoefficient
+import Sheaf.Paper.PbcRationalCategory
 
 /-! # Smooth base change with finite-extension rational coefficients
 Source: blueprint, sec-smooth-base-change/sk-rem-rest, order 1445

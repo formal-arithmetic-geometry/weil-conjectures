@@ -41,6 +41,10 @@ import Sheaf.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits
 import WeilConjectures.SixFunctors.OpenClosed.ClosedImmersion
 import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
+import Sheaf.AlgebraicGeometry.EtaleClosedSupportTriangle
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
+import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
+import WeilConjectures.CategoryTheory.TruncationHypercohomology
 
 /-!
 # Closed-support amplitude

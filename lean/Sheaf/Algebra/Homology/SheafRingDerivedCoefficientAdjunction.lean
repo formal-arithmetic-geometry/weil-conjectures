@@ -19,6 +19,9 @@ import Sheaf.CategoryTheory.ExactFunctorDerivedFunctor
 import Sheaf.Paper.PbcCompletedPullbackActual
 
 public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
+import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
+import Sheaf.CategoryTheory.ModulePullbackPushforwardAdjunction
 /-!
 # The normalized derived coefficient adjunction on a ringed site
 

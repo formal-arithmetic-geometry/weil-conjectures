@@ -15,6 +15,9 @@ import Sheaf.CategoryTheory.RingedSiteModules
 import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 import Mathlib.CategoryTheory.Sites.LocallyBijective
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorClosed
+import Sheaf.AlgebraicGeometry.ProEtale.IsoSectionwiseInverseImage
 
 /-!
 # Inverse image, tensor products, and internal Hom on the small pro-etale site

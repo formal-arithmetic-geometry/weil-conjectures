@@ -12,6 +12,17 @@ public import Mathlib.CategoryTheory.Triangulated.TStructure.TruncLEGT
 import Sheaf.Paper.FiniteReductionReconstructionCompleted
 
 public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
+import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
+import Sheaf.CategoryTheory.DerivedCategory.StandardQuotientsPerfect
+import Sheaf.CategoryTheory.TruncationsAndHomotopyColimits
+import Sheaf.Paper.AdicCoefficientDatum
+import Sheaf.Paper.BoundedConstructibleTower
+import Sheaf.Paper.CompletedRlimFunctor
+import Sheaf.Paper.DerivedScalarExtensionRestrictionAdjunction
+import Sheaf.Paper.IntegralStratifiedPerfectCharacterization
+import Sheaf.Paper.IntegralUniformCoefficient
+import Sheaf.Paper.KoszulReconstruction
+import WeilConjectures.CategoryTheory.Triangulated.TStructure.Homology
 /-! # Integral canonical truncations and their conditional tower computation
 
 Source: blueprint, smooth base change, order 1430; Stacks Tags 0118 and 08J5

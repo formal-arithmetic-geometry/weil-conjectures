@@ -9,6 +9,8 @@ public import Sheaf.AlgebraicGeometry.SfFullCohomologicalDimension
 public import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
 public import WeilConjectures.CategoryTheory.Sites.WeaklyContractible
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+import Sheaf.AlgebraicGeometry.ProEtaleStalkConservative
+import Sheaf.AlgebraicGeometry.ProEtaleVanishingDetection
 
 /-!
 # Testing FullCD on affine weakly contractible objects

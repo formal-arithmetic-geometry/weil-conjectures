@@ -11,6 +11,8 @@ public import Mathlib.RingTheory.Kaehler.Basic
 public import Mathlib.RingTheory.MvPowerSeries.Derivative
 public import Mathlib.LinearAlgebra.Finsupp.LinearCombination
 public import Mathlib.LinearAlgebra.Quotient.Basic
+import Sheaf.SixFunctors.TraceFormula.FormalPowerSeriesContinuousFree
+import Sheaf.TraceFormula.FormalPowerSeriesContinuousConormal
 
 /-!
 # The continuous Jacobian presentation of a formal power-series quotient

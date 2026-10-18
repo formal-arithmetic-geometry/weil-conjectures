@@ -30,6 +30,11 @@ import Mathlib.CategoryTheory.Sites.Sheaf
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 import WeilConjectures.SixFunctors.OpenClosed.Stalk
 import Mathlib.CategoryTheory.Sites.Point.Basic
+import Sheaf.AlgebraicGeometry.GlobalGeneratedStalkwise
+import Sheaf.AlgebraicGeometry.PointedEtaleStalk
+import Sheaf.AlgebraicGeometry.SepClosedEtaleGlobalGeneration
+import Sheaf.CategoryTheory.GloballyGeneratedSheafColimit
+import WeilConjectures.AlgebraicGeometry.GeometricStalkColimits
 
 /-!
 # Global generation of abelian étale sheaves supported on closed points

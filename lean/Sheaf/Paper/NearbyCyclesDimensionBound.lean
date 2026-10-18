@@ -6,6 +6,15 @@ public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.AlgebraicGeometry.Fiber
 public import Mathlib.Topology.KrullDimension
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
+import Sheaf.AlgebraicGeometry.DimensionExtension
+import Sheaf.AlgebraicGeometry.FibreDimensionAfterBaseChange
+import Sheaf.CategoryTheory.BoundedHeartAmplitude
+import Sheaf.CategoryTheory.ModulePullbackPushforwardAdjunction
+import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
+import Sheaf.TraceFormula.GabberNearbyCycleDimensionBound
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
+import WeilConjectures.Mathlib.Topology.KrullDimension
 
 /-!
 # Uniform cohomological bound for oriented nearby cycles

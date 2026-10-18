@@ -36,6 +36,7 @@ import Mathlib.Algebra.Homology.DerivedCategory.DerivabilityStructureInjectives
 import Mathlib.CategoryTheory.Limits.MorphismProperty
 import Mathlib.Algebra.Homology.DerivedCategory.KInjective
 import Mathlib.CategoryTheory.Adjunction.Mates
+import Sheaf.CategoryTheory.DerivedCategory.CompositionAdjunctionNormalization
 
 /-!
 # Geometric specialization slices of nearby cycles

@@ -7,6 +7,14 @@ public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.ResidueField
 public import Mathlib.RingTheory.RegularLocalRing.Defs
 public import Sheaf.RingTheory.IsRegularSystemOfParameters
+import Sheaf.AlgebraicGeometry.IsRegularScheme
+import Sheaf.AlgebraicGeometry.StrictHenselizationLocalPresentation
+import Sheaf.RingTheory.Etale.LocalDimension
+import Sheaf.RingTheory.RegularLocalGeneratorsRegularSequence
+import Sheaf.RingTheory.StrictHenselizationFaithfullyFlat
+import Sheaf.RingTheory.StrictHenselizationRegular
+import Sheaf.RingTheory.StrictHenselizationSurjectiveQuotient
+import WeilConjectures.Mathlib.RingTheory.RegularLocalRing.Defs
 
 /-!
 # Coordinate description of the maximal branch stratum

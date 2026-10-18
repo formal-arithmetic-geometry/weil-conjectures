@@ -25,6 +25,9 @@ public import Sheaf.Paper.IntrinsicFiniteTorsionConstructibility
 public import Sheaf.Paper.FiniteFieldFiber
 public import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
 import Sheaf.AlgebraicGeometry.FiniteTypeFibreDimensionBound
+import Sheaf.Paper.ComparisonTorAmplitude
+import Sheaf.Paper.ConstructibleHomComparison
+import Sheaf.Paper.EtaleHomFiniteTorAmplitude
 
 /-!
 # Pro-etale internal Hom with a site-perfect first argument

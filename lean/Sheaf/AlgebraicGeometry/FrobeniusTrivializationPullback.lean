@@ -18,6 +18,10 @@ import Mathlib.CategoryTheory.Adjunction.Mates
 import Mathlib.CategoryTheory.Adjunction.Basic
 import Mathlib.CategoryTheory.Localization.Predicate
 import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
+import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
+import Sheaf.AlgebraicGeometry.ProEtaleTensorCompositionUnit
+import Sheaf.CategoryTheory.SiteMorphismComposition
+import Sheaf.Paper.IntegralFinitePullbackComposition
 
 /-!
 # Pullback naturality of the canonical absolute-Frobenius trivialization

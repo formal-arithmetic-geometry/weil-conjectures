@@ -36,6 +36,7 @@ import Sheaf.CategoryTheory.SmallModuleDiagramsGrothendieck
 import WeilConjectures.Algebra.Homology.KernelShiftedMappingCone
 import WeilConjectures.Algebra.Homology.TowerEvaluationKInjective
 import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
+import Sheaf.CategoryTheory.LocalizedModuleExactForSystems
 
 /-!
 # Extended Cech complex and the strict Koszul dual limit

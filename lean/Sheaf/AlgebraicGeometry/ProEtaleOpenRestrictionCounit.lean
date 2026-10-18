@@ -12,6 +12,7 @@ import Sheaf.CategoryTheory.SiteMorphismComposition
 import Mathlib.CategoryTheory.Sites.Sheafification
 import Mathlib.CategoryTheory.Sites.Pullback
 import Mathlib.AlgebraicGeometry.Morphisms.OpenImmersion
+import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
 /-! # Open restriction and the direct-image counit.
 Source: Stacks Project, pro-etale functoriality (09A5), Sites (00XZ, 03CB, 03CF),
 and Modules on Sites (03D3, 04J0)

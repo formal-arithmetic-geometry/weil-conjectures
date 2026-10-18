@@ -26,6 +26,9 @@ import Sheaf.AlgebraicGeometry.SfIntrinsicRealizationTransport
 import Sheaf.AlgebraicGeometry.ProEtaleIntrinsicExtensionByZeroAdjunction
 import Sheaf.AlgebraicGeometry.ProEtaleBoundedContinuitySections
 import Sheaf.AlgebraicGeometry.ProEtaleVanishingDetection
+import Sheaf.AlgebraicGeometry.ProEtaleConstantRingOperations
+import Sheaf.AlgebraicGeometry.ProEtaleDerivedExtensionZeroBaseChange
+import Sheaf.AlgebraicGeometry.ProEtaleObjectInverseImageRestriction
 
 /-!
 # Proper acyclicity after extension by zero on a Cartesian open

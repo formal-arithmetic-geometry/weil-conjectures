@@ -15,6 +15,8 @@ public import Sheaf.AlgebraicGeometry.ProEtaleFiniteModules
 public import Sheaf.Paper.ComparisonPullbackExact
 public import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
 import Sheaf.SixFunctors.OpenTensorNormalization
+import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.OpenLowerShriekProj
 
 /-!
 # Comparison preserves the canonical open tensor map

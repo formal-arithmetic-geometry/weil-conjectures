@@ -20,6 +20,7 @@ import Sheaf.AlgebraicGeometry.SupportComparisonPullbackCoherence
 import Sheaf.AlgebraicGeometry.AbelianEtaleProEtaleCohomologyComparison
 import Sheaf.AlgebraicGeometry.EtaleModuleEnoughInjectives
 import Sheaf.CategoryTheory.ModuleAbelianEvaluationComparison
+import Sheaf.CategoryTheory.ConstantLeftModuleInverseImage
 
 /-!
 # The uniform affine étale bound for ordinary finite-coefficient module sheaves

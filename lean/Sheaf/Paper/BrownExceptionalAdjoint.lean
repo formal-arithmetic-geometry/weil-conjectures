@@ -13,6 +13,9 @@ import Sheaf.SixFunctorsBasics.BrownHypotheses
 import Sheaf.Paper.CompactificationLocalizing
 import Sheaf.CategoryTheory.BrownRepresentabilityRightAdjoint
 import Mathlib.CategoryTheory.Yoneda
+import Sheaf.Compactification.BoundaryRefinement
+import Sheaf.Paper.CompactificationCoherenceCocycle
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible
 
 /-!
 # Brown exceptional adjoints and compactification independence

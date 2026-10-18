@@ -26,6 +26,7 @@ import Sheaf.RingTheory.ProjectiveOverLocalFree
 import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Reduced
 import Mathlib.AlgebraicGeometry.Noetherian
 import Mathlib.AlgebraicGeometry.Morphisms.Proper
+import Sheaf.AlgebraicGeometry.NodalContractionEulerDefect
 
 /-! # Exceptional fibres of modifications over smooth points
 

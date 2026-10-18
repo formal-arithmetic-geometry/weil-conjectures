@@ -7,6 +7,8 @@ module
 public import Sheaf.Algebra.Homology.FiniteFilteredModuleHomotopy
 public import WeilConjectures.Algebra.Homology.UpperTruncationStepSES
 public import WeilConjectures.FromJoel.Algebra.Homology.Embedding.CochainComplex
+import Sheaf.Algebra.Homology.FilteredComplexSubquotients
+import WeilConjectures.CategoryTheory.Abelian.Filtration
 
 /-!
 # Canonical truncation filtration

@@ -48,6 +48,7 @@ import Sheaf.AlgebraicGeometry.BoundedDerivedSmoothBaseChange
 import Sheaf.AlgebraicGeometry.BaseChangeMapAbelianAndSets
 import Sheaf.AlgebraicGeometry.ComparisonDirectImage
 import Sheaf.AlgebraicGeometry.SupportComparisonPullbackCoherence
+import Sheaf.Paper.CondensedAmbientExchange
 
 /-!
 # Finite pro-etale smooth base change

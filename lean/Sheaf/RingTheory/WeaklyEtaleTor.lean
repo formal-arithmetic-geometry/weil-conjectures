@@ -15,6 +15,7 @@ import Sheaf.RingTheory.WeaklyEtaleTorBoundedResolution
 import Sheaf.Algebra.Homology.FlatResolutionTorComparison
 import WeilConjectures.Algebra.Homology.DoubleComplexCokernelHomologyIso
 import WeilConjectures.Algebra.Category.ModuleCat.TorSymmetry
+import Sheaf.RingTheory.IndEtaleUniverseTransport
 
 /-! # Tor and flat resolution bounds for weakly etale algebras
 

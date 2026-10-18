@@ -25,6 +25,10 @@ import Sheaf.Paper.CompletedCondensedCoefficients
 import Mathlib.AlgebraicGeometry.Noetherian
 import Mathlib.CategoryTheory.Adjunction.Limits
 import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
+import Sheaf.Paper.CartesianCoefficients
+import Sheaf.Paper.CoefficientHeartTriangulated
+import Sheaf.Paper.CondensedModuleDerivedPushpull
+import Sheaf.SixFunctors.ProEtale.IntegralOpenDirectImage
 
 /-!
 # Rational open direct images with finite constant local models

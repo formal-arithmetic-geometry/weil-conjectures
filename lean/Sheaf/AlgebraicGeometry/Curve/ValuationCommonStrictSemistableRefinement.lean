@@ -7,6 +7,20 @@ public import Sheaf.AlgebraicGeometry.MultipointedCurveModification
 public import Sheaf.AlgebraicGeometry.StrictlySemistableCurve
 public import Mathlib.FieldTheory.IsSepClosed
 public import Mathlib.RingTheory.Valuation.ValuationSubring
+import Sheaf.AlgebraicGeometry.BirationalQuasiModificationCommonCover
+import Sheaf.AlgebraicGeometry.Curve.ValuationMarkedStrictification
+import Sheaf.AlgebraicGeometry.FlatInvertibleSectionsTorsionFree
+import Sheaf.AlgebraicGeometry.GeometricallyReducedEtaNormal
+import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
+import Sheaf.AlgebraicGeometry.ValuationContractedComponentInclusion
+import Sheaf.AlgebraicGeometry.ValuationSemistableStableContraction
+import Sheaf.Compactification.BoundaryRefinement
+import Sheaf.TraceFormula.ValuationComponentFactorization
+import Sheaf.TraceFormula.ValuationHorizontalCurveModels
+import Sheaf.TraceFormula.ValuationMarkingSemistableSeparation
+import Sheaf.TraceFormula.ValuationStrictSemistableCofinality
+import Sheaf.TraceFormula.ValuationStrictSemistableLocalUniformization
+import WeilConjectures.Compactification.Dense
 
 /-! # Common strict semistable refinements of curve models
 

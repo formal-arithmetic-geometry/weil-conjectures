@@ -13,6 +13,9 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous
 public import Mathlib.Algebra.DirectSum.Basic
 public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
 public import Mathlib.Algebra.Category.Grp.FilteredColimits
+import Sheaf.CategoryTheory.ContinuousCocontinuousToposAdjunctionForCoverings
+import Sheaf.CategoryTheory.ModulePullbackPushforwardAdjunction
+import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 
 /-!
 # Slice-site localization for ringed sheaves

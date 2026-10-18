@@ -26,6 +26,8 @@ import WeilConjectures.AlgebraicGeometry.EtaleFibreDiscreteSeparablePoints
 import Sheaf.RingTheory.MiracleFlatness
 import Sheaf.RingTheory.FlatOfFlatClosedFiber
 import Sheaf.AlgebraicGeometry.EtaleAtPrimeFlatUnramifiedCriterion
+import Sheaf.AlgebraicGeometry.SmoothPairRegularEquations
+import Sheaf.RingTheory.RelativeRegularEquationsBaseChange
 
 /-!
 # Simultaneous étale coordinates for a smooth closed pair

@@ -10,6 +10,9 @@ public import Sheaf.AlgebraicGeometry.AlgebraicSpaceFibreProductsEtaleCovers
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.SiteTensorFunctoriality
 import Sheaf.Paper.LocalizeRingedSiteMorphismGeneral
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
+import Sheaf.AlgebraicGeometry.AlgebraicSpace
+import Sheaf.AlgebraicGeometry.EnlargedEtaleRingedSite
 
 /-!
 # Étale localization and module direct images on algebraic spaces

@@ -6,6 +6,9 @@ public import Sheaf.CategoryTheory.Sites.FiniteLocallyConstant
 import Sheaf.TraceFormula.FinitarySiteCoherentGenerators
 import Sheaf.CategoryTheory.Sites.CoherentEpimorphicQuotient
 import Mathlib.CategoryTheory.Sites.LeftExact
+import Sheaf.CategoryTheory.SiteCoveringAxioms
+import Sheaf.CategoryTheory.Sites.CoherentObjectApproximation
+import Sheaf.CategoryTheory.Sites.CoherentToposRepair
 
 @[expose] public section
 

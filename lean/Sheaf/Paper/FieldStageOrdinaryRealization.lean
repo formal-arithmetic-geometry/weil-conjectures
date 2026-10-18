@@ -25,6 +25,9 @@ import Sheaf.Paper.SfScalarExtensionComposition
 import Sheaf.Algebra.Homology.DerivedTensorResolutionIndependent
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Tensor
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.TensorResolution
+import Sheaf.Paper.SfCommonStageWeilCohomology
+import Sheaf.Paper.SfIntegralConstructible
+import Sheaf.Paper.SfRationalizationKaroubi
 
 /-! # Ordinary discrete constant-field realization
 

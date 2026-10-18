@@ -8,6 +8,18 @@ module
 public import Sheaf.AlgebraicGeometry.BoundedBelowProEtaleComparison
 public import WeilConjectures.SixFunctors.Etale.Derived.GlobalSections
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjective
+import Sheaf.Algebra.Homology.BoundedBelowInjectiveResolution
+import Sheaf.AlgebraicGeometry.GeometricPointCanonicalGerm
+import Sheaf.AlgebraicGeometry.ProEtaleComparisonSections
+import Sheaf.AlgebraicGeometry.ProEtaleConstantRingOperations
+import Sheaf.AlgebraicGeometry.ProEtaleSiteComparison
+import Sheaf.AlgebraicGeometry.ProEtaleWContractibleSectionsExact
+import Sheaf.CategoryTheory.PreDerivedAdjointFunctorsGeneral
+import Sheaf.SixFunctors.ProEtale.BaseChange.SmoothBaseChangeComparisons
+import WeilConjectures.Mathlib.CategoryTheory.Preadditive.Injective.Preserves
+import WeilConjectures.Mathlib.RingTheory.Henselian
+import WeilConjectures.RingTheory.ProEtale.WContractible
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-!
 # Resolution model for the torsion pro-étale stalk comparison

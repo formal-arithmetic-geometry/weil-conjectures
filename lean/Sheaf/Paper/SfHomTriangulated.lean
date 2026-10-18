@@ -14,6 +14,8 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
 public import Mathlib.AlgebraicGeometry.Sites.Etale
 public import Mathlib.CategoryTheory.Triangulated.Opposite.Pretriangulated
 import Sheaf.Algebra.Homology.RingedInternalHomExactRestriction
+import Sheaf.Algebra.Homology.RingedInternalHomShiftOfUniverses
+import WeilConjectures.AlgebraicGeometry.DerivedCategories
 
 /-! # Exactness of internal Hom on the small etale site
 

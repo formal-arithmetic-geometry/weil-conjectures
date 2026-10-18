@@ -13,6 +13,7 @@ public import Mathlib.RingTheory.RingHom.Flat
 public import Mathlib.RingTheory.FinitePresentation
 public import Sheaf.RingTheory.CompleteIntersectionOverField
 import Sheaf.RingTheory.LocalCompleteIntersectionFieldChange
+import Sheaf.TraceFormula.LciAffineOpenLocality
 
 
 /-! # Affine criterion for syntomic geometric fibres

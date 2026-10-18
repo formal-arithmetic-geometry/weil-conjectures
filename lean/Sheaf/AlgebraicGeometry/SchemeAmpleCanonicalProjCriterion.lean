@@ -25,6 +25,8 @@ import WeilConjectures.AlgebraicGeometry.AmpleSeparated
 import WeilConjectures.AlgebraicGeometry.QcqsCohomologyDirectSum
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 import WeilConjectures.AlgebraicGeometry.QuasicoherentPushforwardQcqs
+import Sheaf.AlgebraicGeometry.ProjCanonicalMapTwistComparison
+import Sheaf.TraceFormula.ProjQcOpenTwistAmple
 
 /-!
 # Relative ampleness and the canonical section-algebra Proj map

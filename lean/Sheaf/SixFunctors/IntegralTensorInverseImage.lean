@@ -10,6 +10,9 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Hom
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
 public import Mathlib.Algebra.Homology.HomotopyCategory.MappingCone
 public import Mathlib.CategoryTheory.Limits.Shapes.Products
+import Sheaf.Paper.IntegralTensorProduct
+import Sheaf.Paper.IntegralTensorPullback
+import Sheaf.Paper.IntegralTensorShriek
 
 /-!
 # Integral inverse image and uncompleted tensor

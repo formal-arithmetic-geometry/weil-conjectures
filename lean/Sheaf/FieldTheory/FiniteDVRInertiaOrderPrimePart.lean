@@ -13,6 +13,8 @@ public import Mathlib.RingTheory.IntegralClosure.Algebra.Basic
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Mathlib.RingTheory.Ideal.Pointwise
 public import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
+import Sheaf.FieldTheory.FiniteDVRResidueNormalAction
+import Sheaf.NumberTheory.DvrGaloisDegreeData
 
 /-!
 # Prime-to-residue-characteristic part of finite inertia order

@@ -9,6 +9,7 @@ public import Mathlib.CategoryTheory.Filtered.Basic
 public import Mathlib.CategoryTheory.Sites.Sheafification
 public import Sheaf.CategoryTheory.SiteCoveringAxioms
 public import Sheaf.CategoryTheory.Sites.GeometricMorphism
+import WeilConjectures.AlgebraicGeometry.SiteSheafificationSectionsLocal
 
 /-!
 # Reconstruction of a set-valued point from pointed site objects

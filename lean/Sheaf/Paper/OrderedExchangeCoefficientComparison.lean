@@ -43,6 +43,11 @@ import Sheaf.Paper.CompletedDirectImageLimits
 import Sheaf.Paper.CompletedRlimFunctor
 
 public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
+import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
+import Sheaf.CategoryTheory.FlatRingedDiagramRestriction
+import Sheaf.Paper.IntegralFinitePullbackComposition
+import Sheaf.Paper.PbcQbarCompletedPullback
+import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
 /-! # Coefficient normalization of the raw ordered completed exchange
 
 Source: main-20261015 blueprint, proper base change, completed-exchange-coherence,

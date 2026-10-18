@@ -13,6 +13,12 @@ import WeilConjectures.Blowup.Affine.ChartAlgebra
 import WeilConjectures.Blowup.Principalization
 import WeilConjectures.Mathlib.Algebra.Module.Torsion
 import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.EffectiveCartier
+import Sheaf.AlgebraicGeometry.CoherentFiniteType
+import Sheaf.AlgebraicGeometry.ModuleStrictTransformKernel
+import Sheaf.AlgebraicGeometry.TensorPullbackSectionAdjunction
+import Sheaf.TraceFormula.StrictTransformAffineTorsionComparison
+import WeilConjectures.Blowup.Affine.StrictTransformChart
+import WeilConjectures.Blowup.FiniteDegree.Algebra
 
 /-!
 # Strict transforms for centres differing by an effective Cartier factor

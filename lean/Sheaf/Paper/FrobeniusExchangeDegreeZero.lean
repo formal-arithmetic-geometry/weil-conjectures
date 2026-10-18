@@ -13,6 +13,17 @@ public import Mathlib.CategoryTheory.Abelian.RightDerived
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
 import Sheaf.CategoryTheory.PreDerivedAdjointFunctorsGeneral
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
+import Sheaf.AlgebraicGeometry.ProEtale.IsoSectionwiseInverseImage
+import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
+import Sheaf.Paper.CommonStageCompactWeilCohomology
+import Sheaf.Paper.DerivedPullbackTensorHom
+import Sheaf.Paper.FiniteCoefficientPoint
+import Sheaf.Paper.FrobeniusGeometricExchange
+import Sheaf.Paper.IsomorphismDerivedPullback
+import Sheaf.Paper.PointProEtaleSectionsExact
+import Sheaf.Paper.SfCommonStageDirectImage
+import Sheaf.SixFunctors.FrobeniusPointTransport
+import Sheaf.SixFunctors.FrobeniusSquareCartesian
 
 /-!
 # Degree-zero Frobenius exchange

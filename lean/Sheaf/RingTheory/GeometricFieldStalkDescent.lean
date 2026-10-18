@@ -17,6 +17,8 @@ import Mathlib.Algebra.Polynomial.Splits
 import Mathlib.RingTheory.Flat.Localization
 import Mathlib.RingTheory.RingHom.Flat
 import Sheaf.FieldTheory.FiniteExtensionTensorAlgebraicClosureReduced
+import Sheaf.RingTheory.GeometricReducednessLocalBaseChange
+import WeilConjectures.FieldTheory.SeparableExtension
 
 /-!
 # Descent of a geometric field stalk

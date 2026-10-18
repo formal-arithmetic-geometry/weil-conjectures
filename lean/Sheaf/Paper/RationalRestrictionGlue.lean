@@ -16,6 +16,11 @@ import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
 import Sheaf.Paper.CompactificationLocalizing
 import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 import Mathlib.AlgebraicGeometry.Morphisms.Immersion
+import Sheaf.Compactification.BoundaryRefinement
+import Sheaf.Paper.CondensedConstantConstructibility
+import Sheaf.Paper.RestrictionLocal
+import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible
 
 /-!
 # Gluing rational constructibility and restricting the exceptional adjunction

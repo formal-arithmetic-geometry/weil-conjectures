@@ -12,6 +12,7 @@ public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Restriction
 public import WeilConjectures.AlgebraicGeometry.GeometricFrobenius
 public import WeilConjectures.Mathlib.NumberTheory.Padics.RingHoms
 public import Mathlib.CategoryTheory.Conj
+import Sheaf.Paper.FiniteConstantH1Pi1
 
 /-!
 # Continuous adic characters and the first étale cohomology tower

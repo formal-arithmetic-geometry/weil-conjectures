@@ -10,6 +10,10 @@ public import Sheaf.AlgebraicGeometry.SfFiniteExceptionalInverseImage
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Constructible
 import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekPlusBaseChange
 import Mathlib.CategoryTheory.Adjunction.Basic
+import Sheaf.AlgebraicGeometry.SpecifiedExceptionalClassHom
+import Sheaf.Paper.CanonicalFiniteLevelCompactSupportBaseChange
+import Sheaf.Paper.CohomologicalSmoothnessFiniteComparison
+import Sheaf.Paper.ConstructibleExceptionalAdjunctionCoefficients
 
 /-!
 # Base change of a trace transpose

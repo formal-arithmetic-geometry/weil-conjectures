@@ -18,6 +18,7 @@ import Sheaf.RingTheory.SyntomicRingFilteredColimitDescent
 import Sheaf.RingTheory.LocalCompleteIntersectionFieldChange
 import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 import Mathlib.RingTheory.Localization.AtPrime.Basic
+import Sheaf.TraceFormula.SyntomicGeometricFibresAffineCriterion
 
 /-!
 # Descent of complete-intersection fibres along affine inverse limits

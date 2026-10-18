@@ -9,6 +9,8 @@ public import Mathlib.RingTheory.KrullDimension.Basic
 public import Mathlib.RingTheory.AlgebraicIndependent.Basic
 public import Mathlib.SetTheory.Cardinal.ENat
 public import WeilConjectures.AlgebraicGeometry.Curve.DivisorPullback
+import Sheaf.RingTheory.AffineDimensionInequality
+import WeilConjectures.Topology.PresheafModuleStalkFunctor
 
 /-!
 # Local dimension inequality for an integral dominant morphism

@@ -12,6 +12,10 @@ public import Mathlib.FieldTheory.PurelyInseparable.Basic
 import Sheaf.AlgebraicGeometry.IndEtaleStrictLocalInvariance
 import Sheaf.RingTheory.FiniteRingMapQuasiFinite
 import WeilConjectures.RingTheory.FiniteOverHenselianLocalProduct
+import Sheaf.AlgebraicGeometry.StrictHenselization
+import Sheaf.Paper.StrictHenselizationFunctoriality
+import Sheaf.TraceFormula.StrictHenselizationQuasiFiniteRing
+import Sheaf.TraceFormula.StrictHenselizationTensorFinite
 
 /-!
 # Finite base change of strict localizations

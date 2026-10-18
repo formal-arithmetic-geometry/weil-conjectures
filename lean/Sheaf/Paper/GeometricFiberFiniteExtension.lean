@@ -6,6 +6,8 @@ Authors: SHEAF group Q03
 module
 
 public import Sheaf.Paper.FiniteExtensionProperBaseChange
+import Sheaf.AlgebraicGeometry.ChosenCartesianSquare
+import Sheaf.Paper.PbcRationalCategory
 
 /-! # Finite-extension geometric-fiber formula
 

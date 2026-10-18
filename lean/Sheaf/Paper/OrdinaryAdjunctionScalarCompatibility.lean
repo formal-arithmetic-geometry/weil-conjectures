@@ -40,6 +40,8 @@ import Sheaf.NumberTheory.Padics.ExtensionIntegersDvr
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
 import Sheaf.CategoryTheory.ModulePullbackPushforwardAdjunction
 import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
+import Sheaf.CategoryTheory.RingedCoefficientRestrictionCounit
+import Sheaf.Paper.PbcQbarCompletedPullback
 
 
 /-! # Scalar compatibility of the ordinary completed adjunction

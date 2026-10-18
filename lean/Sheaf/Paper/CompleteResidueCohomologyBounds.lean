@@ -29,6 +29,9 @@ import Sheaf.AlgebraicGeometry.ProEtaleMilnorSequence
 import Sheaf.AlgebraicGeometry.ProEtaleProductsDerived
 import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitExistence
 import Sheaf.AlgebraicGeometry.ProEtaleMilnorEpimorphic
+import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
+import Sheaf.AlgebraicGeometry.CoefficientProEtaleTorAmplitude
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Tensor
 
 /-! # Cohomological bounds from complete residue Tor amplitude
 

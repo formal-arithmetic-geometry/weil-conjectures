@@ -10,6 +10,9 @@ public import WeilConjectures.Compactification.StrictTransform
 public import WeilConjectures.Compactification.StrictTransformChartModel
 import WeilConjectures.Blowup.Principalization
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.SchemeTheoreticallyDominant
+import WeilConjectures.Blowup.Affine.Defs
+import WeilConjectures.Blowup.FiniteDegree.Algebra
+import WeilConjectures.Blowup.Gluing
 
 /-!
 # The affine deformation chart as a strict-transform complement

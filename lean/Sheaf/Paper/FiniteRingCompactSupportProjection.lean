@@ -32,6 +32,7 @@ import Mathlib.GroupTheory.Torsion
 import WeilConjectures.SixFunctors.Etale.Derived.LowerStarProjection
 import Sheaf.Paper.RingedExchangeTensorCoherence
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.OpenLowerShriekProj
+import Sheaf.AlgebraicGeometry.UnboundedDirectImageComparison
 
 /-!
 # Compact-support projection with arbitrary finite primary coefficients

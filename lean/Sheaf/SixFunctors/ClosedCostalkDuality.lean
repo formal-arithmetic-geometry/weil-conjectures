@@ -29,6 +29,9 @@ import Mathlib.CategoryTheory.Sites.Point.Skyscraper
 import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 import Mathlib.CategoryTheory.Triangulated.Pretriangulated
+import Sheaf.Algebra.Homology.RingedInternalHomShiftOfUniverses
+import Sheaf.CategoryTheory.ModulePullbackPushforwardAdjunction
+import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
 
 /-!
 # Exceptional restriction of a Verdier dual

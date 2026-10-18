@@ -4,6 +4,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Basic
 public import Mathlib.Algebra.Category.ModuleCat.Abelian
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import Mathlib.Algebra.Homology.DerivedCategory.Fractions
+import Sheaf.CategoryTheory.TruncationsAndHomotopyColimits
 
 /-!
 # Bounded representatives and bounded roofs in the derived category

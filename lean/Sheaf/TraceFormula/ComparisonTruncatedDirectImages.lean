@@ -13,6 +13,8 @@ import Sheaf.CategoryTheory.RingedToposDerivedPushforwardComposition
 import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
 import Mathlib.CategoryTheory.Sites.Limits
 import Mathlib.Algebra.Homology.SpectralSequence.Basic
+import Sheaf.CategoryTheory.Sites.GeometricMorphism
+import WeilConjectures.Mathlib.CategoryTheory.Preadditive.Injective.Preserves
 
 /-!
 # Truncated higher direct images for a comparison of topologies

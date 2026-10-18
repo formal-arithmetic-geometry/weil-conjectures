@@ -8,6 +8,12 @@ module
 public import Sheaf.AlgebraicGeometry.CohomologicalDimension
 public import Sheaf.AlgebraicGeometry.ProEtaleSiteComparison
 public import Sheaf.AlgebraicGeometry.Sites.CohomologicalDimension
+import Sheaf.AlgebraicGeometry.BoundedBelowProEtaleComparison
+import Sheaf.AlgebraicGeometry.ProEtaleClassicalSheavesModules
+import Sheaf.AlgebraicGeometry.ProEtaleDirectImageComparison
+import Sheaf.CategoryTheory.RightDerivedFunctorOfQuasiIsoResolutions
+import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
+import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 
 /-!
 # Pro-étale and étale primary cohomological dimensions agree

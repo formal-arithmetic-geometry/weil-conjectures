@@ -11,6 +11,8 @@ public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Operations
 public import WeilConjectures.WeilSheaf.Stalk
 import WeilConjectures.Mathlib.LinearAlgebra.Charpoly.Basic
 import WeilConjectures.Mathlib.LinearAlgebra.Eigenspace.Basic
+import Sheaf.Paper.EtaleWeilSheafEquivalence
+import WeilConjectures.EtaleCohomology.Purity.RealSheaves.LinearAlgebra
 
 /-!
 # Reality survives semisimplification

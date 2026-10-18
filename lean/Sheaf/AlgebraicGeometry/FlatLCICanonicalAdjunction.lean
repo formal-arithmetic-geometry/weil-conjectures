@@ -40,6 +40,7 @@ import Sheaf.RingTheory.KoszulRegularSequenceDualComplex
 import Sheaf.RingTheory.RegularSequenceConormal
 import Sheaf.RingTheory.RegularSequenceKoszulRegular
 import Mathlib.RingTheory.MvPolynomial.Localization
+import Sheaf.TraceFormula.TwoTermPerfectDeterminant
 
 /-!
 # Canonical adjunction for flat local complete intersections

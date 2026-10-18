@@ -17,6 +17,13 @@ import Sheaf.Paper.IsomorphismDerivedPullback
 import Sheaf.CategoryTheory.CompactSupportRoosCofinality
 import Sheaf.Paper.CompletedConstantSheafReduction
 import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
+import Sheaf.Algebra.Homology.ChangeOfRingsKFlat
+import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
+import Sheaf.AlgebraicGeometry.ProEtaleCountableProductsExact
+import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
+import Sheaf.Paper.IntegralOperationsWellDefined
+import Sheaf.Paper.IntegralScalarExtensionWellDefined
 
 /-!
 # The specified quotient-cone pullback comparison

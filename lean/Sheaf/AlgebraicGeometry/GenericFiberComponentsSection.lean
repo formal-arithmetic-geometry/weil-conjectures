@@ -16,6 +16,16 @@ public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
 public import Sheaf.Topology.ProfiniteCondensedRing
 public import WeilConjectures.RingTheory.ProEtale.WContractible
+import Sheaf.AlgebraicGeometry.ProEtalePointPullback
+import Sheaf.Paper.CondensedPointBasis
+import Sheaf.Paper.GeometricFieldProEtaleEvaluation
+import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
+import Sheaf.RingTheory.IndEtaleStability
+import Sheaf.RingTheory.IndEtaleUniverseTransport
+import Sheaf.Topology.SpectralSpace.ConnectedComponentsProfinite
+import WeilConjectures.AlgebraicGeometry.ProEtale.Comparison.Affine
+import WeilConjectures.CategoryTheory.SiteEquivalenceMorphismOfSites
+import WeilConjectures.RingTheory.Spectrum.Prime.LocallyConstant
 
 /-!
 # Sections of the generic-fibre component map

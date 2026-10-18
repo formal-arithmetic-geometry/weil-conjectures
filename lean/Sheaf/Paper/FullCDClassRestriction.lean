@@ -15,6 +15,7 @@ public import Sheaf.CategoryTheory.RingedSiteModules
 public import Sheaf.AlgebraicGeometry.ComparisonPullbackCoherence
 public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import Sheaf.AlgebraicGeometry.SupportComparisonPullbackCoherence
 
 /-!
 # Restriction of the étale-origin coefficient class

@@ -21,6 +21,7 @@ import Sheaf.Paper.CartesianCoefficients
 import Sheaf.Paper.CompactificationCoherenceCocycle
 import Sheaf.Paper.LocalizingLowerShriekComposition
 import Mathlib.CategoryTheory.Adjunction.CompositionIso
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs
 
 /-!
 # Rational purity for relative affine space in every dimension

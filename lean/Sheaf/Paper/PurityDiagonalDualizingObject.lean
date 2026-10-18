@@ -15,6 +15,21 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.HomCoverGluing
 import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
 import Mathlib.Algebra.Homology.DerivedCategory.FullyFaithful
+import Sheaf.AlgebraicGeometry.DiagonalRegularPureCodimension
+import Sheaf.CategoryTheory.LocalizedModuleExactForSystems
+import Sheaf.CategoryTheory.TruncationsAndHomotopyColimits
+import Sheaf.Paper.CartesianCoefficientTwists
+import Sheaf.Paper.CohomologicalSmoothnessTheorem
+import Sheaf.Paper.ConstructibleExceptionalAdjunctionCoefficients
+import Sheaf.Paper.DerivedPullbackTensorHom
+import Sheaf.Paper.IntrinsicCoefficientTwistsUnrestricted
+import Sheaf.Paper.PurityDiagonalBaseChangeCompared
+import Sheaf.Paper.PurityDncInvariance
+import Sheaf.Paper.PurityFiniteSetting
+import Sheaf.Paper.PurityNormalCone
+import Sheaf.Paper.PuritySectionInvariantIntrinsic
+import Sheaf.Paper.SfCommonStageWeilCohomology
+import Sheaf.Paper.VectorBundlePurity
 
 /-! # The canonical smooth dualizing-object comparison
 

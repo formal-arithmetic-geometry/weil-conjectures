@@ -2,6 +2,8 @@ import Mathlib.AlgebraicGeometry.Morphisms.Etale
 import Mathlib.AlgebraicGeometry.Morphisms.OpenImmersion
 import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
 import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
+import Sheaf.AlgebraicGeometry.FiniteFreeAlgebraSpectrum
+import Sheaf.TraceFormula.StandardEtaleFiniteFreePrimeLifts
 
 /-!
 # Étale finite locally free open refinement

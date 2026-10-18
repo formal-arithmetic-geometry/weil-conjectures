@@ -13,6 +13,7 @@ import Sheaf.Paper.PointSectionsScalarExtension
 import Sheaf.Paper.IntegralOperationsScalarComparisons
 import Sheaf.Paper.IntegralPullbackComparisonRealization
 import Sheaf.CategoryTheory.DerivedCategory.TraceFormalLaws
+import Sheaf.Paper.SfWeilSheafComplex
 
 /-!
 # Local traces of isomorphic finite Weil models

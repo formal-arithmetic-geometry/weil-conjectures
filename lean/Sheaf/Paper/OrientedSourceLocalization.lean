@@ -20,6 +20,10 @@ import Sheaf.CategoryTheory.Sites.OrientedProductLargeSites
 import Sheaf.CategoryTheory.Sites.OrientedProductSliceLocalization
 import Sheaf.Paper.OrientedProductPointsConservative
 import Mathlib.Topology.Constructible
+import Sheaf.CategoryTheory.Sites.ToposComplementFactorization
+import Sheaf.CategoryTheory.Sites.ToposComplementModuleStalks
+import Sheaf.Paper.OrientedConstructibleSheafVanishing
+import Sheaf.TraceFormula.EtaleClosedComplementSets
 
 /-!
 # Open and closed source localization on the vanishing topos

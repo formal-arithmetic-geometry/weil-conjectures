@@ -18,6 +18,8 @@ import Sheaf.CategoryTheory.DerivedCategory.ResolvingClassEssentialConstancy
 import Sheaf.CategoryTheory.LeftDerivedKanSourceTriangles
 import Mathlib.CategoryTheory.Localization.Triangulated
 import Mathlib.Algebra.Homology.HomotopyCategory.Triangulated
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
+import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
 
 /-! # The counit-compatible shift of derived scalar extension
 

@@ -42,6 +42,7 @@ public import Sheaf.Paper.PbcRationalTransport
 public import Sheaf.Paper.PbcScalarExtension
 import Sheaf.SixFunctors.RingedDerivedMonoidalComparisons
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+import Sheaf.Paper.SfCommonStageDirectImage
 
 /-! # Continuous rational realization and derived direct image
 

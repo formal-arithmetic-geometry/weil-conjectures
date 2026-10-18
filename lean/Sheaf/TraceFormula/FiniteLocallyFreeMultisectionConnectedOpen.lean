@@ -25,6 +25,8 @@ import WeilConjectures.AlgebraicGeometry.FpqcOpenSubschemeDescent
 import Mathlib.AlgebraicGeometry.Morphisms.Proper
 import Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
 import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen
+import Sheaf.AlgebraicGeometry.FlatReducedSectionComponentOpen
+import WeilConjectures.AlgebraicGeometry.Morphisms.SlicingFlat
 
 /-!
 # Descent of a connected open using a finite locally free multisection

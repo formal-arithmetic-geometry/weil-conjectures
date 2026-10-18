@@ -18,6 +18,7 @@ import Sheaf.CategoryTheory.LocalizedModuleAdjunctionExact
 import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafOver
 import Sheaf.CategoryTheory.SiteCoveringAxioms
 import Sheaf.CategoryTheory.TruncationsAndHomotopyColimits
+import Sheaf.CategoryTheory.LocalizedModuleExactForSystems
 
 /-! # Local bounded finite-module models of a good lower truncation
 

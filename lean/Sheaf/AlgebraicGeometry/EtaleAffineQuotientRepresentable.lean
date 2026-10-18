@@ -13,6 +13,10 @@ public import Mathlib.CategoryTheory.Sites.Sheafification
 import WeilConjectures.AlgebraicGeometry.SiteSheafificationSectionsLocal
 import Sheaf.AlgebraicGeometry.SeparatedLqfBaseChange
 import Sheaf.CategoryTheory.SiteCoveringAxioms
+import Sheaf.AlgebraicGeometry.AffineEtaleRelationSeparatedQuasiFinite
+import Sheaf.AlgebraicGeometry.EtaleRelationKernelPair
+import Sheaf.AlgebraicGeometry.FppfSheafRepresentabilityDescentData
+import Sheaf.SecTraceFormula.SeparatedLqfFppfEffectiveDescent
 
 /-!
 # Representability for an affine étale-relation quotient

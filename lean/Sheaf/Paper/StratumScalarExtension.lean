@@ -15,6 +15,13 @@ public import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.SiteTensorFunctoriality
 public import Sheaf.Algebra.Homology.ChangeOfRingsComplex
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
+import Sheaf.AlgebraicGeometry.ProEtaleConstantExact
+import Sheaf.AlgebraicGeometry.ProEtaleConstantRingMap
+import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
+import Sheaf.CategoryTheory.ModulePullbackTensorIso
+import Sheaf.Paper.KFlatRingedToposPullback
+import Sheaf.Paper.ProEtaleLocallyConstantSheafOfUniverses
+import Sheaf.Paper.SfCommonStageWeilCohomology
 
 /-!
 # Stratum pullback and scalar-extension comparison

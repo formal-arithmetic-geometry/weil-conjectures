@@ -15,6 +15,11 @@ import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
 import Sheaf.Algebra.Homology.WeilSiteDerivedTensorDescent
 import Sheaf.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
 import Mathlib.CategoryTheory.Localization.Predicate
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
+import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
+import Sheaf.Algebra.Homology.DerivedScalarExtensionCounitShift
+import Sheaf.Algebra.Homology.KFlat
+import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
 
 /-! # The derived scalar-extension unit and distinguished triangles
 

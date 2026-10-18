@@ -11,6 +11,8 @@ public import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMap
 public import WeilConjectures.Compactification.Refinement
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.RingTheory.Noetherian.Defs
+import Sheaf.AlgebraicGeometry.EtaleShriekOpenExchangeAdjoint
+import Sheaf.AlgebraicGeometry.EtaleSupportMapCompatibility
 
 /-!
 # Etale horizontal compact-support exchange is the composition mate

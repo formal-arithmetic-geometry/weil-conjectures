@@ -8,6 +8,11 @@ module
 public import Sheaf.Paper.IntegralCanonicalTruncations
 public import Mathlib.CategoryTheory.Triangulated.TStructure.Induced
 public import Mathlib.CategoryTheory.Triangulated.TStructure.Heart
+import Sheaf.Paper.AdicCoefficientDatum
+import Sheaf.Paper.IntegralStratifiedPerfectCharacterization
+import Sheaf.Paper.IntegralUniformCoefficient
+import Sheaf.Paper.PbcUniformCompleteTriangulated
+import WeilConjectures.CategoryTheory.Triangulated.TStructure.Homology
 
 /-! # The bounded standard integral t-structure
 

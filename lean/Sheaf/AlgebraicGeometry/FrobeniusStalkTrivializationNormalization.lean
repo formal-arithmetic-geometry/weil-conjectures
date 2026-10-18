@@ -7,6 +7,9 @@ module
 public import Sheaf.AlgebraicGeometry.FrobeniusTrivializationPullback
 public import Sheaf.AlgebraicGeometry.ProEtalePullbackStalkCoherence
 public import WeilConjectures.AlgebraicGeometry.AbsoluteFrobenius
+import Sheaf.AlgebraicGeometry.ProEtaleConstantRingMap
+import Sheaf.AlgebraicGeometry.ProEtaleConstantRingOperations
+import Sheaf.AlgebraicGeometry.ProEtaleModuleStalkFunctor
 
 /-!
 # Normalization of the absolute-Frobenius stalk trivialization

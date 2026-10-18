@@ -14,6 +14,7 @@ import Sheaf.Algebra.Homology.DiagramKFlatReplacements
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 import Sheaf.Algebra.Homology.KFlat
 import Sheaf.Paper.CompletedRlimFunctor
+import Sheaf.Paper.PbcQbarCompletedPullback
 
 /-! # Completed pullback preserves shifts and distinguished triangles
 Source: literature/stacks-project/proetale.tex, Tag 099N (2),(5), with

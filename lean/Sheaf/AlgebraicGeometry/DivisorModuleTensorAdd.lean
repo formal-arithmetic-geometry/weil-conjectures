@@ -11,6 +11,7 @@ import Sheaf.AlgebraicGeometry.DivisorModuleLocal
 import Sheaf.AlgebraicGeometry.SmoothConnectedCurveLocalRings
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
 
 /-! # Tensor compatibility of the explicit divisor module
 

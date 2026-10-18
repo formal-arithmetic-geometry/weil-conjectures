@@ -22,6 +22,9 @@ import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
 import WeilConjectures.SixFunctors.OpenClosed.Exact
 import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
+import Sheaf.AlgebraicGeometry.SupportedExteriorProduct
+import WeilConjectures.SixFunctors.Etale.Derived.Tensor
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Tensor
 
 /-!
 # The quotient model of supported constant coefficients

@@ -13,6 +13,8 @@ public import Mathlib.RingTheory.TensorProduct.Basic
 import Mathlib.AlgebraicGeometry.Pullbacks
 import Mathlib.AlgebraicGeometry.FunctionField
 import Mathlib.AlgebraicGeometry.Geometrically.Integral
+import Sheaf.AlgebraicGeometry.LocalNoetherianApproximation
+import Sheaf.RingTheory.NoetherianGeometricallyIntegralProjective
 
 /-!
 # Projectivity of a flat finitely presented algebra with geometrically integral fibres

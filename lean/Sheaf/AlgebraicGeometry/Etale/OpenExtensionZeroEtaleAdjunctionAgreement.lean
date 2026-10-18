@@ -7,6 +7,8 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.EtaleLowerShriekBaseChangeMap
 public import Sheaf.CategoryTheory.RingedSiteModules
+import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMap
+import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 
 /-!
 # Agreement of open and étale extension by zero and their adjunctions

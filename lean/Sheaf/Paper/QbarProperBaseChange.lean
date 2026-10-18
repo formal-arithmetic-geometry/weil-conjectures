@@ -12,6 +12,7 @@ public import Sheaf.Paper.PbcScalarExtension
 public import Sheaf.AlgebraicGeometry.ChosenCartesianSquare
 import Sheaf.Paper.FiniteExtensionProperBaseChange
 import Sheaf.Paper.CommonStageCalculus
+import Sheaf.Paper.IntrinsicQbarCategory
 
 /-! # Proper base change with Qbar_l coefficients
 

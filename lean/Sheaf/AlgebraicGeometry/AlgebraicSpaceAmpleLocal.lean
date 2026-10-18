@@ -11,6 +11,16 @@ import WeilConjectures.AlgebraicGeometry.TensorPullback
 import WeilConjectures.AlgebraicGeometry.Modules.InvertiblePullbackTensor
 import WeilConjectures.AlgebraicGeometry.RelativeProj.Basic
 import WeilConjectures.AlgebraicGeometry.RelativeProj.Universal
+import Sheaf.AlgebraicGeometry.AlgebraicSpace
+import Sheaf.AlgebraicGeometry.AlgebraicSpaceFibreProductsEtaleCovers
+import Sheaf.AlgebraicGeometry.AlgebraicSpaceInvertibleDescent
+import Sheaf.AlgebraicGeometry.SchemeAmpleCanonicalProjCriterion
+import Sheaf.AlgebraicGeometry.SchemeRelativeAmpleBaseChange
+import Sheaf.AlgebraicGeometry.SpaceOpenImmersionEtaleLocal
+import Sheaf.AlgebraicGeometry.TensorPullbackSectionAdjunction
+import Sheaf.TraceFormula.SpaceLineModuleProjMap
+import Sheaf.TraceFormula.SpaceQCSeparatedEtaleLocal
+import Sheaf.TraceFormula.SpaceSectionAlgebraEtaleBaseChange
 
 /-!
 # Relative ampleness is étale local on an algebraic-space base

@@ -1,4 +1,7 @@
 import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMapProjection
+import Sheaf.EtaleCohomology.Purity.Smooth.EtaleSheafProjectionMap
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
+import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMap
 
 open CategoryTheory CategoryTheory.Limits MonoidalCategory
 open CategoryTheory.Functor

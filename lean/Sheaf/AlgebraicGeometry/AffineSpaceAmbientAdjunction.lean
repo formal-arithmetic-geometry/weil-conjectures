@@ -40,6 +40,8 @@ import Sheaf.Paper.RingedTopoiDerivedTensorPullback
 import Sheaf.AlgebraicGeometry.EtaleInverseImageCompositionModuleLinear
 import Mathlib.CategoryTheory.Adjunction.Basic
 import Sheaf.AlgebraicGeometry.FiniteEtaleTwistLine
+import Sheaf.AlgebraicGeometry.ProjectiveLineFullAdjunction
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 
 /-!
 # Affine-space ambient adjunction

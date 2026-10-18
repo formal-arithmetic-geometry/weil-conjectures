@@ -16,6 +16,7 @@ public import Sheaf.AlgebraicGeometry.UnboundedEtaleCompactSupportComparisons
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.FlatModuleCat
 public import WeilConjectures.SixFunctors.Etale.Derived.TorAmplitude
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal
+import Sheaf.Paper.ExchangeProjectionSuppliedDomains
 
 /-!
 # Coefficient factorization of the composite integration counit

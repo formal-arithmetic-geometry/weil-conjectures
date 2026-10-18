@@ -33,6 +33,13 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ModuleDeri
 import Mathlib.Algebra.Category.ModuleCat.AB
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
+import Sheaf.Algebra.Homology.HomComplexGlobalHomotopy
+import Sheaf.Algebra.Homology.HomTensorTotal
+import Sheaf.Algebra.Homology.SignedDoubleHomCone
+import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
+import WeilConjectures.AlgebraicGeometry.DerivedCategories
+import WeilConjectures.Compactification.Defs
+import WeilConjectures.Compactification.Noetherian
 
 /-! # Evaluation and the ambient double-dual morphism
 

@@ -15,6 +15,10 @@ import Sheaf.AlgebraicGeometry.CartierDivisorNowhereDense
 import WeilConjectures.Blowup.Proper
 import WeilConjectures.Blowup.Complement
 import WeilConjectures.Blowup.Density
+import Sheaf.AlgebraicGeometry.NCMaximalBranchBlowup
+import Sheaf.AlgebraicGeometry.PermissibleBoundaryPreservation
+import WeilConjectures.AlgebraicGeometry.Regular
+import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Invertible
 
 /-!
 # Strictification of normal crossings divisors

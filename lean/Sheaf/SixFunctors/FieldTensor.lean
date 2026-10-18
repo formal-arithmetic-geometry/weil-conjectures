@@ -23,6 +23,7 @@ import Sheaf.AlgebraicGeometry.LocallyClosedExtensionCoherence
 import Mathlib.AlgebraicGeometry.Noetherian
 import Sheaf.Paper.CoefficientHeart
 import Sheaf.Paper.CartesianCoefficients
+import Sheaf.Paper.CoefficientHeartGeneration
 
 /-!
 # Tensor closure of rational localizing categories

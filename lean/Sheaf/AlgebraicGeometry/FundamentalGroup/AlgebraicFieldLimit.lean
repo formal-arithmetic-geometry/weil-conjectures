@@ -10,6 +10,8 @@ public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Restriction
 public import Mathlib.Algebra.Group.Subgroup.Ker
 import Sheaf.FieldTheory.AlgebraicSeparableSmooth
 import Sheaf.AlgebraicGeometry.FundamentalGroup.LocallyConstantEquivalence
+import Sheaf.AlgebraicGeometry.FundamentalGroup.FLCFiber
+import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Functoriality
 
 /-!
 # Fundamental groups and algebraic constant-field limits

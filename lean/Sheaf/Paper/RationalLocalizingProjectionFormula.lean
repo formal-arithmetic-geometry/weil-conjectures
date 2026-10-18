@@ -18,6 +18,13 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 import Mathlib.CategoryTheory.Triangulated.Adjunction
 import Mathlib.CategoryTheory.Shift.Adjunction
 import Mathlib.CategoryTheory.Triangulated.Pretriangulated
+import Sheaf.Paper.CartesianCoefficients
+import Sheaf.Paper.LocalizingClosureCtfEqualsBc
+import Sheaf.Paper.ProperBaseChangeRational
+import Sheaf.Paper.UnboundedLocalizingPullback
+import Sheaf.SixFunctors.FieldTensor
+import Sheaf.SixFunctors.ProperImageLocalizingProper
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs
 
 /-!
 # Proper projection formula on rational localizing categories

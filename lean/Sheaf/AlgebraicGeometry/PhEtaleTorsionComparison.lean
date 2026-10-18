@@ -18,6 +18,9 @@ import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusHomology
 import Sheaf.CategoryTheory.DerivedCategory.AdjointFunctors
 import Sheaf.CategoryTheory.TorsionSheafComplexRepresentative
+import Sheaf.CategoryTheory.DerivedCategory.CompositionAdjunctionNormalization
+import Sheaf.TraceFormula.BigSmallEtaleExactRetraction
+import Sheaf.TraceFormula.PhBigEtaleTorsionAcyclicity
 
 /-!
 # Torsion comparison between the small etale and big ph sites

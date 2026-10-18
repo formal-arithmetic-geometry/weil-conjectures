@@ -15,6 +15,10 @@ import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
 import Sheaf.AlgebraicGeometry.ProEtaleCanonicalPullbackComposition
 import Sheaf.AlgebraicGeometry.SfIntrinsicRealizationTransport
 import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
+import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
+import Sheaf.AlgebraicGeometry.RelativeFrobeniusIntegralUniversalHomeomorphism
+import Sheaf.CategoryTheory.SiteInverseImageCompositionGenerators
+import Sheaf.Paper.IntegralFinitePullbackComposition
 
 /-!
 # Canonical trivialization of absolute Frobenius on the small pro-etale site

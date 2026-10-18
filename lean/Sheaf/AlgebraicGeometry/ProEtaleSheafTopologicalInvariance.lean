@@ -32,6 +32,8 @@ import Mathlib.CategoryTheory.Adjunction.FullyFaithful
 import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
 import Sheaf.Paper.SliceSiteLocalization
 import Mathlib.CategoryTheory.Sites.LocalProperties
+import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
+import Sheaf.RingTheory.IndEtaleUniverseTransport
 
 /-!
 # Topological invariance of the small pro-etale topos

@@ -69,6 +69,21 @@ import WeilConjectures.SixFunctors.Etale.Derived.Hom
 import WeilConjectures.SixFunctors.Etale.Derived.TorAmplitude
 import Sheaf.AlgebraicGeometry.UnboundedEtaleCompactSupportComparisons
 import Sheaf.AlgebraicGeometry.ProEtaleStalkConservative
+import Sheaf.Algebra.Homology.RingedInternalHomShiftOfUniverses
+import Sheaf.AlgebraicGeometry.CanonicalCompactSupportSiteComparison
+import Sheaf.AlgebraicGeometry.CompactSupportComparisonUnit
+import Sheaf.AlgebraicGeometry.FiniteCompactProjectionFormula
+import Sheaf.AlgebraicGeometry.SpecifiedExceptionalClassHom
+import Sheaf.Paper.CanonicalFiniteLevelCompactSupportBaseChange
+import Sheaf.Paper.CanonicalOriginCompactSupportComposition
+import Sheaf.Paper.CohomologicalSmoothnessFiniteComparison
+import Sheaf.Paper.ConstructibleExceptionalAdjunctionCoefficients
+import Sheaf.Paper.EtaleIsoDescent
+import Sheaf.Paper.ExchangeProjectionSuppliedDomains
+import Sheaf.Paper.FiniteTorStability
+import Sheaf.Paper.LocalizeRingedSiteMorphismGeneral
+import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
+import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtaleOver
 
 /-!
 # Source-etale locality of cohomological smoothness

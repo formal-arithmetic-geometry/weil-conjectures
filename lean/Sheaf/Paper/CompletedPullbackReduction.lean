@@ -21,6 +21,13 @@ import Sheaf.Paper.ProjectionFormulaTotalization
 
 import Sheaf.Algebra.Homology.KFlatCoefficientUniverse
 public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
+import Sheaf.Paper.AdicCoefficientDatum
+import Sheaf.Paper.AdicCompletionReduction
+import Sheaf.Paper.IntrinsicCompletionCompleted
+import Sheaf.Paper.PbcQbarCompletedPullback
+import Sheaf.Paper.ProEtaleProjectionFormulaArrows
+import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
+import Sheaf.Paper.WeilCompletedTensorReflector
 /-! # Finite reduction of completed pullback
 
 Source: Stacks Project, Tag 099N (5), and blueprint order 1262

@@ -81,6 +81,14 @@ import Sheaf.Algebra.Homology.RingedInternalHomExactRestriction
 import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
 
 import WeilConjectures.Compactification.NagataCompactification
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
+import Sheaf.Algebra.Homology.RingedInternalHomShiftOfUniverses
+import Sheaf.Algebra.Homology.RingedSliceEvaluationTranspose
+import Sheaf.AlgebraicGeometry.EtaleComparison
+import Sheaf.AlgebraicGeometry.UnramifiedMorphism
+import Sheaf.CategoryTheory.LocalizedModuleExactForSystems
+import Sheaf.CategoryTheory.RingedDerivedRestrictionGeneral
+import WeilConjectures.AlgebraicGeometry.DerivedCategories
 
 /-! # Restriction of the evaluation-transpose double-dual morphism
 

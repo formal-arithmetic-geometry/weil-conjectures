@@ -11,6 +11,7 @@ public import Mathlib.RingTheory.Regular.RegularSequence
 public import WeilConjectures.RingTheory.AssociatedGradedRing
 import Mathlib.RingTheory.Filtration
 import Mathlib.RingTheory.Finiteness.Defs
+import Sheaf.RingTheory.QuasiRegularPrefixQuotient
 
 /-!
 # Polynomial associated graded algebras and regular sequences

@@ -14,6 +14,7 @@ import Mathlib.RingTheory.Spectrum.Maximal.Localization
 import Sheaf.RingTheory.SerreCriterionReduced
 import Sheaf.RingTheory.RegularityRkGoesUp
 import Sheaf.RingTheory.SerreSkGoesUp
+import Sheaf.AlgebraicGeometry.IsRegularScheme
 
 /-!
 # Reducedness ascends along regular maps of Noetherian rings

@@ -24,6 +24,10 @@ import Sheaf.AlgebraicGeometry.SmoothTensorDuality
 import WeilConjectures.SixFunctors.Etale.Derived.TensorHom
 import WeilConjectures.AlgebraicGeometry.BoundedConstructibleComplexes
 import Sheaf.AlgebraicGeometry.CompactSupportFiniteTorsion
+import Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses
+import Sheaf.AlgebraicGeometry.CompactProjectionExchange
+import Sheaf.AlgebraicGeometry.SmoothExceptionalBaseChange
+import Sheaf.SmoothPurity.InternalAdjunctionEvaluation
 
 /-!
 # Generic direct images from a smooth source

@@ -38,6 +38,15 @@ import Sheaf.RingTheory.IndEtaleStability
 import Sheaf.Paper.PbcActualScalarPullback
 import Sheaf.Paper.SiteBoundedConstantModel
 import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
+import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
+import Sheaf.AlgebraicGeometry.ProEtaleObjectInverseImageRestriction
+import Sheaf.AlgebraicGeometry.ProEtaleQcqsFiniteFamilyGeometry
+import Sheaf.AlgebraicGeometry.ProEtaleSiteComparison
+import Sheaf.CategoryTheory.ConstantLeftModuleInverseImage
+import Sheaf.CategoryTheory.SiteCoveringAxioms
+import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
+import Sheaf.SixFunctors.GeometricInverseImageConstantModule
+import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 
 /-!
 # Connected étale finite-Tor complexes are locally constant perfect complexes

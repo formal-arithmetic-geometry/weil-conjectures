@@ -17,6 +17,8 @@ import Sheaf.AlgebraicGeometry.ProEtaleToposFunctorialityInverseImage
 import Sheaf.CategoryTheory.SiteInverseImageTensor
 import Sheaf.CategoryTheory.SheavesAlgebraicStructuresObjects
 import Sheaf.CategoryTheory.Adjunction.LiftsGroupRingObjects
+import Sheaf.Topology.ProfiniteCondensedRing
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
 
 /-!
 # Integral pulled-back coefficients as the limit of finite constant coefficients

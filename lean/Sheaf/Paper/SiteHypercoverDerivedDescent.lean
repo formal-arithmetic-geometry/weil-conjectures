@@ -17,6 +17,8 @@ import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
 import WeilConjectures.CategoryTheory.Abelian.RightDerived.LongExactSequence
 import Sheaf.CategoryTheory.RingedSiteModulesGrothendieckOfUniverses
 import Mathlib.Algebra.Homology.DerivedCategory.DerivabilityStructureInjectives
+import Sheaf.CategoryTheory.SiteHypercoverInjectiveSections
+import Sheaf.TraceFormula.SiteAugmentationAcyclicCech
 
 /-! # Derived descent for a representable hypercover of a site
 

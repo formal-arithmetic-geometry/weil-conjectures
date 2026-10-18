@@ -20,6 +20,8 @@ import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import Mathlib.LinearAlgebra.Dual.Lemmas
 import Mathlib.LinearAlgebra.FreeModule.PID
 import Mathlib.Topology.Algebra.Valued.LocallyCompact
+import Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses
+import Sheaf.NumberTheory.Padics.ExtensionIntegersDvr
 
 /-! # Coefficient biduality at the finite, integral and field stages
 

@@ -8,6 +8,7 @@ module
 public import Mathlib.Algebra.Module.FinitePresentation
 public import Mathlib.Algebra.Category.ModuleCat.Basic
 public import Mathlib.CategoryTheory.Category.Preorder
+import Sheaf.Algebra.ModuleDirectedColimitFinitePresentation
 
 /-! # Directed colimits of finitely presented modules
 

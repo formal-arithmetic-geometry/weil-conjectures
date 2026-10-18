@@ -11,6 +11,9 @@ public import Mathlib.RingTheory.Localization.AsSubring
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Mathlib.RingTheory.KrullDimension.Basic
 public import Mathlib.RingTheory.Ideal.Height
+import Sheaf.RingTheory.LocalizationPrimeResidueFieldIso
+import Sheaf.TraceFormula.NormalizationFinitePrimeFibres
+import WeilConjectures.Mathlib.RingTheory.Ideal.HasGoingUp
 
 @[expose] public section
 

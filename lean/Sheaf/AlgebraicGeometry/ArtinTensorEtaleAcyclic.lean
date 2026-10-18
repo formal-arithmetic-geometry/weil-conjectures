@@ -10,6 +10,11 @@ public import Sheaf.AlgebraicGeometry.TorsionEtaleSheaf
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 public import Mathlib.RingTheory.TensorProduct.Basic
 public import WeilConjectures.RingTheory.ProEtale.IndEtale
+import Sheaf.AlgebraicGeometry.ArtinHenselianTensorResidueDichotomy
+import Sheaf.AlgebraicGeometry.KInjectiveResolutions
+import Sheaf.RingTheory.IndEtaleUniverseTransport
+import Sheaf.TraceFormula.AffineEtaleCoverComponentCriterion
+import WeilConjectures.Mathlib.RingTheory.Henselian
 
 /-!
 # Artin tensor étale acyclicity

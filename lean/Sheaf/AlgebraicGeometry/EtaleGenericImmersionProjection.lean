@@ -30,6 +30,7 @@ import WeilConjectures.SixFunctors.Etale.UpperLowerStar.StalkMonoidal
 import WeilConjectures.SixFunctors.Finite.Exact
 import WeilConjectures.SixFunctors.Finite.Stalk
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
+import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Comparison
 
 /-! # Projection formula for an immersion extension by zero
 

@@ -30,6 +30,9 @@ import Mathlib.AlgebraicGeometry.Noetherian
 import Mathlib.Algebra.Homology.DerivedCategory.FullyFaithful
 import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 import Mathlib.Algebra.Homology.DerivedCategory.ShortExact
+import Sheaf.NumberTheory.Padics.ExtensionIntegersDvr
+import Sheaf.Paper.CartesianCoefficients
+import Sheaf.Paper.DerivedNakayamaFirstReduction
 
 /-!
 # The integral constant-model constructible category and its heart

@@ -15,6 +15,7 @@ import Sheaf.RingTheory.PowerSeriesFieldCohenRegularComplete
 import WeilConjectures.Mathlib.RingTheory.RegularLocalRing.Defs
 import Sheaf.RingTheory.RegularLocalLocalization
 import Sheaf.RingTheory.RegularRingNormal
+import Sheaf.TraceFormula.SharpFsOrthantEmbedding
 
 /-!
 # Normality of saturated complete monoid local models

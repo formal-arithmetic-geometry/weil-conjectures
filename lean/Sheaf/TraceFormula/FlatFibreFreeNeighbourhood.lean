@@ -8,6 +8,11 @@ public import Mathlib.AlgebraicGeometry.Fiber
 public import Mathlib.Algebra.Category.ModuleCat.Stalk
 public import Sheaf.TraceFormula.FlatAssociatedEquidimensional
 public import WeilConjectures.AlgebraicGeometry.TensorPullback
+import Sheaf.AlgebraicGeometry.FibreStalkQuotient
+import Sheaf.AlgebraicGeometry.FinitePresentationKernelSurjectionFiniteType
+import Sheaf.RingTheory.FlatOfFlatClosedFiber
+import Sheaf.Topology.FiniteTypeSurjectiveNearStalk
+import WeilConjectures.AlgebraicGeometry.Modules.TensorPullbackStalk
 
 /-!
 # Relative flatness and a flat fibre stalk give a free neighbourhood

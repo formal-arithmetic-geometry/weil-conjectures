@@ -32,6 +32,8 @@ import Sheaf.Paper.LisseTensorScalarExtension
 import Sheaf.RepresentationTheory.LAdic
 import Sheaf.SixFunctors.IntegralLisseReductionEquivalence
 import Sheaf.AlgebraicGeometry.LisseLatticeCoefficientsSized
+import Sheaf.Paper.LisseCompletedSystemComparison
+import Sheaf.Paper.NormalProEtaleMonodromy
 
 /-!
 # Global integral lattices on smooth geometric fibres

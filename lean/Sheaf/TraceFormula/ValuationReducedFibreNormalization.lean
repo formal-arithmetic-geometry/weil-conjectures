@@ -7,6 +7,11 @@ public import Mathlib.RingTheory.FinitePresentation
 public import Mathlib.RingTheory.Nilpotent.GeometricallyReduced
 public import Mathlib.FieldTheory.IsSepClosed
 public import Mathlib.RingTheory.TensorProduct.Maps
+import Sheaf.AlgebraicGeometry.GeometricallyReducedAlgebraicClosureTest
+import Sheaf.AlgebraicGeometry.GeometricallyReducedEtaNormal
+import Sheaf.FieldTheory.ValueGroupDivisible
+import Sheaf.TraceFormula.GeometricReducedFibreLocusBaseChange
+import Sheaf.TraceFormula.ValuationFiniteTypeModulePresentation
 
 /-!
 # Relative integral closure over a separably closed valuation field

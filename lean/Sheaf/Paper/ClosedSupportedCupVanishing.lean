@@ -29,6 +29,7 @@ import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
 import Sheaf.Paper.DerivedPullbackTensorIso
 import Sheaf.Paper.ShiftedTensorMorphismCalculus
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.TensorResolution
+import Sheaf.Paper.SupportedHomAdjunctionTranspose
 
 /-!
 # Vanishing of the closed-support cup action

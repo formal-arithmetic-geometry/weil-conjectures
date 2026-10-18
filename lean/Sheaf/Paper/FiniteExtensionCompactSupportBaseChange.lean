@@ -27,6 +27,10 @@ import Sheaf.Paper.ConstantCompletionEquivalence
 import Mathlib.AlgebraicGeometry.Morphisms.Separated
 import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
+import Sheaf.CategoryTheory.ScalarLocalization
+import Sheaf.Paper.CompletedPullbackTriangles
+import Sheaf.Paper.FiniteExtensionReductionConeBound
+import Sheaf.Paper.SbcCompletedOperations
 
 /-!
 # Compact-support base change over a finite extension

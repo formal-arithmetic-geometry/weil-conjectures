@@ -13,6 +13,8 @@ public import Sheaf.AlgebraicGeometry.ProEtaleBoundedConstructible
 import Sheaf.AlgebraicGeometry.SchemeFrobeniusFiniteRadicial
 import Mathlib.AlgebraicGeometry.Morphisms.Finite
 import Mathlib.AlgebraicGeometry.Morphisms.Proper
+import Sheaf.AlgebraicGeometry.CoefficientBoundedConstructibleProEtale
+import Sheaf.Paper.BoundedConstructiblePushforwardRestriction
 
 /-!
 # The model compact-support comparison and the proper unit

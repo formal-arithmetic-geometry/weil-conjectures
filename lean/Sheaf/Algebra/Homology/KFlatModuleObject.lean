@@ -20,6 +20,10 @@ import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolutio
 import Mathlib.LinearAlgebra.FreeModule.Basic
 import Mathlib.RingTheory.Flat.Basic
 import Mathlib.CategoryTheory.Adjunction.Limits
+import Sheaf.Algebra.Homology.PreservesTotalTensorKFlatQuasiIso
+import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
+import WeilConjectures.CategoryTheory.ModuleObjects.Monoidal
+import WeilConjectures.CategoryTheory.Monoidal.Mod.Abelian
 
 /-!
 # K-flat complexes of module objects on the pro-étale site

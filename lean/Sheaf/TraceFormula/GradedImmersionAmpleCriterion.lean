@@ -14,6 +14,11 @@ public import WeilConjectures.AlgebraicGeometry.GradedSheafStructures
 public import WeilConjectures.AlgebraicGeometry.RelativeProj.Basic
 public import Sheaf.AlgebraicGeometry.TensorPullbackSectionAdjunction
 public import Sheaf.TraceFormula.SpaceLineModuleProjMap
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
+import Sheaf.AlgebraicGeometry.AmplePositiveTensorPower
+import Sheaf.AlgebraicGeometry.ProjCanonicalMapTwistComparison
+import Sheaf.TraceFormula.ProjQcOpenTwistAmple
+import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Immersion
 
 /-!
 # Graded immersion criterion for ampleness

@@ -27,6 +27,9 @@ import Sheaf.Paper.KFlatRingedToposPullback
 import Sheaf.AlgebraicGeometry.ProEtale.IsoSectionwiseInverseImage
 
 public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
+import Sheaf.Paper.IntegralFinitePullbackComposition
+import Sheaf.Paper.IntegralOperationsPreserveConstructible
+import Sheaf.SixFunctors.SchemeFrobenius
 /-!
 # Frobenius pullback and coefficient reduction coherence
 

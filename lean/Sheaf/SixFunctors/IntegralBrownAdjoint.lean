@@ -13,6 +13,10 @@ import Mathlib.AlgebraicGeometry.AffineScheme
 import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 import Mathlib.AlgebraicGeometry.Morphisms.Separated
 import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
+import Sheaf.Compactification.BoundaryRefinement
+import Sheaf.Paper.LocalizingAdmissibleCoefficients
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.LowerShriek
 
 /-!
 # The integral Brown exceptional adjoint

@@ -15,6 +15,7 @@ public import Mathlib.RingTheory.AlgebraicIndependent.Basic
 public import Sheaf.FieldTheory.AbhyankarInequality
 
 import Mathlib.FieldTheory.AlgebraicClosure
+import Sheaf.TraceFormula.ResidualCurveValueGroup
 
 /-!
 # Separable perturbation and factor selection

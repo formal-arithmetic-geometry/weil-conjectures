@@ -15,6 +15,9 @@ import Mathlib.RingTheory.KrullDimension.Regular
 import WeilConjectures.RingTheory.AdicCompletionNoetherian
 import WeilConjectures.Mathlib.RingTheory.RegularLocalRing.Defs
 import Sheaf.RingTheory.HilbertSamuelGrowthDimension
+import Sheaf.RingTheory.MonoidCompletionCoefficients
+import Sheaf.TraceFormula.FsFaceSharpening
+import Sheaf.TraceFormula.SharpMonoidPositiveGrading
 
 /-!
 # Dimension of a formal monoid ring and a parameter hypersurface

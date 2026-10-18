@@ -55,6 +55,8 @@ import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
 import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 
 public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
+import Sheaf.Algebra.Homology.RingedInternalHomShiftOfUniverses
 /-! # External global derived Hom and coefficient cones
 
 Source: Stacks Project, Cohomology on Sites, Tags 08J9, 08JC, 0A90 and 0G7D;

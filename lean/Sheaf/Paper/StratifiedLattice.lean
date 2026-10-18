@@ -17,6 +17,8 @@ import WeilConjectures.AlgebraicGeometry.FiniteEtaleEtaleLocalSplit
 import Sheaf.Paper.LatticeSheafLocallyConstant
 import Mathlib.AlgebraicGeometry.Noetherian
 import Mathlib.LinearAlgebra.FreeModule.PID
+import Sheaf.NumberTheory.Padics.ExtensionIntegersDvr
+import Sheaf.Paper.PadicIntegersInvertEll
 
 /-!
 # Integral lattices after finite stratification

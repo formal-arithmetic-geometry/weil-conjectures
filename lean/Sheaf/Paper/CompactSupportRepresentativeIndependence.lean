@@ -23,6 +23,7 @@ import Mathlib.Algebra.Homology.DerivedCategory.KInjective
 import Sheaf.Paper.SfIntegralCompactSupportConstructible
 import Sheaf.Paper.SfIntegralConstructibleTriangulated
 import Mathlib.LinearAlgebra.TensorProduct.Tower
+import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimitIndependentCoefficients
 
 /-!
 # Compact support and specified rational identifications

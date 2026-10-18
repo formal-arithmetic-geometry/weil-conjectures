@@ -9,6 +9,12 @@ public import Sheaf.Paper.UnboundedProperOpenInterchange
 public import Sheaf.AlgebraicGeometry.OpenSectionClopen
 public import Sheaf.AlgebraicGeometry.EtaleSheafClopenProduct
 public import WeilConjectures.AlgebraicGeometry.EtaleLowerShriekBaseChangeModules
+import Sheaf.AlgebraicGeometry.DerivedCounitKInjectiveTermwise
+import Sheaf.AlgebraicGeometry.ExactUnboundedExchange
+import Sheaf.AlgebraicGeometry.ProperSupportSheafComposition
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
+import WeilConjectures.AlgebraicGeometry.EtaleLowerShriekBaseChangeMap
+import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 
 /-!
 # The adjoint of proper/open refinement is the component projection

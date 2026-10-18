@@ -3,6 +3,8 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.RingTheory.Spectrum.Prime.Topology
 public import Mathlib.RingTheory.Localization.Away.Basic
+import Sheaf.RingTheory.EtaleFittingTrick
+import Sheaf.RingTheory.PresentationFittingIdeal
 
 /-!
 # Etale local factorization of an ideal

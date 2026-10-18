@@ -21,6 +21,7 @@ import Sheaf.RingTheory.HenselianFiniteEtaleEquivalence
 import Sheaf.RingTheory.ReducedNormalIffIntegrallyClosedTotalFractions
 import Sheaf.RingTheory.ValuationRingNormal
 import Sheaf.RingTheory.HenselianFiniteGaloisLift
+import Sheaf.RingTheory.StrictHenselizationFiniteLifts
 
 /-!
 # Strict-henselian fraction field and the residue inertia kernel

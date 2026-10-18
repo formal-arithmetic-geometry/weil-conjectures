@@ -16,6 +16,8 @@ import Sheaf.AlgebraicGeometry.Curve.EtaleCohomologicalDimension
 import Sheaf.Algebra.Homology.BoundedFreeProjectiveCohomologySplitting
 import WeilConjectures.AlgebraicGeometry.AbelianVariety.Final
 import WeilConjectures.AlgebraicGeometry.Curve.Estimate
+import Sheaf.AlgebraicGeometry.Curve.KummerJacobianTateModule
+import WeilConjectures.EtaleCohomology.PoincareDuality.Degreewise
 
 /-! # Finite-level Poincare duality for a geometric curve
 

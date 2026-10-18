@@ -19,6 +19,10 @@ import Mathlib.AlgebraicGeometry.ResidueField
 import Mathlib.AlgebraicGeometry.Limits
 import Mathlib.AlgebraicGeometry.GammaSpecAdjunction
 import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
+import Sheaf.AlgebraicGeometry.CoefficientSectionsLocalization
+import Sheaf.Paper.CondensedPointCoefficients
+import Sheaf.Topology.ProfiniteCondensedRing
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
 
 /-!
 # Finite constant local models for condensed coefficients

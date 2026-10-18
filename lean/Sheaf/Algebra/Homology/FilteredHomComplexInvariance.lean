@@ -12,6 +12,8 @@ public import Mathlib.Algebra.Homology.HomologicalComplexAbelian
 public import Mathlib.Algebra.Category.Grp.Abelian
 public import Sheaf.CategoryTheory.FiniteFiltrationInduction
 public import Mathlib.Algebra.Homology.QuasiIso
+import Sheaf.CategoryTheory.InjectiveTargetHomSymbol
+import WeilConjectures.CategoryTheory.Abelian.Filtration
 
 /-!
 # Homotopy and graded quasi-isomorphism invariance of the shift-filtered Hom complex

@@ -33,6 +33,10 @@ import Sheaf.AlgebraicGeometry.ExchangeForgetCoefficients
 import Sheaf.AlgebraicGeometry.GeometricFiberFinite
 import Sheaf.AlgebraicGeometry.SupportedExteriorProduct
 import Sheaf.AlgebraicGeometry.SfIntrinsicCompactSupport
+import Sheaf.Paper.PurityDivisorClass
+import Sheaf.Paper.SfCommonStageWeilCohomology
+import Sheaf.Paper.SupportedCupFunctoriality
+import WeilConjectures.WeilSheaf.FourierInversion.OtherSections
 
 /-!
 # The finite-coefficient projective-bundle formula

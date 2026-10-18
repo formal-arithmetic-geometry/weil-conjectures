@@ -4,6 +4,8 @@ public import Sheaf.CategoryTheory.SiteCoveringAxioms
 public import Sheaf.CategoryTheory.RingedSiteModules
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.SiteTensorFunctoriality
 public import Mathlib.CategoryTheory.Sites.EpiMono
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
+import WeilConjectures.AlgebraicGeometry.SiteSheafificationSectionsLocal
 
 /-!
 # Tensor quotient epimorphism

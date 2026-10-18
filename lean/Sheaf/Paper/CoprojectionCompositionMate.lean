@@ -30,6 +30,9 @@ import Sheaf.Paper.ProEtaleConstructibleOrigin
 import Sheaf.Paper.PfRefinementCompatibility
 import Mathlib.CategoryTheory.Adjunction.Mates
 import Mathlib.CategoryTheory.Adjunction.Unique
+import Sheaf.Paper.CanonicalOriginCompactSupportComposition
+import Sheaf.Paper.IntegralFinitePullbackComposition
+import WeilConjectures.Compactification.NagataCompactification
 
 /-!
 # Composition of co-projection mates

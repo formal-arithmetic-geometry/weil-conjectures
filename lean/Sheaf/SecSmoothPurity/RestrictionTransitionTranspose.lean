@@ -15,6 +15,9 @@ import Sheaf.AlgebraicGeometry.ProEtaleRingSheafChangeAdjunction
 import Sheaf.AlgebraicGeometry.ProEtaleExtensionZero
 import Sheaf.AlgebraicGeometry.ProEtaleFixedScalarRestrictionDirectImage
 import Sheaf.CategoryTheory.RingedToposDerivedPushforwardComposition
+import Sheaf.AlgebraicGeometry.ProEtaleConstantRingOperations
+import Sheaf.AlgebraicGeometry.ProEtaleIntrinsicExtensionByZero
+import Sheaf.SecSmoothPurity.ScalarExtensionFunctor
 
 /-!
 # Scalar-adjunction transposes of mixed-coefficient compact-support maps

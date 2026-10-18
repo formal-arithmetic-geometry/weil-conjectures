@@ -11,6 +11,9 @@ public import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
 import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.SiteTensorFunctoriality
 import Sheaf.Paper.EtaleDerivedScalarTensor
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
+import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
+import Sheaf.Paper.PointProEtaleSectionsExact
 
 /-! # The canonical sections-tensor comparison commutes with shifts
 

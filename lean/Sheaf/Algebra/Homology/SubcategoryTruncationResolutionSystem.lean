@@ -12,6 +12,7 @@ public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 
 import Mathlib.Algebra.Homology.HomotopyCategory.Triangulated
 import Mathlib.CategoryTheory.Triangulated.Pretriangulated
+import Sheaf.Algebra.Homology.SubcategoryLeftResolution
 
 /-!
 # Compatible bounded-above resolutions from a quotient-generating class

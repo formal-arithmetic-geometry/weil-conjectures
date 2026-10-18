@@ -12,6 +12,7 @@ import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
 import Sheaf.CategoryTheory.RingedSiteModules
 import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
+import Sheaf.AlgebraicGeometry.PointedEtaleStalk
 
 /-!
 # The retract supplied by a surjective scheme morphism

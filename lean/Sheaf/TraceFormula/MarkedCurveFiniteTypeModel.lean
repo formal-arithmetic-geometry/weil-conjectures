@@ -24,6 +24,9 @@ import Sheaf.AlgebraicGeometry.DescendFlatFinitePresentation
 import WeilConjectures.CategoryTheory.ExistsDirectedReindexing
 import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
+import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
+import Sheaf.AlgebraicGeometry.SemistableMarkedBaseChange
+import Sheaf.TraceFormula.PureRelativeDimensionFiniteStage
 
 /-! # Finite-type integral models of multipointed curves
 

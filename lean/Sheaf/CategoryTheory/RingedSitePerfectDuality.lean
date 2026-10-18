@@ -29,6 +29,10 @@ import Sheaf.CategoryTheory.LocalizedModuleExactIndependent
 import Mathlib.CategoryTheory.Sites.LocalProperties
 import Mathlib.Algebra.Homology.DerivedCategory.KInjective
 import Sheaf.Algebra.Homology.KInjectiveRestrictLocalized
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
+import Sheaf.Algebra.Homology.RingedInternalHomShiftOfUniverses
+import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
+import Sheaf.CategoryTheory.LocalizedModuleExactForSystems
 
 /-! # Perfect duality on a small ringed site
 

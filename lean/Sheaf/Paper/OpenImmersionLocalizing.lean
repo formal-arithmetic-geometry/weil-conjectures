@@ -12,6 +12,12 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedC
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenImmersionLowerShriek
 import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import Mathlib.CategoryTheory.Adjunction.Limits
+import Sheaf.CategoryTheory.Triangulated.LocalizingFunctor
+import Sheaf.Paper.CartesianCoefficients
+import Sheaf.Paper.LocalizingClosureExistence
+import Sheaf.Paper.OpenExtensionConstantModelConstructible
+import Sheaf.SixFunctors.IntTensorProjection
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LowerShriek.Defs
 
 /-!
 # Open extension by zero on localizing categories

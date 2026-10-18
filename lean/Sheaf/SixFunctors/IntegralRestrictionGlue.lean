@@ -17,6 +17,13 @@ import Mathlib.Topology.Constructible
 import Sheaf.Paper.RestrictionLocal
 import Sheaf.Paper.LocalizingClosureCtfEqualsBc
 import Sheaf.SixFunctors.IntegralTensorInverseImage
+import Sheaf.AlgebraicGeometry.CoefficientBoundedConstructibleProEtale
+import Sheaf.Paper.CondensedConstantConstructibility
+import Sheaf.Paper.MateOpenRestriction
+import Sheaf.SixFunctors.IntegralLocalizingCompactSupport
+import Sheaf.SixFunctors.IntegralRestrictionClosed
+import Sheaf.SixFunctors.IntegralRestrictionLine
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible
 
 /-!
 # Finite-open gluing and restriction of the integral Brown adjunction

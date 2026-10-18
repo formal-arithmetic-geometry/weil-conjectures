@@ -10,6 +10,13 @@ public import Sheaf.AlgebraicGeometry.EllAdicCondensedCoefficient
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperLowerStar
 import Sheaf.AlgebraicGeometry.FiniteTypeFibreDimensionBound
 import Sheaf.CategoryTheory.TruncationsAndHomotopyColimits
+import Sheaf.CategoryTheory.Triangulated.LeftCompleteHeartUpperBound
+import Sheaf.Paper.AmbientIndDerivedSums
+import Sheaf.Paper.AmbientIndDerivedTriangulated
+import Sheaf.Paper.IntegralConstructibleCompactness
+import Sheaf.Paper.IntegralProperDirectSums
+import Sheaf.Paper.ProperHeartBound
+import Sheaf.Paper.ProperIndConstructibleUnbounded
 
 /-! # Uniform upper bound for the discarded lower tail
 

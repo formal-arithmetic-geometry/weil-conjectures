@@ -11,6 +11,8 @@ import Mathlib.RingTheory.RegularLocalRing.Defs
 import Sheaf.RingTheory.JTwoResidueFieldCriterion
 import Sheaf.RingTheory.IntGRing
 import Sheaf.RingTheory.IntegerPrimeLocalizations
+import Sheaf.AlgebraicGeometry.IsRegularScheme
+import Sheaf.RingTheory.RegularRingUniversallyCatenary
 
 /-!
 # Excellence of the ring of integers

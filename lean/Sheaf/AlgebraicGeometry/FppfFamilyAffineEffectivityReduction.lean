@@ -16,6 +16,7 @@ import Sheaf.AlgebraicGeometry.FiniteCoproductLfpQcqs
 import Sheaf.AlgebraicGeometry.FpqcCanonicalPullbackDatum
 import Sheaf.AlgebraicGeometry.FpqcRefinementReflectsEffectivity
 import Sheaf.AlgebraicGeometry.FpqcEffectivityOpenLocal
+import WeilConjectures.CategoryTheory.Comma.Over.DescentDatum
 
 /-!
 # Reduction of effective fppf descent to affine singleton covers

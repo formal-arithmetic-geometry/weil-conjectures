@@ -9,6 +9,14 @@ public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
 public import Sheaf.AlgebraicGeometry.StrictHenselizationStructuralMap
 public import Sheaf.AlgebraicGeometry.StrictHenselizationClosedLift
+import Sheaf.AlgebraicGeometry.AffineStrictLocalRingComparison
+import Sheaf.AlgebraicGeometry.StrictHenselization
+import Sheaf.Paper.StrictHenselizationFunctoriality
+import Sheaf.RingTheory.MapIntoHenselianColimit
+import Sheaf.RingTheory.PointedEtaleFiltered
+import Sheaf.RingTheory.StrictHenselizationPresentationIn
+import Sheaf.RingTheory.StrictlyHenselianQuotient
+import WeilConjectures.AlgebraicGeometry.EtaleLocalRingTriples
 
 /-!
 # Strict localization along a closed immersion

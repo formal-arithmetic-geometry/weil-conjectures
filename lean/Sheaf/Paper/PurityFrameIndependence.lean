@@ -10,6 +10,8 @@ import Mathlib.AlgebraicGeometry.Sites.Etale
 import Sheaf.RingTheory.LocalGeneratingTuples
 import Sheaf.AlgebraicGeometry.SupportLongExact
 import Sheaf.Paper.SupportedAffineLineHomotopy
+import Sheaf.Paper.RelativeSupportBottomDescent
+import Sheaf.Paper.SupportedCupFunctoriality
 
 /-!
 # Independence of the concrete frame class

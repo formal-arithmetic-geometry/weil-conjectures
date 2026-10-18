@@ -8,6 +8,10 @@ module
 public import Sheaf.Paper.ProjectionFormulaBaseChangeNaturality
 public import Sheaf.Paper.StrictPerfectPackageOnSite
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+import Sheaf.Paper.OpenImmersionTensorPiece
+import Sheaf.Paper.ProEtaleProjectionFormulaArrows
+import Sheaf.Paper.ProjectionCompactification
+import Sheaf.Paper.ProjectionFormulaCompactified
 
 /-!
 # Identity compactification and the projection formula

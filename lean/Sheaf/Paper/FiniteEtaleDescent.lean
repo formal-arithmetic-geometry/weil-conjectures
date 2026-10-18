@@ -11,6 +11,18 @@ public import Sheaf.AlgebraicGeometry.ProEtaleSiteComparison
 public import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
 public import Sheaf.AlgebraicGeometry.FixedFiniteExceptionalAt
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekToLowerStar
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
+import Sheaf.AlgebraicGeometry.CompactSupportComparisonUnit
+import Sheaf.AlgebraicGeometry.EtaleFlatConstructibleModel
+import Sheaf.AlgebraicGeometry.FixedComparisonDirectImageMate
+import Sheaf.AlgebraicGeometry.SupportComparisonPullbackCoherence
+import Sheaf.Paper.ComparisonTorAmplitude
+import Sheaf.Paper.ConstructibleExceptionalAdjunctionCoefficients
+import Sheaf.Paper.EtaleLocallyClosedShriek
+import Sheaf.Paper.FiniteCoefficientDirectImage
+import Sheaf.Paper.FiniteCoefficientReductionFlatModel
+import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
+import WeilConjectures.ConstructibleSheaf.KernelCokernel
 
 /-! # Étale recovery of the closed exceptional quotient comparison
 

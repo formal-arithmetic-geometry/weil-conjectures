@@ -15,6 +15,9 @@ import Sheaf.Algebra.Homology.BoundedAboveFlatSheafKFlat
 import Mathlib.Algebra.Homology.BifunctorShift
 import Sheaf.Paper.FiniteTensorConstructibleCohomology
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
+import Sheaf.Paper.IntrinsicFiniteTorsionConstructibility
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Tensor
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.TensorResolution
 
 /-!
 # Derived tensor on the finite-Tor constructible subcategory

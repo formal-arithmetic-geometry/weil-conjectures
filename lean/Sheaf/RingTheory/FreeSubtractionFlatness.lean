@@ -15,6 +15,8 @@ public import Mathlib.RingTheory.Finiteness.Defs
 public import Mathlib.RingTheory.Flat.Localization
 public import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
 public import Mathlib.LinearAlgebra.TensorProduct.Tower
+import Sheaf.RingTheory.UniversalInjectiveCheckStalks
+import Sheaf.TraceFormula.LocalGenericBasisUniversalInjective
 
 /-!
 # Generic basis subtraction and the relative flat locus

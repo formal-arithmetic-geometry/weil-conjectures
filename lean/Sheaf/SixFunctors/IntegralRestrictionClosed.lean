@@ -12,6 +12,12 @@ public import Sheaf.Paper.CondensedConstantConstructibility
 public import Sheaf.Paper.LocalizingAdmissibleCoefficients
 public import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+import Sheaf.Paper.FormalClosedSupportSheaves
+import Sheaf.Paper.IntegralConstantModelHeart
+import Sheaf.Paper.IntegralTensorPullback
+import Sheaf.Paper.LocalizingClosureCtfEqualsBc
+import Sheaf.SixFunctors.IntegralLocalizingCompactSupport
+import Sheaf.SixFunctors.ProEtale.IntegralOpenDirectImage
 
 /-!
 # Integral exceptional inverse image along a closed immersion

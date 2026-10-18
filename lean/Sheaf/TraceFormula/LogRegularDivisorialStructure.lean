@@ -17,6 +17,11 @@ import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen
 import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 import Mathlib.CategoryTheory.Sites.Point.Conservative
 import Mathlib.RingTheory.LocalProperties.IntegrallyClosed
+import Sheaf.AlgebraicGeometry.LogRegularCompletedChart
+import Sheaf.AlgebraicGeometry.LogRegularMonoidalIdealContraction
+import Sheaf.AlgebraicGeometry.LogRegularSharpChart
+import Sheaf.RingTheory.LogRegularSaturationNormality
+import Sheaf.TraceFormula.CompleteToricMonomialFactors
 
 /-!
 # Normality and divisorial description of a log regular structure

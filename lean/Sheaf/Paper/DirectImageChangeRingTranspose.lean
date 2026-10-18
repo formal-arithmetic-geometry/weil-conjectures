@@ -12,6 +12,8 @@ public import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
 import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
+import Sheaf.AlgebraicGeometry.ProEtaleConstantRingMap
+import Sheaf.AlgebraicGeometry.ProEtaleConstantRingOperations
 
 /-!
 # Restriction of the direct-image coefficient mate

@@ -23,6 +23,8 @@ import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import Sheaf.Algebra.Homology.ComplexColimitHomotopyColimit
 import Mathlib.CategoryTheory.Localization.Predicate
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
+import Sheaf.CategoryTheory.RingedSectionLocalizationOfUniverses
 
 /-!
 # The underlying telescope for scalar localization

@@ -6,6 +6,10 @@ Authors: SHEAF group Q64
 module
 
 public import Sheaf.AlgebraicGeometry.AlgebraicSpace
+import Sheaf.AlgebraicGeometry.FppfAffineRefinement
+import Sheaf.CategoryTheory.SiteCoveringAxioms
+import WeilConjectures.AlgebraicGeometry.SiteSheafificationSectionsLocal
+import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Representability
 
 /-!
 # Gluing algebraic spaces along open subfunctors

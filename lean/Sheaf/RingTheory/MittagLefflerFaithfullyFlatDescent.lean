@@ -9,6 +9,10 @@ public import Mathlib.RingTheory.Flat.FaithfullyFlat.Basic
 public import Mathlib.LinearAlgebra.TensorProduct.Pi
 public import Sheaf.RingTheory.IsMittagLeffler
 import Mathlib.CategoryTheory.Limits.HasLimits
+import Sheaf.Algebra.ModuleDirectedColimitFinitePresentation
+import Sheaf.RingTheory.FaithfullyFlatUniversalInjectiveReflection
+import Sheaf.TraceFormula.DominationPushoutUniversalInjective
+import Sheaf.TraceFormula.MittagLefflerEventualDomination
 
 /-!
 # Faithfully flat descent of Mittag-Leffler modules

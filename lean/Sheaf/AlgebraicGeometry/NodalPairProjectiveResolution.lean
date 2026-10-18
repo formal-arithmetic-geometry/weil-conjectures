@@ -16,6 +16,10 @@ public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 public import Mathlib.AlgebraicGeometry.Fiber
 import Sheaf.AlgebraicGeometry.Morphisms.ProjectiveImpliesProper
 import Mathlib.AlgebraicGeometry.Noetherian
+import Sheaf.AlgebraicGeometry.NormalCrossingsStrictification
+import Sheaf.SixFunctors.TraceFormula.NodalLogRegularity
+import Sheaf.TraceFormula.DivisorialLogChart
+import Sheaf.TraceFormula.LogRegularDesingularization
 
 /-!
 # Resolution of a nodal curve over a smooth normal crossings pair

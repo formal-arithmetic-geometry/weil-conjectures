@@ -31,6 +31,8 @@ import Sheaf.AlgebraicGeometry.ProEtaleClassicalSheaves
 import Sheaf.AlgebraicGeometry.ClassicalContinuityMap
 import Sheaf.AlgebraicGeometry.ClassicalDerivedDefinitions
 import Sheaf.AlgebraicGeometry.ProEtaleSiteComparison
+import Sheaf.AlgebraicGeometry.ProEtaleConstantRingOperations
+import Sheaf.CategoryTheory.Sites.UnboundedSectionsLocalization
 /-!
 # Unbounded direct-image comparison
 

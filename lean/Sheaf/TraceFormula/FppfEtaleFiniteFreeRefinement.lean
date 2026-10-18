@@ -3,6 +3,10 @@ module
 public import Mathlib.AlgebraicGeometry.Sites.Fpqc
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
+import Sheaf.AlgebraicGeometry.QuasiFiniteAtPointIsolated
+import Sheaf.AlgebraicGeometry.QuasiFiniteMorphism
+import Sheaf.SecTraceFormula.FppfLocalQfRefinement
+import WeilConjectures.AlgebraicGeometry.EtaleLocalFiniteAtPoint
 
 @[expose] public section
 

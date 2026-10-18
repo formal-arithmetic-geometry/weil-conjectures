@@ -8,6 +8,9 @@ module
 public import Sheaf.AlgebraicGeometry.ProEtaleFiniteCoefficientDirectImage
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Defs
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+import Sheaf.AlgebraicGeometry.ProEtaleConstantRingOperations
+import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
+import Sheaf.AlgebraicGeometry.ProEtaleRestrictionInjectives
 
 /-!
 # Closed-site operations under weakly etale localization

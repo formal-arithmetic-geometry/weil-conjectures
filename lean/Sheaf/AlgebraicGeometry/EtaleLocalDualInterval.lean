@@ -17,6 +17,11 @@ import Sheaf.CategoryTheory.LocalizedModuleExactIndependent
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.FiniteFreeInternalHomExact
 import Sheaf.Algebra.Homology.RingedInternalHomExactRestriction
 import Sheaf.Paper.PbcActualScalarPullback
+import Sheaf.Algebra.Homology.RingedInternalHomShiftOfUniverses
+import Sheaf.AlgebraicGeometry.BoundedConstructibleComplexes
+import Sheaf.CategoryTheory.LocalizedModuleExactForSystems
+import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
+import WeilConjectures.SixFunctors.Etale.Derived.Tensor
 
 /-! # Uniform local models of a twisted coefficient dual
 

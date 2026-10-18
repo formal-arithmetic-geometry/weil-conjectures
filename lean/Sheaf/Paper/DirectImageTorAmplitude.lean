@@ -34,6 +34,9 @@ import Sheaf.AlgebraicGeometry.FiniteTypeDirectImageConstructibility
 import Sheaf.AlgebraicGeometry.FiniteConstantProjectionFormula
 import WeilConjectures.SixFunctors.Etale.Derived.LowerStarProjection
 import Sheaf.AlgebraicGeometry.ResidueTorAmplitudeTest
+import WeilConjectures.AlgebraicGeometry.DerivedCategories
+import WeilConjectures.CategoryTheory.TruncationHypercohomology
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-!
 # Direct image and finite Tor amplitude

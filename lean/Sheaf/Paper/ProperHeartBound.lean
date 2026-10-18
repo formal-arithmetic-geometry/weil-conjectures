@@ -27,6 +27,11 @@ import Sheaf.Algebra.Homology.BoundedBelowInjectiveResolution
 import Mathlib.Algebra.Homology.DerivedCategory.DerivabilityStructureInjectives
 import Sheaf.AlgebraicGeometry.ProperHeartContinuityDirectImage
 import Sheaf.Paper.IndConstructibleFilteredColimits
+import Sheaf.AlgebraicGeometry.ProperHeartBoundRational
+import Sheaf.Paper.CondensedConstantConstructibility
+import Sheaf.Paper.CondensedModuleDerivedPushpull
+import Sheaf.Paper.ProperBaseChangeRational
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs
 
 /-!
 # A uniform bound for proper direct image on the ind-constructible heart

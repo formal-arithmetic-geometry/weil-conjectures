@@ -7,6 +7,7 @@ module
 
 public import Sheaf.RingTheory.AnnihilatorAssociatedPrimes
 public import Mathlib.RingTheory.LocalRing.ResidueField.Fiber
+import WeilConjectures.RingTheory.AnnihilatorAssociatedPrimes
 
 /-!
 # Associated primes of a fibre module and its fibre ring

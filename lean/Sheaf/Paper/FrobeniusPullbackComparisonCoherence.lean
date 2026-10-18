@@ -13,6 +13,7 @@ public import Sheaf.AlgebraicGeometry.ProEtaleConstantRingPullbackComparison
 import Sheaf.AlgebraicGeometry.ProEtaleDerivedPullbackCoherence
 import Sheaf.AlgebraicGeometry.ProEtaleConstantRingComposition
 import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
+import Sheaf.Paper.IntegralFinitePullbackComposition
 
 /-!
 # Coherence of Frobenius-power pullback comparisons

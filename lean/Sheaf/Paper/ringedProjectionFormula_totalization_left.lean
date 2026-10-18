@@ -26,6 +26,7 @@ import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
 import Sheaf.CategoryTheory.ModulePullbackTensorIso
 import Sheaf.Paper.RingedTopoiDerivedPullback
 import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
+import Sheaf.Paper.ProEtaleProjectionFormulaArrows
 
 /-! Auxiliary split for totalization proof. -/
 

@@ -32,6 +32,9 @@ import Sheaf.Paper.PointProEtaleSectionsExact
 import Sheaf.AlgebraicGeometry.ProEtaleCountableProductsExact
 import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimitOfUniverses
 import Mathlib.CategoryTheory.Abelian.FunctorCategory
+import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimitIndependentCoefficients
+import Sheaf.Paper.DerivedReductionResolutionIndependence
+import Sheaf.Paper.QcqsCompactSupportRealization
 
 /-!
 # The compact-support tower coaugmentation

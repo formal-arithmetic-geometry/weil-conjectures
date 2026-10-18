@@ -24,6 +24,8 @@ import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
 import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Basic
 import Mathlib.CategoryTheory.Functor.OfSequence
 import WeilConjectures.CategoryTheory.Triangulated.DerivedLimit
+import WeilConjectures.CategoryTheory.KInjectiveBridge
+import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitTower
 
 /-!
 # The derived inverse-limit functor on strict completed-coefficient towers

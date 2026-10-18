@@ -13,6 +13,12 @@ public import WeilConjectures.Mathlib.CategoryTheory.Functor.SquareTransport
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
 import Sheaf.SixFunctors.IntegralTensorInverseImage
+import Sheaf.Paper.CompactificationCoherenceCocycle
+import Sheaf.Paper.IntegralExtensionByZero
+import Sheaf.Paper.LocalizingClosureCtfEqualsBc
+import Sheaf.Paper.NonrationalLocalizingLowerShriekComposition
+import Sheaf.SixFunctors.DetSfCompCompositionBaseChange
+import Sheaf.SixFunctors.ProperImageLocalizingProper
 
 /-!
 # Integral compact support on the ordinary localizing category

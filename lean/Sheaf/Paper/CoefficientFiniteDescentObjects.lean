@@ -15,6 +15,10 @@ import Mathlib.CategoryTheory.Triangulated.Pretriangulated
 import Sheaf.CategoryTheory.RightDerivedFunctorOfQuasiIsoResolutions
 import Sheaf.Paper.CoefficientFiniteDescentHom
 import Sheaf.Paper.CoefficientFiniteDescentLisse
+import Sheaf.Paper.CoefficientHeartGeneration
+import Sheaf.Paper.CoefficientHeartTriangulated
+import WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalars
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility
 
 /-!
 # Finite coefficient descent of bounded constructible objects

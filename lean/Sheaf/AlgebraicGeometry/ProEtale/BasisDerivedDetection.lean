@@ -27,6 +27,8 @@ import Mathlib.Algebra.Homology.DerivedCategory.KInjective
 import Mathlib.Algebra.Homology.DerivedCategory.Plus
 import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
 import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
+import Sheaf.AlgebraicGeometry.ProEtaleRestrictionInjectives
+import WeilConjectures.CategoryTheory.RingedSiteGrothendieckAbelian
 
 /-!
 # Derived sections on the affine ind-etale basis detect isomorphisms

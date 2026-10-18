@@ -7,6 +7,8 @@ module
 public import Sheaf.AlgebraicGeometry.FineSaturatedLogBlowup
 import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 import Mathlib.AlgebraicGeometry.Noetherian
+import Sheaf.AlgebraicGeometry.FineLogStalkChartSpreading
+import Sheaf.TraceFormula.FsFaceSharpening
 
 /-!
 # Sharp charts for log regular fs log schemes

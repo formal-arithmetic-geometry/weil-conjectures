@@ -16,6 +16,7 @@ import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
 import Mathlib.RingTheory.Spectrum.Prime.Topology
 import WeilConjectures.Mathlib.FieldTheory.IsSepClosed
 import Sheaf.FieldTheory.CommonExtensionFields
+import Sheaf.FieldTheory.SepClosedAlgebrasTensorIrreducible
 
 /-!
 # Testing geometric irreducibility on finite separable extensions

@@ -15,6 +15,11 @@ import Sheaf.CategoryTheory.Sites.GeometricMorphism
 import Sheaf.CategoryTheory.RingedSiteModulesGrothendieckOfUniverses
 import Sheaf.CategoryTheory.ConstantLeftModuleInverseImage
 import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
+import Sheaf.AlgebraicGeometry.PhEtaleTorsionComparison
+import Sheaf.CategoryTheory.DerivedCategory.CompositionAdjunctionNormalization
+import Sheaf.CategoryTheory.RingedCoefficientRestrictionCounit
+import Sheaf.TraceFormula.SimplicialPhEtaleSquare
+import Sheaf.TraceFormula.TotalSiteDerivedComponents
 
 /-!
 # Universal torsion étale descent for proper hypercovers

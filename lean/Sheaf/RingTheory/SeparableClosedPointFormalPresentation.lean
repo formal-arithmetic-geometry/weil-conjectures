@@ -20,6 +20,9 @@ import WeilConjectures.RingTheory.AdicCompletionNoetherian
 import Sheaf.FieldTheory.FiniteSeparableTensorFieldReduced
 import Sheaf.RingTheory.PowerSeriesFieldCohenRegularComplete
 import Sheaf.RingTheory.PowerSeriesUniversalPropertyComplete
+import Sheaf.RingTheory.FieldExtensionCompletionPresentation
+import Sheaf.TraceFormula.CompletedJacobianDifferentials
+import Sheaf.TraceFormula.SeparableResidueCoefficientSection
 
 /-!
 # Formal presentations at finite separable closed points

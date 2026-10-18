@@ -14,6 +14,9 @@ public import Sheaf.AlgebraicGeometry.ProEtaleTorAmplitude
 
 import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.ConstantFieldTensorCohomology
+import Sheaf.AlgebraicGeometry.CoefficientProEtaleTorAmplitude
+import Sheaf.Paper.FiniteTorAmplitudeSites
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Tensor
 
 /-! # Finite Tor amplitude at field coefficients
 

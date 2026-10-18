@@ -22,6 +22,7 @@ import WeilConjectures.AlgebraicGeometry.GroupScheme.Defs
 import WeilConjectures.RingTheory.ProEtale.WeakDimension
 import Sheaf.RingTheory.WeaklyEtaleField
 import Sheaf.RingTheory.ReducedNoetherianTotalRingFractions
+import Sheaf.RingTheory.IndEtaleUniverseTransport
 
 /-!
 # Normalization tensor decomposition for a local weakly etale map

@@ -14,6 +14,10 @@ public import Sheaf.AlgebraicGeometry.EtaleRestrictScalarsFunctorComparisons
 import Sheaf.AlgebraicGeometry.EtaleRestrictScalarsAdjunctionIdentities
 import Sheaf.AlgebraicGeometry.BaseChangeMapAbelianAndSets
 import Sheaf.AlgebraicGeometry.ExactUnboundedExchange
+import Sheaf.Algebra.Homology.ChangeOfRingsTensorComparison
+import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
+import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
+import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
 
 /-!
 # Restriction of the derived coefficient mate equals the projection morphism

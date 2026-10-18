@@ -9,6 +9,9 @@ public import Sheaf.AlgebraicGeometry.ProEtaleMilnorSequence
 public import Sheaf.AlgebraicGeometry.ProEtaleDerivedCategory
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits
 public import Sheaf.AlgebraicGeometry.ProEtaleSurjectiveTowerDerivedLimit
+import Sheaf.AlgebraicGeometry.ProEtale.SectionsConservative
+import Sheaf.AlgebraicGeometry.ProEtaleSectionsLimitsColimits
+import Sheaf.CategoryTheory.RingedSiteModules
 
 /-!
 # Epimorphic towers on the pro-etale site

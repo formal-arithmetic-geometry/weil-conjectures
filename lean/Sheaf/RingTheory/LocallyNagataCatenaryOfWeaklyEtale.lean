@@ -24,6 +24,8 @@ import WeilConjectures.Mathlib.RingTheory.Etale.Weakly
 import Sheaf.RingTheory.NagataLocalization
 import Sheaf.RingTheory.PolynomialNagata
 import Sheaf.RingTheory.WeaklyEtaleField
+import Sheaf.RingTheory.NagataOfWeaklyEtale
+import Sheaf.RingTheory.WeaklyEtaleLocalComponentDimension
 
 /-!
 # Local Nagata properties and universal catenarity under weakly etale maps

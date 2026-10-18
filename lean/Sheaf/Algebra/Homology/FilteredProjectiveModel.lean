@@ -13,6 +13,8 @@ public import Sheaf.CategoryTheory.DerivedCategory.PerfectRingComplexGeneral
 public import Mathlib.RingTheory.Finiteness.Defs
 public import Mathlib.Algebra.Module.Projective
 import Mathlib.Algebra.Homology.DerivedCategory.KProjective
+import Sheaf.Algebra.Homology.FilteredProjectiveComparison
+import WeilConjectures.CategoryTheory.Abelian.Filtration
 
 /-!
 # A finite projective model of a two-step filtered endomorphism

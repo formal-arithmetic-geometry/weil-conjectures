@@ -8,6 +8,9 @@ public import Mathlib.AlgebraicGeometry.Pullbacks
 public import Mathlib.RingTheory.RegularLocalRing.Defs
 public import Mathlib.Topology.KrullDimension
 public import Mathlib.Topology.Sober
+import Sheaf.AlgebraicGeometry.IsRegularScheme
+import Sheaf.RingTheory.Etale.LocalDimension
+import Sheaf.RingTheory.FlatUnderRegular
 
 /-!
 # Étale descent of regular intersections and codimension

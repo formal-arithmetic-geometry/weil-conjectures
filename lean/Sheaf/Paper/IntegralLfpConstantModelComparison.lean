@@ -11,6 +11,15 @@ public import Sheaf.NumberTheory.Padics.CoefficientExtension
 public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.Def
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
 public import Sheaf.Topology.ContinuousMapCondensedRing
+import Sheaf.AlgebraicGeometry.CondensedFieldRankDescent
+import Sheaf.AlgebraicGeometry.FiniteLocallyClosedStratification
+import Sheaf.CategoryTheory.RingedSiteModules
+import Sheaf.FieldTheory.CommonExtensionFields
+import Sheaf.LinearAlgebra.ContinuousIntegralMatrixLocalSmith
+import Sheaf.NumberTheory.Padics.ExtensionIntegersDvr
+import Sheaf.Paper.ContinuousIntegralCoefficients
+import Sheaf.Paper.GeometricFieldProEtaleEvaluation
+import WeilConjectures.CategoryTheory.ModuleObjects.Monoidal
 
 /-!
 # Integral local finite presentation and constant models

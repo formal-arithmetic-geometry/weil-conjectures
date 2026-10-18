@@ -17,6 +17,12 @@ import Sheaf.AlgebraicGeometry.EtaleDerivedTensorSymmetry
 import Sheaf.AlgebraicGeometry.ShriekTensorComposition
 import WeilConjectures.Compactification.NagataCompactification
 import Mathlib.CategoryTheory.Adjunction.Unique
+import Sheaf.AlgebraicGeometry.EtaleAmbientAdjointLocality
+import Sheaf.AlgebraicGeometry.EtaleExceptionalAdjoint
+import Sheaf.AlgebraicGeometry.QuasiFiniteCompactSupportExact
+import WeilConjectures.AlgebraicGeometry.EtaleLowerShriekBaseChangeMap
+import WeilConjectures.SixFunctors.BaseChange.Etale
+import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMap
 
 /-!
 # The three-factor smooth orientation in relative dimension zero

@@ -18,6 +18,8 @@ import Sheaf.AlgebraicGeometry.GeometricallyConnectedAlgebraicClosure
 import Mathlib.AlgebraicGeometry.Morphisms.Etale
 import Mathlib.RingTheory.Spectrum.Prime.Noetherian
 import Mathlib.FieldTheory.IntermediateField.Adjoin.Basic
+import Sheaf.FieldTheory.UniqueSubfieldOfClosure
+import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
 
 /-!
 # Geometric components after a finite constant extension

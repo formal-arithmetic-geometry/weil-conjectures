@@ -29,6 +29,10 @@ import Sheaf.Paper.RestrictionLocalCompleteness
 import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
 import Sheaf.NumberTheory.Padics.ExtensionIntegersDvr
 import Sheaf.AlgebraicGeometry.ProEtaleTorLocalGlobal
+import Sheaf.AlgebraicGeometry.ConstructibleProEtaleComparison
+import Sheaf.AlgebraicGeometry.IntegralConstantCompletion
+import Sheaf.AlgebraicGeometry.ProEtaleFiniteTorComparisonNoetherian
+import Sheaf.Paper.IntegralCohomologicalAdicCriterion
 
 /-! # Integral constructible objects and Stacks adic constructibility
 

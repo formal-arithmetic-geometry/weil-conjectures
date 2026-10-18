@@ -12,6 +12,11 @@ public import Mathlib.CategoryTheory.Limits.Indization.Category
 public import Mathlib.CategoryTheory.Presentable.Finite
 public import Mathlib.CategoryTheory.EssentialImage
 public import Mathlib.CategoryTheory.ObjectProperty.Ind
+import Sheaf.CategoryTheory.InternalAbelianSheafModuleEquivalence
+import Sheaf.CategoryTheory.SheafTensorStructure
+import Sheaf.Paper.CoefficientHeartSmall
+import Sheaf.Paper.ConstructibleExtContinuity
+import WeilConjectures.CategoryTheory.RingedSiteGrothendieckAbelian
 
 /-!
 # Constructible sheaves are finitely presented and realize the ind-heart fully faithfully

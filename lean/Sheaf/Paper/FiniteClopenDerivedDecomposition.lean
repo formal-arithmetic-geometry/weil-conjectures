@@ -46,6 +46,9 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorBilinearUniversal
 import Mathlib.CategoryTheory.Adjunction.Limits
 import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import Mathlib.CategoryTheory.Limits.HasLimits
+import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
+import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
+import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitExistence
 
 /-! # Finite clopen decomposition of derived coefficient categories
 

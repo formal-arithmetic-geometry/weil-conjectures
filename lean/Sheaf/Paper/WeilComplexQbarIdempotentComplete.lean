@@ -8,6 +8,7 @@ module
 public import Sheaf.Paper.SfWeilSheafComplex
 import Sheaf.Paper.QbarIdempotentComplete
 public import Mathlib.CategoryTheory.Idempotents.Karoubi
+import Sheaf.Paper.DerivedPullbackTensorHom
 
 /-! # Idempotent completeness of the common-stage Weil category
 

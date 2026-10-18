@@ -10,6 +10,9 @@ public import Mathlib.RingTheory.AlgebraicIndependent.Basic
 public import Mathlib.SetTheory.Cardinal.ENat
 public import Mathlib.Topology.KrullDimension
 public import WeilConjectures.AlgebraicGeometry.Curve.DivisorPullback
+import Sheaf.TraceFormula.GenericFibreClosedChain
+import Sheaf.TraceFormula.LocalDimensionFormula
+import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Proper
 
 /-!
 # Dimension formula for a closed dominant morphism

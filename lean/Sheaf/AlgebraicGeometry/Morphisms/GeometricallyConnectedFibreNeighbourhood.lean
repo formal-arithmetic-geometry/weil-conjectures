@@ -14,6 +14,14 @@ public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
+import Sheaf.AlgebraicGeometry.FibreCohenMacaulayLocus
+import Sheaf.AlgebraicGeometry.Morphisms.CohenMacaulayClosedPointSlice
+import Sheaf.TraceFormula.FiniteLocallyFreeMultisectionConnectedOpen
+import Sheaf.TraceFormula.FlatLFPCMLocusFibreDense
+import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
+import WeilConjectures.AlgebraicGeometry.EtaleLocalFiniteAtPoint
+import WeilConjectures.AlgebraicGeometry.FinitePiecePersistence
+import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
 
 /-! # Spreading a geometrically connected fibre open
 

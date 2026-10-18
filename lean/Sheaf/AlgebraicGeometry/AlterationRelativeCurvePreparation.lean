@@ -15,6 +15,10 @@ public import Mathlib.RingTheory.DiscreteValuationRing.Basic
 public import WeilConjectures.Mathlib.Topology.KrullDimension
 public import WeilConjectures.AlgebraicGeometry.Morphisms.Projective
 public import Sheaf.RingTheory.ExcellentRing
+import Sheaf.AlgebraicGeometry.ClosedIrreducibleDimensionTrdeg
+import Sheaf.AlgebraicGeometry.GenericSmoothBoundaryPreparation
+import Sheaf.AlgebraicGeometry.RelativeCurveFactorization
+import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
 
 /-!
 # Preparation of an alteration problem as a relative curve

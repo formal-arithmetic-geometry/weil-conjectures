@@ -12,6 +12,7 @@ import Sheaf.Paper.RationalizationIdempotentComplete
 public import WeilConjectures.CategoryTheory.Idempotents.Triangulated
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.CategoryTheory.Idempotents.Karoubi
+import Sheaf.Paper.SfRationalizationKaroubi
 
 /-!
 # Idempotent completeness of the common-stage coefficient category

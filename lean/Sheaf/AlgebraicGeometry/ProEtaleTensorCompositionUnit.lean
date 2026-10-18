@@ -12,6 +12,8 @@ public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
 import Sheaf.CategoryTheory.SiteMorphismComposition
 import Sheaf.CategoryTheory.SiteInverseImageTensor
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.SiteTensorFunctoriality
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
+import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
 
 /-!
 # The explicit pro-etale tensor comparison and its adjunction units

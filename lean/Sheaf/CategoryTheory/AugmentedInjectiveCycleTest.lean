@@ -2,6 +2,7 @@ import Mathlib.CategoryTheory.Preadditive.Injective.Resolution
 import Mathlib.Algebra.Homology.HomotopyCategory.HomComplexCohomology
 import Mathlib.CategoryTheory.Abelian.Basic
 import Mathlib.Algebra.Homology.ShortComplex.ShortExact
+import WeilConjectures.CategoryTheory.PushoutShortExactSequence
 
 /-!
 # Augmented injective cycle test

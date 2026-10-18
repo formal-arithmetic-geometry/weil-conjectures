@@ -18,6 +18,9 @@ import Sheaf.AlgebraicGeometry.DimensionBaseChange
 import Sheaf.AlgebraicGeometry.DimensionAffineOpenCover
 import Sheaf.AlgebraicGeometry.Dimension
 import Sheaf.AlgebraicGeometry.UnramifiedOverFieldLocalCriterion
+import Sheaf.AlgebraicGeometry.RationalNodeQuadraticCompletion
+import Sheaf.RingTheory.SeparableClosedPointFormalPresentation
+import Sheaf.SixFunctors.TraceFormula.NodalFamilyFittingSingular
 
 /-!
 # Splitting a nodal point over a finite separable extension

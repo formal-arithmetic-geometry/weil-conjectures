@@ -28,6 +28,8 @@ import Sheaf.AlgebraicGeometry.EtaleConstantModuleDirectImageLeftExact
 import Sheaf.AlgebraicGeometry.EtaleModuleEnoughInjectives
 import Sheaf.Paper.BoundedFlatReplacement
 import Sheaf.Paper.EtaleKFlatCriteria
+import Sheaf.CategoryTheory.DerivedCategory.FiniteCDDerivedUpperBound
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 
 /-!
 # The projection formula with a finitely presented constant module

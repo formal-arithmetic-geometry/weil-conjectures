@@ -9,6 +9,11 @@ public import WeilConjectures.AlgebraicGeometry.FundamentalGroup.WeilGroup
 public import Sheaf.NumberTheory.Padics.CoefficientExtensionSmallLog
 public import Mathlib.GroupTheory.GroupAction.ConjAct
 import Sheaf.CategoryTheory.Galois.AutProfinite
+import Sheaf.AlgebraicGeometry.FundamentalGroup.FLCFiber
+import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
+import Sheaf.NumberTheory.Padics.DeepPrincipalUnitLog
+import Sheaf.NumberTheory.Padics.ExtensionIntegersDvr
+import WeilConjectures.GroupTheory.WeilGroup
 
 /-!
 # An invariant additive character from a multiplicative Weil character

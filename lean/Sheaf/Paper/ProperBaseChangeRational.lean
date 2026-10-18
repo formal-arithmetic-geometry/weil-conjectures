@@ -57,6 +57,9 @@ import Mathlib.CategoryTheory.Shift.Adjunction
 import Mathlib.CategoryTheory.Triangulated.Adjunction
 import Mathlib.CategoryTheory.Shift.CommShift
 import WeilConjectures.Mathlib.CategoryTheory.Triangulated.Functor
+import Sheaf.Paper.CondensedModuleDerivedPushpull
+import Sheaf.Paper.IntegralProperBaseChange
+import Sheaf.SixFunctors.IntegralModelsGenerators
 
 /-!
 # Proper direct image with rational condensed coefficients

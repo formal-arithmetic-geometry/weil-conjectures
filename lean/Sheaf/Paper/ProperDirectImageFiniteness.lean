@@ -17,6 +17,7 @@ import Mathlib.RingTheory.Noetherian.Defs
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 import Sheaf.AlgebraicGeometry.ProEtaleSiteComparisonFiniteLevel
+import Sheaf.AlgebraicGeometry.ComparisonDirectImage
 
 /-!
 # Finiteness of proper direct images

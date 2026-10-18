@@ -11,6 +11,9 @@ public import Sheaf.AlgebraicGeometry.ProEtale.WeakContractibleEquivalences
 public import Sheaf.CategoryTheory.RingedSiteModules
 public import Sheaf.CategoryTheory.RingedSiteModulesGrothendieckOfUniverses
 public import WeilConjectures.CategoryTheory.Sites.WeaklyContractible
+import Sheaf.AlgebraicGeometry.WContractibleAffineCover
+import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
+import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
 
 /-!
 # Evaluation on affine weakly contractible objects is conservative

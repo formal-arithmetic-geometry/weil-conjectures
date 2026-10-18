@@ -11,6 +11,10 @@ import Sheaf.AlgebraicGeometry.ProEtaleClassicalStalk
 import Mathlib.CategoryTheory.Sites.Abelian
 import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 import Sheaf.AlgebraicGeometry.ProEtaleSheafificationGeometricStalk
+import Sheaf.AlgebraicGeometry.ProEtaleConstantRingMap
+import Sheaf.AlgebraicGeometry.ProEtaleConstantRingOperations
+import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
+import Sheaf.Paper.IntegralFinitePullbackComposition
 
 /-!
 # Coherence of pro-etale pullback stalk comparisons

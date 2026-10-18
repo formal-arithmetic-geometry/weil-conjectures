@@ -21,6 +21,9 @@ import Mathlib.RingTheory.Localization.Submodule
 import WeilConjectures.Mathlib.RingTheory.Spectrum.Prime.Noetherian
 import Sheaf.RingTheory.RegularLocalLocalization
 import Sheaf.RingTheory.RegularLocalGeneratorsRegularSequence
+import Sheaf.AlgebraicGeometry.IsRegularScheme
+import Sheaf.RingTheory.RegularLocalLiftRegularSequenceQuotient
+import Sheaf.RingTheory.RegularSequencePrincipalNeighbourhood
 
 /-!
 # Openness of the regular locus from regular prime quotients

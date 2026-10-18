@@ -37,6 +37,12 @@ import Mathlib.AlgebraicGeometry.Morphisms.Immersion
 import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 import Mathlib.AlgebraicGeometry.AffineScheme
 import Mathlib.CategoryTheory.Adjunction.Unique
+import Sheaf.Paper.CompactificationCoherenceCocycle
+import Sheaf.Paper.CondensedModuleDerivedPushpull
+import Sheaf.Paper.LocalizingClosureCtfEqualsBc
+import Sheaf.Paper.MateOpenRestriction
+import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs
 
 /-!
 # Rational affine-line compact-support adjunction

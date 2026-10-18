@@ -16,6 +16,8 @@ public import Sheaf.Paper.SfDerivedComplete
 public import WeilConjectures.AlgebraicGeometry.PoincareDualitySetting
 public import WeilConjectures.CategoryTheory.DerivedCategory.Perfect
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.Basic
+import Sheaf.Paper.FiniteTorAmplitudeSites
+import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 
 /-! # Perfectness of the four cohomology point complexes
 

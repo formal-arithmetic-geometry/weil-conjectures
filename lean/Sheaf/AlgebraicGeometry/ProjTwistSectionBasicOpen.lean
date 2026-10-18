@@ -9,6 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist.UnitToT
 public import WeilConjectures.AlgebraicGeometry.Ample
 public import Sheaf.AlgebraicGeometry.ProjStandardOpenProperties
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.SiteTensorFunctoriality
+import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist.Modules
 
 /-!
 # Homogeneous twist sections and standard opens on the invertibility locus

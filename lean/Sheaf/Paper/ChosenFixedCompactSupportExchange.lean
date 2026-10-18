@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerShriekBaseChange
 public import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
+import Sheaf.SecSmoothPurity.CanonicalShriekExchange
 
 /-!
 # Chosen compact-support exchange in the published finite coefficient framework

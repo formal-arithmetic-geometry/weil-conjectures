@@ -15,6 +15,7 @@ import WeilConjectures.CategoryTheory.Triangulated.HomotopyLimit
 import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 import Mathlib.CategoryTheory.Shift.ShiftSequence
 import Sheaf.CategoryTheory.Triangulated.DerivedLimitProducts
+import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitProducts
 
 /-!
 # Upper cohomological bounds from the heart and left completeness

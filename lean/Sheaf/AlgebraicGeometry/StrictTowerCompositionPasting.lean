@@ -14,6 +14,9 @@ import Sheaf.AlgebraicGeometry.Etale.OpenImmersionLowerShriekCoherence
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.CoherenceLegacy
 import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 import Mathlib.CategoryTheory.Adjunction.Mates
+import Sheaf.AlgebraicGeometry.FiniteConstantCoefficientTransport
+import Sheaf.AlgebraicGeometry.StrictConstantTowerOperations
+import Sheaf.AlgebraicGeometry.StrictTowerOpenExtension
 
 /-!
 # Composition pasting for strict constant-coefficient towers

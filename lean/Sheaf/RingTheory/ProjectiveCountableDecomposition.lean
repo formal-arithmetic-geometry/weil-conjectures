@@ -9,6 +9,7 @@ public import Mathlib.Algebra.Module.Projective
 public import Mathlib.Algebra.DirectSum.Module
 public import Mathlib.Data.Set.Countable
 import Mathlib.LinearAlgebra.FreeModule.Basic
+import Sheaf.RingTheory.ProjectiveKaplanskyDirectSummand
 
 /-!
 # Decomposition of projective modules into countably generated projective modules

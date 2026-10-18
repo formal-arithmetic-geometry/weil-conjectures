@@ -21,6 +21,9 @@ public import WeilConjectures.Blowup.Affine.ChartAlgebra
 public import WeilConjectures.Mathlib.Algebra.Module.Torsion
 import Sheaf.RingTheory.PresentationFittingIdeal
 import WeilConjectures.Blowup.Affine.Principalization
+import Sheaf.Paper.AffineGenericLocalizationIntersection
+import Sheaf.RingTheory.AffineGeometricallyIntegralProjective
+import Sheaf.RingTheory.AffinePrincipalFittingGenerators
 
 /-!
 # Constant generic rank affine module becomes free on blow-up charts

@@ -7,6 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Sheaf.RingTheory.ExcellentRing
+import Sheaf.AlgebraicGeometry.IsRegularScheme
 
 /-! # The J-2 property on affine opens
 

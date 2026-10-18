@@ -44,6 +44,17 @@ import Sheaf.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
 import Sheaf.AlgebraicGeometry.StrictHenselizationStalkFormula
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 import Sheaf.AlgebraicGeometry.CurveOpenDimensionGeneral
+import Sheaf.AlgebraicGeometry.AffineStrictLocalRingComparison
+import Sheaf.AlgebraicGeometry.Dimension
+import Sheaf.AlgebraicGeometry.OpenDegreeZeroConstructible
+import Sheaf.AlgebraicGeometry.OpenImmersionRestriction
+import Sheaf.RepresentationTheory.DvrGalois
+import Sheaf.RingTheory.FieldAlgebraStrictHenselizationExcellent
+import Sheaf.RingTheory.PuncturedCurveBranches
+import WeilConjectures.AlgebraicGeometry.ConstructibleModuleFiniteStalks
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
+import WeilConjectures.AlgebraicGeometry.InverseImageStalkGerm
+import WeilConjectures.AlgebraicGeometry.ReductionUniversalHomeomorphism
 
 /-!
 # Open direct-image constructibility on arbitrary curves

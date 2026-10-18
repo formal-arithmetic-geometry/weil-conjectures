@@ -23,6 +23,17 @@ import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
 import Sheaf.Paper.IntegralOperationsWellDefined
 import Mathlib.AlgebraicGeometry.Noetherian
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+import Sheaf.Paper.DerivedPullbackTensorHom
+import Sheaf.Paper.FiniteFreeCompletedScalarComparison
+import Sheaf.Paper.GeneralAlgebraicallyClosedCoefficients
+import Sheaf.Paper.IntegralPullbackComparisonRealization
+import Sheaf.Paper.IntegralStratifiedPerfectCharacterization
+import Sheaf.Paper.IntrinsicQbarCategory
+import Sheaf.Paper.PbcQbarCompletedPullback
+import Sheaf.Paper.PbcRationalCategory
+import Sheaf.Paper.PbcScalarExtension
+import Sheaf.Paper.SfRationalizationKaroubi
+import Sheaf.Paper.SfScalarExtensionComposition
 
 /-! # Canonical coefficient comparison and Frobenius pairs
 

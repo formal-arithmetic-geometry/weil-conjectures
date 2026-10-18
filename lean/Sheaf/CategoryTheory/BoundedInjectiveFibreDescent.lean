@@ -8,6 +8,7 @@ module
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import Sheaf.Algebra.Homology.FilteredLocalizationInjectiveModel
+import WeilConjectures.CategoryTheory.Abelian.Filtration
 
 /-!
 # Descent of bounded injective fibre comparisons

@@ -19,6 +19,9 @@ import Sheaf.RingTheory.RingKrullDimLeOfFaithfullyFlatOfIsLocalHom
 import WeilConjectures.Mathlib.RingTheory.Ideal.HasGoingUp
 import WeilConjectures.Mathlib.RingTheory.Etale.Weakly
 import Sheaf.RingTheory.WeaklyEtaleField
+import Sheaf.RingTheory.IndEtaleUniverseTransport
+import Sheaf.RingTheory.NormalizationLocalizationDimension
+import Sheaf.RingTheory.WeaklyEtaleNormalization
 
 /-! # Dimensions of local components under a weakly etale homomorphism
 

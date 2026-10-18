@@ -42,6 +42,11 @@ import Mathlib.CategoryTheory.Adjunction.Unique
 import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 import Mathlib.AlgebraicGeometry.Noetherian
 import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
+import Sheaf.Algebra.Homology.RingedInternalHomShiftOfUniverses
+import Sheaf.AlgebraicGeometry.EtaleAmbientAdjointLocality
+import Sheaf.AlgebraicGeometry.EtaleClosedAmbientAdjoint
+import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
+import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 
 /-!
 # Verdier duality preserves finite-Tor constructible complexes

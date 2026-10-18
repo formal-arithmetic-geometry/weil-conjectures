@@ -41,6 +41,10 @@ import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Coh
 import Sheaf.AlgebraicGeometry.ProEtaleImmersionLimitPreservation
 import Sheaf.AlgebraicGeometry.ProEtaleRingedOpenClosed
 import Sheaf.AlgebraicGeometry.ProEtaleCountableProductsExact
+import Sheaf.CategoryTheory.FlatRingedDiagramRestriction
+import Sheaf.CategoryTheory.LocalizedModuleExactForSystems
+import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimitIndependentCoefficients
+import Sheaf.Paper.PbcQbarCompletedPullback
 
 /-!
 # Strict-tower realization of completed compact-support exchange

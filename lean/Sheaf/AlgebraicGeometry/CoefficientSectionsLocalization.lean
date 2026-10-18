@@ -15,6 +15,8 @@ import Sheaf.AlgebraicGeometry.ProEtaleObjectInverseImageRestriction
 import Sheaf.CategoryTheory.SheafTensor
 import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
+import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Defs
 
 /-!
 # Coefficient sections and localization

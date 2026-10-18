@@ -20,6 +20,9 @@ import Sheaf.Paper.RingedTopoiTensorSections
 import Mathlib.CategoryTheory.Localization.Predicate
 
 public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
+import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
+import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
 /-!
 # Normalized composition of derived coefficient extensions
 

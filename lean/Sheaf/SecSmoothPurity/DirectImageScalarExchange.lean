@@ -17,6 +17,9 @@ public import Sheaf.Algebra.Homology.DerivedChangeOfRingsIndependentCoefficients
 public import Mathlib.CategoryTheory.Adjunction.Mates
 import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
 import Sheaf.AlgebraicGeometry.ProEtaleCanonicalPullbackComposition
+import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
+import Sheaf.Paper.CondensedAmbientExchange
+import Sheaf.Paper.IntegralFinitePullbackComposition
 
 /-!
 # Scalar extension and direct-image geometric exchange

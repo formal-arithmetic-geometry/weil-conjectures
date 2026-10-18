@@ -6,6 +6,10 @@ module
 
 public import Sheaf.AlgebraicGeometry.ProjectiveBundleMorphism
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
+import Sheaf.AlgebraicGeometry.CanonicalSymmetricGradedAlgebra
+import Sheaf.AlgebraicGeometry.QuasiCoherentSymmetricAlgebra
+import WeilConjectures.AlgebraicGeometry.RelativeProj.Basic
+import WeilConjectures.LinearAlgebra.SymmetricAlgebra.Graded
 
 /-!
 # Separatedness of a projective bundle

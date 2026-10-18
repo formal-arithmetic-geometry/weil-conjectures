@@ -26,6 +26,13 @@ import Sheaf.CategoryTheory.SitePullbackAbelianExact
 import Sheaf.Paper.RestrictionOfScalarsExact
 import Sheaf.AlgebraicGeometry.FiniteTypeDirectImageConstructibility
 import Sheaf.AlgebraicGeometry.Sites.FiniteTypeTorsionCohomologicalDimension
+import Sheaf.AlgebraicGeometry.ComparisonDirectImage
+import Sheaf.AlgebraicGeometry.ProfiniteCoefficientInverseImage
+import Sheaf.Paper.AdicCoefficientDatum
+import Sheaf.Paper.CompletedDirectImageLimits
+import Sheaf.Paper.DerivedCompleteOnSlices
+import Sheaf.Paper.DerivedScalarExtensionRestrictionAdjunction
+import Sheaf.Paper.ProEtaleConstructibleOrigin
 
 /-!
 # Integral direct image preserves bounded constructibility

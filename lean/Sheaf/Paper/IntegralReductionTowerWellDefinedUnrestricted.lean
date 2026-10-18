@@ -10,6 +10,8 @@ public import Sheaf.Paper.IntegralReductionTowerUnrestricted
 import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
 import Sheaf.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
 import Sheaf.Algebra.Homology.QuasiIsoSaturatedTriangulated
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
+import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
 
 /-! # Canonical resolution comparisons without an auxiliary finite-field datum
 

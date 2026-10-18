@@ -17,6 +17,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 import Sheaf.AlgebraicGeometry.FiniteCoproductLfpQcqs
 import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
 import WeilConjectures.AlgebraicGeometry.ProperCoproduct
+import Sheaf.AlgebraicGeometry.GoodCurvesBoundaryQuasiFinite
 
 /-!
 # Geometric compactification of the inverse image of a good-curves open

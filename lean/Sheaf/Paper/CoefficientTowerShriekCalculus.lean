@@ -43,6 +43,11 @@ import Sheaf.SecSmoothPurity.RestrictionTransitionTranspose
 import WeilConjectures.CategoryTheory.ExtensionByZeroPresheaf
 import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
 import WeilConjectures.Compactification.CategoryBaseChange
+import Sheaf.AlgebraicGeometry.CompactificationRefinementCoherence
+import Sheaf.AlgebraicGeometry.ProEtaleFiniteTorComparisonNoetherian
+import Sheaf.AlgebraicGeometry.VaryingRingProperOpenPasting
+import Sheaf.Paper.EtaleProEtaleCoefficientCompatibility
+import Sheaf.Paper.VaryingRingGraphSummand
 
 /-!
 # Compact support on strict varying-coefficient towers

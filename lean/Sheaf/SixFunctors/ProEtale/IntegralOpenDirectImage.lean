@@ -28,6 +28,7 @@ import Sheaf.AlgebraicGeometry.ComparisonDirectImage
 import Sheaf.Paper.CartesianCoefficients
 import Sheaf.AlgebraicGeometry.ProEtaleRingSheafChangeAdjunction
 import Sheaf.Paper.DerivedScalarExtensionRestrictionAdjunction
+import Sheaf.Paper.DerivedNakayamaResolution
 
 /-!
 # Integral open direct image preserves constructibility

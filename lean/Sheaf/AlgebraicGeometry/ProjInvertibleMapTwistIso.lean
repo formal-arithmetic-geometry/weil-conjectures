@@ -12,6 +12,10 @@ public import WeilConjectures.AlgebraicGeometry.TensorPullback
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.SiteTensorFunctoriality
 import Sheaf.AlgebraicGeometry.ProjGradedModuleSheafExists
 import WeilConjectures.AlgebraicGeometry.NonvanishingSectionTrivializes
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
+import Sheaf.AlgebraicGeometry.TensorPullbackSectionAdjunction
+import WeilConjectures.AlgebraicGeometry.Modules.Invertible
+import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist.Modules
 
 /-!
 # The twist comparison for a graded map into an invertible section ring

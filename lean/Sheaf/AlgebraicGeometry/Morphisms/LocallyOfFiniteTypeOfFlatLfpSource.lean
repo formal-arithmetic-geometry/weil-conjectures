@@ -16,6 +16,7 @@ import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen
 import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 import Mathlib.AlgebraicGeometry.Limits
 import Mathlib.RingTheory.Flat.FaithfullyFlat.Basic
+import Sheaf.RingTheory.FiniteTypeFppfSourceDescent
 
 /-!
 # Local finite type descends through a flat locally finitely presented source cover

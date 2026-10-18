@@ -20,6 +20,7 @@ import Sheaf.Paper.ProjectionFormulaTotalization
 import Sheaf.Paper.ProEtaleProjectionFormulaArrows
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
 import Mathlib.CategoryTheory.Abelian.FunctorCategory
+import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimitIndependentCoefficients
 
 /-!
 # Projection morphisms of augmented strict derived towers

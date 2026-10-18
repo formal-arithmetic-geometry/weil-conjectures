@@ -25,6 +25,14 @@ import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
 import Sheaf.Algebra.Homology.WeilSiteDerivedTensorDescent
 
 public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
+import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
+import Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses
+import Sheaf.Algebra.Homology.HomComplex
+import Sheaf.Algebra.Homology.KFlat
+import Sheaf.Algebra.Homology.ScalarInternalHomAdjunction
+import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
+import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
 /-! # Filtered finite-free coefficient passage for internal Hom
 
 Source: Bhatt--Scholze, Lemma 6.8.12, Proposition 6.8.14 and Remark 6.8.15;

@@ -14,6 +14,8 @@ import WeilConjectures.RingTheory.FiniteLocalHenselian
 import Sheaf.RingTheory.IndEtaleStability
 import Sheaf.RingTheory.MapIntoHenselianColimit
 import Sheaf.RingTheory.QuasiFiniteFourRings
+import Sheaf.RingTheory.IndEtaleUniverseTransport
+import WeilConjectures.Mathlib.RingTheory.Henselian
 
 /-!
 # Ordinary henselization under a quasi-finite local map

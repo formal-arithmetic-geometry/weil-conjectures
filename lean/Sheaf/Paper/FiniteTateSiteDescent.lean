@@ -29,6 +29,8 @@ import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
 import Sheaf.CategoryTheory.ConstantLeftModuleInverseImage
 import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
 import WeilConjectures.SixFunctors.ProEtale.Comparison.FullyFaithful
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
+import Sheaf.Paper.IntrinsicCoefficientTwistsUnrestricted
 
 /-! # Finite Tate descent
 Source: Stacks Project, Tags 03PK and 099R

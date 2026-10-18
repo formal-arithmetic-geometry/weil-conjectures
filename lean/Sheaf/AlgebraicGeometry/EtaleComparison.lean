@@ -21,6 +21,8 @@ import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 import Mathlib.AlgebraicGeometry.OpenImmersion
 import Mathlib.RingTheory.FinitePresentation
 import Sheaf.RingTheory.IndEtaleStability
+import Sheaf.AlgebraicGeometry.UnramifiedMorphism
+import Sheaf.RingTheory.IndEtaleUniverseTransport
 
 /-! # Étale, affine pro-étale and weakly étale morphisms
 

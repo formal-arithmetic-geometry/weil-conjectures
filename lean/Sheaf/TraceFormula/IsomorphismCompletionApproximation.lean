@@ -18,6 +18,8 @@ import Mathlib.RingTheory.Unramified.LocalRing
 import Mathlib.RingTheory.AdicCompletion.LocalRing
 import Sheaf.RingTheory.FlatLocalCompletionIso
 import Sheaf.RingTheory.LocalCompletionQuotient
+import Sheaf.TraceFormula.CompletedStalkIsomorphismEtale
+import Sheaf.TraceFormula.LocalMapCompletionApproximation
 
 /-! # Approximation of completed local-ring isomorphisms
 

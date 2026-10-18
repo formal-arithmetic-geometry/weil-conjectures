@@ -22,6 +22,10 @@ import Sheaf.AlgebraicGeometry.FiniteLocallyClosedStratification
 import Sheaf.CategoryTheory.Sites.OrientedProductLargeSites
 import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
 import Mathlib.Topology.Constructible
+import Sheaf.CategoryTheory.Sites.OrientedClosedBaseLocalization
+import Sheaf.Paper.OrientedConstructibleSheafVanishing
+import Sheaf.Paper.StrictHenselizationFunctoriality
+import Sheaf.TraceFormula.FiniteCoverTubeComparison
 
 /-!
 # Extension of oriented nearby cycles from a closed base

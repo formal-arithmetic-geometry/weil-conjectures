@@ -12,6 +12,8 @@ public import WeilConjectures.WeilSheaf.Triangle
 public import WeilConjectures.WeilSheaf.HomologyShift
 public import WeilConjectures.WeilSheaf.Category
 public import WeilConjectures.WeilSheaf.LowerStar
+import Sheaf.Paper.AdicPunctualWeights
+import Sheaf.Paper.ZlFiniteAdicDirectImage
 
 /-! # Finite pushforward preserves punctual upper bounds and purity
 

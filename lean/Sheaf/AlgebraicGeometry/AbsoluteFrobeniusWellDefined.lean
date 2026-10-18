@@ -10,6 +10,7 @@ public import Sheaf.AlgebraicGeometry.SchemeCharacteristic
 public import Mathlib.AlgebraicGeometry.OpenImmersion
 public import Mathlib.AlgebraicGeometry.Restrict
 public import Mathlib.Geometry.RingedSpace.LocallyRingedSpace
+import WeilConjectures.Mathlib.Algebra.CharP.Lemmas
 
 /-!
 # Well-definedness and local descriptions of absolute Frobenius

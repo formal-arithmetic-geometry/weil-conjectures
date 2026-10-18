@@ -17,6 +17,10 @@ public import WeilConjectures.AlgebraicGeometry.DerivedCategories
 import Sheaf.AlgebraicGeometry.ProEtaleIntrinsicExtensionByZeroExact
 import WeilConjectures.AlgebraicGeometry.EtaleInverseImageExact
 import Sheaf.CategoryTheory.SitePullbackAbelianExact
+import Sheaf.AlgebraicGeometry.ProEtaleSiteComparison
+import Sheaf.CategoryTheory.RingedSiteModules
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 
 /-!
 # Explicit etale-origin witnesses under pullback and open extension

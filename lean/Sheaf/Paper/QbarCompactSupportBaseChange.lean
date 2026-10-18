@@ -10,6 +10,8 @@ public import Sheaf.Paper.PbcDescentFunctors
 public import Sheaf.Paper.PbcQbarCategory
 import Sheaf.Paper.CommonStageCalculus
 import Sheaf.Paper.FiniteStagePairCategory
+import Sheaf.Paper.IntrinsicQbarCategory
+import Sheaf.Paper.RationalCompactSupportCoefficientCoherence
 
 /-!
 # Compact-support base change with algebraically closed l-adic coefficients

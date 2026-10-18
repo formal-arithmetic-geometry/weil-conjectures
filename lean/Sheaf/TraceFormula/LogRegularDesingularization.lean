@@ -14,6 +14,14 @@ public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Properties
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import Mathlib.RingTheory.RegularLocalRing.Defs
+import Sheaf.AlgebraicGeometry.FineSaturatedLogBlowup
+import Sheaf.AlgebraicGeometry.FreeCharacteristicRegularBoundary
+import Sheaf.AlgebraicGeometry.LogBlowupNormalization
+import Sheaf.AlgebraicGeometry.MonoidalResolutionTower
+import WeilConjectures.Blowup.Affine.ChartAlgebra
+import WeilConjectures.Blowup.FiniteDegree.Algebra
+import WeilConjectures.Blowup.Proper
+import WeilConjectures.Mathlib.AlgebraicGeometry.Normalization
 
 /-!
 # Desingularization of a log regular pair

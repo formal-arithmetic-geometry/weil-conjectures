@@ -9,6 +9,16 @@ public import Mathlib.CategoryTheory.Adjunction.Additive
 public import Sheaf.Paper.FiniteCoefficientFlatModel
 public import Sheaf.Algebra.Homology.DerivedChangeOfRingsIndependentCoefficients
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.FlatModelReduction
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
+import Sheaf.Algebra.Homology.BoundedFlatIndependentCoefficients
+import Sheaf.Algebra.Homology.ChangeOfRingsKFlat
+import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
+import Sheaf.AlgebraicGeometry.CoefficientProEtaleTorAmplitude
+import Sheaf.AlgebraicGeometry.EtaleTorAmplitude
+import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
+import Sheaf.Paper.SfCommonStageWeilCohomology
+import WeilConjectures.SixFunctors.Etale.Derived.Tensor
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Tensor
 
 /-!
 # Reduction of bounded flat models at finite coefficient levels

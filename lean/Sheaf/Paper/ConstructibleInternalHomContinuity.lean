@@ -37,6 +37,12 @@ import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategory
 import Sheaf.Algebra.Homology.RingedSiteBoundedFreeRHomModel
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
 import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
+import Sheaf.Algebra.Homology.RingedInternalHomShiftOfUniverses
+import Sheaf.AlgebraicGeometry.CondensedOpenClosedInternalHom
+import Sheaf.Paper.CartesianCoefficients
+import Sheaf.Paper.FiniteModelStratumFiltration
+import Sheaf.Paper.ModuleObjectRingedSiteDerivedComparison
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs
 
 /-!
 # Continuity of constructible-source derived internal Hom

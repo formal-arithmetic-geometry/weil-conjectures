@@ -20,6 +20,7 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
 import Sheaf.Paper.RingedExchangeTensorCoherence
 import Sheaf.AlgebraicGeometry.SupportComparisonPullbackCoherence
 import Sheaf.AlgebraicGeometry.ProEtaleConstantRingMap
+import Sheaf.AlgebraicGeometry.ProEtaleSiteComparison
 
 /-!
 # The normalized pro-etale transpose of the etale projection

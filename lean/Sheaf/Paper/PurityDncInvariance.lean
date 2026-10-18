@@ -36,6 +36,13 @@ import Sheaf.AlgebraicGeometry.ProEtaleDerivedCategory
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.HomCoverGluing
 import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
 import Mathlib.AlgebraicGeometry.Morphisms.Etale
+import Sheaf.Paper.CohomologicalSmoothComposition
+import Sheaf.Paper.CohomologicalSmoothEtaleLocality
+import Sheaf.Paper.CohomologicalSmoothnessTheorem
+import Sheaf.Paper.ConstructibleExceptionalAdjunctionCoefficients
+import Sheaf.Paper.DerivedPullbackTensorHom
+import Sheaf.Paper.PurityDncFamilyIntrinsic
+import Sheaf.Paper.TwistPreservesFiniteness
 
 /-! # Deformation invariance of the section dualizing object
 

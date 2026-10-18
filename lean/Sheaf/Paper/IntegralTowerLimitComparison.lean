@@ -19,6 +19,8 @@ import Mathlib.Algebra.Homology.BifunctorShift
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Tensor
 
 public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
+import Sheaf.Paper.IntegralDerivedOperationsOnSlices
+import Sheaf.Paper.SemilinearDerivedSections
 /-! # Derived limit of a strict integral comparison tower
 
 Source: Stacks Project, Tag 0941, `lemma-derived-limit-is-ok`; Tag 07A4,

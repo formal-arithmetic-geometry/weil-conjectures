@@ -35,6 +35,14 @@ import Sheaf.CategoryTheory.ModulePullbackTensorIso
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.RingedToposFlatPullback
 import Sheaf.Algebra.Homology.SiteDerivedTensorDescent
 public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
+import Sheaf.Algebra.Homology.KFlat
+import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
+import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
+import Sheaf.Paper.CompletedConstantSheafReduction
+import Sheaf.Paper.ConstantCompletionEquivalence
+import WeilConjectures.RingTheory.AdicCompletionNoetherian
+import WeilConjectures.RingTheory.FiniteModuleComplete
 /-!
 # Completed constant realization of finite complexes
 Source: Stacks Project, proetale.tex, Tags 09BT and 09BV; sites-modules.tex,

@@ -14,6 +14,8 @@ public import Mathlib.CategoryTheory.Limits.Shapes.Diagonal
 import Sheaf.AlgebraicGeometry.SeparatedLqfBaseChange
 import Mathlib.AlgebraicGeometry.Morphisms.Etale
 import Mathlib.AlgebraicGeometry.OpenImmersion
+import Sheaf.AlgebraicGeometry.AlgebraicSpace
+import Sheaf.AlgebraicGeometry.IsLocallyQuasiFiniteEtaleSource
 
 /-!
 # Base change and open restriction of separated locally quasi-finite algebraic spaces

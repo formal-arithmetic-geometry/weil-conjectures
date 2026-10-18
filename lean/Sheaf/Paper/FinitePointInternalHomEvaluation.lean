@@ -36,6 +36,9 @@ import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
 import WeilConjectures.SixFunctors.Etale.Derived.Hom
 import WeilConjectures.SixFunctors.Etale.Derived.TorAmplitude
+import Sheaf.Paper.ConnectedConstantH0
+import Sheaf.Paper.ConstructibleExceptionalAdjunctionCoefficients
+import Sheaf.Paper.FiniteCoefficientPoint
 /-! # Evaluation comparison for finite coefficients at the geometric point
 
 Source: Weil blueprint, main-20261015, lem-pod-point-dualizing-complex.proof.md,

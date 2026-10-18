@@ -10,6 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
 import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 import Sheaf.AlgebraicGeometry.EtaleInverseImageCompositionModuleLinearCore
+import WeilConjectures.ConstructibleSheaf.Defs
 
 /-!
 # Transfer of a constructible stratification through etale-local isomorphisms

@@ -8,6 +8,12 @@ module
 public import Sheaf.Paper.PuritySectionInvariantIntrinsic
 public import Sheaf.Paper.PurityDncFamily
 public import WeilConjectures.AlgebraicGeometry.DeformationToNormalCone
+import Sheaf.AlgebraicGeometry.DncAffineBlowupComplement
+import Sheaf.AlgebraicGeometry.EtaleLocalNormalForm
+import Sheaf.AlgebraicGeometry.EtaleReesChart
+import Sheaf.Paper.PurityFiniteSetting
+import WeilConjectures.Blowup.Gluing
+import WeilConjectures.Compactification.StrictTransform
 
 /-! # The deformation family and its finite section invariant
 

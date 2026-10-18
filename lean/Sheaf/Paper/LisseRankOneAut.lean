@@ -20,6 +20,9 @@ import Sheaf.ConstructibleSheaf.ConstantModuleLocallyConstant
 import Sheaf.CategoryTheory.SiteConstantModuleFunctorGeneral
 import Sheaf.CategoryTheory.SiteCoveringAxioms
 import Mathlib.CategoryTheory.Sites.LocallyBijective
+import Sheaf.AlgebraicGeometry.ProEtaleSiteComparison
+import Sheaf.Paper.ProEtaleLocallyConstantSheafOfUniverses
+import WeilConjectures.ConstructibleSheaf.ConstantModuleLocallyConstant
 
 /-!
 # Scalars and automorphisms of finite rank-one local systems

@@ -14,6 +14,8 @@ public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 
 import Mathlib.Algebra.Category.ModuleCat.FilteredColimits
 import Mathlib.CategoryTheory.Limits.ConcreteCategory.Basic
+import Sheaf.RingTheory.IndEtaleUniverseTransport
+import WeilConjectures.AlgebraicGeometry.Morphisms.ProAffineEtale
 
 /-! # Continuity maps and classical pro-étale sheaves
 

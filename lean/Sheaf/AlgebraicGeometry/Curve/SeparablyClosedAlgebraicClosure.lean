@@ -5,6 +5,9 @@ public import Mathlib.FieldTheory.IsSepClosed
 public import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism
 public import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
+import Sheaf.AlgebraicGeometry.UniversalHomeomorphismInvariance
+import WeilConjectures.AlgebraicGeometry.EtaleCohomologyPullbackFunctorial
+import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism.Algebra
 
 /-!
 # Passage to an algebraic closure of a separably closed field

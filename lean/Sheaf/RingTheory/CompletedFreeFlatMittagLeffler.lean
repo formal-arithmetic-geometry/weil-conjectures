@@ -14,6 +14,7 @@ import Mathlib.LinearAlgebra.TensorProduct.RightExactness
 import Sheaf.SecTraceFormula.ProductNoetherianFlatMittagLeffler
 import Sheaf.TraceFormula.PureSubmoduleMittagLeffler
 import Sheaf.TraceFormula.UniversallyExactFlatSubmodule
+import Sheaf.RingTheory.CompletedFreeIntoProductUniversallyInjective
 
 /-!
 # Completed free modules are flat Mittag-Leffler

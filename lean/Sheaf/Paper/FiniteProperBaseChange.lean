@@ -28,6 +28,8 @@ import Sheaf.Algebra.Homology.BoundedAboveFlatSheafKFlat
 import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
 import Sheaf.AlgebraicGeometry.ProperTorsionProjectionFormula
 import WeilConjectures.SixFunctors.Etale.Derived.LowerStarProjection
+import Sheaf.AlgebraicGeometry.ConstructibleProEtaleComparison
+import Sheaf.AlgebraicGeometry.ProEtaleFiniteTorComparisonNoetherian
 
 /-!
 # Proper direct image with finite coefficients

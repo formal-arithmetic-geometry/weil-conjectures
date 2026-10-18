@@ -41,6 +41,9 @@ import Mathlib.RingTheory.Noetherian.Basic
 import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
 import Mathlib.RingTheory.Finiteness.Basic
 import Mathlib.AlgebraicGeometry.Noetherian
+import Sheaf.Algebra.Homology.RingedInternalHomShiftOfUniverses
+import Sheaf.AlgebraicGeometry.LocalModelCohomologyDescent
+import Sheaf.Paper.CartesianCoefficients
 
 /-!
 # Scalar cohomology models for locally perfect complexes and their duals

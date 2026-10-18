@@ -40,6 +40,14 @@ import Sheaf.Paper.IntegralDerivedReduction
 import Sheaf.Paper.IntrinsicFiniteTorsionConstructibility
 import Sheaf.AlgebraicGeometry.ProEtaleSurjectiveTowerDerivedLimit
 import Sheaf.Paper.DerivedComplete
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
+import Sheaf.CategoryTheory.LocalizedModuleExactForSystems
+import Sheaf.Paper.ComparisonPullbackExact
+import Sheaf.Paper.CompletedIntegralConstantMapOfUniverses
+import Sheaf.Paper.DerivedCompleteOnSlices
+import Sheaf.Paper.DerivedScalarExtensionRestrictionAdjunction
+import Sheaf.Paper.SfIntegralConstructible
+import WeilConjectures.AlgebraicGeometry.SiteSheafificationSectionsLocal
 
 /-! # The integral Tate line on the pro-etale site
 

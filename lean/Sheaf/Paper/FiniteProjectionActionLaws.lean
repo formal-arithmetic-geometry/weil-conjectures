@@ -23,6 +23,11 @@ import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Comparison
 import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
 import Sheaf.Algebra.Homology.WeilSiteDerivedTensorDescent
 import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
+import Sheaf.Algebra.Homology.RingedDerivedClosedSymmetricMonoidal
+import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
+import Sheaf.Paper.DerivedPullbackTensorIso
+import Sheaf.Paper.ExchangeProjectionSuppliedDomains
+import Sheaf.SixFunctors.OpenTensorNormalization
 
 /-!
 # Tensor-action and open-counit identities for finite-level projection maps

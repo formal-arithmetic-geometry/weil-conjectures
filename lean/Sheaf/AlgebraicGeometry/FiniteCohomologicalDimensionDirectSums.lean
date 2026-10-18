@@ -34,6 +34,7 @@ import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.Free
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusExact
 import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMap
 import Sheaf.CategoryTheory.DerivedModuleDirectSums
+import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 
 /-!
 # Direct sums and finite cohomological dimension

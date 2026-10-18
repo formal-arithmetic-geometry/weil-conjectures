@@ -16,6 +16,11 @@ import Sheaf.Paper.ProjectionFormulaBaseChangeNaturality
 import Sheaf.Paper.CompletedPullback
 import Sheaf.Paper.CompletedDirectImageLimits
 import Sheaf.Paper.CompletedRlimFunctor
+import Sheaf.CategoryTheory.RingedToposDerivedPushforwardComposition
+import Sheaf.Paper.CompletedPullbackAdjunction
+import Sheaf.Paper.OrderedExchangeCoefficientComparison
+import Sheaf.Paper.ProEtaleConstantReductionTower
+import Sheaf.Paper.StrictTowerExchangeMateNormalization
 
 /-!
 # Naturality, units, and pasting of completed exchange

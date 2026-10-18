@@ -18,6 +18,7 @@ import Mathlib.AlgebraicGeometry.AffineScheme
 import WeilConjectures.AlgebraicGeometry.AffinePushforwardBaseChange
 import Mathlib.AlgebraicGeometry.Morphisms.Affine
 import Mathlib.AlgebraicGeometry.Morphisms.Integral
+import Sheaf.RingTheory.UniquePrimeLocalization
 
 /-!
 # Neighbourhoods and module stalks at a singleton finite fibre

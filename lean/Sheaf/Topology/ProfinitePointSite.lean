@@ -9,6 +9,7 @@ public import WeilConjectures.CategoryTheory.RingObjects.Condensed.ContinuousMap
 public import Sheaf.CategoryTheory.SheafTensorStructure
 public import Sheaf.CategoryTheory.RingObjectSheaf
 public import Mathlib.CategoryTheory.Monoidal.CommMon_
+import Sheaf.Topology.ProfiniteCondensedRing
 
 /-!
 # The pro-étale site of a point and commutative condensed rings

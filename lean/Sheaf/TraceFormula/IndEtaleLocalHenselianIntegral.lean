@@ -10,6 +10,10 @@ public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import WeilConjectures.RingTheory.ProEtale.IndEtale
 public import WeilConjectures.Mathlib.RingTheory.Henselian
 public import Sheaf.RingTheory.HenselizationAtPrime
+import Sheaf.RingTheory.Etale.QuasiFiniteAtPrime
+import Sheaf.RingTheory.HenselianFiniteTypeProductDecomposition
+import Sheaf.RingTheory.IndEtaleUniverseTransport
+import WeilConjectures.RingTheory.QuasiFiniteAtPrime
 
 /-!
 # Integrality of a local henselian ind-etale algebra

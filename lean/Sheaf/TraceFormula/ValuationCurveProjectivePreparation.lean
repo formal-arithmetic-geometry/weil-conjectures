@@ -48,6 +48,7 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Etale
 import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Reduced
 import Sheaf.Compactification.NagataSketchClosure
 import WeilConjectures.AlgebraicGeometry.Morphisms.QuasiFiniteFactorization
+import Sheaf.TraceFormula.ReducedFibreModification
 
 /-! # Normal projective preparation and locality for valuation curves
 

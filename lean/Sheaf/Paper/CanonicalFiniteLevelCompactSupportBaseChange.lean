@@ -14,6 +14,17 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
 import Sheaf.AlgebraicGeometry.Etale.OpenImmersionLowerShriekCoherence
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.CoherenceLegacy
 import Sheaf.AlgebraicGeometry.ProEtaleExtensionZero
+import Sheaf.AlgebraicGeometry.CompactSupportComparisonUnit
+import Sheaf.AlgebraicGeometry.CompactSupportFiniteTorsion
+import Sheaf.AlgebraicGeometry.ComparisonDirectImage
+import Sheaf.AlgebraicGeometry.ProEtaleDerivedExtensionZeroBaseChange
+import Sheaf.AlgebraicGeometry.ProEtaleSiteComparisonFiniteLevel
+import Sheaf.AlgebraicGeometry.SupportComparisonPullbackCoherence
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
+import WeilConjectures.Compactification.BaseChange
+import WeilConjectures.Compactification.NagataCompactification
+import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekPlusBaseChange
+import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 
 /-!
 # Compact-support base change in fixed module coordinates

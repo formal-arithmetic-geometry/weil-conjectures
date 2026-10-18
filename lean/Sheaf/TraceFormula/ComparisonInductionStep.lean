@@ -24,6 +24,7 @@ import Sheaf.CategoryTheory.RingedToposDerivedPushforwardComposition
 import Sheaf.Algebra.Homology.BoundedBelowInjectiveResolutionMono
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
 import Mathlib.CategoryTheory.Triangulated.HomologicalFunctor
+import Sheaf.TraceFormula.ComparisonTruncatedCohomology
 
 /-!
 # Induction for comparison of two site topologies

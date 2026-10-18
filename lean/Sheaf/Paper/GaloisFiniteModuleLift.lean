@@ -11,6 +11,8 @@ public import Sheaf.CategoryTheory.FiniteContinuousModule
 public import Mathlib.Algebra.Category.ModuleCat.Ulift
 import Sheaf.CategoryTheory.EquivalenceInternalModule
 import WeilConjectures.AlgebraicGeometry.LisseModuleSheaves
+import Sheaf.AlgebraicGeometry.FundamentalGroup.FLCFiber
+import Sheaf.AlgebraicGeometry.PointedEtaleStalk
 
 /-! # Finite module lifting of the Galois fibre equivalence -/
 

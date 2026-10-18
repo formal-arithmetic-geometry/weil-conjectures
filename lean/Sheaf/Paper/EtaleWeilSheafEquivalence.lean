@@ -16,6 +16,8 @@ public import Sheaf.Paper.LisseTensorScalarExtension
 public import Sheaf.RepresentationTheory.LAdic
 public import Mathlib.RepresentationTheory.Rep.Basic
 import WeilConjectures.RepresentationTheory.FiniteDimensionalRealization
+import WeilConjectures.AlgebraicGeometry.FundamentalGroup.WeilGroup
+import WeilConjectures.WeilSheaf.Tensor
 
 /-!
 # The exact tensor equivalence for actual etale adic Weil sheaves

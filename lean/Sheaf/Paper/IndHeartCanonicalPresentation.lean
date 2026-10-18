@@ -12,6 +12,8 @@ public import Mathlib.CategoryTheory.Functor.KanExtension.DenseAt
 public import Mathlib.CategoryTheory.EssentiallySmall
 import Mathlib.AlgebraicGeometry.Noetherian
 import Mathlib.CategoryTheory.Filtered.Final
+import Sheaf.Paper.CoefficientHeart
+import Sheaf.Paper.CondensedConstantConstructibility
 
 /-!
 # Canonical presentations of ind-constructible sheaves

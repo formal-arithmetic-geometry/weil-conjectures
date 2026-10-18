@@ -71,6 +71,19 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
 import WeilConjectures.ConstructibleSheaf.KernelCokernel
 import Sheaf.AlgebraicGeometry.FiniteTypeDirectImageConstructibility
+import Sheaf.Algebra.Homology.RingedInternalHomShiftOfUniverses
+import Sheaf.AlgebraicGeometry.EtaleClosedSupportTriangle
+import Sheaf.AlgebraicGeometry.EtaleGenericDirectImageExchange
+import Sheaf.AlgebraicGeometry.EtaleGenericEvaluationCoherence
+import Sheaf.AlgebraicGeometry.EtaleGenericImmersionProjection
+import Sheaf.AlgebraicGeometry.EtaleGenericStratumMate
+import Sheaf.AlgebraicGeometry.SmoothStratificationFiniteTor
+import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
+import Sheaf.Paper.StratumAmbientHom
+import Sheaf.SixFunctors.EtaleGenericHomTriangle
+import Sheaf.SixFunctors.EtaleGenericPerfectHom
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
+import WeilConjectures.AlgebraicGeometry.InverseImageStalkGerm
 
 /-! # Ordinary etale exchange at a geometric generic point
 

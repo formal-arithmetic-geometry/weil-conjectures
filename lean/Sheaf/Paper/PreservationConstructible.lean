@@ -17,6 +17,16 @@ import Sheaf.AlgebraicGeometry.ProEtaleSiteComparisonFiniteLevel
 import Sheaf.AlgebraicGeometry.ProEtaleSiteComparisonDerived
 import Sheaf.Paper.RestrictionDirectImage
 import Sheaf.Paper.ConstantCompletionEquivalence
+import Sheaf.Paper.AdicCoefficientDatum
+import Sheaf.Paper.AmplificationProper
+import Sheaf.Paper.BoundedConstructibleTower
+import Sheaf.Paper.CompletedConstantSheafReduction
+import Sheaf.Paper.CompletedDirectImageLimits
+import Sheaf.Paper.CompletedPullbackReduction
+import Sheaf.Paper.IntegralUniformCoefficient
+import Sheaf.Paper.NormalizedConstructibleTowerLocalEffectivity
+import Sheaf.Paper.NormalizedEtaleOriginWitnesses
+import Sheaf.Paper.PerfectProjectionFormula
 
 /-! # Constructible preservation over completed integral coefficients
 

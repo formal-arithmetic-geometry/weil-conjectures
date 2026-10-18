@@ -40,6 +40,11 @@ import Sheaf.CategoryTheory.SiteCohomologyPullback
 public import Sheaf.Paper.PbcScalarExtension
 import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
 import Mathlib.CategoryTheory.Sites.LocallyBijective
+import Sheaf.AlgebraicGeometry.ContinuousEtaleCohomology
+import Sheaf.AlgebraicGeometry.ProEtaleContinuousCohomologyLimit
+import Sheaf.Paper.CartesianCoefficients
+import Sheaf.Paper.CartesianCoefficientsFiniteFree
+import Sheaf.Paper.IntrinsicQbarCategory
 
 /-!
 # Finite-level comparison for constant algebraically closed l-adic coefficients

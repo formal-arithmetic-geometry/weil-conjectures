@@ -22,6 +22,8 @@ import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import WeilConjectures.AlgebraicGeometry.Cohomology.EulerCharProper
 import WeilConjectures.AlgebraicGeometry.PQFCohomology
 import WeilConjectures.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
+import Sheaf.AlgebraicGeometry.CoherentFiniteType
 
 /-! # Cohomology and tensor invariance on a finite scheme
 

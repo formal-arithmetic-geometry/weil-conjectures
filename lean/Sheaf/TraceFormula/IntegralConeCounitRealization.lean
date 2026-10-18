@@ -10,6 +10,7 @@ public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import Mathlib.CategoryTheory.Sites.Abelian
 import WeilConjectures.Algebra.Homology.KernelShiftedMappingCone
 public import Mathlib.CategoryTheory.Preadditive.Injective.Basic
+import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimitIndependentCoefficients
 
 @[expose] public section
 

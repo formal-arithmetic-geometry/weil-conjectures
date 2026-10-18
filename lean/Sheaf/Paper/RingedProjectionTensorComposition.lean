@@ -12,6 +12,7 @@ public import Sheaf.CategoryTheory.RingedToposDerivedPushforwardComposition
 public import WeilConjectures.Mathlib.Algebra.Homology.Monoidal
 public import Mathlib.CategoryTheory.Monoidal.Limits.Preserves
 import WeilConjectures.CategoryTheory.Adjunction.ProjectionMapCompat
+import Sheaf.SixFunctors.RingedDerivedMonoidalComparisons
 
 /-!
 # Tensor and composition coherence of ringed-topos projection maps

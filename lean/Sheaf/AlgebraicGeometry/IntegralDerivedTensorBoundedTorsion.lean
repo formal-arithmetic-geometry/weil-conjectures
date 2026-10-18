@@ -11,6 +11,16 @@ public import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
 public import WeilConjectures.SixFunctors.Etale.Derived.Tensor
 public import Mathlib.Algebra.Category.Grp.CartesianMonoidal
+import Sheaf.Algebra.Homology.FilteredColimitDerivedTensor
+import Sheaf.Algebra.Homology.IntegralBoundedKunnethExact
+import Sheaf.AlgebraicGeometry.AbelianSheavesGModules
+import Sheaf.AlgebraicGeometry.EtaleDerivedTensorSymmetry
+import Sheaf.AlgebraicGeometry.GeometricStalkAsPullback
+import Sheaf.CategoryTheory.TruncationsAndHomotopyColimits
+import WeilConjectures.Algebra.Category.ModuleCat.TorSymmetry
+import WeilConjectures.AlgebraicGeometry.TorsionSheafCharacterizations
+import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
+import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Comparison
 
 /-!
 # Integral derived tensor: lower bound and torsion cohomology

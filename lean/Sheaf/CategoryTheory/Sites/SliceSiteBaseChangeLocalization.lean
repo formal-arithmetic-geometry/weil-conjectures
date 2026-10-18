@@ -9,6 +9,7 @@ public import Sheaf.CategoryTheory.SiteCoveringAxioms
 public import Sheaf.CategoryTheory.Sites.GeometricMorphism
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 public import Mathlib.CategoryTheory.Sites.Pullback
+import Sheaf.CategoryTheory.Sites.SliceSubtoposSitePresentation
 
 /-!
 # Base change between slice sites realizes localization

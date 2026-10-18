@@ -48,6 +48,10 @@ import Mathlib.Algebra.Homology.DerivedCategory.DerivabilityStructureInjectives
 import Mathlib.Algebra.Homology.DerivedCategory.KInjective
 import Mathlib.CategoryTheory.Localization.Predicate
 import Mathlib.CategoryTheory.Adjunction.Mates
+import Sheaf.Paper.CompactSupportStaircaseExpansion
+import Sheaf.Paper.UnboundedProperOpenInterchange
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
+import WeilConjectures.AlgebraicGeometry.EtaleLowerShriekBaseChangeMap
 
 /-!
 # Unbounded ordinary etale compact-support comparisons

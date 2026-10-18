@@ -21,6 +21,8 @@ import Sheaf.RingTheory.StrictHenselizationTriples
 import Sheaf.RingTheory.EtaleColimitNormalLocalDomain
 import Sheaf.RingTheory.IndPrincipalZariski
 import WeilConjectures.RingTheory.ProEtale.IndEtale
+import Sheaf.RingTheory.IndEtaleUniverseTransport
+import Sheaf.TraceFormula.PointArrowsStrictLocalLifts
 
 /-!
 # Generic geometric specialization arrows over a normal base

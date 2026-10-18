@@ -17,6 +17,9 @@ import Sheaf.AlgebraicGeometry.GmPicardPullback
 import Sheaf.CategoryTheory.Abelian.RightDerivedTriangleConnecting
 import WeilConjectures.CategoryTheory.RightDerivedUniversalDeltaFunctor
 import WeilConjectures.AlgebraicGeometry.PullbackCohomologyLongExactLadder
+import Sheaf.AlgebraicGeometry.OrdinaryEtaleCupFunctoriality
+import WeilConjectures.AlgebraicGeometry.Sites.Kummer
+import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 
 /-! # Naturality of finite curve trace-cup pairings
 

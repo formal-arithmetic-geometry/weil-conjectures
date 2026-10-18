@@ -21,6 +21,9 @@ public import Sheaf.AlgebraicGeometry.ProEtaleBoundedContinuitySections
 public import Mathlib.Algebra.Homology.Functor
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.FullyFaithful
 import Mathlib.Algebra.Homology.DerivedCategory.KInjective
+import Sheaf.CategoryTheory.RingedSiteModulesGrothendieckOfUniverses
+import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
+import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
 
 /-!
 # The presheaf description of bounded-below higher direct images

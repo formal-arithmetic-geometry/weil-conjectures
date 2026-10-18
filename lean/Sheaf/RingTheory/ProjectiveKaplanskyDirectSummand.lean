@@ -8,6 +8,8 @@ module
 public import Mathlib.Algebra.DirectSum.Module
 public import Mathlib.Data.Set.Countable
 import Mathlib.LinearAlgebra.Quotient.Basic
+import Sheaf.LinearAlgebra.SplitTransfiniteModuleFiltration
+import Sheaf.RingTheory.CountableCoordinateClosure
 
 /-!
 # Kaplansky direct-summand decomposition

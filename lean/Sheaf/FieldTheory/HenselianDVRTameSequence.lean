@@ -18,6 +18,12 @@ import Sheaf.RingTheory.FiniteOverHenselianLocalProduct
 import Mathlib.Algebra.Algebra.Pi
 import Mathlib.RingTheory.LocalRing.ResidueField.Basic
 import Mathlib.FieldTheory.Galois.Profinite
+import Sheaf.FieldTheory.FiniteDVRTameInertia
+import Sheaf.FieldTheory.FiniteTameCharacterTower
+import Sheaf.FieldTheory.TameRootExtension
+import Sheaf.FieldTheory.TameRootsProduct
+import Sheaf.GroupTheory.InfiniteTameInverseLimit
+import WeilConjectures.RingTheory.FiniteOverHenselianLocalProduct
 
 /-!
 # The tame Galois sequence of a henselian discrete valuation field

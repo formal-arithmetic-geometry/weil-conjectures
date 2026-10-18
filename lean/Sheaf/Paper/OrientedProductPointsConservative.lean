@@ -19,6 +19,10 @@ import Sheaf.CategoryTheory.Sites.GeometricMorphism
 import Mathlib.AlgebraicGeometry.Sites.AffineEtale
 import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
 import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
+import Sheaf.AlgebraicGeometry.EtaleToposPointsGeometric
+import Sheaf.CategoryTheory.Sites.OrientedAffineSliceSite
+import Sheaf.CategoryTheory.Sites.OrientedProductLargeSites
+import Sheaf.Paper.FinitarySiteEnoughPoints
 
 /-!
 # Conservativity of specialization-triple points of the vanishing topos

@@ -18,6 +18,7 @@ import Mathlib.RingTheory.Localization.BaseChange
 import Mathlib.RingTheory.TensorProduct.Maps
 import Sheaf.FieldTheory.CommonExtensionFields
 import Sheaf.RingTheory.PowerGeneratedSpectrumHomeomorphism
+import Sheaf.RingTheory.GeometricReducednessFiniteInseparableTest
 
 /-!
 # Geometric reducedness of local rings after extending the base field

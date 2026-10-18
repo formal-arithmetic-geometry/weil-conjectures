@@ -6,6 +6,16 @@ module
 
 public import Sheaf.Paper.IntegralCtfTriangulated
 public import Sheaf.Paper.FiniteFreeCompletedScalarComparison
+import Sheaf.Algebra.Homology.ChangeOfRingsKFlat
+import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
+import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
+import Sheaf.AlgebraicGeometry.CoefficientProEtaleTorAmplitude
+import Sheaf.Paper.DerivedScalarExtensionRestrictionAdjunction
+import Sheaf.Paper.FiniteTorAmplitudeSites
+import Sheaf.Paper.IntegralScalarExtensionConstructibleIntrinsic
+import Sheaf.Paper.NormalizedDVREffectivity
+import Sheaf.Paper.SfIntegralConstructible
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Tensor
 
 /-!
 # Finite coefficient extension preserves the uniform Tor interval

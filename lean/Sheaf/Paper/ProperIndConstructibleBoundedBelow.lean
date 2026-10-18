@@ -19,6 +19,9 @@ import WeilConjectures.CategoryTheory.TruncationHypercohomology
 import WeilConjectures.CategoryTheory.RingedSiteGrothendieckAbelian
 import Sheaf.Paper.IndHeartKernelsCokernels
 import Sheaf.Paper.IndConstructibleExtensions
+import Sheaf.Paper.CondensedModuleDerivedPushpull
+import Sheaf.Paper.ProperHeartBound
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs
 
 /-!
 # Bounded-below proper direct image of ind-constructible complexes

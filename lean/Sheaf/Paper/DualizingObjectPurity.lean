@@ -10,6 +10,11 @@ public import Sheaf.Paper.SmoothTrace
 import Sheaf.Paper.PurityCompositionCoherence
 import Mathlib.Algebra.Homology.BifunctorShift
 import Mathlib.Algebra.Homology.DerivedCategory.Basic
+import Sheaf.Paper.CohomologicalSmoothnessTheorem
+import Sheaf.Paper.IntrinsicCoefficientTwistsUnrestricted
+import Sheaf.Paper.PurityDiagonalDualizingObject
+import Sheaf.Paper.SmoothPurityMap
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Tensor
 
 /-! # Smooth purity from the diagonal dualizing object
 

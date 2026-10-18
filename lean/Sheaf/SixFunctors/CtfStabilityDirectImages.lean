@@ -49,6 +49,15 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoefficients
 import Sheaf.CategoryTheory.RingedToposDerivedPushforwardComposition
 import Sheaf.Paper.FiniteLocalizingExceptionalPreservation
 import Sheaf.Paper.RationalExceptionalRestriction
+import Sheaf.AlgebraicGeometry.ProEtaleFiniteTorComparisonNoetherian
+import Sheaf.Paper.FiniteProperLocalizing
+import Sheaf.Paper.IntegralProperBaseChange
+import Sheaf.Paper.LocalizingClosureCtfEqualsBc
+import Sheaf.Paper.ProperBaseChangeRational
+import Sheaf.SixFunctors.FieldTensor
+import Sheaf.SixFunctors.IntegralExceptionalRestriction
+import Sheaf.SixFunctors.IntegralModelsGenerators
+import Sheaf.SixFunctors.ProEtale.IntegralOpenDirectImage
 
 /-!
 # Pullback, tensor product and direct images on constructible finite-Tor objects

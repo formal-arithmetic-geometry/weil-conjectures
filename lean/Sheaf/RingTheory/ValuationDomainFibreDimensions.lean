@@ -20,6 +20,7 @@ import Sheaf.Paper.QuasiFiniteOverPolynomialAlgebra
 import Sheaf.RingTheory.QuasiFiniteFourRings
 import WeilConjectures.Mathlib.Topology.KrullDimension
 import WeilConjectures.Topology.DimensionSupremumLocalDimensions
+import Sheaf.TraceFormula.QuasiFinitePolynomialKernelDimensionDrop
 
 /-!
 # Fibre dimensions of a finite type domain over a valuation ring

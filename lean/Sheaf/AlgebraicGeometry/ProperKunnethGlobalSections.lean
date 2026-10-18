@@ -19,6 +19,10 @@ import Sheaf.AlgebraicGeometry.Sites.FiniteTorsionEtaleCohomologicalDimension
 import Sheaf.AlgebraicGeometry.EtaleConstantProjectionFormula
 import Sheaf.AlgebraicGeometry.EtaleDerivedTensorSymmetry
 import Sheaf.AlgebraicGeometry.KunnethMapAgrees
+import Sheaf.CategoryTheory.RingedToposDerivedPushforwardComposition
+import Sheaf.EtaleCohomology.SepClosedFieldVanishing
+import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
+import WeilConjectures.SixFunctors.Etale.Derived.Tensor
 
 /-!
 # Künneth with one proper factor in module-valued cohomology

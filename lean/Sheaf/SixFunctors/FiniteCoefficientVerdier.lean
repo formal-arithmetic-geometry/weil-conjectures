@@ -40,6 +40,8 @@ import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
 import WeilConjectures.ConstructibleSheaf.KernelCokernel
 import Sheaf.Paper.ProEtaleConstructibleOrigin
 import Sheaf.Paper.FiniteCoefficientFlatModel
+import Sheaf.Paper.BasicOperationsCoefficientReduction
+import Sheaf.Paper.FiniteCoefficientHomChange
 
 /-! # Finite coefficient change for Verdier duality
 

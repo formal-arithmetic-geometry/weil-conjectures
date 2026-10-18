@@ -36,6 +36,8 @@ import Mathlib.CategoryTheory.Sites.Abelian
 import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 import Sheaf.Paper.GeometricStalkPerfect
 import Sheaf.Paper.FiniteCoefficientPoint
+import Sheaf.Paper.EtaleCompactSupportCoefficientChange
+import Sheaf.Paper.FiniteTorAmplitudeSites
 
 /-!
 # Perfect compact-support cohomology and geometric stalks

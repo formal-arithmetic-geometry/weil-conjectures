@@ -35,6 +35,7 @@ import Sheaf.AlgebraicGeometry.WContractibleAffineEvaluation
 import Sheaf.AlgebraicGeometry.ProEtaleWeaklyContractibleEvaluationExact
 import Sheaf.AlgebraicGeometry.ProEtaleRestrictionInjectives
 import Mathlib.Algebra.Homology.DerivedCategory.DerivabilityStructureInjectives
+import Sheaf.AlgebraicGeometry.ProEtaleProperBoundaryCohomology
 
 /-!
 # Proper-direct-image acyclicity of open-extended pro-etale injectives

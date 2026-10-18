@@ -7,6 +7,8 @@ public import Sheaf.Algebra.Homology.BoundedDerivedRoofs
 import Sheaf.Algebra.Homology.FilteredQuasiIsoFractions
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 public import Mathlib.Algebra.Homology.DerivedCategory.FullyFaithful
+import Sheaf.Algebra.Homology.FilteredComplexSubquotients
+import WeilConjectures.CategoryTheory.Abelian.Filtration
 
 /-!
 # Canonical truncations lift bounded derived modules to finite filtered localization

@@ -18,6 +18,7 @@ import Sheaf.Algebra.Polynomial.ReciprocalPolynomial
 import Sheaf.Paper.EmbeddingExtension
 import WeilConjectures.ZetaFunction.Weights
 import Mathlib.Algebra.Polynomial.Eval.Coeff
+import Sheaf.ZetaWeil.WeightPurityRoots
 
 /-!
 # Arithmetic roots of the integral Frobenius factors

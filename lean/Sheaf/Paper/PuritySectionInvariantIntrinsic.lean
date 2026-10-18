@@ -16,6 +16,16 @@ public import Sheaf.AlgebraicGeometry.SfFiniteExceptionalInverseImage
 public import Sheaf.AlgebraicGeometry.ProEtaleIntrinsicFiniteOperations
 public import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
+import Sheaf.Paper.CohomologicalSmoothnessTheorem
+import Sheaf.Paper.ConstantCoefficientScalarNormalization
+import Sheaf.Paper.DerivedPullbackTensorHom
+import Sheaf.Paper.DerivedPullbackTensorIso
+import Sheaf.Paper.FiniteClopenDerivedDecomposition
+import Sheaf.Paper.FiniteClopenExceptionalRestriction
+import Sheaf.Paper.FiniteTorAmplitudeSites
+import Sheaf.Paper.IntegralOperationsPreserveConstructible
+import Sheaf.Paper.PullbackTorAmplitude
+import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
 
 /-! # The section invariant in intrinsic finite-coefficient coordinates
 

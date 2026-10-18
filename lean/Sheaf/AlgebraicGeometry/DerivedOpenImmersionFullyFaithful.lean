@@ -22,6 +22,7 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
 import WeilConjectures.SixFunctors.OpenClosed.Vanishing
 import Sheaf.AlgebraicGeometry.EtaleInverseImageExact
 import Sheaf.AlgebraicGeometry.KInjectiveResolutionsExist
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageExact
 
 /-! # Derived full faithfulness for an open immersion
 

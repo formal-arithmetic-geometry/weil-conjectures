@@ -15,6 +15,10 @@ public import Sheaf.AlgebraicGeometry.LocallyClosedStratification
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
+import Sheaf.AlgebraicGeometry.BoundedConstructibleComplexes
+import Sheaf.Paper.OrientedConstructibleSheafVanishing
+import Sheaf.Paper.PsiConstructibilityDescent
+import Sheaf.TraceFormula.PsiProperSurjectiveConstructibility
 
 /-!
 # Constructible strata for Psi-good oriented nearby-cycle cohomology

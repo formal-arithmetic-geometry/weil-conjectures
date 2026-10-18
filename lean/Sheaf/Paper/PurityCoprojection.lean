@@ -22,6 +22,12 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 import Sheaf.Paper.FiniteCompactSupportConstructibility
 import Mathlib.CategoryTheory.Yoneda
 import Mathlib.CategoryTheory.Adjunction.Unique
+import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
+import Sheaf.AlgebraicGeometry.SpecifiedExceptionalClassHom
+import Sheaf.Paper.ConstructibleExceptionalAdjunctionCoefficients
+import Sheaf.Paper.DerivedPullbackTensorIso
+import Sheaf.Paper.ExchangeProjectionSuppliedDomains
+import WeilConjectures.FromJoel.CategoryTheory.Monoidal.KFlat
 
 /-!
 # Co-projection for a closed immersion

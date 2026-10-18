@@ -19,6 +19,10 @@ import Sheaf.CategoryTheory.SheavesAlgebraicStructuresObjects
 import WeilConjectures.AlgebraicGeometry.SiteRestrictionExact
 import Sheaf.CategoryTheory.Sites.OverPullbackPreservesInjectives
 import WeilConjectures.AlgebraicGeometry.EtaleInverseImageExact
+import Sheaf.CategoryTheory.ConstantLeftModuleInverseImage
+import Sheaf.CategoryTheory.Sites.GeometricMorphism
+import Sheaf.TraceFormula.BigSmallEtaleExactRetraction
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-!
 # Localization of big étale derived direct images

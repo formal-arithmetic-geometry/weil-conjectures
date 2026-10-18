@@ -12,6 +12,10 @@ import Sheaf.CategoryTheory.DerivedCategory.PerfectRingClassicalGenerator
 import Sheaf.AlgebraicGeometry.ProEtale.SectionsConservative
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
 import Sheaf.AlgebraicGeometry.ProEtaleConstantRingOperations
+import Sheaf.AlgebraicGeometry.CondensedDualizableLocalPerfectModels
+import Sheaf.AlgebraicGeometry.ProEtale.WeaklyContractibleBasis
+import Sheaf.CategoryTheory.DerivedCategory.PerfectRingComplexGeneral
+import Sheaf.Paper.WContractibleCondensedScalarEvaluation
 
 /-!
 # Truncations and the heart for t-admissible condensed coefficients

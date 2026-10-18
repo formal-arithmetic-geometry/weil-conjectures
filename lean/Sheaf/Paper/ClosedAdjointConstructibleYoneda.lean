@@ -13,6 +13,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Sheaf.Paper.FormalClosedSupport
 import Sheaf.Paper.CoefficientHeart
 import Mathlib.CategoryTheory.Yoneda
+import Sheaf.Paper.ClosedSupportConstructible
 
 /-!
 # Closed exceptional inverse image and sections with support

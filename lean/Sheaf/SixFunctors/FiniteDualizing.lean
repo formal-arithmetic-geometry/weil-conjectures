@@ -55,6 +55,16 @@ import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.FiniteCompari
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
+import Sheaf.AlgebraicGeometry.AffineSpaceTopTrace
+import Sheaf.AlgebraicGeometry.BoundedConstructibleComplexes
+import Sheaf.AlgebraicGeometry.SiteClosedCounitTransport
+import Sheaf.AlgebraicGeometry.SpecifiedExceptionalClassHom
+import Sheaf.Paper.ConstructibleExceptionalAdjunctionCoefficients
+import Sheaf.Paper.EtaleCompactSupportCoefficientChange
+import Sheaf.Paper.EtaleProEtaleCoefficientCompatibility
+import Sheaf.Paper.SfCommonStageWeilCohomology
+import Sheaf.SixFunctors.CompactCoefficientComposition
+import Sheaf.SixFunctors.FiniteDualitySiteComparison
 
 /-!
 # Finite exceptional dualizing comparisons

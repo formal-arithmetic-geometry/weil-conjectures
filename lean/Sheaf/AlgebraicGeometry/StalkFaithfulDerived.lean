@@ -28,6 +28,8 @@ import Sheaf.AlgebraicGeometry.GeometricPointCanonicalGerm
 import Sheaf.AlgebraicGeometry.DerivedGlobalGerm
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
+import WeilConjectures.AlgebraicGeometry.DerivedCategories
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageExact
 
 /-!
 # Stalk faithfulness for derived étale objects

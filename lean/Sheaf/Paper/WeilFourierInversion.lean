@@ -12,6 +12,7 @@ public import WeilConjectures.WeilSheaf.TateTwist
 import WeilConjectures.SixFunctors.Etale.Derived.KernelTransform.Composition
 import WeilConjectures.WeilSheaf.LowerShriekFunctoriality
 import Sheaf.Paper.FieldTorAmplitude
+import Sheaf.Paper.FourierKernelConvolution
 
 /-!
 # Fourier inversion on constructible Weil complexes

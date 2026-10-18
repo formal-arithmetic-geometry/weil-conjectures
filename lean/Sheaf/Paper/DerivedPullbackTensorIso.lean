@@ -37,6 +37,12 @@ import Sheaf.Algebra.Homology.WeilSiteDerivedTensorDescent
 import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
 import Sheaf.Algebra.Homology.KFlatTotalTensorModel
 import Sheaf.AlgebraicGeometry.ProEtaleConstantExact
+import Sheaf.Paper.CoefficientExtensionReductionModel
+import Sheaf.Paper.CompletedOperationTowerSubstitution
+import Sheaf.Paper.IntegralCoherenceTower
+import Sheaf.Paper.IntegralTowerLimitComparison
+import Sheaf.Paper.ScalarExtensionTowerCoherence
+import Sheaf.SecSmoothPurity.CochainPullbackTensorCoherence
 
 /-! # Derived pullback and derived tensor comparison
 

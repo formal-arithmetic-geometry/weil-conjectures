@@ -51,6 +51,9 @@ import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
 import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 import Mathlib.Algebra.Module.LocalizedModule.Exact
+import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimitIndependentCoefficients
+import Sheaf.Paper.IntegralPullbackCompletedComparison
+import Sheaf.Paper.IntegralPullbackComposition
 
 /-! # T-exact constructible pullback and geometric-point fibres
 

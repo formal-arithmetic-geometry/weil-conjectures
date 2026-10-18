@@ -8,6 +8,7 @@ module
 public import Mathlib.GroupTheory.Congruence.Defs
 public import Mathlib.Algebra.Group.Finsupp
 public import Mathlib.Algebra.BigOperators.Finsupp.Basic
+import Sheaf.TraceFormula.CongruencePolynomialKernel
 
 /-! # Finite presentations of finitely generated commutative monoids
 

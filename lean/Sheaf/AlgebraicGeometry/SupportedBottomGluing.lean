@@ -42,6 +42,8 @@ import Mathlib.Algebra.Homology.HomologySequenceLemmas
 import Sheaf.AlgebraicGeometry.SupportLongExact
 import Sheaf.AlgebraicGeometry.ComparisonGlobalCohomologyFiniteNormalized
 import Mathlib.CategoryTheory.Sites.Sheaf
+import Sheaf.Paper.IntrinsicCoefficientTwistsUnrestricted
+import Sheaf.Paper.SfCommonStageWeilCohomology
 
 /-!
 # Supported cohomology in the lowest local degree

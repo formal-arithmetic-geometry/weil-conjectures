@@ -18,6 +18,7 @@ import WeilConjectures.AlgebraicGeometry.AffinePushforwardBaseChange
 import WeilConjectures.AlgebraicGeometry.ClosedPushforwardStalks
 import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
+import Sheaf.AlgebraicGeometry.FiniteSingletonFibreLocalization
 
 /-! # Relative flatness across elementary module dévissage
 

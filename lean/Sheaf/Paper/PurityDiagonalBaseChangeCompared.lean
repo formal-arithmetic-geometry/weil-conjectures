@@ -9,6 +9,14 @@ public import Sheaf.Paper.PuritySectionInvariantCompared
 public import WeilConjectures.Compactification.BaseChange
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarIdCoherence
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
+import Sheaf.AlgebraicGeometry.ProEtaleConstantRingComposition
+import Sheaf.AlgebraicGeometry.ProEtaleDerivedPullbackIdentity
+import Sheaf.Paper.CohomologicalSmoothnessTheorem
+import Sheaf.Paper.ConstructibleExceptionalAdjunctionCoefficients
+import Sheaf.Paper.DerivedPullbackTensorHom
+import Sheaf.Paper.IntegralFinitePullbackComposition
+import Sheaf.Paper.PurityFiniteSetting
+import Sheaf.Paper.PuritySectionInvariantIntrinsic
 
 /-!
 # The specified diagonal base-change comparison in finite coordinates

@@ -14,6 +14,11 @@ public import Sheaf.Paper.IntegralDerivedOperationsOnSlices
 public import Sheaf.Paper.IntegralScalarExtensionUniverses
 public import Sheaf.Paper.PurInverseImageTensorHom
 public import Sheaf.Paper.IsomorphismDerivedPullback
+import Sheaf.Algebra.Homology.ChangeOfRingsKFlat
+import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
+import Sheaf.AlgebraicGeometry.ProEtale.IsoSectionwiseInverseImage
+import Sheaf.Paper.SpecifiedPullbackComparisonAlpha
+import Sheaf.TraceFormula.IsomorphismDerivedPullbackComparisonNormalization
 
 /-!
 # Coefficient compatibility of the specified integral inverse-image comparison

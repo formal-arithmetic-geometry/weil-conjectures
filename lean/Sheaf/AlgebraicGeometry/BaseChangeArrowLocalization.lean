@@ -11,6 +11,12 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtaleOver
 import Sheaf.CategoryTheory.SiteMorphismComposition
 import Sheaf.Paper.SliceSiteLocalization
 import Mathlib.CategoryTheory.Sites.Sheafification
+import Sheaf.AlgebraicGeometry.BaseChangeInverseImageIso
+import Sheaf.AlgebraicGeometry.SetUnderivedExchangeSectionwise
+import Sheaf.AlgebraicGeometry.UnderivedExchangeSectionwise
+import WeilConjectures.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
+import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-!
 # Underived base change and étale localization

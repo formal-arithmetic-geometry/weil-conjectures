@@ -40,6 +40,7 @@ import Sheaf.Paper.SfRationalizationKaroubi
 import Sheaf.Paper.SfScalarExtensionComposition
 import Sheaf.SecSmoothPurity.IntrinsicCompactSupportRestriction
 import WeilConjectures.CategoryTheory.Triangulated.TStructure.Homology
+import Sheaf.Paper.IntrinsicQbarCategory
 
 /-! # Exactness and lower bounds for field-coefficient compact support
 

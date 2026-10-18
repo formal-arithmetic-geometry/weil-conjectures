@@ -2,6 +2,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.OpenImmersion
 public import Sheaf.RingTheory.CompleteIntersectionOverField
+import Sheaf.TraceFormula.LciPointwiseCriterion
 
 /-!
 # Local complete intersection coordinate algebras on arbitrary affine opens

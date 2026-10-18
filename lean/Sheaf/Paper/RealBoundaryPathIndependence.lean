@@ -10,6 +10,10 @@ public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.WeilFundamental
 public import Mathlib.RepresentationTheory.Invariants
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.LinearAlgebra
 import Sheaf.FieldTheory.FiniteFieldAbsoluteGalois
+import Sheaf.AlgebraicGeometry.FundamentalGroup.FLCFiber
+import Sheaf.Paper.EtaleWeilFundamentalRepresentation
+import Sheaf.Paper.RealBoundaryLocalConstants
+import WeilConjectures.AlgebraicGeometry.FundamentalGroup.WeilGroup
 
 /-!
 # Path independence of the inertia invariants of a Weil sheaf

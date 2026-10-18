@@ -8,6 +8,8 @@ module
 public import Sheaf.Paper.UnboundedProperOpenInterchange
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 import Mathlib.Algebra.Homology.DerivedCategory.KInjective
+import Sheaf.AlgebraicGeometry.Etale.OpenImmersionLowerShriekCoherence
+import Sheaf.CategoryTheory.RingedToposDerivedPushforwardComposition
 
 /-!
 # Fixed-staircase expansion of compact-support comparisons

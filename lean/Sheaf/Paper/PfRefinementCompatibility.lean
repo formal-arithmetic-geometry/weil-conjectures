@@ -17,6 +17,12 @@ import Sheaf.Paper.FiniteDirectImageComposition
 import Sheaf.Paper.ProEtaleProperOpenComparison
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerShriekProjection
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.FlatModuleCat
+import Sheaf.AlgebraicGeometry.ProperOpenComparisonSiteNormalization
+import Sheaf.Paper.CompactificationCoherence
+import Sheaf.Paper.DerivedPullbackTensorIso
+import Sheaf.Paper.ExchangeProjectionSuppliedDomains
+import WeilConjectures.Compactification.Refinement
+import WeilConjectures.SixFunctors.Etale.Derived.Adjunctions
 
 /-!
 # Refinement compatibility of finite projection transformations

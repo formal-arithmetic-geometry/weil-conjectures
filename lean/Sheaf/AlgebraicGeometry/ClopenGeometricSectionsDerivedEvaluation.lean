@@ -20,6 +20,10 @@ import Sheaf.CategoryTheory.KInjectiveTotalDerived
 import Sheaf.CategoryTheory.ExactFunctorDerivedFunctor
 import Sheaf.CategoryTheory.DerivedCategory.AdjointFunctors
 import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
+import Sheaf.AlgebraicGeometry.KInjectiveResolutions
+import Sheaf.AlgebraicGeometry.KInjectiveResolutionsExist
+import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-!
 # Unbounded evaluation on finitely many clopen geometric sections

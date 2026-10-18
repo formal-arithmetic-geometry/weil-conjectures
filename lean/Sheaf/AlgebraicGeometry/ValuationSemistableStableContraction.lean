@@ -11,6 +11,8 @@ public import Mathlib.RingTheory.Valuation.ValuationSubring
 
 import Mathlib.RingTheory.RingHom.Flat
 import Mathlib.AlgebraicGeometry.Morphisms.Proper
+import Sheaf.AlgebraicGeometry.ValuationExceptionalBlowdown
+import Sheaf.AlgebraicGeometry.ValuationExceptionalClosedImageCriterion
 
 /-! # Contracting a given semistable modification to a stable modification
 

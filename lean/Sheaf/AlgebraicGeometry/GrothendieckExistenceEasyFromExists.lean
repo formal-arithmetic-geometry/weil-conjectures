@@ -29,6 +29,7 @@ import WeilConjectures.AlgebraicGeometry.CoherentFormalModulesLocalExactness
 import WeilConjectures.AlgebraicGeometry.Modules.IdealTimesQuasiCoherentAffineSections
 import WeilConjectures.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
 import WeilConjectures.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
+import Sheaf.AlgebraicGeometry.CoherentFiniteType
 
 /-! # Existence of outgoing coherent formal algebraizations
 

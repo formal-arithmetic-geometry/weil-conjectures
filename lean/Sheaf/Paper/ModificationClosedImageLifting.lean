@@ -9,6 +9,8 @@ import WeilConjectures.Blowup.Proper
 import WeilConjectures.Blowup.Density
 import WeilConjectures.Blowup.Extension
 import WeilConjectures.Compactification.StrictTransformBlowup
+import Sheaf.Paper.AlterationBlowupFinite
+import Sheaf.TraceFormula.ClosedImageGenericAlteration
 
 /-!
 # Gabber finite cover of a modified closed image

@@ -10,6 +10,9 @@ public import Mathlib.Algebra.Module.Projective
 public import Mathlib.LinearAlgebra.TensorProduct.Defs
 public import Mathlib.Data.Set.Countable
 import Mathlib.RingTheory.Flat.Basic
+import Sheaf.RingTheory.IsMittagLeffler
+import Sheaf.RingTheory.MittagLefflerFaithfullyFlatDescent
+import Sheaf.SecTraceFormula.CountableFlatMittagLefflerProjective
 
 /-!
 # Faithfully flat descent of countably generated projective modules

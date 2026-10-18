@@ -8,6 +8,17 @@ module
 public import Sheaf.Paper.OrientedNearbyCycles
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.RingTheory.DiscreteValuationRing.Basic
+import Sheaf.AlgebraicGeometry.ConstructibleModuleSheafColimit
+import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
+import Sheaf.AlgebraicGeometry.SmoothBaseChange.HigherDirectImageLargeFilteredColimit
+import Sheaf.AlgebraicGeometry.StrictHenselization
+import Sheaf.CategoryTheory.ModulePullbackPushforwardAdjunction
+import Sheaf.Paper.OrgogozoGoodModification
+import Sheaf.Paper.OrientedNearbyStrictLocalDescription
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
+import WeilConjectures.CategoryTheory.TruncationTriangle
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+import WeilConjectures.Mathlib.CategoryTheory.Triangulated.Functor
 
 /-!
 # Nearby-cycle base change over a trait

@@ -13,6 +13,8 @@ import Sheaf.CategoryTheory.SmallModuleDiagramsGrothendieck
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolutionInjective
 import Mathlib.Algebra.Homology.DerivedCategory.KInjective
 import Mathlib.CategoryTheory.Abelian.FunctorCategory
+import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimitIndependentCoefficients
+import Sheaf.CategoryTheory.StrictRoosComparison
 
 /-!
 # The strict Roos comparison and its evaluation maps

@@ -5,6 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.CategoryTheory.Sites.CoherentTopos
+import Sheaf.CategoryTheory.Sites.CoherentToposRepair
 
 /-!
 # Reflection of coherence by a coherent conservative inverse image

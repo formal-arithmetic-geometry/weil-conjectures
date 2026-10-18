@@ -6,6 +6,8 @@ module
 
 public import Mathlib.AlgebraicGeometry.Geometrically.Irreducible
 public import Mathlib.FieldTheory.SeparableClosure
+import Sheaf.FieldTheory.FiniteRelativeAlgebraicClosure
+import Sheaf.FieldTheory.GeometricIrreducibilitySeparable
 
 /-!
 # Finite separable algebraic subextension of a finitely generated field extension

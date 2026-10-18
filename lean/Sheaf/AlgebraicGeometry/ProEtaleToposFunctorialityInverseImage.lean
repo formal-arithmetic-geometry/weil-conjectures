@@ -24,6 +24,7 @@ import Mathlib.CategoryTheory.Sites.Sheafification
 import Mathlib.CategoryTheory.Sites.Limits
 import Mathlib.CategoryTheory.MorphismProperty.Composition
 import Sheaf.CategoryTheory.SitePullbackAbelianUnderlying
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Defs
 
 /-!
 # Functoriality of the inverse image on small pro-étale topoi

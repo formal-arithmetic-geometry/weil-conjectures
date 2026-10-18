@@ -10,6 +10,8 @@ import Sheaf.Paper.PbcScalarExtension
 import Sheaf.CategoryTheory.ScalarLocalizationTriangulated
 
 import Mathlib.CategoryTheory.Triangulated.Triangulated
+import Sheaf.Paper.CommonStageCalculus
+import Sheaf.Paper.FiniteStagePairCategory
 /-! # Simultaneous lifting of distinguished rows and finite equations
 
 Source: blueprint `main-20261015`, `thm-weil-pbc-verdier-axioms.proof.md`, TR2--TR4

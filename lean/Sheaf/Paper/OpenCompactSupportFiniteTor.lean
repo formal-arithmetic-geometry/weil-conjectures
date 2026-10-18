@@ -46,6 +46,9 @@ import Sheaf.Paper.SfDerivedComplete
 import Sheaf.Paper.SfRationalizationKaroubi
 import Sheaf.Paper.WeilCompletedTensorReflector
 import WeilConjectures.CategoryTheory.ExtensionByZeroPresheaf
+import Sheaf.Paper.BasicOperationsCoefficientReduction
+import Sheaf.Paper.CompactificationCoherence
+import Sheaf.Paper.FiniteTorAmplitudeSites
 
 /-!
 # Open compact supports preserve finite-Tor constructibility

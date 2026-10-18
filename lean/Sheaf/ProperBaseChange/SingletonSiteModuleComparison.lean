@@ -25,6 +25,8 @@ public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat
 
 public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
+import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
 /-!
 # Module comparison for the punctual ringed site
 

@@ -15,6 +15,18 @@ public import Mathlib.RingTheory.AdicCompletion.Algebra
 public import Mathlib.RingTheory.MvPowerSeries.Basic
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import Mathlib.Topology.KrullDimension
+import Sheaf.AlgebraicGeometry.Curve.StableModificationUniquenessNormal
+import Sheaf.AlgebraicGeometry.Curve.ValuationStableReduction
+import Sheaf.AlgebraicGeometry.MarkedNodalDualizingDegrees
+import Sheaf.AlgebraicGeometry.ProperFibrewiseAmpleProjective
+import Sheaf.AlgebraicGeometry.ProperFiniteFibreFiniteNeighbourhood
+import Sheaf.AlgebraicGeometry.RiemannZariskiFiniteRefinement
+import Sheaf.AlgebraicGeometry.SemistableMarkedBaseChange
+import Sheaf.RingTheory.FiniteTypeZDomainNormalizationFinite
+import Sheaf.RingTheory.IsExcellentFiniteTypeLocalization
+import Sheaf.TraceFormula.MarkedCurveFiniteTypeModel
+import Sheaf.TraceFormula.StableModificationSpreading
+import WeilConjectures.AlgebraicGeometry.WeilPbcNormalizationInResidueFieldExtension
 
 /-!
 # Temkin stable modification of a multipointed relative curve

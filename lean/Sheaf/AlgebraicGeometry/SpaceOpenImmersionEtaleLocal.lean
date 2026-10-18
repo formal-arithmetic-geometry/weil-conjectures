@@ -2,6 +2,9 @@ module
 
 public import Sheaf.AlgebraicGeometry.AlgebraicSpace
 public import Mathlib.AlgebraicGeometry.OpenImmersion
+import Sheaf.AlgebraicGeometry.FpqcFinerThanEtale
+import Sheaf.CategoryTheory.SiteCoveringAxioms
+import WeilConjectures.AlgebraicGeometry.FpqcOpenSubschemeDescent
 
 /-!
 # Open immersions of algebraic spaces are etale-local on the target

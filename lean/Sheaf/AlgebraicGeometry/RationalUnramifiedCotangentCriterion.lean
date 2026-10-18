@@ -5,6 +5,7 @@ public import Mathlib.AlgebraicGeometry.OpenImmersion
 public import Mathlib.AlgebraicGeometry.Pullbacks
 public import Mathlib.AlgebraicGeometry.ResidueField
 public import Mathlib.RingTheory.Ideal.Cotangent
+import Sheaf.AlgebraicGeometry.UnramifiedMorphism
 
 /-!
 # Rational-point cotangent criterion for unramified morphisms

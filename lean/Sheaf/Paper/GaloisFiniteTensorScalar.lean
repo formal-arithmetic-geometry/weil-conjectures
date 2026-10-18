@@ -7,6 +7,7 @@ module
 
 public import Sheaf.Paper.GaloisLisseCorrespondenceData
 import Sheaf.Paper.LisseTensorScalarExtension
+import Sheaf.AlgebraicGeometry.FundamentalGroup.FLCFiber
 
 /-! # Tensor and scalar comparisons for finite Galois modules -/
 

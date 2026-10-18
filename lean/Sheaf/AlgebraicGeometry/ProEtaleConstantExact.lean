@@ -13,6 +13,9 @@ public import Mathlib.Algebra.Category.Ring.FilteredColimits
 public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 import Sheaf.CategoryTheory.SitePullbackAbelianExact
 import Sheaf.CategoryTheory.SiteCoveringAxioms
+import Sheaf.AlgebraicGeometry.ProEtaleConstantRingOperations
+import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
+import Sheaf.CategoryTheory.RingedSiteModules
 
 /-!
 # Exact pullback of finite constant pro-etale left modules

@@ -35,6 +35,10 @@ import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 import Sheaf.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
+import Sheaf.Algebra.Homology.RingedInternalHomShiftOfUniverses
+import Sheaf.Paper.SfCommonStageWeilCohomology
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
+import WeilConjectures.AlgebraicGeometry.FiniteLocallyConstantModuleValues
 /-! # Constructible internal Hom from an etale site-perfect complex
 
 Source: Weil conjectures blueprint, sec-six-functors/sk-thm-sf-hom-ctf,

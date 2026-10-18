@@ -16,6 +16,8 @@ import Sheaf.AlgebraicGeometry.ProEtaleFiniteLocalSystemsTwist
 import Sheaf.AlgebraicGeometry.BoundedBelowProEtaleComparison
 import Sheaf.AlgebraicGeometry.ProEtaleDirectImageComparison
 import WeilConjectures.AlgebraicGeometry.EtaleStratificationLocalGluingCore
+import Sheaf.AlgebraicGeometry.ClassicalDerivedEquivalence
+import Sheaf.AlgebraicGeometry.CoefficientConstructibleEtaleModules
 
 /-!
 # Constructible comparison for discrete Noetherian coefficients

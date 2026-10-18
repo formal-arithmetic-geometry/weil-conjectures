@@ -8,6 +8,8 @@ module
 public import Sheaf.AlgebraicGeometry.CanonicalCompactSupportSiteComparison
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekPlusBaseChange
 import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Proper
+import Sheaf.AlgebraicGeometry.SfIntrinsicCompactSupport
+import WeilConjectures.SixFunctors.BaseChange.Derived
 
 /-! # Proper coincidence with the identity-open normalization
 

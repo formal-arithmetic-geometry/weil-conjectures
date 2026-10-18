@@ -9,6 +9,7 @@ public import Mathlib.Algebra.Module.Submodule.Equiv
 public import Sheaf.LinearAlgebra.FrobeniusModuleWeights
 import WeilConjectures.Mathlib.LinearAlgebra.Charpoly.Basic
 import WeilConjectures.ZetaLinearAlgebra.FrobeniusModule.Exact
+import Sheaf.LinearAlgebra.FrobeniusPunctualBoundMixed
 
 /-!
 # Mixed weight bounds on Frobenius-stable subquotients

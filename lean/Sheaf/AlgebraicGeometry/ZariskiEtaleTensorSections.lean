@@ -13,6 +13,9 @@ import WeilConjectures.AlgebraicGeometry.ZariskiEtaleInclusionMorphismOfSites
 import Sheaf.AlgebraicGeometry.Curve.EtaleAdditiveStructureSheaf
 import Sheaf.CategoryTheory.ModulePullbackPushforwardAdjunction
 import Mathlib.CategoryTheory.Adjunction.Mates
+import Sheaf.AlgebraicGeometry.EtaleTensorSections
+import Sheaf.CategoryTheory.RingedSiteModules
+import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 
 /-!
 # Tensor sections and Zariski-to-étale change of topology

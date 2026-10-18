@@ -9,6 +9,9 @@ public import Sheaf.CategoryTheory.RingedCompletionUnit
 public import Sheaf.Paper.ExtendedLocalizationCech
 public import Mathlib.Algebra.Homology.Additive
 import Sheaf.Paper.RestrictedCoefficientHomComplex
+import Sheaf.Algebra.Homology.BilinearHomComplex
+import Sheaf.Algebra.Homology.HomComplexProjections
+import Sheaf.Paper.RestrictedCoefficientHom
 
 /-! # Augmentation evaluation in coefficient Hom complexes
 

@@ -14,6 +14,7 @@ import Sheaf.AlgebraicGeometry.GeometricPointCanonicalGerm
 import WeilConjectures.AlgebraicGeometry.InverseImageStalkGerm
 import Sheaf.AlgebraicGeometry.ProperGeometricPointExchange
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-!
 # Proper-surjective descent equalizer for small étale sections

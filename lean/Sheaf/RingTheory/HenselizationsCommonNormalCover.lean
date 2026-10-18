@@ -14,6 +14,7 @@ import Mathlib.RingTheory.Polynomial.RationalRoot
 import Mathlib.RingTheory.Localization.Ideal
 import Mathlib.RingTheory.Localization.Basic
 import Mathlib.RingTheory.Ideal.Maps
+import Sheaf.TraceFormula.HenselizationQuotientAtPrime
 /-!
 # A common normal-domain cover of two ordinary henselizations
 Source: Stacks Project, Algebra, Tag 05WQ, together with Tag 00CT and the

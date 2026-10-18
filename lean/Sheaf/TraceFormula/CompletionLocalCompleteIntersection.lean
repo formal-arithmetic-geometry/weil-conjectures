@@ -26,6 +26,8 @@ import Sheaf.RingTheory.LCIRegularSequenceGlobalCompleteIntersection
 import Sheaf.RingTheory.PowerSeriesFieldCohenRegularComplete
 import Sheaf.RingTheory.PowerSeriesUniversalPropertyComplete
 import Sheaf.RingTheory.RegularLocalGeneratorsRegularSequence
+import Sheaf.AlgebraicGeometry.IsRegularScheme
+import Sheaf.RingTheory.RegularQuotientCompletionKernelTest
 
 /-!
 # Completion criterion for local complete intersections

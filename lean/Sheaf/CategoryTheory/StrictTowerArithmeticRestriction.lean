@@ -19,6 +19,8 @@ import WeilConjectures.Algebra.Homology.KernelShiftedMappingCone
 import WeilConjectures.Algebra.Homology.TowerEvaluationKInjective
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
 import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
+import Sheaf.CategoryTheory.RingedSiteModules
+import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimitIndependentCoefficients
 
 /-!
 # Canonical arithmetic restriction of strict derived towers

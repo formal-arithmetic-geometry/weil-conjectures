@@ -12,6 +12,8 @@ public import Mathlib.CategoryTheory.Sites.GlobalSections
 public import Mathlib.CategoryTheory.Retract
 public import Sheaf.Paper.CoefficientHeart
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible
+import Sheaf.AlgebraicGeometry.ClosedSupportStratumHom
+import Sheaf.Paper.FormalClosedSupportDerived
 
 /-!
 # Sections with support in a closed subscheme

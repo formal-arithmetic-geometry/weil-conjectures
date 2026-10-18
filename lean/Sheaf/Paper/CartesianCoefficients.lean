@@ -15,6 +15,8 @@ import Sheaf.CategoryTheory.SheafTensor
 import Sheaf.CategoryTheory.SheafTensorClosed
 import Sheaf.AlgebraicGeometry.ProEtaleToposFunctorialityInverseImage
 import Sheaf.CategoryTheory.ModuleObjects.LiftExact
+import Sheaf.Paper.CartesianCoefficientTwists
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
 
 /-!
 # Cartesian coefficient sheaves

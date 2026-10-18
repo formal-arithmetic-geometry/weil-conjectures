@@ -35,6 +35,7 @@ import Sheaf.AlgebraicGeometry.EtaleClosedAmbientAdjoint
 import Sheaf.Algebra.Homology.SheafRingDerivedCoefficientAdjunction
 import Sheaf.Paper.EtaleUnboundedRestrictionComparison
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
+import Sheaf.AlgebraicGeometry.QuasiExcellentEtaleDirectImageFiniteness
 
 /-!
 # Finite-field exceptional preservation and finite-free coefficient comparison

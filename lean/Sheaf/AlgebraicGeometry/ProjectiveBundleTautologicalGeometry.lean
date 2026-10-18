@@ -17,6 +17,19 @@ public import WeilConjectures.AlgebraicGeometry.Modules.LocallyFreeRank
 public import Sheaf.AlgebraicGeometry.RelativeProjectiveSpace
 public import Sheaf.AlgebraicGeometry.QuasiCoherentSymmetricAlgebra
 import WeilConjectures.LinearAlgebra.SymmetricAlgebra.Graded
+import Sheaf.AlgebraicGeometry.NagataAffineProjScalarExtension
+import Sheaf.AlgebraicGeometry.ProjectiveSpaceStandardCharts
+import Sheaf.AlgebraicGeometry.TensorPullbackSectionAdjunction
+import Sheaf.CategoryTheory.SiteModuleSheafGluing
+import Sheaf.RingTheory.SymmetricAlgebraBaseChange
+import WeilConjectures.AlgebraicGeometry.ModulePullbackAffineSections
+import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
+import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist.Modules
+import WeilConjectures.AlgebraicGeometry.RelativeProj.Functoriality
+import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
+import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Invertible
+import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
+import WeilConjectures.Mathlib.RingTheory.MvPolynomial.Homogeneous
 
 /-! # Finite locally free projective bundles and tautological geometry
 

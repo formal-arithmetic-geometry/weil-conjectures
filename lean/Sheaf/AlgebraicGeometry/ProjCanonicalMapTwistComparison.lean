@@ -11,6 +11,8 @@ public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 public import Sheaf.AlgebraicGeometry.InvertibleSectionRing
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist.UnitToTwist
 public import Sheaf.AlgebraicGeometry.TensorPullbackSectionAdjunction
+import Sheaf.AlgebraicGeometry.ProjInvertibleMapTwistIso
+import Sheaf.TraceFormula.SpaceLineModuleProjMap
 
 /-!
 # Sufficiently divisible twists pull back to powers of the line module

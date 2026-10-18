@@ -14,6 +14,7 @@ import Sheaf.AlgebraicGeometry.FiniteSchemeCohomologyTensor
 import Sheaf.AlgebraicGeometry.ZeroSupportFiniteScheme
 import WeilConjectures.Mathlib.Topology.KrullDimension
 import WeilConjectures.AlgebraicGeometry.Coherent
+import Sheaf.AlgebraicGeometry.CoherentFiniteType
 
 /-! # Euler characteristic of modules with zero-dimensional support
 

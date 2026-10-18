@@ -10,6 +10,7 @@ public import Sheaf.CategoryTheory.RingedSiteModules
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 import Mathlib.CategoryTheory.Sites.CoverLifting
 import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
 
 /-!
 # Tensor products and restriction to a localized ringed site

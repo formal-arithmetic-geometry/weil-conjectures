@@ -7,6 +7,15 @@ module
 
 public import Sheaf.Paper.CondensedConstantConstructibility
 public import Mathlib.CategoryTheory.Triangulated.Subcategory
+import Sheaf.AlgebraicGeometry.FiniteConstantLocalModel
+import Sheaf.CategoryTheory.InternalAbelianSheafModuleEquivalence
+import Sheaf.CategoryTheory.RingedSiteModules
+import Sheaf.CategoryTheory.SheafTensorClosed
+import Sheaf.CategoryTheory.SheafTensorStructure
+import Sheaf.Paper.ProjectionMateExact
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorBilinearUniversal
+import WeilConjectures.CategoryTheory.ModuleObjects.Monoidal
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Hom
 
 /-!
 # Tor amplitude and `Dᵇ_ctf(X,Λ)` with finite constant scalar models

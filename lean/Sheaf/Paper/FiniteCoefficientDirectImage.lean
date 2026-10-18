@@ -13,6 +13,28 @@ public import Sheaf.Paper.FiniteDirectImageComposition
 public import Sheaf.AlgebraicGeometry.EtaleRestrictScalarsFunctorComparisons
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerStarProjection
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.RestrictScalars
+import Sheaf.Algebra.Homology.BoundedFlatIndependentCoefficients
+import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
+import Sheaf.AlgebraicGeometry.ComparisonDirectImage
+import Sheaf.AlgebraicGeometry.EtaleDirectImageVanishing
+import Sheaf.AlgebraicGeometry.EtaleRestrictScalarsAdjunctionIdentities
+import Sheaf.AlgebraicGeometry.FiniteConstantProjectionFormula
+import Sheaf.AlgebraicGeometry.FixedComparisonDirectImageMate
+import Sheaf.AlgebraicGeometry.ProEtaleConstantRingOperations
+import Sheaf.AlgebraicGeometry.ProEtaleFixedScalarRestrictionDirectImage
+import Sheaf.CategoryTheory.ModulePullbackTensorIso
+import Sheaf.Paper.ComparisonPullbackExact
+import Sheaf.Paper.ComparisonTorAmplitude
+import Sheaf.Paper.DirectImageTorAmplitude
+import Sheaf.Paper.EtaleUnboundedRestrictionComparison
+import Sheaf.Paper.FiniteCoefficientFlatModel
+import Sheaf.Paper.ProjectionMateExact
+import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
+import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+import WeilConjectures.SixFunctors.Etale.Derived.DirectImageVanishing
+import WeilConjectures.SixFunctors.Etale.Derived.Tensor
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import WeilConjectures.SixFunctors.ProEtale.Comparison.Flat
 
 /-!
 # Finite coefficient change for ordinary direct image

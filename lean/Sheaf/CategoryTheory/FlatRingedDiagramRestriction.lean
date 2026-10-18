@@ -23,6 +23,9 @@ import Sheaf.CategoryTheory.DerivedCategory.EssentiallyConstantInd
 import Sheaf.CategoryTheory.DerivedCategory.EssentiallyConstantPro
 import Mathlib.RingTheory.TensorProduct.Basic
 import Mathlib.Algebra.Homology.DerivedCategory.KInjective
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
+import Sheaf.CategoryTheory.RingedSiteModules
 
 /-!
 # Flat coefficient restriction on derived module diagrams

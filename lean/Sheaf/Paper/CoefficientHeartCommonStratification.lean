@@ -24,6 +24,7 @@ import Sheaf.Paper.ProEtaleSurjectiveClosedCoverRefinement
 import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism
 import Sheaf.Paper.CondensedSurjectiveClosedEquivalence
 import Sheaf.AlgebraicGeometry.NoetherianStratumDetection
+import Sheaf.Paper.CartesianCoefficients
 
 /-!
 # Common stratifications and restriction of coefficient modules

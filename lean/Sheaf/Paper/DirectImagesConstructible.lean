@@ -19,6 +19,15 @@ import Sheaf.Paper.SfIntegralDirectImageConstructible
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.ConcreteCoefficients
 import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarCoherence
 import Sheaf.Paper.FiniteCoefficientPoint
+import Sheaf.AlgebraicGeometry.BoundedConstructibleComplexes
+import Sheaf.AlgebraicGeometry.ComparisonDirectImage
+import Sheaf.AlgebraicGeometry.FiniteTypeDirectImageConstructibility
+import Sheaf.AlgebraicGeometry.ProEtaleConstantRingOperations
+import Sheaf.Paper.FiniteCompactSupportConstructibility
+import Sheaf.Paper.QcqsCompactSupportRealization
+import Sheaf.Paper.SfCommonStageDirectImage
+import Sheaf.Paper.SfIntegralCompactSupportConstructible
+import Sheaf.SecSmoothPurity.IntrinsicCompactSupportRestriction
 
 /-!
 # Direct images preserve bounded constructibility

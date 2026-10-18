@@ -33,6 +33,8 @@ import Sheaf.AlgebraicGeometry.HigherDirectImagesLimits
 import Mathlib.FieldTheory.IsSepClosed
 import Sheaf.EtaleCohomology.SepClosedFieldVanishing
 import WeilConjectures.AlgebraicGeometry.EtaleInverseImageExact
+import Sheaf.AlgebraicGeometry.OpenProductExchange
+import WeilConjectures.SixFunctors.BaseChange.Derived
 
 /-!
 # Vanishing on the generic fibre over a normal integral base

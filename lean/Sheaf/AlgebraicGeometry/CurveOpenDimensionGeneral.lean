@@ -29,6 +29,14 @@ import Sheaf.RepresentationTheory.DiscreteContinuousCohomology
 import Sheaf.AlgebraicGeometry.EtaleModuleCohomologyForget
 import Sheaf.Paper.FiniteCoproductCohomologyAssembly
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
+import Sheaf.AlgebraicGeometry.EtaleModuleEnoughInjectives
+import Sheaf.CategoryTheory.DiscreteModulesAbelian
+import Sheaf.CategoryTheory.EquivalenceDerivedSections
+import Sheaf.RepresentationTheory.DvrGalois
+import Sheaf.RingTheory.FieldAlgebraStrictHenselizationExcellent
+import Sheaf.RingTheory.PuncturedCurveBranches
+import WeilConjectures.AlgebraicGeometry.EtaleLocalRingTriples
+import WeilConjectures.AlgebraicGeometry.ReductionUniversalHomeomorphism
 
 /-!
 # Open direct-image dimension on arbitrary curves

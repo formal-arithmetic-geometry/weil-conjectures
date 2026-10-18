@@ -7,6 +7,7 @@ public import Mathlib.RingTheory.KrullDimension.Basic
 public import Sheaf.RingTheory.Depth
 
 import WeilConjectures.AlgebraicGeometry.AffineChartBaseChangeIso
+import Sheaf.TraceFormula.GenericCMLocusField
 
 /-!
 # Density of the fibrewise Cohen--Macaulay locus

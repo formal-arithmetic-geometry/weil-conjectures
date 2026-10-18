@@ -13,6 +13,9 @@ public import Mathlib.Algebra.Homology.HomologicalComplexAbelian
 public import Mathlib.Data.ZMod.Basic
 import Sheaf.AlgebraicGeometry.ProEtaleOpenUnitEvaluation
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
+import Sheaf.AlgebraicGeometry.ProEtaleConstantExact
+import Sheaf.AlgebraicGeometry.ProEtaleFiniteScalarUnitComparison
+import Sheaf.CategoryTheory.RingedSiteModules
 
 /-!
 # Supported kernels and their natural short exact complex sequences

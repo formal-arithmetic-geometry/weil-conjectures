@@ -64,6 +64,8 @@ import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 import WeilConjectures.SixFunctors.Finite.Exact
 import WeilConjectures.SixFunctors.OpenClosed.ClosedImmersion
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerShriek
+import Sheaf.Paper.FiniteDiscreteOrdinaryEquivalence
+import Sheaf.Paper.FiniteProperLocalizing
 
 /-!
 # Finite-coefficient exceptional inverse image on the localizing closure

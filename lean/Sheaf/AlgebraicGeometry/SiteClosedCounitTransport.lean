@@ -8,6 +8,11 @@ module
 public import Sheaf.AlgebraicGeometry.EtaleOriginAdjointClass
 import Sheaf.AlgebraicGeometry.CompactSupportComparisonUnit
 public import Sheaf.AlgebraicGeometry.CanonicalCompactSupportSiteComparison
+import Sheaf.AlgebraicGeometry.ComparisonDerivedPullbackFixed
+import Sheaf.AlgebraicGeometry.EtaleClosedAmbientAdjoint
+import Sheaf.AlgebraicGeometry.FixedComparisonDirectImageMate
+import Sheaf.AlgebraicGeometry.SpecifiedExceptionalClassHom
+import Sheaf.Paper.ConstructibleExceptionalAdjunctionCoefficients
 
 /-!
 # Counit normalization of the site-transported closed adjoint

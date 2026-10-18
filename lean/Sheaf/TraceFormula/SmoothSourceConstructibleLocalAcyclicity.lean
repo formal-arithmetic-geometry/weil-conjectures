@@ -7,6 +7,19 @@ public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
+import Sheaf.AlgebraicGeometry.CohomologyPullbackCanonicalArrows
+import Sheaf.AlgebraicGeometry.EtaleModuleEnoughInjectives
+import Sheaf.AlgebraicGeometry.ExchangeStrictLocalCohomology
+import Sheaf.AlgebraicGeometry.StrictBaseClosedPointLocalizations
+import Sheaf.AlgebraicGeometry.StrictHenselization
+import Sheaf.AlgebraicGeometry.UnboundedAbelianExchangeComparison
+import Sheaf.CategoryTheory.LeftModuleDerivedEvaluationForget
+import Sheaf.Paper.StrictHenselizationFunctoriality
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
+import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Theorem
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-!
 # Smooth-source constructible local acyclicity

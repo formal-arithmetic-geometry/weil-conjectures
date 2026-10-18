@@ -36,6 +36,9 @@ import Mathlib.CategoryTheory.Yoneda
 import Sheaf.CategoryTheory.ConstantLeftModuleInverseImage
 import Sheaf.AlgebraicGeometry.ProEtaleConstantExact
 import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
+import Sheaf.Paper.IntrinsicCoefficientTwistsUnrestricted
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Tensor
 
 /-! # Finite Kummer level of the Tate twist
 

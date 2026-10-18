@@ -15,6 +15,8 @@ public import Sheaf.AlgebraicGeometry.ProEtaleCanonicalPullbackComposition
 public import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen
 import Mathlib.AlgebraicGeometry.Morphisms.Etale
+import Sheaf.Paper.A1QbarOpenClosedCohomology
+import Sheaf.Paper.CommonStageCurveWeilMiddleExtension
 
 /-! # Constructibility of the ordinary adic middle extension
 

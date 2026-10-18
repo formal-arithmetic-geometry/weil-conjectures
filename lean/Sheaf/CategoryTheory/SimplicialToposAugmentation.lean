@@ -9,6 +9,8 @@ public import Sheaf.CategoryTheory.TotalSiteSheafSystems
 public import Sheaf.CategoryTheory.Sites.GeometricMorphism
 public import Mathlib.AlgebraicTopology.SimplexCategory.Basic
 public import Mathlib.CategoryTheory.Limits.Shapes.Equalizers
+import Sheaf.CategoryTheory.Sites.GrothendieckTopos
+import Sheaf.CategoryTheory.TotalSitePseudofunctor
 
 /-!
 # The equalizer direct image of an augmented simplicial topos

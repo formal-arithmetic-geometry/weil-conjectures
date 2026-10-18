@@ -16,6 +16,7 @@ import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 import Sheaf.AlgebraicGeometry.IsLocallyQuasiFiniteResLE
 import Sheaf.AlgebraicGeometry.LocallyOfFiniteTypeOfIsLocallyQuasiFinite
 import WeilConjectures.Mathlib.AlgebraicGeometry.QuasiAffine
+import Sheaf.AlgebraicGeometry.IndQuasiAffineFpqcDescent
 
 /-!
 # Effective fpqc descent of separated locally quasi-finite schemes

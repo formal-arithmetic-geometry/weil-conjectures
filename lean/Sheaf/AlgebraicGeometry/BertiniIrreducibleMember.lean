@@ -21,6 +21,10 @@ import Sheaf.AlgebraicGeometry.Curve.ReductionNilradicalNilpotence
 import Sheaf.RingTheory.FiniteTypeDomainDimensionLocalRing
 import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
 import Mathlib.AlgebraicGeometry.Noetherian
+import Sheaf.AlgebraicGeometry.BertiniIndependentFunctions
+import Sheaf.AlgebraicGeometry.GenericPointGeometricIrreducibility
+import Sheaf.AlgebraicGeometry.LinearIncidenceIrreducible
+import Sheaf.FieldTheory.BertiniFieldExtension
 
 /-!
 # Geometric irreducibility of a general member of a linear system

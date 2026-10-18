@@ -33,6 +33,8 @@ import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
 import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
 import Sheaf.Algebra.Homology.KFlat
 import Mathlib.Algebra.Homology.BifunctorShift
+import Sheaf.Paper.IntegralScalarExtensionConstructibleIntrinsic
+import Sheaf.Paper.IntrinsicCoefficientTwistsUnrestricted
 
 /-! # Coherence of integral twisting and scalar extension
 

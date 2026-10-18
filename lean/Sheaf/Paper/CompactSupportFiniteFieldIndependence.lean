@@ -7,6 +7,10 @@ module
 
 public import Sheaf.Paper.CompactSupportCoefficientAction
 public import Sheaf.Paper.GeneralAlgebraicallyClosedCoefficients
+import Sheaf.Paper.BasicOperationsCoefficientReduction
+import Sheaf.Paper.QcqsCompactSupportRealization
+import Sheaf.Paper.SfRationalizationKaroubi
+import Sheaf.Paper.SfScalarExtensionComposition
 
 /-! # Independence of the finite coefficient field
 

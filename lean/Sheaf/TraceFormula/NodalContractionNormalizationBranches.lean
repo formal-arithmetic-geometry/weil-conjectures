@@ -32,6 +32,8 @@ import Mathlib.RingTheory.AdicCompletion.Exactness
 import Mathlib.RingTheory.AdicCompletion.LocalRing
 import Mathlib.RingTheory.AdicCompletion.AsTensorProduct
 import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
+import Sheaf.AlgebraicGeometry.ComplementaryPureSubcurveComponents
+import Sheaf.TraceFormula.NodalSubcurveBoundary
 
 /-! # Normalization branches of a nodal contraction
 

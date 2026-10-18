@@ -40,6 +40,12 @@ import Mathlib.CategoryTheory.Sites.Point.Basic
 import Mathlib.CategoryTheory.Sites.Point.Skyscraper
 import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 import WeilConjectures.AlgebraicGeometry.Curve.Estimate
+import Sheaf.AlgebraicGeometry.EtaleFiniteTwistPullback
+import Sheaf.AlgebraicGeometry.ExactUnboundedExchange
+import Sheaf.AlgebraicGeometry.OrdinarySupportedCartierKummer
+import Sheaf.AlgebraicGeometry.ProjectiveSpaceStandardCharts
+import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
+import Sheaf.SecSmoothPurity.ProperFiniteCoefficientExtension
 
 /-!
 # Ordinary etale projective-line adjunction for finite coefficients

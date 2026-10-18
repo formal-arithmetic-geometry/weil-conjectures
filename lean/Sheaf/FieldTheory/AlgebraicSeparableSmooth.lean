@@ -9,6 +9,7 @@ public import Mathlib.Algebra.Category.CommAlgCat.Basic
 public import Mathlib.RingTheory.Smooth.Basic
 public import Mathlib.FieldTheory.Separable
 import WeilConjectures.Mathlib.RingTheory.Etale.Field
+import Sheaf.AlgebraicGeometry.EtaleSmoothZeroDimensionalFibres
 
 /-!
 # Algebraic separable extensions as filtered colimits of finite smooth algebras

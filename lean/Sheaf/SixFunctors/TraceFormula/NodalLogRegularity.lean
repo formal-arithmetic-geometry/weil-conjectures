@@ -10,6 +10,10 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
+import Sheaf.AlgebraicGeometry.FineSaturatedLogBlowup
+import Sheaf.AlgebraicGeometry.LogSmoothLogRegular
+import Sheaf.SixFunctors.TraceFormula.NodalEtaleChart
+import Sheaf.TraceFormula.NodalDivisorialChart
 
 /-!
 # Log regularity of a marked nodal curve

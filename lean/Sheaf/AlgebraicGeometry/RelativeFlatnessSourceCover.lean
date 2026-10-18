@@ -15,6 +15,7 @@ import WeilConjectures.AlgebraicGeometry.Modules.TensorPullbackStalk
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 import Sheaf.AlgebraicGeometry.RelativeFlatModuleStalk
 import Sheaf.AlgebraicGeometry.RelativeFlatOfStalks
+import Sheaf.RingTheory.FlatnessFaithfullyFlatExtension
 
 /-!
 # Relative flatness detected on a flat source cover

@@ -45,6 +45,8 @@ import Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
 import Sheaf.CategoryTheory.Abelian.RHomDerivedRoof
 import Sheaf.Algebra.Homology.BoundedBelowInjectiveResolution
 import Sheaf.Algebra.Homology.KInjectiveComparisonPrinciple
+import Sheaf.AlgebraicGeometry.ProEtaleDerivedExtensionZeroBaseChange
+import Sheaf.AlgebraicGeometry.ProEtaleSupportedConstantPresentation
 
 /-!
 # Supported Hom and pullback of closed pairs

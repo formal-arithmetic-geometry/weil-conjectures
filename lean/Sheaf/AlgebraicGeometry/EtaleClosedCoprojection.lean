@@ -29,6 +29,7 @@ import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 import Mathlib.CategoryTheory.Adjunction.Basic
 import Mathlib.AlgebraicGeometry.Morphisms.Finite
 import Mathlib.CategoryTheory.Yoneda
+import Sheaf.CategoryTheory.RingedSiteModulesGrothendieckOfUniverses
 
 /-!
 # Co-projection on ordinary small etale derived categories

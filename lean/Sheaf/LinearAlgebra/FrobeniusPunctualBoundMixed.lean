@@ -6,6 +6,7 @@ Authors: SHEAF group Q43
 module
 
 public import Sheaf.LinearAlgebra.FrobeniusModuleWeights
+import Sheaf.LinearAlgebra.SpectrumExactSequence
 
 /-!
 # Punctual bounds give mixed Frobenius modules

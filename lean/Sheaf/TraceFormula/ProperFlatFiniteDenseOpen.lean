@@ -10,6 +10,12 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Pullbacks
+import Sheaf.AlgebraicGeometry.LocallyQuasiFiniteRelativeDimension
+import Sheaf.AlgebraicGeometry.QuasiFiniteLocallyQuasiFinite
+import Sheaf.AlgebraicGeometry.QuasiFiniteMorphism
+import Sheaf.TraceFormula.FlatFpRelativeDimensionDenseOpen
+import WeilConjectures.AlgebraicGeometry.Morphisms.ProperQuasiFinite
+import WeilConjectures.Mathlib.Topology.KrullDimension
 
 /-! # Proper flat morphisms finite over a dense open are finite
 

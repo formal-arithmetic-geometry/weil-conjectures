@@ -18,6 +18,22 @@ import Sheaf.AlgebraicGeometry.EtaleCompactSupportComparisons
 
 import Sheaf.AlgebraicGeometry.CompactifiableOverField
 import Sheaf.AlgebraicGeometry.DerivedCategories
+import Sheaf.AlgebraicGeometry.CompactSupportComparisonUnit
+import Sheaf.AlgebraicGeometry.CompactifiableCompatibleTower
+import Sheaf.AlgebraicGeometry.ComparisonDirectImage
+import Sheaf.AlgebraicGeometry.CompatibleCompactificationTriangle
+import Sheaf.AlgebraicGeometry.ProEtaleExtensionZeroComparison
+import Sheaf.AlgebraicGeometry.ProEtaleIntrinsicExtensionByZeroAdjunction
+import Sheaf.AlgebraicGeometry.ProEtaleIntrinsicExtensionByZeroExact
+import Sheaf.AlgebraicGeometry.ProperOpenComparisonSiteNormalization
+import Sheaf.AlgebraicGeometry.ProperOpenInterchangeCoherence
+import Sheaf.AlgebraicGeometry.SfIntrinsicCompactSupport
+import Sheaf.Paper.CompactificationCoherence
+import Sheaf.Paper.ComparisonPullbackExact
+import Sheaf.Paper.FiniteDirectImageComposition
+import Sheaf.Paper.RefinementComparisonIsomorphism
+import WeilConjectures.Compactification.NagataCompactification
+import WeilConjectures.Compactification.Refinement
 /-!
 # Canonical compact-support composition on the etale-origin class
 

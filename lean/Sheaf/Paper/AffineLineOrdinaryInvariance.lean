@@ -40,6 +40,10 @@ import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 import Sheaf.AlgebraicGeometry.ComparisonGlobalCohomologyFiniteNormalized
 import Sheaf.AlgebraicGeometry.SupportComparisonPullbackCoherence
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusComp
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
+import Sheaf.Paper.FiniteDirectImageComposition
+import Sheaf.Paper.IntrinsicCoefficientTwistsUnrestricted
+import Sheaf.Paper.SupportedCupFunctoriality
 
 /-!
 # Ordinary affine-line invariance

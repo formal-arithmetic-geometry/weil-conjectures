@@ -18,6 +18,7 @@ import Sheaf.AlgebraicGeometry.ExchangeForgetCoefficients
 import Sheaf.CategoryTheory.RingedToposDerivedPushforwardComposition
 import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 import Sheaf.AlgebraicGeometry.IntegralEtaleDirectImageExact
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-!
 # Integral pushforward identifies the test-base comparison arrows

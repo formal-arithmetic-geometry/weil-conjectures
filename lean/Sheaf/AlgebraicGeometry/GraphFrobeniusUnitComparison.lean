@@ -24,6 +24,9 @@ import Sheaf.AlgebraicGeometry.ProEtaleConstantRingMap
 import Mathlib.CategoryTheory.Adjunction.Mates
 import Mathlib.CategoryTheory.Localization.Predicate
 import Mathlib.CategoryTheory.Sites.Sheafification
+import Sheaf.AlgebraicGeometry.FrobeniusFactorization
+import Sheaf.AlgebraicGeometry.ProEtaleConstantRingOperations
+import Sheaf.AlgebraicGeometry.ProEtaleUnitLerayChainFormula
 
 /-!
 # Constant normalization and ordinary sections of the Frobenius comparison

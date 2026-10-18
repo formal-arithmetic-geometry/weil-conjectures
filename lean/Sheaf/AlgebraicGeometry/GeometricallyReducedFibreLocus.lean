@@ -22,6 +22,7 @@ import WeilConjectures.Mathlib.Algebra.Category.Ring.FilteredColimits
 import Sheaf.TraceFormula.GeometricReducedFibreLocusBaseChange
 import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
 import Sheaf.AlgebraicGeometry.NoetherianConstructibleSubsetCriterion
+import Sheaf.AlgebraicGeometry.GeometricallyReducedAlgebraicClosureTest
 
 /-!
 # The geometrically reduced fibre locus of a finitely presented algebra

@@ -27,6 +27,17 @@ import Sheaf.CategoryTheory.RingedKoszulCompletionReflector
 import Sheaf.Algebra.Homology.KFlat
 import Sheaf.Paper.ExtendedCechCompletionModel
 import Sheaf.Paper.IntegralScalarExtensionWellDefined
+import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
+import Sheaf.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
+import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
+import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimitIndependentCoefficients
+import Sheaf.Paper.DerivedCompleteOnSlices
+import Sheaf.Paper.DerivedScalarExtensionRestrictionAdjunction
+import Sheaf.Paper.IntegralReductionTowerCanonical
+import Sheaf.Paper.WeilCompletedTensorReflector
+import WeilConjectures.Algebra.Homology.RoosComplex
+import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
+import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitExistence
 
 /-!
 # Finite free completed scalar comparison

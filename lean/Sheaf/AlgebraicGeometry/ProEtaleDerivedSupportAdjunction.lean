@@ -17,6 +17,8 @@ import Sheaf.CategoryTheory.KInjectiveTotalDerived
 import Sheaf.CategoryTheory.RingedSiteModulesGrothendieckOfUniverses
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
+import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
+import Sheaf.CategoryTheory.RingedSiteModules
 
 /-!
 # The supported-kernel adjunction and its unbounded derived counit

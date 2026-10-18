@@ -20,6 +20,14 @@ import Sheaf.AlgebraicGeometry.SupportComparisonPullbackCoherence
 import Sheaf.AlgebraicGeometry.CompactSupportComparisonUnit
 import Sheaf.Paper.PbcActualRingedExchange
 import WeilConjectures.SixFunctors.ProEtale.BaseChange.SmoothBaseChange
+import Sheaf.AlgebraicGeometry.ExactUnboundedExchange
+import Sheaf.AlgebraicGeometry.FixedEtaleOriginWitness
+import Sheaf.AlgebraicGeometry.IntrinsicDerivedOpenAdjunction
+import Sheaf.AlgebraicGeometry.ProEtaleConstantRingOperations
+import Sheaf.AlgebraicGeometry.ProEtaleIntrinsicExtensionByZeroExact
+import Sheaf.Paper.CondensedAmbientExchange
+import WeilConjectures.AlgebraicGeometry.DerivedCategories
+import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 
 /-!
 # Etale-origin proper/open interchange

@@ -16,6 +16,9 @@ import Sheaf.RingTheory.WeaklyEtaleField
 import Mathlib.AlgebraicGeometry.Sites.Fpqc
 import Mathlib.AlgebraicGeometry.Morphisms.WeaklyEtale
 import Mathlib.FieldTheory.IsSepClosed
+import Sheaf.AlgebraicGeometry.ProEtaleModuleStalkFunctor
+import Sheaf.RingTheory.IndEtaleUniverseTransport
+import WeilConjectures.AlgebraicGeometry.SiteSheafificationSectionsLocal
 
 /-!
 # Geometric stalks commute with pro-etale inverse image

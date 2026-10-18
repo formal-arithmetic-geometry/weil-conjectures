@@ -15,6 +15,7 @@ public import Mathlib.CategoryTheory.Triangulated.Functor
 public import Mathlib.CategoryTheory.Limits.Shapes.Products
 public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products
 import Sheaf.Paper.PbcRoosTriangle
+import Sheaf.Paper.CompletedDerivedInverseLimit
 
 /-! # Exact functors and sequential derived limits
 

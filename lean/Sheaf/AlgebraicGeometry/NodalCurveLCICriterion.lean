@@ -19,6 +19,8 @@ import Sheaf.TraceFormula.FlatDenseGenericFibrePureDimension
 import Sheaf.AlgebraicGeometry.UnramifiedOverFieldLocalCriterion
 import Sheaf.RingTheory.SmoothLocalCompleteIntersection
 import Mathlib.AlgebraicGeometry.Noetherian
+import Sheaf.AlgebraicGeometry.DthFittingSmoothLocus
+import Sheaf.AlgebraicGeometry.NodalPointLocalCriterion
 
 /-! # Nodal curves and the first-Fitting singular subscheme
 

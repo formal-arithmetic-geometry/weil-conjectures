@@ -12,6 +12,7 @@ public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 public import Mathlib.CategoryTheory.Limits.HasLimits
 import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 import Sheaf.AlgebraicGeometry.ProEtaleProductsExact
+import Sheaf.AlgebraicGeometry.ProEtaleProductsDerived
 
 /-!
 # The Milnor sequence on the small pro-etale site

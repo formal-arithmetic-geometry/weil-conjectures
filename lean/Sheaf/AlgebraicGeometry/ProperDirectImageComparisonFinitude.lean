@@ -26,6 +26,7 @@ import Sheaf.AlgebraicGeometry.Sites.FibrewiseCohomologicalDimension
 import WeilConjectures.ConstructibleSheaf.Defs
 import WeilConjectures.ConstructibleSheaf.Pullback
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
+import WeilConjectures.AlgebraicGeometry.ConstructibleModuleFiniteStalks
 
 /-!
 # Comparison and finitude of proper direct images

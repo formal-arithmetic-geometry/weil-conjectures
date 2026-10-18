@@ -16,6 +16,7 @@ public import Mathlib.RingTheory.Ideal.MinimalPrime.Basic
 import Sheaf.RingTheory.LocalizationPrimeResidueFieldIso
 import Sheaf.RingTheory.IntegralComponentHenselianPermanence
 import Sheaf.RingTheory.NormalizationCompletedBranchLift
+import WeilConjectures.Mathlib.RingTheory.Henselian
 
 /-!
 # Finite prime fibres of a normalization

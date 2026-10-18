@@ -13,6 +13,9 @@ import Sheaf.Algebra.Homology.FilteredQuasiIsoFractions
 import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
 import Mathlib.CategoryTheory.Localization.CalculusOfFractions
 public import Mathlib.CategoryTheory.Localization.Construction
+import Sheaf.Algebra.Homology.FilteredComplexSubquotients
+import Sheaf.CategoryTheory.BoundedFilteredComplexPageCore
+import WeilConjectures.CategoryTheory.Abelian.Filtration
 
 /-!
 # Localization of finite filtered pages

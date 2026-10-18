@@ -16,6 +16,12 @@ import Sheaf.AlgebraicGeometry.AffineSpaceTopTrace
 import Sheaf.Paper.PurTwistSheafLocallyFree
 import Mathlib.AlgebraicGeometry.Noetherian
 import Mathlib.Algebra.Homology.DerivedCategory.FullyFaithful
+import Sheaf.Paper.CohomologicalSmoothnessTheorem
+import Sheaf.Paper.ConstructibleExceptionalAdjunctionCoefficients
+import Sheaf.Paper.DualizingObjectPurity
+import Sheaf.Paper.IntrinsicCoefficientTwistsUnrestricted
+import Sheaf.Paper.PurityDiagonalDualizingObject
+import Sheaf.Paper.VectorBundlePurity
 
 /-! # Finite-coefficient smooth purity
 

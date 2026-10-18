@@ -17,6 +17,12 @@ import Sheaf.AlgebraicGeometry.StrictHenselizationStalkFormula
 import WeilConjectures.AlgebraicGeometry.StrictLocalDerivedGlobalExchange
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Proper
+import Sheaf.AlgebraicGeometry.ProjectiveStrictLocalIntersectionAcyclic
+import Sheaf.AlgebraicGeometry.StrictHenselization
+import Sheaf.CategoryTheory.ConstantLeftModuleInverseImage
+import Sheaf.CategoryTheory.LeftModuleDerivedEvaluationForget
+import Sheaf.Paper.StrictHenselizationFunctoriality
+import Sheaf.TraceFormula.BoundedDimensionProjectiveLocalModel
 
 /-!
 # Gabber dimension bound for torsion nearby cycles

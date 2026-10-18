@@ -32,6 +32,7 @@ import Sheaf.Paper.StratifiedLattice
 import Sheaf.Paper.CoefficientHeartCommonStratification
 import Sheaf.Paper.CoefficientHeartFiltration
 import Sheaf.AlgebraicGeometry.ProEtaleOpenClosedSequenceRingSheaf
+import Sheaf.Paper.CartesianCoefficients
 
 /-!
 # Reduction of a proper direct-image bound to integral lattices on strata

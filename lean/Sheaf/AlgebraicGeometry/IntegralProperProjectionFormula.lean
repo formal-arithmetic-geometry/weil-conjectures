@@ -37,6 +37,12 @@ import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 import Mathlib.CategoryTheory.Sites.Point.Basic
 import Mathlib.CategoryTheory.Sites.Point.Skyscraper
 import Mathlib.Algebra.Homology.ShortComplex.ShortExact
+import Sheaf.AlgebraicGeometry.EtaleConstantProjectionFormulaBoundedBelow
+import Sheaf.AlgebraicGeometry.GeometricPointDerivedConstants
+import Sheaf.AlgebraicGeometry.GeometricPointDerivedSectionsAdjunction
+import Sheaf.AlgebraicGeometry.GeometricPointProjectionComparison
+import Sheaf.AlgebraicGeometry.IntegralDerivedTensorBoundedTorsion
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 
 /-!
 # The integral proper projection formula

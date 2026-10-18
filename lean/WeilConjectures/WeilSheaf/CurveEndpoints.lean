@@ -19,6 +19,24 @@ import WeilConjectures.EtaleCohomology.Purity.RealSheaves.LinearAlgebra
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Proper
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
 import WeilConjectures.WeilSheaf.Cohomology
+import Sheaf.AlgebraicGeometry.BoundedConstructibleComplexes
+import Sheaf.AlgebraicGeometry.CurveBaseChangeRelativeDimensionOne
+import Sheaf.AlgebraicGeometry.Morphisms.SmoothConnectedGenericGeometryCore
+import Sheaf.AlgebraicGeometry.NoetherianAffineDimOneOpen
+import Sheaf.EtaleCohomology.Purity.RealSheaves.TateTwistWeightShift
+import Sheaf.LinearAlgebra.FrobeniusModuleMixedSubquotient
+import Sheaf.LinearAlgebra.FrobeniusModuleWeights
+import Sheaf.Paper.AdicLisseCohomologyCalculus
+import Sheaf.Paper.AdicMiddleExtensionConstructible
+import Sheaf.Paper.CommonStageCompactWeilCohomology
+import Sheaf.Paper.CommonStageCurveWeilMiddleExtension
+import Sheaf.Paper.DegreeZeroCompactSupportSections
+import Sheaf.Paper.EtaleWeilFundamentalRepresentation
+import Sheaf.Paper.IntrinsicCoefficientTwistsUnrestricted
+import Sheaf.Paper.IntrinsicQbarCategory
+import Sheaf.Paper.LisseIntegralSmallCoefficients
+import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+import WeilConjectures.SixFunctors.Etale.Derived.WeilFrobenius
 
 /-!
 # The two endpoints of the compactly supported cohomology of a direct image on a curve

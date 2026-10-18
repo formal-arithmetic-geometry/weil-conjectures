@@ -51,6 +51,9 @@ import Sheaf.Paper.PbcDescentFunctors
 import Sheaf.Paper.PbcVerdierAxioms
 import Sheaf.AlgebraicGeometry.FrobeniusDetailed
 import Sheaf.CategoryTheory.MateIsoAlongEquivalences
+import Sheaf.Paper.BasicOperationsCoefficientReduction
+import Sheaf.Paper.QcqsCompactSupportRealization
+import Sheaf.Paper.SfCommonStageDirectImage
 
 /-!
 # The canonical open-closed triangle at all coefficient stages

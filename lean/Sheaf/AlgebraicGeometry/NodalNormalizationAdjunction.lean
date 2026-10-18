@@ -38,6 +38,7 @@ import Sheaf.RingTheory.PowerSeriesFieldCohenRegularComplete
 import Sheaf.RingTheory.PowerSeriesNormalDomain
 import Sheaf.RingTheory.ReducedNoetherianTotalRingFractions
 import Sheaf.RingTheory.RegularLocalSeparableResidueSmooth
+import Sheaf.AlgebraicGeometry.FormalPlaneAdjunctionLattice
 
 /-! # Normalization adjunction on a component of a nodal curve
 

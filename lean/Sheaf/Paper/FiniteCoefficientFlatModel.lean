@@ -27,6 +27,7 @@ import WeilConjectures.AlgebraicGeometry.EtaleSheaves
 import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.Basic
 import WeilConjectures.SixFunctors.Etale.Derived.Tensor
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.FlatModel
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.FlatModel
 
 /-!
 # Bounded flat models at finite coefficient levels

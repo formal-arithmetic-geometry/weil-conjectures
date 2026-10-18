@@ -14,6 +14,10 @@ public import Mathlib.Topology.Sober
 import Sheaf.AlgebraicGeometry.GeometricallyReducedEtaNormal
 import Sheaf.TraceFormula.ValuationHorizontalCurveModels
 import Mathlib.AlgebraicGeometry.Noetherian
+import Sheaf.TraceFormula.FiniteFibreValuationDomination
+import Sheaf.TraceFormula.ValuationCurveProjectivePreparation
+import Sheaf.TraceFormula.ValuationExceptionalLocalCriterion
+import Sheaf.TraceFormula.ValuationNodalPolarSection
 
 /-! # One exceptional blow-down over a finite-height valuation ring
 

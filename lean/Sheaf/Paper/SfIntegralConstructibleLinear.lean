@@ -15,6 +15,8 @@ import Mathlib.CategoryTheory.Limits.HasLimits
 import Sheaf.CategoryTheory.RingedSiteModules
 import Mathlib.Algebra.Homology.DerivedCategory.Linear
 import Mathlib.Algebra.Homology.DerivedCategory.Basic
+import Sheaf.Paper.CompletedIntegralConstantMapOfUniverses
+import Sheaf.Paper.SfIntegralConstructible
 
 /-!
 # Constant-section linearity of the intrinsic integral constructible category

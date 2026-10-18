@@ -7,6 +7,9 @@ module
 public import WeilConjectures.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 import Sheaf.CategoryTheory.Sites.GeometricMorphism
+import Sheaf.AlgebraicGeometry.PointedEtaleStalk
+import WeilConjectures.AlgebraicGeometry.EtaleSetInverseImageStalkGerm
+import WeilConjectures.SixFunctors.OpenClosed.Stalk
 
 /-!
 # Closed immersion on small étale sheaves of sets

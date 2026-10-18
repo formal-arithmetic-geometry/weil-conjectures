@@ -24,6 +24,10 @@ import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
 import Sheaf.CategoryTheory.RightDerivedFunctorOfQuasiIsoResolutions
 import Sheaf.CategoryTheory.SheafTensor
 import Sheaf.Paper.CompletedCondensedCoefficients
+import Sheaf.AlgebraicGeometry.CoefficientBoundedConstructibleProEtale
+import Sheaf.Paper.ConstructibleExtContinuity
+import WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalars
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility
 
 /-!
 # Finite descent of derived coefficient morphisms

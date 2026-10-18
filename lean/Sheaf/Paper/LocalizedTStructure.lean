@@ -9,6 +9,9 @@ public import Sheaf.Paper.IntegralTStructure
 public import Sheaf.CategoryTheory.ScalarLocalizationTriangulated
 public import Mathlib.CategoryTheory.Triangulated.Triangulated
 import WeilConjectures.CategoryTheory.Triangulated.TStructure.Homology
+import Sheaf.Paper.IntegralCanonicalTruncations
+import Sheaf.Paper.IntegralUniformCoefficient
+import Sheaf.Paper.PbcRationalCategory
 
 /-! # The bounded rational t-structure
 

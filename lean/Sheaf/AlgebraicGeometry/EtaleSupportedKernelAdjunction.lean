@@ -20,6 +20,8 @@ import Sheaf.Paper.InverseImageStalkGerm
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 import Sheaf.AlgebraicGeometry.EtaleClosedImmersionEssentialImage
 import WeilConjectures.SixFunctors.OpenClosed.ClosedImmersion
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageExact
+import WeilConjectures.AlgebraicGeometry.InverseImageStalkGerm
 
 /-!
 # The support kernel and the right adjoint of closed etale direct image

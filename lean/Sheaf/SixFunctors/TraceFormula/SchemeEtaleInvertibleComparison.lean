@@ -14,6 +14,11 @@ import WeilConjectures.AlgebraicGeometry.Descent
 import WeilConjectures.AlgebraicGeometry.ZariskiEtaleInclusionMorphismOfSites
 import Sheaf.AlgebraicGeometry.FpqcFinerThanEtale
 import Sheaf.CategoryTheory.SiteCoveringAxioms
+import Sheaf.AlgebraicGeometry.EtaleQuasiCoherentDescent
+import Sheaf.AlgebraicGeometry.EtaleTensorSections
+import Sheaf.AlgebraicGeometry.TensorPullbackSectionAdjunction
+import WeilConjectures.AlgebraicGeometry.Modules.Invertible
+import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 
 /-!
 # Étale comparison for invertible modules

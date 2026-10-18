@@ -10,6 +10,8 @@ public import WeilConjectures.SixFunctors.BaseChange.DerivedUnbounded
 import Sheaf.AlgebraicGeometry.ExactUnboundedExchange
 import Sheaf.Algebra.Homology.RingedDerivedClosedSymmetricMonoidal
 import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
+import Sheaf.AlgebraicGeometry.EtaleGenericImmersionProjection
+import Sheaf.SixFunctors.RingedDerivedMonoidalComparisons
 
 /-! # Evaluation coherence of immersion internal-Hom exchange
 

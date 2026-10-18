@@ -28,6 +28,9 @@ import Mathlib.CategoryTheory.Adjunction.Limits
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits
 import Mathlib.Algebra.Category.ModuleCat.Limits
 import Mathlib.CategoryTheory.Sites.Limits
+import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
+import Sheaf.AlgebraicGeometry.ProEtaleToposFunctorialityInverseImage
+import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 
 /-!
 # Closed inverse image preserves limits

@@ -20,6 +20,7 @@ import Sheaf.AlgebraicGeometry.IndEtaleStrictLocalInvariance
 import Sheaf.AlgebraicGeometry.StrictBaseClosedPointLocalizations
 public import Mathlib.AlgebraicTopology.CechNerve
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+import Sheaf.Paper.StrictHenselizationFunctoriality
 
 /-!
 # Finite-cover tube decomposition and the ordinary comparison

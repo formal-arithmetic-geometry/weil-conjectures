@@ -11,6 +11,7 @@ public import Mathlib.AlgebraicGeometry.ResidueField
 public import Mathlib.RingTheory.Algebraic.Defs
 public import WeilConjectures.ZetaSeries
 import Sheaf.FieldTheory.FieldExtensionGeometricallyIrreducible
+import Sheaf.AlgebraicGeometry.GeometricallyConnectedImageCriterion
 
 /-!
 # Geometric connectedness from a residue-field point

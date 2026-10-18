@@ -48,6 +48,8 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.AffineSpace
 import WeilConjectures.SixFunctors.Finite.Exact
 import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
 import WeilConjectures.ConstructibleSheaf.KernelCokernel
+import Sheaf.Paper.OrientedSourceLocalization
+import Sheaf.TraceFormula.OrientedNearbySmoothSourcePullback
 
 /-!
 # Proper-surjective local constructibility of nearby-cycle cohomology

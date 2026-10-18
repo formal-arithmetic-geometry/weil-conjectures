@@ -31,6 +31,8 @@ import Sheaf.Algebra.Homology.BoundedAboveFlatSheafKFlat
 import Sheaf.Algebra.Homology.RingedSiteBoundedFreeRHomModel
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
 import Sheaf.Paper.IntegralDerivedOperationsOnSlices
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
+import Sheaf.Paper.ConnectedConstantH0
 
 /-! # Perfect point evaluation and the specified strict-cone completion
 

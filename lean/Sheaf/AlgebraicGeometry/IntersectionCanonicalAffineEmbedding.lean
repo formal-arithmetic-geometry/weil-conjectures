@@ -15,6 +15,8 @@ import Mathlib.CategoryTheory.Sites.PreservesSheafification
 import Mathlib.Algebra.Category.Ring.FilteredColimits
 import Mathlib.AlgebraicGeometry.FunctionField
 import Mathlib.Topology.Sheaves.Stalks
+import Sheaf.AlgebraicGeometry.QuasiAffineOpenAffinizationSquare
+import Sheaf.Topology.FilteredSpectrumTopologicalLimit
 
 /-!
 # Canonical affine embedding of an intersection of quasi-compact opens

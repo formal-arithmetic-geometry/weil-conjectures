@@ -13,6 +13,8 @@ public import Mathlib.Algebra.Module.FinitePresentation
 
 import Mathlib.Algebra.MvPolynomial.Basic
 import Mathlib.RingTheory.Flat.TorsionFree
+import Sheaf.RingTheory.FinitelyPresentedOverSubring
+import Sheaf.RingTheory.LocalGradedFlatModuleFinitePresentation
 
 /-!
 # Finite flat modules over finite type algebras over valuation rings are finitely presented

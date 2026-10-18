@@ -22,6 +22,12 @@ import Mathlib.AlgebraicGeometry.Sites.MorphismProperty
 import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 import Mathlib.AlgebraicGeometry.Limits
 import WeilConjectures.AlgebraicGeometry.AmplePullback
+import Sheaf.AlgebraicGeometry.SchemeAmpleCanonicalProjCriterion
+import Sheaf.AlgebraicGeometry.SchemeZariskiEtaleQuasiCoherentEquivalence
+import Sheaf.AlgebraicGeometry.SpaceOpenImmersionEtaleLocal
+import Sheaf.AlgebraicGeometry.TensorPullbackSectionAdjunction
+import Sheaf.TraceFormula.SpaceLineModuleProjMap
+import Sheaf.TraceFormula.SpaceSectionAlgebraEtaleBaseChange
 
 /-!
 # Relative ampleness on an affine open cover

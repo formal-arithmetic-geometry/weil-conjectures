@@ -9,6 +9,7 @@ public import Sheaf.Algebra.Homology.FiniteFilteredKFlatReplacement
 public import Sheaf.Algebra.Homology.FilteredTensorGradedComparison
 public import Sheaf.Algebra.Homology.DerivedTensorSecondFactorFunctor
 public import Mathlib.CategoryTheory.Localization.Bifunctor
+import Sheaf.Algebra.Homology.FiniteFilteredModuleHomotopy
 
 /-!
 # Convolution tensor on the finite filtered localization

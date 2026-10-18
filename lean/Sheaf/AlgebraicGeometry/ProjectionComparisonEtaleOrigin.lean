@@ -6,6 +6,23 @@ Authors: SHEAF group Q98
 module
 
 public import Sheaf.AlgebraicGeometry.ProjectionComparisonEtaleOriginEquation
+import Sheaf.AlgebraicGeometry.CanonicalCompactSupportSiteComparison
+import Sheaf.AlgebraicGeometry.FixedComparisonDirectImageMate
+import Sheaf.AlgebraicGeometry.ProEtaleExtensionZeroComparison
+import Sheaf.AlgebraicGeometry.ProEtaleIntrinsicExtensionByZeroExact
+import Sheaf.AlgebraicGeometry.ProperBasic
+import Sheaf.AlgebraicGeometry.SupportComparisonPullbackCoherence
+import Sheaf.AlgebraicGeometry.TorAmplitudeKFlatResolution
+import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
+import Sheaf.Paper.CompactSupportSiteCoherence
+import Sheaf.Paper.ExchangeProjectionSuppliedDomains
+import Sheaf.Paper.KunnethDerivedTensorTEst
+import Sheaf.Paper.RingedExchangeTensorCoherence
+import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
+import Sheaf.SixFunctors.OpenTensorNormalization
+import WeilConjectures.SixFunctors.Etale.Derived.LowerStarProjection
+import WeilConjectures.SixFunctors.Etale.Derived.OpenImmersionLowerShriekProjection
+import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 
 /-!
 # Etale-origin comparison of compact-support projection maps

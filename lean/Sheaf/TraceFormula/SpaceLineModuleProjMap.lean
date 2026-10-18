@@ -10,6 +10,11 @@ public import WeilConjectures.AlgebraicGeometry.QuasiCoherentAlgebra
 public import WeilConjectures.AlgebraicGeometry.GradedSheafStructures
 import WeilConjectures.AlgebraicGeometry.RelativeProj.Universal
 import Mathlib.AlgebraicGeometry.Gluing
+import Sheaf.AlgebraicGeometry.AlgebraicSpace
+import Sheaf.AlgebraicGeometry.TensorPullbackSectionAdjunction
+import WeilConjectures.AlgebraicGeometry.Modules.Invertible
+import WeilConjectures.AlgebraicGeometry.RelativeProj.BaseChange
+import WeilConjectures.AlgebraicGeometry.RelativeProj.Basic
 
 /-!
 # The canonical relative-Proj map attached to a line module on an algebraic space

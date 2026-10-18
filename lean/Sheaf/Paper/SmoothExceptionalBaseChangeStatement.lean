@@ -41,6 +41,13 @@ import Sheaf.AlgebraicGeometry.SupportComparisonPullbackCoherence
 import Sheaf.AlgebraicGeometry.ProEtaleSiteComparisonDerived
 import Sheaf.Paper.ComparisonPullbackExact
 import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekPlusBaseChange
+import Sheaf.AlgebraicGeometry.CanonicalCompactSupportSiteComparison
+import Sheaf.AlgebraicGeometry.CompactSupportComparisonUnit
+import Sheaf.AlgebraicGeometry.SpecifiedExceptionalClassHom
+import Sheaf.Paper.CanonicalFiniteLevelCompactSupportBaseChange
+import Sheaf.Paper.CompactSupportExchangeTransport
+import Sheaf.Paper.ConstructibleExceptionalAdjunctionCoefficients
+import Sheaf.Paper.SmoothMateCounitCancellation
 
 /-! # Smooth base change for the finite-level exceptional inverse image
 

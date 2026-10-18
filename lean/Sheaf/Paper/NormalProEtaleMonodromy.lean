@@ -15,6 +15,14 @@ public import Sheaf.Paper.LisseCompletedSystemComparison
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
+import Sheaf.NumberTheory.Padics.AdicLimitFiniteModules
+import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
+import Sheaf.NumberTheory.Padics.ExtensionIntegersDvr
+import Sheaf.Paper.ContinuousFiniteEtaleLatticeDescent
+import Sheaf.Paper.EtaleLocalMonodromyRealization
+import Sheaf.Paper.LatticeSheafLocallyConstant
+import Sheaf.SecPurity.NormalLocallyConstantFiniteSection
+import Sheaf.SixFunctors.IntegralLisseReductionEquivalence
 
 /-!
 # Normal pro-etale monodromy

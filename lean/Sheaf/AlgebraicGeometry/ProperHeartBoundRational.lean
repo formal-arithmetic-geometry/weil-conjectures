@@ -41,6 +41,9 @@ import WeilConjectures.CategoryTheory.ModuleObjects.MapMod
 import Mathlib.CategoryTheory.Monoidal.Mod
 import Sheaf.Paper.CompletedCondensedCoefficients
 import Sheaf.Paper.CartesianCoefficientsFiniteFree
+import Sheaf.Paper.CondensedModuleDerivedPushpull
+import Sheaf.Paper.ProperHeartBoundLattice
+import Sheaf.Paper.ProperHeartBoundReduction
 
 /-!
 # Proper direct-image bound for rational constructible module sheaves

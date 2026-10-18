@@ -33,6 +33,10 @@ import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 import WeilConjectures.SixFunctors.Etale.Derived.OpenImmersionLowerShriek
 import Sheaf.AlgebraicGeometry.EtaleConstantModuleDirectImageLeftExact
 import Sheaf.AlgebraicGeometry.EtaleUnderivedExchangeModuleLinear
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+import WeilConjectures.SixFunctors.BaseChange.Square
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-!
 # Unbounded exchange agrees with bounded exchange and with degree-zero exchange

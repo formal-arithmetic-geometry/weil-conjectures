@@ -21,6 +21,9 @@ import Sheaf.Algebra.Homology.KInjectiveRestrictLocalized
 import Sheaf.CategoryTheory.RightDerivedFunctorOfQuasiIsoResolutions
 import Sheaf.CategoryTheory.ExactFunctorDerivedFunctor
 import Sheaf.CategoryTheory.DerivedCategory.AdjointSquareComparison
+import Sheaf.Paper.CondensedModuleDerivedPushpull
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs
+import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Defs
 
 /-!
 # Base change and identity on an open restriction

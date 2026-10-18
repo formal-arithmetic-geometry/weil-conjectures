@@ -13,6 +13,8 @@ import Sheaf.CategoryTheory.LocalizedModuleExactIndependent
 import Mathlib.Algebra.Homology.DerivedCategory.KInjective
 import Mathlib.CategoryTheory.Abelian.FunctorCategory
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
+import Sheaf.CategoryTheory.LocalizedModuleExactForSystems
+import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimitIndependentCoefficients
 
 /-! # Slice restriction and strict derived limits
 

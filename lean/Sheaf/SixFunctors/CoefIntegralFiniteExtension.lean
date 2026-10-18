@@ -37,6 +37,9 @@ import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimitIndependentCoefficient
 import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
 import Sheaf.CategoryTheory.ModulePullbackPushforwardAdjunction
 import Sheaf.SixFunctors.IntegralDualizing
+import Sheaf.Algebra.Homology.RingedInternalHomShiftOfUniverses
+import Sheaf.Paper.FiniteCoefficientHomChange
+import Sheaf.Paper.SemilinearDerivedSections
 
 /-! # Integral duality under finite coefficient extension
 

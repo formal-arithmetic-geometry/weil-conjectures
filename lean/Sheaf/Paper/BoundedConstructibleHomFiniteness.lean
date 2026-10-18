@@ -9,6 +9,33 @@ public import Sheaf.AlgebraicGeometry.ContinuousCoefficientCommRing
 public import Sheaf.AlgebraicGeometry.ProEtaleBoundedConstructible
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Hom
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible
+import Sheaf.Algebra.Homology.RingedInternalHomShiftOfUniverses
+import Sheaf.Algebra.Homology.ScalarInternalHomAdjunction
+import Sheaf.AlgebraicGeometry.CoefficientBoundedConstructibleProEtale
+import Sheaf.AlgebraicGeometry.CondensedFieldLfpLocalTriviality
+import Sheaf.AlgebraicGeometry.ConstructibleProEtaleComparison
+import Sheaf.AlgebraicGeometry.ProEtalePointPullback
+import Sheaf.CategoryTheory.LocallyDerivedRingedIdealComplete
+import Sheaf.CategoryTheory.RightDerivedFunctorOfQuasiIsoResolutions
+import Sheaf.NumberTheory.Padics.ExtensionIntegersDvr
+import Sheaf.Paper.CartesianCoefficientsFiniteFree
+import Sheaf.Paper.CompletedCondensedCoefficients
+import Sheaf.Paper.CondensedConstantConstructibility
+import Sheaf.Paper.CondensedQbarLfpLocalTriviality
+import Sheaf.Paper.ConstructibleInternalHomContinuity
+import Sheaf.Paper.DerivedInternalHomFilteredColimit
+import Sheaf.Paper.FiniteCoefficientDescentTwoColimit
+import Sheaf.Paper.FiniteFieldInternalHomFiniteness
+import Sheaf.Paper.IntegralCohomologicalAdicCriterion
+import Sheaf.Paper.IntegralHomReduction
+import Sheaf.Paper.IntegralLfpConstantModelComparison
+import Sheaf.Topology.ProfiniteCondensedRing
+import WeilConjectures.CategoryTheory.ModuleObjects.EllAdicRationalization
+import WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalars
+import WeilConjectures.CategoryTheory.Monoidal.Mod.Abelian
+import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
+import WeilConjectures.ConstructibleSheaf.ProEtaleModule.Def
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.TwoColimit
 
 /-!
 # Internal Hom finiteness for finite coefficient extensions in the scheme universe

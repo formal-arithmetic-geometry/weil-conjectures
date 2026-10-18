@@ -11,6 +11,12 @@ import Sheaf.AlgebraicGeometry.OrdinaryFiniteP1Adjunction
 import Sheaf.AlgebraicGeometry.ProperUnboundedBaseChange
 import Sheaf.AlgebraicGeometry.OrdinarySupportedCartierKummer
 import Mathlib.AlgebraicGeometry.Noetherian
+import Sheaf.AlgebraicGeometry.EtaleFiniteTwistPullback
+import Sheaf.AlgebraicGeometry.ExactUnboundedExchange
+import Sheaf.AlgebraicGeometry.ProperProjectionFormula
+import Sheaf.SixFunctors.TensorProjectionAdjunct
+import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
+import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Comparison
 
 /-! # The ordinary etale projective-line decomposition
 

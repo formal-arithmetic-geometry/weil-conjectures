@@ -13,6 +13,7 @@ import Sheaf.RingTheory.GRing
 import Mathlib.FieldTheory.PurelyInseparable.Basic
 import Mathlib.RingTheory.FiniteType
 import Sheaf.RingTheory.PolynomialRingMaximalChainHeightDifference
+import Sheaf.RingTheory.JTwoResidueFieldCriterion
 
 /-!
 # Excellence of fields

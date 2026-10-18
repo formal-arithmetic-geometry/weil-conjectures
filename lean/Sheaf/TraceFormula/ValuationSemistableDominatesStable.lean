@@ -11,6 +11,12 @@ public import Mathlib.AlgebraicGeometry.Properties
 public import Mathlib.Topology.KrullDimension
 import Sheaf.AlgebraicGeometry.FlatInvertibleSectionsTorsionFree
 import Mathlib.AlgebraicGeometry.Sites.Fpqc
+import Sheaf.AlgebraicGeometry.Curve.ValuationCommonStrictSemistableRefinement
+import Sheaf.AlgebraicGeometry.GeometricallyReducedEtaNormal
+import Sheaf.AlgebraicGeometry.SemistableMarkedBaseChange
+import Sheaf.AlgebraicGeometry.ValuationContractedComponentInclusion
+import Sheaf.TraceFormula.ValuationComponentFactorization
+import Sheaf.TraceFormula.ValuationSeparableClosureExtension
 
 /-! # A semistable modification dominates a stable modification over a valuation ring
 

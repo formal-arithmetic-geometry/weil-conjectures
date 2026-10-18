@@ -26,6 +26,11 @@ import Sheaf.CategoryTheory.DerivedCategory.LeftDerivedPointwiseKanBridge
 import Sheaf.CategoryTheory.PreDerivedAdjointFunctorsGeneral
 import Sheaf.Paper.KFlatRingedToposPullback
 public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
+import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
+import Sheaf.Algebra.Homology.SheafRingDerivedCoefficientAdjunction
+import Sheaf.CategoryTheory.ModulePullbackPushforwardAdjunction
+import Sheaf.CategoryTheory.SystemLevelLeftExtension
 /-!
 # Derived extension from a coefficient level
 Source: Zheng, Six Operations and Lefschetz--Verdier, Construction 4.1, printed p. 21;

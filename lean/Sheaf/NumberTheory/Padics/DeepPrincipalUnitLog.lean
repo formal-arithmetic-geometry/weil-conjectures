@@ -7,6 +7,11 @@ module
 
 public import Sheaf.NumberTheory.Padics.CoefficientExtensionSmallLog
 import Sheaf.RingTheory.PowerSeries.ExpSubstHom
+import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
+import Sheaf.NumberTheory.Padics.ExtensionIntegersDvr
+import Sheaf.RingTheory.NonarchimedeanSeriesSubstitution
+import Sheaf.RingTheory.PowerSeries.LogExpFormalIdentities
+import Sheaf.SecPurityRealSheaves.LogExpValuationConvergence
 
 /-!
 # Logarithm and exponential on deep principal units

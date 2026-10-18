@@ -13,6 +13,12 @@ import Sheaf.AlgebraicGeometry.NagataAffineProjScalarExtension
 import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
 import Mathlib.RingTheory.TensorProduct.Basic
 import Mathlib.AlgebraicGeometry.Gluing
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
+import Sheaf.AlgebraicGeometry.CoherentFiniteType
+import Sheaf.AlgebraicGeometry.QuasiCoherentSymmetricAlgebra
+import WeilConjectures.AlgebraicGeometry.Modules.Invertible
+import WeilConjectures.AlgebraicGeometry.RelativeProj.Basic
+import WeilConjectures.LinearAlgebra.SymmetricAlgebra.Graded
 
 /-!
 # Projective bundles are invariant under invertible twists

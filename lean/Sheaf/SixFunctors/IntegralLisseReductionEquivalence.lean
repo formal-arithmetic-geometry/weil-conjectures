@@ -16,6 +16,11 @@ public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 import Sheaf.NumberTheory.Padics.AdicLimitFiniteModules
 import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
+import Sheaf.AlgebraicGeometry.ProEtaleIntegralCoefficientLimit
+import Sheaf.AlgebraicGeometry.ProEtaleWContractibleSectionsExact
+import Sheaf.AlgebraicGeometry.WContractibleAffineCover
+import Sheaf.SixFunctors.IntegralSquareZeroMatrixLift
+import Sheaf.SixFunctors.IntegralTensorQuotientEpimorphism
 
 /-!
 # Integral lisse modules and their normalized reduction towers

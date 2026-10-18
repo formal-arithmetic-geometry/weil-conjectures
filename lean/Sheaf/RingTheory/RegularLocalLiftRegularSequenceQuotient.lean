@@ -10,6 +10,7 @@ public import Mathlib.RingTheory.Regular.RegularSequence
 public import Mathlib.RingTheory.Noetherian.Defs
 import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
 import Mathlib.RingTheory.KrullDimension.Regular
+import Sheaf.AlgebraicGeometry.IsRegularScheme
 
 /-!
 # Regularity lifts from a regular-sequence quotient

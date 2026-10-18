@@ -20,6 +20,13 @@ import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 import Mathlib.AlgebraicGeometry.Morphisms.Proper
+import Sheaf.AlgebraicGeometry.CoefficientBoundedConstructibleProEtale
+import Sheaf.Paper.CoefficientFiniteDescentHom
+import Sheaf.Paper.CoefficientFiniteDescentObjects
+import Sheaf.Paper.CoefficientHeart
+import WeilConjectures.CategoryTheory.FilteredTwoColimit
+import WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalars
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility
 
 /-!
 # Finite coefficient descent and the rational coefficient two-colimit

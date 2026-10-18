@@ -16,6 +16,7 @@ import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimitIndependentCoefficient
 import Sheaf.AlgebraicGeometry.ProEtaleCountableProductsExact
 import Sheaf.CategoryTheory.StrictRoosComparison
 import Mathlib.CategoryTheory.Abelian.FunctorCategory
+import Sheaf.Paper.IntegralPullbackResolutionMatching
 
 /-!
 # Composition of the integral inverse-image comparison

@@ -17,6 +17,7 @@ import Sheaf.AlgebraicGeometry.SpecFiniteProductFields
 import WeilConjectures.Mathlib.RingTheory.Etale.Field
 import Mathlib.AlgebraicGeometry.Morphisms.Etale
 import Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified
+import Sheaf.AlgebraicGeometry.UnramifiedMorphism
 
 /-!
 # Unramified schemes over a field as disjoint unions of finite separable spectra

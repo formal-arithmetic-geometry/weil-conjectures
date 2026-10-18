@@ -11,6 +11,11 @@ public import Sheaf.AlgebraicGeometry.ProEtaleFiniteModules
 public import Sheaf.Paper.ComparisonPullbackExact
 public import Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
 import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
+import Sheaf.Algebra.Homology.BoundedBelowInjectiveResolution
+import Sheaf.AlgebraicGeometry.ProEtaleSiteComparison
+import WeilConjectures.AlgebraicGeometry.DerivedCategories
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
+import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
 
 set_option autoImplicit false
 

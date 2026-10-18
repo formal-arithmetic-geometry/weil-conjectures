@@ -15,6 +15,7 @@ public import Sheaf.CategoryTheory.InvertibleFactorHomCancellation
 public import Sheaf.Algebra.Homology.RingedDerivedClosedSymmetricMonoidal
 import Sheaf.Algebra.Homology.KFlatTelescopeClosure
 import Mathlib.CategoryTheory.Monoidal.Closed.Basic
+import WeilConjectures.SixFunctors.Etale.Derived.Tensor
 
 /-! # Transport of evaluation biduality across an invertible twist
 

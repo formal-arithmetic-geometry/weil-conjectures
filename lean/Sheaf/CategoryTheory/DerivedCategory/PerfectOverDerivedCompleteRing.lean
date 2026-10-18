@@ -7,6 +7,9 @@ module
 
 public import Sheaf.RingTheory.DerivedCompleteModuleComplex
 public import Sheaf.CategoryTheory.DerivedCategory.PerfectRingComplexGeneral
+import Sheaf.CategoryTheory.DerivedCategory.PerfectRingClassicalGenerator
+import Sheaf.RingTheory.DerivedCompleteProductsTriangles
+import Sheaf.RingTheory.ModuleLocalizationTowerVanishing
 
 /-!
 # Perfect complexes over a derived-complete ring

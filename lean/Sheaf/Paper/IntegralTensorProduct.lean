@@ -46,6 +46,8 @@ import Sheaf.AlgebraicGeometry.ConstructibleProEtaleComparison
 import WeilConjectures.ConstructibleSheaf.Pullback
 import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
+import Sheaf.Paper.CartesianCoefficients
+import Sheaf.Paper.IntegralTensorPullback
 
 /-!
 # The ordinary integral derived tensor product

@@ -20,6 +20,9 @@ import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 import Mathlib.AlgebraicGeometry.Noetherian
 import Mathlib.Topology.Constructible
 import Mathlib.Topology.KrullDimension
+import Sheaf.Paper.AdicHeartIntrinsicFibres
+import Sheaf.Paper.QbarPerverseSupportCondition
+import Sheaf.Paper.SfCommonStageWeilCohomology
 
 /-! # Smooth pullback cohomology and support dimension
 

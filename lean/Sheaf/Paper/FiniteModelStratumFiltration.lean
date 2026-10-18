@@ -19,6 +19,10 @@ import Sheaf.AlgebraicGeometry.ProEtaleRingedOpenClosed
 import Sheaf.CategoryTheory.InternalAbelianSheafModuleEquivalence
 import Sheaf.AlgebraicGeometry.ProEtaleToposFunctorialityInverseImage
 import Mathlib.CategoryTheory.Adjunction.CompositionIso
+import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Monoidal
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Defs
 
 /-!
 # Finite open filtrations with finite constant models on reduced strata

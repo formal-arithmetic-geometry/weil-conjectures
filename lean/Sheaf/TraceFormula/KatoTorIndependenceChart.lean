@@ -8,6 +8,14 @@ public import Sheaf.AlgebraicGeometry.FineSaturatedLogBlowup
 public import Sheaf.AlgebraicGeometry.StrictHenselization
 public import Mathlib.CategoryTheory.Monoidal.Tor
 public import Mathlib.Algebra.MonoidAlgebra.Basic
+import Sheaf.AlgebraicGeometry.AffineStrictLocalRingComparison
+import Sheaf.AlgebraicGeometry.LogRegularCompletedChart
+import Sheaf.AlgebraicGeometry.LogRegularSharpChart
+import Sheaf.RingTheory.StrictHenselizationCompletionNoetherian
+import Sheaf.RingTheory.StrictHenselizationTriples
+import Sheaf.RingTheory.TorFlatBaseChange
+import WeilConjectures.RingTheory.AdicCompletionNoetherian
+import WeilConjectures.RingTheory.CohenRing
 
 /-!
 # Tor independence of monoid-ideal quotients in a log regular chart

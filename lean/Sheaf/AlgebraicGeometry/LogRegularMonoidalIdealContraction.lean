@@ -7,6 +7,8 @@ module
 public import Sheaf.AlgebraicGeometry.FineSaturatedLogBlowup
 public import Sheaf.AlgebraicGeometry.StrictHenselization
 import Mathlib.RingTheory.FiniteType
+import Sheaf.AlgebraicGeometry.LogRegularSharpChart
+import Sheaf.TraceFormula.KatoTorIndependenceChart
 
 /-!
 # Contraction of monoidal ideals in a log regular sharp chart

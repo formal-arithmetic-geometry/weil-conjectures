@@ -37,6 +37,21 @@ import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperLowerStar
 import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
+import Sheaf.AlgebraicGeometry.CoefficientBoundedConstructibleProEtale
+import Sheaf.AlgebraicGeometry.ConstructibleProEtaleComparison
+import Sheaf.AlgebraicGeometry.ProEtalePointPullback
+import Sheaf.CategoryTheory.RightDerivedFunctorOfQuasiIsoResolutions
+import Sheaf.Paper.CompletedCondensedCoefficients
+import Sheaf.Paper.CompletedDirectImageLimits
+import Sheaf.Paper.CondensedConstantConstructibility
+import Sheaf.Paper.CondensedModuleDerivedPushpull
+import Sheaf.Paper.IntegralLfpConstantModelComparison
+import Sheaf.Paper.IntegralStratifiedPerfectCharacterization
+import Sheaf.Paper.PerfectProjectionFormula
+import Sheaf.Paper.ProjectionMateExact
+import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
+import Sheaf.Paper.SfIntegralConstructible
+import Sheaf.Paper.SfIntegralDirectImageConstructible
 
 /-!
 

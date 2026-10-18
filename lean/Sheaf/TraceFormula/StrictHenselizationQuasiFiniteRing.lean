@@ -21,6 +21,8 @@ import WeilConjectures.Mathlib.RingTheory.Henselian
 import Sheaf.RingTheory.IndPrincipalZariski
 import Mathlib.FieldTheory.IsSepClosed
 import Mathlib.RingTheory.Etale.Basic
+import Sheaf.AlgebraicGeometry.StrictHenselization
+import Sheaf.RingTheory.IndEtaleUniverseTransport
 
 /-!
 # Strict henselization under a quasi-finite ring map

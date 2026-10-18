@@ -27,6 +27,10 @@ import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
 import Sheaf.AlgebraicGeometry.EtaleLocalNormalForm
 
 import Mathlib.AlgebraicGeometry.Morphisms.Smooth
+import Sheaf.Paper.CanonicalOriginCompactSupportComposition
+import Sheaf.Paper.CohomologicalSmoothnessTheorem
+import Sheaf.Paper.IntegralFinitePullbackComposition
+import Sheaf.SecSmoothPurity.FiniteEtaleDualizingNormalization
 /-!
 # Pasting the orientation-free diagonal section comparison
 

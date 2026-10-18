@@ -35,6 +35,7 @@ import Mathlib.RingTheory.RingHom.Flat
 import Mathlib.Algebra.Module.FinitePresentation
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.Generators
 import Mathlib.RingTheory.Unramified.LocalRing
+import Sheaf.TraceFormula.ElementaryDevissageFlatness
 
 /-!
 # Finite-type flatness gives a finitely presented étale neighbourhood

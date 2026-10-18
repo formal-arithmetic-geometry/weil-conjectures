@@ -9,6 +9,9 @@ public import Mathlib.AlgebraicGeometry.Fiber
 public import Mathlib.AlgebraicGeometry.Limits
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.FieldTheory.Separable
+import Sheaf.AlgebraicGeometry.UnramifiedFieldFibreDecomposition
+import Sheaf.AlgebraicGeometry.UnramifiedMorphism
+import WeilConjectures.AlgebraicGeometry.Morphisms.UnramifiedBaseChangeOpen
 
 /-!
 # Unramifiedness from ordinary fibre decompositions

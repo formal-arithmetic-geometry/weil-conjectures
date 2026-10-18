@@ -22,6 +22,8 @@ import Sheaf.RingTheory.DepthQuotientNonzerodivisor
 import Sheaf.Topology.PresheafModuleStalkFunctor
 
 import Mathlib.Algebra.Category.ModuleCat.Stalk
+import Sheaf.AlgebraicGeometry.ParameterChartGermCriterion
+import WeilConjectures.Topology.PresheafModuleStalkFunctor
 /-!
 # Single-coordinate chains between flat quasi-finite charts
 

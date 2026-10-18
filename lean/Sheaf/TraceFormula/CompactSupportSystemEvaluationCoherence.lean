@@ -4,6 +4,12 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 module
 
 public import Sheaf.TraceFormula.CompactSupportSystemEvaluationDiagram
+import Sheaf.AlgebraicGeometry.ProEtaleConstantRingMap
+import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
+import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
+import Sheaf.CategoryTheory.LocalizedModuleExactForSystems
+import Sheaf.Paper.CoefficientRingedSequenceSite
+import Sheaf.Paper.SemilinearDerivedSections
 
 /-! # Compact-support system evaluation coherence
 

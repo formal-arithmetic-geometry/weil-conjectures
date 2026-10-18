@@ -7,6 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.ProEtaleIntrinsicFiniteOperations
 public import Sheaf.AlgebraicGeometry.ProEtaleOperationsCanonicalAdjunction
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
+import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
 
 /-!
 # Ordinary pro-etale operations with arbitrary constant coefficients

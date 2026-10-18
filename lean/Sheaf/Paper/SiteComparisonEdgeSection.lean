@@ -15,6 +15,12 @@ public import Sheaf.CategoryTheory.HypercohomologyLeftEdge
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.GlobalSections
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.GlobalSections
+import Sheaf.AlgebraicGeometry.ProEtaleConstantRingOperations
+import Sheaf.AlgebraicGeometry.SupportComparisonPullbackCoherence
+import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
+import Sheaf.Paper.SfCommonStageWeilCohomology
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import WeilConjectures.SixFunctors.ProEtale.Comparison.CohomologicalDimension
 -- Terminal comparison comes from the normalized finite-coefficient public import.
 -- The full proof-only operations and CohomologicalDimension imports bring duplicate Iso modules.
 

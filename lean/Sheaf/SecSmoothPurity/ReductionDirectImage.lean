@@ -36,6 +36,8 @@ import Sheaf.AlgebraicGeometry.EtaleModuleEnoughInjectives
 import Sheaf.AlgebraicGeometry.FiniteConstantProjectionFormula
 import Sheaf.AlgebraicGeometry.ProEtaleRingSheafChangeAdjunction
 import Sheaf.Paper.SpDirectImageEtaleMate
+import Sheaf.Paper.DirectImageChangeRingTranspose
+import Sheaf.Paper.FiniteLocalizingExceptionalPreservation
 
 /-!
 # Compact support and finite coefficient extension

@@ -19,6 +19,9 @@ import Sheaf.Algebra.Category.ModuleCat.Sheaf.ScalarExtensionRingIso
 import Sheaf.Paper.EtaleDerivedScalarTensor
 import Sheaf.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
 import Sheaf.CategoryTheory.RingedSiteModules
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
+import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
+import Sheaf.Paper.IntegralReductionTowerWellDefinedUnrestricted
 
 /-! # Isomorphism inverse image of completed coefficient reduction towers
 

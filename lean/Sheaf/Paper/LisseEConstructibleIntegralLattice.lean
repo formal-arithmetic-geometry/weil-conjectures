@@ -45,6 +45,17 @@ import Mathlib.Algebra.Homology.DerivedCategory.KInjective
 import Mathlib.AlgebraicGeometry.Cover.QuasiCompact
 import Mathlib.Topology.NoetherianSpace
 import Mathlib.AlgebraicGeometry.Properties
+import Sheaf.Algebra.Homology.ComplexColimitHomotopyColimit
+import Sheaf.Algebra.Homology.DerivedInternalHomShiftRight
+import Sheaf.Algebra.Homology.RhomGlobalSectionsOfUniverses
+import Sheaf.AlgebraicGeometry.ContinuousCoefficientImmersionRestriction
+import Sheaf.CategoryTheory.DerivedCountableSumsExact
+import Sheaf.CategoryTheory.SequenceRelativeHomTelescope
+import Sheaf.Paper.AdicGlobalDerivedHom
+import Sheaf.Paper.ContinuousFiniteEtaleLatticeDescent
+import Sheaf.Paper.IntegralConstructibleBoundedBelowCompactness
+import Sheaf.Paper.IntegralStratifiedPerfectCharacterization
+import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 
 /-!
 # A lisse finite-extension sheaf has a constructible integral lattice

@@ -7,6 +7,12 @@ public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
 public import Mathlib.AlgebraicGeometry.OpenImmersion
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.Topology.Sober
+import Sheaf.AlgebraicGeometry.ComponentwiseNormalizationAffineCharts
+import Sheaf.AlgebraicGeometry.ExcellentSchemeAffineCover
+import Sheaf.RingTheory.IsExcellentFiniteTypeLocalization
+import Sheaf.RingTheory.JapaneseDomain
+import Sheaf.RingTheory.NagataRing
+import Sheaf.RingTheory.QuasiExcellentNagata
 
 /-!
 # Finite normalization over a dense open of an excellent scheme

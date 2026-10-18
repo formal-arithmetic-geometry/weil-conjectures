@@ -33,6 +33,7 @@ import Sheaf.AlgebraicGeometry.FrobeniusFactorization
 import Sheaf.SixFunctors.SelectedSchemeGaloisComparison
 import Sheaf.AlgebraicGeometry.FrobeniusTrivializationPullback
 import Sheaf.AlgebraicGeometry.FrobeniusStalkTrivializationNormalization
+import Sheaf.Paper.CompactSupportPerfectness
 
 /-!
 # Local Frobenius conjugacy along the normalized orbit

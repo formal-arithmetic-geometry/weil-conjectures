@@ -13,6 +13,10 @@ import Sheaf.Paper.CompactificationLocalizing
 import Sheaf.Paper.FiniteLocalizingExceptionalPreservation
 import Sheaf.Paper.RationalExceptionalRestriction
 import WeilConjectures.Compactification.Dense
+import Sheaf.Paper.CompactificationCoherenceCocycle
+import Sheaf.Paper.LocalizingClosureCtfEqualsBc
+import Sheaf.SixFunctors.IntegralBrownAdjoint
+import Sheaf.SixFunctors.IntegralExceptionalRestriction
 
 /-!
 # Existence of the exceptional inverse image

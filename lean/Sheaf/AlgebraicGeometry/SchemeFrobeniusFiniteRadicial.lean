@@ -10,6 +10,9 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.UniversallyInjective
 import Sheaf.AlgebraicGeometry.RelativeFrobeniusIntegralUniversalHomeomorphism
 import Mathlib.FieldTheory.Finite.Basic
+import Sheaf.AlgebraicGeometry.RelativeFrobeniusFinite
+import WeilConjectures.AlgebraicGeometry.AbsoluteFrobenius
+import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
 
 /-!
 # Finiteness and radiciality of the scalar-extended scheme Frobenius

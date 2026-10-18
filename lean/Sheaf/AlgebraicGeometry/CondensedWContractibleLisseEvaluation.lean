@@ -29,6 +29,10 @@ import Sheaf.Paper.CondensedPointBasisEvaluation
 import Sheaf.AlgebraicGeometry.ProEtale.WContractibleClopenPartition
 import Sheaf.Paper.KFlatRingedToposPullback
 import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
+import Sheaf.CategoryTheory.CommutativeSiteDerivedConstantModuleFunctor
+import Sheaf.CategoryTheory.Sites.ContractibleDerivedSectionsTensor
+import Sheaf.CategoryTheory.Sites.GeometricInverseImageExact
+import Sheaf.Paper.ConstantRealizationDerivedScalarExtension
 
 /-! # Evaluation and connected components of lisse condensed sheaves
 

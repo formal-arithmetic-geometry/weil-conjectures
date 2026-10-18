@@ -7,6 +7,16 @@ module
 
 public import Sheaf.Paper.ProEtaleCanonicalTensorPullback
 public import Sheaf.Paper.RingedTopoiCanonicalTensorComparisonOfUniverses
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
+import Sheaf.Algebra.Homology.KFlat
+import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
+import Sheaf.Algebra.Homology.KFlatTelescopeClosure
+import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
+import Sheaf.CategoryTheory.ModulePullbackPushforwardAdjunction
+import Sheaf.Paper.KFlatRingedToposPullback
+import Sheaf.Paper.RingedTopoiDerivedPullback
+import Sheaf.Paper.RingedTopoiTensorComparisonConstruction
 
 /-!
 # Canonical tensor pullback with independent site universes

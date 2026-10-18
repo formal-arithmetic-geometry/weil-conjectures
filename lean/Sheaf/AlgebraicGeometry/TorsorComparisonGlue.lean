@@ -13,6 +13,10 @@ import Sheaf.Paper.SliceSiteLocalization
 import Sheaf.AlgebraicGeometry.ProEtaleClassicalSheavesUnit
 import Sheaf.CategoryTheory.PeSiteSheafGluing
 import Sheaf.CategoryTheory.SiteCoveringAxioms
+import Sheaf.AlgebraicGeometry.ProEtaleClassicalSheavesImage
+import Sheaf.AlgebraicGeometry.ProEtaleSiteComparison
+import Sheaf.AlgebraicGeometry.ProEtaleTorsorComparisonAffine
+import Sheaf.CategoryTheory.Sites.ConstructibleTorsor
 
 /-! # Gluing the etale models of a torsor
 

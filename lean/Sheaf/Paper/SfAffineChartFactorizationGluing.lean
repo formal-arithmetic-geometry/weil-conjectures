@@ -18,6 +18,10 @@ import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 import Sheaf.AlgebraicGeometry.ConstructibleEtaleModuleQcqsAffineLocal
 import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Comparison
+import Sheaf.AlgebraicGeometry.BoundedConstructibleComplexes
+import Sheaf.AlgebraicGeometry.EtaleTorAmplitude
+import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
+import WeilConjectures.AlgebraicGeometry.DerivedCategories
 
 /-!
 # Finite affine factorizations and gluing of intervals

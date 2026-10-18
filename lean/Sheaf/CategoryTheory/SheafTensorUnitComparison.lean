@@ -6,6 +6,7 @@ Authors: SHEAF group NG
 module
 
 public import Sheaf.CategoryTheory.SheafificationTensorLocalIso
+import Sheaf.CategoryTheory.PresheafTensorInternalHom
 
 /-! # Sheaf tensor unit comparison identities
 

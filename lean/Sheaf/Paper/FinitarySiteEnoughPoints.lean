@@ -9,6 +9,9 @@ public import Sheaf.CategoryTheory.SiteCoveringAxioms
 public import Sheaf.CategoryTheory.Sites.GeometricMorphism
 public import Mathlib.CategoryTheory.Sites.Sheaf
 public import Mathlib.CategoryTheory.Limits.Shapes.FiniteLimits
+import Sheaf.CategoryTheory.PointSystemRefineAll
+import Sheaf.CategoryTheory.Sites.PointFamilyConservative
+import Sheaf.TraceFormula.InverseSystemSitePoint
 
 /-!
 # Finite-cover sites with finite limits have enough points

@@ -9,6 +9,7 @@ public import Sheaf.CategoryTheory.Filtration
 public import Mathlib.CategoryTheory.Preadditive.Injective.Basic
 public import Mathlib.Data.Int.Interval
 import Mathlib.Algebra.Homology.ShortComplex.ShortExact
+import WeilConjectures.CategoryTheory.Abelian.Filtration
 
 /-!
 # Compatible splitting of a filtration with injective graded pieces

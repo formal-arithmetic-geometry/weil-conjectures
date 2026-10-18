@@ -15,6 +15,13 @@ import Sheaf.CategoryTheory.RightDerivedUniversalDeltaFunctor
 import Mathlib.CategoryTheory.Abelian.RightDerived
 import WeilConjectures.CategoryTheory.DeltaFunctor
 import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatCoproduct
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorClosed
+import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorBilinearUniversal
+import WeilConjectures.AlgebraicGeometry.Sites.Kummer
+import WeilConjectures.CategoryTheory.RightDerivedUniversalDeltaFunctor
 
 /-!
 # Finite free change of Kummer coefficients

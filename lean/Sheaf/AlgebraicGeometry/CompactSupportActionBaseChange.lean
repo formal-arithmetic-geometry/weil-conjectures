@@ -17,6 +17,7 @@ import Sheaf.AlgebraicGeometry.CompactifiableOverField
 import Sheaf.AlgebraicGeometry.DerivedCategories
 import Mathlib.AlgebraicGeometry.Morphisms.Separated
 import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
+import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 
 /-!
 # Compact-support actions and arbitrary base change

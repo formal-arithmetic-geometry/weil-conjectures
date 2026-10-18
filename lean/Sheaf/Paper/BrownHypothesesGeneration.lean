@@ -15,6 +15,10 @@ import Sheaf.SixFunctors.FiniteCompactProetale
 import Sheaf.Paper.FiniteCoefficientDescentTwoColimit
 import Mathlib.AlgebraicGeometry.Morphisms.Affine
 import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
+import Sheaf.Paper.AmbientIndDerivedSums
+import Sheaf.Paper.ConstructibleCompactness
+import Sheaf.Paper.IntegralConstructibleCompactness
+import Sheaf.Paper.LocalizingClosureCtfEqualsBc
 
 /-!
 # A small skeleton of constructible finite-Tor complexes generates its localizing closure

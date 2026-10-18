@@ -16,6 +16,7 @@ import Mathlib.RingTheory.Ideal.IdempotentFG
 import Mathlib.RingTheory.Localization.Away.Basic
 import Mathlib.AlgebraicGeometry.OpenImmersion
 import Sheaf.RingTheory.IndEtaleStability
+import Sheaf.RingTheory.IndEtaleUniverseTransport
 
 /-!
 # The quotient onto a component ring is ind-étale

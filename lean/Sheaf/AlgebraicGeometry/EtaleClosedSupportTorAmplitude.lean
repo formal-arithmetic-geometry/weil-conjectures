@@ -33,6 +33,10 @@ import Mathlib.CategoryTheory.Sites.Point.Basic
 import Mathlib.CategoryTheory.Sites.Point.Skyscraper
 import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 import Mathlib.CategoryTheory.Triangulated.Pretriangulated
+import Sheaf.AlgebraicGeometry.EtaleClosedSupportTriangle
+import Sheaf.AlgebraicGeometry.ExceptionalConstantTensor
+import Sheaf.AlgebraicGeometry.ResidueTorAmplitudeTest
+import WeilConjectures.AlgebraicGeometry.ConstantEtaleSheafShortExact
 
 /-!
 # Finite Tor amplitude for closed support

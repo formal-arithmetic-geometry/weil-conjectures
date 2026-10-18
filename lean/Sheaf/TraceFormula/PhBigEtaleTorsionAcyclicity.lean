@@ -11,6 +11,8 @@ public import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 public import Sheaf.AlgebraicGeometry.PhSchemeSite
 public import Sheaf.CategoryTheory.Sites.GeometricMorphism
 public import Sheaf.TraceFormula.BigSmallEtaleExactRetraction
+import Sheaf.TraceFormula.PhEtaleComparisonHypotheses
+import Sheaf.TraceFormula.RefinedTopologyComparisonVanishing
 
 /-!
 # Torsion étale-origin sheaves are ph-to-big-étale acyclic

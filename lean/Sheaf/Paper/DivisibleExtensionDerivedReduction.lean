@@ -28,6 +28,7 @@ import Sheaf.CategoryTheory.ModulePullbackPushforwardAdjunction
 import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 import Mathlib.Algebra.Homology.DerivedCategory.FullyFaithful
 import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
+import Sheaf.CategoryTheory.RingedSiteModules
 
 /-!
 # Derived reduction of an extension by a divisible sheaf

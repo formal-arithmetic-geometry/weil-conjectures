@@ -10,6 +10,8 @@ public import Sheaf.RingTheory.Depth
 public import Mathlib.RingTheory.KrullDimension.Basic
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Mathlib.RingTheory.Noetherian.Defs
+import Sheaf.RingTheory.MaximalChainLengthOfDepth
+import Sheaf.RingTheory.PolynomialAlgebraCohenMacaulay
 
 /-!
 # Noetherian Cohen–Macaulay rings are universally catenary

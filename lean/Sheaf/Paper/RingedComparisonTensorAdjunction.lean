@@ -8,6 +8,7 @@ public import Sheaf.Paper.RingedTensorSquarePresentation
 public import Sheaf.CategoryTheory.RingedToposDerivedPushforwardComposition
 public import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
 public import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
+import Sheaf.SixFunctors.RingedDerivedMonoidalComparisons
 
 /-!
 # Tensor and adjunction compatibility of canonical ringed-topos path comparisons

@@ -8,6 +8,7 @@ module
 public import Sheaf.Algebra.Homology.DerivedInternalHom
 public import Sheaf.Algebra.Homology.KFlatTensorQuasiIso
 public import Mathlib.Algebra.Homology.HomotopyCategory.KProjective
+import Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses
 
 /-!
 # Derived Hom from a bounded-above projective complex

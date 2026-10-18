@@ -31,6 +31,8 @@ import Mathlib.RingTheory.AdicCompletion.Completeness
 import Mathlib.RingTheory.AdicCompletion.Basic
 import Mathlib.RingTheory.TensorProduct.Maps
 import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
+import Sheaf.RingTheory.IndEtaleUniverseTransport
+import WeilConjectures.RingTheory.AdicCompletionNoetherian
 
 /-!
 # G-rings ascend along weakly etale homomorphisms

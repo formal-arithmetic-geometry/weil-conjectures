@@ -16,6 +16,11 @@ import WeilConjectures.CategoryTheory.TruncationTriangle
 import Sheaf.CategoryTheory.RingedDerivedRestrictionGeneral
 import Mathlib.LinearAlgebra.FreeModule.PID
 import Mathlib.Algebra.Module.FinitePresentation
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
+import Sheaf.AlgebraicGeometry.ProEtaleImmersionLimitPreservation
+import Sheaf.AlgebraicGeometry.ProEtaleIntegralCoefficientLimit
+import Sheaf.Paper.CondensedConstantConstructibility
+import Sheaf.Paper.ConstantModuleSectionProperties
 
 /-!
 # The integral cohomological adic criterion

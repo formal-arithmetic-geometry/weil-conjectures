@@ -67,6 +67,14 @@ import Mathlib.AlgebraicGeometry.Morphisms.Immersion
 import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 import Mathlib.CategoryTheory.Adjunction.Mates
 import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
+import Sheaf.AlgebraicGeometry.EtaleDerivedTensorSymmetry
+import Sheaf.AlgebraicGeometry.OrdinaryFiniteP1Adjunction
+import Sheaf.AlgebraicGeometry.ProperProjectionFormula
+import Sheaf.AlgebraicGeometry.UnboundedEtaleCompactSupportComparisons
+import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
+import WeilConjectures.AlgebraicGeometry.EtaleLowerShriekBaseChangeMap
+import WeilConjectures.SixFunctors.Etale.Derived.OpenImmersionLowerShriekProjection
 
 /-! # Arbitrary base change for smooth ambient duality
 

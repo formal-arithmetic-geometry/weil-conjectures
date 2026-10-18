@@ -15,6 +15,7 @@ import Sheaf.CategoryTheory.DiscreteModulesAbelian
 import Sheaf.RepresentationTheory.ProcyclicTwoTerm
 import Mathlib.CategoryTheory.Preadditive.Injective.Resolution
 import Mathlib.CategoryTheory.Abelian.RightDerived
+import Sheaf.FieldTheory.HenselianDVRTameSequence
 
 /-!
 # Prime-to-characteristic local Galois cohomology

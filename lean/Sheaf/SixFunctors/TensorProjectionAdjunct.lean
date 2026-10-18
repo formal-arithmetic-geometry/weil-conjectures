@@ -8,6 +8,10 @@ module
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerStarProjection
 public import Sheaf.AlgebraicGeometry.EtaleDerivedTensorSymmetry
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
+import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
+import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
+import WeilConjectures.SixFunctors.Etale.Derived.Tensor
+import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Comparison
 
 /-!
 # Adjoint of a tensor-projected morphism
