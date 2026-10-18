@@ -14,11 +14,132 @@
   "sk-def-sfb-pulled-back-coefficients",
   "def-weil-sheaf-of-modules-category",
   "def-weil-abstract-derived-category",
-  "sk-def-pe-wlocal"
+  "sk-def-pe-wlocal",
+  "def-sfb-site-derived-constant-module-functor",
+  "def-pur-sheaf-tensor-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $B=\\Gamma(V,\\Lambda_T)$. The geometric w-contractibility in the hypothesis gives weak contractibility of the site object $V$ by [lem-weil-pbc-source-affine-wcontractible-evaluation]. Apply [lem-weil-pbc-condensed-point-basis-evaluation] with $X=T$, $U=V$ and $F=\\Lambda$: it gives $B\\cong\\Lambda(S)=\\Gamma(S,\\Lambda)$ as rings. This comparison is natural and respects the constant-section maps from $R=\\Lambda(*)$, since those maps are induced by the unique map $S\\to *$. Extremal disconnectedness of $S$ is already part of the stated meaning of w-contractibility [sk-def-pe-wlocal].",
+   "uses": [
+    "lem-weil-pbc-source-affine-wcontractible-evaluation",
+    "lem-weil-pbc-condensed-point-basis-evaluation",
+    "sk-def-pe-wlocal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Proposition 4.3(1), proof equation (4.2), and proof of (3); Bhatt–Scholze Lemma 2.4.8"
+   }
+  },
+  {
+   "text": "By [det-pe-wc-sections-exact], evaluation of $\\Lambda_T$-module sheaves at $V$ is exact; by [det-pe-wc-sections-derived] its termwise application to any unbounded complex computes $R\\Gamma(V,-)$. Explicitly exactness identifies $\\Gamma(V,\\ker d^n)$ and $\\Gamma(V,\\operatorname{im}d^{n-1})$ with the kernel and image of the section differential, hence $H^n\\Gamma(V,C)=\\Gamma(V,\\mathcal H^n C)$. A complex with cohomology sheaves zero above, or below, a given degree therefore has section cohomology zero in the same range. This proves t-exactness. Moreover [lem-weil-pbc-proetale-wcontractible-affine-evaluation-colimits] applies because $V$ is affine and weakly contractible by step 1; evaluation preserves all small colimits.",
+   "uses": [
+    "det-pe-wc-sections-exact",
+    "det-pe-wc-sections-derived",
+    "lem-weil-pbc-proetale-wcontractible-affine-evaluation-colimits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Lemma 4.1(1), proof: t-exactness and colimit preservation of sections on a w-contractible qcqs object"
+   }
+  },
+  {
+   "text": "For an ordinary $R$-module $M$ set $F(M)=\\Lambda_T\\otimes_{\\underline R}\\underline M$. Consider the global-sections geometric morphism $\\operatorname{Sh}(T_{\\mathrm{proet}})\\to\\mathrm{Set}$, whose inverse image is the constant-sheaf functor, with structural ring map $\\underline R\\to\\Lambda_T$. By [lem-weil-pbc-ringed-topoi-module-adjunction], $F$ is its module pullback, so is left adjoint to sections with scalars restricted to $R$. Thus $F$ preserves coproducts and cokernels: mapping out of $F(\\operatorname{colim}M_i)$ gives the compatible families of maps from $M_i$ to the right adjoint, which are exactly the maps out of $\\operatorname{colim}F(M_i)$. By step 2, $M\\mapsto\\Gamma(V,F(M))$ also preserves these colimits. The functor $M\\mapsto M\\otimes_R B$ does so by the balanced-tensor universal property. The natural balanced map\n$$\\theta_M:M\\otimes_R B\\longrightarrow\\Gamma(V,F(M)),\\qquad m\\otimes b\\longmapsto b(1\\otimes\\underline m),$$\nis $B$-linear, and $\\theta_R$ is the identity of $B$ under the unit identifications.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Remark 3.2, ordinary scalar-extension model; adjunction is Stacks Tag 03D7, sites-modules lemma-adjoint-pullback-pushforward-modules"
+   }
+  },
+  {
+   "text": "For every set $I$, $\\theta_{R^{(I)}}$ is the direct sum of copies of $\\theta_R$, so is an isomorphism. For any $M$ choose a free presentation $R^{(J)}\\to R^{(I)}\\to M\\to0$: take generators indexed by elements of $M$, and relations indexed by elements of the kernel of the resulting surjection. Apply both cokernel-preserving functors of step 3. Naturality of $\\theta$ identifies their presentation arrows, and the already established isomorphisms on the two free modules induce an isomorphism on their cokernels. Consequently $\\theta_M$ is an isomorphism for every $M$, without assuming $B$ flat over $R$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Equation (3.2) and Remark 3.2, degree-zero comparison expanded by free presentations"
+   }
+  },
+  {
+   "text": "Represent $Q\\in D(R)$ by a complex $A$. Apply [lem-pc-kflat-resolution] on the one-object point site with coefficient ring $R$ to choose a quasi-isomorphism $P\\to A$ with $P$ K-flat and with flat terms. Pullback along the global-sections geometric morphism with coefficient ring $\\underline R$ sends $P$ to $\\underline P$, which is K-flat with flat terms by [lem-weil-pbc-ringed-pullback-preserves-kflat]. By [def-sfb-site-derived-constant-module-functor], the constant-module functor is exact and its termwise application induces $\\underline{(-)}$ on unbounded derived categories; thus $\\underline P\\to\\underline A$ is a quasi-isomorphism representing $\\underline Q$. Apply [lem-pur-derived-change-of-rings] to $\\underline R\\to\\Lambda_T$. The complex $C=\\Lambda_T\\otimes_{\\underline R}\\underline P$, with differential $1\\otimes d_P$, represents $L_T(Q)$. Apply the same change-of-rings result on the point site to $R\\to B$: $P\\otimes_R B$ represents $Q\\otimes_R^L B$.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-ringed-pullback-preserves-kflat",
+    "def-sfb-site-derived-constant-module-functor",
+    "lem-pur-derived-change-of-rings"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS (lemma-K-flat-resolution), 0G7E (lemma-pullback-K-flat), 06YT and 06YY (derived change of rings); HRS Remark 3.2"
+   }
+  },
+  {
+   "text": "By [det-pe-wc-sections-derived], $R\\Gamma(V,L_T(Q))$ is represented by the section complex $C(V)$. Apply $\\theta_{P^n}$ from step 4 in each degree. Naturality for $d_P^n:P^n\\to P^{n+1}$ gives a chain isomorphism $P\\otimes_R B\\xrightarrow{\\sim}C(V)$. Step 5 identifies its source with $Q\\otimes_R^L B$. Invert this chain isomorphism and use the ring comparison of step 1. This gives\n$$R\\Gamma(V,L_T(Q))\\cong Q\\otimes_R^L\\Gamma(S,\\Lambda).$$\nNo interchange of an infinite totalization with sections, and no boundedness or flatness assumption on $B$, is used.",
+   "uses": [
+    "det-pe-wc-sections-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Equation (3.2) and Remark 3.2, computed on unbounded K-flat representatives"
+   }
+  },
+  {
+   "text": "The chain maps $\\theta_{P^n}$ commute with every chain map $P\\to P'$ by their displayed pure-tensor formula. The resolution comparisons for scalar extension are compatible with quasi-isomorphisms and composition by [lem-pur-derived-change-of-rings]. The K-flat, flat-term representatives localized at quasi-isomorphisms are all of $D(R)$ by [lem-weil-pbc-site-derived-tensor-descent], applied to the point site. Therefore the chain comparison descends to a natural isomorphism for every morphism of $D(R)$, not just chain maps in one selected resolution. The coefficient ring comparison is natural by step 1.",
+   "uses": [
+    "lem-pur-derived-change-of-rings",
+    "lem-weil-pbc-site-derived-tensor-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YT, 06YY and 06YS; localization of K-flat representatives, as in the construction of derived tensor; HRS equations (3.1)–(3.2)"
+   }
+  },
+  {
+   "text": "Finally [lem-weil-proetale-weakly-etale-localization] identifies $V_{\\mathrm{proet}}$ with the slice $T_{\\mathrm{proet}}/V$. The exact restriction of [def-weil-pbc-ringed-derived-restriction] evaluates a complex on an object $W\\to V$ by its original value on $W\\to T$; at the terminal object $V\\to V$ its section complex is precisely $C(V)$. The pulled-back coefficient sheaf restricts to $\\Lambda_V$ by functoriality of inverse image in [def-sfb-alpha-bundled]. Thus the sections in steps 2 and 6 are exactly $R\\Gamma(V,L_T(Q)|_V)$ with coefficient ring $\\Gamma(V,\\Lambda_V)$. Steps 1, 2 and 6–7 prove every asserted comparison and t-exactness. None used t-admissibility.",
+   "uses": [
+    "lem-weil-proetale-weakly-etale-localization",
+    "def-weil-pbc-ringed-derived-restriction",
+    "def-sfb-alpha-bundled"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Section 3, functoriality of coefficient pullback and equation (3.2); Lemma 4.1(1); Stacks localized ringed-site restriction"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-source-affine-wcontractible-evaluation",
+  "lem-weil-pbc-condensed-point-basis-evaluation",
+  "sk-def-pe-wlocal",
+  "det-pe-wc-sections-exact",
+  "det-pe-wc-sections-derived",
+  "lem-weil-pbc-proetale-wcontractible-affine-evaluation-colimits",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "def-pur-sheaf-tensor-product",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-ringed-pullback-preserves-kflat",
+  "def-sfb-site-derived-constant-module-functor",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-weil-proetale-weakly-etale-localization",
+  "def-weil-pbc-ringed-derived-restriction",
+  "def-sfb-alpha-bundled"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Section 3, equations (3.1)–(3.2), Remark 3.2, Lemma 4.1(1) and Proposition 4.3; the module-presentation and K-flat computations are expanded with Stacks Tags 03D7, 06YS, 0G7E, 06YT and 06YY."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -54,10 +175,45 @@
    "results": "No hits",
    "date": "2026-10-18",
    "verdict": "no match: the hits do not state the condensed-coefficient local-model or evaluation theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "wContractible|WContractible|weaklyContractible|WeaklyContractible",
+   "results": "No hits",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned facts do not state pro-etale w-contractible condensed-coefficient evaluation"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived global sections on weakly contractible affines commute with scalar extension from discrete modules",
+   "results": "AlgebraicGeometry.AffineScheme.Γ; CommRingCat.moduleCatExtendScalarsPseudofunctor; AlgebraicGeometry.preservesLimit_rightOp_Γ; AlgebraicGeometry.AffineScheme.Γ_preservesLimits; ModuleCat.extendRestrictScalarsAdj; PresheafOfModules.Sheafify.map_smul_eq; AlgebraicGeometry.preservesColimit_Γ; LinearEquiv.extendScalarsOfIsLocalizationEquiv",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned facts do not state pro-etale w-contractible condensed-coefficient evaluation"
+  },
+  {
+   "tool": "loogle",
+   "query": "CondensedMod, SheafOfModules",
+   "results": "No hits",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned facts do not state pro-etale w-contractible condensed-coefficient evaluation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived sections of scalar extension of a complex of discrete modules on a weakly contractible affine scheme equal derived tensor with condensed coefficient sections",
+   "results": "LightCondensed.instMonoidalClosedLightCondMod; instAbelianCondensedMod; LightCondensed.internallyProjective_iff_tensor_condition'; LightCondensed.internallyProjective_iff_tensor_condition; LightCondensed.free_internallyProjective_iff_tensor_condition; LightCondensed.free_internallyProjective_iff_tensor_condition'; LightCondensed.instMonoidalCategoryLightCondMod; LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned facts do not state pro-etale w-contractible condensed-coefficient evaluation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The sections functor at a quasi compact projective object of a ringed site takes constant scalar extension to tensor product with sections of the ring",
+   "results": "LightCondensed.free_internallyProjective_iff_tensor_condition; LightCondensed.free_internallyProjective_iff_tensor_condition'; LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition; LightCondensed.internallyProjective_iff_tensor_condition; LightCondensed.internallyProjective_iff_tensor_condition'; LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition'; LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat; LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned facts do not state pro-etale w-contractible condensed-coefficient evaluation"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-zl-t-admissible-dualizable-truncations",
@@ -77,5 +233,74 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-zl-wcontractible-condensed-scalar-evaluation",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged. Proved coefficient evaluation using the existing profinite-point basis comparison, t-exactness from exact unbounded sections, and scalar evaluation by a natural free-presentation comparison followed by K-flat representatives. Reused all needed DAG statements and definitions, creating no nodes. No exact project declaration or Mathlib match was found.",
+  "blueprint": "The nearest ancestor prop-zl-smooth-proper-relative-purity, field-stage projection-formula paragraph (current split step 4; inherited provenance calls it Step 3), uses the continuous-coefficient lisse criterion through lem-zl-adic-hom-tensor-lisse-criterion and lem-zl-t-admissible-dualizable-truncations. Steps 1–2 supply coefficient evaluation and exact sections; steps 3–8 supply the ordinary-derived scalar-extension computation used in that truncation argument. No replacement of the unit-level duality route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-condensed-point-basis-evaluation",
+    "why": "The existing component-space evaluation for pulled-back sheaves supplies the coefficient ring identification; it is a general coefficient-sheaf tool, not a geometric purity or weight argument. The unit has no substitute for this foundational interface."
+   },
+   {
+    "node": "det-pe-wc-sections-exact",
+    "why": "Generic exactness of evaluation at a w-contractible affine, for arbitrary sheaves of rings. The unit has no substitute for this foundational interface."
+   },
+   {
+    "node": "det-pe-wc-sections-derived",
+    "why": "Generic unbounded derived evaluation at such an affine, supplying termwise section models. The unit has no substitute for this foundational interface."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-wcontractible-affine-evaluation-colimits",
+    "why": "Generic colimit-preserving affine evaluation is needed for free module presentations, not a new proper-base-change argument. The unit has no substitute for this foundational interface."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "why": "Generic tensor-formula module pullback adjunction supplies preservation of coproducts and cokernels. The unit has no substitute for this foundational interface."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic existence of unbounded K-flat flat-term resolutions, applied to the ordinary ring R on the terminal point site. The unit has no substitute for this foundational interface."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-pullback-preserves-kflat",
+    "why": "Generic ringed-topos pullback preserves K-flat flat-term complexes, applied only to the constant-sheaf geometric morphism. The unit has no substitute for this foundational interface."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Generic unbounded change of rings on a site computes ordinary derived scalar extension from K-flat representatives; no geometric purity theorem is used. The unit has no substitute for this foundational interface."
+   },
+   {
+    "node": "lem-weil-pbc-site-derived-tensor-descent",
+    "why": "Generic localization of K-flat flat-term complexes supplies independence and naturality on D(R). The unit has no substitute for this foundational interface."
+   },
+   {
+    "node": "lem-weil-proetale-weakly-etale-localization",
+    "why": "Generic identification of the site over a pro-etale object with its slice identifies the section complexes on T and V. The unit has no substitute for this foundational interface."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-condensed-point-basis-evaluation",
+  "det-pe-wc-sections-exact",
+  "det-pe-wc-sections-derived",
+  "lem-weil-pbc-proetale-wcontractible-affine-evaluation-colimits",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-ringed-pullback-preserves-kflat",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-weil-proetale-weakly-etale-localization"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-Codex-Q23-4aa25e585",
+  "group": "Q23",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q23-4aa25e585 (reviewer sub-agent of L); spot-checked: Read the full item, cited statements, route, and mathematical sources. All eight steps support arbitrary unbounded complexes without flatness or t-admissibility; no repairs or new nodes needed. review.md records checks and the unavailable external pivot-history audit."
  }
 }

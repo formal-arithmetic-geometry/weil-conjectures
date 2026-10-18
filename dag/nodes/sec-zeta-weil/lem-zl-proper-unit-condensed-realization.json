@@ -28,9 +28,184 @@
   "lem-pur-compact-support-condensed-realization",
   "lem-zl-condensed-point-supertrace"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Check the geometric domains first. Finite type over the field $k$ implies locally Noetherian by [pqf-lem-locnoeth-lft], and separated finite type over the affine point implies qcqs by [lem-weil-pbc-qcqs-over-affine]. Thus the schemes are Noetherian. Their dimensions are finite by [lem-kun-dimension-finite-type]. The compactification is finite type over $k$ because its proper part is finite type. Since $\\ell\\ne p$, $\\ell$ is a unit in $k$ and in all the local rings. Properness of $h$ supplies separatedness and finite type. The same checks apply to all schemes in a compatible compactification tower. For an empty scheme use dimension bound zero. These are the hypotheses needed below; $h$ need not be invertible or a Frobenius.",
+   "uses": [
+    "pqf-lem-locnoeth-lft",
+    "lem-weil-pbc-qcqs-over-affine",
+    "lem-kun-dimension-finite-type",
+    "def-weil-proper-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "6.7.6–6.7.7 and 6.8.15, geometric hypotheses; agent assembly of the cited interfaces, not a verbatim assertion of Bhatt–Scholze"
+   }
+  },
+  {
+   "text": "By [lem-pur-integral-operations-preserve-constructible], $M'=Lh^*_{\\rm comp}M$ is integral constructible with the stated reductions. By [lem-weil-pbc-integral-stratified-perfect-characterization], both integral notations used in the statement give the same category, including compatible etale-origin witnesses. The integral equality $D^b_c=D^b_{ctf}$ in [thm-sf-ctf-stability](vii) supplies a common finite Tor interval for the reductions of each integral input; the pointwise assumption about the $M_n$ is therefore not being silently strengthened to a uniform assumption. The compact-support and direct-image outputs are integral by [lem-cbc-integral-compact-support-uniform-restriction] and [lem-sf-integral-direct-image-constructible]. Apply the same integral equality to these intermediate outputs. Open extension is the compact-support case with proper part identity. Hence every intermediate in the finite words below has normalized reductions, compatible witnesses, and common finite cohomological and Tor bounds. This verifies the domains of the system-realization and comparison-bridge lemmas before using them.",
+   "uses": [
+    "lem-pur-integral-operations-preserve-constructible",
+    "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "thm-sf-ctf-stability",
+    "lem-cbc-integral-compact-support-uniform-restriction",
+    "lem-sf-integral-direct-image-constructible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "6.7.6–6.7.7; bounded domains of the simultaneous constructions; agent assembly of the cited interfaces, not a verbatim assertion of Bhatt–Scholze"
+   }
+  },
+  {
+   "text": "Write $\\mathsf r_T$ for reduction to the semilinear system category and $\\mathsf l_T=R\\lim U_T$. For a map $v$ write $P_v\\dashv S_v$ for system inverse image and derived direct image. For a compactification $c_v=(j_v,p_v)$ put $B_v=S_{p_v}J_{j_v}$. These are actual system functors by [lem-coef-semilinear-derived-sections]. On $\\mathsf r_XM$ form $B_f\\eta_h:B_f\\mathsf r_XM\\to B_fS_hP_h\\mathsf r_XM$. Use the identity-open compactification for proper $h$. Choose a compatible composition tower and apply the proper/open map $\\Gamma_Q$ and the direct-image/open compositors to obtain $B_fS_h\\to B_{fh}$. Use $fh=f$ and the specified refinement maps to return to $B_f$. These maps exist before evaluation by [lem-sf-semilinear-proper-open-mate-pasting] and [lem-sf-ambient-proper-open-pasting]. Finally use the inverse of the canonical reduction identification $\\mathsf r_XM'\\simeq P_h\\mathsf r_XM$, supplied on whole systems by [lem-pur-completed-operation-tower-substitution]. This constructs a system arrow $B_f\\mathsf r_XM\\to B_f\\mathsf r_XM'$. Restriction to completed-coefficient towers gives $d_{h,\\bullet}$. By [lem-weil-compact-support-reduction-tower-functor] and the evaluation/adjunction clauses of the system lemmas its evaluations are exactly the displayed $d_{h,n}$, including all quotient transitions. No family of evaluated arrows has been lifted.",
+   "uses": [
+    "lem-coef-semilinear-derived-sections",
+    "lem-sf-semilinear-proper-open-mate-pasting",
+    "lem-sf-ambient-proper-open-pasting",
+    "lem-weil-compact-support-reduction-tower-functor",
+    "lem-pur-integral-operations-preserve-constructible",
+    "lem-pur-completed-operation-tower-substitution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "6.7.6–6.7.7; simultaneous unit, proper/open composition and refinement; agent assembly of the cited interfaces, not a verbatim assertion of Bhatt–Scholze"
+   }
+  },
+  {
+   "text": "Apply $\\mathsf l_s$ to the preceding arrow. By [lem-sf-integral-compactification-system-realization], realization intertwines units, counits, proper/open interchange and direct-image/open composition, also after whiskering by $B_f$. For the compact-support identifications use specifically [lem-sf-integral-compactification-comparison-bridge]: it identifies the direct defining-tower maps $d_{v,K}$ and the semilinear-counit composition with the specified completed compactification-composition map. Thus the resulting arrow, under the defining identifications $\\mathsf l_sB_f\\mathsf r_XN=P_RN$, is the integral proper-unit word\n$$\\delta_{h,M}=P_R(\\eta^{R}_{h,M})\\ ;\\ (Rh_*\\simeq Rh_!)\\ ;\\ {\\rm comp}\\ ;\\ (fh=f).$$\nHere semicolons denote composition in order of application. Its target uses exactly the canonical reduction identification for $M'$, rather than an arbitrarily chosen isomorphism. Consequently $D_{h,M}=\\delta_{h,M}$. This is an equality obtained by applying the functor $R\\lim$ to system constructions; [lem-weil-pbc-ringed-strict-tower-homotopy-limit] fixes that functor on morphisms. It is not an equality inferred from its projections.",
+   "uses": [
+    "lem-sf-integral-compactification-system-realization",
+    "lem-sf-integral-compactification-comparison-bridge",
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "6.7.6–6.7.7; comparison of the whole tower word with integral operations; agent assembly of the cited interfaces, not a verbatim assertion of Bhatt–Scholze"
+   }
+  },
+  {
+   "text": "Rationalize $D_{h,M}=\\delta_{h,M}$ using [prop-weil-pbc-rational-transport], which extends transformations and preserves their compositions. Put $M_E=M[1/t]$. By [lem-weil-pbc-condensed-e-realization], the $J$ pullback and direct-image comparisons carry the rational unit to the actual $E$-condensed unit and preserve pullback composition. The right compositors are adjunction conjugates of the left ones, so [lem-weil-pbc-mate-pasting](2) carries the right compositors as well. Apply [lem-zl-compact-support-realization-factor-normalization], with the domains checked in step 2. Its $q_c^{-1}$ clause puts the integral word of step 4 in separately derived proper/open coordinates. Its displayed equality for $a_{f,E,K}$ identifies the specified $a$, in those coordinates, with $\\chi^J_g$ followed by $Rg_{*,E}(\\delta^J_j)$. This is a statement-level normalization input, not a consequence of naturality or refinement coherence. The proper factor preserves adjunctions by the $J$ lemma. The inverse open factor is the specified open-unit adjunct by [lem-sf-open-tensor-normalization]; hence it preserves open adjuncts under the open adjunction bijection. Thus every proper/open factor used here has its actual adjunction normalization.",
+   "uses": [
+    "prop-weil-pbc-rational-transport",
+    "lem-weil-pbc-condensed-e-realization",
+    "lem-weil-pbc-mate-pasting",
+    "lem-pur-compact-support-condensed-realization",
+    "lem-sf-open-tensor-normalization",
+    "lem-zl-compact-support-realization-factor-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Agent argument using the statement-level factor normalization of lem-zl-compact-support-realization-factor-normalization; Definition 6.7.6, Lemma 6.7.14, Proposition 6.8.14(2), Remark 6.8.15 give the compactification and coefficient context only. Agent-formulated normalization of the specified comparison maps of lem-pur-compact-support-condensed-realization, whose proof Steps 2–5, 6 and 13 motivate the formulas; not an assertion literally stated by Bhatt–Scholze."
+   }
+  },
+  {
+   "text": "Put $T_T=\\Omega_T^c\\otimes^L_{E_T^c}-$ and $l_h:T_XLh_E^*\\simeq Lh_\\Omega^*T_X$ for pullback/tensor balancing. Apply the displayed $\\xi$ equality of [lem-zl-compact-support-realization-factor-normalization] to the identity-open compactification of $h$. Its identity-open clause identifies the specified comparison with precisely $\\pi_h:T_XRh_{E,*}\\xrightarrow{\\sim}Rh_{\\Omega,*}T_X$, and its formula makes $\\pi_h$ the counit transpose of balancing, including at $\\Omega$. Consequently\n$$Rh_{\\Omega,*}(l_{h,L})\\,\\pi_{h,Lh_E^*L}\\,T_X(\\eta^E_{h,L})=\\eta^\\Omega_{h,T_XL}.$$\nIndeed take the $Lh_\\Omega^*\\dashv Rh_{\\Omega,*}$ adjunct. Substitute the displayed counit transpose for $\\pi_h$, move the unit by counit naturality, and apply $\\varepsilon_{h,Lh_E^*L}\\,Lh_E^*(\\eta_{h,L})=1$. Under balancing the adjunct of either side is $1_{Lh_\\Omega^*T_XL}$. This is the unit instance of [lem-weil-pbc-mate-pasting]. Exact scalar extension and its derived adjunction are [lem-weil-pbc-condensed-flat-coefficient-calculus]. No limit is commuted with this extension. Together with step 5 this gives exactly $c_{h,M}$ in the statement.",
+   "uses": [
+    "lem-weil-pbc-mate-pasting",
+    "lem-weil-pbc-condensed-flat-coefficient-calculus",
+    "lem-zl-compact-support-realization-factor-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Agent argument using the statement-level factor normalization of lem-zl-compact-support-realization-factor-normalization; Definition 6.7.6, Lemma 6.7.14, Proposition 6.8.14(2), Remark 6.8.15 give the compactification and coefficient context only. Agent-formulated normalization of the specified comparison maps of lem-pur-compact-support-condensed-realization, whose proof Steps 2–5, 6 and 13 motivate the formulas; not an assertion literally stated by Bhatt–Scholze."
+   }
+  },
+  {
+   "text": "Choose a dense compactification of $jh$ by [sk-thm-nagata-compactification]; its target is qcqs by step 1. Compare it to the original choices by [det-nagata-refinement-common-dense]. The interchange $j_!Rh_*\\to Rq_*k_!$ restricts to the identity on the open and is its open-adjunction adjunct; its condensed normalization and uniqueness are [det-sf-comp-composition-interchange]. The factor equalities of [lem-zl-compact-support-realization-factor-normalization], used in steps 5–6, identify the realized proper comparisons with their counit transposes and the open comparisons with their open-unit adjuncts. Insert these in the explicit proper/open mate word\n$$(S_qJ_k\\varepsilon_h)(S_q\\alpha_QS_h)(\\eta_qJ_jS_h)$$\nof [lem-sf-semilinear-proper-open-mate-pasting]. The open base-change part of $\\alpha_Q$ is fixed by [lem-sf-open-tensor-normalization]. Its clopen projection has identity and zero components, preserved by scalar extension. The units and counits in the word are compared in steps 5–6. Thus mate pasting [lem-weil-pbc-mate-pasting] gives that same normalized interchange after realization. The direct-image compositors agree by step 5, and proper coincidence uses the identity-open case of the normalization lemma. Finally [lem-pur-compact-support-condensed-realization] states preservation of the specified refinement maps. Apply its refinement squares to return from the dense tower to the chosen compactifications. Here that lemma is used for its stated refinement squares; the ordered factor equalities are taken exclusively from the new normalization statement.",
+   "uses": [
+    "sk-thm-nagata-compactification",
+    "det-nagata-refinement-common-dense",
+    "det-sf-comp-composition-interchange",
+    "lem-sf-semilinear-proper-open-mate-pasting",
+    "lem-sf-open-tensor-normalization",
+    "lem-weil-pbc-mate-pasting",
+    "lem-pur-compact-support-condensed-realization",
+    "lem-zl-compact-support-realization-factor-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Agent argument using the statement-level factor normalization of lem-zl-compact-support-realization-factor-normalization; Definition 6.7.6, Lemma 6.7.14, Proposition 6.8.14(2), Remark 6.8.15 give the compactification and coefficient context only. Agent-formulated normalization of the specified comparison maps of lem-pur-compact-support-condensed-realization, whose proof Steps 2–5, 6 and 13 motivate the formulas; not an assertion literally stated by Bhatt–Scholze."
+   }
+  },
+  {
+   "text": "Let $A_N:\\mathcal R_s(P_RN)\\xrightarrow{\\sim}P_\\Omega\\mathcal R_XN$ be the specified $E$ comparison followed by the coefficient comparison of [lem-pur-compact-support-condensed-realization]. The two explicit equalities in [lem-zl-compact-support-realization-factor-normalization] identify its proper and open factors with those compared in steps 5–7. Substitute $D_{h,M}=\\delta_{h,M}$ from step 4. Composing the generator squares proved in steps 5–7, in the order unit, proper coincidence, composition, gives\n$$d^{\\rm cond}_{h,\\mathcal R_XM}\\,A_M=P_\\Omega(c_{h,M})\\,A_{M'}\\,\\mathcal R_s(D_{h,M}).$$\nThis is in the actual module-object category: [sk-def-sfb-dc-lower-shriek] identifies the functor with its separately derived proper/open composite, and restriction to a full subcategory retains those arrows. Compose with inverses to obtain\n$$A_{M'}^{-1}P_\\Omega(c_{h,M}^{-1})d^{\\rm cond}_{h,\\mathcal R_XM}=\\mathcal R_s(D_{h,M})A_M^{-1}.$$",
+   "uses": [
+    "lem-pur-compact-support-condensed-realization",
+    "sk-def-sfb-dc-lower-shriek",
+    "lem-zl-compact-support-realization-factor-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Agent argument using the statement-level factor normalization of lem-zl-compact-support-realization-factor-normalization; Definition 6.7.6, Lemma 6.7.14, Proposition 6.8.14(2), Remark 6.8.15 give the compactification and coefficient context only. Agent-formulated normalization of the specified comparison maps of lem-pur-compact-support-condensed-realization, whose proof Steps 2–5, 6 and 13 motivate the formulas; not an assertion literally stated by Bhatt–Scholze."
+   }
+  },
+  {
+   "text": "Write $e_N:\\mathcal R_s(P_RN)\\xrightarrow{\\sim}\\rho_{E,s}(C_N)$ for the point comparison in the statement, so $b_N=e_NA_N^{-1}$. It is natural on the present morphism. Explicitly, [lem-weil-pbc-geometric-field-proetale-evaluation] identifies point evaluation and finite free coefficient modules, preserving their maps and cokernels. The matrix construction of [lem-zl-condensed-point-supertrace] sends a chain map matrix to that identical matrix through $E\\to\\Omega$ and descends to the derived category. Thus, on bounded finite-dimensional representatives of $C_M,C_{M'}$, both sides of\n$$e_{M'}\\mathcal R_s(D_{h,M})=\\rho_{E,s}(\\operatorname{Fib}_s(D_{h,M})[1/t])e_M$$\nhave the same matrices. Changes of basis conjugate both sides by the same matrices. The finite-dimensional hypotheses on $C_M,C_{M'}$ are exactly those assumed; no finiteness of unrelated ambient objects is needed. Postcompose step 8 by $e_{M'}$ and use this equation and $b_M=e_MA_M^{-1}$ to obtain the asserted formula.",
+   "uses": [
+    "lem-weil-pbc-geometric-field-proetale-evaluation",
+    "lem-zl-condensed-point-supertrace"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "6.8.14–6.8.15; point evaluation and the finite-matrix realization; agent assembly of the cited interfaces, not a verbatim assertion of Bhatt–Scholze"
+   }
+  },
+  {
+   "text": "Every input morphism is acted on by a derived system functor; the system unit, compositors and refinement maps in step 3 are natural before restriction or limit. Step 4 applies the functorial total derived limit, step 5 applies scalar localization, and steps 6–8 use natural coefficient mates and open comparisons. The point comparison in step 9 is natural for arbitrary derived maps between the two finite-dimensional complexes, not just endomorphisms. Composing these naturality squares proves the final naturality assertion, including morphisms of the whole input coefficient systems. The argument has not used Frobenius or a Weil structure.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "6.7.6–6.7.7 and 6.8.14–6.8.15; naturality of the constructed composite; agent assembly of the cited interfaces, not a verbatim assertion of Bhatt–Scholze"
+   }
+  }
+ ],
+ "proof_deps": [
+  "pqf-lem-locnoeth-lft",
+  "lem-weil-pbc-qcqs-over-affine",
+  "lem-kun-dimension-finite-type",
+  "def-weil-proper-morphism",
+  "lem-pur-integral-operations-preserve-constructible",
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "thm-sf-ctf-stability",
+  "lem-cbc-integral-compact-support-uniform-restriction",
+  "lem-sf-integral-direct-image-constructible",
+  "lem-coef-semilinear-derived-sections",
+  "lem-sf-semilinear-proper-open-mate-pasting",
+  "lem-sf-ambient-proper-open-pasting",
+  "lem-weil-compact-support-reduction-tower-functor",
+  "lem-pur-completed-operation-tower-substitution",
+  "lem-sf-integral-compactification-system-realization",
+  "lem-sf-integral-compactification-comparison-bridge",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "prop-weil-pbc-rational-transport",
+  "lem-weil-pbc-condensed-e-realization",
+  "lem-weil-pbc-mate-pasting",
+  "lem-pur-compact-support-condensed-realization",
+  "lem-sf-open-tensor-normalization",
+  "lem-zl-compact-support-realization-factor-normalization",
+  "lem-weil-pbc-condensed-flat-coefficient-calculus",
+  "sk-thm-nagata-compactification",
+  "det-nagata-refinement-common-dense",
+  "det-sf-comp-composition-interchange",
+  "sk-def-sfb-dc-lower-shriek",
+  "lem-weil-pbc-geometric-field-proetale-evaluation",
+  "lem-zl-condensed-point-supertrace"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "6.7.6–6.7.7, 6.7.14, 6.8.14(2), 6.8.15; assembly from existing simultaneous-system, mate and realization interfaces"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -66,10 +241,45 @@
    "results": "8 hits; ; returned names/files: Condensed.profiniteSolid, CondensedMod.LocallyConstant.adjunction, LightCondMod.LocallyConstant.adjunction, LightCondensed.ihomPoints_symm_comp, Condensed.profiniteSolidCounit, CompHausLike.LocallyConstant.instIsIsoFunctorTypeUnitSheafCoherentTopologyAdjunction, LightCondSet.topCatAdjunctionUnit_val_app_apply, CondensedMod.ofSheafCompHaus. Only ordinary adjunctions, discrete condensed functors or ring Frobenius; no compact-support module-object implementation or adic realization comparison.",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Adic compact support realization to condensed modules preserves the proper pullback pushforward adjunction unit and composition on the whole reduction tower",
+   "results": "8 hits: Condensed.profiniteSolid, CondensedMod.LocallyConstant.adjunction, LightCondMod.LocallyConstant.adjunction, Condensed.profiniteFree, CondensedMod.LocallyConstant.functor, Condensed.profiniteSolidification, CondensedMod, Condensed.profiniteSolidCounit. Read returned types: general adjunctions, discrete condensed modules and ordinary adic-completion maps; no adic compact-support realization of this proper-unit word.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "compact.*[Rr]eali[sz]|adic.*[Aa]djunction|condensed.*compact",
+   "results": "25 hits: Mathlib/Topology/MetricSpace/GromovHausdorffRealized.lean, Mathlib/Condensed/TopCatAdjunction.lean, Mathlib/Condensed/TopCatAdjunction.lean, Mathlib/Condensed/TopCatAdjunction.lean, Mathlib/Condensed/TopCatAdjunction.lean, Mathlib/Condensed/TopCatAdjunction.lean, Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean, Mathlib/CategoryTheory/Adjunction/Lifting/Right.lean. Read returned types: general adjunctions, discrete condensed modules and ordinary adic-completion maps; no adic compact-support realization of this proper-unit word.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived compact support cohomology realization preserves the unit of adjunction of pullback and pushforward for a proper scheme endomorphism",
+   "results": "8 hits: SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app, CategoryTheory.ExponentiableMorphism.coev, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, CategoryTheory.Adjunction.derivedη, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app, SheafOfModules.pullbackObjUnitToUnit, CategoryTheory.ExponentiableMorphism.unit_pushforwardId_hom. Read returned types: general adjunctions, discrete condensed modules and ordinary adic-completion maps; no adic compact-support realization of this proper-unit word.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.Functor",
+   "results": "12 hits: CategoryTheory.Adjunction, CategoryTheory.Adjunction.isLeftAdjoint, CategoryTheory.Adjunction.isRightAdjoint, CategoryTheory.Adjunction.mk', CategoryTheory.Adjunction.mkOfHomEquiv, CategoryTheory.Adjunction.mkOfUnitCounit, CategoryTheory.Adjunction.ofIsLeftAdjoint, CategoryTheory.Adjunction.ofIsRightAdjoint. Read returned types: general adjunctions, discrete condensed modules and ordinary adic-completion maps; no adic compact-support realization of this proper-unit word.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatibility of an adic derived inverse limit proper unit with rational coefficient extension and condensed compactly supported cohomology",
+   "results": "8 hits: Condensed.profiniteSolidCounit, BDeRhamPlus, Condensed.profiniteSolid, Condensed.profiniteSolidification, Condensed.profiniteFree, LightCondensed.ihomPoints_symm_comp, AdicCompletion.eval_comp_of, Condensed.isColimitLocallyConstantPresheaf_desc_apply. Read returned types: general adjunctions, discrete condensed modules and ordinary adic-completion maps; no adic compact-support realization of this proper-unit word.",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-zl-condensed-global-frobenius-comparison",
@@ -88,5 +298,164 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-zl-proper-unit-condensed-realization",
+  "worker": "stage1",
+  "summary": "F1/F2 repair of returned head 419f68245726: preserve the ten-step argument and normalization statement; supply in the committed report the complete pinned dropped-id list, immutable absent-item/absent-repair-note history, fourteen verbatim exact-master source files with verified blob hashes, semantic-scope evidence, authentic searches and current citation quotes. Revalidate all cited statements against current main; no dropped id occurs in the dependency traversal, with any pre-existing dangling records separately disclosed. Earlier C3/C4/E5 normalization repair is retained.",
+  "blueprint": "Nearest blueprint ancestor sk-thm-rationality, first proof sentence: the cohomological determinant factorization requires the specific operator. This prerequisite of lem-zl-condensed-global-frobenius-comparison supplies the proper-unit realization square without assuming Frobenius. Current main-20261015 rationality proof uses the same trace-to-determinant step.",
+  "tool_uses": [
+   {
+    "node": "pqf-lem-locnoeth-lft",
+    "why": "Steps 1: use its stated geometric-domain, simultaneous-system, normalized-comparison or coefficient/mate interface as a generic tool for this proper-unit realization word; the rationality unit has no replacement for this interface."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-over-affine",
+    "why": "Steps 1: use its stated geometric-domain, simultaneous-system, normalized-comparison or coefficient/mate interface as a generic tool for this proper-unit realization word; the rationality unit has no replacement for this interface."
+   },
+   {
+    "node": "lem-kun-dimension-finite-type",
+    "why": "Steps 1: use its stated geometric-domain, simultaneous-system, normalized-comparison or coefficient/mate interface as a generic tool for this proper-unit realization word; the rationality unit has no replacement for this interface."
+   },
+   {
+    "node": "def-weil-proper-morphism",
+    "why": "Steps 1: use its stated geometric-domain, simultaneous-system, normalized-comparison or coefficient/mate interface as a generic tool for this proper-unit realization word; the rationality unit has no replacement for this interface."
+   },
+   {
+    "node": "lem-pur-integral-operations-preserve-constructible",
+    "why": "Steps 2, 3: use its stated geometric-domain, simultaneous-system, normalized-comparison or coefficient/mate interface as a generic tool for this proper-unit realization word; the rationality unit has no replacement for this interface."
+   },
+   {
+    "node": "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "why": "Steps 2: use its stated geometric-domain, simultaneous-system, normalized-comparison or coefficient/mate interface as a generic tool for this proper-unit realization word; the rationality unit has no replacement for this interface."
+   },
+   {
+    "node": "thm-sf-ctf-stability",
+    "why": "Steps 2: use its stated geometric-domain, simultaneous-system, normalized-comparison or coefficient/mate interface as a generic tool for this proper-unit realization word; the rationality unit has no replacement for this interface."
+   },
+   {
+    "node": "lem-cbc-integral-compact-support-uniform-restriction",
+    "why": "Steps 2: use its stated geometric-domain, simultaneous-system, normalized-comparison or coefficient/mate interface as a generic tool for this proper-unit realization word; the rationality unit has no replacement for this interface."
+   },
+   {
+    "node": "lem-sf-integral-direct-image-constructible",
+    "why": "Steps 2: use its stated geometric-domain, simultaneous-system, normalized-comparison or coefficient/mate interface as a generic tool for this proper-unit realization word; the rationality unit has no replacement for this interface."
+   },
+   {
+    "node": "lem-coef-semilinear-derived-sections",
+    "why": "Steps 3: use its stated geometric-domain, simultaneous-system, normalized-comparison or coefficient/mate interface as a generic tool for this proper-unit realization word; the rationality unit has no replacement for this interface."
+   },
+   {
+    "node": "lem-sf-semilinear-proper-open-mate-pasting",
+    "why": "Steps 3, 7: use its stated geometric-domain, simultaneous-system, normalized-comparison or coefficient/mate interface as a generic tool for this proper-unit realization word; the rationality unit has no replacement for this interface."
+   },
+   {
+    "node": "lem-sf-ambient-proper-open-pasting",
+    "why": "Steps 3: use its stated geometric-domain, simultaneous-system, normalized-comparison or coefficient/mate interface as a generic tool for this proper-unit realization word; the rationality unit has no replacement for this interface."
+   },
+   {
+    "node": "lem-weil-compact-support-reduction-tower-functor",
+    "why": "Steps 3: use its stated geometric-domain, simultaneous-system, normalized-comparison or coefficient/mate interface as a generic tool for this proper-unit realization word; the rationality unit has no replacement for this interface."
+   },
+   {
+    "node": "lem-pur-completed-operation-tower-substitution",
+    "why": "Steps 3: use its stated geometric-domain, simultaneous-system, normalized-comparison or coefficient/mate interface as a generic tool for this proper-unit realization word; the rationality unit has no replacement for this interface."
+   },
+   {
+    "node": "lem-sf-integral-compactification-system-realization",
+    "why": "Steps 4: use its stated geometric-domain, simultaneous-system, normalized-comparison or coefficient/mate interface as a generic tool for this proper-unit realization word; the rationality unit has no replacement for this interface."
+   },
+   {
+    "node": "lem-sf-integral-compactification-comparison-bridge",
+    "why": "Steps 4: use its stated geometric-domain, simultaneous-system, normalized-comparison or coefficient/mate interface as a generic tool for this proper-unit realization word; the rationality unit has no replacement for this interface."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "why": "Steps 4: use its stated geometric-domain, simultaneous-system, normalized-comparison or coefficient/mate interface as a generic tool for this proper-unit realization word; the rationality unit has no replacement for this interface."
+   },
+   {
+    "node": "prop-weil-pbc-rational-transport",
+    "why": "Steps 5: use its stated geometric-domain, simultaneous-system, normalized-comparison or coefficient/mate interface as a generic tool for this proper-unit realization word; the rationality unit has no replacement for this interface."
+   },
+   {
+    "node": "lem-weil-pbc-condensed-e-realization",
+    "why": "Steps 5: use its stated geometric-domain, simultaneous-system, normalized-comparison or coefficient/mate interface as a generic tool for this proper-unit realization word; the rationality unit has no replacement for this interface."
+   },
+   {
+    "node": "lem-weil-pbc-mate-pasting",
+    "why": "Steps 5, 6, 7: use its stated geometric-domain, simultaneous-system, normalized-comparison or coefficient/mate interface as a generic tool for this proper-unit realization word; the rationality unit has no replacement for this interface."
+   },
+   {
+    "node": "lem-pur-compact-support-condensed-realization",
+    "why": "Steps 5, 6, 7, 8: use its stated geometric-domain, simultaneous-system, normalized-comparison or coefficient/mate interface as a generic tool for this proper-unit realization word; the rationality unit has no replacement for this interface."
+   },
+   {
+    "node": "lem-sf-open-tensor-normalization",
+    "why": "Steps 5, 7: use its stated geometric-domain, simultaneous-system, normalized-comparison or coefficient/mate interface as a generic tool for this proper-unit realization word; the rationality unit has no replacement for this interface."
+   },
+   {
+    "node": "lem-weil-pbc-condensed-flat-coefficient-calculus",
+    "why": "Steps 6: use its stated geometric-domain, simultaneous-system, normalized-comparison or coefficient/mate interface as a generic tool for this proper-unit realization word; the rationality unit has no replacement for this interface."
+   },
+   {
+    "node": "sk-thm-nagata-compactification",
+    "why": "Steps 7: use its stated geometric-domain, simultaneous-system, normalized-comparison or coefficient/mate interface as a generic tool for this proper-unit realization word; the rationality unit has no replacement for this interface."
+   },
+   {
+    "node": "det-nagata-refinement-common-dense",
+    "why": "Steps 7: use its stated geometric-domain, simultaneous-system, normalized-comparison or coefficient/mate interface as a generic tool for this proper-unit realization word; the rationality unit has no replacement for this interface."
+   },
+   {
+    "node": "det-sf-comp-composition-interchange",
+    "why": "Steps 7: use its stated geometric-domain, simultaneous-system, normalized-comparison or coefficient/mate interface as a generic tool for this proper-unit realization word; the rationality unit has no replacement for this interface."
+   },
+   {
+    "node": "sk-def-sfb-dc-lower-shriek",
+    "why": "Steps 8: use its stated geometric-domain, simultaneous-system, normalized-comparison or coefficient/mate interface as a generic tool for this proper-unit realization word; the rationality unit has no replacement for this interface."
+   },
+   {
+    "node": "lem-weil-pbc-geometric-field-proetale-evaluation",
+    "why": "Steps 9: use its stated geometric-domain, simultaneous-system, normalized-comparison or coefficient/mate interface as a generic tool for this proper-unit realization word; the rationality unit has no replacement for this interface."
+   }
+  ]
+ },
+ "tool_uses": [
+  "pqf-lem-locnoeth-lft",
+  "lem-weil-pbc-qcqs-over-affine",
+  "lem-kun-dimension-finite-type",
+  "def-weil-proper-morphism",
+  "lem-pur-integral-operations-preserve-constructible",
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "thm-sf-ctf-stability",
+  "lem-cbc-integral-compact-support-uniform-restriction",
+  "lem-sf-integral-direct-image-constructible",
+  "lem-coef-semilinear-derived-sections",
+  "lem-sf-semilinear-proper-open-mate-pasting",
+  "lem-sf-ambient-proper-open-pasting",
+  "lem-weil-compact-support-reduction-tower-functor",
+  "lem-pur-completed-operation-tower-substitution",
+  "lem-sf-integral-compactification-system-realization",
+  "lem-sf-integral-compactification-comparison-bridge",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "prop-weil-pbc-rational-transport",
+  "lem-weil-pbc-condensed-e-realization",
+  "lem-weil-pbc-mate-pasting",
+  "lem-pur-compact-support-condensed-realization",
+  "lem-sf-open-tensor-normalization",
+  "lem-weil-pbc-condensed-flat-coefficient-calculus",
+  "sk-thm-nagata-compactification",
+  "det-nagata-refinement-common-dense",
+  "det-sf-comp-composition-interchange",
+  "sk-def-sfb-dc-lower-shriek",
+  "lem-weil-pbc-geometric-field-proetale-evaluation"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-Codex-Q32-80408fb36",
+  "group": "Q32",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q32-80408fb36 (reviewer sub-agent of L); spot-checked: Completed the mathematical and source review. Corrected one B2/E4 typing fault: the coefficient-change formula requires K_E=J_X(K[1/t]). The whole corrected node is under fixes/dag/nodes/; review.md records every step, source locations, route checks, edge cases, and accepted tool uses. No target was weakened.; 1 file(s) fixed by the reviewer"
  }
 }
