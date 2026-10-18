@@ -5705,6 +5705,7 @@ public import WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebra
 public import WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebraAdjunction
 public import WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebraFullyFaithful
 public import WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebraHomology
+public import WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebraLeftAdjunction
 public import WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebraTwist
 public import WeilConjectures.CategoryTheory.Endofunctor.Shift
 public import WeilConjectures.CategoryTheory.EquivalenceRightAdjointCounitTransport
@@ -9647,8 +9648,12 @@ public import WeilConjectures.WeilSheaf.Operations
 public import WeilConjectures.WeilSheaf.PoincareDuality
 public import WeilConjectures.WeilSheaf.PoincareDualityLisse
 public import WeilConjectures.WeilSheaf.ProjectionFormula.DualPullbackWeil
+public import WeilConjectures.WeilSheaf.ProjectionFormula.ExtensionByZeroAdjunction
+public import WeilConjectures.WeilSheaf.ProjectionFormula.ExtensionByZeroIhom
 public import WeilConjectures.WeilSheaf.ProjectionFormula.LisseDualPullback
 public import WeilConjectures.WeilSheaf.ProjectionFormula.LisseDuality
+public import WeilConjectures.WeilSheaf.ProjectionFormula.LisseDualityAssembly
+public import WeilConjectures.WeilSheaf.ProjectionFormula.LisseDualityWeil
 public import WeilConjectures.WeilSheaf.ProjectionFormula.LisseTensor
 public import WeilConjectures.WeilSheaf.ProjectionFormula.LowerShriekIhom
 public import WeilConjectures.WeilSheaf.ProjectionFormula.LowerStarIhom
