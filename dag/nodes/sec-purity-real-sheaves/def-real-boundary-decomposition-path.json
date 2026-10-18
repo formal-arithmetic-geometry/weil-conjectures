@@ -56,10 +56,49 @@
    "results": "CategoryTheory.GrothendieckTopology.Point.Hom.hom; CategoryTheory.GrothendieckTopology.Point.fiber; CategoryTheory.GrothendieckTopology.Point.Hom.mk; FundamentalGroup.fundamentalGroupMulEquivOfPath; CategoryTheory.GrothendieckTopology.Point.Hom.ext_iff; CategoryTheory.GrothendieckTopology.Point.Hom.sheafFiber; CategoryTheory.GrothendieckTopology.Point.Hom.presheafFiber; CategoryTheory.PreGaloisCategory.autIsoFibers",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural isomorphism between two functors consists of isomorphisms at every object satisfying naturality",
+   "results": "CategoryTheory.NatIso.ofComponents; CategoryTheory.NatIso.hom_app_isIso; CategoryTheory.NatIso.isIso_of_isIso_app; CategoryTheory.Iso.app; CategoryTheory.NatIso.ofComponents_hom_app; CategoryTheory.NatIso.ofComponents.app; CategoryTheory.NatIso.isIso_app_of_isIso; CategoryTheory.NatTrans.isIso_iff_isIso_app",
+   "date": "2026-10-18",
+   "verdict": "match: generic natural isomorphism and its componentwise finite-set interpretation, specialized to the two given fibre functors"
+  },
+  {
+   "tool": "grep",
+   "query": "def ofComponents|def app|structure NatTrans|def homEquiv|def equivOfIso",
+   "results": "Mathlib/CategoryTheory/Adjunction/Basic.lean; Mathlib/CategoryTheory/ConcreteCategory/Representable.lean; Mathlib/CategoryTheory/ConcreteCategory/Basic.lean; Mathlib/CategoryTheory/Linear/FunctorCategory.lean; Mathlib/CategoryTheory/Adjunction/Parametrized.lean; Mathlib/CategoryTheory/NatIso.lean; Mathlib/CategoryTheory/NatIso.lean; Mathlib/CategoryTheory/NatTrans.lean; subdirectory CategoryTheory",
+   "date": "2026-10-18",
+   "verdict": "match: generic natural isomorphism and its componentwise finite-set interpretation, specialized to the two given fibre functors"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A natural isomorphism of finite set valued functors is a family of bijections commuting with every morphism",
+   "results": "CategoryTheory.NatIso.ofComponents; CategoryTheory.NatIso.ofComponents.congr_simp; CategoryTheory.Cat.Hom.instIsIsoFunctorαCategoryToNatTransHomHom; CategoryTheory.NatTrans.isIso_iff_isIso_app; CategoryTheory.NatIso.hom_app_isIso; CategoryTheory.NatIso.isIso_map_iff; CategoryTheory.NatIso.isIso_app_of_isIso; CategoryTheory.Sigma.natIso",
+   "date": "2026-10-18",
+   "verdict": "match: generic natural isomorphism and its componentwise finite-set interpretation, specialized to the two given fibre functors"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatIso.ofComponents",
+   "results": "CategoryTheory.NatIso.ofComponents; CategoryTheory.NatIso.ofComponents.app; CategoryTheory.NatIso.ofComponents_hom_app; CategoryTheory.NatIso.ofComponents_inv_app; CategoryTheory.opOpEquivalence_counitIso; CategoryTheory.opOpEquivalence_unitIso; CategoryTheory.Functor.opUnopEquiv_unitIso; CategoryTheory.Functor.opUnopEquiv_counitIso",
+   "date": "2026-10-18",
+   "verdict": "match: generic natural isomorphism and its componentwise finite-set interpretation, specialized to the two given fibre functors"
+  },
+  {
+   "tool": "grep",
+   "query": "structure Iso|def equivOfIso|def isoOfEquiv|def equivEquivIso",
+   "results": "Mathlib/CategoryTheory/FintypeCat.lean; Mathlib/CategoryTheory/Iso.lean; Mathlib/CategoryTheory/Iso.lean; Mathlib/CategoryTheory/Bicategory/Functor/StrictlyUnitary.lean; Mathlib/CategoryTheory/Types/Basic.lean; Mathlib/CategoryTheory/Category/ReflQuiv.lean; Mathlib/CategoryTheory/Category/Quiv.lean; Mathlib/CategoryTheory/Category/Quiv.lean; subdirectory CategoryTheory",
+   "date": "2026-10-18",
+   "verdict": "match: generic natural isomorphism and its componentwise finite-set interpretation, specialized to the two given fibre functors"
   }
  ],
- "mathlib_match": null,
- "status": "unsplit",
+ "mathlib_match": {
+  "declaration": "CategoryTheory.Iso, CategoryTheory.NatTrans, CategoryTheory.Iso.app, CategoryTheory.NatIso.ofComponents, FintypeCat.equivEquivIso",
+  "file": "Mathlib/CategoryTheory/NatIso.lean",
+  "how": "specializes in one line: take C = the finite etale covers of Y, D = FintypeCat, F = F_ybar and G = F_zbar, already supplied by def-galois-fibre-functor; an etale path is the type F ≅ G (CategoryTheory.Iso, Mathlib/CategoryTheory/Iso.lean:53). The natural transformations have precisely the component and naturality fields in CategoryTheory.NatTrans (Mathlib/CategoryTheory/NatTrans.lean:53). CategoryTheory.Iso.app (Mathlib/CategoryTheory/NatIso.lean:53) extracts each component isomorphism, FintypeCat.equivEquivIso (Mathlib/CategoryTheory/FintypeCat.lean:130) identifies it with a bijection, and CategoryTheory.NatIso.ofComponents (Mathlib/CategoryTheory/NatIso.lean:181) packages the family of bijections and the stated naturality equation back into F ≅ G. No Galois-category axioms or path-existence theorem is used."
+ },
+ "status": "mathlib",
  "created": {
   "by": "worker",
   "item": "d-real-boundary",
@@ -76,5 +115,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "def-real-boundary-decomposition-path",
+  "worker": "stage1",
+  "summary": "Checked the current boundary definition, its unit and chapter, the two statement dependencies, related path nodes and the project Lean uses of paths. The item only defines the type of paths; its entirety is the generic Mathlib isomorphism of the two given finite-set-valued fibre functors, with the componentwise description supplied by Iso.app, NatIso.ofComponents and FintypeCat.equivEquivIso. Recorded the successful semantic, name and source searches in addition to the inherited searches. No statement change and no new nodes.",
+  "blueprint": "d-real-boundary, statement paragraph beginning Choose a geometric point over Spec K_s → U_0 and a path from it to the base point of rho: this leaf supplies the meaning of path only. Its existence, decomposition homomorphism and independence assertions remain with their existing nodes. Whole-blueprint searches for path, etale path and natural isomorphism found no other blueprint node whose entire statement is this definition."
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-NU-11587f7c3",
+  "group": "NU",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NU-11587f7c3 (reviewer sub-agent of L); spot-checked: I read the item in full against d-real-boundary.md, at the sentence 'Choose a geometric point over Spec K_s → U_0 and a path from it to the base point of ρ'. The blueprint uses 'path' without defining it, and the item gives it the standard meaning: a natural isomorphism F_ȳ ≅ F_z̄ of the finite-étale fibre functors. Its direction is right: γ_P maps |P_ȳ| to |P_z̄|, and naturality is F_z̄(f)∘γ_P = γ_Q∘F_ȳ(f). The source's other clauses (decomposition homomorphism, landing of I_s and W(K_s), conjugation, independence of the choice of path) stay with the existing nodes lem-real-boundary-decomposition-landing and lem-real-boundary-path-independence. Both statement dependencies were checked: def-weil-geometric-point is Spec Ω → Y with Ω algebraically closed, and def-galois-fibre-functor gives the functor P ↦ |P_ȳ| on FÉt(Y) (Y-schemes and Y-morphisms, from def-galois-categories). The connectedness hypothesis does no harm. The citer applies the item on U_0, which is connected: C is connected by d-real-setup, so the smooth curve C is irreducible, the open U is connected and maps onto U_0. Edge cases tested: an empty cover, ȳ = z̄, and a Y with no geometric points. The definition makes no claim that a path exists. I read every Mathlib declaration in the leaf at its stated line: Iso (Iso.lean:53), NatTrans (NatTrans.lean:53), Iso.app (NatIso.lean:53), NatIso.ofComponents (NatIso.lean:181, forward naturality only) and FintypeCat.equivEquivIso (FintypeCat.lean:130). Together they make the item a one-line specialization with one declaration per clause, so status mathlib is correct (B8). All three kinds of search are recorded. Two inherited loogle verdicts read 'no match' and are inaccurate, which is cosmetic and left unchanged. Duplicate search: lem-real-lisse-path-fibres and lem-real-weil-twisted-paths repeat the convention inside larger statements, but neither is a definition node for it, so there is no duplicate and same_as=[] is right. There are no new nodes, no proof, no cycle and no tool_uses. The item is not the unit's key node, so the unit record needs no change. It is not a target, so the base-change and coefficient checks do not apply, and no SGA source is cited. No fixes were made."
  }
 }
