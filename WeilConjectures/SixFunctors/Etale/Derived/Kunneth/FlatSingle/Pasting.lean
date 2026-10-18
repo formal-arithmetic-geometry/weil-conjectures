@@ -41,9 +41,7 @@ namespace Etale
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
   [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
   [Abelian.HasFunctorialFlatResolution A] [Etale.UpperStarPreservesFlat A]
-  [HasSmallSiteSheafify A]
 
-omit [HasSmallSiteSheafify A] in
 /-- The base change map for a pushforward tensored with a complex is the transpose of the tensor
 comparison of `Lh^*` followed by `Lh^* M ⊗ᴸ -` applied to
 `AlgebraicGeometry.Etale.tensorBaseChangeCounitApp`. -/
@@ -57,7 +55,7 @@ lemma tensorBaseChangeMap_eq {X' S' T Y : Scheme.{u}} (h : Y ⟶ X') (e : Y ⟶ 
           ((-⊗ᴸ-(Y)[A]).obj (L((h)^*[A]).obj M)).map (tensorBaseChangeCounitApp A h e f' g w F)) :=
   rfl
 
-omit [UpperStarPreservesFlat A] [HasSmallSiteSheafify A] in
+omit [UpperStarPreservesFlat A] in
 /-- The morphism `Lh^* Lf'^* Rg_* F ⟶ Le^* F` of the base change map for a pushforward tensored
 with a complex is the transpose of the derived base change map `Lf'^* Rg_* F ⟶ Rh_* Le^* F`. -/
 lemma tensorBaseChangeCounitApp_eq {X' S' T Y : Scheme.{u}} (h : Y ⟶ X') (e : Y ⟶ T)
@@ -78,7 +76,6 @@ lemma tensorBaseChangeCounitApp_eq {X' S' T Y : Scheme.{u}} (h : Y ⟶ X') (e : 
     NatTrans.comp_app, Category.assoc]
   rw [← reassoc_of% (key (e ≫ g) w.symm rfl)]
 
-omit [HasSmallSiteSheafify A] in
 /-- **The base change map at the unit**: for a commutative square `h ≫ f' = e ≫ g`, the base change
 map `Λ ⊗ᴸ Lf'^* Rg_* F ⟶ Rh_* (Lh^* Λ ⊗ᴸ Le^* F)` is the derived base change map
 `Lf'^* Rg_* F ⟶ Rh_* Le^* F`, up to the left unitors and the identification `Lh^* Λ ≅ Λ`. -/
@@ -112,7 +109,6 @@ lemma isIso_tensorBaseChangeMap_tensorUnit {X' S' T Y : Scheme.{u}} (h : Y ⟶ X
   exact IsIso.of_isIso_comp_right _ (R((h)_*[A]).map
     ((leftDerivedUpperStarUnitIso A h).hom ▷ L((e)^*[A]).obj F ≫ (λ_ _).hom))
 
-omit [HasSmallSiteSheafify A] in
 set_option maxHeartbeats 1000000 in
 -- the pasting computation in the derived category is expensive to elaborate
 /-- **Pasting of base change maps**: for two commutative squares pasted horizontally,

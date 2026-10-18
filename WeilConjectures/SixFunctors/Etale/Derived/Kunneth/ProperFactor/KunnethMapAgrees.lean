@@ -139,9 +139,6 @@ lemma leftDerivedUpperStar_map_braiding_hom_comp_tensorComparison {T R : Scheme.
         (β_ (L((g)^*[A]).obj K) (L((g)^*[A]).obj M)).hom :=
   leftDerivedUpperStar_map_braiding_hom_δ A g K M
 
-variable [HasSmallSiteSheafify A]
-
-omit [HasSmallSiteSheafify A] in
 /-- The base change map for a pushforward tensored with a complex
 (`AlgebraicGeometry.Etale.tensorBaseChangeMap`) of a commutative square `q ≫ a_X = r ≫ a_Y` is
 the composite

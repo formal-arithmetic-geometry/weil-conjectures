@@ -64,6 +64,7 @@ lemma isIso_tensorBaseChangeMap_congr {X' S' T Y : Scheme.{u}} (h : Y ⟶ X') {e
   subst he hf
   rfl
 
+omit [Finite Λ] in
 /-- If the derived base change map `Lf'^* Rg_* F ⟶ Rh_* Le^* F` is an isomorphism, the base change
 map `M ⊗ᴸ Lf'^* Rg_* F ⟶ Rh_* (Lh^* M ⊗ᴸ Le^* F)` is an isomorphism if and only if the base
 change map of the degenerate square `(h, 𝟙, 𝟙, h)` at `(M, Le^* F)` is. -/
