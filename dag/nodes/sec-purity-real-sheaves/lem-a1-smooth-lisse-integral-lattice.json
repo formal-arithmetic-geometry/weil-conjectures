@@ -14,7 +14,9 @@
   "def-weil-l-adic-coefficient-extension",
   "def-weil-pbc-proetale-site",
   "def-weil-completed-integral-coefficients",
-  "def-weil-sheaf-of-modules-category"
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-ringed-section-localization",
+  "def-pur-sheaf-tensor-product"
  ],
  "proof": [
   {
@@ -263,5 +265,34 @@
   "group": "Q79",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q79-baf946973 (reviewer sub-agent of L); spot-checked: Verdict FIX: the mathematics is correct and follows Bhatt–Scholze (BS) Lemma 6.8.2, Definition 6.8.3, Proposition 6.8.4(1),(4) and §7.4 (Lemmas 7.4.7 and 7.4.10, read at the cited places), together with Stacks 056T and 0BQ3. The item statement is unchanged and not weakened: it uses the completed B_T, an arbitrary field extension K/K_0, a possibly disconnected T, rank 0 and the empty scheme. Steps: (1) the hypotheses of all three cited lemmas hold exactly; 056T applies to every field extension. (2) The connected components are clopen. (3) The new comparison node gives profinite monodromy. (4) The stable-lattice lemma applies (compact group, jointly continuous action), and cor-galois-lisse-representations(1) with base change gives the normalized tower. (5) lem-per-lisse-completed-system-comparison makes N lisse, and the normalization clause plus full faithfulness give N[1/ϖ] ≅ L. (6) B_X ≅ A_X (continuous functions) has no ϖ-torsion, so N embeds in L. (7) Disjoint gluing. Edge cases tested: empty T, rank 0, Spec K, components of different ranks, infinite or inseparable K/K_0. Normality cannot be dropped (BS Example 7.4.9). New node lem-a1-normal-proetale-monodromy is true (7.4.7 + 0BQ3 + 7.4.10, with the integral normalization from the proof of 7.4.7 and 6.8.4(1),(4)). It is statement-only, not a duplicate: lem-sfb-etale-local-monodromy-realization gives only étale-local essential surjectivity. It does not restate the item (D1). Blueprint same_as [] confirmed by grep of main-20261015. No SGA source cited. Batch-5 check, all accepted: none of the four cited nodes is the trace formula, Poincaré duality or a step specific to their proofs, and neither assumption leaf gives any of them; computed closures reach no PD or trace-formula theorem, batch-4 target or nt-assume node. lem-trf-smooth-geometrically-normal is Stacks 056T, general algebra. lem-pod-profinite-stable-lattice is general representation theory. cor-galois-lisse-representations is the Galois/lisse foundation of unit sk-lem-finite (the finiteness unit); its closure holds only lattice, adic-limit and module-object lemmas. lem-sfb-integral-lisse-reduction-equivalence reaches only the I-adic tower lemmas lem-pod-adic-limit-finite-modules and lem-pod-adic-tower-reconstruction. All 8 declared tool_uses accepted. Fixes: (a) C1, item step 2 now cites the Mathlib leaves lem-weil-pbc-noetherian-scheme-closed-subsets-minimal (Noetherian topological space) and lem-weil-pbc-noetherian-open-subscheme-noetherian (each component Noetherian), added to proof_deps. (b) B3, the new node now cites def-weil-completed-integral-coefficients for (A/ϖ^n)_X and places its stmt_dep lem-per-lisse-completed-system-comparison in the text. No cycles; no nodes dropped.; 2 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1011bfd24",
+  "group": "N1",
+  "result": "pass",
+  "note": "Read check-brief2, packet, node copy, report, module and all 9 stmt_dep records. Every clause matches the node: T is the recorded pullback; B_T is completedIntegralCoefficientSheafUnrestricted (the recorded limit); E_T is ringedLocalizationRingOfUniverses at the uniformizer pushed through integralConstantToCompletionOfUniverses (real data); L is IsFiniteLocallyFree (rank may vary); the submodule is Mono i into restrictScalars L; M is IsFiniteLocallyFree; e : changeOfRingsOfUniverses M ≅ L normalized by e(eta(1⊗m)) = i m, which pins e to the inclusion-induced map. Universes: only (u,v), modules at max v (u+1), the IsFiniteLocallyFree index universe is the site's object universe, no forced equality. Edge cases: empty T, rank 0, varying ranks, any K/K0, l=2 all covered. lean.statement is verbatim; all 9 declarations present; the single sorry is the theorem; the helper instances are Prop-valued and axiom-free apart from the standard axioms; no duplicate E_T found (rationalCoefficientSheaf is the different continuous-function sheaf); the 2 added stmt_deps are used and acyclic. nt_compile clean in 9.7 s (warn.sorry=false). Minor note only: priority-100000 global Prop instances."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SmoothLisseIntegralLattice",
+  "declaration": "AlgebraicGeometry.ProEtale.exists_smooth_lisse_integral_lattice",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.smoothLatticeForgetAbFiltered",
+   "AlgebraicGeometry.ProEtale.smoothLatticeSiteAbSheafify",
+   "AlgebraicGeometry.ProEtale.smoothLatticeSliceAbSheafify",
+   "AlgebraicGeometry.ProEtale.smoothLatticeSliceAbLocallyBijective",
+   "AlgebraicGeometry.ProEtale.smoothLatticeSiteAbLocallyBijective",
+   "AlgebraicGeometry.ProEtale.smoothLatticeUniformizerSection",
+   "AlgebraicGeometry.ProEtale.smoothLatticeRationalRing",
+   "AlgebraicGeometry.ProEtale.smoothLatticeCoefficientMap",
+   "AlgebraicGeometry.ProEtale.exists_smooth_lisse_integral_lattice"
+  ],
+  "file": "lean/Sheaf/Paper/SmoothLisseIntegralLattice.lean",
+  "statement": "theorem exists_smooth_lisse_integral_lattice (K₀ K : Type u) [Field K₀] [Field K] [Algebra K₀ K] (T₀ : Scheme.{u}) (f : T₀ ⟶ Spec (.of K₀)) [Smooth f] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (l : ℕ) [Fact l.Prime] (_hl : IsUnit (l : K₀)) (E : Type v) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (L : ringedSiteModules.{max v (u + 1)} ((sheafCompose _ (forget₂ CommRingCat.{max v (u + 1)} RingCat.{max v (u + 1)})).obj (smoothLatticeRationalRing l E (pullback f (Spec.map (CommRingCat.ofHom (algebraMap K₀ K))))))) (_hL : L.IsFiniteLocallyFree) : ∃ (M : ringedSiteModules.{max v (u + 1)} (WeilConjectures.completedIntegralCoefficientSheafUnrestricted l E (pullback f (Spec.map (CommRingCat.ofHom (algebraMap K₀ K)))))) (i : M ⟶ (SheafOfModules.restrictScalars ((sheafCompose _ (forget₂ CommRingCat.{max v (u + 1)} RingCat.{max v (u + 1)})).map (smoothLatticeCoefficientMap l E (pullback f (Spec.map (CommRingCat.ofHom (algebraMap K₀ K))))))).obj L), Mono i ∧ M.IsFiniteLocallyFree ∧ ∃ e : SheafOfModules.changeOfRingsOfUniverses.{u, u + 1, max v (u + 1), max v (u + 1)} (smoothLatticeCoefficientMap l E (pullback f (Spec.map (CommRingCat.ofHom (algebraMap K₀ K))))) M ≅ L, ∀ (U : (Scheme.ProEt (pullback f (Spec.map (CommRingCat.ofHom (algebraMap K₀ K)))))ᵒᵖ) (m : M.val.obj U), e.hom.val.app U (((PresheafOfModules.sheafificationAdjunction (R := (sheafCompose _ (forget₂ CommRingCat.{max v (u + 1)} RingCat.{max v (u + 1)})).obj (smoothLatticeRationalRing l E (pullback f (Spec.map (CommRingCat.ofHom (algebraMap K₀ K)))))) (𝟙 _)).unit.app (SheafOfModules.changeOfRingsPresheafOfUniverses.{u, u + 1, max v (u + 1), max v (u + 1)} (smoothLatticeCoefficientMap l E (pullback f (Spec.map (CommRingCat.ofHom (algebraMap K₀ K))))) M)).app U ((1 : (smoothLatticeRationalRing l E (pullback f (Spec.map (CommRingCat.ofHom (algebraMap K₀ K))))).obj.obj U) ⊗ₜ[_, ((smoothLatticeCoefficientMap l E (pullback f (Spec.map (CommRingCat.ofHom (algebraMap K₀ K))))).hom.app U).hom] m)) = i.val.app U m",
+  "branch": "newtargets-dag",
+  "by": "N1",
+  "date": "2026-10-18",
+  "existing": false
  }
 }
