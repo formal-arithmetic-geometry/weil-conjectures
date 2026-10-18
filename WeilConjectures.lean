@@ -24,6 +24,7 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Presheaf.TopologicalPul
 public import WeilConjectures.Algebra.Category.ModuleCat.Presheaf.TopologicalPullbackRepresentatives
 public import WeilConjectures.Algebra.Category.ModuleCat.PresheafPullbackEvaluation
 public import WeilConjectures.Algebra.Category.ModuleCat.QuotSMulTop
+public import WeilConjectures.Algebra.Category.ModuleCat.QuotSMulTopAdjunction
 public import WeilConjectures.Algebra.Category.ModuleCat.RingScalarExtension
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.BalancedTensorComparisonIsIso
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.BalancedTensorContraction
@@ -32,6 +33,7 @@ public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Bidual
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.ChangeOfRingsAdjunction
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Coinduce
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.DerivedBaseChange
+public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.DerivedBaseChangeRingEquiv
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.ExtensionByZeroFlat
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FiniteFreeInternalHomExact
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FiniteProjectiveInternalHomEvaluation
@@ -7471,6 +7473,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.Defs
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.MapDerivedCategory
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.Monoidal
+public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.MonoidalKFlat
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.SingleFunctor
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedPointwiseKanBridge
 public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryAdjunctionShift
@@ -7515,6 +7518,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.Rationalization
 public import WeilConjectures.CategoryTheory.DerivedCategory.RationalizationMap
 public import WeilConjectures.CategoryTheory.DerivedCategory.RationalizationRecollement
 public import WeilConjectures.CategoryTheory.DerivedCategory.ResolvingClassEssentialConstancy
+public import WeilConjectures.CategoryTheory.DerivedCategory.Retract
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Additive
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Adjunction
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.AdjunctionShift
@@ -7712,6 +7716,7 @@ public import WeilConjectures.CategoryTheory.HypercohomologyLeftEdgeNaturality
 public import WeilConjectures.CategoryTheory.HypercohomologyLeftEdgeSingle
 public import WeilConjectures.CategoryTheory.HypercohomologyLeftEdgeSingleAux
 public import WeilConjectures.CategoryTheory.HypercohomologyLeftEdgeTruncation
+public import WeilConjectures.CategoryTheory.Idempotents.FullSubcategory
 public import WeilConjectures.CategoryTheory.Idempotents.Pretriangulated
 public import WeilConjectures.CategoryTheory.Idempotents.Shift
 public import WeilConjectures.CategoryTheory.Idempotents.TStructure
@@ -8054,6 +8059,7 @@ public import WeilConjectures.CategoryTheory.Triangulated.RingedSpaceDerivedProd
 public import WeilConjectures.CategoryTheory.Triangulated.TStructure.Adjunction
 public import WeilConjectures.CategoryTheory.Triangulated.TStructure.Homology
 public import WeilConjectures.CategoryTheory.Triangulated.TStructure.Karoubian
+public import WeilConjectures.CategoryTheory.Triangulated.TStructure.KaroubianSubcategory
 public import WeilConjectures.CategoryTheory.Triangulated.TStructure.ShortExact
 public import WeilConjectures.CategoryTheory.Triangulated.TriangleMorphismExtension
 public import WeilConjectures.CategoryTheory.TriangulatedEquivalenceTransfer
@@ -10797,7 +10803,11 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Dualizing
 public import WeilConjectures.SixFunctors.Etale.Derived.EtaleLocalization
 public import WeilConjectures.SixFunctors.Etale.Derived.Exchange
 public import WeilConjectures.SixFunctors.Etale.Derived.ExcisionComparison
+public import WeilConjectures.SixFunctors.Etale.Derived.ExtendScalarsQuotient
+public import WeilConjectures.SixFunctors.Etale.Derived.ExtendScalarsQuotientDerived
+public import WeilConjectures.SixFunctors.Etale.Derived.ExtendScalarsQuotientHom
 public import WeilConjectures.SixFunctors.Etale.Derived.FieldStagePointers
+public import WeilConjectures.SixFunctors.Etale.Derived.FiniteCoefficientChange
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.BettiCardinalities
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.BoundedConstructible
@@ -10864,6 +10874,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.HomShift
 public import WeilConjectures.SixFunctors.Etale.Derived.HomTriangulated
 public import WeilConjectures.SixFunctors.Etale.Derived.IntegralCoefficients
 public import WeilConjectures.SixFunctors.Etale.Derived.IntegralConstructible
+public import WeilConjectures.SixFunctors.Etale.Derived.IntegralResidueTor
 public import WeilConjectures.SixFunctors.Etale.Derived.Invertible
 public import WeilConjectures.SixFunctors.Etale.Derived.InvertiblePullback
 public import WeilConjectures.SixFunctors.Etale.Derived.InvertibleRestriction
@@ -11177,6 +11188,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.GeometricFrobeniusMate
 public import WeilConjectures.SixFunctors.ProEtale.Adic.GlobalSectionsHom
 public import WeilConjectures.SixFunctors.ProEtale.Adic.Hom
 public import WeilConjectures.SixFunctors.ProEtale.Adic.HomCoherence
+public import WeilConjectures.SixFunctors.ProEtale.Adic.IdempotentComplete
 public import WeilConjectures.SixFunctors.ProEtale.Adic.InternalHom
 public import WeilConjectures.SixFunctors.ProEtale.Adic.InternalHomEvaluation
 public import WeilConjectures.SixFunctors.ProEtale.Adic.IrreducibleLisse
