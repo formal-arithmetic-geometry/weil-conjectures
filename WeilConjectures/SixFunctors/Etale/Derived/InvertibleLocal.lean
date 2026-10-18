@@ -66,6 +66,11 @@ namespace Etale
 
 variable (Λ : Type (u + 1)) [CommRing Λ]
 
+-- Search the braiding of `ModuleCat Λ` through its symmetric structure, as in the generic
+-- definitions of the derived tensor product: otherwise the monoidal structures found by instance
+-- search differ from the ones in these definitions, and unifying them is very expensive.
+attribute [local instance high] SymmetricCategory.toBraidedCategory
+
 /-- Blueprint `lem-pur-etale-iso-descent`: Isomorphisms descend along étale surjections (family
 version).
 
@@ -90,7 +95,7 @@ theorem isIso_of_forall_isIso_leftDerivedUpperStar_map {X : Scheme.{u}} {ι : Ty
 
 variable [Finite Λ]
 
-set_option maxHeartbeats 40000 in
+set_option maxHeartbeats 100000 in
 /-- For an étale `u : U ⟶ X` and `L ∈ D(X_ét, Λ)` with `Lu^* L` invertible, the derived pullback
 of the evaluation `L ⊗ᴸ RHom(L, Λ) ⟶ Λ` is an isomorphism, the derived pullback along `u`
 commuting with the derived internal hom
@@ -103,10 +108,9 @@ theorem isIso_leftDerivedUpperStar_map_ev_of_etale {U X : Scheme.{u}} (u : U ⟶
   obtain ⟨_⟩ := _root_.DerivedCategory.nonempty_braidedCategory
     (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ))
   have := isIso_ihomComparison_leftDerivedUpperStar_of_etale Λ u L
-  sorry --
+  exact isIso_map_ev_of_isIso_ihomComparison _ ((isInvertible_iff_exists_derivedTensor _).2 h)
 
-
-set_option maxHeartbeats 40000 in
+set_option maxHeartbeats 100000 in
 /-- Blueprint `lem-pur-co-smooth-etale-locality`: Source-étale locality (family version).
 
 Invertibility is local for a jointly surjective family of étale morphisms `a i : U i ⟶ X`: if

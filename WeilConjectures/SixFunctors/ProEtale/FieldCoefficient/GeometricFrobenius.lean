@@ -9,10 +9,16 @@ public import WeilConjectures.SixFunctors.ProEtale.FieldCoefficient.Module
 public import WeilConjectures.SixFunctors.ProEtale.GeometricFrobenius
 
 /-!
-# Pushforward and pullback of `ℓ`-adic sheaves along a base change to `k̄` commute with the
+# Pushforward and pullback of `Λ`-adic sheaves along a base change to `k̄` commute with the
 Frobenius
 
-This is the counterpart, for sheaves of modules over the constant `ℓ`-adic sheaves
+This is the counterpart, for a coefficient field `Λ` with an ultrametric norm (the case of
+interest being a finite extension `E` of `ℚ_ℓ` inside `ℚ̄_ℓ`), of
+`WeilConjectures.SixFunctors.ProEtale.Adic.GeometricFrobenius`, which treats `ℚ̄_ℓ`,
+with the same proofs; the constant sheaf `Λ_X : U ↦ C(U, Λ)` is that of
+`WeilConjectures.SixFunctors.ProEtale.FieldCoefficient.ConstantSheaf`.
+
+This is the counterpart, for sheaves of modules over the constant sheaves `Λ_X`
 (`AlgebraicGeometry.ProEtale.FieldSheaf`), of
 `WeilConjectures.SixFunctors.ProEtale.GeometricFrobenius`.
 For a morphism `φ : X₀ ⟶ Y₀` of schemes over a finite field `k`, with base change
@@ -52,11 +58,13 @@ noncomputable def fieldLowerStarEquivalence (e : X ≅ Y) : FieldSheaf Λ X ≌ 
       (fieldLowerStarComp Λ e.hom e.inv).symm)
     (fieldLowerStarComp Λ e.inv e.hom ≪≫ fieldLowerStarCongr Λ e.inv_hom_id ≪≫ fieldLowerStarId Λ Y)
 
+omit [IsUltrametricDist Λ] in
 @[simp]
 lemma fieldLowerStarEquivalence_functor (e : X ≅ Y) :
     (fieldLowerStarEquivalence Λ e).functor = (e.hom)_*ᶠ[Λ] :=
   rfl
 
+omit [IsUltrametricDist Λ] in
 @[simp]
 lemma fieldLowerStarEquivalence_inverse (e : X ≅ Y) :
     (fieldLowerStarEquivalence Λ e).inverse = (e.inv)_*ᶠ[Λ] :=

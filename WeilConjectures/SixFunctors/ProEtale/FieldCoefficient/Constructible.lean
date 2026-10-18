@@ -14,26 +14,30 @@ public import WeilConjectures.Mathlib.CategoryTheory.Preadditive.Biproducts
 public import WeilConjectures.SixFunctors.ProEtale.FieldCoefficient.Module
 
 /-!
-# Lisse and constructible `ℓ`-adic sheaves on the pro-étale site
+# Lisse and constructible `Λ`-adic sheaves on the pro-étale site
+
+This is the counterpart, for a coefficient field `Λ` with an ultrametric norm (the case of
+interest being a finite extension `E` of `ℚ_ℓ` inside `ℚ̄_ℓ`), of
+`WeilConjectures.SixFunctors.ProEtale.Adic.Constructible`, which treats `ℚ̄_ℓ`,
+with the same proofs; the constant sheaf `Λ_X : U ↦ C(U, Λ)` is that of
+`WeilConjectures.SixFunctors.ProEtale.FieldCoefficient.ConstantSheaf`.
 
 Let `X` be a scheme. Following Bhatt–Scholze (*The pro-étale topology for schemes*, §6.8) and
 the blueprint (`def-weil-constructible-heart`, `def-weil-finite-torsion-constructibility`), a
-sheaf `F` of `ℚ̄_ℓ`-modules on the small pro-étale site of `X` is
+sheaf `F` of `Λ`-modules on the small pro-étale site of `X` is
 
 - *lisse* (`AlgebraicGeometry.ProEtale.IsFieldLisseSheaf`) if it is pro-étale locally a finite
-  direct sum of copies of the constant `ℓ`-adic sheaf `ℚ̄_ℓ`
+  direct sum of copies of the constant sheaf `Λ`
   (`AlgebraicGeometry.ProEtale.fieldConstantSheaf`), that is, locally free of finite rank over
-  `ℚ̄_ℓ,X`;
+  `Λ_X`;
 - *constructible* (`AlgebraicGeometry.ProEtale.IsFieldConstructibleSheaf`) if, locally on `X`,
   `X` is the disjoint union of finitely many locally closed subschemes on each of which `F` is
   lisse (`AlgebraicGeometry.ProEtale.IsFieldStratifiedLisseSheaf`).
 
 A lisse sheaf on a connected `X` is the same as a continuous finite-dimensional representation
-of `π₁(X)` with coefficients in a finite extension `E` of `ℚ_ℓ`: the trivialising pro-étale
-cover may be taken to be a pro-finite étale Galois cover, whose group acts continuously on the
-fibre `E^n`. In particular a lisse sheaf has a finite field of definition, and the category
-of constructible `ℚ̄_ℓ`-sheaves is the `2`-colimit over finite `E ⊆ ℚ̄_ℓ` of the categories of
-constructible `E`-sheaves (`def-weil-algebraically-closed-coefficients`).
+of `π₁(X)` with coefficients in `Λ`: the trivialising pro-étale cover may be taken to be a
+pro-finite étale Galois cover, whose group acts continuously on the fibre `Λⁿ`. For `Λ = E`
+these are the lisse `E`-sheaves of blueprint `def-weil-constructible-heart`.
 
 The strata are only required to be locally closed: on the noetherian schemes of the blueprint
 every locally closed subset is constructible, and with this convention pullback along an
@@ -50,17 +54,18 @@ this is the same as a global finite stratification.
 
 ## Main results
 
-- `AlgebraicGeometry.ProEtale.isFieldLisseSheaf_fieldConstantSheaf`: `ℚ̄_ℓ,X` is lisse.
+- `AlgebraicGeometry.ProEtale.isFieldLisseSheaf_fieldConstantSheaf`: `Λ_X` is lisse.
 - `AlgebraicGeometry.ProEtale.IsFieldLisseSheaf.upperStar`,
   `AlgebraicGeometry.ProEtale.IsFieldConstructibleSheaf.upperStar`: pullback preserves lisse and
-  constructible sheaves. Both rest on `g^* ℚ̄_ℓ ≅ ℚ̄_ℓ`
+  constructible sheaves. Both rest on `g^* Λ ≅ Λ`
   (`AlgebraicGeometry.ProEtale.upperStarFieldConstantSheafIso`).
 - `AlgebraicGeometry.ProEtale.IsFieldLisseSheaf.biprod`,
   `AlgebraicGeometry.ProEtale.IsFieldConstructibleSheaf.biprod`: binary direct sums of lisse,
   resp. constructible, sheaves are lisse, resp. constructible.
 - The constructible sheaves contain `0` and are closed under isomorphisms and finite products.
   On a locally Noetherian scheme they are also closed under kernels and cokernels
-  (`WeilConjectures.SixFunctors.ProEtale.FieldCoefficient.Abelian`), and they are closed under extensions
+  (`WeilConjectures.SixFunctors.ProEtale.FieldCoefficient.Abelian`), and they are closed under
+  extensions
   (`WeilConjectures.SixFunctors.ProEtale.FieldCoefficient.Extension`), the blueprint
   `def-weil-constructible-heart`.
 -/
@@ -185,7 +190,7 @@ lemma nonempty_fieldUpperStar_iso_biproduct {V W : Scheme.{u}} (g : W ⟶ V)
   ⟨(g)^*ᶠ[Λ].mapIso e ≪≫ (g)^*ᶠ[Λ].mapBiproduct _ ≪≫ biproduct.mapIso fun _ ↦ hg.some⟩
 
 /-- The pullback of a lisse sheaf is lisse: the pullback of a trivialising cover is a
-trivialising cover, and the pullback of the constant sheaf is the constant `ℓ`-adic
+trivialising cover, and the pullback of the constant sheaf is the constant
 sheaf (`AlgebraicGeometry.ProEtale.upperStarFieldConstantSheafIso`). -/
 theorem IsFieldLisseSheaf.upperStar {Y : Scheme.{u}} (f : Y ⟶ X)
     {F : FieldSheaf Λ X} (hF : IsFieldLisseSheaf F) :
@@ -300,7 +305,7 @@ theorem IsFieldConstructibleSheaf.biprod
       (pullback.fst j j')^*ᶠ[Λ].mapIso ((j)^*ᶠ[Λ].mapBiprod F G) ≪≫
       (pullback.fst j j')^*ᶠ[Λ].mapBiprod _ _).symm
 
-/-- A sheaf of `Λ`-modules on the small pro-étale site of `X` is an *irreducible `ℓ`-adic local
+/-- A sheaf of `Λ`-modules on the small pro-étale site of `X` is an *irreducible `Λ`-adic local
 system* if it is lisse and nonzero, and every lisse subsheaf of it is zero or all of it. For
 `X` connected this says that the corresponding continuous representation of `π₁(X)` is
 irreducible. -/
@@ -311,7 +316,7 @@ def IsIrreducibleFieldLocalSystem
       IsFieldLisseSheaf G → IsZero G ∨ IsIso i
 
 variable (Λ X) in
-/-- Constructibility of `ℓ`-adic pro-étale sheaves, as an object property. -/
+/-- Constructibility of `Λ`-adic pro-étale sheaves, as an object property. -/
 def fieldConstructibleSheaf :
     ObjectProperty (FieldSheaf Λ X) :=
   fun F ↦ IsFieldConstructibleSheaf F

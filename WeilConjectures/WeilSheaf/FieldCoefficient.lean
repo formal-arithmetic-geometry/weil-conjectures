@@ -134,15 +134,23 @@ noncomputable instance : Category (FieldWeilSheaf k₀ Λ X) :=
   inferInstanceAs (Category (FieldWeilSheaf.objectProperty k₀ Λ X).FullSubcategory)
 
 noncomputable instance [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] :
-    Abelian (FieldWeilSheaf k₀ Λ X) :=
-  inferInstanceAs (Abelian (FieldWeilSheaf.objectProperty k₀ Λ X).FullSubcategory)
+    Abelian (FieldWeilSheaf k₀ Λ X) := by
+  have : (FieldWeilSheaf.objectProperty k₀ Λ X).IsClosedUnderKernels := inferInstance
+  have : (FieldWeilSheaf.objectProperty k₀ Λ X).IsClosedUnderCokernels := inferInstance
+  have : (FieldWeilSheaf.objectProperty k₀ Λ X).IsClosedUnderFiniteProducts := inferInstance
+  have : (FieldWeilSheaf.objectProperty k₀ Λ X).ContainsZero := inferInstance
+  exact inferInstanceAs (Abelian (FieldWeilSheaf.objectProperty k₀ Λ X).FullSubcategory)
 
 noncomputable instance : Preadditive (FieldWeilSheaf k₀ Λ X) :=
   inferInstanceAs (Preadditive (FieldWeilSheaf.objectProperty k₀ Λ X).FullSubcategory)
 
 instance [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] :
-    (FieldWeilComplex.objectProperty k₀ Λ X).IsTriangulated :=
-  inferInstance
+    (FieldWeilComplex.objectProperty k₀ Λ X).IsTriangulated := by
+  have : (FieldWeilSheaf.objectProperty k₀ Λ X).IsClosedUnderKernels := inferInstance
+  have : (FieldWeilSheaf.objectProperty k₀ Λ X).IsClosedUnderCokernels := inferInstance
+  have : (FieldWeilSheaf.objectProperty k₀ Λ X).IsClosedUnderExtensions := inferInstance
+  have : (FieldWeilSheaf.objectProperty k₀ Λ X).ContainsZero := inferInstance
+  infer_instance
 
 noncomputable instance : Category (FieldWeilComplex k₀ Λ X) :=
   inferInstanceAs (Category (FieldWeilComplex.objectProperty k₀ Λ X).FullSubcategory)
@@ -218,5 +226,20 @@ noncomputable def frobeniusIso :
       Functor.mapDerivedCategoryNatIso (IsoAlgebra.forgetCompIso _))
 
 end FieldWeilComplex
+
+section FiniteExtension
+
+variable {l : ℕ} [Fact l.Prime] (E : IntermediateField ℚ_[l] (PadicAlgCl l))
+  [FiniteDimensional ℚ_[l] E] [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
+
+/-- For a finite extension `E` of `ℚ_ℓ` inside `ℚ̄_ℓ`, the constructible `E`-Weil sheaves form an
+abelian category. -/
+noncomputable example : Abelian (FieldWeilSheaf k₀ E X) := inferInstance
+
+/-- For a finite extension `E` of `ℚ_ℓ` inside `ℚ̄_ℓ`, `D^b_{c,W}(X, E)` is a triangulated
+category. -/
+example : IsTriangulated (FieldWeilComplex k₀ E X) := inferInstance
+
+end FiniteExtension
 
 end AlgebraicGeometry

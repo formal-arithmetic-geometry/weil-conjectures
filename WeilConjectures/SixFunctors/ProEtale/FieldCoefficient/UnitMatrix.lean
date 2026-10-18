@@ -11,19 +11,25 @@ public import WeilConjectures.SixFunctors.ProEtale.FieldCoefficient.InternalHom
 public import WeilConjectures.SixFunctors.ProEtale.Adic.UnitMatrix
 
 /-!
-# Morphisms of finite free `ℚ̄_ℓ,V`-modules as matrices of functions
+# Morphisms of finite free `Λ_V`-modules as matrices of functions
 
-An endomorphism `ψ` of the unit module `ℚ̄_ℓ,V` is multiplication by the locally finite continuous
+This is the counterpart, for a coefficient field `Λ` with an ultrametric norm (the case of
+interest being a finite extension `E` of `ℚ_ℓ` inside `ℚ̄_ℓ`), of
+`WeilConjectures.SixFunctors.ProEtale.Adic.UnitMatrix`, which treats `ℚ̄_ℓ`,
+with the same proofs; the constant sheaf `Λ_X : U ↦ C(U, Λ)` is that of
+`WeilConjectures.SixFunctors.ProEtale.FieldCoefficient.ConstantSheaf`.
+
+An endomorphism `ψ` of the unit module `Λ_V` is multiplication by the continuous
 function `AlgebraicGeometry.ProEtale.FieldSheaf.unitEndFun ψ` on `V`, the image of `1`
 (`AlgebraicGeometry.ProEtale.fieldConstantSheaf_app_eq_mul`); conversely every such function `a`
 gives the endomorphism `AlgebraicGeometry.ProEtale.FieldSheaf.unitMul a`. Composition corresponds to
-multiplication. Consequently a morphism `ℚ̄_ℓ,Vⁿ ⟶ ℚ̄_ℓ,Vᵐ` is the same as an `m × n` matrix of
+multiplication. Consequently a morphism `Λ_Vⁿ ⟶ Λ_Vᵐ` is the same as an `m × n` matrix of
 functions (`AlgebraicGeometry.ProEtale.FieldSheaf.unitMatrix`,
 `AlgebraicGeometry.ProEtale.FieldSheaf.ofUnitMatrix`), compatibly with composition.
 
-For a weakly étale `g : W ⟶ V`, pulling back an endomorphism of `ℚ̄_ℓ,V` pulls back its function
+For a weakly étale `g : W ⟶ V`, pulling back an endomorphism of `Λ_V` pulls back its function
 along `g` (`AlgebraicGeometry.ProEtale.fieldConstantSheafEndFun_fieldUpperStar`): on sections the
-comparison `g^* ℚ̄_ℓ,V ≅ ℚ̄_ℓ,W` is the identity (`AlgebraicGeometry.ProEtale.
+comparison `g^* Λ_V ≅ Λ_W` is the identity (`AlgebraicGeometry.ProEtale.
 upperStarIsoLocalizationRestriction_inv_app_comp_fieldUpperStarUnitIso`).
 -/
 
@@ -31,11 +37,13 @@ upperStarIsoLocalizationRestriction_inv_app_comp_fieldUpperStarUnitIso`).
 
 universe w
 
+open PadicAlgCl (sumComplEquiv sumComplEquiv_symm_inl)
+
 namespace AlgebraicGeometry
 
 variable {Λ : Type} [NormedField Λ] [IsUltrametricDist Λ] {T : Type*} [TopologicalSpace T]
 
-/-- Evaluation of locally finite functions at a point. -/
+/-- Evaluation of continuous functions at a point. -/
 noncomputable def fieldFunctionsEval (t : T) :
     fieldFunctions Λ T →+* Λ where
   toFun f := f.1 t
@@ -44,12 +52,14 @@ noncomputable def fieldFunctionsEval (t : T) :
   map_zero' := rfl
   map_add' _ _ := rfl
 
+omit [IsUltrametricDist Λ] in
 @[simp]
 lemma fieldFunctionsEval_apply (t : T) (f : fieldFunctions Λ T) :
     fieldFunctionsEval t f = f.1 t :=
   rfl
 
-/-- A nowhere vanishing locally finite function is invertible. -/
+omit [IsUltrametricDist Λ] in
+/-- A nowhere vanishing continuous function is invertible. -/
 lemma fieldFunctions_isUnit_of_forall_ne_zero (f : fieldFunctions Λ T) (hf : ∀ t, f.1 t ≠ 0) :
     IsUnit f := by
   have hc : Continuous fun t ↦ (f.1 t)⁻¹ := f.1.continuous.inv₀ hf
@@ -60,9 +70,12 @@ lemma fieldFunctions_isUnit_of_forall_ne_zero (f : fieldFunctions Λ T) (hf : �
 
 section ConstantRank
 
+
+
 variable {κ ι : Type*} [Fintype κ] [Fintype ι] [DecidableEq κ] [DecidableEq ι]
 
-/-- Pulled back along maps into a neighbourhood of a point, a matrix of locally finite functions
+omit [IsUltrametricDist Λ] in
+/-- Pulled back along maps into a neighbourhood of a point, a matrix of continuous functions
 of constant rank `r` is equivalent to the matrix `[[1, 0], [0, 0]]` with an `r × r` identity
 block. -/
 lemma exists_isOpen_eq_mul_field (M : Matrix κ ι (fieldFunctions Λ T)) (r : ℕ)
@@ -74,7 +87,7 @@ lemma exists_isOpen_eq_mul_field (M : Matrix κ ι (fieldFunctions Λ T)) (r : �
         (Q : Matrix ι ι (fieldFunctions Λ T')), IsUnit P.det ∧ IsUnit Q.det ∧
         M.map (fieldFunctionsCompAlgHom Λ g) = P * ((Matrix.fromBlocks 1 0 0 0 :
           Matrix (Fin r ⊕ {i // i ∉ Set.range ρ}) (Fin r ⊕ {j // j ∉ Set.range γ}) _).reindex
-            (PadicAlgCl.sumComplEquiv ρ hρ).symm (PadicAlgCl.sumComplEquiv γ hγ).symm) * Q := by
+            (sumComplEquiv ρ hρ).symm (sumComplEquiv γ hγ).symm) * Q := by
   obtain ⟨ρ, γ, h⟩ := (M.le_rank_map_iff (fieldFunctionsEval t₀) r).1 (hr t₀).ge
   have hρ : Function.Injective ρ := fun a b hab ↦ by
     by_contra hne
@@ -86,7 +99,7 @@ lemma exists_isOpen_eq_mul_field (M : Matrix κ ι (fieldFunctions Λ T)) (r : �
   refine ⟨{t | δ.1 t ≠ 0}, ρ, γ, hρ, hγ, isOpen_compl_singleton.preimage δ.1.continuous, h,
     fun {T'} _ g hg ↦ ?_⟩
   let M' := M.map (fieldFunctionsCompAlgHom Λ g)
-  let N := M'.reindex (PadicAlgCl.sumComplEquiv ρ hρ) (PadicAlgCl.sumComplEquiv γ hγ)
+  let N := M'.reindex (sumComplEquiv ρ hρ) (sumComplEquiv γ hγ)
   have hN : N = Matrix.fromBlocks N.toBlocks₁₁ N.toBlocks₁₂ N.toBlocks₂₁ N.toBlocks₂₂ :=
     (Matrix.fromBlocks_toBlocks N).symm
   have hB : N.toBlocks₁₁ = (M.submatrix ρ γ).map (fieldFunctionsCompAlgHom Λ g) := by
@@ -103,17 +116,17 @@ lemma exists_isOpen_eq_mul_field (M : Matrix κ ι (fieldFunctions Λ T)) (r : �
     N.toBlocks₂₂ (fun t' ↦ ?_)
   · rw [Matrix.invOf_eq_nonsing_inv] at hS
     obtain ⟨P, Q, hP, hQ, hPQ⟩ := Matrix.exists_eq_mul_fromBlocks_one_zero _ _ _ _ hBu hS
-    refine ⟨P.reindex (PadicAlgCl.sumComplEquiv ρ hρ).symm (PadicAlgCl.sumComplEquiv ρ hρ).symm,
-      Q.reindex (PadicAlgCl.sumComplEquiv γ hγ).symm (PadicAlgCl.sumComplEquiv γ hγ).symm, by simpa using hP,
+    refine ⟨P.reindex (sumComplEquiv ρ hρ).symm (sumComplEquiv ρ hρ).symm,
+      Q.reindex (sumComplEquiv γ hγ).symm (sumComplEquiv γ hγ).symm, by simpa using hP,
       by simpa using hQ, ?_⟩
-    have hM' : M' = N.reindex (PadicAlgCl.sumComplEquiv ρ hρ).symm (PadicAlgCl.sumComplEquiv γ hγ).symm := by simp [N]
+    have hM' : M' = N.reindex (sumComplEquiv ρ hρ).symm (sumComplEquiv γ hγ).symm := by simp [N]
     change M' = _
     rw [hM', hN, hPQ]
     simp only [Matrix.reindex_apply, Matrix.submatrix_mul_equiv]
   · rw [← hN]
     have : N.map (fieldFunctionsEval t') =
-        (M.map (fieldFunctionsEval (g t'))).reindex (PadicAlgCl.sumComplEquiv ρ hρ)
-          (PadicAlgCl.sumComplEquiv γ hγ) := by
+        (M.map (fieldFunctionsEval (g t'))).reindex (sumComplEquiv ρ hρ)
+          (sumComplEquiv γ hγ) := by
       ext a b
       rfl
     rw [this, Matrix.rank_reindex, hr, Fintype.card_fin]
@@ -132,6 +145,7 @@ namespace AlgebraicGeometry.ProEtale
 
 variable {Λ : Type} [NormedField Λ] [IsUltrametricDist Λ] {V : Scheme.{u}}
 
+omit [IsUltrametricDist Λ] in
 /-- A `Λ_V`-linear endomorphism of `Λ_V` is multiplication by the image of `1`. -/
 lemma fieldConstantSheaf_app_eq_mul (f : fieldConstantSheaf Λ V ⟶ fieldConstantSheaf Λ V)
     (hf : (MonObj.mul : fieldConstantSheaf Λ V ⊗ fieldConstantSheaf Λ V ⟶ _) ≫ f =
@@ -153,6 +167,7 @@ noncomputable def fieldConstantSheafEndFun (f : fieldConstantSheaf Λ V ⟶ fiel
     fieldFunctions Λ V :=
   (f.hom.app (op (proEtTop V)) (ULift.up 1)).down
 
+omit [IsUltrametricDist Λ] in
 lemma fieldConstantSheaf_app_one (f : fieldConstantSheaf Λ V ⟶ fieldConstantSheaf Λ V)
     (U : V.ProEt) :
     f.hom.app (op U) (ULift.up 1) = ULift.up (fieldFunctionsComp Λ
@@ -165,6 +180,7 @@ lemma fieldConstantSheaf_app_one (f : fieldConstantSheaf Λ V ⟶ fieldConstantS
   rw [h]
   rfl
 
+omit [IsUltrametricDist Λ] in
 /-- `Λ_V`-linear endomorphisms of `Λ_V` are determined by their function. -/
 lemma fieldConstantSheaf_end_ext {f g : fieldConstantSheaf Λ V ⟶ fieldConstantSheaf Λ V}
     (hf : (MonObj.mul : fieldConstantSheaf Λ V ⊗ fieldConstantSheaf Λ V ⟶ _) ≫ f =
@@ -177,6 +193,7 @@ lemma fieldConstantSheaf_end_ext {f g : fieldConstantSheaf Λ V ⟶ fieldConstan
   rw [fieldConstantSheaf_app_eq_mul f hf, fieldConstantSheaf_app_eq_mul g hg,
     fieldConstantSheaf_app_one, fieldConstantSheaf_app_one, h]
 
+omit [IsUltrametricDist Λ] in
 lemma fieldConstantSheafEndFun_comp (f g : fieldConstantSheaf Λ V ⟶ fieldConstantSheaf Λ V)
     (hg : (MonObj.mul : fieldConstantSheaf Λ V ⊗ fieldConstantSheaf Λ V ⟶ _) ≫ g =
       fieldConstantSheaf Λ V ◁ g ≫ MonObj.mul) :
@@ -192,7 +209,7 @@ noncomputable def fieldMulPullback {T : Scheme.{u}} (s : fieldFunctions Λ T)
     fieldFunctions Λ T :=
   s * fieldFunctionsComp Λ g.base.hom a
 
-/-- Multiplication by a locally finite function `a` on `V`, an endomorphism of `Λ_V`. -/
+/-- Multiplication by a continuous function `a` on `V`, an endomorphism of `Λ_V`. -/
 noncomputable def fieldConstantSheafMul (a : fieldFunctions Λ V) :
     fieldConstantSheaf Λ V ⟶ fieldConstantSheaf Λ V :=
   ⟨{ app U := ModuleCat.ofHom
@@ -209,18 +226,21 @@ noncomputable def fieldConstantSheafMul (a : fieldFunctions Λ V) :
        congr 1
        exact congrArg a.1 (by rw [← MorphismProperty.Over.w g.unop]; rfl) }⟩
 
+omit [IsUltrametricDist Λ] in
 lemma fieldConstantSheafMul_app (a : fieldFunctions Λ V) (U : V.ProEtᵒᵖ)
     (s : (fieldConstantSheaf Λ V).obj.obj U) :
     (fieldConstantSheafMul a).hom.app U s =
       ULift.up (fieldMulPullback (T := U.unop.left) s.down U.unop.hom a) :=
   rfl
 
+omit [IsUltrametricDist Λ] in
 lemma fieldConstantSheafEndFun_mul (a : fieldFunctions Λ V) :
     fieldConstantSheafEndFun (fieldConstantSheafMul a) = a := by
   change 1 * _ = a
   rw [one_mul]
   rfl
 
+omit [IsUltrametricDist Λ] in
 lemma fieldConstantSheafMul_linear (a : fieldFunctions Λ V) :
     (MonObj.mul : fieldConstantSheaf Λ V ⊗ fieldConstantSheaf Λ V ⟶ _) ≫ fieldConstantSheafMul a =
       fieldConstantSheaf Λ V ◁ fieldConstantSheafMul a ≫ MonObj.mul := by
@@ -237,6 +257,7 @@ section Restriction
 
 variable {W : Scheme.{u}} (g : W ⟶ V) (hg : WeaklyEtale g)
 
+omit [IsUltrametricDist Λ] in
 lemma localizationRestriction_fieldConstantSheaf :
     (localizationRestriction (FieldCoefficients.{u} Λ) g hg).obj (fieldConstantSheaf Λ V) =
       fieldConstantSheaf Λ W :=
@@ -309,33 +330,40 @@ namespace FieldSheaf
 noncomputable def unitEndFun (ψ : unit Λ V ⟶ unit Λ V) : fieldFunctions Λ V :=
   fieldConstantSheafEndFun ψ.hom
 
+omit [IsUltrametricDist Λ] in
 lemma unit_hom_linear (ψ : unit Λ V ⟶ unit Λ V) :
     (MonObj.mul : fieldConstantSheaf Λ V ⊗ fieldConstantSheaf Λ V ⟶ _) ≫ ψ.hom =
       fieldConstantSheaf Λ V ◁ ψ.hom ≫ MonObj.mul :=
   IsModHom.smul_hom (A := fieldConstantSheaf Λ V) (f := ψ.hom)
 
+omit [IsUltrametricDist Λ] in
 lemma unitEndFun_injective : Function.Injective (unitEndFun (Λ := Λ) (V := V)) :=
   fun ψ ψ' h ↦ Mod.hom_ext _ _ (fieldConstantSheaf_end_ext (unit_hom_linear ψ)
     (unit_hom_linear ψ') h)
 
+omit [IsUltrametricDist Λ] in
 lemma unitEndFun_comp (ψ ψ' : unit Λ V ⟶ unit Λ V) :
     unitEndFun (ψ ≫ ψ') = unitEndFun ψ * unitEndFun ψ' :=
   fieldConstantSheafEndFun_comp ψ.hom ψ'.hom (unit_hom_linear ψ')
 
+omit [IsUltrametricDist Λ] in
 lemma unitEndFun_id : unitEndFun (𝟙 (unit Λ V)) = 1 :=
   rfl
 
+omit [IsUltrametricDist Λ] in
 lemma unitEndFun_add (ψ ψ' : unit Λ V ⟶ unit Λ V) :
     unitEndFun (ψ + ψ') = unitEndFun ψ + unitEndFun ψ' :=
   rfl
 
+omit [IsUltrametricDist Λ] in
 lemma unitEndFun_zero : unitEndFun (0 : unit Λ V ⟶ unit Λ V) = 0 :=
   rfl
 
-/-- Multiplication by a locally finite function, an endomorphism of the unit module. -/
+/-- Multiplication by a continuous function, an endomorphism of the unit module. -/
 noncomputable def unitMul (a : fieldFunctions Λ V) : unit Λ V ⟶ unit Λ V :=
   Mod.homMk (fieldConstantSheafMul a) (fieldConstantSheafMul_linear a)
 
+omit [IsUltrametricDist Λ] in
 lemma unitEndFun_unitMul (a : fieldFunctions Λ V) :
     unitEndFun (unitMul a) = a :=
   fieldConstantSheafEndFun_mul a
@@ -380,6 +408,7 @@ lemma unitMatrix_comp (ψ : (⨁ fun _ : ι ↦ unit Λ V) ⟶ ⨁ fun _ : κ �
   rw [unitEndFun_comp, mul_comm]
   rfl
 
+omit [IsUltrametricDist Λ] in
 lemma unitMatrix_id [DecidableEq ι] :
     unitMatrix (𝟙 (⨁ fun _ : ι ↦ unit Λ V)) = 1 := by
   refine Matrix.ext fun i j ↦ ?_
@@ -403,6 +432,7 @@ noncomputable def ofUnitMatrix (N : Matrix κ ι (fieldFunctions Λ V)) :
     (⨁ fun _ : ι ↦ unit Λ V) ⟶ ⨁ fun _ : κ ↦ unit Λ V :=
   biproduct.matrix fun j i ↦ unitMul (Λ := Λ) (V := V) (N i j)
 
+omit [IsUltrametricDist Λ] in
 lemma unitMatrix_ofUnitMatrix (N : Matrix κ ι (fieldFunctions Λ V)) :
     unitMatrix (ofUnitMatrix N) = N := by
   refine Matrix.ext fun i j ↦ ?_
@@ -448,20 +478,21 @@ noncomputable def blockMap : (⨁ fun _ : ι ↦ unit Λ V) ⟶ ⨁ fun _ : κ �
     (biproduct.whiskerEquiv ((Equiv.ofInjective γ hγ).symm.trans (Equiv.ofInjective ρ hρ))
       (fun _ ↦ Iso.refl (unit Λ V))).hom ≫ biproduct.fromSubtype _ (· ∈ Set.range ρ)
 
+omit [IsUltrametricDist Λ] in
 lemma unitMatrix_blockMap :
     unitMatrix (blockMap (Λ := Λ) (V := V) ρ γ hρ hγ) =
       (Matrix.fromBlocks 1 0 0 0 : Matrix (Fin r ⊕ {i // i ∉ Set.range ρ})
-        (Fin r ⊕ {j // j ∉ Set.range γ}) _).reindex (PadicAlgCl.sumComplEquiv ρ hρ).symm
-          (PadicAlgCl.sumComplEquiv γ hγ).symm := by
+        (Fin r ⊕ {j // j ∉ Set.range γ}) _).reindex (sumComplEquiv ρ hρ).symm
+          (sumComplEquiv γ hγ).symm := by
   refine Matrix.ext fun i j ↦ ?_
-  obtain ⟨x, rfl⟩ := (PadicAlgCl.sumComplEquiv ρ hρ).symm.surjective i
-  obtain ⟨y, rfl⟩ := (PadicAlgCl.sumComplEquiv γ hγ).symm.surjective j
+  obtain ⟨x, rfl⟩ := (sumComplEquiv ρ hρ).symm.surjective i
+  obtain ⟨y, rfl⟩ := (sumComplEquiv γ hγ).symm.surjective j
   simp only [Matrix.reindex_apply, Matrix.submatrix_apply, Equiv.symm_symm, Equiv.apply_symm_apply]
   rcases y with b | ⟨j, hj⟩
-  · have h1 : biproduct.ι (fun _ : ι ↦ unit Λ V) ((PadicAlgCl.sumComplEquiv γ hγ).symm
+  · have h1 : biproduct.ι (fun _ : ι ↦ unit Λ V) ((sumComplEquiv γ hγ).symm
         (Sum.inl b)) ≫ blockMap (Λ := Λ) (V := V) ρ γ hρ hγ =
         biproduct.ι (fun _ : κ ↦ unit Λ V) (ρ b) := by
-      rw [PadicAlgCl.sumComplEquiv_symm_inl, blockMap,
+      rw [sumComplEquiv_symm_inl, blockMap,
         biproduct.ι_toSubtype_subtype_assoc (fun _ : ι ↦ unit Λ V) (· ∈ Set.range γ) ⟨γ b, b, rfl⟩]
       simp only [biproduct.whiskerEquiv_hom, Equiv.trans_apply, Iso.refl_inv,
         biproduct.ι_desc_assoc, Category.assoc, biproduct.ι_fromSubtype,
@@ -469,7 +500,7 @@ lemma unitMatrix_blockMap :
       exact Category.id_comp _
     rw [unitMatrix, ← Category.assoc, h1]
     rcases x with a | ⟨i, hi⟩
-    · rw [PadicAlgCl.sumComplEquiv_symm_inl]
+    · rw [sumComplEquiv_symm_inl]
       by_cases hab : b = a
       · subst hab
         rw [biproduct.ι_π_self]
@@ -479,12 +510,12 @@ lemma unitMatrix_blockMap :
         simp only [Matrix.fromBlocks_apply₁₁]
         rw [Matrix.one_apply_ne (Ne.symm hab)]
         rfl
-    · have : (PadicAlgCl.sumComplEquiv ρ hρ).symm (Sum.inr ⟨i, hi⟩) = i := by
-        simp [PadicAlgCl.sumComplEquiv]
+    · have : (sumComplEquiv ρ hρ).symm (Sum.inr ⟨i, hi⟩) = i := by
+        simp [sumComplEquiv]
       rw [this, biproduct.ι_π_ne _ (fun h ↦ hi ⟨b, h⟩)]
       rfl
-  · have : (PadicAlgCl.sumComplEquiv γ hγ).symm (Sum.inr ⟨j, hj⟩) = j := by
-      simp [PadicAlgCl.sumComplEquiv]
+  · have : (sumComplEquiv γ hγ).symm (Sum.inr ⟨j, hj⟩) = j := by
+      simp [sumComplEquiv]
     rw [unitMatrix, this, blockMap]
     simp only [Category.assoc]
     erw [biproduct.ι_toSubtype_assoc, dif_neg hj]
@@ -505,8 +536,8 @@ lemma eq_blockMap_of_unitMatrix_eq
     (P : Matrix κ κ (fieldFunctions Λ V))
     (Q : Matrix ι ι (fieldFunctions Λ V))
     (h : unitMatrix ψ = P * (Matrix.fromBlocks 1 0 0 0 : Matrix (Fin r ⊕ {i // i ∉ Set.range ρ})
-        (Fin r ⊕ {j // j ∉ Set.range γ}) _).reindex (PadicAlgCl.sumComplEquiv ρ hρ).symm
-          (PadicAlgCl.sumComplEquiv γ hγ).symm * Q) :
+        (Fin r ⊕ {j // j ∉ Set.range γ}) _).reindex (sumComplEquiv ρ hρ).symm
+          (sumComplEquiv γ hγ).symm * Q) :
     ψ = ofUnitMatrix Q ≫ blockMap ρ γ hρ hγ ≫ ofUnitMatrix P := by
   rw [← ofUnitMatrix_unitMatrix ψ, h, ofUnitMatrix_mul, ofUnitMatrix_mul,
     ← unitMatrix_blockMap (Λ := Λ) (V := V) ρ γ hρ hγ, ofUnitMatrix_unitMatrix]

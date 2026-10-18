@@ -11,17 +11,24 @@ public import WeilConjectures.SixFunctors.ProEtale.FieldCoefficient.Constructibl
 public import WeilConjectures.SixFunctors.ProEtale.FieldCoefficient.InternalHom
 
 /-!
-# Extensions of constructible `ℓ`-adic sheaves
+# Extensions of constructible `Λ`-adic sheaves
 
-An epimorphism `q : P ⟶ Q` of sheaves of `ℚ̄_ℓ,X`-modules is locally split over a section
-`ℚ̄_ℓ,X ⟶ Q`: there is a pro-étale cover over each member `g : W ⟶ X` of which the section lifts to
-`g^* P` (`AlgebraicGeometry.ProEtale.exists_cover_adic_lift`). The underlying section lifts on a
+This is the counterpart, for a coefficient field `Λ` with an ultrametric norm (the case of
+interest being a finite extension `E` of `ℚ_ℓ` inside `ℚ̄_ℓ`), of
+`WeilConjectures.SixFunctors.ProEtale.Adic.Extension`, which treats `ℚ̄_ℓ`,
+with the same proofs; the constant sheaf `Λ_X : U ↦ C(U, Λ)` is that of
+`WeilConjectures.SixFunctors.ProEtale.FieldCoefficient.ConstantSheaf`.
+
+An epimorphism `q : P ⟶ Q` of sheaves of `Λ_X`-modules is locally split over a section
+`Λ_X ⟶ Q`: there is a pro-étale cover over each member `g : W ⟶ X` of which the section lifts to
+`g^* P` (`AlgebraicGeometry.ProEtale.exists_cover_field_lift`). The underlying section lifts on a
 covering sieve because `q` is locally surjective, and a section over the terminal object of
-`W.ProEt` is a map out of the unit sheaf (`AlgebraicGeometry.ProEtale.unitSheafLift`); the unit
+`W.ProEt` is a map out of the unit sheaf (`AlgebraicGeometry.ProEtale.fieldUnitSheafLift`); the unit
 comparison of the pullback is computed through the restriction to the slice site.
 
-Applied to a basis of `ℚ̄_ℓⁿ`, an extension of `ℚ̄_ℓⁿ` by a lisse sheaf splits locally, so
-extensions of lisse sheaves are lisse (`AlgebraicGeometry.ProEtale.IsFieldLisseSheaf.of_shortExact`).
+Applied to a basis of `Λⁿ`, an extension of `Λⁿ` by a lisse sheaf splits locally, so
+extensions of lisse sheaves are lisse
+(`AlgebraicGeometry.ProEtale.IsFieldLisseSheaf.of_shortExact`).
 Refining stratifications, extensions of constructible sheaves are constructible
 (`AlgebraicGeometry.ProEtale.IsFieldConstructibleSheaf.of_shortExact`), i.e.
 `(fieldConstructibleSheaf Λ X).IsClosedUnderExtensions`.
@@ -45,7 +52,7 @@ section
 variable {W : Scheme.{u}}
 
 /-- The map out of the unit presheaf sending `1` to a section over the terminal object. -/
-noncomputable def unitPresheafLift {G : (W.ProEt)ᵒᵖ ⥤ FieldCoefficients.{u} Λ}
+noncomputable def fieldUnitPresheafLift {G : (W.ProEt)ᵒᵖ ⥤ FieldCoefficients.{u} Λ}
     (x : G.obj (op (⊤_ W.ProEt))) :
     𝟙_ ((W.ProEt)ᵒᵖ ⥤ FieldCoefficients.{u} Λ) ⟶ G where
   app U := ModuleCat.ofHom (LinearMap.toSpanSingleton _ _ (G.map (terminal.from U.unop).op x))
@@ -57,19 +64,21 @@ noncomputable def unitPresheafLift {G : (W.ProEt)ᵒᵖ ⥤ FieldCoefficients.{u
       show (terminal.from (unop U)).op ≫ f = (terminal.from (unop U')).op from
         Quiver.Hom.unop_inj (terminal.hom_ext _ _)]
 
-lemma unitPresheafLift_app_one {G : (W.ProEt)ᵒᵖ ⥤ FieldCoefficients.{u} Λ}
+omit [IsUltrametricDist Λ] in
+lemma fieldUnitPresheafLift_app_one {G : (W.ProEt)ᵒᵖ ⥤ FieldCoefficients.{u} Λ}
     (x : G.obj (op (⊤_ W.ProEt))) :
-    (unitPresheafLift x).app (op (⊤_ W.ProEt)) (1 : ULift.{u + 1} Λ) = x := by
+    (fieldUnitPresheafLift x).app (op (⊤_ W.ProEt)) (1 : ULift.{u + 1} Λ) = x := by
   change (1 : ULift Λ) • G.map (terminal.from _).op x = x
   rw [one_smul, terminal.hom_ext (terminal.from (⊤_ W.ProEt)) (𝟙 _), op_id, G.map_id]
   rfl
 
-lemma unitPresheaf_hom_ext {G : (W.ProEt)ᵒᵖ ⥤ FieldCoefficients.{u} Λ}
+omit [IsUltrametricDist Λ] in
+lemma fieldUnitPresheaf_hom_ext {G : (W.ProEt)ᵒᵖ ⥤ FieldCoefficients.{u} Λ}
     {a b : 𝟙_ ((W.ProEt)ᵒᵖ ⥤ FieldCoefficients.{u} Λ) ⟶ G}
     (h : a.app (op (⊤_ W.ProEt)) (1 : ULift.{u + 1} Λ) =
       b.app (op (⊤_ W.ProEt)) (1 : ULift.{u + 1} Λ)) : a = b := by
   have key (c : 𝟙_ ((W.ProEt)ᵒᵖ ⥤ FieldCoefficients.{u} Λ) ⟶ G) :
-      c = unitPresheafLift (c.app (op (⊤_ W.ProEt)) (1 : ULift.{u + 1} Λ)) := by
+      c = fieldUnitPresheafLift (c.app (op (⊤_ W.ProEt)) (1 : ULift.{u + 1} Λ)) := by
     ext U : 2
     refine ModuleCat.hom_ext (LinearMap.ext fun r ↦ ?_)
     revert r
@@ -90,15 +99,16 @@ variable {W : Scheme.{u}}
 
 
 /-- The map out of the unit sheaf sending `1` to a section over the terminal object. -/
-noncomputable def unitSheafLift {F : Sheaf (Scheme.ProEt.topology W) (FieldCoefficients.{u} Λ)}
+noncomputable def fieldUnitSheafLift {F : Sheaf (Scheme.ProEt.topology W) (FieldCoefficients.{u} Λ)}
     (x : F.obj.obj (op (⊤_ W.ProEt))) : 𝟙_ _ ⟶ F :=
   inv (η (presheafToSheaf (Scheme.ProEt.topology W) (FieldCoefficients.{u} Λ))) ≫
-    ((sheafificationAdjunction _ _).homEquiv _ _).symm (unitPresheafLift x)
+    ((sheafificationAdjunction _ _).homEquiv _ _).symm (fieldUnitPresheafLift x)
 
-lemma ε_comp_unitSheafLift {F : Sheaf (Scheme.ProEt.topology W) (FieldCoefficients.{u} Λ)}
+omit [IsUltrametricDist Λ] in
+lemma ε_comp_fieldUnitSheafLift {F : Sheaf (Scheme.ProEt.topology W) (FieldCoefficients.{u} Λ)}
     (x : F.obj.obj (op (⊤_ W.ProEt))) :
-    ε (sheafToPresheaf _ _) ≫ (sheafToPresheaf _ _).map (unitSheafLift x) =
-      unitPresheafLift x := by
+    ε (sheafToPresheaf _ _) ≫ (sheafToPresheaf _ _).map (fieldUnitSheafLift x) =
+      fieldUnitPresheafLift x := by
   apply ((sheafificationAdjunction (Scheme.ProEt.topology W) (FieldCoefficients.{u} Λ)).homEquiv
     _ _).symm.injective
   rw [Adjunction.homEquiv_naturality_right_symm]
@@ -106,7 +116,7 @@ lemma ε_comp_unitSheafLift {F : Sheaf (Scheme.ProEt.topology W) (FieldCoefficie
       (FieldCoefficients.{u} Λ)).homEquiv _ _).symm (ε (sheafToPresheaf _ _)) =
         η (presheafToSheaf (Scheme.ProEt.topology W) (FieldCoefficients.{u} Λ)) :=
     Equiv.symm_apply_apply _ _
-  rw [this, unitSheafLift, IsIso.hom_inv_id_assoc]
+  rw [this, fieldUnitSheafLift, IsIso.hom_inv_id_assoc]
 
 end
 
@@ -116,14 +126,17 @@ section
 
 variable {V : Scheme.{u}}
 
+omit [IsUltrametricDist Λ] in
 /-- An epimorphism of pro-étale sheaves of `Λ`-modules is locally surjective. -/
-lemma isLocallySurjective_of_epi {P Q : Sheaf (Scheme.ProEt.topology V) (FieldCoefficients.{u} Λ)}
+lemma isLocallySurjective_of_epi_field
+    {P Q : Sheaf (Scheme.ProEt.topology V) (FieldCoefficients.{u} Λ)}
     (q : P ⟶ Q) [Epi q] : Sheaf.IsLocallySurjective q :=
   (Sheaf.isLocallySurjective_iff_epi' (φ := q)).2 inferInstance
 
+omit [IsUltrametricDist Λ] in
 /-- **Local lifting of a section along an epimorphism.** A map `τ : 𝟙 ⟶ Q` lifts along an
 epimorphism `q : P ⟶ Q` after restriction to the members of a pro-étale cover. -/
-lemma exists_cover_unit_lift {P Q : Sheaf (Scheme.ProEt.topology V) (FieldCoefficients.{u} Λ)}
+lemma exists_cover_unit_lift_field {P Q : Sheaf (Scheme.ProEt.topology V) (FieldCoefficients.{u} Λ)}
     (q : P ⟶ Q) [Epi q] (τ : 𝟙_ _ ⟶ Q) :
     ∃ R ∈ Scheme.proetalePrecoverage V, ∀ ⦃W : Scheme.{u}⦄ (g : W ⟶ V), R g →
       ∃ (hg : WeaklyEtale g) (σ : 𝟙_ _ ⟶
@@ -137,7 +150,7 @@ lemma exists_cover_unit_lift {P Q : Sheaf (Scheme.ProEt.topology V) (FieldCoeffi
   let y : Q.obj.obj (op T) :=
     (ε (sheafToPresheaf _ _) ≫ (sheafToPresheaf _ _).map τ).app (op T)
       (1 : ULift.{u + 1} Λ)
-  have hq : Sheaf.IsLocallySurjective q := isLocallySurjective_of_epi q
+  have hq : Sheaf.IsLocallySurjective q := isLocallySurjective_of_epi_field q
   have hS := Presheaf.imageSieve_mem (Scheme.ProEt.topology V) q.hom (U := op T) y
   rw [Scheme.ProEt.mem_topology_iff] at hS
   obtain ⟨R, hR, hle⟩ := hS
@@ -156,11 +169,11 @@ lemma exists_cover_unit_lift {P Q : Sheaf (Scheme.ProEt.topology V) (FieldCoeffi
       have := MorphismProperty.Over.w (φ i)
       rw [← this]
       exact congrArg (TW.hom ≫ ·) (Category.comp_id _))
-  refine ⟨hw, unitSheafLift (P.obj.map k.op x), ?_⟩
+  refine ⟨hw, fieldUnitSheafLift (P.obj.map k.op x), ?_⟩
   apply Sheaf.hom_ext_of_ε_comp
-  apply unitPresheaf_hom_ext
-  rw [Functor.map_comp, reassoc_of% ε_comp_unitSheafLift, Functor.map_comp, NatTrans.comp_app,
-    ConcreteCategory.comp_apply, unitPresheafLift_app_one]
+  apply fieldUnitPresheaf_hom_ext
+  rw [Functor.map_comp, reassoc_of% ε_comp_fieldUnitSheafLift, Functor.map_comp, NatTrans.comp_app,
+    ConcreteCategory.comp_apply, fieldUnitPresheafLift_app_one]
   simp only [NatTrans.comp_app]
   erw [Functor.ε_sheafToPresheaf_app_comp_ε_sheafPushforwardContinuous_app_assoc]
   change q.hom.app _ (P.obj.map k.op x) = τ.hom.app _
@@ -178,14 +191,14 @@ section
 variable {V : Scheme.{u}}
 
 /-- **Local lifting of a section along an epimorphism of `Λ_V`-modules.** -/
-lemma exists_cover_adic_lift {P Q : FieldSheaf Λ V} (q : P ⟶ Q) [Epi q]
+lemma exists_cover_field_lift {P Q : FieldSheaf Λ V} (q : P ⟶ Q) [Epi q]
     (t : FieldSheaf.unit Λ V ⟶ Q) :
     ∃ R ∈ Scheme.proetalePrecoverage V, ∀ ⦃W : Scheme.{u}⦄ (g : W ⟶ V), R g →
       WeaklyEtale g ∧ ∃ s : FieldSheaf.unit Λ W ⟶ (g)^*ᶠ[Λ].obj P,
         s ≫ (g)^*ᶠ[Λ].map q = (fieldUpperStarUnitIso Λ g).inv ≫ (g)^*ᶠ[Λ].map t := by
   have : Epi q.hom := (Mod.forget _).map_epi q
   obtain ⟨R, hR, h⟩ :=
-    exists_cover_unit_lift q.hom ((MonObj.one : 𝟙_ _ ⟶ fieldConstantSheaf Λ V) ≫ t.hom)
+    exists_cover_unit_lift_field q.hom ((MonObj.one : 𝟙_ _ ⟶ fieldConstantSheaf Λ V) ≫ t.hom)
   refine ⟨R, hR, fun W g hg ↦ ?_⟩
   obtain ⟨hw, σ, hσ⟩ := h g hg
   let e := upperStarIsoSheafPushforward (FieldCoefficients.{u} Λ) g hw
@@ -248,7 +261,7 @@ theorem IsFieldLisseSheaf.of_shortExact_of_iso {S : ShortComplex (FieldSheaf Λ 
     (e : S.X₃ ≅ ⨁ fun _ : Fin m ↦ FieldSheaf.unit Λ X) :
     IsFieldLisseSheaf S.X₂ := by
   have := hS.epi_g
-  obtain ⟨R, hR, h⟩ := exists_cover_adic_lift (biproduct.map fun _ : Fin m ↦ S.g)
+  obtain ⟨R, hR, h⟩ := exists_cover_field_lift (biproduct.map fun _ : Fin m ↦ S.g)
     (biproduct.lift fun k ↦ biproduct.ι (fun _ : Fin m ↦ FieldSheaf.unit Λ X) k ≫ e.inv)
   refine IsFieldLisseSheaf.of_presieve R hR fun W g hg ↦ ?_
   obtain ⟨hw, s, hs⟩ := h g hg

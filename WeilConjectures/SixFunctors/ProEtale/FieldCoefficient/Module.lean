@@ -9,30 +9,36 @@ public import WeilConjectures.CategoryTheory.Monoidal.Mod.Abelian
 public import WeilConjectures.SixFunctors.ProEtale.FieldCoefficient.Ring
 
 /-!
-# Sheaves of modules over the constant `ℓ`-adic sheaf
+# Sheaves of modules over the constant sheaf
 
-Let `X` be a scheme and `ℚ̄_ℓ,X = AlgebraicGeometry.ProEtale.fieldConstantSheaf ℓ X` the sheaf of
-rings of locally finite continuous `ℓ`-adic functions on the pro-étale site of `X`. Following
-Bhatt–Scholze (*The pro-étale topology for schemes*, §6.8), the `ℓ`-adic sheaves on `X` are the
-sheaves of `ℚ̄_ℓ,X`-modules: the module objects over the monoid `ℚ̄_ℓ,X` of the monoidal category
-of sheaves of `ℚ̄_ℓ`-modules (`AlgebraicGeometry.ProEtale.FieldSheaf`). This is a Grothendieck
+This is the counterpart, for a coefficient field `Λ` with an ultrametric norm (the case of
+interest being a finite extension `E` of `ℚ_ℓ` inside `ℚ̄_ℓ`), of
+`WeilConjectures.SixFunctors.ProEtale.Adic.Module`, which treats `ℚ̄_ℓ`,
+with the same proofs; the constant sheaf `Λ_X : U ↦ C(U, Λ)` is that of
+`WeilConjectures.SixFunctors.ProEtale.FieldCoefficient.ConstantSheaf`.
+
+Let `X` be a scheme and `Λ_X = AlgebraicGeometry.ProEtale.fieldConstantSheaf Λ X` the sheaf of
+rings of continuous `Λ`-valued functions on the pro-étale site of `X`. Following
+Bhatt–Scholze (*The pro-étale topology for schemes*, §6.8), the `Λ`-adic sheaves on `X` are the
+sheaves of `Λ_X`-modules: the module objects over the monoid `Λ_X` of the monoidal category
+of sheaves of `Λ`-modules (`AlgebraicGeometry.ProEtale.FieldSheaf`). This is a Grothendieck
 abelian category, in which kernels, cokernels and extensions are computed on the underlying
-sheaves of `ℚ̄_ℓ`-modules; but its extensions are those of `ℚ̄_ℓ,X`-modules, not of sheaves of
-modules over the discrete field `ℚ̄_ℓ`.
+sheaves of `Λ`-modules; but its extensions are those of `Λ_X`-modules, not of sheaves of
+modules over the discrete field `Λ`.
 
 For a morphism `g : Z ⟶ Y` the pushforward `g_*` and the pullback `g^*` of sheaves of
-`ℚ̄_ℓ`-modules lift to sheaves of modules over the constant `ℓ`-adic sheaves: `g_*` is lax
-monoidal, so `g_* M` is a `g_* ℚ̄_ℓ,Z`-module, hence a `ℚ̄_ℓ,Y`-module along the ring morphism
-`ℚ̄_ℓ,Y ⟶ g_* ℚ̄_ℓ,Z` (`AlgebraicGeometry.ProEtale.isMonHom_fieldConstantSheafToLowerStar`); and
-`g^*` is monoidal, so `g^* M` is a `g^* ℚ̄_ℓ,Y`-module, hence a `ℚ̄_ℓ,Z`-module along the ring
-isomorphism `g^* ℚ̄_ℓ,Y ≅ ℚ̄_ℓ,Z`. The underlying sheaves are those of the pushforward and the
-pullback of sheaves of `ℚ̄_ℓ`-modules, so both functors are exact, and they are adjoint
+`Λ`-modules lift to sheaves of modules over the constant sheaves `Λ_X`: `g_*` is lax
+monoidal, so `g_* M` is a `g_* Λ_Z`-module, hence a `Λ_Y`-module along the ring morphism
+`Λ_Y ⟶ g_* Λ_Z` (`AlgebraicGeometry.ProEtale.isMonHom_fieldConstantSheafToLowerStar`); and
+`g^*` is monoidal, so `g^* M` is a `g^* Λ_Y`-module, hence a `Λ_Z`-module along the ring
+isomorphism `g^* Λ_Y ≅ Λ_Z`. The underlying sheaves are those of the pushforward and the
+pullback of sheaves of `Λ`-modules, so both functors are exact, and they are adjoint
 (`AlgebraicGeometry.ProEtale.fieldUpperStarLowerStarAdjunction`).
 
 ## Main definitions
 
-- `AlgebraicGeometry.ProEtale.FieldSheaf`: sheaves of `ℚ̄_ℓ,X`-modules on `X_proét`.
-- `AlgebraicGeometry.ProEtale.FieldSheaf.unit`: the constant `ℓ`-adic sheaf as a module over
+- `AlgebraicGeometry.ProEtale.FieldSheaf`: sheaves of `Λ_X`-modules on `X_proét`.
+- `AlgebraicGeometry.ProEtale.FieldSheaf.unit`: the constant sheaf as a module over
   itself.
 - `AlgebraicGeometry.ProEtale.fieldLowerStar`, `AlgebraicGeometry.ProEtale.fieldUpperStar`: `g_*`
   and `g^*`, with notations `(g)_*ᶠ[Λ]` and `(g)^*ᶠ[Λ]`.
@@ -138,6 +144,7 @@ variable (Λ) in
 noncomputable def fieldUpperStarLowerStarAdjunction : (g)^*ᶠ[Λ] ⊣ (g)_*ᶠ[Λ] :=
   (upperStarLowerStarAdjunction (FieldCoefficients.{u} Λ) g).modAdjunction _
 
+omit [IsUltrametricDist Λ] in
 /-- The underlying sheaf of `g_* M` is the pushforward of the underlying sheaf of `M`. -/
 lemma fieldLowerStar_obj_X (M : FieldSheaf Λ Z) :
     ((g)_*ᶠ[Λ].obj M).X = (g)_*[FieldCoefficients.{u} Λ].obj M.X :=
@@ -148,6 +155,7 @@ lemma fieldUpperStar_obj_X (M : FieldSheaf Λ Y) :
     ((g)^*ᶠ[Λ].obj M).X = (g)^*[FieldCoefficients.{u} Λ].obj M.X :=
   rfl
 
+omit [IsUltrametricDist Λ] in
 lemma fieldLowerStar_map_hom {M N : FieldSheaf Λ Z} (f : M ⟶ N) :
     ((g)_*ᶠ[Λ].map f).hom = (g)_*[FieldCoefficients.{u} Λ].map f.hom :=
   rfl
@@ -184,6 +192,7 @@ section Compat
 
 variable (Λ)
 
+omit [IsUltrametricDist Λ] in
 /-- Pulling back functions along a composite is the composite of the pullbacks, up to the
 composition isomorphism of pushforwards. -/
 lemma fieldConstantSheafToLowerStar_comp {R S T : Scheme.{u}} (h₁ : T ⟶ S) (h₂ : S ⟶ R) :
@@ -204,6 +213,7 @@ lemma fieldConstantSheafToLowerStar_comp {R S T : Scheme.{u}} (h₁ : T ⟶ S) (
     exact pullbackLeftPullbackSndIso_inv_fst _ _ _
   exact congrArg (fun φ ↦ x.down.1 (φ.base y)) key
 
+omit [IsUltrametricDist Λ] in
 /-- Pulling back functions along the identity is the identity, up to the identification
 `(𝟙 X)_* ≅ 𝟭`. -/
 lemma fieldConstantSheafToLowerStar_id (X : Scheme.{u}) :
@@ -254,7 +264,7 @@ noncomputable def fieldLowerStarComp {R S T : Scheme.{u}} (h₁ : T ⟶ S) (h₂
     fun f ↦ Mod.hom_ext _ _ ((lowerStarComp (FieldCoefficients.{u} Λ) h₁ h₂).hom.naturality f.hom)
 
 variable (Λ) in
-/-- The identity isomorphism `(𝟙 X)_* ≅ 𝟭` of sheaves of modules over the constant `ℓ`-adic
+/-- The identity isomorphism `(𝟙 X)_* ≅ 𝟭` of sheaves of modules over the constant
 sheaf. -/
 noncomputable def fieldLowerStarId (X : Scheme.{u}) : (𝟙 X)_*ᶠ[Λ] ≅ 𝟭 (FieldSheaf Λ X) :=
   NatIso.ofComponents
@@ -277,18 +287,21 @@ noncomputable def fieldLowerStarCongr {Z Y : Scheme.{u}} {g g' : Z ⟶ Y} (h : g
         erw [Category.comp_id, MonoidalCategory.whiskerLeft_id, Category.id_comp]))
     fun f ↦ Mod.hom_ext _ _ ((lowerStarCongr (FieldCoefficients.{u} Λ) h).hom.naturality f.hom)
 
+omit [IsUltrametricDist Λ] in
 lemma fieldLowerStarCongr_hom_app_hom {Z Y : Scheme.{u}} {g g' : Z ⟶ Y} (h : g = g')
     (M : FieldSheaf Λ Z) :
     ((fieldLowerStarCongr Λ h).hom.app M).hom =
       (lowerStarCongr (FieldCoefficients.{u} Λ) h).hom.app M.X :=
   rfl
 
+omit [IsUltrametricDist Λ] in
 lemma fieldLowerStarComp_hom_app_hom {R S T : Scheme.{u}} (h₁ : T ⟶ S) (h₂ : S ⟶ R)
     (M : FieldSheaf Λ T) :
     ((fieldLowerStarComp Λ h₁ h₂).hom.app M).hom =
       (lowerStarComp (FieldCoefficients.{u} Λ) h₁ h₂).hom.app M.X :=
   rfl
 
+omit [IsUltrametricDist Λ] in
 lemma fieldLowerStarComp_inv_app_hom {R S T : Scheme.{u}} (h₁ : T ⟶ S) (h₂ : S ⟶ R)
     (M : FieldSheaf Λ T) :
     ((fieldLowerStarComp Λ h₁ h₂).inv.app M).hom =
@@ -302,7 +315,7 @@ noncomputable def fieldUpperStarCongr {Z Y : Scheme.{u}} {g g' : Z ⟶ Y} (h : g
   eqToIso (by rw [h])
 
 variable (Λ) in
-/-- The identity isomorphism `(𝟙 X)^* ≅ 𝟭` of sheaves of modules over the constant `ℓ`-adic
+/-- The identity isomorphism `(𝟙 X)^* ≅ 𝟭` of sheaves of modules over the constant
 sheaf, by uniqueness of left adjoints. -/
 noncomputable def fieldUpperStarId (X : Scheme.{u}) : (𝟙 X)^*ᶠ[Λ] ≅ 𝟭 (FieldSheaf Λ X) :=
   (conjugateIsoEquiv Adjunction.id (fieldUpperStarLowerStarAdjunction Λ (𝟙 X))).symm
@@ -384,6 +397,7 @@ noncomputable def fieldLowerStarUnitIso {X Y : Scheme.{u}} (e : X ≅ Y) :
         Iso.inv_hom_id, id_whiskerRight, Category.id_comp]
       rfl)
 
+omit [IsUltrametricDist Λ] in
 lemma fieldLowerStarUnitIso_hom_hom {X Y : Scheme.{u}} (e : X ≅ Y) :
     (fieldLowerStarUnitIso Λ e).hom.hom = (fieldConstantSheafLowerStarIso Λ e).hom :=
   rfl
@@ -402,22 +416,27 @@ noncomputable def smul (c : ULift.{u + 1} Λ) (M : FieldSheaf Λ X) : M ⟶ M :=
     rw [Linear.comp_smul, Category.comp_id, MonoidalLinear.whiskerLeft_smul, Linear.smul_comp,
       MonoidalCategory.whiskerLeft_id, Category.id_comp])
 
+omit [IsUltrametricDist Λ] in
 @[simp]
 lemma smul_hom (c : ULift.{u + 1} Λ) (M : FieldSheaf Λ X) :
     (smul c M).hom = c • 𝟙 M.X :=
   rfl
 
+omit [IsUltrametricDist Λ] in
 lemma smul_comp (c : ULift.{u + 1} Λ) {M N : FieldSheaf Λ X} (f : M ⟶ N) :
     smul c M ≫ f = f ≫ smul c N :=
   Mod.hom_ext _ _ (by simp)
 
+omit [IsUltrametricDist Λ] in
 lemma smul_smul (c d : ULift.{u + 1} Λ) (M : FieldSheaf Λ X) :
     smul c M ≫ smul d M = smul (d * c) M :=
   Mod.hom_ext _ _ (by simp [_root_.smul_smul])
 
+omit [IsUltrametricDist Λ] in
 lemma smul_one (M : FieldSheaf Λ X) : smul 1 M = 𝟙 M :=
   Mod.hom_ext _ _ (by simp)
 
+omit [IsUltrametricDist Λ] in
 /-- The pushforward commutes with multiplication by a scalar. -/
 lemma fieldLowerStar_map_smul {Z : Scheme.{u}} (g : X ⟶ Z) (c : ULift.{u + 1} Λ)
     (M : FieldSheaf Λ X) : (g)_*ᶠ[Λ].map (smul c M) = smul c ((g)_*ᶠ[Λ].obj M) :=

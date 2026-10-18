@@ -105,6 +105,13 @@ lemma fieldFunctionsComp_apply_coe (g : C(T', T)) (f : fieldFunctions Λ T) :
 
 end FieldFunctions
 
+/-- A subfield `E` of `ℚ̄_ℓ`, for instance a finite extension of `ℚ_ℓ`, with the norm restricted
+from `ℚ̄_ℓ`, is ultrametric: it is a coefficient field `Λ = E` of the constructions of
+`WeilConjectures.SixFunctors.ProEtale.FieldCoefficient`. -/
+instance _root_.PadicAlgCl.isUltrametricDist_intermediateField {l : ℕ} [Fact l.Prime]
+    (E : IntermediateField ℚ_[l] (PadicAlgCl l)) : IsUltrametricDist E :=
+  IsUltrametricDist.subtype _
+
 
 /-- The coefficients of `Λ`-adic pro-étale sheaves: modules over `Λ`, lifted to
 `Type (u + 1)`, the universe of the `Hom`-types of sheaves on the sites of `Scheme.{u}`. The
@@ -115,7 +122,7 @@ abbrev FieldCoefficients (Λ : Type) [NormedField Λ] : Type (u + 2) :=
 
 namespace FieldCoefficients
 
-variable (Λ : Type) [NormedField Λ] [IsUltrametricDist Λ]
+variable (Λ : Type) [NormedField Λ]
 
 /-- The underlying `Λ`-vector space of a module over `ULift Λ`, by restriction of scalars
 along `Λ ≃ ULift Λ`. -/
@@ -141,7 +148,7 @@ noncomputable def uliftLinearMap {M N : Type*} [AddCommGroup M] [Module Λ M]
 
 end FieldCoefficients
 
-variable (Λ : Type) [NormedField Λ] [IsUltrametricDist Λ]
+variable (Λ : Type) [NormedField Λ]
 
 open FieldCoefficients
 
@@ -179,7 +186,8 @@ noncomputable def fieldFunctionsPresheafForgetIso :
   NatIso.ofComponents (fun U ↦ Equiv.toIso
     { toFun x := ⟨⟨fun t ↦ ULift.up (x.down.1 t), continuous_uliftUp.comp x.down.1.continuous⟩,
         Set.mem_univ _⟩
-      invFun s := ULift.up ⟨(ContinuousMap.mk ULift.down continuous_uliftDown).comp s.1, Algebra.mem_top⟩
+      invFun s := ULift.up
+        ⟨(ContinuousMap.mk ULift.down continuous_uliftDown).comp s.1, Algebra.mem_top⟩
       left_inv _ := rfl
       right_inv _ := rfl })
     fun _ ↦ by ext x; exact Subtype.ext (ContinuousMap.ext fun _ ↦ rfl)

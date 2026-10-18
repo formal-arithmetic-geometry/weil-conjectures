@@ -10,12 +10,18 @@ public import WeilConjectures.SixFunctors.ProEtale.FieldCoefficient.Hom
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.InternalHom
 
 /-!
-# The internal hom of `ℚ̄_ℓ,X`-modules is local
+# The internal hom of `Λ_X`-modules is local
 
-The internal hom `𝓗om_{ℚ̄_ℓ,X}(M, N)` of sheaves of `ℚ̄_ℓ,X`-modules is the equalizer of
-`[M, N] ⇉ [ℚ̄_ℓ,X ⊗ M, N]` (`AlgebraicGeometry.ProEtale.FieldSheaf.ihomIsoIhom'`). Pullback along a
+This is the counterpart, for a coefficient field `Λ` with an ultrametric norm (the case of
+interest being a finite extension `E` of `ℚ_ℓ` inside `ℚ̄_ℓ`), of
+`WeilConjectures.SixFunctors.ProEtale.Adic.InternalHom`, which treats `ℚ̄_ℓ`,
+with the same proofs; the constant sheaf `Λ_X : U ↦ C(U, Λ)` is that of
+`WeilConjectures.SixFunctors.ProEtale.FieldCoefficient.ConstantSheaf`.
+
+The internal hom `𝓗om_{Λ_X}(M, N)` of sheaves of `Λ_X`-modules is the equalizer of
+`[M, N] ⇉ [Λ_X ⊗ M, N]` (`AlgebraicGeometry.ProEtale.FieldSheaf.ihomIsoIhom'`). Pullback along a
 weakly étale morphism `g` commutes with the internal hom of sheaves and with equalizers, so it
-commutes with `𝓗om_{ℚ̄_ℓ}` (`AlgebraicGeometry.ProEtale.fieldUpperStarIhomIso`):
+commutes with `𝓗om_{Λ}` (`AlgebraicGeometry.ProEtale.fieldUpperStarIhomIso`):
 `g^* 𝓗om(M, N) ≅ 𝓗om(g^* M, g^* N)`.
 -/
 

@@ -16,35 +16,41 @@ public import WeilConjectures.SixFunctors.ProEtale.FieldCoefficient.ConstantShea
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Defs
 
 /-!
-# Pullback of the constant `ℓ`-adic sheaf
+# Pullback of the constant sheaf
 
-The pullback of the constant `ℓ`-adic sheaf `ℚ̄_ℓ,V` along an arbitrary morphism of schemes
-`g : W ⟶ V` is the constant `ℓ`-adic sheaf `ℚ̄_ℓ,W` (Bhatt–Scholze, *The pro-étale topology for
+This is the counterpart, for a coefficient field `Λ` with an ultrametric norm (the case of
+interest being a finite extension `E` of `ℚ_ℓ` inside `ℚ̄_ℓ`), of
+`WeilConjectures.SixFunctors.ProEtale.Adic.UpperStar`, which treats `ℚ̄_ℓ`,
+with the same proofs; the constant sheaf `Λ_X : U ↦ C(U, Λ)` is that of
+`WeilConjectures.SixFunctors.ProEtale.FieldCoefficient.ConstantSheaf`.
+
+The pullback of the constant sheaf `Λ_V` along an arbitrary morphism of schemes
+`g : W ⟶ V` is the constant sheaf `Λ_W` (Bhatt–Scholze, *The pro-étale topology for
 schemes*, Lemma 4.2.12 and §6.8).
 
 For a weakly étale `g` the pullback is restriction along the localization functor
 `W.ProEt ⥤ V.ProEt` (`AlgebraicGeometry.ProEtale.upperStarIsoLocalizationRestriction`), and
-both sheaves have the locally finite continuous functions on `T` as sections over `T → W`.
+both sheaves have the continuous functions on `T` as sections over `T → W`.
 
-For a general `g`, the canonical morphism `g^* ℚ̄_ℓ,V ⟶ ℚ̄_ℓ,W`, adjoint to precomposition
-`ℚ̄_ℓ,V ⟶ g_* ℚ̄_ℓ,W` with the projections `V' ×_V W ⟶ V'`, is an isomorphism by the criterion
+For a general `g`, the canonical morphism `g^* Λ_V ⟶ Λ_W`, adjoint to precomposition
+`Λ_V ⟶ g_* Λ_W` with the projections `V' ×_V W ⟶ V'`, is an isomorphism by the criterion
 `CategoryTheory.isIso_homEquiv_symm_of_locally_generated`:
 
-- every section of `ℚ̄_ℓ,W` is locally the pullback of the tautological function on a constant
+- every section of `Λ_W` is locally the pullback of the tautological function on a constant
   profinite scheme `Spec (LocallyConstant K R)` over an affine open `Spec R ⊆ V`, for `K` a
-  compact subset of a finite-dimensional `ℚ_ℓ`-subspace of `ℚ̄_ℓ`; this scheme is weakly étale
+  compact subset of `Λ`; this scheme is weakly étale
   over `Spec R` (`AlgebraicGeometry.ProEtale.exists_openImmersion_eq_comp_fst_field`);
-- a section of `ℚ̄_ℓ,V` vanishing on the image of a map factors, locally, through its zero
+- a section of `Λ_V` vanishing on the image of a map factors, locally, through its zero
   locus, which is weakly étale over `V`, being affine-locally the spectrum of a localization at
   idempotents (`AlgebraicGeometry.ProEtale.exists_opens_factor_of_eq_zero_field`).
 
 ## Main definitions
 
-- `AlgebraicGeometry.ProEtale.upperStarFieldConstantSheafIsoOfWeaklyEtale`: `g^* ℚ̄_ℓ,V ≅ ℚ̄_ℓ,W`
+- `AlgebraicGeometry.ProEtale.upperStarFieldConstantSheafIsoOfWeaklyEtale`: `g^* Λ_V ≅ Λ_W`
   for a weakly étale `g`, computed by restriction.
 - `AlgebraicGeometry.ProEtale.fieldConstantSheafToLowerStar`: the comparison
-  `ℚ̄_ℓ,V ⟶ g_* ℚ̄_ℓ,W`.
-- `AlgebraicGeometry.ProEtale.upperStarFieldConstantSheafIso`: `g^* ℚ̄_ℓ,V ≅ ℚ̄_ℓ,W` for an arbitrary
+  `Λ_V ⟶ g_* Λ_W`.
+- `AlgebraicGeometry.ProEtale.upperStarFieldConstantSheafIso`: `g^* Λ_V ≅ Λ_W` for an arbitrary
   `g`.
 -/
 
@@ -59,7 +65,7 @@ namespace AlgebraicGeometry.ProEtale
 variable (Λ : Type) [NormedField Λ] [IsUltrametricDist Λ] {V W : Scheme.{u}}
 
 /-- The restriction of the constant sheaf along a weakly étale `g : W ⟶ V` is the
-constant sheaf: both have the locally finite continuous functions on `T` as sections
+constant sheaf: both have the continuous functions on `T` as sections
 over `T → W`. -/
 noncomputable def fieldConstantSheafLocalizationRestrictionIso (g : W ⟶ V) (h : WeaklyEtale g) :
     (localizationRestriction (FieldCoefficients.{u} Λ) g h).obj (fieldConstantSheaf Λ V) ≅
@@ -164,10 +170,10 @@ lemma exists_opens_factor_of_eq_zero_field (V' : V.ProEt) (t : C(V'.left, Λ))
 
 
 /-- **The sections of `Λ_W` are locally pulled back from `Λ_V`.** Every point of
-`U : W.ProEt` has an affine open neighbourhood `Spec B` on which a locally finite function `s`
-on `U` is `t ∘ fst ∘ φ` for some `V' : V.ProEt`, a locally finite function `t` on `V'` and
+`U : W.ProEt` has an affine open neighbourhood `Spec B` on which a continuous function `s`
+on `U` is `t ∘ fst ∘ φ` for some `V' : V.ProEt`, a continuous function `t` on `V'` and
 `φ : Spec B ⟶ V' ×_V W`. Here `V'` is the constant profinite scheme `Spec R × K` over an affine
-open `Spec R ⊆ V`, with `K = s(Spec B)` compact in a finite-dimensional `ℚ_ℓ`-subspace of `Λ`,
+open `Spec R ⊆ V`, with `K = s(Spec B)` compact in `Λ`,
 that is the spectrum of the weakly étale `R`-algebra `LocallyConstant K R`; `t` is the
 projection to `K`, and `φ` is given by `s` (`LocallyConstant.liftPrimeSpectrum`). -/
 lemma exists_openImmersion_eq_comp_fst_field (U : W.ProEt)
@@ -243,6 +249,7 @@ noncomputable def fieldConstantSheafToLowerStar :
        rfl }⟩
 
 
+omit [IsUltrametricDist Λ] in
 /-- Two sections of `Λ` are equal if their underlying functions agree. -/
 lemma fieldConstantSheaf_ext {X : Scheme.{u}} {U : X.ProEt}
     {s s' : (fieldConstantSheaf Λ X).obj.obj (op U)}

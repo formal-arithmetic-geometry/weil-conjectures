@@ -9,12 +9,18 @@ public import WeilConjectures.CategoryTheory.Monoidal.Mod.Tensor
 public import WeilConjectures.SixFunctors.ProEtale.FieldCoefficient.GeometricFrobenius
 
 /-!
-# Tensor product and internal hom over the constant `ℓ`-adic sheaf
+# Tensor product and internal hom over the constant sheaf
 
-The constant `ℓ`-adic sheaf `ℚ̄_ℓ,X` is a *commutative* sheaf of rings
+This is the counterpart, for a coefficient field `Λ` with an ultrametric norm (the case of
+interest being a finite extension `E` of `ℚ_ℓ` inside `ℚ̄_ℓ`), of
+`WeilConjectures.SixFunctors.ProEtale.Adic.Hom`, which treats `ℚ̄_ℓ`,
+with the same proofs; the constant sheaf `Λ_X : U ↦ C(U, Λ)` is that of
+`WeilConjectures.SixFunctors.ProEtale.FieldCoefficient.ConstantSheaf`.
+
+The constant sheaf `Λ_X` is a *commutative* sheaf of rings
 (`AlgebraicGeometry.ProEtale.fieldConstantSheaf.isCommMonObj`), so sheaves of
-`ℚ̄_ℓ,X`-modules have a tensor product `⊗_{ℚ̄_ℓ,X}` and an internal hom
-`𝓗om_{ℚ̄_ℓ,X}` (`AlgebraicGeometry.ProEtale.FieldSheaf.ihom`), right adjoint to the tensor
+`Λ_X`-modules have a tensor product `⊗_{Λ_X}` and an internal hom
+`𝓗om_{Λ_X}` (`AlgebraicGeometry.ProEtale.FieldSheaf.ihom`), right adjoint to the tensor
 product (`CategoryTheory.Mod.ihomAdjunction`). The pushforward along an isomorphism `e` commutes
 with the internal hom (`AlgebraicGeometry.ProEtale.fieldLowerStarCompIhomIso`): this gives the
 Weil structure of the internal hom of two Weil sheaves.
@@ -62,6 +68,7 @@ end FieldSheaf
 
 variable {X Y : Scheme.{u}} (g : X ⟶ Y)
 
+omit [IsUltrametricDist Λ] in
 lemma fieldConstantSheafToLowerStar_eq [IsIso g] :
     fieldConstantSheafToLowerStar Λ g = (fieldConstantSheafLowerStarIso Λ (asIso g)).inv :=
   rfl

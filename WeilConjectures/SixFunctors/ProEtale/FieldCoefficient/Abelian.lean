@@ -13,9 +13,15 @@ public import WeilConjectures.Mathlib.CategoryTheory.NatIso
 public import Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 
 /-!
-# Kernels and cokernels of constructible `ℓ`-adic sheaves
+# Kernels and cokernels of constructible `Λ`-adic sheaves
 
-A morphism `ψ : ℚ̄_ℓ,Tⁿ ⟶ ℚ̄_ℓ,Tᵐ` of finite free modules is a matrix of locally finite continuous
+This is the counterpart, for a coefficient field `Λ` with an ultrametric norm (the case of
+interest being a finite extension `E` of `ℚ_ℓ` inside `ℚ̄_ℓ`), of
+`WeilConjectures.SixFunctors.ProEtale.Adic.Abelian`, which treats `ℚ̄_ℓ`,
+with the same proofs; the constant sheaf `Λ_X : U ↦ C(U, Λ)` is that of
+`WeilConjectures.SixFunctors.ProEtale.FieldCoefficient.ConstantSheaf`.
+
+A morphism `ψ : Λ_Tⁿ ⟶ Λ_Tᵐ` of finite free modules is a matrix of continuous
 functions on `T` (`AlgebraicGeometry.ProEtale.FieldSheaf.unitMatrix`), and has a rank at every
 point of `T`. If this rank is constant, then locally on `T` the morphism is equivalent to
 `[[1, 0], [0, 0]]`, so its kernel and cokernel are lisse
@@ -34,7 +40,7 @@ induction gives finite stratifications on which they are lisse
 Refining stratifications, kernels and cokernels of constructible sheaves on a locally Noetherian
 scheme are constructible (`AlgebraicGeometry.ProEtale.IsFieldConstructibleSheaf.kernel_cokernel`).
 The Noetherian hypothesis is necessary: if the underlying space of `X` is a profinite set without
-isolated points, such as `ℤ_ℓ`, multiplication by the continuous function `t ↦ t` on `ℚ̄_ℓ,X` has
+isolated points, such as `ℤ_ℓ`, multiplication by the continuous function `t ↦ t` on `Λ_X` has
 a cokernel supported at a single non-constructible point.
 
 ## Main results
@@ -50,11 +56,13 @@ open CategoryTheory Limits
 
 namespace AlgebraicGeometry
 
-variable {Λ : Type} [NormedField Λ] [IsUltrametricDist Λ] {T : Type*} [TopologicalSpace T] {κ ι : Type*} [Fintype κ]
+variable {Λ : Type} [NormedField Λ] [IsUltrametricDist Λ] {T : Type*} [TopologicalSpace T]
+  {κ ι : Type*} [Fintype κ]
   [Fintype ι]
 
 set_option linter.unusedFintypeInType false in
-/-- The rank of a matrix of locally finite functions is lower semicontinuous. -/
+omit [IsUltrametricDist Λ] in
+/-- The rank of a matrix of continuous functions is lower semicontinuous. -/
 lemma isOpen_setOf_le_rank_field (M : Matrix κ ι (fieldFunctions Λ T)) (j : ℕ) :
     IsOpen {t | j ≤ (M.map (fieldFunctionsEval t)).rank} := by
   have : {t | j ≤ (M.map (fieldFunctionsEval t)).rank} =

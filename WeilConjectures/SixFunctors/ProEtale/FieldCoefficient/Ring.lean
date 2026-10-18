@@ -15,23 +15,29 @@ public import WeilConjectures.SixFunctors.ProEtale.FieldCoefficient.UpperStar
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Monoidal
 
 /-!
-# The constant `ℓ`-adic sheaf is a sheaf of rings
+# The constant sheaf is a sheaf of rings
 
-The sections of the constant `ℓ`-adic sheaf `ℚ̄_ℓ,X = AlgebraicGeometry.ProEtale.fieldConstantSheaf`
-over `U` are the locally finite continuous functions `U → ℚ̄_ℓ`, a `ℚ̄_ℓ`-algebra under pointwise
-multiplication, and the restriction maps are algebra homomorphisms. Hence `ℚ̄_ℓ,X` is a monoid
-object of the monoidal category of sheaves of `ℚ̄_ℓ`-modules on the pro-étale site of `X`
-(Bhatt–Scholze, §6.8): a sheaf of rings. Its multiplication `ℚ̄_ℓ,X ⊗ ℚ̄_ℓ,X ⟶ ℚ̄_ℓ,X` restricts to
+This is the counterpart, for a coefficient field `Λ` with an ultrametric norm (the case of
+interest being a finite extension `E` of `ℚ_ℓ` inside `ℚ̄_ℓ`), of
+`WeilConjectures.SixFunctors.ProEtale.Adic.Ring`, which treats `ℚ̄_ℓ`,
+with the same proofs; the constant sheaf `Λ_X : U ↦ C(U, Λ)` is that of
+`WeilConjectures.SixFunctors.ProEtale.FieldCoefficient.ConstantSheaf`.
+
+The sections of the constant sheaf `Λ_X = AlgebraicGeometry.ProEtale.fieldConstantSheaf`
+over `U` are the continuous functions `U → Λ`, a `Λ`-algebra under pointwise
+multiplication, and the restriction maps are algebra homomorphisms. Hence `Λ_X` is a monoid
+object of the monoidal category of sheaves of `Λ`-modules on the pro-étale site of `X`
+(Bhatt–Scholze, §6.8): a sheaf of rings. Its multiplication `Λ_X ⊗ Λ_X ⟶ Λ_X` restricts to
 the pointwise multiplication of functions on the presheaf tensor product.
 
-For a morphism `g : W ⟶ V` the comparison `ℚ̄_ℓ,V ⟶ g_* ℚ̄_ℓ,W`, pulling back functions, is a
+For a morphism `g : W ⟶ V` the comparison `Λ_V ⟶ g_* Λ_W`, pulling back functions, is a
 morphism of sheaves of rings
 (`AlgebraicGeometry.ProEtale.isMonHom_fieldConstantSheafToLowerStar`), so that its adjoint
-`g^* ℚ̄_ℓ,V ≅ ℚ̄_ℓ,W` is an isomorphism of sheaves of rings.
+`g^* Λ_V ≅ Λ_W` is an isomorphism of sheaves of rings.
 
 ## Main definitions
 
-- `AlgebraicGeometry.ProEtale.fieldConstantSheaf.monObj`: the ring structure on `ℚ̄_ℓ,X`.
+- `AlgebraicGeometry.ProEtale.fieldConstantSheaf.monObj`: the ring structure on `Λ_X`.
 
 ## Main results
 
@@ -47,10 +53,11 @@ open CategoryTheory MonoidalCategory MonObj Limits Opposite
 
 namespace AlgebraicGeometry
 
-variable (Λ : Type) [NormedField Λ] [IsUltrametricDist Λ] {T T' : Type*} [TopologicalSpace T] [TopologicalSpace T']
+variable (Λ : Type) [NormedField Λ] [IsUltrametricDist Λ] {T T' : Type*} [TopologicalSpace T]
+  [TopologicalSpace T']
 
 /-- Precomposition with a continuous map `g : T' → T`, as a homomorphism of `Λ`-algebras of
-locally finite functions. -/
+continuous functions. -/
 noncomputable def fieldFunctionsCompAlgHom (g : C(T', T)) :
     fieldFunctions Λ T →ₐ[Λ] fieldFunctions Λ T' where
   toFun f := ⟨f.1.comp g, comp_mem_fieldFunctions f.2 g⟩
@@ -94,7 +101,7 @@ namespace ProEtale
 
 variable (X : Scheme.{u})
 
-/-- The presheaf of `ULift Λ`-algebras `U ↦ Λ_X(U)` of locally finite functions. -/
+/-- The presheaf of `ULift Λ`-algebras `U ↦ Λ_X(U)` of continuous functions. -/
 @[simps]
 noncomputable def fieldFunctionsAlgPresheaf :
     X.ProEtᵒᵖ ⥤ AlgCat.{u + 1} (ULift.{u + 1} Λ) where
@@ -119,11 +126,12 @@ noncomputable instance fieldConstantSheaf.monObjObj : MonObj (fieldConstantSheaf
   .ofIso (fieldFunctionsMonPresheafXIso Λ X)
 
 /-- **The constant sheaf is a sheaf of rings**: the ring structure induced from the
-pointwise multiplication of locally finite functions. -/
+pointwise multiplication of continuous functions. -/
 noncomputable instance fieldConstantSheaf.monObj : MonObj (fieldConstantSheaf Λ X) :=
   Sheaf.monObjOfPresheaf _
 
 variable {Λ} in
+omit [IsUltrametricDist Λ] in
 /-- The multiplication of the underlying presheaf of `Λ_X` is the pointwise multiplication of
 functions. -/
 lemma fieldConstantSheaf_mul_app_tmul {U : X.ProEtᵒᵖ}
@@ -132,6 +140,7 @@ lemma fieldConstantSheaf_mul_app_tmul {U : X.ProEtᵒᵖ}
   rfl
 
 variable {Λ} in
+omit [IsUltrametricDist Λ] in
 /-- The unit of the underlying presheaf of `Λ_X` is the constant function `1`. -/
 lemma fieldConstantSheaf_one_app {U : X.ProEtᵒᵖ} (r : ULift.{u + 1} Λ) :
     (η[(fieldConstantSheaf Λ X).obj]).app U r = ULift.up (algebraMap _ _ r.down) :=
@@ -145,12 +154,14 @@ open scoped Obj
 
 variable {Λ} {V W : Scheme.{u}} (g : W ⟶ V)
 
+omit [IsUltrametricDist Λ] in
 lemma fieldConstantSheaf_ε_comp_map_one' (V : Scheme.{u}) :
     ε (sheafToPresheaf (Scheme.ProEt.topology V) (FieldCoefficients.{u} Λ)) ≫
         (sheafToPresheaf _ _).map η[fieldConstantSheaf Λ V] =
       η[(fieldConstantSheaf Λ V).obj] :=
   Sheaf.ε_comp_map_one _
 
+omit [IsUltrametricDist Λ] in
 lemma fieldConstantSheaf_μ_comp_map_mul' (V : Scheme.{u}) :
     «μ» (sheafToPresheaf (Scheme.ProEt.topology V) (FieldCoefficients.{u} Λ)) _ _ ≫
         (sheafToPresheaf _ _).map μ[fieldConstantSheaf Λ V] =
