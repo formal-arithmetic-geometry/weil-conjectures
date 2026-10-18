@@ -56,6 +56,45 @@ theorem isIso_mateEquiv_of_isEquivalence_of_fullyFaithful
     (G : C ⥤ C') (G' : D ⥤ D') [G.IsEquivalence] [G'.Full] [G'.Faithful]
     (θ : G ⋙ L' ≅ L ⋙ G') :
     IsIso (mateEquiv adj adj' θ.hom).natTrans := by
-  sorry
+  rw [NatTrans.isIso_iff_isIso_app]
+  intro d
+  let α := (mateEquiv adj adj' θ.hom).natTrans.app d
+  -- Full faithfulness and the adjunctions identify composition by each component.
+  have h (c : C) : Function.Bijective (fun f : G.obj c ⟶ G.obj (R.obj d) ↦ f ≫ α) := by
+    let e : (G.obj c ⟶ G.obj (R.obj d)) ≃ (G.obj c ⟶ R'.obj (G'.obj d)) :=
+      (Functor.FullyFaithful.ofFullyFaithful G).homEquiv.symm |>.trans
+        ((adj.homEquiv c d).symm.trans
+          ((Functor.FullyFaithful.ofFullyFaithful G').homEquiv.trans
+            ((Iso.homCongr (θ.app c).symm (Iso.refl _)).trans
+              (adj'.homEquiv (G.obj c) (G'.obj d)))))
+    have he (f : G.obj c ⟶ G.obj (R.obj d)) : e f = f ≫ α := by
+      obtain ⟨t, rfl⟩ := G.map_surjective f
+      apply (adj'.homEquiv (G.obj c) (G'.obj d)).symm.injective
+      dsimp only [e, Equiv.trans_apply]
+      erw [Equiv.symm_apply_apply]
+      simp only [Functor.FullyFaithful.homEquiv_apply,
+        Functor.FullyFaithful.homEquiv_symm_apply, Functor.FullyFaithful.preimage_map,
+        Adjunction.homEquiv_symm_apply]
+      rw [L'.map_comp, Category.assoc]
+      rw [show L'.map α ≫ adj'.counit.app (G'.obj d) =
+          θ.hom.app (R.obj d) ≫ G'.map (adj.counit.app d) from
+        mateEquiv_counit adj adj' θ.hom d]
+      have ht := θ.hom.naturality t
+      dsimp only [Functor.comp_map] at ht
+      rw [← Category.assoc, ht]
+      simp [Functor.map_comp, Category.assoc]
+    simpa only [← he] using e.bijective
+  -- Essential surjectivity extends this bijectivity to every source object.
+  apply isIso_of_yoneda_map_bijective α
+  intro x
+  let u := G.objObjPreimageIso x
+  let e : (x ⟶ G.obj (R.obj d)) ≃ (x ⟶ R'.obj (G'.obj d)) :=
+    (Iso.homCongr u.symm (Iso.refl _)).trans
+      ((Equiv.ofBijective _ (h (G.objPreimage x))).trans
+        (Iso.homCongr u (Iso.refl _)))
+  have he : ⇑e = (fun f : x ⟶ G.obj (R.obj d) ↦ f ≫ α) := by
+    funext f
+    simp [e, Iso.homCongr_apply, Category.assoc]
+  exact he ▸ e.bijective
 
 end CategoryTheory
