@@ -55,6 +55,7 @@ universe t
 open CategoryTheory MonoidalCategory
 open scoped TensorProduct ChangeOfRings
 
+
 namespace AlgebraicGeometry.Scheme
 
 /-- The constant commutative ring sheaf, before forgetting commutativity.
@@ -76,6 +77,20 @@ noncomputable def adicConstantMap (X : Scheme.{t}) {A B : Type t}
     adicConstantRing X A ⟶ adicConstantRing X B :=
   (constantSheaf (ProEt.topology X) CommRingCat.{t + 1}).map
     (CommRingCat.ofHom (RingHom.ulift φ))
+
+private theorem adicConstantMap_id (X : Scheme.{t}) (A : Type t) [CommRing A] :
+    adicConstantMap X (RingHom.id A) = 𝟙 (adicConstantRing X A) := by
+  unfold adicConstantMap
+  change (constantSheaf (ProEt.topology X) CommRingCat.{t + 1}).map (𝟙 _) = _
+  exact CategoryTheory.Functor.map_id _ _
+
+private theorem adicConstantMap_comp (X : Scheme.{t}) {A B C : Type t}
+    [CommRing A] [CommRing B] [CommRing C]
+    (φ : A →+* B) (ψ : B →+* C) :
+    adicConstantMap X φ ≫ adicConstantMap X ψ = adicConstantMap X (ψ.comp φ) := by
+  unfold adicConstantMap
+  rw [← Functor.map_comp]
+  rfl
 
 /-- The same coefficient map, regarded as a map of ring sheaves.
 Source: blueprint order 1255 (blueprint: def-weil-pbc-complete-coefficient-datum). -/
@@ -135,7 +150,19 @@ is invertible. The small-site universe convention does not change this construct
 (blueprint: def-weil-pbc-complete-coefficient-datum) -/
 theorem adicKFlatModel_exists (X : Scheme.{t}) (Λ : Type t) [CommRing Λ]
     (K : proEtaleDerivedCategory X Λ) : Nonempty (AdicKFlatModel X Λ K) := by
-  sorry
+  classical
+  have : (adicLocalization X Λ).EssSurj := by
+    dsimp only [adicLocalization]
+    infer_instance
+  let G := (adicLocalization X Λ).objPreimage K
+  obtain ⟨P, f, hP, hflat, hf, _⟩ :=
+    CochainComplex.exists_isKFlatResolutionGeneral (R := adicConstantRing X Λ) G
+  have := hf
+  have : IsIso ((adicLocalization X Λ).map f) := by
+    dsimp only [adicLocalization]
+    infer_instance
+  exact ⟨⟨P, hP, hflat,
+    asIso ((adicLocalization X Λ).map f) ≪≫ (adicLocalization X Λ).objObjPreimageIso K⟩⟩
 
 /-- The quotient map for two powers of the ideal, sending the class of x to the class of x.
 Source: blueprint order 1255, construction step 2
@@ -175,6 +202,228 @@ noncomputable def adicTensorSection (X : Scheme.{t}) {A B : Type t}
         (s ⊗ₜ[(adicConstantRing X A).obj.obj U,
           ((adicConstantMap X φ).hom.app U).hom] m)
 
+set_option backward.isDefEq.respectTransparency false in
+private theorem adicSheafChangeHom_comp (X : Scheme.{t}) {A B : Type t}
+    [CommRing A] [CommRing B] (φ : A →+* B)
+    {M N P : SheafOfModules.{t + 1} (adicModuleRing X A)} (f : M ⟶ N) (g : N ⟶ P) :
+    SheafOfModules.changeOfRingsHom.{t, t + 1, t + 1} (adicConstantMap X φ) M (f ≫ g) =
+      SheafOfModules.changeOfRingsHom.{t, t + 1, t + 1} (adicConstantMap X φ) M f ≫
+        SheafOfModules.changeOfRingsHom.{t, t + 1, t + 1} (adicConstantMap X φ) N g := by
+  unfold SheafOfModules.changeOfRingsHom
+  rw [← Functor.map_comp]
+  congr 1
+  apply PresheafOfModules.hom_ext
+  intro U
+  change (ModuleCat.extendScalars ((adicConstantMap X φ).hom.app U).hom).map
+    (f.val.app U ≫ g.val.app U) = _
+  exact Functor.map_comp _ _ _
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem adicTensorHom_ext (X : Scheme.{t}) {A B : Type t}
+    [CommRing A] [CommRing B] (φ : A →+* B)
+    (M : SheafOfModules.{t + 1} (adicModuleRing X A))
+    {N : SheafOfModules.{t + 1} (adicModuleRing X B)}
+    (f g : SheafOfModules.changeOfRings.{t, t + 1, t + 1} (adicConstantMap X φ) M ⟶ N)
+    (h : ∀ (U : X.ProEtᵒᵖ) (s : (adicConstantRing X B).obj.obj U) (m : M.val.obj U),
+      f.val.app U (adicTensorSection X φ M U s m) =
+        g.val.app U (adicTensorSection X φ M U s m)) : f = g := by
+  apply (PresheafOfModules.sheafificationHomEquiv.{t + 1} (𝟙 (adicModuleRing X B).obj)).injective
+  apply PresheafOfModules.hom_ext
+  intro U
+  apply ModuleCat.ExtendScalars.hom_ext
+  intro m
+  exact h U 1 m
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem adicChangeHom_tensorSection (X : Scheme.{t}) {A B : Type t}
+    [CommRing A] [CommRing B] (φ : A →+* B)
+    {M N : SheafOfModules.{t + 1} (adicModuleRing X A)} (f : M ⟶ N)
+    (U : X.ProEtᵒᵖ) (s : (adicConstantRing X B).obj.obj U) (m : M.val.obj U) :
+    (SheafOfModules.changeOfRingsHom.{t, t + 1, t + 1} (adicConstantMap X φ) M f).val.app U
+        (adicTensorSection X φ M U s m) =
+      adicTensorSection X φ N U s (f.val.app U m) := by
+  let p : SheafOfModules.changeOfRingsPresheaf.{t, t + 1, t + 1} (adicConstantMap X φ) M ⟶
+      SheafOfModules.changeOfRingsPresheaf.{t, t + 1, t + 1} (adicConstantMap X φ) N :=
+    { app := fun V ↦ (ModuleCat.extendScalars ((adicConstantMap X φ).hom.app V).hom).map
+        (f.val.app V)
+      naturality := SheafOfModules.changeOfRingsHom_naturality _ M f }
+  have hn := (PresheafOfModules.sheafificationAdjunction.{t + 1}
+    (𝟙 (adicModuleRing X B).obj)).unit.naturality p
+  have hv := congrArg (fun q ↦ q.app U) hn
+  have hx := ConcreteCategory.congr_hom hv
+    (s ⊗ₜ[(adicConstantRing X A).obj.obj U, ((adicConstantMap X φ).hom.app U).hom] m)
+  change adicTensorSection X φ N U s (f.val.app U m) = _ at hx
+  exact hx.symm
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem adicTensorSection_map (X : Scheme.{t}) {A B : Type t}
+    [CommRing A] [CommRing B] (φ : A →+* B)
+    (M : SheafOfModules.{t + 1} (adicModuleRing X A))
+    {U V : X.ProEtᵒᵖ} (i : U ⟶ V)
+    (s : (adicConstantRing X B).obj.obj U) (m : M.val.obj U) :
+    (SheafOfModules.changeOfRings.{t, t + 1, t + 1}
+      (adicConstantMap X φ) M).val.map i (adicTensorSection X φ M U s m) =
+    adicTensorSection X φ M V ((adicConstantRing X B).obj.map i s) (M.val.map i m) := by
+  have hn := PresheafOfModules.naturality_apply
+    ((PresheafOfModules.sheafificationAdjunction.{t + 1}
+      (𝟙 (adicModuleRing X B).obj)).unit.app
+        (SheafOfModules.changeOfRingsPresheaf.{t, t + 1, t + 1} (adicConstantMap X φ) M)) i
+    (s ⊗ₜ[(adicConstantRing X A).obj.obj U, ((adicConstantMap X φ).hom.app U).hom] m)
+  change _ = (SheafOfModules.changeOfRings.{t, t + 1, t + 1}
+    (adicConstantMap X φ) M).val.map i (adicTensorSection X φ M U s m) at hn
+  have ht := Classical.choose_spec
+    (SheafOfModules.exists_changeOfRingsMap.{t, t + 1, t + 1} (adicConstantMap X φ) M i) s m
+  change SheafOfModules.changeOfRingsMap (adicConstantMap X φ) M i _ = _ at ht
+  change ((PresheafOfModules.sheafificationAdjunction.{t + 1}
+    (𝟙 (adicModuleRing X B).obj)).unit.app
+      (SheafOfModules.changeOfRingsPresheaf.{t, t + 1, t + 1}
+        (adicConstantMap X φ) M)).app V
+      (SheafOfModules.changeOfRingsMap (adicConstantMap X φ) M i _) = _ at hn
+  rw [ht] at hn
+  exact hn.symm
+
+set_option backward.isDefEq.respectTransparency false in
+private noncomputable def adicTranspose (X : Scheme.{t}) {A B : Type t}
+    [CommRing A] [CommRing B] (φ : A →+* B)
+    (M : SheafOfModules.{t + 1} (adicModuleRing X A))
+    (N : SheafOfModules.{t + 1} (adicModuleRing X B))
+    (f : SheafOfModules.changeOfRings.{t, t + 1, t + 1} (adicConstantMap X φ) M ⟶ N) :
+    M ⟶ (SheafOfModules.restrictScalars (adicModuleMap X φ)).obj N where
+  val.app U := ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars.{t + 1, t + 1, t + 1}
+    ((adicConstantMap X φ).hom.app U).hom
+      ((PresheafOfModules.sheafificationHomEquiv.{t + 1}
+        (𝟙 (adicModuleRing X B).obj) f).app U)
+  val.naturality {U V} i := by
+    ext m
+    change f.val.app V (adicTensorSection X φ M V 1 (M.val.map i m)) =
+      N.val.map i (f.val.app U (adicTensorSection X φ M U 1 m))
+    have hn := PresheafOfModules.naturality_apply f.val i
+      (adicTensorSection X φ M U 1 m)
+    rw [adicTensorSection_map, map_one] at hn
+    exact hn
+
+private theorem adicTranspose_apply (X : Scheme.{t}) {A B : Type t}
+    [CommRing A] [CommRing B] (φ : A →+* B)
+    (M : SheafOfModules.{t + 1} (adicModuleRing X A))
+    (N : SheafOfModules.{t + 1} (adicModuleRing X B))
+    (f : SheafOfModules.changeOfRings.{t, t + 1, t + 1} (adicConstantMap X φ) M ⟶ N)
+    (U : X.ProEtᵒᵖ) (m : M.val.obj U) :
+    (adicTranspose X φ M N f).val.app U m =
+      f.val.app U (adicTensorSection X φ M U 1 m) := rfl
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem adicTranspose_injective (X : Scheme.{t}) {A B : Type t}
+    [CommRing A] [CommRing B] (φ : A →+* B)
+    (M : SheafOfModules.{t + 1} (adicModuleRing X A))
+    (N : SheafOfModules.{t + 1} (adicModuleRing X B)) :
+    Function.Injective (adicTranspose X φ M N) := by
+  intro f g h
+  apply (PresheafOfModules.sheafificationHomEquiv.{t + 1}
+    (𝟙 (adicModuleRing X B).obj)).injective
+  apply PresheafOfModules.hom_ext
+  intro U
+  apply ModuleCat.ExtendScalars.hom_ext
+  intro m
+  have hv := congrArg (fun q ↦ q.val.app U) h
+  exact ConcreteCategory.congr_hom hv m
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem adicTensorAddHom_ext (X : Scheme.{t}) {A B : Type t}
+    [CommRing A] [CommRing B] (φ : A →+* B)
+    (M : SheafOfModules.{t + 1} (adicModuleRing X A))
+    (N : Sheaf (ProEt.topology X) AddCommGrpCat.{t + 1})
+    (f g : (SheafOfModules.toSheaf (adicModuleRing X B)).obj
+      (SheafOfModules.changeOfRings.{t, t + 1, t + 1} (adicConstantMap X φ) M) ⟶ N)
+    (h : ∀ (U : X.ProEtᵒᵖ) (s : (adicConstantRing X B).obj.obj U) (m : M.val.obj U),
+      f.hom.app U (adicTensorSection X φ M U s m) =
+        g.hom.app U (adicTensorSection X φ M U s m)) : f = g := by
+  apply ((CategoryTheory.sheafificationAdjunction (ProEt.topology X)
+    AddCommGrpCat.{t + 1}).homEquiv
+      (SheafOfModules.changeOfRingsPresheaf.{t, t + 1, t + 1}
+        (adicConstantMap X φ) M).presheaf N).injective
+  apply NatTrans.ext
+  funext U
+  apply AddCommGrpCat.hom_ext
+  apply AddMonoidHom.ext
+  intro z
+  let : Module ((adicConstantRing X A).obj.obj U) ((adicConstantRing X B).obj.obj U) :=
+    Module.compHom _ ((adicConstantMap X φ).hom.app U).hom
+  induction z using TensorProduct.induction_on with
+  | zero => exact (map_zero _).trans (map_zero _).symm
+  | tmul s m => exact h U s m
+  | add x y hx hy => simp only [map_add, hx, hy]
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem adicModuleLift_tmul (X : Scheme.{t}) {A B : Type t}
+    [CommRing A] [CommRing B] (φ : A →+* B) (U : X.ProEtᵒᵖ)
+    (M : ModuleCat.{t + 1} ((adicConstantRing X A).obj.obj U))
+    (N : ModuleCat.{t + 1} ((adicConstantRing X B).obj.obj U))
+    (g : M ⟶ (ModuleCat.restrictScalars ((adicConstantMap X φ).hom.app U).hom).obj N)
+    (s : (adicConstantRing X B).obj.obj U) (m : M) :
+    ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars.{t + 1, t + 1, t + 1}
+      ((adicConstantMap X φ).hom.app U).hom g
+        (s ⊗ₜ[(adicConstantRing X A).obj.obj U, ((adicConstantMap X φ).hom.app U).hom] m) =
+      s • (show N from g m) := by
+  let : Module ((adicConstantRing X A).obj.obj U) ((adicConstantRing X B).obj.obj U) :=
+    Module.compHom _ ((adicConstantMap X φ).hom.app U).hom
+  let : Module ((adicConstantRing X A).obj.obj U) N :=
+    Module.compHom N ((adicConstantMap X φ).hom.app U).hom
+  erw [ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply,
+    TensorProduct.lift.tmul]
+  rfl
+
+set_option backward.isDefEq.respectTransparency false in
+private noncomputable def adicLiftSeed (X : Scheme.{t}) {A B : Type t}
+    [CommRing A] [CommRing B] (φ : A →+* B)
+    (M : SheafOfModules.{t + 1} (adicModuleRing X A))
+    (N : SheafOfModules.{t + 1} (adicModuleRing X B))
+    (g : M ⟶ (SheafOfModules.restrictScalars (adicModuleMap X φ)).obj N) :
+    SheafOfModules.changeOfRingsPresheaf.{t, t + 1, t + 1} (adicConstantMap X φ) M ⟶
+      N.val where
+  app U := ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars.{t + 1, t + 1, t + 1}
+    ((adicConstantMap X φ).hom.app U).hom (g.val.app U)
+  naturality {U V} i := by
+    apply ModuleCat.ExtendScalars.hom_ext
+    intro m
+    change ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars.{t + 1, t + 1, t + 1}
+      ((adicConstantMap X φ).hom.app V).hom (g.val.app V)
+        (SheafOfModules.changeOfRingsMap (adicConstantMap X φ) M i _) =
+      N.val.map i
+        (ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars.{t + 1, t + 1, t + 1}
+          ((adicConstantMap X φ).hom.app U).hom (g.val.app U) _)
+    erw [Classical.choose_spec
+      (SheafOfModules.exists_changeOfRingsMap.{t, t + 1, t + 1}
+        (adicConstantMap X φ) M i) 1 m, map_one]
+    rw [adicModuleLift_tmul, adicModuleLift_tmul]
+    simp only [one_smul]
+    exact PresheafOfModules.naturality_apply g.val i m
+
+private noncomputable def adicLift (X : Scheme.{t}) {A B : Type t}
+    [CommRing A] [CommRing B] (φ : A →+* B)
+    (M : SheafOfModules.{t + 1} (adicModuleRing X A))
+    (N : SheafOfModules.{t + 1} (adicModuleRing X B))
+    (g : M ⟶ (SheafOfModules.restrictScalars (adicModuleMap X φ)).obj N) :
+    SheafOfModules.changeOfRings.{t, t + 1, t + 1} (adicConstantMap X φ) M ⟶ N :=
+  (PresheafOfModules.sheafificationHomEquiv.{t + 1}
+    (𝟙 (adicModuleRing X B).obj)).symm (adicLiftSeed X φ M N g)
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem adicLift_tensorSection (X : Scheme.{t}) {A B : Type t}
+    [CommRing A] [CommRing B] (φ : A →+* B)
+    (M : SheafOfModules.{t + 1} (adicModuleRing X A))
+    (N : SheafOfModules.{t + 1} (adicModuleRing X B))
+    (g : M ⟶ (SheafOfModules.restrictScalars (adicModuleMap X φ)).obj N)
+    (U : X.ProEtᵒᵖ) (s : (adicConstantRing X B).obj.obj U) (m : M.val.obj U) :
+    (adicLift X φ M N g).val.app U (adicTensorSection X φ M U s m) =
+      s • (show N.val.obj U from g.val.app U m) := by
+  have h := (PresheafOfModules.sheafificationHomEquiv.{t + 1}
+    (𝟙 (adicModuleRing X B).obj)).apply_symm_apply (adicLiftSeed X φ M N g)
+  have hv := congrArg (fun q ↦ q.app U) h
+  have hx := ConcreteCategory.congr_hom hv
+    (s ⊗ₜ[(adicConstantRing X A).obj.obj U, ((adicConstantMap X φ).hom.app U).hom] m)
+  dsimp [adicLiftSeed] at hx
+  exact hx.trans (adicModuleLift_tmul X φ U _ _ (g.val.app U) s m)
+
 /-- The ordinary balancing map is uniquely specified on local tensor generators and is
 invertible. Source: blueprint order 1255, step 3; Stacks Tags 03EK and 0D6D.
 Proof: send s tensor (r tensor m) to (s * ψ(r)) tensor m. The balancing relations
@@ -206,6 +455,17 @@ noncomputable def adicBalanceHom (X : Scheme.{t}) {A B C : Type t}
     adicChange X ψ (adicChange X φ P) ⟶ adicChange X χ P :=
   Classical.choose (adicBalance_exists X φ ψ χ h P)
 
+private theorem adicBalanceHom_tensorSection (X : Scheme.{t}) {A B C : Type t}
+    [CommRing A] [CommRing B] [CommRing C]
+    (φ : A →+* B) (ψ : B →+* C) (χ : A →+* C) (h : ψ.comp φ = χ)
+    (P : CochainComplex (SheafOfModules.{t + 1} (adicModuleRing X A)) ℤ)
+    (p : ℤ) (U : X.ProEtᵒᵖ) (s : (adicConstantRing X C).obj.obj U)
+    (r : (adicConstantRing X B).obj.obj U) (m : (P.X p).val.obj U) :
+    ((adicBalanceHom X φ ψ χ h P).f p).val.app U
+      (adicTensorSection X ψ _ U s (adicTensorSection X φ _ U r m)) =
+    adicTensorSection X χ _ U (s * (adicConstantMap X ψ).hom.app U r) m :=
+  (Classical.choose_spec (adicBalance_exists X φ ψ χ h P)).1.2 p U s r m
+
 /-- The chosen balancing map is invertible. Source: blueprint order 1255, step 3.
 Proof: use the isomorphism clause of adicBalance_exists; its inverse is the formula
 s tensor m maps to s tensor (1 tensor m).
@@ -215,7 +475,7 @@ theorem adicBalanceHom_isIso (X : Scheme.{t}) {A B C : Type t}
     (φ : A →+* B) (ψ : B →+* C) (χ : A →+* C) (h : ψ.comp φ = χ)
     (P : CochainComplex (SheafOfModules.{t + 1} (adicModuleRing X A)) ℤ) :
     IsIso (adicBalanceHom X φ ψ χ h P) := by
-  sorry
+  exact (Classical.choose_spec (adicBalance_exists X φ ψ χ h P)).1.1
 
 /-- Scalar-extension associativity, on the explicit complexes before localization.
 Source: blueprint order 1255, step 3
@@ -237,7 +497,7 @@ theorem adicQuotientMap_comp_mk {Λ : Type t} [CommRing Λ] (I : Ideal Λ)
     (b a : ℕ) (hab : a ≤ b) :
     (adicQuotientMap I b a hab).comp (Ideal.Quotient.mk (I ^ b)) =
       Ideal.Quotient.mk (I ^ a) := by
-  sorry
+  exact Ideal.Quotient.factor_comp_mk _
 
 /-- The quotient-coefficient reduction, computed by the fixed K-flat model.
 Source: blueprint order 1255, step 1; Stacks Tag 06YY
@@ -275,7 +535,9 @@ theorem adicReductionModel_isKFlat (X : Scheme.{t}) {Λ : Type t} [CommRing Λ]
         (@MonoidalCategory.tensorRight _ _
           (SheafOfModules.monoidalCategory (adicConstantRing X (Λ ⧸ d.ideal ^ (n : ℕ))))
           ((adicChange X (Ideal.Quotient.mk (d.ideal ^ (n : ℕ))) M.complex).X p)) := by
-  sorry
+  exact SheafOfModules.changeOfRings_isKFlat_of_flat_terms
+    (adicConstantMap X (Ideal.Quotient.mk (d.ideal ^ (n : ℕ)))) M.complex
+    M.isKFlat M.flatTerms
 
 /-- The source of normalization, computed over the intermediate quotient coefficient ring.
 Source: blueprint order 1255, step 3; Stacks Tag 0G7E
@@ -338,6 +600,17 @@ noncomputable def adicTransitionComplex (X : Scheme.{t}) {Λ : Type t} [CommRing
       (adicChange X (Ideal.Quotient.mk (I ^ (a : ℕ))) P) :=
   Classical.choose (adicTransitionComplex_exists X I P b a hab)
 
+private theorem adicTransitionComplex_tensorSection (X : Scheme.{t})
+    {Λ : Type t} [CommRing Λ] (I : Ideal Λ)
+    (P : CochainComplex (SheafOfModules.{t + 1} (adicModuleRing X Λ)) ℤ)
+    (b a : ℕ+) (hab : a ≤ b) (p : ℤ) (U : X.ProEtᵒᵖ)
+    (r : (adicConstantRing X (Λ ⧸ I ^ (b : ℕ))).obj.obj U) (m : (P.X p).val.obj U) :
+    ((adicTransitionComplex X I P b a hab).f p).val.app U
+      (adicTensorSection X (Ideal.Quotient.mk (I ^ (b : ℕ))) _ U r m) =
+    adicTensorSection X (Ideal.Quotient.mk (I ^ (a : ℕ))) _ U
+      ((adicConstantMap X (adicQuotientMap I b a hab)).hom.app U r) m :=
+  (Classical.choose_spec (adicTransitionComplex_exists X I P b a hab)).1 p U r m
+
 /-- The derived transition q_{b,a}, in the original coefficient category.
 Source: blueprint order 1255, step 2
 (blueprint: def-weil-pbc-complete-coefficient-datum). -/
@@ -356,7 +629,18 @@ theorem adicTransition_id (X : Scheme.{t}) {Λ : Type t} [CommRing Λ]
     (d : CompleteCoefficientDatum Λ) {K : proEtaleDerivedCategory X Λ}
     (M : AdicKFlatModel X Λ K) (a : ℕ+) :
     adicTransition X d M a a (le_refl a) = 𝟙 (adicReductionUnderlying X d M a) := by
-  sorry
+  have hid : adicQuotientMap d.ideal a a (le_refl a) =
+      RingHom.id (Λ ⧸ d.ideal ^ (a : ℕ)) := Ideal.Quotient.factor_eq
+  have he : adicTransitionComplex X d.ideal M.complex a a (le_refl a) = 𝟙 _ := by
+    apply Eq.symm
+    apply (Classical.choose_spec
+      (adicTransitionComplex_exists X d.ideal M.complex a a (le_refl a))).2
+    intro p U r m
+    rw [hid, adicConstantMap_id]
+    rfl
+  change (adicLocalization X Λ).map _ = _
+  rw [he]
+  exact (adicLocalization X Λ).map_id _
 
 /-- Transition maps compose in the stated order. Source: blueprint order 1255, step 2.
 Proof: quotient homomorphisms compose. On every local tensor generator both chain-map
@@ -368,7 +652,29 @@ theorem adicTransition_comp (X : Scheme.{t}) {Λ : Type t} [CommRing Λ]
     (M : AdicKFlatModel X Λ K) (c b a : ℕ+) (hab : a ≤ b) (hbc : b ≤ c) :
     adicTransition X d M c a (le_trans hab hbc) =
       adicTransition X d M c b hbc ≫ adicTransition X d M b a hab := by
-  sorry
+  have he : adicTransitionComplex X d.ideal M.complex c a (le_trans hab hbc) =
+      adicTransitionComplex X d.ideal M.complex c b hbc ≫
+        adicTransitionComplex X d.ideal M.complex b a hab := by
+    apply Eq.symm
+    apply (Classical.choose_spec
+      (adicTransitionComplex_exists X d.ideal M.complex c a (le_trans hab hbc))).2
+    intro p U r m
+    change ((adicTransitionComplex X d.ideal M.complex b a hab).f p).val.app U
+        (((adicTransitionComplex X d.ideal M.complex c b hbc).f p).val.app U _) = _
+    rw [adicTransitionComplex_tensorSection, adicTransitionComplex_tensorSection]
+    have hq : (adicQuotientMap d.ideal b a hab).comp
+        (adicQuotientMap d.ideal c b hbc) =
+        adicQuotientMap d.ideal c a (le_trans hab hbc) :=
+      Ideal.Quotient.factor_comp _ _
+    have hm := adicConstantMap_comp X (adicQuotientMap d.ideal c b hbc)
+      (adicQuotientMap d.ideal b a hab)
+    rw [hq] at hm
+    have hv := congrArg (fun q ↦ q.hom.app U) hm
+    have hr := ConcreteCategory.congr_hom hv r
+    exact congrArg (fun z ↦
+      adicTensorSection X (Ideal.Quotient.mk (d.ideal ^ (a : ℕ))) _ U z m) hr
+  unfold adicTransition
+  rw [← Functor.map_comp, ← he]
 
 /-- Termwise extension of a chain map commutes with differentials.
 Source: blueprint order 1255, steps 3 and 4; Stacks Tag 03EK.
@@ -385,7 +691,11 @@ theorem adicChangeHom_comm (X : Scheme.{t}) {A B : Type t}
       (adicChange X φ P).d i j ≫
         SheafOfModules.changeOfRingsHom.{t, t + 1, t + 1}
           (adicConstantMap X φ) (P.X j) (f.f j) := by
-  sorry
+  change SheafOfModules.changeOfRingsHom (adicConstantMap X φ) _ (f.f i) ≫
+      SheafOfModules.changeOfRingsHom (adicConstantMap X φ) _ (Q.d i j) =
+    SheafOfModules.changeOfRingsHom (adicConstantMap X φ) _ (P.d i j) ≫
+      SheafOfModules.changeOfRingsHom (adicConstantMap X φ) _ (f.f j)
+  rw [← adicSheafChangeHom_comp, ← adicSheafChangeHom_comp, f.comm]
 
 /-- Extension of a chain map on each term, using the recorded sheaf change-of-rings map.
 Source: blueprint order 1255, steps 3 and 4
@@ -398,6 +708,10 @@ noncomputable def adicChangeHom (X : Scheme.{t}) {A B : Type t}
     (adicConstantMap X φ) (P.X i) (f.f i)
   comm' i j _ := adicChangeHom_comm X φ f i j
 
+set_option maxHeartbeats 800000 in
+-- The dependent sheafified tensor extensionality requires extra elaboration heartbeats.
+set_option profiler true in
+set_option backward.isDefEq.respectTransparency false in
 /-- Ordinary balancing is natural in the complex being extended.
 Source: blueprint order 1255, step 3; Stacks Tag 0D6D.
 Proof: both composites send s tensor (r tensor m) to
@@ -445,8 +759,9 @@ theorem adicQuotientMap_comp {Λ : Type t} [CommRing Λ] (I : Ideal Λ)
     (c b a : ℕ+) (hab : a ≤ b) (hbc : b ≤ c) :
     (adicQuotientMap I b a hab).comp (adicQuotientMap I c b hbc) =
       adicQuotientMap I c a (le_trans hab hbc) := by
-  sorry
+  exact Ideal.Quotient.factor_comp _ _
 
+set_option backward.isDefEq.respectTransparency false in
 /-- The normalization cocycle, including the canonical associativity identification of
 its source. The left path extends θ_{c,b} to P_a and then applies θ_{b,a}; the right
 path first balances the last two extensions and then applies θ_{c,a}.
@@ -498,6 +813,14 @@ noncomputable def adicUnitHom (X : Scheme.{t}) {A : Type t} [CommRing A]
     adicChange X φ P ⟶ P :=
   Classical.choose (adicUnit_exists X φ hφ P)
 
+private theorem adicUnitHom_tensorSection (X : Scheme.{t}) {A : Type t} [CommRing A]
+    (φ : A →+* A) (hφ : φ = RingHom.id A)
+    (P : CochainComplex (SheafOfModules.{t + 1} (adicModuleRing X A)) ℤ)
+    (p : ℤ) (U : X.ProEtᵒᵖ) (s : (adicConstantRing X A).obj.obj U)
+    (m : (P.X p).val.obj U) :
+    ((adicUnitHom X φ hφ P).f p).val.app U (adicTensorSection X φ _ U s m) = s • m :=
+  (Classical.choose_spec (adicUnit_exists X φ hφ P)).1.2 p U s m
+
 /-- The equal-index quotient homomorphism is identity.
 Source: blueprint order 1255, steps 2 and 4.
 Proof: its defining quotient factor sends each class to itself, so quotient induction
@@ -505,8 +828,9 @@ proves equality to the identity homomorphism.
 (blueprint: def-weil-pbc-complete-coefficient-datum) -/
 theorem adicQuotientMap_id {Λ : Type t} [CommRing Λ] (I : Ideal Λ) (a : ℕ+) :
     adicQuotientMap I a a (le_refl a) = RingHom.id (Λ ⧸ I ^ (a : ℕ)) := by
-  sorry
+  exact Ideal.Quotient.factor_eq
 
+set_option backward.isDefEq.respectTransparency false in
 /-- Equal-index normalization is the unit identification, rather than an arbitrary
 isomorphism between its source and target. Source: blueprint order 1255, step 4.
 Proof: on s tensor (r tensor m), balancing gives (s*r) tensor m. This is precisely
