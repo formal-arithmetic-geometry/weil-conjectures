@@ -16,7 +16,8 @@
   "def-weil-ordinary-compact-cohomology",
   "def-weil-punctual-weights",
   "def-weil-finite-integral-morphism",
-  "def-weil-frobenius-module-weights"
+  "def-weil-frobenius-module-weights",
+  "def-zl-weil-compact-support-cohomology"
  ],
  "proof": [
   {
@@ -266,5 +267,24 @@
   "group": "Q24",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q24-081d71fab (reviewer sub-agent of L); spot-checked: PASS, no changes. I read the item, the new child, every cited statement, the unit sk-thm-dl-a1-upper, and Stacks 03QP (etale-cohomology.tex lines 8245-8264). The blueprint's display H_c^0 = sum of Gal-invariants of the stalks is false. Counterexamples: over Spec F_q with Frobenius -1 the invariants are 0 but the stalk has dimension 1; over Spec F_{q^2} with the constant sheaf the formula gives dimension 1 instead of 2. The repair keeps the blueprint's evaluate-then-bound route. Step 1 takes exactly what the child states. Step 2 is elementary: with local base q_x=q^{d_x}, p-linear-filtration bounds every local eigenvalue. Step 3 is elementary: a nonzero component e_z(v) of an eigenvector gives lambda^d as a local eigenvalue, and the d-th root gives |iota lambda|<=q^{w/2}. This normalization was missing in the old proof. Step 4 applies lem-a1-punctual-bound-module-mixed, whose hypotheses steps 1 and 3 supply. The child is true by 03QP(1) at the geometric point of Spec k. P_x matches the d_x embeddings of kappa(x), and Frobenius returns as in def-weil-local-frobenius-trace. I tested it on empty Z_0, degree 1 and 2 points, a nonreduced point and a Jordan block. It carries no weights, so it is not a restated clause of the parent, and no DAG node states it (the lem-trf-* and pbc candidates are finite-coefficient or ordinary sheaves). It meets B1-B9 with three kinds of search, and its coefficients are the same common-stage Qlb as the item's. The citers supply the hypothesis as the punctual eigenvalue bound, which matches step 2. Batch-5 check: all five flagged citations are general definitions, not steps in the proofs of the trace formula or Poincare duality. They are the Frobenius module and its weights (sk-def-frobmod), the constructible heart, H_c, global F and local F_y. The heart and F_y were already reached through def-weil-punctual-weights before this delivery. The item uses neither assumption. Caution for the child's future split: prove it through the pbc nodes (lem-weil-pbc-zero-dimensional-sections-stalks), not lem-trf-finite-scheme-derived-germs. No tool_uses needed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-29e4fdc21",
+  "group": "NX",
+  "result": "pass",
+  "note": "Read the item node, all 5 stmt_deps, the source proof, both delivered modules and the used declarations (SfPunctualEigenvalue, SfIsMixedOfWeightsAtMost, zlWeilHigherShriek, Compactification.ofIsProper, IsFinite). Clauses match: IsFinite Z0 with LFT/QC/proper inferred and no extra hypothesis; G in sfCommonStageWeilSheaf; hG is the punctual eigenvalue bound with base #k(y), equivalent per stalk to stalk weights <= w; H_c^0 is the canonical R^0_c a_! on Spec k0 with compactification ofIsProper (compactification-independent); the conclusion SfIsMixedOfWeightsAtMost on the point (q_y=q) is equivalent to Frobenius-module mixedness. Edge cases (empty Z0, zero G, any real w, degree-d points, nonreduced, Jordan blocks), universes u/v independent. The section 1(B) repair of def-weil-ordinary-compact-cohomology is justified (old record on the older WeilSheaf category), real data, old interface publicly imported, node changes only in lean. Item changes only in lean and stmt_deps (+ landed def-zl-weil-compact-support-cohomology). Docstrings with source place and blueprint tag, sorry-only proof, lean.statement verbatim for both nodes. nt_compile.py --json on both snapshot files: rc 0, no errors or warnings, 3.4-3.8 s, reproduced twice. Observations only: the dependency lean record is replaced (prescribed form; Q43 declaration remains importable); the NX second reading is an author re-reading."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FiniteBoundaryWeights",
+  "declaration": "WeilConjectures.sf_finiteBoundary_hasWeightsAtMost",
+  "file": "lean/Sheaf/Paper/FiniteBoundaryWeights.lean",
+  "statement": "theorem sf_finiteBoundary_hasWeightsAtMost (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p) (Qbar : Type v) [Field Qbar] [Algebra (Padic l) Qbar] [IsAlgClosure (Padic l) Qbar] (iota : Qbar ≃+* ℂ) (Z₀ : Over (Spec (.of D.k₀))) [IsFinite Z₀.hom] (G : sfCommonStageWeilSheaf D l hl Z₀ Qbar) (w : ℝ) (hG : ∀ (y : {y : Z₀.left // y ∈ closedPoints Z₀.left}) (α : Qbar), SfPunctualEigenvalue D l hl Qbar Z₀ G y α → ‖iota α‖ ≤ (Nat.card (Z₀.left.residueField y.val) : ℝ) ^ (w / 2)) : SfIsMixedOfWeightsAtMost D l hl Qbar (sfWeilCohomologyPoint D) iota (commonStageCompactWeilCohomology D l hl Qbar Z₀ (Compactification.ofIsProper Z₀.hom) G 0) w",
+  "branch": "newtargets-dag",
+  "by": "NX",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Uses the recorded common-stage Weil heart and local punctual eigenvalues, not the older upstream WeilSheaf. H_c^0 with Frobenius is retained as the canonical compact-support higher image on Spec(k₀); punctual mixedness there is exactly Frobenius-module mixedness under the geometric coefficient-fibre equivalence. The original source statement is unchanged. The newly cited landed definition supplies that canonical higher image; the ordinary/compact cohomology dependency is repaired in this packet to expose its common-stage specialization."
  }
 }

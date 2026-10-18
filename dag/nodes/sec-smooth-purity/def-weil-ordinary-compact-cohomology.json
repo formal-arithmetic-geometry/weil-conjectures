@@ -100,20 +100,25 @@
  "reviewed_lean": {
   "date": "2026-10-18",
   "by": "L",
-  "reviewer": "NT-stage2-cc-e00e13ce9",
-  "group": "Q43",
+  "reviewer": "NT-stage2-cc-29e4fdc21",
+  "group": "NX",
   "result": "pass",
-  "note": "Read node, 3 stmt_deps, all 3 modules, report (Worker report + Second reading by Q43 + Dependency modules) and the upstream WeilSheaf/directImage/lowerStar/cohomology/compactlySupportedCohomology/IsPunctuallyPureOfWeight/HasWeightsAtMostOver/IsCurve declarations in the side clone. Every clause matches: smooth geometrically connected curves (IsCurve+SmoothOfRelativeDimension 1+GeometricallyConnected), dense open immersion over k0, iota an isomorphism, lisse F punctually iota-pure of weight w, ordinary j_* (directImage = lowerStar, no shift), H_c^r = .2 component (Ra_!, geometric Frobenius), weights <= w+r over #k0 for all r : Z. No extra hypotheses; edge cases (r<0, r>2, rank 0, j=id, proper/affine C) covered; universes bound; lean.statement verbatim; node diffs only in lean. Dependency repairs (curveWeilMiddleExtension, ordinaryCompactWeilSheafCohomology) are real-data wrappers of existing upstream operations with justified notes; old interfaces stay publicly imported. Only the theorem's proof is sorry. nt_compile.py --json on snapshot: rc 0, no errors or warnings (2.9 s / 5.0 s / 9.4 s). Observation only: landing replaces the lean records of the widely cited dependency nodes (the prescribed dependency-repair form)."
+  "note": "Read the item node, all 5 stmt_deps, the source proof, both delivered modules and the used declarations (SfPunctualEigenvalue, SfIsMixedOfWeightsAtMost, zlWeilHigherShriek, Compactification.ofIsProper, IsFinite). Clauses match: IsFinite Z0 with LFT/QC/proper inferred and no extra hypothesis; G in sfCommonStageWeilSheaf; hG is the punctual eigenvalue bound with base #k(y), equivalent per stalk to stalk weights <= w; H_c^0 is the canonical R^0_c a_! on Spec k0 with compactification ofIsProper (compactification-independent); the conclusion SfIsMixedOfWeightsAtMost on the point (q_y=q) is equivalent to Frobenius-module mixedness. Edge cases (empty Z0, zero G, any real w, degree-d points, nonreduced, Jordan blocks), universes u/v independent. The section 1(B) repair of def-weil-ordinary-compact-cohomology is justified (old record on the older WeilSheaf category), real data, old interface publicly imported, node changes only in lean. Item changes only in lean and stmt_deps (+ landed def-zl-weil-compact-support-cohomology). Docstrings with source place and blueprint tag, sorry-only proof, lean.statement verbatim for both nodes. nt_compile.py --json on both snapshot files: rc 0, no errors or warnings, 3.4-3.8 s, reproduced twice. Observations only: the dependency lean record is replaced (prescribed form; Q43 declaration remains importable); the NX second reading is an author re-reading."
  },
  "lean": {
-  "module": "Sheaf.Paper.OrdinaryCompactWeilCohomology",
-  "declaration": "AlgebraicGeometry.WeilSheaf.ordinaryCompactWeilSheafCohomology",
-  "file": "lean/Sheaf/Paper/OrdinaryCompactWeilCohomology.lean",
-  "statement": "def ordinaryCompactWeilSheafCohomology {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)] {X : Scheme.{u}} [X.Over (Spec (.of k₀))] [IsSeparated (X ↘ Spec (.of k₀))] [LocallyOfFiniteType (X ↘ Spec (.of k₀))] [QuasiCompact (X ↘ Spec (.of k₀))] (F : WeilSheaf k₀ l X) (r : ℤ) : FrobeniusModule.{u + 1, 0} (PadicAlgCl l) × FrobeniusModule.{u + 1, 0} (PadicAlgCl l)",
+  "module": "Sheaf.Paper.CommonStageCompactWeilCohomology",
+  "declaration": "WeilConjectures.commonStageCompactWeilCohomology",
+  "declarations": [
+   "WeilConjectures.sfWeilCohomologyPoint",
+   "WeilConjectures.sfWeilCohomologyPoint_isFinite",
+   "WeilConjectures.commonStageCompactWeilCohomology"
+  ],
+  "file": "lean/Sheaf/Paper/CommonStageCompactWeilCohomology.lean",
+  "statement": "def commonStageCompactWeilCohomology (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p) (Qbar : Type v) [Field Qbar] [Algebra (Padic l) Qbar] [IsAlgClosure (Padic l) Qbar] (Y₀ : Over (Spec (.of D.k₀))) [LocallyOfFiniteType Y₀.hom] [QuasiCompact Y₀.hom] (c : Compactification Y₀.hom) (G : sfCommonStageWeilSheaf D l hl Y₀ Qbar) (n : ℕ) : sfCommonStageWeilSheaf D l hl (sfWeilCohomologyPoint D) Qbar",
   "branch": "newtargets-dag",
-  "by": "Q43",
-  "date": "2026-10-17",
+  "by": "NX",
+  "date": "2026-10-18",
   "existing": false,
-  "note": "The previous coefficient-module output qbarWeilSheafCohomology forgets the geometric Frobenius and cannot be passed to the recorded weight predicates on FrobeniusModule. Record the exact existing Qbar-Weil cohomology specialization, constructed as global sections of the cohomology sheaf of Ra_! with its induced geometric Frobenius. Ordinary cohomology is supplied in the same module. The finite/integral/rational and common-stage coefficient definitions in Sheaf.Paper.OrdinaryCompactCohomology remain available; this is the Frobenius-retaining interface to the final Weil clause, not a new cohomology construction. The dependency module publicly imports the previous full interface and adds this specialization using existing upstream constructions; no previous coefficient cases are removed."
+  "note": "Section 1(B): the previous Frobenius-retaining specialization accepts the older AlgebraicGeometry.WeilSheaf and PadicAlgCl, while the current punctual-weight dependency accepts sfCommonStageWeilSheaf over an arbitrary specified coefficient closure. The previous common-stage coefficient output forgets Frobenius. This module retains the canonical compact-support higher image as a Weil sheaf on Spec(k₀), using zlWeilHigherShriek and its comparison with sfQbarCompactSupportValue. Its geometric coefficient fibre is the original H_c^n with the induced action. No operator or category equivalence is postulated or chosen. Public imports retain the entire previous ordinary/compact interface, all four coefficient cases, constants, twists and Weil-complex specializations. The new specialization is for sheaves and n≥0; it does not restrict the retained integer-degree interfaces."
  }
 }
