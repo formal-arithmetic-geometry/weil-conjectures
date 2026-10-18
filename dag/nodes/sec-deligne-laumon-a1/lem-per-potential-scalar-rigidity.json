@@ -13,9 +13,135 @@
   "def-pur-derived-internal-hom",
   "def-sbc-standard-tstructure-derived-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Call the scalar assertion $P(T,\\delta)$, quantified over every pinned potential complex on $T$. We prove it for all Noetherian excellent schemes with invertible $\\ell$. The existence and unique pinning-preserving isomorphism assertions needed in the gluing lemma are already supplied independently by [lem-per-potential-dualizing-uniqueness]; we use only those two clauses of its statement, not the stronger assertion inside its proof. The empty scheme satisfies $P$: its sheaf category is zero and the scalar map is the unique isomorphism $0\\to0$.",
+   "uses": [
+    "lem-per-potential-dualizing-uniqueness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, Theorem 5.1.1 and subsection 5.5: the three assertions propagated together"
+   }
+  },
+  {
+   "text": "Reduction preserves and reflects $P$. Indeed $a:T_{\\mathrm{red}}\\to T$ is a universal homeomorphism by [lem-weil-pbc-reduction-universal-homeomorphism], and [thm-weil-pbc-universal-homeomorphism-invariance] gives the inverse/direct-image equivalence of small etale topoi. Applied to module sheaves and then termwise to complexes, this exact equivalence identifies coefficient sheaves, Hom complexes, injectives, and cohomology, hence derived internal Hom and ordinary truncation. The image of scalar multiplication is scalar multiplication. It also identifies the support kernel for each closed point in each local scheme: the complementary open and restriction map correspond. Thus the residue-field costalks correspond. In [def-per-potential-dualizing-complex] the residue transitions are computed from reduced one-dimensional closures in strict localizations and their normalizations; reduction leaves these curves, degrees, roots of unity, and trait complexes unchanged. The same pinnings therefore make $a^*K$ potential for the same dimension function. Reduction is again Noetherian excellent, since on affines it is a quotient finite-type algebra and [lem-exc-finite-type-localization-excellent] applies. We may consequently assume a scheme reduced whenever proving $P$.",
+   "uses": [
+    "lem-weil-pbc-reduction-universal-homeomorphism",
+    "thm-weil-pbc-universal-homeomorphism-invariance",
+    "def-pur-derived-internal-hom",
+    "def-sbc-standard-tstructure-derived-category",
+    "def-per-potential-dualizing-complex",
+    "lem-exc-finite-type-localization-excellent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, subsection 5.5: reduction to the reduced case; Definitions 1.4.1 and 2.1.1-2.1.2"
+   }
+  },
+  {
+   "text": "For a normal scheme, [rem-pc-regular-normal], clause (2), gives finitely many disjoint open-and-closed normal integral components. On one component with generic point $\\eta$, set $m=\\delta(\\eta)$ and $K_0=K(-m)[-2m]$. The twist line is invertible: [lem-asd-finite-etale-twist-line] makes positive powers etale locally free of rank one; the negative powers in [def-per-potential-dualizing-complex] are their module duals, and evaluation is an isomorphism because it is so after choosing a local basis. Tensoring by this line and shifting changes each pinning to $\\Lambda(\\delta(x)-m)[2\\delta(x)-2m]$. On an etale cover trivializing the line, both the supported complexes and their residue maps are the original ones tensored by its basis; thus the compatibility equation is preserved. The resulting dimension function has generic value zero. Apply the scalar clause of [lem-per-normal-pinned-extension] to $K_0$. Locally, simultaneous tensoring of the two entries of the Hom complex by a free rank-one module cancels, as do their simultaneous shifts; these identifications are independent of the basis and take scalar action to scalar action. The Hom model [def-pur-derived-internal-hom] therefore identifies the scalar assertions for $K_0$ and $K$. Restriction to the finitely many disjoint components detects cohomology and isomorphisms, so $P$ holds on every normal scheme.",
+   "uses": [
+    "rem-pc-regular-normal",
+    "lem-asd-finite-etale-twist-line",
+    "def-per-potential-dualizing-complex",
+    "lem-per-normal-pinned-extension",
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, Proposition 5.3.1(c), with twist/shift normalization of the generic dimension value"
+   }
+  },
+  {
+   "text": "Fix the original scheme $X$. Use Noetherian induction on closed subsets $S\\subseteq|X|$, with the strengthened assertion: $P(T,\\epsilon)$ holds for every Noetherian excellent scheme $T$ finite over the reduced closed subscheme $S_{\\mathrm{red}}$, and every dimension function $\\epsilon$ on $T$. The empty support was settled in Step 1. Assume the assertion for every proper closed subset of $S$, and take such a $T$. By Step 2 replace $T$ by $T_{\\mathrm{red}}$. This remains finite over $S_{\\mathrm{red}}$: a quotient of a finite module is finite. Its image $C$ is closed by [lem-weil-pbc-finite-closed-map-finite-fibres]. If $C\\subsetneq S$, the reduced $T$ factors through $C_{\\mathrm{red}}$: on affine charts each element of the radical ideal defining $C$ maps to an element lying in every prime of the reduced source ring, hence to zero. This factor map is finite since the same module generators work after passing to the quotient of the base ring. The induction hypothesis applies. We may therefore assume $T\\to S_{\\mathrm{red}}$ is surjective.",
+   "uses": [
+    "lem-weil-pbc-finite-closed-map-finite-fibres"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, subsection 5.5: Noetherian induction strengthened to schemes finite over a closed support"
+   }
+  },
+  {
+   "text": "Apply [lem-per-excellent-normalization-preparation] to this reduced $T$. Its normalization $p:T'\\to T$ is finite surjective, its source is Noetherian excellent and normal, and it is an isomorphism above a dense open $U$ containing all generic points of $T$. Let $Y=(T\\setminus U)_{\\mathrm{red}}$, $Y'=Y\\times_TT'$, and $q:Y'\\to T$. These are Noetherian excellent schemes: affine rings of $Y$ are quotients, and those of $Y'$ are finite algebras over affine rings of $Y$, so [lem-exc-finite-type-localization-excellent] applies. Invertibility of $\\ell$ pulls back. Finite maps are proper by [lem-weil-pbc-finite-closed-map-finite-fibres], so the identity open immersion followed by each of $p,i:Y\\hookrightarrow T,q$ is a compactification. Apply [lem-per-potential-dualizing-finite-pullback] to a pinned potential complex on $T$, which exists by Step 1. It supplies dimension functions on $T',Y,Y'$, equal to $\\epsilon$ composed with the structure maps: a residue extension of a finite morphism is finite, hence has transcendence degree zero. These are precisely the induced dimension functions required by the gluing statement.",
+   "uses": [
+    "lem-per-excellent-normalization-preparation",
+    "lem-exc-finite-type-localization-excellent",
+    "lem-weil-pbc-finite-closed-map-finite-fibres",
+    "lem-per-potential-dualizing-finite-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, subsection 5.5: the normalization square; Proposition 2.4.3.1 for induced dimension functions"
+   }
+  },
+  {
+   "text": "The image of $Y$ in $S$ is a proper closed subset. Closedness follows from [lem-weil-pbc-finite-closed-map-finite-fibres]. To check properness, a point of $T$ above a generic point of $S$ is generic in $T$. On affine charts the base prime $\\mathfrak p$ is minimal. If its source prime $\\mathfrak q$ were not minimal, take a minimal prime $\\mathfrak q_0\\subsetneq\\mathfrak q$. Its contraction is contained in $\\mathfrak p$, hence equals $\\mathfrak p$. The finite algebra is integral by [lem-weil-pbc-finite-algebra-is-integral], so [lem-weil-pbc-integral-incomparability] rules this out. The boundary $Y$ contains no generic point of $T$, hence its image contains no generic point of $S$. Both $Y$ and $Y'$ are finite over $S$: on affines, if $b_j$ generate a finite algebra over the base and $c_k$ generate a second finite algebra over the first, the products $b_jc_k$ generate the composite. Their images lie in the same proper closed subset $C$. Reduce them first using Step 2; the reduced sources factor finitely through $C_{\\mathrm{red}}$ by the radical-ideal argument of Step 4. The induction hypothesis then supplies $P$ on $Y_{\\mathrm{red}}$ and $Y'_{\\mathrm{red}}$, for the transferred dimension functions. Step 2 restores $P$ on $Y$ and $Y'$, including any nilpotents in the fibre product.",
+   "uses": [
+    "lem-weil-pbc-finite-closed-map-finite-fibres",
+    "lem-weil-pbc-finite-algebra-is-integral",
+    "lem-weil-pbc-integral-incomparability"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, subsection 5.5: why the two boundary schemes fall under the strengthened induction hypothesis"
+   }
+  },
+  {
+   "text": "Step 3 supplies scalar rigidity on the normal scheme $T'$, and Step 6 supplies it on $Y,Y'$. Step 1 gives existence and unique pinned isomorphisms on all three schemes. The finite square of Step 5 satisfies every hypothesis of [lem-per-finite-modification-pinned-gluing], with the induced dimension functions just checked. Its statement therefore gives scalar rigidity for every potential complex on $T$. This proves the inductive assertion for $S$; Step 2 also covers its originally nonreduced sources. Noetherian induction closes, and taking $S=|X|$ and the identity map from $X_{\\mathrm{red}}$ to itself proves $P(X_{\\mathrm{red}},\\delta)$, hence $P(X,\\delta)$ by Step 2. The map supplied by the gluing statement is explicitly scalar action, so no arbitrary choice of a pinned isomorphism replaces the requested map.",
+   "uses": [
+    "lem-per-finite-modification-pinned-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, subsection 5.5, concluding application of Proposition 5.4.1"
+   }
+  },
+  {
+   "text": "Set $H=R\\mathcal Hom_\\Lambda(K,K)$. The scalar map $\\Lambda_X\\to H$ factors uniquely through $\\tau_{\\leq0}H$ by the truncation adjunction in [lem-weil-heart-short-exact-triangles], since $\\Lambda_X$ lies in degree zero. Steps 1-7 show that this factor is an isomorphism. By [def-sbc-standard-tstructure-derived-category], truncation preserves cohomology in degrees at most zero, whereas $\\Lambda_X$ has cohomology only in degree zero. It follows that $\\mathcal H^aH=0$ for $a<0$ and that the scalar map identifies $\\mathcal H^0H$ with $\\Lambda_X$, as asserted.",
+   "uses": [
+    "lem-weil-heart-short-exact-triangles",
+    "def-sbc-standard-tstructure-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, Theorem 5.1.1, interpretation of the scalar truncation isomorphism"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-per-potential-dualizing-complex",
+  "def-pur-derived-internal-hom",
+  "def-sbc-standard-tstructure-derived-category",
+  "lem-asd-finite-etale-twist-line",
+  "lem-exc-finite-type-localization-excellent",
+  "lem-per-excellent-normalization-preparation",
+  "lem-per-finite-modification-pinned-gluing",
+  "lem-per-normal-pinned-extension",
+  "lem-per-potential-dualizing-finite-pullback",
+  "lem-per-potential-dualizing-uniqueness",
+  "lem-weil-heart-short-exact-triangles",
+  "lem-weil-pbc-finite-algebra-is-integral",
+  "lem-weil-pbc-finite-closed-map-finite-fibres",
+  "lem-weil-pbc-integral-incomparability",
+  "lem-weil-pbc-reduction-universal-homeomorphism",
+  "rem-pc-regular-normal",
+  "thm-weil-pbc-universal-homeomorphism-invariance"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose XVII, Proposition 5.3.1(c), Proposition 5.4.1, subsection 5.5 (proof of Theorem 5.1.1)"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -51,10 +177,66 @@
    "results": "Previously run search, retained from searches.jsonl: 12 hits; recorded leading results: ContinuousLinearMap.ofHomothety, ContinuousLinearEquiv.ofHomothety, ContinuousLinearEquiv.homothety_inverse, AffineMap.homothety, AffineMap.homothety_apply_same, AffineMap.homothety_one, AffineMap.homothety_zero, AffineMap.homothetyHom",
    "date": "2026-10-18",
    "verdict": "no match: inspected results concern ordinary Ext, generic derived-category truncations, analytic homotheties or site infrastructure, not potential etale duality"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The scalar homothety map from coefficients to the nonpositive truncation of self derived Hom of a potential dualizing complex is an isomorphism",
+   "results": "Executed msearch.py: 8 hits; ; leading results: CochainComplex.cm5b.instQuasiIsoIntP, CochainComplex.instIsIsoIntιTruncLEOfIsStrictlyLE, HomologicalComplex.dgoEquivHomologicalComplex_counitIso, DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE, CochainComplex.isIso_ιTruncLE_iff, DerivedCategory.exists_iso_Q_obj_of_isLE, CochainComplex.exists_iso_single, DerivedCategory.exists_iso_Q_obj_of_isGE",
+   "date": "2026-10-18",
+   "verdict": "no match: hits are generic derived-category truncations, etale algebra/site infrastructure, or unrelated affine homotheties; none states potential-dualizing scalar rigidity"
+  },
+  {
+   "tool": "loogle",
+   "query": "homothety, DerivedCategory, IsIso",
+   "results": "Executed msearch.py: 0 hits; loogle: unknown identifier 'homothety'; leading results: ",
+   "date": "2026-10-18",
+   "verdict": "inconclusive: unknown identifier; superseded by the quoted dualizing query"
+  },
+  {
+   "tool": "grep",
+   "query": "homothety|potential.*dualiz|self.?Ext",
+   "results": "Executed msearch.py: 0 hits; ; leading results: ",
+   "date": "2026-10-18",
+   "verdict": "inconclusive: incorrect subdirectory (Mathlib/Mathlib); superseded by the subsequent root and Algebra/Homology searches"
+  },
+  {
+   "tool": "leansearch",
+   "query": "No negative self extensions and only scalar endomorphisms for an etale potential dualizing complex",
+   "results": "Executed msearch.py: 8 hits; ; leading results: Algebra.FormallyEtale.of_restrictScalars, AlgebraicGeometry.Scheme.Etale, RingHom.Etale, Algebra.Etale.formallyEtale, Algebra.FormallyEtale.subsingleton_kaehlerDifferential, Algebra.instEtaleOfIsStandardEtale, RingHom.Etale.toAlgebra, AlgebraicGeometry.IsEtale",
+   "date": "2026-10-18",
+   "verdict": "no match: hits are generic derived-category truncations, etale algebra/site infrastructure, or unrelated affine homotheties; none states potential-dualizing scalar rigidity"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Gabber potential dualizing complex endomorphism sheaf is constant ring",
+   "results": "Executed msearch.py: 8 hits; ; leading results: AlgebraicGeometry.StructureSheaf.const_one, AlgebraicGeometry.StructureSheaf.const_self, CategoryTheory.Sheaf.H, LightCondMod.LocallyConstant.functorIsoDiscreteAux₁, LightCondMod.LocallyConstant.functor, AlgebraicGeometry.StructureSheaf.const_mul_rev, SheafOfModules.unit_val, ModuleCat.Tilde.res_const",
+   "date": "2026-10-18",
+   "verdict": "no match: hits are generic derived-category truncations, etale algebra/site infrastructure, or unrelated affine homotheties; none states potential-dualizing scalar rigidity"
+  },
+  {
+   "tool": "grep",
+   "query": "dualizing|Dualizing|homothety",
+   "results": "Executed msearch.py: 25 hits; ; leading results: Mathlib/AlgebraicTopology/ModelCategory/FibrantObjectHomotopy.lean, Mathlib/Algebra/Module/Lattice.lean, Mathlib/Algebra/Module/Lattice.lean, Mathlib/MeasureTheory/Measure/Hausdorff.lean, Mathlib/MeasureTheory/Measure/Hausdorff.lean, Mathlib/MeasureTheory/Measure/Hausdorff.lean, Mathlib/MeasureTheory/Measure/Hausdorff.lean, Mathlib/MeasureTheory/Measure/Hausdorff.lean",
+   "date": "2026-10-18",
+   "verdict": "no match: hits are generic derived-category truncations, etale algebra/site infrastructure, or unrelated affine homotheties; none states potential-dualizing scalar rigidity"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"dualizing\"",
+   "results": "Executed msearch.py: 0 hits; ; leading results: ",
+   "date": "2026-10-18",
+   "verdict": "no match: hits are generic derived-category truncations, etale algebra/site infrastructure, or unrelated affine homotheties; none states potential-dualizing scalar rigidity"
+  },
+  {
+   "tool": "grep",
+   "query": "potential.*dualiz|dualiz.*potential|homothety",
+   "results": "Executed msearch.py: 0 hits; ; leading results: ",
+   "date": "2026-10-18",
+   "verdict": "no match: hits are generic derived-category truncations, etale algebra/site infrastructure, or unrelated affine homotheties; none states potential-dualizing scalar rigidity"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-potential-weak-biduality",
@@ -77,5 +259,64 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-potential-scalar-rigidity",
+  "worker": "stage1",
+  "summary": "Proved scalar rigidity by the existing normal pinned-extension and finite-modification gluing inputs, with explicit reduction invariance, arbitrary generic-dimension twist normalization, and Noetherian induction strengthened to all finite schemes over a closed support. Reused all inputs; no new nodes and no statement change. Existing uniqueness is used only through its stated existence and pinned-isomorphism clauses.",
+  "blueprint": "Realizes lem-per-artin-gabber-affine-curve Proof Step 3, the local-duality input, along its existing potential-duality branch. The current main-20261015 blueprint was read; no chapter or unit route was changed.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-reduction-universal-homeomorphism",
+    "why": "Generic reduction geometry used to transport the scalar assertion; the perverse unit contains no substitute."
+   },
+   {
+    "node": "thm-weil-pbc-universal-homeomorphism-invariance",
+    "why": "Generic etale topological invariance, used only for reduction; no result of this unit gives it."
+   },
+   {
+    "node": "lem-exc-finite-type-localization-excellent",
+    "why": "Generic stability of excellence for quotient and finite algebras in the induction."
+   },
+   {
+    "node": "rem-pc-regular-normal",
+    "why": "Only clause (2), the component decomposition of Noetherian normal schemes, is used as a generic geometric tool."
+   },
+   {
+    "node": "lem-asd-finite-etale-twist-line",
+    "why": "Generic local rank-one property of finite Tate twists, for normalization of the dimension function."
+   },
+   {
+    "node": "lem-weil-pbc-finite-closed-map-finite-fibres",
+    "why": "Generic closedness and properness of finite maps, for induction supports and compactifications."
+   },
+   {
+    "node": "lem-weil-pbc-integral-incomparability",
+    "why": "Generic prime incomparability used to show that the normalization boundary has smaller image in the fixed induction base."
+   },
+   {
+    "node": "lem-weil-heart-short-exact-triangles",
+    "why": "Only the generic truncation adjunction is used to specify the scalar-action factorization."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-reduction-universal-homeomorphism",
+  "thm-weil-pbc-universal-homeomorphism-invariance",
+  "lem-exc-finite-type-localization-excellent",
+  "rem-pc-regular-normal",
+  "lem-asd-finite-etale-twist-line",
+  "lem-weil-pbc-finite-closed-map-finite-fibres",
+  "lem-weil-pbc-integral-incomparability",
+  "lem-weil-heart-short-exact-triangles"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q87-f4e581d38",
+  "group": "Q87",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q87-f4e581d38 (reviewer sub-agent of L); spot-checked: PASS, no file changes and no new nodes. Statement: the item is exactly the scalar clause of ILO XVII Th. 5.1.1 (printed p. 287), Λ → τ≤0 RHom(K,K) is an isomorphism, for Z/ℓ^r on a Noetherian excellent scheme with ℓ invertible. It is unchanged from the imported record, so no target is weakened. The steps follow ILO 5.3.1 (normal case), 5.4.1 (gluing) and 5.5 (Noetherian induction). Step 1 uses only the existence and unique-pinned-isomorphism clauses of the uniqueness lemma's statement, not the scalar rigidity proved inside its proof. Step 2 transfers everything to the reduction through the universal-homeomorphism topos equivalence, including pinnings and residue transitions. Step 3 takes clause (2) of rem-pc-regular-normal (normal Noetherian = disjoint normal integral components), twists by (−m)[−2m] to get δ(η)=0, then applies the scalar clause of lem-per-normal-pinned-extension. Step 4 sets up the strengthened induction over schemes finite over S_red; the radical-ideal argument for factoring through the reduced image is correct. Step 5 uses normalization-preparation, excellence of quotient and finite algebras, and finite-pullback for the induced dimension functions (trdeg 0 for finite maps). Step 6 shows the boundary image is a proper closed subset via integrality plus incomparability. Step 7 checks every hypothesis of the finite-modification gluing lemma. Step 8 is the truncation adjunction. Acyclic (dependency closure of 12732 nodes, item absent). The only citer, weak-biduality Step 1, uses the statement as written. Batch-5: the closure with and without the item's proof differs by 0 nodes. The excellent-affine-cover (Stacks 0HAB) and ind-etale strict-local invariance (Stacks 05WR) nodes are generic. trf ambient-diagonal-purity is reached only through the base node finite-pullback, which is already in the closure. All accepted. tool_uses accepted: reduction universal homeomorphism, universal-homeomorphism invariance, finite-type excellence, rem-pc-regular-normal (2), twist line, finite closed map, incomparability, heart truncations. Maintainer notes: (1) uniqueness re-proves this scalar rigidity inside its induction; to clean up, add the scalar clause to its statement rather than citing this item, which would make a cycle. (2) finite-pullback cites the trf orientation; lem-per-noetherian-prime-power-smooth-duality could replace it."
  }
 }
