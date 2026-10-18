@@ -83,15 +83,30 @@
    }
   },
   {
-   "text": "For $K\\subset L\\subset M$, let $\\tau_V:(V\\otimes_KL)\\otimes_LM\\to V\\otimes_KM$ be the tower isomorphism of [def-weil-vector-space-scalar-extension], $(v\\otimes\\lambda)\\otimes\\mu\\mapsto v\\otimes\\lambda\\mu$. Its inverse sends $v\\otimes\\nu$ to $(v\\otimes1)\\otimes\\nu$: the two composites are identities because $(v\\otimes1)\\otimes\\lambda\\mu=(v\\otimes\\lambda)\\otimes\\mu$ by $L$-balancing. Applied termwise it is a chain isomorphism $\\tau_C$, since both $d\\tau_C$ and $\\tau_Cd$ send $(x\\otimes\\lambda)\\otimes\\mu$ to $dx\\otimes\\lambda\\mu$. Apply the cohomology functor of [def-weil-derived-category-cohomology-functor] to $\\tau_C$; its inverse is the cohomology of $\\tau_C^{-1}$. On the common source $(\\mathrm H^i(C)\\otimes_KL)\\otimes_LM$, compare the direct composite $\\beta^i_{C,M}\\circ\\tau_{\\mathrm H^i(C)}$ and the successive composite $\\mathrm H^i(\\tau_C)\\circ\\beta^i_{C\\otimes_KL,M}\\circ(\\beta^i_{C,L}\\otimes_LM)$. On $([x]\\otimes\\lambda)\\otimes\\mu$ the first gives $[x\\otimes\\lambda\\mu]$; the second gives first $[x\\otimes\\lambda]\\otimes\\mu$, then $[(x\\otimes\\lambda)\\otimes\\mu]$, then $[x\\otimes\\lambda\\mu]$. Here $\\beta^i_{C\\otimes_KL,M}$ is Step 1 for the $L$-complex $C\\otimes_KL$ and the extension $L\\subset M$. Nested pure tensors span the source, so the two $M$-linear maps agree. This is the asserted tower square after its canonical associativity identifications.",
+   "text": "For a tower K → L → M, use the canonical scalar tower of [def-weil-vector-space-scalar-extension]. First prove that the short-complex homology comparison for a composite exact functor equals the successive comparisons: rewrite the second comparison using the first functor's mapped left homology data, cancel the inverse comparison, precompose with the epimorphism from cycles to homology, and cancel the mapped kernel inclusion. The kernel and cokernel universal properties give the same maps. Apply Mathlib ShortComplex.homologyMap_mapNatTrans to the inverse of ModuleCat.extendScalarsComp; combining it with the composite comparison gives fieldComplexHomologyIso_tower. For derived objects, form the two natural isomorphisms in the claimed tower square. By [lem-weil-pbc-localization-universal-property] it suffices to compare their components on Q A. Normalize the derived tower by [lem-weil-derived-field-scalar-extension-tower]. Move the intermediate derived homology comparison to Q of the scalar-extended complex using naturality along mapDerivedCategoryFactors. Normalize all three homology comparisons, cancel inverse factorization maps, and use naturality of homologyFunctorFactors. The complex tower identity supplies the middle equality; naturality of extendScalarsComp supplies the last equality.",
    "uses": [
     "def-weil-vector-space-scalar-extension",
-    "def-weil-derived-category-cohomology-functor"
+    "def-weil-derived-category-cohomology-functor",
+    "lem-weil-derived-field-scalar-extension-tower",
+    "lem-weil-pbc-localization-universal-property"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
     "place": "Tag 00CV (section-tensor-product), tensor universal property and balancing; Tag 00D0 (lemma-transitive), associativity over a single base ring, with the change-of-base tower map and inverse checked explicitly above using the cited scalar-extension definition; homology.tex Tag 010V (section-complexes), induced maps on cycle classes"
+   }
+  },
+  {
+   "text": "The derived comparison is the unique localization lift of the complex comparison. Compose mapDerivedCategoryFactors, homologyFunctorFactors, the complex comparison, and the inverse source homology factorization into an isomorphism after precomposing with Q. The fully faithful precomposition functor of [lem-weil-pbc-localization-universal-property] has a preimage isomorphism. Its map_preimage equation gives exactly fieldDerivedHomologyComponent on Q A. Localization.natTrans_ext gives uniqueness. Thus the selected derived comparison has those normalized components.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "def-weil-derived-category-cohomology-functor",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/CategoryTheory/Localization/Predicate.lean",
+    "place": "fullyFaithfulWhiskeringLeft, natTrans_ext; the universal property of localization, as recorded in lem-weil-pbc-localization-universal-property"
    }
   }
  ],
@@ -99,12 +114,14 @@
   "def-weil-derived-category-cohomology-functor",
   "def-weil-vector-space-scalar-extension",
   "lem-weil-field-scalar-extension-exact",
-  "lem-weil-pbc-exact-functor-complex-cohomology"
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-weil-derived-field-scalar-extension-tower",
+  "lem-weil-pbc-localization-universal-property"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/homology.tex",
-  "place": "Expansion of Tags 010N and 010V and algebra.tex Tags 00HB and 00D0; local literature is absent, online Stacks statements checked, WANTED entries in report.md."
+  "place": "Stacks Tags 010N and 010V, algebra.tex Tags 00H9 and 05G5. J2 implements the canonical exact-functor comparison through Mathlib ShortComplex.homologyFunctorIso and its kernel/cokernel API, finite base change and quasi-isomorphism preservation. Derived descent and tower equality use fully faithful localization precomposition, with the existing normalized derived scalar tower; no new mathematical assumption or statement."
  },
  "mathlib_searches": [
   {
@@ -255,5 +272,15 @@
   "from_unit": "sk-def-sf-admissible",
   "date": "2026-10-17",
   "why": "compatibility node re-routed under the central compatibility sketch (blueprint cbac0b347)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261018T145103-L-3641272",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
