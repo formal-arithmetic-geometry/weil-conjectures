@@ -18,7 +18,10 @@
   "lem-weil-pbc-module-sheaves-grothendieck-abelian",
   "def-weil-pbc-constant-sheaf",
   "def-weil-geometric-point",
-  "def-weil-pbc-inverse-image"
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-etale-sum-extension",
+  "lem-weil-pbc-strict-henselization-local-structure",
+  "def-weil-pbc-strict-henselization-structural-map"
  ],
  "proof": [
   {
@@ -424,5 +427,31 @@
   "group": "Q70",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q70-dde59df6c (reviewer sub-agent of L); spot-checked: Read the item and all 14 steps in full against Travaux de Gabber XVII 5.2 (printed p.287), whose coaisle condition is RΓ_x(K) in D^{>=p(x)}; the equivalence itself and the Hom formula are the agent's own proof. Checked every cited statement and the parent's use (perversity-localization Step 2: Hom(G[k],B)=H^{a-k}RΓ_Z). The statement is kept verbatim. Small cases hold: separably closed point, S empty, Z empty, Hom check through Ri^!. The mathematics is correct: least nonzero degree, the closed support of one section and its generic point, the prime argument at the strict localization, ind-etale supported base change, and the bottom-degree calculation. Repaired three citation faults (C3/C1); the fixed item file is under fixes/dag/nodes/sec-deligne-laumon-a1/. Step 6: the claim that the strict localization is Noetherian had no bridge from T_(t) to (B_p)^sh; it now cites lem-exc-affine-strict-local-ring-comparison. Step 7: it cited the triples-colimit node instead of the ring of T_(t); it now cites that comparison (units outside p) and lem-weil-pbc-strict-henselization-chart-maximal-ideal (m_C=pC), and lem-weil-pbc-strict-henselization-triples is dropped from proof_deps and tool_uses. Step 13: the identification V_(x)=X_(x) was uncited; it now cites lem-trf-ind-etale-strict-local-invariance. Batch-5 flags accepted: lem-trf-bounded-below-derived-adjunction is the generic derived adjunction for an exact left adjoint, and lem-trf-ind-etale-strict-local-invariance is general strict-localization algebra; neither is part of the trace formula or Poincare duality or their proofs. The closures of the two added nodes contain no trace-formula, Poincare or target node and do not contain the item. No SGA source is used, and the declared generic tool_uses are accepted.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SupportedGeneratorsCostalkDetection",
+  "declaration": "AlgebraicGeometry.Etale.supported_bounds_iff_geometricCostalk",
+  "declarations": [
+   "AlgebraicGeometry.Etale.geometricCostalk",
+   "AlgebraicGeometry.Etale.etaleSupportedCohomology",
+   "AlgebraicGeometry.Etale.etaleSupportedGenerator",
+   "AlgebraicGeometry.Etale.supported_bounds_iff_geometricCostalk",
+   "AlgebraicGeometry.Etale.supportedGenerator_hom_naturally_iso"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SupportedGeneratorsCostalkDetection.lean",
+  "statement": "theorem supported_bounds_iff_geometricCostalk (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] (X : Scheme.{u}) [IsNoetherian X] (S : Set X) (hS : ∀ (x y : X), x ⤳ y → x ∈ S → y ∈ S) (a : ℤ) (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) : (∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (x : Spec (.of Ω) ⟶ X), x (IsLocalRing.closedPoint Ω) ∈ S → ∀ (m : ℤ), m ≤ a → IsZero ((DerivedCategory.homologyFunctor (ModuleCat.{u + 1} Λ) m).obj ((geometricCostalk Λ x).obj K))) ↔ (∀ (V : Scheme.{u}) (v : V ⟶ X) [Etale v] [IsAffine V] (Z : Scheme.{u}) (i : Z ⟶ V) [IsClosedImmersion i] [IsReduced Z], Set.range (i ≫ v) ⊆ S → ∀ (m : ℤ), m ≤ a → IsZero ((etaleSupportedCohomology Λ v i m).obj K))",
+  "branch": "newtargets-dag",
+  "by": "Q22",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "The main declaration is the equivalence of bounds; supportedGenerator_hom_naturally_iso states the final natural group isomorphism. The three definitions are actual composites of the recorded constructions belonging to this node, with no postponed data. The existing local-structure, structural-map and etale sum-extension nodes were added to stmt_deps to expose the canonical interfaces used."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-75800e8a1",
+  "group": "Q22",
+  "result": "pass",
+  "note": "Clause-by-clause match with the node: Noetherian X; finite Λ in the recorded ModuleCat.{u+1} encoding; specialization-stable S with hS in the right direction; D+; (1) over every Ω, x with geometricCostalk = upperStar along strictHenselizationStructuralMap then derivedSupportedEtaleSections supported at the closed point; (2) with Etale, IsAffine V, IsClosedImmersion, IsReduced Z, range in S; Hom iso as a natural iso of additive functors, shift -m correct. No extra hypotheses; universes bound; statement verbatim. Mechanical theorem-stmt_dep finding: Classical.choose of strictHenselizationLocalStructure only supplies the IsLocalRing proof needed to name closedPoint; the owning module has no defs or instances, so the statement genuinely depends on the theorem's conclusion (Prop, no data) -> PASS on that point. No duplicate names or notions in the side tree; definitions are real composites (sorry only from dependency Prop proofs); docstrings carry source, blueprint tag and 14 steps. nt_compile --json clean 2.6 s, broken control copy fails, signatures confirmed by #check. Advisory: lowerStar used without citing the direct-image node separately."
  }
 }
