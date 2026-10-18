@@ -161,5 +161,23 @@
   "group": "Q122",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q122-50b880ff2 (reviewer sub-agent of L); spot-checked: I read the item, all three steps and the three cited definition statements (def-weil-pbc-noetherian-ring, def-weil-pbc-finite-type-algebra, def-exc-excellent-ring), and checked them against algebra.tex. Tag 00NK lemma-quotient-catenary, second assertion: the statement matches it verbatim in substance, and the source proves it as a special case of 0ECE lemma-universally-catenary. Tag 00NL makes universal catenarity a notion for Noetherian rings only. Step 1 proves A/I is Noetherian from the ideal-finite-generation definition by taking preimages; it is correct and elementary. lem-weil-pbc-finite-type-algebra-noetherian could have been cited instead, but that is advisory only. Step 2 lifts coefficients along the surjection, so a finite type A/I-algebra is finite type over A; it is correct, including n=0 and I=A. Step 3 uses only the universal-catenarity clause of def-exc-excellent-ring; catenarity depends on the ring B alone, so the conclusion follows. Edge cases checked: I=0, I=A (zero ring, vacuous), A=0, nonprime I such as (x^2) and (xy); no hidden prime or domain hypothesis is used. There are no new nodes. The statement is unchanged and there are no SGA citations. The DAG grep finds no duplicate: lem-per-universal-catenarity-minimal-quotients is a different iff statement. The only citer is lem-per-ratliff-formal-catenarity, so there is no cycle. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.UniversallyCatenaryQuotient",
+  "declaration": "IsUniversallyCatenary.quotient",
+  "file": "lean/Sheaf/RingTheory/UniversallyCatenaryQuotient.lean",
+  "statement": "theorem quotient (A : Type u) [CommRing A] (hA : IsUniversallyCatenary A) (I : Ideal A) : IsUniversallyCatenary (A ⧸ I)",
+  "branch": "newtargets-dag",
+  "by": "Q82",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7072bad6a",
+  "group": "Q82",
+  "result": "pass",
+  "note": "IsUniversallyCatenary.quotient (A : Type u) [CommRing A] (hA : IsUniversallyCatenary A) (I : Ideal A) : IsUniversallyCatenary (A ⧸ I) matches Stacks 00NK second assertion and the node clause by clause; Noetherianity is inside the recorded predicate (hypothesis and conclusion), any ideal with no prime/proper restriction, same universe u; edge cases I=⊥, I=⊤, A=0 and non-prime I covered. No H4 duplicate (minimal-quotients iff is a different statement; no `quotient` name clash in the 4 other IsUniversallyCatenary namespaces). lean.statement matches the file verbatim; the node diff against live adds only lean. Docstrings carry the source place, blueprint id and all 3 steps; proof is sorry only. nt_compile --json clean in 1.4 s; the sorryX control fails. Advisory: redundant public Noetherian.Defs import."
  }
 }

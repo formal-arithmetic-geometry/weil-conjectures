@@ -10,7 +10,8 @@
  "stmt_deps": [
   "def-weil-pbc-noetherian-ring",
   "def-weil-pbc-adic-completion",
-  "def-weil-pbc-krull-dimension-ring"
+  "def-weil-pbc-krull-dimension-ring",
+  "def-exc-excellent-ring"
  ],
  "proof": [
   {
@@ -298,5 +299,23 @@
   "group": "Q115",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q115-85903fda6 (reviewer sub-agent of L); spot-checked: I read the whole item and there are no new nodes. The statement is unchanged against the live unsplit base apart from the appended inline definitions; the catenary definition matches Stacks 00NI. I read Stacks more-algebra 0AW3 (the d>1 paragraph). The split adds q∩A and (0) to the prime-avoidance list, which the proof needs and the source leaves out. Checks against each cited statement: Step 2: m is not contained in any listed contraction (each a in R is strictly below mB). Step 3: the dimension drops to d−1 in B/q because f̄ is a nonzero nonunit of a domain; Ideal.exists_minimalPrimes_le gives P minimal over q+fB with dim B/P = d−1; the height bound with t=1 gives ht(P/q) ≤ 1. Step 4: if T ⊆ P is minimal over fB and contains q_i, then a prime a minimal over q+q_i inside P is in R (this uses d>1), and q ⊊ a ⊊ P contradicts ht ≤ 1, so P is minimal over fB. Step 5: flat going-down gives T ⊆ P over p0, which forces p0 = p; local-completion-quotient with n = m/p identifies the completion of A/p with B/pB, so r = P/pB. Step 6: ht p = 1 plus catenarity of A (saturated chains (0)…m) gives dim A/p = N−1. Edge cases checked: fields and DVRs are excluded; d=2; empty R; non-reduced B; d=1 correctly falls outside. The parent lem-per-ratliff step uses exactly this clause. No duplicates (searched 0AW3, formally catenary, hyperplane). The 12 tool_uses are generic commutative algebra: 10 Mathlib leaves and 2 sk-thm-p1 split nodes; I accept them. No SGA citation, no cycle. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.CatenaryCompletionHyperplane",
+  "declaration": "AdicCompletion.exists_prime_quotient_completion_component_dimension_pred",
+  "file": "lean/Sheaf/RingTheory/CatenaryCompletionHyperplane.lean",
+  "statement": "theorem exists_prime_quotient_completion_component_dimension_pred (A : Type u) [CommRing A] [IsNoetherianRing A] [IsLocalRing A] [IsDomain A] (hcat : IsCatenaryRing A) (q : Ideal (AdicCompletion (IsLocalRing.maximalIdeal A) A)) (hq : q ∈ minimalPrimes (AdicCompletion (IsLocalRing.maximalIdeal A) A)) (d : ℕ) (hdim : ringKrullDim (AdicCompletion (IsLocalRing.maximalIdeal A) A ⧸ q) = (d : WithBot ℕ∞)) (hleast : ∀ q' ∈ minimalPrimes (AdicCompletion (IsLocalRing.maximalIdeal A) A), (d : WithBot ℕ∞) ≤ ringKrullDim (AdicCompletion (IsLocalRing.maximalIdeal A) A ⧸ q')) (hd : 1 < d) (hlt : (d : WithBot ℕ∞) < ringKrullDim A) : ∃ f : A, f ≠ 0 ∧ f ∈ IsLocalRing.maximalIdeal A ∧ ∃ p ∈ (Ideal.span {f}).minimalPrimes, ∃ r ∈ minimalPrimes (AdicCompletion ((IsLocalRing.maximalIdeal A).map (Ideal.Quotient.mk p)) (A ⧸ p)), ringKrullDim (A ⧸ p) + 1 = ringKrullDim A ∧ ringKrullDim (AdicCompletion ((IsLocalRing.maximalIdeal A).map (Ideal.Quotient.mk p)) (A ⧸ p) ⧸ r) = ((d - 1 : ℕ) : WithBot ℕ∞) ∧ 0 < d - 1 ∧ ((d - 1 : ℕ) : WithBot ℕ∞) < ringKrullDim (A ⧸ p)",
+  "branch": "newtargets-dag",
+  "by": "Q88",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4fbeaec19",
+  "group": "Q88",
+  "result": "pass",
+  "note": "All hypotheses (Noetherian local domain, IsCatenaryRing = 00NI, q minimal prime of the canonical maximal-ideal AdicCompletion, dim B/q = d, leastness, 1<d<dim A) and all conclusion clauses (f≠0 in m, p ∈ minimalPrimes of span{f}, r minimal prime of the completion of A/p at m.map mk p, dim(A/p)+1 = dim A, completed component dim d-1, 0<d-1<dim A/p) match the node, with the same quantifier order and no extra assumptions. Added stmt_dep def-exc-excellent-ring owns IsCatenaryRing: needed, acyclic. lean.statement is verbatim. No Mathlib or project duplicate. Docstrings have source 0AW3/00NI, the blueprint id and the six proof steps. Only sorry. nt_compile --json clean in 1.8 s."
  }
 }
