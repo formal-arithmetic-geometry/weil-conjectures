@@ -1,0 +1,175 @@
+{
+ "id": "lem-amb-framed-lifts-classification",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-amb-cartier-kummer-map",
+   "place": "Proof, first two paragraphs: constructing a relative class from a torsor with its specified open trivialization; detailed lifting presentation and translation relation.",
+   "via": [
+    "lem-amb-relative-torsor-cohomology"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Pointed lifting torsors modulo global translation",
+ "statement": "Let C be a site with terminal object T and an object U, with pointed torsors as in [def-amb-torsor-with-section]. Assume abelian-group sheafification exists and its local equivalences are exactly the locally bijective morphisms. Let 0→G→E→Q→0 be short exact. A framed lift is a pair (s,b), where s∈Q(T) and b∈E(U) maps to s restricted to U. It determines the G-torsor of lifts of s with specified section b. Two framed lifts (s,b),(s′,b′) determine isomorphic pointed torsors if and only if there is x∈E(T) with d(x)=s′−s and x|U=b′−b. If E is injective [def-sp-injective-resolutions], every pointed G-torsor has such a presentation; consequently their isomorphism classes are the quotient of framed lifts by this translation relation. The zero frame represents the trivial torsor with its zero section. More generally, two maps from a G-torsor to an abelian sheaf with the same G-equivariance have invariant difference, which descends to a global section and computes the difference of their prescribed quotient images.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 03AJ, lemma-torsors-h1; agent-written relative lifting-torsor refinement of its injective-resolution argument."
+ },
+ "stmt_deps": [
+  "def-amb-torsor-with-section",
+  "def-sp-injective-resolutions"
+ ],
+ "proof": [
+  {
+   "text": "Use the absolute lifting-torsor presentation exists_equiv_lifts in the torsor classification [lem-sc-torsor-h1], applied to the given short exact sequence with E injective. Transport the specified section along the resulting torsor isomorphism. This proves surjectivity of framed presentations.",
+   "uses": [
+    "lem-sc-torsor-h1",
+    "def-sp-injective-resolutions",
+    "def-amb-torsor-with-section"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 03AJ, lemma-torsors-h1; agent-written relative lifting-torsor refinement of its injective-resolution argument."
+   }
+  },
+  {
+   "text": "For an equivariant isomorphism F of lifting torsors, the section F(t)−t is unchanged by replacing t with g+t. The existing invariant-section descent for a torsor therefore glues these differences to x∈E(T). Apply d and evaluate at b to get d(x)=s′−s and x|U=b′−b. Conversely translation by x is a natural equivariant isomorphism, with inverse translation by −x, and the second equality preserves the chosen section. The same invariant-difference calculation works for any two equally equivariant maps into an abelian sheaf.",
+   "uses": [
+    "lem-sc-torsor-h1"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 03AJ, lemma-torsors-h1; agent-written relative lifting-torsor refinement of its injective-resolution argument."
+   }
+  },
+  {
+   "text": "Take the quotient by pointed isomorphism and use the proved surjectivity to obtain the equivalence of classes. For the zero frame, the kernel identification G≅ker(d) identifies its lifting torsor with G and carries zero to zero.",
+   "uses": [
+    "def-amb-torsor-with-section"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 03AJ, lemma-torsors-h1; agent-written relative lifting-torsor refinement of its injective-resolution argument."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-amb-torsor-with-section",
+  "def-sp-injective-resolutions",
+  "lem-sc-torsor-h1"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 03AJ, lemma-torsors-h1; agent-written relative lifting-torsor refinement of its injective-resolution argument. Explicit Lean construction and coordinate verification by R9."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A torsor under an abelian sheaf embeds equivariantly into an injective sheaf and is a sheaf of lifts; pointed isomorphism classes are global translations",
+   "results": "8 returned hits: AddCommGrpCat.enoughInjectives (Mathlib.Algebra.Category.Grp.EnoughInjectives); Equiv.vaddConst (Mathlib.Algebra.AddTorsor.Defs); CategoryTheory.sheafIsAbelian (Mathlib.CategoryTheory.Sites.Abelian); CategoryTheory.GrothendieckTopology.isoSheafify_inv (Mathlib.CategoryTheory.Sites.ConcreteSheafification); CategoryTheory.Sheaf.isLocallyInjective_of_iso (Mathlib.CategoryTheory.Sites.LocallyInjective); CategoryTheory.Sheaf.isLocallyInjective_sheafToPresheaf_map_iff (Mathlib.CategoryTheory.Sites.LocallyInjective); PresheafOfModules.instReflectsIsomorphismsSheafOfModulesSheafAddCommGrpCatToSheaf (Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification); CategoryTheory.Presheaf.isLocallyInjective_toSheafify (Mathlib.CategoryTheory.Sites.LocallyInjective)",
+   "date": "2026-10-18",
+   "verdict": "no exact match; existing general cone, Ext and sheaf APIs are used in the Lean proof"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf.Torsor",
+   "results": "0 hits; ; loogle: unknown identifier 'CategoryTheory.Sheaf.Torsor'",
+   "date": "2026-10-18",
+   "verdict": "no exact match; existing general cone, Ext and sheaf APIs are used in the Lean proof"
+  },
+  {
+   "tool": "grep",
+   "query": "FramedLift|exists_equiv_lifts|isIsomorphic_iff",
+   "results": "1 returned hits: Mathlib/CategoryTheory/IsomorphismClasses.lean:57 theorem Groupoid.isIsomorphic_iff_nonempty_hom {C : Type u} [Groupoid.{v} C] {X Y : C} :",
+   "date": "2026-10-18",
+   "verdict": "no exact match; existing general cone, Ext and sheaf APIs are used in the Lean proof"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.RelativeTorsorCohomology",
+  "date": "2026-10-18",
+  "group": "R9"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.Sites.FramedLifts",
+  "file": "lean/Sheaf/CategoryTheory/Sites/FramedLifts.lean",
+  "declaration": "CategoryTheory.Sheaf.Torsor.FramedLift.isIsomorphic_iff",
+  "declarations": [
+   "CategoryTheory.Sheaf.Torsor.FramedLift",
+   "CategoryTheory.Sheaf.Torsor.FramedLift.toPair",
+   "CategoryTheory.Sheaf.Torsor.FramedLift.surjective",
+   "CategoryTheory.Sheaf.Torsor.FramedLift.isIsomorphic_iff",
+   "CategoryTheory.Sheaf.Torsor.FramedLift.zero",
+   "CategoryTheory.Sheaf.Torsor.FramedLift.zero_isIsomorphic",
+   "CategoryTheory.Sheaf.Torsor.FramedLift.setoid",
+   "CategoryTheory.Sheaf.Torsor.FramedLift.Classes",
+   "CategoryTheory.Sheaf.Torsor.FramedLift.classEquiv",
+   "CategoryTheory.Sheaf.Torsor.liftsEmbedding",
+   "CategoryTheory.Sheaf.Torsor.liftsEmbedding_vadd",
+   "CategoryTheory.Sheaf.Torsor.difference_of_equivariant_lifts"
+  ],
+  "statement": "theorem FramedLift.isIsomorphic_iff (z z' : FramedLift hT hS U) :\n    WithSection.IsIsomorphic z.toPair z'.toPair ↔\n      ∃ x : E.obj.obj (op T),\n        d.hom.app (op T) x = z'.1 - z.1 ∧\n        E.obj.map (hT.from U).op x = z'.2.1 - z.2.1",
+  "branch": "sheaf-dag",
+  "by": "R9",
+  "date": "2026-10-18"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-amb-framed-lifts-classification",
+  "worker": "stage3 R9",
+  "summary": "A new proved supporting lemma for the explicit relative torsor classification; all declarations in its Lean module are proved, with no new sorry. Three Mathlib search kinds and the whole-blueprint search found no matching statement.",
+  "blueprint": "Proof, first two paragraphs: constructing a relative class from a torsor with its specified open trivialization; detailed lifting presentation and translation relation.",
+  "tool_uses": [
+   {
+    "node": "def-sp-injective-resolutions",
+    "why": "Generic torsor, sheaf, Ext or injective-resolution input to the concrete lifting argument; it replaces no step of the unit route."
+   },
+   {
+    "node": "lem-sc-torsor-h1",
+    "why": "Generic torsor, sheaf, Ext or injective-resolution input to the concrete lifting argument; it replaces no step of the unit route."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R9",
+  "result": "pass",
+  "landing": "20261018T092209-L-3362795",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R9",
+  "result": "pass",
+  "landing": "20261018T092209-L-3362795",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,164 @@
+{
+ "id": "lem-amb-first-resolution-extension-class",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-amb-cartier-kummer-map",
+   "place": "Proof, first two paragraphs: comparison of the injective-resolution cocycle of a torsor with its ordinary cohomology class; cone sign check.",
+   "via": [
+    "lem-amb-relative-torsor-cohomology"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Sign of the first extension of an injective resolution",
+ "statement": "Let C be an abelian category with Ext groups and let R be an injective resolution [def-sp-injective-resolutions] of G. Suppose S=(G→R⁰→Z¹(R)) is the short exact first row, with its augmentation and canonical map to cycles. In Mathlib’s Ext and mapping-cone conventions [def-weil-abstract-derived-category], the cocycle iCycles:Z¹(R)→R¹ satisfies R.extMk(iCycles)=−S.extClass in Ext¹(Z¹(R),G).",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 06XR (lemma-compute-ext-resolutions) and 06XV (lemma-ext-1); agent-written cone-homotopy sign verification for Mathlib."
+ },
+ "stmt_deps": [
+  "def-sp-injective-resolutions",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Place S in cochain degree zero. Its cone quotient q:Cone(G[0]→R⁰[0])→Z¹(R)[0] is a quasi-isomorphism. Let z be the cycles inclusion viewed as a map to the shifted resolution. The cone boundary is minus the first projection in Mathlib.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 06XR (lemma-compute-ext-resolutions) and 06XV (lemma-ext-1); agent-written cone-homotopy sign verification for Mathlib."
+   }
+  },
+  {
+   "text": "Construct a cone homotopy from q followed by z to the negative cone boundary followed by the shifted augmentation. Take the homotopy to be zero on the suspended G summand and minus identity R⁰ on the R⁰ summand, transported through the extension-by-zero and shift coordinate isomorphisms. In degree zero the identity is cancellation of the two augmentations; in the other component it is the factorization d⁰=toCycles≫iCycles. All other degrees vanish. The mappingCone.descHomotopy constructor verifies exactly these two component identities.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 06XR (lemma-compute-ext-resolutions) and 06XV (lemma-ext-1); agent-written cone-homotopy sign verification for Mathlib."
+   }
+  },
+  {
+   "text": "Apply the derived localization to the homotopy. The map q and the resolution augmentation become isomorphisms. Cancel them, use the definition of extMk and the cone roof defining S.extClass, and use naturality of localization’s shift comparison. The resulting equality is extMk(iCycles)=−S.extClass.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 06XR (lemma-compute-ext-resolutions) and 06XV (lemma-ext-1); agent-written cone-homotopy sign verification for Mathlib."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-injective-resolutions",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 06XR (lemma-compute-ext-resolutions) and 06XV (lemma-ext-1); agent-written cone-homotopy sign verification for Mathlib."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The cycles inclusion of an injective resolution represents the negative extension class of its first short exact sequence",
+   "results": "8 returned hits: CategoryTheory.InjectiveResolution.of (Mathlib.CategoryTheory.Abelian.Injective.Resolution); CategoryTheory.InjectiveResolution.self (Mathlib.CategoryTheory.Preadditive.Injective.Resolution); CategoryTheory.InjectiveResolution (Mathlib.CategoryTheory.Preadditive.Injective.Resolution); CategoryTheory.ShortComplex.instMonoICycles (Mathlib.Algebra.Homology.ShortComplex.LeftHomology); CategoryTheory.InjectiveResolution.neg_extMk (Mathlib.CategoryTheory.Abelian.Injective.Ext); CategoryTheory.ShortComplex.iCycles (Mathlib.Algebra.Homology.ShortComplex.LeftHomology); CategoryTheory.ShortComplex.ShortExact.extClass.congr_simp (Mathlib.Algebra.Homology.DerivedCategory.Ext.ExtClass); CategoryTheory.InjectiveResolution.of_def (Mathlib.CategoryTheory.Abelian.Injective.Resolution)",
+   "date": "2026-10-18",
+   "verdict": "no exact match; existing general cone, Ext and sheaf APIs are used in the Lean proof"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.InjectiveResolution.extMk",
+   "results": "12 returned hits: CategoryTheory.InjectiveResolution.extMk_zero (Mathlib.CategoryTheory.Abelian.Injective.Ext); CategoryTheory.InjectiveResolution.extMk (Mathlib.CategoryTheory.Abelian.Injective.Ext); CategoryTheory.InjectiveResolution.mk₀_comp_extMk (Mathlib.CategoryTheory.Abelian.Injective.Ext); CategoryTheory.InjectiveResolution.extMk_comp_mk₀ (Mathlib.CategoryTheory.Abelian.Injective.Ext); CategoryTheory.InjectiveResolution.extMk_eq_zero_iff (Mathlib.CategoryTheory.Abelian.Injective.Ext); CategoryTheory.InjectiveResolution.extMk_surjective (Mathlib.CategoryTheory.Abelian.Injective.Ext); CategoryTheory.InjectiveResolution.neg_extMk (Mathlib.CategoryTheory.Abelian.Injective.Ext); CategoryTheory.InjectiveResolution.sub_extMk (Mathlib.CategoryTheory.Abelian.Injective.Ext); CategoryTheory.InjectiveResolution.add_extMk (Mathlib.CategoryTheory.Abelian.Injective.Ext); CategoryTheory.InjectiveResolution.extEquivCohomologyClass_extMk (Mathlib.CategoryTheory.Abelian.Injective.Ext); CategoryTheory.InjectiveResolution.smul_extMk (Mathlib.CategoryTheory.Abelian.Injective.Ext); CategoryTheory.InjectiveResolution.extMk_hom (Mathlib.CategoryTheory.Abelian.Injective.Ext)",
+   "date": "2026-10-18",
+   "verdict": "no exact match; existing general cone, Ext and sheaf APIs are used in the Lean proof"
+  },
+  {
+   "tool": "grep",
+   "query": "extMk.*extClass|extClass.*extMk|firstCycles",
+   "results": "0 hits; ",
+   "date": "2026-10-18",
+   "verdict": "no exact match; existing general cone, Ext and sheaf APIs are used in the Lean proof"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.RelativeTorsorCohomology",
+  "date": "2026-10-18",
+  "group": "R9"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.FirstResolutionExtensionClass",
+  "file": "lean/Sheaf/CategoryTheory/FirstResolutionExtensionClass.lean",
+  "declaration": "CategoryTheory.InjectiveResolution.extMk_firstCycles",
+  "declarations": [
+   "CategoryTheory.InjectiveResolution.extMk_firstCycles"
+  ],
+  "statement": "theorem extMk_firstCycles :\n    R.extMk (R.cocomplex.iCycles 1) 2 rfl (by simp) = -hS.extClass",
+  "branch": "sheaf-dag",
+  "by": "R9",
+  "date": "2026-10-18"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-amb-first-resolution-extension-class",
+  "worker": "stage3 R9",
+  "summary": "A new proved supporting lemma for the explicit relative torsor classification; all declarations in its Lean module are proved, with no new sorry. Three Mathlib search kinds and the whole-blueprint search found no matching statement.",
+  "blueprint": "Proof, first two paragraphs: comparison of the injective-resolution cocycle of a torsor with its ordinary cohomology class; cone sign check.",
+  "tool_uses": [
+   {
+    "node": "def-sp-injective-resolutions",
+    "why": "Generic torsor, sheaf, Ext or injective-resolution input to the concrete lifting argument; it replaces no step of the unit route."
+   },
+   {
+    "node": "def-weil-abstract-derived-category",
+    "why": "Generic torsor, sheaf, Ext or injective-resolution input to the concrete lifting argument; it replaces no step of the unit route."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R9",
+  "result": "pass",
+  "landing": "20261018T092209-L-3362795",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R9",
+  "result": "pass",
+  "landing": "20261018T092209-L-3362795",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

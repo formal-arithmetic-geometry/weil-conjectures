@@ -1,0 +1,202 @@
+{
+ "id": "lem-amb-relative-cocycle-coordinates",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-amb-cartier-kummer-map",
+   "place": "Proof, first two paragraphs: injective-resolution description of the relative class and its open trivialization, including the actual cone coordinates.",
+   "via": [
+    "lem-amb-relative-torsor-cohomology"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Concrete first homology coordinates for the relative restriction cone",
+ "statement": "Let T be a scheme, U an object of its small etale site, and I an injective resolution [def-sp-injective-resolutions] of an abelian sheaf G. Let C be the actual relative section complex Cone(I(T)→I(U))[-1] of [def-amb-relative-etale-cohomology]. Set Q=Z¹(I); the first resolution row 0→G→I⁰→Q→0 is short exact. For a frame z=(s,b) with s∈Q(T), b∈I⁰(U), db=s|U, the element (iCycles(s),−b) in the direct-sum coordinates of C¹ is a cycle. Its homology class is surjective onto H¹(C), and two frames have the same homology class precisely when their pointed lifting torsors are isomorphic [lem-amb-framed-lifts-classification]. This gives an explicit equivalence relativeTorsorEquiv from pointed torsor classes to H¹(C); it sends the zero pointed torsor to zero. Projection to absolute section homology is represented by iCycles(s). For any commuting pair of maps of global and U section complexes, the frame class maps to a target frame class whenever the differences of their two coordinates are (dx,−x|U) for one target global degree-zero section x.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 03AJ, lemma-torsors-h1; agent-written relative lifting-torsor refinement of its injective-resolution argument."
+ },
+ "stmt_deps": [
+  "def-sp-injective-resolutions",
+  "def-amb-relative-etale-cohomology",
+  "lem-amb-framed-lifts-classification"
+ ],
+ "proof": [
+  {
+   "text": "Identify C^(n+1) with I^(n+1)(T)⊕I^n(U) through the actual shift isomorphism, cone biproduct and extension-by-zero isomorphisms. Compute D(a,c)=(da,−r(a)−dc), and C⁰≅I⁰(T) with D(x)=(dx,−r(x)). Compute the forget projection and maps of cones in these same coordinates. The cone-map coordinate identity is the existing coneMap_XIso helper relocated from RelativeTorsorCohomology into this common dependency, so both consumers reuse one proof.",
+   "uses": [
+    "def-amb-relative-etale-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 03AJ, lemma-torsors-h1; agent-written relative lifting-torsor refinement of its injective-resolution argument."
+   }
+  },
+  {
+   "text": "Resolution exactness at degree zero and acyclicity in positive degree make 0→G→I⁰→Z¹(I)→0 short exact. The lifting equation for a frame gives the closed element (iCycles(s),−b). Conversely, any closed element has a unique cycles section s in its first coordinate, since taking cycles commutes with evaluation; its second coordinate is minus a lift b. Thus every cycle and every homology class is represented by a frame.",
+   "uses": [
+    "def-sp-injective-resolutions",
+    "lem-amb-framed-lifts-classification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 03AJ, lemma-torsors-h1; agent-written relative lifting-torsor refinement of its injective-resolution argument."
+   }
+  },
+  {
+   "text": "Use exactness of cycles→homology to identify equality of classes with existence of a degree-zero boundary x. The coordinate formulas say exactly d(x)=s′−s and r(x)=b′−b after cancelling the monic cycles inclusion. By the translation criterion [lem-amb-framed-lifts-classification] this is pointed isomorphism. Quotienting the frame map and using its bijectivity gives relativeFramedLiftEquiv; compose with the inverse of the proved pointed lifting equivalence to obtain relativeTorsorEquiv.",
+   "uses": [
+    "lem-amb-framed-lifts-classification",
+    "def-amb-relative-etale-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 03AJ, lemma-torsors-h1; agent-written relative lifting-torsor refinement of its injective-resolution argument."
+   }
+  },
+  {
+   "text": "The zero frame maps to the zero cycle. The forget map takes its first coordinate to the absolute section cycle. For a commuting square of section maps, apply the homology-map formula and subtract the two cycles. In each coordinate the hypotheses identify this difference with the boundary of x; the homology classes are therefore equal.",
+   "uses": [
+    "def-amb-relative-etale-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 03AJ, lemma-torsors-h1; agent-written relative lifting-torsor refinement of its injective-resolution argument."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-amb-relative-etale-cohomology",
+  "def-sp-injective-resolutions",
+  "lem-amb-framed-lifts-classification"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 03AJ, lemma-torsors-h1; agent-written relative lifting-torsor refinement of its injective-resolution argument. Explicit Lean construction and coordinate verification by R9. Returned-delivery repair: reuse the relocated coneMap_XIso helper instead of duplicating it under coneMap_coordinates."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "First homology of a shifted mapping cone is pairs of cocycles and chosen lifts modulo boundaries",
+   "results": "8 returned hits: CochainComplex.mappingCone.liftCocycle_coe (Mathlib.Algebra.Homology.HomotopyCategory.MappingCone); CochainComplex.mappingCone.ofHom_lift (Mathlib.Algebra.Homology.HomotopyCategory.MappingCone); CochainComplex.mappingCone.fst (Mathlib.Algebra.Homology.HomotopyCategory.MappingCone); CochainComplex.mappingCone.liftCochain (Mathlib.Algebra.Homology.HomotopyCategory.MappingCone); CochainComplex.mappingCone.descCocycle.congr_simp (Mathlib.Algebra.Homology.HomotopyCategory.MappingCone); CochainComplex.mappingCone.liftCocycle (Mathlib.Algebra.Homology.HomotopyCategory.MappingCone); CochainComplex.mappingCone (Mathlib.Algebra.Homology.HomotopyCategory.MappingCone); CochainComplex.mappingCone.shiftIso (Mathlib.Algebra.Homology.HomotopyCategory.Pretriangulated)",
+   "date": "2026-10-18",
+   "verdict": "no exact match; existing general cone, Ext and sheaf APIs are used in the Lean proof"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.mappingCone",
+   "results": "12 returned hits: CochainComplex.mappingCone.fst (Mathlib.Algebra.Homology.HomotopyCategory.MappingCone); CochainComplex.mappingCone.snd (Mathlib.Algebra.Homology.HomotopyCategory.MappingCone); CochainComplex.mappingCone.inl (Mathlib.Algebra.Homology.HomotopyCategory.MappingCone); CochainComplex.mappingCone (Mathlib.Algebra.Homology.HomotopyCategory.MappingCone); CochainComplex.mappingCone.descCochain (Mathlib.Algebra.Homology.HomotopyCategory.MappingCone); CochainComplex.mappingCone.liftCochain (Mathlib.Algebra.Homology.HomotopyCategory.MappingCone); CochainComplex.mappingCone.liftCochain_snd (Mathlib.Algebra.Homology.HomotopyCategory.MappingCone); CochainComplex.mappingCone.inl_descCochain (Mathlib.Algebra.Homology.HomotopyCategory.MappingCone); CochainComplex.mappingCone.inr (Mathlib.Algebra.Homology.HomotopyCategory.MappingCone); CochainComplex.mappingCone.inr_descCochain (Mathlib.Algebra.Homology.HomotopyCategory.MappingCone); CochainComplex.mappingCone.inr_snd_assoc (Mathlib.Algebra.Homology.HomotopyCategory.MappingCone); CochainComplex.mappingCone.isZero_X_iff (Mathlib.Algebra.Homology.HomotopyCategory.MappingCone)",
+   "date": "2026-10-18",
+   "verdict": "no exact match; existing general cone, Ext and sheaf APIs are used in the Lean proof"
+  },
+  {
+   "tool": "grep",
+   "query": "relative.*cocycle|relative.*[Tt]orsor|relative.*[Ff]rame",
+   "results": "1 returned hits: Mathlib/Geometry/Manifold/VectorBundle/Tensoriality.lean:147 -- the expansion of `σ` into coefficients relative to the frame.",
+   "date": "2026-10-18",
+   "verdict": "no exact match; existing general cone, Ext and sheaf APIs are used in the Lean proof"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.RelativeTorsorCohomology",
+  "date": "2026-10-18",
+  "group": "R9"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.RelativeCocycleCoordinates",
+  "file": "lean/Sheaf/AlgebraicGeometry/RelativeCocycleCoordinates.lean",
+  "declaration": "AlgebraicGeometry.Etale.relativeTorsorEquiv",
+  "declarations": [
+   "AlgebraicGeometry.Etale.relativeDegreeIso",
+   "AlgebraicGeometry.Etale.relativeFst",
+   "AlgebraicGeometry.Etale.relativeSnd",
+   "AlgebraicGeometry.Etale.relative_d_fst",
+   "AlgebraicGeometry.Etale.relative_d_snd",
+   "AlgebraicGeometry.Etale.relativeDegreeZeroIso",
+   "AlgebraicGeometry.Etale.relativeBoundary_fst",
+   "AlgebraicGeometry.Etale.relativeBoundary_snd",
+   "AlgebraicGeometry.Etale.resolutionLiftSequence",
+   "AlgebraicGeometry.Etale.resolutionLiftSequence_shortExact",
+   "AlgebraicGeometry.Etale.ResolutionFramedLift",
+   "AlgebraicGeometry.Etale.relativeForget_fst",
+   "AlgebraicGeometry.Etale.relativeFrameElement",
+   "AlgebraicGeometry.Etale.relativeFrameElement_closed",
+   "AlgebraicGeometry.Etale.relativeFrameCycle",
+   "AlgebraicGeometry.Etale.relativeFrameClass",
+   "AlgebraicGeometry.Etale.relativeFrameAbsoluteCycle",
+   "AlgebraicGeometry.Etale.relativeFrameAbsoluteCycle_i",
+   "AlgebraicGeometry.Etale.relativeFrameAbsoluteCycle_class",
+   "AlgebraicGeometry.Etale.relativeFrameClass_surjective",
+   "AlgebraicGeometry.Etale.relativeFrameClass_eq_iff",
+   "AlgebraicGeometry.Etale.relativeFramedLiftEquiv",
+   "AlgebraicGeometry.Etale.relativeTorsorEquiv",
+   "AlgebraicGeometry.Etale.relativeTorsorEquiv_frame",
+   "AlgebraicGeometry.Etale.relativeTorsorEquiv_presentation",
+   "AlgebraicGeometry.Etale.resolutionPresentationMap",
+   "AlgebraicGeometry.Etale.resolutionPresentationMap_vadd",
+   "AlgebraicGeometry.Etale.resolutionPresentationMap_d",
+   "AlgebraicGeometry.Etale.relativeTorsorEquiv_zero",
+   "AlgebraicGeometry.Etale.relativeFrameClass_map_eq",
+   "AlgebraicGeometry.Etale.coneMap_XIso"
+  ],
+  "statement": "def relativeTorsorEquiv :\n    Sheaf.Torsor.WithSection.Classes G U ≃ relativeCohomology T U R 1",
+  "branch": "sheaf-dag",
+  "by": "R9",
+  "date": "2026-10-18"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-amb-relative-cocycle-coordinates",
+  "worker": "stage3 R9",
+  "summary": "A new proved supporting lemma for the explicit relative torsor classification; all declarations in its Lean module are proved, with no new sorry. Three Mathlib search kinds and the whole-blueprint search found no matching statement.",
+  "blueprint": "Proof, first two paragraphs: injective-resolution description of the relative class and its open trivialization, including the actual cone coordinates.",
+  "tool_uses": [
+   {
+    "node": "def-sp-injective-resolutions",
+    "why": "Generic torsor, sheaf, Ext or injective-resolution input to the concrete lifting argument; it replaces no step of the unit route."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R9",
+  "result": "pass",
+  "landing": "20261018T092209-L-3362795",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R9",
+  "result": "pass",
+  "landing": "20261018T092209-L-3362795",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

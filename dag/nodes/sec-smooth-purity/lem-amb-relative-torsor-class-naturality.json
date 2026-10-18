@@ -1,0 +1,163 @@
+{
+ "id": "lem-amb-relative-torsor-class-naturality",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-amb-cartier-kummer-map",
+   "place": "Proof, first two paragraphs: naturality of the relative class from a torsor and its trivialization under coefficient maps and pullback.",
+   "via": [
+    "lem-amb-relative-torsor-cohomology"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Equivariant naturality of framed relative torsor classes",
+ "statement": "Use the raw lifting classification relativeTorsorEquiv of [lem-amb-relative-cocycle-coordinates]. For a coefficient morphism f:G→G′ on T and an augmentation-preserving morphism of injective resolutions I→J, every natural f-equivariant map P→Q of torsors takes a specified section over an etale U to a section whose relative class is the image of the class of (P,s). More generally, for h:T′→T, an open W⊂T, a coefficient map f:G→h_*G′, an augmentation-preserving map I→h_*J and an f-equivariant natural map P→(h^et)^*Q on underlying site presheaves, the corresponding map of the actual restriction cones [def-weil-pbc-etale-resolution-section-transfer] carries the raw class of (P,s) to the raw class of Q with section obtained from s by that map and the canonical open pullback. The conclusion holds for any commuting restriction square of these resolution maps.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 03AJ, lemma-torsors-h1; agent-written relative lifting-torsor refinement of its injective-resolution argument."
+ },
+ "stmt_deps": [
+  "lem-amb-relative-cocycle-coordinates",
+  "def-weil-pbc-etale-resolution-section-transfer"
+ ],
+ "proof": [
+  {
+   "text": "Choose lifting presentations for P and Q using the first rows of I and J. Their maps into I⁰ and J⁰ are equivariant for the two augmentation maps, and applying the first differential gives the respective global cycles coordinates.",
+   "uses": [
+    "lem-amb-relative-cocycle-coordinates",
+    "lem-amb-framed-lifts-classification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 03AJ, lemma-torsors-h1; agent-written relative lifting-torsor refinement of its injective-resolution argument."
+   }
+  },
+  {
+   "text": "For a coefficient morphism, compare the source presentation followed by the degree-zero resolution map with the target presentation preceded by the given torsor map. Augmentation compatibility gives identical G-equivariance. The invariant-difference descent of [lem-amb-framed-lifts-classification] supplies x∈J⁰(T). Its differential is the difference of global cycles coordinates, and its restriction to U is the difference of the pointed coordinates. Apply relativeFrameClass_map_eq.",
+   "uses": [
+    "lem-amb-framed-lifts-classification",
+    "lem-amb-relative-cocycle-coordinates"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 03AJ, lemma-torsors-h1; agent-written relative lifting-torsor refinement of its injective-resolution argument."
+   }
+  },
+  {
+   "text": "For scheme pullback, make the same comparison in the direct-image sheaves h_*J⁰ and h_*J¹ on T. Invariant-difference descent again gives a global x. Pull this section along the terminal pullback morphism to a section x′ of J⁰ on T′. Naturality of terminal and open pullback maps identifies its differential and open restriction with the two differences in the target cone. Apply relativeFrameClass_map_eq. No injectivity of h_*J is required here, since the target lifting presentation is made on T′ before direct image.",
+   "uses": [
+    "lem-amb-framed-lifts-classification",
+    "lem-amb-relative-cocycle-coordinates",
+    "def-weil-pbc-etale-resolution-section-transfer"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 03AJ, lemma-torsors-h1; agent-written relative lifting-torsor refinement of its injective-resolution argument."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-etale-resolution-section-transfer",
+  "lem-amb-framed-lifts-classification",
+  "lem-amb-relative-cocycle-coordinates"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 03AJ, lemma-torsors-h1; agent-written relative lifting-torsor refinement of its injective-resolution argument. Explicit Lean construction and coordinate verification by R9."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The classification of torsors with a specified section by relative cohomology is natural under equivariant morphisms",
+   "results": "8 returned hits: CategoryTheory.Sheaf.ΓObjEquivHom_naturality (Mathlib.CategoryTheory.Sites.GlobalSections); CategoryTheory.Sheaf.ΓObjEquivSections_naturality (Mathlib.CategoryTheory.Sites.GlobalSections); Equiv.vaddConst (Mathlib.Algebra.AddTorsor.Defs); SheafOfModules.unitHomEquiv_symm_comp (Mathlib.Algebra.Category.ModuleCat.Sheaf); Action.HomSubtype (Mathlib.CategoryTheory.Action.Basic); CategoryTheory.PresheafOfGroups.OneCocycle.IsCohomologous.class_eq (Mathlib.CategoryTheory.Sites.NonabelianCohomology.H1); CategoryTheory.PresheafOfGroups.OneCocycle.class (Mathlib.CategoryTheory.Sites.NonabelianCohomology.H1); AddTorsor.noConfusion (Mathlib.Algebra.AddTorsor.Defs)",
+   "date": "2026-10-18",
+   "verdict": "no exact match; existing general cone, Ext and sheaf APIs are used in the Lean proof"
+  },
+  {
+   "tool": "loogle",
+   "query": "Sheaf.Torsor",
+   "results": "0 hits; ; loogle: unknown identifier 'Sheaf.Torsor'",
+   "date": "2026-10-18",
+   "verdict": "no exact match; existing general cone, Ext and sheaf APIs are used in the Lean proof"
+  },
+  {
+   "tool": "grep",
+   "query": "[Tt]orsor.*relative|relative.*[Tt]orsor",
+   "results": "0 hits; ",
+   "date": "2026-10-18",
+   "verdict": "no exact match; existing general cone, Ext and sheaf APIs are used in the Lean proof"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.RelativeTorsorCohomology",
+  "date": "2026-10-18",
+  "group": "R9"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.RelativeTorsorClassNaturality",
+  "file": "lean/Sheaf/AlgebraicGeometry/RelativeTorsorClassNaturality.lean",
+  "declaration": "AlgebraicGeometry.Etale.relativeTorsorEquiv_transfer",
+  "declarations": [
+   "AlgebraicGeometry.Etale.relativeTorsorEquiv_coefficient",
+   "AlgebraicGeometry.Etale.relativeTorsorEquiv_transfer"
+  ],
+  "statement": "theorem relativeTorsorEquiv_transfer\n    {T T' : Scheme.{u}} (h : T' ⟶ T) (W : T.Opens)\n    {G : Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}}\n    {G' : Sheaf T'.smallEtaleTopology AddCommGrpCat.{u + 1}}\n    (f : G ⟶ (lowerStar AddCommGrpCat.{u + 1} h).obj G')\n    (I : InjectiveResolution G) (J : InjectiveResolution G')\n    (a : I.cocomplex ⟶\n      ((lowerStar AddCommGrpCat.{u + 1} h).mapHomologicalComplex (.up ℕ)).obj J.cocomplex)\n    (ha : I.ι.f 0 ≫ a.f 0 = f ≫ (lowerStar AddCommGrpCat.{u + 1} h).map (J.ι.f 0))\n    (P : Sheaf.Torsor.WithSection G (Scheme.Etale.mk W.ι)) (Q : Sheaf.Torsor G')\n    (b : P.1.sheaf.obj ⟶ (MorphismProperty.Over.pullback @Etale ⊤ h).op ⋙ Q.sheaf.obj)\n    (hb : ∀ A g t, b.app A (P.1.vadd A g t) =\n      Q.vadd (op ((MorphismProperty.Over.pullback @Etale ⊤ h).obj A.unop))\n        (f.hom.app A g) (b.app A t))\n    (hsquare : HomologicalComplex.extendMap\n        (globalResolutionSectionTransfer h I.cocomplex J.cocomplex a)\n        ComplexShape.embeddingUpNat ≫\n        relativeSectionRestriction T' (Scheme.Etale.mk (h ⁻¹ᵁ W).ι) J.cocomplex =\n      relativeSectionRestriction T (Scheme.Etale.mk W.ι) I.cocomplex ≫\n        HomologicalComplex.extendMap\n          (openResolutionSectionTransfer h I.cocomplex J.cocomplex a W)\n          ComplexShape.embeddingUpNat) :\n    HomologicalComplex.homologyMap (relativeFiberMap _ _\n        (HomologicalComplex.extendMap\n          (globalResolutionSectionTransfer h I.cocomplex J.cocomplex a)\n          ComplexShape.embeddingUpNat)\n        (HomologicalComplex.extendMap\n          (openResolutionSectionTransfer h I.cocomplex J.cocomplex a W)\n          ComplexShape.embeddingUpNat) hsquare) 1\n        (relativeTorsorEquiv T (Scheme.Etale.mk W.ι) I (Quotient.mk _ P)) =\n      relativeTorsorEquiv T' (Scheme.Etale.mk (h ⁻¹ᵁ W).ι) J (Quotient.mk _\n        ⟨Q, Q.sheaf.obj.map (openSectionPullback h W).op\n          (b.app (op (Scheme.Etale.mk W.ι)) P.2)⟩)",
+  "branch": "sheaf-dag",
+  "by": "R9",
+  "date": "2026-10-18"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-amb-relative-torsor-class-naturality",
+  "worker": "stage3 R9",
+  "summary": "A new proved supporting lemma for the explicit relative torsor classification; all declarations in its Lean module are proved, with no new sorry. Three Mathlib search kinds and the whole-blueprint search found no matching statement.",
+  "blueprint": "Proof, first two paragraphs: naturality of the relative class from a torsor and its trivialization under coefficient maps and pullback.",
+  "tool_uses": [
+   {
+    "node": "def-weil-pbc-etale-resolution-section-transfer",
+    "why": "Generic torsor, sheaf, Ext or injective-resolution input to the concrete lifting argument; it replaces no step of the unit route."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R9",
+  "result": "pass",
+  "landing": "20261018T092209-L-3362795",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R9",
+  "result": "pass",
+  "landing": "20261018T092209-L-3362795",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -15,6 +15,8 @@ public import Sheaf.AlgebraicGeometry.DerivedCategories
 public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 
+import Sheaf.AlgebraicGeometry.RelativeTorsorClassNaturality
+import Sheaf.AlgebraicGeometry.RelativeTorsorForgetNormalization
 import Mathlib.CategoryTheory.Preadditive.Comma
 import Mathlib.Algebra.Homology.HomologySequenceLemmas
 import WeilConjectures.CategoryTheory.Abelian.HorseshoeResolutions
@@ -314,8 +316,75 @@ theorem relative_torsor_cohomology :
         e T' (h ⁻¹ᵁ W) G' J (Quotient.mk _
           ⟨Q, Q.sheaf.obj.map (openSectionPullback h W).op
             (b.app (op (Scheme.Etale.mk W.ι)) P.2)⟩)) := by
-  sorry
-
+  set_option backward.isDefEq.respectTransparency false in
+    classical
+    -- Mathlib's cone boundary is minus the first projection, so the ordinary Ext
+    -- normalization requires the negative of the raw lifting-cocycle classification.
+    let e : ∀ (T : Scheme.{u}) (W : T.Opens)
+        (G : Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}) (I : InjectiveResolution G),
+        Sheaf.Torsor.WithSection.Classes G (Scheme.Etale.mk W.ι) ≃
+          relativeCohomology T (Scheme.Etale.mk W.ι) I 1 :=
+      fun T W G I ↦ (relativeTorsorEquiv T (Scheme.Etale.mk W.ι) I).trans
+        { toFun := fun x ↦ -x
+          invFun := fun x ↦ -x
+          left_inv := neg_neg
+          right_inv := neg_neg }
+    refine ⟨e, ?_, ?_, ?_, ?_⟩
+    · intro T W G I
+      change -relativeTorsorEquiv T (Scheme.Etale.mk W.ι) I _ = 0
+      rw [relativeTorsorEquiv_zero, neg_zero]
+    · intro T W G I c P
+      change c.globalEquiv 1
+        (((((etaleSectionFunctor (Scheme.Etale.mk (𝟙 T))).mapHomologicalComplex (.up ℕ)).obj
+          I.cocomplex).extendHomologyIso ComplexShape.embeddingUpNat
+            (rfl : (1 : ℤ) = 1)).hom
+          (HomologicalComplex.homologyMap
+            (relativeForgetComplex T (Scheme.Etale.mk W.ι) I.cocomplex) 1
+            (-relativeTorsorEquiv T (Scheme.Etale.mk W.ι) I (Quotient.mk _ P)))) = _
+      rw [map_neg, map_neg, map_neg]
+      let hT := MorphismProperty.Over.mkIdTerminal @Etale T
+      let : Injective (I.cocomplex.X 0) := I.injective 0
+      obtain ⟨s, ⟨ε⟩⟩ := Sheaf.Torsor.exists_equiv_lifts hT
+        (resolutionLiftSequence_shortExact T I) P.1
+      rw [relativeTorsorEquiv_presentation T (Scheme.Etale.mk W.ι) I P s ε,
+        relativeFrameClass_forget, neg_neg]
+      have hp : (Quotient.mk _ P.1 : _root_.Quotient (Sheaf.Torsor.setoid (G := G))) =
+          Quotient.mk _ (Sheaf.Torsor.lifts hT (resolutionLiftSequence_shortExact T I) s) :=
+        Quotient.sound ⟨ε⟩
+      rw [hp, Sheaf.Torsor.classH1_lifts]
+      rfl
+    · intro T W G G' f I J a P Q q
+      change HomologicalComplex.homologyMap
+        (relativeSectionMap T (Scheme.Etale.mk W.ι) a.hom) 1
+        (-relativeTorsorEquiv T (Scheme.Etale.mk W.ι) I (Quotient.mk _ P)) =
+        -relativeTorsorEquiv T (Scheme.Etale.mk W.ι) J
+          (Quotient.mk _ ⟨Q, q.quotient (op (Scheme.Etale.mk W.ι)) P.2 0⟩)
+      rw [map_neg]
+      apply congrArg Neg.neg
+      let σ : P.1.sheaf.obj ⟶ Q.sheaf.obj :=
+        { app A := TypeCat.ofHom fun t ↦ q.quotient A t 0
+          naturality A B k := by
+            ext t
+            change q.quotient B (P.1.sheaf.obj.map k t) 0 =
+              Q.sheaf.obj.map k (q.quotient A t 0)
+            rw [q.quotient_natural, map_zero] }
+      apply relativeTorsorEquiv_coefficient T (Scheme.Etale.mk W.ι) f I J a P Q σ
+        (fun A g t => ?_) (relativeSectionMap_square T (Scheme.Etale.mk W.ι) a.hom)
+      change q.quotient A (P.1.vadd A g t) 0 = Q.vadd A (f.hom.app A g) (q.quotient A t 0)
+      calc
+        _ = q.quotient A t (f.hom.app A g) := by
+          simpa only [sub_self] using q.quotient_invariant A g t (f.hom.app A g)
+        _ = _ := by simpa only [zero_add] using q.quotient_vadd A t 0 (f.hom.app A g)
+    · intro T T' h W G G' f I J a ha P Q b hb
+      change HomologicalComplex.homologyMap (relativeTransfer h W I.cocomplex J.cocomplex a) 1
+        (-relativeTorsorEquiv T (Scheme.Etale.mk W.ι) I (Quotient.mk _ P)) =
+        -relativeTorsorEquiv T' (Scheme.Etale.mk (h ⁻¹ᵁ W).ι) J (Quotient.mk _
+          ⟨Q, Q.sheaf.obj.map (openSectionPullback h W).op
+            (b.app (op (Scheme.Etale.mk W.ι)) P.2)⟩)
+      rw [map_neg]
+      apply congrArg Neg.neg
+      exact relativeTorsorEquiv_transfer h W f I J a ha P Q b hb
+        (relativeTransfer_square h W I.cocomplex J.cocomplex a)
 set_option backward.isDefEq.respectTransparency false in
 private lemma comparisonIntoInjectives
     {C : Type*} [Category C] [Abelian C] {G : C} (I : InjectiveResolution G)
@@ -542,20 +611,6 @@ private lemma sectionMap_comp (T : Scheme.{u}) (U : T.Etale)
   unfold relativeSectionMap
   rw [← fiberMap_comp]
   simp only [Functor.map_comp, HomologicalComplex.extendMap_comp]
-
-set_option backward.isDefEq.respectTransparency false in
-private lemma coneMap_XIso
-    {A B A' B' : CochainComplex AddCommGrpCat.{u + 1} ℤ}
-    (r : A ⟶ B) (r' : A' ⟶ B') (a : A ⟶ A') (b : B ⟶ B')
-    (h : a ≫ r' = r ≫ b) (n : ℤ) :
-    (HomologicalComplex.homotopyCofiber.mapArrowHom r r'
-      (fun j ↦ ⟨j - 1, sub_add_cancel j 1⟩) (Arrow.homMk a b h)).f n ≫
-        (HomologicalComplex.homotopyCofiber.XIsoBiprod r' n (n + 1) rfl).hom =
-      (HomologicalComplex.homotopyCofiber.XIsoBiprod r n (n + 1) rfl).hom ≫
-        biprod.map (a.f (n + 1)) (b.f n) := by
-  apply HomologicalComplex.homotopyCofiber.ext_from_X r (n + 1) n rfl <;>
-    simp [HomologicalComplex.homotopyCofiber.mapArrowHom,
-      HomologicalComplex.homotopyCofiber.inrCompHomotopy_hom r' _ (n + 1) n rfl]
 
 set_option backward.isDefEq.respectTransparency false in
 private lemma fiberMap_comp_zero

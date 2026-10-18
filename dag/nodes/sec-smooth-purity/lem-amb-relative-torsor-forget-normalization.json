@@ -1,0 +1,165 @@
+{
+ "id": "lem-amb-relative-torsor-forget-normalization",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-amb-cartier-kummer-map",
+   "place": "Proof, first two paragraphs: normalization of the relative torsor class after forgetting its specified trivialization.",
+   "via": [
+    "lem-amb-relative-torsor-cohomology"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Ordinary normalization of the framed relative cocycle",
+ "statement": "Let T be a scheme, U an etale object, I an injective resolution of G [def-sp-injective-resolutions], and c a ResolutionSectionCanonicalComparison [def-weil-pbc-etale-resolution-section-canonical-comparison]. For a frame (s,b) in the first short exact resolution row S [lem-amb-relative-cocycle-coordinates], project its raw relativeFrameClass to ordinary section homology, identify extension-by-zero homology with nonnegative section homology, and apply c.globalEquiv in degree one. The result is −δ_S(s), where δ_S:Z¹(I)(T)→H¹(T,G) is the ordinary connecting homomorphism. Consequently negating the raw relative class gives the ordinary lifting-torsor class.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 03AJ, lemma-torsors-h1; agent-written relative lifting-torsor refinement of its injective-resolution argument."
+ },
+ "stmt_deps": [
+  "lem-amb-relative-cocycle-coordinates",
+  "def-sp-injective-resolutions",
+  "def-weil-pbc-etale-resolution-section-canonical-comparison"
+ ],
+ "proof": [
+  {
+   "text": "The concrete projection formula identifies the forgotten frame class with the homology class of the absolute section cycle whose inclusion is iCycles(s).",
+   "uses": [
+    "lem-amb-relative-cocycle-coordinates"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 03AJ, lemma-torsors-h1; agent-written relative lifting-torsor refinement of its injective-resolution argument."
+   }
+  },
+  {
+   "text": "Use the constant integer sheaf adjunction and evaluation on 1 to write s as a morphism g:ℤ_T→Z¹(I). Naturality of this adjunction shows that the absolute section cycle represents g followed by iCycles. Apply c.global_cocycle to identify its cohomology class with I.extMk(g≫iCycles).",
+   "uses": [
+    "def-weil-pbc-etale-resolution-section-canonical-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 03AJ, lemma-torsors-h1; agent-written relative lifting-torsor refinement of its injective-resolution argument."
+   }
+  },
+  {
+   "text": "The Ext composition formula gives I.extMk(g≫iCycles)=g^*(I.extMk(iCycles)). By [lem-amb-first-resolution-extension-class] this is −g^*(S.extClass). The definition of the sheaf connecting homomorphism through H⁰ identifies the latter with −δ_S(s). Negation therefore corrects the ordinary torsor normalization.",
+   "uses": [
+    "lem-amb-first-resolution-extension-class",
+    "lem-sc-torsor-h1"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 03AJ, lemma-torsors-h1; agent-written relative lifting-torsor refinement of its injective-resolution argument."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-etale-resolution-section-canonical-comparison",
+  "lem-amb-first-resolution-extension-class",
+  "lem-amb-relative-cocycle-coordinates",
+  "lem-sc-torsor-h1"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 03AJ, lemma-torsors-h1; agent-written relative lifting-torsor refinement of its injective-resolution argument. Explicit Lean construction and coordinate verification by R9."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Forgetting the chosen section of a torsor in relative first cohomology agrees with the ordinary torsor extension class",
+   "results": "8 returned hits: groupCohomology.coboundaries₁_ext (Mathlib.RepresentationTheory.Homological.GroupCohomology.LowDegree); CategoryTheory.PresheafOfGroups.H1 (Mathlib.CategoryTheory.Sites.NonabelianCohomology.H1); CategoryTheory.ShortComplex.ShortExact.extClass.congr_simp (Mathlib.Algebra.Homology.DerivedCategory.Ext.ExtClass); CategoryTheory.PresheafOfGroups.OneCocycle.class (Mathlib.CategoryTheory.Sites.NonabelianCohomology.H1); AddTorsor.noConfusionType (Mathlib.Algebra.AddTorsor.Defs); AddTorsor.noConfusion (Mathlib.Algebra.AddTorsor.Defs); groupCohomology.H1IsoOfIsTrivial_inv_apply (Mathlib.RepresentationTheory.Homological.GroupCohomology.LowDegree); CategoryTheory.PresheafOfGroups.OneCocycle.IsCohomologous.class_eq (Mathlib.CategoryTheory.Sites.NonabelianCohomology.H1)",
+   "date": "2026-10-18",
+   "verdict": "no exact match; existing general cone, Ext and sheaf APIs are used in the Lean proof"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf.H",
+   "results": "12 returned hits: CategoryTheory.Sheaf.H (Mathlib.CategoryTheory.Sites.SheafCohomology.Basic); CategoryTheory.Sheaf.subsingleton_H_of_isZero (Mathlib.CategoryTheory.Sites.SheafCohomology.Basic); CategoryTheory.Sheaf.functorH_obj_coe (Mathlib.CategoryTheory.Sites.SheafCohomology.Basic); CategoryTheory.Sheaf.instSubsingletonHHAddNatOfNat (Mathlib.CategoryTheory.Sites.SheafCohomology.Basic); CategoryTheory.Sheaf.H.map (Mathlib.CategoryTheory.Sites.SheafCohomology.Basic); CategoryTheory.Sheaf.H.equiv₀ (Mathlib.CategoryTheory.Sites.SheafCohomology.Basic); CategoryTheory.Sheaf.functorH_map (Mathlib.CategoryTheory.Sites.SheafCohomology.Basic); CategoryTheory.Sheaf.H.map_id_apply (Mathlib.CategoryTheory.Sites.SheafCohomology.Basic); CategoryTheory.Sheaf.H.map_apply (Mathlib.CategoryTheory.Sites.SheafCohomology.Basic); CategoryTheory.Sheaf.H.map_comp_apply (Mathlib.CategoryTheory.Sites.SheafCohomology.Basic); CategoryTheory.Sheaf.H.map_add_apply (Mathlib.CategoryTheory.Sites.SheafCohomology.Basic); CategoryTheory.Sheaf.H.equiv₀_naturality (Mathlib.CategoryTheory.Sites.SheafCohomology.Basic)",
+   "date": "2026-10-18",
+   "verdict": "no exact match; existing general cone, Ext and sheaf APIs are used in the Lean proof"
+  },
+  {
+   "tool": "grep",
+   "query": "classH1|relativeFrameClass_forget",
+   "results": "0 hits; ",
+   "date": "2026-10-18",
+   "verdict": "no exact match; existing general cone, Ext and sheaf APIs are used in the Lean proof"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.RelativeTorsorCohomology",
+  "date": "2026-10-18",
+  "group": "R9"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.RelativeTorsorForgetNormalization",
+  "file": "lean/Sheaf/AlgebraicGeometry/RelativeTorsorForgetNormalization.lean",
+  "declaration": "AlgebraicGeometry.Etale.relativeFrameClass_forget",
+  "declarations": [
+   "AlgebraicGeometry.Etale.relativeFrameClass_forget"
+  ],
+  "statement": "theorem relativeFrameClass_forget\n    (T : Scheme.{u}) (U : T.Etale)\n    {G : Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}} (I : InjectiveResolution G)\n    (c : ResolutionSectionCanonicalComparison G I) (z : ResolutionFramedLift T U I) :\n    c.globalEquiv 1\n      (((((etaleSectionFunctor (Scheme.Etale.mk (𝟙 T))).mapHomologicalComplex (.up ℕ)).obj\n        I.cocomplex).extendHomologyIso ComplexShape.embeddingUpNat (rfl : (1 : ℤ) = 1)).hom\n          (HomologicalComplex.homologyMap (relativeForgetComplex T U I.cocomplex) 1\n            (relativeFrameClass T U I z))) =\n      -Sheaf.H.δ (resolutionLiftSequence_shortExact T I)\n        (MorphismProperty.Over.mkIdTerminal @Etale T) z.1",
+  "branch": "sheaf-dag",
+  "by": "R9",
+  "date": "2026-10-18"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-amb-relative-torsor-forget-normalization",
+  "worker": "stage3 R9",
+  "summary": "A new proved supporting lemma for the explicit relative torsor classification; all declarations in its Lean module are proved, with no new sorry. Three Mathlib search kinds and the whole-blueprint search found no matching statement.",
+  "blueprint": "Proof, first two paragraphs: normalization of the relative torsor class after forgetting its specified trivialization.",
+  "tool_uses": [
+   {
+    "node": "def-weil-pbc-etale-resolution-section-canonical-comparison",
+    "why": "Generic torsor, sheaf, Ext or injective-resolution input to the concrete lifting argument; it replaces no step of the unit route."
+   },
+   {
+    "node": "lem-sc-torsor-h1",
+    "why": "Generic torsor, sheaf, Ext or injective-resolution input to the concrete lifting argument; it replaces no step of the unit route."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R9",
+  "result": "pass",
+  "landing": "20261018T092209-L-3362795",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R9",
+  "result": "pass",
+  "landing": "20261018T092209-L-3362795",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

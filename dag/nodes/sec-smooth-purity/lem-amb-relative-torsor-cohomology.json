@@ -32,239 +32,136 @@
  ],
  "proof": [
   {
-   "text": "Choose a resolution $0\\to G\\xrightarrow{\\epsilon}I^0\\xrightarrow d I^1\\to\\cdots$ with zero negative terms. Enough injectives and the bounded-below injective representative theorem supply it and say it is K-injective. The open restriction $j^{-1}I$ is K-injective: restriction is right adjoint to the exact extension-by-zero functor, so the right-adjoint K-injectivity theorem applies, with $\\Lambda=\\mathbf Z$. Exact inverse image makes it a resolution of $j^{-1}G$. Thus both terms of the relative cone are computed by $A^r=I^r(T)$ and $B^r=(j^{-1}I^r)(V)$, with restriction $r:A\\to B$.",
+   "text": "For every supplied injective resolution I, use the explicit equivalence relativeTorsorEquiv between pointed torsor classes and actual relative cone homology [lem-amb-relative-cocycle-coordinates], and compose it with negation. This gives the simultaneous family e. The raw equivalence sends the trivial torsor with zero section to zero, and negation preserves zero.",
    "uses": [
-    "lem-weil-pbc-site-sheaves-enough-injectives",
-    "lem-weil-pbc-dplus-injective-representative",
-    "lem-weil-pbc-extension-by-zero-adjunction",
-    "lem-weil-pbc-extension-by-zero-exact",
-    "lem-weil-pbc-right-adjoint-preserves-kinjective",
-    "prop-weil-pbc-inverse-image-modules-exact",
-    "def-weil-pbc-etale-cohomology",
-    "lem-weil-pbc-etale-inverse-image-restriction"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 03F3, lemma-cohomology-of-open; Tag 08FI, lemma-restrict-K-injective-to-open"
-   }
-  },
-  {
-   "text": "Use the signed model $C^n=A^n\\oplus B^{n-1}$ with $D(a,b)=(da,r(a)-db)$ for $\\operatorname{Cone}(r)[-1]$. This is the cone convention in the cited definition, after changing the sign on the $B$ summand; $D^2=0$ since $rd=dr$. In degree one its cocycles are pairs $a\\in I^1(T)$, $b\\in(j^{-1}I^0)(V)$ with $da=0$ and $r(a)=db$. Its boundaries are $(dx,r(x))$ for $x\\in I^0(T)$, since $B^{-1}=0$.",
-   "uses": [
-    "def-weil-abstract-derived-category"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 03AJ, lemma-torsors-h1; relative injective-resolution refinement written here"
-   }
-  },
-  {
-   "text": "For a cocycle $(a,b)$ form the sheaf $P_a$ of solutions $t\\in I^0$ to $dt=a$ (on each etale object use the restriction of $a$). Exactness of the resolution says $I^0\\to\\ker(d:I^1\\to I^2)$ is epi; local surjectivity therefore supplies such solutions on a covering. Two solutions differ by a unique section of $G=\\ker(d:I^0\\to I^1)$, so addition through $\\epsilon$ makes $P_a$ a $G$-torsor. The equation $db=r(a)$ makes $b$ a specified section on $V$. If $(a',b')=(a,b)+(dx,r(x))$, translation $t\\mapsto t+x$ is a torsor isomorphism carrying $b$ to $b'$. This constructs a map from $H^1(C)$ to pairs modulo section-preserving isomorphism.",
-   "uses": [
-    "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective",
-    "def-sc-gm-torsor"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 03AJ, lemma-torsors-h1; relative injective-resolution refinement written here"
-   }
-  },
-  {
-   "text": "This map is injective. Given a section-preserving equivariant isomorphism $F:P_a\\to P_{a'}$, on any object admitting a section $t$ put $x=F(t)-t\\in I^0$. For another section $t+\\epsilon(g)$ equivariance gives $F(t+\\epsilon(g))-(t+\\epsilon(g))=F(t)-t$. These local sections therefore agree on overlaps and glue, by the sheaf axiom for $I^0$, to $x\\in I^0(T)$. Applying $d$ gives $dx=a'-a$, and evaluating on the specified open section gives $r(x)=b'-b$. The two cocycles differ by the boundary $D(x)$ computed in step 2.",
-   "uses": [
-    "def-weil-pbc-abelian-etale-sheaves",
-    "def-sc-gm-torsor"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 03AJ, lemma-torsors-h1; relative injective-resolution refinement written here"
-   }
-  },
-  {
-   "text": "For surjectivity take a pair $(P,s)$. The named canonical extension in the statement of the absolute torsor theorem gives $0\\to G\\to E_P\\xrightarrow p\\mathbf Z_T\\to0$, whose fibre over $1$ is $P$. By injectivity of $I^0$, extend $\\epsilon:G\\to I^0$ across $G\\hookrightarrow E_P$ to $f:E_P\\to I^0$. The composite $df$ kills $G$, hence factors through $p$ as $\\bar a:\\mathbf Z_T\\to I^1$; let $a=\\bar a(1)$. Since $d\\bar a=0$, $da=0$. Set $b=f(s)$ on $V$, so $db=r(a)$. On the fibre over $1$, $f$ is equivariant and takes values in $P_a$; locally choosing a point of $P$ identifies this map with a translation $G\\to G$, hence it is an isomorphism and carries $s$ to $b$. Different extensions $f'$ differ by a morphism $\\mathbf Z_T\\to I^0$, hence by a global $x$, giving exactly $(a',b')-(a,b)=(dx,r(x))$. We have proved a bijection, rather than selected an arbitrary lift of the ordinary torsor class.",
-   "uses": [
-    "lem-sc-torsor-h1",
+    "lem-amb-relative-cocycle-coordinates",
+    "def-amb-torsor-with-section",
+    "def-amb-relative-etale-cohomology",
     "def-sp-injective-resolutions"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 03AJ, lemma-torsors-h1; relative injective-resolution refinement written here"
+    "place": "Tag 03AJ, lemma-torsors-h1; agent-written relative lifting-torsor refinement of its injective-resolution argument."
    }
   },
   {
-   "text": "For $(a,b)=(0,0)$, $P_a=\\epsilon(G)$ and its open section is zero, the identity section of the additive torsor. Projection $C\\to A$ sends $(a,b)$ to $a$. In the extension of step 5, $f$ lifts the section $1$ to degree zero of the resolution, and its differential is $a$. Thus the connecting class $\\delta_{E_P}(1)$ is $[a]$. The absolute torsor theorem names exactly this class as the ordinary class of $P$. Consequently projection is the required forgetful map, with the asserted normalization.",
+   "text": "Present an arbitrary torsor P as the lifting torsor of a global cycles section s. The presentation formula evaluates its raw relative class on this frame. By [lem-amb-relative-torsor-forget-normalization], forgetting the raw class gives −δ(s) under any supplied canonical comparison. Negation cancels this minus sign, while the absolute torsor theorem classH1_lifts identifies δ(s) with the class of P. This proves the specified forget compatibility without changing its signature.",
    "uses": [
+    "lem-amb-relative-torsor-forget-normalization",
     "lem-sc-torsor-h1",
-    "def-weil-abstract-derived-category"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 03AJ, lemma-torsors-h1; relative injective-resolution refinement written here"
-   }
-  },
-  {
-   "text": "For h:T'→T and a coefficient map G→h_*G', exact inverse image makes its right adjoint h_* preserve injectives. Put L=h_*J termwise. Extend the degree-zero augmentation map across G→I⁰ into the injective L⁰. Exactness of the augmented source lets the differential factor through the next image, and injectivity of each Lⁿ extends it; induction gives a:I→L. If a and b have the same augmentation, their difference vanishes on G. Factor its degree-zero component through d:I⁰→I¹, and inductively factor fⁿ-Hⁿd through the next differential, extending into Lⁿ by injectivity. This constructs a homotopy a∼b without a Hom-to-derived bijection. Evaluation and extension by zero preserve it. Restriction commutes with the evaluated homotopy by naturality of its sheaf-morphism components. On the ordinary cone use the diagonal homotopy (-H_A,H_B); the cochain differential formula cancels the mixed terms. Shifting by -1 gives the signed relative homotopy (H_A,-H_B). Transfer factors as the relative map of a followed by the fixed transfer of the identity of L, so homotopic comparisons give the same relative homology map. Identity and composition comparisons give independence and composition. The cited cohomology-pullback definitions identify the resulting section maps with the derived pullback and coefficient maps.",
-   "uses": [
-    "prop-weil-pbc-inverse-image-modules-exact",
-    "def-sp-injective-resolutions",
-    "def-weil-pbc-cohomology-pullback",
-    "lem-weil-pbc-cohomology-pullback-functorial",
-    "lem-weil-pbc-inverse-image-composition",
-    "lem-weil-pbc-etale-inverse-image-algebraic-structures"
+    "def-weil-pbc-etale-resolution-section-canonical-comparison"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 03AJ, lemma-torsors-h1; relative injective-resolution refinement written here"
+    "place": "Tag 03AJ, lemma-torsors-h1; agent-written relative lifting-torsor refinement of its injective-resolution argument."
    }
   },
   {
-   "text": "Inverse image commutes with finite limits of underlying sheaves of sets and with their abelian structures, so preserves the kernel-and-fibre construction of $P_a$. The absolute etale torsor functoriality theorem guarantees that $h^{-1}P_a$ remains a torsor. The contracted-product existence theorem supplies its sheaf quotient. The chain map $u$ of step 7 therefore gives an equivariant morphism $h^{-1}P_a\\to P_{U_Aa}$ under $\\varphi$; it sends the pulled-back chosen section to $U_Bb$. It induces an isomorphism from the contracted product $h^{-1}P_a\\wedge^{h^{-1}G}G'$: locally pick a section $t$ of the source torsor, and both torsors become $G'$; the map is $g'\\mapsto u(t)+g'$, a translation. These local identifications agree by equivariance and the defining quotient relation of the contracted product. For the coefficient identity this is just inverse image of the torsor. Thus the bijection, including its specified section, is natural for every $\\varphi$, without assuming $h^{-1}G=G'$.",
+   "text": "For a contracted-product presentation q, the map t↦q(t,0) is a natural f-equivariant torsor map, by quotient_natural, quotient_invariant and quotient_vadd. Apply the coefficient part of [lem-amb-relative-torsor-class-naturality] and the commuting restriction square relativeSectionMap_square. Homology maps preserve negation, so the result also holds for e.",
    "uses": [
-    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-amb-relative-torsor-class-naturality",
     "def-sc-contracted-product-presentation",
     "def-sc-gm-torsor",
-    "lem-weil-pbc-etale-inverse-image-algebraic-structures",
-    "lem-sc-etale-torsor-h1-functoriality",
-    "lem-sc-etale-contracted-product-exists"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 03AJ, lemma-torsors-h1; relative injective-resolution refinement written here"
-   }
-  },
-  {
-   "text": "For a short exact coefficient sequence choose a horseshoe of nonnegative injective resolutions $I_1,I_2,I_3$. Its degreewise short exact rows split since the first term is injective. Taking sections on $T$ or $V$, and then the finite sums defining $C(I_k)$, preserves those split rows. Thus $0\\to C(I_1)\\to C(I_2)\\to C(I_3)\\to0$ is degreewise short exact. The complex long-exact-sequence theorem supplies $\\delta^q_{T,V}$. Explicitly lift a relative cocycle $z$ to $y\\in C(I_2)^q$; $Dy$ lies in the image of $C(I_1)^{q+1}$, and the class of its unique preimage is $\\delta[z]$. The projections to $A(I_k)$ form a morphism of these short exact complex sequences, so long-exact-sequence naturality proves compatibility with forgetting support. Concretely, evaluating a chosen row splitting and extending by zero gives a splitting in each integer degree. The biproduct decomposition of each cone degree transports the relative row to the biproduct of the two section rows. Its splitting proves short exactness. Naturality of the cone's first projection, followed by the canonical shift cancellation, gives the morphism to the absolute row.",
-   "uses": [
-    "lem-weil-pbc-injective-resolution-ses",
-    "def-sp-injective-resolutions",
-    "lem-weil-pbc-complex-ses-homology-long-exact",
-    "lem-weil-pbc-complex-ses-long-exact-naturality"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Ordinary horseshoe construction as in Tag 03AJ; Derived Categories Tag 013T, lemma-injective-resolution-ses; relative cone calculation written here"
-   }
-  },
-  {
-   "text": "Apply [lem-amb-signed-fibre-triangulated] with $A=\\Gamma(T,-)$, $B=\\Gamma(V,j^{-1}(-))$ and $r$ restriction. These are additive functors by the sectionwise abelian group operations. It supplies the exact homotopy functor $F_T$, the shift comparison $(a,b)\\mapsto(a,-b)$ and the cone comparison $(x,y,z,w)\\mapsto(x,z,y,-w)$, with the boundary $-p$ respected. By step 1 and the definition of derived sections, its value on an injective representative computes exactly the relative cone in the statement, not a different cohomology theory.",
-   "uses": [
-    "lem-amb-signed-fibre-triangulated",
     "def-weil-pbc-etale-cohomology"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08FI, lemma-restrict-K-injective-to-open; relative cone proof of functoriality, compare Cohomology Tags 0G71 and 0G78"
+    "place": "Tag 03AJ, lemma-torsors-h1; agent-written relative lifting-torsor refinement of its injective-resolution argument."
    }
   },
   {
-   "text": "Apply [lem-amb-bounded-injective-fibre-descent] to this $F_T$, first with $E=\\mathrm{id}$ and $\\tau=\\mathrm{id}$. Enough injectives holds for the etale abelian-sheaf category by [lem-weil-pbc-site-sheaves-enough-injectives]. We obtain an exact functor $RF_T$ on $D^+$, computed on the same bounded below injective complexes as in steps 1 and 9, and canonical identifications under changes of those representatives. Thus it is legitimate to apply the relative construction to every derived coefficient morphism, including a boundary into a shift.",
+   "text": "For scheme pullback with the exact coefficient map and equivariant natural map b appearing in the Lean statement, apply the transfer part of [lem-amb-relative-torsor-class-naturality] and relativeTransfer_square. The prescribed open pullback morphism gives exactly the section in the conclusion. Again move negation through the additive homology map.",
    "uses": [
-    "lem-amb-bounded-injective-fibre-descent",
-    "lem-weil-pbc-site-sheaves-enough-injectives"
+    "lem-amb-relative-torsor-class-naturality",
+    "def-weil-pbc-etale-resolution-section-transfer"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08FI, lemma-restrict-K-injective-to-open; relative cone proof of functoriality, compare Cohomology Tags 0G71 and 0G78"
+    "place": "Tag 03AJ, lemma-torsors-h1; agent-written relative lifting-torsor refinement of its injective-resolution argument."
    }
   },
   {
-   "text": "Split the horseshoe rows of step 9, writing $I_2=I_1\\oplus I_3$ with differential $\\begin{pmatrix}d_1&t\\\\0&d_3\\end{pmatrix}$. The split-connecting-morphism node gives the chain map $t:I_3\\to I_1[1]$. The split-boundary comparison identifies its derived class with the canonical cone boundary. Naturality of the complex-SES triangle for the horseshoe augmentation therefore identifies this class with the coefficient boundary $w:G_3\\to G_1[1]$. For the relative split sequence the off-diagonal is $(a,b)\\mapsto(t_Ta,-t_Vb)$, since its second differential is $r-d_V$. This is $s_{I_1}F_T(t)$. The split connecting formula now says that the lift-and-differentiate boundary in step 9 is $H^q(s_{I_1}RF_T(w))$. This also fixes its sign.",
+   "text": "For the existing resolution-comparison declarations, direct image preserves injectives by its adjunction with exact inverse image. Recursively extend the degree-zero map and factor its differential through the next image, obtaining an augmentation-preserving comparison. The same recursion applied to a difference constructs comparison homotopies. Enough injectives supplies the target resolution where existence is requested.",
    "uses": [
-    "lem-weil-pbc-degreewise-split-connecting-morphism",
-    "lem-sc-p1-split-ses-boundary-comparison",
-    "lem-weil-pbc-complex-ses-triangle",
-    "lem-weil-pbc-complex-ses-connecting-formula",
-    "lem-amb-signed-fibre-triangulated"
+    "def-sp-injective-resolutions",
+    "lem-weil-pbc-site-sheaves-enough-injectives",
+    "prop-weil-pbc-inverse-image-modules-exact"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08FI, lemma-restrict-K-injective-to-open; relative cone proof of functoriality, compare Cohomology Tags 0G71 and 0G78"
+    "place": "Tag 03AJ, lemma-torsors-h1; agent-written relative lifting-torsor refinement of its injective-resolution argument."
    }
   },
   {
-   "text": "For $h:T'\\to T$ and $V'=h^{-1}V$ apply [lem-amb-bounded-injective-fibre-descent] with $E=h^{-1}$, $F=F_T$, $F'=F_{T'}$. Exactness of $E$ is [prop-weil-pbc-inverse-image-modules-exact]. The sheaf adjunction unit gives the section maps on $T$ and $V$ and their restriction square (the same square as step 7); its naturality is part of [lem-weil-pbc-etale-inverse-image-algebraic-structures]. These maps define $\\tau$. They commute with the signed shift comparison because they act separately on the two summands. The descent lemma makes the comparison natural for all derived morphisms and shifts, including $w$. Its absolute component is precisely the pullback of [lem-weil-pbc-cohomology-pullback-derived-unit]. It remains to see that $D^+h^{-1}(w)$ is the boundary $w'$ of the pulled-back sequence $0\\to h^{-1}G_1\\to h^{-1}G_2\\to h^{-1}G_3\\to0$. By step 12, $w=Q(\\epsilon_1)[1]^{-1}Q(t)Q(\\epsilon_3)$ for the horseshoe augmentations $\\epsilon_k$. Applying the additive exact functor $h^{-1}$ termwise to the split horseshoe gives a degreewise split short exact sequence of complexes, with the pulled-back splitting maps, resolving the pulled-back coefficient sequence; its split boundary $\\pi d s$ is $h^{-1}t$ [lem-weil-pbc-degreewise-split-connecting-morphism]. By [lem-sc-p1-split-ses-boundary-comparison] its canonical boundary is $Q(h^{-1}t)$, and naturality of [lem-weil-pbc-complex-ses-triangle] for the quasi-isomorphic augmentation $h^{-1}\\epsilon$ gives $w'=Q(h^{-1}\\epsilon_1)[1]^{-1}Q(h^{-1}t)Q(h^{-1}\\epsilon_3)$. Since the derived inverse image is computed termwise compatibly with shifts [def-weil-pbc-derived-inverse-image], this is $D^+h^{-1}(w)$. Applying $H^q$ to the naturality square for $w$ and substituting step 12 on $T$ and on $T'$ proves pullback compatibility of the relative connecting maps.",
+   "text": "Evaluate a comparison homotopy on terminal and open sections. MappingCone.mapHomotopy sends the commuting restriction-square homotopy to a cone homotopy, and shifting preserves it. The same argument after the section transfer proves independence of relativeTransfer on its resolution comparison. These are concrete homotopies of the given complexes, and require no bounded-derived descent theorem.",
    "uses": [
-    "lem-amb-bounded-injective-fibre-descent",
-    "prop-weil-pbc-inverse-image-modules-exact",
-    "lem-weil-pbc-etale-inverse-image-algebraic-structures",
-    "lem-weil-pbc-cohomology-pullback-derived-unit",
-    "def-weil-abstract-derived-category",
-    "lem-weil-pbc-complex-ses-triangle",
-    "lem-weil-pbc-degreewise-split-connecting-morphism",
-    "lem-sc-p1-split-ses-boundary-comparison",
-    "def-weil-pbc-derived-inverse-image"
+    "def-amb-relative-etale-cohomology",
+    "def-weil-pbc-etale-resolution-section-transfer",
+    "def-weil-abstract-derived-category"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08FI, lemma-restrict-K-injective-to-open; relative cone proof of functoriality, compare Cohomology Tags 0G71 and 0G78"
+    "place": "Tag 03AJ, lemma-torsors-h1; agent-written relative lifting-torsor refinement of its injective-resolution argument."
    }
   },
   {
-   "text": "For a morphism of coefficient short exact sequences, use [lem-weil-pbc-horseshoe-morphism-lift] within the same sheaf category to lift it to the two chosen horseshoes. Taking sections and relative cones gives a morphism of the split short exact complex sequences of step 9. By [lem-weil-pbc-complex-ses-long-exact-naturality] its connecting square commutes. Apply this also to the identity coefficient-sequence morphism and two choices of horseshoe; the representative identifications from step 11 identify the horizontal comparisons with the identity derived maps. Thus the boundaries are independent of horseshoe choices. Combine coefficient naturality with step 13 for pullback followed by any coefficient map, and with step 9's projection square for forgetting support. These are all the claimed connecting-map compatibilities. For the stated concrete-complex naturality theorems, no derived descent is needed: a strict coefficient or direct-image diagram induces a strict diagram of restriction cones. Map composition follows functoriality of the cofiber map. Form the resulting morphism of short exact relative complexes and apply homology-sequence δ_naturality. This proves relativeConnecting_coefficient_naturality and relativeConnecting_pullback_naturality directly. The abstract identifications in steps 10–13 remain part of the plan for interpreting all chosen coefficient boundaries canonically.",
+   "text": "For a short exact coefficient sequence, choose the existing compatible horseshoe resolutions [lem-weil-pbc-injective-resolution-ses]. Each degreewise row splits since its first object is injective. Section evaluation, extension by zero, biproducts in the cone and shifting preserve the split rows, giving the short exact relative complex sequence. Its connecting morphism is the Mathlib homology-sequence connecting morphism, and projection gives compatibility with forgetting. The diagonal cone-map formula is the single shared coneMap_XIso theorem from [lem-amb-relative-cocycle-coordinates].",
    "uses": [
-    "lem-weil-pbc-horseshoe-morphism-lift",
+    "lem-weil-pbc-injective-resolution-ses",
+    "def-sp-injective-resolutions",
+    "lem-weil-pbc-complex-ses-homology-long-exact",
+    "def-amb-relative-etale-cohomology",
+    "lem-amb-relative-cocycle-coordinates"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 03AJ, lemma-torsors-h1; agent-written relative lifting-torsor refinement of its injective-resolution argument."
+   }
+  },
+  {
+   "text": "A supplied coefficient-sequence comparison or pullback-sequence comparison induces a morphism of the short exact relative complex sequences. The commuting squares follow from functoriality of relativeSectionMap and relativeTransfer. Apply HomologicalComplex.HomologySequence.δ_naturality to prove the two existing boundary-naturality declarations.",
+   "uses": [
     "lem-weil-pbc-complex-ses-long-exact-naturality",
-    "lem-amb-bounded-injective-fibre-descent"
+    "def-weil-pbc-etale-resolution-section-transfer"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08FI, lemma-restrict-K-injective-to-open; relative cone proof of functoriality, compare Cohomology Tags 0G71 and 0G78"
+    "place": "Tag 03AJ, lemma-torsors-h1; agent-written relative lifting-torsor refinement of its injective-resolution argument."
    }
   }
  ],
  "proof_deps": [
+  "def-amb-relative-etale-cohomology",
+  "def-amb-torsor-with-section",
   "def-sc-contracted-product-presentation",
   "def-sc-gm-torsor",
   "def-sp-injective-resolutions",
   "def-weil-abstract-derived-category",
-  "def-weil-pbc-abelian-etale-sheaves",
-  "def-weil-pbc-cohomology-pullback",
-  "def-weil-pbc-derived-inverse-image",
   "def-weil-pbc-etale-cohomology",
-  "lem-amb-bounded-injective-fibre-descent",
-  "lem-amb-signed-fibre-triangulated",
-  "lem-sc-etale-contracted-product-exists",
-  "lem-sc-etale-torsor-h1-functoriality",
-  "lem-sc-p1-split-ses-boundary-comparison",
+  "def-weil-pbc-etale-resolution-section-canonical-comparison",
+  "def-weil-pbc-etale-resolution-section-transfer",
+  "lem-amb-relative-cocycle-coordinates",
+  "lem-amb-relative-torsor-class-naturality",
+  "lem-amb-relative-torsor-forget-normalization",
   "lem-sc-torsor-h1",
-  "lem-weil-pbc-cohomology-pullback-derived-unit",
-  "lem-weil-pbc-cohomology-pullback-functorial",
-  "lem-weil-pbc-complex-ses-connecting-formula",
   "lem-weil-pbc-complex-ses-homology-long-exact",
   "lem-weil-pbc-complex-ses-long-exact-naturality",
-  "lem-weil-pbc-complex-ses-triangle",
-  "lem-weil-pbc-degreewise-split-connecting-morphism",
-  "lem-weil-pbc-dplus-injective-representative",
-  "lem-weil-pbc-etale-inverse-image-algebraic-structures",
-  "lem-weil-pbc-etale-inverse-image-restriction",
-  "lem-weil-pbc-extension-by-zero-adjunction",
-  "lem-weil-pbc-extension-by-zero-exact",
-  "lem-weil-pbc-horseshoe-morphism-lift",
   "lem-weil-pbc-injective-resolution-ses",
-  "lem-weil-pbc-inverse-image-composition",
-  "lem-weil-pbc-right-adjoint-preserves-kinjective",
-  "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective",
   "lem-weil-pbc-site-sheaves-enough-injectives",
   "prop-weil-pbc-inverse-image-modules-exact"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Relative refinement of Tag 03AJ, lemma-torsors-h1, following its injective-resolution method; open computation Tag 03F3 and Tag 08FI; comparison with cohomology.tex Tags 0G71 and 0G78; stage-3 P4 implements comparison by recursion into injective direct-image terms and concrete connecting naturality by homology-sequence naturality"
+  "place": "Tag 03AJ relative refinement, implemented by explicit framed lifts, actual cone coordinates, invariant-difference descent and the negative first-resolution Ext normalization; existing comparison and boundary declarations remain proved by injective recursion and Mathlib homology-sequence naturality. R9, 2026-10-18."
  },
  "mathlib_searches": [
   {
@@ -572,34 +469,13 @@
   "def-sc-gm-torsor",
   "def-sp-injective-resolutions",
   "def-weil-abstract-derived-category",
-  "def-weil-pbc-abelian-etale-sheaves",
-  "def-weil-pbc-cohomology-pullback",
   "def-weil-pbc-etale-cohomology",
-  "lem-sc-etale-contracted-product-exists",
-  "lem-sc-etale-torsor-h1-functoriality",
   "lem-sc-torsor-h1",
-  "lem-sf-derived-ses-triangle",
-  "lem-weil-pbc-cohomology-pullback-derived-unit",
-  "lem-weil-pbc-cohomology-pullback-functorial",
   "lem-weil-pbc-complex-ses-homology-long-exact",
   "lem-weil-pbc-complex-ses-long-exact-naturality",
-  "lem-weil-pbc-dplus-injective-representative",
-  "lem-weil-pbc-etale-inverse-image-algebraic-structures",
-  "lem-weil-pbc-etale-inverse-image-restriction",
-  "lem-weil-pbc-extension-by-zero-adjunction",
-  "lem-weil-pbc-extension-by-zero-exact",
-  "lem-weil-pbc-horseshoe-morphism-lift",
   "lem-weil-pbc-injective-resolution-ses",
-  "lem-weil-pbc-inverse-image-composition",
-  "lem-weil-pbc-right-adjoint-preserves-kinjective",
-  "lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective",
   "lem-weil-pbc-site-sheaves-enough-injectives",
-  "prop-weil-pbc-inverse-image-modules-exact",
-  "lem-sc-p1-split-ses-boundary-comparison",
-  "lem-weil-pbc-complex-ses-triangle",
-  "lem-weil-pbc-degreewise-split-connecting-morphism",
-  "lem-weil-pbc-complex-ses-connecting-formula",
-  "def-weil-pbc-derived-inverse-image"
+  "prop-weil-pbc-inverse-image-modules-exact"
  ],
  "reviewed": {
   "date": "2026-10-17",
@@ -652,10 +528,10 @@
   "date": "2026-10-18",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "P4",
+  "group": "R9",
   "result": "pass",
-  "landing": "20261018T062847-L-668903",
-  "kind": "proof",
+  "landing": "20261018T092209-L-3362795",
+  "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
