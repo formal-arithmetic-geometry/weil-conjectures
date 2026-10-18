@@ -104,6 +104,22 @@ lemma classRestriction_comp {X Y Z : Scheme.{u}} [HasInvertibleExponent Λ X]
   rfl
 
 omit [Finite Λ] [HasKummerClass.IsNormalized Λ] [HasInvertibleExponent Λ V] in
+/-- Restriction of classes along the identity is the identity: it is idempotent by
+`AlgebraicGeometry.VectorBundle.classRestriction_comp`, and injective since `L(𝟙)^* ≅ 𝟭`. -/
+lemma classRestriction_id {X : Scheme.{u}} [HasInvertibleExponent Λ X]
+    (c : constantComplex Λ X ⟶ (tateObject Λ X r)⟦2 * (r : ℤ)⟧) :
+    classRestriction Λ (𝟙 X) c = c := by
+  have h := classRestriction_comp Λ (𝟙 X) (𝟙 X) (𝟙 X) (Category.id_comp _).symm c
+  have inj : Function.Injective (classRestriction Λ (r := r) (𝟙 X)) := by
+    intro a b hab
+    simp only [classRestriction] at hab
+    rw [cancel_epi, cancel_mono] at hab
+    obtain ⟨e⟩ := nonempty_leftDerivedUpperStar_id_iso Λ X (𝟙 X) rfl
+    have : (L((𝟙 X)^*[ModuleCat.{u + 1} Λ])).Faithful := Functor.Faithful.of_iso e.symm
+    exact Functor.map_injective _ hab
+  exact inj h.symm
+
+omit [Finite Λ] [HasKummerClass.IsNormalized Λ] [HasInvertibleExponent Λ V] in
 /-- *Restriction along sections, given homotopy invariance.* Let `π : V ⟶ T` be a morphism with
 sections `s, s'`. If the unit `Λ_T(r)[2r] ⟶ Rπ_* Lπ^* Λ_T(r)[2r]` is an isomorphism, every
 class `c ∈ H^{2r}(V, Λ(r))` is pulled back from `T`, so `s^* c = (s ≫ π)^* b = s'^* c`. -/

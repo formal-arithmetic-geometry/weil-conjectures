@@ -183,6 +183,38 @@ noncomputable def projectiveFormulaMap {P : Scheme.{u}} (q : P ⟶ S) [HasInvert
       (R((q)_*[ModuleCat.{u + 1} Λ])).obj (constantComplex Λ P) :=
   biproduct.desc fun a ↦ chernPowMap q h a
 
+/-- The projective-space formula in relative dimension `0`: for an isomorphism `q`, the map
+`Λ_S ⟶ Rq_* Λ_P` is an isomorphism. -/
+lemma isIso_projectiveFormulaMap_zero {P : Scheme.{u}} (q : P ⟶ S) [IsIso q]
+    [HasInvertibleExponent Λ P] (h : constantComplex Λ P ⟶ (tateObject Λ P 1)⟦2 * (1 : ℤ)⟧) :
+    IsIso (projectiveFormulaMap q h 0) := by
+  let F : Fin (0 + 1) → _ := fun a ↦ (tateObject Λ S (-(a : ℤ)))⟦2 * (-(a : ℤ))⟧
+  have hdesc : projectiveFormulaMap q h 0 =
+      biproduct.π F 0 ≫
+        chernPowMap q h 0 := by
+    refine biproduct.hom_ext' _ _ fun j ↦ ?_
+    obtain rfl : j = 0 := Subsingleton.elim (α := Fin 1) _ _
+    simp only [projectiveFormulaMap, biproduct.ι_desc, F, biproduct.ι_π_self_assoc]
+    rfl
+  have hπ : IsIso (biproduct.π F 0) := by
+    refine ⟨⟨biproduct.ι F 0, ?_, by simp⟩⟩
+    refine biproduct.hom_ext' _ _ fun j ↦ ?_
+    obtain rfl : j = 0 := Subsingleton.elim (α := Fin 1) _ _
+    simp
+  have hu : IsIso ((derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) q).unit.app
+      ((tateObject Λ S (-((0 : ℕ) : ℤ)))⟦2 * (-((0 : ℕ) : ℤ))⟧)) := by
+    have hid : IsIso ((derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) (𝟙 S)).unit.app
+        ((tateObject Λ S (-((0 : ℕ) : ℤ)))⟦2 * (-((0 : ℕ) : ℤ))⟧)) := by
+      obtain ⟨e⟩ := nonempty_leftDerivedUpperStar_id_iso Λ S (𝟙 S) rfl
+      have : (L((𝟙 S)^*[ModuleCat.{u + 1} Λ])).Full := Functor.Full.of_iso e.symm
+      have : (L((𝟙 S)^*[ModuleCat.{u + 1} Λ])).Faithful := Functor.Faithful.of_iso e.symm
+      infer_instance
+    have := isIso_unit_app_comp_of_isIso Λ q (𝟙 S) _ hid
+    rwa [Category.comp_id] at this
+  rw [hdesc, chernPowMap, Adjunction.homEquiv_unit]
+  simp only [chernPow]
+  infer_instance
+
 variable [HasKummerClass.IsNormalized Λ] {k : Type u} [Field k] (aS : S ⟶ Spec (.of k))
   [IsSeparated aS] [LocallyOfFiniteType aS]
 
@@ -562,6 +594,49 @@ theorem isIso_supportedClassMap_hyperplaneClass [Finite n] :
     rw [h]
     exact isIso_supportedClassMap_hyperplaneFrame aS i
 
+variable (Λ S) in
+/-- The projective-space formula for `ℙ(Option n; S)` and every hyperplane class. -/
+def ProjectiveFormula (n : Type u) [Fintype n] : Prop :=
+  ∀ γ : constantComplex Λ ℙ(Option n; S) ⟶ (R(hyperplane n S)_![ModuleCat.{u + 1} Λ]).obj
+      ((R(hyperplane n S)^![ModuleCat.{u + 1} Λ]).obj
+        ((tateObject Λ ℙ(Option n; S) ((1 : ℕ) : ℤ))⟦2 * ((1 : ℕ) : ℤ)⟧)),
+    IsHyperplaneClass Λ n S γ →
+      IsIso (projectiveFormulaMap (ℙ(Option n; S) ↘ S) (hyperplaneChernClass γ) (Fintype.card n))
+
+include aS in
+/-- *Induction step 0 of the projective-space formula*: `ℙ⁰_S = S`, and `Λ_S ⟶ Rq_* Λ` is an
+isomorphism.
+
+Not proved here: `ℙ(Option PEmpty; S) ⟶ S` is an isomorphism, so the unit is one, and the map is
+the unit up to the identification `Λ_S(0)[0] ≅ Λ_S`. -/
+lemma projectiveFormula_pempty : ProjectiveFormula Λ S PEmpty := by
+  sorry
+
+include aS in
+/-- *Invariance under renaming the coordinates* of the projective-space formula.
+
+Not proved here: an equivalence `n ≃ n'` induces an isomorphism `ℙ(Option n; S) ≅ ℙ(Option n'; S)`
+over `S` carrying the hyperplane to the hyperplane, hence hyperplane classes to hyperplane
+classes (`AlgebraicGeometry.Etale.eq_hyperplaneClass`). -/
+lemma projectiveFormula_of_equiv {n n' : Type u} [Fintype n] [Fintype n'] (e : n ≃ n')
+    (h : ProjectiveFormula Λ S n) : ProjectiveFormula Λ S n' := by
+  sorry
+
+include aS in
+/-- *Induction step of the projective-space formula*, by the localization triangle of
+`𝔸 ⊂ ℙ(Option (Option n); S) ⊃ ℙ(Option n; S)`.
+
+Not proved here. Apply `Rq_*` to `j_! j^* Λ ⟶ Λ ⟶ H_* H^* Λ`, with `j` the open immersion of
+`D₊(T_∗) ≅ 𝔸^{r+1}_S` and `H` the hyperplane. The first term is `Rp_! Λ ≅ Λ_S(-r-1)[-2r-2]`
+(`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerShriek_twistShift_affineSpace`). The last
+is `⊕_{a ≤ r} Λ_S(-a)[-2a]` by the induction hypothesis, compatibly with `hᵃ` since `h` restricts
+to `h` (`AlgebraicGeometry.Etale.classRestriction_hyperplane_hyperplaneChernClass_eq`). The top
+power `h^{r+1}` restricts to zero on the hyperplane and corresponds to the generator of the first
+term. -/
+lemma projectiveFormula_option {n : Type u} [Fintype n] (h : ProjectiveFormula Λ S n) :
+    ProjectiveFormula Λ S (Option n) := by
+  sorry
+
 include aS in
 /-- Blueprint `thm-pur-projective-bundle-formula`: Projective-bundle formula without purity
 
@@ -576,9 +651,9 @@ is an isomorphism. The blueprint states the formula for the projectivization `�
 vector bundle `F`; the projectivization of a vector bundle is not constructed in this repository,
 and the formula for it follows from this case by restriction to trivialising opens.
 
-Not proved here: the blueprint proof computes `RΓ(ℙʳ_k, Λ)` over an algebraically closed field by
-the localization triangle of `𝔸ʳ ⊂ ℙʳ ⊃ ℙ^{r-1}` and induction, then concludes by proper base
-change. -/
+By induction on `n` (`Fintype.induction_empty_option`) from `projectiveFormula_pempty`,
+`projectiveFormula_of_equiv` and the localization step `projectiveFormula_option`, which are
+stated and not proved. -/
 theorem isIso_projectiveFormulaMap [Fintype n]
     (γ : constantComplex Λ ℙ(Option n; S) ⟶ (R(hyperplane n S)_![ModuleCat.{u + 1} Λ]).obj
       ((R(hyperplane n S)^![ModuleCat.{u + 1} Λ]).obj
@@ -586,7 +661,13 @@ theorem isIso_projectiveFormulaMap [Fintype n]
     (hγ : IsHyperplaneClass Λ n S γ) :
     IsIso (projectiveFormulaMap (ℙ(Option n; S) ↘ S) (hyperplaneChernClass γ)
       (Fintype.card n)) := by
-  sorry
+  have key : ∀ (n : Type u) [Fintype n], ProjectiveFormula Λ S n :=
+    Fintype.induction_empty_option (P := fun n _ ↦ ProjectiveFormula Λ S n)
+      (fun _ β _ e h ↦ letI := Fintype.ofEquiv β e.symm; projectiveFormula_of_equiv aS e h)
+      (projectiveFormula_pempty aS)
+      (fun _ _ h ↦ projectiveFormula_option aS h)
+  exact key n γ hγ
+
 attribute [local instance] HasInvertibleExponent.opens
 
 /-- The restriction of a class `h ∈ H^{2m}(Y, Λ(m))` along `g : X ⟶ Y`. -/
@@ -774,14 +855,17 @@ include aS in
 /-- **`c₁(𝒪(1))` is the hyperplane class.** On `ℙ(Option m; S)`, the top Chern class of the line
 bundle `𝒪(1)` is the first Chern class `h` of the hyperplane class of `V(T_∗)`.
 
-Not proved here. The section `T_∗` of `𝒪(1)`, the morphism `ℙ(Option m; S) ⟶ W`,
-`[x] ↦ [x : x_∗]` (to be constructed with `Scheme.CoordinateCover.hom`, as
-`AlgebraicGeometry.ProjectiveSpace.twistBundleπ`), has zero scheme the hyperplane; on the chart
-`D₊(Tᵢ)` its localized top Chern class is the Kummer class of `T_∗ / Tᵢ`
-(`AlgebraicGeometry.VectorBundle.restrictSupportedClass_localizedTopChern`), so it is the
-hyperplane class by uniqueness (`AlgebraicGeometry.Etale.eq_hyperplaneClass`), and (L4)
-(`AlgebraicGeometry.VectorBundle.forgetSupports_localizedTopChern`) identifies its image with
-`c₁(𝒪(1))`. -/
+Not proved here. Let `σ = twistBundleSection (Option m) S none : ℙ(Option m; S) ⟶ W` be the
+section `[x] ↦ [x : x_∗]` of `𝒪(1)` (`twistBundleSection_comp_π`). By (L4) and
+`localizedTopChernForget_eq`, `c₁(𝒪(1)) = σ^* (forget th)`, and by
+`twistBundleHyperplaneClass_eq_thomClass` and `classRestriction_comp` this is the restriction of
+`h_{ℙ(Option (Option m))}` along `σ ≫ W.ι`. It remains to see that this restriction is `h`: the
+square `(hyperplane m, σ ≫ W.ι, hyperplane (Option m))` is cartesian (`x_∗ = 0`), so the
+restriction is `forget` of the restriction of supports of the hyperplane class
+(`supportedRestriction_comp_counit`), which restricts on the chart `D₊(Tᵢ)` to the Kummer class
+of the pull-back `x_∗ / xᵢ` of `T_∗∗ / Tᵢ` (`restrictSupportedClass_kummerBoundaryProduct`,
+`restrictSupportedClass_comp_tateShift`), hence is the hyperplane class by
+`eq_of_frameRestriction_hyperplaneFrame_eq`. -/
 theorem topChernClass_twistBundle_eq_hyperplaneChernClass {m : Type u} [Finite m] :
     (twistBundle (Option m) S).topChernClass Λ (ℙ(Option m; S) ↘ S ≫ aS) =
       hyperplaneChernClass (hyperplaneClass Λ m aS) := by
