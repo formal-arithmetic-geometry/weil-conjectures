@@ -126,3 +126,88 @@ lemma mateEquiv_app_comp_eq_aux {Sg Rg Sg' Sg'' : C ⥤ P} {S1 U1 : P ⥤ P} {Sc
   rw [← reassoc_of% hn, Iso.inv_hom_id_app_assoc, Iso.hom_inv_id_app_assoc, hf,
     Iso.hom_inv_id_app_assoc]
 end CategoryTheory
+
+namespace AlgebraicGeometry.ProEtale.CondensedRing
+
+open Scheme
+
+attribute [local instance] boundedConstructibleBraiding
+
+variable {ℓ : ℕ} [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).Prime]
+  [Fact (ringChar k ≠ ℓ)]
+
+section Coherence
+
+variable {C X Y : Over (Spec (.of k))} [LocallyOfFiniteType C.hom] [QuasiCompact C.hom]
+  [IsSeparated C.hom] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
+  [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
+
+variable (ℓ) in
+/-- The right unit law for the composition isomorphisms of the derived pullbacks, inverse form. -/
+@[reassoc]
+lemma boundedConstructibleUpperStarComp_id_right_inv_app (f : X ⟶ Y)
+    (K : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+    (boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ f (𝟙 Y)).inv.app K ≫
+        eqToHom (by rw [Category.comp_id]; rfl) =
+      (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ f).map
+        ((boundedConstructibleUpperStarId (Profinite.padicAlgClRingObj ℓ) ℓ Y).hom.app K) := by
+  rw [← cancel_epi ((boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ f
+    (𝟙 Y)).hom.app K), Iso.hom_inv_id_app_assoc, boundedConstructibleUpperStarComp_id_right_app]
+
+variable (ℓ) in
+/-- The right unit law for the composition isomorphisms of the lower shriek, inverse form. -/
+lemma boundedConstructibleLowerShriekComp_padicAlgCl_id_right_inv_app (f : X ⟶ Y)
+    (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+    (boundedConstructibleLowerShriekComp_padicAlgCl ℓ f (𝟙 Y)).inv.app K =
+      (boundedConstructibleLowerShriekId ℓ Y).hom.app _ ≫
+        eqToHom (by rw [Category.comp_id]; rfl) := by
+  rw [← cancel_epi ((boundedConstructibleLowerShriekComp_padicAlgCl ℓ f (𝟙 Y)).hom.app K),
+    Iso.hom_inv_id_app, boundedConstructibleLowerShriekId, Iso.trans_hom, NatTrans.comp_app,
+    ← Category.assoc, boundedConstructibleLowerShriekComp_padicAlgCl_id_right ℓ f K,
+    eqToHom_trans, eqToHom_refl]
+
+variable (ℓ) in
+/-- The ordinary half of the global operator (blueprint `thm-trf-fixed-point-localization`,
+proof): for `c₂ ≫ f = g`, the unit of `Lc₂^* ⊣ Rc₂_*` read on `Rf_!` is the ordinary half `γ` of
+the coefficient pushforward along `(f, g)`. -/
+lemma lowerShriek_map_unit_eq_pushforwardCoeffUnit_aux (c₂ : C ⟶ X) (f : X ⟶ Y) (g : C ⟶ Y)
+    [IsProper c₂.left] [IsProper f.left] [IsProper g.left] (hg : c₂ ≫ f = g)
+    (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+    (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ f).map
+        ((boundedConstructibleUpperStarLowerStarAdjunction _ ℓ c₂).unit.app K) ≫
+      (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ f).map
+        ((boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ c₂).inv.app _) ≫
+      (boundedConstructibleLowerShriekComp_padicAlgCl ℓ c₂ f).inv.app _ ≫
+      eqToHom (by rw [hg]; rfl) =
+    (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ f).hom.app K ≫
+      (boundedConstructibleUpperStarId (Profinite.padicAlgClRingObj ℓ) ℓ Y).inv.app _ ≫
+      ((boundedConstructibleUpperStarLowerStarAdjunction _ ℓ g).unit.app _ ≫
+        (boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ g).map
+          ((boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ g (𝟙 Y)).inv.app
+              _ ≫
+            eqToHom (by rw [Category.comp_id, hg]; rfl) ≫
+            (boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ c₂ f).hom.app
+              _ ≫
+            (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ c₂).map
+              ((boundedConstructibleUpperStarLowerStarAdjunction _ ℓ f).counit.app K))) ≫
+      (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ g).inv.app _ := by
+  subst hg
+  rw [boundedConstructibleUpperStarComp_id_right_inv_app_assoc]
+  simp only [eqToHom_refl, Category.comp_id, Category.assoc]
+  exact CategoryTheory.map_unit_comp_inv_eq_aux
+    (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ f)
+    (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ c₂)
+    (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ (c₂ ≫ f))
+    (boundedConstructibleUpperStarComp _ ℓ c₂ f)
+    (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ f)
+    (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ c₂)
+    (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ (c₂ ≫ f))
+    (boundedConstructibleLowerShriekComp_padicAlgCl ℓ c₂ f)
+    (boundedConstructibleLowerStarComp _ ℓ c₂ f)
+    (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl_comp ℓ c₂ f)
+    (CategoryTheory.map_unit_comp_conjugateIsoEquiv_inv_app _ _ _ _)
+    (boundedConstructibleUpperStarId _ ℓ Y) K
+
+end Coherence
+
+end AlgebraicGeometry.ProEtale.CondensedRing
