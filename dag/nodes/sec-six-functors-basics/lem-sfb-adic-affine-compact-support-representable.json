@@ -1,0 +1,127 @@
+{
+ "id": "lem-sfb-adic-affine-compact-support-representable",
+ "kind": "statement",
+ "title": "Affine compact-support representatives",
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-cor-existence-ii",
+ "status": "split",
+ "statement": "Fix a universe u, a prime ell and a field k of positive characteristic different from ell. All schemes are separated finite-type k-schemes in u. Let Lambda be a commutative condensed ring with a certificate IsEllAdicCoefficient ell Lambda, allowing continuous finite extensions, integral valuation rings with torsion, and the finite-subextension-valued algebraic closure [def-sfb-adic-coefficient-certificate]. Write B_T for the full bounded constructible subcategory of the ordinary unbounded derived category of internal Lambda_T-module objects [sk-def-sfb-bounded-constructible; sk-def-sfb-module-derived-pushpull]. Let f:U -> Y with U affine, c a compactification of f and K in B_Y. There exist L in B_U and epsilon:Rf!_c L -> K such that a |-> Rf!_c(a);epsilon is a bijection Hom(M,L) -> Hom(Rf!_c M,K) for every M in B_U. This represents the Hom functor only on bounded constructible tests; it does not choose a localizing right adjoint.",
+ "stmt_deps": [
+  "def-sfb-adic-coefficient-certificate",
+  "sk-def-sfb-bounded-constructible",
+  "sk-def-sfb-module-derived-pushpull"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-existence/det-existence-restriction.proof.md",
+  "place": "Part (2), affine closed factorization in sk-thm-restriction-local.proof.md and sk-thm-int-restriction-glue.proof.md (2); Lean split: lean/Sheaf/AlgebraicGeometry/EllAdicAffineCompactSupportRepresentable.lean (affine_compactSupport_representable)"
+ },
+ "proof": [
+  {
+   "text": "Choose finitely many generators of the affine k-algebra of U. The same coordinates over Y give i:U -> A^n_Y. Its composite with the separated base-change A^n_Y -> A^n_k is the closed embedding over k; hence i is closed and f=i;p.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Use affine projection duality to obtain P on A^n_Y and natural Hom equivalences for every closed support, independent of U and c.",
+   "uses": [
+    "lem-sfb-adic-affine-projection-closed-support-duality"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply closed-support representability to i and P, giving L and eta:i_*L -> P. Transport eta through the inverse Hom equivalence to epsilon:Rf!L -> K. Naturality identifies postcomposition with epsilon with the closed-support postcomposition followed by the inverse equivalence, so it is bijective.",
+   "uses": [
+    "lem-sfb-adic-closed-support-representable"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-adic-affine-projection-closed-support-duality",
+  "lem-sfb-adic-closed-support-representable"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-existence/det-existence-restriction.proof.md",
+  "place": "Part (2), affine closed factorization in sk-thm-restriction-local.proof.md and sk-thm-int-restriction-glue.proof.md (2)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Compactly supported direct image from an affine finite type scheme admits a bounded constructible representing object on bounded constructible inputs",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.isConstructible_image, AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image, AlgebraicGeometry.IsFinite.recOn, AlgebraicGeometry.IsFinite.toIsAffineHom, AlgebraicGeometry.isCompact_iff_exists, AlgebraicGeometry.isAffine_affineScheme, AlgebraicGeometry.quasiCompact_of_noetherianSpace_source, AlgebraicGeometry.Scheme.compactSpace_of_isAffine",
+   "date": "2026-10-18",
+   "verdict": "No exact match; generic categorical or scheme tools only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compact support of adic sheaves on an affine finite type scheme has a bounded constructible representing object on bounded constructible complexes",
+   "results": "8 hits: AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact, AlgebraicGeometry.Scheme.IdealSheafData.mkOfMemSupportIff_ideal, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated, AlgebraicGeometry.isCompact_basicOpen, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_of_res_zero_of_qcqs, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top",
+   "date": "2026-10-18",
+   "verdict": "No exact match; generic categorical or scheme tools only."
+  },
+  {
+   "tool": "grep",
+   "query": "boundedConstructible.*(Adjunction|rightAdjoint)|compactSupport.*represent",
+   "results": "0 hits: ",
+   "date": "2026-10-18",
+   "verdict": "No exact match; generic categorical or scheme tools only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compactly supported direct image of constructible adic sheaves has a right adjoint by affine line trace duality and closed support localization",
+   "date": "2026-10-18",
+   "results": "8 hits: CategoryTheory.Functor.sheafPullbackConstruction.instIsRightAdjointSheafSheafPushforwardContinuousOfHasWeakSheafify, AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, SheafOfModules.instIsRightAdjointPushforward, SheafOfModules.PullbackConstruction.adjunction, PresheafOfModules.instIsRightAdjointPushforwardIdFunctorOppositeRingCat, SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous, CategoryTheory.instIsRightAdjointSheafΓ, AlgebraicGeometry.Scheme.Modules.restrictAdjunction",
+   "verdict": "No compact-support or smooth-duality adjunction in the stated internal condensed-module categories; generic sheaf adjunctions only."
+  }
+ ],
+ "mathlib_match": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EllAdicLocalizingExceptionalBounded",
+  "date": "2026-10-18",
+  "group": "H3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-dc-proper-pushforward-left-adjoint-e",
+   "place": "Part (2), affine closed factorization in sk-thm-restriction-local.proof.md and sk-thm-int-restriction-glue.proof.md (2)",
+   "via": [
+    "lem-sfb-adic-localizing-exceptional-cohomology",
+    "lem-sfb-adic-localizing-exceptional-constructible"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EllAdicAffineCompactSupportRepresentable",
+  "file": "lean/Sheaf/AlgebraicGeometry/EllAdicAffineCompactSupportRepresentable.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.affine_compactSupport_representable",
+  "statement": "theorem affine_compactSupport_representable\n    {U : Over (Spec (.of k))}\n    [LocallyOfFiniteType U.hom] [QuasiCompact U.hom] [IsSeparated U.hom]\n    [IsAffine U.left] (f : U ⟶ Y) (c : Compactification f.left)\n    (K : (boundedConstructible (condensedRingObj Λ Y.left)).FullSubcategory) :\n    ∃ L : (boundedConstructible (condensedRingObj Λ U.left)).FullSubcategory,\n      ∃ ε : (rightDerivedLowerShriekOfCompactification Λ c).obj L.obj ⟶ K.obj,\n        ∀ M : (boundedConstructible (condensedRingObj Λ U.left)).FullSubcategory,\n          Function.Bijective (fun a : M.obj ⟶ L.obj ↦\n            (rightDerivedLowerShriekOfCompactification Λ c).map a ≫ ε)",
+  "branch": "sheaf-dag",
+  "by": "H3",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261018T112416-L-632061",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261018T112416-L-632061",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
