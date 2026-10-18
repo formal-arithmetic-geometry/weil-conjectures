@@ -17,9 +17,107 @@
   "def-weil-etale-morphism",
   "def-weil-ring-localization-away"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $A=R_{\\mathfrak p}$ and $C=B_{\\mathfrak p}$. The images of any finite set of $R$-module generators of $B$ generate $C$ over $A$. Torsion-freeness also persists: if $0\\ne a/s\\in A$ kills $b/t\\in C$, the fraction relation in [def-weil-pbc-module-localization] gives $u ab=0$ in $B$ for some $u\\notin\\mathfrak p$. Since $R$ is a domain, $a\\ne0$ and $u\\ne0$, so $b=0$. If $A$ is a field, a finite spanning set contains a basis, so $C$ is finite free. If $A$ is a DVR, apply [lem-sc-dvr-fg-torsionfree-free] to the finite torsion-free $A$-module $C$. Thus $C$ is finite free in both cases.",
+   "uses": [
+    "def-weil-pbc-module-localization",
+    "lem-sc-dvr-fg-torsionfree-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 07JZ, definition-localization-module; More on Algebra Tag 0AUW, lemma-dedekind-torsion-free-flat (3)"
+   }
+  },
+  {
+   "text": "By [lem-sc-noetherian-finite-module-finite-presentation], $B$ is finitely presented as an $R$-module, since $R$ is Noetherian and $B$ is finite. Step 1 supplies precisely the free localization required by [lem-weil-pbc-finitely-presented-free-at-prime-spreads]. Apply it to obtain $g\\in R\\setminus\\mathfrak p$ such that $B_g$ is finite free over $R_g$. Write $Y=\\operatorname{Spec}R_g$, $X=\\operatorname{Spec}B_g$, and let $h:X\\to Y$ be induced by the structure map.",
+   "uses": [
+    "lem-sc-noetherian-finite-module-finite-presentation",
+    "lem-weil-pbc-finitely-presented-free-at-prime-spreads"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00FP, lemma-Noetherian-finite-type-is-finite-presentation (1), and 0GWM, lemma-finitely-presented-localization-free"
+   }
+  },
+  {
+   "text": "The ring $R_g$ is Noetherian by [lem-weil-pbc-localization-noetherian]. A finite $R_g$-module generating set of $B_g$ also generates it as an algebra: its $R_g$-linear combinations already include every element. Thus [lem-weil-pbc-finite-type-noetherian-finite-presentation] makes $B_g$ a finitely presented $R_g$-algebra, so $h$ is locally of finite presentation by [def-sbc-locally-finite-presentation]. Its finite free underlying module is flat by [lem-sc-affine-standard-cover-finite-free-local-fp-flat]. Apply [lem-pc-affine-flat-module-local-criterion] with $M=B_g$ to obtain flatness of each stalk over its base stalk; hence $h$ is flat by [def-weil-flat-morphism]. It is finite by the affine finite-algebra criterion of [def-weil-finite-integral-morphism].",
+   "uses": [
+    "lem-weil-pbc-localization-noetherian",
+    "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+    "def-sbc-locally-finite-presentation",
+    "lem-sc-affine-standard-cover-finite-free-local-fp-flat",
+    "lem-pc-affine-flat-module-local-criterion",
+    "def-weil-flat-morphism",
+    "def-weil-finite-integral-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00FN, lemma-Noetherian-permanence; 00FP, lemma-Noetherian-finite-type-is-finite-presentation (3); 00NX, lemma-finite-projective; 00HT, lemma-flat-localization (6); 01TP and 01WH"
+   }
+  },
+  {
+   "text": "Let $y=\\mathfrak pR_g\\in Y$. Its residue field is $k=\\kappa(\\mathfrak p)$: inverting $g\\notin\\mathfrak p$ and then all nonzero classes in $R/\\mathfrak p$ gives the same fraction field. The affine fibre-product formula [lem-weil-pbc-fibre-product-affine-spectra] identifies $X_y$ with $\\operatorname{Spec}(B_g\\otimes_{R_g}k)=\\operatorname{Spec}F$. The tensor identification sends $(b/g^n)\\otimes c$ to $b\\otimes g^{-n}c$, with inverse $b\\otimes c\\mapsto(b/1)\\otimes c$. If $b_1,\\ldots,b_N$ generate $B$ over $R$, then $b_i\\otimes1$ span $F$ over $k$, so $F$ is a finite $k$-algebra. Under either hypothesis (i) or (ii), [lem-sc-finite-etale-algebra-criterion] therefore gives that $\\operatorname{Spec}F\\to\\operatorname{Spec}k$, and hence $X_y\\to\\operatorname{Spec}k$, is etale.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-sc-finite-etale-algebra-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Schemes Tag 01I4, lemma-fibre-product-affine-schemes; Algebra Tag 00U3, lemma-etale-over-field; Morphisms Tag 02GU (2),(5)"
+   }
+  },
+  {
+   "text": "Apply [lem-sbc-flat-fibre-etale-neighbourhoods] to $h$ and $y$. Step 3 checks flatness and local finite presentation, and Step 4 checks the etale scheme-theoretic fibre. For every point $x\\in h^{-1}(y)$ it yields an open neighbourhood $V_x\\subseteq X$ such that $V_x\\to Y$ is etale. Put $U=\\bigcup_{x\\in h^{-1}(y)}V_x$. This is open and contains the entire fibre, including when the fibre is empty (then $U=\\varnothing$).",
+   "uses": [
+    "lem-sbc-flat-fibre-etale-neighbourhoods"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02GU, lemma-etale-at-point, equivalence (1) and (2)"
+   }
+  },
+  {
+   "text": "The complement $Z=X\\setminus U$ is closed. Since $h$ is finite, [lem-weil-pbc-finite-closed-map-finite-fibres] implies that $h(Z)$ is closed in $Y$. It misses $y$ because $U$ contains all points over $y$. Thus $W=Y\\setminus h(Z)$ is an open neighbourhood of $y$ and $h^{-1}(W)\\subseteq U$. Regard $Y=D(g)$ as an open of $\\operatorname{Spec}R$; the same $W$ is open there and contains $\\mathfrak p$. Write its closed complement as $V(I)$. Since $\\mathfrak p\\notin V(I)$, choose $f\\in I\\setminus\\mathfrak p$, giving $D(f)\\subseteq W\\subseteq D(g)$. Every point of $h^{-1}(D(f))$ lies in a $V_x$; intersecting with this open retains its etale local presentations. By [def-weil-etale-morphism] the restriction to $h^{-1}(D(f))\\to D(f)$ is etale. The principal-open rings are $R_f$ and $B_f$: the preimage is defined by the image of $f$, and since $D(f)\\subseteq D(g)$, inverting $f$ already makes $g$ a unit (otherwise a maximal ideal of $R_f$ containing $g$ would give a prime in $D(f)\\setminus D(g)$). Therefore this restriction is the required map $R[1/f]\\to B[1/f]$.",
+   "uses": [
+    "lem-weil-pbc-finite-closed-map-finite-fibres",
+    "def-weil-etale-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01WN, lemma-finite-proper; Tag 02GU, lemma-etale-at-point; Zariski principal-open refinement"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-module-localization",
+  "lem-sc-dvr-fg-torsionfree-free",
+  "lem-sc-noetherian-finite-module-finite-presentation",
+  "lem-weil-pbc-finitely-presented-free-at-prime-spreads",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+  "def-sbc-locally-finite-presentation",
+  "lem-sc-affine-standard-cover-finite-free-local-fp-flat",
+  "lem-pc-affine-flat-module-local-criterion",
+  "def-weil-flat-morphism",
+  "def-weil-finite-integral-morphism",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-sc-finite-etale-algebra-criterion",
+  "lem-sbc-flat-fibre-etale-neighbourhoods",
+  "lem-weil-pbc-finite-closed-map-finite-fibres",
+  "def-weil-etale-morphism"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Agent-formulated base-neighbourhood consequence of Tag 02GU (lemma-etale-at-point), with Tags 01WN, 0AUW and 0GWM; the finite map closes the complement of the fibrewise etale source neighbourhoods."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -55,10 +153,45 @@
    "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.etaleLocus\", \"module\": \"Mathlib.RingTheory.Etale.Locus\", \"type\": \": Set (PrimeSpectrum A)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ such that the algebra $A$ over the commutative ring $R$ is étale at $\\\\mathfrak{p}$. This means the localization of $A$ at $\\\\mathfrak{p\"}\n  {\"name\": \"Algebra.FormallyEtale.of_isSeparable_aux\", \"module\": \"Mathlib.RingTheory.Etale.Field\", \"type\": \"[Algebra.IsSeparable K L] [EssFiniteType K L] : FormallyEtale K L\", \"doc\": \"If $ L $ is a separable algebra over a field $ K $ and is finitely generated as a $ K $-algebra, then $ L $ is formally étale over $ K $.\"}\n  {\"name\": \"Algebra.IsEtaleAt\", \"module\": \"Mathlib.RingTheory.Etale.Locus\", \"type\": \"(q : Ideal A) [q.IsPrime] : Prop\", \"doc\": \"An algebra $ A $ over a commutative ring $ R $ is said to be étale at a prime ideal $ q $ if the localization of $ A $ at $ q $ is formally étale, meaning the localized algebra satisfies the infinites\"}\n  {\"name\": \"Algebra.FormallyEtale.iff_exists_algEquiv_prod\", \"module\": \"Mathlib.RingTheory.Etale.Field\", \"type\": \"[EssFiniteType K A] :\\n  FormallyEtale K A ↔\\n    ∃ (I : Type u) (_ : Finite I) (Ai : I → Type u) (_ : ∀ i, Field (Ai i)) (_ : ∀ i, Algebra K (Ai i)) (_ :\\n      A ≃ₐ[K] Π i, Ai i), ∀ i, Algebra.IsSeparable K (Ai i)\", \"doc\": \"A finitely generated algebra $ A $ over a field $ K $ is formally étale if and only if there exists a finite index set $ I $ and a family of field extensions $ \\\\{A_i\\\\}_{i \\\\in I} $, each separable over\"}\n  {\"name\": \"Algebra.Etale\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"(R : Type u) → (A : Type v) → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → Prop\", \"doc\": \"The property of an algebra $ A $ over a commutative ring $ R $ being étale.\"}\n  {\"name\": \"Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat\", \"module\": \"Mathlib.RingTheory.Smooth.StandardSmoothCotangent\", \"type\": \"[IsStandardSmoothOfRelativeDimension 0 R S] : Etale R S\", \"doc\": \"If $ S $ is a standard smooth algebra of relative dimension 0 over a commutative ring $ R $, then $ S $ is an étale algebra over $ R $.\"}\n  {\"name\": \"Algebra.Etale.baseChange\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"[Etale R A] : Etale B (B ⊗[R] A)\", \"doc\": \"If $ A $ is an étale algebra over a commutative ring $ R $, and $ B $ is a commutative $ R $-algebra, then the tensor product $ B \\\\otimes_R A $ is an étale algebra over $ B $.\"}\n  {\"name\": \"Algebra.FormallyEtale.of_isSeparable\", \"module\": \"Mathlib.RingTheory.Etale.Field\", \"type\": \"[Algebra.IsSeparable K L] : FormallyEtale K L\", \"doc\": \"If an algebra $ L $ over a commutative ring $ K $ is separable, then it satisfies the infinitesimal lifting property characterizing formally étale morphisms in algebraic geometry.\"}",
    "date": "2026-10-19",
    "verdict": "no match: exists_etale_of_isEtaleAt gives a source localisation from an assumed etale stalk; it neither proves the stalk flat from torsion-freeness nor gives a base element outside the specified prime"
+  },
+  {
+   "tool": "grep",
+   "query": "[Ee]tale.*(IsTorsionFree|IsDiscreteValuationRing)|[Ee]tale.*[Ff]iber|[Ee]tale.*[Ff]ibre",
+   "results": "{\"t\": \"2026-10-18T21:12:32Z\", \"tool\": \"grep\", \"query\": \"[Ee]tale.*(IsTorsionFree|IsDiscreteValuationRing)|[Ee]tale.*[Ff]iber|[Ee]tale.*[Ff]ibre\", \"sub\": \"\", \"ok\": true, \"n_hits\": 11, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean\", \"Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean\", \"Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean\", \"Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean\", \"Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean\", \"Mathlib/RingTheory/Etale/QuasiFinite.lean\", \"Mathlib/RingTheory/Etale/Finite.lean\", \"Mathlib/RingTheory/Etale/Finite.lean\"], \"digest\": \"e1314b223fcf5453\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: results give etale loci, source principal neighbourhoods, or field criteria; none gives a base principal neighbourhood from the field-or-DVR and torsion-free hypotheses"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite flat algebra with separable fibre is etale over an open neighbourhood of that base point",
+   "results": "{\"t\": \"2026-10-18T21:12:32Z\", \"tool\": \"leansearch\", \"query\": \"A finite flat algebra with separable fibre is etale over an open neighbourhood of that base point\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallyEtale.of_isSeparable\", \"Algebra.FormallyEtale.of_isSeparable_aux\", \"Algebra.etaleLocus\", \"Algebra.isOpen_etaleLocus\", \"Algebra.mem_etaleLocus_iff\", \"Algebra.FormallyEtale.iff_isSeparable\", \"Algebra.Etale.of_isLocalizationAway\", \"Algebra.basicOpen_subset_etaleLocus_iff\"], \"digest\": \"f3bd9de36574eb2c\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: results give etale loci, source principal neighbourhoods, or field criteria; none gives a base principal neighbourhood from the field-or-DVR and torsion-free hypotheses"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.Etale, IsDiscreteValuationRing",
+   "results": "{\"t\": \"2026-10-18T21:12:33Z\", \"tool\": \"loogle\", \"query\": \"Algebra.Etale, IsDiscreteValuationRing\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: results give etale loci, source principal neighbourhoods, or field criteria; none gives a base principal neighbourhood from the field-or-DVR and torsion-free hypotheses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite torsion free algebra over a Noetherian domain is etale near a prime whose local ring is a field or DVR and whose fibre has zero differentials",
+   "results": "{\"t\": \"2026-10-18T21:12:33Z\", \"tool\": \"leanfinder\", \"query\": \"A finite torsion free algebra over a Noetherian domain is etale near a prime whose local ring is a field or DVR and whose fibre has zero differentials\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsEtaleAt\", \"Algebra.etaleLocus\", \"Algebra.exists_etale_of_isEtaleAt\", \"Algebra.mem_etaleLocus_iff\", \"Algebra.IsStandardEtale\", \"Algebra.Etale\", \"Algebra.instEtaleOfIsStandardEtale\", \"StandardEtalePair.instEtaleRing\"], \"digest\": \"a9e6b197c2cb9944\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: results give etale loci, source principal neighbourhoods, or field criteria; none gives a base principal neighbourhood from the field-or-DVR and torsion-free hypotheses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a module finite algebra B over R, etaleness of the fibre and freeness at a prime imply existence of a base element f outside the prime such that B localized at f is etale over R localized at f",
+   "results": "{\"t\": \"2026-10-18T21:15:10Z\", \"tool\": \"leanfinder\", \"query\": \"For a module finite algebra B over R, etaleness of the fibre and freeness at a prime imply existence of a base element f outside the prime such that B localized at f is etale over R localized at f\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.exists_etale_of_isEtaleAt\", \"Algebra.IsEtaleAt\", \"Algebra.mem_etaleLocus_iff\", \"Algebra.basicOpen_subset_etaleLocus_iff_etale\", \"RingHom.Etale.ofLocalizationSpan\", \"RingHom.Etale.ofLocalizationSpanTarget\", \"Algebra.basicOpen_subset_etaleLocus_iff\", \"Algebra.etaleLocus\"], \"digest\": \"9c4c83d636f087ea\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: results give etale loci, source principal neighbourhoods, or field criteria; none gives a base principal neighbourhood from the field-or-DVR and torsion-free hypotheses"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-cohen-gabber-finite-presentations",
@@ -82,5 +215,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-finite-algebra-etale-near-field-or-dvr",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Split into localized torsion-freeness and DVR freeness, spreading a finite basis, flatness and finite presentation on a principal open, the finite-field-algebra etale criterion for both alternatives, fibrewise etale source neighbourhoods, and closing their complement under the finite map. All supporting statements already exist; no new nodes.",
+  "blueprint": "Current split of the blueprint ancestor lem-per-artin-gabber-affine-curve, Step 1: the dimension-normalized Verdier duality input, through lem-per-qbar-arbitrary-field-duality and its finite-coefficient local-duality construction; this item's partial algebraization is used in Step 4 of lem-per-gabber-local-duality-general. Supporting input: Cohen–Gabber presentations with an etale open meeting the special fibre; the finite presentation input itself: ILO IV 2.1.4–2.1.12 and IV 4.2.3–4.2.5. Supporting input: Etale base neighbourhood from a field or DVR stalk",
+  "tool_uses": [
+   {
+    "node": "lem-pc-affine-flat-module-local-criterion",
+    "why": "Generic localization of module flatness converts the finite free section algebra into stalkwise flatness; the perverse unit contains no such commutative-algebra tool."
+   },
+   {
+    "node": "lem-sbc-flat-fibre-etale-neighbourhoods",
+    "why": "Generic pointwise etale fibre criterion for a flat locally finitely presented morphism, used as a black box to obtain source neighbourhoods. It does not replace any perverse or duality argument."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-affine-flat-module-local-criterion",
+  "lem-sbc-flat-fibre-etale-neighbourhoods"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q69-fa56b0fc5",
+  "group": "Q69",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q69-fa56b0fc5 (reviewer sub-agent of L); spot-checked: I read the item, all six steps and all 16 cited statements. The statement is unchanged and has no new nodes or SGA citations. It is true; I tested B=0 (empty fibre, conclusion vacuous), B=R^n, the generic point, a ramified DVR algebra (excluded), R/(t) (excluded by torsion-freeness) and an inseparable residue extension (excluded). Step 1: the localization criterion plus the DVR freeness lemma (0AUW(3), more-algebra.tex:4954) give B_p finite free. Step 2: 00FP finite presentation plus 0GWM freeness at one prime give g with B_g finite free. Step 3: lfp, flat (via the 00HT(6) tool) and finite (via the 01PB clause of the finite-morphism definition). Step 4: κ(pR_g)=κ(p) and the fibre ring is the actual tensor product ≅ F. The finite-étale algebra criterion covers both (i) and (ii), and its notion of étale is def-weil-etale-morphism (checked in the conventions node; 00U3 at algebra.tex:39394). Step 5: the flat-fibre étale-neighbourhood tool (02GU (1)⇔(2), morphisms.tex:8318) is used only through its statement, and empty fibres are allowed. Step 6: a finite map is closed, f∈I∖p gives D(f)⊆W⊆D(g), and h⁻¹(D(f))=Spec B_f because g is a unit in R_f. No duplicates: the codim-one étale-neighbourhood and trace-discriminant nodes state different things. I accept the two tool_uses (00HT localization and the flat-fibre étale criterion). Maintainer note: the source tags on the 0517 and 02GM dependency nodes are imprecise; this was reported by the worker and the nodes were left unedited."
  }
 }
