@@ -27,69 +27,39 @@
  ],
  "proof": [
   {
-   "text": "The structure morphism C\\to\\operatorname{Spec}k is smooth by hypothesis. The projection f_T:C_T\\to T is its base change along T\\to\\operatorname{Spec}k, so f_T is smooth by [lem-pc-proper-base-change](2), the base-change stability of smooth morphisms in [def-sbc-smooth-morphisms].",
+   "text": "The curve instance [def-pc-curve] gives IsIntegral C, hence IrreducibleSpace C, and IsIntegralCurve.topologicalKrullDim_eq_one gives topologicalKrullDim C = 1. Apply the proved source-library theorem AlgebraicGeometry.smoothOfRelativeDimension_iff_topologicalKrullDim_eq f 1 to this equality and the assumed smoothness [def-sbc-smooth-morphisms], obtaining SmoothOfRelativeDimension 1 f. This uses the canonical curve dimension directly, without introducing Scheme.dim or identifying a fibre over Spec k.",
    "uses": [
-    "lem-pc-proper-base-change",
-    "def-sbc-smooth-morphisms"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tag 01VB (lemma-base-change-smooth), equivalently Tags 02H2 and 01TS for the formal-smooth definition"
-   }
-  },
-  {
-   "text": "For x\\in C_T with t=f_T(x), the fibre (C_T)_t is canonically C\\times_{\\operatorname{Spec}k}\\operatorname{Spec}\\kappa(t) by associativity of the fibre-product defining C_T and the scheme-theoretic fibre. Thus it is the fibre of C\\to\\operatorname{Spec}k after base change to \\kappa(t), and x maps to a point of C.",
-   "uses": [
-    "def-pc-base-change",
-    "def-pc-scheme-fibre"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tag 02FY (lemma-dimension-fibre-after-base-change), part (1)"
-   }
-  },
-  {
-   "text": "Apply [lem-sc-fibre-dimension-after-base-change] to C\\to\\operatorname{Spec}k and T\\to\\operatorname{Spec}k. The fibre of C\\to\\operatorname{Spec}k over its unique point s is C itself, since \\kappa(s)=k, so the X_s occurring in that lemma is C. It gives dim_x((C_T)_t)=dim_y(C), where y is the image of x in C. By [def-pc-curve], dim C=1 in the sense of [def-pc-dimension]. Hence the topological dimension of C is 1 by [lem-pc-scheme-dimension-local-rings], and dim_y(C)=1 for every y by [lem-sc-dimension-locally-algebraic], because C is integral and therefore irreducible and its structure morphism is of finite type, hence locally of finite type. Thus dim_x((C_T)_t)=1 for every x.",
-   "uses": [
-    "lem-sc-fibre-dimension-after-base-change",
     "def-pc-curve",
-    "lem-pc-scheme-dimension-local-rings",
-    "lem-sc-dimension-locally-algebraic"
+    "def-sbc-smooth-morphisms"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tag 02NK (lemma-base-change-relative-dimension-d), using Tag 02FY (1); for C over a field, Tag 0A21 (lemma-dimension-locally-algebraic), part (3)"
+    "document": "lean/WeilConjectures/Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean",
+    "place": "smoothOfRelativeDimension_iff_topologicalKrullDim_eq; the same application appears in IsSmoothProjectiveCurve.smoothOfRelativeDimension in lean/WeilConjectures/AlgebraicGeometry/Curve/SmoothProjective.lean and needs only IsIntegralCurve and Smooth"
    }
   },
   {
-   "text": "Combining smoothness from step 1 with the fibre-dimension calculation from step 3 is exactly the definition of smooth of relative dimension 1 [def-sbc-smooth-morphisms].",
+   "text": "The source-library instance AlgebraicGeometry.smoothOfRelativeDimension_pullback_snd applies to f and g, using Mathlib smoothOfRelativeDimension_isStableUnderBaseChange. It gives SmoothOfRelativeDimension 1 (pullback.snd f g), the base-changed morphism of [def-pc-base-change]. This preserves smoothness and the dimension simultaneously, and works also when T is empty.",
    "uses": [
-    "def-sbc-smooth-morphisms"
+    "def-sbc-smooth-morphisms",
+    "def-pc-base-change"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
-    "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-prop-jacobian/_section.md",
-    "place": "proof, step (4), Connectedness, family C_T -> T"
+    "document": "lean/WeilConjectures/Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean",
+    "place": "smoothOfRelativeDimension_pullback_snd, using Mathlib.AlgebraicGeometry.Morphisms.Smooth.smoothOfRelativeDimension_isStableUnderBaseChange (Stacks Tags 02NK, 01VB)"
    }
   }
  ],
  "proof_deps": [
-  "lem-pc-proper-base-change",
-  "def-sbc-smooth-morphisms",
-  "def-pc-base-change",
-  "def-pc-scheme-fibre",
-  "lem-sc-fibre-dimension-after-base-change",
   "def-pc-curve",
-  "lem-pc-scheme-dimension-local-rings",
-  "lem-sc-dimension-locally-algebraic"
+  "def-sbc-smooth-morphisms",
+  "def-pc-base-change"
  ],
  "proof_origin": {
   "by": "document",
-  "document": "literature/stacks-project/morphisms.tex",
-  "place": "Tags 02NK, 02FY, 01VB and 0A21"
+  "document": "lean/WeilConjectures/Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean",
+  "place": "smoothOfRelativeDimension_iff_topologicalKrullDim_eq and smoothOfRelativeDimension_pullback_snd; composed by D2 on 2026-10-18"
  },
  "mathlib_searches": [
   {
@@ -161,9 +131,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-pc-proper-base-change"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-10",
   "by": "L",
@@ -176,7 +144,7 @@
   "module": "Sheaf.AlgebraicGeometry.CurveBaseChangeRelativeDimensionOne",
   "declaration": "AlgebraicGeometry.curve_baseChange_smoothOfRelativeDimension_one",
   "file": "lean/Sheaf/AlgebraicGeometry/CurveBaseChangeRelativeDimensionOne.lean",
-  "statement": "theorem curve_baseChange_smoothOfRelativeDimension_one {k : Type u} [Field k] {C T : Scheme.{u}} (f : C \u27f6 Spec (.of k)) [IsIntegralCurve f] [Smooth f] (g : T \u27f6 Spec (.of k)) : SmoothOfRelativeDimension 1 (pullback.snd f g)",
+  "statement": "theorem curve_baseChange_smoothOfRelativeDimension_one {k : Type u} [Field k] {C T : Scheme.{u}} (f : C ⟶ Spec (.of k)) [IsIntegralCurve f] [Smooth f] (g : T ⟶ Spec (.of k)) : SmoothOfRelativeDimension 1 (pullback.snd f g)",
   "branch": "sheaf-dag",
   "by": "F1",
   "date": "2026-10-11",
@@ -189,6 +157,16 @@
   "reviewer": "R-cbc0931",
   "group": "F1",
   "result": "fix",
-  "note": "FIX: conclusion 'smooth of relative dimension 1 in the sense of def-sbc-smooth-morphisms' restated with that node's recorded declaration SmoothOfRelativeDimension 1 (pullback.snd f g) instead of an inline Smooth \u2227 \u2200x topologicalKrullDimAt(asFiber x)=1 expansion (H4, one notion one declaration; downstream hilb-to-pic/Cartier criterion consume SmoothOfRelativeDimension); renamed to curve_baseChange_smoothOfRelativeDimension_one. Matched: k field; f : C \u27f6 Spec k with IsCurveOverField (integral, separated, lft+qc, C.dim=1); Smooth f; arbitrary g : T \u27f6 Spec k (explicit form ok for base change); C_T = pullback f g, f_T = pullback.snd; empty T vacuous; universe u common"
+  "note": "FIX: conclusion 'smooth of relative dimension 1 in the sense of def-sbc-smooth-morphisms' restated with that node's recorded declaration SmoothOfRelativeDimension 1 (pullback.snd f g) instead of an inline Smooth ∧ ∀x topologicalKrullDimAt(asFiber x)=1 expansion (H4, one notion one declaration; downstream hilb-to-pic/Cartier criterion consume SmoothOfRelativeDimension); renamed to curve_baseChange_smoothOfRelativeDimension_one. Matched: k field; f : C ⟶ Spec k with IsCurveOverField (integral, separated, lft+qc, C.dim=1); Smooth f; arbitrary g : T ⟶ Spec k (explicit form ok for base change); C_T = pullback f g, f_T = pullback.snd; empty T vacuous; universe u common"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261018T062720-L-638946",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
