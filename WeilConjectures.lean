@@ -7434,6 +7434,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.Completion
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.Defs
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.IntegralCoefficient
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.IntegralCompletion
+public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.IntegralIdempotentComplete
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.NormalizedTower
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.Principal
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.QuotPowTriangle
@@ -8292,6 +8293,7 @@ public import WeilConjectures.DeligneLaumon.Reduction.RelativeLineStratification
 public import WeilConjectures.DeligneLaumon.Reduction.TraceReality
 public import WeilConjectures.DeligneLaumon.Reduction.Weights
 public import WeilConjectures.EtaleCohomology.PoincareDuality.Degreewise
+public import WeilConjectures.EtaleCohomology.PoincareDuality.FiniteReduction
 public import WeilConjectures.EtaleCohomology.PoincareDuality.Frobenius
 public import WeilConjectures.EtaleCohomology.PoincareDuality.Frobenius.Equivariance
 public import WeilConjectures.EtaleCohomology.PoincareDuality.Frobenius.Pairings
