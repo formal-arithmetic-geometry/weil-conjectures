@@ -88,9 +88,12 @@ lemma isIso_tensorBaseChangeHomologyMap_app_iff
         (UpperStarPreservesFlat.preservesFlat _ h𝓖))
   have h₁ : IsIso ((tensorBaseChangeHomologyTrunc Λ p f' g 𝓕 q).app 𝓖) :=
     isIso_homologyFunctor_map_whiskerLeft_truncLEι hA _ q
-  have h₂ : IsIso ((tensorBaseChangeHomologyComparison Λ p h e 𝓕 q).app 𝓖) :=
-    Functor.map_isIso _ (isIso_singleFunctorTensorToSingle_app _ _
-      (UpperStarPreservesFlat.preservesFlat _ (UpperStarPreservesFlat.preservesFlat _ h𝓖)))
+  have h₂ : IsIso ((tensorBaseChangeHomologyComparison Λ p h e 𝓕 q).app 𝓖) := by
+    have := (isIso_singleFunctorTensorToSingle_app ((e)^*[ModuleCat.{u + 1} Λ].obj 𝓕) _
+        (UpperStarPreservesFlat.preservesFlat _ (UpperStarPreservesFlat.preservesFlat _ h𝓖)))
+    simp only [tensorBaseChangeHomologyComparison, Functor.whiskerLeft_app, NatTrans.comp_app,
+      Functor.whiskerRight_app, Functor.associator_hom_app, Category.comp_id]
+    infer_instance
   rw [tensorBaseChangeHomologyMap, NatTrans.comp_app, NatTrans.comp_app, NatTrans.comp_app,
     isIso_comp_left_iff, isIso_comp_right_iff, isIso_comp_right_iff]
   rfl

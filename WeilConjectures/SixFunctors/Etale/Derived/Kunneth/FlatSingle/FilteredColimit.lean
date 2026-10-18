@@ -44,7 +44,11 @@ theorem preservesColimitsOfShape_singleFunctor_rightDerivedLowerStar
     PreservesColimitsOfShape J
       (DerivedCategory.singleFunctor (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) 0 ⋙
         R((h)_*[ModuleCat.{u + 1} Λ]) ⋙ DerivedCategory.homologyFunctor _ q) :=
-  have := preservesColimitsOfShape_higherDirectImage_large Λ h q J
+  have : PreservesColimitsOfShape J
+      (DerivedCategory.Plus.singleFunctor (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) 0 ⋙
+        (R+((h)_*[ModuleCat.{u + 1} Λ]) ⋙ DerivedCategory.Plus.ι) ⋙
+          DerivedCategory.homologyFunctor _ q) :=
+    preservesColimitsOfShape_higherDirectImage_large Λ h q J
   preservesColimitsOfShape_of_natIso
     (Functor.isoWhiskerLeft (DerivedCategory.Plus.singleFunctor _ 0)
       (Functor.isoWhiskerRight
