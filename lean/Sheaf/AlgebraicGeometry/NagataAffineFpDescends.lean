@@ -6,6 +6,7 @@ Authors: SHEAF group P1
 module
 
 public import Sheaf.AlgebraicGeometry.NagataAffineFpDescent
+import Mathlib.RingTheory.FinitePresentation
 
 /-!
 # Affine finite-presentation descent
@@ -39,6 +40,11 @@ theorem nagata_affine_fp_descends {I : Type v} [Preorder I]
     Algebra.FinitePresentation (F.obj E.stage) E.stageAlgebra ∧
       ∃ e : (↑(colimit F) ⊗[F.obj E.stage] E.stageAlgebra) ≃ₐ[↑(colimit F)] E.algebra,
         e.toAlgHom = E.beta := by
-  sorry
+  constructor
+  · apply Algebra.FinitePresentation.iff.mpr
+    refine ⟨n, Ideal.span (Set.range E.relationMap), E.stagePresentation.symm, ?_⟩
+    exact Submodule.fg_span (Set.finite_range E.relationMap)
+  · refine ⟨E.tensorPresentation.trans E.presentation.symm, ?_⟩
+    exact E.beta_eq.symm
 
 end AlgebraicGeometry
