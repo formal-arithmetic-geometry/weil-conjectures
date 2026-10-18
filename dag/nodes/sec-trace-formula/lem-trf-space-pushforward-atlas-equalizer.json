@@ -12,7 +12,8 @@
   "def-trf-algebraic-space",
   "def-weil-sheaf-of-modules-category",
   "def-trf-space-etale-module-functors",
-  "lem-trf-space-fibre-products-etale-covers"
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-trf-scheme-algebraic-space"
  ],
  "proof": [
   {
@@ -216,5 +217,24 @@
   "group": "Q42",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q42-812b2c486 (reviewer sub-agent of L); spot-checked: I read the whole item. I checked it against Stacks 03M8 (spaces-morphisms lemma-compute-pushforward, statement and proof) and against the cited places 03H7, 03G2/03G8, 03LV/03LW and 041F(3). Hypotheses: S, f, a surjective étale atlas and an arbitrary O_X-module are all kept. The extra 'U affine' comes from the import and is unused; it is harmless for the only citer (qc-separated pushforward). The coefficient category is Mod(O_X) on the small étale site, as in the source. Statement change: 'F_R=p_1^*F' was ill-typed and is now 'F_R=p_1^*F_U ≅ p_2^*F_U', which only fixes the types and is accepted. Source error confirmed: the printed (V×_YU)×_X(V×_YU)=V×_YR fails for Y=X=U=Spec k with V two points (4 points against 2); the overlap must be taken over W=V×_YX, and step 3 proves that version. Steps: (1) the enlarged-site model and the sites definition give f_*F(V)=F̃(X×_YV), consistent with the chart-limit definition of f_*. (2) The fibre-product and permanence nodes show Z→W is a covering and Z, Q, R are schemes. (3) The overlap computation is elementary and I re-derived it. (4) Étale tensor pullback is restriction, by the pushforward-restriction node and the model's localization clause. (5) The singleton-cover equalizer axiom gives the sequence, with O_Y(V)-linearity. (6) Kernels are sectionwise. Edge cases checked: empty X, F=0, the identity atlas, and the two-affine atlas of P^1. Duplicate searches (03M8 and equalizer terms over dag/nodes, and blueprint_refs) found nothing. All cited statements are in sk-i-curve-zero; the off-unit citations are definitions only, so no tool_uses. No cycle, proof_deps equals the union of uses, no new nodes, no SGA, and no fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicSpacePushforwardAtlasEqualizer",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.moduleDirectImage_atlas_equalizer",
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicSpacePushforwardAtlasEqualizer.lean",
+  "statement": "theorem moduleDirectImage_atlas_equalizer {S : Scheme.{u}} {X Y : AlgebraicSpace S} (f : X ⟶ Y) (U : Over S) [IsAffine U.left] (p : schemeSpace U ⟶ X) (hp : IsEtale p.hom.hom) (hs : IsSurjective p.hom.hom) (F : X.Modules) : ∃ (R : Over S) (p₁ p₂ : schemeSpace R ⟶ schemeSpace U) (h₁ : IsEtale p₁.hom.hom) (h₂ : IsEtale p₂.hom.hom), IsPullback p₁.hom p₂.hom p.hom p.hom ∧ ∃ (ι : (moduleDirectImage f).obj F ⟶ (moduleDirectImage (p ≫ f)).obj ((pullback p hp).obj F)) (r₁ r₂ : (moduleDirectImage (p ≫ f)).obj ((pullback p hp).obj F) ⟶ (moduleDirectImage ((p₁ ≫ p) ≫ f)).obj ((pullback (p₁ ≫ p) (isEtale_comp p₁.hom.hom p.hom.hom h₁ hp)).obj F)), (∀ (V : Y.EtaleSite) (q : ModuleChart f V) (t : ModuleChart (p ≫ f) V), q.left.obj = (moduleChartTarget p).obj t.left → HEq q.hom.left t.hom.left → ∀ s : ((moduleDirectImage f).obj F).val.obj (op V), HEq (((moduleDirectImageModel (p ≫ f)).projection ((pullback p hp).obj F) V).app (op t) (ι.val.app (op V) s)) (((moduleDirectImageModel f).projection F V).app (op q) s)) ∧ (∀ (V : Y.EtaleSite) (q : ModuleChart (p ≫ f) V) (t : ModuleChart ((p₁ ≫ p) ≫ f) V), q.left.obj = (moduleChartTarget p₁).obj t.left → HEq q.hom.left t.hom.left → ∀ s : ((moduleDirectImage (p ≫ f)).obj ((pullback p hp).obj F)).val.obj (op V), HEq (((moduleDirectImageModel ((p₁ ≫ p) ≫ f)).projection ((pullback (p₁ ≫ p) (isEtale_comp p₁.hom.hom p.hom.hom h₁ hp)).obj F) V).app (op t) (r₁.val.app (op V) s)) (((moduleDirectImageModel (p ≫ f)).projection ((pullback p hp).obj F) V).app (op q) s)) ∧ (∀ (V : Y.EtaleSite) (q : ModuleChart (p ≫ f) V) (t : ModuleChart ((p₁ ≫ p) ≫ f) V), q.left.obj = (moduleChartTarget p₂).obj t.left → HEq q.hom.left t.hom.left → ∀ s : ((moduleDirectImage (p ≫ f)).obj ((pullback p hp).obj F)).val.obj (op V), HEq (((moduleDirectImageModel ((p₁ ≫ p) ≫ f)).projection ((pullback (p₁ ≫ p) (isEtale_comp p₁.hom.hom p.hom.hom h₁ hp)).obj F) V).app (op t) (r₂.val.app (op V) s)) (((moduleDirectImageModel (p ≫ f)).projection ((pullback p hp).obj F) V).app (op q) s)) ∧ ∃ hz : ι ≫ (r₁ - r₂) = 0, Nonempty (IsLimit (KernelFork.ofι ι hz))",
+  "branch": "newtargets-dag",
+  "by": "Q87",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "The three arrows are characterized by their values on every compatible scheme chart, using the recorded chart-limit direct image. The overlap is a scheme with a genuine sheaf pullback square. For étale maps the recorded restriction functor represents tensor pullback, with the normalized comparison supplied by lem-trf-space-etale-module-pushforward-restriction. The kernel-fork limit gives exactness at the first two terms. The new definition node def-trf-scheme-algebraic-space owns the existing schemeSpace construction; the enlarged-site theorem remains a proof dependency only. The Lean module is unchanged from the reviewed returned head."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-46a4b301a",
+  "group": "Q87",
+  "result": "pass",
+  "note": "Re-delivery after the H2 return of 42c5692b. The Lean module is byte-identical (sha256 f79fe776…), so the previous clause-by-clause check stands. The item's stmt_deps replace the theorem lem-trf-space-enlarged-etale-ringed-site-model with the new def-trf-scheme-algebraic-space, and the theorem stays in proof_deps; against live the item only adds that def stmt_dep. The new node matches Stacks 025Y/03G1, depends only on def-pc-scheme, def-trf-algebraic-space and def-pc-fppf-site, and has no proof deps, so no cycle. Its lean record is existing:true on the unchanged EnlargedEtaleRingedSite, lists schemeSpace and schemeSheaf_isAlgebraicSpace, and gives the def schemeSpace signature verbatim; check_existing returns no failures. schemeSpace is the only owner-module declaration the signature uses, and no other node owns it live or in runs/2. nt_compile --json is clean (4.0 s, rc 0). Advisories: the owner docstrings keep the theorem's blueprint tag, and the inherited theorem stmt_dep lem-trf-space-fibre-products-etale-covers contributes no signature declaration."
  }
 }

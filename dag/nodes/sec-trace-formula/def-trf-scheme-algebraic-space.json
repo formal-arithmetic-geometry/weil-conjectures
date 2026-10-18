@@ -1,0 +1,120 @@
+{
+ "id": "def-trf-scheme-algebraic-space",
+ "kind": "definition",
+ "title": "A scheme as its representable algebraic space",
+ "status": "split",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and let $T\\to S$ be a scheme over $S$. Regard $T$ as an algebraic space over $S$ [def-trf-algebraic-space] by the representable sheaf $h_T$ on the big fppf site $(\\mathit{Sch}/S)_{fppf}$ [def-pc-fppf-site], where $h_T(V)=\\operatorname{Mor}_S(V,T)$ and restriction is precomposition. Its diagonal is represented by scheme fibre products, and the identity $h_T\\to h_T$ is a surjective etale scheme atlas. Thus this construction retains the actual Yoneda representable sheaf, endowed with its algebraic-space property.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-pc-fppf-site"
+ ],
+ "source": {
+  "document": "literature/stacks-project/spaces.tex; literature/stacks-project/spaces-properties.tex",
+  "place": "Tag 025Y (definition-algebraic-space), applied to a representable sheaf; Tag 03G1 (lemma-compare-etale-sites), the inclusion of scheme objects as algebraic spaces."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A scheme over S gives an algebraic space by its representable fppf sheaf",
+   "results": "{\"t\": \"2026-10-18T21:33:57Z\", \"tool\": \"leansearch\", \"query\": \"A scheme over S gives an algebraic space by its representable fppf sheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.mk.noConfusion\", \"AlgebraicGeometry.Scheme\", \"AlgebraicGeometry.Scheme.sheaf\", \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.scheme\", \"AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable\", \"AlgebraicGeometry.Scheme.mk\", \"AlgebraicGeometry.AffineScheme\", \"AlgebraicGeometry.Scheme.toLocallyRingedSpace\"], \"digest\": \"4f65dad0fd11697d\"}",
+   "date": "2026-10-18",
+   "verdict": "No Mathlib match; use the existing side-project schemeSpace construction, with a new definition node because no definition node owns it."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A scheme over S regarded as an algebraic space using the representable fppf sheaf",
+   "results": "{\"t\": \"2026-10-18T21:33:59Z\", \"tool\": \"leanfinder\", \"query\": \"A scheme over S regarded as an algebraic space using the representable fppf sheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.asOver\", \"AlgebraicGeometry.Scheme.Over\", \"AlgebraicGeometry.Scheme.CanonicallyOver\", \"AlgebraicGeometry.Scheme.forget\", \"AlgebraicGeometry.Scheme.hasCoeToTopCat\", \"AlgebraicGeometry.Scheme.instCoeSortType\", \"AlgebraicGeometry.Scheme.forgetToTop_obj\", \"AlgebraicGeometry.Scheme\"], \"digest\": \"caece08fa164931b\"}",
+   "date": "2026-10-18",
+   "verdict": "No Mathlib match; use the existing side-project schemeSpace construction, with a new definition node because no definition node owns it."
+  },
+  {
+   "tool": "grep",
+   "query": "schemeSpace|schemeSheaf_isAlgebraicSpace|IsAlgebraicSpace",
+   "results": "{\"t\": \"2026-10-18T21:33:59Z\", \"tool\": \"grep\", \"query\": \"schemeSpace|schemeSheaf_isAlgebraicSpace|IsAlgebraicSpace\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "No Mathlib match; use the existing side-project schemeSpace construction, with a new definition node because no definition node owns it."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n schemeSpace|schemeSheaf_isAlgebraicSpace|IsAlgebraicSpace /home/ubuntu/weil-src-slopmaster2/WeilConjectures; rg -n schemeSpace|schemeSheaf_isAlgebraicSpace lean/Sheaf/AlgebraicGeometry/EnlargedEtaleRingedSite.lean; rg -l representable.*fppf.*sheaf|schemeSpace|schemeSheaf_isAlgebraicSpace dag/nodes; blueprint_refs.py search \"scheme algebraic space\"",
+   "results": "No upstream WeilConjectures match. Side-project EnlargedEtaleRingedSite.lean:68-76 gives schemeSheaf_isAlgebraicSpace and schemeSpace. DAG declaration-name matches occur only in theorem-node records lem-trf-space-enlarged-etale-ringed-site-model and lem-trf-space-chartwise-etale-permanence; none is a definition node owning this construction. Conceptual DAG hits are algebraic-space constructions/descent and related statements, not this definition. Zero blueprint nodes match the exact phrase.",
+   "date": "2026-10-18",
+   "verdict": "Reuse the published declarations; add only the missing definition-node ownership, as required by the maintainer return."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-space-pushforward-atlas-equalizer",
+  "date": "2026-10-18",
+  "group": "Q87"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Stacks 03M9 proof invoking 03M8: regard the scheme atlas U and its scheme overlap R as algebraic spaces in the direct-image equalizer.",
+   "via": [
+    "lem-trf-space-pushforward-atlas-equalizer",
+    "lem-trf-space-qc-separated-quasi-coherent-pushforward",
+    "lem-trf-space-section-algebra-etale-base-change",
+    "lem-trf-algebraic-space-ample-local",
+    "lem-trf-polarized-scheme-etale-descent",
+    "lem-trf-polarized-fine-log-etale-descent",
+    "lem-trf-coherent-log-ideal-chart-construction",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EnlargedEtaleRingedSite",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.schemeSpace",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.schemeSheaf_isAlgebraicSpace",
+   "AlgebraicGeometry.AlgebraicSpace.schemeSpace"
+  ],
+  "statement": "def schemeSpace (T : Over S) : AlgebraicSpace S",
+  "branch": "newtargets-dag",
+  "by": "Q87",
+  "date": "2026-10-18",
+  "existing": true,
+  "note": "Existing published construction, not a duplicate module. schemeSpace has actual Yoneda sheaf data; schemeSheaf_isAlgebraicSpace supplies only its Prop-valued algebraic-space property. This definition node gives the construction an owner independently of the enlarged-site theorem, as requested in the return for head 42c5692beb6b. The declarations and their module are unchanged."
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-46a4b301a",
+  "group": "Q87",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-46a4b301a",
+  "group": "Q87",
+  "result": "pass",
+  "note": "Re-delivery after the H2 return of 42c5692b. The Lean module is byte-identical (sha256 f79fe776…), so the previous clause-by-clause check stands. The item's stmt_deps replace the theorem lem-trf-space-enlarged-etale-ringed-site-model with the new def-trf-scheme-algebraic-space, and the theorem stays in proof_deps; against live the item only adds that def stmt_dep. The new node matches Stacks 025Y/03G1, depends only on def-pc-scheme, def-trf-algebraic-space and def-pc-fppf-site, and has no proof deps, so no cycle. Its lean record is existing:true on the unchanged EnlargedEtaleRingedSite, lists schemeSpace and schemeSheaf_isAlgebraicSpace, and gives the def schemeSpace signature verbatim; check_existing returns no failures. schemeSpace is the only owner-module declaration the signature uses, and no other node owns it live or in runs/2. nt_compile --json is clean (4.0 s, rc 0). Advisories: the owner docstrings keep the theorem's blueprint tag, and the inherited theorem stmt_dep lem-trf-space-fibre-products-etale-covers contributes no signature declaration."
+ }
+}
