@@ -9,11 +9,69 @@
  },
  "stmt_deps": [
   "def-weil-abstract-derived-category",
-  "def-weil-pbc-flat-ring-map"
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-module-tensor-product",
+  "lem-pc-derived-tensor-second-factor-functor"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $f:A\\to B$ for the given surjection and regard $B$ as an $A$-module through $f$. For any acyclic $A$-module complex $F^\\bullet$, each sequence $F^{n-1}\\to F^n\\to F^{n+1}$ is exact. Since $B$ is flat, [lem-weil-pbc-flat-tensor-exact] says that $F^{n-1}\\otimes_A B\\to F^n\\otimes_A B\\to F^{n+1}\\otimes_A B$ is exact for every $n$. The total tensor with $B[0]$ is precisely this termwise tensor complex, so it is acyclic. Thus $B[0]$ is K-flat by [def-pc-module-kflat-complex].",
+   "uses": [
+    "lem-weil-pbc-flat-tensor-exact",
+    "def-pc-module-kflat-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 06XZ (definition-K-flat), applied using Tag 00HD (algebra-lemma-flat)"
+   }
+  },
+  {
+   "text": "Apply clause (2) of [lem-pc-derived-tensor-second-factor-functor] with its base ring $R=A$, target ring $A=B$, second complex $N=B[0]$, and first complex $E=B[0]$. By Step 1 the identity $B[0]\\to B[0]$ is a K-flat resolution. The resulting canonical K-flat computation identifies $B\\otimes_A^{\\mathbf L}B$ with $(B\\otimes_A B)[0]$ in $D(B)$, with the $B$-action through the second factor. In this identity-resolution model the canonical derived multiplication is represented by the ordinary multiplication chain map $\\mu[0]$, where $\\mu(b\\otimes c)=bc$: the derived-to-underived comparison on the chosen resolution is the identity.",
+   "uses": [
+    "lem-pc-derived-tensor-second-factor-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 06Y6 (lemma-derived-base-change), construction immediately before the lemma, with the identity K-flat resolution"
+   }
+  },
+  {
+   "text": "Use the balanced tensor relations and pure-tensor generation of [def-weil-pbc-module-tensor-product]. Multiplication is $A$-bilinear and so gives $\\mu:B\\otimes_A B\\to B$. Define $\\nu:B\\to B\\otimes_A B$ by $\\nu(c)=1\\otimes c$; both maps are $B$-linear for the second-factor action. We have $\\mu\\nu(c)=c$. For a pure tensor $b\\otimes c$, choose $a\\in A$ with $f(a)=b$, using surjectivity. Then $b\\otimes c=(a\\cdot1)\\otimes c=1\\otimes(a\\cdot c)=1\\otimes bc=\\nu\\mu(b\\otimes c)$. Generation by pure tensors gives $\\nu\\mu=\\mathrm{id}$. Hence $\\mu$ is an isomorphism with the displayed inverse.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CX (lemma-tensor-product), universal property and balanced tensor relations; explicit surjection calculation"
+   }
+  },
+  {
+   "text": "The inverse maps in Step 3 give inverse chain maps $\\mu[0]$ and $\\nu[0]$. The localization functor defining the derived category [def-weil-abstract-derived-category] preserves their two inverse equations. Consequently $\\mu[0]$ is invertible in $D(B)$; Step 2 identifies this very morphism with the canonical multiplication $B\\otimes_A^{\\mathbf L}B\\to B[0]$. It is therefore an isomorphism, also after restriction to $D(A)$.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 06Y6 (lemma-derived-base-change), K-flat model; concluding inverse equations"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-flat-tensor-exact",
+  "def-pc-module-kflat-complex",
+  "lem-pc-derived-tensor-second-factor-functor",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 06XZ and Tag 06Y6, with the explicit ordinary-tensor inverse calculation supporting cotangent.tex Tag 08R2"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -35,10 +93,45 @@
    "results": "0 hits",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a flat surjective homomorphism of commutative rings A to B the canonical derived tensor multiplication B tensor derived over A B to B is an isomorphism",
+   "results": "8 hits: Module.FaithfullyFlat.surjective_of_tensorProduct, KaehlerDifferential.tensorProductTo_surjective, Algebra.kerTensorProductMapIdToAlgHomEquiv_symm_apply, Algebra.FormallySmooth.instTensorProduct, LinearMap.kerLTensorEquivOfSurjective, Module.FaithfullyFlat.bijective_of_tensorProduct, Algebra.kerTensorProductMapIdToAlgHomEquiv, Algebra.FormallyEtale.instTensorProduct; hits concern ordinary tensor, flatness, differentials or descent, not the full derived-category multiplication.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, TensorProduct, Module.Flat",
+   "results": "0 hits: ; hits concern ordinary tensor, flatness, differentials or descent, not the full derived-category multiplication.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*[Tt]ensor|[Tt]ensor.*derived|mul._bijective_of_surjective|isEpi_iff_forall_one_tmul_eq",
+   "results": "15 hits: Mathlib/RepresentationTheory/Homological/GroupHomology/Basic.lean, Mathlib/RepresentationTheory/Homological/GroupHomology/Basic.lean, Mathlib/Algebra/Algebra/Epi.lean, Mathlib/Algebra/Algebra/Epi.lean, Mathlib/Algebra/Algebra/Epi.lean, Mathlib/Algebra/Algebra/Epi.lean, Mathlib/Algebra/Algebra/Epi.lean, Mathlib/Algebra/Category/Ring/Epi.lean; read Maps.lean:883-890: LinearMap.mul'_bijective_of_surjective proves only the ordinary tensor assertion; read Monoidal/Tor.lean:41-56: defines homology-valued Tor, not the full derived-category multiplication.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A flat surjective ring homomorphism has canonical derived self tensor product isomorphic to the target ring",
+   "results": "8 hits: RingHom.Flat.ofLocalizationSpanTarget, Module.FaithfullyFlat.surjective_of_tensorProduct, ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat, LinearMap.kerLTensorEquivOfSurjective, Module.Flat.iff_flat_tensorProduct, RingHom.FaithfullyFlat, RingHom.FaithfullyFlat.iff_flat_and_comap_surjective, RingHom.Flat; hits concern ordinary tensor, flatness, differentials or descent, not the full derived-category multiplication.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived tensor of two modules with one flat factor is the ordinary tensor product in degree zero",
+   "results": "8 hits: Module.Flat.rTensor_shortComplex_exact, Module.Flat.lTensor_shortComplex_exact, Module.Flat.iff_rTensor_preserves_shortComplex_exact, Module.Flat.iff_lTensor_preserves_shortComplex_exact, Module.Flat.iff_lTensor_exact', LinearMap.tensorKerEquiv_apply, Module.FaithfullyFlat.one_tmul_eq_zero_iff, Module.Flat.iff_lTensor_exact; hits concern ordinary tensor, flatness, differentials or descent, not the full derived-category multiplication.",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-etale-cotangent-vanishing",
@@ -68,5 +161,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-flat-epimorphism-derived-self-tensor",
+  "worker": "stage1",
+  "summary": "Preserved the surjective-flat statement. Proved K-flatness of B[0] directly by the existing flat tensor exactness theorem, used the canonical identity-resolution tensor model, and wrote both inverse equations for multiplication. Reused all inputs; no new nodes. Read the actual cited statements and checked the second-factor B-action and canonical multiplication.",
+  "blueprint": "Supporting ring input along the ancestry from lem-trf-local-term-locality through lem-trf-etale-cotangent-vanishing: makes explicit the flat-surjection derived self-tensor computation used in the Tag 08R2 argument. This item is not a key node of sk-i-curve-zero; no unit realization changed. Whole-blueprint searches for self-tensor, epimorphism and derived tensor flat found no equal statement.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-derived-tensor-second-factor-functor",
+    "why": "Generic K-flat computation of derived scalar extension, used with an identity resolution; the trace-formula unit supplies no construction of derived module tensor."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-derived-tensor-second-factor-functor"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q35-169e88a26",
+  "group": "Q35",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q35-169e88a26 (reviewer sub-agent of L); spot-checked: I read the item, its 4 steps, all 6 cited nodes in full, the consumer lem-trf-etale-cotangent-vanishing, the target-side lemma lem-trf-derived-diagonal-cotangent-vanishing, unit sk-i-curve-zero and the chapter. Statement (surjective A->B with B flat => B (x)^L_A B -> B[0] is an isomorphism) is unchanged and true. Tests: A=B, A->0 and the projection k x k -> k all hold; Z->Z/2 (not flat) and a field extension (not surjective) show both hypotheses are needed. Source checks: Stacks cotangent.tex 08R2 (lemma-when-zero, l.1616-1646), whose proof of case (1) applies 08R0 (lemma-derived-diagonal) to the surjective flat ring map B (x)_A B -> B, which is exactly this item; the consumer applies it in the same way. Step 1: flat tensor exactness (00HD, algebra.tex l.8708) applied degree by degree gives K-flatness of B[0] (06XZ, more-algebra.tex l.14185); elementary, no boundedness needed. Step 2: clause (2) of lem-pc-derived-tensor-second-factor-functor with the identity K-flat resolution gives B (x)^L B = (B (x)_A B)[0] in D(B), with B acting on the second factor; matches 06Y6 and the construction before it (l.14636-14676). Step 3: explicit inverse c |-> 1 (x) c, using b (x) c = 1 (x) bc with b=f(a); checked line by line, and both maps are B-linear for the second-factor action. Step 4: the localization functor keeps the inverse equations, in D(B) and after restriction to D(A). proof_deps equals the union of the steps' uses. No new nodes; rg searches found no duplicate. Not a target node, so the base-change/coefficient-category check does not apply; no SGA source used. Accepted tool use: lem-pc-derived-tensor-second-factor-functor, a generic derived-tensor construction that the trace-formula route lacks. No fixes written."
  }
 }
