@@ -68,7 +68,8 @@ def IsHom (A B : InternalModule R C) (f : A.X ⟶ B.X) : Prop :=
 (blueprint: def-pod-internal-module).
 Proof: compose each operation with the identity and use the product identity law. -/
 theorem isHom_id (A : InternalModule R C) : IsHom A A (𝟙 A.X) := by
-  sorry
+  simp only [IsHom, Category.comp_id, Category.id_comp, prod.map_id_id, and_self,
+    implies_true]
 
 /-- Composites preserve the operations. Source: Stacks Tag 0DV5
 (blueprint: def-pod-internal-module).
@@ -76,7 +77,15 @@ Proof: substitute the two compatibility equations successively, use associativit
 and use functoriality of the binary product map. -/
 theorem isHom_comp (A B D : InternalModule R C) (f : A.X ⟶ B.X) (g : B.X ⟶ D.X)
     (hf : IsHom A B f) (hg : IsHom B D g) : IsHom A D (f ≫ g) := by
-  sorry
+  rcases hf with ⟨hf_add, hf_zero, hf_neg, hf_smul⟩
+  rcases hg with ⟨hg_add, hg_zero, hg_neg, hg_smul⟩
+  refine ⟨?_, ?_, ?_, ?_⟩
+  · rw [← Category.assoc, hf_add, Category.assoc, hg_add, ← Category.assoc,
+      prod.map_map]
+  · rw [← Category.assoc, hf_zero, hg_zero]
+  · rw [← Category.assoc, hf_neg, Category.assoc, hg_neg, ← Category.assoc]
+  · intro a
+    rw [← Category.assoc, hf_smul, Category.assoc, hg_smul, ← Category.assoc]
 
 /-- The category of internal modules, with operation-preserving morphisms.
 Source: Stacks Tag 0DV5 (blueprint: def-pod-internal-module). -/
