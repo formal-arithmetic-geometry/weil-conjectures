@@ -21,9 +21,198 @@
   "lem-per-regular-immersion-class-calculus",
   "lem-per-noetherian-prime-power-smooth-duality"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use $r$ for the smooth dimension and $c$ for the immersion codimension. Smooth base change preserves $r$, and smooth maps are flat. The flat-base-change clause of the regular-immersion class calculus therefore applies to $q$: $j$ is regular of codimension $c$ on nonempty components. Write $c_i:Ri_*\\Lambda_Z\\to\\Lambda_X(c)[2c]$ for the transpose of $a_i$, and similarly $c_j$. Under closed-immersion exchange and Tate pullback this clause says $q^*c_i=c_j$, as supported maps. No regularity of the ambient schemes, excellence, or field hypothesis has been used.",
+   "uses": [
+    "lem-sbc-smooth-relative-dimension-permanence",
+    "lem-pc-smooth-flat",
+    "lem-per-regular-immersion-class-calculus",
+    "lem-asd-etale-finite-twist-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVI, Lemma 2.5.7: flat pullback of the supported class"
+   }
+  },
+  {
+   "text": "We identify the orientation of $p_d:P=\\mathbf A^d_S\\to S$ with the adjoint $\\gamma'$ of the counit $t_{p_d}$ of the affine-space trace node; Steps 8–9 use this for $d=1$ over arbitrary Noetherian bases. Let $x$ be the coordinates of $P$, let $p_1:P\\times_SP\\to P$ be the first projection with fibre coordinates $y$, let $p_2$ be the second projection and $\\Delta$ the diagonal. (i) Base change: the base-change clause of the affine-space trace, transposed through the counit formula for $\\beta$ of the smooth base-change node as in Step 3, shows that $\\beta\\circ p_2^*\\gamma'$ is the adjoint orientation of the coordinate-tower counit of $p_1$ in the coordinates $y$. (ii) Translation: $\\tau_x:(x,y)\\mapsto(x,y-x)$ is the $P$-automorphism of $\\mathbf A^d_P$ given by the section $x$. The translation-trace node gives $t\\circ Rp_{1!}(\\kappa_x)\\circ\\operatorname{Ex}_{\\tau_x}=t$. Transposing, the adjoint orientations in the coordinates $y$ and $u=y-x$ agree under the etale comparison for $\\tau_x$. (iii) Deformation: the smooth-duality node's inverse orientation is diagonal base change, then the deformation comparison $\\delta_{p_1,\\Delta}$, then the zero-section restriction of vector-bundle purity normalized by $t_qh=1$ and the ordered product, i.e. of the adjoint of the coordinate-tower counit. The coordinate clause of the section-deformation node applies to the chart $e=\\tau_x$, with $e\\Delta=0$ and $e^{-1}(0)=\\Delta$ (here $p_1$ is compactifiable by Nagata). On this chart $\\kappa$ is the identity of the pulled-back affine dualizing line, and the normal-bundle orientation is the section restriction of the adjoint orientation in the coordinates $u$; that node makes it frame-independent. Since $p_2\\Delta=1$, (i)–(iii) give $\\gamma_{p_d,\\Lambda}=\\gamma'$, with no free scalar. For $d=0$ all comparisons are identities.",
+   "uses": [
+    "lem-per-noetherian-prime-power-smooth-duality",
+    "lem-trf-finite-ring-section-deformation",
+    "lem-amb-affine-space-top-trace",
+    "prop-asd-smooth-base-change",
+    "lem-trf-ambient-affine-translation-trace",
+    "thm-nagata-compactification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-orientation/sk-prop-sp-orientation-charts.proof.md",
+    "place": "Steps 3–4: diagonal deformation and the affine-space adjunction; ordinary finite-ring coordinate normalization"
+   }
+  },
+  {
+   "text": "For a smooth $h$ of dimension $d$, put $T_hM=h^*M(d)[2d]$ and $t_{h,M}=\\epsilon_{h,M}\\circ Rh_!(\\gamma_{h,M}):Rh_!T_hM\\to M$. This is natural in $M$. For a base change $b$, denote compact-support exchange by $C:b^*Rh_!\\xrightarrow{\\sim}Rh'_!b'^*$. The exceptional comparison $\\beta:b'^*h^!\\to h'^!b^*$ is, by its counit-defined mate formula, characterized by\n$$\\epsilon_{h',b^*M}\\circ Rh'_!\\beta_M=b^*\\epsilon_{h,M}\\circ C^{-1}_{h^!M}.$$\nThe smooth orientation's base-change clause gives $\\beta_M\\circ b'^*\\gamma_{h,M}=\\gamma_{h',b^*M}$. Substitute this into the preceding formula and use naturality of $C$. The result is\n$$t_{h',b^*M}\\circ C_{T_hM}=b^*t_{h,M},$$\nwith the canonical pullback/twist comparison inserted. The identity and composite comparisons here are the compact-support comparisons; their mates paste by mate-pasting. Every application of compact-support exchange below is on bounded-below objects.",
+   "uses": [
+    "lem-per-noetherian-prime-power-smooth-duality",
+    "prop-asd-smooth-base-change",
+    "thm-cbc-finite-torsion",
+    "def-weil-pbc-adjunction-mate",
+    "lem-weil-pbc-mate-pasting",
+    "lem-amb-etale-compact-comparisons"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVI, Lemma 2.5.7: replace the classical trace input by the counit-defined mate and diagonal/DNC base-change clause"
+   }
+  },
+  {
+   "text": "Apply Step 3 with $h=q$, $b=i$, and $M=Ri_*\\Lambda_Z$. Closed-immersion exchange gives $q^*M=Rj_*\\Lambda_{Z'}$. The proper tensor projection formula for $j$ and Tate pullback identify $T_qM$ with $Rj_*\\Lambda_{Z'}(r)[2r]$. Compact-support composition then identifies $Rq_!T_qM$ with $Ri_*Rq'_!\\Lambda_{Z'}(r)[2r]$. Here closed pushforward equals compact-support pushforward, using its identity-open compactification. Also $i^*Ri_*\\Lambda_Z=\\Lambda_Z$. Thus Step 3 gives $i^*t_{q,M}=t_{q',\\Lambda_Z}$ under these comparisons. To recover the supported map, closed direct image is fully faithful with exact left inverse $i^*$ on abelian sheaves; it is exact by the supported-kernel adjunction node. The same assertions hold for constant-$\\Lambda$ modules: the maps and their inverses preserve scalar actions. Applying these exact adjoint functors to complexes and then localizing preserves their adjunction and its invertible counit. Hence $Ri_*$ is fully faithful and $i^*$ detects equality of maps between its image objects. Both endpoints of $t_{q,M}$ have the displayed form $Ri_*(-)$. It follows that\n$$t_{q,Ri_*\\Lambda_Z}=Ri_*t_{q',\\Lambda_Z}.$$\nThe constants, twists, shifts, and exact closed direct images used here are bounded below; the source after $Rq'_!$ is bounded below by the compact-support theorem.",
+   "uses": [
+    "thm-cbc-finite-torsion",
+    "lem-kun-04ca",
+    "lem-pur-etale-supported-kernel-adjunction",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-amb-proper-coproducts-projection",
+    "lem-asd-etale-finite-twist-pullback",
+    "lem-amb-etale-compact-comparisons",
+    "def-amb-etale-compact-support"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVI, Lemma 2.5.7: identify the trace on a closed-supported input"
+   }
+  },
+  {
+   "text": "Naturality of $t_{q,-}$ for $c_i:Ri_*\\Lambda_Z\\to\\Lambda_X(c)[2c]$, together with Steps 1 and 4, gives\n$$t_{q,\\Lambda_X(c)[2c]}\\circ Rq_!(c_j(r)[2r])=c_i\\circ Ri_*t_{q',\\Lambda_Z}.$$\nBoth sides map $R(qj)_!\\Lambda_{Z'}(r)[2r]$ to $\\Lambda_X(c)[2c]$. Transpose through $R(qj)_!\\dashv(qj)^!$, using $qj=iq'$, and move the source twist $(r)[2r]$ to the target. The left transpose is $j^!(\\gamma_{q,\\Lambda})(c-r)[2(c-r)]\\circ a_j$; the right transpose is $q'^!(a_i)(-r)[-2r]\\circ a_{q'}$. The composite-adjunction Hom formula gives these two expressions by successive transposition; the smooth-duality tensor formula identifies the comparison at $\\Lambda_X(c)[2c]$ with the corresponding twist of $\\gamma_{q,\\Lambda}$. They are precisely $a_q\\star a_j$ and $a_i\\star a_{q'}$. Their common target is $(qj)^!\\Lambda_X(c-r)[2(c-r)]$. All shift interchanges are even, so no Koszul minus sign appears.",
+   "uses": [
+    "lem-per-regular-immersion-class-calculus",
+    "lem-per-noetherian-prime-power-smooth-duality",
+    "def-weil-pbc-composite-adjunction",
+    "lem-amb-etale-compact-comparisons"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVI, Lemma 2.5.7: explicitly transpose naturality through the two composite adjunctions"
+   }
+  },
+  {
+   "text": "For the section assertion let $q:V\\to S$ be smooth of dimension $r$ with the given closed section $s$. The finite-ring section-deformation statement gives that $s$ is regular of codimension $r$. Its local coordinate model can also be chosen over Zariski neighbourhoods of points of $S$: apply smooth-pair local coordinates to $S\\hookrightarrow V$ over $S$, with $S\\to S$ the identity. Its coordinate subspace has relative dimension zero, hence $a=0$, and its ambient space has dimension $r$. After shrinking the base inside $s^{-1}(U)$, this gives an etale $S$-map $e:U\\to\\mathbf A^r_S$ with $es=0$ and $e^{-1}(0)=s(S)$ scheme-theoretically. One can choose affine base and source neighbourhoods; then $e$ is separated. All opens are Noetherian; the affine-space schemes are Noetherian by finite type. The separated finite-type maps and their composites are compactifiable by Nagata, since their Noetherian bases are quasi-compact and quasi-separated. Thus all orientation, compact-support and interchange assertions can be applied to these charts. The existing section-deformation statement supplies exactly the same Cartesian-centre coordinate normalization.",
+   "uses": [
+    "lem-trf-finite-ring-section-deformation",
+    "lem-pur-smooth-pair-local-coordinates",
+    "lem-sbc-smooth-relative-dimension-permanence",
+    "lem-weil-pbc-affine-source-morphism-separated",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "thm-nagata-compactification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVI, Lemma 2.5.8: section charts without reduction to a field; Stacks 0FUE/lemma-etale-local-structure"
+   }
+  },
+  {
+   "text": "Compute over an arbitrary Noetherian base $T$ for $p_1:\\mathbf A^1_T\\to T$ and its zero section $z$. In the compactification $j:\\mathbf A^1_T\\hookrightarrow P=\\mathbf P^1_T$, $v:P\\to T$, put $\\bar z=jz$. The divisor line bundle $\\mathcal O_P(\\bar z(T))$ is $\\mathcal O_P(1)$: its ideal has local generators $t$ and $1$ on the standard charts, so its dual has the standard transition $t^{-1}$. The supported Kummer map $c_{\\bar z}$ therefore satisfies $c_{\\bar z}\\circ u=c_1(\\mathcal O_P(1))$, where $u:\\Lambda_P\\to R\\bar z_*\\Lambda_T$ is the unit. After $Rv_*$, precompose with the unit $\\Lambda_T\\to Rv_*\\Lambda_P$. The composite to $Rv_*R\\bar z_*\\Lambda_T=\\Lambda_T$ is the identity, by the composite-unit formula and $v\\bar z=1_T$. Consequently $Rv_*c_{\\bar z}$, under this identification of its source, is exactly the map $h:\\Lambda_T\\to Rv_*\\Lambda_P(1)[2]$ in the projective-line adjunction. That adjunction's counit has $t_vh=1$.",
+   "uses": [
+    "def-pc-divisor-line-bundle",
+    "lem-asd-ordinary-supported-kummer",
+    "lem-asd-ordinary-finite-p1-adjunction",
+    "def-weil-pbc-composite-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVI, Lemmas 2.5.9–2.5.10: Kummer first Chern class of the zero divisor and the normalized projective-line counit"
+   }
+  },
+  {
+   "text": "The supported Kummer map for $\\bar z$ restricts to $c_z$ on $\\mathbf A^1_T$. The affine-line adjunction is the composite of extension by zero/restriction for $j$ and the projective-line adjunction. Its composite-counit formula therefore identifies $t_{p_1}\\circ Rp_{1!}c_z$ with $t_v\\circ Rv_*c_{\\bar z}=1$ from Step 7. By Step 2, $t_{p_1}$ is the transpose of the specified diagonal/DNC $\\gamma_{p_1,\\Lambda}$. Transposing this equality under the composite $p_1z=1_T$ identifies it with $a_{p_1}\\star a_z=1_{\\Lambda_T}$. The regular-immersion class calculus identifies $a_z$ with the transpose of this particular $c_z$, including its positive Kummer sign.",
+   "uses": [
+    "lem-asd-ordinary-supported-kummer",
+    "lem-amb-affine-space-top-trace",
+    "def-weil-pbc-composite-adjunction",
+    "lem-per-regular-immersion-class-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVI, Lemma 2.5.9, rank one: restrict the projective-line adjunction and transpose its normalized evaluation"
+   }
+  },
+  {
+   "text": "Induct on $d\\geq0$ to prove $a_{p_d}\\star a_{z_d}=1$ for the affine-space projection and zero section over every allowed base $T$. At $d=0$ the dimension-zero smooth comparison and the codimension-zero identity class are identities. For $d>0$, write $p_d=p_{d-1}\\pi$ where $\\pi:\\mathbf A^d_T\\to\\mathbf A^{d-1}_T$ forgets the last coordinate, and $z_d=z'z_{d-1}$ where $z'$ is its zero section. The smooth composition clause gives $a_{p_d}=a_{p_{d-1}}\\star a_\\pi$. The regular-immersion composition clause, using the coordinate flag cutting the last coordinate first, gives $a_{z_d}=a_{z'}\\star a_{z_{d-1}}$. The coherent composition comparisons and the composite-adjunction formula make $\\star$ associative. Thus\n$$a_{p_d}\\star a_{z_d}=a_{p_{d-1}}\\star(a_\\pi\\star a_{z'})\\star a_{z_{d-1}}=a_{p_{d-1}}\\star a_{z_{d-1}}=1.$$\nThe first cancellation is Step 8 over the Noetherian base $\\mathbf A^{d-1}_T$; the second is the induction hypothesis. Only composition of smooth maps and of regular immersions has been used, not factorization independence for general maps.",
+   "uses": [
+    "lem-per-noetherian-prime-power-smooth-duality",
+    "lem-per-regular-immersion-class-calculus",
+    "def-weil-pbc-composite-adjunction",
+    "lem-amb-etale-compact-comparisons"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVI, Lemma 2.5.9: induction through the ordered affine coordinate tower"
+   }
+  },
+  {
+   "text": "On a chart from Step 6 write $p_r:\\mathbf A^r_S\\to S$ and $q|_U=p_re$. Etale adjoint locality and the open-restriction clauses of both class nodes compute the original composite on this neighbourhood. Smooth composition and the dimension-zero normalization give $a_{q|_U}=a_{p_r}\\star a_e$. Apply the already proved interchange identity (Steps 1–5) to the Cartesian square of $e$ over $z_r$: its lower immersion is $z_r$, its upper immersion is $s$, and its other smooth edge is $1_S$. It gives $a_e\\star a_s=a_{z_r}\\star a_{1_S}=a_{z_r}$. Hence associativity and Step 9 yield\n$$a_q\\star a_s=a_{p_r}\\star a_e\\star a_s=a_{p_r}\\star a_{z_r}=1$$\non this base neighbourhood. Globally these are endomorphisms of $\\Lambda_S[0]$. Full faithfulness of the degree-zero single-complex functor identifies them with sheaf maps; such a map is determined by the image of the unit, a section of $\\Lambda_S$. Sections that agree on a Zariski cover agree globally. This proves the section identity over $S$, retaining the specified signs and without reducing the base to a field. Empty schemes give the unique maps, and the arguments include $r=0$ and $c=0$.",
+   "uses": [
+    "lem-amb-etale-adjoint-locality",
+    "lem-per-noetherian-prime-power-smooth-duality",
+    "lem-per-regular-immersion-class-calculus",
+    "lem-amb-etale-compact-comparisons",
+    "lem-weil-pbc-derived-single-fully-faithful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVI, Lemma 2.5.8: etale chart reduction and gluing of degree-zero endomorphisms"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "lem-pc-smooth-flat",
+  "lem-per-regular-immersion-class-calculus",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-per-noetherian-prime-power-smooth-duality",
+  "lem-trf-finite-ring-section-deformation",
+  "lem-amb-affine-space-top-trace",
+  "prop-asd-smooth-base-change",
+  "lem-trf-ambient-affine-translation-trace",
+  "thm-nagata-compactification",
+  "thm-cbc-finite-torsion",
+  "def-weil-pbc-adjunction-mate",
+  "lem-weil-pbc-mate-pasting",
+  "lem-amb-etale-compact-comparisons",
+  "lem-kun-04ca",
+  "lem-pur-etale-supported-kernel-adjunction",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-amb-proper-coproducts-projection",
+  "def-amb-etale-compact-support",
+  "def-weil-pbc-composite-adjunction",
+  "lem-pur-smooth-pair-local-coordinates",
+  "lem-weil-pbc-affine-source-morphism-separated",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "def-pc-divisor-line-bundle",
+  "lem-asd-ordinary-supported-kummer",
+  "lem-asd-ordinary-finite-p1-adjunction",
+  "lem-amb-etale-adjoint-locality",
+  "lem-weil-pbc-derived-single-fully-faithful"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "XVI, Lemmas 2.5.7–2.5.10; explicit counit/mate calculation adapted to the stipulated diagonal/DNC prime-power orientation, using the current lecture-notes coordinate normalization instead of a classical trace theorem."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -62,7 +251,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-absolute-gysin-purity",
@@ -85,5 +274,144 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-smooth-gysin-mixed-identities",
+  "worker": "stage1",
+  "summary": "Proved interchange by naturality of the smooth adjoint counit on the supported Kummer map, and section cancellation by the normalized projective-line counit, coordinate induction, and etale section charts. All inputs already exist; no new nodes. Kept the arbitrary-Noetherian, prime-power ordinary-etale statement and checked the diagonal/DNC coordinate normalization explicitly.",
+  "blueprint": "Nearest ancestor lem-per-artin-gabber-affine-curve, proof Step 3, dimension-normalized duality: realizes the mixed composition and section cancellation needed below lem-per-absolute-gysin-purity. The item itself is an input created below that step; it is not the unit key node.",
+  "tool_uses": [
+   {
+    "node": "lem-sbc-smooth-relative-dimension-permanence",
+    "why": "Uses only preservation and addition of smooth relative dimension for the Cartesian and coordinate charts."
+   },
+   {
+    "node": "lem-pc-smooth-flat",
+    "why": "Uses only flatness of a smooth map to apply supported-class flat pullback."
+   },
+   {
+    "node": "lem-asd-etale-finite-twist-pullback",
+    "why": "Uses canonical ordinary finite Tate pullback comparisons, including negative powers."
+   },
+   {
+    "node": "lem-trf-finite-ring-section-deformation",
+    "why": "Uses the arbitrary-Noetherian finite-ring regular-section geometry and identity coordinate normalization of the DNC comparison; the curve unit has no such construction."
+   },
+   {
+    "node": "lem-amb-affine-space-top-trace",
+    "why": "Uses the ordered ordinary-etale affine adjunction counit and its projective-line normalization; a generic duality tool, not the Fourier unit route."
+   },
+   {
+    "node": "prop-asd-smooth-base-change",
+    "why": "Uses the counit-defined exceptional mate to write base-change compatibility as an equality of counits; no curve-unit node states that structural formula."
+   },
+   {
+    "node": "thm-cbc-finite-torsion",
+    "why": "Uses only the named general categorical or scheme-theoretic tool in the displayed computation; the Fourier-exactness unit has no replacement for this structural fact."
+   },
+   {
+    "node": "lem-weil-pbc-mate-pasting",
+    "why": "Uses only the named general categorical or scheme-theoretic tool in the displayed computation; the Fourier-exactness unit has no replacement for this structural fact."
+   },
+   {
+    "node": "lem-amb-etale-compact-comparisons",
+    "why": "Uses the generic coherent composition isomorphisms of ordinary bounded-below compact supports."
+   },
+   {
+    "node": "lem-kun-04ca",
+    "why": "Uses closed direct-image full faithfulness and its exact left inverse; no curve-unit statement supplies this sheaf tool."
+   },
+   {
+    "node": "lem-pur-etale-supported-kernel-adjunction",
+    "why": "Uses exactness of closed direct image to extend its fully faithful inverse-image adjunction to complexes."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Uses only the named general categorical or scheme-theoretic tool in the displayed computation; the Fourier-exactness unit has no replacement for this structural fact."
+   },
+   {
+    "node": "lem-amb-proper-coproducts-projection",
+    "why": "Uses the proper tensor projection isomorphism only for a closed immersion to move its Tate line."
+   },
+   {
+    "node": "lem-pur-smooth-pair-local-coordinates",
+    "why": "Uses the arbitrary-base etale coordinate model of a closed immersion between smooth schemes, specialized to a section."
+   },
+   {
+    "node": "lem-weil-pbc-affine-source-morphism-separated",
+    "why": "Uses only the named general categorical or scheme-theoretic tool in the displayed computation; the Fourier-exactness unit has no replacement for this structural fact."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "why": "Uses only the named general categorical or scheme-theoretic tool in the displayed computation; the Fourier-exactness unit has no replacement for this structural fact."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Uses only the named general categorical or scheme-theoretic tool in the displayed computation; the Fourier-exactness unit has no replacement for this structural fact."
+   },
+   {
+    "node": "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "why": "Uses only the named general categorical or scheme-theoretic tool in the displayed computation; the Fourier-exactness unit has no replacement for this structural fact."
+   },
+   {
+    "node": "thm-nagata-compactification",
+    "why": "Uses only the named general categorical or scheme-theoretic tool in the displayed computation; the Fourier-exactness unit has no replacement for this structural fact."
+   },
+   {
+    "node": "lem-asd-ordinary-supported-kummer",
+    "why": "Uses the Cartier supported morphism, its restriction, and its positive first-Chern-class normalization."
+   },
+   {
+    "node": "lem-asd-ordinary-finite-p1-adjunction",
+    "why": "Uses the ordinary finite-ring projective-line adjunction and the exact equation t_q h=1."
+   },
+   {
+    "node": "lem-amb-etale-adjoint-locality",
+    "why": "Uses the generic counit-preserving locality of ordinary compact-support right adjoints."
+   },
+   {
+    "node": "lem-weil-pbc-derived-single-fully-faithful",
+    "why": "Uses only the named general categorical or scheme-theoretic tool in the displayed computation; the Fourier-exactness unit has no replacement for this structural fact."
+   },
+   {
+    "node": "lem-trf-ambient-affine-translation-trace",
+    "why": "Uses only translation invariance of the ordinary coordinate-tower affine counit, needed to compare the diagonal chart y-x with the base-changed coordinates; already in the batch-5 closure via lem-per-potential-dualizing-coefficient-tower."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "lem-pc-smooth-flat",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-trf-finite-ring-section-deformation",
+  "lem-amb-affine-space-top-trace",
+  "prop-asd-smooth-base-change",
+  "thm-cbc-finite-torsion",
+  "lem-weil-pbc-mate-pasting",
+  "lem-amb-etale-compact-comparisons",
+  "lem-kun-04ca",
+  "lem-pur-etale-supported-kernel-adjunction",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-amb-proper-coproducts-projection",
+  "lem-pur-smooth-pair-local-coordinates",
+  "lem-weil-pbc-affine-source-morphism-separated",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "thm-nagata-compactification",
+  "lem-asd-ordinary-supported-kummer",
+  "lem-asd-ordinary-finite-p1-adjunction",
+  "lem-amb-etale-adjoint-locality",
+  "lem-weil-pbc-derived-single-fully-faithful",
+  "lem-trf-ambient-affine-translation-trace"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q69-1ffbc9df3",
+  "group": "Q69",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q69-1ffbc9df3 (reviewer sub-agent of L); spot-checked: I read all ten steps in full against the statements of every cited node and against ILO XVI 2.5.7–2.5.10 (pp. 240–241). ILO's SGA 4 XVIII trace input and its reduction to a field are replaced by a counit/mate calculation (Steps 3–5) and Zariski étale charts over the original base (Steps 6, 10). There are no new nodes and the statement is preserved; the +c1(O(1)) sign agrees with ILO 2.5.10. One fault, Step 2 (E5/C1): it identified the diagonal/DNC orientation γ_{p_d} with the adjoint of the counit t_{p_d} of lem-amb-affine-space-top-trace without two needed steps. These are (i) the base change of t along p_d with β's counit formula (prop-asd-smooth-base-change) and (ii) invariance under the translation y↦y−x of the chart used for the section deformation, which is lem-trf-ambient-affine-translation-trace (a non-linear automorphism, so lem-amb-linear-trace-invariance does not cover it). I rewrote Step 2 as base change, then translation, then deformation on the chart τ_x, adding those two nodes and Nagata to its uses, recomputed proof_deps, and added a tool_uses entry. The fix is in fixes/dag/nodes/sec-deligne-laumon-a1/lem-per-smooth-gysin-mixed-identities.json. Other checks: Step 1's flat base change via the class calculus; Step 4's full faithfulness of Ri_* from exact i^{-1}⊣i_*; Step 5's transposition, done by hand: both sides land in (qj)^!Λ(c−r)[2(c−r)]; Step 6 gives a=0 and b=r with e^{-1}(0)=s(W) after shrinking the base; Step 7's O(z̄)=O(1) transition matches the p1-adjunction node; Steps 8–9's induction on d is set up correctly; Step 10 glues via degree-zero full faithfulness. Batch 5: I recomputed the closure with and without the item, and it is identical (15045 nodes). lem-trf-finite-ring-section-deformation and the translation-trace node are already reached through the PASSed N6 lem-per-potential-dualizing-coefficient-tower and are used here as generic DNC normalization, not as trace-formula steps. The supported-kummer chain ends in lem-pod-etale-stalk-tensor-scalar, which is generic Stacks 008B algebra. Both flags accepted. Maintainer note: lem-per-smooth-immersion-interchange is the narrower F_ℓ variant of this item.; 1 file(s) fixed by the reviewer"
  }
 }
