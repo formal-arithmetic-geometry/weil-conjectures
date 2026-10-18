@@ -1,0 +1,165 @@
+{
+ "id": "lem-cbc-normalized-proper-open-geometric-normalization",
+ "kind": "statement",
+ "title": "Refinement and base change for fixed normalized proper/open comparisons",
+ "statement": "Let Lambda be a finite commutative ring. Use bounded-below derived etale module sheaves [def-weil-pbc-derived-categories], direct image [def-weil-pbc-direct-image], exact open extension by zero [def-weil-pbc-extension-by-zero], proper maps [def-weil-proper-morphism] and open immersions [def-weil-open-immersion]. For every commutative proper/open square fix ordinary natural isomorphisms delta:i_!r_*≅p_*k_! and derived natural isomorphisms gamma:i_!Rr_*≅Rp_*k_!. Assume that for each square k:A→B, i:C→D, r:A→C, p:B→D with k p=r i, delta_F followed by p_*(k_!F→k_*F) and the compositor k_*p_*→(k p)_* equals i_!r_*F→i_*r_*F followed by the compositor r_*i_*→(k p)_*. Assume also that gamma.hom is exactly rightDerivedFunctorPlusBaseChange(delta.hom). Then (1) on a proper refinement fixing the open, gamma, after the canonical identity-direct-image identification, equals properOpenComparison [def-weil-pbc-proper-open-comparison]; and (2) for every Cartesian base change the gamma square commutes with the canonical extension-by-zero base-change isomorphisms [cor-cbc-derived-extension-zero-base-change] and the canonical derived exchange maps [lem-weil-pbc-exchange-forget-coefficients], with the exact equation specified in the Lean record. Only equalities of these already supplied maps are asserted; no existence or invertibility claim is part of this conclusion.",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 0F7B, 0F7C, 0F7D, 0F7F: lemma-shriek-proper-and-open, lemma-shriek-proper-and-open-compose, lemma-shriek-proper-and-open-compose-horizontal, lemma-shriek-proper-and-open-base-change; open-immersion specialization"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-extension-by-zero",
+  "def-weil-proper-morphism",
+  "def-weil-open-immersion",
+  "def-weil-pbc-proper-open-comparison",
+  "cor-cbc-derived-extension-zero-base-change",
+  "lem-weil-pbc-exchange-forget-coefficients",
+  "def-pc-fibre-product"
+ ],
+ "proof": [
+  {
+   "text": "In the refinement case use [def-weil-pbc-proper-open-comparison]. Its construction identifies $V=u^{-1}(j_2(X))$ and its clopen component $s(X)$, with $bs=j_1$, $ps=\\mathrm{id}_X$. Restrict the arrow just constructed to $j_2$. Under the restriction isomorphism [lem-weil-pbc-derived-open-restriction], the extension-by-zero comparison [cor-cbc-derived-extension-zero-base-change], and the component restriction [lem-weil-pbc-clopen-section-direct-image], its source and target become $K$. The underived $\\delta$ sends a section on $X$ to itself on $s(X)$ and zero on the other component. Thus this restricted arrow is exactly $\\theta_{u,K}^{-1}$ from the comparison definition; the resolution map is the canonical derived comparison and does not change that identity on the component. The adjunction [lem-weil-pbc-extension-by-zero-adjunction], descended degreewise since extension by zero and inverse image are exact [lem-weil-pbc-extension-by-zero-exact] [prop-weil-pbc-inverse-image-modules-exact], makes the arrow $j_{2!}K\\to Ru_*j_{1!}K$ uniquely determined by this restriction. It is consequently $\\alpha_{u,K}$, the adjoint of $\\theta_{u,K}^{-1}$.",
+   "uses": [
+    "def-weil-pbc-proper-open-comparison",
+    "lem-weil-pbc-derived-open-restriction",
+    "cor-cbc-derived-extension-zero-base-change",
+    "lem-weil-pbc-clopen-section-direct-image",
+    "lem-weil-pbc-extension-by-zero-adjunction",
+    "lem-weil-pbc-extension-by-zero-exact",
+    "prop-weil-pbc-inverse-image-modules-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7B, specialization to a refinement; comparison definition and its component normalization"
+   }
+  },
+  {
+   "text": "For base change first work with sheaves. The support inclusions into ordinary direct images in [lem-cbc-proper-support-sheaf-composition] identify $i_!r_*$ and $p_*k_!$ inside $(ir)_*=(pk)_*$. Its pullback-composition clause says that the two paths consisting of the ordinary comparisons and the extension-by-zero comparisons give the pullback comparison for that same composite morphism. Thus the ordinary version of the required base-change diagram commutes. These are injective inclusions; inverse image preserves them by [prop-weil-pbc-inverse-image-modules-exact]. Hence equality in the common ordinary direct image is equality in the support subsheaf. The open comparisons $\\beta_i,\\beta_k$ of [cor-cbc-derived-extension-zero-base-change] agree with the restrictions $c_k,c_i$ of the ordinary comparisons to the support subsheaves, which the support node calls canonical; we check this for $k$ (the case of $i$ is identical). By [lem-cbc-extension-zero-base-change], $\\beta_k^{-1}$ is the $k_{1!}\\dashv k_1^{-1}$ mate of $x=\\theta\\circ d^{-1}\\eta_k:d^{-1}F\\to k_1^{-1}a^{-1}k_!F$. Since $\\beta_k$ is invertible, $c_k=\\beta_k$ iff $c_k\\beta_k^{-1}=\\mathrm{id}$, iff the adjoint $k_1^{-1}(c_k)\\circ x$ is the unit $\\eta_{k_1}$ [lem-weil-pbc-extension-by-zero-adjunction]. Evaluate on an etale $W\\to A_1$: by the presheaf formula [def-weil-pbc-extension-by-zero] and the explicit adjunction, $\\eta_k,\\eta_{k_1}$ are the identity on sections over objects factoring through the open, $\\theta$ is the identity on germs, and the ordinary comparison restricts a section along $W\\to V\\times_BA$, which is $W\\to V$ for $V$ factoring through $A$. So both maps send the germ of $s\\in F(V)$ to the same germ, and $c_k=\\beta_k$. The ordinary-comparison pasting is also the unit/counit mate equation in clauses (1),(2) of [lem-weil-pbc-mate-pasting] for the module inverse-image adjunctions; all constant-ring pullbacks are the identifications of [prop-weil-pbc-inverse-image-modules-exact].",
+   "uses": [
+    "lem-cbc-proper-support-sheaf-composition",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "cor-cbc-derived-extension-zero-base-change",
+    "lem-weil-pbc-mate-pasting",
+    "lem-cbc-extension-zero-base-change",
+    "lem-weil-pbc-extension-by-zero-adjunction",
+    "def-weil-pbc-extension-by-zero"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7F, ordinary-complex diagram and its reduction to ordinary direct images; Tags 0F55 and 0F77"
+   }
+  },
+  {
+   "text": "The assumed derived-unit normalization uniquely identifies every gamma with the rightDerivedFunctorPlusBaseChange map of its delta: use rightDerived_ext, whiskered by the exact open extension. Apply [lem-weil-pbc-right-derived-plus-cube] to the ordinary support cube from the preceding step. The canonical derived exact-comparison isomorphisms in that theorem are precisely extensionZeroBaseChangeDerivedPlusIso, and the two vertical transformations are derivedBaseChangeMapPlus. This gives the asserted derived cube without assuming that inverse image preserves injectives.",
+   "uses": [
+    "lem-weil-pbc-right-derived-plus-cube",
+    "cor-cbc-derived-extension-zero-base-change",
+    "lem-weil-pbc-exchange-forget-coefficients"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "cor-cbc-derived-extension-zero-base-change",
+  "def-weil-pbc-extension-by-zero",
+  "def-weil-pbc-proper-open-comparison",
+  "lem-cbc-extension-zero-base-change",
+  "lem-cbc-proper-support-sheaf-composition",
+  "lem-weil-pbc-clopen-section-direct-image",
+  "lem-weil-pbc-derived-open-restriction",
+  "lem-weil-pbc-exchange-forget-coefficients",
+  "lem-weil-pbc-extension-by-zero-adjunction",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-weil-pbc-mate-pasting",
+  "lem-weil-pbc-right-derived-plus-cube",
+  "prop-weil-pbc-inverse-image-modules-exact"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 0F7B, 0F7C, 0F7D, 0F7F, open-immersion bounded-below finite-ring specialization; resolution comparisons and refinement normalization expanded"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Normalized derived proper pushforward and open extension by zero comparison commutes with vertical and horizontal pasting and arbitrary Cartesian base change",
+   "results": "PresheafOfModules.pushforwardComp, SheafOfModules.pushforwardComp, their associativity and component lemmas, and ExponentiableMorphism.pushforwardComp. These concern ordinary direct images, not normalized proper/open derived comparisons. The source library has rightDerivedFunctorPlusBaseChange_cube, which handles only the generic derived cube after its ordinary hypotheses have been supplied.",
+   "date": "2026-10-18",
+   "verdict": "no complete match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerivedFunctorPlusBaseChange\"",
+   "results": "0 hits in Mathlib. Source library declarations read separately.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedFunctorPlusBaseChange|properOpenComparison|openImmersionLowerShriekComp",
+   "results": "0 hits in Mathlib. Source declarations read in WeilConjectures and Sheaf.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Proper derived pushforward commutes with extension by zero along open immersions, with horizontal pasting and Cartesian base change compatibility",
+   "results": "Eight hits: ordinary pushforward composition and associativity, restriction adjunction and composition, and stability of open immersions under base change. No derived proper/open interchange or coherence theorem.",
+   "date": "2026-10-18",
+   "verdict": "no complete match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProperOpenInterchangeCoherence",
+  "date": "2026-10-18",
+  "group": "F2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-cbc-proper-open-interchange-coherence",
+   "place": "Proof steps 4, 7; fixed-comparison equality part",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProperOpenInterchangeGeometricNormalization",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProperOpenInterchangeGeometricNormalization.lean",
+  "declaration": "AlgebraicGeometry.Etale.properOpenInterchangeGeometricNormalization_of_normalization",
+  "statement": "theorem properOpenInterchangeGeometricNormalization_of_normalization (Λ : Type (u + 1)) [CommRing\n  Λ] [Finite Λ]\n    (δ : ∀ {A B C D : Scheme.{u}} (k : A ⟶ B) (i : C ⟶ D) (r : A ⟶ C) (p : B ⟶ D) [IsOpenImmersion\n        k] [IsOpenImmersion i] [IsProper r] [IsProper p] (h : k ≫ p = r ≫ i), (lowerStar\n        (ModuleCat.{u + 1} Λ) r) ⋙ (openImmersionLowerShriek (ModuleCat.{u + 1} Λ) i) ≅\n        (openImmersionLowerShriek (ModuleCat.{u + 1} Λ) k) ⋙ (lowerStar (ModuleCat.{u + 1} Λ) p))\n      (γ : ∀ {A B C D : Scheme.{u}} (k : A ⟶ B) (i : C ⟶ D) (r : A ⟶ C) (p : B ⟶ D) [IsOpenImmersion\n        k] [IsOpenImmersion i] [IsProper r] [IsProper p] (h : k ≫ p = r ≫ i),\n        ((lowerStar (ModuleCat.{u + 1} Λ) r).rightDerivedFunctorPlus) ⋙ (openImmersionLowerShriek\n        (ModuleCat.{u + 1} Λ) i).mapDerivedCategoryPlus ≅ (openImmersionLowerShriek (ModuleCat.{u +\n        1} Λ) k).mapDerivedCategoryPlus ⋙ ((lowerStar (ModuleCat.{u + 1} Λ)\n          p).rightDerivedFunctorPlus))\n    (hδ : (∀ {A B C D : Scheme.{u}} (k : A ⟶ B) (i : C ⟶ D) (r : A ⟶ C) (p : B ⟶ D)\n      [IsOpenImmersion k]\n        [IsOpenImmersion i] [IsProper r] [IsProper p] (h : k ≫ p = r ≫ i), ∀ (F : (Sheaf\n        A.smallEtaleTopology (ModuleCat.{u + 1} Λ))),\n      (δ k i r p h).hom.app F ≫ (lowerStar (ModuleCat.{u + 1} Λ) p).map\n        ((openImmersionLowerShriekToLowerStar (ModuleCat.{u + 1} Λ) k).app F) ≫\n        (lowerStarComp (ModuleCat.{u + 1} Λ) k p).hom.app F =\n      (openImmersionLowerShriekToLowerStar (ModuleCat.{u + 1} Λ) i).app ((lowerStar (ModuleCat.{u +\n        1} Λ) r).obj F) ≫\n        (lowerStarComp (ModuleCat.{u + 1} Λ) r i (k ≫ p) h).hom.app F))\n    (hγ : ∀ {A B C D : Scheme.{u}} (k : A ⟶ B) (i : C ⟶ D)\n      (r : A ⟶ C) (p : B ⟶ D) [IsOpenImmersion k] [IsOpenImmersion i]\n      [IsProper r] [IsProper p] (h : k ≫ p = r ≫ i),\n      (γ k i r p h).hom = Functor.rightDerivedFunctorPlusBaseChange (δ k i r p h).hom) :\n    (∀ {T₁ T₂ X : Scheme.{u}} (p : T₁ ⟶ T₂) [IsProper p]\n      (j₁ : X ⟶ T₁) (j₂ : X ⟶ T₂) [IsOpenImmersion j₁] [IsOpenImmersion j₂]\n      (h : j₁ ≫ p = j₂) (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1}\n        Λ))),\n      (openImmersionLowerShriek (ModuleCat.{u + 1} Λ) j₂).mapDerivedCategoryPlus.map\n        ((lowerStarIdDerivedPlus (ModuleCat.{u + 1} Λ) X).inv.app K) ≫\n        (γ j₁ j₂ (𝟙 X) p (h.trans (Category.id_comp j₂).symm)).hom.app K =\n      properOpenComparison Λ p j₁ j₂ h K) ∧\n    (∀ {A B C D : Scheme.{u}} (k : A ⟶ B) (i : C ⟶ D) (r : A ⟶ C) (p : B ⟶ D) [IsOpenImmersion k]\n        [IsOpenImmersion i] [IsProper r] [IsProper p] (h : k ≫ p = r ≫ i), ∀ {A₁ B₁ C₁ D₁ :\n        Scheme.{u}}\n      (a : B₁ ⟶ B) (b : D₁ ⟶ D) (c : C₁ ⟶ C) (d : A₁ ⟶ A)\n      (k₁ : A₁ ⟶ B₁) (i₁ : C₁ ⟶ D₁) (r₁ : A₁ ⟶ C₁) (p₁ : B₁ ⟶ D₁)\n      [IsOpenImmersion k₁] [IsOpenImmersion i₁] [IsProper r₁] [IsProper p₁]\n      (h₁ : k₁ ≫ p₁ = r₁ ≫ i₁)\n      (sk : IsPullback d k₁ k a) (si : IsPullback c i₁ i b)\n      (sr : IsPullback d r₁ r c) (sp : IsPullback a p₁ p b)\n      (K : DerivedCategory.Plus (Sheaf A.smallEtaleTopology (ModuleCat.{u + 1} Λ))),\n      (upperStar (ModuleCat.{u + 1} Λ) b).mapDerivedCategoryPlus.map ((γ k i r p h).hom.app K) ≫\n        (derivedBaseChangeMapPlus (ModuleCat.{u + 1} Λ) sp.toCommSq).app ((openImmersionLowerShriek\n        (ModuleCat.{u + 1} Λ) k).mapDerivedCategoryPlus.obj K) ≫\n        ((lowerStar (ModuleCat.{u + 1} Λ) p₁).rightDerivedFunctorPlus).map\n        ((extensionZeroBaseChangeDerivedPlusIso Λ sk).hom.app K) =\n      (extensionZeroBaseChangeDerivedPlusIso Λ si).hom.app (((lowerStar (ModuleCat.{u + 1} Λ)\n        r).rightDerivedFunctorPlus).obj K) ≫\n        (openImmersionLowerShriek (ModuleCat.{u + 1} Λ) i₁).mapDerivedCategoryPlus.map\n        ((derivedBaseChangeMapPlus (ModuleCat.{u + 1} Λ) sr.toCommSq).app K) ≫\n        (γ k₁ i₁ r₁ p₁ h₁).hom.app ((upperStar (ModuleCat.{u + 1} Λ) d).mapDerivedCategoryPlus.obj\n        K))",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261018T112414-L-631734",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261018T112414-L-631734",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
