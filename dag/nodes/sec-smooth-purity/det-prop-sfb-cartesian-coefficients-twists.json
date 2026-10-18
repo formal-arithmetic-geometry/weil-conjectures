@@ -20,7 +20,8 @@
   "sk-def-sfb-condensed-ring",
   "sk-def-sfb-pulled-back-coefficients",
   "def-sfb-module-upper-star",
-  "sk-def-sfb-derived-categories"
+  "sk-def-sfb-derived-categories",
+  "def-cbc-strict-constant-tower-operations"
  ],
  "proof": [
   {
@@ -351,5 +352,37 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CartesianCoefficientTwists",
+  "declaration": "AlgebraicGeometry.ProEtale.spTwists_cartesian",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.spRoots_cartesian",
+   "AlgebraicGeometry.ProEtale.spCoefficientIso_existsUnique",
+   "AlgebraicGeometry.ProEtale.spCoefficientIso",
+   "AlgebraicGeometry.ProEtale.spIntegralComparison_existsUnique",
+   "AlgebraicGeometry.ProEtale.spIntegralComparison",
+   "AlgebraicGeometry.ProEtale.spRationalComparison_existsUnique",
+   "AlgebraicGeometry.ProEtale.spTwistFunctor",
+   "AlgebraicGeometry.ProEtale.SpSignedComparison",
+   "AlgebraicGeometry.ProEtale.spFiniteTwists_cartesian",
+   "AlgebraicGeometry.ProEtale.SpInternalCartesian",
+   "AlgebraicGeometry.ProEtale.spTwists_cartesian"
+  ],
+  "file": "lean/Sheaf/Paper/CartesianCoefficientTwists.lean",
+  "statement": "theorem spTwists_cartesian (ℓ : ℕ) [Fact ℓ.Prime] [∀ x : X, Invertible (ℓ : X.residueField x)] [∀ y : Y, Invertible (ℓ : Y.residueField y)] : ∃ (ρ : ∀ E : PadicAlgCl.FiniteIntermediateField ℓ, (Scheme.proEtaleSheafInverseImage f AddCommGrpCat.{u + 1}).obj (spRationalTwist.{u} Y ℓ E).X ⟶ (spRationalTwist.{u} X ℓ E).X) (κ : (Scheme.proEtaleSheafInverseImage f AddCommGrpCat.{u + 1}).obj (spQbarTwist.{u} Y ℓ).X ⟶ (spQbarTwist.{u} X ℓ).X), (∀ E : PadicAlgCl.FiniteIntermediateField ℓ, (Scheme.proEtaleSheafInverseImage f AddCommGrpCat.{u + 1}).map (Mod.extendπ (padicIntegersToPadicSubfield Y ℓ E) (spIntegralTwist.{u} Y ℓ E)) ≫ ρ E = Functor.OplaxMonoidal.δ (upperStar AddCommGrpCat.{u + 1} f) (condensedRingObj (Profinite.continuousMapRingObj.{u} E.1) Y) (spIntegralTwist.{u} Y ℓ E).X ≫ (condensedPullbackHom (Profinite.continuousMapRingObj.{u} E.1) f ⊗ₘ spIntegralComparison f ℓ E) ≫ Mod.extendπ (padicIntegersToPadicSubfield X ℓ E) (spIntegralTwist.{u} X ℓ E)) ∧ (∀ E : PadicAlgCl.FiniteIntermediateField ℓ, (Scheme.proEtaleSheafInverseImage f AddCommGrpCat.{u + 1}).map (colimit.ι (spRationalTwistDiagram Y ℓ) E) ≫ κ = ρ E ≫ colimit.ι (spRationalTwistDiagram X ℓ) E) ∧ (∀ E : PadicAlgCl.FiniteIntermediateField ℓ, SpInternalCartesian f (Profinite.padicIntegersRingObj.{u} ℓ E.1) (spIntegralTwist.{u} Y ℓ E) (spIntegralTwist.{u} X ℓ E) (spIntegralComparison f ℓ E) ∧ SpInternalCartesian f (Profinite.continuousMapRingObj.{u} E.1) (spRationalTwist.{u} Y ℓ E) (spRationalTwist.{u} X ℓ E) (ρ E)) ∧ SpInternalCartesian f (Profinite.padicAlgClRingObj.{u} ℓ) (spQbarTwist.{u} Y ℓ) (spQbarTwist.{u} X ℓ) κ ∧ (∀ (E F : PadicAlgCl.FiniteIntermediateField ℓ) (h : E ≤ F), (Scheme.proEtaleSheafInverseImage f AddCommGrpCat.{u + 1}).map (spIntegralTwistMap Y ℓ h) ≫ spIntegralComparison f ℓ F = spIntegralComparison f ℓ E ≫ spIntegralTwistMap X ℓ h) ∧ (∀ (E F : PadicAlgCl.FiniteIntermediateField ℓ) (h : E ≤ F), (Scheme.proEtaleSheafInverseImage f AddCommGrpCat.{u + 1}).map (spRationalTwistMap Y ℓ h) ≫ ρ F = ρ E ≫ spRationalTwistMap X ℓ h) ∧ (∀ (n m : ℕ) (h : n ≤ m), (Scheme.proEtaleSheafInverseImage f AddCommGrpCat.{u + 1}).map (Scheme.proEtaleRootsOfUnityTransition Y (ℓ ^ n) (ℓ ^ m) (pow_pos (Fact.out : ℓ.Prime).pos _) (pow_pos (Fact.out : ℓ.Prime).pos _) (pow_dvd_pow ℓ h)) ≫ Scheme.proEtaleRootsOfUnityInverseImageMap f (ℓ ^ n) = Scheme.proEtaleRootsOfUnityInverseImageMap f (ℓ ^ m) ≫ Scheme.proEtaleRootsOfUnityTransition X (ℓ ^ n) (ℓ ^ m) (pow_pos (Fact.out : ℓ.Prime).pos _) (pow_pos (Fact.out : ℓ.Prime).pos _) (pow_dvd_pow ℓ h))",
+  "branch": "newtargets-dag",
+  "by": "N4",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "The statement is distributed across spRoots_cartesian (all exponents), spFiniteTwists_cartesian (all finite admissible rings and Kummer identifications), and spTwists_cartesian (all integral, rational and finite-subextension algebraic-closure coefficients). SpSignedComparison records every signed coefficient comparison, its zero/tensor/evaluation normalization, and the natural unbounded derived consequence. Canonical first comparisons are uniquely fixed by finite projections, localization and colimit coprojections, and their linear lifts use precisely alpha_f."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5512028de",
+  "group": "N4",
+  "result": "pass",
+  "note": "Every node clause (any f, ℓ invertible; roots IsIso for all n incl. 0 and Kummer squares; finite A over all annihilating exponents incl. zero ring with constantRingIso; O_E/Z_ℓ, E/Q_ℓ, Q̄_ℓ comparisons each pinned uniquely by finite projections, extendπ, colimit coprojections; SpInternalCartesian ties degree-1 module iso to τ over spCoefficientIso = α_f adjunct; signed d with zero/tensor/evaluation normalizations; natural derived iso on full unbounded D) matches without extra hypotheses. §1(B) wrapper ProEtaleTateTwistsOfUniverses is an equivalent localization-universe generalization (u+1 → w, used at standard u+2) with no site/coefficient universe equation; added stmt_dep def-cbc-strict-constant-tower-operations is landed and acyclic. lean.statement verbatim; JSON layout exact; docstrings with source/blueprint tags; 6 theorem sorries, no hollow data. nt_compile --json: both files clean (2.5 s, 12.0 s); probe confirmed spTwistFunctor.obj = spComplexTwistOfUniverses.{u+2} by rfl, #print axioms, and a control error surfaced. Remarks only: (B) record lists only the wrapper decl (established OfUniverses practice); redundant X-invertibility binder; finite α via constant-ring comparison per recorded model."
  }
 }

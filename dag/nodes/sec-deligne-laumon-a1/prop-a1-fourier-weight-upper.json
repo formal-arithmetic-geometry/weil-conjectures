@@ -12,7 +12,8 @@
   "def-fd-transform",
   "def-a1-constituent-nonexceptional",
   "def-wf-middle-extension",
-  "def-weil-punctual-weights"
+  "def-weil-punctual-weights",
+  "def-a1-common-stage-lisse-lattice"
  ],
  "proof": [
   {
@@ -367,5 +368,30 @@
   "group": "N1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N1-3702382ce (reviewer sub-agent of L); spot-checked: I read the full item, the unit (main-20261015 statement and proof), and every cited statement. The statement is unchanged and keeps every hypothesis. The route matches the unit: correction prop-fd-zero-extension-comparison, Plancherel cor-fd-plancherel, energy sk-l-dl-a1-energy, with the existence of the weight taken from thm-fd-generic-fourier-sheaf-pure. No SGA source is cited and no new nodes are created. Steps 1, 3, 4, 6, 7 and 8 are correct: the hypotheses match, the Plancherel arithmetic r^2 q^{n(w+2)} and b^2 q^{n(w+1)} checks out, the comparison of q-powers holds for any real w, Step 7 shows the given partner M' is nonzero by inversion and twist cancellation, and Step 8 shows U'_0 is a smooth geometrically connected affine curve. One fault, which I repaired (C4/E6): Steps 2 and 5 used lem-trf-rational-local-frobenius-powers, whose local Frobenius operators come from the trace-formula chapter's construction. The trace function and the weights use the operators of def-weil-local-frobenius-trace, and the steps never identified the two. The lemma's integral-lattice hypothesis was also only asserted. The corrected node in fixes/ now restricts to Spec kappa(y), works at one finite coefficient stage (prop-weil-pbc-common-stage-calculus), takes a free lattice via lem-weil-point-fibre-equivalence, and cites lem-trf-local-frobenius-transport-normalization, the same repair as in the reviewed sibling lem-fd-l2-middle-extension. I updated proof_deps and added three tool_uses. Batch-5 check: each listed citation lies outside both assumptions and is not part of their proofs. def-fd-trace-function and def-pod-lisse-l-adic-sheaves are definitions, and p-linear-triangular is linear algebra. Plancherel, inversion, the correction and the energy lemma are Fourier or route results that use the trace formula or Poincare duality at most as consumers. prop-weil-operations is used only for Frobenius-equivariance of base change, which the Poincare-duality assumption explicitly does not give. The two trace-formula-chapter lemmas are local statements about stalk operators, and a graph traversal of the added normalization lemma reaches no trace-formula or Poincare-duality theorem. For the maintainer: sk-l-dl-a1-energy itself cites sk-thm-trace-transport and should cite nt-assume-trace-formula when it is split. The statement does not cite rem-dl-a1-conventions for 'irreducible lisse'; this is inherited and left unchanged.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CommonStageFourierWeightUpper",
+  "declaration": "WeilConjectures.commonStage_fourierPartner_weight_le_add_one",
+  "declarations": [
+   "WeilConjectures.sfAffineShiftedMiddleExtension",
+   "WeilConjectures.sfAffineFourierTransformForCharacter",
+   "WeilConjectures.sfAffineFourierTransformForCharacter_trace",
+   "WeilConjectures.commonStage_fourierPartner_weight_le_add_one"
+  ],
+  "file": "lean/Sheaf/Paper/CommonStageFourierWeightUpper.lean",
+  "statement": "theorem commonStage_fourierPartner_weight_le_add_one (F : FourierSetting.{u}) (iota : F.coefficients.Qbar ≃+* ℂ) (ψ : AddChar F.field.k₀ F.coefficients.Qbar) (hψ : ψ ≠ 1) (Ψ : AddChar (ZMod F.field.p) F.coefficients.Qbar) (hΨ : Ψ ≠ 1) (c : Compactification (fourierModelSnd F PUnit.{u + 1}).left) (A A' : SfAffineLineOpen F) (M : sfCommonStageWeilSheaf F.field F.coefficients.l F.coefficients.different A.U F.coefficients.Qbar) (M' : sfCommonStageWeilSheaf F.field F.coefficients.l F.coefficients.different A'.U F.coefficients.Qbar) (hMlisse : HasCommonStageLisseLattice F.coefficients.l F.coefficients.Qbar (F.field.geometricFiber A.U).left M.obj.carrier) (hMnonzero : ¬ IsZero M) (hMirreducible : ∀ (G : sfCommonStageWeilSheaf F.field F.coefficients.l F.coefficients.different A.U F.coefficients.Qbar) (i : G ⟶ M), Mono i → HasCommonStageLisseLattice F.coefficients.l F.coefficients.Qbar (F.field.geometricFiber A.U).left G.obj.carrier → IsZero G ∨ IsIso i) (hne : SfIsConstituentNonexceptional F A Ψ hΨ ψ M) (w v : ℝ) (hw : SfIsPunctuallyPureOfWeight F.field F.coefficients.l F.coefficients.different F.coefficients.Qbar A.U iota M w) (hM'lisse : HasCommonStageLisseLattice F.coefficients.l F.coefficients.Qbar (F.field.geometricFiber A'.U).left M'.obj.carrier) (hFT : Nonempty (sfAffineFourierTransformForCharacter F Ψ hΨ ψ c (sfAffineShiftedMiddleExtension F A M) ≅ sfAffineShiftedMiddleExtension F A' M')) (hv : SfIsPunctuallyPureOfWeight F.field F.coefficients.l F.coefficients.different F.coefficients.Qbar A'.U iota M' v) : v ≤ w + 1",
+  "branch": "newtargets-dag",
+  "by": "Q14",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Repairs H3/H4 of immutable returned head 77186f4711e6: replaces the attachment to the old WeilSheaf theorem by a statement on the recorded intrinsic common-stage Weil heart, common-stage Fourier transform, and SfIsPunctuallyPureOfWeight. The same delivery supplies canonical ordinary Weil image, shift and geometric character-constituent helpers, with forgetful compatibility statements. The natural-language statement and eight-step proof plan are unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cdd6af24c",
+  "group": "Q14",
+  "result": "pass",
+  "note": "I checked every hypothesis and the conclusion against the node and the source (sk-p-dl-a1-fourier-weight, order 3121). The statement field is verbatim. Lisse uses HasCommonStageLisseLattice; irreducible is lisse Weil subobjects zero or iso (the source's wording); punctual purity uses the recorded SfIsPunctuallyPureOfWeight; the Fourier isomorphism is an iso of Frobenius pairs between the recorded commonStageFourierTransform with kernel L_Psi(b x y), r=1 (exactly def-fd-transform's L_{Psi,b}), and ordinary j_* followed by [1]. The auxiliary Psi is universally quantified and the trace coefficient b is unique, so all psi are covered. The two §1(B) modules are sound: the Weil j_* is the right adjoint of zlWeilPull (landed pattern, old module publicly imported), and the constituent exclusion runs over every a in k including 0. All postponed theorems are true and have proof docstrings. No duplicate notion was found. Edge cases (whole line, a=0, real weights, no extra assumption on M') are covered. There are no hollow definitions and no pro-etale substitute. nt_compile.py on all three modules: rc 0, no errors (38 s). No findings need a repair."
  }
 }

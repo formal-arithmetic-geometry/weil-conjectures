@@ -1,0 +1,112 @@
+{
+ "id": "def-sfb-module-object-projection-map",
+ "kind": "definition",
+ "title": "Canonical derived projection map for condensed module objects",
+ "status": "split",
+ "statement": "Let $\\Lambda$ be a commutative condensed ring [sk-def-sfb-condensed-ring], $f:X\\to Y$ a scheme morphism, and $\\Lambda_T=p_T^*\\Lambda$ [sk-def-sfb-pulled-back-coefficients]. Use the ordinary unbounded module-object derived functors $Lf^*\\dashv Rf_*$ [sk-def-sfb-module-derived-pushpull] and relative K-flat derived tensors [sk-def-sfb-derived-tensor-hom]. Write $d_{M,N}:Lf^*(M\\otimes^{\\mathbf L}N)\\to Lf^*M\\otimes^{\\mathbf L}Lf^*N$ for the canonical tensor comparison induced by ordinary module pullback and localization: it is the derived bifunctor lift characterized by the two derived counits and the signed total of the ordinary scalar-extension tensorator. Define the canonical projection map\n$$\\pi_{f,K,L}:Rf_*K\\otimes^{\\mathbf L}L\\longrightarrow Rf_*(K\\otimes^{\\mathbf L}Lf^*L)$$\nto be the adjoint transpose of $d_{Rf_*K,L}$ followed by $\\varepsilon_K\\otimes1$, where $\\varepsilon$ is the counit of the specified derived adjunction.",
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-derived-pushpull",
+  "sk-def-sfb-derived-tensor-hom"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EL (lemma-tensor-product-pullback), Tag 0943 (section-projection-formula); blueprint main-20261015 sk-thm-sf-pf-adic-projection canonical-map convention"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Proper projection formula for bounded constructible integral adic module objects and their localizing closure",
+   "results": "OK 8 hits: AdicCompletion.pi_apply_coe, localCohomology, Hausdorffification, AdicCompletion, IsAdicComplete, AdicCompletion.eval, AdicCompletion.submodule, AdicCompletion.eval_of",
+   "date": "2026-10-18",
+   "verdict": "No matching canonical module-object pullback structure or projection map."
+  },
+  {
+   "tool": "leansearch",
+   "query": "canonical strong monoidal structure on pullback of internal module objects over a condensed ring",
+   "results": "OK 8 hits: ModuleCat.MonoidalCategory.tensorUnit_carrier, ModuleCat.hom_whiskerLeft, ModuleCat.MonoidalCategory.tensorUnit_isModule, ModuleCat.instMonoidalFree, CategoryTheory.Over.monObjMkPullbackSnd_mul, AlgebraicGeometry.Scheme.monObjAsOverPullback_mul, ModuleCat.MonoidalCategory.instMonoidalCategoryStruct, SemimoduleCat.MonoidalCategory.instMonoidalCategoryStruct",
+   "date": "2026-10-18",
+   "verdict": "No matching canonical module-object pullback structure or projection map."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "pullback of module objects is strong monoidal and preserves flat objects",
+   "results": "OK 8 hits: ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat, Module.Flat.instPreservesFiniteLimitsModuleCatTensorLeftOfCarrier, Module.Flat.iff_preservesFiniteLimits_tensorLeft, ModuleCat.preservesFiniteLimits_extendScalars_of_flat, CommRingCat.Under.instPreservesLimitsOfShapeUnderWalkingParallelPairTensorProdOfFlatCarrier, CommRingCat.Under.instPreservesLimitUnderWalkingParallelPairParallelPairTensorProdOfFlatCarrier, ModuleCat.monoidalCategory, CommRingCat.Under.instPreservesFiniteLimitsUnderTensorProdOfFlatCarrier",
+   "date": "2026-10-18",
+   "verdict": "No matching canonical module-object pullback structure or projection map."
+  },
+  {
+   "tool": "grep",
+   "query": "mapMod.*Monoidal|upperStar.*Monoidal|upperStar.*PreservesFlat",
+   "results": "OK 0 hits: ",
+   "date": "2026-10-18",
+   "verdict": "No matching canonical module-object pullback structure or projection map."
+  },
+  {
+   "tool": "grep",
+   "query": "moduleUpperStarCoreMonoidal|moduleObjectProjectionMap|moduleUpperStarPreservesFlat; module-object pullback tensor; blueprint_refs.py search pullback module monoidal",
+   "results": "No projection-map definition in local WeilConjectures/ or lean/Sheaf; blueprint search 0. Live source accessor exposes ModuleObject.Derived.Monoidal.leftDerivedUpperStarTensor, whose exact canonical comparison is reused with Adjunction.rightAdjointProjectionMap. No monoidal structure or flatness theorem is restated.",
+   "date": "2026-10-18",
+   "verdict": "No duplicate definition; existing generic operations reused."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "det-thm-sf-pf-adic-projection",
+  "date": "2026-10-18",
+  "group": "Q98"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-thm-sf-pf-adic-projection",
+   "place": "The canonical adjoint-transpose projection map in clauses (1) and (2)",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-pf-adic",
+ "lean": {
+  "module": "Sheaf.Paper.ModuleObjectProjectionMap",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.moduleObjectProjectionMap",
+  "file": "lean/Sheaf/Paper/ModuleObjectProjectionMap.lean",
+  "statement": "def moduleObjectProjectionMap (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))) (L : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y)))",
+  "branch": "newtargets-dag",
+  "by": "Q98",
+  "date": "2026-10-18",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.moduleObjectProjectionMap"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-275386ee1",
+  "group": "Q98",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-275386ee1",
+  "group": "Q98",
+  "result": "pass",
+  "note": "Each node clause and hypothesis matches the Lean: prime l, field k of prime char != l, finite E in the l-adic closure with condensed O_E, standing schemes and k-morphisms, IsProper p, module-object D over condensedRingObj on the small pro-etale site, recorded Dbc constantModelBoundedConstructible, generic localizingClosure, uncompleted derivedTensor; clause (1), tensor closure for every T, clause (2) with the same map. No extra hypotheses or weakening; all binders and universes bound. New def-sfb-module-object-projection-map = rightAdjointProjectionMap of derivedUpperStarLowerStarAdjunction with the live canonical leftDerivedUpperStarTensor: direction and transpose-of-(comparison then counit x id) checked in ProjectionMap.lean:175 and Monoidal.lean:670. Not a duplicate (HasProjectionFormula is the left-adjoint map; pbc projection maps are ringed-topos with completed coefficients). Field rule met. Item changed only lean and stmt_deps; statements verbatim; theorem sorry; docstrings ok. nt_compile.py on both files rc=0, no errors or warnings (3.4 s, 22.7 s). Minor: new node source.document names sites-modules.tex while Tag 0943 is in sites-cohomology.tex (place names both); docstring merges proof steps 3-4."
+ }
+}

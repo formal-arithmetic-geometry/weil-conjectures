@@ -30,7 +30,8 @@
   "sk-def-localizing-closure",
   "def-weil-proper-morphism",
   "sk-def-sfb-derived-tensor-hom",
-  "lem-weil-pbc-ringed-projection-mate-exact"
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "def-sfb-module-object-projection-map"
  ],
  "proof": [
   {
@@ -328,5 +329,23 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.Paper.IntegralProperProjectionFormula",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.integralProperProjectionFormula",
+  "file": "lean/Sheaf/Paper/IntegralProperProjectionFormula.lean",
+  "statement": "theorem integralProperProjectionFormula (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] {X Y : Scheme.{u}} [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))] [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))] [IsSeparated (Y ↘ Spec (.of k))] (p : X ⟶ Y) [p.IsOver (Spec (.of k))] [IsProper p] : (∀ (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.val) X))) (L : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.val) Y))), constantModelBoundedConstructible (Profinite.padicIntegersRingObj ℓ E.val) X K → constantModelBoundedConstructible (Profinite.padicIntegersRingObj ℓ E.val) Y L → IsIso (moduleObjectProjectionMap (Profinite.padicIntegersRingObj ℓ E.val) p K L)) ∧ (∀ (T : Scheme.{u}) [T.Over (Spec (.of k))] [LocallyOfFiniteType (T ↘ Spec (.of k))] [QuasiCompact (T ↘ Spec (.of k))] [IsSeparated (T ↘ Spec (.of k))] (K L : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology T) Ab.{u + 1}) (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.val) T))), localizingClosure (constantModelBoundedConstructible (Profinite.padicIntegersRingObj ℓ E.val) T) K → localizingClosure (constantModelBoundedConstructible (Profinite.padicIntegersRingObj ℓ E.val) T) L → localizingClosure (constantModelBoundedConstructible (Profinite.padicIntegersRingObj ℓ E.val) T) (((derivedTensor (Profinite.padicIntegersRingObj ℓ E.val) T).obj K).obj L)) ∧ (∀ (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.val) X))) (L : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.val) Y))), localizingClosure (constantModelBoundedConstructible (Profinite.padicIntegersRingObj ℓ E.val) X) K → localizingClosure (constantModelBoundedConstructible (Profinite.padicIntegersRingObj ℓ E.val) Y) L → IsIso (moduleObjectProjectionMap (Profinite.padicIntegersRingObj ℓ E.val) p K L))",
+  "branch": "newtargets-dag",
+  "by": "Q98",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-275386ee1",
+  "group": "Q98",
+  "result": "pass",
+  "note": "Each node clause and hypothesis matches the Lean: prime l, field k of prime char != l, finite E in the l-adic closure with condensed O_E, standing schemes and k-morphisms, IsProper p, module-object D over condensedRingObj on the small pro-etale site, recorded Dbc constantModelBoundedConstructible, generic localizingClosure, uncompleted derivedTensor; clause (1), tensor closure for every T, clause (2) with the same map. No extra hypotheses or weakening; all binders and universes bound. New def-sfb-module-object-projection-map = rightAdjointProjectionMap of derivedUpperStarLowerStarAdjunction with the live canonical leftDerivedUpperStarTensor: direction and transpose-of-(comparison then counit x id) checked in ProjectionMap.lean:175 and Monoidal.lean:670. Not a duplicate (HasProjectionFormula is the left-adjoint map; pbc projection maps are ringed-topos with completed coefficients). Field rule met. Item changed only lean and stmt_deps; statements verbatim; theorem sorry; docstrings ok. nt_compile.py on both files rc=0, no errors or warnings (3.4 s, 22.7 s). Minor: new node source.document names sites-modules.tex while Tag 0943 is in sites-cohomology.tex (place names both); docstring merges proof steps 3-4."
  }
 }

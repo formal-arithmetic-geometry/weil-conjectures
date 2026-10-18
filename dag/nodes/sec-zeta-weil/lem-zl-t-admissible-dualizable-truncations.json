@@ -15,7 +15,8 @@
   "def-weil-sheaf-of-modules-category",
   "def-weil-abstract-derived-category",
   "def-sc-finitely-presented-module",
-  "def-weil-pbc-flat-ring-map"
+  "def-weil-pbc-flat-ring-map",
+  "def-zl-t-admissible-coefficient-models"
  ],
  "proof": [
   {
@@ -253,5 +254,26 @@
   "group": "N4",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N4-f302c8dd7 (reviewer sub-agent of L); spot-checked: Read the item, both new nodes, cited statements, HRS/BS sources, unit and chapter route, and delivery errors A–F. All hypotheses, edge cases, source locations, coefficient maps, ordinary derived-category operations, searches, and cross-unit tool uses check out. No duplicates, hidden long-step lemmas, route-pivot machinery, SGA citations, or repairs found."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.TAdmissibleDualizableTruncations",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.tAdmissible_dualizable_truncations",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.tAdmissible_dualizable_truncations"
+  ],
+  "file": "lean/Sheaf/Paper/TAdmissibleDualizableTruncations.lean",
+  "statement": "theorem tAdmissible_dualizable_truncations (Λ : Profinite.CondensedRing.{u}) [IsCommMonObj Λ.X] (hΛ : IsTAdmissible Λ) (X : Scheme.{u}) (hX : HasLocallyFiniteIrreducibleComponents X) : (∀ K : LisseAmbient Λ X, dualizableProperty Λ X K → ∀ n : ℤ, dualizableProperty Λ X ((DerivedCategory.TStructure.t.truncLE n).obj K) ∧ dualizableProperty Λ X ((DerivedCategory.TStructure.t.truncGE n).obj K)) ∧ (∃ h : (dualizableProperty Λ X).IsTriangulated, HasRestrictedStandardTStructure Λ X h) ∧ (∀ M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ.X X), dualizableProperty Λ X ((DerivedCategory.singleFunctor _ 0).obj M) ↔ HasScalarLocalModels Λ X M) ∧ (∀ K : LisseAmbient Λ X, dualizableProperty Λ X K → ∀ q : ℤ, HasScalarLocalModels Λ X ((DerivedCategory.homologyFunctor _ q).obj K))",
+  "branch": "newtargets-dag",
+  "by": "N7",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6fa2e8a23",
+  "group": "N7",
+  "result": "fix",
+  "note": "Read the item, its 9 stmt_dep records, HRS Def 6.1/Thm 6.2(2)/Prop 6.6, all three delivered modules and the declarations they use (Mod.derivedMonoidalCategory, upperStar, changeOfRings, IsPerfectRingComplex, proetalePrecoverage). Every hypothesis and conclusion matches the node, including the equivalence 'f.p. N has a finite f.g.-projective resolution' <=> N[0] perfect; no extra assumptions or universe restrictions; edge cases (zero ring, empty scheme, zero module, varying covers, all n and q) covered; one sorry; docstrings correct; record statement verbatim. The §1(B) Profinite.CondensedRing abbreviation is acceptable. All files compile with nt_compile (rc 0). H4 fix: the delivery duplicated the landed det-def-sfb-constructible-local-model notion (constantScalarMap/condensedScalarModule/scalarModuleOn and the body of HasScalarLocalModels) and upstream CategoryTheory.IsDualizable. fixes/TAdmissibleCoefficientModels.lean now defines HasScalarLocalModels as an abbreviation for an existing pro-etale cover with HasFiniteConstantLocalModelOnCover Λ.X M U, and dualizableProperty as IsDualizable; fixes/def-zl-t-admissible-coefficient-models.json cites det-def-sfb-constructible-local-model in place of the constant-module functor node and drops the three removed declarations; the report gains a Maintainer fix section. The item module and record are unchanged; the fixed set compiles with rc 0."
  }
 }

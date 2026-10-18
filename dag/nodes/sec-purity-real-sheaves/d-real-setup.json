@@ -120,14 +120,20 @@
  "reviewed_lean": {
   "date": "2026-10-18",
   "by": "L",
-  "reviewer": "NT-stage2-cc-3abdb970c",
-  "group": "Q14",
-  "result": "pass",
-  "note": "Read the node, all 5 stmt_deps with their recorded Lean, both delivered modules, the report and the exact upstream declarations (fiberAutBaseChange, weilGroup/weilGroupDeg bodies, geometricFiber, IsAdicLisseSheaf, adicUpperStarLowerStarAdjunction, WeilSheaf.IsLisse/IsIrreducibleLisse, IsConstructibleEtaleModuleSheaf). Clause (1): connected Noetherian stalkwise-normal V (no regularity), dense open immersion, surjectivity of the canonical fiberAutBaseChange on Aut(fiber s), the node's own pi1, plus the connected-cover form; the model API would need an unassumed connectedness. Clause (2): verbatim bodies of the weilGroup/weilGroupDeg abbrevs, avoiding derivable GeometricallyConnected binders; rho fixed by its pair formula; degree, geometric-kernel and full surjectivity. Clause (3): actual finite-level and adic units; pro-etale AdicSheaf is the chapter's recorded qbar framework (WeilSheaf, curveWeilMiddleExtension), not a substitute; regularity and QuasiCompact j correctly dropped. Clause (4): full D.IsCurve; lisse preserved, Hom bijection, irreducibility preserved, for Weil and geometric versions. Clause (5): constructibility of ordinary lowerStar for every finite Lambda and FLC F. The d-real-setup §1(B) repair only appends ringChar_eq (sorry) and a Fact instance; without it the item fails to compile. Node diffs are lean only; statement verbatim; 8 sorry proofs; docstrings, line lengths, names and report sections OK. nt_compile --json on both files: rc 0, clean (2.6 s / 3.6 s); diagnostics confirmed visible by an error probe. Edge cases: empty V, identity j, singular normal V, zero ring, zero sheaves, U=C. Non-blocking: plan imports of the upstream-only prop-wf-weil-sheaf-representation-equivalence and Mathlib leaves absent."
+  "reviewer": "NT-stage2-cc-7a131e97c",
+  "group": "Q01",
+  "result": "fix",
+  "note": "Statement correct. I read the node, the source d-real-boundary(.proof).md, all 5 stmt_deps and the live fundamentalRep/WeilGroup/IsCurve declarations. The local binders are verbatim from exists_boundary_decomposition_landing, the hθ formulas pin θ_a, τ_a/α_a are determined, invariants use Representation.invariants on I_s = r.ker in W(K_s), T_a = toInvariants φ for any lift φ, and the conclusion ∃ A ≃ₗ with A T₁ = T₂ A is neither weaker nor stronger. True for any presentation data (only the homomorphism law of ρ is used) and not vacuous. d-real-setup §1(B): additions only (Curve import, Setup.openIsCurve true, Prop, sorry); only the lean field changed, with a note. Statement verbatim; lines ≤96; docstrings ok; sorry only. nt_compile --json on both modules: rc 0, no diagnostics (4.0/4.9/6.0 s); an error probe confirmed diagnostics are visible. Only defect: H11, the Second reading by Q01 was a self-check. FIX: fixes/lem-real-boundary-path-independence.report.md has the worker report and dependency-modules sections byte-identical, with a real clause-by-clause second reading. Non-blocking: 'reducible' wording for a plain @[expose] def; proof-plan imports."
  },
  "lean": {
   "module": "Sheaf.Paper.RealSheavesSetup",
   "declaration": "RealSheaves.Setup",
+  "file": "lean/Sheaf/Paper/RealSheavesSetup.lean",
+  "statement": "structure Setup",
+  "branch": "newtargets-dag",
+  "by": "Q01",
+  "date": "2026-10-18",
+  "existing": false,
   "declarations": [
    "RealSheaves.Setup",
    "RealSheaves.Setup.q",
@@ -139,14 +145,9 @@
    "RealSheaves.Setup.localFrobenius",
    "RealSheaves.Setup.IsAffineOpen",
    "RealSheaves.Setup.ringChar_eq",
-   "RealSheaves.Setup.coefficientCharFact"
+   "RealSheaves.Setup.coefficientCharFact",
+   "RealSheaves.Setup.openIsCurve"
   ],
-  "file": "lean/Sheaf/Paper/RealSheavesSetup.lean",
-  "statement": "structure Setup",
-  "branch": "newtargets-dag",
-  "by": "Q14",
-  "date": "2026-10-18",
-  "existing": false,
-  "note": "Section 1(B) interface repair: the recorded Setup supplies card_eq = p^a, p prime, a positive, and l != p, but exposes neither its stated characteristic p nor the Fact (ringChar k0 != l) required by the recorded WeilSheaf pullback API. Preserve the entire existing module and Setup interface. Add the named characteristic theorem (the first paragraph of this node), with its proof postponed, and a real-data Fact instance obtained from that theorem and the existing l_ne_p. The consumer now uses the original datum alone, with no additional characteristic hypothesis."
+  "note": "Section 1(B) interface repair: preserve the complete existing Setup module and characteristic interface. The recorded definition gives the chapter curve predicate, but no conversion to the ordinary IsCurve structure on its open subscheme, which the recorded fundamentalRep API requires. Add Setup.openIsCurve, a named proof of that implied structure, and pass it explicitly to WeilGroup so the consumer adds no IsCurve hypothesis."
  }
 }

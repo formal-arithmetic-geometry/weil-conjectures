@@ -322,5 +322,24 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.FiniteCompactProetale",
+  "declaration": "WeilConjectures.finiteCompactProEtale",
+  "file": "lean/Sheaf/SixFunctors/FiniteCompactProetale.lean",
+  "statement": "theorem finiteCompactProEtale (D : FiniteFieldDatum.{u}) (ℓ : ℕ) [Fact ℓ.Prime] (hℓ : ℓ ≠ D.p) (X : Scheme.{u}) [X.Over (Spec (CommRingCat.of D.k))] [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of D.k))] [QuasiCompact (X ↘ Spec (CommRingCat.of D.k))] (A : Type) [CommRing A] (hA : Finite A) [TopologicalSpace A] [DiscreteTopology A] [IsTopologicalRing A] (r : ℕ) (hr : ∀ a : A, (ℓ ^ r) • a = 0) : ∀ (C : DerivedCategory (AlgebraicGeometry.ProEtale.pulledBackModuleObjects (Profinite.continuousMapRingObj A) X)), (AlgebraicGeometry.ProEtale.constantModelBoundedConstructible (Profinite.continuousMapRingObj A) X ⊓ fun K ↦ DerivedCategory.finiteTorAmplitude _ K) C → ∀ (I : Type w) (E : I → DerivedCategory (AlgebraicGeometry.ProEtale.pulledBackModuleObjects (Profinite.continuousMapRingObj A) X)) [hE : HasCoproduct E], (∀ i, AlgebraicGeometry.ProEtale.localizingClosureProEtale (Profinite.continuousMapRingObj A) X (E i)) → AlgebraicGeometry.ProEtale.localizingClosureProEtale (Profinite.continuousMapRingObj A) X (∐ E) → Function.Bijective (DirectSum.toAddMonoid (fun i : I => Preadditive.rightComp C (Sigma.ι E i)) : (⨁ i : I, (C ⟶ E i)) →+ (C ⟶ ∐ E))",
+  "branch": "newtargets-dag",
+  "by": "Q77",
+  "date": "2026-10-18",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-c0960a89f"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c0960a89f",
+  "group": "Q77",
+  "result": "fix",
+  "note": "Statement matches node and source clause by clause: D/ℓ≠p/finite-type X (LocallyOfFiniteType+QuasiCompact), finite ℓ-primary discrete A, D(pulledBackModuleObjects (continuousMapRingObj A) X), Dctf = constantModelBoundedConstructible ⊓ finiteTorAmplitude (the defining property of ConstantModelConstructibleFiniteTor and the generator of localizingClosureProEtale), family in the closure with ambient ∐E, canonical DirectSum.toAddMonoid map word for word the body of IsCompactObject. Edge cases (empty family, C=0, A=0, X=∅) covered. HasCoproduct and ∐E∈L hypotheses are automatic for small families and the statement stays true for larger universes. A : Type is forced by continuousMapRingObj and loses no finite ring. Faults repaired in fixes/FiniteCompactProetale.lean (signature byte-identical to lean.statement): H8 theorem docstring lacked the node's six proof steps; H8 both docstrings cited a non-existent source file (the theorem docstring also cited Stacks 09SM); H9 unused import Sheaf.CategoryTheory.CompactObject removed. nt_compile.py --json: delivered file and fix compile clean; axioms propext/sorryAx/Classical.choice/Quot.sound."
  }
 }

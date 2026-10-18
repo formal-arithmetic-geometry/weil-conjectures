@@ -11,7 +11,9 @@
   "def-pc-scheme",
   "def-trf-algebraic-space",
   "def-weil-open-immersion",
-  "lem-trf-space-fibre-products-etale-covers"
+  "lem-trf-space-fibre-products-etale-covers",
+  "def-a1-space-point-topology",
+  "def-a1-space-open-subspace"
  ],
  "proof": [
   {
@@ -285,5 +287,30 @@
   "group": "N3",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N3-89e0f67e1 (reviewer sub-agent of L); spot-checked: Read the item, all 10 steps, the new node lem-a1-etale-atlas-presentation, every cited statement, and the Stacks sources: spaces.tex 0262 (lemma-space-presentation) and spaces-properties.tex 03BZ, 03H4, 03H5, 03E4, 03IR. Step 1 is 03H4 word for word, with 03H5 extended from scheme-source to representable maps; the worker's note on the typo in 03H5's proof (Z x_X T -> T should be -> Z) is correct. Step 2 gets continuity of every morphism from the scheme-source clause of lem-a1-space-affine-etale-cover; |J| is open with the subspace topology because U_J is open in U. Steps 3-4 follow the 03BZ proof: since ps=pt, s^-1V=t^-1V=R_V, and its projections are etale by base change. 02WW (lem-trf-etale-relation-quotient) gives J=V/R_V. The hypotheses of 02WU (lem-trf-etale-relation-finding-opens) hold: s,t are surjective (new node), etale implies flat and lfp, and an open immersion is etale; its R' is exactly R_V; and |J|=O. Step 5: an open immersion with full image is an isomorphism, which gives uniqueness and inclusion. Step 6: qp is representable etale, so its image is open. Step 7: E_I=E by step 5, E x_I T = E x_F T because I->F is mono, and surjectivity on points follows. Step 8 holds for arbitrary g by uniqueness of open subspaces. Steps 9-10 are 03E4 by finite subcovers; the empty case is covered. New node: statement-only, equivalent to 0262 (1)-(3); 'surjective' is added and is true via the diagonal section. Tested on empty X, an identity atlas and a two-sheet atlas. Not a duplicate of 02WW, of 045Y (lem-trf-etale-relation-kernel-pair) or of the 086K leaf, and it restates no clause of the item. No cycle (transitive closures computed). Accepted tool_uses: lem-trf-space-fibre-products-etale-covers, lem-trf-etale-relation-quotient and lem-trf-etale-relation-finding-opens, all generic algebraic-space tools. Batch-5 check: def-trf-algebraic-space, lem-trf-space-fibre-products-etale-covers, lem-trf-etale-relation-quotient and lem-trf-etale-relation-finding-opens are Stacks foundations (025Y, 02X2, 02WW, 02WU). Neither assumption gives them, and they are not steps of the trace formula or Poincare duality proofs. All four are already in the batch-5 closure through existing nodes (lem-a1-etale-sheaf-algebraic-space-realization and lem-a1-separated-locally-qf-space-representable, under lem-a1-affine-hc0), without passing through the item or any trace-formula node. The citations are kept. No fixes written."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicSpaceEtaleOpenImage",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.etale_open_image",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.points_atlas_isOpen_iff",
+   "AlgebraicGeometry.AlgebraicSpace.openSubspace_points_orderIso",
+   "AlgebraicGeometry.AlgebraicSpace.etale_open_image",
+   "AlgebraicGeometry.AlgebraicSpace.points_compactSpace_iff"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicSpaceEtaleOpenImage.lean",
+  "statement": "theorem etale_open_image {S : Scheme.{u}} (E F : AlgebraicSpace S) (q : E ⟶ F) (hq : IsEtale q.hom.hom) : IsOpen (pointImage q.hom.hom) ∧ ∃ A : OpenSubspace F, pointImage q.hom.hom = pointImage A.val.ι ∧ (∃ qI : E.obj.obj ⟶ A.val.toFunctor, qI ≫ A.val.ι = q.hom.hom ∧ IsEtale qI ∧ IsSurjective qI) ∧ (∀ (G : AlgebraicSpace S) (g : G ⟶ F), IsRepresentableWith (fun _ _ p ↦ IsOpenImmersion p.left) (A.val.preimage g.hom.hom).ι ∧ pointImage (Limits.pullback.snd q.hom g.hom).hom = pointImage (A.val.preimage g.hom.hom).ι) ∧ (CompactSpace (Point E.obj.obj) → CompactSpace (Point A.val.toFunctor))",
+  "branch": "newtargets-dag",
+  "by": "N4",
+  "date": "2026-10-18",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-570a1e037"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-570a1e037",
+  "group": "N4",
+  "result": "fix",
+  "note": "Read the item, all six stmt_deps, the three delivered modules, the node records, the report and Stacks 03BU/03H4/03H5/03BX/03BZ/03E4/03IR. Every clause matches the Lean (atlas topology, order isomorphism with pointImage, open image with factorization, base change and quasi-compactness, quasi-compact atlas criterion), with no stronger hypotheses, the same universes, the edge cases covered and the statement field verbatim. Finding H4: def-a1-algebraic-space-point-classes (Q05, AlgebraicSpacePointClasses: Point, PointRepresentative, schemePointMap) landed during review and is the same notion as the delivered Points, FieldRepresentative and schemePoint; the landed lem-a1-space-affine-etale-cover, used in the item's proof, is stated on Point. Fix: AlgebraicSpacePointTopology.lean reuses Point and keeps only PointRepresentative.map, pointImage and the instance pointTopologicalSpace; the whole node def-a1-space-point-topology.json cites the point-classes node, with lean.declaration pointTopologicalSpace; AlgebraicSpaceEtaleOpenImage.lean renames Points to Point and schemePoint to schemePointMap and adds the proof import of AlgebraicSpaceAffineEtaleCover; the report gains a reviewer-fix section. nt_compile: the delivered modules and the fixed modules all compile clean; a probe confirmed the OpenSubspace order is subfunctor inclusion and the topology is the final topology of étale scheme maps. OpenSubspace is not duplicated."
  }
 }

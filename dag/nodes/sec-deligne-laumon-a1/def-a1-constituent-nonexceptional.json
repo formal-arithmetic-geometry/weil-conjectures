@@ -35,13 +35,28 @@
   "rem-dl-a1-conventions"
  ],
  "lean": {
-  "module": "WeilConjectures.DeligneLaumon.AffineLine.MiddleExtension",
-  "declaration": "AlgebraicGeometry.WeilSheaf.IsNonexceptional",
-  "branch": "slopmaster2",
-  "line": 68,
-  "sorry_free": false,
-  "body_lines": 1,
-  "sorry_free_note": "corrected by L 14:55 UTC: the imported flag was shallow; the declaration rests on sorried declarations transitively (sorry map slopmaster2_71d63dcf, d edges); not attachable"
+  "module": "Sheaf.Paper.CommonStageConstituentNonexceptional",
+  "declaration": "WeilConjectures.SfIsConstituentNonexceptional",
+  "declarations": [
+   "WeilConjectures.SfAffineLineOpen",
+   "WeilConjectures.sfFourierCharacterScale_existsUnique",
+   "WeilConjectures.sfFourierCharacterScale",
+   "WeilConjectures.sfAffineLine_curve",
+   "WeilConjectures.SfAffineLineOpen.curve",
+   "WeilConjectures.sfAffineOpen_geometry",
+   "WeilConjectures.sfAffineOpenLinearFunction",
+   "WeilConjectures.sfAffineLinearArtinSchreierComplex",
+   "WeilConjectures.sfAffineLinearArtinSchreier_mem",
+   "WeilConjectures.sfAffineLinearArtinSchreier",
+   "WeilConjectures.SfIsConstituentNonexceptional"
+  ],
+  "file": "lean/Sheaf/Paper/CommonStageConstituentNonexceptional.lean",
+  "statement": "def SfIsConstituentNonexceptional (Ψ : AddChar (ZMod F.field.p) F.coefficients.Qbar) (hΨ : Ψ ≠ 1) (ψ : AddChar F.field.k₀ F.coefficients.Qbar) (M : sfCommonStageWeilSheaf F.field F.coefficients.l F.coefficients.different A.U F.coefficients.Qbar) : Prop",
+  "branch": "newtargets-dag",
+  "by": "Q14",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Section 1(B), repair of returned head 77186f4711e6: the prior IsNonexceptional takes the older WeilSheaf category and cannot be applied to recorded sfCommonStageWeilSheaf objects. The module retains that interface by public import and states constituent exclusion in the actual geometric common-stage heart, using lisse subquotients and the explicit completed Artin-Schreier line for every a in k, including zero. No geometric irreducibility or infinity condition is added."
  },
  "blueprint_lean": [
   "AlgebraicGeometry.WeilSheaf.IsNonexceptional"
@@ -108,5 +123,13 @@
   "group": "Q81",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q81-d9374271d (reviewer sub-agent of L); spot-checked: Read the item in full, its blueprint text (master order 2752, main-20261015 order 3096, main-20261017 identical) and the unit sk-p-dl-a1-middle sketch. Also read the cited nodes def-wf-fundamental-representation, def-fd-artin-schreier-sheaf (imported statement and BU), rem-dl-a1-conventions and def-fd-additive-character, and all six citers. The delivered statement is the BU verbatim. Its only change from master is dropping 'nonzero irreducible', which follows the current blueprint. Every citer states irreducibility itself, so no citer's meaning changes. The hypotheses of def-wf-fundamental-representation hold: U_0 is open in A^1 (separated, finite type) and U is connected. Coefficients are Q̄_ℓ throughout, and Jordan-Hölder constituents of the finite-dimensional continuous representation are well defined. def-fd-nonexceptional is a different notion (it applies to the whole middle extension) and lem-a1-constituent-nonexceptional-comparison compares the two, so it is not a duplicate. There are no new nodes and no proof steps. Two faults are repaired in fixes/dag/nodes/sec-deligne-laumon-a1/def-a1-constituent-nonexceptional.json. (1) B3: the statement cites [rem-dl-a1-conventions], now an imported definition node that supplies k_0, k, ℓ and lisse Weil sheaf, but it was missing from stmt_deps (dropped at import as a remark). I added it and checked that no cycle results. (2) B3/C4: def-fd-artin-schreier-sheaf defines L_{ψ(ax)} only for a∈k_0, but the item, and the Lean IsNonexceptional at MiddleExtension.lean:68-71, quantify over a∈k=k̄_0. This matters: a Galois orbit of L_{ψ(σ^i(a)x)} with a∉k_0 must count as exceptional. I added one sentence defining L_{ψ(ax)}|_U for a∈k as L_{ψ,ax}, the pullback of L_ψ along x↦ax, and checked it agrees with both forms of the cited construction. Small cases tested: zero sheaf, constant sheaf, L_{ψ(ax)} with a in k_0 and with a in k minus k_0, L_{ψ(x^2)}, Kummer sheaves, and non-semisimple extensions. No tool_uses.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cdd6af24c",
+  "group": "Q14",
+  "result": "pass",
+  "note": "I checked every hypothesis and the conclusion against the node and the source (sk-p-dl-a1-fourier-weight, order 3121). The statement field is verbatim. Lisse uses HasCommonStageLisseLattice; irreducible is lisse Weil subobjects zero or iso (the source's wording); punctual purity uses the recorded SfIsPunctuallyPureOfWeight; the Fourier isomorphism is an iso of Frobenius pairs between the recorded commonStageFourierTransform with kernel L_Psi(b x y), r=1 (exactly def-fd-transform's L_{Psi,b}), and ordinary j_* followed by [1]. The auxiliary Psi is universally quantified and the trace coefficient b is unique, so all psi are covered. The two §1(B) modules are sound: the Weil j_* is the right adjoint of zlWeilPull (landed pattern, old module publicly imported), and the constituent exclusion runs over every a in k including 0. All postponed theorems are true and have proof docstrings. No duplicate notion was found. Edge cases (whole line, a=0, real weights, no extra assumption on M') are covered. There are no hollow definitions and no pro-etale substitute. nt_compile.py on all three modules: rc 0, no errors (38 s). No findings need a repair."
  }
 }

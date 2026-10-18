@@ -132,32 +132,32 @@
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q122-b98de9bc9 (reviewer sub-agent of L); spot-checked: Read the whole delivery: one commit with the item and its report, no new nodes. The main-20261015 definition (main-20261017 only adds a lean field) is kept in full, in order: ordinary j_*F in the qbar category, then [1], with Rj_*F kept separate. I read all 11 stmt_deps and the pair, rational and complete coefficient categories they rest on. Hypotheses hold: U_0 and C_0 are Noetherian, separated and finite-dimensional with ell invertible, as def-pod-lisse-l-adic-sheaves and def-weil-pbc-qbar-category require. Citing def-pod-lisse-l-adic-sheaves (clauses 1, 2 and 4, Weil II 1.1.1 b-d) makes the blueprint's finite-ring lisse pointer precise without changing its meaning; the finite-ring node stays for the finite levels. The direct-image formula with its module action is exactly what def-weil-pbc-proetale-operations and def-weil-pbc-direct-image state. This matches unit Steps 2-3 (levelwise limit; the tower need not be adic), and the item claims neither constructibility nor exactness. The shifts check against def-weil-abstract-derived-category ((K[1])^r=K^{r+1}) and def-weil-pbc-common-stage-cones ((E,K)[1]=(E,K[1])). Small cases checked: j=id, F=0, empty C_0, disconnected C_0. No cycle (the 2072-node closure excludes the item), no duplicate definition (d-real-boundary agrees with it), no SGA, no tool_uses. Etale.middleExtension is the generic small-etale (j)_*[A], so it is rightly not attached. FIX: the statement now says the structure morphism C_0 -> Spec k_0 is smooth, where it only said 'C_0 is smooth'; nothing else changed.; 1 file(s) fixed by the reviewer"
  },
  "lean": {
-  "module": "Sheaf.Paper.QbarCurveOrdinaryImage",
-  "declaration": "WeilConjectures.qbarCurveOrdinaryPushforward",
+  "module": "Sheaf.Paper.CommonStageCurveWeilMiddleExtension",
+  "declaration": "WeilConjectures.qbarCurveWeilOrdinaryPushforward",
   "declarations": [
-   "WeilConjectures.qbarCurveGeometricOpen",
-   "WeilConjectures.qbarCurveDerivedRestriction",
-   "WeilConjectures.qbarCurveRestriction_mem",
-   "WeilConjectures.qbarCurveSheafRestriction",
-   "WeilConjectures.qbarCurveSheafRestriction_isLeftAdjoint",
-   "WeilConjectures.qbarCurveOrdinaryPushforward",
-   "WeilConjectures.qbarCurveOrdinaryAdjunction",
-   "WeilConjectures.qbarCurveShiftedOrdinaryImage"
+   "WeilConjectures.qbarCurveWeilPull_isLeftAdjoint",
+   "WeilConjectures.qbarCurveWeilOrdinaryPushforward",
+   "WeilConjectures.qbarCurveWeilHeartForget",
+   "WeilConjectures.qbarCurveWeilOrdinaryPushforward_forget",
+   "WeilConjectures.qbarAffineArithmeticGeometry",
+   "WeilConjectures.qbarAffineArithmeticShiftLine",
+   "WeilConjectures.qbarAffineWeilShift",
+   "WeilConjectures.qbarAffineWeilShift_forget"
   ],
-  "file": "lean/Sheaf/Paper/QbarCurveOrdinaryImage.lean",
-  "statement": "def qbarCurveOrdinaryPushforward : sfCommonStageHeart l (D.geometricFiber c.U).left Ω ⥤ sfCommonStageHeart l (D.geometricFiber c.C).left Ω",
+  "file": "lean/Sheaf/Paper/CommonStageCurveWeilMiddleExtension.lean",
+  "statement": "def qbarCurveWeilOrdinaryPushforward : sfCommonStageWeilSheaf D l hl c.U Ω ⥤ sfCommonStageWeilSheaf D l hl c.C Ω",
   "branch": "newtargets-dag",
-  "by": "Q17",
+  "by": "Q14",
   "date": "2026-10-18",
   "existing": false,
-  "note": "§1(B): the previous curveWeilMiddleExtension is a functor on upstream WeilSheaf objects, whereas this consumer explicitly requires fixed Frobenius pairs in the recorded geometric constructible category. Its older PBC realization also has a different carrier category. This module publicly retains both previous interfaces and supplies ordinary j_* on the current intrinsic common-stage standard heart as the right adjoint of the recorded geometric inverse image. The right-adjoint universal property determines the functor and adjunction up to unique compatible isomorphism. The existence theorem identifies it with sectionwise ordinary sheaf direct image; no derived direct image or arbitrary chosen map is substituted. The shifted image first uses this heart functor and then the actual cohomological shift."
+  "note": "Section 1(B), repair of returned head 77186f4711e6: the recorded ordinary geometric heart functor is retained by public import. The new ordinary Weil-heart right adjoint supplies its induced Frobenius structure; a forgetful comparison identifies it with qbarCurveOrdinaryPushforward. The shift helper is an explicit tensor with the completed trivial-character coefficient line [1], with arithmetic-descent Weil structure and a comparison to the actual shift. This repairs the missing fixed-pair interface without replacing ordinary j_* by Rj_* or choosing an arbitrary structure map."
  },
  "reviewed_lean": {
   "date": "2026-10-18",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-2dc7ec9b0",
-  "group": "Q17",
+  "reviewer": "NT-stage2-cc-cdd6af24c",
+  "group": "Q14",
   "result": "pass",
-  "note": "Independent statement, dependency, edge-case, docstring, route-pivot, and compiler checks passed; no fixes needed."
+  "note": "I checked every hypothesis and the conclusion against the node and the source (sk-p-dl-a1-fourier-weight, order 3121). The statement field is verbatim. Lisse uses HasCommonStageLisseLattice; irreducible is lisse Weil subobjects zero or iso (the source's wording); punctual purity uses the recorded SfIsPunctuallyPureOfWeight; the Fourier isomorphism is an iso of Frobenius pairs between the recorded commonStageFourierTransform with kernel L_Psi(b x y), r=1 (exactly def-fd-transform's L_{Psi,b}), and ordinary j_* followed by [1]. The auxiliary Psi is universally quantified and the trace coefficient b is unique, so all psi are covered. The two §1(B) modules are sound: the Weil j_* is the right adjoint of zlWeilPull (landed pattern, old module publicly imported), and the constituent exclusion runs over every a in k including 0. All postponed theorems are true and have proof docstrings. No duplicate notion was found. Edge cases (whole line, a=0, real weights, no extra assumption on M') are covered. There are no hollow definitions and no pro-etale substitute. nt_compile.py on all three modules: rc 0, no errors (38 s). No findings need a repair."
  }
 }

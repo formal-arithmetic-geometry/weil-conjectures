@@ -303,26 +303,23 @@
  "reviewed_lean": {
   "date": "2026-10-18",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-2c77cde3f",
-  "group": "Q11",
-  "result": "pass",
-  "note": "Wrote review.md. Checked all clauses, eight statement dependencies, source and declarations, universes, edge cases, normalized maps, docstrings, and route-pivot compliance. Immutable module compiled cleanly through scompile.py in both modes. No fixes required; no repository or branch changes made."
+  "reviewer": "NT-stage2-cc-6fa2e8a23",
+  "group": "N7",
+  "result": "fix",
+  "note": "Read the item, its 9 stmt_dep records, HRS Def 6.1/Thm 6.2(2)/Prop 6.6, all three delivered modules and the declarations they use (Mod.derivedMonoidalCategory, upperStar, changeOfRings, IsPerfectRingComplex, proetalePrecoverage). Every hypothesis and conclusion matches the node, including the equivalence 'f.p. N has a finite f.g.-projective resolution' <=> N[0] perfect; no extra assumptions or universe restrictions; edge cases (zero ring, empty scheme, zero module, varying covers, all n and q) covered; one sorry; docstrings correct; record statement verbatim. The §1(B) Profinite.CondensedRing abbreviation is acceptable. All files compile with nt_compile (rc 0). H4 fix: the delivery duplicated the landed det-def-sfb-constructible-local-model notion (constantScalarMap/condensedScalarModule/scalarModuleOn and the body of HasScalarLocalModels) and upstream CategoryTheory.IsDualizable. fixes/TAdmissibleCoefficientModels.lean now defines HasScalarLocalModels as an abbreviation for an existing pro-etale cover with HasFiniteConstantLocalModelOnCover Λ.X M U, and dualizableProperty as IsDualizable; fixes/def-zl-t-admissible-coefficient-models.json cites det-def-sfb-constructible-local-model in place of the constant-module functor node and drops the three removed declarations; the report gains a Maintainer fix section. The item module and record are unchanged; the fixed set compiles with rc 0."
  },
  "lean": {
-  "module": "Sheaf.AlgebraicGeometry.ContinuousCoefficientCommRing",
-  "declaration": "Profinite.isCommMonObj_continuousCoefficientRingObj",
+  "module": "Sheaf.Topology.ProfiniteCondensedRing",
+  "declaration": "Profinite.CondensedRing",
   "declarations": [
-   "Profinite.continuousCoefficientRingPresheaf",
-   "Profinite.continuousCoefficientRingSheaf",
-   "Profinite.continuousCoefficientRingObj",
-   "Profinite.isCommMonObj_continuousCoefficientRingObj",
-   "Profinite.continuousMapRingSheafMap"
+   "Profinite.CondensedRing"
   ],
-  "statement": "instance isCommMonObj_continuousCoefficientRingObj :\n    IsCommMonObj (continuousCoefficientRingObj T)",
+  "file": "lean/Sheaf/Topology/ProfiniteCondensedRing.lean",
+  "statement": "abbrev CondensedRing : Type (u + 2)",
   "branch": "newtargets-dag",
-  "by": "Q11",
+  "by": "N7",
   "date": "2026-10-18",
-  "existing": true,
-  "note": "§1(B), existing universe-generalized binding. The closed upstream audit gives Profinite.continuousMapRingObj only for a coefficient carrier T : Type 0. This is too small to form the continuous condensed ring of the node's arbitrary finite extension E : Type u without a size restriction. The already published ContinuousCoefficientUniverse/ContinuousCoefficientCommRing interface gives exactly the same sections ULift C(S,T), precomposition and pointwise operations for T : Type u, and exports its commutative internal ring structure. The original continuousMapRingSheafMap remains available for Type 0 coefficients through ModuleObject.Basic; the item specializes continuous quotient postcomposition directly at Type u. No second definition of condensed rings is introduced, and no source or natural statement changes. The primary declaration is physically defined in ContinuousCoefficientCommRing; its public import exports the listed continuous ring constructors from ContinuousCoefficientUniverse."
+  "existing": false,
+  "note": "Section 1(B): the prior primary binding asserted commutativity only for continuous coefficients of a topological commutative ring. The node begins with arbitrary condensed rings, and the consumer is the general t-admissible theorem. The transparent Profinite.CondensedRing abbreviation specializes the existing Mon category to tensor abelian sheaves on the coherent profinite site, the ring-object encoding already specified by the node. It introduces no copied ring or sheaf structure. The public import of the former module retains all its continuous-function, postcomposition, adic, subfield and valuation-ring constructors and its commutativity instance. The consuming definitions and theorem now take this exact general input type with IsCommMonObj on its underlying object; no topological presentation is assumed."
  }
 }
