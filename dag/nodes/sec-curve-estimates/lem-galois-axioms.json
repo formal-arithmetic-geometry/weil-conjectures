@@ -68,18 +68,16 @@
    }
   },
   {
-   "text": "*Clause (4): a morphism $f:X\\to Y$ between connected objects is an epimorphism.* Let $i_1,i_2:Y\\to Y\\amalg_XY$ be the coprojections of the pushout of $f$ along $f$ and $e:E\\to Y$ the equalizer of $i_1,i_2$ (both exist by axiom (1) of [def-galois-category], [def-galois-finite-limits-colimits]). An equalizer morphism is a monomorphism ([def-galois-initial-mono]): two morphisms $u,v:W\\to E$ with $e\\circ u=e\\circ v$ are both the unique factorization of $e\\circ u$ through $e$. Since $i_1\\circ f=i_2\\circ f$, $f$ factors as $f=e\\circ g$ with $g:X\\to E$. $X$ is connected, so $F(X)\\neq\\emptyset$ (step 3), hence $F(E)\\supseteq F(g)(F(X))$ is nonempty and $E$ is not initial (step 3). As $Y$ is connected ([def-galois-connected-object]) and $e$ is a monomorphism with non-initial source, $e$ is an isomorphism. From $i_1\\circ e=i_2\\circ e$ we get $i_1=i_2$, and [lem-galois-epi-iff-cokernel-pair] gives that $f$ is an epimorphism.",
+   "text": "*Clause (4): a morphism f:X→Y between connected objects is epi.* Use clause (5), proved by the equalizer argument below. Since X is not initial, clause (3) gives s∈F(X). For a,b:Y→Z with f≫a=f≫b, functoriality gives F(a)(F(f)(s))=F(b)(F(f)(s)). Clause (5), with connected source Y, gives a=b. This is exactly the epimorphism cancellation condition; no cokernel pair is needed.",
    "uses": [
     "def-galois-category",
-    "def-galois-finite-limits-colimits",
-    "def-galois-initial-mono",
     "def-galois-connected-object",
-    "lem-galois-epi-iff-cokernel-pair"
+    "def-galois-epi-final"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/pione.tex",
-    "place": "Fundamental Groups of Schemes, Lemma 0BN0 (label lemma-epi-mono), proof of (6)"
+    "place": "Fundamental Groups of Schemes, Lemma 0BN0, items (6) and (7); cancellation argument as in Mathlib.CategoryTheory.Galois.Basic, epi_of_nonempty_of_isConnected"
    }
   },
   {
@@ -129,13 +127,12 @@
   "def-galois-initial-mono",
   "def-galois-epi-final",
   "def-galois-connected-object",
-  "lem-galois-epi-iff-cokernel-pair",
   "lem-galois-coproduct-morphism-components"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/pione.tex",
-  "place": "Fundamental Groups of Schemes, Lemma 0BN0 (label lemma-epi-mono) and its proof, and the paragraph after it (Galois objects); with Categories, Lemma 08LR and Example 003C (literature/stacks-project/categories.tex)"
+  "place": "Fundamental Groups of Schemes, Lemma 0BN0 (label lemma-epi-mono) and its proof, and the paragraph after it (Galois objects); with Categories, Lemma 08LR and Example 003C (literature/stacks-project/categories.tex); clause (4) instead follows directly from clause (5) and a point of F(X), as in Mathlib.CategoryTheory.Galois.Basic, epi_of_nonempty_of_isConnected"
  },
  "mathlib_searches": [
   {
@@ -262,5 +259,15 @@
   "group": "G1",
   "result": "fix",
   "note": "C:Type u, Category.{v}, F:C⥤Type w, IsStacksGaloisCategory F (landed def); clauses 1-7 each matched (Faithful; Mono/Epi iff inj/surj; Nonempty IsInitial iff empty, IsTerminal iff singleton; connected→Epi; agree at one s→a=b; Aut injective, Nat.card bound, IsStacksGaloisObject iff card eq iff transitive at s; finite Cofan colimits wI/wJ, α and components as morphism_coproduct_connected_components); fix: docstring clause 7 now cites the node's proof (lem-galois-coproduct-morphism-components)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261018T062755-L-650505",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
