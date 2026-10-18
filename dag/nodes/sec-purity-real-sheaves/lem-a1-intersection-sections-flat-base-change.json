@@ -2,7 +2,7 @@
  "id": "lem-a1-intersection-sections-flat-base-change",
  "kind": "statement",
  "title": "Flat affine base change for sections on intersections of quasi-compact opens",
- "statement": "Let $R$ and $T$ be commutative rings with a homomorphism $R\\to T$, and suppose $\\operatorname{Spec}T\\to\\operatorname{Spec}R$ is flat [def-weil-affine-spectrum, def-weil-flat-morphism]. Let $Y\\to\\operatorname{Spec}R$ be a quasi-separated scheme [def-pc-scheme, def-weil-quasi-separated-morphism], let $Y_T=Y\\times_{\\operatorname{Spec}R}\\operatorname{Spec}T$ [def-pc-fibre-product], and write $g:Y_T\\to Y$ for the projection. Let $E\\subset |Y|$ be an intersection of a nonempty set-indexed family of quasi-compact opens, and set $E_T=g^{-1}(E)$. Give these subsets their subspace topologies and let $\\mathcal O_Y|_E$ and $\\mathcal O_{Y_T}|_{E_T}$ mean inverse-image sheaves along their inclusions. Then the canonical homomorphism of $T$-algebras\n$$\\Gamma(E,\\mathcal O_Y|_E)\\otimes_R T\\ \\xrightarrow{\\sim}\\ \\Gamma(E_T,\\mathcal O_{Y_T}|_{E_T}),\\qquad c\\otimes t\\longmapsto g^\\sharp(c)\\,t$$\nis an isomorphism. These canonical maps are natural for isomorphisms of the schemes with their indicated subsets, and commute with iterated flat affine base change and tensor-product associativity.",
+ "statement": "Let $R$ and $T$ be commutative rings with a homomorphism $R\\to T$, and suppose $\\operatorname{Spec}T\\to\\operatorname{Spec}R$ is flat [def-weil-affine-spectrum, def-weil-flat-morphism]. Let $Y\\to\\operatorname{Spec}R$ be a quasi-separated scheme [def-pc-scheme, def-weil-quasi-separated-morphism], let $Y_T=Y\\times_{\\operatorname{Spec}R}\\operatorname{Spec}T$ [def-pc-fibre-product], and write $g:Y_T\\to Y$ for the projection. Let $E\\subset |Y|$ be an intersection of a nonempty set-indexed family of quasi-compact opens, and set $E_T=g^{-1}(E)$. Give these subsets their subspace topologies and let $\\mathcal O_Y|_E$ and $\\mathcal O_{Y_T}|_{E_T}$ mean inverse-image sheaves along their inclusions [def-weil-pbc-topological-inverse-image]. Then the canonical homomorphism of $T$-algebras\n$$\\Gamma(E,\\mathcal O_Y|_E)\\otimes_R T\\ \\xrightarrow{\\sim}\\ \\Gamma(E_T,\\mathcal O_{Y_T}|_{E_T}),\\qquad c\\otimes t\\longmapsto g^\\sharp(c)\\,t$$\nis an isomorphism. These canonical maps are natural for isomorphisms of the schemes with their indicated subsets, and commute with iterated flat affine base change and tensor-product associativity.",
  "source": {
   "document": "literature/stacks-project/more-groupoids.tex",
   "place": "Tag 0APJ, lemma-affine-base-change, with the canonical maps in equation-sections-of-intersection; functoriality and iterated compatibility refer to these canonical maps"
@@ -13,11 +13,66 @@
   "def-pc-scheme",
   "def-weil-quasi-separated-morphism",
   "def-pc-fibre-product",
-  "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "def-weil-pbc-topological-inverse-image"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write the given intersection as $E=\\bigcap_{i\\in I}U_i$ with each $U_i$ quasi-compact open. Replace $I$ by the nonempty family of all finite intersections of the $U_i$; then the resulting family has the same intersection and is directed by reverse inclusion. Since inverse image commutes with arbitrary intersections, $E_T=\\bigcap_i g^{-1}(U_i)$, and each $g^{-1}(U_i)$ is quasi-compact because $g$ is affine (it is the base change of $\\operatorname{Spec}T\\to\\operatorname{Spec}R$).",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 0APJ proof, opening sentence and the refinement of the family by finite intersections"
+   }
+  },
+  {
+   "text": "Apply [lem-a1-sections-intersection-structure-colimit] to $X=Y$ with the family $(U_i)$ and to $X=Y_T$ with the family $(g^{-1}(U_i))$, which is again directed by reverse inclusion and has intersection $E_T$ by Step 1. Clauses (a) and (b) identify $\\Gamma(E,\\mathcal O_Y|_E)$ and $\\Gamma(E_T,\\mathcal O_{Y_T}|_{E_T})$, through the restriction maps $\\rho_i$ and $\\rho^T_i$, with the filtered colimits of the section rings over $U_i$ and over $g^{-1}(U_i)$, as sets, abelian groups and rings. The quasi-separatedness hypothesis needed for the second application holds because $Y_T\\to Y$ is affine, hence quasi-separated, and $Y$ is quasi-separated, so $Y_T$ is quasi-separated; every $g^{-1}(U_i)$ is a quasi-compact open of $Y_T$ by Step 1.",
+   "uses": [
+    "lem-a1-sections-intersection-structure-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 0APJ proof, equation-sections-of-intersection and the first sentence of lemma-affine-base-change"
+   }
+  },
+  {
+   "text": "Put $A_i=\\Gamma(U_i,\\mathcal O_Y|_{U_i})$, $B_i=\\Gamma(g^{-1}(U_i),\\mathcal O_{Y_T}|_{g^{-1}(U_i)})$, $C=\\Gamma(E,\\mathcal O_Y|_E)$, $C_T=\\Gamma(E_T,\\mathcal O_{Y_T}|_{E_T})$; all are $R$-algebras through $Y\\to\\operatorname{Spec}R$, and the restriction maps are $R$-algebra maps. By clauses (a), (b) of Step 2, $C$ with the $R$-linear maps $\\rho_i$ is the colimit of the $A_i$ in $R$-modules: given compatible $R$-linear $\\mu_i:A_i\\to M$, the map $u(\\rho_i(a))=\\mu_i(a)$ is well defined by (b) and directedness, defined everywhere by (a), and $R$-linear because $r\\rho_i(a)=\\rho_i(ra)$; uniqueness is (a). The same holds for $C_T$ and the $B_i$. For every $i$, apply [lem-weil-pbc-flat-base-change-global-sections-qcqs] to the quasi-compact quasi-separated scheme $U_i$ over $\\operatorname{Spec}R$ (quasi-separated as an open of $Y$) and the flat morphism $\\operatorname{Spec}T\\to\\operatorname{Spec}R$; the fibre product $U_i\\times_{\\operatorname{Spec}R}\\operatorname{Spec}T$ is the open subscheme $g^{-1}(U_i)$ of $Y_T$, so it gives a ring isomorphism $\\varphi_i:A_i\\otimes_RT\\to B_i$, $a\\otimes t\\mapsto g^\\sharp(a)\\,t$. Since pullback of sections along $g$ commutes with restriction, $\\varphi_k\\circ(\\mathrm{res}\\otimes1)=\\mathrm{res}\\circ\\varphi_i$ for $U_k\\subseteq U_i$ (check on pure tensors), so the $\\varphi_i$ form an isomorphism of directed systems of $R$-modules. By [lem-weil-pbc-tensor-commutes-with-colimits], $C\\otimes_RT$ with the maps $\\rho_i\\otimes1$ is the colimit of the $A_i\\otimes_RT$. Hence there is a unique $R$-linear bijection $\\Phi:C\\otimes_RT\\to C_T$ with $\\Phi\\circ(\\rho_i\\otimes1)=\\rho^T_i\\circ\\varphi_i$. For $c=\\rho_i(a)$ this gives $\\Phi(c\\otimes t)=\\rho^T_i(g^\\sharp(a)t)=g^\\sharp(c)\\,t$, since the comorphism of $g|_{E_T}:(E_T,\\mathcal O_{Y_T}|_{E_T})\\to(E,\\mathcal O_Y|_E)$ commutes with the restrictions; by (a) every $c$ is of this form. So $\\Phi$ is the displayed map, and by [lem-weil-pbc-algebra-tensor-pushout-universal-property] (2), (3), applied to the $R$-algebra maps $g^\\sharp:C\\to C_T$ and $T\\to C_T$, it is the unique $T$-algebra homomorphism with that pure-tensor formula; being bijective, it is an isomorphism of $T$-algebras.",
+   "uses": [
+    "lem-weil-pbc-flat-base-change-global-sections-qcqs",
+    "lem-weil-pbc-tensor-commutes-with-colimits",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 0APJ proof, final two sentences; the quasi-compact-open comparison is Cohomology of Schemes Tag 02KH"
+   }
+  },
+  {
+   "text": "All maps used above are the canonical restriction, pullback, and tensor maps. A scheme isomorphism carrying the indicated opens commutes with restriction and pullback, so the stagewise isomorphisms and their filtered-colimit assembly are natural. For a second flat affine base change, the two stagewise maps both send $c\\otimes t\\otimes s$ to the pullback of $c$ multiplied by the two scalars; tensor-product associativity identifies the source, and functoriality of pullback identifies the target. Thus the canonical isomorphisms commute with iterated base change and with tensor-product associativity.",
+   "uses": [
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 0APJ canonical-map formula and functoriality of the displayed affine-base-change isomorphism"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-a1-sections-intersection-structure-colimit",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "lem-weil-pbc-flat-base-change-global-sections-qcqs",
+  "lem-weil-pbc-tensor-commutes-with-colimits"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-groupoids.tex",
+  "place": "Tag 0APJ, lemma-affine-base-change; equation-sections-of-intersection and Cohomology of Schemes Tag 02KH"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -60,7 +115,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-a1-ind-quasi-affine-fpqc-effective-descent",
@@ -83,5 +138,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-a1-intersection-sections-flat-base-change",
+  "worker": "stage1",
+  "summary": "Split Tag 0APJ into the filtered-colimit formula for sections over an intersection and the stagewise flat base-change calculation. The new sections-colimit node is statement-only; the stagewise calculation reuses the existing qcqs global-sections Mathlib leaf and the existing tensor-colimit Mathlib leaf. The canonical pure-tensor formula, naturality, iterated base change, and associativity clauses are checked explicitly.",
+  "blueprint": "Realizes the Tag 0APK Gabber input used through the affine-intersection section-ring identifications recorded under lem-a1-affine-hc0.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-flat-base-change-global-sections-qcqs",
+    "why": "Generic degree-zero flat base change for global sections of a quasi-compact quasi-separated scheme, applied stagewise to each quasi-compact open U_i."
+   },
+   {
+    "node": "lem-weil-pbc-tensor-commutes-with-colimits",
+    "why": "Generic module tensor-colimit theorem used to pass from stagewise section isomorphisms to the filtered-colimit section ring."
+   },
+   {
+    "node": "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "why": "Generic commutative-algebra tensor universal property used to identify the canonical T-algebra map and its pure-tensor formula."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-flat-base-change-global-sections-qcqs",
+  "lem-weil-pbc-tensor-commutes-with-colimits",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-NS-50474a8b9",
+  "group": "NS",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NS-50474a8b9 (reviewer sub-agent of L); spot-checked: I read Stacks more-groupoids.tex: equation-sections-of-intersection (it holds for any sheaf of sets, proved through spectral spaces) and lemma-affine-base-change 0APJ with its two-sentence proof via coherent 02KH. The item's hypotheses match the source one by one (Y quasi-separated, R->T flat, nonempty family of quasi-compact opens, inverse-image sheaves, same projection g:Y_T->Y), so nothing is weakened. Step 1 is elementary and correct; g is affine, so each g^-1(U_i) is quasi-compact. Step 2 is correct: Y_T is quasi-separated because it is affine over the quasi-separated Y. Step 4 (naturality, iterated base change) is elementary from the explicit formula plus pushout uniqueness. The new node is the Stacks equation specialised to O_X: strictly smaller than the item, not elementary, not a restated clause. It has no duplicate; the nearest nodes are pbc 0A30/0A32/0A33 and sc filtered-colimit sections. Tested: E empty; singleton family; X=A^1_k with E the generic point gives k(x), and base change to k[t] gives k(x)[t]=k(x) tensor_k k[t]. Repairs: (1) C4: step 3 needs Gamma(E) to be the R-module colimit, but it cited lem-weil-pbc-filtered-colimit-algebras-elementwise, which gives only that every element comes from some stage, not the kernel condition. The new node now states (a) every section on E comes from some stage and (b) two sections that agree on E agree on some smaller U_k, as Stacks gives for sheaves of sets. Step 3 is rewritten to derive the R-module colimit from (a) and (b), write out the compatibility of the stage maps with restriction, and identify the colimit map with c tensor t -> g#(c)t. The unused algebra leaf is removed from uses, proof_deps and tool_uses. (2) B3: added def-weil-pbc-topological-inverse-image to both nodes. Every out-of-unit dependency is a Mathlib leaf; the remaining tool_uses are accepted and none is required. No SGA is cited. Parent note: lem-a1-ind-quasi-affine-fpqc-effective-descent relies on naturality for restriction to an open L, which the explicit formula gives. Corrected files are in fixes/dag/nodes/sec-purity-real-sheaves/ and the full review is in review.md.; 2 file(s) fixed by the reviewer"
  }
 }
