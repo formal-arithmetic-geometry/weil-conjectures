@@ -2,23 +2,114 @@
  "id": "lem-per-torsion-torsor-descent",
  "kind": "statement",
  "title": "Torsors under torsion local systems are local systems",
- "statement": "Let $X$ be a Noetherian scheme [def-pc-scheme, def-weil-pbc-noetherian-ring] and work on its small etale site [def-weil-pbc-etale-site]. Let $G$ be a sheaf of abelian groups which is a torsion local system, and let $T$ be a sheaf of sets with a free $G$-action such that the quotient sheaf $T/G$ is a local system. Then $T$ is a local system. Here local system means that the underlying sheaf of sets is a filtered colimit of sheaves represented by finite etale $X$-schemes [def-weil-pbc-category-colimit], and torsion means that every germ [def-weil-pbc-geometric-stalks] at a geometric point [def-weil-geometric-point] is killed by some positive integer (the bound may depend on the germ).",
+ "statement": "Let $X$ be a Noetherian scheme [def-pc-scheme, pqf-def-locnoeth, def-weil-pbc-quasi-compact-scheme] and work on its small etale site [def-weil-pbc-etale-site]. Let $G$ be a sheaf of abelian groups which is a torsion local system, and let $T$ be a sheaf of sets with a free $G$-action such that the quotient sheaf $T/G$ is a local system. Then $T$ is a local system. Here local system [def-per-ind-finite-etale-local-system] means that the underlying sheaf of sets is a filtered colimit of sheaves represented by finite etale $X$-schemes [def-weil-pbc-category-colimit], and torsion means that every germ [def-weil-pbc-geometric-stalks] at a geometric point [def-weil-geometric-point] is killed by some positive integer (the bound may depend on the germ).",
  "source": {
   "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
   "place": "Expose XVII, Lemma 7.2.6, pp. 302–303 (PDF pp. 308–309)."
  },
  "stmt_deps": [
   "def-pc-scheme",
-  "def-weil-pbc-noetherian-ring",
   "def-weil-pbc-etale-site",
   "def-weil-pbc-category-colimit",
   "def-weil-geometric-point",
   "def-weil-pbc-geometric-stalks",
-  "def-weil-pbc-etale-sheaves"
+  "def-weil-pbc-etale-sheaves",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-per-ind-finite-etale-local-system"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $Y=T/G$ and write $Y=\\bigcup_iY_i$ as a filtered union of finite local-system subsheaves, using the set-local-system theorem. Set $T_i=T\\times_Y Y_i$. The restricted $G$-action is free and has quotient $Y_i$: a local section of $Y_i$ lifts locally along the quotient map, and two lifts differ locally by $G$. Every local section of $T$ lands locally in some $Y_i$, so $T=\\varinjlim_iT_i$ as set sheaves. Thus closure under ambient colimits reduces the problem to finite $Y$. If $Y$ is empty, $T$ is empty and already finite etale.",
+   "uses": [
+    "lem-per-set-local-system-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII Lemma 7.2.6, p. 302, first paragraph; XVII 7.2.4 for ambient colimit closure."
+   }
+  },
+  {
+   "text": "Represent finite $Y$ by a finite etale $q:Y\\to X$. This $Y$ is Noetherian: a finite algebra is of finite type (a finite module generating list also generates it as an algebra), so the finite-type-over-Noetherian theorem applies. Under the slice equivalence of the set-local-system theorem, $T\\to h_Y$ becomes a sheaf $\\widetilde T$ on $Y_{\\mathrm{et}}$ with free $q^{-1}G$-action and terminal quotient. It is therefore a $q^{-1}G$-torsor: the terminal quotient gives local sections, and freeness plus the quotient condition gives unique local differences, which glue by uniqueness. The same theorem says $q^{-1}G$ is a local system; it remains torsion since the inverse-image stalk theorem gives, for every geometric point $\\bar y$ of $Y$, an isomorphism of abelian groups $(q^{-1}G)_{\\bar y}\\simeq G_{q\\bar y}$. Once the torsor case is proved on the Noetherian scheme $Y$, $q_!\\widetilde T\\simeq T$ is a local system by its total-space clause. Hence it suffices to prove the torsor case over an arbitrary Noetherian base.",
+   "uses": [
+    "lem-per-set-local-system-calculus",
+    "def-weil-finite-integral-morphism",
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "def-sc-gm-torsor",
+    "def-weil-pbc-geometric-stalks",
+    "lem-weil-pbc-inverse-image-stalk-germ"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII Lemma 7.2.6, p. 302, reduction through q_!; finite type: Stacks Tag 01T6, lemma-finite-type-noetherian."
+   }
+  },
+  {
+   "text": "Now $T$ is a $G$-torsor. Write $G=\\varinjlim_iG_i$ using the finite-subsystem lemma. The Noetherian base is quasi-compact by definition and quasi-separated by the locally-Noetherian quasi-separatedness theorem. The cohomology-colimit theorem therefore applies in degree one, without a uniform exponent assumption: $H^1(X,G)=\\varinjlim_iH^1(X,G_i)$. The torsor classification sends $T$ to a class $c$; choose a stage class $c_i$ representing it, and a $G_i$-torsor $T'$ representing $c_i$. Write $G'=G_i$. Coefficient functoriality sends $c_i$ to the class of $P=G\\wedge^{G'}T'$, where the contracted-product theorem supplies this torsor. Since both $P$ and $T$ have class $c$, injectivity of the torsor-class bijection gives a $G$-equivariant isomorphism $T\\simeq P$.",
+   "uses": [
+    "lem-per-torsion-finite-subsystem",
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "lem-weil-pbc-cohomology-filtered-colimit",
+    "lem-sc-torsor-h1",
+    "lem-sc-etale-torsor-h1-functoriality",
+    "lem-sc-etale-contracted-product-exists"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII Lemma 7.2.6, p. 303, H^1 paragraph; Stacks Tags 03Q5 (lemma-colimit) and 03AJ (lemma-torsors-h1)."
+   }
+  },
+  {
+   "text": "For every finite locally constant subgroup $H\\subseteq G$ containing $G'$, form $P_H=H\\wedge^{G'}T'$. This is an $H$-torsor by the contracted-product theorem. By the definition of torsor it is etale locally isomorphic to $H$ by translation through a local section. Refine that cover by one on which $H$ is constant with finite group value. Then $P_H$ is constant with the same finite underlying set on that refinement, hence finite locally constant. The finite locally constant representability theorem makes $P_H$ a sheaf represented by a finite etale $X$-scheme.",
+   "uses": [
+    "lem-sc-etale-contracted-product-exists",
+    "def-sc-gm-torsor",
+    "lem-galois-flc-representable"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII Lemma 7.2.6, p. 303, finite group torsors; Stacks Tag 03RV, lemma-characterize-finite-locally-constant."
+   }
+  },
+  {
+   "text": "The finite subgroups $H$ containing $G'$ are cofinal in the filtered family of all finite subgroup systems: a common upper bound for $G'$ and any given finite subgroup lies in this subfamily. Thus their set-sheaf union is $G$. The contracted-product quotient gives compatible maps $P_H\\to P$. To verify their colimit property, fix any set sheaf $E$. By the contracted-product universal property, compatible maps $P_H\\to E$ are compatible morphisms $T'\\times H\\to E$ invariant under $(t,h)\\mapsto(g'+t,h-g')$. They glue uniquely to an invariant morphism $T'\\times G\\to E$: locally a section of $G$ belongs to some $H$, and two such choices agree locally in a common upper bound. The same universal property now gives a unique map $P\\to E$. Hence $P=\\varinjlim_H P_H$. Each $P_H$ is finite etale representable by the preceding step, so $T\\simeq P$ is a local system by its definition. This proves the torsor case used in Step 2, then the finite-quotient case and finally the general case of Step 1.",
+   "uses": [
+    "lem-per-torsion-finite-subsystem",
+    "lem-sc-etale-contracted-product-exists"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII Lemma 7.2.6, p. 303, final filtered contracted-product paragraph; universal property: Stacks Tag 03AJ, lemma-torsors-h1."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-gm-torsor",
+  "def-weil-finite-integral-morphism",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-geometric-stalks",
+  "lem-galois-flc-representable",
+  "lem-per-set-local-system-calculus",
+  "lem-per-torsion-finite-subsystem",
+  "lem-sc-etale-contracted-product-exists",
+  "lem-sc-etale-torsor-h1-functoriality",
+  "lem-sc-torsor-h1",
+  "lem-weil-pbc-cohomology-filtered-colimit",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-inverse-image-stalk-germ",
+  "lem-weil-pbc-locally-noetherian-quasi-separated"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose XVII, Lemma 7.2.6, pp. 302–303, with torsor classification and cohomology continuity from Stacks Tags 03AJ and 03Q5."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -64,7 +155,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-torsion-local-system-monodromy",
@@ -76,7 +167,7 @@
  "blueprint": {
   "from": {
    "node": "lem-per-artin-gabber-affine-curve",
-   "place": "Support for the extension step: ILO XVII, Lemma 7.2.6, the torsor lemma used in the proof of Proposition 7.2.5.",
+   "place": "Proof of lem-per-artin-gabber-affine-curve, Verdier-duality reduction; inherited coefficient-duality branch through lem-per-qbar-arbitrary-field-duality, lem-per-finite-residue-dualizing, lem-per-potential-local-duality, lem-per-coefficient-change-dualizing, lem-per-ctf-hom-coefficient-comparison, lem-per-ctf-hom-condition-b, lem-per-galois-partition-exact-refinement and lem-per-torsion-local-system-monodromy. The extension step is ILO XVII Proposition 7.2.5, whose proof uses Lemma 7.2.6. The item realizes Lemma 7.2.6: finite quotient, q_! reduction, H^1 finite-stage descent, finite torsors, and filtered contracted products.",
    "via": [
     "lem-per-torsion-local-system-monodromy",
     "lem-per-galois-partition-exact-refinement",
@@ -90,5 +181,54 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-torsion-torsor-descent",
+  "worker": "stage1",
+  "summary": "Followed ILO XVII 7.2.6 with a real H^1 finite-stage argument from existing continuity and torsor-class nodes. Created only the set-valued local-system calculus and finite torsion-subsystem lemmas; avoided citing the module-monodromy parent, which depends on this item. Repaired Noetherian definition citations without changing hypotheses.",
+  "blueprint": "Proof of lem-per-artin-gabber-affine-curve, Verdier-duality reduction; inherited coefficient-duality branch through lem-per-qbar-arbitrary-field-duality, lem-per-finite-residue-dualizing, lem-per-potential-local-duality, lem-per-coefficient-change-dualizing, lem-per-ctf-hom-coefficient-comparison, lem-per-ctf-hom-condition-b, lem-per-galois-partition-exact-refinement and lem-per-torsion-local-system-monodromy. The extension step is ILO XVII Proposition 7.2.5, whose proof uses Lemma 7.2.6. The item realizes Lemma 7.2.6: finite quotient, q_! reduction, H^1 finite-stage descent, finite torsors, and filtered contracted products.",
+  "tool_uses": [
+   {
+    "node": "lem-galois-flc-representable",
+    "why": "Generic finite locally constant set-sheaf representability; the unit has no such general etale descent theorem."
+   },
+   {
+    "node": "lem-sc-etale-contracted-product-exists",
+    "why": "Generic torsor construction and its universal property, used to form and compare structure-group extensions."
+   },
+   {
+    "node": "lem-sc-etale-torsor-h1-functoriality",
+    "why": "Generic coefficient functoriality identifies a class image with the contracted product."
+   },
+   {
+    "node": "lem-sc-torsor-h1",
+    "why": "Generic abelian torsor-class bijection, not a perverse or duality result."
+   },
+   {
+    "node": "lem-weil-pbc-cohomology-filtered-colimit",
+    "why": "Generic etale coefficient-continuity theorem, used only for H^1 of a filtered subgroup diagram."
+   },
+   {
+    "node": "lem-weil-pbc-inverse-image-stalk-germ",
+    "why": "Generic stalk-of-inverse-image identification, used only to see that q^{-1}G stays torsion; added by the reviewer as a missing citation."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-galois-flc-representable",
+  "lem-sc-etale-contracted-product-exists",
+  "lem-sc-etale-torsor-h1-functoriality",
+  "lem-sc-torsor-h1",
+  "lem-weil-pbc-cohomology-filtered-colimit",
+  "lem-weil-pbc-inverse-image-stalk-germ"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q129-c1249581f",
+  "group": "Q129",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q129-c1249581f (reviewer sub-agent of L); spot-checked: Verdict FIX: I read the delivery in full and found one fault, a missing citation in Step 2, which I repaired; the rest is correct. Source read: ILO XVII §7.2 (Def. 7.2.1, Props. 7.2.2–7.2.5, Lemma 7.2.6 with its proof, Ex. 7.2.7; pp. 301–303). Statement: it matches Lemma 7.2.6. Against the base, only the Noetherian citation changed; nothing is weakened. Steps: Step 1 (filtered union of finite subsystems, quotients and colimits stable under pullback), Step 3 (H^1 continuity with the qcqs hypotheses met, torsor bijection, extension of structure group) and Steps 4–5 (finite locally constant representability, filtered contracted product via the universal property against set sheaves) are each correct. Fault C1/C4 in Step 2: the claim that q^{-1}G stays torsion cited only the definition of stalks. It needs (q^{-1}G)_y ≅ G_{qy}, which is lem-weil-pbc-inverse-image-stalk-germ. I added it to the step text, uses, proof_deps and tool_uses; it creates no cycle. New nodes: lem-per-set-local-system-calculus (ILO 7.2.2–7.2.4 plus the slice/total-space equivalence) and lem-per-torsion-finite-subsystem (exhaustion by finite pi_1-stable subgroups) are both true. They are statement-only, self-contained and cited. Neither restates the item. Neither duplicates lem-per-torsion-local-system-monodromy, which depends on this item. The closure check finds no cycle. Edge cases checked: empty quotient, G=0, finite constant G, X empty, constant sum of Z/2, and non-torsion Z (excluded, as in Ex. 7.2.7). Accepted tool uses: generic etale/torsor nodes (flc-representable, contracted product, H^1 functoriality, torsor-H1, cohomology colimit, inverse-image stalk). No SGA source is used.; 1 file(s) fixed by the reviewer"
  }
 }
