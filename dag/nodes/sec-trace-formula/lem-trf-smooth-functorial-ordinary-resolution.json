@@ -14,9 +14,124 @@
   "def-weil-regular-scheme",
   "def-sbc-smooth-morphisms"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For a reduced finite-type $X$ admitting a closed embedding $i:X\\hookrightarrow P$ into a smooth separated finite-type $\\mathbf Q$-scheme, take the embedded tower of [lem-trf-embedded-resolution-ambient-comparison]. At each stage [lemma-nagata-strict-transform-ambient-closed] identifies $X_{i+1}$ with the ordinary blowup of $X_i$ in the ideal of $C_i\\subset X_i$. Thus the strict-transform tower is an intrinsic ordinary blowup tower with coherent, nonempty, nowhere dense regular centers and regular last scheme. Keep its synchronization labels. The ambient-comparison clause of the embedded input identifies these intrinsic towers for different embeddings, including their ideals and labels; write the resulting tower $A(X)$. For an affine finite-type $X$, a finite algebra generating set gives a surjection $\\mathbf Q[t_1,\\ldots,t_N]\\twoheadrightarrow\\Gamma(X,\\mathcal O_X)$ and hence the required closed embedding. Finite disjoint unions admit the disjoint union of these ambient embeddings; the algorithm is applied to this whole pair.",
+   "uses": [
+    "lem-trf-embedded-resolution-ambient-comparison",
+    "lemma-nagata-strict-transform-ambient-closed",
+    "def-weil-pbc-finite-type-algebra",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "2.1.3(ii), 2.3.11--2.3.13; embedded input followed by the ordinary strict-transform/blowup identification."
+   }
+  },
+  {
+   "text": "First compare a smooth $h:Y\\to X$ when both schemes have smooth separated ambient embeddings. By [lem-weil-pbc-smooth-locally-standard-smooth], there are affine charts $W=\\operatorname{Spec}C\\subset Y$ and $V\\subset X$ covering $Y$ on which $W\\to V$ is standard smooth. Embed $V$ in an affine space $\\operatorname{Spec}B$, so $V=\\operatorname{Spec}(B/I)$, as in Step 1. The quotient-lifting statement [lem-weil-pbc-standard-smooth-quotient-lift] supplies a standard smooth $B$-algebra $D$ with $D/ID\\simeq C$. By [lem-weil-pbc-standard-smooth-is-smooth], $Q=\\operatorname{Spec}D\\to\\operatorname{Spec}B$ is smooth by [lem-weil-pbc-smooth-ring-map-iff-smooth-affine], and its square with closed subschemes $W$ and $V$ is cartesian. The polynomial ring $B$ is a standard smooth $\\mathbf Q$-algebra with no equations, so $\\operatorname{Spec}B\\to\\operatorname{Spec}\\mathbf Q$ is smooth by the same two statements, and the ambient $Q$ is smooth over $\\mathbf Q$ by [lem-trf-smooth-composition]; being affine of finite type it is an allowed ambient scheme. Apply the embedded smooth-ambient comparison. Each open $V\\subset X$, respectively $W\\subset Y$, is the intersection with an open of its original ambient scheme; that ambient open need not be affine. Smooth-ambient open restriction and the intrinsic embedding comparison therefore identify the towers here with the restrictions of $A(X)$ and $A(Y)$. On these charts the latter is the contracted pullback of the former, with identical labels and extended ideals. The lifting requires no nilpotence of $I$, and the charts can have different relative dimensions.",
+   "uses": [
+    "lem-trf-embedded-resolution-ambient-comparison",
+    "lem-weil-pbc-smooth-locally-standard-smooth",
+    "lem-weil-pbc-standard-smooth-quotient-lift",
+    "lem-weil-pbc-standard-smooth-is-smooth",
+    "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "lem-trf-smooth-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "2.3.13; local ambient reduction, using Stacks 01V7 (lemma-smooth-locally-standard-smooth), 00T7 (lemma-standard-smooth), and the equation-lifting argument in 07CK (lemma-lift-once), only as stated in the cited quotient-lift node."
+   }
+  },
+  {
+   "text": "The preceding local comparisons determine the global one on embeddable $Y$. Indeed a label occurs in $A(Y)$ exactly when its center meets some member $W$ of the covering; the same criterion holds for a nonempty center in $h^*A(X)$. Thus both contracted towers have the same labels in the same order. Induct along this finite ordered list. After the previously compared blowups the inverse images of the $W$ still cover. The local comparison gives equal ideal sheaves there for the next label, so the global ideals are equal. Their blowups agree, which completes the induction. Smooth maps are flat by [lem-pc-smooth-flat]. Flat blowup base change [thm-nagata-blowup-flat-base-change, def-nagata-blowup-flat-base-change-map] identifies the recursive pullback with the cartesian pullback. This proves $A(Y)=(h^*A(X))^c$, retaining labels and ideals; an omitted label is precisely a unit-ideal stage. For open restrictions this comparison follows directly from the smooth-ambient comparison before making the local reduction in Step 2.",
+   "uses": [
+    "lem-trf-embedded-resolution-ambient-comparison",
+    "thm-nagata-blowup-flat-base-change",
+    "def-nagata-blowup-flat-base-change-map",
+    "lem-pc-smooth-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "2.1.9 and 2.3.4--2.3.5(ii); explicit use of invariant synchronization instead of renumbering local towers."
+   }
+  },
+  {
+   "text": "Let now $S$ be any reduced finite-type $\\mathbf Q$-scheme, with no separatedness assumption. Choose a finite affine open cover $\\{U_a\\}$, possible by [def-weil-finite-type-morphism], and set $U=\\coprod_a U_a$. Apply $A$ once to $U$, obtaining a finite common list of labels. For an affine open $W\\subset U_a\\cap U_b$, the two open maps $W\\to U$ are smooth: their ring maps are localizations, which are finitely presented locally, and any lift across a first-order thickening still lands in the same open because the thickening has the same points [def-sbc-smooth-morphisms]. Step 3 identifies both contracted pullbacks with $A(W)$, with its labels and centers. Restore at each missing label the empty center and identity stage from the common label list for $A(U)$. The two uncontracted restrictions are then identical, with equal ideal sheaves. Induct on the labels: the initial spaces glue to $S$; at the next label the compatible local ideals glue to an ideal $I_i\\subset\\mathcal O_{S_i}$, and their blowups glue to $\\operatorname{Bl}_{I_i}(S_i)$ by open base change. Triple-overlap agreement follows from equality of these ideals. This constructs a finite tower $R(S)$ with uncontracted pullback $A(U)$. Intersections of affine opens are covered by affine opens here; they are never assumed affine.",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "thm-nagata-blowup-flat-base-change",
+    "def-nagata-blowup-flat-base-change-map",
+    "def-sbc-smooth-morphisms"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "2.3.5(ii) and 2.1.9; stagewise Zariski gluing of the uncontracted synchronized centers."
+   }
+  },
+  {
+   "text": "Every descended center is coherent, regular and nowhere dense, since these assertions hold on the open cover of the corresponding level supplied by $A(U)$. It is nonempty since its pullback center in $A(U)$ is nonempty. The final scheme is regular since it has the regular final charts of that tower. The affine charts of its levels are those of finite-type blowups from Step 1; hence no non-finite-type intermediate scheme is introduced. To compare two covers, run the same construction on their finite disjoint union. Over every overlap the labeled restrictions agree by Step 3. At every level the pullback to either original covering family is surjective. If a center of the union tower were empty on one whole family, equality on overlaps would make it empty on the other family as well, contradicting nonemptiness. Hence neither family loses a label. Their levelwise glued ideals, and therefore their whole towers, coincide. The same argument with three covers proves transitivity, so the construction gives one canonical rule, independent of the affine cover.",
+   "uses": [
+    "lem-trf-embedded-resolution-ambient-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "2.3.1, 2.3.4 and Remark 2.3.5(ii); the cover-independence and nondeletion argument is written out."
+   }
+  },
+  {
+   "text": "For a smooth $h:T\\to S$, choose a finite affine cover $U=\\coprod U_a\\to S$ and a finite affine cover $V=\\coprod V_b\\to T$ subordinate to the opens $h^{-1}U_a$. The induced $V\\to U$ is smooth, with no constancy requirement on relative dimension: on $V_b$ it is the open immersion $V_b\\subset h^{-1}U_a$ (smooth as in Step 4 [def-sbc-smooth-morphisms]), followed by the restriction of $h$ to the open $h^{-1}U_a$, followed by the open immersion $U_a\\subset U$, and composites of smooth maps are smooth [lem-trf-smooth-composition]. Step 3 compares $A(V)$ with the contracted pullback of $A(U)$. By construction $A(U)$ and $A(V)$ are the uncontracted pullbacks of $R(S)$ and $R(T)$ along their respective open covers. Descend the comparison one label at a time: a global extended ideal is a unit ideal if and only if it is unit on all the lifted $V_b$; at every retained label those local ideals are precisely the ideals of $A(V)$, and hence descend to those of $R(T)$. Blowup base change identifies the next levels, completing the induction. Thus $R(T)=(h^*R(S))^c$ with the extended ideals in their original order. In particular the construction applies to a finite disjoint union as one input, rather than resolving its components with unrelated stage numbers.",
+   "uses": [
+    "thm-nagata-blowup-flat-base-change",
+    "def-nagata-blowup-flat-base-change-map",
+    "lem-trf-smooth-composition",
+    "def-sbc-smooth-morphisms"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "2.1.9, 2.3.4--2.3.5 and 2.3.13; smooth comparison after synchronized affine descent."
+   }
+  },
+  {
+   "text": "The comparisons are canonical and respect identities and composition. On an affine blowup chart with center ideal $I\\subset B$ and generator $a$, the base-change identifications use the canonical maps on $B[I/a]$; for $B\\to C\\to D$ the two identifications agree through $D\\otimes_C(C\\otimes_B B[I/a])\\simeq D\\otimes_B B[I/a]$, on every generator. Gluing gives the same comparison on every level. Extending ideals twice is extending them along the composite, and a unit ideal stays unit after extension; deleting first and then deleting again keeps exactly the ordered subsequence retained by the composite. Finally, when $h$ is surjective each level of its cartesian pullback is surjective over the corresponding $S_i$. The inverse image of every nonempty center is then nonempty, so no extended ideal is unit and no stage is deleted. For the empty scheme the algorithm and the descended tower have length zero.",
+   "uses": [
+    "thm-nagata-blowup-flat-base-change",
+    "def-nagata-blowup-flat-base-change-map"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "2.3.4 and Remark 2.3.5(i); identity/composition checked on charts and on ordered deletion."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-embedded-resolution-ambient-comparison",
+  "lemma-nagata-strict-transform-ambient-closed",
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-smooth-locally-standard-smooth",
+  "lem-weil-pbc-standard-smooth-quotient-lift",
+  "lem-weil-pbc-standard-smooth-is-smooth",
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+  "lem-trf-smooth-composition",
+  "thm-nagata-blowup-flat-base-change",
+  "def-nagata-blowup-flat-base-change-map",
+  "lem-pc-smooth-flat",
+  "def-weil-finite-type-morphism",
+  "def-sbc-smooth-morphisms"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose VIII 2.1.3--2.1.9 and 2.3.4--2.3.5, 2.3.11--2.3.13; embedded-input reduction and synchronized gluing supplied by Q125."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -45,10 +160,66 @@
    "results": "[leanfinder] OK 8 hit(s); returned top entries: AlgebraicGeometry.IsSmooth.exists_isStandardSmooth, AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension, AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth, AlgebraicGeometry.isSmooth_iff, AlgebraicGeometry.IsSmooth, AlgebraicGeometry.IsSmoothOfRelativeDimension, AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth",
    "date": "2026-10-17",
    "verdict": "no match: the returned declarations describe smoothness and its stability, not an algorithm resolving singularities by an ordered finite blowup tower."
+  },
+  {
+   "tool": "grep",
+   "query": "desingulari[sz]|Hironaka|Bierstone|embedded.*resolution",
+   "results": "[grep] OK 0 hit(s).  Returned: ",
+   "date": "2026-10-18",
+   "verdict": "no match: the inspected results concern ordinary smoothness, immersions and base change, not an embedded desingularization algorithm or its invariant synchronization"
+  },
+  {
+   "tool": "grep",
+   "query": "embedded.*resol|desingulari[sz]|Bierstone|principalization",
+   "results": "[grep] OK 0 hit(s).  Returned: ",
+   "date": "2026-10-18",
+   "verdict": "no match: the inspected results concern ordinary smoothness, immersions and base change, not an embedded desingularization algorithm or its invariant synchronization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "lem-trf-smooth-functorial-ordinary-resolution: Canonical desingularization of reduced characteristic zero schemes retains ordered blowup centers under smooth pullback",
+   "results": "[leansearch] OK 8 hit(s).  Returned: AlgebraicGeometry.IsSmooth.casesOn, AlgebraicGeometry.IsSmooth.recOn, AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth, AlgebraicGeometry.isSmooth_isStableUnderBaseChange, Algebra.Smooth.baseChange, AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth, AlgebraicGeometry.IsSmooth.mk",
+   "date": "2026-10-18",
+   "verdict": "no match: the inspected results concern ordinary smoothness, immersions and base change, not an embedded desingularization algorithm or its invariant synchronization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"desingular\"",
+   "results": "[loogle] OK 0 hit(s).  Returned: ",
+   "date": "2026-10-18",
+   "verdict": "no match: the inspected results concern ordinary smoothness, immersions and base change, not an embedded desingularization algorithm or its invariant synchronization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"resolution\" \"singular\"",
+   "results": "[loogle] OK 0 hit(s). loogle: Function expected at\n  \"resolution\"\nbut this term has type\n  String\n\nNote: Expected a function because this term is being applied to the argument\n  \"singular\" Returned: ",
+   "date": "2026-10-18",
+   "verdict": "invalid query; rerun with the valid substring query \"blowup\""
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-smooth-functorial-ordinary-resolution: Resolution of singularities by ordinary blowups in regular centers over the rationals is functorial for all smooth morphisms",
+   "results": "[leanfinder] OK 8 hit(s).  Returned: AlgebraicGeometry.IsSmooth.exists_isStandardSmooth, AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension, AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth, AlgebraicGeometry.instIsStableUnderCompositionSchemeIsSmooth, AlgebraicGeometry.IsSmooth, AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension, AlgebraicGeometry.IsSmoothOfRelativeDimension, AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth",
+   "date": "2026-10-18",
+   "verdict": "no match: the inspected results concern ordinary smoothness, immersions and base change, not an embedded desingularization algorithm or its invariant synchronization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"blowup\"",
+   "results": "[loogle] OK 0 hit(s).  Returned: ",
+   "date": "2026-10-18",
+   "verdict": "no match: the inspected results concern ordinary smoothness, immersions and base change, not an embedded desingularization algorithm or its invariant synchronization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-smooth-functorial-ordinary-resolution: A finite sequence of blowups desingularizes any reduced rational variety canonically under smooth base change",
+   "results": "[leanfinder] OK 8 hit(s).  Returned: AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth, AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension, AlgebraicGeometry.IsSmooth.exists_isStandardSmooth, AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension, AlgebraicGeometry.IsSmoothOfRelativeDimension, AlgebraicGeometry.IsSmooth, AlgebraicGeometry.isSmooth_iff, AlgebraicGeometry.instIsMultiplicativeSchemeIsSmoothOfRelativeDimensionOfNatNat",
+   "date": "2026-10-18",
+   "verdict": "no match: the inspected results concern ordinary smoothness, immersions and base change, not an embedded desingularization algorithm or its invariant synchronization"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-toric-normalized-desingularization",
@@ -75,5 +246,64 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-smooth-functorial-ordinary-resolution",
+  "worker": "stage1",
+  "summary": "Derived ordinary intrinsic resolution from a synchronized embedded algorithm, by strict transforms, lifting standard-smooth charts, and stagewise gluing of labeled ideals on finite affine covers. Retained all hypotheses and the ordinary tower statement. One genuine embedded-algorithm input remains unsplit; existing blowup and smooth-presentation tools are reused. The detailed embedded-resolution reference is recorded WANTED.",
+  "blueprint": "Historical alteration branch of lem-trf-local-term-locality via toric and fan resolution, specifically ILO VIII 2.3.10 as used in 3.2.19. Current sk-i-curve-zero uses contracting correspondences; this assigned historical descendant preserves its ancestry and does not change that unit.",
+  "tool_uses": [
+   {
+    "node": "lemma-nagata-strict-transform-ambient-closed",
+    "why": "Generic ordinary blowup/closed-embedding input; sk-i-curve-zero has no statement supplying this scheme-theoretic tool."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-locally-standard-smooth",
+    "why": "Generic standard-smooth local presentation/lifting input; sk-i-curve-zero has no statement supplying this scheme-theoretic tool."
+   },
+   {
+    "node": "lem-weil-pbc-standard-smooth-quotient-lift",
+    "why": "Generic standard-smooth local presentation/lifting input; sk-i-curve-zero has no statement supplying this scheme-theoretic tool."
+   },
+   {
+    "node": "lem-weil-pbc-standard-smooth-is-smooth",
+    "why": "Generic standard-smooth local presentation/lifting input; sk-i-curve-zero has no statement supplying this scheme-theoretic tool."
+   },
+   {
+    "node": "thm-nagata-blowup-flat-base-change",
+    "why": "Generic ordinary blowup/closed-embedding input; sk-i-curve-zero has no statement supplying this scheme-theoretic tool."
+   },
+   {
+    "node": "lem-pc-smooth-flat",
+    "why": "Generic scheme smoothness/flatness comparison used for the embedded reduction and ordinary blowup base change; the assigned unit supplies no substitute."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+    "why": "Generic scheme smoothness/flatness comparison used for the embedded reduction and ordinary blowup base change; the assigned unit supplies no substitute."
+   },
+   {
+    "node": "lem-trf-smooth-composition",
+    "why": "Generic scheme smoothness/flatness comparison used for the embedded reduction and ordinary blowup base change; the assigned unit supplies no substitute."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lemma-nagata-strict-transform-ambient-closed",
+  "lem-weil-pbc-smooth-locally-standard-smooth",
+  "lem-weil-pbc-standard-smooth-quotient-lift",
+  "lem-weil-pbc-standard-smooth-is-smooth",
+  "thm-nagata-blowup-flat-base-change",
+  "lem-pc-smooth-flat",
+  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
+  "lem-trf-smooth-composition"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q125-59fe9e720",
+  "group": "Q125",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q125-59fe9e720 (reviewer sub-agent of L); spot-checked: Read in full: the item, its 7 steps and every cited statement, plus the new node lem-trf-embedded-resolution-ambient-comparison. Sources checked: ILO VIII 2.1.3-2.1.10, 2.3.1-2.3.5, Thm 2.3.10 and Rem 2.3.11-2.3.13 (pp.87-94), Stacks 01V7 (lemma-smooth-locally-standard-smooth) and 07CK (lemma-lift-once). The quotient-lift node needs no nilpotent ideal; I rechecked the standard-smooth lifting directly. The item statement is unchanged (identical to the live new-targets copy) and agrees with ILO 2.3.10 restricted to finite-type Q-schemes and smooth maps, using the conventions of 2.3.1, 2.3.4 and 2.3.5(i); no target is weakened. The new node is statement-only, self-contained and cites its definitions. It was tested on small cases: the empty and regular inputs, the node xy=0 embedded in A^2 and in A^3, smooth projection, open restriction away from Sing (which forces centres over Sing, consistent with ILO 2.3.11/2.3.15) and mixed-dimensional unions. It does not restate the item: it is the embedded BM/BMT input, with ambient smooth maps only. The item derives arbitrary smooth maps between embedded schemes (Step 2, chart lifting), gluing over non-separated schemes with label synchronization (Step 4), cover independence (Step 5), general smooth functoriality (Step 6) and composition (Step 7). The duplicate search over all DAG statements found only toric/fan, curve and Popescu nodes, so there is no duplicate and no cycle. Hypotheses checked: flatness for blowup base change via lem-pc-smooth-flat, intersections of affine opens never assumed affine, non-constant relative dimension, and no stage deleted for surjective maps. FIX: Step 2 now justifies that Spec B -> Spec Q is smooth (polynomial ring is standard smooth with no equations). Step 6 now cites def-sbc-smooth-morphisms and lem-trf-smooth-composition for the smoothness of V->U. All 8 listed tool_uses are accepted as generic tools; the unit supplies no substitute. Open: the new node's labelled ambient-independence clause goes beyond the ILO text and must be checked against Bierstone-Milman-Temkin 2011 (Thm 6.1, Addendum, 6.3), which is not available locally (WANTED), when that node is split.; 1 file(s) fixed by the reviewer"
  }
 }
