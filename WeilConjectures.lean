@@ -6078,7 +6078,9 @@ public import WeilConjectures.CategoryTheory.StageSystem.Functor
 public import WeilConjectures.CategoryTheory.StageSystem.Idempotents
 public import WeilConjectures.CategoryTheory.StageSystem.Preadditive
 public import WeilConjectures.CategoryTheory.StageSystem.Pretriangulated
+public import WeilConjectures.CategoryTheory.StageSystem.Restrict
 public import WeilConjectures.CategoryTheory.StageSystem.Shift
+public import WeilConjectures.CategoryTheory.StageSystem.TStructure
 public import WeilConjectures.CategoryTheory.SubobjectHomologyStep
 public import WeilConjectures.CategoryTheory.SupportedComplexSingleRealization
 public import WeilConjectures.CategoryTheory.TensorHomologyImageKernelEpi
@@ -9258,6 +9260,8 @@ public import WeilConjectures.SixFunctors.ProEtale.FieldCoefficient.Abelian
 public import WeilConjectures.SixFunctors.ProEtale.FieldCoefficient.ConstantSheaf
 public import WeilConjectures.SixFunctors.ProEtale.FieldCoefficient.Constructible
 public import WeilConjectures.SixFunctors.ProEtale.FieldCoefficient.ConstructibleHeart
+public import WeilConjectures.SixFunctors.ProEtale.FieldCoefficient.ConstructibleTwoColimit
+public import WeilConjectures.SixFunctors.ProEtale.FieldCoefficient.ConstructibleTwoColimitTStructure
 public import WeilConjectures.SixFunctors.ProEtale.FieldCoefficient.ExtendScalars
 public import WeilConjectures.SixFunctors.ProEtale.FieldCoefficient.ExtendScalarsComp
 public import WeilConjectures.SixFunctors.ProEtale.FieldCoefficient.ExtendScalarsConstructible
