@@ -13,22 +13,28 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.LowerStar
 /-!
 # Higher direct images of `ℓ`-adic lattice sheaves along smooth proper morphisms
 
-Let `K` be a field, `Y` of finite type over `K`, `f : X ⟶ Y` smooth and proper and `(Gₙ)` an
-`ℓ`-adic tower of étale sheaves of `ULift ℤ_ℓ`-modules on `X` as in
+Let `K` be a field, `Y` locally of finite type over `K`, `f : X ⟶ Y` smooth and proper and
+`(Gₙ)` an `ℓ`-adic tower of étale sheaves of `ULift ℤ_ℓ`-modules on `X` as in
 `WeilConjectures.SixFunctors.ProEtale.Adic.SmoothProperLatticeModule`, with limit `M` (in
 `ℤ_ℓ,X`-modules) of the transported tower `ν^* Gₙ`. For an `ℓ`-adic sheaf `F ≅ ℚ̄_ℓ ⊗ M`, every
 `Hⁿ(Rf_* F[0])` is lisse
-(`isAdicLisseSheaf_homology_rightDerivedFunctor_adicLowerStar_of_lattice_of_connectedSpace`).
-
+(`isAdicLisseSheaf_homology_rightDerivedFunctor_adicLowerStar_of_lattice`).
 This is the *lattice case* of
 `isAdicLisseSheaf_homology_rightDerivedFunctor_lowerStar_of_smooth_of_isProper`.
-It is deduced from the integral statement
+
+For `Y` connected and quasi-compact
+(`isAdicLisseSheaf_homology_rightDerivedFunctor_adicLowerStar_of_lattice_of_connectedSpace`),
+it is deduced from the integral statement
 `isAdicLisseSheaf_adicSheafExtendScalars_homology_rightDerivedPadicIntModPushforward_limit`
 using the compatibility of extension of scalars with `Rf_*`
-(`isAdicLisseSheaf_homology_rightDerivedFunctor_adicLowerStar_of_rationalization`),
-which grants the rationalization formula on `X` and on `Y`
-(`[IsIso (rationalizationComparison l X)]`, `[IsIso (rationalizationComparison l Y)]`); these
-are hypotheses here.
+(`isAdicLisseSheaf_homology_rightDerivedFunctor_adicLowerStar_of_rationalization`). In general,
+`Y` is covered by connected quasi-compact opens `U`
+(`Scheme.exists_isOpenImmersion_connectedSpace_compactSpace`),
+over which `Rf_*` is computed on `f⁻¹ U` by open base change, and the tower restricts to `f⁻¹ U`
+(`padicIntModUpperStarLimitComparisonPadicIntModTowerIso`).
+
+The rationalization formula (`IsIso (rationalizationComparison l X)`, the comparison
+`⨁_B colim (M --ℓ--> M --ℓ--> ⋯) ⟶ ℚ̄_ℓ ⊗ M`) is not proved here and is a hypothesis.
 -/
 
 @[expose] public section
@@ -147,8 +153,8 @@ end Restriction
 /-- Every point of a locally Noetherian scheme `Y` lies in the image of an open immersion from a
 connected quasi-compact scheme: the connected component of the point in an affine open
 neighbourhood, which is open since `Y` is locally connected, and closed in the affine open. -/
-lemma Scheme.exists_isOpenImmersion_connectedSpace_compactSpace {Y : Scheme.{u}}
-    [IsLocallyNoetherian Y] (y : Y) :
+lemma _root_.AlgebraicGeometry.Scheme.exists_isOpenImmersion_connectedSpace_compactSpace
+    {Y : Scheme.{u}} [IsLocallyNoetherian Y] (y : Y) :
     ∃ (U : Scheme.{u}) (j : U ⟶ Y), IsOpenImmersion j ∧ ConnectedSpace U ∧ CompactSpace U ∧
       y ∈ Set.range j := by
   obtain ⟨V, hV, hyV, -⟩ := exists_isAffineOpen_mem_and_subset (U := ⊤) (Set.mem_univ y)
@@ -166,7 +172,8 @@ of finite locally constant étale sheaves of torsion `ℤ_ℓ`-modules, every `H
 lisse `ℓ`-adic sheaf. Being lisse is local on `Y`, which is covered by connected quasi-compact
 opens `U`; over `U`, `Rf_*` is computed on `f⁻¹ U` (open base change), to which the tower
 restricts, and
-`ProEtale.isAdicLisseSheaf_homology_rightDerivedFunctor_adicLowerStar_of_lattice_of_connectedSpace` applies. -/
+`isAdicLisseSheaf_homology_rightDerivedFunctor_adicLowerStar_of_lattice_of_connectedSpace`
+applies. -/
 theorem isAdicLisseSheaf_homology_rightDerivedFunctor_adicLowerStar_of_lattice
     {K : Type u} [Field K] {X Y : Scheme.{u}} (aY : Y ⟶ Spec (.of K)) [LocallyOfFiniteType aY]
     (f : X ⟶ Y) [Smooth f] [IsProper f]
@@ -200,7 +207,8 @@ theorem isAdicLisseSheaf_homology_rightDerivedFunctor_adicLowerStar_of_lattice
   have (k : ℕ) : IsFiniteLocallyConstantSheaf
       ((Etale.upperStar (ModuleCat.{u + 1} (ULift.{u + 1} ℤ_[l] ⧸ I k)) g).obj (F₀ k)) :=
     IsFiniteLocallyConstantSheaf.upperStar g (F₀ k)
-  refine (isAdicLisseSheaf_homology_rightDerivedFunctor_adicLowerStar_of_lattice_of_connectedSpace (j y ≫ aY)
+  refine (isAdicLisseSheaf_homology_rightDerivedFunctor_adicLowerStar_of_lattice_of_connectedSpace
+    (j y ≫ aY)
     (pullback.snd f (j y)) G' A' I _
     (fun k ↦ (Etale.upperStar _ g).mapIso (eG k) ≪≫
       (Etale.upperStarRestrictScalarsIso (I k) g).app (F₀ k))
