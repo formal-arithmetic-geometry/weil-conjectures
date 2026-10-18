@@ -32,133 +32,122 @@
  ],
  "proof": [
   {
-   "text": "The spectrum of a field is Noetherian (its only ideals are 0 and 1). By [lem-weil-pbc-finite-type-over-noetherian], $X$ is Noetherian; [lem-weil-pbc-noetherian-finitely-many-components] gives its finitely many components $C_i$ with reduced induced structure. Each $C_i$ is integral and finite type over $k$. Apply [lem-sc-normalization-exists] to $C_i$: $C_i^\\nu\\to C_i$ is finite and surjective. On an affine $\\operatorname{Spec}A\\subset X$, the inverse images in these sources are affine with coordinate rings finite over $A/\\mathfrak p_i$, hence finite over $A$ using the same generators. Their finite disjoint union is the spectrum of their finite product, a finite $A$-module. Thus $\\nu$ is finite. Every point belongs to some $C_i$ and has a preimage in $C_i^\\nu$, so $\\nu$ is surjective. The empty scheme gives the empty coproduct and satisfies both assertions.",
+   "text": "Finite type over a field and quasi-compactness make X Noetherian, so its irreducible components are finite in number. Their reduced induced schemes are integral: the vanishing ideal gives reducedness and the underlying component is irreducible. Normalize each component. The resulting maps to X are finite; their finite coproduct is finite (IsFinite.sigmaDesc). Every point belongs to a component and lifts through its surjective normalization. The coproduct normalization has normal stalks: each coproduct chart is the normalization of an integral component and normality transports through its open-immersion stalk isomorphism.",
    "uses": [
     "lem-weil-pbc-finite-type-over-noetherian",
     "lem-weil-pbc-noetherian-finitely-many-components",
-    "lem-sc-normalization-exists"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 0BXR (lemma-normalization-locally-algebraic), finiteness and component construction; Morphisms 0CDV (lemma-normalization-in-terms-of-components)."
-   }
-  },
-  {
-   "text": "Fix an affine $\\operatorname{Spec}A\\subset X$. By [lem-weil-pbc-reduced-noetherian-total-ring-fractions], $Q(A)$ is the finite product of the fields $\\operatorname{Frac}(A/\\mathfrak p_i)$ for the minimal primes meeting this chart. By [def-sc-normalization] and [lem-weil-pbc-integral-closure-commutes-localization], the component normalizations over this chart have coordinate rings $B_i=\\overline{A/\\mathfrak p_i}^{\\operatorname{Frac}(A/\\mathfrak p_i)}$. Thus $\\nu^{-1}\\operatorname{Spec}A=\\operatorname{Spec}B$, $B=\\prod_i B_i\\subset Q(A)$. This is exactly the integral closure of $A$ in $Q(A)$: projection of a monic equation proves one inclusion; for a tuple integral in each coordinate, lift the coefficients of its finitely many coordinate monic polynomials to $A$ and multiply them. In each coordinate its own polynomial is a factor, so the resulting monic product annihilates the tuple. This also handles an empty product.",
-   "uses": [
-    "lem-weil-pbc-reduced-noetherian-total-ring-fractions",
+    "def-weil-pbc-reduced-normalization",
     "def-sc-normalization",
-    "lem-weil-pbc-integral-closure-commutes-localization"
+    "lem-sc-normalization-exists",
+    "lem-weil-pbc-normalization-normal-stalks"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/morphisms.tex",
-    "place": "Morphisms Tag 035P (lemma-description-normalization), affine description; Tag 0CDV (lemma-normalization-in-terms-of-components)."
+    "place": "Tags 0CDV, 035Q; Varieties Tag 0BXR. Finite coproduct and stalk computations are written explicitly in Lean."
    }
   },
   {
-   "text": "Apply [lem-sbc-integral-closure-finite-normal-product] to $A\\to Q(A)$ and the finite product of its component fraction fields (fields are integrally closed domains). It says that every prime localization of $B$ is an integrally closed domain, so $B$ is normal. Choose finite $A$-module generators $b_j$ of $B$ from step 1, write $b_j=a_j/s_j$ in $Q(A)$ with each $s_j$ a nonzerodivisor, and put $s=\\prod_j s_j$. Then $sB\\subset A$ and $A_s=B_s$. Multiplication by $s$ is injective on $B$, since $B\\subset Q(A)$ and $s$ is a unit in $Q(A)$. By [lem-weil-pbc-reduced-zerodivisors-union-minimal-primes], $s$ avoids every minimal prime; hence $D(s)$ contains every generic point of the chart and is dense. This gives a dense open over which $\\nu$ is an isomorphism.",
+   "text": "Let x have an integrally closed domain stalk. Mathlib Scheme.exists_germ_injective gives an affine neighborhood V whose section ring injects into that stalk, hence V is integral. Exactly one ambient irreducible component C meets V: pulling any such component back to V gives its unique component; density of the intersection in the ambient component identifies that component with the closure of V. The reduced component inclusion restricted over V is a surjective closed immersion into the reduced scheme V, hence is an isomorphism. Thus Spec O_X,x maps dominantly to C. Its stalks are integrally closed, by localization and Spec.stalkIso. Apply the dominant normalization lifting theorem to get a dominant map a:Spec O_X,x -> C^nu. Compose with the coproduct inclusion. Mathlib spread_out_of_isGermInjective' (Tag 0BX6), applied to the finite normalization, spreads this into a section over a neighborhood W of x. Replace W by U=W intersect V. Only C^nu meets the inverse image of U, so that inverse image embeds openly into C^nu. The section is dominant there because a is dominant and factors through it. It is a closed immersion because it is a section of a separated morphism. Its closed dense image is the entire inverse image, and a surjective closed immersion into a reduced scheme is an isomorphism. Consequently normalization is an isomorphism over U.",
    "uses": [
-    "lem-sbc-integral-closure-finite-normal-product",
-    "lem-weil-pbc-reduced-zerodivisors-union-minimal-primes"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 0BXR (lemma-normalization-locally-algebraic); Morphisms 035Q (lemma-normalization-normal); explicit finite-generator denominator argument."
-   }
-  },
-  {
-   "text": "For $\\mathfrak p\\in\\operatorname{Spec}A$, [lem-weil-pbc-integral-closure-commutes-localization] identifies $B_{\\mathfrak p}$ with the integral closure of $A_{\\mathfrak p}$ in $Q(A)_{\\mathfrak p}=Q(A_{\\mathfrak p})$. The latter identification follows from [lem-weil-pbc-reduced-noetherian-total-ring-fractions]: localization kills precisely the field factors whose minimal primes are not contained in $\\mathfrak p$, and keeps the others, exactly the minimal primes of $A_{\\mathfrak p}$ by the inclusion-preserving prime correspondence [lem-weil-pbc-primes-of-localization]. If $A_{\\mathfrak p}$ is an integrally closed domain, this closure is $A_{\\mathfrak p}$. Conversely, if $A_{\\mathfrak p}=B_{\\mathfrak p}$, this local ring is a normal domain: its maximal ideal contracts to a prime $\\mathfrak q$ of $B$ and $(B_{\\mathfrak p})_{\\mathfrak qB_{\\mathfrak p}}=B_{\\mathfrak q}$. A local ring localized at its maximal ideal is itself, and $B_{\\mathfrak q}$ is a normal domain by step 3. Therefore the normal points of the chart are precisely the primes where $(B/A)_{\\mathfrak p}=0$. For generators $m_1,\\ldots,m_h$ of $B/A$, vanishing at $\\mathfrak p$ means some $u_j\\notin\\mathfrak p$ kills each $m_j$; their product kills all generators. Consequently these primes form $\\operatorname{Spec}A\\setminus V(\\operatorname{Ann}_A(B/A))$, an open containing $D(s)$ from step 3. On this open the localized inclusion $A\\to B$ is an isomorphism. These local descriptions agree on overlaps because they use the intrinsic local ring, so they give the dense open $N$ and $\\nu^{-1}(N)\\cong N$.",
-   "uses": [
-    "lem-weil-pbc-integral-closure-commutes-localization",
-    "lem-weil-pbc-reduced-noetherian-total-ring-fractions",
-    "lem-weil-pbc-primes-of-localization"
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-sbc-normalization-dominant-lift",
+    "lem-weil-pbc-normalization-normal-stalks"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/morphisms.tex",
-    "place": "Morphisms Tags 0C3B (lemma-stalk-normalization) and 035K (lemma-normalization-localization); finite-module annihilator calculation written out."
+    "place": "Tag 035Q, universal property and normalization over normal schemes; Mathlib.AlgebraicGeometry.SpreadingOut (Tag 0BX6). This is a local alternative to the finite-cokernel calculation of Tag 0C3B."
    }
   },
   {
-   "text": "By [lem-weil-pbc-affine-open-section-vanishing-prime], a principal open is affine with its coordinate ring the stated localization. For a principal open $D(f)\\subset\\operatorname{Spec}A$, [lem-weil-pbc-integral-closure-commutes-localization] gives $B_f=\\overline{A_f}^{Q(A)_f}$. The total-fractions description [lem-weil-pbc-reduced-noetherian-total-ring-fractions] identifies $Q(A)_f$ with $Q(A_f)$ by discarding the component field factors in which $f=0$. Step 2 applied to $A_f$ therefore identifies $\\operatorname{Spec}B_f\\to\\operatorname{Spec}A_f$ with the normalization. Cover any open $W\\subset X$ by such principal opens in affine charts. On a further principal restriction $D(fg)$ both iterated maps send $b/f^n$ to that same fraction in $B_{fg}$; equality can be tested on principal opens inside each overlap. Thus the identifications agree on overlaps and glue canonically to identify $\\nu^{-1}(W)\\to W$ with the normalization of $W$. Empty opens contribute no charts.",
+   "text": "Take N to be the maximal open on which normalization is an isomorphism. It is an isomorphism over N by target-locality of isomorphisms. A point of N has normal stalk because the normalization has normal stalks and an open immersion induces stalk isomorphisms. Conversely the preceding local construction places every normal point in N. Generic stalks of a reduced Noetherian scheme are fields (Mathlib isField_stalk_of_closure_mem_irreducibleComponents); N therefore contains every generic point and is dense.",
    "uses": [
-    "lem-weil-pbc-integral-closure-commutes-localization",
-    "lem-weil-pbc-reduced-noetherian-total-ring-fractions",
-    "lem-weil-pbc-affine-open-section-vanishing-prime"
+    "def-nagata-maximal-isomorphism-open",
+    "lemma-nagata-maximal-isomorphism-open",
+    "lem-weil-pbc-normalization-normal-stalks"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/morphisms.tex",
-    "place": "Morphisms Tag 035K (lemma-normalization-localization), expanded using Algebra 0307."
+    "place": "Tag 035Q and the generic-stalk field criterion; maximal open construction in WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.IsIso."
    }
   },
   {
-   "text": "Let $K/k$ be separable in the stated, possibly transcendental, sense. On the above affine chart set $A_K=A\\otimes_k K$ and $B_K=B\\otimes_k K$. The normal-algebra scalar-extension theorem [lem-weil-pbc-normal-algebra-separable-scalar-extension] applies to the normal $B$ of step 3 and makes $B_K$ normal. By [lem-weil-pbc-module-over-field-flat] and the injectivity characterization in [def-weil-pbc-flat-ring-map], tensoring $A\\hookrightarrow B$ and multiplication by the nonzerodivisor $s$ preserves injectivity. Thus $A_K\\hookrightarrow B_K$, and $s$ is a nonzerodivisor on both rings; the same finite generators show $B_K$ is finite over $A_K$, and $sB_K\\subset A_K$. A normal ring is reduced: if a nonzero nilpotent $b$ existed, choose a maximal ideal containing its proper annihilator; then $b/1$ would be a nonzero nilpotent in a domain localization, a contradiction. Hence $B_K$, and its subring $A_K$, are reduced. Both are finite-type $K$-algebras and therefore Noetherian by the affine instance of [lem-weil-pbc-finite-type-over-noetherian].",
+   "text": "For any dense open U of X, its inverse image in the normalization is dense. Indeed every irreducible component meets U: remove the other finitely many components, obtaining an open dense in that component, and intersect with U. Surjectivity of the component normalization makes the inverse image nonempty, hence dense in that integral normalization; continuity and the coproduct open cover give density in the whole normalization. Compare this normalization with any finite normal X-scheme which is isomorphic to X over a dense open having dense inverse image. Intersect that open with N and apply the finite-normal dense-open isomorphism theorem. Uniqueness follows from equality on the dense open, reducedness of the source and separatedness of the target.",
+   "uses": [
+    "lem-weil-pbc-noetherian-finitely-many-components",
+    "lem-sc-normalization-exists",
+    "lem-sbc-finite-normal-dense-open-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0BQL, uniqueness of finite normal extensions from a dense open; elementary component topology."
+   }
+  },
+  {
+   "text": "For an arbitrary open W of X, both its componentwise normalization and the restriction of X^nu are finite and normal over W. They are isomorphic to W over the intersection with N. Open immersions pull dense subsets back to dense subsets; the preceding inverse-image argument verifies density in both finite sources. Apply the comparison just established. Its over-W equation and separated-target uniqueness are precisely the required existence and uniqueness statement. Since X is Noetherian, the open W remains quasi-compact over k.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-sc-normalization-exists",
+    "lem-sbc-finite-normal-dense-open-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 035K, normalization and open restriction; finite normal comparison provides the alternative to explicit localization and gluing."
+   }
+  },
+  {
+   "text": "For a separable extension K/k, use affine charts and the tensor-product description of pullbacks of affine spectra. The normal-algebra scalar-extension theorem proves normality of the stalks of X^nu times_k K, transported through the affine pullback isomorphisms and cover stalk maps. The projection Spec K -> Spec k is flat because modules over a field are flat. The base-changed normalization is schematically dominant by flat base change, so its reduced source implies reducedness of X_K. It is finite. The inverse image of N is dense in X_K and its inverse image is dense in X^nu times_k K, since the projections along field extension are open and the original inverse image of N is dense. It is an isomorphism over this open, by pullback pasting. Apply finite normal comparison with the componentwise normalization of X_K. Pullback extensionality identifies the over-X_K equation with the two stated projection equations; thus uniqueness is exactly the requested uniqueness.",
    "uses": [
     "lem-weil-pbc-normal-algebra-separable-scalar-extension",
     "lem-weil-pbc-module-over-field-flat",
     "def-weil-pbc-flat-ring-map",
-    "lem-weil-pbc-finite-type-over-noetherian"
+    "lem-sbc-finite-normal-dense-open-iso",
+    "def-weil-pbc-separable-field-extension"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 0C3N (lemma-normalization-and-change-of-fields), separable case; Tag 0C3M (lemma-base-change-normal-by-separable)."
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Varieties Tags 0C3N and 0C3M. Flat schematic dominance, openness and affine pullback identifications are Mathlib APIs."
    }
   },
   {
-   "text": "The inclusion $B_K\\subset (A_K)_s\\subset Q(A_K)$ is injective because $s$ is a nonzerodivisor on $B_K$ and $sB_K\\subset A_K$. It identifies $Q(B_K)$ with $Q(A_K)$ explicitly: a nonzerodivisor $a$ of $A_K$ is one on $B_K$, since $ab=0$ implies $a(sb)=0$ in $A_K$, hence $sb=0$ and $b=0$. Conversely, if $t$ is a nonzerodivisor of $B_K$, then $st\\in A_K$ is a nonzerodivisor there, and a fraction $b/t$ equals $(sb)/(st)$ in $Q(A_K)$. The Noetherian ring $B_K$ has finitely many minimal primes by [lem-weil-pbc-noetherian-finitely-many-minimal-primes]. Apply [lem-weil-pbc-reduced-normal-iff-integrally-closed-total-fractions] to the reduced Noetherian ring $B_K$: its normality makes it integrally closed in this common total fraction ring. By [lem-weil-pbc-finite-algebra-is-integral], every element of $B_K$ is integral over $A_K$. Any element of $Q(A_K)$ integral over $A_K$ is also integral over $B_K$ (the same monic equation), hence belongs to $B_K$. Therefore $B_K$ is exactly the integral closure of $A_K$ in $Q(A_K)$. By step 2 this identifies $\\operatorname{Spec}B_K$ with the normalization of $\\operatorname{Spec}A_K$. To identify the canonical comparison, flatness as in step 6 preserves injectivity of multiplication by every nonzerodivisor $a$ of $A$, so $A\\to A_K$ extends uniquely to $\\iota:Q(A)\\to Q(A_K)$, $x/a\\mapsto (x\\otimes1)/(a\\otimes1)$. The comparison is Spec of the ring isomorphism $B_K\\to\\overline{A_K}^{Q(A_K)}$, $b\\otimes c\\mapsto c\\iota(b)$. On restriction to $D(f)$ this sends $(b/f^n)\\otimes c$ to $c\\iota(b)/\\iota(f)^n$; on any further principal restriction both composites have this formula. Principal opens inside affine overlaps cover those overlaps, so these local maps agree and glue to the canonical comparison over $X_K$.",
-   "uses": [
-    "lem-weil-pbc-reduced-normal-iff-integrally-closed-total-fractions",
-    "lem-weil-pbc-finite-algebra-is-integral",
-    "lem-weil-pbc-noetherian-finitely-many-minimal-primes"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 0C3N (lemma-normalization-and-change-of-fields), separable-case integral-closure identification; Algebra Tag 030C (lemma-characterize-reduced-ring-normal)."
-   }
-  },
-  {
-   "text": "If $k$ is algebraically closed and $K/k$ is arbitrary, take any finitely generated subextension $L/k$. The Mathlib field tool [lem-weil-pbc-algclosed-fg-field-separating-basis] supplies a finite transcendence basis with separable algebraic remainder. Thus each such $L/k$ is separably generated, exactly condition (2) of [def-weil-pbc-separable-field-extension]. So $K/k$ satisfies the hypothesis of steps 6 and 7, giving the stated special case without assuming that $K/k$ is algebraic or finite.",
+   "text": "An algebraically closed field is perfect. Every finitely generated intermediate field of K/k is an essentially finite type field extension, so the separating transcendence-basis theorem makes it separably generated. This is exactly Algebra.IsSeparableExtension k K. Apply the preceding comparison, without imposing algebraicity or finiteness on K/k.",
    "uses": [
     "lem-weil-pbc-algclosed-fg-field-separating-basis",
     "def-weil-pbc-separable-field-extension"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 0C3N (lemma-normalization-and-change-of-fields); Algebra Tag 030Z (lemma-perfect), specialization to an algebraically closed field."
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Varieties Tag 0C3N; Mathlib.FieldTheory.SeparablyGenerated and IsAlgClosed.perfectField."
    }
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-finite-type-over-noetherian",
   "lem-weil-pbc-noetherian-finitely-many-components",
-  "lem-sc-normalization-exists",
-  "lem-weil-pbc-reduced-noetherian-total-ring-fractions",
+  "def-weil-pbc-reduced-normalization",
   "def-sc-normalization",
-  "lem-weil-pbc-integral-closure-commutes-localization",
-  "lem-sbc-integral-closure-finite-normal-product",
-  "lem-weil-pbc-reduced-zerodivisors-union-minimal-primes",
-  "lem-weil-pbc-primes-of-localization",
-  "lem-weil-pbc-affine-open-section-vanishing-prime",
+  "lem-sc-normalization-exists",
+  "lem-weil-pbc-normalization-normal-stalks",
+  "lem-sbc-normalization-dominant-lift",
+  "def-nagata-maximal-isomorphism-open",
+  "lemma-nagata-maximal-isomorphism-open",
+  "lem-sbc-finite-normal-dense-open-iso",
   "lem-weil-pbc-normal-algebra-separable-scalar-extension",
   "lem-weil-pbc-module-over-field-flat",
   "def-weil-pbc-flat-ring-map",
-  "lem-weil-pbc-reduced-normal-iff-integrally-closed-total-fractions",
-  "lem-weil-pbc-finite-algebra-is-integral",
-  "lem-weil-pbc-noetherian-finitely-many-minimal-primes",
-  "lem-weil-pbc-algclosed-fg-field-separating-basis",
-  "def-weil-pbc-separable-field-extension"
+  "def-weil-pbc-separable-field-extension",
+  "lem-weil-pbc-algclosed-fg-field-separating-basis"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/varieties.tex",
-  "place": "Tags 0BXR and 0C3N, following the affine integral-closure route; normal-locus support and common-denominator computations expanded using Morphisms 035P/035K/0C3B and Algebra 0307/030C."
+  "place": "Tags 0BXR and 0C3N, with the local normal-point proof by normalization lifting and Mathlib spreading (0BX6), and canonical open/base-change comparisons by finite normal schemes over a dense open (0BQL). Written as Lean by group P2 on 2026-10-18; all original statements unchanged."
  },
  "mathlib_searches": [
   {
@@ -268,9 +257,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-sbc-integral-closure-finite-normal-product"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-14",
   "by": "L",
@@ -308,5 +295,15 @@
   "by": "NG",
   "date": "2026-10-15",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261018T062844-L-668115",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
