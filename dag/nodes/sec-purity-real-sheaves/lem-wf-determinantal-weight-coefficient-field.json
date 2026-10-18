@@ -16,7 +16,8 @@
   "def-mg-determinant-line",
   "def-weil-punctual-weights",
   "sk-d-real-weil",
-  "def-weil-l-adic-coefficient-extension"
+  "def-weil-l-adic-coefficient-extension",
+  "def-sbc-normal-dominant-galois"
  ],
  "proof": [
   {
@@ -148,5 +149,28 @@
   "group": "Q55",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q55-f51fe254a (reviewer sub-agent of L); spot-checked: Read in full: the item, the master and main-20261015 blueprint statement and proof (identical; the report's claim that main has no proof is a small inaccuracy), unit sk-d-real-detweights (no steps), the chapter, and the statements of def-mg-determinant-line, def-weil-punctual-weights (including its blueprint_update), sk-d-real-weil, sk-d-real-setup and def-weil-l-adic-coefficient-extension. The statement is verbatim the same, with no weakening, and the added stmt_deps are justified. Step 1: sk-d-real-weil's statement supplies the E-model and the local Frobenius element; the tensor-coordinate matrix j(A) is correct. Step 2: det commutes with a ring homomorphism by the Leibniz formula, which is elementary. Step 3: by def-mg-determinant-line, det(rho)(g)=det(rho(g)) on the rank-one line, whose unique eigenvalue is that scalar; E⊆E'⊆Qlb gives the same alpha_y. Step 4: def-weil-punctual-weights is exactly |iota(alpha)|=q_y^{w/2}, and q_y, iota and a do not change. Every use is a definition, so there is no off-route statement and no tool_uses. No cycle: a DFS from the deps never reaches the item, and the only citer is def-wf-determinantal-weight. No duplicate found by rg over dag/nodes. Tested E'=E, rank 1, a quadratic extension with a non-split 2x2 matrix, and a Jordan block. No new nodes, no changes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cbb943d59",
+  "group": "Q06",
+  "result": "pass",
+  "note": "Read node, all 5 stmt_deps (+sk-d-real-setup), report, module, delivery diff (3 files; node statement unchanged, only lean record + stmt_dep def-sbc-normal-dominant-galois for IsNormalScheme). Clause check: finite K, l prime ≠ ringChar K, IsConnectedCurve + IsNormalScheme + W.geometricallyConnected, iota : PadicAlgCl l ≃+* ℂ, E ≤ E' finite IntermediateFields of the fixed closure, ρ : W.carrier →* GL (Fin r) E as E-model, IsIrreducible over Q̄ℓ, lisse as continuity of coefficients on W.geometric (equivalent to IsLisse via isLisse_iff_exists_basis, avoids u=0 restriction), det = recorded RepresentedDegreeDatum.det (det_rep/coe_detGL_apply), purity = literal |ι(d_x)| = pointNorm^(a/2) for the unique rank-one eigenvalue, conclusion identical over E' via GL.map inclusion. No stronger assumptions or universe restriction. Helper representedDegreeDatumOfMatrix is real data, no duplicate. Edge cases E'=E, r=0 excluded by IsSimpleOrder, r=1, non-split Frobenius, arbitrary real a. Docstrings with source/blueprint and proof steps, only sorry, lean.statement verbatim. nt_compile --json on snapshot file: clean, exit 0 (3.4 s); sanity-checked that errors are reported. Only nit: two unused imports, harmless."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.DeterminantalWeightCoefficientField",
+  "declaration": "AlgebraicGeometry.WeilGroup.isPunctuallyPure_det_coefficientExtension",
+  "declarations": [
+   "AlgebraicGeometry.WeilGroup.representedDegreeDatumOfMatrix",
+   "AlgebraicGeometry.WeilGroup.isPunctuallyPure_det_coefficientExtension"
+  ],
+  "file": "lean/Sheaf/Paper/DeterminantalWeightCoefficientField.lean",
+  "statement": "theorem isPunctuallyPure_det_coefficientExtension {K : Type u} [Field K] [Finite K] {X : Scheme.{u}} {p : X ⟶ Spec (.of K)} [IsConnectedCurve p] (_hNormal : IsNormalScheme X) (W : WeilGroup p) (l : ℕ) [Fact l.Prime] (_hl : l ≠ ringChar K) (iota : PadicAlgCl l ≃+* ℂ) (E E' : IntermediateField (Padic l) (PadicAlgCl l)) [FiniteDimensional (Padic l) E] [FiniteDimensional (Padic l) E'] (hEE' : E ≤ E') {r : ℕ} (ρ : W.carrier →* Matrix.GeneralLinearGroup (Fin r) E) (_hIrreducible : Representation.IsIrreducible ((Matrix.GeneralLinearGroup.toRepresentation (Fin r) (PadicAlgCl l)).comp ((Matrix.GeneralLinearGroup.map E.subtype).comp ρ))) (_hLisse : ∀ i j : Fin r, Continuous fun g : W.geometric ↦ E.subtype (ρ g.val i j)) (a : ℝ) (hPure : ∀ x : X.finitePoints, ‖iota (E.subtype ((W.representedDegreeDatumOfMatrix ρ).det.rep (W.frobenius x) 0 0))‖ = (X.pointNorm x.val : ℝ) ^ (a / 2)) : ∀ x : X.finitePoints, ‖iota (E'.subtype ((W.representedDegreeDatumOfMatrix ((Matrix.GeneralLinearGroup.map (IntermediateField.inclusion hEE').toRingHom).comp ρ)).det.rep (W.frobenius x) 0 0))‖ = (X.pointNorm x.val : ℝ) ^ (a / 2)",
+  "branch": "newtargets-dag",
+  "by": "Q06",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "A basis of the given finite coefficient model identifies scalar extension with entrywise mapping of its GL matrices. Uses the recorded RepresentedDegreeDatum.det, actual finite subfields of the fixed PadicAlgCl, and the literal punctual-purity norm equality specialized to its unique rank-one Frobenius eigenvalue. The auxiliary definition only packages the existing Weil degree datum with the given representation."
  }
 }

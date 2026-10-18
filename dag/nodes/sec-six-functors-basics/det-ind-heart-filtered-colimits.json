@@ -7,7 +7,7 @@
  },
  "kind": "statement",
  "title": "Ind-constructible sheaves are closed under filtered colimits and sums",
- "statement": "Let $\\Lambda=E$ or $\\Qlb$. If $(B_\\lambda)_{\\lambda\\in I}$ is a filtered diagram in $\\IndCons(X,\\Lambda)$,\nthen its colimit $B$ in $\\Mod(X_{\\mathrm{proét}},\\Lambda)$ lies in $\\IndCons(X,\\Lambda)$. Arbitrary direct sums\nof objects of $\\IndCons(X,\\Lambda)$ lie in $\\IndCons(X,\\Lambda)$.",
+ "statement": "Fix a prime $\\ell$, a field $k$ of characteristic $p>0$ with $p\\ne\\ell$, and a separated scheme $X$ of finite type over $k$, in the standing geometric setting of the source. Fix an algebraic closure $\\overline{\\mathbf Q}_\\ell$ and a finite intermediate extension $E/\\mathbf Q_\\ell$. Let $\\Lambda=\\underline E$ or $\\underline{\\overline{\\mathbf Q}_\\ell}$ be the condensed coefficient ring of [sk-def-sfb-condensed-ring] and [sk-def-sfb-qlbar-condensed]. Work in $\\mathcal M=\\operatorname{Mod}_{\\Lambda_X}(\\operatorname{Sh}(X_{\\mathrm{pro\\acute et}},\\operatorname{Ab}))$, the internal-module category of [sk-def-sfb-module-objects], with $\\Lambda_X=p_X^*\\Lambda$. Let $\\operatorname{Cons}(X,\\Lambda)$ use the finite constant local-model convention of [sk-def-sfb-constructible], and let $\\operatorname{IndCons}(X,\\Lambda)$ consist of the objects isomorphic to small filtered colimits in $\\mathcal M$ of constructible objects. Here small means small in the chosen universe of the site and coefficient sheaves.\n\nIf $(B_\\lambda)_{\\lambda\\in I}$ is a small filtered diagram in $\\operatorname{IndCons}(X,\\Lambda)$, then its colimit $B$ in $\\mathcal M$ belongs to $\\operatorname{IndCons}(X,\\Lambda)$. For every small set $S$, the direct sum in $\\mathcal M$ of a family $(B_s)_{s\\in S}$ in $\\operatorname{IndCons}(X,\\Lambda)$ belongs to $\\operatorname{IndCons}(X,\\Lambda)$, including $S=\\varnothing$.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ind-heart/sk-prop-ind-heart-filtered-colimits.md",
   "place": "node det-ind-heart-filtered-colimits, order None"
@@ -152,5 +152,66 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-acaca0b5e",
+  "group": "NA",
+  "result": "pass",
+  "note": "Delivery touches only report, node (statement/statement_change/lean) and new module. §1(C) correction is source-based: X was unintroduced; standing schemes = separated finite type over k, char p>0, p≠ℓ (sk-lem-coefficient-heart 'standing scheme', sk-thm-existence, sk-def-sfb-dc-setting), matching the landed proof prerequisite det-ind-heart-canonical-presentation; both claims kept, empty sum included. Citer audit complete: det-ind-heart-extensions and det-ambient-ind-derived-sums correctly holds:false and unedited, other three hold. Lean matches node clause by clause: continuousMapRingObj E and padicAlgClRingObj ℓ, condensedRingObj, Mathlib Mod, recorded IsConstantModelConstructible, IndCons = Mathlib ObjectProperty.ind.{u+1} (no duplicate), small = Type (u+1) matching ind's universe, Cocone/Cofan IsColimit, no Nonempty, no extra assumptions, no unbound variables. lean.statement verbatim; source/blueprint docstrings with full proof; sorry only; no definitions. nt_compile.py --json: clean, 3.0 s, rc=0; error-injection control confirmed errors are reported and both declarations elaborate.",
+  "statement_corrected": true
+ },
+ "lean": {
+  "module": "Sheaf.Paper.IndConstructibleFilteredColimits",
+  "declaration": "AlgebraicGeometry.ProEtale.indConstructible_filteredColimits_and_sums",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.indConstructible_filteredColimits_and_sums",
+   "AlgebraicGeometry.ProEtale.indConstructible_filteredColimits_and_sums_padicAlgCl"
+  ],
+  "file": "lean/Sheaf/Paper/IndConstructibleFilteredColimits.lean",
+  "statement": "theorem indConstructible_filteredColimits_and_sums (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ) (k : Type u) [Field k] (p : ℕ) [CharP k p] (hp : 0 < p) (hpl : p ≠ ℓ) (X : Scheme.{u}) [X.Over (Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] : (∀ (I : Type (u + 1)) [SmallCategory I] [IsFiltered I] (B : I ⥤ CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj (Profinite.continuousMapRingObj E) X)) (c : Cocone B), IsColimit c → (∀ i : I, ObjectProperty.ind.{u + 1} (IsConstantModelConstructible (Profinite.continuousMapRingObj E) X) (B.obj i)) → ObjectProperty.ind.{u + 1} (IsConstantModelConstructible (Profinite.continuousMapRingObj E) X) c.pt) ∧ (∀ (S : Type (u + 1)) (B : S → CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj (Profinite.continuousMapRingObj E) X)) (c : Cofan B), IsColimit c → (∀ s : S, ObjectProperty.ind.{u + 1} (IsConstantModelConstructible (Profinite.continuousMapRingObj E) X) (B s)) → ObjectProperty.ind.{u + 1} (IsConstantModelConstructible (Profinite.continuousMapRingObj E) X) c.pt)",
+  "branch": "newtargets-dag",
+  "by": "NA",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "The two declarations cover finite E and the condensed algebraic closure; each states both ambient filtered-colimit and direct-sum closure. IndCons is Mathlib ObjectProperty.ind of the recorded finite constant-model constructibility predicate, with no duplicate definition. The field, positive-characteristic and finite-type binders render the now explicit standing source setting. The two proof dependencies have no recorded Lean declarations and hence no proof-only imports yet."
+ },
+ "statement_change": {
+  "date": "2026-10-18",
+  "by": "NA stage 2",
+  "old_statement": "Let $\\Lambda=E$ or $\\Qlb$. If $(B_\\lambda)_{\\lambda\\in I}$ is a filtered diagram in $\\IndCons(X,\\Lambda)$,\nthen its colimit $B$ in $\\Mod(X_{\\mathrm{proét}},\\Lambda)$ lies in $\\IndCons(X,\\Lambda)$. Arbitrary direct sums\nof objects of $\\IndCons(X,\\Lambda)$ lie in $\\IndCons(X,\\Lambda)$.",
+  "what": "The imported statement leaves X unintroduced, the standing scheme hypotheses implicit, and both the size of diagrams and the meaning of IndCons implicit. The source calls X a standing scheme in sk-lem-coefficient-heart, the input used for sums; sk-def-sfb-dc-setting specifies separated finite-type schemes over a field of positive characteristic different from ell. The recorded canonical-presentation proof prerequisite uses precisely this setting. Make those source hypotheses and the unit's actual-colimit definition explicit, rather than silently add them in Lean. This is a scope clarification of a detail lemma, not a change to the parent unit's statement or its claims. No counterexample to the scoped statement is asserted.",
+  "source": {
+   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ind-heart/sk-prop-ind-heart-filtered-colimits.md",
+   "place": "Both assertions; parent _section.md definition of IndCons; sk-lem-coefficient-heart/_section.md standing-scheme hypothesis; sk-def-sfb-dc-setting/_section.md first paragraph"
+  },
+  "citers": [
+   {
+    "id": "det-ind-heart-extensions",
+    "holds": false,
+    "note": "Its statement covers arbitrary Noetherian schemes and does not supply the separated finite-type positive-characteristic field setting; its final filtered-colimit use is not justified by this scoped interface."
+   },
+   {
+    "id": "sk-lem-proper-heart-bound",
+    "holds": true,
+    "note": "It explicitly assumes the same standing separated finite-type field setting and smallness conventions; both uses on X and Y retain the direct-sum conclusion."
+   },
+   {
+    "id": "det-proper-heart-bound-indcons",
+    "holds": true,
+    "note": "X and Y are explicitly separated finite-type schemes over the same positive-characteristic field different from ell; both ambient-sum uses remain valid."
+   },
+   {
+    "id": "det-ind-heart-grothendieck",
+    "holds": true,
+    "note": "This is another detail of the same ind-heart unit with the same implicit standing setting; its finite- and arbitrary-sum uses retain their conclusions in that setting."
+   },
+   {
+    "id": "det-ambient-ind-derived-sums",
+    "holds": false,
+    "note": "It states X is any scheme; its cohomology-sum membership argument cannot invoke a closure interface scoped to separated finite-type schemes over the standing field."
+   }
+  ]
  }
 }

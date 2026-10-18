@@ -15,7 +15,8 @@
   "def-kun-derived-tensor",
   "def-kun-projection-formula-map",
   "lem-weil-pbc-comparison-direct-image-canonical-mate",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "def-weil-boundary-exceptional-comparison-data"
  ],
  "proof": [
   {
@@ -242,37 +243,31 @@
  "reviewed_lean": {
   "date": "2026-10-18",
   "by": "L",
-  "reviewer": "NT-stage2-cc-3fc4cfb76",
-  "group": "Q11",
+  "reviewer": "NT-stage2-cc-65cd7c493",
+  "group": "Q03",
   "result": "pass",
-  "note": "Read node, 8 stmt_deps, upstream declarations (fixedComparisonDirectImageMatePlus and isIso/counit, leftDerivedUpperStarTensorIso, derivedTensorObjCompMapDerivedCategoryComparisonUpperStarIso, comparisonUpperStarCompUpperStarIso, Plus compatibilities), report (Worker report and Second reading by Q11 present), module. All hypotheses match the node (prime l, char p>0 with p!=l, separated finite-type X and Y over k, proper k-morphism, finite rings killed by powers of l, K and H in D+) with no extra assumptions. Coefficient universe u+1 is the recorded convention. beta is the transported named mate, not an arbitrary iso. Tensor identifications are the canonical delta-derived 07A4 comparisons. The target square uses the same comparisonUpperStarCompUpperStarIso orientation as beta's pullback comparison. pi_K is the recorded Etale.rightDerivedLowerStarProjectionMap. Conclusion is c.inv ≫ homEquiv.symm t = eps_N ⊗ 1 plus IsIso pi_K -> IsIso t, as the node says. No hollow defs, only sorry is the theorem, docstrings carry source, blueprint tag and the 4 proof steps, statement verbatim, declarations list exact. nt_compile --json clean (6.3 s and 7.4 s), probe clean. Edge cases B=0, id, K=0, empty schemes, p=id covered. Minor: unused harmless import; second reading is an author self-check placeholder."
+  "note": "Read the node, all 9 stmt_deps and their lean records, the module and the report. Only lean and stmt_deps changed; the stmt_deps addition def-weil-boundary-exceptional-comparison-data is a landed node (allowed by brief-stage2 l.140), used only for the general pullbackSquare helper, with no cycle. lean.statement is verbatim. Every clause matches: prime l, char p>0, p!=l, separated finite-type X and Y over k, proper k-morphism f, finite A and B killed by l-powers with B an A-module via restrictScalars a, K and H in D+ via IsGE, beta_K and beta_H are the recorded fixedComparisonDirectImageMatePlus transported from D+ by the canonical compatibility isos, pi_K is the recorded Etale.rightDerivedLowerStarProjectionMap, t has the node's composition order, the transpose clause c^{-1} then homEquiv.symm t equals eps_N tensor 1 (directions checked by #check), and the conditional IsIso clause is present. A : Type (u+1) is the dependencies' convention. Edge cases checked: empty schemes, B=0, B=A, p=id, K=0, unbounded H excluded by hH. The helpers have real data; the only sorry is the theorem's proof, and the sorryAx in spEtaleMate comes from the dependency's postponed IsIso theorem. Docstrings carry the source, blueprint id and four proof steps; no line over 100. nt_compile.py: rc 0, 10.0 s, no diagnostics; a probe compile confirmed the signatures. Observations only: fixed-ring operations forced by the recorded beta; proof-only imports; placeholder second-reading section."
  },
  "lean": {
-  "module": "Sheaf.Paper.DirectImageEtaleMate",
-  "declaration": "AlgebraicGeometry.ProEtale.directImageEtaleMate",
+  "module": "Sheaf.Paper.SpDirectImageEtaleMate",
+  "declaration": "AlgebraicGeometry.ProEtale.spEtaleMate_transpose",
   "declarations": [
-   "AlgebraicGeometry.ProEtale.directImageEtaleMateEtaleTensor",
-   "AlgebraicGeometry.ProEtale.directImageEtaleMateProEtaleTensor",
-   "AlgebraicGeometry.ProEtale.directImageEtaleMateEtalePullback",
-   "AlgebraicGeometry.ProEtale.directImageEtaleMateEtalePushforward",
-   "AlgebraicGeometry.ProEtale.directImageEtaleMateProEtalePullback",
-   "AlgebraicGeometry.ProEtale.directImageEtaleMateProEtalePushforward",
-   "AlgebraicGeometry.ProEtale.directImageEtaleMateComparison",
-   "AlgebraicGeometry.ProEtale.directImageEtaleMateAdjunction",
-   "AlgebraicGeometry.ProEtale.directImageEtaleMateBeta",
-   "AlgebraicGeometry.ProEtale.directImageEtaleMateSquare",
-   "AlgebraicGeometry.ProEtale.directImageEtaleMateCoefficient",
-   "AlgebraicGeometry.ProEtale.directImageEtaleMateComparisonTensor",
-   "AlgebraicGeometry.ProEtale.directImageEtaleMatePullbackTensor",
-   "AlgebraicGeometry.ProEtale.directImageEtaleMateProjection",
-   "AlgebraicGeometry.ProEtale.directImageEtaleMateTransport",
-   "AlgebraicGeometry.ProEtale.directImageEtaleMate"
+   "AlgebraicGeometry.ProEtale.spEtaleCoefficient",
+   "AlgebraicGeometry.ProEtale.spEtaleTensorObject",
+   "AlgebraicGeometry.ProEtale.spEtaleProjection",
+   "AlgebraicGeometry.ProEtale.spDirectImageComparisonIso",
+   "AlgebraicGeometry.ProEtale.spEtaleMateTargetIso",
+   "AlgebraicGeometry.ProEtale.spEtaleMateSource",
+   "AlgebraicGeometry.ProEtale.spEtaleMateTarget",
+   "AlgebraicGeometry.ProEtale.spEtaleMate",
+   "AlgebraicGeometry.ProEtale.spEtaleMate_transpose"
   ],
-  "file": "lean/Sheaf/Paper/DirectImageEtaleMate.lean",
-  "statement": "theorem directImageEtaleMate (ell p : ℕ) (_hell : ell.Prime) (_hp : 0 < p) (_hne : p ≠ ell) (k : Type u) [Field k] [CharP k p] {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B] (_hA : ∃ n : ℕ, (ell : A) ^ n = 0) (_hB : ∃ n : ℕ, (ell : B) ^ n = 0) (a : A →+* B) {X Y : Scheme.{u}} [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] [IsSeparated (Y ↘ Spec (.of k))] [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))] (f : X ⟶ Y) [f.IsOver (Spec (.of k))] [IsProper f] (K : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A))) (hK : DerivedCategory.TStructure.t.plus K) (hH : DerivedCategory.TStructure.t.plus (((directImageEtaleMateEtaleTensor A X).obj K).obj ((directImageEtaleMateEtalePullback A f).obj (directImageEtaleMateCoefficient a Y)))) : (directImageEtaleMatePullbackTensor f ((directImageEtaleMateProEtalePushforward A f).obj ((directImageEtaleMateComparison A X).obj K)) ((directImageEtaleMateComparison A Y).obj (directImageEtaleMateCoefficient a Y))).inv ≫ ((directImageEtaleMateAdjunction A f).homEquiv _ _).symm (directImageEtaleMateTransport f K (directImageEtaleMateCoefficient a Y) hK hH) = ((directImageEtaleMateProEtaleTensor A X).map ((directImageEtaleMateAdjunction A f).counit.app ((directImageEtaleMateComparison A X).obj K))).app ((directImageEtaleMateProEtalePullback A f).obj ((directImageEtaleMateComparison A Y).obj (directImageEtaleMateCoefficient a Y))) ∧ (IsIso (directImageEtaleMateProjection f K (directImageEtaleMateCoefficient a Y)) → IsIso (directImageEtaleMateTransport f K (directImageEtaleMateCoefficient a Y) hK hH))",
+  "file": "lean/Sheaf/Paper/SpDirectImageEtaleMate.lean",
+  "statement": "theorem spEtaleMate_transpose (ℓ p : ℕ) (_hℓ : ℓ.Prime) (k : Type u) [Field k] [CharP k p] (_hp : 0 < p) (_hne : p ≠ ℓ) {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B] (_hA : ∃ n : ℕ, (ℓ : A) ^ n = 0) (_hB : ∃ n : ℕ, (ℓ : B) ^ n = 0) (a : A →+* B) {X Y : Scheme.{u}} [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))] [IsSeparated (Y ↘ Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))] (f : X ⟶ Y) [f.IsOver (Spec (.of k))] [IsProper f] (K : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A))) (hK : ∃ n : ℤ, K.IsGE n) (hH : ∃ n : ℤ, (spEtaleTensorObject a f K).IsGE n) : (leftDerivedUpperStarTensorIso (ModuleCat.{u + 1} A) f ((lowerStar (ModuleCat.{u + 1} A) f).rightDerivedFunctor.obj ((comparisonUpperStar (ModuleCat.{u + 1} A) X).mapDerivedCategory.obj K)) ((comparisonUpperStar (ModuleCat.{u + 1} A) Y).mapDerivedCategory.obj (spEtaleCoefficient a Y))).inv ≫ ((derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} A) f).homEquiv (spEtaleMateSource a f K) (spEtaleMateTarget a f K)).symm (spEtaleMate a f K hK hH) = ((derivedTensor (ModuleCat.{u + 1} A) X).map ((derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} A) f).counit.app ((comparisonUpperStar (ModuleCat.{u + 1} A) X).mapDerivedCategory.obj K))).app ((upperStar (ModuleCat.{u + 1} A) f).leftDerivedFunctor.obj ((comparisonUpperStar (ModuleCat.{u + 1} A) Y).mapDerivedCategory.obj (spEtaleCoefficient a Y))) ∧ (IsIso (spEtaleProjection a f K) → IsIso (spEtaleMate a f K hK hH))",
   "branch": "newtargets-dag",
-  "by": "Q11",
+  "by": "Q03",
   "date": "2026-10-18",
-  "existing": false
+  "existing": false,
+  "note": "The normalized D+ beta is transported into the ambient derived categories by the standard exact-functor and right-derived inclusion compatibilities. B_X is presented as Lp_et^* B_Y and its pro-etale realization as Lp^* nu_Y^* B_Y; these are the stipulated constant-section identifications. The extra landed statement dependency supplies only the canonical ambient pullback square helper."
  }
 }

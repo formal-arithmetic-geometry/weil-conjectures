@@ -150,5 +150,23 @@
   "group": "NF",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NF-d5829664a (reviewer sub-agent of L); spot-checked: I read the item, both new nodes and every cited statement against Stacks spaces-morphisms.tex: 03XU (lemma-etale-locally-quasi-finite, l.7760, via Morphisms 03WS) and 03XX (proposition-locally-quasi-finite-separated-over-scheme, l.10589, Section 0417). The item matches 03XX+03XU with T=X and no quasi-compactness assumption. I tested small cases: disjoint copies of X and the empty space work as expected. The doubled line and the bug-eyed cover show the separatedness hypothesis is needed. Steps 1 and 3 apply the two new nodes with matching hypotheses. Step 2 is a harmless elementary remark. The new nodes are statement-only, self-contained and strictly smaller than the item. They do not duplicate any node: I checked them against the trf 0265/02WW/03KG representability nodes. Batch-5 check: def-trf-algebraic-space is a general definition with no proof deps, so I accepted it. lem-trf-space-chartwise-etale-permanence is a split node on the sec-trace-formula route, cited in step 4 off-unit and without a tool_uses declaration. The step does not need it, so I removed the citation. FIX: step 4 now says the representing isomorphism h_Z->E is a representable étale scheme chart, because its scheme tests are isomorphisms, hence open immersions, hence étale by the Mathlib leaf lem-weil-pbc-etale-composition-cancellation(1) (Stacks 02GP). The item's chartwise hypothesis then makes Z->X étale. Step 4 is now elementary, and proof_deps, proof_origin and the split_report summary are updated. No node dropped and no tool_uses.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8c52a7f94",
+  "group": "Q08",
+  "result": "pass",
+  "note": "Matches node and Stacks 03XU/03XX (spaces-morphisms.tex l.7761, l.10590) clause by clause: X : Scheme.{u}; E : AlgebraicSpace X (recorded def-trf-algebraic-space); q is the structure map on Sch/X; het quantifies over all representable étale charts (AlgebraicSpace.IsEtale, confirmed by #check with pp.fullNames) giving Etale V.hom; hsep = IsRepresentableWith closed-immersion on the dependency's own diagonal prod.lift; conclusion is ∃ Z : Over X with yoneda Z ≅ E and Etale Z.hom. No quasi-compactness, nonemptiness or universe restriction; empty-space, infinite-disjoint-union and universe edge cases covered. Commit touches only the module, the report and the item's lean record (verbatim statement). One sorry, docstrings with source, blueprint and the 4 proof steps, non-public import only for proof dep def-weil-proper-morphism (allowed), no line over 100 characters. Worker report real; Second reading section is the standard 2026-10-17 note. Duplicate search: TraceFormula IsSeparatedPresheafMap is a helper of an unrelated lemma node and is equivalent here; remark only. nt_compile --json: rc 0, 2.3 s, no diagnostics, run twice; negative control errors as expected; no lake build."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SeparatedEtaleSpaceScheme",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.exists_scheme_of_separated_etale",
+  "file": "lean/Sheaf/AlgebraicGeometry/SeparatedEtaleSpaceScheme.lean",
+  "statement": "theorem exists_scheme_of_separated_etale {X : Scheme.{u}} (E : AlgebraicSpace X) (het : ∀ (V : Over X) (a : yoneda.obj V ⟶ E.obj.obj), IsEtale a → Etale V.hom) (hsep : IsRepresentableWith (fun _ _ p ↦ IsClosedImmersion p.left) (prod.lift (𝟙 E.obj.obj) (𝟙 E.obj.obj))) : ∃ Z : Over X, Nonempty (yoneda.obj Z ≅ E.obj.obj) ∧ Etale Z.hom",
+  "branch": "newtargets-dag",
+  "by": "Q08",
+  "date": "2026-10-18",
+  "existing": false
  }
 }

@@ -68,5 +68,25 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e1c45311a",
+  "group": "NU",
+  "result": "fix",
+  "note": "Substance correct. The definition matches the node clause by clause: X.ProEt sheaves of Ab; the monoidal instance is rfl-equal to sfbSheafTensorStructure(...).monoidal; Λ_X is the canonical coefficientRing X Λ = (upperStarFromPoint X).mapMon.obj Λ; CategoryTheory.Mod gives the action, unit and assoc axioms and the action-commuting morphisms. No extra hypotheses or universe restriction; not hollow; docstrings carry source and blueprint; no sorry; no duplicate (the framework only inlines Mod … condensedRingObj). The delivered file compiles clean with nt_compile. Finding: the plain `def … : Type _` hides Mod's instances, so `Category (condensedModuleCategory X Λ)` fails to synthesize and the category, faithful forgetful functor and regular module required by the node (and claimed in the report) are unavailable. Fix: `noncomputable abbrev`. The fixed file compiles clean, and a probe confirms the Category instance, Mod.forget faithful via Mod.hom_ext, and Mod.regular. Complete fixes: fixes/ProEtaleModuleObjects.lean, fixes/det-def-sfb-module-objects-sheaves.lean-record.json (statement 'abbrev condensedModuleCategory …'), fixes/det-def-sfb-module-objects-sheaves.report.md."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleModuleObjects",
+  "declaration": "AlgebraicGeometry.ProEtale.condensedModuleCategory",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleModuleObjects.lean",
+  "statement": "abbrev condensedModuleCategory (X : Scheme.{u}) (Λ : Mon (Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})) : Type _",
+  "branch": "newtargets-dag",
+  "by": "NU",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Second reader (cc review): `def` changed to `abbrev` so that `CategoryTheory.Mod`'s category instance, forgetful functor and regular module apply to the declared type; with a plain `def` `Category (condensedModuleCategory X Λ)` does not synthesize. The monoidal instance used is ProEtale.sheafMonoidalCategory, rfl-equal to (sfbSheafTensorStructure (Scheme.ProEt.topology X)).monoidal.",
+  "fixed_by": "NT-stage2-cc-e1c45311a"
  }
 }
