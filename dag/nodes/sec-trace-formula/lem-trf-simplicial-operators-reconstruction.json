@@ -10,9 +10,87 @@
  "stmt_deps": [
   "def-weil-pbc-simplicial-object"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use the category $P$ and functor $J:P\\to\\Delta$ in [lem-sc-module-cup-godement-simplex-presentation-faithful]. Explicitly, an arrow of $P$ is a finite composable word in cofaces $\\delta_i$ and codegeneracies $\\sigma_i$, modulo replacement of either side of a simplex relation inside a word. The relations, with degree superscripts suppressed and only typed instances allowed, are $\\delta_j\\delta_i=\\delta_i\\delta_{j-1}$ for $i<j$, $\\sigma_j\\delta_i=\\delta_i\\sigma_{j-1}$ for $i<j$, $\\sigma_j\\delta_j=1=\\sigma_j\\delta_{j+1}$, $\\sigma_j\\delta_i=\\delta_{i-1}\\sigma_j$ for $i>j+1$, and $\\sigma_j\\sigma_i=\\sigma_i\\sigma_{j+1}$ for $i\\leq j$. Here juxtaposition means ordinary composition, with the right factor first. Send $[n]$ to $U_n$; evaluate a word contravariantly, replacing $\\delta_i$ by $d_i$, $\\sigma_i$ by $s_i$, and reversing composition. Every displayed relation evaluates respectively to exactly the corresponding hypothesis on $d,s$, including the two separate identity relations. Consequently replacing a subword preserves its evaluated morphism: the surrounding words just compose the equality on both sides. Reflexivity, symmetry and transitivity then show that equivalent words have equal values. Empty words evaluate to identities and concatenation reverses evaluation. Thus evaluation gives a well-defined functor $E:P^{\\mathrm{op}}\\to\\mathcal D$.",
+   "uses": [
+    "lem-sc-module-cup-godement-simplex-presentation-faithful"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 016B, lemma-characterize-simplicial-object (2),(3), using Tag 0168, lemma-face-degeneracy-category; explicit word evaluation and generator arguments."
+   }
+  },
+  {
+   "text": "For a simplex map $\\alpha:[m]\\to[n]$, let $W(\\alpha)$ mean that there exists $p:[m]\\to[n]$ in $P$ with $J(p)=\\alpha$. Since $J$ is a functor and is the identity on the degree labels, $W$ contains identities and is closed under composition: if $J(p)=\\alpha$ and $J(q)=\\beta$, then $J(qp)=\\beta\\alpha$. It contains all cofaces and codegeneracies by their specified images under $J$. Apply [lem-sc-simplex-morphism-property-generators] to this property $W$ to obtain a lift of every $\\alpha$. By [lem-sc-module-cup-godement-simplex-presentation-faithful], any two such lifts with these endpoints are equal. Write $\\widehat\\alpha$ for this unique lift. Uniqueness gives $\\widehat{1}=1$, $\\widehat{\\beta\\alpha}=\\widehat\\beta\\,\\widehat\\alpha$, and the lift of each coface or codegeneracy is the corresponding generator.",
+   "uses": [
+    "lem-sc-simplex-morphism-property-generators",
+    "lem-sc-module-cup-godement-simplex-presentation-faithful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 016B, lemma-characterize-simplicial-object (2),(3), using Tag 0168, lemma-face-degeneracy-category; explicit word evaluation and generator arguments."
+   }
+  },
+  {
+   "text": "Define $U([n])=U_n$ and $U(\\alpha)=E(\\widehat\\alpha):U_n\\to U_m$ for $\\alpha:[m]\\to[n]$. The equations of Step 2 and the reverse-composition law of $E$ give $U(1)=1$ and $U(\\beta\\alpha)=U(\\alpha)\\circ U(\\beta)$. Thus $U$ is a simplicial object in the precise sense of [def-weil-pbc-simplicial-object]. Since the chosen lifts of cofaces and codegeneracies are generators, their values are exactly the prescribed $d_i,s_i$. This constructs the required functor in every degree, with no limit or colimit assumption on $\\mathcal D$.",
+   "uses": [
+    "def-weil-pbc-simplicial-object"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 016B, lemma-characterize-simplicial-object (2),(3), using Tag 0168, lemma-face-degeneracy-category; explicit word evaluation and generator arguments."
+   }
+  },
+  {
+   "text": "If $U'$ is another such functor, its object assignment equals that of $U$ degreewise. Put $W(\\alpha)$ for $U'(\\alpha)=U(\\alpha)$. This is well typed because their object assignments agree. Both functors preserve identities, so identities lie in $W$. If $W(\\alpha)$ and $W(\\beta)$ hold, contravariant functoriality gives $U'(\\beta\\alpha)=U'(\\alpha)U'(\\beta)=U(\\alpha)U(\\beta)=U(\\beta\\alpha)$; hence $W$ is closed under composition. The prescribed operators give $W$ on all cofaces and codegeneracies. [lem-sc-simplex-morphism-property-generators] implies equality on every simplex map. A functor is determined by its object and arrow assignments, so $U'=U$, proving uniqueness as a functor, not merely up to isomorphism [def-weil-pbc-simplicial-object].",
+   "uses": [
+    "lem-sc-simplex-morphism-property-generators",
+    "def-weil-pbc-simplicial-object"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 016B, lemma-characterize-simplicial-object (2),(3), using Tag 0168, lemma-face-degeneracy-category; explicit word evaluation and generator arguments."
+   }
+  },
+  {
+   "text": "Let $U,V$ now be any two simplicial objects, and suppose $f_n:U_n\\to V_n$ commutes with every face and degeneracy. For $\\alpha:[m]\\to[n]$, put $W(\\alpha)$ for the equation $f_m\\circ U(\\alpha)=V(\\alpha)\\circ f_n$. Identity maps satisfy it. If it holds for $\\alpha:[m]\\to[n]$ and $\\beta:[n]\\to[r]$, then\n$$f_m U(\\beta\\alpha)=f_m U(\\alpha)U(\\beta)=V(\\alpha)f_n U(\\beta)=V(\\alpha)V(\\beta)f_r=V(\\beta\\alpha)f_r.$$\nThus $W$ is closed under composition. The face and degeneracy commutation assumptions say precisely that it contains all cofaces and codegeneracies. [lem-sc-simplex-morphism-property-generators] gives $W$ for every simplex map. These are all the naturality equations, so the family is a natural transformation and hence a morphism of simplicial objects [def-weil-pbc-simplicial-object].",
+   "uses": [
+    "lem-sc-simplex-morphism-property-generators",
+    "def-weil-pbc-simplicial-object"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 016B, lemma-characterize-simplicial-object (2),(3), using Tag 0168, lemma-face-degeneracy-category; explicit word evaluation and generator arguments."
+   }
+  },
+  {
+   "text": "Conversely a morphism of simplicial objects is a natural transformation [def-weil-pbc-simplicial-object]; its naturality equation for $\\delta_i$ is $f_{n-1}d_i^U=d_i^V f_n$, and for $\\sigma_i$ it is $f_{n+1}s_i^U=s_i^V f_n$. Hence it commutes with all faces and degeneracies. A natural transformation has exactly its component family as data, so a family satisfying these equations determines a unique morphism.",
+   "uses": [
+    "def-weil-pbc-simplicial-object"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 016B, lemma-characterize-simplicial-object (2),(3), using Tag 0168, lemma-face-degeneracy-category; explicit word evaluation and generator arguments."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-module-cup-godement-simplex-presentation-faithful",
+  "lem-sc-simplex-morphism-property-generators",
+  "def-weil-pbc-simplicial-object"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/simplicial.tex",
+  "place": "Tag 016B proof via 0168, expanded using the existing faithful-presentation and morphism-generator nodes. Word quotient evaluation, inverse-on-arrows construction and naturality closure are written out."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -55,10 +133,45 @@
    "results": "{\"t\": \"2026-10-18T22:11:33Z\", \"tool\": \"grep\", \"query\": \"toSimplexCategory|def.*(lift|desc)|Faithful|Full\", \"sub\": \"AlgebraicTopology/SimplexCategory/GeneratorsRelations\", \"ok\": true, \"n_hits\": 14, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplexCategory/GeneratorsRelations/Basic.lean\", \"Mathlib/AlgebraicTopology/SimplexCategory/GeneratorsRelations/Basic.lean\", \"Mathlib/AlgebraicTopology/SimplexCategory/GeneratorsRelations/Basic.lean\", \"Mathlib/AlgebraicTopology/SimplexCategory/GeneratorsRelations/Basic.lean\", \"Mathlib/AlgebraicTopology/SimplexCategory/GeneratorsRelations/Basic.lean\", \"Mathlib/AlgebraicTopology/SimplexCategory/GeneratorsRelations/NormalForms.lean\", \"Mathlib/AlgebraicTopology/SimplexCategory/GeneratorsRelations/NormalForms.lean\", \"Mathlib/AlgebraicTopology/SimplexCategory/GeneratorsRelations/NormalForms.lean\"], \"digest\": \"3fb08e6bd2e4f85b\"}",
    "date": "2026-10-18",
    "verdict": "no match: searched for lem-trf-simplicial-operators-reconstruction. SimplicialObject and its operators define an already supplied functor, not reconstruction. Read GeneratorsRelations/Basic.lean:12-18,53-75,250-274 and NormalForms.lean:20-29: the canonical presentation functor and partial normal forms are supplied, but its equivalence is not proved here. The project-specific faithful presentation node is only faithfulness, and the Godement cosimplicial existence node has concrete module values. Neither states reconstruction for an arbitrary category."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A sequence of objects with face and degeneracy maps satisfying the five simplicial relations extends uniquely to a functor from the opposite simplex category",
+   "results": "{\"t\": \"2026-10-18T22:33:18Z\", \"tool\": \"leanfinder\", \"query\": \"A sequence of objects with face and degeneracy maps satisfying the five simplicial relations extends uniquely to a functor from the opposite simplex category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SimplexCategoryGenRel.toSimplexCategory\", \"CategoryTheory.SimplicialObject\", \"CategoryTheory.CosimplicialObject\", \"SimplexCategory.II\", \"CategoryTheory.SimplicialCategory\", \"CategoryTheory.instCategoryObjOppositeSimplexCategoryNerve\", \"SimplexCategoryGenRel.toSimplexCategory_obj_mk\", \"CategoryTheory.SimplicialObject.instSimplicialCategory\"], \"digest\": \"f3933cd71f244587\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: read the returned candidates. SimplexCategoryGenRel and its canonical functor provide the presentation, not reconstruction from arbitrary operators; NormalForms.lean:25-35 still lists the equivalence as a goal and the coface normal form as TODO. SimplicialObject and its identities assume a functor already exists. Use the existing project faithful-presentation node and existing Mathlib generator node, not a new node."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The simplex category is generated by coface and codegeneracy maps subject only to the simplicial relations",
+   "results": "{\"t\": \"2026-10-18T22:33:20Z\", \"tool\": \"leanfinder\", \"query\": \"The simplex category is generated by coface and codegeneracy maps subject only to the simplicial relations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SimplexCategoryGenRel.degeneracies\", \"SimplexCategoryGenRel.generators\", \"SimplexCategoryGenRel.P_σ\", \"SimplexCategoryGenRel.generators.σ\", \"SimplexCategoryGenRel.faces\", \"SimplexCategoryGenRel\", \"SimplexCategoryGenRel.P_σ.σ\", \"SimplexCategoryGenRel.P_δ\"], \"digest\": \"d7fef6c02b82dd52\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: read the returned candidates. SimplexCategoryGenRel and its canonical functor provide the presentation, not reconstruction from arbitrary operators; NormalForms.lean:25-35 still lists the equivalence as a goal and the coface normal form as TODO. SimplicialObject and its identities assume a functor already exists. Use the existing project faithful-presentation node and existing Mathlib generator node, not a new node."
+  },
+  {
+   "tool": "loogle",
+   "query": "SimplexCategoryGenRel, SimplexCategory, SimplicialObject",
+   "results": "{\"t\": \"2026-10-18T22:33:20Z\", \"tool\": \"loogle\", \"query\": \"SimplexCategoryGenRel, SimplexCategory, SimplicialObject\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'SimplicialObject'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: read the returned candidates. SimplexCategoryGenRel and its canonical functor provide the presentation, not reconstruction from arbitrary operators; NormalForms.lean:25-35 still lists the equivalence as a goal and the coface normal form as TODO. SimplicialObject and its identities assume a functor already exists. Use the existing project faithful-presentation node and existing Mathlib generator node, not a new node."
+  },
+  {
+   "tool": "grep",
+   "query": "SimplexCategoryGenRel|toSimplexCategory|δ_comp_δ|σ_comp_σ",
+   "results": "{\"t\": \"2026-10-18T22:33:20Z\", \"tool\": \"grep\", \"query\": \"SimplexCategoryGenRel|toSimplexCategory|δ_comp_δ|σ_comp_σ\", \"sub\": \"AlgebraicTopology/SimplexCategory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/SimplexCategory/SemiSimplexCategory.lean\", \"Mathlib/AlgebraicTopology/SimplexCategory/SemiSimplexCategory.lean\", \"Mathlib/AlgebraicTopology/SimplexCategory/SemiSimplexCategory.lean\", \"Mathlib/AlgebraicTopology/SimplexCategory/SemiSimplexCategory.lean\", \"Mathlib/AlgebraicTopology/SimplexCategory/SemiSimplexCategory.lean\", \"Mathlib/AlgebraicTopology/SimplexCategory/DeltaZeroIter.lean\", \"Mathlib/AlgebraicTopology/SimplexCategory/DeltaZeroIter.lean\", \"Mathlib/AlgebraicTopology/SimplexCategory/Basic.lean\"], \"digest\": \"9c02e4e142428cff\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: read the returned candidates. SimplexCategoryGenRel and its canonical functor provide the presentation, not reconstruction from arbitrary operators; NormalForms.lean:25-35 still lists the equivalence as a goal and the coface normal form as TODO. SimplicialObject and its identities assume a functor already exists. Use the existing project faithful-presentation node and existing Mathlib generator node, not a new node."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A family of objects and face and degeneracy morphisms satisfying the simplicial identities determines a unique simplicial object",
+   "results": "{\"t\": \"2026-10-18T22:33:21Z\", \"tool\": \"leansearch\", \"query\": \"A family of objects and face and degeneracy morphisms satisfying the simplicial identities determines a unique simplicial object\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SSet\", \"CategoryTheory.SimplicialObject\", \"CategoryTheory.SimplicialObject.δ_comp_σ_self'_assoc\", \"CategoryTheory.SimplicialObject.δ_comp_σ_succ'\", \"CategoryTheory.SimplicialObject.δ_comp_σ_succ_assoc\", \"CategoryTheory.SimplicialObject.δ_comp_σ_self\", \"CategoryTheory.SimplicialObject.δ_comp_σ_succ'_assoc\", \"CategoryTheory.instCategorySimplicialObject\"], \"digest\": \"e11b42ccc9303770\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: read the returned candidates. SimplexCategoryGenRel and its canonical functor provide the presentation, not reconstruction from arbitrary operators; NormalForms.lean:25-35 still lists the equivalence as a goal and the coface normal form as TODO. SimplicialObject and its identities assume a functor already exists. Use the existing project faithful-presentation node and existing Mathlib generator node, not a new node."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-comonad-simplicial-object",
@@ -90,5 +203,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-trf-simplicial-operators-reconstruction",
+  "worker": "stage1",
+  "summary": "Kept the full statement and all five relations unchanged after checking Stacks 016B and its remark. Expanded the omitted presentation argument using the existing faithful-presentation node and existing simplex-morphism generator leaf: word evaluation descends by the hypotheses, J has unique lifts, inverse lifts define the functor, and generator closure proves uniqueness and morphism naturality. No new nodes. No exact finished project Lean declaration or Mathlib reconstruction theorem found.",
+  "blueprint": "Preserves the inherited lem-trf-local-term-locality (1)--(2) support chain, through cotangent-resolution coherence, adjunction standard simplicial homotopy, and the comonad construction. The item realizes the 016B(2),(3) invocation in the opening sentence of Stacks 0G5N; Steps 1--4 reconstruct and prove uniqueness, Steps 5--6 reconstruct morphisms.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-module-cup-godement-simplex-presentation-faithful",
+    "why": "Generic completeness of the simplex generator relations, exactly the 0168 presentation input used by 016B; the current unit has no presentation theorem. Its statement alone supplies faithfulness, not reconstruction, and no result on cup products is used."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-module-cup-godement-simplex-presentation-faithful"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-NB-045cee9c8",
+  "group": "NB",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NB-045cee9c8 (reviewer sub-agent of L); spot-checked: I read the item in full against Stacks simplicial.tex 016B(2),(3) (l.217-251), remark-relations (l.253-265) and 0167/0168. The statement is unchanged and its 'whenever defined' convention gives exactly Stacks' index ranges, checked for (a),(b),(d),(e). D is an arbitrary category, as in Stacks. Step 1: I reversed each of the six relations of P (two identities kept separate; they agree with Mathlib GeneratorsRelations/Basic.lean:54-69 up to reindexing), and each gives exactly one of the hypotheses. Descent through the generated congruence is written out. Step 2: W = 'has a J-preimage' is multiplicative and contains δ,σ. The generator lemma (morphismProperty_eq_top, MorphismProperty.lean:74-87) gives fullness and the faithful node gives unique lifts; both are used only through their statements. Steps 3-6 (functor laws, strict uniqueness via the equaliser property, naturality closure with endpoints m,n,r checked, converse by definition) are correct. Edge cases: degree 0 (d_0s_0=d_1s_0=1), maps to and from [0], empty words, and the constant object used by the citer lem-trf-comonad-simplicial-object step 8. Duplicate search (016B, characterize-simplicial, face-degeneracy-category, unique simplicial object, simplex-presentation) found nothing beyond the parent and the faithfulness-only node. There are no new nodes, no restated clauses and no cycle. Accepted tool use: lem-sc-module-cup-godement-simplex-presentation-faithful, a generic combinatorial fact about Δ with no presentation theorem in unit sk-i-curve-zero. No SGA citation; blueprint fields are inherited and correct. No repairs."
  }
 }
