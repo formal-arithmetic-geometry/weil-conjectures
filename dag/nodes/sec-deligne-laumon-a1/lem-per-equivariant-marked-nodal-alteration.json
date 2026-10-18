@@ -28,9 +28,260 @@
   "def-nagata-effective-cartier-ideal",
   "def-pc-geometrically-irreducible"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The scheme $P$ is Noetherian by [lem-weil-pbc-finite-type-over-noetherian], since $f$ is proper over the Noetherian scheme $Y$. Apply [lem-weil-pbc-chow-noetherian] to $P\\to Y$ and then [det-chow-projective-closed-immersions]. Take the reduced closure of the inverse image of the dense isomorphism open in the Chow scheme. Call it $P_0$, with $p:P_0\\to P$. It is integral, projective over $Y$, and proper birational over $P$. On the generic fibre, $p_\\eta$ is a proper birational map of integral curves: its source has dimension one by [lem-sc-closed-irreducible-dimension-trdeg], since its function field is unchanged. The smooth target $P_\\eta$ is normal by [lem-sc-smooth-normal]. Thus [lem-trf-proper-birational-normal-curve-iso] makes $p_\\eta$ an isomorphism.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-chow-noetherian",
+    "det-chow-projective-closed-immersions",
+    "lem-sc-closed-irreducible-dimension-trdeg",
+    "lem-sc-smooth-normal",
+    "lem-trf-proper-birational-normal-curve-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "IX 1.2, realized by the projective preparation of X Theorem 3.4 proof Step 1, p.160."
+   }
+  },
+  {
+   "text": "Let $H_0$ be the schematic closure in $P_0$ of the inverse image of $E_\\eta$ under the generic isomorphism. Its generic fibre is finite etale, including the empty case. Apply [lem-trf-flatification-horizontal-curve-pair] to $(P_0,H_0)\\to Y$. It gives a projective-bundle birational blowup $v:S\\to Y$ and strict transforms $(X,H)$ with $X$ integral, projective flat finitely presented of pure relative dimension one and $H$ finite flat finitely presented. The generic pair is still $(P_\\eta,E_\\eta)$; $S$ is excellent integral Noetherian. On the affine scheme $Y$, $\\mathcal O_Y$ is ample: its principal affine opens are the nonvanishing loci of its sections, by [def-weil-pbc-ample-invertible-module]. Hence [lem-trf-projective-bundle-to-h-projective] makes $v$ projective in the required finite-projective-space convention.",
+   "uses": [
+    "lem-trf-flatification-horizontal-curve-pair",
+    "def-weil-pbc-ample-invertible-module",
+    "lem-trf-projective-bundle-to-h-projective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "X Theorem 3.4 proof Step 2, p.160; projectivity conversion, Stacks 087S."
+   }
+  },
+  {
+   "text": "The flat pair $(X,H)/S$ now satisfies [lem-per-separable-stable-modification-flat-pair]: the generic curve is smooth geometrically integral and the generic marking is etale. Obtain a separable alteration $r:S_1\\to S$ and a projective-bundle stable modification $(Z,J)$ of $(X,H)\\times_S S_1$. Apply [lem-per-projective-galois-alteration-envelope] to $r$. It supplies a normal integral excellent Noetherian scheme $Y'$, a projective Galois alteration $c:Y'\\to S$, a map $t:Y'\\to S_1$, and $G=\\operatorname{Aut}_{k(S)}L$ with $L=k(Y')$. Define $(C,D)=(Z,J)\\times_{S_1}Y'$. The normal-base-change clause of the stable-modification node supplies integrality, excellence, Noetherianity, and a stable modification $m:(C,D)\\to(X,H)\\times_S Y'$. Its generic pair is $(P_\\eta,E_\\eta)\\times_{k(Y)}L$.",
+   "uses": [
+    "lem-per-separable-stable-modification-flat-pair",
+    "lem-per-projective-galois-alteration-envelope"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "X Theorem 3.4 proof Steps 3--4, pp.160--161; implements IX 1.2."
+   }
+  },
+  {
+   "text": "Set $W=X\\times_S Y'$. The maps $X\\to S$ and $v:S\\to Y$ are H-projective, so $S$ is H-projective over the affine scheme $Y$ and has an ample invertible sheaf by [lem-weil-pbc-projective-ample-invertible]. The envelope map $c:Y'\\to S$ is projective in the projective-bundle sense, hence H-projective by [lem-trf-projective-bundle-to-h-projective]. By [lem-pc-projective-base-change] and [lem-trf-h-projective-composition], both $W$ and $Y'$ are H-projective over the affine scheme $Y$. The scheme $W$ therefore has an ample invertible sheaf by [lem-weil-pbc-projective-ample-invertible]. Apply [lem-trf-projective-bundle-to-h-projective] to the projective-bundle curve map $m:C\\to W$, and compose: $f':C\\to Y'$ and $C\\to Y$ are H-projective. Put $b=vc$, and let $a:C\\to P$ be the composite through $W\\to X\\to P_0\\to P$. This gives $fa=bf'$ by the defining maps of the pairs and fibre products.",
+   "uses": [
+    "lem-pc-projective-base-change",
+    "lem-trf-h-projective-composition",
+    "lem-weil-pbc-projective-ample-invertible",
+    "lem-trf-projective-bundle-to-h-projective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "IX 1.2(i),(iii); Stacks 087S and 01WE, projective conventions."
+   }
+  },
+  {
+   "text": "The map $a$ is H-projective as well. Choose a closed immersion $i:C\\hookrightarrow\\mathbf P^n_Y$. Since $P\\to Y$ is separated, the graph of $a$ in $P\\times_Y C$ is the pullback of its closed diagonal. Composing this graph with the base change of $i$ gives a closed immersion $C\\hookrightarrow P\\times_Y\\mathbf P^n_Y=\\mathbf P^n_P$ whose projection is $a$. This is exactly projectivity [def-kun-projective]; the graph and the composition are closed immersions since their defining ideal sheaves pull back and add. The same projective structures show that $C,Y'$ are separated and proper over $Y$ by [lem-pc-projective-proper].",
+   "uses": [
+    "def-weil-proper-morphism",
+    "def-kun-projective",
+    "lem-pc-projective-proper"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "IX 1.2(iii); explicit graph argument for the affine-base projectivity convention."
+   }
+  },
+  {
+   "text": "For $g\\in G$, pull $m$ back by the automorphism $g:Y'\\to Y'$ and identify its target with $W$ using the action on the second factor. The result is another stable modification of $(X,H)\\times_S Y'$: on geometric fibres the condition forbidding a contracted rational component with at most two special points is unchanged, by [def-trf-multipointed-curve-modification]. Apply [lem-trf-stable-modification-uniqueness-normal] over the normal integral qcqs scheme $Y'$. It supplies the unique isomorphism from this conjugate pair to $(C,D)$ over $W$. These isomorphisms give semilinear automorphisms $\\rho_g$ of $(C,D)$ covering $g$. Both $\\rho_g\\rho_h$ and $\\rho_{gh}$ are the unique isomorphism covering $gh$ and compatible with $m$, so they agree; similarly $\\rho_1=1$. Thus they form a $G$-action, preserve the closed marking, and make $f'$ equivariant. The composite $a$ is invariant because $G$ acts trivially on $X,S,P_0,P,Y$.",
+   "uses": [
+    "def-trf-multipointed-curve-modification",
+    "lem-trf-stable-modification-uniqueness-normal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "X Theorem 3.4 proof Step 5, p.161; uniqueness, not an arbitrary choice of stable model."
+   }
+  },
+  {
+   "text": "By the stable-modification statement, $f'$ is flat finitely presented of pure relative dimension one with nodal geometric fibres. Its generic curve is $P_\\eta\\times_{k(Y)}L$, smooth by [lem-pc-proper-base-change](2) and geometrically integral by [def-pc-geometrically-irreducible]. The image of proper $f'$ is closed and contains the generic point of $Y'$, so $f'$ is surjective. Every geometric fibre is therefore nonempty. By [lem-weil-pbc-flat-proper-component-count-lower-semicontinuous], the number $n(y)$ of geometric connected components is lower semicontinuous. If $n(y)>1$, an open neighbourhood of $y$ has $n>1$ and contains the generic point, contradicting the integral generic fibre. Hence all geometric fibres are connected.",
+   "uses": [
+    "lem-per-separable-stable-modification-flat-pair",
+    "lem-pc-proper-base-change",
+    "def-pc-geometrically-irreducible",
+    "lem-weil-pbc-flat-proper-component-count-lower-semicontinuous"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "IX 1.2(iv), nodal-curve definition; X 3.4 Step 3 and geometric connectedness."
+   }
+  },
+  {
+   "text": "The marking $D$ is closed in $C$ and etale over $Y'$ by [lem-per-separable-stable-modification-flat-pair]. Thus it is proper by [lem-weil-pbc-proper-fp-permanence](a),(c). Etaleness gives flatness, unramifiedness and local finite presentation by [def-weil-etale-morphism]; [lem-weil-pbc-unramified-quasi-finite-at-points] gives local quasi-finiteness. Apply [pqf-lem-proper-lqf-finite] to obtain finiteness. The relative smooth locus $U\\subset C$ is open by [lem-trf-nodal-family-fitting-singular] and contains $D$. On $U/Y'$, a smooth relative curve, [lem-pc-cartier-criterion](3) makes $D$ a relative effective Cartier divisor. On $C\\setminus D$ its ideal is the unit ideal. These two opens cover $C$, so $D$ is an effective Cartier divisor on $C$, including when empty.",
+   "uses": [
+    "lem-per-separable-stable-modification-flat-pair",
+    "lem-weil-pbc-proper-fp-permanence",
+    "def-weil-etale-morphism",
+    "lem-weil-pbc-unramified-quasi-finite-at-points",
+    "pqf-lem-proper-lqf-finite",
+    "lem-trf-nodal-family-fitting-singular",
+    "lem-pc-cartier-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "IX 1.2(v); Stacks 02V5, 02LS, and 0B9D (picard lemma-divisor)."
+   }
+  },
+  {
+   "text": "The generic fibre of $C\\to P$ over the generic point of $P$ is $\\operatorname{Spec}(F\\otimes_K L)$, where $K=k(Y)$ and $F=k(P)$. This tensor is a domain by the geometric integrality of $P_\\eta$ [def-pc-geometrically-irreducible], and finite dimensional over $F$, so is a field. It is finite etale over $F$, since $L/K$ is finite separable by [lem-weil-pbc-finite-separable-extension-etale] and etaleness is preserved by base change [lem-weil-pbc-etale-base-change-finite-limits](1). The generic fibre of $b$ is likewise $\\operatorname{Spec}L$. Thus $a,b$ are dominant with finite generic fibres. They are proper by projectivity; [lem-weil-pbc-generic-finite-morphism-open-neighborhood] makes each finite over a dense open. Properness makes their dense images closed, hence surjective. This proves precisely the alteration convention of the statement.",
+   "uses": [
+    "def-pc-geometrically-irreducible",
+    "lem-weil-pbc-finite-separable-extension-etale",
+    "lem-weil-pbc-etale-base-change-finite-limits",
+    "lem-weil-pbc-generic-finite-morphism-open-neighborhood"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "IX 1.2(iii), separability and the finite-over-dense-open convention."
+   }
+  },
+  {
+   "text": "For completeness, the generic etaleness just found holds on dense opens of the targets. On an affine open $\\operatorname{Spec}A$ where either alteration is finite, its inverse image is affine and of finite presentation because $A$ is Noetherian. By [lem-weil-pbc-local-ring-spec-limit-affine-neighbourhoods] (1)--(3), the affine open neighbourhoods of the generic point $\\xi$ of $\\operatorname{Spec}A$ form a directed inverse system of quasi-compact quasi-separated schemes with affine transition maps, whose limit is $\\operatorname{Spec}\\mathcal O_{\\operatorname{Spec}A,\\xi}=\\operatorname{Spec}\\operatorname{Frac}A$. The base change of the finite map to this limit is its generic fibre, etale by Step 9. Apply [lem-weil-pbc-descend-etale] with $S_0=Y_0=\\operatorname{Spec}A$ and $X_0$ the inverse image: the map is etale over some affine open neighbourhood of $\\xi$, which is a dense open. In particular both $a$ and $b$ are generically etale. No degree-prime-to-anything assertion is used.",
+   "uses": [
+    "lem-weil-pbc-local-ring-spec-limit-affine-neighbourhoods",
+    "lem-weil-pbc-descend-etale"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "IX 1.2(iii); Stacks 07RP (limits-lemma-descend-etale)."
+   }
+  },
+  {
+   "text": "By [lem-trf-nodal-family-fitting-singular], the nonsmooth locus of $f'$ is closed. Its image $T_{\\mathrm{sing}}$ under proper $f'$ is closed and omits the generic point, because the generic curve is smooth. Put $A=a^{-1}|E|$. This is closed in the Noetherian scheme $C$, so has finitely many irreducible components by [lem-weil-pbc-noetherian-finitely-many-components]. On the generic fibre $A$ is exactly $|D|$, by the generic isomorphism of marked pairs. Each component of $A$ dominating $Y'$ has its generic point in this fibre, hence in closed $|D|$, and lies entirely in $|D|$. Let $V$ be the union of its other components. Then $T_{\\mathrm{vert}}=f'(V)$ is closed by properness and excludes the generic point. Consequently $A\\subset |D|\\cup(f')^{-1}T_{\\mathrm{vert}}$.",
+   "uses": [
+    "lem-trf-nodal-family-fitting-singular",
+    "lem-weil-pbc-noetherian-finitely-many-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "IX 1.2(iv),(vi); horizontal/vertical boundary construction, X 3.4 Step 8."
+   }
+  },
+  {
+   "text": "The envelope node supplies a dense open $U_S\\subset S$ on which $c$ is a finite etale $G$-torsor; in particular its action is free there. Its complement pulls back to a closed nowhere dense set $T_{\\mathrm{free}}$ in $Y'$. Let $T'$ be the union of all $G$-translates of $T_{\\mathrm{free}}\\cup T_{\\mathrm{sing}}\\cup T_{\\mathrm{vert}}$. This finite union is closed, $G$-stable, and omits the generic point of integral $Y'$, hence is nowhere dense. It contains the three original bad sets, so $f'$ is smooth off $T'$, the action on $Y'\\setminus T'$ is free, and $a^{-1}|E|\\subset |D|\\cup(f')^{-1}T'$.",
+   "uses": [
+    "lem-per-projective-galois-alteration-envelope"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "IX 1.2(ii),(iv),(vi), including enlargement of the bad set, pp.131--132."
+   }
+  },
+  {
+   "text": "The schemes $C,Y'$ are integral excellent Noetherian by Step 3. Step 5 proves that their morphisms to $Y$ are proper, hence separated and of finite type by [def-weil-proper-morphism]. Thus separatedness holds over the very base $S=Y$ required in [lem-per-admissible-quotient-generic-degree]. Both are projective over the affine excellent Noetherian scheme $Y$, and their actions are over $Y$. Apply [lem-per-admissible-quotient-generic-degree]: its projective-over-affine clause makes both actions admissible. They are generically free, since the action on the dense open $Y'\\setminus T'$ is free and $f'$ is equivariant and surjective. The same node now gives finite surjective scheme quotients $q_C:C\\to Q=C/G$ and $q_Y:Y'\\to B=Y'/G$, with invariant structure sheaves and orbit-space topology; $Q,B$ are integral excellent Noetherian of finite type over $Y$. Invariance of $a,b$ gives morphisms $\\alpha:Q\\to P$ and $\\beta:B\\to Y$.",
+   "uses": [
+    "lem-per-admissible-quotient-generic-degree",
+    "def-weil-proper-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "IX 1.4 first paragraph, pp.132--133; apply the quotient theorem only with its finite-type-over-excellent-affine hypothesis."
+   }
+  },
+  {
+   "text": "Apply [lem-per-admissible-finite-quotient-separated] over $Y$ to the two finite quotients: $Q$ and $B$ are separated over $Y$. For any base change $Y_0\\to Y$, a closed subset of $Q\\times_Y Y_0$ has closed inverse image in $C\\times_Y Y_0$; its image in $Y_0$ is closed because $C\\to Y$ is proper, and is the same image because the finite surjection stays surjective after base change. Thus $Q\\to Y$ is universally closed, and similarly $B\\to Y$. Together with finite type and separatedness this is properness by [def-weil-proper-morphism]. For $\\alpha:Q\\to P$, the graph is closed since $P/Y$ is separated; its projection to $P$ is a base change of proper $Q\\to Y$. Hence $\\alpha$ is proper by [lem-weil-pbc-proper-fp-permanence](a)--(c), as is $\\beta$.",
+   "uses": [
+    "lem-per-admissible-finite-quotient-separated",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-proper-fp-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "IX 1.2(iii),1.4; properness of the induced quotient maps."
+   }
+  },
+  {
+   "text": "The quotient theorem [lem-per-admissible-quotient-generic-degree] identifies the function fields of $Q,B$ with the invariant fields in $k(C),L$. On the generic marked pair the lifted action is the canonical one on the $L$ factor, by uniqueness in Step 6. The algebra $F\\otimes_K L$ of Step 9 is already a field, so equals $k(C)$. Apply [lem-weil-pbc-tensor-field-extension-galois-invariants] with $A=F$, $M=L$: its invariant algebra is exactly $F$. Likewise $L^G=K$ by the envelope node. Thus $k(Q)=F=k(P)$ and $k(B)=K=k(Y)$ under $\\alpha,\\beta$. They are dominant proper maps with one-point generic fibres, so [lem-weil-pbc-generic-finite-morphism-open-neighborhood] makes them finite over dense opens.",
+   "uses": [
+    "lem-per-admissible-quotient-generic-degree",
+    "lem-weil-pbc-tensor-field-extension-galois-invariants",
+    "lem-per-projective-galois-alteration-envelope",
+    "lem-weil-pbc-generic-finite-morphism-open-neighborhood"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "IX 1.2(iii): the generic quotient is the original generic point, including the total-space quotient."
+   }
+  },
+  {
+   "text": "Finally a finite dominant map of integral schemes inducing equality of function fields is an isomorphism after shrinking the target. Indeed take a nonempty affine open in the finite locus, with coordinate domain $A_0$; its preimage has coordinate domain $B_0$, finite over $A_0$, and both sit in the same fraction field. Choose finitely many $A_0$-module generators $b_i$ of $B_0$ and write each as $u_i/v_i$ with $u_i,v_i\\in A_0$, $v_i\\ne0$. After inverting $s=\\prod_i v_i$, one has $(B_0)_s=(A_0)_s$. The corresponding nonempty principal open is the required dense isomorphism open. Apply this to $\\alpha$ and $\\beta$ of Step 15. They are proper birational in exactly the statement's convention. This concludes all clauses with the same $G,C,Y',D,T',a,b,f'$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "IX 1.2(iii), passage from equality of generic function fields to dense isomorphism opens."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-projective",
+  "def-pc-geometrically-irreducible",
+  "def-trf-multipointed-curve-modification",
+  "def-weil-etale-morphism",
+  "def-weil-pbc-ample-invertible-module",
+  "def-weil-proper-morphism",
+  "det-chow-projective-closed-immersions",
+  "lem-pc-cartier-criterion",
+  "lem-pc-projective-base-change",
+  "lem-pc-projective-proper",
+  "lem-pc-proper-base-change",
+  "lem-per-admissible-finite-quotient-separated",
+  "lem-per-admissible-quotient-generic-degree",
+  "lem-per-projective-galois-alteration-envelope",
+  "lem-per-separable-stable-modification-flat-pair",
+  "lem-sc-closed-irreducible-dimension-trdeg",
+  "lem-sc-smooth-normal",
+  "lem-trf-flatification-horizontal-curve-pair",
+  "lem-trf-h-projective-composition",
+  "lem-trf-nodal-family-fitting-singular",
+  "lem-trf-projective-bundle-to-h-projective",
+  "lem-trf-proper-birational-normal-curve-iso",
+  "lem-trf-stable-modification-uniqueness-normal",
+  "lem-weil-pbc-chow-noetherian",
+  "lem-weil-pbc-descend-etale",
+  "lem-weil-pbc-etale-base-change-finite-limits",
+  "lem-weil-pbc-finite-separable-extension-etale",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-flat-proper-component-count-lower-semicontinuous",
+  "lem-weil-pbc-generic-finite-morphism-open-neighborhood",
+  "lem-weil-pbc-local-ring-spec-limit-affine-neighbourhoods",
+  "lem-weil-pbc-noetherian-finitely-many-components",
+  "lem-weil-pbc-projective-ample-invertible",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-weil-pbc-tensor-field-extension-galois-invariants",
+  "lem-weil-pbc-unramified-quasi-finite-at-points",
+  "pqf-lem-proper-lqf-finite"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "IX 1.2 and beginning of IX 1.4, implemented by the preparatory Steps 1--5 and boundary Step 8 of X Theorem 3.4; generic invariant-field and affine-local projectivity arguments written out."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -62,7 +313,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-uniformization-nodal-quotient-reduction",
@@ -88,5 +339,159 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-equivariant-marked-nodal-alteration",
+  "worker": "stage1",
+  "summary": "Constructed the equivariant model from Chow preparation, simultaneous flatification, separable stable modification, a projective Galois envelope and uniqueness of stable modifications. Wrote out projectivity, connectedness, Cartier marking, vertical boundary, free locus, properness and both birational quotient arguments. Added three statement-only generic tools; none repeats a clause of the original alteration problem. The item statement is unchanged.",
+  "blueprint": "Realizes the IX 1.1 uniformization input to lem-per-artin-gabber-affine-curve proof Step 3 via the ancestor chain already recorded in blueprint.from. All six IX 1.2 clauses and the quotient paragraph IX 1.4 are accounted for. The unit record is not changed because this is not its key statement.",
+  "tool_uses": [
+   {
+    "node": "det-chow-projective-closed-immersions",
+    "why": "Generic scheme-theoretic tool for the construction of the IX 1.2 marked nodal alteration: Closedness of the Chow immersions for a proper morphism. No node of the curve-perverse unit gives this algebraic-geometric fact."
+   },
+   {
+    "node": "lem-pc-cartier-criterion",
+    "why": "Generic scheme-theoretic tool for the construction of the IX 1.2 marked nodal alteration: The Cartier criterion on smooth one-dimensional fibres. No node of the curve-perverse unit gives this algebraic-geometric fact."
+   },
+   {
+    "node": "lem-pc-projective-base-change",
+    "why": "Generic scheme-theoretic tool for the construction of the IX 1.2 marked nodal alteration: Projective morphisms are stable under base change. No node of the curve-perverse unit gives this algebraic-geometric fact."
+   },
+   {
+    "node": "lem-pc-projective-proper",
+    "why": "Generic scheme-theoretic tool for the construction of the IX 1.2 marked nodal alteration: Projective morphisms are proper. No node of the curve-perverse unit gives this algebraic-geometric fact."
+   },
+   {
+    "node": "lem-pc-proper-base-change",
+    "why": "Generic scheme-theoretic tool for the construction of the IX 1.2 marked nodal alteration: Proper and smooth morphisms are stable under base change. No node of the curve-perverse unit gives this algebraic-geometric fact."
+   },
+   {
+    "node": "lem-sc-closed-irreducible-dimension-trdeg",
+    "why": "Generic scheme-theoretic tool for the construction of the IX 1.2 marked nodal alteration: Dimension of an irreducible closed subset from its generic residue field. No node of the curve-perverse unit gives this algebraic-geometric fact."
+   },
+   {
+    "node": "lem-sc-smooth-normal",
+    "why": "Generic scheme-theoretic tool for the construction of the IX 1.2 marked nodal alteration: Smooth schemes are normal. No node of the curve-perverse unit gives this algebraic-geometric fact."
+   },
+   {
+    "node": "lem-trf-flatification-horizontal-curve-pair",
+    "why": "Generic scheme-theoretic tool for the construction of the IX 1.2 marked nodal alteration: Flatification of a projective generic curve and its horizontal marking. No node of the curve-perverse unit gives this algebraic-geometric fact."
+   },
+   {
+    "node": "lem-trf-h-projective-composition",
+    "why": "Generic scheme-theoretic tool for the construction of the IX 1.2 marked nodal alteration: Composition of H-projective morphisms. No node of the curve-perverse unit gives this algebraic-geometric fact."
+   },
+   {
+    "node": "lem-trf-nodal-family-fitting-singular",
+    "why": "Generic scheme-theoretic tool for the construction of the IX 1.2 marked nodal alteration: Fitting singular subscheme of a nodal relative curve. No node of the curve-perverse unit gives this algebraic-geometric fact."
+   },
+   {
+    "node": "lem-trf-projective-bundle-to-h-projective",
+    "why": "Generic scheme-theoretic tool for the construction of the IX 1.2 marked nodal alteration: Projective-bundle projectivity over an ample base implies H-projectivity. No node of the curve-perverse unit gives this algebraic-geometric fact."
+   },
+   {
+    "node": "lem-trf-proper-birational-normal-curve-iso",
+    "why": "Generic scheme-theoretic tool for the construction of the IX 1.2 marked nodal alteration: A proper birational morphism to a normal integral curve is an isomorphism. No node of the curve-perverse unit gives this algebraic-geometric fact."
+   },
+   {
+    "node": "lem-trf-stable-modification-uniqueness-normal",
+    "why": "Generic scheme-theoretic tool for the construction of the IX 1.2 marked nodal alteration: Uniqueness of stable modifications over a normal integral base. No node of the curve-perverse unit gives this algebraic-geometric fact."
+   },
+   {
+    "node": "lem-weil-pbc-chow-noetherian",
+    "why": "Generic scheme-theoretic tool for the construction of the IX 1.2 marked nodal alteration: Chow's lemma over a Noetherian base. No node of the curve-perverse unit gives this algebraic-geometric fact."
+   },
+   {
+    "node": "lem-weil-pbc-descend-etale",
+    "why": "Generic scheme-theoretic tool for the construction of the IX 1.2 marked nodal alteration: Etaleness descends to a finite stage of a limit. No node of the curve-perverse unit gives this algebraic-geometric fact."
+   },
+   {
+    "node": "lem-weil-pbc-etale-base-change-finite-limits",
+    "why": "Generic scheme-theoretic tool for the construction of the IX 1.2 marked nodal alteration: The base-change functor between small etale sites commutes with finite limits. No node of the curve-perverse unit gives this algebraic-geometric fact."
+   },
+   {
+    "node": "lem-weil-pbc-finite-separable-extension-etale",
+    "why": "Generic scheme-theoretic tool for the construction of the IX 1.2 marked nodal alteration: A finite separable field extension is etale. No node of the curve-perverse unit gives this algebraic-geometric fact."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic scheme-theoretic tool for the construction of the IX 1.2 marked nodal alteration: A scheme of finite type over a Noetherian scheme is Noetherian (Stacks 01T6). No node of the curve-perverse unit gives this algebraic-geometric fact."
+   },
+   {
+    "node": "lem-weil-pbc-flat-proper-component-count-lower-semicontinuous",
+    "why": "Generic scheme-theoretic tool for the construction of the IX 1.2 marked nodal alteration: Lower semicontinuity of geometric component counts in flat proper families. No node of the curve-perverse unit gives this algebraic-geometric fact."
+   },
+   {
+    "node": "lem-weil-pbc-generic-finite-morphism-open-neighborhood",
+    "why": "Generic scheme-theoretic tool for the construction of the IX 1.2 marked nodal alteration: Finite generic fibers become a finite morphism near the generic points. No node of the curve-perverse unit gives this algebraic-geometric fact."
+   },
+   {
+    "node": "lem-weil-pbc-local-ring-spec-limit-affine-neighbourhoods",
+    "why": "Generic scheme-theoretic tool for the construction of the IX 1.2 marked nodal alteration: Spec of a local ring of a scheme is the limit of the affine open neighbourhoods of the point. No node of the curve-perverse unit gives this algebraic-geometric fact."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-finitely-many-components",
+    "why": "Generic scheme-theoretic tool for the construction of the IX 1.2 marked nodal alteration: A Noetherian scheme has finitely many irreducible components. No node of the curve-perverse unit gives this algebraic-geometric fact."
+   },
+   {
+    "node": "lem-weil-pbc-projective-ample-invertible",
+    "why": "Generic scheme-theoretic tool for the construction of the IX 1.2 marked nodal alteration: A closed immersion into projective space supplies an ample invertible sheaf. No node of the curve-perverse unit gives this algebraic-geometric fact."
+   },
+   {
+    "node": "lem-weil-pbc-proper-fp-permanence",
+    "why": "Generic scheme-theoretic tool for the construction of the IX 1.2 marked nodal alteration: Permanence of proper, separated, finite type, finitely presented morphisms and of immersions. No node of the curve-perverse unit gives this algebraic-geometric fact."
+   },
+   {
+    "node": "lem-weil-pbc-tensor-field-extension-galois-invariants",
+    "why": "Generic scheme-theoretic tool for the construction of the IX 1.2 marked nodal alteration: Invariants of a tensor product with a field extension under a group with fixed field the base. No node of the curve-perverse unit gives this algebraic-geometric fact."
+   },
+   {
+    "node": "lem-weil-pbc-unramified-quasi-finite-at-points",
+    "why": "Generic scheme-theoretic tool for the construction of the IX 1.2 marked nodal alteration: An unramified morphism is quasi-finite at every point. No node of the curve-perverse unit gives this algebraic-geometric fact."
+   },
+   {
+    "node": "pqf-lem-proper-lqf-finite",
+    "why": "Generic scheme-theoretic tool for the construction of the IX 1.2 marked nodal alteration: A proper locally quasi-finite morphism is finite. No node of the curve-perverse unit gives this algebraic-geometric fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "det-chow-projective-closed-immersions",
+  "lem-pc-cartier-criterion",
+  "lem-pc-projective-base-change",
+  "lem-pc-projective-proper",
+  "lem-pc-proper-base-change",
+  "lem-sc-closed-irreducible-dimension-trdeg",
+  "lem-sc-smooth-normal",
+  "lem-trf-flatification-horizontal-curve-pair",
+  "lem-trf-h-projective-composition",
+  "lem-trf-nodal-family-fitting-singular",
+  "lem-trf-projective-bundle-to-h-projective",
+  "lem-trf-proper-birational-normal-curve-iso",
+  "lem-trf-stable-modification-uniqueness-normal",
+  "lem-weil-pbc-chow-noetherian",
+  "lem-weil-pbc-descend-etale",
+  "lem-weil-pbc-etale-base-change-finite-limits",
+  "lem-weil-pbc-finite-separable-extension-etale",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-flat-proper-component-count-lower-semicontinuous",
+  "lem-weil-pbc-generic-finite-morphism-open-neighborhood",
+  "lem-weil-pbc-local-ring-spec-limit-affine-neighbourhoods",
+  "lem-weil-pbc-noetherian-finitely-many-components",
+  "lem-weil-pbc-projective-ample-invertible",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-weil-pbc-tensor-field-extension-galois-invariants",
+  "lem-weil-pbc-unramified-quasi-finite-at-points",
+  "pqf-lem-proper-lqf-finite"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q136-caf53b61e",
+  "group": "Q136",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q136-caf53b61e (reviewer sub-agent of L); spot-checked: This head re-delivers aba37de5, which I reviewed earlier today with a FIX. That FIX never landed: landing was refused because lem-per-admissible-quotient-generic-degree's statement changed, and only its conventions paragraph did. I diffed the new head file by file. The three new nodes are byte-identical to the old head. In the item only Step 13 changed: it now gets separatedness and finite type of C and Y′ over S=Y from Step 5's properness via def-weil-proper-morphism. That matches the current quotient-node hypotheses exactly and is correct. The other cited statements, 49 plus def-trf-projective-bundle-morphism, det-chow-projective-qcqs-chow and def-trf-multipointed-curve, are all unchanged. None of the 62 nodes added since the old base duplicates a new node. The closure (12162 nodes) has no cycle and reaches no nt-assume, thm-trf, sk-thm-trace-transport or batch-4 target. I re-read the full math: statement vs ILO IX 1.2 (i)-(vi) and 1.4 (pp.131-133); Steps 1-16 vs ILO X 3.4 Steps 1-10 (pp.159-161); Stacks 081R/087S/01WE/0C59/0AB7/0B9D/07RP. Two faults remain from the old head and are re-repaired in fixes/. (1) E2 overstatement in lem-per-projective-galois-alteration-envelope: it claims c is H-projective over an arbitrary excellent S, but normalization is only EGA-projective (Stacks lemma-finite-projective). The node now says projective-bundle projective (stmt_dep def-trf-projective-bundle-morphism). Item Step 4 converts c via 087S, with S ample by lem-weil-pbc-projective-ample-invertible. (2) Step 10 C4: the cited limit node is over all affine neighbourhoods, not principal opens, so the step was reworded with S0=Y0=Spec A for 07RP. The new stable-modification node (Temkin 1.5/1.1 plus normal base change) and the quotient-separatedness node are true and not duplicates. The 27 tool uses are generic algebraic geometry and accepted. Batch-5: all 8 trf citations are 2 general definitions plus Stacks 081R, 01WE, 0C59, 087S, 0AB7 and Temkin uniqueness. None is trace-formula or Poincaré-duality content, so all are accepted.; 2 file(s) fixed by the reviewer"
  }
 }
