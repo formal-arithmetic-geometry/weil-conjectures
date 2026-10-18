@@ -16,9 +16,147 @@
   "def-weil-pbc-depth",
   "def-weil-pbc-krull-dimension-ring"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The swap $K\\otimes_kL\\longrightarrow L\\otimes_kK$, $u\\otimes v\\mapsto v\\otimes u$, is a ring isomorphism with its swap as inverse, by bilinearity and the multiplication in the statement. Thus assume $K=k(a_1,\\ldots,a_n)$. Apply [lem-weil-pbc-finitely-generated-field-finite-transcendence-basis] to choose algebraically independent $t_1,\\ldots,t_r\\in K$ with $K$ algebraic over $F=k(t_1,\\ldots,t_r)$. Since $F\\subset K$ and $k\\subset F$, the original generators also give $K=F(a_1,\\ldots,a_n)$. They are algebraic over $F$, so [lem-weil-pbc-algebraic-generators-finite-extension] makes $K$ a finite-dimensional $F$-vector space. Choose a finite $F$-basis $e_1,\\ldots,e_d$ of $K$. No assertion of separability is used.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "lem-weil-pbc-finitely-generated-field-finite-transcendence-basis",
+    "lem-weil-pbc-algebraic-generators-finite-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 045M, lemma-tensor-fields-CM, proof: choose a finite extension of a purely transcendental extension; Fields Tags 030F (lemma-transcendence-degree) and 09GH (lemma-algebraic-finitely-generated)."
+   }
+  },
+  {
+   "text": "Put $B=k[t_1,\\ldots,t_r]\\subset K$, $W=B\\setminus\\{0\\}$, and $P=L[t_1,\\ldots,t_r]$. Algebraic independence identifies $B$ with the polynomial ring on these symbols, and $F=W^{-1}B$: the fractions in $B$ form exactly the smallest subfield containing $k$ and all $t_i$. There is a ring isomorphism $B\\otimes_kL\\cong P$ sending $t^\\alpha\\otimes l$ to $lt^\\alpha$; its inverse sends $\\sum_\\alpha l_\\alpha t^\\alpha$ to $\\sum_\\alpha t^\\alpha\\otimes l_\\alpha$. The two maps preserve multiplication by the monomial rule and are inverse by bilinearity. Apply [lem-weil-pbc-localization-tensor-over-base] with base $k$, algebra and module $B$, multiplicative set $W$, and module $L$. It identifies\n$$A:=F\\otimes_kL\\cong W^{-1}(B\\otimes_kL)\\cong W^{-1}P.$$\nThe localization formula $(b\\otimes l)/w\\mapsto (b/w)\\otimes l$ respects products, since both products multiply the two numerators and the two denominators. Here $W$ in $P$ denotes its image under the coefficient inclusion; no nonzero polynomial in $B$ becomes zero in $P$.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-pbc-module-tensor-product",
+    "lem-weil-pbc-localization-tensor-over-base"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 045M, lemma-tensor-fields-CM, proof: the purely transcendental tensor factor is a localization of a polynomial ring; Tag 00DK (lemma-tensor-localization), with tensor associativity Tag 00D2."
+   }
+  },
+  {
+   "text": "The field $L$ is Noetherian because its only ideals are $(0)$ and $L$, and its only prime is $(0)$, with localization $L_{(0)}=L$. Its Krull dimension is zero. Its maximal ideal is zero, so its depth is zero: the empty regular sequence exists and a positive-length sequence in that ideal begins with zero, whose multiplication on the nonzero module $L$ is not injective. Therefore $L$ satisfies every hypothesis of [lem-trf-polynomial-algebra-cm]. Applying that node with coefficient ring $L$ and $r$ variables shows that $P$ is Noetherian and that every $P_{\\mathfrak r}$ has depth equal to dimension. Since $A=W^{-1}P$, [lem-weil-pbc-localization-noetherian] also shows that $A$ is Noetherian.",
+   "uses": [
+    "def-weil-pbc-depth",
+    "lem-trf-polynomial-algebra-cm",
+    "lem-weil-pbc-localization-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 045M, lemma-tensor-fields-CM, last sentence, using Tag 00ND (lemma-CM-polynomial-algebra) and Tag 00FN (lemma-Noetherian-permanence)."
+   }
+  },
+  {
+   "text": "Fix a prime $\\mathfrak p$ of $A=W^{-1}P$. By [lem-weil-pbc-localization-quotient-by-prime], its contraction $\\mathfrak r\\subset P$ is prime, avoids $W$, and $\\mathfrak p=\\mathfrak r A$. The fraction formulas give mutually inverse local ring maps\n$$P_{\\mathfrak r}\\longrightarrow A_{\\mathfrak p},\\quad f/g\\longmapsto(f/1)/(g/1),\\qquad\n A_{\\mathfrak p}\\longrightarrow P_{\\mathfrak r},\\quad (a/s)/(b/t)\\longmapsto at/(sb).$$\nIn the second formula $s,t\\in W$, and $b/t\\notin\\mathfrak p$ means $b\\notin\\mathfrak r$; hence $sb\\notin\\mathfrak r$. The fraction equality relation makes the maps well-defined, and multiplication and cancellation show their composites fix every fraction. Thus $A_{\\mathfrak p}$ has the same depth and dimension as $P_{\\mathfrak r}$, so is Cohen–Macaulay by step 3. The local-ring assertion is part of [def-weil-pbc-localization-at-prime], and its Noetherianity follows from [lem-weil-pbc-localization-noetherian].",
+   "uses": [
+    "lem-weil-pbc-localization-quotient-by-prime",
+    "def-weil-pbc-localization-at-prime",
+    "lem-weil-pbc-localization-noetherian"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 045M, lemma-tensor-fields-CM, localization sentence; Tag 00E3 (lemma-spec-localization) and the fraction construction in Tag 00CO (definition-localization)."
+   }
+  },
+  {
+   "text": "The $A$-algebra $T=K\\otimes_kL$ is identified with $A\\otimes_FK$ by\n$$ (f\\otimes l)\\otimes u\\longmapsto fu\\otimes l,\\qquad\n u\\otimes l\\longmapsto(1\\otimes l)\\otimes u.$$\nThese formulas are balanced over $k$ and $F$, preserve multiplication, and are mutually inverse on the displayed generators. If $\\lambda_i:K\\to F$ are the coordinate maps in the basis $(e_i)$ of step 1, the maps\n$$A^d\\longrightarrow A\\otimes_FK,\\quad(c_i)\\longmapsto\\sum_i c_i\\otimes e_i,\\qquad\n A\\otimes_FK\\longrightarrow A^d,\\quad c\\otimes u\\longmapsto(c\\lambda_i(u))_i$$\nare inverse $A$-linear maps: $\\lambda_i(e_j)=\\delta_{ij}$ checks one composite, and $u=\\sum_i\\lambda_i(u)e_i$ checks the other. Consequently $T$ is a finite free $A$-module. This construction works for inseparable finite extensions as well.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 045M, lemma-tensor-fields-CM, proof: the displayed ring map is finite free; the coordinate verification uses the universal property in Tag 00CX (lemma-tensor-product)."
+   }
+  },
+  {
+   "text": "By step 3, $A$ is Noetherian, and step 5 exhibits finitely many $A$-module generators of $T$. Hence [lem-weil-pbc-finite-algebra-noetherian] makes $T$ Noetherian. By [lem-sc-affine-standard-cover-finite-free-local-fp-flat], its finite free $A$-module structure makes $A\\to T$ flat. By [lem-weil-pbc-finite-algebra-is-integral], the same finiteness makes $A\\to T$ integral. These are statements about the global finite free map, before localization at a prime of $T$.",
+   "uses": [
+    "lem-weil-pbc-finite-algebra-noetherian",
+    "lem-sc-affine-standard-cover-finite-free-local-fp-flat",
+    "lem-weil-pbc-finite-algebra-is-integral"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 045M, lemma-tensor-fields-CM, Noetherian and finite-free assertions; Tags 00FN (lemma-Noetherian-permanence), 00NX (lemma-finite-projective), 00GK (lemma-finite-is-integral)."
+   }
+  },
+  {
+   "text": "Let $\\mathfrak q\\subset T$ be any prime and $\\mathfrak p=\\mathfrak q\\cap A$. Put $R=A_{\\mathfrak p}$ and $S=T_{\\mathfrak q}$. They are local rings with the displayed prime-generated maximal ideals by [def-weil-pbc-localization-at-prime], and they are Noetherian by [lem-weil-pbc-localization-noetherian] and steps 3 and 6. The map $R\\to S$ exists since elements of $A\\setminus\\mathfrak p$ map outside $\\mathfrak q$, hence become units; it is local since $\\mathfrak pR$ maps into $\\mathfrak qS$. Apply [lem-pc-affine-flat-module-local-criterion] to the flat $A$-module $T$ to conclude that $S$ is flat over $R$. Step 4 gives $\\operatorname{depth}R=\\dim R$.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "lem-weil-pbc-localization-noetherian",
+    "lem-pc-affine-flat-module-local-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 045M, lemma-tensor-fields-CM, application of Tag 00R5 (lemma-finite-flat-over-regular-CM), localized using Tag 00HT (lemma-flat-localization), part (6)."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-localization-dimension-chains-below-prime], $\\dim S$ is the supremum of the lengths of strict prime chains in $T$ lying below $\\mathfrak q$. For any such chain $\\mathfrak q_0\\subsetneq\\cdots\\subsetneq\\mathfrak q_m\\subseteq\\mathfrak q$, integrality of $A\\to T$ from step 6 and [lem-weil-pbc-integral-incomparability] show that its contractions are a strict prime chain in $A$ lying below $\\mathfrak p$. The same dimension-chain node applied to $A,\\mathfrak p$ bounds its length by $\\dim R$. Taking suprema yields $\\dim S\\leq\\dim R$. This uses incomparability for $A\\to T$ itself; it makes no finiteness or integrality claim about $R\\to S$.",
+   "uses": [
+    "lem-weil-pbc-localization-dimension-chains-below-prime",
+    "lem-weil-pbc-integral-incomparability"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 045M, lemma-tensor-fields-CM, finite-flat Cohen–Macaulay step; the dimension-bound hypothesis of Tag 00R5 (lemma-finite-flat-over-regular-CM), using Tag 00GT (lemma-integral-no-inclusion) and Tag 00E3 (lemma-spec-localization)."
+   }
+  },
+  {
+   "text": "The map $R\\to S$ is flat and local between Noetherian local rings by step 7, so [lem-weil-pbc-flat-local-depth-formula] gives\n$$\\operatorname{depth}S=\\operatorname{depth}R+\\operatorname{depth}(S/\\mathfrak pRS)\\geq\\operatorname{depth}R=\\dim R.$$\nThe inequality uses only nonnegativity of depth in [def-weil-pbc-depth]. The ring $S$ is nonzero: $A$ is a nonzero localization of the nonzero polynomial ring $P$, and step 5 makes $T$ finite free of positive rank over $A$, so its prime localization $S$ is nonzero. Apply [lem-weil-pbc-depth-le-support-dimension] to the nonzero finite $S$-module $S$ itself: its support is all of $\\operatorname{Spec}S$, because each prime localization has a proper maximal ideal and is nonzero. Thus $\\operatorname{depth}S\\leq\\dim S$. Together with step 8,\n$$\\dim R\\leq\\operatorname{depth}S\\leq\\dim S\\leq\\dim R.$$\nIn particular $\\operatorname{depth}T_{\\mathfrak q}=\\dim T_{\\mathfrak q}$ for every $\\mathfrak q$. This proves the required Cohen–Macaulay assertion, and step 6 already proved Noetherianity. The swap of step 1 handles the case where only $L/k$ is finitely generated.",
+   "uses": [
+    "lem-weil-pbc-flat-local-depth-formula",
+    "def-weil-pbc-depth",
+    "lem-weil-pbc-depth-le-support-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 045M, lemma-tensor-fields-CM, application of Tag 00R5 (lemma-finite-flat-over-regular-CM), with its depth inequality supplied by Tag 0337 (lemma-apply-grothendieck); upper bound Tag 00LK (lemma-bound-depth)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-module-tensor-product",
+  "lem-weil-pbc-finitely-generated-field-finite-transcendence-basis",
+  "lem-weil-pbc-algebraic-generators-finite-extension",
+  "def-weil-pbc-mv-polynomial-ring",
+  "lem-weil-pbc-localization-tensor-over-base",
+  "def-weil-pbc-depth",
+  "lem-trf-polynomial-algebra-cm",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-localization-quotient-by-prime",
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-finite-algebra-noetherian",
+  "lem-sc-affine-standard-cover-finite-free-local-fp-flat",
+  "lem-weil-pbc-finite-algebra-is-integral",
+  "lem-pc-affine-flat-module-local-criterion",
+  "lem-weil-pbc-localization-dimension-chains-below-prime",
+  "lem-weil-pbc-integral-incomparability",
+  "lem-weil-pbc-flat-local-depth-formula",
+  "lem-weil-pbc-depth-le-support-dimension"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 045M, lemma-tensor-fields-CM, proof; the application of Tag 00R5 is expanded using prime chains (00GT, 00E3), the flat local depth formula (0337), and the depth bound (00LK)."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -54,10 +192,45 @@
    "results": "8 hits: tensorProduct_reesAlgebra_isNoetherian_of_fg, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian, AdicCompletion.ofTensorProduct_bijective_of_finite_of_isNoetherian, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of, AdicCompletion.tensor_map_id_left_injective_of_injective, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply, AdicCompletion.tensor_map_id_left_eq_map; digest=6f250254ebc40252.  No Cohen–Macaulay field-tensor theorem. IsCohenMacaulay is an unknown Loogle identifier, not an unavailable service. Semantic hits concern linear disjointness, essentially finite type base change, and finite modules; the alternate Loogle query concerns Rees algebras and adic completion, not this statement.",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "CohenMacaulay|cohen.macaulay|tensor.*[Ff]ield.*[Nn]oetherian",
+   "results": "{\"t\": \"2026-10-18T20:13:16Z\", \"tool\": \"grep\", \"query\": \"CohenMacaulay|cohen.macaulay|tensor.*[Ff]ield.*[Nn]oetherian\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} Read results: field/domain and finiteness/base-change declarations do not supply the Cohen–Macaulay conclusion; no Cohen–Macaulay notion occurs in the grep results.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite flat algebra over a Noetherian Cohen Macaulay ring is Cohen Macaulay",
+   "results": "{\"t\": \"2026-10-18T20:13:17Z\", \"tool\": \"leansearch\", \"query\": \"A finite flat algebra over a Noetherian Cohen Macaulay ring is Cohen Macaulay\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Smooth.flat_of_isNoetherianRing\", \"RingHom.Flat\", \"Module.free_of_flat_of_isLocalRing\", \"Module.FaithfullyFlat.of_flat_of_isLocalHom\", \"Algebra.HasGoingDown.of_flat\", \"isNoetherian_of_isNoetherianRing_of_finite\", \"Module.Flat.iff_flat_tensorProduct\", \"RingHom.FaithfullyFlat\"], \"digest\": \"4f14262577882f61\"} Read results: field/domain and finiteness/base-change declarations do not supply the Cohen–Macaulay conclusion; no Cohen–Macaulay notion occurs in the grep results.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "TensorProduct, IsNoetherianRing",
+   "results": "{\"t\": \"2026-10-18T20:13:17Z\", \"tool\": \"loogle\", \"query\": \"TensorProduct, IsNoetherianRing\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"tensorProduct_reesAlgebra_isNoetherian_of_fg\", \"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian\", \"AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian\", \"AdicCompletion.ofTensorProduct_bijective_of_finite_of_isNoetherian\", \"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of\", \"AdicCompletion.tensor_map_id_left_injective_of_injective\", \"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply\", \"AdicCompletion.tensor_map_id_left_eq_map\"], \"digest\": \"6f250254ebc40252\"} Read results: field/domain and finiteness/base-change declarations do not supply the Cohen–Macaulay conclusion; no Cohen–Macaulay notion occurs in the grep results.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The tensor product of two field extensions is Noetherian and Cohen Macaulay when one extension is finitely generated as a field",
+   "results": "{\"t\": \"2026-10-18T20:13:17Z\", \"tool\": \"leanfinder\", \"query\": \"The tensor product of two field extensions is Noetherian and Cohen Macaulay when one extension is finitely generated as a field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.EssFiniteType.baseChange\", \"Algebra.IsAlgebraic.tensorProduct\", \"Algebra.FiniteType.baseChange\", \"Algebra.TensorProduct.isField_of_isAlgebraic\", \"IntermediateField.LinearDisjoint.isDomain'\", \"Algebra.instIsReducedTensorProductOfIsAlgebraicOfIsGeometricallyReduced\", \"Algebra.TensorProduct.isAlgebraic_of_isField\", \"IntermediateField.LinearDisjoint.exists_field_of_isDomain\"], \"digest\": \"d934935d5dacf525\"} Read results: field/domain and finiteness/base-change declarations do not supply the Cohen–Macaulay conclusion; no Cohen–Macaulay notion occurs in the grep results.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "If K and L are extensions of a field k and K is finitely generated as a field over k then K tensor k L is a Noetherian Cohen Macaulay commutative ring",
+   "results": "{\"t\": \"2026-10-18T20:14:46Z\", \"tool\": \"leansearch\", \"query\": \"If K and L are extensions of a field k and K is finitely generated as a field over k then K tensor k L is a Noetherian Cohen Macaulay commutative ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.TensorProduct.isField_of_isAlgebraic\", \"Algebra.FiniteType.isNoetherianRing\", \"Algebra.EssFiniteType.isNoetherianRing\", \"IntermediateField.LinearDisjoint.isField_of_isAlgebraic\", \"Algebra.FormallyUnramified.base_change\", \"Module.Finite.tensorProduct\", \"instFinitePresentationTensorProduct\", \"Algebra.TensorProduct.isAlgebraic_of_isField\"], \"digest\": \"dabf3cfd36734a1b\"} Read results: field/domain and finiteness/base-change declarations do not supply the Cohen–Macaulay conclusion; no Cohen–Macaulay notion occurs in the grep results.",
+   "date": "2026-10-19",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-relative-assassin-base-change",
@@ -87,5 +260,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-trf-tensor-fields-cohen-macaulay",
+  "worker": "stage1",
+  "summary": "Verified the exact 045M statement and attachment absence. Reused existing DAG inputs throughout, with explicit tensor/localization maps and a finite-basis calculation. Expanded the local finite-flat Cohen–Macaulay argument via incomparability, flat local depth, and the depth bound, avoiding an unjustified finiteness assertion after prime localization. No statement change and no new nodes.",
+  "blueprint": "Serves the recorded proof (1)--(2) component-closure input of lem-trf-local-term-locality, through relative associated specialization and Stacks 05DC: the residue-field tensor ring is Noetherian Cohen–Macaulay. Steps 1--5 realize the rational-field and finite-free reduction of 045M, and steps 6--9 give its Noetherian and local Cohen–Macaulay conclusions.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-affine-flat-module-local-criterion",
+    "why": "Generic localization of flatness (00HT(6)) for the finite free algebra, needed to expand the local use of 00R5; no node in sk-i-curve-zero gives this module-theoretic implication."
+   },
+   {
+    "node": "lem-weil-pbc-flat-local-depth-formula",
+    "why": "Generic depth formula (0337) gives depth(S) >= depth(R) for the flat local map used by the 00R5 argument. It supplies commutative algebra, not a replacement for a unit step."
+   },
+   {
+    "node": "lem-weil-pbc-depth-le-support-dimension",
+    "why": "Generic depth bound (00LK) for the regular module S closes the 00R5 inequalities; no statement of this unit supplies it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-affine-flat-module-local-criterion",
+  "lem-weil-pbc-flat-local-depth-formula",
+  "lem-weil-pbc-depth-le-support-dimension"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q34-140c52b4a",
+  "group": "Q34",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q34-140c52b4a (reviewer sub-agent of L); spot-checked: I read the item in full against Stacks algebra.tex 47266-47286 (Tag 045M). The statement is unchanged and matches 045M: either extension may be of finite type, and Cohen-Macaulay is spelled out as Noetherian with depth = dim at every prime localization. The delivery has no new nodes. proof_deps equals the union of the steps' uses, there is no cycle, and there is no SGA citation. Every cited statement says what its step takes from it. Steps 1-2: finite transcendence basis, K finite over F = k(t), and F⊗L = W^{-1}L[t] via the localization-tensor node, with multiplicativity checked by hand. Step 3: L is a field (depth and dimension 0), so lem-trf-polynomial-algebra-cm and localization-Noetherian apply; r=0 is covered. Step 4: A_p is isomorphic to P_r by explicit fraction maps; the elementary marking is acceptable. Step 5: T is finite free over A = F⊗L via a basis of K over F, which also works for inseparable K. Step 6: T is Noetherian, flat and integral over A. Step 7: flatness localizes to R = A_p -> S = T_q, a local map. Step 8: dim S <= dim R by incomparability for the global integral map A -> T. Step 9: the flat local depth formula and depth <= dim Supp S = dim S give dim R <= depth S <= dim S <= dim R; the closed fibre S/pS is nonzero because the map is local. I tested k=K=L, K=k(t) with L=k(s), and an inseparable K = F_p(b)(b^{1/p}) with L = K, where T is Artinian with dimension and depth 0. The source has no error. No existing node states 045M or 00R5. I accept the three tool_uses (00HT flat localization, 0337 flat local depth formula, 00LK depth bound) as generic commutative algebra needed by the 00R5 step, which no node of sk-i-curve-zero supplies."
  }
 }
