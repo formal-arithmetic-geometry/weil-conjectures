@@ -2,7 +2,7 @@
  "id": "lem-per-tame-admissible-scheme-quotient",
  "kind": "statement",
  "title": "Finite scheme quotient of an admissible tame action",
- "statement": "Let $X$ be a Noetherian scheme [def-pc-scheme, def-weil-pbc-noetherian-ring], and let a finite group $G$ act on $X$ by scheme automorphisms. Suppose $X$ has a cover by $G$-invariant affine opens and the action is tame: for every geometric point $\\bar x$ [def-weil-geometric-point], the order of $\\operatorname{Stab}_G(\\bar x)$ is invertible in its residue field. Then there is a scheme $Y$ and an invariant morphism $q:X\\to Y$ which is finite surjective [def-weil-finite-integral-morphism], with geometric fibres the $G$-orbits, quotient topology on $|Y|$, and $\\mathcal O_Y=(q_*\\mathcal O_X)^G$. The scheme $Y$ is Noetherian. Every $G$-invariant morphism from $X$ to any scheme factors uniquely through $q$. For each invariant affine open $U=\\operatorname{Spec}R$ of the cover, $q(U)$ is open, $q^{-1}q(U)=U$, and the restricted quotient is $\\operatorname{Spec}R\\to\\operatorname{Spec}(R^G)$, where $R^G=\\{r\\in R:g(r)=r\\text{ for all }g\\in G\\}$. No logarithmic structure, generic freeness, integrality, excellence or finite-type base is assumed.",
+ "statement": "Let $X$ be a Noetherian scheme [def-pc-scheme, def-weil-pbc-noetherian-ring], and let a finite group $G$ act on $X$ by scheme automorphisms. Suppose $X$ has a cover by $G$-invariant affine opens and the action is tame: for every geometric point $\\bar x$ [def-weil-geometric-point], the order of $\\operatorname{Stab}_G(\\bar x)$ is invertible in its residue field. Then there is a scheme $Y$ and an invariant morphism $q:X\\to Y$ which is finite surjective [def-weil-finite-integral-morphism], with geometric fibres the $G$-orbits, quotient topology on $|Y|$, and $\\mathcal O_Y=(q_*\\mathcal O_X)^G$. The scheme $Y$ is Noetherian. Every $G$-invariant morphism from $X$ to any scheme factors uniquely through $q$. For each invariant affine open $U=\\operatorname{Spec}R$ of the cover, $q(U)$ is open, $q^{-1}q(U)=U$, and the restricted quotient is $\\operatorname{Spec}R\\to\\operatorname{Spec}(R^G)$, where $R^G=\\{r\\in R:g(r)=r\\text{ for all }g\\in G\\}$. No logarithmic structure, generic freeness, integrality, excellence or finite-type base is assumed. Here Noetherian means locally Noetherian [pqf-def-locnoeth] and quasi-compact [def-weil-pbc-quasi-compact-scheme].",
  "source": {
   "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
   "place": "Exposé VI §3.2, printed p.74 (admissible underlying scheme quotient), and proof 3.7(b), printed p.75 (finite tame strict-local invariant quotient). Scheme-theoretic quotient ingredient, with tameness retained for Noetherian finiteness."
@@ -11,11 +11,99 @@
   "def-pc-scheme",
   "def-weil-pbc-noetherian-ring",
   "def-weil-geometric-point",
-  "def-weil-finite-integral-morphism"
+  "def-weil-finite-integral-morphism",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-quasi-compact-scheme"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Every orbit is contained in one of the given invariant affine opens: choose one containing any point of the orbit, and invariance contains the rest. Thus [lem-per-admissible-quotient-affine-integral-charts] applies to $X,G$. It gives an invariant affine integral surjection $q:X\\to Y$, the orbit-space topology, geometric orbit fibres, and the categorical universal property for arbitrary scheme targets. Its invariant-section description on every affine open of $Y$ gives $\\mathcal O_Y=(q_*\\mathcal O_X)^G$: the canonical map has this image on an affine basis, and sections and invariant sections both glue uniquely. Retain the invariant affine chart cover $W_j=\\operatorname{Spec}R_j$ with $V_j=q(W_j)=\\operatorname{Spec}(R_j^G)$ supplied by that node.",
+   "uses": [
+    "lem-per-admissible-quotient-affine-integral-charts"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VI 3.2, printed p.74, and 3.7(b), printed p.75; agent expansion of the underlying scheme-quotient input."
+   }
+  },
+  {
+   "text": "Let $V=\\operatorname{Spec}A$ be any affine open of $Y$. The affine quotient theorem identifies $q^{-1}V=\\operatorname{Spec}R$ and identifies $A$ with $R^G$. This source is an affine open of the locally Noetherian scheme $X$, so [pqf-lem-affine-open-locnoeth] makes $R$ Noetherian. The $G$-action restricts to this open, since $q$ is invariant. For a prime $\\mathfrak p\\subset R$, choose an algebraic closure of $\\kappa(\\mathfrak p)$ by [def-weil-algebraic-closure]; its residue embedding defines a geometric point over $\\mathfrak p$ by [def-weil-affine-spectrum]. By [def-weil-geometric-point] its residue-field map into the algebraically closed field is injective. Therefore $g$ fixes this geometric point if and only if it fixes $\\mathfrak p$ and acts identically on $\\kappa(\\mathfrak p)$ [def-weil-pbc-localization-at-prime]; this is precisely $I_{\\mathfrak p}$ in [lem-per-tame-inertia-surjective-group-trace]. The assumed tame geometric stabilizers therefore verify that lemma's hypotheses, giving $a\\in R$ with $\\sum_g g(a)=1$. This applies to every affine $V$, including the $V_j$ of step 1.",
+   "uses": [
+    "lem-per-admissible-quotient-affine-integral-charts",
+    "pqf-lem-affine-open-locnoeth",
+    "def-weil-geometric-point",
+    "def-weil-pbc-localization-at-prime",
+    "lem-per-tame-inertia-surjective-group-trace",
+    "def-weil-algebraic-closure",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VI 3.2, printed p.74, and 3.7(b), printed p.75; agent expansion of the underlying scheme-quotient input."
+   }
+  },
+  {
+   "text": "Apply [lem-per-trace-one-noetherian-invariant-finiteness] to each ring $R$ from step 2, with the same finite group and its trace-one element. It gives that $A=R^G$ is Noetherian and $R$ is a finite $A$-module. Since this holds for every affine open $V$ of $Y$, and $q$ is affine by step 1, the definition [def-weil-finite-integral-morphism] says exactly that $q$ is finite. Its surjectivity was already supplied in step 1.",
+   "uses": [
+    "lem-per-trace-one-noetherian-invariant-finiteness",
+    "def-weil-finite-integral-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VI 3.2, printed p.74, and 3.7(b), printed p.75; agent expansion of the underlying scheme-quotient input."
+   }
+  },
+  {
+   "text": "The $V_j$ from step 1 are an affine open cover with Noetherian coordinate rings by step 3; hence $Y$ is locally Noetherian by [pqf-def-locnoeth]. It is quasi-compact by [def-weil-pbc-quasi-compact-scheme]: pull an arbitrary open cover of $Y$ back along $q$; quasi-compactness of $X$ gives finitely many inverse images covering $X$, and surjectivity implies the corresponding finitely many opens cover $Y$. Consequently $Y$ is Noetherian.",
+   "uses": [
+    "pqf-def-locnoeth",
+    "def-weil-pbc-quasi-compact-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VI 3.2, printed p.74, and 3.7(b), printed p.75; agent expansion of the underlying scheme-quotient input."
+   }
+  },
+  {
+   "text": "Now fix any invariant affine open $U=\\operatorname{Spec}R$ of the cover in the statement, not just one of the auxiliary $W_j$. Every orbit meeting $U$ is contained in $U$, so the orbit fibres give $q^{-1}q(U)=U$. The quotient topology makes $q(U)$ open, and [lem-per-admissible-quotient-affine-integral-charts] identifies $U\\to q(U)$ as its categorical quotient. The restriction is finite: for every affine open of $q(U)$ the very same ring map was tested for finiteness in step 3 [def-weil-finite-integral-morphism]. It is surjective, with affine source $U$. The open subscheme $q(U)$ of Noetherian $Y$ is Noetherian by [lem-weil-pbc-noetherian-open-subscheme-noetherian]. Therefore [lem-weil-pbc-finite-surjective-affine-target-noetherian] applies and makes $q(U)$ affine. Applying the invariant-section clause of [lem-per-admissible-quotient-affine-integral-charts] to this affine open identifies its coordinate ring with $R^G$, and the map on sections with the inclusion $R^G\\hookrightarrow R$. By the affine-spectrum correspondence [def-weil-affine-spectrum], the restricted morphism is canonically $\\operatorname{Spec}R\\to\\operatorname{Spec}(R^G)$, as required. All inputs used only the stated Noetherianity, invariant affine cover and tame stabilizers.",
+   "uses": [
+    "lem-per-admissible-quotient-affine-integral-charts",
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "lem-weil-pbc-finite-surjective-affine-target-noetherian",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VI 3.2, printed p.74, and 3.7(b), printed p.75; agent expansion of the underlying scheme-quotient input."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-per-admissible-quotient-affine-integral-charts",
+  "pqf-lem-affine-open-locnoeth",
+  "def-weil-geometric-point",
+  "def-weil-pbc-localization-at-prime",
+  "lem-per-tame-inertia-surjective-group-trace",
+  "def-weil-algebraic-closure",
+  "def-weil-affine-spectrum",
+  "lem-per-trace-one-noetherian-invariant-finiteness",
+  "def-weil-finite-integral-morphism",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-quasi-compact-scheme",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-finite-surjective-affine-target-noetherian"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose VI 3.2 and 3.7(b), printed pp.74--75; combined with the existing admissible quotient theorem and the explicit algebraic trace argument in this delivery."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -51,10 +139,38 @@
    "results": "{\"t\": \"2026-10-18T21:53:27Z\", \"tool\": \"leansearch\", \"query\": \"A tame admissible finite group action on a Noetherian scheme has a finite invariant affine categorical quotient\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.PreGaloisCategory.hasQuotientsByFiniteGroups\", \"Rep.quotientToInvariantsFunctor_obj_V\", \"Finite.of_finite_addAction_orbitRel_quotient\", \"Finite.to_properlyDiscontinuousSMul\", \"MulAction.finite_quotient_of_finite_quotient_of_finite_quotient\", \"t2Space_quotient_addAction_of_properVAdd\", \"CategoryTheory.FintypeCat.isoQuotientStabilizerOfIsConnected\", \"MulAction.orbitRel.Quotient\"], \"digest\": \"5af00889ea0243ee\"}",
    "date": "2026-10-19",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An admissible tame finite group action on a Noetherian scheme has a finite categorical quotient",
+   "results": "{\"t\": \"2026-10-18T22:45:29Z\", \"tool\": \"leansearch\", \"query\": \"An admissible tame finite group action on a Noetherian scheme has a finite categorical quotient\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.PreGaloisCategory.hasQuotientsByFiniteGroups\", \"AddSubgroup.finite_quotient_of_pretransitive_of_index_ne_zero\", \"AddAction.finite_quotient_of_pretransitive_of_finite_quotient\", \"Finite.of_finite_addAction_orbitRel_quotient\", \"MulAction.finite_quotient_of_finite_quotient_of_finite_quotient\", \"Finite.to_properlyDiscontinuousSMul\", \"CategoryTheory.FintypeCat.isoQuotientStabilizerOfIsConnected\", \"t2Space_quotient_addAction_of_properVAdd\"], \"digest\": \"9f5498034f18baba\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: invariant integrality and abstract finite-group colimits do not give the scheme quotient and tame Noetherian finiteness assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A tame finite group action on a Noetherian ring makes the ring finite over its invariant subring",
+   "results": "{\"t\": \"2026-10-18T22:45:30Z\", \"tool\": \"leanfinder\", \"query\": \"A tame finite group action on a Noetherian ring makes the ring finite over its invariant subring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsInvariant.isIntegral\", \"Ideal.Quotient.finite_of_isInvariant\", \"Algebra.EssFiniteType.isNoetherianRing\", \"Algebra.IsInvariant.isIntegral_of_profinite\", \"FixedPoints.instFiniteDimensionalSubtypeMemSubfieldSubfield\", \"IsNoetherianRing.of_finite\", \"fg_of_fg_of_fg\", \"FixedPoints.isIntegral\"], \"digest\": \"1271d68ec32385df\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: invariant integrality and abstract finite-group colimits do not give the scheme quotient and tame Noetherian finiteness assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "tame|invariant.*[Nn]oetherian|[Nn]oetherian.*invariant",
+   "results": "{\"t\": \"2026-10-18T22:45:55Z\", \"tool\": \"grep\", \"query\": \"tame|invariant.*[Nn]oetherian|[Nn]oetherian.*invariant\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: invariant integrality and abstract finite-group colimits do not give the scheme quotient and tame Noetherian finiteness assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsInvariant\", \"Finite\"",
+   "results": "{\"t\": \"2026-10-18T22:45:56Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsInvariant\\\", \\\"Finite\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Ideal.Quotient.finite_of_isInvariant\", \"Ideal.IsFractionRing.finite_of_isInvariant\", \"Algebra.IsInvariant.isIntegral_of_profinite\", \"Algebra.IsInvariant.exists_smul_of_under_eq_of_profinite\"], \"digest\": \"d4ac1654bea9070c\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: invariant integrality and abstract finite-group colimits do not give the scheme quotient and tame Noetherian finiteness assertion."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-very-tame-log-quotient",
@@ -81,5 +197,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-tame-admissible-scheme-quotient",
+  "worker": "stage1",
+  "summary": "Reused the existing admissible affine integral quotient. Separated the genuine algebraic tame-inertia trace criterion from trace-one Noetherian finiteness; verified geometric inertia, every-affine finiteness, quasi-compactness, and all given invariant affine charts. No extra finiteness or logarithmic hypothesis is used.",
+  "blueprint": "Realizes the underlying scheme-quotient ingredient in the existing created-item ancestry from lem-per-artin-gabber-affine-curve, Step 3, through Gabber regular-pair purity and the very tame log quotient. The current main-20261015 ancestor proof was read; this split does not replace its perverse/duality route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-surjective-affine-target-noetherian",
+    "why": "Affineness descends along the finite surjection from any originally specified invariant affine open, once the quotient is Noetherian. This generic scheme theorem ensures the conclusion for every given chart; the unit has no substitute."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-surjective-affine-target-noetherian"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q94-3e5de9736",
+  "group": "Q94",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q94-3e5de9736 (reviewer sub-agent of L); spot-checked: Read the item, both new nodes, every cited statement, ILO VI 3.1-3.7(a) (printed pp.73-75; tame = geometric-point stabilizer order prime to char k(x), matches the item) and Stacks 0BRH/0BRI/0BRJ/01YQ. The item statement is unchanged from the Q145 version apart from an appended explicit definition of Noetherian (locally Noetherian + quasi-compact); not weakened. Step 1: the admissible-quotient node gives an affine integral surjective categorical quotient, orbit topology and fibres, and invariant sections on every affine V, hence O_Y = (q_*O_X)^G. Step 2: every affine V has q^-1V = Spec R with R Noetherian. Through an algebraic closure and the injective residue map, the geometric stabilizer equals the inertia I_p, so tameness gives a trace-one element. Step 3: the trace-one node plus the every-affine definition makes q finite. Step 4 (elementary): Y is locally Noetherian and quasi-compact by surjectivity. Step 5: q^-1q(U) = U and q(U) is open. U -> q(U) is finite, surjective, with affine source and Noetherian target, so 01YQ makes q(U) affine; invariant sections then identify the map with Spec R -> Spec R^G. Accepted tool_use: lem-weil-pbc-finite-surjective-affine-target-noetherian (sk-thm-p1); it is needed because the quotient node gives only some chart cover, not the given invariant affines. New node tame-inertia-surjective-group-trace: true, checked through localization at a maximal ideal of A (0BRH), the orbit transitivity of 0BRI, the surjective Galois trace on kappa/kappa^D, the Chinese remainder theorem and T(r) == 1 mod q. Small cases: zero ring; permutation of p copies of F_p (|G| not invertible); Artin-Schreier x -> x+1. New node trace-one-noetherian-invariant-finiteness: true via the skew group ring (e idempotent, eSe = Ae, Se = Re, S right Noetherian) and the Reynolds-type retraction for A Noetherian; consistent with the Nagarajan wild counterexample. Neither node restates an item clause. A DAG grep for trace one, group trace, Reynolds, averaging, skew group and invariant Noetherian/finite found no duplicates; strict-local-invariants, generic-degree, projective/free quotient nodes were distinguished. No SGA. Mathlib searches are real; no leaf. No fixes."
  }
 }
