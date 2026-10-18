@@ -14,9 +14,143 @@
   "def-pur-derived-internal-hom",
   "def-weil-finite-integral-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lemma-weil-pbc-finite-stalk-formula] to the underlying abelian sheaf of a $\\Lambda$-module sheaf $E$: $(p_*E)_{\\bar x}=\\prod_{\\bar y\\in Y_{\\bar x}}E_{\\bar y}$. This identification is $\\Lambda$-linear, since each projection is restriction followed by taking a germ. By [lemma-weil-pbc-finite-direct-image-exact], $p_*$ is exact on the underlying abelian sheaves. Kernels and cokernels of module-sheaf maps are their abelian-sheaf kernels and cokernels with the induced scalar action, so it is exact on module sheaves too. If $p_*u$ is an isomorphism, the finite product of the stalk maps $u_{\\bar y}$ over each $\\bar x$ is an isomorphism. Each factor map is then an isomorphism (its kernel and cokernel are factors of the zero kernel and cokernel of the product). Every geometric point of $Y$ occurs over its composite geometric point of $X$. Thus [lemma-weil-pbc-geometric-stalk-conservative] says $u$ is an isomorphism. This proves conservativity without assuming $p$ surjective.",
+   "uses": [
+    "lemma-weil-pbc-finite-stalk-formula",
+    "lemma-weil-pbc-finite-direct-image-exact",
+    "lemma-weil-pbc-geometric-stalk-conservative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03QP, proposition-finite-higher-direct-image-zero; Tag 03PU, theorem-exactness-stalks"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-exact-functor-derived-functor], exact $p_*$ on module sheaves computes its derived functor termwise on every complex. In particular it commutes with cohomology: for a representative $C^\\bullet$, applying $p_*$ to $\\ker d^q/\\operatorname{im}d^{q-1}$ gives $\\ker p_*d^q/\\operatorname{im}p_*d^{q-1}$. Finite direct image preserves constructible abelian sheaves on a Noetherian base by [lem-weil-pbc-finite-pushforward-constructible-noetherian]. For $\\Lambda=\\mathbf Z/\\ell^r$, the module structure is the uniquely induced scalar action on an abelian sheaf killed by $\\ell^r$, so finite locally constant abelian restrictions are exactly finite locally constant $\\Lambda$-module restrictions. Consequently $F=p_*$ sends $D^b_c(Y,\\Lambda)$ to $D^b_c(X,\\Lambda)$, preserving the cohomology interval. The assumed preservation by $D_Y$ makes both $M$ and $D_YM$ bounded below, as required in the next application.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-functor",
+    "lem-weil-pbc-finite-pushforward-constructible-noetherian",
+    "def-weil-pbc-constructible-complexes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 095R, lemma-finite-pushforward-constructible; derived.tex Tag 015F, lemma-right-derived-exact-functor"
+   }
+  },
+  {
+   "text": "We fix tensor--Hom transposition on the ordinary etale derived categories, with all tensor products over $\\Lambda$ and derived. Applying $H^0$ of derived global sections to the currying isomorphism of [lem-weil-pbc-ringed-internal-hom-exact-restriction], and then using [lem-pur-rhom-global-sections], gives the natural bijection $\\operatorname{Hom}(B,R\\mathcal Hom(A,K))=\\operatorname{Hom}(B\\otimes A,K)$. Define $e_A:D_KA\\otimes A\\to K$ as the image of $1_{D_KA}$. Thus the transpose of $v:B\\to D_KA$ is $e_A(v\\otimes1_A)$, by naturality in $B$. Evaluation naturality is the same bijection's naturality in $A$: $e_A(D_Ka\\otimes1_A)=e_B(1_{D_KB}\\otimes a)$ for $a:A\\to B$. With the canonical symmetry $\\sigma$ of [lem-kun-tensor-sym], the stipulated bidual map satisfies exactly $e_{D_KA}(\\eta_A\\otimes1_{D_KA})=e_A\\sigma_{A,D_KA}$. These are identities of morphisms; no biduality isomorphism is assumed.",
+   "uses": [
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "lem-pur-rhom-global-sections",
+    "lem-kun-tensor-sym"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 08J9, lemma-internal-hom, and 08JA, lemma-section-RHom-over-U; evaluation of the currying bijection at an identity"
+   }
+  },
+  {
+   "text": "Use the canonical derived adjunction $p^{-1}\\dashv F$ of [def-kun-projection-formula-map], and write $c_A:p^{-1}FA\\to A$ for its counit. Define $\\mu_{A,B}:FA\\otimes FB\\to F(A\\otimes B)$ to be the adjoint of $c_A\\otimes c_B$, using the inverse-image tensor isomorphism of [lem-kun-inverse-image-monoidal]. Naturality follows by transposing and using $c_{A'}p^{-1}F(a)=a c_A$ in each factor. Moreover $F(\\sigma_{A,B})\\mu_{A,B}=\\mu_{B,A}\\sigma_{FA,FB}$: after transposition both sides are $\\sigma_{A,B}(c_A\\otimes c_B)$. Here inverse image commutes with the tensor symmetry: on representatives both swaps send a tensor in bidegree $(i,j)$ to $(-1)^{ij}$ times its reverse, and termwise inverse image preserves that scalar. The symmetry is the signed symmetry of [lem-kun-tensor-sym]. This specifies, and checks the only properties needed of, the product map; it does not assert that $\\mu$ is invertible.",
+   "uses": [
+    "def-kun-projection-formula-map",
+    "lem-kun-inverse-image-monoidal",
+    "lem-kun-tensor-sym"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, proof of Proposition 6.3.1, finite-direct-image weak-reflexivity comparison; agent expansion of the ordinary adjunction product map"
+   }
+  },
+  {
+   "text": "Apply [lem-per-finite-exceptional-internal-hom] with $f=p$, $N=K_X$, and $A=M$, or $A=D_YM$. Its hypotheses hold: $\\Lambda$ is finite commutative, both schemes are Noetherian, $p$ is finite, $K_X\\in D^+$ by [def-per-potential-dualizing-complex], and these two choices of $A$ are bounded below by the assumption on $D_Y$. The specified identification $K_Y=p^!K_X$ gives natural isomorphisms $\\chi_A:FD_YA\\xrightarrow{\\sim}D_XFA$. Put $t:FK_Y\\to K_X$ for the exceptional counit. The cited theorem also identifies $p$ as compactifiable, $Rp_!=F$, and $p^!K_X=p^\\times K_X$, compatibly with this counit, so [lem-asd-internal-adjunction-evaluation] applies with $Q=FD_YA$ and $h=1$. The transpose of $\\chi_A$ is $t F(e_A(c_{D_YA}\\otimes1_A))\\Pi_{p,Q,A}$. By [lem-amb-tensor-projection-adjunct] and naturality of the ordinary counit, $F(c_{D_YA}\\otimes1_A)\\Pi_{p,Q,A}=\\mu_{D_YA,A}$: their ordinary adjoints are both $c_{D_YA}\\otimes c_A$. Hence the precise normalization we use is\n$$e_{FA}(\\chi_A\\otimes1_{FA})=t F(e_A)\\mu_{D_YA,A}.$$\nThe evaluations on the left and right use $K_X$ and $K_Y$, respectively.",
+   "uses": [
+    "lem-per-finite-exceptional-internal-hom",
+    "lem-asd-internal-adjunction-evaluation",
+    "lem-amb-tensor-projection-adjunct",
+    "def-per-potential-dualizing-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, Proposition 6.3.1, finite-map comparison; the evaluation--counit normalization is expanded using the existing internal-adjunction nodes"
+   }
+  },
+  {
+   "text": "Set $a=\\chi_M:FD_YM\\to D_XFM$ and $b=\\chi_{D_YM}:FD_Y^2M\\to D_XFD_YM$. Since internal Hom is a functor in its first variable, $D_Xa:D_X^2FM\\to D_XFD_YM$ is an isomorphism. Therefore the iterated comparison, with its variance made explicit, is\n$$\\beta_M=(D_Xa)^{-1}b:FD_Y^2M\\xrightarrow{\\sim}D_X^2FM.$$\nThis uses the two isomorphisms supplied in Step 5 and functoriality of [def-pur-derived-internal-hom].",
+   "uses": [
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, Lemma 6.5.3: iteration of the finite-map internal-Hom comparison"
+   }
+  },
+  {
+   "text": "We check the actual bidual maps by transposing maps $FM\\to D_XFD_YM$. Write $\\mu=\\mu_{M,D_YM}$. Steps 3--5 give the transpose of $b F\\eta_M$ as the following three equal expressions:\n$$t F(e_{D_YM})\\mu_{D_Y^2M,D_YM}(F\\eta_M\\otimes1)\n=t F(e_{D_YM}(\\eta_M\\otimes1))\\mu\n=t F(e_M)\\mu_{D_YM,M}\\sigma_{FM,FD_YM}.$$\nThe first equality is naturality of $\\mu$ in its first factor; the second uses the defining identity for $\\eta_M$ from Step 3 followed by the symmetry identity of Step 4. On the other hand, evaluation naturality from Step 3 says that the transpose of $(D_Xa)\\eta_{FM}$ is\n$$e_{FM}(a\\otimes1_{FM})\\sigma_{FM,FD_YM},$$\nwhich is exactly the last expression by the normalization in Step 5. Transposition is injective, so $b F\\eta_M=(D_Xa)\\eta_{FM}$. Multiplication by $(D_Xa)^{-1}$ now gives $\\beta_M F\\eta_M=\\eta_{FM}$. This verifies compatibility with the evaluation-transpose maps, rather than merely comparing their source and target objects.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, proof of Proposition 6.3.1: explicit evaluation/symmetry calculation for compatibility with weak reflexivity; Lemma 6.5.3"
+   }
+  },
+  {
+   "text": "Apply $\\mathcal H^q$ to the isomorphism $\\beta_M$ of Step 6. The termwise calculation in Step 2 identifies its source with $p_*\\mathcal H^q(D_Y^2M)$ and its target with $\\mathcal H^q(D_X^2p_*M)$. This gives the required isomorphism for every $q\\in\\mathbf Z$. The identification uses only the kernel/image description of cohomology in [def-weil-derived-cohomology-sheaves] and exactness, so includes negative degrees and commutes with the maps checked in Step 7.",
+   "uses": [
+    "def-weil-derived-cohomology-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, Lemma 6.5.3, displayed canonical cohomology isomorphism, printed p.299"
+   }
+  },
+  {
+   "text": "Finally assume $p$ is surjective. By [lem-weil-pbc-constant-sheaf-geometric-stalk], the stalk of $\\Lambda_X$ at $\\bar x$ is $\\Lambda$. The finite stalk formula of Step 1 identifies the target stalk with $\\prod_{\\bar y\\in Y_{\\bar x}}\\Lambda$. The unit sends a constant local section $\\lambda$ to its pullback constant section, whose germ at every $\\bar y$ is $\\lambda$; its stalk is therefore the diagonal map $\\lambda\\mapsto(\\lambda)_{\\bar y}$. The fibre is nonempty by surjectivity, so projection to any factor is a left inverse to this diagonal. It is injective. Apply [lem-weil-pbc-geometric-stalks-detect-mono] to the underlying abelian sheaf map: all its geometric stalks are injective, hence it is a monomorphism. The same holds as a module-sheaf map since a zero kernel is detected on the underlying abelian sheaf.",
+   "uses": [
+    "lem-weil-pbc-constant-sheaf-geometric-stalk",
+    "lem-weil-pbc-geometric-stalks-detect-mono"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, last paragraph of 6.5, printed p.300: monomorphism for a finite surjection; Stacks 03PU (theorem-exactness-stalks)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lemma-weil-pbc-finite-stalk-formula",
+  "lemma-weil-pbc-finite-direct-image-exact",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "lem-weil-pbc-finite-pushforward-constructible-noetherian",
+  "def-weil-pbc-constructible-complexes",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-pur-rhom-global-sections",
+  "lem-kun-tensor-sym",
+  "def-kun-projection-formula-map",
+  "lem-kun-inverse-image-monoidal",
+  "lem-per-finite-exceptional-internal-hom",
+  "lem-asd-internal-adjunction-evaluation",
+  "lem-amb-tensor-projection-adjunct",
+  "def-per-potential-dualizing-complex",
+  "def-pur-derived-internal-hom",
+  "def-weil-derived-cohomology-sheaves",
+  "lem-weil-pbc-constant-sheaf-geometric-stalk",
+  "lem-weil-pbc-geometric-stalks-detect-mono"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "XVII, Proposition 6.3.1 and Lemma 6.5.3, pp.297,299, plus the last paragraph of 6.5, p.300; expanded evaluation-transpose calculation from existing adjunction nodes"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -45,10 +179,38 @@
    "results": "[grep] OK 0 hit(s)",
    "date": "2026-10-18",
    "verdict": "no match: the returned declarations concern ordinary module duals, generic derived categories, sheaf infrastructure or algebra descent; none states this etale potential-duality assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite morphism of schemes etale pushforward commutes with Verdier duality and the evaluation biduality map",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, AlgebraicGeometry.Scheme.Modules.pushforwardComp_hom_app_app, AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj, AlgebraicGeometry.Scheme.Modules.pushforwardComp_inv_app_app, AlgebraicGeometry.Scheme.Modules.pushforwardComp, AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app",
+   "date": "2026-10-18",
+   "verdict": "no match: the saved hits are ordinary structure-sheaf module adjunctions, light condensed internal Hom, or generic slice-category adjunction triangles; none states finite etale potential-duality comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"verdier\"",
+   "results": "12 hits; CategoryTheory.ObjectProperty.IsVerdierLeftLocalizing, CategoryTheory.ObjectProperty.IsVerdierRightLocalizing, CategoryTheory.ObjectProperty.instIsVerdierLeftLocalizingOppositeOpOfIsVerdierRightLocalizing, CategoryTheory.ObjectProperty.instIsVerdierRightLocalizingOppositeOpOfIsVerdierLeftLocalizing, CategoryTheory.ObjectProperty.isVerdierLeftLocalizing_op_iff, CategoryTheory.ObjectProperty.isVerdierRightLocalizing_op_iff, CategoryTheory.ObjectProperty.instIsVerdierLeftLocalizingUnopOfIsVerdierRightLocalizingOpposite, CategoryTheory.ObjectProperty.instIsVerdierRightLocalizingUnopOfIsVerdierLeftLocalizingOpposite",
+   "date": "2026-10-18",
+   "verdict": "no match: the saved hits are ordinary structure-sheaf module adjunctions, light condensed internal Hom, or generic slice-category adjunction triangles; none states finite etale potential-duality comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact finite etale direct image intertwines derived internal Hom duality and its canonical bidual evaluation transformation",
+   "results": "8 hits; LightCondensed.ihom_map_val_app, CategoryTheory.ExponentiableMorphism.coev_ev, LightCondensed.ihomPoints_symm_comp, CategoryTheory.ExponentiableMorphism.coev_ev_assoc, LightCondensed.ihomPoints, LightCondensed.ihomPoints_symm_apply, CategoryTheory.ExponentiableMorphism.ev_coev, CategoryTheory.ExponentiableMorphism.ev_coev_assoc",
+   "date": "2026-10-18",
+   "verdict": "no match: the saved hits are ordinary structure-sheaf module adjunctions, light condensed internal Hom, or generic slice-category adjunction triangles; none states finite etale potential-duality comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite pushforward of etale sheaves preserves Verdier duality and the natural map into the double dual",
+   "results": "8 hits; SheafOfModules.pushforward_map_val, SheafOfModules.pushforward, TopCat.Sheaf.pushforward_obj_val, SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.instIsRightAdjointPushforward, TopCat.Presheaf.pushforwardPullbackAdjunction, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, SheafOfModules.pushforwardPushforwardAdj",
+   "date": "2026-10-18",
+   "verdict": "no match: the saved hits are ordinary structure-sheaf module adjunctions, light condensed internal Hom, or generic slice-category adjunction triangles; none states finite etale potential-duality comparison"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-gabber-local-duality-general",
@@ -60,7 +222,7 @@
  "blueprint": {
   "from": {
    "node": "lem-per-artin-gabber-affine-curve",
-   "place": "Proof, Step 3: the local duality input for the Verdier lower-bound argument; Finite direct image and evaluation biduality for potential complexes",
+   "place": "Proof, Step 1 of current lem-per-artin-gabber-affine-curve: relative Verdier duality and biduality over the same arbitrary field k; via lem-per-gabber-local-duality-general, finite direct image compares evaluation double duals in the proof of ILO XVII 6.1.1 (historically Step 3 at creation).",
    "via": [
     "lem-per-gabber-local-duality-general",
     "lem-per-potential-local-duality",
@@ -70,5 +232,109 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-potential-finite-bidual-comparison",
+  "worker": "stage1",
+  "summary": "Retained the previous sandbox item and logged Mathlib searches. Proved exactness and conservativity from existing finite stalk/exactness nodes, used the existing finite exceptional internal-Hom theorem, and wrote out the signed evaluation-transpose identity fixing the double-dual comparison and its variance. Cohomology and the unit monomorphism follow by exactness and stalks. No new nodes, statement changes, SGA sources, or Lean work.",
+  "blueprint": "Realizes the potential finite-coefficient duality input under current ancestor lem-per-artin-gabber-affine-curve, Proof Step 1 (Step 3 in historical ancestry). ILO XVII 6.3.1 supplies finite-map weak-reflexivity comparison, 6.5.3 its cohomology form, and the end of 6.5 the unit injection. The unit and chapter route is unchanged.",
+  "tool_uses": [
+   {
+    "node": "lemma-weil-pbc-finite-stalk-formula",
+    "why": "Generic Geometric stalk formula for finite direct image: used only in the explicitly cited proof step for ordinary finite-coefficient etale sheaves or derived categories; the perverse-curve unit supplies no replacement for this formal tool."
+   },
+   {
+    "node": "lemma-weil-pbc-finite-direct-image-exact",
+    "why": "Generic Exactness of finite direct image: used only in the explicitly cited proof step for ordinary finite-coefficient etale sheaves or derived categories; the perverse-curve unit supplies no replacement for this formal tool."
+   },
+   {
+    "node": "lemma-weil-pbc-geometric-stalk-conservative",
+    "why": "Generic Conservativity of geometric stalks: used only in the explicitly cited proof step for ordinary finite-coefficient etale sheaves or derived categories; the perverse-curve unit supplies no replacement for this formal tool."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-functor",
+    "why": "Generic The functor induced by an exact functor is its own right and left derived functor: used only in the explicitly cited proof step for ordinary finite-coefficient etale sheaves or derived categories; the perverse-curve unit supplies no replacement for this formal tool."
+   },
+   {
+    "node": "lem-weil-pbc-finite-pushforward-constructible-noetherian",
+    "why": "Generic Finite pushforward preserves constructibility on Noetherian schemes: used only in the explicitly cited proof step for ordinary finite-coefficient etale sheaves or derived categories; the perverse-curve unit supplies no replacement for this formal tool."
+   },
+   {
+    "node": "def-weil-pbc-constructible-complexes",
+    "why": "Generic Constructible finite-coefficient complexes: used only in the explicitly cited proof step for ordinary finite-coefficient etale sheaves or derived categories; the perverse-curve unit supplies no replacement for this formal tool."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "why": "Generic Derived internal Hom calculus on small ringed sites: used only in the explicitly cited proof step for ordinary finite-coefficient etale sheaves or derived categories; the perverse-curve unit supplies no replacement for this formal tool."
+   },
+   {
+    "node": "lem-pur-rhom-global-sections",
+    "why": "Generic Global sections of the derived internal Hom: used only in the explicitly cited proof step for ordinary finite-coefficient etale sheaves or derived categories; the perverse-curve unit supplies no replacement for this formal tool."
+   },
+   {
+    "node": "lem-kun-tensor-sym",
+    "why": "Generic Symmetry of the derived tensor product: used only in the explicitly cited proof step for ordinary finite-coefficient etale sheaves or derived categories; the perverse-curve unit supplies no replacement for this formal tool."
+   },
+   {
+    "node": "def-kun-projection-formula-map",
+    "why": "Generic The projection-formula morphism: used only in the explicitly cited proof step for ordinary finite-coefficient etale sheaves or derived categories; the perverse-curve unit supplies no replacement for this formal tool."
+   },
+   {
+    "node": "lem-kun-inverse-image-monoidal",
+    "why": "Generic Monoidality of the derived inverse image: used only in the explicitly cited proof step for ordinary finite-coefficient etale sheaves or derived categories; the perverse-curve unit supplies no replacement for this formal tool."
+   },
+   {
+    "node": "lem-asd-internal-adjunction-evaluation",
+    "why": "Generic Evaluation formula for the canonical internal compact-support adjunction: used only in the explicitly cited proof step for ordinary finite-coefficient etale sheaves or derived categories; the perverse-curve unit supplies no replacement for this formal tool."
+   },
+   {
+    "node": "lem-amb-tensor-projection-adjunct",
+    "why": "Generic Adjoint of a tensor-projected morphism: used only in the explicitly cited proof step for ordinary finite-coefficient etale sheaves or derived categories; the perverse-curve unit supplies no replacement for this formal tool."
+   },
+   {
+    "node": "def-pur-derived-internal-hom",
+    "why": "Generic Derived internal Hom on a ringed site: used only in the explicitly cited proof step for ordinary finite-coefficient etale sheaves or derived categories; the perverse-curve unit supplies no replacement for this formal tool."
+   },
+   {
+    "node": "def-weil-derived-cohomology-sheaves",
+    "why": "Generic Cohomology sheaves of a complex of modules over a sheaf of rings: used only in the explicitly cited proof step for ordinary finite-coefficient etale sheaves or derived categories; the perverse-curve unit supplies no replacement for this formal tool."
+   },
+   {
+    "node": "lem-weil-pbc-constant-sheaf-geometric-stalk",
+    "why": "Generic Geometric stalks of a constant etale sheaf: used only in the explicitly cited proof step for ordinary finite-coefficient etale sheaves or derived categories; the perverse-curve unit supplies no replacement for this formal tool."
+   },
+   {
+    "node": "lem-weil-pbc-geometric-stalks-detect-mono",
+    "why": "Generic Monomorphisms of etale sheaves are detected on a covering family of geometric stalks: used only in the explicitly cited proof step for ordinary finite-coefficient etale sheaves or derived categories; the perverse-curve unit supplies no replacement for this formal tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lemma-weil-pbc-finite-stalk-formula",
+  "lemma-weil-pbc-finite-direct-image-exact",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "lem-weil-pbc-finite-pushforward-constructible-noetherian",
+  "def-weil-pbc-constructible-complexes",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-pur-rhom-global-sections",
+  "lem-kun-tensor-sym",
+  "def-kun-projection-formula-map",
+  "lem-kun-inverse-image-monoidal",
+  "lem-asd-internal-adjunction-evaluation",
+  "lem-amb-tensor-projection-adjunct",
+  "def-pur-derived-internal-hom",
+  "def-weil-derived-cohomology-sheaves",
+  "lem-weil-pbc-constant-sheaf-geometric-stalk",
+  "lem-weil-pbc-geometric-stalks-detect-mono"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q45-b7c019a7b",
+  "group": "Q45",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q45-b7c019a7b (reviewer sub-agent of L); spot-checked: Read the item's 9 steps, all 19 cited statements and ILO XVII 6.3.1 (p.297), 6.5.3 (p.299) and the end of 6.5 (p.300). ILO cites SGA 5 I 1.12/1.13 for the comparison; the agent proof avoids SGA by going through lem-per-finite-exceptional-internal-hom (ILO XVII 5.4.1), so the route lock holds and proof_origin=agent is correct. Hypotheses of that lemma all hold: Λ finite, X and Y Noetherian, p finite, K_X in D^+, M and D_YM in D^+ by Step 2. I recomputed the Step 5 normalization e_{FA}(χ_A⊗1)=tF(e_A)μ: for finite p, Π is Rr_*(σ)PFσ=π_f, and its adjoint is (c⊗c)c, the same as μ's. The variance in Step 6 is right: β=(D_Xa)^{-1}b. I redid both transposes in Step 7, which gives βFη_M=η_{FM}, so the actual maps agree, not just objects. Cohomology commutes by exactness. The unit is the diagonal into a non-empty stalk product. Small cases checked: identity, closed immersion, empty Y, fold map, separable and inseparable point extensions. No new nodes; no duplicate found by searching dag/nodes for bidual, 6.3.1, 6.5.3, reflexiv and p_*D_Y patterns. I accept the 17 tool_uses as generic ordinary-étale tools. Batch-5: the newly cited lem-per-finite-exceptional-internal-hom reaches lem-pod-lisse-module-sheaves-as-module-objects only through the proper base change chain. That endpoint is a generic Stacks 0DV5 lisse-sheaf/module-object identification, not a step of the trace formula or Poincaré duality, so the citation is outside the assumed statements. Advisory only: the phrase 'pinned potential K_Y=p^!K_X' is set-up, and pinnedness is cited by the parent; Step 9 uses Step 1's stalk formula without repeating the citation."
  }
 }
