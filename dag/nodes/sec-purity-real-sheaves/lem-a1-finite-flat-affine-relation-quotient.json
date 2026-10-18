@@ -377,5 +377,29 @@
   "group": "NY",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NY-ba565122b (reviewer sub-agent of L); spot-checked: I read Stacks 03BM, 03BI, 03BJ, 03BK, 03BL, 03C8 (groupoids.tex 4194-4912), 03C1 and 02M9 (algebra.tex), and Mathlib IsClosedImmersion.iff_isFinite_and_mono (Finite.lean:124). The item statement matches 03BM without weakening; the extra surjectivity and S-structure conclusions are true. Steps 1-11 and 13 check against their sources and cited statements. The s/t convention swap is used consistently and matches 03C8. Step 8 is marked elementary; I accept it because the 03BI fibre argument is written out. Tested A=0, the trivial relation and U=Spec(k×k) with R=U×_kU. All five new nodes are statement-only, true and match their sources: 03BJ, 03BL, 03C8 finite case, 03BB as a correct Mathlib leaf, and 03C1 combined with 02M9. rg over the DAG found no duplicates, and none restates a clause of the item. FIX to step 12: the claim that finite local freeness is 'local on the target by its definition' fails for the DAG's every-affine-open definition of finite. Step 12 now gets finite projective from flat plus finitely presented via lem-weil-pbc-finitely-presented-flat-module-projective (00NX, the lemma 03BM cites), uses a principal-open free cover, and proves finiteness over an arbitrary affine V directly through the affine fibre-product formula. Its uses, source and proof_deps are updated. Batch-5 check: lem-trf-finite-projective-local-free is removed by the fix. lem-trf-finite-presentation-module-descent-flat-local (Algebra 03C4(2), the lemma 03BM cites) and lem-trf-fppf-covering-base-change (021O(3), a Mathlib leaf) are kept. Both are generic algebra or site facts that neither assumption gives; they bring no trace-formula statement into the closure, and no non-trf node states them. The declared generic tool_uses are accepted. No SGA is cited.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d5c1e9f55",
+  "group": "Q10",
+  "result": "pass",
+  "note": "Every node clause matches the Lean theorem finiteFlat_affineRelation_quotient. S is an arbitrary scheme; U=Spec A and R=Spec B are over S through Over.mk; s and t are Over-morphisms with IsFiniteLocallyFree (the recorded FiberDegree class: finite, flat, locally of finite presentation). The equivalence-relation hypothesis is Mono (prod.lift s t) plus hrel over all H : Over S. C is RingHom.eqLocus of the Spec.homEquiv coordinate maps (real data), and q is Spec.map of C.subtype (canonical). The conclusions are: q finite locally free and AlgebraicGeometry.Surjective; R isomorphic to pullback q q with fst=s and snd=t; a unique m with q≫m=a; yoneda(Over.mk m) an fppf sheaf; and the canonical η from the Yoneda coequalizer with bijective precomposition into every fppf sheaf (the sheafification universal property). This follows the published EtaleAffineQuotientRepresentable pattern. Nothing is weakened and nothing is added. Edge cases A=0, the identity relation and Spec(k×k) are fine; the universe u is uniform. Every declaration has source and blueprint docstrings, the 13 proof steps are in the docstring, and there is a single sorry. lean.statement is verbatim and the node diff is lean-only. nt_compile --json on the snapshot module compiled clean in 2.0 s, and a probe confirmed the signature, the helper membership equation and the class contents. Process note: the Second reading section only records the 2026-10-17 direct-delivery rule; this review is the independent reading."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteFlatAffineRelationQuotient",
+  "declaration": "AlgebraicGeometry.finiteFlat_affineRelation_quotient",
+  "declarations": [
+   "AlgebraicGeometry.affineRelationInvariants",
+   "AlgebraicGeometry.affineRelationQuotientMap",
+   "AlgebraicGeometry.finiteFlat_affineRelation_quotient"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteFlatAffineRelationQuotient.lean",
+  "statement": "theorem finiteFlat_affineRelation_quotient {S : Scheme.{u}} {A B : CommRingCat.{u}} (a : Spec A ⟶ S) (b : Spec B ⟶ S) (s t : Over.mk b ⟶ Over.mk a) [Mono (prod.lift s t)] [s.left.IsFiniteLocallyFree] [t.left.IsFiniteLocallyFree] (hrel : ∀ H : Over S, Equivalence (fun x y : H ⟶ Over.mk a ↦ ∃ r : H ⟶ Over.mk b, r ≫ s = x ∧ r ≫ t = y)) : (affineRelationQuotientMap s.left t.left).IsFiniteLocallyFree ∧ Surjective (affineRelationQuotientMap s.left t.left) ∧ (∃ e : Spec B ≅ pullback (affineRelationQuotientMap s.left t.left) (affineRelationQuotientMap s.left t.left), e.hom ≫ pullback.fst _ _ = s.left ∧ e.hom ≫ pullback.snd _ _ = t.left) ∧ ∃ m : Spec (CommRingCat.of (affineRelationInvariants s.left t.left)) ⟶ S, ∃ hq : affineRelationQuotientMap s.left t.left ≫ m = a, (∀ m' : Spec (CommRingCat.of (affineRelationInvariants s.left t.left)) ⟶ S, affineRelationQuotientMap s.left t.left ≫ m' = a → m' = m) ∧ Presheaf.IsSheaf (Scheme.fppfTopology.over S) (yoneda.obj (Over.mk m)) ∧ ∃ η : coequalizer (yoneda.map s) (yoneda.map t) ⟶ yoneda.obj (Over.mk m), coequalizer.π (yoneda.map s) (yoneda.map t) ≫ η = yoneda.map (Over.homMk (affineRelationQuotientMap s.left t.left) hq) ∧ ∀ G : Sheaf (Scheme.fppfTopology.over S) (Type u), Function.Bijective (fun k : yoneda.obj (Over.mk m) ⟶ G.obj ↦ η ≫ k)",
+  "branch": "newtargets-dag",
+  "by": "Q10",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "The two helper definitions specialize RingHom.eqLocus to Spec.homEquiv and take Spec of its subtype inclusion. The quotient presheaf is the Yoneda coequalizer, and its sheafification is expressed by the universal property of the canonical unit, without assuming sheafification of all Type u-valued presheaves on the big site."
  }
 }

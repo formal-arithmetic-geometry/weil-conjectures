@@ -320,5 +320,32 @@
   "group": "Q29",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q29-01db7b331 (reviewer sub-agent of L); spot-checked: Read in full: the item, the new node lem-sfb-continuous-integral-matrix-local-smith, the unit sk-def-sfb-dc-restricted-functors, the first sentence of the ancestor lem-sfb-dc-hom-preserves proof, and the statements of all 26 cited nodes. HRS checked at Example 3.1, Theorem 6.2(2)/(3), Remark 6.4, Lemma 6.10/Corollary 6.11 and the Theorem 6.12(2) proof (the pivot/division step f=a·h). The coefficient ring p_X^*C(-,O_E) is the same object in the sfb and pbc chapters: the pullback from the point uses the same Lan/LC(S,Z) construction, and for finite E the topology on O_E is its valuation topology. No SGA source is cited. Step 1: |X| is Noetherian by the minimal-closed-subset leaf, and the subspace ACC argument (H_j∩T=O_j) is correct; Cartesian coefficients give exact pullback of presentations; covers are flat and jointly surjective. Step 2: O_E is totally disconnected, so the realization lemma applies; matrix entries are continuous, and specialization invariance holds because A is T1. Step 3: common extension field and algebraic closure give a=b over T. Geometric-field evaluation, point coefficients and integral-regular-coefficient-pullback then give Q_{i,v}≅M_Ω(Ω)≅Q_{j,w} as full A-modules, so torsion is kept. The fibre-product citation is redundant but harmless. Step 4: the rank-descent statement allows any target type; all its hypotheses come from steps 1-3. Step 5: Smith is applied only after local constancy. Continuous L,R are mutually inverse sheaf automorphisms. coker D≅B⊗_A P follows from the universal property (Hom from constant P_W equals Hom_A(P,N(W))), with no flatness needed, and the composed open/pro-étale covers are pro-étale covers. Step 6: the converse by explicit generators and relations is correct. New node is true, by an independent check: with m,n fixed, the cokernel class fixes the Smith list; the minimal-valuation pivot set is open; dividing by p is continuous and stays in A; structure-theorem cancellation drives the induction. Tested on Y empty, m=0 or n=0, F=0, F=(π^a), F=(1), and mixed rectangular cases; F(y)=y on {0}∪{π^k} is correctly excluded. It is a topological lemma strictly smaller than the item, not a clause of it. Duplicate candidates opened and rejected: scalar DVR Smith, field matrix elimination, pivot/analytic covers, the four integral-lfp torsion/resolution nodes, condensed-lfp-local-triviality, det-def-sfb-constructible-local-model. No cycle; proof_deps equals the union of step uses; blueprint from/via/same_as are correct. Accepted the 8 declared generic tool uses: continuous-coefficient-realizations, geometric-field-proetale-evaluation, condensed-field-rank-descent, l-adic-extension-integers-dvr, integral-regular-coefficient-pullback, sk-prop-sfb-cartesian-coefficients, det-pe-condensed-point-coefficients, common-extension-fields. No statement weakened; no fixes made. Only cosmetic point: the new node's blueprint key is out of order."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2bbacc819",
+  "group": "Q29",
+  "result": "fix",
+  "note": "Statement correct clause by clause: CompactSpace+IsLocallyNoetherian X; A=latticeCoefficientIntegers (valuation topology via WithAbs); B_X=coefficientRing X (Mon.mk integralCondensedRing), rfl-checked equal to condensedRingObj/upperStarFromPoint; (i)=upstream IsConstructibleModuleObject (finite constructible locally closed Scheme.Stratification, pro-etale-local Mod.IsFinitelyPresented); (ii)=IsConstantModelConstructible (qcqs branch: stratified finite constant models p^*P with P finitely presented over the condensed ring on the point, i.e. B⊗_A P); no extra assumptions; torsion, empty scheme, zero and rank-zero cases covered; E in universe u justified and no case lost. Dependency records for IsConstructibleModuleObject/IsLocallyFinitelyPresented are exact; the sk-def-sfb-condensed-ring record (generic continuousMapRingObjOfUniverse) is acceptable. Upstream padicIntegersRingObj needs E:Type 0 embedded in PadicAlgCl, so it is not a duplicate. Finding H8, fixed: the five helpers in lean.declarations lacked source/blueprint docstrings and the theorem docstring did not give the node proof step by step; fixes/IntegralLfpConstantModelComparison.lean adds them, comments only, signature byte-identical. nt_compile (--json, side overlay): snapshot and fixed file both compile with no errors; only the theorem's sorry (#print axioms)."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.IntegralLfpConstantModelComparison",
+  "declaration": "AlgebraicGeometry.ProEtale.integralLfpConstantModelComparison",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.integralCondensedRing",
+   "AlgebraicGeometry.ProEtale.integralCondensedRingMonObj",
+   "AlgebraicGeometry.ProEtale.integralCondensedRingComm",
+   "AlgebraicGeometry.ProEtale.integralCoefficientRing",
+   "AlgebraicGeometry.ProEtale.integralCoefficientRingMonObj",
+   "AlgebraicGeometry.ProEtale.integralLfpConstantModelComparison"
+  ],
+  "statement": "theorem integralLfpConstantModelComparison (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (ℚ_[l]) E] [FiniteDimensional (ℚ_[l]) E] (X : Scheme.{u}) [CompactSpace X] [IsLocallyNoetherian X] (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (integralCoefficientRing l E X).X) : IsConstructibleModuleObject (integralCoefficientRing l E X).X M ↔ IsConstantModelConstructible (integralCondensedRing l E) X M",
+  "by": "Q29",
+  "date": "2026-10-18",
+  "branch": "newtargets-dag",
+  "file": "lean/Sheaf/Paper/IntegralLfpConstantModelComparison.lean",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-2bbacc819"
  }
 }

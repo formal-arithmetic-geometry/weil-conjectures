@@ -25,7 +25,8 @@
   "def-weil-pbc-proetale-site",
   "def-weil-sheaf-of-modules-category",
   "sk-def-sfb-constructible",
-  "def-constructible-stratification"
+  "def-constructible-stratification",
+  "def-weil-finite-subextension-directed-set"
  ],
  "proof": [
   {
@@ -319,5 +320,23 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-588152c8e",
+  "group": "Q28",
+  "result": "pass",
+  "note": "Read the whole packet, the snapshot module, the node and the report, the exact declarations used (IsConstantModelConstructible and its stratified/local-model parts, padicIntegersRingObj and PadicAlgCl.integers, condensedRingObj, FiniteCoefficientFields), and Bhatt–Scholze Def 6.8.10 and Prop 6.8.11(1). Every clause matches: IsNoetherian is quasi-compact plus locally Noetherian, Fact ℓ.Prime, E is a finite subfield of the fixed closure, the coefficients are the pulled-back condensed O_E, closure under ambient kernels and cokernels, and ShortExact gives the middle term. No extra hypotheses; universes are the dependency's. A probe showed constructibility reduces to the stratified branch for Noetherian X, and the dependency's constructible-strata requirement is automatic there. Node changes are limited to lean plus one added landed stmt_dep (allowed). lean.statement is verbatim. No duplicate found. sorry only, axioms standard plus sorryAx. Docstrings carry the source place and blueprint tag. Both report sections present. nt_compile.py clean in 2.8 s. Minor and not blocking: the report names FiniteLocallyClosedStratification where the predicate uses upstream Scheme.Stratification (equivalent here), and two imports are unused."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.IntegralConstantModelHeartClosure",
+  "declaration": "AlgebraicGeometry.ProEtale.isConstantModelConstructible_serre_padicIntegers",
+  "file": "lean/Sheaf/Paper/IntegralConstantModelHeartClosure.lean",
+  "statement": "theorem isConstantModelConstructible_serre_padicIntegers (X : Scheme.{u}) [IsNoetherian X] (ℓ : ℕ) [Fact ℓ.Prime] (E : Padic.FiniteCoefficientFields ℓ (PadicAlgCl ℓ)) : (∀ (M N : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.val) X)) (f : M ⟶ N), IsConstantModelConstructible (Profinite.padicIntegersRingObj ℓ E.val) X M → IsConstantModelConstructible (Profinite.padicIntegersRingObj ℓ E.val) X N → IsConstantModelConstructible (Profinite.padicIntegersRingObj ℓ E.val) X (kernel f) ∧ IsConstantModelConstructible (Profinite.padicIntegersRingObj ℓ E.val) X (cokernel f)) ∧ (∀ S : ShortComplex (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.val) X)), S.ShortExact → IsConstantModelConstructible (Profinite.padicIntegersRingObj ℓ E.val) X S.X₁ → IsConstantModelConstructible (Profinite.padicIntegersRingObj ℓ E.val) X S.X₃ → IsConstantModelConstructible (Profinite.padicIntegersRingObj ℓ E.val) X S.X₂)",
+  "branch": "newtargets-dag",
+  "by": "Q28",
+  "date": "2026-10-18",
+  "existing": false
  }
 }

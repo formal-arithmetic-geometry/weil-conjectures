@@ -292,5 +292,28 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0b1c0a21e",
+  "group": "Q14",
+  "result": "fix",
+  "note": "Read the node, blueprint source sk-prop-ind-heart-full-faithfulness.md, every stmt_dep declaration, the module, and the report (Worker report and Second reading present); compiled with nt_compile.py. Findings, all repaired in fixes/: (1) unbound universes: the theorem was .{u_1,u_2,u_3}, with IsFinitelyPresentable.{u_2} and ObjectProperty.ind.{u_3} free; both now .{u+1}, as in the landed sibling det-ind-heart-filtered-colimits. (2) Free [MonObj Λ] [IsCommMonObj Λ] with hΛ only equating the underlying abelian sheaf allowed an arbitrary ring structure; the clauses are now the Prop definition IndHeartFullFaithfulnessAssertions, stated for continuousMapRingObj E (all finite E) and padicAlgClRingObj ℓ with canonical instances. (3) Φ was not tied to the realization; added Nonempty (Ind.yoneda ⋙ Φ ≅ ObjectProperty.ι Cons), which with the presentation-colimit clause pins Φ up to isomorphism. (4) Removed the global instance monObj_condensedRingObj, which duplicated the recorded scoped Functor.monObjObj; the fix uses open scoped CategoryTheory.Obj. The fixed module compiles cleanly (only sorry) with a single universe u. fixes/ has the full module, the lean-record.json (declaration, declarations, note; statement re-read from the file) and the report with a maintainer section. merge_delivery.py was not run on the fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.IndHeartFullFaithfulness",
+  "file": "lean/Sheaf/Paper/IndHeartFullFaithfulness.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.indHeart_fullFaithfulness",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.IndHeartFullFaithfulnessAssertions"
+  ],
+  "statement": "theorem indHeart_fullFaithfulness (ℓ : ℕ) [Fact ℓ.Prime] (X : Scheme.{u}) [IsLocallyNoetherian X] [CompactSpace X] : (∀ E : PadicAlgCl.FiniteIntermediateField ℓ, IndHeartFullFaithfulnessAssertions (Profinite.continuousMapRingObj.{u} E) X) ∧ IndHeartFullFaithfulnessAssertions (Profinite.padicAlgClRingObj.{u} ℓ) X",
+  "branch": "newtargets-dag",
+  "by": "Q14",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Reviewer fix (stage-2 maintainer review of head 0b1c0a21e32e): (1) the delivered theorem had two unbound universes, IsFinitelyPresentable.{u_2} and ObjectProperty.ind.{u_3}; both are now .{u + 1}, the hom universe of Mod_{Λ_X} and the index universe of CategoryTheory.Ind (small diagrams of def-weil-size-convention), as in the landed sibling det-ind-heart-filtered-colimits; (2) the free [MonObj Λ] [IsCommMonObj Λ] binders, tied to the coefficient only by an equation of underlying abelian sheaves, allowed an arbitrary ring structure; the assertions are now stated as IndHeartFullFaithfulnessAssertions for Profinite.continuousMapRingObj E (every finite intermediate E) and Profinite.padicAlgClRingObj ℓ with their canonical instances; (3) Φ is now identified with the realization by the added clause Nonempty (Ind.yoneda ⋙ Φ ≅ ObjectProperty.ι Cons) together with the existing presentation-colimit clause; (4) the global helper instance monObj_condensedRingObj duplicated the canonical scoped instance Functor.monObjObj of CategoryTheory.Obj and is removed (open scoped CategoryTheory.Obj).",
+  "fixed_by": "NT-stage2-cc-0b1c0a21e"
  }
 }

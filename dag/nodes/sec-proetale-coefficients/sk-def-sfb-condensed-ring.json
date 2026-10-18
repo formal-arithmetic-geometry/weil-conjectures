@@ -299,5 +299,23 @@
    "missing": [],
    "open": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2bbacc819",
+  "group": "Q29",
+  "result": "fix",
+  "note": "Statement correct clause by clause: CompactSpace+IsLocallyNoetherian X; A=latticeCoefficientIntegers (valuation topology via WithAbs); B_X=coefficientRing X (Mon.mk integralCondensedRing), rfl-checked equal to condensedRingObj/upperStarFromPoint; (i)=upstream IsConstructibleModuleObject (finite constructible locally closed Scheme.Stratification, pro-etale-local Mod.IsFinitelyPresented); (ii)=IsConstantModelConstructible (qcqs branch: stratified finite constant models p^*P with P finitely presented over the condensed ring on the point, i.e. B⊗_A P); no extra assumptions; torsion, empty scheme, zero and rank-zero cases covered; E in universe u justified and no case lost. Dependency records for IsConstructibleModuleObject/IsLocallyFinitelyPresented are exact; the sk-def-sfb-condensed-ring record (generic continuousMapRingObjOfUniverse) is acceptable. Upstream padicIntegersRingObj needs E:Type 0 embedded in PadicAlgCl, so it is not a duplicate. Finding H8, fixed: the five helpers in lean.declarations lacked source/blueprint docstrings and the theorem docstring did not give the node proof step by step; fixes/IntegralLfpConstantModelComparison.lean adds them, comments only, signature byte-identical. nt_compile (--json, side overlay): snapshot and fixed file both compile with no errors; only the theorem's sorry (#print axioms)."
+ },
+ "lean": {
+  "module": "Sheaf.Topology.ContinuousMapCondensedRing",
+  "declaration": "Profinite.continuousMapRingObjOfUniverse",
+  "statement": "def continuousMapRingObjOfUniverse (T : Type v) [TopologicalSpace T] [Ring T] [IsTopologicalRing T] : Sheaf (coherentTopology Profinite.{u}) AddCommGrpCat.{max u v + 1}",
+  "branch": "newtargets-dag",
+  "by": "Q29",
+  "date": "2026-10-18",
+  "existing": true,
+  "note": "§1(B): the generic condensed-ring notion is represented by the existing ring-object interface; this exact universe-polymorphic declaration supplies the continuous-function condensed ring used for the valuation ring A in the item, with its MonObj and commutative instances."
  }
 }

@@ -108,5 +108,23 @@
   "group": "Q31",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q31-2715c05d6 (reviewer sub-agent of L); spot-checked: I read the item, the cited node lem-a1-space-etale-open-image (same unit sk-p-real-rankin, so no tool use is needed), the four stmt_deps, the citer lem-a1-space-affine-atlas-open-cover, and Stacks spaces-properties.tex Tag 06NF lemma-etale-image-open (lines 536-559) with lemma-factor-through-open-subspace, 03BZ lemma-open-subspaces, lemma-characterize-surjective and lemma-scheme-points. The item agrees with 06NF. The extra 'representable' hypothesis is automatic for a map from a scheme, and the U/R presentation clause it drops is used by no citer. The one step substitutes E=h_U, F=X, q=f into the cited general statement and gets every clause from that statement, not from its proof (C3/C4 OK). The item states no new node, so there is no D1 relabelling, and settling a special case by citing its generalization is what the brief prescribes. A DFS from the cited node does not reach the item, so there is no cycle. Edge cases checked: U empty, f an open immersion, f a surjective atlas, and the squaring map on A^1 minus 0. One fault, B4: the step text had \\to written as a single-backslash JSON escape in three places, so it decoded to TAB+'o'. I repaired it in fixes/dag/nodes/sec-purity-real-sheaves/lem-a1-etale-scheme-map-open-image.json, where only proof[0].text changed: the escapes are fixed, the inclusion j is named, and the |U|=|h_U| identification is spelled out. No SGA, no tool_uses.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e3d1d3525",
+  "group": "NJ",
+  "result": "pass",
+  "note": "Read the node, its 4 stmt_deps (including AlgebraicSpace.lean in full), Stacks spaces-properties.tex 06NF (l.535-559), the module, the report and the delivery diff (only the node's lean field added). Every clause matches: AlgebraicSpace/IsRepresentable/IsEtale/IsSurjective/IsRepresentableWith(IsOpenImmersion p.left) from the dependency, injective inclusion components, ff ≫ j = f, and the field-point clause, which is equivalent to |Xf| = im|U| because j is open. Single universe u, no unbound variables, lean.statement verbatim. Edge cases: U empty, open immersion, atlas, rational-point lift failure, non-mono etale, S empty. No duplicate declaration in Mathlib or lean/Sheaf. No definitions, sorry only, docstrings with source and blueprint. nt_compile (--json) clean, exit 0; a broken-identifier control gave an error. The second-reading section reflects the 2026-10-17 rule, accepted. No findings."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleSchemeMapOpenImage",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.etaleSchemeMap_openImage",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleSchemeMapOpenImage.lean",
+  "statement": "theorem etaleSchemeMap_openImage {S : Scheme.{u}} (X : AlgebraicSpace S) (U : Over S) (f : yoneda.obj U ⟶ X.obj.obj) (hf : IsRepresentable f) (he : IsEtale f) : ∃ (Xf : AlgebraicSpace S) (j : Xf ⟶ X) (ff : yoneda.obj U ⟶ Xf.obj.obj), (∀ T : (Over S)ᵒᵖ, Function.Injective (j.hom.hom.app T)) ∧ IsRepresentableWith (fun _ _ p ↦ IsOpenImmersion p.left) j.hom.hom ∧ ff ≫ j.hom.hom = f ∧ IsRepresentable ff ∧ IsSurjective ff ∧ IsEtale ff ∧ ∀ (K : Type u) [Field K] (s : Spec (CommRingCat.of K) ⟶ S) (x : X.obj.obj.obj (op (Over.mk s))), (∃ y : Xf.obj.obj.obj (op (Over.mk s)), j.hom.hom.app _ y = x) ↔ ∃ (L : Type u) (_ : Field L) (e : K →+* L) (y : Over.mk (Spec.map (CommRingCat.ofHom e) ≫ s) ⟶ U), f.app _ y = X.obj.obj.map (Over.homMk (Spec.map (CommRingCat.ofHom e)) rfl).op x",
+  "branch": "newtargets-dag",
+  "by": "NJ",
+  "date": "2026-10-18",
+  "existing": false
  }
 }

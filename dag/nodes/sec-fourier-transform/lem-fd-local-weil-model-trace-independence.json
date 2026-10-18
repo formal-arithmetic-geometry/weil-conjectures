@@ -304,5 +304,31 @@
   "group": "N9",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N9-78317245f (reviewer sub-agent of L); spot-checked: I read the item, its parent def-fd-trace-function, the source (main-20261015 sk-def-trace/def-fd-trace-function.md, order 3033), the unit and chapter, and the full statements of all 13 cited nodes. The statement is correct and not weakened. It stays in the framework rational categories (raw localization, no Karoubi completion). b_M is the inverse rationalized point-sections comparison φ followed by Fib_{s,L} of the specified comparison a_{x̄}; I checked its direction and type. The point return is g_X^n x̄ = x̄ g_s^n, as in def-weil-local-frobenius-trace. The statement matches the parent's use, which needs degreewise trace agreement of two models over a common extension. Step-by-step: I re-derived the inductions of steps 2, 3 and 5. Step 5 uses the composition/scalar equation of lem-trf-integral-pullback-comparison-realization with h=g^r, k=g. I checked naturality of R_F and the conjugacy chain in step 4. In step 6 I checked that the pasting identity D_L(a_n) b(R_F⊗L) = R_L b is well typed. Its pasting uses the Qlb scalar clause of lem-weil-frobenius-point-transport-natural (2), naturality at L, and equality/iteration compatibility. Step 7 is pure cancellation. Step 8 uses naturality of H^j⊗L. Step 9 uses trace laws (1),(3),(4) on field complexes; the same equality is also elementary from def-weil-endomorphism-trace. proof_deps equals the union of the uses. Small cases I checked: n=1, E=E'=L, rank-one α, Jordan block, zero cohomology, empty point set, shifts. No new nodes. Duplicate candidates are not duplicates: lem-weil-local-frobenius-conjugacy-class and lem-trf-local-frobenius-conjugacy change the point, and lem-rp-local-frobenius-models-agree compares an integral lattice model at one field. I accept all six declared tool uses as generic comparison and trace infrastructure. There is no SGA citation and no route or chapter change. Minor and not changed: source.place's phrase 'final sentence' describes the implicit well-definedness obligation, not literal text. I made no fixes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a21643f0f",
+  "group": "Q08",
+  "result": "pass",
+  "note": "Every hypothesis and conclusion clause matches the node, none stronger: separated finite type (LOFT+QC+IsSeparated, no properness), finite subfields of c.Qbar with E,E' ≤ L, recorded sfWeilComplex pairs, u an IsoAlgebra iso of the extended pairs, n≥1. Helper directions checked against the declarations they use: localWeilModelScalar gives θ_L = ext θ ∘ a₁⁻¹ (node step 5); b_M = pointRationalFibreScalarIso⁻¹ then Fib_L of rationalPullbackScalarComparison at x̄ (normalized by the cited sections comparison and scalarPullbackCompleted); ũ_x = b ≫ Fib(x̄*u) ≫ b'⁻¹ as in the node; the cohomology conjugacy uses fieldDerivedHomologyIso for every j∈ℤ; ordinary LinearMap.trace equal in L and in Qbar (equivalent forms). Edge cases n=1, empty X₀, zero cohomology, negative j, E=E'=L checked; single universe u, nothing unbound. No hollow defs, the main theorem's sorry is the only one, docstrings carry source and blueprint tags, lean.statement verbatim, node differs from the side clone only in its lean field, no duplicate. Report has the Worker report and an author's own Second reading by Q08. nt_compile --json: exit 0, no diagnostics, 8 s. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.LocalWeilModelTraceIndependence",
+  "declaration": "WeilConjectures.localWeilModelTraceIndependence",
+  "declarations": [
+   "WeilConjectures.localWeilModelScalar",
+   "WeilConjectures.localWeilModelPointScalar",
+   "WeilConjectures.localWeilModelPointIso",
+   "WeilConjectures.localWeilModelCohomologyIso",
+   "WeilConjectures.localWeilModelDegreeTrace",
+   "WeilConjectures.localWeilModelTraceIndependence"
+  ],
+  "file": "lean/Sheaf/Paper/LocalWeilModelTraceIndependence.lean",
+  "statement": "theorem localWeilModelTraceIndependence (D : FiniteFieldDatum.{u}) (c : D.CoefficientDatum) (X₀ : Over (Spec (.of D.k₀))) [LocallyOfFiniteType X₀.hom] [QuasiCompact X₀.hom] [IsSeparated X₀.hom] (E E' L : Padic.FiniteCoefficientFields c.l c.Qbar) (hEL : E ≤ L) (hE'L : E' ≤ L) (V : sfWeilComplex D c.l c.different X₀ E.val) (V' : sfWeilComplex D c.l c.different X₀ E'.val) (u : localWeilModelScalar D c X₀ E L hEL V ≅ localWeilModelScalar D c X₀ E' L hE'L V') (n : ℕ) (hn : 1 ≤ n) (x : D.extensionPoints X₀ n hn) : (localWeilModelPointIso D c X₀ E L hEL E' hE'L V V' u (localExtensionPoint D X₀ n hn x)).hom ≫ (DerivedCategory.pointFdScalarExtension (IntermediateField.inclusion hE'L).toRingHom).map (localExtensionFrobenius c.l E'.val D c.different X₀ V' n hn x) = (DerivedCategory.pointFdScalarExtension (IntermediateField.inclusion hEL).toRingHom).map (localExtensionFrobenius c.l E.val D c.different X₀ V n hn x) ≫ (localWeilModelPointIso D c X₀ E L hEL E' hE'L V V' u (localExtensionPoint D X₀ n hn x)).hom ∧ ∀ j : ℤ, (localWeilModelCohomologyIso D c X₀ E L hEL E' hE'L V V' u (localExtensionPoint D X₀ n hn x) j).hom ≫ (ModuleCat.extendScalars (IntermediateField.inclusion hE'L).toRingHom).map (localExtensionFrobeniusCohomology c.l E'.val D c.different X₀ V' n hn x j) = (ModuleCat.extendScalars (IntermediateField.inclusion hEL).toRingHom).map (localExtensionFrobeniusCohomology c.l E.val D c.different X₀ V n hn x j) ≫ (localWeilModelCohomologyIso D c X₀ E L hEL E' hE'L V V' u (localExtensionPoint D X₀ n hn x) j).hom ∧ (IntermediateField.inclusion hEL) (localWeilModelDegreeTrace D c X₀ E V n hn x j) = (IntermediateField.inclusion hE'L) (localWeilModelDegreeTrace D c X₀ E' V' n hn x j) ∧ E.val.subtype (localWeilModelDegreeTrace D c X₀ E V n hn x j) = E'.val.subtype (localWeilModelDegreeTrace D c X₀ E' V' n hn x j)",
+  "branch": "newtargets-dag",
+  "by": "Q08",
+  "date": "2026-10-18",
+  "existing": false
  }
 }

@@ -361,5 +361,40 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5d4b9b2e0",
+  "group": "Q30",
+  "result": "pass",
+  "note": "Statement matches node det-lem-formal-closed-support-adjunction clause by clause: arbitrary condensed ring (MonObj only), closed i, open quasi-compact j with range complement, Gamma_Z = i^* ker(unit of j-adjunction); (1) kernel comparison iso, adjunction i_* -| Gamma_Z with counit normalized, PreservesFiniteLimits; (2) canonical derived adjunction via mapDerivedCategoryRightDerivedAdjunction with i_* exactness concluded, plus Gamma_Z(I) K-injective, derivation unit iso on K-injectives and an iso of global Hom complexes with componentwise homEquiv (= RHom iso); (3) Epi of open unit on injectives; (4) natural delta with distinguished triangle (canonical counit, canonical unit, delta) for all K, fibre formula for every distinguished fibre triangle. FormalSupportModules is rfl-equal to the recorded condensedModuleCategory; the inverse image is defeq to the recorded proEtaleSheafInverseImage; upstream rightDerivedFunctor is the existing canonical construction. Edge cases (empty schemes, zero ring, noncommutative, unbounded) covered; HasDerivedCategory.{u+2} is the size convention; no extra hypotheses. Only the lean field of the node changed; statement verbatim; docstrings and proof plan present; lines <=100; only sorry is the theorem proof (axioms checked); no hollow defs. nt_compile.py (local side overlay) clean in 6.1 s. Minor only: short author-written second-reading section."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FormalClosedSupportAdjunction",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.formal_closed_support_adjunction",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.FormalSupportModules",
+   "AlgebraicGeometry.ProEtale.CondensedRing.formalSupportModules_grothendieck",
+   "AlgebraicGeometry.ProEtale.CondensedRing.formalSupportPullback",
+   "AlgebraicGeometry.ProEtale.CondensedRing.formalSupportPullbackAdjunction",
+   "AlgebraicGeometry.ProEtale.CondensedRing.formalSupportPullback_additive",
+   "AlgebraicGeometry.ProEtale.CondensedRing.formalSupportPullback_preservesFiniteLimits",
+   "AlgebraicGeometry.ProEtale.CondensedRing.formalSupportPullback_preservesFiniteColimits",
+   "AlgebraicGeometry.ProEtale.CondensedRing.formalSupportKernel",
+   "AlgebraicGeometry.ProEtale.CondensedRing.formalSupportKernel_additive",
+   "AlgebraicGeometry.ProEtale.CondensedRing.formalClosedSupport",
+   "AlgebraicGeometry.ProEtale.CondensedRing.formalClosedSupport_additive",
+   "AlgebraicGeometry.ProEtale.CondensedRing.formalSupportKernelInclusion",
+   "AlgebraicGeometry.ProEtale.CondensedRing.formalSupportKernelComparison",
+   "AlgebraicGeometry.ProEtale.CondensedRing.formal_closed_support_adjunction"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FormalClosedSupportAdjunction.lean",
+  "statement": "theorem formal_closed_support_adjunction {X Z V : Scheme.{u}} (i : Z ⟶ X) (j : V ⟶ X) [IsClosedImmersion i] [IsOpenImmersion j] [QuasiCompact j] (hij : Set.range j = (Set.range i)ᶜ) [HasDerivedCategory.{u + 2} (FormalSupportModules Λ X)] [HasDerivedCategory.{u + 2} (FormalSupportModules Λ Z)] [HasDerivedCategory.{u + 2} (FormalSupportModules Λ V)] : IsIso (formalSupportKernelComparison Λ i j) ∧ PreservesFiniteLimits (formalClosedSupport Λ i j) ∧ ∃ a : lowerStar Λ i ⊣ formalClosedSupport Λ i j, (∀ M : FormalSupportModules Λ X, (formalSupportKernelComparison Λ i j).app M ≫ a.counit.app M = (formalSupportKernelInclusion Λ j).app M) ∧ (∀ (I : FormalSupportModules Λ X) [Injective I], Epi ((formalSupportPullbackAdjunction Λ j).unit.app I)) ∧ (∀ (I : CochainComplex (FormalSupportModules Λ X) ℤ) [I.IsKInjective], CochainComplex.IsKInjective (((formalClosedSupport Λ i j).mapHomologicalComplex (ComplexShape.up ℤ)).obj I)) ∧ (∀ (I : CochainComplex (FormalSupportModules Λ X) ℤ) [I.IsKInjective], IsIso ((formalClosedSupport Λ i j).rightDerivedFunctorUnit.app ((HomotopyCategory.quotient _ (ComplexShape.up ℤ)).obj I))) ∧ (∀ (A : CochainComplex (FormalSupportModules Λ Z) ℤ) (I : CochainComplex (FormalSupportModules Λ X) ℤ) [I.IsKInjective], ∃ e : CochainComplex.HomComplex (((lowerStar Λ i).mapHomologicalComplex (ComplexShape.up ℤ)).obj A) I ≅ CochainComplex.HomComplex A (((formalClosedSupport Λ i j).mapHomologicalComplex (ComplexShape.up ℤ)).obj I), ∀ (n : ℤ) (f : CochainComplex.HomComplex.Cochain (((lowerStar Λ i).mapHomologicalComplex (ComplexShape.up ℤ)).obj A) I n) (p q : ℤ) (hpq : p + n = q), (((e.hom.f n).hom f).v p q hpq) = a.homEquiv (A.X p) (I.X q) (f.v p q hpq)) ∧ Exists fun [hclosed : PreservesFiniteColimits (lowerStar Λ i)] ↦ ∃ (b : (lowerStar Λ i).mapDerivedCategory ⊣ (formalClosedSupport Λ i j).rightDerivedFunctor) (c : (formalSupportPullback Λ j).mapDerivedCategory ⊣ (lowerStar Λ j).rightDerivedFunctor), ∃ δ : (formalSupportPullback Λ j).mapDerivedCategory ⋙ (lowerStar Λ j).rightDerivedFunctor ⟶ (formalClosedSupport Λ i j).rightDerivedFunctor ⋙ (lowerStar Λ i).mapDerivedCategory ⋙ shiftFunctor (DerivedCategory (FormalSupportModules Λ X)) (1 : ℤ), b = a.mapDerivedCategoryRightDerivedAdjunction ∧ c = (formalSupportPullbackAdjunction Λ j).mapDerivedCategoryRightDerivedAdjunction ∧ (∀ K : DerivedCategory (FormalSupportModules Λ X), Triangle.mk (b.counit.app K) (c.unit.app K) (δ.app K) ∈ distTriang _) ∧ (∀ (K F : DerivedCategory (FormalSupportModules Λ X)) (s : F ⟶ K) (t : (lowerStar Λ j).rightDerivedFunctor.obj ((formalSupportPullback Λ j).mapDerivedCategory.obj K) ⟶ F⟦(1 : ℤ)⟧), Triangle.mk s (c.unit.app K) t ∈ distTriang _ → Nonempty ((formalClosedSupport Λ i j).rightDerivedFunctor.obj K ≅ (formalSupportPullback Λ i).mapDerivedCategory.obj F))",
+  "branch": "newtargets-dag",
+  "by": "Q30",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "All condensed rings, including noncommutative ones. Canonical inverse coefficient transport avoids the commutativity restriction of upperStar. Global RHom is stated as its actual Hom complexes on arbitrary K-injective targets, with the componentwise adjunction formula; the fibre formula quantifies over distinguished fibre triangles of the canonical derived open unit. No boundedness or constructibility assumption."
  }
 }
