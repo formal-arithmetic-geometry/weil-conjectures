@@ -30,70 +30,62 @@
  ],
  "proof": [
   {
-   "text": "Use the site with exactly one object $*$, its identity as the only arrow, and only the maximal sieve covering. Put $\\mathcal O(*)=A$. This is a small ringed site, and every presheaf is a sheaf: the sole covering-family gluing condition is the identity condition. Evaluation at $*$ therefore identifies its module-sheaf category with $A$-modules, with inverse sending a module to the one-value sheaf [def-weil-sheaf-of-modules-category]. The slice at $*$ is the very same site. These mutually inverse descriptions identify complexes, differentials, cohomology, homotopies, localization at quasi-isomorphisms and hence $D(\\mathcal O)$ with $D(A)$ [def-weil-abstract-derived-category]. The localized sheaf $\\mathcal O[1/f]$ is exactly $A_f$: sectionwise localization has one value and no sheafification change. Products and their projections are identified as well, so the Roos triangle of [def-weil-derived-limit] is the same triangle in both descriptions.",
+   "text": "Put P = direct sum over n in N of ULift A, with coprojections i_n. Define d:P -> P by d i_n = i_n - f i_(n+1). Its kernel is zero: the zeroth coefficient of d(x)=0 gives x_0=0, and induction gives x_(n+1)=f*x_n=0. This does not require f to be a nonzerodivisor. The universal property of the sequential colimit identifies its cokernel with colim(A --f--> A --f--> ...): a map annihilating d is exactly a compatible family. Apply [lem-sc-module-localization-filtered-colimit] to ULift A and the canonical localized-module isomorphism to identify this colimit with ULift(A[1/f]). Thus 0 -> P --d--> P -> ULift(A[1/f]) -> 0 is short exact.",
    "uses": [
-    "def-weil-sheaf-of-modules-category",
+    "lem-sc-module-localization-filtered-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 091P, lemma-hom-from-Af, proof using the two-term free resolution and equivalence of (1), (7), and (3)"
+   }
+  },
+  {
+   "text": "Apply the degree-zero single-complex functor and the derived localization to this short exact sequence, obtaining a distinguished triangle S(P) --S(d)--> S(P) -> S(ULift(A[1/f])) -> S(P)[1] [def-weil-abstract-derived-category]. The coprojections S(i_n) exhibit S(P) as the coproduct of the S(ULift A), and remain so after any shift. Use the proved source-library declaration DerivedCategory.isColimitCofanMkQObj: it computes maps to a K-injective representative using [lem-weil-pbc-kinjective-hom-derived]. The required K-injective resolutions exist for the Grothendieck category of modules; the source-library GrothendieckAbelian.KInjectiveResolution supplies them, also after transporting along the ring equivalence ULift A = A to match arbitrary universes.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 091P, lemma-hom-from-Af, proof using the two-term free resolution and equivalence of (1), (7), and (3)"
+   }
+  },
+  {
+   "text": "For each integer q, the coproduct universal property identifies maps S(P)[q] -> K with families (g_n) of maps S(ULift A)[q] -> K. Under this identification precomposition by S(d)[q] is (g_n) -> (g_n - f*g_(n+1)). The product universal property identifies postcomposition by the tower Roos endomorphism r=1-shift with precisely the same map on families [def-weil-derived-limit]. Hence the two induced Hom maps are bijective simultaneously. The shifted Yoneda exact sequences of the distinguished triangle in step 2 show that every map S(ULift(A[1/f]))[q] -> K is zero for every q if and only if all these precomposition maps are bijective. Handle the sign in a shifted distinguished triangle by the invertible scalar (-1)^q and use the natural shift-add isomorphisms.",
+   "uses": [
+    "def-weil-derived-limit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 091P, lemma-hom-from-Af, proof using the two-term free resolution and equivalence of (1), (7), and (3)"
+   }
+  },
+  {
+   "text": "The objects S(ULift A)[q] detect isomorphisms in the derived category: by the proved source-library DerivedCategory.singleFunctorZeroHomEquiv, maps from the projective module ULift A in degree zero are maps into zeroth homology; shifting gives every homology degree. Evaluation at 1 identifies module maps from ULift A with elements, so bijectivity of these Hom maps is exactly bijectivity on all homology modules, equivalently an isomorphism by DerivedCategory.isIso_iff. Thus step 3 says the localized-module Hom vanishing is equivalent to r being an isomorphism. Finally hT supplies the distinguished Roos triangle T -> product K --r--> product K -> T[1] [def-weil-derived-limit]; the first object of a distinguished triangle is zero if and only if its second morphism is an isomorphism. This proves the stated equivalence for arbitrary unbounded K and arbitrary f.",
+   "uses": [
     "def-weil-abstract-derived-category",
     "def-weil-derived-limit"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 091P (lemma-hom-from-Af), equivalence (1),(3),(6); specialize Tag 0997 (algebraization.tex, lemma-hom-from-Af) to the one-object identity-only site with trivial topology"
-   }
-  },
-  {
-   "text": "Choose a complex representing $K$. Apply [prop-pur-kinjective-resolutions-exist] on this small site to obtain a K-injective complex $I^\\bullet$ representing $K$ (in fact with injective terms). Put $C^n=\\operatorname{Hom}_A(A_f,I^n)$ and $d_C(h)=d_I\\circ h$. By [def-pur-hom-complex] this is precisely the Hom complex from $A_f[0]$ to $I^\\bullet$, since the only nonzero source term is in degree zero. By [def-pur-derived-internal-hom], on the one-object site $QC$ represents $R\\mathcal Hom_{\\mathcal O}(\\mathcal O[1/f],K)$; internal Hom here is ordinary module Hom, since the only slice is the site itself.",
-   "uses": [
-    "prop-pur-kinjective-resolutions-exist",
-    "def-pur-hom-complex",
-    "def-pur-derived-internal-hom"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 091P (lemma-hom-from-Af), equivalence (1),(3),(6); specialize Tag 0997 (algebraization.tex, lemma-hom-from-Af) to the one-object identity-only site with trivial topology"
-   }
-  },
-  {
-   "text": "Fix $q\\in\\mathbf Z$. By [lem-weil-pbc-kinjective-hom-derived], morphisms $A_f[0][q]\\to K$ are the homotopy classes of chain maps $A_f[0][q]\\to I^\\bullet$. The source has only its degree $-q$ term $A_f$, with zero differential [def-weil-abstract-derived-category]. Such a chain map is exactly an $A$-linear $h:A_f\\to I^{-q}$ satisfying $d_Ih=0$. Two such maps differ by a chain homotopy exactly when their difference is $d_I t$ for an $A$-linear $t:A_f\\to I^{-q-1}$ (the source-differential term in the homotopy equation is zero). Thus these classes are $\\ker(d_C^{-q})/\\operatorname{im}(d_C^{-q-1})=H^{-q}(C)$. In particular every derived morphism is zero if and only if this cohomology module is zero. The sign of $q$ imposes no restriction, since $q$ ranges over all integers.",
-   "uses": [
-    "lem-weil-pbc-kinjective-hom-derived",
-    "def-weil-abstract-derived-category"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 091P (lemma-hom-from-Af), equivalence (1),(3),(6); specialize Tag 0997 (algebraization.tex, lemma-hom-from-Af) to the one-object identity-only site with trivial topology"
-   }
-  },
-  {
-   "text": "Apply [lem-weil-pbc-local-hom-tower-criterion] with this small ringed site, $U=*$, global section $f$, and $K$. The site and slice identifications in step 1 make its assertion $QC=0$ if and only if the given $T(K,f)=0$; it applies to any derived limit, without a canonical choice. By [def-weil-abstract-derived-category], $QC=0$ implies all its cohomology objects vanish, since cohomology factors through localization. Conversely, if every $H^n(C)$ vanishes, the map $C\\to0$ is a quasi-isomorphism and therefore becomes an isomorphism $QC\\simeq0$. Step 3 identifies precisely this cohomology vanishing with the vanishing of all the Hom groups in the statement. Combining both directions proves the equivalence for arbitrary unbounded $K$ and arbitrary $f$, including zero divisors.",
-   "uses": [
-    "lem-weil-pbc-local-hom-tower-criterion",
-    "def-weil-abstract-derived-category"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 091P (lemma-hom-from-Af), equivalence (1),(3),(6); specialize Tag 0997 (algebraization.tex, lemma-hom-from-Af) to the one-object identity-only site with trivial topology"
+    "place": "Tag 091P, lemma-hom-from-Af, proof using the two-term free resolution and equivalence of (1), (7), and (3)"
    }
   }
  ],
  "proof_deps": [
-  "def-pur-derived-internal-hom",
-  "def-pur-hom-complex",
   "def-weil-abstract-derived-category",
   "def-weil-derived-limit",
-  "def-weil-sheaf-of-modules-category",
-  "lem-weil-pbc-kinjective-hom-derived",
-  "lem-weil-pbc-local-hom-tower-criterion",
-  "prop-pur-kinjective-resolutions-exist"
+  "lem-sc-module-localization-filtered-colimit",
+  "lem-weil-pbc-kinjective-hom-derived"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Tag 091P (lemma-hom-from-Af), equivalence (1),(3),(6); specialize Tag 0997 (algebraization.tex, lemma-hom-from-Af) to the one-object identity-only site with trivial topology"
+  "place": "Tag 091P, lemma-hom-from-Af, proof using the two-term free resolution and equivalence of (1), (7), and (3)"
  },
  "mathlib_searches": [
   {
@@ -243,12 +235,7 @@
    }
   ]
  },
- "tool_uses": [
-  "def-weil-sheaf-of-modules-category",
-  "prop-pur-kinjective-resolutions-exist",
-  "def-pur-hom-complex",
-  "def-pur-derived-internal-hom"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-14",
   "by": "L",
@@ -286,5 +273,15 @@
   "by": "NO",
   "date": "2026-10-15",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261018T062802-L-653180",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
