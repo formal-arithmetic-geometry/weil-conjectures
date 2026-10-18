@@ -60,6 +60,22 @@ theorem isNormal_tensorProduct_of_separableExtension
       IsDomain (Localization.AtPrime p) ∧ IsIntegrallyClosed (Localization.AtPrime p)) :
     ∀ (q : Ideal (B ⊗[k] K)) [q.IsPrime],
       IsDomain (Localization.AtPrime q) ∧ IsIntegrallyClosed (Localization.AtPrime q) := by
-  sorry
+  set_option linter.style.haveILetI false in
+  let hA : ∀ (E : Type (max u v w)) [Field E] [Algebra k E],
+      ∀ (p : Ideal (K ⊗[k] E)) [p.IsPrime],
+        IsDomain (Localization.AtPrime p) ∧ IsIntegrallyClosed (Localization.AtPrime p) :=
+    fun E _ _ ↦ normal_tensorProduct_of_isSeparableExtension k K E hK
+  let hnormal := isNormal_tensorProduct_of_geometricallyNormal k K B hA hB
+  intro q hq
+  haveI := hq
+  let e : (K ⊗[k] B) ≃+* (B ⊗[k] K) :=
+    (Algebra.TensorProduct.comm k K B).toRingEquiv
+  let p : Ideal (K ⊗[k] B) := Ideal.comap e q
+  haveI : p.IsPrime := Ideal.IsPrime.comap e
+  have hp := hnormal p
+  let f := Localization.localRingEquiv p q e rfl
+  haveI : IsDomain (Localization.AtPrime p) := hp.1
+  haveI : IsIntegrallyClosed (Localization.AtPrime p) := hp.2
+  exact ⟨f.symm.toMulEquiv.isDomain _, IsIntegrallyClosed.of_equiv f⟩
 
 end Algebra
