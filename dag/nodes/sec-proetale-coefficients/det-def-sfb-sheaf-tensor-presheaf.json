@@ -26,7 +26,7 @@
    }
   },
   {
-   "text": "Use the size convention of the unit sk-def-sfb-sheaf-tensor: essential smallness is relative to the universe of Hom sets and small colimits in $\\mathcal A$. Choose a small full subcategory $S\\subset C$ meeting every isomorphism class; the Hom sets of $C$ are small in that universe. For fixed $U$, let $J_U\\subset C/U$ be the full subcategory of arrows $s\\to U$ with $s\\in S$. Its objects form the small union $\\coprod_{s\\in S}\\operatorname{Hom}_C(s,U)$, and its arrows are subsets of the Hom sets between objects of $S$. Every $v:V\\to U$ is isomorphic in $C/U$ to $(s,v\\circ a)$ for an isomorphism $a:s\\to V$. Thus $J_U$ is a small full subcategory meeting every isomorphism class of the slice; no product indexed by all objects of a possibly large slice is taken.",
+   "text": "Use Mathlib SmallModel J and the equivalence from this small category to J, first for J = C^op and then for J = Under U. EssentiallySmall C implies LocallySmall C, and Mathlib StructuredArrow.essentiallySmall shows that Under U is essentially small. This is the opposite-slice indexing category used by the canonical enriched internal hom, so no identification of the object or morphism universes with w is made.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -35,7 +35,7 @@
    }
   },
   {
-   "text": "Write $\\mathsf h(X,Y)=\\underline{\\operatorname{Hom}}_{\\mathcal A}(X,Y)$. On the small category $J_U^{\\mathrm{op}}$ take the bifunctor $T(i,j)=\\mathsf h(F(V_i),G(V_j))$, where $V_i$ denotes the domain of the slice object $i$. Define $E_U$ to be the equalizer of the two maps\n$$P_U=\\prod_{i\\in J_U}\\mathsf h(F(V_i),G(V_i))\\rightrightarrows Q_U=\\prod_{(a:i\\to j)\\in J_U}\\mathsf h(F(V_j),G(V_i)).$$\nFor $a:V_i\\to V_j$ over $U$, the first component is postcomposition of the $j$-projection by $G(a):G(V_j)\\to G(V_i)$, and the second is precomposition of the $i$-projection by $F(a):F(V_j)\\to F(V_i)$. Products and this equalizer exist by [lem-coef-grothendieck-small-limits], applied to the small discrete categories and the parallel-pair category. By the product and equalizer universal properties, maps $B\\to E_U$ are precisely families $t_i:B\\to\\mathsf h(F(V_i),G(V_i))$ with $G(a)_*t_j=F(a)^*t_i$ for every $a:i\\to j$. To extend the projections to all slice objects $v:V\\to U$, choose $a:s\\xrightarrow{\\sim}V$ with $s\\in S$, and put $p_v=\\mathsf h(F(a),G(a)^{-1})p_{v\\circ a}$. For a second choice $b:t\\xrightarrow{\\sim}V$, the slice isomorphism $b^{-1}a:(s,v\\circ a)\\to(t,v\\circ b)$ and the equalizer equation show the two formulas agree. For an arbitrary slice arrow $c:(V,v)\\to(W,w)$, apply that equation to $b^{-1}ca:s\\to t$ to obtain $G(c)_*p_w=F(c)^*p_v$. Conversely, any wedge on the whole slice restricts to $J_U$, and the same isomorphism equation forces this extension. Hence $E_U$, with these projections, is exactly the end meant in clause 2, with its universal property over the entire slice. The integrand is mixed variance: it is not an ordinary diagram $v\\mapsto\\mathsf h(F(V),G(V))$ whose maps would require inverse restriction maps.",
+   "text": "The private proved helper hasEnrichedHom_of_essentiallySmall implements end existence. For E : SmallModel J to J, form Mathlib's canonical end of the enriched-Hom diagram of E composed with F and G. Its defining small multiequalizer exists by [lem-coef-grothendieck-small-limits]. For every j choose k = E.objPreimage j and the canonical isomorphism a : E(k) to j. Extend the k-projection by precomposition with F(a inverse) and postcomposition with G(a). For f : i to j, fullness supplies the arrow lifting a_i followed by f followed by a_j inverse. The small-end wedge equation at that arrow, together with functoriality and commutation of pre- and postcomposition, proves the extended wedge equation. Restrict any wedge on J along E and use the small-end universal property for its map into the constructed wedge. Its factorization at j follows from the original wedge equation for a and cancellation of F(a) with F(a inverse). For uniqueness, evaluate at E(k); the small-end wedge equation at the preimage of the canonical isomorphism E(objPreimage(E(k))) to E(k) identifies the extended projection there with the original k-projection. The small-end hom extensionality then proves uniqueness. Thus the explicitly constructed wedge is limiting on all of J. Applying the helper to C^op and Under U proves both end-existence families; the canonical Mathlib definitions and adjunctions supply the remaining steps.",
    "uses": [
     "lem-coef-grothendieck-small-limits"
    ],
@@ -94,7 +94,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-sheaf-tensor/det-def-sfb-sheaf-tensor-presheaf.md",
-  "place": "Clauses 1–2 and both displayed Hom formulas; explicit construction and proof of the claims in this definition. The current source file has no proof section."
+  "place": "Clauses 1–2 and both displayed Hom formulas. Steps 2–3 are realized by the small-model limiting-wedge construction in Q6's private proved helper; its projection transport calculation also occurs in the upstream precompEnrichedHomInv. The remaining steps use the existing canonical Mathlib interfaces recorded in lean.declarations."
  },
  "mathlib_searches": [
   {
@@ -357,5 +357,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q6",
+  "result": "pass",
+  "landing": "20261018T145112-L-3643811",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

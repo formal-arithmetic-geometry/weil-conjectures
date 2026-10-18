@@ -9,6 +9,8 @@ public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Basic
 public import Mathlib.CategoryTheory.Sites.Monoidal
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Preadditive
 
+import Mathlib.CategoryTheory.Comma.StructuredArrow.Small
+
 /-!
 # Objectwise tensor product and internal hom of presheaves
 
@@ -34,6 +36,75 @@ open CategoryTheory CategoryTheory.Limits
 open scoped CategoryTheory.MonoidalClosed
 
 namespace CategoryTheory
+
+/-- Extend the canonical small-model end along preimage isomorphisms and verify
+its universal property. This implements steps 2–3 of the presheaf tensor node.
+Source: `det-def-sfb-sheaf-tensor-presheaf`, clause 2; the projection transport
+calculation is also used in the upstream `precompEnrichedHomInv`. -/
+private theorem hasEnrichedHom_of_essentiallySmall
+    {J : Type uC} [Category.{vC} J] [EssentiallySmall.{w} J]
+    {A : Type uA} [Category.{vA} A] [Abelian A] [IsGrothendieckAbelian.{w} A]
+    [MonoidalCategory A] [MonoidalClosed A] (F G : J ⥤ A) :
+    Enriched.FunctorCategory.HasEnrichedHom A F G :=
+  open Category MonoidalCategory Enriched Enriched.FunctorCategory in
+  by
+  let E := (equivSmallModel.{w} J).inverse
+  let : HasEnrichedHom A (E ⋙ F) (E ⋙ G) := inferInstance
+  let p := fun j ↦ enrichedHomπ A (E ⋙ F) (E ⋙ G) (E.objPreimage j) ≫
+    eHomWhiskerRight A (F.map (E.objObjPreimageIso j).inv) _ ≫
+    eHomWhiskerLeft A _ (G.map (E.objObjPreimageIso j).hom)
+  have hp : ∀ ⦃i j : J⦄ (f : i ⟶ j),
+      p i ≫ (diagram A F G |>.obj (Opposite.op i)).map f =
+        p j ≫ ((diagram A F G).map f.op).app j := by
+    intro i j f
+    dsimp only [p]
+    simp only [diagram_obj_map, diagram_map_app, Quiver.Hom.unop_op]
+    let g := E.preimage ((E.objObjPreimageIso i).hom ≫ f ≫ (E.objObjPreimageIso j).inv)
+    have hg : E.map g = (E.objObjPreimageIso i).hom ≫ f ≫
+        (E.objObjPreimageIso j).inv := E.map_preimage _
+    have h1 : (E.objObjPreimageIso i).hom ≫ f =
+        E.map g ≫ (E.objObjPreimageIso j).hom := by simp [hg]
+    have h2 : (E.objObjPreimageIso i).inv ≫ E.map g =
+        f ≫ (E.objObjPreimageIso j).inv := by simp [hg]
+    have hc := enrichedHom_condition A (E ⋙ F) (E ⋙ G) g
+    simp only [Functor.comp_map, Functor.comp_obj] at hc
+    simp only [assoc]
+    rw [← eHomWhiskerLeft_comp, ← G.map_comp, h1, G.map_comp, eHomWhiskerLeft_comp,
+      ← eHom_whisker_exchange_assoc, reassoc_of% hc, ← eHomWhiskerRight_comp_assoc,
+      ← F.map_comp, h2, eHom_whisker_exchange, F.map_comp, eHomWhiskerRight_comp_assoc]
+    rfl
+  let W : Wedge (diagram A F G) := Wedge.mk _ p hp
+  refine ⟨⟨⟨W, ?_⟩⟩⟩
+  let lift := fun s : Wedge (diagram A F G) ↦
+    end_.lift (F := diagram A (E ⋙ F) (E ⋙ G)) (fun k ↦ s.ι (E.obj k))
+      (fun i j f ↦ by simpa using Wedge.condition s (E.map f))
+  refine Multifork.IsLimit.mk _ lift ?_ ?_
+  · intro s j
+    change J at j
+    change lift s ≫ p j = s.ι j
+    dsimp only [lift, p]
+    rw [← assoc, ← assoc, end_.lift_π]
+    have hc := Wedge.condition s (E.objObjPreimageIso j).hom
+    simp only [diagram_obj_map, diagram_map_app, Quiver.Hom.unop_op] at hc
+    simp only [assoc]
+    rw [← eHom_whisker_exchange, reassoc_of% hc, ← eHomWhiskerRight_comp,
+      ← F.map_comp, Iso.inv_hom_id, F.map_id, eHomWhiskerRight_id]
+    exact Category.comp_id _
+  · intro s m hm
+    change s.pt ⟶ enrichedHom A (E ⋙ F) (E ⋙ G) at m
+    apply end_.hom_ext (F := diagram A (E ⋙ F) (E ⋙ G))
+    intro k
+    dsimp only [lift]
+    rw [end_.lift_π]
+    have hc := enrichedHom_condition A (E ⋙ F) (E ⋙ G)
+      (E.preimage (E.objObjPreimageIso (E.obj k)).hom)
+    simp only [Functor.comp_map, Functor.comp_obj, Functor.map_preimage] at hc
+    have h := hm (E.obj k)
+    change m ≫ p (E.obj k) = s.ι (E.obj k) at h
+    rw [← h]
+    dsimp only [p]
+    rw [← eHom_whisker_exchange, reassoc_of% hc, ← eHomWhiskerRight_comp,
+      ← F.map_comp, Iso.inv_hom_id, F.map_id, eHomWhiskerRight_id, comp_id]
 
 /-- Existence of the global and slice ends used by the canonical presheaf internal hom.
 The first family supplies the enriched bifunctor used by the closed structure, and the
@@ -82,6 +153,13 @@ theorem presheaf_enrichedHoms_exist
     [MonoidalPreadditive A] :
     (∀ (F G : Cᵒᵖ ⥤ A), Enriched.FunctorCategory.HasEnrichedHom A F G) ∧
       (∀ (F G : Cᵒᵖ ⥤ A), Enriched.FunctorCategory.HasFunctorEnrichedHom A F G) := by
-  sorry
+  constructor
+  · intro F G
+    exact hasEnrichedHom_of_essentiallySmall F G
+  · intro F G U
+    have : LocallySmall.{w} Cᵒᵖ := locallySmall_of_essentiallySmall Cᵒᵖ
+    have : EssentiallySmall.{w} (Under U) :=
+      inferInstanceAs (EssentiallySmall.{w} (StructuredArrow U (𝟭 Cᵒᵖ)))
+    exact hasEnrichedHom_of_essentiallySmall (Under.forget U ⋙ F) (Under.forget U ⋙ G)
 
 end CategoryTheory
