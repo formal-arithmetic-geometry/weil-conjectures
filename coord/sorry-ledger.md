@@ -4,7 +4,7 @@ Source scan; one hole per declaration, regardless of token count. Deleted declar
 Closure is the queue’s import upper bound. Classes use source references, not elaborated dependencies.
 Progress = closed − added in the closure, with pruning reported separately.
 
-Holes now: library **3798**, closure **144**, holes in definitions **9**, definitions with undetermined data **315** (closure **3**).
+Holes now: library **3791**, closure **144**, holes in definitions **9**, definitions with undetermined data **315** (closure **3**).
 
 Definitions with holes (def/instance/structure field):
 
@@ -338,20 +338,20 @@ Definitions with undetermined data (class-1 exceptions in `coord/hollow-definiti
 
 | root | library | closure |
 |---|---:|---:|
-| Sheaf | 3632 | 47 |
+| Sheaf | 3625 | 47 |
 | WeilConjectures | 166 | 97 |
 
 | baseline | scope | closed | added | net | deleted | changed holed statements |
 |---|---|---:|---:|---:|---:|---:|
-| 889327369 (Queue at the start of stage 3) | library | 1808 | 3410 | -1602 | 733 | 14 |
-| 660345513 (Application of proof-dependency imports) | library | 1805 | 3409 | -1604 | 679 | 14 |
+| 889327369 (Queue at the start of stage 3) | library | 1808 | 3403 | -1595 | 733 | 14 |
+| 660345513 (Application of proof-dependency imports) | library | 1805 | 3402 | -1597 | 679 | 14 |
 | 660345513 (Application of proof-dependency imports) | closure | 1500 | 75 | 1425 | 603 | 0 |
 
 No closure delta is quoted across 660345513: proof-dependency imports changed the reached set.
 
 | landing class | count |
 |---|---:|
-| proved | 4261 |
+| proved | 4263 |
 | decomposed | 56 |
 | moved | 4161 |
 | pruned | 147 |
@@ -397,7 +397,7 @@ Per group: whole-library closed/added/net since stage 3; landing count is not pr
 | D9 | 3 | 3 | 1 | 2 | 1/3 (33.3%) |
 | E1 | 170 | 203 | 109 | 94 | 83/170 (48.8%) |
 | E2 | 134 | 129 | 87 | 42 | 62/134 (46.3%) |
-| E3 | 127 | 146 | 100 | 46 | 60/127 (47.2%) |
+| E3 | 128 | 152 | 100 | 52 | 60/128 (46.9%) |
 | E4 | 62 | 69 | 33 | 36 | 22/62 (35.5%) |
 | E5 | 2 | 4 | 0 | 4 | 0/2 (0.0%) |
 | E6 | 3 | 3 | 0 | 3 | 0/3 (0.0%) |
@@ -463,7 +463,7 @@ Per group: whole-library closed/added/net since stage 3; landing count is not pr
 | N3 | 93 | 88 | 66 | 22 | 46/93 (49.5%) |
 | N4 | 63 | 62 | 48 | 14 | 29/63 (46.0%) |
 | P1 | 124 | 145 | 93 | 52 | 67/124 (54.0%) |
-| P2 | 137 | 134 | 82 | 52 | 56/137 (40.9%) |
+| P2 | 138 | 135 | 82 | 53 | 56/138 (40.6%) |
 | P3 | 107 | 99 | 83 | 16 | 54/107 (50.5%) |
 | P4 | 60 | 72 | 42 | 30 | 28/60 (46.7%) |
 | P5 | 2 | 2 | 1 | 1 | 1/2 (50.0%) |
