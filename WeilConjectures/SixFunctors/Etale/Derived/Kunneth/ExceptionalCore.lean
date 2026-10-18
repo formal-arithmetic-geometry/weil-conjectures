@@ -188,6 +188,7 @@ theorem coreProp_of_isClosedImmersion_of_isOpenImmersion
     (hU : CoreProp Λ b (j ≫ a) _ _ (IsPullback.of_hasPullback (j ≫ a) b)) :
     CoreProp Λ b a _ _ (IsPullback.of_hasPullback a b) := by
   have : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace a
+  have : QuasiSeparatedSpace X := (quasiSeparated_iff_quasiSeparatedSpace a).1 inferInstance
   have : HasInvertibleExponent Λ X := .of_hom a
   have : HasCompactification j := (Compactification.ofIsOpenImmersion j).hasCompactification
   have : HasCompactification (pullbackMapLeft a b j) :=

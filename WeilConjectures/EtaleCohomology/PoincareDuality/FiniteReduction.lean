@@ -50,7 +50,7 @@ shift part of the pairing (`lem-fix-operation-reduction`), of the orientation an
 of `Ra_! ⊣ Ra^!` (`thm-pur-finite-reduction-of-purity`). The dual `RΓ_c(X, K)^∨` is the
 internal hom `RHom(Ra_! K, Λ_Y)` in `D(Y_ét)`, which over `Y = Spec k` is the dual of the
 point complex; its comparison map is the canonical
-`CategoryTheory.MonoidalClosed.dualComparison`, an isomorphism for `RΓ_c(X, K_n)` perfect
+`CategoryTheory.MonoidalClosed.dualComparisonOfTensorIso`, an isomorphism for `RΓ_c(X, K_n)` perfect
 (`thm-pod-point-perfectness`), which is a hypothesis.
 -/
 
@@ -70,7 +70,7 @@ variable {C D : Type*} [Category C] [MonoidalCategory C] [MonoidalClosed C]
 /-- The canonical comparison `F(P^∨) ⟶ (F P)^∨` of duals `P^∨ = [P, 𝟙]` for a functor `F`
 with a comparison `μ : F(P ⊗ -) ≅ F P ⊗ F(-)` and `ε : F 𝟙 ≅ 𝟙`: the adjoint of
 `F P ⊗ F(P^∨) ≅ F(P ⊗ P^∨) ⟶ F 𝟙 ≅ 𝟙`, the image of the evaluation. -/
-noncomputable def dualComparison (P : C)
+noncomputable def dualComparisonOfTensorIso (P : C)
     (μ : (curriedTensor C).obj P ⋙ F ≅ F ⋙ (curriedTensor D).obj (F.obj P))
     (ε : F.obj (𝟙_ C) ≅ 𝟙_ D) :
     F.obj ((ihom P).obj (𝟙_ C)) ⟶ (ihom (F.obj P)).obj (𝟙_ D) :=
@@ -86,11 +86,12 @@ theorem map_curry_comp_dualComparison {P Q : C} {P' Q' : D}
     (μ : (curriedTensor C).obj P ⋙ F ≅ F ⋙ (curriedTensor D).obj (F.obj P))
     (ε : F.obj (𝟙_ C) ≅ 𝟙_ D) (β : P ⊗ Q ⟶ 𝟙_ C) (β' : P' ⊗ Q' ⟶ 𝟙_ D) (u : F.obj P ≅ P')
     (w : F.obj Q ⟶ Q') (h : μ.inv.app Q ≫ F.map β ≫ ε.hom = u.hom ▷ F.obj Q ≫ P' ◁ w ≫ β') :
-    F.map (curry β) ≫ dualComparison F P μ ε = w ≫ curry β' ≫ (pre u.hom).app (𝟙_ D) := by
+    F.map (curry β) ≫ dualComparisonOfTensorIso F P μ ε =
+      w ≫ curry β' ≫ (pre u.hom).app (𝟙_ D) := by
   apply uncurry_injective
   have hn := μ.inv.naturality (curry β)
   dsimp at hn
-  rw [uncurry_natural_left, dualComparison, uncurry_curry, reassoc_of% hn,
+  rw [uncurry_natural_left, dualComparisonOfTensorIso, uncurry_curry, reassoc_of% hn,
     ← F.map_comp_assoc, ← uncurry_eq, uncurry_curry, h, uncurry_natural_left, uncurry_pre_app,
     uncurry_curry, whisker_exchange_assoc]
 
@@ -102,16 +103,17 @@ theorem IsPerfectPairing.map_iso_inv_comp {P Q : C} {P' Q' : D}
     (μ : (curriedTensor C).obj P ⋙ F ≅ F ⋙ (curriedTensor D).obj (F.obj P))
     (ε : F.obj (𝟙_ C) ≅ 𝟙_ D) {β : P ⊗ Q ⟶ 𝟙_ C} {β' : P' ⊗ Q' ⟶ 𝟙_ D} (u : F.obj P ≅ P')
     (w : F.obj Q ⟶ Q') (h : μ.inv.app Q ≫ F.map β ≫ ε.hom = u.hom ▷ F.obj Q ≫ P' ◁ w ≫ β')
-    (hβ : IsPerfectPairing β) (hβ' : IsPerfectPairing β') [IsIso (dualComparison F P μ ε)] :
+    (hβ : IsPerfectPairing β) (hβ' : IsPerfectPairing β')
+    [IsIso (dualComparisonOfTensorIso F P μ ε)] :
     IsIso w ∧ F.map hβ.iso.inv ≫ w =
-      (dualComparison F P μ ε ≫ (pre u.inv).app (𝟙_ D)) ≫ hβ'.iso.inv := by
+      (dualComparisonOfTensorIso F P μ ε ≫ (pre u.inv).app (𝟙_ D)) ≫ hβ'.iso.inv := by
   have H := map_curry_comp_dualComparison μ ε β β' u w h
-  have H' : F.map hβ.iso.hom ≫ dualComparison F P μ ε ≫ (pre u.inv).app (𝟙_ D) =
+  have H' : F.map hβ.iso.hom ≫ dualComparisonOfTensorIso F P μ ε ≫ (pre u.inv).app (𝟙_ D) =
       w ≫ hβ'.iso.hom := by
     change F.map (curry β) ≫ _ ≫ _ = w ≫ curry β'
     rw [reassoc_of% H, ← NatTrans.comp_app, ← pre_map, u.inv_hom_id, pre_id,
       NatTrans.id_app, Category.comp_id]
-  have hw : w = F.map hβ.iso.hom ≫ dualComparison F P μ ε ≫ (pre u.inv).app (𝟙_ D) ≫
+  have hw : w = F.map hβ.iso.hom ≫ dualComparisonOfTensorIso F P μ ε ≫ (pre u.inv).app (𝟙_ D) ≫
       hβ'.iso.inv := by
     rw [reassoc_of% H', Iso.hom_inv_id, Category.comp_id]
   refine ⟨?_, ?_⟩
@@ -289,9 +291,9 @@ theorem finiteReduction_poincarePairing (ΨX : 𝐃(X, A) ⥤ 𝐃(X, A'))
         poincarePairingUntraced A' a d T' K')
     (hβ : IsPerfectPairing (poincarePairing a γ K))
     (hβ' : IsPerfectPairing (poincarePairing a γ' K'))
-    [IsIso (MonoidalClosed.dualComparison ΨY _ μ ε)] :
+    [IsIso (MonoidalClosed.dualComparisonOfTensorIso ΨY _ μ ε)] :
     IsIso w ∧ ΨY.map hβ.iso.inv ≫ w =
-      (MonoidalClosed.dualComparison ΨY _ μ ε ≫ (MonoidalClosed.pre u.inv).app (𝟙_ _)) ≫
+      (MonoidalClosed.dualComparisonOfTensorIso ΨY _ μ ε ≫ (MonoidalClosed.pre u.inv).app (𝟙_ _)) ≫
         hβ'.iso.inv :=
   MonoidalClosed.IsPerfectPairing.map_iso_inv_comp μ ε u w
     (map_poincarePairing ΨX ΨY ψ ε γ γ' v₀ vω hγ hS K K' μ u w hE) hβ hβ'
