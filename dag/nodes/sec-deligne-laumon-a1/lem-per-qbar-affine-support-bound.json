@@ -13,7 +13,8 @@
   "def-weil-pbc-qbar-category",
   "lem-per-adic-heart-pullback-fibres",
   "def-weil-derived-direct-image",
-  "def-per-support-condition"
+  "def-per-support-condition",
+  "def-per-qbar-derived-direct-image"
  ],
  "proof": [
   {
@@ -450,5 +451,23 @@
   "group": "N4",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N4-0bbf950bf (reviewer sub-agent of L); spot-checked: I read all 11 steps against the statement of every node they cite, plus BBD 4.1.1 (pp. 102-103) and Stacks 0F0X (etale-cohomology.tex, lemma-interlude-I). The item statement is unchanged and true, and it is exactly what the parent lem-per-artin-gabber-affine-curve Step 5 uses: the bound for q>=0 and vanishing for q<0. I tested it on F=0, on the identity morphism and on G_m->A^1 with a=1, where the q=1 bound is sharp. The proof holds. Steps 2-3 build an integral model K=i_*i^{-1}H supported on Z: stratified characterization (iii), open-closed sequence, filtered-colimit clause, then full faithfulness of J. Step 4 keeps both cohomology sheaves of the derived reduction K_1 and the etale witness L_1, using exactness, full faithfulness and conservativity of nu^*. Steps 5-6 apply the torsion Stacks 0F0X node to T and G; the R^{q+1}f_*T shift sign is correct. Step 7 gets N_q/varpi -> H^q(M_1) as a monomorphism from the uniformizer triangle, and lem-a1 gives the etale origin of the quotient. Step 8 uses lem-a1's finitely generated fibre P with P/varpi=0, then Nakayama, then rational transport. Step 10 is correctly elementary: for constructible S, the generic points of the components of its closure lie in S. Step 11 uses adjunction and orthogonality. All off-unit inputs are generic and declared in tool_uses, and I accept them; lem-a1 is on route because the unit cites sk-l-dl-a1-endpoints. There are no new nodes, no duplicate in the DAG, no SGA citation, and every step is under 2000 characters. Batch-5 check: lem-pod-adic-limit-finite-modules is pure O_E commutative algebra (limits of finite modules, completeness, Hom as a limit). Neither the trace formula nor Poincare duality gives it, and it is not part of their proofs. The other pod nodes in the closure are lisse-coefficient foundations that the item already reaches through its existing statement dependency lem-per-adic-heart-pullback-fibres. So the citation is genuinely outside the assumed statements and is not a RETURN reason. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.QbarAffineSupportBound",
+  "declaration": "AlgebraicGeometry.Scheme.PerAdic.qbarAffineSupportBound",
+  "file": "lean/Sheaf/Paper/QbarAffineSupportBound.lean",
+  "statement": "theorem qbarAffineSupportBound (X Y : Base k) (f : X.scheme ⟶ Y.scheme) [f.IsOver (Spec (.of k))] [IsAffineHom f] [LocallyOfFiniteType f] (F : CommonHeart l Ω X) (a : ℤ) (ha : 0 ≤ a) (hF : topologicalKrullDim (pbcQbarCohomologySupport l Ω X.scheme F.obj 0) ≤ (a.toNat : ℕ∞)) : (∀ q : ℕ, (pbcQbarCohomologySupport l Ω Y.scheme ((qbarDerivedDirectImage l Ω X Y f).obj F.obj) (q : ℤ)).Nonempty → 0 ≤ a - (q : ℤ) ∧ topologicalKrullDim (pbcQbarCohomologySupport l Ω Y.scheme ((qbarDerivedDirectImage l Ω X Y f).obj F.obj) (q : ℤ)) ≤ ((a - (q : ℤ)).toNat : ℕ∞)) ∧ (∀ q : ℤ, q < 0 → IsZero ((cohomology (commonT l Ω Y) q).obj ((qbarDerivedDirectImage l Ω X Y f).obj F.obj)))",
+  "branch": "newtargets-dag",
+  "by": "NH",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-817b13f80",
+  "group": "NH",
+  "result": "pass",
+  "note": "Re-push of the PASSed 487d6cd0. Snapshots are byte-identical apart from the regenerated blueprint-index.tsv. L returned 487d6 at landing only for a RingedSiteDualityMaps overlay break (unknown SheafOfModules.overFunctor) in another group's base side module, not a delivery file. nt_compile --json now runs clean: QbarDerivedDirectImage 3.5 s, QbarAffineSupportBound 5.2 s, rc 0, no errors. Item statement rechecked clause by clause: Base k schemes; IsOver/IsAffineHom/LocallyOfFiniteType; CommonHeart input; pbcQbarCohomologySupport closure; Nonempty guard for dim(empty) = -infinity; q>a forces empty support; q<0 vanishing via commonT; independent universes; 11-step docstring. All six original stmt_dep records equal live (the N5 def-weil-derived-direct-image record is intact, so the H13 fix holds). New node def-per-qbar-derived-direct-image is the canonical rightAdjoint of the recorded pbcQbarCompletedPull, not hollow. No live duplicate Q-bar direct image; the item is not live, so no credit grab. Land as is."
  }
 }

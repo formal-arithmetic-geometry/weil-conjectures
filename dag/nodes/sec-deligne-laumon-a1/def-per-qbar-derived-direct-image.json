@@ -1,0 +1,116 @@
+{
+ "id": "def-per-qbar-derived-direct-image",
+ "kind": "definition",
+ "title": "Completed Qbar derived direct image over an arbitrary field",
+ "status": "split",
+ "statement": "Let $k$ be a field, $\\ell$ a prime invertible in $k$, and $\\Omega$ an algebraic closure of $\\mathbf Q_\\ell$. Let $X,Y$ be separated finite-type $k$-schemes and $f:X\\to Y$ a finite-type $k$-morphism [def-weil-scheme-morphism-properties]. Use the raw common-finite-stage categories $D^b_c(W,\\Omega)$ of [def-weil-pbc-qbar-category], for $W=X,Y$, with the separated finite-type base convention retained by [lem-per-adic-heart-pullback-fibres]. The canonical completed pullback $Lf^*:D^b_c(Y,\\Omega)\\to D^b_c(X,\\Omega)$ of [def-weil-pbc-completed-pullback] has a right adjoint. Define $Rf_*:D^b_c(X,\\Omega)\\to D^b_c(Y,\\Omega)$ to be that right adjoint, determined up to the unique adjunction-compatible isomorphism. It is the completed derived direct image of [def-weil-derived-direct-image]: derive finite-level module direct image by K-injective resolutions, apply restriction of scalars and the derived inverse limit to the finite-reduction tower, rationalize, and pass to common finite coefficient stages. The adjunction characterizes this construction; it does not choose an unrelated functor.",
+ "stmt_deps": [
+  "def-weil-scheme-morphism-properties",
+  "def-weil-pbc-qbar-category",
+  "lem-per-adic-heart-pullback-fibres",
+  "def-weil-pbc-completed-pullback",
+  "def-weil-derived-direct-image"
+ ],
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.14(2), Remark 6.8.15; finite-type constructibility in Section 6.7"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The completed pullback on bounded constructible adic Qbar ell complexes has a right adjoint over a field",
+   "results": "[leansearch] OK 8 hit(s): CategoryTheory.Over.pullbackIsRightAdjoint; AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback; SheafOfModules.PullbackConstruction.adjunction; AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward; TopCat.Sheaf.instIsLeftAdjointPullback; CategoryTheory.Functor.sheafPullbackConstruction.sheafAdjunctionContinuous; TopCat.Presheaf.pushforwardPullbackAdjunction; CategoryTheory.Adjunction.ofIsRightAdjoint.",
+   "date": "2026-10-18",
+   "verdict": "General sheaf and category adjunctions only, not this completed constructible functor."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "right adjoint of completed pullback on constructible Qbar ell categories for finite type morphisms over an arbitrary field",
+   "results": "[leanfinder] OK 8 hit(s): AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback; AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward; CategoryTheory.Over.pullbackIsRightAdjoint; AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction; CategoryTheory.MorphismProperty.Over.mapPullbackAdj; AlgebraicGeometry.Scheme.Modules.pseudofunctor; AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj; AlgebraicGeometry.ExistsHomHomCompEqCompAux.D'.",
+   "date": "2026-10-18",
+   "verdict": "Only general module-sheaf and over-category functors, not completed adic constructible direct image."
+  },
+  {
+   "tool": "loogle",
+   "query": "pbcQbarCompletedPull, Functor.rightAdjoint",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'pbcQbarCompletedPull'",
+   "date": "2026-10-18",
+   "verdict": "No exact declaration in Mathlib."
+  },
+  {
+   "tool": "grep",
+   "query": "qbarDerivedDirectImage|qbarDerivedPullback_isLeftAdjoint|pbcQbarCompletedPull",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-18",
+   "verdict": "No Mathlib declaration for this specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n qbarDerivedDirectImage|qbarDerivedPullback_isLeftAdjoint|arbitrary.field.*direct image dag/nodes lean/Sheaf /home/ubuntu/weil-src-slopmaster2/WeilConjectures; tools/blueprint_refs.py search derived direct image",
+   "results": "No delivered declaration name occurs in the project or upstream sources. DAG search returns the existing integral derived-direct-image node and ordinary-adjunction theorem, but no definition of this arbitrary-field Qbar functor. blueprint_refs returns 78 related nodes, including def-weil-derived-direct-image and lem-per-qbar-ordinary-adjunction. The live sfModelDerivedPush is restricted to a finite-field datum.",
+   "date": "2026-10-18",
+   "verdict": "The existing constructions are publicly imported; the required arbitrary-field right-adjoint interface has no owned definition node."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-per-qbar-affine-support-bound",
+  "date": "2026-10-18",
+  "group": "NH"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Steps 2 and 3: the ordinary adic derived direct image in the affine sheaf support estimate",
+   "via": [
+    "lem-per-qbar-affine-support-bound"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "lean": {
+  "module": "Sheaf.Paper.QbarDerivedDirectImage",
+  "declaration": "AlgebraicGeometry.Scheme.qbarDerivedDirectImage",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.qbarDerivedPullback_isLeftAdjoint",
+   "AlgebraicGeometry.Scheme.qbarDerivedDirectImage"
+  ],
+  "file": "lean/Sheaf/Paper/QbarDerivedDirectImage.lean",
+  "statement": "def qbarDerivedDirectImage : pbcQbarCategory l Ω X.scheme ⥤ pbcQbarCategory l Ω Y.scheme",
+  "branch": "newtargets-dag",
+  "by": "NH",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-817b13f80",
+  "group": "NH",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-817b13f80",
+  "group": "NH",
+  "result": "pass",
+  "note": "Re-push of the PASSed 487d6cd0. Snapshots are byte-identical apart from the regenerated blueprint-index.tsv. L returned 487d6 at landing only for a RingedSiteDualityMaps overlay break (unknown SheafOfModules.overFunctor) in another group's base side module, not a delivery file. nt_compile --json now runs clean: QbarDerivedDirectImage 3.5 s, QbarAffineSupportBound 5.2 s, rc 0, no errors. Item statement rechecked clause by clause: Base k schemes; IsOver/IsAffineHom/LocallyOfFiniteType; CommonHeart input; pbcQbarCohomologySupport closure; Nonempty guard for dim(empty) = -infinity; q>a forces empty support; q<0 vanishing via commonT; independent universes; 11-step docstring. All six original stmt_dep records equal live (the N5 def-weil-derived-direct-image record is intact, so the H13 fix holds). New node def-per-qbar-derived-direct-image is the canonical rightAdjoint of the recorded pbcQbarCompletedPull, not hollow. No live duplicate Q-bar direct image; the item is not live, so no credit grab. Land as is."
+ }
+}
