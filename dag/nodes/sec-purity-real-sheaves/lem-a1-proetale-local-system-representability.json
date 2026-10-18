@@ -15,55 +15,166 @@
   "def-weil-etale-morphism",
   "def-trf-valuation-ring"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-weil-pbc-proetale-locally-classical-etale-cover] to the given local constant trivializations. Its explicit locally constant special case gives an etale sheaf of sets $G$ on $X_{\\mathrm{et}}$ and an isomorphism $F\\cong\\nu_X^*G$. This applies to arbitrary sets $S_i$, including empty and infinite ones. No weakly contractible refinement is needed.",
+   "uses": [
+    "lem-weil-pbc-proetale-locally-classical-etale-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definition 5.1.3, Lemma 5.1.4 and Remark 7.3.2"
+   }
+  },
+  {
+   "text": "Apply [lem-a1-etale-sheaf-algebraic-space-realization] to $G$. It gives an etale algebraic space $E\\to X$ with $G\\cong h_E^{\\mathrm{et}}$ and hence $F\\cong h_E^{\\mathrm{proet}}$. The site is small in the larger universe fixed in the statement, and the set of pairs consisting of a site object and one of its sections is a set. Enlarge the universe of the representing space to contain its presentation if necessary; the conclusion imposes no size bound on $Z$. For each given cover member $U_i$, the same lemma identifies $F|_{U_i}\\cong\\nu_{U_i}^*h_{E_{U_i}}^{\\mathrm{et}}$.",
+   "uses": [
+    "lem-a1-etale-sheaf-algebraic-space-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Stacks Tag 0GF6; Bhatt–Scholze Lemmas 5.1.1 and 5.4.1"
+   }
+  },
+  {
+   "text": "For any set $S$ the constant sheaf $\\underline S$ is the coproduct of $S$ copies of the terminal sheaf: maps from it into $H$ are, by the constant-presheaf definition and the sheafification adjunction, $S$-indexed families of maps from the terminal presheaf into $H$. This is precisely the coproduct universal property. The geometric inverse image $\\nu_U^*$ preserves the terminal object by finite-limit preservation and preserves this coproduct by [lem-weil-pbc-left-adjoint-preserves-colimits]. Thus it carries the etale constant set sheaf to the pro-etale constant set sheaf, without a finiteness assumption on $S$.",
+   "uses": [
+    "def-weil-pbc-constant-sheaf",
+    "def-weil-pbc-sheafification",
+    "def-weil-pbc-site-comparison-morphism",
+    "lem-weil-pbc-left-adjoint-preserves-colimits"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definition 5.1.3 and the geometric comparison; the two adjunction universal properties"
+   }
+  },
+  {
+   "text": "Combine the identifications in steps 2 and 3 with $F|_{U_i}\\cong\\underline{S_i}$ to get $\\nu_{U_i}^*h_{E_{U_i}}^{\\mathrm{et}}\\cong\\nu_{U_i}^*\\underline{S_i}_{\\mathrm{et}}$. Full faithfulness [det-pe-classical-sheaves-unit] lifts this isomorphism and its inverse to mutually inverse maps of etale sheaves. By [lem-galois-constant-sheaf-sets-representable], $\\underline{S_i}_{\\mathrm{et}}$ is $h_{D_i}^{\\mathrm{et}}$ for $D_i=\\coprod_{s\\in S_i}U_i$. The full faithfulness of etale-space realization now lifts this to an isomorphism of algebraic spaces $E_{U_i}\\cong D_i$ over $U_i$. This identifies actual base changes, not just their geometric-point sets.",
+   "uses": [
+    "det-pe-classical-sheaves-unit",
+    "lem-galois-constant-sheaf-sets-representable",
+    "lem-a1-etale-sheaf-algebraic-space-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 5.1.2; Loc_X to wLoc_X in Lemma 7.3.9 specialized to constant local sheaves; Stacks Tag 0GF6"
+   }
+  },
+  {
+   "text": "For $D_i=\\coprod_{s\\in S_i}U_i$, its fibre product with itself over $U_i$ is $\\coprod_{(s,t)\\in S_i\\times S_i}U_i$: on each pair of summands the fibre product is $U_i$, and these open summands partition the whole product. Its diagonal is the union of the summands with $s=t$; its complement is the union with $s\\ne t$, so the diagonal is a closed immersion. For a valuation ring $R$ and a diagram for $D_i\\to U_i$, the generic map chooses one summand $s$. The structural map $\\operatorname{Spec}R\\to U_i$ into that same summand is a lift. Since $R$ is a domain, $\\operatorname{Spec}R$ is connected (its generic point lies in every nonempty open); a morphism from it to the disjoint union must use one summand, and that summand must be $s$. The lift is therefore unique. For $S_i=\\varnothing$ there is no generic map, so the lifting assertion is vacuous. This verifies both properties of every $E_{U_i}\\to U_i$ under step 4's isomorphism.",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family",
+    "def-pc-fibre-product",
+    "def-trf-valuation-ring",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definition 7.3.1(3); the constant special case of Lemma 7.3.6(2),(3)"
+   }
+  },
+  {
+   "text": "The covering family in the hypothesis is fpqc by [def-weil-pbc-proetale-site]. Apply [lem-a1-space-fpqc-separated-valuative-descent] to $E\\to X$ and this family, using the separatedness and full valuation lifting property verified in step 5 on each actual base change $E_{U_i}$, transported along the isomorphism $E_{U_i}\\cong D_i$ of step 4. The descent statement asks that every scheme base change of the diagonal of $E_{U_i}\\to U_i$ be a closed immersion; this holds because the diagonal of $D_i\\to U_i$ is a closed immersion of schemes by step 5 and closed immersions are stable under arbitrary base change [lem-weil-pbc-closed-immersion-base-change]. It follows that $E\\to X$ has closed diagonal and the full valuation lifting property over $X$. These are separate conclusions of the cited descent statement; no assertion about descent of arbitrary schemes or an unproved clopen-colimit diagonal is being used.",
+   "uses": [
+    "def-weil-pbc-proetale-site",
+    "lem-a1-space-fpqc-separated-valuative-descent",
+    "lem-weil-pbc-closed-immersion-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 7.3.9, first forward implication, descent assertion; Stacks Tags 0421 and 04P2"
+   }
+  },
+  {
+   "text": "The algebraic space $E\\to X$ is etale by step 2 and has closed diagonal by step 6. Apply [lem-a1-separated-etale-space-scheme] to obtain a scheme $Z$ representing $E$, with $q:Z\\to X$ etale. In particular the schemehood conclusion uses the separated locally quasi-finite theorem, not a claim of quasi-separatedness from topological Noetherianity. The locally Noetherian hypothesis of the item is retained; this constant-local special case of the forward argument does not need to use it.",
+   "uses": [
+    "lem-a1-separated-etale-space-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 7.3.9, schemehood conclusion; Stacks Tags 03XU and 03XX, Section 0417"
+   }
+  },
+  {
+   "text": "Compose $F\\cong h_E^{\\mathrm{proet}}$ with the isomorphism $E\\cong h_Z$. Evaluation on any object $U\\to X$ gives $\\theta_U:F(U)\\xrightarrow{\\sim}\\operatorname{Hom}_X(U,Z)$, and the presheaf-isomorphism equations give naturality for every arrow of the site. The full lifting property of step 6 is invariant under the representing isomorphism: composing a valuation diagram or its lift with that isomorphism and its inverse gives mutually inverse correspondences on lifts. Thus it is exactly the existence and uniqueness requested for $q$. No bound on the number of summands was used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definition 7.3.1(3), unpacking representability and the valuation lifting property"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-trf-valuation-ring",
+  "def-weil-closed-immersion",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-sheafification",
+  "def-weil-pbc-site-comparison-morphism",
+  "det-pe-classical-sheaves-unit",
+  "lem-a1-etale-sheaf-algebraic-space-realization",
+  "lem-a1-separated-etale-space-scheme",
+  "lem-a1-space-fpqc-separated-valuative-descent",
+  "lem-galois-constant-sheaf-sets-representable",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "lem-weil-pbc-proetale-locally-classical-etale-cover",
+  "lem-weil-pbc-scheme-coproduct-family"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Remark 7.3.2 and Lemma 7.3.9, Loc_X to Cov_X only, pp.66-67; specialize the local representability/descent argument to constant sheaves, with Stacks 0GF6, 0421, 04P2, 03XU, 03XX."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
    "query": "Every locally constant sheaf of sets on the proetale site of a locally Noetherian scheme is represented by an etale scheme satisfying the valuative criterion of properness",
-   "results": "8 hits: AlgebraicGeometry.Scheme.Etale, CondensedSet.mem_locallyConstant_essImage_of_isColimit_mapCocone, AlgebraicGeometry.Scheme.instFullEtaleOverForget, AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful, AlgebraicGeometry.Scheme.instCategoryEtale, AlgebraicGeometry.Scheme.etaleTopology, AlgebraicGeometry.Scheme.smallEtaleTopology, LightCondSet.mem_locallyConstant_essImage_of_isColimit_mapCocone",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Etale; CondensedSet.mem_locallyConstant_essImage_of_isColimit_mapCocone; AlgebraicGeometry.Scheme.instFullEtaleOverForget; AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful; AlgebraicGeometry.Scheme.instCategoryEtale; AlgebraicGeometry.Scheme.etaleTopology; AlgebraicGeometry.Scheme.smallEtaleTopology; LightCondSet.mem_locallyConstant_essImage_of_isColimit_mapCocone",
    "date": "2026-10-18",
-   "verdict": "no match: constant condensed sheaves, the category of etale schemes, and Zariski representability from open charts do not prove representability of arbitrary pro-etale local systems with valuation lifting"
+   "verdict": "no match: scheme-level etale, separatedness, or valuative definitions do not give this algebraic-space theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proetale locally constant sheaves are geometric coverings over locally topologically Noetherian schemes",
+   "results": "8 hits: AlgebraicGeometry.Scheme.etalePretopology; AlgebraicGeometry.Scheme.etaleTopology; AlgebraicGeometry.Scheme.smallEtalePretopology; AlgebraicGeometry.Scheme.smallEtaleTopology; AlgebraicGeometry.Scheme.Cover; AlgebraicGeometry.Scheme.quasiCompactCover; AlgebraicGeometry.QuasiCompactCover; LightProfinite.instWEqualsLocallyBijectiveCoherentTopology",
+   "date": "2026-10-18",
+   "verdict": "no match: scheme-level etale, separatedness, or valuative definitions do not give this algebraic-space theorem"
   },
   {
    "tool": "loogle",
-   "query": "\"Sheaf\", \"IsRepresentable\", \"IsEtale\"",
+   "query": "AlgebraicGeometry.Scheme.Etale, LocallyConstant",
    "results": "0 hits: ",
    "date": "2026-10-18",
-   "verdict": "no match: constant condensed sheaves, the category of etale schemes, and Zariski representability from open charts do not prove representability of arbitrary pro-etale local systems with valuation lifting"
+   "verdict": "no match: scheme-level etale, separatedness, or valuative definitions do not give this algebraic-space theorem"
   },
   {
    "tool": "grep",
    "query": "geometric.?cover|locally.?constant.*represent|represent.*locally.?constant",
-   "results": "0 hits: ",
+   "results": "0 hits: ; directory AlgebraicGeometry",
    "date": "2026-10-18",
-   "verdict": "no match: constant condensed sheaves, the category of etale schemes, and Zariski representability from open charts do not prove representability of arbitrary pro-etale local systems with valuation lifting"
+   "verdict": "no match: scheme-level etale, separatedness, or valuative definitions do not give this algebraic-space theorem"
   },
   {
    "tool": "leansearch",
    "query": "Locally constant proetale sheaves of arbitrary sets are geometric coverings of schemes",
-   "results": "8 hits: CondensedSet.LocallyConstant.functorFullyFaithful, Condensed.lanSheafProfinite, LightCondensed.lanLightCondSet, Condensed.locallyConstantPresheaf, LightCondSet.mem_locallyConstant_essImage_of_isColimit_mapCocone, LightCondSet.LocallyConstant.functor, CompHausLike.LocallyConstant.functor_obj_val, CompHausLike.LocallyConstant.functorIso",
+   "results": "8 hits: CondensedSet.LocallyConstant.functorFullyFaithful; Condensed.lanSheafProfinite; LightCondensed.lanLightCondSet; Condensed.locallyConstantPresheaf; LightCondSet.mem_locallyConstant_essImage_of_isColimit_mapCocone; LightCondSet.LocallyConstant.functor; CompHausLike.LocallyConstant.functor_obj_val; CompHausLike.LocallyConstant.functorIso",
    "date": "2026-10-18",
-   "verdict": "no match: constant condensed sheaves, the category of etale schemes, and Zariski representability from open charts do not prove representability of arbitrary pro-etale local systems with valuation lifting"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "Proetale local systems of sets on locally Noetherian schemes are representable by schemes etale over the base with unique lifts for all valuation rings",
-   "results": "8 hits: AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.Scheme.instFaithfulEtaleOverForget, AlgebraicGeometry.Scheme.Etale.forget, AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful, AlgebraicGeometry.Scheme.instFullEtaleOverForget, AlgebraicGeometry.Scheme.instCategoryEtale, AlgebraicGeometry.Scheme.LocalRepresentability.representableBy, AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable",
-   "date": "2026-10-18",
-   "verdict": "no match: constant condensed sheaves, the category of etale schemes, and Zariski representability from open charts do not prove representability of arbitrary pro-etale local systems with valuation lifting"
-  },
-  {
-   "tool": "grep",
-   "query": "LocallyConstant|IsLocallyConstant|ValuativeCriterion",
-   "results": "0 hits: ; directory AlgebraicGeometry/Sites",
-   "date": "2026-10-18",
-   "verdict": "no match: constant condensed sheaves, the category of etale schemes, and Zariski representability from open charts do not prove representability of arbitrary pro-etale local systems with valuation lifting"
+   "verdict": "no match: scheme-level etale, separatedness, or valuative definitions do not give this algebraic-space theorem"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-a1-normal-locally-constant-finite-section",
@@ -75,15 +186,49 @@
  "blueprint": {
   "from": {
    "node": "lem-a1-affine-hc0",
-   "place": "Master proof of lem-a1-affine-hc0, first sentence: 'A class in H_c^0 is a global section of F whose support is proper over the base field'; the coefficient realization uses global integral lattices. Here the finite-cover section supplies the geometric normality input in the monodromy comparison used to construct those lattices. Auxiliary Representability of pro-etale local systems of sets.",
-   "via": [
-    "lem-a1-normal-locally-constant-finite-section",
-    "lem-a1-normal-proetale-monodromy",
-    "lem-a1-smooth-lisse-integral-lattice",
-    "lem-a1-degree-zero-compact-support-sections"
-   ]
+   "place": "Auxiliary representability input: Bhatt–Scholze Definition 7.3.1 and Lemma 7.3.9 (Loc_X = Cov_X), which supplies the geometric-covering realization used here.",
+   "via": []
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-a1-proetale-local-system-representability",
+  "worker": "stage1",
+  "summary": "Repair of returned head 167ac7cda3. Preserve the item statement; discard the three unnecessary converse inputs and the general qcqs-classical lemma. Reuse existing classicality and algebraic-space definitions. Realize the classical etale sheaf, identify its base changes with actual constant coproduct schemes using full faithfulness, check separatedness and valuation lifting on these coproducts, descend these properties by an explicit generic tool node, and apply the separated-etale-space schemehood node. No weakly contractible refinement, no unsupported Noetherian quasi-separatedness, and no converse inclusion remains. Three statement-only nodes, no Mathlib leaves.",
+  "blueprint": "The ancestor lem-a1-affine-hc0 uses the representability input to turn a pro-etale local system into a geometric covering. The eight steps implement only the Loc_X to Cov_X implication of the auxiliary source BS Lemma 7.3.9, specializing its local construction to the given constant trivializations.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-proetale-locally-classical-etale-cover",
+    "why": "Use its explicit arbitrary locally constant sheaf-of-sets special case to obtain classicality, BS 5.1.4; this generic comparison input is absent from the Rankin–Selberg unit."
+   },
+   {
+    "node": "det-pe-classical-sheaves-unit",
+    "why": "Use full faithfulness of comparison on each cover member to recover the actual etale sheaf isomorphism, BS 5.1.2; the unit gives no comparison theorem."
+   },
+   {
+    "node": "lem-galois-constant-sheaf-sets-representable",
+    "why": "Use arbitrary-set constant sheaf representability by the coproduct, as the constant specialization of the local construction; the unit gives no such generic functor-of-points lemma."
+   },
+   {
+    "node": "lem-weil-pbc-scheme-coproduct-family",
+    "why": "Use arbitrary scheme coproducts with their disjoint open components to check the diagonal and valuation property on constant trivializations; the unit gives no scheme-coproduct construction."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-proetale-locally-classical-etale-cover",
+  "det-pe-classical-sheaves-unit",
+  "lem-galois-constant-sheaf-sets-representable",
+  "lem-weil-pbc-scheme-coproduct-family"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-NN-7fda51070",
+  "group": "NN",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NN-7fda51070 (reviewer sub-agent of L); spot-checked: I read the item, all 8 steps, the 3 new nodes and the statement of every cited node in full. Sources checked: Bhatt–Scholze 5.1.1–5.1.4, 5.4.1 and 7.3.1–7.3.11 (5.1.4 is for pro-étale covers, so step 1 is justified); Stacks 0GF6 with its construction and size footnote, 03XX (no quasi-compactness hypothesis) with 03XU, and 0421 and 04P2. The item statement is unchanged, true and not weakened. It is BS 7.3.9 Loc_X⊂Cov_X with existence and uniqueness of valuative lifts. Edge cases checked: X=∅, S_i=∅, infinite S_i. The parent lem-a1-normal-locally-constant-finite-section uses exactly what the item gives. All three new nodes are true and are strictly smaller than the item. Realization: 0GF6 plus Yoneda, and the pro-étale comparison via BS 5.1.1/5.4.1 and the fact that étale maps are locally of finite presentation; non-separated étale spaces are allowed and no schemehood is claimed. fpqc descent of separatedness and of the full valuative property: I wrote out the argument. Pass to a faithfully flat valuation ring R→R' that dominates a local ring of the cover, then make the two lifts agree on the R-flat generic fibre and descend with 04P2. Infinite disjoint unions show why the node correctly avoids 'proper'. Separated étale space over a scheme is a scheme: 03XX+03XU. There are no duplicates among the lem-trf algebraic-space nodes, lem-weil-pbc-fpqc-descend-separated, lem-trf-space-qc-separated-etale-local or lem-galois-constant-sheaf-sets-representable. Batch-5: all 4 flagged citations (def-trf-algebraic-space ×3, def-trf-valuation-ring) are general definitions. Their transitive closure contains no other trace-formula or Poincaré-duality node, so they are outside both assumptions; accepted. Tool uses accepted: BS 5.1.4 classicality, BS 5.1.2 full faithfulness, constant-sheaf representability, scheme coproducts. FIX: step 6 applied the descent node, which needs every scheme base change of the diagonal to be a closed immersion. Step 5 shows only that the diagonal of D_i is a closed immersion, so the step needed base-change stability of closed immersions and transport along E_{U_i}≅D_i. I added both, citing the Mathlib leaf lem-weil-pbc-closed-immersion-base-change, and regenerated proof_deps. The corrected item is in fixes/dag/nodes/sec-purity-real-sheaves/; details are in review.md.; 1 file(s) fixed by the reviewer"
  }
 }
