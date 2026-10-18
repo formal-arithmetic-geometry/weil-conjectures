@@ -57,7 +57,7 @@ noncomputable def upperStarHomologyRightDerivedRestrictScalarsIso
           (restrictScalarsRightDerivedLowerStarSingleIso (Ideal.Quotient.mk I) g M).symm ≪≫
         (((Sheaf.restrictScalars Y.smallEtaleTopology
           (Ideal.Quotient.mk I)).mapDerivedCategoryHomologyFunctorIso k).app _).symm) ≪≫
-    (upperStarRestrictScalarsIso I j).app _
+    (upperStarRestrictScalarsIso (Ideal.Quotient.mk I) j).app _
 
 variable {𝕜 : Type u} [Field 𝕜]
 
