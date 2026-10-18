@@ -8,7 +8,9 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import Mathlib.LinearAlgebra.PerfectPairing.Basic
 public import WeilConjectures.WeilSheaf.Cohomology
+public import WeilConjectures.WeilSheaf.ConstantTwistCohomology
 public import WeilConjectures.WeilSheaf.Dual
+public import WeilConjectures.WeilSheaf.PoincareDualityLisse
 
 /-!
 # Poincaré duality for a lisse Weil sheaf
@@ -16,8 +18,9 @@ public import WeilConjectures.WeilSheaf.Dual
 Let `k₀ = 𝔽_q` be a finite field, `ℓ ≠ p` a prime, `X₀` a smooth, separated `k₀`-scheme of finite
 type and pure dimension `d`, and `F` a lisse Weil sheaf on `X₀` with dual `F^∨`. Poincaré
 duality pairs `H_c^i(X₀ ⊗ k̄, F)` perfectly with `H^{2d-i}(X₀ ⊗ k̄, F^∨)`, with values in the line
-`ℚ̄_ℓ(-d)` on which the geometric Frobenius acts by `q^d`. The degreewise perfectness of another
-section of the blueprint is stated here, with `sorry`, in this form.
+`ℚ̄_ℓ(-d)` on which the geometric Frobenius acts by `q^d`. This is derived from
+`AlgebraicGeometry.WeilSheaf.exists_isPerfPair_compactlySupportedCohomology_dual` (the twisted
+form, pairing with `F^∨(d)`).
 
 A perfect pairing `M × N ⟶ K` of Frobenius modules with `⟨F x, F y⟩ = c ⟨x, y⟩` identifies `M`
 with the dual `N^∨` with Frobenius rescaled by `c`
@@ -25,18 +28,11 @@ with the dual `N^∨` with Frobenius rescaled by `c`
 
 ## Main statements
 
-- `AlgebraicGeometry.WeilSheaf.exists_isPerfPair_compactlySupportedCohomology_dual`
-  (`thm-pod-degreewise-perfectness-over-a-field` for lisse `K`, with
-  `thm-pod-equivariance-of-the-twisted-pairing`): the perfect Frobenius-equivariant pairings.
+- `AlgebraicGeometry.WeilSheaf.exists_isPerfPair_compactlySupportedCohomology_dual_mul`: the
+  perfect pairings with `F^∨`, on which the Frobenius acts by `q^d`.
 - `FrobeniusModule.Equiv.dual`: the dual of an isomorphism of Frobenius modules.
 - `FrobeniusModule.Equiv.ofIsPerfPair`: a perfect pairing multiplying the Frobenius by `c`
   identifies `M` with `N^∨` rescaled by `c`.
-
-## Implementation notes
-
-As in `WeilConjectures.WeilSheaf.TraceIsomorphism`, Weil complexes have no `Ra^!`, orientation or
-derived tensor product yet, so the duality is stated existentially: there are perfect pairings
-on which the Frobenius acts as asserted.
 -/
 
 @[expose] public section
@@ -87,24 +83,52 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fa
   [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
   [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
 
-/-- Blueprint `thm-pod-degreewise-perfectness-over-a-field` (for `K = F` a lisse Weil sheaf, so
-that `K^∨ = F^∨`, in its line-valued form `H_c^i(X, K) × H^{2d-i}(X, K^∨) ⟶ ℚ̄_ℓ(-d)`), with the
-Frobenius equivariance of `thm-pod-equivariance-of-the-twisted-pairing`: for `X₀` smooth,
-separated, of finite type and pure dimension `d` over `k₀` and `F` lisse, the degreewise
-Poincaré pairings `H_c^i(X₀ ⊗ k̄, F) × H^j(X₀ ⊗ k̄, F^∨) ⟶ ℚ̄_ℓ`, `i + j = 2d`, are perfect, and
-`⟨F x, F y⟩ = q^d ⟨x, y⟩` for the geometric Frobenius `F` (Frobenius acts on `ℚ̄_ℓ(-d)` by
-`q^d`). Properness is not needed.
+/-- Degreewise Poincaré duality for a lisse Weil sheaf, untwisted form: for `X₀` smooth,
+separated, of finite type and pure dimension `d` over `k₀` and `F` lisse, there are perfect
+pairings `H_c^i(X₀ ⊗ k̄, F) × H^j(X₀ ⊗ k̄, F^∨) ⟶ ℚ̄_ℓ`, `i + j = 2d`, with
+`⟨F x, F y⟩ = q^d ⟨x, y⟩` for the geometric Frobenius `F`: the value line is `ℚ̄_ℓ(-d)`.
 
-For `F = ℚ̄_ℓ` this is equivalent to
-`AlgebraicGeometry.WeilSheaf.exists_isPerfPair_compactlySupportedCohomology_adicConstant`, the
-Frobenius of `H^j(ℚ̄_ℓ(d))` being `q^{-d}` times that of `H^j(ℚ̄_ℓ)`. -/
-theorem exists_isPerfPair_compactlySupportedCohomology_dual (d : ℕ)
+This is `AlgebraicGeometry.WeilSheaf.exists_isPerfPair_compactlySupportedCohomology_dual`
+(blueprint `thm-pod-degreewise-perfectness-over-a-field`), which pairs with `F^∨(d)`, transported
+along `H^j(F^∨(d)) ≅ H^j(F^∨)` with Frobenius rescaled by `χ_ℓ(σ)ᵈ = q^{-d}`
+(`AlgebraicGeometry.WeilSheaf.nonempty_equiv_cohomology_constantTwist`). -/
+theorem exists_isPerfPair_compactlySupportedCohomology_dual_mul (d : ℕ)
     [SmoothOfRelativeDimension d (X ↘ Spec (CommRingCat.of k₀))] (F : WeilSheaf k₀ l X)
     (hF : F.IsLisse) (i j : ℤ) (h : i + j = 2 * d) :
     ∃ P : (F.compactlySupportedCohomology i).carrier →ₗ[PadicAlgCl l]
         ((F.dual hF).cohomology j).carrier →ₗ[PadicAlgCl l] PadicAlgCl l,
       P.IsPerfPair ∧ ∀ x y, P ((F.compactlySupportedCohomology i).frobenius x)
-        (((F.dual hF).cohomology j).frobenius y) = (Nat.card k₀ : PadicAlgCl l) ^ d * P x y :=
-  sorry
+        (((F.dual hF).cohomology j).frobenius y) = (Nat.card k₀ : PadicAlgCl l) ^ d * P x y := by
+  obtain ⟨P, hP, hPF⟩ := exists_isPerfPair_compactlySupportedCohomology_dual d hF i j h
+  obtain ⟨e⟩ := nonempty_equiv_cohomology_constantTwist (F.dual hF) (cyclotomicUnit k₀ l ^ d) j
+  let eH : ((F.dual hF).cohomology j).carrier ≃ₗ[PadicAlgCl l]
+      (((F.dual hF).constantTwist (cyclotomicUnit k₀ l ^ d)).cohomology j).carrier :=
+    e.toLinearEquiv.symm
+  have hb : ((cyclotomicUnit k₀ l ^ d : (PadicAlgCl l)ˣ) : PadicAlgCl l) ≠ 0 := Units.ne_zero _
+  -- `eH` divides the Frobenius by `χ_ℓ(σ)ᵈ`
+  have heH (y : ((F.dual hF).cohomology j).carrier) :
+      eH (((F.dual hF).cohomology j).frobenius y) =
+        ((cyclotomicUnit k₀ l ^ d : (PadicAlgCl l)ˣ) : PadicAlgCl l)⁻¹ •
+          (((F.dual hF).constantTwist (cyclotomicUnit k₀ l ^ d)).cohomology j).frobenius
+            (eH y) := by
+    have h1 := e.map_frobenius (eH y)
+    have h2 : e.toLinearEquiv (eH y) = y := e.toLinearEquiv.apply_symm_apply y
+    rw [h2] at h1
+    have h3 : (((F.dual hF).cohomology j).rescale
+        ((cyclotomicUnit k₀ l ^ d : (PadicAlgCl l)ˣ) : PadicAlgCl l)).frobenius y =
+        ((cyclotomicUnit k₀ l ^ d : (PadicAlgCl l)ˣ) : PadicAlgCl l) •
+          ((F.dual hF).cohomology j).frobenius y := by
+      simp [FrobeniusModule.rescale]
+    rw [h3] at h1
+    apply e.toLinearEquiv.injective
+    rw [map_smul, h1, smul_smul, inv_mul_cancel₀ hb, one_smul]
+    exact e.toLinearEquiv.apply_symm_apply _
+  have hq : ((cyclotomicUnit k₀ l ^ d : (PadicAlgCl l)ˣ) : PadicAlgCl l)⁻¹ =
+      (Nat.card k₀ : PadicAlgCl l) ^ d := by
+    rw [Units.val_pow_eq_pow_val, cyclotomicUnit_eq, inv_pow, inv_inv]
+  refine ⟨P.compl₁₂ (LinearEquiv.refl _ _).toLinearMap eH.toLinearMap,
+    LinearMap.IsPerfPair.compl₁₂ (p := P) (LinearEquiv.refl _ _) eH, fun x y ↦ ?_⟩
+  simp only [LinearMap.compl₁₂_apply, LinearEquiv.coe_coe, LinearEquiv.refl_apply]
+  rw [heH, map_smul, hPF, smul_eq_mul, hq]
 
 end AlgebraicGeometry.WeilSheaf

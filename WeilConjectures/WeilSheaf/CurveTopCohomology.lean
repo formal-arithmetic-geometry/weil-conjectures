@@ -29,9 +29,8 @@ The geometric coinvariants are `AlgebraicGeometry.WeilSheaf.geometricCoinvariant
 
 - `AlgebraicGeometry.WeilSheaf.nonempty_equiv_compactlySupportedCohomology_two`
   (`lem-a1-affine-hc2`), from the lisse Poincaré pairing
-  `AlgebraicGeometry.WeilSheaf.exists_isPerfPair_compactlySupportedCohomology_dual` (the lisse
-  case of `thm-pod-degreewise-perfectness-over-a-field`, stated with `sorry` there: Verdier
-  duality for Weil complexes is not available yet).
+  `AlgebraicGeometry.WeilSheaf.exists_isPerfPair_compactlySupportedCohomology_dual_mul` (from the
+  lisse case of `thm-pod-degreewise-perfectness-over-a-field`).
 -/
 
 @[expose] public section
@@ -63,7 +62,7 @@ theorem nonempty_equiv_compactlySupportedCohomology_two [IsAffine U]
     Nonempty ((F.compactlySupportedCohomology 2).Equiv
       ((F.geometricCoinvariants hF).tateTwist (Nat.card k₀) (-1))) := by
   obtain ⟨P, hP, hPF⟩ :=
-    exists_isPerfPair_compactlySupportedCohomology_dual 1 F hF 2 0 (by norm_num)
+    exists_isPerfPair_compactlySupportedCohomology_dual_mul 1 F hF 2 0 (by norm_num)
   have hq : (Nat.card k₀ : PadicAlgCl l) ^ (-(-1 : ℤ)) ≠ 0 :=
     zpow_ne_zero _ (Nat.cast_ne_zero.2 Nat.card_pos.ne')
   exact ⟨(FrobeniusModule.Equiv.ofIsPerfPair P hq fun x y ↦ by
