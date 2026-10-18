@@ -275,5 +275,23 @@
   "group": "Q117",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q117-a7d771601 (reviewer sub-agent of L); spot-checked: I read the item and its proof against Stacks 0ALR (more-algebra.tex line 32037). The hypotheses match one by one. 'As an A-algebra' is a precision that the proof actually delivers, not a weakening, and the statement is unchanged. All 9 steps check against the statements they cite. Step 1: 00FN, 0316, 05GG. Step 2: f in IS gives f^c J inside J^2; the 00EH node with e=1-a_f gives C_f=(S_f)_{1-a_f}. Step 3: the new 0C2A node with the finitely generated K=IS, plus flatness by 00MB and B/IB=S/IS. Step 4: gluing datum with alpha_i=c∘delta^{-1}. The compatibilities (a) and (b) follow from canonical localizations of the ring isomorphisms delta, and Stacks omits this check. Step 5: 00GK, then 07M4 with base B and integral D. Step 6: etale gives flat and finite type over A. Step 7: flat-iso-mod-ideal-powers gives S'=S; 00MA gives D'^ = S'⊗D' = T, and reduction mod I is compatible. Step 8: T is IT-adically complete, the pair is henselian by 0ALJ, and uniqueness of idempotent lifts gives epsilon=(1,0). Step 9 is elementary: D'=F×G and F^ is isomorphic to C. New node lem-per-punctured-idempotent-complement matches 0C2A exactly. I tested it on r=0, k×k and E=0. New node lem-per-formal-glueing-finite-algebras is the algebra consequence of 05ER and 05EU and is true; t=0 forces R=S. Both new nodes are statement-only and self-contained, and neither restates a clause of the item. Duplicate search with rg for 0C2A, glueing-sum-components, 05EU and idempotent localization found no duplicate. The nearest nodes are lem-weil-pbc-formal-glueing-finite-modules (module finiteness only), prop-weil-pbc-formal-glueing-equivalence (modules only) and lem-sbc-punctured-completion-finite-gluing (local punctured-spectrum setting). Edge cases c=0, I=0 and a zero factor all hold. I accepted tool_use lem-weil-pbc-complete-pair-henselian (0ALJ), which the source proof itself uses. No SGA source is cited. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.ConormalTorsionAlgebraization",
+  "declaration": "AdicCompletion.exists_finiteType_algebraization_of_conormal_torsion",
+  "file": "lean/Sheaf/RingTheory/ConormalTorsionAlgebraization.lean",
+  "statement": "theorem exists_finiteType_algebraization_of_conormal_torsion (A : Type u) [CommRing A] [IsNoetherianRing A] (I : Ideal A) (B : Type v) [CommRing B] [Algebra A B] (hB : RingHom.FiniteType (algebraMap A B)) (C : Type w) [CommRing C] [Algebra A C] (f : AdicCompletion (I.map (algebraMap A B)) B →ₐ[A] C) (hf : Function.Surjective f) (htorsion : ∃ c : ℕ, ∀ r ∈ (I ^ c).map (algebraMap A (AdicCompletion (I.map (algebraMap A B)) B)), ∀ x : (RingHom.ker f.toRingHom).Cotangent, r • x = 0) : ∃ (D : Type (max u v)) (_ : CommRing D) (_ : Algebra A D), RingHom.FiniteType (algebraMap A D) ∧ Nonempty (AdicCompletion (I.map (algebraMap A D)) D ≃ₐ[A] C)",
+  "branch": "newtargets-dag",
+  "by": "NW",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e74ba872f",
+  "group": "NW",
+  "result": "pass",
+  "note": "Statement matches node and Stacks 0ALR (more-algebra.tex 32036-32043) clause by clause: IsNoetherianRing A, RingHom.FiniteType, AdicCompletion (I.map) B with canonical A-algebra structure (rfl-checked), A-algebra surjection f (induced structure, no case lost), J = ker f, J/J^2 = Ideal.Cotangent, ∃ c : ℕ with the extended ideal I^c acting by zero (c=0 included), conclusion ∃ D : Type (max u v) finite type with Nonempty (completion ≃ₐ[A] C); universes independent, no extra instances; edge cases I=0, I=⊤, J=0, C=0 fine. No duplicate in Mathlib/side/live; no parallel run. Imports = statement needs + the 8 recorded proof-dep modules; source/blueprint docstrings and 9-step proof docstring present; sorry only (axioms sorryAx); lean.statement verbatim; node otherwise unchanged. nt_compile --json clean 2.0 s."
  }
 }

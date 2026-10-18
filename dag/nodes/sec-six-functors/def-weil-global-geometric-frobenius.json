@@ -94,21 +94,25 @@
   "declaration": "WeilConjectures.globalGeometricFrobenius",
   "declarations": [
    "WeilConjectures.globalGeometricFrobenius",
-   "WeilConjectures.globalGeometricFrobeniusOnCohomology"
+   "WeilConjectures.globalGeometricFrobeniusOnCohomology",
+   "WeilConjectures.globalGeometricFrobeniusQbar",
+   "WeilConjectures.globalGeometricFrobeniusQbarOnCohomology",
+   "WeilConjectures.globalGeometricFrobeniusQbarCohomology"
   ],
   "file": "lean/Sheaf/Paper/GlobalGeometricFrobenius.lean",
   "statement": "def globalGeometricFrobenius (K : sfWeilComplex D c.l c.different Y₀ E.val) : End ((frobeniusCohomologyRationalFunctor D c.l c.different E.val Y₀ c₀ false).obj K.carrier) × End ((frobeniusCohomologyRationalFunctor D c.l c.different E.val Y₀ c₀ true).obj K.carrier)",
   "branch": "newtargets-dag",
-  "by": "NZ",
+  "by": "Q127",
   "date": "2026-10-18",
-  "existing": false
+  "existing": false,
+  "note": "The landed finite-stage record was unusable for this item because it exposes only globalGeometricFrobenius and globalGeometricFrobeniusOnCohomology, while the smooth-proper statement requires the algebraically closed common-stage specialization. This module appends the canonical Qbar endpoint-transport operator, its all-degree cohomology map, and the specified module/action package, preserving the two landed declarations in the same owned module."
  },
  "reviewed_lean": {
   "date": "2026-10-18",
   "by": "L",
-  "reviewer": "NT-stage2-cc-e02aa7dac",
-  "group": "NZ",
+  "reviewer": "NT-stage2-cc-cd2f124b4",
+  "group": "Q127",
   "result": "pass",
-  "note": "Re-delivery applies the 73c626f9 RETURN correction exactly. Tree diff of head vs parent 4e66d97e shows only the report, the item node and lean/Sheaf/Paper/GlobalGeometricFrobenius.lean; no Sheaf/A copy; the head's SixFunctors/FrobeniusCohomologyTransportIso.lean is byte-identical to live; NW's lem-weil-frobenius-cohomology-transport-iso record is unchanged (32 decls). Item module differs from the returned version only in the import, now the canonical path. Node differs from live only in lean; statement verbatim. Substance re-checked: theta = K.str.hom : Lg_Y^*For K -> For K; ordinary/compact composites tau(.1/.2) then RGamma/RGamma_c(theta) via RationalFunctor false/true (compact = Ra_! model then pointRationalFibre); H^i for all i in Z; no extra hypotheses, no sorry, docstrings OK. nt_compile --json with the live dep text as overlay (published olean still missing): dep 24.2 s, item 4.2 s, rc 0, no warnings."
+  "note": "Re-delivery after the H13/H9 RETURN of 50cb9bd6. The item .lean is byte-identical apart from imports: the 6 unused imports were dropped and the item now imports GlobalGeometricFrobenius. The 3 Qbar defs are appended verbatim in section Qbar to NZ's live GlobalGeometricFrobenius.lean; the live text is unchanged. The def-weil-global-geometric-frobenius record keeps its module, declaration and statement, with declarations a superset (2+3) and a lean.note; lean.by NZ->Q127 is advisory. Substance re-checked: zlCommonStageShriek is the lower shriek along the identity compactification, G is its right adjoint, e is pinned by the counit identity, omega's carrier and HEq structure are pinned, and FiniteDimensional holds for both supports and all i; no extra hypotheses, u and v independent. The statement field is verbatim and the stmt_deps are used. nt_compile --json clean: dependency 8.8 s, item 5.7 s, TwFrobeniusAction 9.7 s, RealSheavesCohomologyEulerSeries 5.7 s."
  }
 }

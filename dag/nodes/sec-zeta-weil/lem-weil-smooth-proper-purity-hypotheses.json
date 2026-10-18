@@ -25,7 +25,9 @@
   "def-compact-support-direct-image-detailed",
   "def-weil-weil-sheaf-complex",
   "def-weil-ordinary-compact-cohomology",
-  "def-weil-global-geometric-frobenius"
+  "def-weil-global-geometric-frobenius",
+  "def-zl-common-stage-weil-shriek",
+  "def-weil-constant-weil-structure"
  ],
  "proof": [
   {
@@ -143,5 +145,23 @@
   "group": "Q53",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q53-25814d16b (reviewer sub-agent of L); spot-checked: I read the item and every cited statement in full: sk-def-set and sk-thm-sf-package (1)-(8) at main-20261015, prop-weil-operations, sk-lem-finite, def-weil-weil-sheaf-complex, def-weil-exceptional-inverse-image, def-weil-global-geometric-frobenius, def-weil-ordinary-compact-cohomology, and def-weil-exceptional-adjoint-admissibility with its Warning and statement_change. I also read unit sk-input-weights and the three citers. The delivery has no new nodes. The imported clause 1 (a_X ambient-admissible at Qlb) is false: FullCD and the ambient right adjoint fail for an elliptic curve, as the admissibility node's Warning says, and that node's statement_change already marks this item holds:false. The worker correctly replaced it with the unconditional constructible adjunction on Dctf from sk-thm-sf-package (1). The item is not a target, so no target is weakened. All three steps hold. Step 1: sk-def-set's hypotheses are met because proper implies separated. Step 2: prop-weil-operations gives the equivariant lift of the constructible Rf^! for every separated finite-type f0. Step 3: sk-lem-finite gives field-stage finiteness for the constant object in Dctf, and F is the operator of def-weil-global-geometric-frobenius. The route is fine: all cited units are reached via sk-thm-poincare-duality, so no tool_uses are needed. proof_deps equals the union of the step uses, there is no cycle and no SGA. Small cases checked: d=0 (a point), an elliptic curve (omega = Qlb(1)[2], dimensions 1,2,1), and empty X (excluded by geometric connectedness). I made three repairs in fixes/: (1) def-weil-weil-sheaf-complex does not define 'dualizing Weil complex', so clause 2 and step 2 now say the pair is a Qlb-Weil complex 'called the dualizing Weil complex' and explain why it is an object of D^b_{c,W}; (2) clause 1 now cites def-weil-finite-tor-amplitude and def-compact-support-direct-image-detailed, added to stmt_deps; (3) proof_origin is now by: agent, since the proof follows only blueprint nodes. The report also claims a citations.json that is not in the delivery. SOURCE ERROR for HUMAN.md: prop-weight-purity and thm-weil-deligne-purity (DAG and main-20261015) still assume ambient admissibility, which cannot be discharged. As a result prop-arithmetic-roots step 5 and thm-weil-realization-independence step 2 cite this item for an admissibility claim it no longer makes. Fix those two theorems to use the constructible Ra^! with no admissibility hypothesis, as unit sk-input-weights already does. prop-weight-purity-ordinary uses only clause 3 and is unaffected.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SmoothProperPurityHypotheses",
+  "declaration": "WeilConjectures.smoothProperPurityHypotheses",
+  "file": "lean/Sheaf/Paper/SmoothProperPurityHypotheses.lean",
+  "statement": "theorem smoothProperPurityHypotheses (d : ℕ) (hsmooth : D.IsSmoothOfPureDimension X₀ d) : (∃ G : finiteTorFieldCoefficientCategory (generalAlgebraicallyClosedConstructibleCategory l Ω (D.geometricFiber (sfWeilCohomologyPoint D)).left) ⥤ finiteTorFieldCoefficientCategory (generalAlgebraicallyClosedConstructibleCategory l Ω (D.geometricFiber X₀).left), ∃ adj : zlCommonStageShriek D l hl Ω (frobeniusCohomologyModelMap D X₀) (Compactification.ofIsProper X₀.hom) ⊣ G, ∃ e : G ⋙ sfCommonStageWeilFrobeniusPullback D l hl X₀ Ω ≅ sfCommonStageWeilFrobeniusPullback D l hl (sfWeilCohomologyPoint D) Ω ⋙ G, (∀ K, (zlCommonStageShriek D l hl Ω (frobeniusCohomologyModelMap D X₀) (Compactification.ofIsProper X₀.hom)).map (e.hom.app K) ≫ adj.counit.app ((sfCommonStageWeilFrobeniusPullback D l hl (sfWeilCohomologyPoint D) Ω).obj K) = (zlShriekFrobenius D l hl Ω (frobeniusCohomologyModelMap D X₀) (Compactification.ofIsProper X₀.hom)).inv.app (G.obj K) ≫ (sfCommonStageWeilFrobeniusPullback D l hl (sfWeilCohomologyPoint D) Ω).map (adj.counit.app K)) ∧ ∃ omega : sfCommonStageWeilComplex D l hl X₀ Ω, omega.carrier = G.obj (constantWeilAlgebraicallyClosedComplex l D hl (sfWeilCohomologyPoint D) Ω).carrier ∧ HEq omega.str (e.app (constantWeilAlgebraicallyClosedComplex l D hl (sfWeilCohomologyPoint D) Ω).carrier ≪≫ G.mapIso (constantWeilAlgebraicallyClosedComplex l D hl (sfWeilCohomologyPoint D) Ω).str)) ∧ ∀ (compact : Bool) (i : ℤ), FiniteDimensional Ω (globalGeometricFrobeniusQbarCohomology D l hl X₀ Ω (Compactification.ofIsProper X₀.hom) (constantWeilAlgebraicallyClosedComplex l D hl X₀ Ω) compact i).a",
+  "branch": "newtargets-dag",
+  "by": "Q127",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cd2f124b4",
+  "group": "Q127",
+  "result": "pass",
+  "note": "Re-delivery after the H13/H9 RETURN of 50cb9bd6. The item .lean is byte-identical apart from imports: the 6 unused imports were dropped and the item now imports GlobalGeometricFrobenius. The 3 Qbar defs are appended verbatim in section Qbar to NZ's live GlobalGeometricFrobenius.lean; the live text is unchanged. The def-weil-global-geometric-frobenius record keeps its module, declaration and statement, with declarations a superset (2+3) and a lean.note; lean.by NZ->Q127 is advisory. Substance re-checked: zlCommonStageShriek is the lower shriek along the identity compactification, G is its right adjoint, e is pinned by the counit identity, omega's carrier and HEq structure are pinned, and FiniteDimensional holds for both supports and all i; no extra hypotheses, u and v independent. The statement field is verbatim and the stmt_deps are used. nt_compile --json clean: dependency 8.8 s, item 5.7 s, TwFrobeniusAction 9.7 s, RealSheavesCohomologyEulerSeries 5.7 s."
  }
 }

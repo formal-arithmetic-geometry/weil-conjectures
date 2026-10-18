@@ -241,5 +241,23 @@
   "group": "Q45",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q45-83eb4e957 (reviewer sub-agent of L); spot-checked: Read Stacks 095B (etale-cohomology.tex lines 9972-9991, statement and proof). The item matches the source's module clause exactly: f finite étale, R any commutative ring, F locally constant of finite type in the sense of def-weil-pbc-locally-constant-finite-type-modules. The statement is unchanged from live, and the live node is still unsplit. The delivery has no new nodes and no cycle (the 343-node DFS never reaches the item), cites no SGA, and every step is under 2000 characters. Step 1: lem-weil-pbc-finite-etale-etale-local-split, with one neighbourhood per point; these form a jointly surjective cover and the degree may vary. Step 2: elementary localization of f_* through the fibre-product isomorphism W×_U(U×_XY)≅W×_XY with an explicit inverse; R-linearity gives R_U-linearity. Step 3: lem-weil-pbc-direct-image-split-cover-product, whose hypotheses are exactly Step 1's output; it works for any Λ and gives zero for J=∅. Step 4: restriction of trivializations through étale composites, a common refinement from finite fibre products, and lemma-constructible-pullback-constant. That node is in route unit sk-thm-p1 and closed in slopmaster2, so the declared tool_use is harmless and accepted. Step 5: ∏ of constant presheaves is the constant presheaf with value ∏M_j, then clause (2) of lem-weil-pbc-site-r-module-presheaf-sheafification-exact (sheafification commutes with finite limits). Advisory only: \\underline M is cited via def-weil-pbc-constant-sheaf, while the definition uses the module sheafification of def-weil-pbc-constant-coefficient-scalar-extension; the two agree by the standard identification of \\underline R-module sheaves with R-module-valued sheaves. Step 6: coordinate generators give finite generation, and composing with Step 1's cover gives local constancy. Edge cases checked: J=∅, X=∅, R=0, ℤ², varying degree, infinite R. The only 095B duplicate candidate, lem-weil-pbc-etale-finite-pushforward-locally-constant, needs Λ finite and is a special case."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteEtalePushforwardFiniteType",
+  "declaration": "AlgebraicGeometry.Scheme.isFiniteLocallyConstantSheaf_lowerStar_of_isFinite_etale",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteEtalePushforwardFiniteType.lean",
+  "statement": "theorem isFiniteLocallyConstantSheaf_lowerStar_of_isFinite_etale {X Y : Scheme.{u}} (f : Y ⟶ X) [IsFinite f] [Etale f] {R : Type (u + 1)} [CommRing R] (F : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} R)) [IsFiniteLocallyConstantSheaf F] : IsFiniteLocallyConstantSheaf ((Etale.lowerStar (ModuleCat.{u + 1} R) f).obj F)",
+  "branch": "newtargets-dag",
+  "by": "Q04",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5c8a86440",
+  "group": "Q04",
+  "result": "pass",
+  "note": "Statement matches node and Stacks 095B module clause: IsFinite+Etale f, arbitrary CommRing R : Type (u+1) (recorded étale-coefficient convention, advisory), ModuleCat-valued sheaf on Y_et, input/output IsFiniteLocallyConstantSheaf (read Defs.lean: étale-local IsConstant + f.g. geometric stalks, equivalent to node's f.g. constant-value notion), direct image = recorded Etale.lowerStar. No extra hypotheses; edge cases (empty X/Y, J=∅, R=0, ℤ², non-Noetherian) covered. Not a duplicate: live finiteLocallyConstant_lowerStar_of_finite_etale needs [Finite Λ]; constant-sheaf and lisse versions are other notions. Only the item node's lean field changed; statement verbatim; docstrings with source, blueprint tag and 6 proof steps; proof sorry; plain imports are proof-dep modules. nt_compile --json clean (2.2 s)."
  }
 }

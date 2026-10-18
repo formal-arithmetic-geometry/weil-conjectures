@@ -191,5 +191,23 @@
   "group": "Q86",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q86-b10c4dc88 (reviewer sub-agent of L); spot-checked: I read the item and every node it cites in full. The statement matches Stacks properties.tex Tag 01PU (lemma-ample-on-closed, l.4274) with Definition 01PS (l.4243) exactly: Y is any scheme, M is ample and invertible, i is any closed immersion, and the claim is that i^*M is ample. No hypothesis is added or dropped. Step 1 shows i^*M is invertible (lem-weil-pbc-invertible-pullback-invertible, sorry-free in slopmaster2). It then uses that Y is quasi-compact by the definition of ampleness, that i is a homeomorphism onto a closed subset, and IsClosed.isCompact (Topology 005C), so X is quasi-compact. Step 2 takes n>=1 and s with i(x) in Y_s and Y_s affine. lem-weil-pbc-tensor-power-section-nonvanishing-pullback (sorry-free in slopmaster2) then gives a section t of the n-th power of the pullback with X_t = i^{-1}(Y_s), using the same nonvanishing predicate, so this is a real section transport and not just an isomorphism. Step 3 uses clause (1) of lem-weil-pbc-closed-immersion-affine-cover-criterion, a Mathlib leaf for Stacks 01QO/01IH, to show X_t is affine, which completes the definition. All cited statements are Mathlib leaves or sorry-free in slopmaster2, so nothing leaves the unit's route and no tool_uses entry is needed. The parent unit's Step 3 uses the item with matching hypotheses. I checked these cases: X empty, i the identity, Spec R/I inside Spec R, and non-reduced X or I not of finite type. There are no new nodes, no cycles and no SGA citations; Mathlib searches are recorded honestly, with LeanSearch marked unavailable. Two observations, no fix applied: (1) the existing reviewed lem-weil-pbc-pullback-ample-invertible (pullback of an ample module along an affine morphism; sorry-free in slopmaster2 as isAmple_tensorPullback_of_isAffineHom) covers the item as a one-line special case. The item already existed (created by Q19) and the report names this candidate, so the maintainer may later merge or shortcut. (2) The item has no lean_audit field; it was created that way by Q19 and this delivery did not change it."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AmpleRestrictClosedImmersion",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.isAmple_tensorPullback_of_isClosedImmersion",
+  "file": "lean/Sheaf/AlgebraicGeometry/AmpleRestrictClosedImmersion.lean",
+  "statement": "theorem isAmple_tensorPullback_of_isClosedImmersion {Y : Scheme.{u}} (M : Y.Modules) [M.IsInvertible] (hM : IsAmple Y M) {X : Scheme.{u}} (i : X ⟶ Y) [IsClosedImmersion i] : @IsAmple X ((tensorPullback i).obj M) ((invertible_pullback_tensor i).1 M).2",
+  "branch": "newtargets-dag",
+  "by": "Q120",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e49b9eab1",
+  "group": "Q120",
+  "result": "pass",
+  "note": "Statement matches node and Stacks 01PU clause by clause: Y : Scheme.{u}, M : Y.Modules [IsInvertible] with IsAmple Y M (absolute 01PS notion), any i : X ⟶ Y [IsClosedImmersion]; conclusion @IsAmple X ((tensorPullback i).obj M) via invertible_pullback_tensor, same form as the recorded isAmple_tensorPullback_of_isAffineHom. No extra hypotheses; shared universe forced by the morphism; lean.statement verbatim; only node change vs live is the lean record. Edge cases (empty X, identity, nilpotent ideals) covered. nt_compile --json clean (2.0 s); control with an unknown identifier fails; scratch probe proves the item by exact isAmple_tensorPullback_of_isAffineHom i M hM (2.3 s). No existing closed-immersion theorem, so existing:false is right. Docstrings carry source, blueprint id and all 3 proof steps; only sorry. Second-reading section is the standard dispatcher placeholder. Advisory: stage-3 proof is one line from the affine-hom theorem."
  }
 }

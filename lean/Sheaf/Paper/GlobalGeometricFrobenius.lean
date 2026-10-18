@@ -77,4 +77,63 @@ def globalGeometricFrobeniusOnCohomology
     (DerivedCategory.coefficientFdCohomology E.val i).map
       (globalGeometricFrobenius D c E Y₀ c₀ K).2)
 
+
+section Qbar
+
+universe v
+
+variable (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)
+  (Y₀ : Over (Spec (.of D.k₀))) [LocallyOfFiniteType Y₀.hom] [QuasiCompact Y₀.hom]
+  [IsSeparated Y₀.hom]
+  (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
+  (c₀ : Compactification Y₀.hom)
+
+/-- Global geometric Frobenius on the ordinary or compact coefficient complex of
+an algebraically closed Weil pair. This is precisely tau followed by RΓ(theta), with
+recorded endpoint transports, and contains no arbitrary operator.
+Source: blueprint def-weil-global-geometric-frobenius, displayed composites
+(blueprint: def-weil-global-geometric-frobenius). -/
+def globalGeometricFrobeniusQbar
+    (K : sfCommonStageWeilComplex D l hl Y₀ Ω) (compact : Bool) :
+    End ((frobeniusCohomologyQbarFunctor D l hl Y₀ Ω c₀ compact).obj K.carrier) := by
+  cases compact with
+  | false =>
+    exact eqToHom (frobeniusCohomologyQbarSourceEq D l hl Y₀ Ω c₀ false K.carrier) ≫
+      (frobeniusCohomologyTransport D l hl Y₀ Ω c₀ K.carrier).1 ≫
+      eqToHom (frobeniusCohomologyQbarTargetEq D l hl Y₀ Ω c₀ false K.carrier).symm ≫
+      (frobeniusCohomologyQbarFunctor D l hl Y₀ Ω c₀ false).map K.str.hom
+  | true =>
+    exact eqToHom (frobeniusCohomologyQbarSourceEq D l hl Y₀ Ω c₀ true K.carrier) ≫
+      (frobeniusCohomologyTransport D l hl Y₀ Ω c₀ K.carrier).2 ≫
+      eqToHom (frobeniusCohomologyQbarTargetEq D l hl Y₀ Ω c₀ true K.carrier).symm ≫
+      (frobeniusCohomologyQbarFunctor D l hl Y₀ Ω c₀ true).map K.str.hom
+
+/-- The global geometric-Frobenius action in every integer degree, for either
+support convention. It is H^i of the specified derived endomorphism above.
+The coefficient modules use max u v, so the closure has independent size.
+Source: blueprint def-weil-global-geometric-frobenius, final sentence
+(blueprint: def-weil-global-geometric-frobenius). -/
+def globalGeometricFrobeniusQbarOnCohomology
+    (K : sfCommonStageWeilComplex D l hl Y₀ Ω) (compact : Bool) (i : ℤ) :=
+  letI : HasDerivedCategory.{(max u v) + 1} (ModuleCat.{max u v} Ω) :=
+    HasDerivedCategory.standard _
+  (DerivedCategory.homologyFunctor (ModuleCat.{max u v} Ω) i).map
+    (globalGeometricFrobeniusQbar D l hl Y₀ Ω c₀ K compact)
+
+/-- The coefficient cohomology group equipped with its specified global Frobenius.
+An algebra of the identity functor is exactly an object together with an
+endomorphism, so this packages the existing group and its action without a new
+notion of cohomology or a choice of operator.
+Source: blueprint def-weil-global-geometric-frobenius, cohomology action
+(blueprint: def-weil-global-geometric-frobenius). -/
+def globalGeometricFrobeniusQbarCohomology
+    (K : sfCommonStageWeilComplex D l hl Y₀ Ω) (compact : Bool) (i : ℤ) :
+    CategoryTheory.Endofunctor.Algebra (𝟭 (ModuleCat.{max u v} Ω)) where
+  a := (@DerivedCategory.homologyFunctor (ModuleCat.{max u v} Ω) _ _
+    (HasDerivedCategory.standard _) i).obj
+      ((frobeniusCohomologyQbarFunctor D l hl Y₀ Ω c₀ compact).obj K.carrier)
+  str := globalGeometricFrobeniusQbarOnCohomology D l hl Y₀ Ω c₀ K compact i
+
+end Qbar
+
 end WeilConjectures
