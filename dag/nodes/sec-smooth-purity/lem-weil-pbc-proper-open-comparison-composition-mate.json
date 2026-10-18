@@ -1,0 +1,120 @@
+{
+ "id": "lem-weil-pbc-proper-open-comparison-composition-mate",
+ "kind": "statement",
+ "title": "Mate equality for proper-open comparison composition",
+ "status": "split",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-proper-open-comparison-composition",
+   "place": "Proof steps 3--5: composition of restriction maps, adjunction transpose and cancellation",
+   "via": []
+  },
+  "same_as": []
+ },
+ "statement": "For proper maps f and g carrying a common open X to open immersions j₁, j₂, j₃, and for the canonical derived composition isomorphism c : Rf_* ⋙ Rg_* ≅ R(fg)_*, the composite with c⁻¹ and the successive comparison composite have equal mates under the derived adjunction j₃! ⊣ j₃⁻¹.",
+ "stmt_deps": [
+  "def-weil-pbc-proper-open-comparison"
+ ],
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/lem-weil-pbc-proper-open-comparison-composition.md",
+  "place": "Proof steps 3–5: composition of restriction maps, adjunction transpose and cancellation"
+ },
+ "proof": [
+  {
+   "text": "Choose bounded-below injective representatives for the input and compute the restriction maps sectionwise along the canonical fibre-product sections. The fibre-product associator and the equalities j₁≫f=j₂ and j₂≫g=j₃ identify the successive restriction with the restriction for f≫g. The clopen-section calculation identifies each restriction on extension-by-zero inputs with the specified proper-open identification. Naturality at the comparison morphisms gives equality of the two restricted maps; applying the derived adjunction hom-equivalence yields the displayed equality of mates.",
+   "uses": [
+    "def-weil-pbc-proper-open-comparison",
+    "lem-weil-pbc-dplus-injective-representative",
+    "lem-weil-pbc-direct-image-preserves-injectives",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-weil-pbc-proper-open-identification",
+    "lem-weil-pbc-inverse-image-composition-module-linear",
+    "lem-weil-pbc-extension-by-zero-adjunction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-proper-open-comparison",
+  "lem-weil-pbc-dplus-injective-representative",
+  "lem-weil-pbc-direct-image-preserves-injectives",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-proper-open-identification",
+  "lem-weil-pbc-inverse-image-composition-module-linear",
+  "lem-weil-pbc-extension-by-zero-adjunction"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/lem-weil-pbc-proper-open-comparison-composition.md",
+  "place": "Proof steps 3–5"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "properOpenComparison_comp_mate",
+   "results": "No prior declaration; this is the project-specific mate calculation.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "equality of mates under an adjunction for composed derived direct images",
+   "results": "No exact project theorem; generic adjunction hom-equivalence API only.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv injective equality of mates",
+   "results": "CategoryTheory.Adjunction.homEquiv and Equiv.injective.",
+   "date": "2026-10-18",
+   "verdict": "supporting generic API only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived open immersion adjunction mate equality",
+   "results": "No exact project theorem found.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  }
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProperOpenComparisonCompMate",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProperOpenComparisonCompMate.lean",
+  "declaration": "AlgebraicGeometry.Etale.properOpenComparison_comp_mate",
+  "statement": "theorem properOpenComparison_comp_mate (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]\n    {T₁ T₂ T₃ X : Scheme.{u}} (f : T₁ ⟶ T₂) (g : T₂ ⟶ T₃)\n    [IsProper f] [IsProper g]\n    [((lowerStar (ModuleCat.{u + 1} Λ) f)).PreservesInjectiveObjects]\n    (j₁ : X ⟶ T₁) (j₂ : X ⟶ T₂) (j₃ : X ⟶ T₃)\n    [IsOpenImmersion j₁] [IsOpenImmersion j₂] [IsOpenImmersion j₃]\n    (hf : j₁ ≫ f = j₂) (hg : j₂ ≫ g = j₃)\n    (c : rightDerivedLowerStarPlus (ModuleCat.{u + 1} Λ) f ⋙\n        rightDerivedLowerStarPlus (ModuleCat.{u + 1} Λ) g ≅\n      rightDerivedLowerStarPlus (ModuleCat.{u + 1} Λ) (f ≫ g))\n    (hc : c = Functor.rightDerivedFunctorPlusCompIso'\n      (lowerStar (ModuleCat.{u + 1} Λ) f)\n      (lowerStar (ModuleCat.{u + 1} Λ) g)\n      (lowerStarComp (ModuleCat.{u + 1} Λ) f g))\n    (K : DerivedCategory.Plus\n      (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :\n    let a := derivedOpenImmersionLowerShriekUpperStarAdjunctionPlus\n      (ModuleCat.{u + 1} Λ) j₃\n    a.homEquiv _ _\n        (properOpenComparison Λ (f ≫ g) j₁ j₃\n          ((Category.assoc j₁ f g).symm.trans ((congrArg (· ≫ g) hf).trans hg)) K ≫\n          c.inv.app\n            ((openImmersionLowerShriek (ModuleCat.{u + 1} Λ) j₁).mapDerivedCategoryPlus.obj\n              K)) =\n      a.homEquiv _ _\n        (properOpenComparison Λ g j₂ j₃ hg K ≫\n          (rightDerivedLowerStarPlus (ModuleCat.{u + 1} Λ) g).map\n            (properOpenComparison Λ f j₁ j₂ hf K))",
+  "branch": "sheaf-dag",
+  "by": "C2",
+  "date": "2026-10-18"
+ },
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProperOpenComparisonComposition",
+  "date": "2026-10-18",
+  "group": "C2"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261018T091358-L-3253550",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261018T091358-L-3253550",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

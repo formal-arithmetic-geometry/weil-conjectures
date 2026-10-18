@@ -22,6 +22,7 @@ import WeilConjectures.SixFunctors.BaseChange.DerivedPasting.Vertical
 import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
+import Sheaf.AlgebraicGeometry.ProperOpenComparisonCompMate
 
 /-!
 # Composition and identity of proper-open comparison maps
@@ -103,7 +104,17 @@ theorem properOpenComparison_comp (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
           (properOpenComparison Λ f j₁ j₂ hf K) ≫
         (properOpenDirectImageCompIso Λ f g).hom.app
           ((openImmersionLowerShriek (ModuleCat.{u + 1} Λ) j₁).mapDerivedCategoryPlus.obj K) := by
-  sorry
+  let c := properOpenDirectImageCompIso Λ f g
+  apply (cancel_mono (c.inv.app
+    ((openImmersionLowerShriek (ModuleCat.{u + 1} Λ) j₁).mapDerivedCategoryPlus.obj K))).1
+  have hm := @properOpenComparison_comp_mate Λ _ _ T₁ T₂ T₃ X f g _ _
+    (Functor.preservesInjectiveObjects_of_adjunction_of_preservesMonomorphisms
+      (upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) f)) j₁ j₂ j₃ _ _ _ hf hg c (by
+      rfl) K
+  let a := derivedOpenImmersionLowerShriekUpperStarAdjunctionPlus
+    (ModuleCat.{u + 1} Λ) j₃
+  apply (a.homEquiv _ _).injective
+  simpa [a, c, properOpenDirectImageCompIso] using hm
 
 /-- The proper-open comparison for the identity, under R(id)_* ≅ id, is the identity.
 Source: blueprint sec-smooth-purity/sk-def-sf-operations, order 1483, final sentence
