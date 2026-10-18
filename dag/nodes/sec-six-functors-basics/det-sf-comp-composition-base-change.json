@@ -25,7 +25,9 @@
   "sk-def-sfb-constructible",
   "def-nagata-compactification",
   "def-weil-pbc-quasi-compact-scheme",
-  "def-weil-quasi-separated-morphism"
+  "def-weil-quasi-separated-morphism",
+  "det-sf-comp-coherence-cocycle",
+  "def-weil-pbc-ambient-ringed-exchange"
  ],
  "proof": [
   {
@@ -448,5 +450,34 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d3c0262da",
+  "group": "Q94",
+  "result": "pass",
+  "note": "Repairs of the e0f343f7cbdf return verified. F1: clause (3) uses the comparison family chosen from compactification_coherence_cocycle, which is unique because of its equation against every common dense refinement; phi(c,c)=refl. F2: beta is the published condensedAmbientExchange followed by Rp'_* of the open iso, whose inverse is fixed to the canonical unit/square/counit exchange; for every c and every K in Loc(Dctf) both sides lie in Loc(Y') and the component is IsIso. F3: hΛ : IsLocalizingAdmissibleCoefficient ℓ Λ. The standing setting matches; Y' qcqs is derived, not assumed; v has no extra property; nondense compactifications are allowed; universes u/Ab.{u+1} with no restriction. Mechanical theorem-stmt_dep finding judged: the statement needs the comparison object constructed by det-sf-comp-coherence-cocycle (it cannot be defined from that module's definitions), so PASS on that point. One sorry (the item); real helper data; source/blueprint docstrings and 8-step proof docstring; lean.statement verbatim; Worker report and Second reading sections present. nt_compile --json clean, 55.2 s (near the 60 s limit)."
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.DetSfCompCompositionBaseChange",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.det_sf_comp_composition_base_change",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.detSfDerivedPullback",
+   "AlgebraicGeometry.ProEtale.CondensedRing.detSfCompactSupport",
+   "AlgebraicGeometry.ProEtale.CondensedRing.detSfProperBaseChangeMap",
+   "AlgebraicGeometry.ProEtale.CondensedRing.detSfOpenBaseChangeMap",
+   "AlgebraicGeometry.ProEtale.CondensedRing.detSfBoundaryCompactification",
+   "AlgebraicGeometry.ProEtale.CondensedRing.detSfCanonicalCompactificationComparison",
+   "AlgebraicGeometry.ProEtale.CondensedRing.detSfCompactSupportBaseChangeComposite",
+   "AlgebraicGeometry.ProEtale.CondensedRing.det_sf_comp_composition_base_change"
+  ],
+  "file": "lean/Sheaf/SixFunctors/DetSfCompCompositionBaseChange.lean",
+  "statement": "theorem det_sf_comp_composition_base_change (ℓ : ℕ) [Fact ℓ.Prime] (p : ℕ) [Fact p.Prime] (k : Type u) [Field k] (_hkp : ringChar k = p) [Fact (p ≠ ℓ)] (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ] {X Y Y' : Scheme.{u}} [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))] [Y'.Over (Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))] [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))] [IsSeparated (Y ↘ Spec (.of k))] [LocallyOfFiniteType (Y' ↘ Spec (.of k))] [QuasiCompact (Y' ↘ Spec (.of k))] [IsSeparated (Y' ↘ Spec (.of k))] (f : X ⟶ Y) [f.IsOver (Spec (.of k))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (v : Y' ⟶ Y) [v.IsOver (Spec (.of k))] (hΛ : IsLocalizingAdmissibleCoefficient ℓ Λ) : ∃ o : ∀ c : Compactification f, D((c.i)_!open⟦Λ⟧) ⋙ detSfDerivedPullback Λ (pullback.fst c.g v) ≅ detSfDerivedPullback Λ (pullback.fst f v) ⋙ D(((c.baseChange v).i)_!open⟦Λ⟧), (∀ c : Compactification f, (o c).inv = detSfOpenBaseChangeMap Λ f v c) ∧ (∀ (c : Compactification f) (K : (localizingClosureProEtale Λ X).FullSubcategory), localizingClosureProEtale Λ Y' ((detSfCompactSupport Λ c ⋙ detSfDerivedPullback Λ v).obj K.obj) ∧ localizingClosureProEtale Λ Y' ((detSfDerivedPullback Λ (pullback.fst f v) ⋙ detSfCompactSupport Λ (c.baseChange v)).obj K.obj) ∧ IsIso ((detSfCompactSupportBaseChangeComposite Λ f v c (o c)).app K.obj)) ∧ ∃ hU : ∀ K : (localizingClosureProEtale Λ X).FullSubcategory, localizingClosureProEtale Λ (pullback f v) ((detSfDerivedPullback Λ (pullback.fst f v)).obj K.obj), ∀ (c₁ c₂ : Compactification f) (K : (localizingClosureProEtale Λ X).FullSubcategory), (detSfDerivedPullback Λ v).map ((detSfCanonicalCompactificationComparison Λ ℓ hΛ k f c₁ c₂).hom.app K) ≫ (detSfCompactSupportBaseChangeComposite Λ f v c₂ (o c₂)).app K.obj = (detSfCompactSupportBaseChangeComposite Λ f v c₁ (o c₁)).app K.obj ≫ (detSfCanonicalCompactificationComparison Λ ℓ hΛ k (pullback.snd f v) (c₁.baseChange v) (c₂.baseChange v)).hom.app ⟨(detSfDerivedPullback Λ (pullback.fst f v)).obj K.obj, hU K⟩",
+  "branch": "newtargets-dag",
+  "by": "Q94",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Repair of return e0f343f7cbdf, F1-F3. The open family is normalized by its canonical adjunction exchange arrow. The specified composite uses the published condensedAmbientExchange, followed by Rp-prime_* of that open isomorphism. Invertibility and both localizing-target membership clauses hold for every compactification only on Loc(Dctf). Compatibility uses only the published coherence family, chosen from its common-dense-refinement-normalized existence theorem, on the localizing source. The coefficient predicate is explicitly IsLocalizingAdmissibleCoefficient ell Lambda. No changes to the mathematical node statement or dependency interfaces."
  }
 }

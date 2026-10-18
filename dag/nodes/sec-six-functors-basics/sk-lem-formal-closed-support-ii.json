@@ -393,5 +393,28 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a71d5c714",
+  "group": "Q48",
+  "result": "pass",
+  "note": "Read node, all 17 stmt deps, the module and the declarations it uses (formalClosedSupport, rightDerivedFunctor, IsDerivedLimitTriangle, Mod.IsFree, padicAlgClRingObj and the other coefficient ring objects, upperStar, derivedTensor, commShiftTensorLeft). Coefficient disjunction is exact, including finite-subextension Qbar. Immersion hypotheses are exactly the node's. Left t-exactness uses the standard t-structure. The Roos clause uses the projection-normalized canonical product iso and correct image arrows, with commShiftIso in the right direction. Finite local freeness is Mod.IsFree (finite rank, r=0 allowed) on a pro-etale cover. Derived vs termwise tensor iso is included. Edge cases and universes checked. lean.statement is verbatim; only the lean field changed. Clean nt_compile (25.6 s, no diagnostics) reproduces the recorded compile. Accepted notes: upstream K-injective rightDerivedFunctor (same universal notion as the recorded def-sfb-right-derived-functor, and it carries the needed CommShift); Mod relative tensor consistent with the recorded derivedTensor; the second-reading section defers to this review and every point it lists checks out."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FormalClosedSupportII",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.formalClosedSupportII",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.ClosedSupportIIAssertions",
+   "AlgebraicGeometry.ProEtale.CondensedRing.formalClosedSupportIITensor_commShift",
+   "AlgebraicGeometry.ProEtale.CondensedRing.formalClosedSupportII"
+  ],
+  "file": "lean/Sheaf/Paper/FormalClosedSupportII.lean",
+  "statement": "theorem formalClosedSupportII (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ] (ℓ : ℕ) [Fact ℓ.Prime] (_hΛ : (∃ (A : Type u) (_ : CommRing A) (_ : Finite A) (_ : TopologicalSpace A) (_ : DiscreteTopology A) (_ : IsTopologicalRing A), (∃ n : ℕ, (ℓ ^ n : A) = 0) ∧ Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousCoefficientRingObj A))) ∨ Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj ℤ_[ℓ])) ∨ Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj ℚ_[ℓ])) ∨ (∃ E : PadicAlgCl.FiniteIntermediateField ℓ, Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.padicIntegersRingObj ℓ E.1)) ∨ Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj E))) ∨ Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.padicAlgClRingObj ℓ))) {X Z V S : Scheme.{u}} (i : Z ⟶ X) (j : V ⟶ X) (a : S ⟶ Z) [IsClosedImmersion i] [IsOpenImmersion j] [IsOpenImmersion a] (_hij : Set.range i = (Set.range j)ᶜ) (L : FormalSupportModules Λ S) (_hL : ∃ C : Scheme.Cover.{u} Scheme.proetalePrecoverage S, ∀ s : C.I₀, Mod.IsFree ((ProEtale.upperStar Ab.{u + 1} (C.f s)).obj (condensedRingObj Λ S)) (((ProEtale.upperStar Ab.{u + 1} (C.f s)).mapMod (condensedRingObj Λ S)).obj L)) : ClosedSupportIIAssertions (formalClosedSupport Λ i j).rightDerivedFunctor ∧ ClosedSupportIIAssertions ((formalClosedSupport Λ i j).rightDerivedFunctor ⋙ (upperStar Λ a).mapDerivedCategory) ∧ ClosedSupportIIAssertions ((derivedTensor Λ S).obj ((DerivedCategory.singleFunctor (FormalSupportModules Λ S) 0).obj L)) ∧ Exists fun [_h : PreservesFiniteLimits (MonoidalCategory.tensorLeft L)] ↦ Nonempty (((derivedTensor Λ S).obj ((DerivedCategory.singleFunctor (FormalSupportModules Λ S) 0).obj L)) ≅ (MonoidalCategory.tensorLeft L).mapDerivedCategory)",
+  "branch": "newtargets-dag",
+  "by": "Q48",
+  "date": "2026-10-18",
+  "existing": false
  }
 }

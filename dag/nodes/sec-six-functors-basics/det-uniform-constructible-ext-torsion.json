@@ -33,7 +33,9 @@
   "def-weil-l-adic-coefficient-extension",
   "sk-def-sfb-pulled-back-coefficients",
   "def-sfb-module-lower-star",
-  "def-sfb-module-open-lower-shriek"
+  "def-sfb-module-open-lower-shriek",
+  "def-sfb-torsion-stratum-coefficients",
+  "def-sfb-lisse-coefficient-module"
  ],
  "proof": [
   {
@@ -358,5 +360,33 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5ff56ab31",
+  "group": "Q27",
+  "result": "pass",
+  "note": "Read node, 9 stmt_deps' Lean records, new def node, module, report. Every hypothesis and both clauses (amplitude [0,cd(j)+1] with q<0 handled, IsClassicalAbelian of all H^q; hypercohomology vanishing for q>cd(j)+cd(S)+1, which matches the formalClosedSupportAssertions.stratum shape with ihom dual reduced by extendScalars) match the node; recorded lowerStar/openImmersionLowerShriek/formalClosedSupport/cohomologicalDimension used; WithTop ⊤ makes the bounds vacuous; extra instances on V,Z,S,B,T are implied; universe u is the dependency convention. New node def-sfb-torsion-stratum-coefficients: existing:true, signature verbatim, no duplicate definition node. lean.statement verbatim, 7 decls present, one sorry, docstrings present. nt_compile --json: exit 0, no warnings, 24.5 s. Minor non-blocking: new node cites def-sfb-continuous-map-condensed-ring while Lean uses the pre-existing parallel continuousCoefficientRingSheaf; docstring merges two proof steps; Second reading is a self-check."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.UniformConstructibleExtTorsion",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.uniformConstructibleExtTorsion",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.torsionStratum_quotientComm",
+   "AlgebraicGeometry.ProEtale.CondensedRing.torsionStratumReduction",
+   "AlgebraicGeometry.ProEtale.CondensedRing.torsionStratumDimension",
+   "AlgebraicGeometry.ProEtale.CondensedRing.torsionStratumRelativeDimension",
+   "AlgebraicGeometry.ProEtale.CondensedRing.torsionStratumSupport",
+   "AlgebraicGeometry.ProEtale.CondensedRing.torsionStratumTwist",
+   "AlgebraicGeometry.ProEtale.CondensedRing.uniformConstructibleExtTorsion"
+  ],
+  "file": "lean/Sheaf/Paper/UniformConstructibleExtTorsion.lean",
+  "statement": "theorem uniformConstructibleExtTorsion (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (hpℓ : p ≠ ℓ) (S Z V X T B : Over (Spec (.of k))) [LocallyOfFiniteType S.hom] [QuasiCompact S.hom] [IsSeparated S.hom] [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom] [IsSeparated Z.hom] [LocallyOfFiniteType V.hom] [QuasiCompact V.hom] [IsSeparated V.hom] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType T.hom] [QuasiCompact T.hom] [IsSeparated T.hom] [LocallyOfFiniteType B.hom] [QuasiCompact B.hom] [IsSeparated B.hom] (u : S ⟶ Z) (i : Z ⟶ X) (j : V ⟶ X) (kb : B ⟶ X) (vb : T ⟶ B) [IsOpenImmersion u.left] [IsClosedImmersion i.left] [IsOpenImmersion j.left] [IsClosedImmersion kb.left] [IsOpenImmersion vb.left] (hij : Set.range i.left.base = (Set.range j.left.base)ᶜ) (L₀ : FormalSupportModules (DerivedNakayama.integerRing ℓ E) S.left) (M₀ : FormalSupportModules (DerivedNakayama.integerRing ℓ E) T.left) (hL₀ : IsLisseCoefficientModule (DerivedNakayama.integerRing ℓ E) L₀) (hM₀ : IsLisseCoefficientModule (DerivedNakayama.integerRing ℓ E) M₀) (n : ℕ) (hn : 1 ≤ n) : ((∀ q : ℤ, q < 0 ∨ torsionStratumRelativeDimension ℓ k j + 1 < (q.toNat : WithTop ℕ) → IsZero ((DerivedCategory.homologyFunctor _ q).obj (torsionStratumSupport ℓ E i.left j.left kb.left vb.left M₀ n))) ∧ (∀ q : ℤ, IsClassicalAbelian ((DerivedCategory.homologyFunctor _ q).obj (torsionStratumSupport ℓ E i.left j.left kb.left vb.left M₀ n)).X)) ∧ (∀ q : ℤ, torsionStratumRelativeDimension ℓ k j + torsionStratumDimension ℓ k S + 1 < (q.toNat : WithTop ℕ) → IsZero ((DerivedCategory.homologyFunctor _ q).obj ((formalClosedSupportSections (DerivedNakayama.quotientRing ℓ E n) S.left).rightDerivedFunctor.obj (torsionStratumTwist ℓ E u.left i.left j.left kb.left vb.left L₀ M₀ n))))",
+  "branch": "newtargets-dag",
+  "by": "Q27",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Uses the canonical closed-support functor and actual continuous integral-to-quotient coefficient map. The added lisse definition node is already landed; the new coefficient definition node records existing constructions formerly listed only under the derived Nakayama theorem. Helpers only assemble the reductions and displayed complexes and supply derived qcqs structures to the existing dimension definitions."
  }
 }

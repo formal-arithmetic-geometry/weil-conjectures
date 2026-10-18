@@ -1,0 +1,118 @@
+{
+ "id": "def-sfb-constant-sheaf-scheme-pullback-comparison",
+ "kind": "definition",
+ "title": "Canonical constant-sheaf comparison under scheme inverse image",
+ "status": "split",
+ "statement": "Let $T$ be any scheme in universe $u$, and let $p_T^*$ be inverse image from the profinite point [sk-def-sfb-pullback-from-point], with abelian coefficients in universe $u+1$. Write $c_*$ and $c_T$ for the constant abelian-sheaf functors on profinite sets and the small pro-etale site of $T$ [def-weil-pbc-constant-sheaf]. Define the canonical natural isomorphism $\\kappa_T:c_T\\xrightarrow{\\sim}c_*\\circ p_T^*$ by the following adjunction construction. For a continuous site functor $F:\\mathcal C\\to\\mathcal D$ and a terminal object $V$ of $\\mathcal C$ whose image is terminal, precomposition followed by evaluation at $V$ equals evaluation at $F(V)$. Use the sheaf-section/evaluation comparisons to obtain the pushforward-sections natural isomorphism. Conjugate it under the constant-sheaf/terminal-sections adjunctions and the inverse-image adjunction to define the constant-sheaf pullback isomorphism. First apply this construction to profinite sets mapping to the pro-etale site of $\\operatorname{Spec}\\mathbb Z$, obtaining $\\kappa_{\\mathbb Z}$. Next apply it to base change along $T\\to\\operatorname{Spec}\\mathbb Z$, using the identity object of that pro-etale site as terminal and its pullback as terminal. Compose this second comparison, the inverse image of $\\kappa_{\\mathbb Z}$, and the functor associator. This composite is $\\kappa_T$. The terminal object is the identity scheme over itself, accessed through the equality specifying that object. The construction requires no finite coefficient ring, nonzero coefficient or nonempty scheme.",
+ "stmt_deps": [
+  "sk-def-sfb-pullback-from-point",
+  "def-weil-pbc-constant-sheaf"
+ ],
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Section 5.3 as geometric context; the canonical constant-sheaf adjunction construction in Sheaf.Paper.FiniteDiscreteSchemeRing, preceding finiteDiscreteSchemeRing_constant"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical restriction from sheaves of modules over the constant ring sheaf to sheaves valued in modules over a fixed ring",
+   "results": "{\"t\": \"2026-10-18T04:27:52Z\", \"tool\": \"leansearch\", \"query\": \"Canonical restriction from sheaves of modules over the constant ring sheaf to sheaves valued in modules over a fixed ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PresheafOfModules.restrictScalarsObj\", \"CategoryTheory.Sheaf.ΓRes\", \"SheafOfModules.restrictScalars\", \"PresheafOfModules.restrictScalars\", \"AlgebraicGeometry.Scheme.Modules\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctor\", \"ModuleCat.Tilde.res_const\", \"AlgebraicGeometry.Scheme.Modules.restrict\"], \"digest\": \"1272471466fe6768\"}",
+   "date": "2026-10-18",
+   "verdict": "Use the exact existing project definitions after reading their bodies; no new Lean construction."
+  },
+  {
+   "tool": "loogle",
+   "query": "constantSheaf, SheafOfModules.restrictScalars",
+   "results": "{\"t\": \"2026-10-18T04:27:52Z\", \"tool\": \"loogle\", \"query\": \"constantSheaf, SheafOfModules.restrictScalars\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'constantSheaf'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "Use the exact existing project definitions after reading their bodies; no new Lean construction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical isomorphism between inverse image of a constant sheaf from profinite sets and the constant sheaf on a scheme proetale site",
+   "results": "{\"t\": \"2026-10-18T04:27:54Z\", \"tool\": \"leanfinder\", \"query\": \"Canonical isomorphism between inverse image of a constant sheaf from profinite sets and the constant sheaf on a scheme proetale site\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Condensed.locallyConstantIsoFinYoneda\", \"Condensed.ofSheafForgetProfinite\", \"Condensed.isoLocallyConstantOfIsColimit\", \"lightProfiniteToLightCondSetIsoTopCatToLightCondSet\", \"lightProfiniteToLightCondSetIsoTopCatToLightCondSet_inv_app_val_app_hom_hom\", \"LightCondensed.locallyConstantIsoFinYoneda\", \"Condensed.locallyConstantIsoFinYoneda_hom_app\", \"lightProfiniteToLightCondSetIsoTopCatToLightCondSet_hom_app_val_app_apply\"], \"digest\": \"505f0cd3086b0641\"}",
+   "date": "2026-10-18",
+   "verdict": "Use the exact existing project definitions after reading their bodies; no new Lean construction."
+  },
+  {
+   "tool": "grep",
+   "query": "constantRingModuleRestriction|constantSchemeIso|constantPullbackMonoidalIso",
+   "results": "{\"t\": \"2026-10-18T04:29:42Z\", \"tool\": \"grep\", \"query\": \"constantRingModuleRestriction|constantSchemeIso|constantPullbackMonoidalIso\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "Use the exact existing project definitions after reading their bodies; no new Lean construction."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n constantRingModuleRestriction|constantSchemeIso|constantPullbackMonoidalIso in Mathlib, WeilConjectures and lean/Sheaf; rg -l in dag/nodes; blueprint_refs.py search and ancestor",
+   "results": "Mathlib and the older upstream source have none of these exact definitions. The published Sheaf.CategoryTheory.ConstantRingModuleSheaves defines constantRingModuleRestrictionPresheaf and constantRingModuleRestriction. scompile.py --source Sheaf.Paper.FiniteDiscreteSchemeRing supplies constantSchemeIso and supporting canonical mate constructions. No definition node owns either notion: the only definition-node text mentioning the name is def-trf-oriented-constructible-sheaf, whose Lean declaration instead defines oriented constructibility. Blueprint searches by exact names found zero nodes; ancestor is sk-prop-sf-rf-shriek-preservation.",
+   "date": "2026-10-18",
+   "verdict": "Two new definition-node records of existing constructions; no copied definitions."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-module-object-ordinary-coefficient-equivalence",
+  "date": "2026-10-18",
+  "group": "N8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-prop-sf-rf-shriek-preservation",
+   "place": "Canonical coefficient identification in the auxiliary ordinary/internal comparison; Canonical constant-sheaf comparison under scheme inverse image",
+   "via": [
+    "lem-sf-module-object-ordinary-coefficient-equivalence"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "lean": {
+  "module": "Sheaf.Paper.FiniteDiscreteSchemeRing",
+  "declaration": "AlgebraicGeometry.ProEtale.constantSchemeIso",
+  "declarations": [
+   "precomposeEvaluationIso",
+   "pushforwardSectionsIso",
+   "constantPullbackMonoidalIso",
+   "AlgebraicGeometry.ProEtale.constantPointIso",
+   "AlgebraicGeometry.ProEtale.proEtTerminal",
+   "AlgebraicGeometry.ProEtale.proEtIsTerminal",
+   "AlgebraicGeometry.ProEtale.constantSchemeIso"
+  ],
+  "statement": "noncomputable def constantSchemeIso (T : Scheme.{u}) :\n    constantSheaf (ProEt.topology T) Ab.{u + 1} ≅\n      constantSheaf (coherentTopology Profinite.{u}) Ab.{u + 1} ⋙ upperStarFromPoint T",
+  "branch": "newtargets-dag",
+  "by": "N8",
+  "date": "2026-10-18",
+  "existing": true,
+  "note": "Definition ownership record of the exact existing canonical adjunction-mate comparison and its supporting definitions. Full live source read with scompile.py --source Sheaf.Paper.FiniteDiscreteSchemeRing. proEtTerminal is fixed by equality to the explicit identity object; its existence theorem is proved and determines it uniquely. No new choice, new comparison or replacement construction is introduced. This definition is universe-general and independent of the Type-0 coefficient ring bound of the later ring-identification theorem."
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ded71829b",
+  "group": "N8",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ded71829b",
+  "group": "N8",
+  "result": "pass",
+  "note": "Every node clause is rendered faithfully: canonical normalized ringIso; section-action and fixed-restriction equivalences pinned by functor equations; mapDerivedCategory derived equivalences; Monoidal on the actual functor (Mod.derivedMonoidalCategory to the derived sheaf tensor); every ordered Tor interval against HasProEtaleTorAmplitude; local models; ctf (the exact recorded ConstantModelConstructibleFiniteTor predicate vs mirrored ordinary helpers); CommShift/IsTriangulated/coproducts; localizing closures (same Type (u+2) object universe); same fixed compactification against both recorded rightDerivedLowerShriekOfCompactification. No stronger hypotheses. Zero ring, empty scheme, non-qcqs and unbounded cases are included. The re-delivery fixes the prior stmt_deps return with two faithful existing:true definition nodes (signatures verbatim with live sources, §5 fields OK). The item changed only in lean/stmt_deps. No hollow defs; sorry only. Docstrings OK. nt_compile clean, exit 0, 37.6 s. Minor: the report's claim that lem-cbc was added to proof_deps is not reflected in the delivered node (the tool dropped proof fields); harmless."
+ }
+}

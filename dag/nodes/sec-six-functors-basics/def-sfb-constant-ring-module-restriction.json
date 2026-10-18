@@ -1,0 +1,114 @@
+{
+ "id": "def-sfb-constant-ring-module-restriction",
+ "kind": "definition",
+ "title": "Restriction of module sheaves to constant scalar sections",
+ "status": "split",
+ "statement": "Let $\\mathcal C$ be a category with objects in universe $u$ and arrows in universe $v$, let $J$ be a Grothendieck topology on $\\mathcal C$, and let $\\Lambda$ be a commutative ring in universe $\\max(u,v)$. Let $\\underline\\Lambda$ be the constant ring sheaf [def-weil-pbc-constant-sheaf], with sheafification unit $\\iota:\\Lambda^{\\mathrm{pre}}\\to\\underline\\Lambda$ [def-weil-pbc-sheafification]. Define the constant-ring module restriction functor from sheaves of $\\underline\\Lambda$-modules [def-weil-sheaf-of-modules-category] to sheaves valued in fixed-$\\Lambda$ modules as follows. For $M$, retain its section groups and restriction maps, and give $M(U)$ the action $a\\cdot m=\\iota_U(a)m$. Its underlying module presheaf is denoted $\\operatorname{Res}^{\\mathrm{pre}}_\\iota M$; the sheaf condition is that of the unchanged abelian presheaf. On a module-sheaf morphism retain the same section homomorphisms, now linear over $\\Lambda$ by restriction along $\\iota_U$. This defines $\\operatorname{Res}_\\iota:\\operatorname{Mod}_J(\\underline\\Lambda)\\to\\operatorname{Sh}_J(\\mathcal C,\\operatorname{Mod}_\\Lambda)$. No fibre products, terminal object, nonempty-site or nonzero-ring assumption is made.",
+ "stmt_deps": [
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-sheafification",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03CY, lemma-sheafification-presheaf-modules: restriction along the constant ring sheafification unit"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical restriction from sheaves of modules over the constant ring sheaf to sheaves valued in modules over a fixed ring",
+   "results": "{\"t\": \"2026-10-18T04:27:52Z\", \"tool\": \"leansearch\", \"query\": \"Canonical restriction from sheaves of modules over the constant ring sheaf to sheaves valued in modules over a fixed ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PresheafOfModules.restrictScalarsObj\", \"CategoryTheory.Sheaf.ΓRes\", \"SheafOfModules.restrictScalars\", \"PresheafOfModules.restrictScalars\", \"AlgebraicGeometry.Scheme.Modules\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctor\", \"ModuleCat.Tilde.res_const\", \"AlgebraicGeometry.Scheme.Modules.restrict\"], \"digest\": \"1272471466fe6768\"}",
+   "date": "2026-10-18",
+   "verdict": "Use the exact existing project definitions after reading their bodies; no new Lean construction."
+  },
+  {
+   "tool": "loogle",
+   "query": "constantSheaf, SheafOfModules.restrictScalars",
+   "results": "{\"t\": \"2026-10-18T04:27:52Z\", \"tool\": \"loogle\", \"query\": \"constantSheaf, SheafOfModules.restrictScalars\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'constantSheaf'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "Use the exact existing project definitions after reading their bodies; no new Lean construction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical isomorphism between inverse image of a constant sheaf from profinite sets and the constant sheaf on a scheme proetale site",
+   "results": "{\"t\": \"2026-10-18T04:27:54Z\", \"tool\": \"leanfinder\", \"query\": \"Canonical isomorphism between inverse image of a constant sheaf from profinite sets and the constant sheaf on a scheme proetale site\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Condensed.locallyConstantIsoFinYoneda\", \"Condensed.ofSheafForgetProfinite\", \"Condensed.isoLocallyConstantOfIsColimit\", \"lightProfiniteToLightCondSetIsoTopCatToLightCondSet\", \"lightProfiniteToLightCondSetIsoTopCatToLightCondSet_inv_app_val_app_hom_hom\", \"LightCondensed.locallyConstantIsoFinYoneda\", \"Condensed.locallyConstantIsoFinYoneda_hom_app\", \"lightProfiniteToLightCondSetIsoTopCatToLightCondSet_hom_app_val_app_apply\"], \"digest\": \"505f0cd3086b0641\"}",
+   "date": "2026-10-18",
+   "verdict": "Use the exact existing project definitions after reading their bodies; no new Lean construction."
+  },
+  {
+   "tool": "grep",
+   "query": "constantRingModuleRestriction|constantSchemeIso|constantPullbackMonoidalIso",
+   "results": "{\"t\": \"2026-10-18T04:29:42Z\", \"tool\": \"grep\", \"query\": \"constantRingModuleRestriction|constantSchemeIso|constantPullbackMonoidalIso\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "Use the exact existing project definitions after reading their bodies; no new Lean construction."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n constantRingModuleRestriction|constantSchemeIso|constantPullbackMonoidalIso in Mathlib, WeilConjectures and lean/Sheaf; rg -l in dag/nodes; blueprint_refs.py search and ancestor",
+   "results": "Mathlib and the older upstream source have none of these exact definitions. The published Sheaf.CategoryTheory.ConstantRingModuleSheaves defines constantRingModuleRestrictionPresheaf and constantRingModuleRestriction. scompile.py --source Sheaf.Paper.FiniteDiscreteSchemeRing supplies constantSchemeIso and supporting canonical mate constructions. No definition node owns either notion: the only definition-node text mentioning the name is def-trf-oriented-constructible-sheaf, whose Lean declaration instead defines oriented constructibility. Blueprint searches by exact names found zero nodes; ancestor is sk-prop-sf-rf-shriek-preservation.",
+   "date": "2026-10-18",
+   "verdict": "Two new definition-node records of existing constructions; no copied definitions."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-module-object-ordinary-coefficient-equivalence",
+  "date": "2026-10-18",
+  "group": "N8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-prop-sf-rf-shriek-preservation",
+   "place": "Canonical coefficient identification in the auxiliary ordinary/internal comparison; Restriction of module sheaves to constant scalar sections",
+   "via": [
+    "lem-sf-module-object-ordinary-coefficient-equivalence"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ConstantRingModuleSheaves",
+  "declaration": "CategoryTheory.constantRingModuleRestriction",
+  "declarations": [
+   "CategoryTheory.constantRingModuleRestrictionPresheaf",
+   "CategoryTheory.constantRingModuleRestriction"
+  ],
+  "statement": "def constantRingModuleRestriction :\n    ringedSiteModules.{max u v}\n      ((constantSheaf J RingCat.{max u v}).obj (RingCat.of Λ)) ⥤\n        Sheaf J (ModuleCat.{max u v} Λ)",
+  "branch": "newtargets-dag",
+  "by": "N8",
+  "date": "2026-10-18",
+  "existing": true,
+  "note": "Definition ownership record of the exact existing definitions in the published ConstantRingModuleSheaves module. The enclosing variables are {C : Type u} [Category.{v} C] (J : GrothendieckTopology C) (Λ : Type (max u v)) [CommRing Λ]. This records only the literal scalar-restriction construction, not the theorem that it is an equivalence; no module is duplicated."
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ded71829b",
+  "group": "N8",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ded71829b",
+  "group": "N8",
+  "result": "pass",
+  "note": "Every node clause is rendered faithfully: canonical normalized ringIso; section-action and fixed-restriction equivalences pinned by functor equations; mapDerivedCategory derived equivalences; Monoidal on the actual functor (Mod.derivedMonoidalCategory to the derived sheaf tensor); every ordered Tor interval against HasProEtaleTorAmplitude; local models; ctf (the exact recorded ConstantModelConstructibleFiniteTor predicate vs mirrored ordinary helpers); CommShift/IsTriangulated/coproducts; localizing closures (same Type (u+2) object universe); same fixed compactification against both recorded rightDerivedLowerShriekOfCompactification. No stronger hypotheses. Zero ring, empty scheme, non-qcqs and unbounded cases are included. The re-delivery fixes the prior stmt_deps return with two faithful existing:true definition nodes (signatures verbatim with live sources, §5 fields OK). The item changed only in lean/stmt_deps. No hollow defs; sorry only. Docstrings OK. nt_compile clean, exit 0, 37.6 s. Minor: the report's claim that lem-cbc was added to proof_deps is not reflected in the delivered node (the tool dropped proof fields); harmless."
+ }
+}

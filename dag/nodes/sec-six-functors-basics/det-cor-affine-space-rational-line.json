@@ -1013,5 +1013,32 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1d78e1dd3",
+  "group": "N7",
+  "result": "pass",
+  "note": "Read node, 12 stmt deps, blueprint source, module and report; only the item lean field changed. All hypotheses (char p>0, p!=l, V separated finite type over k) and clauses (1) j_!/j^* on Loc(Dbc) with adjunction, (2) Rp_! (chosen compactificationOverField) iso Rq_* j_!, (3) Rp_! adjoint to Lp^* tensor recorded spRationalTwist/spQbarTwist [2], unique counit-compatible iso to every right adjoint (orientation correct) match; both E and finite-subextension Qlb cases; edge cases and universes ok. Helpers transparent, no hollow defs, only theorem sorry, docstrings with source/blueprint/10 steps, lean.statement verbatim, lines <=100. nt_compile --json rc 0, no diagnostics (18.5 s). Non-blocking remarks: P^1 is the base-change ProjectiveLine (same scheme over V per def-nagata-projective-space-base-change) while stmt_deps cites relative-Proj; existence node uses all-continuous Qlb (stage-3 bridge); proof-only imports; second reading is a self-audit."
+ },
+ "lean": {
+  "module": "Sheaf.Targets.AffineSpaceRationalLine",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.det_cor_affine_space_rational_line",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.rationalLocalizingCategory",
+   "AlgebraicGeometry.ProEtale.CondensedRing.rationalLocalizingInclusion",
+   "AlgebraicGeometry.ProEtale.CondensedRing.rationalTwistFunctor",
+   "AlgebraicGeometry.ProEtale.CondensedRing.affineLineChosenCompactification",
+   "AlgebraicGeometry.ProEtale.CondensedRing.affineLineRationalAssertion",
+   "AlgebraicGeometry.ProEtale.CondensedRing.det_cor_affine_space_rational_line"
+  ],
+  "file": "lean/Sheaf/Targets/AffineSpaceRationalLine.lean",
+  "statement": "theorem det_cor_affine_space_rational_line (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] (V : Scheme.{u}) [V.Over (Spec (.of k))] [LocallyOfFiniteType (V ↘ Spec (.of k))] [QuasiCompact (V ↘ Spec (.of k))] [IsSeparated (V ↘ Spec (.of k))] : (∀ E : PadicAlgCl.FiniteIntermediateField ℓ, affineLineRationalAssertion (Profinite.continuousMapRingObj E.1) V (affineLineChosenCompactification k V) (fun X ↦ rationalTwistFunctor (Profinite.continuousMapRingObj E.1) X (spRationalTwist X ℓ E))) ∧ affineLineRationalAssertion (Profinite.padicAlgClRingObj ℓ) V (affineLineChosenCompactification k V) (fun X ↦ rationalTwistFunctor (Profinite.padicAlgClRingObj ℓ) X (spQbarTwist X ℓ))",
+  "branch": "newtargets-dag",
+  "by": "N7",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "The assertion specializes the recorded generic localizing closure to constantModelBoundedConstructible (Dbc), uses the published Nagata compactificationOverField of the affine projection in Over(Spec k), and characterizes restrictions by ambient natural isomorphisms. The uniqueness clause applies to every right adjoint of this same restricted compact-support functor, hence to the exceptional adjoint. The projective line and standard chart use the base-change model explicitly specified by the node proof and its chart dependency blueprint_update."
  }
 }

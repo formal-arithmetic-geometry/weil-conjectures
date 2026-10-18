@@ -1,0 +1,103 @@
+{
+ "id": "def-sfb-torsion-stratum-coefficients",
+ "kind": "definition",
+ "title": "Continuous integral and uniformizer-quotient coefficient rings",
+ "status": "split",
+ "statement": "Let $\\ell$ be prime and $E/\\mathbf Q_\\ell$ a finite field extension, with its spectral absolute value, ring of integers $\\mathcal O_E$, chosen uniformizer $\\pi_E$ and quotient $A_n=\\mathcal O_E/(\\pi_E^n)$ for $n\\in\\mathbf N$ [def-weil-l-adic-coefficient-extension]. Give $\\mathcal O_E$ the subspace topology and $A_n$ the quotient topology. By [def-sfb-continuous-map-condensed-ring] form the condensed ring sheaves $\\underline{\\mathcal O_E}:P\\mapsto C(P,\\mathcal O_E)$ and $\\underline{A_n}:P\\mapsto C(P,A_n)$. The continuous quotient homomorphism $\\mathcal O_E\\to A_n$ induces the morphism $\\underline{\\mathcal O_E}\\to\\underline{A_n}$ by postcomposition [def-sfb-continuous-map-condensed-ring-map]. Their underlying abelian sheaves carry their pointwise commutative ring-object structures [sk-def-sfb-ring-object], and the same postcomposition gives their ring-object morphism. Level $n$ denotes exponent $n$, including the zero quotient for $n=0$.",
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-sfb-continuous-map-condensed-ring",
+  "def-sfb-continuous-map-condensed-ring-map",
+  "sk-def-sfb-ring-object"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-uniform-constructible-ext/sk-lem-uniform-constructible-ext-torsion.md",
+  "place": "Opening coefficient convention and the reductions M_0/pi_E^n in clauses (1)--(2); construction also given by sk-lem-pe-derived-nakayama-resolution, On the point, steps 1--2"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Condensed ring of integers of a finite p-adic extension and the continuous reduction morphism modulo a uniformizer power",
+   "results": "8 hits: PadicInt.toZModPow; PadicInt.ext_of_toZModPow; PadicInt.toZModHom; PadicInt.toZMod_eq_residueField_comp_residue; PadicInt.instIsLocalRing; Padic.adicCompletionEquiv; PadicInt.instCommRing; PadicInt.instInhabited. These do not construct the finite-extension condensed quotient map.",
+   "date": "2026-10-18",
+   "verdict": "no Mathlib match; reuse existing project construction"
+  },
+  {
+   "tool": "loogle",
+   "query": "Padic, Ideal.Quotient.mk",
+   "results": "0 hits.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "msearch grep integerRingSheaf|quotientRingSheaf|reductionRingSheaf; rg same pattern in /home/ubuntu/weil-src-slopmaster2/WeilConjectures and lean/Sheaf; definition-node search for DerivedNakayama.integerRing/quotientRing/reductionRing; blueprint_refs.py search finite quotient",
+   "results": "Mathlib grep: 0 hits. Upstream WeilConjectures: no hits. Project: Sheaf/Paper/DerivedNakayamaResolution.lean:73 integerRingSheaf, :80 quotientRingSheaf, :87 reductionRingSheaf, :100 integerRing, :113 quotientRing, :119 reductionRing. DAG: no definition node records these declarations; det-pe-derived-nakayama-resolution is a theorem node. Blueprint search: 8 finite quotient hits including derived Nakayama and pullback/operation comparisons, no definition node for this pointwise coefficient reduction. Generic continuous condensed ring and map nodes are reused in stmt_deps.",
+   "date": "2026-10-18",
+   "verdict": "exact existing project declarations; record existing: true without duplicating Lean"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "det-uniform-constructible-ext-torsion",
+  "date": "2026-10-18",
+  "group": "Q27"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-uniform-constructible-ext-torsion",
+   "place": "Opening coefficient reduction in proof step 1; clauses (1)--(2) use the actual integral and finite quotient rings and the quotient map",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-uniform-constructible-ext",
+ "lean": {
+  "module": "Sheaf.Paper.DerivedNakayamaResolution",
+  "declaration": "AlgebraicGeometry.ProEtale.DerivedNakayama.reductionRingSheaf",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.DerivedNakayama.integerRingSheaf",
+   "AlgebraicGeometry.ProEtale.DerivedNakayama.quotientRingSheaf",
+   "AlgebraicGeometry.ProEtale.DerivedNakayama.reductionRingSheaf",
+   "AlgebraicGeometry.ProEtale.DerivedNakayama.integerRing",
+   "AlgebraicGeometry.ProEtale.DerivedNakayama.quotientRing",
+   "AlgebraicGeometry.ProEtale.DerivedNakayama.reductionRing"
+  ],
+  "statement": "def reductionRingSheaf (n : ℕ) : integerRingSheaf l E ⟶ quotientRingSheaf l E n",
+  "branch": "newtargets-dag",
+  "by": "Q27",
+  "date": "2026-10-18",
+  "existing": true,
+  "note": "Exact existing pointwise continuous constructions at DerivedNakayamaResolution.lean lines 73--119. The definition node separates the coefficient data from the theorem node det-pe-derived-nakayama-resolution; it introduces no Lean declaration or duplicate notion. The rings use the coefficient-extension spectral topology and actual quotient topology, and the map is postcomposition with Ideal.Quotient.mk."
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5ff56ab31",
+  "group": "Q27",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5ff56ab31",
+  "group": "Q27",
+  "result": "pass",
+  "note": "Read node, 9 stmt_deps' Lean records, new def node, module, report. Every hypothesis and both clauses (amplitude [0,cd(j)+1] with q<0 handled, IsClassicalAbelian of all H^q; hypercohomology vanishing for q>cd(j)+cd(S)+1, which matches the formalClosedSupportAssertions.stratum shape with ihom dual reduced by extendScalars) match the node; recorded lowerStar/openImmersionLowerShriek/formalClosedSupport/cohomologicalDimension used; WithTop ⊤ makes the bounds vacuous; extra instances on V,Z,S,B,T are implied; universe u is the dependency convention. New node def-sfb-torsion-stratum-coefficients: existing:true, signature verbatim, no duplicate definition node. lean.statement verbatim, 7 decls present, one sorry, docstrings present. nt_compile --json: exit 0, no warnings, 24.5 s. Minor non-blocking: new node cites def-sfb-continuous-map-condensed-ring while Lean uses the pre-existing parallel continuousCoefficientRingSheaf; docstring merges two proof steps; Second reading is a self-check."
+ }
+}

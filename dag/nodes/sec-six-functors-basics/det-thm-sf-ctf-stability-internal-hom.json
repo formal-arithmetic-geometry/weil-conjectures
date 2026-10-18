@@ -20,7 +20,8 @@
   "sk-prop-sf-existence",
   "def-pc-perfect-ring-complex",
   "def-weil-pbc-strict-perfect-coefficient-package",
-  "det-lem-int-tensor-projection"
+  "det-lem-int-tensor-projection",
+  "def-sfb-locally-constant-perfect-complex"
  ],
  "proof": [
   {
@@ -384,5 +385,34 @@
   "group": "Q25",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q25-bdde90283 (reviewer sub-agent of L); spot-checked: I read the whole delivery against the main-20261015 statement and its three proof paragraphs, the unit _section.md, Stacks 08JJ (sites-cohomology.tex, lemma-dual-perfect-complex, l.13048), every cited statement and both new nodes. The return asked only that the 2499-character Step 6 be split and the statement kept. The delivery keeps the statement word for word, and old Steps 7-11 are now Steps 8-12 unchanged apart from renumbered references. The new Steps 6 (586 chars) and 7 (450 chars) cite the reused lem-sfb-ringed-site-perfect-duality and two new statement-only nodes. The longest remaining step is 1987 chars. proof_deps equals the union of the step uses, there is no cycle and no SGA source. New node lem-sfb-internal-hom-dual-constructible-models is true. Locally the dual is the termwise dual of a bounded finite-projective complex. Extending scalars commutes with cohomology at every stage: identity for finite A, flat completed sheaf for O_E (lem-weil-pbc-completed-constant-sheaf-reduction), split sequences for the fields. R is Noetherian, so the cohomology is finitely presented. S is quasi-compact, so a finite affine subfamily of the cover gives uniform bounds. The one-stratum local model is exactly sk-def-sfb-constructible (1). Tested on S empty, 0, B[n], [Z/l^2 -l-> Z/l^2] and O_E/pi (dual (O_E/pi)[-1]). New node lem-sfb-internal-hom-dual-tor-amplitude is true: the local models are K-flat, the dual intervals are reversed, the finite subfamily gives global min and max, and [0,0] works for S empty. Its intervals agree with det-lem-int-integral-heart-dualizable for O_E/pi. Neither node restates a clause of the item. Neither duplicates prop-pod-perfect-local-model or lem-pod-coefficient-dual-perfect (Poincare conventions, finite or already-Dctf inputs), lem-weil-pbc-integral-stratified-perfect-characterization (O_E only) or lem-sfb-connected-etale-perfect-constant (the converse, on the etale site). Both nodes are self-contained, statement-only and single-escaped, with correct blueprint ancestry and recorded LeanSearch, LeanFinder, Loogle and grep searches. I rechecked the unchanged steps: finite A via the etale finite-Tor equivalence, flat model, stalk-flat plus finitely presented gives projective, and the stupid filtration; O_E via local-model clause (1); fields via truncation and lisse filtration; T = u^*RGamma_Z L in Dctf; T isomorphic to a^!L by Yoneda inside Loc only (properness of i, coherence cocycle); the ambient internal open/closed formulas; final devissage by exactness of internal Hom. I accept the 11 declared tool_uses. No undeclared off-route statement. No changes made."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-aa851099c",
+  "group": "Q20",
+  "result": "pass",
+  "note": "Clause-by-clause match of internalHom_stability to the node. Hypotheses: ℓ prime, char k = p > 0 with p ≠ ℓ, X separated finite type over k, recorded admissible Λ, Scheme.{u}/Profinite.{u}/Ab.{u+1}. dctfPred is exactly the recorded ConstantModelConstructibleFiniteTor predicate. Clause 1: RHom(K,L) ∈ Dctf via the recorded derivedHom. Formula clause: a_! is the IntTensorProjection composite for every open-then-closed factorization; a^!L is (G.obj N).obj for G right adjoint to the extension restricted to localizingClosureProEtale, the convention of exists_localizingExceptionalAdjoint; both Nonempty isos are in the ambient derived category, with P^∨ = relativeInternalHomDual. Generation clause: every replete IsTriangulated Q containing the iso-closed a_!P contains every Dctf object, i.e. finite shifts and cones, no retracts. New node def-sfb-locally-constant-perfect-complex copies verbatim the inline hP of the landed internal-Hom tor-amplitude lemma, has real data and follows the H12 field rule; no duplicate found. Item node diff is lean plus one added stmt_dep; both lean.statement fields verbatim; only sorry is the theorem proof; docstrings carry source, blueprint tag and all 12 steps; report has Worker report, Second reading by Q20 and New nodes. nt_compile --json on both snapshot files: rc 0, no errors or warnings (13.9 s, 16.5 s). Edge cases (empty S or X, zero ring, identity/open/closed immersions, empty generation) covered. No findings."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.DetThmSfCtfStabilityInternalHom",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.internalHom_stability",
+  "file": "lean/Sheaf/Paper/DetThmSfCtfStabilityInternalHom.lean",
+  "statement": "theorem internalHom_stability (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] {X : Scheme.{u}} [X.Over (Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))] (_hΛ : IsLocalizingAdmissibleCoefficient ℓ Λ) (K L : moduleDerived Λ X) (_hK : dctfPred Λ X K) (_hL : dctfPred Λ X L) : dctfPred Λ X (internalHomObj Λ X K L) ∧ (∀ (S Sbar : Scheme.{u}) (a : S ⟶ X) (u : S ⟶ Sbar) (i : Sbar ⟶ X), (hu : IsOpenImmersion u) → (hi : IsClosedImmersion i) → a = u ≫ i → ∀ (P : moduleDerived Λ S), IsLocallyConstantPerfectComplex Λ S P → ∃ (h : ∀ N, localizingClosureProEtale Λ S N → localizingClosureProEtale Λ X ((locallyClosedExtension Λ u i hu hi).obj N)) (G : (localizingClosureProEtale Λ X).FullSubcategory ⥤ (localizingClosureProEtale Λ S).FullSubcategory), Nonempty (localizingLocallyClosedExtension Λ u i hu hi h ⊣ G) ∧ ∃ N : (localizingClosureProEtale Λ X).FullSubcategory, N.obj = L ∧ Nonempty (internalHomObj Λ X ((locallyClosedExtension Λ u i hu hi).obj P) L ≅ (CondensedRing.lowerStar Λ a).rightDerivedFunctor.obj (internalHomObj Λ S P (G.obj N).obj)) ∧ Nonempty ((CondensedRing.lowerStar Λ a).rightDerivedFunctor.obj (internalHomObj Λ S P (G.obj N).obj) ≅ (CondensedRing.lowerStar Λ a).rightDerivedFunctor.obj (dualTensorObj Λ S P (G.obj N).obj))) ∧ ∀ K' : moduleDerived Λ X, dctfPred Λ X K' → ∀ Q : ObjectProperty (moduleDerived Λ X), Q.IsTriangulated → Q.IsClosedUnderIsomorphisms → (∀ J : moduleDerived Λ X, internalHomGenerator Λ X J → Q J) → Q K'",
+  "branch": "newtargets-dag",
+  "by": "Q20",
+  "date": "2026-10-18",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.moduleDerived",
+   "AlgebraicGeometry.ProEtale.CondensedRing.dctfPred",
+   "AlgebraicGeometry.ProEtale.CondensedRing.internalHomObj",
+   "AlgebraicGeometry.ProEtale.CondensedRing.dualTensorObj",
+   "AlgebraicGeometry.ProEtale.CondensedRing.locallyClosedExtension",
+   "AlgebraicGeometry.ProEtale.CondensedRing.localizingLocallyClosedExtension",
+   "AlgebraicGeometry.ProEtale.CondensedRing.internalHomGenerator",
+   "AlgebraicGeometry.ProEtale.CondensedRing.internalHom_stability"
+  ],
+  "note": "The exceptional inverse image is bound by an adjunction to the actual locally closed extension restricted to the recorded localizing categories; this uniquely specifies a^! up to the canonical adjunction-compatible isomorphism. Its argument N has underlying object L. Finite generation is membership in every replete triangulated subcategory containing the generators, which is exactly finite shifts and cones and does not introduce retract closure. No statement correction."
  }
 }

@@ -18,7 +18,10 @@
   "sk-def-sfb-module-derived-lower-shriek",
   "def-sfb-finite-derived-lower-shriek-compactification",
   "def-weil-pbc-proetale-modules",
-  "def-weil-proetale-tor-amplitude"
+  "def-weil-proetale-tor-amplitude",
+  "def-sfb-constant-ring-module-restriction",
+  "def-sfb-site-derived-constant-module-functor",
+  "def-sfb-constant-sheaf-scheme-pullback-comparison"
  ],
  "proof": [
   {
@@ -358,5 +361,44 @@
   "group": "Q11",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q11-bf8dfb9f1 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item, all 12 steps, the parent sk-prop-sf-rf-shriek-preservation, the unit and the blueprint proof (main-20261015, four paragraphs, no coefficient step; the agent-written origin is honest), and every cited statement. Sources: Stacks 08BJ derived.tex l.9857, 015F, 070H, 03EK. No SGA is cited. There are no new nodes, the statement is unchanged and holds for any finite A and any T, and the edge cases A=0, T empty and rank-0 modules pass. Steps 1-4, 7-9 and 12 are correct. Step 1 checks the hypotheses of the point and scheme ring lemmas. Step 8's adjoint transpose c_U b_h=alpha_h(h^{-1}c_T) checks out. Step 9's presentation-matrix cokernel works and finitely presented equals finite for finite A. Step 12 meets 08BJ exactly: E_U is right adjoint to its exact inverse. Three repairable faults, fixed in fixes/dag/nodes/sec-six-functors-basics/lem-sf-module-object-ordinary-coefficient-equivalence.json. (1) C5/C2: steps 5-6 re-proved, marked elementary, the existing node lem-pe-internal-section-tensor-comparison (tensor, total complex and K-flat comparison). They now cite it, are non-elementary, and step 6 spells out that the quasi-iso-preservation K-flatness of def-sfb-preserves-kflat-quasi-iso is the same as the acyclic test of def-pc-kflat-complex. (2) C4: step 11 identified the internal j_! with the j_! of def-weil-extension-by-zero, but the target composite def-sfb-finite-derived-lower-shriek-compactification uses def-sfb-finite-extension-by-zero and def-sfb-finite-lower-star. It now cites those and def-sfb-finite-extension-by-zero-adjunction; the unused tool use lem-weil-extension-by-zero-adjunction is dropped. (3) Step 10 now notes that sk-def-localizing-closure is stated for l-primary A (the parent's case) and that the intersection definition is the same for any finite A. proof_deps equals the union of the step uses, there is no cycle and every id exists unmerged. Accepted tool_uses: the finite-discrete condensed-ring, scheme-ring and coefficient-sections lemmas, right-adjoint-preserves-kinjective, lem-pe-internal-section-tensor-comparison, and the exact-functor Mathlib leaf. Parent-side observation, not a fault here: the parent names def-weil-proetale-constructible-sheaf as the ordinary form; on qcqs schemes it agrees with this item's locally-P_U form by a few lines (the constant-sheaf stalk is M; empty cover members can be replaced by 0).; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ded71829b",
+  "group": "N8",
+  "result": "pass",
+  "note": "Every node clause is rendered faithfully: canonical normalized ringIso; section-action and fixed-restriction equivalences pinned by functor equations; mapDerivedCategory derived equivalences; Monoidal on the actual functor (Mod.derivedMonoidalCategory to the derived sheaf tensor); every ordered Tor interval against HasProEtaleTorAmplitude; local models; ctf (the exact recorded ConstantModelConstructibleFiniteTor predicate vs mirrored ordinary helpers); CommShift/IsTriangulated/coproducts; localizing closures (same Type (u+2) object universe); same fixed compactification against both recorded rightDerivedLowerShriekOfCompactification. No stronger hypotheses. Zero ring, empty scheme, non-qcqs and unbounded cases are included. The re-delivery fixes the prior stmt_deps return with two faithful existing:true definition nodes (signatures verbatim with live sources, §5 fields OK). The item changed only in lean/stmt_deps. No hollow defs; sorry only. Docstrings OK. nt_compile clean, exit 0, 37.6 s. Minor: the report's claim that lem-cbc was added to proof_deps is not reflected in the delivered node (the tool dropped proof fields); harmless."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FiniteDiscreteOrdinaryEquivalence",
+  "declaration": "AlgebraicGeometry.ProEtale.FiniteDiscreteOrdinary.moduleObject_ordinary_coefficient_equivalence",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.FiniteDiscreteOrdinary.coefficient",
+   "AlgebraicGeometry.ProEtale.FiniteDiscreteOrdinary.Internal",
+   "AlgebraicGeometry.ProEtale.FiniteDiscreteOrdinary.Ordinary",
+   "AlgebraicGeometry.ProEtale.FiniteDiscreteOrdinary.sectionRing",
+   "AlgebraicGeometry.ProEtale.FiniteDiscreteOrdinary.pointConstants",
+   "AlgebraicGeometry.ProEtale.FiniteDiscreteOrdinary.canonicalAbelianMap",
+   "AlgebraicGeometry.ProEtale.FiniteDiscreteOrdinary.fixedRestriction",
+   "AlgebraicGeometry.ProEtale.FiniteDiscreteOrdinary.sectionEncoding",
+   "AlgebraicGeometry.ProEtale.FiniteDiscreteOrdinary.Encoding",
+   "AlgebraicGeometry.ProEtale.FiniteDiscreteOrdinary.Encoding.ordinaryDerived",
+   "AlgebraicGeometry.ProEtale.FiniteDiscreteOrdinary.Encoding.fixedDerived",
+   "AlgebraicGeometry.ProEtale.FiniteDiscreteOrdinary.Encoding.fixedDerivedShift",
+   "AlgebraicGeometry.ProEtale.FiniteDiscreteOrdinary.ordinaryLocalModel",
+   "AlgebraicGeometry.ProEtale.FiniteDiscreteOrdinary.ordinaryStratified",
+   "AlgebraicGeometry.ProEtale.FiniteDiscreteOrdinary.ordinaryConstructible",
+   "AlgebraicGeometry.ProEtale.FiniteDiscreteOrdinary.ordinaryBoundedConstructible",
+   "AlgebraicGeometry.ProEtale.FiniteDiscreteOrdinary.ordinaryCtf",
+   "AlgebraicGeometry.ProEtale.FiniteDiscreteOrdinary.moduleObject_ordinary_coefficient_equivalence"
+  ],
+  "file": "lean/Sheaf/Paper/FiniteDiscreteOrdinaryEquivalence.lean",
+  "statement": "theorem moduleObject_ordinary_coefficient_equivalence [Finite A] [DiscreteTopology A] : ∃ E : ∀ T : Scheme.{u}, Encoding A T, (∀ T : Scheme.{u}, Nonempty ((E T).fixedDerived.functor.Monoidal) ∧ (∀ (K : DerivedCategory (Internal A T)) (a b : ℤ), a ≤ b → (DerivedCategory.torAmplitudeIn _ a b K ↔ Scheme.HasProEtaleTorAmplitude T A ((E T).ordinaryDerived.functor.obj K) a b)) ∧ (∀ (K : DerivedCategory (Internal A T)) (a b : ℤ), a ≤ b → (DerivedCategory.torAmplitudeIn _ a b K ↔ DerivedCategory.torAmplitudeIn _ a b ((E T).fixedDerived.functor.obj K))) ∧ (∀ M : Internal A T, HasFiniteConstantLocalModel (coefficient A) T M ↔ ordinaryLocalModel A T (((E T).ordinary.functor ⋙ (E T).fixed.functor).obj M)) ∧ (∀ K : DerivedCategory (Internal A T), (constantModelBoundedConstructible (coefficient A) T K ∧ DerivedCategory.finiteTorAmplitude _ K) ↔ ordinaryCtf A T ((E T).fixedDerived.functor.obj K)) ∧ Nonempty ((E T).fixedDerived.functor.CommShift ℤ) ∧ (E T).fixedDerived.functor.IsTriangulated ∧ PreservesColimitsOfSize.{u + 1, u + 1} (E T).fixedDerived.functor ∧ (∀ K : DerivedCategory (Internal A T), localizingClosureProEtale (coefficient A) T K ↔ CategoryTheory.localizingClosure (ordinaryCtf A T) ((E T).fixedDerived.functor.obj K))) ∧ (∀ (X Y : Scheme.{u}) (f : X ⟶ Y) (c : Compactification f), Nonempty (CondensedRing.rightDerivedLowerShriekOfCompactification (coefficient A) c ⋙ (E Y).fixedDerived.functor ≅ (E X).fixedDerived.functor ⋙ rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} (ULift.{u + 1} A)) c))",
+  "branch": "newtargets-dag",
+  "by": "N8",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "The canonical coefficient map is sheafified constant functions followed by the existing constantSchemeIso and upperStarFromPoint. Encoding fixes the ring isomorphism on every constant scalar and fixes both forward functors to section-action/scalar restriction. Its two derived equivalences are the actual termwise Equivalence.mapDerivedCategory, not independent equivalences. Tensor and compactification comparison use the equivalent fixed-ULift-A module-sheaf presentation; Tor intervals are also compared directly with the recorded intrinsic HasProEtaleTorAmplitude. The ordinary local-model and constructibility helpers render the ordinary side of this node with the same covers, strata and affine-local convention; they introduce no new independent notion or chosen data. The two definition nodes def-sfb-constant-ring-module-restriction and def-sfb-constant-sheaf-scheme-pullback-comparison own the existing canonical constructions used by the signature; the associated theorem nodes are proof dependencies. The recorded derived-constant-module interface is also a statement dependency."
  }
 }

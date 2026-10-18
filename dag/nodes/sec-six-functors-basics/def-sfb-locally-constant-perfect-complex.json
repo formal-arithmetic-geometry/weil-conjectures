@@ -1,0 +1,109 @@
+{
+ "id": "def-sfb-locally-constant-perfect-complex",
+ "kind": "definition",
+ "title": "Locally constant perfect condensed-coefficient complexes",
+ "status": "split",
+ "statement": "Let $\\Lambda$ be a commutative condensed coefficient ring, $S$ a scheme, and $P\\in D(S_{\\mathrm{pro\\acute et}},\\Lambda_S)$ in the ambient relative module derived category of [sk-def-sfb-derived-tensor-hom]. Define $P$ to be locally constant perfect if there is a pro-étale covering family $\\{U_i\\to S\\}$ such that, for each $i$, there is a bounded cochain complex $F_i$ of condensed $\\Lambda$-modules on the point whose every term is a retract of a finite free $\\Lambda$-module, and an isomorphism $P|_{U_i}\\simeq Q(F_i\\otimes_\\Lambda\\Lambda_{U_i})$, with scalar extension applied termwise. Use the finite-free retracts and canonical termwise point pullback of [lem-sfb-internal-hom-dual-tor-amplitude]. Equivalently these are the scalar extensions of bounded complexes of finite projective $\\Lambda(*)$-modules of [def-pc-perfect-ring-complex] and [def-weil-pbc-strict-perfect-coefficient-package]: finite-free maps and their retracts on the condensed point are matrices over $\\Lambda(*)$. The bounds may depend on the cover member; the covering family may be empty when $S$ is empty.",
+ "stmt_deps": [
+  "sk-def-sfb-derived-tensor-hom",
+  "lem-sfb-internal-hom-dual-tor-amplitude",
+  "def-pc-perfect-ring-complex",
+  "def-weil-pbc-strict-perfect-coefficient-package"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-internal-hom.md",
+  "place": "Locally constant perfect complex convention preceding the internal Hom formula"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "LeanSearch",
+   "query": "locally constant perfect complexes pulled back from finite projective condensed scalar modules",
+   "results": "CondensedMod.LocallyConstant.functor, CondensedMod.LocallyConstant.functorIsoDiscreteAux₁, CompHausLike.LocallyConstantModule.functor_obj_val: discrete condensed module constructions, not the required perfect-complex cover predicate.",
+   "date": "2026-10-18",
+   "verdict": "No exact declaration; these use discrete scalar modules instead of general condensed coefficients."
+  },
+  {
+   "tool": "LeanFinder",
+   "query": "locally constant perfect complex on a scheme pro etale condensed coefficient ring",
+   "results": "CondensedMod.LocallyConstant.functor and related discrete condensed-module declarations; no combined locally constant perfect predicate.",
+   "date": "2026-10-18",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "Loogle",
+   "query": "DerivedCategory, MonObj",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'MonObj'",
+   "date": "2026-10-18",
+   "verdict": "No result; source searches used to inspect actual module-object APIs."
+  },
+  {
+   "tool": "grep",
+   "query": "LocallyConstant.*Perfect|IsPerfectRingComplex in Mathlib; IsLocallyConstantPerfectComplex|FiniteProjectiveCondensedModule|internalHom_stability in Mathlib, WeilConjectures, lean/Sheaf and dag/lean_names_upstream.json",
+   "results": "[grep] OK 0 hit(s) in Mathlib. Project lean/Sheaf/Paper/InternalHomDualTorAmplitude.lean:77 defines FiniteProjectiveCondensedModule and :144 uses it in the inline hP cover condition. No named combined predicate. Existing finite-projective and scalarExtensionComplex constructions are reused.",
+   "date": "2026-10-18",
+   "verdict": "Reuse existing constituents; add only the named combined cover condition."
+  },
+  {
+   "tool": "blueprint_refs.py search; grep dag/nodes",
+   "query": "locally constant perfect",
+   "results": "1 blueprint nodes match 'locally constant perfect': det-thm-sf-ctf-stability-internal-hom. DAG text also finds the dual constructibility/Tor lemmas; those carry the model hypotheses inline, with no definition node for the combined condition.",
+   "date": "2026-10-18",
+   "verdict": "No existing independent definition node for this combined condition."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "det-thm-sf-ctf-stability-internal-hom",
+  "date": "2026-10-18",
+  "group": "Q20"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-thm-sf-ctf-stability-internal-hom",
+   "place": "Statement, locally constant perfect coefficient-model convention",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.Paper.LocallyConstantPerfectComplex",
+  "declaration": "AlgebraicGeometry.ProEtale.IsLocallyConstantPerfectComplex",
+  "file": "lean/Sheaf/Paper/LocallyConstantPerfectComplex.lean",
+  "statement": "def IsLocallyConstantPerfectComplex (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ] (S : Scheme.{u}) (P : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology S) Ab.{u + 1}) (condensedRingObj Λ S))) : Prop",
+  "branch": "newtargets-dag",
+  "by": "Q20",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-aa851099c",
+  "group": "Q20",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-aa851099c",
+  "group": "Q20",
+  "result": "pass",
+  "note": "Clause-by-clause match of internalHom_stability to the node. Hypotheses: ℓ prime, char k = p > 0 with p ≠ ℓ, X separated finite type over k, recorded admissible Λ, Scheme.{u}/Profinite.{u}/Ab.{u+1}. dctfPred is exactly the recorded ConstantModelConstructibleFiniteTor predicate. Clause 1: RHom(K,L) ∈ Dctf via the recorded derivedHom. Formula clause: a_! is the IntTensorProjection composite for every open-then-closed factorization; a^!L is (G.obj N).obj for G right adjoint to the extension restricted to localizingClosureProEtale, the convention of exists_localizingExceptionalAdjoint; both Nonempty isos are in the ambient derived category, with P^∨ = relativeInternalHomDual. Generation clause: every replete IsTriangulated Q containing the iso-closed a_!P contains every Dctf object, i.e. finite shifts and cones, no retracts. New node def-sfb-locally-constant-perfect-complex copies verbatim the inline hP of the landed internal-Hom tor-amplitude lemma, has real data and follows the H12 field rule; no duplicate found. Item node diff is lean plus one added stmt_dep; both lean.statement fields verbatim; only sorry is the theorem proof; docstrings carry source, blueprint tag and all 12 steps; report has Worker report, Second reading by Q20 and New nodes. nt_compile --json on both snapshot files: rc 0, no errors or warnings (13.9 s, 16.5 s). Edge cases (empty S or X, zero ring, identity/open/closed immersions, empty generation) covered. No findings."
+ }
+}
