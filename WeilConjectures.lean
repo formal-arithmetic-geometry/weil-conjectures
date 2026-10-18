@@ -8786,6 +8786,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.Projective
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.ProjectiveCurve
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.Proper
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.QuotientCoefficients
+public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.SetLocallyConstant
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.TargetLocal
 public import WeilConjectures.SixFunctors.Etale.Derived.GenericFibre.ClosedSupport
 public import WeilConjectures.SixFunctors.Etale.Derived.GenericFibre.Comparison
@@ -9203,6 +9204,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStarAcyclic
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStarCoherence
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.Monoidal
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.UniversalCoverConstant
+public import WeilConjectures.SixFunctors.ProEtale.Comparison.UniversalCoverSetFLC
 public import WeilConjectures.SixFunctors.ProEtale.ConstructibleSheaf
 public import WeilConjectures.SixFunctors.ProEtale.DisjointOpensGluing
 public import WeilConjectures.SixFunctors.ProEtale.ExceptionalAdjoint
