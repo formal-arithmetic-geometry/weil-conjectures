@@ -16,9 +16,48 @@
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-an/_section.md",
   "place": "Steps 5(b) and 6: standard affine-line compactification and coordinate tower"
  },
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Construct a morphism to the tower recursively from a base morphism and an ordered Fin d family of global sections, using AffineSpace.homOfVector at each successor. Induction proves that its composite with the tower projection is the given base morphism and that its coordinate pullbacks are the prescribed sections. A second induction using AffineSpace.hom_ext shows that maps to the tower are determined by their base morphism and coordinates. Apply the recursive construction to the universal coordinates on affine d-space. The two coordinate extensionality statements prove both inverse identities for affineTraceToAffineSpace, also for d=0.",
+   "uses": [
+    "def-sbc-affine-space"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Induct on d. The affine-line projection is affine and locally of finite presentation by the existing AffineSpace instances. LocallyOfFiniteType.isLocallyNoetherian and QuasiCompact.compactSpace_of_compactSpace give Noetherianity of each successor stage. Separatedness, local finite type and quasi-compactness of the tower projection follow by composition; the initial projection is the identity.",
+   "uses": [
+    "def-sbc-affine-space",
+    "def-weil-proper-morphism",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Write the standard projective-line chart as homOfSections for the pair [t:1]. AffineSpace.map pulls this pair back to the same pair on the new base. ProjectiveSpace.comp_homOfSections and hom_ext therefore prove commutativity of the actual chart square. The affine-space projection square and projective-space projection square are Cartesian by their existing isPullback_map theorems. Cancel the latter square from the former rectangle with IsPullback.of_bot to obtain affineTraceChart_isPullback.",
+   "uses": [
+    "def-sbc-affine-space",
+    "def-nagata-projective-space-base-change"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For the tower projection, an arbitrary base change morphism, and the projective-line projection, apply IsUnit.map to the corresponding global-sections ring homomorphism. The ring homomorphism preserves the natural-number cast of N, giving each of the three asserted invertibility statements.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-affine-space",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "def-nagata-projective-space-base-change"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-an/_section.md",
+  "place": "Steps 5(b) and 6; W2 formal proof using universal coordinates and Cartesian-square cancellation"
+ },
  "mathlib_match": null,
  "mathlib_searches": [
   {
@@ -144,5 +183,15 @@
   "group": "Q24",
   "result": "pass",
   "note": "Wrote review.md. Checked immutable files, sources, all statement dependencies, canonical maps, hypotheses, edge cases, universes, docstrings, and verbatim signatures. All three modules compiled cleanly through scompile.py. No corrections needed.; reverted the delivery's change of existing node(s) def-amb-p1-trace (--revert-nodes; kept as on newtargets-dag)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261018T145121-L-3647407",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
