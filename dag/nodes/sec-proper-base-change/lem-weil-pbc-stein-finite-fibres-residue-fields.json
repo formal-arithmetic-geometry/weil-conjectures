@@ -63,7 +63,7 @@
    }
   },
   {
-   "text": "Apply [lem-sc-noetherian-closed-subset-finite-components] with the Noetherian scheme $Y$ and its closed subset $E=Y$. It supplies a finite list of irreducible closed components $C_1,\\ldots,C_r$ covering $Y$, with components as defined in [def-weil-irreducible-components]. By [lem-weil-pbc-scheme-sober], each $C_j$ is $\\overline{\\{\\eta_j\\}}$ for a generic point $\\eta_j$. Continuity gives $h(C_j)\\subseteq\\overline{\\{h(\\eta_j)\\}}$ in $T$. Step 1 makes this last closure a singleton; hence $h(C_j)=\\{h(\\eta_j)\\}$. Surjectivity now gives $T=\\{h(\\eta_1),\\ldots,h(\\eta_r)\\}$, proving finiteness. If $Y$ is empty, surjectivity gives $T$ empty and the same argument uses $r=0$.",
+   "text": "Apply lem-sc-noetherian-closed-subset-finite-components to Y. Mathlib genericPoints.finite gives a finite set G of component generic points, and genericPoints.closure gives closure G = Y by lem-weil-pbc-scheme-sober. The target fibre T is T1 by step 1, so the finite image h(G) is closed. Its preimage is a closed set containing G and therefore all of Y. Surjectivity of h gives T = h(G), proving finiteness, including the empty case.",
    "uses": [
     "lem-sc-noetherian-closed-subset-finite-components",
     "def-weil-irreducible-components",
@@ -88,7 +88,7 @@
    }
   },
   {
-   "text": "Choose an affine member $U=\\operatorname{Spec}C$ of a finite-type affine cover of $Y\\to\\operatorname{Spec}k$ containing $x$ [def-weil-finite-type-morphism]. Then $C$ is a finitely generated $k$-algebra. Since $x$ is closed in $Y$, it is closed in $U$; its prime ideal $\\mathfrak m$ is maximal, and $\\kappa(x)=C/\\mathfrak m$: restriction to the open neighbourhood gives the same stalk, namely $C_{\\mathfrak m}$, and $C_{\\mathfrak m}/\\mathfrak m C_{\\mathfrak m}=(C/\\mathfrak m)_{C\\setminus\\mathfrak m}=C/\\mathfrak m$, since every element inverted has nonzero image in this field. This quotient is a field and a finitely generated $k$-algebra. Apply [lem-weil-pbc-zariski-lemma] to conclude $[\\kappa(x):k]<\\infty$.",
+   "text": "Choose an affine member $U=\\operatorname{Spec}C$ of a finite-type affine cover of $Y\\to\\operatorname{Spec}k$ containing $x$ [def-weil-finite-type-morphism]. Then $C$ is a finitely generated $k$-algebra. Since $x$ is closed in $Y$, it is closed in $U$; its prime ideal $\\mathfrak m$ is maximal, and $\\kappa(x)=C/\\mathfrak m$: restriction to the open neighbourhood gives the same stalk, namely $C_{\\mathfrak m}$, and $C_{\\mathfrak m}/\\mathfrak m C_{\\mathfrak m}=(C/\\mathfrak m)_{C\\setminus\\mathfrak m}=C/\\mathfrak m$, since every element inverted has nonzero image in this field. This quotient is a field and a finitely generated $k$-algebra. Apply [lem-weil-pbc-zariski-lemma] to conclude $[\\kappa(x):k]<\\infty$. In Lean reuse the already proved source-library theorem Scheme.Hom.finite_residueField_of_isClosed from WeilConjectures.PointCount for precisely this finite-residue-field assertion, rather than repeating its affine Jacobson/Zariski lemma proof.",
    "uses": [
     "def-weil-finite-type-morphism",
     "def-weil-residue-field",
@@ -101,7 +101,7 @@
    }
   },
   {
-   "text": "The morphism $q\\circ a:Y\\to\\operatorname{Spec}B$ sends $x$ to $b$, hence induces a field map $\\kappa(b)\\to\\kappa(x)$ [def-weil-residue-field]. It is injective [def-pc-field-extension]. The equality $\\pi\\circ q\\circ a=(\\operatorname{Spec}k\\to S)\\circ(Y\\to\\operatorname{Spec}k)$ says the resulting tower $k\\to\\kappa(b)\\to\\kappa(x)$ has as composite the structure map used in step 5: this follows by composing the local ring maps and reducing modulo their maximal ideals. Thus $\\kappa(b)$ embeds as a $k$-linear subspace of the finite-dimensional space $\\kappa(x)$. Any linearly independent family in $\\kappa(b)$ stays independent in $\\kappa(x)$, so its size is at most $[\\kappa(x):k]$; consequently $[\\kappa(b):k]<\\infty$. This proves the residue-field clause for every $b\\in T$.",
+   "text": "The morphism $q\\circ a:Y\\to\\operatorname{Spec}B$ sends $x$ to $b$, hence induces a field map $\\kappa(b)\\to\\kappa(x)$ [def-weil-residue-field]. It is injective [def-pc-field-extension]. The equality $\\pi\\circ q\\circ a=(\\operatorname{Spec}k\\to S)\\circ(Y\\to\\operatorname{Spec}k)$ says the resulting tower $k\\to\\kappa(b)\\to\\kappa(x)$ has as composite the structure map used in step 5: this follows by composing the local ring maps and reducing modulo their maximal ideals. Thus $\\kappa(b)$ embeds as a $k$-linear subspace of the finite-dimensional space $\\kappa(x)$. Any linearly independent family in $\\kappa(b)$ stays independent in $\\kappa(x)$, so its size is at most $[\\kappa(x):k]$; consequently $[\\kappa(b):k]<\\infty$. This proves the residue-field clause for every $b\\in T$. In Lean insert Scheme.residueFieldCongr for the equality pi(a(x)) = s. Compare the composite field maps after applying Spec and composing with S.fromSpecResidueField s. Naturality of fromSpecResidueField and the pullback equation identify the composites; cancel this monomorphism and use Spec.map_injective. The private proved helper finite_left_of_comp invokes Module.Finite.left for the resulting field tower. RingHom.Finite.of_comp_finite removes the source congruence isomorphism, and transport along a(x) = b gives the stated map.",
    "uses": [
     "def-weil-residue-field",
     "def-pc-field-extension"
@@ -133,7 +133,7 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/more-morphisms.tex",
-  "place": "Tag 0E0M, lemma-stein-universally-closed-residue-fields: the omitted topological argument is expanded using component generic points, and the finite-type point is chosen as a closed point in the closed preimage."
+  "place": "Tag 0E0M, lemma-stein-universally-closed-residue-fields: the omitted topological argument is expanded using component generic points, and the finite-type point is chosen as a closed point in the closed preimage. Lean implementation by A5, 2026-10-18: finite dense component-generic-point image, source-library closed-point finiteness, and explicit cancellation of field-valued points to identify the residue-field tower."
  },
  "mathlib_searches": [
   {
@@ -276,5 +276,15 @@
   "by": "NM",
   "date": "2026-10-15",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A5",
+  "result": "pass",
+  "landing": "20261018T062653-L-629298",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
