@@ -38,7 +38,7 @@ identity, the unit of `Rj_! ⊣ Rj^!` being an isomorphism as well.
 ## Main statements
 
 - `AlgebraicGeometry.Etale.isIso_rightDerivedUpperShriekAdjunction_unit_of_isOpenImmersion`
-- `AlgebraicGeometry.Etale.isIso_rightDerivedUpperShriekBaseChangeMap_of_isOpenImmersion`
+- `AlgebraicGeometry.Etale.isIso_rightDerivedUpperShriekBaseChangeMap_of_isOpenImmersion_right`
 -/
 
 @[expose] public section
@@ -92,8 +92,10 @@ lemma _root_.CategoryTheory.Adjunction.isIso_of_isIso_map_comp_counit {C D : Typ
 
 /-- **Base change along an open immersion.** For a quasi-compact open immersion `j` and a
 cartesian square `g' ≫ j = j' ≫ g` with `j'` quasi-compact, the canonical base change map
-`Lg'^* Rj^! ⟶ Rj'^! Lg^*` is an isomorphism. -/
-theorem isIso_rightDerivedUpperShriekBaseChangeMap_of_isOpenImmersion
+`Lg'^* Rj^! ⟶ Rj'^! Lg^*` is an isomorphism. Here the open immersion is the morphism `j` whose
+exceptional inverse image is taken; for an open immersion `g` along which one base changes, see
+`AlgebraicGeometry.Etale.isIso_rightDerivedUpperShriekBaseChangeMap_of_isOpenImmersion`. -/
+theorem isIso_rightDerivedUpperShriekBaseChangeMap_of_isOpenImmersion_right
     {X Y X' Y' : Scheme.{u}} {f : X ⟶ Y} {g : Y' ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X}
     (sq : IsPullback g' f' f g) [IsOpenImmersion f] [QuasiCompact f] [HasCompactification f]
     [HasCompactification f'] [QuasiCompact f'] :

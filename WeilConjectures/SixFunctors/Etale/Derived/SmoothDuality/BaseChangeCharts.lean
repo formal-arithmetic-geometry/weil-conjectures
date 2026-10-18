@@ -25,7 +25,7 @@ a smooth morphism `f` is an isomorphism *provided* it is one for
   change (`lem-amb-cartier-kummer-map`, `thm-amb-p1-decomposition`).
 
 The open-immersion case (b) is proved
-(`AlgebraicGeometry.Etale.isIso_rightDerivedUpperShriekBaseChangeMap_of_isOpenImmersion`).
+(`AlgebraicGeometry.Etale.isIso_rightDerivedUpperShriekBaseChangeMap_of_isOpenImmersion_right`).
 
 * *Composition* (Step 2): the base change maps of a composite are composed from those of the
   factors (`AlgebraicGeometry.Etale.isIso_rightDerivedUpperShriekBaseChangeMap_comp_iff`); so the
@@ -129,7 +129,7 @@ theorem isIso_rightDerivedUpperShriekBaseChangeMap_app_of_cover {X Y X' Y' : Sch
   have (i : ι) : HasCompactification (v' i) :=
     (Compactification.ofIsOpenImmersion _).hasCompactification
   refine isIso_of_isIso_leftDerivedUpperStar_map_of_jointlySurjective Λ v' hv _ fun i ↦ ?_
-  have := isIso_rightDerivedUpperShriekBaseChangeMap_of_isOpenImmersion Λ (sqv i)
+  have := isIso_rightDerivedUpperShriekBaseChangeMap_of_isOpenImmersion_right Λ (sqv i)
   have h₂ := (isIso_rightDerivedUpperShriekBaseChangeMap_comp_iff (sqv i) sq
     ((sqv i).paste_vert sq) rfl rfl K inferInstance).1 (h i)
   rw [NatIso.isIso_map_iff (leftDerivedUpperStarIsoMapDerivedCategory _ (v' i)),
@@ -174,7 +174,7 @@ theorem isIso_rightDerivedUpperShriekBaseChangeMap_affineSpace (h₁ : AffineLin
     (sq : IsPullback g' p' (𝔸(ULift.{u} (Fin d); S) ↘ S) g) [HasCompactification p']
     [QuasiCompact p'] : IsIso (rightDerivedUpperShriekBaseChangeMap Λ sq) := by
   induction d generalizing S' P' with
-  | zero => exact isIso_rightDerivedUpperShriekBaseChangeMap_of_isOpenImmersion Λ sq
+  | zero => exact isIso_rightDerivedUpperShriekBaseChangeMap_of_isOpenImmersion_right Λ sq
   | succ d ih =>
     set φ : 𝔸(ULift.{u} (Fin (d + 1)); S) ≅ 𝔸(ULift.{u} (Fin 1); 𝔸(ULift.{u} (Fin d); S)) :=
       AffineSpace.reindexIso S ((Equiv.sumCongr Equiv.ulift Equiv.ulift).trans
@@ -190,7 +190,7 @@ theorem isIso_rightDerivedUpperShriekBaseChangeMap_affineSpace (h₁ : AffineLin
       (fun _ _ _ _ _ sq' _ _ ↦ ?_) (fun _ _ _ _ _ sq' _ _ ↦ ih sq')
     exact isIso_rightDerivedUpperShriekBaseChangeMap_of_comp φ.hom q rfl sq'
       (fun _ _ _ _ _ sq'' _ _ ↦
-        isIso_rightDerivedUpperShriekBaseChangeMap_of_isOpenImmersion Λ sq'')
+        isIso_rightDerivedUpperShriekBaseChangeMap_of_isOpenImmersion_right Λ sq'')
       (fun _ _ _ _ _ sq'' _ _ ↦ h₁ sq'')
 section Chart
 
@@ -222,7 +222,7 @@ theorem isIso_rightDerivedUpperShriekBaseChangeMap_chart {X Y : Scheme.{u}}
     rw [hfe, Scheme.Hom.resLE_comp_ι]
   refine isIso_rightDerivedUpperShriekBaseChangeMap_of_comp _ U.ι w sq
     (fun _ _ _ _ _ sq' _ _ ↦ ?_) (fun _ _ _ _ _ sq' _ _ ↦
-      isIso_rightDerivedUpperShriekBaseChangeMap_of_isOpenImmersion Λ sq')
+      isIso_rightDerivedUpperShriekBaseChangeMap_of_isOpenImmersion_right Λ sq')
   exact isIso_rightDerivedUpperShriekBaseChangeMap_of_comp e _ rfl sq'
     (fun _ _ _ _ _ sq'' _ _ ↦ hE e sq'')
     (fun _ _ _ _ _ sq'' _ _ ↦
@@ -306,7 +306,7 @@ theorem isIso_rightDerivedUpperShriekBaseChangeMap_of_etale_of_affineLine {X Y :
   exact isIso_rightDerivedUpperShriekBaseChangeMap_of_comp _ Y₀.ι w sq
     (fun _ _ _ _ _ sq' _ _ ↦
       isIso_rightDerivedUpperShriekBaseChangeMap_of_hasInvertibleExponent hE h₁ _ d sq')
-    (fun _ _ _ _ _ sq' _ _ ↦ isIso_rightDerivedUpperShriekBaseChangeMap_of_isOpenImmersion Λ sq')
+    (fun _ _ _ _ _ sq' _ _ ↦ isIso_rightDerivedUpperShriekBaseChangeMap_of_isOpenImmersion_right Λ sq')
 
 end Chart
 
