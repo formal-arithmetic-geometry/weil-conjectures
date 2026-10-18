@@ -69,6 +69,11 @@ theorem etale_direct_image_vanishing_above_twice_dimension
     (A : Type (u + 1)) [CommRing A] [Finite A]
     (hA : ∃ n : ℕ, 0 < n ∧ IsUnit (n : k) ∧ ∀ a : A, n • a = 0) :
     Etale.HasUniformDirectImageVanishingLE A f (2 * d) := by
-  sorry
+  obtain ⟨n, hn, -, hnA⟩ := hA
+  have hAtors : IsAddTorsion A := fun a ↦
+    isOfFinAddOrder_iff_nsmul_eq_zero.mpr ⟨n, hn, hnA a⟩
+  intro M q hq
+  exact Etale.isZero_higherDirectImage_of_two_mul_lt hAtors f (f ≫ aY) aY rfl d hX M q
+    (by simpa using hq)
 
 end AlgebraicGeometry
