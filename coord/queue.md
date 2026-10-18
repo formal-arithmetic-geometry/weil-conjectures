@@ -1,6 +1,6 @@
 # Work queue
 
-949 items; claim with `tools/claim.py next <group> [--stage N]`.
+945 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (949)
+## Stage 3: modules to prove (945)
 
 On the sorry route of an open batch, or below a route sorry of one (the human, 2026-10-18: provable as soon as every dependency is stated, whatever the depth); route first, then nearest to a route sorry.
 
@@ -126,7 +126,6 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.AlgebraicGeometry.EtaleClosedSupportAmplitude` | - | 1 | proof | 2 |
 | `Sheaf.AlgebraicGeometry.EtaleClosedSupportTorAmplitude` | - | 1 | proof | 2 |
 | `Sheaf.AlgebraicGeometry.EtaleCompactSupportAmplitude` | - | 1 | proof | 2 |
-| `Sheaf.AlgebraicGeometry.EtaleDirectImageVanishing` | - | 1 | proof | 2 |
 | `Sheaf.AlgebraicGeometry.FiniteConstantProjectionFormula` | - | 1 | proof | 2 |
 | `Sheaf.AlgebraicGeometry.FiniteFpProEtalePushforwardExact` | - | 1 | proof | 2 |
 | `Sheaf.AlgebraicGeometry.FiniteNormalClopenConstructibleModule` | - | 1 | proof | 2 |
@@ -307,7 +306,6 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.SixFunctors.SchemeGeometricFrobenius` | - | 3 | proof | 2 |
 | `Sheaf.SixFunctorsBasics.BrownHypotheses` | - | 1 | proof | 2 |
 | `Sheaf.Targets.SliceRestrictionStrictDerivedLimit` | - | 1 | proof | 2 |
-| `Sheaf.Topology.ContinuousMapCondensedRing` | - | 2 | proof | 2 |
 | `Sheaf.Topology.NoetherianGoodStratificationRefinement` | - | 1 | proof | 2 |
 | `Sheaf.AlgebraicGeometry.RationalUnramifiedCotangentCriterion` | 6 | 1 | proof | 3 |
 | `Sheaf.Algebra.Category.ModuleCat.Sheaf.ConstantFieldTensorCohomology` | - | 1 | proof | 3 |
@@ -471,7 +469,6 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.IntegralProperProjectionFormula` | - | 1 | proof | 3 |
 | `Sheaf.Paper.NormalProEtaleMonodromy` | - | 1 | proof | 3 |
 | `Sheaf.Paper.OpenImmersionLocalizing` | - | 1 | proof | 3 |
-| `Sheaf.Paper.PbcDerivedProductRepresentation` | - | 2 | proof | 3 |
 | `Sheaf.Paper.ProEtaleProperOpenInterchange` | - | 1 | proof | 3 |
 | `Sheaf.Paper.ProjectionFormulaCompactified` | - | 5 | proof | 3 |
 | `Sheaf.Paper.ProjectionSectionNormalization` | - | 1 | proof | 3 |
@@ -512,7 +509,6 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.TraceFormula.SmoothGeometricallyNormal` | - | 1 | proof | 3 |
 | `Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatEquationalCriterion` | - | 1 | proof | 4 |
 | `Sheaf.Algebra.Homology.FilteredProjectiveModel` | - | 1 | proof | 4 |
-| `Sheaf.Algebra.Homology.KFlatHomotopyTriangulated` | - | 1 | proof | 4 |
 | `Sheaf.Algebra.Homology.RingedInternalHomDerivedComplete` | - | 1 | proof | 4 |
 | `Sheaf.Algebra.Homology.RingedTensorCohomologicalBounds` | - | 1 | proof | 4 |
 | `Sheaf.Algebra.Homology.TwoStepFilteredTotal` | - | 2 | proof | 4 |
@@ -616,7 +612,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.ConcentratedComplexShift` | - | 1 | proof | 4 |
 | `Sheaf.Paper.ConstructibleCompactnessBounded` | - | 2 | proof | 4 |
 | `Sheaf.Paper.ConstructibleFiniteTorAdjunctions` | - | 1 | proof | 4 |
-| `Sheaf.Paper.ConstructibleHomContinuityDevissage` | - | 2 | proof | 4 |
+| `Sheaf.Paper.ConstructibleHomContinuityDevissage` | - | 1 | proof | 4 |
 | `Sheaf.Paper.DerivedNormalizationArrows` | - | 3 | proof | 4 |
 | `Sheaf.Paper.EtaleSumTensorTotalization` | - | 1 | proof | 4 |
 | `Sheaf.Paper.FiniteRingCompactSupportProjection` | - | 1 | proof | 4 |
