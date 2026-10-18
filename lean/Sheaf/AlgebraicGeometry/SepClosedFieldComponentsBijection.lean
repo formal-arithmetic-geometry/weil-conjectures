@@ -52,6 +52,15 @@ theorem bijective_connectedComponentsMap_pullback_fst_of_isSepClosed
     Function.Bijective
       (pullback.fst (Z ↘ Spec (CommRingCat.of k))
         (Spec.map (CommRingCat.ofHom (algebraMap k L)))).continuous.connectedComponentsMap := by
-  sorry
+  have : GeometricallyConnected (Spec.map (CommRingCat.ofHom (algebraMap k L))) :=
+    GeometricallyConnected.of_connectedSpace_of_isSepClosed _
+  let p := pullback.fst (Z ↘ Spec (CommRingCat.of k))
+    (Spec.map (CommRingCat.ofHom (algebraMap k L)))
+  let e := p.connectedComponentsHomeomorph p.isOpenMap
+  have he : e = p.continuous.connectedComponentsMap := by
+    funext c
+    exact Scheme.Hom.connectedComponentsHomeomorph_apply p p.isOpenMap c
+  rw [← he]
+  exact e.bijective
 
 end AlgebraicGeometry

@@ -15971,3 +15971,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 06:27 L: merged deliver/D4/Sheaf.AlgebraicGeometry.ConstructibleEtaleModuleQcqsAffineLocal (stage 3; reviewer PASS; first push; landing 20261018T062725-L-640360 (proof); batch 20261018T062645; modules 1; new nodes 0)
 - 06:27 L: merged deliver/D4/Sheaf.AlgebraicGeometry.ProEtaleOpenClosedDetection (stage 3; reviewer PASS; first push; landing 20261018T062726-L-640719 (proof); batch 20261018T062645; modules 1; new nodes 0)
 - 06:27 L: merged deliver/D5/Sheaf.AlgebraicGeometry.FiniteTypeFieldPushforwardEmbedding (stage 3; reviewer PASS; first push; landing 20261018T062726-L-640851 (proof); batch 20261018T062645; modules 1; new nodes 0)
+- 06:27 L: merged deliver/D5/Sheaf.AlgebraicGeometry.SepClosedFieldComponentsBijection (stage 3; reviewer PASS; first push; landing 20261018T062727-L-640978 (proof); batch 20261018T062645; modules 1; new nodes 0)

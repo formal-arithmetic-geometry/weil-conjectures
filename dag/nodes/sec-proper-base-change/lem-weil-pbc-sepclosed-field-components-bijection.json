@@ -35,54 +35,36 @@
  ],
  "proof": [
   {
-   "text": "Put $W=\\operatorname{Spec}L$, with structure morphism induced by the field extension $k\\to L$ [def-pc-field-extension]. By [def-weil-affine-spectrum] its underlying space has exactly one point. This space is nonempty, and two disjoint nonempty subsets cannot exist in a singleton. Hence it has no decomposition into two nonempty clopen subsets and is connected by [def-weil-connected-scheme]. This requires only that $L$ is a field, not that $L/k$ is finite or algebraic.",
-   "uses": [
-    "def-pc-field-extension",
-    "def-weil-affine-spectrum",
-    "def-weil-connected-scheme"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 0363, label lemma-separably-closed-field-connected-components, proof; Tag 0385, label lemma-bijection-connected-components"
-   }
-  },
-  {
-   "text": "Apply [lem-weil-separably-closed-geometrically-connected] to the connected $k$-scheme $W$ of step 1. Its hypotheses are exactly that $k$ is separably closed and that $W$ is a scheme over $k$ and connected. It follows that $W$ is geometrically connected over $k$. This supplies the geometric-connectedness input of the proof of Tag 0363 without a new tensor-product lemma; the reused node has an independently finished project proof.",
+   "text": "Apply the existing separably-closed geometric-connectedness theorem to the morphism `Spec.map (CommRingCat.ofHom (algebraMap k L))`. Its hypotheses are exactly `[Field k]`, `[IsSepClosed k]`, `[Field L]`, and `[Algebra k L]`, so the spectrum of `L` is geometrically connected over `Spec k`.",
    "uses": [
     "lem-weil-separably-closed-geometrically-connected"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 0363, label lemma-separably-closed-field-connected-components, proof; Tag 0385, label lemma-bijection-connected-components"
+    "place": "Tag 0363, label lemma-separably-closed-field-connected-components, proof"
    }
   },
   {
-   "text": "Apply [lem-weil-pbc-geometrically-connected-product-components] with its $X=W$ and $Y=Z$. Step 2 supplies the only extra hypothesis. Thus $q:W\\times_k Z\\to Z$ induces the stated bijection. By [def-pc-fibre-product], swapping the two projections gives mutually inverse morphisms $Z\\times_kW\\rightleftarrows W\\times_k Z$: their composites have the original projections, so uniqueness in the universal property makes both composites identities. The swap commutes with the projections to $Z$, identifying $q$ with $p$. Write $h$ for the underlying swap homeomorphism. If $C$ is a component, then $h(C)$ is nonempty and connected by continuity. If a nonempty connected subset $D$ contains $h(C)$, continuity of $h^{-1}$ makes $h^{-1}(D)$ connected and containing $C$; maximality gives $h^{-1}(D)=C$, hence $D=h(C)$. Thus $h$ sends components to components, and applying this argument to $h^{-1}$ gives the inverse component bijection. Therefore the bijection for $q$ is precisely the component map induced by $p$. When $Z$ is empty both fibre products are empty and the bijection is the unique map between empty component sets; otherwise the argument uses no finiteness of either component set.",
+   "text": "Let `p` be the first projection from the displayed pullback. Geometric connectedness is stable under pullback, and the projection is open by the universally-open field-base-change instance. Apply the Mathlib component-homeomorphism theorem `Scheme.Hom.connectedComponentsHomeomorph` to `p`. Its generated `connectedComponentsHomeomorph_apply` equality identifies the resulting homeomorphism with `p.continuous.connectedComponentsMap`; the homeomorphism's bijectivity therefore proves the required bijectivity.",
    "uses": [
-    "lem-weil-pbc-geometrically-connected-product-components",
-    "def-pc-fibre-product"
+    "lem-weil-pbc-geometrically-connected-product-components"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 0363, label lemma-separably-closed-field-connected-components, proof; Tag 0385, label lemma-bijection-connected-components"
+    "place": "Tag 0385, label lemma-bijection-connected-components"
    }
   }
  ],
  "proof_deps": [
-  "def-pc-field-extension",
-  "def-weil-affine-spectrum",
-  "def-weil-connected-scheme",
   "lem-weil-separably-closed-geometrically-connected",
-  "lem-weil-pbc-geometrically-connected-product-components",
-  "def-pc-fibre-product"
+  "lem-weil-pbc-geometrically-connected-product-components"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "document and Mathlib specialization",
   "document": "literature/stacks-project/varieties.tex",
-  "place": "Tag 0363, label lemma-separably-closed-field-connected-components, proof; Tag 0385, label lemma-bijection-connected-components; geometric-connectedness input reused from the existing closed second-assertion node"
+  "place": "Tag 0363 and Tag 0385; direct specialization of Scheme.Hom.connectedComponentsHomeomorph"
  },
  "mathlib_searches": [
   {
@@ -223,5 +205,15 @@
   "by": "NW",
   "date": "2026-10-15",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D5",
+  "result": "pass",
+  "landing": "20261018T062727-L-640978",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
