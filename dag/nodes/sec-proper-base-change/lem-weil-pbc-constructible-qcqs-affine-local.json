@@ -29,36 +29,32 @@
  ],
  "proof": [
   {
-   "text": "Condition (1) implies (2): take the single-member open covering consisting of $T$ itself. No restriction or change of stratification is needed.",
-   "uses": [],
+   "text": "For (1) implies (2), take the singleton open cover consisting of the whole scheme. For an affine open U of this member, its image W in T is affine. Transport the witnessing stratification of W along the inverse of the canonical isomorphism U ≅ W. Keep the same domains, compose their immersions with this isomorphism, and use isoImage_inv_ι to identify the composite into T. The domains remain reduced.",
+   "uses": [
+    "def-constructible-stratification"
+   ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 095E, lemma-constructible-quasi-compact-quasi-separated, proof; module version using 03RW(3)"
+    "place": "Lemma 095E (lemma-constructible-quasi-compact-quasi-separated), the statement for sheaves of Lambda-modules with Lambda Noetherian ('A similar statement holds'), here Lambda finite, and its proof; Stacks' condition 'of finite type and locally constant' in 03RW(3) is, for Lambda finite, the finite-locally-constant condition used here by lem-weil-pbc-finite-locally-constant-module-values ((1) iff (3)); Definition 03RW (definition-constructible) and the paragraph before it (reduced induced structure, topological invariance 03SI); uses Topology Lemma 09Y4 (topology-lemma-constructible-partition-refined-by-stratification), Topology Lemma 'quasi-compact-open-immersion-constructible-image', Properties Lemma 'locally-constructible'."
    }
   },
   {
-   "text": "We record the three transfer facts used below, with $\\mathcal A=\\operatorname{Mod}(\\Lambda)$ as the category of values in [def-constructible-constant]. (a) Restriction. For an etale $e:E\\to Y$ and a module sheaf $G$ on $Y_{\\Et}$, [lem-weil-pbc-etale-inverse-image-restriction] gives an isomorphism $e^{-1}G\\cong G|_E$ of abelian sheaves, natural in $G$; naturality for the endomorphisms $\\lambda:G\\to G$, $\\lambda\\in\\Lambda$, makes it $\\Lambda$-linear, since the module structure of $e^{-1}G$ is given by the same functor of [def-weil-pbc-inverse-image] applied to these scalars (and sections of $\\Lambda_E$ are locally constant). In particular an open restriction $\\mathcal F|_{V}$ is the module inverse image along the open immersion $V\\to T$. (b) Composition. For $v:Z\\to Y$, $u:Y\\to X$, [lem-weil-pbc-inverse-image-composition] (2) gives $v^{-1}u^{-1}\\cong(u\\circ v)^{-1}$, natural in the sheaf, hence $\\Lambda$-linear by the same scalar-naturality argument. (c) Pullback. If $G$ is finite locally constant as a module sheaf in the sense of [def-weil-pbc-etale-constructible-sheaf] (b), i.e. (1) of [lem-weil-pbc-finite-locally-constant-module-values], then by (1) iff (2) there it is locally constant and finite for $\\mathcal A$; for any morphism $h:Z\\to Y$ of schemes, $h^{-1}G$ is locally constant by [lemma-constructible-pullback-locally-constant] and finite by [lemma-constructible-pullback-finite], so by (2) iff (1) again $h^{-1}G$ is finite locally constant in the module sense; [lemma-constructible-iso-invariance] lets us replace a sheaf by an isomorphic one (e.g. via (a), (b)). (d) Representatives. If two immersions into a scheme have the same image, the inverse image of a module sheaf along one is finite locally constant iff it is along the other, by [lemma-constructible-immersion-independence] (with the translation of (c)); this applies to the reduced induced representative of a locally closed subset.",
+   "text": "Use IsFiniteLocallyConstantSheaf.upperStar, whose two fields are the pullback stability of locally constant sheaves [lemma-constructible-pullback-locally-constant] and finite sheaves [lemma-constructible-pullback-finite]. The comparison Etale.upperStarComp [lem-weil-pbc-inverse-image-composition] and isomorphism invariance [lemma-constructible-iso-invariance] identify an iterated pullback with pullback along the composite. All comparisons take place in ModuleCat, so no additional scalar-naturality argument or restriction comparison is necessary.",
    "uses": [
-    "def-constructible-constant",
-    "lem-weil-pbc-etale-inverse-image-restriction",
-    "def-weil-pbc-inverse-image",
-    "lem-weil-pbc-inverse-image-composition",
-    "def-weil-pbc-etale-constructible-sheaf",
-    "lem-weil-pbc-finite-locally-constant-module-values",
     "lemma-constructible-pullback-locally-constant",
     "lemma-constructible-pullback-finite",
-    "lemma-constructible-iso-invariance",
-    "lemma-constructible-immersion-independence"
+    "lem-weil-pbc-inverse-image-composition",
+    "lemma-constructible-iso-invariance"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 095E, lemma-constructible-quasi-compact-quasi-separated, proof; module version using 03RW(3)"
+    "place": "Lemma 095E (lemma-constructible-quasi-compact-quasi-separated), the statement for sheaves of Lambda-modules with Lambda Noetherian ('A similar statement holds'), here Lambda finite, and its proof; Stacks' condition 'of finite type and locally constant' in 03RW(3) is, for Lambda finite, the finite-locally-constant condition used here by lem-weil-pbc-finite-locally-constant-module-values ((1) iff (3)); Definition 03RW (definition-constructible) and the paragraph before it (reduced induced structure, topological invariance 03SI); uses Topology Lemma 09Y4 (topology-lemma-constructible-partition-refined-by-stratification), Topology Lemma 'quasi-compact-open-immersion-constructible-image', Properties Lemma 'locally-constructible'."
    }
   },
   {
-   "text": "Assume (2), with open cover $T=\\bigcup_j V_j$. For each point $x$ choose $j$ with $x\\in V_j$ and, by [lem-weil-pbc-affine-opens-basis], an affine open $W_x$ with $x\\in W_x\\subseteq V_j$. Quasi-compactness of $T$ means this open cover has a finite subcover $W_1,\\ldots,W_r$ (if $T$ is empty use the empty cover). Each $W_a$ is also an affine open of $V_j$, so the hypothesis (1) on $V_j$ supplies a finite constructible locally closed partition of $W_a$ and reduced induced stratum immersions. Its finite locally constant module sheaves are exactly the inverse images of $\\mathcal F$ along the composites into $T$, by the module composition comparison of step 2.",
+   "text": "Under (2), for every point choose a member V of the cover and an affine neighbourhood U of that point in V using [lem-weil-pbc-affine-opens-basis]. Its image W in T is affine. Transport the partition of U to W along the canonical isomorphism U ≅ W, keeping its domains and composing the immersions with the isomorphism. The equation isoImage_hom_ι identifies the composite into T, hence preserves the local finite-constancy hypotheses. Apply isCompact_univ.elim_finite_subcover and index the resulting finite set by Fin n. This construction allows n = 0 on the empty scheme.",
    "uses": [
     "lem-weil-pbc-affine-opens-basis",
     "def-constructible-stratification"
@@ -66,66 +62,62 @@
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 095E, lemma-constructible-quasi-compact-quasi-separated, proof; module version using 03RW(3)"
+    "place": "Lemma 095E (lemma-constructible-quasi-compact-quasi-separated), the statement for sheaves of Lambda-modules with Lambda Noetherian ('A similar statement holds'), here Lambda finite, and its proof; Stacks' condition 'of finite type and locally constant' in 03RW(3) is, for Lambda finite, the finite-locally-constant condition used here by lem-weil-pbc-finite-locally-constant-module-values ((1) iff (3)); Definition 03RW (definition-constructible) and the paragraph before it (reduced induced structure, topological invariance 03SI); uses Topology Lemma 09Y4 (topology-lemma-constructible-partition-refined-by-stratification), Topology Lemma 'quasi-compact-open-immersion-constructible-image', Properties Lemma 'locally-constructible'."
    }
   },
   {
-   "text": "Apply [lem-weil-pbc-etale-stratification-local-gluing-core] to this finite affine cover and its local immersed stratifications. Its hypotheses are precisely quasi-compactness and quasi-separatedness of $T$, affineness of the chosen opens, coverage, and constructibility of each local stratum in its chart. It yields a global finite constructible locally closed immersed stratification $S$, and for each stratum an ACTUAL scheme morphism to one local stratum, with its composite to $T$ equal to the global stratum immersion. Pull back the finite locally constant module sheaf on that local stratum along this morphism, using step 2. The result is the inverse image of $\\mathcal F$ on the global stratum. Hence $S$ witnesses (3) by [def-weil-pbc-etale-constructible-sheaf]. This does not infer scheme-theoretic factorization merely from containment of images.",
+   "text": "Apply exists_global_stratification_factoring_local [lem-weil-pbc-etale-stratification-local-gluing-core] to the finite affine cover and the transported stratifications. For every global stratum, pull back its selected local finite system along the actual factorization q given by that theorem. Step 2 and q followed by the local composite immersion equal to the global immersion give finite local constancy. Apply the first equivalence of finite_locally_constant_module_values_iff [lem-weil-pbc-finite-locally-constant-module-values] to obtain the required finite-value datum. The global stratification therefore witnesses [def-weil-pbc-etale-constructible-sheaf].",
    "uses": [
     "lem-weil-pbc-etale-stratification-local-gluing-core",
+    "lem-weil-pbc-finite-locally-constant-module-values",
     "def-weil-pbc-etale-constructible-sheaf"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 095E, lemma-constructible-quasi-compact-quasi-separated, proof; module version using 03RW(3)"
+    "place": "Lemma 095E (lemma-constructible-quasi-compact-quasi-separated), the statement for sheaves of Lambda-modules with Lambda Noetherian ('A similar statement holds'), here Lambda finite, and its proof; Stacks' condition 'of finite type and locally constant' in 03RW(3) is, for Lambda finite, the finite-locally-constant condition used here by lem-weil-pbc-finite-locally-constant-module-values ((1) iff (3)); Definition 03RW (definition-constructible) and the paragraph before it (reduced induced structure, topological invariance 03SI); uses Topology Lemma 09Y4 (topology-lemma-constructible-partition-refined-by-stratification), Topology Lemma 'quasi-compact-open-immersion-constructible-image', Properties Lemma 'locally-constructible'."
    }
   },
   {
-   "text": "Assume (3), witnessed by immersed strata $Z_i\\to T$ with constructible images $C_i$. Fix any affine open $U\\subseteq T$. By [lemma-constructible-pullback-stratification], the base changes $Z_i\\times_T U\\to U$ give a finite locally closed partition with images $C_i\\cap U$. These images are constructible IN $U$: for the inclusion $j:U\\to T$, a retrocompact open $V\\subseteq T$ has retrocompact inverse image in $U$, since a quasi-compact open $W$ of $U$ is a quasi-compact open of $T$ and $(V\\cap U)\\cap W=V\\cap W$ is quasi-compact with the same subspace topology. Thus [lem-weil-pbc-constructible-preimage] applies to $j$ and $C_i$. Step 2 applied to $Z_i\\times_T U\\to Z_i$ gives finite local constancy with module coefficients; its same-image immersion clause transfers it to the reduced induced representative of $C_i\\cap U$. This is exactly the partition required in (1). Empty intersections are harmless, and no intersection of affine opens was assumed affine.",
+   "text": "Under (3), pull back its stratification along the affine-open immersion U → T using Stratification.pullback [lemma-constructible-pullback-stratification]. This already supplies constructible locally closed strata. For every domain Z of this partition, replace it by the explicitly constructed nilradical subscheme Z_red and compose its immersion with the reduction inclusion. Reducedness and the full image of the reduction are the corresponding clauses of [lem-weil-pbc-reduction-universal-homeomorphism], implemented by isReduced_nilradical_subscheme, range_subschemeι, and support_nilradical. Thus the original partition and its constructibility remain unchanged. Convert the given finite-value data to finite local constancy using [lem-weil-pbc-finite-locally-constant-module-values]. Step 2 pulls it back along the first projection of the base-change square and then along the reduction inclusion. The pullback condition identifies the composite into T. This proves (1), including empty strata, without immersion independence or any claim that containment of images implies factorization.",
    "uses": [
     "lemma-constructible-pullback-stratification",
-    "lem-weil-pbc-constructible-preimage",
-    "def-weil-constructible-subset"
+    "lem-weil-pbc-reduction-universal-homeomorphism",
+    "lem-weil-pbc-finite-locally-constant-module-values"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 095E, lemma-constructible-quasi-compact-quasi-separated, proof; module version using 03RW(3)"
+    "place": "Lemma 095E (lemma-constructible-quasi-compact-quasi-separated), the statement for sheaves of Lambda-modules with Lambda Noetherian ('A similar statement holds'), here Lambda finite, and its proof; Stacks' condition 'of finite type and locally constant' in 03RW(3) is, for Lambda finite, the finite-locally-constant condition used here by lem-weil-pbc-finite-locally-constant-module-values ((1) iff (3)); Definition 03RW (definition-constructible) and the paragraph before it (reduced induced structure, topological invariance 03SI); uses Topology Lemma 09Y4 (topology-lemma-constructible-partition-refined-by-stratification), Topology Lemma 'quasi-compact-open-immersion-constructible-image', Properties Lemma 'locally-constructible'."
    }
   },
   {
-   "text": "The implications (1) to (2), (2) to (3), and (3) to (1) establish the asserted equivalence of all three conditions.",
+   "text": "The three cyclic implications give List.TFAE by List.tfae_of_cycle.",
    "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 095E, lemma-constructible-quasi-compact-quasi-separated, proof; module version using 03RW(3)"
+    "place": "Lemma 095E (lemma-constructible-quasi-compact-quasi-separated), the statement for sheaves of Lambda-modules with Lambda Noetherian ('A similar statement holds'), here Lambda finite, and its proof; Stacks' condition 'of finite type and locally constant' in 03RW(3) is, for Lambda finite, the finite-locally-constant condition used here by lem-weil-pbc-finite-locally-constant-module-values ((1) iff (3)); Definition 03RW (definition-constructible) and the paragraph before it (reduced induced structure, topological invariance 03SI); uses Topology Lemma 09Y4 (topology-lemma-constructible-partition-refined-by-stratification), Topology Lemma 'quasi-compact-open-immersion-constructible-image', Properties Lemma 'locally-constructible'."
    }
   }
  ],
  "proof_deps": [
-  "def-constructible-constant",
-  "lem-weil-pbc-etale-inverse-image-restriction",
-  "def-weil-pbc-inverse-image",
-  "lem-weil-pbc-inverse-image-composition",
-  "def-weil-pbc-etale-constructible-sheaf",
-  "lem-weil-pbc-finite-locally-constant-module-values",
+  "def-constructible-stratification",
   "lemma-constructible-pullback-locally-constant",
   "lemma-constructible-pullback-finite",
+  "lem-weil-pbc-inverse-image-composition",
   "lemma-constructible-iso-invariance",
-  "lemma-constructible-immersion-independence",
   "lem-weil-pbc-affine-opens-basis",
-  "def-constructible-stratification",
   "lem-weil-pbc-etale-stratification-local-gluing-core",
+  "lem-weil-pbc-finite-locally-constant-module-values",
+  "def-weil-pbc-etale-constructible-sheaf",
   "lemma-constructible-pullback-stratification",
-  "lem-weil-pbc-constructible-preimage",
-  "def-weil-constructible-subset"
+  "lem-weil-pbc-reduction-universal-homeomorphism"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tag 095E, lemma-constructible-quasi-compact-quasi-separated, proof; module version using 03RW(3)"
+  "place": "Stacks 095E, proof of lemma-constructible-quasi-compact-quasi-separated; Lean translation by D4 using the stated gluing theorem, explicit nilradical representatives, and the existing module-valued pullback API."
  },
  "mathlib_searches": [
   {
@@ -215,5 +207,15 @@
   "by": "NW",
   "date": "2026-10-15",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261018T062725-L-640360",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
