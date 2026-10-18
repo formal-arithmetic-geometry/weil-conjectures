@@ -9,6 +9,8 @@ public import Sheaf.CategoryTheory.RingedSiteModules
 public import Sheaf.Algebra.Homology.DerivedInternalHom
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+import WeilConjectures.Mathlib.CategoryTheory.Sites.Continuous
+import Mathlib.Algebra.Homology.ShortComplex.ExactFunctor
 
 /-!
 # Derived restriction to the slice of a ringed site
@@ -46,7 +48,10 @@ components with the forgetful functor from the slice category. -/
 theorem ringedOverFunctor_additive (U : C) :
     (SheafOfModules.overFunctor.{u}
       ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O) U).Additive := by
-  sorry
+  constructor
+  intro X Y f g
+  ext V x
+  rfl
 
 /-- Slice restriction preserves finite limits.
 Source: Stacks Project, Modules on Sites, Tag 03DJ
@@ -56,7 +61,14 @@ with the forgetful functor from the slice commutes with them. -/
 theorem ringedOverFunctor_preservesFiniteLimits (U : C) :
     PreservesFiniteLimits (SheafOfModules.overFunctor.{u}
       ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O) U) := by
-  sorry
+  let R := (sheafCompose J (forget₂ CommRingCat RingCat)).obj O
+  let F := SheafOfModules.overFunctor.{u} R U
+  have e : F ⋙ SheafOfModules.toSheaf (R.over U) ≅
+      SheafOfModules.toSheaf R ⋙ J.overPullback AddCommGrpCat.{u} U := Iso.refl _
+  have : PreservesFiniteLimits (F ⋙ SheafOfModules.toSheaf (R.over U)) :=
+    preservesFiniteLimits_of_natIso e.symm
+  exact preservesFiniteLimits_of_reflects_of_preserves F
+    (SheafOfModules.toSheaf (R.over U))
 
 /-- Slice restriction preserves finite colimits.
 Source: Stacks Project, Modules on Sites, Tag 03DJ
