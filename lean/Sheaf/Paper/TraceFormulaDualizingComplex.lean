@@ -6,8 +6,6 @@ Authors: SHEAF group NY
 module
 
 public import Sheaf.Paper.TraceFormulaCoefficientConventions
-public import Sheaf.Paper.DerivedPullbackTensorHom
-public import Sheaf.AlgebraicGeometry.FixedFiniteExceptionalAt
 public import Sheaf.SixFunctors.FiniteDualizing
 public import Sheaf.Paper.FiniteFieldFiber
 public import Sheaf.Paper.FiniteTorAmplitude
