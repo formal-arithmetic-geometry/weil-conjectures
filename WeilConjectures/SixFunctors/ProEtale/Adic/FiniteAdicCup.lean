@@ -53,6 +53,36 @@ lemma frobeniusOperator_comp_shiftCast {Λ : Type (u + 1)} [CommRing Λ] {X : Sc
   subst h
   simp
 
+lemma shiftFunctorAdd'_inv_app_comp_shiftCast {C : Type*} [Category C] [HasShift C ℤ]
+    (X : C) (a b c c' : ℤ) (h : b + a = c) (h' : b + a = c') (hc : c = c') :
+    (shiftFunctorAdd' C b a c h).inv.app X ≫ shiftCast X hc =
+      (shiftFunctorAdd' C b a c' h').inv.app X := by
+  subst hc
+  simp
+
+/-- **The cup product is the Yoneda product of `Ext`-classes**: through
+`Hom(Λ_X, Λ_X[n]) ≅ Extⁿ(Λ_X, Λ_X)`, `x ⌣ y` is the composite `x ∘ y`. -/
+lemma unitShiftAddEquivExt_cupProduct {Λ : Type (u + 1)} [CommRing Λ] {X : Scheme.{u}}
+    (i j k : ℕ) (h : i + j = k)
+    (x : 𝟙_ (Etale.DerivedCategoryModule Λ X) ⟶ (𝟙_ (Etale.DerivedCategoryModule Λ X))⟦(i : ℤ)⟧)
+    (y : 𝟙_ (Etale.DerivedCategoryModule Λ X) ⟶ (𝟙_ (Etale.DerivedCategoryModule Λ X))⟦(j : ℤ)⟧) :
+    Etale.unitShiftAddEquivExt Λ X k (Etale.cupProduct _ i j x y ≫
+        shiftCast (𝟙_ (Etale.DerivedCategoryModule Λ X)) (by omega)) =
+      (Etale.unitShiftAddEquivExt Λ X i x).comp (Etale.unitShiftAddEquivExt Λ X j y) h := by
+  have hU := DerivedCategory.unitorsCommShift (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
+  refine Abelian.Ext.ext ?_
+  rw [Abelian.Ext.comp_hom, Etale.unitShiftAddEquivExt_hom, Etale.unitShiftAddEquivExt_hom,
+    Etale.unitShiftAddEquivExt_hom, Etale.cupProduct_eq_shiftProduct, shiftProduct_eq hU,
+    ShiftedHom.comp]
+  simp only [Functor.map_comp, Category.assoc]
+  rw [← Functor.map_comp_assoc, Iso.hom_inv_id, CategoryTheory.Functor.map_id, Category.id_comp]
+  erw [reassoc_of% (shiftFunctorAdd'_inv_app_comp_shiftCast
+    (C := DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) _ (i : ℤ) (j : ℤ)
+    _ (k : ℤ) (by omega) (by omega) (by omega))]
+  congr 3
+  exact ((shiftFunctorAdd' (Etale.DerivedCategoryModule Λ X) (j : ℤ) (i : ℤ) (k : ℤ)
+    (by omega)).inv.naturality (Etale.unitIsoSingleFunctorConstantSheaf Λ X).hom).symm
+
 variable [CompactSpace S] [QuasiSeparatedSpace S]
 
 /-- The cup product `Hⁱ(S, ℤ/ℓᵐ) × Hʲ(S, ℤ/ℓᵐ) ⟶ Hᵏ(S, ℤ/ℓᵐ)`, `i + j = k`, of pro-étale
