@@ -46,6 +46,6 @@ theorem isConstructibleEtaleModuleSheaf_of_surjective_pullback
     (hG : IsConstructibleEtaleModuleSheaf
       ((Etale.upperStar (ModuleCat.{u + 1} Λ) a).obj G)) :
     IsConstructibleEtaleModuleSheaf G := by
-  sorry
+  exact (isConstructibleEtaleModuleSheaf_iff_surjective_pullback a G).mpr hG
 
 end AlgebraicGeometry.Scheme
