@@ -13,9 +13,56 @@
   "def-weil-pbc-strict-henselization-limit",
   "def-weil-pbc-krull-dimension-ring"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix $\\bar t:\\operatorname{Spec}\\Omega\\to T$ and put $L=T_{(\\bar t)}$, $\\pi=\\pi_{\\bar t}$. Choose an affine open $U=\\operatorname{Spec}A$ containing $t$. The structural map $\\pi$ factors through $U$: its inverse image contains the closed point of the local spectrum $L$, and an open containing that point is all of $L$ (a basic neighbourhood $D(g)$ of the maximal ideal has $g$ a unit). By [lem-weil-pbc-strict-henselization-affine-chart-ind-etale], the coordinate ring of $L$ is ind-etale over $A$. Thus $\\pi$ satisfies the local ind-etale hypothesis of [lem-trf-ind-etale-strict-local-invariance]. By clause (1) of [lem-weil-pbc-strict-henselization-functoriality], $L$ has a closed geometric lift $c:\\operatorname{Spec}\\Omega\\to L$ with $\\pi c=\\bar t$.",
+   "uses": [
+    "lem-weil-pbc-strict-henselization-affine-chart-ind-etale",
+    "lem-trf-ind-etale-strict-local-invariance",
+    "lem-weil-pbc-strict-henselization-functoriality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XIV, Definition 2.1.8 and following paragraph, printed pp.211–212; strict-local reduction in Proposition 2.5.4, printed p.217. Expanded using Stacks 04HX (lemma-describe-etale-local-ring), 05WR (lemma-quasi-finite-strict-henselization), and 0GIP (lemma-base-change-strict-henselization-quasi-finite)."
+   }
+  },
+  {
+   "text": "Suppose $d$ is a dimension function on $T$. Consider any immediate geometric specialization on $L$, with special geometric endpoint $b$ and a geometric general endpoint whose image is $v$ in $L_{(b)}$. Write $w$ for the underlying general point of $L$ and $z$ for its special point. The reduced closure of $v$ in $L_{(b)}$ has dimension one by hypothesis. Apply [lem-trf-ind-etale-strict-local-invariance] to $\\pi$ at $b$, using the same geometric field at $\\pi b$. The canonical isomorphism $L_{(b)}\\simeq T_{(\\pi b)}$ is over $T$. It carries $v$ to a point over $\\pi(w)$ and identifies their reduced closures, so the latter has dimension one as well. Being an isomorphism of local schemes it carries the closed point to the closed point, and by clause (1) of [lem-weil-pbc-strict-henselization-functoriality] the closed points of $L_{(b)}$ and $T_{(\\pi b)}$ lie over $z$ and $\\pi(z)$. Hence this point and the geometric point $\\pi b$ witness an immediate geometric specialization on $T$. Therefore $d(\\pi(z))=d(\\pi(w))-1$. These are exactly the values of $d\\circ|\\pi|$ at $z,w$, proving that it is a dimension function on $L$.",
+   "uses": [
+    "lem-trf-ind-etale-strict-local-invariance",
+    "lem-weil-pbc-strict-henselization-functoriality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XIV, Definition 2.1.8 and following paragraph, printed pp.211–212; strict-local reduction in Proposition 2.5.4, printed p.217. Expanded using Stacks 04HX (lemma-describe-etale-local-ring), 05WR (lemma-quasi-finite-strict-henselization), and 0GIP (lemma-base-change-strict-henselization-quasi-finite)."
+   }
+  },
+  {
+   "text": "Conversely assume $d\\circ|\\pi_{\\bar t}|$ is a dimension function for every $\\bar t$. Take any immediate geometric specialization on $T$ with special endpoint $\\bar t$ and general image $v$ in $L=T_{(\\bar t)}$; by definition the reduced closure of $v$ in $L$ has dimension one. Let $c$ be the closed geometric lift of $\\bar t$ supplied by [lem-weil-pbc-strict-henselization-functoriality]. The closed-point iteration clause of [lem-trf-ind-etale-strict-local-invariance], applied to $\\pi$ at $c$ (so $\\pi c=\\bar t$), says that the canonical map $\\varphi:L_{(c)}\\to T_{(\\bar t)}=L$ is an isomorphism over $T$: $\\pi\\circ\\varphi=\\pi\\circ j$, where $j:L_{(c)}\\to L$ is the structural map. Put $v'=\\varphi^{-1}(v)$. Its reduced closure in $L_{(c)}$ is carried by $\\varphi$ onto that of $v$, hence is one-dimensional, so $v'$ and $c$ give an immediate geometric specialization on $L$, with special point $j(\\text{closed point})$, the closed point of $L$ by clause (1) of functoriality. The assumed dimension-function equation for $d\\circ\\pi$ on $L$ reads $d(\\pi(\\text{closed point of }L))=d(\\pi(j(v')))-1$. Here $\\pi$ sends the closed point of $L$ to $t$, and $\\pi(j(v'))=\\pi(\\varphi(v'))=\\pi(v)$ is the original general point; this is precisely the required equation on $T$. The specialization was arbitrary, proving the converse; the final pullback assertion is the forward direction.",
+   "uses": [
+    "lem-weil-pbc-strict-henselization-functoriality",
+    "lem-trf-ind-etale-strict-local-invariance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XIV, Definition 2.1.8 and following paragraph, printed pp.211–212; strict-local reduction in Proposition 2.5.4, printed p.217. Expanded using Stacks 04HX (lemma-describe-etale-local-ring), 05WR (lemma-quasi-finite-strict-henselization), and 0GIP (lemma-base-change-strict-henselization-quasi-finite)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-ind-etale-strict-local-invariance",
+  "lem-weil-pbc-strict-henselization-affine-chart-ind-etale",
+  "lem-weil-pbc-strict-henselization-functoriality"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose XIV, Definition 2.1.8 and following paragraph, printed pp.211–212; strict-local reduction in Proposition 2.5.4, printed p.217. Expanded using Stacks 04HX (lemma-describe-etale-local-ring), 05WR (lemma-quasi-finite-strict-henselization), and 0GIP (lemma-base-change-strict-henselization-quasi-finite).",
+  "note": "Explicit strict-local extension of the etale locality statement; the source does not spell out this argument."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -51,10 +98,45 @@
    "results": "Returned Algebra.exists_etale_of_isEtaleAt, Algebra.mem_etaleLocus_iff, Algebra.etaleLocus, Algebra.basicOpen_subset_etaleLocus_iff_etale, Algebra.basicOpen_subset_etaleLocus_iff, Algebra.IsEtaleAt, RingHom.Etale.propertyIsLocal, RingHom.Etale.ofLocalizationSpanTarget",
    "date": "2026-10-18",
    "verdict": "no match: returned declarations do not state the dimension-function assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "dimensionFunction|dimension_function|dimension function|codimension.function",
+   "results": "No hits",
+   "date": "2026-10-18",
+   "verdict": "no match: none states integer dimension-function restriction or detection by strict localizations"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Dimension functions on schemes are local for strict henselization",
+   "results": "Returned HenselianLocalRing.toIsLocalRing, IsLocalization.AtPrime.ringKrullDim_eq_height, AlgebraicGeometry.IsLocallyArtinian.of_topologicalKrullDim_le_zero, Ring.krullDimLE_of_isLocalization_maximal, AlgebraicGeometry.HasRingHomProperty.instIsZariskiLocalAtSource, AlgebraicGeometry.isSmoothOfRelativeDimension_iff, Ring.DimensionLEOne.localization, AlgebraicGeometry.Scheme.isLocalHom_stalkClosedPointTo'",
+   "date": "2026-10-18",
+   "verdict": "no match: none states integer dimension-function restriction or detection by strict localizations"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DimensionFunction\"",
+   "results": "No hits",
+   "date": "2026-10-18",
+   "verdict": "no match: none states integer dimension-function restriction or detection by strict localizations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An integer valued dimension function on a scheme pulls back to strict localizations and is detected on all strict localizations",
+   "results": "Returned AlgebraicGeometry.HasRingHomProperty.locally_of_iff, AlgebraicGeometry.HasRingHomProperty.of_stalkMap, AlgebraicGeometry.stalkwise_Spec_map_iff, AlgebraicGeometry.HasRingHomProperty.iff_exists_appLE, AlgebraicGeometry.stalkwise_SpecMap_iff, Ring.krullDimLE_of_isLocalization_maximal, AlgebraicGeometry.HasRingHomProperty.iff_exists_appLE_locally, AlgebraicGeometry.HasRingHomProperty.stalkwise",
+   "date": "2026-10-18",
+   "verdict": "no match: none states integer dimension-function restriction or detection by strict localizations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Codimension one geometric specializations and integer dimension functions are preserved under ind etale maps",
+   "results": "Returned AlgebraicGeometry.IsEtale, AlgebraicGeometry.IsEtale.instFormallyUnramified, StandardEtalePair.HasMap.map, AlgebraicGeometry.Scheme.Etale, Algebra.Etale.iff_isStandardSmoothOfRelativeDimension_zero, RingHom.Etale.propertyIsLocal, Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat, Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial",
+   "date": "2026-10-18",
+   "verdict": "no match: none states integer dimension-function restriction or detection by strict localizations"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-regular-dimension-function-pullback",
@@ -78,5 +160,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-dimension-functions-strict-localization",
+  "worker": "stage1",
+  "summary": "Proved strict-local restriction and detection by transporting the defining one-dimensional reduced closures through canonical ind-etale strict-localization isomorphisms. Statement unchanged. Reused three existing nodes; no new nodes and no Lean work.",
+  "blueprint": "Inherited ancestor lem-per-artin-gabber-affine-curve, proof Step 3 (Verdier duality lower bound), through regular-dimension-function-pullback: supplies the strict-local reduction used at ILO XIV Proposition 2.5.4. Current main-20261015 ancestry and unit are retained.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-strict-henselization-affine-chart-ind-etale",
+    "why": "Generic affine presentation of a strict localization, needed to apply ind-etale invariance; no node of this unit states the chart presentation."
+   },
+   {
+    "node": "lem-weil-pbc-strict-henselization-functoriality",
+    "why": "Generic functoriality and closed geometric lift of a strict localization; this is algebraic input, not a replacement of the perverse-unit route."
+   },
+   {
+    "node": "lem-trf-ind-etale-strict-local-invariance",
+    "why": "Generic canonical invariance of strict localizations under ind-etale maps, including closed-point iteration; no result in the perverse unit gives this input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-strict-henselization-affine-chart-ind-etale",
+  "lem-weil-pbc-strict-henselization-functoriality",
+  "lem-trf-ind-etale-strict-local-invariance"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-NS-89d0cdfe5",
+  "group": "NS",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NS-89d0cdfe5 (reviewer sub-agent of L); spot-checked: I read the whole item. The statement is unchanged and matches ILO XIV Def. 2.1.1/Prop. 2.1.3 (printed pp.209-210; immediate means the closure in X_(ybar) has dimension 1) and Def. 2.1.8 with the paragraph after it (pp.211-212; delta(special)=delta(general)-1, etale restriction), as used at the strict-local opening of Prop. 2.5.4 (p.217). I tested it on a field, the empty scheme, a trait, nilpotents and a larger Omega. The direction (<=) holds because immediate geometric specializations are defined inside strict localizations. Step 1 is correct: pi factors through an affine U containing t (local-spectrum argument), the chart lemma applies (Omega algebraically closed, e=id), so the ind-etale invariance hypothesis holds on all of L, and functoriality (1) gives the closed lift c. Step 2 is correct: invariance at b gives L_(b) iso T_(pi b) over T, which carries the closure and the closed point. Step 3 is correct, but it said the closed-point iteration gives an isomorphism L_(c)->L 'over L'. The cited invariance statement (its proof step 5 confirms) only gives the canonical phi: L_(c)->T_(tbar)=L over T, and the step also mixed v with its lift (C3/C4 imprecision). FIX: Step 3 is rewritten with v'=phi^{-1}(v) and pi(j v')=pi(phi v')=pi(v). Step 2 now cites functoriality clause (1) for the closed-point images, which is added to its uses. There are no new nodes. The rg duplicate search over dag/nodes found related nodes (local-dimension-function-calculus, finite-type-dimension-function, immediate-specialization-criterion, geometric-immediate-catenary) but none states strict-localization restriction or testing. There is no cycle; the only citer is lem-per-regular-dimension-function-pullback. The three declared tool_uses are accepted: generic strict-henselization algebra from sk-thm-p1 and sk-i-curve-zero that replaces no unit step. No SGA source is used. Batch-5 flag: the citation of lem-trf-ind-etale-strict-local-invariance is accepted. It is Stacks 05WR/0GIP plus Olivier's theorem, general commutative algebra outside both assumed statements, and its 253-node closure contains no other trace-formula or Poincare node, no sk-thm-trace node and no nt-assume leaf. Corrected node: fixes/dag/nodes/sec-deligne-laumon-a1/lem-per-dimension-functions-strict-localization.json.; 1 file(s) fixed by the reviewer"
  }
 }
