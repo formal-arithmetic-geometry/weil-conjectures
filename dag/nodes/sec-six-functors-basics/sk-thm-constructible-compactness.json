@@ -253,5 +253,29 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-db5fa2012",
+  "group": "Q51",
+  "result": "pass",
+  "note": "Statement matches node clause by clause: FiniteFieldDatum k=F̄_q, ℓ≠p, E finite subextension with both Λ=E and Λ=Q̄_ℓ as conjuncts, X separated finite type, ordinary D(Mod Λ_X) at Hom universe u+1 (confirmed by pp.universes probe), Cons/Dbc via the recorded finite-constant-model predicates, IndCons=ObjectProperty.ind, Dic inline, localizingClosure of Dbc (not Dctf), IsCompactObject.{u+1} in the closure plus the canonical DirectSum.toAddMonoid coprojection comparison for all Type(u+1) families in Dic with no common bound. Edge cases (empty family, zero, empty X, E=Q_ℓ) admitted. The §1(B) repair of det-constructible-compactness-bounded (explicit HasDerivedCategory.{u+1} binder, import cleanup) leaves the node statement unchanged, and the module has no other importers; both lean.statement fields match their files verbatim. Gates: no hollow defs, sorry only, docstrings with source place, blueprint tag and 5-step proof, no duplicate notion. nt_compile --json clean twice: bounded 53.9s/41.3s, item 10.0s/8.9s. At load ~110–130 the bounded module is close to the 60s limit, so a landing compile could time out; that would be mechanical."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ConstructibleCompactness",
+  "declaration": "AlgebraicGeometry.ProEtale.constructible_compactness",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.constructibleCompactnessComparison",
+   "AlgebraicGeometry.ProEtale.HasConstructibleCompactness",
+   "AlgebraicGeometry.ProEtale.constructible_compactness"
+  ],
+  "file": "lean/Sheaf/Paper/ConstructibleCompactness.lean",
+  "statement": "theorem constructible_compactness (D : WeilConjectures.FiniteFieldDatum.{u}) (ℓ : ℕ) [Fact ℓ.Prime] (hℓ : ℓ ≠ D.p) (E : PadicAlgCl.FiniteIntermediateField ℓ) (X : Scheme.{u}) [X.Over (Spec (.of D.k))] [IsSeparated (X ↘ Spec (.of D.k))] [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))] : HasConstructibleCompactness (Profinite.continuousMapRingObj E) X ∧ HasConstructibleCompactness (Profinite.padicAlgClRingObj ℓ) X",
+  "branch": "newtargets-dag",
+  "by": "Q51",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Both rational coefficients are conjuncts, using the canonical finite-subextension and algebraic-closure ring objects. HasConstructibleCompactness expands both assertions: IsCompactObject inside the full localizingClosure of the actual finite-constant-model Dbc class, and the canonical ambient Hom comparison for every small family whose cohomology lies in ObjectProperty.ind of the same constructibility predicate. The comparison is real data given by DirectSum.toAddMonoid of postcomposition with coprojections. No common bound, finite Tor amplitude or derived completeness is assumed."
  }
 }

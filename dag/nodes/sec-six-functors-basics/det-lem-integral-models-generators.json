@@ -317,5 +317,46 @@
   "pqf-lem-locnoeth-lft",
   "lem-sf-derived-ses-triangle",
   "lem-sf-exact-functor-derived-triangulated"
- ]
+ ],
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-090a81f69",
+  "group": "Q83",
+  "result": "pass",
+  "note": "Head 090a81f69691 has the same content as the earlier PASSed head 202dfd0aca03. diff -rq shows only the generated coord/blueprint-index.tsv differs. Earlier heads were returned only for the 60 s per-file compile timeout. Independent re-read: the hypotheses are the standing setting only (any field k of char p, l != p, X separated of finite type) and hpi makes pi a real uniformizer. The locally closed immersion is open then closed. L0 is CondensedRing.LocallyFree, printed as Mod.IsFree = exists n, M iso finiteFree R n: finite free, rank may vary or be 0. Clauses 1 and 2 use sInf over IsTriangulated and IsClosedUnderIsomorphisms; Mathlib IsTriangulated is ContainsZero, shift-stable and 2-of-3 closed, with no retract closure. Clause 2 chooses one E' per object. Clause 3 states: a_!L0 in Dbc over O_E; for n >= 1 the left derived reduction is iso to a_!(L0/pi^n), is constructible over O_E/pi^n, and lies in the essImage of bounded constructible etale complexes; index n-1 gives pi^n. Dbc is constantModelBoundedConstructible (definition read). lean.statement verbatim; declaration set equals the file; one sorry (the theorem); no hollow defs; source and blueprint docstrings; all 8 proof steps in the docstring. Only the lean fields of the item, change-of-scalars and qlbar-condensed differ from live; Q02's landed qlbar record names the same declaration. Compile via nt_compile --json: timeout at load 135 (15 s CPU in 61 s wall); clean in 30.0 s at load 110. A /tmp refactor gave no speed-up (33.5 s), so no FIX. No findings; retry landing at lower load."
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.IntegralModelsGenerators",
+  "declaration": "WeilConjectures.SixFunctors.integral_models_generators",
+  "declarations": [
+   "WeilConjectures.SixFunctors.integralModel_coefficientMonObj",
+   "WeilConjectures.SixFunctors.finiteCoefficientExtension",
+   "WeilConjectures.SixFunctors.qlbarCoefficientExtension",
+   "WeilConjectures.SixFunctors.integralCoefficientObject",
+   "WeilConjectures.SixFunctors.finiteCoefficientObject",
+   "WeilConjectures.SixFunctors.qlbarCoefficientObject",
+   "WeilConjectures.SixFunctors.integralCoefficientObject_isComm",
+   "WeilConjectures.SixFunctors.finiteCoefficientObject_isComm",
+   "WeilConjectures.SixFunctors.qlbarCoefficientObject_isComm",
+   "WeilConjectures.SixFunctors.integralLowerShriek",
+   "WeilConjectures.SixFunctors.integralModelGenerator",
+   "WeilConjectures.SixFunctors.qlbarModelGenerator",
+   "WeilConjectures.SixFunctors.integralModelConstantScalars",
+   "WeilConjectures.SixFunctors.integralModelFixedScalars",
+   "WeilConjectures.SixFunctors.integralModelFixedScalars_additive",
+   "WeilConjectures.SixFunctors.integralModelIntrinsicRealization",
+   "WeilConjectures.SixFunctors.integralModelIntrinsicRealization_additive",
+   "WeilConjectures.SixFunctors.integralModelReductionMap",
+   "WeilConjectures.SixFunctors.integralModelFiniteCoefficient_isComm",
+   "WeilConjectures.SixFunctors.integralReductionHasEtaleOrigin",
+   "WeilConjectures.SixFunctors.integral_models_generators"
+  ],
+  "file": "lean/Sheaf/SixFunctors/IntegralModelsGenerators.lean",
+  "statement": "theorem integral_models_generators (k : Type u) [Field k] (p ℓ : ℕ) [Fact p.Prime] [Fact ℓ.Prime] [CharP k p] (hℓp : ℓ ≠ p) (X : Scheme.{u}) [X.Over (Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))] (E : PadicAlgCl.FiniteIntermediateField ℓ) (π : PadicAlgCl.integers ℓ E.1) (hπ : Ideal.span {π} = IsLocalRing.maximalIdeal (PadicAlgCl.integers ℓ E.1)) : (∀ K : DerivedCategory (CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (finiteCoefficientObject X ℓ E)), constantModelBoundedConstructible (Profinite.continuousMapRingObj E.1) X K → (sInf {P | integralModelGenerator X ℓ E ≤ P ∧ P.IsTriangulated ∧ P.IsClosedUnderIsomorphisms}) K) ∧ (∀ K : DerivedCategory (CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (qlbarCoefficientObject X ℓ)), constantModelBoundedConstructible (Profinite.padicAlgClRingObj ℓ) X K → ∃ E' : PadicAlgCl.FiniteIntermediateField ℓ, (sInf {P | qlbarModelGenerator X ℓ E' ≤ P ∧ P.IsTriangulated ∧ P.IsClosedUnderIsomorphisms}) K) ∧ (∀ (S V : Scheme.{u}) (u : S ⟶ V) (i : V ⟶ X) [IsOpenImmersion u] [IsClosedImmersion i] (L₀ : CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology S) Ab.{u + 1}) (integralCoefficientObject S ℓ E)), CondensedRing.LocallyFree (integralCoefficientObject S ℓ E) L₀ → integralReductionHasEtaleOrigin X ℓ E π u i L₀)",
+  "branch": "newtargets-dag",
+  "by": "Q83",
+  "date": "2026-10-18",
+  "existing": false
+ }
 }
