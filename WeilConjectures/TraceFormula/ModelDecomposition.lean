@@ -227,10 +227,10 @@ lemma eqToHom_conj_comp {C : Type*} [Category* C] {A A' : C} (h : A = A') (h' : 
 of the iterate `(K, φ_m)`, for any choice of duals. -/
 lemma trace_globalOperator_eq {Φ : X ⟶ X} (K : WeilBoundedConstructible ℓ Φ) (m : ℕ)
     [IsFinite (frobeniusIterate Φ m).left] [IsUniversalHomeomorphism (frobeniusIterate Φ m).left]
-    [HasRightDual
+    [hK : HasRightDual
       ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).obj
         K.carrier)]
-    [HasRightDual
+    [hKm : HasRightDual
       ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).obj
         (K.iterate m).carrier)] :
     trace (K.globalOperator m) = trace (K.iterate m).compactFrobenius := by
@@ -286,6 +286,95 @@ noncomputable def weilUpperStarIterateIso {ΦU : U ⟶ U} {Φ : X ⟶ X} (hj : �
         (boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ j
           (frobeniusIterate Φ m))
         (iterate_carrier K m) (K.iterateStr m).hom _ _ _ _ _ _ _ _)
+
+/-- The global operator of the restriction `K|_U` of a Weil object along a Frobenius stable
+`j : U ⟶ X` has the trace of the compactly supported Frobenius of the restriction of the iterate
+`(K, φ_m)` along `j`, for the Frobenius `Φ_{U,m}`. -/
+lemma trace_globalOperator_weilUpperStar {ΦU : U ⟶ U} {Φ : X ⟶ X} (hj : ΦU ≫ j = j ≫ Φ)
+    (K : WeilBoundedConstructible ℓ Φ) (m : ℕ) [IsFinite (frobeniusIterate ΦU m).left]
+    [IsUniversalHomeomorphism (frobeniusIterate ΦU m).left]
+    [hKU : HasRightDual
+      ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint U)).obj
+        ((weilUpperStar ℓ ΦU Φ j hj).obj K).carrier)]
+    [hKUm : HasRightDual
+      ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint U)).obj
+        (((weilUpperStar ℓ ΦU Φ j hj).obj K).iterate m).carrier)]
+    [hT : HasRightDual
+      ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint U)).obj
+        ((weilUpperStar ℓ (frobeniusIterate ΦU m) (frobeniusIterate Φ m) j
+          (frobeniusIterate_comp_of_comp hj m)).obj (K.iterate m)).carrier)] :
+    trace (((weilUpperStar ℓ ΦU Φ j hj).obj K).globalOperator m) =
+      trace ((weilUpperStar ℓ (frobeniusIterate ΦU m) (frobeniusIterate Φ m) j
+        (frobeniusIterate_comp_of_comp hj m)).obj (K.iterate m)).compactFrobenius := by
+  rw [trace_globalOperator_eq]
+  exact trace_compactFrobenius_eq_of_iso (weilUpperStarIterateIso hj K m)
+
+variable {Z : Over (Spec (.of k))} [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom]
+  [IsSeparated Z.hom] {i : Z ⟶ X}
+
+/-- **The trace formula is additive along an open–closed decomposition** (blueprint
+`sk-i-global-additivity`): for an open subscheme `j : U ⟶ X` with closed complement
+`i : Z ⟶ X`, both stable under the Frobenius, the trace formulas for the restrictions `K|_U` and
+`K|_Z` in degree `m` give the trace formula for `K` in degree `m`. -/
+theorem traceFormula_of_isCompl [IsSepClosed k] {Φ : X ⟶ X} {ΦU : U ⟶ U} {ΦZ : Z ⟶ Z}
+    [IsOpenImmersion j.left] [IsClosedImmersion i.left]
+    (hcompl : IsCompl (Set.range j.left.base) (Set.range i.left.base)) (hj : ΦU ≫ j = j ≫ Φ)
+    (hi : ΦZ ≫ i = i ≫ Φ) (K : WeilBoundedConstructible ℓ Φ) (m : ℕ)
+    [IsFinite (frobeniusIterate Φ m).left] [IsUniversalHomeomorphism (frobeniusIterate Φ m).left]
+    [IsFinite (frobeniusIterate ΦU m).left]
+    [IsUniversalHomeomorphism (frobeniusIterate ΦU m).left]
+    [IsFinite (frobeniusIterate ΦZ m).left]
+    [IsUniversalHomeomorphism (frobeniusIterate ΦZ m).left]
+    (hU : ((weilUpperStar ℓ ΦU Φ j hj).obj K).TraceFormula m)
+    (hZ : ((weilUpperStar ℓ ΦZ Φ i hi).obj K).TraceFormula m) :
+    K.TraceFormula m := by
+  intro _ iX _
+  let e := fixedPointSumEquiv hcompl hj hi m
+  have : Finite (FixedPoint ΦU m) := Finite.of_injective _ (e.injective.comp Sum.inl_injective)
+  have : Finite (FixedPoint ΦZ m) := Finite.of_injective _ (e.injective.comp Sum.inr_injective)
+  let _ : Fintype (FixedPoint ΦU m) := Fintype.ofFinite _
+  let _ : Fintype (FixedPoint ΦZ m) := Fintype.ofFinite _
+  let dKU := (nonempty_hasRightDual_compactCohomology
+    ((weilUpperStar ℓ ΦU Φ j hj).obj K).carrier).some
+  let dKZ := (nonempty_hasRightDual_compactCohomology
+    ((weilUpperStar ℓ ΦZ Φ i hi).obj K).carrier).some
+  let dKUm := (nonempty_hasRightDual_compactCohomology
+    (((weilUpperStar ℓ ΦU Φ j hj).obj K).iterate m).carrier).some
+  let dKZm := (nonempty_hasRightDual_compactCohomology
+    (((weilUpperStar ℓ ΦZ Φ i hi).obj K).iterate m).carrier).some
+  let dKm := (nonempty_hasRightDual_compactCohomology
+    (K.iterate m).carrier).some
+  let dTU := (nonempty_hasRightDual_compactCohomology
+    ((weilUpperStar ℓ (frobeniusIterate ΦU m) (frobeniusIterate Φ m) j
+      (frobeniusIterate_comp_of_comp hj m)).obj (K.iterate m)).carrier).some
+  let dTZ := (nonempty_hasRightDual_compactCohomology
+    ((weilUpperStar ℓ (frobeniusIterate ΦZ m) (frobeniusIterate Φ m) i
+      (frobeniusIterate_comp_of_comp hi m)).obj (K.iterate m)).carrier).some
+  let _ : ∀ y : RationalPoint U, HasRightDual
+      ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ y).obj
+        ((weilUpperStar ℓ ΦU Φ j hj).obj K).carrier) :=
+    fun y ↦ (nonempty_hasRightDual_stalk _ y).some
+  let _ : ∀ z : RationalPoint Z, HasRightDual
+      ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ z).obj
+        ((weilUpperStar ℓ ΦZ Φ i hi).obj K).carrier) :=
+    fun z ↦ (nonempty_hasRightDual_stalk _ z).some
+  have hUeq : trace (((weilUpperStar ℓ ΦU Φ j hj).obj K).globalOperator m) =
+      ∑ y : FixedPoint ΦU m,
+        trace (((weilUpperStar ℓ ΦU Φ j hj).obj K).stalkFrobenius m y.1 y.2) :=
+    hU
+  have hZeq : trace (((weilUpperStar ℓ ΦZ Φ i hi).obj K).globalOperator m) =
+      ∑ z : FixedPoint ΦZ m,
+        trace (((weilUpperStar ℓ ΦZ Φ i hi).obj K).stalkFrobenius m z.1 z.2) :=
+    hZ
+  rw [trace_globalOperator_eq K m (hK := iX) (hKm := dKm),
+    trace_compactFrobenius_eq_add hcompl (frobeniusIterate_comp_of_comp hj m)
+      (frobeniusIterate_comp_of_comp hi m) (K.iterate m),
+    ← trace_globalOperator_weilUpperStar hj K m (hKU := dKU) (hKUm := dKUm) (hT := dTU),
+    ← trace_globalOperator_weilUpperStar hi K m (hKU := dKZ) (hKUm := dKZm) (hT := dTZ),
+    hUeq, hZeq, ← e.sum_comp, Fintype.sum_sum_type]
+  congr 1
+  · exact Finset.sum_congr rfl fun y _ ↦ trace_stalkFrobenius_weilUpperStar hj K m y.1 y.2
+  · exact Finset.sum_congr rfl fun z _ ↦ trace_stalkFrobenius_weilUpperStar hi K m z.1 z.2
 
 
 end WeilBoundedConstructible
