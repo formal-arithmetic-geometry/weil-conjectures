@@ -14,13 +14,212 @@
   "def-sbc-smooth-morphisms",
   "def-weil-closed-immersion",
   "def-weil-pbc-regular-sequence",
+  "def-weil-flat-morphism",
+  "def-sbc-affine-space",
+  "pqf-def-locnoeth",
+  "def-weil-proper-morphism",
   "def-weil-pbc-krull-dimension-ring",
   "def-kun-transcendence-degree",
-  "def-weil-residue-field"
+  "def-weil-residue-field",
+  "pqf-def-quasifinite"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For an immersion between regular Noetherian schemes, restrict the ambient scheme so that it is closed. At a source point the local ring map is a surjection $R\\twoheadrightarrow R/I$ of regular local rings. The regular-local quotient theorem gives a regular system of parameters $x_1,\\ldots,x_d$ of $R$ with $I=(x_1,\\ldots,x_c)$. The parameter theorem says that the entire parameter system is regular, hence its initial segment is regular: its successive multiplication maps are a prefix of those for the full system, and its quotient is nonzero since all entries lie in the maximal ideal.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "def-weil-regular-scheme",
+    "lem-weil-pbc-regular-local-quotient-kernel-parameters",
+    "lem-weil-pbc-regular-local-generators-regular-sequence",
+    "def-weil-pbc-regular-sequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00NR, lemma-regular-quotient-regular; divisors.tex Tag 0E9J, lemma-immersion-regular-regular-immersion"
+   }
+  },
+  {
+   "text": "The stalkwise generators in Step 1 give local equations on an actual neighbourhood as follows. Choose an affine ambient neighbourhood $\\operatorname{Spec}A$, with finitely generated ideal $J$ of the closed subscheme, and clear the finitely many denominators in $x_1,\\ldots,x_c$ to obtain $a_1,\\ldots,a_c\\in J$ whose images generate $J_{\\mathfrak p}$ and form a regular sequence there. Multiplication by those cleared denominators is by units at $\\mathfrak p$, so regularity is unchanged. Apply the principal-neighbourhood regular-sequence lemma to the $a_i$ in the Noetherian ring $A$: the $a_i$ form a regular sequence in $A[1/g]$ for some $g\\notin\\mathfrak p$. Next make $J=(a_1,\\ldots,a_c)$: for each of finitely many generators of $J$, its class modulo $(a_1,\\ldots,a_c)$ is zero at $\\mathfrak p$, so some $h_k\\notin\\mathfrak p$ kills it; put $h=\\prod_kh_k$. The sequence stays regular in $A[1/gh]$: if $a_j\\,(m/h^n)=0$ in $A[1/gh]/(a_1,\\ldots,a_{j-1})$ with $m$ from $A[1/g]/(a_1,\\ldots,a_{j-1})$, then $h^Na_jm=0$ for some $N$, so $h^Nm=0$ by injectivity over $A[1/g]$, i.e. $m/h^n=0$; and the final quotient $(A/J)[1/gh]$ is nonzero because $\\mathfrak p$ survives. Thus the immersion is regular in the stated neighbourhood sense. For any such regular equations, the conormal-freeness theorem identifies $J/J^2$ with $(A/J)^c$ on the classes of the equations. Consequently its rank, and thus the length $c$, is independent of the equations and locally constant on the source. At a nonzero stalk, independence of free rank follows by reducing a free-module isomorphism modulo the maximal ideal.",
+   "uses": [
+    "lem-exc-regular-sequence-principal-neighbourhood",
+    "lem-weil-pbc-regular-sequence-conormal-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 061L, lemma-regular-sequence-in-neighbourhood; Tag 00LN, lemma-regular-quasi-regular, in degree one; divisors.tex Tag 0E9J"
+   }
+  },
+  {
+   "text": "For flat base change, take an affine flat ring map $A\\to B$ and local equations $a_1,\\ldots,a_c$ for a regular closed immersion. Put $M_j=A/(a_1,\\ldots,a_j)$. Tensor every injection $M_{j-1}\\xrightarrow{a_j}M_{j-1}$ with the flat $A$-module $B$. Flat tensor exactness preserves injectivity; the quotient/base-change isomorphism identifies the tensor module with $B/(a_1,\\ldots,a_{j-1})B$ and the tensor map with multiplication by the image of $a_j$. At every prime of $B$ containing the image ideal the tuple is therefore regular by the weak-regular-sequence localization lemma. There is no flatness assumption on $A/(a_1,\\ldots,a_c)$. Step 2 spreads these local sequences to neighbourhoods. The affine pullback is $\\operatorname{Spec}(B/(a_1,\\ldots,a_c)B)$ by the same quotient isomorphism, and its conormal module is free of rank $c$ by conormal freeness. This proves preservation of the regular closed immersion and of codimension.",
+   "uses": [
+    "lem-weil-pbc-flat-tensor-exact",
+    "lem-weil-pbc-tensor-quotient-base-change",
+    "lem-weil-pbc-weakly-regular-sequence-localization-prime",
+    "lem-weil-pbc-regular-sequence-conormal-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00LM, lemma-flat-increases-depth; divisors.tex Tag 067P, lemma-flat-base-change-regular-immersion"
+   }
+  },
+  {
+   "text": "For composition, on a local affine chart write the first ideal as $(a_1,\\ldots,a_c)$ and the second ideal in its quotient as $(\\bar b_1,\\ldots,\\bar b_e)$, with both displayed tuples regular. Lift each $\\bar b_j$ to $b_j$ in the ambient ring. The composite ideal is $(a_1,\\ldots,a_c,b_1,\\ldots,b_e)$. In the first $c$ multiplication tests its injectivity is that of the $a$-tuple; in each subsequent test the prefix quotient is exactly the corresponding quotient by the $\\bar b$-tuple, so injectivity holds there too. The final quotient is the nonzero local ring of the smallest subscheme. Hence the concatenated tuple is regular. Step 2 spreads at the point if needed, and its conormal has rank $c+e$. Thus composition is regular with additive codimension. This is the direct definitional argument of Tag 065K.",
+   "uses": [
+    "def-weil-pbc-regular-sequence",
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-regular-sequence-conormal-free"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 065K, lemma-join-regular-sequences; divisors.tex Tag 067Q, lemma-composition-regular-immersion"
+   }
+  },
+  {
+   "text": "Let $g:V\\to S$ be separated smooth of relative dimension $r$, and $s:S\\to V$ a section. The separated-section lemma gives that $s$ is closed. Both $V\\to S$ and $S\\xrightarrow{\\mathrm{id}}S$ are smooth (the identity has the unique lifting property and is finitely presented), so the smooth-pair lemma supplies regular equations for $s(S)$ locally. To compute their length, use a compatible affine section $R\\to B\\to R$ with composite the identity and ideal $J=\\ker(B\\to R)$. Apply the smooth conormal exact-sequence theorem with $A=C=R$ and $I=0$: it gives $J/J^2\\cong\\Omega_{B/R}\\otimes_B R$. Smooth differentials have rank $r$, while conormal freeness says the rank of $J/J^2$ is the length of the regular equations. Hence that length is $r$. The argument is local along the section, so affine restrictions suffice. It also applies when $r=0$.",
+   "uses": [
+    "lem-weil-pbc-section-separated-closed-immersion",
+    "lem-pur-smooth-pair-regular-immersion",
+    "def-sbc-smooth-morphisms",
+    "lem-weil-pbc-smooth-conormal-sequence-exact",
+    "lem-sc-smooth-omega-finite-locally-free",
+    "lem-weil-pbc-regular-sequence-conormal-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "divisors.tex Tag 067R, lemma-section-smooth-regular-immersion; Tag 06A9, lemma-application-NL-smooth; morphisms.tex Tag 02G1"
+   }
+  },
+  {
+   "text": "On compatible affine charts of a smooth morphism over a regular scheme, the ring map is smooth and the base ring is regular. The smooth-ascent theorem says precisely that its target ring is regular. Thus these charts give regularity of the smooth source scheme. In particular affine space over a regular scheme is regular, because its projection is smooth of the specified relative dimension.",
+   "uses": [
+    "def-weil-regular-scheme",
+    "def-sbc-smooth-morphisms",
+    "lem-weil-pbc-regular-ring-smooth-ascent",
+    "sbc-lem-affine-space-smooth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 07NF, lemma-regular-goes-up; morphisms.tex smooth affine charts and affine-space smoothness"
+   }
+  },
+  {
+   "text": "Write $X=\\operatorname{Spec}A$ and $Y=\\operatorname{Spec}B$ for the given finite-type affine morphism. The all-affine-pairs characterization of local finite type shows that $B$ is a finitely generated $A$-algebra. Choose generators $b_1,\\ldots,b_n$. By the definition of finite-type algebra the evaluation homomorphism $A[t_1,\\ldots,t_n]\\twoheadrightarrow B$, $t_i\\mapsto b_i$, is surjective. Its spectrum is a closed immersion $Y\\hookrightarrow\\mathbf A^n_X$. Affine space is regular by Step 6, so Steps 1 and 2 prove that this immersion is regular. The same argument proves regularity for every closed immersion of $Y$ into an affine space over $X$, since both schemes in the immersion are regular.",
+   "uses": [
+    "lem-weil-pbc-lft-affine-pairs",
+    "def-weil-pbc-finite-type-algebra",
+    "def-weil-affine-spectrum",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "morphisms.tex Tag 01T2, lemma-locally-finite-type-characterize; Tag 00NR applied as in Steps 1 and 2"
+   }
+  },
+  {
+   "text": "For a smooth morphism $p:P\\to X$ of relative dimension $r$ between Noetherian schemes, fix $z\\in P$ and $x=p(z)$. Smoothness implies flatness, local finite presentation, and smooth fibres by the smoothness criterion; by the definition of a flat morphism the local homomorphism $\\mathcal O_{X,x}\\to\\mathcal O_{P,z}$ is flat, and both local rings are Noetherian. Apply the flat height formula to this local map with $\\mathfrak Q=\\mathfrak m_z$, so that $\\mathfrak p=\\mathfrak m_x$: $\\dim\\mathcal O_{P,z}=\\dim\\mathcal O_{X,x}+\\dim(\\mathcal O_{P,z}/\\mathfrak m_x\\mathcal O_{P,z})$. The fibre-stalk quotient theorem identifies the last ring with $\\mathcal O_{P_x,z}$. On a finite-type affine neighbourhood of $z$ in the fibre, the field dimension formula gives $r=\\dim\\mathcal O_{P_x,z}+\\operatorname{trdeg}_{\\kappa(x)}\\kappa(z)$; here $\\dim_z(P_x)=r$ is exactly the relative-dimension hypothesis. Thus $\\dim\\mathcal O_{P,z}+\\operatorname{trdeg}_{\\kappa(x)}\\kappa(z)=\\dim\\mathcal O_{X,x}+r$. Only the flat dimension equality is used, so no dominance or catenarity assumption is implicit.",
+   "uses": [
+    "sbc-lem-smooth-criterion",
+    "lem-weil-pbc-flat-height-formula",
+    "lem-sbc-scheme-fibre-stalk-quotient",
+    "lem-kun-dimension-formula",
+    "def-sbc-smooth-morphisms",
+    "def-weil-flat-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00ON, lemma-dimension-base-fibre-equals-total; morphisms.tex Tag 02FX and Tags 01VF, 01VB"
+   }
+  },
+  {
+   "text": "Now let $f=pi$ be a factorization in the statement, put $z=i(y)$ and $x=f(y)$, and work on components with fixed $r,c$. On an affine chart $\\operatorname{Spec}A$ of $P$ around $z$ the ideal of $i$ is generated by a regular sequence $f_1,\\ldots,f_c$; all $f_j$ lie in the prime of $z$, so by the weak-regular-sequence localization lemma their images form a regular sequence in $\\mathcal O_{P,z}$, and the closed-immersion stalk map identifies $\\mathcal O_{Y,y}$ with $\\mathcal O_{P,z}/(f_1,\\ldots,f_c)$. The regular-sequence dimension-drop theorem gives $\\dim\\mathcal O_{Y,y}+c=\\dim\\mathcal O_{P,z}$. The Noetherian-local finite-dimension theorem ensures these local dimensions are finite, so the extended dimension equality is an equality of ordinary integers. A quotient local-ring map induces an isomorphism $\\kappa(z)\\cong\\kappa(y)$. Substituting into Step 8 and rearranging yields exactly $r-c=\\dim\\mathcal O_{Y,y}-\\dim\\mathcal O_{X,x}+\\operatorname{trdeg}_{\\kappa(x)}\\kappa(y)$. The right hand side only uses $f$ and $y$, proving independence. By local constancy of smooth relative dimension, and Step 2 for $c$, the difference is locally constant on $Y$.",
+   "uses": [
+    "lem-trf-regular-sequence-dimension-formula",
+    "def-weil-closed-immersion",
+    "def-weil-residue-field",
+    "sbc-lem-smooth-relative-dimension-locally-constant",
+    "lem-weil-pbc-noetherian-local-finite-krull-dimension",
+    "lem-weil-pbc-weakly-regular-sequence-localization-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Regular-sequence dimension drop; morphisms.tex Tag 02G1; intrinsic virtual dimension as in ILO XVI Definitions 2.5.1–2.5.3"
+   }
+  },
+  {
+   "text": "For completeness, the finite-fibre formulation of quasi-finiteness in the statement agrees here with isolated fibre points. For a finite-type morphism with finite fibres, every affine open of a fibre is the spectrum of a finite-type field algebra with finite spectrum. The finite-spectrum theorem says all its primes are maximal. Thus all points of the fibre are closed; as there are finitely many, each singleton is open (its complement is a finite union of closed points). Each fibre point is therefore isolated. Apply the isolated-fibre-point residue theorem to conclude that $\\kappa(y)/\\kappa(x)$ is finite. A finite field extension is algebraic: the powers of any element are linearly dependent over the base. Thus no singleton is algebraically independent, so its transcendence degree is zero. The formula of Step 9 specializes as claimed.",
+   "uses": [
+    "lem-pqf-finite-spectrum-maximal-primes",
+    "lem-weil-pbc-isolated-fibre-point-residue-finite",
+    "pqf-def-quasifinite",
+    "def-kun-transcendence-degree"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "morphisms.tex Tags 01TG and 01TH; algebra.tex Tag 0ALW"
+   }
+  },
+  {
+   "text": "All local statements above are asserted at points of the immersed or smooth source. If that source is empty there are no points to check. The empty tuple is regular in every nonzero local ring, has ideal zero and conormal rank zero, so the arguments include codimension zero. In the section case $r=0$ gives conormal rank zero and an empty local defining tuple. In the dimension calculations $r=0$ or $c=0$ is ordinary substitution in the same equalities.",
+   "uses": [
+    "def-weil-pbc-regular-sequence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Empty and zero-dimensional edge cases of the preceding arguments"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-transcendence-degree",
+  "def-sbc-smooth-morphisms",
+  "def-weil-affine-spectrum",
+  "def-weil-closed-immersion",
+  "def-weil-flat-morphism",
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-pbc-regular-sequence",
+  "def-weil-regular-scheme",
+  "def-weil-residue-field",
+  "lem-exc-regular-sequence-principal-neighbourhood",
+  "lem-kun-dimension-formula",
+  "lem-pqf-finite-spectrum-maximal-primes",
+  "lem-pur-smooth-pair-regular-immersion",
+  "lem-sbc-scheme-fibre-stalk-quotient",
+  "lem-sc-smooth-omega-finite-locally-free",
+  "lem-trf-regular-sequence-dimension-formula",
+  "lem-weil-pbc-flat-height-formula",
+  "lem-weil-pbc-flat-tensor-exact",
+  "lem-weil-pbc-isolated-fibre-point-residue-finite",
+  "lem-weil-pbc-lft-affine-pairs",
+  "lem-weil-pbc-noetherian-local-finite-krull-dimension",
+  "lem-weil-pbc-regular-local-generators-regular-sequence",
+  "lem-weil-pbc-regular-local-quotient-kernel-parameters",
+  "lem-weil-pbc-regular-ring-smooth-ascent",
+  "lem-weil-pbc-regular-sequence-conormal-free",
+  "lem-weil-pbc-section-separated-closed-immersion",
+  "lem-weil-pbc-smooth-conormal-sequence-exact",
+  "lem-weil-pbc-tensor-quotient-base-change",
+  "lem-weil-pbc-weakly-regular-sequence-localization-prime",
+  "pqf-def-quasifinite",
+  "sbc-lem-affine-space-smooth",
+  "sbc-lem-smooth-criterion",
+  "sbc-lem-smooth-relative-dimension-locally-constant"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "divisors.tex Tags 0E9J, 067P, 067Q, 067R; algebra.tex Tags 00NR, 061L, 00LN, 065K, 06A9, 00ON; morphisms.tex Tags 02FX, 02G1, 01T2, 01TG, 01TH"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -63,10 +262,45 @@
    "results": "[loogle] OK 0 hit(s)\n",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "regular immersion composition flat base change codimension smooth section virtual dimension formula",
+   "results": "{\"t\": \"2026-10-18T19:32:30Z\", \"tool\": \"leanfinder\", \"query\": \"regular immersion composition flat base change codimension smooth section virtual dimension formula\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsStandardSmooth.relativeDimension\", \"RingHom.isStandardSmoothOfRelativeDimension_isStableUnderBaseChange\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_comp\", \"Algebra.IsStandardSmoothOfRelativeDimension\", \"Algebra.IsStandardSmoothOfRelativeDimension.trans\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange\", \"RingHom.IsStandardSmoothOfRelativeDimension\"], \"digest\": \"2acf856676372f03\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: these inputs concern separate smoothness, immersion or regular-sequence clauses and do not state all assertions of this item"
+  },
+  {
+   "tool": "loogle",
+   "query": "RingTheory.Sequence.IsRegular, AlgebraicGeometry.IsSmoothOfRelativeDimension",
+   "results": "{\"t\": \"2026-10-18T19:32:30Z\", \"tool\": \"loogle\", \"query\": \"RingTheory.Sequence.IsRegular, AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'AlgebraicGeometry.IsSmoothOfRelativeDimension'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match; Loogle rejected the expected identifier, so this query is not evidence of absence"
+  },
+  {
+   "tool": "grep",
+   "query": "regular.*immersion|dimension.*formula|relative.*dimension",
+   "results": "{\"t\": \"2026-10-18T19:32:30Z\", \"tool\": \"grep\", \"query\": \"regular.*immersion|dimension.*formula|relative.*dimension\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Etale.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Etale.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/Etale.lean\"], \"digest\": \"183d3b9e4b9a3f60\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: these inputs concern separate smoothness, immersion or regular-sequence clauses and do not state all assertions of this item"
+  },
+  {
+   "tool": "leansearch",
+   "query": "regular immersion in regular schemes is stable under flat base change and composition and has intrinsic virtual dimension",
+   "results": "{\"t\": \"2026-10-18T19:32:31Z\", \"tool\": \"leansearch\", \"query\": \"regular immersion in regular schemes is stable under flat base change and composition and has intrinsic virtual dimension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsPreimmersion.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.IsImmersion.comp\", \"AlgebraicGeometry.IsClosedImmersion.isStableUnderBaseChange\", \"RingTheory.Sequence.IsWeaklyRegular.of_flat_of_isBaseChange\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange\", \"AlgebraicGeometry.IsPreimmersion.comp\", \"AlgebraicGeometry.IsImmersion.comp_iff\", \"AlgebraicGeometry.IsImmersion.of_comp\"], \"digest\": \"22209ffff62f7088\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: these inputs concern separate smoothness, immersion or regular-sequence clauses and do not state all assertions of this item"
+  },
+  {
+   "tool": "leansearch",
+   "query": "a section of a separated smooth morphism is a regular immersion of codimension its relative dimension",
+   "results": "{\"t\": \"2026-10-18T19:32:31Z\", \"tool\": \"leansearch\", \"query\": \"a section of a separated smooth morphism is a regular immersion of codimension its relative dimension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isSmoothOfRelativeDimension_comp\", \"AlgebraicGeometry.IsSeparated.isClosedImmersion_diagonal\", \"AlgebraicGeometry.IsSmooth.casesOn\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"AlgebraicGeometry.IsSmooth.recOn\", \"AlgebraicGeometry.IsSeparated.diagonal_isClosedImmersion\", \"AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatOfIsOpenImmersion\", \"AlgebraicGeometry.instIsSmoothOfIsOpenImmersion\"], \"digest\": \"2eb22137e4d1a27e\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: these inputs concern separate smoothness, immersion or regular-sequence clauses and do not state all assertions of this item"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-absolute-gysin-purity",
@@ -89,5 +323,139 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-regular-lci-geometric-calculus",
+  "worker": "stage1",
+  "summary": "Retained the statement and original creation provenance. Expanded the regular-local argument through actual principal neighbourhoods and conormal freeness. Proved flat base change by tensoring each multiplication injection, and composition by the definition of a regular sequence. Used the existing separated-section, smooth-pair, smooth-conormal and differential-rank statements for smooth sections. Used smooth regularity ascent and a polynomial presentation for the affine case. Derived the intrinsic dimension equality from the flat height formula and the fibre dimension formula, not the general dimension inequality. Proved the finite-fibre residue assertion using finite-spectrum and isolated-point inputs. Every input is an existing DAG node; no new nodes.",
+  "blueprint": "Realizes the ancestor proof input “Regular-immersion geometry and intrinsic virtual dimension” in the affine regular-local and factorization argument.",
+  "tool_uses": [
+   {
+    "node": "lem-exc-regular-sequence-principal-neighbourhood",
+    "why": "Generic algebraic or scheme-theoretic input used as stated in the proof; this perverse-sheaf unit has no replacement for A regular sequence at a prime spreads to a principal neighbourhood."
+   },
+   {
+    "node": "lem-kun-dimension-formula",
+    "why": "Generic algebraic or scheme-theoretic input used as stated in the proof; this perverse-sheaf unit has no replacement for Dimension formula for finite type schemes."
+   },
+   {
+    "node": "lem-pqf-finite-spectrum-maximal-primes",
+    "why": "Generic algebraic or scheme-theoretic input used as stated in the proof; this perverse-sheaf unit has no replacement for Finite spectrum of a finite-type field algebra forces maximal primes."
+   },
+   {
+    "node": "lem-pur-smooth-pair-regular-immersion",
+    "why": "Generic algebraic or scheme-theoretic input used as stated in the proof; this perverse-sheaf unit has no replacement for Local regular equations for a closed immersion of smooth schemes."
+   },
+   {
+    "node": "lem-sbc-scheme-fibre-stalk-quotient",
+    "why": "Generic algebraic or scheme-theoretic input used as stated in the proof; this perverse-sheaf unit has no replacement for The local ring of a scheme-theoretic fibre is a quotient of the local ring."
+   },
+   {
+    "node": "lem-sc-smooth-omega-finite-locally-free",
+    "why": "Generic algebraic or scheme-theoretic input used as stated in the proof; this perverse-sheaf unit has no replacement for Relative differentials of a smooth morphism are locally free of rank d."
+   },
+   {
+    "node": "lem-trf-regular-sequence-dimension-formula",
+    "why": "Generic algebraic or scheme-theoretic input used as stated in the proof; this perverse-sheaf unit has no replacement for Extended Krull dimension equality for a regular sequence."
+   },
+   {
+    "node": "lem-weil-pbc-flat-height-formula",
+    "why": "Generic algebraic or scheme-theoretic input used as stated in the proof; this perverse-sheaf unit has no replacement for Height formula for flat ring maps of Noetherian rings."
+   },
+   {
+    "node": "lem-weil-pbc-flat-tensor-exact",
+    "why": "Generic algebraic or scheme-theoretic input used as stated in the proof; this perverse-sheaf unit has no replacement for Tensoring with a flat module preserves exact sequences."
+   },
+   {
+    "node": "lem-weil-pbc-isolated-fibre-point-residue-finite",
+    "why": "Generic algebraic or scheme-theoretic input used as stated in the proof; this perverse-sheaf unit has no replacement for An isolated point of a fibre of a locally finite type morphism has finite residue field extension."
+   },
+   {
+    "node": "lem-weil-pbc-lft-affine-pairs",
+    "why": "Generic algebraic or scheme-theoretic input used as stated in the proof; this perverse-sheaf unit has no replacement for Locally of finite type is checked on all pairs of affine opens."
+   },
+   {
+    "node": "lem-weil-pbc-regular-local-generators-regular-sequence",
+    "why": "Generic algebraic or scheme-theoretic input used as stated in the proof; this perverse-sheaf unit has no replacement for A regular system of parameters is a regular sequence."
+   },
+   {
+    "node": "lem-weil-pbc-regular-local-quotient-kernel-parameters",
+    "why": "Generic algebraic or scheme-theoretic input used as stated in the proof; this perverse-sheaf unit has no replacement for The ideal of a regular local quotient is generated by parameters."
+   },
+   {
+    "node": "lem-weil-pbc-regular-ring-smooth-ascent",
+    "why": "Generic algebraic or scheme-theoretic input used as stated in the proof; this perverse-sheaf unit has no replacement for Regularity ascends along smooth ring maps."
+   },
+   {
+    "node": "lem-weil-pbc-regular-sequence-conormal-free",
+    "why": "Generic algebraic or scheme-theoretic input used as stated in the proof; this perverse-sheaf unit has no replacement for The conormal module of an ideal generated by a regular sequence is free."
+   },
+   {
+    "node": "lem-weil-pbc-section-separated-closed-immersion",
+    "why": "Generic algebraic or scheme-theoretic input used as stated in the proof; this perverse-sheaf unit has no replacement for A section of a separated morphism is a closed immersion."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-conormal-sequence-exact",
+    "why": "Generic algebraic or scheme-theoretic input used as stated in the proof; this perverse-sheaf unit has no replacement for Conormal sequence of a section of a smooth algebra is exact."
+   },
+   {
+    "node": "lem-weil-pbc-tensor-quotient-base-change",
+    "why": "Generic algebraic or scheme-theoretic input used as stated in the proof; this perverse-sheaf unit has no replacement for Base change of a quotient ring: B ⊗_A (A/I) ≅ B/IB."
+   },
+   {
+    "node": "lem-weil-pbc-weakly-regular-sequence-localization-prime",
+    "why": "Generic algebraic or scheme-theoretic input used as stated in the proof; this perverse-sheaf unit has no replacement for A sequence satisfying the nonzerodivisor conditions inside a prime becomes a regular sequence in the localization at that prime."
+   },
+   {
+    "node": "sbc-lem-affine-space-smooth",
+    "why": "Generic algebraic or scheme-theoretic input used as stated in the proof; this perverse-sheaf unit has no replacement for Affine space is smooth."
+   },
+   {
+    "node": "sbc-lem-smooth-criterion",
+    "why": "Generic algebraic or scheme-theoretic input used as stated in the proof; this perverse-sheaf unit has no replacement for Smoothness by flatness and smooth fibres."
+   },
+   {
+    "node": "sbc-lem-smooth-relative-dimension-locally-constant",
+    "why": "Generic algebraic or scheme-theoretic input used as stated in the proof; this perverse-sheaf unit has no replacement for Local constancy of the relative dimension."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-local-finite-krull-dimension",
+    "why": "Finiteness of Noetherian local dimensions permits rearranging the extended regular-sequence dimension equality in the integers."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-exc-regular-sequence-principal-neighbourhood",
+  "lem-kun-dimension-formula",
+  "lem-pqf-finite-spectrum-maximal-primes",
+  "lem-pur-smooth-pair-regular-immersion",
+  "lem-sbc-scheme-fibre-stalk-quotient",
+  "lem-sc-smooth-omega-finite-locally-free",
+  "lem-trf-regular-sequence-dimension-formula",
+  "lem-weil-pbc-flat-height-formula",
+  "lem-weil-pbc-flat-tensor-exact",
+  "lem-weil-pbc-isolated-fibre-point-residue-finite",
+  "lem-weil-pbc-lft-affine-pairs",
+  "lem-weil-pbc-regular-local-generators-regular-sequence",
+  "lem-weil-pbc-regular-local-quotient-kernel-parameters",
+  "lem-weil-pbc-regular-ring-smooth-ascent",
+  "lem-weil-pbc-regular-sequence-conormal-free",
+  "lem-weil-pbc-section-separated-closed-immersion",
+  "lem-weil-pbc-smooth-conormal-sequence-exact",
+  "lem-weil-pbc-tensor-quotient-base-change",
+  "lem-weil-pbc-weakly-regular-sequence-localization-prime",
+  "sbc-lem-affine-space-smooth",
+  "sbc-lem-smooth-criterion",
+  "sbc-lem-smooth-relative-dimension-locally-constant",
+  "lem-weil-pbc-noetherian-local-finite-krull-dimension"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q68-71d08d4af",
+  "group": "Q68",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q68-71d08d4af (reviewer sub-agent of L); spot-checked: Read the item in full. It has 11 steps and no new nodes. I read all cited statements and the Stacks sources: 0E9J, 067P, 067Q, 067R, 061L, 00NR/00NQ, 065K, 06A9, 00ON, 02FX, 0ALW, 01TH, 07NF. The statement is unchanged, no SGA source is used, and the closure has no cycle. Batch-5 flag: lem-trf-regular-sequence-dimension-formula is a Mathlib leaf (ringKrullDim_add_length_eq_ringKrullDim_of_isRegular). Its closure is three definitions, so it adds nothing to the batch-5 closure, and neither the trace-formula nor the Poincaré-duality assumption gives it. I accept it as a generic tool. Three repairable faults, fixed in fixes/dag/nodes/sec-deligne-laumon-a1/lem-per-regular-lci-geometric-calculus.json. (1) E5, Step 2: after spreading with 061L, the step inverts a further h without saying why the sequence stays regular; the localization argument and the nonzero final quotient are now written out. (2) C4/E1, Step 8: the 00ON flat height formula was applied to chart ring maps whose flatness was not shown; it is now applied to the flat stalk map O_{X,x}→O_{P,z}, citing def-weil-flat-morphism. (3) C1, Step 9: passing the chart's regular sequence to the stalk O_{P,z} was not cited; it now cites lem-weil-pbc-weakly-regular-sequence-localization-prime. proof_deps is reset to the union of the uses. Step 5's sources check out: smooth-pair 067U, 06A9 with A=C=R and I=0, and rank r from 02G1. Steps 3 and 4 match 067P/00LM and 065K. Step 10's finite-fibre argument is correct. I tested the formula r−c=dim O_Y−dim O_X+trdeg on the identity, a rational section of A^r, A^1_k at its generic and closed points, Spec F_p→Spec Z, A^1_{F_p}→Spec Z through A^1_Z, and empty Y; all hold. The 23 declared tool_uses are generic algebra or scheme facts used as black boxes, and I accept them.; 1 file(s) fixed by the reviewer"
  }
 }
