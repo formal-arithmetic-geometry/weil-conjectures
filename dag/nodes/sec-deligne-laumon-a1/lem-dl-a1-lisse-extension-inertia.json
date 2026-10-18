@@ -14,7 +14,8 @@
   "def-pod-lisse-l-adic-sheaves",
   "def-weil-weil-sheaf-complex",
   "d-real-boundary",
-  "def-wf-middle-extension"
+  "def-wf-middle-extension",
+  "def-wf-fundamental-representation"
  ],
  "proof": [
   {
@@ -184,5 +185,35 @@
   "group": "Q135",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q135-c92e87cf0 (reviewer sub-agent of L); spot-checked: I read the whole delivery. The statement matches the second paragraph of rem-dl-a1-conventions (main-20261015), generalized to every boundary point of a smooth curve, which is what its citer needs; it is not weakened. The coefficients are adic Qbar_l Weil pairs. Small cases check out: no boundary point, the Kummer sheaf on G_m, Artin-Schreier at infinity, and a geometrically constant sheaf. New node lem-dl-a1-weil-kernel-inertia: it follows from Stacks 0BTD (pione.tex l.2984) applied to U_0 and C_0. It is not a duplicate (rg found none) and does not restate a clause of the item. Its Weil-group form holds because the kernel has degree 0, the closure argument works because W is dense in pi_1, and the path choice changes nothing up to conjugacy. I fixed three faults in fixes/.../lem-dl-a1-lisse-extension-inertia.json. (1) C1/C4: step 2 used surjectivity of W(U_0)->W(C_0) without citing it; it now cites lem-wf-dense-open-pi1-surjective (2) and writes out why the map is open. (2) C3/E5: step 3 assumed j_0^* corresponds to restricting the representation; this is now written out from def-wf-fundamental-representation, and d-real-setup is cited. (3) E1: step 4 applied lem-a1-lisse-middle-extension, which is stated for sheaves on the k_0-curve, to the sheaf on the geometric curve C; step 4 now uses lem-wf-dense-open-pi1-surjective (3), with lem-sc-smooth-normal for normality, and gives the Weil-equivariance argument. Steps 1 and 5 are correct. I declared and accept tool_uses prop-wf-weil-sheaf-representation-equivalence, lem-wf-dense-open-pi1-surjective and lem-sc-smooth-normal. Batch-5 check: lem-a1-lisse-middle-extension reached the PD chapter only through a definition, and its citation is now removed. The paths through cor-galois-lisse-representations reach only the general lisse-sheaf/representation equivalence (sk-lem-finite) and definitions. The closure has no node of sk-thm-trace-formula, sk-thm-trace-transport or sk-thm-poincare-duality and no nt-target, so I kept all of them. No SGA source is cited, the graph is acyclic, and proof_deps is the union of the step uses.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-244b0c794",
+  "group": "Q42",
+  "result": "fix",
+  "note": "Read node, all 8 stmt_deps, both modules, report, upstream fundamentalRep/WeilMonodromyData/BasePointData.weilMonodromyData/BoundaryDatum/LisseMonodromy/curveWeilMiddleExtension/MiddleExtensionCurve. All clauses (iff, lisse j_*F, exact homEquiv adjoint iso, ∃! compatible iso), complement index, quantifier order and edge cases match. Fix 1 (H4/H5): companion canonicalMonodromyData was a choice from a new sorry existence-uniqueness theorem duplicating upstream BasePointData.weilMonodromyData (same normalization via toFundamentalGroup_geomHom, weilGroupEquiv_frobLift); canonicalFundamentalRep now := fundamentalRep M B.weilMonodromyData F hF, same signature, choice declarations removed. Fix 2 (H3): item quantified over arbitrary LisseMonodromy M; added (hM : M.IsEquivalenceAt B.t), the content of cor-galois-lisse-representations (2) and the hypothesis of upstream exists_equivalence_fundamentalRep used by proof steps 1 and 3; no hypothesis on C0, F or l added. Both delivered and fixed modules compile clean with nt_compile --json (rc 0, no errors or warnings). fixes/: CanonicalWeilFundamentalRepresentation.lean, LisseExtensionInertia.lean, lem-dl-a1-lisse-extension-inertia.lean-record.json (note)."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.LisseExtensionInertia",
+  "declaration": "AlgebraicGeometry.WeilSheaf.lisse_extension_iff_trivial_inertia",
+  "declarations": [
+   "WeilConjectures.FiniteFieldDatum.lisseExtensionCharacteristic",
+   "WeilConjectures.FiniteFieldDatum.lisseExtensionCoefficientFact",
+   "AlgebraicGeometry.Scheme.MiddleExtensionCurve.lisseExtensionCurves",
+   "AlgebraicGeometry.Scheme.MiddleExtensionCurve.lisseExtensionCurveU",
+   "AlgebraicGeometry.Scheme.MiddleExtensionCurve.lisseExtensionCurveC",
+   "AlgebraicGeometry.Scheme.MiddleExtensionCurve.lisseExtensionNonempty",
+   "AlgebraicGeometry.Scheme.MiddleExtensionCurve.lisseExtensionNonemptyInstance",
+   "AlgebraicGeometry.WeilSheaf.lisse_extension_iff_trivial_inertia"
+  ],
+  "file": "lean/Sheaf/Paper/LisseExtensionInertia.lean",
+  "statement": "theorem lisse_extension_iff_trivial_inertia (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] [Fact (l ≠ D.p)] (c : Scheme.MiddleExtensionCurve D) [GeometricallyConnected c.C.hom] {WU : WeilGroup (c.U.left ↘ Spec (.of D.k₀))} {WC : WeilGroup (c.C.left ↘ Spec (.of D.k₀))} (b : BoundaryDatum c.j.left WU WC) (M : LisseMonodromy l (c.U.left ↘ Spec (.of D.k₀)).geometricFiber D.k₀) (B : WeilGroup.BasePointData WU) (hM : M.IsEquivalenceAt B.t) (F : WeilSheaf D.k₀ l c.U.left) (hF : F.IsLisse) : ((∃ G : WeilSheaf D.k₀ l c.C.left, G.IsLisse ∧ Nonempty ((WeilSheaf.upperStar c.j.left).obj G ≅ F)) ↔ ∀ (x : ↥((Set.range c.j.left.base)ᶜ)) (g : b.inertia x) (v : LisseMonodromy.StalkSpace B.t (F.toLisse hF)), WeilGroup.canonicalFundamentalRep M B F hF g.1 v = v) ∧ ((∀ (x : ↥((Set.range c.j.left.base)ᶜ)) (g : b.inertia x) (v : LisseMonodromy.StalkSpace B.t (F.toLisse hF)), WeilGroup.canonicalFundamentalRep M B F hF g.1 v = v) → ((curveWeilMiddleExtension c.j.left).obj F).IsLisse ∧ (∀ (G : WeilSheaf D.k₀ l c.C.left), G.IsLisse → ∀ α : (WeilSheaf.upperStar c.j.left).obj G ≅ F, ∃ e : G ≅ (curveWeilMiddleExtension c.j.left).obj F, e.hom.hom.hom.f = (adicUpperStarLowerStarAdjunction l (Scheme.Hom.geometricFiberMap c.j.left (comp_over c.j.left (Spec (.of D.k₀))))).homEquiv G.carrier F.carrier α.hom.hom.hom.f) ∧ (∀ (G G' : WeilSheaf D.k₀ l c.C.left), G.IsLisse → G'.IsLisse → ∀ (α : (WeilSheaf.upperStar c.j.left).obj G ≅ F) (α' : (WeilSheaf.upperStar c.j.left).obj G' ≅ F), ∃! e : G ≅ G', (WeilSheaf.upperStar c.j.left).map e.hom ≫ α'.hom = α.hom))",
+  "branch": "newtargets-dag",
+  "by": "Q42",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "All clauses, including the normalized underlying adic adjoint and uniqueness with specified restriction. The ordinary WeilSheaf fixed-pair realization and curveWeilMiddleExtension are reexported by the recorded ordinary-image module; the derived category of Weil sheaves is never used. The source datum fixes k0 and l; upstream sheaf and group interfaces use their canonical algebraic-closure presentations. Curve and coefficient-prime typeclasses and nonemptiness are derived, not additional mathematical assumptions. Reviewer fix: the stalk monodromy M carries hM : M.IsEquivalenceAt B.t, the content of cor-galois-lisse-representations (2) that makes M the node's geometric stalk action (as upstream exists_equivalence_fundamentalRep requires); canonicalFundamentalRep is now upstream fundamentalRep at the existing BasePointData.weilMonodromyData instead of a choice from a new existence theorem.",
+  "fixed_by": "NT-stage2-cc-244b0c794"
  }
 }

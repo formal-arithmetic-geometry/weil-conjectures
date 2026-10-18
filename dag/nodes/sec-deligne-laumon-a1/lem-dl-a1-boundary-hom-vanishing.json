@@ -18,7 +18,9 @@
   "def-wf-middle-extension",
   "def-weil-constructible-heart",
   "def-weil-pbc-qbar-category",
-  "def-weil-abstract-derived-category"
+  "def-weil-abstract-derived-category",
+  "def-dl-a1-boundary-ordinary-images",
+  "def-a1-common-stage-lisse-lattice"
  ],
  "proof": [
   {
@@ -240,5 +242,23 @@
   "group": "Q03",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q03-e5d4dcc22 (reviewer sub-agent of L); spot-checked: I read the whole item: the statement and all six steps, every cited node's statement, the parent's Step 2, the rem-dl-a1-conventions blueprint source, BBD 1.2.4–1.2.6, 1.3.1 and 1.3.6, and Stacks Tags 0145 and 0146. The statement is unchanged and true; I checked it independently: i^!(j_*F)[1] lies in D^{>=1}, and the second Hom vanishes by negative-degree orthogonality. Edge cases checked: Z empty, E=0, F=0, j=id, the constant sheaf on G_m in A^1, and nontrivial inertia. Each step uses only what its cited statement says. Step 1: lem-a1-qbar-open-closed-cohomology gives the heart, t-exactness of j^*, the essential image of i_* and the sheaf adjunction j^* -| j_*. Step 2: clauses (2) and (4) of the heart lemma. Step 3: I checked the adjunction retraction r∘a=id. Step 4: clause (i) of the composition-zero leaf on the rotated triangle. Steps 5 and 6: axiom (2) of the t-structure and faithfulness of the forgetful functor on Frobenius pairs, both correctly marked elementary. There are no new nodes, no cycle, no duplicate in the DAG and no SGA citation. I accept both tool_uses (the open/closed node and the heart short-exact-triangles lemma), since the setup unit has no steps. Batch 5: the closure of lem-a1-qbar-open-closed-cohomology reaches sec-poincare-duality only through the general definition def-pod-lisse-l-adic-sheaves (already a statement dependency of the item), lisse-sheaf foundations and generic homological algebra. None of these is the trace formula, Poincaré duality or a step of their proofs, so the citation is allowed. Fix: source.place still said 'Second paragraph ... no boundary perverse subobjects', although the report claims it was corrected. I changed it to the final paragraph's sentence j_{!*}(F[1])=(j_*F)[1]; the whole corrected item is in fixes/dag/nodes/sec-deligne-laumon-a1/.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d91059d0d",
+  "group": "NM",
+  "result": "pass",
+  "note": "Every node clause matches the Lean boundaryHomVanishing: MiddleExtensionCurve fields, GeometricallyConnected, reduced closed i0 with IsCompl complement, lisse via the landed HasCommonStageLisseLattice, and Homs in the common-stage category of the recorded heart. Both reverse clauses now have the shifted source A[1]. Weil clauses use adjunction-mate induced pairs. The exists-sΦ CommShift follows the landed parent pattern; pair Homs inject into the geometric ones, so it does not weaken the substance. New node def-dl-a1-boundary-ordinary-images: closed image is the right adjoint of zlHeartPull (canonical up to unique iso); the mate matches the node formula; postponed IsLeftAdjoint/IsIso are true Prop theorems with proof docstrings; no hollow data. §1(B) repair of def-weil-pbc-qbar-category is justified: PbcFiniteStagePairCategory is a different type from GeneralAlgebraicallyClosedCoefficients.Pair; only lean changed, note present, legacy module still public. Statements match their files verbatim and declarations exist. nt_compile --json of all three files exited 0 with no errors. Edge cases Z empty, U=C, E=0, F=0 and the constant sheaf on G_m are covered. Report sections present. Remarks only: exists-sΦ could later become forall; the node's 'Second paragraph' locator is a non-lean field."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.BoundaryHomVanishing",
+  "declaration": "WeilConjectures.boundaryHomVanishing",
+  "file": "lean/Sheaf/Paper/BoundaryHomVanishing.lean",
+  "statement": "theorem boundaryHomVanishing (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p) (Ω : Type v) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω] (c : MiddleExtensionCurve D) [GeometricallyConnected c.C.hom] (Z₀ : Over (Spec (.of D.k₀))) [LocallyOfFiniteType Z₀.hom] [QuasiCompact Z₀.hom] (i₀ : Z₀ ⟶ c.C) [IsClosedImmersion i₀.left] [IsReduced Z₀.left] (hcomp : IsCompl (Set.range c.j.left.base) (Set.range i₀.left.base)) (F₀ : sfCommonStageWeilSheaf D l hl c.U Ω) (hF₀ : HasCommonStageLisseLattice l Ω (D.geometricFiber c.U).left F₀.obj.carrier) : ∃ sΦ : (sfCommonStageWeilFrobeniusPullback D l hl c.C Ω).CommShift ℤ, (∀ E : sfCommonStageHeart l (D.geometricFiber Z₀).left Ω, Subsingleton (((boundaryClosedPushforward D l hl Ω i₀).obj E).obj ⟶ ((qbarCurveOrdinaryPushforward D l hl Ω c).obj ⟨F₀.obj.carrier, F₀.property⟩).obj⟦(1 : ℤ)⟧) ∧ Subsingleton (((qbarCurveOrdinaryPushforward D l hl Ω c).obj ⟨F₀.obj.carrier, F₀.property⟩).obj⟦(1 : ℤ)⟧ ⟶ ((boundaryClosedPushforward D l hl Ω i₀).obj E).obj)) ∧ (∀ E₀ : sfCommonStageWeilSheaf D l hl Z₀ Ω, Subsingleton (boundaryOrdinaryWeilImage D l hl Ω i₀ (boundaryClosedPushforward D l hl Ω i₀) (boundaryClosedAdjunction D l hl Ω i₀) E₀ ⟶ boundaryWeilShift D l hl Ω c.C sΦ (boundaryOrdinaryWeilImage D l hl Ω c.j (qbarCurveOrdinaryPushforward D l hl Ω c) (qbarCurveOrdinaryAdjunction D l hl Ω c) F₀)) ∧ Subsingleton (boundaryWeilShift D l hl Ω c.C sΦ (boundaryOrdinaryWeilImage D l hl Ω c.j (qbarCurveOrdinaryPushforward D l hl Ω c) (qbarCurveOrdinaryAdjunction D l hl Ω c) F₀) ⟶ boundaryOrdinaryWeilImage D l hl Ω i₀ (boundaryClosedPushforward D l hl Ω i₀) (boundaryClosedAdjunction D l hl Ω i₀) E₀))",
+  "branch": "newtargets-dag",
+  "by": "NM",
+  "date": "2026-10-18",
+  "existing": false
  }
 }

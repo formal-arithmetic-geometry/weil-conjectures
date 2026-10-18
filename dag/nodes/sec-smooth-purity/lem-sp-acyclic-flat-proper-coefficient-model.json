@@ -336,5 +336,35 @@
   "group": "Q92",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q92-87559bb27 (reviewer sub-agent of L); spot-checked: Read the item, all eight proof steps, every cited node statement, exact Stacks passages, route documents, packet, and report. Checked hypotheses, coefficient categories, base-change morphism direction, adjunction transposes, K-flat models, naturality, duplicate/cycle risks, and edge cases including non-flat Z/4→F₂. No repairable fault found. Review written to review.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-38e363716",
+  "group": "NA",
+  "result": "fix",
+  "note": "Read the node, all 7 statement-dependency records, Stacks 0GL6 context, the module, the report, and the reused scalarExtension/scalarPullbackIso/scalarMate interfaces. Hypotheses, conclusions (4 comparison isos, B-linear representing square, 6 naturality equations), q_r direction, universes and edge cases (empty interval, zero rings, non-flat Z/4->F2) all match the node. Delivered module compiles clean with nt_compile.py (10.2 s). Fixes: (F1, H4/H9) the new etaleFlat/etaleKFlat clash with the existing full names AlgebraicGeometry.Etale.etaleFlat/etaleKFlat in the landed Sheaf.SixFunctors.EtaleOpenTensor, and etaleKFlat duplicates the project's K-flat notion (quasiIso).kFlat used by scalarPullbackIso_existsUnique; both defs removed, hypotheses use exactFunctor (tensorRight _) inline per the def-pc-flat-sheaf-modules record, conclusions use (HomologicalComplex.quasiIso _ (.up ℤ)).kFlat. (F2, H8) properCoefficientPullbackComparison was lambda^{-1} although documented as lambda; now (scalarPullbackIso φ r).symm. The fixed module compiles clean (5.9 s); a scratch check confirmed the lambda type, inv = scalarPullbackIso.hom by rfl, and that the kFlat conclusion feeds scalarPullbackIso_existsUnique. Fixes: complete module, item lean-record.json (statement verbatim, declarations updated), report.md with a maintainer-fix section."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.AcyclicFlatProperCoefficientModel",
+  "file": "lean/Sheaf/Paper/AcyclicFlatProperCoefficientModel.lean",
+  "declaration": "AlgebraicGeometry.Etale.acyclicFlatProperCoefficientModel",
+  "declarations": [
+   "AlgebraicGeometry.Etale.properCoefficientTensor",
+   "AlgebraicGeometry.Etale.properCoefficientPullbackComparison",
+   "AlgebraicGeometry.Etale.properCoefficientMap",
+   "AlgebraicGeometry.Etale.coefficientExtendedComplex",
+   "AlgebraicGeometry.Etale.acyclicFlatProperCoefficientModel",
+   "AlgebraicGeometry.Etale.properAcyclicComparison",
+   "AlgebraicGeometry.Etale.properSheafCoefficientMap",
+   "AlgebraicGeometry.Etale.properCoefficientComplexMap",
+   "AlgebraicGeometry.Etale.IsAcyclicFlatProperCoefficientModel"
+  ],
+  "statement": "theorem acyclicFlatProperCoefficientModel {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B] {W V : Scheme.{u}} (r : W ⟶ V) [IsProper r] [IsNoetherian W] [IsNoetherian V] (φ : A →+* B) (C : CochainComplex (Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} A)) ℤ) (hC : IsAcyclicFlatProperCoefficientModel φ r C) : (HomologicalComplex.quasiIso _ (.up ℤ)).kFlat C ∧ (HomologicalComplex.quasiIso _ (.up ℤ)).kFlat (((lowerStar (ModuleCat.{u + 1} A) r).mapHomologicalComplex (.up ℤ)).obj C) ∧ IsIso (properAcyclicComparison A r C) ∧ IsIso (properAcyclicComparison B r (coefficientExtendedComplex φ W C)) ∧ IsIso (scalarExtensionRepresentative φ W C) ∧ IsIso (scalarExtensionRepresentative φ V (((lowerStar (ModuleCat.{u + 1} A) r).mapHomologicalComplex (.up ℤ)).obj C)) ∧ ((properCoefficientTensor φ V).map (properAcyclicComparison A r C) ≫ (properCoefficientMap φ r).app (DerivedCategory.Q.obj C) ≫ (rightDerivedLowerStar (ModuleCat.{u + 1} B) r).map (scalarExtensionRepresentative φ W C) = scalarExtensionRepresentative φ V (((lowerStar (ModuleCat.{u + 1} A) r).mapHomologicalComplex (.up ℤ)).obj C) ≫ DerivedCategory.Q.map (properCoefficientComplexMap φ r C) ≫ properAcyclicComparison B r (coefficientExtendedComplex φ W C)) ∧ (∀ (C' : CochainComplex (Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} A)) ℤ) (_hC' : IsAcyclicFlatProperCoefficientModel φ r C') (h : C ⟶ C'), (properCoefficientMap φ r).app (DerivedCategory.Q.obj C) ≫ (rightDerivedLowerStar (ModuleCat.{u + 1} B) r).map ((properCoefficientTensor φ W).map (DerivedCategory.Q.map h)) = (properCoefficientTensor φ V).map ((rightDerivedLowerStar (ModuleCat.{u + 1} A) r).map (DerivedCategory.Q.map h)) ≫ (properCoefficientMap φ r).app (DerivedCategory.Q.obj C') ∧ DerivedCategory.Q.map (((lowerStar (ModuleCat.{u + 1} A) r).mapHomologicalComplex (.up ℤ)).map h) ≫ properAcyclicComparison A r C' = properAcyclicComparison A r C ≫ (rightDerivedLowerStar (ModuleCat.{u + 1} A) r).map (DerivedCategory.Q.map h) ∧ DerivedCategory.Q.map (((lowerStar (ModuleCat.{u + 1} B) r).mapHomologicalComplex (.up ℤ)).map (((ProEtale.etaleSheafExtendScalars φ W).mapHomologicalComplex (.up ℤ)).map h)) ≫ properAcyclicComparison B r (coefficientExtendedComplex φ W C') = properAcyclicComparison B r (coefficientExtendedComplex φ W C) ≫ (rightDerivedLowerStar (ModuleCat.{u + 1} B) r).map (DerivedCategory.Q.map (((ProEtale.etaleSheafExtendScalars φ W).mapHomologicalComplex (.up ℤ)).map h)) ∧ (properCoefficientTensor φ W).map (DerivedCategory.Q.map h) ≫ scalarExtensionRepresentative φ W C' = scalarExtensionRepresentative φ W C ≫ DerivedCategory.Q.map (((ProEtale.etaleSheafExtendScalars φ W).mapHomologicalComplex (.up ℤ)).map h) ∧ (properCoefficientTensor φ V).map (DerivedCategory.Q.map (((lowerStar (ModuleCat.{u + 1} A) r).mapHomologicalComplex (.up ℤ)).map h)) ≫ scalarExtensionRepresentative φ V (((lowerStar (ModuleCat.{u + 1} A) r).mapHomologicalComplex (.up ℤ)).obj C') = scalarExtensionRepresentative φ V (((lowerStar (ModuleCat.{u + 1} A) r).mapHomologicalComplex (.up ℤ)).obj C) ≫ DerivedCategory.Q.map (((ProEtale.etaleSheafExtendScalars φ V).mapHomologicalComplex (.up ℤ)).map (((lowerStar (ModuleCat.{u + 1} A) r).mapHomologicalComplex (.up ℤ)).map h)) ∧ ((ProEtale.etaleSheafExtendScalars φ V).mapHomologicalComplex (.up ℤ)).map (((lowerStar (ModuleCat.{u + 1} A) r).mapHomologicalComplex (.up ℤ)).map h) ≫ properCoefficientComplexMap φ r C' = properCoefficientComplexMap φ r C ≫ ((lowerStar (ModuleCat.{u + 1} B) r).mapHomologicalComplex (.up ℤ)).map (((ProEtale.etaleSheafExtendScalars φ W).mapHomologicalComplex (.up ℤ)).map h))",
+  "branch": "newtargets-dag",
+  "existing": false,
+  "by": "NA",
+  "date": "2026-10-18",
+  "fixed_by": "NT-stage2-cc-38e363716"
  }
 }

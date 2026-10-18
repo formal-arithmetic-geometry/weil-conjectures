@@ -17,7 +17,8 @@
   "lem-sfb-successive-derived-quotient-normalization",
   "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
   "lem-weil-pbc-diagram-site-realization",
-  "lem-coef-semilinear-derived-sections"
+  "lem-coef-semilinear-derived-sections",
+  "def-coef-semilinear-system-models"
  ],
  "proof": [
   {
@@ -311,5 +312,43 @@
   "group": "Q02",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q02-061783768 (reviewer sub-agent of L); spot-checked: Read the item, report, cited statements and source passages in full. Verified all nine steps, coefficient-category typing, mate direction, cocycle, shifts and diagram-system argument; tested nonflat and nonidentity-counit cases. No duplicates, cycles, excluded route nodes or repairs found. Detailed checks and accepted tool_uses are recorded in review.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8dc53e39d",
+  "group": "NL",
+  "result": "pass",
+  "note": "Node diff vs landed stage-1: only lean added and def-coef-semilinear-system-models added to stmt_deps; statement, proof and source unchanged. Clause-by-clause: small sites share a c,v bound, consistent with the size convention; geometric morphism uInv⊣uPush, left exact; arbitrary ring maps; AlgebraicInverseImage-pinned coefficients; canonical derived adjunction via mapDerivedCategoryRightDerivedAdjunction; Presentation/Normalization scalar extensions and balanced associators; χ = mateEquiv of c with type and direction checked; Laws.cocycle/identity/square match the node's formulas incl. eqToHom transports; ShiftLaws with shift structures pinned by counits; second conjunct on coefficientSequenceTopology (the systemRing/DS sites). Existential e, uY, uX and shift structures are uniquely determined by ordinary_insertion / K-flat representative / multiplication / counit-shift normalizations, and there is no cocycle input field. Quantified records are satisfiable (successive_derived_quotient_normalization, Grothendieck K-injectives, SemilinearGeometryCore precedent). Edge cases: identity maps, zero ring, nonflat Z→Z/4→Z/2, nonidentity counit, shifts, noncartesian systems, independent coefficient universe r. No hollow defs, single sorry, docstrings with source and blueprint, statement verbatim, all 17 declarations present. nt_compile.py on side overlay: exit 0, no errors, 34.4 s / 35.5 s. Findings: none."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.RingedCoefficientProjectionCocycle",
+  "declaration": "SheafOfModules.RingedCoefficientProjection.ringedCoefficientProjectionCocycle",
+  "declarations": [
+   "SheafOfModules.RingedCoefficientProjection.underlying",
+   "SheafOfModules.RingedCoefficientProjection.Scalars",
+   "SheafOfModules.RingedCoefficientProjection.insertion",
+   "SheafOfModules.RingedCoefficientProjection.computation",
+   "SheafOfModules.RingedCoefficientProjection.Geometry",
+   "SheafOfModules.RingedCoefficientProjection.Geometry.left",
+   "SheafOfModules.RingedCoefficientProjection.Geometry.right",
+   "SheafOfModules.RingedCoefficientProjection.Geometry.adjunction",
+   "SheafOfModules.RingedCoefficientProjection.Comparisons",
+   "SheafOfModules.RingedCoefficientProjection.ScalarUnits",
+   "SheafOfModules.RingedCoefficientProjection.comparison",
+   "SheafOfModules.RingedCoefficientProjection.targetAssociator",
+   "SheafOfModules.RingedCoefficientProjection.successive",
+   "SheafOfModules.RingedCoefficientProjection.Laws",
+   "SheafOfModules.RingedCoefficientProjection.ShiftLaws",
+   "SheafOfModules.RingedCoefficientProjection.Assertion",
+   "SheafOfModules.RingedCoefficientProjection.ringedCoefficientProjectionCocycle"
+  ],
+  "file": "lean/Sheaf/Paper/RingedCoefficientProjectionCocycle.lean",
+  "statement": "theorem ringedCoefficientProjectionCocycle (J : GrothendieckTopology C) (K : GrothendieckTopology X) : Assertion.{c, v, r} J K ∧ Assertion.{c, v, r} (WeilConjectures.coefficientSequenceTopology J) (WeilConjectures.coefficientSequenceTopology K)",
+  "branch": "newtargets-dag",
+  "by": "NL",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "The canonical comparison family is normalized on ordinary scalar insertion and K-flat representatives; the theorem states cocycle, multiplication-unit and arbitrary commuting-square identities, shift compatibility, and the identical assertion on the actual strict-system sequence sites."
  }
 }

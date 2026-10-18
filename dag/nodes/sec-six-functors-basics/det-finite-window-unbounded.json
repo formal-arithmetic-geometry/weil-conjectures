@@ -24,7 +24,8 @@
   "def-weil-abstract-derived-category",
   "def-constructible-stratification",
   "det-def-sfb-constructible-local-model",
-  "def-pc-ext"
+  "def-pc-ext",
+  "sk-def-sfb-constructible"
  ],
  "proof": [
   {
@@ -226,5 +227,28 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3af24dfc8",
+  "group": "NV",
+  "result": "pass",
+  "note": "Clause-by-clause match of both theorems (Λ=E via continuousMapRingObj E, Λ=Q̄_ℓ via padicAlgClRingObj) to the node and to the blueprint source sk-lem-finite-window-unbounded.md: arbitrary X : Scheme.{u}, C constructible via the recorded IsConstantModelConstructible, d_C : ℕ, uniform Mathlib Ext vanishing for r>d_C over all constructible N (≃ ambient derived Hom by Ext.homAddEquiv), every H^q(L) in ObjectProperty.ind.{u+1} of Cons (same as neighbouring landed statements), H^q(L)=0 for q>-d_C-1 over ℤ with no lower bound, conclusion Subsingleton(C[0]⟶L). Edge cases d_C=0, q=-d_C-1, zero objects, empty scheme and universes checked. The only item change outside lean adds the existing node sk-def-sfb-constructible (which has a lean record) to stmt_deps, allowed by brief-stage2 l.140. lean.statement is verbatim in the file; the report has Worker report and Second reading sections. No definitions; proofs sorry only (axioms include sorryAx). Docstrings carry the source place, the blueprint id and all six proof steps. Lines ≤100; proof-dep imports non-public and consistent with records. nt_compile --json on the snapshot file: rc 0 in ~6 s, no errors or warnings (warn.sorry is off in the lakefile). A probe confirmed elaboration and the derived-category instance HasDerivedCategory.ofIsGrothendieckAbelian. No blocking findings."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FiniteWindowUnbounded",
+  "declaration": "AlgebraicGeometry.ProEtale.finiteWindow_unbounded",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.finiteWindow_unbounded",
+   "AlgebraicGeometry.ProEtale.finiteWindow_unbounded_padicAlgCl"
+  ],
+  "file": "lean/Sheaf/Paper/FiniteWindowUnbounded.lean",
+  "statement": "theorem finiteWindow_unbounded (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ) (X : Scheme.{u}) (C : pulledBackModuleObjects (Profinite.continuousMapRingObj E) X) (hC : IsConstantModelConstructible (Profinite.continuousMapRingObj E) X C) (d_C : ℕ) (hExt : ∀ N : pulledBackModuleObjects (Profinite.continuousMapRingObj E) X, IsConstantModelConstructible (Profinite.continuousMapRingObj E) X N → ∀ r : ℕ, d_C < r → Subsingleton (@Abelian.Ext _ _ _ (HasExt.standard _) C N r)) (L : DerivedCategory (pulledBackModuleObjects (Profinite.continuousMapRingObj E) X)) (hL : ∀ q : ℤ, ObjectProperty.ind.{u + 1} (IsConstantModelConstructible (Profinite.continuousMapRingObj E) X) ((DerivedCategory.homologyFunctor _ q).obj L)) (hvanish : ∀ q : ℤ, -(d_C : ℤ) - 1 < q → IsZero ((DerivedCategory.homologyFunctor _ q).obj L)) : Subsingleton ((DerivedCategory.singleFunctor _ 0).obj C ⟶ L)",
+  "branch": "newtargets-dag",
+  "by": "NV",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "The two declarations cover respectively Λ=E and Λ=Qlb. Uses the published finite constant-model constructibility notion and Mathlib ObjectProperty.ind for small ambient filtered colimits; no lower bound on L or geometric hypothesis on X is imposed. The added statement dependency records the existing constructibility predicate used."
  }
 }

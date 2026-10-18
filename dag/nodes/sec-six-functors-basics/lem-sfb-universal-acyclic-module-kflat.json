@@ -248,5 +248,23 @@
   "group": "Q27",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q27-504bda60d (reviewer sub-agent of L); spot-checked: Reviewed the item, all cited nodes, Stacks Tags 0E8F/00HA/00DD/00DB/00D6/00D7/0117 and truncation section 0118, unit/chapter route, edge cases, and tool searches. The expanded proof correctly establishes K-flatness for arbitrary complexes using direct-sum totalization and filtered colimits; no new nodes or route-pivot machinery appear. Existing node lem-trf-module-finitely-presented-directed-colimit has stale source metadata naming 058G instead of 00HA, recorded in review.md; the delivery itself uses the correct 00HA result."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-385bcbdcc",
+  "group": "Q25",
+  "result": "pass",
+  "note": "Lean theorem CochainComplex.kFlat_of_acyclic_tensor_finitePresentation matches node and Stacks 0E8F clause by clause: CommRing A, unbounded E : CochainComplex (ModuleCat.{u} A) ℤ, hypothesis ∀ M with Module.FinitePresentation, mapBifunctor E (single 0 M) curriedTensor Acyclic, conclusion the recorded quasiIso.kFlat. No extra assumptions; common universe u forced by ModuleCat monoidal API and the recorded K-flat interface, not vacuous (A is a test module). No definitions, proof sorry only, source/blueprint docstrings with the 8-step proof, lean.statement verbatim, only the lean field changed, report sections present. No duplicate in Mathlib/project. nt_compile.py on the snapshot: rc=0, no errors; a probe copy showed the tool reports errors and axioms include sorryAx only beyond the standard ones."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.UniversalAcyclicModuleKFlat",
+  "declaration": "CochainComplex.kFlat_of_acyclic_tensor_finitePresentation",
+  "file": "lean/Sheaf/Algebra/Homology/UniversalAcyclicModuleKFlat.lean",
+  "statement": "theorem kFlat_of_acyclic_tensor_finitePresentation {A : Type u} [CommRing A] (E : CochainComplex (ModuleCat.{u} A) ℤ) (hE : ∀ (M : ModuleCat.{u} A), Module.FinitePresentation A M → (mapBifunctor E ((HomologicalComplex.single (ModuleCat.{u} A) (.up ℤ) 0).obj M) (curriedTensor (ModuleCat.{u} A))).Acyclic) : (HomologicalComplex.quasiIso (ModuleCat.{u} A) (.up ℤ)).kFlat E",
+  "branch": "newtargets-dag",
+  "by": "Q25",
+  "date": "2026-10-18",
+  "existing": false
  }
 }

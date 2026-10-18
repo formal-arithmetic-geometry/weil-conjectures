@@ -332,5 +332,31 @@
   "group": "Q15",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q15-6c262b057 (reviewer sub-agent of L); spot-checked: Read all ten steps and cited statements against Stacks 0BSL, 04GK, 04GH, 0FWT, 08HR, 04HX, and normal-closure sources. Comparisons preserve structure and residue maps; edge cases pass. No new nodes, duplicates, cycles, or mathematical faults. Accepted twelve tool uses; detailed checks and isolated-source limitations recorded in review.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-70c1e0148",
+  "group": "Q10",
+  "result": "pass",
+  "note": "Read node, Stacks 0BSL source, all 7 stmt_deps records and their Lean (ResidueField, IsHenselizationAtPrime' (u=v), IsSepClosure, Algebra.Etale, Cocone/IsColimit/IsFiltered, StrictHenselizationPresentationIn, Scheme.strictHenselizationRing), the module and report. Each clause is rendered: finite local étale lifts with residue identification B_e/m_H B_e≃e and ∃! compatible isomorphism; unique local residue-compatible arrows; filtered index; colimit in CommAlgCat H and CommRingCat; local with q onto K, ker q = maximal ideal; A- and H-presentations with residueMap = q (the A-structure fixed by IsScalarTower); ∃! geometric ring iso compatible with A-structure and pointings on every chart, where the chart map is the canonical coprojection composed with the existing colimit iso (isoOfEquivalence refl); finite Galois (Normal) subsystem filtered with the restricted colimit. The κ_A/κ_H/K scalar towers force the residue identification and add no stronger assumption. Edge cases (trivial extension, separably closed κ, imperfect κ via Ω, single universe u) are fine. No hollow definitions, the only proof is sorry, docstrings have source and blueprint, the statement is verbatim, node delta is lean-only, lines ≤98. nt_compile --json: item module 5.4 s, rc=0, no errors or warnings. Second-reading section is the standard post-2026-10-17 note."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.StrictHenselizationFiniteLifts",
+  "declaration": "Algebra.strictHenselization_finite_lifts",
+  "declarations": [
+   "Algebra.finiteResidueLiftIndex",
+   "Algebra.finiteResidueLiftPoint",
+   "Algebra.finiteResidueLiftChart",
+   "Algebra.finiteResidueLiftChartMap",
+   "Algebra.StrictHenselizationFiniteLiftSystem",
+   "Algebra.strictHenselization_finite_lifts"
+  ],
+  "file": "lean/Sheaf/RingTheory/StrictHenselizationFiniteLifts.lean",
+  "statement": "theorem strictHenselization_finite_lifts (A H K : Type u) [CommRing A] [IsLocalRing A] [CommRing H] [HenselianLocalRing H] [Algebra A H] [Algebra (Localization.AtPrime (IsLocalRing.maximalIdeal A)) H] [IsScalarTower A (Localization.AtPrime (IsLocalRing.maximalIdeal A)) H] (hH : IsHenselizationAtPrime' A (IsLocalRing.maximalIdeal A) H) [Field K] [Algebra (IsLocalRing.ResidueField A) K] [IsSepClosure (IsLocalRing.ResidueField A) K] [Algebra (IsLocalRing.ResidueField H) K] [IsSepClosure (IsLocalRing.ResidueField H) K] [Algebra H K] [IsScalarTower H (IsLocalRing.ResidueField H) K] [Algebra A K] [IsScalarTower A (IsLocalRing.ResidueField A) K] [IsScalarTower A H K] : ∃ D : StrictHenselizationFiniteLiftSystem H K, IsFiltered (finiteResidueLiftIndex H K) ∧ ∃ c : Cocone D.diagram, Nonempty (IsColimit c) ∧ Nonempty (IsColimit ((forget₂ (CommAlgCat H) CommRingCat).mapCocone c)) ∧ ∃ (_ : IsLocalRing c.pt) (_ : Algebra A c.pt) (_ : IsScalarTower A H c.pt) (q : c.pt →+* K), Function.Surjective q ∧ RingHom.ker q = IsLocalRing.maximalIdeal c.pt ∧ (∀ e b, q ((c.ι.app e).hom b) = (D.residue e b : K)) ∧ (∃ P : StrictHenselizationPresentationIn.{u, u} A K c.pt, P.residueMap = q) ∧ (∃ P : StrictHenselizationPresentationIn.{u, u} H K c.pt, P.residueMap = q) ∧ IsFiltered (ObjectProperty.FullSubcategory (fun e : finiteResidueLiftIndex H K ↦ Normal (IsLocalRing.ResidueField H) e.val)) ∧ Nonempty (IsColimit (c.whisker (ObjectProperty.ι (fun e : finiteResidueLiftIndex H K ↦ Normal (IsLocalRing.ResidueField H) e.val)))) ∧ ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] [Algebra K Ω], ∃! i : c.pt ≃+* Scheme.strictHenselizationRing (finiteResidueLiftPoint A K Ω), ∀ j : (SmallModel.{u} (Scheme.strictHenselizationNeighbourhoods (finiteResidueLiftPoint A K Ω)))ᵒᵖ, i.toRingHom.comp (algebraMap A c.pt) = ((Scheme.ΓSpecIso (.of A)).inv ≫ (finiteResidueLiftChart (finiteResidueLiftPoint A K Ω) j).obj.fst.hom.appTop ≫ finiteResidueLiftChartMap (finiteResidueLiftPoint A K Ω) j).hom ∧ ((algebraMap K Ω).comp (q.comp i.symm.toRingHom)).comp (finiteResidueLiftChartMap (finiteResidueLiftPoint A K Ω) j).hom = ((finiteResidueLiftChart (finiteResidueLiftPoint A K Ω) j).obj.snd.left.appTop ≫ (Scheme.ΓSpecIso (.of Ω)).hom).hom",
+  "branch": "newtargets-dag",
+  "by": "Q10",
+  "date": "2026-10-18",
+  "existing": false
  }
 }

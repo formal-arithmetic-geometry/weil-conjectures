@@ -10,7 +10,8 @@
   "def-weil-pbc-inverse-image",
   "def-weil-pbc-etale-cohomology",
   "def-weil-pbc-cohomology-pullback",
-  "def-kun-derived-tensor"
+  "def-kun-derived-tensor",
+  "def-wf-ordinary-etale-cup"
  ],
  "source": {
   "document": "literature/stacks-project/sites-cohomology.tex",
@@ -400,5 +401,26 @@
   "group": "Q102",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q102-1413fec3d (reviewer sub-agent of L); spot-checked: I read the whole item: unchanged statement and stmt_deps, eleven steps, no new nodes. I read the statements of all 26 cited nodes and the proof of lem-weil-pbc-ringed-topoi-derived-tensor-pullback. I read the parent lem-wf-curve-trace-cup-naturality (its Steps 5 and 8 apply this item within its hypotheses). I read unit sk-p-real-rankone and the main-20261015 ancestor proof of lem-wf-curve-h1-dual-tate-module (line 14, after (4.2), matches from.place). In Stacks sites-cohomology.tex I read Remark 0B6C (l.4192), section 0FPJ (l.8205), lemma-compose-cup-product (l.8483) and 0H9A (l.8529, proof omitted). The statement is true, uses Ab(T_Et) over Z with Z on the point, and is not a duplicate: the scalar k-linear, fixed-coefficient supported and mixed-support cup nodes are other statements. I tested f=id with p=q=0 (it reduces to the hypothesis), empty X, F=0, disconnected X, geometric-point Y and non-flat F. Every point of the previous return (C4, E5/D5, the three E5 coefficient points, B4, the wrong identity clause) is repaired. Step 1: p_T is a ringed-topos morphism and Rp_* on D+ is the K-injective RGamma. Step 2: from lem-sfb I checked t_C=t_B B(t_A), the counit eps^Y=eps^f B(eps^X_S), and the 2-isomorphism clause for p_Y vs p_X f. Step 3: f_*J is K-injective, so with j=id kappa is the identity and lambda=kappa^{-1}. I recomputed by hand the mates of mu naturality, the Step 5 transpose (counit naturality plus triangle identity), both adjoints of the 0H9A square in Step 6, and the coefficient chain in Step 9; all are correct. Steps 7-8: delta is the truncation to H^0, and H^0(t_B)=q_B by right exactness and exactness of B. t_B is termwise on K-flat models; the node's statement calls it only canonical, but its proof builds it that way, as Stacks 07A4 does, so I accepted it. TeX is clean (the only doubled backslashes are the aligned line breaks), proof_deps equals the union of uses, and no SGA is cited. FIX: Step 3 now says that the unbounded canonical unit eta^f agrees on D+ with eta^D_f of the derived-unit node (both are the class of M->f_*f^{-1}M->f_*J), and Step 3's uses gains lem-weil-pbc-ringed-projection-mate-exact, already in proof_deps. I accept all 16 declared tool_uses as generic ringed-topos and homological tools outside the rank-one route.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-be3fc4d63",
+  "group": "N5",
+  "result": "pass",
+  "note": "Statement matches node clause by clause: f:Y⟶X in Scheme.{u}, six AddCommGrpCat.{u+1} etale sheaves, e/e' on ordinaryEtaleTensor, a/b/c from upperStar, he uses the canonical f⁻¹(F⊗G)→f⁻¹F⊗f⁻¹G comparison (oplax δ of upperStar ⊣ lowerStar conjugated by the canonical pullbackIso and counits) in the right direction, T_a = H.map a ∘ cohomologyMap, all p q : ℕ; no extra hypotheses; both lean.statement fields verbatim; item record changes only lean and stmt_deps. New def-wf-ordinary-etale-cup is real data: integralClassLift = surjInv of the true integralClass_bijective (exact equivalence plus isomorphic generator, so the preimage is unique); the cup is unit diagonal, x̃⊗ỹ, shift iso, lax μ plus moduleCup_singleTensorIso, ẽ[p+q], i.e. the Stacks 0B6C/0FPJ cup; derivedTensor = curriedTensor checked by rfl; the two postponed theorems are named, sorry-proved and stated in the node. Proof-dep modules imported non-publicly; docstrings and blueprint tags present; no pro-etale substitute. nt_compile, separately in dependency order: OrdinaryEtaleCup 49.7 s, Functoriality 4.1 s, no errors. Remarks: the tensor uses the upstream Sheaf(ModuleCat) monoidal structure rather than the SheafOfModules record of def-pur (same notion, as def-kun-derived-tensor requires); OrdinaryEtaleCup compiles close to the 60 s limit."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.OrdinaryEtaleCupFunctoriality",
+  "declaration": "AlgebraicGeometry.Etale.ordinaryEtaleCup_functoriality",
+  "declarations": [
+   "AlgebraicGeometry.Etale.ordinaryEtaleCup_functoriality"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/OrdinaryEtaleCupFunctoriality.lean",
+  "statement": "theorem ordinaryEtaleCup_functoriality {X Y : Scheme.{u}} (f : Y ⟶ X) (F G H : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (F' G' H' : Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1}) (e : ordinaryEtaleTensor X F G ⟶ H) (e' : ordinaryEtaleTensor Y F' G' ⟶ H') (a : (upperStar AddCommGrpCat.{u + 1} f).obj F ⟶ F') (b : (upperStar AddCommGrpCat.{u + 1} f).obj G ⟶ G') (c : (upperStar AddCommGrpCat.{u + 1} f).obj H ⟶ H') (he : (upperStar AddCommGrpCat.{u + 1} f).map e ≫ c = ordinaryEtaleTensorPullback f F G ≫ ordinaryEtaleTensorMap Y a b ≫ e') (p q : ℕ) (x : Sheaf.H F p) (y : Sheaf.H G q) : Sheaf.H.map c (p + q) (cohomologyMap f H (p + q) (ordinaryEtaleCup X e p q x y)) = ordinaryEtaleCup Y e' p q (Sheaf.H.map a p (cohomologyMap f F p x)) (Sheaf.H.map b q (cohomologyMap f G q y))",
+  "branch": "newtargets-dag",
+  "by": "N5",
+  "date": "2026-10-18",
+  "existing": false
  }
 }
