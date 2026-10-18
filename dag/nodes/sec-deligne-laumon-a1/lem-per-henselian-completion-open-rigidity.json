@@ -191,5 +191,23 @@
   "group": "Q27",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q27-fa9f19217 (reviewer sub-agent of L); spot-checked: I read ILO XX §4.4, printed pp.373-374 (CTC, the strictly local case (*), admissible blowups, the limit spectral sequence (**), the reduction via Fujiwara to I-valuative rings, the Krasner Galois isomorphism, and the closing Note). The item statement is unchanged from base and true: CTC plus Gabber's affine proper base change on X and X̂, using Ĉ/IĈ=C/I (Fujiwara 6.6.4). It needs no excellence. I tested Z_(p)^h vs Z_p and the nilpotent-I and I=C edge cases. Step 1 uses exactly 05GG (1)-(2) and the 0ALJ hypothesis, and π^{-1}V(I)=V(IĈ) is elementary. Step 2 uses only the presentation node's statement. Step 3 composes the stalk identification of the valuative-stalks node with the dense-field node, then uses conservativity and H^a(T,-). Step 4's page and filtration comparison is correct, including the degree bounds r>max(a,b+1) and the q=0 case. On the new nodes: in the presentation node I checked directly that the closed fibres agree for non-Noetherian A, i.e. J^nÂ/I^mJ^nÂ=J^n/I^mJ^n once I^k⊂J. In the valuative-stalks node, φ is a non-zero-divisor in the maximal ideal and not in P, so the valuation is nontrivial, and A_t/φ^n=A'_t/φ^n gives density. The dense-field node is the source's Krasner sentence; I tested Q_p^h⊂Q_p and the excluded Q⊂Q_p. None of the three restates the item (no isomorphism asserted in the first two). I found no duplicates (grep for Zariski-Riemann, admissible blowup, Fujiwara, Krasner, valued field, completion comparison; lem-per-completion-supported-constant-comparison is a different statement and needs excellence). No SGA citation, and blueprint fields are correct. Batch-5: both flags cite def-trf-valuation-ring, the general Stacks 00I9 definition whose only deps are the normal-ring and field definitions. It is part of neither assumed statement nor of their proofs, and it is the only general valuation-ring definition node, so I accept both flags. Accepted tool_use: lem-weil-pbc-complete-pair-henselian (generic 0ALJ algebra; advisory: not strictly needed). No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.HenselianCompletionOpenRigidity",
+  "declaration": "AlgebraicGeometry.Etale.bijective_cohomologyMap_henselianCompletion_openComplement",
+  "file": "lean/Sheaf/AlgebraicGeometry/HenselianCompletionOpenRigidity.lean",
+  "statement": "theorem bijective_cohomologyMap_henselianCompletion_openComplement (C : Type u) [CommRing C] [IsNoetherianRing C] (I : Ideal C) [HenselianRing C I] (F : Sheaf (Scheme.Opens.toScheme (X := Spec (CommRingCat.of C)) ⟨(PrimeSpectrum.zeroLocus (I : Set C))ᶜ, (PrimeSpectrum.isClosed_zeroLocus (I : Set C)).isOpen_compl⟩).smallEtaleTopology AddCommGrpCat.{u + 1}) (hF : F.IsTorsion) (q : ℕ) : Function.Bijective (cohomologyMap (pullback.snd (Spec.map (CommRingCat.ofHom (algebraMap C (AdicCompletion I C)))) (Scheme.Opens.ι (X := Spec (CommRingCat.of C)) ⟨(PrimeSpectrum.zeroLocus (I : Set C))ᶜ, (PrimeSpectrum.isClosed_zeroLocus (I : Set C)).isOpen_compl⟩)) F q)",
+  "branch": "newtargets-dag",
+  "by": "Q28",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2ec63d158",
+  "group": "Q28",
+  "result": "pass",
+  "note": "Clause-by-clause match: Noetherian C, HenselianRing C I (pair, no locality), AdicCompletion I C with its canonical algebraMap, U = complement of zeroLocus I as an open subscheme, Û→U = pullback.snd of Spec.map(completion) and Opens.ι (fibre product, not an arbitrary map), F : Sheaf U_et AddCommGrpCat.{u+1} with local-section Sheaf.IsTorsion, q : ℕ, Function.Bijective of the canonical Etale.cohomologyMap (Sheaf.H.mapFunctor along Etale.upperStar; natural by cohomologyMap_map). No extra hypotheses; universes match recorded conventions. Node unchanged from live except the lean field; lean.statement verbatim; docstrings carry source place, blueprint id and the 4 proof steps; no definitions, only sorry. Edge cases (nilpotent I, I=C, q=0, already-complete C) covered and true (Fujiwara-Gabber, ILO XX 4.4). No competing Lean record. nt_compile --json: clean, 2.7 s; a type-error control fails, so the compile is real. Advisory: unused proof-only imports AdicCompletion.LocalRing/Completeness. Second-reading section is the 2026-10-17 placeholder."
  }
 }

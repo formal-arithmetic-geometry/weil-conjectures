@@ -10,7 +10,8 @@
  "stmt_deps": [
   "def-trf-fs-log-blowup",
   "def-weil-geometric-point",
-  "def-weil-etale-morphism"
+  "def-weil-etale-morphism",
+  "def-per-fs-log-group-action"
  ],
  "proof": [
   {
@@ -164,5 +165,28 @@
   "group": "Q131",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q131-ee62622dd (reviewer sub-agent of L); spot-checked: I read the item, the new node lem-per-tame-unit-extension-character, every cited statement and ILO VI 3.1–3.7 (pp. 73–76). The item statement is unchanged from Q109 and is equivalent to VI 3.5(a); ILO's exponent of |H| is replaced by |H|. The new node is true: the cocycle reduces to a hom H→Hom(L,μ_n(k)); this lifts uniquely to H-fixed μ_n(A) by Hensel; the remaining part with values in 1+m is a coboundary because 1+m is uniquely n-divisible, so H^1=0. Small cases tested: trivial H, t↦−t on C[[t]], L=0. It is not a duplicate of lem-per-equivariant-log-smooth-chart, very-tame-local-kummer-quotient, divisible-unit-lattice-extension or trf-log-regular-sharp-chart, and it does not restate a clause of the item. Steps 1 and 4 are correct; Φ_n(ζ)=0 follows from the unit property of ζ^k−1. Fixed: (1) Step 2 now cites lemma-weil-pbc-affine-neighbourhood-cofinal and lem-weil-pbc-strict-henselization-local-structure for O_X,x̄ being strictly henselian, and justifies the residue-identity action, n being a unit and s0(Q)⊂M. (2) Step 3 now checks the stalk-chart-spreading hypothesis: E={0} and Q⊕A^×≅M_x̄. The two off-route trf tools, face-sharpening and stalk-chart-spreading, are declared in split_report.tool_uses. (3) In the new node, the theorem stmt_dep lem-trf-fs-face-sharpening is dropped and sharp is defined inline; blueprint.from.via now has the full chain. Batch-5 flags: the closures of def-trf-fs-log-blowup, lem-trf-fs-face-sharpening and lem-trf-fine-log-stalk-chart-spreading contain no thm, sk, nt or poincare-duality node. They are generic monoid and log tools, not steps of the trace formula or Poincare duality, so I accepted them. No SGA citation.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.VeryTameEquivariantSharpChart",
+  "declaration": "AlgebraicGeometry.exists_equivariant_sharp_chart",
+  "declarations": [
+   "AlgebraicGeometry.SharpChartCyclotomicRing",
+   "AlgebraicGeometry.EquivariantSharpChart",
+   "AlgebraicGeometry.exists_equivariant_sharp_chart"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/VeryTameEquivariantSharpChart.lean",
+  "statement": "theorem exists_equivariant_sharp_chart (X : FineSaturatedLogScheme.{u}) (G : Type v) [Group G] [Finite G] (a : FSLogGroupAction G X) {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (t : Spec (.of Ω) ⟶ X.scheme) (H : Subgroup G) (hH : ∀ g : G, g ∈ H ↔ t ≫ (a.baseAction g).hom = t) (htame : IsUnit (Nat.card H : Ω)) (hcharacteristic : ∀ (h : H) (U V : X.scheme.Etale) (p : (Scheme.pointSmallEtale t).fiber.obj U) (q : (Scheme.pointSmallEtale t).fiber.obj V) (k : V.left ⟶ U.left) (hk : k ≫ U.hom = V.hom ≫ (a.logMap h.val).base), q.left ≫ k = p.left → ∀ s : X.logStructure.monoidSheaf.obj.obj (op U), Associates.mk (X.logStructure.toEtalePrelogStructure.germ t V q ((a.logMap h.val).sectionMap U V k hk s)) = Associates.mk (X.logStructure.toEtalePrelogStructure.germ t U p s)) : Nonempty (EquivariantSharpChart X a H t) ∧ ∀ (h : H) (U V : X.scheme.Etale) (p : (Scheme.pointSmallEtale t).fiber.obj U) (q : (Scheme.pointSmallEtale t).fiber.obj V) (k : V.left ⟶ U.left) (_hk : k ≫ U.hom = V.hom ≫ (a.logMap h.val).base), q.left ≫ k = p.left → ∀ r : Γ(U.left, ⊤), (strictLocalGerm X.scheme t U p r) ^ Nat.card H = 1 → strictLocalGerm X.scheme t V q (k.appTop r) = strictLocalGerm X.scheme t U p r",
+  "branch": "newtargets-dag",
+  "by": "Q77",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-92874b0d2",
+  "group": "Q77",
+  "result": "pass",
+  "note": "Read node, ILO VI 3.1/3.4/3.5(a)/3.7(a) pp.73-75, deps FineSaturatedLogBlowup and FSLogGroupAction (live, unchanged). Node changes only lean plus landed stmt_dep def-per-fs-log-group-action (no cycle); statement verbatim. All hypotheses match: hH is the full geometric stabilizer, the unit premise in Omega is equivalent to the residue-field one, hcharacteristic is the stalk action on Associates over pointed diagrams (well posed, independent of k, not vacuous). Every conclusion clause is pinned: W/action/point_fixed/action_over, IsChart plus characteristic identity, fs/sharp, chi on H_ab tensor Q^gp into mu_n(A), eigenvector as log-section equality with the unit pinned by alpha, roots fixed, Lambda = Z[zeta_n,1/n] coefficient with character_germ, modelAction pinned on monomials, toModel pinned to the Gamma-Spec adjunct, equivariance consistent with the reversed pullback order. Edge cases (H or Q trivial, char 0, nonabelian G, empty X, universes) OK. No duplicate. sorry only, docstrings and imports correct. nt_compile --json clean 14.3 s. Advisory: sharp holds automatically for Associates; toModel_eq writes out the downstream chartSchemeMap formula."
  }
 }

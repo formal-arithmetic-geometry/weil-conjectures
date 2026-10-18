@@ -253,5 +253,28 @@
   "group": "N0",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N0-0c92826b5 (reviewer sub-agent of L); spot-checked: PASS; review.md is written and no fixes were needed. The item statement is unchanged and matches ILO V Thm 1.2.4 (p.64): a Noetherian henselian pair, finite algebras étale away from V(I), and an equivalence with finite B̂-algebras. Each new node matches its exact source. (1) lem-per-affine-proper-finite is Stacks 01WN and an exact Mathlib leaf, IsFinite.iff_isProper_and_isAffineHom at Proper.lean:98. The existing nodes give only finite ⇒ proper or a field base. (2) completed-etale-jacobian-torsion combines 0AJP, 0ALQ(1), 0AJU(3) and 00MA(3). (3) rig-etale-jacobian-algebraization is 0AKG(8) with 0AJU(3); A is not assumed complete, as in the source. (4) etale-away-completion-hom-lifting is 0AKJ with the henselization C^h equal to C. (5) henselian-pair-proper-clopen-lift is 0CT9 verbatim. No DAG or blueprint node states any of them; I swept the tags, Elkik, rig-étale and the conormal-torsion and sbc completion nodes. Small cases (I=0, E=A/I, Y=∅, x²=t versus x²=1+t over k[t]_(t)^h) are all consistent. Steps: (1) base change plus the natural c_C, which is multiplicative. (2) C₂ is Noetherian, integral, hence henselian, so the hom-lifting node applies and the functor is fully faithful. (3) B̂/I^n = B/I^n, so the completed presentation over B̂ is literally the same one over B. (4) Algebraization gives D of finite type, and module-completion gives D/ID ≅ E/IE, finite over B/I. (5) The 0CT9 lift of the whole finite closed fibre, then closed-embedding-affine and the 01WN leaf, make W = Spec C finite and étale over U. (6) Since W contains V(ID), D/I^n ≅ C/I^n, which gives essential surjectivity. No hypothesis is missing and nothing comes from SGA. I accept the generic off-unit tool_uses (sk-thm-p1 commutative-algebra and scheme tools, plus lem-trf-closed-embedding-affine)."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.ElkikFiniteEtaleAwayCompletion",
+  "declaration": "CommRingCat.elkik_finiteEtaleAway_completion",
+  "declarations": [
+   "CommRingCat.finiteEtaleAwayProperty",
+   "CommRingCat.elkik_finiteEtaleAway_completion"
+  ],
+  "file": "lean/Sheaf/RingTheory/ElkikFiniteEtaleAwayCompletion.lean",
+  "statement": "theorem elkik_finiteEtaleAway_completion (B : CommRingCat.{u}) [IsNoetherianRing B] (I : Ideal B) [HenselianRing B I] : ∃ h : ∀ C : (finiteEtaleAwayProperty B I).FullSubcategory, finiteEtaleAwayProperty (.of (AdicCompletion I B)) (I.map (algebraMap B (AdicCompletion I B))) ((tensorProd B (.of (AdicCompletion I B))).obj C.obj), ((finiteEtaleAwayProperty (.of (AdicCompletion I B)) (I.map (algebraMap B (AdicCompletion I B)))).lift ((finiteEtaleAwayProperty B I).ι ⋙ tensorProd B (.of (AdicCompletion I B))) h).IsEquivalence ∧ ∀ E : (finiteEtaleAwayProperty (.of (AdicCompletion I B)) (I.map (algebraMap B (AdicCompletion I B)))).FullSubcategory, ∃ C : (finiteEtaleAwayProperty B I).FullSubcategory, Nonempty ((tensorProd B (.of (AdicCompletion I B))).obj C.obj ≅ E.obj)",
+  "branch": "newtargets-dag",
+  "by": "N6",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "The canonical CommRingCat.tensorProd functor is restricted using ObjectProperty.lift. Its landing proof is existentially asserted in the conclusion, so no well-definedness hypothesis is added. Under B has exactly the B-algebra homomorphisms."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c7432e7f5",
+  "group": "N6",
+  "result": "pass",
+  "note": "Statement matches node and ILO V Thm 1.2.4 (p.64): Noetherian [HenselianRing B I], AdicCompletion with canonical algebra, Under-B full subcategories of Module.Finite algebras étale (morphismRestrict) over the complement of zeroLocus I and of I·B̂, Mathlib CommRingCat.tensorProd lifted via ObjectProperty.lift with landing proof stated existentially, IsEquivalence plus ∀E ∃C iso clause; no extra hypotheses or universe restriction. Edge cases I=0, nilpotent I, zero ring, I=⊤ (via jac), ramified on V(I) ok. finiteEtaleAwayProperty is a real predicate, no duplicate in DAG/Sheaf/Mathlib. Only the item's lean field changed, statement verbatim, proof-dep plain imports per rule 7, docstrings with source and blueprint, sorry-only. nt_compile --json clean in 3.6 s, exit 0."
  }
 }

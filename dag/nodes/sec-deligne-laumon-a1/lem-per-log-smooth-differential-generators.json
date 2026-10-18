@@ -10,7 +10,8 @@
  "stmt_deps": [
   "def-trf-fs-log-blowup",
   "def-per-fs-log-smooth-etale",
-  "def-weil-pbc-geometric-stalks"
+  "def-weil-pbc-geometric-stalks",
+  "def-per-log-differential-stalk"
  ],
  "proof": [
   {
@@ -212,5 +213,27 @@
   "group": "Q02",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q02-ea94560ad (reviewer sub-agent of L); spot-checked: I read the item, the new node and all 11 cited statements in full, and checked them against the sources. Sources: ILO XVI Prop 3.6.3 proof and Lemma 3.6.4, pp.252-253, and ILO X Prop 1.2 proof, pp.136-137 (the surjection (1), the cokernel killed by m invertible, and O^* m-divisible). The item statement and stmt_deps are byte-identical to the version Q50 created. Its cokernel is read modulo units; the printed version into the full M^gp is false (identity of Spec k-bar with trivial logs). Steps: (1) The geometric stalk equals the affine strict-henselization colimit (cofinality lemma plus the def's independence of the representative subcategory), and the local-structure node makes it strictly henselian; only separable closedness of k is used. (2) A chart P gives F=beta^{-1}(A^x), a face; the pushout gives C=P^gp/F^gp, which face-sharpening makes free of finite rank. (3) da=(a+eps)dlog(a+eps), so the dlog m span omega. omega is finite free by the new node, and the selected-basis lemma at the maximal ideal (h a unit) picks a dlog basis. (4) The residue map k⊗omega -> k⊗D: I checked every relation (alpha(m) in the maximal ideal or m a unit; f^flat(b) lies in im Q^gp via the chart), it is surjective, so k⊗H=0. (5) By the structure theorem H has no free part and no char-k primary part, so n=|H| kills H and is invertible in A. (6) T^n-u is separable, has a root in k, and root-lifting gives n-divisibility of the units. Small cases tested: identity with trivial logs, log point, tame Kummer map (n=e), wild map excluded. New node local-freeness: this is Kato 3.10 at the stalk, and it is true for the chart-sense definition (O⊗C_i is free when the torsion order is invertible, and smooth c_i gives a split extension). It is strictly weaker than the item, so neither a restated clause nor circular, and it is self-contained with three kinds of search. No duplicate found in the DAG or the blueprint. The 5 declared tool uses are accepted as generic local-algebra and monoid tools. Batch-5 flags, checked by computing each closure directly: lem-trf-fs-face-sharpening reaches only face-localization, fg-torsion-free-free and two trf definitions; def-trf-fs-log-blowup is a general definition reaching only def-trf-log-regular-pair; def-per-fs-log-smooth-etale reaches only those definitions. None is a step of the trace formula or Poincare duality proofs, so all are accepted. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.LogSmoothDifferentialGenerators",
+  "declaration": "AlgebraicGeometry.EtaleLogHom.exists_logDifferential_generators",
+  "declarations": [
+   "AlgebraicGeometry.EtaleLogStructure.characteristicClass",
+   "AlgebraicGeometry.EtaleLogHom.differentialGeneratorImage"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/LogSmoothDifferentialGenerators.lean",
+  "statement": "theorem EtaleLogHom.exists_logDifferential_generators {X Y : FineSaturatedLogScheme.{u}} (f : EtaleLogHom X Y) (hf : f.IsLogSmooth) {Q : Type u} [CommMonoid Q] (hQ : IsFineSaturatedMonoid Q) [IsMulTorsionFree (Algebra.GrothendieckGroup Q)] (β : Q →* Y.logStructure.monoidSheaf.obj.obj (op (Scheme.Etale.mk (𝟙 Y.scheme)))) (hβ : Y.logStructure.IsChart (Scheme.Etale.mk (𝟙 Y.scheme)) β) {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (t : Spec (.of Ω) ⟶ X.scheme) : Group.FG (Algebra.GrothendieckGroup (X.logStructure.characteristic t)) ∧ IsMulTorsionFree (Algebra.GrothendieckGroup (X.logStructure.characteristic t)) ∧ ∃ (r : ℕ) (ts : Fin r → X.logStructure.stalk t) (n : ℕ), 1 ≤ n ∧ IsUnit (n : strictLocalRing X.scheme t) ∧ (∃ b : Module.Basis (Fin r) (strictLocalRing X.scheme t) (f.LogDifferential t), ∀ i, b i = f.logDLog t (ts i)) ∧ Finite (Algebra.GrothendieckGroup (X.logStructure.characteristic t) ⧸ f.differentialGeneratorImage t β ts) ∧ (∀ c : Algebra.GrothendieckGroup (X.logStructure.characteristic t) ⧸ f.differentialGeneratorImage t β ts, c ^ n = 1) ∧ ∀ a : (strictLocalRing X.scheme t)ˣ, ∃ b : (strictLocalRing X.scheme t)ˣ, b ^ n = a",
+  "branch": "newtargets-dag",
+  "by": "Q20",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-03d7173e1",
+  "group": "Q20",
+  "result": "pass",
+  "note": "Every clause of exists_logDifferential_generators matches the node, quantifier order included: FG and torsion-free C = GrothendieckGroup(Associates M_x̄) = M^gp/A^×; dlog basis from actual monoid elements; finite cokernel of the closure of [t_i] and the canonical baseChartGerm image, killed by n; 1≤n, IsUnit n; unit n-divisibility. New def node def-per-log-differential-stalk is a genuine free-module quotient with all parent relations; base relations over relative étale neighbourhoods equal killing the O_Y and N stalks. No duplicate in Mathlib, side lean, slopmaster2 or runs/2. Item node changed only in lean and the added stmt_dep. No theorem stmt_deps, docstrings and proof steps present, statement verbatim. Edge cases r=0, n=1, empty X, trivial logs fine; Q:Type u harmless since fs Q is f.g. nt_compile --json on both modules: exit 0, 3.7 s and 3.6 s, clean. Advisory only: strictLocalRing used for A instead of the geometric-stalks decl, unused proof-dep imports."
  }
 }
