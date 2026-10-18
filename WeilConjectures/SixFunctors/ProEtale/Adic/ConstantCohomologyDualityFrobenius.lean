@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.Algebra.Module.PadicTorsionLinear
+public import WeilConjectures.SixFunctors.ProEtale.Adic.AdicConstantHPullback
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ConstantCohomologyDuality
 public import WeilConjectures.SixFunctors.ProEtale.Adic.FiniteAdicFrobenius
 
@@ -129,5 +130,35 @@ theorem exists_isPerfPair_adicConstantH_of_unitPairing [ConnectedSpace S] (e : S
       AddMonoidHom.coe_comp, Function.comp_apply, AddEquiv.coe_toAddMonoidHom, hsymm]
     rw [hPF, map_nsmul]
     exact (Nat.cast_smul_eq_nsmul ℤ_[l] c _).symm
+
+/-- **Frobenius-equivariant duality for `ℚ̄_ℓ`-cohomology from finite-level étale dualities.**
+Let `S` be connected, quasi-compact and quasi-separated with finite cohomology groups
+`Hᵏ(S, ℤ/ℓᵐ)`, and `e : S ≅ S`. If for every `m` there is a biadditive pairing
+`Hom(Λ_S, Λ_S[i]) × Hom(Λ_S, Λ_S[j]) ⟶ Λ`, `Λ = ℤ/ℓᵐ`, nondegenerate on both sides, which is a
+`c`-similitude for the Frobenius operators of the canonical Weil datum of `Λ_S`, then there is a
+perfect pairing `Hⁱ(S, ℚ̄_ℓ) × Hʲ(S, ℚ̄_ℓ) ⟶ ℚ̄_ℓ` which is a `c`-similitude for the pullbacks
+`e^*` (`AlgebraicGeometry.ProEtale.adicConstantHPullback`). -/
+theorem exists_isPerfPair_adicConstantH_adicConstantHPullback [ConnectedSpace S] (e : S ≅ S)
+    (hfin : ∀ m k, Finite (FiniteAdicH S l m k)) (i j c : ℕ)
+    (P : ∀ m : ℕ,
+      (𝟙_ (Etale.DerivedCategoryModule (ULift.{u + 1} (ZMod (l ^ m))) S) ⟶
+        (𝟙_ (Etale.DerivedCategoryModule (ULift.{u + 1} (ZMod (l ^ m))) S))⟦(i : ℤ)⟧) →+
+      (𝟙_ (Etale.DerivedCategoryModule (ULift.{u + 1} (ZMod (l ^ m))) S) ⟶
+        (𝟙_ (Etale.DerivedCategoryModule (ULift.{u + 1} (ZMod (l ^ m))) S))⟦(j : ℤ)⟧) →+
+      ULift.{u + 1} (ZMod (l ^ m)))
+    (hPl : ∀ m x, (∀ y, P m x y = 0) → x = 0) (hPr : ∀ m y, (∀ x, P m x y = 0) → y = 0)
+    (hPF : ∀ m x y, P m
+      (Etale.frobeniusOperator e.hom
+        (Etale.shiftWeilDatum e.hom (Etale.leftDerivedUpperStarUnitIso _ e.hom).hom i) x)
+      (Etale.frobeniusOperator e.hom
+        (Etale.shiftWeilDatum e.hom (Etale.leftDerivedUpperStarUnitIso _ e.hom).hom j) y) =
+        c • P m x y) :
+    ∃ P' : AdicConstantH l S i →ₗ[PadicAlgCl l] AdicConstantH l S j →ₗ[PadicAlgCl l]
+        PadicAlgCl l,
+      P'.IsPerfPair ∧ ∀ x y, P' (adicConstantHPullback l e i x) (adicConstantHPullback l e j y) =
+        algebraMap ℤ_[l] (PadicAlgCl l) c * P' x y :=
+  exists_isPerfPair_adicConstantH_of_unitPairing l S e hfin i j c P hPl hPr hPF _ _
+    (adicConstantHPullback_integralToAdicConstantH l e i)
+    (adicConstantHPullback_integralToAdicConstantH l e j)
 
 end AlgebraicGeometry.ProEtale

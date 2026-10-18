@@ -93,4 +93,67 @@ theorem frobeniusOperator_lowerStarWeilDatum_homEquiv (sq : CommSq g a a h)
       CategoryTheory.Functor.map_id, Category.id_comp]
   rw [Functor.map_comp, Category.assoc, reassoc_of% hK']
 
+/-- The inverse of an isomorphism of Weil objects is a morphism of Weil objects. -/
+lemma IsWeilMorphism.of_iso_inv {N P : DerivedCategoryModule Λ Y}
+    {ψN : (L((h)^*[ModuleCat.{u + 1} Λ])).obj N ⟶ N}
+    {ψP : (L((h)^*[ModuleCat.{u + 1} Λ])).obj P ⟶ P} (e : N ≅ P)
+    (he : IsWeilMorphism h ψP ψN e.inv) : IsWeilMorphism h ψN ψP e.hom := by
+  unfold IsWeilMorphism at *
+  rw [← cancel_mono e.inv, Category.assoc, ← he, ← Functor.map_comp_assoc, e.hom_inv_id,
+    CategoryTheory.Functor.map_id, Category.id_comp, Category.assoc, e.hom_inv_id,
+    Category.comp_id]
+
+/-- The shift compatibility `(Ra_* K)[n] ≅ Ra_*(K[n])` is a morphism of Weil objects, for the
+data `(Ra_* φ)[n]` and `Ra_*(φ[n])`: the exchange map `Ex_*` commutes with the shifts. -/
+lemma isWeilMorphism_rightDerivedLowerStar_commShiftIso_inv (sq : CommSq g a a h)
+    {K : DerivedCategoryModule Λ X} (φ : (L((g)^*[ModuleCat.{u + 1} Λ])).obj K ⟶ K) (n : ℤ) :
+    IsWeilMorphism h (shiftWeilDatum h (lowerStarWeilDatum sq φ) n)
+      (lowerStarWeilDatum sq (shiftWeilDatum g φ n))
+      (((R((a)_*[ModuleCat.{u + 1} Λ])).commShiftIso n).inv.app K) := by
+  have hEx := NatTrans.shift_app_comm (derivedBaseChangeMap (ModuleCat.{u + 1} Λ) sq) n K
+  simp only [Functor.comp_obj, Functor.commShiftIso_comp_hom_app, Category.assoc] at hEx
+  have h' := ((R((a)_*[ModuleCat.{u + 1} Λ])).commShiftIso n).inv.naturality φ
+  dsimp at h'
+  unfold IsWeilMorphism shiftWeilDatum lowerStarWeilDatum
+  rw [← cancel_epi ((L((h)^*[ModuleCat.{u + 1} Λ])).map
+    (((R((a)_*[ModuleCat.{u + 1} Λ])).commShiftIso n).hom.app K))]
+  rw [← Functor.map_comp_assoc, Iso.hom_inv_id_app, CategoryTheory.Functor.map_id,
+    Category.id_comp]
+  simp only [Functor.map_comp, Category.assoc]
+  rw [reassoc_of% hEx, h', Iso.hom_inv_id_app_assoc]
+
+variable (Λ) in
+/-- `Hⁿ(X, Λ) = Hom(Λ_X, Λ_X[n]) ≅ Hom(Λ_Y, (Ra_* Λ_X)[n])`, through the adjunction
+`La^* ⊣ Ra_*` and `La^* Λ_Y ≅ Λ_X`. -/
+noncomputable def unitShiftAddEquivLowerStar (a : X ⟶ Y) (n : ℤ) :
+    (𝟙_ (DerivedCategoryModule Λ X) ⟶ (𝟙_ (DerivedCategoryModule Λ X))⟦n⟧) ≃+
+      (𝟙_ (DerivedCategoryModule Λ Y) ⟶
+        ((R((a)_*[ModuleCat.{u + 1} Λ])).obj (𝟙_ (DerivedCategoryModule Λ X)))⟦n⟧) where
+  toFun x := (derivedUpperStarLowerStarAdjunction _ a).homEquiv _ _
+      ((leftDerivedUpperStarUnitIso _ a).hom ≫ x) ≫
+    ((R((a)_*[ModuleCat.{u + 1} Λ])).commShiftIso n).hom.app _
+  invFun z := (leftDerivedUpperStarUnitIso _ a).inv ≫
+    ((derivedUpperStarLowerStarAdjunction _ a).homEquiv _ _).symm
+      (z ≫ ((R((a)_*[ModuleCat.{u + 1} Λ])).commShiftIso n).inv.app _)
+  left_inv x := by simp
+  right_inv z := by simp
+  map_add' x x' := by
+    simp [Adjunction.homEquiv_unit, Preadditive.comp_add, Preadditive.add_comp]
+
+/-- **Frobenius operators on `Hⁿ(X, Λ)` and on `Hⁿ(Y, Ra_* Λ)`.** For a commutative square
+`g ≫ a = a ≫ h`, the identification `Hom(Λ_X, Λ_X[n]) ≅ Hom(Λ_Y, (Ra_* Λ_X)[n])` intertwines the
+Frobenius operators of the canonical Weil data, `Ra_*` carrying the induced datum. -/
+theorem frobeniusOperator_unitShiftAddEquivLowerStar (sq : CommSq g a a h) (n : ℤ)
+    (x : 𝟙_ (DerivedCategoryModule Λ X) ⟶ (𝟙_ (DerivedCategoryModule Λ X))⟦n⟧) :
+    frobeniusOperator h (shiftWeilDatum h
+        (lowerStarWeilDatum sq (leftDerivedUpperStarUnitIso _ g).hom) n)
+      (unitShiftAddEquivLowerStar Λ a n x) =
+      unitShiftAddEquivLowerStar Λ a n (frobeniusOperator g
+        (shiftWeilDatum g (leftDerivedUpperStarUnitIso _ g).hom n) x) := by
+  have hc := IsWeilMorphism.of_iso_inv (((R((a)_*[ModuleCat.{u + 1} Λ])).commShiftIso n).app _)
+    (isWeilMorphism_rightDerivedLowerStar_commShiftIso_inv sq
+      (leftDerivedUpperStarUnitIso _ g).hom n)
+  exact (hc.frobeniusOperator_comp _).trans
+    (congrArg (· ≫ _) (frobeniusOperator_lowerStarWeilDatum_homEquiv sq _ x))
+
 end AlgebraicGeometry.Etale
