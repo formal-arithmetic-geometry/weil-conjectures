@@ -42,130 +42,50 @@
  ],
  "proof": [
   {
-   "text": "Set $T=\\operatorname{Spec}K$, $E=A\\times_ST$, $Y=B\\times_ST$, $p=h\\times_ST:Y\\to E$, and $a:E\\to T$. Choose an affine open chart of $S$ containing $\\bar s$; $t$ factors through it because it factors through the local scheme $A$ and any open containing its closed point contains all its points. In the strict-local limit one can restrict to pointed affine neighbourhoods mapping into this chart: pull back any neighbourhood along the chart and choose an affine open containing its distinguished point. By the defining ring colimit for $A$ and the universal properties of tensor products and colimits, $E=\\operatorname{Spec}C$ with $C=\\varinjlim_i C_i$, where $C_i$ are etale $K$-algebras obtained by base change of these affine etale neighbourhoods. Concretely, a compatible family of maps from their tensors to a $K$-algebra is exactly a compatible family of maps from the original coordinate rings agreeing on the chart ring. Etale base change and the finite-separable-product theorem, followed by triviality of finite separable extensions of $K$, give $C_i\\cong K^{I_i}$ for finite sets $I_i$. The limit interpretation is justified by the small-colimit spectrum theorem. These decompositions are as $K$-algebras, NOT as $A$-algebras; no claim that different $v$ give the same $A$-fibre is made.",
+   "text": "Global sections on E=A\\times_S Spec K is exact and conservative by the strict-local base sections theorem.",
    "uses": [
-    "def-weil-pbc-strict-henselization-limit",
-    "lem-weil-pbc-etale-ring-base-change",
-    "lem-weil-pbc-etale-algebra-over-field-product",
-    "lem-pc-sepclosed-finite-sep-trivial",
-    "lem-weil-pbc-spec-small-colimit-limit",
-    "lem-weil-pbc-strict-henselization-functoriality"
+    "lem-weil-pbc-strict-local-base-sections"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0EZV, first paragraph; Algebra Tag 00U3; Limits Tag 01YW"
+    "place": "Steps 1--4 of the corrected Tag 0EZV proof"
    }
   },
   {
-   "text": "For every prime $z$ of $C$, its pullback to each finite product $K^{I_i}$ selects a unique factor, by the finite-product spectrum statement. If $c\\in C$ is represented by $(\\lambda_j)_j\\in K^{I_i}$ and the selected factor is $j_0$, the corresponding idempotent $e_{j_0}$ is outside $z$ and kills $c-\\lambda_{j_0}$. Consequently every element of $C_z$ is a scalar in $K$: denominators outside $z$ have nonzero selected scalar and can be inverted in $K$. The structural map $K\\to C_z$ is injective since it is a map from a field to a nonzero local ring. Thus $C_z\\cong K$, compatibly with the structural maps. Every prime is therefore maximal, and the zero-dimensional spectrum theorem makes $|E|$ profinite. Points of $E$ are exactly $K$-morphisms $T\\to E$, equivalently lifts $v:T\\to A$ of $t$, since each residue field is canonically $K$. The given $u$ supplies one such point, so $E$ is nonempty. Finite stages can have unused factors; no surjectivity of their transition maps is assumed.",
+   "text": "Use the inverse-image composition isomorphism to remove the coefficient transport in cohomologyPullbackOver. Its H^q map is bijective because it is the image of an isomorphism. The remaining comparison is cohomologyMap p (a^{-1}F) q. Apply the exact conservative sections criterion to identify its bijectivity with invertibility of the homology-sheaf map of the derived unit.",
    "uses": [
-    "lem-weil-pbc-spec-finite-product-fields",
-    "lem-weil-pbc-zero-dimensional-spectrum-profinite",
-    "def-pc-fibre-product"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0EZV, finite-product presentation; Algebra Tags 00ED and 04MG"
-   }
-  },
-  {
-   "text": "For each $z\\in E$, choose a geometric point $\\bar z:\\operatorname{Spec}\\Omega\\to E$ over $z$. Step 2 gives $C_z=K$ and a profinite underlying space; [lem-weil-pbc-profinite-clopen-basis] supplies its clopen basis. Apply [lem-weil-pbc-clopen-etale-neighbourhood-cofinality] to obtain, for every choice of algebraically closed $\\Omega$ and embedding $K\\to\\Omega$, a cofinal system of clopen pointed neighbourhoods and the equalization property. Then [lem-weil-pbc-clopen-stalk-global-sections-detection] identifies every geometric stalk of an abelian sheaf on $E$ with its clopen-section colimit and shows that a zero global section group has zero geometric stalks; applying [lemma-weil-pbc-geometric-stalk-conservative] gives the corresponding zero-sheaf conclusion. The same clopen-section statement for $T=\\operatorname{Spec}K$ identifies $F(T)$ canonically with $F_{\\bar t}$ for every geometric point $\\bar t$.",
-   "uses": [
-    "lem-weil-pbc-profinite-clopen-basis",
-    "lem-weil-pbc-clopen-etale-neighbourhood-cofinality",
-    "lem-weil-pbc-clopen-stalk-global-sections-detection",
-    "lemma-weil-pbc-geometric-stalk-conservative"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tags 09AY and 03PN; corrected Tag 0EZV proof after the finite-product presentation, clopen cofinality and stalk detection paragraphs"
-   }
-  },
-  {
-   "text": "Every point of the affine scheme $E$ is closed and every residue field is the separably closed field $K$, by step 2. Apply the affine closed-point acyclicity theorem to EVERY abelian sheaf on $E$: all positive right derived functors of $\\Gamma(E,-)$ vanish. The category of abelian etale sheaves has enough injectives by [lem-weil-pbc-module-sheaves-enough-injectives]; global sections is additive and left exact since evaluation preserves kernels. Apply [lem-weil-pbc-derived-functor-long-exact] to a short exact sequence: its segment $\\Gamma(E,G_1)\\to\\Gamma(E,G_2)\\to\\Gamma(E,G_3)\\to H^1(E,G_1)=0$ therefore says $\\Gamma(E,-)$ is exact. Combined with the zero-detection argument of step 3, it reflects isomorphisms: a sheaf morphism has invertible global sections precisely when its kernel and cokernel have zero global sections, precisely when both vanish. The same acyclicity theorem applies to $T$, so $H^q(T,F)=0$ for $q>0$.",
-   "uses": [
-    "lem-cbc-affine-sepclosed-etale-acyclic",
-    "lem-weil-pbc-derived-functor-long-exact",
-    "lem-weil-pbc-module-sheaves-enough-injectives"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 09AY, lemma-affine-only-closed-points; derived.tex Tag 015B, lemma-higher-derived-functors (1),(2); injectives.tex Tag 01DU, theorem-sheaves-modules-injectives"
-   }
-  },
-  {
-   "text": "Put $G=a^{-1}F$. The map $p$ is affine: both $E$ and $Y$ are affine schemes, and $p$ is induced by their coordinate-ring homomorphism. Hence it is quasi-compact and quasi-separated. The canonical Leray comparison for $p$, with the explicit derived-unit description of cohomology pullback, identifies $H^q(Y,p^{-1}G)$ with $\\Gamma(E,R^qp_*p^{-1}G)$, because exactness of $\\Gamma(E,-)$ lets it commute with kernels, images and cokernels of a representing complex. For $q=0$ the first comparison in the statement is $\\Gamma(E,\\eta)$ for the unit $\\eta:G\\to p_*p^{-1}G$. It is invertible iff $\\eta$ is an isomorphism by step 4. For $q>0$ its source vanishes and it is invertible iff $\\Gamma(E,R^qp_*p^{-1}G)=0$, iff $R^qp_*p^{-1}G=0$. Composition of inverse images identifies $p^{-1}G$ with the coefficient sheaf pulled back from $T$ to $Y$. Thus we have reduced the first comparison to a sheaf isomorphism in degree zero or a sheaf vanishing in positive degree, without any torsion assumption.",
-   "uses": [
-    "lem-weil-pbc-affine-morphism-permanence",
-    "lem-weil-pbc-cohomology-pullback-derived-unit",
+    "lem-weil-pbc-cohomology-pullback-exact-conservative",
     "lem-weil-pbc-inverse-image-composition"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 03Q9, injective-complex paragraph; derived-unit Leray description"
+    "place": "Step 5 of the corrected Tag 0EZV proof"
    }
   },
   {
-   "text": "Fix $z\\in E$, equivalently a lift $v:T\\to A$, and a geometric point $\\bar z:\\operatorname{Spec}\\Omega\\to E$ over it as in step 3. Cofinality of the clopen neighbourhoods from step 3 identifies the strict localization of $E$ at $\\bar z$ with $\\operatorname{Spec}C_z=T$: the clopen-idempotent theorem writes each affine clopen as $D(e)=\\operatorname{Spec}C_e$. The ring colimit of these $C_e$ is the ordinary localization $C_z$: its natural map to $C_z$ is surjective since every fraction $c/s$ is defined on a clopen inside $D(s)$, and is injective since a section zero in $C_z$ is annihilated by some element outside $z$ and becomes zero on a smaller clopen inside its basic open. Thus the ring colimit over pointed etale neighbourhoods is $C_z$, since every denominator outside $z$ is inverted on a clopen neighbourhood contained in its basic open, and step 2 identifies that localization with $K$. The unrestricted strict-henselization stalk theorem applies to the affine, hence qcqs, morphism $p$ and the abelian sheaf $p^{-1}G$. It gives $(R^qp_*p^{-1}G)_{\\bar z}\\cong H^q(Y\\times_E T,F)$. Fibre-product associativity, checked by their projections, identifies $Y\\times_E T$ with $B\\times_{A,v}T$. By the inverse-image stalk-and-germ theorem for $a:E\\to T$, the source stalk $G_{\\bar z}$ is $F_{a\\bar z}$; step 3 on $T$ identifies this canonically with $F(T)=H^0(T,F)$. For $q=0$ the stalk of $\\eta$ is the section-pullback unit $H^0(T,F)\\to H^0(B\\times_{A,v}T,F)$: a clopen representative of a germ restricts along the section in step 3, and its unit image restricts along the base-changed section, giving exactly the fibre pullback. For $q>0$, $H^q(T,F)=0$ by step 4, so the fibre comparison is invertible exactly when this higher-direct-image stalk vanishes. The clopen system is independent of the chosen $\\Omega$ by step 3, so these identifications hold for every geometric point over $z$. This identifies the actual canonical maps, not just abstract groups.",
+   "text": "The all-lifts strict-local derived-unit criterion identifies this invertibility with exactly the family of fibre cohomology maps in the statement.",
    "uses": [
-    "lem-weil-pbc-unrestricted-strict-henselization-stalk",
-    "def-weil-pbc-strict-henselization-limit",
-    "def-pc-fibre-product",
-    "lem-weil-pbc-inverse-image-composition",
-    "lem-weil-pbc-inverse-image-stalk-germ",
-    "lem-weil-pbc-spec-clopen-idempotent"
+    "lem-weil-pbc-strict-local-fibre-derived-unit"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 03Q9, theorem-higher-direct-images; corrected geometric-fibre calculation for Tag 0EZV; Tag 03Q1, lemma-stalk-pullback (3) and germ compatibility; Algebra Tag 00EE, lemma-disjoint-decomposition"
-   }
-  },
-  {
-   "text": "For $q=0$, geometric-stalk conservativity says that the unit in step 5 is an isomorphism iff its stalk map at EVERY geometric point of $E$ is an isomorphism. For $q>0$ apply the same statement to $0\\to R^qp_*p^{-1}G$, so vanishing is equivalent to vanishing at EVERY geometric stalk. By steps 2, 3 and 6 these conditions are precisely the comparisons for every lift $v:T\\to A$ over $t$. This proves the corrected equivalence and, by taking $v=u$, the one-way implication needed by the existing smooth-local-acyclicity citer. The original assertion for only one selected lift is false; the nodal-curve counterexample and the invalid $A$-linear identification in the source are recorded in report.md.",
-   "uses": [
-    "lemma-weil-pbc-geometric-stalk-conservative"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 03PN, theorem-exactness-stalks; repair of Tag 0EZV"
+    "place": "Steps 6--7 of the corrected Tag 0EZV proof"
    }
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-strict-henselization-limit",
-  "lem-weil-pbc-etale-ring-base-change",
-  "lem-weil-pbc-etale-algebra-over-field-product",
-  "lem-pc-sepclosed-finite-sep-trivial",
-  "lem-weil-pbc-spec-small-colimit-limit",
-  "lem-weil-pbc-strict-henselization-functoriality",
-  "lem-weil-pbc-spec-finite-product-fields",
-  "lem-weil-pbc-zero-dimensional-spectrum-profinite",
-  "def-pc-fibre-product",
-  "lem-weil-pbc-profinite-clopen-basis",
-  "lem-weil-pbc-clopen-etale-neighbourhood-cofinality",
-  "lem-weil-pbc-clopen-stalk-global-sections-detection",
-  "lemma-weil-pbc-geometric-stalk-conservative",
-  "lem-cbc-affine-sepclosed-etale-acyclic",
-  "lem-weil-pbc-derived-functor-long-exact",
-  "lem-weil-pbc-module-sheaves-enough-injectives",
-  "lem-weil-pbc-affine-morphism-permanence",
-  "lem-weil-pbc-cohomology-pullback-derived-unit",
+  "lem-weil-pbc-strict-local-base-sections",
+  "lem-weil-pbc-cohomology-pullback-exact-conservative",
   "lem-weil-pbc-inverse-image-composition",
-  "lem-weil-pbc-unrestricted-strict-henselization-stalk",
-  "lem-weil-pbc-inverse-image-stalk-germ",
-  "lem-weil-pbc-spec-clopen-idempotent"
+  "lem-weil-pbc-strict-local-fibre-derived-unit"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Correction of Tag 0EZV, lemma-check-stalks-better, using Tags 09AY and 03Q9; finite-equation clopen argument written explicitly"
+  "place": "Corrected Tag 0EZV argument, steps 1--7; D7 implements the exact-sections, derived-unit and geometric-conservativity glue in Lean"
  },
  "mathlib_searches": [
   {
@@ -402,5 +322,15 @@
   "by": "NV",
   "date": "2026-10-15",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D7",
+  "result": "pass",
+  "landing": "20261018T071144-L-1665839",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

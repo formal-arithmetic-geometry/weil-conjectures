@@ -1,0 +1,121 @@
+{
+ "id": "lem-weil-pbc-affine-closed-sepclosed-sections-exact",
+ "kind": "statement",
+ "title": "Exact global sections on an affine scheme with closed separably closed points",
+ "statement": "Let T be an affine scheme [def-pc-scheme, def-weil-affine-spectrum], every point of which is closed and has separably closed residue field [def-pc-separably-closed]. Then the global-sections functor on abelian etale sheaves [def-weil-pbc-abelian-etale-sheaves] preserves finite colimits.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 09AY, step 4 of the corrected Tag 0EZV argument"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "def-pc-separably-closed",
+  "def-weil-pbc-abelian-etale-sheaves"
+ ],
+ "proof": [
+  {
+   "text": "The acyclicity theorem gives H^1(T,F)=Ext^1(Z_T,F)=0 for every F. The Ext criterion makes the constant integer sheaf projective. Its preadditive coyoneda functor preserves finite colimits. The constant-sheaf/global-sections adjunction and evaluation at 1 identify that functor with global sections. Transport colimit preservation across the natural isomorphism.",
+   "uses": [
+    "lem-cbc-affine-sepclosed-etale-acyclic"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 09AY; projective Ext criterion and coyoneda adjunction"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-cbc-affine-sepclosed-etale-acyclic"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 09AY, step 4 of the corrected Tag 0EZV argument; explicit Lean reduction by D7"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Global sections of abelian sheaves on an affine scheme with only closed separably closed points preserves finite colimits",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Sheaf.Γ\", \"module\": \"Mathlib.CategoryTheory.Sites.GlobalSections\", \"type\": \"[HasGlobalSectionsFunctor J A] : Sheaf J A ⥤ A\", \"doc\": \"The global sections functor, which is the left adjoint to the constant sheaf functor, assigning to each sheaf its global sections.\"}\n  {\"name\": \"AlgebraicGeometry.AffineScheme.Γ\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \": AffineSchemeᵒᵖ ⥤ CommRingCat\", \"doc\": \"The contravariant functor that maps each affine scheme to its global sections (the value of its structure sheaf on the entire space) in the category of commutative rings. It is constructed as the comp\"}\n  {\"name\": \"CategoryTheory.HasGlobalSectionsFunctor\", \"module\": \"Mathlib.CategoryTheory.Sites.GlobalSections\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    (J : CategoryTheory.GrothendieckTopology C) →\\n      (A : Type u₂) → [inst_1 : CategoryTheory.Category.{v₂, u₂} A] → [CategoryTheory.HasWeakSheafify J A] → Prop\", \"doc\": \"The property that the constant sheaf functor has a left adjoint, called the global sections functor, which assigns to each sheaf its global sections.\"}\n  {\"name\": \"CategoryTheory.hasGlobalSectionsFunctor_of_hasLimitsOfShape\", \"module\": \"Mathlib.CategoryTheory.Sites.GlobalSections\", \"type\": \"[HasLimitsOfShape Cᵒᵖ A] : HasGlobalSectionsFunctor J A\", \"doc\": \"If the opposite category $\\\\mathcal{C}^{\\\\text{op}}$ has all limits of shape $J$, then the category $A$ admits a global sections functor, which serves as the left adjoint to the constant sheaf functor.\"}\n  {\"name\": \"AlgebraicGeometry.preservesColimit_Γ\", \"module\": \"Mathlib.AlgebraicGeometry.AffineScheme\", \"type\": \"{I : Type w} [Category.{v} I] (D : I ⥤ Scheme.{u}ᵒᵖ) [∀ i, IsAffine (D.obj i).unop] : PreservesColimit D Scheme.Γ\", \"doc\": \"The global sections functor $ \\\\Gamma $, which maps schemes to their global sections in the category of commutative rings, preserves colimits of diagrams where each object is an affine scheme. Specific\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.Point.instPreservesColimitsOfSizeSheafSheafFiberOfHasSheafifyOfWEqualsLocallyBijectiveOfReflectsIsomorphismsOfPreservesFilteredColimitsOfSizeForgetOfLocallySmall\", \"module\": \"Mathlib.CategoryTheory.Sites.Point.Basic\", \"type\": \"[HasSheafify J A] [J.WEqualsLocallyBijective A] [(forget A).ReflectsIsomorphisms]\\n  [PreservesFilteredColimitsOfSize.{w, w} (forget A)] [LocallySmall.{w} C] :\\n  PreservesColimitsOfSize.{w, w} (Φ.sheafFiber (A := A))\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a category $\\\\mathcal{A}$, if $\\\\mathcal{C}$ has sheafification, satisfies the locally bijective condition, the forgetful functor refl\"}\n  {\"name\": \"AlgebraicGeometry.SheafedSpace.Γ\", \"module\": \"Mathlib.Geometry.RingedSpace.SheafedSpace\", \"type\": \": (SheafedSpace C)ᵒᵖ ⥤ C\", \"doc\": \"The functor $\\\\Gamma$ that maps each sheafed space over a category $\\\\mathcal{C}$ to its global sections (the value of its sheaf at the terminal object) in $\\\\mathcal{C}$, constructed as the composition \"}\n  {\"name\": \"CategoryTheory.Sheaf.instHasExactLimitsOfShapeOfHasFiniteColimitsOfPreservesFiniteColimitsFunctorOppositeSheafToPresheaf\", \"module\": \"Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Sheaf\", \"type\": \"[HasFiniteColimits A] [HasLimitsOfShape K A] [HasExactLimitsOfShape K A]\\n  [PreservesFiniteColimits (sheafToPresheaf J A)] : HasExactLimitsOfShape K (Sheaf J A)\", \"doc\": \"If a category $\\\\mathcal{A}$ has finite colimits, all limits of shape $K$, exact limits of shape $K$, and the inclusion functor from sheaves to presheaves preserves finite colimits, then the category o\"}\n",
+   "date": "2026-10-18",
+   "digest": "1f0528135d83b716",
+   "verdict": "no exact match: general category, stalk or ring ingredients exist, but none states this scheme comparison; the relevant ingredients are used in the proof"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Global sections of abelian sheaves are exact on an affine scheme all of whose points are closed and have separably closed residue fields",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instAbelian\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X : AlgebraicGeometry.Scheme} → CategoryTheory.Abelian X.Modules\", \"doc\": \"For any scheme $ X $, the category of sheaves of modules over the structure sheaf of $ X $ is an abelian category. This follows from the preadditive structure, existence of finite products, kernels, a\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ (i : I), AlgebraicGeometry.IsAffine (D.obj i)] (i : I) (s : ↑((D.obj i).pr\", \"doc\": \"Given a cofiltered diagram of affine schemes with a limit cone, if a global section of the structure sheaf of some object in the diagram maps to zero under the projection to the limit, then there exis\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact\", \"module\": \"Mathlib/CategoryTheory/Sites/MayerVietorisSquare\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C}\\n  [inst_1 : CategoryTheory.HasWeakSheafify J (Type v)] [inst_2 : CategoryTheory.HasSheafify J AddCommGrpCat]\\n  (S : J.MayerVietorisSquare), S.shortComplex.Exact\", \"doc\": \"Given a Mayer-Vietoris square $ S $ in a category $ \\\\mathcal{C} $ equipped with a Grothendieck topology $ J $, the associated short complex in the category of sheaves on $ \\\\mathcal{C} $ with values in\"}\n  {\"name\": \"AlgebraicGeometry.stalkMap_injective_of_isAffine\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsAffine Y] (x : ↥X),\\n  (∀ (g : ↑(Y.presheaf.obj (Opposite.op ⊤))),\\n      (CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.Scheme.Hom.stalkMap f x))\\n            ((CategoryTheory.ConcreteCategory.hom (Y.presheaf.Γgerm ((Category\", \"doc\": \"Let $X$ and $Y$ be schemes, and let $f : X \\to Y$ be a morphism of schemes. If $Y$ is affine and for every germ $g$ in the stalk of $Y$'s structure sheaf at $f(x)$, the condition $f_{\\text{stalk}}(x)(g)\"}\n  {\"name\": \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} [C\", \"doc\": \"Given a cofiltered diagram of schemes with affine transition morphisms and compact topological spaces, if a global section becomes zero under the limit cone's projection map, then there exists a morph\"}\n  {\"name\": \"AlgebraicGeometry.isReduced_of_isAffine_isReduced\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsAffine X] [IsReduced ↑(X.presheaf.obj (Opposite.op ⊤))],\\n  AlgebraicGeometry.IsReduced X\", \"doc\": \"If $X$ is an affine scheme and the ring of global sections $\\\\Gamma(X, \\\\mathcal{O}_X)$ is reduced (i.e., contains no nonzero nilpotent elements), then the scheme $X$ itself is reduced (i.e., all its lo\"}\n  {\"name\": \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)] {i : I} {U\", \"doc\": \"Given a cofiltered diagram of schemes where all transition morphisms are affine, for any compact open subset $ U $ of a scheme in the diagram and a section $ s $ of the structure sheaf over $ U $ that\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_shortExact\", \"module\": \"Mathlib/CategoryTheory/Sites/MayerVietorisSquare\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C}\\n  [inst_1 : CategoryTheory.HasWeakSheafify J (Type v)] [inst_2 : CategoryTheory.HasSheafify J AddCommGrpCat]\\n  (S : J.MayerVietorisSquare), S.shortComplex.ShortExact\", \"doc\": \"Given a Mayer-Vietoris square $S$ in a category $\\\\mathcal{C}$ with Grothendieck topology $J$, the associated short complex in the category of sheaves on $\\\\mathcal{C}$ with values in additive commutati\"}\n",
+   "date": "2026-10-18",
+   "digest": "263bffd6911742d4",
+   "verdict": "no exact match: general category, stalk or ring ingredients exist, but none states this scheme comparison; the relevant ingredients are used in the proof"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"PreservesFiniteColimits\", \"Projective\"",
+   "results": "[loogle] OK 2 hit(s)\n  {\"name\": \"CategoryTheory.preservesFiniteColimits_preadditiveCoyonedaObj_of_projective\", \"module\": \"Mathlib.CategoryTheory.Abelian.Projective.Basic\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.Abelian C] (P : C) [hP : CategoryTheory.Projective P] : CategoryTheory.Limits.PreservesFiniteColimits (CategoryTheory.preadditiveCoyonedaObj P)\", \"doc\": \"The preadditive co-Yoneda functor on `P` preserves finite colimits if `P` is projective.\"}\n  {\"name\": \"CategoryTheory.projective_of_preservesFiniteColimits_preadditiveCoyonedaObj\", \"module\": \"Mathlib.CategoryTheory.Abelian.Projective.Basic\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.Abelian C] (P : C) [hP : CategoryTheory.Limits.PreservesFiniteColimits (CategoryTheory.preadditiveCoyonedaObj P)] : CategoryTheory.Projective P\", \"doc\": \"An object is projective if its preadditive co-Yoneda functor preserves finite colimits.\"}\n",
+   "date": "2026-10-18",
+   "digest": "4ec4a71bc3401c2a",
+   "verdict": "no exact match: general category, stalk or ring ingredients exist, but none states this scheme comparison; the relevant ingredients are used in the proof"
+  },
+  {
+   "tool": "grep",
+   "query": "projective_iff_subsingleton_ext_one|preservesFiniteColimits_preadditiveCoyoneda",
+   "results": "[grep] OK 5 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/Abelian/Projective/Basic.lean\", \"line\": \"40\", \"text\": \"noncomputable instance preservesFiniteColimits_preadditiveCoyonedaObj_of_projective\"}\n  {\"file\": \"Mathlib/CategoryTheory/Abelian/Projective/Basic.lean\", \"line\": \"46\", \"text\": \"theorem projective_of_preservesFiniteColimits_preadditiveCoyonedaObj (P : C)\"}\n  {\"file\": \"Mathlib/CategoryTheory/Abelian/Projective/Dimension.lean\", \"line\": \"140\", \"text\": \"lemma projective_iff_subsingleton_ext_one [HasExt.{w} C] :\"}\n  {\"file\": \"Mathlib/CategoryTheory/Abelian/Projective/Dimension.lean\", \"line\": \"154\", \"text\": \"  exact ⟨fun _ ↦ inferInstance, fun _ ↦ projective_iff_subsingleton_ext_one.2\"}\n  {\"file\": \"Mathlib/CategoryTheory/Abelian/GrothendieckCategory/ModuleEmbedding/Opposite.lean\", \"line\": \"98\", \"text\": \"  apply preservesFiniteColimits_preadditiveCoyonedaObj_of_projective\"}\n",
+   "date": "2026-10-18",
+   "digest": "a568b3129874d78f",
+   "verdict": "no exact match: general category, stalk or ring ingredients exist, but none states this scheme comparison; the relevant ingredients are used in the proof"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.StrictLocalGeometricFibreTest",
+  "date": "2026-10-18",
+  "group": "D7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-direct-image-finiteness-proper",
+   "place": "Tag 09AY, step 4 of the corrected Tag 0EZV argument",
+   "via": [
+    "lem-weil-pbc-strict-local-geometric-fibre-test"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineClosedSepClosedSectionsExact",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineClosedSepClosedSectionsExact.lean",
+  "declaration": "AlgebraicGeometry.Scheme.affineClosedSepClosed_sections_preservesFiniteColimits",
+  "statement": "theorem affineClosedSepClosed_sections_preservesFiniteColimits\n    (T : Scheme.{u}) [IsAffine T]\n    (hclosed : ∀ t : T, IsClosed ({t} : Set T))\n    (hsep : ∀ t : T, IsSepClosed (T.residueField t)) :\n    PreservesFiniteColimits (Sheaf.Γ T.smallEtaleTopology AddCommGrpCat.{u + 1})",
+  "branch": "sheaf-dag",
+  "by": "D7",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D7",
+  "result": "pass",
+  "landing": "20261018T071144-L-1665839",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D7",
+  "result": "pass",
+  "landing": "20261018T071144-L-1665839",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

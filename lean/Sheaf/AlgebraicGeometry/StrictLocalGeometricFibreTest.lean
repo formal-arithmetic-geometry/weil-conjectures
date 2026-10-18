@@ -8,22 +8,9 @@ module
 public import Sheaf.AlgebraicGeometry.StrictHenselizationCanonicalMap
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 public import Mathlib.FieldTheory.IsSepClosed
-import Sheaf.AlgebraicGeometry.SpecFiniteProductFields
-import Mathlib.CategoryTheory.Sites.Point.Basic
-import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
-import Sheaf.CategoryTheory.Abelian.RightDerived.FullLongExactSequence
-import Sheaf.AlgebraicGeometry.EtaleModuleEnoughInjectives
-import WeilConjectures.AlgebraicGeometry.CohomologyPullbackDerivedUnit
-import Sheaf.AlgebraicGeometry.UnrestrictedStrictHenselizationStalk
-import WeilConjectures.AlgebraicGeometry.InverseImageStalkGerm
-import Sheaf.AlgebraicGeometry.AffineSepclosedEtaleAcyclic
-import Sheaf.AlgebraicGeometry.CohomologyPullbackCanonicalArrows
-import Sheaf.AlgebraicGeometry.StrictHenselization
-import Sheaf.AlgebraicGeometry.StrictHenselizationClosedLift
-import Sheaf.AlgebraicGeometry.ZeroDimensionalSpectrumProfinite
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
-import WeilConjectures.CategoryTheory.Abelian.RightDerived.FullLongExactSequence
-import Sheaf.Paper.StrictHenselizationFunctoriality
+import Sheaf.AlgebraicGeometry.CohomologyPullbackExactConservative
+import Sheaf.AlgebraicGeometry.StrictLocalBaseSections
+import Sheaf.AlgebraicGeometry.StrictLocalFibreDerivedUnit
 
 /-! # Testing a strict-local comparison on every geometric strict-local fibre
 
@@ -61,6 +48,20 @@ noncomputable def strictLocalComparisonMorphism
         (u ≫ Scheme.strictHenselizationStructuralMap (x ≫ f)) :=
   pullback.map _ _ _ _ (Scheme.strictHenselizationMap f x) (𝟙 _) (𝟙 _)
     (by simpa using (Scheme.strictHenselizationMap_over f x).symm) (by simp)
+
+private theorem bijective_cohomologyPullbackOver_iff
+    {Y E T : Scheme.{u}} (p : Y ⟶ E) (a : E ⟶ T)
+    (F : Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℕ) :
+    Function.Bijective (cohomologyPullbackOver p a F q) ↔
+      Function.Bijective (cohomologyMap p
+        ((upperStar AddCommGrpCat.{u + 1} a).obj F) q) := by
+  have hcoeff : Function.Bijective
+      (Sheaf.H.map ((upperStarComp AddCommGrpCat.{u + 1} p a).inv.app F) q) := by
+    exact ConcreteCategory.bijective_of_isIso
+      ((Sheaf.functorH _ q).map ((upperStarComp AddCommGrpCat.{u + 1} p a).inv.app F))
+  rw [cohomologyPullbackOver, AddMonoidHom.coe_comp,
+    Function.Bijective.of_comp_iff' hcoeff]
+  rfl
 
 /-- The strict-local comparison is invertible iff the comparison for every lift is.
 Source: Stacks Project, Tag 0EZV, corrected every-lift formulation
@@ -189,6 +190,16 @@ theorem strictLocalGeometricFibreTest
         u ≫ Scheme.strictHenselizationStructuralMap (x ≫ f) →
       Function.Bijective (cohomologyMap
         (pullback.snd (Scheme.strictHenselizationMap f x) v) F q) := by
-  sorry
+  obtain ⟨hΓ, hconservative⟩ :=
+    strictLocalBase_sections_exact_conservative (x ≫ f) K u
+  have := hΓ
+  have := hconservative
+  let p := strictLocalComparisonMorphism f x u
+  let a := pullback.snd (Scheme.strictHenselizationStructuralMap (x ≫ f))
+    (u ≫ Scheme.strictHenselizationStructuralMap (x ≫ f))
+  apply (bijective_cohomologyPullbackOver_iff p a F q).trans
+  exact (bijective_cohomologyMap_iff_isIso_derivedPullbackUnitHomology p
+    ((upperStar AddCommGrpCat.{u + 1} a).obj F) q).trans
+      (strictLocalFibre_derivedUnit_iff f x K u F q)
 
 end AlgebraicGeometry.Etale

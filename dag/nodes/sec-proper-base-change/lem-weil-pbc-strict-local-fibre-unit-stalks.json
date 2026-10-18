@@ -1,0 +1,194 @@
+{
+ "id": "lem-weil-pbc-strict-local-fibre-unit-stalks",
+ "kind": "statement",
+ "title": "Pointwise strict-local derived-unit fibre comparison",
+ "statement": "Let f:X\\to S and a geometric point x of X [def-pc-scheme, def-weil-geometric-point] determine strict henselizations B=X_(x), A=S_(fx) and their canonical map h:B\\to A [def-weil-pbc-strict-henselization-limit, lem-weil-pbc-strict-henselization-functoriality]. Let K be separably closed [def-pc-separably-closed], u:Spec K\\to A, t=(A\\to S)u, E=A\\times_S Spec K, Y=B\\times_S Spec K, p:Y\\to E, and a:E\\to Spec K [def-pc-fibre-product]. Let F be any abelian etale sheaf on Spec K and q\\geq0 [def-weil-pbc-abelian-etale-sheaves, def-weil-pbc-etale-cohomology]. Let M be H^q of the derived unit a^{-1}F[0]\\to Rp_*p^{-1}a^{-1}F[0] [lem-weil-pbc-cohomology-pullback-exact-conservative]. For every point z of E there is a lift v:Spec K\\to A of t such that the geometric point \\bar z given by its algebraic-closure residue field satisfies pr_A\\bar z=v a\\bar z, and the stalk of M at \\bar z is invertible exactly when H^q(Spec K,F)\\to H^q(B\\times_(A,v)Spec K,F) is bijective [def-weil-pbc-cohomology-pullback]. Conversely, every lift v of t admits such a point z with the same projection equality and the same equivalence.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Step 6 and the point/lift description of corrected Tag 0EZV; Tags 03Q9 and 03Q1"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-geometric-point",
+  "def-weil-pbc-strict-henselization-limit",
+  "lem-weil-pbc-strict-henselization-functoriality",
+  "def-pc-separably-closed",
+  "def-pc-fibre-product",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-etale-cohomology",
+  "lem-weil-pbc-cohomology-pullback-exact-conservative",
+  "def-weil-pbc-cohomology-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Use the proved affineness and ind-etale coordinate-ring theorems on E. Its canonical K-algebra structure is the one induced by a:E to Spec K. Factor B to S through the same affine chart by its closed-point property. A fibre product of the resulting affine schemes over that chart makes Y affine.",
+   "uses": [
+    "lem-weil-pbc-strict-local-base-affine",
+    "lem-weil-pbc-strict-local-base-ind-etale"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Corrected Tag 0EZV, steps 1--3 and 6"
+   }
+  },
+  {
+   "text": "For every prime $z$ of $C$, its pullback to each finite product $K^{I_i}$ selects a unique factor, by the finite-product spectrum statement. If $c\\in C$ is represented by $(\\lambda_j)_j\\in K^{I_i}$ and the selected factor is $j_0$, the corresponding idempotent $e_{j_0}$ is outside $z$ and kills $c-\\lambda_{j_0}$. Consequently every element of $C_z$ is a scalar in $K$: denominators outside $z$ have nonzero selected scalar and can be inverted in $K$. The structural map $K\\to C_z$ is injective since it is a map from a field to a nonzero local ring. Thus $C_z\\cong K$, compatibly with the structural maps. Every prime is therefore maximal, and the zero-dimensional spectrum theorem makes $|E|$ profinite. Points of $E$ are exactly $K$-morphisms $T\\to E$, equivalently lifts $v:T\\to A$ of $t$, since each residue field is canonically $K$. The given $u$ supplies one such point, so $E$ is nonempty. Finite stages can have unused factors; no surjectivity of their transition maps is assumed.",
+   "uses": [
+    "lem-weil-pbc-spec-finite-product-fields",
+    "lem-weil-pbc-zero-dimensional-spectrum-profinite",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0EZV, finite-product presentation; Algebra Tags 00ED and 04MG"
+   }
+  },
+  {
+   "text": "Using the ind-etale coordinate ring, a pointed affine etale neighbourhood has a K-valued section at the marked prime. Spread its finitely many generators and relations to a principal neighbourhood, then choose a clopen refinement using the profinite basis. Given two pointed maps, shrink to an affine target chart; their finitely many generator differences vanish in the local ring and are annihilated after a further principal shrinking. A smaller clopen equalizes them. Thus pointed clopens form a cofinal system, including equalization. Their ring colimit is the local ring K: every fraction is defined on a smaller clopen and a section with zero germ vanishes after a smaller clopen shrinking. This identifies the strict localization with Spec K. The same argument on Spec K identifies its sheaf sections with every geometric stalk.",
+   "uses": [
+    "lem-weil-pbc-strict-local-base-ind-etale",
+    "lem-weil-pbc-profinite-clopen-basis",
+    "lem-weil-pbc-etale-algebra-over-field-product",
+    "lem-pc-sepclosed-finite-sep-trivial"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 09AY and 03PN; corrected Tag 0EZV proof after the finite-product presentation, clopen cofinality and stalk detection paragraphs"
+   }
+  },
+  {
+   "text": "Fix $z\\in E$, equivalently a lift $v:T\\to A$, and a geometric point $\\bar z:\\operatorname{Spec}\\Omega\\to E$ over it as in step 3. Cofinality of the clopen neighbourhoods from step 3 identifies the strict localization of $E$ at $\\bar z$ with $\\operatorname{Spec}C_z=T$: the clopen-idempotent theorem writes each affine clopen as $D(e)=\\operatorname{Spec}C_e$. The ring colimit of these $C_e$ is the ordinary localization $C_z$: its natural map to $C_z$ is surjective since every fraction $c/s$ is defined on a clopen inside $D(s)$, and is injective since a section zero in $C_z$ is annihilated by some element outside $z$ and becomes zero on a smaller clopen inside its basic open. Thus the ring colimit over pointed etale neighbourhoods is $C_z$, since every denominator outside $z$ is inverted on a clopen neighbourhood contained in its basic open, and step 2 identifies that localization with $K$. The unrestricted strict-henselization stalk theorem applies to the affine, hence qcqs, morphism $p$ and the abelian sheaf $p^{-1}G$. It gives $(R^qp_*p^{-1}G)_{\\bar z}\\cong H^q(Y\\times_E T,F)$. Fibre-product associativity, checked by their projections, identifies $Y\\times_E T$ with $B\\times_{A,v}T$. By the inverse-image stalk-and-germ theorem for $a:E\\to T$, the source stalk $G_{\\bar z}$ is $F_{a\\bar z}$; step 3 on $T$ identifies this canonically with $F(T)=H^0(T,F)$. For $q=0$ the stalk of $\\eta$ is the section-pullback unit $H^0(T,F)\\to H^0(B\\times_{A,v}T,F)$: a clopen representative of a germ restricts along the section in step 3, and its unit image restricts along the base-changed section, giving exactly the fibre pullback. For $q>0$, $H^q(T,F)=0$ by step 4, so the fibre comparison is invertible exactly when this higher-direct-image stalk vanishes. The clopen system is independent of the chosen $\\Omega$ by step 3, so these identifications hold for every geometric point over $z$. This identifies the actual canonical maps, not just abstract groups.",
+   "uses": [
+    "lem-weil-pbc-unrestricted-strict-henselization-stalk",
+    "def-weil-pbc-strict-henselization-limit",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-inverse-image-composition",
+    "lem-weil-pbc-inverse-image-stalk-germ",
+    "lem-weil-pbc-spec-clopen-idempotent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03Q9, theorem-higher-direct-images; corrected geometric-fibre calculation for Tag 0EZV; Tag 03Q1, lemma-stalk-pullback (3) and germ compatibility; Algebra Tag 00EE, lemma-disjoint-decomposition"
+   }
+  },
+  {
+   "text": "The residue-field identification K = kappa(z) identifies sections Spec K to E with all its points. Apply it to a given point, and conversely take the point of any given section. The pullback universal property identifies such sections with lifts to A of the fixed t, and the projection equations give the asserted equality after the algebraic-closure point.",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Corrected Tag 0EZV, points and all lifts"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-strict-local-base-affine",
+  "lem-weil-pbc-strict-local-base-ind-etale",
+  "lem-weil-pbc-spec-finite-product-fields",
+  "lem-weil-pbc-zero-dimensional-spectrum-profinite",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-profinite-clopen-basis",
+  "lem-weil-pbc-etale-algebra-over-field-product",
+  "lem-pc-sepclosed-finite-sep-trivial",
+  "lem-weil-pbc-unrestricted-strict-henselization-stalk",
+  "def-weil-pbc-strict-henselization-limit",
+  "lem-weil-pbc-inverse-image-composition",
+  "lem-weil-pbc-inverse-image-stalk-germ",
+  "lem-weil-pbc-spec-clopen-idempotent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Step 6 and the point/lift description of corrected Tag 0EZV; Tags 03Q9 and 03Q1; explicit Lean reduction by D7"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Stalks of the derived pullback direct image adjunction unit equal the cohomology map to strict henselian geometric fibres",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"TopCat.Presheaf.stalkPullbackHom\", \"module\": \"Mathlib.Topology.Sheaves.Stalks\", \"type\": \"(f : X ⟶ Y) (F : Y.Presheaf C) (x : X) : F.stalk (f x) ⟶ ((pullback C f).obj F).stalk x\", \"doc\": \"Given a continuous map $f: X \\\\to Y$ between topological spaces, a presheaf $\\\\mathcal{F}$ on $Y$ with values in a category $\\\\mathcal{C}$, and a point $x \\\\in X$, this defines the canonical morphism from\"}\n  {\"name\": \"TopCat.Presheaf.germ_stalkPullbackHom\", \"module\": \"Mathlib.Topology.Sheaves.Stalks\", \"type\": \"(f : X ⟶ Y) (F : Y.Presheaf C) (x : X) (U : Opens Y) (hU : f x ∈ U) :\\n  F.germ U (f x) hU ≫ stalkPullbackHom C f F x =\\n    ((pushforwardPullbackAdjunction C f).unit.app F).app _ ≫ ((pullback C f).obj F).germ ((Opens.map f).obj U) x hU\", \"doc\": \"Let $f: X \\\\to Y$ be a continuous map between topological spaces, and let $\\\\mathcal{F}$ be a presheaf on $Y$ with values in a category $\\\\mathcal{C}$. For any point $x \\\\in X$ and any open neighborhood $\"}\n  {\"name\": \"StalkSkyscraperPresheafAdjunctionAuxs.unit_app\", \"module\": \"Mathlib.Topology.Sheaves.Skyscraper\", \"type\": \"∀ {X : TopCat} (p₀ : ↑X) [inst : (U : TopologicalSpace.Opens ↑X) → Decidable (p₀ ∈ U)] {C : Type v}\\n  [inst_1 : CategoryTheory.Category.{u, v} C] [inst_2 : CategoryTheory.Limits.HasTerminal C]\\n  [inst_3 : CategoryTheory.Limits.HasColimits C] (x : TopCat.Presheaf C X),\\n  (StalkSkyscraperPresheafAdjun\", \"doc\": \"The unit of the adjunction between the stalk functor at $ p_0 $ and the skyscraper presheaf functor is defined by mapping each presheaf $\\\\mathcal{F}$ to the natural transformation $\\\\mathcal{F} \\\\to \\\\te\"}\n  {\"name\": \"TopCat.Presheaf.stalkPullbackIso\", \"module\": \"Mathlib.Topology.Sheaves.Stalks\", \"type\": \"(f : X ⟶ Y) (F : Y.Presheaf C) (x : X) : F.stalk (f x) ≅ ((pullback C f).obj F).stalk x\", \"doc\": \"For any category $\\\\mathcal{C}$ with colimits, topological spaces $X$ and $Y$, a continuous map $f: X \\\\to Y$, a presheaf $\\\\mathcal{F}$ on $Y$, and a point $x \\\\in X$, there is an isomorphism between the\"}\n  {\"name\": \"TopCat.Presheaf.germ_stalkPullbackHom_assoc\", \"module\": \"Mathlib.Topology.Sheaves.Stalks\", \"type\": \"∀ (C : Type u) [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Limits.HasColimits C] {X Y : TopCat}\\n  (f : X ⟶ Y) (F : TopCat.Presheaf C Y) (x : ↑X) (U : TopologicalSpace.Opens ↑Y)\\n  (hU : (CategoryTheory.ConcreteCategory.hom f) x ∈ U) {Z : C} (h : ((TopCat.Presheaf.pullback C f).\", \"doc\": \"For a presheaf $\\\\mathcal{F}$ on a topological space $Y$, a continuous map $f: X \\\\to Y$, and a point $x \\\\in X$, the composition of the germ map $\\\\mathcal{F}(U) \\\\to \\\\mathcal{F}_x$ with the stalk morphis\"}\n  {\"name\": \"TopCat.Presheaf.pushforwardPullbackAdjunction_unit_pullback_map_germToPullbackStalk_assoc\", \"module\": \"Mathlib.Topology.Sheaves.Stalks\", \"type\": \"∀ (C : Type u) [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Limits.HasColimits C] {X Y : TopCat}\\n  (f : X ⟶ Y) (F : TopCat.Presheaf C Y) (U : TopologicalSpace.Opens ↑X) (x : ↑X) (hx : x ∈ U)\\n  (V : TopologicalSpace.Opens ↑Y) (hV : U ≤ (TopologicalSpace.Opens.map f).obj V) {Z : \", \"doc\": \"For topological spaces $X,Y$ with continuous map $f:X\\\\to Y$, presheaf $\\\\mathcal{F}$ on $Y$, open set $U\\\\subseteq X$ containing $x\\\\in X$, and open set $V\\\\subseteq Y$ with $U\\\\subseteq f^{-1}(V)$, the co\"}\n  {\"name\": \"TopCat.Presheaf.pushforwardPullbackAdjunction_unit_pullback_map_germToPullbackStalk\", \"module\": \"Mathlib.Topology.Sheaves.Stalks\", \"type\": \"(f : X ⟶ Y) (F : Y.Presheaf C) (U : Opens X) (x : X) (hx : x ∈ U) (V : Opens Y) (hV : U ≤ (Opens.map f).obj V) :\\n  ((pushforwardPullbackAdjunction C f).unit.app F).app (op V) ≫\\n      ((pullback C f).obj F).map (homOfLE hV).op ≫ germToPullbackStalk C f F U x hx =\\n    F.germ _ (f x) (hV hx)\", \"doc\": \"Let $f: X \\\\to Y$ be a continuous map between topological spaces, and let $\\\\mathcal{F}$ be a presheaf on $Y$ with values in a category $C$ that has colimits. Let $f^{-1}$ denote the pullback functor an\"}\n  {\"name\": \"TopCat.Presheaf.germ_stalkPullbackInv\", \"module\": \"Mathlib.Topology.Sheaves.Stalks\", \"type\": \"(f : X ⟶ Y) (F : Y.Presheaf C) (x : X) (V : Opens X) (hV : x ∈ V) :\\n  ((pullback C f).obj F).germ _ x hV ≫ stalkPullbackInv C f F x = F.germToPullbackStalk _ f V x hV\", \"doc\": \"Let $f: X \\\\to Y$ be a continuous map between topological spaces, $\\\\mathcal{C}$ a category with all colimits, and $\\\\mathcal{F}$ a presheaf on $Y$ with values in $\\\\mathcal{C}$. For any point $x$ in an o\"}\n",
+   "date": "2026-10-18",
+   "digest": "75f49b1ce3beafd5",
+   "verdict": "no exact match: general category, stalk or ring ingredients exist, but none states this scheme comparison; the relevant ingredients are used in the proof"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The derived direct image adjunction unit at a geometric point is cohomology pullback on its strict local fibre",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"TopCat.Presheaf.pushforwardPullbackAdjunction_unit_pullback_map_germToPullbackStalk\", \"module\": \"Mathlib/Topology/Sheaves/Stalks\", \"type\": \"∀ (C : Type u) [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Limits.HasColimits C] {X Y : TopCat}\\n  (f : X ⟶ Y) (F : TopCat.Presheaf C Y) (U : TopologicalSpace.Opens ↑X) (x : ↑X) (hx : x ∈ U)\\n  (V : TopologicalSpace.Opens ↑Y) (hV : U ≤ (TopologicalSpace.Opens.map f).obj V),\\n  Ca\", \"doc\": \"Let $f: X \\\\to Y$ be a continuous map between topological spaces, and let $\\\\mathcal{F}$ be a presheaf on $Y$ with values in a category $C$ that has colimits. Let $f^{-1}$ denote the pullback functor an\"}\n  {\"name\": \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"The hom-set equivalence of the pullback-pushforward adjunction between sheaves of modules maps the canonical morphism from the pullback of the unit sheaf to the unit sheaf to the canonical morphism fr\"}\n  {\"name\": \"SheafOfModules.pullbackObjUnitToUnit\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F : CategoryTheory.Functor C D} →\\n     \", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"TopCat.Presheaf.pushforwardPullbackAdjunction_unit_app_app_germToPullbackStalk\", \"module\": \"Mathlib/Topology/Sheaves/Stalks\", \"type\": \"∀ (C : Type u) [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Limits.HasColimits C] {X Y : TopCat}\\n  (f : X ⟶ Y) (F : TopCat.Presheaf C Y) (V : (TopologicalSpace.Opens ↑Y)ᵒᵖ) (x : ↑X)\\n  (hx : (CategoryTheory.ConcreteCategory.hom f) x ∈ Opposite.unop V),\\n  CategoryTheory.CategoryS\", \"doc\": \"Let $f: X \\\\to Y$ be a continuous map between topological spaces, and let $\\\\mathcal{F}$ be a presheaf on $Y$ with values in a category $\\\\mathcal{C}$ that has all colimits. For any open set $V \\\\subseteq\"}\n  {\"name\": \"TopCat.Presheaf.pushforwardPullbackAdjunction_unit_app_app_germToPullbackStalk_assoc\", \"module\": \"Mathlib/Topology/Sheaves/Stalks\", \"type\": \"∀ (C : Type u) [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Limits.HasColimits C] {X Y : TopCat}\\n  (f : X ⟶ Y) (F : TopCat.Presheaf C Y) (V : (TopologicalSpace.Opens ↑Y)ᵒᵖ) (x : ↑X)\\n  (hx : (CategoryTheory.ConcreteCategory.hom f) x ∈ Opposite.unop V) {Z : C}\\n  (h : F.stalk ((Ca\", \"doc\": \"For any presheaf $\\\\mathcal{F}$ on $Y$, open set $V \\\\subseteq Y$, point $x \\\\in X$, and morphism $h: \\\\mathcal{F}_{f(x)} \\\\to Z$, the composition of the adjunction unit $\\\\eta_{\\\\mathcal{F}}(V)$ with the ge\"}\n  {\"name\": \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"TopCat.Presheaf.pushforwardPullbackAdjunction_unit_pullback_map_germToPullbackStalk_assoc\", \"module\": \"Mathlib/Topology/Sheaves/Stalks\", \"type\": \"∀ (C : Type u) [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Limits.HasColimits C] {X Y : TopCat}\\n  (f : X ⟶ Y) (F : TopCat.Presheaf C Y) (U : TopologicalSpace.Opens ↑X) (x : ↑X) (hx : x ∈ U)\\n  (V : TopologicalSpace.Opens ↑Y) (hV : U ≤ (TopologicalSpace.Opens.map f).obj V) {Z : \", \"doc\": \"For topological spaces $X,Y$ with continuous map $f:X\\\\to Y$, presheaf $\\\\mathcal{F}$ on $Y$, open set $U\\\\subseteq X$ containing $x\\\\in X$, and open set $V\\\\subseteq Y$ with $U\\\\subseteq f^{-1}(V)$, the co\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : CategoryTheory.LocallyDiscrete AlgebraicGeometry.Schemeᵒᵖ} (f : X ⟶ Y),\\n  (AlgebraicGeometry.Scheme.Modules.pseudofunctor.map f).adj =\\n    (AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction f.as.unop).toCat\", \"doc\": \"For any morphism $ f $ in the opposite category of schemes, the adjunction associated with the pseudofunctor's mapping of $ f $ is equal to the pullback-pushforward adjunction between the module categ\"}\n",
+   "date": "2026-10-18",
+   "digest": "fb56255f16c4c8bd",
+   "verdict": "no exact match: general category, stalk or ring ingredients exist, but none states this scheme comparison; the relevant ingredients are used in the proof"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"sheafFiber\", \"IsIso\"",
+   "results": "[loogle] OK 4 hit(s)\n  {\"name\": \"CategoryTheory.GrothendieckTopology.Point.instIsIsoMapFunctorOppositePresheafFiberToSheafify\", \"module\": \"Mathlib.CategoryTheory.Sites.Point.Skyscraper\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C} (Φ : J.Point) {A : Type u'} [CategoryTheory.Category.{v', u'} A] [CategoryTheory.Limits.HasProducts A] [CategoryTheory.Limits.HasColimitsOfSize.{w, w, v', u'} A] (P : CategoryTheory.Functor Cᵒᵖ A) [CategoryT\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.Point.instIsIsoηFunctorOppositePresheafFiber\", \"module\": \"Mathlib.CategoryTheory.Sites.Point.Monoidal\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C} (Φ : J.Point) {A : Type u'} [CategoryTheory.Category.{v', u'} A] [CategoryTheory.MonoidalCategory A] [CategoryTheory.Limits.HasColimitsOfSize.{w, w, v', u'} A] : CategoryTheory.IsIso (CategoryTheory.Functor.\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.Point.instIsIsoδFunctorOppositePresheafFiber\", \"module\": \"Mathlib.CategoryTheory.Sites.Point.Monoidal\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C} (Φ : J.Point) {A : Type u'} [CategoryTheory.Category.{v', u'} A] [CategoryTheory.MonoidalCategory A] [CategoryTheory.Limits.HasColimitsOfSize.{w, w, v', u'} A] [CategoryTheory.LocallySmall.{w, v, u} C] [∀ (X\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.instIsIsoFunctorOppositeToPresheafFiberNatTransPointBotCoeEquivHomUnopOpObjTypeShrinkYonedaSymmShrinkYonedaObjObjEquivId\", \"module\": \"Mathlib.CategoryTheory.Sites.Point.Presheaf\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.LocallySmall.{w, v, u} C] (X : C) (A : Type u_1) [CategoryTheory.Category.{u_2, u_1} A] [CategoryTheory.Limits.HasColimitsOfSize.{w, w, u_2, u_1} A] : CategoryTheory.IsIso ((CategoryTheory.GrothendieckTopology.pointBot X).toPresheafFib\", \"doc\": \"\"}\n",
+   "date": "2026-10-18",
+   "digest": "7d837e80c0987c0b",
+   "verdict": "no exact match: general category, stalk or ring ingredients exist, but none states this scheme comparison; the relevant ingredients are used in the proof"
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*unit.*stalk|strict.*[Ll]ocal.*[Ff]ibre",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-18",
+   "digest": "4f53cda18c2baa0c",
+   "verdict": "no exact match: general category, stalk or ring ingredients exist, but none states this scheme comparison; the relevant ingredients are used in the proof"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.StrictLocalGeometricFibreTest",
+  "date": "2026-10-18",
+  "group": "D7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-direct-image-finiteness-proper",
+   "place": "Step 6 and the point/lift description of corrected Tag 0EZV; Tags 03Q9 and 03Q1",
+   "via": [
+    "lem-weil-pbc-strict-local-geometric-fibre-test"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.StrictLocalFibreUnitStalks",
+  "file": "lean/Sheaf/AlgebraicGeometry/StrictLocalFibreUnitStalks.lean",
+  "declaration": "AlgebraicGeometry.Etale.strictLocalFibre_unit_stalks",
+  "statement": "theorem strictLocalFibre_unit_stalks\n    {X S : Scheme.{u}} (f : X ⟶ S) {Ω : Type u} [Field Ω] [IsAlgClosed Ω]\n    (x : Spec (.of Ω) ⟶ X) (K : Type u) [Field K] [IsSepClosed K]\n    (u : Spec (.of K) ⟶ Scheme.strictHenselizationScheme (x ≫ f))\n    (F : Sheaf (Spec (.of K)).smallEtaleTopology AddCommGrpCat.{u + 1}) (q : ℕ) :\n    let t := u ≫ Scheme.strictHenselizationStructuralMap (x ≫ f)\n    let p := pullback.map\n      (Scheme.strictHenselizationStructuralMap x ≫ f) t\n      (Scheme.strictHenselizationStructuralMap (x ≫ f)) t\n      (Scheme.strictHenselizationMap f x) (𝟙 _) (𝟙 _)\n      (by simpa using (Scheme.strictHenselizationMap_over f x).symm) (by simp)\n    let a := pullback.snd (Scheme.strictHenselizationStructuralMap (x ≫ f)) t\n    let E := pullback (Scheme.strictHenselizationStructuralMap (x ≫ f)) t\n    let M := derivedPullbackUnitHomology p\n      ((upperStar AddCommGrpCat.{u + 1} a).obj F) q\n    (∀ z : E, ∃ v : Spec (.of K) ⟶ Scheme.strictHenselizationScheme (x ≫ f),\n      v ≫ Scheme.strictHenselizationStructuralMap (x ≫ f) = t ∧\n      E.algClosurePoint z ≫\n          pullback.fst (Scheme.strictHenselizationStructuralMap (x ≫ f)) t =\n        (E.algClosurePoint z ≫ a) ≫ v ∧\n      (IsIso ((Scheme.pointSmallEtale (E.algClosurePoint z)).sheafFiber.map M) ↔\n        Function.Bijective (cohomologyMap\n          (pullback.snd (Scheme.strictHenselizationMap f x) v) F q))) ∧\n    (∀ (v : Spec (.of K) ⟶ Scheme.strictHenselizationScheme (x ≫ f)),\n      v ≫ Scheme.strictHenselizationStructuralMap (x ≫ f) = t →\n      ∃ z : E,\n        E.algClosurePoint z ≫\n            pullback.fst (Scheme.strictHenselizationStructuralMap (x ≫ f)) t =\n          (E.algClosurePoint z ≫ a) ≫ v ∧\n        (IsIso ((Scheme.pointSmallEtale (E.algClosurePoint z)).sheafFiber.map M) ↔\n          Function.Bijective (cohomologyMap\n            (pullback.snd (Scheme.strictHenselizationMap f x) v) F q)))",
+  "branch": "sheaf-dag",
+  "by": "D7",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D7",
+  "result": "pass",
+  "landing": "20261018T071144-L-1665839",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D7",
+  "result": "pass",
+  "landing": "20261018T071144-L-1665839",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

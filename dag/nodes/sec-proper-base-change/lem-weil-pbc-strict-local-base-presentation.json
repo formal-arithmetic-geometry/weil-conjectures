@@ -1,0 +1,159 @@
+{
+ "id": "lem-weil-pbc-strict-local-base-presentation",
+ "kind": "statement",
+ "title": "Generation of geometric stalks by global germs on a geometric strict-local base",
+ "statement": "Let s be a geometric point of a scheme S [def-pc-scheme, def-weil-geometric-point], A its strict henselization [def-weil-pbc-strict-henselization-limit], K a separably closed field [def-pc-separably-closed], and u:Spec K to A. Put t=(A to S)u and E=A times_S Spec K [def-pc-fibre-product]. For every abelian etale sheaf F on E [def-weil-pbc-abelian-etale-sheaves] and each point z of E, the canonical germ map F(E) to F_(bar z) is surjective, where bar z is the geometric point given by the algebraic closure of the residue field of z.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Steps 1--3 of the corrected Tag 0EZV proof; Tags 04MG and 03PN"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-geometric-point",
+  "def-weil-pbc-strict-henselization-limit",
+  "def-pc-separably-closed",
+  "def-pc-fibre-product",
+  "def-weil-pbc-abelian-etale-sheaves"
+ ],
+ "proof": [
+  {
+   "text": "Apply the proved affine-base and canonical ind-etale coordinate-ring theorems. Write this ind-etale K-algebra as a filtered colimit of etale K-algebras. Each stage is a finite product of finite separable extensions of K, hence a finite product of copies of K.",
+   "uses": [
+    "lem-weil-pbc-strict-local-base-affine",
+    "lem-weil-pbc-strict-local-base-ind-etale",
+    "lem-weil-pbc-etale-algebra-over-field-product",
+    "lem-pc-sepclosed-finite-sep-trivial"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0EZV, first paragraph; Algebra Tag 00U3; Limits Tag 01YW"
+   }
+  },
+  {
+   "text": "For each prime z of the filtered colimit C of finite products of K, the pulled-back prime selects one factor at each finite stage. The factor idempotent annihilates the difference between a represented element and its selected scalar. Thus every element of C_z is a scalar; denominators outside z have nonzero selected scalar and invert in K. The field map K to the nonzero local ring C_z is injective, so C_z is canonically K. Every prime is maximal, and the zero-dimensional-spectrum theorem makes Spec C profinite. Surjectivity of the transition maps is unnecessary.",
+   "uses": [
+    "lem-weil-pbc-spec-finite-product-fields",
+    "lem-weil-pbc-zero-dimensional-spectrum-profinite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0EZV, finite-product presentation; Algebra Tags 00ED and 04MG"
+   }
+  },
+  {
+   "text": "Fix a geometric point bar z and an affine pointed etale neighbourhood Spec D. Its fibre over C_z=K is an etale K-algebra, hence a finite product of copies of K. Its specified map to an algebraically closed extension selects a K-factor and hence a K-point. Since D is finitely presented over C, spread its generator images from C_z to C_s by inverting finitely many denominators outside z; invert finitely many further annihilators to make every relation hold. This gives a section over D(s) through the geometric point. Choose a clopen W containing z inside D(s), by the profinite clopen basis. A germ has a representative on an affine pointed neighbourhood. Pull it back along W to that neighbourhood. Glue the resulting section on W with zero on the disjoint open complement, using the sheaf axiom. Naturality of the pointed germ maps gives the specified germ. This proves surjectivity; equalization of pointed refinements and injectivity of the section-to-stalk map are not needed here.",
+   "uses": [
+    "lem-weil-pbc-profinite-clopen-basis",
+    "lem-weil-pbc-etale-algebra-over-field-product",
+    "lem-pc-sepclosed-finite-sep-trivial",
+    "def-weil-pbc-abelian-etale-sheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 09AY and 03PN; corrected Tag 0EZV proof after the finite-product presentation, clopen cofinality and stalk detection paragraphs"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-strict-local-base-affine",
+  "lem-weil-pbc-strict-local-base-ind-etale",
+  "lem-weil-pbc-etale-algebra-over-field-product",
+  "lem-pc-sepclosed-finite-sep-trivial",
+  "lem-weil-pbc-spec-finite-product-fields",
+  "lem-weil-pbc-zero-dimensional-spectrum-profinite",
+  "lem-weil-pbc-profinite-clopen-basis",
+  "def-weil-pbc-abelian-etale-sheaves"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Steps 1--3 of the corrected Tag 0EZV proof; Tags 04MG and 03PN; explicit Lean reduction by D7"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Every germ of an etale sheaf on a strict henselization base changed to a separably closed field extends to a global section",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"TopCat.Presheaf.germ_exist\", \"module\": \"Mathlib.Topology.Sheaves.Stalks\", \"type\": \"(F : X.Presheaf C) (x : X) (t : ToType (stalk.{v, u} F x)) :\\n  ∃ (U : Opens X) (m : x ∈ U) (s : ToType (F.obj (op U))), F.germ _ x m s = t\", \"doc\": \"For any presheaf $\\\\mathcal{F}$ on a topological space $X$, any point $x \\\\in X$, and any element $t$ in the stalk $\\\\mathcal{F}_x$, there exists an open neighborhood $U$ of $x$, a section $s \\\\in \\\\mathca\"}\n  {\"name\": \"TopCat.Presheaf.Sheafify.isGerm\", \"module\": \"Mathlib.Topology.Sheaves.Sheafify\", \"type\": \": PrelocalPredicate fun x => F.stalk x\", \"doc\": \"A prelocal predicate on a presheaf $\\\\mathcal{F}$ that holds for a function $f: U \\\\to \\\\mathcal{F}_x$ if there exists a section $g \\\\in \\\\mathcal{F}(U)$ such that $f(x)$ equals the germ of $g$ at $x$ for \"}\n  {\"name\": \"TopCat.Presheaf.germ\", \"module\": \"Mathlib.Topology.Sheaves.Stalks\", \"type\": \"(F : X.Presheaf C) (U : Opens X) (x : X) (hx : x ∈ U) : F.obj (op U) ⟶ stalk F x\", \"doc\": \"For a presheaf $\\\\mathcal{F}$ on a topological space $X$ with values in a category $\\\\mathcal{C}$, an open set $U \\\\subseteq X$ containing a point $x$, the morphism $\\\\mathcal{F}(U) \\\\to \\\\mathcal{F}_x$ sen\"}\n  {\"name\": \"TopCat.Presheaf.Γgerm_res_apply\", \"module\": \"Mathlib.Topology.Sheaves.Stalks\", \"type\": \"(F : X.Presheaf C) {U : Opens X} {i : U ⟶ ⊤} (x : X) (hx : x ∈ U) [ConcreteCategory C FC] (s) :\\n  F.germ U x hx (F.map i.op s) = F.Γgerm x s\", \"doc\": \"For a presheaf $\\\\mathcal{F}$ on a topological space $X$, an open set $U \\\\subseteq X$ containing a point $x$, and a global section $s$, the germ at $x$ of the restriction of $s$ to $U$ is equal to the \"}\n  {\"name\": \"TopCat.Presheaf.Γgerm\", \"module\": \"Mathlib.Topology.Sheaves.Stalks\", \"type\": \"(F : X.Presheaf C) (x : X) : F.obj (op ⊤) ⟶ stalk F x\", \"doc\": \"The morphism sending a global section of a presheaf $\\\\mathcal{F}$ on a topological space $X$ to its germ at a point $x \\\\in X$, constructed as the canonical inclusion into the colimit over all open nei\"}\n  {\"name\": \"TopCat.Presheaf.map_germ_eq_Γgerm\", \"module\": \"Mathlib.Topology.Sheaves.Stalks\", \"type\": \"(F : X.Presheaf C) {U : Opens X} {i : U ⟶ ⊤} (x : X) (hx : x ∈ U) : F.map i.op ≫ F.germ U x hx = F.Γgerm x\", \"doc\": \"For a presheaf $\\\\mathcal{F}$ on a topological space $X$, a point $x \\\\in X$, and an open set $U$ containing $x$, the germ of a global section at $x$ is equal to the composition of the restriction map f\"}\n  {\"name\": \"AlgebraicGeometry.germ_stalkClosedPointIso_hom\", \"module\": \"Mathlib.AlgebraicGeometry.Stalk\", \"type\": \": (Spec R).presheaf.germ ⊤ (closedPoint _) trivial ≫ (stalkClosedPointIso R).hom = (Scheme.ΓSpecIso R).hom\", \"doc\": \"For the scheme $\\\\operatorname{Spec}(R)$ associated to a commutative ring $R$, the composition of the germ map $\\\\mathcal{O}_{\\\\operatorname{Spec}(R)}(\\\\operatorname{Spec}(R)) \\\\to \\\\mathcal{O}_{\\\\operatorna\"}\n  {\"name\": \"TopCat.Presheaf.germ_exist_of_isBasis\", \"module\": \"Mathlib.Topology.Sheaves.Stalks\", \"type\": \"(F : X.Presheaf C) (x : X) (t : ToType (F.stalk x)) :\\n  ∃ (U : Opens X) (m : x ∈ U) (_ : U ∈ B) (s : ToType (F.obj (op U))), F.germ _ x m s = t\", \"doc\": \"For any presheaf $\\\\mathcal{F}$ on a topological space $X$, a point $x \\\\in X$, and an element $t$ in the stalk $\\\\mathcal{F}_x$, there exists an open set $U$ in a basis $\\\\mathcal{B}$ containing $x$ and \"}\n",
+   "date": "2026-10-18",
+   "digest": "3048bcf5cbf7ff2c",
+   "verdict": "no exact match: general category, stalk or ring ingredients exist, but none states this scheme comparison; the relevant ingredients are used in the proof"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Strict henselization base changed to a separably closed field is affine and has closed points and global sections surject onto geometric stalks",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.isField_of_universallyClosed\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Proper\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (K : Type u) [inst : Field K]\\n  (f : X ⟶ AlgebraicGeometry.Spec { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })\\n  [AlgebraicGeometry.IsIntegral X] [AlgebraicGeometry.UniversallyClosed f], IsField ↑(X.presheaf.obj (Opposite.op ⊤))\", \"doc\": \"If $X$ is an integral scheme and the morphism $f: X \\\\to \\\\operatorname{Spec}(K)$ is universally closed, then the ring of global sections $\\\\Gamma(X, \\\\mathcal{O}_X)$ is a field.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.residue_surjective\", \"module\": \"Mathlib/AlgebraicGeometry/ResidueField\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) (x : ↥X), Function.Surjective ⇑(CategoryTheory.ConcreteCategory.hom (X.residue x))\", \"doc\": \"The canonical ring homomorphism from the local ring $\\\\mathcal{O}_{X,x}$ (the stalk of the structure sheaf at $x$) to its residue field $k(x)$, obtained by quotienting $\\\\mathcal{O}_{X,x}$ by its unique\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsPreimmersionFromSpecResidueField\", \"module\": \"Mathlib/AlgebraicGeometry/ResidueField\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (x : ↥X), AlgebraicGeometry.IsPreimmersion (X.fromSpecResidueField x)\", \"doc\": \"For any scheme $X$ and a point $x \\\\in X$, the canonical morphism $\\\\operatorname{Spec}(\\\\kappa(x)) \\\\to X$ from the spectrum of the residue field $\\\\kappa(x)$ at $x$ to $X$ is a preimmersion in the sense \"}\n  {\"name\": \"AlgebraicGeometry.SurjectiveOnStalks.iff_of_isAffine\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/SurjectiveOnStalks\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [AlgebraicGeometry.IsAffine X] [AlgebraicGeometry.IsAffine Y],\\n  AlgebraicGeometry.SurjectiveOnStalks f ↔\\n    (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.app f ⊤)).SurjectiveOnStalks\", \"doc\": \"For affine schemes $X$ and $Y$, a morphism $f : X \\to Y$ is surjective on stalks if and only if the corresponding ring homomorphism between their global sections is surjective on stalks.\"}\n  {\"name\": \"Algebra.FormallyUnramified.bijective_of_isAlgClosed_of_isLocalRing\", \"module\": \"Mathlib/RingTheory/Unramified/Field\", \"type\": \"∀ (K : Type u_1) (A : Type u_2) [inst : Field K] [inst_1 : CommRing A] [inst_2 : Algebra K A]\\n  [Algebra.FormallyUnramified K A] [Algebra.EssFiniteType K A] [IsAlgClosed K] [IsLocalRing A],\\n  Function.Bijective ⇑(algebraMap K A)\", \"doc\": \"If $ K $ is an algebraically closed field and $ A $ is a local ring, then the canonical algebra homomorphism from $ K $ to $ A $ is bijective.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsPreimmersionMapResidue\", \"module\": \"Mathlib/AlgebraicGeometry/ResidueField\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (x : ↥X), AlgebraicGeometry.IsPreimmersion (AlgebraicGeometry.Spec.map (X.residue x))\", \"doc\": \"For any scheme $X$ and any point $x \\\\in X$, the morphism $\\\\operatorname{Spec}(k(x)) \\\\to X$ induced by the residue homomorphism $\\\\mathcal{O}_{X,x} \\\\to k(x)$ is a preimmersion, where $k(x)$ denotes the \"}\n  {\"name\": \"HenselianLocalRing.TFAE\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"∀ (R : Type u) [inst : CommRing R] [inst_1 : IsLocalRing R],\\n  [HenselianLocalRing R,\\n      ∀ (f : Polynomial R),\\n        f.Monic →\\n          ∀ (a₀ : IsLocalRing.ResidueField R),\\n            (Polynomial.aeval a₀) f = 0 →\\n              (Polynomial.aeval a₀) (Polynomial.derivative f) ≠ 0 → ∃ a, f.IsRo\", \"doc\": \"For a commutative local ring $ R $, the following are equivalent: \\n1. $ R $ is a Henselian local ring;\\n2. For every monic polynomial $ f \\\\in R[X] $, if $ a_0 \\\\in \\\\text{ResidueField}(R) $ satisfies $ \\\\\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.SpecToEquivOfField\", \"module\": \"Mathlib/AlgebraicGeometry/ResidueField\", \"type\": \"(K : Type u) →\\n  [inst : Field K] →\\n    (X : AlgebraicGeometry.Scheme) →\\n      (AlgebraicGeometry.Spec { carrier := K, commRing := Field.toEuclideanDomain.toCommRing } ⟶ X) ≃\\n        (x : ↥X) × (X.residueField x ⟶ { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })\", \"doc\": \"For any scheme $X$ and field $K$, there is a bijection between the set of morphisms $\\\\operatorname{Spec}(K) \\\\to X$ and the set of pairs $(x, \\\\phi)$ where $x \\\\in X$ is a point and $\\\\phi : \\\\kappa(x) \\\\to\"}\n",
+   "date": "2026-10-18",
+   "digest": "12f7aae59d01072e",
+   "verdict": "no exact match: general category, stalk or ring ingredients exist, but none states this scheme comparison; the relevant ingredients are used in the proof"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsSepClosed\", \"Scheme\"",
+   "results": "[loogle] OK 1 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.exists_fac_of_etale_of_isSepClosed\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.EtalePoint\", \"type\": \" {X S : AlgebraicGeometry.Scheme} (f : X ⟶ S) [AlgebraicGeometry.Etale f] {Ω : Type u} [Field Ω] [IsSepClosed Ω] (s : AlgebraicGeometry.Spec ↧Ω ⟶ S) (x : ↥X) (hx : f x = s default) : ∃ l, CategoryTheory.CategoryStruct.comp l f = s ∧ l default = x\", \"doc\": \"\"}\n",
+   "date": "2026-10-18",
+   "digest": "f4890c79d17849cb",
+   "verdict": "no exact match: general category, stalk or ring ingredients exist, but none states this scheme comparison; the relevant ingredients are used in the proof"
+  },
+  {
+   "tool": "grep",
+   "query": "strictHensel.*(stalk|closed)|clopen.*(stalk|germ)",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-18",
+   "digest": "4f53cda18c2baa0c",
+   "verdict": "no exact match: general category, stalk or ring ingredients exist, but none states this scheme comparison; the relevant ingredients are used in the proof"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.StrictLocalGeometricFibreTest",
+  "date": "2026-10-18",
+  "group": "D7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-direct-image-finiteness-proper",
+   "place": "Steps 1--3 of the corrected Tag 0EZV proof; Tags 04MG and 03PN",
+   "via": [
+    "lem-weil-pbc-strict-local-geometric-fibre-test"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.StrictLocalBaseGlobalGerms",
+  "file": "lean/Sheaf/AlgebraicGeometry/StrictLocalBaseGlobalGerms.lean",
+  "declaration": "AlgebraicGeometry.Etale.strictLocalBase_globalGerms",
+  "statement": "theorem strictLocalBase_globalGerms\n    {S : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]\n    (s : Spec (.of Ω) ⟶ S) (K : Type u) [Field K] [IsSepClosed K]\n    (u : Spec (.of K) ⟶ Scheme.strictHenselizationScheme s) :\n    let E := pullback (Scheme.strictHenselizationStructuralMap s)\n      (u ≫ Scheme.strictHenselizationStructuralMap s)\n    ∀ (F : Sheaf E.smallEtaleTopology AddCommGrpCat.{u + 1}) (e : E),\n        Function.Surjective\n          ((Scheme.pointSmallEtale (E.algClosurePoint e)).toPresheafFiber\n            (Scheme.Etale.mk (𝟙 E))\n            (Over.homMk (E.algClosurePoint e) (Category.comp_id _)) F.obj)",
+  "branch": "sheaf-dag",
+  "by": "D7",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D7",
+  "result": "pass",
+  "landing": "20261018T071144-L-1665839",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D7",
+  "result": "pass",
+  "landing": "20261018T071144-L-1665839",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
