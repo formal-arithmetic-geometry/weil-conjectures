@@ -266,7 +266,12 @@ change is `AlgebraicGeometry.Etale.upperStar_map_tateSheafIso_hom`
 
 The blueprint clause that `A` is free of rank `ef` over `ℤ/ℓ^N`, `A ≅ (ℤ/ℓ^N)^{ef}`, is
 `IsDiscreteValuationRing.free_quotient_span_pow`
-(`WeilConjectures.RingTheory.DiscreteValuationRing.FiniteKummerLevelFree`). -/
+(`WeilConjectures.RingTheory.DiscreteValuationRing.FiniteKummerLevelFree`).
+
+The blueprint states the isomorphism on the small pro-étale site; as throughout the purity
+chapter (`def-pur-conventions`, `AlgebraicGeometry.Etale.tateTwist`) the sheaves here are on the
+small étale site, the pro-étale form being transported by the pro-étale comparison
+(`WeilConjectures.SixFunctors.ProEtale.Comparison`). -/
 noncomputable def tateTwistSheafOneIsoQuotientSpanPow (T : Scheme.{u})
     [HasInvertibleExponent (R ⧸ Ideal.span {ϖ ^ (e * N)}) T] :
     haveI := IsDiscreteValuationRing.charP_quotient_span_pow hϖ hℓ he hℓe N
