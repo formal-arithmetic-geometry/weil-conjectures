@@ -17,7 +17,8 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace IsLocalRing
 
-private theorem depth_equiv_local {R : Type u} [CommRing R] [IsLocalRing R]
+/-- Linear equivalences preserve the depth of finite modules over a local ring. -/
+theorem depth_equiv_local {R : Type u} [CommRing R] [IsLocalRing R]
     {A : Type*} [AddCommGroup A] [Module R A] [Module.Finite R A]
     {B : Type*} [AddCommGroup B] [Module R B] [Module.Finite R B]
     (e : A ≃ₗ[R] B) : depth (R := R) A = depth (R := R) B := by
@@ -47,14 +48,16 @@ private theorem depth_equiv_local {R : Type u} [CommRing R] [IsLocalRing R]
     · rintro ⟨rs, hreg, hmem, rfl⟩
       exact ⟨rs, (e.isRegular_congr rs).mpr hreg, hmem, rfl⟩
 
-private theorem depth_subsingleton {R : Type u} [CommRing R] [IsLocalRing R]
+/-- A subsingleton finite module over a local ring has infinite depth. -/
+theorem depth_subsingleton {R : Type u} [CommRing R] [IsLocalRing R]
     (A : Type*) [AddCommGroup A] [Module R A] [Module.Finite R A] [Subsingleton A] :
     depth (R := R) A = ⊤ := by
   unfold depth Ideal.depth
   have ht : maximalIdeal R • (⊤ : Submodule R A) = ⊤ := Subsingleton.elim _ _
   rw [if_pos ht]
 
-private theorem depth_free_ge {R : Type u} [CommRing R] [IsLocalRing R]
+/-- The depth of a finite free module is at least the depth of the local ring. -/
+theorem depth_free_ge {R : Type u} [CommRing R] [IsLocalRing R]
     (A : Type*) [AddCommGroup A] [Module R A] [Module.Finite R A] [Module.Free R A] :
     depth (R := R) R ≤ depth (R := R) A := by
   classical

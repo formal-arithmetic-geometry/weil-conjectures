@@ -11,20 +11,17 @@ public import Sheaf.RingTheory.GlobalDimension
 public import Sheaf.RingTheory.Depth
 import Mathlib.RingTheory.Nakayama
 import Mathlib.RingTheory.Regular.RegularSequence
-import Sheaf.RingTheory.DepthQuotSMulTop
 import Sheaf.RingTheory.MinimalFiniteFreeResolutionLocal
-import Mathlib.Algebra.Module.Projective
-import Sheaf.Algebra.ProjectiveDimensionWellDefined
 import Mathlib.LinearAlgebra.FreeModule.Basic
 import Mathlib.RingTheory.Noetherian.Basic
 import Sheaf.AlgebraicGeometry.ExactFreeComplexLastMinors
 import Sheaf.RingTheory.DepthInSES
-import Mathlib.Algebra.Homology.ExactSequence
-import Mathlib.Algebra.Module.FinitePresentation
-import Mathlib.RingTheory.Flat.Basic
-import Sheaf.Algebra.Homology.FlatResolutionTorComparison
-import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
-import Sheaf.RingTheory.DepthOverQuotientRing
+import Sheaf.RingTheory.BoundedProjectiveResolutionDimension
+import Mathlib.RingTheory.Regular.ProjectiveDimension
+import Sheaf.RingTheory.CohenMacaulayDepthFirstTerm
+import Sheaf.RingTheory.DepthExt
+import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
+import Mathlib.CategoryTheory.Abelian.Projective.Resolution
 
 /-!
 # The Auslander–Buchsbaum depth formula
@@ -39,117 +36,337 @@ universe u v
 
 namespace IsLocalRing
 
+open CategoryTheory CategoryTheory.Limits
+
+private theorem depth_cokernel_ge
+    {R : Type u} [CommRing R] [IsNoetherianRing R] [IsLocalRing R]
+    {A B C : Type*} [AddCommGroup A] [Module R A] [Module.Finite R A]
+    [AddCommGroup B] [Module R B] [Module.Finite R B]
+    [AddCommGroup C] [Module R C] [Module.Finite R C]
+    (f : A →ₗ[R] B) (g : B →ₗ[R] C)
+    (hf : Function.Injective f) (hfg : Function.Exact f g) (hg : Function.Surjective g) :
+    min (depth (R := R) B) (depth (R := R) A - 1) ≤ depth (R := R) C := by
+  cases subsingleton_or_nontrivial C with
+  | inl h =>
+    let := h
+    rw [depth_subsingleton C]
+    exact le_top
+  | inr h =>
+    let := h
+    cases subsingleton_or_nontrivial A with
+    | inl h =>
+      let := h
+      have hfzero : f = 0 := by
+        ext a
+        rw [Subsingleton.elim a 0, map_zero]
+        rfl
+      have hginj : Function.Injective g := by
+        rw [hfzero] at hfg
+        exact (LinearMap.exact_zero_iff_injective _ _).mp hfg
+      rw [depth_subsingleton A]
+      simpa using (depth_equiv_local (LinearEquiv.ofBijective g ⟨hginj, hg⟩)).le
+    | inr h =>
+      let := h
+      have : Nontrivial B := hf.nontrivial
+      exact (depth_in_short_exact f g hf hfg hg).2.1
+
+private theorem projectiveDimension_eq_nat
+    {R : Type u} [CommRing R] (M : ModuleCat.{max u v} R) [Nontrivial M]
+    (h : ModuleCat.HasFiniteProjectiveDimension M) :
+    CategoryTheory.projectiveDimension M =
+      (ModuleCat.projectiveDimension M h : WithBot ℕ∞) := by
+  classical
+  apply eq_of_forall_ge_iff
+  intro a
+  cases a with
+  | bot =>
+    constructor
+    · intro hz
+      have : Limits.IsZero M :=
+        (CategoryTheory.projectiveDimension_eq_bot_iff M).mp (le_bot_iff.mp hz)
+      exact (not_subsingleton M (ModuleCat.isZero_iff_subsingleton.mp this)).elim
+    · intro hz
+      change (ModuleCat.projectiveDimension M h : WithBot ℕ∞) ≤ ⊥ at hz
+      simp only [le_bot_iff, WithBot.natCast_ne_bot] at hz
+  | coe a =>
+    cases a with
+    | top => simp
+    | coe n =>
+      constructor
+      · intro hn
+        have hn' := (CategoryTheory.projectiveDimension_le_iff M n).mp hn
+        have hn'' := (ModuleCat.hasProjectiveResolutionLE_iff_hasProjectiveDimensionLE M n).mpr hn'
+        exact_mod_cast (Nat.find_min' h hn'')
+      · intro hn
+        have hn' : ModuleCat.projectiveDimension M h ≤ n := by exact_mod_cast hn
+        have hres : ModuleCat.HasProjectiveResolutionLE M n := by
+          obtain ⟨P, hP⟩ := Nat.find_spec h
+          exact ⟨P, fun i hi ↦ hP i (lt_of_le_of_lt hn' hi)⟩
+        apply (CategoryTheory.projectiveDimension_le_iff M n).mpr
+        exact (ModuleCat.hasProjectiveResolutionLE_iff_hasProjectiveDimensionLE M n).mp hres
+
+private theorem depth_le_resolution_length_add_depth
+    {R : Type u} [CommRing R] [IsNoetherianRing R] [IsLocalRing R]
+    (M : ModuleCat.{max u v} R) [Module.Finite R M] [Nontrivial M]
+    (e : ℕ) (P : ProjectiveResolution M)
+    (hzero : ∀ i : ℕ, e < i → IsZero (P.complex.X i))
+    (hfree : ∀ i : ℕ, Module.Finite R (P.complex.X i) ∧ Module.Free R (P.complex.X i)) :
+    depth (R := R) R ≤ (e : ℕ∞) + depth (R := R) M := by
+  classical
+  obtain ⟨d, hd, _⟩ := exists_depth_eq_ext_degree (R := R) R
+  let (i : ℕ) : Module.Finite R (P.complex.X i) := (hfree i).1
+  let (i : ℕ) : Module.Free R (P.complex.X i) := (hfree i).2
+  let X : ℕ → ModuleCat.{max u v} R
+    | 0 => M
+    | i + 1 => P.complex.X i
+  let g : (i : ℕ) → (X (i + 1) ⟶ X i)
+    | 0 => P.π.f 0
+    | i + 1 => P.complex.d (i + 1) i
+  let (i : ℕ) : Module.Finite R (X i) := by
+    cases i with
+    | zero => exact inferInstanceAs (Module.Finite R M)
+    | succ i => exact (hfree i).1
+  let (i : ℕ) : Module.Finite R (LinearMap.range (g i).hom) :=
+    Module.Finite.of_surjective (g i).hom.rangeRestrict
+      (LinearMap.range_eq_top.mp (g i).hom.range_rangeRestrict)
+  have hex (i : ℕ) : Function.Exact (g (i + 1)).hom (g i).hom := by
+    cases i with
+    | zero =>
+      exact (ShortComplex.ShortExact.moduleCat_exact_iff_function_exact _).mp P.exact₀
+    | succ i =>
+      exact (ShortComplex.ShortExact.moduleCat_exact_iff_function_exact _).mp (P.exact_succ i)
+  have htopinj : Function.Injective (g e).hom := by
+    have hz : g (e + 1) = 0 := (hzero (e + 1) (by omega)).eq_of_src _ _
+    have he := hex e
+    rw [hz] at he
+    exact (LinearMap.exact_zero_iff_injective _ _).mp he
+  have hbound (i : ℕ) (hi : i ≤ e) :
+      ((d - (e - i) : ℕ) : ℕ∞) ≤ depth (R := R) (LinearMap.range (g i).hom) := by
+    induction hi using Nat.decreasingInduction with
+    | self =>
+      simp only [Nat.sub_self, Nat.sub_zero]
+      rw [← depth_equiv_local (LinearEquiv.ofInjective (g e).hom htopinj)]
+      exact hd ▸ depth_free_ge (P.complex.X e)
+    | of_succ i hi ih =>
+      let f := (LinearMap.range (g (i + 1)).hom).subtype
+      let q := (g i).hom.rangeRestrict
+      have hq : Function.Surjective q :=
+        LinearMap.range_eq_top.mp (g i).hom.range_rangeRestrict
+      have hfq : Function.Exact f q := by
+        rw [LinearMap.exact_iff]
+        simpa only [f, q, Submodule.range_subtype, LinearMap.ker_rangeRestrict] using
+          (LinearMap.exact_iff.mp (hex i))
+      have hdep := depth_cokernel_ge f q Subtype.val_injective hfq hq
+      apply le_trans _ hdep
+      apply le_min
+      · exact le_trans (by exact_mod_cast Nat.sub_le d (e - i))
+          (hd ▸ depth_free_ge (P.complex.X i))
+      · have hsub := tsub_le_tsub_right ih 1
+        apply le_trans _ hsub
+        simpa only [ENat.natCast_sub, Nat.cast_one] using
+          (ENat.natCast_le_natCast.mpr
+            (show d - (e - i) ≤ d - (e - (i + 1)) - 1 by omega))
+  have hepi : Function.Surjective (g 0).hom :=
+    (ModuleCat.epi_iff_surjective (P.π.f 0)).mp inferInstance
+  have hM := hbound 0 (Nat.zero_le e)
+  rw [depth_equiv_local (LinearEquiv.ofTop _ (LinearMap.range_eq_top.mpr hepi))] at hM
+  obtain ⟨t, ht, _⟩ := exists_depth_eq_ext_degree (R := R) M
+  rw [hd, ht, ← ENat.natCast_add]
+  rw [ht] at hM
+  have hdt : d - e ≤ t := by exact_mod_cast hM
+  exact_mod_cast (show d ≤ e + t by omega)
+
+private theorem projectiveDimension_le_depth_ring
+    {R : Type u} [CommRing R] [IsLocalRing R] [IsNoetherianRing R]
+    (M : ModuleCat.{max u v} R) [Module.Finite R M]
+    (h : ModuleCat.HasFiniteProjectiveDimension M) :
+    (ModuleCat.projectiveDimension M h : ℕ∞) ≤ depth (R := R) R := by
+  classical
+  let d := ModuleCat.projectiveDimension M h
+  change (d : ℕ∞) ≤ _
+  by_cases hd0 : d = 0
+  · simp [hd0]
+  have hd : 1 ≤ d := by omega
+  have hres : ModuleCat.HasProjectiveResolutionLE M d := Nat.find_spec h
+  obtain ⟨P, hzero, hfree, hminimal⟩ :=
+    ModuleCat.exists_minimal_finite_free_resolution M d hres
+  let (i : ℕ) : Module.Finite R (P.complex.X i) := (hfree i).1
+  let (i : ℕ) : Module.Free R (P.complex.X i) := (hfree i).2
+  let n : ℕ → ℕ := fun i ↦ Fintype.card (Module.Free.ChooseBasisIndex R (P.complex.X i))
+  let b (i : ℕ) : Module.Basis (Fin (n i)) R (P.complex.X i) :=
+    (Module.Free.chooseBasis R (P.complex.X i)).reindex (Fintype.equivFin _)
+  let c (i : ℕ) : P.complex.X i ≃ₗ[R] (Fin (n i) → R) := (b i).equivFun
+  -- A zero last term would contradict the least possible resolution length.
+  have hn : n d ≠ 0 := by
+    intro hn
+    have hz : CategoryTheory.Limits.IsZero (P.complex.X d) := by
+      apply ModuleCat.isZero_iff_subsingleton.mpr
+      refine ⟨fun x y ↦ (c d).injective ?_⟩
+      ext j
+      exact (Fin.elim0 (hn ▸ j))
+    have hshort : ModuleCat.HasProjectiveResolutionLE M (d - 1) := by
+      refine ⟨P, fun i hi ↦ ?_⟩
+      by_cases hid : i = d
+      · simpa [hid] using hz
+      · exact hzero i (by omega)
+    have : d ≤ d - 1 := Nat.find_min' h hshort
+    omega
+  let f (i : ℕ) : (Fin (n i) → R) →ₗ[R] (Fin (n (i - 1)) → R) :=
+    (c (i - 1)).toLinearMap ∘ₗ (P.complex.d i (i - 1)).hom ∘ₗ (c i).symm.toLinearMap
+  let φ (i : ℕ) : Matrix (Fin (n (i - 1))) (Fin (n i)) R := LinearMap.toMatrix' (f i)
+  have hφ (i : ℕ) (v : Fin (n i) → R) :
+      (φ i).mulVec v = c (i - 1) ((P.complex.d i (i - 1)).hom ((c i).symm v)) := by
+    exact LinearMap.toMatrix'_mulVec (f i) v
+  have hpexact (i : ℕ) (hi : 1 ≤ i) :
+      Function.Exact (P.complex.d (i + 1) i).hom (P.complex.d i (i - 1)).hom := by
+    obtain ⟨j, rfl⟩ := Nat.exists_eq_succ_of_ne_zero (by omega : i ≠ 0)
+    exact (CategoryTheory.ShortComplex.ShortExact.moduleCat_exact_iff_function_exact _).mp
+      (P.exact_succ j)
+  have hexact (i : ℕ) (hi : 1 ≤ i) (_hie : i + 1 ≤ d) :
+      Function.Exact (φ (i + 1)).mulVec (φ i).mulVec := by
+    intro v
+    constructor
+    · intro hv
+      have hv' : (P.complex.d i (i - 1)).hom ((c i).symm v) = 0 := by
+        apply (c (i - 1)).injective
+        simpa only [map_zero, ← hφ] using hv
+      obtain ⟨x, hx⟩ := (hpexact i hi _).mp hv'
+      refine ⟨c (i + 1) x, ?_⟩
+      simp only [hφ, Nat.add_one_sub_one, LinearEquiv.symm_apply_apply, hx,
+        LinearEquiv.apply_symm_apply]
+    · rintro ⟨x, rfl⟩
+      rw [hφ, hφ]
+      simp only [Nat.add_one_sub_one, LinearEquiv.symm_apply_apply]
+      rw [(hpexact i hi).apply_apply_eq_zero, map_zero]
+  have hcomplex (i : ℕ) (hi : 1 ≤ i) (hie : i + 1 ≤ d)
+      (v : Fin (n (i + 1)) → R) :
+      (φ i).mulVec ((φ (i + 1)).mulVec v) = 0 :=
+    (hexact i hi hie).apply_apply_eq_zero v
+  have hdinj : Function.Injective (P.complex.d d (d - 1)).hom := by
+    have hp := hpexact d hd
+    have hz : P.complex.d (d + 1) d = 0 :=
+      (hzero (d + 1) (by omega)).eq_of_src _ _
+    rw [hz] at hp
+    exact (LinearMap.exact_zero_iff_injective _ _).mp hp
+  have hinjective : Function.Injective (φ d).mulVec := by
+    intro x y hxy
+    rw [hφ, hφ] at hxy
+    exact (c d).symm.injective (hdinj ((c (d - 1)).injective hxy))
+  have hentries (i : Fin (n (d - 1))) (j : Fin (n d)) :
+      φ d i j ∈ IsLocalRing.maximalIdeal R := by
+    change LinearMap.toMatrix' (f d) i j ∈ _
+    rw [LinearMap.toMatrix'_apply]
+    let l : P.complex.X (d - 1) →ₗ[R] R :=
+      (LinearMap.proj i) ∘ₗ (c (d - 1)).toLinearMap
+    have hm : (P.complex.d d (d - 1)).hom ((c d).symm (Pi.single j 1)) ∈
+        IsLocalRing.maximalIdeal R • (⊤ : Submodule R (P.complex.X (d - 1))) := by
+      have hm := hminimal (d - 1) (by omega)
+      have heq : d - 1 + 1 = d := by omega
+      rw [heq] at hm
+      exact hm (LinearMap.mem_range_self _ _)
+    have hl := Submodule.smul_top_le_comap_smul_top (IsLocalRing.maximalIdeal R) l hm
+    simpa [l, f, Submodule.mem_comap, Ideal.smul_eq_mul, Ideal.mul_top] using hl
+  let I : Ideal R := Ideal.span {z : R | ∃ r : Fin (n d) → Fin (n (d - 1)),
+    StrictMono r ∧ z = ((φ d).submatrix r id).det}
+  -- Modulo the maximal ideal the last matrix is zero, hence so are its nonempty minors.
+  have hI : I ≤ IsLocalRing.maximalIdeal R := by
+    apply Ideal.span_le.mpr
+    rintro z ⟨r, _hr, rfl⟩
+    apply Ideal.Quotient.eq_zero_iff_mem.mp
+    rw [(Ideal.Quotient.mk (IsLocalRing.maximalIdeal R)).map_det]
+    have hmat : (Ideal.Quotient.mk (IsLocalRing.maximalIdeal R)).mapMatrix
+        ((φ d).submatrix r id) = 0 := by
+      ext i j
+      exact Ideal.Quotient.eq_zero_iff_mem.mpr (hentries (r i) j)
+    rw [hmat]
+    let : Nonempty (Fin (n d)) := ⟨⟨0, Nat.pos_of_ne_zero hn⟩⟩
+    exact Matrix.det_zero
+  obtain htop | ⟨rs, hlen, hmem, hreg⟩ :=
+    exact_free_complex_last_minors_regular_sequence R d hd n φ hcomplex hexact hinjective
+  · exact ((IsLocalRing.maximalIdeal.isMaximal R).ne_top
+      (top_le_iff.mp (htop ▸ hI))).elim
+  · unfold IsLocalRing.depth Ideal.depth
+    split_ifs
+    · exact le_top
+    · apply le_sSup
+      exact ⟨rs, hreg, fun x hx ↦ hI (hmem x hx), by simp [hlen]⟩
+
+
 /-- The Auslander–Buchsbaum formula for a nonzero finite module of finite projective dimension
  over a commutative Noetherian local ring. Both depths use the unique maximal ideal.
 Source: Stacks Project, Algebra, Tag 090V, proposition-Auslander-Buchsbaum
 (blueprint: lem-weil-pbc-auslander-buchsbaum).
 
 Proof:
-1. First justify induction on the depth of the module, uniformly over all Noetherian local rings.
-Nakayama gives $\mathfrak mM\ne M$, since $M$ is finite and nonzero and the Jacobson radical of a
-local ring is its unique maximal ideal. If $\operatorname{depth}(M)=0$ it is already finite.
-Otherwise the supremum definition of depth supplies a regular sequence of positive length in
-$\mathfrak m$; its first element $y$ is injective on $M$. The depth-drop lemma applied to $y$
-explicitly says that $\operatorname{depth}(M)$ is a finite integer. Thus put
-$t=\operatorname{depth}(M)\in\mathbf N$ and use strong induction on $t$ for the asserted formula
-for every pair $(R,M)$ satisfying the hypotheses. Uses: lem-weil-pbc-nakayama-jacobson,
-def-weil-pbc-depth, def-weil-pbc-regular-sequence, lem-weil-pbc-depth-drops-by-one.
+1. Compare the resolution-length projective dimension with Mathlib's Ext projective
+   dimension using the bounded-resolution comparison and the least-length property.
+2. A finite free resolution of length e gives depth R ≤ e + depth M. Factor its maps
+   through their images and apply the depth lemma descending from the injective top map.
+   A zero syzygy has infinite depth; if a short exact sequence has zero left term, the
+   other two terms are isomorphic. These cases justify all uses of the depth lemma.
+3. For any finite module L of finite projective dimension q, minimalize a length-q
+   finite free resolution. If q > 0 its last rank is positive, by minimality of q.
+   Its last maximal minors lie in the maximal ideal. The exact-free-complex last-minors
+   lemma therefore gives a ring-regular sequence of length q, hence q ≤ depth R.
+4. Depth is finite by its Ext characterization. Its supremum definition and Nakayama
+   give an M-regular sequence rs of length depth M in the maximal ideal. Mathlib's
+   projectiveDimension_quotient_eq_add_length_of_isWeaklyRegular gives
+   pd(M/(rs)M) = pd M + length rs, with all dimensions taken over R.
+5. Apply step 3 to the nonzero finite quotient M/(rs)M. This gives
+   pd M + depth M ≤ depth R. Combine it with step 2 by antisymmetry.
 
-2. Put $e=\operatorname{pd}_R(M)$. By the resolution-length definition, part (2) of the
-projective-dimension well-definedness lemma, and the minimal finite free resolution lemma choose
-an exact resolution $0\to F_e\to\cdots\to F_0\to M\to0$ with $F_i=R^{n_i}$ and every differential
-between free terms having entries in $\mathfrak m$. If $e>0$, $n_e>0$: otherwise deleting the zero
-top term gives a shorter projective resolution, contradicting the definition of $e$. If $e=0$,
-$F_0\cong M$ and $n_0>0$ since $M\ne0$. Uses: def-weil-pbc-finite-global-dimension,
-lem-weil-pbc-minimal-finite-free-resolution-local, def-weil-pbc-projective-module,
-lem-weil-pbc-projective-dimension-well-defined.
-
-3. A nonzero finite free module $R^n$, $n>0$, has the same depth as $R$: quotienting
-coordinatewise by each prefix of a sequence gives $(R/J)^n$, multiplication is injective on this
-module exactly when it is injective on $R/J$, and $(R/J)^n\ne0$ exactly when $R/J\ne0$. Therefore
-the regular sequences, and hence their length suprema, coincide. For $e=0$ this proves the desired
-formula immediately. For $e>0$ define $Z_0=M$ and $Z_i=\operatorname{im}(F_i\to F_{i-1})$ for
-$1\le i\le e$, identifying $Z_e$ with $F_e$. Exactness gives $0\to Z_{i+1}\to F_i\to Z_i\to0$ for
-$0\le i<e$. Each $Z_i$ is finite by the Noetherian-submodule lemma (and $Z_0$ is finite by
-hypothesis). Each is nonzero: $Z_i=0$, $i\ge1$, would allow truncation to a projective resolution
-of $M$ of length at most $i-1<e$. Consequently every $F_i$ in these sequences is nonzero too.
-These checks ensure that all three modules in every application of the depth lemma are nonzero
-finite modules. Uses: def-weil-pbc-regular-sequence, def-weil-pbc-depth, def-weil-pbc-free-module,
-def-weil-pbc-finite-global-dimension, lem-weil-pbc-noetherian-submodule-finite.
-
-4. For $e>0$ apply the exact-free-complex last-minors lemma to the unaugmented free complex. Its
-top rank $n_e$ is positive. Every $n_e$-minor of the top matrix is a sum of products of $n_e$
-entries in $\mathfrak m$, so the ideal $I$ of these minors is contained in $\mathfrak m$ and
-cannot equal $R$. The lemma therefore supplies an $R$-regular sequence of length $e$ in
-$I\subseteq\mathfrak m$. The depth definition gives $d:=\operatorname{depth}(R)\ge e$. In
-particular $d>0$; the depth-drop lemma applied to the first element of this regular sequence shows
-that $d$ is finite. Uses: lem-weil-pbc-exact-free-complex-last-minors-regular-sequence,
-def-weil-pbc-depth, lem-weil-pbc-depth-drops-by-one.
-
-5. Base case $t=0$, with $e>0$. Start with $\operatorname{depth}(Z_e)=d$. In $0\to Z_{i+1}\to
-F_i\to Z_i\to0$ the second inequality of the depth lemma gives
-$\operatorname{depth}(Z_i)\ge\min\{d,\operatorname{depth}(Z_{i+1})-1\}$. Descending induction from
-$i=e-1$ to $i=0$ yields $\operatorname{depth}(Z_i)\ge d-(e-i)$, because $d\ge e$ and
-$\operatorname{depth}(F_i)=d$. If a syzygy has infinite depth its contribution to the minimum is
-$d$, so the same bound remains valid. Hence $0=t=\operatorname{depth}(Z_0)\ge d-e$. Together with
-$d\ge e$ this gives $d=e=e+t$. Uses: lem-weil-pbc-depth-in-ses.
-
-6. Induction step $t>0$, with $e>0$. The split short exact sequence $0\to R\to R\oplus M\to M\to0$
-has nonzero finite terms. The first inequality of the depth lemma gives
-$\operatorname{depth}(R\oplus M)\ge\min\{d,t\}>0$. Nakayama ensures $\mathfrak m(R\oplus M)\ne
-R\oplus M$, so the depth definition supplies a regular sequence of positive length on $R\oplus M$
-in $\mathfrak m$. Let $x$ be its first term. Multiplication by $x$ is injective on each summand,
-so $x$ is a common nonzerodivisor on $R$ and $M$. Uses: lem-weil-pbc-depth-in-ses,
-lem-weil-pbc-nakayama-jacobson, def-weil-pbc-depth, def-weil-pbc-regular-sequence.
-
-7. Set $S=R/xR$ and $N=M/xM$. The depth-drop lemma gives $N\ne0$. The ring $S$ is nonzero local
-with maximal ideal $\mathfrak m/xR$: its maximal ideals correspond to maximal ideals of $R$
-containing $xR$, and $x\in\mathfrak m$. It is Noetherian since every ideal of $S$ is the image of
-an ideal of $R$, whose finite generators map to generators; $N$ is finite since generators of $M$
-descend. Reduction of the resolution modulo $x$ remains exact, as follows explicitly. In each
-$0\to A\to B\to C\to0$ of Step 3, multiplication by $x$ is injective on $C$: for $C=M$ this was
-proved in Step 6, and the other $C$ are submodules of finite free modules, on which $x$ is
-injective because it is injective on $R$. If $a\in A$ becomes zero in $B/xB$, write $a=xb$; the
-image of $b$ in $C$ is killed by $x$, hence is zero, so $b\in A$ and $a\in xA$. To check exactness
-in the middle, if $b\in B$ maps to $xc$ in $C$, lift $c$ to $b_1\in B$ and observe that $b-xb_1\in
-A$. Surjectivity follows by lifting representatives. Thus $0\to A/xA\to B/xB\to C/xC\to0$ is
-exact. Splicing these sequences gives $0\to S^{n_e}\to\cdots\to S^{n_0}\to N\to0$. Its
-differential entries still lie in the maximal ideal of $S$ and $n_e>0$. Uses:
-lem-weil-pbc-depth-drops-by-one, def-weil-pbc-exact-sequence, def-weil-pbc-noetherian-ring,
-def-weil-pbc-free-module.
-
-8. The reduced resolution has shortest possible length $e$, not merely length at most $e$. Indeed
-let $k=S/(\mathfrak m/xR)$. Finite free modules are flat by the finite-free flatness lemma, so the
-flat-resolution Tor comparison applied to the reduced resolution, extended by zero above $e$,
-identifies $\operatorname{Tor}^S_e(N,k)$ with its degree-$e$ tensor homology. Tensoring a free
-term $S^n$ with $k$ gives $k^n$ by sending the basis vectors to the standard coordinate vectors;
-all differential entries become zero. Hence this homology is $k^{n_e}\ne0$. If
-$q=\operatorname{pd}_S(N)<e$, part (2) of the projective-dimension well-definedness lemma and the
-minimal finite free resolution lemma would give a finite free resolution of $N$ of length $q$. Its
-terms are again flat, and the same Tor comparison computes $\operatorname{Tor}^S_e(N,k)=0$ since
-its degree-$e$ term is zero. This contradiction proves $\operatorname{pd}_S(N)=e$. All resolutions
-used here are augmented exact complexes of modules, so their augmentations induce an isomorphism
-on degree-zero homology and have zero higher homology, exactly the hypothesis of the comparison
-theorem. Uses: lem-sc-affine-standard-cover-finite-free-local-fp-flat,
-lem-pc-flat-resolution-tor-comparison, def-weil-pbc-module-chain-complex-homology,
-def-weil-pbc-finite-global-dimension, lem-weil-pbc-minimal-finite-free-resolution-local,
-lem-weil-pbc-projective-dimension-well-defined.
-
-9. Apply the depth-drop lemma to $x$ on $R$ and on $M$: as $R$-module depths,
-$\operatorname{depth}_R(S)=d-1$ and $\operatorname{depth}_R(N)=t-1$. The depth-over-quotient-ring
-lemma, for the ideal $xR\subseteq\mathfrak m$ and the modules $S,N$ annihilated by it, identifies
-these with $\operatorname{depth}(S)$ and $\operatorname{depth}_S(N)$ respectively. Step 7 verified
-that $S$ is Noetherian local and $N$ is finite nonzero; Step 8 verified finite projective
-dimension $e$. Strong induction, uniform over rings, therefore applies to $(S,N)$ at depth $t-1<t$
-and gives $d-1=e+(t-1)$. Since $d,t$ are finite integers, adding one proves $d=e+t$. Together with
-the free case and the depth-zero case this completes the induction. Uses:
-lem-weil-pbc-depth-drops-by-one, lem-weil-pbc-depth-over-quotient-ring. -/
+The module universe contains the ring universe, so projectivity in ModuleCat agrees
+with ordinary module projectivity and the bounded-resolution comparison applies. -/
 theorem depth_eq_projectiveDimension_add_depth
     {R : Type u} [CommRing R] [IsNoetherianRing R] [IsLocalRing R]
-    (M : Type v) [AddCommGroup M] [Module R M] [Nontrivial M] [Module.Finite R M]
+    (M : Type (max u v)) [AddCommGroup M] [Module R M] [Nontrivial M] [Module.Finite R M]
     (h : ModuleCat.HasFiniteProjectiveDimension (ModuleCat.of R M)) :
     depth (R := R) R =
       (ModuleCat.projectiveDimension (ModuleCat.of R M) h : ℕ∞) + depth (R := R) M := by
-  sorry
+  classical
+  let L := ModuleCat.of R M
+  let e := ModuleCat.projectiveDimension L h
+  obtain ⟨P, hzero, hfree, _⟩ :=
+    ModuleCat.exists_minimal_finite_free_resolution L e (Nat.find_spec h)
+  apply le_antisymm
+  · exact depth_le_resolution_length_add_depth L e P hzero hfree
+  · obtain ⟨t, ht, _⟩ := exists_depth_eq_ext_degree (R := R) M
+    have hm : maximalIdeal R • (⊤ : Submodule R M) ≠ ⊤ :=
+      (Submodule.top_ne_ideal_smul_of_le_jacobson_annihilator
+        (maximalIdeal_le_jacobson (Module.annihilator R M))).symm
+    have hdef : depth (R := R) M = sSup {n : ℕ∞ | ∃ rs : List R,
+        RingTheory.Sequence.IsRegular M rs ∧ (∀ r ∈ rs, r ∈ maximalIdeal R) ∧
+          n = (rs.length : ℕ∞)} := by
+      simp only [depth, Ideal.depth, if_neg hm]
+    have hmem : depth (R := R) M ∈ {n : ℕ∞ | ∃ rs : List R,
+        RingTheory.Sequence.IsRegular M rs ∧ (∀ r ∈ rs, r ∈ maximalIdeal R) ∧
+          n = (rs.length : ℕ∞)} := by
+      rw [hdef]
+      let : Nonempty {n : ℕ∞ | ∃ rs : List R,
+          RingTheory.Sequence.IsRegular M rs ∧ (∀ r ∈ rs, r ∈ maximalIdeal R) ∧
+            n = (rs.length : ℕ∞)} :=
+        ⟨⟨0, [], RingTheory.Sequence.IsRegular.nil R M, by simp, rfl⟩⟩
+      apply ENat.sSup_mem_of_nonempty_of_lt_top
+      simpa only [← hdef, ht] using ENat.natCast_lt_top t
+    obtain ⟨rs, hrs, hmax, hlen⟩ := hmem
+    have hlength : rs.length = t := by
+      rw [ht] at hlen
+      exact_mod_cast hlen.symm
+    let Q := ModuleCat.of R (M ⧸ Ideal.ofList rs • (⊤ : Submodule R M))
+    let := hrs.quot_ofList_smul_nontrivial (⊤ : Submodule R M)
+    have hqdim : CategoryTheory.projectiveDimension Q = ((e + t : ℕ) : WithBot ℕ∞) := by
+      rw [ModuleCat.projectiveDimension_quotient_eq_add_length_of_isWeaklyRegular
+        L rs hrs.1 hmax, projectiveDimension_eq_nat L h, hlength]
+      exact (Nat.cast_add e t).symm
+    have hQres : ModuleCat.HasProjectiveResolutionLE Q (e + t) :=
+      (ModuleCat.hasProjectiveResolutionLE_iff_hasProjectiveDimensionLE Q (e + t)).mpr
+        ((CategoryTheory.projectiveDimension_le_iff Q (e + t)).mp hqdim.le)
+    have hQfin : ModuleCat.HasFiniteProjectiveDimension Q := ⟨e + t, hQres⟩
+    have hQdim : ModuleCat.projectiveDimension Q hQfin = e + t := by
+      have heq := (projectiveDimension_eq_nat Q hQfin).symm.trans hqdim
+      exact_mod_cast heq
+    have hbound := projectiveDimension_le_depth_ring Q hQfin
+    rw [hQdim, ENat.natCast_add] at hbound
+    simpa only [ht] using hbound
 
 end IsLocalRing
