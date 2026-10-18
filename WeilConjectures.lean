@@ -5842,6 +5842,7 @@ public import WeilConjectures.CategoryTheory.Monoidal.Mod.IhomDual
 public import WeilConjectures.CategoryTheory.Monoidal.Mod.InternalHom
 public import WeilConjectures.CategoryTheory.Monoidal.Mod.Limits
 public import WeilConjectures.CategoryTheory.Monoidal.Mod.MapIhom
+public import WeilConjectures.CategoryTheory.Monoidal.Mod.PointSMul
 public import WeilConjectures.CategoryTheory.Monoidal.Mod.Tensor
 public import WeilConjectures.CategoryTheory.Monoidal.Mod.TensorRegular
 public import WeilConjectures.CategoryTheory.Monoidal.Mod.Transpose
@@ -9108,6 +9109,7 @@ public import WeilConjectures.SixFunctors.OpenClosed.Supports
 public import WeilConjectures.SixFunctors.OpenClosed.Vanishing
 public import WeilConjectures.SixFunctors.ProEtale.Adic.Abelian
 public import WeilConjectures.SixFunctors.ProEtale.Adic.AbelianIrreducible
+public import WeilConjectures.SixFunctors.ProEtale.Adic.AdicAbIdentification
 public import WeilConjectures.SixFunctors.ProEtale.Adic.AdicConstantSheafLeg
 public import WeilConjectures.SixFunctors.ProEtale.Adic.AlgClosedField
 public import WeilConjectures.SixFunctors.ProEtale.Adic.AlgClosedFieldExact
@@ -9140,6 +9142,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.ForgetLowerStar
 public import WeilConjectures.SixFunctors.ProEtale.Adic.FreeSections
 public import WeilConjectures.SixFunctors.ProEtale.Adic.GeometricFrobenius
 public import WeilConjectures.SixFunctors.ProEtale.Adic.GeometricFrobeniusMate
+public import WeilConjectures.SixFunctors.ProEtale.Adic.GlobalSectionSMul
 public import WeilConjectures.SixFunctors.ProEtale.Adic.GlobalSectionsHom
 public import WeilConjectures.SixFunctors.ProEtale.Adic.Hom
 public import WeilConjectures.SixFunctors.ProEtale.Adic.HomCoherence
@@ -9150,7 +9153,10 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.IntegersSheafReduction
 public import WeilConjectures.SixFunctors.ProEtale.Adic.IntegersSheafStageMap
 public import WeilConjectures.SixFunctors.ProEtale.Adic.IntegersSheafStratum
 public import WeilConjectures.SixFunctors.ProEtale.Adic.IntegersSheafStratumFLC
+public import WeilConjectures.SixFunctors.ProEtale.Adic.IntegersSheafStratumIdentification
 public import WeilConjectures.SixFunctors.ProEtale.Adic.IntegersSheafStratumTopology
+public import WeilConjectures.SixFunctors.ProEtale.Adic.IntegralLatticeApproximation
+public import WeilConjectures.SixFunctors.ProEtale.Adic.IntegralLatticeIdentification
 public import WeilConjectures.SixFunctors.ProEtale.Adic.IntegralLatticeScalarLinear
 public import WeilConjectures.SixFunctors.ProEtale.Adic.IntegralLatticeSections
 public import WeilConjectures.SixFunctors.ProEtale.Adic.IntegralLatticeTensorBijective
@@ -9204,8 +9210,11 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.LowerStarClopenSections
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LowerStarComp
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LowerStarConstantBounded
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LowerStarConstantFiniteness
+public import WeilConjectures.SixFunctors.ProEtale.Adic.LowerStarConstantFinitenessStratum
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LowerStarDevissage
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LowerStarFiniteEtaleAlgClosed
+public import WeilConjectures.SixFunctors.ProEtale.Adic.LowerStarStratumLisse
+public import WeilConjectures.SixFunctors.ProEtale.Adic.LowerStarStratumLisseComponents
 public import WeilConjectures.SixFunctors.ProEtale.Adic.MayerVietoris
 public import WeilConjectures.SixFunctors.ProEtale.Adic.Module
 public import WeilConjectures.SixFunctors.ProEtale.Adic.OpenImmersion
@@ -9235,6 +9244,7 @@ public import WeilConjectures.SixFunctors.ProEtale.AmbientCounterexampleCoproduc
 public import WeilConjectures.SixFunctors.ProEtale.BaseChange.ClosedLocalization
 public import WeilConjectures.SixFunctors.ProEtale.BaseChange.SmoothBaseChange
 public import WeilConjectures.SixFunctors.ProEtale.BaseChange.WeaklyEtale
+public import WeilConjectures.SixFunctors.ProEtale.BaseChange.WeaklyEtaleDerived
 public import WeilConjectures.SixFunctors.ProEtale.Comparison
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.CohomologicalDimension
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.ConstantSheaf
