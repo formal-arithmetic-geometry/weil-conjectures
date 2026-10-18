@@ -159,6 +159,22 @@ def only_sorry(body: str) -> bool:
     return bool(re.fullmatch(r":=\s*(?:by\s+)?sorry", body.strip()))
 
 
+def fills_only_sorries(old_body: str, new_body: str) -> bool:
+    """The new body is the old body with each `sorry` replaced by something (the sorried fields of an instance or a
+    `def` filled, the rest verbatim): the old body has a `sorry`, and its pieces between the `sorry`s occur in the
+    new body verbatim and in order. Bodies are whitespace-normalized (decl_table)."""
+    parts = re.split(r"\bsorry\b", old_body)
+    if len(parts) < 2:
+        return False
+    pos = 0
+    for part in parts:
+        i = new_body.find(part, pos)
+        if i < 0:
+            return False
+        pos = i + len(part)
+    return True
+
+
 def diff_module(old: str, new: str) -> dict:
     """What one module's change is, read from the two texts."""
     a, b = decl_table(old), decl_table(new)

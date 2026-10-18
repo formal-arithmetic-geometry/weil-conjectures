@@ -119,9 +119,11 @@ def gate(D: dict, group: str, item: str, graph=None, cycle_check: bool = True) -
         if added: bad.append("adds public declaration(s) " + short(added))
         # launcher, 2026-10-17: filling a body that is `sorry` upstream is allowed for any declaration (instance, def,
         # ...) whose signature (name, binders, type, attributes) is unchanged; those are checked just above and below.
-        # Changing a non-sorry body of a non-theorem declaration stays refused.
+        # 2026-10-18: so is filling the `sorry` fields of an instance or `def` whose other fields stay verbatim
+        # (s3.fills_only_sorries). Changing a non-sorry body of a non-theorem declaration stays refused.
         data = [k for k in d["body_changed"] if d["old"][k]["kw"] not in ("theorem", "lemma")
-                and not s3.only_sorry(d["old"][k]["body"])]
+                and not s3.only_sorry(d["old"][k]["body"])
+                and not s3.fills_only_sorries(d["old"][k]["body"], d["new"][k]["body"])]
         if data: bad.append("changes the non-sorry body of non-theorem declaration(s) " + short(data))
         attrs = [k for k in d["new"] if k in d["old"] and d["old"][k].get("head") != d["new"][k].get("head")]
         if attrs: bad.append("changes attributes of " + short(attrs))
