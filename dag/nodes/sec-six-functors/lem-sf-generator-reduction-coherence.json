@@ -24,7 +24,10 @@
   "lem-sf-open-tensor-normalization",
   "lem-sf-semilinear-proper-open-mate-pasting",
   "lem-weil-pbc-ringed-exchange-tensor-coherence",
-  "def-weil-pbc-proetale-site"
+  "def-weil-pbc-proetale-site",
+  "def-sf-integral-system-operations",
+  "def-sf-integral-system-expression-domain",
+  "def-sf-integral-system-canonical-bridge"
  ],
  "proof": [
   {
@@ -206,5 +209,62 @@
   "group": "Q14",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q14-b06f975c8 (reviewer sub-agent of L); spot-checked: I read the full item, the five steps, every cited statement, the parent's step 5, the unit sk-thm-sf-compatibility and its route, the main-20261015 fix-prop-coherence.proof.md sentence on coefficient comparisons, and Stacks 07A6/07A4/0E48. The statement is correct and unchanged. Small cases pass: the empty word gives d=u^{-1} and the triangle identity; the open case gives e∘R(d_j^{-1})=r_j by naturality of e plus the triangle identity; the tensor unit and a point with K=R̂ also check out. Hypotheses hold: ℓ≠p, qc opens, r and p proper, C_n=A_n. The coefficient categories match the parent. Every cited node is in the route, there is no cycle and no SGA citation. The closest candidate, lem-pur-completed-operation-tower-substitution, is not a duplicate: it covers only tensor and pullback. I repaired three steps (E5: the argument was asserted, not written). Step 2 now shows that d_A is the identity of models (def-pur-integral-derived-operations, def-weil-derived-direct-image), that level n of the adjunct is the adjoint of the n-th limit projection (the counit clause), and derives the open case explicitly. Step 3 now states the R⊣L transposition and cites lem-pur-completed-operation-tower-substitution for the associator, unitors and pullback compositor. Step 4 decomposes λ_Q into the conjugate of β, open base change with the open unit, the clopen formula and the compositor, and obtains Γ_Q as the open-counit adjunct. proof_deps is recomputed. No new nodes, no tool_uses. Details are in review.md, and the corrected file is fixes/dag/nodes/sec-six-functors/lem-sf-generator-reduction-coherence.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.GeneratorReductionStatement",
+  "declaration": "WeilConjectures.GeneratorReduction.generatorReductionCoherence",
+  "declarations": [
+   "WeilConjectures.GeneratorReduction.Operations",
+   "WeilConjectures.GeneratorReduction.Word",
+   "WeilConjectures.GeneratorReduction.Word.length",
+   "WeilConjectures.GeneratorReduction.GeneratorKind",
+   "WeilConjectures.GeneratorReduction.Word.systemValue",
+   "WeilConjectures.GeneratorReduction.Word.ringedValue",
+   "WeilConjectures.GeneratorReduction.GeneratorKind.systemMap",
+   "WeilConjectures.GeneratorReduction.GeneratorKind.ringedMap",
+   "WeilConjectures.GeneratorReduction.inverseOrZero",
+   "WeilConjectures.integralSystemDerivedDirectImage",
+   "WeilConjectures.GeneratorReduction.integralPush",
+   "WeilConjectures.GeneratorReduction.tensorD",
+   "WeilConjectures.GeneratorReduction.pullD",
+   "WeilConjectures.GeneratorReduction.tensorCompletion",
+   "WeilConjectures.GeneratorReduction.tensorR",
+   "WeilConjectures.GeneratorReduction.pullR",
+   "WeilConjectures.GeneratorReduction.pushR",
+   "WeilConjectures.GeneratorReduction.openR",
+   "WeilConjectures.GeneratorReduction.openD",
+   "WeilConjectures.GeneratorReduction.openDInv",
+   "WeilConjectures.GeneratorReduction.Word.integralValue",
+   "WeilConjectures.GeneratorReduction.Word.completionMap",
+   "WeilConjectures.GeneratorReduction.GeneratorKind.integralMap",
+   "WeilConjectures.GeneratorReduction.inputReduction",
+   "WeilConjectures.GeneratorReduction.Word.r",
+   "WeilConjectures.GeneratorReduction.SystemAdmissible",
+   "WeilConjectures.GeneratorReduction.Admissible",
+   "WeilConjectures.GeneratorReduction.Word.admissible",
+   "WeilConjectures.GeneratorReduction.Word.primitiveFormulas",
+   "WeilConjectures.GeneratorReduction.primitiveReductionTranspose",
+   "WeilConjectures.GeneratorReduction.completionMap_isIso",
+   "WeilConjectures.GeneratorReduction.lambdaAdmissible",
+   "WeilConjectures.GeneratorReduction.GeneratorKind.admissible",
+   "WeilConjectures.GeneratorReduction.Assertion",
+   "WeilConjectures.GeneratorReduction.FiniteTypeFamily",
+   "WeilConjectures.GeneratorReduction.generatorReductionCoherence"
+  ],
+  "file": "lean/Sheaf/SixFunctors/GeneratorReductionStatement.lean",
+  "statement": "theorem generatorReductionCoherence {D : FiniteFieldDatum.{u}} (C : D.CoefficientDatum) (E : Type u) [Field E] [Algebra (Padic C.l) E] [FiniteDimensional (Padic C.l) E] {S : Type s} (W : S → Scheme.{u}) (_hW : FiniteTypeFamily W D.k) {I : Type i} (location : I → S) (o : Operations C.l E) {a : S} {B Cw : Word W location a} (g : GeneratorKind W location B Cw) (_hB : B.length ≤ 3) (_hC : Cw.length ≤ 3) (K : ∀ k : I, DerivedCategory (scalarReductionSource C.l E (W (location k)))) (lo hi torLo torHi : ℤ) (_hAdm : ∀ k : I, Admissible C.l E (IntegralSystemRealization.calculus C.l E (W (location k))) (K k) lo hi torLo torHi) (_hIntermediate : Word.admissible C.l E W location o K lo hi torLo torHi B ∧ Word.admissible C.l E W location o K lo hi torLo torHi Cw) (_hGenerator : g.admissible C.l E W location o K lo hi torLo torHi) : B.primitiveFormulas C.l E W location o K ∧ Cw.primitiveFormulas C.l E W location o K ∧ Assertion C.l E W location o K g",
+  "branch": "newtargets-dag",
+  "by": "Q46",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "H13 ownership repair: the landed def-weil-derived-direct-image record remains WeilConjectures.sfModelDerivedPush in Sheaf.Paper.SfCommonStageDirectImage. The integral strict-system specialization used by integralPush is declared in this owning module as WeilConjectures.integralSystemDerivedDirectImage; no dependency-node record is rebound."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f0b58bf1e",
+  "group": "Q46",
+  "result": "pass",
+  "note": "Re-delivery after the H13-only RETURN of 7e1745031a21; the item was already accepted on substance then. The def-weil-derived-direct-image record is byte-equal to live (N5, SfCommonStageDirectImage, 14 sfModel* declarations), and DerivedDirectImageTower.lean is dropped. integralSystemDerivedDirectImage was moved with the same body into GeneratorReductionStatement.lean and added to lean.declarations; no name collision in the live side tree. The module diff against accepted sha b083f8d7 is only that move plus one dropped import. The node changes only declarations and the lean note; statement, stmt_deps and proof are unchanged. lean.statement is verbatim and all 36 declarations are present. There are three sorry'd postponed theorems and no local proofs. Docstrings carry the source and blueprint id; the five proof steps are in the theorem docstring. nt_compile --json: exit 0, clean, 11.4 s. Advisories carried over: the item-local L∘S∘R push, Word/Expression parallels, and a same-worker second reading."
  }
 }
