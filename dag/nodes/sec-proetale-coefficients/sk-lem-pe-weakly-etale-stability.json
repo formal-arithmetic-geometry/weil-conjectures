@@ -25,89 +25,49 @@
  ],
  "proof": [
   {
-   "text": "Let $f:U\\to X$ be weakly étale and $X^{\\prime}\\to X$ arbitrary. Put $U^{\\prime}=U\\times_X X^{\\prime}$. Both $f$ and $\\Delta_f$ are flat by definition. The universal property of fibre products identifies $U^{\\prime}\\times_{X^{\\prime}}U^{\\prime}$ with $(U\\times_XU)\\times_XX^{\\prime}$, and identifies $\\Delta_{f^{\\prime}}$ with the base change of $\\Delta_f$ along its projection to $U\\times_XU$. Thus base-change stability of flatness applies to both $f^{\\prime}$ and its diagonal, proving that $f^{\\prime}$ is weakly étale.",
+   "text": "Use Mathlib's existing IsStableUnderBaseChange instance for WeaklyEtale. Its proof writes WeaklyEtale as Flat intersect diagonal Flat, and applies base-change stability of flatness to both factors. This is exactly the unit's first base-change argument, already formalized in Mathlib/AlgebraicGeometry/Morphisms/WeaklyEtale.lean.",
    "uses": [
-    "def-weil-weakly-etale-morphism",
-    "def-pc-fibre-product",
-    "lem-weil-pbc-flat-morphism-base-change"
+    "def-weil-weakly-etale-morphism"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 094U, lemma-base-change-weakly-etale; Tag 01U9, morphisms/lemma-base-change-flat"
-   }
+   "elementary": false
   },
   {
-   "text": "Let $V\\xrightarrow{g}U\\xrightarrow{f}X$ be weakly étale. Flatness of $g$ and $f$ gives flatness of $f\\circ g$. Its diagonal factors as $V\\xrightarrow{\\Delta_g}V\\times_UV\\xrightarrow{j}V\\times_XV$. The defining equalities for these fibre products give $V\\times_UV\\simeq(V\\times_XV)\\times_{U\\times_XU}U$, where the maps to $U\\times_XU$ are $g\\times_Xg$ and $\\Delta_f$. Consequently $j$ is a base change of the flat map $\\Delta_f$, while $\\Delta_g$ is flat by hypothesis. Their composite is flat by transitivity. This proves weak étaleness of $f\\circ g$.",
+   "text": "Use Mathlib's existing IsMultiplicative instance for WeaklyEtale, whose superclass supplies IsStableUnderComposition. Its proof uses the stability of Flat and diagonal Flat, implementing the composite-diagonal factorization in the unit's first paragraph.",
    "uses": [
-    "def-weil-weakly-etale-morphism",
-    "def-pc-fibre-product",
-    "lem-weil-pbc-flat-morphism-base-change",
-    "lem-pc-flat-compose"
+    "def-weil-weakly-etale-morphism"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 094T, lemma-composition-weakly-etale; Tags 01U7 and 01U9"
-   }
+   "elementary": false
   },
   {
-   "text": "Flatness is local on source and target directly from its stalkwise definition: restricting either scheme to an open neighbourhood changes neither local ring nor its induced homomorphism. For open subschemes $U_0\\subset U$, $X_0\\subset X$ with $f(U_0)\\subset X_0$, the fibre product $U_0\\times_{X_0}U_0$ identifies with the open subscheme $p_1^{-1}(U_0)\\cap p_2^{-1}(U_0)$ of $U\\times_XU$. Indeed both descriptions represent pairs of maps into $U_0$ agreeing over $X$; they agree over $X_0$ because an open immersion is an inclusion of an open subscheme. Under this identification the restricted diagonal is $\\Delta_f|_{U_0}$. Therefore restrictions of a weakly étale morphism are weakly étale. Conversely, if $X=\\bigcup_aX_a$ and $f^{-1}(X_a)=\\bigcup_bU_{ab}$ with all $U_{ab}\\to X_a$ weakly étale, each $u\\in U$ belongs to one $U_{ab}$, so the local homomorphisms for $f$ at $u$ and for $\\Delta_f$ at $u$ are those for the restricted maps and are flat. Thus $f$ and $\\Delta_f$ are flat everywhere. This proves both Zariski locality assertions without any separatedness assumption.",
+   "text": "Use Mathlib's existing IsZariskiLocalAtSource and IsZariskiLocalAtTarget instances for WeaklyEtale. These use the identity WeaklyEtale = Flat intersect diagonal Flat and the corresponding locality instances, so implement the unit's locality argument.",
    "uses": [
-    "def-weil-weakly-etale-morphism",
-    "def-weil-flat-morphism",
-    "def-weil-open-immersion",
-    "def-pc-fibre-product"
+    "def-weil-weakly-etale-morphism"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 094S, lemma-weakly-etale-characterize, open-restriction argument; Tag 01JR, schemes/lemma-open-fibre-product"
-   }
+   "elementary": false
   },
   {
-   "text": "Let $a:U\\to X$, $b:V\\to X$ be weakly étale and let $h:U\\to V$ satisfy $b\\circ h=a$. Factor $h$ through its graph $\\gamma_h:U\\to U\\times_XV$ and the second projection $p_2$. The graph is the base change of $\\Delta_b:V\\to V\\times_XV$ along $(h\\circ p_1,p_2):U\\times_XV\\to V\\times_XV$: the pullback condition forces the second component to equal $h$ of the first. Hence $\\gamma_h$ is flat. The projection $p_2$ is a base change of $a$, hence flat, so $h$ is flat. For the diagonal, the square with top $\\Delta_h:U\\to U\\times_VU$, bottom $\\Delta_a:U\\to U\\times_XU$, left identity and right the canonical map is cartesian. To verify this, maps from any test scheme into its pullback are a pair $(u_1,u_2)$ with $h u_1=h u_2$, together with $u$ with $(u_1,u_2)=(u,u)$; the extra equality follows from $h u=h u$, so the datum is exactly $u$. Thus $\\Delta_h$ is a base change of the flat $\\Delta_a$ and is flat. By definition $h$ is weakly étale.",
+   "text": "Given u : U to S, v : V to S and f : U to V with f followed by v equal to u, rewrite WeaklyEtale u to obtain WeaklyEtale (f followed by v). Mathlib's WeaklyEtale.of_comp f v cancels the weakly etale v, giving WeaklyEtale f. Its HasOfPostcompProperty instance is proved using the weakly etale diagonal, so this reuses the unit's between-objects argument.",
    "uses": [
-    "def-weil-weakly-etale-morphism",
-    "def-pc-fibre-product",
-    "lem-weil-pbc-flat-morphism-base-change",
-    "lem-pc-flat-compose"
+    "def-weil-weakly-etale-morphism"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 0951, lemma-weakly-etale-permanence, graph argument; diagonal square verified here by the fibre-product universal property"
-   }
+   "elementary": false
   },
   {
-   "text": "For $R\\to B$ ind-étale and any $R\\to R^{\\prime}$, the affine fibre-product theorem identifies the base change of $\\operatorname{Spec}B\\to\\operatorname{Spec}R$ with $\\operatorname{Spec}(B\\otimes_RR^{\\prime})\\to\\operatorname{Spec}R^{\\prime}$, with structure map $r^{\\prime}\\mapsto1\\otimes r^{\\prime}$. The base-change clause of ind-étale stability says this ring map is ind-étale. Hence its spectrum is affine pro-étale in the stated sense. For $R\\to B\\to C$ with both maps ind-étale, the composition clause says $R\\to C$ is ind-étale; its spectrum is precisely the composite of the given affine pro-étale maps. These are the two final assertions. The definitions here are the ind-étale/affine-spectrum definitions of sk-def-pe-morphisms, not the assertion that every weakly étale morphism admits a global ind-étale presentation.",
+   "text": "Apply proAffineEtale.comp_mem to the two affine pro-etale maps. Use the source library's IsStableUnderBaseChangeAlong instance for the final affine map; its IsAffineHom hypothesis is inferred from affineness of source and target. Both instances are proved in WeilConjectures/AlgebraicGeometry/Morphisms/ProAffineEtale.lean. Composition is reduced there via proAffineEtale_iff_appTop to RingHom.IndEtale.comp; base change is proved directly for the pro-presentation using etale base change and affineness. This uses exactly the existing pro-affine-etale notion of sk-def-pe-morphisms, without new presentations or arbitrary choices.",
    "uses": [
-    "def-weil-pbc-ind-etale-algebra",
-    "lem-weil-pbc-ind-etale-stability",
-    "lem-weil-pbc-fibre-product-affine-spectra"
+    "sk-def-pe-morphisms"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 097J, lemma-base-change-ind-etale; Tag 097K, lemma-composition-ind-etale; Tag 01I4, schemes/lemma-fibre-product-affine-schemes"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-pc-fibre-product",
-  "def-weil-flat-morphism",
-  "def-weil-open-immersion",
-  "def-weil-pbc-ind-etale-algebra",
   "def-weil-weakly-etale-morphism",
-  "lem-pc-flat-compose",
-  "lem-weil-pbc-fibre-product-affine-spectra",
-  "lem-weil-pbc-flat-morphism-base-change",
-  "lem-weil-pbc-ind-etale-stability"
+  "sk-def-pe-morphisms"
  ],
  "proof_origin": {
   "by": "document",
-  "document": "literature/stacks-project/more-morphisms.tex",
-  "place": "Tags 094T, 094U, 094S and 0951; affine clauses from proetale.tex Tags 097J and 097K. The diagonal pullback in step 4 is verified explicitly."
+  "document": "Mathlib/AlgebraicGeometry/Morphisms/WeaklyEtale.lean; lean/WeilConjectures/AlgebraicGeometry/Morphisms/ProAffineEtale.lean",
+  "place": "WeaklyEtale stability/locality instances and WeaklyEtale.of_comp; proAffineEtale composition and IsStableUnderBaseChangeAlong instances. Reuses the already-formalized diagonal and ind-etale arguments of the unit."
  },
  "mathlib_searches": [
   {
@@ -200,9 +160,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-weil-pbc-ind-etale-stability"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-16",
   "by": "L",
@@ -240,5 +198,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M6",
+  "result": "pass",
+  "landing": "20261018T135913-L-2961675",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
