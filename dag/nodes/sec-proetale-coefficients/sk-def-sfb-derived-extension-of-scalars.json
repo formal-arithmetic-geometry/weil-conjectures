@@ -369,5 +369,34 @@
     }
    ]
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8c4ed6fa5",
+  "group": "NN",
+  "result": "pass",
+  "note": "Existing attachment of CategoryTheory.Mod.derivedExtendMapDerivedCategoryAdjunction (WeilConjectures.CategoryTheory.ModuleObjects.DerivedExtendScalars, branch slopmaster2), the exact declarations named by the blueprint source. Only the item's lean field changed. Hypotheses match the node with no extra flatness, size or universe assumptions; every clause is realized: L(extendScalars φ) as the generic total left derived functor (a genuine right Kan extension), K-flat computation via preservesKFlatQuasiIso and the counit isomorphism, exact comap, R(comap)≅mapDerivedCategory, and the adjunction of exactly the displayed type. One notion per definition: leftDerivedFunctorFromTotalTensor is the same totalLeftDerived term, and upstream kFlat is the same two-sided tensor test. check_existing and check_record are clean. Scratch consumer compiles (3.1 s, no errors) under the item's hypotheses, including identity φ; axioms have no sorryAx. Second-reading section is the accepted protocol stub."
+ },
+ "lean": {
+  "module": "WeilConjectures.CategoryTheory.ModuleObjects.DerivedExtendScalars",
+  "declaration": "CategoryTheory.Mod.derivedExtendMapDerivedCategoryAdjunction",
+  "declarations": [
+   "CategoryTheory.Mod.preservesKFlatQuasiIso",
+   "CategoryTheory.Mod.derivedExtendRestrictAdjunction",
+   "CategoryTheory.Mod.rightDerivedComapIsoMapDerivedCategory",
+   "CategoryTheory.Mod.derivedExtendMapDerivedCategoryAdjunction",
+   "CategoryTheory.Mod.preservesFiniteLimits_comap",
+   "CategoryTheory.Mod.preservesFiniteColimits_comap",
+   "CategoryTheory.Functor.leftDerivedFunctor",
+   "CategoryTheory.Functor.leftDerivedFunctorCounit",
+   "CategoryTheory.Functor.isIso_leftDerivedFunctorCounit_app_of_kFlat"
+  ],
+  "statement": "def derivedExtendMapDerivedCategoryAdjunction :\n    (extendScalars φ).leftDerivedFunctor ⊣ (comap φ).mapDerivedCategory",
+  "branch": "slopmaster2",
+  "by": "NN",
+  "date": "2026-10-18",
+  "existing": true,
+  "note": "Exact existing framework interface, read from the current published source with scompile.py --source. The primary declaration gives the displayed adjunction for arbitrary morphisms of commutative monoid objects in a closed symmetric monoidal Grothendieck abelian category with additive tensor and functorial flat resolutions. Its left functor is the generic total leftDerivedFunctor applied to extendScalars, not a separate definition. The exported preservation instance and generic counit-isomorphism theorem give computation on K-flat resolutions; the exactness instances and rightDerivedComapIsoMapDerivedCategory identify derived restriction with termwise restriction. All listed declarations are exported through this module. Closedness and Grothendieck abelianness supply the tensor-colimit hypotheses, so no additional flatness or size-equality hypothesis is imposed. The upstream kFlat predicate is the same two-sided total-tensor quasi-isomorphism preservation condition as def-sfb-preserves-kflat-quasi-iso under these stronger ambient hypotheses. No new module or definition is introduced."
  }
 }

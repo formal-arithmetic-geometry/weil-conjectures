@@ -194,5 +194,29 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b670449f6",
+  "group": "NP",
+  "result": "pass",
+  "note": "Read the node, all 5 stmt_deps, check-brief2 and delivery-errors §H, the snapshot module, node and report, plus the upstream SheafTensorStructure, RingObjectSheaf, RingPresheaf and Condensed/ContinuousMap. Only the lean field changed; lean.statement matches the file verbatim. Site = coherentTopology Profinite.{u}. pointSite_covering_iff equals Mathlib mem_sieves_iff_hasEffectiveEpiFamily combined with effectiveEpiFamily_tfae, so it is true and exact. Condensed ring = Sheaf J CommRingCat.{max u v+1}. Target is CommMon in Sheaf J Ab with sfbSheafTensorStructure; checked by rfl that it equals Sheaf.monoidalCategory with unit ULift ℤ (integer tensor, not cartesian). The functor has real data (monObj_sheafCompose_obj = MonObj.ofIso of the counit, axiom-clean; isCommMonObj from mul_comm; maps via V.map (U.map f)). Its sorryAx comes only from the upstream Prop theorems presheaf_enrichedHoms_exist and hasSheafCompose_forget₂_ringCat_ab. IsEquivalence is stated for this specific functor, is true, and its docstring carries the node's 4 steps. Universes are explicit with no added hypotheses; edge cases checked (empty set and empty family, zero ring, noncommutative rings excluded, unit a(Z)). No duplicate in Mathlib, side, live or slopmaster2. Imports are used, lines are at most 100 characters, docstrings carry the source and blueprint tag. nt_compile clean in 2.8-3.3 s with no diagnostics; the tool reported an injected error. Second-reading section is the standard post-2026-10-17 policy line."
+ },
+ "lean": {
+  "module": "Sheaf.Topology.ProfinitePointSite",
+  "declaration": "Profinite.commRingSheafToCommMon",
+  "declarations": [
+   "Profinite.pointSite_covering_iff",
+   "Profinite.commRingSheafToCommMon",
+   "Profinite.commRingSheafToCommMon_isEquivalence"
+  ],
+  "file": "lean/Sheaf/Topology/ProfinitePointSite.lean",
+  "statement": "def commRingSheafToCommMon : Sheaf (coherentTopology Profinite.{u}) CommRingCat.{max u v + 1} ⥤ @CommMon (Sheaf (coherentTopology Profinite.{u}) Ab.{max u v + 1}) _ (sfbSheafTensorStructure (A := Ab.{max u v + 1}) (coherentTopology Profinite.{u})).monoidal (sfbSheafTensorStructure (A := Ab.{max u v + 1}) (coherentTopology Profinite.{u})).symmetric.toBraidedCategory",
+  "branch": "newtargets-dag",
+  "by": "NP",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Uses the existing coherent profinite site, integer tensor on Ab, canonical localized sheaf tensor, and counit-transported ring-object construction. The helper theorems state the covering-sieve criterion and that this specific functor is an equivalence. No new notion, dependency replacement or statement correction."
  }
 }
