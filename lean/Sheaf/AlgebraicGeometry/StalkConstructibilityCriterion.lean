@@ -9,6 +9,13 @@ public import Sheaf.AlgebraicGeometry.ConstructibleAbelianSheaf
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 public import Mathlib.Topology.Constructible
+import WeilConjectures.Mathlib.CategoryTheory.Sites.Point.ConstantSheaf
+import WeilConjectures.ConstructibleSheaf.StalkZeroLocus
+import WeilConjectures.ConstructibleSheaf.OpenClosed
+import Mathlib.Algebra.Category.Grp.ZModuleEquivalence
+import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
+import Mathlib.Algebra.Ring.ULift
+import WeilConjectures.AlgebraicGeometry.GeometricStalkComparisonConstant
 import Mathlib.AlgebraicGeometry.Morphisms.Etale
 import Mathlib.CategoryTheory.Sites.ConstantSheaf
 import Mathlib.CategoryTheory.Sites.Point.Basic
@@ -36,6 +43,211 @@ universe u
 open CategoryTheory
 
 namespace AlgebraicGeometry.Scheme
+
+/-- A constant chart computes every geometric stalk in its image. -/
+private theorem abelian_stalk_iso_of_chart {X V : Scheme.{u}}
+    (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})
+    (f : V ⟶ X) [Etale f] (A : AddCommGrpCat.{u + 1})
+    (e : (AlgebraicGeometry.Etale.upperStar AddCommGrpCat.{u + 1} f).obj F ≅
+      (constantSheaf V.smallEtaleTopology AddCommGrpCat.{u + 1}).obj A)
+    {Ω : Type u} [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ X)
+    (hs : s (IsLocalRing.closedPoint Ω) ∈ Set.range f) :
+    Nonempty (((pointSmallEtale s).sheafFiber.obj F) ≅ A) := by
+  have : CategoryTheory.Limits.PreservesFilteredColimitsOfSize.{u, u}
+      (CategoryTheory.forget AddCommGrpCat.{u + 1}) :=
+    CategoryTheory.Limits.preservesFilteredColimitsOfSize_shrink.{u, u + 1, u, u + 1} _
+  obtain ⟨v, hv⟩ := hs
+  obtain ⟨t, ht, -⟩ := exists_fac_of_etale_of_isSepClosed f s v
+    (hv.trans (congrArg s (Subsingleton.elim _ _)))
+  rw [← ht]
+  exact ⟨((AlgebraicGeometry.Etale.upperStarCompSheafFiberIso
+    AddCommGrpCat.{u + 1} f t).app F).symm ≪≫
+    (pointSmallEtale t).sheafFiber.mapIso e ≪≫
+    (pointSmallEtale t).sheafFiberConstantSheafIso A⟩
+
+/-- Trivializations make stalk isomorphism classes locally constant on the base. -/
+private theorem abelian_stalk_iso_near {X : Scheme.{u}}
+    (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})
+    (V : Cover.{u} etalePrecoverage X)
+    (hV : ∀ i : V.I₀, ∃ A : AddCommGrpCat.{u + 1},
+      Nonempty ((AlgebraicGeometry.Etale.upperStar AddCommGrpCat.{u + 1} (V.f i)).obj F ≅
+        (constantSheaf (V.X i).smallEtaleTopology AddCommGrpCat.{u + 1}).obj A)) (x : X) :
+    ∃ O : Set X, IsOpen O ∧ x ∈ O ∧ ∃ A : AddCommGrpCat.{u + 1},
+      ∀ (Ω : Type u) [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ X),
+        s (IsLocalRing.closedPoint Ω) ∈ O →
+          Nonempty (((pointSmallEtale s).sheafFiber.obj F) ≅ A) := by
+  have : JointlySurjective etalePrecoverage.{u} :=
+    inferInstanceAs (JointlySurjective (precoverage @Etale))
+  obtain ⟨i, v, rfl⟩ := V.exists_eq x
+  have : Etale (V.f i) := V.map_prop i
+  obtain ⟨A, ⟨e⟩⟩ := hV i
+  exact ⟨Set.range (V.f i), (V.f i).isOpenMap.isOpen_range, ⟨v, rfl⟩, A,
+    fun Ω _ _ s hs ↦ abelian_stalk_iso_of_chart F (V.f i) A e s hs⟩
+
+/-- The cardinality loci of a sheaf with constant charts are open. -/
+private theorem abelian_cardinality_locus_isOpen {X : Scheme.{u}}
+    (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})
+    (V : Cover.{u} etalePrecoverage X)
+    (hV : ∀ i : V.I₀, ∃ A : AddCommGrpCat.{u + 1},
+      Nonempty ((AlgebraicGeometry.Etale.upperStar AddCommGrpCat.{u + 1} (V.f i)).obj F ≅
+        (constantSheaf (V.X i).smallEtaleTopology AddCommGrpCat.{u + 1}).obj A)) (n : ℕ) :
+    IsOpen {x : X | Nat.card (((pointSmallEtale (X.algClosurePoint x)).sheafFiber
+      (A := AddCommGrpCat.{u + 1})).obj F) = n} := by
+  rw [isOpen_iff_forall_mem_open]
+  intro x hx
+  obtain ⟨O, hO, hxO, A, hA⟩ := abelian_stalk_iso_near F V hV x
+  refine ⟨O, fun y hy ↦ ?_, hO, hxO⟩
+  obtain ⟨e⟩ := hA _ (X.algClosurePoint x) (by simpa using hxO)
+  obtain ⟨e'⟩ := hA _ (X.algClosurePoint y) (by simpa using hy)
+  exact (Nat.card_congr (e' ≪≫ e.symm).addCommGroupIsoToAddEquiv.toEquiv).trans hx
+
+/-- A constant-chart restriction identifies cardinalities along an immersion. -/
+private theorem abelian_cardinality_immersion {X T : Scheme.{u}}
+    (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})
+    (ι : T ⟶ X) [IsImmersion ι]
+    (V : Cover.{u} etalePrecoverage T)
+    (hV : ∀ i : V.I₀, ∃ A : AddCommGrpCat.{u + 1},
+      Nonempty ((AlgebraicGeometry.Etale.upperStar AddCommGrpCat.{u + 1} (V.f i)).obj
+        ((AlgebraicGeometry.Etale.upperStar AddCommGrpCat.{u + 1} ι).obj F) ≅
+          (constantSheaf (V.X i).smallEtaleTopology AddCommGrpCat.{u + 1}).obj A)) (t : T) :
+    Nat.card (((pointSmallEtale (X.algClosurePoint (ι t))).sheafFiber
+      (A := AddCommGrpCat.{u + 1})).obj F) =
+    Nat.card (((pointSmallEtale (T.algClosurePoint t)).sheafFiber
+      (A := AddCommGrpCat.{u + 1})).obj
+        ((AlgebraicGeometry.Etale.upperStar AddCommGrpCat.{u + 1} ι).obj F)) := by
+  obtain ⟨s, hs⟩ := IsImmersion.exists_comp_eq_of_field ι (X.algClosurePoint (ι t))
+    ⟨t, by simp⟩
+  have hst : s (IsLocalRing.closedPoint _) = t := ι.isEmbedding.injective (by
+    rw [← Scheme.Hom.comp_apply, hs, algClosurePoint_base])
+  let G := (AlgebraicGeometry.Etale.upperStar AddCommGrpCat.{u + 1} ι).obj F
+  obtain ⟨O, -, htO, A, hA⟩ := abelian_stalk_iso_near G V hV t
+  obtain ⟨e⟩ := hA _ s (by simpa [hst] using htO)
+  obtain ⟨e'⟩ := hA _ (T.algClosurePoint t) (by simpa using htO)
+  rw [← hs]
+  let eTotal := ((AlgebraicGeometry.Etale.upperStarCompSheafFiberIso
+    AddCommGrpCat.{u + 1} ι s).app F).symm ≪≫ e ≪≫ e'.symm
+  exact Nat.card_congr eTotal.addCommGroupIsoToAddEquiv.toEquiv
+
+/-- Finite stratifications with constant charts have constructible cardinality loci. -/
+private theorem abelian_constructible_cardinality {X : Scheme.{u}} [IsNoetherian X]
+    (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})
+    (hF : IsConstructibleAbelianSheaf F) (n : ℕ) :
+    Topology.IsConstructible {x : X | Nat.card
+      (((pointSmallEtale (X.algClosurePoint x)).sheafFiber
+        (A := AddCommGrpCat.{u + 1})).obj F) = n} := by
+  classical
+  obtain ⟨S, hS, hloc⟩ := hF
+  let C := {x : X | Nat.card (((pointSmallEtale (X.algClosurePoint x)).sheafFiber
+    (A := AddCommGrpCat.{u + 1})).obj F) = n}
+  have heq : C = ⋃ i, (S.stratum i ∩ C) := by
+    rw [← Set.iUnion_inter, S.iUnion_stratum_eq_univ, Set.univ_inter]
+  change Topology.IsConstructible C
+  rw [heq]
+  refine Topology.IsConstructible.iUnion fun i ↦ ?_
+  obtain ⟨V, hV⟩ := hloc i
+  have hV' : ∀ j : V.I₀, ∃ A : AddCommGrpCat.{u + 1},
+      Nonempty ((AlgebraicGeometry.Etale.upperStar AddCommGrpCat.{u + 1} (V.f j)).obj
+        ((AlgebraicGeometry.Etale.upperStar AddCommGrpCat.{u + 1} (S.immersion i)).obj F) ≅
+          (constantSheaf (V.X j).smallEtaleTopology AddCommGrpCat.{u + 1}).obj A) := by
+    intro j
+    obtain ⟨A, -, e⟩ := hV j
+    exact ⟨A, e⟩
+  obtain ⟨O, hO, hOe⟩ := (S.immersion i).isEmbedding.isInducing.isOpen_iff.mp
+    (abelian_cardinality_locus_isOpen _ V hV' n)
+  have hinter : S.stratum i ∩ C = S.stratum i ∩ O := by
+    rw [← S.range_immersion]
+    ext x
+    constructor
+    · rintro ⟨⟨t, rfl⟩, hx⟩
+      refine ⟨⟨t, rfl⟩, ?_⟩
+      change t ∈ (S.immersion i) ⁻¹' O
+      rw [hOe]
+      exact (abelian_cardinality_immersion F (S.immersion i) V hV' t).symm.trans hx
+    · rintro ⟨⟨t, rfl⟩, hx⟩
+      refine ⟨⟨t, rfl⟩, ?_⟩
+      change t ∈ (S.immersion i) ⁻¹' O at hx
+      rw [hOe] at hx
+      exact (abelian_cardinality_immersion F (S.immersion i) V hV' t).trans hx
+  rw [hinter]
+  exact (hS i).inter hO.isConstructible_of_noetherianSpace
+
+/-- Stalk cardinality is independent of the chosen geometric point. -/
+private theorem abelian_cardinality_eq_of_same_point {X : Scheme.{u}}
+    (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})
+    {Ω Ω' : Type u} [Field Ω] [IsSepClosed Ω] [Field Ω'] [IsSepClosed Ω']
+    (s : Spec (.of Ω) ⟶ X) (t : Spec (.of Ω') ⟶ X)
+    (hst : s (IsLocalRing.closedPoint Ω) = t (IsLocalRing.closedPoint Ω')) :
+    Nat.card (((pointSmallEtale s).sheafFiber (A := AddCommGrpCat.{u + 1})).obj F) =
+      Nat.card (((pointSmallEtale t).sheafFiber (A := AddCommGrpCat.{u + 1})).obj F) := by
+  let E := (forget₂ (ModuleCat.{u + 1} ℤ) AddCommGrpCat.{u + 1}).inv ⋙
+    ModuleCat.restrictScalars (ULift.ringEquiv : ULift.{u + 1} ℤ ≃+* ℤ).toRingHom
+  let U := forget₂ (ModuleCat.{u + 1} (ULift.{u + 1} ℤ)) AddCommGrpCat.{u + 1}
+  let M := (sheafCompose X.smallEtaleTopology E).obj F
+  let eAb : (sheafCompose X.smallEtaleTopology U).obj M ≅ F :=
+    (fullyFaithfulSheafToPresheaf _ _).preimageIso
+      (Functor.isoWhiskerLeft F.obj
+        (forget₂ (ModuleCat.{u + 1} ℤ) AddCommGrpCat.{u + 1}).asEquivalence.counitIso ≪≫
+          Functor.rightUnitor F.obj)
+  have : CategoryTheory.Limits.PreservesFilteredColimitsOfSize.{u, u} U :=
+    CategoryTheory.Limits.preservesFilteredColimitsOfSize_shrink.{u, u + 1, u, u + 1} _
+  have : CategoryTheory.Limits.PreservesFilteredColimitsOfSize.{u, u}
+      (CategoryTheory.forget (ModuleCat.{u + 1} (ULift.{u + 1} ℤ))) :=
+    CategoryTheory.Limits.preservesFilteredColimitsOfSize_shrink.{u, u + 1, u, u + 1} _
+  obtain ⟨β, -⟩ := exists_geometricStalkComparison_constant
+    (Λ := ULift.{u + 1} ℤ) s t hst
+  let e := ((pointSmallEtale s).sheafFiber.mapIso eAb).symm ≪≫
+    ((pointSmallEtale s).sheafFiberCompIso U).app M ≪≫ U.mapIso (β.app M) ≪≫
+      (((pointSmallEtale t).sheafFiberCompIso U).app M).symm ≪≫
+        (pointSmallEtale t).sheafFiber.mapIso eAb
+  exact Nat.card_congr e.addCommGroupIsoToAddEquiv.toEquiv
+
+/-- Pullback reads a cardinality locus as the preimage of the original locus. -/
+private theorem abelian_cardinality_pullback {X Y : Scheme.{u}}
+    (f : Y ⟶ X) (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (y : Y) :
+    Nat.card (((pointSmallEtale (Y.algClosurePoint y)).sheafFiber
+      (A := AddCommGrpCat.{u + 1})).obj
+        ((AlgebraicGeometry.Etale.upperStar AddCommGrpCat.{u + 1} f).obj F)) =
+      Nat.card (((pointSmallEtale (X.algClosurePoint (f y))).sheafFiber
+        (A := AddCommGrpCat.{u + 1})).obj F) := by
+  let e := (AlgebraicGeometry.Etale.upperStarCompSheafFiberIso
+    AddCommGrpCat.{u + 1} f (Y.algClosurePoint y)).app F
+  exact (Nat.card_congr e.addCommGroupIsoToAddEquiv.toEquiv).trans
+    (abelian_cardinality_eq_of_same_point F (Y.algClosurePoint y ≫ f)
+      (X.algClosurePoint (f y)) (by simp))
+
+/-- Constructibility of all cardinality loci is preserved by every pullback. -/
+private theorem abelian_cardinality_loci_pullback {X Y : Scheme.{u}}
+    (f : Y ⟶ X) (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})
+    (hF : ∀ n : ℕ, 1 ≤ n → Topology.IsConstructible
+      {x : X | Nat.card (((pointSmallEtale (X.algClosurePoint x)).sheafFiber
+        (A := AddCommGrpCat.{u + 1})).obj F) = n}) :
+    ∀ n : ℕ, 1 ≤ n → Topology.IsConstructible
+      {y : Y | Nat.card (((pointSmallEtale (Y.algClosurePoint y)).sheafFiber
+        (A := AddCommGrpCat.{u + 1})).obj
+          ((AlgebraicGeometry.Etale.upperStar AddCommGrpCat.{u + 1} f).obj F)) = n} := by
+  intro n hn
+  have h := f.isConstructible_preimage (hF n hn)
+  convert h using 1
+  ext y
+  exact iff_of_eq (congrArg (· = n) (abelian_cardinality_pullback f F y))
+
+/-- Converse constructibility criterion from cardinality loci.
+
+This is the Noetherian-induction converse of SGA 4, Exposé IX, Proposition 2.13(iii).
+The proof uses the finite-stalk constant-cardinality open construction on an irreducible
+Noetherian open, followed by Noetherian induction on closed complements.
+(blueprint: fin4-lem-stalk-constructibility-criterion-converse) -/
+theorem isConstructibleAbelianSheaf_of_constructible_stalk_cardinality_loci
+    (X : Scheme.{u}) [IsNoetherian X]
+    (F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})
+    (hfinite : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω]
+      (t : Spec (.of Ω) ⟶ X),
+      Finite (((pointSmallEtale t).sheafFiber (A := AddCommGrpCat.{u + 1})).obj F))
+    (hloci : ∀ n : ℕ, 1 ≤ n → Topology.IsConstructible
+      {x : X | Nat.card (((pointSmallEtale (X.algClosurePoint x)).sheafFiber
+        (A := AddCommGrpCat.{u + 1})).obj F) = n}) :
+    IsConstructibleAbelianSheaf F := by
+  sorry
 
 /-- An abelian étale sheaf with finite geometric stalks on a Noetherian scheme is
 constructible exactly when every positive stalk-cardinality locus is constructible.
@@ -166,6 +378,11 @@ theorem isConstructibleAbelianSheaf_iff_constructible_stalk_cardinality_loci
       ∀ n : ℕ, 1 ≤ n → Topology.IsConstructible
         {x : X | Nat.card (((pointSmallEtale (X.algClosurePoint x)).sheafFiber
           (A := AddCommGrpCat.{u + 1})).obj F) = n} := by
-  sorry
+  constructor
+  · intro hF n _
+    exact abelian_constructible_cardinality F hF n
+  · intro hloci
+    exact isConstructibleAbelianSheaf_of_constructible_stalk_cardinality_loci
+      X F hfinite hloci
 
 end AlgebraicGeometry.Scheme
