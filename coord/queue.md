@@ -1,6 +1,6 @@
 # Work queue
 
-1508 items; claim with `tools/claim.py next <group> [--stage N]`.
+1510 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (1508)
+## Stage 3: modules to prove (1510)
 
 On the sorry route of an open batch, or below a route sorry of one (the human, 2026-10-18: provable as soon as every dependency is stated, whatever the depth); route first, then nearest to a route sorry.
 
@@ -581,6 +581,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.SixFunctors.IntegralCompactificationSystemRealization` | - | 1 | proof | 2 |
 | `Sheaf.SixFunctors.ProperOpenProjectionMate` | - | 2 | proof | 2 |
 | `Sheaf.SixFunctors.ScalarSixPullback` | - | 1 | proof | 2 |
+| `Sheaf.SixFunctors.SchemeGaloisCoefficientChange` | - | 1 | proof | 2 |
 | `Sheaf.SixFunctors.SchemeGeometricFrobenius` | - | 3 | proof | 2 |
 | `Sheaf.AlgebraicGeometry.AffineSpaceAmbientAdjunction` | 4 | 1 | proof | 3 |
 | `Sheaf.AlgebraicGeometry.AffineSpaceLinearTraceInvariance` | 4 | 1 | proof | 3 |
@@ -840,6 +841,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.AlgebraicGeometry.AbsoluteFrobeniusUniversalHomeomorphism` | 10 | 1 | proof | 3 |
 | `Sheaf.Paper.SupportedCup` | 14 | 4 | proof | 3 |
 | `Sheaf.Algebra.Homology.RationalTermHomComparison` | - | 1 | proof | 3 |
+| `Sheaf.AlgebraicGeometry.AbsoluteFrobeniusCoefficientNaturality` | - | 1 | proof | 3 |
 | `Sheaf.AlgebraicGeometry.BertiniIrreducibleMember` | - | 1 | proof | 3 |
 | `Sheaf.AlgebraicGeometry.BertiniSmoothMember` | - | 1 | proof | 3 |
 | `Sheaf.AlgebraicGeometry.CondensedOpenClosedInternalHom` | - | 1 | proof | 3 |
@@ -1523,7 +1525,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Algebra.Homology.SplitCellComplexKFlat` | - | 1 | proof | 21 |
 | `Sheaf.CategoryTheory.BoundedFilteredPageFunctorNormalized` | - | 1 | proof | 21 |
 
-## Stage 3: waiting for statements of dependencies (47)
+## Stage 3: waiting for statements of dependencies (46)
 
 Not items: a node in the dependencies (stmt_deps or proof_deps) has no Lean statement yet (the human, 2026-10-17 and 2026-10-18).
 
@@ -1575,7 +1577,6 @@ Not items: a node in the dependencies (stmt_deps or proof_deps) has no Lean stat
 | `Sheaf.Paper.RationalWeilPurityNaturalityMate` | - | 4 | `det-sp-tower-gamma` |
 | `Sheaf.Paper.VerdierExchange` | - | 1 | `fix-lem-exchanges` |
 | `Sheaf.SecSmoothPurity.SmoothPurityNaturality` | - | 1 | `fix-prop-projection-formula` |
-| `Sheaf.SixFunctors.SchemeGaloisCoefficientChange` | - | 1 | `lem-trf-absolute-frobenius-coefficient-naturality` |
 
 ## Stage 3: held for an open upstream PR (14)
 
