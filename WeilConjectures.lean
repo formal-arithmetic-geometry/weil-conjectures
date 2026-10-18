@@ -7810,7 +7810,6 @@ public import WeilConjectures.CategoryTheory.NatTransFromResolvingClass
 public import WeilConjectures.CategoryTheory.NaturalTruncationCouple
 public import WeilConjectures.CategoryTheory.NormalizedGradedFiniteKernel
 public import WeilConjectures.CategoryTheory.ObjectProperty.Duality
-public import WeilConjectures.CategoryTheory.ObjectProperty.RetractOfKernels
 public import WeilConjectures.CategoryTheory.OpcyclesTorKernelIso
 public import WeilConjectures.CategoryTheory.OpcyclesTorSurjection
 public import WeilConjectures.CategoryTheory.PBCFiltration
@@ -11227,7 +11226,6 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.InternalHom
 public import WeilConjectures.SixFunctors.ProEtale.Adic.InternalHomEvaluation
 public import WeilConjectures.SixFunctors.ProEtale.Adic.IrreducibleLisse
 public import WeilConjectures.SixFunctors.ProEtale.Adic.IrreducibleLisseQuotients
-public import WeilConjectures.SixFunctors.ProEtale.Adic.Karoubian
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseAbelian
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseCover.CocycleLimit
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseCover.Congruence
