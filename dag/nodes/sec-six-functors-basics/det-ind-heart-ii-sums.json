@@ -266,27 +266,21 @@
   }
  },
  "lean": {
-  "module": "Sheaf.Paper.ConstructibleExtSums",
-  "declaration": "AlgebraicGeometry.ProEtale.constructible_ext_sums",
-  "declarations": [
-   "AlgebraicGeometry.ProEtale.constructibleExtSumComparison",
-   "AlgebraicGeometry.ProEtale.constructible_ext_sums",
-   "AlgebraicGeometry.ProEtale.constructible_ext_sums_padicAlgCl"
-  ],
-  "file": "lean/Sheaf/Paper/ConstructibleExtSums.lean",
-  "statement": "theorem constructible_ext_sums (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ) (X : Scheme.{u}) [IsLocallyNoetherian X] [CompactSpace X] (C : CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (padicSubfieldRingObj X ℓ E)) (hC : IsConstantModelConstructible (Profinite.continuousMapRingObj E) X C) (q : ℤ) (S : Type (u + 1)) (B : S → CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (padicSubfieldRingObj X ℓ E)) (hB : ∀ s : S, ObjectProperty.ind.{u + 1} (IsConstantModelConstructible (Profinite.continuousMapRingObj E) X) (B s)) (c : Cofan B) (hc : IsColimit c) : Function.Bijective (constructibleExtSumComparison C B c q)",
+  "module": "Sheaf.Paper.DetIndHeartIISums",
+  "declaration": "AlgebraicGeometry.ProEtale.det_ind_heart_ii_sums",
+  "file": "lean/Sheaf/Paper/DetIndHeartIISums.lean",
+  "statement": "theorem det_ind_heart_ii_sums (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ) (X : Scheme.{u}) [IsLocallyNoetherian X] [CompactSpace X] (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ] (hΛ : Λ = Profinite.continuousMapRingObj E ∨ Λ = Profinite.padicAlgClRingObj ℓ) (C : CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) (hC : IsConstantModelConstructible Λ X C) (q : ℤ) (S : Type (u + 1)) (B : S → CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) (hB : ∀ s : S, ObjectProperty.ind (IsConstantModelConstructible Λ X) (B s)) (c : Cofan B) (hc : IsColimit c) : Function.Bijective (@DirectSum.toAddMonoid S _ _ (Classical.decEq S) _ _ (fun s : S ↦ Preadditive.rightComp ((DerivedCategory.singleFunctor _ 0).obj C) ((shiftFunctor _ q).map ((DerivedCategory.singleFunctor _ 0).map (c.inj s)))) : (⨁ s : S, ((DerivedCategory.singleFunctor _ 0).obj C ⟶ (shiftFunctor _ q).obj ((DerivedCategory.singleFunctor _ 0).obj (B s)))) →+ ((DerivedCategory.singleFunctor _ 0).obj C ⟶ (shiftFunctor _ q).obj ((DerivedCategory.singleFunctor _ 0).obj c.pt)))",
   "branch": "newtargets-dag",
-  "by": "Q76",
+  "by": "Q49",
   "date": "2026-10-18",
-  "existing": false,
-  "note": "The two theorem declarations cover respectively Lambda = E and the condensed algebraic closure; both retain the full Noetherian scope and every integer degree. ObjectProperty.ind of the recorded constant-model constructibility predicate is the ambient IndCons. A colimit cofan specifies the module-sheaf coproduct; the real-data additive comparison sends each summand through its shifted degree-zero coprojection."
+  "existing": false
  },
  "reviewed_lean": {
   "date": "2026-10-18",
   "by": "L",
-  "reviewer": "NT-stage2-cc-bdf8ad877",
-  "group": "Q76",
+  "reviewer": "NT-stage2-Codex-fc832c3ce",
+  "group": "Q49",
   "result": "pass",
-  "note": "Statement field verbatim (diff). Every clause matches the corrected node: IsLocallyNoetherian+CompactSpace X; ℓ prime, E finite in PadicAlgCl; Λ=E via padicSubfieldRingObj and Λ=Qlb via padicAlgClRingObj (second theorem); Mod over Sheaf ProEt Ab.{u+1}; Mathlib DerivedCategory with canonical HasDerivedCategory.ofIsGrothendieckAbelian / Mod.instAbelian (#synth, visible downstream without the private import); IsConstantModelConstructible C; ObjectProperty.ind IndCons (same convention as landed siblings); S : Type (u+1); all q : ℤ; colimit cofan in the abelian category; Ext = Hom(single C, (single B)⟦q⟧); real comparison map DirectSum.toAddMonoid of rightComp with shifted single(c.inj s); Bijective. No extra hypotheses or universe restriction; edge cases (empty or singleton S, negative q, empty X, E=Q_ℓ) covered. Only the lean field of the node changed; no new nodes; sorry only; private proof import; docstrings give source, blueprint tag and proof steps; report has both sections. nt_compile --json clean, 15.9 s, no warnings besides sorry. No duplicate (constructibleBoundedComparison is a different, downstream map). Minor only: universes t w v are used only by the helper."
+  "note": "Statement, dependencies, source, docstrings, edge cases, route-pivot compliance, report sections, and per-file compilation verified."
  }
 }

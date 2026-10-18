@@ -22,7 +22,8 @@
   "def-weil-pbc-direct-image",
   "def-weil-proetale-module-direct-image",
   "lem-cbc-comparison-pullback-sections",
-  "lem-asd-etale-finite-twist-pullback"
+  "lem-asd-etale-finite-twist-pullback",
+  "def-sp-cartier-pole-boundary"
  ],
  "proof": [
   {
@@ -640,5 +641,60 @@
   "group": "Q21",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q21-6e704d401 (reviewer sub-agent of L); spot-checked: Read the complete item, cited statements, sources and unit route. All nine steps support the full normalized supported-morphism comparison, including the canonical source unit, roots target, Kummer sign and nonflat coefficient extension. No new nodes, circularity or repairs. Detailed checks are in review.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-e09ba1c3b",
+  "group": "Q54",
+  "result": "fix",
+  "note": "Mathematical and Lean checks passed; both modules compiled cleanly through scompile.py. Fixed H11 by supplying a complete replacement report with substantive second reading. Findings and compiler evidence are in review.md."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CartierReductionSiteComparison",
+  "declaration": "AlgebraicGeometry.ProEtale.cartier_reduction_site_comparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/CartierReductionSiteComparison.lean",
+  "statement": "theorem cartier_reduction_site_comparison (ℓ : ℕ) (hℓ : ℓ.Prime) (r : ℕ) (hr : 0 < r) (A : Type (u + 1)) [CommRing A] [Finite A] (hA : ((ℓ ^ r : ℕ) : A) = 0) {D Z : Scheme.{u}} (i : D ⟶ Z) [IsClosedImmersion i] (hI : i.ker.IsInvertible) (hZ : IsUnit ((ℓ ^ r : ℕ) : Γ(Z, ⊤))) : IsIso (geoCartierSourceComparison A i) ∧ IsIso (cartierRootsComparison Z (ℓ ^ r)) ∧ CartierScalarUnit (Etale.RawModuleScalarComparison.forget A Z) ((Etale.lowerStar AddCommGrpCat.{u + 1} i).obj (Etale.supportedIntegralConstant D)) ((Etale.lowerStar (ModuleCat.{u + 1} A) i).obj (Etale.ordinaryFiniteConstant A D)) 0 (Ext.mk₀ (Etale.supportedIntegralGenerator A i)) ∧ CartierScalarUnit (cartierForget A Z) ((lowerStar AddCommGrpCat.{u + 1} i).obj ((constantSheaf (Scheme.ProEt.topology D) AddCommGrpCat.{u + 1}).obj (AddCommGrpCat.of (ULift.{u + 1} ℤ)))) ((lowerStar (ModuleCat.{u + 1} A) i).obj (geoCartierConstant A D)) 0 (Ext.mk₀ (cartierProIntegralGenerator A i)) ∧ CartierScalarUnit (Etale.RawModuleScalarComparison.forget A Z) Z.gmSheaf (Scheme.finiteEtaleTateLine Z (ℓ ^ r) A hA) 1 (cartierEtaleKummerUnit A (ℓ ^ r) hA Z hZ) ∧ CartierScalarUnit (cartierForget A Z) (Scheme.proEtaleUnitsSheaf Z) (geoCartierLine A (ℓ ^ r) hA Z) 1 (cartierProKummerUnit A (ℓ ^ r) hA Z (pow_pos hℓ.pos r) hZ) ∧ (Ext.mk₀ (geoCartierSourceComparison A i)).comp (cartierReducedPro A (ℓ ^ r) (pow_pos hℓ.pos r) hA i hI hZ) (zero_add 2) = (cartierReducedEtale A (ℓ ^ r) (pow_pos hℓ.pos r) hA i hI hZ).mapExactFunctor (comparisonUpperStar (ModuleCat.{u + 1} A) Z) ∧ GeoCartierScalarCompatibility (cartierResidueAlgebra ℓ r A hA) (ℓ ^ r) (cartierResidue_cast ℓ r) hA i (cartierResidueReducedPro ℓ hℓ r i hI hZ) (cartierReducedPro A (ℓ ^ r) (pow_pos hℓ.pos r) hA i hI hZ) ∧ Etale.SupportedKummerBoundary A (ℓ ^ r) hA i hI hZ (cartierReducedEtale A (ℓ ^ r) (pow_pos hℓ.pos r) hA i hI hZ) ∧ GeoCartierChernEquation A (ℓ ^ r) hA i hI hZ (cartierReducedPro A (ℓ ^ r) (pow_pos hℓ.pos r) hA i hI hZ) ∧ (∀ c : GeoCartierClass A (ℓ ^ r) hA i, (∃ κ : Ext ((Etale.lowerStar (ModuleCat.{u + 1} A) i).obj (Etale.ordinaryFiniteConstant A D)) (Scheme.finiteEtaleTateLine Z (ℓ ^ r) A hA) 2, Etale.SupportedKummerBoundary A (ℓ ^ r) hA i hI hZ κ ∧ (Ext.mk₀ (geoCartierSourceComparison A i)).comp c (zero_add 2) = κ.mapExactFunctor (comparisonUpperStar (ModuleCat.{u + 1} A) Z)) → c = cartierReducedPro A (ℓ ^ r) (pow_pos hℓ.pos r) hA i hI hZ)",
+  "branch": "newtargets-dag",
+  "by": "Q54",
+  "date": "2026-10-18",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.Etale.cartierPoleBoundary_existsUnique",
+   "AlgebraicGeometry.Etale.cartierPoleBoundary",
+   "AlgebraicGeometry.ProEtale.cartierForget",
+   "AlgebraicGeometry.ProEtale.cartierForget_exact",
+   "AlgebraicGeometry.ProEtale.cartierForgetLimits",
+   "AlgebraicGeometry.ProEtale.cartierForgetColimits",
+   "AlgebraicGeometry.ProEtale.cartierForgetAdditive",
+   "AlgebraicGeometry.ProEtale.cartierForgetComparison",
+   "AlgebraicGeometry.ProEtale.cartierUnitsComparison",
+   "AlgebraicGeometry.ProEtale.cartierIntegralSourceComparison",
+   "AlgebraicGeometry.ProEtale.cartierIntegralSourceComparison_isIso",
+   "AlgebraicGeometry.ProEtale.cartierIntegralSourceIso",
+   "AlgebraicGeometry.ProEtale.cartierProBoundary",
+   "AlgebraicGeometry.ProEtale.cartierRootsComparison_condition",
+   "AlgebraicGeometry.ProEtale.cartierRootsComparison",
+   "AlgebraicGeometry.ProEtale.cartierRootsComparison_isIso",
+   "AlgebraicGeometry.ProEtale.cartierRootsIso",
+   "AlgebraicGeometry.ProEtale.cartierProRootMap",
+   "AlgebraicGeometry.ProEtale.cartierProIntegralGenerator",
+   "AlgebraicGeometry.ProEtale.cartierProKummerComplex",
+   "AlgebraicGeometry.ProEtale.cartierProKummer_exact",
+   "AlgebraicGeometry.ProEtale.cartierEtaleKummerUnit",
+   "AlgebraicGeometry.ProEtale.cartierProKummerUnit",
+   "AlgebraicGeometry.ProEtale.CartierEtaleReductionSpec",
+   "AlgebraicGeometry.ProEtale.CartierProReductionSpec",
+   "AlgebraicGeometry.ProEtale.cartierReduction_existsUnique",
+   "AlgebraicGeometry.ProEtale.cartierReducedEtale",
+   "AlgebraicGeometry.ProEtale.cartierReducedPro",
+   "AlgebraicGeometry.ProEtale.CartierScalarUnit",
+   "AlgebraicGeometry.ProEtale.cartierResidueRing",
+   "AlgebraicGeometry.ProEtale.cartierResidue_cast",
+   "AlgebraicGeometry.ProEtale.cartierResidueAlgebra",
+   "AlgebraicGeometry.ProEtale.cartierResidue_finite",
+   "AlgebraicGeometry.ProEtale.cartierResidueReducedPro",
+   "AlgebraicGeometry.ProEtale.cartier_reduction_site_comparison"
+  ]
  }
 }

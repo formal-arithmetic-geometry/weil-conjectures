@@ -1,0 +1,105 @@
+{
+ "id": "def-sp-cartier-pole-boundary",
+ "kind": "definition",
+ "title": "Normalized integral Cartier pole-extension class",
+ "status": "split",
+ "statement": "Let $i:D\\hookrightarrow Z$ be an effective Cartier divisor [def-pc-divisor-line-bundle]. Work on $Z_{\\mathrm{et}}$ [def-weil-pbc-etale-site], with direct image [def-weil-pbc-direct-image] and Ext defined in the ordinary derived category [def-weil-abstract-derived-category]. Put $F=i_*\\mathbf Z_D$, $L=\\mathcal O_Z(D)$, and let $P=\\underline{\\mathrm{Isom}}(\\mathcal O,L)$ be its frame torsor. Use the supported integral unit $s:\\mathbf Z_Z\\to F$, its section $s(1)$, and the canonical divisor section on the complementary open as in [def-asd-ordinary-supported-kummer-boundary]. Define $\\mathrm{CartierPoleBoundarySpec}(i,\\beta)$ for $\\beta\\in\\mathrm{Ext}^1(F,\\mathbf G_m)$ as follows. For every open $W=Z\\setminus i(D)$ there exist a short exact extension $0\\to\\mathbf G_m\\xrightarrow{a}E\\xrightarrow{b}F\\to0$, a morphism of underlying sheaves $f:P\\to E$, and a frame $\\tau$ of $L$ on $W$, such that $\\tau$ is the canonical divisor section on $W$, $f(g\\cdot p)=a(g)+f(p)$ on every etale object, $b(f(p))=s(1)$ restricted to that object, $f(\\tau)=0$, and $\\beta$ is the connecting extension class. Locally a frame is $t^{-1}$, so this fixes the quotient $t^{-1}\\mapsto+1$ and the trivialization on the complement.",
+ "stmt_deps": [
+  "def-pc-divisor-line-bundle",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-direct-image",
+  "def-weil-abstract-derived-category",
+  "def-asd-ordinary-supported-kummer-boundary"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/sk-lem-geo-cartier.proof.md",
+  "place": "(G1) and the paragraph identifying local lifts t_a inverse with frames of O(D), including its canonical complementary trivialization"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "relative extension of supported integral constant sheaf by units Cartier divisor",
+   "results": "Eight hits: SheafedSpace.unit, constantSheaf and constant-sheaf essential-image facts, structure-sheaf fraction restrictions and fractional ideals. No supported relative extension class.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "relative Picard group Cartier divisor integral extension supported constant sheaf by units",
+   "results": "Eight hits: CommRing.relPic, Submodule.unitsToPic and its image, and local structure-sheaf fractions. No normalized supported extension by G_m.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Ext, ShortComplex.ShortExact",
+   "results": "0 hits; unknown identifier 'ShortComplex.ShortExact'.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "msearch grep CartierPole|pole extension|meromorphic AlgebraicGeometry; rg pole extension|pole sheaf|meromorphic functions|Cartier pole in dag/nodes, lean/Sheaf and WeilConjectures; blueprint_refs.py search pole and relative extension",
+   "results": "Mathlib grep returned 0 hits. DAG finds this item and det-sp-tower-classes, plus unrelated meromorphic-module and trace boundary nodes. Existing SupportedKummerBoundary specifies the finite degree-two class, not the integral degree-one pole class. No project integral relative class. Blueprint search relative extension: 0.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sp-cartier-reduction-site-comparison",
+  "date": "2026-10-18",
+  "group": "Q54"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-tower-classes",
+   "place": "the Cartier pole boundary in the supported site-comparison step",
+   "via": [
+    "lem-sp-cartier-reduction-site-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-tower-geometric",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CartierPoleBoundary",
+  "declaration": "AlgebraicGeometry.Etale.CartierPoleBoundarySpec",
+  "file": "lean/Sheaf/AlgebraicGeometry/CartierPoleBoundary.lean",
+  "statement": "def CartierPoleBoundarySpec {D T : Scheme.{u}} (i : D ⟶ T) [IsClosedImmersion i] (hI : i.ker.IsInvertible) (β : Ext ((lowerStar AddCommGrpCat.{u + 1} i).obj (supportedIntegralConstant D)) T.gmSheaf 1) : Prop",
+  "branch": "newtargets-dag",
+  "by": "Q54",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-e09ba1c3b",
+  "group": "Q54",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-e09ba1c3b",
+  "group": "Q54",
+  "result": "fix",
+  "note": "Mathematical and Lean checks passed; both modules compiled cleanly through scompile.py. Fixed H11 by supplying a complete replacement report with substantive second reading. Findings and compiler evidence are in review.md."
+ }
+}

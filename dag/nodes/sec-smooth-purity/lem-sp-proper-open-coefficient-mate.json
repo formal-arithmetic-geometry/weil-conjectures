@@ -18,7 +18,10 @@
   "def-pc-scheme",
   "def-weil-pbc-noetherian-ring",
   "def-weil-proper-morphism",
-  "def-weil-open-immersion"
+  "def-weil-open-immersion",
+  "lem-coef-finite-direct-image",
+  "lem-coef-etale-open-tensor",
+  "lem-weil-pbc-proper-open-comparison-proetale"
  ],
  "proof": [
   {
@@ -234,5 +237,39 @@
   "group": "Q93",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q93-1bc8e81bf (reviewer sub-agent of L); spot-checked: Read the full item, unit/chapter route, required contract files, Stacks 0F7B/0GL6, current blueprint proof, and every cited node statement. Verified coefficient categories, base-change and mate directions, unbounded/bounded-below hypotheses, naturality, edge cases including Z/4→Z/2, identity and empty-open cases, duplicate searches, Mathlib searches, and no SGA use. No new nodes or repairs are needed; review.md records the checks."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-aed056efc",
+  "group": "NE",
+  "result": "fix",
+  "note": "Mathematics, canonical maps, hypotheses, universes, edge cases, and verbatim signature checked; scompile.py passed. Replaced the H11 second-reading placeholder with a complete independent reading in fixes/lem-sp-proper-open-coefficient-mate.report.md. Full findings in review.md; snapshot and branch unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ProperOpenCoefficientMate",
+  "declaration": "AlgebraicGeometry.Etale.properOpen_coefficient_mate",
+  "declarations": [
+   "AlgebraicGeometry.Etale.properOpenCoefficientInterchange",
+   "AlgebraicGeometry.Etale.properOpenCoefficientRestriction",
+   "AlgebraicGeometry.Etale.properOpenCoefficientTargetPlus",
+   "AlgebraicGeometry.Etale.properOpenCoefficientInterchangePlus",
+   "AlgebraicGeometry.Etale.properOpenCoefficientRestrictionPlus",
+   "AlgebraicGeometry.Etale.properOpenCoefficientComposite",
+   "AlgebraicGeometry.Etale.properOpen_coefficient_mate",
+   "AlgebraicGeometry.Etale.properOpen_coefficient_mate_naturality",
+   "AlgebraicGeometry.ProEtale.properOpenSiteRestrictionInverse",
+   "AlgebraicGeometry.ProEtale.properOpenSiteInterchange",
+   "AlgebraicGeometry.ProEtale.properOpenSiteComposite",
+   "AlgebraicGeometry.ProEtale.properOpen_site_mate",
+   "AlgebraicGeometry.ProEtale.properOpen_site_mate_naturality"
+  ],
+  "file": "lean/Sheaf/Paper/ProperOpenCoefficientMate.lean",
+  "statement": "theorem properOpen_coefficient_mate {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B] (φ : A →+* B) (sq : IsPullback k r p i) (E : DerivedCategoryModule A U) (_hE : ∃ n : ℤ, E.IsGE n) (_hEB : ∃ n : ℤ, ((scalarExtension φ U).obj E).IsGE n) : (scalarExtension φ Z).map ((properOpenCoefficientInterchange A sq).hom.app E) ≫ finiteCoefficientDirectImageMap φ p (D((k)_!open[ModuleCat.{u + 1} A]).obj E) ≫ R((p)_*[ModuleCat.{u + 1} B]).map ((openScalarExtension φ k).hom.app E) = properOpenCoefficientComposite φ sq E",
+  "branch": "newtargets-dag",
+  "by": "NE",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "The module states the coefficient square, site square, and naturality of both. The site equation is mapped through the fully faithful D+ inclusion into the unbounded category. Its pro-etale map is the open adjunct of transported inverse restriction, not a definition by the desired square. Three already-landed dependencies supply the canonical coefficient direct-image, open tensor, and derived site-extension interfaces."
  }
 }

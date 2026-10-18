@@ -21,7 +21,10 @@
   "def-weil-rationalization-karoubi",
   "prop-constructible-truncations",
   "def-weil-triangulated-category",
-  "def-weil-l-adic-coefficient-extension"
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-compact-support-finite-action",
+  "def-weil-compact-support-coefficient-action",
+  "def-weil-constructible-heart"
  ],
  "proof": [
   {
@@ -436,5 +439,24 @@
   "group": "NI",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NI-b53d956f8 (reviewer sub-agent of L); spot-checked: I read the whole item: statement, 9 steps and tool_uses. It adds no new node. I read every cited statement and the sources: Bhatt-Scholze Def 6.7.6, Lemma 6.7.7, Remark 6.7.8, Def 6.8.10, Props 6.8.11(3) and 6.8.14, and Stacks 0G2A(3). The statement agrees with them. The mathematics is correct. Steps 1-3 build the integral tower functor, identify it with completed Rp_*j_! (lem-pur-completed-coefficient-pushforward-comparison replaces the absent prop-weil-pbc-direct-image-limits), and transport it rationally. Step 4 compares the framework and PBC pair categories through chi_{L/E} and descends using the cbc coherence on the identity square. Steps 5-7 do the heart bound: the torsion of H is killed by a uniform power of varpi, the Tor transition is multiplication by varpi so the H^{-1} tower is pro-zero, and the Milnor sequence then gives F^int H in D^{>=0} integrally. Steps 8-9 extend this to the rational and Qbar hearts and then by truncation induction. Tested on: K=0, open immersions, A^1->pt, shifts; f=id shows the bound is sharp. Batch-5 flag: lem-cbc-rational-compact-support-coefficient-coherence reaches def-pod-ring-scalar-extension, a general definition of module scalar extension. The cited node states coefficient coherence of compact support, which neither the trace-formula nor the Poincare-duality assumption gives and which is no step of their proofs. So the citation is genuinely outside and I do not return. Fixes made in fixes/dag/nodes/sec-deligne-laumon-general/lem-zl-field-shriek-lower-bound.json: (1) Step 4 cited [def-weil-pbc-qbar-category] without listing it in uses (C1/B3); added, stated that l is invertible, and kept the step under 2000 characters. (2) Step 1 passed from scheme-theoretic to geometric fibre dimension with no citation; now cites lem-sc-fibre-dimension-after-base-change, also declared in tool_uses. (3) Step 8 applied prop-weil-localized-tstructure (stated for PBC categories) without saying why it applies to the framework categories; now cites lem-weil-pbc-integral-stratified-perfect-characterization and def-weil-rationalization-karoubi. I removed the stale tool_uses entry prop-weil-pbc-direct-image-limits and recomputed proof_deps. The other declared tool uses are accepted.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-152879d62",
+  "group": "NO",
+  "result": "pass",
+  "note": "Wrote review.md. Checked immutable files, all statement dependencies, sources, normalized constructions, universes, edge cases, verbatim signature, and route-pivot compliance. Per-file compilation reproduced cleanly; no corrections needed."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FieldShriekLowerBound",
+  "declaration": "WeilConjectures.fieldShriek_lowerBound",
+  "file": "lean/Sheaf/Paper/FieldShriekLowerBound.lean",
+  "statement": "theorem fieldShriek_lowerBound (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p) (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω] {X Y : Scheme.{u}} (f : X ⟶ Y) [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))] [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))] [QuasiSeparated (X ↘ Spec (.of D.k))] [LocallyOfFiniteType (Y ↘ Spec (.of D.k))] [QuasiCompact (Y ↘ Spec (.of D.k))] [QuasiSeparated (Y ↘ Spec (.of D.k))] [f.IsOver (Spec (.of D.k))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (d : Compactification f) : (∀ E : Padic.FiniteCoefficientFields l Ω, (∃ comm : (sfCompactSupportFiniteFunctor l D.k (PurCompactSupport.coefficientPrimeUnit l D hl) d (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω E)).CommShift ℤ, (fun [commInst : (sfCompactSupportFiniteFunctor l D.k (PurCompactSupport.coefficientPrimeUnit l D hl) d (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω E)).CommShift ℤ] ↦ (sfCompactSupportFiniteFunctor l D.k (PurCompactSupport.coefficientPrimeUnit l D hl) d (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω E)).IsTriangulated) (commInst := comm)) ∧ ∀ (c : ℤ) (K : Stage l Ω X E), (∀ i : ℤ, i < c → IsZero ((constructibleTruncationCohomology (sfRationalStandardTStructure l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω E) X D hl) i).obj K)) → ∀ i : ℤ, i < c → IsZero ((constructibleTruncationCohomology (sfRationalStandardTStructure l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω E) Y D hl) i).obj ((sfCompactSupportFiniteFunctor l D.k (PurCompactSupport.coefficientPrimeUnit l D hl) d (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω E)).obj K))) ∧ (∀ S : SfCompactSupportCoefficientAction l D.k (PurCompactSupport.coefficientPrimeUnit l D hl) Ω d, (∃ comm : S.system.functor.CommShift ℤ, (fun [commInst : S.system.functor.CommShift ℤ] ↦ S.system.functor.IsTriangulated) (commInst := comm)) ∧ ∀ (c : ℤ) (K : generalAlgebraicallyClosedConstructibleCategory l Ω X), (∀ i : ℤ, i < c → IsZero ((constructibleTruncationCohomology (sfCommonStageStandardTStructure l X Ω D hl) i).obj K)) → ∀ i : ℤ, i < c → IsZero ((constructibleTruncationCohomology (sfCommonStageStandardTStructure l Y Ω D hl) i).obj (S.system.functor.obj K)))",
+  "branch": "newtargets-dag",
+  "by": "NO",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Uses the already normalized finite functor and every normalized common-stage coefficient action. The finite-stage fields use the existing canonical small coefficient models of all finite subextensions of the chosen closure. The added statement dependencies are already landed owning nodes of these morphism actions and the canonical standard t-structures."
  }
 }
