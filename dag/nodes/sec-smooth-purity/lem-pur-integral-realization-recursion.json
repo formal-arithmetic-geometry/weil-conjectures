@@ -228,5 +228,36 @@
   "group": "NW",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NW-86dc42bef (reviewer sub-agent of L); spot-checked: I read the item and its seven steps in full, plus the full statements of the four cited nodes (realization, generator-reduction-coherence, derived-system-evaluation-calculus, normalized-dvr-effectivity), steps 4-5 of the parent realization proof, def-coef-normalized-dvr-tower, and main-20261015 fix-prop-coherence.proof.md lines 9-15. Shape: one commit containing the item and the report, no new nodes, statement and ancestry unchanged, proof_deps equal to the union of uses, no cycle by graph closure, no SGA. Route: the two coef nodes are in sk-prop-sf-biduality-general, which sk-thm-sf-compatibility uses directly, so all four citations are on the route and no tool_uses are needed. Step 1: e_M is invertible because effectivity gives the level counit isomorphisms and the calculus node detects isomorphisms by evaluation; only isomorphisms are detected, not equality. Step 2: the right triangle identity gives u_{LM}=L(e_M)^{-1}; RK is normalized; naturality along the existence-only h: LRK->K makes u_K invertible. I checked by hand: r_A = e R(d_A^{-1}) from the generator statement; the R-L transpose b=L(q)u and its inverse q=e_M R(b); the single-operation transpose d_A^{-1}; the unary formula b_{AV}=LA(e_M)d_A(LM)^{-1}A_int(b_V) and its inverse A_int(c_V)a_A(M); the tensor case with two-input d_tensor naturality; and the counit-naturality equations for the inverse LA(e) factors. Hypotheses at intermediate stages hold because I_V is isomorphic to LM (complete, constructible) and R I_V to M (normalized). Small cases: leaf gives u^{-1}; one operation gives d_A; zero input and empty open give zero maps; R[0] at a point. The coefficient categories are the same as in the parent. One formal point, which I accept: the parent's statement does not fix the leaf normalization, so the identification with the parent's c_V in step 6 uses the parent's step-4 definitions. This is inherent to the statement, which names that construction, and the formulas match symbol for symbol. The grep for duplicates over dag/nodes finds only the parent and the user node. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.IntegralRealizationRecursion",
+  "declaration": "WeilConjectures.IntegralSystemRealization.Recursion.integralRealizationRecursion",
+  "declarations": [
+   "WeilConjectures.IntegralSystemRealization.Recursion.properD",
+   "WeilConjectures.IntegralSystemRealization.Recursion.openD",
+   "WeilConjectures.IntegralSystemRealization.Recursion.pullA",
+   "WeilConjectures.IntegralSystemRealization.Recursion.properA",
+   "WeilConjectures.IntegralSystemRealization.Recursion.openA",
+   "WeilConjectures.IntegralSystemRealization.Recursion.tensorA",
+   "WeilConjectures.IntegralSystemRealization.Recursion.BasicTree",
+   "WeilConjectures.IntegralSystemRealization.Recursion.ComparisonFamily",
+   "WeilConjectures.IntegralSystemRealization.Recursion.Equations",
+   "WeilConjectures.IntegralSystemRealization.Recursion.OperationLaws",
+   "WeilConjectures.IntegralSystemRealization.Recursion.integralRealizationRecursion"
+  ],
+  "file": "lean/Sheaf/SixFunctors/IntegralRealizationRecursion.lean",
+  "statement": "theorem integralRealizationRecursion (D : FiniteFieldDatum.{u}) (_hl : l ≠ D.p) (o : Operations l E) (r : Realizations l E D o) : OperationLaws l E D r ∧ (∀ {I : Type u} [Finite I] {X : I → Over (Spec (CommRingCat.of D.k))} {W : Over (Spec (CommRingCat.of D.k))} (e : Expression _ I X W) (g : e.geometric) (K : (e.domain l E o).FullSubcategory), BasicTree e → Equations l E r r.comparison e g K) ∧ (∀ (c : ComparisonFamily l E D o), (∀ {I : Type u} [Finite I] {X : I → Over (Spec (CommRingCat.of D.k))} {W : Over (Spec (CommRingCat.of D.k))} (e : Expression _ I X W) (g : e.geometric) (K : (e.domain l E o).FullSubcategory), BasicTree e → Equations l E r c e g K) → ∀ {I : Type u} [Finite I] {X : I → Over (Spec (CommRingCat.of D.k))} {W : Over (Spec (CommRingCat.of D.k))} (e : Expression _ I X W) (g : e.geometric), BasicTree e → c e g = r.comparison e g)",
+  "branch": "newtargets-dag",
+  "by": "Q57",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9bbc3e89e",
+  "group": "Q57",
+  "result": "pass",
+  "note": "Clause-by-clause match against the node and the 3 stmt_deps: actual unit/counit/R/L of the calculus; dependency Expression.domain (sfIntegralConstructible incl. derived complete, Good = normalized + LevelBounds + Origins at every vertex); geometric arrow conditions; BasicTree excludes compactSupport. a-maps = inverseOrZero(L A(e_M)) ≫ d_A(LM), with GeneratorReduction.pullD/tensorD; openD repeats the GeneratorReduction.openD formula with r.realizationModel (needed: GeneratorReduction.Operations requires tensor-unit data Realizations lacks); properD transports via realizationModel.push. Consistency checked from Realizations fields: inputNormalization, pull, tensor, normalization (e_M iso) + push naturality + triangle give the var/pull/tensor/push equations; open needs the stipulated open-d invertibility (generator node, proof step 4). Conjuncts: OperationLaws invertibility, equations for r.comparison, uniqueness among natural families. Statement verbatim; lines ≤98; source/blueprint docstrings; 7-step proof docstring; sorry only; no duplicate in side lean/Sheaf; universes = dependency. nt_compile --json clean (GeneratorReductionStatement 8.2 s, item 4.3 s, exit 0). Source blueprint file not in side clone, not reread (agent-formulated place, stage-1 reviewed). Advisory: OperationLaws docstring claims a naturality clause it lacks; NormalizedDVREffectivity import is unused by the statement."
  }
 }

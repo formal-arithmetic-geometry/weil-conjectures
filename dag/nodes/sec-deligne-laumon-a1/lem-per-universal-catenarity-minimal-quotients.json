@@ -189,5 +189,23 @@
   "group": "Q121",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q121-f25ae47c5 (reviewer sub-agent of L); spot-checked: The item states exactly Stacks Tag 0AUP (lemma-catenary-check-irreducible) clause (2), checked in algebra.tex and tags/tags: Noetherian A is universally catenary iff A/p is universally catenary for every minimal prime p. The source omits this proof; the delivery supplies it and marks proof_origin.by=agent. Step 1 (forward): lem-per-universal-catenarity-quotient (Stacks 00NK, same unit, unsplit, no deps) applied with I=p; its hypotheses are exactly the item's. Step 2 (converse): reduces to any finite-type B and primes q⊆r; the contraction a of q is prime (1∉a is checked); lem-weil-pbc-prime-contains-minimal-prime with I=0 gives a minimal p⊆a. This correctly avoids assuming that minimal primes of B contract to minimal primes of A. Step 3 (elementary, correctly marked): J=pB⊆q, and C=B/J is a finite-type A/p-algebra via the generator form of def-weil-pbc-finite-type-algebra; the hypothesis and def-exc-excellent-ring make C catenary. Applying the definition needs A/p Noetherian, a one-line fact that the statement itself presupposes; not a fault. Step 4: lem-weil-pbc-spec-quotient-homeomorphism-zero-locus gives inverse bijections; monotonicity is spelled out; the interval [q,r] lies inside V(J). Step 5: both catenary clauses (finite bound and equal length of saturated chains) carry across the order isomorphism. Edge cases checked: zero ring, q=r, domain, k[x,y]/(xy) (prime over two minimal primes), k[e]/(e^2). No new nodes. Searches for duplicates (0AUP, 00NK, catenary with minimal prime) find only the item, its parent lem-per-ratliff-formal-catenarity and the quotient lemma; the trf affine-cover catenarity nodes are different statements. Route stays in unit sk-p-dl-a1-perverse; the other citations are definitions and Mathlib leaves; no tool_uses; no cycle. Minor: the report lists citations.json, which is not among the delivered files; harmless. No changes made."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.UniversallyCatenaryMinimalQuotients",
+  "declaration": "isUniversallyCatenary_iff_quotient_minimalPrimes",
+  "file": "lean/Sheaf/RingTheory/UniversallyCatenaryMinimalQuotients.lean",
+  "statement": "theorem isUniversallyCatenary_iff_quotient_minimalPrimes (A : Type u) [CommRing A] [IsNoetherianRing A] : IsUniversallyCatenary A ↔ ∀ p : Ideal A, p ∈ minimalPrimes A → IsUniversallyCatenary (A ⧸ p)",
+  "branch": "newtargets-dag",
+  "by": "Q03",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2025eeddc",
+  "group": "Q03",
+  "result": "pass",
+  "note": "Item states Stacks 0AUP(2) exactly: (A:Type u)[CommRing A][IsNoetherianRing A] : IsUniversallyCatenary A ↔ ∀ p ∈ minimalPrimes A, IsUniversallyCatenary (A ⧸ p). Every hypothesis and clause matches the node. Uses the landed def-exc-excellent-ring IsUniversallyCatenary (Noetherian + every Type-u finite-type algebra catenary) unchanged; the delivery adds no universe restriction. lean.statement verbatim; stmt_deps exact; edge cases (zero ring, domain, non-reduced, several minimal primes) covered; no duplicate in side lean/Sheaf, runs/2 or Mathlib; sorry only; source and blueprint docstrings present, all 5 proof steps rendered. nt_compile --json clean in 1.5 s, broken-copy control fails as expected. Advisory: two private proof-plan imports unused by the statement."
  }
 }
