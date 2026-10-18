@@ -17,9 +17,76 @@
   "lem-per-regular-gysin-calculus",
   "lem-per-general-costalk-transitions"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use exponent $n=1$ in the coefficient conventions of [def-per-potential-dualizing-complex]. The canonical identification $\\mathbf Z/\\ell\\mathbf Z=\\mathbf F_\\ell$ identifies its twists with those of [def-per-potential-dualizing]: both positive twists are powers of $\\mu_\\ell$ and both negative twists are dual powers. Both costalks are the same supported inverse images after localization. Both immediate transition maps take the reduced closure in the same strict localization, apply the same trait cochain model, and multiply by the inverse of the same residue degree after normalization. Thus the given pinned potential $K$ is also a pinned potential in the exponent-one conventions, with exactly the same maps, rather than merely an isomorphic unnormalized dualizing object.",
+   "uses": [
+    "def-per-potential-dualizing",
+    "def-per-potential-dualizing-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, Definitions 1.2.3.1, 1.3.1, 1.4.1 and 2.1.2 (coefficient exponent one)"
+   }
+  },
+  {
+   "text": "Apply [lem-per-regular-pullback-pinnings] with $h=r$ and $n=1$. The hypotheses are precisely a regular morphism of Noetherian excellent schemes, invertibility of $\\ell$, a dimension function, and a pinned potential $K$; no finite-type or compactifiability hypothesis is required. It gives the dimension function $\\delta_r(t)=\\delta_X(r(t))-b(t)$ and potential pinnings on $r^*K$, defined by the exchange of [lem-per-regular-supported-base-change], then $q^*p_x$, then the inverse class of [lem-per-absolute-gysin-purity] at $n=1$. These are the maps $p^r_t$ of the item. First, the comparison $q^*R\\Gamma_xK\\to i^!r^*K$ of [lem-per-regular-closed-support-base-change] is characterized by its statement: after $i_*$, its composite with the supported counit is $r^*$ of the supported counit. The exchange of [lem-per-regular-supported-base-change] commutes with the closed counits by its statement. Since $i_*$ is left adjoint to $i^!$, a map into $i^!r^*K$ is determined by this composite, so the two comparisons are equal. Second, for the closed immersion $\\operatorname{Spec}\\kappa(t)\\hookrightarrow\\operatorname{Spec}\\mathcal O_{P_x,t}$ of regular affine Noetherian excellent schemes, [lem-per-regular-gysin-calculus] states that its class is the absolute-purity Gysin class, and [lem-per-immersion-class-calculus] states that this class is the immersion class of [lem-per-absolute-gysin-purity] (with $\\mathbf Z/\\ell=\\mathbf F_\\ell$). Thus the inverse classes agree. Hence the result applies to the item's specified maps, and their immediate-specialization squares commute in the derived category.",
+   "uses": [
+    "lem-per-regular-pullback-pinnings",
+    "lem-per-regular-supported-base-change",
+    "lem-per-regular-closed-support-base-change",
+    "lem-per-absolute-gysin-purity",
+    "lem-per-regular-gysin-calculus",
+    "lem-per-immersion-class-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, Proposition 4.1.1 and Lemma 4.3.1.1; the low-base-codimension case is Lemma 4.3.2.1"
+   }
+  },
+  {
+   "text": "For a positive-codimension geometric specialization $t\\prime\\rightsquigarrow t$, [lem-per-general-costalk-transitions] gives an immediate factorization $t_0=t\\prime\\rightsquigarrow t_1\\rightsquigarrow\\cdots\\rightsquigarrow t_N=t$, and additivity of codimensions gives $N=c_P(t\\prime,t)=c$. Since $\\delta_r$ is a dimension function by Step 2, each edge gives $\\delta_r(t_{j-1})=\\delta_r(t_j)+1$ by [def-per-potential-dualizing]. Summing yields $\\delta_r(t\\prime)=\\delta_r(t)+c$, which is the required target identification. For codimension zero the underlying point is unchanged and the same equality holds with $c=0$.",
+   "uses": [
+    "lem-per-general-costalk-transitions",
+    "def-per-potential-dualizing"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, Definition 2.1.1, Theorem 3.1.2 and Remark 1.4.2"
+   }
+  },
+  {
+   "text": "Take cohomology in the immediate compatibility squares from Step 2, using [def-per-potential-dualizing], and compose along the chain of Step 3. More explicitly, induction on $j$ starts with $j=0$ and the identity map, and the edge compatibility, twisted by $(j-1)$, replaces $H^{i+2(j-1)}(p^r_{t_{j-1}}(j-1))$ by $H^{i+2j}(p^r_{t_j}(j))$ composed with that edge transition. After $j$ edges one therefore has $H^i(p^r_{t_0})=H^{i+2j}(p^r_{t_j}(j))$ composed with the chain transition. At $j=c$, [lem-per-general-costalk-transitions] identifies this chain transition with $\\operatorname{sp}^i_{t\\prime,t}$, giving the claimed formula. If $c=0$, that node identifies the transition with geometric transport; the residue-field-site pinnings are morphisms of sheaves and hence commute with this transport. Finally restrict to the requested specializations with $c_X(x\\prime,x)\\leq1$. The chain used above need not remain over an immediate base specialization, since Step 2 already supplies potentiality on all of $P$.",
+   "uses": [
+    "def-per-potential-dualizing",
+    "lem-per-general-costalk-transitions"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, Theorem 3.1.2, Definition 2.1.2 and Remark 1.4.2"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-per-potential-dualizing",
+  "def-per-potential-dualizing-complex",
+  "lem-per-regular-pullback-pinnings",
+  "lem-per-general-costalk-transitions",
+  "lem-per-regular-supported-base-change",
+  "lem-per-regular-closed-support-base-change",
+  "lem-per-absolute-gysin-purity",
+  "lem-per-regular-gysin-calculus",
+  "lem-per-immersion-class-calculus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "XVII, Proposition 4.1.1 and Lemma 4.3.1.1 via the existing more-general node lem-per-regular-pullback-pinnings; compose immediate compatibilities using Theorem 3.1.2"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -55,10 +122,38 @@
    "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime\", \"module\": \"Mathlib/RingTheory/Polynomial/UniversalFactorizationRing\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (P : Ideal R) [inst_1 : P.IsPrime] (p : Polynomial R)\\n  (f g : Polynomial P.ResidueField),\\n  p.Monic →\\n    f.Monic →\\n      g.Monic →\\n        Polynomial.map (algebraMap R P.ResidueField) p = f * g →\\n          IsCoprime f g →\\n            ∃ R' x x_1,\\n              ∃ (\", \"doc\": \"Given a ring homomorphism $ f : A → B $ between commutative rings and prime ideals $ I ⊆ A $, $ J ⊆ B $ such that $ I $ is the preimage of $ J $ under $ f $, there exists a unique $ R $-algebra homomo\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.residue_descResidueField\", \"module\": \"Mathlib/AlgebraicGeometry/ResidueField\", \"type\": \"∀ {K : Type u} [inst : Field K] {X : AlgebraicGeometry.Scheme} {x : ↥X}\\n  (f : X.presheaf.stalk x ⟶ { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })\\n  [inst_1 : IsLocalHom (CommRingCat.Hom.hom f)],\\n  CategoryTheory.CategoryStruct.comp (X.residue x) (AlgebraicGeometry.Scheme.descResi\", \"doc\": \"For a scheme $X$ and a point $x \\\\in X$, given a field $K$ and a local ring homomorphism $f : \\\\mathcal{O}_{X,x} \\\\to K$ from the stalk of the structure sheaf at $x$ to $K$, the composition of the canoni\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Pullback.residueFieldCongr_inv_residueFieldMap_ofPoint\", \"module\": \"Mathlib/AlgebraicGeometry/PullbackCarrier\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} {f : X ⟶ S} {g : Y ⟶ S} (t : ↥(CategoryTheory.Limits.pullback f g)),\\n  CategoryTheory.CategoryStruct.comp\\n      (CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Scheme.residueFieldCongr ⋯).inv\\n        (AlgebraicGeometry.Scheme.Hom.residueFieldMap f (Algebra\", \"doc\": \"For a point $ t $ in the pullback of morphisms $ f: X \\to S $ and $ g: Y \\to S $ of schemes, the composition of the inverse of the residue field isomorphism at $ t $'s image in $ X $ with the residue fi\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.residue_residueFieldMap\", \"module\": \"Mathlib/AlgebraicGeometry/ResidueField\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (x : ↥X),\\n  CategoryTheory.CategoryStruct.comp (Y.residue ((CategoryTheory.ConcreteCategory.hom f.base) x))\\n      (AlgebraicGeometry.Scheme.Hom.residueFieldMap f x) =\\n    CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Scheme.Hom.stalkMap f x) (X.\", \"doc\": \"For any point $x$ in a scheme $X$ and a morphism $f: X \\to Y$ of schemes, the composition of the residue map $\\\\text{residue}_{Y,f(x)}: \\\\mathcal{O}_{Y,f(x)} \\to k(f(x))$ followed by the residue field map\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.residue_descResidueField_assoc\", \"module\": \"Mathlib/AlgebraicGeometry/ResidueField\", \"type\": \"∀ {K : Type u} [inst : Field K] {X : AlgebraicGeometry.Scheme} {x : ↥X}\\n  (f : X.presheaf.stalk x ⟶ { carrier := K, commRing := Field.toEuclideanDomain.toCommRing })\\n  [inst_1 : IsLocalHom (CommRingCat.Hom.hom f)] {Z : CommRingCat}\\n  (h : { carrier := K, commRing := Field.toEuclideanDomain.toCommRin\", \"doc\": \"For a scheme $X$ with point $x$, field $K$, and commutative ring $Z$, the composition of the residue map $\\\\mathcal{O}_{X,x} \\\\to k(x)$ with the morphism $\\\\text{descResidueField}(f): \\\\text{Stalk}(X,x) \\\\\"}\n  {\"name\": \"Algebra.instFormallyUnramifiedResidueField\", \"module\": \"Mathlib/RingTheory/Unramified/LocalRing\", \"type\": \"∀ {S : Type u_2} [inst : CommRing S] [inst_1 : IsLocalRing S], Algebra.FormallyUnramified S (IsLocalRing.ResidueField S)\", \"doc\": \"For any commutative local ring $ S $, its residue field (obtained by quotienting $ S $ by its unique maximal ideal) is formally unramified over $ S $ as an $ S $-algebra. This means the canonical quot\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.SpecMap_residueFieldMap_fromSpecResidueField\", \"module\": \"Mathlib/AlgebraicGeometry/ResidueField\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (x : ↥X),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Spec.map (AlgebraicGeometry.Scheme.Hom.residueFieldMap f x))\\n      (Y.fromSpecResidueField ((CategoryTheory.ConcreteCategory.hom f.base) x)) =\\n    CategoryTheory.CategoryStruct.comp (X.fr\", \"doc\": \"For any point $x$ in a scheme $X$, the composition of the morphism $\\\\operatorname{Spec}$-induced by the residue field map at $x$ followed by the canonical morphism from the residue field of $Y$ equals\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.Spec_map_residueFieldMap_fromSpecResidueField\", \"module\": \"Mathlib/AlgebraicGeometry/ResidueField\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (x : ↥X),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Spec.map (AlgebraicGeometry.Scheme.Hom.residueFieldMap f x))\\n      (Y.fromSpecResidueField ((CategoryTheory.ConcreteCategory.hom f.base) x)) =\\n    CategoryTheory.CategoryStruct.comp (X.fr\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes, and let $x$ be a point in $X$. Let $k(x)$ denote the residue field of $X$ at $x$, and $k(f(x))$ denote the residue field of $Y$ at the image point $f(x)$. Th\"}\n",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale exceptional inverse image for finite radicial maps commutes with regular inverse image and preserves Gysin normalized pinnings",
+   "results": "Hits: AlgebraicGeometry.Scheme.Hom.normalizationDiagram, AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap, AlgebraicGeometry.Scheme.Hom.ι_toNormalization, AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage, AlgebraicGeometry.Scheme.Hom.ι_toNormalization_assoc, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.Scheme.Hom.ι_fromNormalization_assoc, AlgebraicGeometry.Scheme.Hom.ι_fromNormalization. Inspected returned signatures; none concerns normalized Gysin pinnings or potential dualizing complexes.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "potentialDualizing|putativeDualizing|Gysin.*speciali[sz]",
+   "results": "No hits.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"dualizing\", \"specialization\"",
+   "results": "No hits.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A regular pullback of a pinned potential dualizing complex preserves normalized residue transitions on costalks",
+   "results": "Hits: TopCat.Presheaf.stalkPullbackHom, CategoryTheory.regularOfIsPullbackFstOfRegular, TopCat.Presheaf.stalkPullbackIso, AlgebraicGeometry.Scheme.Pullback.residueFieldCongr_inv_residueFieldMap_ofPoint, CategoryTheory.regularOfIsPullbackSndOfRegular, TopCat.Presheaf.stalkPullbackInv, CategoryTheory.MorphismProperty.Over.hasPullbacks, CategoryTheory.MorphismProperty.Over.pullbackComp_left_fst_fst. Inspected returned signatures; none concerns normalized Gysin pinnings or potential dualizing complexes.",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-regular-potential-pullback",
@@ -80,5 +175,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-per-regular-pinnings-low-base-codimension",
+  "worker": "stage1",
+  "summary": "Reuse the already existing prime-power regular-pullback theorem at exponent one, compare its specified twists, residue transitions and fibrewise pinnings, and derive the displayed arbitrary-total-codimension formula by an explicit chain induction. No new nodes, no changed statement, and no attachment. Checked the dependency closure of every proof citation for a path back to the item.",
+  "blueprint": "The ancestor lem-per-artin-gabber-affine-curve, dimension-normalized arbitrary-field duality expansion named in blueprint.from.place: the low-base-codimension comparison is supplied by the existing regular-pullback-pinnings theorem, not a duplicate child. The current blueprint file states the affine perverse bound; the fine duality expansion is recorded by the intervening DAG nodes."
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q27-a27f8adea",
+  "group": "Q27",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q27-a27f8adea (reviewer sub-agent of L); spot-checked: Source read: ILO XVII, Prop 4.1.1, Lemmas 4.3.1.1–4.3.1.2, §4.3.2, Lemmas 4.3.2.1–4.3.2.2 (pp. 280–285). The statement is unchanged and matches 4.3.2.1 hypothesis by hypothesis: regular means flat with geometrically regular fibres; Noetherian excellent; ℓ invertible; pinned potential K; codimension-c transitions read via Th 3.1.2; base codimension 0 or 1. There are no new nodes and no SGA citations, and all cited nodes are in unit sk-p-dl-a1-perverse. Step 1 (F_ℓ and Z/ℓ^n definitions agree at n=1) is accepted as elementary: the two costalk-reduction lemmas and the two trait residue models are word-for-word the same at n=1, and the identification is written out in a step rather than assumed. Step 2 applies lem-per-regular-pullback-pinnings at n=1; its hypotheses match and its statement specifies the pinnings. C1/C3 fault: the step said 'these are exactly the item's maps' without citing why. The item builds them from lem-per-regular-closed-support-base-change and the lem-per-regular-gysin-calculus class; the Z/ℓ^n theorem builds them from lem-per-regular-supported-base-change and lem-per-absolute-gysin-purity. Fixed in fixes/dag/nodes/sec-deligne-laumon-a1/lem-per-regular-pinnings-low-base-codimension.json. Step 2 now gives two arguments. (1) Both comparisons are characterized by compatibility with the supported counit, and i_* is left adjoint to i^!, so they are equal. (2) The statement of gysin-calculus calls its regular-immersion class the absolute-purity class, and the statement of lem-per-immersion-class-calculus says this is the class of absolute-gysin-purity. Spec κ(t)→Spec O_{P_x,t} satisfies the hypotheses of both. The five nodes are added to the step's uses and to proof_deps; no other field changed. Steps 3 and 4 are correct. Step 3 factors the specialization into immediate steps, counts N=c by codimension additivity, and sums the dimension-function equalities. Step 4 states the induction with its base: H^i of each edge's derived-category equality, twist compatibility, the composition clause identifying the chain with sp^i, and the c=0 transport case. Edge cases checked: identity morphism, field base, trait with c=1, c_P>1 over c_X=1, empty schemes; twist signs agree. Cycles: none. The full closures of all cited and added nodes avoid the item; its only citer, lem-per-regular-potential-pullback, is not cited. Batch-5 flags (def-per-potential-dualizing-complex and lem-per-regular-pullback-pinnings, both via lem-per-prime-power-costalk-reduction to lem-trf-ind-etale-strict-local-invariance) are accepted. That node is Stacks 05WR/0GIP, invariance of strict localization under ind-étale maps: generic algebra, outside both the trace-formula and Poincaré-duality assumptions. It is already in the closure of the item's base statement via def-per-potential-dualizing. The other trace-formula nodes reached are a generic bounded-below derived adjunction and the henselian property of integral algebras, also generic. The added citations bring in no new trace-formula node.; 1 file(s) fixed by the reviewer"
  }
 }
