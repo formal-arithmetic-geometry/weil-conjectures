@@ -22,27 +22,28 @@
  ],
  "proof": [
   {
-   "text": "Apply [pqf-lem-proper-basic] to $g$: it is quasi-compact, quasi-separated and of finite type. The target $Y$ is quasi-compact by the Noetherian hypothesis. Apply [lem-fin-finite-type-fibre-dimension-bound] to obtain an integer $e\\geq0$ bounding the dimensions of every scheme-theoretic fibre; empty fibres are allowed.",
+   "text": "Mathlib instances for a proper morphism supply locally finite type, quasi-compactness and quasi-separatedness. Apply [lem-fin-finite-type-fibre-dimension-bound] to choose d bounding all fibre dimensions; the compact target hypothesis supplies the required quasi-compactness, including when source or target is empty.",
    "uses": [
-    "pqf-lem-proper-basic",
     "lem-fin-finite-type-fibre-dimension-bound"
    ],
    "elementary": false
   },
   {
-   "text": "Because $A$ is finite, some positive integer $N$ annihilates $A$. Every $A$-module sheaf is therefore torsion as an abelian sheaf. Apply [lem-kun-proper-torsion-cd-bound] to obtain vanishing of higher direct images above $2e$, and use [lem-sbc-higher-direct-image-forget-comparison] to transfer the vanishing from abelian sheaves to $A$-module sheaves.",
+   "text": "For an A-module sheaf M let F be its underlying abelian sheaf. Every group M(W) is additively torsion by Mathlib IsAddTorsion.module_of_finite, including for the zero ring. Sheaf.IsTorsion.of_forall_isAddTorsion gives local torsion, and [lem-weil-pbc-torsion-sheaf-characterizations] identifies it with [def-weil-pbc-torsion-etale-sheaf]. Apply [lem-kun-proper-torsion-cd-bound] with d. The comparison [lem-sbc-higher-direct-image-forget-comparison] transfers vanishing in integer degree p to the forgotten module higher image. Faithfulness of sheafCompose reflects the identity-equals-zero criterion, so the module higher image is zero. Finally homologyRightDerivedFunctorPlusObjSingleFunctorIso identifies this object with the classical p-th derived direct image for natural p.",
    "uses": [
     "def-weil-pbc-torsion-etale-sheaf",
+    "lem-weil-pbc-torsion-sheaf-characterizations",
     "lem-kun-proper-torsion-cd-bound",
-    "lem-sbc-higher-direct-image-forget-comparison"
+    "lem-sbc-higher-direct-image-forget-comparison",
+    "def-weil-pbc-direct-image"
    ],
    "elementary": false
   },
   {
-   "text": "Apply [lem-exc-direct-image-coproducts] with $u=g$, coefficient ring $A$, and bound $c=2e$. Its finite-amplitude unbounded derived argument gives preservation of every set-indexed coproduct, including the empty family. The bounded-below comparison with the direct image of [def-weil-pbc-direct-image] is the canonical right-derived-functor comparison.",
+   "text": "Apply [lem-exc-direct-image-coproducts] with c = 2*d and the vanishing just proved; this supplies arbitrary set-indexed coproduct preservation for unbounded inputs, including the empty family. Apply [src-right-derived-functor-plus-compatibility] to the additive module direct image to obtain the second conjunct. This follows the current blueprint finite-fibre-bound, higher-image-vanishing and finite-acyclic-resolution route: the stalk and finite-type dimension arguments are encapsulated in the proper torsion bound, and the filtered-colimit/direct-sum argument is encapsulated in the existing coproduct criterion.",
    "uses": [
     "lem-exc-direct-image-coproducts",
-    "def-weil-pbc-direct-image"
+    "src-right-derived-functor-plus-compatibility"
    ],
    "elementary": false
   }
@@ -54,12 +55,13 @@
   "lem-fin-finite-type-fibre-dimension-bound",
   "lem-kun-proper-torsion-cd-bound",
   "lem-sbc-higher-direct-image-forget-comparison",
-  "pqf-lem-proper-basic"
+  "lem-weil-pbc-torsion-sheaf-characterizations",
+  "src-right-derived-functor-plus-compatibility"
  ],
  "proof_origin": {
-  "by": "worker",
-  "document": "coord/changes/etale-compactification-upper-shriek-retirement.md",
-  "place": "H1 retirement of unused auxiliary route; consumer audit and existing active finite-coefficient implementation"
+  "by": "F4 stage 3",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ctf-finite-proper/lem-amb-proper-coproducts.proof.md",
+  "place": "Finite fibre bound, higher-image vanishing and finite acyclic-resolution route; Stacks etale-cohomology.tex Tags 095U and 0F11. Lean proof uses existing proper torsion and finite-cd coproduct criteria, and Mathlib finite-ring module torsion."
  },
  "mathlib_searches": [
   {
@@ -120,14 +122,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-17",
+  "date": "2026-10-18",
   "by": "L",
-  "reviewer": "C-b9f5f",
-  "group": "H1",
+  "reviewer": "C-85230",
+  "group": "F4",
   "result": "pass",
-  "landing": "20261017T003421-L-3315038",
-  "kind": "interface",
-  "note": "independent cc review: Withdrawal of the sorry'd item theorem and retirement of the unused Etale.CompactificationUpperShriek namespace (unclaimed module) matched against a compiled-term audit of 399/402 downstream modules (0 references), compiles of Etale.Derived.UpperShriek and 3 ProEtale UpperShriek modules against the delivered modules, the change record's Users table, and the node diff (only proof/proof_deps/proof_origin/lean changed)"
+  "landing": "20261018T062748-L-648680",
+  "kind": "proof",
+  "note": "independent cc review: Delivered proof of AlgebraicGeometry.Etale.proper_rightDerivedLowerStar_preservesCoproducts (compiles cleanly; axioms add only sorryAx, from the still-sorry ProperTorsionDirectImageBound and FiniteCohomologicalDimensionDirectImageCoproducts) matched against both nodes' proof/proof_deps and the plan route; the removed TorsionEtaleSheaf import checked as a wrapper of the WeilConjectures definition, with unit sk-prop-sf-cbc realized empty and 0 importers"
  },
  "lean_audit": {
   "master": {
