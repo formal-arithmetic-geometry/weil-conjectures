@@ -2,7 +2,7 @@
  "id": "lem-per-tame-normalization-log-regular",
  "kind": "statement",
  "title": "Log regularity of an invertible-order normalization over a regular boundary",
- "statement": "Let $Y$ be an integral excellent regular Noetherian scheme and $T\\subset Y$ a strict normal crossings boundary, allowing the empty boundary. Let $G$ be a finite group whose order is invertible on $Y$, and let $V'\\to V=Y\\setminus|T|$ be a connected finite etale $G$-torsor (the action is simply transitive on each geometric fibre). Let $b:Y'\\to Y$ be the normalization of $Y$ in the function field of $V'$. Then $b$ is finite, $Y'$ is integral excellent Noetherian, and $(Y',b^{-1}|T|)$ is a log regular pair.\n\nThe notions are [def-pc-integral-scheme], [def-exc-excellent-ring], [def-weil-regular-scheme], [def-weil-pbc-noetherian-ring], [def-trf-strict-normal-crossings-boundary], [def-weil-etale-morphism], [def-sbc-normal-dominant-galois], [def-sc-normalization], [def-weil-finite-integral-morphism], [def-trf-log-regular-pair]. Normalization in the indicated finite extension $L$ of the function field means the scheme obtained by gluing $\\operatorname{Spec}$ of the integral closure of each affine coordinate domain in $L$; thus the extension field, rather than just the original function field, is used.",
+ "statement": "Let $Y$ be an integral excellent regular Noetherian scheme and $T\\subset Y$ a strict normal crossings boundary, allowing the empty boundary. Let $G$ be a finite group whose order is invertible on $Y$, and let $V'\\to V=Y\\setminus|T|$ be a connected finite etale $G$-torsor (the action is simply transitive on each geometric fibre). Let $b:Y'\\to Y$ be the normalization of $Y$ in the function field of $V'$. Then $b$ is finite, $Y'$ is integral excellent Noetherian, and $(Y',b^{-1}|T|)$ is a log regular pair.\n\nThe notions are [def-pc-integral-scheme], [def-exc-excellent-ring], [def-weil-regular-scheme], [def-weil-pbc-noetherian-ring], [def-trf-strict-normal-crossings-boundary], [def-weil-etale-morphism], [def-sbc-normal-dominant-galois], [def-fin-normalization-extension], [def-weil-finite-integral-morphism], [def-trf-log-regular-pair]. Normalization in the indicated finite extension $L$ of the function field means the scheme obtained by gluing $\\operatorname{Spec}$ of the integral closure of each affine coordinate domain in $L$; thus the extension field, rather than just the original function field, is used.",
  "source": {
   "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
   "place": "Expose IX Proposition 2.1(i)--(iii) and paragraph 2.2, printed pp. 133--134; log regularity under the resulting Kummer etale cover is Expose VI 1.8 and 2.3, printed pp. 70 and 73."
@@ -15,13 +15,114 @@
   "def-trf-strict-normal-crossings-boundary",
   "def-weil-etale-morphism",
   "def-sbc-normal-dominant-galois",
-  "def-sc-normalization",
+  "def-fin-normalization-extension",
   "def-weil-finite-integral-morphism",
   "def-trf-log-regular-pair"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The complement $V$ is a nonempty open of integral $Y$: an effective Cartier boundary cannot contain its generic point. It is Noetherian, since open subsets of a Noetherian space are quasi-compact and the local rings do not change. It is normal by [rem-pc-regular-normal]. The finite morphism $V'\\to V$ is of finite type (a finite module generating set also generates the algebra), so [lem-weil-pbc-finite-type-over-noetherian] makes $V'$ Noetherian. By [lem-fin-etale-normal-components], $V'$ is a finite disjoint union of open-and-closed normal integral schemes. The torsor over nonempty $V$ is nonempty; connectedness therefore leaves exactly one component. Hence $V'$ is normal integral and has a function field $L$. Apply the pullback construction of [lem-galois-descent-data-existence] at $\\operatorname{Spec}K$, where $K=k(Y)$, to see that the generic fibre is finite etale. On a nonempty affine of $V$ its coordinate algebra is a nonzero finite-dimensional domain over $K$, hence a field: multiplication by a nonzero element is injective, thus surjective. Therefore this fibre is $\\operatorname{Spec}L$. The extension is separable: the field assertion follows from [lem-trf-unramified-field-fibre-decomposition], using the unramified clause of [def-weil-etale-morphism]. Finiteness here can also be read by localizing its finite affine algebra at the nonzero elements of the base.",
+   "uses": [
+    "rem-pc-regular-normal",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-fin-etale-normal-components",
+    "lem-trf-unramified-field-fibre-decomposition",
+    "lem-galois-descent-data-existence",
+    "def-weil-etale-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "IX 2.1, pp. 133--134, connected-cover function field; Stacks Tags 033C and 0356, normal components and finite separable generic fibre."
+   }
+  },
+  {
+   "text": "Use [def-fin-normalization-extension] to construct $Y'$ by gluing the integral closures of the affine coordinate domains $A$ of $Y$ in $L$. By [rem-pc-regular-normal], each $A$ is normal; it is Noetherian by hypothesis. Apply [lem-weil-pbc-noetherian-normal-separable-integral-closure-finite] to $A\\subset K\\subset L$: its integral closure $B$ is a finite $A$-module. Thus $b$ is finite by [def-weil-finite-integral-morphism]. The integral normal scheme and generic-field clauses of [lem-weil-pbc-normalization-in-residue-field-extension], applied at the generic point of the Noetherian (hence quasi-separated) $Y$, show that this normalization is integral with function field $L$. Each $B$ is a finite type $A$-algebra, so [lem-exc-finite-type-localization-excellent] makes $B$ excellent. Its localization clause gives excellence on all local rings, and hence the usual affine-local excellence of $Y'$. The finite map is of finite type by the same module-generator argument; [lem-weil-pbc-finite-type-over-noetherian] gives Noetherianity of $Y'$. This establishes the finiteness, integrality and excellence clauses before making any logarithmic assertion.",
+   "uses": [
+    "def-fin-normalization-extension",
+    "rem-pc-regular-normal",
+    "lem-weil-pbc-noetherian-normal-separable-integral-closure-finite",
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-normalization-in-residue-field-extension",
+    "lem-exc-finite-type-localization-excellent",
+    "lem-weil-pbc-finite-type-over-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "IX 2.1(ii)--(iii), normalization; Stacks 032L (lemma-Noetherian-normal-domain-finite-separable-extension), 035L (lemma-normal-normalization), 07QU (lemma-finite-type-over-excellent)."
+   }
+  },
+  {
+   "text": "Apply [lem-per-regular-boundary-divisorial-chart] to $(Y,T)$. Its hypotheses require precisely a regular Noetherian scheme and the stated strict normal crossings boundary, including the empty case. It gives the fs divisorial structure $M_Y$, identifies its triviality locus with $V$, and gives its log regularity. In its pointed charts $P=\\mathbf N^r$, the quotient by the nonunit ideal is regular of codimension $r$; this verifies the log-regular target hypothesis needed below.",
+   "uses": [
+    "lem-per-regular-boundary-divisorial-chart"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 1.2--1.5(i), pp. 69--70; IX 2.1, p. 133."
+   }
+  },
+  {
+   "text": "Apply [lem-per-prime-to-order-snc-kummer-charts] to the given torsor and the finite normalization $b$ from Step 2, with the fs structure from Step 3. The order is invertible on all of $Y$, not merely on its generic point. All its assumptions are therefore satisfied. It supplies an fs log structure $N$ on $Y'$ and a log morphism to $(Y,M_Y)$. At each pair of selected geometric points its compatible sharp characteristic charts $P\\to Q$ are injective and Kummer, their group cokernel is finite of invertible exponent on the target neighbourhood, and their scheme comparison is etale. This supplies the actual chart data used in the following steps; it does not infer that the underlying map $b$ is etale.",
+   "uses": [
+    "lem-per-prime-to-order-snc-kummer-charts"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "IX 2.1(iii) and 2.2, pp. 133--134; VI 2.2, p. 72."
+   }
+  },
+  {
+   "text": "Apply [lem-per-invertible-kummer-chart-log-regular] to $(Y',N)\\to(Y,M_Y)$. The source and target are locally Noetherian by Step 2 and the original hypotheses; both are fs by Steps 3--4. Step 3 gives target log regularity, and Step 4 gives every specified chart and invertibility hypothesis. It follows that $(Y',N)$ is log regular. The finite cokernel here may have nonzero torsion, so the torsion-free-cokernel lemma lem-trf-log-smooth-log-regular is not invoked.",
+   "uses": [
+    "lem-per-invertible-kummer-chart-log-regular"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 1.8, p. 70, and VI 2.3, p. 73."
+   }
+  },
+  {
+   "text": "At any geometric point of $Y'$ over $Y$, use the charts of Step 4, which identify $P,Q$ with the characteristic monoids at those points. If $Q=0$, injectivity forces $P=0$. Conversely, if $P=0$, the Kummer condition says each $q\\in Q$ has $nq=0$ for some $n>0$. Then $(n-1)q$ is its additive inverse in $Q$; since $Q$ is sharp, $q=0$. Thus $Q=0$ if and only if $P=0$. The triviality locus of $N$ is therefore exactly $b^{-1}V$, and its complement is $b^{-1}|T|$. By [lem-trf-log-regular-divisorial-structure], applied to the locally Noetherian fs log regular source from Step 5, this triviality locus is dense open and $N=\\mathcal O_{Y'}\\cap j'_*\\mathcal O_{b^{-1}V}^{\\times}$. Consequently [def-trf-log-regular-pair] identifies precisely $(Y',b^{-1}|T|)$ as a log regular pair. Together with Step 2 this proves all clauses. If $T$ is empty then $P=Q=0$ everywhere, so the argument also covers the trivial-boundary case.",
+   "uses": [
+    "lem-per-prime-to-order-snc-kummer-charts",
+    "lem-trf-log-regular-divisorial-structure",
+    "def-trf-log-regular-pair"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 1.4, p. 69; VI 2.2--2.3, pp. 72--73; IX 2.2, p. 134."
+   }
+  }
+ ],
+ "proof_deps": [
+  "rem-pc-regular-normal",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-fin-etale-normal-components",
+  "lem-trf-unramified-field-fibre-decomposition",
+  "lem-galois-descent-data-existence",
+  "def-weil-etale-morphism",
+  "def-fin-normalization-extension",
+  "lem-weil-pbc-noetherian-normal-separable-integral-closure-finite",
+  "def-weil-finite-integral-morphism",
+  "lem-weil-pbc-normalization-in-residue-field-extension",
+  "lem-exc-finite-type-localization-excellent",
+  "lem-per-regular-boundary-divisorial-chart",
+  "lem-per-prime-to-order-snc-kummer-charts",
+  "lem-per-invertible-kummer-chart-log-regular",
+  "lem-trf-log-regular-divisorial-structure",
+  "def-trf-log-regular-pair"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "IX Proposition 2.1 and paragraph 2.2, pp. 133--134; VI 1.8 and 2.2--2.3, pp. 70, 72--73."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -67,7 +168,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-gabber-prime-to-ell-regular-cover",
@@ -92,5 +193,69 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-tame-normalization-log-regular",
+  "worker": "stage1",
+  "summary": "Read ILO IX 2.1--2.2 and VI 1.2--1.8, 2.1--2.3. Separate finite normalization/excellence, regular-boundary charts, invertible Kummer charts, log regularity, and recovery of the precise divisorial boundary. Reuse existing algebra and normal-component results; three new statement-only logarithmic lemmas. Correct the normalization definition citation to the existing finite-extension definition without changing the mathematical statement.",
+  "blueprint": "Ancestor proof Step 3, the ILO IX 1.1 uniformization input used by XIII 3.2.1, via prime-to-ell standard form: Expose IX Proposition 2.1(i)--(iii) and paragraph 2.2, printed pp. 133--134; log regularity under the resulting Kummer etale cover is Expose VI 1.8 and 2.3, printed pp. 70 and 73. Realizes the normalization/log-regular-base subargument of the ILO IX uniformization input, without changing the chapter or unit.",
+  "tool_uses": [
+   {
+    "node": "rem-pc-regular-normal",
+    "why": "Generic normal-component, finite-normalization, excellence, or divisorial-recovery theorem used as a black box in the ILO IX normalization argument; the perverse-curve unit supplies no such algebraic/logarithmic tool."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic normal-component, finite-normalization, excellence, or divisorial-recovery theorem used as a black box in the ILO IX normalization argument; the perverse-curve unit supplies no such algebraic/logarithmic tool."
+   },
+   {
+    "node": "lem-fin-etale-normal-components",
+    "why": "Generic normal-component, finite-normalization, excellence, or divisorial-recovery theorem used as a black box in the ILO IX normalization argument; the perverse-curve unit supplies no such algebraic/logarithmic tool."
+   },
+   {
+    "node": "lem-trf-unramified-field-fibre-decomposition",
+    "why": "Generic normal-component, finite-normalization, excellence, or divisorial-recovery theorem used as a black box in the ILO IX normalization argument; the perverse-curve unit supplies no such algebraic/logarithmic tool."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-normal-separable-integral-closure-finite",
+    "why": "Generic normal-component, finite-normalization, excellence, or divisorial-recovery theorem used as a black box in the ILO IX normalization argument; the perverse-curve unit supplies no such algebraic/logarithmic tool."
+   },
+   {
+    "node": "lem-weil-pbc-normalization-in-residue-field-extension",
+    "why": "Generic normal-component, finite-normalization, excellence, or divisorial-recovery theorem used as a black box in the ILO IX normalization argument; the perverse-curve unit supplies no such algebraic/logarithmic tool."
+   },
+   {
+    "node": "lem-exc-finite-type-localization-excellent",
+    "why": "Generic normal-component, finite-normalization, excellence, or divisorial-recovery theorem used as a black box in the ILO IX normalization argument; the perverse-curve unit supplies no such algebraic/logarithmic tool."
+   },
+   {
+    "node": "lem-trf-log-regular-divisorial-structure",
+    "why": "Generic normal-component, finite-normalization, excellence, or divisorial-recovery theorem used as a black box in the ILO IX normalization argument; the perverse-curve unit supplies no such algebraic/logarithmic tool."
+   },
+   {
+    "node": "lem-galois-descent-data-existence",
+    "why": "Its pullback functor supplies finite etaleness of the generic fibre for an arbitrary base morphism; no perverse-curve-unit statement supplies this scheme-theoretic tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "rem-pc-regular-normal",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-fin-etale-normal-components",
+  "lem-trf-unramified-field-fibre-decomposition",
+  "lem-weil-pbc-noetherian-normal-separable-integral-closure-finite",
+  "lem-weil-pbc-normalization-in-residue-field-extension",
+  "lem-exc-finite-type-localization-excellent",
+  "lem-trf-log-regular-divisorial-structure",
+  "lem-galois-descent-data-existence"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q73-35f55bf29",
+  "group": "Q73",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q73-35f55bf29 (reviewer sub-agent of L); spot-checked: Read ILO IX 2.1(i)-(iii) with its proof and 2.2 (pp.133-134), and VI 1.1-1.9 and 2.1-2.3 (pp.69-73). IX 2.2 is exactly the item's inference. Item statement unchanged except the B3 repair def-sc-normalization -> def-fin-normalization-extension, which is correct because the normalization is taken in the extension L. All 6 steps checked against cited statements. Step 1: V nonempty, Noetherian and normal. lem-fin-etale-normal-components plus connectedness makes V' integral. The generic fibre is finite etale (descent-data object is finite etale over Spec K) and the localized domain is the field L. L/K is separable by Stacks 02G7. Step 2: 032L gives a finite integral closure, so b is finite. Generic normalization gives integral with function field L. Excellence by finite-type permanence, Noetherian by finite type. Steps 3-5: every hypothesis of the new nodes is supplied; the torsion-free-cokernel lemma lem-trf-log-smooth-log-regular is correctly avoided. Step 6: Q=0 iff P=0 via injectivity, Kummer and sharpness, so the triviality locus of N is b^-1 V; divisorial recovery then gives the log regular pair. New nodes are true and not duplicates. The regular-boundary node holds: UFD strict local ring, t_i part of a regular system of parameters, characteristic monoid N^r; trf snc chart is only over an algebraically closed field. The SNC Kummer-chart node is IX 2.1(iii) for invertible-order torsors (automatically tame); the existing sbc root charts cover only a single regular principal divisor. The invertible-Kummer preservation node follows from Kato's chart criterion (log etale) plus VI 1.8. Edge cases tested: empty boundary, a tame root t=s^n, and r=0. None restates an item clause. No cycle. No SGA cited; the chart node's later split must use a non-SGA Abhyankar source. Batch-5: closure from both targets, with versus without the item proof, differs only by the 3 new nodes. The flagged def-trf-fs-log-blowup, def-trf-strict-normal-crossings-boundary and def-trf-log-regular-pair are general definitions. lem-trf-unramified-field-fibre-decomposition is Stacks 02G7 algebra. lem-trf-log-regular-divisorial-structure is Niziol 2.6 / VI 1.4 general log geometry. None reaches any trace-formula or Poincare node, so all are accepted. Worker-written tool_uses list genuine generic tools; accepted. No fixes."
  }
 }
