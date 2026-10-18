@@ -81,3 +81,29 @@ theorem Etale.isIso_baseChangeHomologyMap_of_isLimit [Finite Λ]
   sorry
 
 end AlgebraicGeometry
+
+namespace AlgebraicGeometry
+
+variable (Λ : Type (u + 1)) [CommRing Λ]
+
+/-- Blueprint `lem-kun-0ezt`, for a system of cartesian squares with fixed bottom row: let
+`g : T ⟶ S` be quasi-compact and quasi-separated, let `X_i` (`DX`) be a cofiltered system of
+schemes over `S` with affine transition morphisms and limit `X`, and let `Y_i = X_i ×_S T`,
+`Y = X ×_S T`. If for a sheaf `G` of `Λ`-modules on `T` and a degree `q` every base-change map
+`p_i⁻¹ R^q g_* G ⟶ R^q h_{i,*} e_i⁻¹ G` is an isomorphism, then so is
+`p⁻¹ R^q g_* G ⟶ R^q h_* e⁻¹ G`. -/
+@[stacks 0EZT]
+theorem Etale.isIso_baseChangeHomologyMap_of_isLimit_left [Finite Λ]
+    {I : Type u} [Category.{u} I] [IsCofiltered I] {S T : Scheme.{u}} (g : T ⟶ S)
+    [QuasiCompact g] [QuasiSeparated g]
+    (DX : I ⥤ Over S) [∀ {i j : I} (φ : i ⟶ j), IsAffineHom (DX.map φ).left]
+    (cX : Cone DX) (_hcX : IsLimit ((Over.forget S).mapCone cX))
+    {Y : I → Scheme.{u}} (e : ∀ i, Y i ⟶ T) (h : ∀ i, Y i ⟶ (DX.obj i).left)
+    (sq : ∀ i, IsPullback (e i) (h i) g (DX.obj i).hom)
+    {YL : Scheme.{u}} (eL : YL ⟶ T) (hL : YL ⟶ cX.pt.left) (sqL : IsPullback eL hL g cX.pt.hom)
+    (G : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℤ)
+    (_H : ∀ i, IsIso (Etale.baseChangeHomologyMap Λ (sq i) q G)) :
+    IsIso (Etale.baseChangeHomologyMap Λ sqL q G) :=
+  sorry
+
+end AlgebraicGeometry
