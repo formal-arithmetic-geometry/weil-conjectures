@@ -16,9 +16,138 @@
   "def-weil-pbc-localization-at-prime",
   "def-weil-regular-scheme"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose generators $q_i$ of $Q$ and integers $d_i>0$ with $d_iq_i=h(r_i)$. The tensor ring $C$ is generated over $A$ by their monomials, each satisfying $Z_i^{d_i}=\\alpha(r_i)$; the finitely many products with exponents less than $d_i$ span $C$ as an $A$-module. Thus $C$ is finite type and Noetherian by the cited permanence result. Apply the finite-completion-factor statement with $R=A$, $S'=S=C$ and $g=1$: it identifies $\\widehat B$ with the selected idempotent factor of $\\widehat A\\otimes_A C$. All monomials and their generated ideals are preserved. We can therefore perform the calculation over the displayed complete presentation of $\\widehat A$.",
+   "uses": [
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-finite-completion-factor-idempotent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "ILO VI 2.2--2.3, printed pp.72--73; explicit algebraic details of the completed chart calculation."
+   }
+  },
+  {
+   "text": "The local map $A\\to B$ reflects units, so $G,F$ are faces and $h^{-1}F=G$. Face sharpening gives sharp fs monoids $S,T$ with finite free group completions. For $f\\in F$, choose $r\\in R^{\\rm gp}$ with $h(r)=Nf$, and use the Kummer condition to write $df=h(r_0)$ with $r_0\\in R$, $d>0$. Injectivity gives $dr=Nr_0\\in R$, so saturation gives $r\\in R$. Since $[h(r)]=[f]^N$ is a unit in $B$, locality gives $r\\in G$. Thus $NF^{\\rm gp}\\subset h(G^{\\rm gp})$, and $h_U:G^{\\rm gp}\\hookrightarrow F^{\\rm gp}$ has finite cokernel killed by $N$. The induced $\\beta:S\\to T$ sends only $0$ to $0$: if $h(r-g)$ is a unit in $Q_F$, then $h(r)$ belongs to $F$ and $r\\in G$.",
+   "uses": [
+    "lem-trf-fs-face-sharpening"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "ILO VI 2.2--2.3, printed pp.72--73; explicit algebraic details of the completed chart calculation."
+   }
+  },
+  {
+   "text": "Put $U=G^{\\rm gp}$ and $V=F^{\\rm gp}$. Split each quotient group sequence using lifts of a basis of the free groups $S^{\\rm gp}$ and $T^{\\rm gp}$. These group sections restrict to monoid sections: a lift of a monoid class differs from any representative by a unit, which can be added or subtracted in the localized monoid. Thus $R_G\\cong U\\oplus S$ and $Q_F\\cong V\\oplus T$. In these coordinates $h(u,s)=(h_U(u)+c(s),\\beta(s))$, with $c:S^{\\rm gp}\\to V$. Write $\\alpha(u,s)=\\rho(u)e(s)a(s)$; here $\\rho=\\alpha|_U$ and $e(s)=\\epsilon(j_S(s))$ are unit characters, because $\\alpha=\\epsilon a$ and the section $j_S$ is additive. No extension of $\\epsilon$ to $Q^{\\rm gp}$ is needed, and neither $U$ nor $V$ is assumed torsion free.",
+   "uses": [
+    "lem-trf-fs-face-sharpening"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "ILO VI 2.2--2.3, printed pp.72--73; explicit algebraic details of the completed chart calculation."
+   }
+  },
+  {
+   "text": "With $A_0=\\widehat A$, impose the unit relations first: $A_1=A_0\\otimes_{\\mathbf Z[U]}\\mathbf Z[V]$, using $\\rho:U\\to A_0^\\times$. The tame group-algebra lemma applies to the injective map $h_U$ with finite cokernel killed by the invertible $N$, even if its unit groups have torsion. It gives complete local finite etale factors $K$. The split monoid presentation gives the remaining relations $[c(s)]Y^{\\beta(s)}=e(s)X^s$. After completing at the chosen prime, exactly one factor $K$ occurs: modulo the nonzero $T$-monomials all nonzero $S$-monomials vanish by these relations, so the residue prime is precisely a closed-point factor of $A_1$. In particular its residue field equals $\\kappa(\\mathfrak q)$.",
+   "uses": [
+    "lem-per-tame-kummer-group-algebra-completion",
+    "def-weil-pbc-module-tensor-product",
+    "lem-weil-pbc-local-completion-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "ILO VI 2.2--2.3, printed pp.72--73; explicit algebraic details of the completed chart calculation."
+   }
+  },
+  {
+   "text": "Put $E=k[[t_1,\\ldots,t_n]]$ in case (a), and $E=V[[t_1,\\ldots,t_n]]$ in case (b). The power-series/Cohen statement makes $E$ nonzero complete regular Noetherian local. Iterating the defining inverse limits of the formal monoid presentations gives $A_0=E[[S]]/(f)$, where $f=0$ in case (a) and $f=\\theta$ in case (b). Apply the finite-etale formal-monoid coefficient-lift lemma to the selected local finite etale $A_0$-algebra $K$. It supplies a nonzero complete regular Noetherian local finite etale $E$-algebra $D$ with residue field $\\kappa(\\mathfrak q)$ and $K\\cong D[[S]]/(f)$. In mixed characteristic it also preserves every nonzero cotangent class from $E$.",
+   "uses": [
+    "lem-weil-pbc-power-series-field-cohen-regular-complete",
+    "lem-per-finite-etale-formal-monoid-coefficient-lift",
+    "def-weil-pbc-adic-completion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "ILO VI 2.2--2.3, printed pp.72--73; explicit algebraic details of the completed chart calculation."
+   }
+  },
+  {
+   "text": "Under this isomorphism the unit character $e(s)[c(s)]^{-1}$ in $K$ lifts to a character $v:S^{\\rm gp}\\to D[[S]]^\\times$: choose arbitrary unit lifts of its values on a basis of the free group $S^{\\rm gp}$ and extend multiplicatively; reduction recovers the given character. This needs no root extraction. The completed presentation of the selected factor is therefore\n$$D[[S\\oplus T]]/(f,\\ Y^{\\beta(s)}-v(s)X^s\\ (s\\in S)).$$\nTo check this presentation, start with $R_G=U\\oplus S$ and $Q_F=V\\oplus T$, take the balanced tensor quotient on their monomial generators, impose the unit relations to obtain $K$, and then complete. Completion of the quotient is the quotient of the completion by the generated relations by the cited theorem. All these rings are Noetherian: the monoids are finitely generated and finite-type permanence and completion preserve Noetherianity. Changing unit lifts changes the displayed relations only by multiples of $f$.",
+   "uses": [
+    "lem-trf-fs-face-sharpening",
+    "def-weil-pbc-module-tensor-product",
+    "lem-weil-pbc-local-completion-quotient",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-adic-completion-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "ILO VI 2.2--2.3, printed pp.72--73; explicit algebraic details of the completed chart calculation."
+   }
+  },
+  {
+   "text": "Apply implicit monoid elimination with coefficient ring $D$, monoids $S,T$, the map $\\beta$ (whose inverse image of $0$ is $\\{0\\}$), and character $u(s)=v(s)^{-1}$. The relations are $X^s-u(s)Y^{\\beta(s)}$. The lemma identifies their quotient with $D[[T]]$, sends each nonzero $S$-monomial into the nonzero-$T$ ideal, and is the identity on $D$ on the stratum. Thus in equal characteristic the required ring is $D[[T]]$. In mixed characteristic the additional relation becomes the image $\\eta$ of $\\theta$, so the required ring is $D[[T]]/(\\eta)$.",
+   "uses": [
+    "lem-per-formal-monoid-implicit-elimination"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "ILO VI 2.2--2.3, printed pp.72--73; explicit algebraic details of the completed chart calculation."
+   }
+  },
+  {
+   "text": "In mixed characteristic reduce the elimination substitution modulo the nonzero $T$-monomials. Every nonzero $S$-monomial is zero and the coefficients are fixed, so $\\overline\\eta$ is the image of $\\theta_0=\\theta|_{S=0}\\in E$. The hypothesis says $\\theta_0\\equiv p$ modulo $(t_1,\\ldots,t_n)$. In the regular power-series ring $E=V[[t]]$, its linear term in the parameter $p$ has coefficient $1$, so $\\theta_0\\in\\mathfrak m_E\\setminus\\mathfrak m_E^2$, including $n=0$. The coefficient-lift lemma preserves this class in $D$, proving $\\overline\\eta\\in\\mathfrak m_D\\setminus\\mathfrak m_D^2$.",
+   "uses": [
+    "lem-weil-pbc-power-series-field-cohen-regular-complete",
+    "lem-per-finite-etale-formal-monoid-coefficient-lift",
+    "lem-per-formal-monoid-implicit-elimination"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "ILO VI 2.2--2.3, printed pp.72--73; explicit algebraic details of the completed chart calculation."
+   }
+  },
+  {
+   "text": "Finally $Q_F=V\\oplus T$ identifies a monomial from $Q\\setminus F$ with a unit times $Y^t$ for $t\\ne0$. Conversely any $t\\ne0$ has a representative $q-f$ with $q\\notin F$, so $Y^t$ is a unit times the image of $[q]$. Hence the two generated ideals coincide, before and after completion and after the mixed quotient. The elimination isomorphism fixes $Y$-monomials, so it identifies $J\\widehat B$ with the indicated nonzero-$T$ ideal. Each isomorphism was formed on completed local rings and respects their ideals of definition, hence is continuous. The ring $D$ and its residue field are those of Step 5. This proves the asserted pairs in both cases, also for $T=\\{0\\}$.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "lem-per-formal-monoid-implicit-elimination"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "ILO VI 2.2--2.3, printed pp.72--73; explicit algebraic details of the completed chart calculation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-module-tensor-product",
+  "lem-per-finite-etale-formal-monoid-coefficient-lift",
+  "lem-per-formal-monoid-implicit-elimination",
+  "lem-per-tame-kummer-group-algebra-completion",
+  "lem-trf-fs-face-sharpening",
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-finite-completion-factor-idempotent",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-local-completion-quotient",
+  "lem-weil-pbc-power-series-field-cohen-regular-complete"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VI 2.2--2.3, printed pp.72--73; non-strict residue fields, unit faces and unit twists made explicit by the three auxiliary algebra statements."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -57,7 +186,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-invertible-kummer-chart-log-regular",
@@ -69,7 +198,7 @@
  "blueprint": {
   "from": {
    "node": "lem-per-artin-gabber-affine-curve",
-   "place": "Proof Step 3 via uniformization and lem-per-tame-normalization-log-regular: completed local ring calculation for the invertible Kummer chart in ILO VI 2.3, printed p.73.",
+   "place": "Proof Step 3 via uniformization and lem-per-tame-normalization-log-regular: completed equal- and mixed-characteristic Kummer chart formulas in ILO VI 2.3.",
    "via": [
     "lem-per-invertible-kummer-chart-log-regular",
     "lem-per-tame-normalization-log-regular",
@@ -84,5 +213,54 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-completed-invertible-kummer-monoid-extension",
+  "worker": "stage1",
+  "summary": "Repaired the interrupted split: keep arbitrary unit groups and chart twists, first form the tame unit-group algebra, lift its local finite etale coefficient factor to the regular coefficient ring, then eliminate source monoid variables by a contractive formal substitution. This avoids an unjustified extension of the unit character and an incorrect freeness assertion about unit groups. Three smaller statement-only auxiliary nodes; no statement change.",
+  "blueprint": "Realizes the completed chart calculation at ILO VI 2.3 (printed p.73), below the ancestor Artin-Gabber affine-curve proof Step 3 via Kummer local uniformization; Steps 1--4 prepare its charts, Steps 5--8 compute the two completed normal forms, Step 9 identifies the stratum ideal.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-fs-face-sharpening",
+    "why": "General commutative-algebra input for the explicit completed Kummer chart calculation; the Fourier/perverse unit has no corresponding local-algebra statement."
+   },
+   {
+    "node": "lem-weil-pbc-adic-completion-noetherian",
+    "why": "General commutative-algebra input for the explicit completed Kummer chart calculation; the Fourier/perverse unit has no corresponding local-algebra statement."
+   },
+   {
+    "node": "lem-weil-pbc-finite-completion-factor-idempotent",
+    "why": "General commutative-algebra input for the explicit completed Kummer chart calculation; the Fourier/perverse unit has no corresponding local-algebra statement."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-algebra-noetherian",
+    "why": "General commutative-algebra input for the explicit completed Kummer chart calculation; the Fourier/perverse unit has no corresponding local-algebra statement."
+   },
+   {
+    "node": "lem-weil-pbc-local-completion-quotient",
+    "why": "General commutative-algebra input for the explicit completed Kummer chart calculation; the Fourier/perverse unit has no corresponding local-algebra statement."
+   },
+   {
+    "node": "lem-weil-pbc-power-series-field-cohen-regular-complete",
+    "why": "General commutative-algebra input for the explicit completed Kummer chart calculation; the Fourier/perverse unit has no corresponding local-algebra statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-fs-face-sharpening",
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-finite-completion-factor-idempotent",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-local-completion-quotient",
+  "lem-weil-pbc-power-series-field-cohen-regular-complete"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q89-ee68dd276",
+  "group": "Q89",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q89-ee68dd276 (reviewer sub-agent of L); spot-checked: Read the item's 9 steps, the 3 new nodes, the report and ILO VI 2.1-2.3 (pp.71-73); the item realizes 2.3's completed Kummer chart formulas (via 1.6), generalized to a non-strict residue field and arbitrary unit faces and twists. Every step is correct against the statements it cites. Step 1: finite-completion-factor with S'=S=C, g=1. Step 2: face sharpening; N-torsion of V/h(U) by Kummer, injectivity and saturation; beta^-1(0)=0. Step 3: section into R_G. Step 4: tame group algebra; a single factor K whose residue field is kappa(q). Steps 5-6: the coefficient lift, unit lifts on a basis, presentation D[[S+T]]/(f, Y^beta(s) - v(s)X^s). Step 7: elimination with u=v^-1. Step 8: theta_0 = p mod (t) is not in m_E^2, and the lift preserves this. Step 9: ideal J. All 3 new nodes are true. Tame group algebra: cyclic filtration, Z^d - a with d invertible, so etale; tested on L=0, M=Z/2. Coefficient lift: henselian E (Stacks 09ZL), 07NF regularity, 031B completeness, m_D=nD with an injective cotangent map. Elimination: a contractive multiplicative substitution gives a retraction, and complete Nakayama gives surjectivity. None is a duplicate (checked the trf formal-monoid-extension-model, unit-splitting and support-projection nodes and the pbc henselian equivalence) and none restates an item clause. Batch-5 flags accepted: lem-trf-fs-face-sharpening is pure monoid algebra; its 71-node closure contains only the trf face lemmas and fs definitions and no trace-formula or Poincare proof node or target. def-trf-fs-log-blowup is a general definition already in the item's base stmt_deps. Fix (B2/B3): two new nodes, coefficient-lift and implicit-elimination, used 'sharp' (and coefficient-lift the monoid ring) undefined; definitions added inline, statements otherwise unchanged; files under fixes/dag/nodes/sec-deligne-laumon-a1/.; 2 file(s) fixed by the reviewer"
  }
 }
