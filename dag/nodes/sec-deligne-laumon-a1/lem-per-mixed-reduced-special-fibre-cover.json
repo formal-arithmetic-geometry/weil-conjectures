@@ -15,9 +15,180 @@
   "def-sc-discrete-valuation-ring",
   "def-weil-finitely-generated-module"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $k=A/\\mathfrak m$ and $k_*=\\bigcap_{n\\ge0}k^{p^n}$. This intersection is a field, and is perfect: the unique $p$th root of an element in all $k^{p^n}$ again lies in all $k^{p^n}$. Choose a Cohen ring $W_0$ with residue field $k_*$ by [lem-weil-pbc-cohen-rings-exist], and use [def-weil-pbc-cohen-ring] for completeness, the DVR property, and uniformizer $p$. Construct compatible maps $g_n:W_0/p^n\\to A/\\mathfrak m^n$ starting with the given inclusion $k_*\\to k$. Given $g_n$, apply [lem-weil-pbc-cohen-ring-mod-pn-formally-smooth] with exponent $n+1$, target $A/\\mathfrak m^{n+1}$ and square-zero ideal $\\mathfrak m^n/\\mathfrak m^{n+1}$ to lift the composite from $W_0/p^{n+1}$. Here $p^{n+1}=0$ in the target since $p\\in\\mathfrak m$. Completeness [def-weil-pbc-adically-complete-ring] gives a ring map $W_0\\to A$ from these compatible maps. It is local because its residue map is injective. It is injective: every nonzero element of $W_0$ is $up^a$ by [lem-weil-pbc-dvr-unit-times-uniformizer-power], with $u$ a unit, and $p^a\\ne0$ in the characteristic-zero domain $A$.",
+   "uses": [
+    "lem-weil-pbc-cohen-rings-exist",
+    "def-weil-pbc-cohen-ring",
+    "lem-weil-pbc-cohen-ring-mod-pn-formally-smooth",
+    "def-weil-pbc-adically-complete-ring",
+    "lem-weil-pbc-dvr-unit-times-uniformizer-power"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "IV 4.2.3, coefficient map from 4.1.8; lifting construction also Stacks Tags 0328, 0329"
+   }
+  },
+  {
+   "text": "Let $P_1,\\ldots,P_r$ be the minimal primes over $pA$; they are finite by [lem-sc-finite-minimal-primes-over-ideal]. Each $P_i$ is a minimal support prime of the cyclic module $A/pA$, hence associated by [lem-weil-pbc-minimal-support-prime-associated], and has height one by [lem-weil-pbc-normal-domain-principal-quotient-associated-height]. The localization $T_i=A_{P_i}$ is Noetherian and normal by [lem-weil-pbc-localization-noetherian, lem-weil-pbc-localization-normal-domain], of dimension one, so is a DVR by [lem-sc-normal-dim1-dvr]. The map $W_0\\to T_i$ is injective and local since its uniformizer $p$ belongs to $P_i$. The ring $A$ is excellent by [lem-per-complete-local-excellence], and each $T_i$ is excellent by [lem-exc-finite-type-localization-excellent].",
+   "uses": [
+    "lem-sc-finite-minimal-primes-over-ideal",
+    "lem-weil-pbc-minimal-support-prime-associated",
+    "lem-weil-pbc-normal-domain-principal-quotient-associated-height",
+    "lem-weil-pbc-localization-noetherian",
+    "lem-weil-pbc-localization-normal-domain",
+    "lem-sc-normal-dim1-dvr",
+    "lem-per-complete-local-excellence",
+    "lem-exc-finite-type-localization-excellent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "IV 4.2.3, finitely many generic points of the special fibre"
+   }
+  },
+  {
+   "text": "The residue field of $T_i$ is $\\operatorname{Frac}(A/P_i)$. By [lem-weil-pbc-complete-local-quotient], $R_i=A/P_i$ is a complete Noetherian local domain of characteristic $p$ with residue field $k$. The map $k_*=W_0/pW_0\\to R_i$ is injective because it is a unital map from a field to a nonzero ring. Its composite with $R_i\\to k$ is the original inclusion. Since $k_{\\mathrm{perf}}=k_*$, [lem-per-epp-perfect-core-complete-local] proves that every element of the maximal perfect subfield of $\\operatorname{Frac}(A/P_i)$ is algebraic over $k_*$. Apply [lem-per-epp-finite-family-traits] to all the $T_i$ at once. Obtain $W_0\\hookrightarrow W$, its uniformizer $\\pi$, fraction field $K$, and perfect residue field $k_0$.",
+   "uses": [
+    "lem-weil-pbc-complete-local-quotient",
+    "lem-per-epp-perfect-core-complete-local",
+    "lem-per-epp-finite-family-traits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "IV 4.2.3, use of 3.2.3(i),(iv) and simultaneous Epp theorem"
+   }
+  },
+  {
+   "text": "Let $F=\\operatorname{Frac}(A)$ and $K_*=\\operatorname{Frac}(W_0)$. The algebra $F\\otimes_{K_*}K$ is nonzero and finite dimensional over $F$: tensor a $K_*$-basis of $K$. Choose a maximal ideal and let $L$ be its quotient field. Then $L/F$ is finite and the unital map $K\\to L$ is injective. Let $C\\subset L$ be the integral closure of $A$ in $L$. It is a normal domain with fraction field $L$ by [lem-weil-pbc-integral-closure-finite-extension-normal]. It is finite over $A$: [lem-weil-pbc-complete-local-nagata] and [def-weil-pbc-nagata-ring, def-weil-pbc-japanese-domain] give precisely this for the finite extension $L/F$. The map $A\\to C$ is injective, and $W\\subset C$, because $W$ is finite over $W_0$ and hence integral by [lem-weil-pbc-finite-algebra-is-integral]; its monic equations over $W_0$ are also monic equations over $A$.",
+   "uses": [
+    "lem-weil-pbc-integral-closure-finite-extension-normal",
+    "lem-weil-pbc-complete-local-nagata",
+    "def-weil-pbc-nagata-ring",
+    "def-weil-pbc-japanese-domain",
+    "lem-weil-pbc-finite-algebra-is-integral"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "IV 4.2.3 and first sentence of 4.2.5, choosing a component of the normalized base change"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-finite-over-complete-local-product], the finite $A$-domain $C$ is Noetherian complete local, with unique maximal ideal $\\mathfrak n$ over $\\mathfrak m$. Thus $A\\hookrightarrow C$ is local. The field $k'=C/\\mathfrak n$ is finite over $k$: the images of any finite $A$-module generating set of $C$ span $k'$ over $k$. By [lem-weil-pbc-finite-algebra-is-integral] and [lem-weil-pbc-integral-injective-dimension-equal], $\\dim C=d$. Also $W\\hookrightarrow C$ is local: in $W$ the nonzero element $p$ is $u\\pi^e$ by [lem-weil-pbc-dvr-unit-times-uniformizer-power]; its residue is zero, so $e>0$. Since $p\\in\\mathfrak n$ and $u$ stays a unit, $\\pi\\in\\mathfrak n$. Every element outside $\\pi W$ is a unit, giving the asserted inverse image of $\\mathfrak n$. Reduction supplies the specified inclusion $k_0\\hookrightarrow k'$.",
+   "uses": [
+    "lem-weil-pbc-finite-over-complete-local-product",
+    "lem-weil-pbc-finite-algebra-is-integral",
+    "lem-weil-pbc-integral-injective-dimension-equal",
+    "lem-weil-pbc-dvr-unit-times-uniformizer-power"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "IV 4.2.5, first sentence and residue fields"
+   }
+  },
+  {
+   "text": "Let $Q$ be a height-one prime of $C$ containing $\\pi$ and put $P=Q\\cap A$. It contains $p$ because $p=u\\pi^e$. Going down for the normal domain $A$ in its integral domain extension $C$ [lem-weil-pbc-going-down-normal-integral] shows that $P$ cannot have a strict chain of length two below it: such a chain would lift to one below $Q$. Since $p\\ne0$, $P$ has height one. Hence $P$ is minimal over $pA$ (a strictly smaller prime containing $p$ would give a chain of length two), and equals some $P_i$.",
+   "uses": [
+    "lem-weil-pbc-going-down-normal-integral"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "IV 4.2.3, parenthesis about generic points above generic points; Stacks Tag 00H8"
+   }
+  },
+  {
+   "text": "Fix this $P_i$ and localize $C$ at $A\\setminus P_i$, obtaining $C_i$. By [lem-weil-pbc-integral-closure-commutes-localization], $C_i$ is the integral closure of $T_i=A_{P_i}$ in $L$ (localizing the field $L$ changes nothing). Let $D_i$ be the image of $T_i\\otimes_{W_0}W$ in $L$. It is integral over $T_i$ by the finite-algebra criterion [lem-weil-pbc-finite-algebra-is-integral]: a finite $W_0$-module generating set of $W$ gives one for this image over $T_i$. If $x\\in L$ is integral over $D_i$, the extension $D_i\\subset D_i[x]$ is integral: the powers below the degree of a monic equation span $D_i[x]$, so [lem-weil-pbc-finite-algebra-is-integral] applies. Thus [lem-weil-pbc-integral-transitive] for $T_i\\subset D_i\\subset D_i[x]$ makes $x$ integral over $T_i$. Conversely a monic equation over $T_i$ is one over $D_i$. Thus $C_i$ is exactly the integral closure of $D_i$ in $L$. Since $\\operatorname{Frac}(T_i)=F$, the field $L$ is a field factor of $F\\otimes_{K_*}K$. The conclusion of [lem-per-epp-finite-family-traits] therefore says that $C_i/\\pi C_i$ is reduced.",
+   "uses": [
+    "lem-weil-pbc-integral-closure-commutes-localization",
+    "lem-weil-pbc-finite-algebra-is-integral",
+    "lem-weil-pbc-integral-transitive",
+    "lem-per-epp-finite-family-traits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "IV 4.2.3, normalized base change localized at a generic point"
+   }
+  },
+  {
+   "text": "The ring $C_Q/\\pi C_Q$ is reduced. Indeed, it is a localization of the reduced ring $C_i/\\pi C_i$: the maps identify fractions $c/s$ and impose the same relation $\\pi=0$. To check reducedness directly, if $(x/s)^n=0$, some inverted $t$ has $tx^n=0$, so $(tx)^n=t^{n-1}(tx^n)=0$; reducedness gives $tx=0$, hence $x/s=0$. This proves the generic reducedness assertion for every height-one $Q$ containing $\\pi$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "IV 4.2.3, passage to the local special fibre"
+   }
+  },
+  {
+   "text": "Set $M=C/\\pi C$. Every associated prime $Q$ of this cyclic $C$-module has height one by [lem-weil-pbc-normal-domain-principal-quotient-associated-height], because $C$ is a Noetherian normal domain and $\\pi\\ne0$. Such a prime contains $\\pi$. If $z\\in M$ is nilpotent, its image in $M_Q=C_Q/\\pi C_Q$ is zero by the preceding step; the identification is [lem-weil-pbc-localization-at-prime-of-quotient]. Injectivity into the product of these module localizations [lem-weil-pbc-module-injects-localizations-associated-primes] forces $z=0$. Thus $C/\\pi C$ is reduced. This is the argument of IV 4.2.4, expressed through the already available associated-prime form of Stacks 031T and 0311.",
+   "uses": [
+    "lem-weil-pbc-normal-domain-principal-quotient-associated-height",
+    "lem-weil-pbc-localization-at-prime-of-quotient",
+    "lem-weil-pbc-module-injects-localizations-associated-primes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "IV 4.2.4; Stacks Tags 031T, 0311"
+   }
+  },
+  {
+   "text": "The complete Noetherian local domain $C$ is excellent by [lem-per-complete-local-excellence], hence catenary by [def-exc-excellent-ring]. Every prime $Q$ minimal over $\\pi C$ is a minimal support prime of $C/\\pi C$, so [lem-weil-pbc-minimal-support-prime-associated] and [lem-weil-pbc-normal-domain-principal-quotient-associated-height] give $\\operatorname{ht}(Q)=1$. In the catenary local domain $C$ of dimension $d$, all saturated chains from $(0)$ to $\\mathfrak n$ have length $d$. A saturated chain from $Q$ to $\\mathfrak n$, preceded by $(0)\\subsetneq Q$, is such a chain, so has length $d-1$ above $Q$. Chains in $C/Q$ are exactly chains above $Q$; therefore $\\dim(C/Q)=d-1$ for every minimal $Q$ of $C/\\pi C$. This proves equidimensionality of the required dimension. The construction of $C,W,\\pi$ and the residue inclusions in the preceding steps supplies every remaining clause.",
+   "uses": [
+    "lem-per-complete-local-excellence",
+    "def-exc-excellent-ring",
+    "lem-weil-pbc-minimal-support-prime-associated",
+    "lem-weil-pbc-normal-domain-principal-quotient-associated-height"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "IV 4.2.5, assertion that the reduced special fibre is equidimensional of dimension d-1"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-cohen-rings-exist",
+  "def-weil-pbc-cohen-ring",
+  "lem-weil-pbc-cohen-ring-mod-pn-formally-smooth",
+  "def-weil-pbc-adically-complete-ring",
+  "lem-weil-pbc-dvr-unit-times-uniformizer-power",
+  "lem-sc-finite-minimal-primes-over-ideal",
+  "lem-weil-pbc-minimal-support-prime-associated",
+  "lem-weil-pbc-normal-domain-principal-quotient-associated-height",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-localization-normal-domain",
+  "lem-sc-normal-dim1-dvr",
+  "lem-per-complete-local-excellence",
+  "lem-exc-finite-type-localization-excellent",
+  "lem-weil-pbc-complete-local-quotient",
+  "lem-per-epp-perfect-core-complete-local",
+  "lem-per-epp-finite-family-traits",
+  "lem-weil-pbc-integral-closure-finite-extension-normal",
+  "lem-weil-pbc-complete-local-nagata",
+  "def-weil-pbc-nagata-ring",
+  "def-weil-pbc-japanese-domain",
+  "lem-weil-pbc-finite-algebra-is-integral",
+  "lem-weil-pbc-finite-over-complete-local-product",
+  "lem-weil-pbc-integral-injective-dimension-equal",
+  "lem-weil-pbc-going-down-normal-integral",
+  "lem-weil-pbc-integral-closure-commutes-localization",
+  "lem-weil-pbc-integral-transitive",
+  "lem-weil-pbc-localization-at-prime-of-quotient",
+  "lem-weil-pbc-module-injects-localizations-associated-primes",
+  "def-exc-excellent-ring"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose IV 4.2.3–4.2.5 (through the reduced-fibre preparation), with IV 3.1.2–3.1.3 and 3.2.3; associated-prime formulation of 4.2.4 from Stacks 031T and 0311."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -53,10 +224,45 @@
    "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.FormallyUnramified.isReduced_of_field\", \"module\": \"Mathlib.RingTheory.Unramified.Field\", \"type\": \": IsReduced A\", \"doc\": \"If $ A $ is a formally unramified algebra over a field $ R $, then $ A $ is a reduced ring, meaning it contains no nonzero nilpotent elements.\"}\n  {\"name\": \"Ideal.ramificationIdx_eq_one_of_map_localization\", \"module\": \"Mathlib.NumberTheory.RamificationInertia.Basic\", \"type\": \"[Algebra R S] {p : Ideal R} {P : Ideal S} [P.IsPrime] [IsNoetherianRing S] (hpP : map (algebraMap R S) p ≤ P)\\n  (hp : P ≠ ⊥) (hp' : P.primeCompl ≤ nonZeroDivisors S)\\n  (H : p.map (algebraMap R (Localization.AtPrime P)) = maximalIdeal (Localization.AtPrime P)) :\\n  ramificationIdx (algebraMap R S) p P\", \"doc\": \"Let $ R $ and $ S $ be commutative rings with $ S $ Noetherian, $ p $ a prime ideal of $ R $, and $ P $ a prime ideal of $ S $. If the image of $ p $ under the ring homomorphism $ R \\to S $ is containe\"}\n  {\"name\": \"Ideal.ramificationIdx_eq_one_of_isUnramifiedAt\", \"module\": \"Mathlib.NumberTheory.RamificationInertia.Unramified\", \"type\": \"{p : Ideal S} [p.IsPrime] [IsNoetherianRing S] [IsUnramifiedAt R p] (hp : p ≠ ⊥) [IsDomain S] [EssFiniteType R S] :\\n  e(p|R) = 1\", \"doc\": \"If $ S $ is a Noetherian domain of essential finite type over $ R $, $ p $ is a non-zero prime ideal in $ S $, and $ p $ is unramified over $ R $, then the ramification index $ e(p|R) $ is equal to 1.\"}\n  {\"name\": \"Algebra.FormallyUnramified.iff_map_maximalIdeal_eq\", \"module\": \"Mathlib.RingTheory.Unramified.LocalRing\", \"type\": \":\\n  Algebra.FormallyUnramified R S ↔\\n    Algebra.IsSeparable (ResidueField R) (ResidueField S) ∧ (maximalIdeal R).map (algebraMap R S) = maximalIdeal S\", \"doc\": \"An algebra $ S $ over a commutative ring $ R $ is formally unramified if and only if the residue field of $ S $ is separable over the residue field of $ R $, and the image of the maximal ideal of $ R \"}\n  {\"name\": \"Algebra.Unramified.mk\", \"module\": \"Mathlib.RingTheory.Unramified.Basic\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {A : Type u_2} [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  autoParam (Algebra.FormallyUnramified R A) Algebra.Unramified.formallyUnramified._autoParam →\\n    autoParam (Algebra.FiniteType R A) Algebra.Unramified.finiteType._autoParam → Algebra.Unramified R A\", \"doc\": \"If $ A $ is formally unramified over $ R $ and of finite type over $ R $, then $ A $ is unramified over $ R $.\"}\n  {\"name\": \"Ideal.ramificationIdx_mul_inertiaDeg_of_isLocalRing\", \"module\": \"Mathlib.NumberTheory.RamificationInertia.Basic\", \"type\": \"[IsLocalRing S] {p : Ideal R} [p.IsMaximal] (hp0 : p ≠ ⊥) :\\n  ramificationIdx (algebraMap R S) p (IsLocalRing.maximalIdeal S) * p.inertiaDeg (IsLocalRing.maximalIdeal S) =\\n    Module.finrank K L\", \"doc\": \"Let $ R \\\\to S $ be a ring homomorphism where $ S $ is a local ring. For a maximal ideal $ \\\\mathfrak{p} \\\\subset R $ with $ \\\\mathfrak{p} \\\\neq 0 $, let $ \\\\mathfrak{P} \\\\subset S $ be the maximal ideal of \"}\n  {\"name\": \"Algebra.Unramified.of_isLocalization_Away\", \"module\": \"Mathlib.RingTheory.Unramified.Basic\", \"type\": \"(r : R) [IsLocalization.Away r A] : Unramified R A\", \"doc\": \"If $ A $ is the localization of a commutative ring $ R $ at the powers of an element $ r $, then $ A $ is an unramified $ R $-algebra.\"}\n  {\"name\": \"Algebra.unramifiedLocus\", \"module\": \"Mathlib.RingTheory.Unramified.Locus\", \"type\": \": Set (PrimeSpectrum A)\", \"doc\": \"The set of prime ideals in the prime spectrum of a commutative ring $ A $ where the algebra $ A $ is unramified over the base commutative ring $ R $. Formally, this consists of all prime ideals $ \\\\mat\"}",
    "date": "2026-10-19",
    "verdict": "no match: ramification-index, unramified-locus, and perfectoid tilt results do not construct an Epp base change or a reduced special-fibre cover"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Epp cover with reduced equidimensional special fibre for a complete Noetherian normal local mixed characteristic domain",
+   "results": "8 hits: WeierstrassCurve.IsGoodReduction, StandardEtalePair, HenselianLocalRing, PreTilt, StandardEtalePresentation, Algebra.IsStandardSmoothOfRelativeDimension, Algebra.IsStandardEtale, Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq. Search log digest d484f3a9b2705a6e.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Epp elimination of wild ramification finite base change of a complete discrete valuation ring makes normalized special fibres reduced",
+   "results": "8 hits: WeierstrassCurve.IsGoodReduction, Algebra.FormallyUnramified.isReduced_of_field, Algebra.IsGeometricallyReduced, Algebra.IsUnramifiedAt, Algebra.IsUnramifiedAt.of_liesOver, Algebra.Unramified, WeierstrassCurve.reduction, IsUnramifiedAt.of_liesOver_of_ne_bot. Search log digest 7502befeb30a8161.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Epp|elimination.*ramification|generically.*reduced.*divisor",
+   "results": "4 hits: Mathlib/RingTheory/Flat/Equalizer.lean, Mathlib/RingTheory/Flat/Equalizer.lean, Mathlib/RingTheory/Flat/Equalizer.lean, Mathlib/RingTheory/Smooth/Fiber.lean. Search log digest 410a93be9a576780.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Epp theorem elimination wild ramification reduced fibre finite extension discrete valuation ring",
+   "results": "8 hits: Ideal.sum_ramification_inertia, Ideal.ramificationIdx_mul_inertiaDeg_of_isLocalRing, Ideal.ramificationIdx_eq_one_of_isUnramifiedAt, IsDiscreteValuationRing.exists_irreducible, Algebra.FormallyUnramified.isReduced_of_field, Algebra.isUnramifiedAt_iff_of_isDedekindDomain, IsDiscreteValuationRing.irreducible_iff_uniformizer, Ideal.IsDedekindDomain.ramificationIdx_eq_one_iff. Search log digest c034cf1e638d686b.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsDiscreteValuationRing, IsReduced",
+   "results": "0 hits: . Search log digest 4f53cda18c2baa0c.",
+   "date": "2026-10-19",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-cohen-gabber-finite-presentations",
@@ -80,5 +286,74 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-mixed-reduced-special-fibre-cover",
+  "worker": "stage1",
+  "summary": "Retained the statement and source. Wrote coefficient-map lifting, simultaneous Epp at the finitely many height-one vertical primes, explicit field-factor normalization, completeness and finite residue extension, localization comparison, reducedness through associated primes, and equidimensionality through catenarity. Two new statement-only Epp inputs, no new definition or Mathlib leaf. On resumption, re-read ILO and every cited statement, retained the previous split and logged searches, and clarified the application of integral transitivity in step 7.",
+  "blueprint": "Realizes the supporting Cohen–Gabber/Epp preparation in the current split of lem-per-artin-gabber-affine-curve, Step 1, through its recorded finite-coefficient local-duality via chain. The item itself is the reduced-fibre input to step 6 of lem-per-cohen-gabber-finite-presentations; ILO IV 4.2.3 and the first part of 4.2.5 are realized by steps 1–7, IV 4.2.4 by steps 8–9, and the dimension assertion in IV 4.2.5 by step 10. Whole-blueprint searches Epp, elimination ramification, perfect subfield, normalized base change, and complete local fraction field found no matching imported node.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-cohen-rings-exist",
+    "why": "Step 1 needs a complete Cohen DVR of residue field k_*; this is a coefficient-ring existence tool, not a replacement for the perverse unit route."
+   },
+   {
+    "node": "lem-weil-pbc-cohen-ring-mod-pn-formally-smooth",
+    "why": "Step 1 uses exactly its square-zero lifting assertion to construct the coefficient map modulo successive powers of the maximal ideal."
+   },
+   {
+    "node": "lem-weil-pbc-normal-domain-principal-quotient-associated-height",
+    "why": "Steps 2, 9 and 10 need height one for associated primes of a principal quotient of a Noetherian normal domain; this is a generic commutative-algebra tool."
+   },
+   {
+    "node": "lem-sc-normal-dim1-dvr",
+    "why": "Step 2 applies the one-dimensional Noetherian normal local criterion to A localized at a minimal prime over p; the perverse unit has no DVR criterion."
+   },
+   {
+    "node": "lem-exc-finite-type-localization-excellent",
+    "why": "Step 2 needs excellence of A localized at P_i, taking its finite-type algebra to be A itself; this permits the noncomplete upper-trait form of Epp."
+   },
+   {
+    "node": "lem-weil-pbc-complete-local-quotient",
+    "why": "Step 3 needs the complete Noetherian local structure of A/P_i to check the Epp residue-field hypothesis."
+   },
+   {
+    "node": "lem-weil-pbc-complete-local-nagata",
+    "why": "Step 4 takes the N-2 assertion for A/(0) to obtain finite normalization in L; this is an algebraic finiteness tool."
+   },
+   {
+    "node": "lem-weil-pbc-finite-over-complete-local-product",
+    "why": "Step 5 uses its domain clause to prove that the finite normalization C is complete Noetherian local, rather than assuming a chosen field factor stays local."
+   },
+   {
+    "node": "lem-weil-pbc-integral-injective-dimension-equal",
+    "why": "Step 5 needs equality of dimensions for the injective integral map A to C, a generic dimension tool."
+   },
+   {
+    "node": "lem-weil-pbc-module-injects-localizations-associated-primes",
+    "why": "Step 9 uses precisely the injectivity of the diagonal localization map for M=C/pi C to kill a nilpotent; this is the associated-prime form of the normal Cartier-divisor argument."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-cohen-rings-exist",
+  "lem-weil-pbc-cohen-ring-mod-pn-formally-smooth",
+  "lem-weil-pbc-normal-domain-principal-quotient-associated-height",
+  "lem-sc-normal-dim1-dvr",
+  "lem-exc-finite-type-localization-excellent",
+  "lem-weil-pbc-complete-local-quotient",
+  "lem-weil-pbc-complete-local-nagata",
+  "lem-weil-pbc-finite-over-complete-local-product",
+  "lem-weil-pbc-integral-injective-dimension-equal",
+  "lem-weil-pbc-module-injects-localizations-associated-primes"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q83-b74340e55",
+  "group": "Q83",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q83-b74340e55 (reviewer sub-agent of L); spot-checked: I read the item and both new nodes in full, against ILO IV 3.1.2, Remark 3.1.3, 3.2.1–3.2.3, 4.1.7–4.1.9, 4.2.3, Lemma 4.2.4 and the start of 4.2.5. The item statement matches the source's reduced-fibre preparation hypothesis by hypothesis, and it gives the parent lem-per-cohen-gabber-finite-presentations step 6 everything that step takes. Steps 1–10 check out against the statements of every cited node: Cohen lifting modulo p^{n+1} into A/m^{n+1}; finitely many height-one vertical primes giving excellent DVRs T_i via 07QW(2) and 07QU; the Epp residue hypothesis via the perfect-core node; Nagata finiteness of the normalization in a field factor L; C complete local of dimension d with W→C local because p=uπ^e, e>0; going-down putting each height-one Q containing π over some P_i; integral closure commuting with localization (0307), so S^{-1}C is the integral closure of im(T_i⊗W) in L; 4.2.4 done through associated primes (031T, 0311); equidimensionality from catenarity of the excellent ring C. lem-weil-pbc-cohen-ring-lift-complete-local needs Λ/p≅R/m, so rebuilding the lift in step 1 is legitimate. New node perfect-core-complete-local is true: since k0 is perfect, a coefficient field containing k0 exists, then Cohen plus 3.2.3(ii),(iii) and Lemma 3.2.2 apply. Tested on R=k0, R=k[[t]] with imperfect k, and finite extensions. New node finite-family-traits is true: Epp 3.1.2 with 3.1.3; for noncomplete excellent T, normalization commutes with completion; stability under further finite base change holds because the residue field is perfect, the generic fibre is normal and Serre's criterion applies. Its empty and singleton cases are fine. Both are statement-only with self-contained TeX and cited definitions (B1–B3). Searching the DAG for Epp and perfect-subfield found no duplicate, and neither node restates a clause of the item. Batch-5 flag on lem-per-complete-local-excellence: its closure, like the whole item closure, reaches only four sec-trace-formula nodes: regular⇒universally catenary, CM⇒universally catenary, polynomial algebras are CM, and finite-domain fraction degree. These are generic commutative algebra; neither assumption gives them and they are not steps of either proof, so I accept the citation. The declared tool_uses (lem-sc-normal-dim1-dvr, the pbc/exc algebra tools) are accepted for the maintainer. No fixes."
  }
 }
