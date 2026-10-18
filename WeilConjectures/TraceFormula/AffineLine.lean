@@ -121,6 +121,72 @@ theorem traceFormula_of_isProper [IsAlgClosed k] [SmoothOfRelativeDimension 1 X.
   exact Finset.sum_congr rfl fun x _ ↦
     localTerm_traceClass_graph_eq_trace hΦ K hm D.F x.1 x.2 (D.j x) (D.range_eq x)
 
+variable {U Z : Over (Spec (.of k))} [LocallyOfFiniteType U.hom] [QuasiCompact U.hom]
+  [IsSeparated U.hom] [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom] [IsSeparated Z.hom]
+  {j : U ⟶ X} {i : Z ⟶ X}
+
+/-- **The trace formula passes to an open subscheme** (blueprint `sk-thm-trace-formula`): for an
+open subscheme `j : U ⟶ X` with closed complement `i : Z ⟶ X`, both stable under the Frobenius,
+the trace formulas for `K` and for the restriction `K|_Z` in degree `m` give the trace formula
+for the restriction `K|_U`, by additivity of the compactly supported Frobenius and of the sums
+over the fixed points. -/
+theorem traceFormula_open_of_isCompl [IsSepClosed k] {ΦU : U ⟶ U} {ΦZ : Z ⟶ Z}
+    [IsOpenImmersion j.left] [IsClosedImmersion i.left]
+    (hcompl : IsCompl (Set.range j.left.base) (Set.range i.left.base)) (hj : ΦU ≫ j = j ≫ Φ)
+    (hi : ΦZ ≫ i = i ≫ Φ) (K : WeilBoundedConstructible ℓ Φ) (m : ℕ)
+    [IsFinite (frobeniusIterate Φ m).left] [IsUniversalHomeomorphism (frobeniusIterate Φ m).left]
+    [IsFinite (frobeniusIterate ΦU m).left]
+    [IsUniversalHomeomorphism (frobeniusIterate ΦU m).left]
+    [IsFinite (frobeniusIterate ΦZ m).left]
+    [IsUniversalHomeomorphism (frobeniusIterate ΦZ m).left] [Finite (FixedPoint ΦZ m)]
+    (hX : K.TraceFormula m) (hZ : ((weilUpperStar ℓ ΦZ Φ i hi).obj K).TraceFormula m) :
+    ((weilUpperStar ℓ ΦU Φ j hj).obj K).TraceFormula m := by
+  intro _ dKU _
+  let e := fixedPointSumEquiv hcompl hj hi m
+  let _ : Fintype (FixedPoint ΦZ m) := Fintype.ofFinite _
+  let _ : Fintype (FixedPoint Φ m) := Fintype.ofEquiv _ e
+  let dK := (nonempty_hasRightDual_compactCohomology K.carrier).some
+  let dKZ := (nonempty_hasRightDual_compactCohomology
+    ((weilUpperStar ℓ ΦZ Φ i hi).obj K).carrier).some
+  let dKUm := (nonempty_hasRightDual_compactCohomology
+    (((weilUpperStar ℓ ΦU Φ j hj).obj K).iterate m).carrier).some
+  let dKZm := (nonempty_hasRightDual_compactCohomology
+    (((weilUpperStar ℓ ΦZ Φ i hi).obj K).iterate m).carrier).some
+  let dKm := (nonempty_hasRightDual_compactCohomology (K.iterate m).carrier).some
+  let dTU := (nonempty_hasRightDual_compactCohomology
+    ((weilUpperStar ℓ (frobeniusIterate ΦU m) (frobeniusIterate Φ m) j
+      (frobeniusIterate_comp_of_comp hj m)).obj (K.iterate m)).carrier).some
+  let dTZ := (nonempty_hasRightDual_compactCohomology
+    ((weilUpperStar ℓ (frobeniusIterate ΦZ m) (frobeniusIterate Φ m) i
+      (frobeniusIterate_comp_of_comp hi m)).obj (K.iterate m)).carrier).some
+  let _ : ∀ x : RationalPoint X, HasRightDual
+      ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ x).obj K.carrier) :=
+    fun x ↦ (nonempty_hasRightDual_stalk _ x).some
+  let _ : ∀ z : RationalPoint Z, HasRightDual
+      ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ z).obj
+        ((weilUpperStar ℓ ΦZ Φ i hi).obj K).carrier) :=
+    fun z ↦ (nonempty_hasRightDual_stalk _ z).some
+  have hXeq : trace (K.globalOperator m) =
+      ∑ x : FixedPoint Φ m, trace (K.stalkFrobenius m x.1 x.2) :=
+    hX
+  have hZeq : trace (((weilUpperStar ℓ ΦZ Φ i hi).obj K).globalOperator m) =
+      ∑ z : FixedPoint ΦZ m,
+        trace (((weilUpperStar ℓ ΦZ Φ i hi).obj K).stalkFrobenius m z.1 z.2) :=
+    hZ
+  rw [trace_globalOperator_eq K m (hK := dK) (hKm := dKm),
+    trace_compactFrobenius_eq_add hcompl (frobeniusIterate_comp_of_comp hj m)
+      (frobeniusIterate_comp_of_comp hi m) (K.iterate m),
+    ← trace_globalOperator_weilUpperStar hj K m (hKU := dKU) (hKUm := dKUm) (hT := dTU),
+    ← trace_globalOperator_weilUpperStar hi K m (hKU := dKZ) (hKUm := dKZm) (hT := dTZ),
+    ← e.sum_comp, Fintype.sum_sum_type, hZeq] at hXeq
+  have hU' := Finset.sum_congr rfl fun (y : FixedPoint ΦU m) (_ : y ∈ Finset.univ) ↦
+    trace_stalkFrobenius_weilUpperStar hj K m y.1 y.2
+  have hZ' := Finset.sum_congr rfl fun (z : FixedPoint ΦZ m) (_ : z ∈ Finset.univ) ↦
+    trace_stalkFrobenius_weilUpperStar hi K m z.1 z.2
+  rw [hZ'] at hXeq
+  rw [hU']
+  exact add_right_cancel hXeq
+
 end WeilBoundedConstructible
 
 section Model
