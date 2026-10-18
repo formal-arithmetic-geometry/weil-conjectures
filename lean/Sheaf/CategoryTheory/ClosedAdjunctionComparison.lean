@@ -123,6 +123,77 @@ theorem naturality
         adjointComparison tensorC tensorD HC HD θC θD F G μ adj P' N' =
       adjointComparison tensorC tensorD HC HD θC θD F G μ adj P N ≫
         G.map (HD.map (Prod.mkHom (F.map a).op v))) := by
-  sorry
+  let A := HC.obj (op P, G.obj N)
+  let A' := HC.obj (op P', G.obj N')
+  let h : A ⟶ A' := HC.map (Prod.mkHom a.op (G.map v))
+  let ev := evaluation tensorC HC θC P (G.obj N)
+  let ev' := evaluation tensorC HC θC P' (G.obj N')
+  -- Transposing evaluation gives the identity, by its definition.
+  have hθev (X Y : C) :
+      θC (HC.obj (op X, Y)) X Y (evaluation tensorC HC θC X Y) =
+        𝟙 (HC.obj (op X, Y)) :=
+    (θC (HC.obj (op X, Y)) X Y).apply_symm_apply _
+  -- Both sides of the evaluation square transpose to h.
+  have heval : tensorC.map (Prod.mkHom h (𝟙 P')) ≫ ev' =
+      tensorC.map (Prod.mkHom (𝟙 A) a) ≫ ev ≫ G.map v := by
+    apply (θC A P' (G.obj N')).injective
+    calc
+      _ = h := by
+        simpa only [ev', A', Category.comp_id, hθev, op_id, ← prod_id,
+          Functor.map_id] using
+          hθC A' A P' P' (G.obj N') (G.obj N') ev' h (𝟙 P') (𝟙 (G.obj N'))
+      _ = _ := by
+        symm
+        simpa only [ev, A, hθev, Category.id_comp] using
+          hθC A A P P' (G.obj N) (G.obj N') ev (𝟙 A) a (G.map v)
+  let k := (μ A P).hom ≫ F.map ev ≫ adj.counit.app N
+  let k' := (μ A' P').hom ≫ F.map ev' ≫ adj.counit.app N'
+  have hμ₁ : tensorD.map (Prod.mkHom (F.map h) (𝟙 (F.obj P'))) ≫ (μ A' P').hom =
+      (μ A P').hom ≫ F.map (tensorC.map (Prod.mkHom h (𝟙 P'))) := by
+    simpa only [Functor.map_id] using (hμ A A' P' P' h (𝟙 P')).symm
+  have hμ₂ : (μ A P').hom ≫ F.map (tensorC.map (Prod.mkHom (𝟙 A) a)) =
+      tensorD.map (Prod.mkHom (𝟙 (F.obj A)) (F.map a)) ≫ (μ A P).hom := by
+    simpa only [Functor.map_id] using hμ A A P' P (𝟙 A) a
+  -- The untransposed comparison square follows from evaluation and counit naturality.
+  have hk : tensorD.map (Prod.mkHom (F.map h) (𝟙 (F.obj P'))) ≫ k' =
+      tensorD.map (Prod.mkHom (𝟙 (F.obj A)) (F.map a)) ≫ k ≫ v := by
+    calc
+      _ = (μ A P').hom ≫
+          F.map (tensorC.map (Prod.mkHom h (𝟙 P')) ≫ ev') ≫ adj.counit.app N' := by
+        dsimp only [k']
+        rw [← Category.assoc, hμ₁, Functor.map_comp]
+        simp only [Category.assoc]
+      _ = (μ A P').hom ≫
+          F.map (tensorC.map (Prod.mkHom (𝟙 A) a) ≫ ev ≫ G.map v) ≫
+            adj.counit.app N' := by rw [heval]
+      _ = _ := by
+        dsimp only [k]
+        simp only [Functor.map_comp, Category.assoc]
+        rw [adj.counit_naturality v, ← Category.assoc, ← Category.assoc, hμ₂]
+        simp only [Category.assoc]
+  have hb : F.map h ≫ comparison tensorC tensorD HC HD θC θD F G μ adj P' N' =
+      comparison tensorC tensorD HC HD θC θD F G μ adj P N ≫
+        HD.map (Prod.mkHom (F.map a).op v) := by
+    change F.map h ≫ θD (F.obj A') (F.obj P') N' k' =
+      θD (F.obj A) (F.obj P) N k ≫ HD.map (Prod.mkHom (F.map a).op v)
+    calc
+      _ = θD (F.obj A) (F.obj P') N'
+          (tensorD.map (Prod.mkHom (F.map h) (𝟙 (F.obj P'))) ≫ k') := by
+        symm
+        simpa only [Category.comp_id, op_id, ← prod_id, Functor.map_id]
+          using hθD (F.obj A') (F.obj A) (F.obj P') (F.obj P') N' N' k'
+            (F.map h) (𝟙 (F.obj P')) (𝟙 N')
+      _ = θD (F.obj A) (F.obj P') N'
+          (tensorD.map (Prod.mkHom (𝟙 (F.obj A)) (F.map a)) ≫ k ≫ v) := by rw [hk]
+      _ = _ := by
+        simpa only [Category.id_comp] using
+          hθD (F.obj A) (F.obj A) (F.obj P) (F.obj P') N N' k
+            (𝟙 (F.obj A)) (F.map a) v
+  refine ⟨hb, ?_⟩
+  change h ≫ (adj.unit.app A' ≫
+      G.map (comparison tensorC tensorD HC HD θC θD F G μ adj P' N')) = _
+  rw [← Category.assoc, ← adj.unit_naturality h, Category.assoc, ← G.map_comp, hb,
+    G.map_comp]
+  simp only [adjointComparison, Category.assoc, A]
 
 end CategoryTheory.ClosedAdjunctionComparison
