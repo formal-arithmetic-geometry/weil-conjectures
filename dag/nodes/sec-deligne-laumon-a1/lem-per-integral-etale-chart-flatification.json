@@ -19,9 +19,271 @@
   "def-weil-surjective-morphism",
   "def-nagata-scheme-theoretic-closure"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $K_i=k(E_i)$ and $L_i=k(F_i)$. The generic fibre of $f_i$ is $\\operatorname{Spec}L_i$. Indeed, on any nonempty affine open $\\operatorname{Spec}B$ of $f_i^{-1}(\\operatorname{Spec}A)$, dominance embeds $A$ in $B$ and the fraction-field lemma embeds $B$ in $L_i$. Thus $B\\otimes_AK_i$ is a subalgebra of the finite-dimensional $K_i$-vector space $L_i$, is a domain, and has fraction field $L_i$. Multiplication by a nonzero element on this finite-dimensional domain is injective and hence surjective; it is therefore a field and equals $L_i$. These affine pieces all have the same generic point of $F_i$, so their generic fibres glue to that single spectrum.",
+   "uses": [
+    "lem-sc-integral-function-field-affine-fraction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01RV, lemma-integral-scheme-rational-functions; elementary finite-dimensional domain argument"
+   }
+  },
+  {
+   "text": "The sources $E_i$ and $F_i$ are Noetherian: the given maps are of finite type, proper maps are of finite type, and finite type is closed under composition. Properness also makes $f_i$ quasi-compact and separated, hence quasi-separated. The generic-finite neighbourhood lemma applies to $f_i$, by Step 1, and supplies an open $V_i\\subseteq E_i$ containing its generic point over which $f_i$ is finite.",
+   "uses": [
+    "def-weil-proper-morphism",
+    "lem-sfb-finite-type-composition-base-change",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-pc-separated-quasi-separated",
+    "lem-weil-pbc-generic-finite-morphism-open-neighborhood"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01T3, 01T6 and 02NW (lemma-generically-finite)"
+   }
+  },
+  {
+   "text": "Form $W=\\coprod_{i\\in I}F_i$ and let $g:W\\to X$ have components $e_if_i$. This is finite type and separated: locally on each open-and-closed component these properties hold for $e_if_i$, and the finite family supplies quasi-compactness; the diagonal has empty off-diagonal components. Generic flatness applied to $g$ gives a nonempty open $U\\subseteq X$ over which $g$ is flat and locally of finite presentation. The scheme $X$ is quasi-compact by its finite affine cover and quasi-separated by local Noetherianness; $U$ is quasi-compact since $X$ is Noetherian. Thus $X,U,g$ meet all hypotheses of the flattening theorem. If $I$ is empty take $W=\\varnothing$ and $U=X$.",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family",
+    "lem-sfb-finite-type-composition-base-change",
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-sbc-generic-flat-finite-presentation",
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "lem-weil-pbc-affine-scheme-qcqs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 052A, proposition-generic-flatness; Tags 01KU, 01T3; finite disjoint union argument"
+   }
+  },
+  {
+   "text": "Apply flattening to $g$ and $U$. Obtain a $U$-admissible blowup $b:B\\to X$ for which the strict transform $T$ of $W$ is flat and of finite presentation over $B$. Let $O=X\\setminus V(\\mathcal I)$ for the centre ideal. It contains $U$, and $B\\times_XO\\simeq O$. The blowup is proper, hence finite type. Its standard affine charts over an integral affine $\\operatorname{Spec}A\\subset X$ have rings $A[\\mathcal I/a]\\subseteq A_a$. Nonempty charts are domains, and their common open over $O$ is dense in every chart: localization at the nonzero $a$ embeds the chart ring in $A_a$. Hence $B$ is integral and has function field $k(X)$. It is Noetherian and all its affine coordinate rings are quasi-excellent, by finite-type stability.",
+   "uses": [
+    "lem-trf-flattening-by-admissible-blowup",
+    "lemma-nagata-admissible-blowup-over-open",
+    "lemma-nagata-blowup-proper",
+    "prop-nagata-affine-blowup-chart-cover",
+    "def-nagata-blowup-chart-ring",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-per-quasi-excellent-finite-type-stability"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 081R, lemma-flat-after-blowing-up; divisors.tex Tag 0804, lemma-blowing-up-affine; More on Algebra Tag 07QU"
+   }
+  },
+  {
+   "text": "Set $E_{i,B}=E_i\\times_XB$. The open-and-closed decomposition $W\\times_XB=\\coprod_i(F_i\\times_XB)$ restricts the strict transform $T$ to closed subschemes $T_i\\subseteq F_i\\times_XB$. This follows directly from the closure characterization: its defining ideal restricts separately on disjoint open components. Each $T_i\\to B$ is flat and locally of finite presentation, and its restriction over $O$ is $F_i\\times_XO$. Each $E_{i,B}\\to B$ is etale. At $t\\in T_i$ mapping to $z\\in E_{i,B}$, the etale local-ring flatness lemma, applied to $M=\\mathcal O_{T_i,t}$, changes flatness over $\\mathcal O_{B,b(z)}$ into flatness over $\\mathcal O_{E_{i,B},z}$. Consequently $T_i\\to E_{i,B}$ is flat.",
+   "uses": [
+    "lemma-nagata-strict-transform-closure-characterization",
+    "lemma-nagata-scheme-image-restrict-open",
+    "lem-weil-pbc-etale-scheme-base-change",
+    "lem-trf-etale-local-ring-flatness",
+    "def-weil-flat-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 080D, 080E; flat.tex Tag 05BA, lemma-etale-flat-up-down-local-ring"
+   }
+  },
+  {
+   "text": "The morphism $T_i\\to E_{i,B}$ is proper: it is the composite of its closed immersion in $F_i\\times_{E_i}E_{i,B}$ and the base change of $f_i$. The target $E_{i,B}$ is Noetherian by finite-type base change and finite-type permanence; properness and the locally-Noetherian finite-presentation lemma therefore make $T_i\\to E_{i,B}$ locally of finite presentation.",
+   "uses": [
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-sfb-finite-type-composition-base-change",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "pqf-lem-lft-fp-locnoeth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01W4, 01W5, 01T6, 01TX"
+   }
+  },
+  {
+   "text": "The open $D_i=E_{i,B}\\times_{E_i}(V_i\\cap e_i^{-1}O)$ is dense in $E_{i,B}$. To check this, the etale map $E_{i,B}\\to B$ is open, so any nonempty open in $E_{i,B}$ meets the inverse image of the dense open $b^{-1}O$ of $B$. That inverse image is identified with the nonempty open $e_i^{-1}O$ of the integral scheme $E_i$. It meets $V_i$ densely. Here $e_i^{-1}O$ is nonempty because the nonempty etale source $E_i$ maps openly to the integral $X$, so its image meets $O$. Over $D_i$, the morphism $T_i\\to E_{i,B}$ is the finite map $f_i|_{V_i}$ restricted further. Apply the proper-flat finiteness lemma, using Step 6 for local finite presentation, to conclude that $T_i\\to E_{i,B}$ is finite, flat and locally of finite presentation.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "lem-weil-pbc-flat-lfp-open",
+    "lem-trf-proper-flat-finite-dense-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 0B48, lemma-proper-flat-finite-over-dense-open; Tag 01UA, lemma-fppf-open"
+   }
+  },
+  {
+   "text": "Let $\\nu:X'\\to B$ be the componentwise normalization of the integral $B$. On an affine open $\\operatorname{Spec}A\\subseteq B$, it is $\\operatorname{Spec}\\overline A$, where $\\overline A$ is the integral closure of $A$ in $k(X)$. Quasi-excellence makes $A$ Nagata. As $A$ is a domain, the zero-prime clause of the Nagata definition says it is Japanese, and the degree-one case of that definition makes $\\overline A$ a finite $A$-module. The integral-closure normality lemma says $\\overline A$ is a normal domain with fraction field $k(X)$. Its localizations are normal domains. The affine normalization description and localization compatibility therefore give an integral normal scheme $X'$ finite over $B$.",
+   "uses": [
+    "def-weil-pbc-reduced-normalization",
+    "lem-per-componentwise-normalization-affine-charts",
+    "lem-exc-quasi-excellent-nagata",
+    "def-weil-pbc-nagata-ring",
+    "def-weil-pbc-japanese-domain",
+    "lem-weil-pbc-integral-closure-finite-extension-normal",
+    "lem-weil-pbc-localization-normal-domain",
+    "lem-weil-pbc-integral-closure-commutes-localization",
+    "def-weil-finite-integral-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 035P, 035S (affine proof of lemma-nagata-normalization), 07QV, 032R, 032F, 034L, 0307"
+   }
+  },
+  {
+   "text": "There is a nonempty open of $B$ on which $\\nu$ is an isomorphism. Indeed choose a nonempty affine $\\operatorname{Spec}A\\subseteq b^{-1}O$ and finite $A$-module generators $c_1,\\ldots,c_r$ of $\\overline A\\subseteq\\operatorname{Frac}A$. Write $c_j=a_j/d_j$ with $d_j\\ne0$. For $d=\\prod_jd_j$ one has $\\overline A_d=A_d$; localization compatibility identifies this with the restriction of $\\nu$. Since $b$ is an isomorphism over $O$, the nonempty $D(d)$ is also an open of $X$. Thus $p=b\\nu$ is an isomorphism on a dense open of $X$. It is proper since finite maps are proper and proper maps compose. It is finite type, and $X'$ is Noetherian by finite-type permanence.",
+   "uses": [
+    "lem-weil-pbc-integral-closure-commutes-localization",
+    "lem-weil-pbc-finite-proper",
+    "lem-weil-pbc-proper-composition",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-finite-type-over-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0BAJ, lemma-birational-isomorphism-over-dense-open, finite birational affine denominator argument"
+   }
+  },
+  {
+   "text": "For $E_i'=E_i\\times_XX'$, base change gives an etale map $E_i'\\to X'$, and finite-type permanence makes $E_i'$ Noetherian. The normal-components lemma writes it as a finite disjoint union of open-and-closed normal integral schemes. Let $H\\subseteq X$ be the dense open on which $p$ is an isomorphism. Every nonempty open of $E_i'$ meets the inverse image of $p^{-1}H$, because its image under the open map to $X'$ is nonempty open and $p^{-1}H$ is dense in the integral $X'$. This inverse image is $e_i^{-1}H$, a nonempty integral open in $E_i$. It cannot meet two disjoint open-and-closed components. Hence $E_i'$ has exactly one component and is normal integral. The identification over $H$ also identifies its function field with $K_i$.",
+   "uses": [
+    "lem-weil-pbc-etale-scheme-base-change",
+    "lem-sfb-finite-type-composition-base-change",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-fin-etale-normal-components",
+    "def-weil-etale-morphism",
+    "lem-weil-pbc-flat-lfp-open",
+    "lem-sc-integral-function-field-affine-fraction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 02GO, 033C; normal components and openness; Tag 01RV"
+   }
+  },
+  {
+   "text": "Define $F_i'=T_i\\times_{E_{i,B}}E_i'$ via the canonical map $E_i'\\to E_{i,B}$ induced by $\\nu$. On an affine $\\operatorname{Spec}A\\subseteq E_{i,B}$, write its finite inverse image as $\\operatorname{Spec}C$. Over an affine $\\operatorname{Spec}A'$ of $E_i'$ mapping there, the inverse image is $\\operatorname{Spec}(C\\otimes_AA')$; finite generators of $C$ tensor to finite generators. Thus $a_i:F_i'\\to E_i'$ is finite. It is flat by flat base change and locally of finite presentation by base-change permanence, hence finite locally free by definition. The projections give the requested $E_i$-morphism $F_i'\\to F_i$. Over the generic point of $E_i'$, it is $\\operatorname{Spec}L_i\\to\\operatorname{Spec}K_i$, since both the blowup and normalization preserve the function fields and the strict transform agrees with $F_i$ on the dense open $O$.",
+   "uses": [
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "def-pc-finite-locally-free",
+    "lem-sc-integral-function-field-affine-fraction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01U9, 01TS; affine tensor calculation for finite base change"
+   }
+  },
+  {
+   "text": "The finite-locally-free pushforward lemma makes $a_{i*}\\mathcal O_{F_i'}$ locally free of locally constant finite rank. On the connected integral $E_i'$ this rank is constant, and Step 11 identifies its generic value with $\\dim_{K_i}L_i=n_i$. On each affine trivializing neighbourhood $\\operatorname{Spec}A$ its algebra $C$ is free of rank $n_i$. Tensoring with any residue field gives a vector space of dimension $n_i>0$, so its finite-dimensional nonzero algebra has a maximal ideal and its spectrum is nonempty. This proves surjectivity and constant fibre rank $n_i$.",
+   "uses": [
+    "lem-sc-finite-pushforward-locally-free",
+    "def-pc-finite-locally-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 02KB (lemma-finite-locally-free), 02K9 (lemma-finite-flat-is-finite-locally-free); elementary positive-rank fibre argument"
+   }
+  },
+  {
+   "text": "On every nonempty affine $\\operatorname{Spec}A\\subseteq E_i'$, the finite inverse image is $\\operatorname{Spec}C$. Flatness and the affine criterion make $C$ a flat $A$-module. Since $A$ is a domain, the flat-torsionfree lemma shows $C\\hookrightarrow C\\otimes_AK_i=L_i$. Thus $C$ is a domain and its fraction field is $L_i$: its localization by $A\\setminus\\{0\\}$ already equals that field. These affine inverse images share their generic point $\\operatorname{Spec}L_i$, are reduced and are nonempty by Step 12. They cover $F_i'$, so $F_i'$ is integral with function field $L_i$. The projection to $F_i$ induces the identity on $L_i$, as may be checked on the common generic fibre of Step 11.",
+   "uses": [
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-flat-morphism-affine-criterion",
+    "lem-trf-flat-module-torsionfree-domain",
+    "def-pc-integral-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0539, flat implies torsion-free; Tag 01RV; affine localization argument"
+   }
+  },
+  {
+   "text": "Finally $F_i'$ is the scheme-theoretic closure of that generic fibre in $F_i\\times_XX'$. It is already a closed subscheme there, by base change of the closed immersion defining $T_i$. For any nonempty affine open of $F_i'$, its coordinate ring embeds in $L_i$ by integrality and the fraction-field lemma. Therefore restriction to its generic point has zero kernel. On an affine open $\\operatorname{Spec}R$ of the ambient scheme, with $F_i'$ cut out by $J$, this says $J=\\ker(R\\to\\Gamma(G,\\mathcal O_G))$, where $G$ is the intersection of the generic fibre with this open; if the intersection with $F_i'$ is empty then both ideals are the unit ideal. This is precisely the asserted affine kernel description of closure. All schemes constructed are finite type over $X$: $p$ is proper, the $E_i'$ are finite type over $X'$ by base change, and $a_i$ is finite and hence finite type. Thus the $F_i'$ are Noetherian as well.",
+   "uses": [
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-sc-integral-function-field-affine-fraction",
+    "lemma-nagata-scheme-image-ideal-qc",
+    "lem-sfb-finite-type-composition-base-change",
+    "lem-weil-pbc-finite-proper",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-finite-type-over-noetherian"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01QR, 01RV, 01T3, 01T6; scheme-theoretic closure by its affine restriction kernel"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-nagata-blowup-chart-ring",
+  "def-pc-finite-locally-free",
+  "def-pc-integral-scheme",
+  "def-weil-etale-morphism",
+  "def-weil-finite-integral-morphism",
+  "def-weil-flat-morphism",
+  "def-weil-pbc-japanese-domain",
+  "def-weil-pbc-nagata-ring",
+  "def-weil-pbc-reduced-normalization",
+  "def-weil-proper-morphism",
+  "lem-exc-quasi-excellent-nagata",
+  "lem-fin-etale-normal-components",
+  "lem-pc-separated-quasi-separated",
+  "lem-per-componentwise-normalization-affine-charts",
+  "lem-per-quasi-excellent-finite-type-stability",
+  "lem-sbc-generic-flat-finite-presentation",
+  "lem-sc-finite-pushforward-locally-free",
+  "lem-sc-integral-function-field-affine-fraction",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-trf-etale-local-ring-flatness",
+  "lem-trf-flat-module-torsionfree-domain",
+  "lem-trf-flattening-by-admissible-blowup",
+  "lem-trf-proper-flat-finite-dense-open",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "lem-weil-pbc-finite-proper",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-flat-lfp-open",
+  "lem-weil-pbc-flat-morphism-affine-criterion",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-weil-pbc-generic-finite-morphism-open-neighborhood",
+  "lem-weil-pbc-integral-closure-commutes-localization",
+  "lem-weil-pbc-integral-closure-finite-extension-normal",
+  "lem-weil-pbc-localization-normal-domain",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-proper-composition",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lemma-nagata-admissible-blowup-over-open",
+  "lemma-nagata-blowup-proper",
+  "lemma-nagata-scheme-image-ideal-qc",
+  "lemma-nagata-scheme-image-restrict-open",
+  "lemma-nagata-strict-transform-closure-characterization",
+  "pqf-lem-lft-fp-locnoeth",
+  "prop-nagata-affine-blowup-chart-cover"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/flat.tex",
+  "place": "Tag 081R followed by Tags 05BA and 0B48, with the affine normalization construction of morphisms.tex Tags 035P/035S. This expands ILO Expose II 3.2.1 proof (printed p.29) and the platification sentence in 3.2.3 (printed p.30)."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -57,10 +319,45 @@
    "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsFinite.recOn\", \"AlgebraicGeometry.IsFinite\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"AlgebraicGeometry.IsFinite.instLocallyOfFiniteType\", \"AlgebraicGeometry.IsFinite.instIsIntegralHom\", \"AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.IsIntegralHom.instUniversallyClosed\", \"AlgebraicGeometry.IsFinite.casesOn\"], \"digest\": \"0d8f138db6f494b6\"}",
    "date": "2026-10-18",
    "verdict": "no match: inspected hits concern ordinary scheme covers, etale morphisms, normalization or flatness; none states this refinement/flattening result."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Simultaneous flatification of generically finite proper maps on separated etale charts by a modification of the common base",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.generalizingMap\", \"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.Flat.of_stalkMap\", \"AlgebraicGeometry.IsEtale\"], \"digest\": \"d0dadec554448ca4\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: the returned declarations concern flatness, etale maps or finiteness permanence; none constructs a flattening modification or states the simultaneous chart result."
+  },
+  {
+   "tool": "grep",
+   "query": "flatten|flatification|strictTransform",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: the returned declarations concern flatness, etale maps or finiteness permanence; none constructs a flattening modification or states the simultaneous chart result."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A proper generically finite morphism becomes finite locally free after blowing up the integral base",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsFinite.recOn\", \"AlgebraicGeometry.IsProper.instOfIsFinite\", \"AlgebraicGeometry.IsProper.toLocallyOfFiniteType\", \"AlgebraicGeometry.IsFinite.iff_isIntegralHom_and_locallyOfFiniteType\", \"AlgebraicGeometry.instIsProperOfIsFinite\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"AlgebraicGeometry.IsFinite.iff_isProper_and_isAffineHom\", \"AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme\"], \"digest\": \"601b5f13933385ea\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: the returned declarations concern flatness, etale maps or finiteness permanence; none constructs a flattening modification or states the simultaneous chart result."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Flat, AlgebraicGeometry.IsProper",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: the returned declarations concern flatness, etale maps or finiteness permanence; none constructs a flattening modification or states the simultaneous chart result."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Raynaud Gruson flattening by a blowup that is an isomorphism on a dense open subset",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.Flat.instOfIsOpenImmersion\", \"AlgebraicGeometry.Flat.generalizingMap\", \"AlgebraicGeometry.UniversallyOpen.of_flat\", \"AlgebraicGeometry.Flat.of_stalkMap\", \"AlgebraicGeometry.flat_iff\", \"AlgebraicGeometry.IsOpenImmersion.of_flat_of_mono\", \"AlgebraicGeometry.Flat.flat_appLE\"], \"digest\": \"ee24833b94ee759d\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: the returned declarations concern flatness, etale maps or finiteness permanence; none constructs a flattening modification or states the simultaneous chart result."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-alteration-cover-standard-refinement",
@@ -85,5 +382,194 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-integral-etale-chart-flatification",
+  "worker": "stage1",
+  "summary": "Expanded common-base flattening of the finite disjoint union, etale flatness cancellation, proper-flat finiteness, affine finite normalization using quasi-excellence, normal-integral etale charts, and torsion-free generic-fibre closure. All needed tools already exist; no new nodes or statement changes.",
+  "blueprint": "Ancestor lem-per-artin-gabber-affine-curve proof Step 3, through the Gabber finiteness/uniformization chain: the initial platification sentence in ILO II 3.2.3, detailed in the proof of II 3.2.1; only this generic geometric input is split.",
+  "tool_uses": [
+   {
+    "node": "lem-exc-quasi-excellent-nagata",
+    "why": "Generic scheme-theoretic/algebraic tool used in steps 8; it supplies the indicated flattening, permanence, normalization, flatness, or rank interface. The current unit has no replacement for this general tool; the ILO flattening route is retained."
+   },
+   {
+    "node": "lem-fin-etale-normal-components",
+    "why": "Generic scheme-theoretic/algebraic tool used in steps 10; it supplies the indicated flattening, permanence, normalization, flatness, or rank interface. The current unit has no replacement for this general tool; the ILO flattening route is retained."
+   },
+   {
+    "node": "lem-pc-separated-quasi-separated",
+    "why": "Generic scheme-theoretic/algebraic tool used in steps 2; it supplies the indicated flattening, permanence, normalization, flatness, or rank interface. The current unit has no replacement for this general tool; the ILO flattening route is retained."
+   },
+   {
+    "node": "lem-sbc-generic-flat-finite-presentation",
+    "why": "Generic scheme-theoretic/algebraic tool used in steps 3; it supplies the indicated flattening, permanence, normalization, flatness, or rank interface. The current unit has no replacement for this general tool; the ILO flattening route is retained."
+   },
+   {
+    "node": "lem-sc-finite-pushforward-locally-free",
+    "why": "Generic scheme-theoretic/algebraic tool used in steps 12; it supplies the indicated flattening, permanence, normalization, flatness, or rank interface. The current unit has no replacement for this general tool; the ILO flattening route is retained."
+   },
+   {
+    "node": "lem-sc-integral-function-field-affine-fraction",
+    "why": "Generic scheme-theoretic/algebraic tool used in steps 1, 10, 11, 14; it supplies the indicated flattening, permanence, normalization, flatness, or rank interface. The current unit has no replacement for this general tool; the ILO flattening route is retained."
+   },
+   {
+    "node": "lem-sfb-finite-type-composition-base-change",
+    "why": "Generic scheme-theoretic/algebraic tool used in steps 2, 3, 6, 10, 14; it supplies the indicated flattening, permanence, normalization, flatness, or rank interface. The current unit has no replacement for this general tool; the ILO flattening route is retained."
+   },
+   {
+    "node": "lem-trf-etale-local-ring-flatness",
+    "why": "Generic scheme-theoretic/algebraic tool used in steps 5; it supplies the indicated flattening, permanence, normalization, flatness, or rank interface. The current unit has no replacement for this general tool; the ILO flattening route is retained."
+   },
+   {
+    "node": "lem-trf-flat-module-torsionfree-domain",
+    "why": "Generic scheme-theoretic/algebraic tool used in steps 13; it supplies the indicated flattening, permanence, normalization, flatness, or rank interface. The current unit has no replacement for this general tool; the ILO flattening route is retained."
+   },
+   {
+    "node": "lem-trf-flattening-by-admissible-blowup",
+    "why": "Generic scheme-theoretic/algebraic tool used in steps 4; it supplies the indicated flattening, permanence, normalization, flatness, or rank interface. The current unit has no replacement for this general tool; the ILO flattening route is retained."
+   },
+   {
+    "node": "lem-trf-proper-flat-finite-dense-open",
+    "why": "Generic scheme-theoretic/algebraic tool used in steps 7; it supplies the indicated flattening, permanence, normalization, flatness, or rank interface. The current unit has no replacement for this general tool; the ILO flattening route is retained."
+   },
+   {
+    "node": "lem-weil-pbc-affine-scheme-qcqs",
+    "why": "Generic scheme-theoretic/algebraic tool used in steps 3; it supplies the indicated flattening, permanence, normalization, flatness, or rank interface. The current unit has no replacement for this general tool; the ILO flattening route is retained."
+   },
+   {
+    "node": "lem-weil-pbc-etale-scheme-base-change",
+    "why": "Generic scheme-theoretic/algebraic tool used in steps 5, 10; it supplies the indicated flattening, permanence, normalization, flatness, or rank interface. The current unit has no replacement for this general tool; the ILO flattening route is retained."
+   },
+   {
+    "node": "lem-weil-pbc-finite-proper",
+    "why": "Generic scheme-theoretic/algebraic tool used in steps 9, 14; it supplies the indicated flattening, permanence, normalization, flatness, or rank interface. The current unit has no replacement for this general tool; the ILO flattening route is retained."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic scheme-theoretic/algebraic tool used in steps 2, 4, 6, 9, 10, 14; it supplies the indicated flattening, permanence, normalization, flatness, or rank interface. The current unit has no replacement for this general tool; the ILO flattening route is retained."
+   },
+   {
+    "node": "lem-weil-pbc-flat-lfp-open",
+    "why": "Generic scheme-theoretic/algebraic tool used in steps 7, 10; it supplies the indicated flattening, permanence, normalization, flatness, or rank interface. The current unit has no replacement for this general tool; the ILO flattening route is retained."
+   },
+   {
+    "node": "lem-weil-pbc-flat-morphism-affine-criterion",
+    "why": "Generic scheme-theoretic/algebraic tool used in steps 13; it supplies the indicated flattening, permanence, normalization, flatness, or rank interface. The current unit has no replacement for this general tool; the ILO flattening route is retained."
+   },
+   {
+    "node": "lem-weil-pbc-flat-morphism-base-change",
+    "why": "Generic scheme-theoretic/algebraic tool used in steps 11; it supplies the indicated flattening, permanence, normalization, flatness, or rank interface. The current unit has no replacement for this general tool; the ILO flattening route is retained."
+   },
+   {
+    "node": "lem-weil-pbc-generic-finite-morphism-open-neighborhood",
+    "why": "Generic scheme-theoretic/algebraic tool used in steps 2; it supplies the indicated flattening, permanence, normalization, flatness, or rank interface. The current unit has no replacement for this general tool; the ILO flattening route is retained."
+   },
+   {
+    "node": "lem-weil-pbc-integral-closure-commutes-localization",
+    "why": "Generic scheme-theoretic/algebraic tool used in steps 8, 9; it supplies the indicated flattening, permanence, normalization, flatness, or rank interface. The current unit has no replacement for this general tool; the ILO flattening route is retained."
+   },
+   {
+    "node": "lem-weil-pbc-integral-closure-finite-extension-normal",
+    "why": "Generic scheme-theoretic/algebraic tool used in steps 8; it supplies the indicated flattening, permanence, normalization, flatness, or rank interface. The current unit has no replacement for this general tool; the ILO flattening route is retained."
+   },
+   {
+    "node": "lem-weil-pbc-localization-normal-domain",
+    "why": "Generic scheme-theoretic/algebraic tool used in steps 8; it supplies the indicated flattening, permanence, normalization, flatness, or rank interface. The current unit has no replacement for this general tool; the ILO flattening route is retained."
+   },
+   {
+    "node": "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "why": "Generic scheme-theoretic/algebraic tool used in steps 3; it supplies the indicated flattening, permanence, normalization, flatness, or rank interface. The current unit has no replacement for this general tool; the ILO flattening route is retained."
+   },
+   {
+    "node": "lem-weil-pbc-proper-composition",
+    "why": "Generic scheme-theoretic/algebraic tool used in steps 9; it supplies the indicated flattening, permanence, normalization, flatness, or rank interface. The current unit has no replacement for this general tool; the ILO flattening route is retained."
+   },
+   {
+    "node": "lem-weil-pbc-proper-fp-permanence",
+    "why": "Generic scheme-theoretic/algebraic tool used in steps 3, 6, 14; it supplies the indicated flattening, permanence, normalization, flatness, or rank interface. The current unit has no replacement for this general tool; the ILO flattening route is retained."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-morphism-permanence",
+    "why": "Generic scheme-theoretic/algebraic tool used in steps 11; it supplies the indicated flattening, permanence, normalization, flatness, or rank interface. The current unit has no replacement for this general tool; the ILO flattening route is retained."
+   },
+   {
+    "node": "lem-weil-pbc-scheme-coproduct-family",
+    "why": "Generic scheme-theoretic/algebraic tool used in steps 3; it supplies the indicated flattening, permanence, normalization, flatness, or rank interface. The current unit has no replacement for this general tool; the ILO flattening route is retained."
+   },
+   {
+    "node": "lemma-nagata-admissible-blowup-over-open",
+    "why": "Generic scheme-theoretic/algebraic tool used in steps 4; it supplies the indicated flattening, permanence, normalization, flatness, or rank interface. The current unit has no replacement for this general tool; the ILO flattening route is retained."
+   },
+   {
+    "node": "lemma-nagata-blowup-proper",
+    "why": "Generic scheme-theoretic/algebraic tool used in steps 4; it supplies the indicated flattening, permanence, normalization, flatness, or rank interface. The current unit has no replacement for this general tool; the ILO flattening route is retained."
+   },
+   {
+    "node": "lemma-nagata-scheme-image-ideal-qc",
+    "why": "Generic scheme-theoretic/algebraic tool used in steps 14; it supplies the indicated flattening, permanence, normalization, flatness, or rank interface. The current unit has no replacement for this general tool; the ILO flattening route is retained."
+   },
+   {
+    "node": "lemma-nagata-scheme-image-restrict-open",
+    "why": "Generic scheme-theoretic/algebraic tool used in steps 5; it supplies the indicated flattening, permanence, normalization, flatness, or rank interface. The current unit has no replacement for this general tool; the ILO flattening route is retained."
+   },
+   {
+    "node": "lemma-nagata-strict-transform-closure-characterization",
+    "why": "Generic scheme-theoretic/algebraic tool used in steps 5; it supplies the indicated flattening, permanence, normalization, flatness, or rank interface. The current unit has no replacement for this general tool; the ILO flattening route is retained."
+   },
+   {
+    "node": "pqf-lem-lft-fp-locnoeth",
+    "why": "Generic scheme-theoretic/algebraic tool used in steps 6; it supplies the indicated flattening, permanence, normalization, flatness, or rank interface. The current unit has no replacement for this general tool; the ILO flattening route is retained."
+   },
+   {
+    "node": "prop-nagata-affine-blowup-chart-cover",
+    "why": "Generic scheme-theoretic/algebraic tool used in steps 4; it supplies the indicated flattening, permanence, normalization, flatness, or rank interface. The current unit has no replacement for this general tool; the ILO flattening route is retained."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-exc-quasi-excellent-nagata",
+  "lem-fin-etale-normal-components",
+  "lem-pc-separated-quasi-separated",
+  "lem-sbc-generic-flat-finite-presentation",
+  "lem-sc-finite-pushforward-locally-free",
+  "lem-sc-integral-function-field-affine-fraction",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-trf-etale-local-ring-flatness",
+  "lem-trf-flat-module-torsionfree-domain",
+  "lem-trf-flattening-by-admissible-blowup",
+  "lem-trf-proper-flat-finite-dense-open",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "lem-weil-pbc-finite-proper",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-flat-lfp-open",
+  "lem-weil-pbc-flat-morphism-affine-criterion",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-weil-pbc-generic-finite-morphism-open-neighborhood",
+  "lem-weil-pbc-integral-closure-commutes-localization",
+  "lem-weil-pbc-integral-closure-finite-extension-normal",
+  "lem-weil-pbc-localization-normal-domain",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-proper-composition",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lemma-nagata-admissible-blowup-over-open",
+  "lemma-nagata-blowup-proper",
+  "lemma-nagata-scheme-image-ideal-qc",
+  "lemma-nagata-scheme-image-restrict-open",
+  "lemma-nagata-strict-transform-closure-characterization",
+  "pqf-lem-lft-fp-locnoeth",
+  "prop-nagata-affine-blowup-chart-cover"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q97-7bf9f5600",
+  "group": "Q97",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q97-7bf9f5600 (reviewer sub-agent of L); spot-checked: I read the item in full: 14 steps, no new nodes. Statement, stmt_deps, source and blueprint are unchanged from the Q46-created copy; only proof, proof_deps, proof_origin, status, split_report and mathlib_searches changed. proof_deps is exactly the union of the steps' uses. Sources read: ILO II proof of 3.2.1 (p. 29–30: 'quitte à remplacer X par une modification … platifier (Raynaud–Gruson I 5.2.2) … normaliser') and Thm 3.2.3 (pp. 30–31). Stacks flat.tex 081R (l. 9123), 05BA (l. 160) and 0B48 (l. 3054) each match the hypotheses of their nodes. No SGA source is cited. Steps: S1 generic fibre = Spec L_i (B⊗K_i is a finite-dimensional domain inside L_i). S2 Noetherianity, and 02NW applies (qcqs, finite generic fibre). S3 generic flatness on the finite coproduct, which meets the qcqs and quasi-compact-U hypotheses of 081R; I = ∅ is handled. S4 blowup B is O-admissible and integral (charts A[I/a] ⊆ A_a with a ≠ 0, D(a) dense over O); quasi-excellence passes to B by 07QU. S5 the strict transform splits over the components and 05BA transfers flatness to E_{i,B}. S6 closed immersion followed by base change of f_i, so proper and lfp. S7 D_i ≅ V_i ∩ e_i^{-1}O is dense (étale maps are open), so 0B48 gives finiteness. S8 the normalization is finite via Nagata/N-2; normal domains, localization. S9 Ā_d = A_d with D(d) ⊆ b^{-1}O ≅ O, so p is an isomorphism over a dense open. S10 every normal component meets the irreducible open e_i^{-1}H, so E_i′ is integral. S11 base change gives finite flat lfp; the generic fibre is L_i because H ⊆ O. S12 rank is constant n_i > 0, so a_i is surjective and of degree n_i. S13 flat ⇒ torsion-free, so C ⊆ L_i and F_i′ is integral. S14 closed by base change; J = ker(R → L_i); the empty case gives the unit ideal. Duplicate search: lem-trf-finite-after-blowup and lem-trf-finite-eta-flatification are weaker (single base, no normal birational X′). Batch-5: I checked the closure of the five flagged citations (2034 nodes). All its sec-trace-formula nodes and the one sec-poincare-duality node are generic algebra or geometry (Raynaud–Gruson devissage, Fitting/Mittag-Leffler, G-ring covers 07QU, blowups, 05BA, 0B48, flat ⇒ torsion-free) with no trace-formula or duality content, so every citation is accepted. The split_report tool_uses (quasi-excellent ⇒ Nagata, étale-normal-components, separated ⇒ quasi-separated, etc.) are generic and accepted. No changes."
  }
 }
