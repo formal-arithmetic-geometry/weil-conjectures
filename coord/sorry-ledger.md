@@ -8,8 +8,8 @@ Holes now: library **740**, closure **145**, holes in definitions **8**, definit
 
 Definitions with holes (def/instance/structure field):
 
-- `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible::AlgebraicGeometry.ProEtale.CondensedRing.isMonoidalClosed_boundedConstructible` (instance, line 457)
-- `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible::AlgebraicGeometry.ProEtale.CondensedRing.isMonoidal_boundedConstructible` (instance, line 448)
+- `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible::AlgebraicGeometry.ProEtale.CondensedRing.isMonoidalClosed_boundedConstructible` (instance, line 458)
+- `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible::AlgebraicGeometry.ProEtale.CondensedRing.isMonoidal_boundedConstructible` (instance, line 449)
 - `WeilConjectures.TraceFormula.Slop.Basic::AlgebraicGeometry.ProEtale.CondensedRing.Slop.boundedConstructibleLowerShriekComp` (def, line 144)
 - `WeilConjectures.TraceFormula.Slop.Basic::AlgebraicGeometry.ProEtale.CondensedRing.Slop.unitEndRingEquiv` (def, line 160)
 - `WeilConjectures.TraceFormula.Slop.Correspondence::AlgebraicGeometry.ProEtale.CondensedRing.Slop.Correspondence.traceClass` (def, line 206)
@@ -539,7 +539,6 @@ Modules pruned since the imports baseline:
 - `Sheaf.AlgebraicGeometry.FpqcTensorSections`
 - `Sheaf.AlgebraicGeometry.FullAffineEtaleSite`
 - `Sheaf.AlgebraicGeometry.FullAffineEtaleTopos`
-- `Sheaf.AlgebraicGeometry.FunctionField`
 - `Sheaf.AlgebraicGeometry.GeometricPointMorphismStalkBijection`
 - `Sheaf.AlgebraicGeometry.GlobalGenerationNonvanishingCover`
 - `Sheaf.AlgebraicGeometry.GlobalHomPullbackAdjunction`
@@ -663,7 +662,6 @@ Modules pruned since the imports baseline:
 - `Sheaf.AlgebraicGeometry.Sites.EtaleSheavesGsetsPoint`
 - `Sheaf.AlgebraicGeometry.Sites.FiniteEtaleCoproductSections`
 - `Sheaf.AlgebraicGeometry.Sites.SmallEtaleRepresentablePresheafSheaf`
-- `Sheaf.AlgebraicGeometry.SmoothConnectedCurveLocalRings`
 - `Sheaf.AlgebraicGeometry.SmoothDifferentialsFreeRankFibreDimension`
 - `Sheaf.AlgebraicGeometry.SmoothProjectiveCurve`
 - `Sheaf.AlgebraicGeometry.SmoothZeroDifferentialsAffineOpenEtale`
@@ -765,7 +763,6 @@ Modules pruned since the imports baseline:
 - `Sheaf.CategoryTheory.MittagLefflerLimitExact`
 - `Sheaf.CategoryTheory.ModuleDirectedColimitUnderlyingSets`
 - `Sheaf.CategoryTheory.OpcyclesTorSurjection`
-- `Sheaf.CategoryTheory.PreDerivedAdjointFunctorsGeneral`
 - `Sheaf.CategoryTheory.PresheafChangeOfRingsAdjunction`
 - `Sheaf.CategoryTheory.PushoutShortExactSequence`
 - `Sheaf.CategoryTheory.QuotientJShriek`
