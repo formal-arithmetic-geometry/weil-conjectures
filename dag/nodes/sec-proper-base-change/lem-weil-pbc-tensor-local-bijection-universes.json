@@ -2,14 +2,14 @@
  "id": "lem-weil-pbc-tensor-local-bijection-universes",
  "kind": "statement",
  "title": "Tensoring a local module bijection commutes with sheafification in independent universes",
- "statement": "Let C be a category, J a Grothendieck topology on C, R a presheaf of commutative rings whose underlying ring presheaf is a J-sheaf, and P,Q,N presheaves of R-modules [def-weil-sheaf-of-modules-category]. All site, ring and module universes are independent. Suppose $f:P\\to Q$ is locally injective and locally surjective for J. Assume weak sheafification of abelian-group-valued presheaves in the module universe and that J-local equivalences of such presheaves are exactly the locally bijective maps. Then the module sheafification [def-weil-presheaf-modules-sheafification] of f tensor id_N, for the sectionwise tensor product [def-pur-sheaf-tensor-product], is an isomorphism.",
+ "statement": "Let C be a category, J a Grothendieck topology on C, R a presheaf of commutative rings whose underlying ring presheaf is a J-sheaf, and P,Q,N presheaves of R-modules [def-weil-sheaf-of-modules-category]. All site, ring and module universes are independent. Suppose $f:P\\to Q$ is locally injective and locally surjective for J. Assume weak sheafification of abelian-group-valued presheaves in the module universe and that J-local equivalences of such presheaves are exactly the locally bijective maps. Then the module sheafification [def-weil-presheaf-modules-sheafification] of f tensor id_N, for the sectionwise tensor product [def-pur-presheaf-tensor-product], is an isomorphism.",
  "source": {
   "document": "literature/stacks-project/sites-modules.tex",
   "place": "Tags 03EK (tensor product universal property) and 05V4 (tensor comparison through sheafification)"
  },
  "stmt_deps": [
   "def-weil-sheaf-of-modules-category",
-  "def-pur-sheaf-tensor-product",
+  "def-pur-presheaf-tensor-product",
   "def-weil-presheaf-modules-sheafification"
  ],
  "proof": [
@@ -28,7 +28,7 @@
   {
    "text": "For a map g:P tensor N→H into a module sheaf, apply the first two steps to its bilinear pairing. The descended pairing on Q times N is additive and homogeneous in each variable: check the equations on the intersection of the finitely many image covering sieves, where all operands lift, and use separatedness of H. The tensor universal property gives a unique map Q tensor N→H factoring g. Injectivity follows by the same covering-sieve argument on pure tensors.",
    "uses": [
-    "def-pur-sheaf-tensor-product",
+    "def-pur-presheaf-tensor-product",
     "def-weil-sheaf-of-modules-category"
    ],
    "elementary": true
@@ -43,7 +43,7 @@
  ],
  "proof_deps": [
   "def-weil-sheaf-of-modules-category",
-  "def-pur-sheaf-tensor-product",
+  "def-pur-presheaf-tensor-product",
   "def-weil-presheaf-modules-sheafification"
  ],
  "proof_origin": {
@@ -124,14 +124,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-15",
+  "date": "2026-10-18",
   "by": "L",
-  "reviewer": "X-cb0f3",
-  "group": "M2",
+  "reviewer": "COMPILER",
+  "group": "C2",
   "result": "pass",
-  "landing": "20261015T224109-L-2885323",
-  "kind": "interface",
-  "note": "independent Codex review: Delivered files compiled cleanly; the target signature is unchanged, the sole importer compiles, DAG/report/decomposition agree, and no mechanical or forbidden-declaration faults were found."
+  "landing": "20261018T145053-L-3636203",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
  "lean_audit": {
   "master": {
@@ -144,5 +144,76 @@
    "decls": [],
    "missing": []
   }
+ },
+ "statement_change": {
+  "date": "2026-10-18",
+  "by": "C2 stage 2",
+  "old_statement": "Let C be a category, J a Grothendieck topology on C, R a presheaf of commutative rings whose underlying ring presheaf is a J-sheaf, and P,Q,N presheaves of R-modules [def-weil-sheaf-of-modules-category]. All site, ring and module universes are independent. Suppose $f:P\\to Q$ is locally injective and locally surjective for J. Assume weak sheafification of abelian-group-valued presheaves in the module universe and that J-local equivalences of such presheaves are exactly the locally bijective maps. Then the module sheafification [def-weil-presheaf-modules-sheafification] of f tensor id_N, for the sectionwise tensor product [def-pur-sheaf-tensor-product], is an isomorphism.",
+  "what": "The sectionwise presheaf tensor is defined by def-pur-presheaf-tensor-product, not by the sheaf-tensor node. Correct the citation and matching edges. The latter now uses this proved descent lemma, so the incorrect edge would also create a spurious definitional/proof cycle.",
+  "source": {
+   "document": "literature/stacks-project/sites-modules.tex",
+   "place": "Tags 03EK (tensor product universal property) and 05V4 (tensor comparison through sheafification)"
+  },
+  "citers": [
+   {
+    "id": "lem-weil-pbc-flat-local-relations-universes",
+    "holds": true,
+    "note": "Only the definition citation for the sectionwise presheaf tensor is corrected; the mathematical assertion and every Lean signature are unchanged."
+   },
+   {
+    "id": "lem-weil-pbc-scalar-tensor-comparison-universes",
+    "holds": true,
+    "note": "Only the definition citation for the sectionwise presheaf tensor is corrected; the mathematical assertion and every Lean signature are unchanged."
+   },
+   {
+    "id": "lem-weil-pbc-site-flat-equational-criterion-universes",
+    "holds": true,
+    "note": "Only the definition citation for the sectionwise presheaf tensor is corrected; the mathematical assertion and every Lean signature are unchanged."
+   },
+   {
+    "id": "new-ringed-slice-extension-tensor-hom-data",
+    "holds": true,
+    "note": "Only the definition citation for the sectionwise presheaf tensor is corrected; the mathematical assertion and every Lean signature are unchanged."
+   }
+  ],
+  "old_stmt_deps": [
+   "def-weil-sheaf-of-modules-category",
+   "def-pur-sheaf-tensor-product",
+   "def-weil-presheaf-modules-sheafification"
+  ],
+  "old_proof": [
+   {
+    "text": "A locally bijective map of presheaves of sets induces bijections of maps to each sheaf of sets. Given a map from its source, choose local lifts of each target section, apply the map, and glue. Local injectivity and separatedness show independence and compatibility; uniqueness proves naturality. This argument places no relation between the site and value universes.",
+    "uses": [
+     "def-weil-sheaf-of-modules-category"
+    ],
+    "elementary": true
+   },
+   {
+    "text": "The product of a locally bijective set-presheaf map with the identity of another presheaf is again locally bijective: use the equalizer sieve for the first coordinates for injectivity, and restrict the second coordinate along the image sieve of the first for surjectivity.",
+    "uses": [],
+    "elementary": true
+   },
+   {
+    "text": "For a map g:P tensor N→H into a module sheaf, apply the first two steps to its bilinear pairing. The descended pairing on Q times N is additive and homogeneous in each variable: check the equations on the intersection of the finitely many image covering sieves, where all operands lift, and use separatedness of H. The tensor universal property gives a unique map Q tensor N→H factoring g. Injectivity follows by the same covering-sieve argument on pure tensors.",
+    "uses": [
+     "def-pur-sheaf-tensor-product",
+     "def-weil-sheaf-of-modules-category"
+    ],
+    "elementary": true
+   },
+   {
+    "text": "Apply the sheafification adjunction to identify the preceding bijections with precomposition by the sheafification of f tensor id_N on maps into every module sheaf. The coyoneda criterion implies that this morphism is invertible.",
+    "uses": [
+     "def-weil-presheaf-modules-sheafification"
+    ],
+    "elementary": true
+   }
+  ],
+  "old_proof_deps": [
+   "def-weil-sheaf-of-modules-category",
+   "def-pur-sheaf-tensor-product",
+   "def-weil-presheaf-modules-sheafification"
+  ]
  }
 }

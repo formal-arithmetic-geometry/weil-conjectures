@@ -57,16 +57,41 @@
     "def-weil-presheaf-modules-sheafification"
    ],
    "elementary": true
+  },
+  {
+   "text": "For cochainTensorLocalizationIsMonoidal, identify the existing Mathlib presheaf tensor with siteTensorPresheaf by identity section maps, checking restriction naturality on pure tensors. A local equivalence is locally injective and surjective. Apply the proved sheafification_tensorHom_isIso to its first-factor tensor map and the module localization criterion to recover membership in W. Transport along the tensor identification; the presheaf braiding gives left whiskering from right whiskering. Assemble IsMonoidal.",
+   "uses": [
+    "def-pur-presheaf-tensor-product",
+    "def-weil-presheaf-modules-sheafification",
+    "lem-weil-pbc-tensor-local-bijection-universes"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For colimit preservation, the existing localization sheafification L is monoidal. Its tensorator and the sheafification adjunction counit give a natural isomorphism L followed by tensorLeft M with tensorLeft M.val followed by L. The presheaf tensorLeft preserves coefficient-sized colimits, hence smallest-universe colimits, and sheafification is a left adjoint. Apply Mathlib Adjunction.preservesColimitsOfSize_iff for the fully faithful right adjoint. Right tensor colimit preservation follows from the symmetric braiding.",
+   "uses": [
+    "def-pur-presheaf-tensor-product",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The preceding colimit preservation makes tensorLeft preserve binary biproducts in the additive category of module sheaves, hence makes it additive by Functor.additive_of_preservesBinaryBiproducts. The braiding transports additivity to tensorRight. Their map_zero and map_add laws are the four fields of cochainModulesPreadditive.",
+   "uses": [
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-pur-presheaf-tensor-product",
-  "def-weil-presheaf-modules-sheafification"
+  "def-weil-presheaf-modules-sheafification",
+  "lem-weil-pbc-tensor-local-bijection-universes"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-modules.tex",
-  "place": "Section 03EK, sectionwise tensor construction; B2 mixed-universe proof uses semilinear TensorProduct.map, tensor extensionality, and Mathlib local-bijectivity instances. Source checked at https://stacks.math.columbia.edu/tag/03EK; the same-universe scalar-extension laws follow the existing Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct proofs."
+  "place": "Section 03EK, sectionwise tensor and sheafification universal properties. Existing construction steps retained; C2 proves the independent-universe cochain tensor instances by the proved local tensor descent theorem, Mathlib monoidal localization, reflective-adjunction colimit preservation, and binary biproduct additivity."
  },
  "mathlib_searches": [
   {
@@ -276,12 +301,12 @@
   "note": "Head bfecfad67760 repairs the landing tool's RETURN of 0e2341929dd3 (word-for-word duplicate statements): total_isIso is removed and totalIso uses the published tensorPullbackTotal_isIso; existsUnique and unit now bind their full context explicitly (independent uC/vC/uD/vD/u, fresh-namespace structure), which is genuinely more general than the published shared-universe versions. import_prune_check.py exits 0 on all 5 modules. nt_compile --json of all 5 modules: no errors or warnings (data module 36.3 s, arrows 16.6 s, item 2.8 s). All lean.statement fields match their file signatures and all declaration inventories match their files. The clause-by-clause match is unchanged and confirmed: RingedPullback pinned to changeOfRings, comparison = totalIso.symm with unique k, IsCoherent (naturality, associator, Koszul braiding, both unitors), the composition equation via the conjugate normalized on generators, and the coefficient/transition equations with no inverse; no added hypotheses; edge cases covered. FIX (H3/H8, unrepaired from 0e2341929dd3, item module byte-identical): the primary declaration cochainPullbackTensorCoherenceOfUniverses is only the ULift-lifted-ring special case, and its docstring claims an original-size transport that the statement lacks. fixes/ has the complete item module with that docstring corrected, and lean-record.json making cochainPullbackTensorCoherence primary with its verbatim statement; it compiles cleanly with its siblings."
  },
  "reviewed_proof": {
-  "date": "2026-10-15",
+  "date": "2026-10-18",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "B2",
+  "group": "C2",
   "result": "pass",
-  "landing": "20261015T154150-L-158204",
+  "landing": "20261018T145053-L-3636203",
   "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
