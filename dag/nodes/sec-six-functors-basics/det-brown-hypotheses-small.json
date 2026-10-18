@@ -451,5 +451,25 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-815504937",
+  "group": "Q02",
+  "result": "fix",
+  "note": "Read the node, all 11 stmt_deps, source place, report (Worker report + Second reading by Q02 present), module, and the exact declarations (CondensedConstantConstructibility, TorAmplitude, Condensed/EllAdic, FiniteSubextension, ContinuousCoefficientCommRing). Hypotheses (CompactSpace + IsLocallyNoetherian, prime l, FiniteIntermediateField E, six Mon-iso coefficient cases incl. finite-subextension-valued Q̄_l), Dctf = constantModelBoundedConstructible ⊓ finiteTorAmplitude (the recorded ConstantModelConstructibleFiniteTor), and thick = IsTriangulated ∧ IsClosedUnderIsomorphisms ∧ IsStableUnderRetracts all correct; the qlbar dependency record matches EllAdic verbatim; edge cases fine; no hollow definitions; 13-step docstring; sorry only; lean.statement verbatim. Finding (H3/H9 universe): EssentiallySmall had no universe, so Lean generalized it to a fresh parameter (probe: det_brown_hypotheses_small.{u,u_1}, conclusion EssentiallySmall.{u_1}), claiming smallness in every universe, false for u_1<u. FIX: fixes/BrownHypothesesSmall.lean with EssentiallySmall.{u + 1} (the size convention's V; matches det-lem-coefficient-heart-small and det-brown-hypotheses-ambient), plus lean-record.json (new statement, note) and report.md (maintainer-fix section). Delivered and fixed files both compile clean with nt_compile --json; after the fix the only universe parameter is u. No citers."
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.BrownHypothesesSmall",
+  "declaration": "AlgebraicGeometry.ProEtale.det_brown_hypotheses_small",
+  "statement": "theorem det_brown_hypotheses_small (l : ℕ) [Fact l.Prime] (A : Type u) [CommRing A] [Finite A] [TopologicalSpace A] [DiscreteTopology A] (_hA : ∃ n : ℕ, (l ^ n : A) = 0) (E : PadicAlgCl.FiniteIntermediateField l) (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ] (_hΛ : Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousCoefficientRingObj A)) ∨ Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj ℤ_[l])) ∨ Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.padicIntegersRingObj l E)) ∨ Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj ℚ_[l])) ∨ Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj E)) ∨ Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.padicAlgClRingObj l))) (X : Scheme.{u}) [CompactSpace X] [IsLocallyNoetherian X] : (constantModelBoundedConstructible Λ X ⊓ (fun K => DerivedCategory.finiteTorAmplitude _ K)).IsTriangulated ∧ (constantModelBoundedConstructible Λ X ⊓ (fun K => DerivedCategory.finiteTorAmplitude _ K)).IsClosedUnderIsomorphisms ∧ (constantModelBoundedConstructible Λ X ⊓ (fun K => DerivedCategory.finiteTorAmplitude _ K)).IsStableUnderRetracts ∧ ObjectProperty.EssentiallySmall.{u + 1} (constantModelBoundedConstructible Λ X ⊓ (fun K => DerivedCategory.finiteTorAmplitude _ K))",
+  "branch": "newtargets-dag",
+  "by": "Q02",
+  "date": "2026-10-18",
+  "existing": false,
+  "file": "lean/Sheaf/SixFunctors/BrownHypothesesSmall.lean",
+  "note": "Maintainer second-reader fix (NT-cc-Q02 review of 815504937e63): the size conclusion was written `ObjectProperty.EssentiallySmall (…)` with no universe, so Lean generalized it to a fresh universe parameter: the theorem was det_brown_hypotheses_small.{u, u_1} and claimed essential smallness in every universe u_1, including u_1 < u, which is false (e.g. Spec of a field in Type 1 with more quadratic extensions than any Type-0 cardinal has too many rank-one constructible F_3-sheaves). The node asks for smallness in the fixed universe V of def-weil-size-convention, in which derived categories are formed; for X : Scheme.{u} and coefficient sheaves in Ab.{u+1} that is u+1, exactly as in the sibling det-lem-coefficient-heart-small (EssentiallySmall.{u + 1}) and det-brown-hypotheses-ambient (LocallySmall.{u + 1}). The conclusion is now ObjectProperty.EssentiallySmall.{u + 1}; nothing else changed.",
+  "fixed_by": "NT-stage2-cc-815504937"
  }
 }
