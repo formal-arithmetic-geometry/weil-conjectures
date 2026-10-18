@@ -8,7 +8,6 @@ module
 public import WeilConjectures.SixFunctors.ProEtale.Comparison
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.SiteComparison
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.CoverConservative
-
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusSingle
 
 /-!
@@ -21,12 +20,13 @@ comparison `ν^* Ru_* ≅ Ru_* ν^*` for quasi-compact quasi-separated `u`
 (`AlgebraicGeometry.ProEtale.nonempty_iso_comparisonUpperStar_comp_rightDerivedLowerStar`) they
 are also stable under pushforward along such `u`.
 
-Consequently, being of étale origin is local for finite pro-étale covering families
-`p s : V s ⟶ X` by quasi-compact quasi-separated morphisms
-(`AlgebraicGeometry.ProEtale.essImage_comparisonUpperStar_of_cover`): a sheaf `F` is the kernel
-of a morphism `∏ₛ (p s)_* (p s)^* F ⟶ ∏ₛ (p s)_* (p s)^* C` between sheaves of étale origin, where
-`C` is the cokernel of the unit `F ⟶ ∏ₛ (p s)_* (p s)^* F`, whose pullbacks are of étale origin by
-weakly étale base change.
+Consequently, being of étale origin can be checked on a finite family `p s : V s ⟶ X` of
+quasi-compact quasi-separated morphisms whose pullbacks jointly detect zero objects
+(`AlgebraicGeometry.ProEtale.essImage_comparisonUpperStar_of_detect`), for instance a finite
+pro-étale covering family (`AlgebraicGeometry.ProEtale.essImage_comparisonUpperStar_of_cover`):
+the unit `F ⟶ ∏ₛ (p s)_* (p s)^* F` is then a monomorphism, so `F` is the kernel of a morphism
+`∏ₛ (p s)_* (p s)^* F ⟶ ∏ₛ (p s)_* (p s)^* C` between sheaves of étale origin, where `C` is the
+cokernel of the unit.
 -/
 
 @[expose] public section
