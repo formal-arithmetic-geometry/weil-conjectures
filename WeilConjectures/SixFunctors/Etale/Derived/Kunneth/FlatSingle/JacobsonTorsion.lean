@@ -112,7 +112,7 @@ variable (Λ) [Finite Λ]
 -- Use the preadditive structure of `ModuleCat Λ` coming from `Abelian`, as the constructions for a
 -- general abelian coefficient category do, so that the objects built here are syntactically
 -- compatible with them.
-attribute [local instance 10000] Abelian.toPreadditive
+attribute [local instance 10000] Abelian.toPreadditive SymmetricCategory.toBraidedCategory
 
 /-- A finite `Λ`-module killed by the Jacobson radical `J` of `Λ` is a retract of a finite sum of
 copies of `Λ / J`. -/

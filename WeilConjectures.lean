@@ -8824,7 +8824,6 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.FiniteCoefficien
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.FiniteCoefficients.Defs
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.FiniteCoefficients.Projection
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.FiniteCoefficients.Residue
-public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.FiniteCoefficients.Scratch
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.FlatSingle
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.FlatSingle.BaseChange
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.FlatSingle.Coefficients

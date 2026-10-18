@@ -312,9 +312,10 @@ section ModuleCat
 
 /-! ### Coefficients in a finite ring -/
 
--- The generic constructions above use the preadditive structure of `A` coming from `Abelian A`;
--- using the same one for `ModuleCat Λ` avoids expensive comparisons of the two.
-attribute [local instance 10000] Abelian.toPreadditive
+-- The generic constructions above use the preadditive structure of `A` coming from `Abelian A`
+-- and the braiding coming from `SymmetricCategory A`; using the same ones for `ModuleCat Λ` avoids
+-- expensive comparisons of the two.
+attribute [local instance 10000] Abelian.toPreadditive SymmetricCategory.toBraidedCategory
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 
