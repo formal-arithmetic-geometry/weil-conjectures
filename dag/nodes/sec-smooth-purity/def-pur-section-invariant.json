@@ -320,25 +320,32 @@
  "reviewed_lean": {
   "date": "2026-10-18",
   "by": "L",
-  "reviewer": "NT-stage2-cc-693b6794d",
-  "group": "Q21",
+  "reviewer": "NT-stage2-cc-7db85e291",
+  "group": "Q28",
   "result": "pass",
-  "note": "Read the item node, all 18 stmt_deps, the report and all five snapshot modules in full; diffed the three 1(B) dependency modules against the landed legacy modules (co-smoothness: import family and seven renames only; section invariant and diagonal base change keep the same canonical chains, in etale coordinates with pro-etale transport). Every node clause matches the Lean: Lambda=A_{E,n}, n>=1; smooth separated finite-type f,g of dims d,e over finite-type k-schemes; sigma = conjugate compositor inverse after the published theta (omega first); alpha = diagonal inverse-beta chain; gammaF, gammaG, kappa from the genuine Cartesian squares; Equation kappa;alpha_gf = (alpha_f (x) f*alpha_g);sigma_fg compared on the pro-etale site; OpenEquation gives seven squares for arbitrary compatible opens without assuming Cartesian squares; ChartEquation uses ordered literal difference coordinates and nu. Edge cases d=0, e=0, empty schemes or opens, n>=1 and universes (schemes u, coefficients u+1, pro-etale site u+1/u) are covered. Mechanical finding: the statement uses the unique iso that lem-amb-etale-adjoint-locality constructs (Classical.choose of its exists-unique statement for etaleRestriction), not just definitions in its module, so PASS on that point. No hollow definitions; every sorry is a named theorem with a proof docstring; thetaIsIso matches the upstream statement for every K; record fields, verbatim signatures, declaration lists, docstrings and line lengths all check. nt_compile.py --json on all five files: exit 0, no errors or warnings (item 25.3 s), consistent with the delivery's dry run at 58f8c1813c. Notes only: landed citers still use the legacy dependency declarations; diagonalComparedRestriction duplicates finiteDiagonalRestriction; the new compositor node could cite def-weil-pbc-adjunction-conjugate."
+  "note": "Delta vs PASSed head 2729a3d: drops duplicate purityDncIntrinsicCompactifiable (uses landed identical-signature purityDncCompactifiable) and an unused import; this fixes L's return reason. All clauses match the node: general-N twist with N=n and no e|n; kappa = boundary, insertion at 1, comparison, then unique pure-tensor-normalized coefficient iso; base change, N-independence (power transition checked), root torsor; affine-local regularity with c=0; Ls*Rg!A_B with the node's exact hypotheses; extended-Rees DNC family with finiteTorConstructible Pic clause. No hollow defs; sorry only in theorems (11/3/4); docstrings present; statements verbatim; no cycle; universes kept. Mechanical finding: siteDerivedTensorIndependentCoefficients is .choose of site_derived_tensor_descent_independentCoefficients, so the statement genuinely depends on the theorem's constructed object: PASS on that point. nt_compile --json: SI 40.4 s and DNC 17.3 s rc 0; PurityConventions timed out once with the others at load ~130, then rc 0 at 59.0 s alone (25 s CPU; earlier heads 15.7/40.8 s): near the limit only because of load. Non-blocking: re-point Q21/Q31 citers (lem-pur-diagonal-base-change, thm-pur-dnc-invariance, def-pur-finite-section-comparison) in stage 3; def-pur-section-invariant lean.note slightly stale."
  },
  "lean": {
-  "module": "Sheaf.Paper.PuritySectionInvariantCompared",
-  "declaration": "WeilConjectures.PurityFiniteSetting.comparedSectionInvariant",
+  "module": "Sheaf.Paper.PuritySectionInvariantIntrinsic",
+  "declaration": "WeilConjectures.PurityFiniteSetting.sectionInvariantFinite",
   "declarations": [
-   "WeilConjectures.PurityFiniteSetting.comparedSectionInvariant",
-   "WeilConjectures.PurityFiniteSetting.comparedSectionPresentation",
-   "WeilConjectures.PurityFiniteSetting.comparedSectionInvariant_invertible"
+   "WeilConjectures.PurityFiniteSetting.intrinsicSiteSmall",
+   "WeilConjectures.PurityFiniteSetting.intrinsicCoefficientFinite",
+   "WeilConjectures.PurityFiniteSetting.intrinsicCoefficientUnit",
+   "WeilConjectures.PurityFiniteSetting.intrinsicCoefficientTensor",
+   "WeilConjectures.PurityFiniteSetting.intrinsicDualizing",
+   "WeilConjectures.PurityFiniteSetting.sectionInvariantIntrinsic",
+   "WeilConjectures.PurityFiniteSetting.sectionInvariantIntrinsic_invertible",
+   "WeilConjectures.PurityFiniteSetting.sectionCompactifiable",
+   "WeilConjectures.PurityFiniteSetting.sectionInvariantFinite",
+   "WeilConjectures.PurityFiniteSetting.sectionInvariantFinite_invertible"
   ],
-  "file": "lean/Sheaf/Paper/PuritySectionInvariantCompared.lean",
-  "statement": "def comparedSectionInvariant (P : PurityFiniteSetting.{u}) {V B : Scheme.{u}} (g : V ⟶ B) [HasCompactification g] (s : B ⟶ V)",
+  "file": "lean/Sheaf/Paper/PuritySectionInvariantIntrinsic.lean",
+  "statement": "def sectionInvariantFinite (P : PurityFiniteSetting.{u}) {V B : Scheme.{u}} (g : V ⟶ B) [Smooth g] [IsSeparated g] [QuasiCompact g] (aB : B ⟶ Spec (.of P.field.k)) [LocallyOfFiniteType aB] [QuasiCompact aB] (s : B ⟶ V) [IsClosedImmersion s] (hs : s ≫ g = 𝟙 B) : proEtaleDerivedCategory B P.Ring",
   "branch": "newtargets-dag",
-  "by": "Q21",
+  "by": "Q28",
   "date": "2026-10-18",
   "existing": false,
-  "note": "The recorded module imports the retired pro-etale operations through CohomologicalSmoothness and cannot be combined with the finite-coefficient exceptional functor. This module defines the same actual Ls* omega_g on the small pro-etale site, supplies its canonical etale-origin presentation using the published site/pullback comparison, and states tensor invertibility with a Dctf inverse."
+  "note": "Section 1(B): importing the recorded PuritySectionInvariant mixes the retired pro-etale UpperLowerStar.Iso with FiniteCoefficient.UpperLowerStar.Iso and fails with duplicate upperStarIsoLowerStarInv. Its fixed-scalar section invariant also does not directly inhabit the intrinsic finiteTorConstructible category. This replacement uses the canonical intrinsic coefficient realization, the published finite exceptional functor and exact derived pullback. sectionInvariantFinite obtains compactifiability from the source finite-type hypotheses; no ambient exceptional-adjoint admissibility or orientation is added. The finite coefficient stage is stated here; other stages remain the specified transports of def-pur-conventions."
  }
 }

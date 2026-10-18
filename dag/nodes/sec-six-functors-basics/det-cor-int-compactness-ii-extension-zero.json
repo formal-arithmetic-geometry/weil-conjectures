@@ -22,7 +22,8 @@
   "sk-def-sfb-dc-setting",
   "sk-def-sfb-module-lower-shriek",
   "sk-def-sfb-constructible",
-  "det-def-localizing-closure-existence"
+  "det-def-localizing-closure-existence",
+  "def-sfb-integral-derived-coefficient-data"
  ],
  "proof": [
   {
@@ -281,5 +282,23 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.Paper.IntegralExtensionByZero",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.integralExtensionByZero",
+  "file": "lean/Sheaf/Paper/IntegralExtensionByZero.lean",
+  "statement": "theorem integralExtensionByZero (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ l)] {U X : Scheme.{u}} [U.Over (Spec (.of k))] [X.Over (Spec (.of k))] [LocallyOfFiniteType (U ↘ Spec (.of k))] [QuasiCompact (U ↘ Spec (.of k))] [IsSeparated (U ↘ Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))] (j : U ⟶ X) [IsOpenImmersion j] [QuasiCompact j] [j.IsOver (Spec (.of k))] : (openImmersionLowerShriek (integralCoefficientRing l E) j).PreservesHomology ∧ Functor.IsTriangulated (openImmersionLowerShriek (integralCoefficientRing l E) j).mapDerivedCategory ∧ (∀ I : Type (u + 1), PreservesColimitsOfShape (Discrete I) (openImmersionLowerShriek (integralCoefficientRing l E) j).mapDerivedCategory) ∧ PreservesLimitsOfSize.{u + 1, u + 1} (openImmersionLowerShriek (integralCoefficientRing l E) j).mapDerivedCategory ∧ (∀ n : ℕ, Nonempty ((openImmersionLowerShriek (integralCoefficientRing l E) j).mapDerivedCategory ⋙ integralReductionFunctor l E X n ≅ integralReductionFunctor l E U n ⋙ (openImmersionLowerShriek (integralCoefficientRing l E) j).mapDerivedCategory)) ∧ (∀ K : integralDerived l E U, constantModelBoundedConstructible (integralCoefficientRing l E) U K → constantModelBoundedConstructible (integralCoefficientRing l E) X ((openImmersionLowerShriek (integralCoefficientRing l E) j).mapDerivedCategory.obj K)) ∧ (∀ K : integralDerived l E U, localizingClosure (constantModelBoundedConstructible (integralCoefficientRing l E) U) K → localizingClosure (constantModelBoundedConstructible (integralCoefficientRing l E) X) ((openImmersionLowerShriek (integralCoefficientRing l E) j).mapDerivedCategory.obj K))",
+  "branch": "newtargets-dag",
+  "by": "Q35",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6f6c33148",
+  "group": "Q35",
+  "result": "fix",
+  "note": "Byte-identical re-push of 4dcdcec39f2a (diff -rq: only generated coord/blueprint-index.tsv differs). The earlier reviewer FIX was refused by --apply-fixes only because the node file was at fixes/dag/nodes/... instead of DIR/<new node id>.json (prepare.log batch-20261018-133358). Re-checked the substance: hypotheses equal sk-def-sfb-dc-setting plus a quasi-compact open immersion, nothing stronger; clauses (1)-(3) rendered faithfully (PreservesHomology, IsTriangulated, Type(u+1) sums, PreservesLimitsOfSize.{u+1,u+1}, natural reduction iso for all n, Dbc and Loc(Dbc) implications); edge cases admitted; aliases are abbrevs of DerivedNakayama.integerRing/Derived/reductionFunctor, no duplication; lean.statement verbatim for item and new node; only sorry; docstrings present. nt_compile --json exit 0: IntegralDerivedCoefficientData 5.9 s, IntegralExtensionByZero 11.2 s, no warnings. FIX (B2/B3, H12): fixes/def-sfb-integral-derived-coefficient-data.json gives the new node a self-contained statement citing def-weil-l-adic-coefficient-extension, sk-def-sfb-condensed-ring, sk-def-sfb-module-objects, def-weil-pbc-proetale-site, sk-def-sfb-pulled-back-coefficients, sk-def-sfb-derived-categories, def-sfb-derived-tensor-modules and det-pe-derived-nakayama-resolution (owner of the Lean declarations). Citations equal stmt_deps; all ids exist; no cycle (488-node reachability check). Lean unchanged."
  }
 }

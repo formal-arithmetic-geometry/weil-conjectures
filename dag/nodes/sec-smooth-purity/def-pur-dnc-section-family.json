@@ -281,34 +281,34 @@
  "chapter": "sec-smooth-purity",
  "unit": "sk-def-purity-conv",
  "reviewed_lean": {
-  "date": "2026-10-16",
+  "date": "2026-10-18",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-16a171b8b",
-  "group": "Q31",
+  "reviewer": "NT-stage2-cc-7db85e291",
+  "group": "Q28",
   "result": "pass",
-  "note": "Wrote review.md. Checked immutable sources, all statement dependencies, canonical constructions, hypotheses, conclusions, edge cases, universes, report sections, and verbatim signatures. All five modules passed per-file scompile.py checks without diagnostics. No repairs required; branch unchanged."
+  "note": "Delta vs PASSed head 2729a3d: drops duplicate purityDncIntrinsicCompactifiable (uses landed identical-signature purityDncCompactifiable) and an unused import; this fixes L's return reason. All clauses match the node: general-N twist with N=n and no e|n; kappa = boundary, insertion at 1, comparison, then unique pure-tensor-normalized coefficient iso; base change, N-independence (power transition checked), root torsor; affine-local regularity with c=0; Ls*Rg!A_B with the node's exact hypotheses; extended-Rees DNC family with finiteTorConstructible Pic clause. No hollow defs; sorry only in theorems (11/3/4); docstrings present; statements verbatim; no cycle; universes kept. Mechanical finding: siteDerivedTensorIndependentCoefficients is .choose of site_derived_tensor_descent_independentCoefficients, so the statement genuinely depends on the theorem's constructed object: PASS on that point. nt_compile --json: SI 40.4 s and DNC 17.3 s rc 0; PurityConventions timed out once with the others at load ~130, then rc 0 at 59.0 s alone (25 s CPU; earlier heads 15.7/40.8 s): near the limit only because of load. Non-blocking: re-point Q21/Q31 citers (lem-pur-diagonal-base-change, thm-pur-dnc-invariance, def-pur-finite-section-comparison) in stage 3; def-pur-section-invariant lean.note slightly stale."
  },
  "lean": {
-  "module": "Sheaf.Paper.PurityDncFamily",
-  "declaration": "WeilConjectures.purityDncFamily",
+  "module": "Sheaf.Paper.PurityDncFamilyIntrinsic",
+  "declaration": "WeilConjectures.purityDncIntrinsicFamily",
   "declarations": [
-   "WeilConjectures.purityDncBase",
-   "WeilConjectures.purityDncSource",
-   "WeilConjectures.purityDncMap",
-   "WeilConjectures.purityDncSection_over",
-   "WeilConjectures.purityDncSection",
-   "WeilConjectures.purityDncSection_comp_map",
-   "WeilConjectures.purityDncDomain",
-   "WeilConjectures.purityDncCompactifiable",
-   "WeilConjectures.purityDncFamily"
+   "WeilConjectures.purityDncIntrinsicBase",
+   "WeilConjectures.purityDncIntrinsicSource",
+   "WeilConjectures.purityDncIntrinsicMap",
+   "WeilConjectures.purityDncIntrinsicSection_over",
+   "WeilConjectures.purityDncIntrinsicSection",
+   "WeilConjectures.purityDncIntrinsicSection_comp_map",
+   "WeilConjectures.purityDncIntrinsicDomain",
+   "WeilConjectures.purityDncIntrinsicFamily",
+   "WeilConjectures.purityDncIntrinsicFamily_pic"
   ],
-  "file": "lean/Sheaf/Paper/PurityDncFamily.lean",
-  "statement": "def purityDncFamily (P : PurityFiniteSetting.{u}) {V B : Scheme.{u}} (g : V ⟶ B) [Smooth g] [IsSeparated g] [QuasiCompact g] (aB : B ⟶ Spec (.of P.field.k)) [LocallyOfFiniteType aB] [QuasiCompact aB] (s : B ⟶ V) [IsClosedImmersion s] (hs : s ≫ g = 𝟙 B)",
+  "file": "lean/Sheaf/Paper/PurityDncFamilyIntrinsic.lean",
+  "statement": "def purityDncIntrinsicFamily (P : PurityFiniteSetting.{u}) {V B : Scheme.{u}} (g : V ⟶ B) [Smooth g] [IsSeparated g] [QuasiCompact g] (aB : B ⟶ Spec (.of P.field.k)) [LocallyOfFiniteType aB] [QuasiCompact aB] (s : B ⟶ V) [IsClosedImmersion s] (hs : s ≫ g = 𝟙 B)",
   "branch": "newtargets-dag",
-  "by": "Q31",
-  "date": "2026-10-16",
+  "by": "Q28",
+  "date": "2026-10-18",
   "existing": false,
-  "note": "Previously unstated dependency. The actual extended-Rees DNC and its augmentation define the family through the recorded finite PurityFiniteSetting.sectionInvariant; finite-type and compactification domains are named consequences of the stated geometric hypotheses."
+  "note": "Section 1(B): the recorded PurityDncFamily imports the unusable mixed-interface PuritySectionInvariant. This module retains its actual extended-Rees DNC, structural map and augmentation section, and forms the actual family using the supplied intrinsic section invariant. Finite-type and compactifiability facts are source consequences, and the Picard assertion retains finiteTorConstructible membership and a two-sided inverse. Other coefficient stages are the transports specified by def-pur-conventions."
  },
  "split_report": {
   "date": "2026-10-17",

@@ -45,7 +45,13 @@
   "def-weil-pbc-regular-sequence",
   "def-amb-finite-locally-free-module",
   "lem-pur-conormal-graded-algebra",
-  "lem-pur-regular-sequence-graded-polynomial"
+  "lem-pur-regular-sequence-graded-polynomial",
+  "def-pur-conventions",
+  "def-pur-affine-line-datum",
+  "def-pur-roots-of-unity-inverse-image",
+  "def-weil-exceptional-inverse-image",
+  "def-weil-pbc-proetale-operations",
+  "lem-weil-pbc-site-derived-tensor-descent"
  ],
  "proof": [],
  "proof_deps": [],
@@ -318,5 +324,52 @@
     }
    ]
   }
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PurityConventions",
+  "declaration": "WeilConjectures.PurityConventions.coordinateKummer",
+  "declarations": [
+   "WeilConjectures.PurityConventions.coefficientModule",
+   "WeilConjectures.PurityConventions.coefficientSection",
+   "WeilConjectures.PurityConventions.finiteLine",
+   "WeilConjectures.PurityConventions.rootRestriction_existsUnique",
+   "WeilConjectures.PurityConventions.rootRestriction",
+   "WeilConjectures.PurityConventions.IsCoefficientComparison",
+   "WeilConjectures.PurityConventions.coefficientComparison_existsUnique",
+   "WeilConjectures.PurityConventions.coefficientComparison",
+   "WeilConjectures.PurityConventions.kummer",
+   "WeilConjectures.PurityConventions.constantPullbackIso",
+   "WeilConjectures.PurityConventions.finiteLinePullback_existsUnique",
+   "WeilConjectures.PurityConventions.finiteLinePullback",
+   "WeilConjectures.PurityConventions.finiteLineCohomologyPullback",
+   "WeilConjectures.PurityConventions.kummer_baseChange",
+   "WeilConjectures.PurityConventions.finiteLineTransition_existsUnique",
+   "WeilConjectures.PurityConventions.finiteLineTransition",
+   "WeilConjectures.PurityConventions.kummer_exponent_independent",
+   "WeilConjectures.PurityConventions.rootTorsor",
+   "WeilConjectures.PurityConventions.rootCover",
+   "WeilConjectures.PurityConventions.rootTorsor_represented",
+   "WeilConjectures.PurityConventions.kummer_torsor",
+   "WeilConjectures.PurityConventions.coefficientPower_isUnit",
+   "WeilConjectures.PurityConventions.defaultAnnihilator",
+   "WeilConjectures.PurityConventions.coordinateKummer",
+   "WeilConjectures.PurityConventions.IsRegularOfPureCodimension",
+   "WeilConjectures.PurityConventions.regularNormalBundle"
+  ],
+  "file": "lean/Sheaf/Paper/PurityConventions.lean",
+  "statement": "def coordinateKummer (P : PurityFiniteSetting.{u}) (Y : Scheme.{u}) (aY : Y ⟶ Spec (.of P.field.k)) [IsSeparated aY] [LocallyOfFiniteType aY] [QuasiCompact aY] : Sheaf.H (finiteLine (PurityFiniteSetting.Punctured Y) P.coefficients.l P.Coefficient (P.level - 1) (defaultAnnihilator P)) 1",
+  "branch": "newtargets-dag",
+  "by": "Q28",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "The convention is assembled from the recorded sites, twists, affine geometry and actual normal cone. This module supplies the normalized general-exponent coefficient comparison, actual Kummer boundary class, natural pullback and power identifications, root-torsor interpretation, and affine-local regularity including codimension zero. Section invariant and deformation family use the supplied intrinsic dependency interfaces."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7db85e291",
+  "group": "Q28",
+  "result": "pass",
+  "note": "Delta vs PASSed head 2729a3d: drops duplicate purityDncIntrinsicCompactifiable (uses landed identical-signature purityDncCompactifiable) and an unused import; this fixes L's return reason. All clauses match the node: general-N twist with N=n and no e|n; kappa = boundary, insertion at 1, comparison, then unique pure-tensor-normalized coefficient iso; base change, N-independence (power transition checked), root torsor; affine-local regularity with c=0; Ls*Rg!A_B with the node's exact hypotheses; extended-Rees DNC family with finiteTorConstructible Pic clause. No hollow defs; sorry only in theorems (11/3/4); docstrings present; statements verbatim; no cycle; universes kept. Mechanical finding: siteDerivedTensorIndependentCoefficients is .choose of site_derived_tensor_descent_independentCoefficients, so the statement genuinely depends on the theorem's constructed object: PASS on that point. nt_compile --json: SI 40.4 s and DNC 17.3 s rc 0; PurityConventions timed out once with the others at load ~130, then rc 0 at 59.0 s alone (25 s CPU; earlier heads 15.7/40.8 s): near the limit only because of load. Non-blocking: re-point Q21/Q31 citers (lem-pur-diagonal-base-change, thm-pur-dnc-invariance, def-pur-finite-section-comparison) in stage 3; def-pur-section-invariant lean.note slightly stale."
  }
 }

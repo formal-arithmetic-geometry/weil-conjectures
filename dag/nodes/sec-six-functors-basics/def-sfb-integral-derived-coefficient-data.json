@@ -1,0 +1,112 @@
+{
+ "id": "def-sfb-integral-derived-coefficient-data",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-cor-int-compactness-ii-extension-zero",
+   "place": "coefficient data used in the statement and proof of clauses (1)--(3)",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "Integral coefficient ring, derived category, and reduction data",
+ "statement": "Let $\\ell$ be a prime and $E/\\mathbf Q_\\ell$ a finite extension, with valuation ring $\\mathcal O_E$, chosen uniformizer $\\pi_E$ and the topology of its absolute value [def-weil-l-adic-coefficient-extension]. Let $A_E=\\underline{\\mathcal O_E}$ be the condensed ring $S\\mapsto C(S,\\mathcal O_E)$ of continuous functions on profinite sets [sk-def-sfb-condensed-ring], regarded as a commutative ring object of $\\Sh(*_{\\mathrm{pro\\acute et}},\\Ab)$. For $n\\geq0$ let $\\underline{\\mathcal O_E/\\pi_E^n}$ be the condensed ring of the finite quotient $\\mathcal O_E/\\pi_E^n\\mathcal O_E$ with the quotient topology, an $A_E$-module object through the quotient map [sk-def-sfb-module-objects]; for $n=0$ it is zero. For every scheme $X$, with small pro-\\'etale site $X_{\\mathrm{pro\\acute et}}$ [def-weil-pbc-proetale-site], put $A_{E,X}=p_X^*A_E$ [sk-def-sfb-pulled-back-coefficients] and let $D(X_{\\mathrm{pro\\acute et}},A_E)$ be the unbounded derived category [sk-def-sfb-derived-categories] of $A_{E,X}$-module objects of $\\Sh(X_{\\mathrm{pro\\acute et}},\\Ab)$. For $n\\geq0$ the derived reduction $R_{X,n}$ is the endofunctor $K\\mapsto K\\otimes^{\\mathrm L}_{A_{E,X}}p_X^*(\\underline{\\mathcal O_E/\\pi_E^n})$ of $D(X_{\\mathrm{pro\\acute et}},A_E)$, the quotient placed in degree zero [def-sfb-derived-tensor-modules]. The Lean declarations of these three notions are those recorded with [det-pe-derived-nakayama-resolution]; this node gives them the canonical names `integralCoefficientRing`, `integralDerived` and `integralReductionFunctor`.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-cor-int-compactness-ii/sk-cor-int-compactness-ii-extension-zero.md",
+  "place": "coefficient data used in clauses (1)--(3)"
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-module-objects",
+  "def-weil-pbc-proetale-site",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-derived-categories",
+  "def-sfb-derived-tensor-modules",
+  "det-pe-derived-nakayama-resolution"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "integral condensed coefficient ring derived category reductionFunctor aliases for DerivedNakayama",
+   "results": "No exact declaration owning all three names; the existing declarations are the component definitions in DerivedNakayamaResolution.",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "DerivedNakayama.integerRing DerivedNakayama.Derived DerivedNakayama.reductionFunctor",
+   "results": "Found the three component declarations in Sheaf.Paper.DerivedNakayamaResolution; no bundled statement-data node or canonical aliases for this item.",
+   "date": "2026-10-18",
+   "verdict": "component declarations only"
+  },
+  {
+   "tool": "grep",
+   "query": "integralCoefficientRing|integralDerived|integralReductionFunctor",
+   "results": "No matches in Mathlib, WeilConjectures, or the project Lean before this delivery; no existing DAG node found by blueprint_refs search.",
+   "date": "2026-10-18",
+   "verdict": "no existing owner"
+  },
+  {
+   "tool": "grep",
+   "query": "DerivedNakayama.integerRing|DerivedNakayama.Derived|DerivedNakayama.reductionFunctor",
+   "results": "The component definitions occur only in Sheaf.Paper.DerivedNakayamaResolution and are reused by aliases; no duplicate construction is introduced.",
+   "date": "2026-10-18",
+   "verdict": "canonical source declarations reused"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "det-cor-int-compactness-ii-extension-zero",
+  "date": "2026-10-18",
+  "group": "Q35"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-cor-int-compactness-ii",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "status": "split",
+ "lean": {
+  "module": "Sheaf.Paper.IntegralDerivedCoefficientData",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.integralCoefficientRing",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.integralCoefficientRing",
+   "AlgebraicGeometry.ProEtale.CondensedRing.integralDerived",
+   "AlgebraicGeometry.ProEtale.CondensedRing.integralReductionFunctor"
+  ],
+  "file": "lean/Sheaf/Paper/IntegralDerivedCoefficientData.lean",
+  "statement": "abbrev integralCoefficientRing (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}",
+  "branch": "newtargets-dag",
+  "by": "Q35",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "This module owns canonical aliases for the three coefficient notions while delegating their data to DerivedNakayama.integerRing, DerivedNakayama.Derived, and DerivedNakayama.reductionFunctor. It does not redeclare or copy those constructions."
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6f6c33148",
+  "group": "Q35",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6f6c33148",
+  "group": "Q35",
+  "result": "fix",
+  "note": "Byte-identical re-push of 4dcdcec39f2a (diff -rq: only generated coord/blueprint-index.tsv differs). The earlier reviewer FIX was refused by --apply-fixes only because the node file was at fixes/dag/nodes/... instead of DIR/<new node id>.json (prepare.log batch-20261018-133358). Re-checked the substance: hypotheses equal sk-def-sfb-dc-setting plus a quasi-compact open immersion, nothing stronger; clauses (1)-(3) rendered faithfully (PreservesHomology, IsTriangulated, Type(u+1) sums, PreservesLimitsOfSize.{u+1,u+1}, natural reduction iso for all n, Dbc and Loc(Dbc) implications); edge cases admitted; aliases are abbrevs of DerivedNakayama.integerRing/Derived/reductionFunctor, no duplication; lean.statement verbatim for item and new node; only sorry; docstrings present. nt_compile --json exit 0: IntegralDerivedCoefficientData 5.9 s, IntegralExtensionByZero 11.2 s, no warnings. FIX (B2/B3, H12): fixes/def-sfb-integral-derived-coefficient-data.json gives the new node a self-contained statement citing def-weil-l-adic-coefficient-extension, sk-def-sfb-condensed-ring, sk-def-sfb-module-objects, def-weil-pbc-proetale-site, sk-def-sfb-pulled-back-coefficients, sk-def-sfb-derived-categories, def-sfb-derived-tensor-modules and det-pe-derived-nakayama-resolution (owner of the Lean declarations). Citations equal stmt_deps; all ids exist; no cycle (488-node reachability check). Lean unchanged."
+ }
+}
