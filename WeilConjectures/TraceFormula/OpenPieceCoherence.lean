@@ -61,6 +61,33 @@ lemma Adjunction.exchangeLeft_app_comp_map_counit_app {A B A' B' : Type*} [Categ
 variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).Prime]
   [Fact (ringChar k ≠ ℓ)]
 
+
+section BaseChange
+
+variable {X Y X' Y' : Over (Spec (.of k))}
+  [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Y.hom]
+  [QuasiCompact Y.hom] [IsSeparated Y.hom] [LocallyOfFiniteType X'.hom] [QuasiCompact X'.hom]
+  [IsSeparated X'.hom] [LocallyOfFiniteType Y'.hom] [QuasiCompact Y'.hom] [IsSeparated Y'.hom]
+  {f : X ⟶ Y} {g : Y' ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X}
+
+/-- **`Ex_!` for open immersions is the extension-by-zero base change** (blueprint
+`def-exchange-projection`: `Ex_!` is represented, for the compactification `f = 𝟙 ∘ f` of an open
+immersion, by the canonical identification `Lg^* f_! ≅ f'_! Lg'^*`): through `Rf_! ≅ f_!`, the
+compact-support base change of a cartesian square with vertical open immersions is the inverse of
+the extension-by-zero exchange morphism. -/
+theorem boundedConstructibleLowerShriekBaseChange_padicAlgCl_of_isOpenImmersion
+    (sq : IsPullback g' f' f g) [IsOpenImmersion f.left] [IsOpenImmersion f'.left]
+    (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+    (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sq).app K ≫
+        (boundedConstructibleLowerShriekIsoOpenImmersionLowerShriek_padicAlgCl ℓ f').hom.app
+          ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g').obj K) ≫
+        (boundedConstructibleOpenImmersionLowerShriekBaseChange (Profinite.padicAlgClRingObj ℓ) ℓ
+          sq.toCommSq).app K =
+      (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g).map
+        ((boundedConstructibleLowerShriekIsoOpenImmersionLowerShriek_padicAlgCl ℓ f).hom.app K) :=
+  sorry
+
+end BaseChange
 section OpenImmersion
 
 variable {X U : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
