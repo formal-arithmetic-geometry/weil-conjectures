@@ -31,21 +31,10 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek
 public import Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 public import Mathlib.CategoryTheory.Triangulated.Generators
 import Sheaf.AlgebraicGeometry.EtaleFlatConstructibleModel
-import WeilConjectures.AlgebraicGeometry.EtaleSheaves
-import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
-import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.Basic
-import WeilConjectures.SixFunctors.Etale.Derived.Tensor
-import Sheaf.Paper.ComparisonPullbackExact
-import WeilConjectures.SixFunctors.ProEtale.Comparison.Flat
-import Sheaf.Paper.FiniteRingConstructibleSheafOrigin
-import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
-import Mathlib.Algebra.Homology.DerivedCategory.ShortExact
-import Mathlib.AlgebraicGeometry.Morphisms.Immersion
-import Sheaf.AlgebraicGeometry.OpenClosedRecollement
-import Sheaf.AlgebraicGeometry.ProEtaleRingedOpenClosed
-import Sheaf.CategoryTheory.ExactFunctorDerivedFunctor
-import Sheaf.AlgebraicGeometry.ProEtaleFiniteTorComparisonNoetherian
 import Sheaf.SixFunctors.FlatModelGeneration
+import Mathlib.Algebra.Homology.DerivedCategory.SingleTriangle
+import WeilConjectures.FromJoel.Algebra.Homology.HomotopyCategory.Devissage
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
 
 /-!
 # Flat models and generators
@@ -232,17 +221,17 @@ constructibility and the recorded Tor tests on every module sheaf in degree zero
 Source: blueprint `sk-lem-sf-flat-model`, complement
 (blueprint: sk-lem-sf-flat-model).
 
-Proof plan (node steps 1 and 3--7): use lem-sf-etale-flat-constructible directly, without
-a comparison descent. Apply the finite ordered sheaf stratification and filtration of
-det-sf-flat-model-generation to each flat constructible term. Factor each stratum by
-lemma-nagata-immersion-open-in-scheme-image. Exact closed pushforward follows from
-lem-cbc-open-closed-recollement, and lem-weil-pbc-exact-functor-derived-functor identifies
-it with the right derived functor on these sheaves. Thus each filtration factor is one
-of sfEtaleClosureGenerators. Use lem-weil-pbc-complex-ses-triangle for the sheaf
-filtrations and the degreewise split short exact sequences of stupid tails. Finite
-induction, starting from zero above the final degree, gives the property for the model
-from its shifted terms, then for K by its representing isomorphism. Retracts are
-allowed by the property assumption, as stated in the complement. -/
+Proof (node steps 1 and 3--7): use lem-sf-etale-flat-constructible directly, without
+comparison descent. Clauses 1--2 of det-sf-flat-model-generation give an ordered
+stratification and a finite extension filtration of each flat constructible term.
+Finite stalks give finite generation on each locally constant restriction, and inverse
+image preserves flatness. The canonical open factor through the scheme-theoretic image
+therefore identifies each filtration factor with an sfEtaleClosureGenerators object.
+The short exact sequences give distinguished single-object triangles, so finite
+induction proves the property for each term, starting with the zero filtration member.
+Apply HomotopyCategory.mem_subcategory_of_strictly_bounded to the inverse image of P
+under Qh; this implements the bounded stupid-tail induction. Finally transport across
+the quotient-comparison and representing isomorphisms. -/
 theorem etaleThickGeneration
     (X : Scheme.{u}) [IsNoetherian X] (A : Type (u + 1)) [CommRing A] [Finite A]
     (P : ObjectProperty (Etale.DerivedCategoryModule A X))
@@ -252,7 +241,56 @@ theorem etaleThickGeneration
     (hbc : Etale.DerivedCategory.isBoundedConstructible A X K)
     (hTor : ∃ a b : ℤ, a ≤ b ∧ Etale.DerivedCategory.hasTorAmplitudeIn A X a b K) :
     P K := by
-  sorry
+  obtain ⟨a, b, hab, ht⟩ := hTor
+  obtain ⟨Pc, hf, hc, hz, ⟨e⟩⟩ :=
+    (Etale.hasTorAmplitudeIn_iff_exists_finiteValueConstructibleModel A X a b hab K hbc).1 ht
+  have hterm (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A))
+      (hFc : IsConstructibleEtaleModuleSheaf F) (hFf : ObjectProperty.flat F) :
+      P ((_root_.DerivedCategory.singleFunctor _ 0).obj F) := by
+    obtain ⟨str, ho, hp⟩ := etale_flatConstructible_orderedStratification X A F hFc hFf
+    obtain ⟨M, hM0, ⟨eM⟩, hM⟩ :=
+      (etale_flatConstructible_extensionFiltration X A F hFc hFf str ho hp).1
+    have hG (k : Fin str.n) :
+        P ((_root_.DerivedCategory.singleFunctor _ 0).obj
+          ((flatModelEtaleExtension A (str.immersion k) (str.isImmersion k)).obj
+            ((Etale.upperStar (ModuleCat.{u + 1} A) (str.immersion k)).obj F))) := by
+      let L := (Etale.upperStar (ModuleCat.{u + 1} A) (str.immersion k)).obj F
+      have hL : IsFiniteLocallyConstantSheaf L := by
+        have : IsLocallyConstantSheaf L := (hp k).1
+        refine { isFinitelyGenerated_sheafFiber := ?_ }
+        intro Ω _ _ x
+        have := ((hp k).2 Ω x).1
+        rw [ModuleCat.isFinitelyGenerated_iff]
+        exact Module.Finite.of_finite
+      have hLf : ObjectProperty.flat L :=
+        Functor.PreservesFlat.flat_obj (F := Etale.upperStar _ (str.immersion k)) hFf
+      have : TopologicalSpace.NoetherianSpace (str.domain k) :=
+        (str.immersion k).isEmbedding.isInducing.noetherianSpace
+      apply hP
+      exact ⟨str, k, (str.immersion k).toImage, inferInstance, L,
+        Scheme.Hom.toImage_imageι _, hL, hLf, ⟨Iso.refl _⟩⟩
+    have hm : ∀ k : Fin (str.n + 1),
+        P ((_root_.DerivedCategory.singleFunctor _ 0).obj (M k)) := by
+      intro k
+      induction k using Fin.induction with
+      | zero =>
+        exact P.prop_of_isZero (Functor.map_isZero _ hM0)
+      | succ k ih =>
+        obtain ⟨f, g, h, hs⟩ := hM k
+        exact P.ext_of_isTriangulatedClosed₂ _ hs.singleTriangle_distinguished ih (hG k)
+    exact P.prop_of_iso ((_root_.DerivedCategory.singleFunctor _ 0).mapIso eM)
+      (hm (Fin.last str.n))
+  have : Pc.IsStrictlyGE a := by
+    rw [CochainComplex.isStrictlyGE_iff]
+    exact fun q hq ↦ hz q (.inl hq)
+  have : Pc.IsStrictlyLE b := by
+    rw [CochainComplex.isStrictlyLE_iff]
+    exact fun q hq ↦ hz q (.inr hq)
+  have hPc := HomotopyCategory.mem_subcategory_of_strictly_bounded
+    (P.inverseImage _root_.DerivedCategory.Qh) Pc a b
+    (fun n _ _ ↦ hterm (Pc.X n) (hc n) (hf n))
+  exact P.prop_of_iso e (P.prop_of_iso
+    ((_root_.DerivedCategory.quotientCompQhIso _).app Pc) hPc)
 
 /-- In the standing setting the pro-etale finite-Tor constructible category equals
 its thick generator envelope, including reverse containment of the generators.
