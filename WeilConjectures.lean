@@ -9497,6 +9497,8 @@ public import WeilConjectures.WeilSheaf.ArtinSchreierInertia
 public import WeilConjectures.WeilSheaf.ArtinSchreierPurity
 public import WeilConjectures.WeilSheaf.ArtinSchreierTrace
 public import WeilConjectures.WeilSheaf.ArtinSchreierTrivialization
+public import WeilConjectures.WeilSheaf.BifunctorHomShift
+public import WeilConjectures.WeilSheaf.BifunctorHomTriangulated
 public import WeilConjectures.WeilSheaf.BoundaryStalk
 public import WeilConjectures.WeilSheaf.Category
 public import WeilConjectures.WeilSheaf.CohomologicalRange
@@ -9517,6 +9519,7 @@ public import WeilConjectures.WeilSheaf.CurveTopCohomology
 public import WeilConjectures.WeilSheaf.Defs
 public import WeilConjectures.WeilSheaf.DenseOpen
 public import WeilConjectures.WeilSheaf.DerivedHom
+public import WeilConjectures.WeilSheaf.DerivedHomTriangulated
 public import WeilConjectures.WeilSheaf.DirectImageRestriction
 public import WeilConjectures.WeilSheaf.DirectImageStalk
 public import WeilConjectures.WeilSheaf.DirectImageStalkMap

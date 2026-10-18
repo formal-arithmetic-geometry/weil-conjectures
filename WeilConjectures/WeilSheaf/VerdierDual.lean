@@ -7,6 +7,7 @@ module
 
 public import Mathlib.CategoryTheory.Triangulated.Opposite.Pretriangulated
 public import WeilConjectures.WeilSheaf.DerivedHom
+public import WeilConjectures.WeilSheaf.DerivedHomTriangulated
 public import WeilConjectures.WeilSheaf.LowerShriekFunctoriality
 public import WeilConjectures.WeilSheaf.TateTwist
 
@@ -146,8 +147,12 @@ open Pretriangulated.Opposite in
 anti-equivalence `D_{X,ℚ̄_ℓ}`"): it commutes with the shifts and carries distinguished
 triangles of `(WeilComplex X)ᵒᵖ` to distinguished triangles. -/
 theorem exists_commShift_isTriangulated_verdierDual :
-    ∃ _ : (verdierDual k₀ l X).CommShift ℤ, (verdierDual k₀ l X).IsTriangulated :=
-  sorry
+    ∃ _ : (verdierDual k₀ l X).CommShift ℤ, (verdierDual k₀ l X).IsTriangulated := by
+  obtain ⟨_, _⟩ := DerivedCategory.exists_commShift_isTriangulated_bifunctorRHom
+    (ProEtaleWeilSheaf.ihomBifunctor k₀ l X) (dualizingComplex k₀ l X).obj
+  unfold verdierDual ProEtaleWeilSheaf.derivedHom
+  exact ⟨Functor.CommShift.ofComp ((WeilComplex.objectProperty k₀ l X).liftCompιIso _ _) ℤ,
+    ObjectProperty.isTriangulated_lift _ _ _⟩
 
 end VerdierDual
 
