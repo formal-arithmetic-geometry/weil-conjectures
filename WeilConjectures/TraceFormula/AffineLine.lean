@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Line
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.LineSmooth
+public import WeilConjectures.TraceFormula.DimensionZero
 public import WeilConjectures.TraceFormula.Fibration
 public import WeilConjectures.TraceFormula.ModelDecomposition
 public import WeilConjectures.TraceFormula.OpenSquare
@@ -300,7 +301,11 @@ theorem traceFormulaOne_of_weilUpperStar_weilOpenLowerShriek (sq : IsPullback Φ
     (K : WeilBoundedConstructible ℓ ΦU)
     (h : ((weilUpperStar ℓ ΦU ΦY j hw).obj ((weilOpenLowerShriek ℓ sq).obj K)).TraceFormulaOne) :
     K.TraceFormulaOne :=
-  sorry
+  WeilBoundedConstructible.TraceFormulaOne.of_iso
+    (IsoAlgebra.mapOfNatIsoObjMapOfNatIsoObjIso (openSquareExchange ℓ sq)
+      (weilUpperStarComparison ℓ ΦU ΦY j hw) K
+      (unit_comp_map_baseChangeIso_inv_of_eq (sq := sq) _ (weilUpperStarComparison_eq_flip sq hw)
+        K.carrier)) h
 
 end Restriction
 
@@ -327,25 +332,6 @@ theorem traceFormulaOne_of_isZero {Φ : X ⟶ X} [IsFinite Φ.left] [IsUniversal
   intro _ _ _
   rw [trace_eq_zero_of_isZero (Functor.map_isZero _ hK), Finset.sum_eq_zero fun x _ ↦
     trace_eq_zero_of_isZero (Functor.map_isZero _ hK) _]
-
-/-- The stalk Frobenius of the restriction of a Weil object along `j : U ⟶ X` at a point `u`
-fixed by `Φ_U` has the trace of the stalk Frobenius of the Weil object at `u ≫ j`. -/
-lemma trace_weilStalkFrobenius_weilUpperStar {U : Over (Spec (.of k))}
-    [LocallyOfFiniteType U.hom] [QuasiCompact U.hom] [IsSeparated U.hom] {Φ : X ⟶ X}
-    {ΦU : U ⟶ U} {j : U ⟶ X} (hj : ΦU ≫ j = j ≫ Φ) (K : WeilBoundedConstructible ℓ Φ)
-    (u : RationalPoint U) (hu : u ≫ ΦU = u)
-    [HasRightDual ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ u).obj
-      ((weilUpperStar ℓ ΦU Φ j hj).obj K).carrier)]
-    [HasRightDual ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (u ≫ j)).obj
-      K.carrier)] :
-    trace (((weilUpperStar ℓ ΦU Φ j hj).obj K).weilStalkFrobenius u hu) =
-      trace (K.weilStalkFrobenius (u ≫ j)
-        (by rw [Category.assoc, ← hj, ← Category.assoc, hu])) := by
-  have hu1 : u ≫ frobeniusIterate ΦU 1 = u := by
-    rw [frobeniusIterate_one]
-    exact hu
-  rw [← trace_stalkFrobenius_one _ u hu1 hu, trace_stalkFrobenius_weilUpperStar,
-    trace_stalkFrobenius_one]
 
 variable {U Z : Over (Spec (.of k))} [LocallyOfFiniteType U.hom] [QuasiCompact U.hom]
   [IsSeparated U.hom] [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom] [IsSeparated Z.hom]

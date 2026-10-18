@@ -8,6 +8,7 @@ module
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.ProperLowerShriek
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenImmersionUpperShriek
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.PullbackSquareComparison
+public import WeilConjectures.CategoryTheory.DerivedCategory.AdjunctionIdIso
 
 /-!
 
@@ -218,6 +219,37 @@ lemma boundedConstructibleLowerStarId_inv_app_comp_lowerStarComp_hom_app (g : Y 
 
 end LowerStarUnit
 
+/-! ### The extension by zero along the identity -/
+
+section IdAdjunction
+
+variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
+
+/-- The derived adjunction `D((𝟙 X)_!) ⊣ L(𝟙 X)^*` is identified with the identity adjunction
+by `D((𝟙 X)_!) ≅ 𝟭` and `L(𝟙 X)^* ≅ 𝟭`: `ι⁻¹ ≫ ε = u` on `L(𝟙 X)^*`. -/
+lemma derivedOpenImmersionLowerShriekId_inv_app_comp_counit (X : Scheme.{u})
+    (W : DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))) :
+    (derivedOpenImmersionLowerShriekId Λ X).inv.app (L((𝟙 X)^*⟦Λ⟧).obj W) ≫
+      ((derivedOpenImmersionLowerShriekUpperStarAdjunction Λ (𝟙 X)).ofNatIsoRight
+        (leftDerivedUpperStarIsoMapDerivedCategory_of_isOpenImmersion Λ (𝟙 X)).symm).counit.app
+          W =
+      (leftDerivedUpperStarId Λ X).hom.app W := by
+  have hn := (derivedOpenImmersionLowerShriekId Λ X).inv.naturality
+    ((leftDerivedUpperStarIsoMapDerivedCategory_of_isOpenImmersion Λ (𝟙 X)).hom.app W)
+  simp only [Functor.id_map] at hn
+  have hc := Adjunction.mapDerivedCategoryAdjunction_counit_app_of_iso
+    (openImmersionLowerShriekUpperStarAdjunction Λ (𝟙 X)) (openImmersionLowerShriekId Λ X)
+    (upperStarId Λ X)
+    (Adjunction.leftAdjointUniq_ofNatIsoRight_inv_app_comp_counit _ _) W
+  simp only [Adjunction.ofNatIsoRight_counit, NatTrans.comp_app, Iso.symm_inv,
+    Functor.whiskerRight_app]
+  rw [← reassoc_of% hn]
+  erw [hc]
+  simp [leftDerivedUpperStarId, Functor.leftDerivedFunctorNatIso,
+    leftDerivedUpperStarIsoMapDerivedCategory_of_isOpenImmersion]
+
+end IdAdjunction
+
 /-! ### Base change along the trivial refinement -/
 
 section BaseChangeAux
@@ -352,6 +384,61 @@ lemma boundedConstructibleLowerShriekIsoOpenImmersionLowerShriek_inv_comp :
   simp only [← hc, Category.assoc, Iso.inv_hom_id_assoc, hr]
   have ht' := (Iso.inv_comp_eq _).2 ht.symm
   simp only [reassoc_of% ht']
+
+/-- Composing with an identity and the image of an identity does nothing. -/
+lemma id_comp_map_id_comp {C D : Type*} [Category C] [Category D] (F : C ⥤ D) (X : C) {Y : D}
+    (c : F.obj X ⟶ Y) : 𝟙 (F.obj X) ≫ F.map (𝟙 X) ≫ c = c := by
+  simp
+
+/-- The adjunction `(𝟙 U)_! ⊣ L(𝟙 U)^*` on bounded constructible complexes attached to the
+compactification `U ⟶[𝟙] U ⟶[j] X` is identified with the identity adjunction by
+`(𝟙 U)_! ≅ 𝟭` and `L(𝟙 U)^* ≅ 𝟭`: `ι⁻¹ ≫ ε = u` on `L(𝟙 U)^*`. -/
+lemma boundedConstructibleOpenImmersionLowerShriekOfIsProperIso_inv_app_comp_counit
+    (W : Dᵇc(U.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+    (boundedConstructibleOpenImmersionLowerShriekOfIsProperIso _ ℓ j).inv.app
+        ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
+          (Compactification.ofIsProper j.left).overI).obj W) ≫
+      (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction
+        (Profinite.padicAlgClRingObj ℓ) ℓ (Compactification.ofIsProper j.left).overI).counit.app W =
+      (boundedConstructibleUpperStarId (Profinite.padicAlgClRingObj ℓ) ℓ U).hom.app W := by
+  ext1
+  have h := (Adjunction.map_restrictFullyFaithful_counit_app
+      ((derivedOpenImmersionLowerShriekUpperStarAdjunction _
+        (Compactification.ofIsProper j.left).overI.left).ofNatIsoRight
+        (leftDerivedUpperStarIsoMapDerivedCategory_of_isOpenImmersion _
+          (Compactification.ofIsProper j.left).overI.left).symm)
+      (ObjectProperty.fullyFaithfulι _) (ObjectProperty.fullyFaithfulι _)
+      (boundedConstructibleOpenImmersionLowerShriekCompatibility _ ℓ
+        (Compactification.ofIsProper j.left).overI).symm
+      (boundedConstructibleUpperStarCompatibility _ ℓ
+        (Compactification.ofIsProper j.left).overI).symm W)
+  have h1 (V : Dᵇc(U.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+      ((boundedConstructibleOpenImmersionLowerShriekOfIsProperIso _ ℓ j).inv.app V).hom =
+        (derivedOpenImmersionLowerShriekId _ U.left).inv.app V.obj := by
+    simp only [Functor.id_obj, boundedConstructibleOpenImmersionLowerShriekOfIsProperIso,
+      Functor.whiskeringRight_obj_obj, boundedConstructibleOpenImmersionLowerShriekCompatibility,
+      ObjectProperty.liftCompιIso, Functor.FullyFaithful.preimageIso_inv, Iso.trans_inv,
+      Iso.refl_inv, Functor.isoWhiskerLeft_inv, Iso.symm_inv, NatTrans.comp_app,
+      Functor.FullyFaithful.whiskeringRight_preimage_app, NatTrans.id_app, Functor.comp_obj, ObjectProperty.ι_obj, ObjectProperty.lift_obj_obj,
+      Functor.whiskerLeft_app, Functor.rightUnitor_inv_app, Functor.leftUnitor_hom_app,
+      Category.id_comp, ObjectProperty.homMk_hom]
+    exact Category.comp_id _
+  rw [ObjectProperty.FullSubcategory.comp_hom, boundedConstructibleUpperStarId_hom_app_hom]
+  have h' : ((boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction
+      (Profinite.padicAlgClRingObj ℓ) ℓ (Compactification.ofIsProper j.left).overI).counit.app
+        W).hom =
+      ((derivedOpenImmersionLowerShriekUpperStarAdjunction _
+        (Compactification.ofIsProper j.left).overI.left).ofNatIsoRight
+        (leftDerivedUpperStarIsoMapDerivedCategory_of_isOpenImmersion _
+          (Compactification.ofIsProper j.left).overI.left).symm).counit.app W.obj := by
+    refine h.trans ?_
+    simp only [boundedConstructibleOpenImmersionLowerShriekCompatibility,
+      boundedConstructibleUpperStarCompatibility, ObjectProperty.liftCompιIso, Iso.symm_inv,
+      Iso.refl_hom, NatTrans.id_app]
+    exact id_comp_map_id_comp _ _ _
+  have h2 := derivedOpenImmersionLowerShriekId_inv_app_comp_counit _ U.left W.obj
+  erw [h1, h']
+  exact h2
 
 /-- The canonical map `j_! ⟶ Rj_*` of an open and proper immersion, assuming that the
 adjunction `(𝟙 U)_! ⊣ L(𝟙 U)^*` of the compactification `U ⟶[𝟙] U ⟶[j] X` is identified with
