@@ -221,16 +221,16 @@
   "file": "lean/Sheaf/Paper/CoefficientFiniteDescentObjects.lean",
   "statement": "theorem coefficient_finite_descent_objects (k : Type u) [Field k] (p ℓ : ℕ) [CharP k p] [Fact ℓ.Prime] (_hp : 0 < p) (_hpℓ : p ≠ ℓ) (X : Scheme.{u}) [X.Over (Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))] : (∀ K : ConstantModelBoundedConstructible (Profinite.padicAlgClRingObj ℓ) X, ∃ (E : Padic.FiniteCoefficientFields ℓ (PadicAlgCl ℓ)) (K_E : ConstantModelBoundedConstructible (Profinite.continuousMapRingObj E) X), Nonempty ((derivedExtendScalarsToPadicAlgCl X ℓ E).obj K_E.obj ≅ K.obj)) ∧ (∀ (K : ConstantModelBoundedConstructible (Profinite.padicAlgClRingObj ℓ) X) (E : Padic.FiniteCoefficientFields ℓ (PadicAlgCl ℓ)) (K_E : ConstantModelBoundedConstructible (Profinite.continuousMapRingObj E) X), Nonempty ((derivedExtendScalarsToPadicAlgCl X ℓ E).obj K_E.obj ≅ K.obj) → ∀ (F : Padic.FiniteCoefficientFields ℓ (PadicAlgCl ℓ)) (h : E ≤ F), constantModelBoundedConstructible (Profinite.continuousMapRingObj F) X ((derivedExtendScalarsSubfield X ℓ h).obj K_E.obj) ∧ Nonempty ((derivedExtendScalarsToPadicAlgCl X ℓ F).obj ((derivedExtendScalarsSubfield X ℓ h).obj K_E.obj) ≅ K.obj))",
   "branch": "newtargets-dag",
-  "by": "Q10",
+  "by": "Q02",
   "date": "2026-10-18",
   "existing": false
  },
  "reviewed_lean": {
   "date": "2026-10-18",
   "by": "L",
-  "reviewer": "NT-stage2-cc-ab8ffe98b",
-  "group": "Q10",
-  "result": "pass",
-  "note": "The statement matches the node and source clause by clause: standing field k (char p>0, p≠ℓ, ℓ prime) and X separated and finite type over k by explicit binders; Dbc as the recorded ConstantModelBoundedConstructible over padicAlgClRingObj / continuousMapRingObj E (rfl to padicSubfieldRingObj checked); recorded derivedExtendScalarsToPadicAlgCl and derivedExtendScalarsSubfield; conjunct 1 is existence of a model, conjunct 2 is persistence for every finite F with E≤F and states both constructibility and the model iso. No extra hypotheses, single universe u, edge cases (X empty, K=0, F=E, E=ℚ_ℓ) covered. No definitions, sorry-only proof, docstrings carry the source, blueprint tag and five proof steps; imports follow the rule; lean.statement verbatim; node changed only in lean; the five statement-dependency nodes match the current DAG. nt_compile --json clean (rc 0, no warnings, 4.0 s); a probe compile checked the signature, universes, the rfl identities and the axioms (sorryAx only). The report has Worker report and the disclosed self-check Second reading by Q10. No findings."
+  "reviewer": "NT-stage2-cc-7fe8375f1",
+  "group": "Q02",
+  "result": "fix",
+  "note": "This re-delivers Q10's already-landed, reviewed-PASS statement. The module is byte-identical to the live file except the header Authors Q10->Q02, and the node is identical to the live node except lean.by Q10->Q02. The statement is independently re-checked against the node and source (standing setting, the recorded bounded constructible categories over the pulled-back condensed rings, finite coefficient fields, both scalar-extension functors, both conjuncts with matching quantifier order). Edge cases (empty X, K=0, F=E, E=Q_l, single universe u) are covered. There are no definitions and the proof is sorry only. Docstrings carry the source, blueprint tag and five proof steps. lean.statement is verbatim. The five dependency nodes are byte-identical to the live DAG. Report has both required sections. nt_compile --json is clean for the snapshot (rc 0, 13.5 s) and for the fix (rc 0, 17.4 s). FIX: fixes/CoefficientFiniteDescentObjects.lean restores 'Authors: SHEAF group Q10', making the file identical to live. lean.by stays Q02 because refit_record ignores by; the landing note should record that the statement is Q10's and Q02 re-delivered it unchanged. No mathematical findings."
  }
 }
