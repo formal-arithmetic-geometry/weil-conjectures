@@ -25,7 +25,7 @@ theorem module_extensionByZero_outside_stalk (X : Scheme.{u}) (U : X.Opens) :
       IsZero (TopCat.Presheaf.stalk (L.obj F).val.presheaf x) := by
   dsimp
   intro F x hx
-  have h := ModuleExtensionByZeroStalkOutside X.toRingedSpace U F x hx
+  have h := moduleExtensionByZero_stalk_outside X.toRingedSpace U F x hx
   apply (AddCommGrpCat.isZero_iff_subsingleton).mpr
   have hs := (ModuleCat.isZero_iff_subsingleton).mp h
   exact hs
