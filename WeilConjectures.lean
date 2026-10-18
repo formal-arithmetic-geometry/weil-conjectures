@@ -4366,6 +4366,7 @@ public import WeilConjectures.AlgebraicGeometry.ProEtale.Proetale.Basic
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Proetale.Sheafification
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Replete
 public import WeilConjectures.AlgebraicGeometry.ProEtale.RepleteAb
+public import WeilConjectures.AlgebraicGeometry.ProEtale.SectionsFilteredColimit
 public import WeilConjectures.AlgebraicGeometry.ProEtale.SequentialLimit
 public import WeilConjectures.AlgebraicGeometry.ProEtale.SigmaCover
 public import WeilConjectures.AlgebraicGeometry.ProEtale.WeaklyContractible
@@ -7260,6 +7261,7 @@ public import WeilConjectures.Mathlib.RingTheory.Valuation.LocalSubring
 public import WeilConjectures.Mathlib.RingTheory.Valuation.ValuationSubring
 public import WeilConjectures.Mathlib.SetTheory.Cardinal.Finite
 public import WeilConjectures.Mathlib.SetTheory.Cardinal.HasCardinalLT
+public import WeilConjectures.Mathlib.Topology.Algebra.Module.ModuleTopology
 public import WeilConjectures.Mathlib.Topology.Category.TopCat.Limits.Pullbacks
 public import WeilConjectures.Mathlib.Topology.Category.TopCat.Opens
 public import WeilConjectures.Mathlib.Topology.Compactification.StoneCech
@@ -7288,10 +7290,12 @@ public import WeilConjectures.Mathlib.Topology.Spectral.ConstructibleTopology
 public import WeilConjectures.Mathlib.Topology.Spectral.Prespectral
 public import WeilConjectures.NumberTheory.Padics.Exponential
 public import WeilConjectures.NumberTheory.Padics.Extension
+public import WeilConjectures.NumberTheory.Padics.IntegersAlgebra
 public import WeilConjectures.NumberTheory.Padics.IntegersFinite
 public import WeilConjectures.NumberTheory.Padics.IntegersMap
 public import WeilConjectures.NumberTheory.Padics.IntegersModPow
 public import WeilConjectures.NumberTheory.Padics.IntegersNoetherian
+public import WeilConjectures.NumberTheory.Padics.IntegersSubalgebra
 public import WeilConjectures.NumberTheory.Padics.Logarithm
 public import WeilConjectures.NumberTheory.TateModule
 public import WeilConjectures.PoincareDuality.Abstract
@@ -7400,6 +7404,7 @@ public import WeilConjectures.RingTheory.AssociatedGradedFiniteType
 public import WeilConjectures.RingTheory.AssociatedGradedRing
 public import WeilConjectures.RingTheory.AssociatedPrimeMinimalOfDepth
 public import WeilConjectures.RingTheory.AssociatedPrimePowerQuotient
+public import WeilConjectures.RingTheory.AwayTensorExhaustion
 public import WeilConjectures.RingTheory.BaseChangeDiagramElementwise
 public import WeilConjectures.RingTheory.BaseChangeIdealKernelGenerators
 public import WeilConjectures.RingTheory.BasisIffBasisQuotientOfNilpotent
@@ -8620,6 +8625,7 @@ public import WeilConjectures.RingTheory.TateRootClosureQuotientFinite
 public import WeilConjectures.RingTheory.TateRootIdealPrime
 public import WeilConjectures.RingTheory.TateSubmoduleFinite
 public import WeilConjectures.RingTheory.TensorAlgebraStructureFiniteStage
+public import WeilConjectures.RingTheory.TensorBijectiveOfStages
 public import WeilConjectures.RingTheory.TensorCyclesFlatCokernel
 public import WeilConjectures.RingTheory.TensorFiniteTypeLimit
 public import WeilConjectures.RingTheory.TensorLimitOfProZeroKernels
@@ -9131,6 +9137,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.Hom
 public import WeilConjectures.SixFunctors.ProEtale.Adic.HomCoherence
 public import WeilConjectures.SixFunctors.ProEtale.Adic.IntegersSheafLowerStar
 public import WeilConjectures.SixFunctors.ProEtale.Adic.IntegersSheafReduction
+public import WeilConjectures.SixFunctors.ProEtale.Adic.IntegralLatticeSections
 public import WeilConjectures.SixFunctors.ProEtale.Adic.InternalHom
 public import WeilConjectures.SixFunctors.ProEtale.Adic.InternalHomEvaluation
 public import WeilConjectures.SixFunctors.ProEtale.Adic.IrreducibleLisse
@@ -9186,6 +9193,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.MayerVietoris
 public import WeilConjectures.SixFunctors.ProEtale.Adic.Module
 public import WeilConjectures.SixFunctors.ProEtale.Adic.OpenImmersion
 public import WeilConjectures.SixFunctors.ProEtale.Adic.RightDerivedLowerStarColimit
+public import WeilConjectures.SixFunctors.ProEtale.Adic.RightDerivedLowerStarSections
 public import WeilConjectures.SixFunctors.ProEtale.Adic.Ring
 public import WeilConjectures.SixFunctors.ProEtale.Adic.SectionAction
 public import WeilConjectures.SixFunctors.ProEtale.Adic.SplitCovering
@@ -9193,6 +9201,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.StalkEvaluation
 public import WeilConjectures.SixFunctors.ProEtale.Adic.StalkIhomDual
 public import WeilConjectures.SixFunctors.ProEtale.Adic.SubfieldSheafColimit
 public import WeilConjectures.SixFunctors.ProEtale.Adic.TensorPowSection
+public import WeilConjectures.SixFunctors.ProEtale.Adic.TowerLimitModule
 public import WeilConjectures.SixFunctors.ProEtale.Adic.TrivialDescent
 public import WeilConjectures.SixFunctors.ProEtale.Adic.TrivialRepresentation
 public import WeilConjectures.SixFunctors.ProEtale.Adic.Truncation
@@ -9223,7 +9232,9 @@ public import WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStarAcyclic
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStarCoherence
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.Monoidal
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.UniversalCoverConstant
+public import WeilConjectures.SixFunctors.ProEtale.Comparison.UniversalCoverIntegralIdentification
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.UniversalCoverMilnor
+public import WeilConjectures.SixFunctors.ProEtale.Comparison.UniversalCoverMilnorAb
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.UniversalCoverSetFLC
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.UpperStarHomotopyLimit
 public import WeilConjectures.SixFunctors.ProEtale.ConstructibleSheaf
@@ -9382,6 +9393,7 @@ public import WeilConjectures.SixFunctors.ProEtale.RingSheaf.UpperStarSquare
 public import WeilConjectures.SixFunctors.ProEtale.ScalarExtension
 public import WeilConjectures.SixFunctors.ProEtale.ScalarExtensionFlat
 public import WeilConjectures.SixFunctors.ProEtale.ScalarExtensionMonoidal
+public import WeilConjectures.SixFunctors.ProEtale.UpperStarSectionsFilteredColimit
 public import WeilConjectures.SixFunctors.ProEtale.WeaklyContractibleCohomology
 public import WeilConjectures.SixFunctors.UpperLowerStar.Defs
 public import WeilConjectures.SixFunctors.UpperLowerStar.Monoidal
@@ -9438,6 +9450,7 @@ public import WeilConjectures.Topology.ConstantSubsheafUnboundedNormalization
 public import WeilConjectures.Topology.ConstructibleInConstructible
 public import WeilConjectures.Topology.ConstructibleIntersection
 public import WeilConjectures.Topology.ConstructibleIsRetrocompact
+public import WeilConjectures.Topology.ContinuousMapTensorFree
 public import WeilConjectures.Topology.ContinuousOpenNormalStabilizer
 public import WeilConjectures.Topology.DerivedLimitStalkInjective
 public import WeilConjectures.Topology.DimensionSupremumLocalDimensions
