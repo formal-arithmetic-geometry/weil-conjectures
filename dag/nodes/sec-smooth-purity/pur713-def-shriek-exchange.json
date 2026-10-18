@@ -139,19 +139,23 @@
  "reviewed_lean": {
   "date": "2026-10-18",
   "by": "L",
-  "reviewer": "NT-stage2-cc-807b88048",
+  "reviewer": "NT-stage2-cc-3236235f5",
   "group": "Q02",
   "result": "pass",
-  "note": "Lean matches every clause of the node. Binders: l prime, E finite over Q_l, n>=1, A=coefficientExtensionRing, ChosenCartesianSquare, and c : Compactification f (no extra hypothesis). Type: Rf_!(c) then Lg^* to Lg'^* then Rf_!(c.ofIsPullback hsq), on unbounded pro-etale derived categories with ModuleCat.{u+1}(ULift A) coefficients. Body: whiskered derivedBaseChangeMap for the proper square, then Rp'_* of the recorded ordinaryOpenExtensionBaseChangeIso in the direction gbar^* D(j_!) -> D(j'_!) g'^*, via the exact-functor identifications L=D. No c_{f'} comparison and no invertibility asserted. Not hollow, no sorry, docstrings carry source and blueprint id, lines <=100, only the item's lean field changed. nt_compile --json on the snapshot: clean, 6.5 s. Edge cases n=1, K=0, identity compactification, empty schemes and universes checked. Observation: the first arrow uses the framework's ProEtale.derivedBaseChangeMap (same mate construction) instead of the recorded proEtaleFiniteCoefficientDirectImageExchange. That declaration is on the SheafOfModules version of the category, which the recorded open-extension lemmas cannot be combined with; the project's proper base-change results use derivedBaseChangeMap. Disclosed in the worker report and accepted. The second reading section is brief but specific."
+  "note": "Item exceptionalBaseChangeOnOrigin matches pur9-cs-def-bc clause by clause: recorded sfFiniteExceptionalAt at the literal c and cf', K in D+ with the recorded finite-Tor constructibility predicate (= D^b_ctf), retained witness (G = étale f^x Rnu_* K, alpha = refl) and its pulled-back witness via sfDerivedComparisonPullbackIso, Ex° = theta_{c'} (fixedCompactSupportOriginIso conjugated by W'.iso) after the exchange into c' = c.ofIsPullback, counit = preimage of 1_M, b = f'-transpose of (Ex°)^-1 then Lv^*eps; directions and endpoints correct; no extra assumptions, no hollow defs, no sorry in the item module. Three §1(B) repairs justified: CanonicalShriekExchange is the identical body under a new name, forced by the clash of the legacy rightDerivedLowerShriekOfCompactification constant; SpecifiedExceptionalClassHom builds the Hom bijection at the given compactification from canonical maps (recorded theorem only existential, E : Type (u+1)); isIso_csAuxiliaryExchange within the scope of thm-cbc-finite-level-proetale. Postponed specifiedExceptionalEtale_boundedBelow is more general than node clause (2) but true (uniform proper cohomological-dimension bound over a quasi-compact base via proper base change). Records verbatim and only lean fields changed; docstrings and source places present. All four files compile through nt_compile --json (exit 0, no errors; the tool printed no warnings at all). Second reading is an openly declared self-audit with real fixes. Edge cases n=1, K=0, empty schemes, v=id with independent compactifications, and universes checked."
  },
  "lean": {
-  "module": "Sheaf.SecSmoothPurity.ShriekExchange",
-  "declaration": "AlgebraicGeometry.ProEtale.finiteCoefficientCompactSupportExchange",
-  "file": "lean/Sheaf/SecSmoothPurity/ShriekExchange.lean",
-  "statement": "def finiteCoefficientCompactSupportExchange (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ) (_hn : 1 ≤ n) {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'} {f : X ⟶ Y} {g : Y' ⟶ Y} (sq : ChosenCartesianSquare g' f' f g) (c : Compactification f) : Rf_!(c)[ModuleCat.{u + 1} (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E n))] ⋙ L((g)^*[ModuleCat.{u + 1} (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E n))]) ⟶ L((g')^*[ModuleCat.{u + 1} (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E n))]) ⋙ Rf_!(c.ofIsPullback (IsPullback.of_iso_pullback sq.toCommSq sq.isoPullback sq.hom_fst sq.hom_snd))[ ModuleCat.{u + 1} (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E n))]",
+  "module": "Sheaf.SecSmoothPurity.CanonicalShriekExchange",
+  "declaration": "AlgebraicGeometry.ProEtale.canonicalFiniteCoefficientCompactSupportExchange",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.canonicalFiniteCoefficientCompactSupportExchange"
+  ],
+  "file": "lean/Sheaf/SecSmoothPurity/CanonicalShriekExchange.lean",
+  "statement": "def canonicalFiniteCoefficientCompactSupportExchange (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ) (_hn : 1 ≤ n) {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'} {f : X ⟶ Y} {g : Y' ⟶ Y} (sq : ChosenCartesianSquare g' f' f g) (c : Compactification f) : Rf_!(c)[ModuleCat.{u + 1} (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E n))] ⋙ L((g)^*[ModuleCat.{u + 1} (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E n))]) ⟶ L((g')^*[ModuleCat.{u + 1} (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E n))]) ⋙ Rf_!(c.ofIsPullback (IsPullback.of_iso_pullback sq.toCommSq sq.isoPullback sq.hom_fst sq.hom_snd))[ ModuleCat.{u + 1} (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E n))]",
   "branch": "newtargets-dag",
   "by": "Q02",
   "date": "2026-10-18",
-  "existing": false
+  "existing": false,
+  "note": "Section 1(B): the recorded Sheaf.SecSmoothPurity.ShriekExchange imports the legacy WeilConjectures.SixFunctors.ProEtale.Derived.LowerShriek. Combining it with the finite-coefficient exceptional/comparison API fails with environment already contains AlgebraicGeometry.ProEtale.rightDerivedLowerShriekOfCompactification. This replacement is the identical stated compactification-mate/open-extension construction, with imports of the current FiniteCoefficient.Derived.LowerShriek and UpperLowerStar and a distinct declaration name. All coefficients, hypotheses, auxiliary compactification, factors and arrow directions are unchanged; no invertibility is added."
  }
 }

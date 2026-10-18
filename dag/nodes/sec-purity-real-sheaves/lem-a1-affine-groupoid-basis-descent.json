@@ -12,7 +12,8 @@
   "def-weil-affine-spectrum",
   "def-pc-fibre-product",
   "def-weil-pbc-module-tensor-product",
-  "def-weil-pbc-free-module"
+  "def-weil-pbc-free-module",
+  "def-a1-groupoid-scheme"
  ],
  "proof": [
   {
@@ -202,5 +203,23 @@
   "group": "NZ",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NZ-0219b3cb3 (reviewer sub-agent of L); spot-checked: I read the whole item: statement, 6 steps, deps, searches and blueprint. I also read every cited node's statement (three Mathlib leaves: pullbackSpecIso, Basis.baseChange on both tensor sides, productMap/pushout UP; four definitions), Stacks groupoids.tex lemma-basis 03C8 in full with lemma-diagram/-pull, and the final paragraph of 03BM. The statement is the finite r>=1 case of 03C8 (B = sum of s#(A) t#(x_i)). Its map sigma(a)tau(a2) and its tau(x_j)-over-sigma orientation match the parent lem-a1-finite-flat-affine-relation-quotient steps 0 and 8. I recomputed each step. Step 1: s e = t e = id gives eps sigma = eps tau = id. Step 2: D = B (x)_{sigma,A,tau} B, balancing gives p0 sigma = p1 tau, and the source/target laws at the point (pr0,pr1) give Delta sigma = p1 sigma and Delta tau = p0 tau. Step 3: the leaf's F (x)_R A form gives the basis p0 tau(x_j) over the second B. Step 4: both expansions recomputed, and uniqueness gives sigma(a_j) = tau(a_j). Step 5: eps gives spanning, tau gives independence. Step 6: phi is A-linear and maps the base-changed basis 1(x)x_j to tau(x_j), so it is bijective. The elementary marks are justified. There are no new nodes, so nothing to drop. rg over the DAG for 03C8 and groupoid nodes finds no duplicate. Every non-definition use is a Mathlib leaf, so there is no route issue, no tool_uses and no SGA. Small cases checked: k x k pair groupoid, trivial groupoid, A = 0, k[eps]. One minor point, left unchanged: the pushout UP leaf is not in stmt_deps for the ring structure on A (x)_C A. No fixes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5c8b1f7e8",
+  "group": "Q05",
+  "result": "pass",
+  "note": "Read node, Stacks 03C8 and 0231, both modules, report and all statement dependencies. Item Lean matches the node clause by clause: U=Spec A, R=Spec B; s,t,e,i and c : pullback s t -> Spec B; sigma/tau = Spec.preimage (Spec.map_preimage checked); C = RingHom.eqLocus; r>=1 with x : Fin r -> A; verbatim unique-expansion hypothesis; conclusions are a C-basis equal to x and a ring equiv A⊗_C A ≃ B with a⊗a2 ↦ σa·τa2. New IsGroupoidScheme has every 0231 law with the c(a,b)=a∘b convention, is non-vacuous (probe proves the trivial groupoid satisfies it) and stays in one universe u. No duplicate groupoid notion in Mathlib, side or live Lean (SpaceGeometricDescent.IsGroupoidObject is a Segal-space notion). Node diff: only stmt_deps gains the new def plus the lean record; statement field unchanged; lean.statement verbatim in both files. nt_compile of both modules clean, exit 0; axioms show sorry only in the theorem. Report sections present. Minor, unchanged: the tensor-ring UP leaf is a proof dep only. No faults."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineGroupoidBasisDescent",
+  "declaration": "AlgebraicGeometry.affineGroupoid_basis_descent",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineGroupoidBasisDescent.lean",
+  "statement": "theorem affineGroupoid_basis_descent (A B : CommRingCat.{u}) (s t : Spec B ⟶ Spec A) (e : Spec A ⟶ Spec B) (i : Spec B ⟶ Spec B) (c : pullback s t ⟶ Spec B) (_hG : IsGroupoidScheme s t e i c) (r : ℕ) (_hr : 1 ≤ r) (x : Fin r → A) (_hbasis : ∀ b : B, ∃! a : Fin r → A, b = ∑ j : Fin r, (Spec.preimage s).hom (a j) * (Spec.preimage t).hom (x j)) : (∃ b : Module.Basis (Fin r) (RingHom.eqLocus (Spec.preimage s).hom (Spec.preimage t).hom) A, ∀ j : Fin r, b j = x j) ∧ ∃ f : (A ⊗[RingHom.eqLocus (Spec.preimage s).hom (Spec.preimage t).hom] A) ≃+* B, ∀ a a₂ : A, f (a ⊗ₜ a₂) = (Spec.preimage s).hom a * (Spec.preimage t).hom a₂",
+  "branch": "newtargets-dag",
+  "by": "Q05",
+  "date": "2026-10-18",
+  "existing": false
  }
 }

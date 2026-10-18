@@ -295,5 +295,30 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c44ce671a",
+  "group": "Q50",
+  "result": "pass",
+  "note": "Read the node, all 7 statement dependencies, the module, the report and the upstream coefficient declarations (Compatibility.lean:84-102, EllAdic finite-subextension ring and FiniteIntermediateField). Clause (1): any filtered I (Type w, Category.{v}), sheaves of sets and of AddCommGrp in max (u+1) w v t, any colimit cocone c with IsColimit c, canonical colimit.desc comparison; injective, and bijective if QuasiSeparatedSpace V.left or all transitions are injective on sections. Clause (2): padicSubfieldRingObjToPadicAlgCl injective at V, the union of its ranges = univ, Finset and finite-matrix descent with ∃E first; no qs assumption. Universes all bound with no forced equality. Edge cases (empty V, empty set or matrix family, ℓ=2) covered via E=⊥. Node copy changes only lean, and the statement is verbatim. No definitions; all proofs sorry; source and blueprint docstrings carry the 9 proof steps; report sections present. nt_compile clean (2.4 s); a probe showed the elaborated signature, sorryAx plus standard axioms, and QuasiSeparated(terminal.from V.left) ↔ QuasiSeparatedSpace V.left via Mathlib quasiSeparated_iff_quasiSeparatedSpace. Minor informational note only (qs written via QuasiSeparatedSpace)."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CoefficientFiniteDescentSections",
+  "declaration": "AlgebraicGeometry.ProEtale.coefficient_finite_descent_sections",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.proEtale_filteredColimit_sections_types",
+   "AlgebraicGeometry.ProEtale.proEtale_filteredColimit_sections_ab",
+   "AlgebraicGeometry.ProEtale.coefficient_finite_descent_sections",
+   "AlgebraicGeometry.ProEtale.coefficient_finite_descent_matrices"
+  ],
+  "file": "lean/Sheaf/Paper/CoefficientFiniteDescentSections.lean",
+  "statement": "theorem coefficient_finite_descent_sections (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime] (V : X.ProEt) [CompactSpace V.left] : (∀ E : PadicAlgCl.FiniteIntermediateField ℓ, Function.Injective ((padicSubfieldRingObjToPadicAlgCl X ℓ E).hom.app (op V))) ∧ (⋃ E : PadicAlgCl.FiniteIntermediateField ℓ, Set.range ((padicSubfieldRingObjToPadicAlgCl X ℓ E).hom.app (op V))) = Set.univ ∧ (∀ S : Finset ((padicAlgClRingObj X ℓ).obj.obj (op V)), ∃ E : PadicAlgCl.FiniteIntermediateField ℓ, ∀ s ∈ S, s ∈ Set.range ((padicSubfieldRingObjToPadicAlgCl X ℓ E).hom.app (op V)))",
+  "branch": "newtargets-dag",
+  "by": "Q50",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Four declarations state all clauses. The set and abelian comparisons are made for an arbitrary colimit cocone c with IsColimit c, using colimit.desc of the evaluated cocone, so the diagram universes remain independent of the scheme universe. Coefficient sections and inclusions use the published finite-subextension condensed model. No node statement or dependencies changed."
  }
 }

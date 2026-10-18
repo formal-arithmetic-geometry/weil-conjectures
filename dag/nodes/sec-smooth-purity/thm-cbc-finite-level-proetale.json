@@ -412,35 +412,25 @@
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NM-91d87f4bb (reviewer sub-agent of L); spot-checked: I read the item in full: the statement and all 8 steps. I also read the statements of all 19 cited nodes, including blueprint_update for def-cbc-exchange-map, the Nagata qc-open lemma and thm-nagata-compactification. The blueprint main-20261015 sources read were thm-cbc-finite-level-proetale (statement and proof) and the unit _section.md, whose sk-prop-sf-cbc text assumes a compactification. The Stacks sources read were proetale.tex Tag 09A6 lemma-morphism-comparison (line 4696), Tag 09AF lemma-jshriek-comparison (line 5076) and Tag 099T. The statement change (Y qcqs OR a compactification c given; independent of c and of the witness; Zariski-extension clause and machinery dropped) is exactly the human-authorized restatement in coord/repair-notes/thm-cbc-finite-level-proetale.json (2026-10-18). It is reported openly in split_report.statement_dispute and in the report, and no further weakening was made. Coefficients are the constant discrete finite commutative pro-etale D+ with an etale-origin witness, the same category as the blueprint. The morphism is the def-cbc-exchange-map compactification composite transported by C_c and a_g and conjugated by alpha, F=T A(E) S^-1, which is the form the repair note prescribes. The item does not claim F equals an intrinsic pro-etale mate composite. Hypothesis checks: step 1 applies the Nagata qc lemma with T=X, middle scheme Xbar, B=Y (f finite type, p separated, j open), so j is quasi-compact in both branches; p and p' are relatively qcqs with no condition on Y'. Step 2: every hypothesis of thm-cbc-finite-torsion holds and M stays D+. Step 3: the chain isomorphism e_j comes from the natural sheaf comparison plus exactness; b_p is the normalized mate for qcqs p and p'. Step 4: S and T type-check. Steps 5-7: the inverse and the witness-independence chain re-derive correctly. Step 8: I re-derived U S^c = S^d A(g^-1 r) by naturality of a_g, V T^c = T^d A(r'), and V F^c = F^d U from finite-torsion's r'E^c = E^d g^-1(r). Edge cases tested: f proper with j=id, c=d, g=id, empty X / Lambda=0, a witness changed by an automorphism, and Y' non-qcqs with c given. proof_deps equals the union of uses, there is no cycle, the withdrawn machinery is not cited and no SGA is used. The delivery creates no new nodes, so there is no duplicate or restated-clause issue. I accept the nine declared off-unit tool_uses (site comparison, finite-level comparison, pullback/direct-image comparisons and the transport lemma, etale j_! exactness, exact module inverse image, Nagata and its qc lemma). Minor, not faults: step 4's citation of lem-cbc-proetale-extension-zero-base-change is explanatory only; the stale node-level tool_uses entry lemma-weil-pbc-geometric-stalk-conservative is maintainer-owned and no longer used. No fixes made."
  },
  "reviewed_lean": {
-  "date": "2026-10-17",
+  "date": "2026-10-18",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-c68a02fe9",
-  "group": "N4",
+  "reviewer": "NT-stage2-cc-3236235f5",
+  "group": "Q02",
   "result": "pass",
-  "note": "Immutable delivery audited; ordinary derived route verified; scompile local and server checks passed; no substantive or mechanical defects found."
+  "note": "Item exceptionalBaseChangeOnOrigin matches pur9-cs-def-bc clause by clause: recorded sfFiniteExceptionalAt at the literal c and cf', K in D+ with the recorded finite-Tor constructibility predicate (= D^b_ctf), retained witness (G = étale f^x Rnu_* K, alpha = refl) and its pulled-back witness via sfDerivedComparisonPullbackIso, Ex° = theta_{c'} (fixedCompactSupportOriginIso conjugated by W'.iso) after the exchange into c' = c.ofIsPullback, counit = preimage of 1_M, b = f'-transpose of (Ex°)^-1 then Lv^*eps; directions and endpoints correct; no extra assumptions, no hollow defs, no sorry in the item module. Three §1(B) repairs justified: CanonicalShriekExchange is the identical body under a new name, forced by the clash of the legacy rightDerivedLowerShriekOfCompactification constant; SpecifiedExceptionalClassHom builds the Hom bijection at the given compactification from canonical maps (recorded theorem only existential, E : Type (u+1)); isIso_csAuxiliaryExchange within the scope of thm-cbc-finite-level-proetale. Postponed specifiedExceptionalEtale_boundedBelow is more general than node clause (2) but true (uniform proper cohomological-dimension bound over a quasi-compact base via proper base change). Records verbatim and only lean fields changed; docstrings and source places present. All four files compile through nt_compile --json (exit 0, no errors; the tool printed no warnings at all). Second reading is an openly declared self-audit with real fixes. Edge cases n=1, K=0, empty schemes, v=id with independent compactifications, and universes checked."
  },
  "lean": {
-  "module": "Sheaf.Paper.GlobalFiniteLevelCompactSupportBaseChange",
-  "declaration": "AlgebraicGeometry.ProEtale.globalFiniteLevelCompactSupportBaseChange",
+  "module": "Sheaf.Paper.CanonicalFiniteLevelCompactSupportBaseChange",
+  "declaration": "AlgebraicGeometry.ProEtale.isIso_csAuxiliaryExchange",
   "declarations": [
-   "AlgebraicGeometry.ProEtale.cbcFixedCoefficients",
-   "AlgebraicGeometry.ProEtale.cbcFixedWitness",
-   "AlgebraicGeometry.ProEtale.cbcGlobalPullbackComparison",
-   "AlgebraicGeometry.ProEtale.cbcGlobalSource",
-   "AlgebraicGeometry.ProEtale.cbcGlobalTarget",
-   "AlgebraicGeometry.ProEtale.cbcGlobalSourceFunctor",
-   "AlgebraicGeometry.ProEtale.cbcGlobalTargetFunctor",
-   "AlgebraicGeometry.ProEtale.cbcGlobalExchange",
-   "AlgebraicGeometry.ProEtale.cbcGlobalSourceComparison",
-   "AlgebraicGeometry.ProEtale.cbcGlobalTargetComparison",
-   "AlgebraicGeometry.ProEtale.globalFiniteLevelCompactSupportBaseChange"
+   "AlgebraicGeometry.ProEtale.isIso_csAuxiliaryExchange"
   ],
-  "file": "lean/Sheaf/Paper/GlobalFiniteLevelCompactSupportBaseChange.lean",
-  "statement": "theorem globalFiniteLevelCompactSupportBaseChange {X Y X' Y' : Scheme.{u}} {f : X ⟶ Y} {f' : X' ⟶ Y'} {g : Y' ⟶ Y} {g' : X' ⟶ X} [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (sq : IsPullback g' f' f g) (h : (CompactSpace Y ∧ QuasiSeparatedSpace Y) ∨ Nonempty (Compactification f)) (K : FiniteCoefficientDerivedCategoryPlus X Λ) (W : EtaleOriginWitness X Λ K) : Nonempty (Compactification f) ∧ ∀ c : Compactification f, IsIso (cbcGlobalExchange Λ sq c K W) ∧ (∀ W' : EtaleOriginWitness X Λ K, cbcGlobalExchange Λ sq c K W = cbcGlobalExchange Λ sq c K W') ∧ (∀ d : Compactification f, cbcGlobalExchange Λ sq c K W ≫ (cbcGlobalTargetComparison Λ sq c d K W).hom = (cbcGlobalSourceComparison Λ g c d K W).hom ≫ cbcGlobalExchange Λ sq d K W) ∧ (∀ (d : Compactification f) (W' : EtaleOriginWitness X Λ K), cbcGlobalSourceComparison Λ g c d K W = cbcGlobalSourceComparison Λ g c d K W' ∧ cbcGlobalTargetComparison Λ sq c d K W = cbcGlobalTargetComparison Λ sq c d K W')",
+  "file": "lean/Sheaf/Paper/CanonicalFiniteLevelCompactSupportBaseChange.lean",
+  "statement": "theorem isIso_csAuxiliaryExchange (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ) (hn : 1 ≤ n) {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'} {f : X ⟶ Y} {g : Y' ⟶ Y} [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (sq : ChosenCartesianSquare g' f' f g) (c : Compactification f) (M : DerivedCategory.Plus (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E n))))) (_W : Scheme.FixedEtaleOriginWitness X (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E n)) M) : IsIso ((canonicalFiniteCoefficientCompactSupportExchange l E n hn sq c).app M.obj)",
   "branch": "newtargets-dag",
-  "by": "N4",
+  "by": "Q02",
   "date": "2026-10-18",
   "existing": false,
-  "note": "Revalidated the repaired global compactification interface against the current qcqs-or-supplied-compactification statement and repair note; no local extension datum or chart normalization is used."
+  "note": "Section 1(B): reexports the full globalFiniteLevelCompactSupportBaseChange interface unchanged, including witness and compactification independence. Its ringed coefficient endpoints and transported cbcGlobalExchange do not directly accept the raw fixed-module compact-support exchange used by pur9-cs-def-bc. The added clause gives invertibility of that same normalized proper-mate/open-extension composite at the retained FixedEtaleOriginWitness. Its docstring gives the precise proper-mate and open-adjunction identification, with canonical coefficient and exact-pullback transports. No arbitrary isomorphism or ambient compactification comparison is introduced."
  }
 }

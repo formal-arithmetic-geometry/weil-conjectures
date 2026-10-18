@@ -19,7 +19,11 @@
   "def-fd-transform",
   "sk-def-trace",
   "sk-def-char",
-  "def-weil-weil-sheaf-complex"
+  "def-weil-weil-sheaf-complex",
+  "def-fd-adic-fourier-realization",
+  "def-zl-common-stage-weil-shriek",
+  "def-zl-weil-ind-sheaf-category",
+  "def-pur-completed-pullback-tensor-comparison"
  ],
  "proof": [
   {
@@ -306,5 +310,28 @@
   "group": "Q113",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q113-ff294d7dd (reviewer sub-agent of L); spot-checked: Read the item, unit, chapter route, cited nodes, Laumon sources, and delivery materials in full. The six-step proof correctly handles adic coefficients, Frobenius-compatible stalk/base change, the general trace formula, Artin–Schreier scalars including y=0, tensor traces, and the shift sign. Small cases and route restrictions pass; no duplicate, circular, SGA-forbidden, pivot-machinery, or long-step fault found. Review written to review.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-af494a48d",
+  "group": "Q24",
+  "result": "pass",
+  "note": "Clause-by-clause match of fourierTraceFormula to the node: FourierSetting; Psi with Psi≠1 (the standing assumption of sk-def-char); psi=Psi.compTrace; K in sfCommonStageWeilComplex on A^1; every n≥1, every y in extensionSubfield (y=0 included), every compactification; affine fixed-pair transform with r=card PUnit=1 and fourierAdicKernel(stdPairing); weilTraceFunction at the actual F_{q^n}-point; right side -classicalFiniteFieldFourierTransform, which unfolds to -Σ_x t_K(x)ψ(Tr(xy)). lean.statement is verbatim and the docstring carries the 6 proof steps. The §1(B) def-fd-transform repair (old record on derived-of-Weil WeilComplex) is canonical: fourierModelWeil via zlPullComp.symm plus Frob≫π=π; tensor Frobenius via canonicalCommonStagePullbackTensor and N.str in the correct mapOfNatIso type; zlFrobeniusSquare pullback; zlComplexShriek; shift on the model kernel. Helper theorems are true and add no hypotheses; nothing hollow; only sorry proofs. Node diffs: lean only, plus the item's stmt_deps gaining four landed nodes (allowed). No duplicate found in lean/Sheaf. nt_compile --json on both files: rc 0, no messages; an injected type error is reported. Maintainer notes: the def-fd-transform record's main declaration is a generic-kernel functor and the Fourier kernel is applied only on affine space; landed lem-fd-inversion (Q05) is stated on the old WeilComplex transform and should be reopened; three unused imports."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FourierTraceFormula",
+  "declaration": "WeilConjectures.fourierTraceFormula",
+  "declarations": [
+   "WeilConjectures.fourierTraceBaseCharacter",
+   "WeilConjectures.fourierAffineExtensionPoint",
+   "WeilConjectures.fourierTraceFormula"
+  ],
+  "file": "lean/Sheaf/Paper/FourierTraceFormula.lean",
+  "statement": "theorem fourierTraceFormula (F : FourierSetting.{u}) (Ψ : AddChar (ZMod F.field.p) F.coefficients.Qbar) (hΨ : Ψ ≠ 1) (c : Compactification (fourierModelSnd F PUnit.{u + 1}).left) (K : sfCommonStageWeilComplex F.field F.coefficients.l F.coefficients.different (fourierAffineModel F PUnit.{u + 1}) F.coefficients.Qbar) (n : ℕ) (hn : 1 ≤ n) (y : F.field.extensionSubfield n hn) : weilTraceFunction F.field F.coefficients.l F.coefficients.different F.coefficients.Qbar (fourierAffineModel F PUnit.{u + 1}) (affineCommonStageFourierTransform F PUnit.{u + 1} Ψ c K) n hn (fourierAffineExtensionPoint F n hn y) = -classicalFiniteFieldFourierTransform F (fourierTraceBaseCharacter F Ψ) n hn (fun x ↦ weilTraceFunction F.field F.coefficients.l F.coefficients.different F.coefficients.Qbar (fourierAffineModel F PUnit.{u + 1}) K n hn (fourierAffineExtensionPoint F n hn x)) y",
+  "branch": "newtargets-dag",
+  "by": "Q24",
+  "date": "2026-10-18",
+  "existing": false
  }
 }

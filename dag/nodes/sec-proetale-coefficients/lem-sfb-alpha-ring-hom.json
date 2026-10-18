@@ -287,5 +287,23 @@
     }
    ]
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f11bec547",
+  "group": "Q53",
+  "result": "pass",
+  "note": "Lean-only existing record: AlgebraicGeometry.ProEtale.isMonHom_condensedPullbackHom (ModuleObject/Basic.lean:401) states IsMonHom (condensedPullbackHom Λ f) for arbitrary Λ with [MonObj Λ] (no commutativity) and arbitrary f : X ⟶ Y in Scheme.{u}, coefficients Ab.{u+1} as in all deps. α_f is the def-sfb-alpha record. Probe via nt_compile --json: axioms are propext/Classical.choice/Quot.sound only (no sorry); the f^* Monoidal instance is rfl-equal to the recorded monoidal_upperStar; the source MonObj is rfl-equal to the iterated monObjObj transport (p_Y^* then f^*); identity and empty-scheme cases resolve. lean.statement is the source line verbatim. Report has real Worker report and Second reading sections. No new module or definition and no hollow content. No findings."
+ },
+ "lean": {
+  "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic",
+  "declaration": "AlgebraicGeometry.ProEtale.isMonHom_condensedPullbackHom",
+  "statement": "instance isMonHom_condensedPullbackHom : IsMonHom (condensedPullbackHom Λ f)",
+  "branch": "slopmaster2",
+  "by": "Q53",
+  "date": "2026-10-18",
+  "existing": true,
+  "note": "Exact existing instance in the published pro-etale module-object framework, confirmed through scompile.py --source. Its section binds arbitrary Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1} with [MonObj Λ], X Y : Scheme.{u}, and f : X ⟶ Y. It asserts IsMonHom for the recorded condensedPullbackHom Λ f, using the ring structure transported first along upperStarFromPoint Y and then along upperStar Ab f on its source, and along upperStarFromPoint X on its target. IsMonHom expresses precisely preservation of unit and multiplication; no commutativity or geometric restriction on f is assumed. The branch label denotes the published WeilConjectures source root, available through the side overlay rather than the older local slopmaster2 checkout. No new module or definition is introduced."
  }
 }

@@ -1,0 +1,103 @@
+{
+ "id": "def-a1-groupoid-scheme",
+ "kind": "definition",
+ "title": "Groupoid laws for prescribed scheme morphisms",
+ "status": "split",
+ "statement": "Let $U,R$ be schemes [def-pc-scheme], let $s,t:R\\to U$, $e:U\\to R$, $i:R\\to R$ and $c:R\\times_{s,U,t}R\\to R$ [def-pc-fibre-product] be morphisms. These data form an (absolute) groupoid scheme if, for every test scheme $H$, the sets $U(H)=\\operatorname{Hom}(H,U)$ and $R(H)=\\operatorname{Hom}(H,R)$ are respectively objects and arrows of a groupoid, with the operations induced by $s,t,e,i,c$, naturally under precomposition in $H$. Explicitly, $se=te=\\mathrm{id}_U$, $si=t$, $ti=s$, $sc=s\\operatorname{pr}_1$, $tc=t\\operatorname{pr}_0$, and on $H$-points $c(e(t(a)),a)=a$, $c(a,e(s(a)))=a$, $c(i(a),a)=e(s(a))$, $c(a,i(a))=e(t(a))$ and $c(c(a,b),d)=c(a,c(b,d))$ whenever $s(a)=t(b)$ and $s(b)=t(d)$. Here $c(a,b)$ means composition with the unique map into the fibre product having projections $a,b$.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-fibre-product"
+ ],
+ "source": {
+  "document": "literature/stacks-project/groupoids.tex",
+  "place": "Tag 0231 (definition-groupoid), preceding groupoid axioms and following septuple characterization, absolute version over Spec Z."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A groupoid scheme consists of schemes of objects and arrows with source target identity inverse and associative composition",
+   "results": "{\"t\": \"2026-10-18T02:37:52Z\", \"tool\": \"leansearch\", \"query\": \"A groupoid scheme consists of schemes of objects and arrows with source target identity inverse and associative composition\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Groupoid\", \"CategoryTheory.SmallGroupoid\", \"CategoryTheory.Groupoid.noConfusionType\", \"CategoryTheory.Groupoid.mk.noConfusion\", \"CategoryTheory.Groupoid.noConfusion\", \"CategoryTheory.Groupoid.mk\", \"AlgebraicGeometry.Scheme.instCategory\", \"CategoryTheory.instIsGroupoid\"], \"digest\": \"27066b7e806fc507\"}",
+   "date": "2026-10-18",
+   "verdict": "Only ordinary categories/groupoids and Scheme.instCategory were returned; no internal groupoid scheme on prescribed scheme maps."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Groupoid\", \"Scheme\"",
+   "results": "{\"t\": \"2026-10-18T02:37:52Z\", \"tool\": \"loogle\", \"query\": \"\\\"Groupoid\\\", \\\"Scheme\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "No matching declaration found."
+  },
+  {
+   "tool": "grep",
+   "query": "GroupoidScheme|IsSchemeGroupoid|groupoid.*basis|basis.*groupoid",
+   "results": "{\"t\": \"2026-10-18T02:37:52Z\", \"tool\": \"grep\", \"query\": \"GroupoidScheme|IsSchemeGroupoid|groupoid.*basis|basis.*groupoid\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "No matching declaration found."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-a1-affine-groupoid-basis-descent",
+  "date": "2026-10-18",
+  "group": "Q05"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-a1-affine-hc0",
+   "place": "Fourth paragraph of the proof of 03XX: the affine schemes U′,R′ with finite etale projections have affine quotient by groupoids-proposition-finite-flat-equivalence. Supporting Tag 03C8 (groupoids-lemma-basis), finite nonempty index-set case. The groupoid-scheme hypothesis of the supporting basis-descent lemma.",
+   "via": [
+    "lem-a1-affine-groupoid-basis-descent",
+    "lem-a1-finite-flat-affine-relation-quotient",
+    "lem-a1-separated-locally-qf-space-representable",
+    "lem-a1-separated-etale-space-scheme",
+    "lem-a1-proetale-local-system-representability",
+    "lem-a1-normal-locally-constant-finite-section",
+    "lem-a1-normal-proetale-monodromy",
+    "lem-a1-smooth-lisse-integral-lattice",
+    "lem-a1-degree-zero-compact-support-sections"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-purity-real-sheaves",
+ "unit": "sk-p-real-rankin",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GroupoidScheme",
+  "declaration": "AlgebraicGeometry.IsGroupoidScheme",
+  "file": "lean/Sheaf/AlgebraicGeometry/GroupoidScheme.lean",
+  "statement": "structure IsGroupoidScheme {U R : Scheme.{u}} (s t : R ⟶ U) (e : U ⟶ R) (i : R ⟶ R) (c : pullback s t ⟶ R) : Prop",
+  "branch": "newtargets-dag",
+  "by": "Q05",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5c8b1f7e8",
+  "group": "Q05",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5c8b1f7e8",
+  "group": "Q05",
+  "result": "pass",
+  "note": "Read node, Stacks 03C8 and 0231, both modules, report and all statement dependencies. Item Lean matches the node clause by clause: U=Spec A, R=Spec B; s,t,e,i and c : pullback s t -> Spec B; sigma/tau = Spec.preimage (Spec.map_preimage checked); C = RingHom.eqLocus; r>=1 with x : Fin r -> A; verbatim unique-expansion hypothesis; conclusions are a C-basis equal to x and a ring equiv A⊗_C A ≃ B with a⊗a2 ↦ σa·τa2. New IsGroupoidScheme has every 0231 law with the c(a,b)=a∘b convention, is non-vacuous (probe proves the trivial groupoid satisfies it) and stays in one universe u. No duplicate groupoid notion in Mathlib, side or live Lean (SpaceGeometricDescent.IsGroupoidObject is a Segal-space notion). Node diff: only stmt_deps gains the new def plus the lean record; statement field unchanged; lean.statement verbatim in both files. nt_compile of both modules clean, exit 0; axioms show sorry only in the theorem. Report sections present. Minor, unchanged: the tensor-ring UP leaf is a proof dep only. No faults."
+ }
+}

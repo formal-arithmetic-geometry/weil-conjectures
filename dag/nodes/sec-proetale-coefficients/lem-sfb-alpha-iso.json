@@ -202,5 +202,23 @@
     }
    ]
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-dc36ef7b8",
+  "group": "Q25",
+  "result": "pass",
+  "note": "Existing binding lem-sfb-alpha-iso -> AlgebraicGeometry.ProEtale.isIso_condensedPullbackHom (published ModuleObject/Basic.lean:593, side :405); blueprint front matter names it. Statement field verbatim. nt_compile --json probe: forall Lambda : Sheaf (coherentTopology Profinite.{u}) Ab.{u+1}, {X Y : Scheme.{u}} (f), IsIso (condensedPullbackHom Lambda f); no MonObj argument so nothing stronger; condensedPullbackHom = (upperStarFromPointComp f).hom.app Lambda by rfl (def-sfb-alpha and def-sfb-pullback-from-point-comp-iso bindings); axioms propext/Classical.choice/Quot.sound only; no errors. Commit touches only the node lean field and report; report has Worker report and Second reading by Q25. Edge cases (identity, empty schemes, zero/noncommutative ring) and universes match. No findings."
+ },
+ "lean": {
+  "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic",
+  "declaration": "AlgebraicGeometry.ProEtale.isIso_condensedPullbackHom",
+  "statement": "instance isIso_condensedPullbackHom : IsIso (condensedPullbackHom Λ f)",
+  "branch": "slopmaster2",
+  "by": "Q25",
+  "date": "2026-10-18",
+  "existing": true,
+  "note": "Exact existing instance in the published pro-etale module-object framework, read through scompile.py --source. Its section binds Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}, arbitrary X Y : Scheme.{u}, and f : X ⟶ Y. It asserts IsIso of the precise condensedPullbackHom recorded by def-sfb-alpha; the body is the component-isomorphism instance at Λ of upperStarFromPointComp f, recorded by def-sfb-pullback-from-point-comp-iso. No hypothesis on f is imposed. The unused section MonObj instance is omitted by elaboration; the result applies in particular to every condensed ring, without commutativity or nontriviality. As for its dependency bindings, slopmaster2 denotes the published upstream-root framework available through the side overlay, not the older local source checkout."
  }
 }

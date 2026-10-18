@@ -201,5 +201,27 @@
   "group": "Q85",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q85-4aceb6649 (reviewer sub-agent of L); spot-checked: I read the item, all 4 new nodes, the cited statements, the blueprint text of lem-pur-frame-independence in both snapshots and the sk-prop-a1-kummer unit record. The worker's corrections to the blueprint are valid: Smith normal form is unavailable over a non-PID local ring, the local cohomology sheaf on A^1_U is supported on Z_T so it is not Lambda_T, and a strict henselization is not an etale neighbourhood. The route stays inside the unit: the homotopy lemma follows from unit (a) or lem-pur-kunneth-supported plus localization. No tool_uses and no SGA. Checks: c=0 empty product; unit multiples via Kummer additivity and support exactness (pro-etale finite torsion); adjacent-transposition sign (-1)^{4}=1; the shear ideal holds both ways, and the s0/s1 pullbacks of V(f_i+taf_j) are correct; s^*p^*=id; bottom-degree edge map and descent on a Zariski cover; comparison on the etale fibre product. All new statements are true. Tested: the tuple lemma on c=0, c=1 (Nakayama forces a unit), (x,0) vs (0,x) and (1,0) vs (1,1); homotopy on C empty and C=X. A possible counterexample to bottom descent when local rings of B have infinite Krull dimension does not arise: smooth maps are open, so every open of Z meets a fibre over a minimal point of B, which forces c to equal the relative-dimension difference. Three repairs in fixes/: (1) E1: step 2 assumed V of finite type, which def-pur-frame-class does not require, and the second reader had narrowed the cup-functoriality and A^1-homotopy lemmas to separated finite-type schemes on that basis. Both lemmas are restored to arbitrary k-schemes (still true), their unused finite-type and proper stmt_deps are dropped, and step 2 now shrinks only to an affine open N, etale over V. (2) B3: bottom-descent pointed pure codimension to def-pur-support-cohomology, which does not define it; the meaning is now written inline, citing def-pur-frame-class. (3) E5, minor: step 4 now says why swapping two factors of A(1)^{\\otimes c} is the identity (A(1) is locally free of rank one) and that the two supports are the same closed subscheme. Target statement unchanged.; 4 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ac4625e95",
+  "group": "Q64",
+  "result": "fix",
+  "note": "Lean correct: frameClass_independent has exactly the recorded frameClass hypotheses and equates two frames' classes, each moved by the canonical isoPullback/frameClosedCoefficientIso to the same group supported on pullback.snd i e, for every pair of frames on one etale (U,e). This matches the node, with different neighbourhoods compared on the fibre product as in proof step 1. The frameClassOnPullback helper is real canonical data. Edge cases (c=0, empty schemes, unit multiples, generator order, non-reduced Z_U, e not an open immersion, ramified level) and the single universe u checked. lean.statement is verbatim, only the lean field changed, docstrings carry the source and blueprint tag with 7 proof steps, the only sorry is the theorem's proof, no duplicate notion. nt_compile --json: rc 0, no errors or warnings, 17.6 s/19.0 s. F1 (H11): the Second reading by Q64 was a placeholder; fixes/lem-pur-frame-independence.report.md replaces it with a real clause-by-clause reading. Module and record unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PurityFrameIndependence",
+  "declaration": "WeilConjectures.PurityFiniteSetting.frameClass_independent",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.frameClassOnPullback",
+   "WeilConjectures.PurityFiniteSetting.frameClass_independent"
+  ],
+  "file": "lean/Sheaf/Paper/PurityFrameIndependence.lean",
+  "statement": "theorem frameClass_independent (P : PurityFiniteSetting.{u}) {B V Z : Scheme.{u}} (b : B ⟶ Spec (.of P.field.k)) (v : V ⟶ B) [SmoothOfRelativeDimension P.level v] (i : Z ⟶ V) [IsClosedImmersion i] [Smooth (i ≫ v)] (c : ℕ) (hcodim : ∀ z : Z, ringKrullDim (V.presheaf.stalk (i z)) = ringKrullDim (Z.presheaf.stalk z) + (c : WithBot ℕ∞)) (U : Scheme.{u}) (e : U ⟶ V) [Etale e] (f g : Fin c → Γ(U, ⊤)) (tf : U.zeroLocusSubscheme (Set.range f) ⟶ Z) (tg : U.zeroLocusSubscheme (Set.range g) ⟶ Z) (hf : IsPullback tf (U.zeroLocusSubschemeι (Set.range f)) i e) (hg : IsPullback tg (U.zeroLocusSubschemeι (Set.range g)) i e) : P.frameClassOnPullback b v i c hcodim { U := U, e := e, etale := inferInstance, f := f, toZ := tf, isPullback := hf } = P.frameClassOnPullback b v i c hcodim { U := U, e := e, etale := inferInstance, f := g, toZ := tg, isPullback := hg }",
+  "branch": "newtargets-dag",
+  "by": "Q64",
+  "date": "2026-10-18",
+  "existing": false
  }
 }

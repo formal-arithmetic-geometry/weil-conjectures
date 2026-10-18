@@ -395,28 +395,27 @@
  "chapter": "sec-smooth-purity",
  "unit": "sk-prop-sf-existence",
  "lean": {
-  "module": "Sheaf.AlgebraicGeometry.EtaleOriginAdjointClass",
-  "declaration": "AlgebraicGeometry.ProEtale.exists_comparisonClassAdjunction",
-  "file": "lean/Sheaf/AlgebraicGeometry/EtaleOriginAdjointClass.lean",
-  "statement": "theorem exists_comparisonClassAdjunction (D : WeilConjectures.FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p) (E : Type (u + 1)) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ) (_hn : 1 ≤ n) {X Y : Scheme.{u}} (aX : X ⟶ Spec (.of D.k)) (aY : Y ⟶ Spec (.of D.k)) [LocallyOfFiniteType aX] [QuasiCompact aX] [LocallyOfFiniteType aY] [QuasiCompact aY] (f : X ⟶ Y) [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (_hf : f ≫ aY = aX) (c : Compactification f) (d : ℕ) (_hd : topologicalKrullDim c.Z ≤ (d : WithBot ℕ∞)) : HasCohomologicalDimensionLEOnEtaleOrigin (ModuleCat.{u + 1} (Padic.coefficientExtensionRing l E n)) c.g (2 * d) ∧ ∃ G : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} (Padic.coefficientExtensionRing l E n))) ⥤ _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} (Padic.coefficientExtensionRing l E n))), ∃ adj : Etale.rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} (Padic.coefficientExtensionRing l E n)) c ⊣ G, Nonempty (@ComparisonClassAdjunction (Padic.coefficientExtensionRing l E n) inferInstance (Padic.finite_coefficientExtensionRing l E n _hn) X Y f inferInstance c G adj (DerivedCategory.plusEtaleOrigin (ModuleCat.{u + 1} (Padic.coefficientExtensionRing l E n)) X) _root_.DerivedCategory.TStructure.t.plus)",
+  "module": "Sheaf.AlgebraicGeometry.SpecifiedExceptionalClassHom",
+  "declaration": "AlgebraicGeometry.ProEtale.specifiedExceptionalHomEquiv",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.specifiedExceptionalEtale_boundedBelow",
+   "AlgebraicGeometry.ProEtale.specifiedExceptionalHomEquiv"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SpecifiedExceptionalClassHom.lean",
+  "statement": "def specifiedExceptionalHomEquiv (M : DerivedCategory.Plus (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ))) (W : Scheme.FixedEtaleOriginWitness X Λ M) (K : DerivedCategory.Plus (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} Λ))) : ((rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} Λ) c).obj M.obj ⟶ K.obj) ≃ (M.obj ⟶ (sfFiniteExceptionalAt Λ c).obj K.obj)",
   "branch": "newtargets-dag",
-  "by": "Q63",
+  "by": "Q02",
   "date": "2026-10-18",
   "existing": false,
-  "declarations": [
-   "AlgebraicGeometry.ProEtale.ComparisonClassAdjunction",
-   "AlgebraicGeometry.ProEtale.exists_comparisonClassAdjunction"
-  ],
-  "note": "§1(B): the recorded module is repaired to use the canonical mate-based compact-support comparison. It imports FixedComparisonDirectImageMate and defines the normalized Hom chain with fixedCompactSupportComparisonIso, whose proper component is the specified fixedComparisonDirectImageMatePlus mate. The ComparisonClassAdjunction datum now includes the boundedBelow conclusion for the transported right functor on every bounded-below target. The theorem statement and proof plan are unchanged; the added output is a field of the Nonempty datum.",
-  "fixed_by": "NT-stage2-cc-3fdc5fdc7"
+  "note": "Section 1(B): the old module is publicly reexported, retaining its dimension bounds, existence, normalization, naturality and coherent compactification comparisons. Its existence theorem quantifies over G, adj and a normalized class datum but does not supply an evaluable Hom bijection for the ordinary right adjoint of a separately specified compactification. HasCompactification is Prop-valued; its opaque extracted compactification need not equal that supplied c. The added Hom equivalence is constructed from the normalized fixedCompactSupportComparisonIso, actual comparison adjunction, Adjunction.ofIsLeftAdjoint for c, comparison full faithfulness on the bounded-below target, and the retained alpha. Its only postponed obligation is the same ordinary etale finite-amplitude bound in clause (2), stated for this specified c. On the item domain compactness is derived from the given finite-type structure maps, never added as a hypothesis."
  },
  "reviewed_lean": {
-  "date": "2026-10-17",
+  "date": "2026-10-18",
   "by": "L",
-  "reviewer": "NT-stage2-cc-3fdc5fdc7",
-  "group": "Q63",
-  "result": "fix",
-  "note": "Statement correct: each hypothesis and conclusion clause matches the node, with no extra assumption. Evaluation-defined beta for Pet K and bounded-constructible M. Canonical omega arrow (adjunction unit, then constant-unit transport) to sfFiniteExceptionalFixed applied to the unit. Both pairing and biduality compatibility equations have the right types. Equivalence, anti-equivalence and biduality clauses are justified by proof steps 5, 9 and 10. Universes kept; no hollow definitions; only sorry; lean.statement verbatim; no DAG cycle. All 4 delivered files compile clean with nt_compile. F1 (H4/collision): the delivered EtaleOriginAdjointClass copies fixedDirectImageComparisonIso, fixedCompactSupportComparisonIso and fixedCompactSupportOriginIso, which already exist under the same names in the landed FiniteComparisonClassAdjunction. This breaks the landed FiniteDualityLocallyClosedComparison, which compiles on the base and fails with the delivery. Fixed in fixes/lean/Sheaf/AlgebraicGeometry/EtaleOriginAdjointClass.lean: the copies are removed and that module is imported publicly. With the fix, the four delivered modules, FiniteDualityLocallyClosedComparison, the other six importers of EtaleOriginAdjointClass and a probe importing both compile clean. ConstructibleHomComparison already fails on the base, so the delivery did not cause it. Redundant stmt_dep cor-pur-general-admissibility-datum is harmless."
+  "reviewer": "NT-stage2-cc-3236235f5",
+  "group": "Q02",
+  "result": "pass",
+  "note": "Item exceptionalBaseChangeOnOrigin matches pur9-cs-def-bc clause by clause: recorded sfFiniteExceptionalAt at the literal c and cf', K in D+ with the recorded finite-Tor constructibility predicate (= D^b_ctf), retained witness (G = étale f^x Rnu_* K, alpha = refl) and its pulled-back witness via sfDerivedComparisonPullbackIso, Ex° = theta_{c'} (fixedCompactSupportOriginIso conjugated by W'.iso) after the exchange into c' = c.ofIsPullback, counit = preimage of 1_M, b = f'-transpose of (Ex°)^-1 then Lv^*eps; directions and endpoints correct; no extra assumptions, no hollow defs, no sorry in the item module. Three §1(B) repairs justified: CanonicalShriekExchange is the identical body under a new name, forced by the clash of the legacy rightDerivedLowerShriekOfCompactification constant; SpecifiedExceptionalClassHom builds the Hom bijection at the given compactification from canonical maps (recorded theorem only existential, E : Type (u+1)); isIso_csAuxiliaryExchange within the scope of thm-cbc-finite-level-proetale. Postponed specifiedExceptionalEtale_boundedBelow is more general than node clause (2) but true (uniform proper cohomological-dimension bound over a quasi-compact base via proper base change). Records verbatim and only lean fields changed; docstrings and source places present. All four files compile through nt_compile --json (exit 0, no errors; the tool printed no warnings at all). Second reading is an openly declared self-audit with real fixes. Edge cases n=1, K=0, empty schemes, v=id with independent compactifications, and universes checked."
  },
  "split_report": {
   "date": "2026-10-17",

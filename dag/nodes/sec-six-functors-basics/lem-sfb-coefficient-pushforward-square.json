@@ -372,5 +372,23 @@
     }
    ]
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b4200cba7",
+  "group": "Q56",
+  "result": "pass",
+  "note": "Existing-declaration delivery: AlgebraicGeometry.ProEtale.condensedPushforwardHom_comp_map_coefficientMap (side framework ChangeOfCoefficients.lean:121-132, named by the blueprint's lean field). Compiler-printed type has no MonObj/IsMonHom (omit confirmed): arbitrary Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u+1}, a : Λ ⟶ Λ', f : X ⟶ Y of Scheme.{u}. Checked each clause against the recorded dependency declarations (upperStarFromPoint, coefficientMap = .map a, upperStar/lowerStar/upperStarLowerStarAdjunction unit, upperStarFromPointComp in the right direction, condensedPullbackHom = .hom.app, condensedPushforwardHom = unit ≫ lowerStar.map α). Conclusion matches in diagrammatic order; lean.statement is verbatim. Reproduced nt_compile (--json scratch, 3.0 s, no errors): #check type, axioms propext/Classical.choice/Quot.sound, and the node's fully expanded equation closed by the theorem term. Edge cases (a=0/id, no ring structure, f=id, empty schemes) and universes covered. No hollow defs, no local proofs, no modules, no pro-etale substitute. Worker report is real; the second-reading section is the standard 2026-10-17 placeholder (743 landed reports). No findings."
+ },
+ "lean": {
+  "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoefficients",
+  "declaration": "AlgebraicGeometry.ProEtale.condensedPushforwardHom_comp_map_coefficientMap",
+  "statement": "lemma condensedPushforwardHom_comp_map_coefficientMap :\n    condensedPushforwardHom Λ f ≫ (f)_*[Ab.{u + 1}].map (coefficientMap a X) =\n      coefficientMap a Y ≫ condensedPushforwardHom Λ' f",
+  "branch": "slopmaster2",
+  "by": "Q56",
+  "date": "2026-10-18",
+  "existing": true,
+  "note": "Exact existing theorem in the published pro-etale module-object framework. Its explicit omit removes MonObj Λ, MonObj Λ' and IsMonHom a: the compiler confirms parameters {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}} (a : Λ ⟶ Λ') {X Y : Scheme.{u}} (f : X ⟶ Y), without ring hypotheses. coefficientMap a T is (upperStarFromPoint T).map a, condensedPullbackHom Λ f is (upperStarFromPointComp f).hom.app Λ, and condensedPushforwardHom Λ f is the adjunction unit followed by lowerStar.map of that component. A scompile.py probe checked the theorem against precisely this expanded equation, with no monoid structures assumed. Thus the abelian-group square and its ring specialization are the node's exact constructions. #print axioms reports only propext, Classical.choice and Quot.sound. No new module or statement correction."
  }
 }

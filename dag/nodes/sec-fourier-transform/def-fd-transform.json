@@ -95,24 +95,41 @@
   "def-weil-pbc-scheme-conventions"
  ],
  "lean": {
-  "module": "Sheaf.Paper.WeilFourierTransform",
-  "declaration": "AlgebraicGeometry.WeilComplex.fourierTransformOfPairing",
+  "module": "Sheaf.Paper.CommonStageFourierTransform",
+  "declaration": "WeilConjectures.commonStageFourierTransformFunctor",
   "declarations": [
-   "AlgebraicGeometry.WeilComplex.fourierTransformOfPairing",
-   "AlgebraicGeometry.WeilComplex.fourierSquareOver",
-   "AlgebraicGeometry.WeilComplex.fourierSquareFstIsOver",
-   "AlgebraicGeometry.WeilComplex.fourierSquareSndIsOver",
-   "AlgebraicGeometry.WeilComplex.affineNegIsOver",
-   "AlgebraicGeometry.WeilComplex.affineFourierTransform"
+   "WeilConjectures.fourierModelPrime_isUnit",
+   "WeilConjectures.fourierModelPrimeInvertible",
+   "WeilConjectures.fourierModelProjection",
+   "WeilConjectures.fourierModelProjection_frobenius",
+   "WeilConjectures.fourierModelWeil",
+   "WeilConjectures.fourierTensorUnderlying",
+   "WeilConjectures.fourierTensorFrobeniusComponent",
+   "WeilConjectures.fourierTensorFrobenius_naturality",
+   "WeilConjectures.fourierTensorFrobenius",
+   "WeilConjectures.fourierWeilTensorFunctor",
+   "WeilConjectures.commonStageFourierTransformFunctor",
+   "WeilConjectures.commonStageFourierTransform",
+   "WeilConjectures.fourierAffineModel",
+   "WeilConjectures.fourierAffineModel_finiteType",
+   "WeilConjectures.fourierAffineModel_quasiCompact",
+   "WeilConjectures.fourierAffineModel_separated",
+   "WeilConjectures.fourierSquareModel",
+   "WeilConjectures.fourierSquareModel_geometry",
+   "WeilConjectures.fourierSquareModel_characteristic",
+   "WeilConjectures.fourierModelFst",
+   "WeilConjectures.fourierModelSnd",
+   "WeilConjectures.affineCommonStageFourierTransform",
+   "WeilConjectures.fourierBaseCharacteristic",
+   "AlgebraicGeometry.Etale.fourierTransform"
   ],
-  "file": "lean/Sheaf/Paper/WeilFourierTransform.lean",
-  "statement": "def WeilComplex.fourierTransformOfPairing {S V V' : Scheme.{u}} [V.Over (Spec (CommRingCat.of k₀))] [V'.Over (Spec (CommRingCat.of k₀))] (π : V ⟶ S) (π' : V' ⟶ S) [(pullback π π').Over (Spec (CommRingCat.of k₀))] [(pullback.fst π π').IsOver (Spec (CommRingCat.of k₀))] [(pullback.snd π π').IsOver (Spec (CommRingCat.of k₀))] [LocallyOfFiniteType (pullback π π' ↘ Spec (CommRingCat.of k₀))] [IsSeparated (pullback.snd π π')] [LocallyOfFiniteType (pullback.snd π π')] [QuasiCompact (pullback.snd π π')] [LocallyOfFiniteType (V' ↘ Spec (CommRingCat.of k₀))] [QuasiCompact (V' ↘ Spec (CommRingCat.of k₀))] [QuasiSeparated (V' ↘ Spec (CommRingCat.of k₀))] (ψ : AddChar k₀ (PadicAlgCl l)) (b : Γ(pullback π π', ⊤)) (r : ℤ) : WeilComplex k₀ l V ⥤ WeilComplex k₀ l V'",
+  "file": "lean/Sheaf/Paper/CommonStageFourierTransform.lean",
+  "statement": "def commonStageFourierTransformFunctor {V₀ V₀' W₀ : Over (Spec (.of F.field.k₀))} [LocallyOfFiniteType V₀.hom] [QuasiCompact V₀.hom] [LocallyOfFiniteType V₀'.hom] [QuasiCompact V₀'.hom] [LocallyOfFiniteType W₀.hom] [QuasiCompact W₀.hom] (p₁ : W₀ ⟶ V₀) (p₂ : W₀ ⟶ V₀') (c : Compactification p₂.left) (A : generalAlgebraicallyClosedConstructibleCategory F.coefficients.l F.coefficients.Qbar W₀.left) (r : ℤ) : sfCommonStageWeilComplex F.field F.coefficients.l F.coefficients.different V₀ F.coefficients.Qbar ⥤ sfCommonStageWeilComplex F.field F.coefficients.l F.coefficients.different V₀' F.coefficients.Qbar",
   "branch": "newtargets-dag",
-  "by": "Q05",
+  "by": "Q24",
   "date": "2026-10-18",
   "existing": false,
-  "note": "The recorded ordinary-etale Fourier transform has no Weil-complex input, and the upstream Weil transform is rank one only. This module retains the exact ordinary-etale declaration of the current blueprint snapshot via its public upstream import and lean.declarations, and supplies the same canonical formula on constructible Weil complexes for arbitrary pairings and rank, using existing Weil upperStar, tensorLisse, derivedLowerShriek and shift functors. Its affine specialization uses the actual standard pairing. The product-over and negation-over instances only expose canonical finite-field models; no arbitrary comparison or auxiliary mathematical hypothesis replaces the transform.",
-  "fixed_by": "NT-stage2-cc-eaa7d12d2"
+  "note": "§1(B): the prior WeilFourierTransform interface accepts the derived category of Weil sheaves, whereas def-weil-weil-sheaf-complex and sk-def-trace now require IsoAlgebra fixed pairs in the intrinsic adic common-stage derived category. This module publicly retains the full existing ordinary-etale functor and the previous general Weil-pairing/affine interfaces, and adds the actual fixed-pair functor on objects and all morphisms using the recorded adic character kernel, normalized geometric-fibre pullback, monoidal Frobenius comparison and adjunction-mate compact support. The signed shift is formed on the kernel over the finite-field model before descent: the canonical tensor/shift and compact-support/shift comparisons identify this with Rp2!(p1*K tensor kernel)[r]. No arbitrary Frobenius isomorphism, arbitrary kernel, equivalence with derived Weil sheaves, or trace-formula hypothesis is chosen. Tensor naturality is a named postponed obligation; functoriality is inherited from the existing pullback, tensor and compact-support functors. The affine specialization supplies the standard pairing and r=card n, including rank one."
  },
  "blueprint_lean": [
   "AlgebraicGeometry.Etale.fourierTransform"
@@ -180,10 +197,10 @@
  "reviewed_lean": {
   "date": "2026-10-18",
   "by": "L",
-  "reviewer": "NT-stage2-cc-eaa7d12d2",
-  "group": "Q05",
-  "result": "fix",
-  "note": "Read the item node, the def-wf-tate-twist and def-fd-transform records, the blueprint source, the report and both modules. Statements: FT_{psi^-1} after FT_psi ~ tateTwist(-card n) and FT_psi after FT_psi ~ upperStar(AffineSpace.neg) then tateTwist(-card n), as functor isomorphisms on WeilComplex over AffineSpace n (Spec k0) with Fintype n (rank 0 allowed). Hypotheses: Fact l.Prime, ringChar k0 != l, psi != 1 (the chapter's standing nontriviality). Composition order and twist sign checked against Laumon 1.2.2.1, TateTwist.lean and the upstream rank-one nonempty_iso_fourierTransform_comp_inv. Edge cases rank 0, rank 1, char 2 and zero complex are fine; no universe restriction. The section 1(B) dependency module for def-fd-transform is justified (the recorded transform is ordinary-etale; the upstream Weil transform is rank one) and has real data and canonical instances. FINDING H4/H13: WeilSheaf.fourierPairingKernel duplicated the existing upstream artinSchreierOf (WeilSheaf/FourierInversion/Defs.lean); fixes/WeilFourierTransform.lean uses artinSchreierOf and isLisse_artinSchreierOf and imports FourierInversion.Defs, with no signature change. Fixed report adds a reviewer section: the worker's searches missed WeilSheaf/FourierInversion.lean (rank-one first formula only, so the item is not existing). The merge refit will drop Etale.fourierTransform from def-fd-transform lean.declarations; it stays publicly imported and in blueprint_lean. nt_compile.py: delivered pair 4.0 s and 3.6 s, fixed pair 3.7 s and 3.6 s, exit 0, no messages (the tool sets warn.sorry=false). Axiom probe: sorryAx in the defs comes from upstream functors; no sorry outside the two theorem proofs."
+  "reviewer": "NT-stage2-cc-af494a48d",
+  "group": "Q24",
+  "result": "pass",
+  "note": "Clause-by-clause match of fourierTraceFormula to the node: FourierSetting; Psi with Psi≠1 (the standing assumption of sk-def-char); psi=Psi.compTrace; K in sfCommonStageWeilComplex on A^1; every n≥1, every y in extensionSubfield (y=0 included), every compactification; affine fixed-pair transform with r=card PUnit=1 and fourierAdicKernel(stdPairing); weilTraceFunction at the actual F_{q^n}-point; right side -classicalFiniteFieldFourierTransform, which unfolds to -Σ_x t_K(x)ψ(Tr(xy)). lean.statement is verbatim and the docstring carries the 6 proof steps. The §1(B) def-fd-transform repair (old record on derived-of-Weil WeilComplex) is canonical: fourierModelWeil via zlPullComp.symm plus Frob≫π=π; tensor Frobenius via canonicalCommonStagePullbackTensor and N.str in the correct mapOfNatIso type; zlFrobeniusSquare pullback; zlComplexShriek; shift on the model kernel. Helper theorems are true and add no hypotheses; nothing hollow; only sorry proofs. Node diffs: lean only, plus the item's stmt_deps gaining four landed nodes (allowed). No duplicate found in lean/Sheaf. nt_compile --json on both files: rc 0, no messages; an injected type error is reported. Maintainer notes: the def-fd-transform record's main declaration is a generic-kernel functor and the Fourier kernel is applied only on affine space; landed lem-fd-inversion (Q05) is stated on the old WeilComplex transform and should be reopened; three unused imports."
  },
  "split_report": {
   "date": "2026-10-18",
