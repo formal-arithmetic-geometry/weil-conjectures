@@ -17,12 +17,10 @@ public import Mathlib.CategoryTheory.Sites.Equivalence
 public import Mathlib.CategoryTheory.Sites.LocallyBijective
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 public import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
-import Mathlib.Algebra.Homology.DerivedCategory.KInjective
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits
 import Mathlib.Algebra.Category.Grp.AB
 import Sheaf.Algebra.Homology.KInjectiveProductsTermwise
-import Sheaf.Algebra.Homology.KInjectiveProducts
-import Sheaf.CategoryTheory.Triangulated.DerivedLimitExistence
+import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitProducts
 
 /-! # Derived sections over a site object and derived inverse limits
 
@@ -109,6 +107,82 @@ noncomputable abbrev siteModuleDerivedSections
   letI := siteModuleKInjectiveResolutions.{c, v, r} J O
   (siteModuleSections.{c, v, r} J O U).rightDerivedFunctor
 
+/-- Sections preserve termwise products. The derived unit is an isomorphism on the
+K-injective factors and their termwise product, so its naturality identifies the image
+product cone with the localization of the sectionwise product cone. -/
+private theorem siteModuleDerivedSections_preservesCountableProducts
+    {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
+    (O : Sheaf J CommRingCat.{max c v r}) (U : C)
+    [HasDerivedCategory.{w} (ringedSiteModules.{max c v r, max c v r, v, c}
+      ((sheafCompose J
+        (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj O))]
+    [HasDerivedCategory.{w'} AddCommGrpCat.{max c v r}] :
+    PreservesLimitsOfShape (Discrete ℕ) (siteModuleDerivedSections.{c, v, r, w, w'} J O U) := by
+  let := siteModuleKInjectiveResolutions.{c, v, r} J O
+  let A := ringedSiteModules.{max c v r, max c v r, v, c}
+    ((sheafCompose J
+      (forget₂ CommRingCat.{max c v r} RingCat.{max c v r})).obj O)
+  let F := siteModuleSections.{c, v, r} J O U
+  have : PreservesLimitsOfShape (Discrete ℕ) F := by
+    dsimp [F, siteModuleSections]
+    infer_instance
+  classical
+  let G := F.mapHomologicalComplex (ComplexShape.up ℤ)
+  let q := HomotopyCategory.quotient A (ComplexShape.up ℤ)
+  let a : G ⋙ DerivedCategory.Q ≅
+      q ⋙ (F.mapHomotopyCategory (ComplexShape.up ℤ) ⋙ DerivedCategory.Qh) :=
+    Functor.isoWhiskerLeft G (DerivedCategory.quotientCompQhIso AddCommGrpCat).symm ≪≫
+      (Functor.associator _ _ _).symm ≪≫
+      Functor.isoWhiskerRight (F.mapHomotopyCategoryFactors _).symm DerivedCategory.Qh ≪≫
+      Functor.associator _ _ _
+  let β : G ⋙ DerivedCategory.Q ⟶ DerivedCategory.Q ⋙ F.rightDerivedFunctor :=
+    a.hom ≫ Functor.whiskerLeft q F.rightDerivedFunctorUnit ≫
+      (Functor.associator _ _ _).inv ≫
+      (Functor.isoWhiskerRight
+        (DerivedCategory.quotientCompQhIso A)
+        F.rightDerivedFunctor).hom
+  have hβ (I : CochainComplex A ℤ) [I.IsKInjective] :
+      IsIso (β.app I) := by
+    dsimp [β, a]
+    infer_instance
+  obtain ⟨_, hQ, _⟩ :=
+    derivedCategory_countableProducts_core AddCommGrpCat.{max c v r}
+  have : ∀ (I : ℕ → CochainComplex AddCommGrpCat.{max c v r} ℤ),
+      PreservesLimit (Discrete.functor I) DerivedCategory.Q := fun I ↦
+    preservesLimit_of_preserves_limit_cone (limit.isLimit _) (hQ ℕ I).some
+  have : PreservesLimitsOfShape (Discrete ℕ) (DerivedCategory.Q (C := AddCommGrpCat.{max c v r})) :=
+    preservesLimitsOfShape_of_discrete _
+  have hfamily (K : ℕ → DerivedCategory A) :
+      PreservesLimit (Discrete.functor K) F.rightDerivedFunctor := by
+    have hex (n : ℕ) := DerivedCategory.exists_iso_Q_obj_of_isKInjective (K n)
+    choose I hI he using hex
+    let e (n : ℕ) := (Classical.choice (he n)).symm
+    have : ∀ n, (I n).IsKInjective := hI
+    let P := HomologicalComplex.coneOfHasLimitEval (Discrete.functor I)
+    obtain ⟨hPI, hPL'⟩ := CochainComplex.termwise_product_isKInjective_and_isLimit I
+    have : CochainComplex.IsKInjective P.pt := hPI
+    have hPL : IsLimit (DerivedCategory.Q.mapCone P) := hPL'.some
+    have hFPL := isLimitOfPreserves DerivedCategory.Q
+      (isLimitOfPreserves G (HomologicalComplex.isLimitConeOfHasLimitEval (Discrete.functor I)))
+    let α : Discrete.functor I ⋙ DerivedCategory.Q ≅ Discrete.functor K :=
+      Discrete.natIso (fun (n : Discrete ℕ) ↦ e n.as)
+    let c := (Cone.postcompose α.hom).obj (DerivedCategory.Q.mapCone P)
+    have hc : IsLimit c := (IsLimit.postcomposeHomEquiv α _).symm hPL
+    apply preservesLimit_of_preserves_limit_cone hc
+    let αβ : (Discrete.functor I ⋙ G) ⋙ DerivedCategory.Q ≅
+        (Discrete.functor I ⋙ DerivedCategory.Q) ⋙ F.rightDerivedFunctor :=
+      Discrete.natIso (fun (n : Discrete ℕ) ↦ asIso (β.app (I n.as)))
+    have hmap : IsLimit (F.rightDerivedFunctor.mapCone (DerivedCategory.Q.mapCone P)) :=
+      (IsLimit.equivOfNatIsoOfIso αβ
+        (DerivedCategory.Q.mapCone (G.mapCone P))
+        (F.rightDerivedFunctor.mapCone (DerivedCategory.Q.mapCone P))
+        (Cone.ext (asIso (β.app P.pt)) (fun n ↦ by
+          simpa [αβ] using β.naturality (P.π.app n)))).1 hFPL
+    exact (IsLimit.equivOfNatIsoOfIso (Functor.isoWhiskerRight α F.rightDerivedFunctor)
+      (F.rightDerivedFunctor.mapCone (DerivedCategory.Q.mapCone P))
+      (F.rightDerivedFunctor.mapCone c) (Cone.ext (Iso.refl _) (fun n ↦ by simp [c]))).1 hmap
+  exact preservesLimitsOfShape_of_discrete _
+
 /-- Sections over any object of a small ringed site preserve derived products and
 send a specified derived-limit triangle to its image tower's derived-limit triangle.
 The comparison respects every product projection and therefore also the induced
@@ -129,7 +203,7 @@ Proof:
    Its unique product comparison with the prescribed product respects projections.
 3. Sections of this complex are the degreewise product of sections. Products
    of abelian groups are exact (`lem-pc-abelian-groups-exact-products`), so
-   `lem-weil-derived-limit-existence`, clause (2), identifies its localization
+   `lem-weil-derived-limit-products-core` identifies its localization
    with the product in the target derived category. The K-injective comparisons
    and the source product comparison give `e` with the displayed equations.
 4. The right derived functor is triangulated by
@@ -168,6 +242,37 @@ theorem site_rgamma_derivedLimit
           ((siteModuleDerivedSections.{c, v, r, w, w'} J O U).commShiftIso (1 : ℤ)).hom.app L) ∧
       (∀ n : ℕ, (siteModuleDerivedSections.{c, v, r, w, w'} J O U).map p ≫ e.hom ≫ Pi.π _ n =
         (siteModuleDerivedSections.{c, v, r, w, w'} J O U).map (p ≫ Pi.π K n)) := by
-  sorry
+  let := siteModuleKInjectiveResolutions.{c, v, r} J O
+  let Φ := siteModuleDerivedSections.{c, v, r, w, w'} J O U
+  have := siteModuleDerivedSections_preservesCountableProducts.{c, v, r, w, w'} J O U
+  let e := PreservesProduct.iso Φ K
+  have he (n : ℕ) : e.hom ≫ Pi.π _ n = Φ.map (Pi.π K n) := by
+    simp [e]
+  refine ⟨e, he, ?_, ?_⟩
+  · have ht : Φ.map (towerTransitionEndomorphism f) ≫ e.hom =
+        e.hom ≫ towerTransitionEndomorphism (fun n ↦ Φ.map (f n)) := by
+      apply Pi.hom_ext
+      intro n
+      simp only [Category.assoc, he, towerTransitionEndomorphism, towerProductShift,
+        Preadditive.comp_sub, Preadditive.sub_comp, Category.comp_id,
+        Pi.lift_π, Functor.map_sub]
+      rw [← Category.assoc, he, ← Functor.map_comp]
+      rw [← Functor.map_comp, Pi.lift_π, Category.id_comp, Functor.map_comp]
+    exact Pretriangulated.isomorphic_distinguished _ (Φ.map_distinguished _ hK) _
+      (Pretriangulated.Triangle.isoMk _ _ (Iso.refl _) e.symm e.symm
+        (by change (Φ.map p ≫ e.hom) ≫ e.inv = 𝟙 _ ≫ Φ.map p; simp)
+        (by
+          change towerTransitionEndomorphism (fun n ↦ Φ.map (f n)) ≫ e.inv =
+            e.inv ≫ Φ.map (towerTransitionEndomorphism f)
+          apply (cancel_mono e.hom).1
+          simpa only [Category.assoc, Iso.inv_hom_id, Category.comp_id,
+            Iso.inv_hom_id_assoc] using congrArg (fun t ↦ e.inv ≫ t) ht.symm)
+        (by
+          change (e.inv ≫ Φ.map δ ≫ (Φ.commShiftIso (1 : ℤ)).hom.app L) ≫
+            (shiftFunctor _ (1 : ℤ)).map (𝟙 _) =
+              e.inv ≫ (Φ.map δ ≫ (Φ.commShiftIso (1 : ℤ)).hom.app L)
+          simp))
+  · intro n
+    rw [he, ← Φ.map_comp]
 
 end CategoryTheory
