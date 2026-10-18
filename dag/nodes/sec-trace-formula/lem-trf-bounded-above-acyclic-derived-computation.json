@@ -1,0 +1,88 @@
+{
+ "id": "lem-trf-bounded-above-acyclic-derived-computation",
+ "kind": "statement",
+ "title": "Bounded above acyclic complexes compute a left derived functor",
+ "statement": "Let $\\mathcal A,\\mathcal B$ be abelian categories [def-sp-abelian], and assume $\\mathcal A$ has enough projectives: every object admits an epimorphism from an object $P$ for which every map $P\\to Y$ lifts across every epimorphism $X\\to Y$. Every bounded above cochain complex $X$ has a quasi-isomorphism $P\\to X$ with $P$ bounded above and each $P^i$ projective; when $X^i=0$ for $i>b$, one can require $P^i=0$ for $i>b$. Let $V:\\mathcal A\\to\\mathcal B$ be additive and right exact (it preserves cokernels and finite direct sums), and suppose its total left derived functor $LV:D(\\mathcal A)\\to D(\\mathcal B)$ exists, i.e. in Situation 05S8 of [def-pur-saturated-triangulated-localization], with the homotopy category $K(\\mathcal A)$, its quasi-isomorphisms and the functor $Q\\circ V$, the left derived functor is defined at every object, with canonical comparison $\\varepsilon_C:LV(QC)\\to Q(V(C))$ [def-weil-abstract-derived-category]. For every bounded above complex of projective objects $P$, $\\varepsilon_P$ is an isomorphism. Call an object $A$ left $V$-acyclic when $\\varepsilon_{A[0]}:LV(A[0])\\to V(A)[0]$ is an isomorphism. For every bounded above complex $C$ of left $V$-acyclic objects, $\\varepsilon_C$ is an isomorphism. Consequently, if $a:C\\to X$ is a quasi-isomorphism with such $C$, the canonical identification of $LV(QX)$ with $Q(V(C))$ is $\\varepsilon_C\\circ LV(Qa)^{-1}$. These identifications are natural for maps between augmented resolutions: a square $a'f=ha$ gives $Q(V(f))\\varepsilon_C LV(Qa)^{-1}=\\varepsilon_{C'}LV(Qa')^{-1}LV(Qh)$.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 0646, lemma-projective-resolutions-exist; Tag 06XN, lemma-find-existence-computes, applied to bounded above projectives; dual of Tag 015E, lemma-leray-acyclicity. The last equality is naturality of the canonical comparison. Defined at every object: Definition Tag 05S9."
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-weil-abstract-derived-category",
+  "def-pur-saturated-triangulated-localization"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "\"IsLeftDerivedFunctor\"",
+   "results": "12 hits: CategoryTheory.Functor.IsLeftDerivedFunctor, CategoryTheory.Functor.instIsLeftDerivedFunctorTotalLeftDerivedTotalLeftDerivedCounit, CategoryTheory.Functor.IsLeftDerivedFunctor.isRightKanExtension, CategoryTheory.Functor.IsLeftDerivedFunctor.mk, CategoryTheory.Functor.isLeftDerivedFunctor_iff_isRightKanExtension, CategoryTheory.Functor.isLeftDerivedFunctor_iff_isIso_leftDerivedLift, CategoryTheory.Functor.isLeftDerivedFunctor_iff_of_iso, CategoryTheory.Functor.instIsLeftDerivedFunctorCompCompInvAssociatorWhiskerRightOfIsRightAdjoint.  Digest 5538b6c713bb2d39. Actual outputs were read; relevant source files are described in report.md.",
+   "date": "2026-10-18",
+   "verdict": "no match: the hits compute individual leftDerived n from projective resolutions or define abstract Kan extensions; none states the total-derived counit comparison for all bounded above termwise acyclic complexes. Read Abelian/LeftDerived.lean:34-41, 64-133 and Functor/Derived/LeftDerived.lean:45-120."
+  },
+  {
+   "tool": "grep",
+   "query": "acyclic|projective [sub=CategoryTheory/Functor/Derived]",
+   "results": "1 hits: Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean.  Digest e7a4d3a5e5a585e0. Actual outputs were read; relevant source files are described in report.md.",
+   "date": "2026-10-18",
+   "verdict": "no match: the hits compute individual leftDerived n from projective resolutions or define abstract Kan extensions; none states the total-derived counit comparison for all bounded above termwise acyclic complexes. Read Abelian/LeftDerived.lean:34-41, 64-133 and Functor/Derived/LeftDerived.lean:45-120."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A bounded above complex of left acyclic objects computes a left derived functor canonically in the derived category",
+   "results": "8 hits: CategoryTheory.Functor.leftDerived, CategoryTheory.ProjectiveResolution.isoLeftDerivedObj, CategoryTheory.Functor.IsLeftDerivedFunctor.mk, CategoryTheory.Functor.IsLeftDerivedFunctor, CategoryTheory.Functor.leftDerivedToHomotopyCategory, CategoryTheory.Functor.totalLeftDerived, CategoryTheory.Functor.HasPointwiseLeftDerivedFunctorAt.mk, CategoryTheory.Functor.HasLeftDerivedFunctor.  Digest 7a7288136f4e7416. Actual outputs were read; relevant source files are described in report.md.",
+   "date": "2026-10-18",
+   "verdict": "no match: the hits compute individual leftDerived n from projective resolutions or define abstract Kan extensions; none states the total-derived counit comparison for all bounded above termwise acyclic complexes. Read Abelian/LeftDerived.lean:34-41, 64-133 and Functor/Derived/LeftDerived.lean:45-120."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bounded above complex of left acyclic objects computes the total left derived functor and projective resolutions exist in abelian categories with enough projectives",
+   "results": "8 hits: CategoryTheory.Functor.leftDerived, CategoryTheory.Functor.fromLeftDerivedZero, CategoryTheory.ProjectiveResolution.isoLeftDerivedObj, CategoryTheory.Functor.isZero_leftDerived_obj_projective_succ, CategoryTheory.ProjectiveResolution.fromLeftDerivedZero', CategoryTheory.Functor.mapProjectiveResolution_complex, CategoryTheory.ProjectiveResolution.fromLeftDerivedZero_eq, CategoryTheory.projectiveResolutions.  Digest 3d4bd0276221cf89. Actual outputs were read; relevant source files are described in report.md.",
+   "date": "2026-10-18",
+   "verdict": "no match: the hits compute individual leftDerived n from projective resolutions or define abstract Kan extensions; none states the total-derived counit comparison for all bounded above termwise acyclic complexes. Read Abelian/LeftDerived.lean:34-41, 64-133 and Functor/Derived/LeftDerived.lean:45-120."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Leray acyclicity lemma dual for bounded above resolutions and the derived category counit on acyclic complexes",
+   "results": "8 hits: CategoryTheory.ProjectiveResolution.fromLeftDerivedZero', CategoryTheory.InjectiveResolution.toRightDerivedZero', CategoryTheory.Functor.toRightDerivedZero, CategoryTheory.InjectiveResolution.toRightDerivedZero'_comp_iCycles_assoc, CategoryTheory.InjectiveResolution.toRightDerivedZero'_comp_iCycles, CategoryTheory.InjectiveResolution.toRightDerivedZero_eq, CochainComplex.IsKInjective.rightOrthogonal, CategoryTheory.InjectiveResolution.isoRightDerivedObj.  Digest 21cd4feae6a723fc. Actual outputs were read; relevant source files are described in report.md.",
+   "date": "2026-10-18",
+   "verdict": "no match: the hits compute individual leftDerived n from projective resolutions or define abstract Kan extensions; none states the total-derived counit comparison for all bounded above termwise acyclic complexes. Read Abelian/LeftDerived.lean:34-41, 64-133 and Functor/Derived/LeftDerived.lean:45-120."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-derived-colimit-bar",
+  "date": "2026-10-18",
+  "group": "Q71"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Supporting ring/sheaf input: Transitivity triangle for ring cotangent complexes. Proof of the supporting transitivity triangle: polynomial differential sequence, derived category homology comparisons, and identification of functoriality maps. Generic homological input to the category bar resolution: Bounded above acyclic complexes compute a left derived functor.",
+   "via": [
+    "lem-trf-derived-colimit-bar",
+    "lem-trf-cotangent-transitivity-triangle",
+    "lem-trf-lci-cotangent-presentation",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

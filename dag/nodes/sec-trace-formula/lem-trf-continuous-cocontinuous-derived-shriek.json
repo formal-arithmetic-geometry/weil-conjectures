@@ -1,0 +1,91 @@
+{
+ "id": "lem-trf-continuous-cocontinuous-derived-shriek",
+ "kind": "statement",
+ "title": "Unbounded derived lower shriek for continuous and cocontinuous site functors",
+ "statement": "Let $\\mathcal C,\\mathcal D$ be small sites [def-weil-pbc-sites-and-cohomology] in the universe of [def-weil-size-convention]. Let $u:\\mathcal C\\to\\mathcal D$ be continuous and cocontinuous: in addition to continuity, for each object $U\\in\\mathcal C$ and covering family $\\{V_i\\to u(U)\\}$ there is a covering $\\{U_j\\to U\\}$ such that each $u(U_j)\\to u(U)$ factors through some $V_i$. Let $g:\\operatorname{Sh}(\\mathcal C)\\to\\operatorname{Sh}(\\mathcal D)$ be the induced geometric morphism with inverse image $g^{-1}F=F\\circ u$. Let $\\mathcal O$ be a sheaf of commutative rings on $\\mathcal D$ and put $\\mathcal O'=g^{-1}\\mathcal O$, with identity structural ring map [def-weil-pbc-ringed-topos-morphism]. On the categories of module sheaves [def-weil-sheaf-of-modules-category], $g^*=g^{-1}$ is exact and has an additive left adjoint $g_!$. The total left derived functor $Lg_!:D(\\mathcal O')\\to D(\\mathcal O)$ exists on the unbounded derived categories [def-weil-abstract-derived-category]: in Situation 05S8 of [def-pur-saturated-triangulated-localization], with the homotopy category of complexes of $\\mathcal O'$-modules, its quasi-isomorphisms and the functor $Q\\circ g_!$, the left derived functor is defined at every object; is triangulated, and is left adjoint to the termwise functor $g^{-1}:D(\\mathcal O)\\to D(\\mathcal O')$. Its comparison $\\varepsilon:Lg_!Q\\to Qg_!$ and adjunction are the canonical derived comparison and derived adjunction of $g_!\\dashv g^{-1}$; explicitly, for every complex $C$ of $\\mathcal O'$-modules, every complex $N$ of $\\mathcal O$-modules and every chain map $f:g_!C\\to N$ with adjoint $f^\\flat:C\\to g^{-1}N$, the adjunction bijection $\\operatorname{Hom}_{D(\\mathcal O)}(Lg_!QC,QN)\\cong\\operatorname{Hom}_{D(\\mathcal O')}(QC,Qg^{-1}N)$ sends $Q(f)\\circ\\varepsilon_C$ to $Q(f^\\flat)$.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07AC, lemma-existence-derived-lower-shriek; the exact inverse image and module lower shriek used there are from sites-modules.tex, lemma-lower-shriek-modules. Triangulatedness is derived.tex Tag 05SE, proposition-derived-functor; adjunction is Tag 09T5, lemma-derived-adjoint-functors, whose bijection is the one of Tag 0DVC, lemma-pre-derived-adjoint-functors, evaluated at identity resolutions (label authoritative); defined at every object is Definition Tag 05S9."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-ringed-topos-morphism",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-pur-saturated-triangulated-localization"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "\"totalLeftDerived\"",
+   "results": "3 hits: CategoryTheory.Functor.totalLeftDerived, CategoryTheory.Functor.instIsLeftDerivedFunctorTotalLeftDerivedTotalLeftDerivedCounit, CategoryTheory.Functor.totalLeftDerivedCounit.  Digest 97dcafbd4d38ff9a. Actual outputs were read; relevant source files are described in report.md.",
+   "date": "2026-10-18",
+   "verdict": "no match: ordinary sheaf adjunctions and an abstract derived-adjunction construction do not prove existence of the unbounded left derived module lower shriek for these sites. Read Sites/CoverLifting.lean, Functor/Derived/Adjunction.lean:136-160, and Functor/Derived/LeftDerived.lean:45-58, 120-155."
+  },
+  {
+   "tool": "grep",
+   "query": "lowerShriek|lower_shriek|leftDerived.*adjoint|adjoint.*leftDerived [sub=CategoryTheory]",
+   "results": "0 hits: .  Digest 4f53cda18c2baa0c. Actual outputs were read; relevant source files are described in report.md.",
+   "date": "2026-10-18",
+   "verdict": "no match: ordinary sheaf adjunctions and an abstract derived-adjunction construction do not prove existence of the unbounded left derived module lower shriek for these sites. Read Sites/CoverLifting.lean, Functor/Derived/Adjunction.lean:136-160, and Functor/Derived/LeftDerived.lean:45-58, 120-155."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A continuous and cocontinuous functor of small sites has a total left derived lower shriek left adjoint to inverse image on modules",
+   "results": "8 hits: CategoryTheory.Functor.sheafAdjunctionCocontinuous, SheafOfModules.pushforwardPushforwardAdj, SheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.instIsLeftAdjointPullback, SheafOfModules.instIsRightAdjointPushforward, SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous, SheafOfModules.PullbackConstruction.adjunction, CategoryTheory.Functor.pushforwardContinuousSheafificationCompatibility.  Digest 7278366a697bbee1. Actual outputs were read; relevant source files are described in report.md.",
+   "date": "2026-10-18",
+   "verdict": "no match: ordinary sheaf adjunctions and an abstract derived-adjunction construction do not prove existence of the unbounded left derived module lower shriek for these sites. Read Sites/CoverLifting.lean, Functor/Derived/Adjunction.lean:136-160, and Functor/Derived/LeftDerived.lean:45-58, 120-155."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Continuous and cocontinuous site functors have left derived lower shriek adjoint to inverse image",
+   "results": "8 hits: CategoryTheory.Functor.sheafPullback, CategoryTheory.Functor.sheafPullbackConstruction.sheafAdjunctionContinuous, CategoryTheory.Functor.sheafAdjunctionCocontinuous, CategoryTheory.Functor.sheafAdjunctionContinuous, TopCat.Sheaf.pullback, CategoryTheory.Functor.sheafPullbackConstruction.instIsRightAdjointSheafSheafPushforwardContinuousOfHasWeakSheafify, SheafOfModules.PullbackConstruction.adjunction, TopCat.Sheaf.instIsLeftAdjointPullback.  Digest 98f2ac9226b52177. Actual outputs were read; relevant source files are described in report.md.",
+   "date": "2026-10-18",
+   "verdict": "no match: ordinary sheaf adjunctions and an abstract derived-adjunction construction do not prove existence of the unbounded left derived module lower shriek for these sites. Read Sites/CoverLifting.lean, Functor/Derived/Adjunction.lean:136-160, and Functor/Derived/LeftDerived.lean:45-58, 120-155."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The total left derived left adjoint of a site inverse image exists on unbounded derived categories and composes for continuous cocontinuous functors",
+   "results": "8 hits: CategoryTheory.Functor.sheafAdjunctionCocontinuous, CategoryTheory.Functor.pushforwardContinuousSheafificationCompatibility, CategoryTheory.Adjunction.derived, CategoryTheory.Functor.sheafPullbackConstruction.sheafAdjunctionContinuous, CategoryTheory.Functor.sheafPushforwardCocontinuousCompSheafToPresheafIso, CategoryTheory.RanIsSheafOfIsCocontinuous.fac, CategoryTheory.Functor.sheafAdjunctionCocontinuous_homEquiv_apply_val, CategoryTheory.Functor.sheafPushforwardCocontinuous.  Digest b2eb2b49a263a3d5. Actual outputs were read; relevant source files are described in report.md.",
+   "date": "2026-10-18",
+   "verdict": "no match: ordinary sheaf adjunctions and an abstract derived-adjunction construction do not prove existence of the unbounded left derived module lower shriek for these sites. Read Sites/CoverLifting.lean, Functor/Derived/Adjunction.lean:136-160, and Functor/Derived/LeftDerived.lean:45-58, 120-155."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-derived-colimit-bar",
+  "date": "2026-10-18",
+  "group": "Q71"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Supporting ring/sheaf input: Transitivity triangle for ring cotangent complexes. Proof of the supporting transitivity triangle: polynomial differential sequence, derived category homology comparisons, and identification of functoriality maps. Generic homological input to the category bar resolution: Unbounded derived lower shriek for continuous and cocontinuous site functors.",
+   "via": [
+    "lem-trf-derived-colimit-bar",
+    "lem-trf-cotangent-transitivity-triangle",
+    "lem-trf-lci-cotangent-presentation",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}
