@@ -356,4 +356,48 @@ theorem isIso_upperStar_map_unit_of_isPullback (hsq : IsPullback g' j' j g'')
 
 end OpenBaseChange
 
+section Transport
+
+omit [Finite Λ] [HasTateTwist Λ] [HasTateTwist.IsNormalized Λ]
+
+/-- The unit of an adjunction is invertible at `X` if it is at an isomorphic object. -/
+lemma isIso_unit_app_of_iso {C D : Type*} [Category C] [Category D] {F : C ⥤ D} {G : D ⥤ C}
+    (adj : F ⊣ G) {X Y : C} (e : X ≅ Y) (h : IsIso (adj.unit.app Y)) :
+    IsIso (adj.unit.app X) := by
+  have : adj.unit.app X = e.hom ≫ adj.unit.app Y ≫ G.map (F.map e.inv) := by
+    rw [← adj.unit_naturality_assoc, ← G.map_comp, ← F.map_comp, e.hom_inv_id,
+      F.map_id, G.map_id, Category.comp_id]
+  rw [this]
+  infer_instance
+
+/-- The unit of `L(φ ≫ p)^* ⊣ R(φ ≫ p)_*` is invertible at `K` if that of `Lp^* ⊣ Rp_*` is and
+`φ` is an isomorphism. -/
+lemma isIso_unit_app_comp_of_isIso {X Y S : Scheme.{u}} (φ : X ⟶ Y) [IsIso φ] (p : Y ⟶ S)
+    (K : _root_.DerivedCategory (Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    (h : IsIso ((derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) p).unit.app K)) :
+    IsIso ((derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) (φ ≫ p)).unit.app K) := by
+  obtain ⟨e₁⟩ := nonempty_leftDerivedUpperStar_id_iso Λ Y (inv φ ≫ φ) (by simp)
+  obtain ⟨e₂⟩ := nonempty_leftDerivedUpperStar_id_iso Λ X (φ ≫ inv φ) (by simp)
+  let eqv : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) ≌
+      _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :=
+    CategoryTheory.Equivalence.mk (L((φ)^*[ModuleCat.{u + 1} Λ]))
+      (L((inv φ)^*[ModuleCat.{u + 1} Λ]))
+      (e₁.symm ≪≫ leftDerivedUpperStarComp _ (inv φ) φ _ rfl)
+      ((leftDerivedUpperStarComp _ φ (inv φ) _ rfl).symm ≪≫ e₂)
+  have : (L((φ)^*[ModuleCat.{u + 1} Λ])).IsEquivalence := eqv.isEquivalence_functor
+  let adj₁ := (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) p).comp
+    (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) φ)
+  let adj₂ := derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) (φ ≫ p)
+  let α := (leftDerivedUpperStarComp (ModuleCat.{u + 1} Λ) φ p _ rfl).hom
+  have hu := unit_conjugateEquiv adj₁ adj₂ α K
+  have : IsIso (adj₁.unit.app K) := by
+    simp only [adj₁, Adjunction.comp_unit_app]
+    infer_instance
+  have : IsIso (adj₂.unit.app K ≫ (R((φ ≫ p)_*[ModuleCat.{u + 1} Λ])).map (α.app K)) := by
+    rw [← hu]
+    infer_instance
+  exact IsIso.of_isIso_comp_right _ ((R((φ ≫ p)_*[ModuleCat.{u + 1} Λ])).map (α.app K))
+
+end Transport
+
 end AlgebraicGeometry.Etale

@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.LocalizedChern
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.HomotopyInvariance
 public import WeilConjectures.SixFunctors.Etale.Derived.LocalizationBaseChange
 
 /-!
@@ -26,9 +27,9 @@ Both are proved here from homotopy invariance with twisted coefficients, the uni
 (`AlgebraicGeometry.VectorBundle.isIso_unit_tateObjectShift`): every class on `V` is then pulled
 back from `T`, so its restrictions along the sections `s` and `0` agree
 (`AlgebraicGeometry.VectorBundle.classRestriction_section_eq_of_isIso_unit`). Homotopy invariance
-is proved for relative affine space with untwisted coefficients
-(`AlgebraicGeometry.Etale.isIso_constantComplexUnit_affineSpace`); its extension to vector
-bundles and twisted coefficients is stated and not proved.
+is proved for relative affine space
+(`AlgebraicGeometry.Etale.isIso_unit_tateObjectShift_affineSpace`)
+and glued along the trivialising opens.
 -/
 
 @[expose] public section
@@ -136,20 +137,27 @@ lemma classRestriction_section_eq_of_isIso_unit [HasInvertibleExponent Λ V]
 omit [HasInvertibleExponent Λ V] in
 include E aT in
 /-- **Homotopy invariance for vector bundles**, with twisted coefficients: the unit
-`Λ_T(m)[2m] ⟶ Rπ_* Lπ^* Λ_T(m)[2m]` is an isomorphism.
-
-Not proved here. For relative affine space and `m = 0` this is
-`AlgebraicGeometry.Etale.isIso_constantComplexUnit_affineSpace` (by duality: the tensor–Hom
-exchange, affine-space purity and the affine-space trace give `Rπ_* Λ ≅ Λ`, and the unit has a
-left inverse given by the zero section while the endomorphisms of `Λ_T` commute). Missing are
-the twisted coefficients (the same argument, with `End(Λ(m)[2m]) ≅ End(Λ)`) and the passage from
-the charts `π⁻¹(U i) ≅ 𝔸^r_{U i}` to `V`: the unit is an isomorphism if it is one after
-restriction to the opens `U i`, but this needs the compatibility of the open base change
-`j^* Rπ_* ≅ Rπ'_* j'^*` with the units, which is not available. -/
+`Λ_T(m)[2m] ⟶ Rπ_* Lπ^* Λ_T(m)[2m]` is an isomorphism. Isomorphisms are detected on the
+trivialising opens `U i`; there the unit restricts to the unit of `π⁻¹(U i) ⟶ U i`
+(`AlgebraicGeometry.Etale.isIso_upperStar_map_unit_of_isPullback`, open base change), which
+through the chart `π⁻¹(U i) ≅ 𝔸^r_{U i}` is that of relative affine space
+(`AlgebraicGeometry.Etale.isIso_unit_tateObjectShift_affineSpace`). -/
 theorem isIso_unit_tateObjectShift [HasInvertibleExponent Λ T] (m : ℤ) :
     IsIso ((derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) π).unit.app
       ((tateObject Λ T m)⟦2 * m⟧)) := by
-  sorry
+  refine isIso_of_isIso_leftDerivedUpperStar_map_of_jointlySurjective Λ (fun i ↦ (E.U i).ι)
+    (fun x ↦ ?_) _ fun i ↦ ?_
+  · obtain ⟨i, hi⟩ := TopologicalSpace.Opens.mem_iSup.mp (E.iSup_U.ge (Set.mem_univ x))
+    exact ⟨i, ⟨x, hi⟩, rfl⟩
+  have : HasInvertibleExponent Λ (E.U i) := .of_hom (E.U i).ι
+  rw [NatIso.isIso_map_iff (leftDerivedUpperStarIsoMapDerivedCategory _ (E.U i).ι)]
+  refine isIso_upperStar_map_unit_of_isPullback Λ (isPullback_morphismRestrict π (E.U i)) _ ?_
+  rw [← E.chart_over i]
+  refine isIso_unit_app_comp_of_isIso Λ (E.chart i).hom _ _ ?_
+  refine isIso_unit_app_of_iso _
+    (((leftDerivedUpperStarIsoMapDerivedCategory _ (E.U i).ι).app _).symm ≪≫
+      leftDerivedUpperStarTateShiftIso Λ (E.U i).ι m) ?_
+  exact isIso_unit_tateObjectShift_affineSpace Λ r (E.U i) ((E.U i).ι ≫ aT) m
 
 include aT in
 /-- *Restriction along sections of a vector bundle does not depend on the section*: for two
