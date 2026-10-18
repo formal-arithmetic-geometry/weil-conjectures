@@ -27,21 +27,24 @@
  ],
  "proof": [
   {
-   "text": "Let V be any affine open of S, let j:V \\to S be its inclusion, and put X_V = X \\times_S V with induced morphism f_V:X_V \\to V. Properness of f is preserved by this base change [lem-pc-proper-base-change]. By the definition of proper morphism [def-weil-proper-morphism], f_V is separated and of finite type, hence quasi-compact and quasi-separated. Since S is Noetherian, V = Spec(A) has Noetherian coordinate ring; the restriction F_V is coherent and the restriction L_V is ample on X_V by the hypotheses and the definitions. Thus the affine-base Serre-vanishing statement [lem-weil-pbc-coherent-serre-vanishing] applies to f_V, F_V, and L_V.",
+   "text": "For each t in S choose an affine open neighbourhood V. Its ring A = Gamma(S,V) is Noetherian. Set g = (f restricted to V) followed by the canonical affine isomorphism V -> Spec A. Properness is stable under this base change and composition with an isomorphism. Restrict F to f^{-1}V; it remains coherent by the restriction clause of coherent_module_local_on_open_cover. The supplied hL gives an invertible ample restriction of L. Apply exists_isZero_moduleCohomology_tensorPow_of_ample to g and these restrictions, obtaining a natural-number bound n_V uniform in all positive degrees.",
    "uses": [
     "lem-pc-proper-base-change",
     "def-weil-proper-morphism",
+    "lem-weil-pbc-coherent-module-local-on-open-cover",
     "lem-weil-pbc-coherent-serre-vanishing"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, Lemma 30.17.1 (Tag 02O1), proof: reduction to affine opens of the base"
+    "place": "Cohomology of Schemes, Lemma 30.17.1 (Tag 02O1), label lemma-kill-by-twisting"
    }
   },
   {
-   "text": "For each affine V from Step 1, choose n_V such that H^p(X_V, F_V tensor L_V^n) = 0 for every p > 0 and n >= n_V. The affine-base comparison [lem-pc-cohomology-sections-affine-base] identifies this group with Gamma(V, R^p(f_V)_*(F_V tensor L_V^n)), so these sections vanish for all p > 0 and n >= n_V. The higher direct image is quasi-coherent by [lem-pc-finite-support-hi] (1), and a quasi-coherent module on an affine scheme whose global sections vanish is zero, by the affine tilde-global-sections equivalence [lem-weil-pbc-affine-tilde-gamma-adjunction] (3). Hence R^p(f_V)_*(F_V tensor L_V^n) = 0 for all p > 0 and n >= n_V.",
+   "text": "Use openRestrictionNumeratorIso to identify the restriction of F tensor L^n with F restricted tensor the nth power of L restricted, including n=0. Transport the module cohomology vanishing through this isomorphism. The additive source comparison exists_moduleCohomology_source_comparison turns it into Subsingleton of the source-library H. Apply isZero_higherDirectImage_of_subsingleton_H to g. This existing lemma combines the affine-base sections comparison, quasi-coherence of the higher direct image, and the tilde-global-sections counit to detect the zero sheaf.",
    "uses": [
+    "def-sc-tensor-power-open-restriction-comparisons",
+    "lem-sc-module-cohomology-source-comparison",
     "lem-pc-cohomology-sections-affine-base",
     "lem-pc-finite-support-hi",
     "lem-weil-pbc-affine-tilde-gamma-adjunction"
@@ -49,43 +52,46 @@
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, Lemma 30.17.1 (Tag 02O1), proof: affine-base vanishing and Lemma 01XK"
+    "place": "Cohomology of Schemes, Lemma 30.17.1 (Tag 02O1), label lemma-kill-by-twisting"
    }
   },
   {
-   "text": "For E_n = F tensor L^{tensor n}, restriction of the derived direct image to V is canonically Rf_*E_n|_V isomorphic to R(f_V)_*(E_n|_{X_V}) by [lem-pc-restrict-derived-direct-image-open]. Taking p-th cohomology sheaves and using Step 2 gives (R^p f_*E_n)|_V = 0 for every p > 0 and n >= n_V.",
+   "text": "Transport the open-base-change pullback square along V -> Spec A. Apply nonempty_higherDirectImage_iso_restrict, identifying pullback of the coefficient along the source open immersion with restriction via restrictFunctorIsoPullback. This makes the restriction of R^p f_*(F tensor L^n) along fromSpec zero. Vanishing along an open immersion implies vanishing on its open range; this range is exactly V. The whole local argument is the Lean local assertion key, with no new public theorem or sorry.",
    "uses": [
-    "lem-pc-restrict-derived-direct-image-open"
+    "lem-pc-sections-open-base-change"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, Lemma 30.17.1 (Tag 02O1), proof: passage from affine restrictions to higher direct images"
+    "place": "Cohomology of Schemes, Lemma 30.17.1 (Tag 02O1), label lemma-kill-by-twisting"
    }
   },
   {
-   "text": "Because S is Noetherian, choose a finite affine open cover S = \\bigcup_j V_j. For each V_j, Steps 1--3 give a bound n_{V_j}; set n_0 = \\max_j n_{V_j}. Then Step 3 shows (R^p f_*E_n)|_{V_j} = 0 for every p > 0 and n >= n_0. A sheaf whose restrictions vanish on an open cover is zero, so R^p f_*E_n = 0 for every p > 0 and n >= n_0. This proves the asserted bound.",
+   "text": "Choose these neighbourhoods and bounds for every point, extract a finite subcover of the compact Noetherian base, and take the Finset.sup of its natural-number bounds. For n above that supremum and p>0, each point lies in a selected V whose bound is <= n, so the sheaf restricts to zero near every point. Apply isZero_of_forall_exists_isZero_restrict. Finset.sup is zero on the empty cover, so the empty base is included.",
    "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/coherent.tex",
-    "place": "Cohomology of Schemes, Lemma 30.17.1 (Tag 02O1), conclusion after the affine-local reduction"
+    "place": "Cohomology of Schemes, Lemma 30.17.1 (Tag 02O1), label lemma-kill-by-twisting"
    }
   }
  ],
  "proof_deps": [
   "lem-pc-proper-base-change",
   "def-weil-proper-morphism",
+  "lem-weil-pbc-coherent-module-local-on-open-cover",
   "lem-weil-pbc-coherent-serre-vanishing",
+  "def-sc-tensor-power-open-restriction-comparisons",
+  "lem-sc-module-cohomology-source-comparison",
   "lem-pc-cohomology-sections-affine-base",
   "lem-pc-finite-support-hi",
   "lem-weil-pbc-affine-tilde-gamma-adjunction",
-  "lem-pc-restrict-derived-direct-image-open"
+  "lem-pc-sections-open-base-change"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/coherent.tex",
-  "place": "Cohomology of Schemes, Lemma 30.17.1 (Tag 02O1), proof"
+  "place": "Cohomology of Schemes, Lemma 30.17.1 (Tag 02O1), label lemma-kill-by-twisting; implemented via ordinary higher-direct-image open restriction and the existing source-library cohomology comparison."
  },
  "mathlib_searches": [
   {
@@ -147,8 +153,7 @@
  "tool_uses": [
   "lem-pc-proper-base-change",
   "lem-weil-pbc-coherent-serre-vanishing",
-  "lem-pc-cohomology-sections-affine-base",
-  "lem-pc-restrict-derived-direct-image-open"
+  "lem-pc-cohomology-sections-affine-base"
  ],
  "reviewed": {
   "date": "2026-10-10",
@@ -187,5 +192,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261018T062905-L-674041",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

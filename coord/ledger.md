@@ -16144,3 +16144,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 06:29 L: merged deliver/R7/Sheaf.RingTheory.FinitelyPresentedAlgebraModuleGenericFreeness (stage 3; reviewer PASS; first push; landing 20261018T062904-L-673507 (proof); batch 20261018T062645; modules 1; new nodes 0)
 - 06:29 L: merged deliver/R8/Sheaf.RingTheory.NoetherianAlgebraModuleGenericFreeness (stage 3; reviewer PASS; first push; landing 20261018T062904-L-673651 (proof); batch 20261018T062645; modules 1; new nodes 0)
 - 06:29 L: merged deliver/S1/Sheaf.AlgebraicGeometry.OpenImmersionExtensionZeroBaseChange (stage 3; reviewer PASS; first push; landing 20261018T062905-L-673861 (proof); batch 20261018T062645; modules 1; new nodes 0)
+- 06:29 L: merged deliver/S1/Sheaf.AlgebraicGeometry.RelativeSerreVanishing (stage 3; reviewer PASS; first push; landing 20261018T062905-L-674041 (proof); batch 20261018T062645; modules 1; new nodes 0)
