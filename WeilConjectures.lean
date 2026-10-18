@@ -4360,6 +4360,7 @@ public import WeilConjectures.AlgebraicGeometry.ProEtale.Replete
 public import WeilConjectures.AlgebraicGeometry.ProEtale.SequentialLimit
 public import WeilConjectures.AlgebraicGeometry.ProEtale.SigmaCover
 public import WeilConjectures.AlgebraicGeometry.ProEtale.WeaklyContractible
+public import WeilConjectures.AlgebraicGeometry.ProEtale.WeaklyContractibleFinite
 public import WeilConjectures.AlgebraicGeometry.ProductComparisonDistributivity
 public import WeilConjectures.AlgebraicGeometry.ProductUniversalStructurePushforward
 public import WeilConjectures.AlgebraicGeometry.ProjBasicOpenLocalizationDetection
@@ -8325,6 +8326,7 @@ public import WeilConjectures.RingTheory.ProEtale.ClosedLiftAdjunction
 public import WeilConjectures.RingTheory.ProEtale.ClosedLiftMap
 public import WeilConjectures.RingTheory.ProEtale.ClosedLiftRetraction
 public import WeilConjectures.RingTheory.ProEtale.ClosedLiftUnits
+public import WeilConjectures.RingTheory.ProEtale.ClosedPointsLocallyInjective
 public import WeilConjectures.RingTheory.ProEtale.Contraction.Covers
 public import WeilConjectures.RingTheory.ProEtale.Etale
 public import WeilConjectures.RingTheory.ProEtale.FaithfullyFlat
@@ -8345,7 +8347,9 @@ public import WeilConjectures.RingTheory.ProEtale.StalkAlgebraic
 public import WeilConjectures.RingTheory.ProEtale.StalkIso
 public import WeilConjectures.RingTheory.ProEtale.StrictlyHenselianRetraction
 public import WeilConjectures.RingTheory.ProEtale.WContractible
+public import WeilConjectures.RingTheory.ProEtale.WContractibleFinite
 public import WeilConjectures.RingTheory.ProEtale.WLocal
+public import WeilConjectures.RingTheory.ProEtale.WLocalFinite
 public import WeilConjectures.RingTheory.ProEtale.WLocalization.Basic
 public import WeilConjectures.RingTheory.ProEtale.WLocalization.Ideal
 public import WeilConjectures.RingTheory.ProEtale.WStrictLocalization
@@ -9374,6 +9378,7 @@ public import WeilConjectures.Topology.DimensionSupremumLocalDimensions
 public import WeilConjectures.Topology.DirectedInjectiveDerivedSectionsAcyclic
 public import WeilConjectures.Topology.EmbeddingPushforwardTransport
 public import WeilConjectures.Topology.EmptySpaceCohomologyVanishing
+public import WeilConjectures.Topology.ExtremallyDisconnectedLocal
 public import WeilConjectures.Topology.FiniteTypeLocalCoefficients
 public import WeilConjectures.Topology.FiniteTypeSurjectiveNearStalk
 public import WeilConjectures.Topology.FlasqueZariskiAcyclic

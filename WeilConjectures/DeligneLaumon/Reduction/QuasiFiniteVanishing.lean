@@ -8,6 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
 public import WeilConjectures.AlgebraicGeometry.Morphisms.QuasiFiniteFactorization
 public import WeilConjectures.WeilSheaf.LowerShriekFunctoriality
+public import WeilConjectures.AlgebraicGeometry.ProEtale.WeaklyContractibleFinite
 
 /-!
 # Vanishing of direct images of Weil sheaves
@@ -149,12 +150,10 @@ finite direct images for étale sheaves
 (`AlgebraicGeometry.Etale.preservesFiniteColimits_lowerStar_of_isFinite`), and the input of the
 passage to `ℚ̄_ℓ`-coefficients of blueprint `def-weil-pbc-qbar-category`.
 
-It is not yet available: unlike for closed immersions, covers of `X ×_Y V` are not refined by
-base changes of covers of `V`, and a finite algebra over a w-contractible ring need not be
-w-contractible (its `π₀` need not be extremally disconnected), so the closed-immersion argument
-via henselian lifts does not apply directly. A plausible route: for `A` w-contractible and `B`
-finite and finitely presented over `A`, `B` is again w-contractible, so `X ×_Y V` is weakly
-contractible for every weakly contractible affine `V` over `Y`.
+This is `AlgebraicGeometry.ProEtale.preservesFiniteColimits_lowerStar_of_isFinite`: a finite and
+finitely presented algebra over a w-contractible ring is w-contractible
+(`IsWContractibleRing.of_finite`), so `X ×_Y V` is weakly contractible for every `V` over `Y`
+whose underlying scheme is the spectrum of a w-contractible ring, and such `V` cover the site.
 
 Finite presentation is needed: for a separably closed field `k`, the closed immersion
 `Spec C(βℕ ∖ ℕ, k) ⟶ Spec C(βℕ, k)` is finite but its open complement is not quasi-compact,
@@ -162,7 +161,7 @@ and exactness of its pushforward would make `Γ(Spec C(βℕ ∖ ℕ, k), -)` ex
 theorem ProEtale.preservesFiniteColimits_lowerStar_padicAlgCl_of_isFinite {X Y : Scheme.{u}}
     (g : X ⟶ Y) [IsFinite g] [LocallyOfFinitePresentation g] :
     PreservesFiniteColimits ((g)_*[ModuleCat.{u + 1} (ULift.{u + 1} (PadicAlgCl l))]) :=
-  sorry
+  ProEtale.preservesFiniteColimits_lowerStar_of_isFinite g
 
 /-- **Finite direct images are exact** for Weil sheaves (blueprint `def-weil-pbc-qbar-category`):
 for a finite morphism `p : T ⟶ Y` of `k₀`-schemes, the higher direct images `Rʳp₀*G` of a Weil
