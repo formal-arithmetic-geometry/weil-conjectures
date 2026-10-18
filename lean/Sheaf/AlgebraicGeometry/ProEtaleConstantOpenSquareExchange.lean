@@ -26,6 +26,19 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
+private theorem openSquare_coefficientMap (A : Type u) [CommRing A]
+    {X Y : Scheme.{u}} (f : X ⟶ Y) :
+    proEtaleRingDirectImageMap f (proEtaleConstantRing Y A)
+      (proEtaleConstantRing X A) (proEtaleConstantRingComparison f A) =
+        proEtaleCoefficientDirectImageMap f A := by
+  exact ((proEtaleSheafAdjunction f CommRingCat.{u + 1}).homEquiv _ _).apply_symm_apply
+    (proEtaleCoefficientDirectImageMap f A)
+
+private def openSquare_directImageModel (A : Type u) [CommRing A]
+    {X Y : Scheme.{u}} (f : X ⟶ Y) :
+    proEtaleConstantRingPushforward A f ≅ proEtaleConstantModuleDirectImage f A :=
+  SheafOfModules.pushforwardCongr (by rw [openSquare_coefficientMap A f])
+
 /-- The unique identification of the two pullbacks used in the open-square construction.
 Its sectionwise equation preserves their specified units and fixes the scalar action.
 Source: main-20261015, `lem-trf-open-square-exchange`, normalized-mate construction;
@@ -44,7 +57,35 @@ theorem openSquarePullbackModel_existsUnique (A : Type u) [CommRing A] [Finite A
         (e.hom.app M).val.app (Opposite.op ((proEtaleBaseChange f).obj V))
             (((proEtaleConstantRingAdjunction A f).unit.app M).val.app (Opposite.op V) s) =
           ((sfIntrinsicConstantModuleAdjunction f A).unit.app M).val.app (Opposite.op V) s := by
-  sorry
+  let d := openSquare_directImageModel A f
+  let adj₁ := (proEtaleConstantRingAdjunction A f).ofNatIsoRight d
+  let adj₂ := sfIntrinsicConstantModuleAdjunction f A
+  let e : proEtaleConstantRingPullback A f ≅ sfIntrinsicPullback A f :=
+    adj₁.leftAdjointUniq adj₂
+  refine ⟨e, ?_, ?_⟩
+  · intro M V s
+    have h := adj₁.unit_leftAdjointUniq_hom_app adj₂ M
+    have hv := congrArg (fun z ↦ z.val.app (Opposite.op V) s) h
+    change (e.hom.app M).val.app (Opposite.op ((proEtaleBaseChange f).obj V))
+      (((proEtaleConstantRingAdjunction A f).unit.app M).val.app (Opposite.op V) s) =
+        ((sfIntrinsicConstantModuleAdjunction f A).unit.app M).val.app (Opposite.op V) s
+      at hv
+    exact hv
+  · intro e' he'
+    apply Iso.ext
+    apply NatTrans.ext
+    funext M
+    apply (adj₁.homEquiv M _).injective
+    rw [adj₁.homEquiv_leftAdjointUniq_hom_app adj₂]
+    rw [Adjunction.homEquiv_unit]
+    apply SheafOfModules.hom_ext
+    apply PresheafOfModules.hom_ext
+    intro V
+    ext s
+    change (e'.hom.app M).val.app ((proEtaleBaseChange f).op.obj V)
+      (((proEtaleConstantRingAdjunction A f).unit.app M).val.app V s) =
+        ((sfIntrinsicConstantModuleAdjunction f A).unit.app M).val.app V s
+    exact he' M V.unop s
 
 /-- The unique unit-preserving ordinary change of pullback coordinates.
 Source: main-20261015, `lem-trf-open-square-exchange`, construction by mates
