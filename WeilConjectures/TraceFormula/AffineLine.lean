@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.TraceFormula.Fibration
 public import WeilConjectures.TraceFormula.ModelDecomposition
 public import WeilConjectures.TraceFormula.OpenSquare
 public import WeilConjectures.TraceFormula.TraceClass
@@ -282,19 +283,147 @@ lemma weilOpenLowerShriek_eq_mapOfNatIso (sq : IsPullback ΦU j j ΦY) :
     weilOpenLowerShriek ℓ sq = IsoAlgebra.mapOfNatIso (openSquareExchange ℓ sq) :=
   rfl
 
-variable (ℓ) in
-/-- **The restriction of the Weil extension by zero** (blueprint `def-trf-weil-extension-zero`):
-`j^* (j_! K, j_! φ ∘ b) ≅ (K, φ)` as Weil objects, through the unit of `j_! ⊣ Lj^*`. -/
-noncomputable def weilUpperStarWeilOpenLowerShriekIso (sq : IsPullback ΦU j j ΦY)
-    (hw : ΦU ≫ j = j ≫ ΦY) (K : WeilBoundedConstructible ℓ ΦU) :
-    (weilUpperStar ℓ ΦU ΦY j hw).obj ((weilOpenLowerShriek ℓ sq).obj K) ≅ K :=
-  -- UNFINISHED: `IsoAlgebra.mapOfNatIsoObjMapOfNatIsoObjIso (openSquareExchange ℓ sq)
-  -- (weilUpperStarComparison ℓ ΦU ΦY j hw) K (unit_comp_map_baseChangeIso_inv_of_eq _
-  -- (weilUpperStarComparison_eq_flip sq hw) _)` is mathematically the answer, but unifying its
-  -- type with the Weil functors times out (instance arguments differing by abstracted proofs)
+/-- **The degree one trace formula passes along the restriction of the Weil extension by zero**
+(blueprint `def-trf-weil-extension-zero`): the unit of `j_! ⊣ Lj^*` is an isomorphism of Weil
+objects `j^* (j_! K) ≅ K` (`IsoAlgebra.mapOfNatIsoObjMapOfNatIsoObjIso` applied to
+`unit_comp_map_baseChangeIso_inv_of_eq` and `weilUpperStarComparison_eq_flip`), so the degree one
+trace formula for `j^* (j_! K)` gives the one for `K`.
+
+UNFINISHED gap of this subsection: the isomorphism of Weil objects is mathematically assembled
+above, but identifying its source with `(weilUpperStar …).obj ((weilOpenLowerShriek …).obj K)`
+times out (in elaboration and in the kernel) on the instance arguments of the two descriptions of
+the categories of Weil objects, which differ by abstracted proofs. -/
+theorem traceFormulaOne_of_weilUpperStar_weilOpenLowerShriek (sq : IsPullback ΦU j j ΦY)
+    (hw : ΦU ≫ j = j ≫ ΦY) [IsFinite ΦU.left] [IsUniversalHomeomorphism ΦU.left]
+    (K : WeilBoundedConstructible ℓ ΦU)
+    (h : ((weilUpperStar ℓ ΦU ΦY j hw).obj ((weilOpenLowerShriek ℓ sq).obj K)).TraceFormulaOne) :
+    K.TraceFormulaOne :=
   sorry
 
 end Restriction
+
+/-! ### Open subschemes -/
+
+namespace WeilBoundedConstructible
+
+/-- The trace of an endomorphism of a zero object vanishes: `X ⊗ Xᘁ` is a zero object, since
+maps into it correspond to maps into `X`. -/
+lemma _root_.CategoryTheory.MonoidalCategory.trace_eq_zero_of_isZero {C : Type*} [Category C]
+    [HasZeroMorphisms C] [MonoidalCategory C] [BraidedCategory C] {X : C} [HasRightDual X]
+    (hX : IsZero X) (f : X ⟶ X) : trace f = 0 := by
+  have h : IsZero (X ⊗ Xᘁ) := (IsZero.iff_id_eq_zero _).2
+    ((tensorRightHomEquiv (X ⊗ Xᘁ) X Xᘁ X).symm.injective (hX.eq_of_tgt _ _))
+  rw [trace, h.eq_of_tgt (η_ X Xᘁ) 0, zero_comp]
+
+variable {X : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
+  [IsSeparated X.hom]
+
+/-- The degree one trace formula holds for a Weil object with zero underlying complex: both
+sides vanish. -/
+theorem traceFormulaOne_of_isZero {Φ : X ⟶ X} [IsFinite Φ.left] [IsUniversalHomeomorphism Φ.left]
+    (K : WeilBoundedConstructible ℓ Φ) (hK : IsZero K.carrier) : K.TraceFormulaOne := by
+  intro _ _ _
+  rw [trace_eq_zero_of_isZero (Functor.map_isZero _ hK), Finset.sum_eq_zero fun x _ ↦
+    trace_eq_zero_of_isZero (Functor.map_isZero _ hK) _]
+
+/-- The stalk Frobenius of the restriction of a Weil object along `j : U ⟶ X` at a point `u`
+fixed by `Φ_U` has the trace of the stalk Frobenius of the Weil object at `u ≫ j`. -/
+lemma trace_weilStalkFrobenius_weilUpperStar {U : Over (Spec (.of k))}
+    [LocallyOfFiniteType U.hom] [QuasiCompact U.hom] [IsSeparated U.hom] {Φ : X ⟶ X}
+    {ΦU : U ⟶ U} {j : U ⟶ X} (hj : ΦU ≫ j = j ≫ Φ) (K : WeilBoundedConstructible ℓ Φ)
+    (u : RationalPoint U) (hu : u ≫ ΦU = u)
+    [HasRightDual ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ u).obj
+      ((weilUpperStar ℓ ΦU Φ j hj).obj K).carrier)]
+    [HasRightDual ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (u ≫ j)).obj
+      K.carrier)] :
+    trace (((weilUpperStar ℓ ΦU Φ j hj).obj K).weilStalkFrobenius u hu) =
+      trace (K.weilStalkFrobenius (u ≫ j)
+        (by rw [Category.assoc, ← hj, ← Category.assoc, hu])) := by
+  have hu1 : u ≫ frobeniusIterate ΦU 1 = u := by
+    rw [frobeniusIterate_one]
+    exact hu
+  rw [← trace_stalkFrobenius_one _ u hu1 hu, trace_stalkFrobenius_weilUpperStar,
+    trace_stalkFrobenius_one]
+
+variable {U Z : Over (Spec (.of k))} [LocallyOfFiniteType U.hom] [QuasiCompact U.hom]
+  [IsSeparated U.hom] [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom] [IsSeparated Z.hom]
+  {Φ : X ⟶ X} {ΦU : U ⟶ U} {ΦZ : Z ⟶ Z} {j : U ⟶ X} {i : Z ⟶ X} [IsOpenImmersion j.left]
+  [IsClosedImmersion i.left]
+
+/-- **Additivity read backwards, for the open piece**: for an open subscheme `j : U ⟶ X` with
+closed complement `i : Z ⟶ X`, both stable under the Frobenius, the degree one trace formula for
+a Weil object on `X` and for its restriction to `Z` gives the degree one trace formula for its
+restriction to `U`. -/
+theorem traceFormulaOne_of_isCompl_right [IsSepClosed k]
+    (hcompl : IsCompl (Set.range j.left.base) (Set.range i.left.base))
+    (hj : ΦU ≫ j = j ≫ Φ) (hi : ΦZ ≫ i = i ≫ Φ) (K : WeilBoundedConstructible ℓ Φ)
+    [IsFinite Φ.left] [IsUniversalHomeomorphism Φ.left] [IsFinite ΦU.left]
+    [IsUniversalHomeomorphism ΦU.left] [IsFinite ΦZ.left] [IsUniversalHomeomorphism ΦZ.left]
+    [Finite {z : RationalPoint Z // z ≫ ΦZ = z}] (hX : K.TraceFormulaOne)
+    (hZ : ((weilUpperStar ℓ ΦZ Φ i hi).obj K).TraceFormulaOne) :
+    ((weilUpperStar ℓ ΦU Φ j hj).obj K).TraceFormulaOne := by
+  classical
+  intro _ _ _
+  let eU : {u : RationalPoint U // u ≫ ΦU = u} ≃ FixedPoint ΦU 1 :=
+    Equiv.subtypeEquivRight fun u ↦ by rw [frobeniusIterate_one]
+  let eZ : {z : RationalPoint Z // z ≫ ΦZ = z} ≃ FixedPoint ΦZ 1 :=
+    Equiv.subtypeEquivRight fun z ↦ by rw [frobeniusIterate_one]
+  let eX : FixedPoint Φ 1 ≃ {x : RationalPoint X // x ≫ Φ = x} :=
+    Equiv.subtypeEquivRight fun x ↦ by rw [frobeniusIterate_one]
+  let e : {u : RationalPoint U // u ≫ ΦU = u} ⊕ {z : RationalPoint Z // z ≫ ΦZ = z} ≃
+      {x : RationalPoint X // x ≫ Φ = x} :=
+    (Equiv.sumCongr eU eZ).trans ((fixedPointSumEquiv hcompl hj hi 1).trans eX)
+  let _ := Fintype.ofFinite {z : RationalPoint Z // z ≫ ΦZ = z}
+  let _ : Fintype {x : RationalPoint X // x ≫ Φ = x} := Fintype.ofEquiv _ e
+  let _ : HasRightDual
+      ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).obj
+        K.carrier) := (nonempty_hasRightDual_compactCohomology _).some
+  let _ : HasRightDual
+      ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint Z)).obj
+        ((weilUpperStar ℓ ΦZ Φ i hi).obj K).carrier) :=
+    (nonempty_hasRightDual_compactCohomology _).some
+  let _ (x : RationalPoint X) : HasRightDual
+      ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ x).obj K.carrier) :=
+    (nonempty_hasRightDual_stalk _ x).some
+  let _ (z : RationalPoint Z) : HasRightDual
+      ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ z).obj
+        ((weilUpperStar ℓ ΦZ Φ i hi).obj K).carrier) :=
+    (nonempty_hasRightDual_stalk _ z).some
+  have hXeq : trace K.compactFrobenius = ∑ x : {x : RationalPoint X // x ≫ Φ = x},
+      trace (K.weilStalkFrobenius x.1 x.2) := hX
+  have hZeq : trace ((weilUpperStar ℓ ΦZ Φ i hi).obj K).compactFrobenius =
+      ∑ z : {z : RationalPoint Z // z ≫ ΦZ = z},
+        trace (((weilUpperStar ℓ ΦZ Φ i hi).obj K).weilStalkFrobenius z.1 z.2) := hZ
+  have hadd := trace_compactFrobenius_eq_add hcompl hj hi K
+  rw [hXeq, hZeq, ← e.sum_comp, Fintype.sum_sum_type] at hadd
+  refine add_right_cancel (hadd.symm.trans ?_)
+  congr 1
+  · exact Finset.sum_congr rfl fun u _ ↦
+      (trace_weilStalkFrobenius_weilUpperStar hj K u.1 u.2).symm
+  · exact Finset.sum_congr rfl fun z _ ↦
+      (trace_weilStalkFrobenius_weilUpperStar hi K z.1 z.2).symm
+
+/-- **The degree one trace formula on an open subscheme** (blueprint `sk-thm-trace-formula`,
+second paragraph of the proof): for an open subscheme `j : U ⟶ X` with a cartesian Frobenius
+square and closed complement `i : Z ⟶ X`, if the degree one trace formula holds for all Weil
+objects on `X`, it holds for all Weil objects `K` on `U`: it holds for the extension by zero
+`j_! K` on `X` and for its restriction to `Z`, which vanishes, hence for its restriction to `U`,
+which is `K`. -/
+theorem traceFormulaOne_of_isOpenImmersion [IsSepClosed k]
+    (hcompl : IsCompl (Set.range j.left.base) (Set.range i.left.base))
+    (sq : IsPullback ΦU j j Φ) (hj : ΦU ≫ j = j ≫ Φ) (hi : ΦZ ≫ i = i ≫ Φ)
+    [IsFinite Φ.left] [IsUniversalHomeomorphism Φ.left] [IsFinite ΦU.left]
+    [IsUniversalHomeomorphism ΦU.left] [IsFinite ΦZ.left] [IsUniversalHomeomorphism ΦZ.left]
+    [Finite {z : RationalPoint Z // z ≫ ΦZ = z}]
+    (hX : ∀ L : WeilBoundedConstructible ℓ Φ, L.TraceFormulaOne)
+    (K : WeilBoundedConstructible ℓ ΦU) : K.TraceFormulaOne := by
+  refine traceFormulaOne_of_weilUpperStar_weilOpenLowerShriek sq hj K
+    (traceFormulaOne_of_isCompl_right hcompl hj hi _ (hX _) (traceFormulaOne_of_isZero _ ?_))
+  rw [weilUpperStar_obj_carrier, weilOpenLowerShriek_obj_carrier]
+  exact isZero_boundedConstructibleUpperStar_obj_openImmersionLowerShriek _ ℓ j i
+    hcompl.disjoint K.carrier
+
+end WeilBoundedConstructible
 
 section Model
 
