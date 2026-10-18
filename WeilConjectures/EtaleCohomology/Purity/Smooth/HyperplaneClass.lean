@@ -12,6 +12,7 @@ public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.TwistBundle
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.ProjectiveLineChern
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.RegularImmersion
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.VectorBundle
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.TopChernClass
 
 /-!
 # The hyperplane class of projective space and the projective-space formula
@@ -657,6 +658,145 @@ noncomputable def twistBundleHyperplaneClass [Finite n] :
     (twistBundle n S).zero (𝟙 _) (isPullback_twistBundleZero n S)
     (leftDerivedUpperStarConstantComplexIso Λ _).inv
     (leftDerivedUpperStarTateShiftIso Λ _ ((1 : ℕ) : ℤ)) (hyperplaneClass Λ n aS)
+
+variable (n S) in
+/-- The chart `π⁻¹(D₊(Tᵢ)) ⟶ D₊(T_{some i})` of the total space of `𝒪(1)` in `ℙ(Option n; S)`. -/
+noncomputable def twistBundleToStandardOpen (i : n) :
+    (twistBundleπ n S ⁻¹ᵁ standardOpen n S i).toScheme ⟶
+      (standardOpen (Option n) S (some i)).toScheme :=
+  IsOpenImmersion.lift (standardOpen (Option n) S (some i)).ι
+    ((twistBundleπ n S ⁻¹ᵁ standardOpen n S i).ι ≫ (twistBundleOpen n S).ι) (by
+      rintro _ ⟨x, rfl⟩
+      rw [Scheme.Opens.range_ι]
+      have hx : x.1 ∈ (twistBundleOpen n S).ι ⁻¹ᵁ standardOpen (Option n) S (some i) := by
+        rw [← twistBundleπ_preimage_standardOpen]
+        exact x.2
+      exact hx)
+
+variable (n S) in
+@[reassoc (attr := simp)]
+lemma twistBundleToStandardOpen_ι (i : n) :
+    twistBundleToStandardOpen n S i ≫ (standardOpen (Option n) S (some i)).ι =
+      (twistBundleπ n S ⁻¹ᵁ standardOpen n S i).ι ≫ (twistBundleOpen n S).ι :=
+  IsOpenImmersion.lift_fac _ _ _
+
+variable (n S) in
+/-- The local equation `T_∗ / Tᵢ` of the hyperplane pulls back to the fibre coordinate of `𝒪(1)`. -/
+lemma twistBundleToStandardOpen_appTop_frame (i : n) (a : Fin 1) :
+    (twistBundleToStandardOpen n S i).appTop ((hyperplaneFrame n S i).f a) =
+      (twistBundle n S).coord i a := by
+  rw [twistBundle_coord]
+  change (twistBundleToStandardOpen n S i).appTop
+    ((standardOpenIso (Option n) S (some i)).hom.appTop (AffineSpace.coord S ⟨none, by simp⟩)) = _
+  rw [standardOpenIso_hom_appTop_coord, twistBundleFiberCoord]
+  have e₀ : (standardOpen (Option n) S (some i)).topIso.inv =
+      (standardOpen (Option n) S (some i)).ι.appLE (standardOpen (Option n) S (some i)) ⊤
+        (Scheme.Opens.ι_preimage_self _).ge := by
+    rw [Scheme.Opens.ι_appLE]
+    rfl
+  have e₁ : (twistBundleπ n S ⁻¹ᵁ standardOpen n S i).topIso.inv =
+      (twistBundleπ n S ⁻¹ᵁ standardOpen n S i).ι.appLE (twistBundleπ n S ⁻¹ᵁ standardOpen n S i)
+        ⊤ (Scheme.Opens.ι_preimage_self _).ge := by
+    rw [Scheme.Opens.ι_appLE]
+    rfl
+  have e₂ : (twistBundleToStandardOpen n S i).appTop =
+      (twistBundleToStandardOpen n S i).appLE ⊤ ⊤ le_top := by
+    rw [Scheme.Hom.appTop, Scheme.Hom.app_eq_appLE]
+    rfl
+  rw [e₀, e₁, e₂, ← CommRingCat.comp_apply, ← CommRingCat.comp_apply,
+    Scheme.Hom.appLE_comp_appLE, Scheme.Hom.appLE_comp_appLE,
+    appLE_eq_of_eq (twistBundleToStandardOpen_ι n S i)]
+
+include aS in
+/-- On every chart of `𝒪(1)` the restricted hyperplane class is the Kummer class of the fibre
+coordinate `T_∗ / Tᵢ`, the frame class of the chart. -/
+lemma frameRestriction_twistBundleHyperplaneClass [Finite n] (i : n) :
+    frameRestriction Λ ((twistBundle n S).frame i) (twistBundleHyperplaneClass Λ n aS) =
+      frameClass Λ ((twistBundle n S).frame i) := by
+  have hb : ((twistBundle n S).frame i).e ≫ (twistBundleOpen n S).ι =
+      twistBundleToStandardOpen n S i ≫ (hyperplaneFrame n S i).e :=
+    (twistBundleToStandardOpen_ι n S i).symm
+  obtain ⟨g₁, hg₁⟩ : ∃ g, IsPullback g
+      (((twistBundle n S).frame i).U.zeroLocusSubschemeι (Set.range ((twistBundle n S).frame i).f))
+      ((hyperplaneFrame n S i).U.zeroLocusSubschemeι (Set.range (hyperplaneFrame n S i).f))
+      (twistBundleToStandardOpen n S i) :=
+    ⟨_, isPullback_zeroLocusSubschemeι (twistBundleToStandardOpen n S i)
+      (Set.range (hyperplaneFrame n S i).f) (Set.range ((twistBundle n S).frame i).f) (by
+        rw [← Set.range_comp]
+        exact congrArg Set.range (funext fun a ↦ twistBundleToStandardOpen_appTop_frame n S i a))⟩
+  have hp₁ := ((twistBundle n S).frame i).isPullback.paste_horiz (isPullback_twistBundleZero n S)
+  have : HasInvertibleExponent Λ ((twistBundle n S).frame i).U :=
+    .of_hom ((twistBundle n S).frame i).e
+  have : HasInvertibleExponent Λ (hyperplaneFrame n S i).U := .of_hom (hyperplaneFrame n S i).e
+  rw [frameRestriction, twistBundleHyperplaneClass, ← restrictSupportedClass_comp_tateShift Λ
+    ((twistBundle n S).frame i).e (twistBundleOpen n S).ι _ rfl (hyperplane n S)
+    (twistBundle n S).zero _ (𝟙 _) (isPullback_twistBundleZero n S)
+    ((twistBundle n S).frame i).toZ ((twistBundle n S).frame i).isPullback _ hp₁,
+    restrictSupportedClass_comp_tateShift Λ (twistBundleToStandardOpen n S i)
+    (hyperplaneFrame n S i).e _ hb (hyperplane n S) _ _ (hyperplaneFrame n S i).toZ
+    (hyperplaneFrame n S i).isPullback g₁ hg₁ _ hp₁]
+  have hH := isHyperplaneClass_hyperplaneClass (Λ := Λ) aS i
+  rw [frameRestriction] at hH
+  rw [hH, frameClass, frameClass]
+  exact restrictSupportedClass_kummerBoundaryProduct Λ (twistBundleToStandardOpen n S i) _ _
+    (twistBundleToStandardOpen_appTop_frame n S i) g₁ hg₁
+
+include aS in
+/-- **The hyperplane class restricts to the Thom class of `𝒪(1)`** on the total space
+`W ⊆ ℙ(Option n; S)`: both are classes with supports in the zero section `ℙ(n; S) = H` restricting
+to the Kummer class of `T_∗ / Tᵢ` on every chart
+(`AlgebraicGeometry.Etale.frameRestriction_twistBundleHyperplaneClass`). -/
+theorem twistBundleHyperplaneClass_eq_thomClass [Finite n] :
+    twistBundleHyperplaneClass Λ n aS = (twistBundle n S).thomClass Λ (ℙ(n; S) ↘ S ≫ aS) :=
+  haveI : Finite (twistBundle n S).ι := inferInstanceAs (Finite n)
+  (twistBundle n S).eq_thomClass_of_frameRestriction Λ _
+    (frameRestriction_twistBundleHyperplaneClass aS)
+
+include aS in
+/-- **The hyperplane class restricted to the hyperplane is `c₁(𝒪(1))`**: the restriction of
+`h = c₁(𝒪(1)) ∈ H²(ℙ(Option n; S), Λ(1))` along the hyperplane embedding `ℙ(n; S) ⟶ ℙ(Option n; S)`
+is the top Chern class of the line bundle `𝒪(1)` on `ℙ(n; S)`: the hyperplane class restricts on
+the total space of `𝒪(1)` to its Thom class (`twistBundleHyperplaneClass_eq_thomClass`), and
+the zero section of `𝒪(1)` is the hyperplane embedding. -/
+theorem classRestriction_hyperplane_hyperplaneChernClass [Finite n] :
+    VectorBundle.classRestriction Λ (r := 1) (hyperplane n S)
+        (hyperplaneChernClass (hyperplaneClass Λ n aS)) =
+      (twistBundle n S).topChernClass Λ (ℙ(n; S) ↘ S ≫ aS) := by
+  rw [VectorBundle.topChernClass, VectorBundle.localizedTopChernForget_eq,
+    ← twistBundleHyperplaneClass_eq_thomClass,
+    VectorBundle.classRestriction_comp Λ (twistBundleZero n S) (twistBundleOpen n S).ι
+      (hyperplane n S) (twistBundleZero_ι n S).symm]
+  congr 1
+  simp only [VectorBundle.classRestriction, hyperplaneChernClass, twistBundleHyperplaneClass,
+    restrictSupportedClass, Functor.map_comp, Category.assoc, supportedRestriction_comp_counit]
+
+include aS in
+/-- **`c₁(𝒪(1))` is the hyperplane class.** On `ℙ(Option m; S)`, the top Chern class of the line
+bundle `𝒪(1)` is the first Chern class `h` of the hyperplane class of `V(T_∗)`.
+
+Not proved here. The section `T_∗` of `𝒪(1)`, the morphism `ℙ(Option m; S) ⟶ W`,
+`[x] ↦ [x : x_∗]` (to be constructed with `Scheme.CoordinateCover.hom`, as
+`AlgebraicGeometry.ProjectiveSpace.twistBundleπ`), has zero scheme the hyperplane; on the chart
+`D₊(Tᵢ)` its localized top Chern class is the Kummer class of `T_∗ / Tᵢ`
+(`AlgebraicGeometry.VectorBundle.restrictSupportedClass_localizedTopChern`), so it is the
+hyperplane class by uniqueness (`AlgebraicGeometry.Etale.eq_hyperplaneClass`), and (L4)
+(`AlgebraicGeometry.VectorBundle.forgetSupports_localizedTopChern`) identifies its image with
+`c₁(𝒪(1))`. -/
+theorem topChernClass_twistBundle_eq_hyperplaneChernClass {m : Type u} [Finite m] :
+    (twistBundle (Option m) S).topChernClass Λ (ℙ(Option m; S) ↘ S ≫ aS) =
+      hyperplaneChernClass (hyperplaneClass Λ m aS) := by
+  sorry
+
+include aS in
+/-- **The hyperplane class restricts to the hyperplane class**: along the hyperplane embedding
+`ℙ(Option m; S) ⟶ ℙ(Option (Option m); S)`, `h` restricts to `h`. This is the compatibility used
+in the localization induction for the projective-space formula. -/
+theorem classRestriction_hyperplane_hyperplaneChernClass_eq {m : Type u} [Finite m] :
+    VectorBundle.classRestriction Λ (r := 1) (hyperplane (Option m) S)
+        (hyperplaneChernClass (hyperplaneClass Λ (Option m) aS)) =
+      hyperplaneChernClass (hyperplaneClass Λ m aS) := by
+  rw [classRestriction_hyperplane_hyperplaneChernClass,
+    topChernClass_twistBundle_eq_hyperplaneChernClass]
 
 end TwistBundle
 

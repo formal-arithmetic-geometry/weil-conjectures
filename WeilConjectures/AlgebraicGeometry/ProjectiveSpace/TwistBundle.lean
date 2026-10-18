@@ -19,8 +19,8 @@ the hyperplane embedding.
 
 ## Main definitions
 
-- `AlgebraicGeometry.Scheme.CoordinateCover.restrict`: the restriction of a coordinate cover to an
-  open subscheme.
+- `AlgebraicGeometry.Scheme.CoordinateCover.restrictOpen`: the restriction of a coordinate cover to
+  an open subscheme.
 - `AlgebraicGeometry.ProjectiveSpace.twistBundleOpen`: the open `W`.
 - `AlgebraicGeometry.ProjectiveSpace.twistBundleπ`: the projection `W ⟶ ℙ(n; S)`.
 - `AlgebraicGeometry.ProjectiveSpace.twistBundleChart`: the charts `π⁻¹(D₊(Tᵢ)) ≅ 𝔸¹_{D₊(Tᵢ)}`.
@@ -40,7 +40,7 @@ namespace Scheme.CoordinateCover
 variable {X : Scheme.{u}} {ι : Type u} (𝒟 : X.CoordinateCover ι) (W : X.Opens)
 
 /-- The restriction of a coordinate cover of `X` to an open subscheme `W`. -/
-noncomputable def restrict : W.toScheme.CoordinateCover ι where
+noncomputable def restrictOpen : W.toScheme.CoordinateCover ι where
   U i := W.ι ⁻¹ᵁ 𝒟.U i
   ratio i j := W.ι.app (𝒟.U i) (𝒟.ratio i j)
   ratio_self i := by simp [𝒟.ratio_self]
@@ -63,7 +63,7 @@ noncomputable def restrict : W.toScheme.CoordinateCover ι where
     rfl
 
 @[simp]
-lemma restrict_U (i : ι) : (𝒟.restrict W).U i = W.ι ⁻¹ᵁ 𝒟.U i := rfl
+lemma restrictOpen_U (i : ι) : (𝒟.restrictOpen W).U i = W.ι ⁻¹ᵁ 𝒟.U i := rfl
 
 end Scheme.CoordinateCover
 
@@ -80,11 +80,11 @@ noncomputable def twistBundleOpen : ℙ(Option n; S).Opens :=
 
 /-- The standard coordinate cover of `ℙ(Option n; S)` restricted to `W`. -/
 noncomputable def twistBundleCover₀ : (twistBundleOpen n S).toScheme.CoordinateCover (Option n) :=
-  (standardCoordinateCover (Option n) S).restrict (twistBundleOpen n S)
+  (standardCoordinateCover (Option n) S).restrictOpen (twistBundleOpen n S)
 
 lemma iSup_nonvanishing_twistBundleCover₀ :
     ⨆ i : n, ((twistBundleCover₀ n S).coord (some i)).nonvanishing = ⊤ := by
-  simp only [nonvanishing_coord, twistBundleCover₀, Scheme.CoordinateCover.restrict_U,
+  simp only [nonvanishing_coord, twistBundleCover₀, Scheme.CoordinateCover.restrictOpen_U,
     standardCoordinateCover_U]
   rw [← Scheme.Hom.preimage_iSup]
   exact Scheme.Opens.ι_preimage_self _
@@ -691,6 +691,125 @@ lemma twistBundle_coord (i : n) (a : Fin 1) :
 
 @[simp]
 lemma twistBundle_zero : (twistBundle n S).zero = twistBundleZero n S := rfl
+
+/-! ### The coordinate sections of `𝒪(1)` -/
+
+/-- The sections defining the coordinate section `[x] ↦ [x : x_t]`: the coordinates `Tᵢ`, and
+`T_t` for the extra coordinate. -/
+noncomputable def twistBundleSectionSections (t : n) :
+    Option n → (standardCoordinateCover n S).Section 1
+  | none => (standardCoordinateCover n S).coord t
+  | some i => (standardCoordinateCover n S).coord i
+
+lemma span_twistBundleSectionSections (t : n) (i : n) :
+    Ideal.span (Set.range fun a ↦ (twistBundleSectionSections n S t a).s i) = ⊤ := by
+  refine Ideal.eq_top_of_isUnit_mem _ (Ideal.subset_span ⟨some i, rfl⟩) ?_
+  simp [twistBundleSectionSections, (standardCoordinateCover n S).ratio_self i]
+
+lemma twistBundleSectionSections_some_s_self (t : n) (i : n) :
+    (standardOpen n S i).topIso.inv ((twistBundleSectionSections n S t (some i)).s i) = 1 := by
+  simp [twistBundleSectionSections, (standardCoordinateCover n S).ratio_self i]
+
+/-- The coordinate section `[x] ↦ [x : x_t]` as a morphism `ℙ(n; S) ⟶ ℙ(Option n; S)`. -/
+noncomputable def twistBundleSectionAux (t : n) : ℙ(n; S) ⟶ ℙ(Option n; S) :=
+  Scheme.CoordinateCover.hom (twistBundleSectionSections n S t)
+    (span_twistBundleSectionSections n S t) (ℙ(n; S) ↘ S)
+
+@[reassoc (attr := simp)]
+lemma twistBundleSectionAux_over (t : n) :
+    twistBundleSectionAux n S t ≫ ℙ(Option n; S) ↘ S = ℙ(n; S) ↘ S :=
+  Scheme.CoordinateCover.hom_over _ _ _
+
+lemma twistBundleSectionAux_preimage_standardOpen_some (t : n) (i : n) :
+    twistBundleSectionAux n S t ⁻¹ᵁ standardOpen (Option n) S (some i) = standardOpen n S i := by
+  rw [twistBundleSectionAux, Scheme.CoordinateCover.preimage_hom_standardOpen]
+  exact nonvanishing_coord _ i
+
+lemma range_twistBundleSectionAux_subset (t : n) :
+    Set.range (twistBundleSectionAux n S t).base ⊆ Set.range (twistBundleOpen n S).ι.base := by
+  rintro _ ⟨x, rfl⟩
+  obtain ⟨i, hi⟩ := TopologicalSpace.Opens.mem_iSup.mp
+    ((iSup_standardOpen n S).ge (Set.mem_univ x))
+  rw [Scheme.Opens.range_ι]
+  have hx : x ∈ twistBundleSectionAux n S t ⁻¹ᵁ standardOpen (Option n) S (some i) := by
+    rw [twistBundleSectionAux_preimage_standardOpen_some]
+    exact hi
+  exact TopologicalSpace.Opens.mem_iSup.mpr ⟨i, hx⟩
+
+/-- The section `[x] ↦ [x : x_t]` of `𝒪(1)`, the coordinate `T_t`, as a morphism `ℙ(n; S) ⟶ W`. -/
+noncomputable def twistBundleSection (t : n) : ℙ(n; S) ⟶ (twistBundleOpen n S).toScheme :=
+  IsOpenImmersion.lift (twistBundleOpen n S).ι (twistBundleSectionAux n S t)
+    (range_twistBundleSectionAux_subset n S t)
+
+@[reassoc (attr := simp)]
+lemma twistBundleSection_ι (t : n) :
+    twistBundleSection n S t ≫ (twistBundleOpen n S).ι = twistBundleSectionAux n S t :=
+  IsOpenImmersion.lift_fac _ _ _
+
+/-- The coordinate section is a section of the projection.
+On the chart `D₊(Tᵢ)` of `ℙ(n; S)` both sides are `homOfSections` of the ratios
+`Tⱼ / Tᵢ` (`AlgebraicGeometry.ProjectiveSpace.comp_homOfSections`,
+`Scheme.CoordinateCover.ι_hom`): the ratios of `twistBundleCover` are the restrictions of
+`T_{some j} / T_{some i}`, which the hyperplane embedding pulls back to `Tⱼ / Tᵢ`. -/
+lemma twistBundleSection_comp_π (t : n) :
+    twistBundleSection n S t ≫ twistBundleπ n S = 𝟙 ℙ(n; S) := by
+  refine Scheme.Opens.hom_ext_of_iSup_eq_top (fun i ↦ standardOpen n S i) (iSup_standardOpen n S)
+    _ _ fun i ↦ ?_
+  have hr : Set.range ((standardOpen n S i).ι ≫ twistBundleSection n S t).base ⊆
+      Set.range ((twistBundleCover n S).U i).ι.base := by
+    rintro _ ⟨x, rfl⟩
+    rw [Scheme.Opens.range_ι, twistBundleCover_U]
+    have hx : x.1 ∈ twistBundleSectionAux n S t ⁻¹ᵁ standardOpen (Option n) S (some i) := by
+      rw [twistBundleSectionAux_preimage_standardOpen_some]
+      exact x.2
+    change ((standardOpen n S i).ι ≫ twistBundleSection n S t ≫ (twistBundleOpen n S).ι).base x ∈
+      standardOpen (Option n) S (some i)
+    rw [twistBundleSection_ι]
+    exact hx
+  let c := IsOpenImmersion.lift _ _ hr
+  have hc : c ≫ ((twistBundleCover n S).U i).ι =
+      (standardOpen n S i).ι ≫ twistBundleSection n S t :=
+    IsOpenImmersion.lift_fac _ _ _
+  have hh := Scheme.CoordinateCover.ι_hom (𝒟 := standardCoordinateCover n S)
+    (twistBundleSectionSections n S t) (span_twistBundleSectionSections n S t) (ℙ(n; S) ↘ S) i
+  rw [Scheme.CoordinateCover.localHom] at hh
+  rw [← Category.assoc, ← hc, Category.assoc, twistBundleπ, Scheme.CoordinateCover.ι_hom,
+    Scheme.CoordinateCover.localHom, comp_homOfSections, Category.comp_id]
+  conv_rhs => rw [ι_eq_homOfSections n S i]
+  congr 1
+  · rw [← Category.assoc c, hc, Category.assoc, twistBundleSection_ι_assoc,
+      twistBundleSectionAux_over]
+  · funext a
+    rw [Scheme.CoordinateCover.coord_s, twistBundleCover_ratio]
+    have e₁ : ((twistBundleCover n S).U i).topIso.inv =
+        ((twistBundleCover n S).U i).ι.appLE ((twistBundleCover n S).U i) ⊤
+          (Scheme.Opens.ι_preimage_self _).ge := by
+      rw [Scheme.Opens.ι_appLE]
+      rfl
+    have e₂ : c.appTop = c.appLE ⊤ ⊤ le_top := by
+      rw [Scheme.Hom.appTop, Scheme.Hom.app_eq_appLE]
+      rfl
+    have hV : (twistBundleCover n S).U i ≤
+        (twistBundleOpen n S).ι ⁻¹ᵁ standardOpen (Option n) S (some i) := le_of_eq (by simp)
+    have e₃ : (twistBundleOpen n S).toScheme.presheaf.map
+        (homOfLE (nonvanishing_coord _ _).le).op ((twistBundleCover₀ n S).ratio (some i) (some a)) =
+        (twistBundleOpen n S).ι.appLE (standardOpen (Option n) S (some i))
+          ((twistBundleCover n S).U i) hV (coordRatio (Option n) S (some i) (some a)) := rfl
+    rw [e₁, e₂, e₃, ← CommRingCat.comp_apply, ← CommRingCat.comp_apply,
+      Scheme.Hom.appLE_comp_appLE, Scheme.Hom.appLE_comp_appLE]
+    rw [appLE_eq_of_eq (show (c ≫ ((twistBundleCover n S).U i).ι) ≫ (twistBundleOpen n S).ι =
+      (standardOpen n S i).ι ≫ twistBundleSectionAux n S t by
+        rw [hc, Category.assoc, twistBundleSection_ι])]
+    have hh' : (standardOpen n S i).ι ≫ twistBundleSectionAux n S t = homOfSections
+        ((standardOpen n S i).ι ≫ ℙ(n; S) ↘ S)
+        (fun a ↦ (standardOpen n S i).topIso.inv ((twistBundleSectionSections n S t a).s i))
+        (Scheme.CoordinateCover.span_topIso_inv _ (span_twistBundleSectionSections n S t) i) := hh
+    rw [appLE_eq_of_eq hh']
+    exact (homOfSections_appLE_coordRatio (S := S) ((standardOpen n S i).ι ≫ ℙ(n; S) ↘ S)
+      (fun a ↦ (standardOpen n S i).topIso.inv ((twistBundleSectionSections n S t a).s i))
+      (Scheme.CoordinateCover.span_topIso_inv _ (span_twistBundleSectionSections n S t) i)
+      (twistBundleSectionSections_some_s_self n S t i) (some a) _).trans rfl
+
 
 end ProjectiveSpace
 
