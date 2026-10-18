@@ -296,5 +296,32 @@
     }
    ]
   }
+ },
+ "lean": {
+  "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic",
+  "declaration": "AlgebraicGeometry.ProEtale.coefficientRing",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.coefficientRing",
+   "AlgebraicGeometry.ProEtale.coefficientRing_X",
+   "AlgebraicGeometry.ProEtale.condensedRingObj",
+   "AlgebraicGeometry.ProEtale.isCommMonObj_condensedRingObj",
+   "CategoryTheory.Functor.monObjObj",
+   "CategoryTheory.Functor.mapMon",
+   "CategoryTheory.Functor.isCommMonObj_obj"
+  ],
+  "statement": "def coefficientRing (X : Scheme.{u}) (Λ : Mon (Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})) : Mon (Sheaf (ProEt.topology X) Ab.{u + 1})",
+  "branch": "slopmaster2",
+  "by": "N2",
+  "date": "2026-10-18",
+  "existing": true,
+  "note": "Exact existing binding to the published upstream ModuleObject.Basic framework (read from the shared side overlay and confirmed by scompile.py --source). coefficientRing is (upperStarFromPoint X).mapMon.obj, with underlying object p_X^* Λ; Mathlib monObjObj defines the actual unit as ε F ≫ F.map η and multiplication as LaxMonoidal.μ F Λ Λ ≫ F.map μ. The same mapMon supplies the functor on all ring objects, including noncommutative ones; condensedRingObj and its IsCommMonObj instance give the unbundled encoding and preservation of commutativity. The slopmaster2 branch label denotes the published WeilConjectures source root; no copy of the construction is introduced."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2904e15eb",
+  "group": "N2",
+  "result": "pass",
+  "note": "Existing binding to coefficientRing = (upperStarFromPoint X).mapMon.obj Λ in ModuleObject.Basic; only the lean field changed. Checked every node clause: object p_X^*Λ equals (sfbPullbackFromPoint X).obj Λ.X by rfl (the dependency abbrev is the same functor); unit ε≫F.map η and multiplication μ≫F.map μ by rfl, with ε and μ isomorphisms; ring laws and functor on ring objects via mapMon, morphisms sent to F.map a.hom; commutativity only in the conditional isCommMonObj_condensedRingObj. No extra hypotheses; universes Profinite.{u}/Scheme.{u}/Ab.{u+1} match the dependency; empty scheme, zero ring and noncommutative Λ are covered. nt_compile probe clean apart from line-length warnings; axioms only propext/Classical.choice/Quot.sound. Minor, no correction needed: the worker report names the older dependency declaration Sheaf.Paper.pullback_from_point instead of sfbPullbackFromPoint (same functor); the second reading is a disclosed self-check."
  }
 }
