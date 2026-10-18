@@ -436,5 +436,48 @@
   "group": "Q41",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q41-7ff1b0811 (reviewer sub-agent of L); spot-checked: Read the whole delivery against the main-20261015 blueprint statement and proof, unit sk-prop-an, the Stacks constructions.tex tags 01OB, 01O3 (r and θ on twists) and 01OE, and the full statement of every cited node. Faithfulness: the item statement matches the blueprint and the conventions (finite A, B separated finite type, quotient Proj Sym F). Nothing is weakened. Edge cases: n=0, empty B, ramified E with A not flat over Z/ℓ^N. Steps 1, 2 and 4–8 are correct: the mate normalization and full faithfulness, divisor-class restriction and excision, the localization long exact sequence (H^{2n-1}=0 and the top-degree isomorphism), Kummer naturality over Ω without finite type, the clause-3 stalk detector, and exchange-forget for the A-linear mate. The DFS from the item finds no cycle. Two repairable faults were fixed. (1) C1/E5 in step 3: the step treated the internal supported cup ∂κ(t_1)∪…∪∂κ(t_n) (def-pur-supported-cup, pro-étale) as if it were the supported exterior product κ^{Z,W} that the compact lemma speaks about. No DAG node identifies the two. I added an even-degree twisted cup clause to the delivery's own new lemma lem-pur-compact-product-proper-support-compatibility: κ^{Z,W}(α⊗β)=pr^*α∪pr^*β. I rewrote step 3 to use it with lem-pur-supported-cup-functoriality and u_{0}=τ_E (1708 characters). (2) The same lemma defined u_Z only on cohomology classes but asserted a derived equation. u_Z is now defined in D(A) via C_i⊣RΓ_Z and RΓ_c(ε_i), with Z proper so that j_!i_*=ī_*. The excision extension is now made precise. Small: step 5 now cites def-compact-support-direct-image-detailed for RΓ(P^n,j_!A)=RΓ_c(U,A). The geometry lemma is true clause by clause and is not a duplicate of the nagata Proj/base-change nodes. Neither new node is a duplicate or restates a clause of the item. Every proof dependency is on the transitive unit route, so the declared tool_uses are unnecessary but harmless; I accept them. Corrected files: fixes/dag/nodes/sec-smooth-purity/{thm-pur-projective-bundle-formula,lem-pur-compact-product-proper-support-compatibility}.json. Details are in review.md.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ProjectiveBundleFormula",
+  "declaration": "WeilConjectures.PurityFiniteSetting.projectiveBundleFormula",
+  "declarations": [
+   "WeilConjectures.projectiveBundleOrderedCup",
+   "WeilConjectures.projectiveBundleUnitDiagonal",
+   "WeilConjectures.projectiveBundleCupPowerRaw",
+   "WeilConjectures.projectiveBundleSummandEtaleRaw",
+   "WeilConjectures.projectiveBundleCupEvaluationRaw",
+   "WeilConjectures.projectiveBundlePositivePullbackRaw",
+   "WeilConjectures.projectiveBundleSummandPullbackEtaleRaw",
+   "WeilConjectures.projectiveBundleSummandRaw",
+   "WeilConjectures.projectiveBundleSummandPullbackRaw",
+   "WeilConjectures.PurityFiniteSetting.projectiveBundleCupPower",
+   "WeilConjectures.PurityFiniteSetting.projectiveBundleSummandEtale",
+   "WeilConjectures.PurityFiniteSetting.projectiveBundleCupEvaluation",
+   "WeilConjectures.PurityFiniteSetting.projectiveBundlePositivePullback",
+   "WeilConjectures.PurityFiniteSetting.projectiveBundleSummandPullbackEtale",
+   "WeilConjectures.PurityFiniteSetting.projectiveBundleSummand",
+   "WeilConjectures.PurityFiniteSetting.projectiveBundleSummandPullback",
+   "WeilConjectures.PurityFiniteSetting.projectiveBundleUnit",
+   "WeilConjectures.PurityFiniteSetting.projectiveBundleChern",
+   "WeilConjectures.PurityFiniteSetting.projectiveBundleComponent",
+   "WeilConjectures.PurityFiniteSetting.projectiveBundleMap",
+   "WeilConjectures.PurityFiniteSetting.projectiveBundleUnitPullback",
+   "WeilConjectures.PurityFiniteSetting.projectiveBundleTargetBaseChange",
+   "WeilConjectures.PurityFiniteSetting.projectiveBundleFormula"
+  ],
+  "file": "lean/Sheaf/Paper/ProjectiveBundleFormula.lean",
+  "statement": "theorem projectiveBundleFormula (P : PurityFiniteSetting.{u}) (t : Etale.OrdinaryFiniteTwistTransport P.Coefficient P.diagonalExponent P.diagonalExponent_annihilates) (n : ℕ) (G : ProjectiveBundleTautologicalSystem.{u} n) (B : Scheme.{u}) (F : B.Modules) (hF : projectiveBundleRank B n F) (b : B ⟶ Spec (.of P.field.k)) [IsSeparated b] [LocallyOfFiniteType b] [QuasiCompact b] : IsIso (P.projectiveBundleMap t n b (G.bundle B F hF) (G.invertible B F hF)) ∧ ∀ (B' : Scheme.{u}) (b' : B' ⟶ Spec (.of P.field.k)) (_hs : IsSeparated b') (_hft : LocallyOfFiniteType b') (_hqc : QuasiCompact b') (g : B' ⟶ B) (_hg : g ≫ b = b') (F' : B'.Modules) (hF' : projectiveBundleRank B' n F') (e : F' ≅ (Scheme.Modules.tensorPullback g).obj F), IsIso (P.projectiveBundleTargetBaseChange (G.baseChange hF hF' g e)) ∧ ∀ a : Fin (n + 1), IsIso (P.projectiveBundleSummandPullback t g (P.diagonalExponent_isUnit b) a.val) ∧ (ProEtale.upperStar (ModuleCat.{u + 1} P.Coefficient) g).leftDerivedFunctor.map (P.projectiveBundleComponent t b (G.bundle B F hF) (G.invertible B F hF) a.val) ≫ P.projectiveBundleTargetBaseChange (G.baseChange hF hF' g e) = P.projectiveBundleSummandPullback t g (P.diagonalExponent_isUnit b) a.val ≫ P.projectiveBundleComponent t b' (G.bundle B' F' hF') (G.invertible B' F' hF') a.val",
+  "branch": "newtargets-dag",
+  "by": "N1",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ea454de8e",
+  "group": "N1",
+  "result": "pass",
+  "note": "Statement matches the node and the source (blueprint order 1986) clause by clause: finite coefficients O_E/varpi^r for any r>=1 (exponent l^r); B separated finite type over k; F locally free of rank n+1 via the recorded IsFiniteLocallyFreeOfRank; P and O(1) from the normalized recorded ProjectiveBundleTautologicalSystem (existence by exists_projectiveBundleTautologicalGeometry); h_F is the recorded Kummer Chern class; ordered cup powers start at the identity; components are the adjoints of the evaluated cup powers; the map is Sigma.desc over Fin(n+1) and is asserted iso. Base change for every k-morphism g (any F' iso to g^*F): proper base-change exchange iso, summand comparison iso, and the commuting square for each component, which is equivalent to the node's clause. Edge cases n=0, empty base, ramified E and non-trivial bundles are covered; universes are bound with no restriction. No hollow defs; only the theorem is sorry; docstrings name source and blueprint id and carry proof steps 1-8; only the lean field changed; the statement is verbatim in the file; the report has both sections. nt_compile.py --json on the snapshot text against the local side overlay is clean (13.5 s and 13.7 s, exit 0), matching the delivery's record. Accepted observations: A(-a)[-2a] is the derived dual of the recorded positive power (canonically iso, since the twist is locally free of rank one); the fixed-scalar pro-etale operations are used, consistent with lem-pur-kummer-additivity and landed citers."
  }
 }
