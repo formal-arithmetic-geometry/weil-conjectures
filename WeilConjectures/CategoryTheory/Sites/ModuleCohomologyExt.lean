@@ -89,12 +89,6 @@ noncomputable def constantRingHomEquiv (Y : Sheaf J (ModuleCat.{w} Λ)) :
   ((constantSheafAdj J (ModuleCat.{w} Λ) hT).homEquiv _ _).trans
     (ModuleCat.homEquiv.trans (LinearMap.ringLmapEquivSelf Λ Λ _).toEquiv)
 
-/-- Deprecated alias of `CategoryTheory.Sheaf.constantHomEquiv`, with `J` explicit. -/
-@[deprecated constantHomEquiv (since := "2026-10-18")]
-noncomputable def constantIntHomEquiv (G : Sheaf J AddCommGrpCat.{w}) :
-    (constantInt J ⟶ G) ≃ G.obj.obj (op T) :=
-  constantHomEquiv hT G
-
 omit [HasSheafify J AddCommGrpCat.{w}]
   [J.HasSheafCompose (forget₂ (ModuleCat.{w} Λ) AddCommGrpCat.{w})] in
 lemma constantRingHomEquiv_comp {Y Y' : Sheaf J (ModuleCat.{w} Λ)} (f : constantRing J Λ ⟶ Y)
@@ -104,13 +98,6 @@ lemma constantRingHomEquiv_comp {Y Y' : Sheaf J (ModuleCat.{w} Λ)} (f : constan
   rw [constantRingHomEquiv, Equiv.trans_apply, Equiv.trans_apply,
     Adjunction.homEquiv_naturality_right]
   rfl
-
-set_option linter.deprecated false in
-@[deprecated constantHomEquiv_comp (since := "2026-10-18")]
-lemma constantIntHomEquiv_comp {G G' : Sheaf J AddCommGrpCat.{w}} (f : constantInt J ⟶ G)
-    (g : G ⟶ G') :
-    constantIntHomEquiv J hT G' (f ≫ g) = g.hom.app (op T) (constantIntHomEquiv J hT G f) :=
-  constantHomEquiv_comp hT f g
 
 /-- The class `u : ℤ_X ⟶ Λ_X` of the global section `1`. -/
 noncomputable def constantIntToRing : constantInt J ⟶ (forget₂Module J Λ).obj (constantRing J Λ) :=

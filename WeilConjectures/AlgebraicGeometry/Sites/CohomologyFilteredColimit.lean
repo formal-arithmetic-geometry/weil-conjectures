@@ -36,7 +36,9 @@ bijective for every `q` ([Stacks 03Q6]).
 
 ## Implementation notes
 
-The proof is the one sketched in [Stacks 03Q6]. Sections over quasi-compact quasi-separated
+The small case is the site-generic `CategoryTheory.Sheaf.H_map_isColimit_of_isFiltered_small`
+applied to the quasi-compact quasi-separated étale `X`-schemes. Its proof is the one sketched in
+[Stacks 03Q6]. Sections over quasi-compact quasi-separated
 étale `X`-schemes commute with filtered colimits, hence so do the Čech complexes on finite
 families of such schemes. A filtered colimit of injective sheaves (which need not be injective)
 therefore has exact Čech complexes in positive degrees, so it has no higher cohomology by the

@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import Mathlib.AlgebraicGeometry.Geometrically.Connected
+public import WeilConjectures.Algebra.Module.ZModSelfInjective
 public import WeilConjectures.EtaleCohomology.PoincareDuality.Frobenius.DualTateData
 public import WeilConjectures.EtaleCohomology.PoincareDuality.Frobenius.TraceEquivariance
 public import WeilConjectures.EtaleCohomology.PoincareDuality.Frobenius.UnitPairing
@@ -66,13 +67,16 @@ lemma derivedTensor_map_coefficientDualUnitIso_inv_comp_coefficientEvaluation
   have h := Adjunction.rightAdjointUniq_hom_app_counit Adjunction.id
     ((derivedTensorHomAdjunction _ (𝟙_ (DerivedCategoryModule Λ X))).ofNatIsoLeft
       (derivedTensorLeftUnitorNatIso _ X)) (𝟙_ _)
-  rw [← cancel_epi (λ_ (𝟙_ (DerivedCategoryModule Λ X))).inv, Iso.inv_hom_id]
+  rw [Adjunction.ofNatIsoLeft_counit, NatTrans.comp_app, Functor.whiskerLeft_app,
+    Adjunction.id_counit, NatTrans.id_app, Functor.id_map, ← Adjunction.rightAdjointUniq_inv_app,
+    ← Iso.app_inv] at h
   have e1 : (λ_ (𝟙_ (DerivedCategoryModule Λ X))).inv ≫
       ((derivedTensor _ X).obj (𝟙_ (DerivedCategoryModule Λ X))).map
         (coefficientDualUnitIso Λ X).inv =
-      (coefficientDualUnitIso Λ X).inv ≫ (λ_ _).inv :=
-    (leftUnitor_inv_naturality _).symm
-  rw [reassoc_of% e1]
+      (coefficientDualUnitIso Λ X).inv ≫ (λ_ _).inv := by
+    rw [derivedTensor_obj_map]
+    exact (leftUnitor_inv_naturality _).symm
+  rw [← cancel_epi (λ_ (𝟙_ (DerivedCategoryModule Λ X))).inv, Iso.inv_hom_id, reassoc_of% e1]
   exact h
 
 /-- The canonical identification `Λ_X ≅ Λ_X^∨` is a morphism of Weil objects, from the canonical
@@ -81,18 +85,24 @@ lemma isWeilMorphism_coefficientDualUnitIso_inv {X : Scheme.{u}} (g : X ⟶ X) :
     IsWeilMorphism g (leftDerivedUpperStarUnitIso _ g).hom
       (contragredientWeilDatum _ g (leftDerivedUpperStarUnitIso _ g))
       (coefficientDualUnitIso Λ X).inv := by
-  letI := leftDerivedUpperStarMonoidal (ModuleCat.{u + 1} Λ) g
+  let := leftDerivedUpperStarMonoidal (ModuleCat.{u + 1} Λ) g
   have hε : Functor.LaxMonoidal.ε L((g)^*[ModuleCat.{u + 1} Λ]) =
       (leftDerivedUpperStarUnitIso _ g).inv := by
     rw [← cancel_mono (leftDerivedUpperStarUnitIso _ g).hom, Iso.inv_hom_id]
     have := leftDerivedUpperStarUnitIso_hom_eq_η (Λ := Λ) g
     exact this ▸ Functor.Monoidal.ε_η _
   unfold IsWeilMorphism
-  apply ((derivedTensorHomAdjunction _ (𝟙_ (DerivedCategoryModule Λ X))).homEquiv _ _).symm.injective
+  apply ((derivedTensorHomAdjunction _ (𝟙_ (DerivedCategoryModule Λ X))).homEquiv _
+    _).symm.injective
   simp only [Adjunction.homEquiv_counit, Functor.map_comp, Category.assoc]
   erw [derivedTensor_map_contragredientWeilDatum_comp_coefficientEvaluation,
     derivedTensor_map_coefficientDualUnitIso_inv_comp_coefficientEvaluation]
-  sorry
+  rw [← leftDerivedUpperStarMonoidal_μ, ← hε, derivedTensor_obj_map, derivedTensor_obj_map,
+    derivedTensor_map_app, ← whisker_exchange_assoc, Functor.LaxMonoidal.μ_natural_right_assoc,
+    ← Functor.map_comp_assoc, ← derivedTensor_obj_map,
+    derivedTensor_map_coefficientDualUnitIso_inv_comp_coefficientEvaluation,
+    ← Functor.LaxMonoidal.left_unitality_assoc]
+  exact (leftUnitor_naturality _).symm
 
 /-- Composition with an isomorphism, as an additive equivalence of Hom groups, is composition. -/
 lemma _root_.CategoryTheory.Iso.postcompAddEquiv_apply' {C : Type*} [Category C] [Preadditive C]
@@ -119,7 +129,8 @@ theorem frobeniusOperator_unitShiftAddEquivLowerStar_comp_lowerShriek {X Y : Sch
       (lowerShriekWeilDatum sq (leftDerivedUpperStarUnitIso _ g).hom)
       ((rightDerivedLowerShriekIsoRightDerivedLowerStar _ a).inv.app _) :=
     IsWeilMorphism.of_iso_inv ((rightDerivedLowerShriekIsoRightDerivedLowerStar _ a).app _).symm
-      (lowerShriekWeilDatum_comp_rightDerivedLowerShriekIsoRightDerivedLowerStar_hom_app sq _).symm
+      (lowerShriekWeilDatum_comp_rightDerivedLowerShriekIsoRightDerivedLowerStar_hom_app
+        (Λ := Λ) sq _).symm
   rw [(hw.shift n).frobeniusOperator_comp, frobeniusOperator_unitShiftAddEquivLowerStar sq.toCommSq]
 
 section FiniteLevel
@@ -172,11 +183,11 @@ theorem exists_unitPairing_frobeniusOperator_geometricGaloisFrobenius
   have heI (x) : eI x = unitShiftAddEquivLowerStar Λ _ i x ≫
       ((rightDerivedLowerShriekIsoRightDerivedLowerStar _
         f.geometricFiberToAlgebraicClosure).inv.app _)⟦i⟧' :=
-    Iso.postcompAddEquiv_apply' _ _
+    by rw [AddEquiv.trans_apply, Iso.postcompAddEquiv_apply']; rfl
   have heJ (y) : eJ y = unitShiftAddEquivLowerStar Λ _ j y ≫
       ((R((f.geometricFiberToAlgebraicClosure)_*[ModuleCat.{u + 1} Λ])).map
         (coefficientDualUnitIso Λ _).inv)⟦j⟧' :=
-    Iso.postcompAddEquiv_apply' _ _
+    by rw [AddEquiv.trans_apply, Iso.postcompAddEquiv_apply']; rfl
   let B := γ.untwistedDegreewisePoincarePairing (𝟙_ _) i j hij
   refine ⟨AddMonoidHom.mk' (fun x ↦ AddMonoidHom.mk' (fun y ↦ eL (B (eI x) (eJ y)))
     fun y y' ↦ by simp) fun x x' ↦ by ext y; simp, fun x hx ↦ ?_, fun y hy ↦ ?_, fun x y ↦ ?_⟩
@@ -256,11 +267,11 @@ theorem exists_isPerfPair_cohomology_adicConstant_of_isProper (i j : ℕ) (h : i
     let Λ := ULift.{u + 1} (ZMod (l ^ m))
     have : NeZero (l ^ m) := ⟨pow_ne_zero _ (Fact.out : l.Prime).ne_zero⟩
     have : NeZero (ringChar Λ) := by rw [ringChar.eq Λ (l ^ m)]; infer_instance
-    have : Etale.HasInvertibleExponent Λ (Spec (.of (AlgebraicClosure k₀))) :=
+    have : HasInvertibleExponent Λ (Spec (.of (AlgebraicClosure k₀))) :=
       ⟨l ^ m, Nat.pos_of_ne_zero (NeZero.ne _), ULift.ext _ _ (by simp [Λ]), by
         simpa using ((Ne.isUnit (pow_ne_zero m hl)).map
           (Scheme.ΓSpecIso (.of (AlgebraicClosure k₀))).inv.hom)⟩
-    have : Etale.HasInvertibleExponent Λ f.geometricFiber := .of_hom a
+    have : HasInvertibleExponent Λ f.geometricFiber := .of_hom a
     have hcog : ∀ (M : ModuleCat.{u + 1} Λ) (x : M), x ≠ 0 → ∃ χ : M →ₗ[Λ] Λ, χ x ≠ 0 :=
       fun M x hx ↦ ZModLike.exists_apply_ne_zero (n := l ^ m)
         (Nat.pos_of_ne_zero (NeZero.ne _)) (ULift.ext _ _ (by
@@ -270,9 +281,11 @@ theorem exists_isPerfPair_cohomology_adicConstant_of_isProper (i j : ℕ) (h : i
         (fun z hz ↦ (ZMod.intCast_zmod_eq_zero_iff_dvd z _).1 (by
           simpa using congrArg ULift.down hz)) hx
     have hΛ : Function.Surjective (Int.cast : ℤ → Λ) := fun x ↦
-      ⟨(ZMod.intCast_surjective x.down).choose, ULift.ext _ _ (by
-        simpa using (ZMod.intCast_surjective x.down).choose_spec)⟩
-    exact Etale.exists_unitPairing_frobeniusOperator_geometricGaloisFrobenius f d Λ hΛ hcog i j
+      ⟨(ZMod.intCast_surjective x.down).choose, ULift.ext _ _
+        ((ULift.down_intCast _).trans (ZMod.intCast_surjective x.down).choose_spec)⟩
+    exact Etale.exists_unitPairing_frobeniusOperator_geometricGaloisFrobenius (f := f) (d := d)
+      (Λ := Λ)
+      hΛ hcog i j
       (by exact_mod_cast h)
   choose P hPl hPr hPF using key
   obtain ⟨P', hP', hP'F⟩ := exists_isPerfPair_cohomology_adicConstant_of_unitPairing (Y := X) hfin

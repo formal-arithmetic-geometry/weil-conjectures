@@ -63,10 +63,10 @@ theorem str_homologyRightDerivedFunctorForgetIso {K : IsoAlgebra F}
         (homologyRightDerivedFunctorForgetIso e I r).hom =
       G.map (homologyRightDerivedFunctorForgetIso e I r).hom ≫
         ((((mapResolution e I).sc r).map (forget G)).mapHomologyIso G).inv ≫
-        ShortComplex.homologyMap (((mapResolution e I).sc r).mapNatTrans (strNatTrans G)) := by
-  have h := homologyMap_mapNatTrans_strNatTrans G ((mapResolution e I).sc r)
+        ShortComplex.homologyMap (((mapResolution e I).sc r).mapNatTrans (strNatIso G).hom) := by
+  have h := homologyMap_mapNatTrans_strNatIso_hom G ((mapResolution e I).sc r)
   have h' : ((((mapResolution e I).sc r).map (forget G)).mapHomologyIso G).inv ≫
-      ShortComplex.homologyMap (((mapResolution e I).sc r).mapNatTrans (strNatTrans G)) =
+      ShortComplex.homologyMap (((mapResolution e I).sc r).mapNatTrans (strNatIso G).hom) =
       G.map (((mapResolution e I).sc r).mapHomologyIso (forget G)).hom ≫
         ((mapResolution e I).sc r).homology.str.hom ≫
           (((mapResolution e I).sc r).mapHomologyIso (forget G)).inv := by
@@ -146,7 +146,7 @@ theorem frobenius_globalSectionsHomologyIso {K : IsoAlgebra F} (I : InjectiveRes
     (((mapResolution e I).sc r).map (forget G)) τ
   rw [ShortComplex.mapHomologyIso_comp] at key₁
   have key₂ := ShortComplex.mapHomologyIso_hom_naturality
-    (((mapResolution e I).sc r).mapNatTrans (strNatTrans G)) ΓD
+    (((mapResolution e I).sc r).mapNatTrans (strNatIso G).hom) ΓD
   have k₁ : τ.app _ ≫ ΓD.map ((((mapResolution e I).sc r).map (forget G)).mapHomologyIso G).inv =
       ((((mapResolution e I).sc r).map (forget G)).mapHomologyIso ΓD).inv ≫
         ShortComplex.homologyMap ((((mapResolution e I).sc r).map (forget G)).mapNatTrans τ) ≫

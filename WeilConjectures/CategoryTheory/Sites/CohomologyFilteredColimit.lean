@@ -9,6 +9,7 @@ public import Mathlib.Algebra.Category.Grp.FilteredColimits
 public import Mathlib.Algebra.Category.Grp.Ulift
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
 public import WeilConjectures.CategoryTheory.Sites.CechCriterion
+public import WeilConjectures.Mathlib.CategoryTheory.Filtered.Basic
 
 /-!
 # Cohomology on a site commutes with filtered colimits on quasi-compact objects
@@ -20,8 +21,16 @@ covering sieve, whose Čech nerve `U (y 0) ×_V ⋯ ×_V U (y k)` lies in `B` (t
 `B` is the class of quasi-compact quasi-separated objects. Then the cohomology `Hᵠ(T, -)` of
 abelian sheaves commutes with filtered colimits ([Stacks 03Q6], [Stacks 0738]).
 
+## Main definitions
+
+- `CategoryTheory.Functor.toInjectiveExtension`: a functorial monomorphism
+  `D ⟶ D.injectiveExtension` of a diagram in a Grothendieck abelian category into a diagram of
+  injective objects.
+
 ## Main statements
 
+- `AddCommGrpCat.exists_ι_apply_eq_of_isColimit`, `AddCommGrpCat.exists_map_eq_zero_of_isColimit`:
+  elements of filtered colimits of abelian groups of arbitrary size.
 - `CategoryTheory.Sheaf.exists_map_eq_zero_of_isColimit_of_finite`,
   `CategoryTheory.Sheaf.exists_app_eq_of_isColimit_of_finite`: sections over members of `B` of a
   filtered colimit of abelian sheaves come from a finite stage and are separated at a finite
@@ -37,12 +46,12 @@ abelian sheaves commutes with filtered colimits ([Stacks 03Q6], [Stacks 0738]).
 
 ## Implementation notes
 
-This is the site-generic version of `AlgebraicGeometry.Scheme.H_map_isColimit_of_isFiltered_small`
-for the small étale site, with the same proof: sections over members of `B` commute with
-filtered colimits, hence so do the Čech complexes on the finite families; a filtered colimit of
-injective sheaves thus has vanishing higher cohomology by the Čech criterion, and we conclude by
-dimension shifting along the functorial injective embedding
-`CategoryTheory.Functor.toInjectiveExtension`, filtered colimits being exact.
+The small étale site version `AlgebraicGeometry.Scheme.H_map_isColimit_of_isFiltered_small` is a
+special case. Sections over members of `B` commute with filtered colimits, hence so do the Čech
+complexes on the finite families; a filtered colimit of injective sheaves thus has vanishing
+higher cohomology by the Čech criterion, and we conclude by dimension shifting along the
+functorial injective embedding `CategoryTheory.Functor.toInjectiveExtension`, filtered colimits
+being exact.
 -/
 
 @[expose] public section

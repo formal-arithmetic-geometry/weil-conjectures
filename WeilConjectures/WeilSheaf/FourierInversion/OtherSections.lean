@@ -13,10 +13,10 @@ public import WeilConjectures.WeilSheaf.ProjectionFormula.LisseDualityProof
 /-!
 # Fourier inversion: inputs from other sections
 
-Statements of blueprint nodes of other sections (the projection formula, the open–closed
+Statements of blueprint nodes of other sections used for Fourier inversion (the projection
+formula, the open–closed recollement and the Thom isomorphism of the trivial line bundle),
 recorded here; the projection formula is proved in
 `WeilConjectures.WeilSheaf.ProjectionFormula`, the other two are recorded with `sorry`.
-recorded here with `sorry`.
 -/
 
 @[expose] public section

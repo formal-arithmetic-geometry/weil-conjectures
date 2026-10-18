@@ -10,6 +10,7 @@ public import Mathlib.Algebra.Homology.DerivedCategory.KInjective
 public import Mathlib.Algebra.Homology.DerivedCategory.SingleTriangle
 public import Mathlib.Algebra.Module.Injective
 public import Mathlib.RingTheory.Localization.FractionRing
+public import WeilConjectures.Algebra.Homology.DerivedCategory.InjectiveHom
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.Perfect
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure
 
@@ -172,38 +173,6 @@ variable {C : Type u} [Category.{v} C] [Abelian C] [HasDerivedCategory.{w} C]
 
 open TStructure
 
-/-- An object of `D^{≥1}` has no nonzero morphism to an injective object placed in degree `0`:
-it is represented by a complex concentrated in degrees `≥ 1`, and `J[0]` is K-injective. -/
-lemma eq_zero_of_isGE_one {J : C} [Injective J] {M : DerivedCategory C} [M.IsGE 1]
-    (f : M ⟶ (singleFunctor C 0).obj J) : f = 0 := by
-  obtain ⟨K, _, ⟨e⟩⟩ := M.exists_iso_Q_obj_of_isGE 1
-  let S := (CochainComplex.singleFunctor C 0).obj J
-  have hS (n : ℤ) : Injective (S.X n) := by
-    by_cases hn : n = 0
-    · subst hn
-      exact Injective.of_iso (HomologicalComplex.singleObjXSelf _ 0 J).symm inferInstance
-    · exact (HomologicalComplex.isZero_single_obj_X _ 0 J n hn).injective
-  have : S.IsKInjective := CochainComplex.isKInjective_of_injective S 0
-  let eS : (singleFunctor C 0).obj J ≅ Q.obj S := (singleFunctorIsoCompQ C 0).app J
-  suffices h : ∀ g : Q.obj K ⟶ Q.obj S, g = 0 by
-    rw [← cancel_epi e.inv, ← cancel_mono eS.hom]
-    simp only [Category.assoc, comp_zero, zero_comp]
-    exact h _
-  intro g
-  obtain ⟨φ, hφ⟩ := (CochainComplex.IsKInjective.Qh_map_bijective
-    ((HomotopyCategory.quotient C _).obj K) S).2
-      ((quotientCompQhIso C).hom.app K ≫ g ≫ (quotientCompQhIso C).inv.app S)
-  obtain ⟨ψ, rfl⟩ := (HomotopyCategory.quotient C _).map_surjective φ
-  have hψ : ψ = 0 := by
-    ext n
-    by_cases hn : n = 0
-    · subst hn
-      exact (K.isZero_of_isStrictlyGE 1 0).eq_of_src _ _
-    · exact (HomologicalComplex.isZero_single_obj_X _ 0 J n hn).eq_of_tgt _ _
-  rw [hψ, Functor.map_zero, Functor.map_zero] at hφ
-  rw [← cancel_epi ((quotientCompQhIso C).hom.app K), ← cancel_mono
-    ((quotientCompQhIso C).inv.app S), comp_zero, zero_comp, Category.assoc, ← hφ]
-
 variable {J : C} [Injective J]
 
 /-- A morphism `L ⟶ J[0]` to an injective object placed in degree `0` is determined by its
@@ -217,7 +186,7 @@ lemma eq_zero_of_homologyFunctor_map_eq_zero {L : DerivedCategory C}
     simp only [Functor.map_comp, h, comp_zero, Functor.map_zero]
   obtain ⟨g, hg⟩ := Triangle.yoneda_exact₂ _ (t.triangleLTGE_distinguished 1 L) φ h₁
   have : ((t.truncGE 1).obj L).IsGE 1 := t.isGE_truncGE_obj _ _ _
-  rw [hg, eq_zero_of_isGE_one g, comp_zero]
+  rw [hg, eq_zero_of_isGE_one_of_injective g, comp_zero]
 
 /-- Every morphism `H⁰(L) ⟶ H⁰(J[0])` to the cohomology of an injective object placed in degree
 `0` is the effect on `H⁰` of a morphism `L ⟶ J[0]`. -/
@@ -236,7 +205,7 @@ lemma exists_homologyFunctor_map_eq (L : DerivedCategory C)
     have : t.IsGE (((t.triangleLTGE 1).obj L).invRotate.obj₁) 2 :=
       t.isGE_shift ((t.truncGE 1).obj L) 1 (-1) 2
     exact t.isGE_of_ge _ 1 2
-  obtain ⟨φ, hφ⟩ := Triangle.yoneda_exact₂ _ hT ψ (eq_zero_of_isGE_one _)
+  obtain ⟨φ, hφ⟩ := Triangle.yoneda_exact₂ _ hT ψ (eq_zero_of_isGE_one_of_injective _)
   refine ⟨φ, ?_⟩
   rw [← cancel_epi ((homologyFunctor C 0).map ι), ← Functor.map_comp]
   simp only at hψ

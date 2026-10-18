@@ -78,8 +78,8 @@ lemma constantRingHomEquiv_id :
   rfl
 
 /-- The global section of `ℤ_X` corresponding to the identity is the generator `1`. -/
-lemma constantIntHomEquiv_id :
-    Sheaf.constantIntHomEquiv.{u + 1} X.smallEtaleTopology (terminalEtaleIsTerminal X) _ (𝟙 _) =
+lemma constantHomEquiv_id_eq :
+    Sheaf.constantHomEquiv.{u + 1} (J := X.smallEtaleTopology) (terminalEtaleIsTerminal X) _ (𝟙 _) =
       ((toSheafify X.smallEtaleTopology
         ((Functor.const X.Etaleᵒᵖ).obj (AddCommGrpCat.of (ULift.{u + 1} ℤ)))).app
           (op (terminalEtale X))).hom (ULift.up.{u + 1} (1 : ℤ)) := by
@@ -92,12 +92,12 @@ lemma constantIntToRing_comp_sheafForget₂ConstantRingIso_hom :
       (constantSheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}).map
         (AddCommGrpCat.ofHom ((Int.castAddHom Λ).comp
           (AddEquiv.ulift : ULift.{u + 1} ℤ ≃+ ℤ).toAddMonoidHom)) := by
-  apply (Sheaf.constantIntHomEquiv.{u + 1} X.smallEtaleTopology (terminalEtaleIsTerminal X)
+  apply (Sheaf.constantHomEquiv.{u + 1} (J := X.smallEtaleTopology) (terminalEtaleIsTerminal X)
     _).injective
-  rw [Sheaf.constantIntHomEquiv_comp, Sheaf.constantIntToRing]
+  rw [Sheaf.constantHomEquiv_comp, Sheaf.constantIntToRing]
   erw [Equiv.apply_symm_apply, constantRingHomEquiv_id]
-  conv_rhs => rw [← Category.id_comp ((constantSheaf _ _).map _), Sheaf.constantIntHomEquiv_comp,
-    constantIntHomEquiv_id]
+  conv_rhs => rw [← Category.id_comp ((constantSheaf _ _).map _), Sheaf.constantHomEquiv_comp,
+    constantHomEquiv_id_eq]
   have hK := congrArg (fun k ↦ k.hom (1 : Λ))
     (toSheafify_comp_sheafForget₂ConstantRingIso_hom Λ X (op (terminalEtale X)))
   have hN := congrArg (fun k ↦ (k.app (op (terminalEtale X))).hom (ULift.up.{u + 1} (1 : ℤ)))
