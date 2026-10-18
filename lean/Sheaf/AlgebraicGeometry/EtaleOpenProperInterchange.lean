@@ -61,6 +61,7 @@ theorem nonempty_iso_etale_open_proper_interchange
         (openImmersionLowerShriek (ModuleCat.{u + 1} Λ)
             (pullback.fst p i)).mapDerivedCategoryPlus ⋙
           rightDerivedLowerStarPlus (ModuleCat.{u + 1} Λ) p) := by
-  sorry
+  obtain ⟨_, γ, _⟩ := properOpenInterchangeCoherence Λ
+  exact ⟨γ (pullback.fst p i) i (pullback.snd p i) p pullback.condition⟩
 
 end AlgebraicGeometry.Etale
