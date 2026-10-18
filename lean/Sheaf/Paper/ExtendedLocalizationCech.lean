@@ -56,7 +56,7 @@ def Indices (r : ℕ) (q : ℤ) := {s : Finset (Fin r) // (s.card : ℤ) = q}
 Proof: insertion of a new element raises the finite cardinality by one; cast to integers. -/
 theorem insert_degree {r : ℕ} {q : ℤ} (s : Indices r q) (j : Fin r) (h : j ∉ s.val) :
     ((insert j s.val).card : ℤ) = q + 1 := by
-  sorry
+  rw [Finset.card_insert_of_notMem h, Nat.cast_add, Nat.cast_one, s.property]
 
 /-- Free term on the subsets of cardinality q. Source: Tag 0913
 (blueprint: def-weil-pbc-extended-localization-cech). -/
@@ -167,7 +167,12 @@ theorem mapSection_naturality {R B : Sheaf J CommRingCat.{u}} (φ : R ⟶ B)
     (s : (unit (rings R)).sections) {X Y : Cᵒᵖ} (a : X ⟶ Y) :
     (unit (rings B)).val.map a ((φ.hom.app X) (s.val X)) =
       (φ.hom.app Y) (s.val Y) := by
-  sorry
+  have h := CategoryTheory.congr_fun (φ.hom.naturality a) (s.val X)
+  change (φ.hom.app Y) ((R.obj.map a) (s.val X)) =
+    (B.obj.map a) ((φ.hom.app X) (s.val X)) at h
+  change (B.obj.map a) ((φ.hom.app X) (s.val X)) = _
+  rw [← h]
+  exact congrArg (φ.hom.app Y) (s.property a)
 
 /-- Image of a global section under the coefficient map. Source: Tag 099H
 (blueprint: def-weil-pbc-extended-localization-cech). -/
@@ -183,7 +188,25 @@ and its naturality is the naturality of φ. Components determine a sheaf morphis
 theorem unitMap_existsUnique {R B : Sheaf J CommRingCat.{u}} (φ : R ⟶ B) :
     ∃! g : unit (rings R) ⟶ (restriction φ).obj (unit (rings B)),
       ∀ (X : Cᵒᵖ) (a : R.obj.obj X), g.val.app X a = (φ.hom.app X) a := by
-  sorry
+  let g : unit (rings R) ⟶ (restriction φ).obj (unit (rings B)) :=
+    ⟨{ app := fun X ↦ ModuleCat.ofHom
+        (X := (unit (rings R)).val.obj X)
+        (Y := ((restriction φ).obj (unit (rings B))).val.obj X)
+        { toFun := φ.hom.app X
+          map_add' := map_add _
+          map_smul' := fun a b ↦ map_mul (φ.hom.app X).hom a b }
+       naturality := fun {X Y} a ↦ by
+         apply ModuleCat.hom_ext
+         apply LinearMap.ext
+         intro b
+         exact CategoryTheory.congr_fun (φ.hom.naturality a) b }⟩
+  refine ⟨g, fun _ _ ↦ rfl, ?_⟩
+  intro g' hg'
+  apply SheafOfModules.hom_ext
+  apply PresheafOfModules.hom_ext
+  intro X
+  apply ModuleCat.hom_ext
+  exact LinearMap.ext (fun a ↦ hg' X a)
 
 /-- The actual coefficient morphism, uniquely fixed by its sectionwise formula.
 Source: Tag 099H (blueprint: def-weil-pbc-extended-localization-cech). -/
