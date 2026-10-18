@@ -15,9 +15,148 @@
   "def-weil-pbc-derived-categories",
   "def-weil-pbc-constructible-complexes"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First suppose $g$ is proper. Since it is of finite presentation it is of finite type, and $T$ is quasi-compact. Choose $e\\geq0$ bounding the dimensions of all scheme-theoretic fibres by [lem-fin-finite-type-fibre-dimension-bound]. The underlying abelian sheaf of any $B_V$-module $M$ is killed by $\\ell$. Apply [lem-kun-proper-torsion-cd-bound] to this sheaf. The comparison [lem-sbc-higher-direct-image-forget-comparison] identifies the underlying abelian sheaf of $R^qg_*M$ with that higher direct image. Consequently $R^qg_*M=0$ for $q>2e$. Take $d=2e$. This proves the requested uniform bound, without imposing any condition on the characteristic of the residue fields or on the base beyond those already stated.",
+   "uses": [
+    "lem-fin-finite-type-fibre-dimension-bound",
+    "lem-kun-proper-torsion-cd-bound",
+    "lem-sbc-higher-direct-image-forget-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 095U, label lemma-cohomological-dimension-proper; morphisms.tex Tag 0A3V, label lemma-morphism-finite-type-bounded-dimension"
+   }
+  },
+  {
+   "text": "For the same proper $g$ and a constructible sheaf $M$ in degree zero, apply [lem-weil-pbc-etale-compactification-constructibility] to the identity compactification $V\\xrightarrow{1}V\\xrightarrow{g}T$. The identity is a quasi-compact open immersion; $g$ is separated and of finite presentation, and both schemes are qcqs, as that node requires. Its output is $Rg_*M$ by [def-weil-pbc-projection-compactification], so every cohomology sheaf is constructible. The nonnegative injective resolution computing right-derived direct image has no negative cohomology. Step 1 kills degrees above $2e$; hence $Rg_*M$ is bounded constructible.",
+   "uses": [
+    "lem-weil-pbc-etale-compactification-constructibility",
+    "def-weil-pbc-projection-compactification",
+    "def-weil-pbc-direct-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0GL0, label theorem-constructible-shriek, applied to the identity compactification"
+   }
+  },
+  {
+   "text": "We will use the following finite devissage for any of the direct images in this proof. Bounded constructible complexes are closed under shifts and distinguished triangles: the long exact cohomology sequence expresses each middle cohomology as an extension of a cokernel and a kernel of the adjacent maps, which are constructible by [thm-constructible-serre]; the union of finitely many degree intervals is bounded. Right-derived direct image preserves distinguished triangles and shifts by [lem-pc-right-derived-functor-triangulated]. If it sends each constructible sheaf to a bounded constructible complex, it therefore does the same for every bounded constructible $K$: induct on the length of a cohomological interval $[a,b]$ using [lem-sf-derived-truncation-triangle] at $b$, whose terms are $\\tau_{\\leq b-1}K$ and $\\mathcal H^b(K)[-b]$. The zero case is immediate; the two shorter terms give the induction step. This applies Step 2 to the proper case. It also shows that subsequent sheaf finiteness inputs need no bound uniform over all constructible sheaves.",
+   "uses": [
+    "thm-constructible-serre",
+    "lem-pc-right-derived-functor-triangulated",
+    "lem-sf-derived-truncation-triangle",
+    "def-weil-pbc-constructible-complexes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 08J5, remark-truncation-distinguished-triangle; finite devissage as in ILO XIII, 1.1.2"
+   }
+  },
+  {
+   "text": "Now suppose $T$ is quasi-excellent and $\\ell$ is invertible on $T$. The stability lemma [lem-per-quasi-excellent-finite-type-stability] applied to $1_T$ and to $g$ shows that $T$ and $V$ are Noetherian. For any Noetherian quasi-excellent $W$ on which $\\ell$ is invertible and any open immersion $j:U\\hookrightarrow W$, [lem-per-gabber-open-immersion-sheaf-finiteness] gives constructible cohomology and an eventual-vanishing bound for $Rj_*M$ for every constructible $M$. Its negative degrees vanish by the bounded-below resolution definition [def-weil-pbc-direct-image]. Thus Step 3 gives $Rj_*D^b_c(U,B)\\subset D^b_c(W,B)$. No finite-dimensionality of $W$ is used.",
+   "uses": [
+    "lem-per-quasi-excellent-finite-type-stability",
+    "lem-per-gabber-open-immersion-sheaf-finiteness",
+    "def-weil-pbc-direct-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XIII, Theorem 1.1.1 and 1.1.2, open-immersion case"
+   }
+  },
+  {
+   "text": "Consider first a separated finite-type morphism $h:Z\\to W$ with $W$ Noetherian quasi-excellent, $\\ell$ invertible on $W$, and $Z$ qcqs. By [thm-nagata-compactification] choose $Z\\xrightarrow{j}\\overline Z\\xrightarrow{p}W$, with $j$ a quasi-compact open immersion and $p$ proper [def-nagata-compactification]. The stability lemma [lem-per-quasi-excellent-finite-type-stability] applies to $p$: $\\overline Z$ is quasi-excellent and Noetherian, since $p$ is of finite type and its source is quasi-compact. The element $\\ell$ stays a unit on $\\overline Z$ because a ring homomorphism carries an inverse to an inverse. By [pqf-lem-lft-fp-locnoeth], $p$ is locally of finite presentation; properness gives quasi-compactness and separatedness, hence quasi-separatedness, so $p$ is finitely presented and Steps 1--3 apply to it, while Step 4 applies to $j$. For $K\\in D^b_c(Z,B)$ the composition isomorphism [lem-cbc-etale-derived-direct-image-coherence] gives $Rh_*K\\simeq Rp_*Rj_*K\\in D^b_c(W,B)$.",
+   "uses": [
+    "thm-nagata-compactification",
+    "def-nagata-compactification",
+    "lem-per-quasi-excellent-finite-type-stability",
+    "pqf-lem-lft-fp-locnoeth",
+    "lem-cbc-etale-derived-direct-image-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XIII 2.1.2 and 3.1, reduction to an open immersion using a compactification"
+   }
+  },
+  {
+   "text": "To treat an arbitrary $g$ in the quasi-excellent case, first restrict to an affine open $W\\subset T$. The module-coefficient restriction isomorphism [lem-weil-pbc-derived-open-restriction] identifies $(Rg_*K)|_W$ with $R(g_W)_*(K|_{V_W})$. The input remains bounded constructible: inverse-image restriction intersects each stratum with the open and restricts its local constant trivializations [def-weil-pbc-constructible-complexes]. The scheme $V_W$ is Noetherian by [lem-per-quasi-excellent-finite-type-stability] and has a finite affine cover by [lem-weil-pbc-qcqs-finite-affine-open-cover]. For each member of this cover its map to the affine $W$ is separated: the diagonal of a morphism between affine schemes is the closed immersion defined on rings by the surjective multiplication map. Every open subscheme of such an affine member remains separated over $W$, since its relative diagonal is the restriction of that closed diagonal. For the overlap of a finite union of these affines with one more affine, [pqf-lem-qs-intersection-qc] gives quasi-compactness, using that $V_W$ is quasi-separated. Its inclusion into the affine member is then of finite type by [lem-weil-pbc-qc-open-immersion-finite-type], so its map to $W$ is of finite type as well.",
+   "uses": [
+    "lem-weil-pbc-derived-open-restriction",
+    "def-weil-pbc-constructible-complexes",
+    "lem-per-quasi-excellent-finite-type-stability",
+    "lem-weil-pbc-qcqs-finite-affine-open-cover",
+    "pqf-lem-qs-intersection-qc",
+    "lem-weil-pbc-qc-open-immersion-finite-type"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XIII 2.1.2, localization on the target and finite affine coverings of the source"
+   }
+  },
+  {
+   "text": "Here is the relative two-open Mayer--Vietoris argument needed to glue the preceding separated cases. If $Z=U\\cup U'$ and $h:Z\\to W$, represent $L\\in D^+(Z_{\\mathrm{et}},B)$ by a bounded-below injective complex $I$. By [lem-weil-pbc-etale-restriction-injectives], its restrictions to $U,U',U\\cap U'$ remain injective complexes. Apply [lem-dg-etale-injective-finite-cech-rows] with the two-open cover in every degree: the augmented row is split exact. Applying $h_*$ preserves its splitting and gives a short exact sequence of complexes\n$$0\\to h_*I\\to (h|_U)_*(I|_U)\\oplus(h|_{U'})_*(I|_{U'})\\to(h|_{U\\cap U'})_*(I|_{U\\cap U'})\\to0.$$\nBy the injective-resolution computation [def-weil-pbc-direct-image] these are representatives of the corresponding derived images. Their cohomology long exact sequence, together with the kernel/cokernel/extension closure [thm-constructible-serre], implies that the first derived image is bounded constructible whenever the other three are: outside their finite degree intervals both neighbouring groups are zero; in each remaining degree the first group is an extension of a cokernel by a kernel.",
+   "uses": [
+    "lem-weil-pbc-etale-restriction-injectives",
+    "lem-dg-etale-injective-finite-cech-rows",
+    "def-weil-pbc-direct-image",
+    "thm-constructible-serre"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0EYK, label lemma-relative-mayer-vietoris, proof, applied to constant-ring module injective complexes"
+   }
+  },
+  {
+   "text": "Induct on the number $r$ of affine opens in the chosen cover of $V_W$. If $r=0$, $V_W$ is empty and its image is zero. For $r=1$ the map is separated, so Step 5 applies. For $r>1$, let $U$ be the union of the first $r-1$ affine opens and $U'$ the last affine open. The image from $U$ is bounded constructible by induction. The images from $U'$ and $U\\cap U'$ are bounded constructible by Step 5: by Step 6 the latter is a quasi-compact open of the affine $U'$, separated and of finite type over $W$. Step 7 proves bounded constructibility over $W$. Finally choose finitely many affine opens $W_i$ covering the quasi-compact $T$. The restrictions of $Rg_*K$ have finite cohomological intervals; their finite union gives a global interval. For each cohomology sheaf, the finitely many local finite stratifications give a global one: order all their locally closed constructible strata, subtract the previously occurring ones, and refine each remaining constructible difference into finitely many locally closed pieces using the Boolean-algebra and locally closed decomposition properties in [def-weil-constructible-subset]. Each piece lies inside an original stratum and retains its finite locally constant trivialization. Thus the global cohomology is constructible by [def-weil-pbc-constructible-complexes]. This proves the remaining case, with a bound allowed to depend on $K$.",
+   "uses": [
+    "def-weil-pbc-constructible-complexes",
+    "def-weil-constructible-subset"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XIII 2.1.2, finite source-cover reduction and Zariski locality; XIII 1.1.2"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-fin-finite-type-fibre-dimension-bound",
+  "lem-kun-proper-torsion-cd-bound",
+  "lem-sbc-higher-direct-image-forget-comparison",
+  "lem-weil-pbc-etale-compactification-constructibility",
+  "def-weil-pbc-projection-compactification",
+  "def-weil-pbc-direct-image",
+  "thm-constructible-serre",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-sf-derived-truncation-triangle",
+  "def-weil-pbc-constructible-complexes",
+  "lem-per-quasi-excellent-finite-type-stability",
+  "lem-per-gabber-open-immersion-sheaf-finiteness",
+  "thm-nagata-compactification",
+  "def-nagata-compactification",
+  "pqf-lem-lft-fp-locnoeth",
+  "lem-cbc-etale-derived-direct-image-coherence",
+  "lem-weil-pbc-derived-open-restriction",
+  "lem-weil-pbc-qcqs-finite-affine-open-cover",
+  "pqf-lem-qs-intersection-qc",
+  "lem-weil-pbc-qc-open-immersion-finite-type",
+  "lem-weil-pbc-etale-restriction-injectives",
+  "lem-dg-etale-injective-finite-cech-rows",
+  "def-weil-constructible-subset"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "XIII 2.1.2, compactification and finite-open-cover reduction, combined with 1.1.1--1.1.2 for open immersions; proper case Stacks Tags 0GL0, 0A3V, 095U. Explicit module-valued Mayer--Vietoris and finite-truncation devissage."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -53,10 +192,24 @@
    "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-18",
    "verdict": "no match: the returned declarations concern scheme morphisms, sheaf generators, or references to Gabber in t-structure documentation; none is a finiteness theorem for etale derived direct images"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Gabber finiteness of higher etale direct images of constructible finite field sheaves over quasi excellent schemes",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.finite_appTop_of_universallyClosed\", \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image\", \"AlgebraicGeometry.Scheme.Etale\", \"SheafOfModules.IsFinitePresentation.mk\", \"AlgebraicGeometry.Scheme.etaleTopology\", \"AlgebraicGeometry.IsFinite.recOn\", \"SheafOfModules.instIsFiniteTypeOfIsFinitePresentation\"], \"digest\": \"e8682e979e3d203b\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: scheme morphism and constructible-subset results and t-structure bibliographic references do not give etale direct-image finiteness"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived etale direct image with finite field coefficients along a proper finitely presented map of qcqs schemes or a map to a quasi excellent ell invertible scheme preserves bounded constructible complexes",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.isConstructible_image\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image\", \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"AlgebraicGeometry.Scheme.instCategoryEtale\"], \"digest\": \"6ed5f19e169fd798\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: scheme morphism and constructible-subset results and t-structure bibliographic references do not give etale direct-image finiteness"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-finite-exceptional-preservation",
@@ -77,5 +230,104 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-per-quasi-excellent-etale-direct-image-finiteness",
+  "worker": "stage1",
+  "summary": "Retained the corrected two-case statement. Reused the arbitrary-base proper constructibility and torsion dimension tools. Reduced the quasi-excellent case to the smaller open-immersion sheaf finiteness input by compactification, explicit two-open Mayer--Vietoris and finite affine-cover induction; extracted quasi-excellent finite-type stability. Checked all scalar categories and removed any need for a uniform nonproper bound.",
+  "blueprint": "Nearest ancestor lem-per-artin-gabber-affine-curve, proof Step 3: finite-residue Verdier duality; via lem-per-qbar-arbitrary-field-duality, lem-per-finite-residue-dualizing and lem-per-finite-exceptional-preservation, this supplies the ordinary direct-image finiteness used by localization and compactification. No chapter or unit route is replaced.",
+  "tool_uses": [
+   {
+    "node": "lem-fin-finite-type-fibre-dimension-bound",
+    "why": "The proper all-sheaf bound needs a fibre-dimension bound over an arbitrary qcqs base, which the perverse unit does not supply."
+   },
+   {
+    "node": "lem-kun-proper-torsion-cd-bound",
+    "why": "The general torsion 095U estimate supplies the proper all-sheaf bound without invertibility or Noetherian hypotheses."
+   },
+   {
+    "node": "lem-sbc-higher-direct-image-forget-comparison",
+    "why": "Forgetting B-scalars transfers that abelian vanishing estimate to module higher direct images."
+   },
+   {
+    "node": "lem-weil-pbc-etale-compactification-constructibility",
+    "why": "The general qcqs 0GL0 compact-support tool gives constructible cohomology for the identity proper compactification."
+   },
+   {
+    "node": "thm-constructible-serre",
+    "why": "Generic closure of ordinary finite-coefficient constructible sheaves used in truncation and two-open gluing."
+   },
+   {
+    "node": "lem-pc-right-derived-functor-triangulated",
+    "why": "Generic homological algebra needed for the finite truncation argument, not a replacement of the perverse route."
+   },
+   {
+    "node": "lem-sf-derived-truncation-triangle",
+    "why": "Generic standard truncation tool for reducing a bounded complex to its finitely many cohomology sheaves."
+   },
+   {
+    "node": "thm-nagata-compactification",
+    "why": "Generic compactification tool for separated pieces in the finiteness argument, not a change of the perverse route."
+   },
+   {
+    "node": "pqf-lem-lft-fp-locnoeth",
+    "why": "The compactifying proper map must be finitely presented to use the proper-case finiteness tool."
+   },
+   {
+    "node": "lem-cbc-etale-derived-direct-image-coherence",
+    "why": "Generic constant-coefficient D-plus composition comparison for open followed by proper."
+   },
+   {
+    "node": "lem-weil-pbc-derived-open-restriction",
+    "why": "Ordinary finite-coefficient target-open restriction, needed to work over an affine base."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-finite-affine-open-cover",
+    "why": "Generic geometric cover existence used for the nonseparated reduction."
+   },
+   {
+    "node": "pqf-lem-qs-intersection-qc",
+    "why": "Generic qc overlap tool ensures that the separated intersection is in the finite-type range."
+   },
+   {
+    "node": "lem-weil-pbc-qc-open-immersion-finite-type",
+    "why": "The qc overlap inclusion is finite type; this is needed to apply compactification to that overlap."
+   },
+   {
+    "node": "lem-weil-pbc-etale-restriction-injectives",
+    "why": "Generic injective restriction tool needed to compute relative Mayer--Vietoris in module coefficients."
+   },
+   {
+    "node": "lem-dg-etale-injective-finite-cech-rows",
+    "why": "The exact two-open injective module row gives the needed relative Mayer--Vietoris sequence."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-fin-finite-type-fibre-dimension-bound",
+  "lem-kun-proper-torsion-cd-bound",
+  "lem-sbc-higher-direct-image-forget-comparison",
+  "lem-weil-pbc-etale-compactification-constructibility",
+  "thm-constructible-serre",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-sf-derived-truncation-triangle",
+  "thm-nagata-compactification",
+  "pqf-lem-lft-fp-locnoeth",
+  "lem-cbc-etale-derived-direct-image-coherence",
+  "lem-weil-pbc-derived-open-restriction",
+  "lem-weil-pbc-qcqs-finite-affine-open-cover",
+  "pqf-lem-qs-intersection-qc",
+  "lem-weil-pbc-qc-open-immersion-finite-type",
+  "lem-weil-pbc-etale-restriction-injectives",
+  "lem-dg-etale-injective-finite-cech-rows"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q02-fcfed8a3d",
+  "group": "Q02",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q02-fcfed8a3d (reviewer sub-agent of L); spot-checked: PASS: read the item, both new nodes and the 23 nodes it cites in full; no fixes. Item statement checked against ILO XIII Thm 1.1.1/1.1.2 (bound per constructible sheaf; uniform bound only in finite dimension, ILO 2.3) and BS Thm 6.7.1 with R/m=B. The uniform bound 2e is kept only for proper g (Stacks 095U + 0A3V). The statement is unchanged from the base and covers what the citer lem-per-finite-exceptional-preservation uses (Steps 1, 2, 4). The split follows ILO XIII 3.1.2: Nagata, then Rp_*Rj_*, then proper finiteness (Stacks 0GL0 with the identity compactification, which the definition names explicitly), then the open-immersion input, then explicit two-open Cech/Mayer-Vietoris gluing (split exact rows of injectives, restrictions stay injective) and induction on affine covers. Each cited statement covers its step: Serre closure holds for any scheme and finite ring; open restriction holds for finite rings in D^+; lft⇒lfp holds over a Noetherian base; qs-intersection gives the qc overlaps. New open node = ILO 1.1.1 with f=j; it is strictly smaller and is the source's own reduction (not D1). New stability node = 07QU + locality (EGA IV 7.8.3, ILO I 5.1), true. Neither duplicates an existing node: lem-trf-excellent-scheme-affine-cover is about excellence locality only; cor-fin-deligne-open-* and lem-sf-adic-dense-open-* are over a field. Cases tested: ℓ=p excluded on A^1; U=T; U=∅; zero sheaf; g=id. No SGA cited. All 16 declared tool_uses are generic and accepted. Batch-5: lem-kun-proper-torsion-cd-bound (095U, proper cohomological dimension; closure reaches PD only via the generic 0DV5 module-object lemma) and lem-weil-pbc-etale-compactification-constructibility (0GL0, finiteness of Rf_!, a trace-formula hypothesis; closure reaches sec-trace-formula only via a generic D^+ adjunction lemma) are outside both assumed statements and are not steps of their proofs; kept."
  }
 }
