@@ -59,6 +59,11 @@ theorem constantSheaf_cohomology_of_isStrictlyHenselianLocalRing
                 AddCommGrpCat.{u + 1}) 0).obj
               ((constantSheaf (Spec (CommRingCat.of R)).smallEtaleTopology
                 AddCommGrpCat.{u + 1}).obj A))) := by
-  sorry
+  obtain ⟨e⟩ := nonempty_constantSheaf_cohomology_zero_iso R
+  refine ⟨⟨e.app A⟩, ?_⟩
+  intro q hq
+  exact (strictlyHenselian_etale_acyclic R inferInstance).2
+    ((constantSheaf (Spec (CommRingCat.of R)).smallEtaleTopology
+      AddCommGrpCat.{u + 1}).obj A) (q : ℤ) (by omega)
 
 end AlgebraicGeometry.Etale
