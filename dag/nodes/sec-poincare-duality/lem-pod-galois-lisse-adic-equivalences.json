@@ -1,0 +1,152 @@
+{
+ "id": "lem-pod-galois-lisse-adic-equivalences",
+ "kind": "statement",
+ "title": "Construction of the three adic evaluation equivalences, before tensor exactness.",
+ "statement": "For the specified profinite model P and delta: G ≃ₜ* P, construct the integral, rational and algebraic equivalences with the canonical fibre comparisons and evaluation formulas. The returned data has exactly that P and delta.\n\nExact Lean statement:\ntheorem galois_lisse_adic_equivalences {Y : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (y : Spec (.of Ω) ⟶ Y) (G : Type u) [Group G] [TopologicalSpace G] [∀ P, MulAction G ((FiniteEtale.fiber y).obj P)] (c : GaloisLisseFiniteCorrespondence y G) (l : ℕ) [Fact l.Prime] [IsNoetherian Y] [Y.IsSeparated] [∀ x : Y, Invertible (l : Y.residueField x)] (Q : Type (u + 1)) [Field Q] [Algebra ℚ_[l] Q] [IsAlgClosure ℚ_[l] Q] [ConnectedSpace Y] [IsTopologicalGroup G] [CompactSpace G] [IsFundamentalGroup (FiniteEtale.fiber y) G] (P : ProfiniteGrp.{u}) (δ : G ≃ₜ* P) : ∃ d : GaloisLisseAdicData y G c l Q, d.P = P ∧ HEq d.δ δ ∧ galoisIntegralEvaluationAction y G c l Q d ∧ galoisRationalEvaluationAction y G c l Q d ∧ galoisAlgebraicModelScalarExtension y G c l Q d",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-poincare-duality/sk-lem-finite/cor-galois-lisse-representations.md",
+  "place": "node cor-galois-lisse-representations, order 2427"
+ },
+ "stmt_deps": [
+  "def-pod-galois-lisse-correspondence-data"
+ ],
+ "proof": [
+  {
+   "text": "Use the specified profinite model; its construction is now done in the corollary proof. *(2): the $\\mathcal O_E$-level functor.* Let $\\mathcal F=(\\mathcal F_n,t_n)$ be a lisse $\\mathcal O_E$-sheaf [def-pod-lisse-l-adic-sheaves] and $M_n=(\\mathcal F_n)_{\\bar y}$, a finite $A_{E,n}$-module with continuous $\\pi_1$-action by (1) for the finite ring $A_{E,n}$. The maps $(t_n)_{\\bar y}:M_{n+1}\\to M_n$ are equivariant (step 1: they are stalks of maps of sheaves), and by step 5 applied to $A_{E,n+1}\\to A_{E,n}$ they induce equivariant isomorphisms $M_{n+1}\\otimes_{A_{E,n+1}}A_{E,n}\\cong(\\mathcal F_{n+1}\\otimes A_{E,n})_{\\bar y}\\cong M_n$. By [lem-pod-adic-limit-finite-modules] (1), $M=\\mathcal F_{\\bar y}=\\varprojlim M_n$ is a finitely generated $\\mathcal O_E$-module with $M/\\varpi_E^nM=M_n$, whose $\\mathfrak m_E$-adic topology is the limit topology. $\\pi_1$ acts on $M$ by the limit of the actions, $\\mathcal O_E$-linearly; the action map $\\pi_1\\times M\\to M$ is continuous because its composites with the projections $M\\to M_n$ factor as $\\pi_1\\times M\\to\\pi_1\\times M_n\\to M_n$, both continuous. So $\\mathcal F\\mapsto\\mathcal F_{\\bar y}$ is a functor to continuous $\\mathcal O_E$-representations [def-pod-l-adic-representations] (a morphism $(u_n)$ goes to $\\varprojlim(u_n)_{\\bar y}$, equivariant by step 1). Formalization subproblem: identify G homeomorphically with a small profinite model of its\nfundamental-group automorphism group. At every finite quotient use c.e and\nc.finiteEvaluationAction. Take the inverse limit of the actions on stalks.\n`adicLimit_finite_modules` gives finiteness, the projection quotient formula,\nand continuity for the adic topology. The Hom comparison in\n`finite_module_adic_complete_and_hom` gives full faithfulness; quotient towers\nand the inverse finite equivalence give essential surjectivity. The projections\npin the integral evaluation formula. Rationalize the functor and its Hom maps.\nInvariants commute with this localization since all torsion of the finite Hom\nmodule is killed by a fixed uniformizer power. A stable lattice gives rational\nessential surjectivity. The rational action formula follows on a tensor a tensor z.\nFinally pass to the directed finite-coefficient localization. A matrix has\nfinitely many coefficients, so an equivariant map descends to one common finite\nextension. Every l-adic representation descends by its definition, proving\nessential surjectivity. The algebraic fibre comparison is canonical scalar\nextension, giving the model comparison and its pure-tensor formula.",
+   "uses": [
+    "def-pod-lisse-l-adic-sheaves",
+    "def-pod-l-adic-representations",
+    "lem-pod-adic-limit-finite-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stanford-weil2-seminar/L19.pdf",
+    "place": "Proposition 1.1.9, third bullet, p. 3 (the lcc sheaves F_m correspond to the finite pi_1-modules Lambda/m^m Lambda); Milne LEC, Section 19, p. 125 ('to give a locally constant sheaf M on a connected variety X is to give a finitely generated Z_l-module M together with a continuous action of pi_1(X, x)'); Weil II (1.1.1) b), p. 146"
+   }
+  },
+  {
+   "text": "*(2): the $\\mathcal O_E$-level equivalence.* Full faithfulness: by definition $\\operatorname{Hom}(\\mathcal F,\\mathcal G)=\\varprojlim_n\\operatorname{Hom}(\\mathcal F_n,\\mathcal G_n)$ (compatible families), by (1) at each level this is $\\varprojlim_n\\operatorname{Hom}_{\\pi_1}(M_n,N_n)$ (the identification is natural, so it respects the transition maps), and by [lem-pod-adic-limit-finite-modules] (2) a compatible family of equivariant maps $M_n\\to N_n$ is the same as an $\\mathcal O_E$-linear map $M\\to N$ (automatically continuous) whose reductions are equivariant, i.e. an equivariant map, since $N=\\varprojlim N_n$. Essential surjectivity: let $M$ be a continuous $\\mathcal O_E$-representation. By [lem-pod-adic-limit-finite-modules] (2), $M=\\varprojlim M_n$ with $M_n=M/\\varpi_E^nM$; $\\varpi_E^nM$ is an open $\\pi_1$-stable submodule, so $\\pi_1$ acts continuously on the finite discrete $M_n$. By (1) there are lisse sheaves $\\mathcal F_n$ of $A_{E,n}$-modules with $(\\mathcal F_n)_{\\bar y}\\cong M_n$ equivariantly, and by full faithfulness in (1) the projections $M_{n+1}\\to M_n$ come from maps $t_n:\\mathcal F_{n+1}\\to\\mathcal F_n$; the induced map $\\mathcal F_{n+1}\\otimes A_{E,n}\\to\\mathcal F_n$ is a map of lisse $A_{E,n}$-sheaves whose fibre, by step 5, is the isomorphism $M_{n+1}\\otimes A_{E,n}\\to M_n$, hence it is an isomorphism (an equivalence reflects isomorphisms). So $(\\mathcal F_n,t_n)$ is a lisse $\\mathcal O_E$-sheaf with fibre $\\varprojlim M_n=M$. Formalization subproblem: identify G homeomorphically with a small profinite model of its\nfundamental-group automorphism group. At every finite quotient use c.e and\nc.finiteEvaluationAction. Take the inverse limit of the actions on stalks.\n`adicLimit_finite_modules` gives finiteness, the projection quotient formula,\nand continuity for the adic topology. The Hom comparison in\n`finite_module_adic_complete_and_hom` gives full faithfulness; quotient towers\nand the inverse finite equivalence give essential surjectivity. The projections\npin the integral evaluation formula. Rationalize the functor and its Hom maps.\nInvariants commute with this localization since all torsion of the finite Hom\nmodule is killed by a fixed uniformizer power. A stable lattice gives rational\nessential surjectivity. The rational action formula follows on a tensor a tensor z.\nFinally pass to the directed finite-coefficient localization. A matrix has\nfinitely many coefficients, so an equivariant map descends to one common finite\nextension. Every l-adic representation descends by its definition, proving\nessential surjectivity. The algebraic fibre comparison is canonical scalar\nextension, giving the model comparison and its pure-tensor formula.",
+   "uses": [
+    "def-pod-lisse-l-adic-sheaves",
+    "def-pod-l-adic-representations",
+    "lem-pod-adic-limit-finite-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stanford-weil2-seminar/L19.pdf",
+    "place": "Proposition 1.1.9, second and third bullets, pp. 2-3; Weil II (1.1.1) b), p. 146"
+   }
+  },
+  {
+   "text": "*(2): the $E$-level equivalence.* For lisse $\\mathcal O_E$-sheaves with fibres $M,N$, $\\operatorname{Hom}(\\mathcal F\\otimes E,\\mathcal G\\otimes E)=\\operatorname{Hom}(\\mathcal F,\\mathcal G)\\otimes_{\\mathcal O_E}E=\\operatorname{Hom}_{\\pi_1}(M,N)\\otimes_{\\mathcal O_E}E$ by step 7 and [def-pod-lisse-l-adic-sheaves] (2). This equals $\\operatorname{Hom}_{\\pi_1}(M\\otimes E,N\\otimes E)$: since $M$ is finitely presented, $H=\\operatorname{Hom}_{\\mathcal O_E}(M,N)$ is finitely generated and $H\\otimes_{\\mathcal O_E}E=\\operatorname{Hom}_E(M\\otimes E,N\\otimes E)$ equivariantly; $H^{\\pi_1}\\otimes E\\to(H\\otimes E)^{\\pi_1}$ is injective ($\\otimes E$ is exact), and surjective because if $h\\otimes\\varpi_E^{-k}$ is invariant then every $gh-h$ lies in the torsion of $H$, which is killed by a fixed power $\\varpi_E^t$, so $\\varpi_E^th\\in H^{\\pi_1}$. The $E$-space $M\\otimes E$ with its action is a continuous $E$-representation: the image $M'$ of $M$ is an open lattice (a quotient of $M$ by its torsion, free and spanning), the action on it is continuous, and $\\pi_1\\times M\\otimes E\\to M\\otimes E$ is continuous at $(g,\\varpi_E^{-k}m)$ by scaling. Essential surjectivity: a continuous $E$-representation $V$ has a $\\pi_1$-stable lattice $\\Lambda$ with continuous action by [lem-pod-profinite-stable-lattice] ($\\pi_1$ is profinite, hence compact); $\\Lambda$ is a continuous $\\mathcal O_E$-representation, which comes from a lisse $\\mathcal O_E$-sheaf $\\mathcal F$ by step 7, and $\\mathcal F\\otimes E\\mapsto\\Lambda\\otimes E=V$. Formalization subproblem: identify G homeomorphically with a small profinite model of its\nfundamental-group automorphism group. At every finite quotient use c.e and\nc.finiteEvaluationAction. Take the inverse limit of the actions on stalks.\n`adicLimit_finite_modules` gives finiteness, the projection quotient formula,\nand continuity for the adic topology. The Hom comparison in\n`finite_module_adic_complete_and_hom` gives full faithfulness; quotient towers\nand the inverse finite equivalence give essential surjectivity. The projections\npin the integral evaluation formula. Rationalize the functor and its Hom maps.\nInvariants commute with this localization since all torsion of the finite Hom\nmodule is killed by a fixed uniformizer power. A stable lattice gives rational\nessential surjectivity. The rational action formula follows on a tensor a tensor z.\nFinally pass to the directed finite-coefficient localization. A matrix has\nfinitely many coefficients, so an equivariant map descends to one common finite\nextension. Every l-adic representation descends by its definition, proving\nessential surjectivity. The algebraic fibre comparison is canonical scalar\nextension, giving the model comparison and its pure-tensor formula.",
+   "uses": [
+    "def-pod-lisse-l-adic-sheaves",
+    "def-pod-l-adic-representations",
+    "lem-pod-profinite-stable-lattice"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stanford-weil2-seminar/L19.pdf",
+    "place": "Proposition 1.1.9, first and second bullets, p. 2 (lisse E-sheaves correspond to representations defined over E; any lisse E-sheaf comes from a lisse O_E-sheaf, corresponding to a stable lattice); Weil II (1.1.1) c), p. 147"
+   }
+  },
+  {
+   "text": "*(2): scalar extension and the $\\Qlb$-level equivalence.* Let $E\\subset L$ in $\\Qlb$, $e$ the ramification index. For a lisse $\\mathcal O_E$-sheaf $\\mathcal F$ with fibre $M$, the levels of $\\mathcal F\\otimes_{\\mathcal O_E}\\mathcal O_L$ are $\\mathcal F_n\\otimes_{A_{E,n}}A_{L,m}$ [def-pod-lisse-l-adic-sheaves] (3), whose fibres are $M_n\\otimes_{A_{E,n}}A_{L,m}$ with action $1\\otimes\\sigma$ by step 5; by [lem-pod-adic-limit-finite-modules] (3) (for $m=en$, $A_{L,en}=\\mathcal O_L/\\varpi_E^n\\mathcal O_L$) and (1) the limit is $M\\otimes_{\\mathcal O_E}\\mathcal O_L$, so the fibre functor commutes with scalar extension, naturally and compatibly with $E\\subset L\\subset L'$. Then for lisse $\\Qlb$-sheaves $(E,\\mathcal F),(E',\\mathcal F')$ with fibres $V_E,V'_{E'}$, steps 8 and this compatibility give $\\operatorname{Hom}((E,\\mathcal F),(E',\\mathcal F'))=\\varinjlim_L\\operatorname{Hom}_{\\pi_1}(V_E\\otimes_EL,V'_{E'}\\otimes_{E'}L)$. The right side is $\\operatorname{Hom}_{\\pi_1}(V_E\\otimes_E\\Qlb,V'_{E'}\\otimes_{E'}\\Qlb)$: for a fixed $L$ the space $H_L=\\operatorname{Hom}_L(V_E\\otimes L,V'_{E'}\\otimes L)$ is finite-dimensional, its $\\pi_1$-invariants are the kernel of the linear map $H_L\\to\\prod_{g\\in S}H_L$, $h\\mapsto(gh-h)_g$, for a finite set $S\\subset\\pi_1$ (finite dimension), and kernels of linear maps commute with the field extension $\\otimes_L\\Qlb$; hence $\\operatorname{Hom}_{\\pi_1}(V\\otimes\\Qlb,V'\\otimes\\Qlb)=\\operatorname{Hom}_{\\pi_1}(V\\otimes L,V'\\otimes L)\\otimes_L\\Qlb=\\varinjlim_{L'}\\operatorname{Hom}_{\\pi_1}(V\\otimes L',V'\\otimes L')$. So the functor $(E,\\mathcal F)\\mapsto\\mathcal F_{\\bar y}\\otimes_E\\Qlb$ is fully faithful; its values are $\\ell$-adic representations in the sense of [def-pod-l-adic-representations] (3) with $E$-structure $V_E$, and every $\\ell$-adic representation has by definition an $E$-structure $V_E$ which is a continuous $E$-representation, hence by step 8 the fibre of some lisse $E$-sheaf, so the functor is essentially surjective. Formalization subproblem: identify G homeomorphically with a small profinite model of its\nfundamental-group automorphism group. At every finite quotient use c.e and\nc.finiteEvaluationAction. Take the inverse limit of the actions on stalks.\n`adicLimit_finite_modules` gives finiteness, the projection quotient formula,\nand continuity for the adic topology. The Hom comparison in\n`finite_module_adic_complete_and_hom` gives full faithfulness; quotient towers\nand the inverse finite equivalence give essential surjectivity. The projections\npin the integral evaluation formula. Rationalize the functor and its Hom maps.\nInvariants commute with this localization since all torsion of the finite Hom\nmodule is killed by a fixed uniformizer power. A stable lattice gives rational\nessential surjectivity. The rational action formula follows on a tensor a tensor z.\nFinally pass to the directed finite-coefficient localization. A matrix has\nfinitely many coefficients, so an equivariant map descends to one common finite\nextension. Every l-adic representation descends by its definition, proving\nessential surjectivity. The algebraic fibre comparison is canonical scalar\nextension, giving the model comparison and its pure-tensor formula.",
+   "uses": [
+    "def-pod-lisse-l-adic-sheaves",
+    "def-pod-l-adic-representations",
+    "lem-pod-adic-limit-finite-modules",
+    "def-weil-finite-subextension-directed-set"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+    "place": "(1.1.1) d), p. 147 (Qlbar-sheaves as the 2-colimit over finite E, Hom tensor Qlbar) and (1.1.6), p. 148 ('la relation habituelle entre faisceaux lisses et representations continues du groupe fondamental (une equivalence de categories)'); L19, Proposition 1.1.9, first bullet, p. 2"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pod-lisse-l-adic-sheaves",
+  "def-pod-l-adic-representations",
+  "lem-pod-adic-limit-finite-modules",
+  "lem-pod-profinite-stable-lattice",
+  "def-weil-finite-subextension-directed-set"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-poincare-duality/sk-lem-finite/cor-galois-lisse-representations.md",
+  "place": "The cited numbered proof steps of cor-galois-lisse-representations, with explicit Lean interface glue."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An equivalence between finite locally constant module sheaves and finite continuous representations, compatible with stalks and tensor products",
+   "results": "Eight hits, primarily Mathlib.Condensed.Discrete.Module; no scheme-etale or adic correspondence. Earlier fundamental-group query found the abstract functorToContAction equivalence only.",
+   "date": "2026-10-18",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Integral adic sheaves and continuous finite dimensional p-adic representations, tensor products and scalar extension",
+   "results": "Eight hits on AdicCompletion, including ofTensorProductEquivOfFiniteNoetherian, but no sheaf-representation equivalence or monoidal comparison.",
+   "date": "2026-10-18",
+   "verdict": "Useful finite-module infrastructure already covered by the declared adic-limit dependency; no exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "rg IsContinuousCoefficient|IsContinuousIntegral|IsLAdic|isClosedUnder|abelian lean/Sheaf/RepresentationTheory lean/WeilConjectures/RepresentationTheory; rg galoisRepFunctor|exists_equivalence_isFiniteLocallyConstantSheaf_of_isFundamentalGroup lean/WeilConjectures",
+   "results": "LocalSystems proves the finite commutative-ring equivalence; it does not cover all noncommutative finite rings nor the adic clauses. EquivalenceInternalModule proves transport of internal modules, and its finite-action identification is stated. No adic-category equivalence was found.",
+   "date": "2026-10-18",
+   "verdict": "Reuse the declared modules for the parts they cover; the missing comparison/glue is stated here."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.GaloisLisseRepresentations",
+  "date": "2026-10-18",
+  "group": "C1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "cor-galois-lisse-representations",
+   "place": "proof steps 6,7,8,9",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-lem-finite",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.GaloisLisseAdicEquivalences",
+  "file": "lean/Sheaf/Paper/GaloisLisseAdicEquivalences.lean",
+  "declaration": "AlgebraicGeometry.Scheme.galois_lisse_adic_equivalences",
+  "statement": "theorem galois_lisse_adic_equivalences {Y : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (y : Spec (.of Ω) ⟶ Y) (G : Type u) [Group G] [TopologicalSpace G] [∀ P, MulAction G ((FiniteEtale.fiber y).obj P)] (c : GaloisLisseFiniteCorrespondence y G) (l : ℕ) [Fact l.Prime] [IsNoetherian Y] [Y.IsSeparated] [∀ x : Y, Invertible (l : Y.residueField x)] (Q : Type (u + 1)) [Field Q] [Algebra ℚ_[l] Q] [IsAlgClosure ℚ_[l] Q] [ConnectedSpace Y] [IsTopologicalGroup G] [CompactSpace G] [IsFundamentalGroup (FiniteEtale.fiber y) G] (P : ProfiniteGrp.{u}) (δ : G ≃ₜ* P) : ∃ d : GaloisLisseAdicData y G c l Q, d.P = P ∧ HEq d.δ δ ∧ galoisIntegralEvaluationAction y G c l Q d ∧ galoisRationalEvaluationAction y G c l Q d ∧ galoisAlgebraicModelScalarExtension y G c l Q d",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "C-7472d",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261018T071138-L-1664590",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "C-7472d",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261018T071138-L-1664590",
+  "kind": "interface",
+  "note": "independent cc review: galois_lisse_representations proof (assembly + 4 new sorry lemmas with nodes) and verbatim relocation of 46 data defs to GaloisLisseRepresentationData vs node cor-galois-lisse-representations, published module, change record; all 6 modules + 2 direct importers compile; earlier return points done"
+ }
+}

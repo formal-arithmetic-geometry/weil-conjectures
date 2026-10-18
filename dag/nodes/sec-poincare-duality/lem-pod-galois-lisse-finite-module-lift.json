@@ -1,0 +1,116 @@
+{
+ "id": "lem-pod-galois-lisse-finite-module-lift",
+ "kind": "statement",
+ "title": "Lift a specified finite-set fibre equivalence to finite left modules.",
+ "statement": "/-- Lift a specified finite-set fibre equivalence to finite left modules.\nSource: Stacks Project, Tag 0DV5 (3), proof; the proof of\n`cor-galois-lisse-representations`, step 1.\n\nExact Lean statement:\ntheorem galois_lisse_finite_module_lift\n    {Y : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]\n    (y : Spec (.of Ω) ⟶ Y) (G : Type u) [Group G] [TopologicalSpace G]\n    [∀ P, MulAction G ((FiniteEtale.fiber y).obj P)] [IsTopologicalGroup G]\n    (Φ : Y.FiniteEtale ≌ Y.FLC) (E : Y.FLC ≌ ContAction FintypeCat.{u} G)\n    (γ : G ≃ₜ* Aut (ObjectProperty.ι (IsLisseEtaleSheafOfSets (T := Y)) ⋙\n      (pointSmallEtale y).sheafFiber (A := Type (u + 1))))\n    (η : Φ.functor ⋙ ObjectProperty.ι _ ⋙\n      (pointSmallEtale y).sheafFiber (A := Type (u + 1)) ≅\n      FiniteEtale.fiber y ⋙ CategoryTheory.forget FintypeCat.{u} ⋙\n        uliftFunctor.{u + 1, u})\n    (τ : E.functor ⋙ forget₂ (ContAction FintypeCat.{u} G) FintypeCat.{u} ⋙\n      CategoryTheory.forget FintypeCat.{u} ⋙ uliftFunctor.{u + 1, u} ≅\n      ObjectProperty.ι _ ⋙ (pointSmallEtale y).sheafFiber (A := Type (u + 1)))\n    (hτ : ∀ (F : Y.FLC) (g : G) (z : ULift.{u + 1} (E.functor.obj F).obj.V),\n      τ.hom.app F ⟨((E.functor.obj F).obj.ρ g).hom z.down⟩ =\n        (γ g).hom.app F (τ.hom.app F z)) :\n    ∃ (e : ∀ (Λ : Type (u + 1)) [Ring Λ] [Finite Λ],\n        LisseModuleSheafCategory Y Λ ≌ galoisFiniteRepresentations Λ G)\n      (τM : ∀ (Λ : Type (u + 1)) [Ring Λ] [Finite Λ],\n        (e Λ).functor ⋙ ObjectProperty.ι _ ⋙\n          forget₂ (Rep.{u + 1} Λ G) (ModuleCat.{u + 1} Λ) ≅\n        ObjectProperty.ι _ ⋙ (pointSmallEtale y).sheafFiber (A := ModuleCat.{u + 1} Λ)),\n      galoisFiniteEvaluationAction y G ⟨γ, Φ, η, e, τM⟩",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-poincare-duality/sk-lem-finite/cor-galois-lisse-representations.md",
+  "place": "node cor-galois-lisse-representations, order 2427"
+ },
+ "stmt_deps": [
+  "def-pod-galois-lisse-correspondence-data"
+ ],
+ "proof": [
+  {
+   "text": "*(1): the equivalence.* Write $\\mathrm{FLC}(Y)$ for the finite locally constant sheaves of sets on $Y_{\\Et}$ and $\\pi_1\\text{-}\\mathbf{Set}$ for finite sets with a continuous $\\pi_1$-action. By [thm-galois-lc-etale] (finite locally constant sheaves are the sheaves represented by finite etale $Y$-schemes, compatibly with the fibre functors) and [thm-galois-fundamental] ($Y$ connected), the fibre functor $F_{\\bar y}:\\mathcal A\\mapsto\\mathcal A_{\\bar y}$, with $\\pi_1=\\operatorname{Aut}(F_{\\bar y})$ acting by evaluation [def-galois-fibre-functor], is an equivalence $\\mathrm{FLC}(Y)\\to\\pi_1\\text{-}\\mathbf{Set}$ compatible with finite limits, in particular with finite products and the final object. By [lem-pod-lisse-module-sheaves-as-module-objects], a locally constant sheaf of finite left $\\Lambda$-modules is the same as a $\\Lambda$-module object of $\\mathrm{FLC}(Y)$ (its underlying sheaf of sets with the maps $+$, $0$, $-$, $\\lambda\\cdot$), and $\\Lambda$-linear maps are the maps of $\\mathrm{FLC}(Y)$ commuting with these. By [lem-pod-equivalence-induces-module-objects] (1), $F_{\\bar y}$ induces an equivalence of $\\Lambda$-module objects, and by (2) of that lemma the $\\Lambda$-module objects of $\\pi_1\\text{-}\\mathbf{Set}$ are the finite left $\\Lambda$-modules with a continuous $\\Lambda$-linear $\\pi_1$-action. The composite sends $\\mathcal F$ to the finite set $\\mathcal F_{\\bar y}$ with the operations $(+)_{\\bar y},(\\lambda\\cdot)_{\\bar y}$, which are the module operations of the stalk of $\\mathcal F$ as a sheaf of modules (the stalk is a filtered colimit of sections and filtered colimits of sets commute with finite products), with $\\sigma$ acting as in the statement. This is the asserted equivalence; it is additive, because the addition on $\\operatorname{Hom}$ is computed by $+$ on both sides. Formalization subproblem: identify lisse module sheaves with module objects using\n`lisseToModuleObject_isIso_of_categories`. Rewrite the diagram axioms of\n`ModuleObjectStruct` as the generalized-element axioms of `InternalModule` and\nlift the set equivalence with `equivalence_induces_internalModules`.\nUse `internalModules_finiteContAction` to obtain continuous finite modules,\nflatten the two full subcategories, and lift the finite carrier to universe u+1.\nThe fibre comparison is linear because the transported addition and scalar maps\nare their maps on stalks. The set and module stalks agree by the filtered-colimit\nforgetful comparison, whose germ formula gives the stated kappa. Naturality of\nthe specified set comparison gives the evaluation-action formula.",
+   "uses": [
+    "thm-galois-lc-etale",
+    "thm-galois-fundamental",
+    "def-galois-fibre-functor",
+    "lem-pod-lisse-module-sheaves-as-module-objects",
+    "lem-pod-equivalence-induces-module-objects",
+    "def-weil-pbc-geometric-stalks"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 0DV5 (Section 59.65 'Locally constant sheaves and the fundamental group', lemma-locally-constant-on-connected), part (3) and its proof; also Milne LEC, Proposition 6.16, p. 49"
+   }
+  }
+ ],
+ "proof_deps": [
+  "thm-galois-lc-etale",
+  "thm-galois-fundamental",
+  "def-galois-fibre-functor",
+  "lem-pod-lisse-module-sheaves-as-module-objects",
+  "lem-pod-equivalence-induces-module-objects",
+  "def-weil-pbc-geometric-stalks"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-poincare-duality/sk-lem-finite/cor-galois-lisse-representations.md",
+  "place": "The cited numbered proof steps of cor-galois-lisse-representations, with explicit Lean interface glue."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "An equivalence between finite locally constant module sheaves and finite continuous representations, compatible with stalks and tensor products",
+   "results": "Eight hits, primarily Mathlib.Condensed.Discrete.Module; no scheme-etale or adic correspondence. Earlier fundamental-group query found the abstract functorToContAction equivalence only.",
+   "date": "2026-10-18",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Integral adic sheaves and continuous finite dimensional p-adic representations, tensor products and scalar extension",
+   "results": "Eight hits on AdicCompletion, including ofTensorProductEquivOfFiniteNoetherian, but no sheaf-representation equivalence or monoidal comparison.",
+   "date": "2026-10-18",
+   "verdict": "Useful finite-module infrastructure already covered by the declared adic-limit dependency; no exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "rg IsContinuousCoefficient|IsContinuousIntegral|IsLAdic|isClosedUnder|abelian lean/Sheaf/RepresentationTheory lean/WeilConjectures/RepresentationTheory; rg galoisRepFunctor|exists_equivalence_isFiniteLocallyConstantSheaf_of_isFundamentalGroup lean/WeilConjectures",
+   "results": "LocalSystems proves the finite commutative-ring equivalence; it does not cover all noncommutative finite rings nor the adic clauses. EquivalenceInternalModule proves transport of internal modules, and its finite-action identification is stated. No adic-category equivalence was found.",
+   "date": "2026-10-18",
+   "verdict": "Reuse the declared modules for the parts they cover; the missing comparison/glue is stated here."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.GaloisLisseRepresentations",
+  "date": "2026-10-18",
+  "group": "C1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "cor-galois-lisse-representations",
+   "place": "proof steps 1",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-lem-finite",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.GaloisLisseFiniteModuleLift",
+  "file": "lean/Sheaf/Paper/GaloisLisseFiniteModuleLift.lean",
+  "declaration": "AlgebraicGeometry.Scheme.galois_lisse_finite_module_lift",
+  "statement": "theorem galois_lisse_finite_module_lift\n    {Y : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]\n    (y : Spec (.of Ω) ⟶ Y) (G : Type u) [Group G] [TopologicalSpace G]\n    [∀ P, MulAction G ((FiniteEtale.fiber y).obj P)] [IsTopologicalGroup G]\n    (Φ : Y.FiniteEtale ≌ Y.FLC) (E : Y.FLC ≌ ContAction FintypeCat.{u} G)\n    (γ : G ≃ₜ* Aut (ObjectProperty.ι (IsLisseEtaleSheafOfSets (T := Y)) ⋙\n      (pointSmallEtale y).sheafFiber (A := Type (u + 1))))\n    (η : Φ.functor ⋙ ObjectProperty.ι _ ⋙\n      (pointSmallEtale y).sheafFiber (A := Type (u + 1)) ≅\n      FiniteEtale.fiber y ⋙ CategoryTheory.forget FintypeCat.{u} ⋙\n        uliftFunctor.{u + 1, u})\n    (τ : E.functor ⋙ forget₂ (ContAction FintypeCat.{u} G) FintypeCat.{u} ⋙\n      CategoryTheory.forget FintypeCat.{u} ⋙ uliftFunctor.{u + 1, u} ≅\n      ObjectProperty.ι _ ⋙ (pointSmallEtale y).sheafFiber (A := Type (u + 1)))\n    (hτ : ∀ (F : Y.FLC) (g : G) (z : ULift.{u + 1} (E.functor.obj F).obj.V),\n      τ.hom.app F ⟨((E.functor.obj F).obj.ρ g).hom z.down⟩ =\n        (γ g).hom.app F (τ.hom.app F z)) :\n    ∃ (e : ∀ (Λ : Type (u + 1)) [Ring Λ] [Finite Λ],\n        LisseModuleSheafCategory Y Λ ≌ galoisFiniteRepresentations Λ G)\n      (τM : ∀ (Λ : Type (u + 1)) [Ring Λ] [Finite Λ],\n        (e Λ).functor ⋙ ObjectProperty.ι _ ⋙\n          forget₂ (Rep.{u + 1} Λ G) (ModuleCat.{u + 1} Λ) ≅\n        ObjectProperty.ι _ ⋙ (pointSmallEtale y).sheafFiber (A := ModuleCat.{u + 1} Λ)),\n      galoisFiniteEvaluationAction y G ⟨γ, Φ, η, e, τM⟩",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "C-7472d",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261018T071138-L-1664590",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "C-7472d",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261018T071138-L-1664590",
+  "kind": "interface",
+  "note": "independent cc review: galois_lisse_representations proof (assembly + 4 new sorry lemmas with nodes) and verbatim relocation of 46 data defs to GaloisLisseRepresentationData vs node cor-galois-lisse-representations, published module, change record; all 6 modules + 2 direct importers compile; earlier return points done"
+ }
+}

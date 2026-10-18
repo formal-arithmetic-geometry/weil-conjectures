@@ -5,6 +5,7 @@ Authors: SHEAF group Q1
 -/
 module
 
+public import Sheaf.Paper.GaloisLisseRepresentationData
 public import Sheaf.Paper.LisseModuleSheaves
 public import Sheaf.Paper.LisseAdicFiberFunctors
 public import Sheaf.RepresentationTheory.LAdic
@@ -13,13 +14,15 @@ public import Mathlib.CategoryTheory.ObjectProperty.Kernels
 public import Mathlib.CategoryTheory.Abelian.Basic
 public import Mathlib.RepresentationTheory.Rep.Basic
 public import Sheaf.Paper.LisseTensorScalarExtension
-import Sheaf.AlgebraicGeometry.FundamentalGroup.LocallyConstantEquivalence
-import Sheaf.CategoryTheory.EquivalenceInternalModule
-import Sheaf.NumberTheory.Padics.AdicLimitFiniteModules
-import Sheaf.NumberTheory.Padics.FiniteCoefficientFields
-import Sheaf.Paper.LisseAdicSheaves
-import Sheaf.RepresentationTheory.ProfiniteStableLattice
+import Sheaf.Paper.GaloisLisseFiniteModuleLift
+import Sheaf.Paper.GaloisLisseFiniteCompatibility
+import Sheaf.Paper.GaloisLisseAdicEquivalences
+import Sheaf.Paper.GaloisLisseAdicCompatibility
+import Mathlib.CategoryTheory.Abelian.Subcategory
+import Mathlib.CategoryTheory.Abelian.Transfer
 import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FiniteEtale
+import WeilConjectures.ConstructibleSheaf.Biproduct
+import WeilConjectures.ConstructibleSheaf.Monoidal
 import WeilConjectures.ConstructibleSheaf.KernelCokernel
 import WeilConjectures.AlgebraicGeometry.LisseModuleSheaves
 
@@ -37,717 +40,362 @@ universe u
 
 open CategoryTheory CategoryTheory.Limits CategoryTheory.PreGaloisCategory
 open AlgebraicGeometry Opposite
-open scoped TensorProduct
+open scoped TensorProduct FintypeCatDiscrete ZeroObject
 
 namespace AlgebraicGeometry.Scheme
 
-/-- The invertible linear action of a representation. Source: Stacks 0DV5 (3),
-Weil II (1.1.6) (blueprint: cor-galois-lisse-representations). -/
-noncomputable def galoisRepLinearAction (R : Type (u + 1)) [CommRing R]
-    {G : Type u} [Group G] (X : Rep.{u + 1} R G) : G →* (X.V ≃ₗ[R] X.V) :=
-  (LinearMap.GeneralLinearGroup.generalLinearEquiv R X.V).toMonoidHom.comp
-    (Representation.asGroupHom (k := R) (G := G) (V := X.V) X.ρ)
+noncomputable section
 
-/-- Finite representations with open stabilizers (discrete continuity), including
-noncommutative finite coefficient rings. Source: Stacks 0DV5 (3)
-(blueprint: cor-galois-lisse-representations). -/
-@[reducible] def galoisFiniteRepresentations (R : Type (u + 1)) [Ring R]
-    (G : Type u) [Group G] [TopologicalSpace G] :=
-  ObjectProperty.FullSubcategory
-    (fun X : Rep.{u + 1} R G ↦ Finite X.V ∧ ∀ x : X.V, IsOpen {g : G | X.ρ g x = x})
+attribute [local irreducible] Padic
+attribute [local irreducible] IsLisseIntegralDiagram
+attribute [local irreducible] lisseIntegralTensor lisseRationalTensor lisseAlgebraicTensor
+attribute [local irreducible] lisseIntegralUnit lisseRationalUnit lisseAlgebraicUnit
+attribute [local irreducible] Representation.IsContinuousIntegral
+attribute [local irreducible] Representation.IsContinuousCoefficient Representation.IsLAdic
+attribute [local irreducible] Padic.coefficientExtensionAbsoluteValue
+attribute [local irreducible] spectralNorm.nontriviallyNormedField
 
-/-- Continuous integral representations, transported along the specified profinite model.
-Source: Weil II (1.1.6) (blueprint: cor-galois-lisse-representations). -/
-@[reducible] noncomputable def galoisIntegralRepresentations (l : ℕ) [Fact l.Prime]
-    (E : Type (u + 1)) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
-    {G : Type u} [Group G] [TopologicalSpace G] (P : ProfiniteGrp.{u}) (δ : G ≃ₜ* P) :=
-  ObjectProperty.FullSubcategory
-    (fun X : Rep.{u + 1} (Padic.coefficientExtensionIntegers l E) G ↦
-      Representation.IsContinuousIntegral l E P X.V
-        ((galoisRepLinearAction _ X).comp δ.symm.toMonoidHom))
+-- Resolve torsion-freeness over the base field directly, without searching free modules.
+local instance (priority := 100000) galoisAssemblyPadicTorsionFree
+    (l : ℕ) [Fact l.Prime] (E : Type (u + 1)) [Field E] [Algebra ℚ_[l] E] :
+    Module.IsTorsionFree ℚ_[l] E := DivisionSemiring.to_moduleIsTorsionFree
 
-/-- Continuous finite-extension representations over the same profinite model.
-Source: Weil II (1.1.6) (blueprint: cor-galois-lisse-representations). -/
-@[reducible] noncomputable def galoisCoefficientRepresentations (l : ℕ) [Fact l.Prime]
-    (E : Type (u + 1)) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
-    {G : Type u} [Group G] [TopologicalSpace G] (P : ProfiniteGrp.{u}) (δ : G ≃ₜ* P) :=
-  ObjectProperty.FullSubcategory
-    (fun X : Rep.{u + 1} E G ↦ Representation.IsContinuousCoefficient l E P X.V
-      ((galoisRepLinearAction E X).comp δ.symm.toMonoidHom))
+-- The intermediate-field and integral scalar towers recur in each adic clause.
+local instance (priority := 100000) galoisAssemblyIntermediateTorsionFree
+    (l : ℕ) [Fact l.Prime] (Q : Type (u + 1)) [Field Q]
+    [Algebra ℚ_[l] Q] [IsAlgClosure ℚ_[l] Q] (E : Padic.FiniteCoefficientFields l Q) :
+    Module.IsTorsionFree E.val Q := DivisionSemiring.to_moduleIsTorsionFree
 
-/-- Algebraic l-adic representations over the same profinite model.
-Source: Weil II (1.1.6) (blueprint: cor-galois-lisse-representations). -/
-@[reducible] noncomputable def galoisAdicRepresentations (l : ℕ) [Fact l.Prime]
-    (Q : Type (u + 1)) [Field Q] [Algebra ℚ_[l] Q] [IsAlgClosure ℚ_[l] Q]
-    {G : Type u} [Group G] [TopologicalSpace G] (P : ProfiniteGrp.{u}) (δ : G ≃ₜ* P) :=
-  ObjectProperty.FullSubcategory
-    (fun X : Rep.{u + 1} Q G ↦ Representation.IsLAdic l Q P X.V
-      ((galoisRepLinearAction Q X).comp δ.symm.toMonoidHom))
+local instance (priority := 100000) galoisAssemblyIntegersTorsionFree
+    (l : ℕ) [Fact l.Prime] (E : Type (u + 1)) [Field E]
+    [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] :
+    Module.IsTorsionFree (Padic.coefficientExtensionIntegers l E) E := inferInstance
 
-/-- The underlying sheaf of sets of a module sheaf. Its FLC witness is supplied in
-`galoisUnderlyingFLC`. Source: Stacks 0DV5 (3)
-(blueprint: cor-galois-lisse-representations). -/
-noncomputable def galoisUnderlyingSetSheaf {Y : Scheme.{u}}
-    (R : Type (u + 1)) [Ring R] (F : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} R)) :=
-  (sheafCompose Y.smallEtaleTopology (CategoryTheory.forget (ModuleCat.{u + 1} R))).obj F
+-- Fix the small-etale sheafification instance before elaborating the fibre clauses.
+local instance (priority := 100000) galoisAssemblyModuleSheafify
+    (Y : Scheme.{u}) (R : Type (u + 1)) [Ring R] :
+    HasWeakSheafify Y.smallEtaleTopology (ModuleCat.{u + 1} R) :=
+  (GrothendieckTopology.hasSheafify_smallEtaleTopology
+    (ModuleCat.{u + 1} R) Y).isRightAdjoint
 
-/-- The underlying set sheaf bundled with its specified FLC witness.
-Source: Stacks 0DV5 (3) (blueprint: cor-galois-lisse-representations). -/
-noncomputable def galoisUnderlyingFLC {Y : Scheme.{u}}
-    (R : Type (u + 1)) [Ring R] (F : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} R))
-    (h : IsLisseEtaleSheafOfSets (galoisUnderlyingSetSheaf R F)) : Y.FLC :=
-  ⟨galoisUnderlyingSetSheaf R F, h⟩
+private theorem galoisTensorIso (R : Type (u + 1)) [CommRing R]
+    {G : Type u} [Group G] {X Z W : Rep.{u + 1} R G} (i : MonoidalCategory.tensorObj X Z ≅ W) :
+    ∃ c : (X.V ⊗[R] Z.V) ≃ₗ[R] W.V,
+      ∀ (g : G) (z : X.V ⊗[R] Z.V),
+        c (galoisTensorAction R X Z g z) = W.ρ g (c z) := by
+  refine ⟨((forget₂ (Rep.{u + 1} R G) (ModuleCat.{u + 1} R)).mapIso i).toLinearEquiv, ?_⟩
+  intro g z
+  change i.hom.hom ((MonoidalCategory.tensorObj X Z).ρ g z) = W.ρ g (i.hom.hom z)
+  exact Rep.hom_comm_apply i.hom g z
 
-/-- Diagonal action on the tensor product of the underlying representation modules.
-Source: Weil II (1.1.6) (blueprint: cor-galois-lisse-representations). -/
-noncomputable def galoisTensorAction (R : Type (u + 1)) [CommRing R]
-    {G : Type u} [Group G] (X Z : Rep.{u + 1} R G) :=
-  Representation.tensorDiagonal R G X.V Z.V
-    (galoisRepLinearAction R X) (galoisRepLinearAction R Z)
+private theorem galoisMonoidalTensor (R : Type (u + 1)) [CommRing R]
+    {G : Type u} [Group G] {C : Type*} [Category C]
+    (F : C ⥤ Rep.{u + 1} R G) (T : C → C → C) (U : C)
+    (h : ∃ m : MonoidalCategory C, m.toMonoidalCategoryStruct.tensorObj = T ∧
+      @MonoidalCategoryStruct.tensorUnit C _ m.toMonoidalCategoryStruct = U ∧
+      Nonempty (@Functor.Monoidal C _ m (Rep.{u + 1} R G) _ _ F)) :
+    ∀ X Z : C, ∃ c : ((F.obj X).V ⊗[R] (F.obj Z).V) ≃ₗ[R] (F.obj (T X Z)).V,
+      ∀ (g : G) (z : (F.obj X).V ⊗[R] (F.obj Z).V),
+        c (galoisTensorAction R (F.obj X) (F.obj Z) g z) =
+          (F.obj (T X Z)).ρ g (c z) := by
+  obtain ⟨m, ht, hu, ⟨hm⟩⟩ := h
+  let := m
+  let := hm
+  intro X Z
+  have hXZ : MonoidalCategory.tensorObj X Z = T X Z := congrFun (congrFun ht X) Z
+  exact galoisTensorIso R
+    (Functor.Monoidal.μIso F X Z ≪≫ F.mapIso (eqToIso hXZ))
 
-/-- Scalar-extension action on the underlying representation module (`1 ⊗ σ`).
-Source: Weil II (1.1.6) (blueprint: cor-galois-lisse-representations). -/
-noncomputable def galoisScalarAction (E L : Type (u + 1)) [Field E] [Field L] [Algebra E L]
-    {G : Type u} [Group G] (X : Rep.{u + 1} E G) :=
-  Representation.coefficientScalarExtension E L G X.V (galoisRepLinearAction E X)
+private theorem galoisMonoidalUnit (R : Type (u + 1)) [CommRing R]
+    {G : Type u} [Group G] {C : Type*} [Category C]
+    (F : C ⥤ Rep.{u + 1} R G) (T : C → C → C) (U : C)
+    (h : ∃ m : MonoidalCategory C, m.toMonoidalCategoryStruct.tensorObj = T ∧
+      @MonoidalCategoryStruct.tensorUnit C _ m.toMonoidalCategoryStruct = U ∧
+      Nonempty (@Functor.Monoidal C _ m (Rep.{u + 1} R G) _ _ F)) :
+    Nonempty (F.obj U ≅ Rep.trivial R G R) := by
+  obtain ⟨m, ht, hu, ⟨hm⟩⟩ := h
+  let := m
+  let := hm
+  exact ⟨F.mapIso (eqToIso hu.symm) ≪≫ (Functor.Monoidal.εIso F).symm⟩
 
-/-- The shared group, equivalence and fibre-comparison data of part (1).
-Source: Stacks 0DV5 (3) (blueprint: cor-galois-lisse-representations). -/
-structure GaloisLisseFiniteData
-    {Y : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
-    (y : Spec (.of Ω) ⟶ Y) (G : Type u) [Group G] [TopologicalSpace G]
-    [∀ P, MulAction G ((FiniteEtale.fiber y).obj P)] where
-  γ : G ≃ₜ* Aut (ObjectProperty.ι (IsLisseEtaleSheafOfSets (T := Y)) ⋙
-    (pointSmallEtale y).sheafFiber (A := Type (u + 1)))
-  Φ : Y.FiniteEtale ≌ Y.FLC
-  η : Φ.functor ⋙ ObjectProperty.ι _ ⋙ (pointSmallEtale y).sheafFiber (A := Type (u + 1)) ≅
-    FiniteEtale.fiber y ⋙ CategoryTheory.forget FintypeCat.{u} ⋙ uliftFunctor.{u + 1, u}
-  e : ∀ (Λ : Type (u + 1)) [Ring Λ] [Finite Λ], LisseModuleSheafCategory Y Λ ≌
-    galoisFiniteRepresentations Λ G
-  τ : ∀ (Λ : Type (u + 1)) [Ring Λ] [Finite Λ], (e Λ).functor ⋙ ObjectProperty.ι _ ⋙ forget₂ (Rep.{u
-    + 1} Λ G) (ModuleCat.{u + 1} Λ) ≅ ObjectProperty.ι _ ⋙ (pointSmallEtale y).sheafFiber (A :=
-    ModuleCat.{u + 1} Λ)
+-- The two local-finiteness interfaces use the same local constant models.
+private theorem galoisLisse_iff_finiteLocallyConstant
+    {Y : Scheme.{u}} (Λ : Type (u + 1)) [Ring Λ] [Finite Λ]
+    (F : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
+    IsLisseModuleSheaf F ↔ IsFiniteLocallyConstantSheaf F := by
+  have : PreservesFilteredColimitsOfSize.{u, u}
+      (CategoryTheory.forget (ModuleCat.{u + 1} Λ)) :=
+    preservesFilteredColimitsOfSize_shrink.{u, u + 1, u, u + 1} _
+  constructor
+  · intro hF
+    have hs := (lisseModuleSheaf_iff_underlying_finiteLocallyConstant F).mp hF
+    obtain ⟨𝒰, h𝒰⟩ := hF
+    refine { toIsLocallyConstantSheaf := ⟨⟨⟨𝒰, ?_⟩⟩⟩
+             toIsFiniteSheaf := ⟨?_⟩ }
+    · intro i
+      obtain ⟨M, _, ⟨e⟩⟩ := h𝒰 i
+      exact Sheaf.isConstant_of_iso _ e
+    · intro Ω _ _ s
+      apply (ModuleCat.isFinitelyGenerated_iff _).mpr
+      have hfin := hs.finite_sheafFiber Ω s
+      have : Finite (((pointSmallEtale s).sheafFiber
+          (A := ModuleCat.{u + 1} Λ)).obj F) :=
+        @Finite.of_equiv _ _ hfin (((pointSmallEtale s).sheafFiberCompIso
+          (CategoryTheory.forget (ModuleCat.{u + 1} Λ))).app F).toEquiv
+      exact Module.Finite.of_finite
+  · intro hF
+    have := hF
+    apply (lisseModuleSheaf_iff_underlying_finiteLocallyConstant F).mpr
+    refine ⟨?_, ⟨?_⟩⟩
+    · obtain ⟨⟨𝒰, h𝒰⟩⟩ := IsLocallyConstantSheaf.nonempty_locallyConstantDatum (F := F)
+      refine ⟨𝒰, fun i ↦ ?_⟩
+      have := h𝒰 i
+      change ((sheafCompose (Y.smallEtaleTopology.over (𝒰.etalePrecoverageToEtale i))
+        (CategoryTheory.forget (ModuleCat.{u + 1} Λ))).obj
+        (F.over (𝒰.etalePrecoverageToEtale i))).IsConstant _
+      infer_instance
+    · intro Ω _ _ s
+      apply (ConcreteCategory.isFinitelyGenerated_iff_finite _).mpr
+      have := (ModuleCat.isFinitelyGenerated_iff _).mp
+        (IsFiniteSheaf.isFinitelyGenerated_sheafFiber (F := F) Ω s)
+      have hfin : Finite (((pointSmallEtale s).sheafFiber
+          (A := ModuleCat.{u + 1} Λ)).obj F) := Module.finite_of_finite Λ
+      exact @Finite.of_equiv _ _ hfin (((pointSmallEtale s).sheafFiberCompIso
+        (CategoryTheory.forget (ModuleCat.{u + 1} Λ))).app F).symm.toEquiv
 
-/-- Clause `yonedaComparison` of the finite correspondence.
-Source: Stacks 0DV5 (3), Weil II (1.1.1), (1.1.6)
-(blueprint: cor-galois-lisse-representations). -/
-def galoisYonedaComparison
-    {Y : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
-    (y : Spec (.of Ω) ⟶ Y) (G : Type u) [Group G] [TopologicalSpace G]
-    [∀ P, MulAction G ((FiniteEtale.fiber y).obj P)]
-    (d : GaloisLisseFiniteData y G) : Prop :=
-  Nonempty (d.Φ.functor ⋙ ObjectProperty.ι _ ≅ ObjectProperty.ι _ ⋙
-    Y.smallEtaleTopology.uliftYoneda.{u + 1})
+section FiniteAssembly
 
-/-- Clause `finiteEtaleAction` of the finite correspondence.
-Source: Stacks 0DV5 (3), Weil II (1.1.1), (1.1.6)
-(blueprint: cor-galois-lisse-representations). -/
-def galoisFiniteEtaleAction
-    {Y : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
-    (y : Spec (.of Ω) ⟶ Y) (G : Type u) [Group G] [TopologicalSpace G]
-    [∀ P, MulAction G ((FiniteEtale.fiber y).obj P)]
-    (d : GaloisLisseFiniteData y G) : Prop :=
-  ∀ (P : Y.FiniteEtale) (g : G) (z : ((pointSmallEtale y).sheafFiber (A := Type (u + 1))).obj
-    (d.Φ.functor.obj P).obj), d.η.hom.app P ((d.γ g).hom.app (d.Φ.functor.obj P) z) = ⟨g •
-    (d.η.hom.app P z).down⟩
+attribute [local instance] Abelian.hasFiniteBiproducts
 
-/-- Clause `finiteAbelian` of the finite correspondence.
-Source: Stacks 0DV5 (3), Weil II (1.1.1), (1.1.6)
-(blueprint: cor-galois-lisse-representations). -/
-def galoisFiniteAbelian
-    {Y : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
-    (y : Spec (.of Ω) ⟶ Y) (G : Type u) [Group G] [TopologicalSpace G]
-    [∀ P, MulAction G ((FiniteEtale.fiber y).obj P)]
-    (_d : GaloisLisseFiniteData y G) : Prop :=
-  ∀ (Λ : Type (u + 1)) [Ring Λ] [Finite Λ], Nonempty (Abelian (LisseModuleSheafCategory Y Λ))
-
-/-- Clause `finiteKernels` of the finite correspondence.
-Source: Stacks 0DV5 (3), Weil II (1.1.1), (1.1.6)
-(blueprint: cor-galois-lisse-representations). -/
-def galoisFiniteKernels
-    {Y : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
-    (y : Spec (.of Ω) ⟶ Y) (G : Type u) [Group G] [TopologicalSpace G]
-    [∀ P, MulAction G ((FiniteEtale.fiber y).obj P)]
-    (_d : GaloisLisseFiniteData y G) : Prop :=
-  ∀ (Λ : Type (u + 1)) [Ring Λ] [Finite Λ], ObjectProperty.IsClosedUnderKernels (IsLisseModuleSheaf
-    (Y := Y) (Λ := Λ))
-
-/-- Clause `finiteCokernels` of the finite correspondence.
-Source: Stacks 0DV5 (3), Weil II (1.1.1), (1.1.6)
-(blueprint: cor-galois-lisse-representations). -/
-def galoisFiniteCokernels
-    {Y : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
+variable {Y : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
     (y : Spec (.of Ω) ⟶ Y) (G : Type u) [Group G] [TopologicalSpace G]
     [∀ P, MulAction G ((FiniteEtale.fiber y).obj P)]
-    (_d : GaloisLisseFiniteData y G) : Prop :=
-  ∀ (Λ : Type (u + 1)) [Ring Λ] [Finite Λ], ObjectProperty.IsClosedUnderCokernels
-    (IsLisseModuleSheaf (Y := Y) (Λ := Λ))
 
-/-- Clause `finiteLimits` of the finite correspondence.
-Source: Stacks 0DV5 (3), Weil II (1.1.1), (1.1.6)
-(blueprint: cor-galois-lisse-representations). -/
-def galoisFiniteLimits
-    {Y : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
-    (y : Spec (.of Ω) ⟶ Y) (G : Type u) [Group G] [TopologicalSpace G]
-    [∀ P, MulAction G ((FiniteEtale.fiber y).obj P)]
-    (d : GaloisLisseFiniteData y G) : Prop :=
-  ∀ (Λ : Type (u + 1)) [Ring Λ] [Finite Λ], PreservesFiniteLimits (d.e Λ).functor
+private theorem galoisFiniteEtaleFiberComparison
+    [ConnectedSpace Y] [IsTopologicalGroup G] [CompactSpace G]
+    [IsFundamentalGroup (FiniteEtale.fiber y) G]
+    (Φ : Y.FiniteEtale ≌ Y.FLC) (E : Y.FLC ≌ ContAction FintypeCat.{u} G)
+    (γ : G ≃ₜ* Aut (ObjectProperty.ι (IsLisseEtaleSheafOfSets (T := Y)) ⋙
+      (pointSmallEtale y).sheafFiber (A := Type (u + 1))))
+    (hComp : Φ.functor ⋙ E.functor ≅ (FiniteEtale.equivalenceContAction y G).functor)
+    (τ : E.functor ⋙ forget₂ (ContAction FintypeCat.{u} G) FintypeCat.{u} ⋙
+      CategoryTheory.forget FintypeCat.{u} ⋙ uliftFunctor.{u + 1, u} ≅
+      ObjectProperty.ι _ ⋙ (pointSmallEtale y).sheafFiber (A := Type (u + 1)))
+    (hτ : ∀ (F : Y.FLC) (g : G) (z : ULift.{u + 1} (E.functor.obj F).obj.V),
+      τ.hom.app F ⟨((E.functor.obj F).obj.ρ g).hom z.down⟩ =
+        (γ g).hom.app F (τ.hom.app F z)) :
+    ∃ η : Φ.functor ⋙ ObjectProperty.ι _ ⋙
+        (pointSmallEtale y).sheafFiber (A := Type (u + 1)) ≅
+        FiniteEtale.fiber y ⋙ CategoryTheory.forget FintypeCat.{u} ⋙
+          uliftFunctor.{u + 1, u},
+      ∀ (P : Y.FiniteEtale) (g : G)
+        (z : ((pointSmallEtale y).sheafFiber (A := Type (u + 1))).obj
+          (Φ.functor.obj P).obj),
+        η.hom.app P ((γ g).hom.app (Φ.functor.obj P) z) =
+          ⟨g • (η.hom.app P z).down⟩ := by
+  let U := forget₂ (ContAction FintypeCat.{u} G) FintypeCat.{u} ⋙
+    CategoryTheory.forget FintypeCat.{u} ⋙ uliftFunctor.{u + 1, u}
+  let η : Φ.functor ⋙ ObjectProperty.ι _ ⋙
+      (pointSmallEtale y).sheafFiber (A := Type (u + 1)) ≅
+      FiniteEtale.fiber y ⋙ CategoryTheory.forget FintypeCat.{u} ⋙
+        uliftFunctor.{u + 1, u} :=
+    (Functor.isoWhiskerLeft Φ.functor τ).symm ≪≫ Functor.isoWhiskerRight hComp U
+  refine ⟨η, ?_⟩
+  intro P g z
+  have hz := hτ (Φ.functor.obj P) g (τ.inv.app (Φ.functor.obj P) z)
+  have hz' : τ.inv.app (Φ.functor.obj P) ((γ g).hom.app (Φ.functor.obj P) z) =
+      ⟨((E.functor.obj (Φ.functor.obj P)).obj.ρ g).hom
+        (τ.inv.app (Φ.functor.obj P) z).down⟩ := by
+    have hτz : τ.hom.app (Φ.functor.obj P) (τ.inv.app (Φ.functor.obj P) z) = z :=
+      ConcreteCategory.congr_hom (τ.inv_hom_id_app (Φ.functor.obj P)) z
+    rw [hτz] at hz
+    exact (congrArg (τ.inv.app (Φ.functor.obj P)) hz.symm).trans
+      (ConcreteCategory.congr_hom (τ.hom_inv_id_app (Φ.functor.obj P)) _)
+  change ULift.up ((hComp.hom.app P).hom.hom
+    (τ.inv.app (Φ.functor.obj P) ((γ g).hom.app (Φ.functor.obj P) z)).down) = _
+  rw [hz']
+  apply congrArg ULift.up
+  exact ConcreteCategory.congr_hom ((hComp.hom.app P).hom.comm g)
+    (τ.inv.app (Φ.functor.obj P) z).down
 
-/-- Clause `finiteColimits` of the finite correspondence.
-Source: Stacks 0DV5 (3), Weil II (1.1.1), (1.1.6)
-(blueprint: cor-galois-lisse-representations). -/
-def galoisFiniteColimits
-    {Y : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
-    (y : Spec (.of Ω) ⟶ Y) (G : Type u) [Group G] [TopologicalSpace G]
-    [∀ P, MulAction G ((FiniteEtale.fiber y).obj P)]
-    (d : GaloisLisseFiniteData y G) : Prop :=
-  ∀ (Λ : Type (u + 1)) [Ring Λ] [Finite Λ], PreservesFiniteColimits (d.e Λ).functor
+private theorem galoisFiniteKernels_of_data (d : GaloisLisseFiniteData y G) :
+    galoisFiniteKernels y G d := by
+  intro Λ _ _
+  refine ⟨?_⟩
+  rintro _ ⟨f, k, hk, hF, hH⟩
+  have := (galoisLisse_iff_finiteLocallyConstant Λ _).mp hF
+  have := (galoisLisse_iff_finiteLocallyConstant Λ _).mp hH
+  have := IsFiniteLocallyConstantSheaf.kernel f
+  apply (galoisLisse_iff_finiteLocallyConstant Λ k.pt).mpr
+  let i := (kernelIsKernel f).conePointUniqueUpToIso hk
+  change kernel f ≅ k.pt at i
+  exact IsFiniteLocallyConstantSheaf.of_iso i
 
-/-- Clause `finiteUnit` of the finite correspondence.
-Source: Stacks 0DV5 (3), Weil II (1.1.1), (1.1.6)
-(blueprint: cor-galois-lisse-representations). -/
-def galoisFiniteUnit
-    {Y : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
-    (y : Spec (.of Ω) ⟶ Y) (G : Type u) [Group G] [TopologicalSpace G]
-    [∀ P, MulAction G ((FiniteEtale.fiber y).obj P)]
-    (d : GaloisLisseFiniteData y G) : Prop :=
-  ∀ (Λ : Type (u + 1)) [Ring Λ] [Finite Λ], (∃ C : LisseModuleSheafCategory Y Λ, C.obj =
-    (constantSheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj (ModuleCat.of Λ Λ) ∧ Nonempty
-    (((d.e Λ).functor.obj C).obj ≅ Rep.trivial Λ G Λ))
+private theorem galoisFiniteCokernels_of_data (d : GaloisLisseFiniteData y G) :
+    galoisFiniteCokernels y G d := by
+  intro Λ _ _
+  refine ⟨?_⟩
+  rintro _ ⟨f, k, hk, hF, hH⟩
+  have := (galoisLisse_iff_finiteLocallyConstant Λ _).mp hF
+  have := (galoisLisse_iff_finiteLocallyConstant Λ _).mp hH
+  have := IsFiniteLocallyConstantSheaf.cokernel f
+  apply (galoisLisse_iff_finiteLocallyConstant Λ k.pt).mpr
+  let i := (cokernelIsCokernel f).coconePointUniqueUpToIso hk
+  change cokernel f ≅ k.pt at i
+  exact IsFiniteLocallyConstantSheaf.of_iso i
 
-/-- Clause `finiteEvaluationAction` of the finite correspondence.
-Source: Stacks 0DV5 (3), Weil II (1.1.1), (1.1.6)
-(blueprint: cor-galois-lisse-representations). -/
-def galoisFiniteEvaluationAction
-    {Y : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
-    (y : Spec (.of Ω) ⟶ Y) (G : Type u) [Group G] [TopologicalSpace G]
-    [∀ P, MulAction G ((FiniteEtale.fiber y).obj P)]
-    (d : GaloisLisseFiniteData y G) : Prop :=
-  ∀ (Λ : Type (u + 1)) [Ring Λ] [Finite Λ], ∀ F : LisseModuleSheafCategory Y Λ, ∃ h :
-    IsLisseEtaleSheafOfSets (galoisUnderlyingSetSheaf Λ F.obj), ∃ κ :
-    (((pointSmallEtale y).sheafFiber (A := ModuleCat.{u + 1} Λ)).obj F.obj) ≃ (((pointSmallEtale
-    y).sheafFiber (A := Type (u + 1))).obj (galoisUnderlyingSetSheaf Λ F.obj)), (∀ (U : Y.Etale) (x
-    : (pointSmallEtale y).fiber.obj U) (s : F.obj.obj.obj (op U)), κ ((pointSmallEtale
-    y).toPresheafFiber U x F.obj.obj s) = (pointSmallEtale y).toPresheafFiber U x
-    (galoisUnderlyingSetSheaf Λ F.obj).obj s) ∧ ∀ (g : G) (z : ((d.e Λ).functor.obj F).obj.V), κ
-    ((d.τ Λ).hom.app F (((d.e Λ).functor.obj F).obj.ρ g z)) = (d.γ g).hom.app (galoisUnderlyingFLC Λ
-    F.obj h) (κ ((d.τ Λ).hom.app F z))
+private theorem galoisFiniteAbelian_of_data (d : GaloisLisseFiniteData y G) :
+    galoisFiniteAbelian y G d := by
+  intro Λ _ _
+  let P : ObjectProperty (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :=
+    IsLisseModuleSheaf
+  have : P.IsClosedUnderIsomorphisms := ⟨fun e h ↦ by
+    have := (galoisLisse_iff_finiteLocallyConstant Λ _).mp h
+    exact (galoisLisse_iff_finiteLocallyConstant Λ _).mpr
+      (IsFiniteLocallyConstantSheaf.of_iso e)⟩
+  have : P.ContainsZero := ⟨⟨0, isZero_zero _,
+    (galoisLisse_iff_finiteLocallyConstant Λ _).mpr
+      (IsFiniteLocallyConstantSheaf.of_isZero (isZero_zero _))⟩⟩
+  have : P.IsClosedUnderBinaryProducts := .mk' (by
+    rintro _ ⟨H, hH⟩
+    have := (galoisLisse_iff_finiteLocallyConstant Λ _).mp (hH ⟨.left⟩)
+    have := (galoisLisse_iff_finiteLocallyConstant Λ _).mp (hH ⟨.right⟩)
+    have := IsFiniteLocallyConstantSheaf.biprod (H.obj ⟨.left⟩) (H.obj ⟨.right⟩)
+    exact (galoisLisse_iff_finiteLocallyConstant Λ _).mpr
+      (IsFiniteLocallyConstantSheaf.of_iso ((biprod.isoProd _ _) ≪≫
+        (HasLimit.isoOfNatIso (diagramIsoPair H)).symm)))
+  have : P.IsClosedUnderFiniteProducts := .mk'
+  have : P.IsClosedUnderKernels := galoisFiniteKernels_of_data y G d Λ
+  have : P.IsClosedUnderCokernels := galoisFiniteCokernels_of_data y G d Λ
+  exact ⟨inferInstanceAs (Abelian P.FullSubcategory)⟩
 
-/-- Clause `finiteTensor` of the finite correspondence.
-Source: Stacks 0DV5 (3), Weil II (1.1.1), (1.1.6)
-(blueprint: cor-galois-lisse-representations). -/
-def galoisFiniteTensor
-    {Y : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
-    (y : Spec (.of Ω) ⟶ Y) (G : Type u) [Group G] [TopologicalSpace G]
-    [∀ P, MulAction G ((FiniteEtale.fiber y).obj P)]
-    (d : GaloisLisseFiniteData y G) : Prop :=
-  ∀ (R : Type (u + 1)) [CommRing R] [Finite R], ∃ (m : MonoidalCategory (LisseModuleSheafCategory Y
-    R)) (b : @BraidedCategory (LisseModuleSheafCategory Y R) _ m), Nonempty (@Functor.Braided
-    (LisseModuleSheafCategory Y R) _ m b (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} R)) _
-    (Sheaf.monoidalCategory Y.smallEtaleTopology (ModuleCat.{u + 1} R)) (Sheaf.braidedCategory
-    Y.smallEtaleTopology (ModuleCat.{u + 1} R)) (ObjectProperty.ι _)) ∧ Nonempty (@Functor.Braided
-    (LisseModuleSheafCategory Y R) _ m b (Rep.{u + 1} R G) _ _ _ ((d.e R).functor ⋙ ObjectProperty.ι
-    _)) ∧ ∃ F : LisseModuleSheafCategory Y R, F.obj = (constantSheaf Y.smallEtaleTopology
-    (ModuleCat.{u + 1} R)).obj (ModuleCat.of R R) ∧ Nonempty (((d.e R).functor.obj F).obj ≅
-    Rep.trivial R G R)
+private theorem galoisFiniteLimits_of_data (d : GaloisLisseFiniteData y G) :
+    galoisFiniteLimits y G d := by
+  intro Λ _ _
+  infer_instance
 
-/-- Clause `finiteScalarExtension` of the finite correspondence.
-Source: Stacks 0DV5 (3), Weil II (1.1.1), (1.1.6)
-(blueprint: cor-galois-lisse-representations). -/
-def galoisFiniteScalarExtension
-    {Y : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
-    (y : Spec (.of Ω) ⟶ Y) (G : Type u) [Group G] [TopologicalSpace G]
-    [∀ P, MulAction G ((FiniteEtale.fiber y).obj P)]
-    (d : GaloisLisseFiniteData y G) : Prop :=
-  ∃ (B : ∀ (R S : Type (u + 1)) [Ring R] [Finite R] [Ring S] [Finite S], (R →+* S) →
-    (LisseModuleSheafCategory Y R ⥤ LisseModuleSheafCategory Y S)) (α : ∀ (R S : Type (u + 1)) [Ring
-    R] [Finite R] [Ring S] [Finite S] (f : R →+* S), B R S f ⋙ ObjectProperty.ι _ ≅ ObjectProperty.ι
-    _ ⋙ Sheaf.ringExtendScalars.{u + 1, u + 1} Y.smallEtaleTopology f) (β : ∀ (R S : Type (u + 1))
-    [Ring R] [Finite R] [Ring S] [Finite S] (f : R →+* S), B R S f ⋙ (d.e S).functor ⋙
-    ObjectProperty.ι _ ≅ (d.e R).functor ⋙ ObjectProperty.ι _ ⋙ (Rep.repIsoAction R G).functor ⋙
-    (ModuleCat.ringExtendScalars.{u + 1, u + 1} f).mapAction G ⋙ (Rep.repIsoAction S G).inverse), ∀
-    (R S T : Type (u + 1)) [Ring R] [Finite R] [Ring S] [Finite S] [Ring T] [Finite T] (f : R →+* S)
-    (g : S →+* T), ∃ c : B R S f ⋙ B S T g ≅ B R T (g.comp f), (∀ (F : LisseModuleSheafCategory Y R)
-    (z : ((d.e T).functor.obj ((B S T g).obj ((B R S f).obj F))).obj.V), ((β R T (g.comp f)).hom.app
-    F).hom (((d.e T).functor.map (c.hom.app F)).hom.hom z) = (ModuleCat.ringExtensionComp.{u + 1, u
-    + 1} f g).hom.app (ModuleCat.of R ((d.e R).functor.obj F).obj.V)
-    ((ModuleCat.ringExtendScalars.{u + 1, u + 1} g).map ((forget₂ (Rep.{u + 1} S G) (ModuleCat.{u +
-    1} S)).map ((β R S f).hom.app F)) (((β S T g).hom.app ((B R S f).obj F)).hom z))) ∧ ∀ (F :
-    LisseModuleSheafCategory Y R) (U : Y.Etale) (a : S) (b : T) (z : F.obj.obj.obj (op U)), ((α R T
-    (g.comp f)).hom.app F).hom.app (op U) ((c.hom.app F).hom.hom.app (op U) (((α S T g).inv.app ((B
-    R S f).obj F)).hom.app (op U) (((toSheafification Y.smallEtaleTopology (ModuleCat.{u + 1}
-    T)).app (((B R S f).obj F).obj.obj ⋙ ModuleCat.ringExtendScalars.{u + 1, u + 1} g)).app (op U)
-    (ModuleCat.ringExtensionTmul.{u + 1, u + 1} g _ b (((α R S f).inv.app F).hom.app (op U)
-    (((toSheafification Y.smallEtaleTopology (ModuleCat.{u + 1} S)).app (F.obj.obj ⋙
-    ModuleCat.ringExtendScalars.{u + 1, u + 1} f)).app (op U) (ModuleCat.ringExtensionTmul.{u + 1, u
-    + 1} f _ a z))))))) = ((toSheafification Y.smallEtaleTopology (ModuleCat.{u + 1} T)).app
-    (F.obj.obj ⋙ ModuleCat.ringExtendScalars.{u + 1, u + 1} (g.comp f))).app (op U)
-    (ModuleCat.ringExtensionTmul.{u + 1, u + 1} (g.comp f) _ (b * g a) z)
+private theorem galoisFiniteColimits_of_data (d : GaloisLisseFiniteData y G) :
+    galoisFiniteColimits y G d := by
+  intro Λ _ _
+  infer_instance
 
-/-- The simultaneous finite-coefficient correspondence and all clauses of part (1).
-Source: Stacks 0DV5 (3) (blueprint: cor-galois-lisse-representations). -/
-structure GaloisLisseFiniteCorrespondence
-    {Y : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
-    (y : Spec (.of Ω) ⟶ Y) (G : Type u) [Group G] [TopologicalSpace G]
-    [∀ P, MulAction G ((FiniteEtale.fiber y).obj P)]
-    extends GaloisLisseFiniteData y G where
-  yonedaComparison : galoisYonedaComparison y G toGaloisLisseFiniteData
-  finiteEtaleAction : galoisFiniteEtaleAction y G toGaloisLisseFiniteData
-  finiteAbelian : galoisFiniteAbelian y G toGaloisLisseFiniteData
-  finiteKernels : galoisFiniteKernels y G toGaloisLisseFiniteData
-  finiteCokernels : galoisFiniteCokernels y G toGaloisLisseFiniteData
-  finiteLimits : galoisFiniteLimits y G toGaloisLisseFiniteData
-  finiteColimits : galoisFiniteColimits y G toGaloisLisseFiniteData
-  finiteUnit : galoisFiniteUnit y G toGaloisLisseFiniteData
-  finiteEvaluationAction : galoisFiniteEvaluationAction y G toGaloisLisseFiniteData
-  finiteTensor : galoisFiniteTensor y G toGaloisLisseFiniteData
-  finiteScalarExtension : galoisFiniteScalarExtension y G toGaloisLisseFiniteData
+end FiniteAssembly
 
-/-- The profinite model, three equivalences and fibre comparisons of part (2).
-Source: Weil II (0.1), (1.1.1), (1.1.6)
-(blueprint: cor-galois-lisse-representations). -/
-structure GaloisLisseAdicData
-    {Y : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
-    (y : Spec (.of Ω) ⟶ Y) (G : Type u) [Group G] [TopologicalSpace G]
-    [∀ P, MulAction G ((FiniteEtale.fiber y).obj P)]
-    (c : GaloisLisseFiniteCorrespondence y G)
-    (l : ℕ) [Fact l.Prime] [IsNoetherian Y] [Y.IsSeparated]
-    [∀ x : Y, Invertible (l : Y.residueField x)]
-    (Q : Type (u + 1)) [Field Q] [Algebra ℚ_[l] Q] [IsAlgClosure ℚ_[l] Q] where
-  P : ProfiniteGrp.{u}
-  δ : G ≃ₜ* P
-  eI : ∀ E : Padic.FiniteCoefficientFields l Q, LisseIntegralSheaf l E.val Y ≌
-    galoisIntegralRepresentations l E.val P δ
-  eR : ∀ E : Padic.FiniteCoefficientFields l Q, LisseRationalSheaf l E.val Y ≌
-    galoisCoefficientRepresentations l E.val P δ
-  eA : LisseAlgebraicSheaf l Y Q ≌ galoisAdicRepresentations l Q P δ
-  τI : ∀ E : Padic.FiniteCoefficientFields l Q, (eI E).functor ⋙ ObjectProperty.ι _ ⋙ forget₂
-    (Rep.{u + 1} (Padic.coefficientExtensionIntegers l E.val) G) (ModuleCat.{u + 1}
-    (Padic.coefficientExtensionIntegers l E.val)) ≅ lisseIntegralFiberFunctor l E.val Y y
-  τR : ∀ E : Padic.FiniteCoefficientFields l Q, (eR E).functor ⋙ ObjectProperty.ι _ ⋙ forget₂
-    (Rep.{u + 1} E.val G) (ModuleCat.{u + 1} E.val) ≅ lisseRationalFiberFunctor l E.val Y y
-  τA : eA.functor ⋙ ObjectProperty.ι _ ⋙ forget₂ (Rep.{u + 1} Q G) (ModuleCat.{u + 1} Q) ≅
-    lisseAlgebraicFiberFunctor l Y y Q
+section AdicAssembly
 
-/-- Clause `rationalSheavesAbelian` of the adic correspondence.
-Source: Stacks 0DV5 (3), Weil II (1.1.1), (1.1.6)
-(blueprint: cor-galois-lisse-representations). -/
-def galoisRationalSheavesAbelian
-    {Y : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
+variable {Y : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
     (y : Spec (.of Ω) ⟶ Y) (G : Type u) [Group G] [TopologicalSpace G]
     [∀ P, MulAction G ((FiniteEtale.fiber y).obj P)]
     (c : GaloisLisseFiniteCorrespondence y G)
     (l : ℕ) [Fact l.Prime] [IsNoetherian Y] [Y.IsSeparated]
     [∀ x : Y, Invertible (l : Y.residueField x)]
     (Q : Type (u + 1)) [Field Q] [Algebra ℚ_[l] Q] [IsAlgClosure ℚ_[l] Q]
-    (_d : GaloisLisseAdicData y G c l Q) : Prop :=
-  ∀ E : Padic.FiniteCoefficientFields l Q, Nonempty (Abelian (LisseRationalSheaf l E.val Y))
+    (d : GaloisLisseAdicData y G c l Q)
 
-/-- Clause `rationalRepresentationsAbelian` of the adic correspondence.
-Source: Stacks 0DV5 (3), Weil II (1.1.1), (1.1.6)
-(blueprint: cor-galois-lisse-representations). -/
-def galoisRationalRepresentationsAbelian
-    {Y : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
-    (y : Spec (.of Ω) ⟶ Y) (G : Type u) [Group G] [TopologicalSpace G]
-    [∀ P, MulAction G ((FiniteEtale.fiber y).obj P)]
-    (c : GaloisLisseFiniteCorrespondence y G)
-    (l : ℕ) [Fact l.Prime] [IsNoetherian Y] [Y.IsSeparated]
-    [∀ x : Y, Invertible (l : Y.residueField x)]
-    (Q : Type (u + 1)) [Field Q] [Algebra ℚ_[l] Q] [IsAlgClosure ℚ_[l] Q]
-    (d : GaloisLisseAdicData y G c l Q) : Prop :=
-  ∀ E : Padic.FiniteCoefficientFields l Q, Nonempty (Abelian (galoisCoefficientRepresentations l
-    E.val d.P d.δ))
+-- Cache the localization category; its object type need not be unfolded by these proofs.
+local instance (priority := 100000) galoisAssemblyAlgebraicCategory :
+    Category (LisseAlgebraicSheaf l Y Q) := inferInstance
 
-/-- Clause `rationalFiniteLimits` of the adic correspondence.
-Source: Stacks 0DV5 (3), Weil II (1.1.1), (1.1.6)
-(blueprint: cor-galois-lisse-representations). -/
-def galoisRationalFiniteLimits
-    {Y : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
-    (y : Spec (.of Ω) ⟶ Y) (G : Type u) [Group G] [TopologicalSpace G]
-    [∀ P, MulAction G ((FiniteEtale.fiber y).obj P)]
-    (c : GaloisLisseFiniteCorrespondence y G)
-    (l : ℕ) [Fact l.Prime] [IsNoetherian Y] [Y.IsSeparated]
-    [∀ x : Y, Invertible (l : Y.residueField x)]
-    (Q : Type (u + 1)) [Field Q] [Algebra ℚ_[l] Q] [IsAlgClosure ℚ_[l] Q]
-    (d : GaloisLisseAdicData y G c l Q) : Prop :=
-  ∀ E : Padic.FiniteCoefficientFields l Q, PreservesFiniteLimits (d.eR E).functor
 
-/-- Clause `rationalFiniteColimits` of the adic correspondence.
-Source: Stacks 0DV5 (3), Weil II (1.1.1), (1.1.6)
-(blueprint: cor-galois-lisse-representations). -/
-def galoisRationalFiniteColimits
-    {Y : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
-    (y : Spec (.of Ω) ⟶ Y) (G : Type u) [Group G] [TopologicalSpace G]
-    [∀ P, MulAction G ((FiniteEtale.fiber y).obj P)]
-    (c : GaloisLisseFiniteCorrespondence y G)
-    (l : ℕ) [Fact l.Prime] [IsNoetherian Y] [Y.IsSeparated]
-    [∀ x : Y, Invertible (l : Y.residueField x)]
-    (Q : Type (u + 1)) [Field Q] [Algebra ℚ_[l] Q] [IsAlgClosure ℚ_[l] Q]
-    (d : GaloisLisseAdicData y G c l Q) : Prop :=
-  ∀ E : Padic.FiniteCoefficientFields l Q, PreservesFiniteColimits (d.eR E).functor
+private theorem galoisAbelianOfEquivalence {C : Type*} [Category C]
+    {D : Type*} [Category D] [Abelian D] (e : C ≌ D) : Nonempty (Abelian C) := by
+  let : Preadditive C := .ofFullyFaithful e.fullyFaithfulFunctor
+  have : HasFiniteProducts C :=
+    ⟨fun _ ↦ Adjunction.hasLimitsOfShape_of_equivalence e.functor⟩
+  exact ⟨abelianOfEquivalence e.functor⟩
 
-/-- Clause `algebraicSheavesAbelian` of the adic correspondence.
-Source: Stacks 0DV5 (3), Weil II (1.1.1), (1.1.6)
-(blueprint: cor-galois-lisse-representations). -/
-def galoisAlgebraicSheavesAbelian
-    {Y : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
-    (y : Spec (.of Ω) ⟶ Y) (G : Type u) [Group G] [TopologicalSpace G]
-    [∀ P, MulAction G ((FiniteEtale.fiber y).obj P)]
-    (c : GaloisLisseFiniteCorrespondence y G)
-    (l : ℕ) [Fact l.Prime] [IsNoetherian Y] [Y.IsSeparated]
-    [∀ x : Y, Invertible (l : Y.residueField x)]
-    (Q : Type (u + 1)) [Field Q] [Algebra ℚ_[l] Q] [IsAlgClosure ℚ_[l] Q]
-    (_d : GaloisLisseAdicData y G c l Q) : Prop :=
-  Nonempty (Abelian (LisseAlgebraicSheaf l Y Q))
+private theorem galoisRationalSheavesAbelian_of_representations
+    (h : galoisRationalRepresentationsAbelian y G c l Q d) :
+    galoisRationalSheavesAbelian y G c l Q d := by
+  intro E
+  obtain ⟨hE⟩ := h E
+  have := hE
+  exact galoisAbelianOfEquivalence (d.eR E)
 
-/-- Clause `algebraicRepresentationsAbelian` of the adic correspondence.
-Source: Stacks 0DV5 (3), Weil II (1.1.1), (1.1.6)
-(blueprint: cor-galois-lisse-representations). -/
-def galoisAlgebraicRepresentationsAbelian
-    {Y : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
-    (y : Spec (.of Ω) ⟶ Y) (G : Type u) [Group G] [TopologicalSpace G]
-    [∀ P, MulAction G ((FiniteEtale.fiber y).obj P)]
-    (c : GaloisLisseFiniteCorrespondence y G)
-    (l : ℕ) [Fact l.Prime] [IsNoetherian Y] [Y.IsSeparated]
-    [∀ x : Y, Invertible (l : Y.residueField x)]
-    (Q : Type (u + 1)) [Field Q] [Algebra ℚ_[l] Q] [IsAlgClosure ℚ_[l] Q]
-    (d : GaloisLisseAdicData y G c l Q) : Prop :=
-  Nonempty (Abelian (galoisAdicRepresentations l Q d.P d.δ))
+private theorem galoisAlgebraicSheavesAbelian_of_representations
+    (h : galoisAlgebraicRepresentationsAbelian y G c l Q d) :
+    galoisAlgebraicSheavesAbelian y G c l Q d := by
+  obtain ⟨hA⟩ := h
+  have := hA
+  exact galoisAbelianOfEquivalence d.eA
 
-/-- Clause `algebraicFiniteLimits` of the adic correspondence.
-Source: Stacks 0DV5 (3), Weil II (1.1.1), (1.1.6)
-(blueprint: cor-galois-lisse-representations). -/
-def galoisAlgebraicFiniteLimits
-    {Y : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
-    (y : Spec (.of Ω) ⟶ Y) (G : Type u) [Group G] [TopologicalSpace G]
-    [∀ P, MulAction G ((FiniteEtale.fiber y).obj P)]
-    (c : GaloisLisseFiniteCorrespondence y G)
-    (l : ℕ) [Fact l.Prime] [IsNoetherian Y] [Y.IsSeparated]
-    [∀ x : Y, Invertible (l : Y.residueField x)]
-    (Q : Type (u + 1)) [Field Q] [Algebra ℚ_[l] Q] [IsAlgClosure ℚ_[l] Q]
-    (d : GaloisLisseAdicData y G c l Q) : Prop :=
-  PreservesFiniteLimits d.eA.functor
+private theorem galoisRationalFiniteLimits_of_data :
+    galoisRationalFiniteLimits y G c l Q d := by
+  intro E
+  infer_instance
 
-/-- Clause `algebraicFiniteColimits` of the adic correspondence.
-Source: Stacks 0DV5 (3), Weil II (1.1.1), (1.1.6)
-(blueprint: cor-galois-lisse-representations). -/
-def galoisAlgebraicFiniteColimits
-    {Y : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
-    (y : Spec (.of Ω) ⟶ Y) (G : Type u) [Group G] [TopologicalSpace G]
-    [∀ P, MulAction G ((FiniteEtale.fiber y).obj P)]
-    (c : GaloisLisseFiniteCorrespondence y G)
-    (l : ℕ) [Fact l.Prime] [IsNoetherian Y] [Y.IsSeparated]
-    [∀ x : Y, Invertible (l : Y.residueField x)]
-    (Q : Type (u + 1)) [Field Q] [Algebra ℚ_[l] Q] [IsAlgClosure ℚ_[l] Q]
-    (d : GaloisLisseAdicData y G c l Q) : Prop :=
-  PreservesFiniteColimits d.eA.functor
+private theorem galoisRationalFiniteColimits_of_data :
+    galoisRationalFiniteColimits y G c l Q d := by
+  intro E
+  infer_instance
 
-/-- Clause `integralEvaluationAction` of the adic correspondence.
-Source: Stacks 0DV5 (3), Weil II (1.1.1), (1.1.6)
-(blueprint: cor-galois-lisse-representations). -/
-def galoisIntegralEvaluationAction
-    {Y : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
-    (y : Spec (.of Ω) ⟶ Y) (G : Type u) [Group G] [TopologicalSpace G]
-    [∀ P, MulAction G ((FiniteEtale.fiber y).obj P)]
-    (c : GaloisLisseFiniteCorrespondence y G)
-    (l : ℕ) [Fact l.Prime] [IsNoetherian Y] [Y.IsSeparated]
-    [∀ x : Y, Invertible (l : Y.residueField x)]
-    (Q : Type (u + 1)) [Field Q] [Algebra ℚ_[l] Q] [IsAlgClosure ℚ_[l] Q]
-    (d : GaloisLisseAdicData y G c l Q) : Prop :=
-  ∀ (E : Padic.FiniteCoefficientFields l Q) (F : LisseIntegralSheaf l E.val Y) (n : ℕ), ∃ h :
-    IsLisseEtaleSheafOfSets (galoisUnderlyingSetSheaf
-    (Padic.coefficientExtensionIntegers l E.val) (F.obj.obj (op n))), ∃ κ : (((pointSmallEtale
-    y).ulift.{u + 1}.sheafFiber (A := ModuleCat.{u + 1} (Padic.coefficientExtensionIntegers l
-    E.val))).obj (F.obj.obj (op n))) ≃ (((pointSmallEtale y).sheafFiber (A := Type (u + 1))).obj
-    (galoisUnderlyingSetSheaf (Padic.coefficientExtensionIntegers l E.val) (F.obj.obj (op n)))), (∀
-    (U : Y.Etale) (x : (pointSmallEtale y).fiber.obj U) (z : (F.obj.obj (op n)).obj.obj (op U)), κ
-    ((pointSmallEtale y).ulift.{u + 1}.toPresheafFiber U ⟨x⟩ (F.obj.obj (op n)).obj z) =
-    (pointSmallEtale y).toPresheafFiber U x (galoisUnderlyingSetSheaf
-    (Padic.coefficientExtensionIntegers l E.val) (F.obj.obj (op n))).obj z) ∧ ∀ (g : G) (z : ((d.eI
-    E).functor.obj F).obj.V), κ (limit.π (F.obj ⋙ (pointSmallEtale y).ulift.{u + 1}.sheafFiber) (op
-    n) ((d.τI E).hom.app F (((d.eI E).functor.obj F).obj.ρ g z))) = (c.γ g).hom.app
-    (galoisUnderlyingFLC (Padic.coefficientExtensionIntegers l E.val) (F.obj.obj (op n)) h) (κ
-    (limit.π (F.obj ⋙ (pointSmallEtale y).ulift.{u + 1}.sheafFiber) (op n) ((d.τI E).hom.app F z)))
+private theorem galoisAlgebraicFiniteLimits_of_data :
+    galoisAlgebraicFiniteLimits y G c l Q d := by
+  change PreservesFiniteLimits d.eA.functor
+  infer_instance
 
-/-- Clause `rationalEvaluationAction` of the adic correspondence.
-Source: Stacks 0DV5 (3), Weil II (1.1.1), (1.1.6)
-(blueprint: cor-galois-lisse-representations). -/
-def galoisRationalEvaluationAction
-    {Y : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
-    (y : Spec (.of Ω) ⟶ Y) (G : Type u) [Group G] [TopologicalSpace G]
-    [∀ P, MulAction G ((FiniteEtale.fiber y).obj P)]
-    (c : GaloisLisseFiniteCorrespondence y G)
-    (l : ℕ) [Fact l.Prime] [IsNoetherian Y] [Y.IsSeparated]
-    [∀ x : Y, Invertible (l : Y.residueField x)]
-    (Q : Type (u + 1)) [Field Q] [Algebra ℚ_[l] Q] [IsAlgClosure ℚ_[l] Q]
-    (d : GaloisLisseAdicData y G c l Q) : Prop :=
-  ∀ (E : Padic.FiniteCoefficientFields l Q) (F : LisseRationalSheaf l E.val Y) (g : G) (a : E.val)
-    (z : ((d.eI E).functor.obj F.integral).obj.V), eqToHom (lisseRationalFiberFunctor_obj l E.val Y
-    y F) ((d.τR E).hom.app F (((d.eR E).functor.obj F).obj.ρ g ((d.τR E).inv.app F (eqToHom
-    (lisseRationalFiberFunctor_obj l E.val Y y F).symm (TensorProduct.tmul _ a ((d.τI E).hom.app
-    F.integral z)))))) = TensorProduct.tmul _ a ((d.τI E).hom.app F.integral (((d.eI E).functor.obj
-    F.integral).obj.ρ g z))
+private theorem galoisAlgebraicFiniteColimits_of_data :
+    galoisAlgebraicFiniteColimits y G c l Q d := by
+  change PreservesFiniteColimits d.eA.functor
+  infer_instance
 
-/-- Clause `integralMonoidal` of the adic correspondence.
-Source: Stacks 0DV5 (3), Weil II (1.1.1), (1.1.6)
-(blueprint: cor-galois-lisse-representations). -/
-def galoisIntegralMonoidal
-    {Y : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
-    (y : Spec (.of Ω) ⟶ Y) (G : Type u) [Group G] [TopologicalSpace G]
-    [∀ P, MulAction G ((FiniteEtale.fiber y).obj P)]
-    (c : GaloisLisseFiniteCorrespondence y G)
-    (l : ℕ) [Fact l.Prime] [IsNoetherian Y] [Y.IsSeparated]
-    [∀ x : Y, Invertible (l : Y.residueField x)]
-    (Q : Type (u + 1)) [Field Q] [Algebra ℚ_[l] Q] [IsAlgClosure ℚ_[l] Q]
-    (d : GaloisLisseAdicData y G c l Q) : Prop :=
-  ∀ E : Padic.FiniteCoefficientFields l Q, ∃ m : MonoidalCategory (LisseIntegralSheaf l E.val Y),
-    m.toMonoidalCategoryStruct.tensorObj = lisseIntegralTensor l E.val Y ∧
-    @MonoidalCategoryStruct.tensorUnit (LisseIntegralSheaf l E.val Y) _ m.toMonoidalCategoryStruct =
-    lisseIntegralUnit l E.val Y ∧ Nonempty (@Functor.Monoidal (LisseIntegralSheaf l E.val Y) _ m
-    (Rep.{u + 1} (Padic.coefficientExtensionIntegers l E.val) G) _ _ ((d.eI E).functor ⋙
-    ObjectProperty.ι _))
+private theorem galoisIntegralTensor_of_monoidal
+    (h : galoisIntegralMonoidal y G c l Q d) :
+    galoisIntegralTensor y G c l Q d := by
+  intro E
+  exact galoisMonoidalTensor (G := G) (C := LisseIntegralSheaf l E.val Y)
+    (Padic.coefficientExtensionIntegers l E.val) ((d.eI E).functor ⋙ ObjectProperty.ι _)
+    (lisseIntegralTensor l E.val Y) (lisseIntegralUnit l E.val Y) (h E)
 
-/-- Clause `rationalMonoidal` of the adic correspondence.
-Source: Stacks 0DV5 (3), Weil II (1.1.1), (1.1.6)
-(blueprint: cor-galois-lisse-representations). -/
-def galoisRationalMonoidal
-    {Y : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
-    (y : Spec (.of Ω) ⟶ Y) (G : Type u) [Group G] [TopologicalSpace G]
-    [∀ P, MulAction G ((FiniteEtale.fiber y).obj P)]
-    (c : GaloisLisseFiniteCorrespondence y G)
-    (l : ℕ) [Fact l.Prime] [IsNoetherian Y] [Y.IsSeparated]
-    [∀ x : Y, Invertible (l : Y.residueField x)]
-    (Q : Type (u + 1)) [Field Q] [Algebra ℚ_[l] Q] [IsAlgClosure ℚ_[l] Q]
-    (d : GaloisLisseAdicData y G c l Q) : Prop :=
-  ∀ E : Padic.FiniteCoefficientFields l Q, ∃ m : MonoidalCategory (LisseRationalSheaf l E.val Y),
-    m.toMonoidalCategoryStruct.tensorObj = lisseRationalTensor l E.val Y ∧
-    @MonoidalCategoryStruct.tensorUnit (LisseRationalSheaf l E.val Y) _ m.toMonoidalCategoryStruct =
-    lisseRationalUnit l E.val Y ∧ Nonempty (@Functor.Monoidal (LisseRationalSheaf l E.val Y) _ m
-    (Rep.{u + 1} E.val G) _ _ ((d.eR E).functor ⋙ ObjectProperty.ι _))
+private theorem galoisIntegralUnit_of_monoidal
+    (h : galoisIntegralMonoidal y G c l Q d) :
+    galoisIntegralUnit y G c l Q d := by
+  intro E
+  exact galoisMonoidalUnit (G := G) (C := LisseIntegralSheaf l E.val Y)
+    (Padic.coefficientExtensionIntegers l E.val) ((d.eI E).functor ⋙ ObjectProperty.ι _)
+    (lisseIntegralTensor l E.val Y) (lisseIntegralUnit l E.val Y) (h E)
 
-/-- Clause `algebraicMonoidal` of the adic correspondence.
-Source: Stacks 0DV5 (3), Weil II (1.1.1), (1.1.6)
-(blueprint: cor-galois-lisse-representations). -/
-def galoisAlgebraicMonoidal
-    {Y : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
-    (y : Spec (.of Ω) ⟶ Y) (G : Type u) [Group G] [TopologicalSpace G]
-    [∀ P, MulAction G ((FiniteEtale.fiber y).obj P)]
-    (c : GaloisLisseFiniteCorrespondence y G)
-    (l : ℕ) [Fact l.Prime] [IsNoetherian Y] [Y.IsSeparated]
-    [∀ x : Y, Invertible (l : Y.residueField x)]
-    (Q : Type (u + 1)) [Field Q] [Algebra ℚ_[l] Q] [IsAlgClosure ℚ_[l] Q]
-    (d : GaloisLisseAdicData y G c l Q) : Prop :=
-  ∃ m : MonoidalCategory (LisseAlgebraicSheaf l Y Q), m.toMonoidalCategoryStruct.tensorObj =
-    lisseAlgebraicTensor l Y Q ∧ @MonoidalCategoryStruct.tensorUnit (LisseAlgebraicSheaf l Y Q) _
-    m.toMonoidalCategoryStruct = lisseAlgebraicUnit l Y Q ∧ Nonempty (@Functor.Monoidal
-    (LisseAlgebraicSheaf l Y Q) _ m (Rep.{u + 1} Q G) _ _ (d.eA.functor ⋙ ObjectProperty.ι _))
+private theorem galoisRationalTensor_of_monoidal
+    (h : galoisRationalMonoidal y G c l Q d) :
+    galoisRationalTensor y G c l Q d := by
+  intro E
+  exact galoisMonoidalTensor (G := G) (C := LisseRationalSheaf l E.val Y)
+    (E.val) ((d.eR E).functor ⋙ ObjectProperty.ι _)
+    (lisseRationalTensor l E.val Y) (lisseRationalUnit l E.val Y) (h E)
 
-/-- Clause `integralTensor` of the adic correspondence.
-Source: Stacks 0DV5 (3), Weil II (1.1.1), (1.1.6)
-(blueprint: cor-galois-lisse-representations). -/
-def galoisIntegralTensor
-    {Y : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
-    (y : Spec (.of Ω) ⟶ Y) (G : Type u) [Group G] [TopologicalSpace G]
-    [∀ P, MulAction G ((FiniteEtale.fiber y).obj P)]
-    (c : GaloisLisseFiniteCorrespondence y G)
-    (l : ℕ) [Fact l.Prime] [IsNoetherian Y] [Y.IsSeparated]
-    [∀ x : Y, Invertible (l : Y.residueField x)]
-    (Q : Type (u + 1)) [Field Q] [Algebra ℚ_[l] Q] [IsAlgClosure ℚ_[l] Q]
-    (d : GaloisLisseAdicData y G c l Q) : Prop :=
-  ∀ E : Padic.FiniteCoefficientFields l Q, (∀ F H : LisseIntegralSheaf l E.val Y, ∃ c : (((d.eI
-    E).functor.obj F).obj.V ⊗[(Padic.coefficientExtensionIntegers l E.val)] ((d.eI E).functor.obj
-    H).obj.V) ≃ₗ[(Padic.coefficientExtensionIntegers l E.val)] ((d.eI E).functor.obj
-    (lisseIntegralTensor l E.val Y F H)).obj.V, ∀ (g : G) (z : ((d.eI E).functor.obj F).obj.V
-    ⊗[(Padic.coefficientExtensionIntegers l E.val)] ((d.eI E).functor.obj H).obj.V), c
-    (galoisTensorAction (Padic.coefficientExtensionIntegers l E.val) ((d.eI E).functor.obj F).obj
-    ((d.eI E).functor.obj H).obj g z) = ((d.eI E).functor.obj (lisseIntegralTensor l E.val Y F
-    H)).obj.ρ g (c z))
+private theorem galoisRationalUnit_of_monoidal
+    (h : galoisRationalMonoidal y G c l Q d) :
+    galoisRationalUnit y G c l Q d := by
+  intro E
+  exact galoisMonoidalUnit (G := G) (C := LisseRationalSheaf l E.val Y)
+    (E.val) ((d.eR E).functor ⋙ ObjectProperty.ι _)
+    (lisseRationalTensor l E.val Y) (lisseRationalUnit l E.val Y) (h E)
 
-/-- Clause `integralUnit` of the adic correspondence.
-Source: Stacks 0DV5 (3), Weil II (1.1.1), (1.1.6)
-(blueprint: cor-galois-lisse-representations). -/
-def galoisIntegralUnit
-    {Y : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
-    (y : Spec (.of Ω) ⟶ Y) (G : Type u) [Group G] [TopologicalSpace G]
-    [∀ P, MulAction G ((FiniteEtale.fiber y).obj P)]
-    (c : GaloisLisseFiniteCorrespondence y G)
-    (l : ℕ) [Fact l.Prime] [IsNoetherian Y] [Y.IsSeparated]
-    [∀ x : Y, Invertible (l : Y.residueField x)]
-    (Q : Type (u + 1)) [Field Q] [Algebra ℚ_[l] Q] [IsAlgClosure ℚ_[l] Q]
-    (d : GaloisLisseAdicData y G c l Q) : Prop :=
-  ∀ E : Padic.FiniteCoefficientFields l Q, Nonempty (((d.eI E).functor.obj (lisseIntegralUnit l
-    E.val Y)).obj ≅ Rep.trivial (Padic.coefficientExtensionIntegers l E.val) G
-    (Padic.coefficientExtensionIntegers l E.val))
+private theorem galoisAlgebraicTensor_of_monoidal
+    (h : galoisAlgebraicMonoidal y G c l Q d) :
+    galoisAlgebraicTensor y G c l Q d := by
+  exact galoisMonoidalTensor (G := G) (C := LisseAlgebraicSheaf l Y Q)
+    (Q) (d.eA.functor ⋙ ObjectProperty.ι _)
+    (lisseAlgebraicTensor l Y Q) (lisseAlgebraicUnit l Y Q) (h)
 
-/-- Clause `rationalTensor` of the adic correspondence.
-Source: Stacks 0DV5 (3), Weil II (1.1.1), (1.1.6)
-(blueprint: cor-galois-lisse-representations). -/
-def galoisRationalTensor
-    {Y : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
-    (y : Spec (.of Ω) ⟶ Y) (G : Type u) [Group G] [TopologicalSpace G]
-    [∀ P, MulAction G ((FiniteEtale.fiber y).obj P)]
-    (c : GaloisLisseFiniteCorrespondence y G)
-    (l : ℕ) [Fact l.Prime] [IsNoetherian Y] [Y.IsSeparated]
-    [∀ x : Y, Invertible (l : Y.residueField x)]
-    (Q : Type (u + 1)) [Field Q] [Algebra ℚ_[l] Q] [IsAlgClosure ℚ_[l] Q]
-    (d : GaloisLisseAdicData y G c l Q) : Prop :=
-  ∀ E : Padic.FiniteCoefficientFields l Q, (∀ F H : LisseRationalSheaf l E.val Y, ∃ c : (((d.eR
-    E).functor.obj F).obj.V ⊗[E.val] ((d.eR E).functor.obj H).obj.V) ≃ₗ[E.val] ((d.eR E).functor.obj
-    (lisseRationalTensor l E.val Y F H)).obj.V, ∀ (g : G) (z : ((d.eR E).functor.obj F).obj.V
-    ⊗[E.val] ((d.eR E).functor.obj H).obj.V), c (galoisTensorAction E.val ((d.eR E).functor.obj
-    F).obj ((d.eR E).functor.obj H).obj g z) = ((d.eR E).functor.obj (lisseRationalTensor l E.val Y
-    F H)).obj.ρ g (c z))
+private theorem galoisAlgebraicUnit_of_monoidal
+    (h : galoisAlgebraicMonoidal y G c l Q d) :
+    galoisAlgebraicUnit y G c l Q d := by
+  exact galoisMonoidalUnit (G := G) (C := LisseAlgebraicSheaf l Y Q)
+    (Q) (d.eA.functor ⋙ ObjectProperty.ι _)
+    (lisseAlgebraicTensor l Y Q) (lisseAlgebraicUnit l Y Q) (h)
+end AdicAssembly
 
-/-- Clause `rationalUnit` of the adic correspondence.
-Source: Stacks 0DV5 (3), Weil II (1.1.1), (1.1.6)
-(blueprint: cor-galois-lisse-representations). -/
-def galoisRationalUnit
-    {Y : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
-    (y : Spec (.of Ω) ⟶ Y) (G : Type u) [Group G] [TopologicalSpace G]
+private theorem galoisProfiniteModel {Y : Scheme.{u}} [ConnectedSpace Y]
+    {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (y : Spec (.of Ω) ⟶ Y)
+    (G : Type u) [Group G] [TopologicalSpace G] [IsTopologicalGroup G] [CompactSpace G]
     [∀ P, MulAction G ((FiniteEtale.fiber y).obj P)]
-    (c : GaloisLisseFiniteCorrespondence y G)
-    (l : ℕ) [Fact l.Prime] [IsNoetherian Y] [Y.IsSeparated]
-    [∀ x : Y, Invertible (l : Y.residueField x)]
-    (Q : Type (u + 1)) [Field Q] [Algebra ℚ_[l] Q] [IsAlgClosure ℚ_[l] Q]
-    (d : GaloisLisseAdicData y G c l Q) : Prop :=
-  ∀ E : Padic.FiniteCoefficientFields l Q, Nonempty (((d.eR E).functor.obj (lisseRationalUnit l
-    E.val Y)).obj ≅ Rep.trivial E.val G E.val)
-
-/-- Clause `algebraicTensor` of the adic correspondence.
-Source: Stacks 0DV5 (3), Weil II (1.1.1), (1.1.6)
-(blueprint: cor-galois-lisse-representations). -/
-def galoisAlgebraicTensor
-    {Y : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
-    (y : Spec (.of Ω) ⟶ Y) (G : Type u) [Group G] [TopologicalSpace G]
-    [∀ P, MulAction G ((FiniteEtale.fiber y).obj P)]
-    (c : GaloisLisseFiniteCorrespondence y G)
-    (l : ℕ) [Fact l.Prime] [IsNoetherian Y] [Y.IsSeparated]
-    [∀ x : Y, Invertible (l : Y.residueField x)]
-    (Q : Type (u + 1)) [Field Q] [Algebra ℚ_[l] Q] [IsAlgClosure ℚ_[l] Q]
-    (d : GaloisLisseAdicData y G c l Q) : Prop :=
-  (∀ F H : LisseAlgebraicSheaf l Y Q, ∃ c : ((d.eA.functor.obj F).obj.V ⊗[Q] (d.eA.functor.obj
-    H).obj.V) ≃ₗ[Q] (d.eA.functor.obj (lisseAlgebraicTensor l Y Q F H)).obj.V, ∀ (g : G) (z :
-    (d.eA.functor.obj F).obj.V ⊗[Q] (d.eA.functor.obj H).obj.V), c (galoisTensorAction Q
-    (d.eA.functor.obj F).obj (d.eA.functor.obj H).obj g z) = (d.eA.functor.obj (lisseAlgebraicTensor
-    l Y Q F H)).obj.ρ g (c z))
-
-/-- Clause `algebraicUnit` of the adic correspondence.
-Source: Stacks 0DV5 (3), Weil II (1.1.1), (1.1.6)
-(blueprint: cor-galois-lisse-representations). -/
-def galoisAlgebraicUnit
-    {Y : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
-    (y : Spec (.of Ω) ⟶ Y) (G : Type u) [Group G] [TopologicalSpace G]
-    [∀ P, MulAction G ((FiniteEtale.fiber y).obj P)]
-    (c : GaloisLisseFiniteCorrespondence y G)
-    (l : ℕ) [Fact l.Prime] [IsNoetherian Y] [Y.IsSeparated]
-    [∀ x : Y, Invertible (l : Y.residueField x)]
-    (Q : Type (u + 1)) [Field Q] [Algebra ℚ_[l] Q] [IsAlgClosure ℚ_[l] Q]
-    (d : GaloisLisseAdicData y G c l Q) : Prop :=
-  Nonempty ((d.eA.functor.obj (lisseAlgebraicUnit l Y Q)).obj ≅ Rep.trivial Q G Q)
-
-/-- Clause `algebraicModelScalarExtension` of the adic correspondence.
-Source: Stacks 0DV5 (3), Weil II (1.1.1), (1.1.6)
-(blueprint: cor-galois-lisse-representations). -/
-def galoisAlgebraicModelScalarExtension
-    {Y : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
-    (y : Spec (.of Ω) ⟶ Y) (G : Type u) [Group G] [TopologicalSpace G]
-    [∀ P, MulAction G ((FiniteEtale.fiber y).obj P)]
-    (c : GaloisLisseFiniteCorrespondence y G)
-    (l : ℕ) [Fact l.Prime] [IsNoetherian Y] [Y.IsSeparated]
-    [∀ x : Y, Invertible (l : Y.residueField x)]
-    (Q : Type (u + 1)) [Field Q] [Algebra ℚ_[l] Q] [IsAlgClosure ℚ_[l] Q]
-    (d : GaloisLisseAdicData y G c l Q) : Prop :=
-  ∀ (E : Padic.FiniteCoefficientFields l Q) (F : LisseRationalSheaf l E.val Y), ∃ c : (Q ⊗[E.val]
-    ((d.eR E).functor.obj F).obj.V) ≃ₗ[Q] (d.eA.functor.obj (lisseAlgebraicOfModel l Y Q E
-    F)).obj.V, (∀ (g : G) (z : Q ⊗[E.val] ((d.eR E).functor.obj F).obj.V), c (galoisScalarAction
-    E.val Q ((d.eR E).functor.obj F).obj g z) = (d.eA.functor.obj (lisseAlgebraicOfModel l Y Q E
-    F)).obj.ρ g (c z)) ∧ ∀ (a : Q) (z : ((d.eR E).functor.obj F).obj.V), eqToHom
-    (lisseAlgebraicFiber_ofModel l Y y Q E F) (eqToHom (lisseAlgebraicFiberFunctor_obj l Y y Q
-    (lisseAlgebraicOfModel l Y Q E F)) (d.τA.hom.app _ (c (TensorProduct.tmul _ a z)))) =
-    TensorProduct.tmul _ a (eqToHom (lisseRationalFiberFunctor_obj l E.val Y y F) ((d.τR E).hom.app
-    F z))
-
-/-- Clause `integralScalarExtension` of the adic correspondence.
-Source: Stacks 0DV5 (3), Weil II (1.1.1), (1.1.6)
-(blueprint: cor-galois-lisse-representations). -/
-def galoisIntegralScalarExtension
-    {Y : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
-    (y : Spec (.of Ω) ⟶ Y) (G : Type u) [Group G] [TopologicalSpace G]
-    [∀ P, MulAction G ((FiniteEtale.fiber y).obj P)]
-    (c : GaloisLisseFiniteCorrespondence y G)
-    (l : ℕ) [Fact l.Prime] [IsNoetherian Y] [Y.IsSeparated]
-    [∀ x : Y, Invertible (l : Y.residueField x)]
-    (Q : Type (u + 1)) [Field Q] [Algebra ℚ_[l] Q] [IsAlgClosure ℚ_[l] Q]
-    (d : GaloisLisseAdicData y G c l Q) : Prop :=
-  ∀ (E L : Padic.FiniteCoefficientFields l Q) (h : E ≤ L), Nonempty (lisseIntegralScalarExtension l
-    E.val Y L.val (IntermediateField.inclusion h) ⋙ (d.eI L).functor ⋙ ObjectProperty.ι _ ≅ (d.eI
-    E).functor ⋙ ObjectProperty.ι _ ⋙ (Rep.repIsoAction (Padic.coefficientExtensionIntegers l E.val)
-    G).functor ⋙ (ModuleCat.ringExtendScalars.{u + 1, u + 1} (lisseIntegerInclusion l E.val L.val
-    (IntermediateField.inclusion h))).mapAction G ⋙ (Rep.repIsoAction
-    (Padic.coefficientExtensionIntegers l L.val) G).inverse)
-
-/-- Clause `rationalScalarExtension` of the adic correspondence.
-Source: Stacks 0DV5 (3), Weil II (1.1.1), (1.1.6)
-(blueprint: cor-galois-lisse-representations). -/
-def galoisRationalScalarExtension
-    {Y : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
-    (y : Spec (.of Ω) ⟶ Y) (G : Type u) [Group G] [TopologicalSpace G]
-    [∀ P, MulAction G ((FiniteEtale.fiber y).obj P)]
-    (c : GaloisLisseFiniteCorrespondence y G)
-    (l : ℕ) [Fact l.Prime] [IsNoetherian Y] [Y.IsSeparated]
-    [∀ x : Y, Invertible (l : Y.residueField x)]
-    (Q : Type (u + 1)) [Field Q] [Algebra ℚ_[l] Q] [IsAlgClosure ℚ_[l] Q]
-    (d : GaloisLisseAdicData y G c l Q) : Prop :=
-  ∀ (E L : Padic.FiniteCoefficientFields l Q) (h : E ≤ L) [_aEL : Algebra E.val L.val] (_haEL :
-    algebraMap E.val L.val = (IntermediateField.inclusion h).toRingHom), ∃ c : ∀ F :
-    LisseRationalSheaf l E.val Y, (L.val ⊗[E.val] ((d.eR E).functor.obj F).obj.V) ≃ₗ[L.val] ((d.eR
-    L).functor.obj ((lisseRationalScalarExtension l E.val Y L.val (IntermediateField.inclusion
-    h)).obj F)).obj.V, (∀ (F : LisseRationalSheaf l E.val Y) (g : G) (z : L.val ⊗[E.val] ((d.eR
-    E).functor.obj F).obj.V), c F (galoisScalarAction E.val L.val ((d.eR E).functor.obj F).obj g z)
-    = ((d.eR L).functor.obj ((lisseRationalScalarExtension l E.val Y L.val
-    (IntermediateField.inclusion h)).obj F)).obj.ρ g (c F z)) ∧ ∀ (F H : LisseRationalSheaf l E.val
-    Y) (f : F ⟶ H) (z : L.val ⊗[E.val] ((d.eR E).functor.obj F).obj.V), c H (LinearMap.baseChange
-    L.val (((d.eR E).functor.map f).hom.hom.toLinearMap) z) = ((d.eR L).functor.map
-    ((lisseRationalScalarExtension l E.val Y L.val (IntermediateField.inclusion h)).map f)).hom.hom
-    (c F z)
-
-/-- The simultaneous adic correspondences of part (2), using the finite correspondence's
-same evaluation automorphism `c.γ` at every finite level. Source: Weil II (0.1),
-(1.1.1), (1.1.6) (blueprint: cor-galois-lisse-representations). -/
-structure GaloisLisseAdicCorrespondence
-    {Y : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
-    (y : Spec (.of Ω) ⟶ Y) (G : Type u) [Group G] [TopologicalSpace G]
-    [∀ P, MulAction G ((FiniteEtale.fiber y).obj P)]
-    (c : GaloisLisseFiniteCorrespondence y G)
-    (l : ℕ) [Fact l.Prime] [IsNoetherian Y] [Y.IsSeparated]
-    [∀ x : Y, Invertible (l : Y.residueField x)]
-    (Q : Type (u + 1)) [Field Q] [Algebra ℚ_[l] Q] [IsAlgClosure ℚ_[l] Q]
-    extends GaloisLisseAdicData y G c l Q where
-  rationalSheavesAbelian : galoisRationalSheavesAbelian y G c l Q toGaloisLisseAdicData
-  rationalRepresentationsAbelian : galoisRationalRepresentationsAbelian y G c l Q
-    toGaloisLisseAdicData
-  rationalFiniteLimits : galoisRationalFiniteLimits y G c l Q toGaloisLisseAdicData
-  rationalFiniteColimits : galoisRationalFiniteColimits y G c l Q toGaloisLisseAdicData
-  algebraicSheavesAbelian : galoisAlgebraicSheavesAbelian y G c l Q toGaloisLisseAdicData
-  algebraicRepresentationsAbelian : galoisAlgebraicRepresentationsAbelian y G c l Q
-    toGaloisLisseAdicData
-  algebraicFiniteLimits : galoisAlgebraicFiniteLimits y G c l Q toGaloisLisseAdicData
-  algebraicFiniteColimits : galoisAlgebraicFiniteColimits y G c l Q toGaloisLisseAdicData
-  integralEvaluationAction : galoisIntegralEvaluationAction y G c l Q toGaloisLisseAdicData
-  rationalEvaluationAction : galoisRationalEvaluationAction y G c l Q toGaloisLisseAdicData
-  integralMonoidal : galoisIntegralMonoidal y G c l Q toGaloisLisseAdicData
-  rationalMonoidal : galoisRationalMonoidal y G c l Q toGaloisLisseAdicData
-  algebraicMonoidal : galoisAlgebraicMonoidal y G c l Q toGaloisLisseAdicData
-  integralTensor : galoisIntegralTensor y G c l Q toGaloisLisseAdicData
-  integralUnit : galoisIntegralUnit y G c l Q toGaloisLisseAdicData
-  rationalTensor : galoisRationalTensor y G c l Q toGaloisLisseAdicData
-  rationalUnit : galoisRationalUnit y G c l Q toGaloisLisseAdicData
-  algebraicTensor : galoisAlgebraicTensor y G c l Q toGaloisLisseAdicData
-  algebraicUnit : galoisAlgebraicUnit y G c l Q toGaloisLisseAdicData
-  algebraicModelScalarExtension : galoisAlgebraicModelScalarExtension y G c l Q
-    toGaloisLisseAdicData
-  integralScalarExtension : galoisIntegralScalarExtension y G c l Q toGaloisLisseAdicData
-  rationalScalarExtension : galoisRationalScalarExtension y G c l Q toGaloisLisseAdicData
+    [IsFundamentalGroup (FiniteEtale.fiber y) G] :
+    ∃ P : ProfiniteGrp.{u}, Nonempty (G ≃ₜ* P) := by
+  let e := toAutContinuousMulEquiv (FiniteEtale.fiber y) G
+  let P := ProfiniteGrp.ofContinuousMulEquiv
+    (G := ProfiniteGrp.of (Aut (FiniteEtale.fiber y))) e.symm
+  exact ⟨P, ⟨ContinuousMulEquiv.refl G⟩⟩
 
 /-- Finite and adic Galois correspondence, with the evaluation action.
 Source: Stacks 0DV5 (3), Weil II (1.1.1), (1.1.6)
@@ -787,6 +435,59 @@ theorem galois_lisse_representations
       ∀ (l : ℕ) [Fact l.Prime] [IsNoetherian Y] [Y.IsSeparated] [∀ x : Y, Invertible (l :
         Y.residueField x)] (Q : Type (u + 1)) [Field Q] [Algebra ℚ_[l] Q] [IsAlgClosure ℚ_[l] Q],
         Nonempty (GaloisLisseAdicCorrespondence y G c l Q) := by
-  sorry
+  obtain ⟨Φ, E, γ, hYoneda, ⟨hComp⟩, ⟨τ, hτ⟩, _⟩ :=
+    FiniteEtale.exists_fiber_flc_equivalence y G
+  obtain ⟨η, hη⟩ := galoisFiniteEtaleFiberComparison y G Φ E γ hComp τ hτ
+  obtain ⟨e, τM, hEval⟩ := galois_lisse_finite_module_lift y G Φ E γ η τ hτ
+  let d : GaloisLisseFiniteData y G := ⟨γ, Φ, η, e, τM⟩
+  obtain ⟨hunit, htensor, hscalar⟩ := galois_lisse_finite_compatibility y G d hEval
+  let c : GaloisLisseFiniteCorrespondence y G :=
+    { toGaloisLisseFiniteData := d
+      yonedaComparison := hYoneda
+      finiteEtaleAction := hη
+      finiteAbelian := galoisFiniteAbelian_of_data y G d
+      finiteKernels := galoisFiniteKernels_of_data y G d
+      finiteCokernels := galoisFiniteCokernels_of_data y G d
+      finiteLimits := galoisFiniteLimits_of_data y G d
+      finiteColimits := galoisFiniteColimits_of_data y G d
+      finiteUnit := hunit
+      finiteEvaluationAction := hEval
+      finiteTensor := htensor
+      finiteScalarExtension := hscalar }
+  refine ⟨c, ?_⟩
+  obtain ⟨P, ⟨δ⟩⟩ := galoisProfiniteModel y G
+  intro l _ _ _ _ Q _ _ _
+  obtain ⟨d, _, _, hI, hR, hA⟩ :=
+    galois_lisse_adic_equivalences y G c l Q P δ
+  obtain ⟨hRab, hAab, hIm, hRm, hAm, hIS, hRS⟩ :=
+    galois_lisse_adic_compatibility y G c l Q d hI hR hA
+  exact ⟨
+    { toGaloisLisseAdicData := d
+      rationalSheavesAbelian :=
+        galoisRationalSheavesAbelian_of_representations y G c l Q d hRab
+      rationalRepresentationsAbelian := hRab
+      rationalFiniteLimits := galoisRationalFiniteLimits_of_data y G c l Q d
+      rationalFiniteColimits := galoisRationalFiniteColimits_of_data y G c l Q d
+      algebraicSheavesAbelian :=
+        galoisAlgebraicSheavesAbelian_of_representations y G c l Q d hAab
+      algebraicRepresentationsAbelian := hAab
+      algebraicFiniteLimits := galoisAlgebraicFiniteLimits_of_data y G c l Q d
+      algebraicFiniteColimits := galoisAlgebraicFiniteColimits_of_data y G c l Q d
+      integralEvaluationAction := hI
+      rationalEvaluationAction := hR
+      integralMonoidal := hIm
+      rationalMonoidal := hRm
+      algebraicMonoidal := hAm
+      integralTensor := galoisIntegralTensor_of_monoidal y G c l Q d hIm
+      integralUnit := galoisIntegralUnit_of_monoidal y G c l Q d hIm
+      rationalTensor := galoisRationalTensor_of_monoidal y G c l Q d hRm
+      rationalUnit := galoisRationalUnit_of_monoidal y G c l Q d hRm
+      algebraicTensor := galoisAlgebraicTensor_of_monoidal y G c l Q d hAm
+      algebraicUnit := galoisAlgebraicUnit_of_monoidal y G c l Q d hAm
+      algebraicModelScalarExtension := hA
+      integralScalarExtension := hIS
+      rationalScalarExtension := hRS }⟩
+
+end
 
 end AlgebraicGeometry.Scheme
