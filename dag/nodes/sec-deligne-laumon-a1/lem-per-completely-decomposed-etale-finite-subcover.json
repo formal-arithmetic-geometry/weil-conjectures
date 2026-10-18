@@ -216,5 +216,23 @@
   "group": "Q11",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q11-8349315f4 (reviewer sub-agent of L); spot-checked: I read ILO II 2.1.1 and 2.2.1–2.2.4 (printed pp. 26–27). The item is exactly the ℓ=∞ case of Corollary 2.2.4, with no extra hypotheses on the U_i. The new node lem-per-rational-lift-locally-closed-section is Proposition 2.2.3, with 'subscheme' made precise as an immersion. It is statement-only, introduces every object it uses, and has the correct blueprint from/via/same_as. It is not a restatement of the item: it is pointwise and has no family or compactness. It is not a duplicate: I grepped for Nisnevich, completely decomposed, 2.2.3, section on a locally closed subscheme and the spreading-out tags. The nearest node, lem-sbc-pointed-section-stage-descent, is a general limit tool, not this statement. I tested it on: a closed point of Spec Z, the generic point with the open D(2), Spec Z[i] (no rational lift, no section), nonreduced Spec k[ε] (needs a subscheme, not an open), and the reverse direction via the field argument. Steps: (1) The cited statements check out: locnoeth, minimal closed subsets, DCC compactness, 01OY, 094L, and 0901 for spectral spaces. Quasi-compactness from the finite cover is implicit (advisory). (2) Étale gives lfp, which gives lft. The locality in def-weil-finite-type-morphism is one routine 01T2-style sentence (advisory). (3) Immersions induce residue-field isomorphisms; with ba an isomorphism and b injective, a is an isomorphism. Correct. (4) j(Z)=O∩F is open in the constructible topology because every open is quasi-compact (Step 1). Correct. (5) Compactness gives a finite I_0; the empty X case is handled. The citers (finite-flat-cd-etale-exchange step 7, uniformization-nodal-quotient-reduction) use the unchanged statement. No SGA source, no cycle, no tool_uses needed. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CompletelyDecomposedEtaleFiniteSubcover",
+  "declaration": "AlgebraicGeometry.completelyDecomposed_etale_finite_subcover",
+  "file": "lean/Sheaf/AlgebraicGeometry/CompletelyDecomposedEtaleFiniteSubcover.lean",
+  "statement": "theorem completelyDecomposed_etale_finite_subcover (X : Scheme.{u}) [IsNoetherian X] {I : Type w} (U : I → Scheme.{u}) (f : ∀ i : I, U i ⟶ X) (het : ∀ i : I, Etale (f i)) (hcover : ∀ x : X, ∃ (i : I) (z : U i), f i z = x ∧ IsIso ((f i).residueFieldMap z)) : ∃ I₀ : Set I, I₀.Finite ∧ ∀ x : X, ∃ i ∈ I₀, ∃ z : U i, f i z = x ∧ IsIso ((f i).residueFieldMap z)",
+  "branch": "newtargets-dag",
+  "by": "Q11",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-27cfb97e2",
+  "group": "Q11",
+  "result": "pass",
+  "note": "I read the statement clause by clause against the node and ILO II 2.2.4 (ℓ=∞), and it matches. [IsNoetherian X] is equivalent to the finite affine Noetherian cover. I : Type w has no extra assumptions. Etale (f i) for each i. The hypothesis is f i z = x ∧ IsIso ((f i).residueFieldMap z), on the actual induced map. The conclusion ∃ I₀ : Set I, I₀.Finite with the same lift condition has the same quantifier order. No qc/separated/finiteness on U_i. Empty X, empty I and empty U_i are handled. All 4 stmt_deps are existing Mathlib records used as recorded. The node differs from live only in lean. lean.statement is verbatim the file signature. Docstrings carry the source, blueprint tag and 5 proof steps. The only proof is sorry. No duplicate in side lean/Sheaf. nt_compile --json: 2.6 s, no errors or warnings. Advisory H9: proof-only plain imports are unused by the statement."
  }
 }

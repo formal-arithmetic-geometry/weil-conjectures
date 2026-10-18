@@ -188,5 +188,30 @@
   "group": "Q13",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q13-bc0fc9ad7 (reviewer sub-agent of L); spot-checked: Read the item and new node in full against ILO VIII 3.1.8(ii), 3.1.10(ii), and the p.109 comparison argument. Verified all five steps, hypotheses, map directions, edge cases, duplicate candidates, and acyclic dependency closure. No repair needed; detailed checks are in review.md."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.StrictFanChartLocalComparison",
+  "declaration": "AlgebraicGeometry.strict_fan_chart_local_comparison",
+  "declarations": [
+   "AlgebraicGeometry.EtaleLogHom.SharpSpaceMap",
+   "AlgebraicGeometry.EtaleLogHom.SharpSpaceMap.map",
+   "AlgebraicGeometry.FineFan.PointLocalization",
+   "AlgebraicGeometry.strict_fan_chart_local_comparison"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/StrictFanChartLocalComparison.lean",
+  "statement": "theorem strict_fan_chart_local_comparison {Y X : FineSaturatedLogScheme.{u}} (f : EtaleLogHom Y X) (hf : f.IsStrict) {G F : FineFan.Fan.{u}} (d : LogFanChart Y G) (c : LogFanChart X F) (y : Y.scheme) : ∃ (g : f.SharpSpaceMap) (L : FineFan.PointLocalization F (c.map.hom.base (f.base y))) (K : FineFan.PointLocalization G (d.map.hom.base y)) (U : Y.scheme.Opens), y ∈ U ∧ (∀ t ∈ U, c.map.hom.base (f.base t) ∈ L.openSet) ∧ (∀ t ∈ U, d.map.hom.base t ∈ K.openSet) ∧ ∃ (e : G.space.restrict K.openSet.isOpenEmbedding ≅ F.space.restrict L.openSet.isOpenEmbedding) (a : Y.logStructure.sharpSpace.restrict U.isOpenEmbedding ⟶ F.space.restrict L.openSet.isOpenEmbedding) (b : Y.logStructure.sharpSpace.restrict U.isOpenEmbedding ⟶ G.space.restrict K.openSet.isOpenEmbedding), a ≫ F.space.ofRestrict L.openSet.isOpenEmbedding = Y.logStructure.sharpSpace.ofRestrict U.isOpenEmbedding ≫ g.map ≫ c.map ∧ b ≫ G.space.ofRestrict K.openSet.isOpenEmbedding = Y.logStructure.sharpSpace.ofRestrict U.isOpenEmbedding ≫ d.map ∧ a = b ≫ e.hom ∧ ∃ α : FineFan.stalk F.space.presheaf (c.map.hom.base (f.base y)) ≃* FineFan.stalk G.space.presheaf (d.map.hom.base y), (FineFan.stalkMap d.map y).hom.comp α.toMonoidHom = (FineFan.stalkMap g.map y).hom.comp (FineFan.stalkMap c.map (f.base y)).hom ∧ (SheafedSpace.Γ.map e.hom.op).hom.comp (FineFan.affinePullback L.iso.hom) = (FineFan.affinePullback K.iso.hom).comp α.toMonoidHom",
+  "branch": "newtargets-dag",
+  "by": "Q154",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "The helper interfaces present the canonical log characteristic map by its action on every log section, and the affine point localization by its generalization open and germ-normalized coordinates. They belong to the local comparison notion; no dependency declaration is replaced."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1c41b7592",
+  "group": "Q154",
+  "result": "pass",
+  "note": "Clause-by-clause match against the node: strict EtaleLogHom (IsStrict), LogFanChart d and c (Zariski condition carried), PointLocalization opens of generalizations (t ⤳ z) with germ-normalized coordinates pinned through affine_hom_universal, U with both containments, SheafedSpace iso e with a = b ≫ e.hom (a and b are unique factorizations), α fixed as b⁻¹ t a by bijective stalkMap d, and a final clause saying Γ(e) ∘ affinePullback L = affinePullback K ∘ α. SharpSpaceMap is pinned on every log section and exists, so it is canonical, not arbitrary. No H4 duplicate in lean/Sheaf, Mathlib or runs/2. Dependency records identical to live; lean.statement verbatim. Universe u only, no extra hypotheses, edge cases fine, docstrings and H8 steps present, only the theorem proof is sorry. nt_compile --json against current live/side, with the 2026-10-19 dependency updates recompiled: item module 4.5 s, exit 0, clean. Advisory: FineFan.affinePullback comes from the module of theorem node lem-trf-affine-fan-hom-universal, which is a proof_dep, not a stmt_dep (non-stmt_dep owner precedent)."
  }
 }

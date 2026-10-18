@@ -181,5 +181,23 @@
   "group": "Q45",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q45-331fedce1 (reviewer sub-agent of L); spot-checked: PASS, no changes made. I read Stacks 0BAC and 0BAJ (statements and proofs) and checked 01KT/01KU against tags/tags. ITEM: statement unchanged. It matches 0BAJ with the alternatives 'f separated' and 'f locally of finite presentation', with no reducedness assumption. Step 1 applies the new 0BAC(2) node. Step 2: f restricted to W=f^{-1}(V) is the base change along an open, so it is separated by lem-weil-pbc-separated-lqf-base-change clause (1). The section s=j∘g^{-1} is then a closed immersion by lem-weil-pbc-section-separated-closed-immersion, with image U, so U is closed in W. Step 3 (elementary): U is dense in W because W is open in Y, so U=W as open subschemes. This does not use 'a surjective closed immersion is an isomorphism', which fails for nonreduced schemes. The separated shortcut replaces the source's finite-morphism reduction and is valid below the unit. Cases tested: cusp normalization, identity on a nonreduced scheme, the empty scheme, and the doubled-origin line, which fails without separatedness and shows Step 2 needs it. NEW NODE lem-per-birational-common-dense-opens: exactly 0BAC(2) with no separatedness, and it correctly does not claim U=f^{-1}(V). It is strictly weaker than the item, so it is not a relabelling. It has a statement only, every notion cited, and five searches (LeanSearch, LeanFinder, Loogle, grep). Mathlib's Birational/*.lean has no matching result. A DAG search over 0BAC/0BAJ/birational found no duplicate: the trf common-cover, pbc component-assembly, per-normalization and curve-normalization nodes are all different statements. I accept the tool use of lem-weil-pbc-separated-lqf-base-change (sk-thm-p1), clause (1) only, as generic base-change permanence. No SGA citation; proof_deps equals the union of the uses; the blueprint from/via/same_as fields are correct."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.BirationalDenseOpenIso",
+  "declaration": "AlgebraicGeometry.exists_dense_open_isIso_of_generic_stalks",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/BirationalDenseOpenIso.lean",
+  "statement": "theorem exists_dense_open_isIso_of_generic_stalks {X Y : Scheme.{u}} (f : Y ⟶ X) [IsSeparated f] [LocallyOfFinitePresentation f] (hX : (irreducibleComponents X).Finite) (hY : (irreducibleComponents Y).Finite) (hgeneric : Set.BijOn f (genericPoints Y) (genericPoints X)) (hstalk : ∀ η ∈ genericPoints Y, IsIso (f.stalkMap η)) : ∃ V : X.Opens, Dense (V : Set X) ∧ IsIso (f ∣_ V)",
+  "branch": "newtargets-dag",
+  "by": "Q111",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d7be5726f",
+  "group": "Q111",
+  "result": "pass",
+  "note": "Statement matches node and Stacks 0BAJ (separated + lfp case; birational def l.12981) clause by clause: IsSeparated, LocallyOfFinitePresentation, finite irreducibleComponents of X and Y, Set.BijOn f on genericPoints (rfl = component generic points), IsIso f.stalkMap at every source generic point (direction X.stalk(f η) -> Y.stalk η, nilpotents kept), conclusion ∃ V dense with IsIso (f ∣_ V) over the full inverse image. No extra hypotheses, universe u bound, empty-scheme case covered. Only the item's lean field changed vs side; stmt_dep copies unchanged; lean.statement verbatim. Docstrings carry 0BAJ, blueprint id and all 3 proof steps; proof is sorry only (axioms: sorryAx + standard). No duplicate in Mathlib Birational/* or side. nt_compile --json rc 0, 2.4 s, clean; probe confirmed the types. Advisory: unused private proof-dep import SeparatedLqfBaseChange; genericPoints not in def-sc-generic-point declarations."
  }
 }
