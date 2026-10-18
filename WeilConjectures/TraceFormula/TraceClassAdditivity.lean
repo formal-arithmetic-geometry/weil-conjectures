@@ -68,6 +68,7 @@ lemma restrict_add (j : U ⟶ X) [IsOpenImmersion j.left] (α β : BorelMooreSec
     (α + β).restrict j = α.restrict j + β.restrict j := by
   simp only [restrict, Functor.map_add, Preadditive.add_comp, Preadditive.comp_add]
 
+omit [LocallyOfFiniteType U.hom] [IsSeparated U.hom] in
 /-- Local terms are additive (blueprint `lem-trf-integration-linear`). -/
 lemma localTerm_add (j : U ⟶ X) [IsOpenImmersion j.left] [IsClosedImmersion j.left]
     [IsProper U.hom] (α β : BorelMooreSection ℓ X) :
