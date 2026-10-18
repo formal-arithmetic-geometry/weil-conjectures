@@ -8,6 +8,7 @@ module
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.Completion
 public import WeilConjectures.CategoryTheory.Monoidal.Closed.ExceptionalDual
 public import WeilConjectures.SixFunctors.Etale.Derived.IntegralVerdier
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekCompositionTorsion
 public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula.RestrictScalars
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability.Basic
 
@@ -289,16 +290,16 @@ variable {Λ : Type (u + 1)} [CommRing Λ] (I : Ideal Λ) [IsDomain Λ] [IsNoeth
   [IsAdicComplete I Λ] [Finite (Λ ⧸ I)] {ϖ : Λ} (hϖ : ϖ ∈ nonZeroDivisors Λ)
   (hI : I = Ideal.span {ϖ})
 
+omit [IsDomain Λ] [IsNoetherianRing Λ] in
 include hϖ hI in
 /-- **The composition law of the exceptional inverse images on the torsion tower.** For
 composable morphisms `f : X ⟶ Y` and `g : Y ⟶ S` admitting compactifications, the exceptional
 inverse images `R(f ≫ g)^!` and `Rf^! ∘ Rg^!` of `D(-_ét, Λ)` agree on the tower
 `n ↦ Λ ⧸ Iⁿ`, compatibly with the transition maps.
 
-The objects `Λ ⧸ Iⁿ` are torsion. For torsion coefficients the composition law is
-`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_comp`, the mate of the composition
-law of the compactly supported direct images (which rests on proper base change, and fails for
-`Rf_!` of non-torsion objects of `D(X_ét, 𝒪_E)`). -/
+The composition law of the compactly supported direct images fails on `D(-_ét, 𝒪_E)`, but it
+holds up to cones on which `ϖ` acts invertibly, and the objects `Λ ⧸ Iⁿ`, killed by `ϖⁿ`, see no
+such cones (`AlgebraicGeometry.Etale.nonempty_iso_comp_rightDerivedUpperShriek_comp`). -/
 theorem nonempty_iso_quotPowFunctor_comp_rightDerivedUpperShriek_comp {X Y S : Scheme.{u}}
     (f : X ⟶ Y) (g : Y ⟶ S) [HasCompactification f] [HasCompactification g]
     [HasCompactification (f ≫ g)] [QuasiCompact (f ≫ g)]
@@ -307,9 +308,13 @@ theorem nonempty_iso_quotPowFunctor_comp_rightDerivedUpperShriek_comp {X Y S : S
     Nonempty (_root_.DerivedCategory.quotPowFunctor S.smallEtaleTopology I ⋙
         R(f ≫ g)^![ModuleCat.{u + 1} Λ] ≅
       _root_.DerivedCategory.quotPowFunctor S.smallEtaleTopology I ⋙
-        R(g)^![ModuleCat.{u + 1} Λ] ⋙ R(f)^![ModuleCat.{u + 1} Λ]) :=
-  sorry
+        R(g)^![ModuleCat.{u + 1} Λ] ⋙ R(f)^![ModuleCat.{u + 1} Λ]) := by
+  subst hI
+  have hϖI : ϖ ∈ Ideal.span {ϖ} := Ideal.subset_span rfl
+  exact nonempty_iso_comp_rightDerivedUpperShriek_comp hϖ (fun n _ a hZ ↦ hZ.hom_eq_zero
+    (_root_.DerivedCategory.smul_id_quotPowFunctor_obj _ hϖI n.unop) a) f g
 
+omit [IsDomain Λ] [IsNoetherianRing Λ] in
 include hϖ hI in
 /-- **The dualizing complexes correspond under `Rf^!`.** For `a_X = f ≫ a_Y` and integral
 dualizing complexes `ω_X`, `ω_Y` (points of homotopy limit cones of the towers

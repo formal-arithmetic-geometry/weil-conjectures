@@ -208,9 +208,10 @@ projection formula for `E` and `ℚ̄_ℓ`; the case `Λ = E̲`. Let `p : X ⟶ 
 
 Stated here: (2) and (3), for `Λ = E̲`. Not stated: the comparisons (1) of the direct image
 with the changes of coefficients `𝒪_E → E`, `E → F`, `E → ℚ̄_ℓ` on bounded below complexes;
-the corresponding morphisms of condensed rings and the flatness needed for the comparison maps
-`AlgebraicGeometry.ProEtale.CondensedRing.derivedPushHom` are not available for these
-coefficient rings. -/
+the comparison maps `AlgebraicGeometry.ProEtale.CondensedRing.derivedPushHom` need these
+extensions of scalars to be exact (for instance `E_X` flat over `𝒪_{E,X}`), which is not
+available; the morphisms of condensed rings involved are constructed only for finite
+subextensions of `ℚ̄_ℓ` (`PadicAlgCl.FiniteIntermediateField`). -/
 theorem properDirectImage_baseChange_projectionFormula_continuousMapRingObj (p : X ⟶ Y)
     [IsProper p.left] :
     (∀ K : 𝔻[𝐄](X.left), boundedConstructible (condensedRingObj 𝐄 X.left) K →
@@ -289,9 +290,10 @@ projection formula for `E` and `ℚ̄_ℓ`; the case `Λ = ℚ̲̄_ℓ`. Let `p 
 
 Stated here: (2) and (3), for `Λ = ℚ̲̄_ℓ`. Not stated: the comparisons (1) of the direct image
 with the changes of coefficients `𝒪_E → E`, `E → F`, `E → ℚ̄_ℓ` on bounded below complexes;
-the corresponding morphisms of condensed rings and the flatness needed for the comparison maps
-`AlgebraicGeometry.ProEtale.CondensedRing.derivedPushHom` are not available for these
-coefficient rings. -/
+the comparison maps `AlgebraicGeometry.ProEtale.CondensedRing.derivedPushHom` need these
+extensions of scalars to be exact (for instance `E_X` flat over `𝒪_{E,X}`), which is not
+available; the morphisms of condensed rings involved are constructed only for finite
+subextensions of `ℚ̄_ℓ` (`PadicAlgCl.FiniteIntermediateField`). -/
 theorem properDirectImage_baseChange_projectionFormula_padicAlgClRingObj (p : X ⟶ Y)
     [IsProper p.left] :
     (∀ K : 𝔻[𝐐](X.left), boundedConstructible (condensedRingObj 𝐐 X.left) K →

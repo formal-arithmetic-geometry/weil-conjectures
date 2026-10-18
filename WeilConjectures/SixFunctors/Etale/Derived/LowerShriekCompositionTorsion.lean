@@ -6,11 +6,11 @@ Authors: Claude
 module
 
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.DerivedBaseChange
+public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.Completion
 public import WeilConjectures.SixFunctors.BaseChange.RestrictScalars
 public import WeilConjectures.SixFunctors.Etale.Derived.CoextendScalars
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekComposition
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriek
-public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.Completion
 
 /-!
 # Proper base change modulo objects on which `ϖ` acts invertibly

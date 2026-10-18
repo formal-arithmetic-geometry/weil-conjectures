@@ -6,8 +6,11 @@ Authors: Claude
 module
 
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.DerivedBaseChange
+public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.Completion
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.Reduction
 public import WeilConjectures.SixFunctors.Etale.Derived.IntegralCoefficients
+public import WeilConjectures.SixFunctors.Etale.Derived.Perfect.SitePerfect
+public import WeilConjectures.SixFunctors.Etale.Derived.ScalarExtension
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerShriekBaseChange
 
 /-!
@@ -21,10 +24,11 @@ restriction of scalars. Blueprint `lem-fix-operation-reduction` states that this
 commutes with the basic operations, compatibly with the units and counits out of which the
 projection and exchange transformations are built.
 
-The compatibilities are recorded, for the étale and for the pro-étale model of the coefficient
-categories, as the propositions `AlgebraicGeometry.Etale.ReductionCompatibility` and
-`AlgebraicGeometry.ProEtale.ReductionCompatibility`, and the node itself is
-`AlgebraicGeometry.reductionCompatibility_span_singleton`.
+The compatibilities are recorded as propositions: reduction `Λ → Λ ⧸ (ϖ)ⁿ` for the étale and for
+the pro-étale model of the coefficient categories, reduction between finite quotients, and the
+common-stage scalar extension `𝒪_E → 𝒪_{E'}` with its rationalization. They are assembled in
+`AlgebraicGeometry.CoefficientChangeCompatibility`, and the node itself is
+`AlgebraicGeometry.coefficientChangeCompatibility`.
 
 ## Main definitions
 
@@ -33,10 +37,16 @@ categories, as the propositions `AlgebraicGeometry.Etale.ReductionCompatibility`
 - `AlgebraicGeometry.Etale.ReductionCompatibility`,
   `AlgebraicGeometry.ProEtale.ReductionCompatibility`: reduction modulo `Iⁿ` commutes with the
   basic operations, the projection map and the compact-support exchange map.
+- `AlgebraicGeometry.Etale.BaseChangeCompatibility`: derived base change along a ring morphism
+  commutes with the basic operations and the projection map.
+- `AlgebraicGeometry.Etale.FiniteReductionCompatibility`,
+  `AlgebraicGeometry.Etale.ScalarExtensionCompatibility`: its instances for the reduction between
+  finite quotients and for the scalar extension between finite extensions of `ℚ_ℓ`.
+- `AlgebraicGeometry.CoefficientChangeCompatibility`: all of these together.
 
 ## Main statements
 
-- `AlgebraicGeometry.reductionCompatibility_span_singleton` (`lem-fix-operation-reduction`).
+- `AlgebraicGeometry.coefficientChangeCompatibility` (`lem-fix-operation-reduction`).
 - `AlgebraicGeometry.Etale.exists_isDerivedBaseChange_arrowIso_reductionModIdeal_projectionMap`:
   the reduction of `PF_{f, K, L}` modulo `(ϖ)ⁿ` is isomorphic, as an arrow, to the restriction
   of scalars of `PF_{f, K_n, L_n}`.
@@ -57,7 +67,7 @@ independently elaborated instances, which does not terminate in practice.
 
 universe u
 
-open CategoryTheory
+open CategoryTheory Opposite
 
 open scoped CategoryTheory.Functor
 
@@ -89,9 +99,9 @@ local notation "𝐑𝐞𝐬[" X ", " I ", " n "]" =>
 /-- The compatibility of the reduction `Λ → Λ ⧸ Iⁿ` with the basic operations of the étale
 derived categories (the étale part of blueprint `lem-fix-operation-reduction`): every object
 has a reduction (a derived base change along `Λ → Λ ⧸ Iⁿ`); the derived pullback, the derived
-tensor product, the derived direct image and the compact-support direct image of reductions are
-reductions of the corresponding operations; and the reduction of the projection map
-`PF_{f, K, L}` (its image under `- ⊗ᴸ (Λ ⧸ Iⁿ)_Y`) is isomorphic as an arrow to the
+tensor product, the derived direct image, the compact-support direct image and the internal Hom
+of reductions are reductions of the corresponding operations; and the reduction of the
+projection map `PF_{f, K, L}` (its image under `- ⊗ᴸ (Λ ⧸ Iⁿ)_Y`) is isomorphic as an arrow to the
 restriction of scalars of the projection map `PF_{f, K_n, L_n}` over `Λ ⧸ Iⁿ`, which expresses
 that the comparisons preserve the units, counits and associativity maps out of which the
 projection map is built. -/
@@ -133,7 +143,129 @@ structure ReductionCompatibility (Λ : Type (u + 1)) [CommRing Λ] (I : Ideal Λ
     (hη' : IsDerivedBaseChange η') :
     Nonempty (Arrow.mk ((reductionModIdeal Λ Y (I ^ n)).map (projectionMapApp Λ f K L)) ≅
       Arrow.mk (𝐑𝐞𝐬[Y, I, n].map (projectionMapApp (Λ ⧸ I ^ n) f Kn Ln)))
+  /-- The internal Hom, with arbitrary first variable, commutes with reduction modulo `Iⁿ`. -/
+  derivedHom {X : Scheme.{u}} (K L : 𝐃(X, Λ)) (Kn Ln : 𝐃(X, Λ ⧸ I ^ n))
+    (η : K ⟶ 𝐑𝐞𝐬[X, I, n].obj Kn) (η' : L ⟶ 𝐑𝐞𝐬[X, I, n].obj Ln)
+    (hη : IsDerivedBaseChange η) (hη' : IsDerivedBaseChange η') :
+    ∃ θ : ((derivedHom (ModuleCat.{u + 1} Λ) X).obj (op K)).obj L ⟶
+      𝐑𝐞𝐬[X, I, n].obj (((derivedHom (ModuleCat.{u + 1} (Λ ⧸ I ^ n)) X).obj (op Kn)).obj Ln),
+      IsDerivedBaseChange θ
 
+/-- Compatibility of the derived base change along a ring morphism `φ : Λ →+* Λ'` with the basic
+operations of the étale derived categories, on the objects satisfying `P`: the derived pullback,
+the derived tensor product and the compact-support direct image of derived base changes are
+derived base changes of the corresponding operations, and the projection map `PF_{f, K', L'}` of
+the base changes is the base change of `PF_{f, K, L}`: there is a commutative square from
+`PF_{f, K, L}` to the restriction of scalars of `PF_{f, K', L'}` whose two sides exhibit derived
+base changes. This expresses that the comparisons preserve the units, counits and associativity
+maps out of which the projection map is built. -/
+structure BaseChangeCompatibility {Λ Λ' : Type (u + 1)} [CommRing Λ] [CommRing Λ']
+    (φ : Λ →+* Λ') (P : ∀ X : Scheme.{u}, ObjectProperty 𝐃(X, Λ)) : Prop where
+  /-- The derived pullback commutes with derived base change. -/
+  leftDerivedUpperStar {X Y : Scheme.{u}} (f : X ⟶ Y) (L : 𝐃(Y, Λ)) (hL : P Y L)
+    (L' : 𝐃(Y, Λ')) (η : L ⟶ (derivedRestrictScalars φ Y).obj L')
+    (hη : IsDerivedBaseChange η) :
+    ∃ θ : L((f)^*[ModuleCat.{u + 1} Λ]).obj L ⟶
+      (derivedRestrictScalars φ X).obj (L((f)^*[ModuleCat.{u + 1} Λ']).obj L'),
+      IsDerivedBaseChange θ
+  /-- The derived tensor product commutes with derived base change. -/
+  derivedTensor {X : Scheme.{u}} (K L : 𝐃(X, Λ)) (hK : P X K) (hL : P X L) (K' L' : 𝐃(X, Λ'))
+    (η : K ⟶ (derivedRestrictScalars φ X).obj K') (η' : L ⟶ (derivedRestrictScalars φ X).obj L')
+    (hη : IsDerivedBaseChange η) (hη' : IsDerivedBaseChange η') :
+    ∃ θ : ((-⊗ᴸ-(X)[ModuleCat.{u + 1} Λ]).obj K).obj L ⟶
+      (derivedRestrictScalars φ X).obj (((-⊗ᴸ-(X)[ModuleCat.{u + 1} Λ']).obj K').obj L'),
+      IsDerivedBaseChange θ
+  /-- The compact-support direct image commutes with derived base change. -/
+  rightDerivedLowerShriek {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f]
+    (K : 𝐃(X, Λ)) (hK : P X K) (K' : 𝐃(X, Λ')) (η : K ⟶ (derivedRestrictScalars φ X).obj K')
+    (hη : IsDerivedBaseChange η) :
+    ∃ θ : (R(f)_![ModuleCat.{u + 1} Λ]).obj K ⟶
+      (derivedRestrictScalars φ Y).obj ((R(f)_![ModuleCat.{u + 1} Λ']).obj K'),
+      IsDerivedBaseChange θ
+  /-- The projection map of the derived base changes is the base change of the projection
+  map. -/
+  projectionMap {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f] (K : 𝐃(X, Λ))
+    (L : 𝐃(Y, Λ)) (hK : P X K) (hL : P Y L) (K' : 𝐃(X, Λ'))
+    (η : K ⟶ (derivedRestrictScalars φ X).obj K') (L' : 𝐃(Y, Λ'))
+    (η' : L ⟶ (derivedRestrictScalars φ Y).obj L') (hη : IsDerivedBaseChange η)
+    (hη' : IsDerivedBaseChange η') :
+    ∃ (θ₁ : (Arrow.mk (projectionMapApp Λ f K L)).left ⟶
+        (derivedRestrictScalars φ Y).obj (Arrow.mk (projectionMapApp Λ' f K' L')).left)
+      (θ₂ : (Arrow.mk (projectionMapApp Λ f K L)).right ⟶
+        (derivedRestrictScalars φ Y).obj (Arrow.mk (projectionMapApp Λ' f K' L')).right),
+      IsDerivedBaseChange θ₁ ∧ IsDerivedBaseChange θ₂ ∧
+        θ₁ ≫ (derivedRestrictScalars φ Y).map (projectionMapApp Λ' f K' L') =
+          projectionMapApp Λ f K L ≫ θ₂
+
+/-- The compatibility of the reduction `Λ ⧸ Iⁿ → Λ ⧸ Iᵐ` between two finite quotients, for
+`m ≤ n` (for `Λ = 𝒪_E`, the reduction `A_{E,n} → A_{E,m}`), with the basic operations of the
+étale derived categories: derived pullback, derived tensor product, compact-support direct image
+and the projection map commute with it on the objects of finite Tor amplitude; and the internal
+Hom commutes with it when its first variable is perfect on the coefficient site. -/
+structure FiniteReductionCompatibility (Λ : Type (u + 1)) [CommRing Λ] (I : Ideal Λ) {m n : ℕ}
+    (h : m ≤ n) : Prop extends
+    BaseChangeCompatibility (Ideal.Quotient.factor (Ideal.pow_le_pow_right (I := I) h))
+      fun X ↦ DerivedCategory.finiteTorAmplitude (ModuleCat.{u + 1} (Λ ⧸ I ^ n)) X where
+  /-- The internal Hom with site-perfect first variable commutes with reduction. -/
+  derivedHom {X : Scheme.{u}} (K L : 𝐃(X, Λ ⧸ I ^ n)) (hK : DerivedCategory.IsSitePerfect K)
+    (K' L' : 𝐃(X, Λ ⧸ I ^ m))
+    (η : K ⟶ (derivedRestrictScalars (Ideal.Quotient.factor (Ideal.pow_le_pow_right h)) X).obj K')
+    (η' : L ⟶
+      (derivedRestrictScalars (Ideal.Quotient.factor (Ideal.pow_le_pow_right h)) X).obj L')
+    (hη : IsDerivedBaseChange η) (hη' : IsDerivedBaseChange η') :
+    ∃ θ : ((derivedHom (ModuleCat.{u + 1} (Λ ⧸ I ^ n)) X).obj (op K)).obj L ⟶
+      (derivedRestrictScalars (Ideal.Quotient.factor (Ideal.pow_le_pow_right h)) X).obj
+        (((derivedHom (ModuleCat.{u + 1} (Λ ⧸ I ^ m)) X).obj (op K')).obj L'),
+      IsDerivedBaseChange θ
+
+section ScalarExtension
+
+set_option hygiene false in
+/-- The derived category `D(X_ét, 𝒪_E)` of the integral stage. The ring structure is written as
+the one underlying the commutative ring structure, as in the statements for general commutative
+coefficient rings. -/
+local notation "𝐃𝐎(" X ", " E ")" =>
+  _root_.DerivedCategory (Sheaf (Scheme.smallEtaleTopology X)
+    (@ModuleCat.{u + 1} (Shrink.{u + 1} (PadicAlgCl.integers l E)) CommRing.toRing))
+
+/-- The compatibility of the scalar extension `𝒪_E → 𝒪_{E'}` between two finite extensions
+`E ⊆ E'` of `ℚ_ℓ` inside `ℚ̄_ℓ` (the common-stage scalar extension of
+`def-weil-rationalization-karoubi`) with the basic operations: derived pullback, derived tensor
+product, derived direct image, compact-support direct image and the projection map commute with
+the derived base change along `𝒪_E → 𝒪_{E'}`; and after rationalization, the scalar extension
+`- ⊗_E E' : D_comp(Y_ét, E) ⥤ D_comp(Y_ét, E')` of the projection map over `E` is, as an arrow,
+the projection map over `E'` of the scalar extensions. -/
+structure ScalarExtensionCompatibility (l : ℕ) [Fact l.Prime] (E E' : Type) [Field E]
+    [Field E'] [Algebra E (PadicAlgCl l)] [Algebra E' (PadicAlgCl l)] [Algebra E E']
+    [IsScalarTower E E' (PadicAlgCl l)] [Algebra ℚ_[l] E] [IsScalarTower ℚ_[l] E (PadicAlgCl l)]
+    [FiniteDimensional ℚ_[l] E] [Algebra ℚ_[l] E'] [IsScalarTower ℚ_[l] E' (PadicAlgCl l)]
+    [FiniteDimensional ℚ_[l] E'] [Small.{u + 1} E] [Small.{u + 1} E'] : Prop extends
+    BaseChangeCompatibility.{u} (PadicAlgCl.integersShrinkMap l E E') fun _ _ ↦ True where
+  /-- The derived direct image commutes with the scalar extension. -/
+  rightDerivedLowerStar {X Y : Scheme.{u}} (f : X ⟶ Y) (K : 𝐃𝐎(X, E)) (K' : 𝐃𝐎(X, E'))
+    (η : K ⟶ (derivedRestrictScalars (PadicAlgCl.integersShrinkMap l E E') X).obj K')
+    (hη : IsDerivedBaseChange η) :
+    ∃ θ : R((f)_*[ModuleCat.{u + 1} (Shrink.{u + 1} (PadicAlgCl.integers l E))]).obj K ⟶
+      (derivedRestrictScalars (PadicAlgCl.integersShrinkMap l E E') Y).obj
+        (R((f)_*[ModuleCat.{u + 1} (Shrink.{u + 1} (PadicAlgCl.integers l E'))]).obj K'),
+      IsDerivedBaseChange θ
+  /-- The rational scalar extension of the projection map over `E` is the projection map over
+  `E'` of the scalar extensions. -/
+  rationalProjectionMap {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f]
+    (K : 𝐃𝐎(X, E)) (L : 𝐃𝐎(Y, E)) (K' : 𝐃𝐎(X, E'))
+    (η : K ⟶ (derivedRestrictScalars (PadicAlgCl.integersShrinkMap l E E') X).obj K')
+    (L' : 𝐃𝐎(Y, E'))
+    (η' : L ⟶ (derivedRestrictScalars (PadicAlgCl.integersShrinkMap l E E') Y).obj L')
+    (hη : IsDerivedBaseChange η) (hη' : IsDerivedBaseChange η') :
+    Nonempty (Arrow.mk ((derivedCompleteRationalScalarExtension l E E').map
+        ((DerivedCategoryDerivedCompleteRational.fromIntegral Y.smallEtaleTopology l E).map
+          ((DerivedCategoryDerivedCompleteIntegral.completion Y.smallEtaleTopology l E).map
+            (projectionMapApp (Shrink.{u + 1} (PadicAlgCl.integers l E)) f K L)))) ≅
+      Arrow.mk ((DerivedCategoryDerivedCompleteRational.fromIntegral Y.smallEtaleTopology l E').map
+          ((DerivedCategoryDerivedCompleteIntegral.completion Y.smallEtaleTopology l E').map
+            (projectionMapApp (Shrink.{u + 1} (PadicAlgCl.integers l E')) f K' L'))))
+
+end ScalarExtension
 end Etale
 
 namespace ProEtale
@@ -187,34 +319,50 @@ structure ReductionCompatibility (Λ : Type (u + 1)) [CommRing Λ] (I : Ideal Λ
 
 end ProEtale
 
+/-- The statement of blueprint `lem-fix-operation-reduction`, assembled from its parts:
+
+* `reduction`, `proEtaleReduction`: for a nonzerodivisor `ϖ` of `Λ` (for `Λ = 𝒪_E` a
+  uniformizer, so that `Λ → Λ ⧸ (ϖ)ⁿ` is `𝒪_E → A_{E,n}`), reduction modulo `(ϖ)ⁿ` commutes with
+  derived pullback, derived tensor product, ordinary and compact-support direct image and
+  internal Hom (étale), and with derived pullback and compact-support direct image (pro-étale),
+  compatibly with the projection and exchange transformations;
+* `finiteReduction`: the reduction `Λ ⧸ (ϖ)ⁿ → Λ ⧸ (ϖ)ᵐ` between finite quotients commutes with
+  derived pullback, tensor product, compact-support direct image and the projection map on the
+  objects of finite Tor amplitude, and with internal Hom for site-perfect first variable;
+* `scalarExtension`: the common-stage scalar extension `𝒪_E → 𝒪_{E'}` commutes with the same
+  operations and the projection map, also after rationalization. -/
+structure CoefficientChangeCompatibility : Prop where
+  /-- Reduction `Λ → Λ ⧸ (ϖ)ⁿ` and the étale operations. -/
+  reduction {Λ : Type (u + 1)} [CommRing Λ] {ϖ : Λ} (hϖ : ϖ ∈ nonZeroDivisors Λ) (n : ℕ) :
+    Etale.ReductionCompatibility.{u} Λ (Ideal.span {ϖ}) n
+  /-- Reduction `Λ → Λ ⧸ (ϖ)ⁿ` and the pro-étale operations. -/
+  proEtaleReduction {Λ : Type (u + 1)} [CommRing Λ] {ϖ : Λ} (hϖ : ϖ ∈ nonZeroDivisors Λ)
+    (n : ℕ) : ProEtale.ReductionCompatibility.{u} Λ (Ideal.span {ϖ}) n
+  /-- Reduction `Λ ⧸ (ϖ)ⁿ → Λ ⧸ (ϖ)ᵐ` between finite quotients and the étale operations. -/
+  finiteReduction {Λ : Type (u + 1)} [CommRing Λ] {ϖ : Λ} (hϖ : ϖ ∈ nonZeroDivisors Λ)
+    {m n : ℕ} (h : m ≤ n) : Etale.FiniteReductionCompatibility.{u} Λ (Ideal.span {ϖ}) h
+  /-- Common-stage scalar extension `𝒪_E → 𝒪_{E'}`, and rationalization. -/
+  scalarExtension (l : ℕ) [Fact l.Prime] (E E' : Type) [Field E] [Field E']
+    [Algebra E (PadicAlgCl l)] [Algebra E' (PadicAlgCl l)] [Algebra E E']
+    [IsScalarTower E E' (PadicAlgCl l)] [Algebra ℚ_[l] E] [IsScalarTower ℚ_[l] E (PadicAlgCl l)]
+    [FiniteDimensional ℚ_[l] E] [Algebra ℚ_[l] E'] [IsScalarTower ℚ_[l] E' (PadicAlgCl l)]
+    [FiniteDimensional ℚ_[l] E'] [Small.{u + 1} E] [Small.{u + 1} E'] :
+    Etale.ScalarExtensionCompatibility.{u} l E E'
+
 /-- Blueprint `lem-fix-operation-reduction`: Basic operations and coefficient reduction.
 
-Let `ϖ` be a nonzerodivisor of `Λ` (for `Λ = 𝒪_E` a uniformizer, so that the reduction
-`Λ → Λ ⧸ (ϖ)ⁿ` is `𝒪_E → A_{E,n}`). Reduction modulo `(ϖ)ⁿ` commutes with derived pullback,
-derived tensor product, ordinary derived direct image and compact-support direct image, for the
-étale and for the pro-étale coefficient categories, and the comparisons preserve the units,
-counits and associativity maps used to construct the projection and exchange transformations:
-the reductions of the projection map and of the compact-support exchange map are, as arrows,
-the projection map and the exchange map of the reductions
-(`AlgebraicGeometry.Etale.ReductionCompatibility`,
-`AlgebraicGeometry.ProEtale.ReductionCompatibility`).
-
-The remaining assertions of the node are formalised separately: the reduction of internal Hom
-for arbitrary first variable is `AlgebraicGeometry.Etale.nonempty_iso_reductionModIdeal_derivedHom`
-and, between finite quotients for site-perfect first
-variable, `AlgebraicGeometry.Etale.nonempty_iso_reductionModIdeal_derivedHom_of_isSitePerfect`;
-the reduction as an endofunctor of `D(X_ét, Λ)` commutes with `Lf^*`, `Rf_*` and `Rf_!`
-(`AlgebraicGeometry.Etale.leftDerivedUpperStarReductionModIdealIso`,
-`AlgebraicGeometry.Etale.isIso_rightDerivedLowerStarReductionModIdealMap_span_pow`,
-`AlgebraicGeometry.Etale.isIso_rightDerivedLowerShriekReductionModIdealMap_span_pow`); the
-statement for admissible exceptional adjoints is their admissibility hypothesis. The
-comparisons between two finite quotients `A_{E,n} → A_{E,m}` on finite-Tor domains and the
-transport of the comparisons to rationalization and common-stage scalar extension are not part
-of this statement. -/
-theorem reductionCompatibility_span_singleton {Λ : Type (u + 1)} [CommRing Λ] {ϖ : Λ}
-    (hϖ : ϖ ∈ nonZeroDivisors Λ) (n : ℕ) :
-    Etale.ReductionCompatibility.{u} Λ (Ideal.span {ϖ}) n ∧
-      ProEtale.ReductionCompatibility.{u} Λ (Ideal.span {ϖ}) n :=
+For the derived-complete coefficient categories, reduction `𝒪_E → A_{E,n}` commutes with derived
+pullback, tensor, ordinary direct image and compact-support direct image; finite reduction
+`A_{E,n} → A_{E,m}` commutes with pullback, tensor and compact-support direct image on the
+finite-Tor domains; internal Hom commutes with reduction `𝒪_E → A_{E,n}` for arbitrary first
+variables, and between finite quotients for site-perfect first variables; the same operations
+and comparisons commute with rationalization and common-stage scalar extension; and all the
+comparisons preserve the associativity maps, units and counits used to construct the projection
+and exchange transformations (`AlgebraicGeometry.CoefficientChangeCompatibility`). Here `𝒪_E`
+is generalised to a commutative ring with a nonzerodivisor `ϖ`, and the étale and pro-étale
+coefficient categories are both covered. The statement for admissible exceptional adjoints is
+their admissibility hypothesis, and is not repeated. -/
+theorem coefficientChangeCompatibility : CoefficientChangeCompatibility.{u} :=
   sorry
 
 namespace Etale
@@ -237,7 +385,7 @@ For a nonzerodivisor `ϖ` of `Λ`, `f : X ⟶ Y` admitting a compactification, `
 arrow to the restriction of scalars of the projection map `PF_{f, K_n, L_n}` over `Λ ⧸ (ϖ)ⁿ`.
 It is the reduction square that Step 1 of `sk-thm-sf-pf-adic` cites from
 `sk-prop-sf-pf-reduction`, a consequence of
-`AlgebraicGeometry.reductionCompatibility_span_singleton`. -/
+`AlgebraicGeometry.coefficientChangeCompatibility`. -/
 theorem exists_isDerivedBaseChange_arrowIso_reductionModIdeal_projectionMap
     (hϖ : ϖ ∈ nonZeroDivisors Λ) (n : ℕ) (f : X ⟶ Y) [HasCompactification f]
     (K : 𝐃(X, Λ)) (L : 𝐃(Y, Λ)) :
@@ -250,7 +398,7 @@ theorem exists_isDerivedBaseChange_arrowIso_reductionModIdeal_projectionMap
             (projectionMapApp Λ f K L)) ≅
           Arrow.mk ((derivedRestrictScalars (Ideal.Quotient.mk (Ideal.span {ϖ} ^ n)) Y).map
             (projectionMapApp (Λ ⧸ Ideal.span {ϖ} ^ n) f Kn Ln))) := by
-  have h := (reductionCompatibility_span_singleton hϖ n).1
+  have h := coefficientChangeCompatibility.reduction hϖ n
   obtain ⟨Kn, η, hη⟩ := h.exists_isDerivedBaseChange X K
   obtain ⟨Ln, η', hη'⟩ := h.exists_isDerivedBaseChange Y L
   exact ⟨Kn, η, Ln, η', hη, hη', h.projectionMap f K L Kn η Ln η' hη hη'⟩
@@ -281,7 +429,7 @@ derived base change `η : K ⟶ Res K_n`, `CategoryTheory.Sheaf.IsDerivedBaseCha
 reduction modulo `Iⁿ` of the compact-support exchange map `Ex_!(c) : Lg^* Rf_!(c) K ⟶
 Rf'_!(c') Lg'^* K` over `Λ` is isomorphic, as an arrow, to the restriction of scalars of the
 exchange map `Ex_!(c)` over `Λ/Iⁿ` at `K_n`. It is a consequence of
-`AlgebraicGeometry.reductionCompatibility_span_singleton`. -/
+`AlgebraicGeometry.coefficientChangeCompatibility`. -/
 theorem nonempty_arrowIso_reductionModIdeal_rightDerivedLowerShriekOfCompactificationBaseChangeMap
     (hI : ∃ ϖ ∈ nonZeroDivisors Λ, I = Ideal.span {ϖ})
     (n : ℕ) (sq : IsPullback g' f' f g) (c : Compactification f) (K : 𝐃(X, Λ))
@@ -293,7 +441,7 @@ theorem nonempty_arrowIso_reductionModIdeal_rightDerivedLowerShriekOfCompactific
       Arrow.mk (𝐑𝐞𝐬[Y', n].map ((rightDerivedLowerShriekOfCompactificationBaseChangeMap
         (ModuleCat.{u + 1} (Λ ⧸ I ^ n)) sq c).app Kn))) := by
   obtain ⟨ϖ, hϖ, rfl⟩ := hI
-  exact (reductionCompatibility_span_singleton hϖ n).2.exchange sq c K Kn η hη
+  exact (coefficientChangeCompatibility.proEtaleReduction hϖ n).exchange sq c K Kn η hη
 
 end ProEtale
 

@@ -4033,6 +4033,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekComparison.De
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekComparison.IdentityLaw
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekComposition
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekCompositionCoherence
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekCompositionTorsion
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekFormalism
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekFormalismComparison
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekIndependence
