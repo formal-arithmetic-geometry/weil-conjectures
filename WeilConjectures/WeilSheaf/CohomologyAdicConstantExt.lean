@@ -263,7 +263,8 @@ lemma cocycleFrobenius_eq_resolutionFrobeniusCocycle (n : ℕ)
   have h₂ := constantIntHomAddEquivΓ_constantIntSheafToLowerStar_comp
     (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv (I.cocomplex.X n).carrier.X f
   have h₃ := constantIntHomAddEquivΓ_comp
-    (M := ((Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv)_*[WeilCoefficients.{u} l].obj
+    (M :=
+      ((Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv)_*[WeilCoefficients.{u} l].obj
       (I.cocomplex.X n).carrier.X) (N := (I.cocomplex.X n).carrier.X) (constantIntSheafToLowerStar
     (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv ≫
       ((Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv)_*[AddCommGrpCat.{u + 1}].map f)
