@@ -6,12 +6,7 @@ Authors: SHEAF group A2
 module
 
 public import Sheaf.AlgebraicGeometry.EllAdicProperLocalizingPushforward
-import Sheaf.AlgebraicGeometry.CondensedFieldLfpLocalTriviality
-import Sheaf.Paper.CondensedQbarLfpLocalTriviality
-import Sheaf.Paper.IntegralLfpLocalTorsionCharts
-import Sheaf.Paper.IntegralLfpLocallyFreeResolution
-import Sheaf.AlgebraicGeometry.BoundedConstructibleLocalizingClosure
-import WeilConjectures.ConstructibleSheaf.ProEtaleModule.Def
+import Sheaf.AlgebraicGeometry.EllAdicLocalizingBrownRepresentability
 
 /-! # Cohomological boundedness of the localizing exceptional object
 (blueprint: lem-sfb-adic-localizing-exceptional-bounded)
@@ -37,6 +32,25 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
   (g : Z ⟶ Y) [IsProper g.left]
   (hΛ : IsEllAdicCoefficient ℓ Λ inferInstance)
 
+/-- The canonical Brown right adjoint has finite cohomological amplitude on bounded
+constructible inputs.  This is the geometric restriction step of the blueprint proof.
+
+Source: blueprint `det-existence-restriction.proof.md`, Part (2), rational and integral
+restriction theorems and their coefficient comparison.
+Proof: identify the canonical Brown right adjoint with the geometric exceptional inverse
+image on finite affine charts, apply the rational and integral restriction theorems, and
+take a common bound over the finite affine cover.
+(blueprint: lem-sfb-adic-localizing-exceptional-bounded-canonical)
+-/
+theorem ellAdic_localizing_canonical_rightAdjoint_obj_isBounded
+    (hF : (ellAdicLocalizingLowerStar Λ ℓ g hΛ).IsLeftAdjoint)
+    (K : (boundedConstructible (condensedRingObj Λ Y.left)).FullSubcategory) :
+    ∃ a b : ℤ, ∀ i : ℤ, (i < a ∨ b < i) →
+      IsZero ((DerivedCategory.homologyFunctor _ i).obj
+        (((@Functor.rightAdjoint _ _ _ _ (ellAdicLocalizingLowerStar Λ ℓ g hΛ) hF).obj
+          ((boundedConstructibleToLocalizing Λ Y.left).obj K)).obj)) := by
+  sorry
+
 /-- The supplied localizing right adjoint has finite cohomological amplitude on a bounded
 constructible input.
 
@@ -55,6 +69,16 @@ theorem ellAdic_localizing_rightAdjoint_obj_isBounded
     ∃ a b : ℤ, ∀ i : ℤ, (i < a ∨ b < i) →
       IsZero ((DerivedCategory.homologyFunctor _ i).obj
         ((G.obj ((boundedConstructibleToLocalizing Λ Y.left).obj K)).obj)) := by
-  sorry
+  let F := ellAdicLocalizingLowerStar Λ ℓ g hΛ
+  let hF : F.IsLeftAdjoint := ellAdic_isLeftAdjoint_localizingLowerStar Λ ℓ g hΛ
+  let H := @Functor.rightAdjoint _ _ _ _ F hF
+  let adjH : F ⊣ H := @Adjunction.ofIsLeftAdjoint _ _ _ _ F hF
+  obtain ⟨a, b, hb⟩ := ellAdic_localizing_canonical_rightAdjoint_obj_isBounded
+    Λ ℓ g hΛ hF K
+  let e := adjH.rightAdjointUniq adj
+  refine ⟨a, b, fun i hi ↦ ?_⟩
+  let e' := (boundedConstructibleLocalizingClosure Λ Z.left).ι.mapIso
+    (e.app ((boundedConstructibleToLocalizing Λ Y.left).obj K))
+  exact (hb i hi).of_iso ((DerivedCategory.homologyFunctor _ i).mapIso e'.symm)
 
 end AlgebraicGeometry.ProEtale.CondensedRing
