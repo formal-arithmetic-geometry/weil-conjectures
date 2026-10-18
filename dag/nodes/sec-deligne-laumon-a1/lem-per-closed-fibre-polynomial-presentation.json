@@ -227,5 +227,23 @@
   "group": "Q116",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q116-1f82bf2c4 (reviewer sub-agent of L); spot-checked: I read Stacks 0AUG (algebra.tex 12931-12976) in full; the item statement matches it hypothesis by hypothesis and is unchanged. All 7 steps were checked against the cited statements. S1: the reduction to P_q/IP_q, both surjectivity and injectivity checked. S2: the proper-ideal leaf; the contraction of the maximal ideal is m_R. S3: domination of B=R/p in Frac(B), then the closed Nagata extension node into kappa(q), so m_A meets R in m_R. S4: finite pivot induction from the x-or-x^-1 clause of def-trf-valuation-ring; the ratio algebra checks out, and no value-group lemma is needed. S5: the chart inverse maps Q[1/y0] and P[1/xi], checked on generators, then localized at the corresponding primes. S6: Q maps to A, so q_Q + m_R Q is proper. S7: J = T'^{-1}J_0, so S is a localization of a quotient of Q_n. Edge cases tested: n=0, R a field, R not a domain, nilpotents, and R=k[t]_(t), S=k(t), q=(tx-1), where the chart y=1/x works. No duplicate (0AUG appears only in the item and its Ratliff citer) and no cycle. The two Nagata nodes are Lean-closed tools, not route. Batch-5 flag: def-trf-valuation-ring is a general definition (valuation ring), outside both assumed statements and their proofs, so accepted. No SGA source, no fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.ClosedFibrePolynomialPresentation",
+  "declaration": "Algebra.EssFiniteType.exists_polynomial_maximal_localization_quotient",
+  "file": "lean/Sheaf/RingTheory/ClosedFibrePolynomialPresentation.lean",
+  "statement": "theorem exists_polynomial_maximal_localization_quotient (R : Type u) (S : Type v) [CommRing R] [CommRing S] [Algebra R S] [IsLocalRing R] [IsLocalRing S] [Algebra.EssFiniteType R S] : ∃ (n : ℕ) (m : MaximalSpectrum (MvPolynomial (Fin n) R)), m.asIdeal.comap (algebraMap R (MvPolynomial (Fin n) R)) = IsLocalRing.maximalIdeal R ∧ ∃ (I : Ideal (Localization.AtPrime m.asIdeal)) (T : Submonoid (Localization.AtPrime m.asIdeal ⧸ I)), Nonempty (Localization T ≃ₐ[R] S)",
+  "branch": "newtargets-dag",
+  "by": "NB",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-72e57ddbc",
+  "group": "NB",
+  "result": "pass",
+  "note": "Stacks 0AUG read: Lean matches node clause by clause (EssFiniteType, IsLocalRing R/S without IsLocalHom, ∃ n, MaximalSpectrum of MvPolynomial (Fin n) R with comap = maximalIdeal R, ∃ I and T : Submonoid, Nonempty (Localization T ≃ₐ[R] S)); independent universes; n=0, fields, non-local map, zero ring checked. Node copy differs from live only in lean; statement verbatim once. Docstrings carry source, blueprint and all 7 steps. Public imports used; plain imports = recorded proof-dep modules. No line >100 chars, no defs, sorry only. nt_compile --json clean 1.2 s; #print axioms only sorryAx beyond standard. No findings, no fixes."
  }
 }

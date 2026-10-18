@@ -217,5 +217,23 @@
   "group": "Q11",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q11-a0ee0e770 (reviewer sub-agent of L); spot-checked: I read the item, all 4 new nodes, every cited statement, and the Stacks sources (0ECR in full, 0DXR, 0DX7/0DX8/0DX9, 0ECP, 0DXF, 02J6(4)); all tags match their labels. The item statement is unchanged. It is 0ECR with cd replaced by the generator count r, which is valid because cd ≤ r. It holds at T=∅ (Y=Spec R/I is local) and at dim R=0 (only T=∅ qualifies). Steps 2–5 follow 0ECR's first half. The empty puncture gives d ≤ dim X ≤ t < d−1. The formal-sections comparison plus clopen-idempotent (b),(c) gives a disconnected V, with the filtered-colimit lift of the idempotent written out. Z=X\\V meets Y only in {m}, so c ≤ dim Z ≤ t. Steps 6–9 follow the slicing half, cases Y=T and two clopen pieces. The 'small detail omitted' is written out as V(J)\\{m}=V(K)∩(Y\\T). The proper-sum bound gives cd(R,J) ≤ t+e, and the contrapositive is applied to J without a cycle. All 4 new nodes are true, statement-only and smaller than the item. Generator bound: needs I+J≠A, a valid source-error restriction since 0ECP fails at I=J=A with cd(A,A)=−1. Isolated-intersection bound: 0DXF applied to each irreducible component. Formal sections: 0DXR for (A/√0)~ on U; it has a dualizing complex (0BFR), I-adic completeness (090T), and its associated points are the minimal primes, each of dimension ≥ d > cd+1. Slicing: prime avoidance on ∏p_j for points w_j closed in U, which exist by the Jacobson property; checked at e=0 and s=0. Duplicate grep over the DAG for these tags and concepts found no existing node. No SGA. proof_deps equals the union of uses. I accept the tool use lem-weil-pbc-scheme-clopen-idempotent (generic scheme fact). Advisory: the inline Γ_K definition could cite def-sbc-ideal-power-torsion-functor. The formal-sections node id still says 'idempotent'. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.CompleteLocalConnectednessBound",
+  "declaration": "PrimeSpectrum.complete_local_connectedness_bound",
+  "file": "lean/Sheaf/RingTheory/CompleteLocalConnectednessBound.lean",
+  "statement": "theorem complete_local_connectedness_bound (R : Type u) [CommRing R] [IsNoetherianRing R] [IsLocalRing R] [IsAdicComplete (IsLocalRing.maximalIdeal R) R] (hfinite : ringKrullDim R < ⊤) (I : Ideal R) (hproper : I ≠ ⊤) (r : ℕ) (hgen : ∃ f : Fin r → R, Ideal.span (Set.range f) = I) (c d : ℕ) (hc : IsLeast {e : WithBot ℕ∞ | ∃ Z : Set (PrimeSpectrum R), IsClosed Z ∧ ¬ IsConnected Zᶜ ∧ topologicalKrullDim Z = e} (c : WithBot ℕ∞)) (hd : IsLeast {e : WithBot ℕ∞ | ∃ Z : Set (PrimeSpectrum R), Z ∈ irreducibleComponents (PrimeSpectrum R) ∧ topologicalKrullDim Z = e} (d : WithBot ℕ∞)) : (∀ T : Set (PrimeSpectrum R), IsClosed T → T ⊆ zeroLocus (I : Set R) → topologicalKrullDim T + (r : WithBot ℕ∞) + 1 < (min (c + 1) d : WithBot ℕ∞) → IsConnected (zeroLocus (I : Set R) \\ T)) ∧ (r + 1 < min (c + 1) d → IsConnected (zeroLocus (I : Set R) \\ {IsLocalRing.closedPoint R}))",
+  "branch": "newtargets-dag",
+  "by": "Q47",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-939585695",
+  "group": "Q47",
+  "result": "pass",
+  "note": "Statement matches node/0ECR clause by clause: nonzero Noetherian complete local R with finite ringKrullDim, proper I with Fin r generating family, c and d pinned by IsLeast over closed Z with disconnected complement / irreducible components (minima exist and are in N), shifted bound dim T + r + 1 < min(c+1,d) equals the integer inequality, and empty T (bottom) and dim 0 behave as in the source; punctured clause exact. Snapshot file compiled clean via nt_compile --json (1.4 s); probe confirmed elaboration and empty-T arithmetic. lean.statement verbatim, docstrings carry source, blueprint tag and 10 proof steps, sorry-only, plain proof-dep import of SchemeClopenIdempotent required by stage-2 rule 7, no hollow defs, no pro-etale, node unchanged apart from lean field."
  }
 }
