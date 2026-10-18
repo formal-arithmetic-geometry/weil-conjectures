@@ -13,104 +13,50 @@
  ],
  "proof": [
   {
-   "text": "The scalar compatibility makes all $a_{ij}$ and $q_i$ morphisms of $R$-module sheaves: for example $a_{ij}(s_i(r)x)=s_j(r)a_{ij}(x)$. By [lem-weil-pbc-module-sheaves-colimits-forgetful], form a colimit $(L,(b_i:A_i\\to L))$ in $\\operatorname{Mod}(R)$. Its existence applies in the coefficient universe after choosing a $w$-small site skeleton; the hypothesis of essential smallness guarantees sheafification there. Thus a map of module sheaves out of $L$ is determined by its composites with every $b_i$. The module cocone $q_i$ induces a unique $R$-linear map $u:L\\to A$ with $u b_i=q_i$. We will construct a ring structure on this very $L$, then use the given ring-colimit property of $A$ to prove $u$ invertible.",
+   "text": "Use scalar compatibility to view every transition map and every leg of q as a morphism between the restricted regular R-module sheaves. The formula is the original ring map on sections; multiplicativity and compatibility with the scalar map prove linearity. These maps form a diagram D and a cocone d whose underlying abelian diagram and cocone are definitionally the images of A and q under forgetting rings to abelian groups.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Put U = forget₂ CommRingCat RingCat ⋙ forget₂ RingCat AddCommGrpCat. U preserves limits and filtered colimits. On the w-small model of C, Mathlib GrothendieckTopology.instPreservesSheafification therefore shows that U preserves sheafification. The instance in Sites.Equivalence transports this to C; its required structured-arrow limits exist because these index categories are essentially w-small (hasLimitsOfShape_of_essentiallySmall). The same site transport provides ring and abelian sheafification and the abelian WEqualsLocallyBijective criterion. The natural isomorphism sheafComposeNatIso identifies presheaf sheafification followed by sheafCompose J U with postcomposition by U followed by abelian sheafification. The latter preserves I-colimits. Applying Adjunction.preservesColimitsOfShape_iff to the fully faithful sheafification adjunction proves that sheafCompose J U preserves I-colimits.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "lean/WeilConjectures/CategoryTheory/SheafAlgebrasDirectedColimitModuleCore.lean",
+    "place": "ring_toAb_preservesColimit and the preservation/reflection argument in sheafAlgebras_directed_colimit_module_core, generalized from a topological site to an essentially coefficient-small site using Mathlib CategoryTheory/Sites/Equivalence.lean"
+   }
+  },
+  {
+   "text": "The image of q under sheafCompose J U is thus an abelian-sheaf colimit, by isColimitOfPreserves. By lem-weil-pbc-module-sheaves-colimits-forgetful, module-sheaf colimits of shape I exist and their forgetful functor to abelian sheaves preserves them. This functor reflects isomorphisms, so reflectsColimit_of_reflectsIsomorphisms and isColimitOfReflects show that d is a module-sheaf colimit.",
    "uses": [
     "lem-weil-pbc-module-sheaves-colimits-forgetful",
-    "def-weil-sheaf-of-modules-category",
-    "def-weil-pbc-category-colimit"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Agent argument using Tag 03DB (lemma-limits-colimits), Tag 03EP (lemma-tensor-commute-colimits), item (2), and the tensor construction in Section 03EK (section-tensor-product)"
-   }
-  },
-  {
-   "text": "For $i,j\\in I$, choose $k\\ge i,j$. Multiplication in $A_k$ is $R$-bilinear for the action through $s_k$, so the formula\n$$c_{ij}(x\\otimes y)=b_k\\bigl(a_{ik}(x)a_{jk}(y)\\bigr)$$\ndefines a morphism $c_{ij}:A_i\\otimes_R A_j\\to L$. Here the formula is first a map from the sectionwise presheaf tensor, then extends uniquely to its module sheafification by [def-pur-sheaf-tensor-product] and [def-weil-presheaf-modules-sheafification]. If $k'$ is another upper bound, choose $h\\ge k,k'$; applying $b_h a_{kh}=b_k$ and multiplicativity of $a_{kh}$ identifies both formulas with $b_h(a_{ih}(x)a_{jh}(y))$. Thus $c_{ij}$ is independent of the choice. For $i\\le i'$ the same calculation in a common upper bound gives $c_{i'j}(a_{ii'}\\otimes1)=c_{ij}$, and likewise in $j$. These are equalities of sheaf maps because they agree on the sectionwise tensor generators before sheafification.",
-   "uses": [
-    "def-pur-sheaf-tensor-product",
-    "def-weil-presheaf-modules-sheafification"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Agent argument using Tag 03DB (lemma-limits-colimits), Tag 03EP (lemma-tensor-commute-colimits), item (2), and the tensor construction in Section 03EK (section-tensor-product)"
-   }
-  },
-  {
-   "text": "Apply [lem-weil-pbc-independent-sheaf-tensor-colimits] twice to the compatible maps $c_{ij}$. The required preservation in the first variable follows from the balanced swap $x\\otimes y\\mapsto y\\otimes x$, whose inverse is the same swap, for the tensor of [def-pur-sheaf-tensor-product]. First, for each $j$, obtain $d_j:L\\otimes_R A_j\\to L$ with $d_j(b_i\\otimes1)=c_{ij}$. Compatibility of the $d_j$ follows by this same colimit uniqueness after precomposing every $b_i\\otimes1$. Second, obtain a unique $\\mu:L\\otimes_R L\\to L$ with $\\mu(1\\otimes b_j)=d_j$. In particular $\\mu(b_i\\otimes b_j)=c_{ij}$. Moreover, equality of two maps out of $L\\otimes_R L$ can be checked after all $b_i\\otimes b_j$: first fix $j$ and use the first-variable colimit uniqueness, then use the second-variable uniqueness. All the diagrams used here have index $I$ in $w$, as the tensor-preservation statement requires.",
-   "uses": [
-    "lem-weil-pbc-independent-sheaf-tensor-colimits",
-    "def-pur-sheaf-tensor-product"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Agent argument using Tag 03DB (lemma-limits-colimits), Tag 03EP (lemma-tensor-commute-colimits), item (2), and the tensor construction in Section 03EK (section-tensor-product)"
-   }
-  },
-  {
-   "text": "Fix $i_0\\in I$ and put $e=b_{i_0}(1)\\in L(U)$ for every site object $U$, with compatible restrictions. For any $i$, a common upper bound and the unital transition maps give $b_i(1)=e$. The multiplication $\\mu$ is commutative: its two orders agree after $b_i\\otimes b_j$ by commutativity in a common $A_k$, so step 3 gives equality. It is associative as well. Repeatedly use [lem-weil-pbc-independent-sheaf-tensor-colimits] in the three variables to check the two maps out of $(L\\otimes_R L)\\otimes_R L$ after $b_i\\otimes b_j\\otimes b_t$. For $k\\ge i,j,t$ their values are respectively $b_k((a_{ik}(x)a_{jk}(y))a_{tk}(z))$ and $b_k(a_{ik}(x)(a_{jk}(y)a_{tk}(z)))$; these agree. The associativity identifications are those of the sheafified sectionwise tensor [def-pur-sheaf-tensor-product]. Finally, multiplying $b_i(x)$ by $e=b_i(1)$ on either side gives $b_i(x)$; equality on all $b_i$ proves the two unit laws on $L$. Bilinearity gives distributivity. Thus the underlying abelian sheaf $L$ is a sheaf of unital commutative rings, and every $b_i$ is a unital ring-sheaf map, since $\\mu(b_i\\otimes b_i)(x\\otimes y)=b_i(xy)$.",
-   "uses": [
-    "lem-weil-pbc-independent-sheaf-tensor-colimits",
-    "def-pur-sheaf-tensor-product",
-    "def-weil-pbc-category-colimit"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Agent argument using Tag 03DB (lemma-limits-colimits), Tag 03EP (lemma-tensor-commute-colimits), item (2), and the tensor construction in Section 03EK (section-tensor-product)"
-   }
-  },
-  {
-   "text": "Define $s_L:R\\to L$ by $s_L(r)=r e$. For any $i$, $R$-linearity of $b_i$ gives $s_L(r)=b_i(s_i(r))$, so $s_L=b_i s_i$ and is a unital ring map. The original $R$-action on $L$ equals multiplication through $s_L$: after $b_i$, both actions send $(r,x)$ to $b_i(s_i(r)x)$. More explicitly the two $R$-linear maps $L\\to L$, for a local scalar $r$, agree on all $b_i$ locally; equivalently the two maps $R\\otimes_R L\\to L$ agree after $1\\otimes b_i$, by tensor preservation. By [lem-weil-pbc-independent-sheaf-tensor-colimits], $u\\mu$ and $\\mu_A(u\\otimes u)$ agree if they agree after every $b_i\\otimes b_j$. In a common stage $k$ both evaluate to $q_k(a_{ik}(x)a_{jk}(y))$, since $q_k$ is a ring map. Also $u(e)=q_{i_0}(1)=1$. Hence $u$ is a unital ring map as well as an $R$-linear map.",
-   "uses": [
-    "lem-weil-pbc-independent-sheaf-tensor-colimits",
-    "def-pur-sheaf-tensor-product",
-    "def-weil-sheaf-of-modules-category"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Agent argument using Tag 03DB (lemma-limits-colimits), Tag 03EP (lemma-tensor-commute-colimits), item (2), and the tensor construction in Section 03EK (section-tensor-product)"
-   }
-  },
-  {
-   "text": "The ring cocone $(b_i)$ and the given ring-colimit property of $(A,(q_i))$ now give a unique unital ring-sheaf map $v:A\\to L$ with $v q_i=b_i$. It is $R$-linear for the original module structure on $L$: choosing $i_0$ gives $v s=v q_{i_0}s_{i_0}=b_{i_0}s_{i_0}=s_L$, and consequently $v(s(r)x)=s_L(r)v(x)=r\\,v(x)$. Therefore $vu$ is a map of $R$-module sheaves, and $(vu)b_i=b_i$ for every $i$; module-colimit uniqueness implies $vu=1_L$. Both $uv$ and $1_A$ are unital ring-sheaf maps and have composite $q_i$ with every $q_i$; the given ring-colimit uniqueness implies $uv=1_A$. Thus $u$ is an isomorphism of $R$-module sheaves, carrying exactly the legs $b_i$ to $q_i$.",
-   "uses": [
-    "def-weil-pbc-category-colimit",
-    "def-weil-sheaf-of-modules-category"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Agent argument using Tag 03DB (lemma-limits-colimits), Tag 03EP (lemma-tensor-commute-colimits), item (2), and the tensor construction in Section 03EK (section-tensor-product)"
-   }
-  },
-  {
-   "text": "For a module cocone $f_i:A_i\\to M$, let $g:L\\to M$ be its unique factorization through the module colimit. Then $f=gv:A\\to M$ is $R$-linear and $fq_i=gb_i=f_i$. If another $R$-linear map $f':A\\to M$ has the same composites, $f'u$ and $g$ agree on all $b_i$, so $f'u=g$ and $f'=gv$. This proves existence and uniqueness for the specified cocone, as claimed.",
-   "uses": [
     "def-weil-pbc-category-colimit"
    ],
    "elementary": true,
    "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Agent argument using Tag 03DB (lemma-limits-colimits), Tag 03EP (lemma-tensor-commute-colimits), item (2), and the tensor construction in Section 03EK (section-tensor-product)"
+    "document": "lean/WeilConjectures/CategoryTheory/SheafAlgebrasDirectedColimitModuleCore.lean",
+    "place": "ring_toAb_preservesColimit and the preservation/reflection argument in sheafAlgebras_directed_colimit_module_core, generalized from a topological site to an essentially coefficient-small site using Mathlib CategoryTheory/Sites/Equivalence.lean"
    }
+  },
+  {
+   "text": "Package the compatible f_i as a cocone c on D. Define f = hd.desc c for the colimit proof hd of d. The equations hd.fac c i, evaluated on sections, give exactly the requested factorization. If f′ has the same sectionwise composites, extensionality of module-sheaf maps gives d.ι.app i ≫ f′ = c.ι.app i. The uniqueness clause hd.uniq then gives f′ = f.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-pur-sheaf-tensor-product",
   "def-weil-pbc-category-colimit",
-  "def-weil-presheaf-modules-sheafification",
   "def-weil-sheaf-of-modules-category",
-  "lem-weil-pbc-independent-sheaf-tensor-colimits",
   "lem-weil-pbc-module-sheaves-colimits-forgetful"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/stacks-project/sites-modules.tex",
-  "place": "Agent argument using Tag 03DB (lemma-limits-colimits), Tag 03EP (lemma-tensor-commute-colimits), item (2), and the tensor construction in Section 03EK (section-tensor-product)"
+  "document": "lean/WeilConjectures/CategoryTheory/SheafAlgebrasDirectedColimitModuleCore.lean",
+  "place": "ring_toAb_preservesColimit and the preservation/reflection argument in sheafAlgebras_directed_colimit_module_core, generalized from a topological site to an essentially coefficient-small site using Mathlib CategoryTheory/Sites/Equivalence.lean"
  },
  "mathlib_searches": [
   {
@@ -270,7 +216,6 @@
   ]
  },
  "tool_uses": [
-  "lem-weil-pbc-independent-sheaf-tensor-colimits",
   "lem-weil-pbc-module-sheaves-colimits-forgetful"
  ],
  "reviewed": {
@@ -303,5 +248,15 @@
   "group": "Q55",
   "result": "pass",
   "note": "Lean statement matches node clause by clause: site essentially small in w with independent universes u/v/w, R and A_i as CommRingCat.{w} sheaves, nonempty directed I in w, s_i as a natural transformation from the constant functor, a specified IsColimit cocone in ring sheaves, s with q_i s_i = s, and the explicit ∃! universal property in Mod(R) stated on sections. lean.statement is verbatim in the file; no statement_change. The helper siteRingSheafModule (restrictScalars of SheafOfModules.unit) is real data, and a scratch file checks r•x = s(r)x by rfl. The existing commAlgebraSheafModule works only on topological spaces; no general-site duplicate found. Edge cases: empty I correctly excluded; zero rings, non-injective maps, empty site allowed. Only proof is sorry. Docstrings give source and blueprint and all 7 proof steps. Report has Worker report and Second reading by Q55 sections. nt_compile.py --json on the snapshot: rc 0, 3.6 s, no diagnostics."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P7",
+  "result": "pass",
+  "landing": "20261018T145110-L-3643242",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
