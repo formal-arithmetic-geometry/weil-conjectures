@@ -35,8 +35,9 @@ presented, so the identity of `M` spreads out to a linear map `α : M ⟶ G(V)` 
 étale neighbourhood `(V, v)` of `s`, which we may take affine
 (`ModuleCat.exists_lift_of_isColimit_of_finitePresentation`). Through the pullback `g^* G`
 along `g : V ⟶ Y`, `α` is adjoint to a morphism `φ : M_V ⟶ g^* G` from the constant sheaf at
-`M`. Its stalk at a geometric point `r` of `V` is, through `(g^* G)_r ≅ G_{r ≫ g}`, the germ of
-`α` at `(V, r)` (`AlgebraicGeometry.Etale.sheafFiber_map_upperStarSectionHom`). A point `w` of
+`M` (`AlgebraicGeometry.Scheme.constantSheafSpread`). Its stalk at a geometric point `r` of `V`
+is, through `(g^* G)_r ≅ G_{r ≫ g}`, the germ of `α` at `(V, r)`
+(`AlgebraicGeometry.Scheme.isIso_sheafFiber_map_constantSheafSpread`). A point `w` of
 `V` generizing the image of `v` is the image of a point of `Y_(s)`
 (`AlgebraicGeometry.Scheme.exists_strictLocalizationConeAll_π_app_base_eq`); at the
 corresponding geometric point the stalk of `φ` is the cospecialization map, which is bijective.
@@ -45,6 +46,13 @@ vanishing stalks at all generizations of the image of `v`; since their vanishing
 in the constructible topology, they contain an open neighbourhood `W` of that point
 (`exists_specializes_of_isClosed_constructibleTopology_of_mem_closure`). On `W` the morphism
 `φ` is an isomorphism, so `G` is constant on `W`, an étale neighbourhood of `y`.
+
+## Main results
+
+- `AlgebraicGeometry.Scheme.exists_etale_isConstant_upperStar_of_bijective_cospecializationMap`:
+  every point of `Y` has an étale neighbourhood on which `G` is constant.
+- `AlgebraicGeometry.Scheme.isFiniteLocallyConstantSheaf_of_bijective_cospecializationMap`:
+  the criterion.
 -/
 
 @[expose] public section
@@ -95,6 +103,14 @@ def upperStarSectionHom {V : T.Etale} {U : R.Etale} (φ : V.left ⟶ U.left)
   ((upperStarLowerStarAdjunction A t).unit.app G).hom.app (op U) ≫
     ((t)^*[A].obj G).obj.map (homToPullback t φ hφ).op
 
+/-- A point `v` over `s` of an étale `T`-scheme `V`, followed by a morphism `φ : V ⟶ U` over `t`
+to an étale `R`-scheme `U`, lies over `s ≫ t`. -/
+lemma left_comp_comp_hom_eq {s : Spec (.of Ω) ⟶ T} {V : T.Etale} {U : R.Etale}
+    {φ : V.left ⟶ U.left} (hφ : φ ≫ U.hom = V.hom ≫ t) (v : (pointSmallEtale s).fiber.obj V) :
+    (v.left ≫ φ) ≫ U.hom = s ≫ t := by
+  have hv : v.left ≫ V.hom = s := CategoryTheory.Over.w v
+  rw [Category.assoc, hφ, reassoc_of% hv]
+
 /-- The germ of a pulled back section `φ^* g` at a geometric point `v` of `V` is the germ of `g`
 at `v ≫ φ`, through the identification `(t^* G)_s ≅ G_{s ≫ t}`. -/
 lemma upperStarSectionHom_toPresheafFiber_upperStarCompSheafFiberIso_hom
@@ -105,15 +121,10 @@ lemma upperStarSectionHom_toPresheafFiber_upperStarCompSheafFiberIso_hom
         (upperStarCompSheafFiberIso A t s).hom.app G =
       (pointSmallEtale (s ≫ t)).toPresheafFiber U
         (CategoryTheory.Over.homMk (U := CategoryTheory.Over.mk (s ≫ t))
-          (V := (Etale.forget R).obj U) (v.left ≫ φ) (by
-            have hv : v.left ≫ V.hom = s := CategoryTheory.Over.w v
-            change (v.left ≫ φ) ≫ U.hom = s ≫ t
-            rw [Category.assoc, hφ, reassoc_of% hv])) G.obj := by
+          (V := (Etale.forget R).obj U) (v.left ≫ φ) (left_comp_comp_hom_eq t hφ v)) G.obj := by
   set u : (pointSmallEtale (s ≫ t)).fiber.obj U := CategoryTheory.Over.homMk
-    (U := CategoryTheory.Over.mk (s ≫ t)) (V := (Etale.forget R).obj U) (v.left ≫ φ) (by
-      have hv : v.left ≫ V.hom = s := CategoryTheory.Over.w v
-      change (v.left ≫ φ) ≫ U.hom = s ≫ t
-      rw [Category.assoc, hφ, reassoc_of% hv])
+    (U := CategoryTheory.Over.mk (s ≫ t)) (V := (Etale.forget R).obj U) (v.left ≫ φ)
+    (left_comp_comp_hom_eq t hφ v)
   have hv : v.left ≫ V.hom = s := CategoryTheory.Over.w v
   have e : (pointSmallEtale s).fiber.map (homToPullback t φ hφ) v =
       ((Etale.baseChangeNbhd t (s ≫ t) ⟨s, rfl⟩).obj ⟨U, u⟩).2 := by
@@ -313,6 +324,27 @@ lemma isConstructibleSheaf_constantSheaf {X : Scheme.{u}} (M : ModuleCat.{u + 1}
       ((constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M) := ⟨⟩
   exact ⟨Stratification.trivial X, fun _ ↦ IsFiniteLocallyConstantSheaf.upperStar (𝟙 X) _⟩
 
+/-- The stalks of a constructible sheaf of modules are finitely generated: a geometric point lies
+in a stratum, through whose immersion it factors, and the stalk there is the stalk of the finite
+locally constant pullback of the sheaf to the stratum. -/
+lemma moduleFinite_sheafFiber_of_isConstructibleSheaf {X : Scheme.{u}}
+    (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [IsConstructibleSheaf F] {Ω : Type u}
+    [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ X) :
+    Module.Finite Λ (((pointSmallEtale s).sheafFiber (A := ModuleCat.{u + 1} Λ)).obj F) := by
+  obtain ⟨S, hS⟩ := IsConstructibleSheaf.exists_stratification
+    (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N) (CA := fun M : ModuleCat.{u + 1} Λ ↦ M)
+    (F := F)
+  obtain ⟨i, hi⟩ := Set.mem_iUnion.mp
+    (S.iUnion_stratum_eq_univ ▸ Set.mem_univ (s.base (IsLocalRing.closedPoint Ω)))
+  rw [← S.range_immersion] at hi
+  obtain ⟨t, rfl⟩ := IsImmersion.exists_comp_eq_of_field (S.immersion i) s hi
+  have := (hS i).toIsFiniteSheaf
+  exact (ModuleCat.isFinitelyGenerated_iff _).1
+    ((IsFiniteSheaf.isFinitelyGenerated_sheafFiber
+      (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N) (CA := fun M : ModuleCat.{u + 1} Λ ↦ M)
+      (F := (S.immersion i)^*[ModuleCat.{u + 1} Λ].obj F) Ω t).of_iso
+      ((upperStarCompSheafFiberIso (ModuleCat.{u + 1} Λ) (S.immersion i) t).app F))
+
 /-- **Local form of the specialization criterion.** Let `Y` be locally noetherian, `Λ`
 noetherian and `G` a constructible sheaf of `Λ`-modules on `Y` all of whose cospecialization
 maps are bijective. Then every point of `Y` lies in the image of an étale morphism `W ⟶ Y`
@@ -332,9 +364,7 @@ theorem exists_etale_isConstant_upperStar_of_bijective_cospecializationMap
   -- the stalk at a geometric point over `y` is finitely presented
   let s := Y.algClosurePoint y
   let M := ((pointSmallEtale s).sheafFiber (A := ModuleCat.{u + 1} Λ)).obj G
-  have : Module.Finite Λ M := (ModuleCat.isFinitelyGenerated_iff M).1
-    ((IsConstructibleSheaf.isFiniteSheaf (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)
-      (CA := fun M : ModuleCat.{u + 1} Λ ↦ M) ‹_›).isFinitelyGenerated_sheafFiber _ s)
+  have : Module.Finite Λ M := moduleFinite_sheafFiber_of_isConstructibleSheaf G s
   have : Module.FinitePresentation Λ M := Module.finitePresentation_of_finite _ _
   -- spread the identity of `M` out to an affine pointed étale neighbourhood `(V, v)`
   obtain ⟨c, α, hα⟩ := exists_comp_toPresheafFiber_eq_id G s
@@ -342,7 +372,7 @@ theorem exists_etale_isConstant_upperStar_of_bijective_cospecializationMap
   have : IsAffine V.left := c.2
   have : Etale V.hom := V.prop
   have : IsNoetherian V.left :=
-    { toIsLocallyNoetherian := LocallyOfFiniteType.isLocallyNoetherian V.hom }
+    { toIsLocallyNoetherian := LocallyOfFiniteType.isLocallyNoetherian (Y := Y) V.hom }
   let ψ := constantSheafSpread G V M α
   have : IsConstructibleSheaf ((V.hom)^*[ModuleCat.{u + 1} Λ].obj G) :=
     IsConstructibleSheaf.upperStar V.hom G
@@ -359,19 +389,23 @@ theorem exists_etale_isConstant_upperStar_of_bijective_cospecializationMap
     let t := (strictLocalization s).algClosurePoint p
     have hr : IsIso ((pointSmallEtale (t ≫ leg)).sheafFiber.map ψ) := by
       refine isIso_sheafFiber_map_constantSheafSpread G V M α (t ≫ leg)
-        (q := t ≫ strictLocalizationToBase s) (by simp [leg])
+        (q := t ≫ strictLocalizationToBase s) ((Category.assoc _ _ _).trans
+          (congrArg (t ≫ ·) (strictLocalizationConeAll_π_app_hom s _)))
         ((cospecializationNeighborhoodFunctor s t).obj
           ((AffinePointedEtaleNeighborhood.ι s).obj c)).2 rfl ?_
       have e : α ≫ (pointSmallEtale (t ≫ strictLocalizationToBase s)).toPresheafFiber V
           ((cospecializationNeighborhoodFunctor s t).obj
             ((AffinePointedEtaleNeighborhood.ι s).obj c)).2 G.obj =
           cospecializationMap s t (ModuleCat.{u + 1} Λ) G := by
-        rw [← toPresheafFiber_cospecializationMap, ← Category.assoc, hα, Category.id_comp]
+        erw [← toPresheafFiber_cospecializationMap s t _ G
+          ((AffinePointedEtaleNeighborhood.ι s).obj c)]
+        exact (Category.assoc _ _ _).symm.trans ((congrArg
+          (· ≫ cospecializationMap s t (ModuleCat.{u + 1} Λ) G) hα).trans (Category.id_comp _))
       rw [e, ConcreteCategory.isIso_iff_bijective]
       exact hG s t
     obtain ⟨hK, hC⟩ := (isIso_sheafFiber_map_iff ψ (t ≫ leg)).1 hr
-    have hpt : (t ≫ leg).base (IsLocalRing.closedPoint _) = leg.base p := by
-      rw [Scheme.Hom.comp_apply, algClosurePoint_base]
+    have hpt : (t ≫ leg).base (IsLocalRing.closedPoint _) = leg.base p :=
+      congrArg leg.base (algClosurePoint_base (strictLocalization s) p _)
     exact ⟨hpt ▸ mem_stalkZeroLocus_of_isZero_sheafFiber _ _ hK,
       hpt ▸ mem_stalkZeroLocus_of_isZero_sheafFiber _ _ hC⟩
   -- so the stalks of the kernel and cokernel vanish near the base point `v₀` of `V`
@@ -389,24 +423,46 @@ theorem exists_etale_isConstant_upperStar_of_bijective_cospecializationMap
   let U : V.left.Opens := ⟨O, hO⟩
   refine ⟨U, U.ι ≫ V.hom, inferInstance, ⟨⟨v₀, hv₀⟩, ?_⟩, ?_⟩
   · have h : c.obj.2.left ≫ V.hom = s := CategoryTheory.Over.w c.obj.2
-    rw [Scheme.Hom.comp_apply, Scheme.Opens.ι_apply, ← Scheme.Hom.comp_apply, h,
-      algClosurePoint_base]
+    exact (congrArg (fun f ↦ f.base (IsLocalRing.closedPoint _)) h).trans
+      (algClosurePoint_base _ _ _)
   -- on `U` the morphism `ψ` is an isomorphism
   have hiso : IsIso ((U.ι)^*[ModuleCat.{u + 1} Λ].map ψ) := by
     refine isIso_of_isIso_sheafFiber_map _ fun z ↦ ?_
     let a := U.toScheme.algClosurePoint z
-    rw [← NatIso.isIso_map_iff ((pointSmallEtale a).uliftSheafFiberIso _).symm,
-      ← Functor.comp_map,
-      NatIso.isIso_map_iff (upperStarCompSheafFiberIso (ModuleCat.{u + 1} Λ) U.ι a),
-      isIso_sheafFiber_map_iff]
     have hz : (a ≫ U.ι).base (IsLocalRing.closedPoint _) ∈ Z := by
       rw [Scheme.Hom.comp_apply, algClosurePoint_base]
       exact hOZ z.2
-    exact ⟨hz.1 _ _ rfl, hz.2 _ _ rfl⟩
+    have h₁ : IsIso ((pointSmallEtale (a ≫ U.ι)).sheafFiber.map ψ) :=
+      (isIso_sheafFiber_map_iff ψ (a ≫ U.ι)).2 ⟨hz.1 _ _ rfl, hz.2 _ _ rfl⟩
+    have h₂ : IsIso ((pointSmallEtale a).sheafFiber.map ((U.ι)^*[ModuleCat.{u + 1} Λ].map ψ)) :=
+      (NatIso.isIso_map_iff (upperStarCompSheafFiberIso (ModuleCat.{u + 1} Λ) U.ι a) ψ).2 h₁
+    exact (NatIso.isIso_map_iff ((pointSmallEtale a).uliftSheafFiberIso _) _).2 h₂
   exact Sheaf.isConstant_of_iso _
     ((upperStarComp (ModuleCat.{u + 1} Λ) U.ι V.hom).app G ≪≫
       (asIso ((U.ι)^*[ModuleCat.{u + 1} Λ].map ψ)).symm ≪≫
       (upperStarConstantSheafIso (ModuleCat.{u + 1} Λ) U.ι).app M)
+
+/-- **A specialization criterion for local constancy** ([SGA 4, Exp. IX, 2.11],
+[Stacks, Tag 0GJ2]). Let `Y` be a locally noetherian scheme, `Λ` a noetherian ring and `G` a
+constructible sheaf of `Λ`-modules on the small étale site of `Y`. If for every geometric point
+`s` of `Y` and every geometric point `t` of the strict localization `Y_(s)` the cospecialization
+map `G_s ⟶ G_t` (`AlgebraicGeometry.Scheme.cospecializationMap`) is bijective, then `G` is
+finite locally constant. -/
+theorem isFiniteLocallyConstantSheaf_of_bijective_cospecializationMap
+    [IsNoetherianRing Λ] {Y : Scheme.{u}} [IsLocallyNoetherian Y]
+    (G : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [IsConstructibleSheaf G]
+    (hG : ∀ {Ω : Type u} [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ Y) {Ω' : Type u}
+      [Field Ω'] [IsSepClosed Ω'] (t : Spec (.of Ω') ⟶ strictLocalization s),
+      Function.Bijective (cospecializationMap s t (ModuleCat.{u + 1} Λ) G).hom) :
+    IsFiniteLocallyConstantSheaf G := by
+  choose W i hi hy hc using exists_etale_isConstant_upperStar_of_bijective_cospecializationMap G hG
+  let 𝒰 : Cover.{u} etalePrecoverage Y := Cover.mkOfCovers Y W i (fun y ↦ ⟨y, hy y⟩) hi
+  have hlc : IsLocallyConstantSheaf G :=
+    ⟨⟨⟨𝒰, fun y ↦ (isConstant_over_iff_upperStar _ _ G).2 (hc y)⟩⟩⟩
+  exact
+    { toIsLocallyConstantSheaf := hlc
+      toIsFiniteSheaf := ⟨fun _ _ _ s ↦ (ModuleCat.isFinitelyGenerated_iff _).2
+        (moduleFinite_sheafFiber_of_isConstructibleSheaf G s)⟩ }
 
 end Criterion
 
