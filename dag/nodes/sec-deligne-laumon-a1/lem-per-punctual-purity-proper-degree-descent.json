@@ -20,9 +20,103 @@
   "def-weil-finite-type-morphism",
   "def-weil-etale-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For $T=V,W$, put $e_T=\\operatorname{vdim}(T/S)$ and $K_T=p_T^!A_S(-e_T)[-2e_T]$. The prepurity lci calculus supplies $c_T:A_T\\to K_T$. Because $f$ is dominant generically finite etale, $e_V=e_W$ and $f^!K_W\\cong K_V$. Write $g:A_V\\to f^!A_W$ for its virtual-dimension-zero class. The composition formula gives $c_V=f^!(c_W)g$. The relative-class criterion applied to the hypothesized punctual purity of $V$ says that $c_V$ is an isomorphism. Both schemes satisfy its integral, regular, finite-type and quasi-projective hypotheses, over the same complete strictly henselian trait.",
+   "uses": [
+    "lem-per-prepurity-lci-classes",
+    "lem-per-trait-relative-class-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVI, Proposition 3.5.7 proof, using Proposition 3.5.5 and Theorem 2.5.12."
+   }
+  },
+  {
+   "text": "Properness gives $Rf_!=Rf_*$ by the identity-open compactification. Transpose $g$ under $Rf_*\\dashv f^!$ to obtain $t:Rf_*A_V\\to A_W$. For $M\\in D^+(W_{\\mathrm{et}},A)$ define\n$$T_M:Rf_*f^*M\\xrightarrow{\\mathrm{PF}^{-1}}M\\otimes^LRf_*A_V\\xrightarrow{1\\otimes t}M.$$\nThe proper projection formula makes the first arrow invertible; all coefficients are finite and all schemes Noetherian. Its $Rf_*\\dashv f^!$ transpose is $a_M:f^*M\\to f^!M$. Naturality of tensor, projection and adjunction gives $f^!(b)a_M=a_Nf^*(b)$ for every $b:M\\to N$. With the unit object, $T_{A_W}=t$ and $a_{A_W}=g$, by the definition of the transpose.",
+   "uses": [
+    "def-amb-etale-compact-support",
+    "thm-amb-etale-exceptional-adjoint",
+    "lem-amb-proper-coproducts-projection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVI, Lemma 3.5.8 proof; the proper specialization of its tensor/projection construction."
+   }
+  },
+  {
+   "text": "Let $u_M:M\\to Rf_*f^*M$ be the ordinary inverse-image unit and $\\epsilon_M:Rf_*f^!M\\to M$ the exceptional counit. Set $H=Rf_*c_V$, $i_A=u_{A_W}$, $r_A=t$, $i_K=Rf_*a_{K_W}\\,u_{K_W}$ and $r_K=\\epsilon_{K_W}$, identifying $f^!K_W=K_V$. Naturality of $a$ at $c_W$ and of $u$ gives\n$$H i_A=i_Kc_W.$$\nIndeed $a_{K_W}f^*c_W=f^!c_Wg=c_V$. Naturality of $\\epsilon$ gives\n$$r_KH=\\epsilon_{K_W}Rf_*(f^!c_Wg)=c_W\\epsilon_{A_W}Rf_*g=c_Wr_A.$$\nThus $c_W$ is connected to $H$ by a morphism of arrows in each direction. These equations use only naturality and the composition identity established in step 1.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVI, the two commutative diagrams in the proof of Proposition 3.5.7, printed pp.249--250."
+   }
+  },
+  {
+   "text": "Choose the nonempty open $j:U\\hookrightarrow W$ in the hypothesis, where $f_U:f^{-1}U\\to U$ is finite etale of degree $d$. Open exchange for compact supports, its paired right-adjoint restriction, and compatibility of projection maps with restriction identify the restrictions of $T_M,u_M,\\epsilon_M$ with those for $f_U$. The classes restrict by the prepurity lci calculus. The finite-etale ambidexterity statement therefore identifies both restricted composites $j^*(r_Ai_A)$ and $j^*(r_Ki_K)$ with multiplication by $d$, the latter for the complex $j^*K_W$. This is a derived-category identity for the actual counits, rather than a claim that arbitrary derived morphisms can be tested on stalk maps.",
+   "uses": [
+    "lem-amb-shriek-open-exchange-adjoint",
+    "lem-amb-shriek-projection-open-restriction",
+    "lem-per-prepurity-lci-classes",
+    "lem-per-finite-etale-derived-ambidexterity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVI, Lemmas 3.5.9--3.5.10, reduction to a nonempty finite-etale open and its adjunction calculation."
+   }
+  },
+  {
+   "text": "The scheme $W$ is integral, hence nonempty and connected, and so is $U$. Since $A_W$ is concentrated in degree zero,\n$$\\operatorname{End}_{D^+(W_{\\mathrm{et}},A)}(A_W)=\\operatorname{Hom}_{\\mathrm{Sh}_A}(A_W,A_W)=\\Gamma(W,A_W)=A.$$\nThe last equality holds because a locally constant function from a connected scheme to the finite discrete set $A$ is constant. Its restriction to $U$ is the identity on $A$. Consequently step 4 gives $r_Ai_A=d\\operatorname{id}_{A_W}$. The scalar-restriction lemma applies to $K_W$ without assuming purity of $W$; its restriction is injective, and step 4 gives $r_Ki_K=d\\operatorname{id}_{K_W}$. No statement about the scalar endomorphisms of the constant sheaf is being used to assert scalar endomorphisms of an arbitrary complex.",
+   "uses": [
+    "lem-per-trait-dualizing-scalar-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVI, Lemma 3.5.9 proof, printed p.250, scalar detection for the two endomorphisms."
+   }
+  },
+  {
+   "text": "Since $\\ell\\nmid d$, multiplication by $d$ is a unit of $A=\\mathbf F_\\ell$; write its inverse as $b$. The map $H=Rf_*c_V$ is invertible because $c_V$ is, and functors preserve inverses. Define $h=b\\,r_AH^{-1}i_K:K_W\\to A_W$. The equations of steps 3 and 5 imply\n$$hc_W=b\\,r_AH^{-1}Hi_A=b\\,r_Ai_A=1,$$\n$$c_Wh=b\\,r_KHH^{-1}i_K=b\\,r_Ki_K=1.$$\nThus $c_W$ is an isomorphism, with the displayed explicit inverse. This is the retract computation; it needs neither an abstract idempotent-completeness theorem nor a flatness hypothesis on $f$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVI, Proposition 3.5.7 proof after the second diagram, and Lemma 3.5.9."
+   }
+  },
+  {
+   "text": "Apply the reverse implication of the relative-class criterion to $W$. Invertibility of $c_W$ implies that, for every $w\\in W$, the localized Kummer map $A_{\\kappa(w)}\\to j_w^!A_{W_w}(d_w)[2d_w]$ is an isomorphism. This is precisely the definition of punctual purity in the item, so $W$ is punctually pure.",
+   "uses": [
+    "lem-per-trait-relative-class-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVI, Proposition 3.5.5 applied at the end of Proposition 3.5.7."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-per-prepurity-lci-classes",
+  "lem-per-trait-relative-class-criterion",
+  "def-amb-etale-compact-support",
+  "thm-amb-etale-exceptional-adjoint",
+  "lem-amb-proper-coproducts-projection",
+  "lem-amb-shriek-open-exchange-adjoint",
+  "lem-amb-shriek-projection-open-restriction",
+  "lem-per-finite-etale-derived-ambidexterity",
+  "lem-per-trait-dualizing-scalar-restriction"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose XVI, Proposition 3.5.7, Lemmas 3.5.8--3.5.10, printed pp.249--250."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -58,10 +152,52 @@
    "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.Etale.exists_subalgebra_fg\", \"module\": \"Mathlib.RingTheory.Smooth.NoetherianDescent\", \"type\": \"[Etale A B] :\\n  ∃ (A₀ : Subalgebra R A) (B₀ : Type u) (_ : CommRing B₀) (_ : Algebra A₀ B₀),\\n    A₀.FG ∧ Etale A₀ B₀ ∧ Nonempty (B ≃ₐ[A] A ⊗[A₀] B₀)\", \"doc\": \"For any étale algebra $ B $ over a commutative ring $ A $, there exists a finitely generated $ R $-subalgebra $ A_0 \\\\subseteq A $, an étale $ A_0 $-algebra $ B_0 $, and an isomorphism of $ A $-algebra\"}\n  {\"name\": \"Algebra.IsEtaleAt.comp\", \"module\": \"Mathlib.RingTheory.Etale.Locus\", \"type\": \"(p : Ideal A) (P : Ideal B) [P.LiesOver p] [p.IsPrime] [P.IsPrime] [IsEtaleAt R p] [IsEtaleAt A P] : IsEtaleAt R P\", \"doc\": \"If $ A $ is étale over $ R $ at a prime ideal $ \\\\mathfrak{p} $, and $ B $ is étale over $ A $ at a prime ideal $ \\\\mathfrak{P} $ lying over $ \\\\mathfrak{p} $, then $ B $ is étale over $ R $ at $ \\\\mathfr\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"(X : Scheme.{u}) : Type _\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"Algebra.exists_etale_of_isEtaleAt\", \"module\": \"Mathlib.RingTheory.Etale.Locus\", \"type\": \"(P : Ideal A) [P.IsPrime] [IsEtaleAt R P] : ∃ f ∉ P, Algebra.Etale R (Localization.Away f)\", \"doc\": \"If an $ R $-algebra $ A $ is étale at a prime ideal $ \\\\mathfrak{p} $, then there exists an element $ f \\\\notin \\\\mathfrak{p} $ such that the localization of $ A $ away from $ f $ is an étale $ R $-algeb\"}\n  {\"name\": \"Algebra.Etale.formallyEtale\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A} [self : Algebra.Etale R A],\\n  Algebra.FormallyEtale R A\", \"doc\": \"If $ A $ is an étale algebra over a commutative ring $ R $, then $ A $ is formally étale over $ R $. This establishes that the property of being étale implies formal étaleness in the context of commut\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y)\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"Algebra.etaleLocus\", \"module\": \"Mathlib.RingTheory.Etale.Locus\", \"type\": \": Set (PrimeSpectrum A)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ such that the algebra $A$ over the commutative ring $R$ is étale at $\\\\mathfrak{p}$. This means the localization of $A$ at $\\\\mathfrak{p\"}\n  {\"name\": \"RingHom.Etale.propertyIsLocal\", \"module\": \"Mathlib.RingTheory.RingHom.Etale\", \"type\": \": PropertyIsLocal Etale\", \"doc\": \"The property of a ring homomorphism between commutative rings being étale is local, meaning it can be checked after localization or on an open cover.\"}\n",
    "date": "2026-10-19",
    "verdict": "no match: inspected signatures concern general derived-category exact triangles, scheme morphisms, local algebra, or unrelated names; none supplies the stated etale Gysin, punctual-purity, or logarithmic assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a proper generically finite etale morphism of integral regular schemes the composite of the constant sheaf unit with the Gysin trace is multiplication by its generic degree",
+   "results": "Actual recorded hits: AlgebraicGeometry.Scheme.Hom.ι_toNormalization, AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage, AlgebraicGeometry.Scheme.Hom.ι_toNormalization_assoc, AlgebraicGeometry.Scheme.Hom.ι_fromNormalization_assoc, AlgebraicGeometry.Scheme.Hom.ι_fromNormalization, AlgebraicGeometry.Scheme.comp_appTop_assoc, AlgebraicGeometry.Scheme.Hom.normalizationDiagram, AlgebraicGeometry.StructureSheaf.toOpen_comp_comap",
+   "date": "2026-10-18",
+   "verdict": "no match: returned scheme normalization, etale algebra, structural module adjunctions, or condensed locally constant functors; none has the stated ordinary etale Gysin or dualizing assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "Gysin|punctual.*purity|relative.*dualizing|fundamentalClass",
+   "results": "Actual recorded hits: Mathlib/CategoryTheory/Sites/Canonical.lean, Mathlib/CategoryTheory/Sites/Canonical.lean, Mathlib/CategoryTheory/Sites/Canonical.lean",
+   "date": "2026-10-18",
+   "verdict": "no match: no relevant declaration; any finestTopologySingle hit is a substring collision"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale Gysin morphism for regular schemes over a trait and punctual cohomological purity",
+   "results": "Actual recorded hits: AlgebraicGeometry.IsEtale, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.IsEtale.instIsSmooth, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.IsEtale.of_comp, RingHom.Etale, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.Scheme.etaleTopology",
+   "date": "2026-10-18",
+   "verdict": "no match: returned etale morphism definitions or general sheaf pushforward adjunctions, without the finite-etale ambidexterity or Gysin identification"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an integral regular quasi projective scheme over a strictly henselian trait, every endomorphism of the normalized relative etale dualizing complex is a unique scalar and restriction to a dense open is injective",
+   "results": "Actual recorded hits: AlgebraicGeometry.Scheme.Hom.normalization.hom_ext, AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization, AlgebraicGeometry.Scheme.Hom.normalizationDiagram, AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization, AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage, AlgebraicGeometry.Scheme.Hom.ι_toNormalization, AlgebraicGeometry.Scheme.Hom.normalizationDesc",
+   "date": "2026-10-18",
+   "verdict": "no match: returned scheme normalization, etale algebra, structural module adjunctions, or condensed locally constant functors; none has the stated ordinary etale Gysin or dualizing assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "Gysin|absolutePurity|punctuallyPure|dualizingComplex",
+   "results": "Actual recorded hits: ; Mathlib/AlgebraicGeometry",
+   "date": "2026-10-18",
+   "verdict": "no match: no relevant declaration; any finestTopologySingle hit is a substring collision"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"fundamentalClass\"",
+   "results": "Actual recorded hits: ",
+   "date": "2026-10-18",
+   "verdict": "no match: no relevant declaration; any finestTopologySingle hit is a substring collision"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-gabber-regular-pair-purity",
@@ -85,5 +221,49 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-punctual-purity-proper-degree-descent",
+  "worker": "stage1",
+  "summary": "Followed the proper-degree Gysin retract argument; distinguished prepurity classes from circular absolute-purity isomorphisms; exposed the trait relative-class criterion, dualizing scalar restriction and ordinary-etale finite-etale adjunction comparison; wrote the inverse explicitly. Statement unchanged.",
+  "blueprint": "Ancestor lem-per-artin-gabber-affine-curve, proof Step 3, regular finite-torsion duality input through lem-per-gabber-regular-pair-purity: the proper invertible-degree descent component follows ILO XVI 3.5.7.",
+  "tool_uses": [
+   {
+    "node": "def-amb-etale-compact-support",
+    "why": "Generic ordinary-etale compact-support adjunction/projection/restriction tool over a Noetherian base; the perverse unit does not supply this formalism and its geometric route is unchanged."
+   },
+   {
+    "node": "thm-amb-etale-exceptional-adjoint",
+    "why": "Generic ordinary-etale compact-support adjunction/projection/restriction tool over a Noetherian base; the perverse unit does not supply this formalism and its geometric route is unchanged."
+   },
+   {
+    "node": "lem-amb-proper-coproducts-projection",
+    "why": "Generic ordinary-etale compact-support adjunction/projection/restriction tool over a Noetherian base; the perverse unit does not supply this formalism and its geometric route is unchanged."
+   },
+   {
+    "node": "lem-amb-shriek-open-exchange-adjoint",
+    "why": "Generic ordinary-etale compact-support adjunction/projection/restriction tool over a Noetherian base; the perverse unit does not supply this formalism and its geometric route is unchanged."
+   },
+   {
+    "node": "lem-amb-shriek-projection-open-restriction",
+    "why": "Generic ordinary-etale compact-support adjunction/projection/restriction tool over a Noetherian base; the perverse unit does not supply this formalism and its geometric route is unchanged."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-amb-etale-compact-support",
+  "thm-amb-etale-exceptional-adjoint",
+  "lem-amb-proper-coproducts-projection",
+  "lem-amb-shriek-open-exchange-adjoint",
+  "lem-amb-shriek-projection-open-restriction"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q41-0225a2887",
+  "group": "Q41",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q41-0225a2887 (reviewer sub-agent of L); spot-checked: PASS, no fixes. Item statement and stmt_deps are byte-identical to base (Q53 snapshot), so no target is weakened. The 7 steps follow ILO XVI 3.5.7-3.5.10. Steps 1/7 use the class node and the 3.5.5 criterion. Step 2 builds a_M from the 3.5.8 tensor/projection construction (proper f, identity-open compactification). I recomputed the step-3 squares and the step-6 inverse by hand. Step 4 restricts to U through the amb open-exchange and projection nodes plus finite-etale ambidexterity. Step 5 uses End(K_W)=A. All four new nodes are true, unsplit and statement-only, and none is a duplicate. lem-per-prepurity-lci-classes is ILO 2.5.4-2.5.12, which does not use purity; it differs from lem-per-regular-gysin-calculus and lem-per-absolute-gysin-purity, which assert isomorphisms and reach the item, so citing them would close a cycle. lem-per-trait-relative-class-criterion is ILO 3.5.5; on the closed fibre it reduces to purity of the trait (3.5.1). lem-per-trait-dualizing-scalar-restriction (ILO 3.5.9 biduality) differs from the potential-dualizing nodes, which need a pinned complex. lem-per-finite-etale-derived-ambidexterity (ILO 3.5.10, Stacks 03SE/04HN) overlaps lem-weil-pbc-finite-etale-trace-degree only on the termwise degree identity. I checked edge cases: closed point with e=-1, d=0 or 1 sheets, ell dividing d, disconnected T. No cycles. No SGA in any delivered file. The five amb compact-support tool_uses are accepted as generic formalism. Batch-5 flags: every flagged reached node (lem-trf-finite-ring-section-deformation, lem-trf-bounded-below-derived-adjunction, lem-pod-lisse-module-sheaves-as-module-objects) is already in the batch-5 closure without this delivery, which adds only its 4 new nodes. All are generic (DNC smooth orientation, abstract derived adjunction, Stacks 0DV5 lisse module objects), not steps of the trace formula or Poincare duality, so all accepted. Advisory: harmless over-cited def-weil-proper-morphism in two new nodes; future splits should cite lem-per-regular-lci-geometric-calculus and lem-weil-pbc-finite-etale-trace-degree."
  }
 }
