@@ -54,6 +54,39 @@ lemma _root_.CategoryTheory.Abelian.LeftResolution.ιTotal_totalπ_f {C D : Type
           (ComplexShape.up ℤ) n 0 n (by simp) ≫ (singleRow₀ObjTotal K.obj).hom.f n := by
   simp [Abelian.LeftResolution.totalπ, Abelian.LeftResolution.totalπ', mapTotalIso]
 
+/-- The quasi-isomorphism `Φ(K) ⟶ K` attached to a left resolution is a termwise epimorphism:
+on the summand `(n, 0)` of `Φ(K)ⁿ` it is the epimorphism `π : F(Kⁿ) ⟶ Kⁿ` of the resolution. -/
+lemma _root_.CategoryTheory.Abelian.LeftResolution.epi_totalπ_f {C D : Type*} [Category* C]
+    [Category* D] [Preadditive C] [HasZeroObject C] [HasFiniteCoproducts C] [Abelian D]
+    {ι : C ⥤ D} [ι.Full] [ι.Faithful] [ι.Additive] (Λ : Abelian.LeftResolution ι)
+    [Λ.F.PreservesZeroMorphisms] (K : CochainComplex.Minus D) (n : ℤ) :
+    Epi ((Λ.totalπ K).f n) := by
+  have h := Λ.ιTotal_totalπ_f K n
+  have : IsIso (((singleRow D (ComplexShape.up ℤ) (ComplexShape.up ℤ) 0).obj K.obj).ιTotal
+      (ComplexShape.up ℤ) n 0 n (by simp)) := by
+    rw [singleRow_ιTotal]
+    infer_instance
+  have : Epi (((Λ.bicomplexπ.app K.obj).f n).f 0) := by
+    change Epi ((Λ.cochainComplexπ (K.obj.X n)).f 0)
+    rw [Abelian.LeftResolution.cochainComplexπ_f_0]
+    infer_instance
+  have : Epi (ι.map ((Λ.bicomplexFunctor.obj K.obj).ιTotal (ComplexShape.up ℤ) n 0 n
+      (by simp)) ≫ (Λ.totalπ K).f n) := by
+    rw [h]
+    infer_instance
+  exact epi_of_epi (ι.map ((Λ.bicomplexFunctor.obj K.obj).ιTotal (ComplexShape.up ℤ) n 0 n
+    _)) ((Λ.totalπ K).f n)
+
+/-- The resolution `Φ(K)` of a complex `K` strictly concentrated in degrees `≤ N` is strictly
+concentrated in degrees `≤ N`. -/
+lemma _root_.CategoryTheory.Abelian.LeftResolution.isStrictlyLE_minusResolutionFunctor_obj
+    {C D : Type*} [Category* C] [Category* D] [Preadditive C] [HasZeroObject C]
+    [HasFiniteCoproducts C] [Abelian D] {ι : C ⥤ D} [ι.Full] [ι.Faithful]
+    (Λ : Abelian.LeftResolution ι) [Λ.F.PreservesZeroMorphisms] (K : CochainComplex.Minus D)
+    (N : ℤ) [K.obj.IsStrictlyLE N] : (Λ.minusResolutionFunctor.obj K).obj.IsStrictlyLE N :=
+  inferInstanceAs (CochainComplex.IsStrictlyLE
+    ((Λ.bicomplexFunctor.obj K.obj).total (ComplexShape.up ℤ)) N)
+
 /-- Blueprint `lem-kun-bounded-flat-replacement`: Functorial bounded-above flat replacement.
 
 There is a functor `Φ` on bounded above complexes of étale sheaves on `X` together with a
@@ -73,29 +106,18 @@ theorem exists_boundedAbove_flat_replacement :
   let Λ : Abelian.LeftResolution
       (ObjectProperty.flat.ι : _ ⥤ Sheaf X.smallEtaleTopology A) :=
     (Classical.arbitrary _ : Abelian.LeftResolution _).reduced
+  have : Λ.F.PreservesZeroMorphisms :=
+    inferInstanceAs (Abelian.LeftResolution.reduced _).F.PreservesZeroMorphisms
   refine ⟨Λ.minusResolutionFunctor ⋙ ObjectProperty.flat.ι.mapCochainComplexMinus,
     Λ.minusResolutionNatTrans, fun K n ↦ ((Λ.minusResolutionFunctor.obj K).obj.X n).property,
     fun K ↦ inferInstance, fun K n ↦ ?_, fun K N hK ↦ ?_⟩
   · change Epi ((Λ.totalπ K).f n)
-    have h := Λ.ιTotal_totalπ_f K n
-    have : IsIso (((singleRow (Sheaf X.smallEtaleTopology A) (ComplexShape.up ℤ)
-        (ComplexShape.up ℤ) 0).obj K.obj).ιTotal (ComplexShape.up ℤ) n 0 n (by simp)) := by
-      rw [singleRow_ιTotal]
-      infer_instance
-    have : Epi (((Λ.bicomplexπ.app K.obj).f n).f 0) := by
-      dsimp [Abelian.LeftResolution.bicomplexπ]
-      rw [Abelian.LeftResolution.cochainComplexπ_f_0]
-      infer_instance
-    have : Epi (ObjectProperty.flat.ι.map ((Λ.bicomplexFunctor.obj K.obj).ιTotal
-        (ComplexShape.up ℤ) n 0 n (by simp)) ≫ (Λ.totalπ K).f n) := by
-      rw [h]
-      infer_instance
-    exact epi_of_epi _ ((Λ.totalπ K).f n)
+    exact Λ.epi_totalπ_f K n
   · rw [CochainComplex.isStrictlyLE_iff] at hK ⊢
     intro i hi
     have : CochainComplex.IsStrictlyLE K.obj N := (CochainComplex.isStrictlyLE_iff _ _).2 hK
+    have := Λ.isStrictlyLE_minusResolutionFunctor_obj K N
     exact ObjectProperty.flat.ι.map_isZero
-      (CochainComplex.isZero_of_isStrictlyLE ((Λ.bicomplexFunctor.obj K.obj).total
-        (ComplexShape.up ℤ)) N i (by omega))
+      (CochainComplex.isZero_of_isStrictlyLE (Λ.minusResolutionFunctor.obj K).obj N i (by omega))
 
 end AlgebraicGeometry.Etale

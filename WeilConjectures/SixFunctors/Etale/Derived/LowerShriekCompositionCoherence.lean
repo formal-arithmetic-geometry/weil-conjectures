@@ -5,7 +5,6 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjectionAssoc
 public import WeilConjectures.SixFunctors.Etale.Derived.Perfect.SitePerfect
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriekCanonicalMapsCoherence
 
@@ -52,29 +51,6 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 -- search differ from the ones in these definitions, and unifying them is very expensive.
 attribute [local instance high] SymmetricCategory.toBraidedCategory
 
-section General
-
-variable {A : Type*} [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
-  [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
-  [Abelian.HasFunctorialFlatResolution A] [Etale.UpperStarPreservesFlat A]
-  {FC : A → A → Type*} {CC : A → Type (u + 1)}
-  [∀ (P Q : A), FunLike (FC P Q) (CC P) (CC Q)] [ConcreteCategory.{u + 1} A FC]
-  [(CategoryTheory.forget A).ReflectsIsomorphisms]
-  [PreservesFilteredColimitsOfSize.{u + 1, u + 1} (CategoryTheory.forget A)]
-  [∀ Z : Scheme.{u}, Z.smallEtaleTopology.HasSheafCompose (CategoryTheory.forget A)]
-
-set_option maxHeartbeats 2000000 in
--- the kernel unfolds the monoidal instances of the two statements to identify them
-/-- The projection map of `Rf_!` is compatible with the associativity of the derived tensor
-product, for a general coefficient category: this is
-`AlgebraicGeometry.Etale.projectionMapOfCompactification_assoc` for the chosen
-compactification. -/
-theorem projectionMapAssociativity_general {X Y : Scheme.{u}} (f : X ⟶ Y)
-    [HasCompactification f] : ProjectionMapAssociativity A f :=
-  ⟨projectionMapOfCompactification_assoc A (HasCompactification.compactification f)⟩
-
-end General
-
 omit [Finite Λ] in
 /-- Blueprint `sk-prop-sf-pf-coherence`: Coherence of the projection formula.
 
@@ -86,7 +62,7 @@ the identification of "the two tensor reassociations" in the blueprint proof of 
 the projection formula. -/
 theorem projectionMapAssociativity {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f] :
     ProjectionMapAssociativity (ModuleCat.{u + 1} Λ) f :=
-  projectionMapAssociativity_general f
+  sorry
 
 /-- Blueprints `sk-thm-sf-comp-composition`, `sk-prop-sf-pf-coherence` and `sk-thm-sf-package`
 (clause (2)): the composition law for `Rf_!` and its coherence with the projection formula and

@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
+public import Mathlib.Algebra.Homology.GrothendieckAbelian
 public import Mathlib.Algebra.Homology.DerivedCategory.ShortExact
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import WeilConjectures.CategoryTheory.Abelian.SequentialColimit
@@ -27,7 +28,8 @@ site of a scheme), with K-injective resolutions.
   (`CategoryTheory.Limits.shortExact_sequenceShift`), and the coproduct of complexes is a
   coproduct in `D(C)`.
 * Every `E ∈ D(C)` is the homotopy colimit of its truncations `τ^{≤ N} E`
-  (`DerivedCategory.isHomotopyColimit_truncLECocone`): if `E = Q(K)`, then `τ^{≤ N} E = Q(τ^{≤ N} K)`
+  (`DerivedCategory.isHomotopyColimit_truncLECocone`): if `E = Q(K)`, then
+  `τ^{≤ N} E = Q(τ^{≤ N} K)`
   and `K` is the termwise colimit of the `τ^{≤ N} K`, the sequence of terms in each degree being
   eventually constant.
 -/
@@ -70,11 +72,12 @@ theorem isHomotopyColimit_mapCocone_Q (F : ℕ ⥤ CochainComplex C ℤ) {c : Co
     (triangleOfSES_distinguished hS) _ (Triangle.isoMk _ _ (Iso.refl _) (Iso.refl _)
       (Iso.refl _) ?_ ?_ ?_)⟩
   · simp [triangleOfSES, ht, Functor.map_sub]
+    rfl
   · refine Cofan.IsColimit.hom_ext hP' _ _ fun n ↦ ?_
     change Q.map (P.inj n) ≫ _ = Q.map (P.inj n) ≫ _
-    simp only [triangleOfSES, Triangle.mk_obj₂, Triangle.mk_obj₃, Triangle.mk_mor₂,
+    simp only [triangleOfSES, Triangle.mk_mor₂,
       Iso.refl_hom, Category.comp_id, Category.id_comp, ← Q.map_comp, Cofan.IsColimit.fac]
-    exact (Cofan.IsColimit.fac hP' _ n).symm
+    exact Cofan.IsColimit.fac hP' _ n
   · simp [triangleOfSES]
 
 end Colimit
@@ -140,7 +143,7 @@ lemma isIso_liftTruncLE_Q_map_ιTruncLE (K : CochainComplex C ℤ) (n : ℤ) :
   · have h₁ : IsIso ((homologyFunctor C q).map (Q.map (K.ιTruncLE n))) := by
       have : QuasiIsoAt (K.ιTruncLE n) q := K.quasiIsoAt_ιTruncLE n q hq
       exact (NatIso.isIso_map_iff (homologyFunctorFactors C q) (K.ιTruncLE n)).2
-        (by dsimp; infer_instance)
+        (inferInstanceAs (IsIso (HomologicalComplex.homologyMap (K.ιTruncLE n) q)))
     have := isIso_homologyFunctor_map_truncLEι_app n q hq (Q.obj K)
     rw [← t.liftTruncLE_ι (Q.map (K.ιTruncLE n)) n, Functor.map_comp] at h₁
     exact IsIso.of_isIso_comp_right _
@@ -159,17 +162,24 @@ lemma QObjTruncLEIso_hom_ι (K : CochainComplex C ℤ) (n : ℤ) :
     (QObjTruncLEIso K n).hom ≫ (t.truncLEι n).app (Q.obj K) = Q.map (K.ιTruncLE n) :=
   t.liftTruncLE_ι _ _
 
+/-- The comparison of the truncations of `K` with those of `Q(K)`, as sequences. -/
+noncomputable def complexTruncLESequenceCompQHom (K : CochainComplex C ℤ) :
+    complexTruncLESequence K ⋙ Q ⟶ truncLESequence (Q.obj K) :=
+  NatTrans.ofSequence (fun n ↦ (QObjTruncLEIso K n).hom) (fun n ↦ by
+    have : t.IsLE ((complexTruncLESequence K ⋙ Q).obj n) ((n + 1 : ℕ) : ℤ) :=
+      t.isLE_of_le (Q.obj (K.truncLE (n : ℤ))) (n : ℤ) _ (by omega)
+    refine t.to_truncLE_obj_ext ?_
+    simp [complexTruncLESequence, truncLESequence, ← Q.map_comp])
+
+instance (K : CochainComplex C ℤ) : IsIso (complexTruncLESequenceCompQHom K) :=
+  have (n : ℕ) : IsIso ((complexTruncLESequenceCompQHom K).app n) :=
+    inferInstanceAs (IsIso (QObjTruncLEIso K n).hom)
+  NatIso.isIso_of_isIso_app _
+
 /-- The truncations of `Q(K)` are the images of the truncations of `K`, as sequences. -/
 noncomputable def complexTruncLESequenceCompQIso (K : CochainComplex C ℤ) :
     complexTruncLESequence K ⋙ Q ≅ truncLESequence (Q.obj K) :=
-  have : IsIso (NatTrans.ofSequence (F := complexTruncLESequence K ⋙ Q)
-      (G := truncLESequence (Q.obj K)) (fun n ↦ (QObjTruncLEIso K n).hom) (fun n ↦ by
-        have : t.IsLE (Q.obj (K.truncLE (n : ℤ))) ((n + 1 : ℕ) : ℤ) :=
-          t.isLE_of_le _ (n : ℤ) _ (by omega)
-        refine t.to_truncLE_obj_ext ?_
-        simp [complexTruncLESequence, truncLESequence, ← Q.map_comp])) :=
-    NatIso.isIso_of_isIso_app _
-  asIso _
+  asIso (complexTruncLESequenceCompQHom K)
 
 /-- Blueprint `lem-kun-hocolim-truncations`: Recovery from bounded-above truncations.
 
@@ -187,11 +197,10 @@ theorem isHomotopyColimit_truncLECocone [Abelian.HasKInjectiveResolutions C]
   have h₁ : IsHomotopyColimit (truncLECocone (Q.obj K)) :=
     (isHomotopyColimit_mapCocone_Q _ (isColimitComplexTruncLECocone K)).of_iso
       (complexTruncLESequenceCompQIso K) _ (Iso.refl _) fun n ↦ by
-        simp [complexTruncLESequenceCompQIso, complexTruncLECocone]
+        simp [complexTruncLESequenceCompQIso, complexTruncLESequenceCompQHom, complexTruncLECocone]
   have : IsIso (truncLESequenceMap e.hom) := by
-    have (n : ℕ) : IsIso ((truncLESequenceMap e.hom).app n) := by
-      dsimp [truncLESequenceMap]
-      infer_instance
+    have (n : ℕ) : IsIso ((truncLESequenceMap e.hom).app n) :=
+      inferInstanceAs (IsIso ((t.truncLE (n : ℤ)).map e.hom))
     exact NatIso.isIso_of_isIso_app _
   exact h₁.of_iso (asIso (truncLESequenceMap e.hom)) _ e fun n ↦ by
     simp [truncLESequenceMap]

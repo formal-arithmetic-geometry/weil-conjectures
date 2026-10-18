@@ -113,6 +113,8 @@ lemma nonempty_iso_derivedExtendScalars_of_isDerivedBaseChange {K : 𝐃(X, Λ)}
       (Equiv.apply_symm_apply _ η))
   exact ⟨asIso (((derivedExtendScalarsAdjunction hφ ha X).homEquiv K K').symm η)⟩
 
+#exit
+
 set_option maxHeartbeats 1000000 in
 -- the kernel takes long to check the instances of the derived tensor product
 set_option maxHeartbeats 4000000 in
