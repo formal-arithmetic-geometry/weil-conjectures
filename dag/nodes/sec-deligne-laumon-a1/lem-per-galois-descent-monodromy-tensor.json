@@ -24,9 +24,139 @@
   "def-pur-sheaf-tensor-product",
   "def-weil-pbc-module-tensor-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work with small representatives in a universe containing all the sites and coefficients [def-weil-size-convention]. By clauses (a),(b) of [lem-weil-pbc-finite-etale-trace-degree], the finite etale map $c$ has a constant degree $d$ and every geometric fibre has $d$ points. The chosen $\\bar t$ shows $d>0$, so $c$ is surjective and is a singleton covering in [def-weil-pbc-etale-site]. By [lem-weil-pbc-etale-site-localization-open] its slice is $T_{\\mathrm{et}}$, and likewise for the overlaps. Use [lem-weil-pbc-etale-inverse-image-restriction] to identify $c^{-1}F$ with restriction $F|_T$; naturality with respect to each constant scalar makes this identification $R$-linear. By [lem-weil-pbc-site-constant-restriction], constants restrict to constants with the same unit sections, also on every overlap. These identifications will be used below.",
+   "uses": [
+    "def-weil-size-convention",
+    "lem-weil-pbc-finite-etale-trace-degree",
+    "def-weil-pbc-etale-site",
+    "lem-weil-pbc-etale-site-localization-open",
+    "lem-weil-pbc-etale-inverse-image-restriction",
+    "lem-weil-pbc-site-constant-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00XZ (localization), Tag 00XR (restriction); etale-cohomology.tex Tag 03SH (constant finite etale degree)."
+   }
+  },
+  {
+   "text": "The finite etale category with its geometric fibre is a Galois category by [lem-fet-galois-category], and $T$ is a connected object by [lem-galois-finite-etale-connected-object]. Thus [lem-galois-transitive] gives transitivity of $\\Pi$ on $|T_{\\bar s}|$. The deck group $G$ acts simply transitively by [def-galois-object]. For $g\\in\\Pi$, define $a_g\\in G$ uniquely by $g\\bar t=a_g\\bar t$. Naturality in [def-galois-fibre-functor] gives $g(a\\bar x)=a(g\\bar x)$ for every deck map $a$. Consequently $(gh)\\bar t=a_h a_g\\bar t$, so $a_{gh}=a_h a_g$. Put $\\theta(g)=a_g^{-1}$. Then $\\theta(gh)=\\theta(g)\\theta(h)$ and $\\theta(1)=1$. Transitivity gives surjectivity. The orbit map $g\\mapsto g\\bar t$ is continuous into the finite discrete fibre; the bijection $a\\mapsto a\\bar t$ and inversion show $\\theta$ is continuous. Its kernel is the stabilizer of $\\bar t$, identified with $c_*\\pi_1(T,\\bar t)$ by the finite-etale clause of [thm-galois-fundamental]. This construction uses only $c,\\bar t$.",
+   "uses": [
+    "lem-fet-galois-category",
+    "lem-galois-finite-etale-connected-object",
+    "lem-galois-transitive",
+    "def-galois-object",
+    "def-galois-fibre-functor",
+    "thm-galois-fundamental"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Section 03SF (section-finite-etale-under-galois), Section 0BMQ (section-galois), Lemma 0BN3 (lemma-tame); Theorem 0BND for the finite-etale fibre equivalence."
+   }
+  },
+  {
+   "text": "Write $L=T_{c,R}(V)$ and $e_V:L|_T\\xrightarrow{\\sim}V_T$ for its descent trivialization [lem-per-galois-cover-module-descent]. Since $c^{-1}L$ is constant, the converse finite-etale-locality clause of [lem-per-torsion-local-system-monodromy] makes $L$ a local system. Let $s_v=e_V^{-1}(v)\\in L(T)$, where $v$ is the global constant section. By [lem-weil-pbc-constant-sheaf-geometric-stalk], the map $v\\mapsto\\operatorname{germ}_{\\bar t}(v)$ is an isomorphism on underlying abelian groups; it commutes with every scalar $r$ because both constants and germs commute with the map $v\\mapsto rv$. Taking the stalk of $e_V^{-1}$ and using the stalk identification stipulated in the statement therefore gives the $R$-linear isomorphism $\\gamma_V(v)=\\operatorname{germ}_{\\bar t}(s_v)$. For an equivariant map $f:V\\to V'$, its descended morphism restricts to the constant map $f$, so it takes $s_v$ to $s_{f(v)}$. Taking germs proves the asserted naturality.",
+   "uses": [
+    "lem-per-galois-cover-module-descent",
+    "lem-per-torsion-local-system-monodromy",
+    "lem-weil-pbc-constant-sheaf-geometric-stalk"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVII, 7.2.1--7.2.4, pp. 301--302; constant stalk map: etale-cohomology.tex Tag 04FM."
+   }
+  },
+  {
+   "text": "Unpack descent of the given left $G$-action using the convention $\\phi:p_1^{-1}V_T\\to p_2^{-1}V_T$. On a graph $(\\mathrm{id},a):T\\to T\\times_ST$ it is the constant map $\\rho(a)$; on $(x,ax,bax)$ its cocycle equation is precisely $\\rho(ba)=\\rho(b)\\rho(a)$. Thus the gluing convention $e_2=\\phi e_1$ of [lem-pe-set-sheaf-cover-descent], applied to the descent in [lem-per-galois-cover-module-descent], says that the trivialization on the object $(T,a)$ of $T_{\\mathrm{et}}$ is $\\rho(a)e_V$ on its canonically identified domain $L(T)$. Naturality of $e_V$ along $a:(T,a)\\to(T,\\mathrm{id})$, and restriction of constant sections, give $\\rho(a)e_V(L(a)s_v)=v$, hence $L(a)s_v=s_{\\rho(a)^{-1}v}$. For $g\\in\\Pi$, apply [lem-per-local-system-finite-cover-germ-action] to $U=T$ and $s_v$ to obtain $g\\gamma_V(v)=\\operatorname{germ}_{a_g\\bar t}(s_v)$. In the defining stalk colimit [def-weil-pbc-geometric-stalks], restriction along $a_g$ identifies this germ with $\\operatorname{germ}_{\\bar t}(L(a_g)s_v)$. It equals $\\gamma_V(\\rho(a_g)^{-1}v)=\\gamma_V(\\rho(\\theta(g))v)$, as required. This also explains the inverse in Step 2.",
+   "uses": [
+    "lem-pe-set-sheaf-cover-descent",
+    "lem-per-galois-cover-module-descent",
+    "lem-per-local-system-finite-cover-germ-action",
+    "def-weil-pbc-geometric-stalks"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVII, Proposition 7.2.3, p. 301 (ind-finite monodromy); sites.tex Tags 04TR (lemma-glue-sheaves) and 04TQ (lemma-glue-maps), cocycle convention."
+   }
+  },
+  {
+   "text": "Apply [lem-pc-sites-module-sheafification-tensor] on $T_{\\mathrm{et}}$ to the constant ring presheaf $R$ and the constant module presheaves $V,W$. Their presheaf tensor is the constant presheaf $V\\otimes_RW$, so it gives a natural isomorphism $V_T\\otimes_{R_T}W_T\\xrightarrow{\\sim}(V\\otimes_RW)_T$. The comparison sends each tensor of constant sections to the constant section of its tensor: both maps are induced by the same bilinear map $(v,w)\\mapsto v\\otimes w$ before sheafification. Combine this with [lem-sfb-localized-site-tensor-restriction] and the trivializations $e_V,e_W$ to trivialize $(L\\otimes_{R_S}M)|_T$ by $(V\\otimes_RW)_T$, where $M=T_{c,R}(W)$. The restriction comparison has the same pure-tensor normalization. Neither comparison assumes finite generation or flatness.",
+   "uses": [
+    "lem-pc-sites-module-sheafification-tensor",
+    "lem-sfb-localized-site-tensor-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 0GMW (lemma-sheafification-tensor) and 03EL (lemma-tensor-product-pullback), specialized to constant presheaves and localized restriction."
+   }
+  },
+  {
+   "text": "The graphs $(\\mathrm{id},a)$ give the entire double overlap, not just selected geometric points. Indeed, form $q:\\coprod_{a\\in G}T\\to T\\times_ST$ with these graph components. These are finite etale $S$-objects by [lem-fet-finite-limits]. On the fibre at $\\bar s$, the map is $(a,x)\\mapsto(x,ax)$, a bijection by the simple transitivity of [def-galois-object]. By [lem-fet-galois-category] and [def-galois-category], the fibre functor preserves the finite coproduct and product and reflects isomorphisms; hence $q$ is an isomorphism. A triple overlap has components $(x,ax,bax)$, whose pair labels are $a,b,ba$. Thus equality of descent maps may be checked on these graphs, and the cocycle for a left action has the multiplication order used in Step 4.",
+   "uses": [
+    "lem-fet-finite-limits",
+    "def-galois-object",
+    "lem-fet-galois-category",
+    "def-galois-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Section 03SF (section-finite-etale-under-galois); Tag 0BNB (lemma-finite-etale-connected-galois-category), exact conservative fibre functor; Tag 0BMY (definition-galois-category)."
+   }
+  },
+  {
+   "text": "On a double overlap the canonical descent datum of $L\\otimes M$ is the tensor of the canonical data of $L,M$: this follows by naturality of the restriction comparison in [lem-sfb-localized-site-tensor-restriction]. Under Step 5 it sends $v\\otimes w$ to $\\rho(a)v\\otimes\\sigma(a)w$ on every graph $(\\mathrm{id},a)$. The graphs exhaust the overlap by Step 6. The linear map $\\rho(a)\\otimes\\sigma(a)$ is invertible and respects products of $a$, by evaluation on pure tensors [def-weil-pbc-module-tensor-product]. Hence this is exactly the diagonal-action datum defining $T_{c,R}(V\\otimes_RW)$. The local comparison and its inverse agree with those data on pure tensors; this checks all sections, since sheaf tensors are sheafified sectionwise tensors [def-pur-sheaf-tensor-product]. By the morphism-gluing clause of [lem-pe-set-sheaf-cover-descent] they descend to mutually inverse maps. The maps are $R_S$-linear since that equality can be checked on the cover, and their composites are identities by gluing uniqueness. The same uniqueness descends the naturality squares in equivariant maps $f,h$, checked locally by $(f\\otimes h)(v\\otimes w)=f(v)\\otimes h(w)$. Step 5 gives precisely the requested pullback normalization.",
+   "uses": [
+    "lem-sfb-localized-site-tensor-restriction",
+    "lem-per-galois-cover-module-descent",
+    "def-weil-pbc-module-tensor-product",
+    "def-pur-sheaf-tensor-product",
+    "lem-pe-set-sheaf-cover-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 04TQ and 04TR (gluing maps and sheaves); sites-modules.tex Tags 03EK, 03EL, 0GMW (ordinary tensor); explicit diagonal descent-data computation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-size-convention",
+  "lem-weil-pbc-finite-etale-trace-degree",
+  "def-weil-pbc-etale-site",
+  "lem-weil-pbc-etale-site-localization-open",
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "lem-weil-pbc-site-constant-restriction",
+  "lem-fet-galois-category",
+  "lem-galois-finite-etale-connected-object",
+  "lem-galois-transitive",
+  "def-galois-object",
+  "def-galois-fibre-functor",
+  "thm-galois-fundamental",
+  "lem-per-galois-cover-module-descent",
+  "lem-per-torsion-local-system-monodromy",
+  "lem-weil-pbc-constant-sheaf-geometric-stalk",
+  "lem-pe-set-sheaf-cover-descent",
+  "lem-per-local-system-finite-cover-germ-action",
+  "def-weil-pbc-geometric-stalks",
+  "lem-pc-sites-module-sheafification-tensor",
+  "lem-sfb-localized-site-tensor-restriction",
+  "lem-fet-finite-limits",
+  "def-galois-category",
+  "def-weil-pbc-module-tensor-product",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose XVII, Propositions 7.2.3--7.2.4, pp. 301--302; Stacks pione Section 03SF and sites-modules Tags 03EL, 0GMW; explicit deck-action and descent-cocycle calculation."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -48,10 +178,59 @@
    "results": "Mathlib/CategoryTheory/Galois/Action.lean:37 functorToAction; Mathlib/CategoryTheory/Galois/Basic.lean:202 mulAction_naturality",
    "date": "2026-10-19",
    "verdict": "no match: abstract Galois categories with finite fibres; nothing on module sheaves, descended constant sheaves, ind-finite local systems or tensor products"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Monodromy of module sheaves descended from a finite etale Galois cover and tensor compatibility",
+   "results": "8 hits: LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, CategoryTheory.PreGaloisCategory.IsFundamentalGroup.toIsNaturalSMul, CategoryTheory.PreGaloisCategory.action_ext_of_isGalois, groupCohomology.exists_mul_galRestrict_of_norm_eq_one, SheafOfModules.pullbackObjFreeIso, IsCoveringMap.monodromyFunctor_map, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom; note: ; digest: 57202c909fb800e7",
+   "date": "2026-10-19",
+   "verdict": "no match: finite abstract Galois-category facts, topological covering monodromy and generic tensor structures do not identify descended etale module sheaves with their monodromy and normalized tensor maps"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Galois, Action",
+   "results": "0 hits: ; note: loogle: unknown identifier 'CategoryTheory.Galois'; digest: 4f53cda18c2baa0c",
+   "date": "2026-10-19",
+   "verdict": "no match: finite abstract Galois-category facts, topological covering monodromy and generic tensor structures do not identify descended etale module sheaves with their monodromy and normalized tensor maps"
+  },
+  {
+   "tool": "grep",
+   "query": "[Gg]alois.*[Dd]escent|[Mm]onodromy|[Dd]escent.*[Tt]ensor",
+   "results": "6 hits: Mathlib/Topology/Homotopy/Lifting.lean, Mathlib/Topology/Homotopy/Lifting.lean, Mathlib/Topology/Homotopy/Lifting.lean, Mathlib/Topology/Homotopy/Lifting.lean, Mathlib/Topology/Homotopy/Lifting.lean, Mathlib/Algebra/Torsor/Defs.lean; note: ; digest: 85fa56c1a152f70c",
+   "date": "2026-10-19",
+   "verdict": "no match: finite abstract Galois-category facts, topological covering monodromy and generic tensor structures do not identify descended etale module sheaves with their monodromy and normalized tensor maps"
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite Galois cover descended local system monodromy tensor",
+   "results": "8 hits: IsCoveringMap.monodromyFunctor, IsCoveringMap.monodromy, IsCoveringMap.monodromy_map, IsGalois.finiteDimensional_of_finite, IsCoveringMap.monodromyFunctor_obj, CategoryTheory.PreGaloisCategory.instFiberFunctorGetFiberFunctor, CategoryTheory.PreGaloisCategory.instIsPretransitiveCarrierObjFintypeCatOfIsConnected, finGaloisGroupFunctor; note: ; digest: f045fbdc52e5b3f3",
+   "date": "2026-10-19",
+   "verdict": "no match: finite abstract Galois-category facts, topological covering monodromy and generic tensor structures do not identify descended etale module sheaves with their monodromy and normalized tensor maps"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite covering torsor representations associated sheaf tensor product stalk group action",
+   "results": "8 hits: TannakaDuality.FiniteGroup.ofRightFDRep, SheafOfModules.Presentation.mapGenerators, classifyingSpaceUniversalCover_obj, Rep.coinvariantsTensor, TannakaDuality.FiniteGroup.ofRightFDRep_hom, Rep.finsuppToCoinvariantsTensorFree, CompHausLike.LocallyConstantModule.functor, Rep.finsuppToCoinvariantsTensorFree_single; note: ; digest: dc7b5db37e4d0cf6",
+   "date": "2026-10-19",
+   "verdict": "no match: finite abstract Galois-category facts, topological covering monodromy and generic tensor structures do not identify descended etale module sheaves with their monodromy and normalized tensor maps"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.PreGaloisCategory.functorToAction",
+   "results": "12 hits: CategoryTheory.PreGaloisCategory.functorToAction, CategoryTheory.PreGaloisCategory.instFaithfulActionFintypeCatAutFunctorFunctorToAction, CategoryTheory.PreGaloisCategory.instPreservesFiniteCoproductsActionFintypeCatAutFunctorFunctorToAction, CategoryTheory.PreGaloisCategory.instPreservesFiniteProductsActionFintypeCatAutFunctorFunctorToAction, CategoryTheory.PreGaloisCategory.instPreservesIsConnectedActionFintypeCatAutFunctorFunctorToAction, CategoryTheory.PreGaloisCategory.instPreservesMonomorphismsActionFintypeCatAutFunctorFunctorToAction, CategoryTheory.PreGaloisCategory.instReflectsIsomorphismsActionFintypeCatAutFunctorFunctorToAction, CategoryTheory.PreGaloisCategory.instReflectsMonomorphismsActionFintypeCatAutFunctorFunctorToAction; note: ; digest: 9ec82002df23981d",
+   "date": "2026-10-19",
+   "verdict": "no match: finite abstract Galois-category facts, topological covering monodromy and generic tensor structures do not identify descended etale module sheaves with their monodromy and normalized tensor maps"
+  },
+  {
+   "tool": "grep",
+   "query": "functorToAction|mulAction_naturality|[Ee]tale.*[Dd]escent",
+   "results": "18 hits: Mathlib/CategoryTheory/Galois/GaloisObjects.lean, Mathlib/CategoryTheory/Galois/Basic.lean, Mathlib/CategoryTheory/Galois/EssSurj.lean, Mathlib/CategoryTheory/Galois/EssSurj.lean, Mathlib/CategoryTheory/Galois/EssSurj.lean, Mathlib/CategoryTheory/Galois/EssSurj.lean, Mathlib/CategoryTheory/Galois/EssSurj.lean, Mathlib/CategoryTheory/Galois/Equivalence.lean; note: ; digest: 41dd49eac835ba28",
+   "date": "2026-10-19",
+   "verdict": "no match: finite abstract Galois-category facts, topological covering monodromy and generic tensor structures do not identify descended etale module sheaves with their monodromy and normalized tensor maps"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "reviewer",
   "item": "lem-per-local-system-tensor-monodromy",
@@ -78,5 +257,89 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-galois-descent-monodromy-tensor",
+  "worker": "stage1",
+  "summary": "Kept the statement. Proved the quotient map with the inverse needed for commuting left deck/monodromy actions, identified the stalk using constant germs, calculated monodromy from the descent cocycle, and descended the normalized ordinary tensor comparison. A new statement-only germ-action tool isolates the ind-finite naturality fact missing from the cited module equivalence. No Lean attachment or Mathlib leaf was found.",
+  "blueprint": "Proof, Step 3 of lem-per-artin-gabber-affine-curve: 'By the duality symmetry of the middle perverse t-structure' and 'the Verdier exchange'; the inherited coefficient-duality branch via lem-per-qbar-arbitrary-field-duality, lem-per-finite-residue-dualizing, lem-per-potential-local-duality, lem-per-coefficient-change-dualizing, lem-per-ctf-hom-coefficient-comparison and lem-per-ctf-hom-condition-b. Subargument: ILO XVII Lemma 7.6.11, the locally constant flat case of condition (B). Auxiliary tensor stability of the fixed-partition weakly constructible class. The monodromy tensor comparison for arbitrary torsion local systems, before the finite convolution-filtration argument. Step 7 of lem-per-local-system-tensor-monodromy: equivariance of the stalk tensor comparison on a finite Galois cover trivializing a pair of finite-type pieces. Steps 1--4 supply the finite-Galois monodromy identification used in Step 7 of lem-per-local-system-tensor-monodromy; Steps 5--7 supply its normalized tensor comparison.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-etale-trace-degree",
+    "why": "Only clauses (a),(b): positive constant degree makes the given nonempty finite etale cover surjective; the perverse unit has no degree lemma."
+   },
+   {
+    "node": "lem-weil-pbc-etale-site-localization-open",
+    "why": "Generic identification of an etale slice with the etale site of its object, needed to apply the site tensor and gluing tools."
+   },
+   {
+    "node": "lem-weil-pbc-etale-inverse-image-restriction",
+    "why": "Generic inverse-image/restriction comparison for an etale map, used to read the stipulated descent trivialization as a restriction."
+   },
+   {
+    "node": "lem-weil-pbc-site-constant-restriction",
+    "why": "Generic natural restriction comparison for constant modules, used on the cover and overlaps."
+   },
+   {
+    "node": "lem-fet-galois-category",
+    "why": "The finite-etale fibre category is a Galois category, needed only to apply the transitivity tool."
+   },
+   {
+    "node": "lem-galois-finite-etale-connected-object",
+    "why": "Connectedness of T as a scheme gives connectedness of its finite-etale object."
+   },
+   {
+    "node": "lem-galois-transitive",
+    "why": "Generic Galois-category transitivity on the fibre of a connected object, used to construct the deck quotient."
+   },
+   {
+    "node": "thm-galois-fundamental",
+    "why": "Only the finite-etale-cover image/stabilizer clause identifies the kernel of the explicit deck quotient; this generic fundamental-group fact is not supplied by the perverse unit."
+   },
+   {
+    "node": "lem-weil-pbc-constant-sheaf-geometric-stalk",
+    "why": "Generic constant-section-to-geometric-stalk isomorphism, used for gamma without finiteness assumptions."
+   },
+   {
+    "node": "lem-pe-set-sheaf-cover-descent",
+    "why": "Generic morphism gluing and its e_2=phi e_1 convention; used to descend the tensor isomorphism and to unpack the original descent datum."
+   },
+   {
+    "node": "lem-pc-sites-module-sheafification-tensor",
+    "why": "Generic module-sheafification tensor comparison; applied to constant presheaves, no substitute in this unit."
+   },
+   {
+    "node": "lem-sfb-localized-site-tensor-restriction",
+    "why": "Generic normalized tensor/restriction comparison on a localized site; used on the cover and overlaps."
+   },
+   {
+    "node": "lem-fet-finite-limits",
+    "why": "Generic finite limits and coproducts of finite etale covers, used only to verify the graph decomposition of the descent overlap."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-etale-trace-degree",
+  "lem-weil-pbc-etale-site-localization-open",
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "lem-weil-pbc-site-constant-restriction",
+  "lem-fet-galois-category",
+  "lem-galois-finite-etale-connected-object",
+  "lem-galois-transitive",
+  "thm-galois-fundamental",
+  "lem-weil-pbc-constant-sheaf-geometric-stalk",
+  "lem-pe-set-sheaf-cover-descent",
+  "lem-pc-sites-module-sheafification-tensor",
+  "lem-sfb-localized-site-tensor-restriction",
+  "lem-fet-finite-limits"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q125-7851c3c05",
+  "group": "Q125",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q125-7851c3c05 (reviewer sub-agent of L); spot-checked: I read the full item (statement unchanged, 7 steps), the new node lem-per-local-system-finite-cover-germ-action, the statement of every cited node, and the sources: Stacks pione 03SF, sites-modules 0GMW/03EL, and ILO XVII 7.2.1-7.2.4 pp. 301-302. I checked the signs in the π₁-set model, with T ↔ Π/H and deck maps δ_x(yH)=yxH, which form an anti-isomorphism from Π/H. This gives a_{gh}=a_h a_g, so θ=a_g⁻¹ is a continuous surjective homomorphism with kernel Stab(t̄)=c_*π₁(T,t̄); thm-galois-fundamental's finite-étale clause states that kernel identification. For a left action only the descent datum ρ(a) on the graph (id,a) satisfies the cocycle φ13=φ23φ12; since L is contravariant, this gives L(a)s_v=s_{ρ(a)⁻¹v}, and Step 4's g·γ(v)=γ(ρ(θ(g))v) is consistent. The new node says the same as equivariance of f in Hom_Π(Π/H,M) and is true with no finiteness and for U empty or disconnected. It does not restate any clause of the item (D1/D2), and no DAG candidate duplicates it (I read torsor-descent, exc-field-discrete-modules, cor-galois-lisse-representations and others). A BFS found no cycle. Step checks: the trace-degree clauses (a) and (b) give a surjective singleton cover. The localization, inverse-image and constant-restriction nodes give the identifications. The converse locality clause of the torsion-local-system node applies. The scalar linearity in Step 3 is elementary. In Step 6 the graph decomposition is a fibre bijection, and the fibre functor reflects isomorphisms. In Steps 5 and 7 the tensor and sheafification comparisons are normalized on pure tensors, and morphism gluing descends the comparison and its inverse. On the batch-5 flag, the new node's citation of lem-per-torsion-local-system-monodromy, which reaches cor-galois-lisse-representations: the item already had that node in its stmt_deps, so the closure does not grow. Also, that corollary is the generic Galois/lisse equivalence, not trace-formula or Poincaré-duality content, so I accept it. I accept all 13 declared tool_uses as generic site, Galois, tensor and gluing tools. No SGA source is used. No changes."
  }
 }
