@@ -20,49 +20,35 @@
  ],
  "proof": [
   {
-   "text": "By [def-weil-pbc-derived-categories], represent $Q$ by any cochain complex $C^\\bullet$ of abelian sheaves on $T_{\\Et}$. Put $Z^q=\\Ker(d^q:C^q\\to C^{q+1})$ and $B^q=\\Im(d^{q-1}:C^{q-1}\\to C^q)$. The identity $d^qd^{q-1}=0$ gives $B^q\\subset Z^q$, and the cohomology definition gives $\\mathcal H^q(Q)=Z^q/B^q$. No boundedness or injectivity of $C^\\bullet$ is needed.",
-   "uses": [
-    "def-weil-pbc-derived-categories"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-stalks-of-cohomology.md",
-    "place": "## Proof"
-   }
-  },
-  {
-   "text": "Write $S=(-)_{\\bar t}$. Apply the exactness assertion of [prop-weil-pbc-geometric-stalks-exact] to $0\\to Z^q\\to C^q\\to B^{q+1}\\to0$ and $0\\to B^{q+1}\\to C^{q+1}\\to C^{q+1}/B^{q+1}\\to0$: the second sequence makes $S(B^{q+1})\\to S(C^{q+1})$ injective, so the first identifies $S(Z^q)$ with $\\Ker S(d^q)$ and $S(B^{q+1})$ with $\\Im S(d^q)$. Applying this with $q-1$ also gives $S(B^q)=\\Im S(d^{q-1})$. Finally apply exactness to $0\\to B^q\\to Z^q\\to Z^q/B^q\\to0$. Thus $S(\\mathcal H^q(Q))\\cong S(Z^q)/S(B^q)=H^q(S(C^\\bullet))$. These identifications use the indicated kernel inclusions and quotient maps, hence are canonical.",
-   "uses": [
-    "prop-weil-pbc-geometric-stalks-exact"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/homology.tex",
-    "place": "Tag 010N, lemma-exact-functor, kernel/image factorization in the proof; applied to the three displayed short exact sequences"
-   }
-  },
-  {
-   "text": "The calculation of step 2 is natural for chain maps: a map of complexes sends cycles to cycles and boundaries to boundaries, and the induced map on the quotient is the cohomology map on both sides of the comparison. If a chain map is a quasi-isomorphism, its maps on cohomology sheaves are isomorphisms, and applying $S$ preserves these isomorphisms; step 2 therefore shows that its termwise stalk is a quasi-isomorphism. By the localization definition of [def-weil-pbc-derived-categories], termwise $S$ thus defines the derived stalk functor, with $S(C^\\bullet)$ representing the stalk of $Q$. The natural comparison descends too: it commutes with chain maps and hence with the inverses of quasi-isomorphisms in the localization. Now use only the statement of [lem-kun-stalk-as-pullback] to identify this derived stalk with the inverse image $Q_{\\bar t}$. Step 2 gives $\\mathcal H^q(Q)_{\\bar t}\\cong\\mathcal H^q(Q_{\\bar t})$, the canonical identification denoted by equality in the statement, independently of the representative.",
+   "text": "Put F = Etale.upperStar AddCommGrpCat t, the inverse image of def-weil-pbc-inverse-image. Its existing additive, finite-limit-preserving and finite-colimit-preserving instances make it exact. The proved library comparison CategoryTheory.Functor.mapDerivedCategoryHomologyFunctorIso, applied to F and q, gives F(H^q(Q)) isomorphic to H^q(F.mapDerivedCategory(Q)). This comparison already works on the unbounded derived categories of def-weil-pbc-derived-categories: preservation of homology of complexes and localization are built into the proved generic construction.",
    "uses": [
     "def-weil-pbc-derived-categories",
-    "lem-kun-stalk-as-pullback"
+    "def-weil-pbc-inverse-image"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-stalks-of-cohomology.md",
-    "place": "## Proof"
-   }
+   "elementary": true
+  },
+  {
+   "text": "Let S be the universe-lifted sheaf fibre at the identity geometric point of Spec Omega. Apply Etale.upperStarCompUliftSheafFiberIso from lemma-openclosed-stalk-upperstar to t and the identity geometric point. Simplifying identity followed by t gives the natural isomorphism F followed by S isomorphic to the universe-lifted sheaf fibre at t. Evaluate it at H^q(Q) and invert it.",
+   "uses": [
+    "lemma-openclosed-stalk-upperstar"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply S.mapIso to the component at Q of the comparison in step 1. Compose the inverse stalk comparison of step 2 with this image. Its source is the geometric stalk of H^q(Q) at t and its target is S(H^q(F.mapDerivedCategory(Q))), exactly the two objects in nonempty_geometricStalk_cohomology_iso. Wrap the composite in Nonempty. No boundedness or exactness of S is needed in this route.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-weil-pbc-derived-categories",
-  "prop-weil-pbc-geometric-stalks-exact",
-  "lem-kun-stalk-as-pullback"
+  "def-weil-pbc-inverse-image",
+  "lemma-openclosed-stalk-upperstar"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-stalks-of-cohomology.md",
-  "place": "## Proof, expanded with the short-exact-sequence argument of Stacks Tag 010N (homology.tex, lemma-exact-functor)"
+  "place": "Alternative proof using the proved exact-pullback homology comparison CategoryTheory.Functor.mapDerivedCategoryHomologyFunctorIso and the underived stalk comparison of lemma-openclosed-stalk-upperstar; implemented by R4 on 2026-10-18."
  },
  "mathlib_searches": [
   {
@@ -194,5 +180,15 @@
   "date": "2026-10-15",
   "existing": false,
   "fixed_by": "NT-stage2-Codex-d60b31b1b"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261018T062901-L-672828",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

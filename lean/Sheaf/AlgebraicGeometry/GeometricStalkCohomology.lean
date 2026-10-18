@@ -8,9 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.DerivedCategories
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
-import Mathlib.CategoryTheory.Sites.Point.Skyscraper
-import Sheaf.AlgebraicGeometry.GeometricStalkAsPullback
-import WeilConjectures.AlgebraicGeometry.DerivedCategories
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-!
 # Geometric stalks of cohomology sheaves
@@ -59,6 +57,13 @@ theorem nonempty_geometricStalk_cohomology_iso
           (A := AddCommGrpCat.{u + 1})).obj
             ((_root_.DerivedCategory.homologyFunctor _ q).obj
               ((upperStar AddCommGrpCat.{u + 1} t).mapDerivedCategory.obj Q))) := by
-  sorry
+  let S := ((Scheme.pointSmallEtale (𝟙 (Spec (.of Ω)))).ulift.{u + 1}).sheafFiber
+    (A := AddCommGrpCat.{u + 1})
+  have e := upperStarCompUliftSheafFiberIso AddCommGrpCat.{u + 1} t
+    (𝟙 (Spec (.of Ω)))
+  simp only [Category.id_comp] at e
+  exact ⟨(e.app ((_root_.DerivedCategory.homologyFunctor _ q).obj Q)).symm ≪≫
+    S.mapIso (((upperStar AddCommGrpCat.{u + 1} t).mapDerivedCategoryHomologyFunctorIso q).app
+      Q)⟩
 
 end AlgebraicGeometry.Etale
