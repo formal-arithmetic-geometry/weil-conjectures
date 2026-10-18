@@ -19,9 +19,79 @@
   "def-kun-derived-tensor",
   "def-pur-derived-internal-hom"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-per-noetherian-ctf-flat-model] to $L$ of Tor amplitude $[a,b]$. Obtain a flat constructible representative $F^\\bullet$ in degrees $[a,b]$ and one Galois partition $\\mathcal P$ trivializing all its terms. For every ordinary $A$-module $M$, the complex $M_X\\otimes_A F^\\bullet$ represents $M_X\\otimes^L_A L$. On each cover in $\\mathcal P$, every term is constant, since tensoring a constant finite projective module with the constant module $M$ is constant. Its kernels, images and quotients are constant on that cover, so its cohomology belongs to $\\mathcal W_{\\mathcal P}(A)$ as defined in [lem-per-ctf-hom-condition-b]. Its degrees lie in $[a,b]$, independently of $M$; finite generation of $M$ was never used. Taking $M=A$ also puts $L$ itself in this partition class.",
+   "uses": [
+    "lem-per-noetherian-ctf-flat-model",
+    "lem-per-ctf-hom-condition-b"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Proof of Theorem 7.6.1, p. 314, first three sentences; flat-model realization of its fixed partition."
+   }
+  },
+  {
+   "text": "Apply [lem-per-ctf-hom-condition-b] to the fixed $P$ and partition $\\mathcal P$ from Step 1. The hypotheses are exactly the Noetherian scheme, Noetherian prime-field coefficient algebra and the assumed prime-field duality. It gives integers $r,c$ independent of $M$. Since every $M_X\\otimes^L_A L$ is in $D^{[a,b]}_{\\mathcal P}$, all $R\\mathcal Hom_A(P,M_X\\otimes^L_A L)$ lie in $D^{[a-r,b+c]}$. Applying its final constructibility clause to $L$ shows that $H=R\\mathcal Hom_A(P,L)$ is bounded constructible. The partition assertion alone would not imply finite-type stalks for arbitrary $M$; only the case $M=A$ uses that clause.",
+   "uses": [
+    "lem-per-ctf-hom-condition-b"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Proof of Theorem 7.6.1, p. 314, application of condition (B)."
+   }
+  },
+  {
+   "text": "Use [lem-per-ctf-hom-universal-coefficients] with $K=P$ and $Y=L$. The first is bounded above with constructible cohomology, the second has finite Tor amplitude, and Step 2 supplies its required common interval for all ordinary $A$-modules $M$. It follows that $H$ has finite Tor amplitude against every module sheaf, and that $u_C:C_X\\otimes^L_AH\\to R\\mathcal Hom_A(P,C_X\\otimes^L_AL)$ is an isomorphism for every $C\\in D^+(A)$. Together with constructibility from Step 2 this proves $H\\in D^b_{ctf}(X_{\\mathrm{et}},A)$.",
+   "uses": [
+    "lem-per-ctf-hom-universal-coefficients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Proof of Theorem 7.6.1, p. 314, application of Proposition 10.1.1."
+   }
+  },
+  {
+   "text": "Extension to $B$ preserves the finite-Tor constructible category directly on the flat model of [lem-per-noetherian-ctf-flat-model]. For any $K$ in that category, tensor its bounded flat constructible model with $B_X$. A flat $A_X$-module $F$ extends to a flat $B_X$-module: tensoring it over $B_X$ with a short exact sequence of $B_X$-modules is the same as tensoring the restricted sequence with $F$ over $A_X$, and that is exact by flatness. On the finitely many strata and covers, the extended terms are constant with values $B\\otimes_A E$, a direct summand of the same finite free $B$-module because a splitting $E\\to A^t\\to E$ stays a splitting after tensoring. A bounded complex of such flat terms has finite Tor amplitude in its degree interval. Its cohomology is locally constant on those covers, and its stalks are finitely generated because kernels and quotients of finite $B$-modules are finite over the Noetherian ring $B$. Thus $TK\\in D^b_{ctf}(X_{\\mathrm{et}},B)$. Apply this to $P,L,H$.",
+   "uses": [
+    "lem-per-noetherian-ctf-flat-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Definition 7.7.1 and the following paragraph, p. 314; direct flat-model argument with Noetherian B."
+   }
+  },
+  {
+   "text": "Take the ordinary $A$-module $B$ in degree zero in Step 3, giving the isomorphism $u_B:UTH\\to R\\mathcal Hom_A(P,UTL)$, where $U$ is restriction of scalars. By [lem-sfb-dc-hom-scalar-adjunction], there is an evaluation-normalized isomorphism $\\beta:U R\\mathcal Hom_B(TP,TL)\\to R\\mathcal Hom_A(P,UTL)$, and $U$ reflects isomorphisms. For the actual map $\\alpha_{P,L}$ specified in the statement, $\\beta\\circ U\\alpha_{P,L}=u_B$: transpose both sides, insert the scalar-extension unit $P\\to UTP$, and use scalar association. Both transposes are $P\\otimes_A^L(B_X\\otimes_A^LH)\\cong B_X\\otimes_A^L(P\\otimes_A^LH)\\xrightarrow{1\\otimes\\mathrm{ev}}B_X\\otimes_A^LL$. Inserting the unit contributes $1_B$; evaluation in the extended pairing multiplies it by the other scalar, so the coefficient is $1_Bb=b$. The signed symmetry is the same in the two transposes, so their signs agree. Uniqueness of the transpose, using [lem-weil-pbc-ringed-internal-hom-exact-restriction] and [lem-pur-rhom-global-sections], proves the equality. Hence $U\\alpha_{P,L}=\\beta^{-1}u_B$ is invertible; conservativity makes $\\alpha_{P,L}$ invertible. Its source is in the asserted category by Step 4, hence so is its target. Evaluation is natural in both arguments and the transposition bijections are natural, proving naturality of this specified comparison.",
+   "uses": [
+    "lem-sfb-dc-hom-scalar-adjunction",
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "lem-pur-rhom-global-sections"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Theorem 7.6.1, final sentence of proof p. 314; evaluation identification expanded with the existing general scalar adjunction."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-per-noetherian-ctf-flat-model",
+  "lem-per-ctf-hom-condition-b",
+  "lem-per-ctf-hom-universal-coefficients",
+  "lem-sfb-dc-hom-scalar-adjunction",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-pur-rhom-global-sections"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose XVII, proof of Theorem 7.6.1, p. 314, with Proposition 10.1.1 and Definition 7.7.1; evaluation normalization expanded in Steps 4-5."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -60,7 +130,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-coefficient-change-dualizing",
@@ -82,5 +152,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-per-ctf-hom-coefficient-comparison",
+  "worker": "stage1",
+  "summary": "Followed the ILO proof: fixed partition via a general Noetherian flat model, uniform Hom bounds, universal coefficients, then the evaluation-normalized scalar adjunction. Three statement-only children; no statement change and no finite-ring or flat-extension assumption.",
+  "blueprint": "Proof, Step 1 of lem-per-artin-gabber-affine-curve: 'Relative Verdier duality, biduality ... over the same arbitrary field $k$', through lem-per-qbar-arbitrary-field-duality, lem-per-finite-residue-dualizing and lem-per-potential-local-duality; the last node's Step 2 extends finite-field coefficients.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-dc-hom-scalar-adjunction",
+    "why": "General ringed-site tensor-Hom/scalar-adjunction tool used to identify the specified coefficient comparison; this unit has no replacement for the ordinary derived adjunction."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "why": "General ringed-site tensor-Hom/scalar-adjunction tool used to identify the specified coefficient comparison; this unit has no replacement for the ordinary derived adjunction."
+   },
+   {
+    "node": "lem-pur-rhom-global-sections",
+    "why": "General ringed-site tensor-Hom/scalar-adjunction tool used to identify the specified coefficient comparison; this unit has no replacement for the ordinary derived adjunction."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-dc-hom-scalar-adjunction",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-pur-rhom-global-sections"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-NH-016d796ac",
+  "group": "NH",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NH-016d796ac (reviewer sub-agent of L); spot-checked: I read the item and all three new nodes in full against ILO XVII and Stacks: Thm 7.6.1 with its proof on p. 314, Defs 7.3.1-7.3.3, Prop 7.2.5, Def 7.6.8 / Prop 7.6.9, Def 7.7.1 and the paragraph after it, and Prop 10.1.1 with its proof on pp. 325-326, plus Stacks 03TT lemma-when-ctf, remark-projective-each-degree and 09BI. The item is still unsplit live, and its statement and stmt_deps are identical to live. Steps 1-3 follow ILO's proof. Step 1 takes the flat model with one Galois partition; on a connected V_i, kernels and cokernels of maps between constant sheaves are constant, so every M_X⊗^L L lies in W_P with bounds in [a,b] independent of M. Step 2 applies condition (B): the lower bound a-r comes from P in D^{<=r}, the upper bound b+c from shifting Def 7.6.8, and the constructibility clause is used only for L. Step 3 applies 10.1.1; Tor amplitude against all sheaves follows stalkwise from the bound for constant M. Step 4 works on the flat model: flatness survives tensor cancellation, B⊗E stays finite projective, and B is Noetherian, so no condition on B over A is needed. Step 5 checks β∘Uα=u_B on transposes (p⊗(b⊗h) goes to b⊗ev(p,h)), then uses uniqueness of transposes and that U reflects isomorphisms; α is the specified evaluation map. New nodes: condition-b is ILO 7.6.8/7.6.9 with the bounds written out, and W_P equals ILO's ind-unipotent class by 7.2.5 since the sheaves are ℓ-torsion. universal-coefficients is exactly 10.1.1 with its uniform-bound hypothesis. The flat model is true: stalks may be infinite, but after refining the strata the monodromy at each generic point is finite (I tested a nodal-curve twist example), and ILO asserts the same partition. None is a duplicate: sk-lem-sf-flat-model and lem-sf-etale-smooth-stratified-ctf need finite coefficient rings, 09BI and lem-sfb-connected-etale-perfect-constant give only étale-local models, and lem-per-constructible-finite-monodromy-filtration has no bounded flat model. None restates a clause of the item. The three tool_uses (scalar adjunction, exponential law, H^0 RHom) are generic ringed-site tools and I accept them. No SGA is cited. Edge cases checked: empty X, zero complexes, a non-flat quotient, dual numbers (excluded by the finite-Tor hypothesis), and a separably closed point. Nits not changed: the 'this category' wording is harmless because D^b_ctf = D^b_c over F_ℓ, and 'Galois cover' is defined inline."
  }
 }
