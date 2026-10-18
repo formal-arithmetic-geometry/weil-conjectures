@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekProjectionBaseChange
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerStarProjectionComp
+public import WeilConjectures.SixFunctors.Etale.Derived.OpenImmersionLowerShriekToLowerStarBaseChange
 
 /-!
 # Pasting of derived base change maps along a compactification
@@ -106,6 +107,32 @@ lemma map_rightDerivedLowerStarCompHom_derivedBaseChangeMap
     (derivedUpperStar_map_derivedBaseChangeMap_app_counit A hp (R((c.i)_*[A]).obj K))
   simp only [Functor.map_comp] at e2
   rw [reassoc_of% e2, e1, reassoc_of% nhi]
+
+/-- **The forget-supports maps commute with base change**: the compactly supported base change
+map `Lg^* Rf_!(c) ⟶ Rf'_!(c') Lg'^*` followed by the forget-supports map
+`Rf'_!(c') ⟶ R(c'.g)_* R(c'.i)_* ⟶ Rf'_*` of `c'` is `Lg^*` of the forget-supports map of `c`
+followed by the derived base change map `Lg^* Rf_* ⟶ Rf'_* Lg'^*`. -/
+lemma rightDerivedLowerShriekOfCompactificationBaseChangeMap'_app_comp_toLowerStar
+    [HasSmallSiteSheafify A] (K : DerivedCategory (Sheaf X.smallEtaleTopology A)) :
+    (rightDerivedLowerShriekOfCompactificationBaseChangeMap' A c c' q hi hp).app K ≫
+        R((c'.g)_*[A]).map ((derivedOpenImmersionLowerShriekToLowerStar A c'.i).app
+          (L((g')^*[A]).obj K)) ≫
+        (rightDerivedLowerStarCompHom A c'.i c'.g f' c'.comm).app (L((g')^*[A]).obj K) =
+      L((g)^*[A]).map (R((c.g)_*[A]).map ((derivedOpenImmersionLowerShriekToLowerStar A c.i).app
+          K)) ≫
+        L((g)^*[A]).map ((rightDerivedLowerStarCompHom A c.i c.g f c.comm).app K) ≫
+        (derivedBaseChangeMap A sq).app K := by
+  rw [map_rightDerivedLowerStarCompHom_derivedBaseChangeMap A sq c c' q hi hp,
+    rightDerivedLowerShriekOfCompactificationBaseChangeMap'_app]
+  have n := (derivedBaseChangeMap A hp).naturality
+    ((derivedOpenImmersionLowerShriekToLowerStar A c.i).app K)
+  simp only [Functor.comp_map] at n
+  rw [reassoc_of% n, Category.assoc]
+  congr 1
+  simp only [← Functor.map_comp_assoc]
+  congr 2
+  rw [← derivedOpenImmersionLowerShriekBaseChangeIso_hom_comp_toLowerStar A hi K,
+    Iso.inv_hom_id_app_assoc]
 
 end Etale
 
