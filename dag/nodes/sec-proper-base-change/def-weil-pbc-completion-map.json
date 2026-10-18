@@ -21,9 +21,65 @@
   "lem-weil-derived-limit-products-core",
   "def-weil-pbc-adic-derived-inverse-limit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Construct each quotient augmentation degreewise as the extension/restriction-of-scalars unit followed by module sheafification. Restriction naturality follows from the pure-tensor formula for changeOfRingsMap, and the chain-map equation follows from naturality of the sheafification unit on id tensor d. Equality on all sections proves uniqueness.",
+   "uses": [
+    "def-weil-pbc-complete-coefficient-datum",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the uniquely characterized quotient transition on the tensor 1 tensor m; the coefficient ring map preserves one. The unique augmentation formulas give strict compatibility. Project the product augmentation composed with 1 minus shift to each factor to obtain zero, so the zero homotopy gives the prescribed cocone lift. Mathlib mappingCocone.lift_fst and Pi.lift_π prove its quotient projections after localization.",
+   "uses": [
+    "def-weil-pbc-complete-coefficient-datum",
+    "def-weil-category-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Translate the epimorphism clause of countableProducts_exact into preservation of epimorphisms by the discrete-natural-number limit functor, hence CountableAB4Star. Apply derivedCategory_countableProducts_core in the standard derived localization to obtain the required product and its localized limiting cone. Transport across Discrete.compNatIsoDiscrete and identify the cone projections. The universal property of the chosen product makes the canonical comparison invertible.",
+   "uses": [
+    "lem-weil-proetale-countable-products-exact",
+    "lem-weil-derived-limit-products-core"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Check the comparison intertwines the localized 1 minus shift with the derived tower transition endomorphism on every projection. Transport Mathlib mappingCocone_triangle_distinguished by the identity on the cocone and the product comparison on both product terms; the boundary is exactly the stipulated inverse comparison followed by the localized boundary.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-weil-pbc-adic-derived-inverse-limit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a strict map of towers use towerTransitionEndomorphism_natural_backward to form the commutative square of 1 minus shift. Shift Mathlib mappingCone.map by minus one. Its two coordinate equations follow from the cone inclusions and projections. The mappingCocone.id_X identity proves uniqueness from the two coordinates.",
+   "uses": [
+    "def-weil-tower-transition-endomorphism",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-complete-coefficient-datum",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-category-product",
+  "lem-weil-proetale-countable-products-exact",
+  "lem-weil-derived-limit-products-core",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-adic-derived-inverse-limit",
+  "def-weil-tower-transition-endomorphism"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "K1",
+  "date": "2026-10-18",
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/def-weil-pbc-completion-map.md",
+  "place": "node def-weil-pbc-completion-map, order 1258; explicit shifted-cone construction and Mathlib mapping-cocone API"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -215,5 +271,15 @@
   "group": "ND",
   "result": "pass",
   "note": "Audited node, source, dependencies, declarations, report sections, edge cases, docstrings, and universes; scompile.py passed sandbox and library checks with no errors or warnings. No substantive or mechanical defects found."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261018T062820-L-659255",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
