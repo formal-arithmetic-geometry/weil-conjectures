@@ -12,7 +12,10 @@
   "def-weil-pbc-etale-site",
   "def-pc-fibre-product",
   "def-sc-invertible-module",
-  "def-weil-pbc-ample-invertible-module"
+  "def-weil-pbc-ample-invertible-module",
+  "def-trf-fine-log-scheme-morphisms",
+  "def-trf-fine-log-etale-descent-datum",
+  "def-trf-polarized-scheme-etale-descent-datum"
  ],
  "proof": [
   {
@@ -226,5 +229,30 @@
   "group": "Q68",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q68-c023b16da (reviewer sub-agent of L); spot-checked: I read the item, all three new nodes and every cited statement in full. Sources checked: Stacks 0D3C (spaces-descent l.2125), 02WW (spaces l.1603), 04W8, 034C (descent l.4762), 021N, 023Q, 022C/022D and 02GO, plus ILO VIII 3.3.8 (pp.107-108) and VI 1.1 (p.69). Polarized child: it is true by the 02WW gluing route (the relation is a monomorphism because composing with X_j->U_j recovers u). After that, 04W8 descends L, and 0D3C makes X->S representable. The line-bundle cocycle is needed: the identity-cover example with lambda13 != lambda12*lambda23 shows it, and on the real conic O(1) admits no cocycle while O(2) does. Fine-log child: étale sheaf gluing, with the unit condition and charts both étale-local. The A,B clause is general enough for inverse-image sheaves; tested on a Galois log point, the A^1 N-chart and the empty case. Noetherian child: this is exactly 034C plus 021N. Mathlib has only ascent along open subschemes (Noetherian.lean l.158-221), so it is not a Mathlib leaf. Item steps 1-8: each hypothesis is matched, including the X_i->X cover by base change, local Noetherianity before the log gluing, strictness giving M_{U_i}=M_S|U_i, uniqueness via fpqc representable descent, and the equation over M_S by A,B uniqueness. The statement is unchanged and not weakened, and the item is not a target node. Duplicate searches (rg for 0D3C, 02WW, 04W8, 0D40, 034C; regex for ample with descent and for log structures with glue) found no duplicate; thm-pd-effective-descent and the lem-galois-fpqc nodes are different statements. Accepted tool_uses: lem-weil-pbc-fpqc-finer-than-etale, lem-weil-pbc-fpqc-representable-descent, lem-weil-pbc-etale-covering-base-change. No SGA is cited and the blueprint ancestry is correct. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PolarizedFineLogEtaleDescent",
+  "declaration": "AlgebraicGeometry.exists_polarizedFineLog_of_etaleDescent",
+  "declarations": [
+   "AlgebraicGeometry.PolarizedFineLogDescentDatum",
+   "AlgebraicGeometry.PolarizedFineLogRealization",
+   "AlgebraicGeometry.PolarizedFineLogRealizationIso",
+   "AlgebraicGeometry.FineLogMorphismsAreStrictEtaleLocal",
+   "AlgebraicGeometry.exists_polarizedFineLog_of_etaleDescent"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/PolarizedFineLogEtaleDescent.lean",
+  "statement": "theorem exists_polarizedFineLog_of_etaleDescent (S : FineLogScheme.{u}) : (∀ (I : Type v) (U : I → Scheme.{u}) (uMap : ∀ i, U i ⟶ S.scheme) (X : I → Scheme.{u}) (f : ∀ i, X i ⟶ U i) (L : ∀ i, (X i).Modules) (hL : ∀ i, Scheme.Modules.IsInvertible (L i)) (D : PolarizedSchemeEtaleDescentDatum S.scheme I U uMap X f L hL) (E : PolarizedFineLogDescentDatum S D), ∃ d : PolarizedFineLogRealization E, ((∀ i, (E.localLog i).IsFineSaturated) → d.logStructure.IsFineSaturated) ∧ ∀ d' : PolarizedFineLogRealization E, ∃ e : PolarizedFineLogRealizationIso d d', ∀ e' : PolarizedFineLogRealizationIso d d', e' = e) ∧ FineLogMorphismsAreStrictEtaleLocal.{u, w} S",
+  "branch": "newtargets-dag",
+  "by": "Q80",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bdc5f893f",
+  "group": "Q80",
+  "result": "pass",
+  "note": "Re-delivery after b7a27212 RETURN. F1 fixed: def-trf-fs-log-blowup record identical to live; GeneralLogMorphisms removed; HomAlong/CompEq/IsStrictEtale moved verbatim into FineLogSchemeMorphisms and registered in the new def-trf-fine-log-scheme-morphisms. F2 fixed: theorem stmt_dep replaced by existing:true def-trf-polarized-scheme-etale-descent-datum on the unchanged PolarizedSchemeEtaleDescent module (16 defs, theorem excluded, statement verbatim, no witness used). Item Lean byte-identical to the previous head; clause-by-clause re-read OK: fine locally Noetherian base, arbitrary étale cover, localMap over the strict base, logTheta with naturality/alpha/diagonal identity/cocycle/overBase, lambda cocycle, affine-local ampleness, pinned realization with strict charts, unique compatible iso, conditional fs, unconditional strict-étale locality with ∃!. Universes u, v, w free. Edge cases (empty I/A, repeated indices, non-saturated monoids) OK. nt_compile --json on both files: clean (3.2 s, 3.8 s), broken-copy control errors. Notes: Q112's unlanded FineLogScheme.lean would clash later; IsLocallyNoetherian owner and proof-only imports advisory."
  }
 }

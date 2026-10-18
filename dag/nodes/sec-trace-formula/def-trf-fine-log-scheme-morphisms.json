@@ -1,0 +1,123 @@
+{
+ "id": "def-trf-fine-log-scheme-morphisms",
+ "kind": "definition",
+ "title": "Fine log schemes, their morphisms and relative etale tests",
+ "status": "split",
+ "statement": "A fine log scheme is a locally Noetherian scheme $X$ [pqf-def-locnoeth] with an etale log structure $M$ [def-trf-fs-log-blowup] satisfying the fine-chart predicate of [def-trf-fine-log-etale-descent-datum]; saturation is not required. A morphism $(Y,N)\\to(X,M)$ is a scheme map $f:Y\\to X$ together with the structure-preserving map $f^{-1}M\\to N$ of [def-trf-fs-log-blowup]. Its relative-test presentation assigns, to $W\\to X$, $V\\to Y$ in the small etale sites [def-weil-pbc-etale-site] and $k:V\\to W$ with $kW=Vf$, a natural monoid homomorphism $M(W)\\to N(V)$ compatible with pullback of regular functions. Equality with a composite includes the equation of scheme maps and equality of the composed section maps on every composable relative test diagram. Equality of two composites through different intermediate fine log schemes is tested on every pair of such diagrams with the same composite test map. If the underlying scheme map is etale, strictness means these section maps are bijective whenever $k$ is an isomorphism of schemes: this identifies $N$ with the restriction of $M$ under the localized-site equivalence. For any etale map $p:T\\to X$, write $M(p)$ for its sections on this object; for $h:T'\\to T$ with $ph$ etale, restriction $M(p)\\to M(ph)$ is the original sheaf restriction.",
+ "stmt_deps": [
+  "pqf-def-locnoeth",
+  "def-trf-fs-log-blowup",
+  "def-trf-fine-log-etale-descent-datum",
+  "def-weil-pbc-etale-site"
+ ],
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose VI 1.1, printed p.69 (fine versus fs, locally Noetherian convention, log morphisms); VIII 3.3.4(ii) and 3.3.8, printed pp.107--108 (strict etale charts and descent)."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Fine log schemes and their morphisms, without the saturation condition",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.mk.noConfusion\", \"module\": \"Mathlib.AlgebraicGeometry.Scheme\", \"type\": \"{P : Sort u} →\\n  {toLocallyRingedSpace : AlgebraicGeometry.LocallyRingedSpace} →\\n    {local_affine :\\n        ∀ (x : ↑toLocallyRingedSpace.toTopCat),\\n          ∃ U R,\\n            Nonempty\\n              (toLocallyRingedSpace.restrict ⋯ ≅ AlgebraicGeometry.Spec.toLocallyRingedSpace.obj (Opposite.op R))\", \"doc\": \"A scheme is a locally ringed space such that every point has an open neighborhood isomorphic to the affine scheme associated to some commutative ring, constructed via the Spec functor applied to the o\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsSmooth f → Sort u_1} →\\n      (t : AlgebraicGeometry.IsSmooth f) →\\n        ((exists_isStandardSmooth :\\n              ∀ (x : ↥X),\\n                ∃ U V,\\n                  ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Ope\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsFinite f → Sort u} →\\n      (t : AlgebraicGeometry.IsFinite f) →\\n        ([toIsAffineHom : AlgebraicGeometry.IsAffineHom f] →\\n            (finite_app :\\n                ∀ (U : Y.Opens),\\n                  AlgebraicGeom\", \"doc\": \"A morphism $ f : X \\\\to Y $ of schemes is finite if it is affine and for every affine open subset $ U \\\\subseteq Y $, the induced ring homomorphism $ \\\\Gamma(Y, U) \\\\to \\\\Gamma(X, f^{-1}(U)) $ is finite, m\"}\n  {\"name\": \"AlgebraicGeometry.instHasFiniteCoproductsScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Limits\", \"type\": \"CategoryTheory.Limits.HasFiniteCoproducts AlgebraicGeometry.Scheme\", \"doc\": \"The category of schemes has finite coproducts.\"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.FormallyUnramified f → Sort u_1} →\\n      (t : AlgebraicGeometry.FormallyUnramified f) →\\n        ((formallyUnramified_appLE :\\n              ∀ {U : Y.Opens},\\n                AlgebraicGeometry.IsAffineOpen U →\\n          \", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f \"}\n  {\"name\": \"AlgebraicGeometry.FormallyUnramified.casesOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.FormallyUnramified f → Sort u_1} →\\n      (t : AlgebraicGeometry.FormallyUnramified f) →\\n        ((formallyUnramified_appLE :\\n              ∀ {U : Y.Opens},\\n                AlgebraicGeometry.IsAffineOpen U →\\n          \", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is formally unramified if it satisfies the infinitesimal lifting property characterizing formal unramification, meaning there are no nontrivial deformations of $ f \"}\n  {\"name\": \"AlgebraicGeometry.isFinite_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsFinite f ↔\\n    AlgebraicGeometry.IsAffineHom f ∧\\n      ∀ (U : Y.Opens),\\n        AlgebraicGeometry.IsAffineOpen U → (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.app f U)).Finite\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. Then $f$ is a finite morphism if and only if $f$ is an affine morphism and for every affine open subset $U$ of $Y$, the ring of sections $\\\\mathcal{O}_X(f^{-1\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.iff_isIntegralHom_and_locallyOfFiniteType\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \": IsFinite f ↔ IsIntegralHom f ∧ LocallyOfFiniteType f\", \"doc\": \"For a morphism $ f: X \\\\to Y $ of schemes, $ f $ is finite if and only if $ f $ is integral and locally of finite type.\"}",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A fine logarithmic scheme is a locally Noetherian scheme with etale local charts by finitely generated integral monoids; log morphisms are maps of log sheaves",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsLocallyNoetherian\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A scheme is locally Noetherian if it admits an open cover by Noetherian schemes.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme\", \"module\": \"Mathlib/AlgebraicGeometry/Scheme\", \"type\": \"Type (u_1 + 1)\", \"doc\": \"The type of schemes in algebraic geometry.\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegral\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"The predicate for a scheme to be integral\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For schemes $X$ and $Y$, a morphism from $X$ to $Y$ is finite.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The morphism $ f: X \\\\to Y $ is locally of finite type, meaning that for every point in $ Y $, there exists an open neighborhood whose preimage under $ f $ is covered by affine open subsets such that t\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFinitePresentation\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is locally of finite presentation, meaning that for every point in $ X $, there exists an open neighborhood such that the restriction of $ f $ to this neighborhood\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "FineLogScheme|LogStructure|HomAlong",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n FineLogScheme|HomAlong in Mathlib/AlgebraicGeometry, WeilConjectures, lean/Sheaf and dag/nodes; blueprint_refs.py search fine log",
+   "results": "No FineLogScheme or HomAlong declarations in the source or side library. No matching DAG fine-scheme bundle. blueprint_refs.py: 0 blueprint nodes match fine log. The fs-only EtaleLogHom exists in FineSaturatedLogBlowup, and the fine predicate exists in FineLogEtaleDescentDatum; both are reused, with the general relative-test interface owned by this new fine-log-scheme node.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-polarized-fine-log-etale-descent",
+  "date": "2026-10-18",
+  "group": "Q80"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "The fine log schemes and strict etale morphisms used in effective polarized descent, ILO VIII 3.3.8.",
+   "via": [
+    "lem-trf-polarized-fine-log-etale-descent",
+    "lem-trf-coherent-log-ideal-chart-construction",
+    "lem-trf-log-blowup-normalization",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FineLogSchemeMorphisms",
+  "declaration": "AlgebraicGeometry.FineLogScheme",
+  "declarations": [
+   "AlgebraicGeometry.FineLogScheme",
+   "AlgebraicGeometry.FineLogScheme.Hom",
+   "AlgebraicGeometry.FineLogScheme.Hom.CompEq",
+   "AlgebraicGeometry.FineLogScheme.Hom.CompositesEq",
+   "AlgebraicGeometry.EtaleLogStructure.sectionsAt",
+   "AlgebraicGeometry.EtaleLogStructure.restrictAt",
+   "AlgebraicGeometry.EtaleLogStructure.HomAlong",
+   "AlgebraicGeometry.EtaleLogStructure.HomAlong.CompEq",
+   "AlgebraicGeometry.EtaleLogStructure.HomAlong.IsStrictEtale"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FineLogSchemeMorphisms.lean",
+  "statement": "structure FineLogScheme",
+  "branch": "newtargets-dag",
+  "by": "Q80",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bdc5f893f",
+  "group": "Q80",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bdc5f893f",
+  "group": "Q80",
+  "result": "pass",
+  "note": "Re-delivery after b7a27212 RETURN. F1 fixed: def-trf-fs-log-blowup record identical to live; GeneralLogMorphisms removed; HomAlong/CompEq/IsStrictEtale moved verbatim into FineLogSchemeMorphisms and registered in the new def-trf-fine-log-scheme-morphisms. F2 fixed: theorem stmt_dep replaced by existing:true def-trf-polarized-scheme-etale-descent-datum on the unchanged PolarizedSchemeEtaleDescent module (16 defs, theorem excluded, statement verbatim, no witness used). Item Lean byte-identical to the previous head; clause-by-clause re-read OK: fine locally Noetherian base, arbitrary étale cover, localMap over the strict base, logTheta with naturality/alpha/diagonal identity/cocycle/overBase, lambda cocycle, affine-local ampleness, pinned realization with strict charts, unique compatible iso, conditional fs, unconditional strict-étale locality with ∃!. Universes u, v, w free. Edge cases (empty I/A, repeated indices, non-saturated monoids) OK. nt_compile --json on both files: clean (3.2 s, 3.8 s), broken-copy control errors. Notes: Q112's unlanded FineLogScheme.lean would clash later; IsLocallyNoetherian owner and proof-only imports advisory."
+ }
+}
