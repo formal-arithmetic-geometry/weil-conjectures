@@ -152,7 +152,7 @@ lemma dualizingComplexComp_inv_comp (f : T ⟶ T') (g : T' ⟶ T'') :
           (dualizingComplexComp ℓ g).inv =
       (dualizingComplexComp ℓ (f ≫ g)).inv ≫
         (boundedConstructibleUpperShriekComp_padicAlgCl ℓ f g).hom.app
-          (dualizingComplex ℓ T'') :=
+          (dualizingComplex' ℓ T'') :=
   dualizingComplexCompAux_comp f g (toPoint T'') (toPoint T') (toPoint T) (comp_toPoint g)
     (comp_toPoint f) (comp_toPoint (f ≫ g))
 
@@ -302,7 +302,7 @@ subscheme `j : B ⟶ X` is `α ∘ e_B`. -/
 lemma BorelMooreSection.pushforward_restrict (j : B ⟶ X) [IsOpenImmersion j.left]
     [IsProper j.left] (α : BorelMooreSection ℓ X) :
     BorelMooreSection.pushforward j (α.restrict j) =
-      α ≫ (clopenIdempotent ℓ j).app (dualizingComplex ℓ X) := by
+      α ≫ (clopenIdempotent ℓ j).app (dualizingComplex' ℓ X) := by
   rw [BorelMooreSection.pushforward, BorelMooreSection.restrict, clopenIdempotent]
   simp only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app,
     Iso.inv_hom_id_assoc, Functor.map_comp, Category.assoc]

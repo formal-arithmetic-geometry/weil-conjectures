@@ -73,7 +73,7 @@ noncomputable def lowerStarVerdierDualMap (f : X ⟶ Y) [IsProper f.left]
     (boundedConstructibleLowerStar _ ℓ f).obj (verdierDual ℓ (toPoint X) K) ⟶
       verdierDual ℓ (toPoint Y) ((boundedConstructibleLowerStar _ ℓ f).obj K) :=
   curry (lowerStarTensorMap ℓ f K _ ≫
-    (boundedConstructibleLowerStar _ ℓ f).map ((ihom.ev K).app (dualizingComplex ℓ X)) ≫
+    (boundedConstructibleLowerStar _ ℓ f).map ((ihom.ev K).app (dualizingComplex' ℓ X)) ≫
     lowerStarDualizingComplexTrace ℓ f)
 
 variable {X₁ X₂ Y₁ Y₂ : Over (Spec (.of k))}
@@ -166,10 +166,10 @@ variable {c} (F : c.FixedLocus)
 `def-trf-kernel-pushforward-maps`, item 8): the inverse of the right-adjoint form of base change
 in the fixed square followed by `Rd^! ω_X ≅ ω_Fix(c)`. -/
 noncomputable def supportIso :
-    (boundedConstructibleLowerStar _ ℓ F.ι).obj (dualizingComplex ℓ F.F) ≅
+    (boundedConstructibleLowerStar _ ℓ F.ι).obj (dualizingComplex' ℓ F.F) ≅
       (boundedConstructibleUpperShriek _ ℓ c.support).obj
-        ((boundedConstructibleLowerStar _ ℓ (diag X)).obj (dualizingComplex ℓ X)) :=
-  (F.upperShriekLowerStarIso.app (dualizingComplex ℓ X) ≪≫
+        ((boundedConstructibleLowerStar _ ℓ (diag X)).obj (dualizingComplex' ℓ X)) :=
+  (F.upperShriekLowerStarIso.app (dualizingComplex' ℓ X) ≪≫
     (boundedConstructibleLowerStar _ ℓ F.ι).mapIso (dualizingComplexComp ℓ F.d)).symm
 
 end FixedLocus

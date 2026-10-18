@@ -80,11 +80,11 @@ computed by the compactification `U ⟶[j] X ⟶[𝟙] X`. -/
 noncomputable def boundedConstructibleLowerShriekIsoOpenImmersionLowerShriek_padicAlgCl :
     boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ j ≅
       boundedConstructibleOpenImmersionLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ j :=
-  have := isIso_boundedConstructibleLowerStarOpenImmersionLowerShriekExchange_padicAlgCl ℓ
+  have := isIso_boundedConstructibleLowerStarOpenImmersionLowerShriekExchange'_padicAlgCl ℓ
     (isPullback_openImmersionCompactificationHom j)
-  boundedConstructibleLowerShriekOfCompactificationIso_padicAlgCl ℓ _
+  boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl ℓ _
       (Compactification.ofIsOpenImmersion j.left) ≪≫
-    boundedConstructibleLowerShriekRefinementIso _ ℓ
+    boundedConstructibleLowerShriekRefinementIso' _ ℓ
       (isPullback_openImmersionCompactificationHom j)
       (openImmersionCompactificationHom_comp_overG j) ≪≫
     Functor.isoWhiskerLeft _ (boundedConstructibleLowerStarId _ ℓ X) ≪≫ Functor.rightUnitor _

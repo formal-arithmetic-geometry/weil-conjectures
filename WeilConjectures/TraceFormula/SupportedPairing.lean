@@ -163,14 +163,14 @@ the composition isomorphism for `a_Z = p₁ ≫ a_Y`, the morphism `exceptionalK
 of `a_Y`. It is the exceptional Künneth map `α` of blueprint `prop-trf-exceptional-kunneth`
 (`def-sf-kv-maps`, (ii)) for `f₁ = a_Y`, `f₂ = a_X`, `L₁ = L₂ = ℚ̄_ℓ`. -/
 noncomputable def dualizingComplexExternalProduct :
-    externalProduct ℓ (dualizingComplex ℓ Y) (dualizingComplex ℓ X) ⟶
-      dualizingComplex ℓ (Y ⨯ X) :=
+    externalProduct ℓ (dualizingComplex' ℓ Y) (dualizingComplex' ℓ X) ⟶
+      dualizingComplex' ℓ (Y ⨯ X) :=
   (boundedConstructibleUpperShriekAdjunction _ ℓ (toPoint (Y ⨯ X))).homEquiv _ _
     (eqToHom (by rw [← comp_toPoint (prod.fst : Y ⨯ X ⟶ Y)]) ≫
       (boundedConstructibleLowerShriekComp_padicAlgCl ℓ (prod.fst : Y ⨯ X ⟶ Y)
         (toPoint Y)).hom.app _ ≫
       (boundedConstructibleLowerShriek _ ℓ (toPoint Y)).map
-        (exceptionalKunnethAdjoint ℓ (dualizingComplex ℓ Y)) ≫
+        (exceptionalKunnethAdjoint ℓ (dualizingComplex' ℓ Y)) ≫
       (boundedConstructibleUpperShriekAdjunction _ ℓ (toPoint Y)).counit.app (𝟙_ _))
 
 end Exterior
@@ -220,16 +220,16 @@ exterior product of the dualizing complexes. -/
 noncomputable def kernelContraction :
     externalProduct ℓ L (verdierDual ℓ (toPoint X) K) ⊗
         externalProduct ℓ (verdierDual ℓ (toPoint Y) L) K ⟶
-      dualizingComplex ℓ (Y ⨯ X) :=
+      dualizingComplex' ℓ (Y ⨯ X) :=
   (tensorTensorRearrangeIso _ _ _ _).hom ≫
     ((β_ _ _).hom ▷ _) ≫
     ((Functor.LaxMonoidal.μ (boundedConstructibleUpperStar _ ℓ (prod.fst : Y ⨯ X ⟶ Y)) _ _ ≫
         (boundedConstructibleUpperStar _ ℓ (prod.fst : Y ⨯ X ⟶ Y)).map
-          ((ihom.ev L).app (dualizingComplex ℓ Y))) ⊗ₘ
+          ((ihom.ev L).app (dualizingComplex' ℓ Y))) ⊗ₘ
       ((β_ _ _).hom ≫
         Functor.LaxMonoidal.μ (boundedConstructibleUpperStar _ ℓ (prod.snd : Y ⨯ X ⟶ X)) _ _ ≫
         (boundedConstructibleUpperStar _ ℓ (prod.snd : Y ⨯ X ⟶ X)).map
-          ((ihom.ev K).app (dualizingComplex ℓ X)))) ≫
+          ((ihom.ev K).app (dualizingComplex' ℓ X)))) ≫
     dualizingComplexExternalProduct ℓ X Y
 
 variable (c d') in
@@ -242,7 +242,7 @@ noncomputable def pairingMorphism (hE : IsPullback eC eD c d')
     (vc : (boundedConstructibleLowerShriek _ ℓ d').obj (𝟙_ _) ⟶
       externalProduct ℓ (verdierDual ℓ (toPoint Y) L) K) :
     (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (eC ≫ c)).obj (𝟙_ _) ⟶
-      dualizingComplex ℓ (Y ⨯ X) :=
+      dualizingComplex' ℓ (Y ⨯ X) :=
   (supportProductIso ℓ hE).hom ≫ (uc ⊗ₘ vc) ≫ kernelContraction ℓ K L
 
 variable (c d') in

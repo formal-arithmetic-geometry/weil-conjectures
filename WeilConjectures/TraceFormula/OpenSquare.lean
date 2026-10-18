@@ -124,7 +124,7 @@ noncomputable abbrev openSquareExchange (sq : IsPullback gU j' j g) :
         boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g ≅
       boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ gU ⋙
         boundedConstructibleOpenImmersionLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ j' :=
-  boundedConstructibleOpenImmersionLowerShriekBaseChangeIso _ ℓ sq
+  boundedConstructibleOpenImmersionLowerShriekBaseChangeIso' _ ℓ sq
 
 omit [Fact ℓ.Prime] in
 /-- Abstract form of `unit_comp_map_openSquareExchange_inv`: the restriction of the exchange
@@ -146,12 +146,12 @@ lemma unit_comp_map_baseChangeIso_inv_aux (Λ : Sheaf (coherentTopology Profinit
     (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction Λ ℓ j').unit.app
         ((boundedConstructibleUpperStar Λ ℓ gU).obj K) ≫
       (boundedConstructibleUpperStar Λ ℓ j').map
-        ((boundedConstructibleOpenImmersionLowerShriekBaseChangeIso Λ ℓ sq).inv.app K) =
+        ((boundedConstructibleOpenImmersionLowerShriekBaseChangeIso' Λ ℓ sq).inv.app K) =
     (boundedConstructibleUpperStar Λ ℓ gU).map
         ((boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction Λ ℓ j).unit.app K) ≫
       (boundedConstructiblePullbackSquareComparison Λ ℓ sq.toCommSq.flip).hom.app
         ((boundedConstructibleOpenImmersionLowerShriek Λ ℓ j).obj K) := by
-  rw [boundedConstructibleOpenImmersionLowerShriekBaseChangeIso_inv]
+  rw [boundedConstructibleOpenImmersionLowerShriekBaseChangeIso'_inv]
   exact Adjunction.unit_comp_map_exchangeLeft_app _ _ _ K
 
 /-- **The open-square exchange restricts to the identity on `U'`** (blueprint
@@ -233,11 +233,11 @@ lemma baseChangeIso_inv_app_of_id_aux
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
     (j : U ⟶ Y) [IsOpenImmersion j.left] (sq : IsPullback (𝟙 U) j j (𝟙 Y))
     (K : Dᵇc(U.left)⟦Λ⟧) :
-    (boundedConstructibleOpenImmersionLowerShriekBaseChangeIso Λ ℓ sq).inv.app K =
+    (boundedConstructibleOpenImmersionLowerShriekBaseChangeIso' Λ ℓ sq).inv.app K =
       (boundedConstructibleOpenImmersionLowerShriek Λ ℓ j).map
           ((boundedConstructibleUpperStarId Λ ℓ U).hom.app K) ≫
         (boundedConstructibleUpperStarId Λ ℓ Y).inv.app _ := by
-  rw [boundedConstructibleOpenImmersionLowerShriekBaseChangeIso_inv]
+  rw [boundedConstructibleOpenImmersionLowerShriekBaseChangeIso'_inv]
   exact Adjunction.exchangeLeft_app_of_iso_id _ _ _ _
     (boundedConstructiblePullbackSquareComparison_hom_app_of_id ℓ Λ j _) K
 

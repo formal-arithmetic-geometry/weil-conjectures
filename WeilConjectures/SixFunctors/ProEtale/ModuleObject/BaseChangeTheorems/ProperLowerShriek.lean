@@ -129,7 +129,7 @@ noncomputable def boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl :
 /-- Unfolding `boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl`. -/
 lemma boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl_eq :
     boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ f =
-      boundedConstructibleLowerShriekOfCompactificationIso_padicAlgCl ℓ
+      boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl ℓ
           (compactificationOverField f) (.ofIsProper f.left) ≪≫
         boundedConstructibleLowerShriekOfCompactificationOfIsProperIso _ ℓ f := by
   unfold boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl

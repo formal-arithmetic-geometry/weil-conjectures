@@ -89,7 +89,7 @@ using `Rf_! ≅ Rf_*` for the proper `f`, the composition isomorphism `Rf^! ω_Y
 (`dualizingComplexComp`) and the counit of `Rf_! ⊣ Rf^!`. -/
 noncomputable def lowerStarDualizingComplexTrace (f : X ⟶ Y) [IsProper f.left] :
     (boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ f).obj
-        (dualizingComplex ℓ X) ⟶ dualizingComplex ℓ Y :=
+        (dualizingComplex' ℓ X) ⟶ dualizingComplex' ℓ Y :=
   (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ f).inv.app _ ≫
     (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ f).map
       (dualizingComplexComp ℓ f).inv ≫

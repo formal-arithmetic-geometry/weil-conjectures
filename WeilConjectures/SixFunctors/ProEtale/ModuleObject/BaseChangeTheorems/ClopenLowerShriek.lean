@@ -30,11 +30,11 @@ constructible complexes attached to compactifications:
 
 - the comparison of two compactifications through a common refinement does not depend on the
   refinement, so it is the comparison along any given refinement
-  (`ProEtale.CondensedRing.boundedConstructibleLowerShriekOfCompactificationIso_padicAlgCl_eq`);
+  (`ProEtale.CondensedRing.boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl_eq`);
 - the comparisons satisfy the cocycle condition
-  (`ProEtale.CondensedRing.boundedConstructibleLowerShriekOfCompactificationIso_padicAlgCl_trans`);
+  (`ProEtale.CondensedRing.boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl_trans`);
 - the comparisons along refinements are transitive under composition
-  (`ProEtale.CondensedRing.boundedConstructibleLowerShriekRefinementIso_trans`).
+  (`ProEtale.CondensedRing.boundedConstructibleLowerShriekRefinementIso'_trans`).
 
 -/
 
@@ -56,6 +56,7 @@ section Coherence
 
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
   (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
+  [IsFinitenessCoefficient ℓ Λ]
   {X Z Z₁ Z₂ Y : Over (Spec (.of k))}
   [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Z.hom]
   [QuasiCompact Z.hom] [IsSeparated Z.hom] [LocallyOfFiniteType Z₁.hom] [QuasiCompact Z₁.hom]
@@ -70,18 +71,18 @@ composite `h ≫ h₁` is the composite of the comparisons. The blueprint states
 refinements of compactifications; it is used here for factorizations with an open immersion
 followed by an arbitrary morphism, such as `U ⟶[j] X ⟶[𝟙] X`, which are compactifications up to
 the identification of the middle object. -/
-theorem boundedConstructibleLowerShriekRefinementIso_trans {i : X ⟶ Z} {i₁ : X ⟶ Z₁}
+theorem boundedConstructibleLowerShriekRefinementIso'_trans {i : X ⟶ Z} {i₁ : X ⟶ Z₁}
     {i₂ : X ⟶ Z₂} [IsOpenImmersion i.left] [IsOpenImmersion i₁.left] [IsOpenImmersion i₂.left]
     {h : Z ⟶ Z₁} {h₁ : Z₁ ⟶ Z₂} {h₂ : Z ⟶ Z₂} (sq : IsPullback (𝟙 X) i i₁ h)
     (sq₁ : IsPullback (𝟙 X) i₁ i₂ h₁) (sq₂ : IsPullback (𝟙 X) i i₂ h₂) (_hh : h ≫ h₁ = h₂)
     {p : Z ⟶ Y} {p₁ : Z₁ ⟶ Y} {p₂ : Z₂ ⟶ Y} (wp : h ≫ p₁ = p) (wp₁ : h₁ ≫ p₂ = p₁)
     (wp₂ : h₂ ≫ p₂ = p)
-    [IsIso (boundedConstructibleLowerStarOpenImmersionLowerShriekExchange Λ ℓ sq)]
-    [IsIso (boundedConstructibleLowerStarOpenImmersionLowerShriekExchange Λ ℓ sq₁)]
-    [IsIso (boundedConstructibleLowerStarOpenImmersionLowerShriekExchange Λ ℓ sq₂)] :
-    boundedConstructibleLowerShriekRefinementIso Λ ℓ sq₁ wp₁ ≪≫
-        boundedConstructibleLowerShriekRefinementIso Λ ℓ sq wp =
-      boundedConstructibleLowerShriekRefinementIso Λ ℓ sq₂ wp₂ :=
+    [IsIso (boundedConstructibleLowerStarOpenImmersionLowerShriekExchange' Λ ℓ sq)]
+    [IsIso (boundedConstructibleLowerStarOpenImmersionLowerShriekExchange' Λ ℓ sq₁)]
+    [IsIso (boundedConstructibleLowerStarOpenImmersionLowerShriekExchange' Λ ℓ sq₂)] :
+    boundedConstructibleLowerShriekRefinementIso' Λ ℓ sq₁ wp₁ ≪≫
+        boundedConstructibleLowerShriekRefinementIso' Λ ℓ sq wp =
+      boundedConstructibleLowerShriekRefinementIso' Λ ℓ sq₂ wp₂ :=
   sorry
 
 variable {X Y : Over (Spec (.of k))}
@@ -91,11 +92,11 @@ variable {X Y : Over (Spec (.of k))}
 /-- Blueprint `prop-compactification-coherence-detailed`, cocycle clause ("the resulting
 comparison is independent of that choice and satisfies the cocycle condition for triples of
 compactifications"), for bounded constructible `ℚ̄_ℓ`-sheaves. -/
-theorem boundedConstructibleLowerShriekOfCompactificationIso_padicAlgCl_trans
+theorem boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl_trans
     (c₁ c₂ c₃ : Compactification f.left) :
-    boundedConstructibleLowerShriekOfCompactificationIso_padicAlgCl ℓ c₁ c₂ ≪≫
-        boundedConstructibleLowerShriekOfCompactificationIso_padicAlgCl ℓ c₂ c₃ =
-      boundedConstructibleLowerShriekOfCompactificationIso_padicAlgCl ℓ c₁ c₃ :=
+    boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl ℓ c₁ c₂ ≪≫
+        boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl ℓ c₂ c₃ =
+      boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl ℓ c₁ c₃ :=
   sorry
 
 /-- Blueprint `prop-compactification-coherence-detailed`, refinement clause ("for a refinement
@@ -104,13 +105,13 @@ composite of the proper-composition isomorphism with the isomorphism `Ru_* j_{1!
 "comparison through a common refinement gives a natural isomorphism", independent of the choice
 of the refinement): the comparison of `c₁` with a refinement `c` of `c₁` is the comparison along
 the refinement. -/
-theorem boundedConstructibleLowerShriekOfCompactificationIso_padicAlgCl_eq
+theorem boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl_eq
     {c c₁ : Compactification f.left} (r : Compactification.OverRefinement c c₁) :
     haveI := r.isProper
-    haveI := isIso_boundedConstructibleLowerStarOpenImmersionLowerShriekExchange_padicAlgCl ℓ
+    haveI := isIso_boundedConstructibleLowerStarOpenImmersionLowerShriekExchange'_padicAlgCl ℓ
       r.isPullback
-    boundedConstructibleLowerShriekOfCompactificationIso_padicAlgCl ℓ c₁ c =
-      boundedConstructibleLowerShriekRefinementIso _ ℓ r.isPullback r.hom_overG :=
+    boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl ℓ c₁ c =
+      boundedConstructibleLowerShriekRefinementIso' _ ℓ r.isPullback r.hom_overG :=
   sorry
 
 end Coherence
@@ -167,6 +168,7 @@ section LowerStarUnit
 
 variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
   (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)]
+  [IsFinitenessCoefficient ℓ Λ]
   {X Y : Over (Spec (.of k))}
   [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Y.hom]
   [QuasiCompact Y.hom] [IsSeparated Y.hom]
@@ -312,31 +314,31 @@ identifications of the lower shriek is the comparison along the refinement `j` o
 compactification `U ⟶[j] X ⟶[𝟙] X` by `U ⟶[𝟙] U ⟶[j] X`, up to the identifications
 `R(𝟙 X)_* ≅ 𝟭` and `(𝟙 U)_! ≅ 𝟭`. -/
 lemma boundedConstructibleLowerShriekIsoOpenImmersionLowerShriek_inv_comp :
-    haveI := isIso_boundedConstructibleLowerStarOpenImmersionLowerShriekExchange_padicAlgCl ℓ
+    haveI := isIso_boundedConstructibleLowerStarOpenImmersionLowerShriekExchange'_padicAlgCl ℓ
       (isPullback_openImmersionProperRefinementHom j)
     (boundedConstructibleLowerShriekIsoOpenImmersionLowerShriek_padicAlgCl ℓ j).inv ≫
         (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ j).hom =
       (Functor.rightUnitor _).inv ≫
         Functor.whiskerLeft _ (boundedConstructibleLowerStarId _ ℓ X).inv ≫
-        (boundedConstructibleLowerShriekRefinementIso _ ℓ
+        (boundedConstructibleLowerShriekRefinementIso' _ ℓ
           (isPullback_openImmersionProperRefinementHom j)
           (openImmersionProperRefinementHom_comp_id j)).hom ≫
         Functor.whiskerRight
           (boundedConstructibleOpenImmersionLowerShriekOfIsProperIso _ ℓ j).hom _ ≫
         (Functor.leftUnitor _).hom := by
-  have := isIso_boundedConstructibleLowerStarOpenImmersionLowerShriekExchange_padicAlgCl ℓ
+  have := isIso_boundedConstructibleLowerStarOpenImmersionLowerShriekExchange'_padicAlgCl ℓ
     (isPullback_openImmersionProperRefinementHom j)
-  have := isIso_boundedConstructibleLowerStarOpenImmersionLowerShriekExchange_padicAlgCl ℓ
+  have := isIso_boundedConstructibleLowerStarOpenImmersionLowerShriekExchange'_padicAlgCl ℓ
     (isPullback_openImmersionCompactificationHom j)
   have := (openImmersionProperRefinement j).isProper
-  have := isIso_boundedConstructibleLowerStarOpenImmersionLowerShriekExchange_padicAlgCl ℓ
+  have := isIso_boundedConstructibleLowerStarOpenImmersionLowerShriekExchange'_padicAlgCl ℓ
     (openImmersionProperRefinement j).isPullback
-  have hc := congrArg Iso.hom (boundedConstructibleLowerShriekOfCompactificationIso_padicAlgCl_trans
+  have hc := congrArg Iso.hom (boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl_trans
     ℓ (compactificationOverField j) (Compactification.ofIsOpenImmersion j.left)
     (Compactification.ofIsProper j.left))
-  have hr := congrArg Iso.hom (boundedConstructibleLowerShriekOfCompactificationIso_padicAlgCl_eq
+  have hr := congrArg Iso.hom (boundedConstructibleLowerShriekOfCompactificationIso'_padicAlgCl_eq
     ℓ (openImmersionProperRefinement j))
-  have ht := congrArg Iso.hom (boundedConstructibleLowerShriekRefinementIso_trans
+  have ht := congrArg Iso.hom (boundedConstructibleLowerShriekRefinementIso'_trans
     (Profinite.padicAlgClRingObj ℓ) ℓ
     (isPullback_openImmersionProperRefinementHom j) (isPullback_openImmersionCompactificationHom j)
     (openImmersionProperRefinement j).isPullback rfl (openImmersionProperRefinementHom_comp_id j)
@@ -369,7 +371,7 @@ theorem boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl_clopen_of
           (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ j).hom.app M) ≫
       (boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
         j).counit.app M = 𝟙 M := by
-  have := isIso_boundedConstructibleLowerStarOpenImmersionLowerShriekExchange_padicAlgCl ℓ
+  have := isIso_boundedConstructibleLowerStarOpenImmersionLowerShriekExchange'_padicAlgCl ℓ
     (isPullback_openImmersionProperRefinementHom j)
   -- the objects attached to the middle object of `U ⟶[𝟙] U ⟶[j] X`, read on `U`
   let iS₀ := boundedConstructibleOpenImmersionLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ
@@ -381,7 +383,7 @@ theorem boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl_clopen_of
   let a'₀ := boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction
     (Profinite.padicAlgClRingObj ℓ) ℓ (Compactification.ofIsProper j.left).overI
   let a' : iS ⊣ boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (𝟙 U) := a'₀
-  let BC₀ := boundedConstructibleOpenImmersionLowerShriekBaseChangeIso
+  let BC₀ := boundedConstructibleOpenImmersionLowerShriekBaseChangeIso'
     (Profinite.padicAlgClRingObj ℓ) ℓ (isPullback_openImmersionProperRefinementHom j)
   let BC : boundedConstructibleOpenImmersionLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ j ⋙
       boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j ≅
@@ -392,7 +394,7 @@ theorem boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl_clopen_of
       boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (𝟙 U) ≅
       boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j ⋙
       boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (𝟙 U) := θ₀
-  let Exch₀ := boundedConstructibleLowerStarOpenImmersionLowerShriekExchange
+  let Exch₀ := boundedConstructibleLowerStarOpenImmersionLowerShriekExchange'
     (Profinite.padicAlgClRingObj ℓ) ℓ (isPullback_openImmersionProperRefinementHom j)
   let Exch : boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ (𝟙 U) ⋙
       boundedConstructibleOpenImmersionLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ j ⟶
@@ -405,8 +407,8 @@ theorem boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl_clopen_of
   have hBC : BC.inv = Adjunction.exchangeLeft
       (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction _ ℓ j) a' θ := by
     simp only [BC, BC₀, a', a'₀, θ, θ₀]
-    rw [boundedConstructibleOpenImmersionLowerShriekBaseChangeIso, Iso.symm_inv, asIso_hom,
-      boundedConstructibleOpenImmersionLowerShriekBaseChange_eq_exchangeLeft]
+    rw [boundedConstructibleOpenImmersionLowerShriekBaseChangeIso', Iso.symm_inv, asIso_hom,
+      boundedConstructibleOpenImmersionLowerShriekBaseChange'_eq_exchangeLeft]
   have hθ1 (Z : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) : θ.hom.app Z = 𝟙 _ := by
     simp only [θ, θ₀, boundedConstructiblePullbackSquareComparison_hom_app]
     rw [← cancel_epi ((boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ
@@ -440,10 +442,10 @@ theorem boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl_clopen_of
         (boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ j).map
           (iS.map ((boundedConstructibleUpperStarLowerStarAdjunction
             (Profinite.padicAlgClRingObj ℓ) ℓ (𝟙 U)).counit.app N)) := by
-    simp [Exch, Exch₀, boundedConstructibleLowerStarOpenImmersionLowerShriekExchange,
-      boundedConstructibleLowerStarOpenImmersionLowerShriekExchangeUnitStep,
-      boundedConstructibleLowerStarOpenImmersionLowerShriekExchangeSquareStep,
-      boundedConstructibleLowerStarOpenImmersionLowerShriekExchangeCounitStep, BC, BC₀]
+    simp [Exch, Exch₀, boundedConstructibleLowerStarOpenImmersionLowerShriekExchange',
+      boundedConstructibleLowerStarOpenImmersionLowerShriekExchangeUnitStep',
+      boundedConstructibleLowerStarOpenImmersionLowerShriekExchangeSquareStep',
+      boundedConstructibleLowerStarOpenImmersionLowerShriekExchangeCounitStep', BC, BC₀]
     rfl
   have hF3 := clopen_baseChange_aux
     (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction _ ℓ j) a' ι
@@ -465,7 +467,7 @@ theorem boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl_clopen_of
         comp.hom.app (iS.obj M) ≫
         (boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ j).map (ι.hom.app M) := by
     rw [hφ]
-    simp [boundedConstructibleLowerShriekRefinementIso, Exch, Exch₀, comp, comp₀, ι, iS, iS₀]
+    simp [boundedConstructibleLowerShriekRefinementIso', Exch, Exch₀, comp, comp₀, ι, iS, iS₀]
     rfl
   rw [hφ₂]
   exact clopen_comparison_aux

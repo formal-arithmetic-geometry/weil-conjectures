@@ -81,7 +81,7 @@ theorem boundedConstructibleLowerShriekBaseChange_padicAlgCl_of_isOpenImmersion
     (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sq).app K ≫
         (boundedConstructibleLowerShriekIsoOpenImmersionLowerShriek_padicAlgCl ℓ f').hom.app
           ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g').obj K) ≫
-        (boundedConstructibleOpenImmersionLowerShriekBaseChange (Profinite.padicAlgClRingObj ℓ) ℓ
+        (boundedConstructibleOpenImmersionLowerShriekBaseChange' (Profinite.padicAlgClRingObj ℓ) ℓ
           sq.toCommSq).app K =
       (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g).map
         ((boundedConstructibleLowerShriekIsoOpenImmersionLowerShriek_padicAlgCl ℓ f).hom.app K) :=
@@ -186,7 +186,7 @@ lemma compToPoint_inv_app_comp_counit_comp_compactPullback {Φ : X ⟶ X} {ΦU :
       (Profinite.padicAlgClRingObj ℓ) ℓ j)
     (boundedConstructiblePullbackSquareComparison (Profinite.padicAlgClRingObj ℓ) ℓ
       sq.toCommSq.flip) K
-  rw [← boundedConstructibleOpenImmersionLowerShriekBaseChange_eq_exchangeLeft
+  rw [← boundedConstructibleOpenImmersionLowerShriekBaseChange'_eq_exchangeLeft
     (Profinite.padicAlgClRingObj ℓ) ℓ sq.toCommSq] at hEx
   have hB := compactPullback_app_comp_baseChange ℓ sq
     ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j).obj K)

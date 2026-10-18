@@ -118,9 +118,9 @@ noncomputable def diagUpperStarExternalProductIso
 `LΔ^* ⊣ RΔ_*` adjoint of the evaluation `LΔ^* (K ⊠ D_X K) ≅ K ⊗ D_X K ⟶ ω_X`. -/
 noncomputable def evaluationKernel (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     externalProduct ℓ K (verdierDual ℓ (toPoint X) K) ⟶
-      (boundedConstructibleLowerStar _ ℓ (diag X)).obj (dualizingComplex ℓ X) :=
+      (boundedConstructibleLowerStar _ ℓ (diag X)).obj (dualizingComplex' ℓ X) :=
   (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ (diag X)).homEquiv _ _
-    ((diagUpperStarExternalProductIso ℓ K _).hom ≫ (ihom.ev K).app (dualizingComplex ℓ X))
+    ((diagUpperStarExternalProductIso ℓ K _).hom ≫ (ihom.ev K).app (dualizingComplex' ℓ X))
 
 end Evaluation
 
@@ -332,10 +332,10 @@ end FixedLocus
 -/
 noncomputable def traceMap (F : c.FixedLocus) :
     c.traceClassSource ⟶
-      (boundedConstructibleLowerStar _ ℓ F.ι).obj (dualizingComplex ℓ F.F) :=
+      (boundedConstructibleLowerStar _ ℓ F.ι).obj (dualizingComplex' ℓ F.F) :=
   c.verdierDualityIso.hom ≫
     (boundedConstructibleUpperShriek _ ℓ c.support).map (evaluationKernel ℓ K) ≫
-    (F.upperShriekLowerStarIso.app (dualizingComplex ℓ X)).hom ≫
+    (F.upperShriekLowerStarIso.app (dualizingComplex' ℓ X)).hom ≫
     (boundedConstructibleLowerStar _ ℓ F.ι).map (dualizingComplexComp ℓ F.d).hom
 
 /-- The *trace class* `Tr_c(u) : ℚ̄_ℓ,Fix(c) ⟶ ω_Fix(c)` of an endocorrespondence (blueprint

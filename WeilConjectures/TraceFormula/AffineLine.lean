@@ -266,12 +266,12 @@ lemma unit_comp_map_baseChangeIso_inv_of_eq {U' Y' : Over (Spec (.of k))}
     (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction Λ ℓ j').unit.app
         ((boundedConstructibleUpperStar Λ ℓ gU).obj M) ≫
       (boundedConstructibleUpperStar Λ ℓ j').map
-        ((boundedConstructibleOpenImmersionLowerShriekBaseChangeIso Λ ℓ sq).inv.app M) =
+        ((boundedConstructibleOpenImmersionLowerShriekBaseChangeIso' Λ ℓ sq).inv.app M) =
     (boundedConstructibleUpperStar Λ ℓ gU).map
         ((boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction Λ ℓ j).unit.app M) ≫
       θ.hom.app ((boundedConstructibleOpenImmersionLowerShriek Λ ℓ j).obj M) := by
   subst hθ
-  rw [boundedConstructibleOpenImmersionLowerShriekBaseChangeIso_inv]
+  rw [boundedConstructibleOpenImmersionLowerShriekBaseChangeIso'_inv]
   exact Adjunction.unit_comp_map_exchangeLeft_app _ _ _ M
 
 omit [IsOpenImmersion j.left] in

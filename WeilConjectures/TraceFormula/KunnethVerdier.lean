@@ -105,12 +105,12 @@ of compact-support base change in the product square, the counit of `Ra_Y! ⊣ R
 unit isomorphism of the monoidal functor `La_X^*`. -/
 noncomputable def exceptionalKunnethAdjoint (M : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     (boundedConstructibleLowerShriek _ ℓ (prod.fst : X ⨯ Y ⟶ X)).obj
-        (externalProduct ℓ M (dualizingComplex ℓ Y)) ⟶ M :=
+        (externalProduct ℓ M (dualizingComplex' ℓ Y)) ⟶ M :=
   (boundedConstructibleLowerShriek _ ℓ (prod.fst : X ⨯ Y ⟶ X)).map (β_ _ _).hom ≫
     inv (((boundedConstructibleExceptionalProjection _ ℓ (prod.fst : X ⨯ Y ⟶ X)).app
       ((boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)).obj
-        (dualizingComplex ℓ Y))).app M) ≫
-    ((prodBaseChangeIso ℓ X Y).hom.app (dualizingComplex ℓ Y) ▷ M) ≫
+        (dualizingComplex' ℓ Y))).app M) ≫
+    ((prodBaseChangeIso ℓ X Y).hom.app (dualizingComplex' ℓ Y) ▷ M) ≫
     ((boundedConstructibleUpperStar _ ℓ (toPoint X)).map
       ((boundedConstructibleUpperShriekAdjunction _ ℓ (toPoint Y)).counit.app (𝟙_ _)) ▷ M) ≫
     ((Functor.Monoidal.εIso (boundedConstructibleUpperStar _ ℓ (toPoint X))).inv ▷ M) ≫
@@ -120,7 +120,7 @@ noncomputable def exceptionalKunnethAdjoint (M : Dᵇc(X.left)⟦Profinite.padic
 (ii), for `f₁ = 𝟙_X`, `f₂ = a_Y`, `L₁ = M`, `L₂ = ℚ̄_ℓ`): the exceptional adjoint of
 `exceptionalKunnethAdjoint`. -/
 noncomputable def exceptionalKunnethMap (M : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    externalProduct ℓ M (dualizingComplex ℓ Y) ⟶
+    externalProduct ℓ M (dualizingComplex' ℓ Y) ⟶
       (boundedConstructibleUpperShriek _ ℓ (prod.fst : X ⨯ Y ⟶ X)).obj M :=
   (boundedConstructibleUpperShriekAdjunction _ ℓ (prod.fst : X ⨯ Y ⟶ X)).homEquiv _ _
     (exceptionalKunnethAdjoint ℓ M)
@@ -136,7 +136,7 @@ noncomputable def kunnethVerdierPairing (M : Dᵇc(X.left)⟦Profinite.padicAlgC
   (α_ _ _ _).inv ≫ ((β_ _ _).hom ▷ _) ≫ (α_ _ _ _).hom ≫
     (_ ◁ Functor.LaxMonoidal.μ (boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)) _ _) ≫
     (_ ◁ (boundedConstructibleUpperStar _ ℓ (prod.snd : X ⨯ Y ⟶ Y)).map
-      ((ihom.ev N).app (dualizingComplex ℓ Y))) ≫
+      ((ihom.ev N).app (dualizingComplex' ℓ Y))) ≫
     exceptionalKunnethMap ℓ M
 
 /-- The *Künneth–Verdier map* `κ_{M,N} : M ⊠ D_Y N ⟶ RHom(Lp_Y^* N, Rp_X^! M)` (blueprint
@@ -157,18 +157,23 @@ instance isIso_kunnethVerdierMap (M : Dᵇc(X.left)⟦Profinite.padicAlgClRingOb
     IsIso (kunnethVerdierMap ℓ M N) :=
   sorry
 
+/-- The double-dual morphism is natural, for any braiding. -/
+private lemma bidualityMap_naturality {𝒞 : Type*} [Category 𝒞] [MonoidalCategory 𝒞]
+    [MonoidalClosed 𝒞] {_ : BraidedCategory 𝒞} (ω : 𝒞) {M M' : 𝒞} (f : M ⟶ M') :
+    f ≫ Verdier.bidualityMap ω M' = Verdier.bidualityMap ω M ≫ (pre ((pre f).app ω)).app ω :=
+  toIhomIhom_naturality ω f
+
 /-- **Verdier biduality for the dualizing complex** (blueprint `thm-trf-verdier-biduality`): for
 bounded constructible `M` on `Y`, the double-dual morphism `M ⟶ D_Y D_Y M`, the transpose of the
 evaluation `D_Y M ⊗ M ⟶ M ⊗ D_Y M ⟶ ω_Y`, is an isomorphism. It is the constructible biduality
 theorem (`isIso_verdierBiduality`, blueprint `thm-coef-qbar-verdier`). -/
 noncomputable def verdierBidualityIso (M : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     M ≅ verdierDual ℓ (toPoint Y) (verdierDual ℓ (toPoint Y) M) :=
-  haveI := isIso_verdierBiduality ℓ M
+  haveI := isIso_verdierBiduality ℓ (toPoint Y) M
   asIso (verdierBiduality ℓ (toPoint Y) M)
 
 lemma verdierBidualityIso_hom (M : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    (verdierBidualityIso ℓ M).hom =
-      curry ((β_ _ M).hom ≫ (ihom.ev M).app (dualizingComplex ℓ Y)) :=
+    (verdierBidualityIso ℓ M).hom = verdierBiduality ℓ (toPoint Y) M :=
   rfl
 
 /-- The biduality isomorphism is natural (blueprint `thm-trf-verdier-biduality`). -/
@@ -177,7 +182,7 @@ lemma verdierBidualityIso_hom_naturality {M M' : Dᵇc(Y.left)⟦Profinite.padic
     (f : M ⟶ M') :
     f ≫ (verdierBidualityIso ℓ M').hom =
       (verdierBidualityIso ℓ M).hom ≫
-        (pre ((pre f).app (dualizingComplex ℓ Y))).app (dualizingComplex ℓ Y) :=
-  toIhomIhom_naturality (dualizingComplex ℓ Y) f
+        (pre ((pre f).app (dualizingComplex' ℓ Y))).app (dualizingComplex' ℓ Y) :=
+  bidualityMap_naturality _ f
 
 end AlgebraicGeometry.ProEtale.CondensedRing

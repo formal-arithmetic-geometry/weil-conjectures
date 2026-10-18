@@ -5,13 +5,13 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.CategoryTheory.Monoidal.Closed.VerdierExchange
+public import WeilConjectures.PoincareDuality.Abstract
 
 /-!
 
 # Exceptional internal hom and classes of correspondences for an abstract adjunction
 
-This file continues `WeilConjectures.CategoryTheory.Monoidal.Closed.VerdierExchange`, in the same
+This file continues `WeilConjectures.PoincareDuality.Abstract`, in the same
 abstract setting: `C` (for `D(C)`) and `D` (for `D(Z)`) are braided monoidal closed categories,
 `F : D ⥤ C` plays the role of `Lc^*`, `adj' : P ⊣ S` the role of `Rc_! ⊣ Rc^!` and
 ```
