@@ -219,5 +219,23 @@
   "group": "Q09",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q09-5c6c40e7c (reviewer sub-agent of L); spot-checked: Read both nodes, every proof step and cited statement, current blueprint route, Stacks passages, and pinned Mathlib matches. Normality, degrees, tensor identification, integral closure, and both automorphism maps check out. No duplicate, cycle, forbidden dependency, or repair found. Accepted both declared algebra tool_uses; details in review.md."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.HenselianFiniteGaloisLift",
+  "declaration": "HenselianLocalRing.finiteGaloisLift",
+  "file": "lean/Sheaf/RingTheory/HenselianFiniteGaloisLift.lean",
+  "statement": "theorem finiteGaloisLift (H : Type u) [CommRing H] [HenselianLocalRing H] [IsDomain H] [IsIntegrallyClosed H] (B : Type v) [CommRing B] [IsLocalRing B] [Algebra H B] [Module.Finite H B] [Algebra.Etale H B] (e : Type w) [Field e] [Algebra (IsLocalRing.ResidueField H) e] [Algebra H e] [IsScalarTower H (IsLocalRing.ResidueField H) e] [FiniteDimensional (IsLocalRing.ResidueField H) e] [IsGalois (IsLocalRing.ResidueField H) e] (r : (B ⧸ (IsLocalRing.maximalIdeal H).map (algebraMap H B)) ≃ₐ[H] e) : IsDomain B ∧ IsIntegrallyClosed B ∧ Function.Injective (algebraMap H B) ∧ ∀ (K : Type x) [Field K] [Algebra H K] [IsFractionRing H K] (E : Type y) [Field E] [Algebra B E] [IsFractionRing B E] [Algebra H E] [IsScalarTower H B E] [Algebra K E] [IsScalarTower H K E], FiniteDimensional K E ∧ IsGalois K E ∧ Module.finrank K E = Module.finrank (IsLocalRing.ResidueField H) e ∧ (∃ t : K ⊗[H] B ≃ₐ[K] E, ∀ (k : K) (b : B), t (k ⊗ₜ[H] b) = algebraMap K E k * algebraMap B E b) ∧ (∀ a : E, IsIntegral H a ↔ ∃ b : B, algebraMap B E b = a) ∧ ∃ (s : (E ≃ₐ[K] E) ≃* (B ≃ₐ[H] B)) (q : (B ≃ₐ[H] B) ≃* (e ≃ₐ[IsLocalRing.ResidueField H] e)), (∀ (σ : E ≃ₐ[K] E) (b : B), algebraMap B E (s σ b) = σ (algebraMap B E b)) ∧ ∀ (τ : B ≃ₐ[H] B) (b : B), q τ (r (Ideal.Quotient.mk _ b)) = r (Ideal.Quotient.mk _ (τ b))",
+  "branch": "newtargets-dag",
+  "by": "NJ",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-acbe4dc3a",
+  "group": "NJ",
+  "result": "pass",
+  "note": "Clause-by-clause match of HenselianLocalRing.finiteGaloisLift to the node and Stacks 0BSW. Hypotheses: HenselianLocalRing + IsDomain + IsIntegrallyClosed H; IsLocalRing, Module.Finite, Algebra.Etale B; FiniteDimensional + IsGalois e/κ; r : B/mB ≃ₐ[H] e with Algebra H e forced by the scalar tower. Conclusions: normal domain, injectivity, finite Galois with equal degree, tensor iso fixed on pure tensors, integral closure as an iff, restriction and reduction group isos fixed by formulas. K and E are quantified in the conclusion, and the scalar tower forces the K→E inclusion. No stronger assumptions, five independent universes, no definitions, sorry only. Source and blueprint docstrings and all 7 proof steps present. lean.statement verbatim; node differs from the side clone only in lean. nt_compile --json: rc 0, no errors (a broken control copy confirmed diagnostics are reported). Edge cases checked: field H, degree 1, zero ring, non-local B. No findings."
  }
 }

@@ -325,5 +325,42 @@
   "group": "NF",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NF-071444256 (reviewer sub-agent of L); spot-checked: Read in full: the item (10 steps), the new node lem-wf-exact-finite-gsets-forgetful, every cited statement, Stacks pione.tex 0BMV (280-349), 0BN5 (672-703), 0BND(2) and Weil II (1.1.1) b)-d) pp.146-147. The new node is exactly 0BMV (any topological group, exact and finite-valued H, no conservativity assumed). It is statement-only, strictly smaller than the item and duplicated nowhere in the DAG. Small cases checked: trivial G, finite G, H=U. All steps check. Step 2 composes the counit correctly: t=F_z(eps) after s_B. Step 3 gives c_{t'}=Int(a)c_t with a in pi_z. Steps 4-5 get linearity from naturality along set maps, which is valid for noncommutative A; finite scalar extension uses lem-pod(3). Steps 6-9 are levelwise, ramified (n=ceil(m/e)), rational and colimit transport with no limit/stalk interchange. Step 10 gives both action identities from cor-galois-lisse-representations. Step 7 cites cor(2) loosely for the canonical comparison map but the argument does not depend on it. Hypotheses: connectedness alone for the finite part; Noetherian, separated and ell invertible only for the adic part. Statement unchanged and not weakened. lem-real-lisse-path-fibres overlaps but is an existing, stronger-hypothesis node of another unit, not a duplicate created here. Batch-5 check: lem-pod-lisse-tensor-and-scalar-extension (closure 68 nodes: stalk, sheafification and tensor lemmas only) and def-pod-lisse-adic-fibre-functors (a definition whose closure is definitions only) reach no trace-formula or Poincare-duality statement, assumption leaf or batch-4 target. Both are general lisse-sheaf infrastructure outside the assumed statements, so both are accepted. FIX: step 1 used lem-fet-galois-category (an sk-prop-h2 statement) without declaring it; I added it to split_report.tool_uses in fixes/dag/nodes/sec-algebraic-groups-lie-algebras/lem-wf-fibre-functor-basepoint-transport.json, with nothing else changed. Accepted tool_uses: thm-galois-fundamental, lem-fet-galois-category, thm-galois-lc-etale, cor-galois-lisse-representations, lem-pod-lisse-tensor-and-scalar-extension.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FibreFunctorBasepointTransport",
+  "declaration": "AlgebraicGeometry.Scheme.fibre_functor_basepoint_transport",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.pathModuleFiber",
+   "AlgebraicGeometry.Scheme.pathUnderlyingStalk",
+   "AlgebraicGeometry.Scheme.pathScalarStalk",
+   "AlgebraicGeometry.Scheme.LinearFibrePathFamily",
+   "AlgebraicGeometry.Scheme.pathIntegralScalarLevelIso",
+   "AlgebraicGeometry.Scheme.FiniteFibrePathTransport",
+   "AlgebraicGeometry.Scheme.AdicFibrePathData",
+   "AlgebraicGeometry.Scheme.adicIntegralPathEvaluation",
+   "AlgebraicGeometry.Scheme.adicRationalPathEvaluation",
+   "AlgebraicGeometry.Scheme.adicAlgebraicPathEvaluation",
+   "AlgebraicGeometry.Scheme.AdicFibreScalarData",
+   "AlgebraicGeometry.Scheme.adicIntegralScalarGerm",
+   "AlgebraicGeometry.Scheme.adicIntegralScalarPath",
+   "AlgebraicGeometry.Scheme.adicRationalScalarTensor",
+   "AlgebraicGeometry.Scheme.adicRationalScalarPath",
+   "AlgebraicGeometry.Scheme.AdicFibrePathTransport",
+   "AlgebraicGeometry.Scheme.fibre_functor_basepoint_transport"
+  ],
+  "file": "lean/Sheaf/Paper/FibreFunctorBasepointTransport.lean",
+  "statement": "theorem fibre_functor_basepoint_transport {Y : Scheme.{u}} [ConnectedSpace Y] {Ωy : Type u} [Field Ωy] [IsAlgClosed Ωy] (y : Spec (.of Ωy) ⟶ Y) {Ωz : Type u} [Field Ωz] [IsAlgClosed Ωz] (z : Spec (.of Ωz) ⟶ Y) : Nonempty (flcFiber y ≅ flcFiber z) ∧ (∀ t : flcFiber y ≅ flcFiber z, ∃ c : Aut (flcFiber y) ≃ₜ* Aut (flcFiber z), c.toMulEquiv = t.conjAut ∧ ∀ (s : flcFiber y ≅ flcFiber z) (g : Aut (flcFiber y)), s.conjAut g = (t.symm ≪≫ s).symm ≪≫ c g ≪≫ (t.symm ≪≫ s)) ∧ Nonempty (FiniteFibrePathTransport Y) ∧ ∀ (l : ℕ) [Fact l.Prime] [IsNoetherian Y] [Y.IsSeparated] [∀ x : Y, Invertible (l : Y.residueField x)] (Q : Type (u + 1)) [Field Q] [Algebra ℚ_[l] Q] [IsAlgClosure ℚ_[l] Q], Nonempty (AdicFibrePathTransport l Y Q)",
+  "branch": "newtargets-dag",
+  "by": "Q01",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-be8329607",
+  "group": "Q01",
+  "result": "pass",
+  "note": "Every clause of the node matches the Lean: the composition order of c_t and of Int(a)c_t was checked, the topology is the existing SetFunctorAut evaluation topology, the finite transport is pinned by evaluation on the underlying FLC sheaf, the scalar square uses the canonical pathScalarStalk, and the adic maps are pinned levelwise and by tensor formulas, with the scalar comparisons fixed by germ and tensor formulas. The adic hypotheses apply only to the adic conjunct, and the coefficient universes match cor-galois-lisse-representations and def-pod-lisse-adic-fibre-functors. The flcFiber §1(B) repair of def-galois-fibre-functor is justified because the node defines the fibre on FLC, not FEt; it is the expression already used by FiberEquivalence, and only lean changes. No hollow definitions, only the item theorem is sorry, docstrings and verbatim statements are in place, and the report sections are present. nt_compile.py on both files: rc 0, no errors or warnings (2.3 s and 19.0 s). Minor: the report's statement that lem-wf-exact-finite-gsets-forgetful has no record is stale (Q37 has recorded it); this is harmless."
  }
 }

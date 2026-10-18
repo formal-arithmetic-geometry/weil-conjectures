@@ -416,5 +416,23 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.Paper.IntegralModelsOperations",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.integralModelsOperations",
+  "file": "lean/Sheaf/Paper/IntegralModelsOperations.lean",
+  "statement": "theorem integralModelsOperations (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ) : (∀ {X Y : Scheme.{u}} [IsNoetherian X] [IsNoetherian Y] (f : X ⟶ Y) (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.val) Y))), constantModelBoundedConstructible (Profinite.padicIntegersRingObj ℓ E.val) Y K → constantModelBoundedConstructible (Profinite.padicIntegersRingObj ℓ E.val) X (((upperStar (Profinite.padicIntegersRingObj ℓ E.val) f).mapDerivedCategory).obj K)) ∧ (∀ (X : Scheme.{u}) [IsNoetherian X] (K M : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.val) X))), constantModelBoundedConstructible (Profinite.padicIntegersRingObj ℓ E.val) X K → constantModelBoundedConstructible (Profinite.padicIntegersRingObj ℓ E.val) X M → constantModelBoundedConstructible (Profinite.padicIntegersRingObj ℓ E.val) X (((derivedTensor (Profinite.padicIntegersRingObj ℓ E.val) X).obj K).obj M)) ∧ (∀ {S Z X : Scheme.{u}} [IsNoetherian S] [IsNoetherian Z] [IsNoetherian X] (j : S ⟶ Z) [IsOpenImmersion j] (i : Z ⟶ X) [IsClosedImmersion i] (L : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology S) Ab.{u + 1}) (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.val) S))), constantModelBoundedConstructible (Profinite.padicIntegersRingObj ℓ E.val) S L → constantModelBoundedConstructible (Profinite.padicIntegersRingObj ℓ E.val) X (((lowerStar (Profinite.padicIntegersRingObj ℓ E.val) i).rightDerivedFunctor).obj (((openImmersionLowerShriek (Profinite.padicIntegersRingObj ℓ E.val) j).mapDerivedCategory).obj L))) ∧ (∀ {S Z X : Scheme.{u}} [IsNoetherian S] [IsNoetherian Z] [IsNoetherian X] (j : S ⟶ Z) [IsOpenImmersion j] (i : Z ⟶ X) [IsClosedImmersion i] (L : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology S) Ab.{u + 1}) (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.val) S))) (M : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.val) X))), Nonempty ((((derivedTensor (Profinite.padicIntegersRingObj ℓ E.val) X).obj (((lowerStar (Profinite.padicIntegersRingObj ℓ E.val) i).rightDerivedFunctor).obj (((openImmersionLowerShriek (Profinite.padicIntegersRingObj ℓ E.val) j).mapDerivedCategory).obj L))).obj M) ≅ ((lowerStar (Profinite.padicIntegersRingObj ℓ E.val) i).rightDerivedFunctor).obj (((openImmersionLowerShriek (Profinite.padicIntegersRingObj ℓ E.val) j).mapDerivedCategory).obj (((derivedTensor (Profinite.padicIntegersRingObj ℓ E.val) S).obj L).obj (((upperStar (Profinite.padicIntegersRingObj ℓ E.val) (j ≫ i)).mapDerivedCategory).obj M)))))",
+  "branch": "newtargets-dag",
+  "by": "Q86",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d76c7c007",
+  "group": "Q86",
+  "result": "pass",
+  "note": "Read the node, all 7 statement dependencies, the report and the module, plus the side declarations constantModelBoundedConstructible, padicIntegersRingObj, upperStar, lowerStar, openImmersionLowerShriek and derivedTensor. All four clauses match: an arbitrary f for pullback; the uncompleted derived tensor; a_! = R i_* u_! via an explicit open-then-closed factorization with i_* exact; and the projection formula for unbounded L and M with a^* = (j≫i)^*, stated as Nonempty iso for the node's assertion. Dbc is the scalar finite-constant-model predicate that proof step 1 fixes, with no completeness. Every scheme is Noetherian (AlgebraicGeometry.IsNoetherian) and nothing stronger is assumed. One universe u with Ab.{u+1}; everything is bound. lean.statement equals the file signature; the node changes only by its lean field. No new definitions, no duplicate. Docstrings have the source and blueprint tag and the 11 proof steps; the proof is sorry only (axioms checked). The report has a Worker report and a Second reading section. nt_compile.py --json: exit 0, 4.8 s, clean; a control copy with an injected error was reported."
  }
 }

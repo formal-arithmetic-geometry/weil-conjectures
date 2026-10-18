@@ -271,5 +271,30 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ProEtaleProperOpenInterchange",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.properOpenInterchange",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.compositionInterchangePullback",
+   "AlgebraicGeometry.ProEtale.CondensedRing.compositionInterchangeRestriction",
+   "AlgebraicGeometry.ProEtale.CondensedRing.compositionInterchangeIsNormalized",
+   "AlgebraicGeometry.ProEtale.CondensedRing.properOpenInterchange"
+  ],
+  "file": "lean/Sheaf/Paper/ProEtaleProperOpenInterchange.lean",
+  "statement": "theorem properOpenInterchange (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))] [Ybar.Over (Spec (.of k))] [c.obj.obj.Z.Over (Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))] [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))] [IsSeparated (Y ↘ Spec (.of k))] [LocallyOfFiniteType (Ybar ↘ Spec (.of k))] [QuasiCompact (Ybar ↘ Spec (.of k))] [IsSeparated (Ybar ↘ Spec (.of k))] [LocallyOfFiniteType (c.obj.obj.Z ↘ Spec (.of k))] [QuasiCompact (c.obj.obj.Z ↘ Spec (.of k))] [IsSeparated (c.obj.obj.Z ↘ Spec (.of k))] [p.IsOver (Spec (.of k))] [i.IsOver (Spec (.of k))] [c.obj.obj.i.IsOver (Spec (.of k))] [c.obj.obj.g.IsOver (Spec (.of k))] [QuasiCompact i] [IsProper p] [IsSchemeTheoreticallyDominant c.obj.obj.i] (_hΛ : (∃ (A : Type u) (_ : CommRing A) (_ : Finite A) (_ : TopologicalSpace A) (_ : DiscreteTopology A) (_ : IsTopologicalRing A), (∃ n : ℕ, (ℓ ^ n : A) = 0) ∧ Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousCoefficientRingObj A))) ∨ Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj ℤ_[ℓ])) ∨ Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj ℚ_[ℓ])) ∨ (∃ E : PadicAlgCl.FiniteIntermediateField ℓ, Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.padicIntegersRingObj ℓ E.1)) ∨ Nonempty (Mon.mk Λ ≅ Mon.mk ((sheafCompose (coherentTopology Profinite.{u}) (forget₂ RingCat.{u + 1} Ab.{u + 1})).obj (Profinite.padicSubfieldCondensedRing ℓ E.1)))) ∨ Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.padicAlgClRingObj ℓ))) : c.obj.obj.g ⁻¹ᵁ i.opensRange = c.obj.obj.i.opensRange ∧ ∀ A : DerivedCategory (CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)), ∃ m : (openImmersionLowerShriek Λ i).mapDerivedCategory.obj ((lowerStar Λ p).rightDerivedFunctor.obj A) ⟶ (lowerStar Λ c.obj.obj.g).rightDerivedFunctor.obj ((openImmersionLowerShriek Λ c.obj.obj.i).mapDerivedCategory.obj A), compositionInterchangeIsNormalized Λ p i c A m ∧ (∀ m', compositionInterchangeIsNormalized Λ p i c A m' → m' = m) ∧ (localizingClosureProEtale Λ X A → IsIso m)",
+  "branch": "newtargets-dag",
+  "by": "Q12",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "The three auxiliary definitions construct the canonical pullback comparison, its derived adjoint restriction mate, and the identity-on-restriction normalization equation. No arbitrary comparison is chosen. The theorem bundles open-subscheme equality, existence and uniqueness on the unbounded category, and invertibility on the recorded localizing closure."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ec778f9db",
+  "group": "Q12",
+  "result": "pass",
+  "note": "Read the node, the 4 stmt_deps and their records, the blueprint statement and proof (main-20261015), the report and the module. Clause by clause: dc-setting binders as in landed records; admissible Λ as a six-way Mon-iso disjunction with the finite-subextension padicAlgClRingObj; IsProper p; quasi-compact open i; BoundaryCompactification(p≫i) with IsSchemeTheoreticallyDominant j' (the sketch-data sense of dense, which every citer supplies). Clause 1 is Scheme.Opens equality, with restriction carried by comm. Clause 2 is ∃! over normalized maps on the unbounded category, with normalization homEquiv(m)≫β = Rp_*(η_j'), equivalent to the citers' ρ∘i^*m∘η_i = id. Clause 3 is localizingClosureProEtale → IsIso m. The helper definitions are canonical (upperStarComp, mapDerivedCategory isos, adjunction mate). Their sorryAx traces only to the landed BoundaryCompactification's IsMultiplicative. Verbatim statement; node changed only in lean; 3-file shape; docstrings and proof plan present; lines ≤100; names fresh, and Etale.properOpenInterchangeCoherence is a different statement. nt_compile rc 0 in 5.4 s with no warnings; probes confirm the signature. Edge cases checked: empty Y, Ȳ and X̄, identity maps, A = 0, zero ring, E = Q_ℓ, universes. No findings."
  }
 }
