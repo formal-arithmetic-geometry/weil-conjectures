@@ -16,30 +16,9 @@ public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 public import WeilConjectures.AlgebraicGeometry.InvertibleExponent
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import WeilConjectures.Compactification.NagataCompactification
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Sheaf.AlgebraicGeometry.EtaleCompactSupportComparisons
-import Sheaf.AlgebraicGeometry.CompactifiableOverField
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
-import Sheaf.AlgebraicGeometry.GeometricFiberFinite
-import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.BaseChangeSquare
-import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
-import Sheaf.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
-import Sheaf.AlgebraicGeometry.SpecAlgClosedEtaleSheafConstantStalk
-import Sheaf.AlgebraicGeometry.EtaleModuleCohomologyForget
-import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
-import Mathlib.AlgebraicGeometry.Properties
-import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.FiniteComparison
-import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
-import Sheaf.AlgebraicGeometry.EtaleClosedImmersionEssentialImage
-import Sheaf.AlgebraicGeometry.EtaleInverseImageExact
-import WeilConjectures.AlgebraicGeometry.Sites.CohomologyClopen
-import Sheaf.AlgebraicGeometry.Sites.SeparablyClosedTorsionCohomologicalDimension
-import Sheaf.AlgebraicGeometry.Sites.CohomologicalDimension
-import Sheaf.AlgebraicGeometry.Sites.FiniteTypeTorsionCohomologicalDimension
-import Sheaf.AlgebraicGeometry.GeometricStalkSupport
+import WeilConjectures.AlgebraicGeometry.FieldBaseChangeDimension
+import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.CohomologicalDimension
+import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekIndependence
 
 /-!
 # Compact-support amplitude bounded by the original geometric fibres
@@ -153,6 +132,37 @@ theorem isZero_homology_rightDerivedLowerShriek_of_geometricFiberDimensionLE
           (compactSupportAmplitudeCompactification k Y f)).obj
           ((_root_.DerivedCategory.singleFunctor
             (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) 0).obj F))) := by
-  sorry
+  have : IsLocallyNoetherian Y := LocallyOfFiniteType.isLocallyNoetherian
+    (Y ↘ Spec (.of k))
+  have : CompactSpace Y := QuasiCompact.compactSpace_of_compactSpace
+    (Y ↘ Spec (.of k))
+  have hdim (Ω : Type u) [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ Y) :
+      topologicalKrullDim (pullback f s : Scheme.{u}) ≤ (d : WithBot ℕ∞) := by
+    obtain ⟨⟨y, t⟩, rfl⟩ := (Scheme.SpecToEquivOfField Ω Y).symm.surjective s
+    let a : Spec (.of (AlgebraicClosure (Y.residueField y))) ⟶
+        Spec (Y.residueField y) :=
+      Spec.map (CommRingCat.ofHom (algebraMap (Y.residueField y) _))
+    have he (K : Type u) [Field K] (b : Spec (.of K) ⟶ Spec (Y.residueField y)) :
+        topologicalKrullDim (pullback f (b ≫ Y.fromSpecResidueField y) : Scheme.{u}) =
+          topologicalKrullDim (f.fiber y) := by
+      let e := pullbackLeftPullbackSndIso f (Y.fromSpecResidueField y) b
+      calc
+        _ = topologicalKrullDim
+            (pullback (pullback.snd f (Y.fromSpecResidueField y)) b : Scheme.{u}) :=
+          (IsHomeomorph.topologicalKrullDim_eq _ e.hom.homeomorph.isHomeomorph).symm
+        _ = _ := topologicalKrullDim_pullback_eq_of_field
+          (k := Y.residueField y) (pullback.snd f (Y.fromSpecResidueField y)) b
+    change topologicalKrullDim
+      (pullback f (Spec.map t ≫ Y.fromSpecResidueField y) : Scheme.{u}) ≤ _
+    rw [he Ω (Spec.map t), ← he (AlgebraicClosure (Y.residueField y)) a]
+    exact hd y
+  have hz := isZero_homology_rightDerivedLowerShriek_singleFunctor_of_two_mul_lt Λ f
+    (X ↘ Spec (.of k)) (Y ↘ Spec (.of k)) (comp_over f _) d hdim F q hq
+  let K := (_root_.DerivedCategory.Plus.singleFunctor
+    (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) 0).obj F
+  exact hz.of_iso ((_root_.DerivedCategory.homologyFunctor _ q).mapIso
+    ((rightDerivedLowerShriekOfCompactificationPlusιIso Λ
+      (compactSupportAmplitudeCompactification k Y f)
+      (HasCompactification.compactification f)).app K))
 
 end AlgebraicGeometry.Etale
