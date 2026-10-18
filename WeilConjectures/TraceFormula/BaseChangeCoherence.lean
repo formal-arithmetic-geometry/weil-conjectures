@@ -186,6 +186,17 @@ lemma boundedConstructibleLowerShriekBaseChange_padicAlgCl_congr_app
   subst h₁ h₂ h₃ h₄
   simp
 
+
+/-- The compact-support base changes of squares differing only in the bottom map agree up to
+the cast. -/
+lemma boundedConstructibleLowerShriekBaseChange_padicAlgCl_congr_app_bottom
+    {g₁ g₂ : Y' ⟶ Y} (sq₁ : IsPullback g' f' f g₁) (sq₂ : IsPullback g' f' f g₂) (h : g₁ = g₂)
+    (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+    (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sq₁).app K =
+      eqToHom (by subst h; rfl) ≫
+        (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sq₂).app K := by
+  subst h
+  simp
 end Proper
 
 end AlgebraicGeometry.ProEtale.CondensedRing

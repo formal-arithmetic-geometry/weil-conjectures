@@ -119,4 +119,93 @@ lemma pullbackSquareComparison_hom_app_comp_map_upperStarComp_inv_app {ΦZ : Z �
     (fun a b c K ↦ boundedConstructibleUpperStarComp_assoc_app _ ℓ a b c K)
     (fun a b c K ↦ boundedConstructibleUpperStarComp_assoc_app _ ℓ a b c K) w.w.symm hi K
 
+set_option maxHeartbeats 1000000 in
+-- the instances of the categories of sheaves make the rewriting slow
+/-- The relative Frobenius part of `θ_f` at a fibre (blueprint
+`lem-trf-weil-shriek-operator-fibres`, proof of (2)): under the base change to the fibre `Z`
+of `y`, `Rf'_!(η_r)` followed by the composition isomorphisms becomes the pullback `Φ_Z^♯`. -/
+lemma baseChange_comp_relativeFrobenius_stalk {p : X' ⟶ X} {f' : X' ⟶ Y}
+    {r : X ⟶ X'} {ΦZ : Z ⟶ Z} {j : Z ⟶ X'} {y : RationalPoint Y} [IsProper r.left]
+    [IsProper ΦZ.left] (hZ : IsPullback (j ≫ p) (toPoint Z) (r ≫ f') y)
+    (hL : IsPullback j (toPoint Z) f' y) (hT : IsPullback (j ≫ p) ΦZ r j)
+    (hi : ΦZ ≫ j ≫ p = (j ≫ p) ≫ r ≫ p) (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+    (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ y).map
+        ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ f').map
+          ((boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+            r).unit.app ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ p).obj
+              K))) ≫
+      (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ y).map
+        ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ f').map
+          ((boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ r).inv.app
+            ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ r).obj
+              ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ p).obj K)))) ≫
+      (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ y).map
+        ((boundedConstructibleLowerShriekComp_padicAlgCl ℓ r f').inv.app
+          ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ r).obj
+            ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ p).obj K))) ≫
+      (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ y).map
+        ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (r ≫ f')).map
+          ((boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ r p).inv.app K)) ≫
+      (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ hZ).app
+        ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (r ≫ p)).obj K) =
+    (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ hL).app
+        ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ p).obj K) ≫
+      (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint Z)).map
+        ((boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ j p).inv.app K) ≫
+      (compactPullback ℓ ΦZ).app
+        ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (j ≫ p)).obj K) ≫
+      (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint Z)).map
+        ((weilUpperStarComparison ℓ ΦZ (r ≫ p) (j ≫ p) hi).hom.app K) := by
+  have hn₁ := (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ hZ).naturality
+    ((boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ r p).inv.app K)
+  have hV := boundedConstructibleLowerShriekBaseChange_padicAlgCl_paste_vert ℓ hT hL
+    ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ r).obj
+      ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ p).obj K))
+  have cV := boundedConstructibleLowerShriekBaseChange_padicAlgCl_congr_app ℓ hZ
+    (hT.paste_vert hL) rfl (comp_toPoint ΦZ).symm rfl rfl
+    ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ r).obj
+      ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ p).obj K))
+  have hn₂ := (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ hL).naturality
+    ((boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+      r).unit.app ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ p).obj K) ≫
+      (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ r).inv.app _)
+  have hU := map_unit_app_comp_boundedConstructibleLowerShriekBaseChange_padicAlgCl_app ℓ hT
+    ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ p).obj K)
+  simp only [boundedConstructibleUpperStarLowerShriekAdjunction_padicAlgCl,
+    Adjunction.ofNatIsoRight_unit, NatTrans.comp_app, Functor.whiskerLeft_app, Iso.symm_hom,
+    Functor.map_comp, Category.assoc] at hU
+  have hU' := congrArg
+    (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint Z)).map hU
+  have hn₃ := (boundedConstructibleLowerShriekCompToPoint ℓ ΦZ).hom.naturality
+    ((boundedConstructiblePullbackSquareComparison (Profinite.padicAlgClRingObj ℓ) ℓ
+      hT.toCommSq).hom.app ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
+        p).obj K))
+  have hn₄ := (compactPullback ℓ ΦZ).naturality
+    ((boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ j p).inv.app K)
+  have hPB := congrArg
+    (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint Z)).map
+    (pullbackSquareComparison_hom_app_comp_map_upperStarComp_inv_app ℓ hT.toCommSq hi K)
+  simp only [Functor.comp_map, Functor.map_comp, Category.assoc] at hn₁ hn₂ hn₃ hn₄ hU' hPB hV
+  rw [hn₁]
+  erw [cV]
+  rw [hV]
+  have hC := boundedConstructibleLowerShriekCompToPoint_hom_app ℓ ΦZ
+    ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (j ≫ p)).obj
+      ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ r).obj
+        ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ p).obj K)))
+  simp only [eqToHom_refl, Category.id_comp, Category.assoc]
+  rw [← Functor.map_comp_assoc (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ y)
+      ((boundedConstructibleLowerShriekComp_padicAlgCl ℓ r f').inv.app
+        ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ r).obj
+          ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ p).obj K)))]
+  rw [Iso.inv_hom_id_app (boundedConstructibleLowerShriekComp_padicAlgCl ℓ r f')
+      ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ r).obj
+        ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ p).obj K)),
+    CategoryTheory.Functor.map_id, Category.id_comp, reassoc_of% hn₂, reassoc_of% hU',
+    ← reassoc_of% hC, reassoc_of% hn₃]
+  rw [← reassoc_of% (compactPullback_app ℓ ΦZ
+    ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j).obj
+      ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ p).obj K))), hPB,
+    ← reassoc_of% hn₄]
+
 end AlgebraicGeometry.ProEtale.CondensedRing
