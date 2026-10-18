@@ -1,0 +1,116 @@
+{
+ "id": "def-pur-frame-principal-boundary",
+ "kind": "definition",
+ "title": "Individual principal-support Kummer boundary",
+ "status": "split",
+ "statement": "Fix the finite-field and positive finite coefficient datum $P$ of [def-pur-conventions], with ring $A$. Let $X$ be a $k$-scheme and $f\\in\\Gamma(X,\\mathcal O_X)$. Put $i:D=V(f)\\hookrightarrow X$, the principal zero closed subscheme [def-weil-closed-immersion], and let $j:W=X_f\\hookrightarrow X$ be its complementary open [def-weil-open-immersion]. Its restricted function is the actual localization unit. Use the finite root-tensor twist $A(1)$ of [def-coefficient-twists-detailed] and the all-level Kummer class of [def-pur-frame-kummer-class], on the site [def-weil-pbc-proetale-site]. Define the individual supported boundary $\\alpha_X(f)\\in H^2_D(X,A(1))$ [def-pur-support-cohomology] by applying the closed-open support connecting map of [thm-pur-with-support-exactness] to $\\kappa_W(f|_W)$. In the supported-Hom convention of [def-pur-supported-cup], this is composition with the canonical coefficient extension $0\\to j_!A_W\\to A_X\\to i_*A_D\\to0$: apply exact $j_!$ to the Kummer extension, map its target to $A(1)_X$ by the counit through the normalized twist restriction, then compose its degree-one Ext class with the coefficient extension class and take its derived-Hom representative. The coefficient maps are extension by zero followed by the counit and restriction of locally constant functions. This defines the class for every function, including a unit, a zero function, and the empty scheme; it does not assert Cartier or non-zero-divisor hypotheses.",
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-weil-closed-immersion",
+  "def-weil-open-immersion",
+  "def-coefficient-twists-detailed",
+  "def-pur-frame-kummer-class",
+  "def-weil-pbc-proetale-site",
+  "def-pur-support-cohomology",
+  "thm-pur-with-support-exactness",
+  "def-pur-supported-cup"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/def-pur-frame-class.md",
+  "place": "Individual closed-open pairs: alpha_j = partial_j kappa(f_j)"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The supported Kummer boundary of a function on its basic open in degree two with support on its principal zero subscheme.",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.germ_eq_zero_of_pow_mul_eq_zero\", \"groupHomology.boundariesOfIsBoundary₂_coe\", \"MeromorphicOn.divisor\", \"MeromorphicOn.divisor_zpow\", \"AlgebraicGeometry.Scheme.basicOpen_eq_bot_iff_forall_evaluation_eq_zero\", \"groupHomology.isBoundary₂_of_mem_boundaries₂\", \"Finsupp.support_sym2Mul_subset\", \"groupHomology.IsBoundary₂\"], \"digest\": \"53677d4df4df6cc5\"}",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "supportBoundary, kummer",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'supportBoundary'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "supportedKummer|kummerBoundary|supportBoundary",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "def .*([Kk]ummer|[Bb]oundary); blueprint_refs.py search individual closed",
+   "results": "Upstream RegularImmersion.lean:128 is the abstract frameClass. Shared OrdinarySupportedKummerBoundary.lean:110 is the Chern class, and :127 is a relative-boundary predicate for an invertible ideal, not a construction for an arbitrary principal function. Blueprint search finds only the owning frame definition.",
+   "date": "2026-10-18",
+   "verdict": "existing components reused; missing individual construction"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "def-pur-frame-class",
+  "date": "2026-10-18",
+  "group": "NZ"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-pur-frame-class",
+   "place": "Definition of each alpha_j before the ordered cup product",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer",
+ "lean": {
+  "module": "Sheaf.Paper.PurityFramePrincipalBoundary",
+  "declaration": "WeilConjectures.PurityFiniteSetting.frameBoundary",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.frameOpenInclusion",
+   "WeilConjectures.PurityFiniteSetting.frameCoefficientSequence_zero",
+   "WeilConjectures.PurityFiniteSetting.frameCoefficientSequence",
+   "WeilConjectures.PurityFiniteSetting.frameCoefficientSequence_shortExact",
+   "WeilConjectures.PurityFiniteSetting.frameTwistCounit",
+   "WeilConjectures.PurityFiniteSetting.frameOpenKummer",
+   "WeilConjectures.PurityFiniteSetting.frameBoundary"
+  ],
+  "file": "lean/Sheaf/Paper/PurityFramePrincipalBoundary.lean",
+  "statement": "def frameBoundary (P : PurityFiniteSetting.{u}) (X : Scheme.{u}) (a : X ⟶ Spec (.of P.field.k)) (f : Γ(X, ⊤)) : cupSupportedHom P (X.zeroLocusSubschemeι {f}) ((cupSingle P X).obj (P.frameTwist X 1)) 2",
+  "branch": "newtargets-dag",
+  "by": "NZ",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7be9f89c8",
+  "group": "NZ",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7be9f89c8",
+  "group": "NZ",
+  "result": "fix",
+  "note": "Mathematics correct and FIX supplied. All 15 node clauses checked against the 3 modules. Reuses the existing EtaleFrame, kummerδ₀, the finite root-line twist, ordinaryFiniteRootMap and the recorded supportedCup; l^n needs no e|n. Each factor has its own support, the cup is ordered and left-associated, and c=0 gives the unit. Records verbatim; declaration lists exact. Both new nodes justified and their cited dependency nodes exist. Six true sorry obligations with proof docstrings, no hollow data. Edge cases and universes ok. nt_compile rc 0, no warnings (32.6/23.8/43.5 s). F1 (H11): the Second reading by NZ was a self-check; fixes/def-pur-frame-class.report.md replaces it with a real clause-by-clause reading. Observations: the node reuses n for level and relative dimension, followed verbatim and unused; the boundary sign is the Ext convention, not fixed by the existential dependency."
+ }
+}

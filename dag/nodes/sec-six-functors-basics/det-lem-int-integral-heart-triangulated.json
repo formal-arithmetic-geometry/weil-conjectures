@@ -375,5 +375,28 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e138488c3",
+  "group": "Q25",
+  "result": "pass",
+  "note": "Read the item node, all 8 statement dependencies, the module, the report, and the exact declarations used: CondensedConstantConstructibility (constant-model Cons/Dbc), coefficientExtensionIntegers, continuousMapRingObj, and the Mathlib classes IsTriangulated, IsClosedUnderKernels/Cokernels/Extensions and TStructure bounded/truncLE/truncGE. Hypotheses match the node with nothing stronger: char p>0, prime l != p, X separated and LocallyOfFiniteType+QuasiCompact over Spec k, E finite over Q_l in an independent universe v. All clauses are rendered: triangulated, bounded, truncation-stable; degree-0 single functor full and faithful with essImage = Dbc and t.le 0 and t.ge 0; abelian, closed under ambient kernels, cokernels and extensions; EssentiallySmall.{u+1}, which is non-vacuous since the category is Type (u+2) with homs in u+1. The helper integralHeartCoefficientRingObj is real data: Shrink.algEquiv transport of E, spectral-norm valuation ring, continuous-map condensed ring; probe confirms the pointwise MonObj. It is not a duplicate: no recorded condensed O_E exists for this chapter. The t-structure and triangulated-subcategory dependencies are Mathlib leaves used exactly; no dependency record needs repair. Only lean changed in the node; lean.statement is verbatim; one sorry; docstrings carry source, blueprint id and all 9 steps; the commit touches 3 files. nt_compile.py compiled the snapshot module in 3.1 s with no errors; probe #print axioms shows only sorryAx plus the standard axioms. Non-blocking remark: the extra IsClosedUnderIsomorphisms conjunct follows directly from the definitions."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.IntegralConstantModelHeart",
+  "declaration": "AlgebraicGeometry.ProEtale.integralConstantModelHeart",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.integralConstantModelHeart",
+   "AlgebraicGeometry.ProEtale.integralHeartCoefficientRingObj"
+  ],
+  "file": "lean/Sheaf/Paper/IntegralConstantModelHeart.lean",
+  "statement": "theorem integralConstantModelHeart (k : Type u) [Field k] (p : ℕ) [CharP k p] (_hp : 0 < p) (ℓ : ℕ) [Fact ℓ.Prime] (_hℓ : ℓ ≠ p) (E : Type v) [Field E] [Algebra (Padic ℓ) E] [FiniteDimensional (Padic ℓ) E] (X : Scheme.{u}) [X.Over (Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] : ObjectProperty.IsClosedUnderIsomorphisms (constantModelBoundedConstructible (integralHeartCoefficientRingObj ℓ E) X) ∧ ObjectProperty.IsTriangulated (constantModelBoundedConstructible (integralHeartCoefficientRingObj ℓ E) X) ∧ (∀ K, constantModelBoundedConstructible (integralHeartCoefficientRingObj ℓ E) X K → DerivedCategory.TStructure.t.bounded K ∧ ∀ n : ℤ, constantModelBoundedConstructible (integralHeartCoefficientRingObj ℓ E) X ((DerivedCategory.TStructure.t.truncLE n).obj K) ∧ constantModelBoundedConstructible (integralHeartCoefficientRingObj ℓ E) X ((DerivedCategory.TStructure.t.truncGE n).obj K)) ∧ (ObjectProperty.ι (IsConstantModelConstructible (integralHeartCoefficientRingObj ℓ E) X) ⋙ DerivedCategory.singleFunctor _ 0).Full ∧ (ObjectProperty.ι (IsConstantModelConstructible (integralHeartCoefficientRingObj ℓ E) X) ⋙ DerivedCategory.singleFunctor _ 0).Faithful ∧ (∀ K, (ObjectProperty.ι (IsConstantModelConstructible (integralHeartCoefficientRingObj ℓ E) X) ⋙ DerivedCategory.singleFunctor _ 0).essImage K ↔ constantModelBoundedConstructible (integralHeartCoefficientRingObj ℓ E) X K ∧ DerivedCategory.TStructure.t.le 0 K ∧ DerivedCategory.TStructure.t.ge 0 K) ∧ Nonempty (Abelian (ConstantModelConstructible (integralHeartCoefficientRingObj ℓ E) X)) ∧ ObjectProperty.IsClosedUnderKernels (IsConstantModelConstructible (integralHeartCoefficientRingObj ℓ E) X) ∧ ObjectProperty.IsClosedUnderCokernels (IsConstantModelConstructible (integralHeartCoefficientRingObj ℓ E) X) ∧ ObjectProperty.IsClosedUnderExtensions (IsConstantModelConstructible (integralHeartCoefficientRingObj ℓ E) X) ∧ EssentiallySmall.{u + 1} (ConstantModelConstructible (integralHeartCoefficientRingObj ℓ E) X)",
+  "branch": "newtargets-dag",
+  "by": "Q25",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "The theorem uses the recorded finite constant scalar-model constructibility predicate, not the upstream arbitrary-presentation predicate. The real-data coefficient helper transports an arbitrary-universe finite extension through Shrink.algEquiv, using Module.Finite.small, and applies the existing continuous-function condensed ring construction to its spectral-norm valuation ring. No embedding in PadicAlgCl or equality of coefficient and scheme universes is required."
  }
 }

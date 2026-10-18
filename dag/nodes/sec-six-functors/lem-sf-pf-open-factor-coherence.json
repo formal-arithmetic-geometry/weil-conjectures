@@ -222,7 +222,11 @@
   "lem-sf-open-tensor-normalization",
   "lem-fix-constructible-tensor-completion",
   "def-exchange-projection",
-  "lem-cbc-completed-extension-zero-comparison"
+  "lem-cbc-completed-extension-zero-comparison",
+  "def-pur-integral-compact-support-coefficient-data",
+  "def-sf-open-reduction-coefficient-mate",
+  "def-sf-pull-completion-comparison",
+  "def-sf-tensor-completion-comparison"
  ],
  "mathlib_searches": [
   {
@@ -432,5 +436,32 @@
   "group": "Q121",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q121-ed961677a (reviewer sub-agent of L); spot-checked: Read the item, all eleven steps, unit/chapter route, cited DAG statements, and cited Stacks/Bhatt–Scholze sources. Verified hypotheses, coefficient categories, strict quotient transitions, completion units, open tensor/base-change maps, edge cases, route compliance, searches, and acyclicity. Review written to review.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ca8b7212e",
+  "group": "Q24",
+  "result": "pass",
+  "note": "Per-file compile of all 3 modules via nt_compile.py --json: rc=0, no errors (17.7/8.4/8.6 s). Hypotheses match the node exactly; the only apparent extra, the IsOpenImmersion instances on j and j', is already carried by OpenImmersionSquare, and nothing Noetherian, separated or finite-Tor is assumed. Clause (1): restriction preserves completeness; Pull comparison with the actual completion unit; section_unit; complete-subcategory full faithfulness. Clause (2): constructibility without Tor; reduction_iso of the published scalar mate; strict tower iso pinned by tower_unit/tower_unique; interval preservation. Clause (3): gamma is a real composite, gamma_unit is exactly gamma^c chi = j_!(chi) gamma^B, plus gamma_iso and identity restriction; beta is fixed by the cbcDatumCompletedExchange_unit equation with a uniqueness clause, plus iso and identity restriction. All existentially packaged data are pinned by uniqueness or unit equations. lean.statement is verbatim in the file for the item and both new modules, and every listed declaration exists; the item node differs from the side clone only in lean and four appended stmt_deps. New definition nodes are real records with no proof, and the mate node reuses existing declarations (existing:true). Every docstring has source and blueprint id, and the theorem docstring carries all 11 proof steps; one sorry only. Remarks, non-blocking: (R1) the level-wise derived reduction mate is not linked to the localized strict tower; (R2) postponed projection_square is still listed on the compact-support theorem node, which the published docstrings still name."
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.OpenFactorCoherence",
+  "declaration": "WeilConjectures.OpenFactorCoherence.openFactorCoherence",
+  "declarations": [
+   "WeilConjectures.OpenFactorCoherence.Open",
+   "WeilConjectures.OpenFactorCoherence.gamma",
+   "WeilConjectures.OpenFactorCoherence.theta",
+   "WeilConjectures.OpenFactorCoherence.OrdinaryExchange",
+   "WeilConjectures.OpenFactorCoherence.beta",
+   "WeilConjectures.OpenFactorCoherence.Assertion",
+   "WeilConjectures.OpenFactorCoherence.openFactorCoherence"
+  ],
+  "file": "lean/Sheaf/SixFunctors/OpenFactorCoherence.lean",
+  "statement": "theorem openFactorCoherence (F : FiniteFieldDatum.{u}) (_hl : l ≠ F.p) (U' U X' X : Over (Spec (.of F.k))) [LocallyOfFiniteType U'.hom] [QuasiCompact U'.hom] [LocallyOfFiniteType U.hom] [QuasiCompact U.hom] [LocallyOfFiniteType X'.hom] [QuasiCompact X'.hom] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] (a : U' ⟶ U) (j' : U' ⟶ X') (j : U ⟶ X) (h : X' ⟶ X) [IsOpenImmersion j.left] [IsOpenImmersion j'.left] (sq : OpenImmersionSquare a.left j'.left j.left h.left) : Nonempty (Assertion l E sq)",
+  "branch": "newtargets-dag",
+  "by": "Q24",
+  "date": "2026-10-18",
+  "existing": false
  }
 }

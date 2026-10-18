@@ -249,31 +249,27 @@
  "chapter": "sec-smooth-purity",
  "unit": "sk-def-sf-operations",
  "lean": {
-  "module": "Sheaf.AlgebraicGeometry.CompactSupportRestrictionOfScalars",
-  "declaration": "AlgebraicGeometry.ProEtale.compactSupportRestrictionIso",
+  "module": "Sheaf.SecSmoothPurity.IntrinsicCompactSupportRestriction",
+  "declaration": "AlgebraicGeometry.ProEtale.intrinsicCompactSupportRestriction",
   "declarations": [
-   "AlgebraicGeometry.ProEtale.fixedScalarOpenAdjunction",
-   "AlgebraicGeometry.ProEtale.fixedScalarRestrictionOpenMap",
-   "AlgebraicGeometry.ProEtale.fixedScalarRestrictionOpenMap_isIso",
-   "AlgebraicGeometry.ProEtale.fixedScalarRestrictionOpen",
-   "AlgebraicGeometry.ProEtale.compactSupportRestrictionIso",
-   "AlgebraicGeometry.ProEtale.compactSupportRestrictionIso_comp"
+   "AlgebraicGeometry.ProEtale.intrinsicCompactSupportRestriction",
+   "AlgebraicGeometry.ProEtale.intrinsicCompactSupportRestriction_comp"
   ],
-  "statement": "def compactSupportRestrictionIso {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B] (φ : A →+* B) {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f) : Sheaf.derivedRestrictScalars (Scheme.ProEt.topology X) φ ⋙ Rf_!(c)[ModuleCat.{u + 1} A] ≅ Rf_!(c)[ModuleCat.{u + 1} B] ⋙ Sheaf.derivedRestrictScalars (Scheme.ProEt.topology Y) φ",
+  "file": "lean/Sheaf/SecSmoothPurity/IntrinsicCompactSupportRestriction.lean",
+  "statement": "def intrinsicCompactSupportRestriction {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B] (φ : A →+* B) {X Z Y : Scheme.{u}} (j : X ⟶ Z) [IsOpenImmersion j] (h : Z ⟶ Y) : scalarRestriction φ X ⋙ reductionCompactSupport A j h ≅ reductionCompactSupport B j h ⋙ scalarRestriction φ Y",
   "branch": "newtargets-dag",
-  "by": "Q50",
-  "date": "2026-10-17",
+  "by": "N2",
+  "date": "2026-10-18",
   "existing": false,
-  "note": "Section 1(B) repair: this consumer uses the equivalent standard fixed-scalar constant-module presentation of the recorded intrinsic compact-support comparison. The existing CompactSupportRestrictionOfScalars declarations give the full canonical open/proper comparison and coefficient cocycle, but their legacy pro-etale import closure clashes with the canonical finite-coefficient framework (upperStarIsoLowerStarInv). This module uses canonical imports and unfolds the legacy derived-open-adjunction helper to its exact defining expression, mapDerivedCategoryAdjunction of the ordinary open adjunction. All other declaration bodies, signatures and normalizations are unchanged. No arbitrary isomorphism or stronger hypothesis is introduced.",
-  "file": "lean/Sheaf/AlgebraicGeometry/CompactSupportRestrictionOfScalars.lean"
+  "note": "Section 1(B): the recorded fixed-ModuleCat compactSupportRestrictionIso cannot be applied to the intrinsic constant-ring objects used by scalarExtensionFunctor and reductionDirectImageComparison. The existing sfCompactSupportRestriction uses proEtaleConstantDerivedDirectImage (the sectionwise constant-map model), whereas b uses directImageConstantPush (the identified-coefficient ringed model); these are not definitionally the same right-derived functor. This module supplies the same canonical open/proper restriction comparison in exactly b's coordinates, using the published sfOpenRestriction and the inverse of proEtaleRingRestrictionDerivedDirectImage, with its unchanged K-injective normalization. The composition theorem retains the node's separated finite-type, compactification, prime invertible and finite-ring hypotheses. No existing declaration or module is changed or removed."
  },
  "reviewed_lean": {
-  "date": "2026-10-17",
+  "date": "2026-10-18",
   "by": "L",
-  "reviewer": "NT-stage2-cc-c24c02b28",
-  "group": "Q50",
-  "result": "fix",
-  "note": "Every node clause checked against the Lean: datum, l≠p, E/L finite, all levels ≥1 via m+1, arbitrary nonflat φ, separated finite-type schemes over k, closed immersion, D^b_ctf input. The map is fixed uniquely by the exceptional-counit equation, using the published rightDerivedUpperShriekCounit (sfFiniteExceptionalFixed is definitionally rightDerivedUpperShriek) and the canonical finiteCoefficientChangeDirectImageMap. IsIso, B-side D^b_ctf, naturality, closed composition, coefficient chain and all locally closed clauses are present. No hollow definitions or unbound universes; lean.statement verbatim. Dependency modules: import-only (one definitional adjunction unfolding). nt_compile: all 5 files clean, fixed file clean; importers show no new failures (3 pass; 3 fail or time out identically on base). FIX: module docstring and 8 theorem docstrings cited sec-smooth-purity/sk-lem-sp-tower instead of the node source sec-six-functors/sk-prop-sf-biduality-general, order 2139; corrected in fixes/FiniteClosedShriek.lean. Noted, not faulted: lem-sf-compact-support-restriction-of-scalars record rebound to the fixed-scalar module; item status unsplit on base.; reverted the delivery's change of existing node(s) lem-weil-derived-direct-image-composition (--revert-nodes; kept as on newtargets-dag)"
+  "reviewer": "NT-stage2-cc-d3d883af0",
+  "group": "N2",
+  "result": "pass",
+  "note": "Item and dependency modules read against the node, all 13 stmt_deps, Stacks 07A6/0D6E and the exact side-clone declarations (reductionDirectImageComparison, scalarExtensionFunctor composition/identity, scalarRestriction, sfOpenRestriction, proEtaleRingRestrictionDerivedDirectImage, directImageConstantPush). All hypotheses match with none stronger; Dctf predicates are the same as reductionDirectImage_isIso. All 7 conclusion clauses match the node: transpose formula, ambient counit equation, naturality in K/L/t, A->B->C compositions and b-cocycle with correct associator direction, identity map and identity t, IsIso on Dctf. The 1(B) repair intrinsicCompactSupportRestriction is a canonical composite in b's coordinates; only the lean field changed, with a note; it duplicates nothing; its comp theorem keeps the node's hypotheses. lean.statement is verbatim. Helper definitions are real, docstrings have source and blueprint id, proofs are sorry only, there is no global build. Both files compile cleanly together via nt_compile.py --json (3.2 s, 5.0 s, rc 0, no warnings). No findings; the IsIso conjunct is redundant but harmless."
  },
  "split_report": {
   "date": "2026-10-17",

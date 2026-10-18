@@ -17,7 +17,10 @@
   "sk-def-sfb-condensed-ring",
   "sk-def-sfb-pulled-back-coefficients",
   "def-weil-l-adic-coefficient-extension",
-  "def-weil-pbc-constant-sheaf"
+  "def-weil-pbc-constant-sheaf",
+  "def-sfb-continuous-map-condensed-ring",
+  "lem-sfb-integers-profinite-tower",
+  "def-weil-completed-integral-coefficients"
  ],
  "proof": [
   {
@@ -296,5 +299,36 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-90cdca1e8",
+  "group": "Q09",
+  "result": "pass",
+  "note": "Clauses 1-3, hypotheses (l prime, E finite over Q_l, any X, no finite-field datum) and the n+1 indexing all match the node. The finite-set isomorphism is the only possible one, so the normalization using it is canonical. The O_E cone is pinned to the reductions and both the profinite and scheme limits are stated. The set-sheaf limit is given through the ring-sheaf limit's underlying presheaf, which is equivalent (presentation note only). The clause 3 ring isomorphism is unique, fixed by adjunction-unit sections, and the target uses the canonical ring structure. Mechanical finding: the statement genuinely needs theorem lem-sfb-integers-profinite-tower, since building O_E as a profinite set uses its compactness, T2 and total-disconnectedness projections, so PASS on that point. Universes: site levels unchanged; E in the scheme's universe is forced by the recorded framework. Gates: no hollow definitions, only the main theorem has sorry, docstrings give source and blueprint tag, statement verbatim, no cycle from the 3 added stmt_deps. nt_compile --json of the snapshot file: rc 0, no errors; a probe confirmed the tool reports errors."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleIntegralCoefficientLimit",
+  "declaration": "AlgebraicGeometry.ProEtale.sfb_integral_coefficient_limit",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.sfbFiniteConstantSets",
+   "AlgebraicGeometry.ProEtale.sfbFiniteRepresentables",
+   "AlgebraicGeometry.ProEtale.sfbIntegralFiniteLevel",
+   "AlgebraicGeometry.ProEtale.sfbIntegralFiniteTower",
+   "AlgebraicGeometry.ProEtale.sfbIntegralProfinite",
+   "AlgebraicGeometry.ProEtale.sfbCondensedIntegers",
+   "AlgebraicGeometry.ProEtale.sfbCompletedIntegersAb",
+   "AlgebraicGeometry.ProEtale.sfbIntegralPointAdjunction",
+   "AlgebraicGeometry.ProEtale.sfbIntegralFiniteRepresentation",
+   "AlgebraicGeometry.ProEtale.sfb_integral_coefficient_limit"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleIntegralCoefficientLimit.lean",
+  "statement": "theorem sfb_integral_coefficient_limit (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (X : Scheme.{u}) : ∃ a : sfbFiniteConstantSets X ≅ sfbFiniteRepresentables X, ∃ (c : Cone (sfbIntegralFiniteTower l E ⋙ FintypeCat.toProfinite)) (j : sfbIntegralProfinite l E ≅ c.pt), (∀ (n : ℕ) (x : Padic.coefficientExtensionIntegers l E), (j.hom ≫ c.π.app (op n)) x = Ideal.Quotient.mk (Padic.coefficientExtensionIdeal l E (n + 1)) x) ∧ Nonempty (IsLimit c) ∧ Nonempty (IsLimit ((profiniteToProEtOf X ⋙ Scheme.ProEt.forget X ⋙ Over.forget X).mapCone c)) ∧ Nonempty (((sfbPullbackFromPoint X).obj (sfbCondensedIntegers l E).X).obj ⋙ forget Ab.{u + 1} ≅ uliftYoneda.{u + 1}.obj ((profiniteToProEtOf X).obj (sfbIntegralProfinite l E))) ∧ Nonempty ((completedIntegralCoefficientSheafUnrestricted l E X).obj ⋙ forget RingCat.{u + 1} ≅ uliftYoneda.{u + 1}.obj ((profiniteToProEtOf X).obj (sfbIntegralProfinite l E))) ∧ ∃! e : (coefficientRing X (sfbCondensedIntegers l E)).X ≅ sfbCompletedIntegersAb l E X, IsMonHom e.hom ∧ IsMonHom e.inv ∧ ∀ (S : Profinite.{u}) (f : S ⟶ sfbIntegralProfinite l E) (n : ℕ), (sfbIntegralFiniteRepresentation l E X a n).hom.app (op ((profiniteToProEtOf X).obj S)) (((limit.π (integralCoefficientSheafSystem l E X) (op n)).hom.app (op ((profiniteToProEtOf X).obj S))) ((e.hom.hom.app (op ((profiniteToProEtOf X).obj S))) (((sfbIntegralPointAdjunction X).unit.app (sfbCondensedIntegers l E).X).hom.app (op S) (ULift.up f.hom.hom)))) = ULift.up ((profiniteToProEtOf X).map (f ≫ j.hom ≫ c.π.app (op n)))",
+  "branch": "newtargets-dag",
+  "by": "Q09",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "All three clauses, with natural finite-label representation and the positive reduction tower. The ring-object isomorphism with the existing ring-sheaf limit is uniquely specified by its adjunction mate on every profinite test object. Uses the already landed universe-general continuous-map sheaf, the profinite integer tower, and the unrestricted completion without imposing a finite-field datum."
  }
 }

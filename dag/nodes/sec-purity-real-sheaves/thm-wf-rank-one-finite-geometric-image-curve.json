@@ -14,7 +14,8 @@
  },
  "stmt_deps": [
   "def-wf-weil-group",
-  "def-weil-pbc-scheme-conventions"
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pure-dimension"
  ],
  "proof": [
   {
@@ -203,5 +204,23 @@
   "group": "Q145",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q145-17cbf9f34 (reviewer sub-agent of L); spot-checked: I read the item, master and main-20261015 sources (identical, order 2626/2970), the unit sk-p-real-rankone, the chapter record and every cited statement. The statement is unchanged and matches the source; there are no new nodes. Step 1: surjectivity of the degree map comes from the statement of lem-wf-weil-group-exact-sequence, and lem-wf-compact-character-logarithm states the domain clause χ(g)^N∈1+ℓ²O_E. Step 2: lem-galois-aut-profinite applies to the small-skeleton fibre functor, the coordinate maps are continuous by the Mathlib leaf (scalar field Q_ℓ, complete and nontrivially valued), and the bound comes from a finite subcover with |ℓ^a|=ℓ^{-a}. Step 3: the H1 lemma's new hypotheses hold (ℓ∤q gives ℓ≠p; the valuation topology matches). Its Frobenius f↦f(s^{-1}gs) is pullback by the Weil lift, and fixed points are the same even under an inverse convention. prop-wf-open-curve-h1-no-frobenius-fixed has exactly the target's hypotheses. Step 4: the DVR lemma gives ℓ²O_E=m_E^{2e}, and r=2e>e/(ℓ-1) for every ℓ including ℓ=2, so the deep-log lemma (same series as sk-d-real-log) gives injectivity. This correctly avoids the compact-log lemma's unstated r. Step 5 is elementary. Edge cases checked: E=Q_ℓ, ℓ=2, ramified E, trivial χ. Accepted tool_uses: lem-galois-aut-profinite and lem-weil-l-adic-extension-integers-dvr, both generic. There is no cycle and no SGA source, and proof_deps equals the union of the steps' uses. Batch-5 flag on lem-wf-weil-group-exact-sequence: acceptable. It is a definitional exact sequence of the Weil group. It reaches cor-galois-lisse-representations only through the definition def-wf-fundamental-representation, which is also reached by the existing stmt_dep def-wf-weil-group. lem-wf-compact-character-logarithm already cites it, so the closure does not grow. It is neither the trace formula nor Poincaré duality, nor a step of either. No changes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-35041ea81",
+  "group": "NA",
+  "result": "pass",
+  "note": "Statement matches node clause by clause: normal (stalk integrally closed domains), geometrically connected, separated, finite type, IsPureDimension 1, ℓ∤q, E finite over Q_ℓ (own universe v), continuous χ, Π = kernel of the Weil-group degree map (same convention as the landed compact-character-logarithm), both conclusions (finite image; ∃N≥1 killing Π). No stronger assumptions; separably closed Ω is the Weil-group interface and at least as general. Edge cases checked: trivial χ, ℓ=2, ramified E, E=Q_ℓ, empty scheme excluded by geometric connectedness. Upstream RankOne theorems need smoothness and a different Weil group, so the new module is justified. lean.statement verbatim; only change to the node record is the added def-weil-pure-dimension stmt_dep (allowed by §5) plus the lean field. No definitions, single sorry, docstrings carry source place, blueprint id and five proof steps. nt_compile.py --json: clean, item 4.5 s, about 30 s with side imports. Second-reading section is thin (no other worker), noted only."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FundamentalGroup.RankOneFiniteGeometricImageCurve",
+  "declaration": "AlgebraicGeometry.Scheme.FiniteEtale.rankOne_finite_geometricImage_curve",
+  "file": "lean/Sheaf/AlgebraicGeometry/FundamentalGroup/RankOneFiniteGeometricImageCurve.lean",
+  "statement": "theorem rankOne_finite_geometricImage_curve (k₀ : Type u) [Field k₀] [Finite k₀] {U₀ : Scheme.{u}} (p : U₀ ⟶ Spec (.of k₀)) [GeometricallyConnected p] [IsSeparated p] [LocallyOfFiniteType p] [QuasiCompact p] (hnormal : ∀ z : U₀, IsDomain (U₀.presheaf.stalk z) ∧ IsIntegrallyClosed (U₀.presheaf.stalk z)) (hdim : U₀.IsPureDimension 1) {Ω : Type u} [Field Ω] [IsSepClosed Ω] (x : Spec (.of Ω) ⟶ U₀) (ℓ : ℕ) [Fact ℓ.Prime] (hℓ : ¬ ℓ ∣ Nat.card k₀) (E : Type v) [Field E] [Algebra (Padic ℓ) E] [FiniteDimensional (Padic ℓ) E] (χ : weilGroup p x (Aut (fiber x)) →* Eˣ) (hχ : @Continuous _ E inferInstance (spectralNorm.normedField (Padic ℓ) E).toUniformSpace.toTopologicalSpace (fun w ↦ (χ w : E))) : (Set.range (fun g : (weilGroupDeg p x (Aut (fiber x))).ker ↦ χ g.val)).Finite ∧ ∃ N : ℕ, 1 ≤ N ∧ ∀ g : (weilGroupDeg p x (Aut (fiber x))).ker, χ g.val ^ N = 1",
+  "branch": "newtargets-dag",
+  "by": "NA",
+  "date": "2026-10-18",
+  "existing": false
  }
 }

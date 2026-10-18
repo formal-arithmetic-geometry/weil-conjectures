@@ -271,5 +271,28 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cfe7b2e40",
+  "group": "Q20",
+  "result": "pass",
+  "note": "Every node clause matches the Lean exactly: IsLocallyNoetherian + CompactSpace; prime ell; FiniteIntermediateField E with continuousMapRingObj E, and padicAlgClRingObj (finite-subextension sections) in a second theorem; condensedRingObj = p_X^*Lambda; Mod(Sheaf(ProEt X, Ab.{u+1})) module objects; recorded IsConstantModelConstructible; IndCons = ObjectProperty.ind.{u+1} in the ambient category (iso-closed, same as the landed sibling); ShortComplex.ShortExact with hN/hB giving S.X2. No extra hypotheses; universes bound; lean.statement verbatim; only the lean field changed; docstrings have the source, blueprint tag and all 8 steps; no definitions, only sorry. Edge cases covered: empty scheme, zero/split sequences, ell=2, E=Q_ell. nt_compile on the side overlay is clean (control error run confirms errors are reported). Non-blocking stage-3 note: proof step 8 cites det-ind-heart-filtered-colimits, now stated in a narrower char-p finite-type setting; the docstring's substitute (q=0 Ext continuity gives finitely presentable, then ObjectProperty.ind_ind) is sound, and the node's step-8 citation should be updated in stage 3."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.IndConstructibleExtensions",
+  "declaration": "AlgebraicGeometry.ProEtale.indConstructible_of_shortExact",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.indConstructible_of_shortExact",
+   "AlgebraicGeometry.ProEtale.indConstructible_of_shortExact_padicAlgCl"
+  ],
+  "file": "lean/Sheaf/Paper/IndConstructibleExtensions.lean",
+  "statement": "theorem indConstructible_of_shortExact (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ) (X : Scheme.{u}) [IsLocallyNoetherian X] [CompactSpace X] (S : ShortComplex (CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj (Profinite.continuousMapRingObj E) X))) (hS : S.ShortExact) (hN : ObjectProperty.ind.{u + 1} (IsConstantModelConstructible (Profinite.continuousMapRingObj E) X) S.X₁) (hB : ObjectProperty.ind.{u + 1} (IsConstantModelConstructible (Profinite.continuousMapRingObj E) X) S.X₃) : ObjectProperty.ind.{u + 1} (IsConstantModelConstructible (Profinite.continuousMapRingObj E) X) S.X₂",
+  "branch": "newtargets-dag",
+  "by": "Q20",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Two statements cover the finite intermediate field and condensed algebraic-closure coefficient cases. They use the recorded finite constant-model constructibility predicate and Mathlib ObjectProperty.ind at size u+1 in the internal-module category. No geometric assumptions beyond locally Noetherian and quasi-compact are added. The existing algebraic closure and finite-subextension framework fix representatives of the coefficient objects; the algebraic-closure case has no unused finite-field parameter."
  }
 }

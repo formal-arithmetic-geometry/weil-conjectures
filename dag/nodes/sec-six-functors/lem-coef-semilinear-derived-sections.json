@@ -29,7 +29,16 @@
   "lem-pur-site-restriction-module-adjunction-exact",
   "def-pc-kflat-complex",
   "def-pc-tensor-complex-sheaves",
-  "def-pur-derived-internal-hom"
+  "def-pur-derived-internal-hom",
+  "def-coef-ringed-sequence-site",
+  "def-coef-ringed-tensor-hom-model",
+  "def-weil-pbc-algebraic-inverse-image",
+  "def-pc-flat-sheaf-modules",
+  "def-coef-semilinear-system-models",
+  "def-coef-semilinear-derived-calculus",
+  "def-coef-semilinear-geometry-base",
+  "def-coef-semilinear-geometry-derived",
+  "def-coef-semilinear-geometry-ops"
  ],
  "proof": [
   {
@@ -624,5 +633,30 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8a244d7e9",
+  "group": "NF",
+  "result": "fix",
+  "note": "Re-delivery after the RETURN of fae3d3347b17. Both H3 findings are repaired. (1) Data.tensorEvaluation is now pinned by tensorEvaluationModel (TensorComparisonModel for evaluation n) with tensorEvaluationModel_ordinary = ordinaryEvaluationTensor, the unique identity-on-pure-tensors map; the summand and derived equations on flat-term K-flat representatives fix it on every object, so homEvaluation and target.tensorEvaluation become canonical. (2) Data.scalarTensor is pinned by scalarTensorModel (ScalarTensorComparisonModel: pure-tensor rule (x⊗y)⊗1↦(x⊗1)⊗(y⊗1) through the model's E, summand rule, kflat preservation, localized square via scalarEpsilonIso and tensorModelIso); orientation checked against homReductionTranspose. All other modules are byte-identical to the previously reviewed version; clause table, edge cases (empty site, zero rings, equal indices, nonflat maps, constant Z tower sign test), universes (c, v independent, coefficients at max c v r) and one-definition checks pass; lean.statement is verbatim. Mechanical H8 defect: scalarExtensionSection, ScalarTensorPure, scalarEpsilonIso and ScalarTensorComparisonModel lacked Source/(blueprint: def-coef-semilinear-system-models) docstrings. fixes/SemilinearSystemModels.lean is a complete replacement with docstring-only changes. nt_compile of all seven modules is clean both as delivered and with the fix (max 27.6 s per file). Maintainer note: the item's top-level source.place still mentions enhanced sections; a stage-2 FIX cannot change it."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SemilinearDerivedSections",
+  "declaration": "WeilConjectures.SemilinearSections.semilinearDerivedSections",
+  "declarations": [
+   "WeilConjectures.SemilinearSections.SemilinearDerivedSectionsData",
+   "WeilConjectures.SemilinearSections.semilinearDerivedSections",
+   "WeilConjectures.SemilinearSections.AdjunctionEvaluation",
+   "WeilConjectures.SemilinearSections.evaluation_mate"
+  ],
+  "file": "lean/Sheaf/Paper/SemilinearDerivedSections.lean",
+  "statement": "theorem semilinearDerivedSections : Nonempty (SemilinearDerivedSectionsData.{c, v, r} J B τ)",
+  "branch": "newtargets-dag",
+  "by": "NF",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Repair of returned head 2909a6ee908e: geometric tensor comparisons are normalized on generalized pure tensors and total K-flat representatives; derived adjunctions are required to equal the canonical mapDerivedCategoryRightDerivedAdjunctions of the actual ordinary adjunctions, with K-injective transpose formulas before evaluation. The ordinary calculus interfaces are in SemilinearDerivedCalculus; Geometry is split into SemilinearGeometryCore (base fields), SemilinearGeometryDerived (derived fields), and SemilinearGeometryOps (canonical mate/projection words) solely to satisfy the 60-second per-file compiler limit. Mathematical statement unchanged."
  }
 }

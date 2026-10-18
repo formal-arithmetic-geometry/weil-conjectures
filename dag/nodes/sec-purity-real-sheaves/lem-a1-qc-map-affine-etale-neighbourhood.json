@@ -165,5 +165,23 @@
   "group": "NN",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NN-6cd5586b0 (reviewer sub-agent of L); spot-checked: I read the full item, the three new nodes, every cited statement, and Stacks spaces-properties.tex at 0APL (l.2304, second proof paragraph), 03FX (l.701), 03BX (l.379), 03H4 (l.281), 03FZ (l.775), and 03H6, plus morphisms 03WS. The item is faithful to Gabber's chart paragraph: T' is generalized to a quasi-compact C, and 'locally quasi-finite' is added (true by 03WS, and the parent needs it). All new statements are true and statement-only. None is a duplicate: 03FY lem-a1-space-affine-atlas-open-cover is a different lemma, and lem-trf-space-fibre-products-etale-covers needs a jointly surjective family. None restates an item clause. I fixed three faults. (1) Step 1 relied on an undefined topology on |E| and an uncited continuity of |C|->|E| (03BX(2)). lem-a1-space-affine-etale-cover now defines |E|, the quotient topology, surjectivity of |w| and continuity, and the step pulls the open cover back to C. (2) The claim that the glued u is still representable étale had no argument. U is now the open sub-union of the atlas W, and u=w∘k is étale by base change of an open immersion plus the Mathlib leaf lem-weil-pbc-etale-composition-cancellation (1),(2). (3) Step 4 did not check the chartwise hypothesis of lem-a1-etale-space-locally-quasi-finite; it is now checked via étale composition. Affine ⇒ separated (01KN) is written out as an elementary remark. The statement is unchanged and no hypothesis was weakened. There are no tool_uses and no SGA. Batch-5 check: the citation of lem-a1-etale-space-locally-quasi-finite reaches sec-trace-formula only through the stmt dep def-trf-algebraic-space; it is a scheme-level 03WS fact, not part of the trace formula or Poincaré duality. The three citations of def-trf-algebraic-space cite a general definition (proof_deps empty), so the exemption applies. Accepted. Fixed files: fixes/dag/nodes/sec-purity-real-sheaves/{lem-a1-qc-map-affine-etale-neighbourhood,lem-a1-space-affine-etale-cover}.json.; 2 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5c944a77d",
+  "group": "NM",
+  "result": "pass",
+  "note": "The delivery adds only the lean record and one module, and the statement matches the node clause by clause through the recorded dependency declarations: S : Scheme.{u}; E : AlgebraicSpace S; C : Over S with [CompactSpace C.left]; c a natural transformation; affine U (IsAffine U.left); IsEtale u (AlgebraicSpace.IsEtale); V, p, q with IsPullback q (yoneda.map p) u c, the same shape IsRepresentableWith uses; Surjective, Etale, IsSeparated and Scheme.Hom.IsLocallyQuasiFinite on p.left. There are no extra hypotheses and only the single universe u. Empty C (U = Spec 0) is covered, and nothing is assumed on E or S. lean.statement is verbatim in the file. The source is Stacks 0APL (spaces-properties.tex l.2304) with 03WS. Docstrings carry the source, the blueprint tag and the proof outline. The proof is only sorry, there are no definitions, and no duplicate exists. Worker report and Second reading by NM are both present. nt_compile.py --json compiled the file cleanly (1.7 s, exit code 0), and a test copy with an injected error showed the error, the expected signature and sorryAx among the axioms. No findings."
+ },
+ "lean": {
+  "module": "Sheaf.SecPurity.QcMapAffineEtaleNeighbourhood",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.exists_affine_etale_neighbourhood",
+  "file": "lean/Sheaf/SecPurity/QcMapAffineEtaleNeighbourhood.lean",
+  "statement": "theorem exists_affine_etale_neighbourhood {S : Scheme.{u}} (E : AlgebraicSpace S) (C : Over S) [CompactSpace C.left] (c : yoneda.obj C ⟶ E.obj.obj) : ∃ (U : Over S) (u : yoneda.obj U ⟶ E.obj.obj), IsAffine U.left ∧ IsEtale u ∧ ∃ (V : Over S) (p : V ⟶ C) (q : yoneda.obj V ⟶ yoneda.obj U), IsPullback q (yoneda.map p) u c ∧ Surjective p.left ∧ Etale p.left ∧ IsSeparated p.left ∧ Scheme.Hom.IsLocallyQuasiFinite p.left",
+  "branch": "newtargets-dag",
+  "by": "NM",
+  "date": "2026-10-18",
+  "existing": false
  }
 }

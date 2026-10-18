@@ -1,0 +1,117 @@
+{
+ "id": "def-pur-frame-kummer-class",
+ "kind": "definition",
+ "title": "Concrete Kummer class at every positive finite level",
+ "status": "split",
+ "statement": "Fix $P$ as in [def-pur-conventions], with positive level $n$, finite coefficient ring $A=\\mathcal O_E/(\\varpi_E^n)$, and $m=\\ell^n$. For a $k$-scheme $W$ use the finite twist $A(d)$ of [def-coefficient-twists-detailed], the roots sheaf of [def-pur-roots-of-unity-sheaf], and the projection-induced root tensor presentation of [lem-pur-twist-sheaf-locally-free]. Thus $mA=0$, $m$ is invertible on $W$, and $A(1)=\\mu_m\\otimes_{\\mathbf Z/m} A$. For a unit $u\\in\\Gamma(W,\\mathcal O_W)^\\times$, define its all-level finite Kummer class by the connecting map of the actual Kummer sequence [lem-amb-kummer-any-base], followed by the root scalar-extension unit of [def-asd-ordinary-finite-p1-kummer-class], $v\\mapsto v\\otimes1_A$, then the canonical cohomology comparison [lem-cbc-abelian-etale-proetale-cohomology-comparison] for the geometric morphism of [def-weil-pbc-site-comparison-morphism]. Equivalently, first form the etale module Ext class corresponding to $H^1(v\\mapsto v\\otimes1_A)(\\delta_W(u))$, then apply exact comparison inverse image. No divisibility of $n$ by the ramification index is assumed. On every morphism of $k$-schemes, restriction of these positive finite twist sheaves is read via the canonical root-kernel and local pure-tensor normalized pullback isomorphisms of [lem-asd-etale-finite-twist-pullback]. Use the published normalized pullback wrapper of [thm-amb-p1-decomposition], which introduces no noetherian hypothesis for this helper.",
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-coefficient-twists-detailed",
+  "def-pur-roots-of-unity-sheaf",
+  "lem-pur-twist-sheaf-locally-free",
+  "lem-amb-kummer-any-base",
+  "def-asd-ordinary-finite-p1-kummer-class",
+  "lem-cbc-abelian-etale-proetale-cohomology-comparison",
+  "def-weil-pbc-site-comparison-morphism",
+  "lem-asd-etale-finite-twist-pullback",
+  "thm-amb-p1-decomposition"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/def-pur-frame-class.md",
+  "place": "Kummer-class clause and expanded DAG prescription, universal exponent ell^n and root scalar extension"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The Kummer class of a unit with arbitrary finite coefficient level is the etale Kummer connecting map followed by root scalar extension and proetale comparison.",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsDedekindDomain.selmerGroup.fromUnit_ker\", \"adjoinRootXPowSubCEquiv.congr_simp\", \"adjoinRootXPowSubCEquiv_root\", \"IsDedekindDomain.selmerGroup.fromUnitLift\", \"Ideal.rootsOfUnityMapQuot\", \"KummerExtension.termK[_√_]\", \"adjoinRootXPowSubCEquiv\", \"restrictRootsOfUnity_coe_apply\"], \"digest\": \"0213189fc43a0b29\"}",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "kummerδ₀",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'kummerδ₀'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "query rejected"
+  },
+  {
+   "tool": "grep",
+   "query": "kummerδ₀|frameKummer|kummerClass",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "components reused; no exact all-level class"
+  },
+  {
+   "tool": "blueprint_refs.py search and rg dag/nodes",
+   "query": "Kummer class; titles containing Kummer or boundary",
+   "results": "The affine-line datum is restricted to ramification-admissible levels; pur9-def-kummer-class is an imported admissible-level constant-root convention, not the finite-field all-level root-tensor prescription. The owning frame node supplies the all-level prescription. No independent all-level concrete coefficient class node was found.",
+   "date": "2026-10-18",
+   "verdict": "new definition needed"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "def-pur-frame-class",
+  "date": "2026-10-18",
+  "group": "NZ"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-pur-frame-class",
+   "place": "Kummer classes on the individual complementary opens; the expanded node specifies the all-level class explicitly",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer",
+ "lean": {
+  "module": "Sheaf.Paper.PurityFrameKummer",
+  "declaration": "WeilConjectures.PurityFiniteSetting.frameKummer",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.frameTwistEtale",
+   "WeilConjectures.PurityFiniteSetting.frameTwist",
+   "WeilConjectures.PurityFiniteSetting.frameKummerEtale",
+   "WeilConjectures.PurityFiniteSetting.frameKummer",
+   "WeilConjectures.PurityFiniteSetting.frameConstantPullback",
+   "WeilConjectures.PurityFiniteSetting.frameEtalePullback",
+   "WeilConjectures.PurityFiniteSetting.frameTwistPullback"
+  ],
+  "file": "lean/Sheaf/Paper/PurityFrameKummer.lean",
+  "statement": "def frameKummer (P : PurityFiniteSetting.{u}) (X : Scheme.{u}) (a : X ⟶ Spec (.of P.field.k)) (v : Γ(X, ⊤)ˣ) : Abelian.Ext (P.constant X) (P.frameTwist X 1) 1",
+  "branch": "newtargets-dag",
+  "by": "NZ",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7be9f89c8",
+  "group": "NZ",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7be9f89c8",
+  "group": "NZ",
+  "result": "fix",
+  "note": "Mathematics correct and FIX supplied. All 15 node clauses checked against the 3 modules. Reuses the existing EtaleFrame, kummerδ₀, the finite root-line twist, ordinaryFiniteRootMap and the recorded supportedCup; l^n needs no e|n. Each factor has its own support, the cup is ordered and left-associated, and c=0 gives the unit. Records verbatim; declaration lists exact. Both new nodes justified and their cited dependency nodes exist. Six true sorry obligations with proof docstrings, no hollow data. Edge cases and universes ok. nt_compile rc 0, no warnings (32.6/23.8/43.5 s). F1 (H11): the Second reading by NZ was a self-check; fixes/def-pur-frame-class.report.md replaces it with a real clause-by-clause reading. Observations: the node reuses n for level and relative dimension, followed verbatim and unused; the boundary sign is the Ext convention, not fixed by the existential dependency."
+ }
+}

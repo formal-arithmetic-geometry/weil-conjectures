@@ -210,5 +210,23 @@
     }
    ]
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c1869da0b",
+  "group": "NF",
+  "result": "pass",
+  "note": "Existing binding def-sfb-alpha -> AlgebraicGeometry.ProEtale.condensedPullbackHom (side ModuleObject/Basic.lean:396-398); the blueprint front matter names the same declaration. Commit changes only the node lean field and the report. Statement field is verbatim. Body is compAlgHom (an abbrev for tau.app) of (upperStarFromPointComp f).hom at Lambda, the comparison recorded for def-sfb-pullback-from-point-comp-iso, same direction. Target condensedRingObj Lambda X equals (coefficientRing X (Mon.mk Lambda)).X by rfl. Any f : X -> Y in Scheme.{u}, no commutativity or nontriviality assumed, universes Profinite.{u}/Scheme.{u}/Ab.{u+1} match the dependencies; the unused [MonObj] instance is dropped by elaboration, so nothing stronger is assumed. nt_compile --json probe: #check/#print match, both rfl checks accepted, axioms propext/Classical.choice/Quot.sound only, no errors. Report has a real Worker report and a disclosed self second reading. No findings."
+ },
+ "lean": {
+  "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic",
+  "declaration": "AlgebraicGeometry.ProEtale.condensedPullbackHom",
+  "statement": "noncomputable abbrev condensedPullbackHom :\n    (f)^*[Ab.{u + 1}].obj (condensedRingObj Λ Y) ⟶ condensedRingObj Λ X",
+  "branch": "slopmaster2",
+  "by": "NF",
+  "date": "2026-10-18",
+  "existing": true,
+  "note": "Exact existing declaration in the published WeilConjectures pro-etale module-object framework, confirmed through scompile.py --source. The section has Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}, a ring-object structure [MonObj Λ], arbitrary X Y : Scheme.{u}, and f : X ⟶ Y. The body is Functor.compAlgHom (upperStarFromPoint Y) (f)^*[Ab.{u + 1}] (upperStarFromPointComp f).hom Λ, definitionally (upperStarFromPointComp f).hom.app Λ. condensedRingObj Λ X is the underlying sheaf of coefficientRing X (Mon.mk Λ). These are exactly the recorded comparison and pulled-back coefficients; no new module or definition is introduced. The branch label refers to the published upstream source root, available through the side overlay rather than the older local slopmaster2 checkout."
  }
 }

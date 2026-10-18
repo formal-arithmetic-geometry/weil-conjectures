@@ -262,5 +262,34 @@
   "group": "NK",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NK-1f695a641 (reviewer sub-agent of L); spot-checked: Read the item in full, both blueprint versions (main-20261015 order 2328, master order 1984; the statement is verbatim and not weakened), unit sk-prop-an, and every cited statement. The delivery has no new nodes. The finite-level argument, which is the whole blueprint proof, is correct: Step 2 meets every hypothesis of thm-cbc-finite-level-proetale (finite ring, separated finite-type pi, arbitrary g, a compactification supplied); the witness comes from lem-sf-proetale-constructible-origin (ii), whose intrinsic category is def-weil-finite-torsion-constructibility; cor-weil-pbc-geometric-fiber-finite applies to p and the witness j_!L. Three repairable faults were fixed in fixes/dag/nodes/sec-smooth-purity/lem-pur-cfiber-stalk.json. (1) Step 1 used an undefined g and left the fibre square, RGamma_c and the stalk reading unstated. It now sets up the square with g=bbar (lem-pod-separated-finite-type-base-change, def-cbc-compact-support-square), reads RGamma_c as R(pi_bbar)_! over K_0=Omega, and explains why the stalk is the value on Spec Omega. (2) Step 3 silently identified the purity integral category and its tower-defined Rpi_! with the category and Rp_*j_! of thm-cbc-complete-proetale, and said that theorem gives something its statement does not (E5/E6/C4). It now cites lem-weil-pbc-integral-stratified-perfect-characterization, lem-cbc-completed-extension-zero-comparison, lem-weil-pbc-constant-completion-equivalence, lem-sf-cbc-extension-zero-completion and prop-weil-pbc-direct-image-limits, and checks the scheme hypotheses with lem-weil-pbc-finite-type-over-noetherian and lem-kun-dimension-finite-type. (3) Step 4 asserted the hypotheses of thm-cbc-finite-extension without checking them and identified def-weil-rationalization-karoubi and def-weil-algebraically-closed-coefficients with def-weil-pbc-rational-category and def-weil-pbc-qbar-category without citation. It now cites the category identifications, prop-weil-pbc-rational-transport, def-pur-completed-coefficient-presentation-transport and prop-weil-pbc-descent-functors. Accepted tool use: lem-kun-dimension-finite-type, off the unit's route, for the finite dimension of finite-type schemes. All new citations are in route, none is downstream of the item, nothing is duplicated, no SGA source is cited, and fields other than proof, proof_deps and split_report are unchanged.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d0928c63b",
+  "group": "N1",
+  "result": "pass",
+  "note": "Read node, both statement deps, source (master order 1984 = main-20261015 order 2328, verbatim), report and module. Four clauses: finite (finiteTorConstructibleCategory, published pro-etale Ex_!(c) on the intrinsic-realization preimage), integral (finiteTorConstructibleIntegralCategory via the landed integralDetailedTransport, completedCompactSupportExchange; the ∃ completeness only types the input), rational (sfRationalConstructibleCategory, actual localization of that exchange), Qbar (Nonempty normalized CbcQbarExchangeModel ∧ IsIso of descended components, = third clause of qbarCompactSupportBaseChange; its instances are built from the setting, not assumed). All 8 node hypotheses present and nothing unbound (#check); Omega algebraically closed in universe u as def-weil-scheme-morphism-properties says; helper squares are real data. Node file changes only lean; statement verbatim; dependency nodes unchanged; proof-dep imports present; no name collisions; lines <=100. nt_compile clean (rc=0, 7.1 s, no diagnostics). Observation, not a fault: the Qbar clause uses pbcQbarCategory rather than generalAlgebraicallyClosedConstructibleCategory; no published bridge exists, but node proof Step 4 identifies the two, and the citers use the finite level."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CompactFiberStalk",
+  "declaration": "WeilConjectures.PurityFiniteSetting.compactFiber_finite",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.compactFiberProperSquare",
+   "WeilConjectures.PurityFiniteSetting.compactFiberOpenSquare",
+   "WeilConjectures.PurityFiniteSetting.compactFiberFiniteMap",
+   "WeilConjectures.PurityFiniteSetting.compactFiber_finite",
+   "WeilConjectures.PurityFiniteSetting.compactFiber_integral",
+   "WeilConjectures.PurityFiniteSetting.compactFiber_rational",
+   "WeilConjectures.PurityFiniteSetting.CompactFiberQbarFormula",
+   "WeilConjectures.PurityFiniteSetting.compactFiber_qbar"
+  ],
+  "file": "lean/Sheaf/Paper/CompactFiberStalk.lean",
+  "statement": "theorem compactFiber_finite (K : finiteTorConstructibleCategory P.coefficients.l P.extension P.level P.level_pos X) : ∀ c : Compactification f, IsIso (compactFiberFiniteMap P f Omega s c K.obj)",
+  "branch": "newtargets-dag",
+  "by": "N1",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "The four coefficient clauses are compactFiber_finite, _integral, _rational and _qbar. Each states invertibility of the specified compactification exchange over the geometric point, the stalk/fibre reading fixed by Step 1 of this node. Integral input is the original detailed finite-Tor object transported by integralDetailedTransport. Rational input is the original raw sfRationalConstructibleCategory, and its map is actual localization of the completed arrow. The Qbar clause uses the published unit/scalar-normalized common-stage model and asserts its existence; no model is an extra hypothesis. Helpers construct only the literal proper/open fibre squares and specialize existing canonical maps. All chapter hypotheses are retained explicitly by include; no new coefficient category, arbitrary comparison or proof is introduced."
  }
 }

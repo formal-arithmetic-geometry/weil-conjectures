@@ -202,36 +202,36 @@
   }
  },
  "lean": {
-  "module": "Sheaf.CategoryTheory.LocalizedModuleExactIndependent",
-  "declaration": "SheafOfModules.localizedModuleExactIndependent",
+  "module": "Sheaf.CategoryTheory.LocalizedModuleExactForSystems",
+  "declaration": "SheafOfModules.localizedSystemExact",
   "declarations": [
-   "SheafOfModules.localizedModuleExtension",
-   "SheafOfModules.localizedModuleRestriction",
-   "SheafOfModules.localizedModuleExactIndependent",
-   "SheafOfModules.localizedModuleExtension_additive",
-   "SheafOfModules.localizedModuleExtension_limits",
-   "SheafOfModules.localizedModuleExtension_colimits",
-   "SheafOfModules.localizedModuleRestriction_additive",
-   "SheafOfModules.localizedModuleRestriction_limits",
-   "SheafOfModules.localizedModuleRestriction_colimits",
-   "SheafOfModules.localizedModuleAdjunctionIndependent_existsUnique",
-   "SheafOfModules.localizedModuleAdjunctionIndependent",
-   "SheafOfModules.localizedModuleDerivedAdjunction"
+   "SheafOfModules.localizedSystemExtension",
+   "SheafOfModules.localizedSystemRestriction",
+   "SheafOfModules.localizedSystemExact",
+   "SheafOfModules.localizedSystemExtensionAdditive",
+   "SheafOfModules.localizedSystemExtensionLimits",
+   "SheafOfModules.localizedSystemExtensionColimits",
+   "SheafOfModules.localizedSystemRestrictionAdditive",
+   "SheafOfModules.localizedSystemRestrictionLimits",
+   "SheafOfModules.localizedSystemRestrictionColimits",
+   "SheafOfModules.localizedSystemAdjunction_existsUnique",
+   "SheafOfModules.localizedSystemAdjunction"
   ],
-  "statement": "theorem localizedModuleExactIndependent :\n    (localizedModuleExtension R U).Additive ∧\n      PreservesFiniteLimits (localizedModuleExtension R U) ∧\n      PreservesFiniteColimits (localizedModuleExtension R U) ∧\n      (localizedModuleRestriction R U).Additive ∧\n      PreservesFiniteLimits (localizedModuleRestriction R U) ∧\n      PreservesFiniteColimits (localizedModuleRestriction R U)",
+  "file": "lean/Sheaf/CategoryTheory/LocalizedModuleExactForSystems.lean",
+  "statement": "theorem localizedSystemExact : (localizedSystemExtension.{c, v, r} R U).Additive ∧ PreservesFiniteLimits (localizedSystemExtension.{c, v, r} R U) ∧ PreservesFiniteColimits (localizedSystemExtension.{c, v, r} R U) ∧ (localizedSystemRestriction.{c, v, r} R U).Additive ∧ PreservesFiniteLimits (localizedSystemRestriction.{c, v, r} R U) ∧ PreservesFiniteColimits (localizedSystemRestriction.{c, v, r} R U)",
   "branch": "newtargets-dag",
-  "by": "Q19",
-  "date": "2026-10-16",
-  "existing": true,
-  "note": "Section 1(B): the recorded SmallCategory interface cannot instantiate the actual pro-etale site with unequal object/Hom universes. Use the already published Sheaf.CategoryTheory.LocalizedModuleExactIndependent module, confirmed byte-for-byte by scompile.py --source on 2026-10-16. It provides the actual direct-sum extension/sheafification, overFunctor restriction, both exactness clauses, uniquely section-normalized adjunction and exact termwise derived adjunction. The identical module is already on the delivery base, so this is an existing declaration record and no module is redelivered."
+  "by": "NF",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Section 1(B): the recorded LocalizedModuleExactIndependent interface requires site object universe u+1, Hom universe u and coefficients u+1. This module gives the same actual direct-sum extension followed by module sheafification, overFunctor restriction, exactness and uniquely section-normalized adjunction for independent site universes c,v and coefficients max c v r. No site universe is equated and no mathematical hypothesis changes."
  },
  "reviewed_lean": {
-  "date": "2026-10-16",
+  "date": "2026-10-18",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-c674583d0",
-  "group": "Q19",
-  "result": "pass",
-  "note": "Wrote review.md. Checked immutable modules, all eight dependencies, sources, canonical maps, universes, edge cases, verbatim signatures, and report sections. All four sibling modules passed scompile.py with exit 0 and no diagnostics. No fixes needed; branch unchanged."
+  "reviewer": "NT-stage2-cc-8a244d7e9",
+  "group": "NF",
+  "result": "fix",
+  "note": "Re-delivery after the RETURN of fae3d3347b17. Both H3 findings are repaired. (1) Data.tensorEvaluation is now pinned by tensorEvaluationModel (TensorComparisonModel for evaluation n) with tensorEvaluationModel_ordinary = ordinaryEvaluationTensor, the unique identity-on-pure-tensors map; the summand and derived equations on flat-term K-flat representatives fix it on every object, so homEvaluation and target.tensorEvaluation become canonical. (2) Data.scalarTensor is pinned by scalarTensorModel (ScalarTensorComparisonModel: pure-tensor rule (x⊗y)⊗1↦(x⊗1)⊗(y⊗1) through the model's E, summand rule, kflat preservation, localized square via scalarEpsilonIso and tensorModelIso); orientation checked against homReductionTranspose. All other modules are byte-identical to the previously reviewed version; clause table, edge cases (empty site, zero rings, equal indices, nonflat maps, constant Z tower sign test), universes (c, v independent, coefficients at max c v r) and one-definition checks pass; lean.statement is verbatim. Mechanical H8 defect: scalarExtensionSection, ScalarTensorPure, scalarEpsilonIso and ScalarTensorComparisonModel lacked Source/(blueprint: def-coef-semilinear-system-models) docstrings. fixes/SemilinearSystemModels.lean is a complete replacement with docstring-only changes. nt_compile of all seven modules is clean both as delivered and with the fix (max 27.6 s per file). Maintainer note: the item's top-level source.place still mentions enhanced sections; a stage-2 FIX cannot change it."
  },
  "reviewed_proof": {
   "date": "2026-10-12",

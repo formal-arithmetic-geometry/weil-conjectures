@@ -32,7 +32,9 @@
   "def-weil-pbc-inverse-image",
   "lem-asd-etale-finite-twist-pullback",
   "def-weil-proetale-inverse-image",
-  "def-weil-proetale-module-direct-image"
+  "def-weil-proetale-module-direct-image",
+  "def-asd-ordinary-supported-kummer-boundary",
+  "def-asd-ordinary-finite-p1-arrows"
  ],
  "proof": [
   {
@@ -414,5 +416,39 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-40b75a236",
+  "group": "NH",
+  "result": "pass",
+  "note": "Statement matches the node clause by clause and compiles clean (nt_compile.py, 28.9 s, exit 0, no errors or warnings, run twice; agrees with the delivery's dry run). The class is pinned to the canonical one: the source comparison is asserted invertible and the class agrees with the landed SupportedKummerBoundary predicate, which has a unique solution. The Chern equation uses supportedKummerChern on the Picard class of O(D) = dual of the ideal. Coefficient clause: both comparison maps are fixed on generators, the derived-extension universal property is asserted against every unbounded complex, and every ring map is covered including non-flat ones. Base change: arbitrary pullback square with D' Cartier, the canonical exchange map asserted invertible, the line transport fixed by its normalizations, no flatness. Exponent clause: the map on roots is z -> z^(l^(s-r)) and its direction was checked against the Kummer sequences. The pro-etale inverse and direct images are the same constructions as the recorded ones. The fixed-scalar module category is the project's established form, linked to the node's category by a recorded equivalence. Edge cases checked: empty Z, empty D, zero ring, non-flat maps, r = s. Universes left general. All gates met: no hollow definitions, source and blueprint docstrings, proof steps in the theorem docstring, only sorry, statement verbatim, only lean and two landed-node stmt_deps changed. The Second reading section is the author's own but concrete. No findings."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GeoCartierCycleClass",
+  "declaration": "AlgebraicGeometry.ProEtale.exists_geoCartierCycleClass",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.geoCartierConstant",
+   "AlgebraicGeometry.ProEtale.geoCartierLine",
+   "AlgebraicGeometry.ProEtale.GeoCartierClass",
+   "AlgebraicGeometry.ProEtale.GeoCartierClassFamily",
+   "AlgebraicGeometry.ProEtale.geoCartierSourceComparison",
+   "AlgebraicGeometry.ProEtale.geoCartierExchange",
+   "AlgebraicGeometry.ProEtale.geoCartierLinePullback",
+   "AlgebraicGeometry.ProEtale.GeoCartierChernEquation",
+   "AlgebraicGeometry.ProEtale.GeoCartierScalarUnit",
+   "AlgebraicGeometry.ProEtale.GeoCartierScalarCompatibility",
+   "AlgebraicGeometry.ProEtale.GeoCartierBaseChange",
+   "AlgebraicGeometry.ProEtale.GeoCartierExponentIndependence",
+   "AlgebraicGeometry.ProEtale.exists_geoCartierCycleClass"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/GeoCartierCycleClass.lean",
+  "statement": "theorem exists_geoCartierCycleClass (ℓ : ℕ) (hℓ : ℓ.Prime) : ∃ c : GeoCartierClassFamily.{u} ℓ, (∀ (r : ℕ) (hr : 0 < r) (A : Type (u + 1)) [CommRing A] [Finite A] (hA : ((ℓ ^ r : ℕ) : A) = 0) {D Z : Scheme.{u}} (i : D ⟶ Z) [IsClosedImmersion i] (hI : i.ker.IsInvertible) (hZ : IsUnit ((ℓ ^ r : ℕ) : Γ(Z, ⊤))), IsIso (geoCartierSourceComparison A i) ∧ GeoCartierChernEquation A (ℓ ^ r) hA i hI hZ (c r hr A hA i hI hZ) ∧ ∃ κ : Ext ((Etale.lowerStar (ModuleCat.{u + 1} A) i).obj (Etale.ordinaryFiniteConstant A D)) (Scheme.finiteEtaleTateLine Z (ℓ ^ r) A hA) 2, Etale.SupportedKummerBoundary A (ℓ ^ r) hA i hI hZ κ ∧ (Ext.mk₀ (geoCartierSourceComparison A i)).comp (c r hr A hA i hI hZ) (zero_add 2) = κ.mapExactFunctor (comparisonUpperStar (ModuleCat.{u + 1} A) Z)) ∧ (∀ (r : ℕ) (hr : 0 < r) (A B : Type (u + 1)) [CommRing A] [CommRing B] [Finite A] [Finite B] (hA : ((ℓ ^ r : ℕ) : A) = 0) (hB : ((ℓ ^ r : ℕ) : B) = 0) (φ : A →+* B) {D Z : Scheme.{u}} (i : D ⟶ Z) [IsClosedImmersion i] (hI : i.ker.IsInvertible) (hZ : IsUnit ((ℓ ^ r : ℕ) : Γ(Z, ⊤))), GeoCartierScalarCompatibility φ (ℓ ^ r) hA hB i (c r hr A hA i hI hZ) (c r hr B hB i hI hZ)) ∧ GeoCartierBaseChange ℓ c ∧ GeoCartierExponentIndependence ℓ c",
+  "branch": "newtargets-dag",
+  "by": "NH",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Ordinary fixed-scalar module-sheaf presentation, canonically equivalent to the continuous-function ring-sheaf presentation by finiteCoefficientRealization. Ext² is the canonical Ext.homEquiv representation of the displayed shifted derived morphism. All auxiliary definitions spell out its objects and canonical normalization diagrams; no new inverse image, Tate twist or scalar-extension functor is chosen. stmt_deps gains the two already-landed interfaces for the relative Kummer boundary and roots-normalized finite-line transport."
  }
 }
