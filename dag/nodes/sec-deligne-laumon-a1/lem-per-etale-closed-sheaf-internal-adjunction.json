@@ -19,48 +19,166 @@
   "def-sp-injective-resolutions",
   "def-pur-sheaf-hom"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $P(F)=\\ker(F\\to j_*j^*F)$, $a_F:P(F)\\to F$ and $H(F)=i^*P(F)$. The faithful exact forgetful functor of [lem-weil-pbc-module-sheaves-colimits-forgetful] computes this kernel on underlying abelian sheaves. The constant-coefficient inverse images, units and counits have those same underlying abelian maps by [prop-weil-pbc-inverse-image-modules-exact], and direct image does too by [def-weil-pbc-direct-image]. Consequently [lem-pur-etale-supported-kernel-adjunction] supplies an underlying isomorphism $q_F:P(F)\\to i_*H(F)$, specifically the closed unit on $P(F)$. That unit is a module morphism by the module adjunction just cited, so its inverse is also module-linear. Thus $c_F=a_Fq_F^{-1}:i_*H(F)\\to F$ is a natural module-linear support inclusion. Exactness of abelian $i_*$ from the support lemma implies exactness on module sheaves: forgetting scalars preserves kernels and cokernels and reflects zero objects, so it reflects exactness. The kernel construction on morphisms is the unique factorization of $P(F)\\to F\\to F'$ through $P(F')$, and hence gives the functor $H$.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "def-weil-pbc-direct-image",
+    "lem-pur-etale-supported-kernel-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 09XQ (lemma-sections-with-support-acyclic), proof and preceding supported-sheaf definition; module exactness is Tag 03DA (sites-modules-lemma-abelian)."
+   }
+  },
+  {
+   "text": "Let $T_{G,F}$ be the abelian support-adjunction bijection of [lem-pur-etale-supported-kernel-adjunction]. Concretely, $T_{G,F}$ is computed as follows. The open immersion $j$ is etale [lem-weil-pbc-etale-composition-cancellation], so by [lem-weil-pbc-etale-inverse-image-restriction] and [def-weil-pbc-direct-image] the sections of $j^*i_*G$ over $W\\to U$ are $G(W\\times_XZ)=G(\\varnothing)=0$ (the empty covering of the empty scheme); hence $j^*i_*G=0$, and by naturality of the unit every $h:i_*G\\to F$ is killed by $F\\to j_*j^*F$ and factors uniquely as $h=a_Fh'$. Put $T_{G,F}(h)=k$, the unique map with $i_*k=q_Fh'$ [lem-kun-04ca]. Its inverse is $k\\mapsto c_F i_*k$: indeed $c_Fi_*T_{G,F}(h)=a_Fq_F^{-1}q_Fh'=h$, and $c_Fi_*k=a_F(q_F^{-1}i_*k)$ has $h'=q_F^{-1}i_*k$, so $T_{G,F}(c_Fi_*k)=k$; naturality in $G$ and $F$ follows from naturality of $a$ and $q$. For $a\\in A$, naturality of this additive bijection gives\n$$T_{G,F}(h\\,i_*\\mu_a^G)=T_{G,F}(h)\\mu_a^G,\\qquad T_{G,F}(\\mu_a^F h)=H(\\mu_a^F)T_{G,F}(h).$$\nHere $H(\\mu_a^F)=\\mu_a^{H(F)}$ by the kernel and inverse-image module structures of Step 1. Hence $h$ commutes with multiplication by every $a$ if and only if its transpose does. For a constant ring sheaf this is precisely module-linearity: a section of $A_T$ is locally represented by an element of $A$, by its sheafification definition [def-weil-pbc-constant-sheaf], and the required equality is local. Thus $T$ restricts to natural bijections on module morphisms. These are additive and $A$-linear, with the same inverse $k\\mapsto c_F i_*k$. This proves $i_*\\dashv H=i^!_0$ over $A$. The identical scalar argument lifts full faithfulness in [lem-kun-04ca] to module sheaves: the abelian preimage of a module map commutes with every $\\mu_a$ by faithfulness.",
+   "uses": [
+    "lem-pur-etale-supported-kernel-adjunction",
+    "lem-kun-04ca",
+    "def-weil-pbc-constant-sheaf",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-weil-pbc-etale-inverse-image-restriction",
+    "def-weil-pbc-direct-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 09XQ, displayed Hom identity and its support-factorization proof; scalar-equivariant restriction of that bijection."
+   }
+  },
+  {
+   "text": "Let $I$ be injective in $\\operatorname{Mod}(A_X)$ and $M\\hookrightarrow N$ a monomorphism in $\\operatorname{Mod}(A_Z)$. Step 1 makes $i_*M\\to i_*N$ a monomorphism. Transpose a given module map $M\\to H(I)$ by Step 2 to $i_*M\\to I$. Injectivity extends it to $i_*N\\to I$. Transposing back gives $N\\to H(I)$ extending the original map, by naturality of the bijection with respect to $M\\to N$. This is exactly the injectivity criterion of [def-sp-injective-resolutions]. No assertion about injectivity after forgetting scalars is used.",
+   "uses": [
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 09XQ, final sentence of the proof, expanded by the injective-object extension criterion."
+   }
+  },
+  {
+   "text": "Fix an etale object $V\\to X$ and put $Z_V=Z\\times_XV$, $U_V=U\\times_XV$. The immersion $i_V:Z_V\\to V$ is closed by [lem-weil-pbc-closed-immersion-base-change]; its complement is the inverse image of the open set $U$, namely $U_V$. The etale sites of $V,Z_V,U_V$ identify with the corresponding slice sites: $Z_V\\to Z$ and $U_V\\to U$ are etale as base changes of $V\\to X$ [lem-weil-pbc-etale-base-change-finite-limits]; for $T\\to S$ etale, a scheme $W\\to T$ is etale over $T$ if and only if $W\\to T\\to S$ is etale over $S$ [lem-weil-pbc-etale-composition-cancellation], so the objects agree, and coverings are the same jointly surjective families. Likewise $W\\times_XZ=W\\times_VZ_V$ is an etale $Z_V$-scheme for $W\\to V$ etale. Use restriction as in [def-pur-localized-ringed-site]; [lem-weil-pbc-etale-inverse-image-restriction] identifies abelian etale inverse image with this sectionwise restriction, including the unit. Applied to scalar multiplications, its naturality makes this identification module-linear for constant coefficients. The module inverse-image identification of the rings is [prop-weil-pbc-inverse-image-modules-exact]. For $W\\to V$, the direct-image formula [def-weil-pbc-direct-image] gives\n$$(i_*G)|_V(W)=G(W\\times_XZ)=i_{V*}(G|_{Z_V})(W).$$\nThe same formula for $j_*$ and its restriction unit gives\n$$P(F)|_V(W)=\\ker\\bigl(F(W)\\to F(W\\times_XU)\\bigr)=P_V(F|_V)(W).$$\nThese are equalities on sections and arrows, so include the kernel inclusions and all scalar actions.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-base-change",
+    "def-pur-localized-ringed-site",
+    "lem-weil-pbc-etale-inverse-image-restriction",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "def-weil-pbc-direct-image",
+    "lem-weil-pbc-etale-base-change-finite-limits",
+    "lem-weil-pbc-etale-composition-cancellation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 09XP (section-cohomology-support), sectionwise supported-subsheaf formula; Tag 01QR (morphisms-lemma-base-change-closed-immersion); etale restriction of direct image and its unit."
+   }
+  },
+  {
+   "text": "Apply the construction of Step 1 on $V$. Write $H_V=i_V^*P_V$ and $q_{V,F|_V}:P_V(F|_V)\\to i_{V*}H_V(F|_V)$. Restricting $q_F$ to $V$ instead gives, by Step 4, an isomorphism $r_V:P_V(F|_V)\\to i_{V*}(H(F)|_{Z_V})$. Full faithfulness of $i_{V*}$ [lem-kun-04ca], lifted to module morphisms as in Step 2, therefore gives a unique module isomorphism\n$$b_V:H(F)|_{Z_V}\\longrightarrow H_V(F|_V),\\qquad i_{V*}b_V=q_{V,F|_V}r_V^{-1}.$$\nIts defining equality implies\n$$c_{V,F|_V}\\,i_{V*}b_V=c_F|_V.$$\nIn particular $b_V$ is normalized by the actual support inclusion, rather than an unspecified identification. No inverse-image base-change theorem is required for this comparison.",
+   "uses": [
+    "lem-kun-04ca"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 04CA (proposition-closed-immersion-pushforward) and 09XQ: compare the two supported-sheaf presentations using full faithfulness."
+   }
+  },
+  {
+   "text": "By [def-pur-sheaf-hom] and Step 4, a section over $V$ of the left side of the desired isomorphism is a module map $h:i_{V*}(G|_{Z_V})\\to F|_V$. Step 2 applied on $V$ sends it bijectively to $T_V(h):G|_{Z_V}\\to H_V(F|_V)$. Define\n$$\\Phi_V(h)=b_V^{-1}T_V(h)\\in\\operatorname{Hom}_{A_{Z_V}}(G|_{Z_V},H(F)|_{Z_V}).$$\nThe latter group is exactly $(i_*\\mathcal Hom_{A_Z}(G,H(F)))(V)$ by [def-weil-pbc-direct-image] and [def-pur-sheaf-hom]. Its inverse sends $k$ to $(c_F|_V)i_{V*}k$, by the normalization in Step 5. Substituting the two formulas and the two inverse adjunction identities verifies both composites are the identity. Thus each $\\Phi_V$ is a bijection with precisely the support-inclusion-induced inverse required in the statement.",
+   "uses": [
+    "def-pur-sheaf-hom",
+    "def-weil-pbc-direct-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 09XQ, support adjunction on the etale scheme V; the slice definition of internal sheaf Hom."
+   }
+  },
+  {
+   "text": "For an arrow $W\\to V$ of etale objects, restrict the formula $h=(c_F|_V)i_{V*}\\Phi_V(h)$ to $W$. The sectionwise identifications of Step 4 give $h|_W=(c_F|_W)i_{W*}(\\Phi_V(h)|_{Z_W})$. Uniqueness in the bijection of Step 6 then gives $\\Phi_W(h|_W)=\\Phi_V(h)|_{Z_W}$. This proves compatibility with all sheaf restriction maps [def-pur-sheaf-hom]. For maps $G'\\to G$ and $F\\to F'$, the same inverse formula, using naturality of $c$, proves naturality by precomposition and postcomposition. Finally $c_F|_V$ and $i_{V*}$ are $A_V$-linear, so the inverse satisfies $\\Psi_V(a k)=a\\Psi_V(k)$ for every $a\\in A_X(V)$ (acting on the right through restriction to $Z_V$). Its inverse $\\Phi_V$ is therefore also $A_X(V)$-linear. Hence these bijections are the claimed natural isomorphism of module sheaves. All steps allowed arbitrary $A,F,G$; none used a finite generation or finiteness hypothesis.",
+   "uses": [
+    "def-pur-sheaf-hom"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 09XQ, localized support factorization; uniqueness of kernel factorization and of the support adjunction transposes."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "def-weil-pbc-direct-image",
+  "lem-pur-etale-supported-kernel-adjunction",
+  "lem-kun-04ca",
+  "def-weil-pbc-constant-sheaf",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "def-sp-injective-resolutions",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "def-pur-localized-ringed-site",
+  "lem-weil-pbc-etale-base-change-finite-limits",
+  "def-pur-sheaf-hom"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 09XP (section-cohomology-support), 09XQ (lemma-sections-with-support-acyclic), 04CA (proposition-closed-immersion-pushforward); explicit module-linear lift and slice comparison of the support adjunction."
+ },
  "mathlib_searches": [
-  {
-   "tool": "leanfinder",
-   "query": "Sheaves of modules closed immersion direct image exceptional right adjoint kernel open restriction internal sheaf Hom adjunction",
-   "results": "8 hits; AlgebraicGeometry.Scheme.Modules.restrictAdjunction, AlgebraicGeometry.Scheme.kerAdjunction, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app, SheafOfModules.pushforwardPushforwardAdj, AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward; ; digest 0a23598b0904e343",
-   "date": "2026-10-18",
-   "verdict": "no match: ordinary pullback/pushforward adjunctions and monoidal closed structures do not construct the closed-support kernel right adjoint or its internal sheaf adjunction."
-  },
-  {
-   "tool": "leanfinder",
-   "query": "For a closed subtopos i the sheaf Hom from i pushforward M to F is i pushforward sheaf Hom from M to i shriek F",
-   "results": "8 hits; TopCat.Sheaf.pullbackPushforwardAdjunction, SheafOfModules.pushforwardPushforwardAdj, SheafOfModules.pullbackPushforwardAdjunction, TopCat.Sheaf.instIsRightAdjointPushforward, CategoryTheory.Functor.sheafAdjunctionContinuous, SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous, SheafOfModules.instIsRightAdjointPushforward, SheafOfModules.PullbackConstruction.adjunction; ; digest 776afa668d4e273d",
-   "date": "2026-10-18",
-   "verdict": "no match: ordinary pullback/pushforward adjunctions and monoidal closed structures do not construct the closed-support kernel right adjoint or its internal sheaf adjunction."
-  },
-  {
-   "tool": "loogle",
-   "query": "SheafOfModules.hom",
-   "results": "0 hits; ; loogle: unknown identifier 'SheafOfModules.hom'; digest 4f53cda18c2baa0c",
-   "date": "2026-10-18",
-   "verdict": "no match: ordinary pullback/pushforward adjunctions and monoidal closed structures do not construct the closed-support kernel right adjoint or its internal sheaf adjunction."
-  },
   {
    "tool": "grep",
    "query": "upperShriek|sectionsWithSupport|closed.*[Aa]djunction|support.*[Aa]djunction",
-   "results": "16 hits; Mathlib/FieldTheory/IntermediateField/Adjoin/Defs.lean, Mathlib/Algebra/Algebra/Subalgebra/Lattice.lean, Mathlib/Condensed/Light/Monoidal.lean, Mathlib/Condensed/Light/InternallyProjective.lean, Mathlib/Condensed/Light/InternallyProjective.lean, Mathlib/CategoryTheory/Adjunction/Parametrized.lean, Mathlib/CategoryTheory/Adjunction/Parametrized.lean, Mathlib/CategoryTheory/LiftingProperties/PushoutProduct.lean; ; digest 4335624e423e34c8",
-   "date": "2026-10-18",
-   "verdict": "no match: ordinary pullback/pushforward adjunctions and monoidal closed structures do not construct the closed-support kernel right adjoint or its internal sheaf adjunction."
+   "results": "{\"t\": \"2026-10-18T20:40:46Z\", \"tool\": \"grep\", \"query\": \"upperShriek|sectionsWithSupport|closed.*[Aa]djunction|support.*[Aa]djunction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 16, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Algebra/Subalgebra/Lattice.lean\", \"Mathlib/Condensed/Light/Monoidal.lean\", \"Mathlib/Condensed/Light/InternallyProjective.lean\", \"Mathlib/Condensed/Light/InternallyProjective.lean\", \"Mathlib/FieldTheory/IntermediateField/Adjoin/Defs.lean\", \"Mathlib/CategoryTheory/Adjunction/Parametrized.lean\", \"Mathlib/CategoryTheory/Adjunction/Parametrized.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Types.lean\"], \"digest\": \"f2b163dd7f79554d\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: the displayed hits are ordinary pullback/direct-image adjunctions, structure-sheaf kernels, monoidal closed constructions or unrelated support notation; none states the closed-support module right adjoint together with its internal Hom isomorphism."
   },
   {
    "tool": "leansearch",
    "query": "The closed immersion pushforward on etale module sheaves has right adjoint sections with support with an internal Hom adjunction",
-   "results": "8 hits; SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.pushforwardPushforwardAdj, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, AlgebraicGeometry.Scheme.Modules.restrictAdjunction, SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app, SheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app; ; digest 4244c50d2ce55629",
-   "date": "2026-10-18",
-   "verdict": "no match: ordinary pullback/pushforward adjunctions and monoidal closed structures do not construct the closed-support kernel right adjoint or its internal sheaf adjunction."
+   "results": "{\"t\": \"2026-10-18T20:40:46Z\", \"tool\": \"leansearch\", \"query\": \"The closed immersion pushforward on etale module sheaves has right adjoint sections with support with an internal Hom adjunction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.PullbackConstruction.adjunction\", \"SheafOfModules.pushforwardPushforwardAdj\", \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward\", \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction\", \"SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app\", \"SheafOfModules.pullbackPushforwardAdjunction\", \"SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app\"], \"digest\": \"4244c50d2ce55629\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: the displayed hits are ordinary pullback/direct-image adjunctions, structure-sheaf kernels, monoidal closed constructions or unrelated support notation; none states the closed-support module right adjoint together with its internal Hom isomorphism."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pushforward",
+   "results": "{\"t\": \"2026-10-18T20:40:47Z\", \"tool\": \"loogle\", \"query\": \"SheafOfModules.pushforward\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"SheafOfModules.pushforwardId\", \"SheafOfModules.pushforward\", \"SheafOfModules.instIsLeftAdjointOverOverRingCatPushforwardIdSheafOver\", \"SheafOfModules.overPushforwardOverAdj\", \"SheafOfModules.isLeftAdjoint_pushforward_of_isIso\", \"SheafOfModules.pushforwardCongr\", \"SheafOfModules.pushforwardNatIso\", \"SheafOfModules.pushforwardNatTrans\"], \"digest\": \"044b55baec8a6901\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: the displayed hits are ordinary pullback/direct-image adjunctions, structure-sheaf kernels, monoidal closed constructions or unrelated support notation; none states the closed-support module right adjoint together with its internal Hom isomorphism."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a closed subtopos i the sheaf Hom from i pushforward M to F is i pushforward sheaf Hom from M to i shriek F",
+   "results": "{\"t\": \"2026-10-18T20:40:48Z\", \"tool\": \"leanfinder\", \"query\": \"For a closed subtopos i the sheaf Hom from i pushforward M to F is i pushforward sheaf Hom from M to i shriek F\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TopCat.Sheaf.pullbackPushforwardAdjunction\", \"SheafOfModules.pushforwardPushforwardAdj\", \"SheafOfModules.pullbackPushforwardAdjunction\", \"TopCat.Sheaf.instIsRightAdjointPushforward\", \"CategoryTheory.Functor.sheafAdjunctionContinuous\", \"SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous\", \"SheafOfModules.instIsRightAdjointPushforward\", \"SheafOfModules.PullbackConstruction.adjunction\"], \"digest\": \"776afa668d4e273d\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: the displayed hits are ordinary pullback/direct-image adjunctions, structure-sheaf kernels, monoidal closed constructions or unrelated support notation; none states the closed-support module right adjoint together with its internal Hom isomorphism."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheaves of modules closed immersion direct image exceptional right adjoint kernel open restriction internal sheaf Hom adjunction",
+   "results": "{\"t\": \"2026-10-18T20:40:49Z\", \"tool\": \"leanfinder\", \"query\": \"Sheaves of modules closed immersion direct image exceptional right adjoint kernel open restriction internal sheaf Hom adjunction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.restrictAdjunction\", \"AlgebraicGeometry.Scheme.kerAdjunction\", \"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor\", \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app\", \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app\", \"SheafOfModules.pushforwardPushforwardAdj\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso\", \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward\"], \"digest\": \"0a23598b0904e343\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: the displayed hits are ordinary pullback/direct-image adjunctions, structure-sheaf kernels, monoidal closed constructions or unrelated support notation; none states the closed-support module right adjoint together with its internal Hom isomorphism."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.hom",
+   "results": "{\"t\": \"2026-10-18T20:42:20Z\", \"tool\": \"loogle\", \"query\": \"SheafOfModules.hom\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'SheafOfModules.hom'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: the displayed hits are ordinary pullback/direct-image adjunctions, structure-sheaf kernels, monoidal closed constructions or unrelated support notation; none states the closed-support module right adjoint together with its internal Hom isomorphism."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-etale-internal-hom-localization",
@@ -86,5 +204,79 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-etale-closed-sheaf-internal-adjunction",
+  "worker": "stage1",
+  "summary": "Reused the exact abelian etale supported-kernel adjunction; lifted its canonical unit and transpose to constant-ring modules, proved preservation of injectives by the extension criterion, and constructed the internal sheaf Hom isomorphism on each etale slice with an explicitly normalized supported-kernel comparison. No new nodes; no statement changes. Searched the project Lean source for both the blueprint tag and concepts, and ran/recorded all Mathlib searches through msearch.py.",
+  "blueprint": "Realizes the sheaf-level closed adjunction needed for the closed endpoint of ILO XVII 7.6.10 in the existing lem-per-artin-gabber-affine-curve Step 1 ancestry; preserves blueprint.from and its exact dependency-chain place. No other blueprint node states the complete arbitrary-ring internal formula.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "why": "Generic exact faithful forgetting of ring-sheaf modules; used to transfer exactness, and no such abelian-category tool is supplied by the Fourier/perverse unit."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Generic constant-ring module inverse images and their units; identifies the canonical supported unit as a module map."
+   },
+   {
+    "node": "def-weil-pbc-direct-image",
+    "why": "Sectionwise definition of module direct image used to compute restrictions on slices."
+   },
+   {
+    "node": "lem-pur-etale-supported-kernel-adjunction",
+    "why": "Generic abelian etale support adjunction; its full canonical-unit statement is needed before the scalar-equivariant lift."
+   },
+   {
+    "node": "lem-kun-04ca",
+    "why": "Generic closed etale fully faithful embedding; identifies the two supported presentations after slice restriction."
+   },
+   {
+    "node": "def-weil-pbc-constant-sheaf",
+    "why": "Definition used to test linearity locally on scalar sections."
+   },
+   {
+    "node": "def-sp-injective-resolutions",
+    "why": "Injective-object extension criterion, used directly for the right adjoint."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-base-change",
+    "why": "Generic geometric base-change stability needed to apply the same support argument on every etale slice."
+   },
+   {
+    "node": "def-pur-localized-ringed-site",
+    "why": "Sectionwise definition of restriction to a slice and its relocalization."
+   },
+   {
+    "node": "lem-weil-pbc-etale-inverse-image-restriction",
+    "why": "Generic etale restriction/unit comparison; relates scheme inverse image to the slice description."
+   },
+   {
+    "node": "def-pur-sheaf-hom",
+    "why": "Definition of internal sheaf Hom by maps on slice sites."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "def-weil-pbc-direct-image",
+  "lem-pur-etale-supported-kernel-adjunction",
+  "lem-kun-04ca",
+  "def-weil-pbc-constant-sheaf",
+  "def-sp-injective-resolutions",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "def-pur-localized-ringed-site",
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "def-pur-sheaf-hom"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q23-800ec2f38",
+  "group": "Q23",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q23-800ec2f38 (reviewer sub-agent of L); spot-checked: Read the item in full: 7 steps, statement unchanged from base, no new nodes. Also read every cited statement and Stacks etale-cohomology Section 09XP and Lemma 09XQ with its proof: Hom_Z(G,H_Z F)=Hom_X(i_*G,F), i_* exact, so H_Z(I) is injective. The item is the module-linear internal-Hom form of that, slice by slice. It is true, and I tested it on Z empty, Z=X, A=0 and a strictly henselian DVR with F=A_X (both sides 0). The proof checks against its cited statements. Step 1: the kernel is sectionwise, q_F is the closed unit and is an iso by lem-pur-etale-supported-kernel-adjunction, and exactness is reflected by forgetting scalars. Step 2's scalar argument is correct (H(mu_a)=mu_a, sections of A_T are locally constant), and so are step 3 (injectives by the extension criterion), step 5 (c_V i_V* b_V=c_F|_V), and steps 6 and 7 (inverse formula, restriction, naturality, A-linearity). Two repairable faults, fixed in fixes/dag/nodes/sec-deligne-laumon-a1/lem-per-etale-closed-sheaf-internal-adjunction.json. (1) C3/C4/E5, step 2: it took the formula k->c_F i_*k for the inverse of the abelian bijection, but the cited lemma states no formula, and the needed j^*i_*G=0 was not argued. T is now built explicitly: j is étale (lem-weil-pbc-etale-composition-cancellation); sections of j^*i_*G are G(empty)=0 (lem-weil-pbc-etale-inverse-image-restriction, def-weil-pbc-direct-image); h=a_F h'; T(h) is the full-faithfulness preimage of q_F h'. Both composites are verified. (2) C1, step 4: identifying the étale sites with the slice sites needs étale cancellation and étale base change. It now cites lem-weil-pbc-etale-composition-cancellation and lem-weil-pbc-etale-base-change-finite-limits (both Mathlib leaves). proof_deps is recomputed as the union of the step uses. Duplicate search (09XQ, sections with support, i^!_0, internal Hom with i_*) found only the abelian global-Hom lemma it cites (narrower), the abelian def-pur-etale-supported-kernel, pro-étale analogues (lem-sf-ringed-closed-kernel-adjoint, det-lem-formal-closed-support-*, lem-sfb-open-closed-internal-hom-formulas) and def-per-closed-support-plus-adjunction (finite A, derived). None is a duplicate. No cycle: the item is not in its own 402-node closure. The 11 declared generic tool_uses are accepted. No SGA.; 1 file(s) fixed by the reviewer"
  }
 }
