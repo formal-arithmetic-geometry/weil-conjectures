@@ -1,0 +1,72 @@
+{
+ "id": "lem-wf-legendre-digit-sum",
+ "kind": "statement",
+ "title": "Legendre digit-sum identity for the factorial valuation",
+ "statement": "Let $p$ be a prime and let $v_p$ be the normalized $p$-adic valuation of nonzero rational numbers [def-weil-l-adic-numbers]. For $n\\in\\mathbf Z_{\\ge0}$, let $s_p(n)$ be the sum of the digits in the base-$p$ expansion of $n$: if $n=\\sum_{i=0}^k d_i p^i$ with $0\\le d_i<p$, then $s_p(n)=\\sum_{i=0}^k d_i$, and $s_p(0)=0$. Then\n$$(p-1)v_p(n!)=n-s_p(n).$$",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-d-real-log/lem-wf-deep-principal-unit-log.proof.md",
+  "place": "Proof paragraph 2: the factorial valuation estimate used to bound the exponential terms; exact Mathlib source: Mathlib/NumberTheory/Padics/PadicVal/Basic.lean:581"
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-numbers"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Legendre theorem the exponent of a prime in n factorial multiplied by p minus one is n minus the sum of the base p digits of n",
+   "results": "8 hits; scope service index. Read results: Nat.Prime.sub_one_mul_multiplicity_factorial, Nat.sub_one_mul_factorization_factorial, sub_one_mul_padicValNat_factorial, sub_one_mul_padicValNat_factorial_lt_of_ne_zero, Nat.Prime.emultiplicity_factorial_le_div_pred, Nat.factorization_factorial_le_div_pred, Nat.Prime.multiplicity_factorial_pow, Nat.Prime.emultiplicity_factorial_mul. ",
+   "date": "2026-10-18",
+   "verdict": "match: sub_one_mul_padicValNat_factorial; pinned source read at the lines in mathlib_match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Legendre formula (p-1) v_p(n!) = n - sum of base p digits of n",
+   "results": "8 hits; scope service index. Read results: sub_one_mul_padicValNat_factorial, Nat.Prime.sub_one_mul_multiplicity_factorial, Nat.sub_one_mul_factorization_factorial, padicValNat_factorial, Nat.sub_one_mul_sum_log_div_pow_eq_sub_sum_digits, sub_one_mul_padicValNat_choose_eq_sub_sum_digits, padicValNat_factorial_le, sub_one_mul_padicValNat_choose_eq_sub_sum_digits'. ",
+   "date": "2026-10-18",
+   "verdict": "match: sub_one_mul_padicValNat_factorial; pinned source read at the lines in mathlib_match"
+  },
+  {
+   "tool": "loogle",
+   "query": "sub_one_mul_padicValNat_factorial",
+   "results": "1 hits: sub_one_mul_padicValNat_factorial; source read at Basic.lean:581-586.",
+   "date": "2026-10-18",
+   "verdict": "match: sub_one_mul_padicValNat_factorial"
+  },
+  {
+   "tool": "grep",
+   "query": "sub_one_mul_padicValNat_factorial",
+   "results": "5 hits: Mathlib/NumberTheory/Padics/PadicVal/Basic.lean, Mathlib/NumberTheory/Padics/PadicVal/Basic.lean, Mathlib/NumberTheory/Padics/PadicVal/Basic.lean, Mathlib/NumberTheory/Padics/PadicVal/Basic.lean, Mathlib/NumberTheory/Padics/PadicVal/Basic.lean; source read at Basic.lean:581-586.",
+   "date": "2026-10-18",
+   "verdict": "match: sub_one_mul_padicValNat_factorial"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "sub_one_mul_padicValNat_factorial",
+  "file": "Mathlib/NumberTheory/Padics/PadicVal/Basic.lean",
+  "line": 581,
+  "how": "exact: lines 581-586; padicValNat p n! is the exponent of p in the positive integer n!, hence v_p(n!); the digit list sum is s_p(n). The displayed integer identity is the usual natural-number identity, with the same nonnegative difference n-s_p(n)."
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "lem-wf-log-exp-valuation-convergence",
+  "date": "2026-10-18",
+  "group": "Q42"
+ },
+ "chapter": "sec-purity-real-sheaves",
+ "unit": "sk-d-real-log",
+ "blueprint": {
+  "from": {
+   "node": "lem-wf-deep-principal-unit-log",
+   "place": "Proof paragraph 2: the factorial valuation estimate used to bound the exponential terms",
+   "via": [
+    "lem-wf-log-exp-valuation-convergence"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

@@ -2,17 +2,132 @@
  "id": "lem-wf-log-exp-valuation-convergence",
  "kind": "statement",
  "title": "Valuation convergence of deep p-adic logarithm and exponential series",
- "statement": "Let $\\ell$ be prime and $E/\\mathbf Q_\\ell$ a finite extension as in [def-weil-l-adic-coefficient-extension], with valuation ring $\\mathcal O_E$, maximal ideal $\\mathfrak m_E$, normalized valuation $v_E(\\mathfrak m_E)=1$ and $e=v_E(\\ell)$. Use the extended absolute value $|z|_E=\\ell^{-v_E(z)/e}$ for $z\\ne0$. For every integer $r>e/(\\ell-1)$ put $\\delta=r-e/(\\ell-1)>0$, $q=\\ell^{-r/e}$ and $\\theta=\\ell^{-\\delta/e}<1$. For every integer $n\\ge1$,\n$$v_\\ell(n)\\le\\frac{n-1}{\\ell-1},\\qquad v_\\ell(n!)\\le\\frac{n-1}{\\ell-1}.$$\nFor every $x\\in\\mathfrak m_E^r$,\n$$v_E(x^n/n)\\ge nr-e v_\\ell(n)\\ge r+(n-1)\\delta,\\qquad v_E(x^n/n!)\\ge nr-e v_\\ell(n!)\\ge r+(n-1)\\delta.$$\nEquivalently the two coefficient sequences satisfy\n$$|1/n|_E q^n\\le q\\theta^{n-1},\\qquad |1/n!|_E q^n\\le q\\theta^{n-1}\\quad(n\\ge1).$$\nThe series $L(x)=\\sum_{n\\ge1}(-1)^{n+1}x^n/n$ and $A(x)=\\sum_{n\\ge1}x^n/n!$ converge uniformly on $\\mathfrak m_E^r=\\{x:|x|_E\\le q\\}$. Their sums lie in $\\mathfrak m_E^r$, and both maps are continuous there. Thus $\\log(1+x)=L(x)$ and $\\exp(x)=1+A(x)$ converge uniformly on these domains, with logarithm in $\\mathfrak m_E^r$ and exponential in $1+\\mathfrak m_E^r$.",
+ "statement": "Let $\\ell$ be prime and $E/\\mathbf Q_\\ell$ a finite extension as in [def-weil-l-adic-coefficient-extension], with valuation ring $\\mathcal O_E$, maximal ideal $\\mathfrak m_E$, normalized valuation $v_E(\\mathfrak m_E)=1$ and $e=v_E(\\ell)$. Set $v_E(0)=+\\infty$ and $|0|_E=0$, and write $v_\\ell$ for the normalized valuation of [def-weil-l-adic-numbers]. Use the extended absolute value $|z|_E=\\ell^{-v_E(z)/e}$ for $z\\ne0$. For every integer $r>e/(\\ell-1)$ put $\\delta=r-e/(\\ell-1)>0$, $q=\\ell^{-r/e}$ and $\\theta=\\ell^{-\\delta/e}<1$. For every integer $n\\ge1$,\n$$v_\\ell(n)\\le\\frac{n-1}{\\ell-1},\\qquad v_\\ell(n!)\\le\\frac{n-1}{\\ell-1}.$$\nFor every $x\\in\\mathfrak m_E^r$,\n$$v_E(x^n/n)\\ge nr-e v_\\ell(n)\\ge r+(n-1)\\delta,\\qquad v_E(x^n/n!)\\ge nr-e v_\\ell(n!)\\ge r+(n-1)\\delta.$$\nEquivalently the two coefficient sequences satisfy\n$$|1/n|_E q^n\\le q\\theta^{n-1},\\qquad |1/n!|_E q^n\\le q\\theta^{n-1}\\quad(n\\ge1).$$\nThe series $L(x)=\\sum_{n\\ge1}(-1)^{n+1}x^n/n$ and $A(x)=\\sum_{n\\ge1}x^n/n!$ converge uniformly on $\\mathfrak m_E^r=\\{x:|x|_E\\le q\\}$. Their sums lie in $\\mathfrak m_E^r$, and both maps are continuous there. Thus $\\log(1+x)=L(x)$ and $\\exp(x)=1+A(x)$ converge uniformly on these domains, with logarithm in $\\mathfrak m_E^r$ and exponential in $1+\\mathfrak m_E^r$.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-d-real-log/lem-wf-deep-principal-unit-log.proof.md",
   "place": "paragraphs 1–2; strengthened coefficient bounds making paragraph 3 evaluable, supplied by Q153"
  },
  "stmt_deps": [
-  "def-weil-l-adic-coefficient-extension"
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-l-adic-numbers"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use the extending absolute value and its nonarchimedean inequality from [lem-weil-l-adic-extension-absolute-value]. By [lem-weil-l-adic-extension-integers-dvr], choose a uniformizer $\\pi$ and write every nonzero $z\\in E$ as $u\\pi^k$ with $|u|_E=1$ and $k=v_E(z)$. Since $|\\ell|_E=\\ell^{-1}<1$, the integer $e=v_E(\\ell)$ is positive. For $a\\in\\mathbf Q_\\ell^\\times$, the equality $|a|_E=|a|_\\ell=\\ell^{-v_\\ell(a)}$ and the specified normalization give $v_E(a)=e v_\\ell(a)$. Also $\\mathfrak m_E^r=\\pi^r\\mathcal O_E$: a product of $r$ multiples of $\\pi$ is a multiple of $\\pi^r$, and $\\pi^r a$ is such a product for $a\\in\\mathcal O_E$. Thus $z\\in\\mathfrak m_E^r$ exactly when $z=0$ or $v_E(z)\\ge r$, equivalently $|z|_E\\le q$.",
+   "uses": [
+    "lem-weil-l-adic-extension-absolute-value",
+    "lem-weil-l-adic-extension-integers-dvr",
+    "def-weil-l-adic-numbers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-d-real-log/lem-wf-deep-principal-unit-log.proof.md",
+    "place": "Proof paragraphs 1-2, valuation and ideal normalizations"
+   }
+  },
+  {
+   "text": "Apply [lem-wf-legendre-digit-sum] with $p=\\ell$. If $n\\ge1$, its base-$\\ell$ expansion has a nonzero digit, so $s_\\ell(n)\\ge1$, and the identity gives $(\\ell-1)v_\\ell(n!)\\le n-1$. Divide by the positive number $\\ell-1$. To bound $v_\\ell(n)$, put $k=v_\\ell(n)\\ge0$, so $\\ell^k\\mid n$ and $\\ell^k\\le n$ by the definition in [def-weil-l-adic-numbers]. The inequality $\\ell^k\\ge1+k(\\ell-1)$ follows by induction: it is equality for $k=0$, and multiplying the bound by $\\ell=1+(\\ell-1)$ increases its right side by at least $\\ell-1$. Hence $(\\ell-1)v_\\ell(n)\\le n-1$ as well. Both asserted rational bounds follow, including $n=1$.",
+   "uses": [
+    "lem-wf-legendre-digit-sum",
+    "def-weil-l-adic-numbers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-d-real-log/lem-wf-deep-principal-unit-log.proof.md",
+    "place": "Proof paragraphs 1-2, the two arithmetic denominator bounds"
+   }
+  },
+  {
+   "text": "For $d=n$ or $d=n!$ the previous steps give $v_E(d)=e v_\\ell(d)$ and $v_\\ell(d)\\le(n-1)/(\\ell-1)$. Multiplicativity of the absolute value now gives\n$$|1/d|_E q^n=\\ell^{v_\\ell(d)-nr/e}\\le\\ell^{-r/e-(n-1)(r-e/(\\ell-1))/e}=q\\theta^{n-1}.$$\nThis proves the two coefficient inequalities independently of $x$. Since $e>0$, $r>e/(\\ell-1)$ implies $r\\ge1$, $\\delta>0$, $q>0$ and $0<\\theta<1$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-d-real-log/lem-wf-deep-principal-unit-log.proof.md",
+    "place": "Proof paragraphs 1-2, uniform weighted coefficient bounds"
+   }
+  },
+  {
+   "text": "If $x\\ne0$ lies in $\\mathfrak m_E^r$, use [lem-sc-dvr-valuation-arithmetic] to compute $v_E(x^n/d)=n v_E(x)-v_E(d)\\ge nr-e v_\\ell(d)$. Here the quotient formula follows by applying the cited multiplicative identity to $(x^n/d)d=x^n$. The arithmetic bounds imply\n$$nr-e v_\\ell(d)\\ge nr-\\frac{e(n-1)}{\\ell-1}=r+(n-1)\\delta.$$\nFor $x=0$ both numerators vanish and the same inequalities hold with value $+\\infty$. This proves each stated valuation inequality. It also gives $|x^n/d|_E\\le q\\theta^{n-1}$ for all $x$ in the disc. The logarithmic sign has absolute value $1$.",
+   "uses": [
+    "lem-sc-dvr-valuation-arithmetic"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-d-real-log/lem-wf-deep-principal-unit-log.proof.md",
+    "place": "Proof paragraphs 1-2, termwise valuation estimates"
+   }
+  },
+  {
+   "text": "By [lem-wf-real-geometric-summability] the real family $(\\theta^k)_{k\\ge0}$ is summable. Multiplication of its finite sums by the constant $q$ commutes with their limit, so $u_k=q\\theta^k$ is summable too. All $u_k$ are nonnegative.",
+   "uses": [
+    "lem-wf-real-geometric-summability"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-d-real-log/lem-wf-deep-principal-unit-log.proof.md",
+    "place": "Proof paragraphs 1-2, a common summable uniform majorant"
+   }
+  },
+  {
+   "text": "The field $E$ is complete for the extending absolute value by [lem-weil-l-adic-extension-complete]. Set $S=\\mathfrak m_E^r\\subseteq E$ and, for $k\\ge0$, set\n$$f_k(x)=(-1)^{k+2}x^{k+1}/(k+1),\\qquad g_k(x)=x^{k+1}/(k+1)!.$$\nThe estimates already proved show $|f_k(x)|_E,|g_k(x)|_E\\le u_k$ for all $x\\in S$. Apply the uniform-convergence clause of [lem-wf-dominated-continuous-function-series] to each family, with $K=X=E$ and this $S$. Their partial sums converge uniformly on the entire closed disc to the sums $L$ and $A$, respectively.",
+   "uses": [
+    "lem-weil-l-adic-extension-complete",
+    "lem-wf-dominated-continuous-function-series"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-d-real-log/lem-wf-deep-principal-unit-log.proof.md",
+    "place": "Proof paragraphs 1-2, convergence of both series with a uniform domain"
+   }
+  },
+  {
+   "text": "Every term of each series has absolute value at most $q$, because $0<\\theta<1$. The nonarchimedean inequality in [lem-weil-l-adic-extension-absolute-value] shows inductively that every finite partial sum has absolute value at most $q$, starting from the zero sum. Passing to the pointwise limits keeps this bound: for a partial sum $s_N$ with limit $s$, $|s|_E\\le\\max(|s-s_N|_E,q)$, and $|s-s_N|_E\\to0$ while $q>0$. Thus $|L(x)|_E,|A(x)|_E\\le q$, so both sums belong to $\\mathfrak m_E^r$ by step 1.",
+   "uses": [
+    "lem-weil-l-adic-extension-absolute-value"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-d-real-log/lem-wf-deep-principal-unit-log.proof.md",
+    "place": "Proof paragraph 3, sums remain in the deep ideal"
+   }
+  },
+  {
+   "text": "Each $f_k$ and $g_k$ is continuous on $S$. Explicitly, for $n\\ge1$ and $x,y\\in S$, factor $x^n-y^n=(x-y)\\sum_{i=0}^{n-1}x^iy^{n-1-i}$; the nonarchimedean inequality from [lem-weil-l-adic-extension-absolute-value] gives $|x^n-y^n|_E\\le |x-y|_E q^{n-1}$. Multiplication by a fixed coefficient therefore preserves continuity; all denominators are nonzero because $E$ contains $\\mathbf Q_\\ell$. The continuity clause of [lem-wf-dominated-continuous-function-series], with the same summable bound $u_k$, proves that $L$ and $A$ are continuous on $S$.",
+   "uses": [
+    "lem-weil-l-adic-extension-absolute-value",
+    "lem-wf-dominated-continuous-function-series"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-d-real-log/lem-wf-deep-principal-unit-log.proof.md",
+    "place": "Proof paragraph 3, continuity of the sums"
+   }
+  },
+  {
+   "text": "Define $\\log(1+x)=L(x)$ and $\\exp(x)=1+A(x)$ on $S$. Adding the constant term $1$ to each exponential partial sum preserves uniform convergence, and translating the logarithm domain by $1$ is an isometry for $d(x,y)=|x-y|_E$. The preceding range bounds give logarithm in $\\mathfrak m_E^r$ and exponential in $1+\\mathfrak m_E^r$; translation also preserves continuity. These are precisely the last assertions of the item.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-d-real-log/lem-wf-deep-principal-unit-log.proof.md",
+    "place": "Proof paragraphs 1-3, logarithm and exponential notation and domains"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-l-adic-extension-absolute-value",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "def-weil-l-adic-numbers",
+  "lem-wf-legendre-digit-sum",
+  "lem-sc-dvr-valuation-arithmetic",
+  "lem-wf-real-geometric-summability",
+  "lem-weil-l-adic-extension-complete",
+  "lem-wf-dominated-continuous-function-series"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-d-real-log/lem-wf-deep-principal-unit-log.proof.md",
+  "place": "Proof paragraphs 1-3; valuation estimates refined using Legendre, then the Mathlib M-test and continuity theorem"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -76,10 +191,115 @@
    "results": "Command returned 5 hits; scope=Data/Nat/Choose. Top results: [\"Mathlib/Data/Nat/Choose/Factorization.lean\", \"Mathlib/Data/Nat/Choose/Factorization.lean\", \"Mathlib/Data/Nat/Choose/Factorization.lean\", \"Mathlib/Data/Nat/Choose/Factorization.lean\", \"Mathlib/Data/Nat/Choose/Factorization.lean\"]. ",
    "date": "2026-10-18",
    "verdict": "no match for the complete repaired statement in this checkout; see report for individual candidate checks"
+  },
+  {
+   "tool": "grep",
+   "query": "factorization_factorial|sub_one_mul_factorization_factorial",
+   "results": "5 hits; scope Data/Nat/Choose. Read results: Mathlib/Data/Nat/Choose/Factorization.lean, Mathlib/Data/Nat/Choose/Factorization.lean, Mathlib/Data/Nat/Choose/Factorization.lean, Mathlib/Data/Nat/Choose/Factorization.lean, Mathlib/Data/Nat/Choose/Factorization.lean. ",
+   "date": "2026-10-18",
+   "verdict": "partial tool matches only; none states the whole finite-extension log/exp bound and convergence theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A series of continuous functions with norms bounded by a summable nonnegative sequence converges uniformly and its sum is continuous",
+   "results": "8 hits; scope service index. Read results: continuousOn_tsum, tendstoUniformlyOn_tsum_nat_eventually, tendstoUniformlyOn_tsum_nat, HasSumUniformlyOn.of_norm_le_summable, tendstoUniformlyOn_tsum, HasSumUniformlyOn.of_norm_le_summable_eventually, tendstoUniformly_tsum_of_cofinite_eventually, tendstoUniformly_tsum. ",
+   "date": "2026-10-18",
+   "verdict": "partial tool matches only; none states the whole finite-extension log/exp bound and convergence theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "padicValNat, Nat.factorial",
+   "results": "8 hits; scope service index. Read results: padicValNat_factorial_le, padicValNat_factorial_lt_of_ne_zero, padicValNat_factorial_mul, padicValNat_mul_div_factorial, sub_one_mul_padicValNat_factorial_lt_of_ne_zero, padicValNat_factorial_mul_add, sub_one_mul_padicValNat_factorial, padicValNat_factorial. ",
+   "date": "2026-10-18",
+   "verdict": "partial tool matches only; none states the whole finite-extension log/exp bound and convergence theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "p-adic logarithm exponential series uniform convergence valuation factorial bounds on a deep ideal of a finite extension of Q_p",
+   "results": "8 hits; scope service index. Read results: Padic.isUniformInducing_cast_withVal, Padic.exi_rat_seq_conv, PadicInt.mahlerSeries, PadicInt.hasSum_mahlerSeries, padicNormE.defn, Padic.exi_rat_seq_conv_cauchy, PadicInt.mahlerSeries_apply, PadicInt.addChar_of_value_at_one. ",
+   "date": "2026-10-18",
+   "verdict": "partial tool matches only; none states the whole finite-extension log/exp bound and convergence theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "tendstoUniformlyOn_tsum_nat|continuousOn_tsum",
+   "results": "4 hits; scope Analysis/Normed/Group. Read results: Mathlib/Analysis/Normed/Group/FunctionSeries.lean, Mathlib/Analysis/Normed/Group/FunctionSeries.lean, Mathlib/Analysis/Normed/Group/FunctionSeries.lean, Mathlib/Analysis/Normed/Group/FunctionSeries.lean. ",
+   "date": "2026-10-18",
+   "verdict": "partial tool matches only; none states the whole finite-extension log/exp bound and convergence theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "summable_geometric_of_lt_one|summable_geometric_iff_norm_lt_one",
+   "results": "7 hits; scope Analysis/SpecificLimits. Read results: Mathlib/Analysis/SpecificLimits/Basic.lean, Mathlib/Analysis/SpecificLimits/Basic.lean, Mathlib/Analysis/SpecificLimits/Normed.lean, Mathlib/Analysis/SpecificLimits/Normed.lean, Mathlib/Analysis/SpecificLimits/Normed.lean, Mathlib/Analysis/SpecificLimits/Normed.lean, Mathlib/Analysis/SpecificLimits/Normed.lean. ",
+   "date": "2026-10-18",
+   "verdict": "partial tool matches only; none states the whole finite-extension log/exp bound and convergence theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "sub_one_mul_padicValNat_factorial|padicValNat.*factorization|factorization.*padicValNat",
+   "results": "10 hits; scope service index. Read results: Mathlib/NumberTheory/SumTwoSquares.lean, Mathlib/NumberTheory/Padics/PadicVal/Basic.lean, Mathlib/NumberTheory/Padics/PadicVal/Basic.lean, Mathlib/NumberTheory/Padics/PadicVal/Basic.lean, Mathlib/NumberTheory/Padics/PadicVal/Basic.lean, Mathlib/NumberTheory/Padics/PadicVal/Basic.lean, Mathlib/Data/Nat/Factorization/Basic.lean, Mathlib/Data/Nat/Factorization/Defs.lean. ",
+   "date": "2026-10-18",
+   "verdict": "partial tool matches only; none states the whole finite-extension log/exp bound and convergence theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Legendre formula (p-1) v_p(n!) = n - sum of base p digits of n",
+   "results": "8 hits; scope service index. Read results: sub_one_mul_padicValNat_factorial, Nat.Prime.sub_one_mul_multiplicity_factorial, Nat.sub_one_mul_factorization_factorial, padicValNat_factorial, Nat.sub_one_mul_sum_log_div_pow_eq_sub_sum_digits, sub_one_mul_padicValNat_choose_eq_sub_sum_digits, padicValNat_factorial_le, sub_one_mul_padicValNat_choose_eq_sub_sum_digits'. ",
+   "date": "2026-10-18",
+   "verdict": "partial tool matches only; none states the whole finite-extension log/exp bound and convergence theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Legendre theorem the exponent of a prime in n factorial multiplied by p minus one is n minus the sum of the base p digits of n",
+   "results": "8 hits; scope service index. Read results: Nat.Prime.sub_one_mul_multiplicity_factorial, Nat.sub_one_mul_factorization_factorial, sub_one_mul_padicValNat_factorial, sub_one_mul_padicValNat_factorial_lt_of_ne_zero, Nat.Prime.emultiplicity_factorial_le_div_pred, Nat.factorization_factorial_le_div_pred, Nat.Prime.multiplicity_factorial_pow, Nat.Prime.emultiplicity_factorial_mul. ",
+   "date": "2026-10-18",
+   "verdict": "partial tool matches only; none states the whole finite-extension log/exp bound and convergence theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The real geometric series with ratio r between zero and one is summable",
+   "results": "8 hits; scope service index. Read results: summable_geometric_of_lt_one, summable_geometric_of_abs_lt_one, NNReal.summable_geometric, hasSum_geometric_of_lt_one, tsum_geometric_of_lt_one, summable_geometric_two, HasSummableGeomSeries.mk, tsum_geometric_of_abs_lt_one. ",
+   "date": "2026-10-18",
+   "verdict": "partial tool matches only; none states the whole finite-extension log/exp bound and convergence theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "tendstoUniformlyOn_tsum_nat",
+   "results": "1 hits; scope service index. Read results: tendstoUniformlyOn_tsum_nat. ",
+   "date": "2026-10-18",
+   "verdict": "partial tool matches only; none states the whole finite-extension log/exp bound and convergence theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "summable_geometric_of_lt_one",
+   "results": "1 hits; scope service index. Read results: summable_geometric_of_lt_one. ",
+   "date": "2026-10-18",
+   "verdict": "partial tool matches only; none states the whole finite-extension log/exp bound and convergence theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Weierstrass M-test for a sequence of functions into a complete normed additive group: summable uniform norm bounds imply uniform convergence of partial sums and continuity of the sum when each term is continuous",
+   "results": "8 hits; scope service index. Read results: continuous_tsum, continuousOn_tsum, tendstoUniformly_tsum, tendstoUniformlyOn_tsum, tendstoUniformly_tsum_nat, tendstoUniformlyOn_tsum_nat, HasSumUniformlyOn.of_norm_le_summable, tendstoUniformlyOn_tsum_nat_eventually. ",
+   "date": "2026-10-18",
+   "verdict": "partial tool matches only; none states the whole finite-extension log/exp bound and convergence theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a real number r with 0 <= r < 1, the geometric series sum over n of r^n is summable",
+   "results": "8 hits; scope service index. Read results: summable_geometric_of_lt_one, NNReal.summable_geometric, hasSum_geometric_of_lt_one, NNReal.hasSum_geometric, tsum_geometric_of_lt_one, summable_geometric_of_abs_lt_one, tsum_geometric_nnreal, hasSum_geometric_of_abs_lt_one. ",
+   "date": "2026-10-18",
+   "verdict": "partial tool matches only; none states the whole finite-extension log/exp bound and convergence theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For every prime p finite extension E/Q_p and r>e/(p-1), both coefficients q^n/abs(n) and q^n/abs(n!) are bounded by q theta^(n-1), giving continuous uniformly convergent log and exp on a closed ideal",
+   "results": "8 hits; scope service index. Read results: PadicInt.mahlerSeries, PadicInt.hasSum_mahlerSeries, PadicInt.mahlerSeries_apply, mahler, PadicInt.hasSum_mahler, PadicInt.continuousAddCharEquiv, PadicInt.continuousAddCharEquiv_of_norm_mul, PadicInt.coe_addChar_of_value_at_one. ",
+   "date": "2026-10-18",
+   "verdict": "partial tool matches only; none states the whole finite-extension log/exp bound and convergence theorem"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-wf-deep-principal-unit-log",
@@ -96,5 +316,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-wf-log-exp-valuation-convergence",
+  "worker": "stage1",
+  "summary": "Proved the two denominator estimates, the sharp uniform coefficient and term bounds, uniform convergence, range control, and continuity. Reused the finite-extension valuation and completeness nodes; three new nodes are exact Mathlib leaves. Made conventions at zero explicit. No Lean compilation or edits.",
+  "blueprint": "Realizes the first two paragraphs of lem-wf-deep-principal-unit-log.proof.md and the convergence/continuity inputs to paragraph 3; no substitution identities are used here.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-l-adic-extension-integers-dvr",
+    "why": "Uses its uniformizer factorization to identify the ideal power with the closed valuation disc. This generic finite-coefficient tool is not proved in sk-d-real-log; it is part of the existing coefficient-extension datum."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-l-adic-extension-integers-dvr"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q42-41e0a88d6",
+  "group": "Q42",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q42-41e0a88d6 (reviewer sub-agent of L); spot-checked: Read the governing documents, the packet, the report, the item, all three new nodes and the statement of every cited node, plus the parent lem-wf-deep-principal-unit-log and the main-20261015 proof paragraphs 1-3. The only change to the item statement is the convention v_E(0)=+inf and |0|=0, which is notation. Its (n-1)/(l-1) bounds are sharper than the blueprint's n/(l-1) and true. Steps 1-9 check: v_E=e*v_l on Q_l^x via the uniformizer factorization (the integers-dvr tool use is accepted as a generic finite-extension fact, already cited by the parent), Legendre's identity with s_l(n)>=1, Bernoulli by induction, the exponent algebra giving q*theta^(n-1), the M-test with the shifted index, the ultrametric range bound in the limit and termwise continuity. The three new Mathlib leaves match exactly: sub_one_mul_padicValNat_factorial at PadicVal/Basic.lean:581, summable_geometric_of_lt_one at SpecificLimits/Basic.lean:324, and tendstoUniformlyOn_tsum_nat (FunctionSeries.lean:48) with continuousOn_tsum (line 116). An rg search of the DAG found no duplicates. My own script over l in {2,3,5,7}, n<200 and five values of e found no violation. No cycle, no SGA, no changes."
  }
 }
