@@ -16265,3 +16265,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 07:11 L: returned deliver/V3/Sheaf.AlgebraicGeometry.ProjectiveLineConstructible (reviewer RETURN: (the landing tools, head b9b156242) the delivery did not land: import cycle: Sheaf.AlgebraicGeometry.ProjectiveLineConst)
 - 07:11 L: returned deliver/V8/Sheaf.AlgebraicGeometry.FrobeniusVectorBundleKernel (reviewer RETURN: (the landing tools, head c46e7fdf1) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
 - 07:11 L: merged deliver/A2/Sheaf.AlgebraicGeometry.StalkConstructibilityCriterion (stage 3; reviewer PASS; first push; landing 20261018T071129-L-1661789 (proof); batch 20261018T071125; modules 1; new nodes 0)
+- 07:11 L: merged deliver/A2/Sheaf.Paper.RestrictionLocalCompleteness (stage 3; reviewer PASS; first push; landing 20261018T071130-L-1662106 (interface); batch 20261018T071125; modules 4; new nodes 3)

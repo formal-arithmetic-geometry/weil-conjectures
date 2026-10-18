@@ -29,47 +29,50 @@
  ],
  "proof": [
   {
-   "text": "For each object $U$ and section $f\\in\\mathcal J(U)$, apply [lem-weil-pbc-local-hom-tower-criterion] to identify the local derived-completeness condition over $\\mathcal O$ with the vanishing of the derived multiplication tower $T(E|_U,f)$. Apply the same criterion over $\\mathcal B$ to the image of $f$ and the restricted object. The vanishing-elements-ideal statement [lem-weil-pbc-ringed-derived-complete-elements-ideal] then upgrades vanishing for these image sections to vanishing for every section of the locally generated ideal $\\mathcal J\\mathcal B$ (and conversely restricts the condition to the generators).",
+   "text": "Use [lem-weil-pbc-local-complete-test-comparison] for R and B to pass between the local-ideal definition and complete-element predicates.",
    "uses": [
-    "lem-weil-pbc-local-hom-tower-criterion",
-    "def-pur-derived-internal-hom",
-    "def-weil-derived-limit",
+    "lem-weil-pbc-local-complete-test-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tags 0997 and 099C, as expanded by the stated construction comparisons"
+   }
+  },
+  {
+   "text": "If restricted M is I-complete, every image of a section of I is complete over B by [lem-weil-pbc-restriction-complete-element]. The complete elements form sectionwise ideals and satisfy local membership by [lem-weil-pbc-ringed-derived-complete-elements-ideal]. Ideal.map_le_iff_le_comap extends the generator test to the full image ideal on each member of the covering sieve in hIB, and local membership gives the test for every section of IB.",
+   "uses": [
+    "lem-weil-pbc-restriction-complete-element",
     "lem-weil-pbc-ringed-derived-complete-elements-ideal"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebraization.tex",
-    "place": "Tag 099C proof, first sentence, using Tags 0997 and 0998"
+    "place": "Tags 0997 and 099C, as expanded by the stated construction comparisons"
    }
   },
   {
-   "text": "Restriction of scalars leaves the underlying sheaf of abelian groups and every multiplication-by-$f$ map unchanged: only the scalar action is precomposed with $\\varphi$. By the sectionwise kernel/cokernel description of module sheaves, the cohomology sheaves of the two towers and their derived-limit vanishing are computed in the same underlying abelian-sheaf category. Therefore $T(E|_U,f)=0$ exactly when the corresponding tower over $\\mathcal B_U$ is zero, proving both implications.",
+   "text": "Conversely the image of each section f of I belongs to IB: use the top covering sieve, naturality of φ, and stability of I under restriction. Its B-completeness therefore implies R-completeness by [lem-weil-pbc-restriction-complete-element], and the first comparison recovers the original local-ideal predicate.",
    "uses": [
-    "def-pc-sheaf-restrict-scalars",
-    "def-weil-sheaf-of-modules-category",
-    "def-weil-abstract-derived-category",
-    "def-weil-derived-limit"
+    "lem-weil-pbc-restriction-complete-element",
+    "lem-weil-pbc-local-complete-test-comparison"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebraization.tex",
-    "place": "Tag 099C proof, observations that cohomology sheaves of T(K',f) are computed in the category of abelian sheaves and that f is viewed through its image"
+    "place": "Tags 0997 and 099C, as expanded by the stated construction comparisons"
    }
   }
  ],
  "proof_deps": [
-  "def-pc-sheaf-restrict-scalars",
-  "def-pur-derived-internal-hom",
-  "def-weil-abstract-derived-category",
-  "def-weil-derived-limit",
-  "def-weil-sheaf-of-modules-category",
-  "lem-weil-pbc-local-hom-tower-criterion",
+  "lem-weil-pbc-local-complete-test-comparison",
+  "lem-weil-pbc-restriction-complete-element",
   "lem-weil-pbc-ringed-derived-complete-elements-ideal"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/algebraization.tex",
-  "place": "Tag 099C proof together with Tag 0997"
+  "place": "Tag 099C proof: complete-elements ideal closure/descent and the pointwise scalar comparison; Tag 0997 supplies the two localization tests"
  },
  "mathlib_searches": [
   {
@@ -179,5 +182,15 @@
   "by": "NV",
   "date": "2026-10-15",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261018T071130-L-1662106",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
