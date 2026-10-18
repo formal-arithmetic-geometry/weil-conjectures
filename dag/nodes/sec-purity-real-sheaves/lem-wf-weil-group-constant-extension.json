@@ -143,5 +143,20 @@
   "group": "Q155",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q155-8f0048687 (reviewer sub-agent of L); spot-checked: I read the item, the new node, the master blueprint source (statement plus both proof paragraphs; the main-20261015 copy has the same statement and no proof), unit sk-d-real-weil and every cited statement. The item statement is unchanged and not weakened. Step 1 is paragraph 1 of the source: the new node gives pi1(X0^(m)) as the preimage of Gal(k/F_{q^m}) in pi1(X0), with the same geometric kernel pi1(X). Step 2 is paragraph 2 of the source: Phi_m=(id x Spec gamma)^m because gamma_m=gamma^m; W(X0^(m))=H x_{Gal} <gamma^m> = deg^{-1}(mZ); deg_m=deg/m; s^m has normalized degree 1. I checked all of this. The new node is true: X0^(m)->X0 is a connected degree-m finite etale cover pulled back from Spec F_{q^m}, and the stabilizer of the base point is the preimage of Gal(k/F_{q^m}). Small cases checked: m=1, X0=Spec F_q (mZhat), and G_m. The node does not restate the item, and searching dag/nodes found no duplicate; the Galois stabilizer lemmas are general facts and its natural children. Three repairs, in fixes/: (1) the new node's 'Equivalently ... constant-field action factors through Gal(k/F_{q^m})' clause was ill-formed, since Gal(k/F_{q^m}) is a subgroup and not a quotient. It was unused, so I deleted it with def-weil-etale-morphism, made the base points explicit, and named the map via lem-galois-pi1-functoriality. (2) tool_uses wrongly declared the in-unit new node; it now declares lem-wf-weil-group-exact-sequence (unit sk-p-rankone, the exact sequence the unit statement asserts, cited by the blueprint proof), which I accept. (3) Step 1 now checks that X0^(m) is a geometrically connected separated finite-type F_{q^m}-scheme, so the Weil-group definitions apply. Batch-5 check: I accept the def-wf-fundamental-representation citations. It is a general definition (arithmetic pi1, projection to Gal, W(X0)); its reach to cor-galois-lisse-representations is the general lisse-sheaf/representation dictionary, not part of Poincare duality or the trace formula; and the item already reached it through def-wf-weil-group and lem-wf-weil-group-exact-sequence. No SGA is used.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "branch": "master",
+  "existing": true,
+  "module": "WeilConjectures.EtaleCohomology.Purity.RealSheaves.ConstantExtension",
+  "declaration": "AlgebraicGeometry.WeilGroup.constantExtensionMap",
+  "declarations": [
+   "AlgebraicGeometry.WeilGroup.constantExtensionMap",
+   "AlgebraicGeometry.WeilGroup.constantExtension",
+   "AlgebraicGeometry.WeilGroup.exists_constantExtensionMap_eq_pow",
+   "AlgebraicGeometry.Scheme.FiniteEtale.mem_weilGroup_constantExtension_iff",
+   "AlgebraicGeometry.Scheme.FiniteEtale.dvd_of_mem_weilGroup_constantExtension",
+   "AlgebraicGeometry.Scheme.FiniteEtale.mem_range_of_mem_weilGroup_constantExtension"
+  ],
+  "note": "attached by the lead's tool step2_attach.py 2026-10-18 03:07 UTC (L, propagation 2026-10-18), live declaration proved in WeilConjectures.EtaleCohomology.Purity.RealSheaves.ConstantExtension: the blueprint item lem-wf-weil-group-constant-extension's upstream Lean declarations, proved in live (sweep of the propagation)"
  }
 }

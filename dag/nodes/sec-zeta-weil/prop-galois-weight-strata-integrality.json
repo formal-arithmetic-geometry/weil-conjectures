@@ -176,5 +176,17 @@
   "group": "Q145",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q145-a7fe86231 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes and every cited statement. The item statement matches the main-20261015 and master blueprint statements exactly, and steps 1-4 follow the four moves of the main-20261015 proof. Step 1: clause (1) of lem-weil-reciprocal-polynomial (c_0=1, c_r!=0, R=Z) gives a monic C^# with integer coefficients, so the roots in R_i are algebraic integers; when r=0, R_i is empty and the claim is vacuous. Step 2 is correctly marked elementary: the integral elements form a subring (def-weil-pbc-integral-closure), and an induction on the polynomial-ring convolution puts every coefficient of Q_i in it. Step 3 uses the with-multiplicities Galois stability of R_i from prop-galois-weight-strata and the coefficientwise ring homomorphism, which fixes T. Step 4 uses the two leaves and builds P in Z[T] explicitly. The leaves are verified in local Mathlib: InfiniteGalois.mem_range_algebraMap_iff_fixed at Infinite.lean:114-116, with IsGalois inferred through PerfectField.ofCharZero (Perfect.lean:306), IsSepClosure.of_isAlgClosure_of_perfectField (IsSepClosed.lean:251) and IsSepClosure.isGalois (IsSepClosed.lean:267); and IsIntegral.exists_int_iff_exists_rat at Niven.lean:34-39. Duplicate candidates checked: lem-weil-pbc-finite-galois-fixed-field assumes a finite extension. lem-exc-etale-galois-fixed-field-subgroup is a generalization, but using it would need an uncited separability fact for Qbar/Q, so the specialized leaf is justified. lem-weil-monic-divisor-integral and prop-weil-integral-rational-series state different facts. No cycle: the closure of the step citations does not reach the item. No SGA citation. Accepted tool_use: lem-weil-reciprocal-polynomial (unit sk-thm-rh), clause (1) only, used the same way in prop-galois-weight-strata-identification. Small cases checked: q=2 with {+-sqrt2} gives 1-2T^2 and {1+-i} gives 1-2T+2T^2; the non-stable set {sqrt2} fails. Minor: the report mentions a citations.json that is not in the commit. No fixes were needed."
+ },
+ "lean": {
+  "branch": "master",
+  "existing": true,
+  "module": "WeilConjectures.ZetaLinearAlgebra.GaloisStrata",
+  "declaration": "Polynomial.weilStratumPoly",
+  "declarations": [
+   "Polynomial.weilStratumPoly",
+   "Polynomial.exists_map_eq_weilStratumPoly",
+   "Polynomial.exists_int_weilStratumPoly"
+  ],
+  "note": "attached by the lead's tool step2_attach.py 2026-10-18 03:07 UTC (L, propagation 2026-10-18), live declaration proved in WeilConjectures.ZetaLinearAlgebra.GaloisStrata: the blueprint item prop-galois-weight-strata-integrality's upstream Lean declarations, proved in live (sweep of the propagation)"
  }
 }
