@@ -12,7 +12,8 @@
   "def-weil-finite-type-morphism",
   "def-nagata-global-blowup",
   "def-weil-regular-scheme",
-  "def-sbc-smooth-morphisms"
+  "def-sbc-smooth-morphisms",
+  "def-trf-ordinary-resolution-rule"
  ],
  "proof": [
   {
@@ -305,5 +306,23 @@
   "group": "Q125",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q125-59fe9e720 (reviewer sub-agent of L); spot-checked: Read in full: the item, its 7 steps and every cited statement, plus the new node lem-trf-embedded-resolution-ambient-comparison. Sources checked: ILO VIII 2.1.3-2.1.10, 2.3.1-2.3.5, Thm 2.3.10 and Rem 2.3.11-2.3.13 (pp.87-94), Stacks 01V7 (lemma-smooth-locally-standard-smooth) and 07CK (lemma-lift-once). The quotient-lift node needs no nilpotent ideal; I rechecked the standard-smooth lifting directly. The item statement is unchanged (identical to the live new-targets copy) and agrees with ILO 2.3.10 restricted to finite-type Q-schemes and smooth maps, using the conventions of 2.3.1, 2.3.4 and 2.3.5(i); no target is weakened. The new node is statement-only, self-contained and cites its definitions. It was tested on small cases: the empty and regular inputs, the node xy=0 embedded in A^2 and in A^3, smooth projection, open restriction away from Sing (which forces centres over Sing, consistent with ILO 2.3.11/2.3.15) and mixed-dimensional unions. It does not restate the item: it is the embedded BM/BMT input, with ambient smooth maps only. The item derives arbitrary smooth maps between embedded schemes (Step 2, chart lifting), gluing over non-separated schemes with label synchronization (Step 4), cover independence (Step 5), general smooth functoriality (Step 6) and composition (Step 7). The duplicate search over all DAG statements found only toric/fan, curve and Popescu nodes, so there is no duplicate and no cycle. Hypotheses checked: flatness for blowup base change via lem-pc-smooth-flat, intersections of affine opens never assumed affine, non-constant relative dimension, and no stage deleted for surjective maps. FIX: Step 2 now justifies that Spec B -> Spec Q is smooth (polynomial ring is standard smooth with no equations). Step 6 now cites def-sbc-smooth-morphisms and lem-trf-smooth-composition for the smoothness of V->U. All 8 listed tool_uses are accepted as generic tools; the unit supplies no substitute. Open: the new node's labelled ambient-independence clause goes beyond the ILO text and must be checked against Bierstone-Milman-Temkin 2011 (Thm 6.1, Addendum, 6.3), which is not available locally (WANTED), when that node is split.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SmoothFunctorialOrdinaryResolution",
+  "declaration": "AlgebraicGeometry.exists_smooth_functorial_ordinary_resolution",
+  "file": "lean/Sheaf/AlgebraicGeometry/SmoothFunctorialOrdinaryResolution.lean",
+  "statement": "theorem exists_smooth_functorial_ordinary_resolution : Nonempty (SmoothFunctorialOrdinaryResolution.{u})",
+  "branch": "newtargets-dag",
+  "by": "Q85",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b331628e8",
+  "group": "Q85",
+  "result": "pass",
+  "note": "Both files (OrdinaryResolutionRule, SmoothFunctorialOrdinaryResolution) compile clean via nt_compile --json (3.0 s/2.0 s); a broken-identifier control fails as expected. Every node clause is rendered: single Nonempty rule over reduced finite-type Q-schemes with no separatedness; blowup tower with initial iso, transitions and blowupIso/blowup_fac; ofFiniteType, nonempty, nowhere-dense and regular centers (support = V(I)); regular last level; for every smooth h a comparison with count/retainedStage order data, IsPullback at every level, naturality, retained_ideal via IdealSheafData.comap (extended ideal), deleted_iff_unit (ILO 2.1.4 empty blowup = unit ideal); identity/composition count and map laws; surjective h deletes no stage. Level maps are determined by the cartesian squares (blowups have no automorphisms over the base, ILO 2.3.4), so they are not free arrows. Edge cases (length 0, empty scheme, open restriction, mixed dimension, universes) OK. No duplicate notion (fan/log towers differ). New def node has the section-5 fields; item record changes only lean plus stmt_deps; signatures verbatim; H9 imports map to proof_deps. Advisory: the second reading is the author's own; the node's grep search record covers Mathlib only."
  }
 }
