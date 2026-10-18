@@ -12,9 +12,94 @@
   "def-weil-finitely-generated-module",
   "def-weil-pbc-module-tensor-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose $\\Lambda$-generators $b_1,\\ldots,b_u$ of $B$ and $C$-generators $m_1,\\ldots,m_v$ of $M$. Expanding each coefficient into pure tensors shows that the finitely many $(1\\otimes b_i)m_j$ generate $M$ as an $A$-module: $(a\\otimes b)m_j=a\\sum_i\\lambda_i(1\\otimes b_i)m_j$ when $b=\\sum_i\\lambda_i b_i$. Every quotient of an $A$-finite module is $A$-finite by taking images of its generators, and every $A$-submodule of such a module is $A$-finite by [lem-weil-pbc-noetherian-submodule-finite]. These observations apply throughout to submodules, quotient layers and matrix corners. If $M=0$, use the empty filtration; in particular this handles $A=0$ or $B=0$, since modules are unital.",
+   "uses": [
+    "lem-weil-pbc-noetherian-submodule-finite"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVII, Lemma 7.4.7, first paragraph, p. 307; explicit finite-generation verification."
+   }
+  },
+  {
+   "text": "The finite set $\\Lambda^u$ surjects onto $B$, so $B$ has finitely many elements. Its set of left ideals is therefore finite, and every descending sequence of left ideals stabilizes. Apply [lem-per-artinian-radical-semisimple-quotient] to $B$: its two-sided Jacobson radical $J$ satisfies $J^h=0$, with $h\\geq1$ after increasing the exponent if necessary, and $S=B/J$ is semisimple. For $0\\leq r\\leq h$ let $F_r=J^rM$, the set of finite sums of $jm$ with $j\\in J^r$. It is stable under $B$ because $J^r$ is two-sided and under $A$ because the two actions commute. Thus $M=F_0\\supseteq\\cdots\\supseteq F_h=0$ is a finite $C$-filtration. Its layer $Q_r=F_r/F_{r+1}$ is annihilated by $J$ since $JF_r\\subseteq F_{r+1}$. Consequently its commuting $A$- and $B$-actions give an $A\\otimes_\\Lambda S$-action by $(a\\otimes\\bar b)q=abq$, independently of the lift $b$.",
+   "uses": [
+    "lem-per-artinian-radical-semisimple-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVII, Lemma 7.4.7, first reduction, p. 307; finite radical-power filtration makes the Noetherian-induction reduction explicit."
+   }
+  },
+  {
+   "text": "The images of the $b_i$ generate $S$ over $\\Lambda$. Apply [lem-per-semisimple-algebra-matrix-division] with $k=\\Lambda$ to obtain $S\\simeq\\prod_{\\alpha=1}^s\\operatorname{Mat}_{d_\\alpha}(D_\\alpha)$, where every $d_\\alpha>0$ and $D_\\alpha$ is finite-dimensional over $\\Lambda$. A finite generating set gives a surjection from a finite set $\\Lambda^n$ onto each $D_\\alpha$, so [lem-per-finite-division-ring-commutative] makes it a finite field $E_\\alpha$ with the same ring operations and coefficient embedding. Let $c_\\alpha$ be the central factor idempotents of $S$. For each layer $Q_r$, the maps $q\\mapsto(c_\\alpha q)_\\alpha$ and $(q_\\alpha)_\\alpha\\mapsto\\sum_\\alpha q_\\alpha$ identify it with $\\bigoplus_\\alpha Q_{r,\\alpha}$, where $Q_{r,\\alpha}=c_\\alpha Q_r$: the identities $\\sum c_\\alpha=1$ and $c_\\alpha c_\\beta=0$ for $\\alpha\\ne\\beta$ prove the two composites are identities. Each summand is an $A$-finite module by Step 1, with commuting $A$- and $\\operatorname{Mat}_{d_\\alpha}(E_\\alpha)$-actions.",
+   "uses": [
+    "lem-per-semisimple-algebra-matrix-division",
+    "lem-per-finite-division-ring-commutative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVII, Lemma 7.4.7, second reduction, p. 307: product decomposition and finite division rings."
+   }
+  },
+  {
+   "text": "Fix a component $Q=Q_{r,\\alpha}$ and abbreviate $d=d_\\alpha$, $E=E_\\alpha$. Write $e_{ij}$ for the matrix units and put $N=e_{11}Q$. The scalar matrices give $N$ an $E$-action commuting with $A$, and $N$ is $A$-finite by [lem-weil-pbc-noetherian-submodule-finite]. Define $\\phi:N^d\\to Q$ by $\\phi((n_i))=\\sum_i e_{i1}n_i$ and $\\psi:Q\\to N^d$ by $\\psi(q)=(e_{1i}q)_i$. The identities $e_{1j}e_{i1}=\\delta_{ij}e_{11}$ and $\\sum_i e_{i1}e_{1i}=1$ show $\\psi\\phi=1$ and $\\phi\\psi=1$. For a matrix $T=(t_{ij})$, $e_{1i}Tq=\\sum_j t_{ij}e_{1j}q$; hence these are inverse $A$-linear maps intertwining the matrix action on $Q$ with its coordinate action on $N^d$. Let $L=E^d$ with the column action of $B\\to S\\to\\operatorname{Mat}_d(E)$. This is a simple $B$-module: for a nonzero vector $v$, choose $v_j\\ne0$; the matrices $v_j^{-1}e_{ij}$ send $v$ to every standard basis vector, and further scalar matrices give every vector. The surjective factor map from $B$ therefore leaves no nonzero proper submodule.",
+   "uses": [
+    "lem-weil-pbc-noetherian-submodule-finite"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVII, Lemma 7.4.7, second reduction, p. 307; explicit matrix-unit verification of the Morita reduction."
+   }
+  },
+  {
+   "text": "Use only the algebraic first clause of [lem-pur-finite-field-derived-tensor-summand], with $F=\\Lambda$ and $B=E$, to choose $e=\\sum_{j=1}^a x_j\\otimes y_j\\in E\\otimes_\\Lambda E$ satisfying $\\sum_jx_jy_j=1$ and $(z\\otimes1)e=(1\\otimes z)e$ for every $z\\in E$. On $N\\otimes_\\Lambda E$ give $A$ the first-factor action and $E$ the second-factor action. Define $\\beta:N\\otimes_\\Lambda E\\to N$ by $\\beta(n\\otimes z)=zn$, and $\\sigma:N\\to N\\otimes_\\Lambda E$ by $\\sigma(n)=\\sum_jx_jn\\otimes y_j$. The balancing relation makes $\\beta$ well-defined and $A$-linear, and both maps are additive and $A$-linear because the $E$-action on $N$ commutes with $A$. Applying the linear map $E\\otimes_\\Lambda E\\to N\\otimes_\\Lambda E$, $x\\otimes y\\mapsto xn\\otimes y$, to the displayed identity gives $\\sigma(zn)=z\\sigma(n)$ for the second-factor $E$-action. Also $\\beta\\sigma(n)=\\sum_jx_jy_jn=n$. Thus $N$ is a retract of $N\\otimes_\\Lambda E$ as an $A\\otimes_\\Lambda E$-module. No sheaf or derived assertion of the cited node is used.",
+   "uses": [
+    "lem-pur-finite-field-derived-tensor-summand"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVII, Lemma 7.4.7, third reduction, pp. 307-308; explicit separability splitting replaces the descent shorthand. Algebraic idempotent source: Stacks Tag 0C2X, lemma-separable-algebraic-diagonal."
+   }
+  },
+  {
+   "text": "Apply $\\sigma$ and $\\beta$ coordinatewise. Since they are both $E$-linear and $A$-linear, the resulting maps $N^d\\to(N\\otimes_\\Lambda E)^d\\to N^d$ commute with every matrix: the $i$th coordinate of either order of composition is the sum over $j$ of the same map applied to $t_{ij}n_j$. Their composite is the identity. There is an $A$- and matrix-linear isomorphism $\\theta:(N\\otimes_\\Lambda E)^d\\to N\\otimes_\\Lambda E^d$, sending a tensor $n\\otimes z$ in coordinate $i$ to $n\\otimes zv_i$, where $v_i$ is the $i$th standard vector. Its inverse sends $n\\otimes(z_i)_i$ to $(n\\otimes z_i)_i$. Balancing and the formula for matrix multiplication verify both compositions and equivariance on pure tensors, which generate. Compose these maps with $\\psi$ and $\\phi$ from Step 4. They exhibit $Q$ as a retract of $N\\otimes_\\Lambda L$. The other factors of $S$ and $J$ act as zero on both modules, so these maps are $C$-linear after restriction along $C\\to A\\otimes_\\Lambda S$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVII, Lemma 7.4.7, second and third reductions, pp. 307-308; coordinatewise reconstruction of the external tensor retract."
+   }
+  },
+  {
+   "text": "For each $r$, order the finitely many summands $Q_{r,\\alpha}$ and filter $Q_r$ by their successive partial sums. The quotient of one partial sum by the preceding one is its next component: projection onto that component and inclusion followed by the quotient are inverse maps. Take inverse images of these partial sums under $F_r\\to Q_r$; their endpoints are $F_{r+1}$ and $F_r$, and their successive quotients are the same components by the map induced by this surjection. Concatenate these refinements in the order $r=h-1,h-2,\\ldots,0$. This gives an increasing finite filtration from $0$ to $M$. Each quotient has the retract of Step 6 with an $A$-finite $N$ and simple $B$-module $L$, exactly with action $(a\\otimes b)(n\\otimes v)=an\\otimes bv$. Zero components may be omitted. If $s=0$, all $Q_r=0$ and the endpoints force $M=0$, already treated in Step 1.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVII, Lemma 7.4.7, first two reductions, p. 307; finite refinement and assembly."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-noetherian-submodule-finite",
+  "lem-per-artinian-radical-semisimple-quotient",
+  "lem-per-semisimple-algebra-matrix-division",
+  "lem-per-finite-division-ring-commutative",
+  "lem-pur-finite-field-derived-tensor-summand"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose XVII, Lemma 7.4.7, pp. 307-308; follows its radical/product/matrix/finite-field route with explicit radical filtration, matrix-unit maps and separability retraction."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -50,10 +135,45 @@
    "results": "8 hits; top: FDRep.finrank_hom_simple_simple, FDRep.instProjectiveOfNeZeroCastCard, IsSemisimpleModule.exists_end_algEquiv, IsSemisimpleModule.exists_linearEquiv_fin_dfinsupp, Rep.instProjective, CategoryTheory.finrank_hom_simple_simple_le_one, IsIsotypic.linearEquiv_fun, IsIsotypicOfType.linearEquiv_fun; note: ; digest: e1d6d8b03de69af2",
    "date": "2026-10-18",
    "verdict": "no match: finite-generation and semisimple module structure results do not give this external tensor filtration after arbitrary Noetherian scalar extension"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finitely generated module over a Noetherian algebra tensored with a finite algebra over a finite field has a filtration whose quotients are retracts of external tensor products with simple modules",
+   "results": "{\"t\": \"2026-10-18T14:40:40Z\", \"tool\": \"leanfinder\", \"query\": \"A finitely generated module over a Noetherian algebra tensored with a finite algebra over a finite field has a filtration whose quotients are retracts of external tensor products with simple modules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian\", \"AdicCompletion.ofTensorProduct_bijective_of_finite_of_isNoetherian\", \"IsNoetherianRing.exists_relSeries_isQuotientEquivQuotientPrime\", \"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply\", \"Module.Finite.left\", \"TensorProduct.Algebra.exists_of_fg\", \"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of\", \"IsNoetherianRing.induction_on_isQuotientEquivQuotientPrime\"], \"digest\": \"c778bbdd8528e0ba\"}",
+   "date": "2026-10-18",
+   "verdict": "no match for the item: results supply finite tensor generation, semisimple decomposition and isotypic modules but not the filtration after arbitrary Noetherian scalar extension. The Wedderburn-Artin ingredient is separately recorded as a Mathlib leaf."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Devissage of scalar extended finite field representations into direct summands of tensor products with simple representations",
+   "results": "{\"t\": \"2026-10-18T14:46:43Z\", \"tool\": \"leanfinder\", \"query\": \"Devissage of scalar extended finite field representations into direct summands of tensor products with simple representations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FDRep.finrank_hom_simple_simple\", \"Rep.instProjective\", \"IsIsotypicOfType.linearEquiv_fun\", \"FDRep.instProjectiveOfNeZeroCastCard\", \"IsIsotypic.linearEquiv_fun\", \"FDRep.simple_iff_end_is_rank_one\", \"IsIsotypic.linearEquiv_finsupp\", \"IsSemisimpleModule.exists_linearEquiv_fin_dfinsupp\"], \"digest\": \"88651d939484b60b\"}",
+   "date": "2026-10-18",
+   "verdict": "no match for the item: results supply finite tensor generation, semisimple decomposition and isotypic modules but not the filtration after arbitrary Noetherian scalar extension. The Wedderburn-Artin ingredient is separately recorded as a Mathlib leaf."
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite generation over tensor product with finite dimensional algebra",
+   "results": "{\"t\": \"2026-10-18T14:43:26Z\", \"tool\": \"leansearch\", \"query\": \"finite generation over tensor product with finite dimensional algebra\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Finite.tensorProduct\", \"Module.Finite.base_change\", \"TensorProduct.Algebra.exists_of_fg\", \"RingHom.Finite.tensorProductMap\", \"Algebra.TensorProduct.adjoin_tmul_eq_top\", \"Algebra.FinitePresentation.baseChange\", \"RingHom.Finite\", \"Algebra.FiniteType.iff_exists_generators\"], \"digest\": \"5d3eb5b421b605fb\"}",
+   "date": "2026-10-18",
+   "verdict": "no match for the item: results supply finite tensor generation, semisimple decomposition and isotypic modules but not the filtration after arbitrary Noetherian scalar extension. The Wedderburn-Artin ingredient is separately recorded as a Mathlib leaf."
+  },
+  {
+   "tool": "grep",
+   "query": "filtration|simple.*module|Noetherian.*tensor",
+   "results": "{\"t\": \"2026-10-18T14:43:26Z\", \"tool\": \"grep\", \"query\": \"filtration|simple.*module|Noetherian.*tensor\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/RamificationInertia/Ramification.lean\", \"Mathlib/RingTheory/RamificationInertia/Ramification.lean\", \"Mathlib/RingTheory/Flat/FaithfullyFlat/Basic.lean\", \"Mathlib/RingTheory/Length.lean\", \"Mathlib/RingTheory/Length.lean\", \"Mathlib/RingTheory/Length.lean\", \"Mathlib/RingTheory/Artinian/Module.lean\", \"Mathlib/RingTheory/Artinian/Module.lean\"], \"digest\": \"c40b73d536baf082\"}",
+   "date": "2026-10-18",
+   "verdict": "no match for the item: results supply finite tensor generation, semisimple decomposition and isotypic modules but not the filtration after arbitrary Noetherian scalar extension. The Wedderburn-Artin ingredient is separately recorded as a Mathlib leaf."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsSemisimpleRing, AlgEquiv",
+   "results": "{\"t\": \"2026-10-18T14:40:40Z\", \"tool\": \"loogle\", \"query\": \"IsSemisimpleRing, AlgEquiv\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"IsSemisimpleRing.exists_algEquiv_pi_matrix_divisionRing\", \"IsSemisimpleRing.exists_algEquiv_pi_matrix_divisionRing_finite\", \"IsSemisimpleRing.exists_algEquiv_pi_matrix_end_mulOpposite\", \"IsSemisimpleRing.exists_algEquiv_pi_matrix_of_isAlgClosed\"], \"digest\": \"db84179a6e5c3e34\"}",
+   "date": "2026-10-18",
+   "verdict": "no match for the item: results supply finite tensor generation, semisimple decomposition and isotypic modules but not the filtration after arbitrary Noetherian scalar extension. The Wedderburn-Artin ingredient is separately recorded as a Mathlib leaf."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-prime-field-tensor-devissage",
@@ -76,5 +196,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-per-finite-algebra-external-tensor-filtration",
+  "worker": "stage1",
+  "summary": "Checked ILO Expose XVII 7.4.7 against every hypothesis. Replaced its Noetherian induction by the finite radical-power filtration; wrote product splitting, matrix-unit Morita maps, and the separability retraction explicitly. Reused existing Noetherian submodule and finite-field diagonal-idempotent nodes. Three new Mathlib leaves cover the Artinian semiprimary theorem, finite-dimensional Wedderburn-Artin and little Wedderburn. Statement unchanged; no Lean attachment exists.",
+  "blueprint": "Proof, Step 1 of lem-per-artin-gabber-affine-curve: 'Relative Verdier duality, biduality ... over the same arbitrary field $k$', through lem-per-qbar-arbitrary-field-duality, lem-per-finite-residue-dualizing and lem-per-potential-local-duality; the last node's Step 2 extends finite-field coefficients. Supporting External tensor filtration over a finite algebra. This split realizes the supporting coefficient devissage through radical layers and finite-field tensor retracts, without changing the chapter or unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-finite-field-derived-tensor-summand",
+    "why": "Only its first algebraic clause supplies the diagonal idempotent for a finite field extension, a generic coefficient-algebra fact absent from this unit; no derived or geometric Kunneth assertion is used."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-finite-field-derived-tensor-summand"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q53-6073fcc7f",
+  "group": "Q53",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q53-6073fcc7f (reviewer sub-agent of L); spot-checked: Read in full: the item's 7 steps and the 3 new Mathlib leaves. The item statement matches ILO XVII Lemma 7.4.7 (printed pp. 307-308) with Lambda=F_ell, and it was not changed. The route is the source's radical, Wedderburn and finite-field reduction, written out explicitly. The radical-power filtration J^rM replaces Noetherian induction. Central idempotents and matrix units replace 'Morita'. The separability idempotent from the first algebraic clause of lem-pur-finite-field-derived-tensor-summand replaces the SGA 1 descent, so no SGA is cited. I checked every identity: psi.phi and phi.psi, matrix equivariance, simplicity of E^d over B through the surjection B->Mat_d(E), sigma being E-linear for the second factor (from (z⊗1)e=(1⊗z)e), beta.sigma=mu(e)=1, the C-linearity of the retracts, and that the refined quotients are isomorphic to the components (s=0 forces M=0). Mathlib leaves read at the cited lines: IsArtinianRing.instIsSemiprimaryRing (Artinian/Module.lean:653, noncommutative Ring section; fields at Semiprimary.lean:57-58), IsSemisimpleRing.exists_algEquiv_pi_matrix_divisionRing_finite (WedderburnArtin.lean:201-205; algebra map into the centre, NeZero sizes), littleWedderburn (LittleWedderburn.lean:166). Searching the DAG for Wedderburn, Jacobson radical, division ring, semiprimary and separability idempotent found only commutative or unrelated nodes, so there are no duplicates. No new node restates a clause of the item, and the dependency closure has no cycle. Small cases: B=F_ell[eps]/eps^2, B=F_4 over F_2, B=Mat_2(F_2), A of positive dimension or with nilpotents. Accepted tool_use: the diagonal-idempotent clause of lem-pur-finite-field-derived-tensor-summand. Minor, not a fault: def-weil-pbc-simple-module is a Stacks definition with the commutative convention, but the nodes citing it define simple left modules inline. No fixes."
  }
 }
