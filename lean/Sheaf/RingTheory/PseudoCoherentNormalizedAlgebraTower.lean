@@ -98,7 +98,14 @@ private theorem derivedLimit_transport
     rw [CategoryTheory.Functor.map_id, Category.comp_id]
 
 
-private theorem adic_quotient_limit {C : Type u} [CommRing C]
+/-- An adically complete ring is the limit of its positive-power quotients.
+Source: Stacks Project, More on Algebra, Tags 09AV and 0CQF
+(blueprint: lem-weil-pbc-pseudocoherent-normalized-algebra-tower).
+
+Proof: Lift the compatible quotient elements to a sequence in the ring. Compatibility
+makes the lifts an adic Cauchy sequence. Precompleteness supplies a limit with the required
+images, and Hausdorff separatedness makes that limit unique. -/
+theorem adic_quotient_limit {C : Type u} [CommRing C]
     (J : Ideal C) [IsAdicComplete J C]
     (x : ∀ n : ℕ, C ⧸ J ^ (n + 1))
     (hx : ∀ n : ℕ, Ideal.Quotient.factor
@@ -138,7 +145,13 @@ private theorem adic_quotient_limit {C : Type u} [CommRing C]
       (fun n _ ↦ (hb n).trans (hqa n).symm)
   exact congrFun he ()
 
-private theorem adic_step_nilpotent {C : Type u} [CommRing C] (J : Ideal C) (n : ℕ) :
+/-- Each consecutive positive-power quotient map has square-zero kernel.
+Source: Stacks Project, More on Algebra, Tag 0CQF
+(blueprint: lem-weil-pbc-pseudocoherent-normalized-algebra-tower).
+
+Proof: The kernel is the image of `J^(n+1)` modulo `J^(n+2)`. Its square is the image
+of `J^(2n+2)`, which is contained in `J^(n+2)` for every natural number `n`. -/
+theorem adic_step_nilpotent {C : Type u} [CommRing C] (J : Ideal C) (n : ℕ) :
     IsNilpotent (RingHom.ker (Ideal.Quotient.factor
       (Ideal.pow_le_pow_right (I := J) (Nat.le_succ (n + 1))))) := by
   refine ⟨2, ?_⟩
@@ -152,7 +165,14 @@ private theorem adic_step_nilpotent {C : Type u} [CommRing C] (J : Ideal C) (n :
 
 set_option backward.defeqAttrib.useBackward true in
 set_option backward.isDefEq.respectTransparency false in
-private theorem restrictScalarsComp_derived_factors
+/-- The canonical derived restriction-composition isomorphism agrees with its
+normalization on complexes.
+Source: Stacks Project, More on Algebra, Tag 0CQF; derived-functor factorization formulas
+(blueprint: lem-weil-pbc-pseudocoherent-normalized-algebra-tower).
+
+Proof: Apply the composition factorization formula, simplify the identity comparison,
+and then apply the natural-isomorphism factorization formula. -/
+theorem restrictScalarsComp_derived_factors
     {R S T : Type u} [CommRing R] [CommRing S] [CommRing T]
     [HasDerivedCategory.{w} (ModuleCat.{max u v} R)]
     [HasDerivedCategory.{w} (ModuleCat.{max u v} S)]
