@@ -2,7 +2,7 @@
  "id": "lem-per-alteration-cover-calculus",
  "kind": "statement",
  "title": "Dominant pullbacks, refinements and finite covers in the alteration topology",
- "statement": "Fix a Noetherian scheme $S$ and a prime $\\ell$. In $\\operatorname{alt}/S$ with the topology of $\\ell'$-alterations, finite covering families can be composed and a family refining a covering by coverings is covering. Every covering sieve contains a finite covering family. Fibre products in this category are obtained by taking the reduced union of the components of the usual fibre product which dominate components of the base. Pullback in this sense preserves covering families. The same base-change operation along a dominant finite-type map of integral Noetherian schemes preserves alteration covering families on the integral target, using components dominating the new base. A proper surjective generically finite morphism of integral Noetherian schemes of generic degree prime to $\\ell$ is a singleton covering, as is a proper birational morphism. Finite affine open covers are covering. On reduced schemes the finite family of their reduced irreducible components is covering. An object of $\\operatorname{alt}/S$ is reduced and finite type over $S$, with all generic points mapping to generic points and inducing finite residue-field extensions.\n\nConventions for the notions used here: [def-pc-scheme], [def-pc-reduced-scheme], [def-weil-pbc-noetherian-ring], [def-exc-excellent-ring], [def-weil-regular-scheme], [def-trf-strict-normal-crossings-boundary], [def-per-prime-to-ell-alteration-topology], [def-pc-integral-scheme], [def-weil-proper-morphism], [def-weil-finite-type-morphism], [def-weil-finite-integral-morphism], [def-pc-fibre-product], [def-weil-irreducible-components].",
+ "statement": "Fix a Noetherian scheme $S$ and a prime $\\ell$. In $\\operatorname{alt}/S$ with the topology of $\\ell'$-alterations, finite covering families can be composed and a family refining a covering by coverings is covering. Every covering sieve contains a finite covering family. Fibre products in this category are obtained by taking the reduced union of the components of the usual fibre product which dominate components of the base. Pullback in this sense preserves covering families. The same base-change operation along a dominant finite-type map of integral Noetherian schemes preserves alteration covering families on the integral target, using components dominating the new base. A proper surjective generically finite morphism of integral Noetherian schemes of generic degree prime to $\\ell$ is a singleton covering, as is a proper birational morphism. Finite affine open covers are covering. On reduced schemes the finite family of their reduced irreducible components is covering. An object of $\\operatorname{alt}/S$ is reduced and finite type over $S$, with all generic points mapping to generic points and inducing finite residue-field extensions.\n\nConventions for the notions used here: [def-pc-scheme], [def-pc-reduced-scheme], [def-weil-pbc-noetherian-ring], [def-per-prime-to-ell-alteration-topology], [def-pc-integral-scheme], [def-weil-proper-morphism], [def-weil-finite-type-morphism], [def-weil-finite-integral-morphism], [def-pc-fibre-product], [def-weil-irreducible-components].",
  "source": {
   "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
   "place": "Expose II 1.2.5--1.2.8 (dominant fibre products), 2.2.4 (finite extraction for decomposed etale families), 2.3.1 (generators), printed pp. 25--28; finite generation of the topology gives finite covering refinements. For a dominant finite-type new integral base, use the same generator argument at its generic field, retaining dominant components; no flatness of this new base is assumed."
@@ -11,9 +11,6 @@
   "def-pc-scheme",
   "def-pc-reduced-scheme",
   "def-weil-pbc-noetherian-ring",
-  "def-exc-excellent-ring",
-  "def-weil-regular-scheme",
-  "def-trf-strict-normal-crossings-boundary",
   "def-per-prime-to-ell-alteration-topology",
   "def-pc-integral-scheme",
   "def-weil-proper-morphism",
@@ -22,9 +19,184 @@
   "def-pc-fibre-product",
   "def-weil-irreducible-components"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By the definition of $\\operatorname{alt}/S$, its objects have exactly the reducedness, finite-type and generic-point properties asserted. Each object is Noetherian by finite-type preservation of Noetherianity. Apply the generic-fibre finiteness criterion: its fibres over generic points of $S$ are finite schemes. For an $S$-map $X\\to Y$ of objects, the image of a generic point of $X$ lies in such a finite fibre of $Y$, and any generic generization of that image still lies in this zero-dimensional fibre, hence equals it. Thus the image is a generic point of $Y$; its residue field is an intermediate field of the finite extension belonging to $X$. Thus every arrow is maximally dominant and has finite generic residue extensions. On affine charts, generators of the source algebra over the base also generate it over the intermediate target algebra. The source is Noetherian, so preimages of affine opens are quasi-compact. Hence these arrows are of finite type as well.",
+   "uses": [
+    "def-per-prime-to-ell-alteration-topology",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-per-generic-fibre-finiteness-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "II Definition 1.2.2 and 1.2.3, using 1.1.7 and 1.1.10."
+   }
+  },
+  {
+   "text": "For arrows $X\\to T\\leftarrow Y$ of $\\operatorname{alt}/S$, form the usual scheme fibre product $P=X\\times_TY$. It is of finite type over $S$: the arrows to $T$ are of finite type by Step 1, and finite type is stable under base change and composition. Put $Q=P_{\\mathrm{md}}$ relative to $S$. The dominant-closure universal property factors every compatible pair of maps from an object of $\\operatorname{alt}/S$ uniquely through $Q$; thus it gives the required fibre-product universal property. The generic fibre $P_s$ is a fibre product of finite schemes over a finite scheme, so is finite: on affine fibres its coordinate algebra is the tensor product of two finite-dimensional algebras, spanned by the finitely many tensors of basis elements. Its reduction $Q_s$ is finite too. Consequently $Q$ has finite generic residue extensions and is an object of $\\operatorname{alt}/S$. By Step 1, a component of $P$ dominates a component of $S$ exactly when it dominates a component of the common target $T$; this also proves the stated description relative to that base.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-per-dominant-part-coreflection",
+    "lem-sfb-finite-type-composition-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "II 1.2.5 and Proposition 1.2.6, including its reduction to the common target."
+   }
+  },
+  {
+   "text": "Check pullback on each of the two generating types. For an etale $\\ell'$-decomposed family $U_i\\to X$ and $Y\\to X$ in $\\operatorname{alt}/S$, the etale dominant-closure comparison identifies its categorical pullback with the ordinary etale pullback $U_i\\times_XY$. Given $y\\in Y$ over $x$, choose a good point $u\\in U_i$ over $x$ and apply the residue-degree lemma to $\\kappa(u)/\\kappa(x)$ and $\\kappa(y)/\\kappa(x)$. It supplies a point over $y$ with degree prime to $\\ell$, so this pullback is again a generator. For a proper surjective maximally $\\ell'$-finite map $U\\to X$, its ordinary pullback to $Y$ is proper and surjective; dominant reduction preserves both properties. At each generic point $y$ of $Y$, its image is generic in $X$ by Step 1. Apply the same residue-degree lemma there. Its good generic-fibre point survives dominant reduction, so the resulting map is maximally $\\ell'$-finite. Thus both generating types are stable under the categorical pullbacks of Step 2.",
+   "uses": [
+    "def-per-prime-to-ell-alteration-topology",
+    "lem-per-dominant-part-coreflection",
+    "lem-per-prime-to-ell-residue-base-change",
+    "lem-weil-pbc-etale-covering-base-change",
+    "lem-weil-pbc-proper-base-change",
+    "lem-weil-pbc-surjective-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "II 1.2.7--1.2.8, 2.1.1 and 2.3.1--2.3.2."
+   }
+  },
+  {
+   "text": "Every etale generator contains a finite etale $\\ell'$-decomposed subfamily by finite extraction; its target is Noetherian by Step 1. Proper generators already have one member. Take as a precoverage $K$ the families of leaf composites of finite rooted trees, allowing a singleton isomorphism or a finite generating family at each vertex (and the empty generating family over the empty scheme). Grafting trees gives composition stability. Pull back a tree one vertex at a time using Step 3; induction on its finite height gives a finite tree of generators whose leaves are the pullbacks of its original leaves. Hence $K$ is stable under base change, and Step 2 supplies all its required pullbacks. A finite tree has finitely many leaves, so every member of $K$ is finite. This construction closes the generators under composition; it does not assert that the two raw generating types themselves are composition-stable.",
+   "uses": [
+    "lem-per-prime-to-ell-decomposed-etale-finite-subcover",
+    "def-per-prime-to-ell-alteration-topology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "II Corollary 2.2.4 and 2.3.1--2.3.2; finite-tree closure of the generators."
+   }
+  },
+  {
+   "text": "The topology generated by $K$ equals the topology in the statement. Indeed each original etale generator contains one of the finite generators used in $K$, while every tree in $K$ is covering for the original topology by repeated local character; proper generators occur in $K$ directly. These give both inclusions by the defining minimality of the generated topology. Apply the generated-precoverage membership theorem to $K$, using its composition stability, base-change stability, pullbacks and singleton isomorphisms from Step 4. Every covering sieve contains the presieve of some tree in $K$, which is a finite covering family. In particular every covering family has a finite tree refinement: its generated sieve contains the leaves of such a tree, and membership in that sieve supplies a factorization of each leaf through a member of the original family.",
+   "uses": [
+    "def-per-prime-to-ell-alteration-topology",
+    "def-weil-pbc-topos",
+    "lem-per-generated-precoverage-covering-sieve"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "II 2.3.1--2.3.2, expanded using the generated-precoverage membership equivalence (Mathlib lines 166--169)."
+   }
+  },
+  {
+   "text": "For completeness, apply the sieve axioms directly to arbitrary covering families. If $A_i\\to X$ covers and for each $i$ the family $B_{ij}\\to A_i$ covers, let $R$ be the sieve generated by the composites. Its pullback along $A_i\\to X$ contains the covering sieve generated by the $B_{ij}$, and is therefore covering. Local character makes $R$ covering. This proves composition, including refinements by covering families. A coarser family through which a covering family factors is covering because its sieve contains a covering sieve. For pullbacks, a map belongs to the pullback of the sieve generated by $A_i\\to X$ exactly when it factors through one of the categorical fibre products $A_i\\times_XY$; the equivalence follows by pairing the factorization with its given map to $Y$. The pullback-sieve axiom therefore proves stability of every covering family. Composite finite families remain finite because their indices form a finite union of finite sets.",
+   "uses": [
+    "def-weil-pbc-topos",
+    "def-per-prime-to-ell-alteration-topology",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "II 2.3.1 and the axioms of a Grothendieck topology; explicit sieve calculation."
+   }
+  },
+  {
+   "text": "Now let $a:S'\\to S$ be dominant of finite type between integral Noetherian schemes. Define $F(X)=(X\\times_SS')_{\\mathrm{md}}$ relative to $S'$. Finite-type base change and composition make all schemes used here finite type. At the generic point of $S'$, the fibre is the reduction of the scalar extension of the finite generic fibre of $X$, so it is finite. Thus $F(X)$ is in $\\operatorname{alt}/S'$. Functoriality of dominant closure gives $F$ on arrows. To compare successive products and dominant reductions, take a reduced finite-type scheme $T$ maximally dominant over $S'$. Its composite to $S$ is maximally dominant because $a$ is dominant and both bases are integral. Every map $T\\to X\\times_SS'$ therefore factors uniquely through the dominant part of any intermediate finite-type $S$-scheme through which it is expressed. Apply this factorization in both orders to the ordinary fibre-product cones. Uniqueness identifies their dominant reductions, compatibly with projections. Hence $F$ preserves the categorical fibre products needed for tree pullbacks. This argument uses dominance, not flatness.",
+   "uses": [
+    "lem-per-dominant-part-coreflection",
+    "lem-sfb-finite-type-composition-base-change",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "II 1.2.5--1.2.6, applied to a dominant finite-type integral change of base; agent expansion beyond the flat case of II 2.3.4."
+   }
+  },
+  {
+   "text": "The functor $F$ sends each generator to a generator. For etale maps, the comparison $F(U)=U\\times_XF(X)$ is the etale dominant-closure comparison over $S'$. Given a point of $F(X)$, apply the residue-degree lemma to its residue field and a good point in $U$ over its image in $X$. For a proper generator, ordinary base change is proper and surjective and dominant reduction preserves these properties. A generic point of $F(X)$ maps into the generic fibre of $X$ over $S$, whose points are generic in $X$ by Step 1. The residue-degree lemma again supplies a good point at that generic point; dominant reduction retains it. Therefore proper maximally $\\ell'$-finite surjections remain such. A finite generator tree refinement from Step 5 maps under $F$ to a tree of generators: its factorization arrows remain factorization arrows by functoriality. Its leaves give a covering family refining the images of the original covering family. Coarsening as in Step 6 proves the claimed dominant base-change stability.",
+   "uses": [
+    "def-per-prime-to-ell-alteration-topology",
+    "lem-per-dominant-part-coreflection",
+    "lem-per-prime-to-ell-residue-base-change",
+    "lem-weil-pbc-etale-covering-base-change",
+    "lem-weil-pbc-proper-base-change",
+    "lem-weil-pbc-surjective-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "II 1.2.7--1.2.8 and 2.3.1; generator-tree argument for dominant, possibly nonflat, integral base change."
+   }
+  },
+  {
+   "text": "For integral schemes the unique generic residue-field extension of a proper surjective generically finite morphism has its generic degree. If this is prime to $\\ell$, the morphism is precisely a proper surjective maximally $\\ell'$-finite generator. A proper birational morphism has generic degree $1$, so is covered by the same case. These assertions concern morphisms between objects of the relevant alteration category; in particular for such a map to an integral target $X$, one may use $\\operatorname{alt}/X$.",
+   "uses": [
+    "def-per-prime-to-ell-alteration-topology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "II Definitions 1.1.8 and 1.2.2 and generator 2.3.1(ii)."
+   }
+  },
+  {
+   "text": "For a finite affine open cover $X=\\bigcup_iU_i$, the inclusions are etale, and a point lying in $U_i$ lifts with unchanged residue field, of degree $1$. Thus this is an etale $\\ell'$-decomposed generator. Each open is reduced and has the required generic-point property inherited from $X$; a quasi-compact open immersion is of finite type, so these affine opens are objects of $\\operatorname{alt}/S$. This proves the open-cover assertion also for the empty object, with the empty family.",
+   "uses": [
+    "def-per-prime-to-ell-alteration-topology",
+    "lem-weil-pbc-open-immersion-etale",
+    "lem-weil-pbc-qc-open-immersion-finite-type"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "II 1.2.9, 2.1.1 and generator 2.3.1(i)."
+   }
+  },
+  {
+   "text": "Finally let $X$ be a reduced object and write its finitely many reduced irreducible components as $C_j$. Their reduced closed scheme structures exist; their inclusions are finite, hence proper. Form $C=\\coprod_j C_j$. On an affine $\\operatorname{Spec}A\\subset X$, this map is given by $A\\to\\prod_j A/\\mathfrak p_j$ for the component primes meeting that affine. This algebra is a finite $A$-module, so $C\\to X$ is finite and hence proper. It is surjective, and at each generic point has a lift with identical residue field. Thus $C\\to X$ is a singleton alteration generator. The scheme $C$ and each $C_j$ are reduced finite-type objects with the asserted generic points. The component summands form a finite open cover of $C$, so by Step 10 their composites $C_j\\to X$ cover by Step 6. Equivalently, the pullback to $C$ of the sieve generated by the component inclusions contains that open cover, and local character gives the desired component-family covering of $X$. If $X$ is empty, use the empty cover directly.",
+   "uses": [
+    "lem-weil-pbc-noetherian-finite-components",
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "lem-weil-pbc-closed-immersion-finite",
+    "lem-weil-pbc-finite-proper",
+    "lem-weil-pbc-scheme-coproduct-family",
+    "def-per-prime-to-ell-alteration-topology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "II 2.3.1(ii), degree-one component cover; reduced closed structures and finite coproduct, followed by the Zariski generator."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-per-prime-to-ell-alteration-topology",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-per-generic-fibre-finiteness-criterion",
+  "def-pc-fibre-product",
+  "lem-per-dominant-part-coreflection",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-per-prime-to-ell-residue-base-change",
+  "lem-weil-pbc-etale-covering-base-change",
+  "lem-weil-pbc-proper-base-change",
+  "lem-weil-pbc-surjective-base-change",
+  "lem-per-prime-to-ell-decomposed-etale-finite-subcover",
+  "def-weil-pbc-topos",
+  "lem-per-generated-precoverage-covering-sieve",
+  "lem-weil-pbc-open-immersion-etale",
+  "lem-weil-pbc-qc-open-immersion-finite-type",
+  "lem-weil-pbc-noetherian-finite-components",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-weil-pbc-closed-immersion-finite",
+  "lem-weil-pbc-finite-proper",
+  "lem-weil-pbc-scheme-coproduct-family"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose II 1.1.7, 1.2.5--1.2.8, 2.2.4, 2.3.1--2.3.2, printed pp. 24--28; agent expands finite-tree generation, sieve axioms and dominant nonflat integral base change."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -53,10 +225,45 @@
    "results": "[grep] OK 0 hit(s)",
    "date": "2026-10-19",
    "verdict": "no match: read the returned types; none states this scheme-theoretic assertion or specializes to it in one line."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Dominant pullbacks, refinements and finite covers in the prime-to-ell alteration topology",
+   "results": "{\"t\": \"2026-10-18T21:36:40Z\", \"tool\": \"leanfinder\", \"query\": \"Dominant pullbacks, refinements and finite covers in the prime-to-ell alteration topology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.instOverXPullbackCoverOverProp\", \"AlgebraicGeometry.Scheme.instOverXPullbackCoverOverProp'\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀\", \"AlgebraicGeometry.Scheme.Pullback.openCoverOfBase'_f\", \"AlgebraicGeometry.Scheme.Cover.pullbackCoverOverProp'\", \"AlgebraicGeometry.Scheme.Cover.pullbackCoverOverProp\", \"AlgebraicGeometry.Scheme.Cover.pullbackCoverOver_I₀\", \"AlgebraicGeometry.Scheme.Cover.pullbackCoverOver'_X\"], \"digest\": \"23f3ce5fee033cfa\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: ordinary covers and topology stability do not give the dominant-component alteration calculus."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Dominant pullbacks of prime-to-ell alteration covers and finite covering refinements",
+   "results": "{\"t\": \"2026-10-18T21:36:41Z\", \"tool\": \"leansearch\", \"query\": \"Dominant pullbacks of prime-to-ell alteration covers and finite covering refinements\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Cover.pullbackCoverOver'_f\", \"AlgebraicGeometry.Scheme.Cover.pullbackCoverOver\", \"AlgebraicGeometry.Scheme.Cover.pullbackCoverOver'\", \"AlgebraicGeometry.Scheme.instOverPullbackCoverOver\", \"AlgebraicGeometry.Scheme.Cover.pullbackCoverOver'_X\", \"AlgebraicGeometry.Scheme.Cover.pullbackHom\", \"AlgebraicGeometry.Scheme.instOverPullbackCoverOverProp\", \"AlgebraicGeometry.Scheme.instOverXPullbackCoverOverProp\"], \"digest\": \"ab709978ff5b31f3\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: ordinary covers and topology stability do not give the dominant-component alteration calculus."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.GrothendieckTopology, CategoryTheory.Precoverage.IsStableUnderBaseChange",
+   "results": "{\"t\": \"2026-10-18T21:36:41Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.GrothendieckTopology, CategoryTheory.Precoverage.IsStableUnderBaseChange\", \"sub\": \"\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"CategoryTheory.GrothendieckTopology.instIsStableUnderBaseChangeToPrecoverage\", \"CategoryTheory.Precoverage.toGrothendieck_toPretopology_eq_toGrothendieck\", \"CategoryTheory.Precoverage.mem_toGrothendieck_iff_of_isStableUnderComposition\", \"CategoryTheory.Precoverage.toGrothendieck_toCoverage\", \"CategoryTheory.Precoverage.toCoverage_le_toCoverage\", \"CategoryTheory.Precoverage.toGrothendieck_comap_eq_inducedTopology\", \"CategoryTheory.Precoverage.toGrothendieck_comap_eq_restrictedTopology\", \"CategoryTheory.over_toGrothendieck_eq_toGrothendieck_comap_forget\"], \"digest\": \"225440cbfa71f02d\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: ordinary covers and topology stability do not give the dominant-component alteration calculus."
+  },
+  {
+   "tool": "grep",
+   "query": "alteration|completely.decomposed|irreducibleComponents|md",
+   "results": "{\"t\": \"2026-10-18T21:36:41Z\", \"tool\": \"grep\", \"query\": \"alteration|completely.decomposed|irreducibleComponents|md\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean\", \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper.lean\"], \"digest\": \"16001b250ee7c6fb\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: ordinary covers and topology stability do not give the dominant-component alteration calculus."
+  },
+  {
+   "tool": "grep",
+   "query": "alteration|maximally|decomposed",
+   "results": "{\"t\": \"2026-10-18T21:53:42Z\", \"tool\": \"grep\", \"query\": \"alteration|maximally|decomposed\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: ordinary covers and topology stability do not give the dominant-component alteration calculus."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-uniformization-nodal-quotient-reduction",
@@ -82,5 +289,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-alteration-cover-calculus",
+  "worker": "stage1",
+  "summary": "Split all cover-calculus clauses using dominant coreflection, field residue-degree base change, finite etale extraction, generic-fibre finiteness, and a Mathlib generated-precoverage leaf. Proved finite-tree closure, arbitrary cover pullback/refinement, nonflat dominant integral base change, and elementary generators explicitly. Removed unused excellence, regularity and SNC convention dependencies; no mathematical clause changed.",
+  "blueprint": "Ancestor lem-per-artin-gabber-affine-curve proof Step 3, through the IX 1.1 uniformization input to the finiteness/duality branch: realizes all clauses of the alteration-cover-calculus node introduced for the nodal quotient reduction.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "why": "Generic construction of reduced closed scheme structures, used for dominant closures and components; the perverse-curve unit has no such scheme-theoretic construction."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-reduced-induced-closed-subscheme"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q135-03f30d2be",
+  "group": "Q135",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q135-03f30d2be (reviewer sub-agent of L); spot-checked: I read the item's 11 steps, all five new nodes, the definition def-per-prime-to-ell-alteration-topology and every cited statement against ILO Exposé II, printed pp. 23-29 (1.1.7, 1.1.10, 1.2.5-1.2.8, 2.1.1, 2.2.2-2.2.4, 2.3.1-2.3.4) and Mathlib PrecoverageToGrothendieck.lean lines 166-201. The item statement matches the base text from Q74. Only three convention references that no clause uses were dropped (excellent, regular, SNC), so nothing is weakened. The dominant non-flat base-change clause is stronger than ILO 2.3.4. I checked Steps 7-8: on alt/S' both sides represent the same Hom-functor, which needs only dominance. Each étale or proper generator maps to a generator through the coreflection's étale and proper-surjective clauses and the residue lemma, and trees then map to trees. Step 5 meets all four hypotheses of the Mathlib leaf (composition, base change, HasPullbacks through Step 2, HasIsos). New nodes all checked true. Coreflection: the closure of the generic fibres equals the union of dominating components, and the fibre clause stays reduced even over a nonreduced S. The étale clause holds by flat going-down plus étale-over-reduced (an extension of 1.2.8). Generic-fibre criterion (1.1.7): a dense open contains the generic points; empty cases are fine. Residue lemma (1.2.7): d = sum of length times degree; tested on the cubic 1+2 split and on t^{1/p} with K=L. Prime-to-ell extraction (2.2.2/2.2.4) also holds for non-quasi-compact U_i, since its loci are open in the constructible topology; Z[i,1/2] with ell=2 checked. The extraction lemma generalizes, and does not duplicate, lem-per-completely-decomposed-etale-finite-subcover. No other duplicates found (alteration-generators-reduced-base-change, proper-normal-form, standard-refinement, regular-pair-pullback were read). No cycle, no SGA. I accept the tool_use lem-weil-pbc-reduced-induced-closed-subscheme. Minor point, not repaired: Step 11 applies Step 10 to a non-affine summand cover, but Step 10's argument never uses affineness."
  }
 }
