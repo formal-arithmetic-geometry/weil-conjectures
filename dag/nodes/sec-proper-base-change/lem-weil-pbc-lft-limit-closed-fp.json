@@ -46,7 +46,7 @@
    }
   },
   {
-   "text": "Form the system FP(X/S0) of [def-nagata-finite-type-fp-model-system]. Its index is the set of finite-type quasi-coherent subideals of the defining ideal of the closed immersion into the chosen ambient model, ordered by inclusion as in [def-nagata-closed-subscheme-fp-system]. This set contains the zero ideal, and the sum of any two such subideals is again finite type and is an upper bound, so the index is nonempty and directed. Apply the property theorem [lemma-nagata-finite-type-fp-model-system], with base S0, to obtain models Xi→S0 of finite presentation, closed-immersion transition maps and projections X→Xi, and X as their inverse limit in schemes. Since S0 is qcqs, each Xi is qcqs by [lem-weil-pbc-qcqs-morphism-permanence](2). The definition is used only to specify the system and index; the property theorem supplies its existence and limit properties.",
+   "text": "Over the qcqs open base S0, apply Scheme.Hom.exists_isClosedImmersion_locallyOfFinitePresentation from [lemma-nagata-finite-type-fp-model-system] to factor X→S0 as a closed immersion i:X→Y followed by a finite-presentation map q:Y→S0. Use the concrete construction Scheme.Hom.FinitePresentationApproximation.ofIsClosedImmersion q i hcomp from [def-nagata-finite-type-fp-model-system]. Its index is exactly (i.ker.FGSub)ᵒᵖ, where FGSub is [def-nagata-closed-subscheme-fp-system]. Zero gives nonemptiness and sum gives directedness. The fields of this construction give finite presentation, qcqs stages, closed transitions, closed projections and the IsLimit witness. Quasi-compactness and quasi-separatedness of the stages are supplied using [lem-weil-pbc-qcqs-morphism-permanence].",
    "uses": [
     "def-nagata-finite-type-fp-model-system",
     "def-nagata-closed-subscheme-fp-system",
@@ -87,7 +87,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/limits.tex",
-  "place": "Tag 09ZQ; finite qcqs open-base reduction, existing Nagata qcqs approximation system, and composition with the fp open inclusion"
+  "place": "Q8 stage 3: Tag 09ZQ, qcqs open neighborhood of the compact image followed by the existing concrete finite-presentation approximation of a closed immersion, then composition with the open inclusion"
  },
  "mathlib_searches": [
   {
@@ -212,5 +212,15 @@
   "by": "NN",
   "date": "2026-10-15",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q8",
+  "result": "pass",
+  "landing": "20261018T062857-L-671535",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

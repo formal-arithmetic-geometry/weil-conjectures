@@ -9,7 +9,6 @@ public import Mathlib.AlgebraicGeometry.Scheme
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-public import Sheaf.AlgebraicGeometry.LimitAffineTransition
 import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
 
 /-!
@@ -65,6 +64,40 @@ theorem exists_locallyFiniteType_limit_closed_finitePresentation
         (∀ i : Iᵒᵖ, π.app i ≫ p.app i = f) ∧
         Nonempty (IsLimit (Cone.mk X π)) ∧
         (∀ i : Iᵒᵖ, IsClosedImmersion (π.app i)) := by
-  sorry
+  classical
+  obtain ⟨W, hWc, hWo, hXW, _⟩ :=
+    PrespectralSpace.exists_isCompact_and_isOpen_between
+      (isCompact_range f.continuous) isOpen_univ (Set.subset_univ _)
+  let U : S.Opens := ⟨W, hWo⟩
+  have : CompactSpace U.toScheme := isCompact_iff_compactSpace.mp hWc
+  have : QuasiSeparatedSpace U.toScheme := quasiSeparatedSpace_of_quasiSeparated U.ι
+  let f₀ : X ⟶ U.toScheme := IsOpenImmersion.lift U.ι f (by
+    rw [Scheme.Opens.range_ι]
+    exact hXW)
+  have hf₀ : f₀ ≫ U.ι = f := IsOpenImmersion.lift_fac _ _ _
+  have : LocallyOfFiniteType (f₀ ≫ U.ι) := hf₀.symm ▸ inferInstance
+  have : LocallyOfFiniteType f₀ := locallyOfFiniteType_of_comp f₀ U.ι
+  obtain ⟨Y, q, i, hq, hqc, hqs, hi, hcomp⟩ :=
+    f₀.exists_isClosedImmersion_locallyOfFinitePresentation
+  have := hq
+  have := hqc
+  have := hqs
+  have := hi
+  let A := Scheme.Hom.FinitePresentationApproximation.ofIsClosedImmersion q i hcomp
+  refine ⟨i.ker.FGSub, inferInstance, inferInstance, inferInstance,
+    A.D, A.p ≫ (Functor.const _).map U.ι, A.π, ?_, ?_, ?_, ?_, ⟨A.isLimit⟩, ?_⟩
+  · intro j
+    change LocallyOfFinitePresentation (A.p.app j ≫ U.ι) ∧
+      QuasiCompact (A.p.app j ≫ U.ι) ∧ QuasiSeparated (A.p.app j ≫ U.ι)
+    exact ⟨inferInstance, inferInstance, inferInstance⟩
+  · intro j
+    exact ⟨A.compactSpace_obj j, A.quasiSeparatedSpace_obj j⟩
+  · intro j k g
+    exact A.isClosedImmersion_map g
+  · intro j
+    change A.π.app j ≫ (A.p.app j ≫ U.ι) = f
+    rw [← Category.assoc, A.w, hf₀]
+  · intro j
+    exact A.isClosedImmersion_π j
 
 end AlgebraicGeometry
