@@ -7,8 +7,6 @@ module
 
 public import Sheaf.Paper.TraceFormulaCoefficientConventions
 public import Sheaf.SixFunctors.FiniteDualizing
-public import Sheaf.Algebra.Homology.RingedInternalHomSignedCalculus
-public import Sheaf.Algebra.Homology.RingedInternalHomExactRestriction
 public import Sheaf.Paper.CoefficientRingedTensorHomModel
 public import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
 public import Sheaf.Paper.CoefficientHomRepresentativeEvaluation
