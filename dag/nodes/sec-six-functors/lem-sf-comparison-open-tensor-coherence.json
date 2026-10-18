@@ -1,0 +1,191 @@
+{
+ "id": "lem-sf-comparison-open-tensor-coherence",
+ "kind": "statement",
+ "title": "Etale/pro-etale comparison respects the canonical open tensor map",
+ "statement": "Let $\\Lambda$ be a finite discrete commutative ring and $j:U\\hookrightarrow X$ an open immersion of schemes [def-weil-open-immersion]. Work on small representatives of the ordinary etale and pro-etale sites in a common larger universe, with the unbounded derived categories of constant-$\\Lambda$ module sheaves [def-weil-pbc-derived-categories, def-weil-pbc-proetale-modules]. Write $A_T=\\nu_T^*$ for the exact derived comparison pullback [lem-sf-comparison-pullback-exact]. Let $K\\in D(U_{\\mathrm{et}},\\Lambda)$ and $N\\in D(X_{\\mathrm{et}},\\Lambda)$ be arbitrary. Write\n$$e_F:A_Xj^{e}_!F\\xrightarrow{\\sim}j^{p}_!A_UF$$\nfor the degreewise derived comparison of [lem-cbc-proetale-extension-zero-comparison], using exact extensions by zero [lem-weil-pbc-extension-by-zero-exact, lem-cbc-proetale-extension-zero]. Superscripts $e,p$ distinguish the two sites. Let $t_T:A_T(F\\otimes^L G)\\xrightarrow{\\sim}A_TF\\otimes^L A_TG$ be the canonical tensor comparison [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] and let $a_j:A_Uj_e^*\\xrightarrow{\\sim}j_p^*A_X$ be the canonical derived pullback comparison [lem-weil-pbc-comparison-pullback]. Define\n$$h_{K,N}=(1\\otimes a_{j,N})\\circ t_U:\n A_U(K\\otimes^Lj_e^*N)\\xrightarrow{\\sim}A_UK\\otimes^Lj_p^*A_XN.$$\nLet $\\gamma^e_{K,N}:j^e_!K\\otimes^LN\\xrightarrow{\\sim}j^e_!(K\\otimes^Lj_e^*N)$ and $\\gamma^p_{A_UK,A_XN}$ be the canonical open tensor comparisons of [lem-pur-etale-open-derived-tensor, lem-cbc-extension-zero-projection-formula]. Then the following equality holds in $D(X_{\\mathrm{proet}},\\Lambda)$, naturally in $K,N$:\n$$\nj^p_!(h_{K,N})\\circ e_{K\\otimes^Lj_e^*N}\\circ A_X(\\gamma^e_{K,N})\n=\\gamma^p_{A_UK,A_XN}\\circ(e_K\\otimes1)\\circ t_X,\n$$\nas maps from $A_X(j^e_!K\\otimes^LN)$ to $j^p_!(A_UK\\otimes^Lj_p^*A_XN)$. No boundedness, constructibility, properness, or finite Tor-amplitude hypothesis is required.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0GL1, lemma-j-shriek-and-tensor; sites-modules.tex Tag 0E8I, lemma-j-shriek-and-tensor; Tag 07A4, lemma-pullback-tensor-product. Compatibility with the etale/pro-etale comparison is the agent-formulated refinement required by the blueprint finite-coefficient transport paragraph."
+ },
+ "stmt_deps": [
+  "def-weil-open-immersion",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-proetale-modules",
+  "lem-sf-comparison-pullback-exact",
+  "lem-cbc-proetale-extension-zero-comparison",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-cbc-proetale-extension-zero",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-comparison-pullback",
+  "lem-pur-etale-open-derived-tensor",
+  "lem-cbc-extension-zero-projection-formula"
+ ],
+ "proof": [
+  {
+   "text": "The comparison pullback is exact, so its termwise action on complexes preserves quasi-isomorphisms and identifies cohomology with the pulled-back cohomology. The extension-by-zero comparison is natural in the sheaf, and both étale and pro-étale extension by zero are exact. Therefore the degreewise maps e_F descend to natural isomorphisms on the unbounded derived categories, with no boundedness condition. The derived tensor comparison t_T is the canonical natural comparison supplied by the ringed-topos tensor-pullback lemma.",
+   "uses": [
+    "lem-sf-comparison-pullback-exact",
+    "lem-cbc-proetale-extension-zero-comparison",
+    "lem-weil-pbc-extension-by-zero-exact",
+    "lem-cbc-proetale-extension-zero",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0GL1 and sites-modules.tex Tag 0E8I; derived termwise passage"
+   }
+  },
+  {
+   "text": "On the étale site, the canonical map gamma^e is the natural open-tensor isomorphism for an open immersion, valid for arbitrary unbounded complexes. On the pro-étale site, the extension-zero projection-formula node gives the corresponding canonical isomorphism gamma^p. The generic open-tensor normalization records that this pro-étale map is the adjunction-normalized map: its inverse is the j_! dashv j^* adjunct of the open unit tensored with the identity, and after restricting to the open its component is the identity. Thus both gamma maps are fixed by the same unit/counit normalization rather than by an arbitrary choice of isomorphism.",
+   "uses": [
+    "lem-pur-etale-open-derived-tensor",
+    "lem-cbc-extension-zero-projection-formula",
+    "lem-sf-open-tensor-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0GL1, lemma-j-shriek-and-tensor; Tag 0E8I, lemma-j-shriek-and-tensor"
+   }
+  },
+  {
+   "text": "The pullback comparison a_j is natural and compatible with identities and composites, and the tensor comparison t_U is natural in both variables. Consequently the composite h_{K,N}=(1 tensor a_{j,N}) composed with t_U is exactly the canonical comparison from A_U(K tensor^L j_e^*N) to A_UK tensor^L j_p^*A_XN. This identification uses the same restriction map j on the two sites and does not introduce a second pullback or tensor structure.",
+   "uses": [
+    "lem-weil-pbc-comparison-pullback",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A4, lemma-pullback-tensor-product; comparison pullback compatibility"
+   }
+  },
+  {
+   "text": "Choose flat-term K-flat representatives P of K and Q of N. The tensor-pullback comparison is represented termwise by the canonical pure-tensor map, while e is represented termwise by the natural sheaf comparison between the two extension-by-zero functors. Thus both composites are maps between the corresponding extension-by-zero tensor complexes. On each object of the localized site, the ordinary sheaf identity underlying the open tensor comparison sends a pure tensor x tensor y to the extension-by-zero section of x tensor the restriction of y; this identity is checked on the open restriction and on stalks at points of the complement, where both sides have zero stalk by the extension-by-zero prescriptions. The adjunction-normalized description in lem-sf-open-tensor-normalization makes the restriction maps the identity, and full faithfulness of j_! then identifies the resulting sheaf maps. Naturality with respect to the differentials gives equality of chain maps. K-flat descent and localization in the cited tensor-pullback lemma give the displayed equality in the unbounded derived category.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-cbc-proetale-extension-zero-comparison",
+    "lem-weil-pbc-extension-by-zero-exact",
+    "lem-pur-etale-open-derived-tensor",
+    "lem-cbc-extension-zero-projection-formula",
+    "lem-sf-open-tensor-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0GL1 and Tag 0E8I, with the finite-coefficient transport paragraph of the blueprint"
+   }
+  },
+  {
+   "text": "Every comparison, tensorator, restriction comparison, extension-by-zero comparison, and open-tensor map used above is natural in K and N. Hence the componentwise equality is natural in both variables. The construction used only exactness, adjunction units and counits, and the canonical tensor comparisons, so it applies to arbitrary unbounded K and N and requires no boundedness, constructibility, properness, or finite Tor-amplitude hypothesis.",
+   "uses": [
+    "lem-sf-comparison-pullback-exact",
+    "lem-cbc-proetale-extension-zero-comparison",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-cbc-proetale-extension-zero"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-pf-proetale/thm-sf-pf-proetale.proof.md",
+    "place": "finite-coefficient transport paragraph"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-cbc-extension-zero-projection-formula",
+  "lem-cbc-proetale-extension-zero",
+  "lem-cbc-proetale-extension-zero-comparison",
+  "lem-pur-etale-open-derived-tensor",
+  "lem-sf-comparison-pullback-exact",
+  "lem-sf-open-tensor-normalization",
+  "lem-weil-pbc-comparison-pullback",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-pf-proetale/thm-sf-pf-proetale.proof.md",
+  "place": "finite-coefficient transport paragraph: comparison carries the étale projection transformation to the pro-étale one; open tensor factor compatibility"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "extensionByZero.*[Tt]ensor|[Tt]ensor.*extensionByZero|[Cc]omparison.*[Ss]hriek",
+   "results": "0 hits: ",
+   "date": "2026-10-17",
+   "verdict": "no match: returned scheme pullback identities, ringed-space restrictions, monoidal sheafification, and condensed projectivity results do not identify the two open-extension comparison/tensor composites"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The tensor projection isomorphism for extension by zero along an open immersion is compatible with etale pro etale comparison",
+   "results": "8 hits: AlgebraicGeometry.SheafedSpace.IsOpenImmersion.isoRestrict_hom_ofRestrict_assoc, AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.isoRestrict, Algebra.Extension.tensorCotangentSpace, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.isoRestrict, AlgebraicGeometry.SheafedSpace.IsOpenImmersion.isoRestrict, AlgebraicGeometry.morphismRestrictOpensRange, AlgebraicGeometry.PresheafedSpace.GlueData.componentwise_diagram_π_isIso, Algebra.FormallyEtale.instTensorProduct",
+   "date": "2026-10-17",
+   "verdict": "no match: returned scheme pullback identities, ringed-space restrictions, monoidal sheafification, and condensed projectivity results do not identify the two open-extension comparison/tensor composites"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"tensor\", \"extension\"",
+   "results": "0 hits: ",
+   "date": "2026-10-17",
+   "verdict": "no match: returned scheme pullback identities, ringed-space restrictions, monoidal sheafification, and condensed projectivity results do not identify the two open-extension comparison/tensor composites"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale to pro etale comparison pullback commutes with the canonical open extension by zero derived tensor projection map",
+   "results": "8 hits: AlgebraicGeometry.pullbackSpecIso_hom_base, AlgebraicGeometry.pullbackSpecIso_hom_snd, AlgebraicGeometry.pullbackSpecIso_hom_fst', AlgebraicGeometry.pullbackSpecIso_hom_fst, AlgebraicGeometry.pullbackSpecIso_inv_fst', AlgebraicGeometry.pullbackSpecIso_inv_fst, AlgebraicGeometry.pullbackSpecIso_inv_snd, AlgebraicGeometry.Proj.pullbackAwayιIso_hom_awayι",
+   "date": "2026-10-17",
+   "verdict": "no match: returned scheme pullback identities, ringed-space restrictions, monoidal sheafification, and condensed projectivity results do not identify the two open-extension comparison/tensor composites"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A comparison of ringed topoi preserves the tensor projection transformation for extension by zero on a localized open site",
+   "results": "8 hits: LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, LightCondensed.internallyProjective_iff_tensor_condition, LightCondensed.internallyProjective_iff_tensor_condition', LightCondensed.free_internallyProjective_iff_tensor_condition, CategoryTheory.Sheaf.monoidalCategory, SheafOfModules.Presentation.map_π_eq, LightCondensed.free_internallyProjective_iff_tensor_condition', PresheafOfModules.Monoidal.tensorObj_map_tmul",
+   "date": "2026-10-17",
+   "verdict": "no match: returned scheme pullback identities, ringed-space restrictions, monoidal sheafification, and condensed projectivity results do not identify the two open-extension comparison/tensor composites"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "thm-sf-pf-proetale",
+  "date": "2026-10-17",
+  "group": "Q97"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-pf-proetale",
+ "blueprint": {
+  "from": {
+   "node": "thm-sf-pf-proetale",
+   "place": "Finite-coefficient transport paragraph: comparison carries the etale projection transformation to the pro-etale one; compatibility of the open tensor factor in the compactification composite.",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-sf-comparison-open-tensor-coherence",
+  "worker": "stage1",
+  "summary": "Audited the imported comparison/open-tensor coherence statement against the finite-coefficient transport paragraph. No new child node is needed: the proof is a formal derived-category calculation using the existing exact comparison pullback, extension-by-zero comparison, tensor pullback comparison, and the two site-specific open-tensor projection isomorphisms. The generic open-tensor normalization is declared as a tool from the compatibility unit. The equality is checked on flat-term K-flat representatives by the common pure-tensor formula and then descended to the unbounded derived category.",
+  "blueprint": "Realizes the finite-coefficient transport paragraph of thm-sf-pf-proetale: comparison commutes with tensor and open extension, and carries the étale projection transformation to the pro-étale one.",
+  "tool_uses": [
+   {
+    "node": "lem-sf-open-tensor-normalization",
+    "why": "Generic adjunction-normalized open-tensor coherence is used to identify the canonical pro-etale projection map and its restriction normalization; the current item specializes this tool to the etale/pro-etale comparison square."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sf-open-tensor-normalization"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-N3-59117269b",
+  "group": "N3",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N3-59117269b (reviewer sub-agent of L); spot-checked: Step 4 incorrectly treated extension by zero as zero on every object outside the open. Corrected whole DAG JSON is in fixes/dag/nodes/sec-six-functors/lem-sf-comparison-open-tensor-coherence.json, using restriction, complementary stalks, adjunction normalization, and full faithfulness. Statement, hypotheses, coefficient categories, base-change morphism, dependencies, and edge cases check.; 1 file(s) fixed by the reviewer"
+ }
+}

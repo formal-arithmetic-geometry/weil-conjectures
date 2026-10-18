@@ -66,18 +66,13 @@
    }
   },
   {
-   "text": "Use [lem-weil-pbc-ringed-exchange-tensor-coherence] on the commutative square of ringed topoi with upper row $u=p_{\\mathrm{et}}:\\overline X_{\\mathrm{et}}\\to Y_{\\mathrm{et}}$, lower row $p_{\\mathrm{proet}}:\\overline X_{\\mathrm{proet}}\\to Y_{\\mathrm{proet}}$, and vertical maps $\\nu_{\\overline X},\\nu_Y$. The constant-ring identifications and exact derived comparison are given by [lem-sf-comparison-pullback-exact]. The pullback commutation isomorphism is the inverse of the comparison of [lem-weil-pbc-comparison-pullback], induced termwise; no Cartesian scheme square is asserted or required. Its exchange mate at $C$ is precisely $b_C:A_YRp_{\\mathrm{et},*}C\\to Rp_{\\mathrm{proet},*}A_{\\overline X}C$ of [lem-weil-pbc-comparison-direct-image-canonical-mate], because both transpose to $A_{\\overline X}(\\varepsilon_C)$ preceded by that inverse pullback comparison. Apply the coherence equality with $C=M_0$ and second input $L_0$. Both $b_{M_0}$ and $b_{P_0}$ are invertible by the same canonical-mate lemma: $p$ is qcqs and the two complexes are bounded below by step 2. The remaining vertical maps are the canonical tensor-pullback isomorphisms of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. We obtain a commutative square with invertible vertical maps comparing the etale and pro-etale direct-image projection maps, with the specified counit normalizations.\n\nThe open-immersion comparison [lem-cbc-proetale-extension-zero-comparison], applied degreewise (both comparison inverse image and pro-etale $j_!$ are exact by [lem-sf-comparison-pullback-exact, lem-cbc-proetale-extension-zero]), gives $A_{\\overline X}M_0\\cong j_!A_XK_0$. The open tensor factors in the compact-support projection maps are the isomorphisms of [lem-pur-etale-open-derived-tensor] and [lem-cbc-extension-zero-projection-formula]. These factors commute with the comparison: on sheaf tensor generators both composites are $[x]\\otimes y\\mapsto[x\\otimes j^*y]$, and the open-extension comparison uses the same supported section $[x]$. Sheafification and totalization preserve this equality, with the same tensor differential signs. The pullback comparison identifies $A_X(K_0\\otimes^L f^*L_0)$ with $A_XK_0\\otimes^L f^*A_YL_0$. Postcompose the direct-image square by the images under $Rp_*$ of these open tensor comparisons. This gives exactly the square comparing the compactification-relative projection composites of [def-exchange-projection], not an arbitrarily chosen source/target isomorphism.",
+   "text": "Use the ringed-topos square with horizontal arrows $p_{\\mathrm{et}}$ and $p_{\\mathrm{proet}}$ and vertical arrows $\\nu_{\\overline X},\\nu_Y$. Its constant-ring identifications and exact derived comparison are [lem-sf-comparison-pullback-exact]; its pullback commutation is the inverse of [lem-weil-pbc-comparison-pullback]. The exchange mate is $b_C$ of [lem-weil-pbc-comparison-direct-image-canonical-mate]: its transpose is exactly $A_{\\overline X}(\\varepsilon_C)$ preceded by that inverse commutation. Thus these are the specified maps, with the same normalization. Apply [lem-weil-pbc-ringed-exchange-tensor-coherence] at $(M_0,L_0)$. Its two-composite equality gives the commutative square comparing the etale and pro-etale proper projection maps; it requires no Cartesian scheme square. The vertical tensor identifications are [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. The maps $b_{M_0},b_{P_0}$ are invertible by the canonical-mate lemma, since step 2 verified qcqs and bounded-below hypotheses.",
    "uses": [
-    "lem-weil-pbc-ringed-exchange-tensor-coherence",
     "lem-sf-comparison-pullback-exact",
     "lem-weil-pbc-comparison-pullback",
     "lem-weil-pbc-comparison-direct-image-canonical-mate",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-cbc-proetale-extension-zero-comparison",
-    "lem-cbc-proetale-extension-zero",
-    "lem-pur-etale-open-derived-tensor",
-    "lem-cbc-extension-zero-projection-formula",
-    "def-exchange-projection"
+    "lem-weil-pbc-ringed-exchange-tensor-coherence",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
    ],
    "elementary": false,
    "source": {
@@ -86,7 +81,31 @@
    }
   },
   {
-   "text": "The etale compact-support projection map at $(K_0,L_0)$ is invertible by the etale assertion of [lem-weil-finite-compact-projection-formula], which requires a separated finite-type morphism of finite-type $k$-schemes and precisely the bounded constructibility and Tor hypotheses verified in steps 1 and 2. On separated $k$-schemes this is also the statement of [thm-sf-pf-finite]. The more general lemma avoids imposing separatedness of $X$ and $Y$, which is not part of the operation datum. Only its etale assertion is used here; its pro-etale conclusion is not used to bypass the comparison argument. Apply the comparison functor $A_Y$ to its inverse. Its image is inverse to the image of the projection map by functoriality. The commuting square of step 3, whose vertical maps are invertible, expresses the pro-etale projection map at $(A_XK_0,A_YL_0)$ as this image conjugated by isomorphisms. It is therefore invertible. Finally use naturality of the specified projection transformation [def-exchange-projection] with respect to $e_K,e_L$ to conjugate this map to the one at $(K,L)$. This proves the finite-stage assertion for the compactification used to define the stated map.",
+   "text": "Apply [lem-sf-comparison-open-tensor-coherence] to $j:X\\hookrightarrow\\overline X$, $K_0$, and $N=p_{\\mathrm{et}}^*L_0$. Its displayed equality identifies the two routes from comparison of the etale open tensor factor to the pro-etale open tensor factor, including the canonical open-extension comparison $e$ and tensor and restriction comparisons. These are exactly the factors of the compactification-relative projection composite [def-exchange-projection]. Its hypotheses hold because the coefficient ring is finite and $j$ is open; it imposes no additional bounds. The comparison [lem-weil-pbc-comparison-pullback] for $p$ identifies the second input with $p_{\\mathrm{proet}}^*A_YL_0$, and its composition compatibility identifies the restriction to $X$ with $f_{\\mathrm{proet}}^*A_YL_0$.",
+   "uses": [
+    "lem-sf-comparison-open-tensor-coherence",
+    "def-exchange-projection",
+    "lem-weil-pbc-comparison-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-pf-proetale/thm-sf-pf-proetale.proof.md",
+    "place": "Finite-coefficient transport paragraph"
+   }
+  },
+  {
+   "text": "Postcompose the proper projection square of step 3 by $Rp_*$ of the open tensor factors of step 4. The equality in step 4 makes the resulting outer square commute: replace its open-factor composite by the equal opposite route, and then use the equality in step 3. By the formula $\\operatorname{PF}^c=Rp_*(\\gamma)\\circ\\pi_p$ in [def-exchange-projection], its horizontal arrows are precisely the compactification-relative projection maps. All its vertical arrows are composites of the invertible comparison arrows already identified in steps 3 and 4. This gives the required comparison of the actual projection composites.",
+   "uses": [
+    "def-exchange-projection"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-pf-proetale/thm-sf-pf-proetale.proof.md",
+    "place": "Finite-coefficient transport paragraph"
+   }
+  },
+  {
+   "text": "The etale compact-support projection map at $(K_0,L_0)$ is invertible by the etale assertion of [lem-weil-finite-compact-projection-formula], which requires a separated finite-type morphism of finite-type $k$-schemes and precisely the bounded constructibility and Tor hypotheses verified in steps 1 and 2. On separated $k$-schemes this is also the statement of [thm-sf-pf-finite]. The more general lemma avoids imposing separatedness of $X$ and $Y$, which is not part of the operation datum. Only its etale assertion is used here; its pro-etale conclusion is not used to bypass the comparison argument. Apply the comparison functor $A_Y$ to its inverse. Its image is inverse to the image of the projection map by functoriality. The commuting square of step 5, whose vertical maps are invertible, expresses the pro-etale projection map at $(A_XK_0,A_YL_0)$ as this image conjugated by isomorphisms. It is therefore invertible. Finally use naturality of the specified projection transformation [def-exchange-projection] with respect to $e_K,e_L$ to conjugate this map to the one at $(K,L)$. This proves the finite-stage assertion for the compactification used to define the stated map.",
    "uses": [
     "lem-weil-finite-compact-projection-formula",
     "thm-sf-pf-finite",
@@ -99,7 +118,7 @@
    }
   },
   {
-   "text": "Changing a finite-stage witness does not change this conclusion or the projection map it concerns. For two presentations $A_TF_0\\cong F\\cong A_TF_1$, full faithfulness on $D^+$ [thm-weil-pbc-site-comparison] uniquely lifts the induced isomorphism $A_TF_0\\cong A_TF_1$ to an isomorphism $F_0\\cong F_1$; its inverse lifts as well, and their composites are identities by faithfulness. The comparison square and the open comparisons are natural in the inputs, so the two conjugations of step 4 give the same canonical projection component at $F$. This justifies the wording about supplied witnesses without treating the definition of a witness as an existence theorem. At the higher stages the word realization refers to the completed/rationalized/common-stage coefficient constructions, not the discrete finite-ring comparison.",
+   "text": "Changing a finite-stage witness does not change this conclusion or the projection map it concerns. For two presentations $A_TF_0\\cong F\\cong A_TF_1$, full faithfulness on $D^+$ [thm-weil-pbc-site-comparison] uniquely lifts the induced isomorphism $A_TF_0\\cong A_TF_1$ to an isomorphism $F_0\\cong F_1$; its inverse lifts as well, and their composites are identities by faithfulness. The comparison square and the open comparisons are natural in the inputs, so the two conjugations of step 6 give the same canonical projection component at $F$. This justifies the wording about supplied witnesses without treating the definition of a witness as an existence theorem. At the higher stages the word realization refers to the completed/rationalized/common-stage coefficient constructions, not the discrete finite-ring comparison.",
    "uses": [
     "thm-weil-pbc-site-comparison"
    ],
@@ -124,7 +143,7 @@
    }
   },
   {
-   "text": "For $\\Lambda=E$, [def-weil-rationalization-karoubi] defines the rational category with the same objects as its integral category, so both inputs have integral representatives. For $\\overline{\\mathbf Q}_\\ell$, [def-weil-algebraically-closed-coefficients] makes every object a finite-stage pair and provides a common finite extension for the two inputs. There is no Karoubi completion at either stage. Their projection maps are the rationalized/common-stage maps specified in [def-sf-pf]. Apply [thm-sf-pf-field] to these representatives. Its conclusion gives the invertible projection maps over $E$ and over $\\overline{\\mathbf Q}_\\ell$, compatible with the extension functors. In particular their realization is the projection component in this statement. Conjugating by the chosen realization isomorphisms preserves its inverse. Together with steps 4 and 6 this exhausts all the coefficient stages of the datum. No finite reduction of a rational coefficient object is used.",
+   "text": "For $\\Lambda=E$, [def-weil-rationalization-karoubi] defines the rational category with the same objects as its integral category, so both inputs have integral representatives. For $\\overline{\\mathbf Q}_\\ell$, [def-weil-algebraically-closed-coefficients] makes every object a finite-stage pair and provides a common finite extension for the two inputs. There is no Karoubi completion at either stage. Their projection maps are the rationalized/common-stage maps specified in [def-sf-pf]. Apply [thm-sf-pf-field] to these representatives. Its conclusion gives the invertible projection maps over $E$ and over $\\overline{\\mathbf Q}_\\ell$, compatible with the extension functors. In particular their realization is the projection component in this statement. Conjugating by the chosen realization isomorphisms preserves its inverse. Together with steps 6 and 8 this exhausts all the coefficient stages of the datum. No finite reduction of a rational coefficient object is used.",
    "uses": [
     "def-weil-rationalization-karoubi",
     "def-weil-algebraically-closed-coefficients",
@@ -152,14 +171,11 @@
   "def-weil-proper-morphism",
   "def-weil-finite-type-morphism",
   "lem-pc-separated-quasi-separated",
-  "lem-weil-pbc-ringed-exchange-tensor-coherence",
   "lem-sf-comparison-pullback-exact",
   "lem-weil-pbc-comparison-pullback",
   "lem-weil-pbc-comparison-direct-image-canonical-mate",
-  "lem-cbc-proetale-extension-zero-comparison",
-  "lem-cbc-proetale-extension-zero",
-  "lem-pur-etale-open-derived-tensor",
-  "lem-cbc-extension-zero-projection-formula",
+  "lem-weil-pbc-ringed-exchange-tensor-coherence",
+  "lem-sf-comparison-open-tensor-coherence",
   "lem-weil-finite-compact-projection-formula",
   "thm-sf-pf-finite",
   "thm-weil-pbc-site-comparison",
@@ -234,7 +250,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -268,8 +284,8 @@
   "date": "2026-10-17",
   "item": "thm-sf-pf-proetale",
   "worker": "stage1",
-  "summary": "Made the imported shorthand statement self-contained and typed its coefficient realizations correctly: etale-origin witnesses are finite-level data, higher stages are completed integral, rationalized and common-stage constructions. Expanded the proof into seven steps; all auxiliary facts are existing nodes, including the general non-Cartesian ringed-topos exchange/tensor coherence theorem. No new nodes or Mathlib leaves. The general finite compact-support projection lemma supplies the etale finite assertion without adding separatedness assumptions on X and Y.",
-  "blueprint": "Realizes the comparison-pullback and compact-support projection-transport sentences by steps 1-5, the integral sentence by step 6, and the field sentence by step 7; the last witness sentence is justified only on its legitimate finite-coefficient constructible domain.",
+  "summary": "Q97 repair of the human re-split return: replaced the 2480-character step 3 by three short steps. The proper projection square cites the existing non-Cartesian ringed-topos coherence and normalized comparison-mate statements; the open tensor compatibility is extracted as lem-sf-comparison-open-tensor-coherence; the final step pastes these two equalities. The statement, Lean record, proof route, and the other six steps are retained (with references renumbered). One new statement-only node; no Mathlib leaves.",
+  "blueprint": "Finite-stage transport paragraph is realized by steps 1-7 (the old step 3 is now steps 3-5); integral sentence by step 8 and field sentence by step 9. Witness independence remains restricted to finite coefficients.",
   "tool_uses": [
    {
     "node": "lem-sf-proetale-constructible-origin",
@@ -333,23 +349,23 @@
    },
    {
     "node": "lem-weil-finite-compact-projection-formula",
-    "why": "Step 4 uses only its etale finite compact-support projection assertion for a separated finite-type morphism of arbitrary finite-type k-schemes; the named finite theorem unnecessarily assumes separated X,Y."
+    "why": "Step 6 uses only its etale finite compact-support projection assertion for a separated finite-type morphism of arbitrary finite-type k-schemes; the named finite theorem unnecessarily assumes separated X,Y."
    },
    {
     "node": "thm-sf-pf-finite",
-    "why": "Step 4 records the finite etale projection theorem explicitly named by the unit on its separated-scheme domain; the general finite lemma supplies the same etale assertion on the full domain."
+    "why": "Step 6 records the finite etale projection theorem explicitly named by the unit on its separated-scheme domain; the general finite lemma supplies the same etale assertion on the full domain."
    },
    {
     "node": "thm-weil-pbc-site-comparison",
-    "why": "Step 5 uses bounded-below full faithfulness over a finite discrete ring to compare two origin witnesses and lift their inverse equations."
+    "why": "Step 7 uses bounded-below full faithfulness over a finite discrete ring to compare two origin witnesses and lift their inverse equations."
    },
    {
     "node": "thm-sf-pf-adic",
-    "why": "Step 6 uses the integral reconstruction and map-identification conclusion expressly delegated by the source proof, on its completed pro-etale coefficient system."
+    "why": "Step 8 uses the integral reconstruction and map-identification conclusion expressly delegated by the source proof, on its completed pro-etale coefficient system."
    },
    {
     "node": "thm-sf-pf-field",
-    "why": "Step 7 uses invertibility and scalar-extension compatibility at rational and common finite stages, as expressly delegated by the unit."
+    "why": "Step 9 uses invertibility and scalar-extension compatibility at rational and common finite stages, as expressly delegated by the unit."
    }
   ],
   "statement_change": {
@@ -382,11 +398,11 @@
   "thm-sf-pf-field"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-18",
   "by": "L",
-  "reviewer": "NT-cc-Q74-4a33e8e87",
-  "group": "Q74",
+  "reviewer": "NT-cc-Q09-638908364",
+  "group": "Q97",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q74-4a33e8e87 (reviewer sub-agent of L); spot-checked: I read the whole item, all 7 steps, and the statement of every cited node, against the blueprint text (master and main-20261015 are identical) and the unit and chapter. The delivery has no new nodes and no cycle; proof_deps equals the union of the step uses, and all four search kinds are recorded. Statement: the self-contained rewrite matches def-sf-datum and def-exchange-projection (the PF^c composite, constant-A pro-étale categories at the finite stage, the completed integral category, raw rationalization with no Karoubi completion, common-stage Q̄_ℓ). The STATEMENT-DISPUTED restriction of étale-origin witnesses to finite Λ is correct, because ν^* and the witness are defined only for finite discrete rings. The higher stages assert the result for all objects, so nothing is weakened. Not requiring X and Y separated is a strengthening, and every cited theorem covers that wider domain. Step 1: constructible-origin (ii) and the Tor-interval comparison descend the Tor bounds; the hypotheses hold. Step 2: the bounded flat model, which is K-flat by kflat-criteria (1) and stays K-flat under pullback, keeps P_0 bounded; proper implies qcqs. Step 3: the coherence lemma applied to the non-Cartesian square (p_et, p_proet, ν), with θ the inverse of the comparison-pullback map, gives an exchange map equal to b of canonical-mate, invertible on D^+ for qcqs p. The open factors are compared via the extension-zero comparison and the two open tensor lemmas. Dropping thm-cbc-finite-level-proetale is correct: its statement is exchange-map invertibility only. Step 4: the étale clause of lem-weil-finite-compact-projection-formula, whose proof covers an arbitrary compactification, plus conjugation. Step 5: correct but superfluous. Step 6: thm-sf-pf-adic hypotheses checked. Step 7: thm-sf-pf-field at E and Q̄_ℓ checked. Accepted tool_uses (the 13 off-route statements): lem-sf-proetale-constructible-origin, lem-exc-comparison-tor-interval, lem-weil-pbc-extension-by-zero-exact, lem-sf-etale-flat-model, lem-kun-kflat-criteria, lem-weil-pbc-ringed-topoi-derived-tensor-pullback, lem-weil-pbc-ringed-exchange-tensor-coherence, lem-weil-pbc-comparison-pullback, lem-weil-pbc-comparison-direct-image-canonical-mate, lem-cbc-proetale-extension-zero-comparison, lem-cbc-proetale-extension-zero, lem-cbc-extension-zero-projection-formula, thm-weil-pbc-site-comparison. The other declared tool uses are in-route nodes or a Mathlib leaf and are not accepted as tool uses. No fixes were needed; minor notation remarks are in review.md."
+  "note": "Q97 repair c22b42ea2f of the re-split return of 2026-10-17 (step 3 of 2480 characters): old step 3 became steps 3-5, the open tensor compatibility it carried inline became lem-sf-comparison-open-tensor-coherence (split by N3, 25f1103b16); longest non-elementary step now 1434 characters; statement unchanged. Read in full and passed by the cc stage-1 reviews NT-cc-Q09-638908364 (2026-10-18 01:46 CST: 'the rest of the item matches the side node, Q97's nine-step repair. I re-read it in full ... PASS'), NT-cc-N6-8fbf4323f, NT-cc-Q104-c905bfc83 and NT-cc-Q10-06665efdf, of deliveries that changed only the split report or the wording of step 3; recorded by L (s1loop) because the repair was committed on the side and never promoted to live, so the queue kept the item open while every later delivery was archived as already completed."
  }
 }
