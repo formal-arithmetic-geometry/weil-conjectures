@@ -18,55 +18,240 @@
   "def-weil-pbc-finite-etale-category",
   "def-weil-surjective-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "If $Z$ is empty, the conclusion is vacuous. Otherwise apply [lem-a1-normal-etale-components-clopen]. The local normality hypothesis on $X$ gives geometric unibranchness by Tag 0BQ3, etaleness makes $Z$ locally topologically Noetherian, and the cited component lemma therefore makes every connected component $C$ of $Z$ open and closed and irreducible. The induced open-and-closed subscheme structure on $C$ is consequently defined.",
+   "uses": [
+    "lem-a1-normal-etale-components-clopen"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "proof of Lemma 7.4.10, p. 71, first paragraph"
+   }
+  },
+  {
+   "text": "Fix a connected component $C$ of $|Z|$; by step 1 it is open in $|Z|$, and we give it its induced open subscheme structure. The base $X$ is connected, quasi-compact, locally Noetherian with integrally closed local domains, $q$ is etale, and $q$ has the unique valuation lifting property, which are exactly the hypotheses of [lem-a1-geometric-cover-component-qc-proper] for the open connected component $C$. It gives that $q|_C$ is quasi-compact and proper and that $q^{-1}(\\{x\\})\\cap C$ is finite for every $x\\in X$.",
+   "uses": [
+    "lem-a1-geometric-cover-component-qc-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "proof of Lemma 7.4.10, p. 71, generic-fibre and Noetherian-induction paragraphs"
+   }
+  },
+  {
+   "text": "The base $X$ is locally Noetherian, so [thm-pqf-finite-iff-proper-finite-fibres] applies to $q|_C$: properness and finite fibres imply that $q|_C$ is finite. Since $q$ is etale and $C\\hookrightarrow Z$ is open, the restriction is etale; hence $q|_C$ is finite etale.",
+   "uses": [
+    "lem-a1-geometric-cover-component-qc-proper",
+    "thm-pqf-finite-iff-proper-finite-fibres"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 02OG, Lemma coherent-lemma-characterize-finite; finite iff proper with finite fibres"
+   }
+  },
+  {
+   "text": "Each connected component $C$ is nonempty by definition. The etale image lemma [lem-weil-pbc-etale-morphism-open-map] makes the image of $q|_C$ open, while [lem-weil-pbc-finite-closed-map-finite-fibres] makes it closed because $q|_C$ is finite. Thus the image is nonempty and clopen in connected $X$, so it is all of $X$ and $q|_C$ is surjective.",
+   "uses": [
+    "lem-weil-pbc-etale-morphism-open-map",
+    "lem-weil-pbc-finite-closed-map-finite-fibres"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 02J3 and 04D1/02GW; nonempty clopen image in connected base"
+   }
+  },
+  {
+   "text": "The connected components are pairwise disjoint and cover $|Z|$ by their maximality. Because each is open and closed, their induced open subschemes glue to a disjoint union decomposition of $Z$, and the empty scheme has the empty indexing family. The indexing family can be infinite because no global quasi-compactness of $Z$ was assumed.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definition 7.3.1(3) and proof of Lemma 7.4.10, p. 71"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-a1-normal-etale-components-clopen",
+  "lem-a1-geometric-cover-component-qc-proper",
+  "thm-pqf-finite-iff-proper-finite-fibres",
+  "lem-weil-pbc-etale-morphism-open-map",
+  "lem-weil-pbc-finite-closed-map-finite-fibres"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Definition 7.3.1(3) and proof of Lemma 7.4.10, p. 71"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
-   "query": "An etale scheme over a connected normal Noetherian scheme satisfying the valuative criterion of properness is a disjoint union of connected finite etale covers",
-   "results": "8 hits: AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.IsEtale, AlgebraicGeometry.IsProper.of_valuativeCriterion, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.IsIntegral, AlgebraicGeometry.Scheme.Hom.normalization, AlgebraicGeometry.Scheme.instCategoryEtale, AlgebraicGeometry.Scheme.Hom.normalizationOpenCover",
+   "query": "Connected components of an etale geometric covering over a connected normal locally Noetherian quasi-compact scheme are open and finite etale surjective",
+   "results": "CategoryTheory.PreGaloisCategory.has_decomp_connected_components'; AlgebraicGeometry.Scheme.Etale; Scheme.Hom.normalizationOpenCover; smallEtaleTopology; smallEtalePretopology; etaleTopology; IsEtale postcomposition instance; Algebra.isOpen_etaleLocus. No declaration states the geometric-cover decomposition.",
    "date": "2026-10-18",
-   "verdict": "no match: the properness criterion requires quasi-compactness, which is a substantive conclusion here; finite irreducible components, affine etale algebras, and etale-category declarations do not state this geometric-cover decomposition"
+   "verdict": "no match"
   },
   {
    "tool": "loogle",
-   "query": "\"IsNormal\", \"IsEtale\", \"IsFinite\"",
-   "results": "0 hits: ",
+   "query": "\"IsEtale\", \"IsProper\", \"ConnectedComponents\"",
+   "results": "0 hits",
    "date": "2026-10-18",
-   "verdict": "no match: the properness criterion requires quasi-compactness, which is a substantive conclusion here; finite irreducible components, affine etale algebras, and etale-category declarations do not state this geometric-cover decomposition"
+   "verdict": "no match"
   },
   {
    "tool": "grep",
-   "query": "unibranch|valuative.*[Ee]tale|[Ee]tale.*valuative|geometric.?cover",
-   "results": "0 hits: ",
+   "query": "geometric.?cover|connectedComponent.*[Ee]tale|valuative.*[Ee]tale [Mathlib/AlgebraicGeometry]",
+   "results": "0 hits",
    "date": "2026-10-18",
-   "verdict": "no match: the properness criterion requires quasi-compactness, which is a substantive conclusion here; finite irreducible components, affine etale algebras, and etale-category declarations do not state this geometric-cover decomposition"
+   "verdict": "no match"
   },
   {
    "tool": "leansearch",
-   "query": "Connected components of a geometric covering of a normal Noetherian scheme are finite etale and surjective",
-   "results": "8 hits: AlgebraicGeometry.finite_irreducibleComponents_of_isNoetherian, AlgebraicGeometry.Scheme.OpenCover.compactSpace, AlgebraicGeometry.Scheme.isAffine_affineOpenCover, AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite, AlgebraicGeometry.isNoetherian_iff_of_finite_affine_openCover, AlgebraicGeometry.isNoetherian_iff_of_finite_iSup_eq_top, AlgebraicGeometry.Scheme.Cover.mkOfCovers, AlgebraicGeometry.Scheme.Cover.sigma",
+   "query": "A connected component of an etale scheme over a connected normal Noetherian scheme satisfying the valuative criterion is finite etale and surjective",
+   "results": "IsProper.of_valuativeCriterion; ValuativeCriterion; ValuativeCriterion.Existence; Scheme.Etale; IsEtale; ValuativeCriterion.iff; ValuativeCriterion.existence; finite_irreducibleComponents_of_isNoetherian. None gives the decomposition.",
    "date": "2026-10-18",
-   "verdict": "no match: the properness criterion requires quasi-compactness, which is a substantive conclusion here; finite irreducible components, affine etale algebras, and etale-category declarations do not state this geometric-cover decomposition"
+   "verdict": "no match"
   },
   {
    "tool": "leanfinder",
-   "query": "For a normal connected Noetherian base, an arbitrary etale scheme with unique valuation ring lifting is the coproduct of its connected components, and each component is a finite etale surjection",
-   "results": "8 hits: AlgebraicGeometry.Scheme.Etale, Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq, Algebra.Etale.iff_exists_algEquiv_prod, Algebra.Etale.exists_subalgebra_fg, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, Algebra.Etale.finitePresentation, AlgebraicGeometry.IsEtale.of_comp, AlgebraicGeometry.IsEtale.instFormallyUnramified",
+   "query": "A connected etale geometric covering of a normal connected Noetherian scheme is quasi-compact and finite etale",
+   "results": "Scheme.quasiCompactCover; QuasiCompactCover; Scheme.Hom.instQuasiCompactToNormalization; Scheme.Etale; normalizationOpenCover; IsFinite; quasiCompactCover_iff; QuasiCompactCover.of_finite. No connected-cover finiteness theorem.",
    "date": "2026-10-18",
-   "verdict": "no match: the properness criterion requires quasi-compactness, which is a substantive conclusion here; finite irreducible components, affine etale algebras, and etale-category declarations do not state this geometric-cover decomposition"
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsProper.of_valuativeCriterion\", \"IsEtale\"",
+   "results": "0 hits",
+   "date": "2026-10-18",
+   "verdict": "no match"
   },
   {
    "tool": "grep",
-   "query": "connectedComponent.*([Ee]tale|[Ff]inite)|([Ee]tale|[Ff]inite).*connectedComponent|IsNormal.*IsEtale",
-   "results": "0 hits: ; directory AlgebraicGeometry",
+   "query": "normal.?scheme|geometrically.?unibranch|valuative.?criterion [Mathlib/AlgebraicGeometry]",
+   "results": "10 hits in ProjectiveSpectrum/Proper.lean and ValuativeCriterion.lean, but no geometric-cover theorem.",
    "date": "2026-10-18",
-   "verdict": "no match: the properness criterion requires quasi-compactness, which is a substantive conclusion here; finite irreducible components, affine etale algebras, and etale-category declarations do not state this geometric-cover decomposition"
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "normal scheme is geometrically unibranch",
+   "results": "Scheme.mk.noConfusion; FormallyUnramified.recOn; Scheme.Hom.normalizationDesc; FormallyUnramified.casesOn; IsNoetherian.toIsLocallyNoetherian; Scheme.Hom.toNormalization; integral normalization declarations. No geometric-unibranch declaration.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A normal scheme is geometrically unibranch",
+   "results": "IsIntegral; normalization reduced/integral/dominant declarations; isIntegral_of_irreducibleSpace_of_isReduced; irreducibleSpace_of_isIntegral; no geometric-unibranch declaration.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"GeometricallyUnibranch\", \"IsNormalScheme\"",
+   "results": "0 hits",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "geometrically.?unibranch|normal-geometrically-unibranch [Mathlib/AlgebraicGeometry]",
+   "results": "0 hits",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A locally topologically Noetherian geometrically unibranch scheme has clopen irreducible components",
+   "results": "finite_irreducibleComponents_of_isNoetherian; IsNoetherian.toIsLocallyNoetherian; NoetherianSpace.finite_irreducibleComponents; irreducibleComponents_eq_singleton; isClosed_irreducibleComponent; no clopen geometric-unibranch theorem.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Irreducible components are open and closed in a locally Noetherian geometrically unibranch scheme",
+   "results": "quasi-sober and prespectral scheme instances; finite irreducible components; irreducibleSpace_of_isIntegral; no clopen theorem.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"geometricallyUnibranch\", \"irreducibleComponents\"",
+   "results": "0 hits",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "irreducibleComponents.*[Oo]pen|geometrically.?unibranch [Mathlib/Topology]",
+   "results": "2 unrelated hits in Mathlib/Topology/Irreducible.lean; no geometric-unibranch result.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A connected geometric covering over a connected quasi-compact geometrically unibranch locally Noetherian scheme is quasi-compact and has finite fibres",
+   "results": "finite fibre instance for IsFinite; quasiCompactCover declarations; no theorem for connected geometric coverings.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Connected geometric covering has finite fibres and is quasi-compact",
+   "results": "QuasiCompactCover; Scheme.quasiCompactCover; QuasiCompactCover.of_finite; homCover; singleton; LocallyQuasiFinite; no geometric-cover theorem.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ValuativeCriterion\", \"QuasiCompact\", \"Finite\"",
+   "results": "0 hits",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*[Ff]ibres|quasi.?compact.*[Ff]ibres [Mathlib/AlgebraicGeometry]",
+   "results": "0 hits",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The image of a nonempty finite etale morphism is open and closed",
+   "results": "IsOpenImmersion.isOpen_range; Scheme.Hom.isLocallyClosed_range; Algebra.isOpen_etaleLocus; IsProper.instOfIsFinite; IsEtale; isOpenMap_of_generalizingMap. No finite-etale image theorem.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite etale morphism has open and closed image",
+   "results": "Algebra.isOpen_etaleLocus; IsEtale postcomposition instance; IsFinite; IsImmersion.isLocallyClosed_range; no finite-etale image theorem.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsFinite\", \"IsEtale\", \"IsOpen\", \"IsClosed\"",
+   "results": "0 hits",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "[Ff]inite.*[Cc]losed|[Ee]tale.*[Oo]pen [Mathlib/AlgebraicGeometry]",
+   "results": "13 unrelated hits, chiefly Proper.lean and Smooth.lean; no finite-etale image theorem.",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-a1-normal-locally-constant-finite-section",
@@ -78,8 +263,9 @@
  "blueprint": {
   "from": {
    "node": "lem-a1-affine-hc0",
-   "place": "Master proof of lem-a1-affine-hc0, first sentence: 'A class in H_c^0 is a global section of F whose support is proper over the base field'; the coefficient realization uses global integral lattices. Here the finite-cover section supplies the geometric normality input in the monodromy comparison used to construct those lattices. Auxiliary Finite connected components of geometric coverings over a normal base.",
+   "place": "Proof of Lemma 7.4.10, p. 71: clopen components and irreducibility; finite generic fibre and Noetherian induction for quasi-compactness; then proper etale is finite etale and nonempty components surject onto connected X.",
    "via": [
+    "lem-a1-normal-geometric-cover-components",
     "lem-a1-normal-locally-constant-finite-section",
     "lem-a1-normal-proetale-monodromy",
     "lem-a1-smooth-lisse-integral-lattice",
@@ -88,5 +274,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-a1-normal-geometric-cover-components",
+  "worker": "stage1",
+  "summary": "Split the geometric-cover component argument into two substantive statement-only children: clopen irreducible components of an etale scheme over a normal locally Noetherian base, and quasi-compactness, properness and finite fibres of an open connected component under the valuation lifting property. The item proof then applies these children, the existing proper-with-finite-fibres characterization of finite morphisms, the existing open-image (etale) and closed-image (finite) nodes for surjectivity, and an explicit disjoint-union argument; the statement is unchanged.",
+  "blueprint": "Realizes the proof of Lemma 7.4.10 cited in the item source: first paragraph on clopen components and irreducibility, generic-fibre/Noetherian-induction paragraph for quasi-compactness and finite fibres, and the final proper-etale-finite and image argument.",
+  "tool_uses": [
+   {
+    "node": "thm-pqf-finite-iff-proper-finite-fibres",
+    "why": "Generic scheme-theoretic characterization used after the geometric-cover route supplies properness and finite fibres."
+   }
+  ]
+ },
+ "tool_uses": [
+  "thm-pqf-finite-iff-proper-finite-fibres"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-NM-455d44a58",
+  "group": "NM",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NM-455d44a58 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, every cited statement, Bhatt-Scholze Def 7.3.1(3) on p.66 and the full proof of Lemma 7.4.10 on p.71, the blueprint chain to lem-a1-affine-hc0, and the citer lem-a1-normal-locally-constant-finite-section. The item statement is unchanged and correct. I tested the empty Z, infinitely many components, and an open immersion that fails the lifting property. Steps 1-5 check out: step 3 uses Tag 02OG via thm-pqf-finite-iff-proper-finite-fibres, which I accept as a generic tool use. Step 4 uses the etale open-image and finite closed-image Mathlib leaves. Step 5 is genuinely elementary. Both children are true. For the clopen child: Z is locally Noetherian and normal, so it is geometrically unibranch and its components are clopen. For the qc-proper child: C is integral and separated; ZMT gives an open immersion into the normalization of X in kappa(xi); existence of lifts makes it surjective, so C is finite. Neither child is a duplicate: lem-fin-etale-normal-components and lem-trf-* need a Noetherian or affine source. Neither restates the item, and there is no cycle. Batch-5 check: def-trf-valuation-ring is a pure general definition that the item's base statement already cited. It is neither assumption nor part of their proofs, so it is accepted. Fixes: (1) clopen child: cite def-sc-ring-strict-henselization and def-weil-irreducible-components, define locally topologically Noetherian and connected component inline. (2) qc-proper child: it presupposed C open, so C is now assumed to be an open connected component (step 1 provides that); cite def-weil-finite-type-morphism, def-weil-proper-morphism and pqf-def-quasifinite; item step 2 text adjusted. (3) The item split_report.summary wrongly claimed a third child for the image argument; corrected.; 3 file(s) fixed by the reviewer"
  }
 }
