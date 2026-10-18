@@ -1,0 +1,152 @@
+{
+ "id": "lem-weil-pbc-ringed-cech-hom-coefficient-action",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-completed-pullback",
+   "place": "Detailed form, comparison with Stacks 099N: flat ringed coefficient equivalence, Tag 099I, construction of E prime and final displayed composite, with the omitted evaluation compatibility expanded.",
+   "via": [
+    "lem-weil-pbc-flat-ringed-ideal-complete-equivalence",
+    "lem-weil-pbc-constant-completion-equivalence"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Coefficient action and evaluation on derived Hom from a B-complex",
+ "statement": "Let C be a small site, phi:R -> B a morphism of commutative ring sheaves, and r:D(B) -> D(R) the exact derived restriction functor [def-pc-sheaf-restrict-scalars, def-weil-abstract-derived-category]. Let epsilon:K -> R[0] and epsilonB:KB -> B[0] be arbitrary augmented complexes, with a quasi-isomorphism u:K -> r(KB) commuting with augmentations and the coefficient map. There exist a functor F:D(R) -> D(B), a natural isomorphism theta:rF -> RHom_R(K,-) [def-pur-derived-internal-hom], and a natural transformation beta:id_D(B) -> Fr, such that for every M in D(B), r(beta_M) followed by theta_(rM) equals the canonical augmentation-induced unit rM -> RHom_R(K,rM) [def-weil-pbc-ringed-completion-unit]. There are no flatness, ideal, quotient, or completeness hypotheses.",
+ "source": {
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 099I, construction of E prime and final displayed composite, with the omitted evaluation compatibility expanded."
+ },
+ "stmt_deps": [
+  "def-pc-sheaf-restrict-scalars",
+  "def-weil-abstract-derived-category",
+  "def-pur-derived-internal-hom",
+  "def-weil-pbc-ringed-completion-unit"
+ ],
+ "proof": [
+  {
+   "text": "For an R-complex E use its functorial K-injective replacement I(E). Give Hom_R(rKB,I(E)) the B-action (b h)(k)=h(bk). The action laws follow from commutativity and the B-module axioms on KB. The restrictions commute with this action. The Hom differential is B-linear because the differential of KB is B-linear. Maps in E are induced by the replacement functor and are B-linear.",
+   "uses": [
+    "def-pur-derived-internal-hom",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Naturality of replacement and two-out-of-three imply that a quasi-isomorphism E -> E′ induces a quasi-isomorphism between the K-injective replacements. Hom invariance makes the resulting Hom map a quasi-isomorphism. Restriction has unchanged additive cohomology, so it is also a quasi-isomorphism over B. Localize to construct F. Forgetting the action identifies rF with RHom_R(rKB,-); Hom invariance and the quasi-isomorphism u give the natural isomorphism theta by precomposition.",
+   "uses": [
+    "lem-pur-rhom-well-defined",
+    "def-weil-abstract-derived-category",
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a B-complex M the homogeneous evaluation m -> (k -> q(epsilonB(k)m)), zero on k outside degree zero, is B-linear under this action. Its chain-map equation follows from epsilonB d=0 and the chain-map equation for q; the degree minus one term vanishes by epsilonB d=0. Functoriality and localization make these maps beta natural in derived morphisms. Precomposing with u changes evaluation to x -> q(phi(epsilon(x))m)=epsilon(x)q(m), exactly the cochain for the canonical completion unit, with its evaluation-at-one identification. This proves the required equation. Zero complexes satisfy the same formulas; no boundedness or completeness assumption occurs.",
+   "uses": [
+    "def-weil-pbc-ringed-completion-unit",
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pur-derived-internal-hom",
+  "def-weil-sheaf-of-modules-category",
+  "lem-pur-rhom-well-defined",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-ringed-completion-unit"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 099I, construction of E prime and final displayed composite, with the omitted evaluation compatibility expanded."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived internal Hom from a complex of B-modules into R-modules has B action by precomposition and a natural evaluation map",
+   "results": "CategoryTheory.ihom.ev (Mathlib.CategoryTheory.Monoidal.Closed.Basic); ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.evalAt (Mathlib.Algebra.Category.ModuleCat.ChangeOfRings); ModuleCat.ihom_map_apply (Mathlib.Algebra.Category.ModuleCat.Monoidal.Closed). These are ordinary or abstract internal Hom, not the derived ringed-site construction.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived internal Hom from a restricted B complex has B action by precomposition and natural evaluation from B modules",
+   "results": "ModuleCat.RestrictionCoextensionAdj.HomEquiv.fromRestriction; ModuleCat.RestrictionCoextensionAdj.HomEquiv.fromRestriction_hom_apply_apply; ModuleCat.RestrictionCoextensionAdj.app′ (Mathlib/Algebra/Category/ModuleCat/ChangeOfRings). These supply the ordinary module formula but not internal Hom of sheaves or its derived localization.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "extended.*Cech|Cech.*quasiIso|[Dd]erived.*[Cc]oefficient.*[Aa]ction",
+   "results": "0 hits in Mathlib.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FlatRingedIdealCompleteEquivalence",
+  "date": "2026-10-18",
+  "group": "M1"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RingedCechHomCoefficientAction",
+  "file": "lean/Sheaf/Paper/RingedCechHomCoefficientAction.lean",
+  "declaration": "CategoryTheory.ringed_cech_hom_coefficient_action",
+  "statement": "theorem ringed_cech_hom_coefficient_action\n    {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}\n    {R B : Sheaf J CommRingCat.{u}} (φ : R ⟶ B)\n    [HasDerivedCategory.{w} (ringedSiteModules.{u} (siteModuleRings R))]\n    [HasDerivedCategory.{w} (ringedSiteModules.{u} (siteModuleRings B))]\n    [PreservesFiniteLimits (SheafOfModules.restrictScalars.{u}\n      ((sheafCompose J (forget₂ CommRingCat RingCat)).map φ))]\n    [PreservesFiniteColimits (SheafOfModules.restrictScalars.{u}\n      ((sheafCompose J (forget₂ CommRingCat RingCat)).map φ))]\n    (K : ringedSiteComplex R) (ε : K ⟶ ringedSiteRingComplex R)\n    (KB : ringedSiteComplex B) (εB : KB ⟶ ringedSiteRingComplex B)\n    (u : K ⟶ ((SheafOfModules.restrictScalars.{u}\n      ((sheafCompose J (forget₂ CommRingCat RingCat)).map φ)).mapHomologicalComplex\n        (ComplexShape.up ℤ)).obj KB)\n    (hu : QuasiIso u)\n    (hε : u ≫ ((SheafOfModules.restrictScalars.{u}\n      ((sheafCompose J (forget₂ CommRingCat RingCat)).map φ)).mapHomologicalComplex\n        (ComplexShape.up ℤ)).map εB = ε ≫ siteRingComplexScalarUnit φ) :\n    let r : ringedSiteDerived B ⥤ ringedSiteDerived R :=\n      (SheafOfModules.restrictScalars.{u}\n        ((sheafCompose J (forget₂ CommRingCat RingCat)).map φ)).mapDerivedCategory\n    ∃ (F : ringedSiteDerived R ⥤ ringedSiteDerived B)\n      (θ : F ⋙ r ≅ ringedCechCompletionFunctor R K)\n      (β : 𝟭 (ringedSiteDerived B) ⟶ r ⋙ F),\n      ∀ M : ringedSiteDerived B,\n        r.map (β.app M) ≫ θ.hom.app (r.obj M) =\n          ringedCechCompletionUnit R K ε (r.obj M)",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-18"
+ },
+ "merged_into": null,
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-weil-pbc-ringed-cech-hom-coefficient-action",
+  "worker": "stage3",
+  "summary": "Isolated the indicated proper part of the source argument with its precise Lean data and compatibility; all remaining proof work is described in the module docstring.",
+  "blueprint": "Detailed form, comparison with Stacks 099N: flat ringed coefficient equivalence, Tag 099I, construction of E prime and final displayed composite, with the omitted evaluation compatibility expanded.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-rhom-well-defined",
+    "why": "Generic invariance of Hom with K-injective target supplies localization of the explicit coefficient action and inversion of precomposition with u; this is independent of the proper-base-change unit."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261018T071202-L-1671418",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261018T071202-L-1671418",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,185 @@
+{
+ "id": "lem-weil-pbc-flat-ringed-cech-base-change",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-completed-pullback",
+   "place": "Detailed form, comparison with Stacks 099N: flat ringed coefficient equivalence, Tags 099H and 099I, the termwise scalar-extension comparison in the construction of K prime.",
+   "via": [
+    "lem-weil-pbc-flat-ringed-ideal-complete-equivalence",
+    "lem-weil-pbc-constant-completion-equivalence"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Quasi-isomorphism of the concrete scalar-extension unit on a ringed Cech model",
+ "statement": "Let C be a small site, phi:R -> B a morphism of commutative ring sheaves, and I a locally finite type ideal subsheaf [def-weil-pbc-ringed-site-ideal, def-weil-pbc-module-finite-type-presentation]. Assume B is R-flat [def-pc-flat-sheaf-modules] and R/I -> B/IB is an isomorphism. Let epsilon:K -> R[0] have the local extended Cech description [def-weil-pbc-local-extended-cech-description]. Form scalar extension by the actual degreewise sheafified sectionwise tensor B tensor_R K [def-pur-sheaf-tensor-product], with its unit u:K -> r(B tensor_R K) given by x -> 1 tensor x; r is restriction of scalars [def-pc-sheaf-restrict-scalars]. Then this specified unit is a quasi-isomorphism. The module also constructs its augmentation to B[0] and proves compatibility with epsilon and phi on complexes. No derived completeness of any object or equivalence of categories is assumed.",
+ "source": {
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tags 099H and 099I, the termwise scalar-extension comparison in the construction of K prime."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-ringed-site-ideal",
+  "def-pc-flat-sheaf-modules",
+  "def-weil-pbc-local-extended-cech-description",
+  "def-pc-sheaf-restrict-scalars",
+  "def-weil-pbc-module-finite-type-presentation",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "The module constructs the scalar-extension functor explicitly by sheafifying the sectionwise tensors and their maps. The unit sends x to 1 tensor x followed by sheafification, and its naturality is proved from sheafification naturality. Tensor adjunction and the sheafification hom equivalence construct the lifted coefficient map; composing with the unit recovers the original linear map. Apply this to phi on the rank-one module and then to complexes concentrated in degree zero, obtaining the augmentation and its proved compatibility. Thus all data below are these specified constructions, not arbitrary witnesses.",
+   "uses": [
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Flatness makes tensoring exact: apply it to the kernel/image short exact sequences of each differential. It therefore preserves quasi-isomorphisms and transports the given derived local description of K.",
+   "uses": [
+    "def-pc-flat-sheaf-modules",
+    "def-weil-pbc-local-extended-cech-description"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restrict to a slice with a finite generating list for I. Restriction is exact and preserves quotients, and flatness restricts. Identify tensor of localization with localization of B by b tensor (a/f^n) -> b phi(a)/phi(f)^n and its inverse b/phi(f)^n -> b tensor (1/f^n). These commute with differentials and augmentations; finite products are finite sums. Apply flat extended Cech comparison to deduce that u is a quasi-isomorphism on this slice.",
+   "uses": [
+    "lem-weil-pbc-site-restriction-exact",
+    "lem-weil-pbc-slice-restriction-flat",
+    "lem-weil-pbc-flat-extended-cech-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Local finite generation gives a covering by these generating slices. The kernel and cokernel cohomology sheaves vanish on that cover and hence globally, so u is a quasi-isomorphism. The augmentation equation already holds on complexes. For I zero the empty tensor Cech model is the ring complex, and the quotient hypothesis makes the coefficient map an isomorphism; for I the unit ideal both models are contractible.",
+   "uses": [
+    "def-weil-pbc-module-finite-type-presentation"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-tensor-product",
+  "def-pc-flat-sheaf-modules",
+  "def-weil-pbc-local-extended-cech-description",
+  "lem-weil-pbc-site-restriction-exact",
+  "lem-weil-pbc-slice-restriction-flat",
+  "lem-weil-pbc-flat-extended-cech-comparison",
+  "def-weil-pbc-module-finite-type-presentation"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tags 099H and 099I, the termwise scalar-extension comparison in the construction of K prime."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Quasi-isomorphism of extended Cech complexes under flat scalar extension isomorphic modulo a finitely generated ideal",
+   "results": "QuasiIso and quasiIso_comp (Mathlib.Algebra.Homology.QuasiIso); HomologicalComplex.quasiIsoAt_extendMap_iff (Mathlib.Algebra.Homology.Embedding.ExtendHomology). Generic quasi-isomorphism facts only.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flat extension of sheaves of rings isomorphic modulo finitely generated ideal gives quasi-isomorphism on extended Cech complex",
+   "results": "SheafOfModules.QuasicoherentData.IsFinitePresentation (Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent); Module.flat_of_isLocalized_span (Mathlib/RingTheory/Flat/Localization); CochainComplex.cm5b.instQuasiIsoIntP (Mathlib/Algebra/Homology/Factorizations/CM5b). No matching Cech base-change statement.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "extended.*Cech|Cech.*quasiIso|[Dd]erived.*[Cc]oefficient.*[Aa]ction",
+   "results": "0 hits in Mathlib.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FlatRingedIdealCompleteEquivalence",
+  "date": "2026-10-18",
+  "group": "M1"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FlatRingedCechBaseChange",
+  "file": "lean/Sheaf/Paper/FlatRingedCechBaseChange.lean",
+  "declaration": "CategoryTheory.flat_ringed_cech_base_change_unit_quasiIso",
+  "statement": "theorem flat_ringed_cech_base_change_unit_quasiIso\n    {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}\n    {R B : Sheaf J CommRingCat.{u}} (φ : R ⟶ B) (I : RingedSiteIdeal R)\n    [HasDerivedCategory.{w} (ringedSiteModules.{u} (siteModuleRings R))]\n    [∀ U : C, HasDerivedCategory.{w}\n      (ringedSiteModules.{u} (siteModuleRings (R.over U)))]\n    (hI : SheafOfModules.IsFiniteType.{u, u, u} I.module)\n    (hflat : SheafOfModules.IsFlat\n      ((SheafOfModules.restrictScalars.{u}\n        ((sheafCompose J (forget₂ CommRingCat RingCat)).map φ)).obj\n          (SheafOfModules.unit (siteModuleRings B))))\n    (hquot : I.IsQuotientIso φ)\n    (K : ringedSiteComplex R) (ε : K ⟶ ringedSiteRingComplex R)\n    (hK : HasLocalExtendedCechDescription R I.module I.inclusion K ε) :\n    QuasiIso (siteExtendScalarsComplexUnit φ K)",
+  "branch": "sheaf-dag",
+  "by": "M1",
+  "date": "2026-10-18",
+  "declarations": [
+   "CategoryTheory.siteExtendScalarsPresheafMap",
+   "CategoryTheory.siteExtendScalars",
+   "CategoryTheory.siteExtendScalars_additive",
+   "CategoryTheory.siteExtendScalarsPresheafUnit",
+   "CategoryTheory.siteScalarSheafificationUnit",
+   "CategoryTheory.siteExtendScalarsUnit",
+   "CategoryTheory.siteExtendScalarsPresheafLift",
+   "CategoryTheory.siteExtendScalarsLift",
+   "CategoryTheory.siteExtendScalarsUnit_naturality",
+   "CategoryTheory.siteExtendScalarsLift_unit",
+   "CategoryTheory.siteExtendScalarsComplexUnit",
+   "CategoryTheory.siteExtendScalarsComplexUnit_naturality",
+   "CategoryTheory.siteExtendScalarsRingCounit",
+   "CategoryTheory.siteRingComplexMap",
+   "CategoryTheory.siteExtendScalarsRingCounit_unit",
+   "CategoryTheory.siteExtendScalarsAugmentation",
+   "CategoryTheory.siteExtendScalarsAugmentation_unit",
+   "CategoryTheory.siteRingScalarUnit",
+   "CategoryTheory.siteRingComplexScalarUnit",
+   "CategoryTheory.flat_ringed_cech_base_change_unit_quasiIso",
+   "CategoryTheory.flat_ringed_cech_base_change"
+  ]
+ },
+ "merged_into": null,
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-weil-pbc-flat-ringed-cech-base-change",
+  "worker": "stage3",
+  "summary": "Constructed scalar extension, its additive functor structure, units, tensor-adjoint lifting, and the augmented complex compatibility explicitly. The remaining strictly smaller assertion is quasi-isomorphy of the specified scalar-extension unit; the augmented-model existence theorem is proved from it.",
+  "blueprint": "Detailed form, comparison with Stacks 099N: flat ringed coefficient equivalence, Tags 099H and 099I, the termwise scalar-extension comparison in the construction of K prime.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-site-restriction-exact",
+    "why": "Generic exact slice restriction detects the quasi-isomorphism on generating slices and preserves the quotient hypothesis; no step of this unit supplies this site-theoretic fact."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261018T071202-L-1671418",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261018T071202-L-1671418",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
