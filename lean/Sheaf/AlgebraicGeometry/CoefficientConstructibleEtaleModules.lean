@@ -73,7 +73,23 @@ Compose these three continuous functors. -/
     (coefficientEtaleBaseChange.{u, v} f).IsContinuous
       (smallModelComparisonEtaleTopology.{u, v} Y)
       (smallModelComparisonEtaleTopology.{u, v} X) := by
-  sorry
+  let : (AsSmall.up : X.Etale ⥤ smallModelComparisonEtaleSite.{u, v} X).IsContinuous
+      X.smallEtaleTopology (smallModelComparisonEtaleTopology.{u, v} X) :=
+    inferInstanceAs
+      ((AsSmall.equiv.{u, u + 1, max v (u + 1)} (C := X.Etale)).functor.IsContinuous
+        X.smallEtaleTopology
+        ((AsSmall.equiv.{u, u + 1, max v (u + 1)} (C := X.Etale)).inverse.inducedTopology
+          X.smallEtaleTopology))
+  let : (MorphismProperty.Over.pullback @Etale ⊤ f).IsContinuous
+      Y.smallEtaleTopology X.smallEtaleTopology :=
+    Scheme.isContinuous_overPullback @Etale @Etale le_rfl f
+  have := Functor.isContinuous_comp (MorphismProperty.Over.pullback @Etale ⊤ f)
+    (AsSmall.up : X.Etale ⥤ smallModelComparisonEtaleSite.{u, v} X)
+    Y.smallEtaleTopology X.smallEtaleTopology (smallModelComparisonEtaleTopology.{u, v} X)
+  exact Functor.isContinuous_comp AsSmall.down
+    (MorphismProperty.Over.pullback @Etale ⊤ f ⋙ AsSmall.up)
+    (smallModelComparisonEtaleTopology.{u, v} Y) Y.smallEtaleTopology
+    (smallModelComparisonEtaleTopology.{u, v} X)
 
 /-- The same inverse image, constructed by Kan extension and sheafification.
 Source: Stacks Tag 03D2 (blueprint: def-pe-etale-constructible-module). -/
