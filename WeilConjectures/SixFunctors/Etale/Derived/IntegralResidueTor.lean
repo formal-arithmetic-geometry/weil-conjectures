@@ -153,6 +153,25 @@ theorem torAmplitudeIn_of_isDerivedBaseChange {X : Scheme.{u}} {K : 𝐃(X, Λ)}
     ((Sheaf.restrictScalars X.smallEtaleTopology
       (Ideal.Quotient.mk J')).homologyConcentratedIn_mapDerivedCategory_obj hN)
 
+/-- Blueprint `lem-coef-integral-residue-tor`: The residue reduction controls integral Tor
+amplitude, second half: `Dᵇc(X, 𝒪_E) = Dᵇctf(X, 𝒪_E)`.
+
+If all the reductions `K ⊗ᴸ_Λ Λ ⧸ Iᵐ⁺¹` of `K ∈ D(X_ét, Λ)` have cohomology in one interval
+`[a, b]`, which is the boundedness condition of an object of `Dᵇc(X, 𝒪_E)`, then every
+derived base change `K_n = K ⊗ᴸ_Λ A_n` has Tor amplitude in the same interval `[a, b]` over
+`A_n`: this is the finite Tor amplitude condition defining `Dᵇctf(X, 𝒪_E)`. Only the residue
+reduction `m = 0` is used (`AlgebraicGeometry.Etale.torAmplitudeIn_of_isDerivedBaseChange`). -/
+theorem torAmplitudeIn_of_isDerivedBaseChange_of_forall {X : Scheme.{u}} {K : 𝐃(X, Λ)}
+    {a b : ℤ}
+    (hK : ∀ m : ℕ, _root_.DerivedCategory.homologyConcentratedIn a b
+      ((reductionModIdeal Λ X (I ^ (m + 1))).obj K))
+    {Kn : 𝐃(X, Λ ⧸ I ^ (n + 1))}
+    {η : K ⟶ (Sheaf.derivedRestrictScalars X.smallEtaleTopology
+      (Ideal.Quotient.mk (I ^ (n + 1)))).obj Kn}
+    (hη : Sheaf.IsDerivedBaseChange η) :
+    DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} (Λ ⧸ I ^ (n + 1))) X a b Kn :=
+  torAmplitudeIn_of_isDerivedBaseChange I n (by simpa only [zero_add, pow_one] using hK 0) hη
+
 end Etale
 
 end AlgebraicGeometry

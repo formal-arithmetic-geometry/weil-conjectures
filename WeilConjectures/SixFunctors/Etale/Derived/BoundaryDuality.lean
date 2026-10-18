@@ -182,7 +182,11 @@ and `Y` separated of finite type over `k`, the boundary duality input
 `AlgebraicGeometry.Etale.HasBoundaryDuality` holds: its first clause is the preservation
 `AlgebraicGeometry.Etale.constructibleFiniteTor_verdierDual`, its second the boundary exchange
 `AlgebraicGeometry.Etale.nonempty_iso_leftDerivedUpperStar_verdierDual`, on the pieces `T`,
-which are again separated of finite type over `k`. -/
+which are again separated of finite type over `k`.
+
+Blueprint `rem-ptr-weil-exceptional-adjoint-admissibility-9`: this geometric proof of boundary
+duality is separate from the exceptional preservation clause of the admissibility datum, and it
+is complete at finite coefficients. -/
 theorem hasBoundaryDuality [IsAlgClosed k] {Y : Scheme.{u}} (aY : Y ⟶ Spec (.of k))
     [IsSeparated aY] [LocallyOfFiniteType aY] [QuasiCompact aY] :
     HasBoundaryDuality Λ aY := by
