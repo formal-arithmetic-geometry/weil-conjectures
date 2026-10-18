@@ -1,0 +1,106 @@
+{
+ "id": "def-weil-pbc-augmented-module-complex-glue-data",
+ "kind": "definition",
+ "title": "Strict descent data for augmented module complexes",
+ "statement": "Let $(C,J,R)$ be a small ringed site, $U:A\\to C$ a family, $B$ an $R$-module cochain complex, $L_i$ complexes on $C/U_i$, and $\\alpha_i:L_i\\to B|_{U_i}$ chain maps [def-weil-sheaf-of-modules-category]. Strict augmented descent data consist of $R(W)$-linear equivalences $L_i^n(W\\to U_i)\\simeq L_j^n(W\\to U_j)$ for every common test span, natural under every further test map, satisfying the triple cocycle and commuting with differentials and $\\alpha_i$. This is the complex version of the all-test-span formulation [def-weil-pbc-site-module-compatible-tuples]; it assumes no fibre products.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 04TR, lemma-glue-sheaves, degreewise with augmentations"
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-site-module-compatible-tuples"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 04TR, lemma-glue-sheaves, degreewise with augmentations"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Glue augmented cochain complexes of sheaves of modules along a cover with compatible transition isomorphisms; locally finite generating families yield equal generated section ideals; sheafify a functorial complex indexed by finitely generated ideals",
+   "results": "Matches: SheafOfModules.LocalGeneratorsData.I, SheafOfModules.LocalGeneratorsData.X, SheafOfModules.LocalGeneratorsData.generators, SheafOfModules.GeneratingSections.I, SheafOfModules.GeneratingSections, SheafOfModules.LocalGeneratorsData, SheafOfModules.localGeneratorsDataOfIsFiniteType, SheafOfModules.QuasicoherentData.localGeneratorsData_I",
+   "date": "2026-10-18",
+   "verdict": "No exact match. The hits provide generic interfaces rather than this statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, CochainComplex",
+   "results": "No matches.",
+   "date": "2026-10-18",
+   "verdict": "No exact match. The hits provide generic interfaces rather than this statement."
+  },
+  {
+   "tool": "grep",
+   "query": "AugmentedComplexGlueData|augmentedComplex.*glue|glue.*[Cc]omplex",
+   "results": "No matches.",
+   "date": "2026-10-18",
+   "verdict": "No exact match. The hits provide generic interfaces rather than this statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Glue augmented cochain complexes of sheaves of modules along a cover with coherent linear transitions.",
+   "results": "Matches: CochainComplex.augment, AlgebraicGeometry.LocallyRingedSpace.GlueData.noConfusion, AlgebraicGeometry.Scheme.Cover.gluedCover, AlgebraicGeometry.LocallyRingedSpace.GlueData, TopCat.Presheaf.IsSheaf.isSheafUniqueGluing, TopCat.GlueData.mk', TopCat.Presheaf.IsGluing, TopCat.Sheaf.existsUnique_gluing",
+   "date": "2026-10-18",
+   "verdict": "No exact match. The hits provide generic interfaces rather than this statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ExtendedCechCompletionModel",
+  "date": "2026-10-18",
+  "group": "F4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-extended-cech-completion-model",
+   "place": "Tag 099E: explicit finite generating slices, independence of the section ideal, and augmented gluing.",
+   "via": [
+    "lem-weil-pbc-extended-cech-global-model"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.AugmentedComplexGluing",
+  "file": "lean/Sheaf/CategoryTheory/AugmentedComplexGluing.lean",
+  "declaration": "SheafOfModules.AugmentedComplexGlueData",
+  "statement": "structure AugmentedComplexGlueData (R : Sheaf J RingCat.{u}) {A : Type u} (U : A → C)\n    [∀ i, (overFunctor R (U i)).PreservesZeroMorphisms]\n    (B : CochainComplex (SheafOfModules.{u} R) ℤ)\n    (localComplex : ∀ i : A, CochainComplex (SheafOfModules.{u} (R.over (U i))) ℤ)\n    (localAugmentation : ∀ i : A,\n      localComplex i ⟶ ((overFunctor R (U i)).mapHomologicalComplex (.up ℤ)).obj B)",
+  "branch": "sheaf-dag",
+  "by": "F4",
+  "date": "2026-10-18",
+  "declarations": [
+   "SheafOfModules.AugmentedComplexGlueData",
+   "SheafOfModules.augmentedComplexGlueData_over_preservesZeroMorphisms"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261018T110337-L-342298",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261018T110337-L-342298",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,121 @@
+{
+ "id": "lem-weil-pbc-functorial-ring-complex-descent-data",
+ "kind": "statement",
+ "title": "Strict descent for all finite ideal generating slices",
+ "statement": "Let $(C,J,O)$ be a small ringed site, $I$ a module sheaf, $\\iota:I\\to O$ a monomorphism, and $K,\\epsilon,m$ a specified strictly functorial augmented ring-complex family [def-weil-pbc-ring-complex-cech-data]. Index by all specified finite generating slices [def-weil-pbc-ringed-ideal-generating-index]. Their explicit sheafified ring-family models [def-weil-pbc-functorial-ring-complex-sheaf], augmented to the restriction of $O[0]$ [def-weil-pbc-ringed-derived-restriction], admit strict descent data [def-weil-pbc-augmented-module-complex-glue-data]. No finite-type assumption or derived-category instance is required.",
+ "source": {
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 099E, lemma-global-extended-cech-complex"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-ringed-ideal-generating-index",
+  "def-weil-pbc-ring-complex-cech-data",
+  "def-weil-pbc-functorial-ring-complex-sheaf",
+  "def-weil-pbc-augmented-module-complex-glue-data",
+  "def-weil-pbc-ringed-derived-restriction"
+ ],
+ "proof": [
+  {
+   "text": "For every pair of specified generating slices and common test span, the local equality theorem gives a covering on which their extended section ideals are equal. Supply precisely these coverings to the general ring-family ideal descent theorem.",
+   "uses": [
+    "lem-weil-pbc-ringed-generating-lists-local-equality",
+    "lem-weil-pbc-functorial-ring-complex-ideal-descent"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ringed-generating-lists-local-equality",
+  "lem-weil-pbc-functorial-ring-complex-ideal-descent"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 099E, lemma-global-extended-cech-complex"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Sheafifications of functorial complexes indexed by finitely generated section ideals have canonical cocycle transition isomorphisms when the ideals generate the same ideal subsheaf",
+   "results": "Matches: SheafOfModules.Presentation.map_π_eq, SheafOfModules.QuasicoherentData.localGeneratorsData_I, SheafOfModules.LocalGeneratorsData.mk.inj, PresheafOfModules.sheafificationHomEquiv, PresheafOfModules.toSheaf_map_sheafificationHomEquiv_symm, PresheafOfModules.toPresheaf_map_sheafificationHomEquiv, PresheafOfModules.sheafifyHomEquiv', PresheafOfModules.toPresheaf_map_sheafificationHomEquiv_def",
+   "date": "2026-10-18",
+   "verdict": "No exact match. The hits provide generic interfaces rather than this statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "Ideal.span, SheafOfModules",
+   "results": "No matches.",
+   "date": "2026-10-18",
+   "verdict": "No exact match. The hits provide generic interfaces rather than this statement."
+  },
+  {
+   "tool": "grep",
+   "query": "ideal.*(descent|sheafif)|[Ss]heafif.*ideal",
+   "results": "No matches.",
+   "date": "2026-10-18",
+   "verdict": "No exact match. The hits provide generic interfaces rather than this statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Two finite generating lists of the same ideal sheaf generate equal section ideals locally on each common test span.",
+   "results": "Matches: SheafOfModules.GeneratingSections.IsFiniteType, SheafOfModules.LocalGeneratorsData.mk.injEq, AlgebraicGeometry.IsAffineOpen.ideal_ext_iff, AlgebraicGeometry.Scheme.IdealSheafData.ext_iff, SheafOfModules.LocalGeneratorsData.generators, SheafOfModules.Presentation.mk.injEq, SheafOfModules.GeneratingSections.mk, SheafOfModules.LocalGeneratorsData.mk.inj",
+   "date": "2026-10-18",
+   "verdict": "No exact match. The hits provide generic interfaces rather than this statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ExtendedCechCompletionModel",
+  "date": "2026-10-18",
+  "group": "F4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-extended-cech-completion-model",
+   "place": "Tag 099E: explicit finite generating slices, independence of the section ideal, and augmented gluing.",
+   "via": [
+    "lem-weil-pbc-extended-cech-global-model"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FunctorialRingComplexDescentData",
+  "file": "lean/Sheaf/Paper/FunctorialRingComplexDescentData.lean",
+  "declaration": "CategoryTheory.exists_ringFamily_descentData",
+  "statement": "theorem exists_ringFamily_descentData\n    {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}\n    (O : Sheaf J CommRingCat.{u})\n    (I : ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O))\n    (ι : I ⟶ SheafOfModules.unit ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O))\n    [Mono ι]\n    (K : RingComplexFamily.{u}) (ε : RingComplexAugmentations K)\n    (m : RingComplexMaps K) (hm : RingComplexFunctorial K ε m) :\n    Nonempty (SheafOfModules.AugmentedComplexGlueData\n      ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O)\n      (fun p : RingedIdealGeneratingIndex O I ι ↦ p.U) (ringedSiteRingComplex O)\n      (fun p ↦ (ringFamilySliceModel O K ε m hm I ι p).1)\n      (fun p ↦ (ringFamilySliceModel O K ε m hm I ι p).2 ≫\n        (ringedRestrictionRingComplexIso O p.U).inv))",
+  "branch": "sheaf-dag",
+  "by": "F4",
+  "date": "2026-10-18",
+  "declarations": [
+   "CategoryTheory.ringFamilySliceModel",
+   "CategoryTheory.exists_ringFamily_descentData"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261018T110337-L-342298",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261018T110337-L-342298",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,133 @@
+{
+ "id": "lem-weil-pbc-functorial-ring-complex-cech-comparison",
+ "kind": "statement",
+ "title": "Derived Cech comparison for the sheafified Godement ring model",
+ "statement": "Let $(C,J,O)$ be a small ringed site with the derived category of $O$-module sheaves [def-weil-sheaf-of-modules-category], and let $m$ make the concrete Godement family [def-weil-pbc-ring-complex-godement-construction] strictly functorial [def-weil-pbc-ring-complex-cech-data]. For any finite global section list $f$, the extended Čech complex [def-weil-pbc-ringed-extended-cech] is isomorphic in the derived category to the explicit sheafified Godement-family model [def-weil-pbc-functorial-ring-complex-sheaf]. The isomorphism commutes with their maps to $O[0]$. This concerns one global list and contains no ideal-sheaf gluing or finite-type ideal hypothesis.",
+ "source": {
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tags 099D(c),(d), lemma-all-rings, and 099E, lemma-global-extended-cech-complex, final paragraph"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-ring-complex-godement-construction",
+  "def-weil-pbc-ring-complex-cech-data",
+  "def-weil-pbc-functorial-ring-complex-sheaf",
+  "def-weil-pbc-ringed-extended-cech",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [
+  {
+   "text": "The Godement ring model has its augmented ordered localization Cech model. Resolve it over a section ring by a K-flat complex. The normalized semilinear maps to every restriction ring extend to scalar-extension chain maps preserving the augmentation. The augmented Cech base-change theorem makes these maps quasi-isomorphisms.",
+   "uses": [
+    "lem-weil-pbc-ring-complex-godement-cech",
+    "lem-weil-pbc-ring-complex-cech-base-change",
+    "def-weil-pbc-ring-complex-semilinear-extension",
+    "lem-pc-kflat-resolution"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Sheafify degreewise, preserving quasi-isomorphisms by exact module sheafification. Fraction base change identifies the localization terms and maps with the finite ordered tensor of the one-element localization complexes; the alternating signs are the tensor differential signs. Both maps preserve the augmented ring term. Invert the quasi-isomorphisms in the derived category.",
+   "uses": [
+    "lem-weil-pbc-ringed-site-module-sheafification-exact",
+    "def-weil-pbc-ringed-extended-cech",
+    "def-weil-pbc-functorial-ring-complex-sheaf"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ring-complex-godement-cech",
+  "lem-weil-pbc-ring-complex-cech-base-change",
+  "def-weil-pbc-ring-complex-semilinear-extension",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-ringed-site-module-sheafification-exact",
+  "def-weil-pbc-ringed-extended-cech",
+  "def-weil-pbc-functorial-ring-complex-sheaf"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tags 099D(c),(d), lemma-all-rings, and 099E, lemma-global-extended-cech-complex, final paragraph"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The sheafification of a strictly functorial ring model of the extended Cech complex agrees in the derived category with the tensor product of one-element localization complexes",
+   "results": "Matches: SheafOfModules.mapFree, LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat, SheafOfModules.Presentation.map, PresheafOfModules.sheafificationCompToSheaf, localCohomology.diagram, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₁, CategoryTheory.Sheaf.H, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf",
+   "date": "2026-10-18",
+   "verdict": "No exact match. The hits provide generic interfaces rather than this statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex, Localization.Away",
+   "results": "No matches.",
+   "date": "2026-10-18",
+   "verdict": "No exact match. The hits provide generic interfaces rather than this statement."
+  },
+  {
+   "tool": "grep",
+   "query": "[Cc]ech.*[Ll]ocaliz|[Ll]ocaliz.*[Cc]ech",
+   "results": "No matches.",
+   "date": "2026-10-18",
+   "verdict": "No exact match. The hits provide generic interfaces rather than this statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The sheafification of a functorial Godement ring model for a finite list of sections is the extended Cech complex in the derived category.",
+   "results": "Matches: CategoryTheory.sheafification, CategoryTheory.sheafify, TopCat.Presheaf.sheafify, CategoryTheory.GrothendieckTopology.sheafify_isSheaf, CategoryTheory.GrothendieckTopology.sheafify, CategoryTheory.Sheaf.isColimitSheafifyCocone, CategoryTheory.plusPlusSheaf, CategoryTheory.presheafToSheaf",
+   "date": "2026-10-18",
+   "verdict": "No exact match. The hits provide generic interfaces rather than this statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ExtendedCechCompletionModel",
+  "date": "2026-10-18",
+  "group": "F4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-extended-cech-completion-model",
+   "place": "Tag 099E: explicit finite generating slices, independence of the section ideal, and augmented gluing.",
+   "via": [
+    "lem-weil-pbc-extended-cech-global-model"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FunctorialRingComplexCechComparison",
+  "file": "lean/Sheaf/Paper/FunctorialRingComplexCechComparison.lean",
+  "declaration": "CategoryTheory.ringFamilySheafModel_cech",
+  "statement": "theorem ringFamilySheafModel_cech\n    {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}\n    (O : Sheaf J CommRingCat.{u})\n    [HasDerivedCategory.{w} (ringedSiteModules.{u}\n      ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O))]\n    (m : RingComplexMaps (fun A I ↦ ringComplexGodement A I.val))\n    (hm : RingComplexFunctorial (fun A I ↦ ringComplexGodement A I.val)\n      (fun A I ↦ ringComplexGodementAugmentation A I.val) m)\n    (r : ℕ) (f : Fin r → (O.obj ⋙ forget CommRingCat).sections) :\n    ∃ e : DerivedCategory.Q.obj (ringedExtendedCech O r f).1 ≅\n        DerivedCategory.Q.obj\n          (ringFamilySheafModel O (fun A I ↦ ringComplexGodement A I.val)\n            (fun A I ↦ ringComplexGodementAugmentation A I.val) m hm r f).1,\n      e.hom ≫ DerivedCategory.Q.map\n          (ringFamilySheafModel O (fun A I ↦ ringComplexGodement A I.val)\n            (fun A I ↦ ringComplexGodementAugmentation A I.val) m hm r f).2 =\n        DerivedCategory.Q.map (ringedExtendedCech O r f).2",
+  "branch": "sheaf-dag",
+  "by": "F4",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261018T110337-L-342298",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261018T110337-L-342298",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

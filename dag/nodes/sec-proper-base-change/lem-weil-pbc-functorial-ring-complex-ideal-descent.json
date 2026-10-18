@@ -1,0 +1,130 @@
+{
+ "id": "lem-weil-pbc-functorial-ring-complex-ideal-descent",
+ "kind": "statement",
+ "title": "Coherent ring-family descent from locally equal section ideals",
+ "statement": "Let $(C,J,O)$ be a small ringed site, let $K,\\epsilon,m$ be a specified strictly functorial augmented ring-complex family [def-weil-pbc-ring-complex-cech-data], and let $U:A\\to C$ be any small family with finite section lists $f_i$ over $U_i$. Assume that for every span $W\\to U_i,W\\to U_j$, their extended section ideals are equal on a covering sieve of $W$. The explicit sheafified slice models [def-weil-pbc-functorial-ring-complex-sheaf], with their maps to the restriction of $O[0]$ [def-weil-pbc-ringed-derived-restriction], admit strict augmented descent data [def-weil-pbc-augmented-module-complex-glue-data]. No covering assumption on $U$, finite-type ideal module, derived category or Čech comparison is assumed.",
+ "source": {
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 099E, lemma-global-extended-cech-complex"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-ring-complex-cech-data",
+  "def-weil-pbc-functorial-ring-complex-sheaf",
+  "def-weil-pbc-augmented-module-complex-glue-data",
+  "def-weil-pbc-ringed-derived-restriction"
+ ],
+ "proof": [
+  {
+   "text": "On a common test span restrict both presheaf complexes to its slice. The hypothesis on further spans gives a covering equality locus. Apply the canonical augmented comparison for locally equal ideals and identify the resulting sheafifications with the restrictions of the original models.",
+   "uses": [
+    "lem-weil-pbc-ring-family-locally-equal-models",
+    "lem-weil-pbc-ring-family-restriction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The unit-section formulas uniquely specify the comparison, by the covering-locus hom-ext theorem. Further restriction preserves the formula, proving naturality. On three lists, refine to the intersection of equality loci; transitivity of equality transport proves the cocycle by the same hom-ext theorem. The chain equation comes from the chain comparisons. Test augmentation on presheaf-unit sections: its equality is the ring-family augmentation equation under ideal transport. The adjunction and hom-ext theorem prove it globally. Evaluation at the terminal test object gives the required linear transitions.",
+   "uses": [
+    "lem-weil-pbc-module-sheafification-local-iso",
+    "lem-weil-pbc-ring-family-locally-equal-models",
+    "lem-weil-pbc-ring-family-restriction",
+    "lem-weil-pbc-module-sheafification-restriction",
+    "def-weil-pbc-augmented-module-complex-glue-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ring-family-locally-equal-models",
+  "lem-weil-pbc-ring-family-restriction",
+  "lem-weil-pbc-module-sheafification-local-iso",
+  "lem-weil-pbc-module-sheafification-restriction",
+  "def-weil-pbc-augmented-module-complex-glue-data"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 099E, lemma-global-extended-cech-complex"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Compatible linear transport for locally equal generated ideals gives a canonical cocycle on sheafified augmented cochain complexes on slice sites",
+   "results": "Matches: SheafOfModules.Presentation.map_generators_I, SheafOfModules.Presentation.mapGenerators, SheafOfModules.Presentation.map_π_eq, SheafOfModules.Presentation.map, SheafOfModules.QuasicoherentData.I, SheafOfModules.QuasicoherentData.presentation, SheafOfModules.generatorsOfIsCokernelFree_s, SheafOfModules.generatorsOfIsCokernelFree_I",
+   "date": "2026-10-18",
+   "verdict": "No exact match. The hits provide generic interfaces rather than this statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.overMap, PresheafOfModules.sheafification",
+   "results": "No matches.",
+   "date": "2026-10-18",
+   "verdict": "No exact match. The hits provide generic interfaces rather than this statement."
+  },
+  {
+   "tool": "grep",
+   "query": "ringFamily|sheafification.*[Cc]ocycle|[Cc]ocycle.*sheafification",
+   "results": "No matches.",
+   "date": "2026-10-18",
+   "verdict": "No exact match. The hits provide generic interfaces rather than this statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compatible linear transport for locally equal generated ideals gives a canonical cocycle for sheafified ring-family complexes.",
+   "results": "Matches: PresheafOfModules.sheafifyMap.congr_simp, PresheafOfModules.toSheaf_map_sheafificationHomEquiv_symm, PresheafOfModules.sheafifyHomEquiv', PresheafOfModules.sheafifyHomEquiv, PresheafOfModules.sheafifyMap, CategoryTheory.Equivalence.transportAndSheafify, SheafOfModules.sheafificationCompPullback, SheafOfModules.Presentation.mapGenerators.congr_simp",
+   "date": "2026-10-18",
+   "verdict": "No exact match. The hits provide generic interfaces rather than this statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ExtendedCechCompletionModel",
+  "date": "2026-10-18",
+  "group": "F4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-extended-cech-completion-model",
+   "place": "Tag 099E: explicit finite generating slices, independence of the section ideal, and augmented gluing.",
+   "via": [
+    "lem-weil-pbc-extended-cech-global-model"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FunctorialRingComplexIdealDescent",
+  "file": "lean/Sheaf/Paper/FunctorialRingComplexIdealDescent.lean",
+  "declaration": "CategoryTheory.exists_ringFamily_idealDescentData",
+  "statement": "theorem exists_ringFamily_idealDescentData\n    {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}\n    (O : Sheaf J CommRingCat.{u})\n    (K : RingComplexFamily.{u}) (ε : RingComplexAugmentations K)\n    (m : RingComplexMaps K) (hm : RingComplexFunctorial K ε m)\n    {A : Type u} (U : A → C) (r : A → ℕ)\n    (f : ∀ i : A, Fin (r i) → O.obj.obj (op (U i)))\n    (heq : ∀ (i j : A) (W : C) (a : W ⟶ U i) (b : W ⟶ U j),\n      ∃ S ∈ J W, ∀ (V : C) (k : V ⟶ W), S k →\n        Ideal.span (Set.range (fun t ↦ O.obj.map (k ≫ a).op (f i t))) =\n          Ideal.span (Set.range (fun t ↦ O.obj.map (k ≫ b).op (f j t)))) :\n    Nonempty (SheafOfModules.AugmentedComplexGlueData\n      ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O) U (ringedSiteRingComplex O)\n      (fun i ↦ (ringFamilySheafModel (O.over (U i)) K ε m hm (r i)\n        (fun t ↦ ringedSliceSection O (U i) (f i t))).1)\n      (fun i ↦ (ringFamilySheafModel (O.over (U i)) K ε m hm (r i)\n        (fun t ↦ ringedSliceSection O (U i) (f i t))).2 ≫\n          (ringedRestrictionRingComplexIso O (U i)).inv))",
+  "branch": "sheaf-dag",
+  "by": "F4",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261018T110337-L-342298",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261018T110337-L-342298",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

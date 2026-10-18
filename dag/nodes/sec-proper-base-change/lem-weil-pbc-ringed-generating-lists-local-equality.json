@@ -1,0 +1,114 @@
+{
+ "id": "lem-weil-pbc-ringed-generating-lists-local-equality",
+ "kind": "statement",
+ "title": "Local equality for two specified finite generating lists",
+ "statement": "Let $(C,J,O)$ be a small ringed site, $I$ a module sheaf, and $\\iota:I\\to O$ linear. Let $f$ over $U$ and $g$ over $V$ be specified finite generating lists of $I|_U$ and $I|_V$ through $\\iota$ [def-weil-pbc-ringed-ideal-generators]. For every $a:W\\to U$ and $b:W\\to V$, there is a covering sieve $S\\in J(W)$ such that for each $k:T\\to W$ in $S$, the ideals $(O(k a)(f_i))$ and $(O(k b)(g_j))$ in $O(T)$ are equal. Neither monicity of $\\iota$ nor fibre products are assumed.",
+ "source": {
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 099E, lemma-global-extended-cech-complex"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-ringed-ideal-generators",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-weil-pbc-finite-generators-local-span] on C/U to the finite values of the V-family on W, and in the other direction on C/V. Translate the slice covering sieves to covering sieves of W and intersect them. Naturality and the prescribed terminal values identify the generator images with the restrictions of f and g. Applying ι to the linear expressions puts each generator in the other ideal, proving both inclusions.",
+   "uses": [
+    "lem-weil-pbc-finite-generators-local-span",
+    "def-weil-pbc-ringed-ideal-generators"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-generators-local-span",
+  "def-weil-pbc-ringed-ideal-generators"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 099E, lemma-global-extended-cech-complex"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Two finite generating lists of the same ideal sheaf generate equal ideals of sections after a covering refinement of any common slice test object",
+   "results": "Matches: AlgebraicGeometry.Scheme.IdealSheafData.ext_of_iSup_eq_top, SheafOfModules.QuasicoherentData.localGeneratorsData_I, AlgebraicGeometry.Scheme.IdealSheafData.ext, AlgebraicGeometry.Scheme.IdealSheafData.ideal, AlgebraicGeometry.Scheme.IdealSheafData.ofIdeals, AlgebraicGeometry.Scheme.IdealSheafData.ofIdeals_ideal, AlgebraicGeometry.Scheme.IdealSheafData.ext_iff, SheafOfModules.GeneratingSections.IsFiniteType",
+   "date": "2026-10-18",
+   "verdict": "No exact match. The hits provide generic interfaces rather than this statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "Ideal.span, SheafOfModules.GeneratingSections",
+   "results": "No matches.",
+   "date": "2026-10-18",
+   "verdict": "No exact match. The hits provide generic interfaces rather than this statement."
+  },
+  {
+   "tool": "grep",
+   "query": "generatingLists.*ideal|generating.*[Ii]deal.*(cover|local)",
+   "results": "No matches.",
+   "date": "2026-10-18",
+   "verdict": "No exact match. The hits provide generic interfaces rather than this statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Two finite generating lists of the same ideal sheaf generate equal section ideals locally on each common test span.",
+   "results": "Matches: SheafOfModules.GeneratingSections.IsFiniteType, SheafOfModules.LocalGeneratorsData.mk.injEq, AlgebraicGeometry.IsAffineOpen.ideal_ext_iff, AlgebraicGeometry.Scheme.IdealSheafData.ext_iff, SheafOfModules.LocalGeneratorsData.generators, SheafOfModules.Presentation.mk.injEq, SheafOfModules.GeneratingSections.mk, SheafOfModules.LocalGeneratorsData.mk.inj",
+   "date": "2026-10-18",
+   "verdict": "No exact match. The hits provide generic interfaces rather than this statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ExtendedCechCompletionModel",
+  "date": "2026-10-18",
+  "group": "F4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-extended-cech-completion-model",
+   "place": "Tag 099E: explicit finite generating slices, independence of the section ideal, and augmented gluing.",
+   "via": [
+    "lem-weil-pbc-extended-cech-global-model"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RingedGeneratingListsLocalEquality",
+  "file": "lean/Sheaf/Paper/RingedGeneratingListsLocalEquality.lean",
+  "declaration": "CategoryTheory.exists_cover_generatingLists_ideal_eq",
+  "statement": "theorem exists_cover_generatingLists_ideal_eq\n    (U : C) (r : ℕ) (f : Fin r → O.obj.obj (op U))\n    (hf : IsRingedIdealGeneratingList O I ι U r f)\n    (V : C) (s : ℕ) (g : Fin s → O.obj.obj (op V))\n    (hg : IsRingedIdealGeneratingList O I ι V s g)\n    (W : C) (a : W ⟶ U) (b : W ⟶ V) :\n    ∃ S ∈ J W, ∀ (T : C) (k : T ⟶ W), S k →\n      Ideal.span (Set.range (fun i ↦ O.obj.map (k ≫ a).op (f i))) =\n        Ideal.span (Set.range (fun i ↦ O.obj.map (k ≫ b).op (g i)))",
+  "branch": "sheaf-dag",
+  "by": "F4",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261018T110337-L-342298",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261018T110337-L-342298",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

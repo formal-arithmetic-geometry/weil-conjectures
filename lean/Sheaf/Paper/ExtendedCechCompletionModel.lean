@@ -11,6 +11,9 @@ public import Sheaf.CategoryTheory.RingedCompletionUnit
 import Sheaf.Algebra.Homology.HomComplexUnitEvaluationNaturality
 import Sheaf.Algebra.Homology.DerivedInternalHom
 import Sheaf.Paper.ExtendedCechReflectorCore
+import Sheaf.Paper.FunctorialRingComplexDescentData
+import Sheaf.Paper.FunctorialRingComplexCechComparison
+import Sheaf.Paper.RingComplexGodementFunctorial
 
 /-!
 # Global extended Cech model and its derived completion unit
@@ -145,13 +148,18 @@ private theorem unit_isIso_of_complete_universal
     simp only [← Category.assoc, hr, Category.id_comp, Category.comp_id]
   exact ⟨⟨r, hr, hs⟩⟩
 
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 /-- The global augmented model exists.
 Source: Stacks Project, algebraization.tex, Tag 099E.
 (blueprint: lem-weil-pbc-extended-cech-global-model).
 
-Proof: construct on the finite-generator subsite using the functorial ring complex, then sheafify
-and glue the local choices using the recorded site equivalence and exact sheafification. The
-remaining comparison between sequential and fraction localization is isolated in this theorem.
+Proof: take the cover indexed by all specified finite generating lists. Sheafify the
+concrete Godement ring family on each slice. The independence-of-ideals descent theorem
+and effective gluing of augmented complexes give a global augmented complex. For any
+generating list, compose its derived Čech comparison with the inverse local gluing
+isomorphism and the comparison for derived restriction. Naturality of the latter and
+the two augmentation squares give the required augmented local description.
 -/
 theorem exists_ringedExtendedCech_global_model
     {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
@@ -165,7 +173,48 @@ theorem exists_ringedExtendedCech_global_model
     [Mono ι] [I.IsFiniteType] :
     ∃ (K : ringedSiteComplex O) (ε : K ⟶ ringedSiteRingComplex O),
       HasLocalExtendedCechDescription O I ι K ε := by
-  sorry
+  let KR : AlgebraicGeometry.RingComplexFamily.{u} :=
+    fun A I ↦ AlgebraicGeometry.ringComplexGodement A I.val
+  let εR : AlgebraicGeometry.RingComplexAugmentations KR :=
+    fun A I ↦ AlgebraicGeometry.ringComplexGodementAugmentation A I.val
+  obtain ⟨m, hm⟩ := AlgebraicGeometry.ringComplex_godement_functorial.{u}
+  obtain ⟨D⟩ := exists_ringFamily_descentData O I ι KR εR m hm
+  obtain ⟨K, ε, e, he⟩ := SheafOfModules.exists_augmentedComplex_of_glueData
+    (coversTop_ringedIdealGeneratingIndex O I ι) D
+  refine ⟨K, ε, ?_⟩
+  intro U r f hf
+  let p : RingedIdealGeneratingIndex O I ι := ⟨U, r, f, hf⟩
+  obtain ⟨β, hβ⟩ := ringFamilySheafModel_cech (O.over U) m hm r
+    (fun i ↦ ringedSliceSection O U (f i))
+  let R := (sheafCompose J (forget₂ CommRingCat RingCat)).obj O
+  let : HasDerivedCategory.{w} (SheafOfModules.{u}
+      (((sheafCompose J (forget₂ CommRingCat RingCat)).obj O).over U)) :=
+    inferInstanceAs (HasDerivedCategory.{w} (ringedSiteModules.{u}
+      ((sheafCompose (J.over U) (forget₂ CommRingCat RingCat)).obj (O.over U))))
+  let F := SheafOfModules.overFunctor.{u} R U
+  let fac := F.mapDerivedCategoryFactors
+  let a := ringedRestrictionRingComplexIso O U
+  have hε : (e p).inv ≫ (F.mapHomologicalComplex (.up ℤ)).map ε ≫ a.hom =
+      (ringFamilySliceModel O KR εR m hm I ι p).2 := by
+    rw [← he p]
+    simp only [a, p, Category.assoc, Iso.inv_hom_id, Category.comp_id, Iso.inv_hom_id_assoc]
+  refine ⟨β ≪≫ DerivedCategory.Q.mapIso (e p).symm ≪≫ (fac.app K).symm, ?_⟩
+  change (β.hom ≫ DerivedCategory.Q.map (e p).inv ≫ (fac.app K).inv) ≫
+      F.mapDerivedCategory.map (DerivedCategory.Q.map ε) ≫
+      (fac.app (ringedSiteRingComplex O)).hom ≫ DerivedCategory.Q.map a.hom = _
+  calc
+    _ = β.hom ≫ DerivedCategory.Q.map
+        ((e p).inv ≫ (F.mapHomologicalComplex (.up ℤ)).map ε ≫ a.hom) := by
+      simp only [Functor.map_comp, Category.assoc]
+      have hn := F.mapDerivedCategoryFactors_hom_naturality ε
+      change F.mapDerivedCategory.map (DerivedCategory.Q.map ε) ≫
+        (fac.app (ringedSiteRingComplex O)).hom =
+        (fac.app K).hom ≫
+          DerivedCategory.Q.map ((F.mapHomologicalComplex (.up ℤ)).map ε) at hn
+      simpa only [Category.assoc, Iso.inv_hom_id_assoc] using congrArg
+        (fun z ↦ β.hom ≫ DerivedCategory.Q.map (e p).inv ≫
+          (fac.app K).inv ≫ z ≫ DerivedCategory.Q.map a.hom) hn
+    _ = _ := by rw [hε]; exact hβ
 
 /-- The internal-Hom reflector properties of every local extended Cech model.
 Source: Stacks Project, algebraization.tex, Tags 099B and 099F.

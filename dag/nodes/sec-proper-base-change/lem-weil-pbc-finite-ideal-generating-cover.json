@@ -1,0 +1,118 @@
+{
+ "id": "lem-weil-pbc-finite-ideal-generating-cover",
+ "kind": "statement",
+ "title": "Finite generating slices cover the site",
+ "statement": "Let $(C,J,O)$ be a small ringed site, $I$ a module sheaf, and $\\iota:I\\to O$ linear. Suppose $I$ is of finite type, in the sense of Mathlib $\\operatorname{IsFiniteType}$ [def-weil-pbc-ringed-ideal-generators]. There exist a covering family $U:A\\to C$, with $A$ in the universe of $C$, and a specified finite generating list for $I|_{U(a)}$ through $\\iota$ for every $a\\in A$. Consequently the family of all specified finite generating slices [def-weil-pbc-ringed-ideal-generating-index] is covering.",
+ "source": {
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 099E, lemma-global-extended-cech-complex"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-ringed-ideal-generating-index",
+  "def-weil-pbc-ringed-ideal-generators"
+ ],
+ "proof": [
+  {
+   "text": "Take the local generators data furnished by the definition of IsFiniteType. Reindex each finite generator type by Fin of its cardinality; apply ι and evaluate at the terminal object of its slice. These data satisfy the specified-list predicate. Enlarge this covering subfamily to all specified generating slices.",
+   "uses": [
+    "def-weil-pbc-ringed-ideal-generators",
+    "def-weil-pbc-ringed-ideal-generating-index"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-ringed-ideal-generators",
+  "def-weil-pbc-ringed-ideal-generating-index"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 099E, lemma-global-extended-cech-complex"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Finitely many generating sections of a module sheaf give a covering by finite generating lists, and two finite generating families generate the same section ideal locally",
+   "results": "Matches: SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType, SheafOfModules.IsFiniteType.exists_localGeneratorsData, SheafOfModules.GeneratingSections.IsFiniteType, SheafOfModules.localGeneratorsDataOfIsFiniteType, SheafOfModules.LocalGeneratorsData.IsFiniteType, SheafOfModules.GeneratingSections.IsFiniteType.finite, SheafOfModules.GeneratingSections.I, SheafOfModules.GeneratingSections",
+   "date": "2026-10-18",
+   "verdict": "No exact match. The hits provide generic interfaces rather than this statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.GeneratingSections",
+   "results": "Matches: SheafOfModules.GeneratingSections, SheafOfModules.GeneratingSections.I, SheafOfModules.GeneratingSections.IsFiniteType, SheafOfModules.GeneratingSections.s, SheafOfModules.GeneratingSections.IsFiniteType.finite, SheafOfModules.GeneratingSections.IsFiniteType.mk, SheafOfModules.GeneratingSections.equivOfIso, SheafOfModules.GeneratingSections.π",
+   "date": "2026-10-18",
+   "verdict": "No exact match. The hits provide generic interfaces rather than this statement."
+  },
+  {
+   "tool": "grep",
+   "query": "GeneratingSections|freeSectionsLinearEquiv|exists_cover_lift_finite_sections",
+   "results": "Matches: Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean",
+   "date": "2026-10-18",
+   "verdict": "No exact match. The hits provide generic interfaces rather than this statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finitely many generating sections of a module sheaf give a covering by finite generating lists.",
+   "results": "Matches: SheafOfModules.GeneratingSections.IsFiniteType.mk, SheafOfModules.GeneratingSections.IsFiniteType, SheafOfModules.GeneratingSections.mk, SheafOfModules.LocalGeneratorsData.IsFiniteType.mk, SheafOfModules.IsFiniteType.mk, SheafOfModules.GeneratingSections, SheafOfModules.LocalGeneratorsData.mk, SheafOfModules.GeneratingSections.IsFiniteType.rec",
+   "date": "2026-10-18",
+   "verdict": "No exact match. The hits provide generic interfaces rather than this statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ExtendedCechCompletionModel",
+  "date": "2026-10-18",
+  "group": "F4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-extended-cech-completion-model",
+   "place": "Tag 099E: explicit finite generating slices, independence of the section ideal, and augmented gluing.",
+   "via": [
+    "lem-weil-pbc-extended-cech-global-model"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteIdealGeneratingCover",
+  "file": "lean/Sheaf/Paper/FiniteIdealGeneratingCover.lean",
+  "declaration": "CategoryTheory.exists_finiteIdealGeneratingCover",
+  "statement": "theorem exists_finiteIdealGeneratingCover\n    {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}\n    (O : Sheaf J CommRingCat.{u})\n    (I : ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O))\n    (ι : I ⟶ SheafOfModules.unit ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O))\n    [I.IsFiniteType] :\n    ∃ (A : Type u) (U : A → C) (r : A → ℕ)\n      (f : ∀ a : A, Fin (r a) → O.obj.obj (op (U a))),\n      J.CoversTop U ∧ ∀ a : A, IsRingedIdealGeneratingList O I ι (U a) (r a) (f a)",
+  "branch": "sheaf-dag",
+  "by": "F4",
+  "date": "2026-10-18",
+  "declarations": [
+   "CategoryTheory.exists_finiteIdealGeneratingCover",
+   "CategoryTheory.coversTop_ringedIdealGeneratingIndex"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261018T110337-L-342298",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261018T110337-L-342298",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

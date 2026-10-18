@@ -1,0 +1,124 @@
+{
+ "id": "lem-weil-pbc-module-sheafification-local-iso",
+ "kind": "statement",
+ "title": "Canonical isomorphisms from local equivalences of module presheaves",
+ "statement": "Let $R$ be a ring sheaf on a small site $(C,J)$, and $M,N$ presheaves of $R$-modules [def-weil-sheaf-of-modules-category]. Let $E$ be a restriction-stable predicate on objects, locally exhaustive in the sense that every object has a covering sieve with all domains in $E$. Suppose linear equivalences $M(X)\\simeq N(X)$ on $E$ commute with restriction. Their module sheafifications are isomorphic by a map taking each presheaf-unit section to its specified equivalent on $E$. Maps out of a sheafification are equal if they agree on these unit sections. For cochain complexes, if the equivalences commute with differentials and specified augmentations, the isomorphisms form an augmented chain isomorphism with the same unit formula.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 0H6Y, lemma-isomorphism-sheafifications; module and complex argument used by Tag 099E"
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [
+  {
+   "text": "Use the subpresheaf equal to M on E and zero off E. Its inclusion into M and the map to N induced by the given equivalences are locally bijective: injectivity is sectionwise, and local surjectivity follows on the covering locus. Both become isomorphisms under module sheafification. Their quotient comparison has the asserted unit formula by unit naturality.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the sheafification adjunction and separatedness on the covering sieves to prove the hom-ext assertion. Construct a complex isomorphism from the degreewise isomorphisms. Test the differential and augmentation equations on the covering-locus unit images; the hom-ext assertion proves the equations globally.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 0H6Y, lemma-isomorphism-sheafifications; module and complex argument used by Tag 099E"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Compatible linear equivalences between presheaf modules on a restriction stable covering locus extend uniquely after sheafification and give isomorphisms of augmented cochain complexes",
+   "results": "Matches: PresheafOfModules.toPresheaf_map_sheafificationHomEquiv, PresheafOfModules.sheafifyHomEquiv', PresheafOfModules.toPresheaf_map_sheafificationHomEquiv_def, PresheafOfModules.sheafifyHomEquiv, PresheafOfModules.toSheaf_map_sheafificationHomEquiv_symm, PresheafOfModules.sheafificationHomEquiv, PresheafOfModules.comp_toPresheaf_map_sheafifyHomEquiv'_symm_hom, PresheafOfModules.homEquivOfIsLocallyBijective",
+   "date": "2026-10-18",
+   "verdict": "No exact match. The hits provide generic interfaces rather than this statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "PresheafOfModules.sheafification",
+   "results": "Matches: PresheafOfModules.sheafification, PresheafOfModules.instIsLeftAdjointSheafOfModulesSheafification, PresheafOfModules.instPreservesFiniteLimitsSheafOfModulesSheafification, PresheafOfModules.instPreservesFiniteLimitsSheafAddCommGrpCatCompSheafOfModulesSheafificationToSheaf, PresheafOfModules.sheafificationAdjunction, PresheafOfModules.sheafificationCompToSheaf, PresheafOfModules.sheafificationHomEquiv, PresheafOfModules.sheafificationCompForgetCompToPresheaf",
+   "date": "2026-10-18",
+   "verdict": "No exact match. The hits provide generic interfaces rather than this statement."
+  },
+  {
+   "tool": "grep",
+   "query": "homEquivOfIsLocallyBijective|W_of_isLocallyBijective|inverseImage_W_toPresheaf",
+   "results": "Matches: Mathlib/Algebra/Category/ModuleCat/Sheaf/Localization.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Localization.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafify.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafify.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf.lean",
+   "date": "2026-10-18",
+   "verdict": "No exact match. The hits provide generic interfaces rather than this statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compatible linear equivalences between presheaf modules on a restriction stable covering locus induce a canonical augmented complex sheafification isomorphism.",
+   "results": "Matches: CategoryTheory.GrothendieckTopology.isoSheafify, CategoryTheory.isoSheafify, CategoryTheory.GrothendieckTopology.isoSheafify.congr_simp, PresheafOfModules.sheafify, PresheafOfModules.sheafifyMap, PresheafOfModules.sheafification, PresheafOfModules.toSheaf_map_sheafificationHomEquiv_symm, PresheafOfModules.toSheafify",
+   "date": "2026-10-18",
+   "verdict": "No exact match. The hits provide generic interfaces rather than this statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ExtendedCechCompletionModel",
+  "date": "2026-10-18",
+  "group": "F4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-extended-cech-completion-model",
+   "place": "Tag 099E: explicit finite generating slices, independence of the section ideal, and augmented gluing.",
+   "via": [
+    "lem-weil-pbc-extended-cech-global-model"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.ModuleSheafificationLocalIso",
+  "file": "lean/Sheaf/CategoryTheory/ModuleSheafificationLocalIso.lean",
+  "declaration": "PresheafOfModules.exists_sheafificationIso_of_localEquiv",
+  "statement": "theorem exists_sheafificationIso_of_localEquiv\n    (hcover : ∀ X : C, ∃ S ∈ J X, ∀ (Y : C) (f : Y ⟶ X), S f → E (op Y))\n    (e : ∀ X, E X → M.obj X ≃ₗ[R.obj.obj X] N.obj X)\n    (he : ∀ {X Y : Cᵒᵖ} (f : X ⟶ Y) (h : E X) (x : M.obj X),\n      e Y (hE f h) (M.map f x) = N.map f (e X h x)) :\n    ∃ z : (sheafification (𝟙 R.obj)).obj M ≅\n        (sheafification (𝟙 R.obj)).obj N,\n      ∀ (X : Cᵒᵖ) (h : E X) (x : M.obj X),\n        z.hom.val.app X (((sheafificationAdjunction (𝟙 R.obj)).unit.app M).app X x) =\n          (((sheafificationAdjunction (𝟙 R.obj)).unit.app N).app X (e X h x))",
+  "branch": "sheaf-dag",
+  "by": "F4",
+  "date": "2026-10-18",
+  "declarations": [
+   "PresheafOfModules.exists_sheafificationIso_of_localEquiv",
+   "PresheafOfModules.sheafification_hom_ext_on_locus",
+   "PresheafOfModules.moduleSheafification_additive",
+   "PresheafOfModules.exists_augmentedSheafificationIso_of_localEquiv_with_unit"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261018T110337-L-342298",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261018T110337-L-342298",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

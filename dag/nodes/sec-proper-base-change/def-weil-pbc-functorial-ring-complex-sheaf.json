@@ -1,0 +1,128 @@
+{
+ "id": "def-weil-pbc-functorial-ring-complex-sheaf",
+ "kind": "definition",
+ "title": "Explicit sheafified augmented ring-family complex",
+ "statement": "Let $(C,J,O)$ be a small ringed site and let $K(A,L)$, $\\epsilon(A,L)$ and $m$ be a specified strictly functorial augmented ring-complex family [def-weil-pbc-ring-complex-cech-data]. For a finite list $f$ of global sections of $O$, put $L_X=(f_i(X))\\subset O(X)$. Define the presheaf complex $P_f(X)=K(O(X),L_X)$, with restrictions $m$, differential inherited from $K$, and augmentation inherited from $\\epsilon$. Define its sheaf model by degreewise module sheafification and adjoint transpose of the augmentation. These are actual constructions, parameterized by the given maps, with no data chosen from an existence assertion. Extension of $L_X$ along restriction equals $L_Y$, and the augmentation annihilates boundaries. Complexes and the ring complex use [def-weil-pbc-ringed-extended-cech].",
+ "source": {
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 099E, lemma-global-extended-cech-complex"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-ring-complex-cech-data",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-ringed-extended-cech"
+ ],
+ "proof": [
+  {
+   "text": "Ideal.map_span and the section naturality equations identify the restriction ideals. The strict identity, composition, differential and augmentation clauses of the ring-family predicate verify the presheaf and chain-map equations. Apply module sheafification and its adjunction on complexes to the resulting augmentation.",
+   "uses": [
+    "def-weil-pbc-ring-complex-cech-data",
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-pbc-ringed-extended-cech"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-ring-complex-cech-data",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-ringed-extended-cech"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 099E, lemma-global-extended-cech-complex"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Build a presheaf cochain complex of modules by evaluating a functorial complex for each section ring and finitely generated ideal and sheafify it degreewise",
+   "results": "Matches: SheafOfModules.QuasicoherentData.presentation, SheafOfModules.LocalGeneratorsData.X, SheafOfModules.LocalGeneratorsData.I, SheafOfModules.QuasicoherentData.I, ModuleCat.tilde, SheafOfModules.Presentation, PresheafOfModules.sheafify, SheafOfModules.QuasicoherentData.X",
+   "date": "2026-10-18",
+   "verdict": "No exact match. The hits provide generic interfaces rather than this statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "PresheafOfModules.sheafification, CochainComplex",
+   "results": "No matches.",
+   "date": "2026-10-18",
+   "verdict": "No exact match. The hits provide generic interfaces rather than this statement."
+  },
+  {
+   "tool": "grep",
+   "query": "sheafification.*Complex|Complex.*sheafification|mapHomologicalComplex",
+   "results": "Matches: Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean, Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean, Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean, Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean, Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean, Mathlib/Algebra/Homology/HomotopyCategory/SingleFunctors.lean, Mathlib/Algebra/Homology/HomotopyCategory/SingleFunctors.lean, Mathlib/Algebra/Homology/HomotopyCategory/SingleFunctors.lean",
+   "date": "2026-10-18",
+   "verdict": "No exact match. The hits provide generic interfaces rather than this statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Build a presheaf cochain complex of modules by evaluating a functorial complex for each section ring and generated ideal, then sheafify it.",
+   "results": "Matches: PresheafOfModules.sheafification, PresheafOfModules.sheafify, PresheafOfModules.sheafification_map, SheafOfModules.Presentation, SheafOfModules.mk, PresheafOfModules.ofPresheaf, PresheafOfModules.mk, PresheafOfModules.presheaf",
+   "date": "2026-10-18",
+   "verdict": "No exact match. The hits provide generic interfaces rather than this statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ExtendedCechCompletionModel",
+  "date": "2026-10-18",
+  "group": "F4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-extended-cech-completion-model",
+   "place": "Tag 099E: explicit finite generating slices, independence of the section ideal, and augmented gluing.",
+   "via": [
+    "lem-weil-pbc-extended-cech-global-model"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FunctorialRingComplexSheaf",
+  "file": "lean/Sheaf/Paper/FunctorialRingComplexSheaf.lean",
+  "declaration": "CategoryTheory.ringFamilySheafModel",
+  "statement": "def ringFamilySheafModel : Σ L : ringedSiteComplex O, L ⟶ ringedSiteRingComplex O",
+  "branch": "sheaf-dag",
+  "by": "F4",
+  "date": "2026-10-18",
+  "declarations": [
+   "CategoryTheory.ringFamilySectionIdeal",
+   "CategoryTheory.ringFamilySectionIdeal_map",
+   "CategoryTheory.ringFamilyPresheafTerm",
+   "CategoryTheory.ringFamilyPresheafDifferential",
+   "CategoryTheory.ringFamilyPresheafComplex",
+   "CategoryTheory.ringFamilyPresheafAugmentationZero",
+   "CategoryTheory.ringFamilyPresheafAugmentationZero_closed",
+   "CategoryTheory.ringFamilyPresheafAugmentation",
+   "CategoryTheory.ringFamilySheafModel"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261018T110337-L-342298",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261018T110337-L-342298",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,102 @@
+{
+ "id": "def-weil-pbc-ringed-ideal-generating-index",
+ "kind": "definition",
+ "title": "Objects carrying specified finite ideal generators",
+ "statement": "Let $(C,J)$ be a small site, let $O$ be a sheaf of commutative rings, let $I$ be an $O$-module sheaf, and let $\\iota:I\\to O$ be linear [def-weil-sheaf-of-modules-category]. The type $\\operatorname{RingedIdealGeneratingIndex}(O,I,\\iota)$ consists of an object $U$, a natural number $r$, a list $f:\\operatorname{Fin}(r)\\to O(U)$, and a proof that $f$ is a specified generating list of $I|_U$ through $\\iota$, as defined in [def-weil-pbc-ringed-ideal-generators].",
+ "source": {
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 099E, lemma-global-extended-cech-complex"
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-ringed-ideal-generators"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 099E, lemma-global-extended-cech-complex"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Finitely many generating sections of a module sheaf give a covering by finite generating lists, and two finite generating families generate the same section ideal locally",
+   "results": "Matches: SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType, SheafOfModules.IsFiniteType.exists_localGeneratorsData, SheafOfModules.GeneratingSections.IsFiniteType, SheafOfModules.localGeneratorsDataOfIsFiniteType, SheafOfModules.LocalGeneratorsData.IsFiniteType, SheafOfModules.GeneratingSections.IsFiniteType.finite, SheafOfModules.GeneratingSections.I, SheafOfModules.GeneratingSections",
+   "date": "2026-10-18",
+   "verdict": "No exact match. The hits provide generic interfaces rather than this statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.GeneratingSections",
+   "results": "Matches: SheafOfModules.GeneratingSections, SheafOfModules.GeneratingSections.I, SheafOfModules.GeneratingSections.IsFiniteType, SheafOfModules.GeneratingSections.s, SheafOfModules.GeneratingSections.IsFiniteType.finite, SheafOfModules.GeneratingSections.IsFiniteType.mk, SheafOfModules.GeneratingSections.equivOfIso, SheafOfModules.GeneratingSections.π",
+   "date": "2026-10-18",
+   "verdict": "No exact match. The hits provide generic interfaces rather than this statement."
+  },
+  {
+   "tool": "grep",
+   "query": "GeneratingSections|freeSectionsLinearEquiv|exists_cover_lift_finite_sections",
+   "results": "Matches: Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean",
+   "date": "2026-10-18",
+   "verdict": "No exact match. The hits provide generic interfaces rather than this statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finitely many generating sections of a module sheaf give a covering by finite generating lists.",
+   "results": "Matches: SheafOfModules.GeneratingSections.IsFiniteType.mk, SheafOfModules.GeneratingSections.IsFiniteType, SheafOfModules.GeneratingSections.mk, SheafOfModules.LocalGeneratorsData.IsFiniteType.mk, SheafOfModules.IsFiniteType.mk, SheafOfModules.GeneratingSections, SheafOfModules.LocalGeneratorsData.mk, SheafOfModules.GeneratingSections.IsFiniteType.rec",
+   "date": "2026-10-18",
+   "verdict": "No exact match. The hits provide generic interfaces rather than this statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ExtendedCechCompletionModel",
+  "date": "2026-10-18",
+  "group": "F4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-extended-cech-completion-model",
+   "place": "Tag 099E: explicit finite generating slices, independence of the section ideal, and augmented gluing.",
+   "via": [
+    "lem-weil-pbc-extended-cech-global-model"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteIdealGeneratingCover",
+  "file": "lean/Sheaf/Paper/FiniteIdealGeneratingCover.lean",
+  "declaration": "CategoryTheory.RingedIdealGeneratingIndex",
+  "statement": "structure RingedIdealGeneratingIndex\n    {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}\n    (O : Sheaf J CommRingCat.{u})\n    (I : ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O))\n    (ι : I ⟶ SheafOfModules.unit ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O))",
+  "branch": "sheaf-dag",
+  "by": "F4",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261018T110337-L-342298",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261018T110337-L-342298",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

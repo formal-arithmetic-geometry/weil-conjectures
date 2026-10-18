@@ -1,0 +1,128 @@
+{
+ "id": "lem-weil-pbc-ring-family-locally-equal-models",
+ "kind": "statement",
+ "title": "Canonical augmented ring-family models for locally equal ideals",
+ "statement": "Let $(C,J,O)$ be a small ringed site, let $K,\\epsilon,m$ be a specified strictly functorial augmented ring-complex family [def-weil-pbc-ring-complex-cech-data], and let $f,g$ be finite lists of global sections of $O$. Suppose every object has a cover on which the section ideals $(f_i)$ and $(g_j)$ are equal. Their explicit sheaf models [def-weil-pbc-functorial-ring-complex-sheaf] are isomorphic as augmented complexes. On every sheafification-unit section where the ideals are equal, the isomorphism is transport of the ring-complex component along that equality of its ideal parameter.",
+ "source": {
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 099E, lemma-global-extended-cech-complex"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-ring-complex-cech-data",
+  "def-weil-pbc-functorial-ring-complex-sheaf"
+ ],
+ "proof": [
+  {
+   "text": "Equality of the section ideals is restriction-stable by ideal-map compatibility. Transport of a ring-family component along equality of its ideal is a linear equivalence. The same transports commute with restriction maps, differentials and augmentations, by substitution and proof irrelevance.",
+   "uses": [
+    "def-weil-pbc-functorial-ring-complex-sheaf",
+    "def-weil-pbc-ring-complex-cech-data"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the augmented local-equivalence sheafification theorem, with the equality locus and the component transports. The augmentation-unit equation follows from the sheafification adjunction; in degrees other than zero both presheaf augmentations vanish.",
+   "uses": [
+    "lem-weil-pbc-module-sheafification-local-iso",
+    "def-weil-pbc-functorial-ring-complex-sheaf"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-functorial-ring-complex-sheaf",
+  "def-weil-pbc-ring-complex-cech-data",
+  "lem-weil-pbc-module-sheafification-local-iso"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 099E, lemma-global-extended-cech-complex"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Sheafifications of functorial complexes indexed by finitely generated section ideals have canonical cocycle transition isomorphisms when the ideals generate the same ideal subsheaf",
+   "results": "Matches: SheafOfModules.Presentation.map_π_eq, SheafOfModules.QuasicoherentData.localGeneratorsData_I, SheafOfModules.LocalGeneratorsData.mk.inj, PresheafOfModules.sheafificationHomEquiv, PresheafOfModules.toSheaf_map_sheafificationHomEquiv_symm, PresheafOfModules.toPresheaf_map_sheafificationHomEquiv, PresheafOfModules.sheafifyHomEquiv', PresheafOfModules.toPresheaf_map_sheafificationHomEquiv_def",
+   "date": "2026-10-18",
+   "verdict": "No exact match. The hits provide generic interfaces rather than this statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "Ideal.span, SheafOfModules",
+   "results": "No matches.",
+   "date": "2026-10-18",
+   "verdict": "No exact match. The hits provide generic interfaces rather than this statement."
+  },
+  {
+   "tool": "grep",
+   "query": "ideal.*(descent|sheafif)|[Ss]heafif.*ideal",
+   "results": "No matches.",
+   "date": "2026-10-18",
+   "verdict": "No exact match. The hits provide generic interfaces rather than this statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compatible linear equivalences between presheaf modules on a restriction stable covering locus induce a canonical augmented complex sheafification isomorphism.",
+   "results": "Matches: CategoryTheory.GrothendieckTopology.isoSheafify, CategoryTheory.isoSheafify, CategoryTheory.GrothendieckTopology.isoSheafify.congr_simp, PresheafOfModules.sheafify, PresheafOfModules.sheafifyMap, PresheafOfModules.sheafification, PresheafOfModules.toSheaf_map_sheafificationHomEquiv_symm, PresheafOfModules.toSheafify",
+   "date": "2026-10-18",
+   "verdict": "No exact match. The hits provide generic interfaces rather than this statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ExtendedCechCompletionModel",
+  "date": "2026-10-18",
+  "group": "F4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-extended-cech-completion-model",
+   "place": "Tag 099E: explicit finite generating slices, independence of the section ideal, and augmented gluing.",
+   "via": [
+    "lem-weil-pbc-extended-cech-global-model"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RingFamilyLocallyEqualModels",
+  "file": "lean/Sheaf/Paper/RingFamilyLocallyEqualModels.lean",
+  "declaration": "CategoryTheory.ringFamilySheafModel_iso_of_locally_equal_ideals_with_unit",
+  "statement": "theorem ringFamilySheafModel_iso_of_locally_equal_ideals_with_unit (s : ℕ)\n    (g : Fin s → (O.obj ⋙ forget CommRingCat).sections)\n    (h : ∀ X : C, ∃ S ∈ J X, ∀ (Y : C) (a : Y ⟶ X), S a →\n      (ringFamilySectionIdeal O r f (op Y)).val =\n        (ringFamilySectionIdeal O s g (op Y)).val) :\n    ∃ z : (ringFamilySheafModel O K ε m hm r f).1 ≅\n        (ringFamilySheafModel O K ε m hm s g).1,\n      z.hom ≫ (ringFamilySheafModel O K ε m hm s g).2 =\n        (ringFamilySheafModel O K ε m hm r f).2 ∧\n        ∀ (n : ℤ) (X : Cᵒᵖ)\n          (hX : ringFamilySectionIdeal O r f X = ringFamilySectionIdeal O s g X)\n          (x : ((ringFamilyPresheafComplex O K ε m hm r f).X n).obj X),\n          (z.hom.f n).val.app X\n              (((PresheafOfModules.sheafificationAdjunction\n                (𝟙 ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O).obj)).unit.app\n                  ((ringFamilyPresheafComplex O K ε m hm r f).X n)).app X x) =\n            (((PresheafOfModules.sheafificationAdjunction\n              (𝟙 ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O).obj)).unit.app\n                ((ringFamilyPresheafComplex O K ε m hm s g).X n)).app X\n                  (ringFamilyComponentEquiv K (O.obj.obj X) _ _ hX n x))",
+  "branch": "sheaf-dag",
+  "by": "F4",
+  "date": "2026-10-18",
+  "declarations": [
+   "CategoryTheory.ringFamilyComponentEquiv",
+   "CategoryTheory.ringFamilySheafModel_iso_of_locally_equal_ideals_with_unit",
+   "CategoryTheory.ringFamilySheafModel_augmentation_unit"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261018T110337-L-342298",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261018T110337-L-342298",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

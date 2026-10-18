@@ -1,0 +1,121 @@
+{
+ "id": "lem-weil-pbc-augmented-module-complex-gluing",
+ "kind": "statement",
+ "title": "Effective gluing of augmented module complexes",
+ "statement": "For strict augmented complex gluing data [def-weil-pbc-augmented-module-complex-glue-data] on a small ringed site $(C,J,R)$, assume the object family $U:A\\to C$ covers the site. There exist a global module cochain complex $K$, a map $\\epsilon:K\\to B$, and chain isomorphisms $e_i:K|_{U_i}\\simeq L_i$ with $e_i\\alpha_i=\\epsilon|_{U_i}$.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 04TR, lemma-glue-sheaves, applied degreewise"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-augmented-module-complex-glue-data"
+ ],
+ "proof": [
+  {
+   "text": "Apply the compatible-tuples construction degreewise. The transition/differential equations define the global differential and its square-zero equation is tested on every component. Local graph evaluation is a chain isomorphism.",
+   "uses": [
+    "def-weil-pbc-site-module-compatible-tuples",
+    "def-weil-pbc-augmented-module-complex-glue-data"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The local augmentations give a map to the compatible tuples for B. Its diagonal from B is an isomorphism, since it is locally an isomorphism on the given cover. Compose with its inverse. The local augmentation equation follows componentwise.",
+   "uses": [
+    "def-weil-pbc-site-module-compatible-tuples",
+    "def-weil-pbc-augmented-module-complex-glue-data"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-site-module-compatible-tuples",
+  "def-weil-pbc-augmented-module-complex-glue-data"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 04TR, lemma-glue-sheaves, applied degreewise"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Glue augmented cochain complexes of sheaves of modules along a cover with compatible transition isomorphisms; locally finite generating families yield equal generated section ideals; sheafify a functorial complex indexed by finitely generated ideals",
+   "results": "Matches: SheafOfModules.LocalGeneratorsData.I, SheafOfModules.LocalGeneratorsData.X, SheafOfModules.LocalGeneratorsData.generators, SheafOfModules.GeneratingSections.I, SheafOfModules.GeneratingSections, SheafOfModules.LocalGeneratorsData, SheafOfModules.localGeneratorsDataOfIsFiniteType, SheafOfModules.QuasicoherentData.localGeneratorsData_I",
+   "date": "2026-10-18",
+   "verdict": "No exact match. The hits provide generic interfaces rather than this statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, CochainComplex",
+   "results": "No matches.",
+   "date": "2026-10-18",
+   "verdict": "No exact match. The hits provide generic interfaces rather than this statement."
+  },
+  {
+   "tool": "grep",
+   "query": "AugmentedComplexGlueData|augmentedComplex.*glue|glue.*[Cc]omplex",
+   "results": "No matches.",
+   "date": "2026-10-18",
+   "verdict": "No exact match. The hits provide generic interfaces rather than this statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Glue augmented cochain complexes of sheaves of modules along a cover with coherent linear transitions.",
+   "results": "Matches: CochainComplex.augment, AlgebraicGeometry.LocallyRingedSpace.GlueData.noConfusion, AlgebraicGeometry.Scheme.Cover.gluedCover, AlgebraicGeometry.LocallyRingedSpace.GlueData, TopCat.Presheaf.IsSheaf.isSheafUniqueGluing, TopCat.GlueData.mk', TopCat.Presheaf.IsGluing, TopCat.Sheaf.existsUnique_gluing",
+   "date": "2026-10-18",
+   "verdict": "No exact match. The hits provide generic interfaces rather than this statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ExtendedCechCompletionModel",
+  "date": "2026-10-18",
+  "group": "F4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-extended-cech-completion-model",
+   "place": "Tag 099E: explicit finite generating slices, independence of the section ideal, and augmented gluing.",
+   "via": [
+    "lem-weil-pbc-extended-cech-global-model"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.AugmentedComplexGluing",
+  "file": "lean/Sheaf/CategoryTheory/AugmentedComplexGluing.lean",
+  "declaration": "SheafOfModules.exists_augmentedComplex_of_glueData",
+  "statement": "theorem exists_augmentedComplex_of_glueData (hU : J.CoversTop U)\n    (D : AugmentedComplexGlueData R U B L a) :\n    ∃ (K : CochainComplex (SheafOfModules.{u} R) ℤ) (ε : K ⟶ B),\n      ∃ e : ∀ i, ((overFunctor R (U i)).mapHomologicalComplex (.up ℤ)).obj K ≅\n          L i,\n        ∀ i, (e i).hom ≫ a i =\n          ((overFunctor R (U i)).mapHomologicalComplex (.up ℤ)).map ε",
+  "branch": "sheaf-dag",
+  "by": "F4",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261018T110337-L-342298",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261018T110337-L-342298",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

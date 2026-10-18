@@ -1,0 +1,119 @@
+{
+ "id": "lem-weil-pbc-ring-family-restriction",
+ "kind": "statement",
+ "title": "Unit-compatible restriction of ring-family models",
+ "statement": "Let $F:(C,J)\\to(D,L)$ be continuous and cocontinuous between small sites, let $O$ be a commutative ring sheaf on $D$, let $K,\\epsilon,m$ be a specified strictly functorial augmented ring-complex family [def-weil-pbc-ring-complex-cech-data], and let $f$ be a finite list of global sections of $O$. The explicit sheafified ring-family complex [def-weil-pbc-functorial-ring-complex-sheaf] for the restricted ring and list is chain isomorphic to the restriction of the model for $O,f$. Its homomorphism takes every sheafification-unit section to its original unit section over $F(X)$. The restriction functor uses the additive module restriction interface [lem-weil-pbc-module-sheafification-restriction].",
+ "source": {
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 099E, lemma-global-extended-cech-complex"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-ring-complex-cech-data",
+  "def-weil-pbc-functorial-ring-complex-sheaf",
+  "lem-weil-pbc-module-sheafification-restriction"
+ ],
+ "proof": [
+  {
+   "text": "The restricted presheaf complex is sectionwise identical to the one formed from the restricted ring and sections. Use identity component isomorphisms for that presheaf identification. Apply the module-sheafification restriction isomorphism degreewise. Its naturality for the presheaf differential gives a chain isomorphism, and unit naturality transfers its unit formula.",
+   "uses": [
+    "lem-weil-pbc-module-sheafification-restriction",
+    "def-weil-pbc-functorial-ring-complex-sheaf"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-module-sheafification-restriction",
+  "def-weil-pbc-functorial-ring-complex-sheaf"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 099E, lemma-global-extended-cech-complex"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Sheafification of presheaves of modules commutes with restriction along a continuous and cocontinuous functor between sites, compatibly with the unit of sheafification",
+   "results": "Matches: SheafOfModules.sheafificationCompPullback, CategoryTheory.Functor.toSheafify_pullbackSheafificationCompatibility, CategoryTheory.Functor.pushforwardContinuousSheafificationCompatibility, CategoryTheory.Functor.pushforwardContinuousSheafificationCompatibility_hom_app_val, CategoryTheory.toPresheafToSheafCompComposeAndSheafify, CategoryTheory.toPresheafToSheafCompComposeAndSheafify_app, CategoryTheory.sheafifyComposeIso, CategoryTheory.presheafToSheafCompComposeAndSheafifyIso",
+   "date": "2026-10-18",
+   "verdict": "No exact match. The hits provide generic interfaces rather than this statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.overMap, PresheafOfModules.sheafification",
+   "results": "No matches.",
+   "date": "2026-10-18",
+   "verdict": "No exact match. The hits provide generic interfaces rather than this statement."
+  },
+  {
+   "tool": "grep",
+   "query": "sheafification.*(Pushforward|Restriction)|restriction.*sheafification",
+   "results": "Matches: Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean",
+   "date": "2026-10-18",
+   "verdict": "No exact match. The hits provide generic interfaces rather than this statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sheafification of presheaves of modules commutes with restriction along a continuous cocontinuous functor, compatibly with the sheafification unit.",
+   "results": "Matches: PresheafOfModules.sheafification_map, PresheafOfModules.sheafify, PresheafOfModules.toSheafify, PresheafOfModules.sheafification, PresheafOfModules.sheafifyMap, CategoryTheory.plusPlusSheaf, CategoryTheory.sheafifyComposeIso, CategoryTheory.sheafComposeIso_hom_fac",
+   "date": "2026-10-18",
+   "verdict": "No exact match. The hits provide generic interfaces rather than this statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ExtendedCechCompletionModel",
+  "date": "2026-10-18",
+  "group": "F4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-extended-cech-completion-model",
+   "place": "Tag 099E: explicit finite generating slices, independence of the section ideal, and augmented gluing.",
+   "via": [
+    "lem-weil-pbc-extended-cech-global-model"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RingFamilyRestriction",
+  "file": "lean/Sheaf/Paper/RingFamilyRestriction.lean",
+  "declaration": "CategoryTheory.exists_ringFamilySheafModel_restrictionIso",
+  "statement": "theorem exists_ringFamilySheafModel_restrictionIso :\n    ∃ e : (ringFamilySheafModel\n        ((F.sheafPushforwardContinuous CommRingCat.{u} J L).obj O)\n        K ε m hm r (ringFamilyRestrictedSections F O r f)).1 ≅\n      (((SheafOfModules.pushforward (F := F)\n        (𝟙 ((F.sheafPushforwardContinuous RingCat.{u} J L).obj\n          ((sheafCompose L (forget₂ CommRingCat RingCat)).obj O)))).mapHomologicalComplex\n          (.up ℤ)).obj\n        (ringFamilySheafModel O K ε m hm r f).1),\n      ∀ (n : ℤ) (X : Cᵒᵖ)\n        (x : ((ringFamilyPresheafComplex O K ε m hm r f).X n).obj (F.op.obj X)),\n        (e.hom.f n).val.app X\n            (((PresheafOfModules.sheafificationAdjunction\n              (𝟙 ((sheafCompose J (forget₂ CommRingCat RingCat)).obj\n                ((F.sheafPushforwardContinuous CommRingCat.{u} J L).obj O)).obj)).unit.app\n                  ((ringFamilyPresheafComplex\n                    ((F.sheafPushforwardContinuous CommRingCat.{u} J L).obj O)\n                    K ε m hm r (ringFamilyRestrictedSections F O r f)).X n)).app X x) =\n          (((PresheafOfModules.sheafificationAdjunction\n            (𝟙 ((sheafCompose L (forget₂ CommRingCat RingCat)).obj O).obj)).unit.app\n              ((ringFamilyPresheafComplex O K ε m hm r f).X n)).app (F.op.obj X) x)",
+  "branch": "sheaf-dag",
+  "by": "F4",
+  "date": "2026-10-18",
+  "declarations": [
+   "CategoryTheory.ringFamilyRestrictedSections",
+   "CategoryTheory.exists_ringFamilySheafModel_restrictionIso"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261018T110337-L-342298",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261018T110337-L-342298",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

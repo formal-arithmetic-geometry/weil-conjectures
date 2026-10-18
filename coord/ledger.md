@@ -16419,3 +16419,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 11:03 L: returned deliver/H3/Sheaf.AlgebraicGeometry.EllAdicLocalizingExceptionalBounded (reviewer RETURN: (the landing tools, head dd86fa917) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
 - 11:03 L: merged deliver/B4/Sheaf.AlgebraicGeometry.AffineFiniteModuleFreeLocus (stage 3; reviewer PASS; first push; landing 20261018T110335-L-341842 (proof); batch 20261018T110332; modules 1; new nodes 0)
 - 11:03 L: merged deliver/E1/Sheaf.AlgebraicGeometry.ProjectiveCurveFiniteGroup (stage 3; reviewer PASS; first push; landing 20261018T110336-L-342043 (interface); batch 20261018T110332; modules 3; new nodes 2)
+- 11:03 L: merged deliver/F4/Sheaf.Paper.ExtendedCechCompletionModel (stage 3; reviewer PASS; first push; landing 20261018T110337-L-342298 (interface); batch 20261018T110332; modules 13; new nodes 14)
