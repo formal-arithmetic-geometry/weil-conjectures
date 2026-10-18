@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "thm-wf-rank-one-finite-geometric-image-curve",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Finite geometric image of a rank-one Weil character on a curve",
@@ -18,41 +18,136 @@
  ],
  "proof": [
   {
-   "text": "Choose $s\\in W(U_0,\\bar u)$ of degree one. By\n[lem-wf-compact-character-logarithm], there are $N,r\\geq1$ and a\ncontinuous additive character\n\n$$\n\\lambda(g)=\\log(\\chi(g)^N):\\Pi\\longrightarrow E\n$$\n\nwhich is invariant under $g\\mapsto s^{-1}gs$. The Frobenius-equivariant\nisomorphism of [lem-wf-additive-characters-h1] is applied after\nchoosing a $\\mathbf Q_\\ell$-basis $e_1,\\ldots,e_d$ of $E$ and its\ndual coordinate maps $t_i:E\\to\\mathbf Q_\\ell$. Each\n$f_i=t_i\\circ\\lambda$ is a continuous additive character invariant under\n$g\\mapsto s^{-1}gs$. Its image is compact, hence bounded; choose one\ninteger $a$ such that\n$\\ell^a f_i(\\Pi)\\subseteq\\mathbf Z_\\ell$ for every $i$. Put\n$f_i'=\\ell^a f_i$. The lemma gives compatible reductions\n\n$$\n[f'_{i,n}]\\in H^1_{\\mathrm{\\acute et}}(U,\\mathbf Z/\\ell^n\\mathbf Z)\n\\qquad(n\\geq1).\n\\tag{6.1}\n$$\n\nTheir Frobenius invariance follows from the invariance of $\\lambda$ and\nthe equivariance in [lem-wf-additive-characters-h1]. Hence (6.1) is a\nfixed element of the inverse limit, and it is zero by\n[prop-wf-open-curve-h1-no-frobenius-fixed]. The isomorphism in\n[lem-wf-additive-characters-h1] then gives $f_i'=0$, for every\n$i$. Since the $t_i$ separate points of $E$, $\\lambda=0$ on\n$\\Pi$.",
+   "text": "The hypotheses on $U_0$ allow [lem-wf-weil-group-exact-sequence]; its surjectivity gives $s\\in W(U_0,\\bar u)$ with $\\deg(s)=1$. By [lem-wf-compact-character-logarithm], choose $N\\geq1$ and the continuous additive character $\\lambda(g)=\\log(\\chi(g)^N):\\Pi\\to E$, invariant under $g\\mapsto s^{-1}gs$. Every $\\chi(g)^N$ lies in the stated logarithm domain $1+\\ell^2\\mathcal O_E$. We use exactly this domain clause, rather than any unstated condition on the lemma's auxiliary integer $r$.",
    "uses": [
-    "lem-wf-compact-character-logarithm",
+    "lem-wf-weil-group-exact-sequence",
+    "lem-wf-compact-character-logarithm"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-p-real-rankone/thm-wf-rank-one-finite-geometric-image-curve.proof.md",
+    "place": "Proof, first paragraph: degree-one lift and invariant logarithm"
+   }
+  },
+  {
+   "text": "By [def-galois-fibre-functor], $\\Pi$ is the automorphism group of a finite-set-valued functor on a chosen small skeleton, with the evaluation topology. Hence [lem-galois-aut-profinite] makes $\\Pi$ profinite, in particular compact. Choose a $\\mathbf Q_\\ell$-basis of $E$ and its coordinate maps $t_i:E\\to\\mathbf Q_\\ell$. They are continuous by [lem-sfb-finite-dimensional-linear-map-continuous]: the scalar field $\\mathbf Q_\\ell$ is complete and nontrivially valued, and the finite extension $E$ is a finite-dimensional Hausdorff topological vector space with its valuation topology. Thus $f_i=t_i\\circ\\lambda$ are continuous additive characters, still conjugation-invariant. Each image is compact. The open balls $\\{z:|z|_\\ell<\\ell^a\\}$, $a\\geq0$, cover $\\mathbf Q_\\ell$; a finite subcover of each image, followed by the maximum over the finitely many $i$, gives one $a\\geq0$ with $|f_i(g)|_\\ell\\leq\\ell^a$ for all $i,g$. By [def-weil-l-adic-numbers], $f_i'=\\ell^a f_i$ takes values in $\\mathbf Z_\\ell$. As a map to this subspace with the valuation topology, it remains continuous, additive and conjugation-invariant.",
+   "uses": [
+    "def-galois-fibre-functor",
+    "lem-galois-aut-profinite",
+    "lem-sfb-finite-dimensional-linear-map-continuous",
+    "def-weil-l-adic-numbers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-p-real-rankone/thm-wf-rank-one-finite-geometric-image-curve.proof.md",
+    "place": "Proof, first paragraph: coordinate maps and uniform integral scaling"
+   }
+  },
+  {
+   "text": "Apply the current statement of [lem-wf-additive-characters-h1] with $k_0=\\mathbf F_q$. Its additional prime-to-characteristic hypothesis holds: if $p=\\operatorname{char}(\\mathbf F_q)$, then $q=p^b$ for $b\\geq1$, so $\\ell\\nmid q$ implies $\\ell\\ne p$. Its geometric connectedness, separatedness and finite-type hypotheses are precisely among those on $U_0$; its $U,\\bar u$ and degree-one lift are ours. Its valuation topology on $\\mathbf Z_\\ell$ is the subspace topology used in the preceding step. The isomorphism sends $f_i'$ to a compatible family $x_i\\in\\varprojlim_n H^1_{\\mathrm{\\acute et}}(U,\\mathbf Z/\\ell^n\\mathbf Z)$. The stated Frobenius action is $f\\mapsto[g\\mapsto f(s^{-1}gs)]$, so the invariance of $f_i'$ implies $\\Phi_q x_i=x_i$. All hypotheses of [prop-wf-open-curve-h1-no-frobenius-fixed], including normality, pure dimension one and $\\ell\\nmid q$, are those of the target. It gives $x_i=0$. The additive isomorphism is injective, hence $f_i'=0$. The scalar $\\ell^a$ is nonzero, so $t_i\\circ\\lambda=0$ for every $i$. Coordinates separate points of $E$, giving $\\lambda=0$.",
+   "uses": [
     "lem-wf-additive-characters-h1",
     "prop-wf-open-curve-h1-no-frobenius-fixed"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-p-real-rankone/thm-wf-rank-one-finite-geometric-image-curve.proof.md",
+    "place": "Proof, first paragraph: Frobenius-fixed compatible classes and vanishing"
+   }
   },
   {
-   "text": "The logarithm is injective on $1+\\mathfrak m_E^r$ by\n[lem-wf-deep-principal-unit-log]. It follows that\n\n$$\n\\chi(g)^N=1\\qquad(g\\in\\Pi).\n$$",
+   "text": "To justify logarithm injectivity on the domain actually supplied in step 1, use [lem-weil-l-adic-extension-integers-dvr]. Choose a uniformizer $\\varpi$, write $\\ell=u\\varpi^e$ with $u\\in\\mathcal O_E^\\times$ and $e=v_E(\\ell)>0$, and put $r=2e$. Since $\\mathfrak m_E=\\varpi\\mathcal O_E$, multiplying principal ideals gives $\\ell^2\\mathcal O_E=\\varpi^{2e}\\mathcal O_E=\\mathfrak m_E^{2e}$. For every prime $\\ell$, including $\\ell=2$, $r=2e>e/(\\ell-1)$. Thus [lem-wf-deep-principal-unit-log] makes the logarithm injective on $1+\\mathfrak m_E^r=1+\\ell^2\\mathcal O_E$. It is the same series as the logarithm in [lem-wf-compact-character-logarithm]. Since $\\chi(g)^N$ belongs to that domain and $\\lambda(g)=0=\\log(1)$, injectivity gives $\\chi(g)^N=1$ for every $g\\in\\Pi$.",
    "uses": [
-    "lem-wf-deep-principal-unit-log"
+    "lem-weil-l-adic-extension-integers-dvr",
+    "lem-wf-deep-principal-unit-log",
+    "lem-wf-compact-character-logarithm"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-p-real-rankone/thm-wf-rank-one-finite-geometric-image-curve.proof.md",
+    "place": "Proof, second paragraph: injectivity; domain comparison from the cited DVR statement"
+   }
   },
   {
-   "text": "Thus $\\chi(\\Pi)$ is contained in the set of roots of the polynomial\n$T^N-1$, and is finite. Conversely, if $\\chi(\\Pi)$ is finite, its\nexponent supplies such an $N$.",
+   "text": "The image $\\chi(\\Pi)$ lies in the roots of the nonzero polynomial $T^N-1$ over the field $E$, hence has at most $N$ elements. Conversely, for a finite image its exponent (equal to $1$ for the trivial group) is a positive integer killing every image element.",
    "uses": [],
-   "elementary": null
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-p-real-rankone/thm-wf-rank-one-finite-geometric-image-curve.proof.md",
+    "place": "Proof, third paragraph: finite roots and the converse"
+   }
   }
  ],
  "proof_deps": [
-  "lem-wf-compact-character-logarithm",
+  "def-galois-fibre-functor",
+  "def-weil-l-adic-numbers",
+  "lem-galois-aut-profinite",
+  "lem-sfb-finite-dimensional-linear-map-continuous",
+  "lem-weil-l-adic-extension-integers-dvr",
   "lem-wf-additive-characters-h1",
-  "prop-wf-open-curve-h1-no-frobenius-fixed",
-  "lem-wf-deep-principal-unit-log"
+  "lem-wf-compact-character-logarithm",
+  "lem-wf-deep-principal-unit-log",
+  "lem-wf-weil-group-exact-sequence",
+  "prop-wf-open-curve-h1-no-frobenius-fixed"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-p-real-rankone/thm-wf-rank-one-finite-geometric-image-curve.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-p-real-rankone/thm-wf-rank-one-finite-geometric-image-curve.proof.md",
+  "place": "Full proof, retaining the blueprint route; current hypothesis and logarithm-domain obligations expanded"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "WeilGroup|finite_geometric_image|exists_pow_eq_one_of_continuous",
+   "results": "{\"t\": \"2026-10-18T02:12:48Z\", \"tool\": \"grep\", \"query\": \"WeilGroup|finite_geometric_image|exists_pow_eq_one_of_continuous\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A continuous character of the Weil group of a curve over a finite field has finite geometric image",
+   "results": "{\"t\": \"2026-10-18T02:12:49Z\", \"tool\": \"leansearch\", \"query\": \"A continuous character of the Weil group of a curve over a finite field has finite geometric image\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"cyclotomicCharacter.continuous\", \"InfiniteGalois.instCompactSpaceAlgEquivOfIsGalois\", \"BoundedContinuousFunction.char_add_eq_mul\", \"WeakDual.CharacterSpace.toCLM\", \"WeakDual.CharacterSpace.instContinuousLinearMapClass\", \"AddChar.instFintype\", \"FDRep.character\", \"PadicInt.continuousAddCharEquiv\"], \"digest\": \"9704db04d7c2076c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Weil\", \"finite\"",
+   "results": "{\"t\": \"2026-10-18T02:12:49Z\", \"tool\": \"loogle\", \"query\": \"\\\"Weil\\\", \\\"finite\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A continuous rank one Weil character of a normal geometrically connected curve over a finite field has finite image on the geometric fundamental group",
+   "results": "{\"t\": \"2026-10-18T02:12:50Z\", \"tool\": \"leanfinder\", \"query\": \"A continuous rank one Weil character of a normal geometrically connected curve over a finite field has finite image on the geometric fundamental group\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"FunctionField.classNumber\", \"MulChar.finite\", \"FunctionField.RingOfIntegers.instFintypeClassGroupSubtypeMemSubalgebraPolynomialRingOfIntegers\", \"krullTopology_discreteTopology_of_finiteDimensional\", \"Field.absoluteGaloisGroupAbelianization\", \"groupCohomology.Hilbert90.aux_ne_zero\", \"groupCohomology.exists_div_of_norm_eq_one\", \"FiniteField.unitsMap_norm_surjective\"], \"digest\": \"29f98f21347dd401\"}",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Weil.*[Cc]haracter|geometric.*monodromy|finite.*geometric",
+   "results": "{\"t\": \"2026-10-18T02:13:00Z\", \"tool\": \"grep\", \"query\": \"Weil.*[Cc]haracter|geometric.*monodromy|finite.*geometric\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Continuous\", \"IsOfFinOrder\"",
+   "results": "{\"t\": \"2026-10-18T02:13:00Z\", \"tool\": \"loogle\", \"query\": \"\\\"Continuous\\\", \\\"IsOfFinOrder\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Rank one l adic representations of the arithmetic Weil fundamental group have torsion geometric monodromy",
+   "results": "{\"t\": \"2026-10-18T02:13:01Z\", \"tool\": \"leanfinder\", \"query\": \"Rank one l adic representations of the arithmetic Weil fundamental group have torsion geometric monodromy\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Field.absoluteGaloisGroupAbelianization\", \"NumberField.mixedEmbedding.fundamentalCone.integerSetTorsionSMul_stabilizer\", \"IsArithFrobAt.mul_inv_mem_inertia\", \"cyclotomicCharacter.continuous\", \"IsArithFrobAt.exists_of_isInvariant\", \"CategoryTheory.PreGaloisCategory.IsFundamentalGroup.non_trivial\", \"CategoryTheory.PreGaloisCategory.IsFundamentalGroup.non_trivial'\", \"InfiniteGalois.profiniteGalGrp\"], \"digest\": \"16ca2435062e45c0\"}",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -79,5 +174,34 @@
   }
  },
  "chapter": "sec-purity-real-sheaves",
- "unit": "sk-p-real-rankone"
+ "unit": "sk-p-real-rankone",
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "thm-wf-rank-one-finite-geometric-image-curve",
+  "worker": "stage1",
+  "summary": "Repair of returned head 6542e35c04: revalidated every dependency against current DAG statements, checked the explicit prime-to-characteristic and valuation-topology hypotheses of the changed H1 lemma, replaced an unstated deep-domain assumption by the DVR identity ell^2 O_E = m_E^(2e), and cited existing degree-surjectivity, compactness and coordinate-continuity results. Preserved the target statement and the logarithm/cohomology/finite-roots route. No new nodes.",
+  "blueprint": "Current main-20261015 proof first paragraph is realized by steps 1–3, second paragraph by step 4, and third paragraph by step 5. Unit sk-p-real-rankone steps 3–4 are retained.",
+  "tool_uses": [
+   {
+    "node": "lem-galois-aut-profinite",
+    "why": "Generic automorphism-group compactness tool applied to the small finite-set-valued fibre functor in step 2; it supplies compactness required by the unit’s coordinate-scaling argument."
+   },
+   {
+    "node": "lem-weil-l-adic-extension-integers-dvr",
+    "why": "Generic coefficient-field DVR tool for the elementary identity ell^2 O_E = m_E^(2e), needed to use the logarithm injectivity already on the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-galois-aut-profinite",
+  "lem-weil-l-adic-extension-integers-dvr"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q145-17cbf9f34",
+  "group": "Q145",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q145-17cbf9f34 (reviewer sub-agent of L); spot-checked: I read the item, master and main-20261015 sources (identical, order 2626/2970), the unit sk-p-real-rankone, the chapter record and every cited statement. The statement is unchanged and matches the source; there are no new nodes. Step 1: surjectivity of the degree map comes from the statement of lem-wf-weil-group-exact-sequence, and lem-wf-compact-character-logarithm states the domain clause χ(g)^N∈1+ℓ²O_E. Step 2: lem-galois-aut-profinite applies to the small-skeleton fibre functor, the coordinate maps are continuous by the Mathlib leaf (scalar field Q_ℓ, complete and nontrivially valued), and the bound comes from a finite subcover with |ℓ^a|=ℓ^{-a}. Step 3: the H1 lemma's new hypotheses hold (ℓ∤q gives ℓ≠p; the valuation topology matches). Its Frobenius f↦f(s^{-1}gs) is pullback by the Weil lift, and fixed points are the same even under an inverse convention. prop-wf-open-curve-h1-no-frobenius-fixed has exactly the target's hypotheses. Step 4: the DVR lemma gives ℓ²O_E=m_E^{2e}, and r=2e>e/(ℓ-1) for every ℓ including ℓ=2, so the deep-log lemma (same series as sk-d-real-log) gives injectivity. This correctly avoids the compact-log lemma's unstated r. Step 5 is elementary. Edge cases checked: E=Q_ℓ, ℓ=2, ramified E, trivial χ. Accepted tool_uses: lem-galois-aut-profinite and lem-weil-l-adic-extension-integers-dvr, both generic. There is no cycle and no SGA source, and proof_deps equals the union of the steps' uses. Batch-5 flag on lem-wf-weil-group-exact-sequence: acceptable. It is a definitional exact sequence of the Weil group. It reaches cor-galois-lisse-representations only through the definition def-wf-fundamental-representation, which is also reached by the existing stmt_dep def-wf-weil-group. lem-wf-compact-character-logarithm already cites it, so the closure does not grow. It is neither the trace formula nor Poincaré duality, nor a step of either. No changes."
+ }
 }
