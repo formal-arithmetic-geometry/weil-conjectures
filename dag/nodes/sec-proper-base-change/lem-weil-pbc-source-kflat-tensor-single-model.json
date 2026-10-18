@@ -1,0 +1,135 @@
+{
+ "id": "lem-weil-pbc-source-kflat-tensor-single-model",
+ "kind": "statement",
+ "title": "K-flat tensor with a single module has its termwise model",
+ "statement": "Let $A$ be a commutative ring and choose its derived category $D(A)$ [def-weil-abstract-derived-category], equipped with the source K-flat derived tensor product. Let $P$ be an unbounded cochain complex of $A$-modules which is K-flat [def-pc-module-kflat-complex], and let $M$ be any $A$-module. Then $Q(P)\\otimes_A^{\\mathbf L}M[0]$ is isomorphic to $Q$ of the complex whose term in degree $i$ is $P^i\\otimes_A M$ and whose differential is $d_P\\otimes 1_M$. No flatness or boundedness hypothesis on $M$ is imposed.",
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-pc-module-kflat-complex"
+ ],
+ "source": {
+  "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/FlatModel.lean",
+  "place": "DerivedCategory.QObjTensorSingleFunctorObjIso; ordinary-module specialization of the already proved generic source declaration; lines 202-218"
+ },
+ "proof": [
+  {
+   "text": "K-flatness of P passes to the homotopy quotient. The derived tensor counit is invertible on its first factor. Compose this counit with the comparison between tensoring a cochain complex with the degree-zero single complex and tensoring each term with M, and with the quotient-to-derived-category comparison. This is the existing source construction QObjTensorSingleFunctorObjIso; no boundedness or flatness of M is needed.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/FlatModel.lean",
+  "place": "DerivedCategory.QObjTensorSingleFunctorObjIso",
+  "note": "Existing proved source result; no Lean statement or hole is added."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived tensor product of a K-flat complex with a module concentrated in degree zero is computed by termwise tensor",
+   "results": "8 hits concerning total tensor products of complexes; none states the derived tensor bound or K-flat single-module model.",
+   "date": "2026-10-18",
+   "verdict": "Use the existing proved source declaration."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"kFlat\", \"tensor\"",
+   "results": "0 hits",
+   "date": "2026-10-18",
+   "verdict": "No matching Mathlib declaration."
+  },
+  {
+   "tool": "grep",
+   "query": "QObjTensorSingleFunctorObjIso",
+   "results": "0 Mathlib hits; repository rg locates the exact proved declaration in FlatModel.lean.",
+   "date": "2026-10-18",
+   "verdict": "Reuse source."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived tensor product of a K-flat complex with a module concentrated in degree zero is computed by termwise tensor",
+   "results": "8 hits: Module.Flat.lTensor_shortComplex_exact, Module.Flat.rTensor_shortComplex_exact, HomologicalComplex.tensorObj, TensorProduct.gradedComm_tmul_of_zero, Module.Flat.rTensor_exact, Module.Flat.lTensor_exact, ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat, TensorProduct.gradedComm_of_zero_tmul.",
+   "date": "2026-10-18",
+   "verdict": "No exact derived-tensor theorem; reuse the proved source declaration."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.NilpotentDerivedUpperBound",
+  "date": "2026-10-18",
+  "group": "K1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-amplification-proper",
+   "place": "proof (c), TOW local models; Tag 09AR verification of hypothesis (5): upper-bound part of the nilpotent derived reduction argument",
+   "via": [
+    "lem-weil-pbc-nilpotent-derived-upper-bound",
+    "lem-weil-pbc-nilpotent-projective-complex-lift",
+    "lem-weil-pbc-pseudo-coherent-nilpotent-invariance",
+    "lem-weil-pbc-pseudocoherent-normalized-algebra-tower",
+    "lem-weil-pbc-normalized-constructible-local-effectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.CategoryTheory.DerivedCategory.FlatModel",
+  "declaration": "DerivedCategory.QObjTensorSingleFunctorObjIso",
+  "statement": "noncomputable def QObjTensorSingleFunctorObjIso (P : CochainComplex C ℤ)\n    (hP : (HomologicalComplex.quasiIso C (.up ℤ)).kFlat P) (F : C) :\n    Q.obj P ⊗ (singleFunctor C 0).obj F ≅\n      Q.obj (((tensorRight F).mapHomologicalComplex _).obj P)",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-18",
+  "note": "Specialize the generic source declaration to ModuleCat A, where the monoidal Grothendieck abelian category and functorial flat resolution instances already exist."
+ },
+ "lean_audit": {
+  "slopmaster2": {
+   "state": "none",
+   "decls": [
+    {
+     "name": "DerivedCategory.QObjTensorSingleFunctorObjIso",
+     "module": "WeilConjectures.CategoryTheory.DerivedCategory.FlatModel",
+     "lines": [
+      202,
+      218
+     ],
+     "kind": "def",
+     "sorry": false
+    }
+   ],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261018T062818-L-658770",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261018T062818-L-658770",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

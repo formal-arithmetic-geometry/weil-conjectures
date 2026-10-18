@@ -1,0 +1,134 @@
+{
+ "id": "lem-weil-pbc-source-derived-tensor-upper-bound",
+ "kind": "statement",
+ "title": "Upper bound of the derived tensor product of module complexes",
+ "statement": "Let $A$ be a commutative ring and choose its derived category $D(A)$ [def-weil-abstract-derived-category], equipped with the source K-flat derived tensor product. Let $K,L\\in D(A)$ and $b,d\\in\\mathbf Z$. If $H^i(K)=0$ for every $i>b$ and $H^i(L)=0$ for every $i>d$, then $H^i(K\\otimes_A^{\\mathbf L}L)=0$ for every $i>b+d$.",
+ "stmt_deps": [
+  "def-weil-abstract-derived-category"
+ ],
+ "source": {
+  "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/FlatModel.lean",
+  "place": "DerivedCategory.isLE_tensor; ordinary-module specialization of the already proved generic source declaration; lines 441-449"
+ },
+ "proof": [
+  {
+   "text": "Represent K and N by good truncations zero above b and d. Replace the first truncation by its bounded-above flat resolution, still zero above b. This resolution is K-flat, so it computes the derived tensor with the second truncation. Each summand of its total tensor in degree greater than b+d is zero, because at least one factor has degree greater than its bound. Transport this strict upper bound across the two representing isomorphisms. This is the already proved source lemma isLE_tensor.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/FlatModel.lean",
+  "place": "DerivedCategory.isLE_tensor",
+  "note": "Existing proved source result; no Lean statement or hole is added."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The derived tensor product of complexes bounded above in degrees b and d is bounded above in degree b plus d",
+   "results": "8 hits concerning total tensor products of complexes; none states the derived tensor bound or K-flat single-module model.",
+   "date": "2026-10-18",
+   "verdict": "Use the existing proved source declaration."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"isLE\", \"tensor\"",
+   "results": "12 unrelated tensor and adjoint hits",
+   "date": "2026-10-18",
+   "verdict": "No matching Mathlib declaration."
+  },
+  {
+   "tool": "grep",
+   "query": "isLE_tensor",
+   "results": "0 Mathlib hits; repository rg locates the exact proved declaration in FlatModel.lean.",
+   "date": "2026-10-18",
+   "verdict": "Reuse source."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The derived tensor product of complexes bounded above in degrees b and d is bounded above in degree b plus d",
+   "results": "8 hits: HomologicalComplex.tensorObj, SSet.hasDimensionLE_prod, DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE, HomologicalComplex.ιTensorObj, HomologicalComplex.tensorHom, SSet.instHasDimensionLETensorObjHAddNat, SSet.instHasDimensionLTTensorObjHAddNat.",
+   "date": "2026-10-18",
+   "verdict": "No exact derived-tensor theorem; reuse the proved source declaration."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.NilpotentDerivedUpperBound",
+  "date": "2026-10-18",
+  "group": "K1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-amplification-proper",
+   "place": "proof (c), TOW local models; Tag 09AR verification of hypothesis (5): upper-bound part of the nilpotent derived reduction argument",
+   "via": [
+    "lem-weil-pbc-nilpotent-derived-upper-bound",
+    "lem-weil-pbc-nilpotent-projective-complex-lift",
+    "lem-weil-pbc-pseudo-coherent-nilpotent-invariance",
+    "lem-weil-pbc-pseudocoherent-normalized-algebra-tower",
+    "lem-weil-pbc-normalized-constructible-local-effectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.CategoryTheory.DerivedCategory.FlatModel",
+  "declaration": "DerivedCategory.isLE_tensor",
+  "statement": "lemma isLE_tensor (K N : DerivedCategory C) (b d : ℤ) [K.IsLE b] [N.IsLE d] :\n    (K ⊗ N).IsLE (b + d)",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-18",
+  "note": "Specialize the generic source declaration to ModuleCat A, where the monoidal Grothendieck abelian category and functorial flat resolution instances already exist."
+ },
+ "lean_audit": {
+  "slopmaster2": {
+   "state": "none",
+   "decls": [
+    {
+     "name": "DerivedCategory.isLE_tensor",
+     "module": "WeilConjectures.CategoryTheory.DerivedCategory.FlatModel",
+     "lines": [
+      441,
+      449
+     ],
+     "kind": "theorem",
+     "sorry": false
+    }
+   ],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261018T062818-L-658770",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261018T062818-L-658770",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -28,96 +28,91 @@
  ],
  "proof": [
   {
-   "text": "Work on the one-object site with identity covering, where sheaves of A-modules are ordinary A-modules. Choose a representing complex G for C, and use [lem-pc-kflat-resolution] to obtain a quasi-isomorphism P → G with P K-flat and every P^r flat. By [lem-pur-derived-change-of-rings], Q=P⊗_A B, where B=A/I, represents the given reduced object. By [lem-pur-kflat-change-of-rings], Q is K-flat over B and has flat B-module terms. In particular H^i(Q)=0 for i>b, without assuming P bounded.",
+   "text": "Choose a termwise flat K-flat resolution P of a representative of C. Evaluation at the sole object is an additive exact equivalence with ModuleCat A: its inverse is the constant module presheaf, every presheaf is a sheaf for the bottom topology, and the unit is the identity after identifying every site object with the sole object. The sheafification unit identifies evaluated sheaf tensor with ordinary tensor, naturally in both variables. This also identifies unbounded total tensor because the equivalence preserves coproducts. Consequently evaluation preserves termwise flatness and K-flatness.",
    "uses": [
-    "def-weil-abstract-derived-category",
     "lem-pc-kflat-resolution",
-    "lem-pur-derived-change-of-rings",
-    "lem-pur-kflat-change-of-rings"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 0H75, lemma-check-tor-dimension-modulo-nilpotent, nilpotent filtration proof; upper-bound-only adaptation used by Tag 09AR"
-   }
-  },
-  {
-   "text": "Form the good truncation T of Q: T^r=Q^r for r<b, T^b=ker(d_Q^b), and T^r=0 for r>b. The inclusion T→Q induces the identity on cohomology in degrees at most b; above b both cohomologies vanish. Thus it is a quasi-isomorphism by direct calculation of kernels and images. Apply [lem-pc-kflat-bounded-flat-replacement] over B with N=b to obtain F→T with F^r=0 for r>b, all terms flat, and F→T a quasi-isomorphism. By [lem-pc-module-bounded-flat-kflat], F is K-flat. The composite α:F→Q is a quasi-isomorphism between K-flat B-complexes.",
-   "uses": [
-    "def-weil-abstract-derived-category",
-    "lem-pc-kflat-bounded-flat-replacement",
-    "lem-pc-module-bounded-flat-kflat"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 0H75, lemma-check-tor-dimension-modulo-nilpotent, nilpotent filtration proof; upper-bound-only adaptation used by Tag 09AR"
-   }
-  },
-  {
-   "text": "For every B-module M, the cone E=Cone(α) is acyclic by [lem-pur-quasi-iso-cone-acyclic] and K-flat by [lem-pc-kflat-cone-direct-sum]. Regard M as a complex concentrated in degree zero. By [lem-pur-acyclic-kflat-tensor-arbitrary], M⊗_B E is acyclic. The degreewise maps m⊗e ↦ e⊗m and e⊗m ↦ m⊗e are inverse balanced maps commuting with differentials: the differential on the degree-zero M factor is zero, so both tensor differentials act only on e and no sign is introduced. Hence E⊗_B M is acyclic as well. The degreewise distributivity isomorphism identifies this with Cone(α⊗1_M): the differentials are the same block matrix with entries d_Q⊗1, α⊗1, and −d_F⊗1. The cone criterion again proves F⊗_B M→Q⊗_B M is a quasi-isomorphism. Since F⊗_B M is zero in degrees greater than b, H^i(Q⊗_B M)=0 for i>b. This establishes the upper tensor bound needed below; no lower bound or finite Tor amplitude is inferred.",
-   "uses": [
-    "lem-pur-quasi-iso-cone-acyclic",
-    "lem-pc-kflat-cone-direct-sum",
-    "lem-pur-acyclic-kflat-tensor-arbitrary",
-    "def-weil-abstract-derived-category"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 0H75, lemma-check-tor-dimension-modulo-nilpotent, nilpotent filtration proof; upper-bound-only adaptation used by Tag 09AR"
-   }
-  },
-  {
-   "text": "If M is an A-module with IM=0, give it its quotient B-module structure. There is an isomorphism of complexes P⊗_A M≅(P⊗_A B)⊗_B M=Q⊗_B M. Explicitly p⊗m maps to (p⊗1)⊗m, with inverse (p⊗ā)⊗m ↦ p⊗am; the inverse is independent of the lift a because I kills M. These formulas respect balanced tensor relations and commute with the differential d_P. The preceding step therefore proves H^i(P⊗_A M)=0 for i>b whenever IM=0.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 0H75, lemma-check-tor-dimension-modulo-nilpotent, nilpotent filtration proof; upper-bound-only adaptation used by Tag 09AR"
-   }
-  },
-  {
-   "text": "Induct on t≥1 to show that every A-module M killed by I^t has H^i(P⊗_A M)=0 for i>b. The case t=1 is the preceding step. If I^{t+1}M=0, then I^t(IM)=0 and I(M/IM)=0. The sequence 0→IM→M→M/IM→0 is short exact. By flatness of every P^r, in precisely the exact-functor sense of [def-pc-flat-sheaf-modules], tensoring it with P gives a degreewise short exact sequence of complexes. The induction hypothesis and the base case give the bound for its first and third complexes. Here is the required middle exactness argument, rather than an uncited appeal to a long exact sequence: for a degree i>b cocycle z in P⊗M, its image in P⊗(M/IM) is dy since that cohomology vanishes. Lift y to degree i−1 of P⊗M; z−dy comes from an element x of degree i in P⊗IM. Injectivity in degree i+1 shows dx=0. Write x=dw using vanishing of H^i(P⊗IM). Then z=d(y+w) after including w in P⊗M. Every such cocycle is a boundary, completing the induction.",
-   "uses": [
     "def-pc-flat-sheaf-modules",
     "def-weil-abstract-derived-category"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 0H75, lemma-check-tor-dimension-modulo-nilpotent, nilpotent filtration proof; upper-bound-only adaptation used by Tag 09AR"
+    "place": "Tag 0H75, lemma-check-tor-dimension-modulo-nilpotent, upper-bound-only version of its nilpotent filtration proof, as used by Tag 09AR"
    }
   },
   {
-   "text": "Apply the induction with t=N and M=A, since I^N A=0. The complex P⊗_A A is isomorphic to P via p⊗a ↦ ap, with inverse p ↦ p⊗1. Thus H^i(P)=0 for all i>b. Since P→G is a quasi-isomorphism and G represents C, the same vanishing holds for C.",
+   "text": "Use derivedChangeOfRings to get a canonical derived extension whose counit is invertible on P. The supplied object and map formulas identify its additive scalar extension with E. Uniqueness of left derived functors therefore identifies LF(C) with Q(E(P)). Evaluation commutes with scalar extension: on the bottom-topology point site the sheafification unit is invertible and its evaluated source is the ordinary extension of scalars. Hence the ordinary reduced evaluated complex has zero homology above b.",
+   "uses": [
+    "lem-pur-derived-change-of-rings"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0H75, lemma-check-tor-dimension-modulo-nilpotent, upper-bound-only version of its nilpotent filtration proof, as used by Tag 09AR"
+   }
+  },
+  {
+   "text": "Ordinary extension of scalars preserves K-flatness. For a K-flat ordinary B-complex Q with homology zero above b and any B-module M, the existing derived tensor upper-bound theorem applied to Q and M[0] gives an upper bound b+0. The K-flat tensor-single comparison identifies this derived tensor with termwise tensor. Braiding exchanges the two factors, giving vanishing for M tensor Q above b.",
+   "uses": [
+    "lem-pc-kflat-extension-of-scalars",
+    "lem-weil-pbc-source-derived-tensor-upper-bound",
+    "lem-weil-pbc-source-kflat-tensor-single-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0H75, lemma-check-tor-dimension-modulo-nilpotent, upper-bound-only version of its nilpotent filtration proof, as used by Tag 09AR"
+   }
+  },
+  {
+   "text": "For a module M killed by I, use the canonical quotient-ring action. The natural balanced tensor-restriction-extension comparison identifies M tensor_A P with restriction of M tensor_B (B tensor_A P). Restriction of scalars is exact and commutes with homology, so the preceding upper bound proves the claim for all such M.",
+   "uses": [
+    "lem-pc-tensor-restrict-extend-module-natural"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0H75, lemma-check-tor-dimension-modulo-nilpotent, upper-bound-only version of its nilpotent filtration proof, as used by Tag 09AR"
+   }
+  },
+  {
+   "text": "Induct on n for modules killed by I^n. The n=0 case is a zero module. For n+1, set L=IM. Powers of ideal elements and the submodule smul induction show I^n L=0, while I kills M/L. The sequence L to M to M/L is short exact. Termwise flatness of P makes its termwise tensor sequence a short exact sequence of complexes. Exactness of the homology sequence and vanishing of both outer homology objects yield vanishing of the middle one in each degree above b.",
+   "uses": [
+    "def-pc-flat-sheaf-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0H75, lemma-check-tor-dimension-modulo-nilpotent, upper-bound-only version of its nilpotent filtration proof, as used by Tag 09AR"
+   }
+  },
+  {
+   "text": "Apply the induction to M=A and exponent N, using I^N=0. The tensor unit isomorphism gives the bound for the evaluated P. The point equivalence preserves and reflects zero homology. Finally transport the bound along Q(P) isomorphic to C.",
    "uses": [
     "def-weil-abstract-derived-category"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 0H75, lemma-check-tor-dimension-modulo-nilpotent, nilpotent filtration proof; upper-bound-only adaptation used by Tag 09AR"
+    "place": "Tag 0H75, lemma-check-tor-dimension-modulo-nilpotent, upper-bound-only version of its nilpotent filtration proof, as used by Tag 09AR"
    }
   }
  ],
  "proof_deps": [
   "def-pc-flat-sheaf-modules",
   "def-weil-abstract-derived-category",
-  "lem-pc-kflat-bounded-flat-replacement",
-  "lem-pc-kflat-cone-direct-sum",
+  "lem-pc-kflat-extension-of-scalars",
   "lem-pc-kflat-resolution",
-  "lem-pc-module-bounded-flat-kflat",
-  "lem-pur-acyclic-kflat-tensor-arbitrary",
+  "lem-pc-tensor-restrict-extend-module-natural",
   "lem-pur-derived-change-of-rings",
-  "lem-pur-kflat-change-of-rings",
-  "lem-pur-quasi-iso-cone-acyclic"
+  "lem-weil-pbc-source-derived-tensor-upper-bound",
+  "lem-weil-pbc-source-kflat-tensor-single-model"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "worker",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Tag 0H75, lemma-check-tor-dimension-modulo-nilpotent, nilpotent filtration proof; upper-bound-only adaptation used by Tag 09AR",
-  "note": "Upper-bound-only adaptation of the published nilpotent filtration argument; flat representatives and the tensor bound are supplied explicitly."
+  "place": "Tag 0H75, lemma-check-tor-dimension-modulo-nilpotent, upper-bound-only nilpotent filtration argument",
+  "note": "K1, 2026-10-18: actual Lean proof uses the existing source derived tensor upper bound and K-flat tensor-single model in place of a new truncation/replacement/cone argument. Point-site equivalences and filtration glue are proved privately in the assigned module."
  },
  "mathlib_searches": [
   {
@@ -256,14 +251,8 @@
   ]
  },
  "tool_uses": [
-  "lem-pc-kflat-bounded-flat-replacement",
-  "lem-pc-kflat-cone-direct-sum",
   "lem-pc-kflat-resolution",
-  "lem-pc-module-bounded-flat-kflat",
-  "lem-pur-acyclic-kflat-tensor-arbitrary",
-  "lem-pur-derived-change-of-rings",
-  "lem-pur-kflat-change-of-rings",
-  "lem-pur-quasi-iso-cone-acyclic"
+  "lem-pur-derived-change-of-rings"
  ],
  "reviewed": {
   "date": "2026-10-14",
@@ -302,5 +291,15 @@
   "by": "NP",
   "date": "2026-10-15",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261018T062818-L-658770",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
