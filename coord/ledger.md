@@ -15887,3 +15887,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 06:05 L: returned deliver/C1/Sheaf.Paper.GaloisLisseRepresentations (reviewer RETURN: (reviewer C-5c23a, head 5c23afa1b) 6 (C1/node agrees with Lean): in dag/nodes/sec-poincare-duality/cor-galois-lisse-repr)
 - 06:26 L: returned deliver/A2/Sheaf.RingTheory.FiniteAlgebraExtremallyDisconnected (reviewer RETURN: (the landing tools, head 68674e8b6) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Rin)
 - 06:26 L: returned deliver/D2/Sheaf.AlgebraicGeometry.AffineFormallySmooth (reviewer RETURN: (the landing tools, head d0c014242) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
+- 06:26 L: returned deliver/F1/Sheaf.AlgebraicGeometry.OpenImmersionInverseLimitDescent (reviewer RETURN: (the landing tools, head cf2cb6b7e) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
