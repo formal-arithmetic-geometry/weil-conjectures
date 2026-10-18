@@ -8,6 +8,7 @@ module
 public import WeilConjectures.CategoryTheory.Monoidal.Mod.TensorDualToIhomMap
 public import WeilConjectures.SixFunctors.ProEtale.Adic.InternalHomEvaluation
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseInternalHom
+public import WeilConjectures.WeilSheaf.IhomLisse.UpperStarComparison
 
 /-!
 # Duality for lisse `ℓ`-adic sheaves
@@ -38,19 +39,6 @@ namespace AlgebraicGeometry.ProEtale
 variable {l : ℕ} [Fact l.Prime] {Y : Scheme.{u}}
 
 attribute [local instance] Sheaf.symmetricCategory
-
-/-- **Isomorphisms of `ℓ`-adic sheaves are local**: a morphism whose pullbacks along the
-members of a pro-étale cover are isomorphisms is an isomorphism. -/
-lemma AdicSheaf.isIso_of_isIso_upperStar {ι : Type*} {W : ι → Scheme.{u}} (g : ∀ i, W i ⟶ Y)
-    [∀ i, WeaklyEtale (g i)] (hg : Presieve.ofArrows W g ∈ Scheme.proetalePrecoverage Y)
-    {P Q : AdicSheaf l Y} (f : P ⟶ Q) (h : ∀ i, IsIso ((g i)^*ᵃ[l].map f)) : IsIso f := by
-  have : Mono f := Preadditive.mono_of_isZero_kernel _
-    (AdicSheaf.isZero_of_isZero_upperStar g hg fun i ↦
-      (isZero_kernel_of_mono _).of_iso (PreservesKernel.iso (g i)^*ᵃ[l] f))
-  have : Epi f := Preadditive.epi_of_isZero_cokernel _
-    (AdicSheaf.isZero_of_isZero_upperStar g hg fun i ↦
-      (isZero_cokernel_of_epi _).of_iso (PreservesCokernel.iso (g i)^*ᵃ[l] f))
-  exact isIso_of_mono_of_epi f
 
 section Pullback
 

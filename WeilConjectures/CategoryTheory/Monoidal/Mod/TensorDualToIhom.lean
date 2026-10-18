@@ -8,6 +8,7 @@ module
 public import WeilConjectures.CategoryTheory.Monoidal.Mod.Transpose
 public import WeilConjectures.CategoryTheory.Monoidal.Mod.Curry
 public import WeilConjectures.CategoryTheory.Monoidal.Mod.EvaluationPairing
+public import WeilConjectures.CategoryTheory.Monoidal.Mod.IhomComp
 
 /-!
 # The morphism `X ⊗_A M^∨ ⟶ Hom_A(M, X)`
@@ -118,13 +119,6 @@ end Structural
 variable [Abelian C] [MonoidalPreadditive C] [IsGrothendieckAbelian.{v} C]
   [∀ X : C, PreservesColimitsOfSize.{v, v} (MonoidalCategory.tensorLeft X)]
   [∀ X : C, PreservesColimitsOfSize.{v, v} (MonoidalCategory.tensorRight X)]
-
-/-- The evaluation `Hom_A(M, N) ⊗ M ⟶ N` is `A`-linear in `M`. -/
-lemma isLinearRight_evaluation (M N : Mod C A) :
-    IsLinearRight (X := ((ihom M).obj N).X) (D := M) (N := N) (evaluation M N) := by
-  unfold IsLinearRight
-  rw [whiskerLeft_act_evaluation, rightAct, comp_whiskerRight_assoc,
-    act_whiskerRight_evaluation]
 
 variable (M X : Mod C A)
 

@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LowerStarComp
+public import WeilConjectures.SixFunctors.ProEtale.Adic.GeometricFrobenius
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LowerStarComp
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.CoherenceLegacy
 
@@ -170,6 +171,15 @@ noncomputable def adicLowerStarSquareIso {Z Y Y' X : Scheme.{u}} {p : Z ⟶ Y} {
     {p' : Z ⟶ Y'} {q' : Y' ⟶ X} (h : p ≫ q = p' ≫ q') :
     (p)_*ᵃ[l] ⋙ (q)_*ᵃ[l] ≅ (p')_*ᵃ[l] ⋙ (q')_*ᵃ[l] :=
   adicLowerStarComp l p q ≪≫ adicLowerStarCongr l h ≪≫ (adicLowerStarComp l p' q').symm
+
+/-- The exchange isomorphism of the pushforward along a base change `φ̄` with the Frobenius
+pullbacks is the square isomorphism of `φ̄ ≫ Fr_Y⁻¹ = Fr_X⁻¹ ≫ φ̄`. -/
+lemma adicLowerStarGeometricFiberMapCompFrobeniusIso_eq {k : Type u} [Field k] [Finite k]
+    {X₀ Y₀ : Scheme.{u}} {f : X₀ ⟶ Spec (.of k)} {g : Y₀ ⟶ Spec (.of k)} (φ : X₀ ⟶ Y₀)
+    (h : φ ≫ g = f) :
+    adicLowerStarGeometricFiberMapCompFrobeniusIso l φ h =
+      adicLowerStarSquareIso l (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius_inv φ h) :=
+  rfl
 
 lemma adicLowerStarSquareIso_hom_app_hom {Z Y Y' X : Scheme.{u}} {p : Z ⟶ Y} {q : Y ⟶ X}
     {p' : Z ⟶ Y'} {q' : Y' ⟶ X} (h : p ≫ q = p' ≫ q') (M : AdicSheaf l Z) :
