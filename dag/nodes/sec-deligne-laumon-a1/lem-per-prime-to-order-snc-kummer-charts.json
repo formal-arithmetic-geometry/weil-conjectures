@@ -16,7 +16,9 @@
   "def-sbc-normal-dominant-galois",
   "def-weil-etale-morphism",
   "def-fin-normalization-extension",
-  "def-weil-finite-integral-morphism"
+  "def-weil-finite-integral-morphism",
+  "def-trf-log-regular-pair",
+  "def-per-fs-log-smooth-etale"
  ],
  "proof": [
   {
@@ -246,5 +248,23 @@
   "group": "Q68",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q68-b5106d52f (reviewer sub-agent of L); spot-checked: Read in full: the item, both new nodes, every cited statement, and ILO IX 1.4-2.4 (printed pp.132-134). The item statement and stmt_deps are byte-identical to the base; the live node is still unsplit. The seven steps follow IX 2.1: (1) parameter chart from the regular-boundary node; (2) etale-local root-quotient normal form; (3) invariant-lattice algebra; (4) associated log structure plus the fibre-product leaf, so the comparison is an isomorphism; (5) VI 1.8 log regularity, triviality locus = W_V, divisorial identification; (6) global N = O ∩ j_*O^x, glued (elementary); (7) characteristic Q at the selected point. Every cited statement says what the step takes from it, and r=0 is covered. New node lem-per-diagonal-root-invariant-monoid-algebra is true: H acts on the free basis x^m by characters, unit separation leaves only invariant monomials, and Z[Q] is free over Z[P] on z^rho, rho in L∩[0,1)^r. Tested on r=1,n=2,H=Z/2; H=0; r=2,H=<(1,1)> giving A[w]/(w^2-t1t2); and n=1. New node lem-per-snc-parameter-root-quotient is true: tame Abhyankar for exponent |G|, normalization commutes with etale base change, descent from the strict henselization, and 1-zeta^a units since their product is n. It is strictly smaller than the item and cites no SGA (route lock respected); its later split must use the Stacks Abhyankar lemma. Duplicate search: the sbc root nodes cover one divisor, punctured torsors only; lem-sbc-strict-local-root-invariants is the r=1 special case; lem-per-very-tame-local-kummer-quotient is strict-local log charts. None is a duplicate. Tool uses accepted: associated-log, fibre-product leaf, log-regular divisorial structure (as at Q73). Batch 5: I computed each flagged citation's own closure. All are generic log, monoid or commutative algebra (fs/SNC definitions, VI 1.8, K0/UFD, sheafification, Nizol 2.6), with no thm-trf, sk-*, trace or Poincare node and no step of either assumed proof. All accepted. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PrimeToOrderSNCKummerCharts",
+  "declaration": "AlgebraicGeometry.Scheme.primeToOrder_snc_kummerCharts",
+  "file": "lean/Sheaf/AlgebraicGeometry/PrimeToOrderSNCKummerCharts.lean",
+  "statement": "theorem primeToOrder_snc_kummerCharts (Y : Scheme.{u}) [IsIntegral Y] [IsNoetherian Y] (_hY : IsRegularScheme Y) (T : Y.IdealSheafData) (_hT : IsStrictNormalCrossingsBoundary T) (M : EtaleLogStructure Y) (eM : M.monoidSheaf.obj ≅ divisorialLogPresheaf (Scheme.Opens.ι T.support.compl)) (_heM : eM.hom ≫ divisorialStructuralMap (Scheme.Opens.ι T.support.compl) = M.alpha) (hM : M.IsFineSaturated) (G : Type v) [Group G] [Finite G] (_hG : IsUnit (Nat.card G : Γ(Y, ⊤))) (C : Scheme.GaloisCoverAction G (Scheme.Opens.toScheme T.support.compl)) [ConnectedSpace C.Z] : ∃ (_ : IsIntegral C.Z) (_ : Algebra Y.functionField C.Z.functionField), FiniteDimensional Y.functionField C.Z.functionField ∧ Y.fromSpecOfAlgebraFunctionField C.Z.functionField = C.Z.fromSpecFunctionField ≫ C.π ≫ (Scheme.Opens.ι T.support.compl) ∧ ∀ (_hb : IsFinite (Y.fromNormalizationIn C.Z.functionField)), ∃ (hZ : IsLocallyNoetherian (Y.normalizationIn C.Z.functionField)) (N : EtaleLogStructure (Y.normalizationIn C.Z.functionField)) (hN : N.IsFineSaturated) (f : EtaleLogHom ⟨Y.normalizationIn C.Z.functionField, hZ, N, hN⟩ ⟨Y, inferInstance, M, hM⟩), f.base = Y.fromNormalizationIn C.Z.functionField ∧ ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (z : Spec (.of Ω) ⟶ Y.normalizationIn C.Z.functionField), ∃ (c : FSLogChart f) (w : (Scheme.pointSmallEtale z).fiber.obj c.V) (y : (Scheme.pointSmallEtale (z ≫ Y.fromNormalizationIn C.Z.functionField)).fiber.obj c.W), w.left ≫ c.map = y.left ∧ (∀ p : c.P, IsUnit p → p = 1) ∧ (∀ q : c.Q, IsUnit q → q = 1) ∧ Function.Bijective (fun p : c.P ↦ Associates.mk (M.toEtalePrelogStructure.germ (z ≫ Y.fromNormalizationIn C.Z.functionField) c.W y (c.chartY p))) ∧ Function.Bijective (fun q : c.Q ↦ Associates.mk (N.toEtalePrelogStructure.germ z c.V w (c.chartX q))) ∧ Function.Injective c.g ∧ (∀ q : c.Q, ∃ n : ℕ, 0 < n ∧ ∃ p : c.P, c.g p = q ^ n) ∧ Function.Injective c.groupMap ∧ Finite c.cokernel ∧ (∃ n : ℕ, 0 < n ∧ (∀ a : c.cokernel, a ^ n = 1) ∧ ∀ t : c.W.left, IsUnit (n : c.W.left.presheaf.stalk t)) ∧ Etale c.comparison",
+  "branch": "newtargets-dag",
+  "by": "Q40",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f794e6324",
+  "group": "Q40",
+  "result": "pass",
+  "note": "Clause-by-clause check of the Lean statement against the node: Y integral/Noetherian/regular; SNC T; M tied to divisorialLogPresheaf with its structural map; fs; |G| invertible as IsUnit in Γ(Y,⊤); connected GaloisCoverAction torsor; function-field algebra existential but fixed by the generic-point equation (same packaging as the landed TameNormalizationLogRegular); finite-normalization kept as hypothesis _hb; ∃ fs N and EtaleLogHom over b; ∀ geometric z with pointed FSLogChart lifts commuting; sharp P,Q; Associates-characteristic bijections; injective h, Kummer multiples, injective groupMap, finite cokernel killed by n invertible on U; Etale comparison. Nothing stronger or missing; empty boundary/trivial G/n=1 covered. Node statement identical to live; lean.statement verbatim; single sorry; docstrings carry source, blueprint tag and 7 steps; added stmt_deps def-trf-log-regular-pair and def-per-fs-log-smooth-etale own the used declarations. nt_compile --json clean (2.6 s). No findings."
  }
 }

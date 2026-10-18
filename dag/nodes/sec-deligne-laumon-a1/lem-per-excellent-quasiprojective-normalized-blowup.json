@@ -16,7 +16,9 @@
   "def-sc-normalization",
   "pqf-def-locnoeth",
   "def-weil-finite-integral-morphism",
-  "def-kun-projective"
+  "def-kun-projective",
+  "def-nagata-global-blowup",
+  "def-nagata-projective-space-base-change"
  ],
  "proof": [
   {
@@ -334,5 +336,23 @@
   "group": "NM",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NM-a1a093fc1 (reviewer sub-agent of L); spot-checked: Read the item in full: 10 steps, no new nodes, statement unchanged. I also read every cited node statement and the Stacks sources 087S (morphisms l.10848: ample base implies projective is H-projective), 0B3I, 01WE, 01N2, 01MW/01Q2, 01PU, 0HAB and 07QU. One fault, C1: Steps 2 and 7 identify P^m_S, defined in the DAG as S x_Z P^m_Z (def-nagata-projective-space-base-change), with Proj A[T_0..T_m] without a citation, and A need not be flat over Z. I fixed this by citing the existing node lem-nagata-affine-proj-scalar-extension (Stacks 01N2, cartesian square for B = S tensor_R A) in both steps, and added it to proof_deps and split_report.tool_uses. Its closure does not contain the item, so there is no cycle, and it has no trf or pod node. The rest is correct. Step 3: Sym(J) to Rees(J) is surjective in each degree and gives a closed immersion by relative-Proj functoriality (3); the chart (R[Jt]_{at})_0 is R[J/a], injective because R is a domain and a is nonzero. Step 4 (integrality, elementary) is accepted: D(a) is nonempty inside a domain chart and maps into U = X minus V(J), so p^{-1}U is dense and irreducible. Step 5: 01WC gives proper, hence finite type; 07QU makes the cover excellent and 0HAB extends this to every affine, which is exactly the preparation lemma's hypothesis. Steps 6 and 9: 087S is used only over bases with an ample sheaf constructed in Steps 2 and 7; the immersion is base-changed as closed followed by open, then composed and followed by Segre 01WD; 0B3I and 01WE give pν H-projective. Step 8: on integral Z the componentwise normalization is the function-field normalization. Step 10: O meets p^{-1}U because Z is irreducible. Edge cases J = O_X, X = Spec k and nonreduced A are fine; J = 0 is excluded. Duplicates: lem-trf-normalized-blowup-calculus is only over Q, so not a duplicate. Batch-5 flags are all accepted as generic scheme theory, each checked by its own closure: def-trf-projective-bundle-morphism (01W8), lem-trf-ample-restrict-closed-immersion (01PU), lem-trf-excellent-scheme-affine-cover and its G-ring/J-2/catenary children (0HAB), which is also the only trf route of lem-per-excellent-normalization-preparation, lem-trf-finite-projective-bundle (0B3I), lem-trf-h-projective-composition (01WE), lem-trf-proj-qc-open-twist-ample (01MW), lem-trf-projective-bundle-proper (01WC) and lem-trf-projective-bundle-to-h-projective (087S). None of them reaches the trace-formula transport, a batch-4 target or Poincare duality. No SGA is cited.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ExcellentQuasiprojectiveNormalizedBlowup",
+  "declaration": "AlgebraicGeometry.excellent_quasiprojective_normalizedBlowup",
+  "file": "lean/Sheaf/AlgebraicGeometry/ExcellentQuasiprojectiveNormalizedBlowup.lean",
+  "statement": "theorem excellent_quasiprojective_normalizedBlowup (A : Type u) [CommRing A] [IsNoetherianRing A] (hA : IsExcellent A) (X : Scheme.{u}) [IsIntegral X] (f : X ⟶ Spec (.of A)) [LocallyOfFiniteType f] [QuasiCompact f] (hX : ∃ (m : ℕ) (i : X ⟶ ℙ(ULift.{u} (Fin (m + 1)); Spec (.of A))), IsImmersion i ∧ i ≫ ℙ(ULift.{u} (Fin (m + 1)); Spec (.of A)) ↘ Spec (.of A) = f) (J : X.IdealSheafData) (hJ₀ : J ≠ ⊥) (hJ : J.toModules.IsQuasiCoherentFiniteType) : ∃ hZ : IsIntegral J.blowup, IsNoetherian J.blowup ∧ IsIntegral (@Scheme.normalization J.blowup hZ) ∧ IsNoetherian (@Scheme.normalization J.blowup hZ) ∧ LocallyOfFiniteType (J.blowupMap ≫ f) ∧ QuasiCompact (J.blowupMap ≫ f) ∧ LocallyOfFiniteType (@Scheme.fromNormalization J.blowup hZ ≫ J.blowupMap ≫ f) ∧ QuasiCompact (@Scheme.fromNormalization J.blowup hZ ≫ J.blowupMap ≫ f) ∧ (∃ (m : ℕ) (i : J.blowup ⟶ ℙ(ULift.{u} (Fin (m + 1)); Spec (.of A))), IsImmersion i ∧ i ≫ ℙ(ULift.{u} (Fin (m + 1)); Spec (.of A)) ↘ Spec (.of A) = J.blowupMap ≫ f) ∧ (∃ (m : ℕ) (i : @Scheme.normalization J.blowup hZ ⟶ ℙ(ULift.{u} (Fin (m + 1)); Spec (.of A))), IsImmersion i ∧ i ≫ ℙ(ULift.{u} (Fin (m + 1)); Spec (.of A)) ↘ Spec (.of A) = @Scheme.fromNormalization J.blowup hZ ≫ J.blowupMap ≫ f) ∧ IsFinite (@Scheme.fromNormalization J.blowup hZ) ∧ IsHProjective (@Scheme.fromNormalization J.blowup hZ ≫ J.blowupMap) ∧ ∃ U : X.Opens, Dense (U : Set X) ∧ Dense ((@Scheme.fromNormalization J.blowup hZ ≫ J.blowupMap) ⁻¹ᵁ U : Set (@Scheme.normalization J.blowup hZ)) ∧ IsIso ((@Scheme.fromNormalization J.blowup hZ ≫ J.blowupMap) ∣_ U)",
+  "branch": "newtargets-dag",
+  "by": "Q89",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d5b7d0e58",
+  "group": "Q89",
+  "result": "pass",
+  "note": "Module compiles clean (exit 0, 2.5 s; control copy confirmed the compile is real); stmt field verbatim; only an existential-sorry theorem. Every node clause matches: excellent Noetherian A, Spec A, integral X of finite type over Spec A, immersion over the base into P(ULift(Fin(m+1))), J ≠ ⊥ (⊥ ideal = zero by rfl) with qc finite-type ideal; ordinary blowup = glued Proj Rees; function-field normalization; integrality asserted not assumed; IsNoetherian = qc + loc. Noetherian; finite type, immersions into projective spaces, IsFinite ν, IsHProjective (ν≫p); birational via dense inverse-image open, equivalent since separated. Added stmt_deps (global blowup, projective space) are existing landed nodes; dep records unchanged; no duplicate; edge cases J=⊤/⊥, empty X, m=0, nonreduced A fine. Advisory: blowupMap/toModules owners not in stmt_deps; unused proof-dep imports."
  }
 }

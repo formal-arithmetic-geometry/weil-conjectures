@@ -1,0 +1,117 @@
+{
+ "id": "def-trf-comonad-standard-resolution",
+ "kind": "definition",
+ "title": "Prescribed standard simplicial resolution data of a comonad",
+ "status": "split",
+ "statement": "Let $\\mathcal C$ be an ordinary category and let $(T,e,c)$ be a comonad: an endofunctor $T:\\mathcal C\\to\\mathcal C$ with natural transformations $e:T\\to\\mathrm{id}_{\\mathcal C}$ and $c:T\\to T^2$ satisfying $(eT)c=1_T=(Te)c$ and $(cT)c=(Tc)c$. Define its powers by $T^0=\\mathrm{id}_{\\mathcal C}$ and $T^{n+1}=T\\circ T^n$. For a simplicial object $B_\\bullet$ in endofunctors [def-weil-pbc-simplicial-object] and an augmentation $a:B_\\bullet\\to\\operatorname{const}(\\mathrm{id}_{\\mathcal C})$, say that $(B_\\bullet,a)$ is a standard simplicial resolution of $(T,e,c)$ if $B_n=T^{n+1}$ for every $n\\geq0$, its faces are $d_i=T^i e T^{n-i}:B_n\\to B_{n-1}$ for $n\\geq1$, $0\\leq i\\leq n$, its degeneracies are $s_i=T^i c T^{n-i}:B_n\\to B_{n+1}$ for $n\\geq0$, $0\\leq i\\leq n$, and $a_0=e$. The operator equalities use transport along the specified equalities of their source and target functors. This defines a predicate on the supplied augmented simplicial object, without asserting its existence.",
+ "stmt_deps": [
+  "def-weil-pbc-simplicial-object"
+ ],
+ "source": {
+  "document": "literature/stacks-project/simplicial.tex",
+  "place": "Tag 0G5M, example-godement: powers and whiskered faces and degeneracies; degree-zero augmentation e as in Tag 0G5N, lemma-godement."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "resolutionPower|IsStandardSimplicialResolution|[Cc]omonad.*[Ss]implicial|[Ss]implicial.*[Cc]omonad",
+   "results": "{\"t\": \"2026-10-18T22:46:34Z\", \"tool\": \"grep\", \"query\": \"resolutionPower|IsStandardSimplicialResolution|[Cc]omonad.*[Ss]implicial|[Ss]implicial.*[Cc]omonad\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "No match: augmentation and ExtraDegeneracy describe supplied simplicial objects, not the predicate prescribing powers and whiskered operators of a comonad."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The prescribed powers faces degeneracies and augmentation of the standard simplicial resolution of a comonad",
+   "results": "{\"t\": \"2026-10-18T22:46:35Z\", \"tool\": \"leansearch\", \"query\": \"The prescribed powers faces degeneracies and augmentation of the standard simplicial resolution of a comonad\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.CosimplicialObject.augment\", \"CategoryTheory.SimplicialObject.augment\", \"CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.recOn\", \"CategoryTheory.SimplicialObject.σ\", \"CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.s\", \"CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.mk\", \"CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.s'\", \"CategoryTheory.CosimplicialObject.σ\"], \"digest\": \"f8ae2b9dc439efbf\"}",
+   "date": "2026-10-18",
+   "verdict": "No match: augmentation and ExtraDegeneracy describe supplied simplicial objects, not the predicate prescribing powers and whiskered operators of a comonad."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Predicate specifying the standard augmented simplicial object of a comonad using powers and whiskered counit and comultiplication",
+   "results": "{\"t\": \"2026-10-18T22:46:37Z\", \"tool\": \"leanfinder\", \"query\": \"Predicate specifying the standard augmented simplicial object of a comonad using powers and whiskered counit and comultiplication\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialObject.Augmented\", \"CategoryTheory.CosimplicialObject.Augmented\", \"CategoryTheory.SimplicialObject.Augmented.const\", \"CategoryTheory.CosimplicialObject.Augmented.const\", \"CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy\", \"CategoryTheory.CosimplicialObject\", \"CategoryTheory.CosimplicialObject.augment\", \"CategoryTheory.CosimplicialObject.instCategoryAugmented\"], \"digest\": \"b2e9037286814bed\"}",
+   "date": "2026-10-18",
+   "verdict": "No match: augmentation and ExtraDegeneracy describe supplied simplicial objects, not the predicate prescribing powers and whiskered operators of a comonad."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n resolutionPower|IsStandardSimplicialResolution|[Cc]omonad.*[Ss]implicial|[Ss]implicial.*[Cc]omonad in /home/ubuntu/weil-src-slopmaster2/WeilConjectures and /home/ubuntu/weil-newtargets-shared/lean/Sheaf",
+   "results": "No hits in either source tree.",
+   "date": "2026-10-18",
+   "verdict": "No existing declaration. DAG search found the existence theorem lem-trf-comonad-simplicial-object, not a definition node for the prescribed resolution data. Other comonad nodes concern free categories or specialized sheaf constructions. blueprint_refs.py search comonad: 0 blueprint nodes."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-adjunction-standard-simplicial-homotopy",
+  "date": "2026-10-18",
+  "group": "NB"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Supporting ring/sheaf input: Functorial standard resolutions and comparison with arbitrary polynomial resolutions. Generic input to lem-trf-cotangent-resolution-coherence: Standard simplicial object of an adjunction and its homotopy equivalences. Definitional input: the powers, whiskered faces and degeneracies, and augmentation prescribed in Stacks Example 0G5M.",
+   "via": [
+    "lem-trf-adjunction-standard-simplicial-homotopy",
+    "lem-trf-cotangent-resolution-coherence",
+    "lem-trf-lci-cotangent-presentation",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ComonadStandardResolution",
+  "declaration": "CategoryTheory.Comonad.IsStandardSimplicialResolution",
+  "declarations": [
+   "CategoryTheory.Comonad.resolutionPower",
+   "CategoryTheory.Comonad.IsStandardSimplicialResolution"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/ComonadStandardResolution.lean",
+  "statement": "def IsStandardSimplicialResolution (T : Comonad C) (B : SimplicialObject (C ⥤ C)) (e : B ⟶ (SimplicialObject.const (C ⥤ C)).obj (𝟭 C)) : Prop",
+  "branch": "newtargets-dag",
+  "by": "NB",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-22e65b461",
+  "group": "NB",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-22e65b461",
+  "group": "NB",
+  "result": "pass",
+  "note": "H2 re-delivery done as required: new def node def-trf-comonad-standard-resolution owns resolutionPower/IsStandardSimplicialResolution in its own module (old module minus the theorem); item module unchanged except the import; stmt_deps = base + new def node; the theorem lem-trf-comonad-simplicial-object is in proof_deps only. Clauses checked against Stacks 0G5M/0G5N/08NC/08ND: faces T^iεT^{n-i} counted from the left, degeneracies T^iδT^{n-i}, augmentation ε, first section pinned to η_{Ua} plus degeneracies, homotopies in the prism node's direction, free-object section; a strict section is equivalent to the node (homotopic maps into const objects are equal); 4 free universes; edge cases OK; lean.statement verbatim for both nodes. nt_compile --json clean (1.3 s/1.4 s, exit 0); a control with the predicate renamed makes the item fail. Advisory: resolutionPower duplicates the live NaturalTransport.power, which only a theorem node owns; NZ's comonad theorem should reuse this def node."
+ }
+}

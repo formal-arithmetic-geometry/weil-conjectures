@@ -9,7 +9,8 @@
  },
  "stmt_deps": [
   "def-weil-pbc-simplicial-object",
-  "lem-coef-simplicial-extra-degeneracy-prism"
+  "lem-coef-simplicial-extra-degeneracy-prism",
+  "def-trf-comonad-standard-resolution"
  ],
  "proof": [
   {
@@ -228,5 +229,30 @@
   "group": "NR",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NR-b967839de (reviewer sub-agent of L); spot-checked: I read the item, the new node lem-trf-comonad-simplicial-object, and the full statements of all three cited nodes (def-weil-pbc-simplicial-object and the two Mathlib leaves lem-coef-simplicial-extra-degeneracy-prism and lem-coef-extra-degeneracy-contraction). I checked them against Stacks simplicial.tex: 0G5M (l.6193), 0G5N (l.6226), 08N9, 08NC (l.6675) and 08ND (l.6729). The item statement is byte-identical to the base and adds no hypotheses (F/U here are U/V in Stacks). Step 1: all three comonad identities follow from the triangle identities and naturality of eta. Step 3: on Z=UX(a) every face and degeneracy with index i+1 is UF of the one with index i, so eta-naturality gives every extra-degeneracy equation of the prism node, using Mathlib's convention. Step 5: on W=X(Fs) with v=F(eta_s), naturality of the face and degeneracy transformations at v and epsilon_{Fs}v=1 give the right-hand version of the equations. Step 6: index reversal (d^r_i=d_{n-i}) turns them into left extra degeneracies, and I checked each substitution. Step 7: H~_j=H_{n-j} gives a homotopy from 1 to ae; I checked the endpoint, middle-face and strict-face cases. The new node matches 0G5N hypothesis by hypothesis and is statement-only. It is the source's own Godement lemma and strictly more general than the item, not a restated clause. Small cases tested: identity comonad, the degree-1 identities and the free/forgetful adjunction. Duplicate search over the whole DAG and blueprint main-20261015 found only unrelated sheaf-Godement, free-category comonad and infinity-bar nodes. There is no cycle: the new node's closure is two simplicial definitions, and the coef tools are Mathlib leaves. Batch-5 flag on lem-trf-comonad-simplicial-object: accepted. Its closure is pure category theory, outside both assumptions and not a step of the proof of the trace formula or of Poincare duality, and the item was already reachable from batch 5 through its existing citers. The report's note that 08ND composes the self-map in the wrong order is right and does not affect the statements. No fixes were written."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.AdjunctionStandardSimplicialHomotopy",
+  "declaration": "CategoryTheory.Adjunction.exists_standardSimplicialHomotopy",
+  "declarations": [
+   "CategoryTheory.Adjunction.standardSimplicialRight",
+   "CategoryTheory.Adjunction.standardSimplicialRightAugmentation",
+   "CategoryTheory.Adjunction.standardSimplicialFree",
+   "CategoryTheory.Adjunction.standardSimplicialFreeAugmentation",
+   "CategoryTheory.Adjunction.exists_standardSimplicialHomotopy"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/AdjunctionStandardSimplicialHomotopy.lean",
+  "statement": "theorem exists_standardSimplicialHomotopy {F : S ⥤ A} {U : A ⥤ S} (adj : F ⊣ U) : ∃ (B : SimplicialObject (A ⥤ A)) (e : B ⟶ (SimplicialObject.const (A ⥤ A)).obj (𝟭 A)), Comonad.IsStandardSimplicialResolution adj.toComonad B e ∧ (∃ r : (SimplicialObject.const (A ⥤ S)).obj U ⟶ standardSimplicialRight B U, r ≫ standardSimplicialRightAugmentation B e U = 𝟙 _ ∧ Nonempty (SimplicialObject.Homotopy (standardSimplicialRightAugmentation B e U ≫ r) (𝟙 (standardSimplicialRight B U))) ∧ HEq (r.app (op ⦋0⦌)) (Functor.whiskerLeft U adj.unit) ∧ (∀ n : ℕ, r.app (op ⦋n⦌) = r.app (op ⦋0⦌) ≫ (standardSimplicialRight B U).map (SimplexCategory.isTerminalZero.from ⦋n⦌).op)) ∧ (∃ l : (SimplicialObject.const (S ⥤ A)).obj F ⟶ standardSimplicialFree B F, l ≫ standardSimplicialFreeAugmentation B e F = 𝟙 _ ∧ Nonempty (SimplicialObject.Homotopy (𝟙 (standardSimplicialFree B F)) (standardSimplicialFreeAugmentation B e F ≫ l)))",
+  "branch": "newtargets-dag",
+  "by": "NB",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-22e65b461",
+  "group": "NB",
+  "result": "pass",
+  "note": "H2 re-delivery done as required: new def node def-trf-comonad-standard-resolution owns resolutionPower/IsStandardSimplicialResolution in its own module (old module minus the theorem); item module unchanged except the import; stmt_deps = base + new def node; the theorem lem-trf-comonad-simplicial-object is in proof_deps only. Clauses checked against Stacks 0G5M/0G5N/08NC/08ND: faces T^iεT^{n-i} counted from the left, degeneracies T^iδT^{n-i}, augmentation ε, first section pinned to η_{Ua} plus degeneracies, homotopies in the prism node's direction, free-object section; a strict section is equivalent to the node (homotopic maps into const objects are equal); 4 free universes; edge cases OK; lean.statement verbatim for both nodes. nt_compile --json clean (1.3 s/1.4 s, exit 0); a control with the predicate renamed makes the item fail. Advisory: resolutionPower duplicates the live NaturalTransport.power, which only a theorem node owns; NZ's comonad theorem should reuse this def node."
  }
 }
