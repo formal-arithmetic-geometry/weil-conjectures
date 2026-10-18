@@ -1,0 +1,119 @@
+{
+ "id": "lem-weil-pbc-prime-curve-charP-high-vanishing",
+ "kind": "statement",
+ "title": "Characteristic-prime curve direct-image vanishing above degree one",
+ "statement": "Let f : C → S be a proper smooth morphism of schemes with nonempty geometrically connected one-dimensional fibres. Let p be prime and suppose p = 0 in Γ(S, O_S). For every integer q > 1, R^q f_* of the constant lifted F_p-module is the zero sheaf. Direct images and geometric stalks use [def-weil-pbc-direct-image] and [def-weil-pbc-geometric-stalks]; the associated constructibility convention is [def-weil-pbc-etale-constructible-sheaf]. The base need not be reduced or Noetherian.",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0GKV, case (b), vanishing paragraph; Tag 0A3N"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-geometric-stalks",
+  "def-weil-pbc-etale-constructible-sheaf"
+ ],
+ "proof": [
+  {
+   "text": "at each algebraically closed geometric point, base change gives a smooth\nproper connected curve of dimension one. The image of p = 0 in the global section\nring of the base gives characteristic p in this geometric field. The Artin--Schreier\ncurve dimension theorem makes the constant Z/p cohomology zero above degree one.\nConstants commute with forgetting coefficients, and the module/abelian cohomology\ncomparison reflects zero objects, giving the same vanishing for prime modules.\nProper base change and preservation of constants identify this group with the\ngeometric stalk of the required higher direct image. The algebraic-closure-point\nstalk functors are conservative; applied to the identity versus zero, they show the\nwhole higher direct image is zero. Empty schemes satisfy this argument vacuously.",
+   "uses": [
+    "lem-sc-artin-schreier-dimension",
+    "cor-weil-pbc-geometric-fiber-finite",
+    "lem-weil-pbc-etale-module-cohomology-forget",
+    "lemma-weil-pbc-geometric-stalk-conservative",
+    "lemma-constructible-pullback-constant",
+    "lem-sbc-smooth-relative-dimension-permanence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-artin-schreier-dimension",
+  "cor-weil-pbc-geometric-fiber-finite",
+  "lem-weil-pbc-etale-module-cohomology-forget",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "lemma-constructible-pullback-constant",
+  "lem-sbc-smooth-relative-dimension-permanence"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0GKV, case (b), vanishing paragraph; Tag 0A3N"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "etale cohomology of the constant prime field on a smooth proper curve in characteristic p vanishes in degrees greater than one",
+   "results": "8 hits, none is the stated etale-sheaf theorem.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cohomology\", \"CharP\"",
+   "results": "0 hits.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "etale.*vanish|vanish.*etale",
+   "results": "1 hit: RingTheory/Etale/Basic, vanishing of differential modules, not etale sheaf cohomology.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "higher etale cohomology constant prime field sheaf on proper smooth curves in characteristic p vanishes above one",
+   "results": "8 hits: AlgebraicGeometry.StructureSheaf.res_const', AlgebraicGeometry.IsEtale, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.Scheme.etaleTopology, Algebra.FormallyEtale.subsingleton_h1Cotangent, Algebra.exists_etale_of_isEtaleAt, Algebra.FormallySmooth.subsingleton_h1Cotangent, Algebra.isOpen_etaleLocus. General algebraic/sheaf helpers only; none is the stated theorem.",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProperSmoothCurvesPrimeCoefficients",
+  "date": "2026-10-18",
+  "group": "T8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-proper-smooth-curves-prime-coefficients",
+   "place": "Tag 0GKV, case (b), vanishing paragraph; Tag 0A3N"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PrimeCurveCharPHighVanishing",
+  "file": "lean/Sheaf/AlgebraicGeometry/PrimeCurveCharPHighVanishing.lean",
+  "declaration": "AlgebraicGeometry.Etale.prime_higherDirectImage_zero_of_charP",
+  "statement": "theorem prime_higherDirectImage_zero_of_charP\n    {C S : Scheme.{u}} (f : C ⟶ S) [Smooth f] [IsProper f]\n    [GeometricallyConnected f]\n    (hdim : ∀ s : S, topologicalKrullDim (f.fiber s) = 1)\n    (p : ℕ) [Fact p.Prime] (hp : (p : Γ(S, ⊤)) = 0) (q : ℕ) (hq : 1 < q) :\n    IsZero (higherDirectImage (ULift.{u + 1} (ZMod p)) f q\n      ((constantSheaf C.smallEtaleTopology _).obj\n        (ModuleCat.of (ULift.{u + 1} (ZMod p)) (ULift.{u + 1} (ZMod p)))))",
+  "branch": "sheaf-dag",
+  "by": "T8",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T8",
+  "result": "pass",
+  "landing": "20261018T091412-L-3259045",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T8",
+  "result": "pass",
+  "landing": "20261018T091412-L-3259045",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,117 @@
+{
+ "id": "lem-weil-pbc-constructible-cyclic-module-of-abelian",
+ "kind": "statement",
+ "title": "Constructible cyclic module sheaves from finite abelian charts",
+ "statement": "Let S be a scheme, n a nonzero natural number, and M a sheaf of modules over the lifted ring Z/n on S_et. If its underlying abelian sheaf is isomorphic to an abelian sheaf A admitting finite constant abelian charts on a finite constructible locally closed stratification, then M is constructible with finite module charts. Direct images, geometric stalks and the finite-module constructibility convention are [def-weil-pbc-direct-image], [def-weil-pbc-geometric-stalks] and [def-weil-pbc-etale-constructible-sheaf]. The assertion includes n = 1 and empty strata.",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0GKV, final coefficient comparison; Tags 03RU and 03RW"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-geometric-stalks",
+  "def-weil-pbc-etale-constructible-sheaf"
+ ],
+ "proof": [
+  {
+   "text": "use the same finite stratification. Inverse image commutes with forgetting\ncoefficients, so its module restriction has the indicated underlying abelian sheaf.\nThe given finite constant charts provide a locally constant datum. Lift any geometric\npoint through their etale cover; the pullback-stalk and constant-stalk comparisons\nidentify its stalk with the finite abelian chart value. Transport through the given\nabelian isomorphism. The finite-local-cyclic-module comparison now lifts these finite\nabelian local systems to finite module charts. This comparison discards empty charts,\nso neither empty schemes nor arbitrarily large constant values on empty charts cause\nan exception. The argument works for every nonzero modulus, including modulus one.",
+   "uses": [
+    "lem-weil-pbc-finite-local-cyclic-module-forget",
+    "lem-weil-pbc-module-abelian-inverse-image-comparison",
+    "def-weil-pbc-constructible-abelian-sheaf",
+    "def-weil-pbc-etale-constructible-sheaf",
+    "lem-weil-pbc-constant-sheaf-geometric-stalk"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-local-cyclic-module-forget",
+  "lem-weil-pbc-module-abelian-inverse-image-comparison",
+  "def-weil-pbc-constructible-abelian-sheaf",
+  "def-weil-pbc-etale-constructible-sheaf",
+  "lem-weil-pbc-constant-sheaf-geometric-stalk"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0GKV, final coefficient comparison; Tags 03RU and 03RW"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "constructible sheaf of cyclic modules from constructibility of its underlying abelian sheaf",
+   "results": "8 hits, none is the stated etale-sheaf theorem.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"constructible\", \"module\"",
+   "results": "0 hits.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*(cyclic|module)|module.*constructible",
+   "results": "0 hits.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "constructible module sheaf over Z/n from constructible underlying abelian sheaf",
+   "results": "8 hits: ModuleCat.tildeInModuleCat, SheafOfModules.mk, SheafOfModules.toSheaf, SheafOfModules, AlgebraicGeometry.Scheme.Modules, AlgebraicGeometry.Scheme.Modules.presheaf, PresheafOfModules.Sheafify.module, SheafOfModules.instAbelian. General algebraic/sheaf helpers only; none is the stated theorem.",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProperSmoothCurvesPrimeCoefficients",
+  "date": "2026-10-18",
+  "group": "T8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-proper-smooth-curves-prime-coefficients",
+   "place": "Tag 0GKV, final coefficient comparison; Tags 03RU and 03RW"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ConstructibleCyclicModuleOfAbelian",
+  "file": "lean/Sheaf/AlgebraicGeometry/ConstructibleCyclicModuleOfAbelian.lean",
+  "declaration": "AlgebraicGeometry.Scheme.isConstructibleEtaleModuleSheaf_of_abelianIso",
+  "statement": "theorem isConstructibleEtaleModuleSheaf_of_abelianIso {S : Scheme.{u}} (p : ℕ) [NeZero p]\n    (M : Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod p))))\n    (A : Sheaf S.smallEtaleTopology AddCommGrpCat.{u + 1})\n    (e : (Etale.moduleAbelianForget (ULift.{u + 1} (ZMod p)) S).obj M ≅ A)\n    (hA : IsConstructibleAbelianSheaf A) : IsConstructibleEtaleModuleSheaf M",
+  "branch": "sheaf-dag",
+  "by": "T8",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T8",
+  "result": "pass",
+  "landing": "20261018T091412-L-3259045",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T8",
+  "result": "pass",
+  "landing": "20261018T091412-L-3259045",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

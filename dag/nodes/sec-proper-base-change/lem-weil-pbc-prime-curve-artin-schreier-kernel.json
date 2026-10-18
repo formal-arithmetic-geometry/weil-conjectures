@@ -1,0 +1,121 @@
+{
+ "id": "lem-weil-pbc-prime-curve-artin-schreier-kernel",
+ "kind": "statement",
+ "title": "Degree-one prime coefficients as a Frobenius fixed-point kernel",
+ "statement": "Let f : X → S be proper and smooth with nonempty geometrically connected one-dimensional fibres over a quasi-compact locally Noetherian scheme S. Let p be prime and suppose p = 0 in Γ(S, O_S). There exist a finite locally free quasi-coherent O_S-module E and an additive endomorphism F of its lifted associated etale sheaf satisfying F(ae) = a^p F(e) on every etale object, such that the underlying abelian sheaf of R^1 f_* of the constant lifted F_p-module is isomorphic to kernel(F - identity). Direct images use [def-weil-pbc-direct-image], geometric stalks use [def-weil-pbc-geometric-stalks], and the subsequent finite-module constructibility convention is [def-weil-pbc-etale-constructible-sheaf]. This conclusion is a kernel realization, without an assertion that the kernel is constructible.",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0GKV, case (b), second and third paragraphs"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-geometric-stalks",
+  "def-weil-pbc-etale-constructible-sheaf"
+ ],
+ "proof": [
+  {
+   "text": "Pullback of global functions makes p zero on X. The scheme Artin--Schreier\nsection-data and exactness lemmas give the short exact sequence of constant Z/p,\nthe lifted associated structure sheaf, and that same structure sheaf with map wp.\nTransport its tensor-unit model to X.etaleAdditiveSheaf by the natural coordinate\nidentifications: on U the component sends x to ULift.up (a U x). Naturality is the\nrestriction identity in the section data, and each component is an additive\nisomorphism. Thus the structure-direct-image theorem applies to these coefficients.\nThe right-derived delta functor of abelian direct image supplies the exact segment\nfrom the cokernel of f_*wp to R1 f_* Z/p to the kernel of R1 f_*wp. The smooth-curve\nstructure direct-image theorem identifies f_*O with O_S and R1 f_*O with the lifted\nassociated sheaf of a finite locally free quasi-coherent module E. On f_*O, wp is\np-th power minus identity; the rank-one case of the Frobenius vector-bundle theorem\nmakes its cokernel zero. Here use E = O_S and sectionwise p-th power, whose\nadditivity follows from p = 0 and whose semilinearity is (ab)^p = a^p b^p.\nThe zero-degree derived comparison is natural in wp, so this also says that\nR0 f_*wp is epic. The connecting morphism is then zero by epi cancellation;\nexactness at R1 f_* Z/p makes its map into R1 f_*O monic. Exactness at R1 f_*O\nidentifies this monomorphism with the kernel. Hence the exact segment identifies\nR1 f_* Z/p with the\nkernel on R1 f_*O. Put F = R1 f_*wp + identity and transport through the specified\nstructure comparison. To verify F(ae) = a^p F(e), first take a raw local cohomology\nclass over an etale object. Sectionwise p-th power intertwines multiplication by\na with multiplication by a^p. Functoriality of cohomology and the scalar formula of\nthe structure direct-image theorem give the same equation on raw classes. The\nhigher-image presheaf theorem says sections are locally represented by such classes,\nso sheaf separation proves the equation for every section. Finally the exact\nmodule/abelian direct-image comparison identifies the left term with the forgotten\nprime-module higher direct image. The construction uses the full characteristic-p\nclosed subscheme, including nilpotents. For an empty base take the zero module.",
+   "uses": [
+    "lem-sc-artin-schreier-scheme-section-data",
+    "lem-sc-artin-schreier-scheme-section-exact",
+    "lem-weil-pbc-smooth-curve-etale-structure-direct-images",
+    "lem-weil-pbc-frobenius-vector-bundle-kernel",
+    "lem-weil-pbc-right-derived-universal-delta-functor",
+    "sbc-lem-higher-direct-image-presheaf",
+    "lem-weil-pbc-module-abelian-derived-direct-image-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-artin-schreier-scheme-section-data",
+  "lem-sc-artin-schreier-scheme-section-exact",
+  "lem-weil-pbc-smooth-curve-etale-structure-direct-images",
+  "lem-weil-pbc-frobenius-vector-bundle-kernel",
+  "lem-weil-pbc-right-derived-universal-delta-functor",
+  "sbc-lem-higher-direct-image-presheaf",
+  "lem-weil-pbc-module-abelian-derived-direct-image-comparison"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0GKV, case (b), second and third paragraphs"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Artin Schreier sequence identifies first direct image of the constant prime field sheaf with Frobenius fixed points on the first direct image of the structure sheaf",
+   "results": "8 hits, none is the stated etale-sheaf theorem.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Frobenius\", \"kernel\"",
+   "results": "0 hits.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "artinSchreier.*(kernel|directImage)|Frobenius.*kernel",
+   "results": "0 hits.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Artin Schreier higher direct image degree one proper smooth curves kernel of Frobenius on H1 structure sheaf",
+   "results": "8 hits: WittVector.StandardOneDimIsocrystal.frobenius_apply, AlgebraicGeometry.Scheme.Hom.ker, FiniteField.Extension.frob, FiniteField.frobeniusAlgEquivOfAlgebraic, AlgHom.IsArithFrobAt, WittVector.instIsocrystalStandardOneDimIsocrystal, IsPurelyInseparable.iterateFrobeniusₛₗ, FiniteField.frobeniusAlgHom. General algebraic/sheaf helpers only; none is the stated theorem.",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProperSmoothCurvesPrimeCoefficients",
+  "date": "2026-10-18",
+  "group": "T8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-proper-smooth-curves-prime-coefficients",
+   "place": "Tag 0GKV, case (b), second and third paragraphs"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PrimeCurveArtinSchreierKernel",
+  "file": "lean/Sheaf/AlgebraicGeometry/PrimeCurveArtinSchreierKernel.lean",
+  "declaration": "AlgebraicGeometry.Etale.exists_prime_curve_artinSchreier_kernel",
+  "statement": "theorem exists_prime_curve_artinSchreier_kernel\n    {X S : Scheme.{u}} [IsLocallyNoetherian S] [CompactSpace S]\n    (f : X ⟶ S) [IsProper f] [Smooth f] [GeometricallyConnected f]\n    (hdim : ∀ s : S, topologicalKrullDim (f.fiber s) = 1)\n    (p : ℕ) [Fact p.Prime] (hp : (p : Γ(S, ⊤)) = 0) :\n    ∃ (E : S.Modules) (_ : E.IsFiniteLocallyFree) (_ : E.IsQuasicoherent)\n      (F : Scheme.Modules.liftedCoherentEtaleSheaf E ⟶\n        Scheme.Modules.liftedCoherentEtaleSheaf E),\n      (∀ (U : S.Etaleᵒᵖ) (a : ULift.{u + 1} Γ(U.unop.left, ⊤))\n        (e : ULift.{u + 1} Γ((Scheme.Modules.tensorPullback U.unop.hom).obj E, ⊤)),\n        F.hom.app U (ULift.up (a.down • e.down)) =\n          ULift.up (a.down ^ p •\n            (@id Γ((Scheme.Modules.tensorPullback U.unop.hom).obj E, ⊤)\n              (F.hom.app U e).down))) ∧\n      Nonempty ((moduleAbelianForget (ULift.{u + 1} (ZMod p)) S).obj\n        (higherDirectImage (ULift.{u + 1} (ZMod p)) f 1\n          ((constantSheaf X.smallEtaleTopology _).obj\n            (ModuleCat.of (ULift.{u + 1} (ZMod p)) (ULift.{u + 1} (ZMod p))))) ≅\n        kernel (F - 𝟙 _))",
+  "branch": "sheaf-dag",
+  "by": "T8",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T8",
+  "result": "pass",
+  "landing": "20261018T091412-L-3259045",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T8",
+  "result": "pass",
+  "landing": "20261018T091412-L-3259045",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

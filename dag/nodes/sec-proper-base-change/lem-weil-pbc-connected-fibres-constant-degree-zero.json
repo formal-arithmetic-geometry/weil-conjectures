@@ -1,0 +1,115 @@
+{
+ "id": "lem-weil-pbc-connected-fibres-constant-degree-zero",
+ "kind": "statement",
+ "title": "Degree-zero constant direct images under connected fibres",
+ "statement": "Let f : X → S be a flat quasi-compact morphism of schemes with nonempty geometrically connected fibres. For any commutative ring R in the coefficient universe and any R-module M whose underlying set is finite, the degree-zero higher direct image of the constant M sheaf is constructible. The direct image and constructibility use [def-weil-pbc-direct-image] and [def-weil-pbc-etale-constructible-sheaf]; geometric stalks use [def-weil-pbc-geometric-stalks]. This statement uses the source-library constructibility predicate for modules over any ring, not an assumption that R is finite.",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0GKV, case (b), degree zero; Tag 0A3H"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-geometric-stalks",
+  "def-weil-pbc-etale-constructible-sheaf"
+ ],
+ "proof": [
+  {
+   "text": "apply the connected-fibre section theorem to the pullback over every etale\nobject of the base. Its section map is the component of the inverse-image adjunction\nunit, followed by restriction along the identity chart. That restriction is an\nisomorphism, so the unit is an isomorphism objectwise and hence as a sheaf morphism.\nThe degree-zero derived functor is the underived direct image. Inverse image preserves\nconstant sheaves, so its value on the constant sheaf is the base constant sheaf.\nThis is finite locally constant: identity charts prove local constancy, and the\nconstant-stalk comparison gives finite stalks. The trivial stratification proves\nconstructibility. The proof includes empty bases and zero coefficient modules.",
+   "uses": [
+    "lem-sbc-module-chart-sections-flat-connected",
+    "lemma-constructible-pullback-constant",
+    "lem-weil-pbc-constant-sheaf-geometric-stalk",
+    "def-weil-pbc-etale-constructible-sheaf"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sbc-module-chart-sections-flat-connected",
+  "lemma-constructible-pullback-constant",
+  "lem-weil-pbc-constant-sheaf-geometric-stalk",
+  "def-weil-pbc-etale-constructible-sheaf"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0GKV, case (b), degree zero; Tag 0A3H"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "degree zero higher direct image of a constant sheaf under a flat quasi compact morphism with geometrically connected fibers is constant",
+   "results": "8 hits, none is the stated etale-sheaf theorem.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"constantSheaf\", \"connected\"",
+   "results": "0 hits.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "constantSheaf.*(connected|directImage)|connected.*constantSheaf",
+   "results": "0 hits.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "degree zero higher direct image constant sheaf geometrically connected fibres is constant",
+   "results": "8 hits: CategoryTheory.Sheaf.isConstant_of_iso, CategoryTheory.Sheaf.IsConstant.casesOn, CategoryTheory.Sheaf.IsConstant, CategoryTheory.Sheaf.isConstant_iff_mem_essImage, LightCondensed.IsDiscrete, CategoryTheory.Sheaf.isConstant_iff_isIso_counit_app, CategoryTheory.Sheaf.IsConstant.mk, CategoryTheory.Sheaf.IsConstant.mem_essImage. General algebraic/sheaf helpers only; none is the stated theorem.",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProperSmoothCurvesPrimeCoefficients",
+  "date": "2026-10-18",
+  "group": "T8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-proper-smooth-curves-prime-coefficients",
+   "place": "Tag 0GKV, case (b), degree zero; Tag 0A3H"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ConnectedFibresConstantDegreeZero",
+  "file": "lean/Sheaf/AlgebraicGeometry/ConnectedFibresConstantDegreeZero.lean",
+  "declaration": "AlgebraicGeometry.Etale.higherDirectImage_zero_constant_constructible",
+  "statement": "theorem higherDirectImage_zero_constant_constructible\n    {X S : Scheme.{u}} {R : Type (u + 1)} [CommRing R]\n    (f : X ⟶ S) [Flat f] [QuasiCompact f] [GeometricallyConnected f]\n    (M : ModuleCat.{u + 1} R) [Finite M] :\n    Scheme.IsConstructibleSheaf (higherDirectImage R f 0\n      ((constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} R)).obj M))",
+  "branch": "sheaf-dag",
+  "by": "T8",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T8",
+  "result": "pass",
+  "landing": "20261018T091412-L-3259045",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T8",
+  "result": "pass",
+  "landing": "20261018T091412-L-3259045",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
