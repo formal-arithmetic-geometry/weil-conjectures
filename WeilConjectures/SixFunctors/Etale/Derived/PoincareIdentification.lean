@@ -29,7 +29,7 @@ Verdier-duality isomorphism `(Ra_! K)^∨ ≅ Ra_* 𝔻_X K`. This is blueprint
 - `AlgebraicGeometry.Etale.exchangePairing`: the pairing
   `Ra_! M ⊗ᴸ Ra_* RHom(M, Ra^! N) ⟶ N` (cup product, evaluation, counit of `Ra_! ⊣ Ra^!`),
   whose adjoint is the tensor–Hom exchange.
-- `AlgebraicGeometry.Etale.projectionMapApp`: the components of the projection map, with
+- `AlgebraicGeometry.Etale.projectionMapObjObj`: the components of the projection map, with
   source and target written through `Ra_!`, `-⊗ᴸ-` and `La^*`.
 - `AlgebraicGeometry.Etale.purityVerdierDualMap`: the purity identification
   `(K^∨ ⊗ᴸ T)[2d] ⟶ 𝔻_X K` attached to `γ`.
@@ -91,7 +91,7 @@ instance (K : 𝐃(X, A)) : NatTrans.CommShift (projectionMapComp A a K) ℤ :=
 
 /-- The component `Ra_! K ⊗ᴸ M ⟶ Ra_!(K ⊗ᴸ La^* M)` of the projection map
 (`AlgebraicGeometry.Etale.projectionMap`). -/
-noncomputable def projectionMapApp (K : 𝐃(X, A)) (M : 𝐃(Y, A)) :
+noncomputable def projectionMapObjObj (K : 𝐃(X, A)) (M : 𝐃(Y, A)) :
     ((derivedTensor A Y).obj ((R(a)_![A]).obj K)).obj M ⟶
       (R(a)_![A]).obj (((derivedTensor A X).obj K).obj ((L((a)^*[A])).obj M)) :=
   (projectionMapComp A a K).app M
@@ -99,8 +99,8 @@ noncomputable def projectionMapApp (K : 𝐃(X, A)) (M : 𝐃(Y, A)) :
 omit [HasSmallSiteSheafify A] [(R(a)_![A]).IsLeftAdjoint] in
 @[reassoc]
 lemma projectionMapApp_naturality (K : 𝐃(X, A)) {M M' : 𝐃(Y, A)} (g : M ⟶ M') :
-    ((derivedTensor A Y).obj ((R(a)_![A]).obj K)).map g ≫ projectionMapApp A a K M' =
-      projectionMapApp A a K M ≫
+    ((derivedTensor A Y).obj ((R(a)_![A]).obj K)).map g ≫ projectionMapObjObj A a K M' =
+      projectionMapObjObj A a K M ≫
         (R(a)_![A]).map (((derivedTensor A X).obj K).map ((L((a)^*[A])).map g)) :=
   (projectionMapComp A a K).naturality g
 
@@ -108,8 +108,8 @@ omit [HasSmallSiteSheafify A] [(R(a)_![A]).IsLeftAdjoint] in
 @[reassoc]
 lemma projectionMapApp_shift (K : 𝐃(X, A)) (M : 𝐃(Y, A)) (n : ℤ) :
     (((derivedTensor A Y).obj ((R(a)_![A]).obj K)).commShiftIso n).hom.app M ≫
-        (projectionMapApp A a K M)⟦n⟧' =
-      projectionMapApp A a K (M⟦n⟧) ≫
+        (projectionMapObjObj A a K M)⟦n⟧' =
+      projectionMapObjObj A a K (M⟦n⟧) ≫
         (R(a)_![A]).map (((derivedTensor A X).obj K).map
           (((L((a)^*[A])).commShiftIso n).hom.app M)) ≫
         (R(a)_![A]).map ((((derivedTensor A X).obj K).commShiftIso n).hom.app
@@ -124,8 +124,8 @@ omit [HasSmallSiteSheafify A] [(R(a)_![A]).IsLeftAdjoint] in
 lemma projectionMapApp_naturality_commShiftIso_inv (K L : 𝐃(X, A)) (n : ℤ) :
     ((derivedTensor A Y).obj ((R(a)_![A]).obj K)).map
         (((R((a)_*[A])).commShiftIso n).inv.app L) ≫
-      projectionMapApp A a K ((R((a)_*[A])).obj (L⟦n⟧)) =
-    projectionMapApp A a K (((R((a)_*[A])).obj L)⟦n⟧) ≫
+      projectionMapObjObj A a K ((R((a)_*[A])).obj (L⟦n⟧)) =
+    projectionMapObjObj A a K (((R((a)_*[A])).obj L)⟦n⟧) ≫
       (R(a)_![A]).map (((derivedTensor A X).obj K).map ((L((a)^*[A])).map
         (((R((a)_*[A])).commShiftIso n).inv.app L))) :=
   projectionMapApp_naturality A a K _
@@ -133,7 +133,7 @@ lemma projectionMapApp_naturality_commShiftIso_inv (K L : 𝐃(X, A)) (n : ℤ) 
 omit [HasSmallSiteSheafify A] [(R(a)_![A]).IsLeftAdjoint] in
 lemma mixedSupportCupProduct_eq_projectionMapApp (K L : 𝐃(X, A)) :
     mixedSupportCupProduct A a K L =
-      projectionMapApp A a K ((R((a)_*[A])).obj L) ≫
+      projectionMapObjObj A a K ((R((a)_*[A])).obj L) ≫
         (R(a)_![A]).map (((derivedTensor A X).obj K).map
           ((derivedUpperStarLowerStarAdjunction A a).counit.app L)) := by
   rw [mixedSupportCupProduct_eq]
@@ -193,7 +193,7 @@ theorem uncurry_derivedHomRightDerivedLowerShriekIso_hom_app_app [IsIso (project
       ((derivedTensorHomAdjunction₂ A X).comp (derivedUpperStarLowerStarAdjunction A a)
         (rightDerivedUpperShriekAdjunction A a)).conjugateIso
         ((derivedTensorHomAdjunction₂ A Y).precomp R(a)_![A]) e ∧
-      ∀ M' L', (e.hom.app M').app L' = projectionMapApp A a M' L' :=
+      ∀ M' L', (e.hom.app M').app L' = projectionMapObjObj A a M' L' :=
     ⟨_, rfl, fun _ _ ↦ rfl⟩
   rw [he]
   refine (MonoidalClosed.uncurry_eq _).trans

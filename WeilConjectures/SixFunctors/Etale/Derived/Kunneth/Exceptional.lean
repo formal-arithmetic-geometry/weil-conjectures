@@ -83,13 +83,13 @@ theorem nonempty_iso_rightDerivedUpperShriek_derivedTensor {T S W P Q : Scheme.{
           ((L((h ≫ r)^*[ModuleCat.{u + 1} Λ])).obj M)) := by
   obtain ⟨hBC, hτ⟩ := isExceptionalKunneth Λ k g b b c sqP sq
   have := (isIsoRightDerivedUpperShriekTensorMap_iff _ _ _).1 (hτ N M)
-  have := (isIso_rightDerivedUpperShriekDerivedTensorMap_iff h
+  have := (isIso_rightDerivedUpperShriekTensorMapOfDerivedTensor_iff h
     ((L((q)^*[ModuleCat.{u + 1} Λ])).obj N) ((L((r)^*[ModuleCat.{u + 1} Λ])).obj M)).2 this
   have := hBC N
   let e : (L((q')^*[ModuleCat.{u + 1} Λ])).obj ((R(g)^![ModuleCat.{u + 1} Λ]).obj N) ≅
       (R(h)^![ModuleCat.{u + 1} Λ]).obj ((L((q)^*[ModuleCat.{u + 1} Λ])).obj N) :=
     asIso ((rightDerivedUpperShriekBaseChangeMap Λ sq).app N)
-  exact ⟨(asIso (rightDerivedUpperShriekDerivedTensorMap h _ _)).symm ≪≫
+  exact ⟨(asIso (rightDerivedUpperShriekTensorMapOfDerivedTensor h _ _)).symm ≪≫
     ((derivedTensor _ Q).mapIso e.symm).app _ ≪≫
     ((derivedTensor _ Q).obj _).mapIso ((leftDerivedUpperStarComp _ h r).app M).symm⟩
 

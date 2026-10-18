@@ -82,17 +82,17 @@ attribute [local instance high] SymmetricCategory.toBraidedCategory
 /-- The tensor map `τ_f(M, N) : Rf^! M ⊗ᴸ Lf^* N ⟶ Rf^!(M ⊗ᴸ N)`
 (`AlgebraicGeometry.Etale.rightDerivedUpperShriekTensorMap`), with source and target written
 with the derived tensor product `AlgebraicGeometry.Etale.derivedTensor`. -/
-noncomputable def rightDerivedUpperShriekDerivedTensorMap {X Y : Scheme.{u}} (f : X ⟶ Y)
+noncomputable def rightDerivedUpperShriekTensorMapOfDerivedTensor {X Y : Scheme.{u}} (f : X ⟶ Y)
     [HasCompactification f] [(R(f)_![A]).IsLeftAdjoint] [IsIso (projectionMap A f)]
     (M N : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)) :
     ((derivedTensor A X).obj ((R(f)^![A]).obj M)).obj ((L((f)^*[A])).obj N) ⟶
       (R(f)^![A]).obj (((derivedTensor A Y).obj M).obj N) :=
   rightDerivedUpperShriekTensorMap f M N
 
-lemma isIso_rightDerivedUpperShriekDerivedTensorMap_iff {X Y : Scheme.{u}} (f : X ⟶ Y)
+lemma isIso_rightDerivedUpperShriekTensorMapOfDerivedTensor_iff {X Y : Scheme.{u}} (f : X ⟶ Y)
     [HasCompactification f] [(R(f)_![A]).IsLeftAdjoint] [IsIso (projectionMap A f)]
     (M N : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)) :
-    IsIso (rightDerivedUpperShriekDerivedTensorMap f M N) ↔
+    IsIso (rightDerivedUpperShriekTensorMapOfDerivedTensor f M N) ↔
       IsIso (rightDerivedUpperShriekTensorMap f M N) :=
   Iff.rfl
 
