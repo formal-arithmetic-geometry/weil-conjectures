@@ -306,7 +306,8 @@ theorem isIso_rightDerivedUpperShriekBaseChangeMap_of_etale_of_affineLine {X Y :
   exact isIso_rightDerivedUpperShriekBaseChangeMap_of_comp _ Y₀.ι w sq
     (fun _ _ _ _ _ sq' _ _ ↦
       isIso_rightDerivedUpperShriekBaseChangeMap_of_hasInvertibleExponent hE h₁ _ d sq')
-    (fun _ _ _ _ _ sq' _ _ ↦ isIso_rightDerivedUpperShriekBaseChangeMap_of_isOpenImmersion_right Λ sq')
+    (fun _ _ _ _ _ sq' _ _ ↦
+      isIso_rightDerivedUpperShriekBaseChangeMap_of_isOpenImmersion_right Λ sq')
 
 end Chart
 
