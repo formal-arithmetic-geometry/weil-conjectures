@@ -6606,6 +6606,7 @@ public import WeilConjectures.GroupTheory.TorsionCharacter
 public import WeilConjectures.GroupTheory.WeilGroup
 public import WeilConjectures.LinearAlgebra.Basis.PowQuotientTower
 public import WeilConjectures.LinearAlgebra.Basis.TowerLift
+public import WeilConjectures.LinearAlgebra.Basis.ULiftPowQuotient
 public import WeilConjectures.LinearAlgebra.ExteriorLocalizationKernelTorsion
 public import WeilConjectures.LinearAlgebra.ExteriorPower.ChartTransition
 public import WeilConjectures.LinearAlgebra.ExteriorPower.Top
@@ -9089,6 +9090,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.ClosedOpenImmersion
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ClosedOpenImmersionUnit
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ClosedSupport
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ConstantGlobalSections
+public import WeilConjectures.SixFunctors.ProEtale.Adic.ConstantModuleTower
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ConstantSheaf
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ConstantSheafCohomology
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ConstantSheafColimit
@@ -9150,6 +9152,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseStalkPointwise
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseStrictlyHenselian
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseUniversalCover
 public import WeilConjectures.SixFunctors.ProEtale.Adic.Localization
+public import WeilConjectures.SixFunctors.ProEtale.Adic.LocallyFreeTowerLimit
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LowerShriekFiniteness
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LowerStar
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LowerStarClopenSections
