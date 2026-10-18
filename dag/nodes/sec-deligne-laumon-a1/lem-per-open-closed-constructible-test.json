@@ -360,5 +360,23 @@
   "group": "Q25",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q25-9bd91a4b4 (reviewer sub-agent of L); spot-checked: Read the item in full: 9 steps, no new nodes; statement byte-identical to live, stmt_deps only gained lem-exc-closed-ambient. Read every cited node's statement and the source. ILO Gabber XVII Lemme 6.2.2.2 (Noetherian excellent Z[1/n]-scheme, K in D+, equivalence via 'Rj_* preserves D^b_c, cf. XIII-1.1.1') and XIII Thm 1.1.1/1.1.2 (quasi-excellent, bound depends on F) match the item's ℓ^n special case. Steps 1-3: exact restrictions; closed i_* exact on modules through the abelian finite-pushforward node plus faithful exact forget; counit linear over Z/ℓ^n; finite-stalk pushforward node with Noetherian X plus constructibility comparison both ways; reflection via i*i_* ≅ id. Step 4: the same-unit Gabber sheaf node with B=F_ℓ; all hypotheses hold (excellent ⇒ quasi-excellent, ℓ a unit, bound depends on the sheaf); the forget comparison applied for Λ and F_ℓ gives the same abelian sheaf, linear because Λ_X is a quotient of Z_X. Step 5: ℓ-adic image filtration via weak Serre, SES triangles and 2-of-3 in D^b_c; base and step are explicit. Step 6: truncation triangles with n=-r (indices checked). Step 7: the ordinary-étale support triangle shows Ri^!K is in D+, so it is the statement's bounded-below i^!. Steps 8/9: both implications correct. Edge cases checked: U or Z empty, nonreduced Z, n=1, X a point, j_*Λ on A^1. No cycle, no SGA. Duplicates: XIII-1.1.1 nodes are finite-field only; blueprint search found nothing. The 17 declared tool_uses are generic tools used as black boxes; all accepted. Advisory only: the D+ and unbounded Rj_* agree via K-injectivity of bounded-below injective complexes; this is implicit in the steps."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.OpenClosedConstructibleTest",
+  "declaration": "AlgebraicGeometry.Etale.isBoundedConstructible_iff_open_closed_exceptional",
+  "file": "lean/Sheaf/AlgebraicGeometry/OpenClosedConstructibleTest.lean",
+  "statement": "theorem isBoundedConstructible_iff_open_closed_exceptional (ℓ : ℕ) [Fact ℓ.Prime] (n : ℕ) (_hn : 1 ≤ n) {X Z U : Scheme.{u}} [IsNoetherian X] (_hexc : ∀ V : X.affineOpens, IsExcellent Γ(X, V)) (_hinv : ∀ x : X, IsUnit (ℓ : X.presheaf.stalk x)) (i : Z ⟶ X) [IsClosedImmersion i] (j : U ⟶ X) [IsOpenImmersion j] (_hij : Set.range i.base = (Set.range j.base)ᶜ) (K : _root_.DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod (ℓ ^ n)))))) : DerivedCategory.isBoundedConstructible (ULift.{u + 1} (ZMod (ℓ ^ n))) X K.obj ↔ DerivedCategory.isBoundedConstructible (ULift.{u + 1} (ZMod (ℓ ^ n))) U ((upperStar (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod (ℓ ^ n)))) j).mapDerivedCategory.obj K.obj) ∧ DerivedCategory.isBoundedConstructible (ULift.{u + 1} (ZMod (ℓ ^ n))) Z ((R(lowerStar (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod (ℓ ^ n)))) i)).rightAdjoint.obj K.obj)",
+  "branch": "newtargets-dag",
+  "by": "Q03",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-12eed3aeb",
+  "group": "Q03",
+  "result": "pass",
+  "note": "Every hypothesis and both iff sides match the node and the recorded dependency declarations. Λ = ULift.{u+1}(ZMod(ℓ^n)) is the standard coefficient lift; excellence is IsExcellent on all affine opens; ℓ is a unit at every stalk; Z and U are complementary by range; K is in DerivedCategory.Plus. j^* is upperStar.mapDerivedCategory and i^! is R(lowerStar i).rightAdjoint, which exists by lem-exc-closed-ambient. No extra assumptions; edge cases U=∅, Z=∅, X=∅, n=1 and nonreduced Z are fine. Node is identical to live apart from lean; lean.statement is verbatim in the file. No duplicate statement in lean/Sheaf or Mathlib. Docstrings give source place, blueprint id and all nine steps; sorry only; no pro-etale. nt_compile --json: clean, 3.7 s. Advisory: the def-amb-etale-compact-support declaration is not used directly (Ri_! = R i_* for a closed immersion); garbled phrase in the report."
  }
 }
