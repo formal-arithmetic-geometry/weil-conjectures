@@ -465,9 +465,11 @@
   }
  },
  "lean": {
-  "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperLowerStar",
-  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.derivedUpperStarLowerStarAdjunction",
+  "module": "Sheaf.Paper.CondensedModuleDerivedPushpull",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.moduleObjectDerivedPushforward",
   "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.moduleObjectDerivedPushforward",
+   "AlgebraicGeometry.ProEtale.CondensedRing.moduleObjectDerivedPullback",
    "AlgebraicGeometry.ProEtale.CondensedRing.derivedUpperStarLowerStarAdjunction",
    "CategoryTheory.Functor.rightDerivedFunctor",
    "CategoryTheory.Functor.rightDerivedFunctorPlus",
@@ -479,19 +481,20 @@
    "AlgebraicGeometry.ProEtale.CondensedRing.rightDerivedLowerStarIso",
    "AlgebraicGeometry.ProEtale.CondensedRing.leftDerivedUpperStarIso"
   ],
-  "statement": "noncomputable def derivedUpperStarLowerStarAdjunction : L((f)^*⟦Λ⟧) ⊣ R((f)_*⟦Λ⟧)",
-  "branch": "slopmaster2",
-  "by": "Q25",
+  "file": "lean/Sheaf/Paper/CondensedModuleDerivedPushpull.lean",
+  "statement": "def moduleObjectDerivedPushforward : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) ⥤ DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ Y))",
+  "branch": "newtargets-dag",
+  "by": "Q102",
   "date": "2026-10-18",
-  "existing": true,
-  "note": "Exact aggregate match in the published pro-etale module-object framework, confirmed by scompile.py --source. The module deliberately introduces no separate definitions of Rf_* or Lf^*: these are Functor.rightDerivedFunctor and Functor.leftDerivedFunctor applied to the dependency's full lowerStar and upperStar composites. The same module specializes rightDerivedFunctorPlus, supplies the K-flat quasi-isomorphism instance and derives upperStarLowerStarAdjunction directly. The generic right-derived unit on K-injectives and left-derived counit on K-flat complexes give the resolution computations; upperStar's extension-of-scalars definition gives the displayed tensor formula termwise. The two factorization isomorphisms are companion results, not definitions. The branch label denotes the published WeilConjectures source root, including its side overlay; no duplicate construction is added. Open proof dependencies and all existing audit records are retained."
+  "existing": false,
+  "note": "§1(B) computational interface repair: the recorded general derived functors are mathematically exact, but specializing their many monoidal/K-flat structural arguments repeatedly at integral coefficients makes library-artifact compilation of the consumer exceed 60 seconds (confirmed on the server). This module names the two canonical specializations once, with bodies exactly the existing general rightDerivedFunctor of lowerStar and leftDerivedFunctor of upperStar. It publicly imports all recorded adjunction, bounded-below and resolution interfaces unchanged; no independent derived construction, stronger assumption or arbitrary choice is introduced."
  },
  "reviewed_lean": {
   "date": "2026-10-18",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-06bb0eed8",
-  "group": "Q25",
+  "reviewer": "NT-stage2-cc-35d4254fd",
+  "group": "Q102",
   "result": "pass",
-  "note": "Wrote review.md. Checked source, dependencies, every statement clause, universes, edge cases, and route-pivot compliance. Current published source passes both scompile phases; the stale clone’s duplicate compatibility declarations do not affect this existing-source binding. No repository changed."
+  "note": "Re-delivery of the PASSed head c3c7068 (which failed to land on the 60 s compile limit); the mathematics is unchanged. The diff only replaces R(lowerStar Λ f)/L(upperStar Λ g)/⊗ with moduleObjectDerivedPushforward/moduleObjectDerivedPullback/derivedTensor. The new §1(B) module CondensedModuleDerivedPushpull defines these as exactly (lowerStar Λ f).rightDerivedFunctor and (upperStar Λ f).leftDerivedFunctor; R(F)/L(F)/(f)_*⟦Λ⟧ were checked to be notation for these. It covers arbitrary commutative Λ and arbitrary f in universes Scheme.{u}/Ab.{u+1}, with real data, no added assumption and a public upstream import. In the dependency record only lean changes, with a note, and the old declarations are retained. Both lean.statement fields are verbatim in their files; 3 sorry only; docstrings carry source and blueprint ids; report sections present. nt_compile --json at load ~113: dependency module 8-9 s clean; item 54.4 s and 39.9 s clean; the old c3c7068 file timed out at 60 s back to back, so the speed-up is real. Maintainer note: the item is still 40-54 s under load, so retry landing at lower load if needed."
  }
 }

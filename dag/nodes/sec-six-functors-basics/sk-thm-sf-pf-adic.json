@@ -37,7 +37,10 @@
   "sk-def-sfb-module-derived-pushpull",
   "sk-def-sfb-derived-tensor-hom",
   "sk-def-sfb-pulled-back-coefficients",
-  "def-weil-open-immersion"
+  "def-weil-open-immersion",
+  "def-sfb-module-object-projection-map",
+  "def-weil-pbc-ambient-ringed-exchange",
+  "def-weil-pbc-cartesian-square"
  ],
  "proof": [
   {
@@ -330,5 +333,29 @@
     }
    ]
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-35d4254fd",
+  "group": "Q102",
+  "result": "pass",
+  "note": "Re-delivery of the PASSed head c3c7068 (which failed to land on the 60 s compile limit); the mathematics is unchanged. The diff only replaces R(lowerStar Λ f)/L(upperStar Λ g)/⊗ with moduleObjectDerivedPushforward/moduleObjectDerivedPullback/derivedTensor. The new §1(B) module CondensedModuleDerivedPushpull defines these as exactly (lowerStar Λ f).rightDerivedFunctor and (upperStar Λ f).leftDerivedFunctor; R(F)/L(F)/(f)_*⟦Λ⟧ were checked to be notation for these. It covers arbitrary commutative Λ and arbitrary f in universes Scheme.{u}/Ab.{u+1}, with real data, no added assumption and a public upstream import. In the dependency record only lean changes, with a note, and the old declarations are retained. Both lean.statement fields are verbatim in their files; 3 sorry only; docstrings carry source and blueprint ids; report sections present. nt_compile --json at load ~113: dependency module 8-9 s clean; item 54.4 s and 39.9 s clean; the old c3c7068 file timed out at 60 s back to back, so the speed-up is real. Maintainer note: the item is still 40-54 s under load, so retry landing at lower load if needed."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.IntegralOpenImageProperFormulas",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.integralOpenDirectImage",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.integralOpenDirectImage",
+   "AlgebraicGeometry.ProEtale.CondensedRing.integralProperBaseChange",
+   "AlgebraicGeometry.ProEtale.CondensedRing.integralProperProjection"
+  ],
+  "file": "lean/Sheaf/Paper/IntegralOpenImageProperFormulas.lean",
+  "statement": "theorem integralOpenDirectImage (j : U ⟶ X) [IsOpenImmersion j] [QuasiCompact j] [j.IsOver (Spec (.of k))] (K : ConstantModelConstructibleFiniteTor (Profinite.padicIntegersRingObj ℓ E.val) U) : constantModelBoundedConstructible (Profinite.padicIntegersRingObj ℓ E.val) X ((moduleObjectDerivedPushforward (Profinite.padicIntegersRingObj ℓ E.val) j).obj K.obj) ∧ DerivedCategory.finiteTorAmplitude _ ((moduleObjectDerivedPushforward (Profinite.padicIntegersRingObj ℓ E.val) j).obj K.obj)",
+  "branch": "newtargets-dag",
+  "by": "Q102",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Three clauses using recorded constant-model Dctf and its localizing closure. Proper base change uses the landed condensedAmbientExchange on ChosenCartesianSquare; projection uses the landed moduleObjectProjectionMap. Both proper conclusions state endpoint membership and ambient invertibility. The dependency module CondensedModuleDerivedPushpull names the existing total derived composites once to share structural arguments; the relative tensor is the existing derivedTensor. No canonical map is redefined and no hypothesis or conclusion is changed."
  }
 }

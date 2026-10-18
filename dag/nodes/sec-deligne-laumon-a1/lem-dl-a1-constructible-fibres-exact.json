@@ -17,7 +17,10 @@
   "def-weil-finite-coefficient-point",
   "def-weil-coefficient-cohomology-modules",
   "def-weil-weil-sheaf-complex",
-  "def-weil-pbc-exact-sequence"
+  "def-weil-pbc-exact-sequence",
+  "def-dl-a1-locally-constructible-adic-heart",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-wf-middle-extension"
  ],
  "proof": [
   {
@@ -496,5 +499,29 @@
   "group": "Q133",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q133-3a03f04c4 (reviewer sub-agent of L); spot-checked: Read the item, all 12 steps, the statement of every cited node, the coefficient definitions behind them, and Bhatt-Scholze section 6.8 in the PDF (Lemma 6.8.2, Def 6.8.3, Prop 6.8.4, Cor 6.8.5, Def 6.8.6, Lemma 6.8.7, Prop 6.8.14, Rem 6.8.15). The statement is true and unchanged, the delivery adds no new nodes, and there is no cycle. Three faults, all repaired in fixes/dag/nodes/sec-deligne-laumon-a1/lem-dl-a1-constructible-fibres-exact.json. (1) Steps 2 and 5 applied rational transport and the condensed realization J_Y, which are stated on the raw rationalization of def-weil-pbc-bounded-constructible-complete, to objects of def-weil-rationalization-karoubi over def-weil-derived-complete-integral-detailed. The two categories were identified silently; the steps now cite lem-weil-pbc-integral-stratified-perfect-characterization, which identifies them on Noetherian finite-dimensional schemes with l invertible. (2) Step 7 claimed lem-tw-lisse-rational-realization identifies the point fibre with the finite-system fibre of cor-galois-lisse-representations(2). It does not (error C4): it only gives sections at s of the pullback of the pro-etale realized sheaf, and the step also left the stable lattice uncited. Steps 6 and 7 are rewritten: finitely many open connected components of each stratum, each with a k-point (Nullstellensatz); constant rank on each component (existing det-lem-stratified-lattice-rank); sections at s of a lisse sheaf are E^r, using the retraction from lem-weil-pbc-wcontractible-geometric-criterion; then the sheaf cover criterion and the equivalence J_S. (3) Step 12 used J on non-separated finite-type opens; it now tests on separated affine opens. Batch-5 check: def-pod-ring-scalar-extension, reached through the condensed realization and the characterization lemma, is a general definition, so those citations stay. The repair removes the citations of lem-sfb-etale-local-monodromy-realization and cor-galois-lisse-representations. cor-galois is in any case the foundational lisse-sheaf/representation equivalence, given by neither assumption, and is already in the closure through rem-dl-a1-conventions. tool_uses adjusted accordingly. Details in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-60b5a4971",
+  "group": "N6",
+  "result": "pass",
+  "note": "Re-delivery of returned f563ae1b5612; all three findings fixed. F1: lem-weil-pbc-condensed-e-realization removed from stmt_deps, its module and import dropped, compile error quoted in report. F2: the SmoothPurityQbar import and smoothQbarResidueInvertible are replaced by dlAdicGeometricResidueInvertible in the new definition node (k0 unit mapped through k0->k->residue field; Invertible is a subsingleton, so the data is canonical; the helper is listed in lean.declarations and named in the node statement). F3: landed def-weil-derived-pullback-tensor-hom and def-wf-middle-extension added to stmt_deps. The item statement field equals the base; only lean and stmt_deps differ; all 12 dependency-node copies match the side clone. The theorem signature is unchanged and the earlier clause and edge-case check still holds (all Spec k points, exact finite-dimensional fibres, joint conservativity, zero-map detection, short-exact iff fibrewise, Weil via forget, locality on locally finite-type k0-schemes with arbitrary covers). lean.statement appears verbatim once per file and all declarations exist. nt_compile --json: DlLocallyConstructibleAdicHeart 10.8 s and DlConstructibleFibresExact 7.6 s, both clean, exit 0."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.DlConstructibleFibresExact",
+  "declaration": "WeilConjectures.dlConstructibleFibresExact",
+  "declarations": [
+   "WeilConjectures.dlAdicHeartFibre",
+   "WeilConjectures.DlAdicFibreAssertions",
+   "WeilConjectures.DlAdicLocalExactness",
+   "WeilConjectures.dlConstructibleFibresExact"
+  ],
+  "file": "lean/Sheaf/Paper/DlConstructibleFibresExact.lean",
+  "statement": "theorem dlConstructibleFibresExact (_ι : c.Qbar ≃+* ℂ) : (∀ (Y₀ : Over (Spec (.of D.k₀))) [LocallyOfFiniteType Y₀.hom] [QuasiCompact Y₀.hom] [IsSeparated Y₀.hom], DlAdicFibreAssertions D c (D.geometricFiber Y₀).left (dlAdicHeartFibre D c (D.geometricFiber Y₀)) ∧ (qbarCurveWeilHeartForget D c.l c.different c.Qbar Y₀).Additive ∧ PreservesFiniteLimits (qbarCurveWeilHeartForget D c.l c.different c.Qbar Y₀) ∧ PreservesFiniteColimits (qbarCurveWeilHeartForget D c.l c.different c.Qbar Y₀) ∧ DlAdicFibreAssertions D c (D.geometricFiber Y₀).left (fun x ↦ qbarCurveWeilHeartForget D c.l c.different c.Qbar Y₀ ⋙ dlAdicHeartFibre D c (D.geometricFiber Y₀) x)) ∧ DlAdicLocalExactness.{u, w} D c",
+  "branch": "newtargets-dag",
+  "by": "N6",
+  "date": "2026-10-18",
+  "existing": false
  }
 }

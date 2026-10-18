@@ -234,23 +234,21 @@
   "module": "Sheaf.AlgebraicGeometry.EtaleSupportedKernelAdjunction",
   "declaration": "AlgebraicGeometry.Etale.supportedKernel_closedAdjunction",
   "declarations": [
-   "AlgebraicGeometry.Etale.supportedKernel",
-   "AlgebraicGeometry.Etale.supportedClosedInverseImage",
    "AlgebraicGeometry.Etale.supportedKernel_closedAdjunction"
   ],
-  "file": "lean/Sheaf/AlgebraicGeometry/EtaleSupportedKernelAdjunction.lean",
   "statement": "theorem supportedKernel_closedAdjunction {Z O X : Scheme.{u}} (i : Z ⟶ X) (j : O ⟶ X) [IsClosedImmersion i] [IsOpenImmersion j] (hcompl : IsCompl (Set.range i.base) (Set.range j.base)) : IsIso (Functor.whiskerLeft (supportedKernel j) (upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} i).unit) ∧ PreservesFiniteLimits (lowerStar AddCommGrpCat.{u + 1} i) ∧ PreservesFiniteColimits (lowerStar AddCommGrpCat.{u + 1} i) ∧ Nonempty (lowerStar AddCommGrpCat.{u + 1} i ⊣ supportedClosedInverseImage i j)",
   "branch": "newtargets-dag",
-  "by": "Q133",
-  "date": "2026-10-17",
-  "existing": false
+  "by": "Q72",
+  "date": "2026-10-18",
+  "existing": true,
+  "note": "Published dependency module is reused unchanged; this delivery only reclassifies its definitions as separate existing definition nodes."
  },
  "reviewed_lean": {
-  "date": "2026-10-17",
+  "date": "2026-10-18",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-da66e127e",
-  "group": "Q133",
+  "reviewer": "NT-stage2-cc-0582b0b15",
+  "group": "Q72",
   "result": "pass",
-  "note": "Wrote review.md. Checked immutable files, source, dependencies, universes, canonical constructions, edge cases, docstrings, and verbatim signature. Reproduced clean per-file compilation in both wrapper views. No corrections needed; branch unchanged."
+  "note": "Re-delivery after d22a5c0338c1 (PASS, landing failed because two proof_deps were in no step's uses). Diffed the full snapshot against d22a: the only changes are Step 6 citing lem-sp-grothendieck-edge-maps (its left edge R^n(GF)->G R^nF is the grothendieckLeftEdgeMap used in relativeSupportEdge), Step 8 citing lem-weil-pbc-module-abelian-derived-direct-image-comparison (holds for any f and any Lambda, so it applies to the open complement), the matching uses, statement_change.old_proof plus an extended 'what', and two docstring lines in the module (no signature change). proof_deps now equals the union of uses exactly; steps are under 2000 chars; old_proof/old_statement/old_stmt_deps/old_proof_deps equal the live/side base exactly; both citers hold, statement mathematically unchanged. Re-checked hypotheses (frame = Ideal.span of the c functions via IsPullback, ringKrullDim codimension, smooth/etale/closed immersion) and all six clauses against the node; edge cases c=0, empty cover, negative r, no universe restriction. Statement verbatim, 36 declarations match, 16/16 proofs sorry, docstrings ok. nt_compile --json exit 0 in 16.4 s, no diagnostics."
  }
 }
