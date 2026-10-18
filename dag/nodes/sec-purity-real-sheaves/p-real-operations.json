@@ -1,110 +1,253 @@
 {
-  "id": "p-real-operations",
-  "blueprint": {
-    "is": "p-real-operations",
-    "from": null,
-    "same_as": null
+ "id": "p-real-operations",
+ "blueprint": {
+  "is": "p-real-operations",
+  "from": null,
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Local Frobenius polynomials",
+ "statement": "Keep the notation of [prop-wf-weil-sheaf-representation-equivalence], so\nthat $(V,\\rho)$ is the Weil fundamental representation of\n[def-wf-fundamental-representation], and let $x$ be a closed point of\n$C_0$ of degree $e_x$, with local Frobenius $F_x$ of\n[def-weil-local-frobenius-trace] acting on the stalk\n$\\mathcal F_{\\bar x}$; it acts through the conjugacy class of\ngeometric Frobenius elements at $x$ (images of the geometric Frobenius of\n$k(x)$ under a decomposition-group map $\\pi_1(x)\\to\\pi_1(C_0)$), of degree $e_x$, in the Weil group $W(C_0)$ of [def-wf-weil-group],\nthe geometric Frobenius over $k(x)$ having degree $e_x$ by\n[lem-wf-weil-group-constant-extension]. (Changing the decomposition-group\nmap conjugates $F_x$ by some $g\\in\\pi_1(C_0)$, and this is a conjugation\ninside $W(C_0)$: as $\\widehat{\\mathbf Z}=\\mathbf Z+e_x\\widehat{\\mathbf Z}$,\none can write $g=wF_x^t$ with $w\\in W(C_0)$ and $t\\in\\widehat{\\mathbf Z}$,\nwhere $F_x^t$ is the image of the $t$-th power of the geometric Frobenius\nin the procyclic group $\\pi_1(x)$, which commutes with $F_x$; so\n$gF_xg^{-1}=wF_xw^{-1}$.) Use the tensor equivalence\n[prop-wf-weil-sheaf-representation-equivalence] for the operations of\n[def-real-weil-representation-operations] (direct sum, tensor product, dual,\nexterior powers, determinant), and\nwrite $P_x(\\mathcal F,T)=\\det(1-TF_x\\mid\\mathcal F_{\\bar x})$ for the local\ncharacteristic factor of [def-wf-iota-real]. Then\n\n$$\nP_x(\\mathcal F,T)=\\det\\bigl(1-T\\,\\rho(F_x)\\mid V\\bigr)\n\\qquad\\text{for every closed }x .\n$$",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-p-real-operations/p-real-operations.md",
+  "place": "node p-real-operations, order 2592"
+ },
+ "stmt_deps": [
+  "prop-wf-weil-sheaf-representation-equivalence",
+  "def-wf-fundamental-representation",
+  "def-weil-local-frobenius-trace",
+  "def-wf-weil-group",
+  "lem-wf-weil-group-constant-extension",
+  "def-real-weil-representation-operations",
+  "def-wf-iota-real"
+ ],
+ "proof": [
+  {
+   "text": "Work over a common finite coefficient field $E$. Indeed, [def-pod-lisse-l-adic-sheaves] supplies a finite-field lisse model of the underlying $\\overline{\\mathbf Q}_\\ell$-sheaf. In the common-stage category [def-weil-algebraically-closed-coefficients], represent $\\theta$ and $\\theta^{-1}$ over a finite extension of that field. Their two inverse equations hold after a further finite extension, by the stated equality rule in the filtered Hom colimit. Hence these representatives give an actual $E$-Weil pair, with lisse underlying object; no integral lattice stable under $\\theta$ is required. Apply [lem-tw-lisse-rational-realization] to this model: its pullbacks, fibres, and iterated point transports become those of an ordinary lisse module sheaf. By [d-real-setup] the geometric curve $C$ is connected, smooth, separated and finite type, so [lem-real-lisse-path-fibres] applies. Write $b=\\bar\\eta$, $V_E=\\mathcal F_{E,b}$, $g=\\operatorname{id}_{C_0}\\times\\operatorname{Spec}(\\gamma)$, and $\\theta:g^*\\mathcal F_E\\to\\mathcal F_E$. All subsequent maps extend to the original coefficients by the scalar compatibilities in these cited statements.",
+   "uses": [
+    "def-pod-lisse-l-adic-sheaves",
+    "def-weil-algebraically-closed-coefficients",
+    "lem-tw-lisse-rational-realization",
+    "d-real-setup",
+    "lem-real-lisse-path-fibres"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+    "place": "(1.1.1) b)-d), (1.1.10); common-stage coefficient convention and the cited normalized realization"
+   }
   },
-  "kind": "statement",
-  "title": "Local Frobenius polynomials",
-  "statement": "Keep the notation of [prop-wf-weil-sheaf-representation-equivalence], so\nthat $(V,\\rho)$ is the Weil fundamental representation of\n[def-wf-fundamental-representation], and let $x$ be a closed point of\n$C_0$ of degree $e_x$, with local Frobenius $F_x$ of\n[def-weil-local-frobenius-trace] acting on the stalk\n$\\mathcal F_{\\bar x}$; it acts through the conjugacy class of\ngeometric Frobenius elements at $x$ (images of the geometric Frobenius of\n$k(x)$ under a decomposition-group map $\\pi_1(x)\\to\\pi_1(C_0)$), of degree $e_x$, in the Weil group $W(C_0)$ of [def-wf-weil-group],\nthe geometric Frobenius over $k(x)$ having degree $e_x$ by\n[lem-wf-weil-group-constant-extension]. (Changing the decomposition-group\nmap conjugates $F_x$ by some $g\\in\\pi_1(C_0)$, and this is a conjugation\ninside $W(C_0)$: as $\\widehat{\\mathbf Z}=\\mathbf Z+e_x\\widehat{\\mathbf Z}$,\none can write $g=wF_x^t$ with $w\\in W(C_0)$ and $t\\in\\widehat{\\mathbf Z}$,\nwhere $F_x^t$ is the image of the $t$-th power of the geometric Frobenius\nin the procyclic group $\\pi_1(x)$, which commutes with $F_x$; so\n$gF_xg^{-1}=wF_xw^{-1}$.) Use the tensor equivalence\n[prop-wf-weil-sheaf-representation-equivalence] for the operations of\n[def-real-weil-representation-operations] (direct sum, tensor product, dual,\nexterior powers, determinant), and\nwrite $P_x(\\mathcal F,T)=\\det(1-TF_x\\mid\\mathcal F_{\\bar x})$ for the local\ncharacteristic factor of [def-wf-iota-real]. Then\n\n$$\nP_x(\\mathcal F,T)=\\det\\bigl(1-T\\,\\rho(F_x)\\mid V\\bigr)\n\\qquad\\text{for every closed }x .\n$$",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-p-real-operations/p-real-operations.md",
-    "place": "node p-real-operations, order 2592"
+  {
+   "text": "Use [lem-real-weil-twisted-paths] to identify $w\\in W(C_0,b)$ of degree $n$ with a path $p_w:b\\rightsquigarrow g^n b$. For $n\\geq0$ let $\\theta^{[0]}=1$ and $\\theta^{[n]}=\\theta\\circ g^*\\theta\\circ\\cdots\\circ(g^{n-1})^*\\theta$; define negative iterates using inverses. With pullback-stalk identifications understood, put $A_b(w)=\\theta_b^{[n]}(p_w)_{\\mathcal F_E}$. The path naturality and pullback rule of [lem-real-lisse-path-fibres] give\n$$(p_w)_{\\mathcal F_E}\\theta_b^{[m]}=\\theta_{g^n b}^{[m]}(g^m p_w)_{\\mathcal F_E}.$$\nAlso $\\theta_b^{[n]}\\theta_{g^n b}^{[m]}=\\theta_b^{[n+m]}$: for nonnegative exponents both sides are the same ordered list of factors; cancelling inverse factors gives the equality for integers. Combining these equations with the multiplication formula in the twisted-path lemma gives $A_b(w)A_b(v)=A_b(wv)$, and the zero iterate gives $A_b(1)=1$.",
+   "uses": [
+    "lem-real-weil-twisted-paths",
+    "lem-real-lisse-path-fibres"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+    "place": "(1.1.10)-(1.1.12); explicit evaluation of the action on (X,F)"
+   }
   },
-  "stmt_deps": [
-    "prop-wf-weil-sheaf-representation-equivalence",
-    "def-wf-fundamental-representation",
+  {
+   "text": "For degree zero, [lem-real-lisse-path-fibres] identifies $A_b(\\delta)$ with $\\rho_{\\mathrm{geom}}(\\delta)$. Choose the degree-one lift $s$ used in [def-wf-fundamental-representation]. Its path is $p_s$, so the definition of its stalk transport and the descent operator is precisely $T_s=\\theta_b(p_s)_{\\mathcal F_E}=A_b(s)$. Every $w$ has the form $\\delta s^n$, with $\\delta=ws^{-n}$ in the geometric subgroup. The multiplication just checked therefore yields\n$$A_b(w)=\\rho_{\\mathrm{geom}}(\\delta)T_s^n=\\rho(w),$$\nwhere the last equality is the defining formula in [def-wf-fundamental-representation]. This identifies the constructed action with the particular fundamental representation in the statement, rather than with an unspecified equivalent representation.",
+   "uses": [
+    "lem-real-lisse-path-fibres",
+    "def-wf-fundamental-representation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+    "place": "(1.1.12); comparison with the degree-one construction of def-wf-fundamental-representation"
+   }
+  },
+  {
+   "text": "Fix a closed $x$ and its lift $a=\\bar x$, put $e=e_x$, and choose a geometric path $\\tau:a\\rightsquigarrow b$ using [lem-real-lisse-path-fibres]. Let $u=\\tau_{\\mathcal F_E}:\\mathcal F_{E,a}\\xrightarrow{\\sim}V_E$. In [lem-real-weil-twisted-paths] the decomposition Frobenius $f_x$ corresponds to the path $p_{f_x}=g^e(\\tau)c_{a,e}\\tau^{-1}$. Naturality of $\\tau$ for the actual sheaf map $\\theta^{[e]}:(g^e)^*\\mathcal F_E\\to\\mathcal F_E$, and its pullback rule, give the explicit square\n$$u\\theta_a^{[e]}=\\theta_b^{[e]}(g^e\\tau)_{\\mathcal F_E}.$$\nConsequently the action computed in the preceding steps satisfies\n$$\\rho(f_x)=\\theta_b^{[e]}(p_{f_x})_{\\mathcal F_E}=u\\bigl(\\theta_a^{[e]}(c_{a,e})_{\\mathcal F_E}\\bigr)u^{-1}.$$\nThus $u$ intertwines the cyclic local Weil action (all integer powers of $f_x$) with the represented action. The underlying finite-etale paths also intertwine the full decomposition group by conjugation; for a general Weil sheaf only its integer-degree subgroup acts on the sheaf.",
+   "uses": [
+    "lem-real-lisse-path-fibres",
+    "lem-real-weil-twisted-paths"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+    "place": "(1.1.8), (1.1.12)-(1.1.13); explicit naturality square at the closed point"
+   }
+  },
+  {
+   "text": "The remaining operator is exactly the framework local operator, as a map and with its normalization. Under [lem-tw-lisse-rational-realization], the source of the local composite in [def-weil-local-frobenius-trace] is the ordinary fibre $\\mathcal F_{E,a}$. Its first arrow $I_N^{[e]}$ is the iterated restriction-and-coprojection transport; its middle arrow identifies $g^e a=a\\operatorname{Spec}(\\gamma^e)$. On finite locally constant sheaves this composite sends a lifted geometric point $z$ to $z\\circ\\operatorname{Spec}(\\gamma^e)$, hence is $(c_{a,e})_{\\mathcal F_E}$ by [lem-real-weil-twisted-paths]. The finite-level maps extend to integral models by their compatible inverse limits, then to rational maps and coefficient extensions by [lem-real-lisse-path-fibres]. The realization lemma identifies the framework iterates with these same ordinary transports. The last arrow is evaluation of $\\theta^{[e]}$ at $a$. Therefore $F_x=\\theta_a^{[e]}(c_{a,e})_{\\mathcal F_E}$ on the degree-zero fibre. Substituting into the preceding displayed equation gives $uF_xu^{-1}=\\rho(f_x)$ over $E$ and over $\\overline{\\mathbf Q}_\\ell$.",
+   "uses": [
+    "lem-tw-lisse-rational-realization",
     "def-weil-local-frobenius-trace",
-    "def-wf-weil-group",
+    "lem-real-weil-twisted-paths",
+    "lem-real-lisse-path-fibres"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-p-real-operations/p-real-operations.proof.md",
+    "place": "Second paragraph: expanded comparison of the specified local operator, using Deligne (1.1.7)-(1.1.8) and the normalized realization"
+   }
+  },
+  {
+   "text": "The degree of $f_x$ is $e_x$ by [lem-real-weil-twisted-paths], consistent with the normalization of [lem-wf-weil-group-constant-extension]. A different arithmetic path changes $f_x$ to $h f_x h^{-1}$ for $h\\in\\pi_1(C_0,b)$. Write $\\deg h=n+e_x t$, with $n\\in\\mathbf Z$ and $t\\in\\widehat{\\mathbf Z}$; this is the elementary quotient calculation $\\widehat{\\mathbf Z}/e_x\\widehat{\\mathbf Z}=\\mathbf Z/e_x\\mathbf Z$. The image $f_x^t$ of the profinite power in $\\pi_1(x)$ commutes with $f_x$. Thus $w=h f_x^{-t}$ has integer degree $n$, belongs to $W(C_0,b)$ by [def-wf-weil-group], and $h f_x h^{-1}=w f_x w^{-1}$. No value of $\\rho$ on $f_x^t$ or on a general element of $\\pi_1(C_0)$ is used. The stalk comparison therefore describes the required conjugacy class inside the Weil group.",
+   "uses": [
+    "lem-real-weil-twisted-paths",
     "lem-wf-weil-group-constant-extension",
+    "def-wf-weil-group"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-p-real-operations/p-real-operations.proof.md",
+    "place": "First paragraph; Deligne (1.1.13)"
+   }
+  },
+  {
+   "text": "The operations are transported through the exact tensor equivalence [prop-wf-weil-sheaf-representation-equivalence] using the actions specified in [def-real-weil-representation-operations]. For the local polynomial use [def-wf-iota-real] and the established equation $uF_xu^{-1}=\\rho(f_x)$. In a basis transported by $u$, the two operators have the same matrix; hence their determinants $\\det(1-TF_x)$ and $\\det(1-T\\rho(f_x))$ are equal. Replacing $f_x$ by $w f_x w^{-1}$ replaces its matrix by conjugation by $\\rho(w)$; multiplicativity of the determinant over $\\overline{\\mathbf Q}_\\ell[T]$ cancels the two inverse change-of-basis factors. This proves the asserted identity for every member of the Frobenius class, including rank zero, where both determinants are $1$.",
+   "uses": [
+    "prop-wf-weil-sheaf-representation-equivalence",
     "def-real-weil-representation-operations",
     "def-wf-iota-real"
-  ],
-  "proof": [
-    {
-      "text": "Granted [prop-wf-weil-sheaf-representation-equivalence], the operations of\n[def-real-weil-representation-operations] on\nlisse Weil sheaves are *defined* by transport along the equivalence, so\nonly the local polynomial needs an argument. Iterating the Frobenius\nstructure map $e_x$ times on the stalk at $\\bar x$, as in\n[def-weil-local-frobenius-trace], realizes $F_x$ as $\\rho$ of\nany member of the degree-$e_x$ class supplied by $x$. A characteristic\npolynomial is invariant under conjugation, so $\\det(1-T\\rho(F_x)\\mid V)$ is\nindependent of the member chosen and agrees with the stalkwise $P_x$ of [def-wf-iota-real].",
-      "uses": [
-        "prop-wf-weil-sheaf-representation-equivalence",
-        "def-real-weil-representation-operations",
-        "def-weil-local-frobenius-trace",
-        "def-wf-iota-real"
-      ],
-      "elementary": false
-    }
-  ],
-  "proof_deps": [
-    "prop-wf-weil-sheaf-representation-equivalence",
-    "def-real-weil-representation-operations",
-    "def-weil-local-frobenius-trace",
-    "def-wf-iota-real"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-p-real-operations/p-real-operations.md",
-    "place": "## Proof"
-  },
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [],
-  "blueprint_kind": "theorem",
-  "blueprint_order": 2592,
-  "blueprint_uses": [
-    "def-real-weil-representation-operations",
-    "def-weil-local-frobenius-trace",
-    "def-wf-fundamental-representation",
-    "def-wf-iota-real",
-    "def-wf-weil-group",
-    "lem-wf-weil-group-constant-extension",
-    "prop-wf-weil-sheaf-representation-equivalence"
-  ],
-  "blueprint_tags": [
-    "latex:proposition"
-  ],
-  "proof_split_by": "paragraphs",
-  "blueprint_notes": [
-    {
-      "label": "uses_line",
-      "text": "Uses: [def-real-weil-representation-operations], [def-weil-local-frobenius-trace], [def-wf-fundamental-representation], [def-wf-iota-real], [def-wf-weil-group], [lem-wf-weil-group-constant-extension], [prop-wf-weil-sheaf-representation-equivalence]",
-      "where": "proof"
-    }
-  ],
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
-  },
-  "chapter": "sec-purity-real-sheaves",
-  "unit": "sk-p-real-operations",
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "Keep the notation of [prop-wf-weil-sheaf-representation-equivalence], so\nthat $(V,\\rho)$ is the Weil fundamental representation of\n[def-wf-fundamental-representation], and let $x$ be a closed point of\n$C_0$ of degree $e_x$, with local Frobenius $F_x$ of\n[def-weil-local-frobenius-trace] acting on the stalk\n$\\mathcal F_{\\bar x}$; it acts through the conjugacy class of\ngeometric Frobenius elements at $x$ (images of the geometric Frobenius of\n$k(x)$ under a decomposition-group map $\\pi_1(x)\\to\\pi_1(C_0)$), of degree $e_x$, in the Weil group $W(C_0)$ of [def-wf-weil-group],\nthe geometric Frobenius over $k(x)$ having degree $e_x$ by\n[lem-wf-weil-group-constant-extension]. Use the tensor equivalence\n[prop-wf-weil-sheaf-representation-equivalence] for the operations of\n[def-real-weil-representation-operations] (direct sum, tensor product, dual,\nexterior powers, determinant), and\nwrite $P_x(\\mathcal F,T)=\\det(1-TF_x\\mid\\mathcal F_{\\bar x})$ for the local\ncharacteristic factor of [def-wf-iota-real]. Then\n\n$$\nP_x(\\mathcal F,T)=\\det\\bigl(1-T\\,\\rho(F_x)\\mid V\\bigr)\n\\qquad\\text{for every closed }x .\n$$",
-    "proof": [
-      {
-        "text": "Changing the decomposition-group map conjugates $F_x$ by some\n$g\\in\\pi_1(C_0)$, and this is a conjugation inside $W(C_0)$: as\n$\\widehat{\\mathbf Z}=\\mathbf Z+e_x\\widehat{\\mathbf Z}$, one can write\n$g=wF_x^t$ with $w\\in W(C_0)$ and $t\\in\\widehat{\\mathbf Z}$, where $F_x^t$ is\nthe image of the $t$-th power of the geometric Frobenius in the procyclic\ngroup $\\pi_1(x)$, which commutes with $F_x$; so $gF_xg^{-1}=wF_xw^{-1}$.\nHence $F_x$ is well defined up to conjugacy in $W(C_0)$.",
-        "uses": [],
-        "elementary": null
-      },
-      {
-        "text": "Granted [prop-wf-weil-sheaf-representation-equivalence], the operations of\n[def-real-weil-representation-operations] on\nlisse Weil sheaves are *defined* by transport along the equivalence, so\nonly the local polynomial needs an argument. Iterating the Frobenius\nstructure map $e_x$ times on the stalk at $\\bar x$, as in\n[def-weil-local-frobenius-trace], realizes $F_x$ as $\\rho$ of\nany member of the degree-$e_x$ class supplied by $x$. A characteristic\npolynomial is invariant under conjugation, so $\\det(1-T\\rho(F_x)\\mid V)$ is\nindependent of the member chosen and agrees with the stalkwise $P_x$ of [def-wf-iota-real].",
-        "uses": [
-          "prop-wf-weil-sheaf-representation-equivalence",
-          "def-real-weil-representation-operations",
-          "def-weil-local-frobenius-trace",
-          "def-wf-iota-real"
-        ],
-        "elementary": false
-      }
-    ],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-p-real-operations/p-real-operations.proof.md",
+    "place": "Second paragraph: operations and final determinant equality"
+   }
   }
+ ],
+ "proof_deps": [
+  "d-real-setup",
+  "def-pod-lisse-l-adic-sheaves",
+  "def-real-weil-representation-operations",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-local-frobenius-trace",
+  "def-wf-fundamental-representation",
+  "def-wf-iota-real",
+  "def-wf-weil-group",
+  "lem-real-lisse-path-fibres",
+  "lem-real-weil-twisted-paths",
+  "lem-tw-lisse-rational-realization",
+  "lem-wf-weil-group-constant-extension",
+  "prop-wf-weil-sheaf-representation-equivalence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-p-real-operations/p-real-operations.proof.md",
+  "place": "Both paragraphs, expanded through finite coefficient models, natural lisse paths and coefficient-free twisted loops; Deligne Weil II (1.1.1), (1.1.7)-(1.1.13)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "localPolynomial_eq_charpoly|WeilSheaf|stalkFrobenius",
+   "results": "No hits",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Frobenius\", \"charpoly\"",
+   "results": "No hits",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The local characteristic polynomial of a lisse Weil sheaf is the characteristic polynomial of its fundamental representation at Frobenius",
+   "results": "LinearMap.charpoly, LinearMap.polyCharpoly, Matrix.charpoly, LinearMap.charpoly_def, LinearMap.charpoly_monic, Matrix.charpoly.univ, LinearRecurrence.charPoly, LinearMap.eval_charpoly",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Local Frobenius defined by a Weil sheaf descent isomorphism agrees on stalks with its Weil group representation",
+   "results": "ModuleCat.Tilde.stalkIso_hom, AlgebraicGeometry.StructureSheaf.stalkIso_hom, WittVector.StandardOneDimIsocrystal.frobenius_apply, WittVector.exists_frobenius_solution_fractionRing_aux, WittVector.instIsocrystalStandardOneDimIsocrystal, WittVector.Isocrystal.frob, WittVector.Isocrystal.frobenius, ModuleCat.Tilde.stalkToFiberLinearMap_toStalk",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "theorem",
+ "blueprint_order": 2592,
+ "blueprint_uses": [
+  "def-real-weil-representation-operations",
+  "def-weil-local-frobenius-trace",
+  "def-wf-fundamental-representation",
+  "def-wf-iota-real",
+  "def-wf-weil-group",
+  "lem-wf-weil-group-constant-extension",
+  "prop-wf-weil-sheaf-representation-equivalence"
+ ],
+ "blueprint_tags": [
+  "latex:proposition"
+ ],
+ "proof_split_by": "paragraphs",
+ "blueprint_notes": [
+  {
+   "label": "uses_line",
+   "text": "Uses: [def-real-weil-representation-operations], [def-weil-local-frobenius-trace], [def-wf-fundamental-representation], [def-wf-iota-real], [def-wf-weil-group], [lem-wf-weil-group-constant-extension], [prop-wf-weil-sheaf-representation-equivalence]",
+   "where": "proof"
+  }
+ ],
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-purity-real-sheaves",
+ "unit": "sk-p-real-operations",
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "Keep the notation of [prop-wf-weil-sheaf-representation-equivalence], so\nthat $(V,\\rho)$ is the Weil fundamental representation of\n[def-wf-fundamental-representation], and let $x$ be a closed point of\n$C_0$ of degree $e_x$, with local Frobenius $F_x$ of\n[def-weil-local-frobenius-trace] acting on the stalk\n$\\mathcal F_{\\bar x}$; it acts through the conjugacy class of\ngeometric Frobenius elements at $x$ (images of the geometric Frobenius of\n$k(x)$ under a decomposition-group map $\\pi_1(x)\\to\\pi_1(C_0)$), of degree $e_x$, in the Weil group $W(C_0)$ of [def-wf-weil-group],\nthe geometric Frobenius over $k(x)$ having degree $e_x$ by\n[lem-wf-weil-group-constant-extension]. Use the tensor equivalence\n[prop-wf-weil-sheaf-representation-equivalence] for the operations of\n[def-real-weil-representation-operations] (direct sum, tensor product, dual,\nexterior powers, determinant), and\nwrite $P_x(\\mathcal F,T)=\\det(1-TF_x\\mid\\mathcal F_{\\bar x})$ for the local\ncharacteristic factor of [def-wf-iota-real]. Then\n\n$$\nP_x(\\mathcal F,T)=\\det\\bigl(1-T\\,\\rho(F_x)\\mid V\\bigr)\n\\qquad\\text{for every closed }x .\n$$",
+  "proof": [
+   {
+    "text": "Changing the decomposition-group map conjugates $F_x$ by some\n$g\\in\\pi_1(C_0)$, and this is a conjugation inside $W(C_0)$: as\n$\\widehat{\\mathbf Z}=\\mathbf Z+e_x\\widehat{\\mathbf Z}$, one can write\n$g=wF_x^t$ with $w\\in W(C_0)$ and $t\\in\\widehat{\\mathbf Z}$, where $F_x^t$ is\nthe image of the $t$-th power of the geometric Frobenius in the procyclic\ngroup $\\pi_1(x)$, which commutes with $F_x$; so $gF_xg^{-1}=wF_xw^{-1}$.\nHence $F_x$ is well defined up to conjugacy in $W(C_0)$.",
+    "uses": [],
+    "elementary": null
+   },
+   {
+    "text": "Granted [prop-wf-weil-sheaf-representation-equivalence], the operations of\n[def-real-weil-representation-operations] on\nlisse Weil sheaves are *defined* by transport along the equivalence, so\nonly the local polynomial needs an argument. Iterating the Frobenius\nstructure map $e_x$ times on the stalk at $\\bar x$, as in\n[def-weil-local-frobenius-trace], realizes $F_x$ as $\\rho$ of\nany member of the degree-$e_x$ class supplied by $x$. A characteristic\npolynomial is invariant under conjugation, so $\\det(1-T\\rho(F_x)\\mid V)$ is\nindependent of the member chosen and agrees with the stalkwise $P_x$ of [def-wf-iota-real].",
+    "uses": [
+     "prop-wf-weil-sheaf-representation-equivalence",
+     "def-real-weil-representation-operations",
+     "def-weil-local-frobenius-trace",
+     "def-wf-iota-real"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "p-real-operations",
+  "worker": "stage1",
+  "summary": "Repair of C1, C4, E5, D3: added two strictly smaller statement-only lemmas for lisse path fibres and the coefficient-free twisted-path model of the Weil group. The item now constructs the finite E-model, evaluates the descent action, matches its generators to the specified fundamental representation, writes the path naturality square, and identifies each arrow of the actual local composite. Retained the statement, current blueprint route and original search history/report in the sandbox.",
+  "blueprint": "The current first paragraph is Step 6; the second paragraph is Steps 1-5 and 7. The two children expose its omitted path and finite-cover identifications, without restating the polynomial or operator comparison.",
+  "tool_uses": [
+   {
+    "node": "lem-tw-lisse-rational-realization",
+    "why": "Identifies the specified framework pullback, point fibre and point transports with ordinary lisse module sheaves, including iterations and scalar extensions; no node of this unit gives this coefficient-model comparison."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-tw-lisse-rational-realization"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q143-473d8ffb2",
+  "group": "Q143",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q143-473d8ffb2 (reviewer sub-agent of L); spot-checked: Read the whole delivery against the main-20261015 blueprint proof, unit sk-p-real-operations, every cited statement and the sources: Stacks 0BND/0BN5/0BTV/0BTX, Weil II (1.1.1), (1.1.7), (1.1.9), Bhatt-Scholze 6.8.4, 7.4.7 and 7.4.10. The item's statement is unchanged. Step 1 picks finite-stage representatives of theta and its inverse with the inverse equations (no stable lattice assumed). lem-tw-lisse-rational-realization relates the framework object to ordinary Loc(X,E_X). Step 2: the group law A(w)A(v)=A(wv) holds with the order (n,p)(m,q)=(n+m, g^m(p)q); checked by naturality of p_w for theta^[m] and the pullback rule, with all domains matching. Step 3: T_s = theta_b (p_s)_F, so A agrees with rho(delta s^n) = rho_geom(delta) T_s^n. Step 4: the square u theta_a^[e] = theta_b^[e] (g^e tau)_F holds. Step 5: traced each arrow of the local operator in def-weil-local-frobenius-trace; restriction plus coprojection sends z to z∘Spec(gamma^e) = c_{a,e}, so F_x = theta_a^[e] c. Step 6: the Zhat = Z + e Zhat conjugacy is correct. Step 7: the determinant is elementary. Both new nodes are true, self-contained, strictly smaller than the item and not duplicates. lem-real-lisse-path-fibres: smooth implies unibranch, so BS 7.4.10 applies. lem-real-weil-twisted-paths: tested on X_0 = Spec F_q with constant covers (degree 1 acts as sigma -> gamma sigma, geometric Frobenius), g^e a = a Spec(gamma^e), and e=1. Constant rank-one case gives lambda^e on both sides; rank 0 gives 1. Accepted tool use: lem-tw-lisse-rational-realization (coefficient-model comparison; no node of this unit gives it). Batch-5: all four flagged citations (def-pod-lisse-l-adic-sheaves, lem-tw-lisse-rational-realization, cor-galois-lisse-representations, def-wf-weil-group) are already in the batch-5 closure without the delivery's edges (e.g. via lem-tw-dual-stalk-frobenius). They are general definitions, the pi1/lisse dictionary, or the lisse realization, which the trace-formula and Poincare-duality assumptions do not give and which are not steps of their proofs. The trace-formula node reached (lem-trf-integral-pullback-comparison-realization) is a pullback-coherence lemma, not the trace formula. No SGA citation. No fixes written."
+ }
 }

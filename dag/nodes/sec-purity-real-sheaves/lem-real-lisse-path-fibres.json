@@ -1,0 +1,86 @@
+{
+ "id": "lem-real-lisse-path-fibres",
+ "kind": "statement",
+ "title": "Natural transport of lisse fibres along etale paths",
+ "statement": "Let $k=\\overline{\\mathbf F}_q$, let $\\ell\\ne\\operatorname{char}k$ be prime, and let $X$ be a nonempty connected smooth separated finite-type $k$-scheme [def-sbc-smooth-morphisms, def-weil-pbc-scheme-conventions]. For a geometric point $a$ let $F_a$ be the finite-etale fibre functor of [def-galois-fibre-functor]. An etale path $p:a\\rightsquigarrow b$ means a natural isomorphism $F_a\\xrightarrow{\\sim}F_b$. Paths exist between any two geometric points of $X$.\n\nFix a finite extension $E/\\mathbf Q_\\ell$ in $\\overline{\\mathbf Q}_\\ell$, with valuation ring $R$ and uniformizer $\\varpi$ [def-weil-l-adic-coefficient-extension]. Every path $p$ induces natural $E$-linear isomorphisms\n$$p_L:L_a\\xrightarrow{\\sim}L_b$$\nfor lisse $E$-sheaves $L$ of [def-pod-lisse-l-adic-sheaves]. On an integral model this is the inverse limit of its maps on the finite locally constant $R/\\varpi^r$-module stalks, followed by inversion of $\\varpi$. It agrees, under the lisse realization and point-fibre comparison of [lem-tw-lisse-rational-realization], with transport on the ordinary pro-etale lisse module sheaf. Thus the assertion applies also to framework lisse objects and the point fibres $\\operatorname{Fib}_s(La^*L)$ of [def-weil-finite-coefficient-point] (in degree zero, with the analogous interpretation at arbitrary geometric points).\n\nThese maps preserve identities and composition of paths and satisfy $p_{L'}u_a=u_b p_L$ for every sheaf map $u:L\\to L'$. They commute with finite coefficient extension $E\\subset E'$ and with scalar extension to $\\overline{\\mathbf Q}_\\ell$ at a common finite stage. For a scheme automorphism $h:X\\to X$, not necessarily $k$-linear, the path $h(p):h(a)\\rightsquigarrow h(b)$ obtained by evaluating $p$ on $h^*$ satisfies\n$$p_{h^*L}=(h(p))_L$$\nunder the canonical pullback-stalk identifications. The same assertion holds for iterates of $h$. On geometric loops the maps are exactly the actions of $\\pi_1(X,a)=\\operatorname{Aut}(F_a)$ in [cor-galois-lisse-representations]; in particular\n$$p_L\\rho_a(\\delta)p_L^{-1}=\\rho_b(p\\delta p^{-1}).$$",
+ "source": {
+  "document": "literature/stacks-project/pione.tex",
+  "place": "Tag 0BND, pione-theorem-fundamental-group (2); module and adic extension: Deligne, literature/deligne-weil-II_PMIHES-1980-52.pdf (1.1.1), (1.1.6), pp. 146-150; ordinary pro-etale realization: literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf, Proposition 6.8.4, Lemmas 7.4.7 and 7.4.10. The explicit compatibility package is an agent formulation of these fibre constructions."
+ },
+ "stmt_deps": [
+  "def-sbc-smooth-morphisms",
+  "def-weil-pbc-scheme-conventions",
+  "def-galois-fibre-functor",
+  "def-weil-l-adic-coefficient-extension",
+  "def-pod-lisse-l-adic-sheaves",
+  "lem-tw-lisse-rational-realization",
+  "def-weil-finite-coefficient-point",
+  "cor-galois-lisse-representations"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(etalePath|étale path|fibre functor|fiberFunctor).*",
+   "results": "Mathlib/CategoryTheory/Galois/Examples.lean, Mathlib/CategoryTheory/Galois/Examples.lean, Mathlib/CategoryTheory/Galois/Examples.lean, Mathlib/CategoryTheory/Galois/Examples.lean, Mathlib/CategoryTheory/Galois/Examples.lean, Mathlib/CategoryTheory/Galois/Decomposition.lean, Mathlib/CategoryTheory/Galois/Decomposition.lean, Mathlib/CategoryTheory/Galois/Decomposition.lean",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"fiberFunctor\", \"iso\"",
+   "results": "CategoryTheory.PreGaloisCategory.FiberFunctor.reflectsIsos",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale paths transport the fibres of lisse l-adic sheaves naturally in sheaf morphisms",
+   "results": "CategoryTheory.Grothendieck.transport_fiber, CategoryTheory.GrothendieckTopology.Point.Hom.sheafFiber, AlgebraicGeometry.Scheme.Etale, CategoryTheory.sheafCompose_map, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.IsEtale, AlgebraicGeometry.Scheme.smallEtaleTopology, CategoryTheory.Grothendieck.transport",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An etale path between geometric points gives natural linear isomorphisms on lisse l-adic sheaf stalks compatible with pullback and coefficient extension",
+   "results": "AlgebraicGeometry.Scheme.Hom.arrowStalkMapIsoOfEq, AlgebraicGeometry.Scheme.arrowStalkMapIsoOfEq, AlgebraicGeometry.Scheme.Hom.stalkMap_congr_point, AlgebraicGeometry.Scheme.stalkMap_congr_point, AlgebraicGeometry.Scheme.Hom.stalkMap_congr_point_assoc, AlgebraicGeometry.Scheme.stalkMap_congr_point_assoc, AlgebraicGeometry.Scheme.residue_residueFieldCongr, AlgebraicGeometry.Scheme.stalkMap_congr",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Lisse local system fibre functors at different base points are naturally isomorphic equivariantly with fundamental group conjugation",
+   "results": "CategoryTheory.PreGaloisCategory.toAutHomeo_apply, IsCoveringMap.monodromyFunctor_map, CategoryTheory.PreGaloisCategory.IsFundamentalGroup.toIsNaturalSMul, IsCoveringMap.monodromyFunctor_obj, CategoryTheory.PreGaloisCategory.autIsoFibers_inv_app, CategoryTheory.PreGaloisCategory.autIsoFibers, IsCoveringMap.monodromyFunctor, CategoryTheory.PreGaloisCategory.evaluationEquivOfIsGalois_symm_fiber",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "fiberFunctorIso|iso.*[Ff]iber|[Ff]iber.*[Ii]so|isIso",
+   "results": "Mathlib/CategoryTheory/Galois/Examples.lean, Mathlib/CategoryTheory/Galois/Examples.lean, Mathlib/CategoryTheory/Galois/Examples.lean, Mathlib/CategoryTheory/Galois/Examples.lean, Mathlib/CategoryTheory/Galois/Examples.lean, Mathlib/CategoryTheory/Galois/Basic.lean, Mathlib/CategoryTheory/Galois/Basic.lean, Mathlib/CategoryTheory/Galois/Basic.lean; subdirectory CategoryTheory/Galois",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "p-real-operations",
+  "date": "2026-10-18",
+  "group": "Q143"
+ },
+ "chapter": "sec-purity-real-sheaves",
+ "unit": "sk-p-real-operations",
+ "blueprint": {
+  "from": {
+   "node": "p-real-operations",
+   "place": "Second proof paragraph: comparing the stalk at the closed point with the geometric generic stalk, before identifying the local operator.",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ }
+}

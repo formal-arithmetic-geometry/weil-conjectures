@@ -13,9 +13,27 @@
   "def-weil-size-convention",
   "def-weil-open-immersion"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-a1-space-etale-open-image] with the algebraic space $E=h_U$, the target $F=X$, and the representable etale map $q=f$. Its conclusion supplies an open subspace $X_f\\subseteq X$ whose underlying set is exactly the point image of $|h_U|\\to|X|$, an inclusion $j:X_f\\hookrightarrow X$ that is representable by open immersions, and a factorization $h_U\\to X_f\\to X$ whose first map $f_f$ is representable, surjective and etale. Here $|h_U|$ is the set of field-valued point classes of $h_U$, which is the meaning of $|U|$ under the convention fixed in the item statement (equivalently the underlying set of the scheme $U$, a point $u$ corresponding to $\\operatorname{Spec}\\kappa(u)\\to U$). This is precisely the asserted $X_f$, inclusion $j$, and factorization $f=j\\circ f_f$.",
+   "uses": [
+    "lem-a1-space-etale-open-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 06NF, lemma-etale-image-open, first assertion and factorization (lines 536-555)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-a1-space-etale-open-image"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-properties.tex",
+  "place": "Tag 06NF, lemma-etale-image-open, first assertion and factorization (lines 536-555), using the general open-image node for the specialization."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -54,7 +72,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-a1-space-affine-atlas-open-cover",
@@ -66,7 +84,7 @@
  "blueprint": {
   "from": {
    "node": "lem-a1-affine-hc0",
-   "place": "Auxiliary 03XX schemehood reduction underlying the separated-etale-space input to the support argument: 03FY constructs open images of affine etale charts, using 06NF.",
+   "place": "Auxiliary 03XX schemehood reduction underlying the separated-etale-space input to the support argument: 03FY invokes 06NF for the open image and etale-surjective factorization.",
    "via": [
     "lem-a1-space-affine-atlas-open-cover",
     "lem-a1-separated-locally-qf-space-representable",
@@ -75,5 +93,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-a1-etale-scheme-map-open-image",
+  "worker": "stage1",
+  "summary": "No matching sorry-free project declaration exists. I found the existing general node lem-a1-space-etale-open-image, which states that a representable etale map of algebraic spaces has an open point image, factors through it, and is representable surjective etale onto it. Specializing its source to the scheme algebraic space h_U and its target to X proves every clause of this item; no new node is needed.",
+  "blueprint": "The single step realizes the auxiliary 03XX/03FY open-image construction via Tag 06NF: existence of the open image and the representable surjective etale factorization."
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q31-2715c05d6",
+  "group": "Q31",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q31-2715c05d6 (reviewer sub-agent of L); spot-checked: I read the item, the cited node lem-a1-space-etale-open-image (same unit sk-p-real-rankin, so no tool use is needed), the four stmt_deps, the citer lem-a1-space-affine-atlas-open-cover, and Stacks spaces-properties.tex Tag 06NF lemma-etale-image-open (lines 536-559) with lemma-factor-through-open-subspace, 03BZ lemma-open-subspaces, lemma-characterize-surjective and lemma-scheme-points. The item agrees with 06NF. The extra 'representable' hypothesis is automatic for a map from a scheme, and the U/R presentation clause it drops is used by no citer. The one step substitutes E=h_U, F=X, q=f into the cited general statement and gets every clause from that statement, not from its proof (C3/C4 OK). The item states no new node, so there is no D1 relabelling, and settling a special case by citing its generalization is what the brief prescribes. A DFS from the cited node does not reach the item, so there is no cycle. Edge cases checked: U empty, f an open immersion, f a surjective atlas, and the squaring map on A^1 minus 0. One fault, B4: the step text had \\to written as a single-backslash JSON escape in three places, so it decoded to TAB+'o'. I repaired it in fixes/dag/nodes/sec-purity-real-sheaves/lem-a1-etale-scheme-map-open-image.json, where only proof[0].text changed: the escapes are fixed, the inclusion j is named, and the |U|=|h_U| identification is spelled out. No SGA, no tool_uses.; 1 file(s) fixed by the reviewer"
  }
 }
