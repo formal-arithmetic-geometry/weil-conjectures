@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.Mathlib.AlgebraicGeometry.Restrict
 public import WeilConjectures.WeilSheaf.FourierInversion.ArtinSchreier
 public import WeilConjectures.WeilSheaf.FourierInversion.OtherSections
 public import WeilConjectures.WeilSheaf.FourierInversion.TensorLisse
@@ -97,14 +98,6 @@ theorem range_eq_compl_basicOpen_of_isPullback {X Z S : Scheme.{u}}
   rw [← Scheme.preimage_basicOpen_top]
   exact ⟨fun H ↦ H PUnit.unit, fun H _ ↦ H⟩
 
-/-- A function is a unit on its basic open set. -/
-theorem isUnit_ι_appTop_basicOpen (X : Scheme.{u}) (r : Γ(X, ⊤)) :
-    IsUnit ((X.basicOpen r).ι.appTop r) := by
-  refine (X.basicOpen r).toScheme.toRingedSpace.isUnit_of_isUnit_germ ⊤ _ fun x _ ↦ ?_
-  have hx : x ∈ (X.basicOpen r).ι ⁻¹ᵁ X.basicOpen r := x.2
-  rw [Scheme.preimage_basicOpen_top] at hx
-  exact (Scheme.mem_basicOpen_top _ _ _).1 hx
-
 /-- **The delta kernel on a trivial line bundle** (the relative form of blueprint
 `lem-fd-convolution-kernel`, `sk-prop-convolution-kernel`). Let `h` be a function on a
 `k₀`-scheme `X` (as a morphism `X ⟶ 𝔸¹`), with zero locus `i : Z ⟶ X` (the base change of
@@ -192,7 +185,7 @@ theorem WeilComplex.nonempty_iso_derivedLowerShriek_tensorLisse_artinSchreierOf_
     rw [heq] at e
     exact (WeilComplex.isZero_derivedLowerShriek_tensorLisse_artinSchreierOf_upperStar ψ hψ πU
       (j' ≫ s) ((IsPullback.of_hasPullback π U.ι).flip.paste_vert hπ) (U.ι.appTop f)
-      (isUnit_ι_appTop_basicOpen X f) ((WeilComplex.upperStar U.ι).obj P)).of_iso (e.app P)
+      (X.isUnit_ι_appTop_basicOpen f) ((WeilComplex.upperStar U.ι).obj P)).of_iso (e.app P)
   have : ∀ P, IsIso ((Functor.whiskerLeft F η).app P) := fun P ↦ hη _ (hF P)
   have : IsIso (Functor.whiskerLeft F η) := NatIso.isIso_of_isIso_app _
   -- over the zero locus `Z` the kernel is constant
