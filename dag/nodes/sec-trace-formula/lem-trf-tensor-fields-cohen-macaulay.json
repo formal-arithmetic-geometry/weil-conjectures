@@ -294,5 +294,23 @@
   "group": "Q34",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q34-140c52b4a (reviewer sub-agent of L); spot-checked: I read the item in full against Stacks algebra.tex 47266-47286 (Tag 045M). The statement is unchanged and matches 045M: either extension may be of finite type, and Cohen-Macaulay is spelled out as Noetherian with depth = dim at every prime localization. The delivery has no new nodes. proof_deps equals the union of the steps' uses, there is no cycle, and there is no SGA citation. Every cited statement says what its step takes from it. Steps 1-2: finite transcendence basis, K finite over F = k(t), and F⊗L = W^{-1}L[t] via the localization-tensor node, with multiplicativity checked by hand. Step 3: L is a field (depth and dimension 0), so lem-trf-polynomial-algebra-cm and localization-Noetherian apply; r=0 is covered. Step 4: A_p is isomorphic to P_r by explicit fraction maps; the elementary marking is acceptable. Step 5: T is finite free over A = F⊗L via a basis of K over F, which also works for inseparable K. Step 6: T is Noetherian, flat and integral over A. Step 7: flatness localizes to R = A_p -> S = T_q, a local map. Step 8: dim S <= dim R by incomparability for the global integral map A -> T. Step 9: the flat local depth formula and depth <= dim Supp S = dim S give dim R <= depth S <= dim S <= dim R; the closed fibre S/pS is nonzero because the map is local. I tested k=K=L, K=k(t) with L=k(s), and an inseparable K = F_p(b)(b^{1/p}) with L = K, where T is Artinian with dimension and depth 0. The source has no error. No existing node states 045M or 00R5. I accept the three tool_uses (00HT flat localization, 0337 flat local depth formula, 00LK depth bound) as generic commutative algebra needed by the 00R5 step, which no node of sk-i-curve-zero supplies."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.TensorFieldsCohenMacaulay",
+  "declaration": "Algebra.TensorProduct.isNoetherianRing_and_local_depth_eq_dimension_of_fg",
+  "file": "lean/Sheaf/RingTheory/TensorFieldsCohenMacaulay.lean",
+  "statement": "theorem isNoetherianRing_and_local_depth_eq_dimension_of_fg {k : Type u} {K : Type v} {L : Type w} [Field k] [Field K] [Field L] [Algebra k K] [Algebra k L] (hfg : (⊤ : IntermediateField k K).FG ∨ (⊤ : IntermediateField k L).FG) : IsNoetherianRing (TensorProduct k K L) ∧ ∀ (q : Ideal (TensorProduct k K L)) [q.IsPrime], IsNoetherianRing (Localization.AtPrime q) ∧ IsLocalRing (Localization.AtPrime q) ∧ (IsLocalRing.depth (R := Localization.AtPrime q) (Localization.AtPrime q) : WithBot ℕ∞) = ringKrullDim (Localization.AtPrime q)",
+  "branch": "newtargets-dag",
+  "by": "Q31",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8c4b231e5",
+  "group": "Q31",
+  "result": "pass",
+  "note": "Statement matches node and Stacks 045M (algebra.tex 47266-47286) clause by clause: IntermediateField.FG of ⊤ on either side (field finite type, transcendental allowed); TensorProduct k K L; IsNoetherianRing; ∀ prime q: Localization.AtPrime q Noetherian, local, (IsLocalRing.depth q-loc : WithBot ℕ∞) = ringKrullDim. Depth decl (side Sheaf/RingTheory/Depth.lean) matches def-weil-pbc-depth. No extra hypotheses, independent universes u v w, lean.statement verbatim, no statement_change, no new nodes. Edge cases k=K=L, L-only fg, trdeg 0, inseparable/non-reduced T covered. No CM def or duplicate in live/side Lean or runs/2. Docstrings have source place + blueprint + 9 steps; sorry-only; recorded proof-dep modules imported. nt_compile --json on snapshot: 2.2 s, exit 0, clean. Advisory: IsLocalRing conjunct redundant (instance); Second-reading section nominal (direct delivery)."
  }
 }
