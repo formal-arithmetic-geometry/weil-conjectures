@@ -16457,3 +16457,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:59 L: merged deliver/P5/Sheaf.CategoryTheory.DerivedCategory.PerfectRingTriangleClosure (stage 3; reviewer PASS; first push; landing 20261018T135914-L-2962216 (proof); batch 20261018T135825; modules 1; new nodes 0)
 - 13:59 L: merged deliver/P8/Sheaf.AlgebraicGeometry.CoefficientConstructibleEtaleModules (stage 3; reviewer PASS; first push; landing 20261018T135915-L-2962503 (proof); batch 20261018T135825; modules 1; new nodes 0)
 - 13:59 L: merged deliver/Q2/Sheaf.Paper.NormalizedDVRTower (stage 3; reviewer PASS; first push; landing 20261018T135916-L-2962768 (proof); batch 20261018T135825; modules 1; new nodes 0)
+- 13:59 L: merged deliver/Q8/Sheaf.AlgebraicGeometry.DiagonalRegularPureCodimension (stage 3; reviewer PASS; first push; landing 20261018T135917-L-2963001 (proof); batch 20261018T135825; modules 1; new nodes 0)

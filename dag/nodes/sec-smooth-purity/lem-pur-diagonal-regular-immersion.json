@@ -19,20 +19,26 @@
  ],
  "proof": [
   {
-   "text": "By [sbc-thm-etale-local-normal-form], $f$ is etale locally the\nprojection $\\mathbf A^d_Y\\to Y$; on the model, $\\Delta$ is the zero\nsection of $\\mathbf A^d$, a regular closed immersion of codimension\n$d$ with normal bundle the trivial rank-$d$ bundle, which under the\nidentification is $T_{X/Y}$. Regular immersions, their codimension\nand their normal bundles are etale local (and compatible with etale\nbase change), hence the assertion.",
-   "uses": [
-    "sbc-thm-etale-local-normal-form"
-   ],
+   "text": "Since d is positive, use the already proved source-library instance AlgebraicGeometry.isRegularImmersion_diagonal in WeilConjectures.AlgebraicGeometry.Morphisms.RegularImmersion. It proves the affine-local regularity by the unchanged unit route: standard smooth charts, etale polynomial coordinates, coordinate differences, and restriction to the diagonal. This reuses the normal-form argument already implemented there instead of separately invoking Sheaf.AlgebraicGeometry.EtaleLocalNormalForm.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "The product W is locally of finite type over the field, hence locally Noetherian. At each z in X take an affine neighborhood U of Delta(z) and a weakly regular list r of length d generating the diagonal ideal. The stalk is a flat localization of Gamma(W,U), so r remains weakly regular. Since Delta(z) belongs to the zero locus of the diagonal ideal, each generator germ is a nonunit in the local ring. Mathlib IsLocalRing.isRegular_iff_isWeaklyRegular_of_subset_maximalIdeal makes the list regular. The proved closed-immersion identity Scheme.Hom.ker_stalkMap identifies its generated ideal with the kernel of the stalk map.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Apply Mathlib ringKrullDim_add_length_eq_ringKrullDim_of_isRegular to this regular sequence in the Noetherian local stalk. The stalk map of a closed immersion is surjective; RingHom.quotientKerEquivOfSurjective identifies the quotient by its kernel with the source stalk. This gives exactly dim O_W,Delta(z) = dim O_X,z + d. Index the regular list by Fin d using List.get and List.ofFn_get; its range is precisely its list membership set, so its ideal is the required span. Combine these two stalk clauses with the given positivity hd.",
+   "uses": [],
    "elementary": false
   }
  ],
- "proof_deps": [
-  "sbc-thm-etale-local-normal-form"
- ],
+ "proof_deps": [],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-lem-diag-reg/lem-pur-diagonal-regular-immersion.md",
-  "place": "## Proof"
+  "document": "lean/WeilConjectures/AlgebraicGeometry/Morphisms/RegularImmersion.lean",
+  "place": "isRegularImmersion_diagonal and the stalk-localization argument of IsRegularImmersion.ringKrullDim_stalk_add; Mathlib/RingTheory/KrullDimension/Regular.lean, ringKrullDim_add_length_eq_ringKrullDim_of_isRegular; Q8, 2026-10-18"
  },
  "mathlib_searches": [],
  "mathlib_match": null,
@@ -119,5 +125,15 @@
   "group": "Q17",
   "result": "pass",
   "note": "Read the item node, all 13 statement-dependency records and the exact side declarations (etaleSupportMapCompatibility, NoetherianSectionSpecialization family/Normalized/specialization/sectionMap/existsUnique_normalized, dualizingComplexBaseChangeMap vs smoothDualizingBaseChangeMap, smoothTensorDualityMap, unboundedEtaleLowerShriekId, vectorBundleIntegration/VectorBundlePurity, affine-trace d=0 conventions, IsRegularImmersionOfPureCodimension). Hypotheses match the node with nothing stronger. N/hN are verbatim the graph and homotopy equations of the support-compatibility dependency and determine N uniquely. rho is built by rightAdjointUniq from the actual adjunctions. All three factor equalities, alpha = composite = omega coordinates, gamma = rho^-1 for every unbounded K, and the sum-counit adjoint clause are equalities of the specified arrows. Edge cases (empty schemes, identity, fold map, n=1, K=0, unbounded K, universes u/u+1) are covered. No hollow definitions; the theorem's sorry is the only one; docstrings and the 9 proof steps are present; statements are verbatim; nodes changed only in lean; no lines over 100 characters. Both files compile cleanly via nt_compile.py --json (2.6 s, 14.4 s; warn.sorry=false). Dependency rebinding of lem-pur-diagonal-regular-immersion is a justified §1(B) repair (blueprint_update statement, chapter predicate with built-in 1<=c, lean.note present, no landed users of the old declaration). Non-blocking: factor (iii) uses the project's d=0 identity-trace convention transported along the actual cone instead of vectorBundleIntegration, which only accepts locally-free-sheaf bundles while the node sets pi=z=1_X; the second reading is a self-rereading as the dispatcher required; for stage 3, proof Step 2 must rest on its direct clopen argument, not the d>=1 regularity lemma."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q8",
+  "result": "pass",
+  "landing": "20261018T135917-L-2963001",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
