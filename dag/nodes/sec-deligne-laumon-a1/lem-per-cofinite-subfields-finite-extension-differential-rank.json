@@ -250,5 +250,23 @@
   "group": "Q72",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q72-47741e2b6 (reviewer sub-agent of L); spot-checked: PASS, no fixes. Source: ILO IV Prop. 1.2.4 (printed p.49), with 1.2.1–1.2.3 on pp.48–49, read in full. The item statement matches it hypothesis by hypothesis. 'Nonempty family' is added, and it is needed: an empty family over a perfect K makes ∃β false. The quantifier over all cofinite K' ⊆ K_β is kept, including K' that do not contain K^p. The proof is the agent's own direct route, recorded as proof_origin.by=agent, and every step holds. Step 1: the e_i^p are independent over K^p, by injectivity of Frobenius; this needs no separability. Step 2: the contrapositive of the 07P3 node is applied to the relation space V ⊆ K^n with k=K^p, and all of that node's hypotheses hold (nonempty index set, n≥1, directed family). Step 3 is correctly marked elementary: since derivations kill E=K'K^p and F=K'L^p, Ω_{K/K'}≅Ω_{K/E} and Ω_{L/K'}≅Ω_{L/F}. Step 4: the frobenius-basis-compositum node is applied with S=E; it gives spanning only, and independence comes from Step 2, so [F:E]=n. Step 5: the tower law is applied to both towers with finiteness checked, then n>0 is cancelled. Step 6: the relative p-basis existence and differential-basis nodes are applied with k=E and k=F, using kK^p=E. The index sets are finite, p^r=p^s gives r=s, and Step 3 transfers the result to K'. Each cited statement says what its step takes from it. There are no new nodes and no cycle (the proof_deps closure of 23 nodes does not contain the item). There is no duplicate: the related pbc node intersection-subfields-differentials-powers is ILO 1.2.3, a different statement. All six declared tool_uses are generic sk-thm-p1 field-theory tools used as black boxes, and I accept them. No SGA source is cited. tools/review_split.py on the snapshot gives PASS. Small cases checked: L=K; F_p(t) with L=K(t^{1/p}) and K'=F_p(t^{p^2}); and F_p(s,t) with L=K(s^{1/p}), where the exceptional indices are exactly those with s∈K_α."
+ },
+ "lean": {
+  "module": "Sheaf.FieldTheory.CofiniteSubfieldsDifferentialRank",
+  "declaration": "FieldTheory.exists_cofinite_subfield_differential_finrank_eq",
+  "file": "lean/Sheaf/FieldTheory/CofiniteSubfieldsDifferentialRank.lean",
+  "statement": "theorem exists_cofinite_subfield_differential_finrank_eq (p : ℕ) [Fact p.Prime] (K : Type u) [Field K] [CharP K p] (L : Type v) [Field L] [Algebra K L] [Module.Finite K L] {I : Type w} [Nonempty I] (F : I → Subfield K) (hcofinite : ∀ a : I, Module.Finite (F a) K) (hinter : (⋂ a : I, (F a : Set K)) = Set.range (fun x : K ↦ x ^ p)) (hdirected : ∀ a b : I, ∃ c : I, F c ≤ F a ⊓ F b) : ∃ b : I, ∀ K' : Subfield K, K' ≤ F b → Module.Finite K' K → Module.finrank L (KaehlerDifferential K' L) = Module.finrank K (KaehlerDifferential K' K)",
+  "branch": "newtargets-dag",
+  "by": "N9",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e4f03a5a1",
+  "group": "N9",
+  "result": "pass",
+  "note": "Checked against ILO IV Prop. 1.2.4 p.49 in the PDF: every hypothesis (p prime, CharP K p, finite L/K, nonempty family, cofinite members, intersection equal to the Frobenius image, directedness) and the conclusion ∃b ∀K' ≤ F b cofinite, finrank L Ω[L/K'] = finrank K Ω[K/K'] are faithful, with the same quantifier order. K' need not contain K^p. Universes u, v, w are independent. The K'-algebra structure on L is the canonical composite (rfl check plus IsScalarTower instance compiled). Node differs from live only in lean; statement field verbatim; docstrings carry source, blueprint id and the 6 proof steps; sorry only; imports follow rule 7. nt_compile --json clean in 1.2 s; a broken-copy control fails as expected. No duplicate found. No findings."
  }
 }

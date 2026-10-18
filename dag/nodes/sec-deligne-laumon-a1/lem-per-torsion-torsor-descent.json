@@ -230,5 +230,23 @@
   "group": "Q129",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q129-c1249581f (reviewer sub-agent of L); spot-checked: Verdict FIX: I read the delivery in full and found one fault, a missing citation in Step 2, which I repaired; the rest is correct. Source read: ILO XVII §7.2 (Def. 7.2.1, Props. 7.2.2–7.2.5, Lemma 7.2.6 with its proof, Ex. 7.2.7; pp. 301–303). Statement: it matches Lemma 7.2.6. Against the base, only the Noetherian citation changed; nothing is weakened. Steps: Step 1 (filtered union of finite subsystems, quotients and colimits stable under pullback), Step 3 (H^1 continuity with the qcqs hypotheses met, torsor bijection, extension of structure group) and Steps 4–5 (finite locally constant representability, filtered contracted product via the universal property against set sheaves) are each correct. Fault C1/C4 in Step 2: the claim that q^{-1}G stays torsion cited only the definition of stalks. It needs (q^{-1}G)_y ≅ G_{qy}, which is lem-weil-pbc-inverse-image-stalk-germ. I added it to the step text, uses, proof_deps and tool_uses; it creates no cycle. New nodes: lem-per-set-local-system-calculus (ILO 7.2.2–7.2.4 plus the slice/total-space equivalence) and lem-per-torsion-finite-subsystem (exhaustion by finite pi_1-stable subgroups) are both true. They are statement-only, self-contained and cited. Neither restates the item. Neither duplicates lem-per-torsion-local-system-monodromy, which depends on this item. The closure check finds no cycle. Edge cases checked: empty quotient, G=0, finite constant G, X empty, constant sum of Z/2, and non-torsion Z (excluded, as in Ex. 7.2.7). Accepted tool uses: generic etale/torsor nodes (flc-representable, contracted product, H^1 functoriality, torsor-H1, cohomology colimit, inverse-image stalk). No SGA source is used.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.TorsionTorsorDescent",
+  "declaration": "AlgebraicGeometry.Scheme.isIndFiniteEtaleSheaf_of_free_torsion_action",
+  "file": "lean/Sheaf/AlgebraicGeometry/TorsionTorsorDescent.lean",
+  "statement": "theorem isIndFiniteEtaleSheaf_of_free_torsion_action (X : Scheme.{u}) [IsLocallyNoetherian X] [CompactSpace X] (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}) (T Y : Sheaf X.smallEtaleTopology (Type (u + 1))) (vadd : ∀ U : X.Etaleᵒᵖ, G.obj.obj U → T.obj.obj U → T.obj.obj U) (hzero : ∀ (U : X.Etaleᵒᵖ) (t : T.obj.obj U), vadd U 0 t = t) (hadd : ∀ (U : X.Etaleᵒᵖ) (g h : G.obj.obj U) (t : T.obj.obj U), vadd U (g + h) t = vadd U g (vadd U h t)) (hnat : ∀ {U V : X.Etaleᵒᵖ} (f : U ⟶ V) (g : G.obj.obj U) (t : T.obj.obj U), T.obj.map f (vadd U g t) = vadd V (G.obj.map f g) (T.obj.map f t)) (hfree : ∀ (U : X.Etaleᵒᵖ) (t : T.obj.obj U), Function.Injective (vadd U · t)) (q : T ⟶ Y) (hqinvariant : ∀ (U : X.Etaleᵒᵖ) (g : G.obj.obj U) (t : T.obj.obj U), q.hom.app U (vadd U g t) = q.hom.app U t) (hquotient : ∀ (E : Sheaf X.smallEtaleTopology (Type (u + 1))) (f : T ⟶ E), (∀ (U : X.Etaleᵒᵖ) (g : G.obj.obj U) (t : T.obj.obj U), f.hom.app U (vadd U g t) = f.hom.app U t) → ∃! k : Y ⟶ E, q ≫ k = f) (hG : IsIndFiniteEtaleSheaf ((sheafCompose X.smallEtaleTopology (CategoryTheory.forget AddCommGrpCat.{u + 1})).obj G)) (htorsion : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (x : Spec (.of Ω) ⟶ X) (g : (pointedEtaleStalk G x : AddCommGrpCat.{u + 1})), ∃ n : ℕ, 0 < n ∧ n • g = 0) (hY : IsIndFiniteEtaleSheaf Y) : IsIndFiniteEtaleSheaf T",
+  "branch": "newtargets-dag",
+  "by": "Q102",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b0a5731cf",
+  "group": "Q102",
+  "result": "pass",
+  "note": "Statement matches ILO XVII Lemma 7.2.6 and the node clause by clause: Noetherian = IsLocallyNoetherian + CompactSpace; sectionwise action laws with naturality; free = injective orbit maps; q is the sheaf quotient by invariance plus unique factorization; recorded IsIndFiniteEtaleSheaf for G's underlying set sheaf, for Y and in the conclusion; germwise torsion at all geometric points with n>0. No stronger assumptions; universes consistent and bound; no definitions introduced; the action fields copy Sheaf.Torsor's action part, which needs bijectivity, so no duplicate notion. Edge cases fine: empty X, empty quotient, G=0, infinite sum of Z/2, Z excluded. Docstrings give source and blueprint with all five proof steps; proof is sorry; lean.statement verbatim. nt_compile --json clean in 3.4 s; broken control fails. Advisory only: unused plain imports of proof-dependency modules."
  }
 }

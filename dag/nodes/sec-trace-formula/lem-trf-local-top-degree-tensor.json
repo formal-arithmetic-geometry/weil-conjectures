@@ -157,5 +157,23 @@
   "group": "Q71",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q71-9d37d8499 (reviewer sub-agent of L); spot-checked: I read the full item, all four proof steps, the statements of all three cited nodes, the parent lem-trf-local-derived-tensor-nonvanishing (its step 5 is the only citer, and its hypotheses match), unit sk-i-curve-zero, and the Stacks more-algebra direct-sum Tot convention starting at line 14177. The statement was not changed and is true. Its finite-free hypothesis is never used, so nothing was weakened. Steps 1-2: with P^i=0 for i>a and Q^j=0 for j>b, only the (a,b) term is in top degree. The incoming terms are (a-1,b) and (a,b-1). The sign (-1)^a does not change the image. Step 3: lem-weil-pbc-tensor-right-exact (Mathlib rTensor_exact/lTensor_exact) is applied twice, with N=Q^b and then N=H^a(P). The kernels are the images of im d_P⊗Q^b and of P^a⊗im d_Q, and their sum is the incoming image. The step is correct and correctly marked non-elementary. Step 4: the map defined by representatives is the composite of the quotient maps. Small cases checked by hand over Z: Z/2⊗Z/3=0 and Z/2⊗Z/2=Z/2 match the top cohomology of Tot; P=0 and single-degree complexes also work. The pc definitions are stated for sites; using them for R-modules is the one-point-site case. A search of the DAG found no duplicate. The tool_uses entry names a Mathlib leaf; it is accurate but not needed, and I accept it. For the maintainer: blueprint.via lists the item itself first. 29 nodes in the DAG share this pattern, so I left it unchanged; it is not a mathematical fault. I made no fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.TopDegreeTensor",
+  "declaration": "CochainComplex.exists_topDegreeTensorIso",
+  "file": "lean/Sheaf/Algebra/Homology/TopDegreeTensor.lean",
+  "statement": "theorem exists_topDegreeTensorIso (R : Type u) [CommRing R] (P Q : CochainComplex (ModuleCat.{u} R) ℤ) (a b : ℤ) (hPfree : ∀ i : ℤ, Module.Free R (P.X i)) (hPfinite : ∀ i : ℤ, Module.Finite R (P.X i)) (hQfree : ∀ i : ℤ, Module.Free R (Q.X i)) (hQfinite : ∀ i : ℤ, Module.Finite R (Q.X i)) (hP : ∀ i : ℤ, a < i → IsZero (P.X i)) (hQ : ∀ i : ℤ, b < i → IsZero (Q.X i)) : ∃ (e : P.homology a ⊗ Q.homology b ≅ (mapBifunctor P Q (curriedTensor (ModuleCat.{u} R))).homology (a + b)) (t : P.cycles a ⊗ Q.cycles b ⟶ (mapBifunctor P Q (curriedTensor (ModuleCat.{u} R))).cycles (a + b)), t ≫ (mapBifunctor P Q (curriedTensor (ModuleCat.{u} R))).iCycles (a + b) = (P.iCycles a ⊗ₘ Q.iCycles b) ≫ ιMapBifunctor P Q (curriedTensor (ModuleCat.{u} R)) a b (a + b) rfl ∧ (P.homologyπ a ⊗ₘ Q.homologyπ b) ≫ e.hom = t ≫ (mapBifunctor P Q (curriedTensor (ModuleCat.{u} R))).homologyπ (a + b)",
+  "branch": "newtargets-dag",
+  "by": "Q156",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-60633b055",
+  "group": "Q156",
+  "result": "pass",
+  "note": "Item adds only its lean record; no new nodes or dependency repairs. CochainComplex.exists_topDegreeTensorIso: R CommRing, P Q : CochainComplex (ModuleCat.{u} R) ℤ, finite free in every degree, IsZero above a and b in ℤ. Total complex is the recorded mapBifunctor with curriedTensor, signs (-1)^p, HasMapBifunctor from ModuleCat colimits. ∃ e t pins the canonical map: t through mono iCycles to (iCycles⊗iCycles)≫ι_(a,b), e.hom through epi homologyπ⊗homologyπ; not a bare Nonempty. Statement true (degree a+b+1 zero). Universe forced by ModuleCat.monoidalCategory, matches the consumer LocalDerivedTensorNonvanishing. No duplicate in side Sheaf or Mathlib. Docstrings carry source, blueprint id and all 4 steps. lean.statement verbatim. nt_compile --json clean (1.4 s, exit 0); broken control copy fails. Advisory: Mathlib basics (ιMapBifunctor, homology API) not in stmt_dep records; second reading is the group's self-check. No fixes."
  }
 }

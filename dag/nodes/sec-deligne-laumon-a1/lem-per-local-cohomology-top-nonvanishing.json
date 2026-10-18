@@ -10,7 +10,8 @@
  "stmt_deps": [
   "def-weil-pbc-noetherian-ring",
   "def-weil-affine-spectrum",
-  "def-kun-topological-krull-dimension"
+  "def-kun-topological-krull-dimension",
+  "def-sbc-ideal-power-torsion-functor"
  ],
  "proof": [
   {
@@ -277,5 +278,24 @@
   "group": "Q57",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q57-02e747e37 (reviewer sub-agent of L); spot-checked: Read in full: the item and all 5 new nodes, every cited node's statement, and the Stacks sources (0DXE l.595; dualizing 0A7L, 0A7M, 0A7V, 0AAK, 0ALZ, 0955, 08Y3, 0A7B, 0BFR case (2)). No SGA. Item statement is unchanged and matches 0DXE's first assertion. Steps 1-3 (dualizing complex on R^): completion gives a complete Noetherian local ring of dimension d, with (nA)^k = n^kA written out; the Cohen node presents it as a quotient of a complete regular local ring S; the trf regular node gives a bounded injective S[0], the K-injective node and evaluation at 1 make the scalar map an isomorphism, the trf finite-transfer node gives conditions (i)-(iii) of the new definition, and the normalization node fixes the shift (sign checked). Step 4: the minimal prime of full dimension is genuinely elementary from the chain definition. Steps 5-6: 0A7V applied with e=d gives H^{-d}(omega) nonzero; local duality applied to M=A with Ext^{-d}(A,omega)=H^{-d}(omega), and since N^ = A ⊗ N = N, H^d_m(A) is nonzero. Step 7: flat base change gives H^d_n(R) ⊗ A = H^d_m(A), so H^d_n(R) is nonzero. This replaces the 0DXA inequality soundly; the existing lem-per-local-cohomology-change-rings is only the inequality and would also need 0DX9 right-exactness. New nodes are true and match their sources: the definition is 0A7B+0A7M; normalization is 0A7L plus a shift; generic degree is 0A7V; local duality is 0AAK with K=M[0] plus existence of E (08Y3); flat base change is 0ALZ+0955. None duplicates an existing node: trf/sp dualizing objects are étale; lem-sbc-local-cohomology-derived-torsion is the Ext-colimit comparison over one ring; the pbc Čech nodes are not R^qGamma; there is no blueprint statement. None restates the item. B1-B9 checked. Small cases: field, DVR (omega=A[1], H^1=K/A), Artinian ring, nilpotents, I=A or I=0. Batch 5: both lem-trf-regular-local-bounded-injective-resolution (0AWX) and lem-trf-finite-map-dualizing-transfer (0AX0) are pure commutative algebra that neither the trace-formula nor the Poincare-duality leaf gives. Both are unsplit with proof_deps [], and their closures (10 and 179 nodes) contain no trace-formula or Poincare node beyond themselves. Accepted as generic tools, consistent with earlier pure-algebra trf acceptances. The declared tool_uses (pbc completion, Cohen and K-injective nodes, plus the two trf nodes) are accepted as black-box algebra. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.TopLocalCohomologyNonvanishing",
+  "declaration": "ModuleCat.top_local_cohomology_nonzero",
+  "file": "lean/Sheaf/Algebra/Homology/TopLocalCohomologyNonvanishing.lean",
+  "statement": "theorem top_local_cohomology_nonzero (R : Type u) [CommRing R] [IsNoetherianRing R] [IsLocalRing R] (d : ℕ) (hd : topologicalKrullDim (AlgebraicGeometry.Spec (.of R)) = (d : WithBot ℕ∞)) : ¬ IsZero (((idealPowerTorsion (IsLocalRing.maximalIdeal R)).rightDerived d).obj (ModuleCat.of R R))",
+  "branch": "newtargets-dag",
+  "by": "Q46",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Uses the already landed idealPowerTorsion functor and its rightDerived directly, exactly the node definition of local cohomology; added its owning node to stmt_deps."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-907e7167d",
+  "group": "Q46",
+  "result": "pass",
+  "note": "Statement matches node and Stacks 0DXE (first assertion only): CommRing+IsNoetherianRing+IsLocalRing (nontrivial), d:ℕ with topologicalKrullDim (Spec R)=d, ¬IsZero of (idealPowerTorsion (maximalIdeal R)).rightDerived d on ModuleCat.of R R. idealPowerTorsion = primaryComponent (∃n, J^n kills x; n=0 harmless), same local-cohomology idiom as landed localCohomologicalDimension. Node delta only lean record + added stmt_dep def-sbc-ideal-power-torsion-functor (owner of the used decl, required). No extra hypotheses, universes bound, sorry only, docstrings with 0DXE/blueprint and 7 steps, statement verbatim. No existing decl (Mathlib/side). nt_compile --json clean 1.8 s; control with bad identifier errors."
  }
 }

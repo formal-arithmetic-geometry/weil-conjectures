@@ -226,5 +226,29 @@
   "group": "Q24",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q24-faf9476e4 (reviewer sub-agent of L); spot-checked: I read the delivery in full and wrote no fixes. It adds no new nodes, and the item statement is byte-identical to the one I repaired in Q70. Source: ILO VIII Thm 1.1 (printed p.85, pdf p.90), which asks for X noetherian, qe, separated and fs log regular, G tame and generically free, Z the non-triviality locus and T the non-free locus; it gives a projective modification with Z'=f^-1(Z∪T) and a very tame action. The split cites the existing unsplit lem-per-gabber-absolute-equivariant-modification (Q18), which is more general (fs log regular, quasi-excellent input, plus the four-stage tower). Step 1 checks every hypothesis of that node: the divisorial M is fs with triviality locus C∖B, excellent implies quasi-excellent, stabilizer orders divide |G| so the action is tame, preserving B means acting by log automorphisms, and its Z,F are this item's B,T. Step 2: the absolute node gives an integral, fs log regular, very tame source and an isomorphism over C∖(B∪T), meaning the full preimage. C^0 is dense because two nonempty opens of an irreducible scheme meet. lem-trf-log-regular-divisorial-structure says the source structure equals O∩j_*O_V^× with V dense, so (C1,B1) is a log regular pair, and the very-tame conditions match word for word. Step 3: 01WC properness gives quasi-compactness, and def-trf-fs-log-blowup works over locally Noetherian schemes, so C1 is Noetherian. Step 4 (elementary): the projective bundle restricts to an affine W through i_W and Sym clause (b). Step 5: O_W is ample with n=1, s=1, so 087S(1) makes f^-1(W)→W H-projective. Step 6: a nonempty preimage in an integral C1 is dense. Small and edge cases checked: ILO 1.2(a) (A², ±1, blowup of 0), trivial G, empty boundary, dimension 0, empty W. There is no cycle, and no SGA source is cited. I accept the five off-unit tool_uses. Batch-5 flags: I walked the closure of each flagged node (stmt_deps and proof_deps, stopping at nt-assume) and none contains thm-trf, sk-thm, a trace node or a sec-poincare-duality node. log-regular-divisorial-structure is general monoid and toric algebra (Nizioł, VI 1.4), projective-bundle-proper is 01WC, fs-log-blowup and projective-bundle-morphism are definitions, and projective-bundle-to-h-projective is 087S. All are general scheme theory or log geometry, outside both assumptions, so I accept them. Maintainer note: the item and the absolute node overlap (both state VIII 1.1, both created 2026-10-19 by different groups). That overlap is in the base, not this delivery, and reusing the general node is the correct response."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GabberEquivariantLogModification",
+  "declaration": "AlgebraicGeometry.exists_gabber_equivariant_log_modification",
+  "file": "lean/Sheaf/AlgebraicGeometry/GabberEquivariantLogModification.lean",
+  "statement": "theorem exists_gabber_equivariant_log_modification (C : Scheme.{u}) [IsIntegral C] [IsNoetherian C] [C.IsSeparated] (hExcellent : ∀ W : C.Opens, IsAffineOpen W → IsExcellent Γ(C, W)) (B : TopologicalSpace.Closeds C) (U : C.Opens) (hBU : (U : Set C) = (B : Set C)ᶜ) (hU : DenseRange U.ι) (hlog : IsDivisorialFineSaturatedLogRegularPair C U.toScheme U.ι hU) (G : Type v) [Group G] [Finite G] (a : G →* Aut C) (horder : ∀ x : C, IsUnit (Nat.card G : C.presheaf.stalk x)) (hboundary : ∀ (g : G) (x : C), (a g).hom x ∈ U ↔ x ∈ U) (V : C.Opens) (hV : IsLargestFreeInvariantOpen a V) (T : TopologicalSpace.Closeds C) (hT : (T : Set C) = (V : Set C)ᶜ) : ∃ C1 : Scheme.{u}, ∃ hC1int : IsIntegral C1, ∃ hC1noeth : IsNoetherian C1, ∃ a1 : G →* (Aut C1), ∃ f : C1 ⟶ C, ∃ C0 : C.Opens, Dense (C0 : Set C) ∧ IsIso (pullback.snd f C0.ι) ∧ (∀ g : G, (a1 g).hom ≫ f = f ≫ (a g).hom) ∧ IsAffineLocallyHProjective f ∧ (∀ W : C.Opens, Dense (W : Set C) → Dense ((f ⁻¹ᵁ W : C1.Opens) : Set C1)) ∧ ∃ (B1 : TopologicalSpace.Closeds C1) (U1 : C1.Opens) (hU1 : DenseRange U1.ι), (B1 : Set C1) = f ⁻¹' ((B : Set C) ∪ (T : Set C)) ∧ (U1 : Set C1) = (B1 : Set C1)ᶜ ∧ @IsDivisorialFineSaturatedLogRegularPair C1 U1.toScheme U1.ι inferInstance hC1noeth.toIsLocallyNoetherian hU1 ∧ (∀ (g : G) (x : C1), (a1 g).hom x ∈ U1 ↔ x ∈ U1) ∧ IsVeryTameDivisorialAction U1 a1",
+  "branch": "newtargets-dag",
+  "by": "Q126",
+  "date": "2026-10-19",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.IsFreeInvariantOpen",
+   "AlgebraicGeometry.IsLargestFreeInvariantOpen",
+   "AlgebraicGeometry.IsAffineLocallyHProjective",
+   "AlgebraicGeometry.exists_gabber_equivariant_log_modification"
+  ]
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cb348ad19",
+  "group": "Q126",
+  "result": "pass",
+  "note": "Matched every hypothesis and conclusion clause against ILO VIII 1.1 / VI 3.1. Generic freeness is rendered as density of the largest free invariant open, which is equivalent; geometric points in Type u suffice; the U1 density and invariance clauses follow from the node's density clause and equivariance; IsVeryTameDivisorialAction matches VI 3.1; IsAffineLocallyHProjective is IsHProjective of f restricted to each affine open, the def-kun-projective declaration. Edge cases checked: trivial G, B empty, dimension 0, characteristic 0. lean.statement verbatim. No duplicate in live lean or the side clone. nt_compile --json clean in 1.9 s. Advisories: IsVeryTameDivisorialAction belongs to def-per-very-tame-divisorial-action, which is not in stmt_deps (stage 2 could not add it; maintainer should); the ClosedImmersion import is redundant; the def-weil-closed-immersion stmt_dep is used only through IsHProjective."
  }
 }

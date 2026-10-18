@@ -185,5 +185,27 @@
   "group": "Q35",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q35-169e88a26 (reviewer sub-agent of L); spot-checked: I read the item, its 4 steps, all 6 cited nodes in full, the consumer lem-trf-etale-cotangent-vanishing, the target-side lemma lem-trf-derived-diagonal-cotangent-vanishing, unit sk-i-curve-zero and the chapter. Statement (surjective A->B with B flat => B (x)^L_A B -> B[0] is an isomorphism) is unchanged and true. Tests: A=B, A->0 and the projection k x k -> k all hold; Z->Z/2 (not flat) and a field extension (not surjective) show both hypotheses are needed. Source checks: Stacks cotangent.tex 08R2 (lemma-when-zero, l.1616-1646), whose proof of case (1) applies 08R0 (lemma-derived-diagonal) to the surjective flat ring map B (x)_A B -> B, which is exactly this item; the consumer applies it in the same way. Step 1: flat tensor exactness (00HD, algebra.tex l.8708) applied degree by degree gives K-flatness of B[0] (06XZ, more-algebra.tex l.14185); elementary, no boundedness needed. Step 2: clause (2) of lem-pc-derived-tensor-second-factor-functor with the identity K-flat resolution gives B (x)^L B = (B (x)_A B)[0] in D(B), with B acting on the second factor; matches 06Y6 and the construction before it (l.14636-14676). Step 3: explicit inverse c |-> 1 (x) c, using b (x) c = 1 (x) bc with b=f(a); checked line by line, and both maps are B-linear for the second-factor action. Step 4: the localization functor keeps the inverse equations, in D(B) and after restriction to D(A). proof_deps equals the union of the steps' uses. No new nodes; rg searches found no duplicate. Not a target node, so the base-change/coefficient-category check does not apply; no SGA source used. Accepted tool use: lem-pc-derived-tensor-second-factor-functor, a generic derived-tensor construction that the trace-formula route lacks. No fixes written."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.FlatSurjectionDerivedSelfTensor",
+  "declaration": "DerivedCategory.isIso_derivedSelfTensorMultiplication_of_flat_surjective",
+  "declarations": [
+   "DerivedCategory.derivedSelfTensorMultiplication",
+   "DerivedCategory.isIso_derivedSelfTensorMultiplication_of_flat_surjective"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/FlatSurjectionDerivedSelfTensor.lean",
+  "statement": "theorem isIso_derivedSelfTensorMultiplication_of_flat_surjective {A B : Type u} [CommRing A] [CommRing B] [HasDerivedCategory.{wA} (ModuleCat.{u} A)] [HasDerivedCategory.{wB} (ModuleCat.{u} B)] (f : A →+* B) (hf : Function.Surjective f) (hflat : f.Flat) : IsIso (derivedSelfTensorMultiplication f)",
+  "branch": "newtargets-dag",
+  "by": "Q147",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-efd0dda0e",
+  "group": "Q147",
+  "result": "pass",
+  "note": "Read node, 4 stmt_deps, module, record, report. Hyps exactly CommRing A B, f:A→+*B, Surjective f, f.Flat (=Module.Flat via toAlgebra; restrictScalars smul agrees); common universe u forced by recorded exists_derivedTensor_second_factor_functor. Source B⊗^L_A B = (choose T).obj B[0]_B applied to Q(restrict B)[0]; helper derivedSelfTensorMultiplication = (ε N).app E ≫ Q.map(mapBifunctorSingle₁Iso ≫ singleMapHomologicalComplex ≫ single.map(λ_ ≫ extendRestrictScalarsAdj counit)) = canonical μ, ε from the same choose_spec; no arbitrary map, no sorry in data. Conclusion IsIso of the named arrow in D(B); true (B[0] K-flat ⇒ ε iso; μ bijective by surjectivity). Edge cases A=B, B=0, k×k→k ok; ℤ→ℤ/2 and field ext show hyps needed. No duplicate (changeOfRingsFixedTensor is a theorem-node .choose abbrev). Record differs from live only in lean; statement verbatim; proof-dep imports per rule 7; lines ≤100; docstrings with source+blueprint+4 steps. nt_compile --json clean 4.7 s, control fails. Advisory: mixedTensor (def-pc-mixed-total-tensor) used in helper body via the dep's stmt_deps."
  }
 }

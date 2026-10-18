@@ -9,7 +9,8 @@
  },
  "stmt_deps": [
   "def-trf-fs-log-blowup",
-  "def-per-fs-log-smooth-etale"
+  "def-per-fs-log-smooth-etale",
+  "def-per-strict-log-morphism"
  ],
  "proof": [
   {
@@ -286,5 +287,26 @@
   "group": "Q144",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q144-aeebf2a54 (reviewer sub-agent of L); spot-checked: Read the item's 7 steps, the new node lem-per-fs-log-infinitesimal-criterion, every cited statement, and ILO X 1.2 with its proof (pp.136-139). That proof adapts Kato 1988 3.5 and refines it to fs charts, so the new node (Kato 3.5 chart criterion <=> strict square-zero lifting, log smooth and log etale versions) is true, not a duplicate, and not a restated item clause. No cycle. Small cases checked: trivial log structures reduce to Stacks 02H6; Spec k[N] is log smooth but not log etale. Steps 1, 2 and 4-7 are correct. Step 6 reads the saturated charts with (Q_e^sat)^gp = P^gp, so K = C = 0 and the comparison is the identity. Fix 1, E1 in Step 3: X' = X x_Y Y' was asserted locally Noetherian 'because the construction is used within the category'. A fibre product of locally Noetherian schemes need not be locally Noetherian, and def-trf-fs-log-blowup needs this for p^*M_X. I moved the lfp argument for q into Step 3 and concluded with the Mathlib leaf pqf-lem-locnoeth-lft (01T6). Step 4 now refers to Step 3. Fix 2, B3 in the new node: the sheaf inverse image i^{-1}L and the associated log structure of a sheaf were undefined. They are now defined inline, citing def-weil-pbc-inverse-image, def-weil-pbc-sheafification and def-weil-pbc-etale-site. Batch-5 flags: none of the closures of def-trf-fs-log-blowup, def-per-fs-log-smooth-etale, lem-trf-associated-log-universal-stalks and lem-trf-coherent-log-ideal-chart-construction contains a thm-trf node, trace-transport or a Poincare-duality node. They are generic log-geometry, descent and Proj material, so all are accepted. All 10 declared tool_uses are accepted as generic. No SGA source is used.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.LogSmoothCompositionStrictBaseChange",
+  "declaration": "AlgebraicGeometry.logSmooth_composition_strictBaseChange",
+  "declarations": [
+   "AlgebraicGeometry.logSmooth_composition_strictBaseChange"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/LogSmoothCompositionStrictBaseChange.lean",
+  "statement": "theorem logSmooth_composition_strictBaseChange : (∀ (X Y Z : FineSaturatedLogScheme.{u}) (f : EtaleLogHom X Y) (g : EtaleLogHom Y Z), f.IsLogSmooth → g.IsLogSmooth → ∃ c : EtaleLogHom X Z, f.CompEq g c ∧ c.IsLogSmooth) ∧ (∀ (X Y : FineSaturatedLogScheme.{u}) (f : EtaleLogHom X Y), f.IsLogEtale → f.IsLogSmooth) ∧ (∀ (X Y Z : FineSaturatedLogScheme.{u}) (f : EtaleLogHom X Y) (g : EtaleLogHom Y Z), f.IsLogEtale → g.IsLogSmooth → ∃ c : EtaleLogHom X Z, f.CompEq g c ∧ c.IsLogSmooth) ∧ (∀ (X Y Y' : FineSaturatedLogScheme.{u}) (f : EtaleLogHom X Y) (h : EtaleLogHom Y' Y), f.IsLogSmooth → h.IsStrict → ∃ (X' : FineSaturatedLogScheme.{u}) (p : EtaleLogHom X' X) (q : EtaleLogHom X' Y') (c : EtaleLogHom X' Y), p.IsStrict ∧ IsPullback p.base q.base f.base h.base ∧ p.CompEq f c ∧ q.CompEq h c ∧ q.IsLogSmooth) ∧ (∀ (X X' Y Y' : FineSaturatedLogScheme.{u}) (f : EtaleLogHom X Y) (h : EtaleLogHom Y' Y) (p : EtaleLogHom X' X) (q : EtaleLogHom X' Y') (c : EtaleLogHom X' Y), h.IsStrict → p.IsStrict → IsPullback p.base q.base f.base h.base → p.CompEq f c → q.CompEq h c → f.IsLogSmooth → q.IsLogSmooth) ∧ (∀ (X Y : FineSaturatedLogScheme.{u}) (f : EtaleLogHom X Y) (ι : Type v) (U V : ι → FineSaturatedLogScheme.{u}) (a : ∀ i : ι, EtaleLogHom (U i) X) (b : ∀ i : ι, EtaleLogHom (V i) Y) (r : ∀ i : ι, EtaleLogHom (U i) (V i)) (c : ∀ i : ι, EtaleLogHom (U i) Y), (∀ i : ι, (a i).IsStrict ∧ Etale (a i).base) → (∀ i : ι, (b i).IsStrict ∧ Etale (b i).base) → (∀ i : ι, (a i).CompEq f (c i) ∧ (r i).CompEq (b i) (c i)) → (∀ x : X.scheme, ∃ (i : ι) (z : (U i).scheme), (a i).base z = x) → (f.IsLogSmooth ↔ ∀ i : ι, (r i).IsLogSmooth) ∧ (f.IsLogEtale ↔ ∀ i : ι, (r i).IsLogEtale)) ∧ (∀ (X X' : FineSaturatedLogScheme.{u}) (b : EtaleLogHom X' X) (I : X.logStructure.IdealFamily), IsSaturatedLogBlowup b I → b.IsLogEtale) ∧ (∀ T : SaturatedLogBlowupTower.{u}, ∃ p : ∀ i : Fin (T.length + 1), EtaleLogHom (T.level i) (T.level 0), (p 0).IsIdentity ∧ (∀ i : Fin T.length, (T.arrow i).CompEq (p i.castSucc) (p i.succ)) ∧ (p ⟨T.length, Nat.lt_succ_self T.length⟩).IsLogEtale)",
+  "branch": "newtargets-dag",
+  "by": "NG",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7b1ee432e",
+  "group": "NG",
+  "result": "pass",
+  "note": "Re-delivery after H4 RETURN of 836bdd61fb18. StrictLogMorphism.lean and the item-local IsIdentity are removed; def-per-strict-log-morphism is now an existing:true ownership record on landed LogFanChartBlowup (declarations CharacteristicRelation, IsStrict, IsIdentity; statement verbatim with line 100; the node defines strictness by the graph-normalized characteristic-stalk iso and includes the identity sentence; no other owner; no cycle). Item node differs from live only by the lean record and the new stmt_dep. All 8 conjuncts re-checked: composition, etale implies smooth, mixed composite, strict base change (existence and every representative), strict-etale locality both ways in universe v, saturated blowup log etale, towers (arrow direction and length 0). No extra hypotheses; sorry only; docstrings OK; statement field verbatim. nt_compile --json: item clean 2.3 s; import-together probe with LogFanChartBlowup and KummerLogMorphism clean, so the name clash is resolved."
  }
 }
