@@ -13,7 +13,9 @@
   "def-exc-excellent-ring",
   "def-weil-pbc-krull-dimension-ring",
   "def-weil-geometric-point",
-  "def-weil-pbc-strict-henselization-limit"
+  "def-weil-pbc-strict-henselization-limit",
+  "def-weil-pbc-strict-henselization-structural-map",
+  "def-kun-topological-krull-dimension"
  ],
  "proof": [
   {
@@ -169,5 +171,23 @@
   "group": "NJ",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NJ-a1b2310a8 (reviewer sub-agent of L); spot-checked: I read the item, the report, the existing node it cites (lem-per-immediate-specialization-criterion), def-per-potential-dualizing, def-exc-excellent-ring, def-weil-pbc-krull-dimension-ring, the strict-henselization and geometric-point definitions, and ILO XIV §2.1 (Def. 2.1.1–2.1.2, Prop. 2.1.3–2.1.4 and Lemmas 2.1.5–2.1.6 with proofs, printed pp. 209–211). Shape: one commit, the item plus the report, no new nodes. The statement, stmt_deps and blueprint are unchanged; proof_deps equals the union of the step uses; there is no SGA citation. Both this item and the criterion are still unsplit live, so the delivery is not superseded. The item's (1)⇔(2) is ILO 2.1.4 with the x/y convention swapped, and the item's universal catenarity (on every affine open) implies the criterion's affine-cover hypothesis. Step 1 is elementary and correct: O_{Z,x}=(A/p)_{q/p}, its primes are those between p and q, and every intermediate point lies in the affine chart. Step 2 cites the criterion's final clause, which defines immediate through def-per-potential-dualizing, so it includes existence. I checked (a) myself: points over y are minimal primes of the flat strict henselization O^sh_{Z,x}, so their closures have dimension exactly 1, and the fibre over y is nonempty by faithful flatness. Step 3 applies (b) and then Step 1, which gives saturation. Edge cases: a field; a DVR; A² localized at the origin with y the generic point (both sides false); A² with y the generic point of the line {t=0} and x the origin (both sides true; this is the case that broke the X_(x̄)-component node returned in Q05). The criterion is in the same unit, has no proof, and Q05's split of it never cited this item, so there is no cycle and no tool_uses are needed. Citing an existing restatement is allowed by brief §2. Maintainer note: two nodes created on 2026-10-18 (by Q07 and N6) overlap. Consider merging them per stages/1-dag.md §2. Until then the criterion's split must not cite this item, which would create a cycle. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GeometricImmediateCatenary",
+  "declaration": "AlgebraicGeometry.Scheme.geometricImmediate_iff_zariskiImmediate_of_universallyCatenary",
+  "file": "lean/Sheaf/AlgebraicGeometry/GeometricImmediateCatenary.lean",
+  "statement": "theorem geometricImmediate_iff_zariskiImmediate_of_universallyCatenary (X : Scheme.{u}) [IsNoetherian X] (hcat : ∀ U : X.affineOpens, IsUniversallyCatenary Γ(X, U)) (y x : X) (hne : y ≠ x) (hyx : y ⤳ x) : ((∀ z : X, y ⤳ z → z ⤳ x → z = y ∨ z = x) ↔ ∃ zx : (IdealSheafData.vanishingIdeal (Closeds.closure ({y} : Set X))).subscheme, (IdealSheafData.vanishingIdeal (Closeds.closure ({y} : Set X))).subschemeι zx = x ∧ ringKrullDim ((IdealSheafData.vanishingIdeal (Closeds.closure ({y} : Set X))).subscheme.presheaf.stalk zx) = 1) ∧ ((∀ z : X, y ⤳ z → z ⤳ x → z = y ∨ z = x) ↔ ∃ (Ωx : Type u) (_ : Field Ωx) (_ : IsAlgClosed Ωx) (barX : Spec (.of Ωx) ⟶ X), barX (IsLocalRing.closedPoint Ωx) = x ∧ ∃ (Ωy : Type u) (_ : Field Ωy) (_ : IsAlgClosed Ωy) (a : Spec (.of Ωy) ⟶ strictHenselizationScheme barX), strictHenselizationStructuralMap barX (a (IsLocalRing.closedPoint Ωy)) = y ∧ topologicalKrullDim (closure ({a (IsLocalRing.closedPoint Ωy)} : Set (strictHenselizationScheme barX))) = 1) ∧ (∀ (Ωx : Type u) [Field Ωx] [IsAlgClosed Ωx] (barX : Spec (.of Ωx) ⟶ X), barX (IsLocalRing.closedPoint Ωx) = x → ∀ (Ωy : Type u) [Field Ωy] [IsAlgClosed Ωy] (a : Spec (.of Ωy) ⟶ strictHenselizationScheme barX), strictHenselizationStructuralMap barX (a (IsLocalRing.closedPoint Ωy)) = y → topologicalKrullDim (closure ({a (IsLocalRing.closedPoint Ωy)} : Set (strictHenselizationScheme barX))) = 1 → ∀ (U : X.affineOpens) (p q : PrimeSpectrum Γ(X, U)), U.2.fromSpec p = y → U.2.fromSpec q = x → p.asIdeal < q.asIdeal ∧ ¬ ∃ r : PrimeSpectrum Γ(X, U), p.asIdeal < r.asIdeal ∧ r.asIdeal < q.asIdeal)",
+  "branch": "newtargets-dag",
+  "by": "Q07",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-56a2f23d4",
+  "group": "Q07",
+  "result": "pass",
+  "note": "Only the item node changed vs live: lean record added plus two landed stmt_deps (strict-henselization structural map, topological Krull dim), both used. Every hypothesis matches the node (IsNoetherian X; IsUniversallyCatenary on every affine open; y≠x; y⤳x). Three conjuncts: (1)⇔ dim O_{Z,x}=1 on the reduced vanishing-ideal subscheme; (1)⇔ existence of a geometric point over x and a lift in strictHenselizationScheme over y whose point closure has topological dim 1; every such lift gives a saturated p<q on every affine chart. Math checked against ILO XIV 2.1.1–2.1.4 (flatness/minimal primes, criterion (a)/(b) with catenarity for the converse); closure of the lifted point, not a component of X_(x̄). Edge cases OK (empty, field, DVR, A² generic/line). Proof is sorry only; docstrings carry source and blueprint; proof steps in docstring; lean.statement verbatim. nt_compile --json clean 1.8 s. Advisory: ResidueField import unused. Maintainer note: overlaps lem-per-immediate-specialization-criterion; criterion must not cite this item."
  }
 }
