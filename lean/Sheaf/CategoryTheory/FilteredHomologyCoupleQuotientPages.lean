@@ -11,8 +11,6 @@ public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
 import Sheaf.CategoryTheory.FilteredHomologyTowerQuotients
 import Sheaf.CategoryTheory.FilteredHomologyTowerDifferential
 import Sheaf.CategoryTheory.FilteredComplexDifferentialRepresentativesCover
-import Sheaf.Algebra.Homology.FilteredComplexSubquotients
-import Sheaf.CategoryTheory.ExactCouple
 import WeilConjectures.CategoryTheory.ExactCoupleConvergence
 /-!
 # Derived homology-couple pages as representative quotients
@@ -101,6 +99,78 @@ theorem filteredHomologyCouple_quotient_pages
                 2 * (p + (s + 1)) + (q - (s + 1) + 1) by omega)
               (show -p - 1 - s = -(p + (s + 1)) by omega)) ≫
               (eQ s (p + (s + 1)) (q - (s + 1) + 1)).hom) := by
-  sorry
+  classical
+  obtain ⟨j, t, hj, ht, hepi, hker⟩ :=
+    filteredHomology_tower_quotients C hBZ eH hH U
+  let X := filteredHomologyExactCouple U.obj.obj U.obj.filtration
+  let T := X.cycleBoundaryTower
+  let Q := fun (s : ℕ) (p q : ℤ) ↦ t s p q ≫ T.projection s (2 * p + q) (-p)
+  have hQepi (s : ℕ) (p q : ℤ) : Epi (Q s p q) := hepi s p q
+  have hQzero (s : ℕ) (p q : ℤ) :
+      Subobject.ofLE _ _ (hBZ U p q (s + 1) (by omega)) ≫ Q s p q = 0 := by
+    apply (kernelSubobject_factors_iff _ _).mp
+    rw [hker s p q]
+    simpa only [Category.id_comp] using
+      imageSubobject_factors_comp_self
+        (Subobject.ofLE _ _ (hBZ U p q (s + 1) (by omega))) (𝟙 _)
+  have hQcoker (s : ℕ) (p q : ℤ) :=
+    ((ShortComplex.exact_iff_image_eq_kernel
+      (ShortComplex.mk _ _ (hQzero s p q))).mpr (hker s p q).symm).gIsCokernel
+  let eQ := fun (s : ℕ) (p q : ℤ) ↦
+    (hQcoker s p q).coconePointUniqueUpToIso
+      (cokernelIsCokernel (Subobject.ofLE _ _ (hBZ U p q (s + 1) (by omega))))
+  have hQ (s : ℕ) (p q : ℤ) :
+      Q s p q ≫ (eQ s p q).hom =
+        cokernel.π (Subobject.ofLE _ _ (hBZ U p q (s + 1) (by omega))) :=
+    (hQcoker s p q).comp_coconePointUniqueUpToIso_hom
+      (cokernelIsCokernel _) WalkingParallelPair.one
+  refine ⟨eQ, ?_, ?_⟩
+  · intro p q
+    apply heq_of_eq
+    apply (cancel_epi (Q 0 p q)).mp
+    rw [hQ]
+    have hbase : Q 0 p q ≫ (filteredHomologyEIso U.obj.obj U.obj.filtration p q).hom =
+        j 0 p q ≫ (U.obj.filtration.gradedPiece p).homologyπ (p + q) := by
+      simpa only [Q, T.projection_zero, Category.assoc] using ht 0 p q
+    obtain ⟨z, g, hz, hg, hzEpi, hzg⟩ := hH U p q
+    have hzj : z ≫ j 0 p q = g := by
+      apply (cancel_mono ((U.obj.filtration.gradedPiece p).iCycles (p + q))).mp
+      rw [Category.assoc, hj]
+      exact hz.trans hg.symm
+    have hnorm : j 0 p q ≫ (U.obj.filtration.gradedPiece p).homologyπ (p + q) =
+        cokernel.π (Subobject.ofLE _ _ (hBZ U p q 1 (by omega))) ≫ (eH U p q).hom := by
+      apply (cancel_epi z).mp
+      rw [← Category.assoc z, hzj]
+      exact hzg.symm
+    simp only [Iso.trans_hom, Iso.symm_hom, ← Category.assoc]
+    rw [hbase, hnorm]
+    simp only [Category.assoc, Iso.hom_inv_id, Category.comp_id]
+    rfl
+  · intro s p q
+    have hij : (ComplexShape.up' ((s : ℤ) + 1, 1 - ((s : ℤ) + 1))).Rel
+        (p, q) (p + (s + 1), q - (s + 1) + 1) := by
+      change (p, q) + ((s : ℤ) + 1, 1 - ((s : ℤ) + 1)) = _
+      have hq : q + (1 - ((s : ℤ) + 1)) = q - ((s : ℤ) + 1) + 1 := by omega
+      exact congrArg (fun k : ℤ ↦ (p + ((s : ℤ) + 1), k)) hq
+    obtain ⟨A, a, a', x, y, hxEpi, ha, hx, hy⟩ :=
+      filteredComplex_differential_representatives_cover U.obj.obj U.obj.filtration
+        (s + 1) (p, q) (p + (s + 1), q - (s + 1) + 1) hij
+    have hD := (D (s + 1) (by omega)).on_representatives A
+      (p, q) (p + (s + 1), q - (s + 1) + 1) hij a a' x y ha hx hy
+    have hT := filteredHomology_tower_differential C hBZ eH hH U j t hj ht
+      s p q A a a' x y ha hx hy
+    apply (cancel_epi (x ≫ Q s p q)).mp
+    simp only [Category.assoc]
+    rw [reassoc_of% (hQ s p q)]
+    calc
+      _ = y ≫ cokernel.π (Subobject.ofLE _ _
+          (hBZ U (p + (s + 1)) (q - (s + 1) + 1) (s + 1) (by omega))) := by
+        simpa only [filteredComplexPageπ, filteredComplexPageObject] using hD
+      _ = y ≫ Q s (p + (s + 1)) (q - (s + 1) + 1) ≫
+          (eQ s (p + (s + 1)) (q - (s + 1) + 1)).hom := by
+        rw [hQ]
+      _ = _ := by
+        simpa only [Q, Category.assoc] using
+          congrArg (fun f ↦ f ≫ (eQ s (p + (s + 1)) (q - (s + 1) + 1)).hom) hT.symm
 
 end CategoryTheory
