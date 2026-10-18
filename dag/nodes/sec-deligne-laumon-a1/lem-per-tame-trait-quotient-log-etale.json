@@ -13,9 +13,171 @@
   "def-weil-finite-integral-morphism",
   "def-weil-affine-spectrum"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $B=R^{\\prime}$, $L=\\operatorname{Frac}B$ and $A=B^H$. By [def-sc-discrete-valuation-ring], the rings of both given traits are DVRs; use the normalized additive valuation $v:L^\\times\\to\\mathbf Z$ of $B$, so $B=\\{0\\}\\cup\\{x:v(x)\\geq0\\}$. By [lem-weil-pbc-finite-algebra-is-integral], $B$ is integral over $R$; the maximal-preimage clause of [lem-weil-pbc-integral-algebra-ideal-in-radical] (with $I=0$) shows that its maximal ideal contracts to the unique maximal ideal of $R$. Thus a uniformizer of $R$ has positive value in $B$. Each $h$ extends to $L$ by $h(a/b)=h(a)/h(b)$. Let $G$ be the image of $H$ in $\\operatorname{Aut}(L)$ and put $F=L^G$. The action of $G$ is faithful. Apply [lem-wf-finite-field-action-fixed-degree]: $L/F$ is finite Galois of degree $d=|G|$. The fibres of $H\\twoheadrightarrow G$ are cosets of its kernel, all of the same size, so $d\\mid\\#H$. If $p>0$ is the residue characteristic of $R$, the unit hypothesis on $\\#H$ implies $p\\nmid d$.",
+   "uses": [
+    "def-sc-discrete-valuation-ring",
+    "lem-wf-finite-field-action-fixed-degree",
+    "lem-weil-pbc-finite-algebra-is-integral",
+    "lem-weil-pbc-integral-algebra-ideal-in-radical"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 09I3, lemma-galois-over-fixed-field; ILO XVI 3.7, p.254, quotient trait and prime-to-residue-characteristic degree"
+   }
+  },
+  {
+   "text": "The equality $A=B\\cap F$ follows directly from being fixed by $H$. Also $\\operatorname{Frac}A=F$: for $x=a/b\\in F$, $a,b\\in B$, $b\\neq0$, put $c=\\prod_{h\\in H}h(b)$. Then $0\\neq c\\in A$ and $xc=a\\prod_{h\\neq1}h(b)\\in B\\cap F=A$. Restrict $v$ to $F^\\times$. Its image is a nonzero subgroup of $\\mathbf Z$, since a uniformizer of $R$ has positive value in $B$ (as checked in Step 1). Write this subgroup as $r\\mathbf Z$, $r>0$, and choose $\\pi\\in F$ with $v(\\pi)=r$. Then $\\pi\\in A$. Elements of value zero are precisely the units of $A$; for every nonzero ideal $J$ of $A$, choose an element $a\\in J$ of least value. Every $b\\in J$ has $v(b/a)\\geq0$, so $b/a\\in A$ and $J=aA$. Thus $A$ is local, every ideal is principal, and $\\pi$ generates its nonzero maximal ideal. It is a DVR, hence a trait, by [def-sc-discrete-valuation-ring]. This is a direct valuation argument, not a new invariant-ring lemma.",
+   "uses": [
+    "def-sc-discrete-valuation-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00PD, lemma-characterize-dvr, and its valuation/unit-times-uniformizer proof"
+   }
+  },
+  {
+   "text": "Since $R$ is Noetherian and $B$ is finite over $R$, the $R$-submodule $A\\subset B$ is finite by [lem-weil-pbc-noetherian-submodule-finite]. The same finite list of $R$-module generators of $B$ generates it over $A$, since $R\\subset A$. Apply [lem-weil-pbc-finite-over-complete-local-product] to $R\\to A$: as $A$ is a domain it is complete for its maximal ideal. By [lem-weil-pbc-henselian-local-root-lifting] ((ii)$\\Rightarrow$(i)), the root-lifting henselianity of $R$ in the statement is henselianity in the idempotent sense of [lem-weil-pbc-finite-over-henselian-local-product]; apply that node to the same map. A nonzero domain has no nontrivial idempotent, so only one factor occurs; $A$ is henselian and its residue field $k_A$ is finite over $k_R$; by (i)$\\Rightarrow$(ii) of [lem-weil-pbc-henselian-local-root-lifting], simple roots of monic polynomials over $k_A$ lift to $A$, as the statement's definition requires. By [lem-kun-sep-closed-finite-extension-sep-closed], $k_A$ is separably closed. Thus $T=\\operatorname{Spec}A$ is complete strictly henselian. Both $R\\hookrightarrow A$ and $A\\hookrightarrow B$ are module-finite and injective, so the two scheme maps are finite by [def-weil-finite-integral-morphism] and dominant: the zero prime maps to the zero prime, whose closure in either domain spectrum is the whole spectrum. The embeddings also preserve characteristic zero and the positive residue characteristic.",
+   "uses": [
+    "lem-weil-pbc-noetherian-submodule-finite",
+    "lem-weil-pbc-finite-over-complete-local-product",
+    "lem-weil-pbc-finite-over-henselian-local-product",
+    "lem-weil-pbc-henselian-local-root-lifting",
+    "lem-kun-sep-closed-finite-extension-sep-closed",
+    "def-weil-finite-integral-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00IK, lemma-Noetherian-basic; 0325, lemma-quotient-complete-local; 04GH, lemma-finite-over-henselian; fields.tex Tag 030K, lemma-separable-first"
+   }
+  },
+  {
+   "text": "The DVRs $A$ and $B$ are normal by [lem-weil-pbc-pid-noetherian-normal]. Since $B$ is finite over $A$, [lem-weil-pbc-finite-algebra-is-integral] says its elements are integral over $A$. Conversely, an element of $L$ integral over $A$ is integral over $B$ by the same monic equation, and belongs to $B$ by its normality. Thus $B$ is exactly the integral closure of $A$ in $L$. By [lem-weil-pbc-finite-galois-fixed-field], $\\operatorname{Gal}(L/F)$ has order $[L:F]=d$. The image $G$ is a subgroup of this automorphism group of the same order, so it is the whole group. Every such automorphism preserves $B$ (apply it to monic equations over $A$), hence its unique maximal ideal. By [lem-weil-pbc-finite-over-henselian-local-product], $k_B/k_A$ is finite; by [lem-kun-sep-closed-finite-extension-purely-inseparable] it is purely inseparable. Every $k_A$-automorphism of $k_B$ is therefore the identity: if $x^{p^m}\\in k_A$, the equation $X^{p^m}=x^{p^m}$ has at most one root. Consequently both decomposition and inertia groups are the whole $G$.",
+   "uses": [
+    "lem-weil-pbc-pid-noetherian-normal",
+    "lem-weil-pbc-finite-algebra-is-integral",
+    "lem-weil-pbc-finite-galois-fixed-field",
+    "lem-weil-pbc-finite-over-henselian-local-product",
+    "lem-kun-sep-closed-finite-extension-purely-inseparable"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 09E8, remark-finite-separable-extension; 09EE, lemma-galois-inertia; algebra.tex Tag 00GK, lemma-finite-is-integral; fields.tex Tag 09I1, lemma-finite-Galois"
+   }
+  },
+  {
+   "text": "Choose uniformizers $\\pi\\in A$ and $w\\in B$, and write $\\pi=uw^e$ with $u\\in B^\\times$. By [lem-exc-dvr-galois-degree-data], $d=e f$, where $f=[k_B:k_A]$; the number of maximal ideals is one since $B$ is local. Thus $e$ is prime to $p$. Apply [lem-exc-finite-dvr-tame-inertia] to the now verified integral closure $B/A$ and finite Galois extension $L/F$. Its wild kernel $P\\subset I=G$ is a finite $p$-group, while $|G|=d$ is prime to $p$, so $P=1$ (coset counting makes $|P|$ divide $d$). Its tame quotient has order the prime-to-$p$ part of $e$, which here is $e$ itself. Hence $d=|G|=|I/P|=e$ and $f=1$. In particular the residue map $k_A\\to k_B$ is an isomorphism and $e$ is invertible in both local rings. This establishes total tame ramification without assuming the separably closed residue fields perfect.",
+   "uses": [
+    "lem-exc-dvr-galois-degree-data",
+    "lem-exc-finite-dvr-tame-inertia"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 09EB, lemma-galois-conclusion; 09EE, lemma-galois-inertia (3)-(5)"
+   }
+  },
+  {
+   "text": "The polynomial $X^e-\\bar u$ over the separably closed residue field $k_B$ has a root $\\bar b$, since $e$ is prime to $p$ and $\\bar u\\neq0$, so it is separable. Its derivative at that root is $e\\bar b^{e-1}\\neq0$. By [lem-weil-pbc-henselian-local-root-lifting], applied in the henselian ring $B$, this root lifts to $b\\in B$ with $b^e=u$. Its residue is nonzero, hence $b$ is a unit. Set $t=bw$. It is a uniformizer of $B$ and $t^e=\\pi$. The argument includes $e=1$.",
+   "uses": [
+    "lem-weil-pbc-henselian-local-root-lifting",
+    "def-kun-separably-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 04GG, lemma-characterize-henselian, simple-root lifting; more-algebra.tex Tag 09EV, tame root-of-uniformizer construction"
+   }
+  },
+  {
+   "text": "Let $D=A[Z]/(Z^e-\\pi)$ and map $Z$ to $t$. By [lem-sbc-dvr-uniformizer-root-algebra], $D$ is a DVR. To check this map injective, reduce a polynomial modulo the monic equation to $\\sum_{0\\leq i<e}a_iZ^i$. If its image is nonzero termwise, the term values $v(a_it^i)=e v_A(a_i)+i$ are distinct modulo $e$. A term of strictly least value cannot cancel: divide by it; its residue is nonzero and every other summand has residue zero. Thus the kernel is zero. The same calculation with $a_i\\in F$ proves the $e$ elements $1,t,\\ldots,t^{e-1}$ linearly independent over $F$. Since $[L:F]=e$, they form a basis, so the fraction field of the embedded $D$ is $L$. The DVR $D$ is integrally closed by [lem-weil-pbc-pid-noetherian-normal]. Every element of $B$ satisfies a monic equation over $A\\subset D$ from Step 4, so lies in $D$. The reverse inclusion holds by construction. We have proved the actual $A$-algebra identification $B=A[t]=A[Z]/(Z^e-\\pi)$.",
+   "uses": [
+    "lem-sbc-dvr-uniformizer-root-algebra",
+    "lem-weil-pbc-pid-noetherian-normal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09EV, lemma-extend-tame; algebra.tex Tag 00PD, lemma-characterize-dvr; explicit valuation comparison for the Kummer presentation"
+   }
+  },
+  {
+   "text": "The canonical log structures have the uniformizer charts $\\mathbf N\\to A$, $1\\mapsto\\pi$, and $\\mathbf N\\to B$, $1\\mapsto t$, as stated in [lem-per-trait-log-smooth-uniformizer-chart]. The map of charts is $1\\mapsto e$. Its group map $\\mathbf Z\\to\\mathbf Z$ has zero kernel and cokernel $\\mathbf Z/e\\mathbf Z$, of unit order. The underlying comparison $\\operatorname{Spec}B\\to T\\times_{\\operatorname{Spec}\\mathbf Z[\\mathbf N]}\\operatorname{Spec}\\mathbf Z[\\mathbf N]$ is the identity under the presentation of Step 7. It is etale (an identity is flat, finitely presented and unramified). Therefore [def-per-fs-log-smooth-etale] gives log etaleness of $S^{\\prime}\\to T$. These are fs charts since $\\mathbf N$ is finitely generated, integral and saturated. Step 1 gives its generic-field degree $e=d\\mid\\#H$.",
+   "uses": [
+    "lem-per-trait-log-smooth-uniformizer-chart",
+    "def-per-fs-log-smooth-etale"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose VI 2.1--2.2, pp.71--72, standard Kummer etale covers; XVI Definition 3.6.1, p.252, canonical uniformizer chart; XVI 3.7, p.254"
+   }
+  },
+  {
+   "text": "Now let $(V,M_V)\\to S^{\\prime}$ be the stated log-smooth morphism. At each geometric point apply [lem-per-trait-log-smooth-uniformizer-chart], with the specific uniformizer $t$ constructed above. It supplies an etale neighborhood $U\\to V$, an fs monoid $Q$ with torsion-free group completion $Q^{\\rm gp}$, an injective $u:\\mathbf N\\to Q$, and a chart compatible with $1\\mapsto t$, for which $C=Q^{\\rm gp}/\\mathbf Z u(1)$ has finite torsion subgroup of order $n$ invertible on $U$. The comparison $U\\to S^{\\prime}\\times_{\\operatorname{Spec}\\mathbf Z[\\mathbf N]}\\operatorname{Spec}\\mathbf Z[Q]$ is etale. The hypotheses of that node are exactly the given locally Noetherian fs condition and log smoothness over a trait; it imposes no regularity or finite-type assumption on $V$. Use for $V\\to T$ the same chart on $U$ and the map $\\mathbf N\\to Q$, $1\\mapsto e u(1)$.",
+   "uses": [
+    "lem-per-trait-log-smooth-uniformizer-chart"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVI Proposition 3.6.3 with the fixed chart Q=N on the base trait, printed p.252"
+   }
+  },
+  {
+   "text": "Put $q=u(1)$. The group map for the composite chart is injective because $u^{\\rm gp}$ is injective and $e>0$. Write $C'=Q^{\\rm gp}/\\mathbf Z(e q)$. The natural surjection $C'\\to C$ has kernel $\\mathbf Zq/\\mathbf Z(e q)\\cong\\mathbf Z/e\\mathbf Z$. Its inverse image of $C_{\\rm tors}$ is exactly $C'_{\\rm tors}$: if $m x=a q$ modulo the representatives in $Q^{\\rm gp}$, then $emx=0$ in $C'$, and the converse follows by projection. Thus $0\\to\\mathbf Z/e\\mathbf Z\\to C'_{\\rm tors}\\to C_{\\rm tors}\\to0$ is exact. Each fibre has $e$ elements, so $C'_{\\rm tors}$ is finite of order $en$, which is invertible on $U$ since both $e$ and $n$ are. This is an explicit computation of the chart cokernel, not an appeal to logarithmic composition.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVI 3.7, p.254, log smoothness over T; chart group calculation using Proposition 3.6.3"
+   }
+  },
+  {
+   "text": "The two comparison targets are the same scheme with the same induced map from $U$. Indeed their coordinate algebras are respectively\n$$B\\otimes_{\\mathbf Z[\\mathbf N]}\\mathbf Z[Q]\n\\cong A[Z]\\otimes_{\\mathbf Z[\\mathbf N]}\\mathbf Z[Q]/(Z^e-\\pi)\n\\cong A[Q]/(z^{e q}-\\pi)\n\\cong A\\otimes_{\\mathbf Z[\\mathbf N]}\\mathbf Z[Q],$$\nwhere the first tensor uses $1\\mapsto t$ and $1\\mapsto q$, and the last uses $1\\mapsto\\pi$ and $1\\mapsto e q$. In the middle, $Z$ is identified with $z^q$. The comparison maps agree since they have the same $Q$-chart and $A$-structure map; this calculation takes place on affine opens of the targets and does not require $U$ affine. The comparison for $V\\to T$ is therefore the etale comparison of Step 9, hence smooth by [lem-weil-pbc-etale-smooth-zero-dimensional-fibres]. The charts cover every geometric point of $V$; with the group conditions of Step 10, [def-per-fs-log-smooth-etale] gives log smoothness of the composite. This proves the last clause and completes the item.",
+   "uses": [
+    "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+    "def-per-fs-log-smooth-etale"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVI 3.7, p.254: log smoothness over S prime implies log smoothness over T; expanded via XVI Proposition 3.6.3 and the standard Kummer chart of VI 2.2"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-discrete-valuation-ring",
+  "lem-wf-finite-field-action-fixed-degree",
+  "lem-weil-pbc-finite-algebra-is-integral",
+  "lem-weil-pbc-integral-algebra-ideal-in-radical",
+  "lem-weil-pbc-noetherian-submodule-finite",
+  "lem-weil-pbc-finite-over-complete-local-product",
+  "lem-weil-pbc-finite-over-henselian-local-product",
+  "lem-kun-sep-closed-finite-extension-sep-closed",
+  "def-weil-finite-integral-morphism",
+  "lem-weil-pbc-pid-noetherian-normal",
+  "lem-weil-pbc-finite-galois-fixed-field",
+  "lem-kun-sep-closed-finite-extension-purely-inseparable",
+  "lem-exc-dvr-galois-degree-data",
+  "lem-exc-finite-dvr-tame-inertia",
+  "lem-weil-pbc-henselian-local-root-lifting",
+  "def-kun-separably-closed",
+  "lem-sbc-dvr-uniformizer-root-algebra",
+  "lem-per-trait-log-smooth-uniformizer-chart",
+  "def-per-fs-log-smooth-etale",
+  "lem-weil-pbc-etale-smooth-zero-dimensional-fibres"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose XVI 3.7 p.254 and VI 2.1--2.2 pp.71--72; expanded invariant-ring, valuation and composition calculations with the cited Stacks lemmas and XVI Proposition 3.6.3"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -44,10 +206,83 @@
    "results": "[grep] OK 0 hit(s)\n",
    "date": "2026-10-19",
    "verdict": "no match: ordinary smooth or etale morphisms, invariant-field algebra, module quotients and projectivizations do not state the logarithmic or scheme-quotient assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite group invariant ring quotient of a complete strictly henselian mixed characteristic trait",
+   "results": "{\"t\": \"2026-10-18T20:42:25Z\", \"tool\": \"leanfinder\", \"query\": \"A finite group invariant ring quotient of a complete strictly henselian mixed characteristic trait\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsArithFrobAt.arithFrobAt\", \"IsArithFrobAt.exists_of_isInvariant\", \"PreTilt.instCommRing\", \"arithFrobAt\", \"PreTilt\", \"MixedCharZero.charP_quotient\", \"PreTilt.instCharP\", \"PreTilt.instPerfectRing\"], \"digest\": \"5b7ecfc0e54eba63\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: hits give ordinary etale, invariant-ring or valuation components, not the full logarithmic quotient statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.IsGalois, IsDiscreteValuationRing, FixedPoints",
+   "results": "{\"t\": \"2026-10-18T20:42:26Z\", \"tool\": \"loogle\", \"query\": \"Algebra.IsGalois, IsDiscreteValuationRing, FixedPoints\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'Algebra.IsGalois'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-19",
+   "verdict": "not absence evidence: initial identifier/path query was malformed; corrected searches below used the actual Mathlib subdirectory and valid names"
+  },
+  {
+   "tool": "grep",
+   "query": "LogEtale|tame|invariant.*ring",
+   "results": "{\"t\": \"2026-10-18T20:42:26Z\", \"tool\": \"grep\", \"query\": \"LogEtale|tame|invariant.*ring\", \"sub\": \"Mathlib/RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-19",
+   "verdict": "not absence evidence: initial identifier/path query was malformed; corrected searches below used the actual Mathlib subdirectory and valid names",
+   "subdirectory": "Mathlib/RingTheory"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tame ramified extension of complete strictly henselian discrete valuation rings gives a Kummer logarithmically etale map",
+   "results": "{\"t\": \"2026-10-18T20:42:27Z\", \"tool\": \"leansearch\", \"query\": \"Tame ramified extension of complete strictly henselian discrete valuation rings gives a Kummer logarithmically etale map\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.Etale\", \"Ideal.ramificationIdx_mul_inertiaDeg_of_isLocalRing\", \"Algebra.FormallyEtale.of_formallyUnramified_and_formallySmooth\", \"Algebra.FormallyEtale.of_unramified_and_smooth\", \"StandardEtalePair.instFormallyEtaleRing\", \"Algebra.FormallyEtale.instFormallyUnramified\", \"Algebra.FormallyUnramified.iff_isSeparable\", \"Algebra.FormallyUnramified.iff_map_maximalIdeal_eq\"], \"digest\": \"8d6e668ad35d08dc\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: hits give ordinary etale, invariant-ring or valuation components, not the full logarithmic quotient statement"
+  },
+  {
+   "tool": "grep",
+   "query": "integralClosure.*fixed|fixed.*integralClosure|invariant.*DVR",
+   "results": "{\"t\": \"2026-10-18T20:45:09Z\", \"tool\": \"grep\", \"query\": \"integralClosure.*fixed|fixed.*integralClosure|invariant.*DVR\", \"sub\": \"Mathlib/RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-19",
+   "verdict": "not absence evidence: initial identifier/path query was malformed; corrected searches below used the actual Mathlib subdirectory and valid names",
+   "subdirectory": "Mathlib/RingTheory"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite tamely ramified extension of strictly henselian traits is Kummer logarithmically etale",
+   "results": "{\"t\": \"2026-10-18T20:45:10Z\", \"tool\": \"leansearch\", \"query\": \"Finite tamely ramified extension of strictly henselian traits is Kummer logarithmically etale\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallyEtale.iff_exists_algEquiv_prod\", \"RingHom.Etale\", \"Algebra.FormallyEtale.of_isSeparable_aux\", \"Field.henselian\", \"Algebra.FormallyUnramified.iff_isSeparable\", \"Algebra.Etale.iff_exists_algEquiv_prod\", \"Algebra.Etale.formallyEtale\", \"Algebra.FormallyEtale.of_formallyUnramified_and_formallySmooth\"], \"digest\": \"53c49aa7ea440332\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: hits give ordinary etale, invariant-ring or valuation components, not the full logarithmic quotient statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "FixedPoints.finrank_eq_card, IsDiscreteValuationRing",
+   "results": "{\"t\": \"2026-10-18T20:45:10Z\", \"tool\": \"loogle\", \"query\": \"FixedPoints.finrank_eq_card, IsDiscreteValuationRing\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: hits give ordinary etale, invariant-ring or valuation components, not the full logarithmic quotient statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite group invariants of a finite extension of complete strictly henselian discrete valuation rings",
+   "results": "{\"t\": \"2026-10-18T20:45:11Z\", \"tool\": \"leanfinder\", \"query\": \"Finite group invariants of a finite extension of complete strictly henselian discrete valuation rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"arithFrobAt\", \"IsArithFrobAt.exists_of_isInvariant\", \"ValuationSubring.inertiaSubgroup\", \"IsArithFrobAt.arithFrobAt\", \"Ideal.Quotient.finite_of_isInvariant\", \"IsNonarchimedeanLocalField.instFiniteResidueFieldSubtypeMemSubringIntegerValueGroupWithZeroValuation\", \"Ideal.ncard_primesOver_mul_card_inertia_mul_finrank\", \"Valued.integer.finite_quotient_maximalIdeal_pow_of_finite_residueField\"], \"digest\": \"df787763088217f6\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: hits give ordinary etale, invariant-ring or valuation components, not the full logarithmic quotient statement"
+  },
+  {
+   "tool": "grep",
+   "query": "LogEtale|LogSmooth|tame.ramif|tamely.ramif",
+   "results": "{\"t\": \"2026-10-18T20:46:23Z\", \"tool\": \"grep\", \"query\": \"LogEtale|LogSmooth|tame.ramif|tamely.ramif\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: hits give ordinary etale, invariant-ring or valuation components, not the full logarithmic quotient statement"
+  },
+  {
+   "tool": "grep",
+   "query": "invariant|fixedPoints",
+   "results": "{\"t\": \"2026-10-18T20:46:23Z\", \"tool\": \"grep\", \"query\": \"invariant|fixedPoints\", \"sub\": \"RingTheory/Invariant\", \"ok\": true, \"n_hits\": 20, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Invariant/Profinite.lean\", \"Mathlib/RingTheory/Invariant/Profinite.lean\", \"Mathlib/RingTheory/Invariant/Profinite.lean\", \"Mathlib/RingTheory/Invariant/Profinite.lean\", \"Mathlib/RingTheory/Invariant/Profinite.lean\", \"Mathlib/RingTheory/Invariant/Basic.lean\", \"Mathlib/RingTheory/Invariant/Basic.lean\", \"Mathlib/RingTheory/Invariant/Basic.lean\"], \"digest\": \"6a7053037c028476\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: hits give ordinary etale, invariant-ring or valuation components, not the full logarithmic quotient statement",
+   "subdirectory": "RingTheory/Invariant"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-trait-prime-to-ell-log-alteration",
@@ -72,5 +307,59 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-tame-trait-quotient-log-etale",
+  "worker": "stage1",
+  "summary": "Expanded the tame trait quotient into eleven proof steps: faithful image on the fraction field, invariant DVR and complete strictly henselian structure, integral-closure and inertia calculation, explicit Kummer presentation, log-etale chart and log-smooth composite chart. Reused existing nodes only. Statement unchanged, including nonfaithful actions and imperfect separably closed residue fields.",
+  "blueprint": "Proof Step 3: dimension-normalized Verdier duality, regular finite-torsion local model; pointwise purity and composition used to compare the normalized curve with the ambient regular scheme. Input: Gabber purity for a regular Noetherian closed pair. More precisely: Expose XVI, section 3.7 second paragraph through its last paragraph, printed pp.254--255: semistable G-alteration, ell-Sylow H, tame equivariant modification, quotient over T=S prime/H, and log resolution. Geometric construction only, before applying Theorem 3.6.2 and Proposition 3.5.7; preliminary finite extension to normalize constants in the first paragraph. Specifically: XVI 3.7: the quotient T=S prime/H and the tame log-etale change of trait. Realized specifically by Steps 1--8 for the tame quotient trait and Steps 9--11 for logarithmic smoothness after changing the base. No unit or chapter route is replaced.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-over-complete-local-product",
+    "why": "Completeness of a finite domain algebra over the original complete local ring; generic commutative algebra, not supplied by the perverse unit."
+   },
+   {
+    "node": "lem-exc-dvr-galois-degree-data",
+    "why": "The finite DVR degree formula d=ef for the unique prime of B."
+   },
+   {
+    "node": "lem-exc-finite-dvr-tame-inertia",
+    "why": "Wild inertia is a p-group and the tame quotient has order the prime-to-p ramification index."
+   },
+   {
+    "node": "lem-sbc-dvr-uniformizer-root-algebra",
+    "why": "The explicit monic root algebra is a DVR; used to identify it with B by normality."
+   },
+   {
+    "node": "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+    "why": "An ordinary etale comparison is smooth, needed in the log-smooth chart criterion."
+   },
+   {
+    "node": "lem-weil-pbc-finite-over-henselian-local-product",
+    "why": "A finite algebra over a henselian local ring is a product of henselian local rings with finite residue extensions; generic commutative algebra used for A over R and B over A, not supplied by the perverse unit."
+   },
+   {
+    "node": "lem-weil-pbc-henselian-local-root-lifting",
+    "why": "Equivalence of idempotent-lifting and simple-root-lifting henselianity, needed to pass between the statement's definition and the product node, and to lift the e-th root of a unit in B."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-over-complete-local-product",
+  "lem-exc-dvr-galois-degree-data",
+  "lem-exc-finite-dvr-tame-inertia",
+  "lem-sbc-dvr-uniformizer-root-algebra",
+  "lem-weil-pbc-etale-smooth-zero-dimensional-fibres",
+  "lem-weil-pbc-finite-over-henselian-local-product",
+  "lem-weil-pbc-henselian-local-root-lifting"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q45-c58f24088",
+  "group": "Q45",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q45-c58f24088 (reviewer sub-agent of L); spot-checked: FIX, not RETURN. I read the whole delivery: 11 steps, no new nodes, statement unchanged against the Q53-created version. Source checked: ILO XVI 3.7, printed p.254. There T=S'/H with H an ell-Sylow subgroup, so the extension is tame and log etale, and log smoothness transfers from S' to T. The node keeps the source's hypotheses but only uses that #H is invertible, which also covers non-faithful actions. No SGA is cited. Steps 1-11 are correct, and I checked every hypothesis. Faithful image G with the fixed-degree leaf; maximal ideal lies over by the integral-radical node with I=0. Invariant DVR by an elementary valuation argument, with Frac A=F via the product of conjugates. Finiteness, completeness and henselianity of A. Normality makes B the integral closure; G=Gal(L/F); trivial residue action from pure inseparability. e=d and f=1 from the degree-data node and the tame-inertia node (P=1 because p does not divide d); this holds even for imperfect residue fields. Henselian lift of an e-th root, giving t^e=pi. Kummer presentation B=A[Z]/(Z^e-pi): the values e*v_A(a_i)+i are distinct mod e, and normality of the root algebra gives B inside it. Chart 1->e with cokernel Z/e and an isomorphism as comparison map, so S'->T is log etale. The uniformizer-chart node is applied with its exact hypotheses. Torsion exact sequence 0->Z/e->C'_tors->C_tors->0, of order en. The comparison schemes agree through the presentation. Small cases tested: trivial or non-faithful H; a cyclic mu_e action; an imperfect separably closed residue field; empty V. Duplicate search found nothing that states this item (trait-tame-algebra, very-tame-quotient, exc tame-root-extension and the sbc dvr-root nodes all differ). Batch-5 flag: lem-per-trait-log-smooth-uniformizer-chart reaches only def-trf-fs-log-blowup and def-trf-log-regular-pair, both general log-geometry definitions. Neither is a step of the trace formula or Poincare duality proofs, and def-trf-fs-log-blowup is already in the item's stmt_deps, so the flag is accepted. Faults repaired: (1) C1/C4: the statement defines henselian as root lifting, but lem-weil-pbc-finite-over-henselian-local-product uses idempotent lifting; Step 3 now cites lem-weil-pbc-henselian-local-root-lifting in both directions. (2) C8: the off-unit split nodes finite-over-henselian-local-product and henselian-local-root-lifting were not declared; both added to split_report.tool_uses. The declared tool uses (complete-local-product, the two exc DVR nodes, the sbc root algebra, etale-smooth) are generic algebra and accepted.; 1 file(s) fixed by the reviewer"
  }
 }
