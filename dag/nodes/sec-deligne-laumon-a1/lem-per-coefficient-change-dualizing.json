@@ -12,9 +12,120 @@
   "def-pur-derived-internal-hom",
   "def-weil-pbc-constructible-complexes"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose $[a,b]$ containing the cohomology of $K$. At a geometric stalk a complex of $\\Lambda$-vector spaces splits into its cohomology and contractible summands. Extension to $A$ therefore has cohomology $A\\otimes_\\Lambda H^i(K_{\\bar x})$ in the same interval; tensoring further with any $A$-module $V$ gives $H^i(K_{\\bar x})\\otimes_\\Lambda V$, still in that interval. The tensor identification [lem-sfb-etale-derived-tensor-stalk] and exact conservative stalks [prop-weil-pbc-geometric-stalks-exact, lemma-weil-pbc-geometric-stalk-conservative] give this bound for tensor with every module sheaf. Extension over the field is exact, so $\\mathcal H^i(K_A)=A_X\\otimes_{\\Lambda_X}\\mathcal H^i(K)$; on a finite common constructible stratification this is locally constant with finite free $A$-stalks. Thus $K_A\\in D^b_{ctf}(X_{\\mathrm{et}},A)$. The same stalk calculation over any field $B/\\Lambda$ proves $D^b_{ctf}(X_{\\mathrm{et}},B)=D^b_c(X_{\\mathrm{et}},B)$.",
+   "uses": [
+    "lem-sfb-etale-derived-tensor-stalk",
+    "prop-weil-pbc-geometric-stalks-exact",
+    "lemma-weil-pbc-geometric-stalk-conservative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, proof of Theorem 7.1.3, p. 311: membership of K_A in D^b_ctf, specialized to field Lambda"
+   }
+  },
+  {
+   "text": "The given $K$ witnesses the duality-existence hypothesis of [lem-per-ctf-hom-coefficient-comparison]. Its first conclusion applied to $(M,K_A)$ gives $D_AM=R\\mathcal Hom_A(M,K_A)\\in D^b_{ctf}$ for every $M\\in D^b_{ctf}$, and a second application gives $D_A^2M\\in D^b_{ctf}$. The same node gives the evaluation-defined natural coefficient comparisons for these pairs along every map of Noetherian $\\Lambda$-algebras. For $\\Lambda\\to A$ it applies to $(N,K)$ and $(D_KN,K)$, since the original duality makes both $N$ and $D_KN$ bounded constructible over the field.",
+   "uses": [
+    "lem-per-ctf-hom-coefficient-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, Theorem 7.6.1 and proof of Theorem 7.1.3, pp. 310-311"
+   }
+  },
+  {
+   "text": "Compute the actual biduality morphism under coefficient extension. Write $R\\to S$ for a map of Noetherian $\\Lambda$-algebras, $T=S_X\\otimes^L_{R_X}(-)$, $K_S=TK_R$ and $D_R=R\\mathcal Hom_R(-,K_R)$. For $M,K_R,D_RM$ in $D^b_{ctf}$ let $\\alpha_M:TD_RM\\xrightarrow{\\sim}D_STM$ be the comparison of [lem-per-ctf-hom-coefficient-comparison]. Identify $TD_R^2M$ with $D_S^2TM$ by $$\\beta_M=R\\mathcal Hom_S(\\alpha_M^{-1},1)\\circ\\alpha_{D_RM,K_R}.$$ The tensor--Hom transpose of $\\beta_M T(\\delta_M)$ is $T(\\mathrm{ev}_R)\\circ(1\\otimes\\alpha_M^{-1})$, using the signed symmetry in $\\delta$. The defining equation $\\mathrm{ev}_S\\circ(1\\otimes\\alpha_M)=T(\\mathrm{ev}_R)$ for $\\alpha_M$ shows that this transpose is $\\mathrm{ev}_S$. Uniqueness of transposes gives $\\beta_M T(\\delta_M)=\\delta_{TM}$. Taking $R=\\Lambda$, $S=A$, $M=N$, $K_R=K$ proves the final clause of the item. All comparisons are natural, so the identity is natural in $M$.",
+   "uses": [
+    "lem-per-ctf-hom-coefficient-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, Definition 7.1.1 and canonical coefficient comparison of Theorem 7.6.1, pp. 310-311"
+   }
+  },
+  {
+   "text": "First treat an arbitrary field extension $B/\\Lambda$, including infinite $B$. Step 1 identifies $D^b_c$ with $D^b_{ctf}$ and Step 2 gives preservation by $D_B$. Let $\\mathcal T$ be the class where $\\delta_M:M\\to D_B^2M$ is invertible. By [lem-sf-hom-triangulated], applying $D_B$ twice gives an exact covariant functor: the two reversals of a distinguished triangle restore its order. The natural evaluation-transpose maps form a morphism to this double-dual triangle, with the signed shift identifications. The cohomology long exact sequences of [lem-sf-derived-homology-long-exact] then show that invertibility on two terms implies invertibility on the third. The shift identification sends $\\delta_{M[r]}$ to $\\delta_M[r]$ (the two contravariant shift signs cancel). Additivity gives the direct-sum property; naturality on the inclusion and projection of a retract makes its biduality map a retract of the original one, hence invertible. Thus $\\mathcal T$ is closed under shifts, cones, finite sums and direct summands.",
+   "uses": [
+    "lem-sf-hom-triangulated",
+    "lem-sf-derived-homology-long-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, proof of Theorem 7.1.2 in 7.5.3, p. 310: devissage of the biduality property"
+   }
+  },
+  {
+   "text": "Apply [lem-per-prime-field-tensor-devissage] with $A=B$. Each generator $N_X\\otimes^L_\\Lambda F$ has $N$ finite-dimensional over $B$. A finite $B$-basis identifies it with a finite sum of copies of $B_X\\otimes^L_\\Lambda F$. Step 3 identifies the latter's biduality with $B_X\\otimes^L_\\Lambda\\delta_F$, an isomorphism because $K$ is dualizing. Every generator is therefore in $\\mathcal T$. Step 4 and the generation statement give $\\mathcal T=D^b_c(X_{\\mathrm{et}},B)$. This proves field-coefficient biduality without asserting that every individual $B$-complex descends to $\\Lambda$.",
+   "uses": [
+    "lem-per-prime-field-tensor-devissage"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, Proposition 7.4.6 and proof of 7.4.1, pp. 307-308, in the argument of 7.5.3"
+   }
+  },
+  {
+   "text": "For general $A$ and $M\\in D^b_{ctf}(X_{\\mathrm{et}},A)$, let $B=A/\\mathfrak m$ for a maximal ideal $\\mathfrak m$. By [lem-per-ctf-hom-coefficient-comparison], coefficient extension gives a finite-Tor constructible $B$-complex $B_X\\otimes_A^LM$. Tensor associativity identifies $B_X\\otimes_A^LK_A$ with $K_B$. Step 3 identifies $B_X\\otimes_A^L\\delta_M$ with its biduality map over the field $B$, so Step 5 makes it invertible. Let $C$ be a cone of $\\delta_M$. Exactness of derived tensor [lem-kun-derived-tensor-triangulated] gives $B_X\\otimes_A^LC=0$ for every maximal ideal. The residue field $B$ need not be finite; this is why Step 5 allowed arbitrary fields.",
+   "uses": [
+    "lem-per-ctf-hom-coefficient-comparison",
+    "lem-kun-derived-tensor-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, proof of Theorem 7.1.3, p. 311: reduction modulo maximal ideals"
+   }
+  },
+  {
+   "text": "The cone $C$ has bounded cohomology with finite geometric stalks as $A$-modules. Indeed, Step 2 gives this for $M,D_A^2M$, and [lem-sf-derived-homology-long-exact] expresses each cohomology stalk of $C$ as an extension of a cokernel by a kernel between finitely generated $A$-modules; $A$ is Noetherian. Exact stalks [prop-weil-pbc-geometric-stalks-exact] give $C_{\\bar x}\\in D^-_{\\mathrm{fg}}(A)$, and [lem-weil-pbc-noetherian-pseudocoherent-cohomology-criterion] makes it pseudo-coherent. By [lem-sfb-etale-derived-tensor-stalk], its derived tensor with each maximal residue field is zero. For each integer $i$, apply [lem-weil-pbc-pseudocoherent-maximal-fibre-perfect] with $a=b=i+1$: its fiber-vanishing hypothesis holds, and its conclusion with the module $A$ gives $H^i(C_{\\bar x})=0$. Every stalk of every cohomology sheaf of $C$ is zero. Exactness and [lemma-weil-pbc-geometric-stalk-conservative] imply $C=0$, hence $\\delta_M$ is invertible.",
+   "uses": [
+    "lem-sf-derived-homology-long-exact",
+    "prop-weil-pbc-geometric-stalks-exact",
+    "lem-weil-pbc-noetherian-pseudocoherent-cohomology-criterion",
+    "lem-sfb-etale-derived-tensor-stalk",
+    "lem-weil-pbc-pseudocoherent-maximal-fibre-perfect",
+    "lemma-weil-pbc-geometric-stalk-conservative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, Lemma 7.6.2 and proof of Theorem 7.1.3, p. 311; realized using existing Stacks 066E and 068V interfaces"
+   }
+  },
+  {
+   "text": "Steps 1, 2 and 7 give bounded constructibility of $K_A$ and preservation and natural evaluation-transpose biduality on $D^b_{ctf}$. If $A$ is a finite field, Step 1 identifies this category with all of $D^b_c$; finite generation over $A$ is equivalent to finiteness of the stalks as sets, as in the original finite-coefficient definition. Step 3 is the required identity on inputs extended from $\\Lambda$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, Definition 7.1.1 and Theorem 7.1.3"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-kun-derived-tensor-triangulated",
+  "lem-per-ctf-hom-coefficient-comparison",
+  "lem-per-prime-field-tensor-devissage",
+  "lem-sf-derived-homology-long-exact",
+  "lem-sf-hom-triangulated",
+  "lem-sfb-etale-derived-tensor-stalk",
+  "lem-weil-pbc-noetherian-pseudocoherent-cohomology-criterion",
+  "lem-weil-pbc-pseudocoherent-maximal-fibre-perfect",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "prop-weil-pbc-geometric-stalks-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Adapted from XVII, proof of Theorem 7.1.3, p. 311, and the tensor-generator devissage of 7.5.3, p. 310; existing 066E/068V realize residue detection."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -71,10 +182,38 @@
    "results": "msearch returned 16 hit(s); top: Mathlib/Data/Set/Defs.lean, Mathlib/AlgebraicTopology/ModelCategory/FibrantObjectHomotopy.lean, Mathlib/Algebra/Homology/HomotopyFiber.lean, Mathlib/Analysis/Normed/Module/PiTensorProduct/ProjectiveSeminorm.lean, Mathlib/Analysis/Normed/Module/DoubleDual.lean, Mathlib/Analysis/Normed/Module/DoubleDual.lean, Mathlib/Analysis/Normed/Module/DoubleDual.lean, Mathlib/Analysis/Normed/Module/DoubleDual.lean",
    "date": "2026-10-18",
    "verdict": "no match: hits concern ordinary linear duals, derived-category infrastructure, etale algebra, or unrelated analytic/order duality; none states etale duality for pinned potential complexes or its coefficient extension"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension of coefficients preserves dualizing complexes and the canonical biduality morphism on constructible etale complexes of finite Tor amplitude",
+   "results": "8 hits; top: HomologicalComplex.extend_d_eq, HomologicalComplex.extend.rightHomologyData_g', HomologicalComplex.extend_op_d, HomologicalComplex.extend_op_d_assoc, HomologicalComplex.extend.rightHomologyData_Q, HomologicalComplex.extendOpIso, HomologicalComplex.extend.rightHomologyData_H, HomologicalComplex.extend.leftHomologyData_H; note: ; digest: 5b30c4175e018428",
+   "date": "2026-10-18",
+   "verdict": "no match: ordinary linear dual base change and derived-category infrastructure do not state etale coefficient extension of duality"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A dualizing complex on a noetherian scheme extends along any noetherian algebra over a prime finite field to duality on constructible finite Tor complexes",
+   "results": "8 hits; top: IsBaseChange.dual, FGModuleCat.FGModuleCatDual, Module.Dual.baseChange_baseChange, IsBaseChange.toDual, dualTensorHomEquiv, IsBaseChange.toDualBaseChange, Module.Dual.baseChange, Algebra.Extension.cotangentComplex; note: ; digest: bd66c6c0cc0eda3d",
+   "date": "2026-10-18",
+   "verdict": "no match: ordinary linear dual base change and derived-category infrastructure do not state etale coefficient extension of duality"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory",
+   "results": "12 hits; top: DerivedCategory, instCategoryDerivedCategory, DerivedCategory.instHasZeroObject, DerivedCategory.instPreadditive, DerivedCategory.instHasShiftInt, DerivedCategory.singleFunctor, DerivedCategory.singleFunctors, DerivedCategory.instAdditiveSingleFunctor; note: ; digest: f354bb07c1812d8c",
+   "date": "2026-10-18",
+   "verdict": "no match: ordinary linear dual base change and derived-category infrastructure do not state etale coefficient extension of duality"
+  },
+  {
+   "tool": "grep",
+   "query": "dualizing|biduality|constructible.*tensor",
+   "results": "0 hits; top: none; note: ; digest: 4f53cda18c2baa0c",
+   "date": "2026-10-18",
+   "verdict": "no match: ordinary linear dual base change and derived-category infrastructure do not state etale coefficient extension of duality"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-potential-local-duality",
@@ -86,7 +225,7 @@
  "blueprint": {
   "from": {
    "node": "lem-per-artin-gabber-affine-curve",
-   "place": "Proof, Step 3: extension of the local duality statement from the prime field coefficients to a finite coefficient field",
+   "place": "Proof, Step 1 of lem-per-artin-gabber-affine-curve: 'Relative Verdier duality, biduality ... over the same arbitrary field $k$', through lem-per-qbar-arbitrary-field-duality, lem-per-finite-residue-dualizing and lem-per-potential-local-duality; the last node's Step 2 extends finite-field coefficients.",
    "via": [
     "lem-per-potential-local-duality",
     "lem-per-finite-residue-dualizing",
@@ -95,5 +234,54 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-per-coefficient-change-dualizing",
+  "worker": "stage1",
+  "summary": "Keep the statement. Prove coefficient extension, its evaluation-transpose compatibility, arbitrary-field devissage and maximal-residue detection. Create two general ingredients, not clauses of this item: tensor generators and finite-Tor internal-Hom coefficient comparison. Reuse the existing stalk, exactness, pseudo-coherence and perfectness interfaces.",
+  "blueprint": "Proof, Step 1 of lem-per-artin-gabber-affine-curve: 'Relative Verdier duality, biduality ... over the same arbitrary field $k$', through lem-per-qbar-arbitrary-field-duality, lem-per-finite-residue-dualizing and lem-per-potential-local-duality; the last node's Step 2 extends finite-field coefficients.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-etale-derived-tensor-stalk",
+    "why": "General K-flat etale stalk comparison for Tor bounds and residue detection; absent from the perverse unit. This is a tool, not a replacement of the unit route."
+   },
+   {
+    "node": "lemma-weil-pbc-geometric-stalk-conservative",
+    "why": "Generic detection of etale sheaf isomorphisms; needed to conclude from vanishing stalks. This is a tool, not a replacement of the unit route."
+   },
+   {
+    "node": "lem-sf-hom-triangulated",
+    "why": "Generic exactness of derived internal Hom in each variable, used to deviss biduality. This is a tool, not a replacement of the unit route."
+   },
+   {
+    "node": "lem-kun-derived-tensor-triangulated",
+    "why": "Generic exactness of derived tensor, used to tensor the cone of biduality. This is a tool, not a replacement of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-pseudocoherent-cohomology-criterion",
+    "why": "Stacks 066E turns bounded finite-cohomology stalks into pseudo-coherent module complexes. This is a tool, not a replacement of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-pseudocoherent-maximal-fibre-perfect",
+    "why": "Stacks 068V gives residue detection for pseudo-coherent stalks, realizing ILO 7.6.2 without a new node. This is a tool, not a replacement of the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-etale-derived-tensor-stalk",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "lem-sf-hom-triangulated",
+  "lem-kun-derived-tensor-triangulated",
+  "lem-weil-pbc-noetherian-pseudocoherent-cohomology-criterion",
+  "lem-weil-pbc-pseudocoherent-maximal-fibre-perfect"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-N8-4e3575467",
+  "group": "N8",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N8-4e3575467 (reviewer sub-agent of L); spot-checked: Read ILO XVII §7 in full: Déf. 7.1.1 (the printed RHom(K,−) is a typo for RHom(−,K)), Thms 7.1.2/7.1.3, Prop. 7.4.6/Lemme 7.4.7 and the proof of 7.4.1, 7.5.3, Thm 7.6.1, Lemme 7.6.2 and the deduction of 7.1.3, the proof of 7.6.1, and Déf. 7.7.1 with the paragraph after it (ctf=c-parf over Noetherian rings, preserved by any A→A'). Also read Stacks 068V. The item statement is unchanged from N7's version and is correct (no ℓ-invertibility needed in §7). Step checks: S1 splits stalks over F_ℓ and gives a Tor interval independent of V (also D^b_ctf=D^b_c over any field B). S3: I recomputed the transpose, beta∘Tδ=δ_T, using α's stated evaluation normalization; directions are right and the elementary marking is accepted. S4: closure of the biduality class under shifts, cones, sums and summands (δ as a morphism of triangles, standard). S5: generators ≅ (B⊗F)^r. S6: B⊗K_A≅K_B is two lines over the field Λ; the residue field B may be infinite. S7: 066E plus 068V(3)⇒(1) with a=b=i+1 and M=A gives H^i=0, a valid replacement of 7.6.2. New comparison node = 7.6.1 (Noetherian B), plus T preserving ctf, which holds via 7.7.1; the map is pinned by evaluation. New generator node: both inclusions checked (7.4.6 with ℓA=0, plus weak-Serre and summand closure). Neither node is an item clause. Not duplicates: thm-coef-finite-hom, cor-weil-finite-constructible-hom, thm-sf-hom-ctf, lem-per-finite-tor-internal-hom-any-field, lem-fin-constructible-devissage and lem-trf-devissage-generation all have narrower hypotheses. No SGA. Batch-5: lem-sfb-etale-derived-tensor-stalk reaches lem-pod-etale-stalk-tensor-scalar, a generic stalk-of-tensor fact (Stacks 008B) cited by about 30 nodes. Neither assumed statement gives it, and it is not a step of either proof, so it lies genuinely outside them; no RETURN. All 6 tool_uses accepted. FIX (B3): both new nodes now cite def-constructible-stratification and def-weil-pbc-locally-constant-finite-type-modules for the general-A constructibility wording (statement and stmt_deps; meaning unchanged); files in fixes/dag/nodes/sec-deligne-laumon-a1/. Maintainer note: the item's own statement uses the same uncited wording.; 2 file(s) fixed by the reviewer"
  }
 }
