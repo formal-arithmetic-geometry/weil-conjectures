@@ -3,58 +3,277 @@
  "blueprint": {
   "is": "det-sp-p1-adjunction",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Triangle identities for the projective-line adjunction",
- "statement": "With the notation of [det-sp-p1-trace], let $\\varepsilon_K$ and $\\eta_M$ be the\ncounit and unit displayed in [sk-prop-geo-p1-adjunction]. Then for all $M$ on $\\mathbf P^1_S$\nand $K$ on $S$ (in $D(-_{\\mathrm{ét}},\\Lambda_n)$, and hence on the classical\npro-étale categories and on $\\Dctf$):\n\n$$\n\\varepsilon_{Rq_*M}\\circ Rq_*(\\eta_M)=\\mathrm{id}_{Rq_*M},\\qquad\nq^*(\\varepsilon_K)(1)[2]\\circ\\eta_{q^*K(1)[2]}=\\mathrm{id}_{q^*K(1)[2]}.\n$$\n\nHence $Rq_*\\dashv q^*(-)(1)[2]$ with unit $\\eta$ and counit $\\varepsilon$, and both\nare compatible with base change on $S$. The adjunction restricts to the\ncategories $\\Dctf(-_{\\mathrm{proét}},\\Lambda_n)$.",
+ "statement": "Fix a prime $\\ell$, $n\\geq1$, $A=\\Lambda_n=\\mathbf Z/\\ell^n\\mathbf Z$, and a Noetherian scheme $S$ on which $\\ell$ is invertible. Use $q:P=\\mathbf P^1_S\\to S$, $W=P\\times_SP$, its projections $p_1,p_2$, its diagonal $\\Delta$, the supported diagonal class $\\delta:R\\Delta_*A_P\\to A_W(1)[2]$, and the normalized trace of [det-sp-p1-trace]. On the ordinary small etale derived categories of constant $A$-module sheaves, the trace and diagonal class mean their etale versions [def-amb-p1-trace, lem-amb-p1-diagonal-integrals]. Write $L_T=A_T(1)[2]$ and $G(K)=q^*K\\otimes_A^L L_P=q^*K(1)[2]$. All tensors below are derived, and all functors are the ordinary unbounded ones. Let $B_M:q^*Rq_*M\\xrightarrow{\\sim}Rp_{2*}p_1^*M$ be canonical proper exchange. Define precisely the maps (G6)--(G7) of the unit sk-prop-geo-p1-adjunction by\n$$\\eta_M:M\\cong Rp_{2*}R\\Delta_*M\\xrightarrow{Rp_{2*}(\\delta\\otimes1)}Rp_{2*}(p_1^*M\\otimes L_W)\\cong G(Rq_*M),$$\nwhere $R\\Delta_*M\\cong R\\Delta_*A_P\\otimes p_1^*M$ is the projection formula, and the last isomorphism first applies the inverse projection identification for $L_W=p_2^*L_P$ and then $B_M^{-1}\\otimes1_{L_P}$; and put\n$$\\varepsilon_K:Rq_*G(K)\\xrightarrow{\\pi_q^{-1}}K\\otimes Rq_*L_P\\xrightarrow{1\\otimes\\operatorname{Tr}_q}K,$$\nwith tensor unit constraints understood and $\\pi_q$ the canonical ordered projection map. Then, for every $M\\in D(P_{\\mathrm{et}},A)$ and $K\\in D(S_{\\mathrm{et}},A)$,\n$$\\varepsilon_{Rq_*M}\\circ Rq_*(\\eta_M)=1_{Rq_*M},\\qquad G(\\varepsilon_K)\\circ\\eta_{G(K)}=1_{G(K)}.$$\nConsequently $Rq_*\\dashv G$ has exactly this unit and counit, compatible with Noetherian base change on $S$. For bases of finite type over the standing finite or algebraically closed field $k$, the comparison [lem-sfb-unbounded-site-comparison, lem-sfb-finite-classical-unbounded-comparison, lem-sfb-unbounded-direct-image-comparison] gives the same adjunction and the same formulas on the full classical pro-etale categories. Base change there is between bases in that range. In the standing setting of separated finite-type schemes over a field of characteristic $p>0$, $p\\ne\\ell$, the adjunction restricts to the full categories $\\Dctf(-_{\\mathrm{proet}},A)$ of bounded constructible complexes with finite Tor amplitude [sk-def-sfb-constructible], with the same unit and counit.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/det-sp-p1-adjunction.md",
   "place": "node det-sp-p1-adjunction, order None"
  },
  "stmt_deps": [
-  "det-sp-p1-trace"
+  "det-sp-p1-trace",
+  "def-amb-p1-trace",
+  "lem-amb-p1-diagonal-integrals",
+  "lem-sfb-unbounded-site-comparison",
+  "lem-sfb-finite-classical-unbounded-comparison",
+  "lem-sfb-unbounded-direct-image-comparison",
+  "sk-def-sfb-constructible"
  ],
  "proof": [
   {
-   "text": "*First identity.* Using composition of direct images, $qp_1=qp_2$, proper base\nchange and the projection formula, the composite\n$\\varepsilon_{Rq_*M}\\circ Rq_*(\\eta_M)$ equals\n\n$$\nRq_*M=R(qp_1)_*\\Delta_*M\\to R(qp_1)_*p_1^*M(1)[2]\n\\simeq Rq_*\\bigl(M\\otimes^{\\mathbf L}Rp_{1*}(\\Lambda_n)(1)[2]\\bigr)\n\\xrightarrow{Rq_*(1_M\\otimes\\operatorname{Tr}_{p_1})}Rq_*M .\n$$\n\nThe proper base-change map is the adjoint transpose of the counit of\n$g^*\\dashv Rg_*$ for the relevant pullback, and the projection map is the\nadjoint transpose of tensoring with the same counit; expanding these\ndefinitions along either route uses this counit once in each coordinate, in\nthe same order once $qp_1=qp_2$ is used. Hence the first arrow is\n$1_M\\otimes Rp_{1*}\\delta$ under the projection identification, and the\ncomposite is $Rq_*(1_M\\otimes(\\operatorname{Tr}_{p_1}\\circ Rp_{1*}\\delta))=Rq_*(1_M)$\nby [det-sp-p1-trace] (3).",
+   "text": "Work first etale. Set $F=Rq_*$, $L_T=A_T(1)[2]$, and write $\\pi$ with the order $V\\otimes Rr_*E\\to Rr_*(r^*V\\otimes E)$. The morphisms $q,p_1,p_2$ are projective lines and hence proper; $\\Delta$ is a closed immersion and hence proper. Their sources and targets are Noetherian, since a proper morphism is of finite type and a finite-type scheme over a Noetherian base is Noetherian. Thus the proper projection theorem applies to all these maps for arbitrary unbounded complexes, not merely perfect coefficients. Proper exchange likewise applies to the self-product square for every $M$. These facts justify every inverse projection or exchange map in the statement.",
    "uses": [
-    "det-sp-p1-trace"
+    "lemma-nagata-projective-space-base-change-proper",
+    "lem-weil-pbc-closed-immersion-proper",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-amb-proper-coproducts-projection",
+    "lem-kun-proper-base-change-torsion-ring"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/det-sp-p1-adjunction.proof.md",
+    "place": "Unit proof, The unit and counit; G6--G7"
+   }
   },
   {
-   "text": "*Second identity.* For $M=q^*K(1)[2]$, $p_1^*M$ and $p_2^*M$ both equal\n$(qp_1)^*K(1)[2]=(qp_2)^*K(1)[2]$, since $K$ and the twist come from $S$. The\nprojection formula takes this common factor outside $Rp_{2*}$, and\n$q^*(\\varepsilon_K)(1)[2]$ contracts the remaining kernel by\n$\\operatorname{Tr}_{p_2}$; so the composite is\n$1_{q^*K(1)[2]}\\otimes(\\operatorname{Tr}_{p_2}\\circ Rp_{2*}\\delta)=1$ by\n[det-sp-p1-trace] (3). All shifts moved are even, so no Koszul signs appear.",
+   "text": "Use the canonical composition and symmetric monoidal comparisons throughout; in particular $Rp_{a*}R\\Delta_*\\cong1$ is normalized by $p_a\\Delta=1$, and $R(qp_1)_*=R(qp_2)_*$. Define $u_a:A_P\\to Rp_{a*}L_W$ to be $Rp_{a*}(\\delta)\\alpha_a$, with $\\alpha_a:A_P\\cong Rp_{a*}R\\Delta_*A_P$. The etale diagonal-integral statement gives $s_a:=\\operatorname{Tr}_{p_a}u_a=1$ for both $a$. Its trace is exactly $\\operatorname{pr}_2b^{-1}$, so it is the trace used in $\\varepsilon$, not an independently normalized trace. Put $v_M:R\\Delta_*M\\to p_1^*M\\otimes L_W$ equal to $1\\otimes\\delta$ under the diagonal projection isomorphism. Naturality of projection and of $\\delta\\otimes1$ makes $v_M$, hence $\\eta_M$, natural in $M$; the definition of $\\varepsilon$ is natural in $K$.",
    "uses": [
-    "det-sp-p1-trace"
+    "lem-sfb-ringed-derived-monoidal-comparisons",
+    "lem-amb-p1-diagonal-integrals",
+    "def-amb-p1-trace",
+    "lem-sfb-ringed-projection-tensor-composition"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/det-sp-p1-adjunction.proof.md",
+    "place": "First identity, notation and G5--G6"
+   }
   },
   {
-   "text": "*Adjunction and base change.* Two natural transformations satisfying the\ntriangle identities exhibit an adjunction ([thm-amb-p1-adjunction]). The unit\nis built from $\\delta$ (compatible with base change, $\\Delta$ being a relative\nCartier divisor in every fibre) and proper base change; the counit from\n$\\operatorname{Tr}_q$ and the projection formula; all are compatible with base\nchange on $S$, hence so are $\\eta$ and $\\varepsilon$.",
+   "text": "For either $a$, identify $M$ with $M\\otimes A_P$. The section specialization of projection-composition coherence, with $i=\\Delta$, $p=p_a$, $V=A_P$, says that the two projection maps from $M\\otimes Rp_{a*}R\\Delta_*A_P$ through $Rp_{a*}(p_a^*M\\otimes R\\Delta_*A_P)$ to $Rp_{a*}R\\Delta_*M$ compose to the identity of $M$. Compose with $Rp_{a*}(1\\otimes\\delta)$, and use naturality of $\\pi_{p_a}$ in its second argument. It follows that the resulting map, after the inverse projection identification, is exactly $1_M\\otimes u_a$. This accounts for the source identification and for the first arrow in (G8); it is not an assertion that the diagonal projection isomorphism can be chosen arbitrarily.",
    "uses": [
-    "thm-amb-p1-adjunction"
+    "lem-sfb-ringed-projection-tensor-composition",
+    "lem-amb-p1-diagonal-integrals"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/det-sp-p1-adjunction.proof.md",
+    "place": "First identity, first arrow of G8"
+   }
   },
   {
-   "text": "*Restriction to $\\Dctf$.* $Rq_*$ preserves $\\Dctf$ (proper direct image), and\n$q^*(-)(1)[2]$ preserves $\\Dctf$ (inverse image, twist by an invertible sheaf,\nshift). The comparison of [sk-prop-pe-unbounded-classical] transports the étale adjunction\nto the pro-étale categories, Hom groups agreeing by full faithfulness.",
-   "uses": [],
-   "elementary": null
+   "text": "Here is the exchange/projection rewriting in (G8). Apply exchange-tensor coherence to the self-product square $q p_1=q p_2$, with $f=q$, $g=q$, $f'=p_2$, $g'=p_1$, $E=M$, and $Q=L_S$; use $q^*L_S=L_P$. This moves the line through $B_M$. For the contraction in $\\varepsilon_{FM}$, use the same square with the factors interchanged, $E=L_P$ and $Q=FM$. Its commuting square moves $\\pi_q^{-1}$ across exchange and replaces $q^*\\operatorname{Tr}_q$ by $\\operatorname{Tr}_{p_1}$ (the trace base-change equation). Compose the two squares, apply $Rq_*$, and use the composition identity for $q p_1=q p_2$. The intervening $B_M$ and $B_M^{-1}$ cancel; projection naturality leaves\n$$\\varepsilon_{FM}F(\\eta_M)=F\\bigl((1_M\\otimes\\operatorname{Tr}_{p_1})\\,\\pi_{p_1}^{-1}\\,Rp_{1*}(v_M)\\bigr).$$\nThe source on the right is $M=Rp_{1*}R\\Delta_*M$. All comparisons used here are the canonical adjunction-compatible ones: exchange is the mate of the pullback square, so pasting its two defining counit squares agrees with direct-image composition. No exceptional adjunction is used in this rewriting.",
+   "uses": [
+    "lem-weil-pbc-ringed-exchange-tensor-coherence",
+    "lem-sfb-ringed-projection-tensor-composition",
+    "lem-weil-pbc-mate-pasting",
+    "lem-sfb-ringed-derived-monoidal-comparisons",
+    "lem-asd-etale-finite-twist-pullback",
+    "lem-asd-ordinary-finite-p1-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/det-sp-p1-adjunction.proof.md",
+    "place": "First identity, equality of the maps in G8"
+   }
+  },
+  {
+   "text": "Step 3 with $a=1$ turns the right side of step 4 into $F(1_M\\otimes\\operatorname{Tr}_{p_1}u_1)=F(1_M\\otimes s_1)$. The first diagonal integral is $s_1=1$, and a functor preserves identities. Thus $\\varepsilon_{FM}F(\\eta_M)=1_{FM}$. This argument used no boundedness condition on $M$.",
+   "uses": [
+    "lem-amb-p1-diagonal-integrals"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/det-sp-p1-adjunction.proof.md",
+    "place": "First identity, last equation"
+   }
+  },
+  {
+   "text": "For the second identity put $M=GK=q^*K\\otimes L_P$. The normalized pullback comparisons give $p_1^*M=p_2^*M$, since both are $(qp_1)^*K\\otimes L_W$; the Tate line identifications are compatible with this equality and with composition. Apply exchange-tensor coherence for $f=q$, $g=q$, $f'=p_2$, $g'=p_1$ to the factors $E=L_P$, $Q=K$. Together with tensor-associativity of projection it identifies $G(\\varepsilon_K)$, after the inverse of the last isomorphism in $\\eta_M$, with\n$$Rp_{2*}(p_2^*M\\otimes L_W)\\xrightarrow{\\pi_{p_2}^{-1}}M\\otimes Rp_{2*}L_W\\xrightarrow{1_M\\otimes\\operatorname{Tr}_{p_2}}M.$$\nTrace base change supplies the last map. Step 3, now with $a=2$ and $p_1^*M=p_2^*M$, therefore computes $G(\\varepsilon_K)\\eta_{GK}=1_M\\otimes s_2=1_M$. Symmetry uses the specified derived signs: the extra shifted line has even shift $2$, so moving it contributes $(-1)^{2j}=1$ in degree $j$.",
+   "uses": [
+    "lem-asd-etale-finite-twist-pullback",
+    "lem-weil-pbc-ringed-exchange-tensor-coherence",
+    "lem-sfb-ringed-projection-tensor-composition",
+    "lem-sfb-ringed-derived-monoidal-comparisons",
+    "lem-asd-ordinary-finite-p1-adjunction",
+    "lem-amb-p1-diagonal-integrals"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/det-sp-p1-adjunction.proof.md",
+    "place": "Second identity, G9"
+   }
+  },
+  {
+   "text": "For $a:FM\\to K$ and $b:M\\to GK$ define $\\Phi(a)=G(a)\\eta_M$ and $\\Psi(b)=\\varepsilon_K F(b)$. By naturality and the two identities just proved,\n$$\\Psi\\Phi(a)=a\\varepsilon_{FM}F\\eta_M=a,\\qquad\\Phi\\Psi(b)=G\\varepsilon_K\\eta_{GK}b=b.$$\nThe formulas are natural in $M,K$, so the natural-bijection adjunction criterion gives $F\\dashv G$. Evaluating at $1_{FM}$ and $1_{GK}$ recovers exactly $\\eta_M$ and $\\varepsilon_K$. Thus an existing theorem asserting some right adjoint is not being used to identify its unit with the diagonal unit.",
+   "uses": [
+    "lem-weil-pbc-adjunction-of-natural-bijection"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/det-sp-p1-adjunction.proof.md",
+    "place": "Adjunction and base change, adjunction criterion"
+   }
+  },
+  {
+   "text": "Let $g:S'\\to S$ be a Noetherian base change. The diagonal of $\\mathbf P^1_{S'}$ is again effective Cartier: on the four affine charts its equations are $x-y$, $1-xy$, $1-xy$, $x-y$, each a non-zero-divisor over any coefficient ring (compare the top coefficient in one variable). Thus supported Kummer pullback carries $\\delta$ to $\\delta'$. The finite twist pulls back canonically; the decomposition, trace and counit normalization commute with Noetherian base change. For the counit this is also the exchange-tensor square followed by $1\\otimes\\operatorname{Tr}$. For the unit, apply that square to the diagonal projection identification, use exchange pasting for $p_2\\Delta=1$ and the self-product square, and then insert $g_W^*\\delta=\\delta'$ in the middle arrow of G6. The three arrows of G6 and the two arrows of G7 consequently have commuting base-change squares, so their composites do too. This proves compatibility of the actual natural transformations, rather than only existence of isomorphic adjoints.",
+   "uses": [
+    "lem-asd-ordinary-supported-kummer",
+    "lem-asd-etale-finite-twist-pullback",
+    "lem-asd-ordinary-finite-p1-adjunction",
+    "lem-weil-pbc-ringed-exchange-tensor-coherence",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/det-sp-p1-adjunction.proof.md",
+    "place": "Adjunction and base change, compatibility of G6--G7"
+   }
+  },
+  {
+   "text": "Now assume the standing finite-type hypotheses over a finite or algebraically closed field $k$, so $S,P,W$ are in the range of the unbounded comparison. Exact full faithfulness of $\\nu_T^*$ and its essential image (all classical complexes) give equivalences $D(T_{\\mathrm{et}},A)\\simeq D_{\\mathrm{class}}(T_{\\mathrm{proet}},A)$. The unbounded direct-image comparison $C$ is the canonical mate; inverse images commute with $\\nu^*$ by the square of sites, and monoidal comparison identifies tensors and twists ($A_T(1)=\\nu_T^*A_{T,\\mathrm{et}}(1)$). By mate pasting and exchange-tensor coherence, $C$ carries $\\nu^*$ of the etale projection and exchange maps to the pro-etale ones, so these are invertible on classical objects. Comparison preserves units, so $C_q\\nu_S^*$ of the etale decomposition has the unit and $h$ as components and equals $b_q$; hence $\\operatorname{Tr}_q=\\nu_S^*t_q\\,C_q^{-1}$ and $\\varepsilon$ is the transport of the etale counit. Transporting step 7 therefore gives an adjunction $F\\dashv G$ on the classical categories with counit $\\varepsilon$, and $b\\mapsto\\varepsilon_{FM}F(b)$ is bijective on $\\operatorname{Hom}(M,GFM)$. Its unit is $\\eta$ formed with the pro-etale class $\\delta$ of [det-sp-p1-trace]. Steps 2--5 use only ringed-topos coherence, the twist pullback, trace base change and the integral $s_1$. Repeat them on the pro-etale sites. Trace base change and $s_1=1$ come from [det-sp-p1-trace] (2),(3), and invertibility comes from the comparison above. This gives $\\varepsilon_{FM}F(\\eta_M)=1$, so $\\eta_M$ is the transported unit and the second identity follows. No equality of $\\delta$ with the pulled-back etale class is used. The base-change squares hold by step 8 and by the Cartier pullback clause of [sk-lem-geo-cartier].",
+   "uses": [
+    "lem-sfb-unbounded-site-comparison",
+    "lem-sfb-finite-classical-unbounded-comparison",
+    "lem-sfb-unbounded-direct-image-comparison",
+    "sk-thm-pe-direct-image-comparison",
+    "lem-sfb-ringed-derived-monoidal-comparisons",
+    "lem-weil-pbc-mate-pasting",
+    "lem-weil-pbc-ringed-exchange-tensor-coherence",
+    "sk-lem-geo-cartier",
+    "det-sp-p1-trace",
+    "lem-sfb-ringed-projection-tensor-composition",
+    "lem-weil-pbc-adjunction-of-natural-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/det-sp-p1-adjunction.proof.md",
+    "place": "Restriction to Dctf, first transport to the whole classical category"
+   }
+  },
+  {
+   "text": "For the finite-Tor restriction retain the standing separated finite-type setting in characteristic $p>0$, $p\\ne\\ell$. The finite proper-image theorem for $q$ and $A=\\mathbf Z/\\ell^n$ states that $Rq_*$ maps $\\Dctf(P,A)$ into $\\Dctf(S,A)$. Exact inverse image preserves bounded constructibility (these coefficients are precisely the standard quotient $P_n$). If $K$ has Tor interval $[a,b]$, the general ringed-site flat-model theorem represents it by flat terms in those degrees. Flat module pullback preserves flat terms; exactness of constant-ring inverse image and the derived tensor/pullback construction identify the pulled-back model with $q^*K$. Thus its interval is still $[a,b]$. The Tate sheaf is locally a free rank-one sheaf, so twisting preserves both bounded constructibility and that interval; shift $[2]$ translates the interval to $[a-2,b-2]$. Hence $G$ preserves $\\Dctf$. The bounded finite-Tor comparison identifies the etale and pro-etale versions of these objects.",
+   "uses": [
+    "det-ctf-finite-proper-localizing",
+    "lem-weil-pbc-pullback-preserves-bounded-constructible",
+    "lem-sp-ringed-site-tor-flat-model",
+    "lem-weil-pbc-ringed-topos-flat-module-pullback",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-asd-finite-etale-twist-line",
+    "det-pe-finite-tor-comparison-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/det-sp-p1-adjunction.proof.md",
+    "place": "Restriction to Dctf, preservation of both functors"
+   }
+  },
+  {
+   "text": "The finite-Tor categories are full. On the etale sites restrict the same inverse Hom maps $\\Phi,\\Psi$, since step 10 keeps both functors in these categories. To pass to pro-etale $\\Dctf$, use the bounded finite-Tor equivalence of step 10 and the bounded-below direct-image comparison, whose statement includes compatibility with units, counits and composition. All objects involved are bounded below, including their proper direct images. As in step 9, the tensor comparisons and this bounded-below comparison identify the pro-etale projection, exchange and trace maps with $\\nu^*$ of the etale ones, and the counit $\\varepsilon$ with the transported counit. Hence the transported restricted adjunction has counit $\\varepsilon$, and its unit is characterized by $\\varepsilon_{FM}F(b)=1_{FM}$. The computation of steps 2--5 on the pro-etale sites, with $\\delta$ and the integrals of [det-sp-p1-trace], shows that $\\eta$ satisfies this. So $\\eta$ is that unit, and the restricted Hom bijections, unit, counit and base-change equations hold. This bounded comparison argument applies to every field in the standing characteristic-$p$ setting, without claiming unbounded classical comparison over an arbitrary field.",
+   "uses": [
+    "sk-def-sfb-constructible",
+    "det-pe-finite-tor-comparison-noetherian",
+    "sk-thm-pe-direct-image-comparison",
+    "lem-sfb-ringed-derived-monoidal-comparisons",
+    "det-sp-p1-trace",
+    "lem-sfb-ringed-projection-tensor-composition",
+    "lem-weil-pbc-ringed-exchange-tensor-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/det-sp-p1-adjunction.proof.md",
+    "place": "Restriction to Dctf, fullness"
+   }
   }
  ],
  "proof_deps": [
+  "def-amb-p1-trace",
+  "def-weil-proper-morphism",
+  "det-ctf-finite-proper-localizing",
+  "det-pe-finite-tor-comparison-noetherian",
   "det-sp-p1-trace",
-  "thm-amb-p1-adjunction"
+  "lem-amb-p1-diagonal-integrals",
+  "lem-amb-proper-coproducts-projection",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-asd-finite-etale-twist-line",
+  "lem-asd-ordinary-finite-p1-adjunction",
+  "lem-asd-ordinary-supported-kummer",
+  "lem-kun-proper-base-change-torsion-ring",
+  "lem-sfb-finite-classical-unbounded-comparison",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-sfb-ringed-projection-tensor-composition",
+  "lem-sfb-unbounded-direct-image-comparison",
+  "lem-sfb-unbounded-site-comparison",
+  "lem-sp-ringed-site-tor-flat-model",
+  "lem-weil-pbc-adjunction-of-natural-bijection",
+  "lem-weil-pbc-closed-immersion-proper",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-mate-pasting",
+  "lem-weil-pbc-pullback-preserves-bounded-constructible",
+  "lem-weil-pbc-ringed-exchange-tensor-coherence",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-ringed-topos-flat-module-pullback",
+  "lemma-nagata-projective-space-base-change-proper",
+  "sk-def-sfb-constructible",
+  "sk-lem-geo-cartier",
+  "sk-thm-pe-direct-image-comparison"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/det-sp-p1-adjunction.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/det-sp-p1-adjunction.proof.md",
+  "place": "First identity (G8), Second identity (G9), Adjunction and base change, Restriction to Dctf; expanded using existing canonical coherence statements"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Projective line derived pushforward is left adjoint to pullback twisted by one and shifted by two; diagonal cycle class unit and trace counit",
+   "results": "{\"t\": \"2026-10-18T14:37:23Z\", \"tool\": \"leanfinder\", \"query\": \"Projective line derived pushforward is left adjoint to pullback twisted by one and shifted by two; diagonal cycle class unit and trace counit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.PullbackShift.adjunction\", \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit\", \"SheafOfModules.pushforwardPushforwardAdj\", \"SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app\"], \"digest\": \"4b51cc808f869c99\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: hits do not state the diagonal/trace projective-line adjunction"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.Functor",
+   "results": "{\"t\": \"2026-10-18T14:38:49Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Adjunction, CategoryTheory.Functor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction\", \"CategoryTheory.Adjunction.isLeftAdjoint\", \"CategoryTheory.Adjunction.isRightAdjoint\", \"CategoryTheory.Adjunction.mk'\", \"CategoryTheory.Adjunction.mkOfHomEquiv\", \"CategoryTheory.Adjunction.mkOfUnitCounit\", \"CategoryTheory.Adjunction.ofIsLeftAdjoint\", \"CategoryTheory.Adjunction.ofIsRightAdjoint\"], \"digest\": \"d2183a4d275d6f7e\"}",
+   "date": "2026-10-18",
+   "verdict": "no match for this geometric item; mkOfUnitCounit supplies only the formal adjunction criterion"
+  },
+  {
+   "tool": "grep",
+   "query": "projective.line|p1Adjunction",
+   "results": "{\"t\": \"2026-10-18T14:38:49Z\", \"tool\": \"grep\", \"query\": \"projective.line|p1Adjunction\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point.lean\"], \"digest\": \"5c4e0f95fe3749d5\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: hits do not state the diagonal/trace projective-line adjunction",
+   "subdirectory": "AlgebraicGeometry"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Projective line trace and diagonal cycle class define derived pushforward twisted pullback adjunction",
+   "results": "{\"t\": \"2026-10-18T14:38:50Z\", \"tool\": \"leansearch\", \"query\": \"Projective line trace and diagonal cycle class define derived pushforward twisted pullback adjunction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TopCat.Presheaf.pushforwardPullbackAdjunction\", \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"CategoryTheory.ExponentiableMorphism.pullbackPushforwardAdj\", \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward\", \"SheafOfModules.conjugateEquiv_pullbackId_hom\", \"CategoryTheory.ExponentiableMorphism.pushforwardUncurry\", \"AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackId_hom\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj\"], \"digest\": \"2de87843b00939ed\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: hits do not state the diagonal/trace projective-line adjunction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The class of the diagonal and integration along the two projections give the triangle identities for Poincare duality of the projective line",
+   "results": "{\"t\": \"2026-10-18T14:43:06Z\", \"tool\": \"leanfinder\", \"query\": \"The class of the diagonal and integration along the two projections give the triangle identities for Poincare duality of the projective line\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Rep.diagonal_succ_projective\", \"Projectivization.cross\", \"Configuration.ofField.instProjectivePlaneProjectivizationForallFinOfNatNatOfDecidableEq\", \"Projectivization.map_id\", \"Configuration.ofField.instMembershipProjectivizationForallFinOfNatNat\", \"Projectivization.card\", \"Projectivization.nonZeroEquivProjectivizationProdUnits\", \"AlgebraicGeometry.Proj.pullbackAwayιIso_inv_fst\"], \"digest\": \"bc84b273af35aefd\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: hits do not state the diagonal/trace projective-line adjunction"
+  },
+  {
+   "tool": "grep",
+   "query": "CoreUnitCounit|mkOfUnitCounit",
+   "results": "{\"t\": \"2026-10-18T14:43:06Z\", \"tool\": \"grep\", \"query\": \"CoreUnitCounit|mkOfUnitCounit\", \"sub\": \"CategoryTheory/Adjunction\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Adjunction/Basic.lean\", \"Mathlib/CategoryTheory/Adjunction/Basic.lean\", \"Mathlib/CategoryTheory/Adjunction/Basic.lean\", \"Mathlib/CategoryTheory/Adjunction/Basic.lean\", \"Mathlib/CategoryTheory/Adjunction/Basic.lean\"], \"digest\": \"ab6eb20a4f0afa29\"}",
+   "date": "2026-10-18",
+   "verdict": "no match for this geometric item; mkOfUnitCounit supplies only the formal adjunction criterion",
+   "subdirectory": "CategoryTheory/Adjunction"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses",
@@ -82,5 +301,169 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "det-sp-p1-adjunction",
+  "worker": "stage1",
+  "summary": "Expanded the canonical exchange/projection calculations in the two triangle identities; gave explicit inverse Hom maps; added actual unbounded classical-comparison and finite-Tor preservation dependencies. Clarified the finite-type standing range for the pro-etale clauses while retaining the etale identities over every Noetherian base. No new nodes.",
+  "blueprint": "The item proof First identity is steps 1--5 (unit G6, diagonal G5, canonical rewriting G8); Second identity G9 is step 6; the adjunction criterion and base-change paragraph are steps 7--8; classical transport and the complement restriction are steps 9--11. The unit sk-prop-geo-p1-adjunction route through diagonal integrals is unchanged.",
+  "tool_uses": [
+   {
+    "node": "def-amb-p1-trace",
+    "why": "Step(s) 2: generic canonical exchange/projection, site comparison, flat-model, or geometric tool; supplies the corresponding formal G8/G9/transport/complement operation without replacing the diagonal-integral route"
+   },
+   {
+    "node": "def-weil-proper-morphism",
+    "why": "Step(s) 1: generic canonical exchange/projection, site comparison, flat-model, or geometric tool; supplies the corresponding formal G8/G9/transport/complement operation without replacing the diagonal-integral route"
+   },
+   {
+    "node": "det-ctf-finite-proper-localizing",
+    "why": "Step(s) 10: finite proper-image preservation for the final complement; the unit does not itself prove a general preservation theorem"
+   },
+   {
+    "node": "det-pe-finite-tor-comparison-noetherian",
+    "why": "Step(s) 10,11: generic canonical exchange/projection, site comparison, flat-model, or geometric tool; supplies the corresponding formal G8/G9/transport/complement operation without replacing the diagonal-integral route"
+   },
+   {
+    "node": "lem-amb-p1-diagonal-integrals",
+    "why": "Step(s) 2,3,5,6: ordinary etale diagonal integrals, exactly the G5 input of the unit route"
+   },
+   {
+    "node": "lem-amb-proper-coproducts-projection",
+    "why": "Step(s) 1: generic canonical exchange/projection, site comparison, flat-model, or geometric tool; supplies the corresponding formal G8/G9/transport/complement operation without replacing the diagonal-integral route"
+   },
+   {
+    "node": "lem-asd-etale-finite-twist-pullback",
+    "why": "Step(s) 4,6,8: generic canonical exchange/projection, site comparison, flat-model, or geometric tool; supplies the corresponding formal G8/G9/transport/complement operation without replacing the diagonal-integral route"
+   },
+   {
+    "node": "lem-asd-finite-etale-twist-line",
+    "why": "Step(s) 10: generic canonical exchange/projection, site comparison, flat-model, or geometric tool; supplies the corresponding formal G8/G9/transport/complement operation without replacing the diagonal-integral route"
+   },
+   {
+    "node": "lem-asd-ordinary-finite-p1-adjunction",
+    "why": "Step(s) 4,6,8: only the decomposition/trace and actual counit base-change normalization; its existence-of-adjunction clause is not used to assert the diagonal-unit identity"
+   },
+   {
+    "node": "lem-asd-ordinary-supported-kummer",
+    "why": "Step(s) 8: generic canonical exchange/projection, site comparison, flat-model, or geometric tool; supplies the corresponding formal G8/G9/transport/complement operation without replacing the diagonal-integral route"
+   },
+   {
+    "node": "lem-kun-proper-base-change-torsion-ring",
+    "why": "Step(s) 1: generic canonical exchange/projection, site comparison, flat-model, or geometric tool; supplies the corresponding formal G8/G9/transport/complement operation without replacing the diagonal-integral route"
+   },
+   {
+    "node": "lem-sfb-finite-classical-unbounded-comparison",
+    "why": "Step(s) 9: generic canonical exchange/projection, site comparison, flat-model, or geometric tool; supplies the corresponding formal G8/G9/transport/complement operation without replacing the diagonal-integral route"
+   },
+   {
+    "node": "lem-sfb-ringed-derived-monoidal-comparisons",
+    "why": "Step(s) 2,4,6,9,11: generic canonical exchange/projection, site comparison, flat-model, or geometric tool; supplies the corresponding formal G8/G9/transport/complement operation without replacing the diagonal-integral route"
+   },
+   {
+    "node": "lem-sfb-ringed-projection-tensor-composition",
+    "why": "Step(s) 2,3,4,6: generic canonical exchange/projection, site comparison, flat-model, or geometric tool; supplies the corresponding formal G8/G9/transport/complement operation without replacing the diagonal-integral route"
+   },
+   {
+    "node": "lem-sfb-unbounded-direct-image-comparison",
+    "why": "Step(s) 9: generic canonical exchange/projection, site comparison, flat-model, or geometric tool; supplies the corresponding formal G8/G9/transport/complement operation without replacing the diagonal-integral route"
+   },
+   {
+    "node": "lem-sfb-unbounded-site-comparison",
+    "why": "Step(s) 9: generic canonical exchange/projection, site comparison, flat-model, or geometric tool; supplies the corresponding formal G8/G9/transport/complement operation without replacing the diagonal-integral route"
+   },
+   {
+    "node": "lem-sp-ringed-site-tor-flat-model",
+    "why": "Step(s) 10: generic canonical exchange/projection, site comparison, flat-model, or geometric tool; supplies the corresponding formal G8/G9/transport/complement operation without replacing the diagonal-integral route"
+   },
+   {
+    "node": "lem-weil-pbc-adjunction-of-natural-bijection",
+    "why": "Step(s) 7: generic canonical exchange/projection, site comparison, flat-model, or geometric tool; supplies the corresponding formal G8/G9/transport/complement operation without replacing the diagonal-integral route"
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-proper",
+    "why": "Step(s) 1: generic canonical exchange/projection, site comparison, flat-model, or geometric tool; supplies the corresponding formal G8/G9/transport/complement operation without replacing the diagonal-integral route"
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Step(s) 1: generic canonical exchange/projection, site comparison, flat-model, or geometric tool; supplies the corresponding formal G8/G9/transport/complement operation without replacing the diagonal-integral route"
+   },
+   {
+    "node": "lem-weil-pbc-mate-pasting",
+    "why": "Step(s) 4,8,9: generic canonical exchange/projection, site comparison, flat-model, or geometric tool; supplies the corresponding formal G8/G9/transport/complement operation without replacing the diagonal-integral route"
+   },
+   {
+    "node": "lem-weil-pbc-pullback-preserves-bounded-constructible",
+    "why": "Step(s) 10: generic canonical exchange/projection, site comparison, flat-model, or geometric tool; supplies the corresponding formal G8/G9/transport/complement operation without replacing the diagonal-integral route"
+   },
+   {
+    "node": "lem-weil-pbc-ringed-exchange-tensor-coherence",
+    "why": "Step(s) 4,6,8,9: generic canonical exchange/projection, site comparison, flat-model, or geometric tool; supplies the corresponding formal G8/G9/transport/complement operation without replacing the diagonal-integral route"
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Step(s) 10: generic canonical exchange/projection, site comparison, flat-model, or geometric tool; supplies the corresponding formal G8/G9/transport/complement operation without replacing the diagonal-integral route"
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topos-flat-module-pullback",
+    "why": "Step(s) 10: generic canonical exchange/projection, site comparison, flat-model, or geometric tool; supplies the corresponding formal G8/G9/transport/complement operation without replacing the diagonal-integral route"
+   },
+   {
+    "node": "lemma-nagata-projective-space-base-change-proper",
+    "why": "Step(s) 1: generic canonical exchange/projection, site comparison, flat-model, or geometric tool; supplies the corresponding formal G8/G9/transport/complement operation without replacing the diagonal-integral route"
+   },
+   {
+    "node": "sk-def-sfb-constructible",
+    "why": "Step(s) 11: generic canonical exchange/projection, site comparison, flat-model, or geometric tool; supplies the corresponding formal G8/G9/transport/complement operation without replacing the diagonal-integral route"
+   },
+   {
+    "node": "sk-lem-geo-cartier",
+    "why": "Step(s) 9,11: generic canonical exchange/projection, site comparison, flat-model, or geometric tool; supplies the corresponding formal G8/G9/transport/complement operation without replacing the diagonal-integral route"
+   },
+   {
+    "node": "sk-thm-pe-direct-image-comparison",
+    "why": "Step(s) 9,11: generic canonical exchange/projection, site comparison, flat-model, or geometric tool; supplies the corresponding formal G8/G9/transport/complement operation without replacing the diagonal-integral route"
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-amb-p1-trace",
+  "def-weil-proper-morphism",
+  "det-ctf-finite-proper-localizing",
+  "det-pe-finite-tor-comparison-noetherian",
+  "lem-amb-p1-diagonal-integrals",
+  "lem-amb-proper-coproducts-projection",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-asd-finite-etale-twist-line",
+  "lem-asd-ordinary-finite-p1-adjunction",
+  "lem-asd-ordinary-supported-kummer",
+  "lem-kun-proper-base-change-torsion-ring",
+  "lem-sfb-finite-classical-unbounded-comparison",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-sfb-ringed-projection-tensor-composition",
+  "lem-sfb-unbounded-direct-image-comparison",
+  "lem-sfb-unbounded-site-comparison",
+  "lem-sp-ringed-site-tor-flat-model",
+  "lem-weil-pbc-adjunction-of-natural-bijection",
+  "lem-weil-pbc-closed-immersion-proper",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-mate-pasting",
+  "lem-weil-pbc-pullback-preserves-bounded-constructible",
+  "lem-weil-pbc-ringed-exchange-tensor-coherence",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-ringed-topos-flat-module-pullback",
+  "lemma-nagata-projective-space-base-change-proper",
+  "sk-def-sfb-constructible",
+  "sk-lem-geo-cartier",
+  "sk-thm-pe-direct-image-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q34-8bec9533f",
+  "group": "Q34",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q34-8bec9533f (reviewer sub-agent of L); spot-checked: I read the full delivery: the item, its 11 steps, the statements of all 29 proof dependencies, the main-20261015 blueprint item and proof, unit sk-prop-geo-p1-adjunction (G4/G6/G7 and the Complement), blueprint sk-prop-pe-unbounded-classical (stated over a finite or algebraically closed k) and sk-def-sfb-dc-setting. There are no new nodes. Statement: the étale triangle identities are kept over any Noetherian S with ell invertible. The classical pro-étale clause is limited to finite type over a finite or algebraically closed k, which is exactly the hypothesis of sk-prop-pe-unbounded-classical and of the DAG comparison nodes, so this is not a weakening. The Dctf clause covers the whole standing characteristic-p setting. The only citer, lem-per-ordinary-smooth-orientation, uses the étale clause and still holds. Steps 1-8 check out: the properness and Noetherian hypotheses hold; s_a=1 comes from lem-amb-p1-diagonal-integrals; step 3 is the section specialisation of lem-sfb-ringed-projection-tensor-composition; in step 4 B_M uses the square with f'=p2, while the trace base change uses the swapped square, so q^*Tr_q becomes Tr_{p1}; step 7 uses the natural-bijection criterion; in step 8 the chart equations x-y and 1-xy are non-zero-divisors over any ring. Step 10 also checks out: det-ctf (1), flat model, flat pullback, the rank-one twist, the shift [2] and det-pe-finite-tor all apply. Fault C4 in steps 9 and 11: they say the pro-étale Cartier class c_Delta equals the pullback of the étale supported Kummer class and cite sk-lem-geo-cartier. Its statement fixes only c_D composed with u equal to c_1, which does not determine a supported class. No node identifies c_D with that étale class; lem-sp-cartier-reduction-site-comparison links c_D to the pole-extension boundary instead, and det-sp-p1-trace deliberately compares only the integrals. Repair (fixes/dag/nodes/sec-six-functors-basics/det-sp-p1-adjunction.json): the comparison maps send the étale decomposition to b_q, so Tr = nu^*t composed with C_q^{-1} and epsilon is the transported counit. The transported adjunction therefore has counit epsilon, and epsilon_{FM}F(b)=1 characterises its unit. Steps 2-5, rerun on the pro-étale sites with det-sp-p1-trace (2),(3), show this for the pro-étale eta, and the second identity follows. Uses added to steps 9 and 11: det-sp-p1-trace (same unit, no cycle), lem-sfb-ringed-projection-tensor-composition, and lem-weil-pbc-adjunction-of-natural-bijection in step 9; proof_deps recomputed. Batch 5: lem-amb-p1-diagonal-integrals, lem-asd-ordinary-supported-kummer and det-ctf-finite-proper-localizing end in lem-pod-etale-stalk-tensor-scalar (étale stalks of tensor products and scalar extension); lem-kun-proper-base-change-torsion-ring ends in lem-pod-lisse-module-sheaves-as-module-objects (lisse sheaves as FLC module objects); sk-lem-geo-cartier ends in the definition def-pod-ring-scalar-extension. All three end nodes are generic and lie outside both assumed statements, so all five citations are accepted. The declared tool_uses are generic coherence, comparison and properness tools, and I accept them.; 1 file(s) fixed by the reviewer"
  }
 }
