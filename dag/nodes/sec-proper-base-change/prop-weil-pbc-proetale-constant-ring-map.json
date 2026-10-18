@@ -22,90 +22,63 @@
  ],
  "proof": [
   {
-   "text": "The empty family covers the empty object of any $T_{\\Proet}$: the arrow condition in [def-weil-pbc-proetale-site] is vacuous and zero affine opens cover its only affine open, which is empty. The sheaf gluing axiom then says that every ring sheaf $G$ has exactly one section on that object: the empty matching family has a unique amalgamation. Consequently $G(\\varnothing)$ is the zero ring. If $T=\\varnothing$, every object mapping to $T$ is empty, so every ring sheaf on $T_{\\Proet}$ is uniquely isomorphic to the zero ring sheaf. In particular both the sheafification defining $\\Lambda_{T,\\Proet}$ [def-weil-pbc-proetale-modules] and the sheafification defining $u^{-1}\\Lambda_{V,\\Proet}$ [def-weil-proetale-inverse-image] are zero ring sheaves when $U=\\varnothing$; any presheaf value before sheafification does not change this conclusion [def-weil-pbc-sheafification]. For any $G$ on the empty site, both $\\operatorname{Hom}_{\\mathrm{ShRing}}(\\Lambda_{T,\\Proet},G)$ and $\\operatorname{Hom}_{\\mathrm{Ring}}(\\Lambda,G(T))$ are singletons. There is a unique unital ring map from any ring to the zero ring. Constant sections need not be distinct: here $\\eta_T(0)=\\eta_T(1)=0=1$. Thus the ring-operation and unit-preservation conditions below hold also on empty objects.",
+   "text": "Naturality of the fibre-product function map follows from pullback.lift_fst on underlying scheme points, passage to connected components and naturality of toSheafify. This proves finiteCoefficientDirectImageApp_naturality for the recorded base-change functor.",
    "uses": [
-    "def-weil-pbc-proetale-site",
     "def-weil-pbc-proetale-modules",
     "def-weil-proetale-inverse-image",
     "def-weil-pbc-sheafification"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Remark Tag 04B3 (remark-sheaf-condition-empty-covering); proetale.tex Tag 09A5 (section-morphism); direct application of the sheaf gluing axiom"
-   }
+   "elementary": true
   },
   {
-   "text": "Put $P_T(W)=\\operatorname{Cont}(\\pi_0(|W|),\\Lambda)$ as in [def-weil-pbc-proetale-modules]. Pullback along the quotient $|W|\\to\\pi_0(|W|)$ identifies its elements with continuous functions $|W|\\to\\Lambda$: a continuous map to a discrete space is constant on each connected component, and the quotient topology is exactly the condition for the descended function to be continuous. For each such function $s$, its fibres $W_a=s^{-1}(a)$ are clopen subsets, not connected components. Regard them as open subschemes. By [lem-weil-proetale-weakly-etale-localization], open immersions are weakly etale and composition with $W\\to T$ gives objects of $T_{\\Proet}$ (use that lemma with auxiliary commutative ring $\\mathbf Z$; no coefficient claim of that lemma is needed). They cover $W$ in the topology of [def-weil-pbc-proetale-site]: any affine open is covered by affine opens inside the fibres, and quasi-compactness gives a finite subcover. On $W_a$, $s$ is the constant $a$.",
+   "text": "The already stated finiteCoefficientScalarMap_locallyBijective of def-weil-pbc-proetale-modules supplies the open-fibre argument. The constant-presheaf sheafification unit is locally bijective. Its composite with finiteCoefficientConstantComparison is exactly finiteCoefficientScalarMap by the sheafification adjunction. Cancel local bijectivity of the unit, then apply Sheaf.isLocallyBijective_iff_isIso. Uniqueness among constant-preserving comparisons is sheafify_hom_ext.",
    "uses": [
     "def-weil-pbc-proetale-modules",
-    "lem-weil-proetale-weakly-etale-localization",
-    "def-weil-pbc-proetale-site"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Example Tag 0H7J (example-constant-sheaf), with the ring-valued sheafification universal property, and proetale.tex Section Tag 09A5 (Functoriality of the pro-etale site); correction of the blueprint proof"
-   }
-  },
-  {
-   "text": "For a sheaf of rings $G$ on $T_{\\Proet}$, restriction to constant functions gives a bijection $\\operatorname{Hom}_{\\mathrm{PShRing}}(P_T,G)\\cong\\operatorname{Hom}_{\\mathrm{Ring}}(\\Lambda,G(T))$. Indeed a ring map $\\alpha:\\Lambda\\to G(T)$ sends $s\\in P_T(W)$ to the unique glued section whose restriction to $W_a$ is $\\alpha(a)|_{W_a}$. Distinct fibres have empty intersection; a sheaf has a unique section on the empty object, so these sections agree on overlaps. On $W_a\\cap W_b$ for the simultaneous fibres of $s,t$, the glued values are $\\alpha(a),\\alpha(b)$, so the values of $s+t$ and $st$ are $\\alpha(a+b)$ and $\\alpha(ab)$; uniqueness of gluing proves preservation of both operations. The constant functions $0,1$ map to $0,1$; these may coincide, as Step 1 proves on the empty object. No injectivity of the map of constants is asserted. For a morphism $W'\\to W$, the fibres of the restricted function are the inverse images of $W_a$, so restriction and gluing give the same section. Conversely any natural transformation is determined by its values on constants at $T$, since $T$ is terminal and the fibre family covers. By [def-weil-pbc-sheafification] and $P_T^\\#=\\Lambda_{T,\\Proet}$ of [def-weil-pbc-proetale-modules], this gives natural bijections $\\operatorname{Hom}_{\\mathrm{ShRing}}(\\Lambda_{T,\\Proet},G)\\cong\\operatorname{Hom}_{\\mathrm{Ring}}(\\Lambda,G(T))$, with $h$ corresponding to $a\\mapsto h_T(\\eta_T(a))$.",
-   "uses": [
     "def-weil-pbc-sheafification",
-    "def-weil-pbc-proetale-modules"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Example Tag 0H7J (example-constant-sheaf), with the ring-valued sheafification universal property, and proetale.tex Section Tag 09A5 (Functoriality of the pro-etale site); correction of the blueprint proof"
-   }
-  },
-  {
-   "text": "Compare this with the constant sheaf of [def-weil-pbc-constant-sheaf]: let $C_T$ be the sheafification of the constant ring presheaf. The constant functions give $q:C_T\\to P_T^\\#$. Applying the gluing construction to the canonical map $\\Lambda\\to C_T(T)$ gives $r:P_T^\\#\\to C_T$. The composite $rq:C_T\\to C_T$ agrees with $\\mathrm{id}_{C_T}$ after precomposition with the canonical map from the constant presheaf, and hence equals $\\mathrm{id}_{C_T}$ by the sheafification universal property; $qr$ is the identity on every constant function and therefore on each $s$ by its fibre cover, and hence on $P_T^\\#$ by the sheafification universal property. These identifications preserve constants. This is the constant-ring-sheaf characterization of [def-weil-pbc-constant-sheaf], proved here directly from its definition; it is not the module unit-Hom characterization.",
-   "uses": [
-    "def-weil-pbc-sheafification",
-    "def-weil-pbc-proetale-modules",
     "def-weil-pbc-constant-sheaf"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Example Tag 0H7J (example-constant-sheaf), with the ring-valued sheafification universal property, and proetale.tex Section Tag 09A5 (Functoriality of the pro-etale site); correction of the blueprint proof"
-   }
+   "elementary": false
   },
   {
-   "text": "For every ring sheaf $G$ on $U_{\\Proet}$, use the ring-sheaf adjunction and direct-image evaluation of [def-weil-proetale-inverse-image], and Step 3 for $U,V$, to obtain natural bijections $\\operatorname{Hom}_{\\mathrm{ShRing}(U)}(u^{-1}\\Lambda_{V,\\Proet},G)\\cong\\operatorname{Hom}_{\\mathrm{ShRing}(V)}(\\Lambda_{V,\\Proet},u_*G)\\cong\\operatorname{Hom}_{\\mathrm{Ring}}(\\Lambda,(u_*G)(V))=\\operatorname{Hom}_{\\mathrm{Ring}}(\\Lambda,G(U))\\cong\\operatorname{Hom}_{\\mathrm{ShRing}(U)}(\\Lambda_{U,\\Proet},G)$. Here $V\\times_VU\\cong U$ is the terminal base-change identification. The map $\\rho$ in the statement exists by Step 3 applied to $u_*\\Lambda_{U,\\Proet}$ and $a\\mapsto\\eta_U(a)$. For $h:\\Lambda_{U,\\Proet}\\to G$, the adjunct of $h\\circ c_u$ is $u_*h\\circ\\rho$; at $V$ this sends $a$ to $h_U(\\eta_U(a))$. Thus under the displayed bijections precomposition with $c_u$ is the identity of $\\operatorname{Hom}_{\\mathrm{Ring}}(\\Lambda,G(U))$, so it is bijective. Both compared Hom functors have the same ring-sheaf category as their target category. For commutative $\\Lambda$, Step 4 identifies both coefficient sheaves with the constant-presheaf sheafifications, preserving constants. Under these identifications, $\\rho$ agrees on every constant section with the presheaf map specifying $c^u_\\Lambda$ in [def-weil-proetale-inverse-image]. The sheafification universal property makes the two maps to the direct image equal, and the adjunction makes their adjuncts equal. This proves the stated agreement with $c^u_\\Lambda$.",
+   "text": "For arbitrary ring coefficients, prove the comparison square between finiteCoefficientInverseImageMap and proEtaleConstantInverseImageMap. Naturality of the inverse-image adjunction reduces it to a direct-image equality. Precompose with the constant-presheaf sheafification unit and use the defining equations of both sheafification extensions. Both maps then send each scalar to the same constant function on the fibre product, so the equality is pointwise reflexivity. The stated commutative comparison is a specialization of this ring-valued square.",
    "uses": [
+    "def-weil-pbc-proetale-modules",
+    "def-weil-proetale-inverse-image",
+    "def-weil-pbc-sheafification",
+    "def-weil-pbc-constant-sheaf"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Base change preserves the terminal pro-etale object. Compose the constant-sheaf/global-sections adjunction on V with the inverse-image/direct-image adjunction and the sectionwise direct-image evaluation isomorphism. This composite and the constant-sheaf/global-sections adjunction on U have the same right adjoint. Uniqueness of left adjoints gives an isomorphism; evaluating the Hom equivalences proves that its component is exactly proEtaleConstantInverseImageMap. The comparison square and the invertible finiteCoefficientConstantComparison maps imply that finiteCoefficientInverseImageMap is invertible, by cancellation of an isomorphism. This argument works in RingCat without commutativity.",
+   "uses": [
+    "def-weil-pbc-proetale-site",
+    "def-weil-proetale-inverse-image",
+    "def-weil-pbc-constant-sheaf"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "When U is empty, every pro-etale object W over U has empty underlying scheme. The empty sieve covers W (ProEt.bot_mem_topology), so a ring sheaf has terminal sections there (isTerminalSectionsOfIsEmpty). The forgetful functor from rings to types preserves this terminal object, giving a singleton section type. Apply this to both coefficient sheaves, then use sectionwise extensionality to prove uniqueness of their morphism.",
+   "uses": [
+    "def-weil-pbc-proetale-site",
+    "def-weil-pbc-proetale-modules",
     "def-weil-proetale-inverse-image"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Example Tag 0H7J (example-constant-sheaf), with the ring-valued sheafification universal property, and proetale.tex Section Tag 09A5 (Functoriality of the pro-etale site); correction of the blueprint proof"
-   }
-  },
-  {
-   "text": "Write $A=u^{-1}\\Lambda_{V,\\Proet}$, $B=\\Lambda_{U,\\Proet}$ and $c=c_u:A\\to B$ in the single category $\\mathrm{ShRing}(U_{\\Proet})$. Surjectivity of $(-)\\circ c:\\operatorname{Hom}(B,A)\\to\\operatorname{Hom}(A,A)$ supplies $d:B\\to A$ with $d\\circ c=\\mathrm{id}_A$. Injectivity of $(-)\\circ c:\\operatorname{Hom}(B,B)\\to\\operatorname{Hom}(A,B)$ applied to $(c\\circ d)\\circ c=c=\\mathrm{id}_B\\circ c$ gives $c\\circ d=\\mathrm{id}_B$. Hence $c$ is invertible, without any identification or change of module coefficient categories.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Example Tag 0H7J (example-constant-sheaf), with the ring-valued sheafification universal property, and proetale.tex Section Tag 09A5 (Functoriality of the pro-etale site); correction of the blueprint proof"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-proetale-site",
   "def-weil-pbc-proetale-modules",
   "def-weil-proetale-inverse-image",
   "def-weil-pbc-sheafification",
-  "lem-weil-proetale-weakly-etale-localization",
-  "def-weil-pbc-constant-sheaf"
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-proetale-site"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-proetale-constant-ring-map.md",
-  "place": "Proof corrected using open fibres and ring-sheaf adjunction, including explicit empty-site sheafification; Stacks Tags 04B3, 0H7J and 09A5"
+  "place": "Blueprint order 1235, Stacks Tags 04B3, 0H7J and 09A5; G1 Lean proof using the stated locally bijective scalar map and uniqueness of left adjoints. The generic constant-ring adjunction calculation follows the existing private proEtaleConstantComparison_isIso proof in Sheaf.AlgebraicGeometry.ProfiniteCoefficientInverseImage, generalized from CommRingCat to RingCat."
  },
  "mathlib_searches": [
   {
@@ -331,5 +304,15 @@
   "date": "2026-10-15",
   "existing": false,
   "note": "Concrete function-pullback construction of rho, extended by sheafification, and its ring-sheaf adjunct c_f. Supporting statements record the unique constant-preserving coefficient identification, commutative structure-map normalization and empty-source zero-sheaf case. No dependency repairs or statement correction."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261018T144407-L-3501008",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
