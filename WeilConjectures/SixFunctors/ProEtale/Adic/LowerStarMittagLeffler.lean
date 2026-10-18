@@ -24,7 +24,9 @@ Then for every `i` the tower `(Rⁱf_* ν^* Gₙ)ₙ` of sheaves on `Y_proét` i
 (`AlgebraicGeometry.ProEtale.mittagLeffler_homology_rightDerivedLowerStar_of_smooth_of_isProper`).
 This is the hypothesis of
 `AlgebraicGeometry.ProEtale.isIso_lift_homology_rightDerivedLowerStar_of_mittagLeffler`, which then
-gives `Rʲf_* (lim ν^* Gₙ) ≅ lim Rʲf_* ν^* Gₙ` (the `R¹lim` term of the Milnor sequence vanishes).
+gives `Rʲf_* (lim ν^* Gₙ) ≅ lim Rʲf_* ν^* Gₙ` (the `R¹lim` term of the Milnor sequence vanishes)
+for towers with epimorphic transitions
+(`AlgebraicGeometry.ProEtale.isIso_lift_homology_rightDerivedLowerStar_of_smooth_of_isProper`).
 
 The proof: `Rⁱf_* ν^* Gₙ ≅ ν^* Rⁱf_* Gₙ`
 (`AlgebraicGeometry.ProEtale.homologyRightDerivedLowerStarSingleComparisonUpperStarIso`), and
@@ -174,7 +176,8 @@ situation of
 `AlgebraicGeometry.ProEtale.mittagLeffler_homology_rightDerivedLowerStar_of_smooth_of_isProper`,
 if moreover the transition maps of `G` are epimorphisms, then for `i + 1 = j` the map
 `Rʲf_* (lim ν^* Gₙ) ⟶ lim Rʲf_* ν^* Gₙ` induced by the projections is an isomorphism: the
-Milnor sequence (`AlgebraicGeometry.ProEtale.isIso_lift_homology_rightDerivedLowerStar_of_mittagLeffler`)
+Milnor sequence
+(`AlgebraicGeometry.ProEtale.isIso_lift_homology_rightDerivedLowerStar_of_mittagLeffler`)
 applies, the tower `(Rⁱf_* ν^* Gₙ)ₙ` being Mittag-Leffler. -/
 theorem isIso_lift_homology_rightDerivedLowerStar_of_smooth_of_isProper
     {K : Type u} [Field K] {X Y : Scheme.{u}} (aY : Y ⟶ Spec (.of K)) [LocallyOfFiniteType aY]
@@ -197,7 +200,10 @@ theorem isIso_lift_homology_rightDerivedLowerStar_of_smooth_of_isProper
         ((HomologicalComplex.single _ (ComplexShape.up ℤ) 0).mapCone c))))) := by
   let S := HomologicalComplex.single (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ))
     (ComplexShape.up ℤ) 0
-  have (n : ℕ) := hG n
+  have : (ν^*(X)[ModuleCat.{u + 1} Λ]).IsLeftAdjoint := (comparisonAdjunction _ X).isLeftAdjoint
+  have (n : ℕ) : Epi ((G ⋙ ν^*(X)[ModuleCat.{u + 1} Λ]).map (homOfLE n.le_succ).op) :=
+    have := hG n
+    (ν^*(X)[ModuleCat.{u + 1} Λ]).map_epi (G.map (homOfLE n.le_succ).op)
   exact isIso_lift_homology_rightDerivedLowerStar_of_mittagLeffler f
     (T := (G ⋙ ν^*(X)[ModuleCat.{u + 1} Λ]) ⋙ S) (c := S.mapCone c)
     (fun n i ↦ epi_single_map_f _ 0 i) (isLimitOfPreserves S hc) i j hij
