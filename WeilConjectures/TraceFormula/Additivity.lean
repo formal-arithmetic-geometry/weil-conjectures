@@ -338,6 +338,8 @@ variable {Φ : X ⟶ X} {ΦU : U ⟶ U} {ΦZ : Z ⟶ Z} {j : U ⟶ X} {i : Z ⟶
 
 namespace WeilBoundedConstructible
 
+omit [IsClosedImmersion i.left] [IsFinite Φ.left] [IsUniversalHomeomorphism Φ.left]
+  [IsFinite ΦZ.left] [IsUniversalHomeomorphism ΦZ.left] in
 /-- The Frobenius structure of the restriction `K|_Z`. -/
 lemma weilUpperStar_obj_str_hom (hi : ΦZ ≫ i = i ≫ Φ) (K : WeilBoundedConstructible ℓ Φ) :
     ((weilUpperStar ℓ ΦZ Φ i hi).obj K).str.hom =
@@ -346,6 +348,7 @@ lemma weilUpperStar_obj_str_hom (hi : ΦZ ≫ i = i ≫ Φ) (K : WeilBoundedCons
   rw [weilUpperStar_obj_str ℓ ΦZ Φ i hi K]
   rfl
 
+omit [IsClosedImmersion i.left] [IsFinite Φ.left] [IsUniversalHomeomorphism Φ.left] in
 /-- The compactly supported Frobenius of the restriction `K|_Z` as `RΓ_c(φ|_Z) ∘ Φ_Z^♯`. -/
 lemma compactFrobenius_weilUpperStar (hi : ΦZ ≫ i = i ≫ Φ) (K : WeilBoundedConstructible ℓ Φ) :
     ((weilUpperStar ℓ ΦZ Φ i hi).obj K).compactFrobenius =
@@ -358,8 +361,9 @@ lemma compactFrobenius_weilUpperStar (hi : ΦZ ≫ i = i ≫ Φ) (K : WeilBounde
     weilUpperStar_obj_str_hom]
   rfl
 
--- the coherence of the pullbacks along `Φ_Z ≫ i = i ≫ Φ` is a long elaboration
 set_option maxHeartbeats 1000000 in
+-- the coherence of the pullbacks along `Φ_Z ≫ i = i ≫ Φ` is a long elaboration
+omit [IsUniversalHomeomorphism ΦZ.left] in
 /-- **The compactly supported Frobenius commutes with the pullback to a closed piece**: for a
 closed immersion `i` with `Φ_Z ≫ i = i ≫ Φ`, `i^♯ ∘ F_c(K) = F_c(K|_Z) ∘ i^♯`. Through
 `F_c = RΓ_c(φ) ∘ Φ^♯` this is the composition law of the pullbacks along
@@ -428,8 +432,9 @@ noncomputable def compactFrobeniusClosedPiece (hi : ΦZ ≫ i = i ≫ Φ)
     (boundedConstructibleLowerStarCompToPoint ℓ i).inv.app
     ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ i).obj K.carrier)
 
--- the closed-piece operator unfolds to a long composite
 set_option maxHeartbeats 1000000 in
+-- the closed-piece operator unfolds to a long composite
+omit [IsUniversalHomeomorphism ΦZ.left] in
 /-- The square of the closed piece: `E_Z ∘ RΓ_c(η) = RΓ_c(η) ∘ F_c(K)` for the unit
 `η : K ⟶ Ri_* Li^* K`. -/
 theorem compactFrobenius_comp_compactUnit (hi : ΦZ ≫ i = i ≫ Φ)
@@ -461,7 +466,8 @@ theorem compactFrobenius_comp_compactUnit (hi : ΦZ ≫ i = i ≫ Φ)
                 K.str.hom)) := by
     rw [← e]
     exact compactFrobenius_comp_compactPullback hi K
-  rw [compactFrobeniusClosedPiece, ← cancel_mono ((boundedConstructibleLowerStarCompToPoint ℓ i).hom.app
+  rw [compactFrobeniusClosedPiece,
+    ← cancel_mono ((boundedConstructibleLowerStarCompToPoint ℓ i).hom.app
     ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ i).obj K.carrier)),
     Category.assoc, h]
   simp only [Category.assoc, Iso.inv_hom_id_app, Category.comp_id]

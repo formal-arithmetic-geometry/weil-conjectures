@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.TraceFormula.Additivity
 public import WeilConjectures.TraceFormula.TraceClass
 public import WeilConjectures.TraceFormula.FixedPoint
 
@@ -153,7 +154,7 @@ theorem trace_compactFrobenius_eq_add
     trace K.compactFrobenius =
       trace ((weilUpperStar ℓ ΦU Φ j hj).obj K).compactFrobenius +
         trace ((weilUpperStar ℓ ΦZ Φ i hi).obj K).compactFrobenius :=
-  sorry
+  trace_compactFrobenius_eq_add_of_isCompl hcompl hj hi K
 
 omit [Fact ℓ.Prime] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] [LocallyOfFiniteType X.hom]
   [QuasiCompact X.hom] [IsSeparated X.hom] in
