@@ -7,12 +7,15 @@ module
 
 public import Sheaf.CategoryTheory.RingedToposMorphism
 public import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimit
+public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 import Sheaf.CategoryTheory.RingedTowerPushforwardLimitAcyclic
 import Sheaf.CategoryTheory.RingedToposDerivedPushforwardComposition
+import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import Sheaf.CategoryTheory.SmallModuleDiagramsGrothendieck
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
+import Mathlib.Algebra.Homology.DerivedCategory.KInjective
 import WeilConjectures.Algebra.Homology.TowerEvaluationKInjective
 
 /-!
