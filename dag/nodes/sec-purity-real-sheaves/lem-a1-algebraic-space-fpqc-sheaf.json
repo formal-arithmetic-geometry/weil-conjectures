@@ -13,9 +13,117 @@
   "def-weil-pbc-fpqc-covering",
   "def-pc-fibre-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First prove uniqueness for any fpqc covering of any $S$-scheme $T$. For $a,b:T\\to E$ agreeing on the covering, form the sheaf $P=T\\times_{(a,b),E\\times E,\\Delta_E}E$. By [def-trf-algebraic-space] it is represented by a scheme. The projection $p:P\\to T$ is a monomorphism: a section above a given test map to $T$ is precisely an equality between its composites with $a,b$, so it is unique. The local equalities supply scheme maps $r_i:T_i\\to P$. On each $T_i\\times_TT_j$ their composites to $T$ agree; monicity of $p$ makes the maps to $P$ agree. Apply [lem-weil-pbc-fpqc-representable-descent] with target $P$ to obtain $r:T\\to P$. Its composite $pr$ is the identity, because both maps restrict to $v_i$ and the same lemma gives uniqueness for target $T$. The defining equality on $P$, pulled back by $r$, gives $a=b$. This proves injectivity without separatedness of $E$.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-weil-pbc-fpqc-representable-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 0APL, proposition-sheaf-fpqc, Gabber proof; scheme-domain case cited by Tag 04P2 in spaces-descent.tex."
+   }
+  },
+  {
+   "text": "To apply an absolute presheaf criterion to our relative space, define $H(A)$, for an arbitrary scheme $A$, to be the set of pairs $(s,x)$ with $s:A\\to S$ and $x\\in E(A,s)$; restrictions are composition in $s$ and restriction in $E$. Here $E(A,s)$ is evaluation of the fppf sheaf defining $E$ on the $S$-scheme $(A,s)$. This is a presheaf in the size convention of the algebraic-space definition. It is a Zariski sheaf: compatible maps $s_j:A_j\\to S$ glue uniquely, since their continuous maps glue and their local maps of structure sheaves glue and remain local on stalks. After this gluing, the $x_j$ are sections on one fixed $S$-scheme and glue uniquely by the fppf sheaf property of $E$; an open covering is an fppf covering. This also handles the empty covering. Thus [lem-a1-fpqc-sheaf-affine-criterion] reduces existence for $H$ to singleton fpqc covers of affine schemes. For such a cover $f:T\\prime\\to T$, a compatible $(s\\prime,c)\\in H(T\\prime)$ has $s\\prime p_0=s\\prime p_1$, so [lem-weil-pbc-fpqc-representable-descent] gives a unique $s:T\\to S$ with $sf=s\\prime$. It remains to descend $c$ as a morphism to $E$ over this fixed $S$-structure. Uniqueness follows from step 1, after uniqueness of $s$.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "def-pc-fppf-site",
+    "lem-a1-fpqc-sheaf-affine-criterion",
+    "lem-weil-pbc-fpqc-representable-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 0APL, proposition-sheaf-fpqc, Gabber proof; scheme-domain case cited by Tag 04P2 in spaces-descent.tex."
+   }
+  },
+  {
+   "text": "Fix such $f:T\\prime\\to T$ and $c:T\\prime\\to E$ with $cp_0=cp_1$. The affine scheme $T\\prime$ is quasi-compact. Apply [lem-a1-qc-map-affine-etale-neighbourhood] to obtain an affine $U$, a representable etale map $u:U\\to E$, and a scheme $V=T\\prime\\times_EU$ whose projection to $T\\prime$ is surjective, etale, separated and locally quasi-finite. Put $D=T\\prime\\times_TT\\prime$. Both $p_0^*V$ and $p_1^*V$ identify with $D\\times_{E,cp_0}U=D\\times_{E,cp_1}U$. Use the resulting isomorphism $\\phi:p_0^*V\\to p_1^*V$ as descent datum: it changes the displayed $T\\prime$ coordinate and keeps the $U$ coordinate. On $T\\prime\\times_TT\\prime\\times_TT\\prime$, both $\\phi_{12}\\phi_{01}$ and $\\phi_{02}$ keep the same $U$ coordinate and the same three base coordinates, so they are equal by the fibre-product universal property. This verifies the cocycle rather than merely asserting a canonical datum.",
+   "uses": [
+    "lem-a1-qc-map-affine-etale-neighbourhood",
+    "def-pd-descent-datum",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 0APL, proposition-sheaf-fpqc, Gabber proof; scheme-domain case cited by Tag 04P2 in spaces-descent.tex."
+   }
+  },
+  {
+   "text": "By [lem-a1-separated-lqf-fpqc-effective-descent] this datum is effective: choose $p:W\\to T$ and $\\alpha:W\\times_TT\\prime\\xrightarrow{\\sim}V$ inducing $\\phi$. Its hypotheses hold by step 3; in particular no quasi-compactness of $V$ is needed. The base change of $p$ to $T\\prime$ is etale, so [lem-galois-fpqc-descend-etale] makes $p$ etale. It is surjective as well: for each $t\\in T$, the fpqc covering $f$ supplies a point $t\\prime$ over $t$, and surjectivity of $V\\to T\\prime$ supplies a point of $V$ over $t\\prime$; its image in $W$ lies over $t$. Thus $W\\to T$ is an etale surjection.",
+   "uses": [
+    "lem-a1-separated-lqf-fpqc-effective-descent",
+    "lem-galois-fpqc-descend-etale",
+    "def-weil-pbc-fpqc-covering"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 0APL, proposition-sheaf-fpqc, Gabber proof; scheme-domain case cited by Tag 04P2 in spaces-descent.tex."
+   }
+  },
+  {
+   "text": "Write $W\\prime=W\\times_TT\\prime$ and let $b\\prime:W\\prime\\xrightarrow{\\alpha}V\\to U$. On $W\\times_TD$, the two pullbacks of $\\alpha$ differ by $\\phi$, while $V\\to U$ is unchanged by $\\phi$ as constructed in step 3. Therefore $b\\prime\\circ(1_W,p_0)=b\\prime\\circ(1_W,p_1)$. The covering $W\\prime\\to W$ is fpqc by [lem-galois-fpqc-covering-base-change]. By [lem-weil-pbc-fpqc-representable-descent], applied to the scheme target $U$, there is a unique $b:W\\to U$ pulling back to $b\\prime$. It is an $S$-map: the two maps $W\\to S$ given by its composite with $U\\to S$ and by $W\\to T\\to S$ agree on $W\\prime$, so the same scheme descent uniqueness makes them equal. Set $a\\prime=u b:W\\to E$. Then on $W\\prime$ its pullback equals $c$ composed with $W\\prime\\to T\\prime$, by the defining fibre-product equation of $V$.",
+   "uses": [
+    "lem-galois-fpqc-covering-base-change",
+    "lem-weil-pbc-fpqc-representable-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 0APL, proposition-sheaf-fpqc, Gabber proof; scheme-domain case cited by Tag 04P2 in spaces-descent.tex."
+   }
+  },
+  {
+   "text": "On $R=W\\times_TW$ the two maps $a\\prime\\operatorname{pr}_0,a\\prime\\operatorname{pr}_1:R\\to E$ agree after the fpqc cover $R\\times_TT\\prime\\to R$ supplied by [lem-galois-fpqc-covering-base-change]: both become $c$ composed with the projection to $T\\prime$, by step 5. Step 1 therefore makes them equal on $R$. Since $W\\to T$ is a surjective etale morphism, it is an fppf covering (etale means flat and locally of finite presentation). By the fppf sheaf condition in [def-trf-algebraic-space], $a\\prime$ glues to $a:T\\to E$. To verify $af=c$, pull back along $V\\simeq W\\times_TT\\prime\\to T\\prime$, a surjective etale, hence fppf, covering. There $af$ and $c$ agree by step 5. The uniqueness part of the fppf sheaf condition gives $af=c$ on $T\\prime$. Step 1 gives uniqueness of $a$.",
+   "uses": [
+    "lem-galois-fpqc-covering-base-change",
+    "def-weil-etale-morphism",
+    "def-pc-fppf-site",
+    "def-trf-algebraic-space"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 0APL, proposition-sheaf-fpqc, Gabber proof; scheme-domain case cited by Tag 04P2 in spaces-descent.tex."
+   }
+  },
+  {
+   "text": "Steps 3–6 prove the singleton affine condition for $H$ required in step 2. Its Zariski sheaf property and [lem-a1-fpqc-sheaf-affine-criterion] therefore give the sheaf condition for every fpqc family. Apply this to the sections $(s v_i,e_i)$ of $H(T_i)$, where $s:T\\to S$ is the prescribed structure morphism of the item. The glued pair $(t,e)$ has $t v_i=s v_i$ for all $i$, hence $t=s$ by [lem-weil-pbc-fpqc-representable-descent] with scheme target $S$. Consequently $e$ is an $S$-morphism and has exactly the specified restrictions. Step 1 gives its uniqueness and the final assertion about equality of two morphisms. Only the auxiliary chart and its projection were separated; no separatedness or finiteness property of $E$ has been used.",
+   "uses": [
+    "lem-a1-fpqc-sheaf-affine-criterion",
+    "lem-weil-pbc-fpqc-representable-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 0APL, proposition-sheaf-fpqc, Gabber proof; scheme-domain case cited by Tag 04P2 in spaces-descent.tex."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-algebraic-space",
+  "lem-weil-pbc-fpqc-representable-descent",
+  "def-pc-fppf-site",
+  "lem-a1-fpqc-sheaf-affine-criterion",
+  "lem-a1-qc-map-affine-etale-neighbourhood",
+  "def-pd-descent-datum",
+  "def-pc-fibre-product",
+  "lem-a1-separated-lqf-fpqc-effective-descent",
+  "lem-galois-fpqc-descend-etale",
+  "def-weil-pbc-fpqc-covering",
+  "lem-galois-fpqc-covering-base-change",
+  "def-weil-etale-morphism"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-properties.tex",
+  "place": "Tag 0APL, proposition-sheaf-fpqc, Gabber proof of the scheme-domain case of Tag 04P2; expanded the relative-site reduction, the descent cocycle, the invariant U-coordinate calculation, and final restriction checks."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -54,7 +162,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-a1-space-fpqc-separated-valuative-descent",
@@ -74,5 +182,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-a1-algebraic-space-fpqc-sheaf",
+  "worker": "stage1",
+  "summary": "Expanded the scheme-domain fpqc sheaf theorem through Gabber's separated locally quasi-finite scheme descent argument. Constructed the equalizer-scheme uniqueness proof, explicit descent datum and invariant map to U, and fppf gluing. The absolute presheaf of pairs (S-structure, E-section) makes the Mathlib affine criterion applicable without a relative-site gap. Created two genuine geometric inputs as statement-only nodes and one Mathlib leaf for the affine criterion; statement retained.",
+  "blueprint": "This is the Tag 04P2 descent input to the representability branch of lem-a1-affine-hc0: its lissity/support argument passes through lem-a1-proetale-local-system-representability and the Loc_X-to-Cov_X construction of Bhatt–Scholze Lemma 7.3.9. The current seven steps expand that auxiliary input, not the Rankin unit's top-level proof.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-fpqc-representable-descent",
+    "why": "Generic unique descent of maps into scheme targets, used for the equalizer scheme, maps to U, and the base S-structure; no node of this unit gives it."
+   },
+   {
+    "node": "lem-galois-fpqc-covering-base-change",
+    "why": "Generic base-change stability of fpqc families, required for the W and W-times-T-W checks; does not replace any unit step."
+   },
+   {
+    "node": "lem-galois-fpqc-descend-etale",
+    "why": "Generic fpqc descent of the etaleness of the effective scheme W; not a replacement route for the unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-fpqc-representable-descent",
+  "lem-galois-fpqc-covering-base-change",
+  "lem-galois-fpqc-descend-etale"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-NB-93810a4b6",
+  "group": "NB",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NB-93810a4b6 (reviewer sub-agent of L); spot-checked: I read the item, all three new nodes and every cited statement against Stacks 0APL (Gabber's proof, in full), 03BX/03FX/03FZ/03H4/03WS, 0AP9 and 0APK, and against Mathlib SheafQuasiCompact.lean:36, Fpqc.lean:78 and Flat.lean:54/78/81. The item statement is the scheme-domain case of 0APL/04P2 and is unchanged; the empty family is fine. Step 1 proves uniqueness with the equalizer scheme P, the monomorphism P->T and scheme descent; uniqueness for target T gives pr=id, and it uses no separatedness of E. Step 2: the presheaf of pairs H is a Zariski sheaf, which is the 'little argument omitted' in 0APL. H is defined on all schemes while E lives on the chosen fppf site; I accept that as the standard size identification. Steps 3-6: the descent datum on V=T'xU keeps the U coordinate, the cocycle holds by the universal property, W is effective, and W->T is etale by fpqc descent and surjective by a pointwise argument. b descends and is an S-map. The two pullbacks agree on R by step 1, the result glues along the fppf cover W->T, and af=c is checked on V->T'. Step 7 recovers the S-structure through descent uniqueness. New nodes: the affine criterion is an exact P=Flat specialization of isSheaf_type_propQCTopology_iff, with the needed instances present; the affine etale neighbourhood selection is true by 03BX/03FX/03FZ/03H4/03WS; separated locally quasi-finite fpqc effectivity is true by 0AP9+0APK. None is a duplicate: the existing nodes need an fppf cover (lem-trf-separated-lqf-fppf), a quasi-affine morphism (lem-trf-quasi-affine) or an affine morphism (lem-galois-fpqc-affine). None restates a clause of the item. Batch-5 check: def-trf-algebraic-space, cited by lem-a1-qc-map-affine-etale-neighbourhood, is the general definition of an algebraic space. Within sec-trace-formula/sec-poincare-duality its closure contains only itself, and it is not a step of the trace-formula or Poincare-duality proofs, so I accept it. The closures of the other off-unit citations reach neither chapter. I accept the three declared tool_uses as generic tools: fpqc-representable-descent, fpqc-covering-base-change and fpqc-descend-etale. No fixes."
  }
 }
