@@ -15,9 +15,116 @@
   "def-sp-injective-resolutions",
   "def-weil-pbc-etale-cohomology"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $L_p(V)=\\operatorname{Hom}_X(p,V)$. By [lem-fix-geometric-stalk-topos-point], the presheaf $V\\mapsto\\operatorname{Map}(L_p(V),M_p)$ is a sheaf of sets. The product over $p$ is a sheaf: glue a matching family separately at each $p$, and uniqueness at each coordinate gives uniqueness of the product gluing. Addition and the constant $R$-action are coordinatewise. To specify the full $R_X(V)$-action, send $a\\in R_X(V)$ to its germ $a_{p,v}\\in R$ at each $(p,v)$ and put $(a m)_{p,v}=a_{p,v}m_{p,v}$. The identification $(R_X)_p=R$ is [lem-weil-pbc-constant-sheaf-geometric-stalk] applied to the additive group of $R$; it respects multiplication and $1$, since the germ and constant-section maps respect those operations. Germs commute with restriction, so this action makes the product an $R_X$-module sheaf by [def-weil-sheaf-of-modules-category]. Precomposition on lift indices and coordinatewise maps in $M$ preserve all these operations and define $B_P$.",
+   "uses": [
+    "lem-fix-geometric-stalk-topos-point",
+    "lem-weil-pbc-constant-sheaf-geometric-stalk",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00Y8, lemma-point-pushforward-sheaf (1); module action as in sites-modules.tex, Section 04EM (section-stalks), and etale-cohomology.tex Tag 03PT (lemma-stalk-exact) (2)"
+   }
+  },
+  {
+   "text": "For $R$-linear maps $t_p:F_p\\to M_p$, define $h_V(s)_{p,v}=t_p([V,v,s])$. This commutes with restriction by the definition of germs [def-weil-pbc-geometric-stalks], and is $R_X(V)$-linear because $[V,v,a s]=a_{p,v}[V,v,s]$. Conversely, a module-sheaf map $h:F\\to B_P(M)$ gives $t_p([V,v,s])=h_V(s)_{p,v}$. It is well-defined: the opposite pointed-neighbourhood category is filtered [lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered], so equal germs agree on a common refinement, and naturality of $h$ gives equal coordinates there. The same refinement checks addition; constant sections check $R$-linearity. The two constructions are inverse, as is seen on every representative $[V,v,s]$ and every coordinate $(p,v)$. Both commute with maps in $F$ and in $M$, giving the adjunction $A_P\\dashv B_P$. Taking all $t_p$ to be identities gives exactly the tuple of germ maps as its unit.",
+   "uses": [
+    "def-weil-pbc-geometric-stalks",
+    "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00Y7, lemma-adjoint-point-push-stalk, proof; Tag 00Y8, lemma-point-pushforward-sheaf (2); the formula is written explicitly for modules and a family of points"
+   }
+  },
+  {
+   "text": "The forgetful functor from $R_X$-module sheaves to abelian sheaves is faithful and exact [lem-weil-pbc-module-sheaves-colimits-forgetful]. Thus a short exact sequence of module sheaves gives a short exact sequence of abelian sheaves. Each geometric stalk is exact on abelian sheaves [prop-weil-pbc-geometric-stalks-exact]; its maps here are $R$-linear. Exactness of $R$-modules is exactness of the underlying groups (the usual kernels and images in [lem-weil-pbc-ring-modules-enough-injectives]). Consequently each module-stalk functor is exact. Kernels and cokernels in the family category are componentwise, by their universal properties; hence $A_P$ is exact. No point-detection assertion is used.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "prop-weil-pbc-geometric-stalks-exact",
+    "lem-weil-pbc-ring-modules-enough-injectives"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03DA, lemma-abelian, and 04EQ, lemma-stalk-exact-modules (1); etale-cohomology.tex Tag 03PT, lemma-stalk-exact (3)"
+   }
+  },
+  {
+   "text": "Fix $V\\to X$. On a componentwise short exact sequence of module families the displayed formula for $B_P(-)(V)$ is exact: an element in the kernel is precisely a tuple of elements in the coordinate kernels; injectivity is checked coordinatewise; and a tuple in the final product lifts by choosing a preimage separately for every $(p,v)$. These are choices over a set by [def-weil-size-convention]. Thus evaluation of $B_P$ on every $V$ is exact. The resulting sequence of sheaves is exact as well: its sectionwise kernel is its first term, and its last arrow is sectionwise surjective, so its sectionwise cokernel is zero and remains zero after sheafification. These descriptions of kernels and cokernels in the module-sheaf category are [def-weil-sheaf-of-modules-category]. Therefore $B_P$ is exact. Empty products are zero modules and satisfy the same assertions.",
+   "uses": [
+    "def-weil-size-convention",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 05V8, lemma-skyscraper-modules-exact (1), with the product calculation written out; kernels and cokernels: Tag 03DA, lemma-abelian"
+   }
+  },
+  {
+   "text": "Suppose each $M_p$ is injective. Let $i:F\\hookrightarrow G$ be a monomorphism of module sheaves and $h:F\\to B_P(M)$. Under step 2, $h$ is a tuple $t_p:F_p\\to M_p$. By step 3 each $i_p:F_p\\hookrightarrow G_p$ is injective. The extension property in [def-sp-injective-resolutions] gives $\\widetilde t_p:G_p\\to M_p$ extending $t_p$, and small choice gives a tuple of these extensions. Its adjoint $\\widetilde h:G\\to B_P(M)$ satisfies $\\widetilde h i=h$, because that equality holds at each adjoint component. This is the defining injectivity of $B_P(M)$.",
+   "uses": [
+    "def-sp-injective-resolutions",
+    "def-weil-size-convention"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 015Z, lemma-adjoint-preserve-injectives, extension-property argument, written here directly for the family adjunction"
+   }
+  },
+  {
+   "text": "The category of $R$-modules is abelian with enough injectives [lem-weil-pbc-ring-modules-enough-injectives]. Apply clause (1) of [lem-weil-pbc-left-exact-injective-resolution-degree-zero] to choose a nonnegative injective resolution $M_p\\to J_p^\\bullet$ for every $p$. The family is small, so these choices are simultaneous in the universe of [def-weil-size-convention]. Its augmented complex is exact componentwise. Step 4 carries that exact augmented complex to $B_P(M)\\to B_P(J^\\bullet)$: equivalently, apply its kernel-image calculation at every degree. Every $B_P(J^n)$ is injective by step 5, and the complex is zero in negative degrees. This is the required injective sheaf resolution.",
+   "uses": [
+    "lem-weil-pbc-ring-modules-enough-injectives",
+    "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
+    "def-weil-size-convention"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 013K, lemma-injective-resolutions-exist (1), with modules having enough injectives by more-algebra.tex Tag 01DD, lemma-injectives-modules"
+   }
+  },
+  {
+   "text": "The module-sheaf category has enough injectives [lem-weil-pbc-module-sheaves-enough-injectives]. Evaluation $\\Gamma_V$ is additive, and [lem-weil-pbc-right-derived-plus-injective], clause (2), computes its right derived functor on the bounded-below injective resolution of step 6. Since its augmentation is a quasi-isomorphism, $R\\Gamma_V(B_P(M)[0])$ is represented by $B_P(J^\\bullet)(V)$. Its differentials are the coordinate differentials of $\\prod_{p,v}J_p^\\bullet$. For $a>0$, a cocycle is a tuple $z_{p,v}\\in\\ker(d_p^a)$. Exactness of each module resolution gives $y_{p,v}\\in J_p^{a-1}$ with $d_p^{a-1}y_{p,v}=z_{p,v}$. Small choice makes these into an element of $B_P(J^{a-1})(V)$ whose differential is the given cocycle. Thus $H^a(B_P(J^\\bullet)(V))=0$, which is precisely $R^a\\Gamma(V,-)(B_P(M))=0$. This calculation remains valid for empty lift sets and for $P=\\varnothing$, and nowhere uses conservativity, Noetherianity, finiteness, or a torsion hypothesis.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-enough-injectives",
+    "lem-weil-pbc-right-derived-plus-injective",
+    "def-weil-size-convention"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 05TH, lemma-injective-acyclic (1), and 05TI, lemma-enough-injectives-right-derived (2); existence in injectives.tex Tag 01DU, theorem-sheaves-modules-injectives; positive-degree product calculation written out"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-fix-geometric-stalk-topos-point",
+  "lem-weil-pbc-constant-sheaf-geometric-stalk",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-geometric-stalks",
+  "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "prop-weil-pbc-geometric-stalks-exact",
+  "lem-weil-pbc-ring-modules-enough-injectives",
+  "def-weil-size-convention",
+  "def-sp-injective-resolutions",
+  "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
+  "lem-weil-pbc-module-sheaves-enough-injectives",
+  "lem-weil-pbc-right-derived-plus-injective"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tags 00Y7 and 00Y8 for point adjunction; sites-modules.tex Tags 03DA and 04EQ; more-algebra.tex 01DD; derived.tex 013K, 05TH, 05TI. The product-family assembly, extension argument and evaluation-cocycle calculation are written explicitly by Q23."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -53,10 +160,38 @@
    "results": "{\"t\": \"2026-10-18T20:42:51Z\", \"tool\": \"leanfinder\", \"query\": \"The right adjoint of a family of exact stalk functors is the product of point skyscraper sheaves, exact on sections and acyclic for evaluation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"stalkSkyscraperSheafAdjunction\", \"instIsRightAdjointSheafSkyscraperSheafFunctorOfHasColimits\", \"instIsLeftAdjointPresheafStalkFunctor\", \"skyscraperPresheafStalkAdjunction\", \"StalkSkyscraperPresheafAdjunctionAuxs.counit\", \"StalkSkyscraperPresheafAdjunctionAuxs.unit\", \"StalkSkyscraperPresheafAdjunctionAuxs.counit_app\", \"instIsRightAdjointPresheafSkyscraperPresheafFunctorOfHasColimits\"], \"digest\": \"46279519aab18daf\"}",
    "date": "2026-10-19",
    "verdict": "no match: the returned skyscraper adjunction and sheaf cohomology definitions do not state sectionwise exactness and evaluation acyclicity of arbitrary families of geometric-point products"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Products of geometric point skyscraper sheaves of modules are exact and acyclic for sections on every etale object",
+   "results": "{\"t\": \"2026-10-18T21:13:55Z\", \"tool\": \"leanfinder\", \"query\": \"Products of geometric point skyscraper sheaves of modules are exact and acyclic for sections on every etale object\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Condensed.instAB4StarCondensedMod\", \"AlgebraicGeometry.Scheme.Modules.instAbelian\", \"instAbelianCondensedMod\", \"LightCondensed.instIsGrothendieckAbelianLightCondMod\", \"LightCondMod.ofSheafLightProfinite\", \"SheafOfModules.instAbelian\", \"LightCondAb.ofSheafLightProfinite\", \"instAbelianLightCondMod\"], \"digest\": \"2d2425f6b8e4266c\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: point skyscraper definitions/adjunctions, cohomology definitions and condensed-category exactness do not state the full family exactness and evaluation-acyclicity theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "skyscraperSheaf|skyscraper.*[Aa]cyclic|[Aa]cyclic.*skyscraper",
+   "results": "{\"t\": \"2026-10-18T21:15:13Z\", \"tool\": \"grep\", \"query\": \"skyscraperSheaf|skyscraper.*[Aa]cyclic|[Aa]cyclic.*skyscraper\", \"sub\": \"CategoryTheory/Sites\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean\", \"Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean\", \"Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean\", \"Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean\", \"Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean\", \"Mathlib/CategoryTheory/Sites/Point/Comap.lean\", \"Mathlib/CategoryTheory/Sites/Point/Comap.lean\", \"Mathlib/CategoryTheory/Sites/Point/Comap.lean\"], \"digest\": \"bbbf9df1a712ad69\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: point skyscraper definitions/adjunctions, cohomology definitions and condensed-category exactness do not state the full family exactness and evaluation-acyclicity theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The right adjoint to the family of geometric stalks is exact and its values are acyclic for evaluation on each object of the site",
+   "results": "{\"t\": \"2026-10-18T21:15:14Z\", \"tool\": \"leansearch\", \"query\": \"The right adjoint to the family of geometric stalks is exact and its values are acyclic for evaluation on each object of the site\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.instIsRightAdjointSheafΓ\", \"AlgebraicGeometry.instIsRightAdjointCommRingCatOppositeLocallyRingedSpaceΓ\", \"CategoryTheory.Sheaf.Γ\", \"instIsLeftAdjointPresheafStalkFunctor\", \"CategoryTheory.HasSheafify.isLeftExact\", \"AlgebraicGeometry.instIsRightAdjointCommRingCatOppositeSchemeΓ\", \"CategoryTheory.Functor.sheafPullbackConstruction.instIsRightAdjointSheafSheafPushforwardContinuousOfHasWeakSheafify\", \"CategoryTheory.sheafToPresheaf_isRightAdjoint\"], \"digest\": \"87529efd65f60799\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: point skyscraper definitions/adjunctions, cohomology definitions and condensed-category exactness do not state the full family exactness and evaluation-acyclicity theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a family of modules the product of point direct image sheaves is right adjoint to the stalk family functor and has zero higher section cohomology",
+   "results": "{\"t\": \"2026-10-18T21:15:58Z\", \"tool\": \"leanfinder\", \"query\": \"For a family of modules the product of point direct image sheaves is right adjoint to the stalk family functor and has zero higher section cohomology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPresheafOfModulesToPresheafOfModules\", \"CondensedMod.LocallyConstant.adjunction\", \"LightCondMod.LocallyConstant.adjunction\", \"stalkSkyscraperSheafAdjunction\", \"instIsRightAdjointSheafSkyscraperSheafFunctorOfHasColimits\", \"instIsLeftAdjointPresheafStalkFunctor\", \"LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat\", \"PresheafOfModules.sheafificationAdjunction\"], \"digest\": \"72e78f9035096a0a\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: point skyscraper definitions/adjunctions, cohomology definitions and condensed-category exactness do not state the full family exactness and evaluation-acyclicity theorem"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-etale-godement-supported-exact-model",
@@ -82,5 +217,45 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-etale-point-product-acyclic",
+  "worker": "stage1",
+  "group": "Q23",
+  "summary": "Split into seven explicit steps, using only existing nodes. Constructed the constant-ring-sheaf action, family adjunction and germ unit; reduced module-stalk exactness to the stated abelian-stalk theorem through the exact forgetful functor; proved sectionwise product exactness by coordinate lifts; proved injectivity by the extension property; used ordinary nonnegative module resolutions and bounded-below derived evaluation. No new nodes, statement changes, Lean edits or compiles. Retained prior genuine searches and reused the interrupted-turn search log.",
+  "blueprint": "The item realizes the geometric-point-product building block in the from.place chain of lem-per-artin-gabber-affine-curve: the supported Godement construction required by the regular finite-coefficient purity model. Steps 1-3 establish its sheaf/stalk interface; steps 4-7 supply exact point products and evaluation acyclicity before the germ-unit resolution is iterated. Whole-blueprint searches for skyscraper, point pushforward, product sheaves and geometric stalk found no duplicate theorem. No unit or chapter route changes.",
+  "tool_uses": [
+   {
+    "node": "lem-fix-geometric-stalk-topos-point",
+    "why": "Only the small-etale set-skyscraper sheaf clause is used to construct each factor; the perverse unit supplies no general site-point adjunction."
+   },
+   {
+    "node": "lem-weil-pbc-constant-sheaf-geometric-stalk",
+    "why": "Identifies the stalk of the constant coefficient ring with R, for the explicit R_X action; no same-unit coefficient-stalk lemma exists."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "why": "Transfers module-sheaf exactness to abelian sheaves before applying the existing abelian-stalk exactness theorem."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-enough-injectives",
+    "why": "Supplies the general module-sheaf enough-injectives hypothesis for bounded-below derived evaluation."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-fix-geometric-stalk-topos-point",
+  "lem-weil-pbc-constant-sheaf-geometric-stalk",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-module-sheaves-enough-injectives"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q23-182c368c2",
+  "group": "Q23",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q23-182c368c2 (reviewer sub-agent of L); spot-checked: Read in full: the item (statement inherited unchanged from Q21, 7 steps) and the statements of all 16 cited nodes. Stacks sources checked at their labels: 00Y7 lemma-adjoint-point-push-stalk and 00Y8 lemma-point-pushforward-sheaf (sites.tex); 04EQ lemma-stalk-exact-modules and 05V8 lemma-skyscraper-modules-exact (sites-modules.tex). Step checks: S1 gets the sheaf property from the set p_* sheaf clause of lem-fix-geometric-stalk-topos-point; the R_X action is defined through germs and is semilinear under restriction. S2 is the 00Y7 adjunction, well defined on germs through a common refinement in the cofiltered pointed-neighbourhood category; the unit is the tuple of germ maps. S3 gets exactness of A_P from forget-exactness plus exact abelian stalks (the 04EQ pattern). S4 (marked elementary): products are exact on sections by choice, and a sequence exact on every section is exact in Mod(R_X). S5 (marked elementary): a right adjoint of a mono-preserving functor preserves injectives. S6: a family of resolutions plus S4 and S5 gives an injective sheaf resolution. S7: clause (2) of right-derived-plus-injective gives RΓ_V = ∏_{p,v} J_p^•, whose cohomology vanishes in degrees a>0. Edge cases checked: P empty, V with no lifts, an algebraically closed point with non-injective M, R = 0. No finiteness, Noetherian or conservativity hypothesis is used. The parent lem-per-etale-godement-supported-exact-model uses exactly the clauses supplied, and none restates a parent clause. No duplicate found (grep for Godement/skyscraper on étale sites and for 00Y8/05V8). No cycle (closure of 168 nodes; the only citer is the parent). No SGA. The four declared tool_uses are accepted as generic infrastructure: lem-fix-geometric-stalk-topos-point, lem-weil-pbc-constant-sheaf-geometric-stalk, lem-weil-pbc-module-sheaves-colimits-forgetful and lem-weil-pbc-module-sheaves-enough-injectives. Advisory only: the statement's pointer to def-weil-pbc-etale-cohomology is loose (that node defines global-section cohomology of abelian sheaves), but the statement itself defines R^aΓ(V,-) in Mod(R_X), and S7 uses that meaning. No fixes."
  }
 }
