@@ -1,0 +1,139 @@
+{
+ "id": "lem-weil-pbc-proetale-finite-constant-representable",
+ "kind": "statement",
+ "title": "Finite constant pro-etale sheaves are represented by labelled copies",
+ "statement": "For a scheme U [def-pc-scheme] and a finite set E in the scheme universe, let U[E] be the disjoint union of copies of U indexed by E, as a weakly etale U-scheme. The canonical map from the constant sheaf with value ULift E [def-weil-pbc-constant-sheaf] to the lifted representable sheaf h(U[E]) on [def-weil-pbc-proetale-site] is an isomorphism. The map sends each constant label to that component, and these isomorphisms are natural in every map of finite label sets. Empty E is included.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 0H7J, example-constant-sheaf; groupoids.tex Tag 03YW; proetale.tex Tag 098T. Adaptation of the proved ConstantSheafSetsRepresentable argument to pro-etale open coverings."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-constant-sheaf"
+ ],
+ "proof": [
+  {
+   "text": "The disjoint union is weakly etale since this is local at the source and each component is the identity. Construct the label-section map to its lifted representable sheaf. Subcanonicity supplies the sheaf condition.",
+   "uses": [
+    "def-weil-pbc-proetale-site"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "A represented section determines a clopen partition by [lem-galois-coproduct-copies-morphisms-clopen]. The open pieces form a pro-etale cover, and on each piece the section is its label. If distinct labels coincide, the clopen preimage is both top and bottom, hence the domain is empty and its empty open covering proves local injectivity.",
+   "uses": [
+    "lem-galois-coproduct-copies-morphisms-clopen"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Sheafify the canonical section map. Both it and the sheafification unit are locally bijective, so the induced sheaf morphism is an isomorphism. Naturality follows by the sheafification adjunction, tested on constant labels, where it is the coproduct injection equation.",
+   "uses": [
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-proetale-site",
+  "lem-galois-coproduct-copies-morphisms-clopen",
+  "def-weil-pbc-sheafification"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 0H7J, example-constant-sheaf; groupoids.tex Tag 03YW; proetale.tex Tag 098T. Adaptation of the proved ConstantSheafSetsRepresentable argument to pro-etale open coverings.; formal assembly by R1, 2026-10-18"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A finite constant sheaf is represented by the disjoint union of copies of the terminal object on the small pro-etale site",
+   "results": "8 hits for constant sheaves and IsConstant; no labelled scheme representation.",
+   "date": "2026-10-18",
+   "verdict": "No matching theorem on scheme pro-etale sites; use the generic categorical results in the Lean proof."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A tower of finite constant sheaves on the pro-etale site is represented by a profinite test object, and base change preserves its limit",
+   "results": "8 hits concerning condensed sheaves and finite-limit-preserving light profinite Yoneda.",
+   "date": "2026-10-18",
+   "verdict": "No matching theorem on scheme pro-etale sites; use the generic categorical results in the Lean proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"constantSheaf\", \"PreservesLimit\"",
+   "results": "0 hits.",
+   "date": "2026-10-18",
+   "verdict": "No matching theorem on scheme pro-etale sites; use the generic categorical results in the Lean proof."
+  },
+  {
+   "tool": "grep",
+   "query": "proEtale.*[Ff]inite.*[Tt]ower|profiniteToCommRingCatOp|constantSheaf.*[Rr]epresent",
+   "results": "0 hits.",
+   "date": "2026-10-18",
+   "verdict": "No matching theorem on scheme pro-etale sites; use the generic categorical results in the Lean proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProfiniteCoefficientInverseImage",
+  "date": "2026-10-18",
+  "group": "R1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-four-corners",
+   "place": "statement: coefficient identifications required to define ordinary E = L(g′)*K and identify its finite reduction with E_n",
+   "via": [
+    "lem-weil-pbc-profinite-coefficient-inverse-image"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleFiniteConstantRepresentable",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleFiniteConstantRepresentable.lean",
+  "declaration": "AlgebraicGeometry.Scheme.proEtaleFiniteConstantComparison_isIso",
+  "statement": "theorem proEtaleFiniteConstantComparison_isIso (U : Scheme.{u}) (E : Type u) [Finite E] : IsIso (proEtaleFiniteConstantComparison U E)",
+  "branch": "sheaf-dag",
+  "by": "R1",
+  "date": "2026-10-18",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.proEtaleFiniteConstantObject",
+   "AlgebraicGeometry.Scheme.proEtaleFiniteCopiesFunctor",
+   "AlgebraicGeometry.Scheme.proEtaleFiniteConstantPresheaf",
+   "AlgebraicGeometry.Scheme.proEtaleFiniteConstantSections",
+   "AlgebraicGeometry.Scheme.proEtaleFiniteConstantComparison",
+   "AlgebraicGeometry.Scheme.proEtaleFiniteConstantComparison_isIso",
+   "AlgebraicGeometry.Scheme.proEtaleFiniteConstantComparison_naturality",
+   "AlgebraicGeometry.Scheme.proEtaleFiniteConstantRepresentableIso"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261018T091411-L-3258605",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261018T091411-L-3258605",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

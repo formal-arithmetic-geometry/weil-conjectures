@@ -1,0 +1,131 @@
+{
+ "id": "lem-weil-pbc-proetale-finite-tower-representation",
+ "kind": "statement",
+ "title": "Geometric representation of finite constant ring towers",
+ "statement": "For any scheme morphism f:X→Y and a natural-number opposite diagram Q of finite commutative rings in the sheaf-value universe, there exist a diagram D of objects of the small pro-etale site of Y and a cone c on D such that c is limiting, its image under site base change along f is limiting, and the diagram of lifted Yoneda sheaves of D is naturally isomorphic to the underlying set sheaves of Q followed by the constant ring-sheaf functor. No surjectivity hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 097D, lemma-construct-profinite; Tag 098T, lemma-morphism-big-small (2); profinite test objects of RefactorInstruction.tex Section 4, Lemma lem:XS."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-proetale-site",
+  "def-weil-proetale-inverse-image",
+  "def-weil-pbc-constant-sheaf"
+ ],
+ "proof": [
+  {
+   "text": "Shrink the finite carriers to the scheme universe, transporting every transition by equivShrink. The lifted finite-carrier diagram is naturally isomorphic to the original carrier diagram.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Take its limit as a diagram of finite discrete profinite spaces. The opposite locally constant integer ring functor is a right adjoint by [lem-weil-pbc-profinite-locally-constant-right-adjoint]; Spec also preserves limits. Pass to schemes over Spec Z, then base change to Y. The resulting cone is a limit in Over Y and hence in its full pro-etale subcategory. Base change again along f preserves the same cone in Over X, and fullness reflects the limit.",
+   "uses": [
+    "lem-weil-pbc-profinite-locally-constant-right-adjoint",
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the natural finite-test-object comparison of [lem-weil-pbc-profinite-test-object-functor], and explicitly compare chosen slice coproducts with scheme coproducts. Apply [lem-weil-pbc-proetale-finite-constant-representable] naturally to the resulting finite-copy diagram. Compose with the carrier shrink isomorphism and Mathlib constantCommuteCompose to identify the underlying ring sheaves.",
+   "uses": [
+    "lem-weil-pbc-profinite-test-object-functor",
+    "lem-weil-pbc-proetale-finite-constant-representable"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-profinite-locally-constant-right-adjoint",
+  "def-weil-proetale-inverse-image",
+  "lem-weil-pbc-profinite-test-object-functor",
+  "lem-weil-pbc-proetale-finite-constant-representable"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 097D, lemma-construct-profinite; Tag 098T, lemma-morphism-big-small (2); profinite test objects of RefactorInstruction.tex Section 4, Lemma lem:XS.; formal assembly by R1, 2026-10-18"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Inverse image on the small pro-etale site preserves inverse limits of finite constant ring sheaves",
+   "results": "8 hits, led by sheafPullbackConstruction.preservesFiniteLimits; finite limits only.",
+   "date": "2026-10-18",
+   "verdict": "No matching theorem on scheme pro-etale sites; use the generic categorical results in the Lean proof."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A tower of finite constant sheaves on the pro-etale site is represented by a profinite test object, and base change preserves its limit",
+   "results": "8 hits concerning condensed sheaves and finite-limit-preserving light profinite Yoneda.",
+   "date": "2026-10-18",
+   "verdict": "No matching theorem on scheme pro-etale sites; use the generic categorical results in the Lean proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"constantSheaf\", \"PreservesLimit\"",
+   "results": "0 hits.",
+   "date": "2026-10-18",
+   "verdict": "No matching theorem on scheme pro-etale sites; use the generic categorical results in the Lean proof."
+  },
+  {
+   "tool": "grep",
+   "query": "proEtale.*[Ff]inite.*[Tt]ower|profiniteToCommRingCatOp|constantSheaf.*[Rr]epresent",
+   "results": "0 hits.",
+   "date": "2026-10-18",
+   "verdict": "No matching theorem on scheme pro-etale sites; use the generic categorical results in the Lean proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProfiniteCoefficientInverseImage",
+  "date": "2026-10-18",
+  "group": "R1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-four-corners",
+   "place": "statement: coefficient identifications required to define ordinary E = L(g′)*K and identify its finite reduction with E_n",
+   "via": [
+    "lem-weil-pbc-profinite-coefficient-inverse-image"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleFiniteTowerRepresentation",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleFiniteTowerRepresentation.lean",
+  "declaration": "AlgebraicGeometry.Scheme.proEtaleFiniteTower_representableLimit",
+  "statement": "theorem proEtaleFiniteTower_representableLimit {X Y : Scheme.{u}} (f : X ⟶ Y) (Q : ℕᵒᵖ ⥤ CommRingCat.{u + 1}) [∀ n : ℕᵒᵖ, Finite (Q.obj n)] : ∃ (D : ℕᵒᵖ ⥤ Y.ProEt) (c : Cone D), Nonempty (IsLimit c) ∧ Nonempty (IsLimit ((proEtaleBaseChange f).mapCone c)) ∧ Nonempty (D ⋙ (ProEt.topology Y).uliftYoneda.{u + 1} ≅ Q ⋙ constantSheaf (ProEt.topology Y) CommRingCat.{u + 1} ⋙ sheafCompose (ProEt.topology Y) (CategoryTheory.forget CommRingCat.{u + 1}))",
+  "branch": "sheaf-dag",
+  "by": "R1",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261018T091411-L-3258605",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261018T091411-L-3258605",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
