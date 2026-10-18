@@ -27,12 +27,12 @@
  ],
  "proof": [
   {
-   "text": "Suppose F is constructible in the abelian sense [def-weil-pbc-constructible-abelian-sheaf]. Fix one of its finitely many locally closed strata S. On an etale trivializing cover V_i of S the restriction is the constant abelian sheaf with finite value A_i. The inverse-image stalk isomorphism [lem-weil-pbc-inverse-image-stalk-germ] and the constant stalk theorem [lem-weil-pbc-constant-sheaf-geometric-stalk] identify its stalks with A_i. Every geometric point over a point of the image of V_i lifts to V_i [lem-weil-pbc-etale-cover-geometric-point-lift], so cardinality equals |A_i| on that entire image. Etale morphisms are flat and locally of finite presentation [def-weil-etale-morphism], so these images are open by [lem-weil-pbc-flat-lfp-open]. For each n their union with |A_i|=n is C_n intersect S, and the union with |A_i| unequal to n is its complement in S. Hence C_n intersect S is clopen in S, thus locally closed in X. There are only finitely many strata; their union is constructible by the Noetherian characterization in [def-weil-constructible-subset]. This does not presume a finite etale cover or globally constant cardinality on a stratum.",
+   "text": "On each of the finitely many constructible locally closed strata, a constant-chart cover identifies geometric stalks with the chart group. A geometric point in an etale image lifts to that chart, and inverse-image stalk comparison transports the identification. Thus every cardinality locus is open on the stratum: near each point its cardinality is fixed. Embed this relative open into the ambient scheme; its intersection with the constructible stratum is constructible because the ambient scheme is Noetherian. The finite union over strata gives the required constructible locus.",
    "uses": [
     "def-weil-pbc-constructible-abelian-sheaf",
-    "lem-weil-pbc-inverse-image-stalk-germ",
     "lem-weil-pbc-constant-sheaf-geometric-stalk",
     "lem-weil-pbc-etale-cover-geometric-point-lift",
+    "lemma-openclosed-stalk-upperstar",
     "def-weil-etale-morphism",
     "lem-weil-pbc-flat-lfp-open",
     "def-weil-constructible-subset"
@@ -40,103 +40,94 @@
    "elementary": false,
    "source": {
     "document": "literature/sga/SGA4-expose-09_reedition.pdf",
-    "place": "Proposition 2.13(iii), forward implication; abelian group version of 2.4"
+    "place": "Exposé IX, Proposition 2.13(iii), using the finite-table lifting argument of (i) and the irreducible neighbourhood argument of (ii)"
    }
   },
   {
-   "text": "For the converse perform Noetherian induction on the closed subsets T of X, giving each its reduced induced closed subscheme structure supplied by [lem-weil-pbc-reduced-induced-closed-subscheme]. On an affine Noetherian chart Spec(R) of X this structure is Spec(R/I); any ascending chain of ideals of R/I lifts to an ascending chain of ideals of R containing I, so R/I is Noetherian. Its underlying closed subset is quasi-compact, hence this is a Noetherian scheme. The induction assertion is that the abelian inverse image F_T has a finite locally closed partition with finite locally constant abelian restrictions. The empty closed subset has the empty partition. At T assume the assertion for every proper closed subset. By [lem-weil-pbc-inverse-image-stalk-germ] the stalks of F_T are those of F at the corresponding geometric points, so they are finite, and its cardinality level sets are C_n intersect T. These are constructible in T by [def-weil-constructible-subset]. By [lem-weil-pbc-noetherian-scheme-closed-subsets-minimal], the closed subsets of X satisfy the minimal condition, giving the stated Noetherian induction. A chain of subsets closed in a fixed closed T is also a chain of closed subsets of X, so the same condition holds in T. It therefore suffices to construct one nonempty open W of a nonempty T where F_T is finite locally constant; its complement is proper closed, to which the induction hypothesis applies. In the next steps write X and F for T and F_T.",
+   "text": "Use well-founded induction on closed subsets C of X. Quantify the induction assertion over every closed immersion Z to X whose image is contained in C. Such Z is Noetherian, since a closed immersion is locally of finite type and quasi-compact. Stalk finiteness pulls back by upperStarCompSheafFiberIso. For cardinality loci, compare the pulled-back canonical geometric point with the canonical point of X over the same underlying point, using the geometric-stalk comparison after passing from abelian groups to modules over ULift Z. The loci are therefore preimages of the constructible loci on X. It remains to find one nonempty open of each nonempty Z on which the restriction has finite constant charts. The empty scheme has the empty etale covering.",
    "uses": [
-    "lem-weil-pbc-inverse-image-stalk-germ",
+    "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+    "lemma-openclosed-stalk-upperstar",
+    "lem-weil-pbc-geometric-stalk-comparison-constant",
     "def-weil-constructible-subset",
-    "lem-weil-pbc-reduced-induced-closed-subscheme",
-    "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal"
+    "def-weil-pbc-constructible-abelian-sheaf"
    ],
    "elementary": false,
    "source": {
     "document": "literature/sga/SGA4-expose-09_reedition.pdf",
-    "place": "Proposition 2.13(iii), final Noetherian induction; blueprint paragraph 2; reduced closed structure: Stacks 01J3 (lemma-reduced-closed-subscheme), 01J4 (definition-reduced-induced-scheme), schemes.tex; scheme-to-topology passage: Stacks 01OZ (lemma-Noetherian-topology), properties.tex, and 0051 (definition-noetherian), topology.tex"
+    "place": "Exposé IX, Proposition 2.13(iii), using the finite-table lifting argument of (i) and the irreducible neighbourhood argument of (ii)"
    }
   },
   {
-   "text": "Choose an irreducible component of the nonempty X and its generic point eta, whose existence is supplied by [lem-sc-scheme-sober]. There are finitely many irreducible components by [lem-weil-pbc-noetherian-finite-components]. Remove all components other than the chosen one. The resulting open X_0 contains eta and is irreducible. Let M=F_bar_eta and m=|M|, which is at least 1 for an abelian group. The constructible set C_m intersect X_0 is a finite union of locally closed subsets [def-weil-constructible-subset] and contains eta. One of those subsets contains eta. In an expression O intersect Z for that subset, Z is closed in X_0 and contains eta, so Z=X_0. Thus it contains a nonempty open U of X_0 on which every stalk has exactly m elements.",
+   "text": "Choose the generic point eta of an irreducible component. Let M be the finite abelian stalk at the canonical algebraic-closure point over eta, and m its positive cardinality. A constructible set containing a component generic point contains an open neighbourhood of that point: remove the other finitely many components and write the constructible set as a finite union of locally closed sets. The closed factor of a locally closed set containing the generic point fills the retained irreducible component. Apply the proved Topology.IsConstructible.exists_isOpen_mem_subset to obtain an open O containing eta on which the canonical stalk cardinality is m.",
    "uses": [
+    "lem-sc-scheme-sober",
     "lem-weil-pbc-noetherian-finite-components",
-    "def-weil-constructible-subset",
-    "lem-sc-scheme-sober"
+    "def-weil-constructible-subset"
    ],
    "elementary": true,
    "source": {
     "document": "literature/sga/SGA4-expose-09_reedition.pdf",
-    "place": "Proposition 2.13(iii), reduction to constant cardinality; blueprint paragraph 2"
+    "place": "Exposé IX, Proposition 2.13(iii), using the finite-table lifting argument of (i) and the irreducible neighbourhood argument of (ii)"
    }
   },
   {
-   "text": "The stalk is the colimit of sections on pointed etale neighbourhoods [def-weil-pbc-geometric-stalks]. Its index is filtered by [lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered]; use a small skeleton of affine pointed objects, with all their lifts, supplied by [lem-weil-pbc-affine-etale-essentially-small-cover]. Affine open refinement retains the marked point, so this subsystem is cofinal for stalks. Apply the elementwise filtered-colimit theorem [lem-weil-pbc-filtered-colimit-modules-elementwise] with R=Z (abelian groups are Z-modules) to lift every a in the finite group M to a section s_a on a common pointed etale neighbourhood V_0 of bar_eta in U. Each of the finitely many relations s_0=0 and s_a+s_b=s_(a+b) has zero germ. The same theorem kills each relation after a further refinement, and cofilteredness gives one common pointed refinement on which all hold. The table a maps to s_a is now a group homomorphism M to F(V_0). Restricting these sections to each etale object over V_0 gives a natural map from the constant abelian presheaf to F restricted to V_0. By [def-weil-pbc-constant-sheaf] and the sheafification universal property [def-weil-pbc-sheafification] it extends uniquely to phi:constant M to F restricted to V_0. Restriction and inverse image agree by [lem-weil-pbc-etale-inverse-image-restriction]. The constant stalk theorem identifies its marked stalk map with the identity of M.",
+   "text": "Use Point.toPresheafFiber_jointly_surjective to represent each element of the finite M by a section on a pointed etale neighbourhood. Cofilteredness gives a common neighbourhood for all representatives. For each of the finitely many pairs a,b of M, the representatives of a+b and the sum of the representatives of a and b have equal germs. Induct over the finite set of pairs, applying Point.toPresheafFiber_eq_iff' to make each equality hold after one further pointed refinement. This produces a function sigma from M to sections that preserves addition; its value at zero is zero by cancellation. Thus sigma is a group homomorphism and its germ map is the identity on M. These are the concrete Point API versions of the elementwise filtered-colimit facts, with the existing small pointed-site construction handling universes.",
    "uses": [
     "def-weil-pbc-geometric-stalks",
     "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered",
-    "lem-weil-pbc-affine-etale-essentially-small-cover",
-    "lem-weil-pbc-filtered-colimit-modules-elementwise",
-    "def-weil-pbc-constant-sheaf",
-    "def-weil-pbc-sheafification",
-    "lem-weil-pbc-etale-inverse-image-restriction",
-    "lem-weil-pbc-constant-sheaf-geometric-stalk"
+    "lem-weil-pbc-filtered-colimit-modules-elementwise"
    ],
    "elementary": false,
    "source": {
     "document": "literature/sga/SGA4-expose-09_reedition.pdf",
-    "place": "Proposition 2.13(i), finite-fibre section lifting with group operations; blueprint paragraph 3"
+    "place": "Exposé IX, Proposition 2.13(iii), using the finite-table lifting argument of (i) and the irreducible neighbourhood argument of (ii)"
    }
   },
   {
-   "text": "Apply [lem-weil-pbc-etale-generic-irreducible-neighbourhood] to V_0 to U and the underlying point of its marked lift over eta. Here U is Noetherian and irreducible, eta is its component generic point, and V_0 to U is etale; no reducedness or normality is assumed. It gives an irreducible open V retaining the marked lift whose underlying point is generic in V. Restrict each section s_a to V. Restriction is a homomorphism, so s_0=0 and s_a+s_b=s_(a+b) still hold. For each etale object E over V, send a to s_a restricted to E; these homomorphisms commute with restriction and define a morphism from the constant abelian presheaf with value M to F restricted to V. The universal property [def-weil-pbc-sheafification] extends this to phi:constant M to F restricted to V, with the source defined by [def-weil-pbc-constant-sheaf]. The restriction sheaf agrees with abelian inverse image by [lem-weil-pbc-etale-inverse-image-restriction]. Germ compatibility in [lem-weil-pbc-inverse-image-stalk-germ] identifies the retained germs of these sections with their original germs, namely a; [lem-weil-pbc-constant-sheaf-geometric-stalk] identifies the source stalk with M through these same constant sections. Hence the newly defined phi induces the identity on M at the retained point.",
+   "text": "Apply exists_irreducible_open_of_etale_generic to the etale neighbourhood just constructed and its marked point over eta. Intersect the resulting irreducible open with the preimage of O. The marked point remains in this intersection and is generic there; the intersection is therefore irreducible and nonempty. Restrict sigma along the resulting open immersion. Naturality of toPresheafFiber preserves its identity germ map. The cardinalities of the canonical ambient stalks at all points of this neighbourhood equal m.",
    "uses": [
     "lem-weil-pbc-etale-generic-irreducible-neighbourhood",
-    "lem-weil-pbc-etale-inverse-image-restriction",
-    "lem-weil-pbc-inverse-image-stalk-germ",
-    "def-weil-pbc-sheafification",
-    "def-weil-pbc-constant-sheaf",
-    "lem-weil-pbc-constant-sheaf-geometric-stalk"
+    "def-weil-pbc-geometric-stalks"
    ],
    "elementary": false,
    "source": {
     "document": "literature/sga/SGA4-expose-09_reedition.pdf",
-    "place": "Proposition 2.13(ii), irreducible etale generic neighbourhood; blueprint paragraph 3"
+    "place": "Exposé IX, Proposition 2.13(iii), using the finite-table lifting argument of (i) and the irreducible neighbourhood argument of (ii)"
    }
   },
   {
-   "text": "For a nonzero a in M let Z_a be the set of points of V where the section phi(a)=s_a has zero geometric germ. The elementwise stalk-colimit criterion [lem-weil-pbc-filtered-colimit-modules-elementwise], with the pointed neighbourhood and smallness results of step 4, says that a zero germ vanishes as a section on a further pointed etale neighbourhood. Conversely vanishing as a section gives zero germs throughout that neighbourhood; the germ identification [lem-weil-pbc-inverse-image-stalk-germ] makes this assertion independent of restriction notation. Its image in V is open by [def-weil-etale-morphism] and [lem-weil-pbc-flat-lfp-open], and geometric points over every point of that image lift by [lem-weil-pbc-etale-cover-geometric-point-lift]. Thus Z_a is precisely a union of open images. It omits the generic point: if any vanishing neighbourhood had that point in its image, the retained geometric generic point would lift to that neighbourhood by [lem-weil-pbc-etale-cover-geometric-point-lift], forcing s_a to have zero germ at the retained lift, contrary to the identity marked stalk map. Thus no choice-independence theorem for germs is being assumed. Every nonempty open of irreducible V contains its generic point, so Z_a is empty. The constant stalk theorem [lem-weil-pbc-constant-sheaf-geometric-stalk] identifies every source stalk with M; consequently phi is injective on all stalks. The inverse-image stalk theorem identifies every target stalk with a stalk of F at a point of U, hence both source and target have m elements. An injective map of finite sets of the same cardinality is bijective. By [lemma-weil-pbc-geometric-stalk-conservative], phi is an isomorphism of abelian sheaves on V.",
+   "text": "On the irreducible neighbourhood V, prove the labels sigma(a) are distinct at every geometric germ on every etale W over V. If two germs agree, Point.toPresheafFiber_eq_iff' gives a nonempty pointed refinement W' on which the restricted sections agree. Its etale image in V is nonempty open and so contains the retained generic point. Lift the original separably closed geometric generic point to W'; the equality then holds in the original generic stalk, where sigma is injective. Consequently a=b. Define a natural transformation c from the constant presheaf M to the concrete localization restriction of F using these sections. It is locally injective by the just-proved independence. For local surjectivity at a point of an etale T over V, compare its stalk cardinality with the canonical ambient stalk using exists_geometricStalkComparison_constant. The injective map from finite M to that stalk has equal cardinalities and is bijective. Represent the germ of any section by a label a; the germ-equality criterion gives a pointed refinement on which the section equals c(a). Regard that refinement as an etale object over V to obtain a covering member. Thus c is locally bijective. GrothendieckTopology.W_iff_isLocallyBijective and W_iff imply its sheafification is an isomorphism. Compose with sheafificationIso and upperStarIsoLocalizationRestriction to get a constant-sheaf chart for the inverse image to V. No geometric-stalk conservativity theorem or compatibility theorem for the inverse-image unit is used.",
    "uses": [
-    "lem-weil-pbc-filtered-colimit-modules-elementwise",
-    "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered",
-    "lem-weil-pbc-affine-etale-essentially-small-cover",
-    "lem-weil-pbc-inverse-image-stalk-germ",
+    "def-weil-pbc-geometric-stalks",
     "def-weil-etale-morphism",
     "lem-weil-pbc-flat-lfp-open",
     "lem-weil-pbc-etale-cover-geometric-point-lift",
-    "lem-weil-pbc-constant-sheaf-geometric-stalk",
-    "lemma-weil-pbc-geometric-stalk-conservative"
+    "lem-weil-pbc-geometric-stalk-comparison-constant",
+    "def-weil-pbc-constant-sheaf",
+    "def-weil-pbc-sheafification",
+    "lem-weil-pbc-etale-inverse-image-restriction"
    ],
    "elementary": false,
    "source": {
     "document": "literature/sga/SGA4-expose-09_reedition.pdf",
-    "place": "Proposition 2.13(iii), generic fibre injectivity and equal cardinalities; blueprint paragraph 4"
+    "place": "Exposé IX, Proposition 2.13(iii), using the finite-table lifting argument of (i) and the irreducible neighbourhood argument of (ii)"
    }
   },
   {
-   "text": "The image W of V to X is a nonempty open by [def-weil-etale-morphism] and [lem-weil-pbc-flat-lfp-open]. The same map V to W is an etale surjection and its restriction of F is constant with finite abelian value M by step 6 and [lem-weil-pbc-etale-inverse-image-restriction]. This is the required finite locally constant condition in [def-weil-pbc-constructible-abelian-sheaf]; the inverse-image composition isomorphism [lem-weil-pbc-inverse-image-composition] identifies the iterated restriction with the original one. The induction hypothesis of step 2 gives a finite lisse partition on X minus W. Regard those strata as strata of X through the closed immersion, and adjoin W. Locally closed subsets of a closed subset remain locally closed in X; by [def-weil-constructible-subset] they are constructible since X is Noetherian. The composition isomorphism identifies their abelian inverse images with the restrictions provided by induction. This proves the induction assertion and the converse. For empty X the empty partition already proves both directions. The obtained finite partition, with finitely many constant cardinalities on each Noetherian stratum after a finite subcover of the open trivializing images, also yields a finite image of the cardinality function; an infinite union of constructible sets was never used to infer a bound.",
+   "text": "The image U of V in X is nonempty open. The induced map V to U is an etale surjection, giving a singleton etale covering and a finite constant chart on U. Use upperStarComp to compare the iterated inverse image with the already constructed chart. For the complement D of U inside any closed Z in the induction, construct the closed immersion directly as (IdealSheafData.vanishingIdeal D).subschemeι; its range is D by Mathlib's support and range equations. Its composite image in X is strictly smaller than C because a point of U is missing, so the induction hypothesis applies. Concatenate the two stratifications using the proved Stratification.openClosed construction and transfer each chart using upperStarComp. All resulting strata are constructible in the Noetherian scheme. Apply the induction assertion to the identity immersion and transport along upperStarId. Reducedness of the closed complement is not needed, nor is the project's existential reduced-induced-subscheme theorem.",
    "uses": [
     "def-weil-etale-morphism",
     "lem-weil-pbc-flat-lfp-open",
     "lem-weil-pbc-etale-inverse-image-restriction",
     "def-weil-pbc-constructible-abelian-sheaf",
     "lem-weil-pbc-inverse-image-composition",
-    "def-weil-constructible-subset"
+    "prop-constructible-open-closed"
    ],
    "elementary": false,
    "source": {
     "document": "literature/sga/SGA4-expose-09_reedition.pdf",
-    "place": "Proposition 2.13(iii), conclusion by Noetherian induction; blueprint paragraph 4"
+    "place": "Exposé IX, Proposition 2.13(iii), using the finite-table lifting argument of (i) and the irreducible neighbourhood argument of (ii)"
    }
   }
  ],
@@ -148,25 +139,24 @@
   "def-weil-pbc-geometric-stalks",
   "def-weil-pbc-sheafification",
   "lem-sc-scheme-sober",
-  "lem-weil-pbc-affine-etale-essentially-small-cover",
   "lem-weil-pbc-constant-sheaf-geometric-stalk",
   "lem-weil-pbc-etale-cover-geometric-point-lift",
   "lem-weil-pbc-etale-generic-irreducible-neighbourhood",
   "lem-weil-pbc-etale-inverse-image-restriction",
   "lem-weil-pbc-filtered-colimit-modules-elementwise",
   "lem-weil-pbc-flat-lfp-open",
+  "lem-weil-pbc-geometric-stalk-comparison-constant",
   "lem-weil-pbc-inverse-image-composition",
-  "lem-weil-pbc-inverse-image-stalk-germ",
   "lem-weil-pbc-noetherian-finite-components",
   "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
   "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered",
-  "lem-weil-pbc-reduced-induced-closed-subscheme",
-  "lemma-weil-pbc-geometric-stalk-conservative"
+  "lemma-openclosed-stalk-upperstar",
+  "prop-constructible-open-closed"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/sga/SGA4-expose-09_reedition.pdf",
-  "place": "Exposé IX Proposition 2.13(iii), pp. 13-14 (printed margins 21-22); abelian finite-table version of (i); the blueprint zero-germ proof spells out the specialization argument"
+  "place": "Exposé IX, Proposition 2.13(iii), using the finite-table lifting argument of (i) and the irreducible neighbourhood argument of (ii); A2: concrete Point API lifting, locally bijective sheafification, and closed-subset induction, 2026-10-18"
  },
  "mathlib_searches": [
   {
@@ -283,9 +273,7 @@
  "tool_uses": [
   "def-weil-pbc-constructible-abelian-sheaf",
   "lem-weil-pbc-constant-sheaf-geometric-stalk",
-  "lem-weil-pbc-etale-generic-irreducible-neighbourhood",
-  "lem-weil-pbc-inverse-image-stalk-germ",
-  "lem-weil-pbc-reduced-induced-closed-subscheme"
+  "lem-weil-pbc-etale-generic-irreducible-neighbourhood"
  ],
  "reviewed": {
   "date": "2026-10-14",
@@ -317,16 +305,10 @@
   "date": "2026-10-18",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "U6",
+  "group": "A2",
   "result": "pass",
-  "landing": "20261018T062929-L-685112",
+  "landing": "20261018T071129-L-1661789",
   "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "AlgebraicGeometry.Scheme.isConstructibleAbelianSheaf_iff_constructible_stalk_cardinality_loci"
-  ],
-  "sorry_after": [
-   "AlgebraicGeometry.Scheme.isConstructibleAbelianSheaf_of_constructible_stalk_cardinality_loci"
-  ]
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

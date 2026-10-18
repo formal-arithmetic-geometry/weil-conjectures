@@ -12,24 +12,118 @@
  ],
  "proof": [
   {
-   "text": "Use Noetherian induction on closed subsets. On a nonempty irreducible open, the generic stalk and constructibility of its cardinality locus give a nonempty open where cardinality is constant; lift the finite stalk and its addition table to a common pointed etale neighbourhood, extend to a constant sheaf map, and use the zero-germ argument to prove it is an isomorphism on a smaller open. The complement is proper closed and is handled by induction; concatenate the open and closed stratifications.",
+   "text": "Use well-founded induction on closed subsets C of X. Quantify the induction assertion over every closed immersion Z to X whose image is contained in C. Such Z is Noetherian, since a closed immersion is locally of finite type and quasi-compact. Stalk finiteness pulls back by upperStarCompSheafFiberIso. For cardinality loci, compare the pulled-back canonical geometric point with the canonical point of X over the same underlying point, using the geometric-stalk comparison after passing from abelian groups to modules over ULift Z. The loci are therefore preimages of the constructible loci on X. It remains to find one nonempty open of each nonempty Z on which the restriction has finite constant charts. The empty scheme has the empty etale covering.",
    "uses": [
-    "fin4-lem-stalk-constructibility-criterion"
+    "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+    "lemma-openclosed-stalk-upperstar",
+    "lem-weil-pbc-geometric-stalk-comparison-constant",
+    "def-weil-constructible-subset",
+    "def-weil-pbc-constructible-abelian-sheaf"
    ],
    "elementary": false,
    "source": {
     "document": "literature/sga/SGA4-expose-09_reedition.pdf",
-    "place": "Exposé IX, Proposition 2.13(iii), converse proof"
+    "place": "Exposé IX, Proposition 2.13(iii), using the finite-table lifting argument of (i) and the irreducible neighbourhood argument of (ii)"
+   }
+  },
+  {
+   "text": "Choose the generic point eta of an irreducible component. Let M be the finite abelian stalk at the canonical algebraic-closure point over eta, and m its positive cardinality. A constructible set containing a component generic point contains an open neighbourhood of that point: remove the other finitely many components and write the constructible set as a finite union of locally closed sets. The closed factor of a locally closed set containing the generic point fills the retained irreducible component. Apply the proved Topology.IsConstructible.exists_isOpen_mem_subset to obtain an open O containing eta on which the canonical stalk cardinality is m.",
+   "uses": [
+    "lem-sc-scheme-sober",
+    "lem-weil-pbc-noetherian-finite-components",
+    "def-weil-constructible-subset"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/sga/SGA4-expose-09_reedition.pdf",
+    "place": "Exposé IX, Proposition 2.13(iii), using the finite-table lifting argument of (i) and the irreducible neighbourhood argument of (ii)"
+   }
+  },
+  {
+   "text": "Use Point.toPresheafFiber_jointly_surjective to represent each element of the finite M by a section on a pointed etale neighbourhood. Cofilteredness gives a common neighbourhood for all representatives. For each of the finitely many pairs a,b of M, the representatives of a+b and the sum of the representatives of a and b have equal germs. Induct over the finite set of pairs, applying Point.toPresheafFiber_eq_iff' to make each equality hold after one further pointed refinement. This produces a function sigma from M to sections that preserves addition; its value at zero is zero by cancellation. Thus sigma is a group homomorphism and its germ map is the identity on M. These are the concrete Point API versions of the elementwise filtered-colimit facts, with the existing small pointed-site construction handling universes.",
+   "uses": [
+    "def-weil-pbc-geometric-stalks",
+    "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered",
+    "lem-weil-pbc-filtered-colimit-modules-elementwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/sga/SGA4-expose-09_reedition.pdf",
+    "place": "Exposé IX, Proposition 2.13(iii), using the finite-table lifting argument of (i) and the irreducible neighbourhood argument of (ii)"
+   }
+  },
+  {
+   "text": "Apply exists_irreducible_open_of_etale_generic to the etale neighbourhood just constructed and its marked point over eta. Intersect the resulting irreducible open with the preimage of O. The marked point remains in this intersection and is generic there; the intersection is therefore irreducible and nonempty. Restrict sigma along the resulting open immersion. Naturality of toPresheafFiber preserves its identity germ map. The cardinalities of the canonical ambient stalks at all points of this neighbourhood equal m.",
+   "uses": [
+    "lem-weil-pbc-etale-generic-irreducible-neighbourhood",
+    "def-weil-pbc-geometric-stalks"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/sga/SGA4-expose-09_reedition.pdf",
+    "place": "Exposé IX, Proposition 2.13(iii), using the finite-table lifting argument of (i) and the irreducible neighbourhood argument of (ii)"
+   }
+  },
+  {
+   "text": "On the irreducible neighbourhood V, prove the labels sigma(a) are distinct at every geometric germ on every etale W over V. If two germs agree, Point.toPresheafFiber_eq_iff' gives a nonempty pointed refinement W' on which the restricted sections agree. Its etale image in V is nonempty open and so contains the retained generic point. Lift the original separably closed geometric generic point to W'; the equality then holds in the original generic stalk, where sigma is injective. Consequently a=b. Define a natural transformation c from the constant presheaf M to the concrete localization restriction of F using these sections. It is locally injective by the just-proved independence. For local surjectivity at a point of an etale T over V, compare its stalk cardinality with the canonical ambient stalk using exists_geometricStalkComparison_constant. The injective map from finite M to that stalk has equal cardinalities and is bijective. Represent the germ of any section by a label a; the germ-equality criterion gives a pointed refinement on which the section equals c(a). Regard that refinement as an etale object over V to obtain a covering member. Thus c is locally bijective. GrothendieckTopology.W_iff_isLocallyBijective and W_iff imply its sheafification is an isomorphism. Compose with sheafificationIso and upperStarIsoLocalizationRestriction to get a constant-sheaf chart for the inverse image to V. No geometric-stalk conservativity theorem or compatibility theorem for the inverse-image unit is used.",
+   "uses": [
+    "def-weil-pbc-geometric-stalks",
+    "def-weil-etale-morphism",
+    "lem-weil-pbc-flat-lfp-open",
+    "lem-weil-pbc-etale-cover-geometric-point-lift",
+    "lem-weil-pbc-geometric-stalk-comparison-constant",
+    "def-weil-pbc-constant-sheaf",
+    "def-weil-pbc-sheafification",
+    "lem-weil-pbc-etale-inverse-image-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/sga/SGA4-expose-09_reedition.pdf",
+    "place": "Exposé IX, Proposition 2.13(iii), using the finite-table lifting argument of (i) and the irreducible neighbourhood argument of (ii)"
+   }
+  },
+  {
+   "text": "The image U of V in X is nonempty open. The induced map V to U is an etale surjection, giving a singleton etale covering and a finite constant chart on U. Use upperStarComp to compare the iterated inverse image with the already constructed chart. For the complement D of U inside any closed Z in the induction, construct the closed immersion directly as (IdealSheafData.vanishingIdeal D).subschemeι; its range is D by Mathlib's support and range equations. Its composite image in X is strictly smaller than C because a point of U is missing, so the induction hypothesis applies. Concatenate the two stratifications using the proved Stratification.openClosed construction and transfer each chart using upperStarComp. All resulting strata are constructible in the Noetherian scheme. Apply the induction assertion to the identity immersion and transport along upperStarId. Reducedness of the closed complement is not needed, nor is the project's existential reduced-induced-subscheme theorem.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "lem-weil-pbc-flat-lfp-open",
+    "lem-weil-pbc-etale-inverse-image-restriction",
+    "def-weil-pbc-constructible-abelian-sheaf",
+    "lem-weil-pbc-inverse-image-composition",
+    "prop-constructible-open-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/sga/SGA4-expose-09_reedition.pdf",
+    "place": "Exposé IX, Proposition 2.13(iii), using the finite-table lifting argument of (i) and the irreducible neighbourhood argument of (ii)"
    }
   }
  ],
  "proof_deps": [
-  "fin4-lem-stalk-constructibility-criterion"
+  "def-weil-constructible-subset",
+  "def-weil-etale-morphism",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-constructible-abelian-sheaf",
+  "def-weil-pbc-geometric-stalks",
+  "def-weil-pbc-sheafification",
+  "lem-sc-scheme-sober",
+  "lem-weil-pbc-etale-cover-geometric-point-lift",
+  "lem-weil-pbc-etale-generic-irreducible-neighbourhood",
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "lem-weil-pbc-filtered-colimit-modules-elementwise",
+  "lem-weil-pbc-flat-lfp-open",
+  "lem-weil-pbc-geometric-stalk-comparison-constant",
+  "lem-weil-pbc-inverse-image-composition",
+  "lem-weil-pbc-noetherian-finite-components",
+  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+  "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered",
+  "lemma-openclosed-stalk-upperstar",
+  "prop-constructible-open-closed"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/sga/SGA4-expose-09_reedition.pdf",
-  "place": "Exposé IX, Proposition 2.13(iii)"
+  "place": "Exposé IX, Proposition 2.13(iii), using the finite-table lifting argument of (i) and the irreducible neighbourhood argument of (ii); A2: concrete Point API lifting, locally bijective sheafification, and closed-subset induction, 2026-10-18"
  },
  "mathlib_searches": [
   {
@@ -109,9 +203,9 @@
   "date": "2026-10-18",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "U6",
+  "group": "A2",
   "result": "pass",
-  "landing": "20261018T062929-L-685112",
+  "landing": "20261018T071129-L-1661789",
   "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
