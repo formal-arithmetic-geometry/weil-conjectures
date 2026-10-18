@@ -20,9 +20,135 @@
   "def-weil-pbc-constant-sheaf",
   "def-weil-abstract-derived-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $\\mathcal T$ for the subcategory generated in the statement. First $D^b_c(X_{\\mathrm{et}},A)$ is closed under the listed operations. The weak Serre assertion [lem-sfb-discrete-noetherian-constructible-serre] applies to $A$ without assuming its underlying set finite. Its affine-local notion equals the finite-global-stratification notion here by [lem-sfb-noetherian-global-constructibility]; over a Noetherian ring finite generation implies finite presentation by [lem-sc-noetherian-finite-module-finite-presentation], and the converse follows from a finite presentation. In the long exact cohomology sequence [lem-sf-derived-homology-long-exact] of $K\\to L\\to C\\to K[1]$, $H^q(C)$ is an extension of $\\operatorname{coker}(H^q(K)\\to H^q(L))$ by $\\ker(H^{q+1}(K)\\to H^{q+1}(L))$. Thus cones have constructible cohomology and a finite cohomology interval. Shifts and finite sums preserve both conditions. For a retract $P$ of $K$, $H^q(P)$ is the image of the idempotent on $H^q(K)$, hence the kernel of one minus that idempotent; it is constructible and vanishes wherever $H^q(K)$ does. This also proves closure under direct summands.",
+   "uses": [
+    "lem-sfb-discrete-noetherian-constructible-serre",
+    "lem-sfb-noetherian-global-constructibility",
+    "lem-sc-noetherian-finite-module-finite-presentation",
+    "lem-sf-derived-homology-long-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "7.4.1, the triangulated constructible ambient category, p. 305; explicit weak Serre verification from Stacks Tags 03RZ and 095E"
+   }
+  },
+  {
+   "text": "For a finitely generated $A$-module $N$, the functor $N_X\\otimes_{\\Lambda_X}-$ is exact. Indeed [lem-pod-etale-stalk-tensor-scalar] and [prop-weil-pbc-geometric-stalks-exact] identify its effect on a short exact sequence at every geometric point with tensoring a short exact sequence of $\\Lambda$-vector spaces by $N$. Such a sequence splits by lifting a basis of its quotient, so tensoring is exact; stalk isomorphism detection [lem-weil-pbc-sets-etale-iso-on-geometric-stalks] then gives exactness on sheaves. It follows directly that the degree-zero sheaf $N_X$ is K-flat: tensoring any acyclic complex remains acyclic. Thus $N_X\\otimes^L_\\Lambda F$ has cohomology $N_X\\otimes_\\Lambda H^q(F)$. On a stratum and a cover where $H^q(F)$ is constant of finite $\\Lambda$-dimension $d$, the basis gives a map from the constant $A$-module $N^{\\oplus d}$ to this sheaf. It is an isomorphism on stalks: constants have their stated stalks by clause (1) of [lem-pod-lisse-tensor-and-scalar-extension], and the tensor stalk formula identifies the map with $N^{\\oplus d}\\cong N\\otimes_\\Lambda\\Lambda^d$. Stalk detection makes it an isomorphism of sheaves. These are finite local models, and the cohomology interval is that of $F$. Every generator lies in $D^b_c(X_{\\mathrm{et}},A)$, so Step 1 gives $\\mathcal T\\subseteq D^b_c(X_{\\mathrm{et}},A)$.",
+   "uses": [
+    "lem-pod-etale-stalk-tensor-scalar",
+    "prop-weil-pbc-geometric-stalks-exact",
+    "lem-weil-pbc-sets-etale-iso-on-geometric-stalks",
+    "lem-pod-lisse-tensor-and-scalar-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "7.4.1, tensor functors in the prime-field case; explicit flatness and local-model verification"
+   }
+  },
+  {
+   "text": "Let $E$ be a constructible $A$-module sheaf. Apply [lem-per-constructible-finite-monodromy-filtration] to obtain its finite filtration with quotients $k_!L$ and the factorizations $k=j i$ supplied there. It suffices to put each such $k_!L$ in $\\mathcal T$: each short exact sequence of the filtration gives a distinguished triangle by [lem-sf-derived-ses-triangle], and induction on its finite length, starting with zero, then puts $E[0]$ in $\\mathcal T$.",
+   "uses": [
+    "lem-per-constructible-finite-monodromy-filtration",
+    "lem-sf-derived-ses-triangle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "7.4.2 and the first reduction of 7.4.6, pp. 305, 307"
+   }
+  },
+  {
+   "text": "Fix one such $S,L,c:Y\\to S$, and put $G=\\operatorname{Aut}_S(Y)$ and $B=\\Lambda[G]$. This is a finite-dimensional $\\Lambda$-algebra with basis the finite set $G$. By [lem-per-galois-cover-module-descent], $L=T_{c,A}(M)$ for an $A$-finite module $M$ with $A$-linear $G$-action. Regard $M$ as a module over $A\\otimes_\\Lambda B=A[G]$; its $A$-generators also generate over this algebra. Apply [lem-per-finite-algebra-external-tensor-filtration] to $M$. Exactness and additivity of $T_{c,A}$ turn its filtration into a filtration of $L$ whose quotients are retracts of $N_S\\otimes_\\Lambda L_0$, where $N$ is $A$-finite and $L_0=T_{c,\\Lambda}(V)$ for a simple $B$-module $V$. Since $B$ is finite-dimensional, any nonzero $v\\in V$ gives the surjection $B\\to V$, $b\\mapsto bv$; hence $V$ is finite-dimensional over $\\Lambda$. The descent statement therefore makes $L_0$ a finite-type locally constant $\\Lambda$-sheaf on $S$.",
+   "uses": [
+    "lem-per-galois-cover-module-descent",
+    "lem-per-finite-algebra-external-tensor-filtration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "7.4.6, finite group algebra reduction, and Lemma 7.4.7, pp. 307-308"
+   }
+  },
+  {
+   "text": "The functor $k_!=j_!i_*$ is exact. For $j_!$ this is [lem-weil-pbc-extension-by-zero-exact]. For the closed immersion $i$, [lemma-weil-pbc-finite-stalk-formula] identifies each stalk of $i_*Q$ with the corresponding stalk of $Q$ on the closed subset and with zero elsewhere. Exactness of stalks and their detection of isomorphisms therefore give exactness of $i_*$; the same argument applies to module sheaves because kernels and cokernels have the induced coefficient actions. Consequently applying $k_!$ to the filtration in Step 4 preserves its short exact sequences and retract diagrams. Each resulting quotient is a retract of $k_!(N_S\\otimes_\\Lambda L_0)$.",
+   "uses": [
+    "lem-weil-pbc-extension-by-zero-exact",
+    "lemma-weil-pbc-finite-stalk-formula",
+    "prop-weil-pbc-geometric-stalks-exact",
+    "lem-weil-pbc-sets-etale-iso-on-geometric-stalks"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "7.4.2 and 7.4.6, exact stratum extension by zero; Stacks Tags 03DJ, 03S5 and finite stalk formula"
+   }
+  },
+  {
+   "text": "Put $F_0=k_!L_0$. On $S$ it restricts to $L_0$, and off $S$ it restricts to zero: for $j_!$ use [lem-weil-pbc-extension-by-zero-stalks], and for $i_*$ use [lemma-weil-pbc-finite-stalk-formula]. Add to $S$ the closed complement of the chosen open $V$ and the open complement $V\\setminus S$ in $V$; these give a finite locally closed stratification of $X$. Thus $F_0$ is a constructible $\\Lambda$-sheaf. There is a natural comparison\n$$N_X\\otimes_\\Lambda k_!L_0\\longrightarrow k_!(N_S\\otimes_\\Lambda L_0).$$\nConstruct its closed factor by restriction of sections to $S$ followed by the tensor map, and its open factor on the extension-by-zero presheaves, then sheafify. By [lem-pod-etale-stalk-tensor-scalar] and the two extension stalk formulas, this map is the identity on $N\\otimes_\\Lambda(L_0)_{\\bar s}$ at a point of $S$ and the map $0\\to0$ elsewhere. It is therefore an isomorphism by [lem-weil-pbc-sets-etale-iso-on-geometric-stalks]. Step 2 identifies its left side with $N_X\\otimes^L_\\Lambda F_0$. This is one of the stated generators, so all quotients from Step 5 lie in $\\mathcal T$ by closure under retracts.",
+   "uses": [
+    "lem-weil-pbc-extension-by-zero-stalks",
+    "lemma-weil-pbc-finite-stalk-formula",
+    "lem-pod-etale-stalk-tensor-scalar",
+    "lem-weil-pbc-sets-etale-iso-on-geometric-stalks"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "7.4.6, tensor quotients extended from strata; explicit mixed-coefficient stalk comparison"
+   }
+  },
+  {
+   "text": "Induct up the finite filtration of $k_!L$ in Step 5, using [lem-sf-derived-ses-triangle] at each short exact sequence and closure of $\\mathcal T$ under cones and shifts. Step 6 puts each quotient in $\\mathcal T$, hence $k_!L\\in\\mathcal T$. The induction in Step 3 now gives $E[0]\\in\\mathcal T$ for every constructible $A$-module sheaf $E$. This includes the empty filtration and zero sheaf.",
+   "uses": [
+    "lem-sf-derived-ses-triangle"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "7.4.6 and conclusion of the proof of 7.4.1, pp. 307-308"
+   }
+  },
+  {
+   "text": "Finally take $K\\in D^b_c(X_{\\mathrm{et}},A)$ and choose $a\\le b$ with $H^q(K)=0$ outside $[a,b]$. By [lem-weil-pbc-truncation-cohomology], $\\tau_{\\le a-1}K$ is acyclic and $\\tau_{\\le b}K\\to K$ is a quasi-isomorphism. For $a\\le q\\le b$, [lem-weil-pbc-truncation-triangle] gives\n$$\\tau_{\\le q-1}K\\longrightarrow\\tau_{\\le q}K\\longrightarrow H^q(K)[-q]\\longrightarrow(\\tau_{\\le q-1}K)[1].$$\nStep 7 and shifts put the third term in $\\mathcal T$. Starting from the zero object $\\tau_{\\le a-1}K$, induction on $q$ puts $\\tau_{\\le b}K$, hence $K$, in $\\mathcal T$. Together with Step 2 this proves equality of the strictly full subcategories.",
+   "uses": [
+    "lem-weil-pbc-truncation-cohomology",
+    "lem-weil-pbc-truncation-triangle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "7.4.1 and its final reduction to constructible sheaves, pp. 305, 308; Stacks Tag 08J5"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-per-constructible-finite-monodromy-filtration",
+  "lem-per-finite-algebra-external-tensor-filtration",
+  "lem-per-galois-cover-module-descent",
+  "lem-pod-etale-stalk-tensor-scalar",
+  "lem-pod-lisse-tensor-and-scalar-extension",
+  "lem-sc-noetherian-finite-module-finite-presentation",
+  "lem-sf-derived-homology-long-exact",
+  "lem-sf-derived-ses-triangle",
+  "lem-sfb-discrete-noetherian-constructible-serre",
+  "lem-sfb-noetherian-global-constructibility",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-weil-pbc-extension-by-zero-stalks",
+  "lem-weil-pbc-sets-etale-iso-on-geometric-stalks",
+  "lem-weil-pbc-truncation-cohomology",
+  "lem-weil-pbc-truncation-triangle",
+  "lemma-weil-pbc-finite-stalk-formula",
+  "prop-weil-pbc-geometric-stalks-exact"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose XVII, 7.4.2, 7.4.6, 7.4.7 and proof of 7.4.1, pp. 305-308, with explicit ordinary-derived and stalk calculations"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -51,10 +177,38 @@
    "results": "0 hits; top: none; note: ; digest: 4f53cda18c2baa0c",
    "date": "2026-10-18",
    "verdict": "no match: finite-type module sheaves, ordinary module prime filtrations and derived-category infrastructure do not state constructible etale coefficient devissage"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Constructible complexes of etale module sheaves over a noetherian finite field algebra are thickly generated by tensor products with prime field constructible sheaves",
+   "results": "8 hits; top: SheafOfModules.IsFiniteType.exists_localGeneratorsData, AlgebraicGeometry.Scheme.Modules.instAbelian, AlgebraicGeometry.Scheme.Modules.instHasColimits, Algebra.Etale.iff_exists_algEquiv_prod, SheafOfModules.LocalGeneratorsData.generators, SheafOfModules.IsFiniteType.mk, SheafOfModules.GeneratingSections.ctorIdx, AlgebraicGeometry.Scheme.etalePretopology; note: ; digest: ab7a7869d10a400f",
+   "date": "2026-10-18",
+   "verdict": "no match: sheaf finite-generation infrastructure and etale algebra results do not state thick generation for ordinary constructible etale complexes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale constructible complexes tensor generators finite field coefficients",
+   "results": "8 hits; top: Algebra.Etale.exists_subalgebra_fg, Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq, Algebra.Generators.cotangentSpaceBasis_repr_tmul, Algebra.IsStandardSmoothOfRelativeDimension.exists_subalgebra_fg, RingHom.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial, Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial, StandardEtalePresentation.toPresentation, StandardEtalePresentation.toPresentation_σ'; note: ; digest: c9ee830a08110de6",
+   "date": "2026-10-18",
+   "verdict": "no match: sheaf finite-generation infrastructure and etale algebra results do not state thick generation for ordinary constructible etale complexes"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, TensorProduct",
+   "results": "0 hits; top: none; note: ; digest: 4f53cda18c2baa0c",
+   "date": "2026-10-18",
+   "verdict": "no match: sheaf finite-generation infrastructure and etale algebra results do not state thick generation for ordinary constructible etale complexes"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible|devissage",
+   "results": "0 hits; top: none; note: ; digest: 4f53cda18c2baa0c",
+   "date": "2026-10-18",
+   "verdict": "no match: sheaf finite-generation infrastructure and etale algebra results do not state thick generation for ordinary constructible etale complexes"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-coefficient-change-dualizing",
@@ -76,5 +230,95 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-per-prime-field-tensor-devissage",
+  "worker": "stage1",
+  "group": "NK",
+  "summary": "Read ILO XVII 7.2-7.4 and the existing DAG. Kept the statement and arbitrary Noetherian F_ell-algebra coefficients. Separated algebraic external-tensor filtration, geometric finite-monodromy filtration, and arbitrary-coefficient Galois descent. Proved closure, mixed coefficient extension-by-zero comparison and bounded truncation induction in the item. No completed project declaration matches.",
+  "blueprint": "Proof, Step 1 of lem-per-artin-gabber-affine-curve: 'Relative Verdier duality, biduality ... over the same arbitrary field $k$', through lem-per-qbar-arbitrary-field-duality, lem-per-finite-residue-dualizing and lem-per-potential-local-duality; the last node's Step 2 extends finite-field coefficients. This split supplies the tensor-generation input in coefficient-change duality without assuming descent of each A-object to F_ell.",
+  "tool_uses": [
+   {
+    "node": "lem-pod-etale-stalk-tensor-scalar",
+    "why": "Generic ordinary etale tensor stalk calculation including arbitrary modules; no finite coefficient-cardinality assumption. The perverse unit does not supply this elementary infrastructure."
+   },
+   {
+    "node": "lem-pod-lisse-tensor-and-scalar-extension",
+    "why": "Only clause (1), which explicitly allows any ring and module, supplies stalks of constant sheaves; finite-ring tensor clauses are not invoked. The perverse unit does not supply this elementary infrastructure."
+   },
+   {
+    "node": "lem-sc-noetherian-finite-module-finite-presentation",
+    "why": "Generic finite-module finite-presentation fact over Noetherian rings, used to compare the two constructibility wordings. The perverse unit does not supply this elementary infrastructure."
+   },
+   {
+    "node": "lem-sf-derived-homology-long-exact",
+    "why": "Generic derived cohomology long exact sequence, used for cone closure. The perverse unit does not supply this elementary infrastructure."
+   },
+   {
+    "node": "lem-sf-derived-ses-triangle",
+    "why": "Generic short-exact-to-triangle theorem for any abelian category. The perverse unit does not supply this elementary infrastructure."
+   },
+   {
+    "node": "lem-sfb-discrete-noetherian-constructible-serre",
+    "why": "Generic weak Serre closure for arbitrary Noetherian discrete coefficients; finite-ring closure nodes are insufficient. The perverse unit does not supply this elementary infrastructure."
+   },
+   {
+    "node": "lem-sfb-noetherian-global-constructibility",
+    "why": "Generic affine-local/global finite stratification comparison needed to apply weak Serre closure to the stated notion. The perverse unit does not supply this elementary infrastructure."
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-exact",
+    "why": "Generic exactness of ordinary etale extension by zero for any commutative ring. The perverse unit does not supply this elementary infrastructure."
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-stalks",
+    "why": "Generic extension-by-zero stalk formula for arbitrary ring coefficients. The perverse unit does not supply this elementary infrastructure."
+   },
+   {
+    "node": "lem-weil-pbc-sets-etale-iso-on-geometric-stalks",
+    "why": "Generic detection of sheaf isomorphisms by geometric stalks, applicable to underlying sheaves of sets. The perverse unit does not supply this elementary infrastructure."
+   },
+   {
+    "node": "lem-weil-pbc-truncation-cohomology",
+    "why": "Generic cohomology calculation for good truncations. The perverse unit does not supply this elementary infrastructure."
+   },
+   {
+    "node": "lem-weil-pbc-truncation-triangle",
+    "why": "Generic distinguished good-truncation triangle for any abelian category. The perverse unit does not supply this elementary infrastructure."
+   },
+   {
+    "node": "lemma-weil-pbc-finite-stalk-formula",
+    "why": "Generic finite direct-image stalk formula, applied only to closed immersions and underlying abelian sheaves. The perverse unit does not supply this elementary infrastructure."
+   },
+   {
+    "node": "prop-weil-pbc-geometric-stalks-exact",
+    "why": "Generic exactness of geometric stalks, inherited by module sheaves. The perverse unit does not supply this elementary infrastructure."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pod-etale-stalk-tensor-scalar",
+  "lem-pod-lisse-tensor-and-scalar-extension",
+  "lem-sc-noetherian-finite-module-finite-presentation",
+  "lem-sf-derived-homology-long-exact",
+  "lem-sf-derived-ses-triangle",
+  "lem-sfb-discrete-noetherian-constructible-serre",
+  "lem-sfb-noetherian-global-constructibility",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-weil-pbc-extension-by-zero-stalks",
+  "lem-weil-pbc-sets-etale-iso-on-geometric-stalks",
+  "lem-weil-pbc-truncation-cohomology",
+  "lem-weil-pbc-truncation-triangle",
+  "lemma-weil-pbc-finite-stalk-formula",
+  "prop-weil-pbc-geometric-stalks-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-NK-62477650e",
+  "group": "NK",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NK-62477650e (reviewer sub-agent of L); spot-checked: I read the mathematics in full against ILO XVII pp. 301-308 (7.2.1-7.2.7, 7.3.1-7.3.7, 7.4.1-7.4.7 and the proof of 7.4.1). The item is the ℓ-specialization of 7.4.1 with finitely generated N, which is no weaker; its statement is unchanged; X is an arbitrary Noetherian scheme and A an arbitrary Noetherian F_ℓ-algebra. All 8 steps check against the cited statements. Step 1: weak Serre closure for arbitrary Noetherian R, the global/affine-local comparison, cone cohomology from the long exact sequence, and summands via ker(1-e). Step 2: stalks of the tensor product and of a constant sheaf (clause 1 of lem-pod-lisse, arbitrary ring), exactness over a field, N_X is K-flat, local model N^d. Steps 4-6: the descent equivalence with B=F_ℓ[G] and A⊗B=A[G]; the mixed tensor clause carries the diagonal G-action; k_! is exact through the j_! node and the finite stalk formula for the closed immersion; the comparison N_X⊗k_!L_0≅k_!(N_S⊗L_0) checked on stalks. Step 8: truncation induction from the zero object. All three new nodes are true and are not item clauses or duplicates. The algebra node is 7.4.7; I tested A=F_ℓ, F_ℓ[G] with ℓ dividing |G|, and A=B=F_{ℓ^2}. The descent node holds for arbitrary R, A and N because Y is connected; the existing torsor-descent and cor-galois-lisse nodes need finite rings. The geometric filtration node stays true despite the ILO 7.2.7 warning, because its strata may be refined (nodal cubic with monodromy [[t,1],[1,0]]); generic trivialization, spreading out and Noetherian induction prove it. Batch 5: lem-pod-etale-stalk-tensor-scalar and lem-pod-lisse-tensor-and-scalar-extension (clause 1) are generic sheaf algebra. Their closures (66 and 70 nodes) contain no trace-formula node, and their only sec-poincare-duality members are themselves and def-pod-ring-scalar-extension, so neither is a statement assumed by the PD or trace-formula leaves nor a step of their proofs: accepted. I accept all 14 declared tool_uses as generic black boxes. Form: proof_deps equal the union of the step uses, all steps are under 2000 characters, no SGA. Cosmetic only: Step 5 names two stalk nodes in words rather than in brackets. No fixes."
  }
 }
