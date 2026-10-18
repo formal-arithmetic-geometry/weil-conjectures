@@ -22,6 +22,7 @@ import Sheaf.CategoryTheory.Triangulated.DerivedLimitExistence
 import Mathlib.CategoryTheory.Triangulated.Pretriangulated
 import Mathlib.CategoryTheory.Localization.Predicate
 import Sheaf.Algebra.Homology.SiteDerivedTensorDescent
+import Mathlib.CategoryTheory.Adjunction.Additive
 
 /-! # Well-definedness of integral pullback and completed tensor product
 
@@ -158,7 +159,15 @@ additive (the preadditive adjunction criterion). -/
 @[instance]
 theorem integralOperationsLevelPullback_additive {X Y : AlgebraicGeometry.Scheme.{t}}
     (f : X ⟶ Y) (n : ℕ) : (integralOperationsLevelPullback l E f n).Additive := by
-  sorry
+  have : (AlgebraicGeometry.Scheme.coefficientProEtaleModuleDirectImage.{t, u} f
+      (CommRingCat.of
+        (ULift.{t + 1} (Padic.coefficientExtensionRing l E (n + 1))))).Additive := by
+    constructor
+    intro M N a b
+    rfl
+  exact (AlgebraicGeometry.Scheme.coefficientProEtaleModuleAdjunction.{t, u} f
+    (CommRingCat.of
+      (ULift.{t + 1} (Padic.coefficientExtensionRing l E (n + 1))))).left_adjoint_additive
 
 /-- The nth pullback tower level Res_n f*(P_n), as a functor on complexes.
 Source: Stacks Tags 03D2 and 06YT
@@ -323,7 +332,10 @@ theorem integralOperationsRoos_square
       Limits.Pi.map (fun n ↦ α.app (op n)) ≫
         towerTransitionEndomorphism (K := fun n ↦ C'.obj (op n))
           (integralOperationsTowerStep C') := by
-  sorry
+  apply Eq.symm
+  apply towerTransitionEndomorphism_natural_backward
+  intro n
+  exact (α.naturality (homOfLE (Nat.le_succ n)).op).symm
 
 /-- The induced map on the two shifted-cone summands is the diagonal product map.
 Source: Stacks Tag 08TC (blueprint: lem-pur-integral-operations-well-defined). -/
@@ -344,7 +356,24 @@ Proof: the product map of identity components is identity; the mapping-cone map
 and the shift preserve identity maps. -/
 theorem integralOperationsRoosMap_id (C : ℕᵒᵖ ⥤ CochainComplex A ℤ) :
     integralOperationsRoosMap (𝟙 C) = 𝟙 (integralOperationsRoos C) := by
-  sorry
+  have h : Limits.Pi.map (fun n ↦ 𝟙 (C.obj (op n))) = 𝟙 _ := by
+    apply Limits.Pi.hom_ext
+    intro n
+    simp
+  have ha : Arrow.homMk (Limits.Pi.map (fun n ↦ 𝟙 (C.obj (op n))))
+      (Limits.Pi.map (fun n ↦ 𝟙 (C.obj (op n))))
+      (integralOperationsRoos_square (𝟙 C)).symm =
+      𝟙 (Arrow.mk (towerTransitionEndomorphism
+        (K := fun n ↦ C.obj (op n)) (integralOperationsTowerStep C))) := by
+    apply Arrow.hom_ext <;> exact h
+  change (shiftFunctor (CochainComplex A ℤ) (-1 : ℤ)).map
+      (HomologicalComplex.homotopyCofiber.mapArrowHom _ _
+        (fun j ↦ ⟨j - 1, Int.sub_add_cancel j 1⟩)
+        (Arrow.homMk (Limits.Pi.map (fun n ↦ 𝟙 (C.obj (op n))))
+          (Limits.Pi.map (fun n ↦ 𝟙 (C.obj (op n))))
+          (integralOperationsRoos_square (𝟙 C)).symm)) = _
+  erw [ha, HomologicalComplex.homotopyCofiber.mapArrowHom_id]
+  exact (shiftFunctor (CochainComplex A ℤ) (-1 : ℤ)).map_id _
 
 /-- The diagonal product map preserves composition.
 Source: Stacks Tag 08TC (blueprint: lem-pur-integral-operations-well-defined).
@@ -354,7 +383,10 @@ theorem integralOperationsRoosMap_comp
     {C C' C'' : ℕᵒᵖ ⥤ CochainComplex A ℤ} (α : C ⟶ C') (β : C' ⟶ C'') :
     integralOperationsRoosMap (α ≫ β) =
       integralOperationsRoosMap α ≫ integralOperationsRoosMap β := by
-  sorry
+  unfold integralOperationsRoosMap
+  rw [← Functor.map_comp, ← HomologicalComplex.homotopyCofiber.mapArrowHom_comp]
+  congr 2
+  apply Arrow.hom_ext <;> apply Limits.Pi.hom_ext <;> intro n <;> simp
 
 /-- The functorial strict-complex Roos construction; this makes no choice of cones
 in a bare triangulated category.
@@ -384,7 +416,26 @@ product with the derived-category product, and supplies HasCountableProducts. -/
 @[instance]
 theorem integralOperationsDerivedCountableProducts (W : AlgebraicGeometry.Scheme.{t}) :
     HasCountableProducts (DerivedCategory (integralTowerModules l E W)) := by
-  sorry
+  let : HasFiniteBiproducts (integralTowerModules l E W) := Abelian.hasFiniteBiproducts
+  have : (lim (J := Discrete ℕ)
+      (C := integralTowerModules l E W)).PreservesEpimorphisms :=
+    { preserves := by
+        intro F G f hf
+        have h := (AlgebraicGeometry.Scheme.ProEt.countableProducts_exact.{t, u, 0} W
+          (completedIntegralCommRingSheafUnrestricted l E W)).2.2
+          ℕ (fun n ↦ F.obj ⟨n⟩) (fun n ↦ G.obj ⟨n⟩)
+          (fun n ↦ f.app ⟨n⟩) (fun n ↦ inferInstance)
+        have he : lim.map f = (Limits.Pi.isoLimit _).inv ≫
+            Limits.Pi.map (fun n ↦ f.app ⟨n⟩) ≫ (Limits.Pi.isoLimit _).hom := by
+          apply limit.hom_ext
+          intro ⟨n⟩
+          simp
+        rw [he]
+        infer_instance }
+  have := hasExactLimitsOfShape_of_preservesEpi (integralTowerModules l E W) (Discrete ℕ)
+  have := CountableAB4Star.of_hasExactLimitsOfShape_nat (integralTowerModules l E W)
+  exact (derivedCategory_countableProducts_and_towerLimit.{0}
+    (integralTowerModules l E W)).choose
 
 /-- The strict pullback tower, functorial in the input complex.
 Source: Stacks Tags 03D2 and 06YT
