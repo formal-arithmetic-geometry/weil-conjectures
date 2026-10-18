@@ -185,5 +185,23 @@
   "group": "N8",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N8-0d936f053 (reviewer sub-agent of L); spot-checked: I read the item, all cited statements and the parent in full. The item statement is unchanged; it is chartwise 03XU with a scheme target. Sources checked: Stacks spaces-morphisms.tex l.7760-7775 (03XU) and morphisms.tex l.8161-8172 (03WS: 02GK etale implies unramified, then 02V5 at l.7778-7788 unramified implies locally quasi-finite). Step 1 takes the unramified conjunct out of def-weil-etale-morphism (lfp, flat and unramified via def-weil-unramified-morphism); it is correctly marked elementary. Step 2: lem-weil-pbc-unramified-quasi-finite-at-points needs only an unramified scheme morphism, uses the same unramified node, and concludes pqf-def-quasifinite(2) as the item requires. Step 3 is universal introduction over every chart and never uses atlas surjectivity. Edge cases checked: empty E; E=h_T, which reduces to 03WS; an infinite disjoint union, where the conclusion stays lqf and nothing claims quasi-compactness. The parent lem-a1-separated-etale-space-scheme uses exactly this statement. There are no new nodes. The rg search finds no scheme-level 03WS duplicate, so reusing the more general 02V5 node is right. I accept the declared tool use of lem-weil-pbc-unramified-quasi-finite-at-points (unit sk-thm-p1): it is a generic scheme fact used as a black box, it replaces no step of sk-p-real-rankin, and other nodes already use it the same way. Blueprint fields are filled, nothing cites SGA, proof_deps equals the union of the uses, and I made no fixes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e3f604df1",
+  "group": "NC",
+  "result": "pass",
+  "note": "Clause-by-clause match of chartwise_isLocallyQuasiFinite_of_etale to the node: AlgebraicSpace S, T : Over S, f to yoneda.obj T, all charts v with AlgebraicSpace.IsEtale v (#print-verified), hypothesis Etale (yonedaEquiv (v ≫ f)).left, conclusion Stacks-01TD Scheme.Hom.IsLocallyQuasiFinite with the same quantifiers. No extra assumptions, single universe u, lean.statement verbatim, node otherwise unchanged. Source 03XU/03WS/02V5 checked in the local tex and tags file. Edge cases (empty, E=h_T, infinite unions, non-surjective charts) covered. Docstrings carry the source, blueprint tag and proof steps; proof is sorry only; no hollow defs. nt_compile.py --json (side overlay) clean in 2.0 s; probe showed the tool reports errors. The stock second-reading line is current policy. No findings."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleSpaceLocallyQuasiFinite",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.chartwise_isLocallyQuasiFinite_of_etale",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleSpaceLocallyQuasiFinite.lean",
+  "statement": "theorem chartwise_isLocallyQuasiFinite_of_etale {S : Scheme.{u}} (E : AlgebraicSpace S) (T : Over S) (f : E.obj.obj ⟶ yoneda.obj T) (hf : ∀ (V : Over S) (v : yoneda.obj V ⟶ E.obj.obj), IsEtale v → Etale (yonedaEquiv (v ≫ f)).left) : ∀ (V : Over S) (v : yoneda.obj V ⟶ E.obj.obj), IsEtale v → Scheme.Hom.IsLocallyQuasiFinite (yonedaEquiv (v ≫ f)).left",
+  "branch": "newtargets-dag",
+  "by": "NC",
+  "date": "2026-10-18",
+  "existing": false
  }
 }

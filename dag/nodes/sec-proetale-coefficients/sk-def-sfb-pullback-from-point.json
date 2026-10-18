@@ -500,5 +500,37 @@
    "missing": [],
    "open": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-12c29968f",
+  "group": "NO",
+  "result": "fix",
+  "note": "Read node, source place, 4 stmt_deps, module, report and the exact framework declarations in ModuleObject/Basic.lean and UpperLowerStar Defs/Monoidal. All clauses match except H3: the delivered Nonempty pointUpperStar.Monoidal/.Braided and Nonempty (upperStarFromPoint X).Monoidal/.Braided only assert that some structure exists. fixes/PullbackFromPoint.lean replaces them with IsIso of the canonical η/δ and δ-braiding compatibility; rfl confirms δ/η are the adjunction mates (oplaxMonoidal_pointUpperStar, composite with oplaxMonoidal_upperStar). Tensor instances are rfl to sfbSheafTensorStructure; section formula and profiniteToProEtOf/upperStarFromPoint unfoldings are rfl; finite-stage Nonempty isos are unique. Edge cases, universes and gates ok. nt_compile clean: delivered 2.0 s, fixed 2.6 s. lean-record.json keeps the mixed declarations list (refit_record: no notes/refusals); report gets a maintainer-fix section."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PullbackFromPoint",
+  "declaration": "AlgebraicGeometry.ProEtale.pullback_from_point",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.specZ",
+   "AlgebraicGeometry.ProEtale.toSpecZ",
+   "AlgebraicGeometry.ProEtale.profiniteToCommRingCatOp",
+   "AlgebraicGeometry.ProEtale.profiniteToScheme",
+   "AlgebraicGeometry.ProEtale.profiniteToProEt",
+   "AlgebraicGeometry.ProEtale.profiniteToProEtOf",
+   "AlgebraicGeometry.ProEtale.pointLowerStar",
+   "AlgebraicGeometry.ProEtale.pointUpperStar",
+   "AlgebraicGeometry.ProEtale.upperStarFromPoint",
+   "AlgebraicGeometry.ProEtale.pullback_from_point"
+  ],
+  "file": "lean/Sheaf/Paper/PullbackFromPoint.lean",
+  "statement": "theorem pullback_from_point : (∀ (X Y : Scheme.{u}) (f : X ⟶ Y), f ≫ toSpecZ Y = toSpecZ X) ∧ (∀ S : Profinite.{u}, WeaklyEtale (toSpecZ (profiniteToScheme.obj S))) ∧ Nonempty (FintypeCat.toProfinite ⋙ profiniteToScheme.{u} ≅ forget FintypeCat.{u} ⋙ sigmaConst.obj specZ.{u}) ∧ (∀ S : Profinite.{u}, Nonempty (IsLimit (profiniteToScheme.mapCone S.asLimitCone))) ∧ PreservesFiniteLimits profiniteToProEt.{u} ∧ CoverPreserving (coherentTopology Profinite.{u}) (Scheme.ProEt.topology specZ) profiniteToProEt ∧ profiniteToProEt.IsContinuous (coherentTopology Profinite.{u}) (Scheme.ProEt.topology specZ) ∧ (∀ X : Scheme.{u}, Nonempty (FintypeCat.toProfinite ⋙ profiniteToProEtOf X ⋙ Scheme.ProEt.forget X ≅ forget FintypeCat.{u} ⋙ sigmaConst.obj (Over.mk (𝟙 X))) ∧ (∀ S : Profinite.{u}, Nonempty (IsLimit ((profiniteToProEtOf X ⋙ Scheme.ProEt.forget X).mapCone S.asLimitCone)))) ∧ Nonempty (pointUpperStar.{u} ⊣ pointLowerStar) ∧ IsIso (η pointUpperStar.{u}) ∧ (∀ F G : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}, IsIso (δ pointUpperStar F G) ∧ δ pointUpperStar F G ≫ (β_ (pointUpperStar.obj F) (pointUpperStar.obj G)).hom = pointUpperStar.map (β_ F G).hom ≫ δ pointUpperStar G F) ∧ (∀ X : Scheme.{u}, IsIso (η (upperStarFromPoint X)) ∧ (∀ F G : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}, IsIso (δ (upperStarFromPoint X) F G) ∧ δ (upperStarFromPoint X) F G ≫ (β_ ((upperStarFromPoint X).obj F) ((upperStarFromPoint X).obj G)).hom = (upperStarFromPoint X).map (β_ F G).hom ≫ δ (upperStarFromPoint X) G F) ∧ Nonempty (upperStarFromPoint X ⊣ lowerStar Ab.{u + 1} (toSpecZ X) ⋙ pointLowerStar) ∧ (∀ (G : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (S : Profinite.{u}), ((lowerStar Ab.{u + 1} (toSpecZ X) ⋙ pointLowerStar).obj G).obj.obj (op S) = G.obj.obj (op ((profiniteToProEtOf X).obj S))))",
+  "branch": "newtargets-dag",
+  "by": "NO",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Mixed binding: all construction data are the listed existing declarations of the published WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic framework, publicly imported here. The only new declaration is the sorry theorem pullback_from_point collecting the unit statement, including canonical finite-quotient cones, finite coproduct stages and the actual right-adjoint section formula. No second definition of the site, test objects or inverse images is made. Scheme and profinite universes are u; abelian coefficients are in u+1. The tensor is the localized objectwise integer tensor of the recorded sheaf-tensor dependency.",
+  "fixed_by": "NT-stage2-cc-12c29968f"
  }
 }

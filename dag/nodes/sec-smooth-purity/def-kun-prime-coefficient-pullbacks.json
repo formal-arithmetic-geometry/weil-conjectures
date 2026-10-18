@@ -1,0 +1,106 @@
+{
+ "id": "def-kun-prime-coefficient-pullbacks",
+ "kind": "definition",
+ "title": "Canonical coefficient pullback maps",
+ "status": "split",
+ "statement": "Let $f:V\\to W$ be a scheme morphism and $\\varphi:A\\to B$ a homomorphism of commutative rings, using [def-kun-prime-coefficient-constructions]. Write $f^{-1}M$ for the exact inverse image of a sheaf. For $q:M\\to U_WN$ define its pulled coefficient arrow as $f_A^{-1}M\\xrightarrow{f_A^{-1}q}f_A^{-1}U_WN\\xrightarrow{\\sim}U_Vf_B^{-1}N$, where the second map is the canonical scalar-restriction comparison. The canonical degree-zero comparison is $Lf_A^{-1}(M[0])\\cong(f_A^{-1}M)[0]$.",
+ "stmt_deps": [
+  "def-kun-prime-coefficient-constructions"
+ ],
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0F1J, lemma-punctual-base-change-upgrade, prime-torsion coefficient identity; constructions expanded using Tags 03EK and 06YU"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Sheaf quotient coefficient tensor chain map normalization via localization of complexes",
+   "results": "{\"t\": \"2026-10-17T18:20:00Z\", \"tool\": \"leansearch\", \"query\": \"Sheaf quotient coefficient tensor chain map normalization via localization of complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ComplexShape.quotient_isLocalization\", \"AlgebraicGeometry.Scheme.Hom.preservesLocalization_normalizationDiagramMap\", \"instIsLocalizationHomologicalComplexIntUpHomotopyCategoryQuotientHomotopyEquivalences\", \"instIsLocalizationHomologicalComplexDownHomotopyCategoryQuotientHomotopyEquivalences\", \"Submodule.toLocalizedQuotient'\", \"Submodule.toLocalizedQuotient\", \"Submodule.toLocalizedQuotient'_mk\", \"DerivedCategory.instLinearCochainComplexIntQ\"], \"digest\": \"7701d0e14a5601e3\"}",
+   "date": "2026-10-17",
+   "verdict": "no exact match; use the existing tensor, scalar restriction and localization interfaces"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapDerivedCategoryFactors\", \"tensor\"",
+   "results": "{\"t\": \"2026-10-17T18:20:01Z\", \"tool\": \"loogle\", \"query\": \"\\\"mapDerivedCategoryFactors\\\", \\\"tensor\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-17",
+   "verdict": "no exact match; use the existing tensor, scalar restriction and localization interfaces"
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategoryFactors|singleMapHomologicalComplex",
+   "results": "{\"t\": \"2026-10-17T18:20:01Z\", \"tool\": \"grep\", \"query\": \"mapDerivedCategoryFactors|singleMapHomologicalComplex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 18, \"note\": \"\", \"top\": [\"Mathlib/RepresentationTheory/Homological/Resolution.lean\", \"Mathlib/CategoryTheory/Preadditive/Projective/Resolution.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/SingleFunctors.lean\", \"Mathlib/Algebra/Homology/Additive.lean\", \"Mathlib/Algebra/Homology/Additive.lean\", \"Mathlib/Algebra/Homology/Additive.lean\", \"Mathlib/Algebra/Homology/Additive.lean\", \"Mathlib/Algebra/Homology/Additive.lean\"], \"digest\": \"a53023c2447bfb33\"}",
+   "date": "2026-10-17",
+   "verdict": "no exact match; use the existing tensor, scalar restriction and localization interfaces"
+  },
+  {
+   "tool": "grep",
+   "query": "primeCoefficient|PrimeTensorCoefficient|PrimeTermwiseTensor (WeilConjectures and lean/Sheaf); DAG prime coefficient normalization; blueprint_refs search coefficient",
+   "results": "Source/Sheaf: only primeCoefficientCurveAssertions, unrelated; no quotient tensor normalization definition. DAG/blueprint: coefficient comparison theorems but no standalone normalization definition. Generic ordinary module tensor comparison and derived degree-zero restriction lemmas do not specify this quotient map and localization diagram.",
+   "date": "2026-10-17",
+   "verdict": "no existing node/declaration for the three canonical constructions below"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-kun-0f1j-prime-torsion-coefficient-reduction",
+  "date": "2026-10-17",
+  "group": "N3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-kun-0f1j",
+   "place": "Prime torsion reduction: quotient coefficient tensor identification and its localization",
+   "via": [
+    "lem-kun-0f1j-prime-torsion-coefficient-reduction"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-kunneth-ordinary",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PrimeTorsionCoefficientReductionPullbacks",
+  "declaration": "AlgebraicGeometry.Etale.primePulledSheaf",
+  "declarations": [
+   "AlgebraicGeometry.Etale.primePulledSheaf",
+   "AlgebraicGeometry.Etale.primePullbackCoefficientMap",
+   "AlgebraicGeometry.Etale.primePullbackSingleIso"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/PrimeTorsionCoefficientReductionPullbacks.lean",
+  "statement": "abbrev primePulledSheaf (Λ : Type (u + 1)) [CommRing Λ] {V W : Scheme.{u}} (f : V ⟶ W) (M : Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ))",
+  "branch": "newtargets-dag",
+  "by": "N3",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ea0cbfc57",
+  "group": "N3",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ea0cbfc57",
+  "group": "N3",
+  "result": "pass",
+  "note": "Re-delivery after return L; all of F1-F5 repaired. F1: the commit no longer includes the def-pc-flat-sheaf-modules / def-pc-sheaf-restrict-scalars files (git show --stat: only the report, 10 new def nodes, the item node and 11 modules). The item uses the upstream constant-coefficient ObjectProperty.flat and Sheaf.restrictScalars, explained in the report. F2: the input/output complexes, the Termwise, Localization and Compat predicates and their 4 nodes now take an arbitrary cochain complex C, so Phi is fixed at Q C on every object, including (f')^-1 Rg_* F. F3: Termwise docstring has its Source line and blueprint tag. F4: all 10 helpers are in stmt_deps. F5: a real Second reading by N3. Re-checked every hypothesis and clause (IsPullback squares, qcqs, n>=1, IsUnit n, l prime dividing n, canonical ZMod quotient with ULift, sheafified E/lE, flatness clause, natural isos in F and E, the Step 5-6 equation directions, kappa_R;b = a;U(kappa_k) with the parent's punctualTensorBaseChangeMap) and edge cases (n=1 vacuous, n=l, n=l^2, E=0, F=0, empty schemes, unbounded C true via K-flat M[0]). Universes: u for schemes, u+1 for coefficients, nothing unbound. No hollow defs; one sorry (main theorem); source and blueprint docstrings on all 11 modules; lean.statement verbatim for the item and 10 nodes; all declarations exist. nt_compile: all 11 modules clean (main 23.2 s, Termwise 22.2 s). The mu-witness HEq type equality is equal by definition (derivedTensor = curriedTensor) but rfl/simp probes time out at 60 s; this is a stage-3 note. Other non-blocking notes: the extra true IsIso conjunct, the parent-module import cycle hazard, and the missing Apache line in Norm2/3/4."
+ }
+}

@@ -233,5 +233,30 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-586b49d85",
+  "group": "N7",
+  "result": "pass",
+  "note": "Node vs Lean checked clause by clause. Hypotheses: IsNoetherian X; E/Qlb coefficients as in the common-stratification dependency; hF IsConstantModelConstructible; R : FiniteLocallyClosedStratification; hadapt = HasFiniteConstantLocalModel per stratum; V a presentation of the open prefixes (the dependency's clause-(1) condition, V_0 empty). Conclusion: counit mono for all k; image subobject at V_0 = bottom and at V_m = top; non-strict ≤ chain; cokernel of Subobject.ofLE ≅ a_! (restriction) with a_! = lowerStar a.imageι after openImmersionLowerShriek a.toImage (node's i_*u_!, no sorryAx); restrictions IsLisseCoefficientModule (Mod.IsFree has finite rank). Delivery changes only the lean field; statement field verbatim; no duplicate pro-etale module-object a_! in the project (others are etale/ModuleCat); edge cases empty X, F=0, empty strata, m=1, universes OK; only sorry is the theorem's proof; docstrings carry source and blueprint id; report has Worker report and the standard Second reading note. nt_compile --json rc 0 with no messages (error reporting confirmed by an injected failure); #print axioms shows the theorem elaborated, sorryAx only from its proof."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CoefficientHeartFiltration",
+  "declaration": "AlgebraicGeometry.ProEtale.coefficientHeart_filtration",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.coefficientHeartOpenTerm",
+   "AlgebraicGeometry.ProEtale.coefficientHeartOpenCounit",
+   "AlgebraicGeometry.ProEtale.coefficientHeartFiltrationStep",
+   "AlgebraicGeometry.ProEtale.coefficientHeartLocallyClosedExtension",
+   "AlgebraicGeometry.ProEtale.coefficientHeart_filtration"
+  ],
+  "file": "lean/Sheaf/Paper/CoefficientHeartFiltration.lean",
+  "statement": "theorem coefficientHeart_filtration (ℓ : ℕ) [Fact ℓ.Prime] (L : Sheaf (coherentTopology Profinite.{u}) RingCat.{u + 1}) [IsCommMonObj (coefficientHeartRingObj L)] (hL : (∃ E : IntermediateField ℚ_[ℓ] (PadicAlgCl ℓ), FiniteDimensional ℚ_[ℓ] E ∧ L = Profinite.padicSubfieldCondensedRing ℓ E) ∨ L = Profinite.padicAlgClCondensedRing ℓ) (X : Scheme.{u}) [IsNoetherian X] (F : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj (coefficientHeartRingObj L) X)) (hF : IsConstantModelConstructible (coefficientHeartRingObj L) X F) (R : X.FiniteLocallyClosedStratification) (hadapt : ∀ a : Fin R.n, HasFiniteConstantLocalModel (coefficientHeartRingObj L) (R.domain a) ((CondensedRing.upperStar (coefficientHeartRingObj L) (R.immersion a)).obj F)) (V : Fin (R.n + 1) → X.Opens) (hV : ∀ k : Fin (R.n + 1), (V k : Set X) = ⋃ a : Fin R.n, ⋃ (_ : a.val < k.val), R.stratum a) : (∀ k : Fin (R.n + 1), Mono (coefficientHeartOpenCounit (coefficientHeartRingObj L) F (V k))) ∧ coefficientHeartFiltrationStep (coefficientHeartRingObj L) F (V 0) = ⊥ ∧ coefficientHeartFiltrationStep (coefficientHeartRingObj L) F (V (Fin.last R.n)) = ⊤ ∧ ∃ h : ∀ a : Fin R.n, coefficientHeartFiltrationStep (coefficientHeartRingObj L) F (V a.castSucc) ≤ coefficientHeartFiltrationStep (coefficientHeartRingObj L) F (V a.succ), ∀ a : Fin R.n, Nonempty (cokernel (Subobject.ofLE (coefficientHeartFiltrationStep (coefficientHeartRingObj L) F (V a.castSucc)) (coefficientHeartFiltrationStep (coefficientHeartRingObj L) F (V a.succ)) (h a)) ≅ (coefficientHeartLocallyClosedExtension (coefficientHeartRingObj L) (R.immersion a) (R.isImmersion a)).obj ((CondensedRing.upperStar (coefficientHeartRingObj L) (R.immersion a)).obj F)) ∧ IsLisseCoefficientModule (coefficientHeartRingObj L) ((CondensedRing.upperStar (coefficientHeartRingObj L) (R.immersion a)).obj F)",
+  "branch": "newtargets-dag",
+  "by": "N7",
+  "date": "2026-10-18",
+  "existing": false
  }
 }

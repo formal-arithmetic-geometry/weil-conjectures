@@ -190,5 +190,23 @@
   "group": "NC",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NC-93337fc4f (reviewer sub-agent of L); spot-checked: I read the whole split, the report and every cited node's statement against Stacks 089F (spaces-morphisms.tex l.8740-8775) and the definition of an extension of valuation rings (more-algebra.tex l.37306: injective and local). The statement is the faithful scheme case with no hypothesis added or dropped. It covers what the citer lem-a1-space-fpqc-separated-valuative-descent uses. Step 1: valuation ring => local domain, the argument is correct. Step 2: tensor-nontrivial, maximal-ideal and fibre-product-points give z with p(z)=y and h(z)=s. Step 3: flat base change, the stalk map is local and flat, and the germ iso is part (a). Step 4: m_R B is contained in n, the maximal-ideal criterion gives faithful flatness, and surjectivity on Spec gives q over (0); this matches 00HQ. Step 5: B/q is a local domain; lemma-nagata-local-domain-valuation-dominates, in its updated statement and as the closed Mathlib LocalSubring.exists_le_valuationSubring (inclusion plus IsLocalHom), gives the dominating R'. Step 6: injectivity and locality are verified, and part (b)'s bijection gives h∘d = Spec ι; this is elementary. Edge cases checked: R a field, B not reduced, nontrivial residue extension, empty Y, arbitrary rank. Every cited node is a definition, a Mathlib leaf or Lean-closed, so there is no route issue. I accept the declared tool_use of the Nagata domination node. No duplicate: the only DAG hits for 089F are the item and its citer. There are no new nodes and no fixes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-98ee33a1b",
+  "group": "N1",
+  "result": "pass",
+  "note": "Clause-by-clause match against the node and Stacks 089F with the more-algebra definition of an extension (injective and local): [Flat f], ValuationRing R (its IsDomain is a class parameter, not an extra hypothesis), b (closedPoint R) ∈ range f, ∃ R' : Type u valuation ring, injective IsLocalHom ι, c ≫ f = Spec.map ι ≫ b. Single universe u, all bound; R' in Type u loses no case. Edge cases checked: R a field, Y empty, T empty, any rank, non-reduced Y. No duplicate in Mathlib, project Lean or slopmaster2, and no name clash. Proof is only sorry (#print axioms shows sorryAx); docstrings carry the source place, blueprint tag and six proof steps; lean.statement matches the file verbatim; only the item's lean record changed. nt_compile.py --json on the snapshot: clean, 1.9 s, and a control run confirms the tool reports errors. Second reading section is the standard 2026-10-17 placeholder used in 707 reports in the repository; this review stands in for it."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FlatValuationLifting",
+  "declaration": "AlgebraicGeometry.exists_flat_valuation_lift",
+  "file": "lean/Sheaf/AlgebraicGeometry/FlatValuationLifting.lean",
+  "statement": "theorem exists_flat_valuation_lift {Y T : Scheme.{u}} (f : Y ⟶ T) [Flat f] (R : Type u) [CommRing R] [IsDomain R] [ValuationRing R] (b : Spec (CommRingCat.of R) ⟶ T) (h : b (IsLocalRing.closedPoint R) ∈ Set.range f) : ∃ (R' : Type u) (_ : CommRing R') (_ : IsDomain R') (_ : ValuationRing R') (ι : R →+* R'), Function.Injective ι ∧ IsLocalHom ι ∧ ∃ c : Spec (CommRingCat.of R') ⟶ Y, c ≫ f = Spec.map (CommRingCat.ofHom ι) ≫ b",
+  "branch": "newtargets-dag",
+  "by": "N1",
+  "date": "2026-10-18",
+  "existing": false
  }
 }
