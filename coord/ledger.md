@@ -16238,3 +16238,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 15:07 L: batch 20261018T062645 dependency take-out
 - 07:11 L: returned deliver/A3/Sheaf.Paper.RingComplexFunctorial (reviewer RETURN: (the landing tools, head 5ce6acee3) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Pap)
 - 07:11 L: returned deliver/A4/Sheaf.AlgebraicGeometry.ProEtaleRingSheafChangeAdjunction (reviewer RETURN: (the landing tools, head ea87a3cd8) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
+- 07:11 L: returned deliver/B2/Sheaf.AlgebraicGeometry.CompactSupportFiniteTorsion (reviewer RETURN: (the landing tools, head 88e9d0336) the delivery did not land: (d) user Sheaf.AlgebraicGeometry.EtaleCompactSupportCompa)
