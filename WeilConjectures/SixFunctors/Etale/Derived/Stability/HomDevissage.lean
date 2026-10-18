@@ -11,6 +11,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.HomTriangulated
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekToLowerStar
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability.UpperShriek
 public import WeilConjectures.SixFunctors.Etale.Derived.TensorHom
+public import WeilConjectures.SixFunctors.Etale.Derived.VerdierPreservation
 
 /-!
 # Internal hom preserves `Dctf` by dévissage
@@ -50,10 +51,29 @@ namespace Etale
 
 open _root_.AlgebraicGeometry.Etale.DerivedCategory
 
+section General
+
+variable {A : Type*} [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
+  [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
+  [Abelian.HasFunctorialFlatResolution A] {Y : Scheme.{u}}
+
+/-- If `D` is a left dual of `K` in `D(Y_ét)`, then `RHom(K, N) ≅ D ⊗ᴸ N` for every `N`. It is
+stated for a general coefficient category through `AlgebraicGeometry.Etale.derivedTensor`, so
+that at `A = ModuleCat Λ` no monoidal instance found by instance search has to be compared with
+the one inside `derivedTensor` (which the kernel cannot do in reasonable time). -/
+theorem nonempty_iso_derivedHom_of_exactPairing
+    {D K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)} (p : ExactPairing D K)
+    (N : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)) :
+    Nonempty (((derivedTensor A Y).obj D).obj N ≅ ((RHom(Y)[A]).obj (op K)).obj N) := by
+  let _ := p
+  obtain ⟨ep⟩ := nonempty_exactPairing_swap D K
+  obtain ⟨e⟩ := nonempty_iso_coefficientDual_tensor ⟨@HasRightDual.mk _ _ _ _ D ep⟩ N
+  exact ⟨(whiskerRightIso (coefficientDualIsoOfExactPairing D K) N).symm ≪≫ e⟩
+
+end General
+
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 
-set_option maxHeartbeats 400000 in
--- the kernel check of the exact pairing is slow
 /-- A lisse flat sheaf `F` placed in degree `0` has a left dual in `D(X_ét, Λ)` lying in
 `Dctf(X, Λ)`: the termwise dual of the single complex, which is the lisse flat sheaf `[F, Λ_X]`
 in degree `0`. -/
@@ -104,13 +124,9 @@ theorem constructibleFiniteTor_derivedHom_singleFunctor_of_isFiniteLocallyConsta
     constructibleFiniteTor (ModuleCat.{u + 1} Λ) X
       (((RHom(X)[ModuleCat.{u + 1} Λ]).obj
         (op ((_root_.DerivedCategory.singleFunctor _ 0).obj F))).obj N) := by
-  obtain ⟨D, hD, ⟨_⟩⟩ := exists_constructibleFiniteTor_exactPairing_singleFunctor Λ F hF
-  obtain ⟨ep⟩ := nonempty_exactPairing_swap D ((_root_.DerivedCategory.singleFunctor _ 0).obj F)
-  obtain ⟨e⟩ := nonempty_iso_coefficientDual_tensor ⟨@HasRightDual.mk _ _ _ _ D ep⟩ N
-  have hT : constructibleFiniteTor (ModuleCat.{u + 1} Λ) X (D ⊗ N) :=
-    constructibleFiniteTor_tensor Λ X hD hN
-  exact (constructibleFiniteTor _ X).prop_of_iso
-    ((whiskerRightIso (coefficientDualIsoOfExactPairing D _) N).symm ≪≫ e) hT
+  obtain ⟨D, hD, ⟨p⟩⟩ := exists_constructibleFiniteTor_exactPairing_singleFunctor Λ F hF
+  obtain ⟨e⟩ := nonempty_iso_derivedHom_of_exactPairing p N
+  exact (constructibleFiniteTor _ X).prop_of_iso e (constructibleFiniteTor_tensor Λ X hD hN)
 
 section Devissage
 
@@ -139,15 +155,11 @@ instance : (derivedHomConstructibleFiniteTor Λ X).IsStableUnderRetracts where
             CategoryTheory.Functor.map_id, NatTrans.id_app] }
       (hK L hL)
 
-set_option maxHeartbeats 400000 in
--- the kernel check of the instance is slow
 instance : (derivedHomConstructibleFiniteTor Λ X).IsTriangulated where
   exists_zero := by
     open ZeroObject in
     exact ⟨0, isZero_zero _, fun L _ ↦ (constructibleFiniteTor _ X).prop_of_isZero
-      (letI := (_root_.DerivedCategory.nonempty_braidedCategory
-        (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))).some
-      MonoidalCategory.isZero_ihom_obj_of_isZero (isZero_zero _) L)⟩
+      (isZero_derivedHom_obj_of_isZero _ (isZero_zero _) L)⟩
   isStableUnderShiftBy a := ⟨fun K hK L hL ↦ (constructibleFiniteTor _ X).prop_of_iso
     ((derivedHomShiftIso _ K a).app L).symm
       ((constructibleFiniteTor (ModuleCat.{u + 1} Λ) X).le_shift (-a) _ (hK L hL))⟩

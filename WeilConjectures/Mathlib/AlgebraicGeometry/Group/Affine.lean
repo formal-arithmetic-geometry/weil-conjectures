@@ -10,6 +10,9 @@ public import Mathlib.AlgebraicGeometry.Group.Affine
 /-!
 # Naturality of `Spec.mapMulEquiv`
 
+The instance `specOverSpec` gets a low priority, so that `Spec R` lies over itself through the
+identity.
+
 Precomposing the morphism of affine schemes `Spec T ⟶ Spec S` given by an algebra homomorphism
 `S → T` with `Spec U ⟶ Spec T`, for an algebra homomorphism `T → U`, corresponds to composing the
 algebra homomorphisms.
@@ -42,5 +45,10 @@ theorem Spec.map_asOver_comp_mapMulEquiv (φ : T →ₐ[R] U) (ψ : WithConv (S 
   change Spec.map _ ≫ Spec.map _ = Spec.map _
   rw [← Spec.map_comp, ← CommRingCat.ofHom_comp]
   rfl
+
+-- `Spec R` lies over itself both through the identity (`CategoryTheory.OverClass` of an object
+-- over itself) and through `specOverSpec` for the algebra `R → R`. Lower the priority of
+-- `specOverSpec` so that the identity is found, as in files not importing this one.
+attribute [instance 50] specOverSpec
 
 end AlgebraicGeometry

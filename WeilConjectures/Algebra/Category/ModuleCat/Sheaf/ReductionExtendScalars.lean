@@ -84,6 +84,13 @@ lemma adjunction_unit_app (F : 𝒜) : D.adjunction.unit.app F = D.r.app F := by
 
 end CategoryTheory.Functor.ReductionDatum
 
+-- Make instance search produce the braiding `SymmetricCategory.toBraidedCategory` of `ModuleCat`, as
+-- used by the derived tensor product of étale sheaves (`AlgebraicGeometry.Etale.derivedTensor`), so
+-- that the monoidal statements below can be compared cheaply with those about derived tensor
+-- products.
+attribute [local instance high] SymmetricCategory.toBraidedCategory
+attribute [local instance 20000] GrothendieckTopology.braidedCategory_sheaf_of_essentiallySmall
+
 namespace CategoryTheory.Sheaf
 
 variable {C : Type (u + 1)} [Category.{u} C] [EssentiallySmall.{u + 1} C]

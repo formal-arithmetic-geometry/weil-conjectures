@@ -154,8 +154,11 @@ variable {X' Y' W Z : Scheme.{u}} [X'.Over (Spec (CommRingCat.of k₀))]
   [LocallyOfFiniteType (Y' ↘ Spec (CommRingCat.of k₀))]
   [QuasiCompact (Y' ↘ Spec (CommRingCat.of k₀))]
 
+omit [IsProper q] [q.IsOver (Spec (CommRingCat.of k₀))]
+  [LocallyOfFiniteType (Y' ↘ Spec (CommRingCat.of k₀))]
+  [QuasiCompact (Y' ↘ Spec (CommRingCat.of k₀))] in
 /-- Auxiliary form of
-`AlgebraicGeometry.ProEtaleWeilSheaf.isIso_counit_app_rightDerivedLowerStar_obj_extensionByZero_obj`,
+`ProEtaleWeilSheaf.isIso_counit_app_rightDerivedLowerStar_obj_extensionByZero_obj`,
 for a given closed immersion `ι` complementary to `i`. -/
 lemma ProEtaleWeilSheaf.isIso_counit_app_rightDerivedLowerStar_obj_extensionByZero_obj_aux
     {C : Scheme.{u}} [C.Over (Spec (CommRingCat.of k₀))] (ι : C ⟶ Z) [IsClosedImmersion ι]
@@ -184,6 +187,9 @@ lemma ProEtaleWeilSheaf.isIso_counit_app_rightDerivedLowerStar_obj_extensionByZe
         ((ProEtaleWeilSheaf.extensionByZero k₀ l a).mapDerivedCategory.obj K.obj))
     exact @IsIso.of_isIso_comp_left _ _ _ _ _ _ _ inferInstance (by rw [h]; infer_instance)
 
+omit [IsProper q] [q.IsOver (Spec (CommRingCat.of k₀))]
+  [LocallyOfFiniteType (Y' ↘ Spec (CommRingCat.of k₀))]
+  [QuasiCompact (Y' ↘ Spec (CommRingCat.of k₀))] in
 /-- For a commutative square `a ≫ b = q ≫ i` with `a`, `i` open immersions and `b`, `q` proper,
 the counit `i_! i^* E ⟶ E` is an isomorphism for `E = Rb_* a_! K`, `K` a Weil complex: its
 pullback along `i` is invertible, `D(i_!)` being fully faithful, and its pullback to the closed
@@ -285,7 +291,8 @@ noncomputable def ProEtaleWeilSheaf.rightDerivedLowerStarExtensionByZeroIso
       (ProEtaleWeilSheaf.lowerStar k₀ l (pullback.snd b i)).rightDerivedFunctor ≅
       (ProEtaleWeilSheaf.lowerStar k₀ l q).rightDerivedFunctor :=
     Functor.isoWhiskerRight
-        ((ProEtaleWeilSheaf.extensionByZero k₀ l a').rightDerivedFunctorIsoMapDerivedCategory.symm ≪≫
+        ((ProEtaleWeilSheaf.extensionByZero k₀ l
+          a').rightDerivedFunctorIsoMapDerivedCategory.symm ≪≫
           Functor.rightDerivedFunctorNatIso
             (asIso (ProEtaleWeilSheaf.extensionByZeroToLowerStar k₀ l a'))) _ ≪≫
       (ProEtaleWeilSheaf.rightDerivedLowerStarCompIso k₀ l a' (pullback.snd b i)).symm ≪≫
@@ -319,12 +326,14 @@ variable (k₀ l) in
 /-- **The direct image with compact support does not change under refinement of the
 compactification** (blueprint `prop-compactification-coherence-detailed`): for a refinement
 `r : c ⟶ d` of compactifications of `f`, `R^c f_! ≅ R^d f_!` on Weil complexes, since
-`Rr_* ∘ c.i_! ≅ d.i_!` (`AlgebraicGeometry.ProEtaleWeilSheaf.rightDerivedLowerStarExtensionByZeroIso`
+`Rr_* ∘ c.i_! ≅ d.i_!`
+(`AlgebraicGeometry.ProEtaleWeilSheaf.rightDerivedLowerStarExtensionByZeroIso`
 for the square `c.i ≫ r = 𝟙 ≫ d.i`) and `c.g = r ≫ d.g`. -/
 noncomputable def ProEtaleWeilSheaf.rightDerivedLowerShriekIsoOfRefinement
     {c d : Compactification f} (r : c.Refinement d) :
     (WeilComplex.objectProperty k₀ l X).ι ⋙ ProEtaleWeilSheaf.rightDerivedLowerShriek k₀ l f c ≅
-      (WeilComplex.objectProperty k₀ l X).ι ⋙ ProEtaleWeilSheaf.rightDerivedLowerShriek k₀ l f d := by
+      (WeilComplex.objectProperty k₀ l X).ι ⋙
+        ProEtaleWeilSheaf.rightDerivedLowerShriek k₀ l f d := by
   have := c.locallyOfFiniteType
   have : LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀)) := by
     rw [← comp_over f (Spec (CommRingCat.of k₀))]
@@ -486,6 +495,7 @@ variable {X X' Z Z' : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
   (i : X ⟶ Z) [IsOpenImmersion i] [i.IsOver (Spec (CommRingCat.of k₀))]
   (p : Z' ⟶ Z) [p.IsOver (Spec (CommRingCat.of k₀))]
 
+omit [Fact (ringChar k₀ ≠ l)] [g.IsOver (Spec (CommRingCat.of k₀))] in
 /-- Auxiliary form of
 `AlgebraicGeometry.ProEtaleWeilSheaf.isIso_counit_app_upperStar_obj_extensionByZero_obj`, for a
 given closed immersion `ι` complementary to `i'`. -/

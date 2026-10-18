@@ -111,7 +111,8 @@ structure HasKunnethComparisons (S : Scheme.{u}) : Prop where
         externalProduct A b₁ b₂ ((R(f₁)_![A]).obj M₁) ((R(f₂)_![A]).obj M₂))
   /-- The exceptional Künneth map `α` is an isomorphism. -/
   exceptional : ∀ {X₁ X₂ Y₁ Y₂ : Scheme.{u}} (b₁ : Y₁ ⟶ S) (b₂ : Y₂ ⟶ S)
-      [LocallyOfFiniteType b₁] [QuasiCompact b₁] [LocallyOfFiniteType b₂] [QuasiCompact b₂]
+      [IsSeparated b₁] [LocallyOfFiniteType b₁] [QuasiCompact b₁]
+      [IsSeparated b₂] [LocallyOfFiniteType b₂] [QuasiCompact b₂]
       (f₁ : X₁ ⟶ Y₁) (f₂ : X₂ ⟶ Y₂) [HasCompactification f₁] [HasCompactification f₂]
       [QuasiCompact f₁] [QuasiCompact f₂]
       [HasCompactification (pullback.mapOverBase f₁ f₂ b₁ b₂)]

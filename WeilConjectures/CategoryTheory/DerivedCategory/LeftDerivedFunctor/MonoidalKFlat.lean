@@ -181,6 +181,13 @@ instance isIso_leftDerivedTensorComparisonOfKFlat :
   dsimp only [leftDerivedTensorComparisonOfKFlat]
   infer_instance
 
+/-- The isomorphism `LF(K ⊗ᴸ M) ≅ LF K ⊗ᴸ LF M`, natural in `M`, for a fixed `K`: a component of
+the comparison `CategoryTheory.Functor.leftDerivedTensorComparisonOfKFlat`. -/
+noncomputable def leftDerivedTensorIsoOfKFlat (K : DerivedCategory C) :
+    (curriedTensor (DerivedCategory C)).obj K ⋙ F.leftDerivedFunctor ≅
+      F.leftDerivedFunctor ⋙ (curriedTensor (DerivedCategory D)).obj (F.leftDerivedFunctor.obj K) :=
+  (asIso F.leftDerivedTensorComparisonOfKFlat).app K
+
 end Comparison
 
 end CategoryTheory.Functor

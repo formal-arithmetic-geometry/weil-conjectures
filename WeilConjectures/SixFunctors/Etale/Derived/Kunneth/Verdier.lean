@@ -6,7 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Comparisons
-public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.ExceptionalClosed
+public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.ExceptionalGeneral
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriekIso
 
 /-!
@@ -159,15 +159,15 @@ For morphisms `f₁ : X₁ ⟶ Y₁` and `f₂ : X₂ ⟶ Y₂` admitting compac
 
 `α : Rf₁^! N₁ ⊠ Rf₂^! N₂ ≅ R(f₁ × f₂)^! (N₁ ⊠ N₂)`.
 
-Proved cases: open immersions
-(`AlgebraicGeometry.Etale.nonempty_iso_externalProduct_rightDerivedUpperShriek_of_isOpenImmersion`)
-and smooth morphisms
-(`AlgebraicGeometry.Etale.nonempty_iso_externalProduct_rightDerivedUpperShriek_of_smooth`). The
-general case needs the dévissage of the blueprint proof (closed immersions by localization, the
-induction on the dimension of the supports). -/
+As in the blueprint (`AlgebraicGeometry.Etale.exceptionalKunneth_mapOverBase`): `f₁ × f₂` is
+`(f₁ × 𝟙) ∘ (𝟙 × f₂)`, and `f × 𝟙` factors through the graph of `f`, a closed immersion
+(supported localization), and a base change of a structure morphism, handled by the constant
+coefficient case, itself proved by smooth purity for affine spaces, supported localization for
+closed immersions and the open–closed dévissage on the source. -/
 theorem nonempty_iso_externalProduct_rightDerivedUpperShriek {X₁ X₂ Y₁ Y₂ : Scheme.{u}}
     (b₁ : Y₁ ⟶ Spec (.of k)) (b₂ : Y₂ ⟶ Spec (.of k))
-    [LocallyOfFiniteType b₁] [QuasiCompact b₁] [LocallyOfFiniteType b₂] [QuasiCompact b₂]
+    [IsSeparated b₁] [LocallyOfFiniteType b₁] [QuasiCompact b₁]
+    [IsSeparated b₂] [LocallyOfFiniteType b₂] [QuasiCompact b₂]
     (f₁ : X₁ ⟶ Y₁) (f₂ : X₂ ⟶ Y₂) [HasCompactification f₁] [HasCompactification f₂]
     [QuasiCompact f₁] [QuasiCompact f₂]
     [HasCompactification (pullback.mapOverBase f₁ f₂ b₁ b₂)]
@@ -179,7 +179,7 @@ theorem nonempty_iso_externalProduct_rightDerivedUpperShriek {X₁ X₂ Y₁ Y�
         ((R(f₁)^![ModuleCat.{u + 1} Λ]).obj N₁) ((R(f₂)^![ModuleCat.{u + 1} Λ]).obj N₂) ≅
       (R(pullback.mapOverBase f₁ f₂ b₁ b₂)^![ModuleCat.{u + 1} Λ]).obj
         (externalProduct (ModuleCat.{u + 1} Λ) b₁ b₂ N₁ N₂)) :=
-  sorry
+  exceptionalKunneth_mapOverBase Λ (rightDerivedLowerShriekCompCoherence Λ) b₁ b₂ f₁ f₂ h₁ h₂
 
 /-- Blueprint `prop-trf-external-hom`: External Hom; the `β` map.
 
@@ -270,7 +270,7 @@ theorem hasKunnethComparisons :
     exact nonempty_iso_rightDerivedLowerShriek_mapOverBase_externalProduct (Λ := Λ) b₁ b₂ f₁ f₂
       hM₁ hM₂
   exceptional := by
-    intro _ _ _ _ b₁ b₂ _ _ _ _ f₁ f₂ _ _ _ _ _ _ _ _ _ _ h₁ h₂
+    intro _ _ _ _ b₁ b₂ _ _ _ _ _ _ f₁ f₂ _ _ _ _ _ _ _ _ _ _ h₁ h₂
     exact nonempty_iso_externalProduct_rightDerivedUpperShriek Λ k b₁ b₂ f₁ f₂ h₁ h₂
   externalHom := by
     intro _ _ c₁ c₂ _ _ _ _ _ _ _ _ _ _ hE₁ hE₂ hN₁ hN₂
