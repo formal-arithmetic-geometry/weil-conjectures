@@ -12,9 +12,72 @@
   "def-sbc-smooth-morphisms",
   "def-weil-affine-spectrum"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix a geometric point of $X$ and choose the compatible chart neighbourhoods in the hypothesis; write them again as $X,Y$. Put $P=A$, $Q=B$, $h:P\\to Q$, and let $n$ be the positive order of the torsion subgroup of $Q^{\\rm gp}/h^{\\rm gp}(P^{\\rm gp})$. Although $n$ is only assumed invertible on the source, its image is nonzero in the residue field of our source point, hence also in the residue field of its image in $Y$. Restrict $Y$ to its open locus where $n$ is invertible and restrict $X$ to its inverse image. This retains the point and the charts and smooth comparison. The geometric-stalk definition [def-trf-fs-log-blowup] shows directly that restricting a log regular scheme to these neighbourhoods retains log regularity. It suffices to prove the result on such neighbourhoods: an etale neighbourhood of a geometric point has the same strict local ring and log stalk at that point, since the pointed etale neighbourhoods defining that stalk refine each other.",
+   "uses": [
+    "def-trf-fs-log-blowup"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 1.1--1.2, p.69; pointwise reduction for VI 1.8, p.70."
+   }
+  },
+  {
+   "text": "Apply [lem-per-fs-chart-torsion-factorization] to $h:P\\to Q$. It gives the explicit fs monoid $R=\\{q\\in Q:\\exists m>0,\\ mq\\in h(P)\\}$ and a factorization $P\\xrightarrow{a}R\\xrightarrow{b}Q$. The first map is Kummer and has injective group map with finite cokernel of order $n$, annihilated by $n$; the second has injective group map with torsion-free cokernel. These conclusions include group-completion torsion and do not require sharp charts.",
+   "uses": [
+    "lem-per-fs-chart-torsion-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 1.8 and 2.1, pp.70--71; agent-supplied saturation factorization using VIII 3.1.17, p.101."
+   }
+  },
+  {
+   "text": "Form $Y_R=Y\\times_{\\operatorname{Spec}\\mathbf Z[P]}\\operatorname{Spec}\\mathbf Z[R]$. First, local Noetherianity: on an affine chart $Y=\\operatorname{Spec}D$ the affine fibre-product formula [lem-weil-pbc-fibre-product-affine-spectra] gives the ring $D\\otimes_{\\mathbf Z[P]}\\mathbf Z[R]$. If $r_1,\\ldots,r_s$ generate $R$, this is a quotient of $D[T_1,\\ldots,T_s]$ by the surjective map $T_i\\mapsto1\\otimes z^{r_i}$: each tensor is a sum of $d\\otimes z^{\\sum e_i r_i}=d\\prod_i(1\\otimes z^{r_i})^{e_i}$. It is Noetherian by [lem-weil-pbc-finite-type-algebra-noetherian]. Now give $Y_R$ the log structure $L_{Y_R}(R,\\beta)$ associated to $\\beta:R\\to\\Gamma(Y_R,\\mathcal O)$, $r\\mapsto 1\\otimes z^r$ [lem-trf-associated-log-universal-stalks]; its stalk formula says exactly that $R$ is a chart in the sense of [def-trf-fs-log-blowup], so $Y_R$ is fs because $R$ is fs. On $Y$ the chart identifies $M_Y$ with $L_Y(P)$, and the universal property of [lem-trf-associated-log-universal-stalks] (applied on $Y_R$ to the inverse image, $[p,u]\\mapsto[a(p),u]$) gives the map of log structures of $Y_R\\to Y$ with chart $a:P\\to R$. Its comparison with this very same fibre product is the identity, hence etale. Its finite group cokernel is annihilated by $n$, which is invertible on $Y$ by step 1. Thus every hypothesis of [lem-per-invertible-kummer-chart-log-regular] holds, and $Y_R$ is log regular.",
+   "uses": [
+    "def-trf-fs-log-blowup",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-trf-associated-log-universal-stalks",
+    "lem-per-invertible-kummer-chart-log-regular"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 2.1--2.2, pp.71--72; VI 1.8, p.70. Noetherianity: Stacks Tag 00FN (lemma-Noetherian-permanence)."
+   }
+  },
+  {
+   "text": "The original $Q$-chart on $X$ and $b:R\\to Q$ induce a log morphism $X\\to Y_R$: on functions the new $R$-monomials are sent to their $Q$-monomials. Its compatible map of log structures comes from [lem-trf-associated-log-universal-stalks]: the inverse image of $L_{Y_R}(R)$ maps to $L_X(R)$ by $[r,u]\\mapsto[r,u]$, and the universal property of $L_X(R)$ turns the monoid map $R\\xrightarrow{b}Q\\to M_X(X)$, compatible with the structure maps to $\\mathcal O_X$, into a map $L_X(R)\\to M_X$; by construction $R\\to Q$ is a compatible chart map for $X\\to Y_R$. Its comparison target is canonically the original target, since\n$$\\left(Y\\times_{\\operatorname{Spec}\\mathbf Z[P]}\\operatorname{Spec}\\mathbf Z[R]\\right)\\times_{\\operatorname{Spec}\\mathbf Z[R]}\\operatorname{Spec}\\mathbf Z[Q]\\cong Y\\times_{\\operatorname{Spec}\\mathbf Z[P]}\\operatorname{Spec}\\mathbf Z[Q].$$\nIndeed both fibre-product universal properties specify precisely a map to $Y$ and a compatible map to $\\operatorname{Spec}\\mathbf Z[Q]$; the map to $\\operatorname{Spec}\\mathbf Z[R]$ is forced by $b$. This identification sends the comparison of $X\\to Y_R$ to the given smooth comparison of $f$. Now apply [lem-trf-log-smooth-log-regular] to $X\\to Y_R$, with its fs charts $R,Q$: both schemes are locally Noetherian, $Y_R$ is log regular by step 3, $b^{\\rm gp}$ is injective with torsion-free cokernel by step 2, and the comparison is smooth as just checked. Its log-regularity conclusion gives log regularity at our chosen point of $X$. Repeating step 1 at every geometric point proves the assertion, including the vacuous empty-source case. No torsion-freeness of the original cokernel has been imposed.",
+   "uses": [
+    "def-trf-fs-log-blowup",
+    "lem-trf-associated-log-universal-stalks",
+    "lem-trf-log-smooth-log-regular"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 1.8, p.70, reduced to the Kummer case VI 2.2 and the existing torsion-free chart theorem by an explicit fibre-product identification."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-fs-log-blowup",
+  "lem-per-fs-chart-torsion-factorization",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-trf-associated-log-universal-stalks",
+  "lem-per-invertible-kummer-chart-log-regular",
+  "lem-trf-log-smooth-log-regular"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VI 1.8, p.70, and VI 2.1--2.2, pp.71--72; factorization through the root saturation of the chart image. ILO only cites Kato 1994, 8.2 for the general preservation theorem; this split supplies a different algebraic reduction using existing DAG tools."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -53,7 +116,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-regular-log-smooth-monomial-chart",
@@ -79,5 +142,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-log-smooth-invertible-torsion-log-regular",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Separated the finite invertible chart torsion by an explicit Kummer intermediate chart. Reused the existing Kummer preservation lemma and torsion-free chart theorem; verified invertibility on the intermediate base, local Noetherianity by finite monomial generators, log-structure compatibility and the smooth comparison by fibre-product universal properties. One new statement-only monoid factorization node; no Mathlib leaf.",
+  "blueprint": "The recorded regular finite-torsion local-model branch of lem-per-artin-gabber-affine-curve, Proof Step 3, through lem-per-regular-log-smooth-monomial-chart and ILO XVI 3.6.5; this is its log-regularity input VI 1.8. No change to the chapter or Fourier unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-log-smooth-log-regular",
+    "why": "Generic preservation theorem for torsion-free injective charts, used only after separating the finite torsion by the Kummer intermediate base; the unit has no torsion-free replacement theorem."
+   },
+   {
+    "node": "lem-weil-pbc-fibre-product-affine-spectra",
+    "why": "Generic affine fibre-product ring formula to check that the intermediate chart scheme is locally Noetherian."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-log-smooth-log-regular",
+  "lem-weil-pbc-fibre-product-affine-spectra"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q108-38a7bf05c",
+  "group": "Q108",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q108-38a7bf05c (reviewer sub-agent of L); spot-checked: Read ILO VI 1.8 (p.70: log smooth over log regular implies log regular, proof deferred to Kato 1994 8.2); the item's chart reading with torsion of order invertible on the source matches Kato's criterion, and the statement is unchanged. Step 1: n invertible at x implies invertible at f(x), since kappa(f(x)) embeds in kappa(x); restricting to D(n) keeps the charts, the comparison and log regularity, which is checked pointwise at geometric points. Step 2: uses only what the new node states. Step 3: checked each hypothesis of lem-per-invertible-kummer-chart-log-regular (fs and locally Noetherian, where finite type comes from the monomial generators via the 01I4 node and 00FN; a injective; Kummer; finite cokernel annihilated by n, invertible on Y; identity comparison is etale). Step 4: checked each hypothesis of lem-trf-log-smooth-log-regular (b^gp injective with torsion-free cokernel Q^gp/H; smooth comparison through the pasted fibre products). New node lem-per-fs-chart-torsion-factorization: proved it myself. R^gp=H by the trick n(g+p2)=p1+(n-1)p2; R is saturated in H; R is finitely generated as the saturation of h(P) plus coset representatives, via lem-trf-fine-monoid-finite-saturation. Tested on N->N with 1->n, N->Z, N->N^2, 0->finite group and the identity: true. Not a duplicate of trf fs-chart-free-factorization (torsion-free cokernel), fine-monoid-finite-saturation (saturates in the monoid's own group) or log-regular-toric-refinement (P^gp=Q^gp), and not a restatement of the item. Fault C1/C4: Steps 3 and 4 took the associated log structure on Y_R and the log maps Y_R->Y and X->Y_R from def-trf-fs-log-blowup, which neither constructs the associated log structure nor states its universal property. FIX: steps 3 and 4 now cite lem-trf-associated-log-universal-stalks (existence, stalk formula, universal property), with Noetherianity proved first in step 3, and proof_deps updated. Batch 5: def-trf-fs-log-blowup is a general definition (closure: two trf defs); lem-trf-log-smooth-log-regular is generic VI 1.8 log geometry, and its closure holds only monoid/toric/Tor/Hilbert-Samuel/strict-henselization lemmas, with no thm-trf and no trace or duality content. Both accepted, and the added node is generic and already in that closure. No cycle, no SGA citation. tool_uses accepted; the maintainer should record lem-trf-associated-log-universal-stalks as a generic tool.; 1 file(s) fixed by the reviewer"
  }
 }
