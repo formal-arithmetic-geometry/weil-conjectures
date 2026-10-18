@@ -1469,6 +1469,7 @@ public import WeilConjectures.AlgebraicGeometry.Morphisms.Finite.SplitExists
 public import WeilConjectures.AlgebraicGeometry.Morphisms.Finite.SplitNeighborhood
 public import WeilConjectures.AlgebraicGeometry.Morphisms.FiniteFlatNorm
 public import WeilConjectures.AlgebraicGeometry.Morphisms.Frobenius
+public import WeilConjectures.AlgebraicGeometry.Morphisms.FrobeniusExistence
 public import WeilConjectures.AlgebraicGeometry.Morphisms.FrobeniusPoints
 public import WeilConjectures.AlgebraicGeometry.Morphisms.GenericFiniteness
 public import WeilConjectures.AlgebraicGeometry.Morphisms.Integral.DisjointCover
@@ -4616,6 +4617,7 @@ public import WeilConjectures.TraceFormula.Frobenius
 public import WeilConjectures.TraceFormula.KunnethVerdier
 public import WeilConjectures.TraceFormula.LocalTerm
 public import WeilConjectures.TraceFormula.Main
+public import WeilConjectures.TraceFormula.ModelDecomposition
 public import WeilConjectures.TraceFormula.OpenCover
 public import WeilConjectures.TraceFormula.OpenSquare
 public import WeilConjectures.TraceFormula.Product

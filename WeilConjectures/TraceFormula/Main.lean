@@ -485,16 +485,6 @@ theorem modelTraceFormula_of_smoothOfRelativeDimension_one [IsAlgClosed k] {X₀
     ModelTraceFormula ℓ (k := k) f₀ :=
   sorry
 
-/-- **The trace formula is additive** (blueprint `sk-i-global-additivity`): for a closed
-subscheme `i₀ : Z₀ ⟶ X₀` with open complement `j₀ : U₀ ⟶ X₀`, the trace formula over `U₀` and
-over `Z₀` gives the trace formula over `X₀`. -/
-theorem modelTraceFormula_of_isCompl {X₀ U₀ Z₀ : Scheme.{u}} (f₀ : X₀ ⟶ Spec (.of k₀))
-    [LocallyOfFiniteType f₀] (j₀ : U₀ ⟶ X₀) (i₀ : Z₀ ⟶ X₀) [IsOpenImmersion j₀]
-    [IsClosedImmersion i₀] (hcompl : IsCompl (Set.range j₀.base) (Set.range i₀.base))
-    (hU : ModelTraceFormula ℓ (k := k) (j₀ ≫ f₀)) (hZ : ModelTraceFormula ℓ (k := k) (i₀ ≫ f₀)) :
-    ModelTraceFormula ℓ (k := k) f₀ :=
-  sorry
-
 /-- **The trace formula over every model** (blueprint `sk-thm-trace-formula`), by Noetherian
 induction from `modelTraceFormula_of_isCompl`, `modelTraceFormula_of_isFinite`,
 `modelTraceFormula_of_smoothOfRelativeDimension_one` and the fibration step of

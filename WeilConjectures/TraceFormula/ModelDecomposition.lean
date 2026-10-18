@@ -379,4 +379,64 @@ theorem traceFormula_of_isCompl [IsSepClosed k] {Φ : X ⟶ X} {ΦU : U ⟶ U} {
 
 end WeilBoundedConstructible
 
+/-! ### Additivity of the trace formula over a model -/
+
+section Model
+
+variable {ℓ : ℕ} [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).Prime]
+  [Fact (ringChar k ≠ ℓ)] {k₀ : Type u} [Field k₀] [Finite k₀] [Algebra k₀ k]
+
+/-- **The trace formula is additive** (blueprint `sk-i-global-additivity`): for a closed
+subscheme `i₀ : Z₀ ⟶ X₀` with open complement `j₀ : U₀ ⟶ X₀`, the trace formula over `U₀` and
+over `Z₀` gives the trace formula over `X₀`. The base changes `U = U₀ ×_{X₀} X` and
+`Z = Z₀ ×_{X₀} X` are models of `U₀` and `Z₀` (`IsModelFrobenius.baseChange`), and
+`WeilBoundedConstructible.traceFormula_of_isCompl` assembles the trace formulas. -/
+theorem modelTraceFormula_of_isCompl [IsAlgClosed k] {X₀ U₀ Z₀ : Scheme.{u}}
+    (f₀ : X₀ ⟶ Spec (.of k₀)) [LocallyOfFiniteType f₀] (j₀ : U₀ ⟶ X₀) (i₀ : Z₀ ⟶ X₀)
+    [IsOpenImmersion j₀] [IsClosedImmersion i₀]
+    (hcompl : IsCompl (Set.range j₀.base) (Set.range i₀.base))
+    (hU : ModelTraceFormula ℓ (k := k) (j₀ ≫ f₀)) (hZ : ModelTraceFormula ℓ (k := k) (i₀ ≫ f₀)) :
+    ModelTraceFormula ℓ (k := k) f₀ := by
+  intro X _ _ _ Φ p hΦ K m hm
+  obtain ⟨F₀, hF₀, hp⟩ := hΦ.exists_isFrobenius
+  obtain ⟨FU, hFU⟩ := Scheme.Hom.exists_isFrobenius (j₀ ≫ f₀)
+  obtain ⟨FZ, hFZ⟩ := Scheme.Hom.exists_isFrobenius (i₀ ≫ f₀)
+  have hFUc : FU ≫ j₀ = j₀ ≫ F₀ := (hFU.comp_eq_comp (j₀ ≫ f₀) hF₀ j₀).symm
+  have hFZc : FZ ≫ i₀ = i₀ ≫ F₀ := (hFZ.comp_eq_comp (i₀ ≫ f₀) hF₀ i₀).symm
+  have : IsLocallyNoetherian X.left := LocallyOfFiniteType.isLocallyNoetherian X.hom
+  have : LocallyOfFiniteType (modelBaseChange p j₀).hom :=
+    inferInstanceAs (LocallyOfFiniteType (pullback.snd j₀ p ≫ X.hom))
+  have : QuasiCompact (modelBaseChange p j₀).hom :=
+    inferInstanceAs (QuasiCompact (pullback.snd j₀ p ≫ X.hom))
+  have : IsSeparated (modelBaseChange p j₀).hom :=
+    inferInstanceAs (IsSeparated (pullback.snd j₀ p ≫ X.hom))
+  have : LocallyOfFiniteType (modelBaseChange p i₀).hom :=
+    inferInstanceAs (LocallyOfFiniteType (pullback.snd i₀ p ≫ X.hom))
+  have : QuasiCompact (modelBaseChange p i₀).hom :=
+    inferInstanceAs (QuasiCompact (pullback.snd i₀ p ≫ X.hom))
+  have : IsSeparated (modelBaseChange p i₀).hom :=
+    inferInstanceAs (IsSeparated (pullback.snd i₀ p ≫ X.hom))
+  have : IsOpenImmersion (modelBaseChangeHom p j₀).left :=
+    inferInstanceAs (IsOpenImmersion (pullback.snd j₀ p))
+  have : IsClosedImmersion (modelBaseChangeHom p i₀).left :=
+    inferInstanceAs (IsClosedImmersion (pullback.snd i₀ p))
+  have hΦU := hΦ.baseChange p j₀ hp hFUc hFU
+  have hΦZ := hΦ.baseChange p i₀ hp hFZc hFZ
+  have hcomplX : IsCompl (Set.range (pullback.snd j₀ p).base)
+      (Set.range (pullback.snd i₀ p).base) := by
+    rw [Scheme.Pullback.range_snd, Scheme.Pullback.range_snd]
+    exact hcompl.preimage p.base
+  have := hΦ.isFinite m
+  have := hΦ.isUniversalHomeomorphism m
+  have := hΦU.isFinite m
+  have := hΦU.isUniversalHomeomorphism m
+  have := hΦZ.isFinite m
+  have := hΦZ.isUniversalHomeomorphism m
+  intro _ _ _
+  exact WeilBoundedConstructible.traceFormula_of_isCompl hcomplX
+    (modelBaseChangeEndo_comp p j₀ hp hFUc) (modelBaseChangeEndo_comp p i₀ hp hFZc) K m
+    (hU _ _ _ hΦU _ m hm) (hZ _ _ _ hΦZ _ m hm)
+
+end Model
+
 end AlgebraicGeometry.ProEtale.CondensedRing
