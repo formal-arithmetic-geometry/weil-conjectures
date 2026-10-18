@@ -3,25 +3,79 @@
  "blueprint": {
   "is": "def-sfb-dc-open-base-change-morphism",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "The extension-by-zero exchange morphism",
- "statement": "Let $\\Lambda$ be a commutative condensed ring, and let\n\n$$\n\\begin{array}{ccc}\nX' & \\xrightarrow{\\;g'\\;} & X\\\\\n{\\scriptstyle j'}\\downarrow & & \\downarrow{\\scriptstyle j}\\\\\nZ' & \\xrightarrow{\\;g\\;} & Z\n\\end{array}\n$$\n\nbe a commutative square of the setting with $j$ and $j'$ open immersions. The *extension-by-zero\nexchange morphism* $\\mathrm{Ex}^{j}_{sq}\\colon j'_!\\circ Lg'^*\\to Lg^*\\circ j_!$ on\n$D_{\\mathrm{cons}}(X,\\Lambda)$ is the composite\n\n$$\nj'_!Lg'^*\\xrightarrow{\\ \\eta\\ }j'_!Lg'^*Lj^*j_!\\xrightarrow[\\ \\sim\\ ]{\\ \\theta\\ }j'_!Lj'^*Lg^*j_!\\xrightarrow{\\ \\varepsilon'\\ }Lg^*j_!.\n$$\n\nHere $\\eta$ is the unit of $j_!\\dashv Lj^*$ and $\\varepsilon'$ the counit of $j'_!\\dashv Lj'^*$\n([def-sfb-dc-open-lower-shriek-adjunction]). The isomorphism $\\theta$ is the pullback\ncomparison $Lg'^*Lj^*\\cong Lj'^*Lg^*$ of [sk-def-sfb-base-change-morphism] for the square\nread with $j'$ on top and $g'$, $g$ vertical, whiskered by $j'_!$ on the left and $j_!$ on the right.",
+ "statement": "Fix a prime $\\ell$ and a field $k$ of characteristic $p>0$ with $p\\ne\\ell$. All schemes below are separated and of finite type over $k$, and all arrows are $k$-morphisms, as in [sk-def-sfb-dc-setting]. Let $\\Lambda$ be any commutative condensed ring ([sk-def-sfb-condensed-ring]), and let\n\n$$\n\\begin{array}{ccc}\nX' & \\xrightarrow{\\;g'\\;} & X\\\\\n{\\scriptstyle j'}\\downarrow & & \\downarrow{\\scriptstyle j}\\\\\nZ' & \\xrightarrow{\\;g\\;} & Z\n\\end{array}\n$$\n\nbe a commutative square, so $j\\circ g'=g\\circ j'$, with $j$ and $j'$ open immersions. Use the restricted pullbacks of [def-sfb-dc-upper-star] and the restricted extensions by zero of [def-sfb-dc-open-lower-shriek]. The *extension-by-zero\nexchange morphism* $\\mathrm{Ex}^{j}_{sq}\\colon j'_!\\circ Lg'^*\\to Lg^*\\circ j_!$ of functors\n$D_{\\mathrm{cons}}(X,\\Lambda)\\to D_{\\mathrm{cons}}(Z',\\Lambda)$ is the composite\n\n$$\nj'_!Lg'^*\\xrightarrow{\\ \\eta\\ }j'_!Lg'^*Lj^*j_!\\xrightarrow[\\ \\sim\\ ]{\\ \\theta\\ }j'_!Lj'^*Lg^*j_!\\xrightarrow{\\ \\varepsilon'\\ }Lg^*j_!.\n$$\n\nHere $\\eta$ is the unit of $j_!\\dashv Lj^*$ and $\\varepsilon'$ the counit of $j'_!\\dashv Lj'^*$\n([def-sfb-dc-open-lower-shriek-adjunction]). The isomorphism $\\theta$ is the pullback\ncomparison $Lg'^*Lj^*\\cong Lj'^*Lg^*$ of [det-def-sfb-base-change-morphism-comparison] for the square\nread with $j'$ on top and $g'$, $g$ vertical, whiskered by $j'_!$ on the left and $j_!$ on the right.\n\nExplicitly, if $c_{a,b}\\colon L(b\\circ a)^*\\xrightarrow{\\sim}La^*Lb^*$ denotes the composition isomorphism used in that comparison, then\n$$\n\\theta=\\bigl(Lg'^*Lj^*\\xrightarrow{c_{g',j}^{-1}}L(j\\circ g')^*=L(g\\circ j')^*\\xrightarrow{c_{j',g}}Lj'^*Lg^*\\bigr).\n$$\nFor $K\\in D_{\\mathrm{cons}}(X,\\Lambda)$ the component is therefore\n$$\n\\mathrm{Ex}^{j}_{sq,K}\n=\\varepsilon'_{Lg^*j_!K}\\circ j'_!\\bigl(\\theta_{j_!K}\\bigr)\\circ j'_!Lg'^*(\\eta_K).\n$$\nThis definition uses only commutativity of the square; it does not require the square to be cartesian or any preservation assumption on derived pushforwards.\n",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-open-base-change/def-sfb-dc-open-base-change-morphism.md",
   "place": "node def-sfb-dc-open-base-change-morphism, order 1804"
  },
  "stmt_deps": [
+  "sk-def-sfb-dc-setting",
+  "sk-def-sfb-condensed-ring",
+  "def-sfb-dc-upper-star",
+  "def-sfb-dc-open-lower-shriek",
   "def-sfb-dc-open-lower-shriek-adjunction",
-  "sk-def-sfb-base-change-morphism"
+  "det-def-sfb-base-change-morphism-comparison"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "boundedConstructibleOpenImmersion|extensionByZero.*[Bb]ase[Cc]hange|openImmersion.*[Ee]xchange",
+   "results": "No hits",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "exchange map extension by zero pullback on bounded constructible derived categories of pro-etale modules",
+   "results": "CategoryTheory.PreZeroHypercover.pullback₂_X, Function.ExtendByZero.linearMap, CategoryTheory.Precoverage.ZeroHypercover.instHasPullbackFOfHasPullbacksPresieve₀, HomologicalComplex.extendMap_zero, CategoryTheory.Precoverage.ZeroHypercover.pullback₂_toPreZeroHypercover, CategoryTheory.Precoverage.ZeroHypercover.pullback₁_toPreZeroHypercover, PresheafOfModules.pullback, CategoryTheory.PreZeroHypercover.pullback₁",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.whiskerLeft, CategoryTheory.whiskerRight",
+   "results": "No hits. loogle: unknown identifier 'CategoryTheory.whiskerLeft'",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "extension by zero exchange natural transformation on bounded constructible pro-etale derived categories built from adjunction unit pullback comparison and counit",
+   "results": "Condensed.profiniteSolidCounit, Condensed.profiniteSolidification, Condensed.instIsRightKanExtensionFintypeCatCondensedModProfiniteProfiniteSolidProfiniteSolidCounit, SheafOfModules.pullbackObjUnitToUnit, SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal, SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "mate of a natural isomorphism between composites of right adjoints using units and counits",
+   "results": "CategoryTheory.mateEquiv_apply, CategoryTheory.mateEquiv, CategoryTheory.mateEquiv_counit, CategoryTheory.mateEquiv_counit_symm, CategoryTheory.unit_mateEquiv, CategoryTheory.mateEquiv_symm_apply, CategoryTheory.unit_mateEquiv_symm, CategoryTheory.conjugateEquiv_apply_app; read Mathlib/CategoryTheory/Adjunction/Mates.lean:84-103: generic mateEquiv inverse constructs the formal composite, but does not define these project-specific restricted functors or their canonical comparison.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "def mate|def.*[Ee]xchange|def.*[Bb]ase[Cc]hange",
+   "results": "Mathlib/CategoryTheory/Monoidal/Category.lean, Mathlib/CategoryTheory/Monoidal/Category.lean, Mathlib/CategoryTheory/Monoidal/Transport.lean, Mathlib/CategoryTheory/Monoidal/Cartesian/Basic.lean, Mathlib/CategoryTheory/Monoidal/Cartesian/Basic.lean, Mathlib/CategoryTheory/Monoidal/Hopf_.lean, Mathlib/CategoryTheory/Monoidal/Closed/FunctorCategory/Basic.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean; searched subdirectory CategoryTheory",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.unit, CategoryTheory.Adjunction.counit",
+   "results": "CategoryTheory.Adjunction.toEquivalence, CategoryTheory.Adjunction.toEquivalence_functor, CategoryTheory.Adjunction.toEquivalence_inverse, CategoryTheory.Adjunction.left_triangle_components, CategoryTheory.Adjunction.right_triangle_components, CategoryTheory.Functor.isEquivalence_of_isRightAdjoint, CategoryTheory.Adjunction.left_triangle_components_assoc, CategoryTheory.Adjunction.right_triangle_components_assoc",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "unreachable"
@@ -46,5 +100,20 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "def-sfb-dc-open-base-change-morphism",
+  "worker": "stage1",
+  "summary": "Audited the definition against its current blueprint and the unit: made the setting and component formula explicit, retained the unit-square-counit construction and unrestricted condensed coefficients, and cited the existing comparison-only node instead of the larger base-change morphism node whose pushforward preservation hypothesis is unnecessary here. All constituent notions already exist; no new node or theorem is needed. No exact slopmaster2 attachment or Mathlib realization was found.",
+  "blueprint": "Definition node, entire displayed composite and final paragraph; realizes the exchange-morphism clause of unit sk-def-sfb-open-base-change step 1. The cartesian isomorphism and inverse clauses belong to their existing sibling nodes."
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-ND-accff2dc4",
+  "group": "ND",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-ND-accff2dc4 (reviewer sub-agent of L); spot-checked: I read the item in full against the blueprint source main-20261015 sk-def-sfb-open-base-change/def-sfb-dc-open-base-change-morphism.md (order 1804; the 20261017 copy is identical) and against the unit record (step 1). There are no new nodes. The item is a definition, and its six stmt_deps all exist, are unmerged and say what they are cited for. Setting and coefficients: the setting is the hypotheses of sk-def-sfb-dc-setting spelled out, which matches the archived master Proper.lean. Λ is any commutative condensed ring and D_cons consists of module objects over p_X^*Λ. The square is only commutative, with j and j' open immersions. No hypothesis is added and nothing is weakened. Master formula: the hα of the stage3-sfb-open-base-change-component nodes is unit whiskered by g'^* ⋙ j'_!, then squareTransport of boundedConstructiblePullbackSquareComparison applied to sq.flip, then the counit of j'. Its orientation and endpoints match the item's composite and its explicit θ = c_{j',g} ∘ c_{g',j}^{-1}. I checked this by substituting top j', left g', right g, bottom j into θ_sq of det-def-sfb-base-change-morphism-comparison. Replacing sk-def-sfb-base-change-morphism with det-def-sfb-base-change-morphism-comparison is correct: the comparison node is a blueprint node, reviewed by Q33 as PASS, valid for every commutative Λ and every commutative square, and it avoids the sk node's assumption that pushforwards preserve D_cons. I type-checked η, the whiskered θ and ε'. Edge cases: the identity square gives the identity by the triangle identity; empty X gives the zero map; a noncartesian square with g=id, j=id, j' a proper open gives the counit, which is not invertible and is not claimed to be; Λ=0 is fine. The duplicate grep over dag/nodes found no other node defining this map, so same_as=[] stands. There are no off-route uses and no tool_uses, and no SGA is cited. The Mathlib searches are recorded; mateEquiv is generic and gives no leaf. No fixes."
  }
 }
