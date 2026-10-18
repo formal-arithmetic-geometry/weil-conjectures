@@ -8801,8 +8801,11 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.Modification
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.Projective
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.ProjectiveCurve
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.Proper
+public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.QuotPowExtension
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.QuotPowHigherDirectImage
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.QuotPowHigherDirectImageLimit
+public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.QuotPowStratification
+public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.QuotPowTowerLocallyConstant
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.QuotientCoefficients
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.SetLocallyConstant
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.SetLocallyConstantScalars
@@ -9146,7 +9149,9 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.IntegersSheafLowerStar
 public import WeilConjectures.SixFunctors.ProEtale.Adic.IntegersSheafReduction
 public import WeilConjectures.SixFunctors.ProEtale.Adic.IntegersSheafStageMap
 public import WeilConjectures.SixFunctors.ProEtale.Adic.IntegersSheafStratum
+public import WeilConjectures.SixFunctors.ProEtale.Adic.IntegersSheafStratumFLC
 public import WeilConjectures.SixFunctors.ProEtale.Adic.IntegersSheafStratumTopology
+public import WeilConjectures.SixFunctors.ProEtale.Adic.IntegralLatticeScalarLinear
 public import WeilConjectures.SixFunctors.ProEtale.Adic.IntegralLatticeSections
 public import WeilConjectures.SixFunctors.ProEtale.Adic.IntegralLatticeTensorBijective
 public import WeilConjectures.SixFunctors.ProEtale.Adic.InternalHom
@@ -9198,6 +9203,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.LowerStar
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LowerStarClopenSections
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LowerStarComp
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LowerStarConstantBounded
+public import WeilConjectures.SixFunctors.ProEtale.Adic.LowerStarConstantFiniteness
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LowerStarDevissage
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LowerStarFiniteEtaleAlgClosed
 public import WeilConjectures.SixFunctors.ProEtale.Adic.MayerVietoris
