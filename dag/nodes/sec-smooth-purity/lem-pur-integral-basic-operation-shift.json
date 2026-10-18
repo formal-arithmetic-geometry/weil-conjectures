@@ -11,7 +11,8 @@
   "lem-sf-integral-compactification-system-realization",
   "lem-sf-generator-reduction-coherence",
   "lem-coef-derived-system-evaluation-calculus",
-  "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "def-pur-integral-operation-shift-data"
  ],
  "proof": [
   {
@@ -196,5 +197,38 @@
   "group": "NO",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NO-8b9cb9ada (reviewer sub-agent of L); spot-checked: Read the item, its parent and siblings, the statement of every cited node, the integral-operation definitions, the source fix-prop-coherence.proof.md (maps-used sentence) and the unit route. The statement is unchanged and right: same coefficient category, same hypotheses, and d_A exactly as the generator node specifies it. It is strictly smaller than its parent and duplicates no existing node. There is no cycle, and every cited unit is on the route of sk-thm-sf-compatibility, so no tool_uses are needed. Repaired three small faults in the item file. (1) Step 2 put the factor (-1)^{rp} on whichever tensor slot is shifted. I checked by hand that this is not a chain map for odd r when the first slot is shifted. The step now uses t_{a,b}: identity for the first slot, (-1)^{rp} for the second, and it separates the two completed-tensor slots. (2) Step 4 used d_j=u^{-1}L(r_j)^{-1} without citing it. It now cites lem-sf-integral-open-reduction-comparison and lem-coef-derived-system-evaluation-calculus, with the check that the unit is fixed by the cone map. (3) Step 5 said the integral shift comparisons come from Steps 1-2 (E5). It now cites def-pur-integral-derived-operations and def-weil-derived-direct-image: the integral operations are R lim of finite-level towers, so their shift is the termwise one plus the cone map (b,a)->(b,(-1)^r a), which I verified on cochains. proof_deps is updated; no nodes are added or dropped.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.IntegralBasicOperationShift",
+  "declaration": "WeilConjectures.IntegralSystemRealization.integralBasicOperationShift",
+  "declarations": [
+   "WeilConjectures.IntegralSystemRealization.BasicShiftOperation",
+   "WeilConjectures.IntegralSystemRealization.BasicShiftOperation.system",
+   "WeilConjectures.IntegralSystemRealization.BasicShiftOperation.integral",
+   "WeilConjectures.IntegralSystemRealization.BasicShiftOperation.source",
+   "WeilConjectures.IntegralSystemRealization.BasicShiftOperation.systemShift",
+   "WeilConjectures.IntegralSystemRealization.basicIntegralPushShift",
+   "WeilConjectures.IntegralSystemRealization.BasicShiftOperation.integralShift",
+   "WeilConjectures.IntegralSystemRealization.BasicShiftOperation.sourceShift",
+   "WeilConjectures.IntegralSystemRealization.BasicShiftOperation.comparison",
+   "WeilConjectures.IntegralSystemRealization.BasicShiftOperation.admissible",
+   "WeilConjectures.IntegralSystemRealization.BasicShiftCoherent",
+   "WeilConjectures.IntegralSystemRealization.integralBasicOperationShift"
+  ],
+  "file": "lean/Sheaf/SixFunctors/IntegralBasicOperationShift.lean",
+  "statement": "theorem integralBasicOperationShift (D : FiniteFieldDatum.{u}) (_hl : l ≠ D.p) (o : GeneratorReduction.Operations l E) {U V : Over (Spec (.of D.k))} (_hUt : LocallyOfFiniteType U.hom) (_hUq : QuasiCompact U.hom) (_hVt : LocallyOfFiniteType V.hom) (_hVq : QuasiCompact V.hom) (A : BasicShiftOperation l E _ U V) : BasicShiftCoherent (A.system l E o) (A.systemShift l E o) ∧ BasicShiftCoherent (A.integral l E o) (A.integralShift l E o) ∧ BasicShiftCoherent (A.source l E o) (A.sourceShift l E o) ∧ (∀ (K : Integral l E U.left) (lo hi torLo torHi : ℤ), A.admissible l E o K lo hi torLo torHi → ∀ r : ℤ, A.comparison l E o (K⟦r⟧) ≫ (A.integralShift l E o r K).hom = (A.sourceShift l E o r K).hom ≫ (A.comparison l E o K)⟦r⟧') ∧ (∀ (K L : Integral l E U.left) (f : K ⟶ L) (lo hi torLo torHi : ℤ), A.admissible l E o K lo hi torLo torHi → A.admissible l E o L lo hi torLo torHi → (A.source l E o).map f ≫ A.comparison l E o L = A.comparison l E o K ≫ (A.integral l E o).map f)",
+  "branch": "newtargets-dag",
+  "by": "Q54",
+  "date": "2026-10-18",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-a1d763b12"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a1d763b12",
+  "group": "Q54",
+  "result": "fix",
+  "note": "Read the node, the six source steps, all 5 stmt_dep records (byte-equal to live) and the side declarations: TensorShifts and its normalizations, limitShift/limitShift_roos, reductionShift, systemPull/Push/OpenShift, integralShifts, and GeneratorReduction pullD/tensorD/openD/openDInv/integralPush/Admissible/SystemAdmissible. Hypotheses (k, l≠p, E finite, finite-type U and V, separated/proper/qc-open maps, both tensor slots), d_A as the generator's, the signed tensor shifts, the Roos-pinned total-limit shift, common-bound admissibility, CommShift-pinned coherence clauses and naturality all match the node. Edge cases r=0, negative r, empty schemes and universes are covered. H3 fault: conjunct 4 added IsIso of d_A, which the node does not state; it is trivial for pull/tensor/push and restates the generator theorem's openD inverse laws for open. FIX drops that conjunct (fixes/IntegralBasicOperationShift.lean; record statement refit from the file). nt_compile --json clean: delivered 5.4 s, fixed 6.0 s. No hollow defs, sorry-only theorem, docstrings and blueprint ids, lines ≤100, imports = proof_deps modules, statement verbatim, no live name collision. Advisories: plain defs from theorem stmt_deps per the node's design; integral push shift is the composite on the generator's L∘S∘R push."
  }
 }
