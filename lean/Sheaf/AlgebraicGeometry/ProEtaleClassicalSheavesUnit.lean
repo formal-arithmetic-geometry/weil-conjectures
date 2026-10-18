@@ -7,10 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.ProEtaleSiteComparison
 import Sheaf.AlgebraicGeometry.ProEtaleComparisonPullbackSections
-import Sheaf.AlgebraicGeometry.EtaleSetInverseImageRestriction
 
-import Sheaf.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
-import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 /-!
 # The comparison unit for sheaves of sets
 
@@ -34,23 +31,17 @@ Source: Weil conjectures blueprint, main-20261015,
 (blueprint: det-pe-classical-sheaves-unit).
 
 Proof:
-1. Fix an etale sheaf F and an etale object V over X. Direct image in
-   def-weil-pbc-site-comparison-morphism is restriction, so its value at V after inverse
-   image is the value of the inverse image at V. Apply
-   lem-cbc-comparison-pullback-sections: this value is sections on V of the etale inverse
-   image of F, compatibly with the actual comparison unit. By
-   lem-weil-pbc-sets-etale-inverse-image-restriction these sections identify with F(V).
-   The composite starting with the unit sends each section to itself. Thus the unit
-   at V is bijective. All sheaves here are set-valued; no coefficient ring is needed.
-2. Invert these component bijections. Naturality of the unit, composed on both sides
-   with the component inverses, proves naturality of the inverses. They therefore give
-   an inverse sheaf morphism, proving the first clause, also for the empty scheme.
-3. The adjunction of def-weil-pbc-site-comparison-morphism identifies morphisms from
-   inverse image F to inverse image F' with morphisms from F to direct image of inverse
-   image F'. Naturality of the unit identifies the image of inverse image of a morphism
-   with its postcomposition by the unit at F'. This postcomposition is bijective by
-   step 2, hence so is inverse image on Hom sets. Explicitly the inverse sends psi to
-   the composite of the unit at F, direct image of psi, and inverse unit at F'. -/
+1. Apply lem-cbc-comparison-pullback-sections. Its normalization clause identifies
+   the comparison unit at each etale object, followed by the section equivalence
+   and the component of the comparison isomorphism, with the usual etale section
+   bijection. This last bijection is also a clause of that theorem, already proved
+   there from lem-weil-pbc-sets-etale-inverse-image-restriction. Cancel the two
+   injective comparison maps to conclude that the unit component is bijective.
+2. A natural transformation of set-valued presheaves is invertible when its
+   components are bijective. The sheaf-to-presheaf functor reflects isomorphisms,
+   so each sheaf unit is invertible, including over the empty scheme.
+3. Apply the adjunction theorem that an invertible unit makes the left adjoint
+   fully faithful, and take its bijection on Hom sets. -/
 theorem proEtaleClassicalSheavesUnit (X : Scheme.{u}) :
     (∀ F : Sheaf X.smallEtaleTopology (Type (u + 1)),
       IsIso ((proEtaleSiteComparison X).unit.app F)) ∧
@@ -59,6 +50,32 @@ theorem proEtaleClassicalSheavesUnit (X : Scheme.{u}) :
         (fun φ : F ⟶ F' ↦
           (Functor.sheafPullbackConstruction.sheafPullback (toProEt X)
             (Type (u + 1)) X.smallEtaleTopology (ProEt.topology X)).map φ)) := by
-  sorry
+  obtain ⟨A, e, p, _, _, hbij, hunit⟩ := proEtaleComparisonPullbackSections X
+  have hη : ∀ F : Sheaf X.smallEtaleTopology (Type (u + 1)),
+      IsIso ((proEtaleSiteComparison X).unit.app F) := by
+    intro F
+    have happ : ∀ U : X.Etaleᵒᵖ,
+        IsIso (((proEtaleSiteComparison X).unit.app F).hom.app U) := by
+      intro U
+      apply (isIso_iff_bijective _).2
+      let q := (p.app F).hom.hom.app (Opposite.op ((toProEt X).obj U.unop))
+      have hq : Function.Bijective q := ConcreteCategory.bijective_of_isIso q
+      have heq : (e F ((toProEt X).obj U.unop)) ∘ q ∘
+          ((proEtaleSiteComparison X).unit.app F).hom.app U =
+          proEtaleComparisonEtaleSection F U.unop := by
+        funext s
+        exact hunit F U.unop s
+      have hcomp := hbij F U.unop
+      rw [← heq] at hcomp
+      exact (hcomp.of_comp_left (e F ((toProEt X).obj U.unop)).injective).of_comp_left hq.1
+    have : IsIso ((sheafToPresheaf X.smallEtaleTopology (Type (u + 1))).map
+        ((proEtaleSiteComparison X).unit.app F)) := by
+      change IsIso ((proEtaleSiteComparison X).unit.app F).hom
+      exact NatIso.isIso_of_isIso_app _
+    exact isIso_of_reflects_iso _ (sheafToPresheaf X.smallEtaleTopology (Type (u + 1)))
+  refine ⟨hη, ?_⟩
+  have : IsIso (proEtaleSiteComparison X).unit := NatIso.isIso_of_isIso_app _
+  intro F F'
+  exact (proEtaleSiteComparison X).fullyFaithfulLOfIsIsoUnit.map_bijective F F'
 
 end AlgebraicGeometry.Scheme

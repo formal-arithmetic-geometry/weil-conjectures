@@ -17,11 +17,10 @@
  ],
  "proof": [
   {
-   "text": "Fix a sheaf of sets $F$ on $X_{\\Et}$ and an arbitrary etale object $h:V\\to X$. By [def-weil-pbc-site-comparison-morphism], $(\\nu_{X,*}\\nu_X^*F)(V)=(\\nu_X^*F)(V)$. Apply [lem-cbc-comparison-pullback-sections] to this object: its section isomorphism identifies this set with $\\Gamma(V_{\\Et},h_{\\Et}^{-1}F)$, and, importantly, its last sentence identifies the actual comparison unit with the usual identification on etale objects. By [lem-weil-pbc-sets-etale-inverse-image-restriction], $h_{\\Et}^{-1}F$ identifies with $F|_V$, whose value at the identity object is $F(V)$. Thus the composite $F(V)\\xrightarrow{\\eta_F(V)}(\\nu_X^*F)(V)\\xrightarrow{\\sim}\\Gamma(V_{\\Et},h_{\\Et}^{-1}F)\\xrightarrow{\\sim}F(V)$ sends every $s$ to $s$. All three nodes concern sheaves of sets; no abelian-category or coefficient-ring assumption is imposed. In particular $\\eta_F(V)$ is bijective.",
+   "text": "Fix an etale sheaf F and an arbitrary etale object U. The direct image of [def-weil-pbc-site-comparison-morphism] is restriction. Apply [lem-cbc-comparison-pullback-sections] and write its comparison isomorphism as p and its section equivalence as e. Its final clause says e composed with the U-component of p and the actual comparison unit equals the usual etale section map. Its preceding clause states that this usual map is bijective (the restriction identification has already been proved inside that theorem). Since e and the component of p are bijective, cancellation shows that the actual unit at U is bijective. No coefficient-ring or nonemptiness assumption is used.",
    "uses": [
     "def-weil-pbc-site-comparison-morphism",
-    "lem-cbc-comparison-pullback-sections",
-    "lem-weil-pbc-sets-etale-inverse-image-restriction"
+    "lem-cbc-comparison-pullback-sections"
    ],
    "elementary": false,
    "source": {
@@ -30,7 +29,7 @@
    }
   },
   {
-   "text": "For every etale object $V$, let $b_V$ be the inverse bijection of $\\eta_F(V)$ obtained in step 1. For an arrow $a:W\\to V$, naturality of $\\eta_F$ gives $(\\nu_*\\nu^*F)(a)\\eta_F(V)=\\eta_F(W)F(a)$. Multiply on the left by $b_W$ and on the right by $b_V$ to obtain $b_W(\\nu_*\\nu^*F)(a)=F(a)b_V$. The $b_V$ therefore define a morphism of sheaves inverse to $\\eta_F$, with both inverse identities checked on every object. This proves that the unit is an isomorphism for arbitrary $X$, including the empty scheme.",
+   "text": "The component bijections of step 1 give an invertible natural transformation of presheaves by Mathlib NatIso.isIso_of_isIso_app and isIso_iff_bijective. The sheaf-to-presheaf functor is fully faithful and reflects isomorphisms, hence each sheaf unit is invertible. Equivalently, naturality of the component inverses follows by composing the unit naturality square with the inverses. This also covers the empty scheme.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -39,7 +38,7 @@
    }
   },
   {
-   "text": "The adjunction $\\nu_X^*\\dashv\\nu_{X,*}$ of [def-weil-pbc-site-comparison-morphism] sends a morphism $\\psi:\\nu_X^*F\\to\\nu_X^*F'$ to $\\nu_{X,*}(\\psi)\\circ\\eta_F$ and is a bijection $\\Hom(\\nu_X^*F,\\nu_X^*F')\\cong\\Hom(F,\\nu_{X,*}\\nu_X^*F')$. For $\\psi=\\nu_X^*\\varphi$, naturality of the unit gives $\\nu_{X,*}\\nu_X^*(\\varphi)\\circ\\eta_F=\\eta_{F'}\\circ\\varphi$. Postcomposition with the isomorphism $\\eta_{F'}$ is a bijection, with inverse postcomposition with $\\eta_{F'}^{-1}$. Hence the comparison map on Hom sets, whose composite with the adjunction bijection is this postcomposition map, is itself bijective. Explicitly its inverse sends $\\psi$ to $\\eta_{F'}^{-1}\\circ\\nu_{X,*}(\\psi)\\circ\\eta_F$.",
+   "text": "The unit is a natural isomorphism by step 2. Apply Mathlib Adjunction.fullyFaithfulLOfIsIsoUnit to the adjunction of [def-weil-pbc-site-comparison-morphism], then Functor.FullyFaithful.map_bijective. This is the adjunction Hom argument: a morphism from inverse image F to inverse image F-prime corresponds to a morphism from F to direct image of inverse image F-prime; invertibility of the latter unit gives the required unique morphism from F to F-prime.",
    "uses": [
     "def-weil-pbc-site-comparison-morphism"
    ],
@@ -52,13 +51,13 @@
  ],
  "proof_deps": [
   "def-weil-pbc-site-comparison-morphism",
-  "lem-cbc-comparison-pullback-sections",
-  "lem-weil-pbc-sets-etale-inverse-image-restriction"
+  "lem-cbc-comparison-pullback-sections"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/proetale.tex",
-  "place": "Tag 099T, lemma-fully-faithful, using Tag 0GLZ, lemma-describe-pullback-from-etale; explicit adjunction argument for full faithfulness"
+  "place": "Tag 099T, lemma-fully-faithful, using Tag 0GLZ, lemma-describe-pullback-from-etale; explicit adjunction argument for full faithfulness",
+  "note": "D9, 2026-10-18: implemented the same sectionwise-unit and adjunction route; use both final clauses of the section theorem, which already includes the etale restriction bijection."
  },
  "mathlib_searches": [
   {
@@ -145,8 +144,7 @@
   ]
  },
  "tool_uses": [
-  "lem-cbc-comparison-pullback-sections",
-  "lem-weil-pbc-sets-etale-inverse-image-restriction"
+  "lem-cbc-comparison-pullback-sections"
  ],
  "reviewed": {
   "date": "2026-10-16",
@@ -187,5 +185,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D9",
+  "result": "pass",
+  "landing": "20261018T135904-L-2959270",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
