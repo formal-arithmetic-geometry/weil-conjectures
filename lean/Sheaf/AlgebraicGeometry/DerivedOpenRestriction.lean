@@ -8,11 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.ChosenCartesianSquare
 public import Sheaf.AlgebraicGeometry.DerivedCategories
 public import WeilConjectures.SixFunctors.BaseChange.Derived
-import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
-import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtaleOver
-import Sheaf.CategoryTheory.LocalizedModuleAdjunctionExact
-import Sheaf.AlgebraicGeometry.KInjectiveResolutionsExist
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+import WeilConjectures.SixFunctors.BaseChange.EtaleDerived
 
 /-!
 # Derived direct image restricted to an open
@@ -58,6 +54,7 @@ theorem isIso_derivedBaseChangeMapPlus_of_openImmersion
     (b : V ⟶ T) (fU : V ⟶ U) [IsOpenImmersion a]
     (sq : ChosenCartesianSquare b fU f a) :
     IsIso (derivedBaseChangeMapPlus (ModuleCat.{u + 1} Λ) sq.toCommSq) := by
-  sorry
+  exact isIso_derivedBaseChangeMapPlus_of_etale Λ
+    (IsPullback.of_iso_pullback sq.toCommSq sq.isoPullback sq.hom_fst sq.hom_snd)
 
 end AlgebraicGeometry.Etale
