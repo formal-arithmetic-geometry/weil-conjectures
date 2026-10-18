@@ -42,18 +42,25 @@ open Scheme
 
 namespace Etale
 
-variable (Λ : Type (u + 1)) [CommRing Λ]
+section Generic
 
-/-- The constant sheaf functor on étale sheaves of `Λ`-modules preserves flat objects: the stalk
-of `M_W` at every geometric point is `M`. -/
-instance preservesFlat_constantSheaf (W : Scheme.{u}) :
-    (constantSheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ)).PreservesFlat where
-  flat_obj {M} hM := (flat_iff_forall_flat_sheafFiber_obj _).2 fun s ↦
-    ObjectProperty.prop_of_iso _
-      ((pointSmallEtale s).ulift.{u + 1}.sheafFiberConstantSheafIso M).symm hM
+variable (A : Type (u + 1)) [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
+  [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
+  [Abelian.HasFunctorialFlatResolution A] (W : Scheme.{u})
+  [(constantSheaf W.smallEtaleTopology A).Monoidal]
+  [(constantSheaf W.smallEtaleTopology A).PreservesFlat]
+  [PreservesFiniteLimits (constantSheaf W.smallEtaleTopology A)]
 
-noncomputable def testA (W : Scheme.{u}) (M N : DerivedCategory (ModuleCat.{u + 1} Λ)) :=
-  ((constantSheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ)).leftDerivedTensorComparison.app M).app N
+noncomputable def testG (M N : DerivedCategory A) :
+    (constantSheaf W.smallEtaleTopology A).mapDerivedCategory.obj (M ⊗ N) ⟶
+      ((-⊗ᴸ-(W)[A]).obj ((constantSheaf W.smallEtaleTopology A).mapDerivedCategory.obj M)).obj
+        ((constantSheaf W.smallEtaleTopology A).mapDerivedCategory.obj N) :=
+  let F := constantSheaf W.smallEtaleTopology A
+  let e := F.leftDerivedFunctorIsoMapDerivedCategory
+  e.inv.app (M ⊗ N) ≫ (F.leftDerivedTensorComparison.app M).app N ≫
+    ((-⊗ᴸ-(W)[A]).map (e.hom.app M)).app _ ≫ ((-⊗ᴸ-(W)[A]).obj _).map (e.hom.app N)
+
+end Generic
 
 end Etale
 
