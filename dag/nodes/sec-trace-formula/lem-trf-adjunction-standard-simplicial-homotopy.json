@@ -8,11 +8,93 @@
   "place": "Tags 08NC (lemma-standard-simplicial), 08ND (lemma-standard-simplicial-homotopy), Situation 08N9. Here F is the left adjoint called U in the source, and U is its right adjoint called V."
  },
  "stmt_deps": [
-  "def-weil-pbc-simplicial-object"
+  "def-weil-pbc-simplicial-object",
+  "lem-coef-simplicial-extra-degeneracy-prism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write composites in functional order. The triangle identities give $\\epsilon_{Ga}\\delta_a=1_{Ga}$ and $G(\\epsilon_a)\\delta_a=1_{Ga}$: the first is the left-adjoint triangle at $Ua$, and the second is $F$ applied to $U\\epsilon_a\\circ\\eta_{Ua}=1_{Ua}$. Naturality of $\\eta$ at $\\eta_{Ua}$ says $UF(\\eta_{Ua})\\eta_{Ua}=\\eta_{UFUa}\\eta_{Ua}$; applying $F$ gives $G(\\delta_a)\\delta_a=\\delta_{Ga}\\delta_a$. Thus $G,\\epsilon,\\delta$ satisfy exactly the three equations of the comonad construction.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 08NC, lemma-standard-simplicial; Tag 08ND, lemma-standard-simplicial-homotopy."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-comonad-simplicial-object] with $\\mathcal C=\\mathcal A$, $T=G$, $e=\\epsilon$, $c=\\delta$, using the equations just checked. Its faces and degeneracies are exactly those of the item, and its augmentation has degree-zero map $\\epsilon_a$. It constructs a simplicial object in endofunctors; evaluation at $a$ therefore gives the desired augmented simplicial object, and evaluation on a morphism $a\\to b$ gives naturality, in the functor and natural-transformation sense of [def-weil-pbc-simplicial-object].",
+   "uses": [
+    "lem-trf-comonad-simplicial-object",
+    "def-weil-pbc-simplicial-object"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 08NC, lemma-standard-simplicial; Tag 08ND, lemma-standard-simplicial-homotopy."
+   }
+  },
+  {
+   "text": "Put $Z_n=UG^{n+1}a$ and $Z_{-1}=Ua$, and set $h_n=\\eta_{UG^{n+1}a}:Z_n\\to Z_{n+1}$ for $n\\geq-1$ (so $G^0a=a$). The right-adjoint triangle gives $e_0h_{-1}=1$ and $d_0h_n=1$. Every face with index $i+1$ of $Z$ is $UF$ applied to its face with index $i$ one degree lower. Naturality $UF(v)\\eta=\\eta v$, with $v=U\\epsilon_a$, gives $d_1h_0=h_{-1}e_0$; with $v=d_i:Z_{n+1}\\to Z_n$, it gives $d_{i+1}h_{n+1}=h_nd_i$. The same naturality with $v=s_i:Z_n\\to Z_{n+1}$ gives $s_{i+1}h_n=h_{n+1}s_i$. These are all the extra-degeneracy equations, with $0\\leq i\\leq n+1$ in the face relation and $0\\leq i\\leq n$ in the degeneracy relation.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 08NC, lemma-standard-simplicial; Tag 08ND, lemma-standard-simplicial-homotopy."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-simplicial-extra-degeneracy-prism] in $\\mathcal S$ to the augmented object $Z$ and the maps of step 3. Every hypothesis is precisely one of the equations established there. It gives a simplicial section $a_n=Z(q_n)\\eta_{Ua}$, $q_n:[n]\\to[0]$, with $ea=1$ and a homotopy $ae\\simeq1_Z$. Thus $UX_\\bullet(a)\\to\\operatorname{const}(Ua)$ is a homotopy equivalence, with the stated degree-zero section and its iterated degeneracies. When $\\mathcal S=\\mathrm{Set}$, [lem-coef-extra-degeneracy-contraction] applies to the same equations and supplies the equivalent cylinder description $Z\\times\\Delta^1\\to Z$.",
+   "uses": [
+    "lem-coef-simplicial-extra-degeneracy-prism",
+    "lem-coef-extra-degeneracy-contraction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 08NC, lemma-standard-simplicial; Tag 08ND, lemma-standard-simplicial-homotopy."
+   }
+  },
+  {
+   "text": "For $s\\in\\mathcal S$ put $b=Fs$, $W_n=G^{n+1}b$, $W_{-1}=b$, and $v=F\\eta_s:b\\to Gb$. The left-adjoint triangle gives $\\epsilon_bv=1_b$. Define $t_{-1}=v$ and $t_n=G^{n+1}(v):W_n\\to W_{n+1}$. Then $d_{n+1}t_n=G^{n+1}(\\epsilon_bv)=1$. Naturality of the face transformation $G^{n+1}\\to G^n$ at $v$ gives $d_it_n=t_{n-1}d_i$ for $0\\leq i\\leq n$; in degree zero this reads $d_0t_0=t_{-1}e_0$. Naturality of the degeneracy transformation $G^{n+1}\\to G^{n+2}$ at $v$ gives $s_it_n=t_{n+1}s_i$ for $0\\leq i\\leq n$. Together with $e_0t_{-1}=1$ these are the right-hand versions of the extra-degeneracy equations.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 08NC, lemma-standard-simplicial; Tag 08ND, lemma-standard-simplicial-homotopy."
+   }
+  },
+  {
+   "text": "Reverse the ordinal indices: define $r(\\alpha):[m]\\to[n]$ for $\\alpha:[m]\\to[n]$ by $r(\\alpha)(j)=n-\\alpha(m-j)$. It is order preserving, preserves compositions, and $r^2=1$. Precomposing $W$ by $r^{\\mathrm{op}}$ gives $W^r_n=W_n$ with $d_i^r=d_{n-i}$ and $s_i^r=s_{n-i}$ on degree $n$. The maps $t_n$ of step 5 are now left extra degeneracies: $d_0^rt_n=d_{n+1}t_n=1$, $d_1^rt_0=d_0t_0=t_{-1}e_0$, and the face and degeneracy commutation relations follow by substituting $i\\mapsto n+1-i$ and $i\\mapsto n-i$, respectively, in step 5. The augmentation and its degree-zero section are unchanged.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 08NC, lemma-standard-simplicial; Tag 08ND, lemma-standard-simplicial-homotopy."
+   }
+  },
+  {
+   "text": "Apply [lem-coef-simplicial-extra-degeneracy-prism] in $\\mathcal A$ to $W^r$. It yields a section with $ea=1$ and a homotopy between $ae$ and $1_{W^r}$. Undo ordinal reversal: the section still has components $W(q_n)v$, since $r(q_n)=q_n$. If $H_j^n$ are the homotopy components, use $\\widetilde H_j^n=H_{n-j}^n$ for $W$. In the prism identities displayed in the cited node, substituting $d_i^r=d_{n-i}$ and $s_i^r=s_{n-i}$ swaps the two endpoint identities, swaps the two strict face cases and the two degeneracy cases, and preserves the middle face identity. Hence these components give a homotopy between $1_W$ and $ae$. This proves the second homotopy equivalence. The unit, counit and their functorial powers are natural, so the constructions in both assertions are natural in their parameters; no limits, products in the categories, or additivity were assumed.",
+   "uses": [
+    "lem-coef-simplicial-extra-degeneracy-prism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 08NC, lemma-standard-simplicial; Tag 08ND, lemma-standard-simplicial-homotopy."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-comonad-simplicial-object",
+  "def-weil-pbc-simplicial-object",
+  "lem-coef-simplicial-extra-degeneracy-prism",
+  "lem-coef-extra-degeneracy-contraction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/simplicial.tex",
+  "place": "Tags 08NC–08ND; explicit extra-degeneracy verification replaces the Godement-two-maps invocation in 08ND, using the existing Mathlib contraction leaf. Comonad construction follows 0G5N."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -48,10 +130,59 @@
    "results": "0 hits; top=[]; note=; digest=4f53cda18c2baa0c. Full output retained as repair-search-*.txt in the sandbox.",
    "date": "2026-10-18",
    "verdict": "no match: ExtraDegeneracy.homotopyEquiv and ExtraDegeneracy.homotopy assume supplied extra degeneracies and do not construct the adjunction bar object or its contraction. Monad.Basic only defines comonads; no simplicial construction there. Read ExtraDegeneracy.lean:72-103,122-225. Representation standardComplex is specific to group representations, not arbitrary adjunctions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The augmented simplicial object associated to an adjunction is contractible after applying the right adjoint, and on objects in the image of the left adjoint",
+   "results": "{\"t\": \"2026-10-18T21:14:12Z\", \"tool\": \"leanfinder\", \"query\": \"The augmented simplicial object associated to an adjunction is contractible after applying the right adjoint, and on objects in the image of the left adjoint\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialObject.cechNerveAdjunction\", \"CategoryTheory.CosimplicialObject.cechConerveAdjunction\", \"CategoryTheory.nerveAdjunction\", \"CategoryTheory.nerveAdjunction.isIso_counit\", \"CategoryTheory.SimplicialObject.skAdj\", \"CategoryTheory.SimplicialObject.coskAdj\", \"CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.homotopyEquiv\", \"SSet.coskAdj\"], \"digest\": \"7b075a1e62c3e26a\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: Comonad.mk and Adjunction.toComonad define the comonad and its equations, not its augmented simplicial object. ExtraDegeneracy defines contraction data on an already supplied augmented simplicial object; Cech nerves require pullbacks and are different constructions. Read Monad/Basic.lean:61-83, Monad/Adjunction.lean:67-78, ExtraDegeneracy.lean:72-83,126-174; no general bar construction found by two semantic phrasings and whole-source grep."
+  },
+  {
+   "tool": "grep",
+   "query": "comonad|barConstruction|standardResolution",
+   "results": "{\"t\": \"2026-10-18T21:15:17Z\", \"tool\": \"grep\", \"query\": \"comonad|barConstruction|standardResolution\", \"sub\": \"AlgebraicTopology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: Comonad.mk and Adjunction.toComonad define the comonad and its equations, not its augmented simplicial object. ExtraDegeneracy defines contraction data on an already supplied augmented simplicial object; Cech nerves require pullbacks and are different constructions. Read Monad/Basic.lean:61-83, Monad/Adjunction.lean:67-78, ExtraDegeneracy.lean:72-83,126-174; no general bar construction found by two semantic phrasings and whole-source grep."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A comonad gives an augmented simplicial object by taking its iterated powers",
+   "results": "{\"t\": \"2026-10-18T21:15:17Z\", \"tool\": \"leansearch\", \"query\": \"A comonad gives an augmented simplicial object by taking its iterated powers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialObject.augment\", \"CategoryTheory.Comon\", \"CategoryTheory.SimplicialObject.Augmented\", \"CategoryTheory.Comonad.mk\", \"CategoryTheory.Comonad.recOn\", \"CategoryTheory.Comon.comon\", \"CategoryTheory.coeComonad\", \"CategoryTheory.Comon.ComonToMonOpOpObj\"], \"digest\": \"f1889c55cec7b588\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: Comonad.mk and Adjunction.toComonad define the comonad and its equations, not its augmented simplicial object. ExtraDegeneracy defines contraction data on an already supplied augmented simplicial object; Cech nerves require pullbacks and are different constructions. Read Monad/Basic.lean:61-83, Monad/Adjunction.lean:67-78, ExtraDegeneracy.lean:72-83,126-174; no general bar construction found by two semantic phrasings and whole-source grep."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Comonad\"",
+   "results": "{\"t\": \"2026-10-18T21:15:18Z\", \"tool\": \"loogle\", \"query\": \"\\\"Comonad\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Comonad\", \"CategoryTheory.Comonad.id\", \"CategoryTheory.instCategoryComonad\", \"CategoryTheory.instQuiverComonad\", \"CategoryTheory.Comonad.instInhabited\", \"CategoryTheory.ComonadHom\", \"CategoryTheory.Comonad.toFunctor\", \"CategoryTheory.coeComonad\"], \"digest\": \"76af676eb20d4f47\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: Comonad.mk and Adjunction.toComonad define the comonad and its equations, not its augmented simplicial object. ExtraDegeneracy defines contraction data on an already supplied augmented simplicial object; Cech nerves require pullbacks and are different constructions. Read Monad/Basic.lean:61-83, Monad/Adjunction.lean:67-78, ExtraDegeneracy.lean:72-83,126-174; no general bar construction found by two semantic phrasings and whole-source grep."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Counit and comultiplication of a comonad define face and degeneracy maps of its augmented simplicial bar construction",
+   "results": "{\"t\": \"2026-10-18T21:15:19Z\", \"tool\": \"leanfinder\", \"query\": \"Counit and comultiplication of a comonad define face and degeneracy maps of its augmented simplicial bar construction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.s\", \"SSet.Augmented.StandardSimplex.extraDegeneracy\", \"CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.s'\", \"CategoryTheory.CosimplicialObject.Augmented\", \"classifyingSpaceUniversalCover.compForgetAugmented\", \"CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy.const\", \"CategoryTheory.SimplicialObject.Augmented.ExtraDegeneracy\", \"classifyingSpaceUniversalCover.extraDegeneracyCompForgetAugmented\"], \"digest\": \"67b4a0e8ddbe71c8\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: Comonad.mk and Adjunction.toComonad define the comonad and its equations, not its augmented simplicial object. ExtraDegeneracy defines contraction data on an already supplied augmented simplicial object; Cech nerves require pullbacks and are different constructions. Read Monad/Basic.lean:61-83, Monad/Adjunction.lean:67-78, ExtraDegeneracy.lean:72-83,126-174; no general bar construction found by two semantic phrasings and whole-source grep."
+  },
+  {
+   "tool": "grep",
+   "query": "Godement|cobar|barConstruction|Comonad.*[Ss]implicial|[Ss]implicial.*[Cc]omonad",
+   "results": "{\"t\": \"2026-10-18T21:16:17Z\", \"tool\": \"grep\", \"query\": \"Godement|cobar|barConstruction|Comonad.*[Ss]implicial|[Ss]implicial.*[Cc]omonad\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: Comonad.mk and Adjunction.toComonad define the comonad and its equations, not its augmented simplicial object. ExtraDegeneracy defines contraction data on an already supplied augmented simplicial object; Cech nerves require pullbacks and are different constructions. Read Monad/Basic.lean:61-83, Monad/Adjunction.lean:67-78, ExtraDegeneracy.lean:72-83,126-174; no general bar construction found by two semantic phrasings and whole-source grep."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Powers of an endofunctor with a coassociative comultiplication and counit form a simplicial resolution",
+   "results": "{\"t\": \"2026-10-18T21:16:18Z\", \"tool\": \"leansearch\", \"query\": \"Powers of an endofunctor with a coassociative comultiplication and counit form a simplicial resolution\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Comonad.mk\", \"CategoryTheory.ComonObj.comul_counit_assoc\", \"CategoryTheory.ComonObj.comul_assoc_assoc\", \"CategoryTheory.ComonObj.termΔ\", \"CategoryTheory.ComonObj.mk\", \"CategoryTheory.Functor.map.instIsComon_Hom\", \"CoalgebraStruct.comul\", \"CategoryTheory.Monoidal.ComonFunctorCategoryEquivalence.functorObjObj_comon_comul\"], \"digest\": \"482d9cacd621b456\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: Comonad.mk and Adjunction.toComonad define the comonad and its equations, not its augmented simplicial object. ExtraDegeneracy defines contraction data on an already supplied augmented simplicial object; Cech nerves require pullbacks and are different constructions. Read Monad/Basic.lean:61-83, Monad/Adjunction.lean:67-78, ExtraDegeneracy.lean:72-83,126-174; no general bar construction found by two semantic phrasings and whole-source grep."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-cotangent-resolution-coherence",
@@ -81,5 +212,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-trf-adjunction-standard-simplicial-homotopy",
+  "worker": "stage1",
+  "summary": "Kept the statement; checked Stacks 08NC/08ND and wrote explicit left and right contractions. Reused the arbitrary-category Mathlib prism leaf, rather than incorrectly applying its Set-only specialization in an arbitrary category. Added one generic comonad construction node (0G5N). No Lean attachment found.",
+  "blueprint": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Supporting ring/sheaf input: Functorial standard resolutions and comparison with arbitrary polynomial resolutions. Generic input to lem-trf-cotangent-resolution-coherence: Standard simplicial object of an adjunction and its homotopy equivalences. Steps 1–2 supply the standard resolution; steps 3–7 supply the two homotopy equivalences used by the cotangent-resolution auxiliary.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-NR-b967839de",
+  "group": "NR",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NR-b967839de (reviewer sub-agent of L); spot-checked: I read the item, the new node lem-trf-comonad-simplicial-object, and the full statements of all three cited nodes (def-weil-pbc-simplicial-object and the two Mathlib leaves lem-coef-simplicial-extra-degeneracy-prism and lem-coef-extra-degeneracy-contraction). I checked them against Stacks simplicial.tex: 0G5M (l.6193), 0G5N (l.6226), 08N9, 08NC (l.6675) and 08ND (l.6729). The item statement is byte-identical to the base and adds no hypotheses (F/U here are U/V in Stacks). Step 1: all three comonad identities follow from the triangle identities and naturality of eta. Step 3: on Z=UX(a) every face and degeneracy with index i+1 is UF of the one with index i, so eta-naturality gives every extra-degeneracy equation of the prism node, using Mathlib's convention. Step 5: on W=X(Fs) with v=F(eta_s), naturality of the face and degeneracy transformations at v and epsilon_{Fs}v=1 give the right-hand version of the equations. Step 6: index reversal (d^r_i=d_{n-i}) turns them into left extra degeneracies, and I checked each substitution. Step 7: H~_j=H_{n-j} gives a homotopy from 1 to ae; I checked the endpoint, middle-face and strict-face cases. The new node matches 0G5N hypothesis by hypothesis and is statement-only. It is the source's own Godement lemma and strictly more general than the item, not a restated clause. Small cases tested: identity comonad, the degree-1 identities and the free/forgetful adjunction. Duplicate search over the whole DAG and blueprint main-20261015 found only unrelated sheaf-Godement, free-category comonad and infinity-bar nodes. There is no cycle: the new node's closure is two simplicial definitions, and the coef tools are Mathlib leaves. Batch-5 flag on lem-trf-comonad-simplicial-object: accepted. Its closure is pure category theory, outside both assumptions and not a step of the proof of the trace formula or of Poincare duality, and the item was already reachable from batch 5 through its existing citers. The report's note that 08ND composes the self-map in the wrong order is right and does not affect the statements. No fixes were written."
  }
 }
