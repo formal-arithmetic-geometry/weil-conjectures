@@ -33,7 +33,15 @@
   "det-sp-et-proet-adjunction-transfer",
   "lem-amb-etale-compact-comparisons",
   "def-weil-pbc-etale-sum-extension",
-  "lem-asd-etale-compact-support-normalization"
+  "lem-asd-etale-compact-support-normalization",
+  "def-weil-pbc-witness-compatibility",
+  "lem-pur-etale-scalar-mate-projection",
+  "lem-sf-proper-open-coefficient-refinement",
+  "lem-sf-class-compact-support-comparison",
+  "lem-amb-unbounded-compact-support-comparisons",
+  "def-sp-reduction-direct-image-comparison",
+  "lem-sf-compact-support-restriction-of-scalars",
+  "def-sp-et-proet-coefficient-transport"
  ],
  "proof": [
   {
@@ -581,5 +589,40 @@
   "from_unit": "sk-lem-sp-reduction",
   "date": "2026-10-17",
   "why": "compatibility node re-routed under the central compatibility sketch (blueprint cbac0b347)"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-59523c471",
+  "group": "Q31",
+  "result": "pass",
+  "note": "R1 fixed: proEtaleCoefficientMap is now transportedRecordedReductionDirectImageComparison φ c (reductionDirectImageComparison φ c.i c.g). This is the FullyFaithful.whiskeringRight preimage under E_{Y,S} of F̂◁s_Y⁻¹ ≫ a_R⁻¹▷T ≫ E◁b ≫ s_X▷F ≫ T̂◁a_S; b is the middle morphism. s is leftAdjointUniq through the unique section-identity sfRealizationRestriction choice; a is funInvIdAssoc plus rightAdjointUniq through the openSquarePullbackModel choice plus sfIntrinsicDerivedDirectImageComparison. IsIso, the main square, refinement, composition and counit all use it. Aliases, phantom structure and fixed composite removed. R3: def-sp-et-proet-coefficient-transport is genuine; its TeX matches the Lean, its stmt_deps equal its citations, and its fields and docstrings are complete. R2: second reading now accurate. Theorem stmt_deps (scalar-mate-projection, proper-open-coefficient-refinement, class-compact-support-comparison, unbounded-compact-support-comparisons, compact-support-restriction-of-scalars): all cited for theorem-constructed objects (.choose/asIso/constructed iso), so PASS on that point; fixedScalarRestrictionOpenMap is gone. Hypotheses, orientations and edge cases checked. A,B : Type u with ULift excludes no finite ring; sites stay u+1/u. Statement fields verbatim, declaration lists match, lines ≤100, all theorem proofs sorry. Item node changes only lean and stmt_deps (new def node plus landed nodes). nt_compile --json exit 0, clean: transport 3.8 s, item 9.6 s."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.EtaleProEtaleCoefficientCompatibility",
+  "declaration": "AlgebraicGeometry.ProEtale.CoefficientCompatibility.etaleProEtaleCoefficientCompatibility",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CoefficientCompatibility.etaleCoefficientMap",
+   "AlgebraicGeometry.ProEtale.CoefficientCompatibility.proEtaleCoefficientMap",
+   "AlgebraicGeometry.ProEtale.CoefficientCompatibility.sumCoefficientIso",
+   "AlgebraicGeometry.ProEtale.CoefficientCompatibility.siteRefinement",
+   "AlgebraicGeometry.ProEtale.CoefficientCompatibility.etaleCompositor",
+   "AlgebraicGeometry.ProEtale.CoefficientCompatibility.compositionSiteBoundary",
+   "AlgebraicGeometry.ProEtale.CoefficientCompatibility.siteCompositor",
+   "AlgebraicGeometry.ProEtale.CoefficientCompatibility.etaleProEtaleCoefficientCompatibility",
+   "AlgebraicGeometry.ProEtale.CoefficientCompatibility.etaleProEtaleCoefficientCompatibility_refinement",
+   "AlgebraicGeometry.ProEtale.CoefficientCompatibility.etaleProEtaleCoefficientCompatibility_composition",
+   "AlgebraicGeometry.ProEtale.CoefficientCompatibility.normalizedSumComparison",
+   "AlgebraicGeometry.ProEtale.CoefficientCompatibility.etaleProEtaleCoefficientCompatibility_sum",
+   "AlgebraicGeometry.ProEtale.CoefficientCompatibility.etaleProEtaleCoefficientCompatibility_counit",
+   "AlgebraicGeometry.ProEtale.CoefficientCompatibility.etaleProEtaleCoefficientCompatibility_naturality"
+  ],
+  "file": "lean/Sheaf/Paper/EtaleProEtaleCoefficientCompatibility.lean",
+  "statement": "theorem etaleProEtaleCoefficientCompatibility {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B] (ell p : ℕ) [Fact ell.Prime] (_hp : 0 < p) (_hEll : p ≠ ell) (k : Type u) [Field k] [CharP k p] (_hA : ∃ n : ℕ, ∀ x : A, (ell ^ n) • x = 0) (_hB : ∃ n : ℕ, ∀ x : B, (ell ^ n) • x = 0) (φ : A →+* B) {X Y : Scheme.{u}} [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))] [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))] [IsSeparated (Y ↘ Spec (.of k))] (f : X ⟶ Y) [f.IsOver (Spec (.of k))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (c : Compactification f) (L : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1, u} A)))) (_hL : AdjunctionTransfer.etaleProperty (ULift.{u + 1, u} A) X L.obj) : ∃ hLB : DerivedCategory.TStructure.t.plus ((Etale.scalarExtension (uliftRingHom φ) X).obj L.obj), IsIso (etaleCoefficientMap (uliftRingHom φ) c L.obj) ∧ IsIso ((proEtaleCoefficientMap φ c).app ((comparisonUpperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) X).mapDerivedCategory.obj L.obj)) ∧ (@pbcFixedScalarExtension.{u} Y.ProEt inferInstance (essentiallySmallSelf.{0, u, u + 1} _) (Scheme.ProEt.topology Y) (ULift.{u + 1, u} A) (ULift.{u + 1, u} B) inferInstance inferInstance (uliftRingHom φ)).map ((compactSupportSiteComparison (ULift.{u + 1, u} A) c).inv.app L) ≫ (proEtaleCoefficientMap φ c).app ((comparisonUpperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) X).mapDerivedCategory.obj L.obj) ≫ (rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} (ULift.{u + 1, u} B)) c).map ((pbcComparisonReduction.{u} X (uliftRingHom φ)).hom.app L.obj) = (pbcComparisonReduction.{u} Y (uliftRingHom φ)).hom.app ((Etale.rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) c).obj L.obj) ≫ (comparisonUpperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} B)) Y).mapDerivedCategory.map (etaleCoefficientMap (uliftRingHom φ) c L.obj) ≫ (compactSupportSiteComparison (ULift.{u + 1, u} B) c).inv.app ⟨(Etale.scalarExtension (uliftRingHom φ) X).obj L.obj, hLB⟩",
+  "branch": "newtargets-dag",
+  "by": "Q31",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Repair R1/R2/R3/R4: proEtaleCoefficientMap is now definitionally the genuine transport of reductionDirectImageComparison via normalized scalar/support realization comparisons. Every pro-etale statement uses it. Finite rings are small and their fixed-module presentations use ULift into u+1, leaving site objects u+1 and morphisms u distinct. The unused aliases and independent fixed composite are removed. No mathematical clause changes."
  }
 }
