@@ -319,5 +319,24 @@
   "group": "Q12",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q12-ef5a2b6ca (reviewer sub-agent of L); spot-checked: I read all of it: the item, all 12 steps, the statements of all 19 cited nodes, the master and main-20261015 blueprint text, and Stacks pione.tex 0BN9 (lines 967-1010) and the 0BNB coequalizer remark. The statement is unchanged and matches 0BN9: any scheme Y, all Y-morphisms, base change U |-> U x_Y Y', exact meaning preserving finite limits and finite colimits. Steps 1-3 give the terminal object and fibre products over R (base change taken with base R), then use lem-weil-pbc-finite-limits-from-terminal-pullbacks. Step 4 covers finite coproducts including the empty one: Spec 0 is finite, etaleness is vacuous, and base change uses the finite coproduct base-change node. Steps 5-7 split P and Z locally (04HN) with finite sets S_i, T_i that vary with the cover member, fix the index maps on clopen pieces, and take the quotient E=S/~. I checked this with T empty and S empty, and the coequalizer property holds universally under base change. Step 8 assembles over U = disjoint union of the U_i. Etaleness there uses the chart description in def-weil-etale-morphism, which is acceptable. Finiteness uses finite-local-on-target (3), and gluing uses the representable etale sheaf statement. Step 9 builds the descent datum from coequalizer uniqueness. Step 10 descends through lem-galois-descent (any surjective etale map, full faithfulness plus effectivity), and there is no cycle: the item's proof/stmt closure of 214 nodes does not contain the item. Step 11 gets right exactness from the pulled-back cover, step 8 over the overlaps, and descent over Y'. Step 12 is the coproduct-coequalizer presentation of a finite colimit, including I empty. Source error confirmed: lem-fet-locally-trivial (one finite set S over a single surjective etale cover) is false for disconnected Y. Over Y = Spec k disjoint-union Spec k with a cover of rank 1 on one component and rank 2 on the other, the fibres of P x Y' have 1 and 2 points while Y' x S has |S| points everywhere. So the switch to lem-weil-pbc-finite-etale-etale-local-split is justified. I accept both declared tool_uses (that local-split node and lem-weil-pbc-small-etale-representable-presheaf-sheaf). There are no new nodes, no SGA citations, no duplicate in the DAG (checked against galois-coproduct-morphism-components, finite-section-coproduct-local-permutation and the affine-etale colimit node) and no Mathlib leaf (grep for FiniteEtale finds only RingTheory/Etale/Finite.lean). Maintainer note: record in coord/HUMAN.md that lem-fet-locally-trivial is false unless Y is connected."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteEtaleFiniteLimits",
+  "declaration": "AlgebraicGeometry.Scheme.FiniteEtale.finite_limits_colimits_and_exact_baseChange",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteEtaleFiniteLimits.lean",
+  "statement": "theorem finite_limits_colimits_and_exact_baseChange (Y : Scheme.{u}) : HasFiniteLimits Y.FiniteEtale ∧ HasFiniteColimits Y.FiniteEtale ∧ ∀ (Y' : Scheme.{u}) (f : Y' ⟶ Y), PreservesFiniteLimits (pullback f) ∧ PreservesFiniteColimits (pullback f)",
+  "branch": "newtargets-dag",
+  "by": "NQ",
+  "date": "2026-10-18",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-ec927055d"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ec927055d",
+  "group": "NQ",
+  "result": "fix",
+  "note": "Statement correct vs node/blueprint/Stacks 0BN9: Y.FiniteEtale has finite limits and colimits; for every f : Y' ⟶ Y, pullback f (rfl-probed = FiniteEtale.pullback, P ↦ P ×_Y Y') preserves finite limits and colimits. No extra hypotheses, edge cases (empty Y, empty diagram, varying degree, arbitrary f) admitted, one universe u. Y.FiniteEtale vs mathlib_match Over form consistent with landed citers and def-galois-categories, so no H4; upstream has only a HasFiniteLimits instance, so existing:false is right. FIX in fixes/FiniteEtaleFiniteLimits.lean: H9 removed unused imports GaloisCategories and FundamentalGroup.LocallyTrivial (not in stmt_deps or proof_deps); H8 docstring replaced with the node's 12-step proof (it summarized the superseded proof and cited lem-fet-locally-trivial, which the re-split avoids); signature byte-identical, so lean.statement stays verbatim. Delivered and fixed files compile clean (nt_compile --json, about 1.7 s). Advisory: the worker report describes the pre-re-split node (empty stmt_deps)."
  }
 }
