@@ -29,8 +29,8 @@
 | `WeilConjectures.WeilSheaf.AffineLineCohomology` | 8 | 1 | proof |
 | `WeilConjectures.WeilSheaf.ArtinSchreierDual` | 8 | 1 | proof |
 | `WeilConjectures.WeilSheaf.TraceIsomorphism` | 9 | 1 | proof |
-| `Sheaf.CategoryTheory.GrothendieckDerivedPerfectWellGenerators` | 10 | 1 | proof |
 | `WeilConjectures.SixFunctors.ProEtale.Adic.LisseMonodromy` | 10 | 1 | proof |
+| `Sheaf.CategoryTheory.GrothendieckDerivedPerfectWellGeneratorsSupport` | 11 | 1 | proof |
 | `WeilConjectures.WeilSheaf.FourierInversion.Composite` | 11 | 1 | proof |
 | `WeilConjectures.WeilSheaf.FourierInversion.Delta` | 11 | 1 | proof |
 | `Sheaf.Paper.IntegralResidueTensorRouteKFlat` | 12 | 1 | proof |
