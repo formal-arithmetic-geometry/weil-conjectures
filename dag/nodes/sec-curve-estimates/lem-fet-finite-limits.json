@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-fet-finite-limits",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Finite limits and colimits of finite etale covers",
@@ -12,31 +12,261 @@
   "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lem-fet-finite-limits.md",
   "place": "node lem-fet-finite-limits, order 974"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-weil-pbc-finite-etale-category",
+  "def-galois-finite-limits-colimits",
+  "def-galois-exact-functor"
+ ],
  "proof": [
   {
-   "text": "Step 1: finite limits. With $\\mathrm{F\\acute Et}(Y)$ as in\n[def-galois-categories] and the scheme-theoretic fibre products of\n[def-weil-pbc-scheme-conventions], the final object is $Y$, and fibre products of\nfinite etale $Y$-schemes are finite etale over $Y$; base change\ncommutes with these operations, so it is left exact.\nStep 2: finite colimits. Finite coproducts are disjoint unions and the\ninitial object is the empty scheme, so it remains to construct coequalizers\nof a pair $a,b:Z\\to Y$ in $\\mathrm{F\\acute Et}(Y)$. By\n[lem-fet-locally-trivial] applied over the members of an etale cover,\nand because the existence of a coequalizer which is finite etale is a\nstatement local on the target for the etale topology, we may assume\n$Y=\\coprod_{i=1}^nY$ and $Z=\\coprod_{j=1}^mY$; the two morphisms then\ncorrespond to maps of index sets\n$a_s,b_s:\\{1,\\dots,m\\}\\to\\{1,\\dots,n\\}$, after a further Zariski\nrefinement. Let $T$ be the coequalizer of $a_s,b_s$ in finite sets.\nThen $\\coprod_{t\\in T}Y$, with the evident structure morphisms, is a\ncoequalizer of $a,b$ in $\\mathrm{F\\acute Et}(Y)$: an object\n$W\\to Y$ of $\\mathrm{F\\acute Et}(Y)$ is, etale-locally, of the form\n$\\coprod_{i\\in I}Y$, and morphisms to it are maps of index sets, so the\nuniversal property reduces to the universal property of $T$. It is\nfinite etale over $Y$, and base change commutes with the construction, so\nbase change is right exact.",
+   "text": "Work in the category of finite etale schemes over $Y$, with all $Y$-morphisms, as defined in [def-weil-pbc-finite-etale-category]. If $P\\to R$ is such a morphism, then it is finite by [lem-weil-pbc-finite-permanence-over-separated], applied to $P\\to R\\to Y$: its composite is finite and $R\\to Y$ is separated because it is finite. It is etale by clause (3) of [lem-weil-pbc-etale-composition-cancellation], since both structure maps are etale.",
    "uses": [
-    "def-galois-categories",
-    "def-weil-pbc-scheme-conventions",
-    "lem-fet-locally-trivial"
+    "def-weil-pbc-finite-etale-category",
+    "lem-weil-pbc-finite-permanence-over-separated",
+    "lem-weil-pbc-etale-composition-cancellation"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BN9, lemma-finite-etale-covers-limits-colimits; finite limits paragraph; permanence of morphisms between the objects"
+   }
+  },
+  {
+   "text": "The identity of $Y$ is a finite etale morphism: on each affine chart its ring map is the identity, which is finite and etale. It is terminal, because a morphism to it is necessarily the structure map. For a cospan $P\\to R\\leftarrow Q$, form the scheme fibre product $L=P\\times_R Q$ using [def-pc-fibre-product]. By step 1, $P\\to R$ is finite etale. Its base change $L\\to Q$ is finite etale by [def-weil-pbc-finite-etale-category]; composing with $Q\\to Y$ is finite by [lem-weil-pbc-finite-composition] and etale by [lem-weil-pbc-etale-composition-cancellation]. The scheme universal property, restricted to finite etale test objects, exhibits $L$ as the pullback in our full subcategory.",
+   "uses": [
+    "def-weil-finite-integral-morphism",
+    "def-weil-etale-morphism",
+    "def-pc-fibre-product",
+    "def-weil-pbc-finite-etale-category",
+    "lem-weil-pbc-finite-composition",
+    "lem-weil-pbc-etale-composition-cancellation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BN9, lemma-finite-etale-covers-limits-colimits; finite limits paragraph; terminal object and scheme fibre products"
+   }
+  },
+  {
+   "text": "For any $g:Y'\\to Y$, the functor $g^*$ is the base change functor of [def-weil-pbc-finite-etale-category]. The fibre product universal property gives $Y\\times_Y Y'\\cong Y'$ and the canonical isomorphism\n$$ (P\\times_R Q)\\times_Y Y'\\cong(P\\times_Y Y')\\times_{R\\times_Y Y'}(Q\\times_Y Y'). $$\nIndeed, on either side a map from a scheme $T$ is a compatible triple of maps from $T$ to $P,Q,Y'$; the isomorphism preserves all the projections. Thus $g^*$ preserves the terminal object and pullbacks. Apply both clauses of [lem-weil-pbc-finite-limits-from-terminal-pullbacks] to obtain finite limits and their preservation by $g^*$.",
+   "uses": [
+    "def-weil-pbc-finite-etale-category",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-finite-limits-from-terminal-pullbacks"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BN9, lemma-finite-etale-covers-limits-colimits; finite limits paragraph; left exactness"
+   }
+  },
+  {
+   "text": "Finite coproducts are scheme disjoint unions. Their existence, disjoint clopen summands and universal property are given by [lem-weil-pbc-scheme-coproduct-family]. The map from a binary disjoint union is finite by [lem-weil-pbc-finite-coproduct], and a finite disjoint union of etale maps is etale by [lem-sc-etale-coproduct-etale]. For the empty union the map $\\varnothing\\to Y$ is finite: over an affine chart it is $\\operatorname{Spec}(0)$, with zero module finite over the base ring; its etaleness is vacuous on source charts. Induction using the binary case gives every finite coproduct in our category, including the initial object. Its universal property restricts from schemes, since morphisms are all maps over $Y$. By [lem-sc-etale-fibre-product-base-change-coproduct], arbitrary base change preserves these coproducts, including the empty one.",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family",
+    "lem-weil-pbc-finite-coproduct",
+    "lem-sc-etale-coproduct-etale",
+    "def-weil-finite-integral-morphism",
+    "def-weil-etale-morphism",
+    "lem-sc-etale-fibre-product-base-change-coproduct"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BN9, lemma-finite-etale-covers-limits-colimits; finite colimits paragraph, disjoint unions"
+   }
+  },
+  {
+   "text": "Fix parallel arrows $a,b:Z\\rightrightarrows P$ in our category. At each point of $Y$, [lem-weil-pbc-finite-etale-etale-local-split] gives an etale neighbourhood splitting $P$ into finitely many copies of that neighbourhood. Apply the same statement to the pullback of $Z$ there, at every point of the neighbourhood, and compose the resulting etale maps using [lem-weil-pbc-etale-composition-cancellation]. Pullback preserves the previous decomposition by [lem-sc-etale-fibre-product-base-change-coproduct]. These neighbourhoods form an etale covering $\\{U_i\\to Y\\}$ on which both $P$ and $Z$ split. Write $P_{U_i}=\\coprod_{s\\in S_i}U_i$ and $Z_{U_i}=\\coprod_{t\\in T_i}U_i$ with finite sets $S_i,T_i$. No common cardinality over all $i$ is asserted.",
+   "uses": [
+    "lem-weil-pbc-finite-etale-etale-local-split",
+    "def-weil-pbc-finite-etale-category",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-sc-etale-fibre-product-base-change-coproduct"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BN9, lemma-finite-etale-covers-limits-colimits; finite colimits paragraph; local splitting; etale.tex Tag 04HN, lemma-finite-etale-etale-local"
+   }
+  },
+  {
+   "text": "Refine each $U_i$ by opens so that both arrows are induced by fixed maps $\\alpha_i,\\beta_i:T_i\\to S_i$. Here is the refinement explicitly. On each source sheet, the inverse images under $a$ and $b$ of the target sheets are finite clopen partitions, because the target sheets are disjoint clopen and cover the target by [lem-weil-pbc-scheme-coproduct-family]. At a point choose the part containing it in every one of these finitely many partitions and intersect them. This is an open neighbourhood on which every chosen target index is fixed. The restriction of a map between two copies of this open is the identity, since the map is over the open. These opens cover $U_i$; empty source-sheet sets impose no condition.",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BN9, lemma-finite-etale-covers-limits-colimits; finite colimits paragraph; further open refinement making the index maps constant"
+   }
+  },
+  {
+   "text": "For one refined member $U=U_i$, let $E=S_i/{\\sim}$, where $\\sim$ is the equivalence relation generated by $\\alpha_i(t)\\sim\\beta_i(t)$ for $t\\in T_i$. This is a finite set. Put $Q_i=\\coprod_{e\\in E}U$ and let $q_i:P_U\\to Q_i$ send sheet $s$ to $[s]$. The structure map $Q_i\\to U$ is finite etale by step 4. For any $U$-scheme $H$, a map $P_U\\to H$ is a family of sections $h_s:U\\to H$ by [lem-weil-pbc-scheme-coproduct-family]. It equalizes $a,b$ exactly when $h_{\\alpha_i(t)}=h_{\\beta_i(t)}$ for each $t$. Equality propagates along finite chains and hence along $\\sim$, so this family factors uniquely through the sheets of $Q_i$. Thus $q_i$ is a coequalizer even among all $U$-schemes. After any $V\\to U$, [lem-sc-etale-fibre-product-base-change-coproduct] identifies the pulled maps with these same index maps between copies of $V$; the identical sections argument proves the coequalizer property over $V$.",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family",
+    "lem-sc-etale-fibre-product-base-change-coproduct"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BN9, lemma-finite-etale-covers-limits-colimits; finite-set quotient computation in the last paragraph; its omitted base change verification written out"
+   }
+  },
+  {
+   "text": "Set $U=\\coprod_iU_i$ with its map $u:U\\to Y$, and $Q'=\\coprod_iQ_i$, using [lem-weil-pbc-scheme-coproduct-family]. The map $u$ is surjective by the covering property and etale: on affine charts within the open components $U_i$ its ring maps are etale, as in [def-weil-etale-morphism]. The same chart argument shows $Q'\\to U$ is etale. Its inverse image of $U_i$ is $Q_i$ by disjointness of the summands, so clause (3) of [lem-weil-pbc-finite-local-on-target] shows it is finite. Thus $Q'$ is an object of [def-weil-pbc-finite-etale-category].\nFor any $V\\to U$, the pullbacks of the open component coverings of $U$ and $Q'$ are etale coverings by [lem-weil-pbc-etale-composition-cancellation] and [lem-weil-pbc-etale-covering-base-change]. The inverse images of the distinct components are disjoint; restriction of a fibre product to a component is its fibre product there, by [def-pc-fibre-product]. Apply [lem-weil-pbc-small-etale-representable-presheaf-sheaf] on the small etale site of $V$: first glue the maps $(q_i)_V$ on the covering of $P_V$, obtaining $q'_V:P_V\\to Q'_V$. Given any $V$-scheme $H$ and an equalizing map $P_V\\to H$, step 7 gives its unique factorization on each component $(Q_i)_V$. The intersections of distinct components are empty, so the factorizations glue uniquely to $Q'_V\\to H$ by the same sheaf statement, now on the covering of $Q'_V$. Taking $V=U$ constructs $q'$; uniqueness identifies its pullback with $q'_V$ for every $V$. Hence $q'$ is a coequalizer universally under base change.",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family",
+    "def-weil-etale-morphism",
+    "lem-weil-pbc-finite-local-on-target",
+    "lem-weil-pbc-small-etale-representable-presheaf-sheaf",
+    "def-weil-pbc-finite-etale-category",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-weil-pbc-etale-covering-base-change",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BN9, lemma-finite-etale-covers-limits-colimits; explicit descent version of the local quotient construction; morphisms glue by etale-cohomology.tex Tags 03O3 and 03O4"
+   }
+  },
+  {
+   "text": "Over $U''=U\\times_Y U$, the two pullbacks $q'_1:P_{U''}\\to Q'_1$ and $q'_2:P_{U''}\\to Q'_2$ are coequalizers of the same pair by step 8. There is therefore a unique map $\\varphi:Q'_1\\to Q'_2$ with $\\varphi q'_1=q'_2$. The map obtained in the other direction is its inverse, since their composites agree with the identity after the quotient maps and coequalizer uniqueness applies. Over $U\\times_Y U\\times_Y U$, both $\\varphi_{23}\\varphi_{12}$ and $\\varphi_{13}$ carry the first quotient map to the third, so uniqueness gives the cocycle equation. The diagonal pullback is the identity by the same argument. Thus $(Q',\\varphi)$ is a finite etale descent datum, and $q'$ is a morphism from the canonical datum on $P_U$ to it. Fibre product identifications here are those of [def-pc-fibre-product].",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-weil-pbc-finite-etale-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BN9, lemma-finite-etale-covers-limits-colimits; explicit overlap comparison and cocycle for the etale-local quotient"
+   }
+  },
+  {
+   "text": "Apply [lem-galois-descent] to the surjective etale map $u:U\\to Y$. Its essential surjectivity gives a finite etale $Y$-scheme $Q$ with descent datum identified with $(Q',\\varphi)$; its full faithfulness descends $q'$ to $q:P\\to Q$. It also descends the equality $qa=qb$. For a finite etale $Y$-scheme $W$ and $h:P\\to W$ with $ha=hb$, step 8 gives a unique $k':Q'\\to W_U$ with $k'q'=h_U$. On $U''$, both possible transported maps have this same composite with $q'_1$, so uniqueness makes $k'$ compatible with the descent data. Fullness gives $k:Q\\to W$; faithfulness gives $kq=h$. Any other factor pulls back to $k'$ and hence equals $k$ by faithfulness. This proves that $q$ is a coequalizer in $\\mathsf{FEt}(Y)$.",
+   "uses": [
+    "lem-galois-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BN9, lemma-finite-etale-covers-limits-colimits; effectivity and morphism descent filling the blueprint locality assertion; Stacks descent.tex Tags 0245, 02LA and 02VN via the cited descent theorem"
+   }
+  },
+  {
+   "text": "Let $g:Y'\\to Y$ be arbitrary. The pullback covering $\\{U_i\\times_Y Y'\\to Y'\\}$ is jointly surjective etale by [lem-weil-pbc-etale-covering-base-change]; equivalently $U\\times_Y Y'\\to Y'$ is a surjective etale map, using the fibre product and coproduct descriptions. Over this cover the pullback of $q$ is a base change of $q'$, hence a coequalizer by step 8. Given any finite etale $Y'$-scheme $W'$ and an equalizing map $P_{Y'}\\to W'$, solve the factorization on this cover. Its two pullbacks agree by local coequalizer uniqueness. Full faithfulness in [lem-galois-descent], now applied over $Y'$, gives exactly one factorization $Q_{Y'}\\to W'$. Thus $g^*q$ is a coequalizer. Every coequalizer is uniquely isomorphic to this constructed one respecting its quotient map, so $g^*$ preserves all coequalizers.",
+   "uses": [
+    "lem-weil-pbc-etale-covering-base-change",
+    "lem-galois-descent",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-scheme-coproduct-family"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BN9, lemma-finite-etale-covers-limits-colimits; omitted arbitrary base change verification, completed by the local quotient calculation and descent"
+   }
+  },
+  {
+   "text": "Finally, let $D:I\\to\\mathsf{FEt}(Y)$ be a finite diagram, with finite limits and colimits understood as in [def-galois-finite-limits-colimits]. Form $B=\\coprod_{i\\in\\mathrm{Ob}(I)}D(i)$ and $A=\\coprod_{f:i\\to j\\in\\mathrm{Mor}(I)}D(i)$. Define $a,b:A\\rightrightarrows B$ on the $f:i\\to j$ summand by the inclusion of $D(i)$ and by $D(f)$ followed by the inclusion of $D(j)$, respectively. A map from their coequalizer to $W$ is precisely a family $D(i)\\to W$ satisfying the cocone equations, by the coproduct and coequalizer universal properties. Thus this coequalizer is a colimit of $D$. The construction includes $I=\\varnothing$, when $A=B=\\varnothing$. Steps 4 and 11 show that $g^*$ carries this coproduct-coequalizer presentation and its legs to the corresponding presentation of $g^*D$; the same universal-property calculation proves it preserves this colimit. Together with step 3 this is the asserted exactness: preservation of finite limits and finite colimits. This is exactness in the sense of [def-galois-exact-functor].",
+   "uses": [
+    "def-galois-finite-limits-colimits",
+    "def-galois-exact-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BN9, lemma-finite-etale-covers-limits-colimits; reduction to finite coproducts and coequalizers, written out rather than using a new category-theory node"
+   }
   }
  ],
  "proof_deps": [
-  "def-galois-categories",
-  "def-weil-pbc-scheme-conventions",
-  "lem-fet-locally-trivial"
+  "def-weil-pbc-finite-etale-category",
+  "lem-weil-pbc-finite-permanence-over-separated",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "def-weil-finite-integral-morphism",
+  "def-weil-etale-morphism",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-finite-composition",
+  "lem-weil-pbc-finite-limits-from-terminal-pullbacks",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-weil-pbc-finite-coproduct",
+  "lem-sc-etale-coproduct-etale",
+  "lem-sc-etale-fibre-product-base-change-coproduct",
+  "lem-weil-pbc-finite-etale-etale-local-split",
+  "lem-weil-pbc-finite-local-on-target",
+  "lem-weil-pbc-small-etale-representable-presheaf-sheaf",
+  "lem-weil-pbc-etale-covering-base-change",
+  "lem-galois-descent",
+  "def-galois-finite-limits-colimits",
+  "def-galois-exact-functor"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-curve-estimates/sk-prop-h2/lem-fet-finite-limits.md",
-  "place": "## Proof"
+  "document": "literature/stacks-project/pione.tex",
+  "place": "Tag 0BN9, lemma-finite-etale-covers-limits-colimits. Same terminal/pullback and etale-local finite-set quotient route; explicit effective-descent assembly replaces the relative-algebra equalizer construction, and the omitted arbitrary base change verification is supplied."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For every scheme Y the category of finite etale Y schemes has finite limits and colimits and arbitrary base change preserves them",
+   "results": "AlgebraicGeometry.Scheme.instHasPullbacksEtale; AlgebraicGeometry.instHasFiniteLimitsScheme; AlgebraicGeometry.Scheme.instCategoryEtale; AlgebraicGeometry.IsFinite.instFstScheme; AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified; AlgebraicGeometry.IsFinite.instSndScheme; AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme",
+   "date": "2026-10-18",
+   "verdict": "no full match: hits give scheme or etale limits, finite/etale stability, coproducts or open gluing; none gives finite-etale coequalizers and their preservation by arbitrary base change"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.FiniteEtale",
+   "results": "No hits. loogle: unknown identifier 'AlgebraicGeometry.Scheme.FiniteEtale'",
+   "date": "2026-10-18",
+   "verdict": "no match: query identifier not known to Loogle"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite limits and colimits of finite etale schemes and preservation by base change",
+   "results": "AlgebraicGeometry.instHasFiniteLimitsScheme; AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme; AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme; AlgebraicGeometry.Scheme.instHasPullbacksEtale; AlgebraicGeometry.instFinitaryExtensiveScheme; AlgebraicGeometry.Scheme.smallEtaleTopology; AlgebraicGeometry.IsEtale; AlgebraicGeometry.Scheme.Etale",
+   "date": "2026-10-18",
+   "verdict": "no full match: hits give scheme or etale limits, finite/etale stability, coproducts or open gluing; none gives finite-etale coequalizers and their preservation by arbitrary base change"
+  },
+  {
+   "tool": "grep",
+   "query": "FiniteEtale|finiteEtale|finite_etale",
+   "results": "No hits (Mathlib/AlgebraicGeometry searched)",
+   "date": "2026-10-18",
+   "verdict": "no full match: hits give scheme or etale limits, finite/etale stability, coproducts or open gluing; none gives finite-etale coequalizers and their preservation by arbitrary base change"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The full subcategory of finite etale schemes over a scheme admits coequalizers preserved by arbitrary change of base",
+   "results": "AlgebraicGeometry.instFinitaryExtensiveScheme; AlgebraicGeometry.Scheme.instHasPullbacksEtale; AlgebraicGeometry.Scheme.instCategoryEtale; AlgebraicGeometry.IsFinite.instDescScheme; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified; AlgebraicGeometry.Scheme.GlueData.instHasMulticoequalizerDiagram; AlgebraicGeometry.Scheme.smallEtalePretopology; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme",
+   "date": "2026-10-18",
+   "verdict": "no full match: hits give scheme or etale limits, finite/etale stability, coproducts or open gluing; none gives finite-etale coequalizers and their preservation by arbitrary base change"
+  },
+  {
+   "tool": "grep",
+   "query": "HasFiniteColimits|PreservesFiniteColimits|coequalizer",
+   "results": "Mathlib/AlgebraicGeometry/Pullbacks.lean; Mathlib/AlgebraicGeometry/Pullbacks.lean; Mathlib/AlgebraicGeometry/Pullbacks.lean; Mathlib/AlgebraicGeometry/Pullbacks.lean; Mathlib/AlgebraicGeometry/Pullbacks.lean; Mathlib/AlgebraicGeometry/Gluing.lean; Mathlib/AlgebraicGeometry/Gluing.lean; Mathlib/AlgebraicGeometry/Gluing.lean (Mathlib/AlgebraicGeometry searched)",
+   "date": "2026-10-18",
+   "verdict": "no full match: hits give scheme or etale limits, finite/etale stability, coproducts or open gluing; none gives finite-etale coequalizers and their preservation by arbitrary base change"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsFinite, AlgebraicGeometry.IsEtale",
+   "results": "No hits. loogle: unknown identifier 'AlgebraicGeometry.IsEtale'",
+   "date": "2026-10-18",
+   "verdict": "no match: query identifier not known to Loogle"
+  },
+  {
+   "tool": "grep",
+   "query": "instHasFiniteLimits|HasFiniteLimits|HasOfPostcompProperty|IsStableUnderComposition",
+   "results": "Mathlib/CategoryTheory/MorphismProperty/Ind.lean; Mathlib/CategoryTheory/MorphismProperty/Ind.lean; Mathlib/CategoryTheory/MorphismProperty/Ind.lean; Mathlib/CategoryTheory/MorphismProperty/Ind.lean; Mathlib/CategoryTheory/MorphismProperty/Representable.lean; Mathlib/CategoryTheory/MorphismProperty/Representable.lean; Mathlib/CategoryTheory/MorphismProperty/LocalEpi.lean; Mathlib/CategoryTheory/MorphismProperty/LocalEpi.lean (Mathlib/CategoryTheory/MorphismProperty searched)",
+   "date": "2026-10-18",
+   "verdict": "no full match: hits give scheme or etale limits, finite/etale stability, coproducts or open gluing; none gives finite-etale coequalizers and their preservation by arbitrary base change"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "theorem",
@@ -60,5 +290,34 @@
   }
  },
  "chapter": "sec-curve-estimates",
- "unit": "sk-prop-h2"
+ "unit": "sk-prop-h2",
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-fet-finite-limits",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged. Replaced the imported two-paragraph proof by twelve checked steps along Stacks 0BN9: scheme pullbacks, finite disjoint unions, local finite-set quotients, explicit effective descent, and arbitrary base change. Reused existing nodes only. Avoided the globally constant-rank claim of lem-fet-locally-trivial, using the local statement 04HN already in the DAG. The project Lean covers finite limits and finite coproducts only, not the whole item. Preserved and read the previous four search records; added four logged searches with a second semantic phrasing. The resumed review adds the exact-functor definition and checks the infinite covering assembly through pulled-back component coverings and representable sheaves, without applying a finite-coproduct lemma to an infinite family.",
+  "blueprint": "Blueprint lem-fet-finite-limits proof Step 1 is realized by steps 1--3; Step 2 disjoint unions by step 4, local splitting and fixed index maps by steps 5--6, finite-set coequalizer by step 7, its unproved etale-locality assertion by steps 8--10, right exactness and finite-colimit reduction by steps 11--12.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-etale-etale-local-split",
+    "why": "Local splitting at each point is the exact input needed for the blueprint finite-set quotient calculation; the unit node lem-fet-locally-trivial incorrectly asserts a single rank globally."
+   },
+   {
+    "node": "lem-weil-pbc-small-etale-representable-presheaf-sheaf",
+    "why": "Glues quotient maps and factorizations on open components; this is a generic representability/sheaf tool, not a replacement of the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-etale-etale-local-split",
+  "lem-weil-pbc-small-etale-representable-presheaf-sheaf"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q12-ef5a2b6ca",
+  "group": "Q12",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q12-ef5a2b6ca (reviewer sub-agent of L); spot-checked: I read all of it: the item, all 12 steps, the statements of all 19 cited nodes, the master and main-20261015 blueprint text, and Stacks pione.tex 0BN9 (lines 967-1010) and the 0BNB coequalizer remark. The statement is unchanged and matches 0BN9: any scheme Y, all Y-morphisms, base change U |-> U x_Y Y', exact meaning preserving finite limits and finite colimits. Steps 1-3 give the terminal object and fibre products over R (base change taken with base R), then use lem-weil-pbc-finite-limits-from-terminal-pullbacks. Step 4 covers finite coproducts including the empty one: Spec 0 is finite, etaleness is vacuous, and base change uses the finite coproduct base-change node. Steps 5-7 split P and Z locally (04HN) with finite sets S_i, T_i that vary with the cover member, fix the index maps on clopen pieces, and take the quotient E=S/~. I checked this with T empty and S empty, and the coequalizer property holds universally under base change. Step 8 assembles over U = disjoint union of the U_i. Etaleness there uses the chart description in def-weil-etale-morphism, which is acceptable. Finiteness uses finite-local-on-target (3), and gluing uses the representable etale sheaf statement. Step 9 builds the descent datum from coequalizer uniqueness. Step 10 descends through lem-galois-descent (any surjective etale map, full faithfulness plus effectivity), and there is no cycle: the item's proof/stmt closure of 214 nodes does not contain the item. Step 11 gets right exactness from the pulled-back cover, step 8 over the overlaps, and descent over Y'. Step 12 is the coproduct-coequalizer presentation of a finite colimit, including I empty. Source error confirmed: lem-fet-locally-trivial (one finite set S over a single surjective etale cover) is false for disconnected Y. Over Y = Spec k disjoint-union Spec k with a cover of rank 1 on one component and rank 2 on the other, the fibres of P x Y' have 1 and 2 points while Y' x S has |S| points everywhere. So the switch to lem-weil-pbc-finite-etale-etale-local-split is justified. I accept both declared tool_uses (that local-split node and lem-weil-pbc-small-etale-representable-presheaf-sheaf). There are no new nodes, no SGA citations, no duplicate in the DAG (checked against galois-coproduct-morphism-components, finite-section-coproduct-local-permutation and the affine-etale colimit node) and no Mathlib leaf (grep for FiniteEtale finds only RingTheory/Etale/Finite.lean). Maintainer note: record in coord/HUMAN.md that lem-fet-locally-trivial is false unless Y is connected."
+ }
 }
