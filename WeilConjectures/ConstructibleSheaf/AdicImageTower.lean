@@ -58,7 +58,8 @@ instance {Ω : Type u} [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ X) :
 
 /-- An étale sheaf of `Λ`-modules whose stalks at all the geometric points `X.algClosurePoint x`
 vanish is zero. -/
-lemma isZero_of_forall_isZero_sheafFiber {F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)}
+lemma isZero_of_forall_isZero_sheafFiber_algClosurePoint
+    {F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)}
     (h : ∀ x : X, IsZero ((pointSmallEtale (X.algClosurePoint x)).sheafFiber
       (A := ModuleCat.{u + 1} Λ) |>.obj F)) :
     IsZero F := by
@@ -79,7 +80,7 @@ lemma exact_of_forall_sheafFiber
         ∃ z, (pointSmallEtale (X.algClosurePoint x)).sheafFiber.map S.f z = y) :
     S.Exact := by
   rw [S.exact_iff_isZero_homology]
-  exact isZero_of_forall_isZero_sheafFiber fun x ↦
+  exact isZero_of_forall_isZero_sheafFiber_algClosurePoint fun x ↦
     ((S.map (pointSmallEtale (X.algClosurePoint x)).sheafFiber).exact_iff_isZero_homology.1
       ((S.map (pointSmallEtale (X.algClosurePoint x)).sheafFiber).moduleCat_exact_iff.2
         (h x))).of_iso
