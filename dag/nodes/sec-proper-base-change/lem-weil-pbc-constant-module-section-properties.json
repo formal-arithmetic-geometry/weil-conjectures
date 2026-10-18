@@ -24,10 +24,9 @@
  ],
  "proof": [
   {
-   "text": "By the definition of the constant sheaf, the constant presheaf sequence sheafifies to the displayed sequence of constant abelian sheaves. The module-sheafification interface identifies the underlying abelian sheaf with abelian sheafification, and the arbitrary-site sheafification exactness and sectionwise-limit statement gives exactness after evaluation at every U. For surjectivity, choose a set-theoretic section s:C→B; functoriality of the constant-sheaf construction gives a morphism of sheaves of sets underline C→underline B splitting the quotient, so its component at U supplies the required section. Thus M↦underline M(U) preserves short exact sequences.",
+   "text": "The constant-presheaf functor, module-valued sheafification, the sheaf inclusion, and evaluation preserve finite limits. Their composite M ↦ underline M(U) therefore preserves injections and the exactness of short exact sequences on the left. Forgetting modules to sets commutes with constant sheaves by constantCommuteCompose. Choose a set-theoretic section of a surjective module map, apply the constant-set-sheaf functor, and conjugate by this comparison; its component at U is a right inverse. This proves surjectivity and hence sectionwise short exactness directly in ModuleCat, without the varying-ring module-sheafification interface.",
    "uses": [
     "def-weil-pbc-constant-sheaf",
-    "lem-pc-sites-module-sheafification-interface",
     "lem-weil-pbc-sheafification-exact"
    ],
    "elementary": false,
@@ -37,7 +36,7 @@
    }
   },
   {
-   "text": "Choose a finite presentation R^s → R^t → Q → 0. Right exactness of tensor product gives M^s → M^t → M tensor_R Q → 0. Applying the sectionwise exact constant-sheaf sequence from step 1 at U gives underline M(U)^s → underline M(U)^t → underline(M tensor_R Q)(U) → 0; evaluation commutes with these finite direct sums. The cokernel of the first map is, by the defining finite-presentation cokernel description of tensor product, underline M(U) tensor_R Q. This identifies the canonical map, and all constructions commute with maps in M, Q, and restriction in U.",
+   "text": "Construct for every R-linear additive functor F on R-modules the canonical map F(M) tensor Q → F(M tensor Q), sending s tensor q to F(m ↦ m tensor q)(s). Its naturality follows from functoriality. For Q = R^n, write an explicit inverse using the n coordinate projections and the standard basis: the two inverse identities are finite-sum identities preserved by F. For finitely presented Q, choose R^m → R^n → Q → 0, tensor with M and with F(M), and apply the section functor F from step 1, which preserves finite colimits by its short exactness. The resulting commutative right-exact diagram has bijective first and second vertical maps. An explicit diagram chase proves the last vertical map bijective. Turn this constructed linear map into a linear equivalence. Naturality in M and Q follows from the already proved formula; naturality in U follows by tensor induction from naturality of the constant-sheaf morphism.",
    "uses": [
     "lem-weil-pbc-sheafification-exact",
     "lem-weil-pbc-tensor-right-exact"
@@ -49,7 +48,7 @@
    }
   },
   {
-   "text": "Let I be a finitely generated ideal of R. The existing Noetherian finite-module presentation result makes I finitely presented. The finite-presentation tensor argument, using the cited tensor right-exactness statement and the arbitrary-site sectionwise exactness statement, identifies underline M(U) tensor_R I with underline(M tensor_R I)(U). Flatness of M makes M tensor_R I → M injective, so the constant-sheaf exactness result makes the induced map on sections injective. Since R is commutative, the symmetry of tensor identifies this map with the criterion map I tensor_R underline M(U) → R tensor_R underline M(U) under the canonical unit identification R tensor_R underline M(U) ≅ underline M(U). The existing finitely-generated-ideal criterion therefore implies that underline M(U) is flat.",
+   "text": "For an ideal I, Noetherianity gives a finite presentation of I. Apply the comparison in step 2 to Q = I and Q = R. Flatness of M makes M tensor I → M tensor R injective, and step 1 makes its map on sections injective. Naturality of the tensor comparison gives a commuting square. If two tensors in underline M(U) tensor I have equal images in underline M(U) tensor R, apply the comparison, cancel the injective map on sections, and then cancel the comparison for I. Thus tensoring the ideal inclusion with underline M(U) is injective. The lTensor version of the finitely-generated-ideal flatness criterion proves flatness.",
    "uses": [
     "lem-sc-noetherian-finite-module-finite-presentation",
     "lem-weil-pbc-tensor-right-exact",
@@ -65,7 +64,6 @@
  ],
  "proof_deps": [
   "def-weil-pbc-constant-sheaf",
-  "lem-pc-sites-module-sheafification-interface",
   "lem-sc-noetherian-finite-module-finite-presentation",
   "lem-weil-pbc-flat-fg-ideal-criterion",
   "lem-weil-pbc-sheafification-exact",
@@ -74,7 +72,7 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/sites-modules.tex",
-  "place": "Tags 093J, 093K, 093L"
+  "place": "Tags 093J, 093K, 093L; explicit coordinate inverse and right-exact diagram chase formalized by T3 on 2026-10-18"
  },
  "mathlib_searches": [
   {
@@ -173,5 +171,15 @@
   "by": "NW",
   "date": "2026-10-15",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261018T062918-L-679716",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
