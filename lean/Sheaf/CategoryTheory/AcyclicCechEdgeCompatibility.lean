@@ -8,12 +8,10 @@ public import Sheaf.CategoryTheory.SiteCechEdgeNormalization
 public import Sheaf.CategoryTheory.RightDerivedUniversalDeltaFunctor
 public import Sheaf.CategoryTheory.Sites.CohomologyRightDerivedSections
 public import Mathlib.CategoryTheory.Sites.Pullback
-public import Sheaf.CategoryTheory.RingedSiteModules
 import WeilConjectures.CategoryTheory.SiteInjectiveCechAcyclic
 import Sheaf.CategoryTheory.Sites.InjectiveModuleCechAcyclic
 
 import Sheaf.CategoryTheory.ModuleAbelianEvaluationComparison
-import Mathlib.Algebra.Homology.TotalComplexSymmetry
 import WeilConjectures.Mathlib.CategoryTheory.Abelian.Injective.Resolution
 import Sheaf.Algebra.Homology.FirstQuadrantAugmentation
 import Sheaf.CategoryTheory.SitePullbackAbelianExact
