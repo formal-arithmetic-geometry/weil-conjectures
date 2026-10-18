@@ -11,19 +11,11 @@ public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFr
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.Algebra.Category.Grp.Ulift
 public import Mathlib.Data.ZMod.Basic
+public import Mathlib.AlgebraicGeometry.Scheme
+public import Mathlib.CategoryTheory.Sites.Sheaf
 
 import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
-import Sheaf.AlgebraicGeometry.TensorPullback
-import WeilConjectures.Mathlib.RingTheory.Extension.Presentation.Submersive
-import WeilConjectures.Mathlib.RingTheory.Smooth.StandardSmoothOfFree
-import Mathlib.AlgebraicGeometry.Morphisms.Etale
-import WeilConjectures.LinearAlgebra.SemilinearFrobenius
-public import Mathlib.AlgebraicGeometry.Scheme
-import Mathlib.AlgebraicGeometry.Sites.Etale
-public import Mathlib.CategoryTheory.Sites.Sheaf
 import Sheaf.AlgebraicGeometry.EtaleStratifiedFinite
-import Sheaf.AlgebraicGeometry.Sites.InverseImageRepresentable
-import Sheaf.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
 import Sheaf.AlgebraicGeometry.FiniteEtaleYonedaLocalTrivializations
 import Sheaf.AlgebraicGeometry.FiniteLocalAbelianForget
 import WeilConjectures.AlgebraicGeometry.EtaleStratificationLocalGluingCore
@@ -32,8 +24,13 @@ import Mathlib.CategoryTheory.Sites.ConstantSheaf
 import Mathlib.CategoryTheory.Sites.Sheafification
 import WeilConjectures.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
 import WeilConjectures.AlgebraicGeometry.Sites.InverseImageRepresentable
-import WeilConjectures.AlgebraicGeometry.TensorPullback
 import WeilConjectures.ConstructibleSheaf.Defs
+import WeilConjectures.ConstructibleSheaf.Pullback
+import all Sheaf.AlgebraicGeometry.PullbackFiniteLocallyConstant
+import WeilConjectures.Mathlib.CategoryTheory.Sites.Point.ConstantSheaf
+import Mathlib.CategoryTheory.Sites.EpiMono
+import Sheaf.AlgebraicGeometry.FrobeniusVectorBundleLocalLifts
+import Sheaf.AlgebraicGeometry.FrobeniusVectorBundleAffineKernelModels
 
 /-!
 # Fixed points of Frobenius-semilinear vector-bundle endomorphisms
@@ -52,6 +49,106 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme
 
 set_option autoImplicit false
+
+private theorem finiteAbelianModels {X : Scheme.{u}}
+    (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})
+    (hG : IsLisseEtaleSheafOfSets
+      ((sheafCompose _ (CategoryTheory.forget AddCommGrpCat.{u + 1})).obj G)) :
+    ∃ V : Cover.{u} etalePrecoverage X, ∀ i : V.I₀,
+      ∃ A : AddCommGrpCat.{u + 1}, Finite A ∧
+        Nonempty ((Etale.upperStar AddCommGrpCat.{u + 1} (V.f i)).obj G ≅
+          (constantSheaf (V.X i).smallEtaleTopology AddCommGrpCat.{u + 1}).obj A) := by
+  classical
+  let : JointlySurjective etalePrecoverage.{u} :=
+    inferInstanceAs (JointlySurjective (precoverage @Etale))
+  obtain ⟨hloc, hfin⟩ := (finite_local_abelian_forget_iff G).mp hG
+  obtain ⟨⟨V₀, hV₀⟩⟩ := hloc.nonempty_locallyConstantDatum
+  let V : Cover.{u} etalePrecoverage X :=
+    { I₀ := { i : V₀.I₀ // Nonempty (V₀.X i) }
+      X i := V₀.X i.1
+      f i := V₀.f i.1
+      mem₀ := by
+        refine (presieve₀_mem_precoverage_iff _).mpr ⟨fun x ↦ ?_, fun i ↦ V₀.map_prop i.1⟩
+        obtain ⟨i, y, hy⟩ := V₀.exists_eq x
+        exact ⟨⟨i, ⟨y⟩⟩, y, hy⟩ }
+  refine ⟨V, fun i ↦ ?_⟩
+  have := hV₀ i.1
+  obtain ⟨A, ⟨e⟩⟩ := (G.over (V₀.etalePrecoverageToEtale i.1)).mem_essImage_of_isConstant
+  let U := V.etalePrecoverageToEtale i
+  let e' : (Etale.upperStar AddCommGrpCat.{u + 1} U.hom).obj G ≅
+      (constantSheaf U.left.smallEtaleTopology AddCommGrpCat.{u + 1}).obj A :=
+    (overSheafEquivFunctorObjOverIso AddCommGrpCat.{u + 1} U G).symm ≪≫
+      (Etale.overSheafEquiv U AddCommGrpCat.{u + 1}).functor.mapIso e.symm ≪≫
+      ((Etale.overEquiv U).constantSheafSheafCongrIso
+        (X.smallEtaleTopology.over U) U.left.smallEtaleTopology
+        AddCommGrpCat.{u + 1} Over.mkIdTerminal).app A
+  have : Nonempty U.left := i.2
+  let t := U.left.algClosurePoint (Classical.arbitrary U.left)
+  have : PreservesFilteredColimitsOfSize.{u, u}
+      (CategoryTheory.forget AddCommGrpCat.{u + 1}) :=
+    preservesFilteredColimitsOfSize_shrink.{u, u + 1, u, u + 1} _
+  let es := ((Etale.upperStarCompSheafFiberIso AddCommGrpCat.{u + 1} U.hom t).app G).symm ≪≫
+    (pointSmallEtale t).sheafFiber.mapIso e' ≪≫
+    (pointSmallEtale t).sheafFiberConstantSheafIso A
+  exact ⟨A, @Finite.of_equiv _ _ (hfin _ (t ≫ U.hom))
+    es.addCommGroupIsoToAddEquiv.toEquiv, ⟨e'⟩⟩
+
+private theorem lissePullbackOfRepresentable {X Y P : Scheme.{u}}
+    (i : Y ⟶ X) (π : P ⟶ X) [Etale π]
+    [IsFinite (pullback.snd π i)]
+    (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})
+    (e : (sheafCompose _ (CategoryTheory.forget AddCommGrpCat.{u + 1})).obj G ≅
+      (X.smallEtaleTopology.uliftYoneda.{u + 1}).obj (Etale.mk π)) :
+    IsLisseEtaleSheafOfSets
+      ((sheafCompose _ (CategoryTheory.forget AddCommGrpCat.{u + 1})).obj
+        ((Etale.upperStar AddCommGrpCat.{u + 1} i).obj G)) := by
+  let ea := (AlgebraicGeometry.etaleInverseImageAlgebraicStructures Y X i).2.choose.app G
+  let adj := Functor.sheafPullbackConstruction.sheafAdjunctionContinuous
+    i.Etale (Type (u + 1)) X.smallEtaleTopology Y.smallEtaleTopology
+  obtain ⟨er⟩ := AlgebraicGeometry.nonempty_inverseImage_representable_iso.{u, u + 1}
+    i (etaleSetPullback i) adj
+  let e' := ea ≪≫ (etaleSetPullback i).mapIso e ≪≫ er.app (Etale.mk π)
+  obtain ⟨⟨V, hV⟩, hf⟩ :=
+    finiteEtale_yoneda_local_trivializations Y (pullback π i) (pullback.snd π i)
+  apply finiteLocallyConstant_of_iso e'.symm
+  refine ⟨⟨V, fun j ↦ ?_⟩, hf⟩
+  obtain ⟨A, _, ⟨eA⟩⟩ := hV j
+  exact Sheaf.isConstant_of_iso _ eA
+
+private theorem constructibleOfAffineRepresentations {X : Scheme.{u}}
+    [CompactSpace X] [QuasiSeparatedSpace X]
+    (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})
+    (n : ℕ) (W : Fin n → X.Opens) (hW : ∀ a, IsAffineOpen (W a))
+    (hcover : (⋃ a : Fin n, (W a : Set X)) = Set.univ)
+    (P : Fin n → Scheme.{u}) (π : ∀ a, P a ⟶ (W a).toScheme)
+    [∀ a, Etale (π a)] [∀ a, CompactSpace (P a)] [∀ a, QuasiSeparatedSpace (P a)]
+    (e : ∀ a, Nonempty
+      ((sheafCompose _ (CategoryTheory.forget AddCommGrpCat.{u + 1})).obj
+        ((Etale.upperStar AddCommGrpCat.{u + 1} (W a).ι).obj G) ≅
+          ((W a).toScheme.smallEtaleTopology.uliftYoneda.{u + 1}).obj (Etale.mk (π a)))) :
+    IsConstructibleAbelianSheaf G := by
+  classical
+  have hstr (a : Fin n) := by
+    have : IsAffine (W a).toScheme := hW a
+    exact exists_etale_stratified_finite (π a)
+  choose T hc hfinite using hstr
+  have hlocal (a : Fin n) (b : Fin (T a).n) : IsLisseEtaleSheafOfSets
+      ((sheafCompose _ (CategoryTheory.forget AddCommGrpCat.{u + 1})).obj
+        ((Etale.upperStar AddCommGrpCat.{u + 1} ((T a).immersion b ≫ (W a).ι)).obj G)) := by
+    have := (hfinite a b).1
+    have hi := lissePullbackOfRepresentable ((T a).immersion b) (π a)
+      ((Etale.upperStar AddCommGrpCat.{u + 1} (W a).ι).obj G) (e a).some
+    exact finiteLocallyConstant_of_iso
+      ((sheafCompose _ (CategoryTheory.forget AddCommGrpCat.{u + 1})).mapIso
+      ((Etale.upperStarComp AddCommGrpCat.{u + 1} ((T a).immersion b) (W a).ι).app G).symm) hi
+  obtain ⟨S, hS, hfac⟩ :=
+    exists_global_stratification_factoring_local n W hW hcover T hc
+  refine ⟨S, hS, fun j ↦ ?_⟩
+  obtain ⟨a, b, q, hq⟩ := hfac j
+  have h := (pullback_finite_locally_constant q ((T a).immersion b ≫ (W a).ι)
+    G (hlocal a b)).2
+  rw [hq] at h
+  exact finiteAbelianModels _ h
 
 /-- A Frobenius-semilinear endomorphism of a finite locally free module has zero
 cokernel after subtracting the identity, and its fixed-point sheaf is constructible.
@@ -95,7 +192,17 @@ theorem frobenius_vectorBundle_kernel_constructible
         ULift.up (a.down ^ p • (@id Γ((Modules.tensorPullback U.unop.hom).obj E, ⊤)
           (F.hom.app U e).down))) :
     IsZero (cokernel (F - 𝟙 _)) ∧
-      IsConstructibleAbelianSheaf (kernel (F - 𝟙 _)) := by
-  sorry
+      IsConstructibleAbelianSheaf (kernel (F - 𝟙 _))  := by
+  classical
+  have hsurj := frobenius_vectorBundle_local_lifts p S E F hF
+  have : Sheaf.IsLocallySurjective (F - 𝟙 _) := hsurj
+  have : Epi (F - 𝟙 _) := inferInstance
+  refine ⟨isZero_cokernel_of_epi _, ?_⟩
+  obtain ⟨n, W, hW, hcover, hmodel⟩ :=
+    frobenius_vectorBundle_affine_kernel_models p S E F hF
+  choose P π hP hπ e using hmodel
+  have : ∀ a, IsAffine (P a) := hP
+  have : ∀ a, Etale (π a) := hπ
+  exact constructibleOfAffineRepresentations (kernel (F - 𝟙 _)) n W hW hcover P π e
 
 end AlgebraicGeometry.Scheme

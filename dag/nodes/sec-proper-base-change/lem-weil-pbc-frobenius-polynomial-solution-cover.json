@@ -1,0 +1,150 @@
+{
+ "id": "lem-weil-pbc-frobenius-polynomial-solution-cover",
+ "kind": "statement",
+ "title": "Affine polynomial solution cover for Frobenius equations",
+ "statement": "Let X be an affine scheme [def-pc-scheme], p a prime with p=0 in Γ(X,O_X), n a natural number, c an n-by-n matrix and b an n-tuple over Γ(X,O_X). There exist an affine scheme P, an etale surjective map π:P→X [def-weil-etale-morphism], and sections y_i satisfying sum_j π*(c_ij)y_j^p-y_i=π*(b_i). For every scheme T→X and solution tuple z in Γ(T,O_T)^n, there is a unique map T→P over X pulling y back to z. This includes n=0 and the empty affine scheme.",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0GKU, label lemma-frobenius-linear-on-vb, proof"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-etale-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Form the explicit quotient B=A[X_1,...,X_n]/(b_i+X_i-sum_j c_ij X_j^p). Its naive square Jacobian matrix is the identity since p=0 in A; hence Spec B→Spec A is etale by the square-Jacobian criterion. Transport along X≅Spec Γ(X).",
+   "uses": [
+    "def-exc-jacobian-presentation",
+    "lem-exc-etale-jacobian-presentation",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0GKU, label lemma-frobenius-linear-on-vb, proof"
+   }
+  },
+  {
+   "text": "For each prime q of A, take an algebraic closure K of its residue field. The specialized matrix defines a p-semilinear map on K^n. Lang--Steinberg solves F(x)-x=b, giving B→K. The kernel prime lies over q, proving surjectivity, including the vacuous zero-ring case.",
+   "uses": [
+    "lem-sc-lang-steinberg"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0GKU, label lemma-frobenius-linear-on-vb, proof"
+   }
+  },
+  {
+   "text": "Evaluation at any solution tuple annihilates the displayed ideal and thus factors uniquely through B. The Spec/global-sections adjunction gives the unique morphism T→Spec B. Equality on constants and variables proves uniqueness, and the images of the variables give the universal solution.",
+   "uses": [
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0GKU, label lemma-frobenius-linear-on-vb, proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-exc-jacobian-presentation",
+  "lem-exc-etale-jacobian-presentation",
+  "def-weil-affine-spectrum",
+  "lem-sc-lang-steinberg"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0GKU, label lemma-frobenius-linear-on-vb, proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "multivariate polynomial quotient by b_i plus x_i minus matrix times pth powers is etale in characteristic p",
+   "results": "[leanfinder] OK 8 hit(s); Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial; Polynomial.instEtaleUniversalCoprimeFactorizationRing; RingHom.IsStandardSmooth.exists_etale_mvPolynomial; RingHom.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial; StandardEtalePair.instEtaleRing; StandardEtalePresentation.P; StandardEtalePresentation.toSubmersivePresentation; StandardEtalePresentation.exists_mul_aeval_x_g_pow_eq_aeval_x",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.PreSubmersivePresentation.naive",
+   "results": "[loogle] OK 3 hit(s); Algebra.PreSubmersivePresentation.jacobiMatrix_naive; Algebra.PreSubmersivePresentation.naive; Algebra.PreSubmersivePresentation.naive_toPresentation",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "jacobiMatrix_naive|surjective_sub_id",
+   "results": "[grep] OK 2 hit(s); Mathlib/RingTheory/Extension/Presentation/Submersive.lean; Mathlib/RingTheory/Extension/Presentation/Submersive.lean",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An affine scheme representing solutions of b_i + x_i minus sum c_ij x_j to the p-th power is etale and surjective in characteristic p",
+   "results": "[leansearch] OK 8 hit(s); AlgebraicGeometry.Scheme.Etale; AlgebraicGeometry.IsEtale; AlgebraicGeometry.AffineScheme; AlgebraicGeometry.AffineScheme.Spec_essSurj; AlgebraicGeometry.IsAffine.recOn; AlgebraicGeometry.Scheme.exists_hom_isAffine_of_isZariskiLocalAtSource; AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme; AlgebraicGeometry.AffineSpace.instSurjectiveOverSchemeInferInstanceOverClass. These concern general etale morphisms, Frobenius or sheaf operations, rather than the stated natural finite-coordinate or polynomial-cover result.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FrobeniusVectorBundleKernel",
+  "date": "2026-10-18",
+  "group": "V8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-direct-image-finiteness-proper",
+   "place": "The invocation of Tag 0GKU for Frobenius-linear vector bundles, expanded here at Affine polynomial solution cover for Frobenius equations.",
+   "via": [
+    "lem-weil-pbc-frobenius-vector-bundle-kernel",
+    "lem-weil-pbc-proper-smooth-curves-prime-coefficients",
+    "lem-weil-pbc-etale-proper-smooth-curves-finite-module",
+    "lem-weil-pbc-etale-constant-shriek-rel-dim-1",
+    "lem-weil-pbc-etale-lisse-open-relative-line-constructibility",
+    "lem-weil-pbc-etale-affine-line-shriek-sheaf-constructible",
+    "lem-weil-pbc-etale-compactification-constructibility",
+    "lem-weil-pbc-etale-proper-direct-image-finiteness"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FrobeniusPolynomialSolutions",
+  "file": "lean/Sheaf/AlgebraicGeometry/FrobeniusPolynomialSolutions.lean",
+  "declaration": "AlgebraicGeometry.Scheme.frobenius_polynomial_solution_cover",
+  "statement": "theorem frobenius_polynomial_solution_cover\n    (X : Scheme.{u}) [IsAffine X] (p : ℕ) [Fact p.Prime]\n    (hp : (p : Γ(X, ⊤)) = 0) (n : ℕ)\n    (c : Fin n → Fin n → Γ(X, ⊤)) (b : Fin n → Γ(X, ⊤)) :\n    ∃ (P : Scheme.{u}) (π : P ⟶ X) (x : Fin n → Γ(P, ⊤)),\n      IsAffine P ∧ Etale π ∧ Surjective π ∧\n      (∀ i, ∑ j, π.appTop (c i j) * x j ^ p - x i = π.appTop (b i)) ∧\n      ∀ (T : Scheme.{u}) (f : T ⟶ X) (y : Fin n → Γ(T, ⊤)),\n        (∀ i, ∑ j, f.appTop (c i j) * y j ^ p - y i = f.appTop (b i)) →\n        ∃! g : T ⟶ P, g ≫ π = f ∧ ∀ i, g.appTop (x i) = y i",
+  "branch": "sheaf-dag",
+  "by": "V8",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V8",
+  "result": "pass",
+  "landing": "20261018T091415-L-3259664",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V8",
+  "result": "pass",
+  "landing": "20261018T091415-L-3259664",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
