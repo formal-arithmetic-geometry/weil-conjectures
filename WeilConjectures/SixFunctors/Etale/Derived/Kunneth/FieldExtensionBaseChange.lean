@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.LimitBaseChange
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Limits.PerfectSeparable
-public import WeilConjectures.FieldTheory.SeparableSmoothColimit
+public import WeilConjectures.FieldTheory.SeparableSmoothSubalgebra
 public import WeilConjectures.AlgebraicGeometry.Sites.EtaleLimitDescent
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.BaseChangeUniversalHomeomorphism
 

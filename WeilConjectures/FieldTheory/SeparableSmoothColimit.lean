@@ -1,242 +1,157 @@
 /-
-Copyright (c) 2026 Claude. All rights reserved.
+Copyright (c) 2026 Bin Wu. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
+Authors: Bin Wu
 -/
+
 module
 
-public import Mathlib.RingTheory.Smooth.Field
-public import Mathlib.RingTheory.Smooth.Locus
-public import WeilConjectures.FieldTheory.SeparableExtension
-public import WeilConjectures.RingTheory.FiniteTypeSubalgebraUnion
+public import WeilConjectures.FieldTheory.FgSeparableSmooth
+public import Mathlib.AlgebraicGeometry.Morphisms.Affine
+import WeilConjectures.FieldTheory.SeparablyGeneratedSeparable
+import Mathlib.FieldTheory.IntermediateField.Adjoin.Algebra
+import Mathlib.Algebra.Category.Ring.FilteredColimits
+import Mathlib.AlgebraicGeometry.GammaSpecAdjunction
 
-/-! # Separable field extensions are filtered unions of smooth subalgebras
+/-!
+# Separable extensions as colimits of smooth subalgebras
 
-Generic smoothness for fraction fields, and its consequence: a separable field extension
-`L / K` is the directed union of its finite type smooth `K`-subalgebras.
-
-## Main statements
-
-* `Algebra.exists_smooth_localizationAway_of_formallySmooth`: a finite type domain over a
-  field whose fraction field is formally smooth has a smooth principal localization `A_g`,
-  `g ≠ 0` (generic smoothness).
-* `Algebra.exists_smooth_subalgebra_of_isSeparable` (blueprint
-  `lem-kun-algebraic-separable-smooth`),
-* `Algebra.exists_smooth_subalgebra_of_isSeparablyGenerated` (blueprint
-  `lem-kun-fg-separable-smooth`),
-* `Algebra.exists_smooth_subalgebra_of_isSeparableExtension` (blueprint
-  `lem-kun-separable-smooth-colimit`): every finite subset of `L` lies in a finite type smooth
-  `K`-subalgebra of `L`.
-* `Algebra.directedOn_smooth_finiteType_subalgebra_of_isSeparableExtension`,
-  `Algebra.sSup_smooth_finiteType_subalgebra_of_isSeparableExtension`: the finite type smooth
-  `K`-subalgebras of `L` form a directed family with union `L`.
-* `Algebra.isFiltered_smooth_finiteType_subalgebra_of_isSeparableExtension`,
-  `Algebra.isColimitSmoothFiniteTypeSubalgebraOfIsSeparableExtension`: `L` is the filtered
-  colimit in `CommRingCat` of these subalgebras along the inclusions.
+Source: Stacks Project, Algebra, Lemma 10.158.11, Tag 07BV
+(blueprint: lem-kun-separable-smooth-colimit).
 -/
 
 @[expose] public section
 
-universe u
+universe u v
 
-namespace Algebra
+open CategoryTheory CategoryTheory.Limits AlgebraicGeometry
 
-open scoped IntermediateField.algebraAdjoinAdjoin
+namespace FieldTheory
 
-section Directed
+/-- The inclusion diagram of finitely generated smooth subalgebras of a field extension.
+Source: Stacks Project, Algebra, Lemma 10.158.11, Tag 07BV
+(blueprint: lem-kun-separable-smooth-colimit). -/
+def smoothSubalgebraDiagram (K : Type u) (L : Type v) [Field K] [Field L]
+    [Algebra K L] :
+    {A : Subalgebra K L // Algebra.Smooth K A ∧ A.FG} ⥤ CommRingCat :=
+  { obj := fun A => CommRingCat.of A.1
+    map := fun {A B} f =>
+      CommRingCat.ofHom (Subalgebra.inclusion (leOfHom f)).toRingHom
+    map_id := by intros; ext; rfl
+    map_comp := by intros; ext; rfl }
 
-variable {R B : Type*} [CommRing R] [CommRing B] [Algebra R B]
+/-- The cocone from smooth subalgebras to their ambient field, with inclusion maps.
+Source: Stacks Project, Algebra, Lemma 10.158.11, Tag 07BV
+(blueprint: lem-kun-separable-smooth-colimit). -/
+def smoothSubalgebraCocone (K : Type u) (L : Type v) [Field K] [Field L]
+    [Algebra K L] : Cocone (smoothSubalgebraDiagram K L) :=
+  { pt := CommRingCat.of L
+    ι :=
+      { app := fun A => CommRingCat.ofHom A.1.val.toRingHom
+        naturality := by intros; ext; rfl } }
 
-/-- If every finite subset of `B` is contained in a finite type `R`-subalgebra satisfying `P`,
-then the finite type `R`-subalgebras satisfying `P` form a directed family. -/
-theorem directedOn_setOf_finiteType_of_forall_finset {P : Subalgebra R B → Prop}
-    (h : ∀ s : Finset B, ∃ S : Subalgebra R B, P S ∧ FiniteType R S ∧ (s : Set B) ⊆ S) :
-    DirectedOn (· ≤ ·) {S : Subalgebra R B | P S ∧ FiniteType R S} := by
+private theorem finite_subset_of_directed_cover
+    {K : Type u} {L : Type v} [Field K] [Field L] [Algebra K L]
+    {ι : Type v} [Nonempty ι] {A : ι → Subalgebra K L}
+    (hdir : Directed (· ≤ ·) A) (hcover : ∀ x : L, ∃ i, x ∈ A i)
+    (s : Finset L) : ∃ i, ∀ x ∈ s, x ∈ A i := by
   classical
-  rintro S₁ ⟨-, h₁⟩ S₂ ⟨-, h₂⟩
-  obtain ⟨t₁, rfl⟩ := (Subalgebra.fg_iff_finiteType S₁).2 h₁
-  obtain ⟨t₂, rfl⟩ := (Subalgebra.fg_iff_finiteType S₂).2 h₂
-  obtain ⟨S, hP, hS, hsub⟩ := h (t₁ ∪ t₂)
-  refine ⟨S, ⟨hP, hS⟩, adjoin_le fun x hx ↦ hsub ?_, adjoin_le fun x hx ↦ hsub ?_⟩ <;>
-    simp [hx]
+  induction s using Finset.induction_on with
+  | empty => exact ⟨Classical.arbitrary ι, by simp⟩
+  | @insert x s hx ih =>
+    obtain ⟨i, hi⟩ := ih
+    obtain ⟨j, hj⟩ := hcover x
+    obtain ⟨k, hik, hjk⟩ := hdir i j
+    refine ⟨k, ?_⟩
+    intro y hy
+    rcases Finset.mem_insert.mp hy with rfl | hy
+    · exact hjk hj
+    · exact hik (hi y hy)
 
-/-- If every finite subset of `B` is contained in a finite type `R`-subalgebra satisfying `P`,
-then the finite type `R`-subalgebras satisfying `P` have union `B`. -/
-theorem sSup_setOf_finiteType_eq_top_of_forall_finset {P : Subalgebra R B → Prop}
-    (h : ∀ s : Finset B, ∃ S : Subalgebra R B, P S ∧ FiniteType R S ∧ (s : Set B) ⊆ S) :
-    sSup {S : Subalgebra R B | P S ∧ FiniteType R S} = ⊤ := by
+/-- For any separable field extension `L/K`, the full collection of finitely generated smooth
+`K`-subalgebras of `L` is nonempty and directed under inclusion, and its union is `L`.
+Its canonical cocone of inclusions is a colimit, and its image under `Spec` is a limit cone of
+affine smooth `K`-schemes with affine transition maps.
+
+Source: Stacks Project, Algebra, Lemma 10.158.11, Tag 07BV
+(blueprint: lem-kun-separable-smooth-colimit). For each finitely generated subextension of
+`L/K`, apply `fg_separable_extension_is_filtered_colimit_smooth`. Every finite subset of `L`
+lies in one of the resulting smooth subalgebras; applying this to generators of two such
+subalgebras proves directedness. The union is the ring colimit. The `Spec` functor sends its
+opposite cone to a limit cone, and maps between affine schemes are affine. -/
+theorem separable_extension_is_filtered_colimit_smooth
+    {K : Type u} {L : Type v} [Field K] [Field L] [Algebra K L]
+    (hsep : Algebra.IsSeparableExtension K L) :
+    Nonempty {A : Subalgebra K L // Algebra.Smooth K A ∧ A.FG} ∧
+      Directed (· ≤ ·)
+        (fun A : {A : Subalgebra K L // Algebra.Smooth K A ∧ A.FG} => A.1) ∧
+      (∀ x : L, ∃ A : {A : Subalgebra K L // Algebra.Smooth K A ∧ A.FG}, x ∈ A.1) ∧
+      Nonempty (IsColimit (smoothSubalgebraCocone K L)) ∧
+      Nonempty (IsLimit (Scheme.Spec.mapCone (smoothSubalgebraCocone K L).op)) ∧
+      (∀ A : {A : Subalgebra K L // Algebra.Smooth K A ∧ A.FG},
+        Algebra.Smooth K A.1) ∧
+      (∀ (A B : {A : Subalgebra K L // Algebra.Smooth K A ∧ A.FG}) (f : B ⟶ A),
+        IsAffineHom
+        (Spec.map (CommRingCat.ofHom
+          (Subalgebra.inclusion (leOfHom f)).toRingHom))) := by
   classical
-  refine Algebra.eq_top_iff.2 fun x ↦ ?_
-  obtain ⟨S, hP, hS, hsub⟩ := h {x}
-  have hmem : S ∈ {S : Subalgebra R B | P S ∧ FiniteType R S} := ⟨hP, hS⟩
-  exact le_sSup hmem (hsub (Finset.mem_coe.2 (Finset.mem_singleton_self x)))
+  let S := {A : Subalgebra K L // Algebra.Smooth K A ∧ A.FG}
+  have finite_cover (s : Finset L) : ∃ A : S, ∀ x ∈ s, x ∈ A.1 := by
+    let F := IntermediateField.adjoin K (s : Set L)
+    have hfg : F.FG := IntermediateField.fg_adjoin_finset s
+    let : Algebra.EssFiniteType K F := IntermediateField.essFiniteType_iff.mpr hfg
+    have hsepF := Algebra.isSeparableExtension_of_isSeparablyGenerated K F (hsep F hfg)
+    obtain ⟨ι, A, hne, hsmooth, hFG, hdir, hcover⟩ :=
+      fg_separable_extension_is_filtered_colimit_smooth hsepF
+    let := hne
+    let t : Finset F := s.attach.image (fun x ↦
+      ⟨x.1, IntermediateField.subset_adjoin K (s : Set L) x.2⟩)
+    obtain ⟨i, hi⟩ := finite_subset_of_directed_cover hdir hcover t
+    let B := (A i).map F.val
+    have hB : Algebra.Smooth K B := by
+      let := hsmooth i
+      exact Algebra.Smooth.of_equiv
+        (Subalgebra.equivMapOfInjective (A i) F.val F.val.injective)
+    refine ⟨⟨B, hB, (hFG i).map F.val⟩, ?_⟩
+    intro x hx
+    have ht : (⟨x, IntermediateField.subset_adjoin K (s : Set L) hx⟩ : F) ∈ t := by
+      exact Finset.mem_image.mpr ⟨⟨x, hx⟩, Finset.mem_attach _ _, rfl⟩
+    exact ⟨_, hi _ ht, rfl⟩
+  have hne : Nonempty S := by
+    obtain ⟨A, _⟩ := finite_cover ∅
+    exact ⟨A⟩
+  have hdir : Directed (· ≤ ·) (fun A : S ↦ A.1) := by
+    intro A B
+    obtain ⟨s, hs⟩ := A.2.2
+    obtain ⟨t, ht⟩ := B.2.2
+    obtain ⟨C, hC⟩ := finite_cover (s ∪ t)
+    refine ⟨C, ?_, ?_⟩
+    · change A.1 ≤ C.1
+      rw [← hs]
+      exact Algebra.adjoin_le fun x hx ↦ hC x (Finset.mem_union.mpr (Or.inl hx))
+    · change B.1 ≤ C.1
+      rw [← ht]
+      exact Algebra.adjoin_le fun x hx ↦ hC x (Finset.mem_union.mpr (Or.inr hx))
+  have hcover : ∀ x : L, ∃ A : S, x ∈ A.1 := by
+    intro x
+    obtain ⟨A, hA⟩ := finite_cover {x}
+    exact ⟨A, hA x (Finset.mem_singleton_self x)⟩
+  let := hne
+  let : IsDirectedOrder S := ⟨hdir⟩
+  have hc : IsColimit (smoothSubalgebraCocone K L) := by
+    let : ReflectsColimitsOfShape S (forget CommRingCat) :=
+      reflectsColimitsOfShape_of_reflectsIsomorphisms
+    apply isColimitOfReflects (forget CommRingCat)
+    apply Types.FilteredColimit.isColimitOf'
+    · intro x
+      obtain ⟨A, hx⟩ := hcover x
+      exact ⟨A, ⟨x, hx⟩, rfl⟩
+    · intro A x y hxy
+      refine ⟨A, 𝟙 A, ?_⟩
+      exact Subtype.ext hxy
+  refine ⟨hne, hdir, hcover, ⟨hc⟩, ?_, fun A ↦ A.2.1, ?_⟩
+  · exact ⟨isLimitOfPreserves Scheme.Spec hc.op⟩
+  · intro A B f
+    infer_instance
 
-end Directed
-
-/-- **Generic smoothness.** Let `A` be a finite type domain over a field `K` whose fraction
-field `F` is formally smooth over `K` (e.g. separably generated over `K`). Then there is a
-nonzero `g ∈ A` such that `A_g` is smooth over `K`.
-
-Proof: `A` is of finite presentation. The localization of `A` at the prime `(0)` is the
-fraction field `F`, so `A` is smooth at `(0)`; the smooth locus is open, so it contains a
-basic open neighbourhood `D(g)` of `(0)`. -/
-theorem exists_smooth_localizationAway_of_formallySmooth (K A F : Type*) [Field K] [CommRing A]
-    [IsDomain A] [Algebra K A] [FiniteType K A] [Field F] [Algebra K F] [Algebra A F]
-    [IsScalarTower K A F] [IsFractionRing A F] [FormallySmooth K F] :
-    ∃ g : A, g ≠ 0 ∧ Smooth K (Localization.Away g) := by
-  have : FinitePresentation K A := FinitePresentation.of_finiteType.mp inferInstance
-  have hloc : IsLocalization (nonZeroDivisors A) (Localization.AtPrime (⊥ : Ideal A)) := by
-    simpa [Ideal.primeCompl_bot] using Localization.isLocalization (M := (⊥ : Ideal A).primeCompl)
-  let e : Localization.AtPrime (⊥ : Ideal A) ≃ₐ[A] F :=
-    IsLocalization.algEquiv (nonZeroDivisors A) _ F
-  have : IsSmoothAt K (⊥ : Ideal A) := FormallySmooth.of_equiv (e.restrictScalars K).symm
-  obtain ⟨g, hg, h⟩ := IsSmoothAt.exists_notMem_smooth (R := K) (⊥ : Ideal A)
-  exact ⟨g, hg, h⟩
-
-variable {K L : Type*} [Field K] [Field L] [Algebra K L]
-
-/-- Let `A` be a finite type `K`-subalgebra of a field `L` whose fraction field `F` is formally
-smooth over `K`. Then `A` is contained in a finite type smooth `K`-subalgebra of `L`, namely the
-image of a smooth localization `A_g` (generic smoothness). -/
-theorem exists_smooth_subalgebra_ge_of_formallySmooth (A : Subalgebra K L) [FiniteType K A]
-    (F : Type*) [Field F] [Algebra K F] [Algebra A F] [IsScalarTower K A F]
-    [IsFractionRing A F] [FormallySmooth K F] :
-    ∃ S : Subalgebra K L, A ≤ S ∧ Smooth K S ∧ FiniteType K S := by
-  obtain ⟨g, hg, hsm⟩ := exists_smooth_localizationAway_of_formallySmooth K A F
-  have hu (y : Submonoid.powers g) : IsUnit (A.val y) := by
-    refine IsUnit.mk0 _ ?_
-    obtain ⟨_, n, rfl⟩ := y
-    simpa using pow_ne_zero n hg
-  let φ : Localization.Away g →ₐ[K] L := IsLocalization.liftAlgHom hu
-  have hφ : Function.Injective φ := by
-    rw [IsLocalization.coe_liftAlgHom, IsLocalization.lift_injective_iff]
-    intro x y
-    rw [(IsLocalization.injective (Localization.Away g)
-      (powers_le_nonZeroDivisors_of_noZeroDivisors hg)).eq_iff]
-    exact Subtype.val_injective.eq_iff.symm
-  have : Smooth K φ.range := Smooth.of_equiv (AlgEquiv.ofInjective φ hφ)
-  refine ⟨φ.range, fun a ha ↦ ⟨algebraMap A _ ⟨a, ha⟩, ?_⟩, this, inferInstance⟩
-  simp [φ]
-
-/-- A finitely generated intermediate field of a separable field extension (in the sense of
-`Algebra.IsSeparableExtension`) is formally smooth. -/
-theorem formallySmooth_of_isSeparableExtension (h : IsSeparableExtension K L)
-    (F : IntermediateField K L) (hF : F.FG) : FormallySmooth K F := by
-  obtain ⟨s, hs, hsep⟩ := h F hF
-  have : Algebra.IsSeparable (IntermediateField.adjoin K (Set.range ((↑) : s → F))) F := by
-    rwa [Subtype.range_coe]
-  exact FormallySmooth.of_algebraicIndependent_of_isSeparable hs.1
-
-/-- Blueprint `lem-kun-separable-smooth-colimit`: a separable field extension `L / K` is the
-filtered union of its finite type smooth `K`-subalgebras: every finite subset of `L` lies in
-a finite type smooth `K`-subalgebra of `L`. See
-`directedOn_smooth_finiteType_subalgebra_of_isSeparableExtension` and
-`sSup_smooth_finiteType_subalgebra_of_isSeparableExtension` for the directed-union form;
-`Spec L` is then the limit of the affine smooth `K`-schemes `Spec S` along the (affine)
-morphisms induced by the inclusions.
-
-Proof: for a finite `s ⊆ L`, the field `K(s)` is finitely generated, hence separably generated,
-hence formally smooth over `K`; it is the fraction field of the finite type algebra `K[s]`, so
-generic smoothness gives a smooth `K[s]_g ⊆ L` containing `s`. -/
-theorem exists_smooth_subalgebra_of_isSeparableExtension (h : IsSeparableExtension K L)
-    (s : Finset L) : ∃ S : Subalgebra K L, Smooth K S ∧ FiniteType K S ∧ (s : Set L) ⊆ S := by
-  have := formallySmooth_of_isSeparableExtension h _ (IntermediateField.fg_adjoin_finset s)
-  have : FiniteType K (adjoin K (s : Set L)) := .adjoin_of_finite s.finite_toSet
-  obtain ⟨S, hle, hS, hft⟩ := exists_smooth_subalgebra_ge_of_formallySmooth
-    (adjoin K (s : Set L)) (IntermediateField.adjoin K (s : Set L))
-  exact ⟨S, hS, hft, subset_adjoin.trans hle⟩
-
-/-- The finite type smooth `K`-subalgebras of a separable extension `L / K` form a directed
-family (companion of `lem-kun-separable-smooth-colimit`). -/
-theorem directedOn_smooth_finiteType_subalgebra_of_isSeparableExtension
-    (h : IsSeparableExtension K L) :
-    DirectedOn (· ≤ ·) {S : Subalgebra K L | Smooth K S ∧ FiniteType K S} :=
-  directedOn_setOf_finiteType_of_forall_finset
-    (exists_smooth_subalgebra_of_isSeparableExtension h)
-
-/-- The finite type smooth `K`-subalgebras of a separable extension `L / K` have union `L`
-(companion of `lem-kun-separable-smooth-colimit`). -/
-theorem sSup_smooth_finiteType_subalgebra_of_isSeparableExtension
-    (h : IsSeparableExtension K L) :
-    sSup {S : Subalgebra K L | Smooth K S ∧ FiniteType K S} = ⊤ :=
-  sSup_setOf_finiteType_eq_top_of_forall_finset
-    (exists_smooth_subalgebra_of_isSeparableExtension h)
-
-/-- Blueprint `lem-kun-fg-separable-smooth`: a finitely generated separably generated field
-extension `L / K` (Stacks 07BV) is the filtered union of its finite type smooth
-`K`-subalgebras: every finite subset of `L` lies in a finite type smooth `K`-subalgebra.
-
-Proof: let `t` generate `L` as a field. For a finite `s ⊆ L`, the algebra `K[s ∪ t]` is of
-finite type with fraction field `K(s ∪ t) = L`, which is formally smooth over `K` since it is
-separably generated. Generic smoothness gives a smooth `K[s ∪ t]_g ⊆ L` containing `s`. -/
-theorem exists_smooth_subalgebra_of_isSeparablyGenerated
-    (hfg : (⊤ : IntermediateField K L).FG) (h : IsSeparablyGenerated K L) (s : Finset L) :
-    ∃ S : Subalgebra K L, Smooth K S ∧ FiniteType K S ∧ (s : Set L) ⊆ S := by
-  classical
-  obtain ⟨t, ht⟩ := hfg
-  obtain ⟨b, hb, hsep⟩ := h
-  have : Algebra.IsSeparable (IntermediateField.adjoin K (Set.range ((↑) : b → L))) L := by
-    rwa [Subtype.range_coe]
-  have : FormallySmooth K L := FormallySmooth.of_algebraicIndependent_of_isSeparable hb.1
-  let u : Finset L := s ∪ t
-  have hu : IntermediateField.adjoin K (u : Set L) = ⊤ :=
-    top_le_iff.1 (ht ▸ IntermediateField.adjoin.mono _ _ _ (by simp [u]))
-  have : FormallySmooth K (IntermediateField.adjoin K (u : Set L)) := by
-    rw [hu]
-    exact .of_equiv IntermediateField.topEquiv.symm
-  have : FiniteType K (adjoin K (u : Set L)) := .adjoin_of_finite u.finite_toSet
-  obtain ⟨S, hle, hS, hft⟩ := exists_smooth_subalgebra_ge_of_formallySmooth
-    (adjoin K (u : Set L)) (IntermediateField.adjoin K (u : Set L))
-  exact ⟨S, hS, hft, fun x hx ↦ hle (subset_adjoin (by simp [u, hx]))⟩
-
-/-- Blueprint `lem-kun-algebraic-separable-smooth`: an algebraic separable extension `L / K`
-is the filtered union of its finite separable subextensions, which are finite étale, hence
-smooth, `K`-algebras: every finite subset of `L` lies in a finite type smooth (indeed étale)
-`K`-subalgebra of `L`.
-
-Proof: for a finite `s ⊆ L`, the field `K(s)` is finite and separable over `K`, hence étale
-over `K`. -/
-theorem exists_smooth_subalgebra_of_isSeparable [Algebra.IsSeparable K L] (s : Finset L) :
-    ∃ S : Subalgebra K L, Smooth K S ∧ FiniteType K S ∧ (s : Set L) ⊆ S := by
-  let F := IntermediateField.adjoin K (s : Set L)
-  have : FiniteDimensional K F :=
-    IntermediateField.finiteDimensional_adjoin fun x _ ↦
-      (Algebra.IsSeparable.isSeparable K x).isIntegral
-  have : Algebra.IsSeparable K F := .of_algHom K L F.val
-  have : FormallyEtale K F := .of_isSeparable K F
-  have : FinitePresentation K F := FinitePresentation.of_finiteType.mp inferInstance
-  have : Etale K F := ⟨inferInstance, inferInstance⟩
-  exact ⟨F.toSubalgebra, inferInstanceAs (Smooth K F), inferInstanceAs (FiniteType K F),
-    IntermediateField.subset_adjoin K _⟩
-
-
-section Colimit
-
-open CategoryTheory Limits
-
-variable {K : Type*} {L : Type u} [Field K] [Field L] [Algebra K L]
-
-/-- The finite type smooth `K`-subalgebras of a separable extension `L / K`, ordered by
-inclusion, form a filtered category (companion of `lem-kun-separable-smooth-colimit`). -/
-theorem isFiltered_smooth_finiteType_subalgebra_of_isSeparableExtension
-    (h : IsSeparableExtension K L) :
-    IsFiltered {S : Subalgebra K L | Smooth K S ∧ FiniteType K S} := by
-  refine Subalgebra.isFiltered_of_directedOn
-    (directedOn_smooth_finiteType_subalgebra_of_isSeparableExtension h) ?_
-  obtain ⟨S, hS, hft, -⟩ := exists_smooth_subalgebra_of_isSeparableExtension h ∅
-  exact ⟨S, hS, hft⟩
-
-/-- A separable extension `L / K` is the filtered colimit in `CommRingCat` of its finite type
-smooth `K`-subalgebras along the inclusions (companion of `lem-kun-separable-smooth-colimit`);
-dually, `Spec L` is the cofiltered limit of the affine smooth `K`-schemes `Spec S`. -/
-noncomputable def isColimitSmoothFiniteTypeSubalgebraOfIsSeparableExtension
-    (h : IsSeparableExtension K L) :
-    IsColimit (Subalgebra.cocone {S : Subalgebra K L | Smooth K S ∧ FiniteType K S}) :=
-  Subalgebra.isColimitCocone (directedOn_smooth_finiteType_subalgebra_of_isSeparableExtension h)
-    fun x ↦ by
-      obtain ⟨S, hS, hft, hx⟩ := exists_smooth_subalgebra_of_isSeparableExtension h {x}
-      exact ⟨S, ⟨hS, hft⟩, hx (Finset.mem_coe.2 (Finset.mem_singleton_self x))⟩
-
-end Colimit
-
-end Algebra
+end FieldTheory
