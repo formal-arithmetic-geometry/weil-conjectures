@@ -11088,8 +11088,6 @@ public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Coefficients
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.CurveTestDatum
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.DegreeZero
-public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.DegreeZero
-public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.DegreeZero
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Derived
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.FailureOverField
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.FailureOverField.ClosedOpen
