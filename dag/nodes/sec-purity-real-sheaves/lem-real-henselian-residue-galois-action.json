@@ -1,0 +1,99 @@
+{
+ "id": "lem-real-henselian-residue-galois-action",
+ "kind": "statement",
+ "title": "Equivariant reduction of algebraic constants over a henselian local ring",
+ "statement": "Let $k_0=\\mathbf F_q$ be a finite field [def-weil-finite-field-q-elements]. Let $(R,\\mathfrak m,\\kappa)$ be a henselian local commutative $k_0$-algebra [def-weil-pbc-henselian-terminology] whose residue field $\\kappa$ is finite. Let $K$ be a field with a unital $k_0$-algebra homomorphism $R\\to K$, and let $\\Omega/K$ be an algebraic closure [def-weil-algebraic-closure]. Let $B\\subset\\Omega$ be the integral closure of the image of $R$ [def-weil-pbc-integral-closure]. Then $B$ is local, its unique maximal ideal $\\mathfrak n$ contracts to $\\mathfrak m$, and $\\overline\\kappa=B/\\mathfrak n$ is an algebraic closure of $\\kappa$. Every $\\sigma\\in\\operatorname{Gal}(\\Omega/K)$ [def-real-boundary-absolute-galois-group] preserves $B$ and $\\mathfrak n$, and reduction induces a continuous homomorphism $r:\\operatorname{Gal}(\\Omega/K)\\to\\operatorname{Gal}(\\overline\\kappa/\\kappa)$ characterized by $r(\\sigma)(\\overline b)=\\overline{\\sigma(b)}$ for $b\\in B$. Here the Krull topology on either automorphism group has a neighbourhood basis of the identity given by the subgroups fixing finite subsets of the algebraic closure pointwise. Let $k'\\subset\\Omega$ be the subfield of elements algebraic over $k_0$. Then $k'\\subset B$, and reduction restricts to a $k_0$-isomorphism $t:k'\\xrightarrow{\\sim}\\overline\\kappa$ satisfying $t\\circ(\\sigma|_{k'})=r(\\sigma)\\circ t$ for every $\\sigma\\in\\operatorname{Gal}(\\Omega/K)$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 04GH (lemma-finite-over-henselian), locality input, and Tag 00GN (lemma-integral-transitive), integral-root input. The equivariant residue-constants identification is an agent formulation of these inputs for the decomposition-homomorphism clause of d-real-boundary."
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-q-elements",
+  "def-weil-pbc-henselian-terminology",
+  "def-weil-algebraic-closure",
+  "def-weil-pbc-integral-closure",
+  "def-real-boundary-absolute-galois-group"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "henselian.*[Gg]alois|residue.*[Gg]alois|[Ii]ntegral[Cc]losure.*[Ll]ocal",
+   "results": "Mathlib/RingTheory/ZariskisMainTheorem.lean, Mathlib/RingTheory/ZariskisMainTheorem.lean, Mathlib/RingTheory/Algebraic/Pi.lean, Mathlib/RingTheory/Algebraic/Defs.lean, Mathlib/RingTheory/IntegralClosure/IntegralRestrict.lean, Mathlib/RingTheory/IntegralClosure/IntegralRestrict.lean, Mathlib/RingTheory/IntegralClosure/IntegralRestrict.lean, Mathlib/RingTheory/IntegralClosure/IntegralRestrict.lean",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Integral closure of henselian local domain algebraic closure unique maximal ideal residue Galois action",
+   "results": "instSMulDistribClassAlgEquiv, Ideal.instMulActionAlgEquivElemPrimesOver, Algebra.isInvariant_of_isGalois, completeIntegralClosure, IsIntegralClosure.of_isIntegrallyClosed, algebraicClosure.isIntegralClosure, IsIntegralClosure.MulSemiringAction, IsGaloisGroup.of_isFractionRing",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsHenselianLocalRing, integralClosure",
+   "results": "none; loogle: unknown identifier 'IsHenselianLocalRing'",
+   "date": "2026-10-18",
+   "verdict": "invalid pattern; corrected in subsequent recorded query"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Integral closure of a henselian local domain in an algebraic closure is local with algebraically closed residue field and Galois equivariant reduction",
+   "results": "HenselianLocalRing.TFAE, HenselianLocalRing.toIsLocalRing, Field.henselian, instHenselianRingMaximalIdeal, instIsAlgebraicResidueFieldOfIsIntegral, Algebra.FormallyUnramified.isField_of_isAlgClosed_of_isLocalRing, Algebra.instFormallyUnramifiedResidueField, Algebra.FormallyUnramified.of_map_maximalIdeal",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A henselian local ring has local integral closure inside a field and the induced residue field automorphism is compatible with reduction",
+   "results": "HenselianLocalRing.TFAE, HenselianLocalRing, Field.henselian, HenselianLocalRing.toIsLocalRing, instHenselianRingMaximalIdeal, HenselianLocalRing.is_henselian, Algebra.instFormallyUnramifiedResidueField, Algebra.instFormallyUnramifiedResidueField_1",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "isLocalRing.*[Ii]ntegral|[Ii]ntegral.*isLocalRing|HenselianLocalRing|isAlgClosed.*[Rr]esidue",
+   "results": "none in subpath RingTheory/Henselian (the relevant file is Henselian.lean, not this subdirectory)",
+   "date": "2026-10-18",
+   "verdict": "unhelpful search scope; superseded by the recorded grep HenselianLocalRing|def mapAut over RingTheory"
+  },
+  {
+   "tool": "loogle",
+   "query": "HenselianLocalRing.TFAE",
+   "results": "HenselianLocalRing.TFAE",
+   "date": "2026-10-18",
+   "verdict": "no match: root-lifting equivalences, not the locality and equivariant residue-constants comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "HenselianLocalRing|def mapAut",
+   "results": "Mathlib/RingTheory/Henselian.lean, Mathlib/RingTheory/Henselian.lean, Mathlib/RingTheory/Henselian.lean, Mathlib/RingTheory/Henselian.lean, Mathlib/RingTheory/Henselian.lean, Mathlib/RingTheory/LocalRing/ResidueField/Basic.lean",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-real-boundary-decomposition-landing",
+  "date": "2026-10-18",
+  "group": "NV"
+ },
+ "chapter": "sec-purity-real-sheaves",
+ "unit": "sk-d-real-boundary",
+ "blueprint": {
+  "from": {
+   "node": "d-real-boundary",
+   "place": "the decomposition-group homomorphism clause: comparison of the local residue action with the constant-field action",
+   "via": [
+    "lem-real-boundary-decomposition-landing"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}
