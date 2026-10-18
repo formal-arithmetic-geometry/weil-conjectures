@@ -7,6 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.ProEtaleDerivedCategory
 public import Mathlib.Topology.LocallyConstant.Algebra
+import Mathlib.AlgebraicGeometry.Sites.ConstantSheaf
 import WeilConjectures.Mathlib.AlgebraicGeometry.Gluing
 import Sheaf.AlgebraicGeometry.AbelianEtaleProEtaleCohomologyComparison
 import Sheaf.AlgebraicGeometry.AffineSepclosedEtaleAcyclic
